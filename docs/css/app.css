@@ -219,3 +219,54 @@ p.lead { color: var(--grigio); margin: 0 0 18px; }
 table.res { width: 100%; border-collapse: collapse; font-size: .9rem; }
 table.res td { padding: 6px 4px; border-bottom: 1px solid var(--grigio-chiaro); }
 table.res td:last-child { text-align: right; font-family: var(--mono); }
+
+/* --------------------------------------------------------------- teoria */
+
+.lesson { background: var(--carta); border-radius: var(--raggio);
+          box-shadow: var(--ombra); padding: 20px 18px; margin-top: 14px;
+          line-height: 1.62; }
+.lesson .intro { font-size: 1.02rem; color: var(--inchiostro);
+                 border-left: 3px solid var(--verde); padding-left: 14px;
+                 margin: 0 0 4px; }
+.lesson .blk { padding-top: 20px; margin-top: 20px;
+               border-top: 1px solid var(--grigio-chiaro); }
+.lesson .blk:first-of-type { border-top: none; margin-top: 8px; padding-top: 4px; }
+.lesson h2 { font-size: 1.05rem; margin: 0 0 10px; letter-spacing: -.01em; }
+.lesson p { margin: 0 0 10px; }
+.lesson i.it { font-style: normal; font-weight: 600; color: var(--verde);
+               font-family: var(--mono); font-size: .93em; }
+
+.tw { overflow-x: auto; margin: 12px 0 14px; -webkit-overflow-scrolling: touch; }
+table.gram { border-collapse: collapse; width: 100%; min-width: 320px;
+             font-size: .88rem; }
+table.gram th { text-align: left; font-size: .74rem; text-transform: uppercase;
+                letter-spacing: .04em; color: var(--grigio); font-weight: 700;
+                padding: 6px 10px 6px 0; border-bottom: 2px solid var(--grigio-chiaro);
+                white-space: nowrap; }
+table.gram td { padding: 7px 10px 7px 0; vertical-align: top;
+                border-bottom: 1px solid var(--grigio-chiaro); }
+table.gram td.k { font-weight: 600; white-space: nowrap; }
+table.gram tr:last-child td { border-bottom: none; }
+
+ul.exs { list-style: none; margin: 12px 0 4px; padding: 0; }
+ul.exs li { display: grid; grid-template-columns: 1fr auto; gap: 2px 10px;
+            padding: 9px 0; border-bottom: 1px dashed var(--grigio-chiaro); }
+ul.exs li:last-child { border-bottom: none; }
+ul.exs .it { font-weight: 600; color: var(--verde); }
+ul.exs .es { grid-column: 1; color: var(--grigio); font-size: .87rem; }
+ul.exs .say { grid-column: 2; grid-row: 1 / span 2; align-self: center;
+              border: none; background: transparent; font-size: 1.05rem;
+              cursor: pointer; padding: 4px 2px; opacity: .55; }
+ul.exs .say:hover, ul.exs .say:active { opacity: 1; }
+
+.call { border-radius: 11px; padding: 12px 14px; margin: 14px 0 4px;
+        font-size: .93rem; }
+.call b { display: block; font-size: .72rem; text-transform: uppercase;
+          letter-spacing: .05em; margin-bottom: 5px; }
+.call p { margin: 0; }
+.call.warn { background: rgba(200,54,47,.09);
+             border-left: 3px solid var(--rosso); }
+.call.warn b { color: var(--rosso-chiaro); }
+.call.tip { background: rgba(212,160,23,.12);
+            border-left: 3px solid var(--oro); }
+.call.tip b { color: var(--oro); }

@@ -111,6 +111,77 @@
     return html;
   }
 
+  /* ---------------------------------------------------------------- teoria */
+
+  /* *parola* marca una forma italiana, **texto** una regla clave. */
+  function mk(text) {
+    return esc(text)
+      .replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>")
+      .replace(/\*([^*]+)\*/g, '<i class="it">$1</i>');
+  }
+
+  function lessonRead(n) { return !!(state.read || {})[n]; }
+
+  var sayIndex = {};
+
+  function renderTeoria(w) {
+    var L = w.lesson;
+    sayIndex = {};
+    if (!L) return '<button class="btn ghost" id="back">← al percorso</button>' +
+      '<p class="lead">Esta semana todavía no tiene teoría.</p>';
+
+    var html = '<button class="btn ghost" id="tback">← alla settimana</button>' +
+      '<h1>Teoria · settimana ' + w.week + '</h1>' +
+      '<p class="lead">' + esc(w.title) + '</p>' +
+      '<div class="lesson"><p class="intro">' + mk(L.intro) + '</p>';
+
+    L.blocks.forEach(function (b, i) {
+      html += '<section class="blk">';
+      if (b.h) html += "<h2>" + mk(b.h) + "</h2>";
+      (b.p || []).forEach(function (par) { html += "<p>" + mk(par) + "</p>"; });
+
+      if (b.table) {
+        html += '<div class="tw"><table class="gram">';
+        if (b.table.head && b.table.head.join("")) {
+          html += "<thead><tr>" + b.table.head.map(function (c) {
+            return "<th>" + mk(c) + "</th>";
+          }).join("") + "</tr></thead>";
+        }
+        html += "<tbody>" + (b.table.rows || []).map(function (r) {
+          return "<tr>" + r.map(function (c, k) {
+            return "<td" + (k === 0 ? ' class="k"' : "") + ">" + mk(c) + "</td>";
+          }).join("") + "</tr>";
+        }).join("") + "</tbody></table></div>";
+      }
+
+      if (b.ex) {
+        html += '<ul class="exs">' + b.ex.map(function (pair, k) {
+          sayIndex[i + "-" + k] = pair[0];
+          return '<li><span class="it">' + esc(pair[0]) + "</span>" +
+            '<span class="es">' + esc(pair[1]) + "</span>" +
+            '<button class="say" data-say="' + i + "-" + k + '" ' +
+            'aria-label="escuchar">🔊</button></li>';
+        }).join("") + "</ul>";
+      }
+
+      if (b.warn) html += '<div class="call warn"><b>La trampa</b>' +
+        "<p>" + mk(b.warn) + "</p></div>";
+      if (b.tip) html += '<div class="call tip"><b>El atajo</b>' +
+        "<p>" + mk(b.tip) + "</p></div>";
+      html += "</section>";
+    });
+
+    html += "</div>" +
+      '<div class="card"><div class="row">' +
+      (lessonRead(w.week)
+        ? '<button class="btn" id="tplay">▶︎ A jugar</button>'
+        : '<button class="btn" id="tdone">✓ Leído (+' + Engine.XP.lesson +
+          " xp)</button>") +
+      '<button class="btn ghost" id="tback2">Volver</button>' +
+      "</div></div>";
+    return html;
+  }
+
   /* -------------------------------------------------------------- briefing */
 
   function renderBriefing(w) {
@@ -140,6 +211,8 @@
         (sections ? '<h3>Secciones del Soluzioni</h3>' + sections : "") +
       '</div>' +
       '<div class="card"><h2>Modos de juego</h2><div class="row">' +
+        (w.lesson ? '<button class="btn ' + (lessonRead(w.week) ? "ghost" : "") +
+          '" id="teo">📘 Teoria' + (lessonRead(w.week) ? " ✓" : "") + "</button>" : "") +
         '<button class="btn" id="play">' +
           (w.boss ? "⚔️ Entrar al boss" : "▶︎ Allenamento (12 preguntas)") + '</button>' +
         (w.boss ? "" : '<button class="btn ghost" id="gym">🏋️ Gimnasio de verbos</button>') +
@@ -497,6 +570,7 @@
     else if (view.screen === "ripasso") html += renderRipasso();
     else if (view.screen === "medaglie") html += renderMedaglie();
     else if (view.screen === "briefing") html += renderBriefing(course.weeks[view.week - 1]);
+    else if (view.screen === "teoria") html += renderTeoria(course.weeks[view.week - 1]);
     else if (view.screen === "sfide") html += renderSfide(course.weeks[view.week - 1]);
     else if (view.screen === "gioco") html += renderGioco();
     else if (view.screen === "risultato") html += renderRisultato();
@@ -525,6 +599,40 @@
       view.screen = view.tab = "percorso";
       render();
     };
+
+    var teo = $("#teo");
+    if (teo) teo.onclick = function () { view.screen = "teoria"; render(); };
+
+    ["#tback", "#tback2"].forEach(function (sel) {
+      var b = $(sel);
+      if (b) b.onclick = function () { view.screen = "briefing"; render(); };
+    });
+
+    var tdone = $("#tdone");
+    if (tdone) tdone.onclick = function () {
+      var w = course.weeks[view.week - 1];
+      if (!state.read) state.read = {};
+      if (!state.read[w.week]) {
+        state.read[w.week] = Date.now();
+        state.xp += Engine.XP.lesson;
+        Engine.touchStreak(state);
+        var won = Engine.checkBadges(state);
+        persist();
+        renderHeader();
+        toast(won.length ? "🏅 " + won[0].name : "+" + Engine.XP.lesson + " xp");
+      }
+      view.screen = "briefing";
+      render();
+    };
+
+    var tplay = $("#tplay");
+    if (tplay) tplay.onclick = function () {
+      startRound(course.weeks[view.week - 1].boss ? "boss" : "round");
+    };
+
+    document.querySelectorAll("[data-say]").forEach(function (b) {
+      b.onclick = function () { speak(sayIndex[b.dataset.say] || ""); };
+    });
 
     var play = $("#play");
     if (play) play.onclick = function () {

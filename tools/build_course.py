@@ -534,6 +534,53 @@ def split_answers(answer: str) -> list:
     return [x for x in out if x]
 
 
+def load_lessons() -> dict:
+    """Import tools/lessons/*.py and merge their LESSONS dicts."""
+    out = {}
+    folder = os.path.join(ROOT, "tools", "lessons")
+    for fn in sorted(os.listdir(folder)):
+        if not fn.endswith(".py") or fn == "__init__.py":
+            continue
+        spec = importlib.util.spec_from_file_location(fn[:-3],
+                                                      os.path.join(folder, fn))
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        for week, lesson in getattr(mod, "LESSONS", {}).items():
+            if week in out:
+                raise ValueError("lezione doppia per la settimana %s" % week)
+            out[week] = lesson
+    return out
+
+
+def check_lesson(week: int, lesson: dict) -> list:
+    """Sanity check on one lesson; returns a list of problems."""
+    bad = []
+    if not lesson.get("intro"):
+        bad.append("settimana %s: manca l'intro" % week)
+    blocks = lesson.get("blocks") or []
+    if len(blocks) < 3:
+        bad.append("settimana %s: solo %d blocchi" % (week, len(blocks)))
+    known = {"h", "p", "table", "ex", "warn", "tip"}
+    for i, b in enumerate(blocks, 1):
+        extra = set(b) - known
+        if extra:
+            bad.append("settimana %s blocco %d: chiavi ignote %s"
+                       % (week, i, sorted(extra)))
+        if not (set(b) & {"p", "table", "ex", "warn", "tip"}):
+            bad.append("settimana %s blocco %d: senza contenuto" % (week, i))
+        t = b.get("table")
+        if t:
+            width = len(t.get("head", []))
+            for r in t.get("rows", []):
+                if len(r) != width:
+                    bad.append("settimana %s blocco %d: riga di %d celle su %d"
+                               % (week, i, len(r), width))
+        for pair in b.get("ex", []):
+            if len(pair) != 2:
+                bad.append("settimana %s blocco %d: esempio malformato" % (week, i))
+    return bad
+
+
 def load_authored() -> list:
     """Import every tools/authored/*.py module and collect its ITEMS."""
     out = []
@@ -578,6 +625,7 @@ def main() -> None:
             })
 
     authored = load_authored()
+    lessons = load_lessons()
     for it in authored:
         it.setdefault("accept", [it["answer"]] + list(it.get("alt", [])))
 
@@ -619,6 +667,7 @@ def main() -> None:
             "level": spec["level"],
             "focus": spec["focus"],
             "keys": spec["keys"],
+            "lesson": lessons.get(spec["w"]),
             "boss": bool(spec.get("boss")),
             "refs": {
                 "dummies": spec.get("d", []),
@@ -631,6 +680,13 @@ def main() -> None:
             "verbs": spec.get("v", []),
             "tenses": spec.get("tenses", ["presente"]),
         })
+
+    senza_lezione = [w["week"] for w in weeks if not w["lesson"]]
+    if senza_lezione:
+        missing.append("lezioni mancanti: %s" % senza_lezione)
+    for w in weeks:
+        if w["lesson"]:
+            missing += check_lesson(w["week"], w["lesson"])
 
     if missing:
         print("ATTENZIONE, riferimenti mancanti:")
@@ -664,6 +720,8 @@ def main() -> None:
     empty = [w["week"] for w in weeks if not w["items"]]
     print("settimane: %d  item giocabili: %d (dummies %d + autore %d)"
           % (len(weeks), len(items) + len(authored), len(items), len(authored)))
+    print("lezioni: %d  blocchi di teoria: %d"
+          % (len(lessons), sum(len(l["blocks"]) for l in lessons.values())))
     print("sfide Routledge: %d  gruppi con item: %d"
           % (sum(len(x["items"]) for x in flat), len(flat)))
     if empty:

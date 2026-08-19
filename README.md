@@ -36,9 +36,14 @@ aprobar con 85% para desbloquear la siguiente:
 | La Corrente | 27–39 | B1 → B2 | Congiuntivo, periodo hipotético, pasiva, *ne* y *ci* |
 | La Vetta | 40–52 | B2 → C1 | Causativo, formas no finitas, discurso indirecto, registro |
 
-Cada semana trae un *briefing* en español con los puntos clave, la referencia a
-los capítulos de ambos libros, y cuatro modos de juego:
+Cada semana trae un *briefing* en español con los puntos clave y la referencia a
+los capítulos de ambos libros, una **lección de teoría** completa, y cuatro modos
+de juego:
 
+- **Teoria** — la gramática de la semana explicada en español para
+  hispanohablantes: tablas, ejemplos con audio, y en cada bloque *la trampa*
+  (el error que induce el castellano) y *el atajo* (la regla que conviene
+  memorizar). Leerla da XP y marca la semana.
 - **Allenamento** — 12 preguntas mezclando ejercicios del libro, banco propio y
   gimnasio de verbos. Cinco vidas, combo multiplicador de XP.
 - **Gimnasio de verbos** — conjugación generada al vuelo, sin repetirse nunca.
@@ -55,6 +60,8 @@ sobre todo lo ya jugado, racha diaria y once medallas.
 | Ejercicios auto-corregibles de *For Dummies* | 871 |
 | Ítems propios de nivel B2/C1 en español | 144 |
 | Desafíos abiertos del *Soluzioni* | 338 grupos / 1.632 sub-ítems |
+| Lecciones de teoría (una por semana) | 52, con 221 bloques |
+| Tablas gramaticales y ejemplos bilingües | 76 tablas / 349 ejemplos |
 | Verbos en el motor de conjugación | 96 |
 | Tiempos y modos generables | 14 |
 
@@ -79,6 +86,7 @@ tools/
   extract_routledge.py   EPUB -> temario + desafíos
   build_course.py        arma docs/data/course.json
   authored/              banco de ítems propios (Python legible)
+  lessons/               teoría de las 52 semanas (s1..s4, una por estación)
   test_conjugator.js     1.442 comprobaciones de formas verbales
   test_game.js           21.564 comprobaciones de datos y lógica
 ```
@@ -104,7 +112,15 @@ node tools/test_game.js         # integridad del curso, corrección, SRS, progre
 (incluidas las irregularidades del *passato remoto* en patrón 1-3-3 y las reglas
 ortográficas de *-care/-gare/-ciare/-giare*). `test_game.js` comprueba, entre
 otras cosas, que las 52 semanas sean superables y que la respuesta impresa en el
-libro se acepte siempre como correcta.
+libro se acepte siempre como correcta. `build_course.py` valida además que las
+52 semanas tengan lección, que ninguna tabla tenga filas desparejas y que no
+queden bloques vacíos.
+
+La teoría vive en `tools/lessons/*.py` como diccionarios legibles: cada bloque
+admite título, párrafos, una tabla, ejemplos `[italiano, castellano]`, una
+trampa y un atajo. Dentro del texto, `*forma*` marca una forma italiana y
+`**texto**` una regla clave. Para editar una lección se toca ese archivo y se
+vuelve a correr `python3 tools/build_course.py`.
 
 ## Dos advertencias honestas
 

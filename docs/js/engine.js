@@ -133,7 +133,8 @@
     return { level: lvl, into: xp - total, need: need };
   }
 
-  var XP = { right: 10, close: 4, bonusCombo: 2, boss: 150, challenge: 6 };
+  var XP = { right: 10, close: 4, bonusCombo: 2, boss: 150, challenge: 6,
+           lesson: 15 };
 
   function xpFor(verdict, combo) {
     if (verdict === VERDICT.RIGHT) {
@@ -156,6 +157,7 @@
       streak: 0,
       lastPlayed: null,
       cards: {},          // itemId -> scheda SRS
+      read: {},           // week -> timestamp della lezione letta
       weekStats: {},      // week -> { attempts, right, bossPassed }
       challengeLog: {},   // challengeId -> autovalutazione
       badges: [],
@@ -228,7 +230,11 @@
       desc: "Superá el boss de la semana 39 sin perder vidas.",
       test: function (s) { return (s.weekStats[39] || {}).perfect === true; } },
     { id: "sfidante", name: "Sfidante", desc: "50 desafíos del Soluzioni resueltos.",
-      test: function (s) { return Object.keys(s.challengeLog).length >= 50; } }
+      test: function (s) { return Object.keys(s.challengeLog).length >= 50; } },
+    { id: "studioso", name: "Studioso", desc: "Leé la teoría de 10 semanas.",
+      test: function (s) { return Object.keys(s.read || {}).length >= 10; } },
+    { id: "erudito", name: "Erudito", desc: "Leé la teoría de las 52 semanas.",
+      test: function (s) { return Object.keys(s.read || {}).length >= 52; } }
   ];
 
   function checkBadges(state) {
