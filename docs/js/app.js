@@ -10,6 +10,9 @@
   var view = { screen: "percorso", week: 1, tab: "percorso" };
   var round = null;
   var itemMap = {};
+  var oggi = null;                 // piano del giorno scritto da custode.py
+  var chat = null;                 // conversazione col Compagno
+  var drafts = {};                 // testi scritti, sopravvivono ai re-render
 
   var $ = function (sel) { return document.querySelector(sel); };
   var app = function () { return $("#app"); };
@@ -28,7 +31,88 @@
     setTimeout(function () { t.remove(); }, ms || 2200);
   }
 
-  function persist() { Engine.save(state); }
+  function persist() {
+    state.savedAt = Date.now();
+    Engine.save(state);
+    Sync.push(state);
+  }
+
+  // A button that is waiting for the local model: disabled, with a hint.
+  function busy(btn, on, label) {
+    if (!btn) return;
+    if (on) {
+      btn.dataset.label = btn.textContent;
+      btn.textContent = label || "Il Maestro piensa…";
+      btn.disabled = true;
+    } else {
+      btn.textContent = btn.dataset.label || btn.textContent;
+      btn.disabled = false;
+    }
+  }
+
+  function tutorOn() { return Tutor.status.ok && !!Tutor.config.model; }
+
+  function needTutor() {
+    if (tutorOn()) return true;
+    toast("Il Maestro no está conectado: mirá la pestaña Maestro.", 3200);
+    return false;
+  }
+
+  function tutorLog() {
+    if (!state.tutor) state.tutor = { graded: 0, writings: 0, chats: 0 };
+    return state.tutor;
+  }
+
+  /* ------------------------------------------------------------------ oggi */
+
+  function oggiFresh() { return !!(oggi && oggi.date === Engine.today()); }
+
+  function oggiDone(kind) {
+    var d = state.oggiDone;
+    return !!(d && d.date === Engine.today() && d.kinds.indexOf(kind) >= 0);
+  }
+
+  function markOggi(kind) {
+    if (!oggiFresh()) return;
+    var d = state.oggiDone;
+    if (!d || d.date !== Engine.today()) d = state.oggiDone = { date: Engine.today(), kinds: [] };
+    if (d.kinds.indexOf(kind) < 0) d.kinds.push(kind);
+  }
+
+  var OGGI_ICON = { review: "🔁", round: "▶︎", gym: "🏋️", teoria: "📘", sfide: "📖",
+                    scrittura: "✍️", compagno: "💬" };
+
+  function renderOggi() {
+    if (!oggiFresh()) return "";
+    var plan = oggi.plan || [];
+    var all = plan.length && plan.every(function (p) { return oggiDone(p.kind); });
+    return '<div class="card oggi' + (all ? " done" : "") + '">' +
+      '<h2>' + esc(oggi.title || "Oggi") + "</h2>" +
+      '<p>' + esc(oggi.message || "") + "</p>" +
+      '<div class="row">' + plan.map(function (p, i) {
+        var done = oggiDone(p.kind);
+        return '<button class="btn ' + (done ? "ghost" : "") + '" data-oggi="' + i + '">' +
+          (done ? "✓ " : (OGGI_ICON[p.kind] || "") + " ") + esc(p.label) + "</button>";
+      }).join("") + "</div>" +
+      (all ? '<p class="muted" style="margin-top:10px">Plan del día completo. Basta.</p>' : "") +
+      (oggi.weak && oggi.weak.length
+        ? '<p class="muted" style="margin-top:10px">Flojo en: ' +
+          oggi.weak.map(esc).join(" · ") + "</p>" : "") +
+      "</div>";
+  }
+
+  function runOggi(p) {
+    if (p.week) view.week = Math.max(1, Math.min(state.unlocked, +p.week));
+    else view.week = Math.min(state.unlocked, 52);
+    var w = course.weeks[view.week - 1];
+    if (p.kind === "review") startRound("review", { size: p.size });
+    else if (p.kind === "round") startRound(w.boss ? "boss" : "round", { size: p.size });
+    else if (p.kind === "gym") startRound("gym", { size: p.size });
+    else if (p.kind === "teoria") { view.screen = w.lesson ? "teoria" : "briefing"; render(); }
+    else if (p.kind === "sfide") { view.screen = "sfide"; render(); }
+    else if (p.kind === "scrittura") { view.screen = "scrittura"; render(); }
+    else if (p.kind === "compagno") { startChat(); }
+  }
 
   /* ------------------------------------------------------------- pronuncia */
 
@@ -79,7 +163,8 @@
   }
 
   function renderPercorso() {
-    var html = '<h1>Il percorso</h1>' +
+    var html = renderOggi() +
+      '<h1>Il percorso</h1>' +
       '<p class="lead">Cuatro estaciones, 52 misiones semanales. Cada semana se ' +
       'desbloquea al superar la anterior; los <b>boss</b> son exámenes con nota mínima.</p>';
 
@@ -219,6 +304,10 @@
         (nChal ? '<button class="btn ghost" id="chal">📖 Sfide del Maestro (' +
           nChal + ")</button>" : "") +
       '</div>' +
+      '<h3>Con il Maestro' + (tutorOn() ? "" : " (desconectado)") + '</h3><div class="row">' +
+        '<button class="btn ghost" id="wri">✍️ Scrittura</button>' +
+        '<button class="btn ghost" id="cmp">💬 Compagno</button>' +
+      '</div>' +
       '<p class="muted" style="margin-top:12px">' +
         (w.boss
           ? "Para aprobar necesitás 85% y te quedan 3 vidas."
@@ -229,14 +318,15 @@
 
   /* ------------------------------------------------------------ allenamento */
 
-  function startRound(kind) {
+  function startRound(kind, opts) {
+    opts = opts || {};
     var w = course.weeks[view.week - 1];
     var items;
     if (kind === "boss") items = Drills.buildBoss(course, w, state);
-    else if (kind === "review") items = Drills.buildReview(course, state, 20);
+    else if (kind === "review") items = Drills.buildReview(course, state, opts.size || 20);
     else if (kind === "gym") {
       items = [];
-      for (var i = 0; i < 15; i++) {
+      for (var i = 0; i < (opts.size || 15); i++) {
         var v = w.verbs[Math.floor(Math.random() * w.verbs.length)];
         var t = w.tenses[Math.floor(Math.random() * w.tenses.length)];
         try {
@@ -244,7 +334,7 @@
                                  : Drills.conjugationTyped(v, t));
         } catch (e) { /* salta */ }
       }
-    } else items = Drills.buildRound(course, w, { map: itemMap });
+    } else items = Drills.buildRound(course, w, { map: itemMap, size: opts.size });
 
     if (!items.length) { toast("No hay preguntas para este modo todavía."); return; }
 
@@ -356,6 +446,9 @@
       (it.note ? '<div class="note">' + esc(it.note) + "</div>" : "") +
       (it.hint && it.src === "dummies"
         ? '<div class="note">Consigna original: ' + esc(it.hint) + "</div>" : "") +
+      (it.src === "maestro"
+        ? '<div class="note">✍️ Ítem escrito por il Maestro contra tus errores. ' +
+          "Si dudás de la respuesta, verificá con la teoría.</div>" : "") +
       '<div class="row" style="margin-top:10px">' +
         '<button class="btn" id="next">Continuar →</button>' +
         '<button class="tab" id="say2">🔊 escuchar</button>' +
@@ -398,6 +491,7 @@
     var w = course.weeks[view.week - 1];
 
     Engine.touchStreak(state);
+    markOggi(round.kind === "boss" ? "round" : round.kind);
 
     var passed = false;
     if (round.kind === "boss") {
@@ -481,12 +575,18 @@
     (w.challenges || []).forEach(function (id) { ids[id] = true; });
     var list = course.challenges.filter(function (c) { return ids[c.id]; });
 
+    var on = tutorOn();
     var html = '<button class="btn ghost" id="back">← al percorso</button>' +
       "<h1>Sfide del Maestro</h1>" +
       '<p class="lead">Ejercicios abiertos tomados del <b>Soluzioni</b>. ' +
-      "El libro digital no trae las soluciones, así que estos no se corrigen solos: " +
-      "resolvelos por escrito, verificá contra el capítulo y puntuate vos. " +
-      "Lo que marques alimenta igual tu racha y tu repaso.</p>";
+      "El libro digital no trae las soluciones, así que " +
+      (on
+        ? "los corrige <b>il Maestro</b> (tu modelo local): escribí tus respuestas " +
+          "y pedile la corrección. Si no estás de acuerdo, verificá contra el capítulo."
+        : "estos no se corrigen solos: resolvelos por escrito, verificá contra el " +
+          "capítulo y puntuate vos. Con Ollama conectado (pestaña Maestro) los " +
+          "corrige il Maestro.") +
+      " Lo que marques alimenta igual tu racha y tu repaso.</p>";
 
     list.forEach(function (c) {
       var done = state.challengeLog[c.id];
@@ -496,15 +596,285 @@
         "</ol>" +
         '<div class="muted">Soluzioni, cap. ' + c.chapter + " — " +
           esc(c.chapterTitle) + "</div>" +
+        (on
+          ? '<div class="mgrade"><textarea data-mtext="' + c.id + '" rows="3" ' +
+            'placeholder="a) … b) … c) …" spellcheck="false">' +
+            esc(drafts[c.id] || "") + "</textarea>" +
+            '<button class="btn" data-mgrade="' + c.id + '">🎓 Corregir con il Maestro</button>' +
+            '<div class="mres" id="mres-' + c.id + '"></div></div>'
+          : "") +
         '<div class="selfscore">' +
           '<button class="btn ghost" data-self="' + c.id + '" data-q="2">Lo tuve bien</button>' +
           '<button class="btn ghost" data-self="' + c.id + '" data-q="1">A medias</button>' +
           '<button class="btn ghost" data-self="' + c.id + '" data-q="0">No me salió</button>' +
-          (done ? '<span class="muted" style="align-self:center">✓ ' +
-            ["no salió", "a medias", "bien"][done.q] + "</span>" : "") +
+          (done ? '<span class="muted" style="align-self:center" id="mdone-' + c.id + '">✓ ' +
+            ["no salió", "a medias", "bien"][done.q] +
+            (done.by === "maestro" ? " (Maestro)" : "") + "</span>" : "") +
         "</div></div>";
     });
     return html;
+  }
+
+  function recordChallenge(id, q, by) {
+    state.challengeLog[id] = { q: q, at: Date.now(), by: by || "self" };
+    state.xp += q === 2 ? Engine.XP.challenge : q === 1 ? 3 : 1;
+    if (by === "maestro") tutorLog().graded++;
+    Engine.touchStreak(state);
+    markOggi("sfide");
+    var won = Engine.checkBadges(state);
+    persist();
+    renderHeader();
+    if (won.length) toast("🏅 " + won[0].name);
+  }
+
+  function gradeChallenge(id, btn) {
+    if (!needTutor()) return;
+    var ta = document.querySelector('[data-mtext="' + id + '"]');
+    var text = ta ? ta.value.trim() : "";
+    if (!text) { toast("Escribí tus respuestas primero."); return; }
+    var c = course.challenges.filter(function (x) { return x.id === id; })[0];
+    var w = course.weeks[view.week - 1];
+    var box = $("#mres-" + id);
+    busy(btn, true);
+    box.innerHTML = '<p class="muted">Corrigiendo con ' + esc(Tutor.config.model) + "…</p>";
+    Tutor.gradeChallenge(c, text, w).then(function (r) {
+      busy(btn, false);
+      box.innerHTML = '<table class="res mtab">' + r.items.map(function (it) {
+        return '<tr class="' + esc(it.verdict) + '"><td><b>' + esc(it.label) + ")</b> " +
+          esc(it.corrected) + '<div class="note">' + esc(it.why) + "</div></td>" +
+          "<td>" + { giusto: "✓", quasi: "≈", sbagliato: "✗" }[it.verdict] + "</td></tr>";
+      }).join("") + "</table>" +
+        '<div class="feedback ' + ["sbagliato", "quasi", "giusto"][r.q] + '">' +
+        '<div class="verdict">' + ["No salió", "A medias", "Bien"][r.q] + "</div>" +
+        '<div class="note">' + esc(r.summary) + "</div></div>";
+      recordChallenge(id, r.q, "maestro");
+      var mark = $("#mdone-" + id);
+      var label = "✓ " + ["no salió", "a medias", "bien"][r.q] + " (Maestro)";
+      if (mark) mark.textContent = label;
+      else box.insertAdjacentHTML("afterend",
+        '<span class="muted" id="mdone-' + id + '">' + label + "</span>");
+    }).catch(function (e) {
+      busy(btn, false);
+      box.innerHTML = '<p class="muted">Il Maestro falló: ' + esc(e.message) + "</p>";
+    });
+  }
+
+  /* ------------------------------------------------------------ scrittura */
+
+  function renderScrittura(w) {
+    var on = tutorOn();
+    return '<button class="btn ghost" id="back2">← alla settimana</button>' +
+      "<h1>Scrittura · settimana " + w.week + "</h1>" +
+      '<p class="lead">Producción escrita corregida por il Maestro. ' +
+      "Escribí sin diccionario: los errores son el material.</p>" +
+      '<div class="card"><div class="inst">' + esc(Tutor.writingPrompt(w)) + "</div>" +
+      '<textarea id="wtext" rows="8" spellcheck="false" lang="it" ' +
+      'placeholder="Scrivi qui in italiano…">' + esc(drafts["w" + w.week] || "") +
+      "</textarea>" +
+      '<div class="row" style="margin-top:10px">' +
+        '<button class="btn" id="wsend"' + (on ? "" : " disabled") + ">🎓 Corregir</button>" +
+        (on ? "" : '<span class="muted" style="align-self:center">Il Maestro desconectado ' +
+          "(pestaña Maestro).</span>") +
+      "</div>" +
+      '<div id="wres"></div></div>';
+  }
+
+  function correctWriting(btn) {
+    if (!needTutor()) return;
+    var text = ($("#wtext") || {}).value || "";
+    text = text.trim();
+    if (text.split(/\s+/).length < 8) { toast("Escribí un poco más: al menos unas frases."); return; }
+    var w = course.weeks[view.week - 1];
+    var box = $("#wres");
+    busy(btn, true);
+    box.innerHTML = '<p class="muted">Leyendo tu texto…</p>';
+    Tutor.correctWriting(text, w).then(function (r) {
+      busy(btn, false);
+      var gained = [5, 12, 25][r.q];
+      state.xp += gained;
+      tutorLog().writings++;
+      Engine.touchStreak(state);
+      markOggi("scrittura");
+      var won = Engine.checkBadges(state);
+      drafts["w" + w.week] = "";
+      persist();
+      renderHeader();
+      box.innerHTML = '<div class="feedback ' + ["sbagliato", "quasi", "giusto"][r.q] + '">' +
+        '<div class="verdict">' + r.score + "/10 · +" + gained + " xp</div>" +
+        '<div class="note">' + esc(r.praise) + "</div></div>" +
+        "<h3>Versión corregida</h3><p class=\"corr\" lang=\"it\">" + esc(r.corrected) + "</p>" +
+        (r.errors.length ? "<h3>Errores</h3><table class=\"res mtab\">" +
+          r.errors.map(function (e) {
+            return "<tr><td><s>" + esc(e.wrong) + "</s> → <b>" + esc(e.right) + "</b>" +
+              '<div class="note">' + esc(e.why) + "</div></td></tr>";
+          }).join("") + "</table>" : "<p>Sin errores gramaticales. Bravo.</p>") +
+        "<h3>Para la próxima</h3><p>" + esc(r.next) + "</p>" +
+        (won.length ? "<p>🏅 <b>" + esc(won[0].name) + "</b></p>" : "") +
+        '<div class="row" style="margin-top:12px">' +
+          '<button class="btn" id="wagain">Otro texto</button>' +
+          '<button class="btn ghost" id="wsay">🔊 escuchar</button></div>';
+      $("#wagain").onclick = function () { render(); };
+      $("#wsay").onclick = function () { speak(r.corrected); };
+    }).catch(function (e) {
+      busy(btn, false);
+      box.innerHTML = '<p class="muted">Il Maestro falló: ' + esc(e.message) + "</p>";
+    });
+  }
+
+  /* ------------------------------------------------------------- compagno */
+
+  function startChat() {
+    if (!needTutor()) return;
+    var w = course.weeks[view.week - 1];
+    chat = { week: w.week, history: [], busy: false, report: null };
+    chat.history.push({ role: "assistant", content: Tutor.companionOpen(w) });
+    view.screen = "compagno";
+    render();
+  }
+
+  function userTurns() {
+    return chat ? chat.history.filter(function (m) { return m.role === "user"; }).length : 0;
+  }
+
+  function renderCompagno() {
+    if (!chat) return "";
+    var w = course.weeks[chat.week - 1];
+    var html = '<button class="btn ghost" id="back2">← alla settimana</button>' +
+      "<h1>Il Compagno · settimana " + w.week + "</h1>" +
+      '<p class="lead">Charlá en italiano. No te corrige mientras hablás: al terminar ' +
+      "te devuelve tus errores más útiles. Hacen falta al menos 3 mensajes tuyos.</p>" +
+      '<div class="card chatbox"><div class="chatlog" id="chatlog">' +
+      chat.history.map(function (m, i) {
+        return '<div class="msg ' + m.role + '">' + esc(m.content) +
+          (m.role === "assistant"
+            ? ' <button class="say" data-csay="' + i + '" aria-label="escuchar">🔊</button>' : "") +
+          "</div>";
+      }).join("") +
+      (chat.busy ? '<div class="msg assistant muted">…</div>' : "") +
+      "</div>";
+    if (!chat.report) {
+      html += '<div class="typed"><input id="cin" autocomplete="off" lang="it" ' +
+        'placeholder="Scrivi in italiano…"' + (chat.busy ? " disabled" : "") + ">" +
+        '<button class="btn" id="csend"' + (chat.busy ? " disabled" : "") + ">Invia</button></div>" +
+        '<div class="accents">' + ["à", "è", "é", "ì", "ò", "ù", "'"].map(function (c) {
+          return '<button data-ins="' + c + '">' + c + "</button>";
+        }).join("") + "</div>" +
+        '<div class="row" style="margin-top:12px"><button class="btn ghost" id="cend"' +
+        (userTurns() >= 3 && !chat.busy ? "" : " disabled") +
+        ">🎓 Terminar y pedir feedback</button></div>";
+    } else {
+      var r = chat.report;
+      html += '<div class="feedback giusto"><div class="verdict">+' + r.gained + " xp</div>" +
+        '<div class="note">' + esc(r.good) + "</div></div>" +
+        (r.errors.length ? "<h3>Lo que un italiano diría</h3><table class=\"res mtab\">" +
+          r.errors.map(function (e) {
+            return "<tr><td><s>" + esc(e.said) + "</s> → <b>" + esc(e.better) + "</b>" +
+              '<div class="note">' + esc(e.why) + "</div></td></tr>";
+          }).join("") + "</table>" : "<p>Ningún error que valga la pena marcar.</p>") +
+        "<p>" + esc(r.summary) + "</p>" +
+        '<div class="row" style="margin-top:12px">' +
+          '<button class="btn" id="cagain">Otra charla</button></div>';
+    }
+    return html + "</div>";
+  }
+
+  function sendChat(text) {
+    text = String(text || "").trim();
+    if (!text || chat.busy) return;
+    var w = course.weeks[chat.week - 1];
+    chat.history.push({ role: "user", content: text });
+    chat.busy = true;
+    render();
+    Tutor.companionReply(chat.history, w).then(function (reply) {
+      chat.busy = false;
+      chat.history.push({ role: "assistant", content: reply });
+      render();
+      speak(reply);
+    }).catch(function (e) {
+      chat.busy = false;
+      toast("Il Compagno falló: " + e.message, 3500);
+      render();
+    });
+  }
+
+  function endChat(btn) {
+    var w = course.weeks[chat.week - 1];
+    chat.busy = true;
+    busy(btn, true, "Il Maestro revisa la charla…");
+    Tutor.companionReport(chat.history, w).then(function (r) {
+      chat.busy = false;
+      r.gained = 15 + Math.min(15, userTurns() * 3);
+      chat.report = r;
+      state.xp += r.gained;
+      tutorLog().chats++;
+      Engine.touchStreak(state);
+      markOggi("compagno");
+      Engine.checkBadges(state);
+      persist();
+      renderHeader();
+      render();
+    }).catch(function (e) {
+      chat.busy = false;
+      busy(btn, false);
+      toast("Il Maestro falló: " + e.message, 3500);
+    });
+  }
+
+  /* -------------------------------------------------------------- maestro */
+
+  function renderMaestro() {
+    var st = Tutor.status, cfg = Tutor.config, w = course.weeks[view.week - 1];
+    var tl = tutorLog();
+    var html = "<h1>Il Maestro</h1>" +
+      '<p class="lead">Un modelo local (Ollama) que corrige tus Sfide, tu escritura ' +
+      "y charla con vos. Nada sale de tu PC.</p>" +
+      '<div class="card"><h2>Conexión</h2>' +
+      (st.ok
+        ? '<p>🟢 Conectado vía <code>' + esc(st.via) + "</code>" +
+          (Sync.isAvailable() ? " · progreso sincronizado con <code>progress.json</code>" : "") + "</p>"
+        : '<p>🔴 Sin conexión' + (st.error ? ": " + esc(st.error) : "") + "</p>" +
+          "<p class=\"muted\">Para encender il Maestro:</p>" +
+          "<pre>ollama serve\nollama pull qwen2.5:14b   # o el modelo que prefieras\n" +
+          "python3 tools/serve.py     # en vez de http.server</pre>") +
+      '<div class="row" style="margin-top:10px">' +
+        '<label class="fld">Modelo <select id="mmodel">' +
+          (st.models.length ? st.models.map(function (m) {
+            return '<option' + (m === cfg.model ? " selected" : "") + ">" + esc(m) + "</option>";
+          }).join("") : '<option value="">(sin modelos)</option>') + "</select></label>" +
+        '<label class="fld">URL de Ollama (opcional) <input id="mbase" value="' +
+          esc(cfg.base) + '" placeholder="/ollama o http://127.0.0.1:11434"></label>' +
+        '<button class="btn ghost" id="mtest">Probar conexión</button>' +
+      "</div></div>" +
+      '<div class="card"><h2>Practicar con la semana ' + w.week + "</h2>" +
+      '<div class="row">' +
+        '<button class="btn" id="cmp">💬 Compagno</button>' +
+        '<button class="btn" id="wri">✍️ Scrittura</button>' +
+        '<button class="btn ghost" id="chal">📖 Sfide</button>' +
+      "</div>" +
+      '<table class="res" style="margin-top:14px">' +
+        "<tr><td>Sfide corregidas por il Maestro</td><td>" + tl.graded + "</td></tr>" +
+        "<tr><td>Textos corregidos</td><td>" + tl.writings + "</td></tr>" +
+        "<tr><td>Charlas terminadas</td><td>" + tl.chats + "</td></tr>" +
+      "</table></div>" +
+      '<div class="card"><h2>Agentes de fondo</h2>' +
+      "<p>Dos scripts que corren solos en tu PC y leen <code>progress.json</code>:</p>" +
+      "<ul class=\"keys\">" +
+        "<li><b>Il Custode</b> (<code>tools/custode.py</code>) arma el plan del día según " +
+        "cuánto hace que no jugás. Si faltaste, el plan es más chico, no más grande." +
+        (oggiFresh() ? " <b>Hoy ya está.</b>" : " Hoy no hay plan todavía.") + "</li>" +
+        "<li><b>Il Redattore</b> (<code>tools/redattore.py</code>) escribe de noche ítems " +
+        "nuevos contra tus errores repetidos." +
+        (course.maestroItems ? " <b>" + course.maestroItems + " ítems suyos en juego.</b>" : "") +
+        "</li></ul>" +
+      "<p class=\"muted\">Programalos con cron o el Programador de tareas; el README " +
+      "explica cómo.</p></div>";
+    return html;
+  }
+
+  function applyMaestroSettings() {
+    var sel = $("#mmodel"), base = $("#mbase");
+    Tutor.saveConfig({ model: sel ? sel.value : Tutor.config.model,
+                       base: base ? base.value.trim() : Tutor.config.base });
   }
 
   /* ------------------------------------------------------------ medaglie */
@@ -554,7 +924,7 @@
 
   function renderTabs() {
     var tabs = [["percorso", "Percorso"], ["ripasso", "Ripasso"],
-                ["medaglie", "Medaglie"]];
+                ["maestro", "Maestro" + (tutorOn() ? " 🟢" : "")], ["medaglie", "Medaglie"]];
     return '<div class="tabs">' + tabs.map(function (t) {
       return '<button class="tab' + (view.tab === t[0] ? " on" : "") +
         '" data-tab="' + t[0] + '">' + t[1] + "</button>";
@@ -563,7 +933,7 @@
 
   function render() {
     var html = "";
-    var showTabs = ["percorso", "ripasso", "medaglie"].indexOf(view.screen) >= 0;
+    var showTabs = ["percorso", "ripasso", "maestro", "medaglie"].indexOf(view.screen) >= 0;
     if (showTabs) html += renderTabs();
 
     if (view.screen === "percorso") html += renderPercorso();
@@ -574,6 +944,9 @@
     else if (view.screen === "sfide") html += renderSfide(course.weeks[view.week - 1]);
     else if (view.screen === "gioco") html += renderGioco();
     else if (view.screen === "risultato") html += renderRisultato();
+    else if (view.screen === "maestro") html += renderMaestro();
+    else if (view.screen === "scrittura") html += renderScrittura(course.weeks[view.week - 1]);
+    else if (view.screen === "compagno") html += renderCompagno();
 
     app().innerHTML = html;
     wire();
@@ -680,17 +1053,68 @@
 
     document.querySelectorAll("[data-self]").forEach(function (b) {
       b.onclick = function () {
-        var id = b.dataset.self, q = +b.dataset.q;
-        state.challengeLog[id] = { q: q, at: Date.now() };
-        state.xp += q === 2 ? Engine.XP.challenge : q === 1 ? 3 : 1;
-        Engine.touchStreak(state);
-        Engine.checkBadges(state);
-        persist();
-        renderHeader();
+        recordChallenge(b.dataset.self, +b.dataset.q, "self");
         render();
         toast("Anotado.");
       };
     });
+
+    /* --- il Maestro --- */
+    document.querySelectorAll("[data-oggi]").forEach(function (b) {
+      b.onclick = function () { runOggi(oggi.plan[+b.dataset.oggi]); };
+    });
+    var back2 = $("#back2");
+    if (back2) back2.onclick = function () { view.screen = "briefing"; render(); };
+    var wri = $("#wri");
+    if (wri) wri.onclick = function () { view.screen = "scrittura"; render(); };
+    var cmp = $("#cmp");
+    if (cmp) cmp.onclick = startChat;
+
+    document.querySelectorAll("[data-mtext]").forEach(function (ta) {
+      ta.oninput = function () { drafts[ta.dataset.mtext] = ta.value; };
+    });
+    document.querySelectorAll("[data-mgrade]").forEach(function (b) {
+      b.onclick = function () { gradeChallenge(b.dataset.mgrade, b); };
+    });
+
+    var wtext = $("#wtext");
+    if (wtext) wtext.oninput = function () { drafts["w" + view.week] = wtext.value; };
+    var wsend = $("#wsend");
+    if (wsend) wsend.onclick = function () { correctWriting(wsend); };
+
+    var cin = $("#cin"), csend = $("#csend");
+    if (cin && csend) {
+      csend.onclick = function () { sendChat(cin.value); };
+      cin.onkeydown = function (e) {
+        if (e.key === "Enter") { e.preventDefault(); sendChat(cin.value); }
+      };
+      cin.focus();
+      document.querySelectorAll("[data-ins]").forEach(function (b) {
+        b.onclick = function () { cin.value += b.dataset.ins; cin.focus(); };
+      });
+      var log = $("#chatlog");
+      if (log) log.scrollTop = log.scrollHeight;
+    }
+    var cend = $("#cend");
+    if (cend) cend.onclick = function () { endChat(cend); };
+    var cagain = $("#cagain");
+    if (cagain) cagain.onclick = startChat;
+    document.querySelectorAll("[data-csay]").forEach(function (b) {
+      b.onclick = function () { speak(chat.history[+b.dataset.csay].content); };
+    });
+
+    var mmodel = $("#mmodel"), mbase = $("#mbase"), mtest = $("#mtest");
+    if (mmodel) mmodel.onchange = function () { applyMaestroSettings(); render(); };
+    if (mtest) mtest.onclick = function () {
+      applyMaestroSettings();
+      busy(mtest, true, "Probando…");
+      Tutor.detect().then(function (st) {
+        toast(st.ok ? "Conectado: " + st.models.length + " modelos." : "Sin conexión.", 3000);
+        renderHeader();
+        render();
+      });
+    };
+    if (mbase) mbase.onkeydown = function (e) { if (e.key === "Enter") mtest.click(); };
 
     var reset = $("#reset");
     if (reset) reset.onclick = function () {
@@ -706,6 +1130,28 @@
 
   /* ------------------------------------------------------------------ avvio */
 
+  function optional(url) {
+    return fetch(url).then(function (r) { return r.ok ? r.json() : null; })
+      .catch(function () { return null; });
+  }
+
+  // Items written overnight by redattore.py join the week they were made for.
+  function mergeMaestroBank(bank) {
+    if (!bank || !bank.items) return;
+    var n = 0;
+    bank.items.forEach(function (it) {
+      if (!it || !it.id || itemMap[it.id] || !it.answer || !it.stem) return;
+      var w = course.weeks[(+it.week || 0) - 1];
+      if (!w) return;
+      it.src = "maestro";
+      course.items.push(it);
+      w.items.push(it.id);
+      itemMap[it.id] = it;
+      n++;
+    });
+    course.maestroItems = n;
+  }
+
   fetch("data/course.json")
     .then(function (r) {
       if (!r.ok) throw new Error("HTTP " + r.status);
@@ -714,6 +1160,20 @@
     .then(function (data) {
       course = data;
       itemMap = Drills.itemsById(course);
+      return Promise.all([
+        optional("data/bank_maestro.json"),
+        optional("data/oggi.json"),
+        Sync.pull(),
+        Tutor.detect()
+      ]);
+    })
+    .then(function (extra) {
+      mergeMaestroBank(extra[0]);
+      oggi = extra[1];
+      var remote = extra[2];
+      if (remote && Sync.newer(state, remote) === remote) {
+        state = Engine.load(remote);
+      }
       view.week = Math.min(state.unlocked, 52);
       renderHeader();
       render();

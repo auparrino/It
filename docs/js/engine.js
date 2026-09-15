@@ -161,15 +161,24 @@
       weekStats: {},      // week -> { attempts, right, bossPassed }
       challengeLog: {},   // challengeId -> autovalutazione
       badges: [],
-      totals: { attempts: 0, right: 0, close: 0, wrong: 0 }
+      totals: { attempts: 0, right: 0, close: 0, wrong: 0 },
+      tutor: { graded: 0, writings: 0, chats: 0 },   // lavoro fatto col Maestro
+      oggiDone: { date: null, kinds: [] },           // piano del giorno spuntato
+      savedAt: 0
     };
   }
 
-  function load() {
+  // With an argument, normalises a save that came from elsewhere (the
+  // server's progress.json); without one, reads the browser's own copy.
+  function load(given) {
     try {
-      var raw = root.localStorage && root.localStorage.getItem(KEY);
-      if (!raw) return blankSave();
-      var s = JSON.parse(raw);
+      var s;
+      if (given) s = given;
+      else {
+        var raw = root.localStorage && root.localStorage.getItem(KEY);
+        if (!raw) return blankSave();
+        s = JSON.parse(raw);
+      }
       var base = blankSave();
       Object.keys(base).forEach(function (k) {
         if (s[k] === undefined) s[k] = base[k];
@@ -234,7 +243,15 @@
     { id: "studioso", name: "Studioso", desc: "Leé la teoría de 10 semanas.",
       test: function (s) { return Object.keys(s.read || {}).length >= 10; } },
     { id: "erudito", name: "Erudito", desc: "Leé la teoría de las 52 semanas.",
-      test: function (s) { return Object.keys(s.read || {}).length >= 52; } }
+      test: function (s) { return Object.keys(s.read || {}).length >= 52; } },
+    { id: "scrittore", name: "Scrittore", desc: "Cinco textos corregidos por il Maestro.",
+      test: function (s) { return ((s.tutor || {}).writings || 0) >= 5; } },
+    { id: "chiacchierone", name: "Chiacchierone",
+      desc: "Cinco charlas terminadas con il Compagno.",
+      test: function (s) { return ((s.tutor || {}).chats || 0) >= 5; } },
+    { id: "allievo", name: "Allievo del Maestro",
+      desc: "25 sfide corregidas por il Maestro.",
+      test: function (s) { return ((s.tutor || {}).graded || 0) >= 25; } }
   ];
 
   function checkBadges(state) {
@@ -264,6 +281,7 @@
     load: load,
     save: save,
     touchStreak: touchStreak,
+    today: today,
     checkBadges: checkBadges,
     STORAGE_KEY: KEY
   };

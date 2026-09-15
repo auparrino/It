@@ -270,3 +270,54 @@ ul.exs .say:hover, ul.exs .say:active { opacity: 1; }
 .call.tip { background: rgba(212,160,23,.12);
             border-left: 3px solid var(--oro); }
 .call.tip b { color: var(--oro); }
+
+/* --------------------------------------------------------------- maestro */
+
+.oggi { border-left: 4px solid var(--oro);
+        background: linear-gradient(180deg, rgba(212,160,23,.10), var(--carta) 70%); }
+.oggi.done { border-left-color: var(--verde); }
+.oggi h2 { margin-bottom: 6px; }
+.oggi p { margin: 0 0 12px; }
+
+textarea {
+  font: inherit; width: 100%; padding: 12px 14px; border-radius: 11px;
+  background: var(--carta); border: 1.5px solid var(--grigio-chiaro); color: inherit;
+  resize: vertical; line-height: 1.5;
+}
+textarea:focus { outline: none; border-color: var(--verde); }
+
+.mgrade { margin-top: 12px; display: flex; flex-direction: column; gap: 8px;
+          align-items: flex-start; }
+.mgrade textarea { font-family: var(--mono); font-size: .9rem; }
+.mres { width: 100%; }
+table.mtab td { font-family: inherit !important; text-align: left !important; }
+table.mtab td:last-child { text-align: right !important; width: 2em; font-size: 1.1rem; }
+table.mtab tr.giusto td:last-child { color: var(--verde); }
+table.mtab tr.quasi td:last-child { color: var(--oro); }
+table.mtab tr.sbagliato td:last-child { color: var(--rosso); }
+table.mtab s { color: var(--rosso); }
+table.mtab b { color: var(--verde); }
+.corr { font-size: 1.02rem; line-height: 1.6; border-left: 3px solid var(--verde);
+        padding-left: 14px; }
+
+.chatbox { display: flex; flex-direction: column; }
+.chatlog { display: flex; flex-direction: column; gap: 8px; max-height: 52vh;
+           overflow-y: auto; padding: 4px 2px 12px; }
+.msg { max-width: 82%; padding: 10px 14px; border-radius: 14px; line-height: 1.45;
+       position: relative; }
+.msg.assistant { align-self: flex-start; background: var(--sfondo);
+                 border-bottom-left-radius: 4px; }
+.msg.user { align-self: flex-end; background: var(--verde); color: #fff;
+            border-bottom-right-radius: 4px; }
+.msg .say { border: none; background: transparent; cursor: pointer; opacity: .5;
+            font-size: .95rem; padding: 0 2px; }
+.msg .say:hover { opacity: 1; }
+
+.fld { display: flex; flex-direction: column; gap: 4px; font-size: .8rem;
+       color: var(--grigio); min-width: 200px; flex: 1; }
+.fld select, .fld input { font: inherit; color: inherit; padding: 9px 12px;
+  border-radius: 10px; border: 1.5px solid var(--grigio-chiaro); background: var(--carta); }
+pre { background: var(--sfondo); padding: 12px 14px; border-radius: 10px;
+      font-family: var(--mono); font-size: .85rem; overflow-x: auto; }
+code { font-family: var(--mono); font-size: .9em; background: var(--sfondo);
+       padding: 1px 5px; border-radius: 5px; }

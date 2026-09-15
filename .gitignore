@@ -2,3 +2,9 @@ node_modules/
 *.epub
 .DS_Store
 __pycache__/
+
+# generado por los agentes locales (progreso personal, plan del día, ítems del Redattore)
+progress.json
+progress.json.tmp
+docs/data/oggi.json
+docs/data/bank_maestro.json

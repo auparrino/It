@@ -16,13 +16,58 @@ como para hacerte tropezar.
 ## Jugar
 
 ```sh
-cd docs && python3 -m http.server 8000
+python3 tools/serve.py
 # abrir http://localhost:8000
 ```
 
 Es un sitio estático sin dependencias: se puede publicar tal cual en GitHub Pages
-apuntando a la carpeta `docs/`. El progreso se guarda en `localStorage`, así que
-vive en el navegador que uses.
+apuntando a la carpeta `docs/` (o servirla con `python3 -m http.server`). El
+progreso se guarda en `localStorage`; con `serve.py` además se copia a
+`progress.json`, que es lo que leen los agentes de abajo.
+
+## Il Maestro: los agentes con Ollama
+
+El curso original es un gimnasio de gramática con tres huecos que son justo
+donde uno se desengancha: los ejercicios abiertos no se corrigen, nunca se
+produce italiano propio, y nadie te trae de vuelta cuando faltás. Los agentes
+tapan eso con un modelo local de [Ollama](https://ollama.com). Nada sale de tu
+PC y no hace falta ninguna clave.
+
+```sh
+ollama serve                 # si no corre ya como servicio
+ollama pull qwen2.5:14b      # o gemma3:12b, llama3.1:8b… cualquiera que hable italiano
+python3 tools/serve.py       # sirve docs/ y reenvía /ollama a tu Ollama
+```
+
+El juego detecta Ollama solo (vía el proxy de `serve.py` o directo en el
+puerto 11434) y elige un modelo; en la pestaña **Maestro** se cambia.
+
+| Agente | Dónde | Qué hace |
+|---|---|---|
+| **Il Maestro** | en el juego, *Sfide* | Corrige los 1.632 sub-ítems abiertos del *Soluzioni*: veredicto por ítem, versión correcta y la regla en español. Lo que dictamina alimenta el SRS igual que la autoevaluación. |
+| **Scrittura** | en el juego, por semana | Consigna de escritura con la gramática de la semana; devuelve el texto corregido, los errores explicados y una cosa para practicar. |
+| **Il Compagno** | en el juego, por semana | Charla en italiano al nivel de la semana. No interrumpe para corregir: al terminar te da tus errores más útiles. |
+| **Il Custode** | `tools/custode.py`, una vez al día | Lee `progress.json` y arma el plan del día en la tarjeta *Oggi*. Cuanto más faltaste, **más chico** es el plan: volver cuesta 3 preguntas, no una hora. |
+| **Il Redattore** | `tools/redattore.py`, de noche | Encuentra las semanas donde más tropezás y escribe ítems nuevos contra esos errores, validados y mezclados en las rondas de esa semana. |
+
+Los tres primeros corren en el navegador con la teoría de la semana como
+contexto (las *trampas* y *atajos* de la lección van en el prompt). Los dos
+scripts se programan una vez:
+
+```sh
+# Linux / macOS: crontab -e
+0 8 * * *  cd /ruta/al/repo && python3 tools/custode.py --notify
+0 3 * * *  cd /ruta/al/repo && python3 tools/redattore.py
+```
+
+En Windows, dos tareas en el Programador de tareas con los mismos comandos. Sin
+Ollama encendido el Custode igual escribe el plan (con un mensaje de plantilla)
+y el Redattore simplemente no agrega nada.
+
+**Advertencia:** un modelo local se equivoca. Los ítems del Redattore se marcan
+como suyos y el juego siempre pide verificar con la teoría; las correcciones
+del Maestro conviene contrastarlas con el capítulo cuando algo no cierra. Un
+modelo de 12–14B es un buen piso; con 7–8B las correcciones son más flojas.
 
 ## Cómo está armado el año
 
@@ -79,9 +124,15 @@ docs/                 el juego (sitio estático, listo para GitHub Pages)
   js/conjugator.js    motor de conjugación italiano
   js/engine.js        corrección, SRS, XP, guardado
   js/drills.js        generación de rondas, bosses y repaso
+  js/tutor.js         il Maestro: cliente de Ollama y prompts
+  js/sync.js          copia del progreso a progress.json
   js/app.js           interfaz
   data/course.json    curso completo compilado
 tools/
+  serve.py               servidor local: docs/ + proxy a Ollama + progress.json
+  agente.py              lo común de los agentes de fondo
+  custode.py             plan del día (docs/data/oggi.json)
+  redattore.py           ítems nuevos contra tus errores (docs/data/bank_maestro.json)
   extract_dummies.py     EPUB -> banco auto-corregible
   extract_routledge.py   EPUB -> temario + desafíos
   build_course.py        arma docs/data/course.json
@@ -89,6 +140,8 @@ tools/
   lessons/               teoría de las 52 semanas (s1..s4, una por estación)
   test_conjugator.js     1.442 comprobaciones de formas verbales
   test_game.js           21.564 comprobaciones de datos y lógica
+  test_tutor.js          tutor y sincronización, con fetch simulado
+  test_agenti.py         agentes y servidor, con un Ollama falso
 ```
 
 ## Reconstruir los datos
@@ -106,6 +159,8 @@ python3 tools/build_course.py
 ```sh
 node tools/test_conjugator.js   # formas verbales contra las tablas de los libros
 node tools/test_game.js         # integridad del curso, corrección, SRS, progresión
+node tools/test_tutor.js        # il Maestro y la sincronización, sin red
+python3 tools/test_agenti.py    # custode, redattore y serve.py contra un Ollama falso
 ```
 
 `test_conjugator.js` valida las 14 conjugaciones contra formas verificadas
@@ -132,8 +187,9 @@ sale del banco de *For Dummies*, del motor de conjugación y del banco propio.
 
 **Esto es gramática, no un curso completo.** Un año de este juego te da el
 sistema gramatical del C1 con solidez, pero el C1 real también exige volumen de
-lectura, escucha y producción oral. El curso es el andamio; la exposición al
-idioma la tenés que poner aparte.
+lectura, escucha y producción oral. *Scrittura* y *il Compagno* cubren la
+producción escrita; la lectura, la escucha y el hablar los tenés que poner
+aparte.
 
 Los dos manuales son obra con derechos de autor y no se incluyen en el repo:
 los scripts de extracción trabajan sobre las copias que tengas vos, y el material
