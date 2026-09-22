@@ -161,7 +161,14 @@
       weekStats: {},      // week -> { attempts, right, bossPassed }
       challengeLog: {},   // challengeId -> autovalutazione
       badges: [],
-      totals: { attempts: 0, right: 0, close: 0, wrong: 0 }
+      totals: { attempts: 0, right: 0, close: 0, wrong: 0 },
+      days: {},           // "aaaa-m-g" -> xp guadagnata quel giorno
+      goal: 50,           // obiettivo di xp al giorno
+      shields: 1,         // scudi che salvano la serie se salti un giorno
+      chest: null,        // giorno in cui hai aperto il forziere
+      best: {},           // record personali: lampo, combo
+      silent: false,      // modalità ufficio: niente audio automatico
+      written: 0          // frasi scritte a memoria senza errori
     };
   }
 
@@ -189,20 +196,99 @@
     }
   }
 
-  function today() {
-    var d = new Date();
+  function dayKey(d) {
+    d = d || new Date();
     return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
   }
 
-  // The streak counts consecutive calendar days, not sessions.
-  function touchStreak(state) {
-    var t = today();
+  function today() { return dayKey(); }
+
+  // Whole calendar days between two day keys (b - a).
+  function daysBetween(a, b) {
+    function parse(k) {
+      var p = k.split("-");
+      return Date.UTC(+p[0], +p[1] - 1, +p[2]);
+    }
+    return Math.round((parse(b) - parse(a)) / DAY);
+  }
+
+  /* The streak counts consecutive calendar days, not sessions.  A shield
+     covers each missed day, so one bad day at work doesn't wipe a month. */
+  function touchStreak(state, now) {
+    var t = dayKey(now);
     if (state.lastPlayed === t) return state.streak;
-    var y = new Date(Date.now() - DAY);
-    var yesterday = y.getFullYear() + "-" + (y.getMonth() + 1) + "-" + y.getDate();
-    state.streak = state.lastPlayed === yesterday ? state.streak + 1 : 1;
+    var gap = state.lastPlayed ? daysBetween(state.lastPlayed, t) : 99;
+    var missed = gap - 1;
+    if (gap === 1) state.streak += 1;
+    else if (missed > 0 && missed <= (state.shields || 0) && state.streak > 0) {
+      state.shields -= missed;
+      state.shieldUsed = t;
+      state.streak += 1;
+    } else state.streak = 1;
+    // Every 7 days of streak earns a shield (max 3 in the pocket).
+    if (state.streak % 7 === 0) state.shields = Math.min(3, (state.shields || 0) + 1);
     state.lastPlayed = t;
     return state.streak;
+  }
+
+  // XP earned today, and whether today's goal has just been reached.
+  function addXp(state, n, now) {
+    var k = dayKey(now);
+    if (!state.days) state.days = {};
+    var before = state.days[k] || 0;
+    state.days[k] = before + n;
+    state.xp += n;
+    var goal = state.goal || 50;
+    return before < goal && state.days[k] >= goal;
+  }
+
+  function todayXp(state, now) {
+    return (state.days || {})[dayKey(now)] || 0;
+  }
+
+  // The last n days as [{key, xp}] from oldest to today.
+  function lastDays(state, n, now) {
+    var out = [], base = now ? now.getTime() : Date.now();
+    for (var i = n - 1; i >= 0; i--) {
+      var k = dayKey(new Date(base - i * DAY));
+      out.push({ key: k, xp: (state.days || {})[k] || 0 });
+    }
+    return out;
+  }
+
+  /* Il forziere: una volta al giorno, raggiunto l'obiettivo, una ricompensa
+     a sorpresa.  La varietà è ciò che fa tornare. */
+  function openChest(state, rnd, now) {
+    var k = dayKey(now);
+    if (state.chest === k) return null;
+    if (todayXp(state, now) < (state.goal || 50)) return null;
+    state.chest = k;
+    var r = (rnd || Math.random)();
+    var prize;
+    if (r < 0.15 && (state.shields || 0) < 3) {
+      state.shields = (state.shields || 0) + 1;
+      prize = { kind: "shield", label: "🛡️ ¡Un escudo de racha!" };
+    } else if (r < 0.35) {
+      prize = { kind: "xp", xp: 50, label: "💎 ¡Premio gordo: +50 xp!" };
+    } else {
+      var n = 10 + Math.floor((rnd || Math.random)() * 4) * 5;
+      prize = { kind: "xp", xp: n, label: "✨ +" + n + " xp" };
+    }
+    if (prize.xp) state.xp += prize.xp;
+    state.coins = (state.coins || 0) + 1;
+    return prize;
+  }
+
+  /* I gradi: un titolo per ogni tappa, da turista a madrelingua. */
+  var RANKS = [
+    [1, "Turista"], [3, "Viaggiatore"], [6, "Studente Erasmus"],
+    [10, "Pendolare"], [15, "Cittadino"], [21, "Chiacchierone"],
+    [28, "Oratore"], [36, "Poeta"], [45, "Dantesco"], [55, "Madrelingua"]
+  ];
+  function rankFor(level) {
+    var r = RANKS[0][1];
+    RANKS.forEach(function (x) { if (level >= x[0]) r = x[1]; });
+    return r;
   }
 
   /* ----------------------------------------------------------------- badge */
@@ -234,7 +320,26 @@
     { id: "studioso", name: "Studioso", desc: "Leé la teoría de 10 semanas.",
       test: function (s) { return Object.keys(s.read || {}).length >= 10; } },
     { id: "erudito", name: "Erudito", desc: "Leé la teoría de las 52 semanas.",
-      test: function (s) { return Object.keys(s.read || {}).length >= 52; } }
+      test: function (s) { return Object.keys(s.read || {}).length >= 52; } },
+    { id: "penna", name: "Prima penna", desc: "Escribí de memoria tu primera frase.",
+      test: function (s) { return (s.written || 0) >= 1; } },
+    { id: "scrittore", name: "Scrittore", desc: "100 frases escritas de memoria.",
+      test: function (s) { return (s.written || 0) >= 100; } },
+    { id: "fulmine", name: "Fulmine", desc: "20 aciertos en un Lampo de 60 segundos.",
+      test: function (s) { return ((s.best || {}).lampo || 0) >= 20; } },
+    { id: "frasario", name: "Frasario", desc: "100 frases de conversación aprendidas.",
+      test: function (s) {
+        return Object.keys(s.cards).filter(function (k) {
+          return k.indexOf("frase:") === 0;
+        }).length >= 100;
+      } },
+    { id: "costante", name: "Costante", desc: "Cumplí la meta diaria 5 días.",
+      test: function (s) {
+        var g = s.goal || 50;
+        return Object.keys(s.days || {}).filter(function (k) {
+          return s.days[k] >= g;
+        }).length >= 5;
+      } }
   ];
 
   function checkBadges(state) {
@@ -264,6 +369,14 @@
     load: load,
     save: save,
     touchStreak: touchStreak,
+    dayKey: dayKey,
+    daysBetween: daysBetween,
+    addXp: addXp,
+    todayXp: todayXp,
+    lastDays: lastDays,
+    openChest: openChest,
+    rankFor: rankFor,
+    RANKS: RANKS,
     checkBadges: checkBadges,
     STORAGE_KEY: KEY
   };

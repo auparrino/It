@@ -13,16 +13,66 @@ El curso está escrito **en español para hispanohablantes**: casi todo el mater
 propio ataca los puntos donde el español y el italiano se parecen lo suficiente
 como para hacerte tropezar.
 
-## Jugar
+## En el celular (lo principal)
+
+Es una **app web instalable** (PWA): se publica una vez y queda en tu pantalla de
+inicio como cualquier app, **funciona sin internet** y guarda tu progreso **solo en
+tu teléfono**. No usa cuentas, servidores, micrófono ni IA externa.
+
+1. Publicá la carpeta `docs/` con GitHub Pages: *Settings → Pages → Deploy from a
+   branch →* la rama que tenga estos cambios, carpeta `/docs`.
+2. Abrí la URL en el celular una vez con internet.
+3. **iPhone** (Safari): *Compartir → Agregar a inicio*. **Android** (Chrome):
+   el botón *Instalar app* de la pantalla Oggi, o *menú ⋮ → Instalar app*.
+4. Desde ahí abre sin conexión. Al publicar una versión nueva, se actualiza sola
+   la próxima vez que la abras con internet.
+
+### Pensada para el trabajo aburrido
+
+- **☕ Pausa caffè**: 3 minutos, todo con el pulgar. Mezcla un poco de repaso,
+  dos frases nuevas, frases que ya viste y un par de preguntas de gramática de tu
+  semana.
+- **⚡ Lampo 60″**: contrarreloj de un minuto, del castellano al italiano. Cada
+  error resta 3 segundos. Guarda tu récord.
+- **🗣️ Frasi**: 15 escenas y 258 frases de conversación de alta frecuencia (bar,
+  oficina, charla, reacciones, conectores, opiniones con congiuntivo, falsos
+  amigos). Cada escena te presenta frases nuevas y después te las pide de cinco
+  maneras: armarla con fichas, escucharla, tarjeta rápida y, sobre todo,
+  **escribirla de memoria**, que es lo que te hace rápido para hablar. Al
+  escribir no cuentan los acentos ni la puntuación, pero sí el orden de las palabras.
+- **🤫 Modo oficina** (botón arriba a la derecha): no suena nada solo y no
+  aparecen ejercicios de escucha. El 🔊 sigue andando si lo tocás con auriculares.
+
+### Lo que te mantiene enganchado
+
+- **Meta diaria** (20, 50, 100 o 150 xp) con anillo de progreso en la cabecera.
+- **🎁 Cofre diario** al cumplir la meta: premio sorpresa (xp, premio gordo o un
+  escudo).
+- **🔥 Racha con 🛡️ escudos**: cada 7 días de racha ganás un escudo, y cada
+  escudo salva la racha por un día que no pudiste jugar (máximo 3).
+- **Rangos**, de *Turista* a *Madrelingua*, además del nivel.
+- **Calendario** de tus últimas 4 semanas, combos, confeti, sonidos y vibración.
+- **Repaso espaciado** que mezcla gramática y frases: cada frase vuelve cuando
+  estás por olvidarla, y cada vez con otro tipo de ejercicio.
+- **Recordatorio diario**: en *Io* elegís una hora y se agrega a tu calendario
+  un evento que se repite todos los días. Anda sin servidor ni notificaciones push.
+
+### Tu memoria
+
+Todo queda en el `localStorage` del teléfono. La app le pide al navegador
+almacenamiento persistente, y al instalarla en la pantalla de inicio es mucho menos
+probable que se borre. Igual, en *Io → Guardar copia* bajás (o compartís a Drive o
+WhatsApp) un `.json` con todo tu progreso, y con *Restaurar copia* lo recuperás
+en otro teléfono.
+
+## Jugar en la computadora
 
 ```sh
 cd docs && python3 -m http.server 8000
 # abrir http://localhost:8000
 ```
 
-Es un sitio estático sin dependencias: se puede publicar tal cual en GitHub Pages
-apuntando a la carpeta `docs/`. El progreso se guarda en `localStorage`, así que
-vive en el navegador que uses.
+Es un sitio estático sin dependencias.
 
 ## Cómo está armado el año
 
@@ -76,9 +126,11 @@ estudiante comete de verdad.
 docs/                 el juego (sitio estático, listo para GitHub Pages)
   index.html
   css/app.css
+  manifest.webmanifest, sw.js, icons/   app instalable y sin conexión
   js/conjugator.js    motor de conjugación italiano
-  js/engine.js        corrección, SRS, XP, guardado
-  js/drills.js        generación de rondas, bosses y repaso
+  js/engine.js        corrección, SRS, XP, meta diaria, racha y escudos, cofre, guardado
+  js/frasi.js         banco de frases de conversación y sus ejercicios
+  js/drills.js        generación de rondas, bosses, repaso, pausa y lampo
   js/app.js           interfaz
   data/course.json    curso completo compilado
 tools/
@@ -88,7 +140,8 @@ tools/
   authored/              banco de ítems propios (Python legible)
   lessons/               teoría de las 52 semanas (s1..s4, una por estación)
   test_conjugator.js     1.442 comprobaciones de formas verbales
-  test_game.js           21.564 comprobaciones de datos y lógica
+  test_game.js           ~21.500 comprobaciones de datos y lógica
+  test_frasi.js          ~7.000 comprobaciones de frases, pausa, lampo, racha y cofre
 ```
 
 ## Reconstruir los datos
@@ -106,7 +159,11 @@ python3 tools/build_course.py
 ```sh
 node tools/test_conjugator.js   # formas verbales contra las tablas de los libros
 node tools/test_game.js         # integridad del curso, corrección, SRS, progresión
+node tools/test_frasi.js        # frases, ejercicios, pausa, lampo, racha, escudos, cofre
 ```
+
+Si cambiás algún archivo de `docs/`, subí `VERSION` en `docs/sw.js` para que los
+teléfonos descarguen la versión nueva.
 
 `test_conjugator.js` valida las 14 conjugaciones contra formas verificadas
 (incluidas las irregularidades del *passato remoto* en patrón 1-3-3 y las reglas
