@@ -11,6 +11,8 @@
     (typeof require === "function" ? require("./conjugator.js") : null);
   var Frasi = root.Frasi ||
     (typeof require === "function" ? require("./frasi.js") : null);
+  var Lab = root.Lab ||
+    (typeof require === "function" ? require("./lab.js") : null);
 
   function shuffle(a, rnd) {
     a = a.slice();
@@ -160,11 +162,12 @@
   function reviewItem(map, id, opts) {
     if (map[id]) return map[id];
     if (Frasi && Frasi.BY_ID[id]) return Frasi.pickItem(Frasi.BY_ID[id], opts);
+    if (Lab && Lab.BY_ID[id]) return Lab.item(id);
     return null;
   }
 
   function knownId(map, id) {
-    return !!(map[id] || (Frasi && Frasi.BY_ID[id]));
+    return !!(map[id] || (Frasi && Frasi.BY_ID[id]) || (Lab && Lab.BY_ID[id]));
   }
 
   /* La coda del ripasso: schede scadute, le più in ritardo per prime. */
@@ -204,45 +207,62 @@
     return Frasi.SCENES[Math.floor(Math.random() * Frasi.SCENES.length)];
   }
 
-  /* Pausa caffè: tre minuti, tutto con un pollice.  Un po' di ripasso,
-     due frasi nuove, qualche frase nota e un paio di domande della settimana. */
+  /* Pausa caffè: tre minuti.  Un po' di ripasso, due frasi nuove, qualche
+     frase nota, una domanda del laboratorio e una della settimana.  Ogni frase
+     nuova si presenta presto e si richiede dopo qualche domanda di mezzo:
+     subito dopo la si ricorda "a vista", senza sforzo, e non serve
+     (spacing dentro la sessione: Cepeda et al. 2006). */
   function buildPausa(course, state, week, opts) {
     opts = opts || {};
     var map = opts.map || itemsById(course);
-    var out = buildReview(course, state, 3, { map: map, silent: opts.silent });
+    var review = buildReview(course, state, 3, { map: map, silent: opts.silent });
     var seenIds = {};
-    out.forEach(function (it) { seenIds[it.id] = true; });
+    review.forEach(function (it) { seenIds[it.id] = true; });
 
+    var intros = [], drills = [], filler = review.slice();
     if (Frasi) {
       var sc = nextScene(state);
-      var fresh = Frasi.ofScene(sc.id).filter(function (f) {
+      Frasi.ofScene(sc.id).filter(function (f) {
         return !state.cards[f.id] && !seenIds[f.id];
-      }).slice(0, 2);
-      fresh.forEach(function (f) {
-        out.push({ id: f.id, frase: f, src: "frasi", type: "intro",
-                   prompt: "Frase nueva", stem: f.it, answer: f.it, note: f.note });
-        out.push(Frasi.pickItem(f, { silent: opts.silent, fresh: true }));
+      }).slice(0, 2).forEach(function (f) {
+        intros.push({ id: f.id, frase: f, src: "frasi", type: "intro",
+                      prompt: "Frase nueva", stem: f.it, answer: f.it, note: f.note });
+        drills.push(Frasi.pickItem(f, { silent: opts.silent, fresh: true }));
         seenIds[f.id] = true;
       });
-      var known = shuffle(Frasi.ALL.filter(function (f) {
+      shuffle(Frasi.ALL.filter(function (f) {
         return state.cards[f.id] && !seenIds[f.id];
-      })).slice(0, 2);
-      known.forEach(function (f) { out.push(Frasi.pickItem(f, opts)); });
+      })).slice(0, 2).forEach(function (f) { filler.push(Frasi.pickItem(f, opts)); });
     }
 
-    // Solo domande a scelta: in pausa non si scrive.
+    // Interleaving (Rohrer & Taylor 2007): una domanda del laboratorio.
+    if (Lab) filler.push(Lab.randomItem(state.cards));
+
+    // Del libro solo domande a scelta: in pausa si va veloci.
     var bookChoice = (week.items || []).map(function (id) { return map[id]; })
       .filter(function (it) { return it && it.type === "choice" && !seenIds[it.id]; });
-    sample(bookChoice, 2).forEach(function (it) { out.push(it); });
+    sample(bookChoice, 2).forEach(function (it) { filler.push(it); });
     if (week.verbs && week.verbs.length) {
       try {
-        out.push(conjugationDrill(
+        filler.push(conjugationDrill(
           week.verbs[Math.floor(Math.random() * week.verbs.length)],
           week.tenses[Math.floor(Math.random() * week.tenses.length)]));
       } catch (e) { /* salta */ }
     }
-    // Keep intros right before their drill; shuffle only what follows them.
-    return out.slice(0, 10);
+    filler = shuffle(filler);
+
+    // intro A, 2 filler, intro B, 2 filler, drill A, 2 filler, drill B, rest.
+    var out = [];
+    function take(n) { for (var i = 0; i < n && filler.length; i++) out.push(filler.shift()); }
+    if (intros[0]) out.push(intros[0]);
+    take(2);
+    if (intros[1]) out.push(intros[1]);
+    take(2);
+    if (drills[0]) out.push(drills[0]);
+    take(2);
+    if (drills[1]) out.push(drills[1]);
+    take(filler.length);
+    return out.slice(0, 11);
   }
 
   /* Lampo: 60 secondi di scelte rapide castellano → italiano. */

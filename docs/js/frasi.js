@@ -341,6 +341,52 @@
         ["Ne ho abbastanza!", "¡Ya me cansé! / ¡Estoy harto!"],
         ["Sono fiero di te.", "Estoy orgulloso de vos."],
         ["In bocca al lupo!", "¡Suerte!", "Se responde *Crepi!* (¡que se muera el lobo!)."]
+      ] },
+
+    { id: "idee", emoji: "🏛️", name: "Parlare di idee",
+      blurb: "Para charlar de historia, política, libros y sociedad sin quedarte mudo.",
+      phrases: [
+        ["Da un punto di vista storico, ha senso.", "Desde un punto de vista histórico, tiene sentido."],
+        ["Bisogna contestualizzare.", "Hay que contextualizar."],
+        ["È una questione di classe sociale.", "Es una cuestión de clase social."],
+        ["Non sono d'accordo con questa interpretazione.", "No estoy de acuerdo con esta interpretación."],
+        ["Dipende da cosa intendi per libertà.", "Depende de qué entendés por libertad."],
+        ["Il problema è più complesso di così.", "El problema es más complejo que eso."],
+        ["Su questo punto hai ragione.", "En este punto tenés razón."],
+        ["Mi ha fatto riflettere.", "Me hizo reflexionar."],
+        ["È un libro che mi ha cambiato la vita.", "Es un libro que me cambió la vida."],
+        ["L'ho letto in traduzione.", "Lo leí traducido."],
+        ["Il suo pensiero è ancora attuale.", "Su pensamiento sigue siendo actual.", "*Attuale* = actual, vigente. «Actualmente» es *attualmente*."],
+        ["Non si può ridurre tutto all'economia.", "No se puede reducir todo a la economía."],
+        ["Si tratta di un luogo comune.", "Se trata de un lugar común."],
+        ["In altre parole, il potere si basa sul consenso.", "En otras palabras, el poder se basa en el consenso."],
+        ["Faccio l'avvocato del diavolo.", "Hago de abogado del diablo."],
+        ["La storia la scrivono i vincitori.", "La historia la escriben los vencedores."],
+        ["Sono cresciuto leggendo Borges.", "Crecí leyendo a Borges.", "Con personas no va *a*: *leggo Borges*, *conosco Maria*."],
+        ["Che cosa ne pensi, da sociologo?", "¿Qué opinás, como sociólogo?"]
+      ] },
+
+    { id: "citazioni", emoji: "✒️", name: "Citazioni celebri",
+      blurb: "Versos y frases que cualquier italiano reconoce. Aprenderlas es aprender la lengua y la cultura a la vez.",
+      phrases: [
+        ["Nel mezzo del cammin di nostra vita", "En medio del camino de nuestra vida", "Dante, *Inferno* I, 1: el primer verso de la *Commedia*."],
+        ["Lasciate ogni speranza, voi ch'entrate", "Abandonen toda esperanza, ustedes que entran", "Dante, *Inferno* III: la inscripción sobre la puerta del infierno."],
+        ["Amor, ch'a nullo amato amar perdona", "Amor, que a ningún amado permite no amar", "Dante, *Inferno* V: Francesca da Rimini."],
+        ["Fatti non foste a viver come bruti", "No fueron hechos para vivir como bestias", "Dante, *Inferno* XXVI: Ulises; sigue *ma per seguir virtute e canoscenza*."],
+        ["E quindi uscimmo a riveder le stelle", "Y así salimos a volver a ver las estrellas", "Dante, *Inferno* XXXIV: el último verso del Infierno. *Uscimmo* es passato remoto."],
+        ["Chi vuol esser lieto, sia: di doman non c'è certezza", "Quien quiera ser feliz, que lo sea: del mañana no hay certeza", "Lorenzo de' Medici, *Canzona di Bacco* (1490)."],
+        ["Sempre caro mi fu quest'ermo colle", "Siempre me fue querida esta colina solitaria", "Leopardi, *L'infinito* (1819). *Fu* = passato remoto de *essere*."],
+        ["E il naufragar m'è dolce in questo mare", "Y naufragar me es dulce en este mar", "Leopardi, el último verso de *L'infinito*."],
+        ["Quel ramo del lago di Como", "Aquel brazo del lago de Como", "Manzoni, el comienzo de *I promessi sposi*."],
+        ["Se vogliamo che tutto rimanga com'è, bisogna che tutto cambi", "Si queremos que todo siga como está, es necesario que todo cambie", "Tomasi di Lampedusa, *Il Gattopardo*. Dos congiuntivi: *rimanga*, *cambi*."],
+        ["M'illumino d'immenso", "Me ilumino de inmensidad", "Ungaretti, *Mattina* (1917): un poema entero de dos versos."],
+        ["Si sta come d'autunno sugli alberi le foglie", "Se está como en otoño en los árboles las hojas", "Ungaretti, *Soldati* (1918): los soldados en la trinchera."],
+        ["Ognuno sta solo sul cuor della terra", "Cada uno está solo sobre el corazón de la tierra", "Quasimodo, *Ed è subito sera*."],
+        ["Odio gli indifferenti", "Odio a los indiferentes", "Gramsci, artículo de 1917."],
+        ["Il pessimismo dell'intelligenza, l'ottimismo della volontà", "El pesimismo de la inteligencia, el optimismo de la voluntad", "Lema que Gramsci tomó de Romain Rolland."],
+        ["Considerate se questo è un uomo", "Consideren si esto es un hombre", "Primo Levi, del poema que abre *Se questo è un uomo*."],
+        ["Un paese ci vuole, non fosse che per il gusto di andarsene via", "Hace falta un pueblo, aunque sea por el gusto de irse", "Pavese, *La luna e i falò* (1950)."],
+        ["Eppur si muove", "Y sin embargo se mueve", "Atribuida a Galileo tras el proceso de 1633. No hay pruebas de que la haya dicho."]
       ] }
   ];
 
@@ -361,6 +407,16 @@
 
   var BY_ID = {};
   ALL.forEach(function (f) { BY_ID[f.id] = f; });
+
+  // A word capitalised in mid-sentence is a name (Firenze, Borges).
+  var PROPER = {};
+  ALL.forEach(function (f) {
+    var t = String(f.it).replace(/«|»/g, "").split(/\s+/);
+    for (var i = 1; i < t.length; i++) {
+      var w = t[i].replace(/^[.,!?;:…"]+|[.,!?;:…"]+$/g, "");
+      if (/^[A-ZÀ-Ý]/.test(w) && !/[.!?…]$/.test(t[i - 1])) PROPER[w] = true;
+    }
+  });
 
   function scene(id) {
     for (var i = 0; i < SCENES.length; i++) if (SCENES[i].id === id) return SCENES[i];
@@ -385,6 +441,17 @@
   // Words as the learner sees them on the tiles (punctuation kept on the word).
   function tiles(s) {
     return String(s).replace(/«|»/g, "").split(/\s+/).filter(Boolean);
+  }
+
+  /* Tiles as shown on screen: no punctuation and no sentence-initial capital,
+     or the tiles give the order away ("Ciao," first, "stai?" last).  Proper
+     nouns keep their capital (PROPER is filled at load, see above). */
+
+  function tileWords(s) {
+    return tiles(s).map(function (t) {
+      var w = t.replace(/^[.,!?;:…"]+|[.,!?;:…"]+$/g, "");
+      return PROPER[w] ? w : w.charAt(0).toLowerCase() + w.slice(1);
+    }).filter(Boolean);
   }
 
   // Words as the grader compares them: lower case, no punctuation, no accents.
@@ -448,12 +515,12 @@
      `frase` che porta la frase di origine. */
 
   function tilesItem(f) {
-    var own = tiles(f.it);
+    var own = tileWords(f.it);
     var others = shuffle(ALL.filter(function (g) { return g.scene === f.scene && g.id !== f.id; }));
     var extra = [];
     var have = words(f.it);
     for (var i = 0; i < others.length && extra.length < 3; i++) {
-      var cand = tiles(others[i].it);
+      var cand = tileWords(others[i].it);
       var w = cand[Math.floor(Math.random() * cand.length)];
       var key = words(w).join(" ");
       if (key && have.indexOf(key) < 0 && extra.every(function (e) {
@@ -507,16 +574,77 @@
     };
   }
 
+  /* Cloze in contesto: la frase intera, una parola da ricordare.  Recuperare
+     una parola dentro il suo blocco la lega al blocco (Nation 2013). */
+  var STOP = ["sono", "come", "questo", "questa", "della", "nella", "alla", "anche",
+              "però", "perché", "molto", "sempre", "ancora"];
+
+  function clozeItem(f) {
+    var toks = tiles(f.it);
+    var cands = [];
+    toks.forEach(function (t, i) {
+      var core = t.replace(/^[^A-Za-zÀ-ÿ]+|[^A-Za-zÀ-ÿ]+$/g, "");
+      if (core.length >= 3 && core.indexOf("'") < 0 && /^[A-Za-zÀ-ÿ]+$/.test(core) &&
+          STOP.indexOf(core.toLowerCase()) < 0) cands.push({ i: i, core: core });
+    });
+    if (!cands.length) return tilesItem(f);
+    var c = cands[Math.floor(Math.random() * cands.length)];
+    var stem = toks.map(function (t, i) {
+      return i === c.i ? t.replace(c.core, "___") : t;
+    }).join(" ");
+    return {
+      id: f.id, frase: f, src: "frasi", type: "cloze",
+      prompt: "Completá la frase: «" + f.es + "»",
+      stem: stem,
+      answer: c.core, accept: [c.core], note: f.note
+    };
+  }
+
+  /* Dettato: ascoltare e scrivere unisce suono e grafia. */
+  function dictationItem(f) {
+    return {
+      id: f.id, frase: f, src: "frasi", type: "dictation",
+      prompt: "Dettato: escuchá y escribí lo que oís",
+      stem: f.it,
+      answer: f.it, accept: [f.it], note: f.note
+    };
+  }
+
+  /* Pretest: provare a indovinare prima di vedere la risposta migliora il
+     ricordo, anche quando si sbaglia (Kornell, Hays & Bjork 2009; Richland,
+     Kornell & Kao 2009).  Non costa vite né entra nel ripasso. */
+  function guessItem(f) {
+    var used = {};
+    used[f.it] = true;
+    var others = shuffle(ALL.filter(function (g) { return g.scene === f.scene; }))
+      .concat(shuffle(ALL))
+      .filter(function (g) {
+        if (used[g.it]) return false;
+        used[g.it] = true;
+        return true;
+      }).slice(0, 2);
+    return {
+      id: f.id, frase: f, src: "frasi", type: "guess",
+      prompt: "Adiviná antes de aprenderla (no pasa nada si le errás)",
+      stem: f.es,
+      options: shuffle([f.it].concat(others.map(function (g) { return g.it; }))),
+      answer: f.it, accept: [f.it], note: f.note
+    };
+  }
+
   function pickItem(f, opts) {
     opts = opts || {};
     // Known phrases are asked to be produced more often than recognised:
     // recall is what makes you fast when you talk.
-    var kinds = opts.silent ? ["tiles", "tiles", "flash", "write", "write"]
-                            : ["tiles", "tiles", "listen", "flash", "write", "write"];
-    if (opts.fresh) kinds = ["tiles", "tiles", "flash"];
+    // Desirable difficulty (Bjork 1994): a phrase seen for the first time is
+    // recognised (tiles); once it is known, it has to be produced.
+    var kinds = opts.silent ? ["tiles", "cloze", "flash", "write", "write"]
+                            : ["tiles", "cloze", "listen", "dictation", "flash", "write", "write"];
+    if (opts.fresh) kinds = ["tiles", "tiles", "cloze"];
     var k = kinds[Math.floor(Math.random() * kinds.length)];
     return k === "tiles" ? tilesItem(f) : k === "listen" ? listenItem(f)
-         : k === "write" ? writeItem(f) : flashItem(f);
+         : k === "write" ? writeItem(f) : k === "cloze" ? clozeItem(f)
+         : k === "dictation" ? dictationItem(f) : flashItem(f);
   }
 
   /* Una sessione di scena: prima presenta le frasi nuove, poi le mette alla
@@ -528,7 +656,9 @@
     var known = list.filter(function (f) { return cards[f.id]; });
     var newOnes = fresh.slice(0, opts.newCount || 4);
     var out = [];
-    newOnes.forEach(function (f) {
+    newOnes.forEach(function (f, i) {
+      // Half of the new phrases are guessed before being shown.
+      if (i % 2 === 0) out.push(guessItem(f));
       out.push({ id: f.id, frase: f, src: "frasi", type: "intro",
                  prompt: "Frase nueva", stem: f.it, answer: f.it, note: f.note });
     });
@@ -567,12 +697,17 @@
     scene: scene,
     ofScene: ofScene,
     tiles: tiles,
+    tileWords: tileWords,
+    PROPER: PROPER,
     words: words,
     compare: compare,
     gradeWritten: gradeWritten,
     tilesItem: tilesItem,
     listenItem: listenItem,
     writeItem: writeItem,
+    clozeItem: clozeItem,
+    dictationItem: dictationItem,
+    guessItem: guessItem,
     flashItem: flashItem,
     pickItem: pickItem,
     sceneSession: sceneSession,

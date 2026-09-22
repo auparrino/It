@@ -163,12 +163,14 @@
       badges: [],
       totals: { attempts: 0, right: 0, close: 0, wrong: 0 },
       days: {},           // "aaaa-m-g" -> xp guadagnata quel giorno
-      goal: 50,           // obiettivo di xp al giorno
+      goal: 200,          // obiettivo di xp al giorno (~2 pause caffè)
+      goalV: 2,           // versione della scala dell'obiettivo
       shields: 1,         // scudi che salvano la serie se salti un giorno
       chest: null,        // giorno in cui hai aperto il forziere
       best: {},           // record personali: lampo, combo
       silent: false,      // modalità ufficio: niente audio automatico
-      written: 0          // frasi scritte a memoria senza errori
+      written: 0,         // frasi scritte a memoria senza errori
+      letture: {}         // puntata -> { pct, at } delle letture fatte
     };
   }
 
@@ -178,6 +180,12 @@
       if (!raw) return blankSave();
       var s = JSON.parse(raw);
       var base = blankSave();
+      // The first goal scale (20-150) was reached with a single session; map
+      // old choices onto the new one before filling the missing fields.
+      if (s.goalV !== 2) {
+        s.goal = { 20: 100, 50: 200, 100: 350, 150: 500 }[s.goal] || 200;
+        s.goalV = 2;
+      }
       Object.keys(base).forEach(function (k) {
         if (s[k] === undefined) s[k] = base[k];
       });
@@ -238,7 +246,7 @@
     var before = state.days[k] || 0;
     state.days[k] = before + n;
     state.xp += n;
-    var goal = state.goal || 50;
+    var goal = state.goal || 200;
     return before < goal && state.days[k] >= goal;
   }
 
@@ -261,7 +269,7 @@
   function openChest(state, rnd, now) {
     var k = dayKey(now);
     if (state.chest === k) return null;
-    if (todayXp(state, now) < (state.goal || 50)) return null;
+    if (todayXp(state, now) < (state.goal || 200)) return null;
     state.chest = k;
     var r = (rnd || Math.random)();
     var prize;
@@ -333,9 +341,25 @@
           return k.indexOf("frase:") === 0;
         }).length >= 100;
       } },
+    { id: "lettore", name: "Lettore", desc: "Terminá 5 lecturas.",
+      test: function (s) { return Object.keys(s.letture || {}).length >= 5; } },
+    { id: "bologna", name: "Bolognese", desc: "Terminá la historia de Martín.",
+      test: function (s) { return !!(s.letture || {}).ep10; } },
+    { id: "umanista", name: "Umanista", desc: "Leé las 10 lecturas de cultura.",
+      test: function (s) {
+        return Object.keys(s.letture || {}).filter(function (k) {
+          return k.indexOf("c-") === 0;
+        }).length >= 10;
+      } },
+    { id: "ponte", name: "Pontiere", desc: "50 cognados pasados al italiano.",
+      test: function (s) {
+        return Object.keys(s.cards).filter(function (k) {
+          return k.indexOf("ponte:") === 0;
+        }).length >= 50;
+      } },
     { id: "costante", name: "Costante", desc: "Cumplí la meta diaria 5 días.",
       test: function (s) {
-        var g = s.goal || 50;
+        var g = s.goal || 200;
         return Object.keys(s.days || {}).filter(function (k) {
           return s.days[k] >= g;
         }).length >= 5;

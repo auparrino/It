@@ -72,7 +72,7 @@
     var bits = ["🇮🇹", "🍕", "✨", "🎉", "🍝", "⭐", "☕"];
     var box = document.createElement("div");
     box.className = "confetti";
-    for (var i = 0; i < 26; i++) {
+    for (var i = 0; i < 16; i++) {
       var s = document.createElement("span");
       s.textContent = bits[i % bits.length];
       s.style.left = Math.random() * 100 + "%";
@@ -81,14 +81,26 @@
       box.appendChild(s);
     }
     document.body.appendChild(box);
-    setTimeout(function () { box.remove(); }, 2600);
+    setTimeout(function () { box.remove(); }, 1900);
   }
 
   /* -------------------------------------------------------- xp e obiettivo */
 
+  function dias(n) { return n + (n === 1 ? " día" : " días"); }
+
   function gain(n) {
     if (!n) return;
+    var lvBefore = Engine.levelFor(state.xp).level;
     var hit = Engine.addXp(state, n);
+    var lvAfter = Engine.levelFor(state.xp).level;
+    if (lvAfter > lvBefore) {
+      var rkB = Engine.rankFor(lvBefore), rkA = Engine.rankFor(lvAfter);
+      setTimeout(function () {
+        fx.goal();
+        toast(rkA !== rkB ? "🎖️ ¡Nuevo rango: " + rkA + "! (nivel " + lvAfter + ")"
+                          : "⬆️ ¡Nivel " + lvAfter + "!", 2600);
+      }, hit ? 3400 : 300);
+    }
     Engine.touchStreak(state);
     if (hit) {
       setTimeout(function () {
@@ -133,7 +145,7 @@
   function renderHeader() {
     var lv = Engine.levelFor(state.xp);
     var todayXp = Engine.todayXp(state);
-    var goal = state.goal || 50;
+    var goal = state.goal || 200;
     var pct = Math.min(100, Math.round(todayXp / goal * 100));
     $("#hdr").innerHTML =
       '<div class="bar">' +
@@ -172,7 +184,7 @@
   /* ------------------------------------------------------------------ oggi */
 
   function renderOggi() {
-    var goal = state.goal || 50;
+    var goal = state.goal || 200;
     var todayXp = Engine.todayXp(state);
     var reached = todayXp >= goal;
     var chestOpen = state.chest === Engine.dayKey();
@@ -181,18 +193,20 @@
     var sp = Frasi.progress(sc.id, state.cards);
     var w = course.weeks[Math.min(state.unlocked, 52) - 1];
     var f = Frasi.ofTheDay();
+    var known = Frasi.ALL.filter(function (x) { return state.cards[x.id]; }).length;
     var hour = new Date().getHours();
     var hello = hour < 13 ? "Buongiorno" : hour < 19 ? "Buon pomeriggio" : "Buonasera";
 
     var html = '<h1>' + hello + '! 👋</h1>' +
       '<p class="lead">' + (state.streak > 1
-        ? "Llevás <b>" + state.streak + " días</b> seguidos. No cortes la racha."
+        ? "Llevás <b>" + dias(state.streak) + "</b> seguidos. No cortes la racha."
         : "Tres minutos alcanzan. Arrancá con una pausa caffè.") + "</p>";
 
     // Obiettivo del giorno + forziere
     html += '<div class="card goal">' +
       '<div class="goalrow"><div><b>Meta de hoy</b>' +
-        '<span class="muted"> ' + todayXp + " / " + goal + " xp</span></div>" +
+        '<span class="muted"> ' + (reached ? "✓ " + todayXp + " xp hoy" : todayXp + " / " + goal + " xp") +
+        "</span></div>" +
         (reached && !chestOpen
           ? '<button class="btn gold pulse" id="chest">🎁 Abrir cofre</button>'
           : chestOpen ? '<span class="muted">🎁 cofre abierto · volvé mañana</span>'
@@ -205,10 +219,12 @@
     // Azioni principali
     html += '<div class="big">' +
       '<button class="bigbtn pausa" id="pausa"><span class="e">☕</span>' +
-        "<b>Pausa caffè</b><small>3 minutos · todo con el pulgar</small></button>" +
-      '<button class="bigbtn lampo" id="lampo"><span class="e">⚡</span>' +
-        "<b>Lampo 60″</b><small>récord: " + ((state.best || {}).lampo || 0) +
-        "</small></button>" +
+        "<b>Pausa caffè</b><small>3 minutos, entre dos mails</small></button>" +
+      '<button class="bigbtn lampo" id="lampo"' + (known < 12 ? " disabled" : "") +
+        '><span class="e">⚡</span>' +
+        "<b>Lampo 60″</b><small>" + (known < 12
+          ? "se abre con 12 frases vistas (llevás " + known + ")"
+          : "récord: " + ((state.best || {}).lampo || 0)) + "</small></button>" +
       '<button class="bigbtn scena" id="scena"><span class="e">' + sc.emoji + "</span>" +
         "<b>" + esc(sc.name) + "</b><small>frases " + sp.seen + "/" + sp.total +
         "</small></button>" +
@@ -224,6 +240,15 @@
       '<span class="prog"><i style="width:' +
         Math.min(100, Math.round((weekStat(w.week).right) / 20 * 100)) + '%"></i></span>' +
       "</button>";
+
+    // La storia di Martín: la prossima puntata
+    var ep = Letture.next(state.letture);
+    if (ep) {
+      html += '<button class="card weekcard" data-ep="' + ep.id + '">' +
+        '<span class="muted">Lectura · Martín a Bologna · episodio ' + ep.n + " · " +
+          esc(ep.level) + "</span>" +
+        "<b>" + ep.emoji + " " + esc(ep.title) + "</b></button>";
+    }
 
     // Frase del giorno
     html += '<div class="card fdg"><span class="muted">Frase del giorno</span>' +
@@ -268,6 +293,25 @@
       "Cada escena te presenta frases nuevas, te las hace armar con fichas y después " +
       "<b>escribirlas de memoria</b>. Cuanto más rápido te salen escritas, más rápido " +
       "te salen habladas.</p>";
+
+    var pp = Lab.progress("ponte:", state.cards), pf = Lab.progress("falso:", state.cards),
+        pc = Lab.progress("capire:", state.cards);
+    html += "<h2>Laboratorio</h2>" +
+      '<div class="labs">' +
+        '<button class="lab" data-lab="ponte"><span class="e">🌉</span><b>Ponte</b>' +
+          '<span class="muted">Del español al italiano con reglas: -ción → -zione, h- → f-…</span>' +
+          '<span class="meta">' + pp.seen + "/" + pp.total + " palabras</span></button>" +
+        '<button class="lab" data-lab="falsi"><span class="e">🪤</span><b>Falsi amici</b>' +
+          '<span class="muted">Las palabras que parecen y no son.</span>' +
+          '<span class="meta">' + pf.seen + "/" + pf.total + "</span></button>" +
+        '<button class="lab" data-lab="capire"><span class="e">🎯</span><b>Capire</b>' +
+          '<span class="muted">Leer la gramática: quién, cuándo, cuántos, seguro o no.</span>' +
+          '<span class="meta">' + pc.seen + "/" + pc.total + "</span></button>" +
+      "</div>" +
+      '<p class="muted science">🔬 Ponte usa la transferencia desde tu lengua (Ringbom); ' +
+      "Capire es input estructurado: primero interpretar la forma, después producirla (VanPatten).</p>";
+
+    html += "<h2>Escenas</h2>";
     html += '<div class="scenes">';
     Frasi.SCENES.forEach(function (s) {
       var p = Frasi.progress(s.id, state.cards);
@@ -283,6 +327,84 @@
         "</button>";
     });
     return html + "</div>";
+  }
+
+  /* ----------------------------------------------------------------- leggi */
+
+  function renderLeggi() {
+    var done = state.letture || {};
+    var html = "<h1>Leggi</h1>" +
+      '<p class="lead">Leer mucho, entendiendo casi todo, es de lo que más hace crecer una lengua. ' +
+      "Tocá las palabras subrayadas para ver qué significan.</p>";
+    Letture.SERIES.forEach(function (sr) {
+      html += "<h2>" + sr.emoji + " " + esc(sr.name) + "</h2>" +
+        '<p class="muted">' + esc(sr.blurb) + '</p><div class="eps">';
+      Letture.ofSeries(sr.id).forEach(function (ep) {
+        var d = done[ep.id], open = Letture.isOpen(ep, done);
+        html += '<button class="ep' + (d ? " done" : "") + '" data-ep="' + ep.id + '"' +
+          (open ? "" : " disabled") + ">" +
+          '<span class="e">' + (open ? ep.emoji : "🔒") + "</span>" +
+          "<span><b>" + esc(ep.title) + "</b>" +
+          '<span class="muted">' + (ep.area ? esc(ep.area) + " · " : "episodio " + ep.n + " · ") +
+            esc(ep.level) + " · " + esc(ep.grammar) + "</span></span>" +
+          (d ? '<span class="score">' + d.pct + "%</span>" : "") +
+          "</button>";
+      });
+      html += "</div>";
+    });
+    html += '<p class="muted science">🔬 Input comprensible (Krashen) con glosario para cubrir ' +
+      "el ~98% del vocabulario (Hu y Nation); después, la caza de formas te hace notar la " +
+      "gramática dentro de un texto que ya entendiste (Schmidt).</p>";
+    return html;
+  }
+
+  var glossIndex = [];
+
+  // Text of an episode as tappable words.  mode "read": glossed words open
+  // their meaning; mode "hunt": every word can be selected.
+  function renderText(ep, mode) {
+    var k = 0;
+    glossIndex = [];
+    return '<div class="text' + (mode === "hunt" ? " hunt" : "") + '">' +
+      Letture.paragraphs(ep).map(function (par) {
+        return "<p>" + Letture.tokens(par).map(function (t) {
+          var i = k++;
+          if (mode === "hunt") {
+            return '<span class="w" data-tok="' + i + '">' + esc(t) + "</span>";
+          }
+          var g = Letture.glossFor(ep, t);
+          if (g) {
+            glossIndex[i] = Letture.bare(t) + " — " + g;
+            return '<span class="w gl" data-gl="' + i + '">' + esc(t) + "</span>";
+          }
+          return esc(t);
+        }).join(" ") + "</p>";
+      }).join("") + "</div>";
+  }
+
+  function renderLettura(ep) {
+    return '<button class="btn ghost" id="lback">← a Leggi</button>' +
+      "<h1>" + ep.emoji + " " + esc(ep.title) + "</h1>" +
+      '<p class="lead">' + (ep.area ? esc(ep.area) + " · " : "Martín a Bologna · episodio " + ep.n + " · ") +
+        esc(ep.level) + "</p>" +
+      '<div class="card">' + renderText(ep, "read") +
+        '<div class="row"><button class="tab" id="readall">🔊 escuchar todo</button>' +
+        '<button class="tab" id="readslow">🐢 lento</button></div></div>' +
+      '<button class="btn wide" id="lquiz">Lo leí → preguntas y caza de formas</button>';
+  }
+
+  function showGloss(txt) {
+    var box = $("#glossbox");
+    if (!box) {
+      box = document.createElement("div");
+      box.id = "glossbox";
+      box.className = "glossbox";
+      document.body.appendChild(box);
+    }
+    box.textContent = txt;
+    box.classList.add("on");
+    clearTimeout(showGloss.t);
+    showGloss.t = setTimeout(function () { box.classList.remove("on"); }, 3200);
   }
 
   /* -------------------------------------------------------------- percorso */
@@ -444,6 +566,8 @@
 
   // Only graded grammar rounds cost lives; phrase sessions are for flow.
   var WITH_LIVES = { round: 1, boss: 1, gym: 1 };
+  // Only these rounds count towards unlocking the next grammar week.
+  var WEEK_KINDS = { round: 1, gym: 1, review: 1, pausa: 1 };
 
   function startRound(kind, arg) {
     var w = course.weeks[view.week - 1];
@@ -465,7 +589,11 @@
                                  : Drills.conjugationTyped(v, t));
         } catch (e) { /* salta */ }
       }
-    } else items = Drills.buildRound(course, w, { map: itemMap });
+    } else if (kind === "ponte") items = Lab.ponteSession(state.cards, arg);
+    else if (kind === "falsi") items = Lab.falsiSession(state.cards);
+    else if (kind === "capire") items = Lab.capireSession(state.cards, arg);
+    else if (kind === "lettura") items = Letture.session(Letture.byId(arg));
+    else items = Drills.buildRound(course, w, { map: itemMap });
 
     if (!items.length) { toast("No hay preguntas para este modo todavía."); return; }
 
@@ -483,6 +611,7 @@
       xp: 0,
       answered: false,
       picked: [],
+      again: {},
       log: []
     };
     view.screen = "gioco";
@@ -528,7 +657,45 @@
         "</div>";
     }
 
-    if (it.type === "tiles") {
+    if (it.type === "card") {
+      return hud() + '<div class="card intro">' +
+        '<div class="badge-new">📐 ' + esc(it.prompt) + "</div>" +
+        "<h2>" + mk(it.h) + "</h2><p>" + mk(it.body) + "</p>" +
+        (it.ex && it.ex.length ? '<ul class="exs">' + it.ex.map(function (e) {
+          return '<li><span class="es">' + esc(e[0]) + '</span><span class="it">→ ' +
+            esc(e[1]) + "</span></li>";
+        }).join("") + "</ul>" : "") +
+        '<button class="btn wide" id="next">Entendido →</button></div>';
+    }
+
+    if (it.type === "hunt") {
+      var ep = Letture.byId(it.ep);
+      return hud() + '<div class="card">' +
+        '<div class="prompt">' + esc(it.prompt) + "</div>" +
+        '<div class="stem">' + esc(it.stem) + "</div>" +
+        renderText(ep, "hunt") +
+        '<div class="row"><button class="btn" id="hcheck">Controlla</button>' +
+        '<span class="muted" id="hcount" style="align-self:center">0 marcadas</span></div>' +
+        '<div id="fb"></div></div>';
+    }
+
+    if (it.type === "guess" || (it.type === "choice" && it.options)) {
+      body = '<div class="options">' + it.options.map(function (o, k) {
+        return '<button class="opt" data-opt="' + k + '">' + esc(o) + "</button>";
+      }).join("") + "</div>";
+      if (it.withText) {
+        body = '<button class="tab" id="showtext">📄 ver el texto</button>' +
+          '<div id="qtext" hidden>' + renderText(Letture.byId(it.ep), "read") + "</div>" + body;
+      }
+    } else if (it.type === "dictation") {
+      body = '<div class="center"><button class="bigplay" id="play1">🔊</button>' +
+        '<div><button class="tab" id="slow">🐢 más lento</button></div></div>' +
+        '<div class="typed">' +
+        '<input id="wans" autocomplete="off" autocapitalize="sentences" ' +
+        'autocorrect="off" spellcheck="false" enterkeyhint="done" placeholder="lo que escuchás…">' +
+        '<button class="btn" id="wsend">Controlla</button></div>';
+      stem = "";
+    } else if (it.type === "tiles") {
       body = '<div class="tiles-answer" id="tans"></div>' +
         '<div class="tiles-bank" id="tbank"></div>' +
         '<div class="row" style="margin-top:12px">' +
@@ -554,10 +721,8 @@
         '<div class="peek" id="hinttxt" hidden></div>';
     } else if (it.type === "flash") {
       body = '<div id="flash"><button class="btn wide" id="reveal">Mostrar respuesta</button></div>';
-    } else if (it.type === "choice" && it.options) {
-      body = '<div class="options">' + it.options.map(function (o, k) {
-        return '<button class="opt" data-opt="' + k + '">' + esc(o) + "</button>";
-      }).join("") + "</div>";
+    } else if (it.type === "choice" || it.type === "guess") {
+      /* handled above */
     } else {
       body = '<div class="typed">' +
         '<input id="ans" autocomplete="off" autocapitalize="off" ' +
@@ -570,7 +735,7 @@
         "</div>";
     }
 
-    var sayBtn = it.src === "frasi" ? "" :
+    var sayBtn = it.src === "frasi" || it.src === "lettura" || it.src === "lab" ? "" :
       ' <button class="tab" id="say" title="escuchar">🔊</button>';
 
     return hud() +
@@ -635,6 +800,9 @@
     var q = verdict === Engine.VERDICT.RIGHT ? 2
           : verdict === Engine.VERDICT.CLOSE ? 1 : 0;
 
+    // A guess before learning is never an error: it only primes the memory.
+    if (it.type === "guess") return settleGuess(it, q, given);
+
     if (q === 2) {
       round.right++; round.combo++;
       round.bestCombo = Math.max(round.bestCombo, round.combo);
@@ -652,8 +820,24 @@
 
     // SRS only tracks the fixed bank and the phrases; generated conjugation
     // drills are endless by design, so they are not scheduled as cards.
-    if (it.src !== "coniugatore") {
+    if (it.src !== "coniugatore" && it.src !== "lettura") {
       state.cards[it.id] = Engine.schedule(state.cards[it.id], q);
+    }
+
+    /* Successive relearning (Rawson & Dunlosky 2011): what you miss comes
+       back later in the same session, until you get it (at most twice). */
+    var relearn = "";
+    if (q < 2 && round.kind !== "boss" && it.src !== "lettura" &&
+        (round.again[it.id] || 0) < 2) {
+      round.again[it.id] = (round.again[it.id] || 0) + 1;
+      var copy = it.frase ? Frasi.pickItem(it.frase, { silent: state.silent }) : it;
+      // Same question, new order: remember the answer, not its position.
+      if (copy === it && it.options) {
+        copy = Object.assign({}, it, { options: Drills.shuffle(it.options) });
+      }
+      var at = Math.min(round.items.length, round.i + 3);
+      round.items.splice(at, 0, copy);
+      relearn = '<div class="note">🔁 Te la vuelvo a preguntar en un rato.</div>';
     }
 
     state.totals.attempts++;
@@ -661,7 +845,7 @@
     else if (q === 1) state.totals.close++;
     else state.totals.wrong++;
 
-    if (it.src !== "frasi") {
+    if (!it.frase && it.src !== "lab" && it.src !== "lettura") {
       var ws = state.weekStats[view.week] ||
         (state.weekStats[view.week] = { attempts: 0, right: 0, bossPassed: false });
       ws.attempts++;
@@ -674,16 +858,18 @@
 
     var label = { giusto: pick(["¡Perfetto!", "¡Bravo!", "¡Esatto!", "¡Grande!", "¡Benissimo!"]),
                   quasi: "Quasi…", sbagliato: "No, era así:" }[verdict];
-    var sol = it.type === "listen" ? it.frase.it + " — " + it.answer : it.answer;
+    var sol = it.type === "listen" ? it.frase.it + " — " + it.answer
+            : it.frase ? it.frase.it : it.answer;
     var fb = '<div class="feedback ' + verdict + '">' +
       '<div class="verdict">' + label +
         (gained ? ' <span class="xpgain">+' + gained + " xp</span>" : "") + "</div>" +
       (extra || "") +
-      '<div class="sol">' + esc(sol) + "</div>" +
+      (it.type === "hunt" ? "" : '<div class="sol">' + esc(sol) + "</div>") +
       (it.frase && it.type !== "listen" ? '<div class="note">' + esc(it.frase.es) + "</div>" : "") +
       (it.note ? '<div class="note">' + mk(it.note) + "</div>" : "") +
       (it.hint && it.src === "dummies"
         ? '<div class="note">Consigna original: ' + esc(it.hint) + "</div>" : "") +
+      relearn +
       '<div class="row" style="margin-top:10px">' +
         '<button class="btn" id="next">Continuar →</button>' +
         '<button class="tab" id="say2">🔊 escuchar</button>' +
@@ -703,16 +889,40 @@
     }
     var input = $("#ans");
     if (input) input.disabled = true;
-    ["#tcheck", "#tclear", "#wsend", "#wans", "#easier", "#reveal"].forEach(function (s) {
+    ["#tcheck", "#tclear", "#wsend", "#wans", "#easier", "#reveal", "#hcheck"].forEach(function (s) {
       var b = $(s); if (b) b.disabled = true;
     });
     if (it.type === "tiles") drawTiles();
 
-    var spoken = it.frase ? it.frase.it : it.answer;
+    var spoken = it.frase ? it.frase.it : it.src === "lettura" ? "" : it.answer;
+    // False friends and structured input: read the Italian prompt aloud.
+    if (it.lab === "falsi" || it.lab === "capire") spoken = it.stem;
     $("#next").onclick = nextItem;
     $("#say2").onclick = function () { speak(spoken, true); };
     if (q === 2 || it.frase) speak(spoken);
     $("#fb").scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }
+
+  function settleGuess(it, q, given) {
+    var gained = q === 2 ? 5 : 2;
+    round.xp += gained;
+    gain(gained);
+    persist();
+    renderHeader();
+    if (q === 2) fx.right(); else fx.tap();
+    $("#fb").innerHTML = '<div class="feedback ' + (q === 2 ? "giusto" : "quasi") + '">' +
+      '<div class="verdict">' + (q === 2 ? "¡Buen olfato!" : "Era esta. Ahora ya la conocés.") +
+        ' <span class="xpgain">+' + gained + " xp</span></div>" +
+      '<div class="sol">' + esc(it.answer) + "</div>" +
+      '<div class="note">🔬 Intentar adivinar antes de aprender ayuda a recordar, ' +
+        "aunque le erres (efecto del pretest).</div>" +
+      '<div class="row" style="margin-top:10px"><button class="btn" id="next">Continuar →</button></div></div>';
+    document.querySelectorAll(".opt").forEach(function (o) {
+      o.disabled = true;
+      if (o.textContent === it.answer) o.classList.add("right");
+      else if (o.textContent === given) o.classList.add("wrong");
+    });
+    $("#next").onclick = nextItem;
   }
 
   function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
@@ -749,11 +959,18 @@
         gain(Engine.XP.boss);
         if (view.week >= state.unlocked) state.unlocked = Math.min(52, view.week + 1);
       }
-    } else if (round.kind !== "scene" &&
+    } else if (WEEK_KINDS[round.kind] &&
                (round.right >= 20 || weekStat(view.week).right >= 20)) {
       if (view.week >= state.unlocked && !w.boss) {
         state.unlocked = Math.min(52, view.week + 1);
       }
+    }
+
+    if (round.kind === "lettura") {
+      if (!state.letture) state.letture = {};
+      var prev = state.letture[round.arg];
+      state.letture[round.arg] = { pct: Math.max(pct, prev ? prev.pct : 0), at: Date.now() };
+      if (!prev) gain(20);
     }
 
     var won = Engine.checkBadges(state);
@@ -771,7 +988,7 @@
     var title = round.kind === "boss"
       ? (r.passed ? "⚔️ Boss superado" : "Boss no superado")
       : r.pct >= 90 ? "🏆 ¡Fantastico!" : r.pct >= 70 ? "👏 ¡Molto bene!" : "💪 Sesión terminada";
-    var goal = state.goal || 50, tx = Engine.todayXp(state);
+    var goal = state.goal || 200, tx = Engine.todayXp(state);
 
     var html = '<h1>' + title + "</h1>" +
       '<div class="card">' +
@@ -779,13 +996,13 @@
         (round.bestCombo > 2 ? '<span>🔥 combo ×' + round.bestCombo + "</span>" : "") + "</div>" +
       '<div class="goalbar" style="margin:12px 0 4px"><i style="width:' +
         Math.min(100, Math.round(tx / goal * 100)) + '%"></i></div>' +
-      '<p class="muted" style="margin:0 0 10px">Meta de hoy: ' + tx + " / " + goal + " xp" +
-        (tx >= goal ? " ✓" : " — te faltan " + (goal - tx)) + "</p>" +
+      '<p class="muted" style="margin:0 0 10px">Meta de hoy: ' + (tx >= goal ? tx + " xp" : tx + " / " + goal + " xp") +
+        (tx >= goal ? " ✓ cumplida" : " — te faltan " + (goal - tx)) + "</p>" +
       '<table class="res">' +
         "<tr><td>Correctas</td><td>" + round.right + "</td></tr>" +
         "<tr><td>Casi</td><td>" + round.close + "</td></tr>" +
         "<tr><td>Incorrectas</td><td>" + round.wrong + "</td></tr>" +
-        "<tr><td>Racha</td><td>" + state.streak + " días 🔥</td></tr>" +
+        "<tr><td>Racha</td><td>" + dias(state.streak) + " 🔥</td></tr>" +
       "</table>";
 
     if (round.kind === "boss") {
@@ -962,8 +1179,8 @@
 
       '<div class="card"><h2>Ajustes</h2>' +
         '<label class="set"><span>Meta diaria</span><select id="goal">' +
-          [[20, "Relajada · 20 xp"], [50, "Normal · 50 xp"], [100, "Seria · 100 xp"],
-           [150, "Intensa · 150 xp"]].map(function (g) {
+          [[100, "Relajada · 100 xp (1 pausa)"], [200, "Normal · 200 xp (2 pausas)"],
+           [350, "Seria · 350 xp"], [500, "Intensa · 500 xp"]].map(function (g) {
             return '<option value="' + g[0] + '"' + (state.goal === g[0] ? " selected" : "") +
               ">" + g[1] + "</option>";
           }).join("") + "</select></label>" +
@@ -1092,7 +1309,7 @@
 
   /* ---------------------------------------------------------------- router */
 
-  var TABS = [["oggi", "🏠", "Oggi"], ["frasi", "🗣️", "Frasi"],
+  var TABS = [["oggi", "🏠", "Oggi"], ["frasi", "🗣️", "Frasi"], ["leggi", "📖", "Leggi"],
               ["percorso", "🗺️", "Percorso"], ["io", "👤", "Io"]];
 
   function renderNav() {
@@ -1123,7 +1340,11 @@
     else if (s === "risultato") html = renderRisultato();
     else if (s === "lampo") html = renderLampo();
     else if (s === "lampofine") html = renderLampoFine();
+    else if (s === "leggi") html = renderLeggi();
+    else if (s === "lettura") html = renderLettura(Letture.byId(view.ep));
 
+    var gb = $("#glossbox");
+    if (gb) gb.classList.remove("on");
     app().innerHTML = html;
     document.body.classList.toggle("ingame", s === "gioco" || s === "lampo");
     renderNav();
@@ -1203,8 +1424,34 @@
     on("#chal", function () { view.screen = "sfide"; render(); });
     on("#again", function () { startRound(round.kind, round.arg); });
     on("#quit", function () {
-      if (round.kind === "scene" || round.kind === "pausa" || round.kind === "review") go("oggi");
+      if (round.kind === "lettura") go("leggi");
+      else if (["ponte", "falsi", "capire", "scene"].indexOf(round.kind) >= 0) go("frasi");
+      else if (round.kind === "pausa" || round.kind === "review") go("oggi");
       else { view.screen = "briefing"; render(); }
+    });
+
+    // leggi e laboratorio
+    document.querySelectorAll("[data-lab]").forEach(function (b) {
+      b.onclick = function () { startRound(b.dataset.lab); };
+    });
+    document.querySelectorAll("[data-ep]").forEach(function (b) {
+      b.onclick = function () {
+        view.ep = b.dataset.ep;
+        view.tab = "leggi";
+        view.screen = "lettura";
+        render();
+        window.scrollTo(0, 0);
+      };
+    });
+    on("#lback", function () { go("leggi"); });
+    on("#lquiz", function () { startRound("lettura", view.ep); });
+    on("#readall", function () { speak(Letture.byId(view.ep).text, true); });
+    on("#readslow", function () { speak(Letture.byId(view.ep).text, true, 0.7); });
+    document.querySelectorAll("[data-gl]").forEach(function (b) {
+      b.onclick = function () {
+        showGloss(glossIndex[+b.dataset.gl]);
+        speak(Letture.bare(b.textContent), false);
+      };
     });
 
     // lampo
@@ -1256,6 +1503,45 @@
 
     on("#say", function () { speak(it.stem.replace(/___/g, "…"), true); });
 
+    if (it.type === "card") on("#next", nextItem);
+
+    on("#showtext", function () { $("#qtext").hidden = !$("#qtext").hidden; });
+
+    if (it.type === "hunt") {
+      var sel = [];
+      document.querySelectorAll("[data-tok]").forEach(function (w) {
+        w.onclick = function () {
+          if (round.answered) return;
+          var k = +w.dataset.tok, at = sel.indexOf(k);
+          if (at >= 0) sel.splice(at, 1); else sel.push(k);
+          w.classList.toggle("on", at < 0);
+          fx.tap();
+          $("#hcount").textContent = sel.length + " marcadas";
+        };
+      });
+      on("#hcheck", function () {
+        var ep = Letture.byId(it.ep);
+        var r = Letture.gradeHunt(ep, sel);
+        document.querySelectorAll("[data-tok]").forEach(function (w) {
+          var k = +w.dataset.tok, want = r.targets.indexOf(k) >= 0, got = sel.indexOf(k) >= 0;
+          w.classList.remove("on");
+          if (want && got) w.classList.add("hit");
+          else if (want) w.classList.add("missed");
+          else if (got) w.classList.add("bad");
+        });
+        settle(r.verdict, sel.join(","),
+          '<div class="note">Encontraste ' + r.hit + " de " + r.total +
+          (r.wrong ? " · " + r.wrong + " de más" : "") +
+          ". En verde las que marcaste bien; subrayadas en naranja, las que faltaban.</div>");
+      });
+    }
+
+    if (it.type === "dictation") {
+      on("#play1", function () { speak(it.answer, true); });
+      on("#slow", function () { speak(it.answer, true, 0.6); });
+      setTimeout(function () { speak(it.answer); }, 250);
+    }
+
     if (it.type === "intro") {
       on("#next", nextItem);
       on("#sayit", function () { speak(it.frase.it, true); });
@@ -1300,7 +1586,7 @@
       });
     }
 
-    if (it.type === "write") {
+    if (it.type === "write" || it.type === "dictation") {
       var w = $("#wans");
       var check = function () {
         if (!w.value.trim()) return;

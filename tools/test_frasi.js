@@ -8,6 +8,8 @@ var ROOT = path.join(__dirname, "..");
 var Frasi = require(path.join(ROOT, "docs/js/frasi.js"));
 var Engine = require(path.join(ROOT, "docs/js/engine.js"));
 var Drills = require(path.join(ROOT, "docs/js/drills.js"));
+var Lab = require(path.join(ROOT, "docs/js/lab.js"));
+var Letture = require(path.join(ROOT, "docs/js/letture.js"));
 var course = JSON.parse(
   fs.readFileSync(path.join(ROOT, "docs/data/course.json"), "utf8"));
 
@@ -44,7 +46,7 @@ Frasi.ALL.forEach(function (f) {
   for (var r = 0; r < 3; r++) {
     var t = Frasi.tilesItem(f);
     // Le tessere giuste, nell'ordine giusto, danno la frase.
-    var own = Frasi.tiles(f.it);
+    var own = Frasi.tileWords(f.it);
     var pool = t.tiles.slice();
     var allThere = own.every(function (w) {
       var k = pool.indexOf(w);
@@ -56,6 +58,11 @@ Frasi.ALL.forEach(function (f) {
     ok(Frasi.words(own.join(" ")).join(" ") === Frasi.words(f.it).join(" "),
        "le tessere ricompongono la frase: " + f.id);
     ok(t.tiles.length <= own.length + 3, "troppe tessere: " + f.id);
+    // Tiles must not give the order away.
+    t.tiles.forEach(function (w) {
+      ok(!/[.,!?;:…]$/.test(w), "tessera con punteggiatura: " + f.id + " «" + w + "»");
+      ok(!/^[A-ZÀ-Ý]/.test(w) || Frasi.PROPER[w], "tessera con maiuscola iniziale: " + f.id + " «" + w + "»");
+    });
 
     var l = Frasi.listenItem(f);
     ok(l.options.indexOf(f.es) >= 0, "ascolto senza risposta: " + f.id);
@@ -124,8 +131,10 @@ course.weeks.forEach(function (w) {
   var items = Drills.buildPausa(course, s, w, {});
   ok(items.length >= 5 && items.length <= 10, "pausa di lunghezza giusta, settimana " + w.week);
   items.forEach(function (it) {
-    ok(it.type !== "cloze" && it.type !== "translate",
-       "in pausa niente domande da scrivere del libro, settimana " + w.week);
+    if (it.src !== "frasi" && it.src !== "lab") {
+      ok(it.type !== "cloze" && it.type !== "translate",
+         "in pausa niente domande da scrivere del libro, settimana " + w.week);
+    }
     if (it.type === "choice") ok(it.options.indexOf(it.answer) >= 0, "pausa: scelta senza risposta");
   });
 });
@@ -136,6 +145,100 @@ for (var i = 0; i < 300; i++) {
   ok(li.options.indexOf(li.answer) >= 0 && uniq(li.options) && li.options.length === 4,
      "lampo con opzioni valide");
 }
+
+
+/* ------------------------------------------------------- laboratorio */
+
+ok(uniq(Object.keys(Lab.BY_ID)), "id del laboratorio unici");
+Lab.RULES.forEach(function (r) {
+  ok(r.words.length >= 10, "regola ponte con poche parole: " + r.id);
+  ok(uniq(r.words.map(function (w) { return w[0]; })), "parole ripetute nella regola " + r.id);
+});
+Object.keys(Lab.BY_ID).forEach(function (id) {
+  for (var k = 0; k < 3; k++) {
+    var it = Lab.item(id);
+    ok(Engine.grade(it.answer, it) === "giusto", "la risposta del laboratorio è accettata: " + id);
+    if (it.type === "choice") {
+      ok(it.options.indexOf(it.answer) >= 0, "opzione giusta presente: " + id);
+      ok(uniq(it.options), "opzioni doppie: " + id);
+      if (it.lab === "falsi") ok(it.options.indexOf(it.trap) >= 0, "il falso amico mostra la trappola: " + id);
+    }
+  }
+});
+Lab.CAPIRE.forEach(function (c) {
+  c.items.forEach(function (x) {
+    ok(c.opts.indexOf(x[1]) >= 0, "capire: risposta fuori dalle opzioni: " + x[0]);
+  });
+  // Every option of a set is the right answer at least once: the form decides.
+  c.opts.forEach(function (o) {
+    ok(c.items.some(function (x) { return x[1] === o; }), "capire " + c.id + ": opzione mai giusta: " + o);
+  });
+});
+var ps = Lab.ponteSession({});
+ok(ps[0].type === "card" && ps.length >= 9, "ponte: prima la regola, poi le parole");
+ok(Lab.capireSession({})[0].type === "card", "capire: prima la spiegazione");
+ok(Lab.falsiSession({}).length === 10, "falsi amici: 10 domande");
+for (var r2 = 0; r2 < 50; r2++) ok(!!Lab.randomItem({}), "item casuale del laboratorio");
+
+var lst = Engine.blankSave();
+Object.keys(Lab.BY_ID).slice(0, 20).forEach(function (id) {
+  lst.cards[id] = Engine.schedule(null, 2);
+  lst.cards[id].due = Date.now() - 1;
+});
+ok(Drills.buildReview(course, lst, 50).length === 20, "il ripasso include il laboratorio");
+
+/* ----------------------------------------------------------- letture */
+
+ok(Letture.ofSeries("martin").length === 10, "10 puntate di Martín");
+ok(Letture.ofSeries("cultura").length >= 10, "almeno 10 letture di cultura");
+ok(uniq(Letture.EPISODI.map(function (e) { return e.id; })), "id di lettura unici");
+Letture.EPISODI.forEach(function (ep) {
+  var toks = Letture.allTokens(ep);
+  ok(toks.length >= 80 && toks.length <= 140, "lunghezza della lettura " + ep.id + ": " + toks.length);
+  Object.keys(ep.gloss).forEach(function (k) {
+    ok(toks.some(function (t) { return Letture.glossFor(ep, t) === ep.gloss[k]; }),
+       "glossa senza parola nel testo: " + ep.id + "/" + k);
+  });
+  ep.hunt.targets.forEach(function (t) {
+    ok(toks.some(function (x) { return Letture.bare(x) === t || Letture.core(x) === t; }),
+       "caccia: forma assente dal testo: " + ep.id + "/" + t);
+  });
+  ep.questions.forEach(function (q) {
+    ok(q[1].indexOf(q[2]) >= 0 && uniq(q[1]), "domanda malformata: " + ep.id + " " + q[0]);
+  });
+  var want = Letture.huntTargets(ep);
+  ok(Letture.gradeHunt(ep, want).verdict === "giusto", "caccia perfetta = giusto: " + ep.id);
+  ok(Letture.gradeHunt(ep, []).verdict === "sbagliato", "caccia vuota = sbagliato: " + ep.id);
+  var all = toks.map(function (_, i) { return i; });
+  ok(Letture.gradeHunt(ep, all).verdict === "sbagliato", "toccare tutto non paga: " + ep.id);
+  var sess = Letture.session(ep);
+  ok(sess.length === ep.questions.length + 1 && sess[sess.length - 1].type === "hunt",
+     "sessione di lettura: domande e poi caccia: " + ep.id);
+});
+ok(Letture.isOpen(Letture.byId("ep1"), {}) && !Letture.isOpen(Letture.byId("ep2"), {}),
+   "Martín si sblocca in ordine");
+ok(Letture.isOpen(Letture.byId("ep2"), { ep1: { pct: 50 } }), "letto ep1, si apre ep2");
+ok(Letture.isOpen(Letture.byId("c-gramsci"), {}), "la cultura è tutta aperta");
+ok(Letture.next({}).id === "ep1" && Letture.next({ ep1: {} }).id === "ep2", "prossima puntata");
+
+/* ------------------------------------------- nuovi esercizi di frase */
+
+Frasi.ALL.forEach(function (f) {
+  var c = Frasi.clozeItem(f);
+  if (c.type === "cloze") {
+    ok(c.stem.indexOf("___") >= 0, "cloze senza buco: " + f.id);
+    ok(c.stem.replace("___", c.answer) === Frasi.tiles(f.it).join(" "),
+       "il buco ricompone la frase: " + f.id);
+    ok(Engine.grade(c.answer, c) === "giusto", "cloze: la parola è accettata: " + f.id);
+  }
+  var g = Frasi.guessItem(f);
+  ok(g.options.indexOf(f.it) >= 0 && uniq(g.options) && g.options.length === 3,
+     "indovina: opzioni valide: " + f.id);
+  ok(Frasi.gradeWritten(f.it, Frasi.dictationItem(f).answer).verdict === "giusto",
+     "dettato accetta la frase: " + f.id);
+});
+var fresh = Frasi.sceneSession("idee", {}, {});
+ok(fresh[0].type === "guess" && fresh[1].type === "intro", "pretest prima della frase nuova");
 
 /* ----------------------------------- serie, scudi, obiettivo, forziere */
 
@@ -178,7 +281,12 @@ ok(Engine.rankFor(1) === "Turista" && Engine.rankFor(60) === "Madrelingua", "gra
 var old = { xp: 10, cards: {}, badges: [], totals: { attempts: 1, right: 1, close: 0, wrong: 0 } };
 global.localStorage = { getItem: function () { return JSON.stringify(old); } };
 var loaded = Engine.load();
-ok(loaded.goal === 50 && loaded.days && loaded.shields === 1, "salvataggio vecchio aggiornato");
+ok(loaded.goal === 200 && loaded.goalV === 2 && loaded.days && loaded.shields === 1,
+   "salvataggio vecchio aggiornato (obiettivo 50 → 200)");
+old = { xp: 10, cards: {}, badges: [], goal: 20, totals: { attempts: 0, right: 0, close: 0, wrong: 0 } };
+ok(Engine.load().goal === 100, "obiettivo rilassato: 20 → 100");
+old = { xp: 10, cards: {}, badges: [], goal: 350, goalV: 2, totals: { attempts: 0, right: 0, close: 0, wrong: 0 } };
+ok(Engine.load().goal === 350, "un obiettivo già nuovo non si tocca");
 delete global.localStorage;
 
 var fdg = Frasi.ofTheDay(day(2026, 6, 1));
