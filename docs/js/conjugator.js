@@ -529,6 +529,31 @@
 
   var ALL_TENSES = Object.keys(TENSE_LABELS);
 
+  /* New regular verbs (from the word bank) can be added at run time: only
+     the class, auxiliary and -isc- flag are needed.  Irregular verbs must be
+     described in VERBS above. */
+  function register(inf, spec) {
+    if (VERBS[inf] || !/(are|ere|ire|rsi)$/.test(inf)) return false;
+    VERBS[inf] = {
+      es: spec.es || "", aux: spec.aux || "avere",
+      isc: !!spec.isc, refl: /rsi$/.test(inf) || undefined
+    };
+    return true;
+  }
+
+  /* What a learner who treats the verb as regular would produce: vado →
+     *ando*, preso → *prenduto*.  Used to diagnose over-regularisation. */
+  function regular(inf, tense) {
+    var saved = VERBS[inf];
+    if (!saved) throw new Error("verbo sconosciuto: " + inf);
+    VERBS[inf] = { es: saved.es, aux: saved.aux, refl: saved.refl, isc: saved.isc };
+    try {
+      return tense === "participio" ? participle(inf) : conjugate(inf, tense);
+    } finally {
+      VERBS[inf] = saved;
+    }
+  }
+
   var api = {
     PERSONS: PERSONS,
     VERBS: VERBS,
@@ -541,7 +566,9 @@
     imperative: imperative,
     participle: participle,
     gerund: gerund,
-    auxiliary: auxiliary
+    auxiliary: auxiliary,
+    register: register,
+    regular: regular
   };
 
   if (typeof module === "object" && module.exports) module.exports = api;

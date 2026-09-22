@@ -170,7 +170,9 @@
       best: {},           // record personali: lampo, combo
       silent: false,      // modalità ufficio: niente audio automatico
       written: 0,         // frasi scritte a memoria senza errori
-      letture: {}         // puntata -> { pct, at } delle letture fatte
+      letture: {},        // puntata -> { pct, at } delle letture fatte
+      errs: {},           // categoria d'errore -> { n, fixed, last }
+      errLog: []          // ultimi errori: { cat, g, e, at }
     };
   }
 

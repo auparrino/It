@@ -13,6 +13,8 @@
     (typeof require === "function" ? require("./frasi.js") : null);
   var Lab = root.Lab ||
     (typeof require === "function" ? require("./lab.js") : null);
+  var Banca = root.Banca ||
+    (typeof require === "function" ? require("./banca.js") : null);
 
   function shuffle(a, rnd) {
     a = a.slice();
@@ -163,11 +165,13 @@
     if (map[id]) return map[id];
     if (Frasi && Frasi.BY_ID[id]) return Frasi.pickItem(Frasi.BY_ID[id], opts);
     if (Lab && Lab.BY_ID[id]) return Lab.item(id);
+    if (Banca && id.indexOf("b:") === 0) return Banca.item(id);
     return null;
   }
 
   function knownId(map, id) {
-    return !!(map[id] || (Frasi && Frasi.BY_ID[id]) || (Lab && Lab.BY_ID[id]));
+    return !!(map[id] || (Frasi && Frasi.BY_ID[id]) || (Lab && Lab.BY_ID[id]) ||
+              (Banca && Banca.loaded() && id.indexOf("b:") === 0 && Banca.item(id)));
   }
 
   /* La coda del ripasso: schede scadute, le più in ritardo per prime. */

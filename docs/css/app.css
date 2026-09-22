@@ -459,6 +459,30 @@ h2 { margin-top: 22px; }
 .intro h2 { margin-top: 4px; }
 .intro ul.exs li { grid-template-columns: 1fr 1fr; }
 
+/* diagnosi e correzione */
+.feedback.prompt { border-color: var(--oro); background: rgba(212,160,23,.08); }
+.diag { margin: 6px 0 8px; }
+.diag .tag { display: inline-block; font-size: .7rem; font-weight: 700; letter-spacing: .04em;
+  text-transform: uppercase; background: rgba(200,54,47,.12); color: var(--rosso-chiaro);
+  padding: 2px 8px; border-radius: 99px; margin-bottom: 6px; }
+.feedback.giusto .diag .tag, .feedback.quasi .diag .tag { background: rgba(22,160,111,.14); color: var(--verde); }
+.diag p { margin: 6px 0 0; font-size: .92rem; }
+.diag i.it, .feedback p i.it { font-style: normal; font-weight: 650; color: var(--verde); }
+.diff { font-family: var(--mono); font-size: .9rem; line-height: 1.7; margin: 4px 0; }
+.diff .k { display: inline-block; min-width: 34px; font-family: inherit; font-size: .7rem; color: var(--grigio);
+  text-transform: uppercase; }
+.diff b.bad { color: var(--rosso-chiaro); text-decoration: line-through; font-weight: 700; }
+.diff b.fix { color: var(--verde); font-weight: 800; }
+.selfrepair { color: var(--verde); font-weight: 650; }
+.fixerr { margin: 8px 0 12px; font-size: 1.12rem; }
+.fixerr .w.missed { background: rgba(212,160,23,.35); }
+.lab.clin, .weekcard.clin { border: 1.5px solid var(--rosso); }
+.errbars { display: grid; gap: 6px; }
+.eb { display: grid; grid-template-columns: minmax(110px, 38%) 1fr auto; align-items: center; gap: 8px; font-size: .85rem; }
+.eb i { display: block; height: 8px; border-radius: 99px; background: var(--rosso-chiaro); opacity: .75; }
+.eb b { font-family: var(--mono); font-size: .8rem; }
+.eb small { color: var(--verde); font-weight: 600; }
+
 /* coriandoli */
 .confetti { position: fixed; inset: 0; pointer-events: none; z-index: 70; overflow: hidden; }
 .confetti span { position: absolute; top: -40px; animation: fall 2.2s ease-in forwards; }

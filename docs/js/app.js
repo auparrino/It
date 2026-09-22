@@ -241,6 +241,15 @@
         Math.min(100, Math.round((weekStat(w.week).right) / 20 * 100)) + '%"></i></span>' +
       "</button>";
 
+    // La clinica: gli errori che si ripetono
+    var weakO = Banca.loaded() ? Banca.weakest(state, 2) : [];
+    if (weakO.length) {
+      html += '<button class="card weekcard clin" data-bank="clinica">' +
+        '<span class="muted">🩺 Clínica de tus errores</span>' +
+        "<b>Practicá " + weakO.map(function (w) { return esc((Diagnosi.LABEL[w.cat] || w.cat).toLowerCase()); }).join(" y ") + "</b>" +
+        '<span class="muted">12 ejercicios armados con lo que más te cuesta.</span></button>';
+    }
+
     // La storia di Martín: la prossima puntata
     var ep = Letture.next(state.letture);
     if (ep) {
@@ -288,7 +297,7 @@
   /* ----------------------------------------------------------------- frasi */
 
   function renderFrasi() {
-    var html = "<h1>Frasi</h1>" +
+    var html = "<h1>Allena</h1>" +
       '<p class="lead">Bloques listos para hablar ya, sin armar gramática en la cabeza. ' +
       "Cada escena te presenta frases nuevas, te las hace armar con fichas y después " +
       "<b>escribirlas de memoria</b>. Cuanto más rápido te salen escritas, más rápido " +
@@ -311,6 +320,28 @@
       '<p class="muted science">🔬 Ponte usa la transferencia desde tu lengua (Ringbom); ' +
       "Capire es input estructurado: primero interpretar la forma, después producirla (VanPatten).</p>";
 
+    if (Banca.loaded()) {
+      var st = Banca.stats(), weak = Banca.weakest(state, 2);
+      html += "<h2>Banco</h2>" +
+        '<p class="muted">' + st.nouns + " sustantivos, " + st.verbs + " verbos, " + st.adjectives +
+        " adjetivos, " + st.sentences + " oraciones y " + st.errors + " errores típicos. " +
+        "Cuando te equivocás, la app te dice qué tipo de error es y te deja corregirlo.</p>" +
+        '<div class="labs">' +
+          (weak.length ? '<button class="lab clin" data-bank="clinica"><span class="e">🩺</span><b>Clínica de tus errores</b>' +
+            '<span class="muted">Práctica armada con lo que más te cuesta: ' +
+            weak.map(function (w) { return esc(Diagnosi.LABEL[w.cat] || w.cat); }).join(", ") + ".</span></button>" : "") +
+          '<button class="lab" data-bank="b-voc"><span class="e">📚</span><b>Parole</b>' +
+            '<span class="muted">Vocabulario de tu nivel: primero reconocer, después escribir con el artículo.</span></button>' +
+          '<button class="lab" data-bank="b-tr"><span class="e">✍️</span><b>Traduci</b>' +
+            '<span class="muted">Oraciones del español al italiano, con corrección que te explica el error.</span></button>' +
+          '<button class="lab" data-bank="b-gap"><span class="e">🔧</span><b>Coniuga in contesto</b>' +
+            '<span class="muted">El verbo justo dentro de una oración real.</span></button>' +
+          '<button class="lab" data-bank="b-err"><span class="e">🔍</span><b>Trova l\'errore</b>' +
+            '<span class="muted">Encontrá y corregí el error típico de un hispanohablante.</span></button>' +
+          '<button class="lab" data-bank="b-forme"><span class="e">🧩</span><b>Forme</b>' +
+            '<span class="muted">Artículos, plurales, preposiciones con artículo y concordancia.</span></button>' +
+        "</div>";
+    }
     html += "<h2>Escenas</h2>";
     html += '<div class="scenes">';
     Frasi.SCENES.forEach(function (s) {
@@ -579,6 +610,10 @@
       w = course.weeks[Math.min(state.unlocked, 52) - 1];
       view.week = w.week;
       items = Drills.buildPausa(course, state, w, drillOpts());
+      if (Banca.loaded()) {
+        var bi = Banca.pausaItem(state);
+        if (bi) items.splice(Math.min(5, items.length), 0, bi);
+      }
     } else if (kind === "gym") {
       items = [];
       for (var i = 0; i < 15; i++) {
@@ -593,6 +628,12 @@
     else if (kind === "falsi") items = Lab.falsiSession(state.cards);
     else if (kind === "capire") items = Lab.capireSession(state.cards, arg);
     else if (kind === "lettura") items = Letture.session(Letture.byId(arg));
+    else if (kind === "b-voc") items = Banca.vocabSession(state, 12);
+    else if (kind === "b-forme") items = Banca.formsSession(state, 12);
+    else if (kind === "b-tr") items = Banca.translateSession(state, 8);
+    else if (kind === "b-gap") items = Banca.gapSession(state, 10);
+    else if (kind === "b-err") items = Banca.errorSession(state, 8);
+    else if (kind === "clinica") items = Banca.clinicaSession(state, 12);
     else items = Drills.buildRound(course, w, { map: itemMap });
 
     if (!items.length) { toast("No hay preguntas para este modo todavía."); return; }
@@ -612,6 +653,7 @@
       answered: false,
       picked: [],
       again: {},
+      tried: false,
       log: []
     };
     view.screen = "gioco";
@@ -666,6 +708,15 @@
             esc(e[1]) + "</span></li>";
         }).join("") + "</ul>" : "") +
         '<button class="btn wide" id="next">Entendido →</button></div>';
+    }
+
+    if (it.type === "fixerr") {
+      return hud() + '<div class="card">' +
+        '<div class="prompt">' + esc(it.prompt) + "</div>" +
+        '<div class="text hunt fixerr">' + it.stem.split(/\s+/).map(function (t, k) {
+          return '<span class="w" data-ft="' + k + '">' + esc(t) + "</span>";
+        }).join(" ") + "</div>" +
+        '<div id="fixbox"></div><div id="fb"></div></div>';
     }
 
     if (it.type === "hunt") {
@@ -726,7 +777,8 @@
     } else {
       body = '<div class="typed">' +
         '<input id="ans" autocomplete="off" autocapitalize="off" ' +
-        'autocorrect="off" spellcheck="false" placeholder="tu respuesta…">' +
+        'autocorrect="off" spellcheck="false" placeholder="' +
+          (it.type === "translate" ? "in italiano…" : "tu respuesta…") + '">' +
         '<button class="btn" id="send">Controlla</button></div>' +
         '<div class="accents">' +
           ["à", "è", "é", "ì", "ò", "ù", "'"].map(function (c) {
@@ -785,15 +837,120 @@
     return { given: built, verdict: ok ? Engine.VERDICT.RIGHT : Engine.VERDICT.WRONG };
   }
 
+  var GENERIC = { lessico: 1, parola_mancante: 1, parola_in_piu: 1, refuso: 1, vuoto: 1 };
+
+  // Multiple choice: say why *that* option is wrong (Shute 2008).
   function answer(given) {
     if (round.answered) return;
     var it = currentItem();
-    settle(Engine.grade(given, it), given);
+    var verdict = Engine.grade(given, it);
+    if (verdict === Engine.VERDICT.RIGHT || !window.Diagnosi) { settle(verdict, given); return; }
+    var cd = it.choiceDiag || { before: "", after: "" };
+    var d = Diagnosi.explainChoice(cd.before + given + cd.after, cd.before + it.answer + cd.after);
+    // Only when the options are Italian: diagnosing a Spanish gloss as if it
+    // were Italian would be nonsense.
+    var italianOptions = it.choiceDiag || it.src === "coniugatore" ||
+      (it.src !== "banca" && it.src !== "lab" && it.src !== "lettura" && it.src !== "frasi") ||
+      (it.src === "frasi" && it.type === "choice");
+    var useful = italianOptions && d && d.cat && !GENERIC[d.cat];
+    if (useful) recordError(d, given);
+    settle(verdict, given, useful ? diagHtml(d, false) : "");
+  }
+
+  /* -------------------------------------------- produzione e correzione */
+
+  /* Written answers get a diagnosis.  A rule error on the first attempt
+     earns a prompt, not the answer: the learner corrects it (Lyster & Ranta
+     1997; Lyster & Saito 2010).  Slips (accents, typos) are just flagged. */
+  function produce(given) {
+    if (round.answered) return;
+    var it = currentItem();
+    if (!String(given || "").trim()) return;
+    var accept = it.accept && it.accept.length ? it.accept : [it.answer];
+    var d = window.Diagnosi ? Diagnosi.diagnose(given, accept, {}) : { verdict: "sbagliato" };
+    // The old graders forgive a letter or two; the diagnosis knows whether
+    // those letters were a typo or grammar (a il / al, la / il lunedì).
+    // A rule error always wins over typo tolerance.
+    var v1 = it.frase && (it.type === "write" || it.type === "dictation")
+      ? Frasi.gradeWritten(given, it.answer).verdict : Engine.grade(given, it);
+    var verdict = v1 === "giusto" || d.verdict === "giusto" ? "giusto"
+                : d.verdict === "sbagliato" && d.cat ? "sbagliato"
+                : v1 === "quasi" || d.verdict === "quasi" ? "quasi" : "sbagliato";
+    // Phrase drills stay lenient on accents only.
+    if (it.frase && verdict === "sbagliato" && d.all && d.all.every(function (c) { return c === "accento" || c === "refuso"; })) {
+      verdict = "quasi";
+    }
+    if (verdict === "giusto") {
+      if (round.tried) {
+        markFixed(round.firstCat);
+        settle("quasi", given, '<div class="note selfrepair">🎯 ¡Lo corregiste vos! Autocorregirse es lo que más fija.</div>',
+               { label: "¡Eso es!" });
+      } else {
+        if (it.frase && it.type === "write") state.written = (state.written || 0) + 1;
+        settle("giusto", given);
+      }
+      return;
+    }
+    if (verdict === "sbagliato" && !round.tried && round.kind !== "boss" && d.hint && d.cat !== "vuoto") {
+      round.tried = true;
+      round.firstCat = d.cat;
+      recordError(d, given);
+      showPrompt(d);
+      return;
+    }
+    if (!round.tried && d.cat) recordError(d, given);
+    settle(verdict, given, d.cat ? diagHtml(d, true) : "");
+  }
+
+  function tokHtml(list, cls) {
+    return list.map(function (t) {
+      return t[cls] ? '<b class="' + cls + '">' + esc(t.w) + "</b>" : esc(t.w);
+    }).join(" ");
+  }
+
+  function diagHtml(d, withDiff) {
+    var diff = withDiff && d.given && d.given.length <= 24
+      ? '<div class="diff"><span class="k">vos</span> ' + tokHtml(d.given, "bad") +
+        '<br><span class="k">bien</span> ' + tokHtml(d.fixed, "fix") + "</div>" : "";
+    return '<div class="diag"><span class="tag">' + esc(d.label || "") + "</span>" + diff +
+      "<p>" + mk(d.explain || "") + "</p>" +
+      (d.others ? '<div class="muted">+ ' + d.others + (d.others === 1 ? " detalle más" : " detalles más") + "</div>" : "") +
+      "</div>";
+  }
+
+  function showPrompt(d) {
+    fx.close();
+    $("#fb").innerHTML = '<div class="feedback prompt">' +
+      '<div class="verdict">🔎 Casi. Revisalo:</div>' +
+      (d.given && d.given.length <= 24 ? '<div class="diff">' + tokHtml(d.given, "bad") + "</div>" : "") +
+      "<p>" + mk(d.hint) + "</p>" +
+      '<div class="row"><button class="tab" id="giveup">Ver la respuesta</button></div></div>';
+    on("#giveup", function () { settle("sbagliato", "", diagHtml(d, true)); });
+    var input = $("#ans") || $("#wans");
+    if (input) { input.focus(); input.select && input.select(); }
+  }
+
+  function recordError(d, given) {
+    if (!d || !d.cat || { refuso: 1, soggetto: 1, vuoto: 1 }[d.cat]) return;
+    if (!state.errs) state.errs = {};
+    if (!state.errLog) state.errLog = [];
+    var e = state.errs[d.cat] || (state.errs[d.cat] = { n: 0, fixed: 0, last: 0 });
+    e.n++;
+    e.last = Date.now();
+    state.errLog.unshift({ cat: d.cat, g: String(given).slice(0, 80), e: String(d.target || "").slice(0, 80), at: Date.now() });
+    state.errLog = state.errLog.slice(0, 60);
+    persist();
+  }
+
+  function markFixed(cat) {
+    if (!cat || !state.errs || !state.errs[cat]) return;
+    state.errs[cat].fixed = (state.errs[cat].fixed || 0) + 1;
   }
 
   // Record a verdict: SRS, stats, xp, feedback panel.
-  function settle(verdict, given, extra) {
+  function settle(verdict, given, extra, opts) {
     if (round.answered) return;
+    opts = opts || {};
     var it = currentItem();
     round.answered = true;
 
@@ -856,7 +1013,7 @@
     persist();
     renderHeader();
 
-    var label = { giusto: pick(["¡Perfetto!", "¡Bravo!", "¡Esatto!", "¡Grande!", "¡Benissimo!"]),
+    var label = opts.label || { giusto: pick(["¡Perfetto!", "¡Bravo!", "¡Esatto!", "¡Grande!", "¡Benissimo!"]),
                   quasi: "Quasi…", sbagliato: "No, era así:" }[verdict];
     var sol = it.type === "listen" ? it.frase.it + " — " + it.answer
             : it.frase ? it.frase.it : it.answer;
@@ -889,7 +1046,7 @@
     }
     var input = $("#ans");
     if (input) input.disabled = true;
-    ["#tcheck", "#tclear", "#wsend", "#wans", "#easier", "#reveal", "#hcheck"].forEach(function (s) {
+    ["#tcheck", "#tclear", "#wsend", "#wans", "#easier", "#reveal", "#hcheck", "#send", "#fxsend", "#fxdel", "#fxin"].forEach(function (s) {
       var b = $(s); if (b) b.disabled = true;
     });
     if (it.type === "tiles") drawTiles();
@@ -930,6 +1087,8 @@
   function nextItem() {
     round.i++;
     round.answered = false;
+    round.tried = false;
+    round.firstCat = null;
     round.picked = [];
     if (round.lives <= 0 || round.i >= round.items.length) {
       finishRound();
@@ -1200,6 +1359,7 @@
         '<p class="muted" id="persistmsg" style="margin-top:10px"></p>' +
       "</div>" +
 
+      errorsCard() +
       '<div class="card"><h2>Medallas</h2><div class="badges">' +
         Engine.BADGES.map(function (b) {
           var won = state.badges.indexOf(b.id) >= 0;
@@ -1223,6 +1383,27 @@
       '<div class="row" style="margin-top:14px">' +
         '<button class="btn ghost" id="reset">Borrar mi progreso</button>' +
       "</div></div>";
+  }
+
+  function errorsCard() {
+    var errs = state.errs || {};
+    var cats = Object.keys(errs).sort(function (a, b) { return errs[b].n - errs[a].n; });
+    if (!cats.length) return "";
+    var max = errs[cats[0]].n;
+    return '<div class="card"><h2>Tus errores</h2>' +
+      '<p class="muted">Se registran solos cuando te equivocás. Los que corregís vos mismo cuentan como avance.</p>' +
+      '<div class="errbars">' + cats.slice(0, 8).map(function (c) {
+        var e = errs[c];
+        return '<div class="eb"><span>' + esc(Diagnosi.LABEL[c] || c) + "</span>" +
+          '<i style="width:' + Math.round(e.n / max * 100) + '%"></i>' +
+          "<b>" + e.n + (e.fixed ? ' <small>· ' + e.fixed + (e.fixed === 1 ? " corregido" : " corregidos") + "</small>" : "") + "</b></div>";
+      }).join("") + "</div>" +
+      ((state.errLog || []).length ? '<h3>Últimos</h3><table class="res">' + state.errLog.slice(0, 6).map(function (l) {
+        return "<tr><td>" + esc(l.g) + "</td><td>" + esc(l.e) + "</td></tr>";
+      }).join("") + "</table>" : "") +
+      (Banca.loaded() && Banca.weakest(state, 1).length
+        ? '<div class="row" style="margin-top:12px"><button class="btn" data-bank="clinica">🩺 Ir a la clínica</button></div>' : "") +
+      "</div>";
   }
 
   function stamp() {
@@ -1309,7 +1490,7 @@
 
   /* ---------------------------------------------------------------- router */
 
-  var TABS = [["oggi", "🏠", "Oggi"], ["frasi", "🗣️", "Frasi"], ["leggi", "📖", "Leggi"],
+  var TABS = [["oggi", "🏠", "Oggi"], ["frasi", "🏋️", "Allena"], ["leggi", "📖", "Leggi"],
               ["percorso", "🗺️", "Percorso"], ["io", "👤", "Io"]];
 
   function renderNav() {
@@ -1425,12 +1606,15 @@
     on("#again", function () { startRound(round.kind, round.arg); });
     on("#quit", function () {
       if (round.kind === "lettura") go("leggi");
-      else if (["ponte", "falsi", "capire", "scene"].indexOf(round.kind) >= 0) go("frasi");
+      else if (["ponte", "falsi", "capire", "scene", "b-voc", "b-forme", "b-tr", "b-gap", "b-err", "clinica"].indexOf(round.kind) >= 0) go("frasi");
       else if (round.kind === "pausa" || round.kind === "review") go("oggi");
       else { view.screen = "briefing"; render(); }
     });
 
     // leggi e laboratorio
+    document.querySelectorAll("[data-bank]").forEach(function (b) {
+      b.onclick = function () { startRound(b.dataset.bank); };
+    });
     document.querySelectorAll("[data-lab]").forEach(function (b) {
       b.onclick = function () { startRound(b.dataset.lab); };
     });
@@ -1488,9 +1672,9 @@
 
     var send = $("#send"), input = $("#ans");
     if (send && input) {
-      send.onclick = function () { answer(input.value); };
+      send.onclick = function () { produce(input.value); };
       input.onkeydown = function (e) {
-        if (e.key === "Enter") { e.preventDefault(); answer(input.value); }
+        if (e.key === "Enter") { e.preventDefault(); produce(input.value); }
       };
       input.focus();
       document.querySelectorAll("[data-ins]").forEach(function (b) {
@@ -1504,6 +1688,8 @@
     on("#say", function () { speak(it.stem.replace(/___/g, "…"), true); });
 
     if (it.type === "card") on("#next", nextItem);
+
+    if (it.type === "fixerr") wireFixerr(it);
 
     on("#showtext", function () { $("#qtext").hidden = !$("#qtext").hidden; });
 
@@ -1588,15 +1774,7 @@
 
     if (it.type === "write" || it.type === "dictation") {
       var w = $("#wans");
-      var check = function () {
-        if (!w.value.trim()) return;
-        var r = Frasi.gradeWritten(w.value, it.answer);
-        var marks = '<div class="words">' + Frasi.tiles(it.answer).map(function (x, k) {
-          return '<span class="' + (r.hits[k] ? "hit" : "miss") + '">' + esc(x) + "</span>";
-        }).join(" ") + "</div>";
-        if (r.verdict === "giusto") state.written = (state.written || 0) + 1;
-        settle(r.verdict, w.value, r.verdict === "giusto" ? "" : marks);
-      };
+      var check = function () { produce(w.value); };
       on("#wsend", check);
       w.onkeydown = function (e) {
         if (e.key === "Enter") { e.preventDefault(); check(); }
@@ -1615,6 +1793,91 @@
         render();
       });
     }
+  }
+
+  /* Trova l'errore: prima trovare (notare), poi correggere (produrre). */
+  function wireFixerr(it) {
+    var toks = it.stem.split(/\s+/);
+    var core = function (t) { return t.toLowerCase().replace(/^[^a-zàèéìòù']+|[^a-zàèéìòù']+$/g, ""); };
+    var badT = it.bad.split(/\s+/).map(core), start = -1;
+    for (var i = 0; i <= toks.length - badT.length && start < 0; i++) {
+      var ok = true;
+      for (var j = 0; j < badT.length; j++) if (core(toks[i + j]) !== badT[j]) ok = false;
+      if (ok) start = i;
+    }
+    var misses = 0, found = false;
+    var label = (window.Diagnosi && Diagnosi.LABEL[it.cat]) || it.cat;
+    function markBad(cls) {
+      for (var k = start; k < start + badT.length; k++) {
+        var el = document.querySelector('[data-ft="' + k + '"]');
+        if (el) el.classList.add(cls);
+      }
+    }
+    function reveal() {
+      markBad("missed");
+      recordError({ cat: it.cat, target: it.answer }, it.stem);
+      settle("sbagliato", "", '<div class="diag"><span class="tag">' + esc(label) + "</span>" +
+        '<div class="diff"><span class="k">mal</span> ' + esc(it.bad) + ' <span class="k">→</span> ' +
+        (it.good ? "<b class=\"fix\">" + esc(it.good) + "</b>" : "<i>(se borra)</i>") + "</div></div>");
+    }
+    function askFix() {
+      $("#fixbox").innerHTML = '<p class="muted">¡Bien visto! Ahora corregila: escribí lo que va en su lugar' +
+        ' o, si sobra, borrala.</p>' +
+        '<div class="typed"><input id="fxin" autocomplete="off" autocapitalize="off" spellcheck="false" value="' +
+        esc(it.bad) + '"><button class="btn" id="fxsend">Controlla</button></div>' +
+        '<div class="row" style="margin-top:8px"><button class="tab" id="fxdel">🗑️ sobra: borrarla</button></div>';
+      var inp = $("#fxin");
+      inp.focus(); inp.select();
+      var tries = 0;
+      function judge(val) {
+        if (round.answered) return;
+        val = String(val).trim();
+        var right = it.good === "" ? val === "" : window.Diagnosi &&
+          Diagnosi.diagnose(val, [it.good]).verdict === "giusto";
+        if (right) {
+          if (tries) markFixed(it.cat);
+          settle(tries ? "quasi" : "giusto", val, '<div class="diag"><span class="tag">' + esc(label) + "</span></div>",
+                 tries ? { label: "¡Eso es!" } : {});
+          return;
+        }
+        tries++;
+        if (tries === 1) {
+          recordError({ cat: it.cat, target: it.answer }, it.stem);
+          var d = it.good && window.Diagnosi ? Diagnosi.diagnose(val || "—", [it.good]) : null;
+          $("#fb").innerHTML = '<div class="feedback prompt"><div class="verdict">🔎 Casi.</div><p>' +
+            (it.good === "" ? "Esa palabra no hay que cambiarla por otra: sobra." :
+             d && d.hint && !GENERIC[d.cat] ? mk(d.hint) : "Pista: es un error de <b>" + esc(label) + "</b>.") +
+            "</p></div>";
+          inp.focus();
+          return;
+        }
+        settle("sbagliato", val, '<div class="diag"><span class="tag">' + esc(label) + "</span>" +
+          '<div class="diff"><span class="k">mal</span> ' + esc(it.bad) + ' <span class="k">→</span> ' +
+          (it.good ? "<b class=\"fix\">" + esc(it.good) + "</b>" : "<i>(se borra)</i>") + "</div></div>");
+      }
+      on("#fxsend", function () { judge(inp.value); });
+      inp.onkeydown = function (e) { if (e.key === "Enter") { e.preventDefault(); judge(inp.value); } };
+      on("#fxdel", function () { judge(""); });
+    }
+    document.querySelectorAll("[data-ft]").forEach(function (el) {
+      el.onclick = function () {
+        if (round.answered || found) return;
+        var k = +el.dataset.ft;
+        fx.tap();
+        if (k >= start && k < start + badT.length) {
+          found = true;
+          markBad("on");
+          askFix();
+          return;
+        }
+        misses++;
+        el.classList.add("bad");
+        if (misses === 1) {
+          $("#fb").innerHTML = '<div class="feedback prompt"><div class="verdict">🔎 Esa está bien.</div>' +
+            "<p>Pista: el error es de <b>" + esc(label) + "</b>.</p></div>";
+        } else reveal();
+      };
+    });
   }
 
   function wireIo() {
@@ -1689,11 +1952,27 @@
     }
   });
 
+  // Test hook (only with ?test in the URL): lets the automated playthrough
+  // read the current question so it can answer right or wrong on purpose.
+  if (/[?&]test\b/.test(location.search)) {
+    window.__test = {
+      item: function () { return round && view.screen === "gioco" ? round.items[round.i] : null; },
+      state: function () { return state; }
+    };
+  }
+
+  // The bank is optional: without it the app still works, just smaller.
+  var bankP = fetch("data/bank.json")
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (b) { if (b) Banca.load(b); })
+    .catch(function () { /* senza banca */ });
+
   fetch("data/course.json")
     .then(function (r) {
       if (!r.ok) throw new Error("HTTP " + r.status);
       return r.json();
     })
+    .then(function (data) { return bankP.then(function () { return data; }); })
     .then(function (data) {
       course = data;
       itemMap = Drills.itemsById(course);

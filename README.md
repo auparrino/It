@@ -72,6 +72,59 @@ tu teléfono**. No usa cuentas, servidores, micrófono ni IA externa.
   comprensión y una **caza de formas**: marcar en el texto los verbos en
   passato remoto, los congiuntivi, etc.
 
+### 🩺 Cómo te corrige
+
+La app no se limita a decir "incorrecto, era X". Un motor de diagnóstico
+(`docs/js/diagnosi.js`) compara tu respuesta con la correcta palabra por palabra
+y reconoce *qué tipo* de error cometiste. Tiene unas 30 categorías pensadas para
+hispanohablantes: auxiliar *essere/avere*, concordancia del participio, «a»
+personal, preposiciones y contracciones (*a il → al*), artículo (*il zaino →
+lo zaino*), artículo con posesivos (*la mia madre*), género distinto del
+español (*la latte*), concordancia, plurales irregulares, persona y tiempo del
+verbo, congiuntivo tras *penso che*, periodo hipotético (*se avrei*), verbos
+irregulares regularizados (*ando, prenduto*), *-isc-*, *-care/-gare*, dobles
+consonantes, tildes (*è/e*), palabras y grafías del español (*muy, ñ, ll*),
+falsos amigos, lugar del pronombre, *ci/ne*, palabras que faltan o sobran, y
+tipeos.
+
+Según lo que dice la investigación:
+
+- **Primer intento con error de regla:** la app no te da la respuesta. Te
+  marca la palabra y te da una pista ("Revisá el auxiliar de *andare*: ¿essere
+  o avere?"), y vos lo corregís. Las pistas que te hacen autocorregirte
+  funcionan mejor que darte la forma correcta (Lyster y Ranta 1997; metaanálisis
+  de Lyster y Saito 2010).
+- **Segundo intento:** ves tu respuesta al lado de la correcta, con la
+  diferencia marcada, y la regla explicada. La retroalimentación específica a
+  *tu* respuesta supera a la simple verificación (Shute 2008).
+- **Errores de regla y de vocabulario:** los de regla (auxiliar, concordancia,
+  artículo, tiempo) se corrigen con la regla; los de vocabulario, con el
+  significado de la palabra que usaste ("*caldo* significa caliente"),
+  siguiendo la distinción de Ferris entre errores tratables y no tratables.
+- **Deslices:** un tipeo, una tilde o un pronombre sujeto de más se marcan sin
+  hacerte repetir (Corder: *mistakes* y *errors*).
+- **Opción múltiple:** si elegiste mal, te explica por qué *esa* opción está
+  mal ("*vai* es la forma de *tu*; el sujeto es *noi*").
+- **Tu perfil de errores:** cada error se anota por tipo. La **Clínica** arma
+  sesiones con lo que más te cuesta, y los errores que corregís vos solo cuentan
+  como avance (Metcalfe 2017: equivocarse y analizar el error enseña).
+
+### 🏦 El banco
+
+`tools/bank/` tiene el contenido en Python legible y `tools/build_bank.py` lo
+valida (formato, duplicados, errores bien construidos, verbos que el conjugador
+generaría mal) y lo compila a `docs/data/bank.json`:
+
+| Contenido | Para qué |
+|---|---|
+| 1.827 sustantivos con género, plural, nivel y nota contrastiva | *Parole*, artículos, plurales, preposiciones con artículo, concordancia |
+| 636 verbos con auxiliar, *-isc-* e irregularidad | Vocabulario; los regulares se suman al gimnasio de conjugación |
+| 423 adjetivos con sus cuatro formas | Concordancia |
+| 354 adverbios, conectores, preposiciones y pronombres | Vocabulario |
+| 864 oraciones español → italiano (A1–C1), con variantes aceptadas | *Traduci* y *Coniuga in contesto* |
+| 584 errores típicos de hispanohablantes con explicación | *Trova l'errore* |
+| 1.137 interferencias del español, 97 falsos amigos y 48 grafías | Reconocer el español dentro de tu italiano |
+
 ### 🔬 En qué investigación se basa cada ejercicio
 
 No es "toda la bibliografía", porque nadie la puede leer entera. Son los
@@ -94,6 +147,11 @@ lenguas y en psicología de la memoria:
 | Transferencia desde la lengua materna | Laboratorio *Ponte* (9 reglas, 121 cognados) y *Falsi amici* | Ringbom 2007 |
 | Fluidez con material conocido y bajo presión de tiempo | Lampo 60″ | Nation 2007 (four strands) |
 | Interés y elección sostienen la motivación | Lecturas de cultura de libre elección | Hidi & Renninger 2006; Deci & Ryan 2000 |
+| Pistas para autocorregirse (*prompts*) antes que la respuesta | Primer intento con error de regla | Lyster & Ranta 1997; Lyster & Saito 2010 |
+| Retroalimentación específica a la respuesta dada | Diagnóstico de errores y de opciones elegidas | Shute 2008 |
+| Errores tratables (regla) y no tratables (léxico) | La explicación cambia según el tipo | Ferris 1999; Ellis 2009 |
+| Aprender del error propio, con análisis | Perfil de errores y Clínica | Metcalfe 2017 |
+| Interferencias típicas del hispanohablante (preposiciones, auxiliar, «a» personal) | Categorías del diagnóstico y *Trova l'errore* | Calvi; Schmid; corpus VALICO |
 
 ### Tu memoria
 
@@ -170,6 +228,9 @@ docs/                 el juego (sitio estático, listo para GitHub Pages)
   js/frasi.js         banco de frases de conversación y sus ejercicios
   js/lab.js           laboratorio: cognados (Ponte), falsos amigos, input estructurado (Capire)
   js/letture.js       lecturas graduadas: Martín a Bologna y Cultura
+  js/diagnosi.js      diagnóstico de errores: categoría, pista y explicación
+  js/banca.js         ejercicios generados desde el banco, y la Clínica
+  data/bank.json      banco compilado (palabras, oraciones, errores, interferencias)
   js/drills.js        generación de rondas, bosses, repaso, pausa y lampo
   js/app.js           interfaz
   data/course.json    curso completo compilado
@@ -182,6 +243,9 @@ tools/
   test_conjugator.js     1.442 comprobaciones de formas verbales
   test_game.js           ~21.500 comprobaciones de datos y lógica
   test_frasi.js          ~24.000 comprobaciones de frases, laboratorio, lecturas, pausa, racha y cofre
+  test_diagnosi.js       mete ~1.600 errores típicos en las oraciones del banco y verifica el diagnóstico
+  build_bank.py          valida y compila el banco
+  bank/                  el banco en Python legible
 ```
 
 ## Reconstruir los datos
@@ -200,6 +264,8 @@ python3 tools/build_course.py
 node tools/test_conjugator.js   # formas verbales contra las tablas de los libros
 node tools/test_game.js         # integridad del curso, corrección, SRS, progresión
 node tools/test_frasi.js        # frases, ejercicios, pausa, lampo, racha, escudos, cofre
+python3 tools/build_bank.py     # valida y compila el banco
+node tools/test_diagnosi.js     # el diagnóstico reconoce los errores típicos
 ```
 
 Si cambiás algún archivo de `docs/`, subí `VERSION` en `docs/sw.js` para que los
