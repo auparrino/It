@@ -50,6 +50,37 @@ course.weeks.forEach(function (w) {
   });
 });
 
+/* Nothing before its theory: build_course.py marks in «wk» the first week
+   whose lessons cover every tense and construction an item uses
+   (tools/sillabo.py), and no week may ask anything later. */
+var TENSE_WEEK = { presente: 1, imperfetto: 18, futuro: 20, condizionale: 21, congiuntivo: 27,
+                   congImperfetto: 30, passatoRemoto: 45, passatoProssimo: 17,
+                   trapassatoProssimo: 26, futuroAnteriore: 20, trapassatoRemoto: 45,
+                   condizionalePassato: 31, congiuntivoPassato: 29, congiuntivoTrapassato: 30 };
+course.weeks.forEach(function (w) {
+  (w.items || []).concat(w.extra || []).forEach(function (id) {
+    var it = ids[id];
+    ok(it && it.wk && it.wk <= w.week,
+       "settimana " + w.week + " chiede " + id + " prima della sua teoria (settimana " + (it && it.wk) + ")");
+  });
+  (w.tenses || []).forEach(function (t) {
+    ok(w.boss || (TENSE_WEEK[t] || 99) <= w.week,
+       "settimana " + w.week + ": il coniugatore chiede " + t + " prima della sua teoria");
+  });
+  (w.known || []).forEach(function (t) {
+    ok((TENSE_WEEK[t] || 99) <= w.week, "settimana " + w.week + ": distrattori in " + t);
+  });
+});
+course.challenges.forEach(function (c) {
+  course.weeks.forEach(function (w) {
+    if ((w.challenges || []).indexOf(c.id) >= 0) {
+      (c.play || []).forEach(function (id) {
+        ok(ids[id].wk <= w.week, "sfida " + c.id + " alla settimana " + w.week + " prima della teoria: " + id);
+      });
+    }
+  });
+});
+
 var chalIds = {};
 course.challenges.forEach(function (c) { chalIds[c.id] = true; });
 course.weeks.forEach(function (w) {

@@ -71,6 +71,36 @@ LESSONS = {
         "el norte también *casa*). "
         "La *r* simple entre vocales es un toque breve (*caro*), como la *r* de "
         "«caro»; la *rr* doble (*terra*, *carro*) sí es vibrante múltiple."]},
+
+ {"h": "Tus dos primeros verbos: essere y avere",
+  "p": ["Desde la primera frase vas a necesitar dos verbos: *essere* (ser y "
+        "casi siempre también «estar») y *avere* (tener). Son irregulares, así "
+        "que se aprenden de memoria; el resto de los verbos llega en las "
+        "semanas 6 y 7. El pronombre (*io*, *tu*...) se suele omitir, como en "
+        "castellano: *sono argentina*, *ho fame*.",
+        "Acá se ve para qué sirve la *h* muda: *ho*, *hai*, *ha*, *hanno* se "
+        "pronuncian «o», «ai», «a», «anno», y la *h* solo los distingue de *o* "
+        "(o), *ai* (a los), *a* (a) y *anno* (año)."],
+  "table": {"head": ["", "essere", "avere"],
+            "rows": [["io", "sono", "ho"],
+                     ["tu", "sei", "hai"],
+                     ["lui / lei", "è", "ha"],
+                     ["noi", "siamo", "abbiamo"],
+                     ["voi", "siete", "avete"],
+                     ["loro", "sono", "hanno"]]},
+  "ex": [["Sono di Buenos Aires.", "Soy de Buenos Aires."],
+         ["Il caffè è caldo.", "El café está caliente."],
+         ["Ho vent'anni.", "Tengo veinte años."],
+         ["Abbiamo fame.", "Tenemos hambre."],
+         ["C'è un bar qui vicino?", "¿Hay un bar cerca de acá?"]],
+  "warn": "*è* (es) lleva tilde y *e* (y) no: *Marco è alto e simpatico*. "
+          "*sono* sirve para «yo soy» y para «ellos son»: el contexto decide.",
+  "tip": "La edad y las sensaciones van con *avere*, como «tener» en castellano: "
+         "*ho trent'anni*, *ho fame* (hambre), *ho sete* (sed), *ho sonno* "
+         "(sueño), *ho freddo* / *ho caldo* (frío / calor), *ho paura* (miedo), "
+         "*ho vergogna* (vergüenza). Dos que en castellano van con «estar»: "
+         "*ho fretta* (estoy apurado) y *ho ragione* / *ho torto* (tengo razón / "
+         "estoy equivocado). Y «hay» es *c'è* (singular) / *ci sono* (plural)."},
 ]},
 
 2: {
@@ -116,7 +146,7 @@ LESSONS = {
         "*lo sport / gli sport*), en vocal tónica (*la città / le città*, "
         "*il caffè / i caffè*), los monosílabos (*il re / i re*) y los acabados "
         "en *-i* (*la crisi / le crisi*, *l'analisi / le analisi*)."],
-  "ex": [["Ho visto due film.", "Vi dos películas."],
+  "ex": [["Stasera ci sono due film.", "Esta noche hay dos películas."],
          ["Le città italiane sono belle.", "Las ciudades italianas son lindas."]]},
 
  {"h": "Los irregulares que aparecen todos los días",
@@ -187,8 +217,8 @@ LESSONS = {
  {"h": "El partitivo: «unos», «algo de»",
   "p": ["*di* + artículo también sirve para expresar cantidad indeterminada, "
         "donde el castellano no pone nada."],
-  "ex": [["Ho comprato del pane.", "Compré pan."],
-         ["Vorrei dell'acqua.", "Quisiera agua."],
+  "ex": [["Compro del pane.", "Compro pan."],
+         ["C'è dell'acqua in frigo.", "Hay agua en la heladera."],
          ["Ho degli amici a Roma.", "Tengo (unos) amigos en Roma."]]},
 
  {"h": "Dónde el italiano pone artículo y el castellano no",
@@ -297,7 +327,7 @@ LESSONS = {
         "con el cardinal salvo el día 1, que usa el ordinal."],
   "ex": [["Oggi è il 5 maggio.", "Hoy es el 5 de mayo."],
          ["Il primo gennaio.", "El primero de enero."],
-         ["Sono nato nel 1988.", "Nací en 1988."],
+         ["Il mio compleanno è il 3 maggio.", "Mi cumpleaños es el 3 de mayo."],
          ["Nel Duemila / Nel 2003.", "En el año 2000 / En 2003."]],
   "tip": "Los meses y los días de la semana van en minúscula: *lunedì*, "
          "*gennaio*. Y ojo con el orden numérico: 5/8/2024 es el 5 de agosto, "
@@ -436,6 +466,20 @@ LESSONS = {
         "cualidades y ubicaciones el italiano usa *essere*: *sono stanco* "
         "(estoy cansado), *sono a Roma* (estoy en Roma), *la porta è aperta* "
         "(la puerta está abierta)."]},
+
+ {"h": "stare + gerundio: solo lo que pasa ahora mismo",
+  "p": ["El gerundio se forma casi como en castellano: *-are → -ando* "
+        "(*parlando*), *-ere* y *-ire → -endo* (*leggendo*, *dormendo*). Los "
+        "irregulares salen de la raíz larga: *fare → facendo*, *dire → "
+        "dicendo*, *bere → bevendo*. Con *stare* en presente describe una "
+        "acción en curso: *sto leggendo* (estoy leyendo)."],
+  "ex": [["Sto leggendo un libro.", "Estoy leyendo un libro."],
+         ["Cosa stai facendo?", "¿Qué estás haciendo?"],
+         ["Stiamo cenando, ti chiamo dopo.", "Estamos cenando, te llamo después."]],
+  "warn": "El italiano lo usa mucho menos que el castellano. Para costumbres, "
+          "planes o situaciones que duran va el presente simple: *lavoro a "
+          "Milano* (estoy trabajando en Milán), *stasera esco* (esta noche "
+          "salgo). «Sto lavorando a Milano» suena a traducción."},
 ]},
 
 8: {
@@ -481,13 +525,6 @@ LESSONS = {
   "tip": "El infinitivo pierde la *-e* final al pegar el pronombre: "
          "*vedere* + *ti* → *vederti*, no «vederéti»."},
 
- {"h": "Concordancia del participio",
-  "p": ["Con los pronombres directos de tercera persona (*lo, la, li, le*), el "
-        "participio del passato prossimo concuerda en género y número. Con "
-        "*mi, ti, ci, vi* la concordancia es opcional."],
-  "ex": [["Ho visto Anna → L'ho vista.", "La vi."],
-         ["Ho comprato i libri → Li ho comprati.", "Los compré."],
-         ["Ho letto le lettere → Le ho lette.", "Las leí."]]},
 ]},
 
 9: {
@@ -565,8 +602,10 @@ LESSONS = {
           "*a Marco piace*, *ai bambini piacciono*. Sin *a* la frase queda "
           "dicha al revés."},
 
- {"h": "En pasado va con essere",
-  "p": ["El participio concuerda con el sujeto, es decir con la cosa que gustó."],
+ {"h": "Adelanto: en pasado va con essere",
+  "p": ["Esto es para reconocerlo cuando lo leas: el passato prossimo se "
+        "estudia en la semana 17, y ahí se practica. En pasado *piacere* va con "
+        "*essere* y el participio concuerda con la cosa que gustó."],
   "ex": [["Mi è piaciuto il film.", "Me gustó la película."],
          ["Mi è piaciuta la cena.", "Me gustó la cena."],
          ["Mi sono piaciuti i quadri.", "Me gustaron los cuadros."],
@@ -605,7 +644,7 @@ LESSONS = {
         "escritura, el signo de interrogación va solo al final: el italiano no "
         "usa el signo de apertura del castellano."],
   "ex": [["Vieni con noi?", "¿Venís con nosotros?"],
-         ["Hai capito?", "¿Entendiste?"],
+         ["Hai fame?", "¿Tenés hambre?"],
          ["Non sei d'accordo?", "¿No estás de acuerdo?"]]},
 
  {"h": "Los interrogativos",

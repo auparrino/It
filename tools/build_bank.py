@@ -238,6 +238,29 @@ def main():
     with open(path, "w", encoding="utf-8") as fh:
         json.dump(bank, fh, ensure_ascii=False, separators=(",", ":"))
 
+    # From which week of the course each sentence and error can be asked:
+    # tools/sillabo.py reads the tenses it uses (it needs the bank just
+    # written, for the regular verbs and the nouns).
+    import sillabo
+
+    def week(feats):
+        return max(feats.values()) if feats else 1
+
+    for sn in bank["sentences"]:
+        sn["w"] = week(sillabo.analyze(sn["it"][0], answer=True))
+        if sn.get("gap"):
+            ctx = sillabo.analyze(sn["it"][0])
+            ctx.update({k: v for k, v in sillabo.analyze(sn["gap"][0], answer=True).items()
+                        if v > ctx.get(k, 0)})
+            sn["wg"] = week(ctx)
+    for er in bank["errors"]:
+        ctx = sillabo.analyze(er["right"])
+        ctx.update({k: v for k, v in sillabo.analyze(er["good"], answer=True).items()
+                    if v > ctx.get(k, 0)})
+        er["w"] = week(ctx)
+    with open(path, "w", encoding="utf-8") as fh:
+        json.dump(bank, fh, ensure_ascii=False, separators=(",", ":"))
+
     for p in problems[:60]:
         print("  ! " + p)
     if len(problems) > 60:

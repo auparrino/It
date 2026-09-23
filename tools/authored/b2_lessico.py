@@ -81,7 +81,7 @@ ITEMS = [
          note="«Lo» ante z, s+consonante, gn, ps, x, y semiconsonántica."),
     dict(id="b2-prep-06", type="choice", topic="articoli",
          prompt="Elegí el artículo correcto.",
-         stem="___ studenti sono arrivati.", options=["Gli", "I", "Li"], answer="Gli",
+         stem="___ studenti sono in classe.", options=["Gli", "I", "Li"], answer="Gli",
          note="Plural de «lo» → «gli»."),
     dict(id="b2-prep-07", type="choice", topic="articoli",
          prompt="Elegí la forma correcta.",
@@ -90,7 +90,7 @@ ITEMS = [
               "igual que el español."),
     dict(id="b2-prep-08", type="choice", topic="possessivi",
          prompt="Elegí la forma correcta.",
-         stem="___ è arrivata.", options=["Mia sorella", "La mia sorella",
+         stem="___ è a casa.", options=["Mia sorella", "La mia sorella",
                                           "Sorella mia"], answer="Mia sorella",
          note="Parentesco singular sin artículo. Pero: «le mie sorelle», "
               "«la mia sorellina» (diminutivo → vuelve el artículo)."),

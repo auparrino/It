@@ -70,7 +70,9 @@
     return Conj.conjugate(verb, tense, { aux: "essere" });
   }
 
-  function conjugationDrill(verb, tense) {
+  /* known: the tenses already taught (week.known).  Distractors come only
+     from those, so a week-6 learner never sees a congiuntivo as an option. */
+  function conjugationDrill(verb, tense, known) {
     var forms = Conj.conjugate(verb, tense);
     var alt = otherAux(verb, tense);
     var p = Math.floor(Math.random() * 6);
@@ -86,12 +88,13 @@
           !(alt && alt.indexOf(f) >= 0)) pool.push(f);
     }
     forms.forEach(add);
-    shuffle(Conj.ALL_TENSES).forEach(function (t) {
+    var tenses = known && known.length ? known : Conj.ALL_TENSES;
+    shuffle(tenses).forEach(function (t) {
       if (t === tense || pool.length >= 8) return;
       try { add(Conj.conjugate(verb, t)[p]); } catch (e) { /* non coniugabile */ }
     });
     // Last resort: other persons of other tenses, so we always reach 4 options.
-    shuffle(Conj.ALL_TENSES).forEach(function (t) {
+    shuffle(tenses).forEach(function (t) {
       if (pool.length >= 3) return;
       try {
         Conj.conjugate(verb, t).forEach(add);
@@ -152,13 +155,14 @@
     var map = opts.map || itemsById(course);
     var out = [];
 
-    // The week's own items plus its challenges (now graded): more variety.
-    var chIds = {}; (week.challenges || []).forEach(function (id) { chIds[id] = 1; });
-    var sfida = [];
-    (course.challenges || []).forEach(function (c) {
-      if (chIds[c.id] && c.play) sfida = sfida.concat(c.play);
-    });
-    var bookItems = (week.items || []).concat(sfida)
+    // The week's own items (book, authored and graded sfide), all of them
+    // already within reach: build_course.py moves what needs later theory.
+    var bookItems = (week.items || [])
+      .map(function (id) { return map[id]; })
+      .filter(Boolean);
+    // Review moved here from earlier weeks (a nouns exercise in passato
+    // prossimo lands in week 17): a few per round, interleaved.
+    var extra = (week.extra || [])
       .map(function (id) { return map[id]; })
       .filter(Boolean);
 
@@ -167,14 +171,16 @@
       size
     );
     var wantBook = size - wantConj;
+    var wantExtra = Math.min(extra.length, Math.round(wantBook / 4));
 
-    pickFresh(bookItems, wantBook, opts.state).forEach(function (it) { out.push(it); });
+    pickFresh(bookItems, wantBook - wantExtra, opts.state).forEach(function (it) { out.push(it); });
+    pickFresh(extra, wantExtra, opts.state).forEach(function (it) { out.push(it); });
 
     for (var i = 0; i < wantConj; i++) {
       var verb = week.verbs[Math.floor(Math.random() * week.verbs.length)];
       var tense = week.tenses[Math.floor(Math.random() * week.tenses.length)];
       try {
-        out.push(i % 2 === 0 ? conjugationDrill(verb, tense)
+        out.push(i % 2 === 0 ? conjugationDrill(verb, tense, week.known)
                              : conjugationTyped(verb, tense));
       } catch (e) { /* salta i verbi non coniugabili in quel tempo */ }
     }
@@ -183,7 +189,7 @@
     // never with a repeat.
     if (out.length < size) {
       var inRound = {}; out.forEach(function (it) { inRound[it.id] = 1; });
-      pickFresh(bookItems.filter(function (it) { return !inRound[it.id]; }), size - out.length, opts.state)
+      pickFresh(bookItems.concat(extra).filter(function (it) { return !inRound[it.id]; }), size - out.length, opts.state)
         .forEach(function (it) { out.push(it); });
     }
     if (out.length < size) bankFill(opts.state, size - out.length).forEach(function (it) { out.push(it); });
@@ -198,7 +204,7 @@
     var pool = [];
     course.weeks.forEach(function (w) {
       if (w.week <= week.week) {
-        (w.items || []).forEach(function (id) {
+        (w.items || []).concat(w.extra || []).forEach(function (id) {
           if (map[id]) pool.push(map[id]);
         });
       }
@@ -294,7 +300,7 @@
     }
 
     // Interleaving (Rohrer & Taylor 2007): una domanda del laboratorio.
-    if (Lab) filler.push(Lab.randomItem(state.cards));
+    if (Lab) filler.push(Lab.randomItem(state.cards, week.week));
 
     // Del libro solo domande a scelta: in pausa si va veloci.
     var bookChoice = (week.items || []).map(function (id) { return map[id]; })
@@ -309,7 +315,7 @@
       try {
         filler.push(conjugationDrill(
           week.verbs[Math.floor(Math.random() * week.verbs.length)],
-          week.tenses[Math.floor(Math.random() * week.tenses.length)]));
+          week.tenses[Math.floor(Math.random() * week.tenses.length)], week.known));
       } catch (e) { /* salta */ }
     }
     filler = shuffle(filler);

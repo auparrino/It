@@ -94,10 +94,10 @@ LESSONS = {
                      ["quindi / dunque / perciò", "por lo tanto", ""],
                      ["allora", "entonces", "también muletilla oral"],
                      ["così", "así que", "Pioveva, così sono rimasto a casa."]]},
-  "ex": [["Siccome pioveva, siamo rimasti a casa.",
-          "Como llovía, nos quedamos en casa."],
-         ["Non è venuto, quindi abbiamo cominciato senza di lui.",
-          "No vino, así que empezamos sin él."]]},
+  "ex": [["Siccome piove, restiamo a casa.",
+          "Como llueve, nos quedamos en casa."],
+         ["Non viene, quindi cominciamo senza di lui.",
+          "No viene, así que empezamos sin él."]]},
 
  {"h": "Tiempo y orden del discurso",
   "p": ["*prima di* + infinitivo, *dopo* + infinitivo compuesto, *quando*, "
@@ -105,13 +105,13 @@ LESSONS = {
         "*poi*, *infine*, *alla fine*. Para ordenar una argumentación: "
         "*innanzitutto*, *in primo luogo*, *d'altra parte*, *in conclusione*."],
   "ex": [["Prima di uscire, chiudi la finestra.", "Antes de salir, cerrá la ventana."],
-         ["Dopo aver mangiato, siamo usciti.", "Después de comer, salimos."],
+         ["Dopo aver mangiato, esco.", "Después de comer, salgo."],
          ["Appena arrivo, ti chiamo.", "Apenas llegue, te llamo."]],
   "warn": "*Dopo* + infinitivo exige el infinitivo COMPUESTO: *dopo aver "
           "mangiato*, *dopo essere arrivati*. No se dice «dopo mangiare»."},
 
- {"h": "Los que ya piden congiuntivo",
-  "p": ["Anotalos ahora aunque el congiuntivo llegue en la temporada 3, porque "
+ {"h": "Adelanto: los que piden congiuntivo",
+  "p": ["Solo para reconocerlos: no se practican hasta la semana 27. Anotalos ahora aunque el congiuntivo llegue en la temporada 3, porque "
         "vas a leerlos antes de estudiarlos: *benché*, *sebbene*, *nonostante*, "
         "*malgrado* (aunque); *affinché*, *perché* con valor de finalidad (para "
         "que); *a meno che non*, *purché*, *a patto che* (a menos que, con tal "
@@ -123,8 +123,7 @@ LESSONS = {
 16: {
 "intro": "Los adverbios italianos se forman casi igual que en castellano, así "
          "que la semana es corta en teoría nueva. Lo que sí hay que trabajar es "
-         "el orden: dónde se meten dentro de la frase, sobre todo con tiempos "
-         "compuestos.",
+         "el orden: dónde se meten dentro de la frase.",
 "blocks": [
  {"h": "Formación en -mente",
   "p": ["Se toma la forma femenina singular del adjetivo y se agrega *-mente*: "
@@ -147,15 +146,16 @@ LESSONS = {
 
  {"h": "Dónde se coloca",
   "p": ["El adverbio normalmente va después del verbo: *parla lentamente*, "
-        "*lavora molto*. Con tiempos compuestos, los adverbios cortos y "
-        "frecuentes se meten ENTRE el auxiliar y el participio."],
-  "ex": [["Ho già mangiato.", "Ya comí."],
-         ["Non ho ancora finito.", "Todavía no terminé."],
-         ["Non ci sono mai stato.", "Nunca estuve ahí."],
-         ["Ha sempre lavorato qui.", "Siempre trabajó acá."],
-         ["Ho appena parlato con lui.", "Recién hablé con él."]],
-  "tip": "Los largos en *-mente* van fuera: *Ho parlato chiaramente*, no «ho "
-         "chiaramente parlato» (posible pero enfático y raro)."},
+        "*lavora molto*. Con la negación, *mai*, *più* y *ancora* completan el "
+        "*non* que va delante del verbo."],
+  "ex": [["Parla lentamente.", "Habla despacio."],
+         ["Mangio sempre qui.", "Siempre como acá."],
+         ["Non mangio mai carne.", "Nunca como carne."],
+         ["Non sono ancora pronto.", "Todavía no estoy listo."],
+         ["Arrivo subito.", "Llego enseguida."]],
+  "tip": "Cuando llegues al passato prossimo (semana 17) vas a ver que los "
+         "adverbios cortos se meten entre el auxiliar y el participio: *ho già "
+         "mangiato*. Por ahora, después del verbo."},
 
  {"h": "Adverbios de tiempo y lugar que se confunden",
   "table": {"head": ["Italiano", "Castellano", "Ojo con"],
@@ -234,6 +234,25 @@ LESSONS = {
                      ["chiudere", "chiuso", "decidere", "deciso"],
                      ["nascere", "nato", "morire", "morto"],
                      ["succedere", "successo", "correre", "corso"]]}},
+
+ {"h": "Dónde van già, mai, ancora, appena",
+  "p": ["Con tiempos compuestos, los adverbios cortos y frecuentes se meten "
+        "ENTRE el auxiliar y el participio."],
+  "ex": [["Ho già mangiato.", "Ya comí."],
+         ["Non ho ancora finito.", "Todavía no terminé."],
+         ["Non ci sono mai stato.", "Nunca estuve ahí."],
+         ["Ha sempre lavorato qui.", "Siempre trabajó acá."],
+         ["Ho appena parlato con lui.", "Recién hablé con él."]],
+  "tip": "Los largos en *-mente* van fuera: *Ho parlato chiaramente*, no «ho "
+         "chiaramente parlato» (posible pero enfático y raro)."},
+
+ {"h": "Pronombre directo delante: el participio concuerda",
+  "p": ["Con los pronombres directos de tercera persona (*lo, la, li, le*), el "
+        "participio concuerda en género y número aunque el auxiliar sea "
+        "*avere*. Con *mi, ti, ci, vi* la concordancia es opcional."],
+  "ex": [["Ho visto Anna → L'ho vista.", "La vi."],
+         ["Ho comprato i libri → Li ho comprati.", "Los compré."],
+         ["Ho letto le lettere → Le ho lette.", "Las leí."]]},
 ]},
 
 18: {
@@ -338,7 +357,7 @@ LESSONS = {
         "(nos divertimos), *si è accorto* (se dio cuenta), *mi sono dimenticato* "
         "(me olvidé)."],
   "ex": [["Ci siamo conosciuti a Milano.", "Nos conocimos en Milán."],
-         ["Se ne sono andati presto.", "Se fueron temprano."],
+         ["Si sono salutati alla stazione.", "Se despidieron en la estación."],
          ["Mi sono dimenticata le chiavi.", "Me olvidé las llaves."]]},
 
  {"h": "Con modales, dos opciones",

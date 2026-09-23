@@ -14,6 +14,8 @@ import os
 import re
 import sys
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(ROOT, "docs", "data")
 
@@ -25,12 +27,13 @@ DATA = os.path.join(ROOT, "docs", "data")
 # --------------------------------------------------------------------------
 WEEKS = [
     # ---------------- Stagione 1: Le Fondamenta (A1 -> A2) ----------------
-    dict(w=1, title="Suoni e ortografia", level="A1", d=[], r=[1],
+    dict(w=1, title="Suoni e ortografia", level="A1", d=[], r=[],
          focus="El italiano se lee como se escribe, pero no como el español.",
          keys=["Dobles consonantes: cambian el significado (nono/nonno, casa/cassa).",
                "c/g suenan duras ante a, o, u y blandas ante e, i; ch/gh las endurecen.",
                "gli y sc(e/i): sonidos que el español no tiene; gn suena como ñ.",
-               "El acento gráfico marca la sílaba final tónica (città, perché) y algunos monosílabos (è, più)."],
+               "El acento gráfico marca la sílaba final tónica (città, perché) y algunos monosílabos (è, più).",
+               "essere y avere en presente: los dos primeros verbos, de memoria."],
          v=["essere", "avere"], t=["ortografia"]),
     dict(w=2, title="Nomi: genere e numero", level="A1", d=[3], r=[1],
          focus="Los sustantivos y sus plurales, incluidos los que no se mueven.",
@@ -77,7 +80,8 @@ WEEKS = [
          keys=["essere, avere, andare, stare, dare, fare.",
                "Modales: potere, volere, dovere, sapere.",
                "venire, tenere, uscire, rimanere, salire.",
-               "Muchos comparten patrón: -go en io/loro (vengo/vengono)."],
+               "Muchos comparten patrón: -go en io/loro (vengo/vengono).",
+               "stare + gerundio (sto leggendo) solo para lo que pasa ahora."],
          v=["essere", "avere", "andare", "stare", "dare", "fare", "potere",
             "volere", "dovere", "sapere", "venire", "uscire"],
          tenses=["presente"], t=[]),
@@ -103,7 +107,7 @@ WEEKS = [
                "El sujeto es la cosa que gusta, no la persona.",
                "En pasado va con essere: mi è piaciuta la mostra.",
                "Familia: mancare, servire, bastare, interessare, sembrare."],
-         v=["piacere"], tenses=["presente", "passatoProssimo"], t=["piacere"]),
+         v=["piacere"], tenses=["presente"], t=["piacere"]),
     dict(w=11, title="Domande e interrogativi", level="A2", d=[11], r=[10],
          focus="Preguntar sin invertir el orden como en inglés.",
          keys=["chi, che/che cosa, quale/quali, quanto, come, dove, quando, perché.",
@@ -149,14 +153,15 @@ WEEKS = [
          keys=["Adjetivo femenino + -mente: lentamente.",
                "Adjetivos en vocal + -le/-re pierden la e: facilmente, particolarmente.",
                "Irregulares: bene, male, meglio, peggio.",
-               "Posición: después del verbo; en tiempos compuestos, entre auxiliar y participio."],
+               "Posición: normalmente después del verbo (parla lentamente)."],
          v=["parlare", "andare"], tenses=["presente"], t=["avverbi"]),
     dict(w=17, title="Passato prossimo", level="B1", d=[16], r=[20],
          focus="El pasado que más vas a usar, y la guerra de los auxiliares.",
          keys=["avere + participio para transitivos.",
                "essere + participio con concordancia para movimiento y cambio de estado.",
                "Participios irregulares: fatto, detto, visto, preso, scritto, letto.",
-               "Con avere concuerda solo si el objeto va antes en pronombre: le ho viste."],
+               "Con avere concuerda solo si el objeto va antes en pronombre: le ho viste.",
+               "già, mai, ancora, appena van entre auxiliar y participio: ho già mangiato."],
          v=["parlare", "andare", "fare", "vedere", "prendere", "scrivere",
             "leggere", "venire"],
          tenses=["passatoProssimo"], t=["passato"]),
@@ -478,6 +483,42 @@ WEEKS = [
             "relativi", "ne", "ci", "pronomi combinati", "falsi amici"]),
 ]
 
+# Each block of exercises of "For Dummies" goes to the week of its topic, not
+# to the week of its chapter: chapter 3 mixes nouns, articles and suffixes,
+# chapter 8 simple and combined pronouns.  (chapter, first, last, weeks)
+DUMMIES_WEEKS = [
+    (3, 1, 30, [2]), (3, 31, 55, [3]), (3, 56, 60, [24]),
+    (4, 1, 40, [5]),
+    (5, 1, 30, [4]),
+    (6, 1, 70, [6]),
+    # essere y avere se enseñan en la semana 1 y se repasan en la 7
+    (7, 1, 35, [1, 7]), (7, 36, 70, [7]),
+    (8, 1, 30, [8]), (8, 31, 40, [36]), (8, 41, 45, [37]),
+    (9, 1, 30, [9]),
+    (10, 1, 55, [10]),
+    (11, 1, 40, [11]),
+    (12, 1, 40, [12]),
+    (13, 1, 50, [14]),
+    (14, 1, 20, [15]), (14, 21, 30, [38]),
+    (15, 1, 20, [16]), (15, 21, 30, [22]),
+    (16, 1, 50, [17]), (16, 51, 70, [18]),
+    (17, 1, 20, [19]),
+    (18, 1, 35, [20]), (18, 36, 55, [21]), (18, 56, 60, [33]),
+    (19, 1, 40, [32]),
+    (20, 1, 30, [27, 28]), (20, 31, 40, [30]),
+    (21, 1, 30, [33]),
+    (22, 1, 10, [29]), (22, 11, 30, [30, 31]),
+]
+
+
+def dummies_weeks(item_id: str) -> list:
+    ch, n = (int(x) for x in re.match(r"d(\d+)-(\d+)", item_id).groups())
+    for c, a, b, weeks in DUMMIES_WEEKS:
+        if c == ch and a <= n <= b:
+            return weeks
+    raise ValueError("ejercicio de Dummies sin semana: %s" % item_id)
+
+
 SEASONS = [
     dict(n=1, name="Le Fondamenta", weeks=[1, 13], level="A1 → A2",
          blurb="Sonidos, género, artículos y el presente completo."),
@@ -602,6 +643,78 @@ def load_authored() -> list:
     return out
 
 
+def place_by_syllabus(weeks: list, by_id: dict, challenges: list) -> None:
+    """Nothing is asked before its theory.
+
+    Each week inherits whole book chapters, and a chapter on nouns can bring
+    sentences in imperfetto or passato prossimo.  tools/sillabo.py tells from
+    which week on an exercise can be understood; what a week cannot use yet
+    moves to that week as review ("extra"), where the rounds mix it in.
+    Sfide groups move whole, to the week their hardest item needs.
+    """
+    import sillabo
+
+    # What a week's own lesson teaches ahead of the general order: week 9
+    # teaches the Lei imperative, which is a congiuntivo form (parli, venga).
+    local = {9: {"congiuntivo"}}
+
+    def weeks_ok(feats, week):
+        return all(v <= week or k in local.get(week, ()) for k, v in feats.items())
+
+    feats = {iid: sillabo.min_week(it)[1] for iid, it in by_id.items()}
+    need = {iid: max(f.values()) if f else 1 for iid, f in feats.items()}
+    for iid, it in by_id.items():
+        # first week that can ask it: test_game.js checks every week against it
+        it["wk"] = next(w for w in range(1, 53) if weeks_ok(feats[iid], w))
+    groups = {c["id"]: c for c in challenges}
+    for c in challenges:
+        c["week"] = max([need.get(i, 1) for i in c.get("play") or []] or [1])
+        c["ok"] = lambda week, c=c: all(weeks_ok(feats.get(i, {}), week) for i in c.get("play") or [])
+    by_week = {w["week"]: w for w in weeks}
+
+    homes, group_homes = {}, set()
+    for w in weeks:
+        # the week's own sfide, item by item, next to the book items
+        own = list(w["items"])
+        for gid in w["challenges"]:
+            own += groups[gid].get("play") or []
+            group_homes.add(gid)
+        w["items"] = own
+        for iid in own:
+            homes.setdefault(iid, []).append(w["week"])
+
+    moved = {}
+    for w in weeks:
+        keep = []
+        for iid in w["items"]:
+            if weeks_ok(feats.get(iid, {}), w["week"]):
+                if iid not in keep:
+                    keep.append(iid)
+            elif not any(weeks_ok(feats.get(iid, {}), h) for h in homes[iid]):
+                moved[iid] = need[iid]
+        w["items"] = keep
+        w["extra"] = []
+        w["challenges"] = [g for g in w["challenges"] if groups[g]["ok"](w["week"])]
+
+    for iid, wk in sorted(moved.items()):
+        target = by_week.get(wk)
+        if target and iid not in target["items"] and iid not in target["extra"]:
+            target["extra"].append(iid)
+    placed = {g for w in weeks for g in w["challenges"]}
+    for gid in sorted(group_homes - placed):
+        target = by_week.get(groups[gid]["week"])
+        if target:
+            target["challenges"].append(gid)
+    for c in challenges:
+        del c["ok"]
+    # Which tenses the conjugation gym may use as distractors in each week.
+    for w in weeks:
+        w["known"] = ["presente"] + [t for t, k in sorted(sillabo.TENSE_WEEK.items(), key=lambda x: x[1])
+                                     if t != "presente" and k <= w["week"]
+                                     and t not in ("imperativo", "passivo", "gerundio")]
+    print("sillabo: %d ejercicios pasan a una semana posterior, a su teoría" % len(moved))
+
+
 def main() -> None:
     with open(os.path.join(DATA, "bank_dummies.json"), encoding="utf-8") as fh:
         dummies = json.load(fh)
@@ -673,13 +786,28 @@ def main() -> None:
 
     challenges = {c["chapter"]: c for c in routledge["chapters"]}
 
+    by_dweek = {}
+    for it in items:
+        for wk in dummies_weeks(it["id"]):
+            by_dweek.setdefault(wk, []).append(it["id"])
+
     weeks, missing = [], []
     for spec in WEEKS:
         pool = []
         for c in spec.get("d", []):
             if c not in by_chapter:
                 missing.append("dummies cap. %s (settimana %s)" % (c, spec["w"]))
-            pool += by_chapter.get(c, [])
+        if spec.get("boss") or spec["w"] == 51:
+            # a boss (and the final review) draws on everything its season
+            # (or the year) has taught: build_course keeps these items too
+            first = 1 if spec["w"] == 52 else next(
+                s["weeks"][0] for s in SEASONS if s["weeks"][0] <= spec["w"] <= s["weeks"][1])
+            if spec["w"] == 51:
+                first = 27
+            for wk in range(first, spec["w"] + 1):
+                pool += [i for i in by_dweek.get(wk, []) if i not in pool]
+        else:
+            pool += by_dweek.get(spec["w"], [])
         for t in spec.get("t", []):
             if t not in by_topic:
                 missing.append("tema '%s' (settimana %s)" % (t, spec["w"]))
@@ -767,6 +895,8 @@ def main() -> None:
                         sfida_items.append(item)
                         ch["play"].append(iid)
             flat.append(ch)
+
+    place_by_syllabus(weeks, {i["id"]: i for i in items + authored + sfida_items}, flat)
 
     course = {
         "title": "La Via C1",

@@ -758,13 +758,13 @@
         var v = w.verbs[Math.floor(Math.random() * w.verbs.length)];
         var t = w.tenses[Math.floor(Math.random() * w.tenses.length)];
         try {
-          items.push(i % 3 === 0 ? Drills.conjugationDrill(v, t)
+          items.push(i % 3 === 0 ? Drills.conjugationDrill(v, t, w.known)
                                  : Drills.conjugationTyped(v, t));
         } catch (e) { /* salta */ }
       }
     } else if (kind === "ponte") items = Lab.ponteSession(state.cards, arg);
     else if (kind === "falsi") items = Lab.falsiSession(state.cards);
-    else if (kind === "capire") items = Lab.capireSession(state.cards, arg);
+    else if (kind === "capire") items = Lab.capireSession(state.cards, arg, state.unlocked);
     else if (kind === "lettura") items = Letture.session(Letture.byId(arg));
     else if (kind === "b-voc") items = Banca.vocabSession(state, 12);
     else if (kind === "b-forme") items = Banca.formsSession(state, 12);
