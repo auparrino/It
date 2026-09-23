@@ -1083,6 +1083,80 @@ def main() -> None:
         "challenges": flat,
         "sources": [dummies["source"], routledge["source"]],
     }
+    # Words of the week: the new, not transparent words its exercises use most,
+    # with the meaning and a sentence of the course where they appear.  They
+    # are presented and practised before (and inside) the week's rounds.
+    import collections
+    import lessico
+    import sillabo
+    by_id_all = {i["id"]: i for i in course["items"]}
+    freq = collections.Counter()
+    for it in course["items"]:
+        r, wtxt = lessico.item_texts(it)
+        for tok in lessico.words_of(r + " " + wtxt):
+            lm = lessico.lemma_of(tok)
+            if lm:
+                freq[lm[0]] += 1
+    given = set()
+    for w in weeks:
+        cand = collections.OrderedDict()
+        texts = []
+        for iid in w["items"]:
+            it = by_id_all[iid]
+            r, wtxt = lessico.item_texts(it)
+            texts.append((r if it.get("type") != "translate" else wtxt, r + " " + wtxt))
+        for b in (w.get("lesson") or {}).get("blocks", []):
+            texts += [(p[0], p[0]) for p in b.get("ex", [])]
+        for show, t in texts:
+            for tok in lessico.words_of(t):
+                lm = lessico.lemma_of(tok)
+                if not lm or lm[1] <= 0 or not lm[2] or lm[0] in given or lm[0] in cand:
+                    continue
+                if lessico.is_cognate(lm[0], lm[2]) or lessico.is_cognate(tok, lm[2]):
+                    continue
+                # «sei» is «you are» before it is «six»; «faccia», «letto» are
+                # verb forms before nouns: a word list must not guess wrong
+                lex = sillabo.lexicon()
+                verbish = tok in lex["simple"] or tok in lex["participles"]
+                if verbish and not re.search(r"(are|ere|ire|rre|rsi)$", lm[0]):
+                    continue
+                if tok in ("soldi", "soldo") or lm[0] == "soldo" or "'" in lm[0] or "’" in lm[0]:
+                    continue
+                if lm[1] > max(w["week"], 1) and lm[1] != 1:
+                    continue           # not yet in play at this level
+                cand[lm[0]] = [lm[0], lm[2].split(" / ")[0].split(";")[0].strip(), ""]
+        lex = sillabo.lexicon()
+        # The example: the shortest complete sentence of the week that has the
+        # word itself (not «voglia» for volere), else one of its forms.
+        for key, entry in cand.items():
+            best_ex = None
+            for show, _ in texts:
+                ex = re.sub(r"\s+", " ", show).strip()
+                # a real sentence, not a table row («zio → zii», «zia: femminile»)
+                if not ex or "_" in ex or len(ex) > 70 or re.search(r"[→:=]|\s[.,?!]", ex):
+                    continue
+                toks = lessico.words_of(ex)
+                if len(ex.split()) < 3:
+                    continue
+                if key in toks:
+                    rank = (0, len(ex))
+                # a conjugated form of the verb, once the presente is known,
+                # and only a form that is plainly the verb (not «voglia»)
+                elif w["week"] >= 5 and any(
+                        (lessico.lemma_of(t) or [None])[0] == key and
+                        "presente" in lex["simple"].get(t, []) for t in toks):
+                    rank = (1, len(ex))
+                else:
+                    continue
+                if best_ex is None or rank < best_ex[0]:
+                    best_ex = (rank, ex)
+            entry[2] = best_ex[1] if best_ex else ""
+        n = 12 if w["week"] <= 26 else 15
+        best = sorted(cand.values(), key=lambda v: -freq[v[0]])[:0 if w["boss"] else n]
+        w["vocab"] = best
+        given.update(v[0] for v in best)
+    print("palabras de la semana: %d en total" % sum(len(w["vocab"]) for w in weeks))
+
     # Tap a word, see what it means: every Italian word of the exercises and
     # of the lessons, with its lemma, Spanish and the week it is in play.
     import lessico

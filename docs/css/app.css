@@ -1029,3 +1029,8 @@ table.gram th { letter-spacing: .12em; }
 .mission b, .weekcard b, .scene b, .lab b, .ep b, .week .t { font-weight: 800; }
 .weekcard.first { border: 2px solid var(--verde); background: color-mix(in srgb, var(--verde) 8%, var(--carta)); }
 .weekcard.first b { color: var(--verde); }
+.hearts .over { font-size: .72rem; font-weight: 900; color: var(--rosso); vertical-align: middle; }
+ul.vocab { list-style: none; padding: 0; margin: 6px 0 0; display: grid; gap: 6px; }
+ul.vocab li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px; padding: 6px 0; border-bottom: 1px dashed var(--line, #ddd); }
+ul.vocab li small { flex-basis: 100%; color: var(--muted, #777); padding-left: 34px; }
+ul.vocab .say { padding: 2px 6px; }

@@ -18,23 +18,24 @@
   var EPISODI = [
     { id: "ep1", week: 1, n: 1, level: "A1", emoji: "🧳", title: "Arrivo a Bologna",
       grammar: "essere e avere",
+      // Day one: only essere, avere and words you can guess (argentino,
+      // grande, piccolo).  Short sentences, one idea each.
       text:
-        "Mi chiamo Martín e sono argentino. Ho trentadue anni e faccio l'ingegnere. " +
-        "Oggi è un giorno speciale: sono a Bologna per la prima volta!\n\n" +
-        "La città è bellissima, con i portici lunghi e i palazzi rossi. Ho una valigia " +
-        "grande e uno zaino piccolo. Il mio appartamento è in via Zamboni, vicino " +
-        "all'università. È piccolo ma luminoso.\n\n" +
-        "La mia coinquilina si chiama Giulia. È di Napoli, ha ventotto anni ed è molto " +
-        "simpatica. Giulia parla veloce, troppo veloce! Io capisco poco, ma ho un piano: " +
-        "imparare l'italiano in un anno.",
-      gloss: { portici: "soportales, galerías techadas", palazzi: "edificios",
-               valigia: "valija", zaino: "mochila", luminoso: "luminoso, con mucha luz",
-               coinquilina: "compañera de departamento", veloce: "rápido",
-               piano: "plan (y también: despacio)", capisco: "entiendo" },
+        "Ciao! Io sono Martín. Sono argentino e ho 32 anni. " +
+        "Oggi sono a Bologna!\n\n" +
+        "Bologna è bella. Ho una valigia grande e uno zaino piccolo. " +
+        "La casa è in via Zamboni. È piccola ma bella. Ho una mappa e un telefono: " +
+        "la mappa è grande, il telefono è piccolo.\n\n" +
+        "Giulia è la mia coinquilina. È di Napoli e ha 28 anni. " +
+        "È molto simpatica. Giulia ha un gatto. Il gatto è nero e bello. " +
+        "Io sono stanco, ma sono contento!",
+      gloss: { oggi: "hoy", bella: "linda", valigia: "valija", zaino: "mochila",
+               coinquilina: "compañera de departamento", mia: "mi (la mia = mi)",
+               ma: "pero", mappa: "mapa", gatto: "gato", nero: "negro", stanco: "cansado", contento: "contento, feliz", molto: "muy" },
       questions: [
         ["¿De dónde es Giulia?", ["de Nápoles", "de Bolonia", "de Buenos Aires", "de Roma"], "de Nápoles"],
-        ["¿Cómo es el departamento?", ["chico pero luminoso", "grande y oscuro", "lejos de la universidad", "en un edificio rojo"], "chico pero luminoso"],
-        ["¿Cuál es el problema con Giulia?", ["habla demasiado rápido", "es antipática", "no habla español", "trabaja de noche"], "habla demasiado rápido"]
+        ["¿Cómo es la casa?", ["chica pero linda", "grande y fea", "lejos del centro", "en Nápoles"], "chica pero linda"],
+        ["¿Cómo está Martín?", ["cansado pero contento", "triste", "enojado", "enfermo"], "cansado pero contento"]
       ],
       hunt: { label: "Tocá todas las formas de essere (sono, è)", targets: ["sono", "è"] } },
 

@@ -207,11 +207,25 @@ por misión:
    vidas y combo de XP.
 3. **Dominala** — 85% de acierto en al menos 30 respuestas.
 
-Los **boss** cierran cada estación: examen acumulativo, tres vidas, 85% para pasar.
+Los **boss** cierran cada estación: examen acumulativo, 85% para pasar.
+Las **vidas** son un indicador, no un castigo: cada error vacía un corazón para que
+veas dónde te equivocaste, pero la ronda se juega siempre hasta el final.
 Aparte están el **gimnasio de verbos** (conjugación generada al vuelo) y las
 **Sfide del Maestro**: los desafíos del *Soluzioni* con clave de respuestas,
 cada uno una ronda corregida (elegir, completar varios blancos, traducir del
 español) con la regla explicada al responder; 80% o más gana su estrella.
+
+Cada semana trae además **📚 Palabras de la semana** (9 a 15 palabras nuevas,
+no transparentes, sacadas de sus propios ejercicios, con audio y una frase de
+ejemplo): primero elegís qué significan, después las escribís; quedan en el
+ripasso con repetición espaciada. En *Oggi* ves cuántas palabras practicaste
+contra la meta del trimestre (2.000 en el primero).
+
+**Reconocer antes de producir**: la primera vez que aparece un ejercicio de
+escribir (conjugar, completar, traducir) llega como opción múltiple; la
+próxima vez, ya lo escribís. La semana 1 incluye **escucha sin texto**
+(*nonno* o *nono*, *casa* o *cassa*, *cena* o *scena*) y *Trova l'errore* se
+abre en la semana 5, cuando ya podés leer la oración.
 
 Además hay una cola de **ripasso** con repetición espaciada (SM-2 simplificado)
 sobre todo lo ya jugado, racha diaria y once medallas.

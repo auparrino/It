@@ -15,6 +15,8 @@
     (typeof require === "function" ? require("./lab.js") : null);
   var Banca = root.Banca ||
     (typeof require === "function" ? require("./banca.js") : null);
+  var Lez = root.Lezione ||
+    (typeof require === "function" ? require("./lezione.js") : null);
 
   function shuffle(a, rnd) {
     a = a.slice();
@@ -145,12 +147,130 @@
     };
   }
 
+  /* ------------------------------------------ riconoscere prima di produrre */
+
+  /* The first time an exercise shows up, you recognise the answer among
+     options; from the second time on, you write it (recognition before
+     production: Nation 2013, and the project guide).  The options are the
+     errors a Spanish speaker makes (accent, double consonant, ending,
+     article: Lezione.traps) or answers of the same week that look alike.
+     The id stays the same, so the SRS card is the one of the exercise. */
+  var TYPED = { cloze: 1, translate: 1, conjugate: 1, plural: 1, numbers: 1, qa: 1, typed: 1 };
+
+  function norm(x) {
+    return String(x).toLowerCase().replace(/[’]/g, "'").replace(/[.,!?¿¡;:«»"]/g, "").replace(/\s+/g, " ").trim();
+  }
+
+  function recognitionOf(it, pool, week) {
+    if (!it || !TYPED[it.type] || /\|/.test(it.answer || "") || !it.answer) return null;
+    var answer = String(it.answer);
+    if (answer.length > 90) return null;
+    var accepted = {};
+    (it.accept || [answer]).forEach(function (a) { accepted[norm(a)] = 1; });
+    var opts = [];
+    function add(o) {
+      if (o && !accepted[norm(o)] && opts.every(function (x) { return norm(x) !== norm(o); })) opts.push(o);
+    }
+    // 1. conjugation: the same verb in other persons
+    if (it.src === "coniugatore" && Conj) {
+      var m = /^conjw?:([^:]+):([^:]+):(\d)$/.exec(it.id);
+      if (m) {
+        try { shuffle(Conj.conjugate(m[1], m[2])).forEach(add); } catch (e) { /* no */ }
+      }
+    }
+    // 2. the typical errors on the answer itself
+    if (opts.length < 3 && Lez) {
+      Lez.traps(answer, Math.random, week || 52).slice(0, 3).forEach(add);
+    }
+    // 3. answers of the same kind from the same week, of similar length
+    if (opts.length < 2 && pool) {
+      var len = answer.length;
+      shuffle(pool.filter(function (x) {
+        return x && x.id !== it.id && x.type === it.type && x.answer && !/\|/.test(x.answer) &&
+               Math.abs(String(x.answer).length - len) <= Math.max(4, len / 2);
+      })).slice(0, 6).forEach(function (x) { add(String(x.answer)); });
+    }
+    if (opts.length < 2) return null;
+    var copy = {};
+    Object.keys(it).forEach(function (k) { copy[k] = it[k]; });
+    copy.type = "choice";
+    copy.recog = true;
+    copy.options = shuffle(opts.slice(0, 3).concat([answer]));
+    copy.prompt = it.type === "translate" ? "¿Cuál es la traducción en italiano?" : it.prompt;
+    copy.note = "La próxima vez esta la vas a escribir." + (it.note ? " " + it.note : "");
+    return copy;
+  }
+
+  // First sighting (no SRS card yet): recognition; otherwise as it is.
+  function firstRecognize(list, state, week, pool) {
+    var cards = (state && state.cards) || {};
+    return list.map(function (it) {
+      // phrases have their own ladder (tiles → memory): left alone
+      if (!it || cards[it.id] || it.src === "frasi" || it.src === "lab" || it.src === "lettura") return it;
+      return recognitionOf(it, pool || list, week) || it;
+    });
+  }
+
   /* -------------------------------------------------------- costruire round */
 
   function itemsById(course) {
     var map = {};
     course.items.forEach(function (it) { map[it.id] = it; });
+    indexVocab(course);
     return map;
+  }
+
+  /* ---------------------------------------------------- palabras de la semana */
+
+  /* Each week lists its new words (build_course.py: week.vocab, [italian,
+     spanish, example]).  First you recognise the meaning among options, then
+     you produce the word from the Spanish; the SRS card «v:<word>» brings it
+     back in the ripasso like any other exercise. */
+  var VOC = null;           // word → { v, week }
+
+  function indexVocab(course) {
+    VOC = {};
+    (course.weeks || []).forEach(function (w) {
+      (w.vocab || []).forEach(function (v) { VOC[v[0]] = { v: v, week: w.week }; });
+    });
+  }
+
+  function vocabItem(word, state) {
+    var e = VOC && VOC[word];
+    if (!e) return null;
+    var v = e.v, id = "v:" + v[0], card = state && state.cards && state.cards[id];
+    if (!card) {
+      // distractors: meanings of nearby weeks, never the same Spanish word
+      var near = Object.keys(VOC).map(function (k) { return VOC[k]; }).filter(function (x) {
+        return x.v[0] !== v[0] && x.v[1] !== v[1] && Math.abs(x.week - e.week) <= 3;
+      });
+      // same kind of word: a verb among nouns gives itself away
+      var isVerb = function (it) { return /(are|ere|ire|rre|rsi)$/.test(it); };
+      var same = shuffle(near.filter(function (x) { return isVerb(x.v[0]) === isVerb(v[0]); }));
+      var opts = [v[1]];
+      same.concat(shuffle(near)).forEach(function (x) { if (opts.length < 4 && opts.indexOf(x.v[1]) < 0) opts.push(x.v[1]); });
+      return { id: id, src: "vocab", type: "choice", topic: "vocabolario",
+               prompt: "¿Qué significa?", stem: v[0], options: shuffle(opts), answer: v[1],
+               accept: [v[1]], note: v[2] ? "Ejemplo: *" + v[2] + "*" : "", say: v[0] };
+    }
+    return { id: id, src: "vocab", type: "cloze", topic: "vocabolario",
+             prompt: "¿Cómo se dice en italiano?", stem: "«" + v[1] + "» → ___", answer: v[0],
+             accept: [v[0]], note: v[2] ? "Ejemplo: *" + v[2] + "*" : "", say: v[0] };
+  }
+
+  // The week's words, new ones first, plus a few of earlier weeks that are due.
+  function vocabSession(course, week, state, size) {
+    if (!VOC) indexVocab(course);
+    var cards = (state && state.cards) || {}, now = Date.now();
+    var own = (week.vocab || []).map(function (v) { return v[0]; });
+    var fresh = own.filter(function (w) { return !cards["v:" + w]; });
+    var known = own.filter(function (w) { return cards["v:" + w]; });
+    var due = Object.keys(VOC).filter(function (w) {
+      var c = cards["v:" + w];
+      return VOC[w].week < week.week && c && c.due <= now;
+    });
+    return fresh.concat(shuffle(known), shuffle(due).slice(0, 4)).slice(0, size || 14)
+      .map(function (w) { return vocabItem(w, state); }).filter(Boolean);
   }
 
   /* Un round mescola tre sorgenti in modo che nessuna sessione sia uguale:
@@ -163,14 +283,16 @@
 
     // The week's own items (book, authored and graded sfide), all of them
     // already within reach: build_course.py moves what needs later theory.
+    // Listening needs sound: in silent mode (the office) it waits.
+    var audible = function (it) { return it && !(opts.silent && it.type === "listen"); };
     var bookItems = (week.items || [])
       .map(function (id) { return map[id]; })
-      .filter(Boolean);
+      .filter(audible);
     // Review moved here from earlier weeks (a nouns exercise in passato
     // prossimo lands in week 17): a few per round, interleaved.
     var extra = (week.extra || [])
       .map(function (id) { return map[id]; })
-      .filter(Boolean);
+      .filter(audible);
 
     // The gym weighs more when the week brings a new tense (gymShare, from
     // build_course.py); in review weeks it would only repeat «voi siete».
@@ -201,7 +323,12 @@
         .forEach(function (it) { out.push(it); });
     }
     if (out.length < size) bankFill(opts.state, size - out.length).forEach(function (it) { out.push(it); });
-    return shuffle(out).slice(0, size);
+    // two words of the week, interleaved with the grammar
+    if (week.vocab && week.vocab.length) {
+      var vs = vocabSession(course, week, opts.state || {}, 2);
+      out = out.slice(0, size - vs.length).concat(vs);
+    }
+    return firstRecognize(shuffle(out).slice(0, size), opts.state, week.week, bookItems);
   }
 
   /* Il boss pesca da tutte le settimane già sbloccate, non solo dall'ultima. */
@@ -231,6 +358,7 @@
      rigenera l'esercizio, così la stessa frase torna in forma diversa. */
   function reviewItem(map, id, opts) {
     if (map[id]) return map[id];
+    if (id.indexOf("v:") === 0) return vocabItem(id.slice(2), opts && opts.state);
     if (Frasi && Frasi.BY_ID[id]) return Frasi.pickItem(Frasi.BY_ID[id], opts);
     if (Lab && Lab.BY_ID[id]) return Lab.item(id);
     if (Banca && id.indexOf("b:") === 0) return Banca.item(id);
@@ -238,7 +366,7 @@
   }
 
   function knownId(map, id) {
-    return !!(map[id] || (Frasi && Frasi.BY_ID[id]) || (Lab && Lab.BY_ID[id]) ||
+    return !!(map[id] || (id.indexOf("v:") === 0 && VOC && VOC[id.slice(2)]) || (Frasi && Frasi.BY_ID[id]) || (Lab && Lab.BY_ID[id]) ||
               (Banca && Banca.loaded() && id.indexOf("b:") === 0 && Banca.item(id)));
   }
 
@@ -255,7 +383,7 @@
     });
     due.sort(function (a, b) { return a.due - b.due; });
     return due.slice(0, size || 20).map(function (d) {
-      return reviewItem(map, d.id, opts);
+      return reviewItem(map, d.id, Object.assign({ state: state }, opts));
     }).filter(Boolean);
   }
 
@@ -341,7 +469,7 @@
     take(2);
     if (drills[1]) out.push(drills[1]);
     take(filler.length);
-    return out.slice(0, 11);
+    return firstRecognize(out.slice(0, 11), state, week ? week.week : 1);
   }
 
   /* Lampo: 60 secondi di scelte rapide castellano → italiano. */
@@ -370,6 +498,10 @@
     conjugationDrill: conjugationDrill,
     conjugationTyped: conjugationTyped,
     buildRound: buildRound,
+    firstRecognize: firstRecognize,
+    vocabSession: vocabSession,
+    vocabItem: vocabItem,
+    recognitionOf: recognitionOf,
     pickFresh: pickFresh,
     buildBoss: buildBoss,
     buildReview: buildReview,

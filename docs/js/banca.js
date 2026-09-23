@@ -358,7 +358,12 @@
     return prefer(state, ids, "b:gap:").slice(0, size || 10).map(gapItem).filter(Boolean);
   }
 
+  /* Spotting a mistake needs a sentence you can already read: before week 5
+     (presente regular behind you) there is nothing to compare it with. */
+  var ERR_WEEK = 5;
+
   function errorSession(state, size, cats) {
+    if ((state.unlocked || 1) < ERR_WEEK) return [];
     var lvl = levelOf(state), ids = [];
     B.errors.forEach(function (e, i) {
       if (within(e.lvl, lvl) && taught(e, state) && (!cats || cats.indexOf(e.cat) >= 0)) ids.push(i);
@@ -464,7 +469,7 @@
   function pausaItem(state) {
     var r = Math.random();
     if (r < 0.4) return translateSession(state, 1)[0];
-    if (r < 0.7) return errorSession(state, 1)[0];
+    if (r < 0.7 && (state.unlocked || 1) >= ERR_WEEK) return errorSession(state, 1)[0];
     return gapSession(state, 1)[0];
   }
 
@@ -495,6 +500,7 @@
     gapSession: gapSession,
     errorItem: errorItem,
     errorSession: errorSession,
+    ERR_WEEK: ERR_WEEK,
     weakest: weakest,
     clinicaSession: clinicaSession,
     CURE: CURE,

@@ -277,6 +277,19 @@
         Math.min(100, Math.round((weekStat(w.week).right) / 20 * 100)) + '%"></i></span>' +
       "</button>";
 
+    // Vocabulary: words practised at least once, towards the season goal
+    // (the guide: ~2.000 words by the end of the first trimester).
+    var nWords = Object.keys(state.cards).filter(function (id) {
+      return id.indexOf("v:") === 0 || id.indexOf("b:voc:") === 0;
+    }).length;
+    var wordGoal = state.unlocked <= 13 ? 2000 : state.unlocked <= 26 ? 3500 : 5000;
+    html += '<button class="card weekcard" data-week="' + w.week + '" data-vocab="1">' +
+      '<span class="muted">📚 Palabras practicadas · meta del trimestre ' + wordGoal.toLocaleString("es-AR") + "</span>" +
+      "<b>" + nWords.toLocaleString("es-AR") + " palabras</b>" +
+      '<span class="prog"><i style="width:' + Math.min(100, Math.round(nWords / wordGoal * 100)) + '%"></i></span>' +
+      '<span class="muted">' + (w.vocab && w.vocab.length ? "Esta semana: " + w.vocab.length + " palabras nuevas." : "Sumá con el banco de vocabulario.") + "</span>" +
+      "</button>";
+
     // La clinica: gli errori che si ripetono
     var weakO = Banca.loaded() ? Banca.weakest(state, 2) : [];
     if (weakO.length) {
@@ -372,8 +385,11 @@
             '<span class="muted">Oraciones del español al italiano, con corrección que te explica el error.</span></button>' +
           '<button class="lab" data-bank="b-gap"><span class="e">🔧</span><b>Coniuga in contesto</b>' +
             '<span class="muted">El verbo justo dentro de una oración real.</span></button>' +
-          '<button class="lab" data-bank="b-err"><span class="e">🔍</span><b>Trova l\'errore</b>' +
-            '<span class="muted">Encontrá y corregí el error típico de un hispanohablante.</span></button>' +
+          '<button class="lab" data-bank="b-err"' + (state.unlocked < Banca.ERR_WEEK ? " disabled" : "") +
+            '><span class="e">🔍</span><b>Trova l\'errore</b>' +
+            '<span class="muted">' + (state.unlocked < Banca.ERR_WEEK
+              ? "Se abre en la semana " + Banca.ERR_WEEK + ": primero tenés que poder leer la oración."
+              : "Encontrá y corregí el error típico de un hispanohablante.") + "</span></button>" +
           '<button class="lab" data-bank="b-forme"><span class="e">🧩</span><b>Forme</b>' +
             '<span class="muted">Artículos, plurales, preposiciones con artículo y concordancia.</span></button>' +
         "</div>";
@@ -745,7 +761,7 @@
     };
     var html = '<div class="card"><h2>Misiones ' + starsHtml(weekStars(w)) + "</h2><div class=\"missions\">";
     if (w.boss) {
-      html += m("play", st.bossPassed, "⚔️", "Vencé al jefe", "85% con 3 vidas. Superarlo te da las 3 estrellas.", "boss");
+      html += m("play", st.bossPassed, "⚔️", "Vencé al jefe", "85% de aciertos. Superarlo te da las 3 estrellas.", "boss");
     } else {
       if (w.lesson) html += m("lez", lessonRead(w.week), "📘", "Jugá la lección",
         lessonRead(w.week) ? "Hecha" + (state.lessonScore && state.lessonScore[w.week] != null ? " · " + state.lessonScore[w.week] + "% en los chequeos" : "") : "Teoría en pasos cortos, con preguntas.");
@@ -761,6 +777,19 @@
       (nChal ? '<button class="tab" id="chal">📖 Sfide del Maestro (' + nChal + ")</button>" : "") +
       "</div></div>";
     return html;
+  }
+
+  /* The week's words: listen to them, then a round that goes from
+     recognising the meaning to writing the word. */
+  function vocabCard(w) {
+    if (!w.vocab || !w.vocab.length) return "";
+    var seen = w.vocab.filter(function (v) { return state.cards["v:" + v[0]]; }).length;
+    return '<div class="card"><h2>📚 Palabras de la semana <small class="muted">' + seen + " / " + w.vocab.length + "</small></h2>" +
+      '<ul class="vocab">' + w.vocab.map(function (v) {
+        return '<li><button class="say" data-say="' + esc(v[0]) + '" aria-label="Escuchar">🔊</button> <b>' + esc(v[0]) +
+          "</b> <span>" + esc(v[1]) + "</span>" + (v[2] ? '<small><i>' + esc(v[2]) + "</i></small>" : "") + "</li>";
+      }).join("") + "</ul>" +
+      '<div class="row" style="margin-top:10px"><button class="btn" id="vocab">Practicar las palabras</button></div></div>';
   }
 
   function renderBriefing(w) {
@@ -780,6 +809,7 @@
         '</span><span class="t-via">' + esc(w.title) + "</span></h1>" +
       '<p class="lead">' + esc(w.focus) + '</p>' +
       missions(w, st, nChal) +
+      vocabCard(w) +
       '<div class="card"><h2>Lo que se juega esta semana</h2>' +
         '<ul class="keys">' +
           w.keys.map(function (k) { return "<li>" + esc(k) + "</li>"; }).join("") +
@@ -790,12 +820,14 @@
 
   /* ------------------------------------------------------------ allenamento */
 
-  // Only graded grammar rounds cost lives; phrase sessions are for flow.
+  /* Lives are a gauge, not a wall: each error empties a heart so you see
+     where the round went wrong, but you always play to the end (a round cut
+     in half teaches nothing).  Phrase sessions have none: they are for flow. */
   var WITH_LIVES = { round: 1, boss: 1, gym: 1 };
   // Only these rounds count towards unlocking the next grammar week.
-  var WEEK_KINDS = { round: 1, gym: 1, pausa: 1 };
+  var WEEK_KINDS = { round: 1, gym: 1, pausa: 1, vocab: 1 };
   // Rounds whose answers count as the week's progress (review mixes weeks).
-  var COUNT_KINDS = { round: 1, gym: 1, pausa: 1, boss: 1 };
+  var COUNT_KINDS = { round: 1, gym: 1, pausa: 1, boss: 1, vocab: 1 };
 
   function startRound(kind, arg) {
     var w = course.weeks[view.week - 1];
@@ -827,7 +859,9 @@
                                  : Drills.conjugationTyped(v, t, w.persons));
         } catch (e) { /* salta */ }
       }
-    } else if (kind === "ponte") items = Lab.ponteSession(state.cards, arg);
+      items = Drills.firstRecognize(items, state, w.week);
+    } else if (kind === "vocab") items = Drills.vocabSession(course, w, state, 14);
+    else if (kind === "ponte") items = Lab.ponteSession(state.cards, arg);
     else if (kind === "falsi") items = Lab.falsiSession(state.cards);
     else if (kind === "capire") items = Lab.capireSession(state.cards, arg, state.unlocked);
     else if (kind === "lettura") items = Letture.session(Letture.byId(arg));
@@ -840,8 +874,9 @@
     else if (kind === "sfida") {
       var ch = course.challenges.filter(function (c) { return c.id === arg; })[0];
       items = ch && ch.play ? ch.play.map(function (id) { return itemMap[id]; }).filter(Boolean) : [];
+      items = Drills.firstRecognize(items, state, w.week);
     }
-    else items = Drills.buildRound(course, w, { map: itemMap, state: state });
+    else items = Drills.buildRound(course, w, { map: itemMap, state: state, silent: state.silent });
 
     if (!items.length) { toast("No hay preguntas para este modo todavía."); return; }
 
@@ -855,9 +890,8 @@
       wrong: 0,
       combo: 0,
       bestCombo: 0,
-      // In the first season errors are how you learn: rounds never end
-      // early.  Lives come from week 14; the bosses always have 3.
-      lives: kind === "boss" ? 3 : WITH_LIVES[kind] && w.week > 13 ? 5 : Infinity,
+      lives: kind === "boss" ? 3 : WITH_LIVES[kind] ? 5 : Infinity,
+      maxLives: kind === "boss" ? 3 : 5,
       xp: 0,
       answered: false,
       picked: [],
@@ -874,7 +908,9 @@
   function hud() {
     var hearts = "";
     if (round.lives !== Infinity) {
-      for (var i = 0; i < 5; i++) hearts += i < round.lives ? "❤️" : "🤍";
+      for (var i = 0; i < round.maxLives; i++) hearts += i < round.lives ? "❤️" : "🤍";
+      // Past zero you keep playing: the extra errors are counted, not punished.
+      if (round.lives < 0) hearts += ' <small class="over">+' + (-round.lives) + "</small>";
     }
     return '<div class="hud">' +
         (hearts ? '<span class="hearts">' + hearts + "</span>" : "") +
@@ -974,8 +1010,9 @@
     } else if (it.type === "listen") {
       body = '<div class="center"><button class="bigplay" id="play1">🔊</button>' +
         '<div><button class="tab" id="slow">🐢 más lento</button>' +
-        '<button class="tab" id="peek">👀 ver texto</button></div>' +
-        '<div class="peek" id="peektxt" hidden>' + esc(it.stem) + "</div></div>" +
+        // listening to tell sounds apart: the text would give it away
+        (it.nopeek ? "</div>" : '<button class="tab" id="peek">👀 ver texto</button></div>' +
+        '<div class="peek" id="peektxt" hidden>' + esc(it.stem) + "</div>") + "</div>" +
         '<div class="options">' + it.options.map(function (o, k) {
           return '<button class="opt" data-opt="' + k + '">' + esc(o) + "</button>";
         }).join("") + "</div>";
@@ -1251,7 +1288,7 @@
 
     var label = opts.label || { giusto: pick(["¡Perfetto!", "¡Bravo!", "¡Esatto!", "¡Grande!", "¡Benissimo!"]),
                   quasi: "Quasi…", sbagliato: "No, era así:" }[verdict];
-    var sol = it.type === "listen" ? it.frase.it + " — " + it.answer
+    var sol = it.type === "listen" && it.frase ? it.frase.it + " — " + it.answer
             : it.frase ? it.frase.it : it.answer;
     var fb = '<div class="feedback ' + verdict + '">' +
       '<div class="verdict">' + label +
@@ -1328,7 +1365,7 @@
     round.lastGiven = null;
     round.firstCat = null;
     round.picked = [];
-    if (round.lives <= 0 || round.i >= round.items.length) {
+    if (round.i >= round.items.length) {
       finishRound();
       return;
     }
@@ -1347,7 +1384,7 @@
 
     var passed = false;
     if (round.kind === "boss") {
-      passed = pct >= 85 && round.lives > 0;
+      passed = pct >= 85;
       var ws = state.weekStats[view.week] ||
         (state.weekStats[view.week] = { attempts: 0, right: 0, bossPassed: false });
       if (passed) {
@@ -1413,7 +1450,7 @@
       html += r.passed
         ? '<p style="margin-top:14px">Semana ' + Math.min(52, view.week + 1) +
           " desbloqueada. +" + Engine.XP.boss + " xp</p>"
-        : '<p style="margin-top:14px">Hace falta <b>85%</b> y terminar con vidas. ' +
+        : '<p style="margin-top:14px">Hace falta <b>85%</b> de aciertos. ' +
           "Repasá el briefing y volvé a intentarlo.</p>";
     }
 
@@ -1897,12 +1934,13 @@
       startRound(course.weeks[view.week - 1].boss ? "boss" : "round");
     });
     document.querySelectorAll("[data-say]").forEach(function (b) {
-      b.onclick = function () { speak(sayIndex[b.dataset.say] || "", true); };
+      b.onclick = function () { speak(sayIndex[b.dataset.say] || (/^\d+-\d+$/.test(b.dataset.say) ? "" : b.dataset.say), true); };
     });
     on("#play", function () {
       startRound(course.weeks[view.week - 1].boss ? "boss" : "round");
     });
     on("#gym", function () { startRound("gym"); });
+    on("#vocab", function () { startRound("vocab"); });
     on("#lez", startLezione);
     on("#play2", function () { startRound("round"); });
     on("#lesnext", lesNext);
