@@ -42,19 +42,19 @@
      "items": [
       {
        "label": "a",
-       "text": "Il popolo danese era/erano contro la UE. ( The Danish people were against the EU .)"
+       "text": "Il popolo danese era/erano contro la UE. (The Danish people were against the EU.)"
       },
       {
        "label": "b",
-       "text": "C’è/Ci sono troppa gente qui. ( There are too many people here .)"
+       "text": "C’è/Ci sono troppa gente qui. (There are too many people here.)"
       },
       {
        "label": "c",
-       "text": "È arrivato/Sono arrivati un centinaio di ospiti. ( A hundred or so guests have arrived .)"
+       "text": "È arrivato/Sono arrivati un centinaio di ospiti. (A hundred or so guests have arrived.)"
       },
       {
        "label": "d",
-       "text": "La maggioranza dei prigionieri è stata/sono stati torturati. ( The majority of the prisoners were tortured .)"
+       "text": "La maggioranza dei prigionieri è stata/sono stati torturati. (The majority of the prisoners were tortured.)"
       }
      ]
     },
@@ -215,7 +215,7 @@
       },
       {
        "label": "b",
-       "text": "Il finestrino (di) la macchina è chiusa?"
+       "text": "Il finestrino (di) la macchina è chiuso?"
       },
       {
        "label": "c",
@@ -276,7 +276,7 @@
      "items": [
       {
        "label": "a",
-       "text": "La capitale (di) Scozia è Edinburgo."
+       "text": "La capitale (di) Scozia è Edimburgo."
       },
       {
        "label": "b",
@@ -307,27 +307,27 @@
      "items": [
       {
        "label": "a",
-       "text": "_____ Cipro è situata a sud _____ Turchia. ( Cyprus is situated south of Turkey .)"
+       "text": "_____ Cipro è situata a sud _____ Turchia. (Cyprus is situated south of Turkey.)"
       },
       {
        "label": "b",
-       "text": "Ci sono molti libri e guide _____ isola d’Elba. ( There are lots of books and guides of Elba .)"
+       "text": "Ci sono molti libri e guide _____ isola d’Elba. (There are lots of books and guides of Elba.)"
       },
       {
-       "label": "",
-       "text": "(c) _____ Sicilia non è lontana _____ Africa. ( Sicily is not far from Africa .)"
+       "label": "c",
+       "text": "_____ Sicilia non è lontana _____ Africa. (Sicily is not far from Africa.)"
       },
       {
        "label": "d",
-       "text": "_____ Bratislava è _____ Slovakia, ma non è lontana _____ Vienna. ( Bratislava is in Slovakia but is not far from Vienna .)"
+       "text": "_____ Bratislava è _____ Slovacchia, ma non è lontana _____ Vienna. (Bratislava is in Slovakia but is not far from Vienna.)"
       },
       {
        "label": "e",
-       "text": "_____ Eolie sono al largo _____ Sicilia. ( The Aeolian islands are off the coast of Sicily .)"
+       "text": "_____ Eolie sono al largo _____ Sicilia. (The Aeolian islands are off the coast of Sicily.)"
       },
       {
        "label": "f",
-       "text": "_____ Canada occupa la parte nord _____ America settentrionale. ( Canada occupies the northern part of North America .)"
+       "text": "_____ Canada occupa la parte nord _____ America settentrionale. (Canada occupies the northern part of North America.)"
       }
      ]
     },
@@ -338,34 +338,34 @@
      "items": [
       {
        "label": "a",
-       "text": "Fiona lives on the island of Skye ."
+       "text": "Fiona lives on the island of Skye."
       },
       {
        "label": "b",
-       "text": "Donald lives in the Orkneys . ( le Orcadi )"
+       "text": "Donald lives in the Orkneys. (le Orcadi)"
       },
       {
        "label": "c",
-       "text": "Alberto lives in Capri ."
+       "text": "Alberto lives in Capri."
       },
       {
        "label": "d",
-       "text": "Barbara is going to the Isle of Man ."
+       "text": "Barbara is going to the Isle of Man."
       },
       {
        "label": "e",
-       "text": "Alistair is going to the Hebrides . ( le Ebridi )"
+       "text": "Alistair is going to the Hebrides. (le Ebridi)"
       },
       {
        "label": "f",
-       "text": "Sandra is going to Cuba ."
+       "text": "Sandra is going to Cuba."
       }
      ]
     },
     {
      "id": "r02-11",
      "n": 11,
-     "instruction": "Choose the appropriate form of di .",
+     "instruction": "Choose the appropriate form of di.",
      "items": [
       {
        "label": "a",
@@ -384,7 +384,7 @@
     {
      "id": "r02-01",
      "n": 1,
-     "instruction": "In the second sentence, provide the correct form of the partitive article di .",
+     "instruction": "In the second sentence, provide the correct form of the partitive article di.",
      "items": [
       {
        "label": "a",
@@ -396,7 +396,7 @@
       },
       {
        "label": "c",
-       "text": "A Dresden ho visto della porcellana antica. Ho visto _____ antica porcellana settecentesca."
+       "text": "A Dresda ho visto della porcellana antica. Ho visto _____ antica porcellana settecentesca."
       }
      ]
     },
@@ -672,23 +672,23 @@
      "items": [
       {
        "label": "a",
-       "text": "Mio padre è alto e ( abbastanza grasso ) ed è nato in un ( piccolo paese ) di montagna."
+       "text": "Mio padre è alto e (abbastanza grasso) ed è nato in un (piccolo paese) di montagna."
       },
       {
        "label": "b",
-       "text": "Ho conosciuto Daniele ( circa un mese ) fa. È ( una persona molto simpatica ) che ci fa ridere tanto."
+       "text": "Ho conosciuto Daniele (circa un mese) fa. È (una persona molto simpatica) che ci fa ridere tanto."
       },
       {
        "label": "c",
-       "text": "Mia figlia va male in francese. È veramente ( piuttosto debole )."
+       "text": "Mia figlia va male in francese. È veramente (piuttosto debole)."
       },
       {
        "label": "d",
-       "text": "Mirella si veste malissimo con quel ( brutto cappello ) sformato e quelle ( brutte scarpe ) sporche."
+       "text": "Mirella si veste malissimo con quel (brutto cappello) sformato e quelle (brutte scarpe) sporche."
       },
       {
        "label": "e",
-       "text": "Carlo è noioso. Fa sempre dei ( lunghi discorsi ) pieni di ( parole complicate ) incomprensibili."
+       "text": "Carlo è noioso. Fa sempre dei (lunghi discorsi) pieni di (parole complicate) incomprensibili."
       }
      ]
     },
@@ -719,7 +719,7 @@
       },
       {
        "label": "f",
-       "text": "Un rubinetto è un piccolo rubino ( ruby )."
+       "text": "Un rubinetto è un piccolo rubino (ruby)."
       }
      ]
     },
@@ -730,19 +730,19 @@
      "items": [
       {
        "label": "a",
-       "text": "Non c’è posto qui. – Ti puoi spostare ( solo un po’ )?"
+       "text": "Non c’è posto qui. – Ti puoi spostare (solo un po’)?"
       },
       {
        "label": "b",
-       "text": "È andato bene ieri? – Sì, è andato ( abbastanza bene ), credo."
+       "text": "È andato bene ieri? – Sì, è andato (abbastanza bene), credo."
       },
       {
        "label": "c",
-       "text": "Aspettiamo mezz’ora, è ancora ( un po’ presto ) per partire."
+       "text": "Aspettiamo mezz’ora, è ancora (un po’ presto) per partire."
       },
       {
        "label": "d",
-       "text": "Come stai adesso? – ( Non molto bene ), purtroppo."
+       "text": "Come stai adesso? – (Non molto bene), purtroppo."
       }
      ]
     }
@@ -830,46 +830,46 @@
     {
      "id": "r07-02",
      "n": 2,
-     "instruction": "Stress, contrast and contradict . Give the Italian equivalent of the English using appropriate pronouns.",
+     "instruction": "Stress, contrast and contradict. Give the Italian equivalent of the English using appropriate pronouns.",
      "items": [
       {
        "label": "a",
-       "text": "Javier e Fiona di dove sono? – ( He ) è spagnolo e ( she ) è scozzese."
+       "text": "Javier e Fiona di dove sono? – (He) è spagnolo e (she) è scozzese."
       },
       {
        "label": "b",
-       "text": "Venite anche ( you )? – No, ( we ) non veniamo, viene solo Marco."
+       "text": "Venite anche (you)? – No, (we) non veniamo, viene solo Marco."
       },
       {
        "label": "c",
-       "text": "Che bella lampada! L’hai comprata ( you ), Mariella? – Sì, l’ho comprata ( I )."
+       "text": "Che bella lampada! L’hai comprata (you), Mariella? – Sì, l’ho comprata (I)."
       },
       {
        "label": "d",
-       "text": "È un bel giardino, lo cura ( you ), signora o suo marito? – Lo curiamo ( us ) due."
+       "text": "È un bel giardino, lo cura (you), signora o suo marito? – Lo curiamo (us) due."
       },
       {
        "label": "e",
-       "text": "Sei stato ( you ) a chiamare ieri? – No, ( not me ), forse sono stati ( them )."
+       "text": "Sei stato (you) a chiamare ieri? – No, (not me), forse sono stati (them)."
       }
      ]
     },
     {
      "id": "r07-03",
      "n": 3,
-     "instruction": "Clarify matters . Give the Italian equivalent of the English.",
+     "instruction": "Clarify matters. Give the Italian equivalent of the English.",
      "items": [
       {
        "label": "a",
-       "text": "Mina e Elena, siete voi? – No, it’s us, Marta and Ida ."
+       "text": "Mina e Elena, siete voi? – No, it’s us, Marta and Ida."
       },
       {
        "label": "b",
-       "text": "Sei tu, Dario? – No, it’s me, Giuseppe ."
+       "text": "Sei tu, Dario? – No, it’s me, Giuseppe."
       },
       {
        "label": "c",
-       "text": "Chi è che vuole una caramella? – Not me/I don’t ."
+       "text": "Chi è che vuole una caramella? – Not me/I don’t."
       },
       {
        "label": "d",
@@ -877,11 +877,11 @@
       },
       {
        "label": "e",
-       "text": "Chi è che viene domani? – Me and my sister ."
+       "text": "Chi è che viene domani? – Me and my sister."
       },
       {
        "label": "f",
-       "text": "Chi è che fa quel rumore? Sei tu? – No, it’s them, the neighbours ."
+       "text": "Chi è che fa quel rumore? Sei tu? – No, it’s them, the neighbours."
       }
      ]
     },
@@ -923,15 +923,15 @@
      "items": [
       {
        "label": "a",
-       "text": "Mio nonno ( falls asleep ) sempre dopo pranzo. ( addormentarsi )"
+       "text": "Mio nonno (falls asleep) sempre dopo pranzo. (addormentarsi)"
       },
       {
        "label": "b",
-       "text": "I miei figli ( wash themselves and comb their hair ) sempre in fretta. ( lavarsi, pettinarsi )"
+       "text": "I miei figli (wash themselves and comb their hair) sempre in fretta. (lavarsi, pettinarsi)"
       },
       {
        "label": "c",
-       "text": "Normalmente io e mia moglie ( wake up ) alle sette e ( we get up ) subito. ( svegliarsi, alzarsi )"
+       "text": "Normalmente io e mia moglie (wake up) alle sette e (we get up) subito. (svegliarsi, alzarsi)"
       }
      ]
     },
@@ -942,15 +942,15 @@
      "items": [
       {
        "label": "a",
-       "text": "( I get up early ) ma lui di solito rimane a letto."
+       "text": "(I get up early) ma lui di solito rimane a letto."
       },
       {
        "label": "b",
-       "text": "( She washes her hair ) ogni mattina, ma io no."
+       "text": "(She washes her hair) ogni mattina, ma io no."
       },
       {
        "label": "c",
-       "text": "No, (he is graduating ) a giugno, ma ( I am graduating ) l’anno prossimo."
+       "text": "No, (he is graduating) a giugno, ma (I am graduating) l’anno prossimo."
       }
      ]
     },
@@ -1011,11 +1011,11 @@
      "items": [
       {
        "label": "a",
-       "text": "He bought some roses and gave them to his wife . (3)"
+       "text": "He bought some roses and gave them to his wife. (3)"
       },
       {
        "label": "b",
-       "text": "He bought her some roses . (2)"
+       "text": "He bought her some roses. (2)"
       },
       {
        "label": "c",
@@ -1042,11 +1042,11 @@
       },
       {
        "label": "c",
-       "text": "Conosce mio figlio ? – No, non _____ conosco."
+       "text": "Conosce mio figlio? – No, non _____ conosco."
       },
       {
        "label": "d",
-       "text": "Conoscete le mie cugine ? – Certo, _____ conosciamo da molto tempo."
+       "text": "Conoscete le mie cugine? – Certo, _____ conosciamo da molto tempo."
       }
      ]
     },
@@ -1057,19 +1057,19 @@
      "items": [
       {
        "label": "a",
-       "text": "Angelo, _____ posso aiutare? ( you )"
+       "text": "Angelo, _____ posso aiutare? (you)"
       },
       {
        "label": "b",
-       "text": "Arriveder _____, signore, _____ richiamerò più tardi. ( you – formal)"
+       "text": "Arriveder _____, signore, _____ richiamerò più tardi. (you – formal)"
       },
       {
        "label": "c",
-       "text": "Ragazzi, _____ ringrazio per la bella serata. ( you – plural)"
+       "text": "Ragazzi, _____ ringrazio per la bella serata. (you – plural)"
       },
       {
        "label": "d",
-       "text": "_____ accompagno io, Signora Rossi. ( you – formal)"
+       "text": "_____ accompagno io, Signora Rossi. (you – formal)"
       }
      ]
     },
@@ -1080,7 +1080,7 @@
      "items": [
       {
        "label": "a",
-       "text": "Sai dov’è andato ? – No, non _____ so."
+       "text": "Sai dov’è andato? – No, non _____ so."
       },
       {
        "label": "b",
@@ -1088,15 +1088,15 @@
       },
       {
        "label": "c",
-       "text": "Tu dici che sono tutti disonesti ? – Certo, è ovvio che _____ sono!"
+       "text": "Tu dici che sono tutti disonesti? – Certo, è ovvio che _____ sono!"
       },
       {
        "label": "d",
-       "text": "Hai la chiave ? – Sì _____ ho."
+       "text": "Hai la chiave? – Sì _____ ho."
       },
       {
        "label": "e",
-       "text": "I clienti hanno i documenti ? – Sì, _____ hanno."
+       "text": "I clienti hanno i documenti? – Sì, _____ hanno."
       }
      ]
     },
@@ -1107,19 +1107,19 @@
      "items": [
       {
        "label": "a",
-       "text": "Ascolti spesso la radio? – Yes, I often listen to it ."
+       "text": "Ascolti spesso la radio? – Yes, I often listen to it."
       },
       {
        "label": "b",
-       "text": "Hai chiesto il conto? – Yes, I’ve asked for it ."
+       "text": "Hai chiesto il conto? – Yes, I’ve asked for it."
       },
       {
        "label": "c",
-       "text": "Da quanto tempo aspetti il treno? – I have been waiting for it for an hour ."
+       "text": "Da quanto tempo aspetti il treno? – I have been waiting for it for an hour."
       },
       {
        "label": "d",
-       "text": "Quelle scarpe, quanto le hai pagate? – I paid 150 euros for them ."
+       "text": "Quelle scarpe, quanto le hai pagate? – I paid 150 euros for them."
       }
      ]
     },
@@ -1130,26 +1130,26 @@
      "items": [
       {
        "label": "a",
-       "text": "Ho prestato 50 euro a Riccardo . Ieri _____ ho prestato 50 euro."
+       "text": "Ho prestato 50 euro a Riccardo. Ieri _____ ho prestato 50 euro."
       },
       {
        "label": "b",
-       "text": "Devi restituire i soldi a Rina . _____ devi restituire i soldi domani."
+       "text": "Devi restituire i soldi a Rina. _____ devi restituire i soldi domani."
       },
       {
        "label": "c",
-       "text": "Anna deve 100 euro a suo fratello . Purtroppo _____ deve 100 euro."
+       "text": "Anna deve 100 euro a suo fratello. Purtroppo _____ deve 100 euro."
       },
       {
        "label": "d",
-       "text": "Lucio dovrà pagare 2,000 euro alla moglie . È vero, _____ dovrà pagare 2,000 euro."
+       "text": "Lucio dovrà pagare 2,000 euro alla moglie. È vero, _____ dovrà pagare 2,000 euro."
       }
      ]
     },
     {
      "id": "r07-07",
      "n": 7,
-     "instruction": "Insert the correct word for you .",
+     "instruction": "Insert the correct word for you.",
      "items": [
       {
        "label": "a",
@@ -1176,7 +1176,7 @@
     {
      "id": "r07-08",
      "n": 8,
-     "instruction": "A helping hand . Complete the sentences using the correct pronoun. Use the English as a guide.",
+     "instruction": "A helping hand. Complete the sentences using the correct pronoun. Use the English as a guide.",
      "items": [
       {
        "label": "a",
@@ -1195,19 +1195,19 @@
     {
      "id": "r07-09",
      "n": 9,
-     "instruction": "Disaster . Complete the sentences using the Italian equivalent of the English pronoun given.",
+     "instruction": "Disaster. Complete the sentences using the Italian equivalent of the English pronoun given.",
      "items": [
       {
        "label": "a",
-       "text": "Mio nipote _____ ha rotto l’orologio. ( my )"
+       "text": "Mio nipote _____ ha rotto l’orologio. (my)"
       },
       {
        "label": "b",
-       "text": "Giulio è rimasto male, la cameriera _____ ha macchiato la camicia. ( his )"
+       "text": "Giulio è rimasto male, la cameriera _____ ha macchiato la camicia. (his)"
       },
       {
        "label": "c",
-       "text": "Maria _____ ha bruciato la caffetieria. ( their )"
+       "text": "Maria _____ ha bruciato la caffettiera. (their)"
       }
      ]
     },
@@ -1218,7 +1218,7 @@
      "items": [
       {
        "label": "a",
-       "text": "I asked him to buy the bread ."
+       "text": "I asked him to buy the bread."
       },
       {
        "label": "b",
@@ -1226,7 +1226,7 @@
       },
       {
        "label": "c",
-       "text": "Dario, you must answer them (the girls) immediately ."
+       "text": "Dario, you must answer them (the girls) immediately."
       }
      ]
     },
@@ -1241,7 +1241,7 @@
       },
       {
        "label": "b",
-       "text": "Porterò dei fiori a mia nonna . (la/le)"
+       "text": "Porterò dei fiori a mia nonna. (la/le)"
       },
       {
        "label": "c",
@@ -1249,7 +1249,7 @@
       },
       {
        "label": "d",
-       "text": "Manderò una email a Silvio . (lo/gli)"
+       "text": "Manderò una email a Silvio. (lo/gli)"
       },
       {
        "label": "e",
@@ -1257,14 +1257,14 @@
       },
       {
        "label": "f",
-       "text": "Leggerò il riassunto a Dina e a Lucia . (li/gli/loro)"
+       "text": "Leggerò il riassunto a Dina e a Lucia. (li/gli/loro)"
       }
      ]
     },
     {
      "id": "r07-13",
      "n": 13,
-     "instruction": "Insert the correct word for you , choosing between direct and indirect object pronouns.",
+     "instruction": "Insert the correct word for you, choosing between direct and indirect object pronouns.",
      "items": [
       {
        "label": "a",
@@ -1303,46 +1303,46 @@
       },
       {
        "label": "b",
-       "text": "We must persuade her to help . convincere qlcu. a to persuade sb. to"
+       "text": "We must persuade her to help. convincere qlcu. a to persuade sb. to"
       },
       {
        "label": "c",
-       "text": "You can’t force him to come . costringere qlcu. a to make/force sb. to do sth ."
+       "text": "You can’t force him to come. costringere qlcu. a to make/force sb. to do sth."
       },
       {
        "label": "d",
-       "text": "I have allowed him to go to the party . permettere a qlcu. di to allow sb. to"
+       "text": "I have allowed him to go to the party. permettere a qlcu. di to allow sb. to"
       }
      ]
     },
     {
      "id": "r07-15",
      "n": 15,
-     "instruction": "Him, her and them . Use the appropriate DO or IDO pronoun to complete the sentences.",
+     "instruction": "Him, her and them. Use the appropriate DO or IDO pronoun to complete the sentences.",
      "items": [
       {
        "label": "a",
-       "text": "Non ti preoccupare, _____ dirò di pagare. ( him )"
+       "text": "Non ti preoccupare, _____ dirò di pagare. (him)"
       },
       {
        "label": "b",
-       "text": "Non c’è problema, _____ convincerò a pagare. ( him )"
+       "text": "Non c’è problema, _____ convincerò a pagare. (him)"
       },
       {
        "label": "c",
-       "text": "_____ dovresti incoraggiare a studiare di più. ( her )"
+       "text": "_____ dovresti incoraggiare a studiare di più. (her)"
       },
       {
        "label": "d",
-       "text": "_____ dovresti consigliare di studiare di più. ( her )"
+       "text": "_____ dovresti consigliare di studiare di più. (her)"
       },
       {
        "label": "e",
-       "text": "Ieri _____ ho invitati a cena. ( them )"
+       "text": "Ieri _____ ho invitati a cena. (them)"
       },
       {
        "label": "f",
-       "text": "Ieri _____ ho offerto la cena. ( them )"
+       "text": "Ieri _____ ho offerto la cena. (them)"
       }
      ]
     },
@@ -1368,19 +1368,19 @@
     {
      "id": "r07-02",
      "n": 2,
-     "instruction": "You too . Give the Italian equivalent of the English replies. Begin each one with: Anch’io …",
+     "instruction": "You too. Give the Italian equivalent of the English replies. Begin each one with: Anch’io …",
      "items": [
       {
        "label": "a",
-       "text": "Consumo pochissimi grassi. – I eat very little too ."
+       "text": "Consumo pochissimi grassi. – I eat very little too."
       },
       {
        "label": "b",
-       "text": "Consumo tanta frutta e verdura. – I eat a great deal too ."
+       "text": "Consumo tanta frutta e verdura. – I eat a great deal too."
       },
       {
        "label": "c",
-       "text": "Compro molto cibo biologico. I buy a lot too ."
+       "text": "Compro molto cibo biologico. – I buy a lot too."
       }
      ]
     },
@@ -1414,35 +1414,35 @@
      "items": [
       {
        "label": "a",
-       "text": "Hai bisogno di aiuto? – No thanks, I don’t need any . ( avere bisogno di )"
+       "text": "Hai bisogno di aiuto? – No thanks, I don’t need any. (avere bisogno di)"
       },
       {
        "label": "b",
-       "text": "Credi che si dimetterà? – I am sure of it . ( essere sicuro di )"
+       "text": "Credi che si dimetterà? – I am sure of it. (essere sicuro di)"
       },
       {
        "label": "c",
-       "text": "Abbiamo parlato dei loro problemi – We talked about them too . ( parlare di )"
+       "text": "Abbiamo parlato dei loro problemi – We talked about them too. (parlare di)"
       },
       {
        "label": "d",
-       "text": "Dimmi quello che è successo. – But I don’t know anything about it . ( sapere di )"
+       "text": "Dimmi quello che è successo. – But I don’t know anything about it. (sapere di)"
       },
       {
        "label": "e",
-       "text": "Cosa pensi di quello che ha detto? – I don’t know, what do you think of it? ( pensare di – tu )"
+       "text": "Cosa pensi di quello che ha detto? – I don’t know, what do you think of it? (pensare di – tu)"
       },
       {
        "label": "f",
-       "text": "Il mio gattino è adorabile. I can’t do without it . ( fare a meno di )"
+       "text": "Il mio gattino è adorabile. I can’t do without it. (fare a meno di)"
       },
       {
        "label": "g",
-       "text": "Hai sentito la notizia? – Yes and I was upset by it . ( essere sconvolto da )"
+       "text": "Hai sentito la notizia? – Yes and I was upset by it. (essere sconvolto da)"
       },
       {
        "label": "h",
-       "text": "È uscito di casa? Yes, he’s coming out (of there) right now . ( uscire di casa )"
+       "text": "È uscito di casa? Yes, he’s coming out (of there) right now. (uscire di casa)"
       }
      ]
     },
@@ -1453,96 +1453,96 @@
      "items": [
       {
        "label": "a",
-       "text": "Sei stato a Roma ? – Sì, sono stato tante volte."
+       "text": "Sei stato a Roma? – Sì, sono stato tante volte."
       },
       {
        "label": "b",
-       "text": "Andate in centro ? – Sì, andiamo fra poco."
+       "text": "Andate in centro? – Sì, andiamo fra poco."
       },
       {
        "label": "c",
-       "text": "Sei andata dal farmacista ? – Sì, sono passata stamattina."
+       "text": "Sei andata dal farmacista? – Sì, sono passata stamattina."
       },
       {
        "label": "d",
-       "text": "Siete andate a trovare Liliana ? – Sì, siamo andate ieri."
+       "text": "Siete andate a trovare Liliana? – Sì, siamo andate ieri."
       },
       {
        "label": "e",
-       "text": "Quand’è che vai a far la spesa ? – Vado adesso."
+       "text": "Quand’è che vai a far la spesa? – Vado adesso."
       }
      ]
     },
     {
      "id": "r07-02",
      "n": 2,
-     "instruction": "Using c’è or ci sono , give the Italian equivalent of the following.",
+     "instruction": "Using c’è or ci sono, give the Italian equivalent of the following.",
      "items": [
       {
        "label": "a",
-       "text": "In my flat there are six rooms but there is only one bathroom . ( un bagno solo )"
+       "text": "In my flat there are six rooms but there is only one bathroom. (un bagno solo)"
       },
       {
        "label": "b",
-       "text": "What is there to eat? – There is spaghetti alle vongole and there is salad ."
+       "text": "What is there to eat? – There is spaghetti alle vongole and there is salad."
       },
       {
        "label": "c",
-       "text": "Is Nita there/in? – No, she’s not here/in ."
+       "text": "Is Nita there/in? – No, she’s not here/in."
       },
       {
        "label": "d",
-       "text": "Are Andrea and Massimo in? – No, they’re not here/in ."
+       "text": "Are Andrea and Massimo in? – No, they’re not here/in."
       }
      ]
     },
     {
      "id": "r07-03",
      "n": 3,
-     "instruction": "Complete the sentences in Italian using metterci and volerci .",
+     "instruction": "Complete the sentences in Italian using metterci and volerci.",
      "items": [
       {
        "label": "a",
-       "text": "( I take an hour ) per arrivare all’università."
+       "text": "(I take an hour) per arrivare all’università."
       },
       {
        "label": "b",
-       "text": "( It takes an hour ) per arrivare in centro."
+       "text": "(It takes an hour) per arrivare in centro."
       },
       {
        "label": "c",
-       "text": "Quanto ( do they take ) per andare a Genova?"
+       "text": "Quanto (do they take) per andare a Genova?"
       },
       {
        "label": "d",
-       "text": "( It takes ) tre quarti d’ora se prendi la macchina."
+       "text": "(It takes) tre quarti d’ora se prendi la macchina."
       }
      ]
     },
     {
      "id": "r07-04",
      "n": 4,
-     "instruction": "Give the Italian equivalent of the English. There are two cases in which you cannot use ci .",
+     "instruction": "Give the Italian equivalent of the English. There are two cases in which you cannot use ci.",
      "items": [
       {
        "label": "a",
-       "text": "Sei abituato/a al freddo? – Yes, I’m used to it ."
+       "text": "Sei abituato/a al freddo? – Yes, I’m used to it."
       },
       {
        "label": "b",
-       "text": "Siete riusciti/e a farlo? – Yes, we managed to ."
+       "text": "Siete riusciti/e a farlo? – Yes, we managed to."
       },
       {
        "label": "c",
-       "text": "Hai risposto a tuo zio? – Yes, I’ve answered him ."
+       "text": "Hai risposto a tuo zio? – Yes, I’ve answered him."
       },
       {
        "label": "d",
-       "text": "Avete pensato a quello che volete fare? – No, we haven’t thought about it ."
+       "text": "Avete pensato a quello che volete fare? – No, we haven’t thought about it."
       },
       {
        "label": "e",
-       "text": "Pensi spesso ai tuoi fratelli? – Yes, I often think about them ."
+       "text": "Pensi spesso ai tuoi fratelli? – Yes, I often think about them."
       }
      ]
     },
@@ -1581,7 +1581,7 @@
       },
       {
        "label": "h",
-       "text": "Ne compro altri (Ho deciso di)"
+       "text": "Ne compro altri. (Ho deciso di)"
       }
      ]
     },
@@ -1592,7 +1592,7 @@
      "items": [
       {
        "label": "a",
-       "text": "Angelica è uscita, lasciando aperta la finestra ."
+       "text": "Angelica è uscita, lasciando aperta la finestra."
       },
       {
        "label": "b",
@@ -1600,11 +1600,11 @@
       },
       {
        "label": "c",
-       "text": "È caduto, lasciando cadere i bicchieri ."
+       "text": "È caduto, lasciando cadere i bicchieri."
       },
       {
        "label": "d",
-       "text": "Sto leggendo un racconto a mio figlio ."
+       "text": "Sto leggendo un racconto a mio figlio."
       }
      ]
     },
@@ -1615,11 +1615,11 @@
      "items": [
       {
        "label": "a",
-       "text": "Gianna, manda la lettera ."
+       "text": "Gianna, manda la lettera."
       },
       {
        "label": "b",
-       "text": "Signora, spedisca subito questo pacco ."
+       "text": "Signora, spedisca subito questo pacco."
       },
       {
        "label": "c",
@@ -1634,7 +1634,7 @@
     {
      "id": "r07-04",
      "n": 4,
-     "instruction": "It makes little difference . Rewrite the sentences to mean the same thing, but changing the pronoun order.",
+     "instruction": "It makes little difference. Rewrite the sentences to mean the same thing, but changing the pronoun order.",
      "items": [
       {
        "label": "a",
@@ -1669,19 +1669,19 @@
      "items": [
       {
        "label": "a",
-       "text": "C’è una lettera per ( me ) e una fattura per ( you ), dottore."
+       "text": "C’è una lettera per (me) e una fattura per (you), dottore."
       },
       {
        "label": "b",
-       "text": "Esci con ( them ) stasera o solo con ( her )?"
+       "text": "Esci con (them) stasera o solo con (her)?"
       },
       {
        "label": "c",
-       "text": "Vuoi venire da ( me/my place ) o devi andare da ( him/his place )?"
+       "text": "Vuoi venire da (me/my place) o devi andare da (him/his place)?"
       },
       {
        "label": "d",
-       "text": "Secondo ( us ) è pericoloso farlo, e secondo ( you – plural )?"
+       "text": "Secondo (us) è pericoloso farlo, e secondo (you – plural)?"
       }
      ]
     },
@@ -1692,50 +1692,50 @@
      "items": [
       {
        "label": "a",
-       "text": "Mi porti al cinema? Lo porti al cinema? ( Are you taking me or him to the cinema? )"
+       "text": "Mi porti al cinema? Lo porti al cinema? (Are you taking me or him to the cinema?)"
       },
       {
        "label": "b",
-       "text": "Le vuoi telefonare? Gli vuoi telefonare? ( Do you want to ring her or him? )"
+       "text": "Le vuoi telefonare? Gli vuoi telefonare? (Do you want to ring her or him?)"
       },
       {
        "label": "c",
-       "text": "Li chiamerò. Chiamerò Gina. ( I’ll call them and also Gina .)"
+       "text": "Li chiamerò. Chiamerò Gina. (I’ll call them and also Gina.)"
       },
       {
        "label": "d",
-       "text": "Ti manderò una cartolina. Manderò una cartolina ai miei. ( I’ll send a postcard to you and to my parents .)"
+       "text": "Ti manderò una cartolina. Manderò una cartolina ai miei. (I’ll send a postcard to you and to my parents.)"
       }
      ]
     },
     {
      "id": "r07-03",
      "n": 3,
-     "instruction": "Pick the appropriate pronoun to substitute the English: sé, lui, lei or loro .",
+     "instruction": "Pick the appropriate pronoun to substitute the English: sé, lui, lei or loro.",
      "items": [
       {
        "label": "a",
-       "text": "Eduardo è proprio noioso, parla sempre di ( himself )."
+       "text": "Eduardo è proprio noioso, parla sempre di (himself)."
       },
       {
        "label": "b",
-       "text": "Angela è veramente innamorata, parla sempre di ( him )."
+       "text": "Angela è veramente innamorata, parla sempre di (him)."
       },
       {
        "label": "c",
-       "text": "Sono piuttosto antipatici, parlano sempre male di ( her )."
+       "text": "Sono piuttosto antipatici, parlano sempre male di (her)."
       },
       {
        "label": "d",
-       "text": "Ida è abbastanza egoista, pensa solo a ( herself )."
+       "text": "Ida è abbastanza egoista, pensa solo a (herself)."
       },
       {
        "label": "e",
-       "text": "I miei figli vogliono sempre fare tutto da ( themselves )."
+       "text": "I miei figli vogliono sempre fare tutto da (themselves)."
       },
       {
        "label": "f",
-       "text": "Amalia vizia i figli, fa proprio tutto per ( them )."
+       "text": "Amalia vizia i figli, fa proprio tutto per (them)."
       }
      ]
     },
@@ -1746,15 +1746,15 @@
      "items": [
       {
        "label": "a",
-       "text": "L’attrice farà girare un film su se stessa ."
+       "text": "L’attrice farà girare un film su se stessa."
       },
       {
        "label": "b",
-       "text": "È la sua vera storia raccontata da lei stessa ."
+       "text": "È la sua vera storia raccontata da lei stessa."
       },
       {
        "label": "c",
-       "text": "‘Conosci te stesso ’ è un motto greco."
+       "text": "‘Conosci te stesso’ è un motto greco."
       },
       {
        "label": "d",
@@ -1766,15 +1766,15 @@
       },
       {
        "label": "f",
-       "text": "Il blog s’intitola, ‘Lettere a me stesso ’."
+       "text": "Il blog s’intitola, ‘Lettere a me stesso’."
       },
       {
        "label": "g",
-       "text": "Il ministro parla a vanvera; lo ha detto lui stesso ."
+       "text": "Il ministro parla a vanvera; lo ha detto lui stesso."
       },
       {
        "label": "h",
-       "text": "Poveretto, dopo la morte della moglie è diventato l’ombra di se stesso ."
+       "text": "Poveretto, dopo la morte della moglie è diventato l’ombra di se stesso."
       }
      ]
     },
@@ -1793,11 +1793,11 @@
       },
       {
        "label": "c",
-       "text": "Mi compri due etti di prosciutto ?"
+       "text": "Mi compri due etti di prosciutto?"
       },
       {
        "label": "d",
-       "text": "Fra poco ci spediranno i biglietti ."
+       "text": "Fra poco ci spediranno i biglietti."
       },
       {
        "label": "e",
@@ -1805,7 +1805,7 @@
       },
       {
        "label": "f",
-       "text": "Gli daresti un altro po’ di vino ?"
+       "text": "Gli daresti un altro po’ di vino?"
       }
      ]
     },
@@ -1816,15 +1816,15 @@
      "items": [
       {
        "label": "a",
-       "text": "Mi presti i tuoi appunti ? _____ presti stasera? ( Will you lend them to me this evening? )"
+       "text": "Mi presti i tuoi appunti? _____ presti stasera? (Will you lend them to me this evening?)"
       },
       {
        "label": "b",
-       "text": "Ti posso spedire le informazioni ? _____ spedisco adesso?"
+       "text": "Ti posso spedire le informazioni? _____ spedisco adesso?"
       },
       {
-       "label": "",
-       "text": "(c) Signore, Le posso dare il mio numero di casa ? _____ posso dare adesso?"
+       "label": "c",
+       "text": "Signore, Le posso dare il mio numero di casa? _____ posso dare adesso?"
       },
       {
        "label": "d",
@@ -1836,7 +1836,7 @@
       },
       {
        "label": "f",
-       "text": "Le parlo spesso dei miei figli . _____ parlo spesso."
+       "text": "Le parlo spesso dei miei figli. _____ parlo spesso."
       }
      ]
     },
@@ -1847,15 +1847,15 @@
      "items": [
       {
        "label": "a",
-       "text": "Devo stirare queste camicie. _____ stiro io, se vuoi. ( tu ) ( I’ll iron them for you if you want .)"
+       "text": "Devo stirare queste camicie. _____ stiro io, se vuoi. (tu) (I’ll iron them for you if you want.)"
       },
       {
        "label": "b",
-       "text": "Devo imbucare questa lettera _____ imbuco io, se vuole. ( Lei )"
+       "text": "Devo imbucare questa lettera. _____ imbuco io, se vuole. (Lei)"
       },
       {
        "label": "c",
-       "text": "Dobbiamo aprire questo pacco. _____ apro io, se volete. ( voi )"
+       "text": "Dobbiamo aprire questo pacco. _____ apro io, se volete. (voi)"
       }
      ]
     },
@@ -1866,22 +1866,22 @@
      "items": [
       {
        "label": "a",
-       "text": "Queste pere sono mature, signora, _____ scelgo qualcuna? ( Shall I choose some for you? )"
+       "text": "Queste pere sono mature, signora, _____ scelgo qualcuna? (Shall I choose some for you?)"
       },
       {
        "label": "b",
-       "text": "Sono tre etti di formaggio, signore, _____ tolgo un po’? ( Shall I take some off for you? )"
+       "text": "Sono tre etti di formaggio, signore, _____ tolgo un po’? (Shall I take some off for you?)"
       },
       {
        "label": "c",
-       "text": "I panini, sono freschi, ragazzi, _____ incarto un paio? ( Shall I wrap a couple for you? )"
+       "text": "I panini, sono freschi, ragazzi, _____ incarto un paio? (Shall I wrap a couple for you?)"
       }
      ]
     },
     {
      "id": "r07-05",
      "n": 5,
-     "instruction": "Ask who told you each time, using the appropriate pronouns for you and not forgetting lo .",
+     "instruction": "Ask who told you each time, using the appropriate pronouns for you and not forgetting lo.",
      "items": [
       {
        "label": "a",
@@ -1958,11 +1958,11 @@
       },
       {
        "label": "d",
-       "text": "Che freddo che fa! Chiudiamo la finestra? – Fine, I’ll deal with it . ( occuparsi di )"
+       "text": "Che freddo che fa! Chiudiamo la finestra? – Fine, I’ll deal with it. (occuparsi di)"
       },
       {
        "label": "e",
-       "text": "Perché non fate un viaggio in Messico? – We can’t afford it . ( permettersi )"
+       "text": "Perché non fate un viaggio in Messico? – We can’t afford it. (permettersi)"
       }
      ]
     },
@@ -1973,7 +1973,7 @@
      "items": [
       {
        "label": "a",
-       "text": "It’s late, I’m going ."
+       "text": "It’s late, I’m going."
       },
       {
        "label": "b",
@@ -1981,22 +1981,22 @@
       },
       {
        "label": "c",
-       "text": "Do you feel like coming to the cinema? ( tu )"
+       "text": "Do you feel like coming to the cinema? (tu)"
       },
       {
        "label": "d",
-       "text": "Why do you take offence? ( tu )"
+       "text": "Why do you take offence? (tu)"
       },
       {
        "label": "e",
-       "text": "I got by in the exam . ( all’esame )"
+       "text": "I got by in the exam. (all’esame)"
       }
      ]
     },
     {
      "id": "r07-01",
      "n": 1,
-     "instruction": "Wrong end of the stick . Correct these misconceptions about Italy by completing the sentences using si and another appropriate pronoun.",
+     "instruction": "Wrong end of the stick. Correct these misconceptions about Italy by completing the sentences using si and another appropriate pronoun.",
      "items": [
       {
        "label": "a",
@@ -2004,7 +2004,7 @@
       },
       {
        "label": "b",
-       "text": "In Italia, di solito, la grappa si beve come aperitivo – Ma no, _____ beve come digestivo!"
+       "text": "In Italia, di solito, la grappa si beve come aperitivo. – Ma no, _____ beve come digestivo!"
       },
       {
        "label": "c",
@@ -2015,7 +2015,7 @@
     {
      "id": "r07-02",
      "n": 2,
-     "instruction": "How do I look? Rewrite the following sentences, replacing the underlined possessives with an IDO pronoun and combining it with si . Refer to p. 170 if necessary.",
+     "instruction": "How do I look? Rewrite the following sentences, replacing the underlined possessives with an IDO pronoun and combining it with si. Refer to p. 170 if necessary.",
      "items": [
       {
        "label": "a",
@@ -2023,11 +2023,11 @@
       },
       {
        "label": "b",
-       "text": "La sua cravatta si è sporcata. ( his )"
+       "text": "La sua cravatta si è sporcata. (his)"
       },
       {
        "label": "c",
-       "text": "La sua giacca si è strappata. ( her )"
+       "text": "La sua giacca si è strappata. (her)"
       },
       {
        "label": "d",
@@ -2038,7 +2038,7 @@
     {
      "id": "r07-03",
      "n": 3,
-     "instruction": "Complete the second sentences, replacing the underlined phrase with a pronoun and combining it with si .",
+     "instruction": "Complete the second sentences, replacing the underlined phrase with a pronoun and combining it with si.",
      "items": [
       {
        "label": "a",
@@ -2054,7 +2054,7 @@
       },
       {
        "label": "d",
-       "text": "Si riuscirà a fare un bel lavoro . _____ riuscirà di sicuro."
+       "text": "Si riuscirà a fare un bel lavoro. _____ riuscirà di sicuro."
       }
      ]
     },
@@ -2088,23 +2088,23 @@
      "items": [
       {
        "label": "a",
-       "text": "Quanti bicchieri ci sono? ( There are five .)"
+       "text": "Quanti bicchieri ci sono? (There are five.)"
       },
       {
        "label": "b",
-       "text": "C’è della birra in casa? ( No, there isn’t any .)"
+       "text": "C’è della birra in casa? (No, there isn’t any.)"
       },
       {
        "label": "c",
-       "text": "Abbiamo abbastanza formaggio, vero? ( No, there is very little .)"
+       "text": "Abbiamo abbastanza formaggio, vero? (No, there is very little.)"
       },
       {
        "label": "d",
-       "text": "Ci sono poche candele. ( It’s true, there are very few .) The situation brightens up just a little …"
+       "text": "Ci sono poche candele. (It’s true, there are very few.) The situation brightens up just a little …"
       },
       {
        "label": "e",
-       "text": "Ho trovato altre candele. ( Good, how many are there? )"
+       "text": "Ho trovato altre candele. (Good, how many are there?)"
       }
      ]
     },
@@ -2115,19 +2115,19 @@
      "items": [
       {
        "label": "a",
-       "text": "Hanno scelto i libri ? – No, non _____ hanno ancora _____."
+       "text": "Hanno scelto i libri? – No, non _____ hanno ancora _____."
       },
       {
        "label": "b",
-       "text": "Avete innaffiato le piante ? – No, non _____ abbiamo ancora _____."
+       "text": "Avete innaffiato le piante? – No, non _____ abbiamo ancora _____."
       },
       {
        "label": "c",
-       "text": "Ha mandato la lettera ? – No, non _____ ha ancora _____."
+       "text": "Ha mandato la lettera? – No, non _____ ha ancora _____."
       },
       {
        "label": "d",
-       "text": "Hanno prenotato i biglietti ? – No, non _____ hanno ancora _____."
+       "text": "Hanno prenotato i biglietti? – No, non _____ hanno ancora _____."
       }
      ]
     },
@@ -2150,7 +2150,7 @@
       },
       {
        "label": "d",
-       "text": "Ci puoi portare la carta igienica? – Ma ve _____ abbiamo portat ____ ieri!"
+       "text": "Ci puoi portare la carta igienica? – Ma ve _____ abbiamo portat _____ ieri!"
       }
      ]
     },
@@ -2161,19 +2161,19 @@
      "items": [
       {
        "label": "a",
-       "text": "Sai che ho rotto i piatti nuovi di Giulia ? – Come! _____ hai rott _____ tutti?"
+       "text": "Sai che ho rotto i piatti nuovi di Giulia? – Come! _____ hai rott _____ tutti?"
       },
       {
        "label": "b",
-       "text": "Sai che ho rovinato la lavatrice di Antonio ? – Come! _____ hai rovinat _____ completamente?"
+       "text": "Sai che ho rovinato la lavatrice di Antonio? – Come! _____ hai rovinat _____ completamente?"
       },
       {
        "label": "c",
-       "text": "Sai che ho sfasciato la macchina di Rina e Roberto ? – Come! _____ hai sfasciat _____ del tutto?"
+       "text": "Sai che ho sfasciato la macchina di Rina e Roberto? – Come! _____ hai sfasciat _____ del tutto?"
       },
       {
        "label": "d",
-       "text": "Sai che ho distrutto il computer di Fabio ? – Come! _____ hai distrutt _____ totalmente?"
+       "text": "Sai che ho distrutto il computer di Fabio? – Come! _____ hai distrutt _____ totalmente?"
       }
      ]
     },
@@ -2203,7 +2203,7 @@
     {
      "id": "r07-05",
      "n": 5,
-     "instruction": "Some, a few, a little, a couple . Supply the correct past participle and agreement/s with ne .",
+     "instruction": "Some, a few, a little, a couple. Supply the correct past participle and agreement/s with ne.",
      "items": [
       {
        "label": "a",
@@ -2322,43 +2322,43 @@
      "items": [
       {
        "label": "a",
-       "text": "Non ho mai visto la casa del signor Pirelli . ( his )"
+       "text": "Non ho mai visto la casa del signor Pirelli. (his)"
       },
       {
        "label": "b",
-       "text": "La casa di Mariella è molto piccola. ( her )"
+       "text": "La casa di Mariella è molto piccola. (her)"
       },
       {
        "label": "c",
-       "text": "Ti piace la nuova casa di Emilia e Patrizio ? ( their )"
+       "text": "Ti piace la nuova casa di Emilia e Patrizio? (their)"
       },
       {
        "label": "d",
-       "text": "L’appartamento di Gianni ha un balcone enorme. ( his )"
+       "text": "L’appartamento di Gianni ha un balcone enorme. (his)"
       },
       {
        "label": "e",
-       "text": "L’appartamento di Gigliola si trova al secondo piano. ( her )"
+       "text": "L’appartamento di Gigliola si trova al secondo piano. (her)"
       },
       {
        "label": "f",
-       "text": "L’appartamento dei signori Mancini è in via Manin. ( their )"
+       "text": "L’appartamento dei signori Mancini è in via Manin. (their)"
       },
       {
        "label": "g",
-       "text": "Non mi piacciono le amiche di Sandra . ( her )"
+       "text": "Non mi piacciono le amiche di Sandra. (her)"
       },
       {
        "label": "h",
-       "text": "Siamo usciti con le amiche di Flavia e Fulvio . ( their )"
+       "text": "Siamo usciti con le amiche di Flavia e Fulvio. (their)"
       },
       {
        "label": "i",
-       "text": "I figli del signor Vezzani frequentano l’università. ( his )"
+       "text": "I figli del signor Vezzani frequentano l’università. (his)"
       },
       {
        "label": "j",
-       "text": "I figli dei vicini vivono tutti all’estero. ( their )"
+       "text": "I figli dei vicini vivono tutti all’estero. (their)"
       }
      ]
     },
@@ -2369,19 +2369,19 @@
      "items": [
       {
        "label": "a",
-       "text": "Conosce ( my children )?"
+       "text": "Conosce (my children)?"
       },
       {
        "label": "b",
-       "text": "Questi sono ( our grandchildren )."
+       "text": "Questi sono (our grandchildren)."
       },
       {
        "label": "c",
-       "text": "Queste sono ( my nieces )."
+       "text": "Queste sono (my nieces)."
       },
       {
        "label": "d",
-       "text": "Ti faccio conoscere ( our daughters )."
+       "text": "Ti faccio conoscere (our daughters)."
       }
      ]
     },
@@ -2392,23 +2392,23 @@
      "items": [
       {
        "label": "a",
-       "text": "Questo è ( my ) marito, Enrico, e questa è ( our ) figlia, Laura."
+       "text": "Questo è (my) marito, Enrico, e questa è (our) figlia, Laura."
       },
       {
        "label": "b",
-       "text": "Questo è ( my ) figlio, Claudio, e questa è ( his ) fidanzata, Emilia."
+       "text": "Questo è (my) figlio, Claudio, e questa è (his) fidanzata, Emilia."
       },
       {
        "label": "c",
-       "text": "Questa è Alessandra, ( our ) figlia più grande, e questo è ( her ) fidanzato, Alessio."
+       "text": "Questa è Alessandra, (our) figlia più grande, e questo è (her) fidanzato, Alessio."
       },
       {
        "label": "d",
-       "text": "Ti presento ( my ) mamma e ( my ) fratellino, Roberto."
+       "text": "Ti presento (my) mamma e (my) fratellino, Roberto."
       },
       {
        "label": "e",
-       "text": "Questa è ( my ) moglie e queste sono ( our ) figlie, Simonetta e Chiara."
+       "text": "Questa è (my) moglie e queste sono (our) figlie, Simonetta e Chiara."
       }
      ]
     },
@@ -2419,23 +2419,23 @@
      "items": [
       {
        "label": "a",
-       "text": "Tu prendi la tua macchina e io prendo ( mine )."
+       "text": "Tu prendi la tua macchina e io prendo (mine)."
       },
       {
        "label": "b",
-       "text": "Io ho invitato le mie amiche e lei ha invitato ( hers )."
+       "text": "Io ho invitato le mie amiche e lei ha invitato (hers)."
       },
       {
        "label": "c",
-       "text": "A me piace il mio professore, a te piace ( yours )?"
+       "text": "A me piace il mio professore, a te piace (yours)?"
       },
       {
        "label": "d",
-       "text": "Tu porti tuo padre e io porto ( mine )."
+       "text": "Tu porti tuo padre e io porto (mine)."
       },
       {
        "label": "e",
-       "text": "Io chiederò il permesso ai miei genitori e tu chiedi il permesso a ( yours/your parents )."
+       "text": "Io chiederò il permesso ai miei genitori e tu chiedi il permesso a (yours/your parents)."
       }
      ]
     },
@@ -2446,15 +2446,15 @@
      "items": [
       {
        "label": "a",
-       "text": "Enrico, è ( yours ) questo libro? – No, non è ( mine ). ( Mine ) è qui."
+       "text": "Enrico, è (yours) questo libro? – No, non è (mine). (Mine) è qui."
       },
       {
        "label": "b",
-       "text": "Che bella sciarpa! È ( yours ), signora? – No, non è ( mine ). ( Mine ) è quella nera."
+       "text": "Che bella sciarpa! È (yours), signora? – No, non è (mine). (Mine) è quella nera."
       },
       {
        "label": "c",
-       "text": "Ho trovato delle chiavi. Sono ( his )? – No, non sono ( his ), sono ( mine )."
+       "text": "Ho trovato delle chiavi. Sono (his)? – No, non sono (his), sono (mine)."
       }
      ]
     },
@@ -2465,27 +2465,27 @@
      "items": [
       {
        "label": "a",
-       "text": "Leonardo’s mother is ill ."
+       "text": "Leonardo’s mother is ill."
       },
       {
        "label": "b",
-       "text": "Signor Palladino’s wife is on holiday ."
+       "text": "Signor Palladino’s wife is on holiday."
       },
       {
        "label": "c",
-       "text": "The neighbours’ cat is black ."
+       "text": "The neighbours’ cat is black."
       },
       {
        "label": "d",
-       "text": "I have found Elisabetta’s shoes and Antonio’s too ."
+       "text": "I have found Elisabetta’s shoes and Antonio’s too."
       },
       {
        "label": "e",
-       "text": "I have lost Marta’s letter and her sister’s too ."
+       "text": "I have lost Marta’s letter and her sister’s too."
       },
       {
        "label": "f",
-       "text": "I’ll see you at Giovanni’s ."
+       "text": "I’ll see you at Giovanni’s."
       }
      ]
     },
@@ -2496,15 +2496,15 @@
      "items": [
       {
        "label": "a",
-       "text": "È arrivato con ( three friends of his )."
+       "text": "È arrivato con (three friends of his)."
       },
       {
        "label": "b",
-       "text": "Siamo uscite con ( a few clients of ours )."
+       "text": "Siamo uscite con (a few clients of ours)."
       },
       {
        "label": "c",
-       "text": "Ho litigato con ( those friends of yours )."
+       "text": "Ho litigato con (those friends of yours)."
       }
      ]
     },
@@ -2515,19 +2515,19 @@
      "items": [
       {
        "label": "a",
-       "text": "È importante trovare soddisfazione nel ( one’s ) lavoro."
+       "text": "È importante trovare soddisfazione nel (one’s) lavoro."
       },
       {
        "label": "b",
-       "text": "È necessario esaminare ( one’s ) coscienza."
+       "text": "È necessario esaminare (one’s) coscienza."
       },
       {
        "label": "c",
-       "text": "Ognuno ha diritto alla ( one’s own ) opinione."
+       "text": "Ognuno ha diritto alla (one’s own) opinione."
       },
       {
        "label": "d",
-       "text": "Ho pagato con ( my own ) soldi."
+       "text": "Ho pagato con (my own) soldi."
       }
      ]
     },
@@ -2538,23 +2538,23 @@
      "items": [
       {
        "label": "a",
-       "text": "Piove, devi prendere ( your umbrella )."
+       "text": "Piove, devi prendere (your umbrella)."
       },
       {
        "label": "b",
-       "text": "Angelo arriverà domani con ( his wife )."
+       "text": "Angelo arriverà domani con (his wife)."
       },
       {
        "label": "c",
-       "text": "Fa freddo, perché non ti metti ( your jumper )?"
+       "text": "Fa freddo, perché non ti metti (your jumper)?"
       },
       {
        "label": "d",
-       "text": "Mi fa male ( my foot )."
+       "text": "Mi fa male (my foot)."
       },
       {
        "label": "e",
-       "text": "Si sono tolti ( their hats )."
+       "text": "Si sono tolti (their hats)."
       }
      ]
     }
@@ -2611,27 +2611,27 @@
     {
      "id": "r09-04",
      "n": 4,
-     "instruction": "Which animals are being pointed out at the zoo? Complete the sentences using quello .",
+     "instruction": "Which animals are being pointed out at the zoo? Complete the sentences using quello.",
      "items": [
       {
        "label": "a",
-       "text": "Guarda quella tigre! Quale? ( That one ) lì."
+       "text": "Guarda quella tigre! Quale? (That one) lì."
       },
       {
        "label": "b",
-       "text": "Guarda quel leone! Quale? ( That one ) lì."
+       "text": "Guarda quel leone! Quale? (That one) lì."
       },
       {
        "label": "c",
-       "text": "Hai visto quegli ippopotami? Quali? ( Those ones. Those three .)"
+       "text": "Hai visto quegli ippopotami? Quali? (Those ones. Those three.)"
       },
       {
        "label": "d",
-       "text": "Hai visto quei pappagalli? Quali? ( Those ones. The green ones .)"
+       "text": "Hai visto quei pappagalli? Quali? (Those ones. The green ones.)"
       },
       {
        "label": "e",
-       "text": "Hai visto quell’elefante? Quale? ( That one? ) No, ( that other smaller one )."
+       "text": "Hai visto quell’elefante? Quale? (That one?) No, (that other smaller one)."
       }
      ]
     },
@@ -2642,11 +2642,11 @@
      "items": [
       {
        "label": "a",
-       "text": "This is the kitchen and this is the bathroom right here ."
+       "text": "This is the kitchen and this is the bathroom right here."
       },
       {
        "label": "b",
-       "text": "This is my room here and that’s yours there ."
+       "text": "This is my room here and that’s yours there."
       },
       {
        "label": "c",
@@ -2661,34 +2661,34 @@
     {
      "id": "r09-01",
      "n": 1,
-     "instruction": "Using ciò and questo , give your reactions to the following, and find an Italian equivalent of the English. There may be more than one possibility.",
+     "instruction": "Using ciò and questo, give your reactions to the following, and find an Italian equivalent of the English. There may be more than one possibility.",
      "items": [
       {
        "label": "a",
-       "text": "Riccardo è molto depresso. – That doesn’t interest me ."
+       "text": "Riccardo è molto depresso. – That doesn’t interest me."
       },
       {
        "label": "b",
-       "text": "Sabrina non è ancora arrivata. – That doesn’t mean she won’t come ."
+       "text": "Sabrina non è ancora arrivata. – That doesn’t mean she won’t come."
       },
       {
        "label": "c",
-       "text": "Silvia guadagna meno di Umberto. – That doesn’t seem fair ."
+       "text": "Silvia guadagna meno di Umberto. – That doesn’t seem fair."
       },
       {
        "label": "d",
-       "text": "Sono divorziati. – That isn’t true ."
+       "text": "Sono divorziati. – That isn’t true."
       }
      ]
     },
     {
      "id": "r09-02",
      "n": 2,
-     "instruction": "Saying that’s . Comment on these situations, using an appropriate Italian equivalent for the English responses below.",
+     "instruction": "Saying that’s. Comment on these situations, using an appropriate Italian equivalent for the English responses below.",
      "items": [
       {
        "label": "a",
-       "text": "Marco si è rotto la gamba. – That’s a pity, he can’t go skiing . ( andare a sciare )"
+       "text": "Marco si è rotto la gamba. – That’s a pity, he can’t go skiing. (andare a sciare)"
       },
       {
        "label": "b",
@@ -2700,11 +2700,11 @@
       },
       {
        "label": "d",
-       "text": "Ho perso le chiavi di casa. – That’s a nuisance! Have you got a spare key? ( una chiave di riserva )"
+       "text": "Ho perso le chiavi di casa. – That’s a nuisance! Have you got a spare key? (una chiave di riserva)"
       },
       {
        "label": "e",
-       "text": "Ti posso dare un passaggio? – Thank you, that’s very kind ."
+       "text": "Ti posso dare un passaggio? – Thank you, that’s very kind."
       }
      ]
     },
@@ -2738,7 +2738,7 @@
      "items": [
       {
        "label": "a",
-       "text": "Il treno si è fermato a Prato. – That’s why I am late ."
+       "text": "Il treno si è fermato a Prato. – That’s why I am late."
       },
       {
        "label": "b",
@@ -2750,18 +2750,18 @@
       },
       {
        "label": "d",
-       "text": "Come lo sai che Tilda si separa dal marito? – My brother is a friend of her husband’s, that’s how I know (it) ."
+       "text": "Come lo sai che Tilda si separa dal marito? – My brother is a friend of her husband’s, that’s how I know (it)."
       }
      ]
     },
     {
      "id": "r09-05",
      "n": 5,
-     "instruction": "Find Italian equivalents of the following, choosing between ecco quello che and quello che .",
+     "instruction": "Find Italian equivalents of the following, choosing between ecco quello che and quello che.",
      "items": [
       {
        "label": "a",
-       "text": "To access the internet, this is what you must do … ( avere accesso a )"
+       "text": "To access the internet, this is what you must do … (avere accesso a)"
       },
       {
        "label": "b",
@@ -2769,11 +2769,11 @@
       },
       {
        "label": "c",
-       "text": "Yes, that’s/it’s what I intend to do . ( aver intenzione di )"
+       "text": "Yes, that’s/it’s what I intend to do. (aver intenzione di)"
       },
       {
        "label": "d",
-       "text": "That’s not what I mean ."
+       "text": "That’s not what I mean."
       }
      ]
     }
@@ -2870,7 +2870,7 @@
       },
       {
        "label": "e",
-       "text": "You haven’t paid, have you? ( tu )"
+       "text": "You haven’t paid, have you? (tu)"
       },
       {
        "label": "f",
@@ -2885,7 +2885,7 @@
      "items": [
       {
        "label": "a",
-       "text": "Dimmi un po’ – when (exactly) are you leaving? ( tu )"
+       "text": "Dimmi un po’ – when (exactly) are you leaving? (tu)"
       },
       {
        "label": "b",
@@ -2893,18 +2893,18 @@
       },
       {
        "label": "c",
-       "text": "Dimmi un po’ – since when have you been waiting? ( tu )"
+       "text": "Dimmi un po’ – since when have you been waiting? (tu)"
       }
      ]
     },
     {
      "id": "r10-03",
      "n": 3,
-     "instruction": "Using quando, dove or perchè , give the Italian equivalent(s) of the English: take account of possible different subject positions.",
+     "instruction": "Using quando, dove or perché, give the Italian equivalent(s) of the English: take account of possible different subject positions.",
      "items": [
       {
        "label": "a",
-       "text": "When are you leaving? ( voi )"
+       "text": "When are you leaving? (voi)"
       },
       {
        "label": "b",
@@ -2912,7 +2912,7 @@
       },
       {
        "label": "c",
-       "text": "Where are you going? ( voi )"
+       "text": "Where are you going? (voi)"
       },
       {
        "label": "d",
@@ -2920,7 +2920,7 @@
       },
       {
        "label": "e",
-       "text": "Why are you laughing? ( tu )"
+       "text": "Why are you laughing? (tu)"
       },
       {
        "label": "f",
@@ -2935,15 +2935,15 @@
      "items": [
       {
        "label": "a",
-       "text": "Dimmi ( where the cinema is ). ( trovarsi )"
+       "text": "Dimmi (where the cinema is). (trovarsi)"
       },
       {
        "label": "b",
-       "text": "Mi sai dire ( when Maria is coming back )?"
+       "text": "Mi sai dire (when Maria is coming back)?"
       },
       {
        "label": "c",
-       "text": "Mi dispiace, non so ( when the bank opens )."
+       "text": "Mi dispiace, non so (when the bank opens)."
       }
      ]
     },
@@ -2954,7 +2954,7 @@
      "items": [
       {
        "label": "a",
-       "text": "How come you’re late? ( voi )"
+       "text": "How come you’re late? (voi)"
       },
       {
        "label": "b",
@@ -2962,7 +2962,7 @@
       },
       {
        "label": "c",
-       "text": "What’s your new job like? ( tu )"
+       "text": "What’s your new job like? (tu)"
       },
       {
        "label": "d",
@@ -3027,7 +3027,7 @@
     {
      "id": "r10-08",
      "n": 8,
-     "instruction": "Give the Italian equivalent of the English. Use voi for you .",
+     "instruction": "Give the Italian equivalent of the English. Use voi for you.",
      "items": [
       {
        "label": "a",
@@ -3055,7 +3055,7 @@
       },
       {
        "label": "g",
-       "text": "What do you need? ( aver bisogno di )"
+       "text": "What do you need? (aver bisogno di)"
       },
       {
        "label": "h",
@@ -3070,11 +3070,11 @@
      "items": [
       {
        "label": "a",
-       "text": "How much spaghetti do you want? ( tu )"
+       "text": "How much spaghetti do you want? (tu)"
       },
       {
        "label": "b",
-       "text": "How much sauce do you want? ( tu )"
+       "text": "How much sauce do you want? (tu)"
       },
       {
        "label": "c",
@@ -3082,30 +3082,30 @@
       },
       {
        "label": "d",
-       "text": "I don’t know how many eggs are left (remain) ."
+       "text": "I don’t know how many eggs are left (remain)."
       }
      ]
     },
     {
      "id": "r10-14",
      "n": 14,
-     "instruction": "Ask the following in Italian, using quanto .",
+     "instruction": "Ask the following in Italian, using quanto.",
      "items": [
       {
        "label": "a",
-       "text": "How far (away) is your house? ( tu )"
+       "text": "How far (away) is your house? (tu)"
       },
       {
        "label": "b",
-       "text": "How long do you take to get there? ( lei ) ( impiegare/metterci )"
+       "text": "How long do you take to get there? (lei) (impiegare/metterci)"
       },
       {
        "label": "c",
-       "text": "How big is your kitchen? ( lei )"
+       "text": "How big is your kitchen? (lei)"
       },
       {
        "label": "d",
-       "text": "How wide is it? ( largo/a )"
+       "text": "How wide is it? (largo/a)"
       },
       {
        "label": "e",
@@ -3139,31 +3139,31 @@
     {
      "id": "r10-01",
      "n": 1,
-     "instruction": "Complete the sentences by substituting the correct Italian verb in place of the English. Use tu for you .",
+     "instruction": "Complete the sentences by substituting the correct Italian verb in place of the English. Use tu for you.",
      "items": [
       {
        "label": "a",
-       "text": "Perché ( pay ) più del necessario?"
+       "text": "Perché (pay) più del necessario?"
       },
       {
        "label": "b",
-       "text": "Ma perché ( help him )? Non è mica un bambino!"
+       "text": "Ma perché (help him)? Non è mica un bambino!"
       },
       {
        "label": "c",
-       "text": "Ma perché ( get angry )? Non c’è più niente da fare."
+       "text": "Ma perché (get angry)? Non c’è più niente da fare."
       },
       {
        "label": "d",
-       "text": "Che lo ( are you calling ) a fare? Non è mai in casa."
+       "text": "Che lo (are you calling) a fare? Non è mai in casa."
       },
       {
        "label": "e",
-       "text": "Che ci ( are you going ) a fare a Londra?"
+       "text": "Che ci (are you going) a fare a Londra?"
       },
       {
        "label": "f",
-       "text": "Che ci ( are you doing ) qui?"
+       "text": "Che ci (are you doing) qui?"
       }
      ]
     },
@@ -3189,35 +3189,35 @@
      "items": [
       {
        "label": "a",
-       "text": "Dimmi _____ vuoi. ( che cosa/quello che/ciò che ) Tell me what you want ."
+       "text": "Dimmi _____ vuoi. (che cosa/quello che/ciò che) Tell me what you want."
       },
       {
        "label": "b",
-       "text": "Fa’ _____ ti dico. ( che cosa/quello che/ciò che ) Do what I tell you ."
+       "text": "Fa’ _____ ti dico. (che cosa/quello che/ciò che) Do what I tell you."
       },
       {
        "label": "c",
-       "text": "Voglio sapere _____ viene. ( chi/che ) I want to know who is coming ."
+       "text": "Voglio sapere _____ viene. (chi/che) I want to know who is coming."
       },
       {
        "label": "d",
-       "text": "Gli ospiti _____ vengono sono italiani. ( chi/che ) The guests who are coming are Italian ."
+       "text": "Gli ospiti _____ vengono sono italiani. (chi/che) The guests who are coming are Italian."
       },
       {
        "label": "e",
-       "text": "Non mi hai detto con _____ giochi a tennis. ( con chi/con cui ) You haven’t told me who you play tennis with ."
+       "text": "Non mi hai detto con _____ giochi a tennis. (con chi/con cui) You haven’t told me who you play tennis with."
       },
       {
        "label": "f",
-       "text": "La ragazza _____ esci è simpaticissima. ( con chi/con cui ) The girl you go out with is extremely nice ."
+       "text": "La ragazza _____ esci è simpaticissima. (con chi/con cui) The girl you go out with is extremely nice."
       },
       {
        "label": "g",
-       "text": "Mi dai una penna _____ funziona? ( quale/che ) Can you give me a pen which works?"
+       "text": "Mi dai una penna _____ funziona? (quale/che) Can you give me a pen which works?"
       },
       {
        "label": "h",
-       "text": "Non so _____ penna funziona. ( quale/che ) I don’t know which pen works ."
+       "text": "Non so _____ penna funziona. (quale/che) I don’t know which pen works."
       }
      ]
     }
@@ -3245,8 +3245,8 @@
      "instruction": "How do you react? Choose the most appropriate exclamation(s) to fit the situation.",
      "items": [
       {
-       "label": "",
-       "text": "(a) Your friends say they can’t come: che delusione! che peccato! che noia!"
+       "label": "a",
+       "text": "Your friends say they can’t come: che delusione! che peccato! che noia!"
       },
       {
        "label": "b",
@@ -3338,19 +3338,19 @@
      "items": [
       {
        "label": "a",
-       "text": "You’ve been invited to a concert . (i) Che bella! (ii) Che bello! (iii) Com’è bello"
+       "text": "You’ve been invited to a concert. (i) Che bella! (ii) Che bello! (iii) Com’è bello!"
       },
       {
        "label": "b",
-       "text": "That’s odd, your friend hasn’t turned up . (i) Com’è strano! (ii) Quant’è strano! (iii) Che strano!"
+       "text": "That’s odd, your friend hasn’t turned up. (i) Com’è strano! (ii) Quant’è strano! (iii) Che strano!"
       },
       {
        "label": "c",
-       "text": "The ice cream is delicious . (i) Che squisito! (ii) Che buono! (iii) Che gelato squisito!"
+       "text": "The ice cream is delicious. (i) Che squisito! (ii) Che buono! (iii) Che gelato squisito!"
       },
       {
        "label": "d",
-       "text": "That boy’s so clever . (i) Com’è bravo! (ii) Quant’è bravo! (iii) Che bravo!"
+       "text": "That boy’s so clever. (i) Com’è bravo! (ii) Quant’è bravo! (iii) Che bravo!"
       }
      ]
     },
@@ -3361,35 +3361,35 @@
      "items": [
       {
        "label": "a",
-       "text": "( Bother! ) ho dimenticato di chiudere la porta a chiave!"
+       "text": "(Bother!) ho dimenticato di chiudere la porta a chiave!"
       },
       {
        "label": "b",
-       "text": "Corrado ha dato del tu al preside! – ( You don’t say! ) E che cosa gli è successo?"
+       "text": "Corrado ha dato del tu al preside! – (You don’t say!) E che cosa gli è successo?"
       },
       {
        "label": "c",
-       "text": "Come sto? – ( Wow! Fantastic! ), sembri una diva con quel vestito!"
+       "text": "Come sto? – (Wow! Fantastic!), sembri una diva con quel vestito!"
       },
       {
        "label": "d",
-       "text": "Abbiamo finito tutti quanti i compiti. – ( Well done! )"
+       "text": "Abbiamo finito tutti quanti i compiti. – (Well done!)"
       },
       {
        "label": "e",
-       "text": "Alberto è stato ricoverato in ospedale. – ( Oh dear! ), che cos’ha?"
+       "text": "Alberto è stato ricoverato in ospedale. – (Oh dear!), che cos’ha?"
       },
       {
        "label": "f",
-       "text": "Non vengo prima delle sei stasera – ( For goodness sake!/Damn it! ), me lo potevi dire prima!"
+       "text": "Non vengo prima delle sei stasera. – (For goodness sake!/Damn it!), me lo potevi dire prima!"
       },
       {
        "label": "g",
-       "text": "Vieni con noi domani? – ( You must be joking!/Of course not! ), domani c’è l’esame! – ( My goodness/Oh dear ), avevo dimenticato!"
+       "text": "Vieni con noi domani? – (You must be joking!/Of course not!), domani c’è l’esame! – (My goodness/Oh dear), avevo dimenticato!"
       },
       {
        "label": "h",
-       "text": "Vuoi un’altra fetta di torta? – ( Heaven forbid!/Good heavens no! ), sto a dieta!"
+       "text": "Vuoi un’altra fetta di torta? – (Heaven forbid!/Good heavens no!), sto a dieta!"
       }
      ]
     }
@@ -3445,7 +3445,7 @@
     {
      "id": "r12-01",
      "n": 1,
-     "instruction": "Complete the sentences by inserting the Italian equivalent of something, anything, someone, anyone, nothing, no one .",
+     "instruction": "Complete the sentences by inserting the Italian equivalent of something, anything, someone, anyone, nothing, no one.",
      "items": [
       {
        "label": "a",
@@ -3461,7 +3461,7 @@
       },
       {
        "label": "d",
-       "text": "Non c’è _____ in giro. ( around )"
+       "text": "Non c’è _____ in giro. (around)"
       },
       {
        "label": "e",
@@ -3480,19 +3480,19 @@
      "items": [
       {
        "label": "a",
-       "text": "Do you want anything/something? ( Lei )"
+       "text": "Do you want anything/something? (Lei)"
       },
       {
        "label": "b",
-       "text": "I don’t know anyone called Orazio ."
+       "text": "I don’t know anyone called Orazio."
       },
       {
        "label": "c",
-       "text": "There’s someone on the phone ."
+       "text": "There’s someone on the phone."
       },
       {
        "label": "d",
-       "text": "I don’t need anything ."
+       "text": "I don’t need anything."
       },
       {
        "label": "e",
@@ -3511,30 +3511,30 @@
      "items": [
       {
        "label": "a",
-       "text": "Avete scattato delle belle foto? – Yes, some/a few/the odd one ."
+       "text": "Avete scattato delle belle foto? – Yes, some/a few/the odd one."
       },
       {
        "label": "b",
-       "text": "Hai ricevuto qualche bel regalo? – Yes, some/a few/the odd one ."
+       "text": "Hai ricevuto qualche bel regalo? – Yes, some/a few/the odd one."
       },
       {
        "label": "c",
-       "text": "Avete dei progetti interessanti per quest’estate? – No, none ."
+       "text": "Avete dei progetti interessanti per quest’estate? – No, none."
       },
       {
        "label": "d",
-       "text": "Mi serve un foglio di carta. – Ce n’è ( some/a few ) sulla scrivania."
+       "text": "Mi serve un foglio di carta. – Ce n’è (some/a few) sulla scrivania."
       },
       {
        "label": "e",
-       "text": "Hai per caso qualche busta? – Sì, ce n’è ( some/a few ) nel cassetto."
+       "text": "Hai per caso qualche busta? – Sì, ce n’è (some/a few) nel cassetto."
       }
      ]
     },
     {
      "id": "r12-07",
      "n": 7,
-     "instruction": "Complete the sentences using the appropriate form of the pronoun ognuno .",
+     "instruction": "Complete the sentences using the appropriate form of the pronoun ognuno.",
      "items": [
       {
        "label": "a",
@@ -3561,11 +3561,11 @@
     {
      "id": "r12-08",
      "n": 8,
-     "instruction": "Complete the sentences using the correct form of the pronoun ciascuno .",
+     "instruction": "Complete the sentences using the correct form of the pronoun ciascuno.",
      "items": [
       {
        "label": "a",
-       "text": "Le cartoline costano un euro 20 centesimi _____."
+       "text": "Le cartoline costano un euro e 20 centesimi _____."
       },
       {
        "label": "b",
@@ -3596,27 +3596,27 @@
      "items": [
       {
        "label": "a",
-       "text": "Everyone needs affection ."
+       "text": "Everyone needs affection."
       },
       {
        "label": "b",
-       "text": "Every one of his daughters married a rich man ."
+       "text": "Every one of his daughters married a rich man."
       },
       {
        "label": "c",
-       "text": "In all four restaurants the waiters are unpleasant ."
+       "text": "In all four restaurants the waiters are unpleasant."
       },
       {
        "label": "d",
-       "text": "All of you must make an effort ."
+       "text": "All of you must make an effort."
       },
       {
        "label": "e",
-       "text": "Each of you deserves a prize . ( meritare )"
+       "text": "Each of you deserves a prize. (meritare)"
       },
       {
        "label": "f",
-       "text": "The lilies are expensive. They cost 10 euros each . ( gigli )"
+       "text": "The lilies are expensive. They cost 10 euros each. (gigli)"
       }
      ]
     },
@@ -3646,7 +3646,7 @@
     {
      "id": "r12-01",
      "n": 1,
-     "instruction": "Complete these sentences using ogni or qualche .",
+     "instruction": "Complete these sentences using ogni or qualche.",
      "items": [
       {
        "label": "a",
@@ -3654,11 +3654,11 @@
       },
       {
        "label": "b",
-       "text": "______ volta mi saluta, ma non sempre."
+       "text": "_____ volta mi saluta, ma non sempre."
       },
       {
        "label": "c",
-       "text": "Vado in Italian _____ anno."
+       "text": "Vado in Italia _____ anno."
       },
       {
        "label": "d",
@@ -3700,23 +3700,23 @@
     {
      "id": "r12-05",
      "n": 5,
-     "instruction": "Answer the questions in Italian, taking care to give the correct equivalent of any .",
+     "instruction": "Answer the questions in Italian, taking care to give the correct equivalent of any.",
      "items": [
       {
        "label": "a",
-       "text": "A che ora ti chiamo? – At any time ."
+       "text": "A che ora ti chiamo? – At any time."
       },
       {
        "label": "b",
-       "text": "Che colore preferisci? – Any colour is fine ."
+       "text": "Che colore preferisci? – Any colour is fine."
       },
       {
        "label": "c",
-       "text": "Che vino beviamo? – Any one you want ."
+       "text": "Che vino beviamo? – Any one you want."
       },
       {
        "label": "d",
-       "text": "Un whiskey? Che marca vuoi? – Any will do ."
+       "text": "Un whisky? Che marca vuoi? – Any will do."
       }
      ]
     },
@@ -3738,47 +3738,47 @@
     {
      "id": "r12-01",
      "n": 1,
-     "instruction": "Substitute the English with appropriate forms of tutto .",
+     "instruction": "Substitute the English with appropriate forms of tutto.",
      "items": [
       {
        "label": "a",
-       "text": "Abbiamo organizzato ( everything )."
+       "text": "Abbiamo organizzato (everything)."
       },
       {
        "label": "b",
-       "text": "Vengono ( everyone )?"
+       "text": "Vengono (everyone)?"
       },
       {
        "label": "c",
-       "text": "Siamo ( all ) qui."
+       "text": "Siamo (all) qui."
       },
       {
        "label": "d",
-       "text": "Hanno dimenticato ( all the ) libri."
+       "text": "Hanno dimenticato (all the) libri."
       },
       {
        "label": "e",
-       "text": "Sono stato a letto ( the whole/all ) giornata."
+       "text": "Sono stato a letto (the whole/all) giornata."
       },
       {
        "label": "f",
-       "text": "Lavoro ( every ) sere."
+       "text": "Lavoro (every) sere."
       },
       {
        "label": "g",
-       "text": "Vengono ( absolutely everyone ) da noi."
+       "text": "Vengono (absolutely everyone) da noi."
       },
       {
        "label": "h",
-       "text": "La minestra ti fa bene. La devi mangiare ( the whole lot )."
+       "text": "La minestra ti fa bene. La devi mangiare (the whole lot)."
       },
       {
        "label": "i",
-       "text": "( The entire ) commissione sarà rieletta."
+       "text": "(The entire) commissione sarà rieletta."
       },
       {
        "label": "j",
-       "text": "( Every single ) studenti sono stati bocciati."
+       "text": "(Every single) studenti sono stati bocciati."
       }
      ]
     },
@@ -3789,19 +3789,19 @@
      "items": [
       {
        "label": "a",
-       "text": "( All three ) case danno sul mare."
+       "text": "(All three) case danno sul mare."
       },
       {
        "label": "b",
-       "text": "( All five ) appartamenti sono lussuosi."
+       "text": "(All five) appartamenti sono lussuosi."
       },
       {
        "label": "c",
-       "text": "( All four of ) mie sorelle sono insegnanti."
+       "text": "(All four of) mie sorelle sono insegnanti."
       },
       {
        "label": "d",
-       "text": "( All six ) giudici sono corrotti."
+       "text": "(All six) giudici sono corrotti."
       }
      ]
     },
@@ -3847,7 +3847,7 @@
       },
       {
        "label": "b",
-       "text": "I have met you somewhere . ( conoscere )"
+       "text": "I have met you somewhere. (conoscere)"
       },
       {
        "label": "c",
@@ -3855,15 +3855,15 @@
       },
       {
        "label": "d",
-       "text": "I don’t want to go anywhere ."
+       "text": "I don’t want to go anywhere."
       },
       {
        "label": "e",
-       "text": "I don’t want to go anywhere else ."
+       "text": "I don’t want to go anywhere else."
       },
       {
        "label": "f",
-       "text": "I’ve looked everywhere/all over the place ."
+       "text": "I’ve looked everywhere/all over the place."
       }
      ]
     },
@@ -3893,15 +3893,15 @@
      "items": [
       {
        "label": "a",
-       "text": "I eat whenever I want to, at any time of the day ."
+       "text": "I eat whenever I want to, at any time of the day."
       },
       {
        "label": "b",
-       "text": "Whenever you feel like it, come and see me . ( tu )"
+       "text": "Whenever you feel like it, come and see me. (tu)"
       },
       {
        "label": "c",
-       "text": "I need to be in touch at all times/at a moment’s notice ."
+       "text": "I need to be in touch at all times/at a moment’s notice."
       }
      ]
     }
@@ -3955,7 +3955,7 @@
       },
       {
        "label": "b",
-       "text": "Eduardo è un lontano cugino. Edoardo lavora a Parigi."
+       "text": "Edoardo è un lontano cugino. Edoardo lavora a Parigi."
       },
       {
        "label": "c",
@@ -3967,7 +3967,7 @@
       },
       {
        "label": "e",
-       "text": "‘Roma Città Aperta’ è un film di Rossellini. Non ho mai visto ‘Roma Città Aperta’ ."
+       "text": "‘Roma Città Aperta’ è un film di Rossellini. Non ho mai visto ‘Roma Città Aperta’."
       }
      ]
     },
@@ -3978,22 +3978,22 @@
      "items": [
       {
        "label": "a",
-       "text": "The flat I rented is on the first floor . ( affittare )"
+       "text": "The flat I rented is on the first floor. (affittare)"
       },
       {
        "label": "b",
-       "text": "The man you met is the landlady’s husband who is leaving today . ( la padrona )"
+       "text": "The man you met is the landlady’s husband who is leaving today. (la padrona)"
       },
       {
        "label": "c",
-       "text": "They have raised the rent, which isn’t fair . ( l’affitto )"
+       "text": "They have raised the rent, which isn’t fair. (l’affitto)"
       }
      ]
     },
     {
      "id": "r13-03",
      "n": 3,
-     "instruction": "Identify the two sentences below in which both che and il/la quale , etc. can be used. (Remember that il quale is not used as a direct object.) Then, for the remaining two sentences, supply the appropriate pronoun.",
+     "instruction": "Identify the two sentences below in which both che and il/la quale, etc. can be used. (Remember that il quale is not used as a direct object.) Then, for the remaining two sentences, supply the appropriate pronoun.",
      "items": [
       {
        "label": "a",
@@ -4020,19 +4020,19 @@
      "items": [
       {
        "label": "a",
-       "text": "What you’re doing is absurd ."
+       "text": "What you’re doing is absurd."
       },
       {
        "label": "b",
-       "text": "You can do what you want ."
+       "text": "You can do what you want."
       },
       {
        "label": "c",
-       "text": "I will do what I can ."
+       "text": "I will do what I can."
       },
       {
        "label": "d",
-       "text": "What I don’t like is the colour ."
+       "text": "What I don’t like is the colour."
       },
       {
        "label": "e",
@@ -4044,7 +4044,7 @@
       },
       {
        "label": "g",
-       "text": "I don’t know what to do ."
+       "text": "I don’t know what to do."
       }
      ]
     },
@@ -4055,11 +4055,11 @@
      "items": [
       {
        "label": "a",
-       "text": "Il professor Binni è un insegnante. Ho molto rispetto per il Professor Binni ."
+       "text": "Il professor Binni è un insegnante. Ho molto rispetto per il professor Binni."
       },
       {
        "label": "b",
-       "text": "Carlotta è la nipote. Ho regalato una bicicletta a Carlotta ."
+       "text": "Carlotta è la nipote. Ho regalato una bicicletta a Carlotta."
       },
       {
        "label": "c",
@@ -4078,42 +4078,42 @@
     {
      "id": "r13-04",
      "n": 4,
-     "instruction": "Family matters . Give the Italian equivalent of the English.",
+     "instruction": "Family matters. Give the Italian equivalent of the English.",
      "items": [
       {
        "label": "a",
-       "text": "1905 is the year my grandfather was born ."
+       "text": "1905 is the year my grandfather was born."
       },
       {
        "label": "b",
-       "text": "The reason(s) he emigrated are not clear ."
+       "text": "The reason(s) he emigrated are not clear."
       },
       {
        "label": "c",
-       "text": "The house in London he lived in was bombed during the war . ( è stata bombardata )"
+       "text": "The house in London he lived in was bombed during the war. (è stata bombardata)"
       }
      ]
     },
     {
      "id": "r13-01",
      "n": 1,
-     "instruction": "Give the Italian equivalent of the English. Use tu for you . In sentence (e) there are two possibilities.",
+     "instruction": "Give the Italian equivalent of the English. Use tu for you. In sentence (e) there are two possibilities.",
      "items": [
       {
        "label": "a",
-       "text": "Quale piatto prendo? – The one you prefer ."
+       "text": "Quale piatto prendo? – The one you prefer."
       },
       {
        "label": "b",
-       "text": "Quali riviste compro? – The ones you want ."
+       "text": "Quali riviste compro? – The ones you want."
       },
       {
        "label": "c",
-       "text": "Non mi piace quella ragazza. – Quale? – The one who studies medicine ."
+       "text": "Non mi piace quella ragazza. – Quale? – The one who studies medicine."
       },
       {
        "label": "d",
-       "text": "Mi presti qualche libro? – Of course, take whichever/the ones you want ."
+       "text": "Mi presti qualche libro? – Of course, take whichever/the ones you want."
       },
       {
        "label": "e",
@@ -4124,7 +4124,7 @@
     {
      "id": "r13-06",
      "n": 6,
-     "instruction": "Times are hard . The readers of a woman’s magazine have been asked to blog and say what they won’t give up under any circumstances. Read the short article and answer the question. In questo momento di crisi economica abbiamo chiesto alle nostre blogger: ‘A che cosa di non strettamente necessario non siete comunque disposte a rinunciare?’ Ecco i risultati del sondaggio. Assolutamente non voglio rinunciare a:",
+     "instruction": "Times are hard. The readers of a woman’s magazine have been asked to blog and say what they won’t give up under any circumstances. Read the short article and answer the question. In questo momento di crisi economica abbiamo chiesto alle nostre blogger: ‘A che cosa di non strettamente necessario non siete comunque disposte a rinunciare?’ Ecco i risultati del sondaggio. Assolutamente non voglio rinunciare a:",
      "items": [
       {
        "label": "",
@@ -4187,7 +4187,7 @@
      "items": [
       {
        "label": "a",
-       "text": "Ti chiami Edda? – No, my name isn’t Edda, it’s Emma ."
+       "text": "Ti chiami Edda? – No, my name isn’t Edda, it’s Emma."
       },
       {
        "label": "b",
@@ -4195,22 +4195,22 @@
       },
       {
        "label": "c",
-       "text": "Perché lo chiami? – Because I’d like to know if he’s paid or not ."
+       "text": "Perché lo chiami? – Because I’d like to know if he’s paid or not."
       },
       {
        "label": "d",
-       "text": "Prendi l’aereo? – No, I like to travel by train, not by plane ."
+       "text": "Prendi l’aereo? – No, I like to travel by train, not by plane."
       },
       {
        "label": "e",
-       "text": "Prendiamo un bicchierino insieme? – No, I’m sorry, no wine today ."
+       "text": "Prendiamo un bicchierino insieme? – No, I’m sorry, no wine today."
       }
      ]
     },
     {
      "id": "r14-01",
      "n": 1,
-     "instruction": "The right word for the right situation . Choose the appropriate response from the ones given. There are a few cases where either will do.",
+     "instruction": "The right word for the right situation. Choose the appropriate response from the ones given. There are a few cases where either will do.",
      "items": [
       {
        "label": "a",
@@ -4253,27 +4253,27 @@
      "items": [
       {
        "label": "a",
-       "text": "I haven’t seen anyone ."
+       "text": "I haven’t seen anyone."
       },
       {
        "label": "b",
-       "text": "He has never seen Mont Blanc ."
+       "text": "He has never seen Mont Blanc."
       },
       {
        "label": "c",
-       "text": "She hasn’t left yet ."
+       "text": "She hasn’t left yet."
       },
       {
        "label": "d",
-       "text": "I don’t want to eat anything ."
+       "text": "I don’t want to eat anything."
       },
       {
        "label": "e",
-       "text": "She never wants to help ."
+       "text": "She never wants to help."
       },
       {
        "label": "f",
-       "text": "I don’t want to come any more ."
+       "text": "I don’t want to come any more."
       }
      ]
     },
@@ -4284,26 +4284,26 @@
      "items": [
       {
        "label": "a",
-       "text": "I don’t like it at all ."
+       "text": "I don’t like it at all."
       },
       {
        "label": "b",
-       "text": "I don’t know him at all ."
+       "text": "I don’t know him at all."
       },
       {
        "label": "c",
-       "text": "He isn’t in the least unpleasant ."
+       "text": "He isn’t in the least unpleasant."
       },
       {
        "label": "d",
-       "text": "You simply mustn’t leave ."
+       "text": "You simply mustn’t leave."
       }
      ]
     },
     {
      "id": "r14-01",
      "n": 1,
-     "instruction": "Surely not? You’re hoping your worst fears won’t be realised. Put the following into Italian, using tu for you .",
+     "instruction": "Surely not? You’re hoping your worst fears won’t be realised. Put the following into Italian, using tu for you.",
      "items": [
       {
        "label": "a",
@@ -4315,7 +4315,7 @@
       },
       {
        "label": "c",
-       "text": "Surely you haven’t left the oven on, have you? ( lasciare acceso il forno )"
+       "text": "Surely you haven’t left the oven on, have you? (lasciare acceso il forno)"
       }
      ]
     },
@@ -4326,27 +4326,27 @@
      "items": [
       {
        "label": "a",
-       "text": "He never explains anything ."
+       "text": "He never explains anything."
       },
       {
        "label": "b",
-       "text": "He won’t offend anyone again/ any more ."
+       "text": "He won’t offend anyone again/ any more."
       },
       {
        "label": "c",
-       "text": "There is nothing else left ."
+       "text": "There is nothing else left."
       },
       {
        "label": "d",
-       "text": "I haven’t found anything yet ."
+       "text": "I haven’t found anything yet."
       },
       {
        "label": "e",
-       "text": "I didn’t actually find anything ."
+       "text": "I didn’t actually find anything."
       },
       {
        "label": "f",
-       "text": "I won’t say anything to anyone ."
+       "text": "I won’t say anything to anyone."
       }
      ]
     }
@@ -4394,31 +4394,31 @@
      "items": [
       {
        "label": "a",
-       "text": "I live on the top floor . ( ultimo )"
+       "text": "I live on the top floor. (ultimo)"
       },
       {
        "label": "b",
-       "text": "The restaurant is on the corner, on the right ."
+       "text": "The restaurant is on the corner, on the right."
       },
       {
        "label": "c",
-       "text": "The bookshop is 200 metres from my house ."
+       "text": "The bookshop is 200 metres from my house."
       },
       {
        "label": "d",
-       "text": "I live in a town southwest of London . ( sud ovest )"
+       "text": "I live in a town southwest of London. (sud ovest)"
       },
       {
        "label": "e",
-       "text": "There is an interesting film on television ."
+       "text": "There is an interesting film on television."
       },
       {
        "label": "f",
-       "text": "Your mother’s on the phone ."
+       "text": "Your mother’s on the phone."
       },
       {
        "label": "g",
-       "text": "See you in December, at Christmas ."
+       "text": "See you in December, at Christmas."
       },
       {
        "label": "h",
@@ -4433,19 +4433,19 @@
      "items": [
       {
        "label": "a",
-       "text": "I must go to France ."
+       "text": "I must go to France."
       },
       {
        "label": "b",
-       "text": "I must ring Italy ."
+       "text": "I must ring Italy."
       },
       {
        "label": "c",
-       "text": "I’m going by plane ."
+       "text": "I’m going by plane."
       },
       {
        "label": "d",
-       "text": "Let’s go into/enter the shop ."
+       "text": "Let’s go into/enter the shop."
       },
       {
        "label": "e",
@@ -4453,34 +4453,34 @@
       },
       {
        "label": "f",
-       "text": "It’s in the drawer . ( il cassetto )"
+       "text": "It’s in the drawer. (il cassetto)"
       },
       {
        "label": "g",
-       "text": "I sleep on the train ."
+       "text": "I sleep on the train."
       }
      ]
     },
     {
      "id": "r15-03",
      "n": 3,
-     "instruction": "Answer the questions, giving the Italian equivalent of the English using in or a .",
+     "instruction": "Answer the questions, giving the Italian equivalent of the English using in or a.",
      "items": [
       {
        "label": "a",
-       "text": "A chi devi telefonare? – I have to phone my cousin (f.) in Italy, in Rome ."
+       "text": "A chi devi telefonare? – I have to phone my cousin (f.) in Italy, in Rome."
       },
       {
        "label": "b",
-       "text": "È difficile imparare a guidare? – No, you can learn in (a) few months ."
+       "text": "È difficile imparare a guidare? – No, you can learn in (a) few months."
       },
       {
        "label": "c",
-       "text": "In quanti siete? – There are six of us ."
+       "text": "In quanti siete? – There are six of us."
       },
       {
        "label": "d",
-       "text": "Quand’è che è nato Piero? – He was born in April at 5, at dawn ."
+       "text": "Quand’è che è nato Piero? – He was born in April at 5, at dawn."
       }
      ]
     },
@@ -4597,7 +4597,7 @@
     {
      "id": "r15-07",
      "n": 7,
-     "instruction": "Where are you meeting? Choose between a, da and in . Begin: Ci vediamo …",
+     "instruction": "Where are you meeting? Choose between a, da and in. Begin: Ci vediamo …",
      "items": [
       {
        "label": "a",
@@ -4718,7 +4718,7 @@
     {
      "id": "r15-10",
      "n": 10,
-     "instruction": "Insert the correct preposition – di or da .",
+     "instruction": "Insert the correct preposition – di or da.",
      "items": [
       {
        "label": "a",
@@ -4749,31 +4749,31 @@
     {
      "id": "r15-11",
      "n": 11,
-     "instruction": "Complete the words for clothing and personal effects below using di, a or da . Bear in mind that a usually denotes design or how something is made, da generally indicates what something is for, while di tells you what something consists of.",
+     "instruction": "Complete the words for clothing and personal effects below using di, a or da. Bear in mind that a usually denotes design or how something is made, da generally indicates what something is for, while di tells you what something consists of.",
      "items": [
       {
        "label": "a",
-       "text": "un anello _____ oro ( a gold ring )"
+       "text": "un anello _____ oro (a gold ring)"
       },
       {
        "label": "b",
-       "text": "un abito _____ sera ( an evening dress )"
+       "text": "un abito _____ sera (an evening dress)"
       },
       {
        "label": "c",
-       "text": "una gonna _____ fiori ( a flowery skirt )"
+       "text": "una gonna _____ fiori (a flowery skirt)"
       },
       {
        "label": "d",
-       "text": "un cappello _____ paglia ( a straw hat )"
+       "text": "un cappello _____ paglia (a straw hat)"
       },
       {
        "label": "e",
-       "text": "occhiali _____ sole ( sunglasses )"
+       "text": "occhiali _____ sole (sunglasses)"
       },
       {
        "label": "f",
-       "text": "una camicia _____ quadretti ( a checked shirt )"
+       "text": "una camicia _____ quadretti (a checked shirt)"
       }
      ]
     },
@@ -4784,23 +4784,23 @@
      "items": [
       {
        "label": "a",
-       "text": "Che lavoro fa? – I work for an airline company . ( una compagnia aerea )"
+       "text": "Che lavoro fa? – I work for an airline company. (una compagnia aerea)"
       },
       {
        "label": "b",
-       "text": "Lei è qui in vacanza? – No, I’m here on business ."
+       "text": "Lei è qui in vacanza? – No, I’m here on business."
       },
       {
        "label": "c",
-       "text": "Lei per che cosa è qui? – I’m here to learn Italian. It’s for my job ."
+       "text": "Lei per che cosa è qui? – I’m here to learn Italian. It’s for my job."
       },
       {
        "label": "d",
-       "text": "Quanto si trattiene a Milano? – I’m staying for a month . ( mi trattengo )"
+       "text": "Quanto si trattiene a Milano? – I’m staying for a month. (mi trattengo)"
       },
       {
        "label": "e",
-       "text": "È libero domani? – I’m sorry, I have lots of appointments for tomorrow ."
+       "text": "È libero domani? – I’m sorry, I have lots of appointments for tomorrow."
       }
      ]
     },
@@ -4811,22 +4811,22 @@
      "items": [
       {
        "label": "a",
-       "text": "I tifosi giravano ( through/about ) la città."
+       "text": "I tifosi giravano (through/about) la città."
       },
       {
        "label": "b",
-       "text": "Erano seduti ( on the ground )."
+       "text": "Erano seduti (on the ground)."
       },
       {
        "label": "c",
-       "text": "L’ho incontrato ( in the street )."
+       "text": "L’ho incontrato (in the street)."
       }
      ]
     },
     {
      "id": "r15-20",
      "n": 20,
-     "instruction": "Substitute the prepositions in and da with con , making any necessary changes.",
+     "instruction": "Substitute the prepositions in and da with con, making any necessary changes.",
      "items": [
       {
        "label": "a",
@@ -4990,7 +4990,7 @@
       },
       {
        "label": "f",
-       "text": "Oltre i libri, ci hato dato delle videocassette."
+       "text": "Oltre i libri, ci hanno dato delle videocassette."
       }
      ]
     },
@@ -5059,35 +5059,35 @@
      "items": [
       {
        "label": "a",
-       "text": "I am fed up with my job ."
+       "text": "I am fed up with my job."
       },
       {
        "label": "b",
-       "text": "I am satisfied with the results ."
+       "text": "I am satisfied with the results."
       },
       {
        "label": "c",
-       "text": "I am pleased to meet you ."
+       "text": "I am pleased to meet you."
       },
       {
        "label": "d",
-       "text": "I would be happy to help ."
+       "text": "I would be happy to help."
       },
       {
        "label": "e",
-       "text": "He is nice to me ."
+       "text": "He is nice to me."
       },
       {
        "label": "f",
-       "text": "She is married to an engineer ."
+       "text": "She is married to an engineer."
       },
       {
        "label": "g",
-       "text": "She is in love with Pino ."
+       "text": "She is in love with Pino."
       },
       {
        "label": "h",
-       "text": "Alfonso always wears black ."
+       "text": "Alfonso always wears black."
       }
      ]
     },
@@ -5098,15 +5098,15 @@
      "items": [
       {
        "label": "a",
-       "text": "I piumini sono ( filled with ) fibre sintetiche."
+       "text": "I piumini sono (filled with) fibre sintetiche."
       },
       {
        "label": "b",
-       "text": "È un piatto realizzato con polenta ( filled/stuffed with ) funghi e formaggio."
+       "text": "È un piatto realizzato con polenta (filled/stuffed with) funghi e formaggio."
       },
       {
        "label": "c",
-       "text": "La vasca del bagno è ( full of ) acqua sporchissima."
+       "text": "La vasca del bagno è (full of) acqua sporchissima."
       }
      ]
     },
@@ -5148,19 +5148,19 @@
      "items": [
       {
        "label": "a",
-       "text": "The cause of the accident is not clear ."
+       "text": "The cause of the accident is not clear."
       },
       {
        "label": "b",
-       "text": "My sister is an expert on Medieval Italy ."
+       "text": "My sister is an expert on Medieval Italy."
       },
       {
        "label": "c",
-       "text": "His love of animals is well known ."
+       "text": "His love of animals is well known."
       },
       {
        "label": "d",
-       "text": "Her aversion to cats was extraordinary ."
+       "text": "Her aversion to cats was extraordinary."
       }
      ]
     }
@@ -5239,7 +5239,18 @@
     {
      "id": "r16-01",
      "n": 1,
-     "instruction": "Complete the text below by using the connectives given. • e anche • e • inoltre • in più • oltre a Durante le vacanze sono andato in giro con mio fratello. Abbiamo visitato tutta la Campania, ( 1 and also ) la Sicilia. ( 2 Also/In addition ) siamo stati nelle isole Eolie al largo della Sicilia. In Campania abbiamo visto Napoli, Salerno, Amalfi ( 3 and ) Ravello. In Sicilia siamo stati un po’ dappertutto. ( 4 As well as ) visitare le città principali di Messina, Palermo, Catania, Siracusa e Trapani, siamo stati nel centro, a Enna e ( 5 in addition ) abbiamo visitato Erice e il tempio di Segesta. ▲ 2 Give the English equivalent of the following sentences.",
+     "instruction": "Complete the text below by using the connectives given. • e anche • e • inoltre • in più • oltre a",
+     "items": [
+      {
+       "label": "",
+       "text": "Durante le vacanze sono andato in giro con mio fratello. Abbiamo visitato tutta la Campania, (1 and also) la Sicilia. (2 Also/In addition) siamo stati nelle isole Eolie al largo della Sicilia. In Campania abbiamo visto Napoli, Salerno, Amalfi (3 and) Ravello. In Sicilia siamo stati un po’ dappertutto. (4 As well as) visitare le città principali di Messina, Palermo, Catania, Siracusa e Trapani, siamo stati nel centro, a Enna e (5 in addition) abbiamo visitato Erice e il tempio di Segesta."
+      }
+     ]
+    },
+    {
+     "id": "r16-02",
+     "n": 2,
+     "instruction": "Give the English equivalent of the following sentences.",
      "items": [
       {
        "label": "a",
@@ -5266,50 +5277,50 @@
      "items": [
       {
        "label": "a",
-       "text": "Cosa prendete? – We have beer or wine ."
+       "text": "Cosa prendete? – We have beer or wine."
       },
       {
        "label": "b",
-       "text": "Facciamo quello che vuoi tu, we can either stay here or (else) go to the cinema ."
+       "text": "Facciamo quello che vuoi tu, we can either stay here or (else) go to the cinema."
       },
       {
        "label": "c",
-       "text": "Dobbiamo rispondere subito, otherwise we’ll lose the contract ."
+       "text": "Dobbiamo rispondere subito, otherwise we’ll lose the contract."
       },
       {
        "label": "d",
-       "text": "È meglio parlargli direttamente instead of sending an email ."
+       "text": "È meglio parlargli direttamente instead of sending an email."
       }
      ]
     },
     {
      "id": "r16-01",
      "n": 1,
-     "instruction": "Contrast and compare . Complete the sentences by substituting the English with suitable Italian connectives.",
+     "instruction": "Contrast and compare. Complete the sentences by substituting the English with suitable Italian connectives.",
      "items": [
       {
        "label": "a",
-       "text": "Io studio legge ( but ) mia sorella studia architettura."
+       "text": "Io studio legge (but) mia sorella studia architettura."
       },
       {
        "label": "b",
-       "text": "Io studio legge ( whereas ) mia sorella studia architettura."
+       "text": "Io studio legge (whereas) mia sorella studia architettura."
       },
       {
        "label": "c",
-       "text": "Io studio medicina, ( however ) non mi piace molto!"
+       "text": "Io studio medicina, (however) non mi piace molto!"
       },
       {
        "label": "d",
-       "text": "Io sono nato a Torino, Leonardo ( on the other hand/however ) è nato a Palermo."
+       "text": "Io sono nato a Torino, Leonardo (on the other hand/however) è nato a Palermo."
       },
       {
        "label": "e",
-       "text": "Sta male, ( and yet/nevertheless ) ha intenzione di dare l’esame."
+       "text": "Sta male, (and yet/nevertheless) ha intenzione di dare l’esame."
       },
       {
        "label": "f",
-       "text": "Non mi piace viaggiare in aereo, ( on the other hand ) è molto comodo."
+       "text": "Non mi piace viaggiare in aereo, (on the other hand) è molto comodo."
       }
      ]
     },
@@ -5320,15 +5331,15 @@
      "items": [
       {
        "label": "a",
-       "text": "( Since/Seeing that ) sei qui, mi puoi aiutare."
+       "text": "(Since/Seeing that) sei qui, mi puoi aiutare."
       },
       {
        "label": "b",
-       "text": "( Because/Since ) la banca è chiusa, sono rimasto senza soldi."
+       "text": "(Because/Since) la banca è chiusa, sono rimasto senza soldi."
       },
       {
        "label": "c",
-       "text": "( Since/As I had ) perso la chiave, sono rimasto chiuso fuori."
+       "text": "(Since/As I had) perso la chiave, sono rimasto chiuso fuori."
       }
      ]
     },
@@ -5339,19 +5350,19 @@
      "items": [
       {
        "label": "a",
-       "text": "Io mangio di tutto ( except ) il baccalà. ( salt cod )"
+       "text": "Io mangio di tutto (except) il baccalà. (salt cod)"
       },
       {
        "label": "b",
-       "text": "Non ha obbiettato nessuno, ( except ) tuo fratello."
+       "text": "Non ha obiettato nessuno, (except) tuo fratello."
       },
       {
        "label": "c",
-       "text": "( Apart from ) mia madre, nessuno parla inglese."
+       "text": "(Apart from) mia madre, nessuno parla inglese."
       },
       {
        "label": "d",
-       "text": "Chiedimi tutto, ( apart from ) invitare quella gente!"
+       "text": "Chiedimi tutto, (apart from) invitare quella gente!"
       }
      ]
     },
@@ -5362,19 +5373,19 @@
      "items": [
       {
        "label": "a",
-       "text": "Io voglio andarci ( even though ) è lontano."
+       "text": "Io voglio andarci (even though) è lontano."
       },
       {
        "label": "b",
-       "text": "Mi sono divertito ( despite ) la pioggia."
+       "text": "Mi sono divertito (despite) la pioggia."
       },
       {
        "label": "c",
-       "text": "So che c’è sciopero ma io parto ( all the same )."
+       "text": "So che c’è sciopero ma io parto (all the same)."
       },
       {
        "label": "d",
-       "text": "La partita è cominciata male per loro, ma ( anyhow ) sono riusciti a vincere."
+       "text": "La partita è cominciata male per loro, ma (anyhow) sono riusciti a vincere."
       }
      ]
     },
@@ -5385,23 +5396,23 @@
      "items": [
       {
        "label": "a",
-       "text": "( As far as ) lo so, è sposato da due anni."
+       "text": "(As far as) lo so, è sposato da due anni."
       },
       {
        "label": "b",
-       "text": "Quest’anno andiamo in ferie ( however ) vadano gli affari."
+       "text": "Quest’anno andiamo in ferie (however) vadano gli affari."
       },
       {
        "label": "c",
-       "text": "Non so se saranno d’accordo, ( in that case/possibly ) li chiamo domani."
+       "text": "Non so se saranno d’accordo, (in that case/possibly) li chiamo domani."
       },
       {
        "label": "d",
-       "text": "( Suppose/What if ) trovassi un appartamento, lo compreresti?"
+       "text": "(Suppose/What if) trovassi un appartamento, lo compreresti?"
       },
       {
        "label": "e",
-       "text": "( If/Should ) tu non potessi venire, fammelo sapere subito."
+       "text": "(If/Should) tu non potessi venire, fammelo sapere subito."
       }
      ]
     },
@@ -5458,23 +5469,23 @@
      "items": [
       {
        "label": "a",
-       "text": "( So/Right ), dove eravamo rimasti?"
+       "text": "(So/Right), dove eravamo rimasti?"
       },
       {
        "label": "b",
-       "text": "Siamo tornati sul Web. Scusate il ritardo! ( First of all ), ecco alcune spiegazioni: si sono rotti due dischi sulla catena del server e anche il disco USB che ospita il backup."
+       "text": "Siamo tornati sul Web. Scusate il ritardo! (First of all), ecco alcune spiegazioni: si sono rotti due dischi sulla catena del server e anche il disco USB che ospita il backup."
       },
       {
        "label": "c",
-       "text": "È difficile definire l’identità iraniana: ( broadly speaking ) è un misto di elementi persiani, islamici e occidentali, con tutti i paradossi che questo comporta."
+       "text": "È difficile definire l’identità iraniana: (broadly speaking) è un misto di elementi persiani, islamici e occidentali, con tutti i paradossi che questo comporta."
       },
       {
        "label": "d",
-       "text": "Le elezioni libanesi hanno dimostrato che ( basically ) la politica interna non è stata proprio ‘interna’."
+       "text": "Le elezioni libanesi hanno dimostrato che (basically) la politica interna non è stata proprio ‘interna’."
       },
       {
        "label": "e",
-       "text": "Appartengono a famiglie ( on the whole ) forse più ricche delle nostre."
+       "text": "Appartengono a famiglie (on the whole) forse più ricche delle nostre."
       }
      ]
     }
@@ -5585,27 +5596,27 @@
      "items": [
       {
        "label": "a",
-       "text": "( Ten per cent of ) automobilisti non sono assicurati."
+       "text": "(Ten per cent of) automobilisti non sono assicurati."
       },
       {
        "label": "b",
-       "text": "( Fifty-one per cent of ) popolazione ha votato."
+       "text": "(Fifty-one per cent of) popolazione ha votato."
       },
       {
        "label": "c",
-       "text": "L’olio costa ( 25 euro per ) litro."
+       "text": "L’olio costa (25 euro per) litro."
       },
       {
        "label": "d",
-       "text": "( 2017 ) è stato un anno brutto per gli agricoltori."
+       "text": "(2017) è stato un anno brutto per gli agricoltori."
       },
       {
        "label": "e",
-       "text": "Per chiamare fuori bisogna fare ( 9 )."
+       "text": "Per chiamare fuori bisogna fare (9)."
       },
       {
        "label": "f",
-       "text": "Il mio numero di telefono è ( 02 39 24 81 ) interno ( 750 )."
+       "text": "Il mio numero di telefono è (02 39 24 81) interno (750)."
       }
      ]
     },
@@ -5620,34 +5631,34 @@
       },
       {
        "label": "b",
-       "text": "one o’clock ( p.m .)"
+       "text": "one o’clock (p.m.)"
       },
       {
        "label": "c",
-       "text": "eight o’clock ( p.m .)"
+       "text": "eight o’clock (p.m.)"
       },
       {
        "label": "d",
-       "text": "11 o’clock ( p.m .)"
+       "text": "11 o’clock (p.m.)"
       }
      ]
     },
     {
      "id": "r17-04",
      "n": 4,
-     "instruction": "Do the following calculations in Italian providing alternatives for ‘ equals ’.",
+     "instruction": "Do the following calculations in Italian providing alternatives for ‘equals’.",
      "items": [
       {
        "label": "a",
-       "text": "Twelve times twelve equals/makes a hundred and forty-four ."
+       "text": "Twelve times twelve equals/makes a hundred and forty-four."
       },
       {
        "label": "b",
-       "text": "Two thousand minus one thousand five hundred equals/is five hundred ."
+       "text": "Two thousand minus one thousand five hundred equals/is five hundred."
       },
       {
        "label": "c",
-       "text": "Forty-five divided by nine and multiplied by six equals/makes thirty ."
+       "text": "Forty-five divided by nine and multiplied by six equals/makes thirty."
       }
      ]
     },
@@ -5716,19 +5727,19 @@
      "items": [
       {
        "label": "a",
-       "text": "There were about a hundred guests ."
+       "text": "There were about a hundred guests."
       },
       {
        "label": "b",
-       "text": "There were about twenty students ."
+       "text": "There were about twenty students."
       },
       {
        "label": "c",
-       "text": "There are about a thousand demonstrators . ( manifestanti )"
+       "text": "There are about a thousand demonstrators. (manifestanti)"
       },
       {
        "label": "d",
-       "text": "There are thousands of demonstrators ."
+       "text": "There are thousands of demonstrators."
       }
      ]
     }
@@ -5782,7 +5793,7 @@
     {
      "id": "r18-03",
      "n": 3,
-     "instruction": "Spell it right . Give the correct present tense form of the verbs in brackets.",
+     "instruction": "Spell it right. Give the correct present tense form of the verbs in brackets.",
      "items": [
       {
        "label": "a",
@@ -5917,19 +5928,19 @@
      "items": [
       {
        "label": "a",
-       "text": "I get up early and leave the house at seven ."
+       "text": "I get up early and leave the house at seven."
       },
       {
        "label": "b",
-       "text": "Great Britain is an island and Italy is a peninsula . ( isola, penisola )"
+       "text": "Great Britain is an island and Italy is a peninsula. (isola, penisola)"
       },
       {
        "label": "c",
-       "text": "Do you drink coffee in the morning? ( voi )"
+       "text": "Do you drink coffee in the morning? (voi)"
       },
       {
        "label": "d",
-       "text": "What job do you do? ( tu )"
+       "text": "What job do you do? (tu)"
       },
       {
        "label": "e",
@@ -5937,11 +5948,11 @@
       },
       {
        "label": "f",
-       "text": "What is he saying? I can’t hear him ."
+       "text": "What is he saying? I can’t hear him."
       },
       {
        "label": "g",
-       "text": "I can’t open the window ."
+       "text": "I can’t open the window."
       }
      ]
     },
@@ -5952,31 +5963,31 @@
      "items": [
       {
        "label": "a",
-       "text": "Da quanto tempo impari l’italiano? – I have been learning Italian for two years ."
+       "text": "Da quanto tempo impari l’italiano? – I have been learning Italian for two years."
       },
       {
        "label": "b",
-       "text": "Da quant’è che abiti qui? – I have been living here for a couple of months ."
+       "text": "Da quant’è che abiti qui? – I have been living here for a couple of months."
       },
       {
        "label": "c",
-       "text": "Da quando uscite insieme? – We have been going out since January ."
+       "text": "Da quando uscite insieme? – We have been going out since January."
       },
       {
        "label": "d",
-       "text": "Da quant’è che vi conoscete? – We have known each other for three months ."
+       "text": "Da quant’è che vi conoscete? – We have known each other for three months."
       },
       {
        "label": "e",
-       "text": "Da quant’è che non ci sentiamo? – We haven’t spoken since last year ."
+       "text": "Da quant’è che non ci sentiamo? – We haven’t spoken since last year."
       },
       {
        "label": "f",
-       "text": "È da molto che sei in Italia? – I have been in Italy since September ."
+       "text": "È da molto che sei in Italia? – I have been in Italy since September."
       },
       {
        "label": "g",
-       "text": "Lo aspetti da molto tempo? – I have been waiting for him since nine o’clock ."
+       "text": "Lo aspetti da molto tempo? – I have been waiting for him since nine o’clock."
       },
       {
        "label": "h",
@@ -5985,9 +5996,9 @@
      ]
     },
     {
-     "id": "r18-04",
-     "n": 4,
-     "instruction": "Give the English equivalent of the questions in Exercise 3. ▲ 5 Choose the appropriate tense in the sentences below and provide the English equivalent.",
+     "id": "r18-05",
+     "n": 5,
+     "instruction": "Choose the appropriate tense in the sentences below and provide the English equivalent.",
      "items": [
       {
        "label": "a",
@@ -6068,19 +6079,19 @@
      "items": [
       {
        "label": "a",
-       "text": "She says Mario is arriving tomorrow but he is not well ."
+       "text": "She says Mario is arriving tomorrow but he is not well."
       },
       {
        "label": "b",
-       "text": "I know Susanna has lost her keys again – she is always so careless ! ( distratta )"
+       "text": "I know Susanna has lost her keys again – she is always so careless! (distratta)"
       },
       {
        "label": "c",
-       "text": "My sister says our uncle always used to eat too much but now he eats hardly anything . ( quasi niente )"
+       "text": "My sister says our uncle always used to eat too much but now he eats hardly anything. (quasi niente)"
       },
       {
        "label": "d",
-       "text": "I know they are meant to arrive around eleven, but they are usually late . ( fare tardi )"
+       "text": "I know they are meant to arrive around eleven, but they are usually late. (fare tardi)"
       }
      ]
     }
@@ -6231,15 +6242,15 @@
      "items": [
       {
        "label": "a",
-       "text": "Lo sai che Marina è all’ospedale? – I’ll go and see her, then . ( andare a trovare )"
+       "text": "Lo sai che Marina è all’ospedale? – I’ll go and see her, then. (andare a trovare)"
       },
       {
        "label": "b",
-       "text": "Hanno chiuso l’autostrada. – We’ll take the statale (road), then . ( prendere la statale )"
+       "text": "Hanno chiuso l’autostrada. – We’ll take the statale (road), then. (prendere la statale)"
       },
       {
        "label": "c",
-       "text": "È il compleanno di Giacomo. – I’ll send him a card, then . ( mandare un biglietto di auguri )"
+       "text": "È il compleanno di Giacomo. – I’ll send him a card, then. (mandare un biglietto di auguri)"
       }
      ]
     },
@@ -6250,15 +6261,15 @@
      "items": [
       {
        "label": "a",
-       "text": "Tomorrow I’m going/going to go to Turin ."
+       "text": "Tomorrow I’m going/going to go to Turin."
       },
       {
        "label": "b",
-       "text": "We’re taking/going to take the train at five o’clock ."
+       "text": "We’re taking/going to take the train at five o’clock."
       },
       {
        "label": "c",
-       "text": "I’m sending/going to send my mother some flowers ."
+       "text": "I’m sending/going to send my mother some flowers."
       }
      ]
     },
@@ -6269,7 +6280,7 @@
      "items": [
       {
        "label": "a",
-       "text": "He must be at least sixty . ( almeno )"
+       "text": "He must be at least sixty. (almeno)"
       },
       {
        "label": "b",
@@ -6277,7 +6288,7 @@
       },
       {
        "label": "c",
-       "text": "I expect he’s married ."
+       "text": "I expect he’s married."
       },
       {
        "label": "d",
@@ -6288,19 +6299,19 @@
     {
      "id": "r19-07",
      "n": 7,
-     "instruction": "Here are some definite promises and predictions you have made. Express them in Italian using tu .",
+     "instruction": "Here are some definite promises and predictions you have made. Express them in Italian using tu.",
      "items": [
       {
        "label": "a",
-       "text": "If you give me a hand, I’ll buy you an ice cream ."
+       "text": "If you give me a hand, I’ll buy you an ice cream."
       },
       {
        "label": "b",
-       "text": "If you lend me the car, I’ll pay for the petrol ."
+       "text": "If you lend me the car, I’ll pay for the petrol."
       },
       {
        "label": "c",
-       "text": "If you don’t hurry up, we’ll be late . ( sbrigarsi, fare tardi )"
+       "text": "If you don’t hurry up, we’ll be late. (sbrigarsi, fare tardi)"
       }
      ]
     },
@@ -6311,15 +6322,15 @@
      "items": [
       {
        "label": "a",
-       "text": "Se non aumentano gli stipendi quest’anno … teachers will go on strike . ( fare sciopero )"
+       "text": "Se non aumentano gli stipendi quest’anno … teachers will go on strike. (fare sciopero)"
       },
       {
        "label": "b",
-       "text": "Se i rifornimenti non arrivano presto … people will starve . ( morire di fame )"
+       "text": "Se i rifornimenti non arrivano presto … people will starve. (morire di fame)"
       },
       {
        "label": "c",
-       "text": "Se non riusciranno a salvare le foreste equatoriali … the Earth’s climate will change ."
+       "text": "Se non riusciranno a salvare le foreste equatoriali … the Earth’s climate will change."
       }
      ]
     },
@@ -6330,15 +6341,15 @@
      "items": [
       {
        "label": "a",
-       "text": "Fra una settimana … you will have forgotten him ."
+       "text": "Fra una settimana … you will have forgotten him."
       },
       {
        "label": "b",
-       "text": "Quando leggerà questa lettera … I will already have left ."
+       "text": "Quando leggerà questa lettera … I will already have left."
       },
       {
        "label": "c",
-       "text": "A quest’ora domani … Giovanni will have returned/will be back ."
+       "text": "A quest’ora domani … Giovanni will have returned/will be back."
       }
      ]
     },
@@ -6349,15 +6360,15 @@
      "items": [
       {
        "label": "a",
-       "text": "Could he have gone the wrong way? ( sbagliare strada )"
+       "text": "Could he have gone the wrong way? (sbagliare strada)"
       },
       {
        "label": "b",
-       "text": "He must have had an accident ."
+       "text": "He must have had an accident."
       },
       {
        "label": "c",
-       "text": "He may be a good driver but the weather is bad . ( un bravo autista )"
+       "text": "He may be a good driver but the weather is bad. (un bravo autista)"
       }
      ]
     },
@@ -6368,26 +6379,26 @@
      "items": [
       {
        "label": "a",
-       "text": "Potrò passare a prenderti alle sette … if I have finished my homework ."
+       "text": "Potrò passare a prenderti alle sette … if I have finished my homework."
       },
       {
        "label": "b",
-       "text": "Ti restituirò il libro … when I have read it ."
+       "text": "Ti restituirò il libro … when I have read it."
       },
       {
        "label": "c",
-       "text": "Ti inviterò da me … once I have sorted out the flat . ( sistemare )"
+       "text": "Ti inviterò da me … once I have sorted out the flat. (sistemare)"
       },
       {
        "label": "d",
-       "text": "Ti verrò a trovare … after I have done the shopping ."
+       "text": "Ti verrò a trovare … after I have done the shopping."
       }
      ]
     },
     {
      "id": "r19-04",
      "n": 4,
-     "instruction": "Now make the statements above more of a definite promise, using appena .",
+     "instruction": "Now make the statements above more of a definite promise, using appena.",
      "items": [
       {
        "label": "a",
@@ -6414,15 +6425,15 @@
      "items": [
       {
        "label": "a",
-       "text": "Come and see me when you’ve finished ."
+       "text": "Come and see me when you’ve finished."
       },
       {
        "label": "b",
-       "text": "Send him the book once he has paid ."
+       "text": "Send him the book once he has paid."
       },
       {
        "label": "c",
-       "text": "As soon as he divorces he will remarry at once ."
+       "text": "As soon as he divorces he will remarry at once."
       }
      ]
     }
@@ -6531,27 +6542,27 @@
      "items": [
       {
        "label": "a",
-       "text": "( I have made ) un errore madornale. (fare)"
+       "text": "(I have made) un errore madornale. (fare)"
       },
       {
        "label": "b",
-       "text": "( He answered ) subito. (rispondere)"
+       "text": "(He answered) subito. (rispondere)"
       },
       {
        "label": "c",
-       "text": "Luca, ( have you opened ) la finestra? (aprire)"
+       "text": "Luca, (have you opened) la finestra? (aprire)"
       },
       {
        "label": "d",
-       "text": "Ieri sera ( I stayed ) da Ornella. (stare)"
+       "text": "Ieri sera (I stayed) da Ornella. (stare)"
       },
       {
        "label": "e",
-       "text": "Oggi ( I stayed ) a casa. (rimanere)"
+       "text": "Oggi (I stayed) a casa. (rimanere)"
       },
       {
        "label": "f",
-       "text": "L’anno scorso ( they came ) da noi. (venire)"
+       "text": "L’anno scorso (they came) da noi. (venire)"
       }
      ]
     },
@@ -6658,7 +6669,7 @@
     {
      "id": "r20-08",
      "n": 8,
-     "instruction": "Rewrite the sentences below using the passato prossimo . Use the correct auxiliary and agreements each time.",
+     "instruction": "Rewrite the sentences below using the passato prossimo. Use the correct auxiliary and agreements each time.",
      "items": [
       {
        "label": "a",
@@ -6688,16 +6699,16 @@
        "text": "Non sono potuto partire."
       },
       {
-       "label": "c",
-       "text": "Hai dovuto cambiare treno?"
-      },
-      {
        "label": "b",
        "text": "Non ho voluto vederlo."
       },
       {
-       "label": "",
-       "text": "(d) Sei dovuto tornare a casa?"
+       "label": "c",
+       "text": "Hai dovuto cambiare treno?"
+      },
+      {
+       "label": "d",
+       "text": "Sei dovuto tornare a casa?"
       }
      ]
     },
@@ -6711,39 +6722,39 @@
        "text": "Ci siamo dovuti fermare."
       },
       {
-       "label": "",
-       "text": "(c) Ho potuto sposarmi presto."
-      },
-      {
        "label": "b",
        "text": "Elena si è dovuta riposare."
       },
       {
-       "label": "",
-       "text": "(d) Marta non ha voluto fidanzarsi."
+       "label": "c",
+       "text": "Ho potuto sposarmi presto."
+      },
+      {
+       "label": "d",
+       "text": "Marta non ha voluto fidanzarsi."
       }
      ]
     },
     {
      "id": "r20-01",
      "n": 1,
-     "instruction": "Things aren’t what they used to be . Recall the good old days by completing the sentences.",
+     "instruction": "Things aren’t what they used to be. Recall the good old days by completing the sentences.",
      "items": [
       {
        "label": "a",
-       "text": "Adesso la città è piena di macchine. Trent’anni fa … there were very few cars ."
+       "text": "Adesso la città è piena di macchine. Trent’anni fa … there were very few cars."
       },
       {
        "label": "b",
-       "text": "Al giorno d’oggi la gente ha paura di uscire di notte. Vent’anni fa … no one was afraid ."
+       "text": "Al giorno d’oggi la gente ha paura di uscire di notte. Vent’anni fa … no one was afraid."
       },
       {
        "label": "c",
-       "text": "Al giorno d’oggi tutti i giovani bevono tanto. Anni fa … they drank/used to drink very little ."
+       "text": "Al giorno d’oggi tutti i giovani bevono tanto. Anni fa … they drank/used to drink very little."
       },
       {
        "label": "d",
-       "text": "Adesso nessuno va più a Messa. Ai miei tempi … everyone went/used to go to Mass ."
+       "text": "Adesso nessuno va più a Messa. Ai miei tempi … everyone went/used to go to Mass."
       }
      ]
     },
@@ -6754,15 +6765,15 @@
      "items": [
       {
        "label": "a",
-       "text": "Non ha sentito niente quando hanno rotto il vetro della finestra? – No, I was listening to the radio ."
+       "text": "Non ha sentito niente quando hanno rotto il vetro della finestra? – No, I was listening to the radio."
       },
       {
        "label": "b",
-       "text": "Sono passati per il giardino? – I don’t know, I was preparing supper in the kitchen ."
+       "text": "Sono passati per il giardino? – I don’t know, I was preparing supper in the kitchen."
       },
       {
        "label": "c",
-       "text": "Non ha visto nessuno fuori? – It was dark, but yes, there was someone. He was wearing a ski jacket ( una giacca a vento ) and a woollen hat. I saw him as he was getting into a white van . ( un furgoncino )"
+       "text": "Non ha visto nessuno fuori? – It was dark, but yes, there was someone. He was wearing a ski jacket (una giacca a vento) and a woollen hat. I saw him as he was getting into a white van. (un furgoncino)"
       }
      ]
     },
@@ -6773,42 +6784,42 @@
      "items": [
       {
        "label": "a",
-       "text": "I hadn’t seen her since December ."
+       "text": "I hadn’t seen her since December."
       },
       {
        "label": "b",
-       "text": "I had known her since I was three ."
+       "text": "I had known her since I was three."
       },
       {
        "label": "c",
-       "text": "He had been waiting for an hour ."
+       "text": "He had been waiting for an hour."
       },
       {
        "label": "d",
-       "text": "Since 1980 she had had three husbands ."
+       "text": "Since 1980 she had had three husbands."
       }
      ]
     },
     {
      "id": "r20-07",
      "n": 7,
-     "instruction": "Reporting back . You were not prepared for what was going to happen. Complete the sentences by substituting the English.",
+     "instruction": "Reporting back. You were not prepared for what was going to happen. Complete the sentences by substituting the English.",
      "items": [
       {
        "label": "a",
-       "text": "Non sapevo che … they were coming so soon ."
+       "text": "Non sapevo che … they were coming so soon."
       },
       {
        "label": "b",
-       "text": "Mio figlio non mi aveva detto che … he was sleeping out ."
+       "text": "Mio figlio non mi aveva detto che … he was sleeping out."
       },
       {
        "label": "c",
-       "text": "Mio marito non mi aveva avvertito che … he was bringing twenty guests to dinner ."
+       "text": "Mio marito non mi aveva avvertito che … he was bringing twenty guests to dinner."
       },
       {
        "label": "d",
-       "text": "Nessuno mi aveva detto che … they were about to sell the house ."
+       "text": "Nessuno mi aveva detto che … they were about to sell the house."
       }
      ]
     },
@@ -6857,27 +6868,27 @@
      "items": [
       {
        "label": "a",
-       "text": "On Tuesday while Anna listened to the radio, Pietro made supper ."
+       "text": "On Tuesday while Anna listened to the radio, Pietro made supper."
       },
       {
        "label": "b",
-       "text": "On Wednesday Anna cleaned the house while Pietro prepared a lecture . ( una lezione )"
+       "text": "On Wednesday Anna cleaned the house while Pietro prepared a lecture. (una lezione)"
       },
       {
        "label": "c",
-       "text": "Yesterday we went to a party. It was a wonderful evening ."
+       "text": "Yesterday we went to a party. It was a wonderful evening."
       },
       {
        "label": "d",
-       "text": "Yesterday we went for a walk because it was a lovely evening ."
+       "text": "Yesterday we went for a walk because it was a lovely evening."
       },
       {
        "label": "e",
-       "text": "Last year I went to Corsica. I liked it a lot ."
+       "text": "Last year I went to Corsica. I liked it a lot."
       },
       {
        "label": "f",
-       "text": "When I lived in London I liked visiting the museums ."
+       "text": "When I lived in London I liked visiting the museums."
       }
      ]
     },
@@ -6888,27 +6899,27 @@
      "items": [
       {
        "label": "a",
-       "text": "( I was supposed to ) partire alle tre ma il treno è in ritardo."
+       "text": "(I was supposed to) partire alle tre ma il treno è in ritardo."
       },
       {
        "label": "b",
-       "text": "( I had to ) partire subito, mia figlia si è sentita male."
+       "text": "(I had to) partire subito, mia figlia si è sentita male."
       },
       {
        "label": "c",
-       "text": "Purtroppo ( I couldn’t see ) il professore perché era malato."
+       "text": "Purtroppo (I couldn’t see) il professore perché era malato."
       },
       {
        "label": "d",
-       "text": "Mi hanno detto che ( I couldn’t see ) il medico prima di lunedì."
+       "text": "Mi hanno detto che (I couldn’t see) il medico prima di lunedì."
       },
       {
        "label": "e",
-       "text": "( I found out ) dalla segretaria che il mio capo era in vacanza."
+       "text": "(I found out) dalla segretaria che il mio capo era in vacanza."
       },
       {
        "label": "f",
-       "text": "( I knew ) che il mio capo era in vacanza."
+       "text": "(I knew) che il mio capo era in vacanza."
       }
      ]
     },
@@ -6954,19 +6965,19 @@
      "items": [
       {
        "label": "a",
-       "text": "As soon as I (had) left the house I was taken ill . ( sentirsi male )"
+       "text": "As soon as I (had) left the house I was taken ill. (sentirsi male)"
       },
       {
        "label": "b",
-       "text": "After I had finished the exams I found myself a job ."
+       "text": "After I had finished the exams I found myself a job."
       },
       {
        "label": "c",
-       "text": "I had already left when they arrived ."
+       "text": "I had already left when they arrived."
       },
       {
        "label": "d",
-       "text": "Once my wife had left hospital, I was able to go back to work . ( uscire da )"
+       "text": "Once my wife had left hospital, I was able to go back to work. (uscire da)"
       }
      ]
     },
@@ -6981,7 +6992,7 @@
       },
       {
        "label": "b",
-       "text": "Dopo l’omicidio del figlio, la famiglia (ricevere) una lettera ononima."
+       "text": "Dopo l’omicidio del figlio, la famiglia (ricevere) una lettera anonima."
       },
       {
        "label": "c",
@@ -7070,7 +7081,7 @@
       },
       {
        "label": "e",
-       "text": "‘Non appena ho capito che non avrei trovato un lavoro in Italia, sono partito in Inghilterra.’"
+       "text": "‘Non appena ho capito che non avrei trovato un lavoro in Italia, sono partito per l’Inghilterra.’"
       }
      ]
     }
@@ -7153,7 +7164,7 @@
     {
      "id": "r21-03",
      "n": 3,
-     "instruction": "Be polite and ask diplomatically . Rewrite the commands and statements below using the conditional.",
+     "instruction": "Be polite and ask diplomatically. Rewrite the commands and statements below using the conditional.",
      "items": [
       {
        "label": "a",
@@ -7277,68 +7288,68 @@
      "items": [
       {
        "label": "a",
-       "text": "Non hanno fatto la fila, sono passati davanti a noi. Voi cosa avreste fatto? – We would have protested ."
+       "text": "Non hanno fatto la fila, sono passati davanti a noi. Voi cosa avreste fatto? – We would have protested."
       },
       {
        "label": "b",
-       "text": "Sono arrivati con tre ore di ritardo. Tu come avresti reagito? – I would have been angry ."
+       "text": "Sono arrivati con tre ore di ritardo. Tu come avresti reagito? – I would have been angry."
       },
       {
        "label": "c",
-       "text": "Mi hanno fatto pagare troppo. Tu cosa avresti fatto? – I would have complained . ( lamentarsi )"
+       "text": "Mi hanno fatto pagare troppo. Tu cosa avresti fatto? – I would have complained. (lamentarsi)"
       }
      ]
     },
     {
      "id": "r21-03",
      "n": 3,
-     "instruction": "I would like … I would have liked . Answer in Italian, using the appropriate conditional form of the verb used in the question: piacere or volere .",
+     "instruction": "I would like … I would have liked. Answer in Italian, using the appropriate conditional form of the verb used in the question: piacere or volere.",
      "items": [
       {
        "label": "a",
-       "text": "Ti sarebbe piaciuto andare? – Yes, I would have liked to go (have gone). I would like to go tomorrow ."
+       "text": "Ti sarebbe piaciuto andare? – Yes, I would have liked to go (have gone). I would like to go tomorrow."
       },
       {
        "label": "b",
-       "text": "Avresti voluto parlargli? – Yes, I would have liked to speak to him. I would like to speak to him soon ."
+       "text": "Avresti voluto parlargli? – Yes, I would have liked to speak to him. I would like to speak to him soon."
       },
       {
        "label": "c",
-       "text": "Gli sarebbe piaciuto venire? – Yes, he would have liked to come. He would like to come next week ."
+       "text": "Gli sarebbe piaciuto venire? – Yes, he would have liked to come. He would like to come next week."
       },
       {
        "label": "d",
-       "text": "Avresti voluto finire il lavoro? – Yes, I would have liked to finish the job. I would like to finish it soon ."
+       "text": "Avresti voluto finire il lavoro? – Yes, I would have liked to finish the job. I would like to finish it soon."
       }
      ]
     },
     {
      "id": "r21-04",
      "n": 4,
-     "instruction": "Too late . What do you and others wish you had never done? Give the Italian equivalent of the English.",
+     "instruction": "Too late. What do you and others wish you had never done? Give the Italian equivalent of the English.",
      "items": [
       {
        "label": "a",
-       "text": "I shouldn’t have bought those shoes ."
+       "text": "I shouldn’t have bought those shoes."
       },
       {
        "label": "b",
-       "text": "You ( tu ) shouldn’t have paid cash . ( in contanti )"
+       "text": "You (tu) shouldn’t have paid cash. (in contanti)"
       },
       {
        "label": "c",
-       "text": "You ( voi ) shouldn’t have employed her . ( impiegare )"
+       "text": "You (voi) shouldn’t have employed her. (impiegare)"
       },
       {
        "label": "d",
-       "text": "They shouldn’t have drunk that wine ."
+       "text": "They shouldn’t have drunk that wine."
       }
      ]
     },
     {
      "id": "r21-01",
      "n": 1,
-     "instruction": "Travel reports . Complete the sentences using the English as a guide.",
+     "instruction": "Travel reports. Complete the sentences using the English as a guide.",
      "items": [
       {
        "label": "a",
@@ -7346,7 +7357,7 @@
       },
       {
        "label": "b",
-       "text": "Alla radio avevo sentito che _______________ (i) the plane should have left an hour before . (ii) the motorway could have been blocked by snow ."
+       "text": "Alla radio avevo sentito che _______________ (i) the plane should have left an hour before. (ii) the motorway could have been blocked by snow."
       }
      ]
     },
@@ -7357,15 +7368,15 @@
      "items": [
       {
        "label": "a",
-       "text": "I was convinced she would phone/she was going to phone ."
+       "text": "I was convinced she would phone/she was going to phone."
       },
       {
        "label": "b",
-       "text": "They knew she would leave/she was going to leave ."
+       "text": "They knew she would leave/she was going to leave."
       },
       {
        "label": "c",
-       "text": "He told me he would arrive at four/he was arriving at four ."
+       "text": "He told me he would arrive at four/he was arriving at four."
       }
      ]
     },
@@ -7380,7 +7391,7 @@
       },
       {
        "label": "b",
-       "text": "Realma mi aveva assicurato che avrebbe risposto presto, e infatti la lettera è arriva ieri."
+       "text": "Realma mi aveva assicurato che avrebbe risposto presto, e infatti la lettera è arrivata ieri."
       },
       {
        "label": "c",
@@ -7494,22 +7505,22 @@
      "items": [
       {
        "label": "a",
-       "text": "Do it at once . ( fare )"
+       "text": "Do it at once. (fare)"
       },
       {
        "label": "b",
-       "text": "Tell her to come . ( dire a )"
+       "text": "Tell her to come. (dire a)"
       },
       {
        "label": "c",
-       "text": "Go (there) . ( andare )"
+       "text": "Go (there). (andare)"
       }
      ]
     },
     {
      "id": "r22-07",
      "n": 7,
-     "instruction": "Give the English equivalent of the following using tu imperatives and then voi imperatives. Notice where the spoken stress falls.",
+     "instruction": "Give the Italian equivalent of the following using tu imperatives and then voi imperatives. Notice where the spoken stress falls.",
      "items": [
       {
        "label": "a",
@@ -7517,23 +7528,23 @@
       },
       {
        "label": "b",
-       "text": "Finish it ."
+       "text": "Finish it."
       },
       {
        "label": "c",
-       "text": "Sit down . ( sedersi )"
+       "text": "Sit down. (sedersi)"
       },
       {
        "label": "d",
-       "text": "Ask him to come . ( chiedere a )"
+       "text": "Ask him to come. (chiedere a)"
       },
       {
        "label": "e",
-       "text": "Put on your coat . ( mettersi )"
+       "text": "Put on your coat. (mettersi)"
       },
       {
        "label": "f",
-       "text": "Have fun! ( divertirsi )"
+       "text": "Have fun! (divertirsi)"
       }
      ]
     },
@@ -7575,23 +7586,23 @@
      "items": [
       {
        "label": "a",
-       "text": "Do sit down . (also voi form)"
+       "text": "Do sit down. (also voi form)"
       },
       {
        "label": "b",
-       "text": "Pass me the salt ."
+       "text": "Pass me the salt."
       },
       {
        "label": "c",
-       "text": "Give me a bit of bread, please ."
+       "text": "Give me a bit of bread, please."
       },
       {
        "label": "d",
-       "text": "Make us a coffee, please ."
+       "text": "Make us a coffee, please."
       },
       {
        "label": "e",
-       "text": "Bring us the bill, please ."
+       "text": "Bring us the bill, please."
       }
      ]
     },
@@ -7691,35 +7702,35 @@
      "items": [
       {
        "label": "a",
-       "text": "Hanno finito di … working ?"
+       "text": "Hanno finito di … working?"
       },
       {
        "label": "b",
-       "text": "Ieri ha cominciato a … raining/to rain ."
+       "text": "Ieri ha cominciato a … raining/to rain."
       },
       {
        "label": "c",
-       "text": "Non devi partire … without paying ."
+       "text": "Non devi partire … without paying."
       },
       {
        "label": "d",
-       "text": "Ti vedrò … before I leave ."
+       "text": "Ti vedrò … before I leave."
       },
       {
        "label": "e",
-       "text": "Non so … how to thank you . ( tu )"
+       "text": "Non so … how to thank you. (tu)"
       },
       {
        "label": "f",
-       "text": "Bisogna … change trains in Milan ."
+       "text": "Bisogna … change trains in Milan."
       },
       {
        "label": "g",
-       "text": "Che strano … to see you here! ( tu & voi )"
+       "text": "Che strano … to see you here! (tu & voi)"
       },
       {
        "label": "h",
-       "text": "Mio figlio mi ha detto … where to go ."
+       "text": "Mio figlio mi ha detto … where to go."
       }
      ]
     },
@@ -7730,19 +7741,19 @@
      "items": [
       {
        "label": "a",
-       "text": "I like travelling by train ."
+       "text": "I like travelling by train."
       },
       {
        "label": "b",
-       "text": "I’m thinking of leaving ."
+       "text": "I’m thinking of leaving."
       },
       {
        "label": "c",
-       "text": "I hope to see you soon . ( tu & Lei )"
+       "text": "I hope to see you soon. (tu & Lei)"
       },
       {
        "label": "d",
-       "text": "I doubt I can come ."
+       "text": "I doubt I can come."
       }
      ]
     },
@@ -7753,19 +7764,19 @@
      "items": [
       {
        "label": "a",
-       "text": "Paolo believes he is ill ."
+       "text": "Paolo believes he is ill."
       },
       {
        "label": "b",
-       "text": "Manuela doesn’t think she can come ."
+       "text": "Manuela doesn’t think she can come."
       },
       {
        "label": "c",
-       "text": "What a pity I have to leave ."
+       "text": "What a pity I have to leave."
       },
       {
        "label": "d",
-       "text": "Gigi is thinking of coming ."
+       "text": "Gigi is thinking of coming."
       }
      ]
     },
@@ -7776,42 +7787,42 @@
      "items": [
       {
        "label": "a",
-       "text": "Sta a letto tutta la giornata … reading novels ."
+       "text": "Sta a letto tutta la giornata … reading novels."
       },
       {
        "label": "b",
-       "text": "Erano seduti intorno al tavolo … playing bridge ."
+       "text": "Erano seduti intorno al tavolo … playing bridge."
       },
       {
        "label": "c",
-       "text": "Hanno passato la giornata … mending the car ."
+       "text": "Hanno passato la giornata … mending the car."
       },
       {
        "label": "d",
-       "text": "Era distesa sul divano … eating chocolates . ( cioccolatini )"
+       "text": "Era distesa sul divano … eating chocolates. (cioccolatini)"
       }
      ]
     },
     {
      "id": "r23-01",
      "n": 1,
-     "instruction": "‘ I am pleased to have … ’ Give the past infinitive form of the following simple infinitives, beginning: Sono contento di :",
+     "instruction": "‘I am pleased to have …’ Give the past infinitive form of the following simple infinitives, beginning: Sono contento di:",
      "items": [
       {
        "label": "a",
        "text": "pagare i debiti"
       },
       {
-       "label": "",
-       "text": "(b) ricevere il pacco"
+       "label": "b",
+       "text": "ricevere il pacco"
       },
       {
-       "label": "",
-       "text": "(c) uscire con te"
+       "label": "c",
+       "text": "uscire con te"
       },
       {
-       "label": "",
-       "text": "(d) divertirsi"
+       "label": "d",
+       "text": "divertirsi"
       }
      ]
     },
@@ -7822,19 +7833,19 @@
      "items": [
       {
        "label": "a",
-       "text": "Che sollievo … to have found the keys ."
+       "text": "Che sollievo … to have found the keys."
       },
       {
        "label": "b",
-       "text": "È un peccato … not to have gone there ."
+       "text": "È un peccato … not to have gone there."
       },
       {
        "label": "c",
-       "text": "Dubito di … ( that ) I have understood ."
+       "text": "Dubito di … (that) I have understood."
       },
       {
        "label": "d",
-       "text": "Mi dispiace … ( that ) I had to leave . ( dover partire )"
+       "text": "Mi dispiace … (that) I had to leave. (dover partire)"
       }
      ]
     },
@@ -7845,19 +7856,19 @@
      "items": [
       {
        "label": "a",
-       "text": "I went out without having breakfast ."
+       "text": "I went out without having breakfast."
       },
       {
        "label": "b",
-       "text": "They left without having paid ."
+       "text": "They left without having paid."
       },
       {
        "label": "c",
-       "text": "Thank you for helping us ."
+       "text": "Thank you for helping us."
       },
       {
        "label": "d",
-       "text": "I’ll come and see you after I’ve talked to him ."
+       "text": "I’ll come and see you after I’ve talked to him."
       }
      ]
     },
@@ -7899,19 +7910,19 @@
      "items": [
       {
        "label": "a",
-       "text": "He says that he has finished ."
+       "text": "He says that he has finished."
       },
       {
        "label": "b",
-       "text": "I remember that I called early ."
+       "text": "I remember that I called early."
       },
       {
        "label": "c",
-       "text": "They think that they have understood ."
+       "text": "They think that they have understood."
       },
       {
        "label": "d",
-       "text": "She was sorry that she had not helped . ( le è dispiaciuto )"
+       "text": "She was sorry that she had not helped. (le è dispiaciuto)"
       }
      ]
     },
@@ -7930,7 +7941,7 @@
       },
       {
        "label": "c",
-       "text": "Gli affari vanno benisssimo, come ha fatto? – (Studiare) il mercato e (offrire) un servizio sempre migliore."
+       "text": "Gli affari vanno benissimo, come ha fatto? – (Studiare) il mercato e (offrire) un servizio sempre migliore."
       }
      ]
     },
@@ -7958,21 +7969,21 @@
      ]
     },
     {
-     "id": "r23-02",
-     "n": 2,
-     "instruction": "Look back at the text by Camilleri in Exercise 6 on p. 371 and give the English equivalent of oltre che inondato di polvere . ▲ 3 Complete the sentences by giving the Italian equivalent of the English.",
+     "id": "r23-03",
+     "n": 3,
+     "instruction": "Complete the sentences by giving the Italian equivalent of the English.",
      "items": [
       {
        "label": "a",
-       "text": "When the car was mended , hanno potuto partire."
+       "text": "When the car was mended, hanno potuto partire."
       },
       {
        "label": "b",
-       "text": "When the boat left , sono tutti tornati a casa."
+       "text": "When the boat left, sono tutti tornati a casa."
       },
       {
        "label": "c",
-       "text": "After she received the bad news , Marinella si ammalò."
+       "text": "After she received the bad news, Marinella si ammalò."
       }
      ]
     }
@@ -8074,7 +8085,7 @@
     {
      "id": "r24-03",
      "n": 3,
-     "instruction": "Have a guess . Can you form the present subjunctive singular form of the verbs below? They have irregular indicative present tenses. If necessary, consult the lists on pp. 286–7.",
+     "instruction": "Have a guess. Can you form the present subjunctive singular form of the verbs below? They have irregular indicative present tenses. If necessary, consult the lists on pp. 286–7.",
      "items": [
       {
        "label": "a",
@@ -8109,15 +8120,15 @@
      "items": [
       {
        "label": "a",
-       "text": "Nicola, non hai ancora pagato l’affitto? It’s essential that you pay it soon ."
+       "text": "Nicola, non hai ancora pagato l’affitto? It’s essential that you pay it soon."
       },
       {
        "label": "b",
-       "text": "Silvana e Giorgio non hanno spedito il pacco? It’s important that they send it tomorrow ."
+       "text": "Silvana e Giorgio non hanno spedito il pacco? It’s important that they send it tomorrow."
       },
       {
        "label": "c",
-       "text": "Voi non sapete se venite domani? But it’s necessary for me to know today ."
+       "text": "Voi non sapete se venite domani? But it’s necessary for me to know today."
       }
      ]
     },
@@ -8128,15 +8139,15 @@
      "items": [
       {
        "label": "a",
-       "text": "È difficile che (venire) tutti quanti. ( It’s unlikely that they will all come .)"
+       "text": "È difficile che (venire) tutti quanti. (It’s unlikely that they will all come.)"
       },
       {
        "label": "b",
-       "text": "È possibile che il treno (essere) in ritardo. ( It’s possible that the train may be late .)"
+       "text": "È possibile che il treno (essere) in ritardo. (It’s possible that the train may be late.)"
       },
       {
        "label": "c",
-       "text": "Non è detto che loro (tornare) stasera. ( They won’t necessarily come back tonight .)"
+       "text": "Non è detto che loro (tornare) stasera. (They won’t necessarily come back tonight.)"
       }
      ]
     },
@@ -8201,15 +8212,15 @@
      "items": [
       {
        "label": "a",
-       "text": "Giovanni, lascia che lo (fare) tuo fratello. ( Giovanni, let your brother do it .)"
+       "text": "Giovanni, lascia che lo (fare) tuo fratello. (Giovanni, let your brother do it.)"
       },
       {
        "label": "b",
-       "text": "Lavinia permetti che io (finire) il mio discorso? ( Lavinia, will you allow me to finish what I’m saying? )"
+       "text": "Lavinia, permetti che io (finire) il mio discorso? (Lavinia, will you allow me to finish what I’m saying?)"
       },
       {
        "label": "c",
-       "text": "Voglio che Simone mi (dare) una mano. ( I want Simone to give me a hand .)"
+       "text": "Voglio che Simone mi (dare) una mano. (I want Simone to give me a hand.)"
       }
      ]
     },
@@ -8220,19 +8231,19 @@
      "items": [
       {
        "label": "a",
-       "text": "Sarà contento che tu _______________ you came/have come ."
+       "text": "Sarà contento che tu _______________ you came/have come."
       },
       {
        "label": "b",
-       "text": "Ho l’impressione che _______________ he has not understood ."
+       "text": "Ho l’impressione che _______________ he has not understood."
       },
       {
        "label": "c",
-       "text": "Non credo che _______________ they have arrived ."
+       "text": "Non credo che _______________ they have arrived."
       },
       {
        "label": "d",
-       "text": "Non è certo che _______________ they have forgotten ."
+       "text": "Non è certo che _______________ they have forgotten."
       }
      ]
     },
@@ -8243,15 +8254,15 @@
      "items": [
       {
        "label": "a",
-       "text": "I imagine it has been difficult ."
+       "text": "I imagine it has been difficult."
       },
       {
        "label": "b",
-       "text": "Maybe he has already left ."
+       "text": "Maybe he has already left."
       },
       {
        "label": "c",
-       "text": "It’s odd that they haven’t called ."
+       "text": "It’s odd that they haven’t called."
       },
       {
        "label": "d",
@@ -8328,19 +8339,19 @@
      "items": [
       {
        "label": "a",
-       "text": "Pensavo che … they had returned ."
+       "text": "Pensavo che … they had returned."
       },
       {
        "label": "b",
-       "text": "Era contento che … we had studied ."
+       "text": "Era contento che … we had studied."
       },
       {
        "label": "c",
-       "text": "Non sapevo se … you (tu) had understood ."
+       "text": "Non sapevo se … you (tu) had understood."
       },
       {
        "label": "d",
-       "text": "Era strano che … he had gone out early ."
+       "text": "Era strano che … he had gone out early."
       }
      ]
     },
@@ -8370,11 +8381,11 @@
     {
      "id": "r24-07",
      "n": 7,
-     "instruction": "What would happen if … What would have happened if … ? Complete the sentences.",
+     "instruction": "What would happen if … What would have happened if …? Complete the sentences.",
      "items": [
       {
        "label": "a",
-       "text": "If you came/were to come to my place … potremmo partire insieme. ( voi)"
+       "text": "If you came/were to come to my place … potremmo partire insieme. (voi)"
       },
       {
        "label": "b",
@@ -8460,7 +8471,7 @@
       },
       {
        "label": "d",
-       "text": "Era evidente che… they were not willing to help . ( essere disposto a )"
+       "text": "Era evidente che … they were not willing to help. (essere disposto a)"
       },
       {
        "label": "e",
@@ -8475,15 +8486,15 @@
      "items": [
       {
        "label": "a",
-       "text": "It’s the most beautiful place there is ."
+       "text": "It’s the most beautiful place there is."
       },
       {
        "label": "b",
-       "text": "It’s the most beautiful place I have ever seen ."
+       "text": "It’s the most beautiful place I have ever seen."
       },
       {
        "label": "c",
-       "text": "He was the only teacher who had ever helped me ."
+       "text": "He was the only teacher who had ever helped me."
       }
      ]
     },
@@ -8618,7 +8629,7 @@
       },
       {
        "label": "c",
-       "text": "‘Non è sicuro che il primo Ministro abbia intenzione di accettare la proposta.’ (Cinzia ha ritenuto che …)"
+       "text": "‘Non è sicuro che il primo ministro abbia intenzione di accettare la proposta.’ (Cinzia ha ritenuto che …)"
       },
       {
        "label": "d",
@@ -8626,7 +8637,7 @@
       },
       {
        "label": "e",
-       "text": "‘Quando avremo risolto la situazione finanziaria, potemo finalmente andar avanti.’ (Il ministro disse …)"
+       "text": "‘Quando avremo risolto la situazione finanziaria, potremo finalmente andar avanti.’ (Il ministro disse …)"
       }
      ]
     },
@@ -8709,19 +8720,35 @@
      "items": [
       {
        "label": "a",
-       "text": "He washed himself . (e) We kissed each other ."
+       "text": "He washed himself."
       },
       {
        "label": "b",
-       "text": "He washed the car . (f) They kissed us ."
+       "text": "He washed the car."
       },
       {
        "label": "c",
-       "text": "I dressed my daughter . (g) I felt unwell ."
+       "text": "I dressed my daughter."
       },
       {
        "label": "d",
-       "text": "I got dressed . (h) I felt a pain . ( un dolore )"
+       "text": "I got dressed."
+      },
+      {
+       "label": "e",
+       "text": "We kissed each other."
+      },
+      {
+       "label": "f",
+       "text": "They kissed us."
+      },
+      {
+       "label": "g",
+       "text": "I felt unwell."
+      },
+      {
+       "label": "h",
+       "text": "I felt a pain. (un dolore)"
       }
      ]
     },
@@ -8747,15 +8774,15 @@
      "items": [
       {
        "label": "a",
-       "text": "Franco, ti piace il nuovo corso? – Yes, I like it very much ."
+       "text": "Franco, ti piace il nuovo corso? – Yes, I like it very much."
       },
       {
        "label": "b",
-       "text": "Signora Marini, le piacciono i fiori? – Yes, I like them a lot ."
+       "text": "Signora Marini, le piacciono i fiori? – Yes, I like them a lot."
       },
       {
        "label": "c",
-       "text": "Antonio e Roberto, vi piace andare in palestra? – Yes, we like it very much ."
+       "text": "Antonio e Roberto, vi piace andare in palestra? – Yes, we like it very much."
       }
      ]
     },
@@ -8766,22 +8793,22 @@
      "items": [
       {
        "label": "a",
-       "text": "i tuoi figli: andare a teatro? ( Do your children like going to the theatre? )"
+       "text": "i tuoi figli: andare a teatro? (Do your children like going to the theatre?)"
       },
       {
        "label": "b",
-       "text": "tutti gli amici: viaggiare all’estero? ( Do all your friends like travelling abroad? )"
+       "text": "tutti gli amici: viaggiare all’estero? (Do all your friends like travelling abroad?)"
       },
       {
        "label": "c",
-       "text": "nessuno: la musica lirica? ( Doesn’t anyone like opera? )"
+       "text": "nessuno: la musica lirica? (Doesn’t anyone like opera?)"
       }
      ]
     },
     {
      "id": "r25-09",
      "n": 9,
-     "instruction": "You’ve been away as a family. Say who liked what, using the passato prossimo .",
+     "instruction": "You’ve been away as a family. Say who liked what, using the passato prossimo.",
      "items": [
       {
        "label": "a",
@@ -8820,7 +8847,7 @@
       },
       {
        "label": "d",
-       "text": "Nino e Sandro, (convenire) andare in aereo."
+       "text": "Nino e Sandro, (convenire) andare in aereo?"
       },
       {
        "label": "e",
@@ -8882,7 +8909,7 @@
     {
      "id": "r26-01",
      "n": 1,
-     "instruction": "Make these sentences passive using the auxiliary essere .",
+     "instruction": "Make these sentences passive using the auxiliary essere.",
      "items": [
       {
        "label": "a",
@@ -8898,7 +8925,7 @@
       },
       {
        "label": "d",
-       "text": "Credete che il pubblico accetterebbe un aumento dell’Iva??"
+       "text": "Credete che il pubblico accetterebbe un aumento dell’Iva?"
       },
       {
        "label": "e",
@@ -8932,7 +8959,7 @@
     {
      "id": "r26-03",
      "n": 3,
-     "instruction": "Substitute forms of venire or rimanere for essere , as appropriate.",
+     "instruction": "Substitute forms of venire or rimanere for essere, as appropriate.",
      "items": [
       {
        "label": "a",
@@ -8955,34 +8982,34 @@
     {
      "id": "r26-04",
      "n": 4,
-     "instruction": "The house is falling apart . Say what must be done using andare to complete the sentences.",
+     "instruction": "The house is falling apart. Say what must be done using andare to complete the sentences.",
      "items": [
       {
        "label": "a",
-       "text": "Il tetto ( must be ) riparato."
+       "text": "Il tetto (must be) riparato."
       },
       {
        "label": "b",
-       "text": "La cucina ( ought to be ) rinnovata."
+       "text": "La cucina (ought to be) rinnovata."
       },
       {
        "label": "c",
-       "text": "I soffitti ( will have to be ) rifatti."
+       "text": "I soffitti (will have to be) rifatti."
       },
       {
        "label": "d",
-       "text": "Le finestre ( should have been ) pulite."
+       "text": "Le finestre (should have been) pulite."
       }
      ]
     },
     {
      "id": "r26-01",
      "n": 1,
-     "instruction": "Substitute the passive constructions using the passive si .",
+     "instruction": "Substitute the passive constructions using the passive si.",
      "items": [
       {
        "label": "a",
-       "text": "Domani il pacco verrà spedito ."
+       "text": "Domani il pacco verrà spedito."
       },
       {
        "label": "b",
@@ -8990,22 +9017,22 @@
       },
       {
        "label": "c",
-       "text": "La città bombardata è stata abbandonata ."
+       "text": "La città bombardata è stata abbandonata."
       },
       {
        "label": "d",
-       "text": "Il prezzo non è stato preso in considerazione ."
+       "text": "Il prezzo non è stato preso in considerazione."
       },
       {
        "label": "e",
-       "text": "La settimana prossima tutte le finestre dovranno essere pulite ."
+       "text": "La settimana prossima tutte le finestre dovranno essere pulite."
       }
      ]
     },
     {
      "id": "r26-02",
      "n": 2,
-     "instruction": "Which of the following are si passivante and which si impersonale ? Mark each either P for passivante or I for impersonale .",
+     "instruction": "Which of the following are si passivante and which si impersonale? Mark each either P for passivante or I for impersonale.",
      "items": [
       {
        "label": "a",
@@ -9088,27 +9115,27 @@
      "items": [
       {
        "label": "a",
-       "text": "I will get the garden watered . (far innaffiare)"
+       "text": "I will get the garden watered. (far innaffiare)"
       },
       {
        "label": "b",
-       "text": "I will get/allow the children to water the garden ."
+       "text": "I will get/allow the children to water the garden."
       },
       {
        "label": "c",
-       "text": "She needs to get her hair cut . (far tagliare)"
+       "text": "She needs to get her hair cut. (far tagliare)"
       },
       {
        "label": "d",
-       "text": "She needs to get Dina to cut her hair ."
+       "text": "She needs to get Dina to cut her hair."
       },
       {
        "label": "e",
-       "text": "You should get the colours chosen tomorrow . (far scegliere)"
+       "text": "You should get the colours chosen tomorrow. (far scegliere)"
       },
       {
        "label": "f",
-       "text": "You should get the others to choose the colours ."
+       "text": "You should get the others to choose the colours."
       }
      ]
     },
@@ -9154,15 +9181,15 @@
      "items": [
       {
        "label": "a",
-       "text": "Non ho voglia di fare la cena – Falla preparare _____ figli, allora."
+       "text": "Non ho voglia di fare la cena. – Falla preparare _____ figli, allora."
       },
       {
        "label": "b",
        "text": "Ho perso la chiave del portone – Ma puoi farti aprire _____ portiere."
       },
       {
-       "label": "",
-       "text": "(c) Il riscaldamento non funziona. – Perché non ti fai prestare una stufa _____ vicini?"
+       "label": "c",
+       "text": "Il riscaldamento non funziona. – Perché non ti fai prestare una stufa _____ vicini?"
       },
       {
        "label": "d",
@@ -9178,7 +9205,7 @@
       },
       {
        "label": "g",
-       "text": "Mi ha offerto un prestito – Stai attenta a non lasciarti ingannare _____ quel ladrone."
+       "text": "Mi ha offerto un prestito. – Stai attenta a non lasciarti ingannare _____ quel ladrone."
       },
       {
        "label": "h",
@@ -9193,7 +9220,7 @@
      "items": [
       {
        "label": "a",
-       "text": "Non far cambiare la ruota a Luciano , Adriana lo sa fare."
+       "text": "Non far cambiare la ruota a Luciano, Adriana lo sa fare."
       },
       {
        "label": "b",
@@ -9201,11 +9228,11 @@
       },
       {
        "label": "c",
-       "text": "Dovresti far fare i lavori all’architetto , non alla designer d’interni ."
+       "text": "Dovresti far fare i lavori all’architetto, non alla designer d’interni."
       },
       {
        "label": "d",
-       "text": "Non lasciarti offendere da quelle ragazze ."
+       "text": "Non lasciarti offendere da quelle ragazze."
       }
      ]
     },
@@ -9216,14 +9243,14 @@
      "items": [
       {
        "label": "a",
-       "text": "Tua figlia è sensibile – perche non _____ fai suonare l’arpa?"
+       "text": "Tua figlia è sensibile – perché non _____ fai suonare l’arpa?"
       }
      ]
     },
     {
      "id": "r27-01",
      "n": 1,
-     "instruction": "You need help to get things ready . Complete the sentences by choosing between a or da .",
+     "instruction": "You need help to get things ready. Complete the sentences by choosing between a or da.",
      "items": [
       {
        "label": "a",
@@ -9246,7 +9273,7 @@
     {
      "id": "r27-02",
      "n": 2,
-     "instruction": "You’re moving in. Who will do what? Complete the sentences by choosing between a or da .",
+     "instruction": "You’re moving in. Who will do what? Complete the sentences by choosing between a or da.",
      "items": [
       {
        "label": "a",
@@ -9258,7 +9285,7 @@
       },
       {
        "label": "c",
-       "text": "Faremo pitturare le camera (a/da) l’imbianchino."
+       "text": "Faremo pitturare le camere (a/da) l’imbianchino."
       },
       {
        "label": "d",
@@ -9273,19 +9300,19 @@
      "items": [
       {
        "label": "a",
-       "text": "I’ll get Barbara to post the letter ."
+       "text": "I’ll get Barbara to post the letter."
       },
       {
        "label": "b",
-       "text": "I’ll get Angelo to buy the newspaper ."
+       "text": "I’ll get Angelo to buy the newspaper."
       },
       {
        "label": "c",
-       "text": "I’ll get Giacomo to write the letter ."
+       "text": "I’ll get Giacomo to write the letter."
       },
       {
        "label": "d",
-       "text": "I’ll get Patrizio to take Carla ."
+       "text": "I’ll get Patrizio to take Carla."
       }
      ]
     },
@@ -9296,50 +9323,50 @@
      "items": [
       {
        "label": "a",
-       "text": "( Make him ) studiare di più."
+       "text": "(Make him) studiare di più."
       },
       {
        "label": "b",
-       "text": "( Get him to ) studiare medicina."
+       "text": "(Get him to) studiare medicina."
       },
       {
        "label": "c",
-       "text": "( Make them ) tornare presto la sera."
+       "text": "(Make them) tornare presto la sera."
       },
       {
        "label": "d",
-       "text": "( Make them ) consegnare i compiti."
+       "text": "(Make them) consegnare i compiti."
       },
       {
        "label": "e",
-       "text": "( Let her ) uscire di più."
+       "text": "(Let her) uscire di più."
       },
       {
        "label": "f",
-       "text": "( Let her ) scegliere le materie che preferisce."
+       "text": "(Let her) scegliere le materie che preferisce."
       }
      ]
     },
     {
      "id": "r27-07",
      "n": 7,
-     "instruction": "Travel hitches . Can you say what happened next by completing each sentence in Italian?",
+     "instruction": "Travel hitches. Can you say what happened next by completing each sentence in Italian?",
      "items": [
       {
        "label": "a",
-       "text": "C’è stato un incendio all’aeroporto: They didn’t let us leave/We didn’t get to leave ."
+       "text": "C’è stato un incendio all’aeroporto: They didn’t let us leave/We didn’t get to leave."
       },
       {
        "label": "b",
-       "text": "C’è stato un incidente sull’autostrada: The police didn’t let him pass ."
+       "text": "C’è stato un incidente sull’autostrada: The police didn’t let him pass."
       },
       {
        "label": "c",
-       "text": "Avevo perso il biglietto d’imbarco: They didn’t let me on the plane . ( far salire su )"
+       "text": "Avevo perso il biglietto d’imbarco: They didn’t let me on the plane. (far salire su)"
       },
       {
        "label": "d",
-       "text": "Ho imboccata una strada a senso unico: The police made me turn round . ( tornare indietro )"
+       "text": "Ho imboccato una strada a senso unico: The police made me turn round. (tornare indietro)"
       }
      ]
     },
@@ -9350,84 +9377,84 @@
      "items": [
       {
        "label": "a",
-       "text": "I let Giuliano in ."
+       "text": "I let Giuliano in."
       },
       {
        "label": "b",
-       "text": "I knocked over the vase ."
+       "text": "I knocked over the vase."
       },
       {
        "label": "c",
-       "text": "I borrowed some money ."
+       "text": "I borrowed some money."
       },
       {
        "label": "d",
-       "text": "I dropped the tray . ( il vassoio )"
+       "text": "I dropped the tray. (il vassoio)"
       },
       {
        "label": "e",
-       "text": "I introduced him to my parents ."
+       "text": "I introduced him to my parents."
       },
       {
        "label": "f",
-       "text": "I reminded him he hadn’t paid ."
+       "text": "I reminded him he hadn’t paid."
       }
      ]
     },
     {
      "id": "r27-01",
      "n": 1,
-     "instruction": "Morning routines . Complete the following by inserting the correct verb forms.",
+     "instruction": "Morning routines. Complete the following by inserting the correct verb forms.",
      "items": [
       {
        "label": "a",
-       "text": "La mattina alle 6, ( I hear the alarm ring ). ( la sveglia )"
+       "text": "La mattina alle 6, (I hear the alarm ring). (la sveglia)"
       },
       {
        "label": "b",
-       "text": "Poi ( I see my husband get out of bed ) e ( go ) in bagno. ( scendere dal letto )"
+       "text": "Poi (I see my husband get out of bed) e (go) in bagno. (scendere dal letto)"
       },
       {
        "label": "c",
-       "text": "( I hear him have a shower ) e poi ( go down ) in cucina."
+       "text": "(I hear him have a shower) e poi (go down) in cucina."
       },
       {
        "label": "d",
-       "text": "Alle 7 scendo anch’io, in tempo per ( see him leave the ) casa. ( uscire di )"
+       "text": "Alle 7 scendo anch’io, in tempo per (see him leave the) casa. (uscire di)"
       },
       {
        "label": "e",
-       "text": "Dalla finestra ( I see him get into the car and leave ). ( salire in )"
+       "text": "Dalla finestra (I see him get into the car and leave). (salire in)"
       }
      ]
     },
     {
      "id": "r27-02",
      "n": 2,
-     "instruction": "Some likes, dislikes and wishes . Complete the sentences by giving the Italian equivalent of the English.",
+     "instruction": "Some likes, dislikes and wishes. Complete the sentences by giving the Italian equivalent of the English.",
      "items": [
       {
        "label": "a",
-       "text": "Il sabato mi piace ( seeing my team play )."
+       "text": "Il sabato mi piace (seeing my team play)."
       },
       {
        "label": "b",
-       "text": "Non mi piace ( seeing Giulia smoke )."
+       "text": "Non mi piace (seeing Giulia smoke)."
       },
       {
        "label": "c",
-       "text": "Mi piacerebbe ( hear the nightingale sing ). ( l’usignolo )"
+       "text": "Mi piacerebbe (hear the nightingale sing). (l’usignolo)"
       },
       {
        "label": "d",
-       "text": "Non ti piacerebbe ( watch the Prime Minister arrive )?"
+       "text": "Non ti piacerebbe (watch the Prime Minister arrive)?"
       }
      ]
     },
     {
      "id": "r27-04",
      "n": 4,
-     "instruction": "There has been a robbery . Express in Italian the questions asked by the inspector. Use Lei .",
+     "instruction": "There has been a robbery. Express in Italian the questions asked by the inspector. Use Lei.",
      "items": [
       {
        "label": "a",
@@ -9439,7 +9466,7 @@
       },
       {
        "label": "c",
-       "text": "Did you hear them slam the door? ( sbattere )"
+       "text": "Did you hear them slam the door? (sbattere)"
       },
       {
        "label": "d",
@@ -9462,7 +9489,7 @@
       },
       {
        "label": "c",
-       "text": "Ieri sera avete sentito i fans che tifavano per l’Inter?"
+       "text": "Ieri sera avete sentito i fan che tifavano per l’Inter?"
       },
       {
        "label": "d",
@@ -9477,11 +9504,11 @@
      "items": [
       {
        "label": "a",
-       "text": "Davide e Silvio, dove sono? – Here they are arriving now ."
+       "text": "Davide e Silvio, dove sono? – Here they are arriving now."
       },
       {
        "label": "b",
-       "text": "Anna, dov’è andata a finire? – There she is talking to Nina ."
+       "text": "Anna, dov’è andata a finire? – There she is talking to Nina."
       },
       {
        "label": "c",
@@ -9489,7 +9516,7 @@
       },
       {
        "label": "d",
-       "text": "Martina e Roberta sono già qui? – Of course, I saw them arrive a short while ago ."
+       "text": "Martina e Roberta sono già qui? – Of course, I saw them arrive a short while ago."
       }
      ]
     },
@@ -9500,34 +9527,34 @@
      "items": [
       {
        "label": "a",
-       "text": "I can see Livia waiting for you on the corner . ( tu )"
+       "text": "I can see Livia waiting for you on the corner. (tu)"
       },
       {
        "label": "b",
-       "text": "You will see Aldo waiting for you at the petrol/gas station . ( dal benzinaio ) ( voi )"
+       "text": "You will see Aldo waiting for you at the petrol/gas station. (dal benzinaio) (voi)"
       },
       {
        "label": "c",
-       "text": "I have just seen Mario waiting outside ."
+       "text": "I have just seen Mario waiting outside."
       },
       {
        "label": "d",
-       "text": "We saw Daniele waiting for the bus in the square ."
+       "text": "We saw Daniele waiting for the bus in the square."
       },
       {
        "label": "e",
-       "text": "I had seen Marta and Lucia waiting for the train at the station ."
+       "text": "I had seen Marta and Lucia waiting for the train at the station."
       },
       {
        "label": "f",
-       "text": "We could see Piero and Gina waiting for us in the bar ."
+       "text": "We could see Piero and Gina waiting for us in the bar."
       }
      ]
     },
     {
      "id": "r27-04",
      "n": 4,
-     "instruction": "Complete these sentences in Italian, choosing the appropriate form: stare a or stare + gerund . There are two sentences in which both are possible.",
+     "instruction": "Complete these sentences in Italian, choosing the appropriate form: stare a or stare + gerund. There are two sentences in which both are possible.",
      "items": [
       {
        "label": "a",
@@ -9612,35 +9639,35 @@
      "items": [
       {
        "label": "a",
-       "text": "I want to help him because he can’t pay the rent ."
+       "text": "I want to help him because he can’t pay the rent."
       },
       {
        "label": "b",
-       "text": "I have to see him because it’s essential to make a decision . ( prendere una decisione )"
+       "text": "I have to see him because it’s essential to make a decision. (prendere una decisione)"
       },
       {
        "label": "c",
-       "text": "You had better go now because they don’t like waiting . (use tu )"
+       "text": "You had better go now because they don’t like waiting. (use tu)"
       },
       {
        "label": "d",
-       "text": "It seems a shame to stay at home but Marco hates travelling ."
+       "text": "It seems a shame to stay at home but Marco hates travelling."
       },
       {
        "label": "e",
-       "text": "I can’t talk now, do you mind calling later? ( tu )"
+       "text": "I can’t talk now, do you mind calling later? (tu)"
       },
       {
        "label": "f",
-       "text": "I am sorry to say so, but I am obliged to pay the fine ."
+       "text": "I am sorry to say so, but I am obliged to pay the fine."
       },
       {
        "label": "g",
-       "text": "It seems necessary to ask for advice because no one knows how to do it . ( chiedere consiglio )"
+       "text": "It seems necessary to ask for advice because no one knows how to do it. (chiedere consiglio)"
       },
       {
        "label": "h",
-       "text": "I believe I can come, but I’m not interested in visiting the museum ."
+       "text": "I believe I can come, but I’m not interested in visiting the museum."
       }
      ]
     },
@@ -9651,23 +9678,23 @@
      "items": [
       {
        "label": "a",
-       "text": "È venuto ( to make/and made ) una telefonata, dopodiché è andato via."
+       "text": "È venuto (to make/and made) una telefonata, dopodiché è andato via."
       },
       {
        "label": "b",
-       "text": "Sono venuto qui ( to/in order to make ) una telefonata, ma il telefono è guasto."
+       "text": "Sono venuto qui (to/in order to make) una telefonata, ma il telefono è guasto."
       },
       {
-       "label": "",
-       "text": "(c) Siamo rimasti ( to see/and saw ) la partita."
+       "label": "c",
+       "text": "Siamo rimasti (to see/and saw) la partita."
       },
       {
        "label": "d",
-       "text": "Si annoiavano ( hearing ) sempre le stesse canzoni."
+       "text": "Si annoiavano (hearing) sempre le stesse canzoni."
       },
       {
        "label": "e",
-       "text": "Stavano alla finestra ( watching ) le stelle."
+       "text": "Stavano alla finestra (watching) le stelle."
       }
      ]
     },
@@ -9678,30 +9705,30 @@
      "items": [
       {
        "label": "a",
-       "text": "I got down to studying the verbs ."
+       "text": "I got down to studying the verbs."
       },
       {
        "label": "b",
-       "text": "I began to understand them ."
+       "text": "I began to understand them."
       },
       {
        "label": "c",
-       "text": "I carried on studying until midnight ."
+       "text": "I carried on studying until midnight."
       },
       {
        "label": "d",
-       "text": "I can’t ( manage to ) sleep ."
+       "text": "I can’t (manage to) sleep."
       },
       {
        "label": "e",
-       "text": "I can’t ( manage to ) pay ."
+       "text": "I can’t (manage to) pay."
       }
      ]
     },
     {
      "id": "r28-01",
      "n": 1,
-     "instruction": "Verbs of beginning, stopping, trying and deciding: do you know when to use di and when to use a ? Complete the sentences with the appropriate preposition. You may need to refer to Sections 28.2 and 28.3 in this chapter.",
+     "instruction": "Verbs of beginning, stopping, trying and deciding: do you know when to use di and when to use a? Complete the sentences with the appropriate preposition. You may need to refer to Sections 28.2 and 28.3 in this chapter.",
      "items": [
       {
        "label": "a",
@@ -9748,15 +9775,15 @@
     {
      "id": "r28-03",
      "n": 3,
-     "instruction": "Give the Italian equivalent of the English, using the verbs supplied with either di or a .",
+     "instruction": "Give the Italian equivalent of the English, using the verbs supplied with either di or a.",
      "items": [
       {
        "label": "a",
-       "text": "I have got fed up of waiting . (stufarsi)"
+       "text": "I have got fed up of waiting. (stufarsi)"
       },
       {
        "label": "b",
-       "text": "I get tired studying in the evening . (stancarsi)"
+       "text": "I get tired studying in the evening. (stancarsi)"
       },
       {
        "label": "c",
@@ -9764,7 +9791,7 @@
       },
       {
        "label": "d",
-       "text": "I’m ashamed that I cheated/of having cheated Carla ."
+       "text": "I’m ashamed that I cheated/of having cheated Carla."
       }
      ]
     },
@@ -9775,19 +9802,19 @@
      "items": [
       {
        "label": "a",
-       "text": "I am waiting for the train ."
+       "text": "I am waiting for the train."
       },
       {
        "label": "b",
-       "text": "I am looking for my iPad ."
+       "text": "I am looking for my iPad."
       },
       {
        "label": "c",
-       "text": "I am listening to the radio ."
+       "text": "I am listening to the radio."
       },
       {
        "label": "d",
-       "text": "I am looking at the photos ."
+       "text": "I am looking at the photos."
       }
      ]
     },
@@ -9798,23 +9825,23 @@
      "items": [
       {
        "label": "a",
-       "text": "I will pay for the drinks and then I’ll pay the hotel ."
+       "text": "I will pay for the drinks and then I’ll pay the hotel."
       },
       {
        "label": "b",
-       "text": "Can you pay the electrician? ( l’elettricista )"
+       "text": "Can you pay the electrician? (l’elettricista)"
       },
       {
        "label": "c",
-       "text": "I am paying for Maria ."
+       "text": "I am paying for Maria."
       },
       {
        "label": "d",
-       "text": "I have paid Luca 200 euros ."
+       "text": "I have paid Luca 200 euros."
       },
       {
        "label": "e",
-       "text": "I have paid (for) Sandra’s fare . ( il viaggio )"
+       "text": "I have paid (for) Sandra’s fare. (il viaggio)"
       }
      ]
     },
@@ -9825,19 +9852,19 @@
      "items": [
       {
        "label": "a",
-       "text": "Bere ( is bad for ) il fegato."
+       "text": "Bere (is bad for) il fegato."
       },
       {
        "label": "b",
-       "text": "( I love ) i nonni. ( voler bene )"
+       "text": "(I love) i nonni. (voler bene)"
       },
       {
        "label": "c",
-       "text": "( I took part in ) un convegno interessante."
+       "text": "(I took part in) un convegno interessante."
       },
       {
        "label": "d",
-       "text": "( I gave up ) l’idea di cambiare casa."
+       "text": "(I gave up) l’idea di cambiare casa."
       }
      ]
     },
@@ -9856,11 +9883,11 @@
       },
       {
        "label": "c",
-       "text": "Lo devi costringere ______ pagare."
+       "text": "Lo devi costringere _____ pagare."
       },
       {
        "label": "d",
-       "text": "Gli devi ordinare ______ pagare."
+       "text": "Gli devi ordinare _____ pagare."
       }
      ]
     },
@@ -9871,19 +9898,19 @@
      "items": [
       {
        "label": "a",
-       "text": "Ieri ( him ) ho proibito ______ uscire."
+       "text": "Ieri (him) ho proibito _____ uscire."
       },
       {
        "label": "b",
-       "text": "Domani ( him ) convincerò ______ uscire."
+       "text": "Domani (him) convincerò _____ uscire."
       },
       {
        "label": "c",
-       "text": "Ieri ( her ) ho chiesto _______ rimanere."
+       "text": "Ieri (her) ho chiesto _____ rimanere."
       },
       {
        "label": "d",
-       "text": "Domani ( her ) costringerò ______ rimanere."
+       "text": "Domani (her) costringerò _____ rimanere."
       }
      ]
     },
@@ -9894,27 +9921,27 @@
      "items": [
       {
        "label": "a",
-       "text": "I told Simona to come later . ( dire )"
+       "text": "I told Simona to come later. (dire)"
       },
       {
        "label": "b",
-       "text": "I invited Angelo to come . ( invitare )"
+       "text": "I invited Angelo to come. (invitare)"
       },
       {
        "label": "c",
-       "text": "I asked Martina to leave . ( chiedere )"
+       "text": "I asked Martina to leave. (chiedere)"
       },
       {
        "label": "d",
-       "text": "I reminded Susi to phone . ( ricordare )"
+       "text": "I reminded Susi to phone. (ricordare)"
       },
       {
        "label": "e",
-       "text": "He made Susi phone . ( costringere )"
+       "text": "He made Susi phone. (costringere)"
       },
       {
        "label": "f",
-       "text": "She begged Fabrizio to write . ( pregare )"
+       "text": "She begged Fabrizio to write. (pregare)"
       }
      ]
     },
@@ -9925,35 +9952,35 @@
      "items": [
       {
        "label": "a",
-       "text": "I am worried about my father’s health ."
+       "text": "I am worried about my father’s health."
       },
       {
        "label": "b",
-       "text": "I have made enquiries about him ."
+       "text": "I have made enquiries about him."
       },
       {
        "label": "c",
-       "text": "I have thanked them for the flowers ."
+       "text": "I have thanked them for the flowers."
       },
       {
        "label": "d",
-       "text": "Don’t bother about the details ."
+       "text": "Don’t bother about the details."
       },
       {
        "label": "e",
-       "text": "He ended up becoming president ."
+       "text": "He ended up becoming president."
       },
       {
        "label": "f",
-       "text": "You must apologise to Lino for your behaviour . ( comportamento, tu )"
+       "text": "You must apologise to Lino for your behaviour. (comportamento, tu)"
       },
       {
        "label": "g",
-       "text": "Thank you for everything. I am glad I can count on you . ( tu )"
+       "text": "Thank you for everything. I am glad I can count on you. (tu)"
       },
       {
        "label": "h",
-       "text": "He spends all day surfing the Web ."
+       "text": "He spends all day surfing the Web."
       }
      ]
     },
@@ -9995,7 +10022,7 @@
      "items": [
       {
        "label": "a",
-       "text": "You can believe what you want ."
+       "text": "You can believe what you want."
       },
       {
        "label": "b",
@@ -10015,7 +10042,7 @@
       },
       {
        "label": "f",
-       "text": "He talked to me about his job ."
+       "text": "He talked to me about his job."
       }
      ]
     }

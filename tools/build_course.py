@@ -526,7 +526,9 @@ def split_answers(answer: str) -> list:
         part = part.strip()
         if part and part not in out:
             out.append(part)
-    if "," in answer:
+    # Only word lists split on commas («soltanto, solamente»); a sentence
+    # with commas is one answer, not several.
+    if "," in answer and all(len(p.split()) <= 2 for p in answer.split(",")):
         for part in answer.split(","):
             part = part.strip()
             if part and part not in out:
@@ -605,6 +607,16 @@ def main() -> None:
         dummies = json.load(fh)
     with open(os.path.join(DATA, "bank_routledge.json"), encoding="utf-8") as fh:
         routledge = json.load(fh)
+    # The book restarts exercise numbers in every subsection, so the same id
+    # can name several exercises: make each one unique (r07-02, r07-02b…),
+    # otherwise scoring one would score them all.
+    seen_ids = {}
+    for c in routledge["chapters"]:
+        for x in c["challenges"]:
+            n = seen_ids.get(x["id"], 0)
+            seen_ids[x["id"]] = n + 1
+            if n:
+                x["id"] = x["id"] + "abcdefghijklmnopqrstuvwxyz"[n]
 
     # --- graded items from the Dummies bank -----------------------------
     items = []
