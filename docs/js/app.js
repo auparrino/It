@@ -170,9 +170,9 @@
     var pct = Math.min(100, Math.round(todayXp / goal * 100));
     $("#hdr").innerHTML =
       '<div class="bar">' +
-        '<button class="brand" id="home">La Via C1' +
-          '<small>liv. ' + lv.level + ' · ' + esc(Engine.rankFor(lv.level)) +
-          '</small></button>' +
+        // El logo es una placa de calle romana: «La Via» es el camino.
+        '<button class="brand targa" id="home"><span class="t-sup">liv. ' + lv.level + ' · ' +
+          esc(Engine.rankFor(lv.level)) + '</span><span class="t-via">Via C1</span></button>' +
         '<div class="stats">' +
           '<div class="stat' + (state.streak > 0 ? " hot" : "") + '"><b>' + state.streak + "<i>🔥</i></b><span>racha</span></div>" +
           '<div class="stat"><b>' + (state.shields || 0) + '🛡️</b><span>escudos</span></div>' +
@@ -497,6 +497,13 @@
     return state.weekStats[n] || { attempts: 0, right: 0, bossPassed: false };
   }
 
+  // Settimana XVII: numeri romani sulle targhe.
+  function romano(n) {
+    var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
+    v.forEach(function (p) { while (n >= p[0]) { out += p[1]; n -= p[0]; } });
+    return out;
+  }
+
   function renderPercorso() {
     var total = 0, got = 0;
     course.weeks.forEach(function (w) { total += 3; got += weekStars(w); });
@@ -507,7 +514,7 @@
       '<span class="goalbar"><i style="width:' + Math.round(got / total * 100) + '%"></i></span></div>';
 
     course.seasons.forEach(function (s) {
-      html += '<div class="season"><div class="banner"><span class="lvl">' + esc(s.level) + "</span>" +
+      html += '<div class="season"><div class="banner s' + s.n + '"><span class="lvl">' + esc(s.level) + "</span>" +
         "<h2>" + esc(s.name) + "</h2><p>" + esc(s.blurb) + '</p></div><div class="path">';
       course.weeks.filter(function (w) { return w.season === s.n; }).forEach(function (w, k) {
         var open = w.week <= state.unlocked;
@@ -755,7 +762,8 @@
     var nChal = (w.challenges || []).length;
 
     return '<button class="btn ghost" id="back">← al percorso</button>' +
-      '<h1>Settimana ' + w.week + " · " + esc(w.title) + '</h1>' +
+      '<h1 class="targa big"><span class="t-sup">Settimana ' + romano(w.week) + " · " + esc(w.level) +
+        '</span><span class="t-via">' + esc(w.title) + "</span></h1>" +
       '<p class="lead">' + esc(w.focus) + '</p>' +
       missions(w, st, nChal) +
       '<div class="card"><h2>Lo que se juega esta semana</h2>' +

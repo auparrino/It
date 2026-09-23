@@ -18,8 +18,8 @@
   --sfondo: #f5eee2;
   --ombra: 0 1px 2px rgba(60,35,15,.06), 0 10px 28px rgba(60,35,15,.08);
   --raggio: 20px;
-  --serif: "Fraunces", Georgia, "Times New Roman", serif;
-  --sans: "Nunito", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --serif: "Bodoni Moda", "Didot", Georgia, "Times New Roman", serif;
+  --sans: "Titillium Web", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   color-scheme: light;
 }
@@ -41,12 +41,20 @@
   }
 }
 
-@font-face { font-family: "Fraunces"; font-style: normal; font-weight: 500 800; font-display: swap;
-  src: url(../fonts/fraunces-normal.woff2) format("woff2"); }
-@font-face { font-family: "Fraunces"; font-style: italic; font-weight: 500 700; font-display: swap;
-  src: url(../fonts/fraunces-italic.woff2) format("woff2"); }
-@font-face { font-family: "Nunito"; font-style: normal; font-weight: 500 900; font-display: swap;
-  src: url(../fonts/nunito-normal.woff2) format("woff2"); }
+/* Bodoni Moda (Bodoni era de Parma) y Titillium Web (Accademia di Belle
+   Arti di Urbino): dos tipografías italianas, servidas desde el propio sitio. */
+@font-face { font-family: "Bodoni Moda"; font-style: normal; font-weight: 400 900; font-display: swap;
+  src: url(../fonts/bodoni-normal.woff2) format("woff2"); }
+@font-face { font-family: "Bodoni Moda"; font-style: italic; font-weight: 400 900; font-display: swap;
+  src: url(../fonts/bodoni-italic.woff2) format("woff2"); }
+@font-face { font-family: "Titillium Web"; font-style: normal; font-weight: 400; font-display: swap;
+  src: url(../fonts/titillium-normal-400.woff2) format("woff2"); }
+@font-face { font-family: "Titillium Web"; font-style: normal; font-weight: 600; font-display: swap;
+  src: url(../fonts/titillium-normal-600.woff2) format("woff2"); }
+@font-face { font-family: "Titillium Web"; font-style: normal; font-weight: 700 800; font-display: swap;
+  src: url(../fonts/titillium-normal-700.woff2) format("woff2"); }
+@font-face { font-family: "Titillium Web"; font-style: normal; font-weight: 900; font-display: swap;
+  src: url(../fonts/titillium-normal-900.woff2) format("woff2"); }
 
 * { box-sizing: border-box; }
 
@@ -857,3 +865,165 @@ body.ingame .feedback.sbagliato #lesnext2 { background: var(--rosso-chiaro); box
 .stem .w.gl:active { background: rgba(31,122,77,.15); }
 .stem .w.gl.new { text-decoration: underline dotted; text-underline-offset: 4px;
   text-decoration-color: var(--verde); }
+
+/* =====================================================================
+   Estetica italiana.  «La Via» è una strada: il logo e le settimane sono
+   targhe di via romane in travertino; le schede grandi sono maioliche di
+   Vietri e la pausa caffè ha la tenda a righe del bar.  Bodoni per i
+   titoli, Titillium per il resto.
+   ===================================================================== */
+
+:root {
+  --verde: #1e6b48;          /* verde bottiglia */
+  --verde-chiaro: #2f8f62;
+  --verde-scuro: #134a31;
+  --rosso: #b8432b;          /* terracotta */
+  --rosso-chiaro: #d4593d;
+  --rosso-scuro: #862f1e;
+  --oro: #e2ad1b;            /* limone di Amalfi */
+  --oro-scuro: #a47a0c;
+  --blu: #1f4f8f;            /* blu cobalto, maiolica */
+  --blu-scuro: #143866;
+  --travertino: #efe6d4;
+  --travertino-ombra: #cdbd9f;
+  --inchiostro: #2a211b;
+  --carta: #fffcf5;
+  --sfondo: #f3ead9;
+  --grigio: #7b6a58;
+  --grigio-chiaro: #e6dac4;
+  --maiolica: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E%3Cg fill='none' stroke='%23fff' stroke-width='1.5' stroke-opacity='.24'%3E%3Cpath d='M28 7c6 7 6 14 0 21c-6-7-6-14 0-21zM28 49c6-7 6-14 0-21c-6 7-6 14 0 21zM7 28c7-6 14-6 21 0c-7 6-14 6-21 0zM49 28c-7-6-14-6-21 0c7 6 14 6 21 0z'/%3E%3Ccircle cx='28' cy='28' r='3.5'/%3E%3Cpath d='M0 9a9 9 0 0 0 9-9M47 0a9 9 0 0 0 9 9M56 47a9 9 0 0 0-9 9M9 56a9 9 0 0 0-9-9'/%3E%3C/g%3E%3C/svg%3E");
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --verde: #3f9b6e; --verde-chiaro: #57b585; --verde-scuro: #1f5a3e;
+    --rosso: #d0644a; --rosso-chiaro: #e27b61; --rosso-scuro: #8c3524;
+    --oro: #eab93a; --oro-scuro: #a67d12; --blu: #4a7fc4; --blu-scuro: #24497c;
+    --inchiostro: #f3eadb; --carta: #221b16; --sfondo: #16110e;
+    --grigio: #b4a38e; --grigio-chiaro: #3a2f27;
+  }
+}
+
+body { font-weight: 400; letter-spacing: .005em;
+  background:
+    radial-gradient(1000px 420px at 100% -8%, color-mix(in srgb, var(--oro) 12%, transparent), transparent 60%),
+    radial-gradient(800px 480px at -15% 8%, color-mix(in srgb, var(--verde) 9%, transparent), transparent 60%),
+    var(--sfondo);
+  background-attachment: fixed; }
+b, strong { font-weight: 700; }
+
+/* titoli: Bodoni, con il corsivo per l'italiano */
+h1, h2, .brand, .stem, .fit, .rk, .scorebig b, .lsec, .fdg .fit { font-family: var(--serif); }
+h1 { font-weight: 800; letter-spacing: -.01em; font-size: 2.15rem; line-height: 1.08;
+  font-variation-settings: "opsz" 72; }
+h2 { font-weight: 700; letter-spacing: 0; font-variation-settings: "opsz" 28; }
+h3 { font-family: var(--sans); font-weight: 700; letter-spacing: .14em; font-size: .78rem; }
+.stem { font-weight: 600; font-variation-settings: "opsz" 36; }
+.lesson i.it, ul.exs .it, .fit, body.ingame .feedback .sol, .note i.it, .call i.it, .diag i.it {
+  font-family: var(--serif); font-style: italic; }
+
+/* ---------- la targa: travertino, filetto inciso, capitali romane */
+.targa { display: inline-flex; flex-direction: column; align-items: center; gap: 0;
+  background: linear-gradient(160deg, #f7f1e4 0%, var(--travertino) 55%, #e2d6bf 100%);
+  color: #2b2520; border-radius: 5px; padding: 5px 12px 4px; text-align: center;
+  border: 1px solid var(--travertino-ombra);
+  box-shadow: inset 0 0 0 3px #f6efe1, inset 0 0 0 4px #8f7d61, 0 2px 0 rgba(60,40,20,.25), 0 6px 14px rgba(60,40,20,.12); }
+.targa .t-sup { font-family: var(--sans); font-size: .56rem; font-weight: 700; letter-spacing: .22em;
+  text-transform: uppercase; color: #6f604c; line-height: 1.4; }
+.targa .t-via { font-family: var(--serif); font-weight: 800; font-size: 1.12rem; letter-spacing: .12em;
+  text-transform: uppercase; line-height: 1.1; font-variation-settings: "opsz" 20; }
+.brand.targa { margin: 2px 0; }
+.targa.big { display: flex; width: 100%; margin: 18px 0 10px; padding: 12px 16px 12px; border-radius: 8px;
+  box-shadow: inset 0 0 0 5px #f6efe1, inset 0 0 0 6px #8f7d61, 0 3px 0 rgba(60,40,20,.28), 0 10px 22px rgba(60,40,20,.14); }
+.targa.big .t-sup { font-size: .7rem; letter-spacing: .3em; }
+.targa.big .t-via { font-size: 1.55rem; letter-spacing: .06em; line-height: 1.15; margin-top: 2px;
+  font-variation-settings: "opsz" 40; }
+@media (max-width: 520px) { .targa.big .t-via { font-size: 1.3rem; } }
+
+/* ---------- header: bianco latte, tricolore sottile */
+header.top { border-bottom: 1px solid var(--grigio-chiaro); }
+header.top::before { height: 4px;
+  background: linear-gradient(90deg, #1e8a4c 0 33.3%, #f4f1ea 33.3% 66.6%, #c8352e 66.6%); }
+.stat { background: color-mix(in srgb, var(--sfondo) 70%, var(--carta)); border: 1px solid var(--grigio-chiaro); }
+.stat b { font-weight: 900; }
+.xpbar i { background: linear-gradient(90deg, var(--verde-chiaro), var(--oro)); }
+
+/* ---------- schede: carta da menù, filetto sottile */
+.card { border-radius: 14px; border: 1px solid var(--grigio-chiaro);
+  box-shadow: 0 1px 0 rgba(255,255,255,.6) inset, 0 8px 24px rgba(60,35,15,.07); }
+@media (prefers-color-scheme: dark) { .card { box-shadow: 0 8px 24px rgba(0,0,0,.35); } }
+p.lead { font-size: 1.04rem; }
+
+/* ---------- oggi: maioliche e la tenda del bar */
+.bigbtn { border-radius: 16px; background-blend-mode: normal; }
+.bigbtn::after { display: none; }
+.bigbtn b { font-family: var(--serif); font-size: 1.42rem; font-weight: 800; font-style: italic;
+  font-variation-settings: "opsz" 36; }
+.bigbtn small { font-weight: 600; letter-spacing: .02em; }
+.bigbtn .e { background: rgba(255,255,255,.2); border-radius: 50%; border: 1.5px solid rgba(255,255,255,.35); }
+.bigbtn.pausa { padding-top: 34px;
+  background: var(--maiolica) 0 0 / 56px 56px, linear-gradient(160deg, #175c3e, #1e6b48 55%, #2f8f62); }
+.bigbtn.pausa::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 22px; z-index: 1;
+  background: repeating-linear-gradient(90deg, #f6f0e2 0 22px, #1e8a4c 22px 44px);
+  -webkit-mask: radial-gradient(11px at 11px 11px, #000 98%, transparent) 0 11px / 22px 22px repeat-x,
+    linear-gradient(#000, #000) 0 0 / 100% 11px no-repeat;
+          mask: radial-gradient(11px at 11px 11px, #000 98%, transparent) 0 11px / 22px 22px repeat-x,
+    linear-gradient(#000, #000) 0 0 / 100% 11px no-repeat;
+  filter: drop-shadow(0 2px 1px rgba(0,0,0,.18)); }
+.bigbtn.lampo { color: #3a2a05;
+  background: var(--maiolica) 0 0 / 56px 56px, linear-gradient(160deg, #e2ad1b, #f1c94e); }
+.bigbtn.scena {
+  background: var(--maiolica) 28px 28px / 56px 56px, linear-gradient(160deg, #9c3622, #b8432b 55%, #d4593d); }
+.bigbtn.ripasso {
+  background: var(--maiolica) 0 0 / 56px 56px, linear-gradient(160deg, #143866, #1f4f8f 60%, #2d67b0); }
+.weekcard b { font-family: var(--serif); font-weight: 800; font-size: 1.3rem; }
+.fdg { border-left: 4px solid var(--oro); }
+.fdg .fit { font-size: 1.4rem; font-weight: 600; }
+.heat i.h1 { background: color-mix(in srgb, var(--oro) 45%, transparent); }
+.heat i.h2 { background: color-mix(in srgb, var(--rosso-chiaro) 70%, transparent); }
+.heat i.h3 { background: var(--verde); }
+
+/* ---------- percorso: le stagioni su piastrelle, i nodi come sampietrini */
+.banner { border-radius: 14px; box-shadow: 0 4px 0 rgba(0,0,0,.2); }
+.season .banner.s1 { background: var(--maiolica) 0 0 / 56px 56px, linear-gradient(160deg, #134a31, #1e6b48 60%, #2f8f62); color: #fff; }
+.season .banner.s2 { background: var(--maiolica) 0 0 / 56px 56px, linear-gradient(160deg, #a47a0c, #e2ad1b 70%, #f1c94e); color: #3a2a05; }
+.season .banner.s3 { background: var(--maiolica) 0 0 / 56px 56px, linear-gradient(160deg, #862f1e, #b8432b 60%, #d4593d); color: #fff; }
+.season .banner.s4 { background: var(--maiolica) 0 0 / 56px 56px, linear-gradient(160deg, #143866, #1f4f8f 60%, #2d67b0); color: #fff; }
+.banner h2 { font-style: italic; font-size: 1.6rem; }
+.node .dot { border-radius: 42%; font-family: var(--sans); font-weight: 900; }
+.node.boss .dot { border-radius: 14px; }
+.pathsum b { font-family: var(--serif); font-size: 1.3rem; }
+
+/* ---------- missioni e liste */
+.mission { border-radius: 14px; }
+.mission b, .scene b, .lab b, .ep b, .week .t { font-family: var(--serif); font-weight: 700; }
+.mission .mi { border-radius: 50%; border: 1.5px solid var(--grigio-chiaro); }
+
+/* ---------- bottoni */
+.btn { border-radius: 12px; font-weight: 700; letter-spacing: .03em; }
+.tab { font-weight: 700; }
+
+/* ---------- gioco */
+.prompt { font-weight: 600; letter-spacing: .01em; }
+.opt { border-radius: 12px; font-weight: 600; }
+.opt::before { border-radius: 50%; font-family: var(--serif); font-style: italic; font-weight: 700; }
+.stem .gap { border-bottom-color: var(--oro); }
+body.ingame .feedback:not(.prompt) { border-radius: 18px 18px 0 0;
+  border-top: 4px solid transparent; }
+body.ingame .feedback.giusto { border-top-color: var(--verde-chiaro); }
+body.ingame .feedback.sbagliato { border-top-color: var(--rosso-chiaro); }
+body.ingame .feedback.quasi { border-top-color: var(--oro); }
+body.ingame .feedback .verdict { font-style: italic; font-size: 1.6rem; }
+
+/* ---------- lezione */
+.lesson h2 { font-size: 1.35rem; font-style: italic; }
+.lesson p.rule { background: color-mix(in srgb, var(--verde) 7%, var(--carta));
+  border-left-color: var(--verde); border-radius: 0 8px 8px 0; }
+.lescard .badge-new, .lescard.quiz .badge-new, .intro .badge-new { border-radius: 4px; letter-spacing: .14em; }
+table.gram th { letter-spacing: .12em; }
+.call.warn b, .call.tip b { letter-spacing: .14em; }
+
+/* ---------- nav */
+.nav button.on { color: var(--verde); }
+.nav button { font-weight: 700; letter-spacing: .02em; }
+.brand.targa { text-align: center; font-size: 1rem; letter-spacing: 0; }
+.mission b, .weekcard b, .scene b, .lab b, .ep b, .week .t { font-weight: 800; }

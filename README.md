@@ -262,9 +262,15 @@ y los dos bancos extraídos de libros (este último con ~125 respuestas corregid
 en *Dummies* y errores de extracción limpiados en *Soluzioni*). Las reglas que
 el corrector enuncia en español también se revisaron una por una.
 
-**Diseño.** Paleta de café italiano (papel, basílico, terracota, azafrán) con
-modo oscuro; *Fraunces* para el italiano y *Nunito* para la interfaz, servidas
-desde `docs/fonts/` (licencia SIL OFL, incluida) para que funcionen sin red.
+**Diseño.** «La Via» es una calle: el logo y el título de cada semana son
+**placas de calle romanas** en travertino, con la semana en números romanos
+(*Settimana XVII*). Las tarjetas grandes llevan un patrón de **maiólica** de
+Vietri sobre verde botella, limón de Amalfi, terracota y azul cobalto, y la
+Pausa caffè tiene el **toldo a rayas** de un bar. Tipografías italianas:
+*Bodoni Moda* (Bodoni era de Parma) para títulos y el italiano, y *Titillium
+Web* (Accademia di Belle Arti di Urbino) para la interfaz, servidas desde
+`docs/fonts/` (licencia SIL OFL, incluida) para que funcionen sin red. Con
+modo oscuro.
 
 El gimnasio de verbos genera preguntas en vez de almacenarlas: 96 verbos × 14
 tiempos × 6 personas dan más de 8.000 formas distintas, con distractores tomados
