@@ -37,9 +37,12 @@
   --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   color-scheme: light;
 }
+/* il tema: segue il telefono, oppure quello scelto in alto (☀️/🌙) o in Io */
+html[data-theme="dark"] { color-scheme: dark; }
+html[data-theme="light"] { color-scheme: light; }
 
 @media (prefers-color-scheme: dark) {
-  :root {
+  html:not([data-theme="light"]) {
     --terracotta: #f0674a; --terracotta-scura: #c94a2c; --terracotta-chiara: #ff8a6a;
     --verde: #34c47a; --verde-chiaro: #55d894; --verde-scuro: #1d8a52;
     --oro: #ffd24a; --oro-scuro: #d1a20e;
@@ -51,6 +54,17 @@
     color-scheme: dark;
   }
 }
+html[data-theme="dark"] {
+    --terracotta: #f0674a; --terracotta-scura: #c94a2c; --terracotta-chiara: #ff8a6a;
+    --verde: #34c47a; --verde-chiaro: #55d894; --verde-scuro: #1d8a52;
+    --oro: #ffd24a; --oro-scuro: #d1a20e;
+    --azzurro: #5aa3f5; --azzurro-scuro: #2f75c8;
+    --cielo: #12356a; --cielo-chiaro: #0f1f3b;
+    --intonaco: #0f141b; --carta: #1a2029; --travertino: #262e38;
+    --inchiostro: #f2eee6; --grigio: #a9a59d; --grigio-chiaro: #2f3843;
+    --ombra: 0 1px 2px rgba(0,0,0,.4), 0 6px 18px rgba(0,0,0,.35);
+    color-scheme: dark;
+  }
 
 @font-face { font-family: "Bodoni Moda"; font-style: normal; font-weight: 400 900; font-display: swap;
   src: url(../fonts/bodoni-normal.woff2) format("woff2"); }
@@ -115,7 +129,8 @@ header.top .bar {
 .targa { display: inline-flex; flex-direction: column; align-items: center;
   background: var(--travertino); color: var(--inchiostro); border-radius: 4px; padding: 5px 12px 4px;
   text-align: center; box-shadow: inset 0 0 0 1px var(--carta), inset 0 0 0 2px color-mix(in srgb, var(--grigio) 55%, transparent); }
-@media (prefers-color-scheme: dark) { .targa { box-shadow: inset 0 0 0 1px var(--carta), inset 0 0 0 2px var(--grigio); } }
+@media (prefers-color-scheme: dark) { html:not([data-theme="light"]) .targa { box-shadow: inset 0 0 0 1px var(--carta), inset 0 0 0 2px var(--grigio); } }
+html[data-theme="dark"] .targa { box-shadow: inset 0 0 0 1px var(--carta), inset 0 0 0 2px var(--grigio); }
 .targa .t-sup { font-family: var(--sans); font-size: .56rem; font-weight: 700; letter-spacing: .22em;
   text-transform: uppercase; color: var(--grigio); line-height: 1.4; }
 .targa .t-via { font-family: var(--serif); font-weight: 800; font-size: 1.1rem; letter-spacing: .1em;
@@ -423,7 +438,8 @@ body.ingame header.top .stats .stat:nth-child(2) { display: none; }
 .hud { display: flex; align-items: center; gap: 10px; margin: 14px 0 12px; flex-wrap: nowrap; }
 .hud .muted { font-style: italic; font-weight: 700; font-size: 1rem;
   color: var(--azzurro-scuro); white-space: nowrap; }
-@media (prefers-color-scheme: dark) { .hud .muted { color: var(--azzurro); } }
+@media (prefers-color-scheme: dark) { html:not([data-theme="light"]) .hud .muted { color: var(--azzurro); } }
+html[data-theme="dark"] .hud .muted { color: var(--azzurro); }
 .hud .dai { font-style: italic; font-weight: 700; font-size: .95rem;
   color: var(--terracotta); white-space: nowrap; animation: rise .4s ease backwards; }
 .hearts { white-space: nowrap; font-size: .92rem; letter-spacing: 0; }
@@ -450,7 +466,8 @@ body.ingame #app > .card::before { content: ""; position: absolute; left: 0; rig
 .stem .gap.n { display: inline-grid; place-items: center; min-width: 30px; height: 26px; padding: 0 8px; margin: 0 2px;
   border: none; border-radius: 8px; background: color-mix(in srgb, var(--oro) 22%, transparent); color: var(--oro-scuro);
   font-family: var(--sans); font-size: .85rem; font-weight: 800; vertical-align: middle; }
-@media (prefers-color-scheme: dark) { .stem .gap.n { color: var(--oro); } }
+@media (prefers-color-scheme: dark) { html:not([data-theme="light"]) .stem .gap.n { color: var(--oro); } }
+html[data-theme="dark"] .stem .gap.n { color: var(--oro); }
 .stem .w.gl { cursor: pointer; border-radius: 3px; }
 .stem .w.gl:active { background: color-mix(in srgb, var(--verde) 15%, transparent); }
 .stem .w.gl.new { text-decoration: underline dotted; text-underline-offset: 4px; text-decoration-color: var(--verde); }
@@ -470,7 +487,8 @@ body.ingame #app > .card::before { content: ""; position: absolute; left: 0; rig
 .opt.wrong { border-color: var(--terracotta); background: color-mix(in srgb, var(--terracotta) 12%, var(--carta)); color: var(--terracotta-scura);
   animation: shake .32s ease; }
 .opt.wrong::before { content: "✕"; color: #fff; background: var(--terracotta); border-color: var(--terracotta); }
-@media (prefers-color-scheme: dark) { .opt.right { color: var(--verde-chiaro); } .opt.wrong { color: var(--terracotta-chiara); } }
+@media (prefers-color-scheme: dark) { html:not([data-theme="light"]) .opt.right { color: var(--verde-chiaro); } html:not([data-theme="light"]) .opt.wrong { color: var(--terracotta-chiara); } }
+html[data-theme="dark"] .opt.right { color: var(--verde-chiaro); } html[data-theme="dark"] .opt.wrong { color: var(--terracotta-chiara); }
 .opt:disabled { cursor: default; }
 .opt:disabled:not(.right):not(.wrong) { opacity: .5; }
 @keyframes bump { 40% { transform: scale(1.03); } }
@@ -549,10 +567,9 @@ body.ingame .feedback.giusto { background: #dcf6e6; color: #0f5b34; border-top-c
 body.ingame .feedback.quasi { background: #fff1bf; color: #5c4200; border-top-color: var(--oro); }
 body.ingame .feedback.sbagliato { background: #ffe4da; color: #7d2a13; border-top-color: var(--terracotta); }
 @media (prefers-color-scheme: dark) {
-  body.ingame .feedback.giusto { background: #123f28; color: #d9f7e5; }
-  body.ingame .feedback.quasi { background: #3d3010; color: #ffeec0; }
-  body.ingame .feedback.sbagliato { background: #46201a; color: #ffdfd3; }
+  html:not([data-theme="light"]) body.ingame .feedback.giusto { background: #123f28; color: #d9f7e5; } html:not([data-theme="light"]) body.ingame .feedback.quasi { background: #3d3010; color: #ffeec0; } html:not([data-theme="light"]) body.ingame .feedback.sbagliato { background: #46201a; color: #ffdfd3; }
 }
+html[data-theme="dark"] body.ingame .feedback.giusto { background: #123f28; color: #d9f7e5; } html[data-theme="dark"] body.ingame .feedback.quasi { background: #3d3010; color: #ffeec0; } html[data-theme="dark"] body.ingame .feedback.sbagliato { background: #46201a; color: #ffdfd3; }
 body.ingame .feedback:not(.prompt) .note, body.ingame .feedback:not(.prompt) .muted { color: inherit; opacity: .78; }
 body.ingame .feedback .verdict { font-size: 1.75rem; margin-bottom: 8px; }
 body.ingame .feedback .sol { font-size: 1.2rem; }
@@ -571,7 +588,8 @@ body.ingame:has(.feedback:not(.prompt)) .wrap { padding-bottom: 62vh; }
 /* +xp che vola verso l'anello */
 .xpfloat { position: fixed; z-index: 80; pointer-events: none; font-weight: 900; color: var(--oro-scuro);
   font-size: 1.3rem; text-shadow: 0 2px 0 rgba(255,255,255,.7); animation: xpfly .9s cubic-bezier(.2,.8,.3,1) forwards; }
-@media (prefers-color-scheme: dark) { .xpfloat { color: var(--oro); text-shadow: 0 2px 0 rgba(0,0,0,.6); } }
+@media (prefers-color-scheme: dark) { html:not([data-theme="light"]) .xpfloat { color: var(--oro); text-shadow: 0 2px 0 rgba(0,0,0,.6); } }
+html[data-theme="dark"] .xpfloat { color: var(--oro); text-shadow: 0 2px 0 rgba(0,0,0,.6); }
 @keyframes xpfly { 0% { opacity: 0; transform: translateY(10px) scale(.6); } 25% { opacity: 1; transform: translateY(0) scale(1.15); }
   100% { opacity: 0; transform: translateY(-70px) scale(.9); } }
 
@@ -580,7 +598,8 @@ body.ingame:has(.feedback:not(.prompt)) .wrap { padding-bottom: 62vh; }
 .diag .tag { display: inline-block; font-size: .7rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase;
   background: color-mix(in srgb, var(--terracotta) 12%, transparent); color: var(--terracotta-scura);
   padding: 2px 8px; border-radius: 4px; margin-bottom: 6px; }
-@media (prefers-color-scheme: dark) { .diag .tag { color: var(--terracotta-chiara); } }
+@media (prefers-color-scheme: dark) { html:not([data-theme="light"]) .diag .tag { color: var(--terracotta-chiara); } }
+html[data-theme="dark"] .diag .tag { color: var(--terracotta-chiara); }
 .feedback.giusto .diag .tag, .feedback.quasi .diag .tag { background: color-mix(in srgb, var(--verde) 14%, transparent); color: var(--verde); }
 .diag p { margin: 6px 0 0; font-size: .92rem; }
 .diff { font-family: var(--mono); font-size: .9rem; line-height: 1.7; margin: 4px 0; }
@@ -656,7 +675,8 @@ ul.vocab .say { padding: 2px 6px; }
 .call.warn b { color: var(--terracotta); }
 .call.tip { background: color-mix(in srgb, var(--oro) 12%, var(--carta)); border-left: 3px solid var(--oro); }
 .call.tip b { color: var(--oro-scuro); }
-@media (prefers-color-scheme: dark) { .call.tip b { color: var(--oro); } }
+@media (prefers-color-scheme: dark) { html:not([data-theme="light"]) .call.tip b { color: var(--oro); } }
+html[data-theme="dark"] .call.tip b { color: var(--oro); }
 
 /* ----------------------------------------------------------------- letture */
 
@@ -715,9 +735,13 @@ ul.ainotes li { margin: 4px 0; }
 /* ------------------------------------------------------------------ mobile */
 
 @media (max-width: 520px) {
-  header.top .bar { padding: 8px 12px; gap: 8px; }
-  .stats { gap: 10px; }
-  .stat { min-width: 36px; }
+  header.top .bar { padding: 8px 12px; gap: 6px; }
+  .stats { gap: 7px; }
+  .stat { min-width: 32px; }
+  .stat span { font-size: .5rem; letter-spacing: .06em; }
+  .mode { width: 34px; height: 34px; font-size: .95rem; }
+  .ring { width: 36px; height: 36px; } .ring b { width: 28px; height: 28px; font-size: .68rem; }
+  .targa { padding: 4px 9px 3px; } .targa .t-via { font-size: 1rem; } .targa .t-sup { font-size: .52rem; }
   h1 { font-size: 1.85rem; margin-top: 16px; }
   .card { padding: 16px; }
   .stem { font-size: 1.38rem; }

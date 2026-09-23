@@ -237,6 +237,7 @@
       chest: null,        // giorno in cui hai aperto il forziere
       best: {},           // record personali: lampo, combo
       silent: false,      // modalità ufficio: niente audio automatico
+      theme: "",          // "" come il telefono, "light" o "dark"
       written: 0,         // frasi scritte a memoria senza errori
       letture: {},        // puntata -> { pct, at } delle letture fatte
       errs: {},           // categoria d'errore -> { n, fixed, last }
