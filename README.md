@@ -403,9 +403,12 @@ sujeto (*io aiutava*, *la gente sono*, *mi piace i*), auxiliares y
 participios en todos los tiempos (*avrei andato*, *siamo tornato*, *li ho
 visto*, *vivuto*), congiuntivo después de *penso che*, *benché*, *pensavo
 che*, *come se*, y falsos amigos en contexto (*salgo di casa*, *un vaso
-d'acqua*, *toccare la chitarra*). Las reglas se miden con un corpus de 96
-textos de estudiantes con 502 errores anotados (`tools/scrivi_corpus.json`):
-el corrector propio marca el 61 % sin marcar nada en las versiones
+d'acqua*, *toccare la chitarra*). Las reglas se miden con un corpus de 144
+textos de estudiantes con 748 errores anotados (`tools/scrivi_corpus.json`),
+escrito en dos tandas: con la primera se armaron las reglas y la segunda,
+con otros temas y otras palabras, sirvió para ver si generalizaban (de
+entrada marcaron el 45 %; después de corregir por familia, el 61 %). Hoy el
+corrector propio marca el 62 % del total sin marcar nada en las versiones
 corregidas ni en las frases del curso, y `tools/test_scrivi.js` fija esos
 pisos por familia. Lo que se escapa (pronombres por referente, tiempos
 según el contexto, léxico) lo agarran la IA y LanguageTool. Después
