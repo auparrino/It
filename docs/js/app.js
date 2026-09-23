@@ -8,6 +8,21 @@
 
   var course = null;
   var state = Engine.load();
+
+  /* Tema: "" sigue al teléfono; "light" u "dark" lo fuerzan.  Se aplica antes
+     de dibujar nada, así no hay parpadeo. */
+  function themeNow() {
+    return state.theme || (window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  }
+  function applyTheme() {
+    document.documentElement.dataset.theme = state.theme || "";
+    var dark = themeNow() === "dark";
+    document.querySelectorAll('meta[name="theme-color"]').forEach(function (m) {
+      if (!m.dataset.auto) m.dataset.auto = m.content;
+      m.content = state.theme ? (dark ? "#12356a" : "#7dbdf0") : m.dataset.auto;
+    });
+  }
+  applyTheme();
   var view = { screen: "oggi", week: 1, tab: "oggi" };
   var round = null;
   var lampo = null;
@@ -182,11 +197,20 @@
           (state.boost > 0 ? '<div class="stat boost" title="doble xp en la próxima ronda"><b>🎟️' + state.boost + '</b><span>doble</span></div>' : "") +
           '<button class="mode" id="mode" title="modo oficina">' +
             (state.silent ? "🤫" : "🔊") + '</button>' +
+          '<button class="mode" id="theme" title="tema claro u oscuro">' +
+            (themeNow() === "dark" ? "🌙" : "☀️") + '</button>' +
         '</div>' +
       '</div>' +
       '<div class="xpbar"><i style="width:' +
         Math.round(lv.into / lv.need * 100) + '%"></i></div>';
     $("#home").onclick = function () { go("oggi"); };
+    $("#theme").onclick = function () {
+      state.theme = themeNow() === "dark" ? "light" : "dark";
+      persist();
+      applyTheme();
+      renderHeader();
+      if (view.screen === "io") render();
+    };
     $("#mode").onclick = function () {
       state.silent = !state.silent;
       persist();
@@ -359,7 +383,7 @@
 
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION in sw.js: test_game checks it). */
-  var APP_VERSION = "v39";
+  var APP_VERSION = "v40";
   function versionLine() {
     return '<p class="muted small version">La Via C1 · versión ' + APP_VERSION + "</p>";
   }
@@ -2161,6 +2185,10 @@
             return '<option value="' + g[0] + '"' + (state.goal === g[0] ? " selected" : "") +
               ">" + g[1] + "</option>";
           }).join("") + "</select></label>" +
+        '<label class="set"><span>Tema<small>el ☀️/🌙 de arriba también lo cambia</small></span><select id="theme-set">' +
+          [["", "Como el teléfono"], ["light", "Claro ☀️"], ["dark", "Oscuro 🌙"]].map(function (t) {
+            return '<option value="' + t[0] + '"' + ((state.theme || "") === t[0] ? " selected" : "") + ">" + t[1] + "</option>";
+          }).join("") + "</select></label>" +
         '<label class="set"><span>Modo oficina 🤫<small>nada suena solo; el 🔊 sigue andando si lo tocás</small></span>' +
           '<input type="checkbox" id="silent"' + (state.silent ? " checked" : "") + "></label>" +
         '<label class="set"><span>Recordatorio diario<small>se agrega a tu calendario</small></span>' +
@@ -3097,6 +3125,13 @@
       persist();
       renderHeader();
       toast("Meta: " + state.goal + " xp por día");
+    };
+    var themeSel = $("#theme-set");
+    if (themeSel) themeSel.onchange = function () {
+      state.theme = themeSel.value;
+      persist();
+      applyTheme();
+      renderHeader();
     };
     var silent = $("#silent");
     if (silent) silent.onchange = function () {
