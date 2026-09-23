@@ -352,7 +352,7 @@
 
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION in sw.js: test_game checks it). */
-  var APP_VERSION = "v35";
+  var APP_VERSION = "v36";
   function versionLine() {
     return '<p class="muted small version">La Via C1 · versión ' + APP_VERSION + "</p>";
   }
@@ -2632,7 +2632,7 @@
       '<div class="row" style="margin-top:10px"><button class="btn" id="scheck">🔎 Revisar</button>' +
       '<button class="tab" id="smodel">👀 Ver un modelo</button></div>' +
       '<label class="muted small ltopt"><input type="checkbox" id="slt"' + (state.ltOff ? "" : " checked") + "> " +
-        "Pedir también la corrección de LanguageTool (gratis; el texto se envía a su servidor)</label>" +
+        "Si la IA no está, pedir la corrección de LanguageTool (gratis; el texto se envía a su servidor)</label>" +
       '<p class="muted small ailine">🤖 ' + (aiKey()
         ? "Corrector con IA activado (" + [aiKeys().groq ? "Groq" : "", aiKeys().gemini ? (aiKeys().groq ? "Gemini de respaldo" : "Gemini") : ""].filter(Boolean).join(" + ") + "). "
         : "Para que una IA marque todo y lo explique, cargá una clave gratuita. ") +
@@ -2697,39 +2697,40 @@
     });
     on("#scheck", function () {
       var text = box.value, r = Scrivi.check(text, w.week), out = $("#sout");
-      var ai = aiKeys();
-      r.ai = aiKey() && text.trim() ? "…" : null;
-      showScrivi(w, text, r, state.ltOff ? null : "…");
-      if (r.ai) Scrivi.aiCheck(text, w.week, ai, function (err, data) {
-        if (view.screen !== "scrivi" || $("#stext") !== box || box.value !== text) return;
-        if (err) { r.ai = "error"; r.aiErr = String(err.message || err); }
-        else {
+      // With a key, the AI is the corrector; the local rules and
+      // LanguageTool only step in when it cannot answer.
+      r.local = r.findings;
+      if (aiKey() && text.trim()) { r.findings = []; r.hard = 0; runAI(); }
+      else fallback();
+      function runAI() {
+        r.ai = "…"; r.findings = []; r.hard = 0;
+        showScrivi(w, text, r, null);
+        Scrivi.aiCheck(text, w.week, aiKeys(), function (err, data) {
+          if (view.screen !== "scrivi" || $("#stext") !== box || box.value !== text) return;
+          if (err) { r.ai = "error"; r.aiErr = String(err.message || err); fallback(); return; }
           r.ai = "ok"; r.aiData = data;
-          // the AI's word goes before LanguageTool's on the same words
-          // what the local checker or LanguageTool said inside a fragment the
-          // AI marked is the same error: the AI's version stays
-          var aiF = Scrivi.fromAI(text, data, []), aiTok = {};
-          aiF.forEach(function (f) { for (var j = 0; j < f.n; j++) aiTok[f.i + j] = 1; });
-          r.findings = r.findings.filter(function (f) {
-            for (var j = 0; j < f.n; j++) if (!aiTok[f.i + j]) return true;
-            return false;
-          }).concat(aiF).sort(function (a, b) { return a.i - b.i; });
+          r.findings = Scrivi.fromAI(text, data, []);
           r.hard = r.findings.filter(function (f) { return !f.soft; }).length;
-        }
-        showScrivi(w, text, r, r.lt || (state.ltOff ? null : "…"));
-      });
-      if (state.ltOff || !text.trim()) return;
-      // The local check shows at once; LanguageTool's opinion joins it when it arrives.
-      Scrivi.ltCheck(text, function (err, matches) {
-        if (view.screen !== "scrivi" || $("#stext") !== box || box.value !== text) return;
-        if (err) { r.lt = "error"; showScrivi(w, text, r, "error"); return; }
-        var ltF = Scrivi.fromLT(text, matches, r.findings.filter(function (f) { return !f.ai; })), aiT = {};
-        r.findings.forEach(function (f) { if (f.ai) for (var j = 0; j < f.n; j++) aiT[f.i + j] = 1; });
-        r.findings = r.findings.concat(ltF.filter(function (f) { return !aiT[f.i]; })).sort(function (a, b) { return a.i - b.i; });
+          showScrivi(w, text, r, null);
+          on("#sretry", runAI);
+        });
+      }
+      function fallback() {
+        r.findings = r.local;
         r.hard = r.findings.filter(function (f) { return !f.soft; }).length;
-        r.lt = "ok";
-        showScrivi(w, text, r, "ok");
-      });
+        showScrivi(w, text, r, state.ltOff || !text.trim() ? null : "…");
+        on("#sretry", runAI);
+        if (state.ltOff || !text.trim()) return;
+        Scrivi.ltCheck(text, function (err, matches) {
+          if (view.screen !== "scrivi" || $("#stext") !== box || box.value !== text || r.ai === "…" || r.ai === "ok") return;
+          if (err) { r.lt = "error"; showScrivi(w, text, r, "error"); on("#sretry", runAI); return; }
+          r.findings = r.findings.concat(Scrivi.fromLT(text, matches, r.findings)).sort(function (a, b) { return a.i - b.i; });
+          r.hard = r.findings.filter(function (f) { return !f.soft; }).length;
+          r.lt = "ok";
+          showScrivi(w, text, r, "ok");
+          on("#sretry", runAI);
+        });
+      }
     });
   }
 
@@ -2741,20 +2742,26 @@
         return '<li class="' + (f.soft ? "soft" : "bad") + '"><b>' + (k + 1) + ".</b> " + mk(f.msg) + "</li>";
       }).join("");
       var missing = r.reqs.filter(function (q) { return !q.ok; });
+      var busy = r.ai === "…";
       out.innerHTML = '<div class="card">' +
-        (r.findings.length ? '<p class="scrivi-marked it">' + Scrivi.markup(text, r.findings, esc) + "</p><ol class=\"findings\">" + list + "</ol>"
-                           : '<p>✨ No encontré errores' + (ltState === "ok" ? ", y LanguageTool tampoco." : " de los que sé buscar.") + "</p>") +
-        (ltState === "…" ? '<p class="muted small">⏳ Consultando LanguageTool…</p>'
-          : ltState === "error" ? '<p class="muted small">No pude consultar LanguageTool (sin conexión o límite de uso): esta es solo la revisión local.</p>'
-          : ltState === "ok" ? '<p class="muted small">✓ Revisado también por LanguageTool.</p>' : "") +
-        (r.ai === "…" ? '<p class="muted small">⏳ La IA está leyendo tu texto (suele tardar menos de 10 segundos)…</p>'
-          : r.ai === "error" ? '<p class="muted small">No pude usar la IA (' + esc(r.aiErr || "") + "). " +
-              (/clave|401|403/.test(r.aiErr || "") ? "Revisá la clave en Io." : "Las reglas propias ya revisaron el texto; probá la IA de nuevo en un rato.") + "</p>"
-          : r.ai === "ok" && r.aiData ? '<div class="aiout">' +
+        (busy ? '<p>⏳ La IA está corrigiendo tu texto…</p><p class="muted small">Suele tardar menos de 20 segundos.</p>'
+          : r.findings.length ? '<p class="scrivi-marked it">' + Scrivi.markup(text, r.findings, esc) + "</p><ol class=\"findings\">" + list + "</ol>"
+          : r.ai === "ok" ? "<p>✨ La IA no encontró errores.</p>"
+          : '<p>✨ No encontré errores' + (ltState === "ok" ? ", y LanguageTool tampoco." : " de los que sé buscar.") + "</p>") +
+        (r.ai === "ok" && r.aiData ? '<div class="aiout">' +
+              (r.aiData.consigna ? '<p class="muted small">📋 ' + esc(r.aiData.consigna) + "</p>" : "") +
               (r.aiData.comentario ? "<p>🤖 " + esc(r.aiData.comentario) + "</p>" : "") +
               (r.aiData.corregido ? '<p class="muted small">Versión corregida:</p><p class="model it">' + esc(r.aiData.corregido) + "</p>" : "") +
             "</div>" : "") +
-        (missing.length ? '<p class="muted">Todavía falta: ' + missing.map(function (q) { return esc(q.label) + " (" + q.n + " / " + q.need + ")"; }).join(" · ") + ".</p>"
+        (r.ai === "error" ? '<p class="muted small">⚠️ No pude usar la IA (' + esc(r.aiErr || "") + "). " +
+              (/clave|401|403/.test(r.aiErr || "") ? "Revisá las claves en Io. " : "") +
+              "Mientras, te muestro la revisión automática, que es mucho más limitada.</p>" +
+              '<button class="tab" id="sretry">🤖 Probar la IA de nuevo</button>' : "") +
+        (!r.ai && !aiKey() ? '<p class="muted small">Esta es la revisión automática, que se le escapan muchas cosas. Para una corrección completa, cargá una clave en Io.</p>' : "") +
+        (!busy && r.ai !== "ok" ? (ltState === "…" ? '<p class="muted small">⏳ Consultando LanguageTool…</p>'
+          : ltState === "error" ? '<p class="muted small">No pude consultar LanguageTool (sin conexión o límite de uso).</p>'
+          : ltState === "ok" ? '<p class="muted small">✓ Revisado también por LanguageTool.</p>' : "") : "") +
+        (busy ? "" : missing.length ? '<p class="muted">Todavía falta: ' + missing.map(function (q) { return esc(q.label) + " (" + q.n + " / " + q.need + ")"; }).join(" · ") + ".</p>"
                         : '<p>Cumple la consigna.' + (hard.length ? " Corregí lo marcado si querés, o entregalo así: los errores quedan anotados para la clínica." : "") + "</p>" +
                           '<button class="btn" id="sdone">✓ Entregar el texto</button>') +
         "</div>";

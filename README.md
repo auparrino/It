@@ -427,6 +427,15 @@ instante y la de LanguageTool cuando llega; sin conexión o sin cupo, queda
 solo la local. Se puede apagar con la casilla de la pantalla, porque el
 texto se envía a sus servidores.
 
+**Con clave, la corrección la hace la IA.** Si hay una clave cargada en
+Io, Scrivi manda el texto a la IA y muestra solo su corrección: cada error
+con su arreglo, el tipo de error (el mismo de la clínica, así lo que falla
+va al repaso por errores) y la regla en castellano, además de si cumplió la
+consigna, una devolución y el texto corregido. Lo correcto pero poco
+natural aparece como sugerencia y no cuenta como error. Las reglas propias
+y LanguageTool quedan de respaldo: se usan si no hay clave o si la IA no
+responde, con un botón para volver a probar la IA.
+
 **Corrector con IA (opcional).** LanguageTool casi no controla la
 concordancia ni la persona del verbo en italiano. Para una corrección
 completa, la app usa **Groq** con una clave gratuita del usuario
