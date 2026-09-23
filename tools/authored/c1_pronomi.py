@@ -98,7 +98,7 @@ ITEMS = [
          stem="Ho visto le ragazze. → Le ho vist___.",
          answer="e",
          note="Con «avere» concuerda solo si el objeto directo va ANTES en forma "
-              "de pronombre lo/la/li/le."),
+              "de pronombre lo/la/li/le (y con «ne» partitivo)."),
     dict(id="c1-part-03", type="choice", topic="participio",
          prompt="Elegí la forma correcta.",
          stem="Ho ___ le ragazze.",
@@ -112,7 +112,7 @@ ITEMS = [
          note="Reflexivo con objeto directo propio: en uso corriente concuerda con "
               "el sujeto (lavata). Con el objeto delante en pronombre: «se le è lavate»."),
     dict(id="c1-part-05", type="choice", topic="participio",
-         prompt="Elegí la correcta.",
+         prompt="Elegí la forma más usual en el italiano actual.",
          stem="Quella è la lettera che ho ___ ieri.",
          options=["scritto", "scritta"], answer="scritto",
          note="Tras «che» relativo el participio normalmente no concuerda: «la "

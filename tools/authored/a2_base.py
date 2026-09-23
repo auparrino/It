@@ -42,7 +42,7 @@ ITEMS = [
     # --- negazioni ed esclamazioni (settimana 23) ---
     dict(id="a2-neg-01", type="choice", topic="negazioni", level="B1",
          prompt="Elegí la forma correcta.",
-         stem="Non ho visto ___.", options=["nessuno", "qualcuno", "alcuno"],
+         stem="Non ho visto ___.", options=["nessuno", "qualcuno", "qualche"],
          answer="nessuno",
          note="Doble negación obligatoria: non + nessuno."),
     dict(id="a2-neg-02", type="choice", topic="negazioni", level="B1",
@@ -86,7 +86,9 @@ ITEMS = [
          prompt="Elegí el ordinal correcto.",
          stem="Abito al ___ piano (11º).",
          options=["undicesimo", "undicimo", "primoundici"], answer="undicesimo",
-         note="Del 11 en adelante: cardinal sin vocal final + -esimo."),
+         note="Del 11 en adelante: cardinal sin vocal final + -esimo (undicesimo, "
+              "ventesimo); los terminados en -tré y en -sei conservan la vocal: "
+              "ventitreesimo, ventiseiesimo."),
     dict(id="a2-num-02", type="choice", topic="numerali", level="B1",
          prompt="Elegí la forma correcta.",
          stem="Siamo andati in ___ (unas diez personas).",

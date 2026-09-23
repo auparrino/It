@@ -61,7 +61,9 @@ LESSONS = {
                      ["scegliere", "scelga", "scegliamo", "scegliate", "scelgano"],
                      ["rimanere", "rimanga", "rimaniamo", "rimaniate", "rimangano"]]},
   "tip": "La forma de *noi* coincide siempre con el indicativo (*parliamo*), y "
-         "la de *voi* solo agrega una *i* (*parlate → parliate*). O sea que de "
+         "la de *voi* sale de la de *noi* cambiando *-iamo* por *-iate* "
+         "(*parliamo → parliate*, *prendiamo → prendiate*, *dormiamo → "
+         "dormiate*). O sea que de "
          "seis personas, solo tenés que aprender cuatro formas distintas."},
 
  {"h": "Ya lo venías usando sin saberlo",
@@ -299,7 +301,7 @@ LESSONS = {
 
  {"h": "La prohibición",
   "warn": "Detrás de *se* NUNCA va condicional. Ni *se avrei*, ni *se "
-          "sarei*, ni *se vorrei*. La secuencia correcta es siempre congiuntivo "
+          "sarei*, ni *se vorrei*. En los tipos II y III la secuencia correcta es congiuntivo "
           "en la parte del *se* y condicional en la otra. Es idéntico al "
           "castellano correcto («si tuviera... llamaría»), pero como en el "
           "castellano rioplatense se oye «si tendría», el error se traslada.",
@@ -607,8 +609,9 @@ LESSONS = {
 
  {"h": "il cui: el posesivo relativo",
   "p": ["*il cui*, *la cui*, *i cui*, *le cui* significan «cuyo». El artículo "
-        "concuerda con la cosa poseída, no con el poseedor, y no lleva "
-        "preposición."],
+        "concuerda con la cosa poseída, no con el poseedor, y no necesita "
+        "preposición (aunque puede llevarla según la función: *la casa nel "
+        "cui giardino...*)."],
   "ex": [["Lo scrittore il cui libro ho letto.",
           "El escritor cuyo libro leí."],
          ["Una città le cui strade sono strette.",
@@ -671,7 +674,7 @@ LESSONS = {
           "5. *Quando si è STANCHI* (plural masculino). "
           "6. *ne* obligatorio con cantidades: *ne ho tre*. "
           "7. *cui* con preposición, *che* sin ella. "
-          "8. *come se* + imperfetto de congiuntivo, siempre."},
+          "8. *come se* + congiuntivo imperfetto o trapassato, siempre."},
 ]},
 
 }

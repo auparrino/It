@@ -137,7 +137,7 @@ LESSONS = {
           "*il carcere* (la cárcel), *il costume* (la costumbre); y del otro lado "
           "*la fine* (el fin), *l'origine* (f., el origen), *la domenica* (el "
           "domingo), *l'analisi* (f.), *l'arte* (f.).",
-  "p": ["Aparte están los helenismos en *-ma*, *-emma*, *-ista*, que son "
+  "p": ["Aparte están los helenismos en *-ma*, *-emma* y *-eta*, que son "
         "masculinos igual que en castellano: *il problema*, *il programma*, "
         "*il sistema*, *il tema*, *il poeta*. En plural hacen *-i*: "
         "*i problemi*, *i programmi*. Los de *-ista* valen para los dos "
@@ -193,11 +193,12 @@ LESSONS = {
 
  {"h": "Dónde el italiano pone artículo y el castellano no",
   "warn": "Con los posesivos: *il mio libro*, *la mia casa* (no «mi libro»). "
-          "Con los días de la semana en sentido habitual: *il lunedì* (los "
-          "lunes). Con los porcentajes y los años: *il 20%*, *il 1999*. "
+          "Con los años: *il 1999* (*nel 1999*, «en 1999»). "
           "Con los nombres de países y regiones: *l'Italia è bella*. "
-          "Con las lenguas: *studio l'italiano*. Y en las generalizaciones: "
-          "*mi piace la musica*, *il caffè fa male*.",
+          "Con las lenguas: *studio l'italiano*. (En las generalizaciones, "
+          "con los días en sentido habitual y con los porcentajes el artículo "
+          "va igual que en castellano: *mi piace la musica*, *il lunedì* = los "
+          "lunes, *il 20%* = el 20%.)",
   "p": ["Al revés, se omite con los nombres de ciudad (*Roma è bella*) y con "
         "los parientes en singular sin adjetivo: *mio padre*, *mia sorella*, "
         "pero *il mio caro fratello*, *la mia sorellina*, *i miei fratelli* y "
@@ -466,8 +467,9 @@ LESSONS = {
          ["Scrivo a Anna → Le scrivo.", "Le escribo a Ana."],
          ["Conosco i tuoi amici → Li conosco.", "Conozco a tus amigos."]],
   "warn": "El leísmo del castellano (*le* como complemento directo de "
-          "persona: «le vi», «le saludo») acá es un error grave: en italiano *le* es "
-          "SIEMPRE indirecto femenino. Además el italiano no pone la "
+          "persona: «le vi», «le saludo») acá es un error grave: en italiano *le* singular es "
+          "SIEMPRE indirecto femenino (como directo, *le* solo es plural: "
+          "*le vedo* = las veo). Además el italiano no pone la "
           "preposición *a* delante del objeto directo de persona: se dice "
           "*vedo Marco*, no «vedo a Marco»."},
 
@@ -700,10 +702,9 @@ LESSONS = {
           "*innamorarsi di* (enamorarse de), *sposarsi con*, "
           "*entrare in* (entrar en/a), *salire su*, *dipendere da*, "
           "*servire a/per*, *finire di*, *cominciare a*. "
-          "Y el clásico: *cerco un libro* y *ascolto la musica* van SIN "
-          "preposición, mientras el castellano dice «busco» y «escucho» "
-          "también sin preposición, pero *aspetto Marco* (espero a Marco) sí "
-          "pierde la *a* del castellano."},
+          "Y el clásico: *cerco un libro*, *ascolto la musica* y *aspetto "
+          "Marco* van SIN preposición; con persona el castellano pone «a» "
+          "(espero a Marco) y el italiano no."},
 ]},
 
 13: {

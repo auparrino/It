@@ -403,8 +403,7 @@ LESSONS = {
                      ["ieri", "il giorno prima"],
                      ["domani", "il giorno dopo"],
                      ["fa (due giorni fa)", "prima (due giorni prima)"],
-                     ["venire", "andare"],
-                     ["portare", "prendere"]]},
+                     ["venire", "andare"]]},
   "ex": [["«Vengo qui domani» → Disse che sarebbe andato lì il giorno dopo.",
           "Dijo que iría allá al día siguiente."]]},
 
@@ -681,7 +680,8 @@ LESSONS = {
         "2. La subjetividad decide el modo: opinión, deseo, duda y emoción "
         "piden congiuntivo. "
         "3. El tiempo de la principal decide el de la subordinada. "
-        "4. Detrás de *se* hipotético va congiuntivo, nunca condicional. "
+        "4. Detrás de *se* hipotético va indicativo (realidad) o congiuntivo "
+        "(posibilidad e irrealidad), nunca condicional. "
         "5. El futuro visto desde el pasado es condicional COMPUESTO."]},
 
  {"h": "Lo que separa un B2 de un C1",

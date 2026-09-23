@@ -130,7 +130,9 @@ ITEMS = [
          answer="Mi ha promesso che sarebbe venuto",
          alt=["Mi promise che sarebbe venuto",
               "Mi ha promesso che sarebbe venuta",
-              "Mi promise che sarebbe venuta"],
+              "Mi promise che sarebbe venuta",
+              "Mi ha promesso di venire",
+              "Mi promise di venire"],
          note="«que vendría» → «che sarebbe venuto», nunca «che verrebbe»."),
 
     # --- periodo ipotetico ---

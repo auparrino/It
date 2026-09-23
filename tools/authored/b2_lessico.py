@@ -128,8 +128,16 @@ ITEMS = [
               "Quando ero piccola, andavo al mare ogni estate",
               "Da piccolo andavo al mare tutte le estati",
               "Da piccola andavo al mare tutte le estati",
+              "Da piccolo andavo al mare ogni estate",
+              "Da piccola andavo al mare ogni estate",
               "Da bambino andavo al mare ogni estate",
-              "Da bambina andavo al mare ogni estate"],
+              "Da bambina andavo al mare ogni estate",
+              "Da bambino andavo al mare tutte le estati",
+              "Da bambina andavo al mare tutte le estati",
+              "Quando ero bambino, andavo al mare tutte le estati",
+              "Quando ero bambino, andavo al mare ogni estate",
+              "Quando ero bambina, andavo al mare tutte le estati",
+              "Quando ero bambina, andavo al mare ogni estate"],
          note="Costumbre en el pasado → imperfetto en los dos verbos."),
 
     # --- espressioni idiomatiche ---

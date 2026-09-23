@@ -322,3 +322,15 @@ usb                      # chal:r16-01g: Siamo tornati sul Web. Scusate il ritar
 vezzani                  # chal:r08-02: I figli del signor Vezzani frequentano l'università. → ___ frequent
 viena                    # chal:r02-09: Bratislava è ___ Slovacchia, ma non è lontana ___ Vienna. (Bratisla
 órcadas                  # chal:r02-10: Donald vive en las Órcadas. (le Orcadi)
+# Ejercicios de refuerzo (revisadas en contexto)
+callecita                # rf-24-12: diminutivo rioplatense
+inema                    # rf-1-23: fragmento de pronunciación [tʃ]inema
+interfijo                # rf-24-24: término gramatical
+letteraccia              # rf-24-07: peyorativo italiano correcto
+malísima                 # rf-22-07: superlativo español
+ol                       # rf-24-24: interfijo -ol-
+pobrecito                # rf-4-18: diminutivo español
+schi                     # rf-1-09: grafía didáctica
+scientia                 # rf-1-11: étimo latino
+tré                      # a2-num-01: terminación citada
+alpes                    # rf-35-03: topónimo (los Alpes)

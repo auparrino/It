@@ -89,3 +89,8 @@ mont
 chantilly
 chin
 gracie
+spritz
+cyrano
+bergerac
+shea
+ski

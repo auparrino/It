@@ -45,7 +45,7 @@ WEEKS = [
          keys=["lo/gli ante z, s+consonante, gn, ps, x, y.",
                "il/i en el resto de los masculinos; l' ante vocal.",
                "Preposiciones articuladas: del, al, dal, nel, sul.",
-               "El italiano usa artículo donde el español lo omite (mi piace LA musica)."],
+               "El italiano usa artículo donde el español lo omite (il mio libro, l'Italia, studio l'italiano)."],
          v=["essere", "avere"], t=["articoli"]),
     dict(w=4, title="Aggettivi qualificativi", level="A1", d=[5], r=[3],
          focus="Concordancia y las tres formas irregulares que aparecen todo el tiempo.",

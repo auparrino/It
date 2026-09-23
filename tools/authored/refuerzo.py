@@ -589,7 +589,7 @@ ITEMS = [
     dict(id="rf-35-03", type="choice", topic="si impersonale", level="B2",
          prompt=CE, stem="Nelle giornate limpide da Torino si ___ le Alpi.",
          options=["vedono", "vede", "vedi"], answer="vedono",
-         note="Las Alpes son plural: si vedono."),
+         note="Los Alpes son plural: si vedono."),
     dict(id="rf-35-04", type="choice", topic="si impersonale", level="B2",
          prompt=CE, stem="In agosto si ___ al mare.", options=["va", "vanno", "andiamo"],
          answer="va",

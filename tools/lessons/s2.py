@@ -47,7 +47,7 @@ LESSONS = {
                      ["tutto/a/i/e + artículo", "todo", "tutti i giorni, tutta la notte"],
                      ["qualcuno / qualcosa", "alguien / algo", "invariables"],
                      ["nessuno / niente", "nadie / nada", "detrás del verbo piden non"],
-                     ["altro/a/i/e", "otro", "un altro libro (sin «uno otro»)"],
+                     ["altro/a/i/e", "otro", "un altro libro (con «un», a diferencia de «otro libro»)"],
                      ["poco, molto, troppo, tanto", "poco, mucho...",
                       "concuerdan como adjetivos"]]},
   "warn": "*qualche* va con sustantivo SINGULAR aunque el sentido sea plural: "
@@ -406,8 +406,8 @@ LESSONS = {
 21: {
 "intro": "El condicional italiano se construye sobre la misma raíz que el "
          "futuro, así que si hiciste bien la semana pasada, esta es media "
-         "semana de trabajo. A cambio, tiene un uso periodístico que no existe "
-         "en castellano y que aparece en todo examen de comprensión.",
+         "semana de trabajo. A cambio, tiene un uso periodístico que el castellano "
+         "también conoce pero usa mucho menos, y que aparece en todo examen de comprensión.",
 "blocks": [
  {"h": "Las formas",
   "table": {"head": ["", "parlare", "essere", "avere", "volere"],
@@ -448,7 +448,7 @@ LESSONS = {
 
 22: {
 "intro": "Comparar es fácil hasta que aparece la elección entre *di* y *che*, "
-         "que no tiene equivalente en castellano —nosotros decimos siempre "
+         "que no tiene equivalente en castellano —nosotros decimos casi siempre "
          "«que»— y que es una pregunta fija de todos los exámenes.",
 "blocks": [
  {"h": "di o che",
