@@ -1622,7 +1622,8 @@
       '<div class="row" style="margin-top:10px">' +
         '<button class="btn" id="next">Continuar →</button>' +
         '<button class="tab" id="say2">🔊 escuchar</button>' +
-      "</div></div>";
+        (q < 2 && aiKey() && window.Scrivi && it.type !== "hunt" ? '<button class="tab" id="aiexp">🤖 Explicame</button>' : "") +
+      '</div><div id="aiexpout"></div></div>';
 
     $("#fb").innerHTML = fb;
     $("#fb").querySelectorAll("[data-sg]").forEach(function (b) {
@@ -1653,6 +1654,31 @@
     // False friends and structured input: read the Italian prompt aloud.
     if (it.lab === "falsi" || it.lab === "capire") spoken = it.stem;
     $("#next").onclick = nextItem;
+    on("#aiexp", function () {
+      var b = $("#aiexp"), outE = $("#aiexpout");
+      if (b) b.disabled = true;
+      if (outE) outE.innerHTML = '<p class="muted small">⏳ Preguntándole a la IA…</p>';
+      var fbText = ($("#fb") || {}).innerText || "";
+      var x = { prompt: it.prompt, stem: it.stem, options: it.options, given: given, answer: sol,
+                accept: it.accept, feedback: fbText.split("Continuar")[0].replace(/\s+/g, " ").slice(0, 600) };
+      Scrivi.explain(x, aiKey(), function (err, data) {
+        var o = $("#aiexpout");
+        if (!o) return;
+        if (err) { o.innerHTML = '<p class="muted small">No pude usar la IA (' + esc(String(err.message || err)) + ").</p>"; if (b) b.disabled = false; return; }
+        var dispute = data && (data.tambien_correcta || data.app_equivocada);
+        if (dispute) {
+          // Kept for review: the learner does not have to explain it to anyone.
+          if (!state.aiNotes) state.aiNotes = [];
+          state.aiNotes.unshift({ id: it.id, prompt: it.prompt, stem: it.stem, given: given, answer: sol,
+                                  ai: String(data.explicacion || "").slice(0, 600), at: Date.now() });
+          state.aiNotes = state.aiNotes.slice(0, 80);
+          persist();
+        }
+        o.innerHTML = '<div class="aiout"><p>🤖 ' + mk(esc(String((data && data.explicacion) || ""))) + "</p>" +
+          (dispute ? '<p class="muted small">La IA cree que ' + (data.tambien_correcta ? "tu respuesta también vale" : "la corrección de la app no es buena") +
+             ". Quedó anotado en Io → «Correcciones para revisar».</p>" : "") + "</div>";
+      });
+    });
     $("#say2").onclick = function () { speak(spoken, true); };
     if (q === 2 || it.frase) speak(spoken);
     $("#fb").scrollIntoView({ behavior: "smooth", block: "nearest" });
@@ -2136,6 +2162,7 @@
       "</div>" +
 
       errorsCard() +
+      aiCard() +
       '<div class="card"><h2>Medallas</h2><div class="badges">' +
         Engine.BADGES.map(function (b) {
           var won = state.badges.indexOf(b.id) >= 0;
@@ -2169,6 +2196,24 @@
                 ["articolo", "il / lo, artículo donde el español no lo pone"], ["preposizione_articolata", "nel, sul, dalla"],
                 ["congiuntivo", "congiuntivo: penso che sia"], ["falso_amico", "falsos amigos: caldo, burro, salire"],
                 ["parola_spagnola", "palabras en español dentro del italiano"]];
+  /* The AI corrector: the key, and the corrections it disputed (so the
+     learner can pass them on in one go instead of explaining each). */
+  function aiCard() {
+    var notes = state.aiNotes || [];
+    return '<div class="card"><h2>🤖 Corrector con IA</h2>' +
+      '<p class="muted small">Con una clave gratuita de Gemini (Google), Scrivi corrige tu texto entero y en cualquier ejercicio aparece «🤖 Explicame». ' +
+      'Sacala en <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a> → «Create API key». Queda solo en este teléfono.</p>' +
+      '<div class="row"><input id="aikey" type="password" autocomplete="off" placeholder="Pegá tu clave (AIza…)" value="' + esc(aiKey()) + '">' +
+      '<button class="tab" id="aisave">Guardar</button></div>' +
+      (notes.length ? "<h3>Correcciones para revisar (" + notes.length + ")</h3>" +
+        '<p class="muted small">La IA cree que en estos casos tu respuesta también valía o la corrección de la app no era buena. Copialas y pegámelas todas juntas.</p>' +
+        '<ul class="ainotes">' + notes.slice(0, 8).map(function (n) {
+          return "<li><b>" + esc(n.given || "—") + "</b> ≠ " + esc(n.answer || "") + ' <small class="muted">' + esc((n.stem || "").slice(0, 60)) + "</small></li>";
+        }).join("") + "</ul>" +
+        '<div class="row"><button class="tab" id="aicopy">📋 Copiar todas</button><button class="tab" id="aiclear">Borrar</button></div>' : "") +
+      "</div>";
+  }
+
   function itanolCard() {
     var errs = state.errs || {}, now = Date.now();
     return '<div class="card"><h2>📓 Cuaderno itañol</h2>' +
@@ -2978,6 +3023,21 @@
 
   function wireIo() {
     if (view.screen !== "io") return;
+    on("#aisave", function () {
+      var k = (($("#aikey") || {}).value || "").trim();
+      try { if (k) localStorage.setItem(AI_KEY, k); else localStorage.removeItem(AI_KEY); } catch (e) { /* */ }
+      toast(k ? "Clave guardada." : "Clave borrada.");
+      render();
+    });
+    on("#aicopy", function () {
+      var txt = (state.aiNotes || []).map(function (n) {
+        return "[" + n.id + "] " + (n.prompt || "") + " | " + (n.stem || "") + " | yo: " + (n.given || "") + " | app: " + (n.answer || "") + " | IA: " + (n.ai || "");
+      }).join("\n");
+      var done = function () { toast("Copiadas " + (state.aiNotes || []).length + " correcciones."); };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done, function () { prompt("Copiá:", txt); });
+      else prompt("Copiá:", txt);
+    });
+    on("#aiclear", function () { state.aiNotes = []; persist(); render(); });
     var goal = $("#goal");
     if (goal) goal.onchange = function () {
       state.goal = +goal.value;

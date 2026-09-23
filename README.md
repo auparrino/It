@@ -416,6 +416,12 @@ una devolución. La clave queda solo en el teléfono (no entra en las copias
 de seguridad) y el texto se envía a Google. Lo que la IA marca reemplaza lo
 que el corrector propio o LanguageTool dijeron sobre las mismas palabras.
 
+**«🤖 Explicame» en cualquier ejercicio.** Con la clave guardada (en Scrivi o
+en *Io → Corrector con IA*), después de un error aparece el botón: la IA
+explica qué está mal y la regla, y dice si la respuesta en realidad también
+valía o si la corrección de la app confunde. Esos casos quedan en *Io →
+Correcciones para revisar*, con un botón para copiarlos todos juntos.
+
 El corrector propio también sabe **quién habla**: en un texto en primera
 persona («Mi chiamo…», «io», «mio»), un verbo sin sujeto en otra persona se
 marca (*Mi chiami → mi chiamo*, *Hanno 32 anni → ho*), igual que un adjetivo
