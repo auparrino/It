@@ -205,8 +205,13 @@ En una pregunta de opción múltiple las opciones se parecen: la misma frase
 con un error típico (*La ragazze*, *Le ragaze*), las otras formas del mismo
 verbo (*sono / sei / siamo*), los otros miembros de la misma clase de palabra
 (*dove / quando / come*; *a / in / da*). Nunca otra frase que se descarta por
-su significado. `test_game.js` lo controla en las lecciones y en las
-versiones de reconocimiento.
+su significado. Vale para todos los tipos: en «Completá la tabla» las otras
+celdas más parecidas a la respuesta (y nunca la única que repite palabras de
+la fila), en «Completá la regla» formas de la misma clase, en «¿Qué
+significa?» palabras del mismo campo (*fratello*: hermano / hija / tío) y del
+mismo tipo, en las escuchas y en el Lampo las frases que más se parecen.
+`test_game.js` lo controla en las lecciones y en las versiones de
+reconocimiento.
 
 ### Tu memoria
 
@@ -266,9 +271,12 @@ tiene **3 estrellas**, una por misión:
    semana en el *Allenamento*: 12 preguntas con ejercicios del libro, banco
    propio y gimnasio de verbos, cinco vidas y combo de XP (el gimnasio y las
    palabras no cuentan para la estrella).
-3. **Dominala** — 85% de acierto en las **últimas 30** respuestas de la semana
-   (ventana móvil, no el histórico) y al menos el 60 % de los ejercicios de la
-   semana vistos. El gimnasio y las palabras no cuentan para las estrellas.
+3. **Dominala** — **una sola sesión** de 30 preguntas de toda la semana, sin
+   vidas, con lo no visto primero: con 85 % de acierto se gana. Cuenta la
+   primera respuesta de cada pregunta (la segunda vuelta, más fácil, es para
+   aprender); lo escrito se escribe, no se reconoce. Si no llega, el briefing
+   muestra el mejor intento. El gimnasio y las palabras no cuentan para las
+   estrellas.
 
 **La semana siguiente se abre al completar todas las misiones de la semana
 menos *Dominala***: la lección, las palabras, las 20 correctas, la escena de
@@ -523,7 +531,6 @@ node tools/test_frasi.js        # frases, ejercicios, pausa, lampo, racha, escud
 python3 tools/build_bank.py     # valida y compila el banco
 node tools/test_diagnosi.js     # el diagnóstico reconoce los errores típicos
 node tools/test_scrivi.js       # los textos modelo de Scrivi cumplen; el corrector marca los errores típicos
-python3 tools/hoja_nativo.py    # planillas para que un nativo revise el curso (revision/)
 node tools/sim_carriera.js      # una carrera entera: carga por semana, ripasso, cobertura, jefes
 ```
 

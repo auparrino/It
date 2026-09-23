@@ -192,7 +192,8 @@ ok(badges.length >= 4, "medaglie sbloccate a fine anno: " + badges.length);
 
 var review = Drills.buildReview(course, state, 20);
 ok(Array.isArray(review), "la coda di ripasso è una lista");
-Object.keys(state.cards).slice(0, 30).forEach(function (id) {
+// (cards already learnt are retired and never come back: only the others)
+Object.keys(state.cards).filter(function (id) { return !Engine.retired(state.cards[id]); }).slice(0, 30).forEach(function (id) {
   state.cards[id].due = Date.now() - 1000;
 });
 ok(Drills.dueCount(course, state) >= 30, "le schede scadute rientrano in coda");

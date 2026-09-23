@@ -379,6 +379,49 @@
     });
   }
 
+  // What kind of word: verb, noun, adjective, adverb, expression.
+  function wordKind(it, es) {
+    var D = root.Diagnosi && root.Diagnosi.DATA;
+    var first = String(es || "").split(/[,;/(]/)[0].trim().toLowerCase();
+    if (/(are|ere|ire|rre|rsi)$/.test(it) && /(ar|er|ir|ír)(se|lo|la|le)?$/.test(first)) return "v";
+    if (/^[¡¿]/.test(es || "")) return "x";
+    if (/mente$/.test(it)) return "adv";
+    if (D && D.nouns && (D.nouns[it] || D.nounsByPlural[it])) return "n";
+    if ((D && D.adj && D.adj[it]) || /(at|ut|it)[oaie]$/.test(it) || /(oso|osa|ivo|iva|ico|ica)$/.test(it)) return "a";
+    return "o";
+  }
+  // Closed fields by the Spanish meaning: numbers, days, colours, family…
+  var FIELDS = [
+    ["num", /^(uno|dos|tres|cuatro|cinco|seis|siete|ocho|nueve|diez|once|doce|trece|catorce|quince|veinte|treinta|cuarenta|cincuenta|cien|mil|millón|docena|centenar)\b/],
+    ["ord", /^(primer[oa]?|segund[oa]|tercer[oa]?|cuart[oa]|quint[oa]|sext[oa]|séptim[oa]|octav[oa]|noven[oa]|décim[oa]|undécim[oa]|vigésim[oa]|centésim[oa]|último)\b/],
+    ["dia", /^(lunes|martes|miércoles|jueves|viernes|sábado|domingo)\b/],
+    ["mes", /^(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre)\b/],
+    ["hora", /^(mañana|tarde|noche|mediodía|medianoche|madrugada|hoy|ayer|anteayer|pasado mañana|esta noche)\b/],
+    ["dir", /^(norte|sur|este|oeste|derecha|izquierda|derecho|arriba|abajo|adelante|atrás)\b/],
+    ["color", /^(rojo|azul|verde|amarillo|blanco|negro|gris|marrón|rosa|violeta|celeste|naranja)\b/],
+    ["fam", /^(madre|padre|hermano|hermana|hijo|hija|tío|tía|abuel[oa]|prim[oa]|espos[oa]|marido|mujer|novi[oa]|sobrin[oa]|niet[oa]|suegr[oa]|cuñad[oa]|mamá|papá|padres|parientes)\b/]];
+  function fieldOf(es) {
+    var e = String(es || "").toLowerCase().trim();
+    for (var i = 0; i < FIELDS.length; i++) if (FIELDS[i][1].test(e)) return FIELDS[i][0];
+    return null;
+  }
+
+  // The topic of a noun in the bank (casa, famiglia, cibo…).
+  var TOPIC = null;
+  function wordTopic(it) {
+    if (!TOPIC) {
+      TOPIC = {};
+      var b = root.Banca && root.Banca.loaded() ? root.Banca.bank() : null;
+      ((b && b.nouns) || []).forEach(function (n) { if (n[4]) { TOPIC[n[0]] = n[4]; TOPIC[n[2]] = n[4]; } });
+    }
+    return TOPIC[String(it).replace(/^(il|lo|la|l'|i|gli|le)\s+/, "")] || null;
+  }
+  function topicGlosses(topic, v) {
+    var b = root.Banca && root.Banca.loaded() ? root.Banca.bank() : null;
+    return ((b && b.nouns) || []).filter(function (n) { return n[4] === topic && n[0] !== v[0] && n[3] !== v[1]; })
+      .map(function (n) { return n[3]; });
+  }
+
   function vocabItem(word, state) {
     var e = VOC && VOC[word];
     if (!e) return null;
@@ -388,11 +431,22 @@
       var near = Object.keys(VOC).map(function (k) { return VOC[k]; }).filter(function (x) {
         return x.v[0] !== v[0] && x.v[1] !== v[1] && Math.abs(x.week - e.week) <= 3;
       });
-      // same kind of word: a verb among nouns gives itself away
-      var isVerb = function (it) { return /(are|ere|ire|rre|rsi)$/.test(it); };
-      var same = shuffle(near.filter(function (x) { return isVerb(x.v[0]) === isVerb(v[0]); }));
+      // Same field first (hermano among hija, tío, abuelo), then the same
+      // kind of word: a verb among nouns, or «ventana» next to «hermano»,
+      // gives itself away.
+      var kind = wordKind(v[0], v[1]), topic = wordTopic(v[0]), fld = fieldOf(v[1]);
+      // the whole list when the week has too few of the same kind
+      var all = Object.keys(VOC).map(function (k) { return VOC[k]; }).filter(function (x) { return x.v[0] !== v[0] && x.v[1] !== v[1]; });
+      var ranked = shuffle(all).map(function (x) {
+        return { x: x, s: (fld && fieldOf(x.v[1]) === fld ? 8 : 0) + (topic && wordTopic(x.v[0]) === topic ? 4 : 0) +
+                          (wordKind(x.v[0], x.v[1]) === kind ? 3 : 0) + (Math.abs(x.week - e.week) <= 3 ? 1 : 0) +
+                          (Math.abs(x.v[1].length - v[1].length) <= 6 ? 1 : 0) };
+      }).sort(function (a, b) { return b.s - a.s; });
       var opts = [v[1]];
-      same.concat(shuffle(near)).forEach(function (x) { if (opts.length < 4 && opts.indexOf(x.v[1]) < 0) opts.push(x.v[1]); });
+      var field = topic ? topicGlosses(topic, v) : [];
+      ranked.filter(function (r) { return r.s >= 4; }).forEach(function (r) { if (opts.length < 4 && opts.indexOf(r.x.v[1]) < 0) opts.push(r.x.v[1]); });
+      shuffle(field).forEach(function (g) { if (opts.length < 4 && opts.indexOf(g) < 0) opts.push(g); });
+      ranked.forEach(function (r) { if (opts.length < 4 && opts.indexOf(r.x.v[1]) < 0) opts.push(r.x.v[1]); });
       return { id: id, src: "vocab", type: "choice", topic: "vocabolario",
                prompt: "¿Qué significa?", stem: v[0], options: shuffle(opts), answer: v[1],
                accept: [v[1]], note: v[2] ? "Ejemplo: *" + v[2] + "*" : "", say: v[0] };
@@ -678,6 +732,25 @@
     var sum = 0; l.slice(-30).forEach(function (x) { sum += x; });
     return sum >= 26;
   }
+  /* Dominala: one long session over the whole week, no lives, the unseen
+     exercises first (so one pass also covers the week).  Written items stay
+     written: mastering is producing, not recognising. */
+  var DOMINA_SIZE = 30;
+  function buildDomina(course, week, state, opts) {
+    opts = opts || {};
+    var map = opts.map || itemsById(course);
+    var pool = (week.items || []).map(function (id) { return map[id]; })
+      .filter(function (it) { return it && !(opts.silent && it.type === "listen"); });
+    var out = pickFresh(pool, DOMINA_SIZE, state);
+    if (out.length < DOMINA_SIZE) bankFill(state, DOMINA_SIZE - out.length).forEach(function (it) { out.push(it); });
+    return shuffle(out);
+  }
+  // The week is mastered by passing that session, or (saves from before it
+  // existed) by 85 % over the last 30 answers with the week covered.
+  function dominated(ws, week, state) {
+    return !!(ws && ws.dominated) || (mastered(ws) && coverage(week, state).ok);
+  }
+
   function coverage(week, state) {
     var cards = (state && state.cards) || {}, ids = week.items || [];
     var seen = ids.filter(function (id) { return cards[id]; }).length;
@@ -784,11 +857,7 @@
     var pool = Frasi.ALL.filter(function (f) { return state.cards[f.id]; });
     if (pool.length < 8) pool = Frasi.ALL.slice(0, 40);
     var f = pool[Math.floor(Math.random() * pool.length)];
-    var others = shuffle(Frasi.ALL.filter(function (g) {
-      return g.id !== f.id && g.it !== f.it;
-    }));
-    var near = others.filter(function (g) { return g.scene === f.scene; }).slice(0, 2);
-    var far = others.filter(function (g) { return g.scene !== f.scene; }).slice(0, 1);
+    var near = Frasi.similar(f, 3, "it"), far = [];
     return {
       id: f.id, frase: f, src: "frasi", type: "choice",
       prompt: "¿Cómo se dice?",
@@ -816,6 +885,9 @@
     pickFresh: pickFresh,
     buildBoss: buildBoss,
     buildWeak: buildWeak,
+    buildDomina: buildDomina,
+    dominated: dominated,
+    DOMINA_SIZE: DOMINA_SIZE,
     weakItems: weakItems,
     buildReview: buildReview,
     mastered: mastered,

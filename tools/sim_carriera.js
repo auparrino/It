@@ -92,6 +92,7 @@ function play(items, kind, week, acc) {
     if (ekind === "slip") q = 1;
     acc.asked++;
     if (right) { acc.right++; combo++; } else combo = 0;
+    if (!it.retry) { acc.firstAsked = (acc.firstAsked || 0) + 1; if (right || q === 1) acc.firstRight = (acc.firstRight || 0) + 1; }
     var gained = Engine.xpFor(right ? "giusto" : "sbagliato", combo);
     if (it.retry) gained = Math.ceil(gained / 2);
     acc.xp += gained;
@@ -278,12 +279,23 @@ course.weeks.forEach(function (w) {
       var racc = play(items, "round", w.week);
       roundAsked += racc.asked; roundSec += racc.sec;
       ws = state.weekStats[w.week] || { attempts: 0, right: 0 };
-    } while (!(ws.right >= 20 && Drills.mastered(ws) && Drills.coverage(w, state).ok) && rounds < 12);
+    } while (ws.right < 20 && rounds < 12);
+    // Dominala: una sola sesión; si no llega al 85 %, otra ronda y otro intento.
+    var domTries = 0;
+    while (!ws.dominated && domTries < 4) {
+      domTries++;
+      var dItems = Drills.buildDomina(course, w, state, { map: map });
+      dItems.forEach(function (it) { if (map[it.id]) poolServed[it.id] = (poolServed[it.id] || 0) + 1; });
+      var dacc = play(dItems, "round", w.week, null, true);
+      roundAsked += dacc.asked; roundSec += dacc.sec;
+      if (dacc.firstAsked && dacc.firstRight / dacc.firstAsked >= 0.85) ws.dominated = true;
+      else { var r2 = play(Drills.buildRound(course, w, { map: map, state: state }), "round", w.week); roundAsked += r2.asked; roundSec += r2.sec; }
+    }
     if (ws.right >= 20) state.unlocked = Math.min(52, w.week + 1);
     var distinct = Object.keys(poolServed).length;
     var maxRep = 0; Object.keys(poolServed).forEach(function (k) { maxRep = Math.max(maxRep, poolServed[k]); });
     missions.push({ m: "entrenamiento", rounds: rounds, asked: roundAsked, sec: roundSec, pool: pool.length,
-                    distinctServed: distinct, maxRepeat: maxRep, mastered: Drills.mastered(ws) && Drills.coverage(w, state).ok });
+                    distinctServed: distinct, maxRepeat: maxRep, mastered: Drills.dominated(ws, w, state), domTries: domTries });
     // gimnasio: una sesión, y todas las combinaciones verbo × tiempo
     var gymErr = 0, gymItems = [];
     (w.verbs || []).forEach(function (v) { (w.tenses || []).forEach(function (t) {

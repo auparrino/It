@@ -1123,7 +1123,7 @@
   }
 
   function soundRule(noun) {
-    if (/^(s[bcdfgklmnpqrstvz]|z|gn|ps|pn|x|y)/.test(noun)) return "sz";
+    if (/^(s[bcdfghklmnpqrstvz]|z|gn|ps|pn|x|y)/.test(noun)) return "sz";
     if (/^[aeiouàèéìòùh]/.test(noun)) return "v";
     return "c";
   }

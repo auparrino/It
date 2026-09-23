@@ -263,7 +263,7 @@ medio mandó dos capturas.
 | 4. Partes | 27 semanas con la lección en partes (antes 12). |
 | 5. Confusiones | 40 pares de palabras italianas que se confunden (*volta/tempo*, *largo/lungo*, *ancora/già*, *presto/subito/pronto*, *buono/bravo/bene*, *fa/da*…) con su diferencia. |
 | 6. Repaso | El desliz no reinicia la tarjeta; tres aciertos seguidos la retiran. Cola máxima del año: de 641 a 154. |
-| 7. Revisión | Revisión completa de 2.919 ejercicios y 864 oraciones: 0 errores de italiano; 13 arreglos (una pista en masculino, 11 variantes correctas que faltaban, una frase ambigua). Planillas `revision/*.csv` para un revisor nativo. |
+| 7. Revisión | Revisión completa de 2.919 ejercicios y 864 oraciones: 0 errores de italiano; 13 arreglos (una pista en masculino, 11 variantes correctas que faltaban, una frase ambigua). |
 | 8. Arreglos chicos | La guardia contra el doble toque solo descarta un toque en el mismo lugar; 22 bloques de teoría con chequeo escrito a mano; los nombres propios en castellano (*Isabel → Elisabetta*) tienen su mensaje. |
 
 ### Verificación

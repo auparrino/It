@@ -631,7 +631,7 @@
     var st = weekStat(w.week);
     if (w.boss) return st.bossPassed ? 3 : 0;
     return (lessonRead(w.week) || !w.lesson ? 1 : 0) + (st.right >= 20 ? 1 : 0) +
-      (Drills.mastered(st) && Drills.coverage(w, state).ok ? 1 : 0);
+      (Drills.dominated(st, w, state) ? 1 : 0);
   }
   function starsHtml(n, of) {
     var h = ""; for (var i = 0; i < (of || 3); i++) h += '<i class="' + (i < n ? "on" : "") + '">★</i>';
@@ -948,11 +948,11 @@
       if (w.week === Banca.GAP_WEEK) m({ kind: "b-gap", done: bankDone(/^b:gap:/), ico: "🔧", title: "Banco: Coniuga in contesto",
         sub: "El verbo justo dentro de una oración real." });
     }
-    var cov = Drills.coverage(w, state), last = (st.last || []).slice(-30);
-    var lastPct = last.length ? Math.round(last.reduce(function (a, b) { return a + b; }, 0) / last.length * 100) : 0;
-    m({ kind: "play2", done: Drills.mastered(st) && cov.ok, ico: "🏆", title: "Dominala",
-        sub: "85 % en las últimas 30 respuestas (vas " + lastPct + " % en " + last.length + ") · ejercicios vistos " +
-             cov.seen + " / " + cov.total });
+    var domDone = Drills.dominated(st, w, state);
+    m({ kind: "play2", done: domDone, ico: "🏆", title: "Dominala",
+        sub: domDone ? "Dominada" + (st.domPct ? " · " + st.domPct + " %" : "")
+          : "Una sola sesión de " + Drills.DOMINA_SIZE + " preguntas de toda la semana, sin vidas: con 85 % la ganás" +
+            (st.domBest ? " · tu mejor intento: " + st.domBest + " %" : "") });
     return out;
   }
 
@@ -980,7 +980,7 @@
     if (kind === "lez") startLezione(arg != null ? +arg : undefined);
     else if (kind === "vocab") startRound("vocab");
     else if (kind === "play") startRound(w.boss ? "boss" : "round");
-    else if (kind === "play2") startRound("round");
+    else if (kind === "play2") startRound("domina");
     else if (kind === "debil") startRound("debil");
     else if (kind === "scrivi") { view.screen = "scrivi"; render(); window.scrollTo(0, 0); }
     else if (kind === "scene" || kind === "ponte" || kind === "falsi" || kind === "capire" ||
@@ -1062,9 +1062,9 @@
      in half teaches nothing).  Phrase sessions have none: they are for flow. */
   var WITH_LIVES = { round: 1, boss: 1, gym: 1 };
   // Only these rounds count towards unlocking the next grammar week.
-  var WEEK_KINDS = { round: 1, gym: 1, pausa: 1, vocab: 1, giorno: 1, debil: 1 };
+  var WEEK_KINDS = { round: 1, gym: 1, pausa: 1, vocab: 1, giorno: 1, debil: 1, domina: 1 };
   // Rounds whose answers count as the week's progress (review mixes weeks).
-  var COUNT_KINDS = { round: 1, gym: 1, pausa: 1, boss: 1, vocab: 1, giorno: 1, debil: 1 };
+  var COUNT_KINDS = { round: 1, gym: 1, pausa: 1, boss: 1, vocab: 1, giorno: 1, debil: 1, domina: 1 };
 
   /* Le quattro corde di Nation (la guida): input, output, forma, fluidez. */
   function strandOf(it, kind) {
@@ -1085,6 +1085,7 @@
     }
     else if (kind === "boss") items = Drills.buildBoss(course, w, state, { map: itemMap });
     else if (kind === "debil") items = Drills.buildWeak(course, w, state, { map: itemMap, size: 15 });
+    else if (kind === "domina") items = Drills.buildDomina(course, w, state, { map: itemMap, silent: state.silent });
     else if (kind === "review") items = Drills.buildReview(course, state, 20, drillOpts());
     else if (kind === "scene") items = Frasi.sceneSession(arg, state.cards, drillOpts());
     else if (kind === "pausa") {
@@ -1553,7 +1554,7 @@
     if (round.boost) gained *= 2;
     round.xp += gained;
     Engine.addStrand(state, strandOf(it, round.kind), gained);
-    round.log.push({ id: it.id, verdict: verdict, given: given, answer: it.answer,
+    round.log.push({ id: it.id, verdict: verdict, given: given, answer: it.answer, retry: !!it.retry,
                      es: it.frase ? it.frase.es : "", stem: it.stem || "", prompt: it.prompt || "" });
 
     // SRS only tracks the fixed bank and the phrases; generated conjugation
@@ -1563,7 +1564,7 @@
     // every exercise ever seen.
     if (it.src !== "coniugatore" && it.src !== "lettura") {
       var light = !it.frase && it.src !== "vocab" && it.src !== "lab" && it.src !== "banca" && !it.retry &&
-                  (round.kind === "round" || round.kind === "sfida" || round.kind === "giorno" || round.kind === "boss");
+                  (round.kind === "round" || round.kind === "sfida" || round.kind === "giorno" || round.kind === "boss" || round.kind === "domina");
       // The diagnosis says what kind of mistake it was (a slip, a word, a rule).
       var dg = round.lastDiag; round.lastDiag = null;
       var ekind = q === 1 && (!dg || dg.slip) ? "slip"
@@ -1730,7 +1731,7 @@
       return p;
     } catch (e) { return null; }
   }
-  var KIND_NAME = { debil: "Puntos débiles", round: "Entrenamiento", giorno: "Sfida del giorno", boss: "Jefe", gym: "Gimnasio de verbos", pausa: "Pausa caffè", review: "Ripasso",
+  var KIND_NAME = { debil: "Puntos débiles", domina: "Dominala", round: "Entrenamiento", giorno: "Sfida del giorno", boss: "Jefe", gym: "Gimnasio de verbos", pausa: "Pausa caffè", review: "Ripasso",
                     scene: "Frases", vocab: "Palabras de la semana", lettura: "Lectura", sfida: "Sfida", ponte: "Ponte",
                     falsi: "Falsi amici", capire: "Capire", "b-voc": "Parole", "b-tr": "Traduci", "b-gap": "Coniuga in contesto",
                     "b-forme": "Forme", "b-err": "Trova l'errore", clinica: "Clínica" };
@@ -1796,6 +1797,22 @@
 
     if (round.kind === "debil") { if (!state.weakDone) state.weakDone = {}; state.weakDone[view.week] = true; }
 
+    // Dominala: the first answer to each question counts (the second, easier
+    // pass after a miss is for learning, not for the score).
+    var domExtra = null;
+    if (round.kind === "domina") {
+      var firsts = round.log.filter(function (x) { return !x.retry; });
+      var okN = firsts.filter(function (x) { return x.verdict === Engine.VERDICT.RIGHT || x.verdict === Engine.VERDICT.CLOSE; }).length;
+      var dp = firsts.length ? Math.round(okN / firsts.length * 100) : 0;
+      var dws = state.weekStats[view.week] || (state.weekStats[view.week] = { attempts: 0, right: 0, bossPassed: false });
+      dws.domBest = Math.max(dws.domBest || 0, dp);
+      if (dp >= 85 && firsts.length >= Math.min(20, round.items.length)) {
+        if (!dws.dominated) gain(60);
+        dws.dominated = true; dws.domPct = Math.max(dws.domPct || 0, dp);
+        domExtra = "🏆 ¡Semana dominada! " + dp + " % en " + firsts.length + " preguntas";
+      } else domExtra = "🏆 Dominala: " + dp + " % (hace falta 85 %). Tu mejor intento: " + dws.domBest + " %.";
+    }
+
     if (round.kind === "sfida") {
       var prevS = state.challengeLog[round.arg];
       state.challengeLog[round.arg] = { q: pct >= 80 ? 2 : pct >= 50 ? 1 : 0,
@@ -1820,6 +1837,7 @@
       gain(25);
       extras.push("☀️ Primera ronda del día: +25 xp");
     }
+    if (domExtra) extras.push(domExtra);
     extras = extras.concat(missionCheck(round.week, round.planDone));
 
     var won = Engine.checkBadges(state);

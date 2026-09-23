@@ -63,7 +63,7 @@
   /* --------------------------------------------------------- articoli */
 
   function soundOf(w) {
-    if (/^(s[bcdfgklmnpqrstvz]|z|gn|ps|pn|x|y)/.test(w)) return "sz";
+    if (/^(s[bcdfghklmnpqrstvz]|z|gn|ps|pn|x|y)/.test(w)) return "sz";
     if (/^[aeiouàèéìòù]/.test(w) || /^h[aeiou]/.test(w)) return "v";
     return "c";
   }

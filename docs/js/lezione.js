@@ -198,9 +198,12 @@
       var t = [bb.r].concat(bb.p || [], bb.ex ? bb.ex.map(function (e) { return e[0]; }) : [], [bb.warn, bb.tip]).filter(Boolean).join(" ");
       (t.match(/\*([^*]{3,24})\*/g) || []).forEach(function (x) { all.push(x.replace(/\*/g, "")); });
     });
+    // Distractors of the same kind as the gap: same number of words and
+    // either the same class (essere / avere, a / in / da) or a near shape
+    // (parlo / parla); «avere | migliore / parleremo» gives itself away.
     var others = uniq(shuffle(all, rnd).map(clean).filter(function (f) {
-      return f && f.toLowerCase() !== pick.toLowerCase() &&
-        Math.abs(f.length - pick.length) <= 4 && forms.indexOf(f) < 0;
+      return f && f.toLowerCase() !== pick.toLowerCase() && forms.indexOf(f) < 0 &&
+        f.split(/\s+/).length === pick.split(/\s+/).length && akin(f.toLowerCase(), pick.toLowerCase());
     })).slice(0, 2);
     if (others.length < 2) return null;
     var src = [b.r].concat(b.p || []).filter(function (t) { return t && t.indexOf("*" + pick + "*") >= 0; })[0] || b.r || "";
@@ -210,6 +213,29 @@
     if (stem.length > 160) stem = stem.slice(0, 157) + "…";
     return { kind: "rule", prompt: "Completá la regla", stem: stem, answer: pick,
              options: shuffle([pick].concat(others), rnd) };
+  }
+
+  var CLASSES = [["essere", "avere", "stare", "fare"], ["il", "lo", "la", "l'", "i", "gli", "le", "un", "uno", "una", "un'"],
+                 ["a", "di", "da", "in", "su", "con", "per", "tra", "fra"], ["io", "tu", "lui", "lei", "noi", "voi", "loro", "Lei"],
+                 ["mi", "ti", "si", "ci", "vi", "lo", "la", "li", "le", "gli", "ne"], ["che", "cui", "chi", "quale", "il quale"],
+                 ["presente", "imperfetto", "futuro", "condizionale", "congiuntivo", "passato prossimo", "passato remoto", "trapassato"]];
+  function lev(a, b) {
+    var m = [], i, j;
+    for (i = 0; i <= a.length; i++) m[i] = [i];
+    for (j = 0; j <= b.length; j++) m[0][j] = j;
+    for (i = 1; i <= a.length; i++) for (j = 1; j <= b.length; j++)
+      m[i][j] = Math.min(m[i - 1][j] + 1, m[i][j - 1] + 1, m[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+    return m[a.length][b.length];
+  }
+  // Two forms are of a kind: same closed class, or at most half the letters apart.
+  function akin(a, b) {
+    if (CLASSES.some(function (c) { return c.indexOf(a) >= 0 && c.indexOf(b) >= 0; })) return true;
+    return lev(a, b) <= Math.max(2, Math.floor(Math.max(a.length, b.length) / 2));
+  }
+  function overlap(a, b) {
+    var wa = a.toLowerCase().split(/[^a-zà-ù']+/).filter(function (w) { return w.length > 2; });
+    var wb = b.toLowerCase().split(/[^a-zà-ù']+/);
+    return wa.filter(function (w) { return wb.indexOf(w) >= 0; }).length;
   }
 
   // «Completá la tabla» from one cell of the block's table.
@@ -227,14 +253,26 @@
         if (col.length >= 2 && strip(r[0])) tries.push({ ri: ri, c: c, cell: cell, col: col });
       }
     });
-    if (!tries.length) return null;
-    var p = tries[Math.floor(rnd() * tries.length)];
-    var head = t.head || [];
-    var rowLabel = strip(t.rows[p.ri][0]);
-    var colLabel = strip(head[p.c] || "");
-    return { kind: "table", prompt: "Completá la tabla",
-             stem: (strip(head[0]) ? strip(head[0]) + ": " : "") + rowLabel + (colLabel ? " → " + colLabel : ""),
-             answer: p.cell, options: shuffle([p.cell].concat(shuffle(p.col, rnd).slice(0, 2)), rnd) };
+    // A cell that repeats words of its own row label («come se è → come se
+    // fosse») is found by matching, not by knowing: only if the other
+    // options repeat them too.  The options closest in shape go first.
+    tries = shuffle(tries, rnd);
+    for (var k = 0; k < tries.length; k++) {
+      var p = tries[k], rowLabel = strip(t.rows[p.ri][0]);
+      var own = overlap(p.cell, rowLabel);
+      var col = p.col.filter(function (x) { return overlap(x, rowLabel) >= Math.min(own, 1); });
+      if (col.length < 2) continue;
+      col = shuffle(col, rnd).sort(function (a, b) {
+        return Math.abs(a.length - p.cell.length) - Math.abs(b.length - p.cell.length) ||
+               lev(a.toLowerCase(), p.cell.toLowerCase()) - lev(b.toLowerCase(), p.cell.toLowerCase());
+      });
+      var head = t.head || [];
+      var colLabel = strip(head[p.c] || "");
+      return { kind: "table", prompt: "Completá la tabla",
+               stem: (strip(head[0]) ? strip(head[0]) + ": " : "") + rowLabel + (colLabel ? " → " + colLabel : ""),
+               answer: p.cell, options: shuffle([p.cell].concat(col.slice(0, 2)), rnd) };
+    }
+    return null;
   }
 
   // A check written by hand in tools/lessons («q»), for the blocks whose
