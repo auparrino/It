@@ -72,9 +72,10 @@ ERR.forEach(function (e) {
   ok(!f.length, "«" + t + "» no debería marcar nada: " + f.map(function (x) { return x.msg; }).join(" | "));
 });
 
-// La llamada a Gemini, con fetch simulado: saturado → otro modelo; un
-// modelo que no acepta apagar el razonamiento → el mismo sin esa opción;
-// clave mala → error claro; sin razonamiento en los 2.5.
+// La llamada a Cerebras, con fetch simulado: elige el mejor modelo de la
+// lista que devuelve la clave; saturado → otro modelo; un modelo que no
+// acepta el modo JSON → el mismo sin él; clave mala → error claro; lee el
+// JSON aunque venga con <think> o ```.
 var GEM = [];
 function gem(name, plan, check) { GEM.push([name, plan, check]); }
 function runGem() {
@@ -82,24 +83,33 @@ function runGem() {
   var g = GEM.shift(), calls = [], mem = {};
   global.localStorage = { getItem: function (k) { return mem[k] || null; }, setItem: function (k, v) { mem[k] = v; } };
   global.fetch = function (url, opt) {
-    var model = url.match(/models\/([^:]+):/)[1], body = JSON.parse(opt.body);
-    calls.push(model + (body.generationConfig.thinkingConfig ? "~" : ""));
+    if (/\/models$/.test(url)) {
+      return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve({ data: [
+        { id: "llama3.1-8b" }, { id: "gpt-oss-120b" }, { id: "qwen-3-235b-a22b-instruct-2507" }, { id: "llama-3.3-70b" }] }); } });
+    }
+    var body = JSON.parse(opt.body);
+    calls.push(body.model + (body.response_format ? "~" : ""));
     var a = g[1](calls.length, body);
     return Promise.resolve({ ok: a.status === 200, status: a.status, json: function () { return Promise.resolve(a.body); },
                              text: function () { return Promise.resolve(JSON.stringify(a.body || {})); } });
   };
   S.explain({ prompt: "p", stem: "s", given: "a", answer: "b" }, "K", function (err, data) {
-    ok(g[2](err, data, calls), "gemini " + g[0] + ": " + (err ? err.message : "ok") + " · " + calls.join(" → "));
+    ok(g[2](err, data, calls), "cerebras " + g[0] + ": " + (err ? err.message : "ok") + " · " + calls.join(" → "));
     runGem();
   });
 }
-var GOOD = { candidates: [{ content: { parts: [{ text: '{"tambien_correcta":false,"explicacion":"x"}' }] } }] };
+function reply(txt) { return { choices: [{ message: { content: txt } }] }; }
+var GOOD = reply('{"tambien_correcta":false,"explicacion":"x"}');
+gem("mejor modelo primero", function () { return { status: 200, body: GOOD }; },
+    function (e, d, c) { return !e && d.explicacion === "x" && c[0] === "qwen-3-235b-a22b-instruct-2507~"; });
 gem("saturado", function (n) { return n === 1 ? { status: 503, body: {} } : { status: 200, body: GOOD }; },
-    function (e, d, c) { return !e && c.length === 2 && /~$/.test(c[0]); });
-gem("sin razonamiento no admitido", function (n, b) { return b.generationConfig.thinkingConfig ? { status: 400, body: { error: { message: "thinking not supported" } } } : { status: 200, body: GOOD }; },
+    function (e, d, c) { return !e && c.length === 2 && c[1] === "gpt-oss-120b~"; });
+gem("sin modo JSON", function (n, b) { return b.response_format ? { status: 400, body: { message: "response_format not supported" } } : { status: 200, body: GOOD }; },
     function (e, d, c) { return !e && c.length === 2 && c[0] === c[1] + "~"; });
-gem("clave mala", function () { return { status: 400, body: { error: { message: "API key not valid" } } }; },
+gem("clave mala", function () { return { status: 401, body: { message: "Wrong API Key" } }; },
     function (e) { return e && /clave/.test(e.message); });
+gem("JSON con <think> y ```", function () { return { status: 200, body: reply('<think>mmm</think>```json\n{"tambien_correcta":true,"explicacion":"y"}\n```') }; },
+    function (e, d) { return !e && d.tambien_correcta === true && d.explicacion === "y"; });
 gem("todo saturado", function () { return { status: 503, body: {} }; },
-    function (e, d, c) { return e && /saturada/.test(e.message) && c.length === 5; });
+    function (e, d, c) { return e && /saturado/.test(e.message) && c.length === 4; });
 runGem();

@@ -409,12 +409,16 @@ texto se envía a sus servidores.
 
 **Corrector con IA (opcional).** LanguageTool casi no controla la
 concordancia ni la persona del verbo en italiano. Para una corrección
-completa, la pantalla de Scrivi acepta una clave gratuita de Gemini (Google
-AI Studio, *aistudio.google.com/apikey*): con ella, la IA marca cada error
-del texto con su explicación en castellano y agrega la versión corregida y
-una devolución. La clave queda solo en el teléfono (no entra en las copias
-de seguridad) y el texto se envía a Google. Lo que la IA marca reemplaza lo
-que el corrector propio o LanguageTool dijeron sobre las mismas palabras.
+completa, la app usa **Cerebras** con una clave gratuita del usuario
+(*cloud.cerebras.ai → API Keys*): la IA marca cada error del texto con su
+explicación en castellano y agrega la versión corregida y una devolución.
+La app le pide a Cerebras la lista de modelos de esa clave y usa el mejor
+disponible (Qwen 3 235B, gpt-oss-120b, Llama 3.3 70B…), así no depende de
+nombres que cambian; si un modelo tarda más de 20 segundos, está saturado o
+no acepta el modo JSON, prueba el siguiente, y recuerda el que anduvo. La
+clave queda solo en el teléfono (no entra en las copias de seguridad) y el
+texto se envía a Cerebras. Lo que la IA marca reemplaza lo que el corrector
+propio o LanguageTool dijeron sobre las mismas palabras.
 
 **«🤖 Explicame» en cualquier ejercicio.** Con la clave guardada (en Scrivi o
 en *Io → Corrector con IA*), después de un error aparece el botón: la IA

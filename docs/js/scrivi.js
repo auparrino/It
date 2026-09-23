@@ -796,12 +796,14 @@
   }
 
   /* ------------------------------------------------------------ IA
-     Optional: Google's Gemini with the learner's own free key (Google AI
-     Studio).  It reads the whole text like a teacher, marks everything and
-     explains in Spanish; the key never leaves the phone except to Google. */
-  // When one model is busy (503), overloaded or rate-limited (429) or gone
-  // (404), the next one is tried; after the whole list, one more round.
-  var AI_MODELS = ["gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-flash-latest", "gemini-flash-lite-latest", "gemini-2.0-flash"];
+     Optional: Cerebras (free key of the learner, OpenAI-style API, answers
+     in a second or two).  It reads the whole text like a teacher, marks
+     everything and explains in Spanish; the key never leaves the phone
+     except to Cerebras.  Which models a key can use changes over time, so
+     the app asks Cerebras for the list and takes the best one available. */
+  var AI_PREFER = [/qwen-3-235b.*instruct/i, /gpt-oss-120b/i, /llama-3\.3-70b/i, /llama-4-maverick/i, /qwen-3-32b/i, /llama-4-scout/i, /qwen/i, /llama/i];
+  var AI_FALLBACK = ["qwen-3-235b-a22b-instruct-2507", "gpt-oss-120b", "llama-3.3-70b", "qwen-3-32b", "llama3.1-8b"];
+  var AI_URL = "https://api.cerebras.ai/v1";
   function aiPrompt(text, week, task) {
     return "Sos profesor de italiano para un hispanohablante rioplatense que está en la semana " + week +
       " de 52 de un curso hasta C1. La consigna era: «" + (task ? task.t : "texto libre") + "».\n" +
@@ -813,7 +815,7 @@
       "\"corregido\":\"el texto completo corregido\",\"comentario\":\"una o dos oraciones de devolución, en castellano\"}\n\n" +
       "Texto:\n" + text;
   }
-  function aiCheck(text, week, key, done) { gemini(aiPrompt(text, week, TASKS[week]), key, done); }
+  function aiCheck(text, week, key, done) { llm(aiPrompt(text, week, TASKS[week]), key, done); }
 
   /* Any exercise: why is my answer wrong (or is it right after all)? */
   function explainPrompt(x) {
@@ -827,63 +829,88 @@
       "con un ejemplo corto en italiano. Si su respuesta en realidad también es correcta, o si la corrección de la app está mal o confunde, decilo claro.\n" +
       "Respondé SOLO con JSON: {\"tambien_correcta\": true o false, \"app_equivocada\": true o false, \"explicacion\": \"...\"}";
   }
-  function explain(x, key, done) { gemini(explainPrompt(x), key, done); }
+  function explain(x, key, done) { llm(explainPrompt(x), key, done); }
 
-  /* One request at a time through the list of models: each attempt waits at
-     most 20 s, the whole thing at most 60 s.  Gemini 2.5 «thinks» before
-     answering unless told not to, which can take more than half a minute:
-     for correcting a text that is not needed, so the thinking is switched
-     off.  The model that answered last time goes first next time. */
-  var MODEL_KEY = "laviac1.gemini.model";
-  function gemini(prompt, key, done) {
-    if (typeof fetch !== "function") return done(new Error("sin fetch"));
-    var order = AI_MODELS.slice(), deadline = Date.now() + 60000, lastErr = null, noThink = {};
+  /* One request at a time through the models, best first: each attempt
+     waits at most 20 s, the whole thing at most 60 s.  The model that
+     answered last time goes first next time. */
+  var MODEL_KEY = "laviac1.cerebras.model", LIST_KEY = "laviac1.cerebras.models";
+  function models(key, cb) {
     try {
-      var good = localStorage.getItem(MODEL_KEY);
-      if (good && order.indexOf(good) > 0) { order.splice(order.indexOf(good), 1); order.unshift(good); }
+      var c = JSON.parse(localStorage.getItem(LIST_KEY) || "null");
+      if (c && c.at > Date.now() - 86400000 && c.ids && c.ids.length) return cb(c.ids);
     } catch (e) { /* */ }
-    var k = 0;
-    function next(err) {
-      if (err) lastErr = err;
-      if (k >= order.length || Date.now() > deadline) {
-        var m = lastErr && /abort/i.test(String(lastErr.message || lastErr)) ? "la IA no respondió a tiempo" : String((lastErr && lastErr.message) || lastErr || "sin respuesta");
-        return done(new Error(m));
-      }
-      attempt(order[k++]);
-    }
-    function attempt(model) {
-      var ctl = typeof AbortController === "function" ? new AbortController() : null;
-      var timer = setTimeout(function () { if (ctl) ctl.abort(); }, Math.min(20000, Math.max(3000, deadline - Date.now())));
-      var gen = { temperature: 0.2, responseMimeType: "application/json", maxOutputTokens: 4096 };
-      if (/^gemini-2\.5/.test(model) && !noThink[model]) gen.thinkingConfig = { thinkingBudget: 0 };
-      fetch("https://generativelanguage.googleapis.com/v1beta/models/" + model + ":generateContent?key=" + encodeURIComponent(key), {
-        method: "POST", signal: ctl ? ctl.signal : undefined, headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ contents: [{ role: "user", parts: [{ text: prompt }] }], generationConfig: gen })
-      }).then(function (r) {
-        if (r.ok) return r.json();
-        return r.text().then(function (b) {
-          clearTimeout(timer);
-          // a model that does not accept the thinking switch: same model without it
-          if (r.status === 400 && /thinking/i.test(b) && !noThink[model]) { noThink[model] = 1; attempt(model); return null; }
-          if (r.status === 400 || r.status === 401 || r.status === 403) {
-            return done(new Error("HTTP " + r.status + (/API.?key|permission|denied/i.test(b) ? ", clave" : "")));
-          }
-          next(new Error(r.status === 503 || r.status === 429 ? "Google tiene la IA saturada ahora (" + r.status + ")" : "HTTP " + r.status));
-          return null;
-        });
-      }).then(function (j) {
-        if (!j) return;
+    var ctl = typeof AbortController === "function" ? new AbortController() : null;
+    var timer = setTimeout(function () { if (ctl) ctl.abort(); }, 8000);
+    fetch(AI_URL + "/models", { headers: { Authorization: "Bearer " + key }, signal: ctl ? ctl.signal : undefined })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) {
         clearTimeout(timer);
-        var c = j.candidates && j.candidates[0];
-        var txt = c && c.content && c.content.parts ? c.content.parts.map(function (p) { return p.text || ""; }).join("") : "";
-        var data;
-        try { data = JSON.parse(String(txt || "").replace(/^\s*```(json)?/, "").replace(/```\s*$/, "").trim()); }
-        catch (e) { return next(new Error("respuesta ilegible")); }
-        try { localStorage.setItem(MODEL_KEY, model); } catch (e) { /* */ }
-        done(null, data);
-      }).catch(function (e) { clearTimeout(timer); next(e); });
-    }
-    next();
+        var ids = ((j && j.data) || []).map(function (m) { return m.id; }).filter(Boolean);
+        var ranked = [];
+        AI_PREFER.forEach(function (rx) { ids.forEach(function (id) { if (rx.test(id) && ranked.indexOf(id) < 0) ranked.push(id); }); });
+        ids.forEach(function (id) { if (ranked.indexOf(id) < 0) ranked.push(id); });
+        if (ranked.length) { try { localStorage.setItem(LIST_KEY, JSON.stringify({ at: Date.now(), ids: ranked })); } catch (e) { /* */ } }
+        cb(ranked.length ? ranked : AI_FALLBACK.slice());
+      })
+      .catch(function () { clearTimeout(timer); cb(AI_FALLBACK.slice()); });
+  }
+  // The JSON inside a reply (some models think aloud in <think>…</think> or wrap it in ```).
+  function jsonOf(txt) {
+    txt = String(txt || "").replace(/<think>[\s\S]*?<\/think>/g, "").replace(/```(json)?/g, "").trim();
+    var a = txt.indexOf("{"), b = txt.lastIndexOf("}");
+    return JSON.parse(a >= 0 && b > a ? txt.slice(a, b + 1) : txt);
+  }
+  function llm(prompt, key, done) {
+    if (typeof fetch !== "function") return done(new Error("sin fetch"));
+    models(key, function (list) {
+      var order = list.slice(0, 6), deadline = Date.now() + 60000, lastErr = null, plain = {};
+      try {
+        var good = localStorage.getItem(MODEL_KEY);
+        if (good && order.indexOf(good) > 0) { order.splice(order.indexOf(good), 1); order.unshift(good); }
+      } catch (e) { /* */ }
+      var k = 0;
+      function next(err) {
+        if (err) lastErr = err;
+        if (k >= order.length || Date.now() > deadline) {
+          var m = lastErr && /abort/i.test(String(lastErr.message || lastErr)) ? "la IA no respondió a tiempo" : String((lastErr && lastErr.message) || lastErr || "sin respuesta");
+          return done(new Error(m));
+        }
+        attempt(order[k++]);
+      }
+      function attempt(model) {
+        var ctl = typeof AbortController === "function" ? new AbortController() : null;
+        var timer = setTimeout(function () { if (ctl) ctl.abort(); }, Math.min(20000, Math.max(3000, deadline - Date.now())));
+        var body = { model: model, temperature: 0.2, max_completion_tokens: 4096,
+                     messages: [{ role: "system", content: "Respondés solo con JSON válido." }, { role: "user", content: prompt }] };
+        if (!plain[model]) body.response_format = { type: "json_object" };
+        if (/gpt-oss/i.test(model) && !plain[model]) body.reasoning_effort = "low";
+        fetch(AI_URL + "/chat/completions", {
+          method: "POST", signal: ctl ? ctl.signal : undefined,
+          headers: { "Content-Type": "application/json", Authorization: "Bearer " + key },
+          body: JSON.stringify(body)
+        }).then(function (r) {
+          if (r.ok) return r.json();
+          return r.text().then(function (b) {
+            clearTimeout(timer);
+            // a model that rejects the JSON mode or the reasoning option: again without them
+            if (r.status === 400 && !plain[model] && /response_format|json|reasoning/i.test(b)) { plain[model] = 1; attempt(model); return null; }
+            if (r.status === 401 || r.status === 403) return done(new Error("HTTP " + r.status + ", clave"));
+            next(new Error(r.status === 429 ? "se terminó el cupo por ahora (429)" : r.status >= 500 ? "Cerebras está saturado ahora (" + r.status + ")" : "HTTP " + r.status));
+            return null;
+          });
+        }).then(function (j) {
+          if (!j) return;
+          clearTimeout(timer);
+          var msg = j.choices && j.choices[0] && j.choices[0].message;
+          var data;
+          try { data = jsonOf(msg && msg.content); } catch (e) { return next(new Error("respuesta ilegible")); }
+          try { localStorage.setItem(MODEL_KEY, model); } catch (e) { /* */ }
+          done(null, data);
+        }).catch(function (e) { clearTimeout(timer); next(e); });
+      }
+      next();
+    });
   }
   // The AI's errors as findings on the text's tokens (each fragment is found
   // in the text; what the local checker already marked is not repeated).
