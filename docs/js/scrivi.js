@@ -527,15 +527,27 @@
       var nxt = ni >= 0 ? tk[ni] : null;
       // A capital in mid-sentence, or two capitals in a row (Buenos Aires): a name.
       var proper = t.cap && (!t.start || (nxt && nxt.cap && ni === i + 1));
+      var already = out.some(function (f) { return i >= f.i && i < f.i + f.n; });
       var truncated = /^(aver|esser|far|dir|star|andar|poter|voler|dover|saper|fin|per|cuor|buon|bel|gran|san|qual|tal|signor|dottor|professor|mar|ben|son|vien)$/.test(w);
       // 1. Español metido
-      if (!proper && !truncated && !LEXI[w] && U.spanishWord && (U.spanishWord(w) || U.looksSpanish(w))) {
+      if (!already && !proper && !truncated && !LEXI[w] && U.spanishWord && (U.spanishWord(w) || U.looksSpanish(w))) {
         var tr = U.spanishWord(w);
+        // a Spanish plural: translate the singular and make it plural (gatos → gatti)
+        if (!tr && /s$/.test(w)) {
+          [w.replace(/es$/, ""), w.replace(/s$/, "")].some(function (sg) {
+            if (DATA.nouns[sg] && DATA.nouns[sg].pl) { tr = DATA.nouns[sg].pl; return true; }   // libros → libri
+            var t1 = U.spanishWord(sg);
+            if (!t1) return false;
+            var it1 = String(t1).split(" / ")[0], nn = DATA.nouns[it1];
+            tr = nn && nn.pl ? nn.pl : it1;
+            return true;
+          });
+        }
         push(i, 1, "parola_spagnola", it(t.o) + " es español" + (tr ? "; en italiano: " + it(String(tr).split(" / ")[0]) : "") + ".");
         return;
       }
       // 2. Palabra que no existe: tipeo, doble, tilde
-      if (!proper && !truncated && /^[a-zà-ÿ]+'?$/.test(w) && w.length > 2 && !known(w) && !isPart(w) && !isInfCl(w) &&
+      if (!already && !proper && !truncated && /^[a-zà-ÿ]+'?$/.test(w) && w.length > 2 && !known(w) && !isPart(w) && !isInfCl(w) &&
           !suffixed(w) && !/(ando|endo|mente)$/.test(w)) {
         if (!lexKeys) lexKeys = Object.keys(LEXI).concat(Object.keys(DATA.lex));
         var best = null, bd = 9, lim = w.length > 6 ? 2 : 1;
@@ -683,7 +695,7 @@
           var nw = n, pluralOk = DATA.nounsByPlural[nw] && DATA.nounsByPlural[nw].pl === nw;
           var cand = DATA.nouns[nw] && DATA.nouns[nw].s === nw && DATA.nouns[nw].pl !== nw ? DATA.nouns[nw].pl : null;
           if (!pluralOk && !cand && !known(nw)) {
-            var st = nw.replace(/[oaie]$/, "");
+            var st = nw.replace(/s$/, "").replace(/[oaie]$/, "");   // annos, anne → anni
             ["i", "e"].forEach(function (x) { if (!cand && DATA.nounsByPlural[st + x] && DATA.nounsByPlural[st + x].pl === st + x) cand = st + x; });
           }
           if (cand && !pluralOk) {
@@ -787,7 +799,9 @@
      Optional: Google's Gemini with the learner's own free key (Google AI
      Studio).  It reads the whole text like a teacher, marks everything and
      explains in Spanish; the key never leaves the phone except to Google. */
-  var AI_MODELS = ["gemini-flash-latest", "gemini-2.5-flash", "gemini-2.0-flash"];
+  // When one model is busy (503), overloaded or rate-limited (429) or gone
+  // (404), the next one is tried; after the whole list, one more round.
+  var AI_MODELS = ["gemini-2.5-flash", "gemini-flash-latest", "gemini-2.5-flash-lite", "gemini-flash-lite-latest", "gemini-2.0-flash"];
   function aiPrompt(text, week, task) {
     return "Sos profesor de italiano para un hispanohablante rioplatense que está en la semana " + week +
       " de 52 de un curso hasta C1. La consigna era: «" + (task ? task.t : "texto libre") + "».\n" +
@@ -815,8 +829,8 @@
   }
   function explain(x, key, done) { gemini(explainPrompt(x), key, done); }
 
-  function gemini(prompt, key, done, model) {
-    model = model || AI_MODELS[0];
+  function gemini(prompt, key, done, model, round) {
+    model = model || AI_MODELS[0]; round = round || 0;
     if (typeof fetch !== "function") return done(new Error("sin fetch"));
     var ctl = typeof AbortController === "function" ? new AbortController() : null;
     var timer = setTimeout(function () { if (ctl) ctl.abort(); }, 30000);
@@ -826,8 +840,15 @@
                              generationConfig: { temperature: 0.2, responseMimeType: "application/json" } })
     }).then(function (r) {
       var k = AI_MODELS.indexOf(model);
-      if (r.status === 404 && k >= 0 && k < AI_MODELS.length - 1) { clearTimeout(timer); gemini(prompt, key, done, AI_MODELS[k + 1]); return null; }
-      if (!r.ok) return r.text().then(function (b) { throw new Error("HTTP " + r.status + (/API.?key/i.test(b) ? ", clave" : "")); });
+      if (/^(404|429|500|503)$/.test(String(r.status))) {
+        clearTimeout(timer);
+        if (k >= 0 && k < AI_MODELS.length - 1) { gemini(prompt, key, done, AI_MODELS[k + 1], round); return null; }
+        if (round < 1) { setTimeout(function () { gemini(prompt, key, done, AI_MODELS[0], round + 1); }, 2500); return null; }
+      }
+      if (!r.ok) return r.text().then(function (b) {
+        throw new Error(r.status === 503 || r.status === 429 ? "Google tiene la IA saturada ahora (" + r.status + ")" :
+                        "HTTP " + r.status + (/API.?key/i.test(b) ? ", clave" : ""));
+      });
       return r.json();
     }).then(function (j) {
       if (!j) return;
