@@ -443,6 +443,22 @@
         (e !== sp2[0] && sp2[0].split(" / ").indexOf(e) < 0 ? " (acá: " + it(e) + ")" : "") +
         "." + (sp2[1] ? " " + sp2[1] : "") };
 
+    // 18b. L'infinito al posto della forma coniugata (avere → abbiamo):
+    // tipico di chi comincia, non è un problema di vocabolario.
+    if (/(are|ere|ire|rre)$/.test(g) && verbForms(e).some(function (x) { return x.lemma === g; })) {
+      return { cat: "persona_verbale", slip: false,
+        hint: "Escribiste el infinitivo: hay que conjugarlo para la persona de la frase.",
+        explain: it(g) + " es el infinitivo; conjugado para esta persona queda " + it(e) + "." };
+    }
+
+    // 18c. Due parole diverse (nonna / nonno, casa / cassa): è lessico, non
+    // concordanza, anche se cambia solo una lettera.
+    if (DATA.nouns && DATA.nouns[g] && DATA.nouns[e] && g !== e && DATA.lex[g] && DATA.lex[e]) {
+      return { cat: "lessico", slip: false,
+        hint: it(g) + " es otra palabra. ¿Qué significa?",
+        explain: it(g) + " significa «" + DATA.lex[g] + "»; " + it(e) + ", «" + DATA.lex[e] + "»." };
+    }
+
     // 19. Accordo di genere e numero (cambia solo la vocale finale)
     if (endingOnly) {
       var pl = /[ie]$/.test(e) && /[oa]$/.test(g) ? "plural" :

@@ -49,6 +49,11 @@
     var w = (state && state.unlocked) || 1;
     return w <= 8 ? "A1" : w <= 18 ? "A2" : w <= 30 ? "B1" : w <= 42 ? "B2" : "C1";
   }
+  /* E la settimana del corso decide la grammatica: build_bank.py segna in
+     «w» (tradurre) e «wg» (completare) da quale settimana una frase usa
+     solo tempi già spiegati. */
+  function weekOf(state) { return (state && state.unlocked) || 1; }
+  function taught(x, state, key) { return (x[key || "w"] || 1) <= weekOf(state); }
   function within(lvl, max) { return LEVELS.indexOf(lvl) <= LEVELS.indexOf(max); }
   function nearLevel(lvl, max) {
     var a = LEVELS.indexOf(lvl), b = LEVELS.indexOf(max);
@@ -322,10 +327,10 @@
              cat: e.cat, note: e.why, lvl: e.lvl, say: e.right };
   }
 
-  function sentencePool(state, pred) {
+  function sentencePool(state, pred, key) {
     var lvl = levelOf(state), out = [];
     B.sentences.forEach(function (s, i) {
-      if (within(s.lvl, lvl) && (!pred || pred(s))) out.push(i);
+      if (within(s.lvl, lvl) && taught(s, state, key) && (!pred || pred(s))) out.push(i);
     });
     return out;
   }
@@ -349,16 +354,23 @@
   function gapSession(state, size, tagFilter) {
     var ids = sentencePool(state, function (s) {
       return s.gap && (!tagFilter || s.tags.some(function (t) { return tagFilter.indexOf(t) >= 0; }));
-    });
+    }, "wg");
     return prefer(state, ids, "b:gap:").slice(0, size || 10).map(gapItem).filter(Boolean);
   }
 
+  /* Spotting a mistake needs a sentence you can already read: before week 5
+     (presente regular behind you) there is nothing to compare it with. */
+  var ERR_WEEK = 5;
+
   function errorSession(state, size, cats) {
+    if ((state.unlocked || 1) < ERR_WEEK) return [];
     var lvl = levelOf(state), ids = [];
     B.errors.forEach(function (e, i) {
-      if (within(e.lvl, lvl) && (!cats || cats.indexOf(e.cat) >= 0)) ids.push(i);
+      if (within(e.lvl, lvl) && taught(e, state) && (!cats || cats.indexOf(e.cat) >= 0)) ids.push(i);
     });
-    if (!ids.length) B.errors.forEach(function (e, i) { if (!cats || cats.indexOf(e.cat) >= 0) ids.push(i); });
+    if (!ids.length) B.errors.forEach(function (e, i) {
+      if (taught(e, state) && (!cats || cats.indexOf(e.cat) >= 0)) ids.push(i);
+    });
     return prefer(state, ids, "b:err:").slice(0, size || 8).map(errorItem);
   }
 
@@ -457,7 +469,7 @@
   function pausaItem(state) {
     var r = Math.random();
     if (r < 0.4) return translateSession(state, 1)[0];
-    if (r < 0.7) return errorSession(state, 1)[0];
+    if (r < 0.7 && (state.unlocked || 1) >= ERR_WEEK) return errorSession(state, 1)[0];
     return gapSession(state, 1)[0];
   }
 
@@ -488,6 +500,7 @@
     gapSession: gapSession,
     errorItem: errorItem,
     errorSession: errorSession,
+    ERR_WEEK: ERR_WEEK,
     weakest: weakest,
     clinicaSession: clinicaSession,
     CURE: CURE,

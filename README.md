@@ -68,6 +68,9 @@ tu teléfono**. No usa cuentas, servidores, micrófono ni IA externa.
   filosofía, sociología y literatura italianas: Dante, Maquiavelo, Galileo,
   Garibaldi, Gramsci, Primo Levi, el *boom* económico, Calvino, Beccaria y
   Natalia Ginzburg. Donde una frase famosa es apócrifa, el texto lo dice.
+- Cada texto se abre en la semana cuya gramática usa (el episodio del
+  imperfetto, en la 15; los de passato remoto, en la 37), así nunca leés
+  antes de la teoría.
 - Cada lectura tiene glosario (tocás la palabra subrayada), preguntas de
   comprensión y una **caza de formas**: marcar en el texto los verbos en
   passato remoto, los congiuntivi, etc.
@@ -177,10 +180,18 @@ aprobar con 85% para desbloquear la siguiente:
 
 | Estación | Semanas | Nivel | Contenido |
 |---|---|---|---|
-| Le Fondamenta | 1–13 | A1 → A2 | Sonidos, género, artículos, presente completo |
-| Il Ponte | 14–26 | A2 → B1 | Pasados, futuro, condicional, comparativos |
-| La Corrente | 27–39 | B1 → B2 | Congiuntivo, periodo hipotético, pasiva, *ne* y *ci* |
-| La Vetta | 40–52 | B2 → C1 | Causativo, formas no finitas, discurso indirecto, registro |
+| Le Fondamenta | 1–13 | A1 → A2 | Sonidos (vocales abiertas y cerradas, dobles), essere y avere, género, artículos, presente completo, pronombres, **passato prossimo**, reflexivos e imperativo |
+| Il Ponte | 14–26 | A2 → B1 | Piacere, imperfetto, futuro, condicional, **ne y ci**, **pronombres combinados**, comparativos, **congiuntivo presente** |
+| La Corrente | 27–39 | B1 → B2 | Congiuntivo pasado e imperfecto, concordancia, periodo hipotético, pasiva, relativos, **passato remoto**, **discurso indirecto** |
+| La Vetta | 40–52 | B2 → C1 | Causativo, percepción, formas no finitas, construcciones especiales, orden de palabras, registro alto, léxico C1 |
+
+El orden sigue la guía basada en evidencia del proyecto (y la secuencia de
+adquisición del italiano L2 del Progetto di Pavia: presente → passato prossimo
+→ imperfetto → futuro → condicional → congiuntivo): el passato prossimo llega
+en el primer trimestre, y los clíticos *ne/ci*, los pronombres combinados y el
+congiuntivo presente en el segundo. Desde la primera semana se atacan las
+interferencias del castellano (dobles, vocales abiertas, *a* personal,
+*essere/avere*).
 
 El percorso es un **camino** de 52 nodos. Cada semana tiene **3 estrellas**, una
 por misión:
@@ -196,14 +207,69 @@ por misión:
    vidas y combo de XP.
 3. **Dominala** — 85% de acierto en al menos 30 respuestas.
 
-Los **boss** cierran cada estación: examen acumulativo, tres vidas, 85% para pasar.
+Los **boss** cierran cada estación: examen acumulativo, 85% para pasar.
+Las **vidas** son un indicador, no un castigo: cada error vacía un corazón para que
+veas dónde te equivocaste, pero la ronda se juega siempre hasta el final.
 Aparte están el **gimnasio de verbos** (conjugación generada al vuelo) y las
 **Sfide del Maestro**: los desafíos del *Soluzioni* con clave de respuestas,
 cada uno una ronda corregida (elegir, completar varios blancos, traducir del
 español) con la regla explicada al responder; 80% o más gana su estrella.
 
+Cada semana trae además **📚 Palabras de la semana** (9 a 15 palabras nuevas,
+no transparentes, sacadas de sus propios ejercicios, con audio y una frase de
+ejemplo): primero elegís qué significan, después las escribís; quedan en el
+ripasso con repetición espaciada. En *Oggi* ves cuántas palabras practicaste
+contra la meta del trimestre (2.000 en el primero).
+
+**Reconocer antes de producir**: la primera vez que aparece un ejercicio de
+escribir (conjugar, completar, traducir) llega como opción múltiple; la
+próxima vez, ya lo escribís. La semana 1 incluye **escucha sin texto**
+(*nonno* o *nono*, *casa* o *cassa*, *cena* o *scena*) y *Trova l'errore* se
+abre en la semana 5, cuando ya podés leer la oración.
+
 Además hay una cola de **ripasso** con repetición espaciada (SM-2 simplificado)
 sobre todo lo ya jugado, racha diaria y once medallas.
+
+### Nada antes de su teoría
+
+Cada semana toma ejercicios de los dos libros, y un capítulo de sustantivos
+puede traer frases en imperfetto (*il popolo danese era contro…*) o un
+superlativo en passato prossimo (*le vittime più tragiche sono state…*).
+`tools/sillabo.py` lee cada ejercicio, reconoce los tiempos verbales que usa
+(con un léxico de formas generado por el conjugador: `tools/forms_lexicon.js`)
+y otras construcciones (pronombres combinados, *ne*, *cui*, gerundio,
+comparativos), y calcula **la primera semana cuya teoría lo cubre todo**:
+
+- En el enunciado, que solo se lee, el presente vale desde el principio.
+- En la respuesta, lo que escribís o elegís, el presente cuenta desde la
+  semana 5; *essere* y *avere* se enseñan en la semana 1.
+- Lo que una semana todavía no puede pedir pasa, como repaso, a la semana
+  donde ya se enseñó; ahí cada ronda mezcla unos pocos (la cuarta parte como
+  máximo).
+- Los ejercicios de *For Dummies* se reparten por tema, bloque por bloque, y
+  no por capítulo: el capítulo 3 mezcla sustantivos (semana 2), artículos
+  (semana 3) y sufijos (semana 46). Lo mismo con las secciones de cada capítulo del
+  *Soluzioni*: cada una va a la semana de su tema, y cada ejercicio aparece una sola
+  vez fuera de los exámenes y repasos.
+- El gimnasio de verbos solo usa como distractores tiempos ya vistos; el
+  banco (*Traduci*, *Completa*, *Trova l'errore*, la Clínica y la Pausa)
+  y los juegos de *Capire* filtran por la semana a la que llegaste.
+
+- **Vocabulario**: `tools/lessico.py` sabe desde qué semana se conoce cada
+  palabra (el nivel del banco, lo que ya mostró la teoría, o cognado
+  transparente para un hispanohablante, que se comprueba contra el diccionario
+  de castellano con las reglas del Ponte). Lo que escribís tiene que ser
+  vocabulario ya visto; en lo que leés se toleran hasta dos palabras nuevas.
+  Las palabras que no están en el banco tienen significado y nivel en
+  `tools/bank/glossario.py`.
+- **Toque en la palabra**: en cualquier ejercicio (salvo los que preguntan el
+  significado) tocás una palabra italiana y ves qué significa; las que todavía
+  no viste en el curso aparecen subrayadas (`docs/data/glossario.json`).
+
+`test_game.js` verifica que ninguna semana pida nada antes de su teoría, y
+`python3 tools/sillabo.py` lista qué ejercicio esperó a qué semana y por qué.
+Si se reordena el programa, las semanas de cada tiempo se ajustan en
+`TENSE_WEEK`, dentro de `tools/sillabo.py`.
 
 ## Contenido
 
@@ -223,9 +289,15 @@ y los dos bancos extraídos de libros (este último con ~125 respuestas corregid
 en *Dummies* y errores de extracción limpiados en *Soluzioni*). Las reglas que
 el corrector enuncia en español también se revisaron una por una.
 
-**Diseño.** Paleta de café italiano (papel, basílico, terracota, azafrán) con
-modo oscuro; *Fraunces* para el italiano y *Nunito* para la interfaz, servidas
-desde `docs/fonts/` (licencia SIL OFL, incluida) para que funcionen sin red.
+**Diseño.** «La Via» es una calle: el logo y el título de cada semana son
+**placas de calle romanas** en travertino, con la semana en números romanos
+(*Settimana XVII*). Las tarjetas grandes llevan un patrón de **maiólica** de
+Vietri sobre verde botella, limón de Amalfi, terracota y azul cobalto, y la
+Pausa caffè tiene el **toldo a rayas** de un bar. Tipografías italianas:
+*Bodoni Moda* (Bodoni era de Parma) para títulos y el italiano, y *Titillium
+Web* (Accademia di Belle Arti di Urbino) para la interfaz, servidas desde
+`docs/fonts/` (licencia SIL OFL, incluida) para que funcionen sin red. Con
+modo oscuro.
 
 El gimnasio de verbos genera preguntas en vez de almacenarlas: 96 verbos × 14
 tiempos × 6 personas dan más de 8.000 formas distintas, con distractores tomados
@@ -254,6 +326,10 @@ tools/
   extract_dummies.py     EPUB -> banco auto-corregible
   extract_routledge.py   EPUB -> temario + desafíos
   build_course.py        arma docs/data/course.json
+  sillabo.py             desde qué semana se puede pedir cada ejercicio
+  lessico.py             desde qué semana se conoce cada palabra; glosario
+  check_lessons.py       formato y sillabo de la teoría
+  forms_lexicon.js       léxico de formas verbales para el sillabo
   authored/              banco de ítems propios (Python legible)
   lessons/               teoría de las 52 semanas (s1..s4, una por estación)
   test_conjugator.js     1.442 comprobaciones de formas verbales
@@ -295,9 +371,14 @@ libro se acepte siempre como correcta. `build_course.py` valida además que las
 52 semanas tengan lección, que ninguna tabla tenga filas desparejas y que no
 queden bloques vacíos.
 
-La teoría vive en `tools/lessons/*.py` como diccionarios legibles: cada bloque
-admite título, párrafos, una tabla, ejemplos `[italiano, castellano]`, una
-trampa y un atajo. Dentro del texto, `*forma*` marca una forma italiana y
+La teoría vive en `tools/lessons/*.py` como diccionarios legibles, en formato
+corto para leer en el teléfono: cada bloque es una idea, con título, **la regla
+en ≤ 30 palabras** (`r`), una tabla y/o hasta 5 ejemplos `[italiano,
+castellano]`, una trampa y un atajo (≤ 30 palabras cada uno), y el detalle
+opcional (`more`) plegado bajo «¿Por qué? Más detalle». En la lección jugada,
+un bloque con tabla y ejemplos se muestra en dos pantallas.
+`python3 tools/check_lessons.py` controla el formato, los límites y que los
+ejemplos no usen tiempos de semanas posteriores (salvo bloques «Adelanto»). Dentro del texto, `*forma*` marca una forma italiana y
 `**texto**` una regla clave. Para editar una lección se toca ese archivo y se
 vuelve a correr `python3 tools/build_course.py`.
 

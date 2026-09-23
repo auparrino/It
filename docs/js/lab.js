@@ -134,7 +134,7 @@
   // Ogni set: una spiegazione breve (informazione esplicita, come prevede la
   // Processing Instruction) e item che si risolvono solo leggendo la forma.
   var CAPIRE = [
-    { id: "persona", h: "¿Quién lo hace?",
+    { id: "persona", week: 5, h: "¿Quién lo hace?",
       body: "En italiano el sujeto casi nunca se dice: **la terminación del verbo** te dice quién. Leé solo el final: *-iamo* = nosotros, *-ate/-ete/-ite* = ustedes, *-ano/-ono* = ellos.",
       q: "¿Quién hace la acción?",
       opts: ["yo", "vos", "él / ella", "nosotros", "ustedes", "ellos"],
@@ -147,7 +147,7 @@
               ["Hai fame?", "vos"], ["Ho fame.", "yo"], ["Hanno fame.", "ellos"],
               ["Abbiamo fame.", "nosotros"]] },
 
-    { id: "tempo", h: "¿Cuándo pasa?",
+    { id: "tempo", week: 19, h: "¿Cuándo pasa?",
       body: "Las pistas de tiempo (*ieri, domani*) no siempre están: aprendé a leer **el tiempo en el verbo**. *Ha mangiato* = ya pasó; *mangiava* = pasaba habitualmente; *mangerà* = va a pasar; *mangia* = pasa ahora o siempre.",
       q: "¿Cuándo pasa?",
       opts: ["ya pasó (una vez)", "pasaba siempre (antes)", "pasa ahora / siempre", "va a pasar"],
@@ -166,7 +166,7 @@
               ["Uscivo con gli amici.", "pasaba siempre (antes)"],
               ["Sono uscito con gli amici.", "ya pasó (una vez)"]] },
 
-    { id: "accordo", h: "¿Quiénes llegaron?",
+    { id: "accordo", week: 11, h: "¿Quiénes llegaron?",
       body: "Con *essere*, el participio concuerda con el sujeto: **-o** un hombre, **-a** una mujer, **-i** varios (al menos un hombre), **-e** varias mujeres. El verbo te dice quién llegó aunque no haya nombres.",
       q: "¿Quién llegó / salió / se fue?",
       opts: ["un hombre", "una mujer", "varios (algún hombre)", "varias mujeres"],
@@ -174,10 +174,10 @@
               ["Sono arrivati tardi.", "varios (algún hombre)"], ["Sono arrivate tardi.", "varias mujeres"],
               ["È uscita alle otto.", "una mujer"], ["Sono usciti alle otto.", "varios (algún hombre)"],
               ["È partito ieri.", "un hombre"], ["Sono partite ieri.", "varias mujeres"],
-              ["Si è svegliata presto.", "una mujer"], ["Si sono svegliati presto.", "varios (algún hombre)"],
+              ["Si è svegliata presto.", "una mujer", 16], ["Si sono svegliati presto.", "varios (algún hombre)", 16],
               ["È tornato stanco.", "un hombre"], ["Sono tornate stanche.", "varias mujeres"]] },
 
-    { id: "certezza", h: "¿Está seguro o es una opinión?",
+    { id: "certezza", week: 25, h: "¿Está seguro o es una opinión?",
       body: "Después de *penso che, credo che, mi sembra che, spero che* va **congiuntivo** (*sia, abbia, venga*): el hablante opina o desea. Con *so che, sono sicuro che, è vero che* va **indicativo** (*è, ha, viene*): lo da por un hecho. La forma del verbo te lo dice.",
       q: "¿Cómo lo presenta el hablante?",
       opts: ["como un hecho", "como opinión / deseo"],
@@ -188,7 +188,7 @@
               ["Dubito che lo sappia.", "como opinión / deseo"], ["Sappiamo che lo sa.", "como un hecho"],
               ["Immagino che siano stanchi.", "como opinión / deseo"], ["È chiaro che sono stanchi.", "como un hecho"]] },
 
-    { id: "cortesia", h: "¿Pedido cortés o directo?",
+    { id: "cortesia", week: 20, h: "¿Pedido cortés o directo?",
       body: "El **condizionale** (*vorrei, potrebbe, sarebbe*) suaviza: es la forma educada de pedir en un bar, una oficina o un mail. El presente (*voglio, può*) es más directo; *voglio* puede sonar brusco con desconocidos.",
       q: "¿Cómo suena?",
       opts: ["cortés / suave", "directo"],
@@ -199,14 +199,15 @@
               ["Avrei una domanda.", "cortés / suave"], ["Ho una domanda.", "directo"],
               ["Dovresti riposare.", "cortés / suave"], ["Devi riposare.", "directo"]] },
 
-    { id: "pronomi", h: "¿A quién se refiere?",
+    { id: "pronomi", week: 10, h: "¿A quién se refiere?",
       body: "Los pronombres van **antes** del verbo conjugado y marcan género y número: *lo* (a él / eso), *la* (a ella), *li* (a ellos), *le* (a ellas); y en el indirecto, *gli* = **a él** y *le* = a ella. Mirá solo el pronombre.",
       q: "¿A qué se refiere el pronombre?",
       opts: ["al libro", "a la carta", "a los libros", "a las cartas"],
       items: [["Lo leggo stasera.", "al libro"], ["La leggo stasera.", "a la carta"],
               ["Li leggo stasera.", "a los libros"], ["Le leggo stasera.", "a las cartas"],
-              ["L'ho letto ieri.", "al libro"], ["L'ho letta ieri.", "a la carta"],
-              ["Li ho letti ieri.", "a los libros"], ["Le ho lette ieri.", "a las cartas"],
+              // en passato prossimo: desde la semana 11
+              ["L'ho letto ieri.", "al libro", 11], ["L'ho letta ieri.", "a la carta", 11],
+              ["Li ho letti ieri.", "a los libros", 11], ["Le ho lette ieri.", "a las cartas", 11],
               ["Non lo trovo più.", "al libro"], ["Non le trovo più.", "a las cartas"]] }
   ];
 
@@ -255,7 +256,7 @@
   CAPIRE.forEach(function (s) {
     s.items.forEach(function (x, i) {
       var it = {
-        id: "capire:" + s.id + ":" + i, src: "lab", lab: "capire", group: s.id,
+        id: "capire:" + s.id + ":" + i, src: "lab", lab: "capire", group: s.id, week: x[2] || s.week,
         type: "choice", prompt: s.q, stem: x[0],
         options: s.opts.slice(), answer: x[1], accept: [x[1]],
         note: s.h + " — " + s.body.replace(/\*\*/g, "")
@@ -322,11 +323,21 @@
     return unseen.concat(seen).slice(0, 10).map(item);
   }
 
-  function capireSession(cards, groupId) {
+  /* Each Capire set reads a form the course teaches in a given week (the
+     passato prossimo, the congiuntivo): before that week it stays closed. */
+  function capireOpen(week) {
+    return CAPIRE.filter(function (s) { return !week || s.week <= week; });
+  }
+
+  function capireSession(cards, groupId, week) {
+    var open = capireOpen(week);
+    if (!open.length) return [];
     var g = groupId ? CAPIRE.filter(function (s) { return s.id === groupId; })[0]
-                    : freshestGroup(CAPIRE, "capire:", cards);
+                    : freshestGroup(open, "capire:", cards);
     var out = [card(g.h, g.body)];
-    shuffle(ids("capire:" + g.id + ":")).slice(0, 10).forEach(function (k) { out.push(item(k)); });
+    shuffle(ids("capire:" + g.id + ":").filter(function (k) {
+      return !week || BY_ID[k].week <= week;
+    })).slice(0, 10).forEach(function (k) { out.push(item(k)); });
     return out;
   }
 
@@ -336,8 +347,10 @@
   }
 
   // One random item for interleaving into the coffee break.
-  function randomItem(cards) {
-    var pool = Object.keys(BY_ID);
+  function randomItem(cards, week) {
+    var pool = Object.keys(BY_ID).filter(function (k) {
+      return !week || !BY_ID[k].week || BY_ID[k].week <= week;
+    });
     var seen = pool.filter(function (k) { return cards[k]; });
     var src = seen.length >= 6 && Math.random() < 0.5 ? seen : pool;
     var id = src[Math.floor(Math.random() * src.length)];
@@ -357,6 +370,7 @@
     ponteSession: ponteSession,
     falsiSession: falsiSession,
     capireSession: capireSession,
+    capireOpen: capireOpen,
     progress: progress,
     randomItem: randomItem
   };

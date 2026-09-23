@@ -660,7 +660,7 @@ _RAW = [
     ("A2", "accento", "La liberta è un valore fondamentale.", "liberta", "libertà",
      "Libertà es aguda y lleva acento final, como verità, città, novità."),
     ("A2", "accento", "Mio zio vive in América da anni.", "América", "America",
-     "En italiano America (A-mè-ri-ca) es esdrújula como en español, pero no lleva tilde: solo se escribe el acento cuando cae en la última sílaba."),
+     "En italiano America (a-ME-ri-ca) es esdrújula como en español, pero no lleva tilde: solo se escribe el acento cuando cae en la última sílaba."),
     ("A2", "accento", "Abbiamo mangiato la pizza a Nápoli.", "Nápoli", "Napoli",
      "El italiano no escribe acentos en la antepenúltima sílaba: Napoli, Genova, tavolo. Solo en la final."),
     ("B1", "accento", "Non so perchè è arrivato tardi.", "perchè", "perché",

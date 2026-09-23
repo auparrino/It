@@ -50,6 +50,37 @@ course.weeks.forEach(function (w) {
   });
 });
 
+/* Nothing before its theory: build_course.py marks in «wk» the first week
+   whose lessons cover every tense and construction an item uses
+   (tools/sillabo.py), and no week may ask anything later. */
+var TENSE_WEEK = { presente: 1, imperfetto: 15, futuro: 19, condizionale: 20, congiuntivo: 24,
+                   congImperfetto: 30, passatoRemoto: 37, passatoProssimo: 11,
+                   trapassatoProssimo: 26, futuroAnteriore: 19, trapassatoRemoto: 37,
+                   condizionalePassato: 31, congiuntivoPassato: 29, congiuntivoTrapassato: 30 };
+course.weeks.forEach(function (w) {
+  (w.items || []).concat(w.extra || []).forEach(function (id) {
+    var it = ids[id];
+    ok(it && it.wk && it.wk <= w.week,
+       "settimana " + w.week + " chiede " + id + " prima della sua teoria (settimana " + (it && it.wk) + ")");
+  });
+  (w.tenses || []).forEach(function (t) {
+    ok(w.boss || (TENSE_WEEK[t] || 99) <= w.week,
+       "settimana " + w.week + ": il coniugatore chiede " + t + " prima della sua teoria");
+  });
+  (w.known || []).forEach(function (t) {
+    ok((TENSE_WEEK[t] || 99) <= w.week, "settimana " + w.week + ": distrattori in " + t);
+  });
+});
+course.challenges.forEach(function (c) {
+  course.weeks.forEach(function (w) {
+    if ((w.challenges || []).indexOf(c.id) >= 0) {
+      (c.play || []).forEach(function (id) {
+        ok(ids[id].wk <= w.week, "sfida " + c.id + " alla settimana " + w.week + " prima della teoria: " + id);
+      });
+    }
+  });
+});
+
 var chalIds = {};
 course.challenges.forEach(function (c) { chalIds[c.id] = true; });
 course.weeks.forEach(function (w) {
@@ -163,6 +194,23 @@ Object.keys(state.cards).slice(0, 30).forEach(function (id) {
   state.cards[id].due = Date.now() - 1000;
 });
 ok(Drills.dueCount(course, state) >= 30, "le schede scadute rientrano in coda");
+
+/* ------------------------------------------- migrazione del vecchio ordine */
+
+(function () {
+  // Chi aveva finito le vecchie settimane 1-10 (fino a Piacere) ...
+  var old = { syllabusV: undefined, unlocked: 11, week: 10, read: { 8: 1, 10: 1 },
+              weekStats: { 5: { attempts: 20, right: 18 }, 8: { attempts: 5, right: 5 } }, lessonScore: {} };
+  var s = Engine.migrateSyllabus(old);
+  ok(s.syllabusV === 2, "migrazione: versione segnata");
+  ok(s.week === 14, "migrazione: la settimana corrente (Piacere) diventa la 14");
+  ok(!!s.read[10] && !!s.read[14], "migrazione: lezioni lette rinumerate (pronomi 8→10, piacere 10→14)");
+  ok(!!s.weekStats[7] && !!s.weekStats[10], "migrazione: statistiche rinumerate (numeri 5→7, pronomi 8→10)");
+  // vecchie 1-10 → nuove 1,2,3,4,7,5,6,10,12,14: la prima mancante è la 8
+  ok(s.unlocked === 8, "migrazione: sbloccata la prima settimana nuova non fatta (" + s.unlocked + ")");
+  ok(Engine.migrateSyllabus(s).unlocked === 8, "migrazione: una sola volta");
+  ok(Engine.blankSave().syllabusV === 2, "un salvataggio nuovo nasce col nuovo ordine");
+})();
 
 console.log("\ncontrolli: " + checks + "   errori: " + fails);
 process.exit(fails ? 1 : 0);

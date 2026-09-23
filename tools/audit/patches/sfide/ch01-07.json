@@ -52,13 +52,13 @@
   ]
  },
  "r01-03": {
-  "consigna": "Completá con la terminación correcta (-o/-a, -i/-e) de adjetivos y participios.",
+  "consigna": "Completá las terminaciones que faltan (-o/-a en singular, -i/-e en plural) y, donde hay un adjetivo entre paréntesis, escribilo concordado. Fijate con qué sustantivo concuerda cada uno.",
   "interactive": true,
   "items": [
    {
     "label": "a",
     "type": "cloze",
-    "stem": "Maria è diventat___ un architetto molto brav___.",
+    "stem": "Maria è diventat___ un architetto molto brav___. (María llegó a ser un arquitecto muy bueno.)",
     "answer": "a | o",
     "alt": [],
     "note": "El participio concuerda con Maria (femenino); el adjetivo concuerda con «architetto», que es masculino."
@@ -66,7 +66,7 @@
    {
     "label": "b",
     "type": "cloze",
-    "stem": "Mio figlio è diventat___ una guida molto conosciut___.",
+    "stem": "Mio figlio è diventat___ una guida molto conosciut___. (Mi hijo llegó a ser un guía muy conocido.)",
     "answer": "o | a",
     "alt": [],
     "note": "El participio concuerda con «figlio»; el adjetivo, con «guida», que es siempre femenino."
@@ -74,12 +74,12 @@
    {
     "label": "c",
     "type": "cloze",
-    "stem": "Le vittime più ___ sono stat___ i bambini. (tragici/tragiche)",
+    "stem": "Le vittime più ___ (tragico) sono stat___ i bambini. (Las víctimas más trágicas fueron los niños.)",
     "answer": "tragiche | e",
     "alt": [
      "tragiche | i"
     ],
-    "note": "«Vittima» es siempre femenino aunque se refiera a varones; el participio puede concordar con «vittime» o con «bambini»."
+    "note": "«Vittima» es siempre femenino, aunque se refiera a varones: le vittime più tragiche (tragico → tragiche, con h para conservar el sonido duro). El participio concuerda con el sujeto, «le vittime» (state); también se oye «stati» concordando con «i bambini»."
    }
   ]
  },

@@ -336,3 +336,7 @@ tré                      # a2-num-01: terminación citada
 alpes                    # rf-35-03: topónimo (los Alpes)
 gwi                      # grafie:0: transcripción fonética /gwi/
 rarísimo                 # rf-38-01: superlativo español
+pèsca                    # lesson:1: pèsca / pésca, vocales abiertas y cerradas
+pésca                    # lesson:1: pèsca / pésca
+pòrta                    # lesson:1: pòrta / sóle, o abierta
+sóle                     # lesson:1: pòrta / sóle, o cerrada

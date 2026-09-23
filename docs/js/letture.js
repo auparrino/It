@@ -16,29 +16,30 @@
   "use strict";
 
   var EPISODI = [
-    { id: "ep1", n: 1, level: "A1", emoji: "🧳", title: "Arrivo a Bologna",
+    { id: "ep1", week: 1, n: 1, level: "A1", emoji: "🧳", title: "Arrivo a Bologna",
       grammar: "essere e avere",
+      // Day one: only essere, avere and words you can guess (argentino,
+      // grande, piccolo).  Short sentences, one idea each.
       text:
-        "Mi chiamo Martín e sono argentino. Ho trentadue anni e faccio l'ingegnere. " +
-        "Oggi è un giorno speciale: sono a Bologna per la prima volta!\n\n" +
-        "La città è bellissima, con i portici lunghi e i palazzi rossi. Ho una valigia " +
-        "grande e uno zaino piccolo. Il mio appartamento è in via Zamboni, vicino " +
-        "all'università. È piccolo ma luminoso.\n\n" +
-        "La mia coinquilina si chiama Giulia. È di Napoli, ha ventotto anni ed è molto " +
-        "simpatica. Giulia parla veloce, troppo veloce! Io capisco poco, ma ho un piano: " +
-        "imparare l'italiano in un anno.",
-      gloss: { portici: "soportales, galerías techadas", palazzi: "edificios",
-               valigia: "valija", zaino: "mochila", luminoso: "luminoso, con mucha luz",
-               coinquilina: "compañera de departamento", veloce: "rápido",
-               piano: "plan (y también: despacio)", capisco: "entiendo" },
+        "Ciao! Io sono Martín. Sono argentino e ho 32 anni. " +
+        "Oggi sono a Bologna!\n\n" +
+        "Bologna è bella. Ho una valigia grande e uno zaino piccolo. " +
+        "La casa è in via Zamboni. È piccola ma bella. Ho una mappa e un telefono: " +
+        "la mappa è grande, il telefono è piccolo.\n\n" +
+        "Giulia è la mia coinquilina. È di Napoli e ha 28 anni. " +
+        "È molto simpatica. Giulia ha un gatto. Il gatto è nero e bello. " +
+        "Io sono stanco, ma sono contento!",
+      gloss: { oggi: "hoy", bella: "linda", valigia: "valija", zaino: "mochila",
+               coinquilina: "compañera de departamento", mia: "mi (la mia = mi)",
+               ma: "pero", mappa: "mapa", gatto: "gato", nero: "negro", stanco: "cansado", contento: "contento, feliz", molto: "muy" },
       questions: [
         ["¿De dónde es Giulia?", ["de Nápoles", "de Bolonia", "de Buenos Aires", "de Roma"], "de Nápoles"],
-        ["¿Cómo es el departamento?", ["chico pero luminoso", "grande y oscuro", "lejos de la universidad", "en un edificio rojo"], "chico pero luminoso"],
-        ["¿Cuál es el problema con Giulia?", ["habla demasiado rápido", "es antipática", "no habla español", "trabaja de noche"], "habla demasiado rápido"]
+        ["¿Cómo es la casa?", ["chica pero linda", "grande y fea", "lejos del centro", "en Nápoles"], "chica pero linda"],
+        ["¿Cómo está Martín?", ["cansado pero contento", "triste", "enojado", "enfermo"], "cansado pero contento"]
       ],
       hunt: { label: "Tocá todas las formas de essere (sono, è)", targets: ["sono", "è"] } },
 
-    { id: "ep2", n: 2, level: "A1", emoji: "🧀", title: "Al mercato",
+    { id: "ep2", week: 5, n: 2, level: "A1", emoji: "🧀", title: "Al mercato",
       grammar: "presente e articoli",
       text:
         "Il sabato mattina Giulia e Martín vanno al Mercato di Mezzo. Giulia compra " +
@@ -48,7 +49,7 @@
         "«Non lo so. Tutto sembra buonissimo!» risponde Martín.\n\n" +
         "Il signore del banco sorride e taglia un pezzo di parmigiano. «Questo è " +
         "stagionato trenta mesi. Lo vuole provare?» Martín mangia e chiude gli occhi. " +
-        "«Mamma mia! Ne prendo mezzo chilo.»\n\n" +
+        "«Mamma mia! Prendo mezzo chilo!»\n\n" +
         "Giulia ride: «Benvenuto in Emilia-Romagna. Qui si mangia bene, ma si spende " +
         "anche tanto.»",
       gloss: { banco: "puesto (del mercado)", taglia: "corta", pezzo: "pedazo",
@@ -62,7 +63,7 @@
       hunt: { label: "Tocá las comidas que aparecen", targets:
         ["pane", "frutta", "tortellini", "mortadella", "formaggi", "parmigiano"] } },
 
-    { id: "ep3", n: 3, level: "A1", emoji: "⏰", title: "Una giornata tipo",
+    { id: "ep3", week: 12, n: 3, level: "A1", emoji: "⏰", title: "Una giornata tipo",
       grammar: "verbi riflessivi",
       text:
         "Di solito mi sveglio alle sette meno un quarto. Non mi alzo subito: resto " +
@@ -85,7 +86,7 @@
       hunt: { label: "Tocá los verbos reflexivos (los que van con mi / si)", targets:
         ["sveglio", "alzo", "faccio", "vesto", "alza", "addormento"] } },
 
-    { id: "ep4", n: 4, level: "A2", emoji: "🚆", title: "Gita a Firenze",
+    { id: "ep4", week: 11, n: 4, level: "A2", emoji: "🚆", title: "Gita a Firenze",
       grammar: "passato prossimo",
       text:
         "Sabato scorso Martín e Giulia sono andati a Firenze in treno. Sono partiti " +
@@ -110,7 +111,7 @@
         ["andati", "partiti", "arrivati", "visitato", "camminato", "mangiato", "bevuto",
          "detto", "riso", "assaggiato", "stato", "perso", "tornati"] } },
 
-    { id: "ep5", n: 5, level: "A2", emoji: "🌊", title: "Quando ero piccola",
+    { id: "ep5", week: 15, n: 5, level: "A2", emoji: "🌊", title: "Quando ero piccola",
       grammar: "imperfetto e passato prossimo",
       text:
         "Una sera Giulia racconta la sua infanzia a Martín.\n\n" +
@@ -134,7 +135,7 @@
       hunt: { label: "Tocá los verbos en imperfetto (lo que pasaba siempre)", targets:
         ["ero", "abitavamo", "faceva", "usciva", "cucinava", "eravamo", "andavo", "giocavo"] } },
 
-    { id: "ep6", n: 6, level: "B1", emoji: "💼", title: "Il colloquio",
+    { id: "ep6", week: 19, n: 6, level: "B1", emoji: "💼", title: "Il colloquio",
       grammar: "futuro semplice",
       text:
         "Lunedì Martín avrà un colloquio importante in un'azienda di Modena che produce " +
@@ -160,13 +161,13 @@
         ["avrà", "chiederanno", "risponderai", "faranno", "parlerai", "userai",
          "chiederai", "saprò", "andrà", "vedrai"] } },
 
-    { id: "ep7", n: 7, level: "B1", emoji: "📞", title: "Com'è andata?",
+    { id: "ep7", week: 22, n: 7, level: "B1", emoji: "📞", title: "Com'è andata?",
       grammar: "pronomi diretti, indiretti e combinati",
       text:
         "Martín esce dal colloquio e chiama subito Giulia.\n\n" +
         "«Allora? Com'è andata?»\n" +
         "«Non lo so ancora. Mi hanno fatto tantissime domande. Il direttore mi ha chiesto " +
-        "il curriculum, anche se gliel'avevo già mandato per email.»\n" +
+        "il curriculum, anche se gliel'ho già mandato per email.»\n" +
         "«E tu?»\n" +
         "«Gliel'ho dato un'altra volta, ovviamente, e poi gli ho spiegato il mio " +
         "progetto in Argentina. Gli è piaciuto, credo.»\n" +
@@ -185,7 +186,7 @@
       hunt: { label: "Tocá los pronombres de objeto indirecto sueltos (mi, ti, gli, me, te)", targets:
         ["mi", "ti", "gli", "me", "te"] } },
 
-    { id: "ep8", n: 8, level: "B1", emoji: "✉️", title: "La risposta",
+    { id: "ep8", week: 20, n: 8, level: "B1", emoji: "✉️", title: "La risposta",
       grammar: "condizionale",
       text:
         "Venerdì mattina arriva la mail: l'azienda di Modena gli offre il posto. Martín " +
@@ -210,7 +211,7 @@
       hunt: { label: "Tocá los verbos en condizionale", targets:
         ["dovrebbe", "faresti", "accetterei", "potresti", "mancherebbe", "sarei"] } },
 
-    { id: "ep9", n: 9, level: "B2", emoji: "💌", title: "Il consiglio della mamma",
+    { id: "ep9", week: 30, n: 9, level: "B2", emoji: "💌", title: "Il consiglio della mamma",
       grammar: "congiuntivo",
       text:
         "La risposta della madre arriva la mattina dopo, per colpa del fuso orario.\n\n" +
@@ -235,7 +236,7 @@
       hunt: { label: "Tocá los verbos en congiuntivo", targets:
         ["sia", "conti", "faccia", "avessi", "decida", "abbia"] } },
 
-    { id: "ep10", n: 10, level: "B2", emoji: "🥂", title: "Un anno dopo",
+    { id: "ep10", week: 33, n: 10, level: "B2", emoji: "🥂", title: "Un anno dopo",
       grammar: "periodo ipotetico",
       text:
         "È passato un anno da quando Martín è arrivato a Bologna. Alla fine ha accettato " +
@@ -264,7 +265,7 @@
        Contenuto che interessa (Hidi & Renninger 2006): l'interesse per il tema
        aumenta comprensione e memoria.  Si scelgono liberamente. */
 
-    { id: "c-dante", series: "cultura", area: "Letteratura", n: 1, level: "A2", emoji: "📜",
+    { id: "c-dante", week: 11, series: "cultura", area: "Letteratura", n: 1, level: "A2", emoji: "📜",
       title: "Dante e la lingua italiana", grammar: "presente storico",
       text:
         "Dante Alighieri nasce a Firenze nel 1265. Scrive la Divina Commedia in volgare " +
@@ -288,7 +289,7 @@
       hunt: { label: "Tocá los tres reinos del viaje (cada vez que aparecen)", targets:
         ["inferno", "purgatorio", "paradiso"] } },
 
-    { id: "c-machiavelli", series: "cultura", area: "Filosofia", n: 2, level: "B1", emoji: "🦊",
+    { id: "c-machiavelli", week: 37, series: "cultura", area: "Filosofia", n: 2, level: "B1", emoji: "🦊",
       title: "Machiavelli e Il Principe", grammar: "passato prossimo e remoto",
       text:
         "Nel 1513 Niccolò Machiavelli è fuori dalla politica. I Medici sono tornati al " +
@@ -313,7 +314,7 @@
       hunt: { label: "Tocá los animales (en italiano antiguo y moderno)", targets:
         ["golpe", "lione", "volpe", "leone"] } },
 
-    { id: "c-galileo", series: "cultura", area: "Storia", n: 3, level: "B1", emoji: "🔭",
+    { id: "c-galileo", week: 29, series: "cultura", area: "Storia", n: 3, level: "B1", emoji: "🔭",
       title: "Galileo e il cannocchiale", grammar: "congiuntivo e condizionale",
       text:
         "Nel 1609 Galileo Galilei sente parlare di uno strumento olandese che fa sembrare " +
@@ -340,7 +341,7 @@
       hunt: { label: "Tocá los verbos en congiuntivo o condizionale", targets:
         ["possano", "avrebbe", "abbia"] } },
 
-    { id: "c-garibaldi", series: "cultura", area: "Storia", n: 4, level: "B1", emoji: "🇮🇹",
+    { id: "c-garibaldi", week: 31, series: "cultura", area: "Storia", n: 4, level: "B1", emoji: "🇮🇹",
       title: "Garibaldi e l'Unità", grammar: "presente storico e futuro nel passato",
       text:
         "Nel maggio del 1860 Giuseppe Garibaldi parte da Quarto, vicino a Genova, con " +
@@ -364,7 +365,7 @@
       hunt: { label: "Tocá los lugares geográficos", targets:
         ["quarto", "genova", "marsala", "sicilia", "teano", "italia", "roma"] } },
 
-    { id: "c-gramsci", series: "cultura", area: "Sociologia", n: 5, level: "B2", emoji: "📓",
+    { id: "c-gramsci", week: 37, series: "cultura", area: "Sociologia", n: 5, level: "B2", emoji: "📓",
       title: "Gramsci e l'egemonia", grammar: "passato remoto",
       text:
         "Antonio Gramsci, nato in Sardegna nel 1891, fu tra i fondatori del Partito " +
@@ -389,7 +390,7 @@
       hunt: { label: "Tocá los verbos en passato remoto", targets:
         ["fu", "arrestò", "condannò", "scrisse", "morì"] } },
 
-    { id: "c-levi", series: "cultura", area: "Letteratura", n: 6, level: "B2", emoji: "🕯️",
+    { id: "c-levi", week: 37, series: "cultura", area: "Letteratura", n: 6, level: "B2", emoji: "🕯️",
       title: "Primo Levi, testimone", grammar: "passato remoto e congiuntivo",
       text:
         "Primo Levi era un chimico ebreo di Torino. Nel 1944 fu deportato ad Auschwitz, " +
@@ -414,7 +415,7 @@
       hunt: { label: "Tocá los verbos en passato remoto", targets:
         ["fu", "rimase", "sopravvisse", "sentì", "scrisse"] } },
 
-    { id: "c-boom", series: "cultura", area: "Sociologia", n: 7, level: "B1", emoji: "📺",
+    { id: "c-boom", week: 24, series: "cultura", area: "Sociologia", n: 7, level: "B1", emoji: "📺",
       title: "Il boom economico", grammar: "presente e passato prossimo",
       text:
         "Tra la fine degli anni Cinquanta e l'inizio dei Sessanta l'Italia cambia " +
@@ -439,7 +440,7 @@
       hunt: { label: "Tocá los aparatos que llegan a las casas", targets:
         ["frigorifero", "lavatrice", "televisione"] } },
 
-    { id: "c-calvino", series: "cultura", area: "Letteratura", n: 8, level: "B1", emoji: "🏙️",
+    { id: "c-calvino", week: 34, series: "cultura", area: "Letteratura", n: 8, level: "B1", emoji: "🏙️",
       title: "Calvino e le città invisibili", grammar: "congiuntivo imperfetto",
       text:
         "In Le città invisibili, pubblicato nel 1972, Italo Calvino immagina un dialogo " +
@@ -463,7 +464,7 @@
       hunt: { label: "Tocá los nombres de ciudades", targets:
         ["zaira", "despina", "ottavia", "venezia"] } },
 
-    { id: "c-beccaria", series: "cultura", area: "Filosofia", n: 9, level: "B2", emoji: "⚖️",
+    { id: "c-beccaria", week: 34, series: "cultura", area: "Filosofia", n: 9, level: "B2", emoji: "⚖️",
       title: "Beccaria contro la pena di morte", grammar: "presente storico e imperfetto",
       text:
         "Nel 1764 un giovane nobile milanese di ventisei anni, Cesare Beccaria, pubblica " +
@@ -488,7 +489,7 @@
       hunt: { label: "Tocá las palabras del derecho penal", targets:
         ["delitti", "pene", "tortura", "pena", "crimine"] } },
 
-    { id: "c-ginzburg", series: "cultura", area: "Letteratura", n: 10, level: "B1", emoji: "🍽️",
+    { id: "c-ginzburg", week: 37, series: "cultura", area: "Letteratura", n: 10, level: "B1", emoji: "🍽️",
       title: "Natalia Ginzburg, Lessico famigliare", grammar: "imperfetto",
       text:
         "«Non fate malagrazie!» gridava il padre a tavola. Con frasi come questa comincia " +
@@ -619,9 +620,12 @@
     return EPISODI.filter(function (e) { return e.series === id; });
   }
 
-  // Martín's episodes open one after the other; culture texts are all open
-  // (choice sustains motivation: Deci & Ryan 2000).
-  function isOpen(ep, done) {
+  /* Each text opens in the week whose grammar it uses (tools/sillabo.py:
+     «week»), so nothing is read before its theory.  Martín's episodes also
+     go one after the other; culture texts are free to pick among the open
+     ones (choice sustains motivation: Deci & Ryan 2000). */
+  function isOpen(ep, done, week) {
+    if (week && ep.week > week) return false;
     if (ep.series !== "martin") return true;
     return ep.n === 1 || !!(done || {})["ep" + (ep.n - 1)];
   }

@@ -3,8 +3,8 @@
 
 Cada semana tiene al menos 25 ítems suyos, así las rondas de
 entrenamiento no repiten siempre las mismas frases.  Semanas cubiertas:
-1 ortografía, 4 adjetivos, 16 adverbios, 22 comparativos, 24 sufijos,
-35 «si» pasivo e impersonal, 38 relativos, 46 construcciones verbales,
+1 ortografía, 4 adjetivos, 23 comparativos, 27 adverbios, 34 relativos,
+36 «si» pasivo e impersonal, 45 construcciones verbales, 46 sufijos,
 48 orden de palabras.
 """
 
@@ -25,10 +25,10 @@ ITEMS = [
          answer="palla",
          note="La doble cambia la palabra: «pala» es la herramienta, «palla» la pelota."),
     dict(id="rf-1-02", type="choice", topic="ortografia", level="A1",
-         prompt="Elegí el participio de «fare» (hecho).",
-         stem="Hai ___ i compiti?", options=["fatto", "fato", "facto"],
-         answer="fatto",
-         note="«Fatto» con tt; «fato» con una sola t es el destino."),
+         prompt="Elegí la palabra que significa «leche».",
+         stem="Un bicchiere di ___, per favore.", options=["latte", "late", "lattè"],
+         answer="latte",
+         note="«Latte» con doble t y sin tilde: la doble se pronuncia larga, como si sonaran dos t."),
     dict(id="rf-1-03", type="choice", topic="ortografia", level="A1",
          prompt="Elegí el número 7.",
          stem="La settimana ha ___ giorni.", options=["sette", "sete", "setté"],
@@ -120,10 +120,10 @@ ITEMS = [
          alt=["Mio nonno ha novanta anni"],
          note="Ojo con las dobles: nonno, anni. La edad va con avere."),
     dict(id="rf-1-23", type="translate", topic="ortografia", level="A1",
-         prompt=TR, stem="¿Por qué no venís al cine?",
-         answer="Perché non vieni al cinema?",
-         alt=["Perché non vieni al cine?"],
-         note="«Perché» con acento agudo; «cinema» se lee [tʃ]inema."),
+         prompt=TR, stem="¿Dónde está el cine?",
+         answer="Dov'è il cinema?",
+         alt=["Dove è il cinema?"],
+         note="«Dov'è» con apóstrofo; «cinema» se lee [tʃ]inema y es masculino: il cinema."),
     dict(id="rf-1-24", type="translate", topic="ortografia", level="A1",
          prompt=TR, stem="La ciudad es linda.",
          answer="La città è bella",
@@ -144,7 +144,7 @@ ITEMS = [
          options=["bel", "bello", "bell'"], answer="bel",
          note="«Bello» delante se comporta como el artículo: il tramonto → bel tramonto."),
     dict(id="rf-4-03", type="choice", topic="aggettivi", level="A1",
-         prompt=CE, stem="Agli Uffizi abbiamo visto dei ___ quadri.",
+         prompt=CE, stem="Agli Uffizi ci sono dei ___ quadri.",
          options=["bei", "begli", "belli"], answer="bei",
          note="i quadri → bei quadri. «Belli» solo va detrás del sustantivo."),
     dict(id="rf-4-04", type="choice", topic="aggettivi", level="A1",
@@ -156,7 +156,7 @@ ITEMS = [
          answer="buon",
          note="«Buono» delante de masculino sigue a «un»: un buon amico, sin apóstrofo."),
     dict(id="rf-4-06", type="choice", topic="aggettivi", level="A1",
-         prompt=CE, stem="Ha trovato un lavoro con un ___ stipendio.",
+         prompt=CE, stem="Ha un lavoro con un ___ stipendio.",
          options=["buono", "buon", "buoni"], answer="buono",
          note="Ante s + consonante se usa la forma entera: uno stipendio → un buono stipendio."),
     dict(id="rf-4-07", type="choice", topic="aggettivi", level="A1",
@@ -188,7 +188,7 @@ ITEMS = [
          stem="Le strade di questo quartiere sono ___ (largo).", answer="larghe",
          note="-go → -ghe en femenino plural. Ojo: «largo» es ancho, no «lungo»."),
     dict(id="rf-4-14", type="choice", topic="aggettivi", level="A1",
-         prompt=CE, stem="Ho comprato due magliette ___.",
+         prompt=CE, stem="Ho due magliette ___.",
          options=["blu", "blue", "blui"], answer="blu",
          note="Invariables: blu, rosa, viola, beige. No cambian en plural."),
     dict(id="rf-4-15", type="choice", topic="aggettivi", level="A1",
@@ -215,7 +215,7 @@ ITEMS = [
          answer="un vecchio amico",
          note="Delante = de larga data. Detrás = de edad avanzada."),
     dict(id="rf-4-20", type="choice", topic="aggettivi", level="A1",
-         prompt=CE, stem="Dante è stato un ___ poeta.",
+         prompt=CE, stem="Dante è un ___ poeta.",
          options=["gran", "grandi", "grossi"], answer="gran",
          note="«Grande» delante puede acortarse: un gran poeta (también «un grande poeta»)."),
     dict(id="rf-4-21", type="cloze", topic="aggettivi", level="A1",
@@ -236,14 +236,14 @@ ITEMS = [
          prompt=TR, stem="¡Qué lindos zapatos!", answer="Che belle scarpe!",
          note="«Scarpe» es femenino: belle scarpe. En exclamaciones, «che» + adjetivo delante."),
 
-    # ================= Settimana 16: Avverbi =================
+    # ================= Settimana 27: Avverbi =================
     dict(id="rf-16-01", type="cloze", topic="avverbi", level="B1",
          prompt="Formá el adverbio en -mente.",
          stem="Il nonno parla ___ (lento).", answer="lentamente",
          note="Femenino del adjetivo + -mente: lenta → lentamente."),
     dict(id="rf-16-02", type="cloze", topic="avverbi", level="B1",
          prompt="Formá el adverbio en -mente.",
-         stem="La commessa mi ha risposto ___ (gentile).", answer="gentilmente",
+         stem="La commessa risponde sempre ___ (gentile).", answer="gentilmente",
          note="Adjetivos en -le pierden la e: gentile → gentilmente."),
     dict(id="rf-16-03", type="cloze", topic="avverbi", level="B1",
          prompt="Formá el adverbio en -mente.",
@@ -266,7 +266,7 @@ ITEMS = [
          options=["meglio", "migliore", "più bene"], answer="meglio",
          note="Comparativo de «bene» = meglio (adverbio). «Migliore» es adjetivo."),
     dict(id="rf-16-08", type="choice", topic="avverbi", level="B1",
-         prompt=CE, stem="Stanotte ho dormito ___ del solito.",
+         prompt=CE, stem="Oggi sto ___ di ieri: ho la febbre.",
          options=["peggio", "peggiore", "più male"], answer="peggio",
          note="Comparativo de «male» = peggio. «Più male» es coloquial y se evita en la lengua cuidada."),
     dict(id="rf-16-09", type="choice", topic="avverbi", level="B1",
@@ -312,17 +312,17 @@ ITEMS = [
          answer="forte",
          note="Algunos adjetivos funcionan como adverbios sin -mente: forte, piano, chiaro, veloce."),
     dict(id="rf-16-18", type="choice", topic="avverbi", level="B1",
-         prompt=CE, stem="Il vento soffiava ___.",
+         prompt=CE, stem="Il vento soffia ___.",
          options=["violentemente", "violentamente", "violentomente"],
          answer="violentemente",
          note="Varios adjetivos en -lento hacen -lentemente: violento → violentemente, fraudolento → fraudolentemente. Ojo: lento → lentamente."),
     dict(id="rf-16-19", type="cloze", topic="avverbi", level="B1",
          prompt="Formá el adverbio en -mente.",
-         stem="Sei ___ (leggero) più alto di me.", answer="leggermente",
+         stem="Il vestito è ___ (leggero) corto.", answer="leggermente",
          note="leggera + mente → leggermente (se pierde la a por excepción)."),
     dict(id="rf-16-20", type="cloze", topic="avverbi", level="B1",
          prompt="Formá el adverbio en -mente.",
-         stem="Il professore ha parlato ___ (breve) della vita di Petrarca.",
+         stem="Il professore parla ___ (breve) della vita di Petrarca.",
          answer="brevemente",
          note="Adjetivos en -e (sin l/r antes): breve → brevemente."),
     dict(id="rf-16-21", type="translate", topic="avverbi", level="B1",
@@ -348,11 +348,11 @@ ITEMS = [
          note="«Piano» o «lentamente». Manejar = guidare."),
     dict(id="rf-16-25", type="choice", topic="avverbi", level="B1",
          prompt="Elegí la forma correcta (sobre todo).",
-         stem="Leopardi scriveva ___ di notte.",
+         stem="Studio ___ di notte.",
          options=["soprattutto", "sopratutto", "sopra tuto"], answer="soprattutto",
          note="«Soprattutto» con tt: sopra + tutto se funden y la t se duplica."),
 
-    # ================= Settimana 22: Comparativi e superlativi =================
+    # ================= Settimana 23: Comparativi e superlativi =================
     dict(id="rf-22-01", type="choice", topic="comparativi", level="B1",
          prompt=CE, stem="Roma è più antica ___ Buenos Aires.",
          options=["di", "che", "come"], answer="di",
@@ -462,7 +462,7 @@ ITEMS = [
          alt=["Questo caffè è ottimo"],
          note="Superlativo absoluto: buonissimo u ottimo. «Estar rico» → essere buono."),
 
-    # ================= Settimana 24: Suffissi e alterazione =================
+    # ================= Settimana 46: Suffissi e alterazione =================
     dict(id="rf-24-01", type="choice", topic="suffissi", level="B1",
          prompt="¿Qué significa «casetta»?", stem="casetta",
          options=["casita", "casona", "casucha"], answer="casita",
@@ -577,7 +577,7 @@ ITEMS = [
          alt=["Ha passato una giornataccia"],
          note="giornata + -accia = giornataccia: día de porquería."),
 
-    # ================= Settimana 35: Si passivante e si impersonale =================
+    # ================= Settimana 36: Si passivante e si impersonale =================
     dict(id="rf-35-01", type="choice", topic="si impersonale", level="B2",
          prompt=CE, stem="In questo negozio si ___ biciclette usate.",
          options=["vendono", "vende", "venduto"], answer="vendono",
@@ -688,7 +688,7 @@ ITEMS = [
               "Quando si è giovani ci si innamora con facilità"],
          note="«Uno» impersonal → si; con reflexivo → ci si; adjetivo en plural (giovani)."),
 
-    # ================= Settimana 38: Pronomi relativi =================
+    # ================= Settimana 34: Pronomi relativi =================
     dict(id="rf-38-01", type="choice", topic="relativi", level="B2",
          prompt=CE, stem="Il romanzo ___ sto leggendo è di Calvino.",
          options=["che", "cui", "il quale"], answer="che",
@@ -801,7 +801,7 @@ ITEMS = [
          answer=_PAESE[0], alt=_PAESE[1:],
          note="Lugar: in cui, dove o nel quale. Pueblo = paese."),
 
-    # ================= Settimana 46: Costruzioni verbali speciali =================
+    # ================= Settimana 45: Costruzioni verbali speciali =================
     dict(id="rf-46-01", type="choice", topic="costruzioni", level="C1",
          prompt=CE, stem="Se la festa non ti piace, ___ pure.",
          options=["vattene", "vatti", "vanno"], answer="vattene",
