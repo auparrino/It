@@ -1,34 +1,36 @@
 /* La Via C1 — foglio di stile unico, nessuna dipendenza esterna.
 
-   Estetica «Piazza»: l'Italia quieta di un tardo pomeriggio.  Un cielo
-   chiaro in alto, muri d'intonaco caldo, carta color crema con un filetto
-   sottile, terracotta per ciò che si preme, verde bottiglia quando va bene.
-   Bodoni (Parma) solo per i titoli grandi e per il «Bravo!»; Atkinson per
-   tutto ciò che si legge.  Niente ombre spesse, niente motivi: leggibile.  */
+   Estetica «Riviera»: l'Italia di mezzogiorno.  Un cielo azzurro vero in
+   alto, bianco di sole sotto, e i colori delle case di Positano per tutto
+   ciò che si preme: corallo, limone, basilico, mare.  Bodoni (Parma) solo
+   nella targa «VIA C1»: i suoi filetti sottili spariscono sullo schermo del
+   telefono, quindi tutto il resto è in Atkinson, fatta per leggere.
+   Niente motivi né ombre spesse: vivo, ma leggibile.  */
 
 :root {
-  --terracotta: #b9472b;        /* i tetti, i cotti */
-  --terracotta-scura: #8f341e;
-  --terracotta-chiara: #d5674b;
-  --verde: #22694a;             /* verde bottiglia, le persiane */
-  --verde-chiaro: #2f8a62;
-  --verde-scuro: #164a33;
-  --oro: #d9a520;               /* il sole sulle pietre */
-  --oro-scuro: #9a720c;
-  --azzurro: #3f7fb4;           /* il cielo, il mare */
-  --azzurro-scuro: #2b5d88;
-  --cielo: #cfe1ee;             /* la striscia di cielo in alto */
-  --intonaco: #f4ecdf;          /* il muro: lo sfondo */
-  --carta: #fffcf6;             /* le schede */
-  --travertino: #ede3cf;
-  --inchiostro: #2b2420;
-  --grigio: #786a5c;
-  --grigio-chiaro: #e6dbc9;     /* i filetti */
+  --terracotta: #e0522b;        /* corallo di Positano */
+  --terracotta-scura: #b53d1c;
+  --terracotta-chiara: #f2734f;
+  --verde: #1d9b58;             /* basilico */
+  --verde-chiaro: #2fbd72;
+  --verde-scuro: #136a3c;
+  --oro: #f5c531;               /* limone di Amalfi */
+  --oro-scuro: #c08f06;
+  --azzurro: #1a6fd8;           /* il mare */
+  --azzurro-scuro: #124f9e;
+  --cielo: #7dbdf0;             /* il cielo in alto */
+  --cielo-chiaro: #d6ebfb;
+  --intonaco: #fbf8f1;          /* bianco di sole: lo sfondo */
+  --carta: #ffffff;             /* le schede */
+  --travertino: #f3ebdb;
+  --inchiostro: #1f2630;
+  --grigio: #6b6a66;
+  --grigio-chiaro: #e6e1d8;     /* i filetti */
   /* alias storici usati in tutto il foglio */
   --rosso: var(--terracotta); --rosso-chiaro: var(--terracotta-chiara); --rosso-scuro: var(--terracotta-scura);
   --blu: var(--azzurro); --blu-scuro: var(--azzurro-scuro);
   --sfondo: var(--intonaco);
-  --ombra: 0 1px 2px rgba(60,35,15,.05), 0 6px 18px rgba(60,35,15,.06);
+  --ombra: 0 1px 2px rgba(20,50,90,.06), 0 8px 24px rgba(20,50,90,.10);
   --raggio: 14px;
   --serif: "Bodoni Moda", "Didot", Georgia, "Times New Roman", serif;
   --sans: "Atkinson", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
@@ -38,13 +40,13 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --terracotta: #d4664a; --terracotta-scura: #a4442b; --terracotta-chiara: #e27f64;
-    --verde: #3f9a6f; --verde-chiaro: #58b487; --verde-scuro: #24603f;
-    --oro: #e6b63a; --oro-scuro: #a97f14;
-    --azzurro: #5b93c6; --azzurro-scuro: #2f5f8c;
-    --cielo: #1b2838;
-    --intonaco: #17120f; --carta: #221b16; --travertino: #2c231c;
-    --inchiostro: #f3eadc; --grigio: #b3a28e; --grigio-chiaro: #3a2f27;
+    --terracotta: #f0674a; --terracotta-scura: #c94a2c; --terracotta-chiara: #ff8a6a;
+    --verde: #34c47a; --verde-chiaro: #55d894; --verde-scuro: #1d8a52;
+    --oro: #ffd24a; --oro-scuro: #d1a20e;
+    --azzurro: #5aa3f5; --azzurro-scuro: #2f75c8;
+    --cielo: #12356a; --cielo-chiaro: #0f1f3b;
+    --intonaco: #0f141b; --carta: #1a2029; --travertino: #262e38;
+    --inchiostro: #f2eee6; --grigio: #a9a59d; --grigio-chiaro: #2f3843;
     --ombra: 0 1px 2px rgba(0,0,0,.4), 0 6px 18px rgba(0,0,0,.35);
     color-scheme: dark;
   }
@@ -76,8 +78,8 @@ body {
   letter-spacing: .005em;
   line-height: 1.55;
   color: var(--inchiostro);
-  /* il cielo sopra il muro */
-  background: linear-gradient(180deg, var(--cielo) 0, var(--intonaco) 300px) fixed, var(--intonaco);
+  /* il cielo di mezzogiorno, e sotto il bianco di sole */
+  background: linear-gradient(180deg, var(--cielo) 0, var(--cielo-chiaro) 220px, var(--intonaco) 460px) fixed, var(--intonaco);
   -webkit-text-size-adjust: 100%;
   min-height: 100vh;
 }
@@ -95,13 +97,13 @@ body.ingame .wrap { padding-bottom: calc(40px + env(safe-area-inset-bottom)); }
 /* ---------- header: bianco latte, filetto tricolore sottile */
 header.top {
   position: sticky; top: 0; z-index: 20;
-  background: color-mix(in srgb, var(--carta) 90%, transparent);
-  -webkit-backdrop-filter: saturate(1.2) blur(12px); backdrop-filter: saturate(1.2) blur(12px);
-  padding: env(safe-area-inset-top) 0 0; border-bottom: 1px solid var(--grigio-chiaro);
+  background: color-mix(in srgb, var(--carta) 86%, transparent);
+  -webkit-backdrop-filter: saturate(1.3) blur(14px); backdrop-filter: saturate(1.3) blur(14px);
+  padding: env(safe-area-inset-top) 0 0; border-bottom: 1px solid color-mix(in srgb, var(--grigio-chiaro) 60%, transparent);
 }
 header.top::before {
-  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px;
-  background: linear-gradient(90deg, #1e8a4c 0 33.3%, #f4f1ea 33.3% 66.6%, #c8352e 66.6%);
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 4px;
+  background: linear-gradient(90deg, #009246 0 33.3%, #f4f5f0 33.3% 66.6%, #ce2b37 66.6%);
 }
 header.top .bar {
   display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
@@ -142,7 +144,7 @@ header.top .bar {
 .mode { border: 1px solid var(--grigio-chiaro); background: var(--carta); color: inherit;
   border-radius: 50%; width: 38px; height: 38px; font-size: 1rem; padding: 0; }
 .xpbar { height: 3px; background: transparent; max-width: 940px; margin: 0 auto; overflow: hidden; }
-.xpbar i { display: block; height: 100%; background: var(--oro); transition: width .6s cubic-bezier(.2,.8,.2,1); }
+.xpbar i { display: block; height: 100%; background: linear-gradient(90deg, var(--oro), var(--terracotta)); transition: width .6s cubic-bezier(.2,.8,.2,1); }
 
 /* ------------------------------------------------------------------ schede */
 
@@ -158,9 +160,7 @@ body.ingame #app > * { animation-duration: .24s; }
 
 /* ------------------------------------------------------------------- testo */
 
-h1, .brand { font-family: var(--serif); }
-h1 { font-size: 2.15rem; font-weight: 800; letter-spacing: -.01em; line-height: 1.08; margin: 24px 0 6px;
-     font-variation-settings: "opsz" 72; }
+h1 { font-size: 1.9rem; font-weight: 800; letter-spacing: -.015em; line-height: 1.15; margin: 24px 0 6px; }
 h2 { font-size: 1.2rem; font-weight: 800; margin: 22px 0 10px; letter-spacing: -.005em; }
 h3 { font-size: .78rem; margin: 18px 0 8px; text-transform: uppercase; letter-spacing: .12em;
      color: var(--grigio); font-weight: 700; }
@@ -186,7 +186,7 @@ p.version { text-align: center; margin: 18px 0 8px; opacity: .8; }
 .btn.ghost { background: var(--carta); color: var(--inchiostro); border: 1.5px solid var(--grigio-chiaro); }
 @media (hover: hover) { .btn.ghost:hover:not(:disabled) { background: var(--intonaco); } }
 .btn.ghost:active:not(:disabled) { background: var(--intonaco); }
-.btn.gold { background: var(--oro); color: #2b2000; }
+.btn.gold { background: var(--oro); color: #3a2a00; }
 @media (hover: hover) { .btn.gold:hover:not(:disabled) { background: var(--oro-scuro); color: #fff; } }
 .btn.gold:active:not(:disabled) { background: var(--oro-scuro); color: #fff; }
 .btn.wide { width: 100%; }
@@ -204,24 +204,25 @@ p.version { text-align: center; margin: 18px 0 8px; opacity: .8; }
 .goal { padding: 14px 16px; }
 .goalrow { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
 .goalbar { height: 8px; background: var(--grigio-chiaro); border-radius: 99px; overflow: hidden; margin-top: 10px; }
-.goalbar i { display: block; height: 100%; border-radius: 99px; background: var(--oro); transition: width .5s ease; }
+.goalbar i { display: block; height: 100%; border-radius: 99px; background: linear-gradient(90deg, var(--oro), var(--terracotta)); transition: width .5s ease; }
 
 /* le insegne: tinta piatta, un filetto chiaro dentro, come un'insegna dipinta */
 .big { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 14px 0; }
 .bigbtn { border: none; border-radius: 14px; padding: 16px 16px 14px; text-align: left; color: #fff;
   display: flex; flex-direction: column; gap: 2px; min-height: 118px; position: relative;
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,.28); transition: transform .08s, filter .15s; }
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 6px 16px color-mix(in srgb, var(--tinta, #000) 28%, transparent);
+  transition: transform .08s, filter .15s; }
 .bigbtn:active:not(:disabled) { transform: scale(.985); filter: brightness(.94); }
 .bigbtn:disabled { opacity: .55; filter: saturate(.4); }
 .bigbtn .e { font-size: 1.5rem; line-height: 1; margin-bottom: 8px; }
 .bigbtn b { font-size: 1.2rem; font-weight: 800; margin-top: auto; letter-spacing: -.005em; }
 .bigbtn small { opacity: .9; font-size: .78rem; font-weight: 600; letter-spacing: .01em; }
-.bigbtn.pausa { background: var(--terracotta); grid-column: span 2; min-height: 108px; }
-.bigbtn.giorno { background: var(--oro); color: #2b2000; box-shadow: inset 0 0 0 1px rgba(255,255,255,.4); }
-.bigbtn.ripasso { background: var(--verde); grid-column: span 2; min-height: 80px; }
-.bigbtn.parole { background: var(--azzurro); }
-.bigbtn.lampo { background: var(--oro-scuro); }
-.bigbtn.scena { background: var(--terracotta-chiara); }
+.bigbtn.pausa { --tinta: var(--terracotta); background: linear-gradient(160deg, var(--terracotta-chiara), var(--terracotta) 60%, var(--terracotta-scura)); grid-column: span 2; min-height: 108px; }
+.bigbtn.giorno { --tinta: var(--oro-scuro); background: linear-gradient(160deg, #ffdd6b, var(--oro) 60%, #e6b31c); color: #3a2a00; }
+.bigbtn.ripasso { --tinta: var(--verde); background: linear-gradient(160deg, var(--verde-chiaro), var(--verde) 60%, var(--verde-scuro)); grid-column: span 2; min-height: 80px; }
+.bigbtn.parole { --tinta: var(--azzurro); background: linear-gradient(160deg, #4b93ec, var(--azzurro) 60%, var(--azzurro-scuro)); }
+.bigbtn.lampo { --tinta: #e07a1a; background: linear-gradient(160deg, #ffb340, #f28c1e 60%, #d9720d); }
+.bigbtn.scena { --tinta: var(--terracotta); background: linear-gradient(160deg, #ff9a7a, var(--terracotta-chiara) 60%, var(--terracotta)); }
 
 .weekcard { width: 100%; text-align: left; display: flex; flex-direction: column; gap: 4px; color: inherit;
   transition: transform .1s; }
@@ -235,7 +236,7 @@ p.version { text-align: center; margin: 18px 0 8px; opacity: .8; }
 .hero .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
 .hero .row .btn { margin: 0; }
 
-.fdg { border-left: 4px solid var(--oro); }
+.fdg { border-left: 5px solid var(--oro); }
 .fdg .fit, .fit { font-size: 1.35rem; font-weight: 700; color: var(--verde); margin: 4px 0 2px; letter-spacing: -.005em; }
 .fit.big { font-size: 1.8rem; line-height: 1.25; }
 .fes { color: var(--grigio); }
@@ -261,22 +262,21 @@ p.version { text-align: center; margin: 18px 0 8px; opacity: .8; }
 /* --------------------------------------------------------------- percorso */
 
 .pathsum { display: flex; align-items: center; gap: 14px; padding: 14px 18px; }
-.pathsum b { font-family: var(--serif); font-size: 1.3rem; white-space: nowrap; color: var(--oro-scuro); }
+.pathsum b { font-size: 1.25rem; font-weight: 800; white-space: nowrap; color: var(--azzurro); }
 .pathsum .goalbar { flex: 1; margin: 0; }
-@media (prefers-color-scheme: dark) { .pathsum b { color: var(--oro); } }
 .season { margin: 26px 0 8px; }
 .season h2 { display: flex; align-items: baseline; gap: 10px; margin-bottom: 2px; }
 .season .lvl { font-size: .72rem; font-weight: 800; padding: 2px 10px; border-radius: 99px;
   background: rgba(255,255,255,.25); color: inherit; }
 .season p { margin: 0 0 12px; font-size: .9rem; }
 .banner { position: relative; border-radius: var(--raggio); padding: 16px 18px; color: #fff; margin-top: 8px;
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,.28); }
-.banner h2 { margin: 2px 0; font-family: var(--serif); font-style: italic; font-weight: 700; font-size: 1.6rem; letter-spacing: 0; }
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 6px 16px rgba(20,50,90,.14); }
+.banner h2 { margin: 2px 0; font-weight: 800; font-size: 1.5rem; letter-spacing: -.01em; }
 .banner p { margin: 0; font-size: .88rem; opacity: .92; color: inherit; }
-.season .banner.s1 { background: var(--verde); }
-.season .banner.s2 { background: var(--oro); color: #2b2000; }
-.season .banner.s3 { background: var(--terracotta); }
-.season .banner.s4 { background: var(--azzurro); }
+.season .banner.s1 { background: linear-gradient(160deg, var(--verde-chiaro), var(--verde) 60%, var(--verde-scuro)); }
+.season .banner.s2 { background: linear-gradient(160deg, #ffdd6b, var(--oro) 60%, #e6b31c); color: #3a2a00; }
+.season .banner.s3 { background: linear-gradient(160deg, var(--terracotta-chiara), var(--terracotta) 60%, var(--terracotta-scura)); }
+.season .banner.s4 { background: linear-gradient(160deg, #4b93ec, var(--azzurro) 60%, var(--azzurro-scuro)); }
 
 /* i sampietrini: cerchi piatti col filetto */
 .path { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 18px 0 8px; }
@@ -285,7 +285,7 @@ p.version { text-align: center; margin: 18px 0 8px; opacity: .8; }
 .node .dot { width: 68px; height: 68px; border-radius: 50%; font-size: 1.4rem; font-weight: 800;
   color: var(--verde); background: var(--carta); border: 2px solid var(--verde); transition: transform .08s; }
 .node .dot:active:not(:disabled) { transform: scale(.96); }
-.node.full .dot { background: var(--oro); border-color: var(--oro); color: #2b2000; }
+.node.full .dot { background: var(--oro); border-color: var(--oro); color: #3a2a00; }
 .node.current .dot { background: var(--terracotta); border-color: var(--terracotta); color: #fff;
   animation: nodepulse 1.8s ease-in-out infinite; }
 @keyframes nodepulse { 50% { box-shadow: 0 0 0 9px color-mix(in srgb, var(--terracotta) 22%, transparent); } }
@@ -369,7 +369,7 @@ h2 .stars i { font-size: 1.2rem; }
 .badge span { font-size: .72rem; color: var(--grigio); }
 
 .rank { text-align: center; }
-.rank .rk { font-family: var(--serif); font-style: italic; font-size: 2rem; font-weight: 700; color: var(--terracotta); }
+.rank .rk { font-size: 1.9rem; font-weight: 800; color: var(--azzurro); }
 .set { display: flex; justify-content: space-between; align-items: center; gap: 12px;
   padding: 10px 0; border-bottom: 1px solid var(--grigio-chiaro); flex-wrap: wrap; }
 .set:last-child { border-bottom: none; }
@@ -412,18 +412,19 @@ table.res td:last-child { text-align: right; font-family: var(--mono); }
   font-size: .68rem; font-weight: 700; letter-spacing: .02em; display: flex; flex-direction: column;
   align-items: center; gap: 2px; padding: 6px 0 4px; position: relative; }
 .nav button span { font-size: 1.3rem; filter: grayscale(1); opacity: .6; transition: transform .2s, filter .2s, opacity .2s; }
-.nav button.on { color: var(--terracotta); }
+.nav button.on { color: var(--azzurro); }
 .nav button.on span { filter: none; opacity: 1; transform: translateY(-1px); }
 .nav button.on::after { content: ""; position: absolute; bottom: 0; width: 22px; height: 3px; border-radius: 3px;
-  background: var(--terracotta); }
+  background: var(--azzurro); }
 
 /* ------------------------------------------------------------------- gioco */
 
 body.ingame header.top .stats .stat:nth-child(2) { display: none; }
 .hud { display: flex; align-items: center; gap: 10px; margin: 14px 0 12px; flex-wrap: nowrap; }
-.hud .muted { font-family: var(--serif); font-style: italic; font-weight: 600; font-size: 1rem;
-  color: var(--inchiostro); white-space: nowrap; }
-.hud .dai { font-family: var(--serif); font-style: italic; font-weight: 600; font-size: .98rem;
+.hud .muted { font-style: italic; font-weight: 700; font-size: 1rem;
+  color: var(--azzurro-scuro); white-space: nowrap; }
+@media (prefers-color-scheme: dark) { .hud .muted { color: var(--azzurro); } }
+.hud .dai { font-style: italic; font-weight: 700; font-size: .95rem;
   color: var(--terracotta); white-space: nowrap; animation: rise .4s ease backwards; }
 .hearts { white-space: nowrap; font-size: .92rem; letter-spacing: 0; }
 .hearts .over { font-size: .72rem; font-weight: 900; color: var(--terracotta); vertical-align: middle; }
@@ -431,18 +432,21 @@ body.ingame header.top .stats .stat:nth-child(2) { display: none; }
 .combo.pop { animation: pop .35s ease; display: inline-block; }
 @keyframes pop { 0% { transform: scale(.4); } 70% { transform: scale(1.3); } }
 /* la via: una linea sottile che avanza */
-.progressline { flex: 1 1 140px; height: 6px; background: var(--grigio-chiaro); border-radius: 99px;
+.progressline { flex: 1 1 140px; height: 8px; background: color-mix(in srgb, var(--carta) 55%, transparent); border-radius: 99px;
   overflow: hidden; min-width: 0; }
-.progressline i { display: block; height: 100%; background: var(--terracotta); border-radius: 99px;
+.progressline i { display: block; height: 100%; background: linear-gradient(90deg, var(--oro), var(--terracotta)); border-radius: 99px;
   transition: width .5s cubic-bezier(.2,.8,.2,1); }
 #quit, #lesquit { padding: 6px 12px; border: none; background: transparent; font-size: 1.1rem; color: var(--grigio); }
 
 /* la scheda dell'esercizio: carta da menù col filetto in alto */
-body.ingame #app > .card { padding: 22px 20px 20px; border-top: 3px solid var(--terracotta); }
+body.ingame #app > .card { padding: 22px 20px 20px; border-top: none; position: relative; overflow: hidden; }
+/* il filetto del sole: limone e corallo */
+body.ingame #app > .card::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 5px;
+  background: linear-gradient(90deg, var(--oro), var(--terracotta)); }
 .prompt { color: var(--grigio); font-size: .9rem; font-weight: 600; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
 .prompt .tab { padding: 4px 8px; }
 .stem { font-size: 1.5rem; font-weight: 700; line-height: 1.4; letter-spacing: -.005em; margin: 8px 0 20px; }
-.stem .gap { color: var(--terracotta); border-bottom: 2.5px solid var(--terracotta); padding: 0 18px; }
+.stem .gap { color: var(--azzurro); border-bottom: 3px solid var(--azzurro); padding: 0 18px; }
 .stem .gap.n { display: inline-grid; place-items: center; min-width: 30px; height: 26px; padding: 0 8px; margin: 0 2px;
   border: none; border-radius: 8px; background: color-mix(in srgb, var(--oro) 22%, transparent); color: var(--oro-scuro);
   font-family: var(--sans); font-size: .85rem; font-weight: 800; vertical-align: middle; }
@@ -457,15 +461,15 @@ body.ingame #app > .card { padding: 22px 20px 20px; border-top: 3px solid var(--
   transition: transform .06s, background .15s, border-color .15s; }
 .opt::before { counter-increment: opt; content: counter(opt); position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
   width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-size: .9rem;
-  font-family: var(--serif); font-style: italic; font-weight: 700; color: var(--grigio); border: 1.5px solid var(--grigio-chiaro); }
+  font-weight: 800; color: var(--grigio); border: 1.5px solid var(--grigio-chiaro); }
 @media (hover: hover) { .opt:hover:not(:disabled) { border-color: var(--terracotta); } }
 .opt:active:not(:disabled) { transform: scale(.99); border-color: var(--terracotta); }
-.opt.right { border-color: var(--verde); background: color-mix(in srgb, var(--verde) 10%, var(--carta)); color: var(--verde-scuro);
+.opt.right { border-color: var(--verde); background: color-mix(in srgb, var(--verde) 14%, var(--carta)); color: var(--verde-scuro);
   animation: bump .35s cubic-bezier(.3,1.6,.5,1); }
-.opt.right::before { content: "✓"; font-family: var(--sans); font-style: normal; color: #fff; background: var(--verde); border-color: var(--verde); }
-.opt.wrong { border-color: var(--terracotta); background: color-mix(in srgb, var(--terracotta) 9%, var(--carta)); color: var(--terracotta-scura);
+.opt.right::before { content: "✓"; color: #fff; background: var(--verde); border-color: var(--verde); }
+.opt.wrong { border-color: var(--terracotta); background: color-mix(in srgb, var(--terracotta) 12%, var(--carta)); color: var(--terracotta-scura);
   animation: shake .32s ease; }
-.opt.wrong::before { content: "✕"; font-family: var(--sans); font-style: normal; color: #fff; background: var(--terracotta); border-color: var(--terracotta); }
+.opt.wrong::before { content: "✕"; color: #fff; background: var(--terracotta); border-color: var(--terracotta); }
 @media (prefers-color-scheme: dark) { .opt.right { color: var(--verde-chiaro); } .opt.wrong { color: var(--terracotta-chiara); } }
 .opt:disabled { cursor: default; }
 .opt:disabled:not(.right):not(.wrong) { opacity: .5; }
@@ -525,11 +529,11 @@ body.ingame #app > .card { padding: 22px 20px 20px; border-top: 3px solid var(--
 .feedback.giusto { border-color: var(--verde); }
 .feedback.quasi { border-color: var(--oro); }
 .feedback.sbagliato { border-color: var(--terracotta); }
-.feedback .verdict { font-family: var(--serif); font-style: italic; font-size: 1.5rem; font-weight: 700;
+.feedback .verdict { font-size: 1.45rem; font-weight: 800;
   letter-spacing: -.005em; margin-bottom: 6px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 .feedback .sol { font-size: 1.2rem; font-weight: 700; }
 .feedback .note { font-size: .88rem; margin-top: 6px; }
-.xpgain { font-family: var(--sans); font-style: normal; font-size: .85rem; font-weight: 800; background: var(--oro); color: #2b2000;
+.xpgain { font-size: .85rem; font-weight: 800; background: var(--oro); color: #3a2a00;
   padding: 2px 10px; border-radius: 99px; animation: pop .4s cubic-bezier(.3,1.6,.5,1) .15s both; }
 
 body.ingame .feedback:not(.prompt) {
@@ -541,20 +545,20 @@ body.ingame .feedback:not(.prompt) {
 }
 @media (min-width: 700px) { body.ingame .feedback:not(.prompt) { left: 50%; width: 660px; margin-left: -330px; } }
 @keyframes sheet { from { transform: translateY(100%); } }
-body.ingame .feedback.giusto { background: #e6f2ea; color: #143f2c; border-top-color: var(--verde); }
-body.ingame .feedback.quasi { background: #fbf0d4; color: #574008; border-top-color: var(--oro); }
-body.ingame .feedback.sbagliato { background: #f9e6df; color: #6b2416; border-top-color: var(--terracotta); }
+body.ingame .feedback.giusto { background: #dcf6e6; color: #0f5b34; border-top-color: var(--verde); }
+body.ingame .feedback.quasi { background: #fff1bf; color: #5c4200; border-top-color: var(--oro); }
+body.ingame .feedback.sbagliato { background: #ffe4da; color: #7d2a13; border-top-color: var(--terracotta); }
 @media (prefers-color-scheme: dark) {
-  body.ingame .feedback.giusto { background: #183a2a; color: #d8f2e2; }
-  body.ingame .feedback.quasi { background: #3a2e12; color: #f8e7bd; }
-  body.ingame .feedback.sbagliato { background: #3f1f17; color: #f8d9cf; }
+  body.ingame .feedback.giusto { background: #123f28; color: #d9f7e5; }
+  body.ingame .feedback.quasi { background: #3d3010; color: #ffeec0; }
+  body.ingame .feedback.sbagliato { background: #46201a; color: #ffdfd3; }
 }
 body.ingame .feedback:not(.prompt) .note, body.ingame .feedback:not(.prompt) .muted { color: inherit; opacity: .78; }
 body.ingame .feedback .verdict { font-size: 1.75rem; margin-bottom: 8px; }
 body.ingame .feedback .sol { font-size: 1.2rem; }
 body.ingame .feedback #next, body.ingame .feedback #lesnext2 { width: 100%; padding: 15px; font-size: 1.08rem; order: -1; }
 body.ingame .feedback.giusto #next, body.ingame .feedback.giusto #lesnext2 { background: var(--verde); }
-body.ingame .feedback.quasi #next { background: var(--oro-scuro); }
+body.ingame .feedback.quasi #next { background: var(--oro); color: #3a2a00; }
 body.ingame .feedback.sbagliato #next, body.ingame .feedback.sbagliato #lesnext2 { background: var(--terracotta); }
 body.ingame .feedback .row { flex-direction: column; align-items: stretch; }
 body.ingame .feedback #say2 { align-self: center; color: inherit; opacity: .75; }
@@ -562,7 +566,7 @@ body.ingame:has(.feedback:not(.prompt)) .wrap { padding-bottom: 62vh; }
 .feedback.prompt { display: block; color: inherit; font-size: inherit; font-weight: inherit; margin-bottom: 0;
   border-left-width: 4px; border-color: var(--oro); border-radius: 12px;
   background: color-mix(in srgb, var(--oro) 12%, var(--carta)); }
-.feedback.prompt .verdict { font-family: var(--sans); font-style: normal; font-size: 1.05rem; font-weight: 800; }
+.feedback.prompt .verdict { font-size: 1.05rem; font-weight: 800; }
 
 /* +xp che vola verso l'anello */
 .xpfloat { position: fixed; z-index: 80; pointer-events: none; font-weight: 900; color: var(--oro-scuro);
@@ -590,14 +594,14 @@ body.ingame:has(.feedback:not(.prompt)) .wrap { padding-bottom: 62vh; }
 /* ---------------------------------------------------------------- risultato */
 
 .scorebig { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; justify-content: center; }
-.scorebig b { font-family: var(--serif); font-size: 3.8rem; line-height: 1; font-weight: 800; letter-spacing: -.03em; color: var(--terracotta); }
+.scorebig b { font-size: 3.4rem; line-height: 1; font-weight: 800; letter-spacing: -.03em; color: var(--azzurro); }
 .scorebig span { color: var(--grigio); font-weight: 700; background: var(--intonaco); padding: 4px 12px; border-radius: 99px; }
 .lesdone .bigstar { font-size: 5rem; line-height: 1; color: var(--oro); animation: starpop .7s cubic-bezier(.3,1.6,.5,1); }
 @keyframes starpop { from { transform: scale(0) rotate(-60deg); } }
 .lesdone .scorebig { justify-content: center; }
 
 /* lampo */
-.lsec { font-family: var(--serif); font-weight: 800; font-size: 1.5rem; min-width: 42px; }
+.lsec { font-weight: 800; font-size: 1.5rem; min-width: 42px; }
 .lampobar i { background: linear-gradient(90deg, var(--terracotta), var(--oro)); transition: width .1s linear; }
 
 /* ------------------------------------------------------------------- teoria */
@@ -608,7 +612,7 @@ body.ingame:has(.feedback:not(.prompt)) .wrap { padding-bottom: 62vh; }
                  border-left: 3px solid var(--verde); padding-left: 14px; margin: 0 0 4px; }
 .lesson .blk { padding-top: 20px; margin-top: 20px; border-top: 1px solid var(--grigio-chiaro); }
 .lesson .blk:first-of-type { border-top: none; margin-top: 8px; padding-top: 4px; }
-.lesson h2 { font-family: var(--serif); font-style: italic; font-weight: 700; font-size: 1.4rem; margin: 0 0 10px; letter-spacing: 0; }
+.lesson h2 { font-weight: 800; font-size: 1.35rem; margin: 0 0 10px; letter-spacing: -.01em; }
 .lesson p { margin: 0 0 10px; }
 .lesson p.rule { font-size: 1.06rem; line-height: 1.5; color: var(--inchiostro);
   background: color-mix(in srgb, var(--verde) 7%, var(--carta)); border-left: 4px solid var(--verde);
