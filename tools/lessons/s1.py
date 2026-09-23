@@ -29,10 +29,10 @@ LESSONS = {
                      ["che, chi", "ke, ki", "perché, chiave"],
                      ["cia, cio, ciu", "cha, cho, chu", "ciao, cioccolata"],
                      ["ga, go, gu", "ga, go, gu", "gatto, gonna"],
-                     ["ge, gi", "ye/dye inglesa (como «gel»)", "gelato, giro"],
+                     ["ge, gi", "dy, como la j inglesa de «jeans»", "gelato, giro"],
                      ["ghe, ghi", "gue, gui", "spaghetti, ghiaccio"],
                      ["gn", "ñ", "signore, bagno"],
-                     ["gli", "ll rioplatense suave, casi «lli»", "figlio, aglio"],
+                     ["gli", "ll tradicional (no la rioplatense), casi «li» rápida", "figlio, aglio"],
                      ["sce, sci", "sh inglesa", "pesce, sciare"],
                      ["z", "ts o dz", "grazie, zero"]]}},
 
@@ -46,14 +46,15 @@ LESSONS = {
          ["pena / penna", "pena / lapicera"],
          ["papa / pappa", "papa (el Papa) / papilla"],
          ["sete / sette", "sed / siete"]],
-  "warn": "En castellano solo la *rr* y la *ll* son dobles reales, así que el "
+  "warn": "En castellano no hay consonantes largas que distingan palabras "
+          "(la *rr* y la *ll* son sonidos distintos, no alargados), así que el "
           "oído no está entrenado. Al escribir vas a olvidarte dobles todo el "
           "tiempo: *bello*, *sorella*, *professore*, *appartamento*, *mamma*. "
           "Es la falta más frecuente del hispanohablante en los exámenes."},
 
  {"h": "El acento: dónde cae y cuándo se escribe",
   "p": ["La mayoría de las palabras italianas son llanas: el acento cae en la "
-        "penúltima sílaba (*ca-SA*, *fi-NE-stra*, *stu-DEN-te*). Pero hay "
+        "penúltima sílaba (*CA-sa*, *fi-NE-stra*, *stu-DEN-te*). Pero hay "
         "muchísimas esdrújulas que el castellano no tiene en el mismo lugar, y "
         "el italiano no las marca: se escribe *abitano*, *parlano*, *telefono*, "
         "*camera*, *utile*, y se pronuncian *Á-bitano*, *PAR-lano*, *te-LÉ-fono*.",
@@ -66,9 +67,10 @@ LESSONS = {
 
  {"h": "Detalles que se pegan rápido",
   "p": ["*qu* siempre suena «cu» (*questo* = «cuésto», nunca «késto»). "
-        "*s* entre vocales suena como una *z* inglesa, vibrada (*casa*, *rosa*). "
-        "La *r* es simple y golpeada, nunca la *rr* fuerte del castellano, ni "
-        "siquiera al principio de palabra: *Roma* se dice con una sola vibración."]},
+        "*s* entre vocales suele sonar sonora, como una *z* inglesa (*rosa*, y en "
+        "el norte también *casa*). "
+        "La *r* simple entre vocales es un toque breve (*caro*), como la *r* de "
+        "«caro»; la *rr* doble (*terra*, *carro*) sí es vibrante múltiple."]},
 ]},
 
 2: {
@@ -132,8 +134,9 @@ LESSONS = {
   "warn": "Estas son las que hacen perder puntos, porque el instinto castellano "
           "está mal calibrado: *il latte* (la leche), *il sale* (la sal), "
           "*il sangue* (la sangre), *il fiore* (la flor), *il miele* (la miel), "
-          "*il colore*, *il dolore*, *il rumore*; y del otro lado *la sera*, "
-          "*la coppia*, *l'analisi* (f.), *la fronte* (la frente), *l'arte* (f.).",
+          "*il carcere* (la cárcel), *il costume* (la costumbre); y del otro lado "
+          "*la fine* (el fin), *l'origine* (f., el origen), *la domenica* (el "
+          "domingo), *l'analisi* (f.), *l'arte* (f.).",
   "p": ["Aparte están los helenismos en *-ma*, *-emma*, *-ista*, que son "
         "masculinos igual que en castellano: *il problema*, *il programma*, "
         "*il sistema*, *il tema*, *il poeta*. En plural hacen *-i*: "
@@ -171,8 +174,8 @@ LESSONS = {
 
  {"h": "Preposiciones articuladas",
   "p": ["Cuando *di, a, da, in, su* se encuentran con un artículo determinado, "
-        "se fusionan obligatoriamente. No es opcional como *de el* → *del* del "
-        "castellano: acá pasa siempre y con las cinco preposiciones."],
+        "se fusionan obligatoriamente. No es solo *de el* → *del* y *a el* → *al* "
+        "como en castellano: acá pasa siempre y con las cinco preposiciones."],
   "table": {"head": ["", "il", "lo", "l'", "i", "gli", "la", "le"],
             "rows": [["di", "del", "dello", "dell'", "dei", "degli", "della", "delle"],
                      ["a", "al", "allo", "all'", "ai", "agli", "alla", "alle"],
@@ -197,7 +200,8 @@ LESSONS = {
           "*mi piace la musica*, *il caffè fa male*.",
   "p": ["Al revés, se omite con los nombres de ciudad (*Roma è bella*) y con "
         "los parientes en singular sin adjetivo: *mio padre*, *mia sorella*, "
-        "pero *il mio fratello maggiore* y *i miei fratelli*."]},
+        "pero *il mio caro fratello*, *la mia sorellina*, *i miei fratelli* y "
+        "*il loro padre*."]},
 ]},
 
 4: {
@@ -249,8 +253,8 @@ LESSONS = {
         "*grand'* ante vocal (*un grand'uomo*). *santo* da *san* ante consonante "
         "(*San Marco*), *santo* ante s impura (*Santo Stefano*), *sant'* ante "
         "vocal (*Sant'Antonio*)."],
-  "warn": "El castellano apocopa *buen*, *gran*, *san* de forma parecida, pero "
-          "solo en masculino singular. El italiano también tiene *buon'amica* en "
+  "warn": "El castellano apocopa *buen* y *san* de forma parecida, pero solo en "
+          "masculino singular. El italiano también tiene *buon'amica* en "
           "femenino, que no tiene equivalente castellano."},
 ]},
 
@@ -415,10 +419,10 @@ LESSONS = {
 
  {"h": "La trampa grande: el italiano no diptonga",
   "warn": "El castellano rompe la vocal de la raíz cuando lleva acento: "
-          "p*ue*do, d*ue*rmo, q*uie*ro, p*ie*nso, c*ue*nto. El italiano no hace "
-          "nada de eso. Se dice *posso*, *dormo*, *penso*, *conto*, *trovo*, "
-          "*gioco* (este sí, pero por otra razón). Cada vez que tu instinto "
-          "quiera diptongar, frenalo.",
+          "p*ue*do, d*ue*rmo, q*uie*ro, p*ie*nso, c*ue*nto. El italiano casi nunca "
+          "lo hace (salvo unos pocos: *vieni*, *vuole*, *può*). Se dice *posso*, "
+          "*dormo*, *penso*, *conto*, *trovo*, *gioco* (acá la *i* es solo "
+          "gráfica). Cada vez que tu instinto quiera diptongar, frenalo.",
   "ex": [["Non posso venire.", "No puedo venir."],
          ["Dormo poco.", "Duermo poco."],
          ["Penso di sì.", "Pienso que sí."],
@@ -426,7 +430,7 @@ LESSONS = {
 
  {"h": "essere o stare",
   "p": ["No se reparten como en castellano. *Stare* significa sobre todo "
-        "«estar» de salud y de lugar físico (*Come stai?*, *Sto a casa*), y "
+        "«estar» de salud y «quedarse» (*Come stai?*, *Stasera sto a casa*), y "
         "forma el presente continuo (*sto mangiando*). Para estados, "
         "cualidades y ubicaciones el italiano usa *essere*: *sono stanco* "
         "(estoy cansado), *sono a Roma* (estoy en Roma), *la porta è aperta* "
@@ -457,12 +461,12 @@ LESSONS = {
         "responde a «¿a quién / para quién?». La diferencia se ve solo en la "
         "tercera persona: *lo/la/li/le* frente a *gli/le/gli*."],
   "ex": [["Vedo Marco → Lo vedo.", "Veo a Marco → Lo veo."],
-         ["Telefono a Marco → Gli telefono.", "Llamo a Marco → Le llamo."],
+         ["Telefono a Marco → Gli telefono.", "Llamo a Marco → Lo llamo (en it., indirecto)."],
          ["Vedo Anna → La vedo.", "Veo a Ana → La veo."],
          ["Scrivo a Anna → Le scrivo.", "Le escribo a Ana."],
          ["Conosco i tuoi amici → Li conosco.", "Conozco a tus amigos."]],
-  "warn": "El castellano rioplatense usa *le* para el complemento directo de "
-          "persona («le vi»), y eso acá es un error grave: en italiano *le* es "
+  "warn": "El leísmo del castellano (*le* como complemento directo de "
+          "persona: «le vi», «le saludo») acá es un error grave: en italiano *le* es "
           "SIEMPRE indirecto femenino. Además el italiano no pone la "
           "preposición *a* delante del objeto directo de persona: se dice "
           "*vedo Marco*, no «vedo a Marco»."},
@@ -491,7 +495,7 @@ LESSONS = {
          "final del verbo.",
 "blocks": [
  {"h": "Los reflexivos",
-  "table": {"head": ["", "alzarsi", "", "lavarsi"],
+  "table": {"head": ["", "alzarsi (sing.)", "", "alzarsi (pl.)"],
             "rows": [["io", "mi alzo", "noi", "ci alziamo"],
                      ["tu", "ti alzi", "voi", "vi alzate"],
                      ["lui/lei", "si alza", "loro", "si alzano"]]},

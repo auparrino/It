@@ -43,6 +43,7 @@ ITEMS = [
          prompt="Traducí al italiano (pasiva refleja).",
          stem="Aquí se venden libros usados.",
          answer="Qui si vendono libri usati",
+         alt=["Qua si vendono libri usati", "Si vendono libri usati qui"],
          note="Plural obligatorio en el verbo: «si vendono», no «si vende»."),
 
     # --- causativo ---
@@ -75,10 +76,10 @@ ITEMS = [
     dict(id="c1-caus-05", type="choice", topic="percezione",
          prompt="Elegí la forma correcta.",
          stem="Ho visto Maria ___ dalla finestra.",
-         options=["uscire", "che usciva", "uscendo"],
+         options=["uscire", "di uscire", "uscendo"],
          answer="uscire",
-         note="Verbos de percepción + infinitivo. «Che usciva» también existe, "
-              "pero el infinitivo es la construcción básica."),
+         note="Verbos de percepción + infinitivo sin preposición. «Che usciva» "
+              "también vale; «uscendo» se referiría al sujeto (yo)."),
 
     # --- infinito, gerundio, participio ---
     dict(id="c1-nonfin-01", type="choice", topic="gerundio",
@@ -111,12 +112,12 @@ ITEMS = [
          note="«Seguir + gerundio» NO se calca: italiano usa «continuare A + "
               "infinito». «Sto studiando» es solo acción en curso ahora."),
     dict(id="c1-nonfin-06", type="choice", topic="gerundio",
-         prompt="¿Cuál es incorrecta?",
-         stem="___ il treno, ho comprato il biglietto.",
+         prompt="Elegí la forma correcta (mientras esperaba).",
+         stem="___ il treno, ho letto il giornale.",
          options=["Aspettando", "Avendo aspettato", "Aspettato"],
-         answer="Aspettato",
-         note="El participio absoluto de un transitivo necesita su objeto delante: "
-              "«aspettato il treno» suena mal aquí; con gerundio va bien."),
+         answer="Aspettando",
+         note="Simultaneidad con el mismo sujeto → gerundio simple. «Avendo "
+              "aspettato» y «aspettato» marcan anterioridad: la espera ya terminó."),
 
     # --- connettivi e registro ---
     dict(id="c1-conn-01", type="choice", topic="connettivi",
@@ -166,6 +167,7 @@ ITEMS = [
          prompt="Traducí al italiano con dislocación a la derecha.",
          stem="Ya lo sabía, eso.",
          answer="Lo sapevo già, questo",
+         alt=["Già lo sapevo, questo"],
          note="Dislocación a la derecha: el pronombre anticipa y el elemento "
               "aparece al final como refuerzo."),
 

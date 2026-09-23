@@ -25,7 +25,7 @@ ITEMS = [
          prompt="¿Dónde lleva acento gráfico?",
          stem="___", options=["città", "cittá", "cìtta"], answer="città",
          note="El italiano usa acento grave en la mayoría de las oxítonas; "
-              "agudo solo en perché, né, sé, affinché."),
+              "agudo en la é cerrada: perché, né, sé, affinché, ventitré."),
     dict(id="a2-ort-05", type="choice", topic="ortografia", level="A1",
          prompt="¿Cuál es la forma correcta?",
          stem="___ è il tuo indirizzo?", options=["Qual", "Qual'", "Quale'"],
@@ -33,9 +33,9 @@ ITEMS = [
          note="«Qual è» se escribe sin apóstrofo: es apócope, no elisión."),
     dict(id="a2-ort-06", type="choice", topic="ortografia", level="A1",
          prompt="¿Cómo suena «gli» en «figli»?",
-         stem="figli", options=["[ʎ] como «ll» rioplatense no, como «lli» en «millón»",
+         stem="figli", options=["[ʎ], como la «ll» tradicional (no la rioplatense)",
                                 "[gli] separado", "[x] como la j española"],
-         answer="[ʎ] como «ll» rioplatense no, como «lli» en «millón»",
+         answer="[ʎ], como la «ll» tradicional (no la rioplatense)",
          note="Sonido palatal lateral. Excepciones donde sí se lee [gl]: "
               "glicerina, negligente, anglicano."),
 
@@ -53,7 +53,7 @@ ITEMS = [
          note="Si el negativo va DELANTE del verbo, desaparece el «non»."),
     dict(id="a2-neg-03", type="choice", topic="negazioni", level="B1",
          prompt="Elegí la forma correcta.",
-         stem="Non lavoro ___ qui.", options=["più", "ancora", "mai più"],
+         stem="Ho cambiato lavoro: non lavoro ___ qui.", options=["più", "ancora", "mai più"],
          answer="più",
          note="«non ... più» = ya no. «non ... ancora» = todavía no."),
     dict(id="a2-neg-04", type="choice", topic="negazioni", level="B1",
@@ -114,8 +114,8 @@ ITEMS = [
          stem="Il ___ per cento degli italiani.", options=["20", "venti per",
                                                            "ventesimo"],
          answer="20",
-         note="Los porcentajes llevan artículo: il 20 per cento, y concuerdan "
-              "en singular."),
+         note="Los porcentajes llevan artículo: il 20 per cento. El verbo va en "
+              "singular o concuerda con el sustantivo que sigue."),
 
     # --- passato remoto (settimana 45) ---
     dict(id="a2-pr-01", type="choice", topic="passato remoto", level="C1",
@@ -128,7 +128,7 @@ ITEMS = [
          prompt="Completá con el passato remoto.",
          stem="Loro ___ (fare) di tutto per aiutarci.", answer="fecero",
          note="fare: feci, facesti, fece, facemmo, faceste, fecero. "
-              "Irregular en 1ª y 3ª, regular en el resto."),
+              "Irregular en io, lui/lei y loro; regular en el resto."),
     dict(id="a2-pr-03", type="cloze", topic="passato remoto", level="C1",
          prompt="Completá con el passato remoto.",
          stem="Tu ___ (dire) la verità.", answer="dicesti",

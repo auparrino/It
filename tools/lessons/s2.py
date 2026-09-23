@@ -35,8 +35,8 @@ LESSONS = {
         "lleva artículo igual."],
   "warn": "La única excepción a lo del artículo: parentesco en singular y sin "
           "adjetivo. *mio padre*, *tua sorella*, *suo figlio*. Pero *i miei "
-          "fratelli* (plural), *il mio fratello maggiore* (con adjetivo), "
-          "*la mia mamma* (diminutivo afectivo) y *il loro padre* (siempre con "
+          "fratelli* (plural), *il mio caro fratello* (con adjetivo), "
+          "*la mia mamma* (forma afectiva) y *il loro padre* (siempre con "
           "*loro*)."},
 
  {"h": "Indefinidos que hay que saber",
@@ -46,7 +46,7 @@ LESSONS = {
                      ["ogni + singular", "cada / todos los", "invariable: ogni giorno"],
                      ["tutto/a/i/e + artículo", "todo", "tutti i giorni, tutta la notte"],
                      ["qualcuno / qualcosa", "alguien / algo", "invariables"],
-                     ["nessuno / niente", "nadie / nada", "piden non antes del verbo"],
+                     ["nessuno / niente", "nadie / nada", "detrás del verbo piden non"],
                      ["altro/a/i/e", "otro", "un altro libro (sin «uno otro»)"],
                      ["poco, molto, troppo, tanto", "poco, mucho...",
                       "concuerdan como adjetivos"]]},
@@ -72,7 +72,7 @@ LESSONS = {
 "blocks": [
  {"h": "Sumar, oponer, corregir",
   "table": {"head": ["Conector", "Sentido", "Ejemplo"],
-            "rows": [["e / ed", "y (ed ante vocal)", "Marco ed Anna"],
+            "rows": [["e / ed", "y (ed ante vocal, sobre todo ante e)", "Anna ed Elena"],
                      ["anche", "también", "Viene anche lui."],
                      ["inoltre", "además", "Inoltre, costa poco."],
                      ["ma", "pero", "Vorrei, ma non posso."],
@@ -93,7 +93,7 @@ LESSONS = {
                      ["dato che / visto che", "dado que", "coloquial y frecuente"],
                      ["quindi / dunque / perciò", "por lo tanto", ""],
                      ["allora", "entonces", "también muletilla oral"],
-                     ["così", "así que", "Ho così deciso di partire."]]},
+                     ["così", "así que", "Pioveva, così sono rimasto a casa."]]},
   "ex": [["Siccome pioveva, siamo rimasti a casa.",
           "Como llovía, nos quedamos en casa."],
          ["Non è venuto, quindi abbiamo cominciato senza di lui.",
@@ -116,7 +116,7 @@ LESSONS = {
         "*malgrado* (aunque); *affinché*, *perché* con valor de finalidad (para "
         "que); *a meno che non*, *purché*, *a patto che* (a menos que, con tal "
         "de que); *prima che* (antes de que)."],
-  "ex": [["Benché sia stanco, esco lo stesso.", "Aunque esté cansado, salgo igual."],
+  "ex": [["Benché sia stanco, esco lo stesso.", "Aunque estoy cansado, salgo igual."],
          ["Te lo dico perché tu capisca.", "Te lo digo para que entiendas."]]},
 ]},
 
@@ -131,7 +131,7 @@ LESSONS = {
         "*lento → lenta → lentamente*, *vero → veramente*, *raro → raramente*. "
         "Los adjetivos en *-e* la agregan directamente: *veloce → velocemente*, "
         "*semplice → semplicemente*."],
-  "warn": "Los adjetivos terminados en *-le* y *-re* pierden la *e* final: "
+  "warn": "Los adjetivos terminados en vocal + *-le* / *-re* pierden la *e* final: "
           "*facile → facilmente*, *difficile → difficilmente*, "
           "*normale → normalmente*, *particolare → particolarmente*, "
           "*regolare → regolarmente*. Escribir «facilemente» es falta segura."},
@@ -187,7 +187,8 @@ LESSONS = {
  {"h": "Cuál auxiliar",
   "p": ["*avere* con los verbos transitivos, es decir los que pueden llevar "
         "objeto directo: *ho letto il libro*, *ho mangiato*, *ho visto*. "
-        "*essere* con los intransitivos de movimiento y de cambio de estado, "
+        "*essere* con muchos intransitivos de movimiento (no todos: *camminare*, "
+        "*viaggiare*, *nuotare* van con *avere*) y de cambio de estado, "
         "con los reflexivos y con los impersonales. Con *essere* el participio "
         "CONCUERDA con el sujeto."],
   "table": {"head": ["Grupo", "Verbos"],
@@ -394,7 +395,7 @@ LESSONS = {
          ["Quanti anni ha? — Avrà quarant'anni.", "Tendrá unos cuarenta."],
          ["Dov'è Marco? — Sarà a casa.", "Estará en casa."],
          ["Sarà anche vero, ma non ci credo.", "Puede que sea cierto, pero no lo creo."]],
-  "warn": "Detrás de *quando*, *appena*, *se* el italiano culto pide futuro "
+  "warn": "Detrás de *quando* y *appena* el italiano culto pide futuro "
           "cuando el sentido es futuro: *Quando arriverai, ti darò le chiavi*. "
           "El castellano usa presente o subjuntivo ahí («cuando llegues»), así "
           "que la traducción literal falla. En el habla cotidiana el italiano "
@@ -532,7 +533,7 @@ LESSONS = {
 
  {"h": "mica, la negación coloquial",
   "p": ["Refuerza la negación en el habla cotidiana: *Non è mica facile!* "
-        "(¡No es nada fácil!). También aparece sola en preguntas: *Non avresti "
+        "(¡No es nada fácil!). También aparece en preguntas: *Non avresti "
         "mica una penna?* (¿No tendrías por casualidad una lapicera?). Se "
         "entiende siempre, se escribe casi nunca."]},
 
@@ -542,9 +543,9 @@ LESSONS = {
         "*Quanto* + verbo: *Quanto mi manchi!*. Y las que hay que saber sí o "
         "sí: *Magari!* (¡ojalá!), *Figurati!* (¡para nada, no es molestia!), "
         "*Dai!* (¡dale!), *Boh!* (ni idea), *Beato te!* (¡dichoso vos!)."],
-  "tip": "*Che bello!* no lleva artículo, a diferencia del castellano «¡qué "
-         "lindo!» que tampoco lo lleva, pero sí frente a *Che bella giornata!*, "
-         "donde el italiano tampoco pone *una*. Nunca «che una bella giornata»."},
+  "tip": "*Che bello!* no lleva artículo, igual que «¡qué lindo!». Y con "
+         "sustantivo tampoco: *Che bella giornata!* (¡qué lindo día!). Nunca "
+         "«che una bella giornata»."},
 ]},
 
 24: {
@@ -566,13 +567,13 @@ LESSONS = {
                      ["-accio / -accia", "feo, malo, despectivo",
                       "tempaccio, parolaccia, ragazzaccio"],
                      ["-uccio / -uccia", "cariñoso, un poco menor",
-                      "cattivuccio, boccuccia"]]},
+                      "caruccio, boccuccia"]]},
   "warn": "*-one* suele convertir en masculino un sustantivo femenino: "
           "*la porta → il portone*, *la donna → il donnone*. Y no todo lo que "
           "termina así es alterado: *il tacchino* (el pavo) no es un *tacco* "
           "pequeño, ni *il mattone* (el ladrillo) un *matto* grande. Estos son "
           "los llamados falsos alterados: *burrone*, *bottone*, *montone*, "
-          "*focaccia*, *cavallino*."},
+          "*focaccia*, *postino*."},
 
  {"h": "Se aplica a casi todo",
   "ex": [["un caffettino", "un cafecito"],
@@ -674,7 +675,7 @@ LESSONS = {
         "*avere* en todo lo demás, y ahí el participio solo concuerda si hay un "
         "pronombre directo de tercera persona delante."]},
 
- {"h": "Las seis raíces de futuro y condicional",
+ {"h": "Las raíces irregulares de futuro y condicional",
   "p": ["*sar-* (essere), *avr-* (avere), *andr-* (andare), *potr-* (potere), "
         "*vorr-* (volere), *verr-* (venire), *dovr-* (dovere), *sapr-* "
         "(sapere), *vedr-* (vedere), *rimarr-* (rimanere), *terr-* (tenere), "

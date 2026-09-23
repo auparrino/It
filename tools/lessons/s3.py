@@ -27,8 +27,8 @@ LESSONS = {
   "warn": "Las tres personas del singular son IGUALES. Por eso, cuando el "
           "sujeto no se deduce del contexto, el italiano sí pone el pronombre: "
           "*Credo che TU abbia ragione*, *Penso che LUI venga*. El castellano "
-          "no lo necesita («creo que tengas razón») y por eso al hispanohablante "
-          "se le olvida."},
+          "casi nunca lo necesita («quiero que vengas»: la terminación ya dice "
+          "quién) y por eso al hispanohablante se le olvida."},
 
  {"h": "La inversión que confunde",
   "warn": "En castellano el subjuntivo de los verbos en *-ar* usa *e* "
@@ -99,9 +99,9 @@ LESSONS = {
   "warn": "*Credo che sia tardi* = «Creo que ES tarde». *Penso che tu abbia "
           "ragione* = «Pienso que TIENES razón». *Mi sembra che non stia bene* = "
           "«Me parece que no ESTÁ bien». En castellano estos verbos, en "
-          "afirmativa, van con indicativo; en italiano piden congiuntivo "
-          "siempre. Es el error que más rápido identifica a un hispanohablante, "
-          "y el más fácil de corregir porque la regla no tiene excepciones.",
+          "afirmativa, van con indicativo; en italiano cuidado piden congiuntivo. "
+          "Es el error que más rápido identifica a un hispanohablante, "
+          "y el más fácil de corregir porque la regla es muy estable.",
   "ex": [["Credo che abbia ragione.", "Creo que tiene razón."],
          ["Penso che sia una buona idea.", "Pienso que es una buena idea."],
          ["Mi sembra che sia in ritardo.", "Me parece que llega tarde."],
@@ -164,9 +164,9 @@ LESSONS = {
   "tip": "La regla en una línea: mismo momento o posterior → congiuntivo "
          "presente; anterior → congiuntivo passato. Nada más."},
 
- {"h": "Con expresiones de tiempo",
-  "p": ["Aparece mucho con *dopo che*, *prima che*, *nonostante*, *benché* y "
-        "los superlativos."],
+ {"h": "Con concesivas y superlativos",
+  "p": ["Aparece mucho con *nonostante*, *benché*, *sebbene* y "
+        "los superlativos. (*Dopo che*, en cambio, va con indicativo.)"],
   "ex": [["Benché abbia studiato, non ha passato l'esame.",
           "Aunque estudió, no aprobó."],
          ["È la cosa più bella che io abbia mai visto.",
@@ -493,7 +493,7 @@ LESSONS = {
           "ella» o «a usted». El plural *loro* culto sería *lo do loro*, pero "
           "en el italiano actual *glielo* cubre también el plural."},
 
- {"h": "El orden es el inverso del castellano",
+ {"h": "El orden es el del castellano; cambia la vocal",
   "warn": "El castellano dice «me lo» pero también «se lo» a partir de «le lo». "
           "El italiano sigue la misma lógica, así que la sorpresa no es el "
           "orden sino la *e*: *mi* + *lo* no da «mi lo» sino *me lo*. La i "
@@ -506,7 +506,7 @@ LESSONS = {
 
  {"h": "En los tiempos compuestos",
   "p": ["El participio concuerda con el pronombre directo, igual que antes: "
-        "*Me l'ha data* (la carta), *Gliel'ho dette* (las cosas), "
+        "*Me l'ha data* (la carta), *Gliele ho dette* (las cosas), "
         "*Ce li hanno portati*."],
   "ex": [["Il libro? Me l'ha prestato Marco.",
           "¿El libro? Me lo prestó Marco."],
@@ -621,8 +621,8 @@ LESSONS = {
   "ex": [["Ho parlato con la sorella di Marco, la quale è medico.",
           "Hablé con la hermana de Marco, que es médica."],
          ["Il progetto al quale lavoro.", "El proyecto en el que trabajo."]],
-  "tip": "Compará: *il figlio della vicina, che è simpatico* (¿quién es "
-         "simpático?) frente a *il figlio della vicina, il quale è simpatico* "
+  "tip": "Compará: *il figlio della vicina, che mi saluta sempre* (¿quién "
+         "saluda?) frente a *il figlio della vicina, il quale mi saluta sempre* "
          "(el hijo, sin duda)."},
 
  {"h": "chi, quello che, ciò che",

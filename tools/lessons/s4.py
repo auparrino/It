@@ -31,9 +31,9 @@ LESSONS = {
          ["Faccio leggere il libro a Marco. → Glielo faccio leggere.",
           "Le hago leer el libro a Marco. → Se lo hago leer."]],
   "warn": "El detalle de examen: los pronombres van SIEMPRE delante de *fare*, "
-          "no del infinitivo. *Lo faccio venire*, jamás «faccio venirlo». La "
-          "única excepción es el imperativo informal, donde se pegan a *fare*: "
-          "*fallo entrare*."},
+          "no del infinitivo. *Lo faccio venire*, jamás «faccio venirlo». Solo "
+          "cuando *fare* está en imperativo informal, infinitivo o gerundio se "
+          "pegan a *fare*: *fallo entrare*, *devo farlo venire*."},
 
  {"h": "lasciare: permitir en vez de obligar",
   "p": ["Funciona igual que *fare* pero significa «dejar que». Admite además "
@@ -70,8 +70,8 @@ LESSONS = {
                       "Ho visto Maria uscire."],
                      ["+ che + indicativo", "la circunstancia, con más detalle",
                       "Ho visto che Maria usciva."],
-                     ["+ gerundio", "la acción en curso, sorprendida",
-                      "Ho visto Maria che usciva / uscendo."]]},
+                     ["+ che (relativa)", "la acción en curso, sorprendida",
+                      "Ho visto Maria che usciva."]]},
   "p": ["Con *vedere*, *sentire*, *udire*, *guardare*, *ascoltare*, "
         "*osservare*, *notare*. La más frecuente en el habla es la del "
         "infinitivo."]},
@@ -86,8 +86,8 @@ LESSONS = {
           "que los correctores buscan."},
 
  {"h": "La pasiva de percepción",
-  "p": ["Cuando el infinitivo es pasivo, el italiano usa el participio solo o "
-        "*farsi*: *Si è sentito chiamare* (oyó que lo llamaban), *si è visto "
+  "p": ["Cuando el sujeto es quien recibe la acción, el italiano usa el verbo "
+        "de percepción en forma reflexiva + infinitivo: *Si è sentito chiamare* (oyó que lo llamaban), *si è visto "
         "rifiutare la richiesta* (le rechazaron el pedido, y lo vio)."]},
 
  {"h": "Sentire, un verbo que abarca mucho",
@@ -150,7 +150,7 @@ LESSONS = {
 
  {"h": "Cómo estudiar esto",
   "tip": "No memorices listas: memorizá la frase entera. *Non riesco a "
-         "capire*, *ho smesso di fumare*, *mi sono abituato a alzarmi presto*. "
+         "capire*, *ho smesso di fumare*, *mi sono abituato ad alzarmi presto*. "
          "La preposición viaja pegada al verbo dentro de una frase completa, y "
          "así se recupera automáticamente al hablar."},
 ]},
@@ -241,7 +241,8 @@ LESSONS = {
 
  {"h": "El participio pasado absoluto",
   "p": ["Un participio solo, al principio de la frase, con valor temporal o "
-        "causal. Concuerda con su propio sujeto y es la construcción más culta "
+        "causal. Concuerda con el sustantivo al que se refiere (en los transitivos, "
+        "con el objeto: *letta la lettera*) y es la construcción más culta "
         "de esta semana."],
   "ex": [["Finito il lavoro, siamo usciti.", "Terminado el trabajo, salimos."],
          ["Arrivata la primavera, tutto cambia.",
@@ -275,7 +276,7 @@ LESSONS = {
   "p": ["Los verbos en *-ere* tienen dos series posibles en tres personas. Las "
         "dos son correctas; la de *-etti* es algo más común."]},
 
- {"h": "El patrón 1-3-3 de los irregulares",
+ {"h": "El patrón 1-3-6 de los irregulares",
   "p": ["Casi todos los irregulares del passato remoto lo son SOLO en tres "
         "personas: *io*, *lui/lei* y *loro*. Las otras tres son regulares. Y "
         "las tres irregulares se construyen sobre la misma raíz: "
@@ -341,8 +342,10 @@ LESSONS = {
 
  {"h": "Cómo se conjugan",
   "p": ["El pronombre reflexivo cambia con la persona, y *la*, *ne* o *ci* se "
-        "quedan fijos. En los tiempos compuestos van con *essere*, y con las "
-        "formas en *la* el participio termina en *-a*."],
+        "quedan fijos. En los tiempos compuestos, los que llevan reflexivo van "
+        "con *essere* (*me ne sono andato*, *se l'è presa*); *farcela*, "
+        "*avercela* y *metterci* conservan *avere* (*ce l'ho fatta*, *ci ho "
+        "messo un'ora*). Con las formas en *la* el participio termina en *-a*."],
   "ex": [["Me ne sono andato / Ce ne siamo andati.", "Me fui / Nos fuimos."],
          ["Ce l'ho fatta!", "¡Lo logré!"],
          ["Se l'è presa.", "Se ofendió."],
@@ -366,7 +369,7 @@ LESSONS = {
                      ["non fare che + infinito", "no hacer más que"],
                      ["avere un bel + infinito", "por más que (hai un bel dire)"],
                      ["fare a meno di", "prescindir de"]]},
-  "tip": "*Sto per uscire* = «estoy por salir». Es la única forma de expresar "
+  "tip": "*Sto per uscire* = «estoy por salir». Es la forma normal de expresar "
          "el futuro inminente: *stare* + gerundio NO sirve para eso."},
 ]},
 
@@ -415,15 +418,15 @@ LESSONS = {
          ["Non so se sia vero.", "No sé si es cierto."]],
   "warn": "*Se* del discurso indirecto no es el *se* hipotético: acá "
           "significa «si» de pregunta y admite congiuntivo o indicativo, sin la "
-          "prohibición del condicional. *Non so se verrà* es perfectamente "
-          "correcto."},
+          "prohibición del condicional. *Mi chiedo se sarebbe d'accordo* es "
+          "perfectamente correcto."},
 
  {"h": "Los verbos para reportar",
   "p": ["No repitas *dire*. El C1 se nota en la variedad: *affermare*, "
         "*sostenere*, *dichiarare*, *ammettere*, *negare*, *aggiungere*, "
         "*precisare*, *ribadire*, *suggerire*, *proporre*, *promettere*, "
         "*minacciare*, *lamentarsi*, *far notare*. Ojo: muchos piden "
-        "congiuntivo (*negare che sia*, *sostenere che sia*)."]},
+        "congiuntivo (*negare che sia*, *ammettere che sia*)."]},
 ]},
 
 48: {
@@ -451,7 +454,7 @@ LESSONS = {
          ["L'ho vista ieri, Maria.", "La vi ayer, a María."],
          ["Ce l'hai, il biglietto?", "¿Lo tenés, el boleto?"]]},
 
- {"h": "Frase escindida (c'è... che)",
+ {"h": "Frase escindida (è... che)",
   "p": ["Para poner un elemento en foco exclusivo, igual que el castellano «es "
         "X el que...»."],
   "ex": [["È Marco che ha telefonato.", "Fue Marco el que llamó."],
@@ -577,11 +580,11 @@ LESSONS = {
 
  {"h": "Palabras que el castellano no distingue",
   "p": ["*sapere* (saber un dato) contra *conoscere* (conocer a alguien o un "
-        "lugar). *Portare* (llevar hacia el interlocutor) contra *prendere* "
-        "(traer/agarrar). *Andare* (ir) contra *venire* (venir hacia donde está "
+        "lugar). *Portare* (llevar y también traer: *portami l'acqua*) contra "
+        "*prendere* (tomar, agarrar, ir a buscar). *Andare* (ir) contra *venire* (venir hacia donde está "
         "el que escucha: *vengo da te* = «voy a tu casa»). *Buono* (bueno de "
-        "sabor o de carácter) contra *bravo* (bueno haciendo algo): "
-        "*è un bravo medico*, no «un buon medico»."],
+        "sabor o de carácter) contra *bravo* (hábil, bueno en lo suyo): "
+        "*un bravo cuoco*, *un bravo studente*."],
   "warn": "*Vengo* se usa para moverse hacia el interlocutor, aunque en "
           "castellano digamos «voy». *Vieni alla festa? — Sì, vengo.* Decir "
           "«sì, vado» ahí es un error de lógica deíctica."},

@@ -110,18 +110,26 @@ ITEMS = [
          prompt="Elegí el auxiliar correcto.",
          stem="___ molto ieri sera.", options=["Ho piovuto", "È piovuto",
                                                "Era piovuto"], answer="È piovuto",
-         note="Verbos meteorológicos admiten los dos, pero «essere» es lo estándar."),
+         note="Verbos meteorológicos admiten los dos (è piovuto / ha piovuto); "
+              "«ho piovuto» falla por la persona."),
     dict(id="b2-pass-04", type="cloze", topic="passato",
          prompt="Completá con el passato prossimo.",
          stem="Loro ___ (dovere) partire presto.",
          answer="hanno dovuto",
+         alt=["sono dovuti", "sono dovute"],
          note="Los modales toman el auxiliar del verbo que rigen; con «partire» "
               "también es correcto «sono dovuti partire»."),
     dict(id="b2-pass-05", type="translate", topic="passato",
          prompt="Traducí al italiano.",
          stem="Cuando era chico, iba al mar todos los veranos.",
          answer="Quando ero piccolo, andavo al mare tutte le estati",
-         alt=["Quando ero piccola, andavo al mare tutte le estati"],
+         alt=["Quando ero piccola, andavo al mare tutte le estati",
+              "Quando ero piccolo, andavo al mare ogni estate",
+              "Quando ero piccola, andavo al mare ogni estate",
+              "Da piccolo andavo al mare tutte le estati",
+              "Da piccola andavo al mare tutte le estati",
+              "Da bambino andavo al mare ogni estate",
+              "Da bambina andavo al mare ogni estate"],
          note="Costumbre en el pasado → imperfetto en los dos verbos."),
 
     # --- espressioni idiomatiche ---

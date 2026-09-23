@@ -57,7 +57,7 @@ ITEMS = [
          note="«Andarsene» es pronominal doble: me ne vado, te ne vai, se ne va."),
     dict(id="c1-ne-05", type="translate", topic="ne",
          prompt="Traducí al italiano.",
-         stem="No puedo más. (con andarsene no; usá «farcela»)",
+         stem="No puedo más. (usá «farcela»)",
          answer="Non ce la faccio più",
          note="«Farcela» = arreglárselas/poder. Otro verbo pronominale idiomático."),
 
@@ -108,14 +108,15 @@ ITEMS = [
          prompt="Completá la terminación.",
          stem="Maria si è lava___ le mani.",
          answer="ta",
+         alt=["te"],
          note="Reflexivo con objeto directo propio: en uso corriente concuerda con "
               "el sujeto (lavata). Con el objeto delante en pronombre: «se le è lavate»."),
     dict(id="c1-part-05", type="choice", topic="participio",
          prompt="Elegí la correcta.",
          stem="Quella è la lettera che ho ___ ieri.",
          options=["scritto", "scritta"], answer="scritto",
-         note="Tras «che» relativo la concordancia es opcional; «scritto» es la "
-              "forma no marcada y siempre segura."),
+         note="Tras «che» relativo el participio normalmente no concuerda: «la "
+              "lettera che ho scritto». «Scritta» es literario o anticuado."),
 
     # --- pronomi relativi (cap. 13) ---
     dict(id="c1-rel-01", type="choice", topic="relativi",
