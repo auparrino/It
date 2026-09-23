@@ -215,28 +215,33 @@
     var reached = todayXp >= goal;
     var chestOpen = state.chest === Engine.dayKey();
     var due = Drills.dueCount(course, state, itemMap);
-    var sc = Drills.nextScene(state);
-    var sp = Frasi.progress(sc.id, state.cards);
     var w = course.weeks[Math.min(state.unlocked, 52) - 1];
     var f = Frasi.ofTheDay();
     var known = Frasi.ALL.filter(function (x) { return state.cards[x.id]; }).length;
     var hour = new Date().getHours();
     var hello = hour < 13 ? "Buongiorno" : hour < 19 ? "Buon pomeriggio" : "Buonasera";
 
+    var plan = weekPlan(w), doneN = plan.filter(function (x) { return x.done; }).length;
+    var nm = nextMission(w);
     var html = '<h1>' + hello + '! 👋</h1>' +
       '<p class="lead">' + (state.streak > 1
         ? "Llevás <b>" + dias(state.streak) + "</b> seguidos. No cortes la racha."
-        : !lessonRead(1) ? "Empezás de cero: primero la lección 1, después la práctica."
-        : "Tres minutos alcanzan. Arrancá con una pausa caffè.") + "</p>";
+        : !lessonRead(1) ? "Empezás de cero. Tu camino es el percorso: un paso por vez."
+        : "Tu próximo paso está marcado. Si tenés tres minutos, una pausa caffè.") + "</p>";
 
-    // Primera vez: antes que nada, la lección 1 (teoría antes que práctica).
-    if (!lessonRead(1)) {
-      html += '<button class="card weekcard first" id="firstles">' +
-        '<span class="muted">👋 Primera vez · 5 minutos</span>' +
-        "<b>Empezá por acá: la lección 1</b>" +
-        '<span class="muted">Cómo suena el italiano y tus dos primeros verbos, <i>essere</i> y ' +
-        "<i>avere</i>. Después, la pausa caffè ya tiene con qué practicar.</span></button>";
-    }
+    // Il percorso davanti a tutto: la settimana in corso e la prossima missione.
+    html += '<div class="card weekcard first hero">' +
+      '<span class="muted">🗺️ Il percorso · semana ' + w.week + " · " + esc(w.level) + " · " + doneN + " / " + plan.length + " misiones</span>" +
+      "<b>" + esc(w.title) + "</b>" +
+      '<span class="prog"><i style="width:' + Math.round(doneN / Math.max(1, plan.length) * 100) + '%"></i></span>' +
+      (nm
+        ? '<span class="muted">Siguiente: <b>' + nm.ico + " " + nm.title + "</b></span>" +
+          '<span class="row" style="margin-top:10px"><button class="btn" id="heronext">▶︎ ' + esc(nm.title) + "</button>" +
+          '<button class="tab" data-week="' + w.week + '">Ver la semana</button></span>'
+        : '<span class="muted">Semana completa. ' + (state.unlocked > w.week ? "Seguí con la siguiente." : "Repasá o entrená para abrir la siguiente.") + "</span>" +
+          '<span class="row" style="margin-top:10px"><button class="btn" data-week="' + w.week + '">Ver la semana</button>' +
+          '<button class="tab" id="topercorso">Il percorso</button></span>') +
+      "</div>";
 
     // Obiettivo del giorno + forziere
     html += '<div class="card goal">' +
@@ -252,43 +257,19 @@
         Math.min(100, Math.round(todayXp / goal * 100)) + '%"></i></div>' +
       "</div>";
 
-    // Azioni principali
+    // Azioni rapide: la pausa (mescola la settimana in corso), il ripasso, il lampo.
     html += '<div class="big">' +
       '<button class="bigbtn pausa" id="pausa"><span class="e">☕</span>' +
-        "<b>Pausa caffè</b><small>3 minutos, entre dos correos</small></button>" +
+        "<b>Pausa caffè</b><small>3 minutos con lo de tu semana</small></button>" +
+      '<button class="bigbtn ripasso" id="rev"' + (due ? "" : " disabled") + '>' +
+        '<span class="e">🔁</span><b>Ripasso</b><small>' +
+        (due ? due + " para repasar" : "nada pendiente") + "</small></button>" +
       '<button class="bigbtn lampo" id="lampo"' + (known < 12 ? " disabled" : "") +
         '><span class="e">⚡</span>' +
         "<b>Lampo 60″</b><small>" + (known < 12
           ? "se abre con 12 frases vistas (llevás " + known + ")"
           : "récord: " + ((state.best || {}).lampo || 0)) + "</small></button>" +
-      '<button class="bigbtn scena" id="scena"><span class="e">' + sc.emoji + "</span>" +
-        "<b>" + esc(sc.name) + "</b><small>frases " + sp.seen + "/" + sp.total +
-        "</small></button>" +
-      '<button class="bigbtn ripasso" id="rev"' + (due ? "" : " disabled") + '>' +
-        '<span class="e">🔁</span><b>Ripasso</b><small>' +
-        (due ? due + " para repasar" : "nada pendiente") + "</small></button>" +
       "</div>";
-
-    // Settimana del percorso
-    html += '<button class="card weekcard" data-week="' + w.week + '">' +
-      '<span class="muted">Gramática · semana ' + w.week + " · " + esc(w.level) + "</span>" +
-      "<b>" + esc(w.title) + "</b>" +
-      '<span class="prog"><i style="width:' +
-        Math.min(100, Math.round((weekStat(w.week).right) / 20 * 100)) + '%"></i></span>' +
-      "</button>";
-
-    // Vocabulary: words practised at least once, towards the season goal
-    // (the guide: ~2.000 words by the end of the first trimester).
-    var nWords = Object.keys(state.cards).filter(function (id) {
-      return id.indexOf("v:") === 0 || id.indexOf("b:voc:") === 0;
-    }).length;
-    var wordGoal = state.unlocked <= 13 ? 2000 : state.unlocked <= 26 ? 3500 : 5000;
-    html += '<button class="card weekcard" data-week="' + w.week + '" data-vocab="1">' +
-      '<span class="muted">📚 Palabras practicadas · meta del trimestre ' + wordGoal.toLocaleString("es-AR") + "</span>" +
-      "<b>" + nWords.toLocaleString("es-AR") + " palabras</b>" +
-      '<span class="prog"><i style="width:' + Math.min(100, Math.round(nWords / wordGoal * 100)) + '%"></i></span>' +
-      '<span class="muted">' + (w.vocab && w.vocab.length ? "Esta semana: " + w.vocab.length + " palabras nuevas." : "Sumá con el banco de vocabulario.") + "</span>" +
-      "</button>";
 
     // La clinica: gli errori che si ripetono
     var weakO = Banca.loaded() ? Banca.weakest(state, 2) : [];
@@ -297,15 +278,6 @@
         '<span class="muted">🩺 Clínica de tus errores</span>' +
         "<b>Practicá " + weakO.map(function (w) { return esc((Diagnosi.LABEL[w.cat] || w.cat).toLowerCase()); }).join(" y ") + "</b>" +
         '<span class="muted">12 ejercicios armados con lo que más te cuesta.</span></button>';
-    }
-
-    // La storia di Martín: la prossima puntata
-    var ep = Letture.next(state.letture);
-    if (ep && Letture.isOpen(ep, state.letture, state.unlocked)) {
-      html += '<button class="card weekcard" data-ep="' + ep.id + '">' +
-        '<span class="muted">Lectura · Martín a Bologna · episodio ' + ep.n + " · " +
-          esc(ep.level) + "</span>" +
-        "<b>" + ep.emoji + " " + esc(ep.title) + "</b></button>";
     }
 
     // Frase del giorno
@@ -468,7 +440,7 @@
   }
 
   function renderLettura(ep) {
-    return '<button class="btn ghost" id="lback">← a Leggi</button>' +
+    return '<button class="btn ghost" id="lback">' + (view.epFrom === "briefing" ? "← a la semana" : "← a Leggi") + "</button>" +
       "<h1>" + ep.emoji + " " + esc(ep.title) + "</h1>" +
       '<p class="lead">' + (ep.area ? esc(ep.area) + " · " : "Martín a Bologna · episodio " + ep.n + " · ") +
         esc(ep.level) + "</p>" +
@@ -752,24 +724,105 @@
 
   /* -------------------------------------------------------------- briefing */
 
-  function missions(w, st, nChal) {
+  /* Il percorso è la diva: tutto quello che porta una settimana (lezione,
+     parole, allenamento, frasi, lettura, laboratorio) è una missione della
+     settimana, in ordine.  Le schede Allena e Leggi restano come scorciatoie
+     libere, ma la strada ordinata è questa. */
+  var PONTE_WEEK = { zione: 2, ta: 3, bile: 4, tt: 5, dittonghi: 6, effe: 7, pi: 8, aggio: 9, colte: 10 };
+  var FALSI_WEEK = 11;
+
+  // Martín's episodes open in order: an episode never lands before the one
+  // that precedes it in the story.
+  function readingWeek(ep) {
+    if (ep.series !== "martin") return ep.week;
+    var wk = 1;
+    Letture.ofSeries("martin").forEach(function (e) { if (e.n <= ep.n) wk = Math.max(wk, e.week); });
+    return wk;
+  }
+
+  function weekPlan(w) {
+    var st = weekStat(w.week), out = [];
     var pct = st.attempts ? Math.round(st.right / st.attempts * 100) : 0;
-    var m = function (id, done, ico, title, sub, cls) {
-      return '<button class="mission' + (done ? " done" : "") + (cls ? " " + cls : "") + '" id="' + id + '">' +
-        '<span class="mi">' + (done ? "★" : ico) + "</span><span><b>" + title + "</b><small>" + sub + "</small></span>" +
-        '<span class="go">›</span></button>';
-    };
-    var html = '<div class="card"><h2>Misiones ' + starsHtml(weekStars(w)) + "</h2><div class=\"missions\">";
+    var m = function (o) { out.push(o); };
     if (w.boss) {
-      html += m("play", st.bossPassed, "⚔️", "Vencé al jefe", "85% de aciertos. Superarlo te da las 3 estrellas.", "boss");
-    } else {
-      if (w.lesson) html += m("lez", lessonRead(w.week), "📘", "Jugá la lección",
-        lessonRead(w.week) ? "Hecha" + (state.lessonScore && state.lessonScore[w.week] != null ? " · " + state.lessonScore[w.week] + "% en los chequeos" : "") : "Teoría en pasos cortos, con preguntas.");
-      html += m("play", st.right >= 20, "🎯", "Superá la semana", Math.min(st.right, 20) + " / 20 respuestas correctas" +
-        (st.right >= 20 ? " · semana siguiente abierta" : ""));
-      html += m("play2", st.attempts >= 30 && pct >= 85, "🏆", "Dominala", "85% de acierto en al menos 30 respuestas (vas " +
-        (st.attempts ? pct + "% en " + st.attempts : "0") + ")");
+      m({ kind: "play", done: st.bossPassed, ico: "⚔️", title: "Vencé al jefe",
+          sub: "85% de aciertos. Superarlo te da las 3 estrellas.", cls: "boss" });
+      return out;
     }
+    if (w.lesson) m({ kind: "lez", done: lessonRead(w.week), ico: "📘", title: "Jugá la lección",
+      sub: lessonRead(w.week)
+        ? "Hecha" + (state.lessonScore && state.lessonScore[w.week] != null ? " · " + state.lessonScore[w.week] + "% en los chequeos" : "")
+        : "Teoría en pasos cortos, con preguntas." });
+    if (w.vocab && w.vocab.length) {
+      var seenV = w.vocab.filter(function (v) { return state.cards["v:" + v[0]]; }).length;
+      m({ kind: "vocab", done: seenV >= w.vocab.length, ico: "📚", title: "Palabras de la semana",
+          sub: seenV + " / " + w.vocab.length + " practicadas · primero reconocer, después escribir" });
+    }
+    m({ kind: "play", done: st.right >= 20, ico: "🎯", title: "Superá la semana",
+        sub: Math.min(st.right, 20) + " / 20 respuestas correctas" + (st.right >= 20 ? " · semana siguiente abierta" : "") });
+    if (window.Drills && window.Frasi) Drills.scenesOfWeek(w.week).forEach(function (sc) {
+      var p = Frasi.progress(sc.id, state.cards);
+      m({ kind: "scene", arg: sc.id, done: p.seen >= p.total, ico: sc.emoji, title: "Frases: " + sc.name,
+          sub: p.seen + " / " + p.total + " frases · " + sc.blurb });
+    });
+    if (window.Letture) Letture.SERIES.forEach(function (sr) {
+      Letture.ofSeries(sr.id).forEach(function (ep) {
+        if (readingWeek(ep) !== w.week) return;
+        var d = (state.letture || {})[ep.id];
+        m({ kind: "ep", arg: ep.id, done: !!d, ico: ep.emoji,
+            title: (ep.series === "martin" ? "Lectura: " : "Cultura: ") + ep.title,
+            sub: d ? "Leída · " + d.pct + "%" : esc(ep.level) + " · " + esc(ep.area || ep.grammar || "") +
+                 (ep.series === "martin" ? "" : " · opcional") });
+      });
+    });
+    if (window.Lab) {
+      Lab.RULES.forEach(function (r) {
+        if (PONTE_WEEK[r.id] !== w.week) return;
+        var p = Lab.progress("ponte:" + r.id + ":", state.cards);
+        m({ kind: "ponte", arg: r.id, done: p.seen >= p.total, ico: "🌉", title: "Ponte: " + r.h,
+            sub: p.seen + " / " + p.total + " palabras que ya sabés del español" });
+      });
+      if (w.week === FALSI_WEEK) {
+        var pf = Lab.progress("falso:", state.cards);
+        m({ kind: "falsi", done: pf.seen >= pf.total, ico: "🪤", title: "Falsi amici",
+            sub: pf.seen + " / " + pf.total + " palabras que parecen y no son" });
+      }
+      Lab.CAPIRE.forEach(function (c) {
+        if (c.week !== w.week) return;
+        var pc = Lab.progress("capire:" + c.id + ":", state.cards);
+        m({ kind: "capire", arg: c.id, done: pc.seen >= pc.total, ico: "🎯", title: "Capire: " + c.h,
+            sub: pc.seen + " / " + pc.total + " · leer la gramática antes de producirla" });
+      });
+    }
+    m({ kind: "play2", done: st.attempts >= 30 && pct >= 85, ico: "🏆", title: "Dominala",
+        sub: "85% de acierto en al menos 30 respuestas (vas " + (st.attempts ? pct + "% en " + st.attempts : "0") + ")" });
+    return out;
+  }
+
+  function nextMission(w) {
+    return weekPlan(w).filter(function (x) { return !x.done; })[0] || null;
+  }
+
+  function goMission(kind, arg) {
+    var w = course.weeks[view.week - 1];
+    if (kind === "lez") startLezione();
+    else if (kind === "vocab") startRound("vocab");
+    else if (kind === "play") startRound(w.boss ? "boss" : "round");
+    else if (kind === "play2") startRound("round");
+    else if (kind === "scene" || kind === "ponte" || kind === "falsi" || kind === "capire") startRound(kind, arg);
+    else if (kind === "ep") { view.ep = arg; view.epFrom = "briefing"; view.screen = "lettura"; render(); window.scrollTo(0, 0); }
+  }
+
+  function missions(w, st, nChal) {
+    var plan = weekPlan(w), doneN = plan.filter(function (x) { return x.done; }).length;
+    var html = '<div class="card"><h2>Misiones ' + starsHtml(weekStars(w)) +
+      ' <small class="muted">' + doneN + " / " + plan.length + "</small></h2><div class=\"missions\">";
+    plan.forEach(function (x, k) {
+      html += '<button class="mission' + (x.done ? " done" : "") + (x.cls ? " " + x.cls : "") +
+        '" data-m="' + x.kind + '"' + (x.arg ? ' data-arg="' + esc(x.arg) + '"' : "") + ">" +
+        '<span class="mi">' + (x.done ? "★" : x.ico) + "</span><span><b>" + (k + 1) + ". " + x.title + "</b><small>" + x.sub + "</small></span>" +
+        '<span class="go">›</span></button>';
+    });
     html += "</div>";
     html += '<div class="row" style="margin-top:12px">' +
       (w.lesson ? '<button class="tab" id="teo">📄 Ver la teoría entera</button>' : "") +
@@ -883,6 +936,8 @@
     round = {
       kind: kind,
       arg: arg,
+      from: view.screen === "briefing" || view.screen === "sfide" ||
+            (view.screen === "lettura" && view.epFrom === "briefing") ? "briefing" : null,
       items: items,
       i: 0,
       right: 0,
@@ -1472,7 +1527,8 @@
     }
 
     html += '<div class="row" style="margin-top:16px">' +
-      '<button class="btn" id="again">Otra ronda</button>' +
+      (round.from === "briefing" ? '<button class="btn" id="backweek">← Seguir el percorso</button>' : "") +
+      '<button class="btn' + (round.from === "briefing" ? " ghost" : "") + '" id="again">Otra ronda</button>' +
       '<button class="btn ghost" id="toggi">Inicio</button>' +
       "</div></div>";
     return html;
@@ -1943,6 +1999,18 @@
     on("#vocab", function () { startRound("vocab"); });
     on("#lez", startLezione);
     on("#play2", function () { startRound("round"); });
+    document.querySelectorAll("[data-m]").forEach(function (b) {
+      b.onclick = function () { goMission(b.dataset.m, b.dataset.arg); };
+    });
+    on("#heronext", function () {
+      var w = course.weeks[Math.min(state.unlocked, 52) - 1];
+      var nm = nextMission(w);
+      if (!nm) return;
+      view.week = w.week; view.tab = "percorso";
+      goMission(nm.kind, nm.arg);
+    });
+    on("#topercorso", function () { go("percorso"); });
+    on("#backweek", function () { view.tab = "percorso"; view.screen = "briefing"; render(); window.scrollTo(0, 0); });
     on("#lesnext", lesNext);
     on("#lesquit", function () { view.screen = "briefing"; render(); });
     on("#lesback", function () { view.screen = "briefing"; render(); });
@@ -1955,7 +2023,8 @@
     });
     on("#again", function () { startRound(round.kind, round.arg); });
     on("#quit", function () {
-      if (round.kind === "lettura") go("leggi");
+      if (round.from === "briefing") { view.tab = "percorso"; view.screen = "briefing"; render(); window.scrollTo(0, 0); }
+      else if (round.kind === "lettura") go("leggi");
       else if (["ponte", "falsi", "capire", "scene", "b-voc", "b-forme", "b-tr", "b-gap", "b-err", "clinica"].indexOf(round.kind) >= 0) go("frasi");
       else if (round.kind === "pausa" || round.kind === "review") go("oggi");
       else if (round.kind === "sfida") { view.screen = "sfide"; render(); }
@@ -1972,13 +2041,17 @@
     document.querySelectorAll("[data-ep]").forEach(function (b) {
       b.onclick = function () {
         view.ep = b.dataset.ep;
+        view.epFrom = null;
         view.tab = "leggi";
         view.screen = "lettura";
         render();
         window.scrollTo(0, 0);
       };
     });
-    on("#lback", function () { go("leggi"); });
+    on("#lback", function () {
+      if (view.epFrom === "briefing") { view.epFrom = null; view.tab = "percorso"; view.screen = "briefing"; render(); window.scrollTo(0, 0); }
+      else go("leggi");
+    });
     on("#lquiz", function () { startRound("lettura", view.ep); });
     on("#readall", function () { speak(Letture.byId(view.ep).text, true); });
     on("#readslow", function () { speak(Letture.byId(view.ep).text, true, 0.7); });

@@ -193,8 +193,16 @@ congiuntivo presente en el segundo. Desde la primera semana se atacan las
 interferencias del castellano (dobles, vocales abiertas, *a* personal,
 *essere/avere*).
 
-El percorso es un **camino** de 52 nodos. Cada semana tiene **3 estrellas**, una
-por misión:
+El percorso es **el eje de la app**: la pantalla Oggi muestra la semana en
+curso y su próximo paso, y cada semana lista **en orden** todo lo que trae:
+la lección, las palabras de la semana, el entrenamiento, la escena de frases
+que le corresponde (cada una de las 17 escenas tiene su semana: *Primi passi*
+en la 1, *Al bar* en la 3, *Opinioni* con congiuntivo en la 27), la lectura
+que se abre esa semana, el laboratorio (*Ponte* una regla por semana de la 2 a
+la 10, *Falsi amici* en la 11, *Capire* cuando llega su forma) y la maestría.
+Las pestañas *Allena* y *Leggi* siguen como atajos libres, y la Pausa caffè
+mezcla lo de la semana en curso. Es un **camino** de 52 nodos. Cada semana
+tiene **3 estrellas**, una por misión:
 
 1. **Jugá la lección** — la teoría en pasos cortos (tablas, ejemplos con audio,
    *la trampa* que induce el castellano y *el atajo*), y después de cada bloque

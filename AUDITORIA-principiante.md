@@ -322,7 +322,47 @@ oscuro) es de las más cuidadas que se ven en apps caseras.
 
 ---
 
-## 6. Prioridad sugerida
+## 6. Cambio hecho: el percorso como eje (pedido del 23/9)
+
+Pedido: «que el percorso sea la diva de la app; todo lo demás son buenas
+prácticas, pero tiene que estar dentro del percorso para un aprendizaje
+ordenado». Implementado así:
+
+- **Oggi** arranca con la semana en curso y su **próximo paso** (un solo botón
+  grande: «▶︎ Jugá la lección», después «Palabras de la semana», etc.), con el
+  avance de misiones de la semana. Desaparecen de Oggi las tarjetas sueltas de
+  semana, palabras, escena y lectura: todo vive en la semana.
+- **Cada semana** lista sus misiones **en orden**: 1. lección, 2. palabras,
+  3. superá la semana, 4. frases de la escena que le corresponde, 5. lectura
+  que se abre esa semana, 6. laboratorio (Ponte / Falsi amici / Capire) cuando
+  toca, 7. dominala. El contador «n / m misiones» se ve en Oggi y en la
+  semana.
+- **Escenas con semana** (`SCENE_WEEK` en `docs/js/drills.js`): *Primi passi*
+  1, *Salvavita* 2, *Al bar* 3, *A tavola* 4, *In giro* 5, *Casa e famiglia*
+  6, *In ufficio* 7, *Negozi e salute* 8, *Reazioni* 9, *Connettori* 10,
+  *Falsi amici* 12, *Chiacchiere* 14 (passato prossimo, *piace*), *Sentimenti*
+  15, *Passato e futuro* 19 (futuro), *Opinioni* 27 (congiuntivo), *Parlare di
+  idee* 30, *Citazioni* 40. La Pausa caffè y el botón de escena siguen ese
+  orden: nunca presentan una escena de una semana futura.
+- **Laboratorio con semana**: una regla de *Ponte* por semana de la 2 a la 10,
+  *Falsi amici* en la 11, cada set de *Capire* en la semana de su forma (ya
+  tenían semana).
+- **Lecturas**: cada episodio es misión de la semana en que se abre; los de
+  Martín respetan el orden de la historia (el episodio 4, marcado semana 11,
+  espera al 3, de la semana 12).
+- Salir de una escena, lectura o laboratorio abiertos desde la semana
+  **vuelve a la semana**, y la pantalla de resultado ofrece «← Seguir el
+  percorso».
+- *Allena* y *Leggi* quedan como atajos libres (buenas prácticas, no camino).
+
+Queda para después, en la misma línea: que el nodo del percorso muestre
+«n / m misiones» además de las estrellas, y que el banco (*Traduci*, *Forme*,
+*Coniuga in contesto*) se abra como misión en la semana en que tiene sentido
+(ver 1.3).
+
+---
+
+## 7. Prioridad sugerida
 
 1. **Bug 3.1** (diagnóstico sobre opciones en español, contamina el perfil de
    errores y la Clínica). Una línea en `app.js:1109`.

@@ -398,13 +398,33 @@
   }
 
   /* La scena consigliata: la prima non ancora completata. */
+  /* Il percorso è l'asse del corso: ogni scena di frasi ha la sua settimana,
+     così le frasi arrivano quando la grammatica che usano è già stata vista
+     (le opinioni con congiuntivo dopo la settimana 26, non il primo giorno). */
+  var SCENE_WEEK = { ciao: 1, salva: 2, bar: 3, tavola: 4, giro: 5, casa: 6, lavoro: 7, negozi: 8,
+                     reazioni: 9, ponti: 10, trappole: 12, chiacchiere: 14, cuore: 15, tempo: 19,
+                     opinioni: 27, idee: 30, citazioni: 40 };
+  function sceneWeek(id) { return SCENE_WEEK[id] || 52; }
+  function scenesOfWeek(week) {
+    if (!Frasi) return [];
+    return Frasi.SCENES.filter(function (s) { return sceneWeek(s.id) === week; });
+  }
+
+  /* La scena del momento: la prima incompleta fra quelle già raggiunte nel
+     percorso.  Se sono tutte complete, l'ultima raggiunta (ripasso), mai una
+     di una settimana futura. */
   function nextScene(state) {
     if (!Frasi) return null;
-    for (var i = 0; i < Frasi.SCENES.length; i++) {
-      var p = Frasi.progress(Frasi.SCENES[i].id, state.cards);
-      if (p.seen < p.total) return Frasi.SCENES[i];
+    var unlocked = Math.min((state && state.unlocked) || 1, 52);
+    var cards = (state && state.cards) || {};
+    var ordered = Frasi.SCENES.slice().sort(function (a, b) { return sceneWeek(a.id) - sceneWeek(b.id); });
+    var reached = ordered.filter(function (s) { return sceneWeek(s.id) <= unlocked; });
+    if (!reached.length) reached = ordered.slice(0, 1);
+    for (var i = 0; i < reached.length; i++) {
+      var p = Frasi.progress(reached[i].id, cards);
+      if (p.seen < p.total) return reached[i];
     }
-    return Frasi.SCENES[Math.floor(Math.random() * Frasi.SCENES.length)];
+    return reached[reached.length - 1];
   }
 
   /* Pausa caffè: tre minuti.  Un po' di ripasso, due frasi nuove, qualche
@@ -498,6 +518,8 @@
     conjugationDrill: conjugationDrill,
     conjugationTyped: conjugationTyped,
     buildRound: buildRound,
+    sceneWeek: sceneWeek,
+    scenesOfWeek: scenesOfWeek,
     firstRecognize: firstRecognize,
     vocabSession: vocabSession,
     vocabItem: vocabItem,
