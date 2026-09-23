@@ -182,19 +182,25 @@ aprobar con 85% para desbloquear la siguiente:
 | La Corrente | 27–39 | B1 → B2 | Congiuntivo, periodo hipotético, pasiva, *ne* y *ci* |
 | La Vetta | 40–52 | B2 → C1 | Causativo, formas no finitas, discurso indirecto, registro |
 
-Cada semana trae un *briefing* en español con los puntos clave y la referencia a
-los capítulos de ambos libros, una **lección de teoría** completa, y cuatro modos
-de juego:
+El percorso es un **camino** de 52 nodos. Cada semana tiene **3 estrellas**, una
+por misión:
 
-- **Teoria** — la gramática de la semana explicada en español para
-  hispanohablantes: tablas, ejemplos con audio, y en cada bloque *la trampa*
-  (el error que induce el castellano) y *el atajo* (la regla que conviene
-  memorizar). Leerla da XP y marca la semana.
-- **Allenamento** — 12 preguntas mezclando ejercicios del libro, banco propio y
-  gimnasio de verbos. Cinco vidas, combo multiplicador de XP.
-- **Gimnasio de verbos** — conjugación generada al vuelo, sin repetirse nunca.
-- **Sfide del Maestro** — ejercicios abiertos del *Soluzioni*, autoevaluados.
-- **Boss** — examen acumulativo de la estación, tres vidas, 85% para pasar.
+1. **Jugá la lección** — la teoría en pasos cortos (tablas, ejemplos con audio,
+   *la trampa* que induce el castellano y *el atajo*), y después de cada bloque
+   un **chequeo rápido** generado de su propio material: completar la tabla o
+   elegir la frase bien escrita entre dos trampas con el error típico
+   (auxiliar, concordancia, contracción, dobles). Leer y enseguida recuperar
+   fija más que releer.
+2. **Superá la semana** — 20 respuestas correctas en el *Allenamento*: 12
+   preguntas con ejercicios del libro, banco propio y gimnasio de verbos, cinco
+   vidas y combo de XP.
+3. **Dominala** — 85% de acierto en al menos 30 respuestas.
+
+Los **boss** cierran cada estación: examen acumulativo, tres vidas, 85% para pasar.
+Aparte están el **gimnasio de verbos** (conjugación generada al vuelo) y las
+**Sfide del Maestro**: los desafíos del *Soluzioni* con clave de respuestas,
+cada uno una ronda corregida (elegir, completar varios blancos, traducir del
+español) con la regla explicada al responder; 80% o más gana su estrella.
 
 Además hay una cola de **ripasso** con repetición espaciada (SM-2 simplificado)
 sobre todo lo ya jugado, racha diaria y once medallas.
@@ -205,7 +211,7 @@ sobre todo lo ya jugado, racha diaria y once medallas.
 |---|---|
 | Ejercicios auto-corregibles de *For Dummies* | 871 |
 | Ítems propios de nivel B2/C1 en español | 144 |
-| Desafíos abiertos del *Soluzioni* | 339 grupos / 1.637 sub-ítems |
+| Desafíos del *Soluzioni*, con clave de respuestas | 339 grupos / 1.637 sub-ítems |
 | Lecciones de teoría (una por semana) | 52, con 221 bloques |
 | Tablas gramaticales y ejemplos bilingües | 76 tablas / 349 ejemplos |
 | Verbos en el motor de conjugación | 96 |

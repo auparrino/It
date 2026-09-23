@@ -149,7 +149,7 @@ function visible(u) {
     var c = Object.assign({}, d); delete c.type; delete c.options; return c;
   }
   if (u.kind === "sfida" && d.play) {
-    return { consigna: d.consigna, play: d.play.map(function (x) { var y = Object.assign({}, x); delete y.options; return y; }) };
+    return { consigna: d.consigna, play: d.play.map(function (x) { var y = Object.assign({}, x); delete y.options; delete y.type; delete y.label; return y; }) };
   }
   if (/^testi:/.test(u.id)) return d.filter(function (x) { return !/^[a-z0-9 _-]+$/.test(x.trim()); })
     .map(function (x) { return x.replace(/<[^>]*>/g, " "); });
