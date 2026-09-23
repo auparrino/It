@@ -352,7 +352,7 @@
 
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION in sw.js: test_game checks it). */
-  var APP_VERSION = "v28";
+  var APP_VERSION = "v29";
   function versionLine() {
     return '<p class="muted small version">La Via C1 · versión ' + APP_VERSION + "</p>";
   }
@@ -2728,9 +2728,9 @@
         (ltState === "…" ? '<p class="muted small">⏳ Consultando LanguageTool…</p>'
           : ltState === "error" ? '<p class="muted small">No pude consultar LanguageTool (sin conexión o límite de uso): esta es solo la revisión local.</p>'
           : ltState === "ok" ? '<p class="muted small">✓ Revisado también por LanguageTool.</p>' : "") +
-        (r.ai === "…" ? '<p class="muted small">⏳ La IA está leyendo tu texto…</p>'
+        (r.ai === "…" ? '<p class="muted small">⏳ La IA está leyendo tu texto (suele tardar menos de 10 segundos)…</p>'
           : r.ai === "error" ? '<p class="muted small">No pude usar la IA (' + esc(r.aiErr || "") + "). " +
-              (/clave|400|403/.test(r.aiErr || "") ? "Revisá la clave." : "Probá de nuevo en un rato.") + "</p>"
+              (/clave|401|403/.test(r.aiErr || "") ? "Revisá la clave en Io." : "Las reglas propias ya revisaron el texto; probá la IA de nuevo en un rato.") + "</p>"
           : r.ai === "ok" && r.aiData ? '<div class="aiout">' +
               (r.aiData.comentario ? "<p>🤖 " + esc(r.aiData.comentario) + "</p>" : "") +
               (r.aiData.corregido ? '<p class="muted small">Versión corregida:</p><p class="model it">' + esc(r.aiData.corregido) + "</p>" : "") +
