@@ -1577,16 +1577,37 @@
       fallback: ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-2.5-flash-lite"],
       reasoning: function (m) { return /pro/i.test(m) ? "low" : /2\.5|latest/i.test(m) ? "none" : null; } }
   ];
+  // The error types of the clinic: the AI files each mistake under one of them.
+  var AI_TYPES = {
+    ausiliare: "essere/avere en tiempos compuestos", participio_accordo: "concordancia del participio",
+    accordo: "concordancia de adjetivos y determinantes", genere: "género de un sustantivo", plurale: "plural de un sustantivo",
+    articolo: "artículo (forma, falta o sobra)", articolo_possessivo: "artículo con posesivos", preposizione: "preposición",
+    preposizione_articolata: "preposición + artículo", persona_verbale: "persona o número del verbo",
+    tempo_verbale: "tiempo verbal elegido", congiuntivo: "congiuntivo", periodo_ipotetico: "período hipotético",
+    condizionale: "condicional", irregolare: "forma de verbo irregular", pronome: "pronombre",
+    posizione_pronome: "lugar del pronombre", ci_ne: "ci / ne", a_personale: "«a» personal del castellano",
+    parola_spagnola: "palabra o construcción del castellano", falso_amico: "falso amigo", lessico: "palabra equivocada",
+    ortografia: "ortografía", doppie: "consonantes dobles", accento: "tildes y apóstrofos", ordine: "orden de las palabras",
+    parola_mancante: "falta una palabra", parola_in_piu: "sobra una palabra",
+    stile: "correcto pero poco natural (sugerencia, no error)"
+  };
   function aiPrompt(text, week, task) {
-    return "Sos profesor de italiano para un hispanohablante rioplatense que está en la semana " + week +
-      " de 52 de un curso hasta C1. La consigna era: «" + (task ? task.t : "texto libre") + "».\n" +
-      "Corregí su texto. Marcá TODOS los errores: gramática, concordancia, persona del verbo, artículos, " +
-      "preposiciones, léxico, ortografía, tildes, dobles, castellano metido y lo que un italiano no diría. " +
-      "No marques como error algo correcto solo porque se podría decir mejor.\n" +
-      "Respondé SOLO con JSON: {\"errores\":[{\"mal\":\"fragmento EXACTO copiado del texto (lo más corto posible)\"," +
-      "\"bien\":\"la corrección de ese fragmento\",\"explicacion\":\"una oración en castellano rioplatense con la regla\"}]," +
-      "\"corregido\":\"el texto completo corregido\",\"comentario\":\"una o dos oraciones de devolución, en castellano\"}\n\n" +
-      "Texto:\n" + text;
+    var level = week <= 8 ? "A1" : week <= 18 ? "A2" : week <= 30 ? "B1" : week <= 42 ? "B2" : "C1";
+    return "Sos profesor de italiano, nativo, para un hispanohablante rioplatense que está en la semana " + week +
+      " de 52 de un curso hasta C1 (nivel actual aproximado: " + level + ").\n" +
+      "Consigna del ejercicio: «" + (task ? task.t : "texto libre") + "»." +
+      (task && task.use && task.use.length ? " Estructuras que tenía que usar: " + task.use.map(function (u) { return u[2]; }).join("; ") + "." : "") + "\n\n" +
+      "Corregí su texto con mucho cuidado, oración por oración. Marcá TODOS los errores, sin dejar pasar ninguno: gramática, " +
+      "concordancia, persona y tiempo del verbo, auxiliares, participios, pronombres, artículos, preposiciones, léxico, falsos amigos, " +
+      "castellano metido, ortografía, tildes, dobles, orden. Lo que es correcto pero un italiano no diría así, marcalo como \"stile\". " +
+      "No marques como error algo correcto solo porque se podría decir mejor, y no cambies el contenido.\n" +
+      "Cada error lleva un \"tipo\" de esta lista: " + Object.keys(AI_TYPES).map(function (k) { return k + " (" + AI_TYPES[k] + ")"; }).join(", ") + ".\n" +
+      "Respondé SOLO con JSON: {\"errores\":[{\"mal\":\"fragmento EXACTO copiado del texto, lo más corto posible\"," +
+      "\"bien\":\"la corrección de ese fragmento\",\"tipo\":\"uno de la lista\"," +
+      "\"explicacion\":\"una o dos oraciones en castellano rioplatense: qué regla es y por qué, con el dato que le sirve para no repetirlo\"}]," +
+      "\"corregido\":\"el texto completo corregido\",\"consigna\":\"una oración: si cumplió la consigna y usó bien las estructuras pedidas\"," +
+      "\"comentario\":\"dos o tres oraciones de devolución en castellano: qué hizo bien y qué tiene que practicar\"}\n" +
+      "Los errores van en el orden en que aparecen en el texto.\n\nTexto:\n" + text;
   }
   function aiCheck(text, week, keys, done) { llm(aiPrompt(text, week, TASKS[week]), keys, done); }
 
@@ -1719,7 +1740,7 @@
     (local || []).forEach(function (f) { if (!f.lt) for (var j = 0; j < f.n; j++) taken[f.i + j] = 1; });
     ((data && data.errores) || []).forEach(function (e) {
       var bad = String(e.mal || "").replace(/[’‘`´]/g, "'").trim();
-      if (!bad) return;
+      if (!bad || String(e.bien || "").replace(/[’‘`´]/g, "'").trim().toLowerCase() === bad.toLowerCase()) return;
       var at = low.indexOf(bad.toLowerCase(), from);
       if (at < 0) at = low.indexOf(bad.toLowerCase());
       if (at < 0) return;
@@ -1730,9 +1751,11 @@
       var dup = true;
       for (var j = 0; j < n; j++) if (!taken[first + j]) dup = false;
       if (dup) return;
-      out.push({ i: first, n: n, cat: "ia", soft: false, ai: true,
-                 msg: "IA: " + (e.bien ? "*" + bad + "* → *" + String(e.bien).trim() + "*. " : "") + String(e.explicacion || "").trim() });
+      var tipo = String(e.tipo || "").trim().toLowerCase(), soft = tipo === "stile";
+      out.push({ i: first, n: n, cat: AI_TYPES[tipo] && !soft ? tipo : soft ? "stile" : "ia", soft: soft, ai: true,
+                 msg: (e.bien ? "*" + bad + "* → *" + String(e.bien).trim() + "*. " : "") + (soft ? "(Más natural) " : "") + String(e.explicacion || "").trim() });
     });
+    out.sort(function (x, y) { return x.i - y.i; });
     return out;
   }
 
@@ -1740,7 +1763,7 @@
 
   var api = { TASKS: TASKS, features: features, lint: lint, check: check, markup: markup, weeks: weeks, toks: toks,
               learn: learn, learnCourse: learnCourse, ltCheck: ltCheck, fromLT: fromLT,
-              aiCheck: aiCheck, fromAI: fromAI, aiPrompt: aiPrompt, explain: explain, explainPrompt: explainPrompt, PROVIDERS: PROVIDERS };
+              aiCheck: aiCheck, fromAI: fromAI, aiPrompt: aiPrompt, explain: explain, explainPrompt: explainPrompt, PROVIDERS: PROVIDERS, AI_TYPES: AI_TYPES };
   if (typeof module === "object" && module.exports) module.exports = api;
   else root.Scrivi = api;
 })(typeof window !== "undefined" ? window : globalThis);
