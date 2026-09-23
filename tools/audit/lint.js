@@ -154,7 +154,7 @@ function structure(u) {
 // Campi che contengono errori voluti o chiavi tecniche: esclusi dal lessico.
 function visible(u) {
   var d = u.data;
-  if (u.kind === "trova_errore") return { right: d.right, good: d.good, why: d.why };
+  if (u.kind === "trova_errore") return { right: d.right, good: d.good, alt: d.alt, why: d.why };
   if (u.kind === "esercizio") {
     // Wrong options are wrong on purpose: only the right answer must be real Italian.
     var c = Object.assign({}, d); delete c.type; delete c.options; return c;
