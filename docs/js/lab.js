@@ -19,7 +19,7 @@
   // [spagnolo, italiano, accettate in più?]
   var RULES = [
     { id: "zione", h: "-ción → -zione",
-      body: "Casi todas las palabras en **-ción** tienen gemela italiana en **-zione**, y son femeninas: *la nazione*, *la stazione*. Ojo: la *c* antes de la *t* se vuelve doble *t* (*acción → azione*, *atención → attenzione*).",
+      body: "Casi todas las palabras en **-ción** tienen gemela italiana en **-zione**, y son femeninas: *la nazione*, *la stazione*. Ojo: **-cción** pasa a **-zione** (*acción → azione*, *lección → lezione*), y a veces se dobla otra consonante (*atención → attenzione*).",
       ex: [["nación", "nazione"], ["atención", "attenzione"]],
       words: [["nación", "nazione"], ["estación", "stazione"], ["información", "informazione"],
               ["situación", "situazione"], ["relación", "relazione"], ["educación", "educazione"],
@@ -43,10 +43,10 @@
       words: [["posible", "possibile"], ["imposible", "impossibile"], ["terrible", "terribile"],
               ["increíble", "incredibile"], ["responsable", "responsabile"], ["probable", "probabile"],
               ["flexible", "flessibile"], ["horrible", "orribile"], ["visible", "visibile"],
-              ["sensible", "sensibile"], ["amable", "amabile"], ["notable", "notevole"]] },
+              ["sensible", "sensibile"], ["amable", "amabile"], ["admirable", "ammirabile"]] },
 
     { id: "tt", h: "-ct- / -pt- → -tt-",
-      body: "Donde el español tiene **ct** o **pt**, el italiano dobla la **t**: *perfecto → perfetto*, *septiembre → settembre*. Lo mismo con **x** → **ss**: *exacto → esatto*.",
+      body: "Donde el español tiene **ct** o **pt**, el italiano dobla la **t**: *perfecto → perfetto*, *septiembre → settembre*. Lo mismo con **x** → **ss**: *exacto → esatto*. Y a veces donde el español ya simplificó el grupo latino: *escrito → scritto*, *objeto → oggetto*.",
       ex: [["perfecto", "perfetto"], ["exacto", "esatto"]],
       words: [["perfecto", "perfetto"], ["efecto", "effetto"], ["director", "direttore"],
               ["actor", "attore"], ["exacto", "esatto"], ["proyecto", "progetto"],
@@ -70,7 +70,7 @@
               ["hormiga", "formica"], ["hongo", "fungo"], ["hacer", "fare"], ["hijo", "figlio"]] },
 
     { id: "pi", h: "pl / cl / fl / bl / ll → pi / chi / fi / bi",
-      body: "Después de consonante, la **l** latina se volvió **i** en italiano: *plaza → piazza*, *blanco → bianco*. La **ll-** del español suele ser **pi-** o **chi-**: *lleno → pieno*, *llave → chiave*.",
+      body: "Después de consonante, la **l** latina se volvió **i** en italiano: *plaza → piazza*, *blanco → bianco*. La **ll-** del español suele ser **pi-**, **chi-** o **fi-**: *lleno → pieno*, *llave → chiave*, *llama → fiamma*.",
       ex: [["plaza", "piazza"], ["llave", "chiave"]],
       words: [["plaza", "piazza"], ["plato", "piatto"], ["pluma", "piuma"], ["blanco", "bianco"],
               ["flor", "fiore"], ["llave", "chiave"], ["lleno", "pieno"], ["llover", "piovere"],
@@ -119,7 +119,7 @@
     ["rumore", "ruido", "rumor", "El rumor es *voce* o *pettegolezzo*."],
     ["guardare", "mirar", "guardar", "Guardar es *conservare* o *mettere via*."],
     ["fermare", "detener / parar", "firmar", "Firmar es *firmare*."],
-    ["autista", "chofer", "autista (TEA)", "*L'autista del bus* = el colectivo lo maneja el chofer."],
+    ["autista", "chofer", "autista (TEA)", "*L'autista del bus* = el chofer del colectivo."],
     ["bravo", "bueno / hábil", "bravo (enojado)", "*È bravo in matematica* = es bueno en matemática."],
     ["nudo", "desnudo", "nudo", "El nudo es *nodo*."],
     ["negozio", "tienda / negocio", "negocio (empresa)", "Una empresa es *azienda* o *ditta*."],
@@ -200,7 +200,7 @@
               ["Dovresti riposare.", "cortés / suave"], ["Devi riposare.", "directo"]] },
 
     { id: "pronomi", h: "¿A quién se refiere?",
-      body: "Los pronombres van **antes** del verbo conjugado y marcan género y número: *lo* (a él / eso), *la* (a ella), *li* (a ellos), *le* (a ellas), y *gli* = **a él** (indirecto). Mirá solo el pronombre.",
+      body: "Los pronombres van **antes** del verbo conjugado y marcan género y número: *lo* (a él / eso), *la* (a ella), *li* (a ellos), *le* (a ellas); y en el indirecto, *gli* = **a él** y *le* = a ella. Mirá solo el pronombre.",
       q: "¿A qué se refiere el pronombre?",
       opts: ["al libro", "a la carta", "a los libros", "a las cartas"],
       items: [["Lo leggo stasera.", "al libro"], ["La leggo stasera.", "a la carta"],

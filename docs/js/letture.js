@@ -240,7 +240,7 @@
       text:
         "È passato un anno da quando Martín è arrivato a Bologna. Alla fine ha accettato " +
         "il lavoro e fa il pendolare: ogni mattina prende il treno delle 7:40 per Modena. " +
-        "Stasera festeggia con Giulia nello stesso bar dove si sono conosciuti.\n\n" +
+        "Stasera festeggia con Giulia nel bar sotto casa, dove hanno preso il primo caffè insieme.\n\n" +
         "«Se non avessi trovato te come coinquilina, non avrei mai imparato l'italiano " +
         "così in fretta» le dice.\n" +
         "«E se tu non fossi venuto, io non avrei mai assaggiato l'asado» risponde lei.\n\n" +
@@ -275,7 +275,7 @@
         "in Paradiso lo accompagna Beatrice, la donna che ha amato da giovane.\n\n" +
         "Dante muore in esilio a Ravenna nel 1321, lontano dalla sua città. Ancora oggi " +
         "molti italiani sanno a memoria il primo verso: «Nel mezzo del cammin di nostra " +
-        "vita». Per questo lo chiamano il padre della lingua italiana.",
+        "vita». Non a caso lo chiamano il padre della lingua italiana.",
       gloss: { volgare: "lengua vulgar, la hablada por el pueblo", dotti: "sabios, eruditos",
                scelta: "elección", poema: "poema", regni: "reinos", guida: "guía",
                accompagna: "acompaña", esilio: "exilio", cammin: "(cammino) camino",
@@ -362,13 +362,13 @@
         ["¿Qué quiere decir la frase de d'Azeglio?", ["que faltaba crear una identidad común", "que los italianos no querían la unidad", "que Italia era demasiado grande", "que había que hacer la guerra"], "que faltaba crear una identidad común"]
       ],
       hunt: { label: "Tocá los lugares geográficos", targets:
-        ["quarto", "genova", "marsala", "sicilia", "teano", "roma"] } },
+        ["quarto", "genova", "marsala", "sicilia", "teano", "italia", "roma"] } },
 
     { id: "c-gramsci", series: "cultura", area: "Sociologia", n: 5, level: "B2", emoji: "📓",
       title: "Gramsci e l'egemonia", grammar: "passato remoto",
       text:
         "Antonio Gramsci, nato in Sardegna nel 1891, fu tra i fondatori del Partito " +
-        "Comunista d'Italia. Nel 1926 il regime fascista lo arrestò e lo condannò a più " +
+        "Comunista d'Italia. Nel 1926 il regime fascista lo arrestò e nel 1928 lo condannò a più " +
         "di vent'anni di carcere. «Per vent'anni dobbiamo impedire a questo cervello di " +
         "funzionare», avrebbe detto il pubblico ministero.\n\n" +
         "Eppure in prigione Gramsci scrisse migliaia di pagine: i Quaderni del carcere. " +
@@ -400,7 +400,7 @@
         "vuole solo commuovere il lettore: vuole che capisca come un sistema possa " +
         "distruggere l'umanità delle persone.\n\n" +
         "Molti anni dopo, nei Sommersi e i salvati, riflette sulla «zona grigia», lo " +
-        "spazio ambiguo tra vittime e carnefici. «È avvenuto, e quindi può accadere di " +
+        "spazio ambiguo tra vittime e carnefici. «È avvenuto, quindi può accadere di " +
         "nuovo», scrisse: per questo ricordare è un dovere.",
       gloss: { chimico: "químico", ebreo: "judío", sopravvisse: "sobrevivió",
                mestiere: "oficio", bisogno: "necesidad", limpida: "límpida, clara",
@@ -422,7 +422,7 @@
         "persone lasciano i campi del Sud per andare a lavorare a Torino e a Milano. " +
         "Nelle case arrivano il frigorifero, la lavatrice e soprattutto la " +
         "televisione.\n\n" +
-        "Nel 1954 la Rai comincia le trasmissioni, e un programma come Non è mai troppo " +
+        "Nel 1954 la Rai comincia le trasmissioni televisive, e un programma come Non è mai troppo " +
         "tardi insegna a leggere e a scrivere agli adulti. Secondo il linguista Tullio " +
         "De Mauro, la televisione ha fatto moltissimo per l'unità della lingua.\n\n" +
         "Ma il boom ha anche un lato oscuro: le periferie crescono senza regole, e Pier " +

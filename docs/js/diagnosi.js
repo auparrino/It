@@ -304,7 +304,7 @@
     // 5. Grafia spagnola (ñ, ll, que, j…)
     var graw = g.replace(/ñ/g, "\u0000");
     var spellings = DATA.spelling.concat([
-      ["lli", "gli", "El sonido ll se escribe gli: famiglia, figlio."],
+      ["lli", "gli", "El sonido de la ll tradicional (no la rioplatense) se escribe gli: famiglia, figlio."],
       ["aqu", "acqu", "*Acqua* y sus derivados se escriben con cq: acqua, acquisto."],
       ["ge", "ghe", "Para el sonido /ge/ se escribe *ghe* (spaghetti, laghetto); *ge* suena /dʒe/."],
       ["gi", "ghi", "Para el sonido /gi/ se escribe *ghi* (laghi, ghiaccio); *gi* suena /dʒi/."],
@@ -519,10 +519,10 @@
     if (TONIC.indexOf(e) >= 0 && PREPS_ALL.indexOf(prev) >= 0) return { cat: "pronome", slip: false,
       hint: "Después de una preposición va otra forma del pronombre.",
       explain: "Después de preposición van los pronombres tónicos: " + it(prev + " " + e) +
-        " (per te, con me, senza di lui). *Mi, ti* solo van pegados al verbo." };
+        " (per te, con me, senza di lui). *Mi, ti* (átonos) solo van junto al verbo." };
     if ((g === "le" && e === "gli") || (g === "gli" && e === "le")) return { cat: "pronome", slip: false,
       hint: "¿El pronombre se refiere a un hombre o a una mujer?",
-      explain: "Objeto indirecto: *gli* = a él (y, en lo coloquial, a ellos); *le* = a ella. Acá: " + it(e) + "." };
+      explain: "Objeto indirecto: *gli* = a él (y, en el uso corriente, también a ellos); *le* = a ella. Acá: " + it(e) + "." };
     if (ATONE.indexOf(e) >= 0 && ATONE.indexOf(g) >= 0) {
       var dir = ["lo", "la", "li", "le"], ind = ["gli", "le"];
       return { cat: "pronome", slip: false,
@@ -541,7 +541,7 @@
     ["essere", "stare", "Acá va *stare*: salud (sto bene), acción en curso (sto mangiando), *stare per* y quedarse (sta' zitto)."],
     ["conoscere", "sapere", "*Sapere* = saber un dato o hacer algo (so che…, so nuotare); *conoscere* = conocer personas, lugares, cosas."],
     ["sapere", "conoscere", "*Conoscere* = conocer personas, lugares o cosas; *sapere* = saber un dato o saber hacer."],
-    ["guardare", "vedere", "*Vedere* = ver (percibir); *guardare* = mirar con intención. No vedo niente = no veo nada."],
+    ["guardare", "vedere", "*Vedere* = ver (percibir); *guardare* = mirar con intención. Non vedo niente = no veo nada."],
     ["vedere", "guardare", "*Guardare* = mirar con intención (guardo la TV); *vedere* = ver."],
     ["ascoltare", "sentire", "*Sentire* = oír (y sentir); *ascoltare* = escuchar con atención. Non ti sento = no te escucho/oigo."],
     ["sentire", "ascoltare", "*Ascoltare* = escuchar con atención (ascolto musica); *sentire* = oír."],
@@ -552,7 +552,7 @@
     ["uscire", "salire", "*Salire* = subir (salgo sul treno); *uscire* = salir."],
     ["restare", "rimanere", "*Rimanere* y *restare* son casi sinónimos (quedarse); acá va *rimanere*."],
     ["fare", "rendere", "«Hacer + adjetivo» (hacer feliz) es *rendere*: mi rendi felice."],
-    ["chiedere", "domandare", "Acá va *domandare* (preguntar)."],
+    ["chiedere", "domandare", "*Chiedere* y *domandare* son casi sinónimos (preguntar); acá va *domandare*."],
     ["domandare", "chiedere", "*Chiedere* = pedir y preguntar."],
     ["pensare", "credere", "*Credere* = creer; *pensare* = pensar."],
     ["sperare", "aspettare", "«Esperar» a alguien o algo es *aspettare* (aspetto il treno); *sperare* es tener esperanza (spero di sì)."],
@@ -958,7 +958,7 @@
     }
     if (ARTICLES[w] && POSSESSIVE.indexOf(next) >= 0 && FAMILY.indexOf(next2) >= 0) return { cat: "articolo_possessivo", slip: false,
       hint: "Con este posesivo sobra algo.",
-      explain: "Con familiares en singular el posesivo va sin artículo: *" + next + " " + next2 + "*. Pero sí va en plural o con diminutivo: *i miei genitori, la mia mamma*." };
+      explain: "Con familiares en singular el posesivo va sin artículo: *" + next + " " + next2 + "*. Pero sí va en plural o con diminutivo: *i miei genitori, la mia sorellina*." };
     if (SUBJECTS.indexOf(w) >= 0) return { cat: "soggetto", slip: true,
       hint: "No hace falta el pronombre sujeto.",
       explain: "No hace falta " + it(w) + ": el verbo ya dice quién. Se usa solo para contrastar o enfatizar." };
