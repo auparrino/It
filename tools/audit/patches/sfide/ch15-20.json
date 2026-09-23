@@ -1887,8 +1887,7 @@
      "Tranne",
      "Eccetto",
      "Salvo",
-     "Fuorché",
-     "Eccetto che"
+     "Fuorché"
     ],
     "note": "A parte = aparte de."
    },
@@ -4206,8 +4205,10 @@
     "type": "cloze",
     "stem": "Angelo, ti sei mess___ la giacca? – No, non me la sono mess___, fa troppo caldo.",
     "answer": "o | a",
-    "alt": [],
-    "note": "Con reflexivo concuerda con el sujeto (messo); con la delante, con el objeto (messa)."
+    "alt": [
+     "a | a"
+    ],
+    "note": "Con reflexivo concuerda con el sujeto (messo; también se admite messa, con el objeto); con la delante, con el objeto (messa)."
    }
   ]
  },
@@ -4731,7 +4732,8 @@
      "Ieri siamo andati ad una festa. È stata una serata meravigliosa.",
      "Ieri siamo andate a una festa. È stata una serata meravigliosa.",
      "Ieri siamo andati a una festa, è stata una serata meravigliosa.",
-     "Ieri siamo andati a una festa è stata una serata meravigliosa."
+     "Ieri siamo andati a una festa è stata una serata meravigliosa.",
+     "Ieri siamo andati a una festa. È stata una notte meravigliosa."
     ],
     "note": "Valoración de un hecho terminado: passato prossimo (è stata)."
    },

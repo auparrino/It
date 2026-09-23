@@ -42,7 +42,7 @@ ITEMS = [
     # --- negazioni ed esclamazioni (settimana 23) ---
     dict(id="a2-neg-01", type="choice", topic="negazioni", level="B1",
          prompt="Elegí la forma correcta.",
-         stem="Non ho visto ___.", options=["nessuno", "qualcuno", "qualche"],
+         stem="Non ho visto ___.", options=["nessuno", "nessun", "qualche"],
          answer="nessuno",
          note="Doble negación obligatoria: non + nessuno."),
     dict(id="a2-neg-02", type="choice", topic="negazioni", level="B1",

@@ -2041,16 +2041,20 @@
     "type": "cloze",
     "stem": "Il vino è buono, ___ vuole?",
     "answer": "ne",
-    "alt": [],
-    "note": "«Ne vuole?» = ¿quiere un poco?: ne tiene valor partitivo."
+    "alt": [
+     "lo"
+    ],
+    "note": "«Ne vuole?» = ¿quiere un poco?: ne tiene valor partitivo («lo vuole?» sería todo el vino)."
    },
    {
     "label": "d",
     "type": "cloze",
     "stem": "Le salsicce sono eccezionali, ___ volete?",
     "answer": "ne",
-    "alt": [],
-    "note": "«Ne volete?» = ¿quieren algunas?"
+    "alt": [
+     "le"
+    ],
+    "note": "«Ne volete?» = ¿quieren algunas? («le volete?» serían todas)."
    }
   ]
  },

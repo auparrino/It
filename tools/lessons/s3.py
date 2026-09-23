@@ -101,7 +101,7 @@ LESSONS = {
   "warn": "*Credo che sia tardi* = «Creo que ES tarde». *Penso che tu abbia "
           "ragione* = «Pienso que TENÉS razón». *Mi sembra che non stia bene* = "
           "«Me parece que no ESTÁ bien». En castellano estos verbos, en "
-          "afirmativa, van con indicativo; en italiano cuidado piden congiuntivo. "
+          "afirmativa, van con indicativo; en italiano piden congiuntivo. "
           "Es el error que más rápido identifica a un hispanohablante, "
           "y el más fácil de corregir porque la regla es muy estable.",
   "ex": [["Credo che abbia ragione.", "Creo que tiene razón."],

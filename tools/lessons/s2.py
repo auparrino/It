@@ -669,7 +669,7 @@ LESSONS = {
                       "cortesía, deseo, noticia no confirmada"]]}},
 
  {"h": "Auxiliar: la decisión de cada frase",
-  "p": ["*essere* si el verbo es de movimiento, de cambio de estado, "
+  "p": ["*essere* si el verbo es de desplazamiento hacia o desde un lugar (andare, venire, partire; no camminare ni viaggiare), de cambio de estado, "
         "reflexivo, pronominal, impersonal, o pertenece a la familia de "
         "*piacere*. Con *essere*, el participio concuerda con el sujeto. "
         "*avere* en todo lo demás, y ahí el participio solo concuerda si hay un "

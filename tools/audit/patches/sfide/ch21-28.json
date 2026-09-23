@@ -4164,12 +4164,9 @@
     "label": "e",
     "type": "translate",
     "stem": "Se lo presenté a mis padres.",
-    "answer": "Gli ho fatto conoscere i miei genitori.",
-    "alt": [
-     "L'ho fatto conoscere ai miei genitori.",
-     "Lo ho fatto conoscere ai miei genitori."
-    ],
-    "note": "Far conoscere = presentar."
+    "answer": "L'ho fatto conoscere ai miei genitori.",
+    "alt": [],
+    "note": "Far conoscere = presentar. «Se lo presenté» = lo presenté a él (lo) a mis padres (se): l'ho fatto conoscere ai miei genitori."
    },
    {
     "label": "f",
@@ -4350,11 +4347,11 @@
     "label": "a",
     "type": "translate",
     "stem": "¿Ayer viste al abuelo trepar al árbol?",
-    "answer": "Ieri hai visto il nonno arrampicarsi all'albero?",
+    "answer": "Ieri hai visto il nonno arrampicarsi sull'albero?",
     "alt": [
-     "Hai visto ieri il nonno arrampicarsi all'albero?",
-     "Ieri hai visto il nonno arrampicarsi sull'albero?",
-     "Hai visto ieri il nonno arrampicarsi sull'albero?"
+     "Hai visto ieri il nonno arrampicarsi sull'albero?",
+     "Ieri hai visto il nonno arrampicarsi all'albero?",
+     "Hai visto ieri il nonno arrampicarsi all'albero?"
     ],
     "note": "Infinitivo: se percibe la acción entera."
    },
@@ -4502,7 +4499,7 @@
   ]
  },
  "r27-04d": {
-  "consigna": "Elegí o completá con stare a + infinitivo o stare + gerundio. En las dos oraciones para escribir valen las dos formas.",
+  "consigna": "Elegí la forma más natural o completá con stare a + infinitivo o stare + gerundio. En las dos oraciones para escribir valen las dos formas.",
   "interactive": true,
   "items": [
    {
