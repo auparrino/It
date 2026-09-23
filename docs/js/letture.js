@@ -261,6 +261,71 @@
       hunt: { label: "Tocá el verbo de cada condición con «se» (congiuntivo)", targets:
         ["avessi", "fossi", "dovessi"] } },
 
+    /* La quarta stagione: tre puntate C1, una ogni quattro settimane, così
+       la strada verso l'esame ha ancora una storia da leggere. */
+    { id: "ep11", week: 41, n: 11, level: "C1", emoji: "🧑‍💼", title: "Il capo nuovo",
+      grammar: "causativo e verbi di percezione",
+      text:
+        "A settembre in azienda arriva un direttore nuovo, Fabrizio, e in una settimana fa rifare a tutti " +
+        "i rapporti del trimestre. Non lascia parlare nessuno nelle riunioni e ha fatto aspettare " +
+        "Martín un'ora davanti al suo ufficio.\n\n" +
+        "«Lo sento urlare dal corridoio» dice Giulia al telefono. «Non lasciarti mettere i piedi in testa.»\n" +
+        "Martín ci pensa. Il giorno dopo si fa ricevere alle otto, prima di tutti, e gli porta un " +
+        "piano di lavoro di una pagina. Fabrizio lo guarda leggere in silenzio, poi sorride per la prima volta.\n\n" +
+        "«Finalmente qualcuno che mi fa risparmiare tempo» dice. Da quel giorno lo fa sedere accanto a sé.",
+      gloss: { azienda: "empresa", rifare: "rehacer", rapporti: "informes", trimestre: "trimestre",
+               urlare: "gritar", corridoio: "pasillo", "testa": "(mettere i piedi in testa) pisotear, abusar",
+               ricevere: "(farsi ricevere) conseguir que lo atiendan", risparmiare: "ahorrar", accanto: "al lado" },
+      questions: [
+        ["¿Qué hace Fabrizio en su primera semana?", ["hace rehacer los informes", "despide a Martín", "organiza una fiesta", "se va de vacaciones"], "hace rehacer los informes"],
+        ["¿Qué le aconseja Giulia?", ["que no se deje pisotear", "que renuncie", "que grite también", "que llegue tarde"], "que no se deje pisotear"],
+        ["¿Cómo termina?", ["Fabrizio lo sienta a su lado", "Martín cambia de trabajo", "Fabrizio se va", "nadie habla más"], "Fabrizio lo sienta a su lado"]
+      ],
+      hunt: { label: "Tocá las formas de «fare» y «lasciare» seguidas de infinitivo (causativo)", targets:
+        ["fa", "fatto", "lascia", "lasciarti"] } },
+
+    { id: "ep12", week: 45, n: 12, level: "C1", emoji: "🍷", title: "La cena di lavoro",
+      grammar: "gerundio e participio",
+      text:
+        "Essendo l'unico straniero della squadra, a Martín tocca il brindisi della cena di fine anno. " +
+        "Avendo preparato due righe in italiano, le legge dal telefono, ma sbagliando una doppia: " +
+        "dice «pena» invece di «penna» e tutti ridono.\n\n" +
+        "Finita la cena, Fabrizio lo prende da parte. «Sapendo quanto ti costa, ti ringrazio il doppio.» " +
+        "Martín, arrossendo, risponde che dopo un anno una doppia sbagliata è quasi un lusso.\n\n" +
+        "Tornando a casa a piedi sotto i portici, pensa che la lingua non si impara: si abita.",
+      gloss: { squadra: "equipo", brindisi: "brindis", righe: "renglones", doppia: "consonante doble",
+               ridono: "ríen", "parte": "(prendere da parte) llevar aparte", arrossendo: "sonrojándose",
+               lusso: "lujo", portici: "soportales", abita: "(si abita) se habita, se vive" },
+      questions: [
+        ["¿Por qué le toca el brindis a Martín?", ["porque es el único extranjero", "porque es el jefe", "porque cumple años", "porque lo pidió"], "porque es el único extranjero"],
+        ["¿Qué error comete?", ["una consonante doble", "un verbo en pasado", "el nombre del jefe", "el número de mesa"], "una consonante doble"],
+        ["¿Qué piensa al volver?", ["que la lengua se habita, no se aprende", "que quiere volver a Buenos Aires", "que odia los brindis", "que Fabrizio es malo"], "que la lengua se habita, no se aprende"]
+      ],
+      hunt: { label: "Tocá todos los gerundios (essendo, sapendo…)", targets:
+        ["essendo", "avendo", "sbagliando", "sapendo", "arrossendo", "tornando"] } },
+
+    { id: "ep13", week: 49, n: 13, level: "C1", emoji: "✉️", title: "L'ultima lettera",
+      grammar: "registro alto e coesione",
+      text:
+        "Gentile professoressa Bianchi,\n\n" +
+        "le scrivo affinché sappia quanto le sono grato. Nonostante il mio italiano fosse, all'inizio, " +
+        "un impasto di spagnolo e buona volontà, lei non mi ha mai corretto con impazienza. Tuttavia " +
+        "non mi ha nemmeno lasciato passare una preposizione sbagliata, e di questo la ringrazio.\n\n" +
+        "Qualora l'università organizzasse ancora il corso per stranieri, sarei lieto di tornare " +
+        "come volontario. Infatti, dopo un anno, mi sono reso conto che si impara davvero solo " +
+        "insegnando a qualcun altro.\n\n" +
+        "Con stima e riconoscenza,\nMartín",
+      gloss: { affinché: "para que (+ congiuntivo)", grato: "agradecido", nonostante: "a pesar de que",
+               impasto: "mezcla, masa", tuttavia: "sin embargo", nemmeno: "ni siquiera", qualora: "en caso de que (+ congiuntivo)",
+               lieto: "contento (registro alto)", volontario: "voluntario", stima: "estima", riconoscenza: "gratitud" },
+      questions: [
+        ["¿A quién le escribe Martín?", ["a su profesora", "a Fabrizio", "a Giulia", "al Comune"], "a su profesora"],
+        ["¿Qué agradece?", ["que lo corrigiera sin impaciencia y sin dejar pasar errores", "que le regalara un libro", "que le diera trabajo", "que le enseñara a cocinar"], "que lo corrigiera sin impaciencia y sin dejar pasar errores"],
+        ["¿Qué descubrió después de un año?", ["que se aprende enseñando", "que el italiano es fácil", "que no quiere volver", "que odia las preposiciones"], "que se aprende enseñando"]
+      ],
+      hunt: { label: "Tocá los conectores de registro alto (affinché, nonostante, tuttavia, qualora, infatti)", targets:
+        ["affinché", "nonostante", "tuttavia", "qualora", "infatti"] } },
+
     /* ---------------------------------------------- Cultura: storia, idee, libri.
        Contenuto che interessa (Hidi & Renninger 2006): l'interesse per il tema
        aumenta comprensione e memoria.  Si scelgono liberamente. */
@@ -289,7 +354,7 @@
       hunt: { label: "Tocá los tres reinos del viaje (cada vez que aparecen)", targets:
         ["inferno", "purgatorio", "paradiso"] } },
 
-    { id: "c-machiavelli", week: 37, series: "cultura", area: "Filosofia", n: 2, level: "B1", emoji: "🦊",
+    { id: "c-machiavelli", week: 38, series: "cultura", area: "Filosofia", n: 2, level: "B1", emoji: "🦊",
       title: "Machiavelli e Il Principe", grammar: "passato prossimo e remoto",
       text:
         "Nel 1513 Niccolò Machiavelli è fuori dalla politica. I Medici sono tornati al " +
@@ -365,7 +430,7 @@
       hunt: { label: "Tocá los lugares geográficos", targets:
         ["quarto", "genova", "marsala", "sicilia", "teano", "italia", "roma"] } },
 
-    { id: "c-gramsci", week: 37, series: "cultura", area: "Sociologia", n: 5, level: "B2", emoji: "📓",
+    { id: "c-gramsci", week: 45, series: "cultura", area: "Sociologia", n: 5, level: "B2", emoji: "📓",
       title: "Gramsci e l'egemonia", grammar: "passato remoto",
       text:
         "Antonio Gramsci, nato in Sardegna nel 1891, fu tra i fondatori del Partito " +
@@ -390,7 +455,7 @@
       hunt: { label: "Tocá los verbos en passato remoto", targets:
         ["fu", "arrestò", "condannò", "scrisse", "morì"] } },
 
-    { id: "c-levi", week: 37, series: "cultura", area: "Letteratura", n: 6, level: "B2", emoji: "🕯️",
+    { id: "c-levi", week: 42, series: "cultura", area: "Letteratura", n: 6, level: "B2", emoji: "🕯️",
       title: "Primo Levi, testimone", grammar: "passato remoto e congiuntivo",
       text:
         "Primo Levi era un chimico ebreo di Torino. Nel 1944 fu deportato ad Auschwitz, " +
@@ -464,7 +529,7 @@
       hunt: { label: "Tocá los nombres de ciudades", targets:
         ["zaira", "despina", "ottavia", "venezia"] } },
 
-    { id: "c-beccaria", week: 34, series: "cultura", area: "Filosofia", n: 9, level: "B2", emoji: "⚖️",
+    { id: "c-beccaria", week: 36, series: "cultura", area: "Filosofia", n: 9, level: "B2", emoji: "⚖️",
       title: "Beccaria contro la pena di morte", grammar: "presente storico e imperfetto",
       text:
         "Nel 1764 un giovane nobile milanese di ventisei anni, Cesare Beccaria, pubblica " +
@@ -489,7 +554,7 @@
       hunt: { label: "Tocá las palabras del derecho penal", targets:
         ["delitti", "pene", "tortura", "pena", "crimine"] } },
 
-    { id: "c-ginzburg", week: 37, series: "cultura", area: "Letteratura", n: 10, level: "B1", emoji: "🍽️",
+    { id: "c-ginzburg", week: 48, series: "cultura", area: "Letteratura", n: 10, level: "B1", emoji: "🍽️",
       title: "Natalia Ginzburg, Lessico famigliare", grammar: "imperfetto",
       text:
         "«Non fate malagrazie!» gridava il padre a tavola. Con frasi come questa comincia " +
@@ -613,7 +678,7 @@
     { id: "martin", name: "Martín a Bologna", emoji: "📖",
       blurb: "Una historia por capítulos, de A1 a B2. Cada episodio usa la gramática que estás viendo y abre el siguiente." },
     { id: "cultura", name: "Cultura", emoji: "🏛️",
-      blurb: "Historia, filosofía, sociología y literatura italianas en textos graduados. Elegí el que te interese." }
+      blurb: "Historia, filosofía, sociología y literatura italianas en textos graduados. Cada uno se abre con la gramática que usa; entre los abiertos, elegí el que te interese." }
   ];
 
   function ofSeries(id) {

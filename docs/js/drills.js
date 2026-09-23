@@ -17,6 +17,8 @@
     (typeof require === "function" ? require("./banca.js") : null);
   var Lez = root.Lezione ||
     (typeof require === "function" ? require("./lezione.js") : null);
+  var Engine = root.Engine ||
+    (typeof require === "function" ? require("./engine.js") : null);
 
   function shuffle(a, rnd) {
     a = a.slice();
@@ -182,22 +184,35 @@
     if (opts.length < 3 && Lez) {
       Lez.traps(answer, Math.random, week || 52).slice(0, 3).forEach(add);
     }
-    // 3. answers of the same kind from the same week, of similar length
+    // 3. answers of the same kind from the same week: same shape (a letter
+    //    group against letter groups, never «ho» against «sc»), same topic
+    //    when there is one, and the sentences that share most words first
+    //    («Paolo ha caldo» against «Micia ha sete», not «La città è bella»).
     if (opts.length < 2 && pool) {
-      var len = answer.length;
-      shuffle(pool.filter(function (x) {
-        return x && x.id !== it.id && x.type === it.type && x.answer && !/\|/.test(x.answer) &&
-               Math.abs(String(x.answer).length - len) <= Math.max(4, len / 2);
-      })).slice(0, 6).forEach(function (x) { add(String(x.answer)); });
+      var len = answer.length, short = len <= 4 && answer.indexOf(" ") < 0;
+      var words = function (x) { return norm(x).split(" "); };
+      var aw = words(answer);
+      var shared = function (x) { return words(x).filter(function (w) { return aw.indexOf(w) >= 0; }).length; };
+      var cands = pool.filter(function (x) {
+        if (!x || x.id === it.id || x.type !== it.type || !x.answer || /\|/.test(x.answer)) return false;
+        var xa = String(x.answer);
+        if (it.topic && x.topic && x.topic !== it.topic) return false;
+        if (short) return xa.indexOf(" ") < 0 && Math.abs(xa.length - len) <= 2;
+        return Math.abs(xa.length - len) <= Math.max(4, len / 2);
+      });
+      shuffle(cands).sort(function (a, b) { return shared(b.answer) - shared(a.answer); })
+        .slice(0, 6).forEach(function (x) { add(String(x.answer)); });
     }
     if (opts.length < 2) return null;
     var copy = {};
     Object.keys(it).forEach(function (k) { copy[k] = it[k]; });
     copy.type = "choice";
     copy.recog = true;
+    copy.orig = it.type;
     copy.options = shuffle(opts.slice(0, 3).concat([answer]));
     copy.prompt = it.type === "translate" ? "¿Cuál es la traducción en italiano?" : it.prompt;
-    copy.note = "La próxima vez esta la vas a escribir." + (it.note ? " " + it.note : "");
+    // Said once, and only after a right answer: after a miss it reads as a threat.
+    copy.recogNote = "La próxima vez esta la vas a escribir.";
     return copy;
   }
 
@@ -258,6 +273,28 @@
              accept: [v[0]], note: v[2] ? "Ejemplo: *" + v[2] + "*" : "", say: v[0] };
   }
 
+  /* A word is met before it is asked (as the phrases are): a card with the
+     word, its meaning, audio and the example, two or three items before the
+     first question about it. */
+  function wordIntro(v) {
+    return { id: "vi:" + v[0], src: "vocab", type: "word", prompt: "Palabra nueva",
+             stem: v[0], answer: v[0], word: v, say: v[0] };
+  }
+  function withWordIntros(list, state) {
+    var cards = (state && state.cards) || {}, out = list.slice(), done = {};
+    for (var i = 0; i < out.length; i++) {
+      var it = out[i];
+      if (!it || it.src !== "vocab" || it.type !== "choice" || cards[it.id] || done[it.id]) continue;
+      var v = VOC && VOC[it.stem];
+      if (!v) continue;
+      done[it.id] = 1;
+      var at = Math.max(0, i - 2);
+      out.splice(at, 0, wordIntro(v.v));
+      i++;
+    }
+    return out;
+  }
+
   // The week's words, new ones first, plus a few of earlier weeks that are due.
   function vocabSession(course, week, state, size) {
     if (!VOC) indexVocab(course);
@@ -304,7 +341,15 @@
     var wantExtra = Math.min(extra.length, Math.round(wantBook / 4));
 
     pickFresh(bookItems, wantBook - wantExtra, opts.state).forEach(function (it) { out.push(it); });
-    pickFresh(extra, wantExtra, opts.state).forEach(function (it) { out.push(it); });
+    // What the last four weeks left unseen comes along, a couple per round,
+    // so that three quarters of the course do not stay in the drawer.
+    var cards = (opts.state && opts.state.cards) || {};
+    var carry = [];
+    (course.weeks || []).forEach(function (pw) {
+      if (pw.week >= week.week || pw.week < week.week - 4 || pw.boss) return;
+      (pw.items || []).forEach(function (id) { if (map[id] && !cards[id]) carry.push(map[id]); });
+    });
+    pickFresh(extra.concat(shuffle(carry).filter(audible)), wantExtra, opts.state).forEach(function (it) { out.push(it); });
 
     for (var i = 0; i < wantConj; i++) {
       var verb = week.verbs[Math.floor(Math.random() * week.verbs.length)];
@@ -328,7 +373,7 @@
       var vs = vocabSession(course, week, opts.state || {}, 2);
       out = out.slice(0, size - vs.length).concat(vs);
     }
-    return firstRecognize(shuffle(out).slice(0, size), opts.state, week.week, bookItems);
+    return withWordIntros(firstRecognize(shuffle(out).slice(0, size), opts.state, week.week, bookItems), opts.state);
   }
 
   /* Il boss pesca da tutte le settimane già sbloccate, non solo dall'ultima. */
@@ -336,15 +381,48 @@
     opts = opts || {};
     var size = opts.size || (week.week === 52 ? 40 : 25);
     var map = itemsById(course);
-    var pool = [];
+    // Half from the season it closes, a quarter from the one before, the
+    // rest from anywhere earlier: the C1 exam examines C1, not «io sono».
+    var season = (course.seasons || []).filter(function (s) { return week.week >= s.weeks[0] && week.week <= s.weeks[1]; })[0];
+    var lo = season ? season.weeks[0] : 1;
+    var prevLo = Math.max(1, lo - 13);
+    var pools = { own: [], prev: [], old: [] };
     course.weeks.forEach(function (w) {
-      if (w.week <= week.week) {
-        (w.items || []).concat(w.extra || []).forEach(function (id) {
-          if (map[id]) pool.push(map[id]);
-        });
-      }
+      if (w.week > week.week) return;
+      (w.items || []).concat(w.extra || []).forEach(function (id) {
+        var it = map[id];
+        if (!it) return;
+        var wk = it.wk || w.week;
+        (wk >= lo ? pools.own : wk >= prevLo ? pools.prev : pools.old).push(it);
+      });
     });
-    var out = sample(pool, Math.ceil(size * 0.7));
+    // Inside a season, one week at a time in turn: the boss of week 13 asks
+    // about every week of the season, not thirteen times about essere.
+    var byWeek = function (pool, n) {
+      var groups = {};
+      pool.forEach(function (it) { (groups[it.wk || 0] = groups[it.wk || 0] || []).push(it); });
+      var keys = shuffle(Object.keys(groups)), picked = [], k = 0;
+      keys.forEach(function (key) { groups[key] = shuffle(groups[key]); });
+      while (picked.length < n && keys.length) {
+        var key = keys[k % keys.length];
+        if (groups[key].length) picked.push(groups[key].pop());
+        else { keys.splice(k % keys.length, 1); continue; }
+        k++;
+      }
+      return picked;
+    };
+    var nBook = Math.ceil(size * 0.8);
+    var out = byWeek(pools.own, Math.round(nBook * 0.5))
+      .concat(byWeek(pools.prev, Math.round(nBook * 0.25)))
+      .concat(byWeek(pools.old, nBook));
+    var seenB = {};
+    out = out.filter(function (it) { if (seenB[it.id]) return false; seenB[it.id] = 1; return true; });
+    // The first boss has no earlier season: top up from its own season
+    // rather than with conjugation drills.
+    shuffle(pools.own.concat(pools.prev, pools.old)).forEach(function (it) {
+      if (out.length < nBook && !seenB[it.id]) { seenB[it.id] = 1; out.push(it); }
+    });
+    out = out.slice(0, nBook);
     var verbs = week.verbs || [], tenses = week.tenses || ["presente"];
     while (out.length < size && verbs.length) {
       var v = verbs[Math.floor(Math.random() * verbs.length)];
@@ -371,40 +449,75 @@
   }
 
   /* La coda del ripasso: schede scadute, le più in ritardo per prime. */
-  function buildReview(course, state, size, opts) {
-    var map = (opts && opts.map) || itemsById(course);
-    var now = Date.now();
-    var due = [];
+  /* La coda di ripasso: prima gli errori (reps 0), poi la settimana in
+     corso, poi il resto per scadenza.  Le schede con 90 giorni di intervallo
+     sono imparate e non tornano (niente arretrato di 2.000 schede). */
+  function dueList(map, state) {
+    var now = Date.now(), week = (state && state.unlocked) || 1, due = [];
     Object.keys(state.cards).forEach(function (id) {
       var card = state.cards[id];
-      if (knownId(map, id) && card.due && card.due <= now) {
-        due.push({ id: id, due: card.due });
-      }
+      if (!knownId(map, id) || !card.due || card.due > now || (Engine && Engine.retired && Engine.retired(card))) return;
+      var pri = card.reps === 0 ? 0 : (map[id] && map[id].wk === week) ? 1 : 2;
+      due.push({ id: id, due: card.due, pri: pri });
     });
-    due.sort(function (a, b) { return a.due - b.due; });
-    return due.slice(0, size || 20).map(function (d) {
+    due.sort(function (a, b) { return a.pri - b.pri || a.due - b.due; });
+    return due;
+  }
+
+  function buildReview(course, state, size, opts) {
+    var map = (opts && opts.map) || itemsById(course);
+    return dueList(map, state).slice(0, size || 20).map(function (d) {
       return reviewItem(map, d.id, Object.assign({ state: state }, opts));
     }).filter(Boolean);
   }
 
   function dueCount(course, state, map) {
     map = map || itemsById(course);
-    var now = Date.now(), n = 0;
-    Object.keys(state.cards).forEach(function (id) {
-      var c = state.cards[id];
-      if (knownId(map, id) && c.due && c.due <= now) n++;
-    });
-    return n;
+    return dueList(map, state).length;
+  }
+
+  /* Padronanza: l'85 % sulle ultime 30 risposte della settimana (finestra
+     mobile, non lo storico), e almeno il 60 % del pool proprio visto. */
+  function mastered(ws) {
+    var l = (ws && ws.last) || [];
+    if (l.length < 30) return false;
+    var sum = 0; l.slice(-30).forEach(function (x) { sum += x; });
+    return sum >= 26;
+  }
+  function coverage(week, state) {
+    var cards = (state && state.cards) || {}, ids = week.items || [];
+    var seen = ids.filter(function (id) { return cards[id]; }).length;
+    return { seen: seen, total: ids.length, ok: ids.length === 0 || seen >= Math.min(40, Math.ceil(ids.length * 0.6)) };
   }
 
   /* La scena consigliata: la prima non ancora completata. */
+  /* Il percorso è l'asse del corso: ogni scena di frasi ha la sua settimana,
+     così le frasi arrivano quando la grammatica che usano è già stata vista
+     (le opinioni con congiuntivo dopo la settimana 26, non il primo giorno). */
+  var SCENE_WEEK = { ciao: 1, salva: 2, bar: 3, tavola: 4, giro: 5, casa: 6, lavoro: 7, negozi: 8,
+                     reazioni: 9, ponti: 10, trappole: 12, chiacchiere: 14, cuore: 15, tempo: 19,
+                     opinioni: 27, idee: 30, citazioni: 40, email: 42, dibattito: 44, aneddoto: 46, sportello: 48 };
+  function sceneWeek(id) { return SCENE_WEEK[id] || 52; }
+  function scenesOfWeek(week) {
+    if (!Frasi) return [];
+    return Frasi.SCENES.filter(function (s) { return sceneWeek(s.id) === week; });
+  }
+
+  /* La scena del momento: la prima incompleta fra quelle già raggiunte nel
+     percorso.  Se sono tutte complete, l'ultima raggiunta (ripasso), mai una
+     di una settimana futura. */
   function nextScene(state) {
     if (!Frasi) return null;
-    for (var i = 0; i < Frasi.SCENES.length; i++) {
-      var p = Frasi.progress(Frasi.SCENES[i].id, state.cards);
-      if (p.seen < p.total) return Frasi.SCENES[i];
+    var unlocked = Math.min((state && state.unlocked) || 1, 52);
+    var cards = (state && state.cards) || {};
+    var ordered = Frasi.SCENES.slice().sort(function (a, b) { return sceneWeek(a.id) - sceneWeek(b.id); });
+    var reached = ordered.filter(function (s) { return sceneWeek(s.id) <= unlocked; });
+    if (!reached.length) reached = ordered.slice(0, 1);
+    for (var i = 0; i < reached.length; i++) {
+      var p = Frasi.progress(reached[i].id, cards);
+      if (p.seen < p.total) return reached[i];
     }
-    return Frasi.SCENES[Math.floor(Math.random() * Frasi.SCENES.length)];
+    return reached[reached.length - 1];
   }
 
   /* Pausa caffè: tre minuti.  Un po' di ripasso, due frasi nuove, qualche
@@ -415,7 +528,7 @@
   function buildPausa(course, state, week, opts) {
     opts = opts || {};
     var map = opts.map || itemsById(course);
-    var review = buildReview(course, state, 3, { map: map, silent: opts.silent });
+    var review = buildReview(course, state, 4, { map: map, silent: opts.silent });
     var seenIds = {};
     review.forEach(function (it) { seenIds[it.id] = true; });
 
@@ -438,7 +551,7 @@
     // Interleaving (Rohrer & Taylor 2007): una domanda del laboratorio.
     // week: the last week whose lesson the learner has read.  Before the
     // first lesson there is no grammar to practise: only phrases and words.
-    if (Lab) filler.push(Lab.randomItem(state.cards, week ? week.week : 1));
+    if (Lab && week) filler.push(Lab.randomItem(state.cards, week.week));
 
     // Del libro solo domande a scelta: in pausa si va veloci.
     var bookChoice = ((week && week.items) || []).map(function (id) { return map[id]; })
@@ -498,6 +611,10 @@
     conjugationDrill: conjugationDrill,
     conjugationTyped: conjugationTyped,
     buildRound: buildRound,
+    recognitionOf: recognitionOf,
+    withWordIntros: withWordIntros,
+    sceneWeek: sceneWeek,
+    scenesOfWeek: scenesOfWeek,
     firstRecognize: firstRecognize,
     vocabSession: vocabSession,
     vocabItem: vocabItem,
@@ -505,6 +622,8 @@
     pickFresh: pickFresh,
     buildBoss: buildBoss,
     buildReview: buildReview,
+    mastered: mastered,
+    coverage: coverage,
     dueCount: dueCount,
     nextScene: nextScene,
     buildPausa: buildPausa,

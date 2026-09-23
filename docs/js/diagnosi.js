@@ -577,6 +577,17 @@
     ["venire", "andare", "*Andare* = ir a otro lugar; *venire* = venir hacia el que habla o acompañar (vieni con noi?)."]
   ];
 
+  var SUBJ = { io: 0, tu: 1, lui: 2, lei: 2, "lui/lei": 2, noi: 3, voi: 4, loro: 5 };
+  function subjectPerson(ctx) {
+    var stem = String(ctx && ctx.stem || "").replace(/\(.*?\)/g, " ").toLowerCase();
+    var m = /(^|[^a-zà-ù])(io|tu|lui\/lei|lui|lei|noi|voi|loro)(?=[^a-zà-ù]|$)/.exec(stem);
+    return m ? SUBJ[m[2]] : null;
+  }
+  function formalContext(ctx) {
+    var stem = String(ctx && ctx.stem || "");
+    return /(^|[\s,(])Lei[\s,?]/.test(stem) || /\bsignor[ae]?\b/i.test(stem);
+  }
+
   function verbRule(g, e, ctx) {
     var fe = verbForms(e), fg = verbForms(g);
     var prevE = ctx.e[ctx.ei - 1] || "", nextE = ctx.e[ctx.ei + 1] || "";
@@ -665,7 +676,16 @@
         var a = fe[i], b = fg[j];
         if (a.lemma !== b.lemma) continue;
         if (a.tense === b.tense && a.p !== b.p) {
-          var formal = (b.p === 1 && a.p === 2);
+          // «sono» is io and loro: the subject in the sentence decides which
+          // one to name («el sujeto acá es loro», not «io»).
+          var subj = subjectPerson(ctx);
+          if (subj != null && subj !== a.p) {
+            var alt = fe.filter(function (x) { return x.lemma === a.lemma && x.tense === a.tense && x.p === subj; })[0];
+            if (alt) a = alt;
+          }
+          // The courtesy form only when the sentence addresses someone as
+          // «Lei» / «signora»; a plain lui/lei drill is not «usted».
+          var formal = (b.p === 1 && a.p === 2) && formalContext(ctx);
           return { cat: "persona_verbale", slip: false,
             hint: formal ? "¿Tuteás o hablás de usted? Mirá a quién se dirige la frase."
                          : "El verbo está bien elegido, pero no en la persona correcta. ¿Quién es el sujeto?",
@@ -1274,7 +1294,7 @@
     } else {
       var ops = align(g, e);
       ops.forEach(function (o) {
-        var c = { e: e, ei: o.ei, g: g, gi: o.gi, names: nm };
+        var c = { e: e, ei: o.ei, g: g, gi: o.gi, names: nm, stem: ctx.stem };
         if (o.op === "sub") {
           var d = pairRules(o.g, o.e, c);
           found.push({ d: d, gi: o.gi, ei: o.ei });
