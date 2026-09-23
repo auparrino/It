@@ -72,6 +72,51 @@ ERR.forEach(function (e) {
   ok(!f.length, "«" + t + "» no debería marcar nada: " + f.map(function (x) { return x.msg; }).join(" | "));
 });
 
+// Corpus de textos de estudiantes hispanohablantes con cada error anotado
+// (tools/scrivi_corpus.json): cuántos errores marca el corrector propio
+// por familia, y que no marque nada en las versiones corregidas ni en las
+// frases del curso.  Los pisos de abajo son el nivel medido: si una regla
+// nueva los baja, algo se rompió.
+(function () {
+  var C = JSON.parse(fs.readFileSync(path.join(__dirname, "scrivi_corpus.json"), "utf8"));
+  var hit = 0, tot = 0, falsos = [], byCat = {};
+  C.forEach(function (o) {
+    var tk = S.toks(o.text), f = S.lint(o.text, o.week).filter(function (x) { return !x.soft; });
+    o.errors.forEach(function (e) {
+      var a = o.text.indexOf(e.wrong), b = a + e.wrong.length, ids = [];
+      tk.forEach(function (t, i) { if (t.w && t.at < b && t.at + t.len > a) ids.push(i); });
+      var got = f.some(function (x) { for (var k = x.i; k < x.i + x.n; k++) if (ids.indexOf(k) >= 0) return true; return false; });
+      var c = byCat[e.cat] = byCat[e.cat] || [0, 0];
+      c[1]++; tot++;
+      if (got) { c[0]++; hit++; }
+    });
+    var tc = S.toks(o.corrected);
+    S.lint(o.corrected, o.week).filter(function (x) { return !x.soft; }).forEach(function (x) {
+      falsos.push("semana " + o.week + " «" + tc.slice(x.i, x.i + x.n).map(function (z) { return z.o; }).join(" ") + "»: " + x.msg);
+    });
+  });
+  ok(hit / tot >= 0.60, "corpus: el corrector propio marca " + hit + "/" + tot + " errores (piso 60%)");
+  var FLOOR = { spagnolo: 0.75, preposizione: 0.75, articolo: 0.85, ausiliare: 0.85, accento: 0.9, concordanza: 0.55, a_personale: 0.7, ortografia: 0.6 };
+  Object.keys(FLOOR).forEach(function (k) {
+    var c = byCat[k] || [0, 1];
+    ok(c[0] / c[1] >= FLOOR[k], "corpus, " + k + ": " + c[0] + "/" + c[1] + " (piso " + Math.round(FLOOR[k] * 100) + "%)");
+  });
+  ok(!falsos.length, "corpus: marca errores en textos corregidos: " + falsos.slice(0, 5).join(" | "));
+  if (verbose) console.log("  corpus: " + hit + "/" + tot + " · " + Object.keys(byCat).map(function (k) { return k + " " + byCat[k][0] + "/" + byCat[k][1]; }).join(", "));
+
+  var clean = [];
+  Frasi.ALL.forEach(function (f) { clean.push(f.it); });
+  Letture.EPISODI.forEach(function (e) { e.text.split(/\n+/).forEach(function (l) { clean.push(l); }); });
+  (Banca.bank().sentences || []).forEach(function (x) { (x.it || []).forEach(function (a) { clean.push(a); }); });
+  clean = clean.filter(function (t) { return t && !/→|_{2,}|\/|[¡¿]|\s{3,}/.test(t); });
+  var bad = [];
+  clean.forEach(function (t) {
+    var tk = S.toks(t);
+    S.lint(t, 52).filter(function (x) { return !x.soft; }).forEach(function (x) { bad.push("«" + tk.slice(x.i, x.i + x.n).map(function (z) { return z.o; }).join(" ") + "» en «" + t.slice(0, 60) + "»: " + x.msg); });
+  });
+  ok(!bad.length, "frases del curso (" + clean.length + "): " + bad.length + " marcadas: " + bad.slice(0, 5).join(" | "));
+})();
+
 // La llamada a Groq, con fetch simulado: elige el mejor modelo de la
 // lista que devuelve la clave; saturado → otro modelo; un modelo que no
 // acepta el modo JSON → el mismo sin él; clave mala → error claro; lee el
