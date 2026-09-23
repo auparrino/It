@@ -99,7 +99,7 @@ Frasi.SCENES.forEach(function (s) {
   var sess = Frasi.sceneSession(s.id, cards, {});
   // A new phrase is met once (presented or guessed) and retrieved once.
   var intros = sess.filter(function (it) { return it.type === "intro" || it.type === "guess"; });
-  ok(intros.length === 4, "4 frasi nuove per sessione: " + s.id);
+  ok(intros.length === 6, "6 frasi nuove per sessione: " + s.id);
   var times = {}; sess.forEach(function (it) { times[it.id] = (times[it.id] || 0) + 1; });
   ok(Object.keys(times).every(function (k) { return times[k] <= 2; }), "ogni frase al massimo 2 volte per sessione: " + s.id);
   ok(sess.length >= 8, "sessione troppo corta: " + s.id);
@@ -112,7 +112,7 @@ Frasi.SCENES.forEach(function (s) {
      "in modalità ufficio niente ascolto automatico: " + s.id);
 });
 var p = Frasi.progress("ciao", cards);
-ok(p.seen === 4 && p.total === Frasi.ofScene("ciao").length, "progresso di scena");
+ok(p.seen === 6 && p.total === Frasi.ofScene("ciao").length, "progresso di scena");
 
 /* ------------------------------------------------ ripasso con frasi */
 

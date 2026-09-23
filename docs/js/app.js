@@ -843,7 +843,7 @@
           sub: seenV + " / " + w.vocab.length + " practicadas · primero reconocer, después escribir" });
     }
     m({ kind: "play", done: st.right >= 20, ico: "🎯", title: "Superá la semana",
-        sub: Math.min(st.right, 20) + " / 20 respuestas correctas" + (st.right >= 20 ? " · semana siguiente abierta" : "") });
+        sub: Math.min(st.right, 20) + " / 20 respuestas correctas con los ejercicios de la semana" });
     if (window.Drills && window.Frasi) Drills.scenesOfWeek(w.week).forEach(function (sc) {
       var p = Frasi.progress(sc.id, state.cards);
       m({ kind: "scene", arg: sc.id, done: p.seen >= p.total, ico: sc.emoji, title: "Frases: " + sc.name,
@@ -899,6 +899,21 @@
     return weekPlan(w).filter(function (x) { return !x.done; })[0] || null;
   }
 
+  /* The next week opens when every mission of this one is done, «Dominala»
+     aside (that is the third star): the lesson, the words, the twenty right
+     answers, the phrases, the reading, the lab and the bank of the week. */
+  function pendingToAdvance(w) {
+    if (w.boss) return weekStat(w.week).bossPassed ? [] : ["Vencé al jefe"];
+    return weekPlan(w).filter(function (x) { return !x.done && x.kind !== "play2"; }).map(function (x) { return x.title; });
+  }
+  function tryAdvance(week) {
+    var w = course.weeks[week - 1];
+    if (!w || w.boss || week < state.unlocked || week >= 52) return false;
+    if (pendingToAdvance(w).length) return false;
+    state.unlocked = Math.min(52, week + 1);
+    return true;
+  }
+
   function goMission(kind, arg) {
     var w = course.weeks[view.week - 1];
     if (kind === "lez") startLezione();
@@ -912,8 +927,14 @@
 
   function missions(w, st, nChal) {
     var plan = weekPlan(w), doneN = plan.filter(function (x) { return x.done; }).length;
+    var left = pendingToAdvance(w);
     var html = '<div class="card"><h2>Misiones ' + starsHtml(weekStars(w)) +
-      ' <small class="muted">' + doneN + " / " + plan.length + "</small></h2><div class=\"missions\">";
+      ' <small class="muted">' + doneN + " / " + plan.length + "</small></h2>" +
+      (w.boss ? "" : w.week < 52 && state.unlocked <= w.week
+        ? '<p class="muted">🔒 La semana ' + (w.week + 1) + " se abre al completar " + (left.length === 1 ? "esta misión" : "estas " + left.length + " misiones") +
+          " (todas menos Dominala).</p>"
+        : '<p class="muted">🔓 Semana ' + (w.week + 1) + " abierta.</p>") +
+      "<div class=\"missions\">";
     plan.forEach(function (x, k) {
       html += '<button class="mission' + (x.done ? " done" : "") + (x.cls ? " " + x.cls : "") +
         '" data-m="' + x.kind + '"' + (x.arg ? ' data-arg="' + esc(x.arg) + '"' : "") + ">" +
@@ -1047,7 +1068,9 @@
     round = {
       kind: kind,
       arg: arg,
-      from: view.screen === "briefing" || view.screen === "sfide" ||
+      // A round that starts from the week (its briefing, its sfide, its
+      // lesson's «A entrenar», a reading opened from it) goes back to the week.
+      from: view.screen === "briefing" || view.screen === "sfide" || view.screen === "lezione" ||
             (view.screen === "lettura" && view.epFrom === "briefing") ? "briefing" : null,
       items: items,
       i: 0,
@@ -1382,8 +1405,10 @@
         '<br><span class="k">bien</span> ' + tokHtml(d.fixed, "fix") + "</div>" : "";
     return '<div class="diag"><span class="tag">' + esc(d.label || "") + "</span>" + diff +
       "<p>" + mk(d.explain || "") + "</p>" +
-      (d.all && d.all.length > 1 ? '<div class="muted">También: ' + d.all.slice(1).map(function (c) {
-        return esc(Diagnosi.LABEL[c] || c); }).join(", ") + "</div>" : "") +
+      (d.all && d.all.length > 1 ? (function () {
+        var seen = {}, rest = d.all.slice(1).filter(function (c) { if (seen[c] || c === d.cat) return false; seen[c] = 1; return true; });
+        return rest.length ? '<div class="muted">También: ' + rest.map(function (c) { return esc(Diagnosi.LABEL[c] || c); }).join(", ") + "</div>" : "";
+      })() : "") +
       "</div>";
   }
 
@@ -1494,7 +1519,8 @@
         (state.weekStats[view.week] = { attempts: 0, right: 0, bossPassed: false });
       ws.attempts++;
       if (q === 2) ws.right++;
-      ws.last = (ws.last || []).concat([q === 2 ? 1 : 0]).slice(-30);
+      // What you fixed yourself counts as learnt here too (Metcalfe 2017).
+      ws.last = (ws.last || []).concat([q === 2 || opts.fixed ? 1 : 0]).slice(-30);
     }
 
     gain(gained);
@@ -1690,12 +1716,8 @@
         gain(Engine.XP.boss);
         if (view.week >= state.unlocked) state.unlocked = Math.min(52, view.week + 1);
       }
-    } else if (WEEK_KINDS[round.kind] &&
-               (round.right >= 20 || weekStat(view.week).right >= 20)) {
-      if (view.week >= state.unlocked && !w.boss) {
-        state.unlocked = Math.min(52, view.week + 1);
-      }
     }
+    // (the next week opens from missionCheck, once every mission is done)
 
     if (round.kind === "sfida") {
       var prevS = state.challengeLog[round.arg];
@@ -1741,6 +1763,13 @@
     if (now > (before || 0)) {
       fx.goal();
       out.push("★ Misión completada · " + now + " / " + plan.length + " de la semana " + w.week);
+    }
+    var before2 = state.unlocked;
+    if (tryAdvance(w.week) && state.unlocked > before2) {
+      out.push("🔓 ¡Semana " + state.unlocked + " abierta!");
+    } else if (w.week === state.unlocked && !w.boss) {
+      var left = pendingToAdvance(w);
+      if (left.length && now > (before || 0)) out.push("Para abrir la semana " + (w.week + 1) + ": " + left.join(", ") + ".");
     }
     if (now === plan.length && plan.length && !(state.perfectWeeks || {})[w.week]) {
       state.perfectWeeks = state.perfectWeeks || {};
@@ -2526,7 +2555,11 @@
         var extra = "";
         if (r.verdict !== Engine.VERDICT.RIGHT && window.Diagnosi) {
           var d = Diagnosi.diagnose(r.given, [it.answer], { stem: it.stem });
-          if (d.cat && !GENERIC[d.cat]) { recordError(d, r.given); extra = diagHtml(d, true); }
+          // Tiles are all Italian words handed over: a wrong pick is order,
+          // a tile too many or too few, or the wrong form; never a «false
+          // friend» or a «Spanish word».
+          var TILE_SKIP = { falso_amico: 1, parola_spagnola: 1, lessico: 1 };
+          if (d.cat && !GENERIC[d.cat] && !TILE_SKIP[d.cat]) { recordError(d, r.given); extra = diagHtml(d, true); }
         }
         settle(r.verdict, r.given, extra);
       });

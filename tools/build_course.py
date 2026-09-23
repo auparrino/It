@@ -1116,14 +1116,17 @@ def main() -> None:
     with open(os.path.join(DATA, "bank.json"), encoding="utf-8") as fh:
         bank_sents = [(it, snt.get("w", 1)) for snt in json.load(fh)["sentences"] for it in snt["it"]]
 
+    lex_forms = sillabo.lexicon()["lemmas"]     # forma → lemas del conjugador
+
     def word_forms(word):
         fs = {word}
         if re.search(r"(are|ere|ire|rsi|rre)$", word):
-            stem = re.sub(r"rsi$", "re", word)[:-3]
-            for e in ("o", "i", "a", "e", "iamo", "ate", "ete", "ite", "ano", "ono", "isco", "isci", "isce",
-                      "iscono", "ato", "ata", "ati", "ate", "uto", "uta", "uti", "ute", "ito", "ita", "iti",
-                      "ite", "ava", "avo", "avano", "erà", "erò", "irà", "irò", "ai", "ò", "à"):
-                fs.add(stem + e)
+            # only forms the conjugator knows as this verb: «dove» is not a
+            # form of «dovere», «fine» not one of «finire»
+            lemma = re.sub(r"rsi$", "re", word)
+            for form, lemmas in lex_forms.items():
+                if lemma in lemmas:
+                    fs.add(form)
         elif word.endswith("o"):
             fs.update({word[:-1] + "i", word[:-1] + "a", word[:-1] + "e"})
         elif word.endswith("a"):
