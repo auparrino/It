@@ -72,7 +72,7 @@ ERR.forEach(function (e) {
   ok(!f.length, "«" + t + "» no debería marcar nada: " + f.map(function (x) { return x.msg; }).join(" | "));
 });
 
-// La llamada a Cerebras, con fetch simulado: elige el mejor modelo de la
+// La llamada a Groq, con fetch simulado: elige el mejor modelo de la
 // lista que devuelve la clave; saturado → otro modelo; un modelo que no
 // acepta el modo JSON → el mismo sin él; clave mala → error claro; lee el
 // JSON aunque venga con <think> o ```.
@@ -85,7 +85,8 @@ function runGem() {
   global.fetch = function (url, opt) {
     if (/\/models$/.test(url)) {
       return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve({ data: [
-        { id: "llama3.1-8b" }, { id: "gpt-oss-120b" }, { id: "qwen-3-235b-a22b-instruct-2507" }, { id: "llama-3.3-70b" }] }); } });
+        { id: "llama-3.1-8b-instant" }, { id: "openai/gpt-oss-120b" }, { id: "moonshotai/kimi-k2-instruct" },
+        { id: "llama-3.3-70b-versatile" }, { id: "whisper-large-v3" }, { id: "viejo-70b", active: false }] }); } });
     }
     var body = JSON.parse(opt.body);
     calls.push(body.model + (body.response_format ? "~" : ""));
@@ -94,24 +95,24 @@ function runGem() {
                              text: function () { return Promise.resolve(JSON.stringify(a.body || {})); } });
   };
   S.explain({ prompt: "p", stem: "s", given: "a", answer: "b" }, "K", function (err, data) {
-    ok(g[2](err, data, calls), "cerebras " + g[0] + ": " + (err ? err.message : "ok") + " · " + calls.join(" → "));
+    ok(g[2](err, data, calls), "groq " + g[0] + ": " + (err ? err.message : "ok") + " · " + calls.join(" → "));
     runGem();
   });
 }
 function reply(txt) { return { choices: [{ message: { content: txt } }] }; }
 var GOOD = reply('{"tambien_correcta":false,"explicacion":"x"}');
 gem("mejor modelo primero", function () { return { status: 200, body: GOOD }; },
-    function (e, d, c) { return !e && d.explicacion === "x" && c[0] === "qwen-3-235b-a22b-instruct-2507~"; });
+    function (e, d, c) { return !e && d.explicacion === "x" && c[0] === "moonshotai/kimi-k2-instruct~" && !c.some(function (m) { return /whisper|viejo/.test(m); }); });
 gem("saturado", function (n) { return n === 1 ? { status: 503, body: {} } : { status: 200, body: GOOD }; },
-    function (e, d, c) { return !e && c.length === 2 && c[1] === "gpt-oss-120b~"; });
+    function (e, d, c) { return !e && c.length === 2 && c[1] === "openai/gpt-oss-120b~"; });
 gem("sin modo JSON", function (n, b) { return b.response_format ? { status: 400, body: { message: "response_format not supported" } } : { status: 200, body: GOOD }; },
     function (e, d, c) { return !e && c.length === 2 && c[0] === c[1] + "~"; });
 gem("clave mala", function () { return { status: 401, body: { message: "Wrong API Key" } }; },
     function (e) { return e && /clave/.test(e.message); });
 gem("JSON con <think> y ```", function () { return { status: 200, body: reply('<think>mmm</think>```json\n{"tambien_correcta":true,"explicacion":"y"}\n```') }; },
     function (e, d) { return !e && d.tambien_correcta === true && d.explicacion === "y"; });
-gem("pagos (402) hasta llegar al gratuito", function (n, b) { return /8b/.test(b.model) ? { status: 200, body: GOOD } : { status: 402, body: { message: "payment required" } }; },
-    function (e, d, c) { return !e && c.length === 4 && /llama3\.1-8b/.test(c[3]); });
+gem("pagos (402) hasta llegar al gratuito", function (n, b) { return /8b-instant/.test(b.model) ? { status: 200, body: GOOD } : { status: 402, body: { message: "payment required" } }; },
+    function (e, d, c) { return !e && c.length === 4 && /llama-3\.1-8b-instant/.test(c[3]); });
 gem("todo pago", function () { return { status: 402, body: {} }; },
     function (e, d, c) { return e && /plan pago/.test(e.message) && c.length === 4; });
 gem("todo saturado", function () { return { status: 503, body: {} }; },

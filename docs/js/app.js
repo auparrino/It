@@ -352,7 +352,7 @@
 
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION in sw.js: test_game checks it). */
-  var APP_VERSION = "v31";
+  var APP_VERSION = "v32";
   function versionLine() {
     return '<p class="muted small version">La Via C1 · versión ' + APP_VERSION + "</p>";
   }
@@ -2208,9 +2208,9 @@
   function aiCard() {
     var notes = state.aiNotes || [];
     return '<div class="card"><h2>🤖 Corrector con IA</h2>' +
-      '<p class="muted small">Con una clave gratuita de Cerebras, Scrivi corrige tu texto entero y en cualquier ejercicio aparece «🤖 Explicame». ' +
-      'Sacala en <a href="https://cloud.cerebras.ai" target="_blank" rel="noopener">cloud.cerebras.ai</a> → «API Keys» → «Generate API key». Queda solo en este teléfono.</p>' +
-      '<div class="row"><input id="aikey" type="password" autocomplete="off" placeholder="Pegá tu clave (csk-…)" value="' + esc(aiKey()) + '">' +
+      '<p class="muted small">Con una clave gratuita de Groq (sin tarjeta), Scrivi corrige tu texto entero y en cualquier ejercicio aparece «🤖 Explicame». ' +
+      'Sacala en <a href="https://console.groq.com/keys" target="_blank" rel="noopener">console.groq.com/keys</a> → «Create API Key». Queda solo en este teléfono.</p>' +
+      '<div class="row"><input id="aikey" type="password" autocomplete="off" placeholder="Pegá tu clave (gsk_…)" value="' + esc(aiKey()) + '">' +
       '<button class="tab" id="aisave">Guardar</button></div>' +
       (notes.length ? "<h3>Correcciones para revisar (" + notes.length + ")</h3>" +
         '<p class="muted small">La IA cree que en estos casos tu respuesta también valía o la corrección de la app no era buena. Copialas y pegámelas todas juntas.</p>' +
@@ -2636,16 +2636,16 @@
       '<label class="muted small ltopt"><input type="checkbox" id="slt"' + (state.ltOff ? "" : " checked") + "> " +
         "Pedir también la corrección de LanguageTool (gratis; el texto se envía a su servidor)</label>" +
       '<details class="aibox"' + (aiKey() ? "" : " open") + '><summary class="muted small">🤖 Corrector con IA ' + (aiKey() ? "(activado)" : "(opcional, gratis)") + "</summary>" +
-        '<p class="muted small">Marca todo y explica en castellano. Usa Cerebras con tu propia clave gratuita: ' +
-        'entrá a <a href="https://cloud.cerebras.ai" target="_blank" rel="noopener">cloud.cerebras.ai</a>, abrí «API Keys», generá una clave, copiala y pegala acá. ' +
-        "Queda solo en este teléfono y el texto se envía a Google.</p>" +
-        '<div class="row"><input id="aikey" type="password" autocomplete="off" placeholder="Pegá tu clave (csk-…)" value="' + esc(aiKey()) + '">' +
+        '<p class="muted small">Marca todo y explica en castellano. Usa Groq con tu propia clave gratuita (sin tarjeta): ' +
+        'entrá a <a href="https://console.groq.com/keys" target="_blank" rel="noopener">console.groq.com/keys</a>, tocá «Create API Key», copiala y pegala acá. ' +
+        "Queda solo en este teléfono y el texto se envía a Groq.</p>" +
+        '<div class="row"><input id="aikey" type="password" autocomplete="off" placeholder="Pegá tu clave (gsk_…)" value="' + esc(aiKey()) + '">' +
         '<button class="tab" id="aisave">Guardar</button></div></details>' +
       '<div id="sout"></div>';
   }
 
   var scriviTimer = null;
-  var AI_KEY = "laviac1.cerebras.key";
+  var AI_KEY = "laviac1.groq.key";
   function aiKey() { try { return localStorage.getItem(AI_KEY) || ""; } catch (e) { return ""; } }
   function wireScrivi() {
     if (view.screen !== "scrivi") return;
