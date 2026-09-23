@@ -379,6 +379,7 @@ node tools/test_game.js         # integridad del curso, corrección, SRS, progre
 node tools/test_frasi.js        # frases, ejercicios, pausa, lampo, racha, escudos, cofre
 python3 tools/build_bank.py     # valida y compila el banco
 node tools/test_diagnosi.js     # el diagnóstico reconoce los errores típicos
+node tools/sim_carriera.js      # una carrera entera: carga por semana, ripasso, cobertura, jefes
 ```
 
 Si cambiás algún archivo de `docs/`, subí `VERSION` en `docs/sw.js` para que los
