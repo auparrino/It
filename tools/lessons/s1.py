@@ -414,9 +414,9 @@ LESSONS = {
                      ["voi", "venite", "uscite", "dite", "bevete", "date", "rimanete"],
                      ["loro", "vengono", "escono", "dicono", "bevono", "danno",
                       "rimangono"]]},
-  "tip": "Muchos irregulares lo son solo en *io* y *loro*, y regulares en el "
-         "resto: *venGo / venGono* pero *vieni, veniamo, venite*. Si sabés la "
-         "primera persona, casi siempre deducís la tercera del plural."},
+  "tip": "Varios irregulares meten una *g* solo en *io* y *loro*: *rimanGo / "
+         "rimanGono* pero *rimani, rimaniamo, rimanete*. Si sabés la primera "
+         "persona, casi siempre deducís la tercera del plural."},
 
  {"h": "La trampa grande: el italiano no diptonga",
   "warn": "El castellano rompe la vocal de la raíz cuando lleva acento: "

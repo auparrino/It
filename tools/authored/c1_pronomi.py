@@ -83,6 +83,7 @@ ITEMS = [
          prompt="Completá con volerci o metterci.",
          stem="Io ___ due ore per arrivare, ma in generale ___ un'ora.",
          answer="ci metto | ci vuole",
+         alt=["ci ho messo | ci vuole"],
          multi=True,
          note="«Metterci» lleva sujeto personal; «volerci» es impersonal y concuerda "
               "con la cantidad: ci vuole un'ora / ci vogliono due ore."),

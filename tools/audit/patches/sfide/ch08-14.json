@@ -2677,7 +2677,9 @@
     "answer": "Chiunque chiami, digli che sono fuori.",
     "alt": [
      "Chiunque chiami, digli che non ci sono.",
-     "Chiunque telefoni, digli che sono fuori."
+     "Chiunque telefoni, digli che sono fuori.",
+     "Chiunque telefoni, digli che non ci sono.",
+     "Chiunque chiami, digli che non sono in casa."
     ],
     "note": "Chiunque + subjuntivo = quienquiera que."
    },
@@ -3177,9 +3179,17 @@
     "alt": [
      "Devi essere pronto a partire in qualsiasi momento.",
      "Devi essere pronta a partire in ogni momento.",
-     "Devi essere pronta a partire in qualsiasi momento."
+     "Devi essere pronta a partire in qualsiasi momento.",
+     "Devi essere pronto a partire in qualunque momento.",
+     "Devi essere pronto a uscire in ogni momento.",
+     "Devi essere pronto a uscire in qualsiasi momento.",
+     "Devi essere pronto a uscire in qualunque momento.",
+     "Devi essere pronta a partire in qualunque momento.",
+     "Devi essere pronta a uscire in ogni momento.",
+     "Devi essere pronta a uscire in qualsiasi momento.",
+     "Devi essere pronta a uscire in qualunque momento."
     ],
-    "note": "In ogni momento = en todo momento."
+    "note": "In ogni momento / in qualsiasi momento = en cualquier momento; salir = partire (de viaje) o uscire (de casa)."
    },
    {
     "label": "c",

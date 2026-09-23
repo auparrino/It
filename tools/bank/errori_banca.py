@@ -1294,7 +1294,7 @@ ALT = {
     "Il film comincia in dieci minuti.": ["fra"],
     "Ieri sera ho telefonato Marco.": ["chiamato"],
     "L'ho sentito nella radio stamattina.": ["per", "in"],
-    "Vado in palestra due volte per settimana.": ["a settimana"],
+    "Vado in palestra due volte per settimana.": ["a settimana", "la settimana"],
     "Ho incontrato Luca nella strada.": ["in strada", "per la strada"],
     "Abbiamo mangiato nella spiaggia.": ["sulla spiaggia"],
     "Lo zaino è sotto del tavolo.": ["sotto al"],
