@@ -441,8 +441,9 @@ recuerda el que anduvo. Las claves quedan solo en el teléfono (no entran en
 las copias de seguridad) y el texto se envía a Groq o a Google. Lo que la IA marca reemplaza lo que el corrector
 propio o LanguageTool dijeron sobre las mismas palabras.
 
-**«🤖 Explicame» en cualquier ejercicio.** Con la clave guardada (en Scrivi o
-en *Io → Corrector con IA*), después de un error aparece el botón: la IA
+**«🤖 Explicame» en cualquier ejercicio.** Con la clave guardada (en
+*Io → Corrector con IA*, el único lugar donde se cargan las claves; Scrivi
+solo muestra si la IA está activa y lleva a Io), después de un error aparece el botón: la IA
 explica qué está mal y la regla, y dice si la respuesta en realidad también
 valía o si la corrección de la app confunde. Esos casos quedan en *Io →
 Correcciones para revisar*, con un botón para copiarlos todos juntos.

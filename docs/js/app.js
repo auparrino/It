@@ -352,7 +352,7 @@
 
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION in sw.js: test_game checks it). */
-  var APP_VERSION = "v33";
+  var APP_VERSION = "v34";
   function versionLine() {
     return '<p class="muted small version">La Via C1 · versión ' + APP_VERSION + "</p>";
   }
@@ -2207,7 +2207,7 @@
      learner can pass them on in one go instead of explaining each). */
   function aiCard() {
     var notes = state.aiNotes || [];
-    return '<div class="card"><h2>🤖 Corrector con IA</h2>' +
+    return '<div class="card" id="aicard"><h2>🤖 Corrector con IA</h2>' +
       '<p class="muted small">Con una clave gratuita, Scrivi corrige tu texto entero y en cualquier ejercicio aparece «🤖 Explicame».</p>' +
       aiKeyFields() +
       (notes.length ? "<h3>Correcciones para revisar (" + notes.length + ")</h3>" +
@@ -2633,9 +2633,10 @@
       '<button class="tab" id="smodel">👀 Ver un modelo</button></div>' +
       '<label class="muted small ltopt"><input type="checkbox" id="slt"' + (state.ltOff ? "" : " checked") + "> " +
         "Pedir también la corrección de LanguageTool (gratis; el texto se envía a su servidor)</label>" +
-      '<details class="aibox"' + (aiKey() ? "" : " open") + '><summary class="muted small">🤖 Corrector con IA ' + (aiKey() ? "(activado)" : "(opcional, gratis)") + "</summary>" +
-        '<p class="muted small">Marca todo y explica en castellano, con tus propias claves gratuitas (sin tarjeta).</p>' +
-        aiKeyFields() + "</details>" +
+      '<p class="muted small ailine">🤖 ' + (aiKey()
+        ? "Corrector con IA activado (" + [aiKeys().groq ? "Groq" : "", aiKeys().gemini ? (aiKeys().groq ? "Gemini de respaldo" : "Gemini") : ""].filter(Boolean).join(" + ") + "). "
+        : "Para que una IA marque todo y lo explique, cargá una clave gratuita. ") +
+        '<a href="#" id="aigo">Claves en Io →</a></p>' +
       '<div id="sout"></div>';
   }
 
@@ -2685,11 +2686,14 @@
     });
     var lt = $("#slt");
     if (lt) lt.onchange = function () { state.ltOff = !lt.checked; persist(); };
-    on("#aisave", function () {
-      var k = saveKeys();
-      if (box && state.scrittiDraft) { state.scrittiDraft[w.week] = box.value; persist(); }
-      toast(k ? "Guardado (" + k + "): la próxima revisión usa la IA." : "Claves borradas.");
-      render();
+    on("#aigo", function (e) {
+      if (e && e.preventDefault) e.preventDefault();
+      if (!state.scrittiDraft) state.scrittiDraft = {};
+      state.scrittiDraft[w.week] = box.value.slice(0, 4000);
+      persist();
+      go("io");
+      var card = $("#aicard");
+      if (card) card.scrollIntoView({ block: "start" });
     });
     on("#scheck", function () {
       var text = box.value, r = Scrivi.check(text, w.week), out = $("#sout");
