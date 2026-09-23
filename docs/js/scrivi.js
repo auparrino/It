@@ -796,14 +796,15 @@
   }
 
   /* ------------------------------------------------------------ IA
-     Optional: Cerebras (free key of the learner, OpenAI-style API, answers
-     in a second or two).  It reads the whole text like a teacher, marks
-     everything and explains in Spanish; the key never leaves the phone
-     except to Cerebras.  Which models a key can use changes over time, so
-     the app asks Cerebras for the list and takes the best one available. */
-  var AI_PREFER = [/qwen-3-235b.*instruct/i, /gpt-oss-120b/i, /llama-3\.3-70b/i, /llama-4-maverick/i, /qwen-3-32b/i, /llama-4-scout/i, /qwen/i, /llama/i];
-  var AI_FALLBACK = ["qwen-3-235b-a22b-instruct-2507", "gpt-oss-120b", "llama-3.3-70b", "qwen-3-32b", "llama3.1-8b"];
-  var AI_URL = "https://api.cerebras.ai/v1";
+     Optional: Groq (free key of the learner, no card, OpenAI-style API,
+     answers in a second or two).  It reads the whole text like a teacher,
+     marks everything and explains in Spanish; the key never leaves the
+     phone except to Groq.  Which models a key can use changes over time, so
+     the app asks Groq for the list and takes the best one available. */
+  var AI_PREFER = [/kimi-k2/i, /gpt-oss-120b/i, /llama-3\.3-70b/i, /qwen3?-32b|qwen\//i, /llama-4-maverick/i, /llama-4-scout/i, /gpt-oss-20b/i, /llama-3\.1-8b/i];
+  var AI_SKIP = /whisper|tts|guard|playai|orpheus|distil|compound|allam|embed/i;   // not chat models
+  var AI_FALLBACK = ["moonshotai/kimi-k2-instruct", "openai/gpt-oss-120b", "llama-3.3-70b-versatile", "qwen/qwen3-32b", "llama-3.1-8b-instant"];
+  var AI_URL = "https://api.groq.com/openai/v1";
   function aiPrompt(text, week, task) {
     return "Sos profesor de italiano para un hispanohablante rioplatense que está en la semana " + week +
       " de 52 de un curso hasta C1. La consigna era: «" + (task ? task.t : "texto libre") + "».\n" +
@@ -834,7 +835,7 @@
   /* One request at a time through the models, best first: each attempt
      waits at most 20 s, the whole thing at most 60 s.  The model that
      answered last time goes first next time. */
-  var MODEL_KEY = "laviac1.cerebras.model", LIST_KEY = "laviac1.cerebras.models", PAID_KEY = "laviac1.cerebras.paid";
+  var MODEL_KEY = "laviac1.groq.model", LIST_KEY = "laviac1.groq.models", PAID_KEY = "laviac1.groq.paid";
   // Models that answered 402 (payment required) with this key: never asked again.
   function paid() { try { return JSON.parse(localStorage.getItem(PAID_KEY) || "{}") || {}; } catch (e) { return {}; } }
   function markPaid(model) { var p = paid(); p[model] = Date.now(); try { localStorage.setItem(PAID_KEY, JSON.stringify(p)); } catch (e) { /* */ } }
@@ -849,7 +850,8 @@
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (j) {
         clearTimeout(timer);
-        var ids = ((j && j.data) || []).map(function (m) { return m.id; }).filter(Boolean);
+        var ids = ((j && j.data) || []).filter(function (m) { return m && m.id && m.active !== false && !AI_SKIP.test(m.id); })
+          .map(function (m) { return m.id; });
         var ranked = [];
         AI_PREFER.forEach(function (rx) { ids.forEach(function (id) { if (rx.test(id) && ranked.indexOf(id) < 0) ranked.push(id); }); });
         ids.forEach(function (id) { if (ranked.indexOf(id) < 0) ranked.push(id); });
@@ -878,7 +880,7 @@
       function next(err) {
         if (err) lastErr = err;
         if (k >= order.length || Date.now() > deadline) {
-          var m = n402 && n402 === k ? "Cerebras pide un plan pago para todos los modelos de tu cuenta (402): fijate en cloud.cerebras.ai que tengas el plan gratuito (Free) activo"
+          var m = n402 && n402 === k ? "Groq pide un plan pago para todos los modelos de tu cuenta (402)"
                 : lastErr && /abort/i.test(String(lastErr.message || lastErr)) ? "la IA no respondió a tiempo" : String((lastErr && lastErr.message) || lastErr || "sin respuesta");
           return done(new Error(m));
         }
@@ -891,6 +893,7 @@
                      messages: [{ role: "system", content: "Respondés solo con JSON válido." }, { role: "user", content: prompt }] };
         if (!plain[model]) body.response_format = { type: "json_object" };
         if (/gpt-oss/i.test(model) && !plain[model]) body.reasoning_effort = "low";
+        if (/qwen3/i.test(model) && !plain[model]) body.reasoning_effort = "none";
         fetch(AI_URL + "/chat/completions", {
           method: "POST", signal: ctl ? ctl.signal : undefined,
           headers: { "Content-Type": "application/json", Authorization: "Bearer " + key },
@@ -903,7 +906,7 @@
             if (r.status === 400 && !plain[model] && /response_format|json|reasoning/i.test(b)) { plain[model] = 1; attempt(model); return null; }
             if (r.status === 401 || r.status === 403) return done(new Error("HTTP " + r.status + ", clave"));
             if (r.status === 402) { n402++; markPaid(model); next(new Error("HTTP 402")); return null; }
-            next(new Error(r.status === 429 ? "se terminó el cupo por ahora (429)" : r.status >= 500 ? "Cerebras está saturado ahora (" + r.status + ")" : "HTTP " + r.status));
+            next(new Error(r.status === 429 ? "se terminó el cupo por ahora (429)" : r.status >= 500 ? "Groq está saturado ahora (" + r.status + ")" : "HTTP " + r.status));
             return null;
           });
         }).then(function (j) {
