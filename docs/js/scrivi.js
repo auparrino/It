@@ -1607,9 +1607,39 @@
       "\"explicacion\":\"una o dos oraciones en castellano rioplatense: qué regla es y por qué, con el dato que le sirve para no repetirlo\"}]," +
       "\"corregido\":\"el texto completo corregido\",\"consigna\":\"una oración: si cumplió la consigna y usó bien las estructuras pedidas\"," +
       "\"comentario\":\"dos o tres oraciones de devolución en castellano: qué hizo bien y qué tiene que practicar\"}\n" +
-      "Los errores van en el orden en que aparecen en el texto.\n\nTexto:\n" + text;
+      "Los errores van en el orden en que aparecen en el texto. Cada error se marca una sola vez: no repitas un error ni marques uno " +
+      "adentro de otro (si en «Hanno 32 annos» hay dos errores, van separados: «Hanno» y «annos»). Las explicaciones, la consigna y el " +
+      "comentario van en castellano, con italiano solo en los ejemplos. El comentario habla del texto del alumno, no del corregido. " +
+      "Antes de responder, revisá que cada explicación sea cierta.\n\nTexto:\n" + text;
   }
-  function aiCheck(text, week, keys, done) { llm(aiPrompt(text, week, TASKS[week]), keys, done); }
+  /* A second teacher checks the first one's correction: drops what is not
+     an error or is repeated, fixes wrong explanations, adds what was missed. */
+  function reviewPrompt(text, week, task, data) {
+    return "Sos un segundo profesor de italiano, nativo, que revisa la corrección que un colega hizo del texto de un alumno " +
+      "hispanohablante rioplatense (semana " + week + " de 52 de un curso hasta C1; consigna: «" + (task ? task.t : "texto libre") + "»).\n\n" +
+      "Texto del alumno:\n" + text + "\n\nCorrección del colega (JSON):\n" + JSON.stringify(data) + "\n\n" +
+      "Revisala y devolvé la versión buena:\n" +
+      "1. Cada error tiene que ser un error de verdad en italiano estándar; sacá los que no lo sean.\n" +
+      "2. \"mal\" tiene que estar copiado EXACTO del texto del alumno, lo más corto posible.\n" +
+      "3. Ningún error repetido ni uno adentro de otro: si un fragmento tiene dos errores, separalos en dos fragmentos cortos.\n" +
+      "4. Cada explicación tiene que ser cierta y precisa, en castellano rioplatense, con italiano solo en los ejemplos; corregí las que estén mal.\n" +
+      "5. El \"tipo\" tiene que ser el que corresponde de esta lista: " + Object.keys(AI_TYPES).join(", ") + ".\n" +
+      "6. Agregá los errores que el colega no vio.\n" +
+      "7. \"corregido\" tiene que tener todos los arreglos y nada más; \"consigna\" y \"comentario\" tienen que ser ciertos y hablar del texto del alumno.\n" +
+      "Respondé SOLO con el JSON revisado, con el mismo formato.";
+  }
+  // done(err, data, meta): meta says which provider and model corrected and which reviewed.
+  function aiCheck(text, week, keys, done, onStage) {
+    var task = TASKS[week];
+    llm(aiPrompt(text, week, task), keys, function (err, data, meta) {
+      if (err) return done(err);
+      if (onStage) onStage("review", meta);
+      llm(reviewPrompt(text, week, task, data), keys, function (err2, data2, meta2) {
+        var good = !err2 && data2 && Array.isArray(data2.errores);
+        done(null, good ? data2 : data, { first: meta, review: good ? meta2 : null });
+      });
+    });
+  }
 
   /* Any exercise: why is my answer wrong (or is it right after all)? */
   function explainPrompt(x) {
@@ -1670,8 +1700,8 @@
     (function nextProvider() {
       var P = todo.shift();
       if (!P) return done(new Error(errs.length > 1 ? errs.join(" · ") : errs[0].replace(/^\w+: /, "")));
-      ask(P, prompt, keys[P.id], function (err, data) {
-        if (!err) return done(null, data);
+      ask(P, prompt, keys[P.id], function (err, data, model) {
+        if (!err) return done(null, data, { provider: P.name, model: model });
         errs.push(P.name + ": " + String(err.message || err));
         nextProvider();
       });
@@ -1687,7 +1717,7 @@
         if (good && order.indexOf(good) > 0) { order.splice(order.indexOf(good), 1); order.unshift(good); }
       } catch (e) { /* */ }
       var k = 0, over = false;
-      function finish(err, data) { if (over) return; over = true; done(err, data); }
+      function finish(err, data, model) { if (over) return; over = true; done(err, data, model); }
       function next(err) {
         if (err) lastErr = err;
         if (k >= order.length || Date.now() > deadline) {
@@ -1727,7 +1757,7 @@
           var data;
           try { data = jsonOf(msg && msg.content); } catch (e) { return next(new Error("respuesta ilegible")); }
           try { localStorage.setItem(store(P, "model"), model); } catch (e) { /* */ }
-          finish(null, data);
+          finish(null, data, model);
         }).catch(function (e) { clearTimeout(timer); next(e); });
       }
       next();
@@ -1751,6 +1781,7 @@
       var dup = true;
       for (var j = 0; j < n; j++) if (!taken[first + j]) dup = false;
       if (dup) return;
+      for (var j2 = 0; j2 < n; j2++) taken[first + j2] = 1;
       var tipo = String(e.tipo || "").trim().toLowerCase(), soft = tipo === "stile";
       out.push({ i: first, n: n, cat: AI_TYPES[tipo] && !soft ? tipo : soft ? "stile" : "ia", soft: soft, ai: true,
                  msg: (e.bien ? "*" + bad + "* → *" + String(e.bien).trim() + "*. " : "") + (soft ? "(Más natural) " : "") + String(e.explicacion || "").trim() });
@@ -1763,7 +1794,7 @@
 
   var api = { TASKS: TASKS, features: features, lint: lint, check: check, markup: markup, weeks: weeks, toks: toks,
               learn: learn, learnCourse: learnCourse, ltCheck: ltCheck, fromLT: fromLT,
-              aiCheck: aiCheck, fromAI: fromAI, aiPrompt: aiPrompt, explain: explain, explainPrompt: explainPrompt, PROVIDERS: PROVIDERS, AI_TYPES: AI_TYPES };
+              aiCheck: aiCheck, fromAI: fromAI, aiPrompt: aiPrompt, explain: explain, explainPrompt: explainPrompt, reviewPrompt: reviewPrompt, PROVIDERS: PROVIDERS, AI_TYPES: AI_TYPES };
   if (typeof module === "object" && module.exports) module.exports = api;
   else root.Scrivi = api;
 })(typeof window !== "undefined" ? window : globalThis);

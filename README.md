@@ -432,7 +432,12 @@ Io, Scrivi manda el texto a la IA y muestra solo su corrección: cada error
 con su arreglo, el tipo de error (el mismo de la clínica, así lo que falla
 va al repaso por errores) y la regla en castellano, además de si cumplió la
 consigna, una devolución y el texto corregido. Lo correcto pero poco
-natural aparece como sugerencia y no cuenta como error. Las reglas propias
+natural aparece como sugerencia y no cuenta como error. La corrección pasa
+por dos consultas: la primera corrige y la segunda, como un segundo
+profesor, la revisa (saca lo que no es error o está repetido, arregla
+explicaciones equivocadas y agrega lo que faltó); si la revisión falla,
+queda la primera. Abajo se ve qué servicio y qué modelo corrigió y cuál
+revisó, y lo mismo en «🤖 Explicame». Las reglas propias
 y LanguageTool quedan de respaldo: se usan si no hay clave o si la IA no
 responde, con un botón para volver a probar la IA.
 
