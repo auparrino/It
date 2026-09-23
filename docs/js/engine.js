@@ -176,23 +176,88 @@
     };
   }
 
+  /* A save can come back damaged (an old version, a half-written copy, a
+     hand-edited backup).  Every field is checked against the blank save:
+     wrong types go back to their default, numbers are clamped, broken
+     entries dropped.  What is valid is kept. */
+  function isObj(v) { return !!v && typeof v === "object" && !Array.isArray(v); }
+  function num(v, def, min, max) {
+    v = +v;
+    if (!isFinite(v)) return def;
+    if (min !== undefined && v < min) v = min;
+    if (max !== undefined && v > max) v = max;
+    return v;
+  }
+
+  function sanitize(s) {
+    var base = blankSave();
+    if (!isObj(s)) return base;
+    Object.keys(base).forEach(function (k) {
+      var b = base[k], v = s[k];
+      if (v === undefined) { s[k] = b; return; }
+      if (typeof b === "number") s[k] = num(v, b);
+      else if (typeof b === "boolean") s[k] = !!v;
+      else if (Array.isArray(b)) { if (!Array.isArray(v)) s[k] = b; }
+      else if (isObj(b) || (b && typeof b === "object")) { if (!isObj(v)) s[k] = b; }
+      else if (b === null) { if (v !== null && typeof v !== "string") s[k] = null; }
+    });
+    s.xp = num(s.xp, 0, 0);
+    s.coins = num(s.coins, 0, 0);
+    s.unlocked = Math.round(num(s.unlocked, 1, 1, 52));
+    s.week = Math.round(num(s.week, 1, 1, 52));
+    s.streak = Math.round(num(s.streak, 0, 0));
+    s.shields = Math.round(num(s.shields, 1, 0, 3));
+    s.spoken = num(s.spoken, 0, 0);
+    s.written = num(s.written, 0, 0);
+    if ([100, 200, 350, 500].indexOf(s.goal) < 0) s.goal = 200;
+    ["attempts", "right", "close", "wrong"].forEach(function (k) {
+      s.totals[k] = num(s.totals[k], 0, 0);
+    });
+    s.badges = s.badges.filter(function (b) { return typeof b === "string"; });
+    Object.keys(s.cards).forEach(function (id) {
+      var c = s.cards[id];
+      if (!isObj(c)) { delete s.cards[id]; return; }
+      c.ease = num(c.ease, 2.5, 1.3, 2.8);
+      c.interval = num(c.interval, 0, 0);
+      c.reps = num(c.reps, 0, 0);
+      c.due = num(c.due, 0, 0);
+    });
+    Object.keys(s.days).forEach(function (k) {
+      if (!isFinite(+s.days[k])) delete s.days[k]; else s.days[k] = +s.days[k];
+    });
+    Object.keys(s.errs).forEach(function (k) {
+      var e = s.errs[k];
+      if (!isObj(e) || !isFinite(+e.n)) { delete s.errs[k]; return; }
+      e.n = num(e.n, 0, 0); e.fixed = num(e.fixed, 0, 0); e.last = num(e.last, 0, 0);
+    });
+    s.errLog = s.errLog.filter(isObj).slice(0, 60);
+    Object.keys(s.weekStats).forEach(function (k) {
+      var w = s.weekStats[k];
+      if (!isObj(w)) { delete s.weekStats[k]; return; }
+      w.attempts = num(w.attempts, 0, 0); w.right = num(w.right, 0, 0);
+    });
+    Object.keys(s.letture).forEach(function (k) {
+      if (!isObj(s.letture[k])) delete s.letture[k];
+      else s.letture[k].pct = num(s.letture[k].pct, 0, 0, 100);
+    });
+    return s;
+  }
+
   function load() {
+    var raw = null;
     try {
-      var raw = root.localStorage && root.localStorage.getItem(KEY);
+      raw = root.localStorage && root.localStorage.getItem(KEY);
       if (!raw) return blankSave();
       var s = JSON.parse(raw);
-      var base = blankSave();
-      // The first goal scale (20-150) was reached with a single session; map
-      // old choices onto the new one before filling the missing fields.
-      if (s.goalV !== 2) {
+      if (isObj(s) && s.goalV !== 2) {
+        // The first goal scale (20-150) was reached with a single session.
         s.goal = { 20: 100, 50: 200, 100: 350, 150: 500 }[s.goal] || 200;
         s.goalV = 2;
       }
-      Object.keys(base).forEach(function (k) {
-        if (s[k] === undefined) s[k] = base[k];
-      });
-      return s;
+      return sanitize(s);
     } catch (e) {
+      // Unreadable: keep a copy aside before a new save overwrites it.
+      try { if (raw) root.localStorage.setItem(KEY + ".damaged", raw); } catch (e2) { /* */ }
       return blankSave();
     }
   }
@@ -393,6 +458,7 @@
     xpFor: xpFor,
     blankSave: blankSave,
     load: load,
+    sanitize: sanitize,
     save: save,
     touchStreak: touchStreak,
     dayKey: dayKey,

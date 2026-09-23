@@ -280,8 +280,16 @@
   }
 
   // Alternative answers for a gap, read off the other accepted sentences.
+  // Where the gap form stands as a whole word (not inside another word:
+  // «è» inside «caffè»).
+  function wordAt(text, form) {
+    var re = new RegExp("(^|[^A-Za-zÀ-ÿ])" + form.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "(?![A-Za-zÀ-ÿ])");
+    var m = re.exec(text);
+    return m ? m.index + m[1].length : -1;
+  }
+
   function gapAccept(s) {
-    var main = s.it[0], form = s.gap[0], at = main.indexOf(form), out = [form];
+    var main = s.it[0], form = s.gap[0], at = wordAt(main, form), out = [form];
     var pre = main.slice(0, at), post = main.slice(at + form.length);
     s.it.slice(1).forEach(function (v) {
       if (v.indexOf(pre) === 0 && v.slice(-post.length || v.length) === post && post.length) {
@@ -295,7 +303,8 @@
   function gapItem(i) {
     var s = B.sentences[i];
     if (!s.gap) return null;
-    var main = s.it[0], at = main.indexOf(s.gap[0]);
+    var main = s.it[0], at = wordAt(main, s.gap[0]);
+    if (at < 0) return null;
     var stem = main.slice(0, at) + "___ (" + s.gap[1] + ")" + main.slice(at + s.gap[0].length);
     return { id: "b:gap:" + i, src: "banca", bank: "gap", type: "typed",
              prompt: "Completá: «" + s.es + "»", stem: stem, answer: s.gap[0], accept: gapAccept(s),
@@ -378,7 +387,12 @@
     lessico: { tags: ["lessico"], err: ["lessico"], vocab: true },
     doppie: { err: ["doppie", "ortografia"], vocab: true },
     accento: { err: ["accento"], vocab: true },
-    ortografia: { err: ["ortografia", "doppie"], vocab: true }
+    ortografia: { err: ["ortografia", "doppie"], vocab: true },
+    comparativo: { tags: ["comparativi", "superlativi"], err: ["comparativo"] },
+    piacere: { tags: ["piacere"], err: ["piacere"] },
+    ordine: { tags: ["pronomi_diretti", "connettivi"], err: ["ordine", "posizione_pronome"] },
+    parola_mancante: { tags: ["articoli", "preposizioni", "ci", "ne"], err: ["articolo", "preposizione", "ci_ne"] },
+    parola_in_piu: { tags: ["a_personale", "articoli", "possessivi"], err: ["a_personale", "articolo_possessivo"] }
   };
 
   // The learner's weakest areas, recent errors weighing more.
@@ -387,7 +401,8 @@
     return Object.keys(errs).map(function (k) {
       var e = errs[k], age = (now - (e.last || 0)) / 86400000;
       return { cat: k, score: (e.n - (e.fixed || 0) * 0.5) * Math.pow(0.9, age) };
-    }).filter(function (x) { return x.score > 0 && CURE[x.cat]; })
+    // A pattern, not a one-off: at least a couple of recent errors.
+    }).filter(function (x) { return x.score >= 1.8 && CURE[x.cat]; })
       .sort(function (a, b) { return b.score - a.score; })
       .slice(0, n || 3);
   }

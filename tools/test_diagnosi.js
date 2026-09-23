@@ -210,5 +210,62 @@ if (bank) {
   console.log("(docs/data/bank.json assente: test della banca saltati)");
 }
 
+/* ------------------------------------------- tentativi di romperla */
+
+// Words that are also JavaScript property names must not break anything.
+["constructor", "__proto__", "toString", "hasOwnProperty", "valueOf", "prototype"].forEach(function (w) {
+  ["Ieri sono andato al cinema.", w, "__proto__"].forEach(function (t) {
+    var ok1 = true;
+    try { D.diagnose(w, [t]); D.diagnose(t, [w]); } catch (e) { ok1 = false; }
+    ok(ok1, "la diagnosi si rompe con «" + w + "» / «" + t + "»");
+  });
+});
+// Garbage input never throws and never prints undefined/NaN.
+["", "   ", "<script>alert(1)</script>", "😀😀", "a".repeat(3000), "\x27\x27\x27", ".,;:!?", "l\x27 l\x27 l\x27", "\u0000"].forEach(function (w) {
+  var d = null;
+  try { d = D.diagnose(w, ["Ho mangiato una pizza."]); } catch (e) { /* */ }
+  ok(d && d.verdict, "input assurdo non gestito: " + JSON.stringify(w).slice(0, 20));
+  if (d && d.hint) ok(!/undefined|NaN|\[object/.test(d.hint + d.explain), "testo rotto con input assurdo");
+});
+
+if (bank) {
+  // Random typing slips on every sentence: never a crash, always a hint.
+  var seed = 7;
+  var rnd = function () { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
+  var crashes = 0, noHint = 0;
+  bank.sentences.forEach(function (s) {
+    for (var r = 0; r < 3; r++) {
+      var a = s.it[0].split("");
+      var k = Math.floor(rnd() * a.length);
+      a.splice(k, 1, rnd() < 0.5 ? "" : "x");
+      try {
+        var d = D.diagnose(a.join(""), s.it);
+        if (d.verdict !== "giusto" && (!d.hint || !d.explain)) noHint++;
+      } catch (e) { crashes++; }
+    }
+  });
+  ok(crashes === 0, "la diagnosi si rompe su frasi mutate: " + crashes);
+  ok(noHint === 0, "errori senza indizio: " + noHint);
+
+  // A first-attempt hint never names the corrected word (binary choices like
+  // «¿di o che?» aside).
+  var leaks = 0;
+  bank.errors.forEach(function (e) {
+    var d = D.diagnose(e.wrong, [e.right]);
+    if (d.cat === "comparativo") return;
+    d.fixed.filter(function (t) { return t.fix && t.w.length > 2; }).forEach(function (t) {
+      if (d.hint.toLowerCase().indexOf("*" + t.w + "*") >= 0) leaks++;
+    });
+  });
+  ok(leaks === 0, "indizi che rivelano la risposta: " + leaks);
+
+  // Every gap is cut where the word really is (not «è» inside «caffè»).
+  bank.sentences.forEach(function (s, i) {
+    if (!s.gap) return;
+    var it = Banca.gapItem(i);
+    ok(it && it.stem.replace(/___ \([^)]*\)/, it.answer) === s.it[0], "buco sbagliato in: " + s.it[0]);
+  });
+}
+
 console.log("\ncontrolli: " + checks + "   errori: " + fails);
 process.exit(fails ? 1 : 0);

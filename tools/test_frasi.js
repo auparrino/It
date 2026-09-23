@@ -289,6 +289,21 @@ old = { xp: 10, cards: {}, badges: [], goal: 350, goalV: 2, totals: { attempts: 
 ok(Engine.load().goal === 350, "un obiettivo già nuovo non si tocca");
 delete global.localStorage;
 
+// Damaged saves are repaired, not trusted.
+var weird = Engine.sanitize({ xp: "abc", cards: null, days: "x", badges: {}, totals: 5, weekStats: [],
+  unlocked: 999, streak: -3, errs: { a: null, b: { n: "x" }, ausiliare: { n: 3 } }, errLog: {}, letture: 7,
+  best: null, goal: "mucho", shields: 99 });
+ok(weird.xp === 0 && weird.unlocked === 52 && weird.streak === 0 && weird.shields === 3,
+   "numeri riportati nei limiti");
+ok(weird.goal === 200 && Array.isArray(weird.badges) && Array.isArray(weird.errLog), "tipi ripristinati");
+ok(Object.keys(weird.errs).join() === "ausiliare", "voci d'errore rotte eliminate");
+ok(typeof weird.totals === "object" && weird.totals.right === 0, "totali ricostruiti");
+ok(Engine.sanitize(null).xp === 0 && Engine.sanitize([1, 2]).xp === 0, "salvataggio non oggetto");
+var goodSave = Engine.blankSave();
+goodSave.xp = 1234; goodSave.cards["frase:bar:1"] = Engine.schedule(null, 2);
+var kept = Engine.sanitize(JSON.parse(JSON.stringify(goodSave)));
+ok(kept.xp === 1234 && kept.cards["frase:bar:1"].interval === 1, "un salvataggio sano non si tocca");
+
 var fdg = Frasi.ofTheDay(day(2026, 6, 1));
 ok(fdg === Frasi.ofTheDay(day(2026, 6, 1, 23)), "la frase del giorno non cambia nel giorno");
 

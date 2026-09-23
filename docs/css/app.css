@@ -483,6 +483,9 @@ h2 { margin-top: 22px; }
 .eb b { font-family: var(--mono); font-size: .8rem; }
 .eb small { color: var(--verde); font-weight: 600; }
 
+.shake { animation: shake .3s ease; }
+@keyframes shake { 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+
 /* coriandoli */
 .confetti { position: fixed; inset: 0; pointer-events: none; z-index: 70; overflow: hidden; }
 .confetti span { position: absolute; top: -40px; animation: fall 2.2s ease-in forwards; }

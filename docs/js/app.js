@@ -31,7 +31,14 @@
     setTimeout(function () { t.remove(); }, ms || 2200);
   }
 
-  function persist() { Engine.save(state); }
+  var saveWarned = false;
+  function persist() {
+    if (!Engine.save(state) && !saveWarned) {
+      saveWarned = true;
+      toast("⚠️ No puedo guardar tu progreso: el teléfono no tiene espacio o bloquea el almacenamiento. " +
+            "Liberá espacio o guardá una copia en Io.", 6000);
+    }
+  }
 
   /* --------------------------------------------------- suoni e vibrazione */
 
@@ -598,7 +605,9 @@
   // Only graded grammar rounds cost lives; phrase sessions are for flow.
   var WITH_LIVES = { round: 1, boss: 1, gym: 1 };
   // Only these rounds count towards unlocking the next grammar week.
-  var WEEK_KINDS = { round: 1, gym: 1, review: 1, pausa: 1 };
+  var WEEK_KINDS = { round: 1, gym: 1, pausa: 1 };
+  // Rounds whose answers count as the week's progress (review mixes weeks).
+  var COUNT_KINDS = { round: 1, gym: 1, pausa: 1, boss: 1 };
 
   function startRound(kind, arg) {
     var w = course.weeks[view.week - 1];
@@ -891,8 +900,17 @@
       }
       return;
     }
+    // The same text again within a moment is a double tap, not a second
+    // attempt; sent again later, it is a deliberate "I think I'm right".
+    if (round.tried && String(given).trim() === round.lastGiven && Date.now() - round.promptAt < 1500) {
+      var inp0 = $("#ans") || $("#wans");
+      if (inp0) { inp0.classList.remove("shake"); void inp0.offsetWidth; inp0.classList.add("shake"); inp0.focus(); }
+      return;
+    }
     if (verdict === "sbagliato" && !round.tried && round.kind !== "boss" && d.hint && d.cat !== "vuoto") {
       round.tried = true;
+      round.lastGiven = String(given).trim();
+      round.promptAt = Date.now();
       round.firstCat = d.cat;
       recordError(d, given);
       showPrompt(d);
@@ -1002,7 +1020,9 @@
     else if (q === 1) state.totals.close++;
     else state.totals.wrong++;
 
-    if (!it.frase && it.src !== "lab" && it.src !== "lettura") {
+    // Only the week's own grammar counts towards unlocking the next week.
+    if (!it.frase && it.src !== "lab" && it.src !== "lettura" && it.src !== "banca" &&
+        COUNT_KINDS[round.kind]) {
       var ws = state.weekStats[view.week] ||
         (state.weekStats[view.week] = { attempts: 0, right: 0, bossPassed: false });
       ws.attempts++;
@@ -1088,6 +1108,7 @@
     round.i++;
     round.answered = false;
     round.tried = false;
+    round.lastGiven = null;
     round.firstCat = null;
     round.picked = [];
     if (round.lives <= 0 || round.i >= round.items.length) {
@@ -1444,9 +1465,7 @@
         if (typeof s.xp !== "number" || !s.cards) throw new Error("formato");
         if (!confirm("Esto reemplaza tu progreso actual por la copia (" + s.xp +
                      " xp). ¿Seguir?")) return;
-        var base = Engine.blankSave();
-        Object.keys(base).forEach(function (k) { if (s[k] === undefined) s[k] = base[k]; });
-        state = s;
+        state = Engine.sanitize(s);
         persist();
         renderHeader();
         render();
@@ -1526,6 +1545,7 @@
 
     var gb = $("#glossbox");
     if (gb) gb.classList.remove("on");
+    guardUntil = Date.now() + 300;
     app().innerHTML = html;
     document.body.classList.toggle("ingame", s === "gioco" || s === "lampo");
     renderNav();
@@ -1533,6 +1553,16 @@
   }
 
   function on(sel, fn) { var b = $(sel); if (b) b.onclick = fn; }
+
+  /* A double tap on «Continuar» must not answer the next question: taps
+     right after a screen change are swallowed. */
+  var guardUntil = 0;
+  document.addEventListener("click", function (e) {
+    if (Date.now() < guardUntil && !(window.__test && window.__test.fast) && app().contains(e.target)) {
+      e.stopPropagation();
+      e.preventDefault();
+    }
+  }, true);
 
   function wire() {
     document.querySelectorAll("[data-week]").forEach(function (b) {
@@ -1679,8 +1709,12 @@
       input.focus();
       document.querySelectorAll("[data-ins]").forEach(function (b) {
         b.onclick = function () {
-          input.value += b.dataset.ins;
+          // Insert at the cursor, not at the end.
+          var st = input.selectionStart == null ? input.value.length : input.selectionStart;
+          var en = input.selectionEnd == null ? st : input.selectionEnd;
+          input.value = input.value.slice(0, st) + b.dataset.ins + input.value.slice(en);
           input.focus();
+          try { input.setSelectionRange(st + 1, st + 1); } catch (e) { /* */ }
         };
       });
     }
@@ -1983,9 +2017,13 @@
     })
     .catch(function (e) {
       app().innerHTML = '<div class="card"><h2>No se pudo cargar el curso</h2>' +
-        '<p class="muted">' + esc(e.message) + "</p>" +
-        "<p>Serví la carpeta <code>docs/</code> con un servidor web " +
-        "(<code>python3 -m http.server</code>): abrir el archivo directamente " +
-        "bloquea la carga de datos por seguridad del navegador.</p></div>";
+        "<p>La primera vez la app necesita internet para descargarse; después funciona sin conexión. " +
+        "Revisá la conexión y probá de nuevo.</p>" +
+        '<button class="btn" id="retry">Reintentar</button>' +
+        (location.protocol === "file:" ? '<p class="muted">Abierta como archivo: serví la carpeta ' +
+          "<code>docs/</code> con un servidor web (python3 -m http.server).</p>" : "") +
+        '<p class="muted">' + esc(e.message) + "</p></div>";
+      var rb = document.getElementById("retry");
+      if (rb) rb.onclick = function () { location.reload(); };
     });
 })();

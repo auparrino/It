@@ -32,7 +32,15 @@
   var Conj = root.Conj ||
     (typeof require === "function" ? require("./conjugator.js") : null);
 
-  var DATA = { esIt: {}, falsi: {}, spelling: [], lex: {}, nouns: {} };
+  // Maps keyed by what the learner types must not inherit from Object:
+  // "constructor" or "__proto__" are words someone can type.
+  function dict(o) {
+    var d = Object.create(null);
+    if (o) Object.keys(o).forEach(function (k) { d[k] = o[k]; });
+    return d;
+  }
+
+  var DATA = { esIt: dict(), falsi: dict(), spelling: [], lex: dict(), nouns: dict(), nounsByPlural: dict() };
 
   /* --------------------------------------------------------- strumenti */
 
@@ -130,16 +138,16 @@
 
   /* ----------------------------------------------------- inventari */
 
-  var ARTICLES = {
+  var ARTICLES = dict({
     "il": ["m", "s", "det"], "lo": ["m", "s", "det"], "l'": ["?", "s", "det"],
     "la": ["f", "s", "det"], "i": ["m", "p", "det"], "gli": ["m", "p", "det"],
     "le": ["f", "p", "det"], "un": ["m", "s", "ind"], "uno": ["m", "s", "ind"],
     "una": ["f", "s", "ind"], "un'": ["f", "s", "ind"]
-  };
+  });
 
-  var PREP_BASE = { di: "di", a: "a", da: "da", in: "in", su: "su", con: "con",
-                    per: "per", tra: "tra", fra: "fra" };
-  var ART_PREP = {};
+  var PREP_BASE = dict({ di: "di", a: "a", da: "da", in: "in", su: "su", con: "con",
+                    per: "per", tra: "tra", fra: "fra" });
+  var ART_PREP = dict();
   (function () {
     var bases = { a: "a", di: "de", da: "da", in: "ne", su: "su" };
     var arts = { il: "l", lo: "llo", "l'": "ll'", la: "lla", i: "i", gli: "gli", le: "lle" };
@@ -197,7 +205,7 @@
   var PIDX = null;   // participio → lemma
 
   function buildVerbIndex() {
-    VIDX = {}; PIDX = {};
+    VIDX = dict(); PIDX = dict();
     if (!Conj) return;
     Conj.list().forEach(function (v) {
       Conj.SIMPLE_TENSES.forEach(function (t) {
@@ -479,7 +487,7 @@
       explain: "Acá va " + it(e) + (DATA.lex[e] ? " («" + DATA.lex[e] + "»)" : "") + "." };
   }
 
-  var BELLO = {};
+  var BELLO = dict();
   ["bel", "bello", "bell'", "bella", "bei", "begli", "belle"].forEach(function (w) { BELLO[w] = "bello"; });
   ["quel", "quello", "quell'", "quella", "quei", "quegli", "quelle"].forEach(function (w) { BELLO[w] = "quello"; });
 
@@ -750,6 +758,20 @@
 
   function articleRule(g, e, ctx) {
     var noun = nounAfter(ctx), ag = ARTICLES[g], ae = ARTICLES[e];
+    // The hint may only name the learner's own word: naming the expected noun
+    // would give the answer away when the noun itself was wrong (la mesa →
+    // il tavolo, i bracci → le braccia).
+    var gNoun = ctx.g && ctx.gi >= 0 ? ctx.g[ctx.gi + 1] : noun;
+    var shown = gNoun === noun ? noun : null;
+    var r = articleRuleInner(g, e, ctx, noun, ag, ae);
+    if (!shown) {
+      r.hint = r.cat === "genere" ? "Revisá el artículo y la palabra que lo sigue: ¿son del mismo género?"
+             : "Revisá el artículo y la palabra que lo sigue.";
+    }
+    return r;
+  }
+
+  function articleRuleInner(g, e, ctx, noun, ag, ae) {
     var info = DATA.nouns[noun] || DATA.nounsByPlural[noun];
     var sound = soundRule(noun);
     // Gender
@@ -790,7 +812,7 @@
     if (pg.base === pe.base) {
       // Same preposition, wrong article inside it
       if (pe.art && pg.art) {
-        var fake = { e: [pe.art, next], ei: 0 };
+        var fake = { e: [pe.art, next], ei: 0, g: [pg.art, ctx.g ? ctx.g[ctx.gi + 1] : next], gi: 0 };
         var ar = articleRule(pg.art, pe.art, fake);
         ar.cat = "preposizione_articolata";
         ar.explain = it(e) + " = *" + pe.base + " + " + pe.art + "*. " + ar.explain;
@@ -1176,20 +1198,20 @@
 
   function init(bank) {
     bank = bank || {};
-    DATA.esIt = bank.esIt || {};
+    DATA.esIt = dict(bank.esIt);
     // A few multi-word Spanish structures the engine relies on.
     [["lo que", "quello che / ciò che", "Lo que = quello che (o ciò che)."],
      ["tengo que", "devo", "Tener que = dovere: devo andare."],
      ["hay que", "bisogna / si deve", "Hay que = bisogna + infinitivo."],
      ["acabo de", "ho appena", "Acabar de = appena + passato prossimo: ho appena mangiato."]]
       .forEach(function (x) { if (!DATA.esIt[x[0]]) DATA.esIt[x[0]] = [x[1], x[2]]; });
-    DATA.falsi = bank.falsi || {};
+    DATA.falsi = dict(bank.falsi);
     DATA.spelling = (bank.spelling || []).slice().sort(function (a, b) {
       return b[0].length - a[0].length;
     });
-    DATA.lex = {};
-    DATA.nouns = {};
-    DATA.nounsByPlural = {};
+    DATA.lex = dict();
+    DATA.nouns = dict();
+    DATA.nounsByPlural = dict();
     (bank.nouns || []).forEach(function (n) {
       var x = { s: n[0], g: n[1], pl: n[2], es: n[3], note: n[6] };
       DATA.nouns[n[0]] = x;
@@ -1210,7 +1232,6 @@
     });
     VIDX = null;   // rebuild with the new verbs on first use
   }
-  DATA.nounsByPlural = {};
 
   var api = {
     tokens: tokens,
