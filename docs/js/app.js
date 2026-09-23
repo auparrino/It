@@ -2315,7 +2315,21 @@
 
   if ("serviceWorker" in navigator && location.protocol !== "file:") {
     window.addEventListener("load", function () {
-      navigator.serviceWorker.register("sw.js").catch(function () { /* offline no */ });
+      navigator.serviceWorker.register("sw.js").then(function (reg) {
+        reg.update().catch(function () { /* offline */ });
+      }).catch(function () { /* offline no */ });
+      // A new version took over: reload once so the screen runs it too
+      // (outside a round, so no answer is lost).
+      var hadController = !!navigator.serviceWorker.controller, reloading = false;
+      navigator.serviceWorker.addEventListener("controllerchange", function () {
+        if (!hadController || reloading) return;
+        var go = function () {
+          if (["gioco", "lampo", "lezione", "lettura"].indexOf(view.screen) >= 0) { setTimeout(go, 5000); return; }
+          reloading = true;
+          location.reload();
+        };
+        go();
+      });
     });
   }
   // Ask the browser not to evict the save under storage pressure.
