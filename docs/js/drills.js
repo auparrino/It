@@ -181,11 +181,17 @@
     else if (ART_PL.indexOf(low) >= 0) shuffle(ART_PL).forEach(push);
     Object.keys(PREP_ART).forEach(function (p) { if (PREP_ART[p].indexOf(low) >= 0) shuffle(PREP_ART[p]).forEach(push); });
     if (out.length >= 3) return out;
+    // Only for nouns, adjectives and articles: a verb form with another
+    // vowel («siame» for «siamo») is not a form anybody writes, and the
+    // diagnosis would then talk about agreement.  Verb items keep the pool
+    // of other persons (step 3).
+    var nominal = it.type === "plural" || /plural|singular|concordan|adjetiv|femenin|masculin|sustantiv|artículo/i.test(it.prompt || "");
+    var m = /([a-zà-ù']+)\s*→/i.exec(it.stem || "") || /\(([a-zà-ù']+)\)/i.exec(it.stem || "");
+    var base = m ? m[1] : null;
+    if (it.type === "conjugate" || (!nominal && !base)) return out;
     // The word in the stem («fantasma → ___», «(parco)»): left unchanged, or
     // with the Spanish plural; then the answer with another ending vowel,
     // then without its double consonant.
-    var m = /([a-zà-ù']+)\s*→/i.exec(it.stem || "") || /\(([a-zà-ù']+)\)/i.exec(it.stem || "");
-    var base = m ? m[1] : null;
     if (base && base.toLowerCase() !== low) { push(base); push(base + "s"); }
     var stem = ans.replace(/[aeio]$/, "");
     if (stem !== ans) shuffle(["a", "e", "i", "o"]).forEach(function (v) { push(stem + v); });
@@ -203,6 +209,16 @@
     var opts = [];
     function add(o) {
       if (o && !accepted[norm(o)] && opts.every(function (x) { return norm(x) !== norm(o); })) opts.push(o);
+    }
+    // 0. the alternatives the prompt itself names («o» (conjunción) o «ho»
+    //    (verbo)): that contrast is the whole point of the exercise
+    (String(it.prompt || "").match(/«([^»]{1,20})»/g) || []).forEach(function (q) { add(q.replace(/[«»]/g, "")); });
+    // 0b. a book conjugation item: the other answers asked with the same
+    //     prompt are the other persons of the same verb
+    if (it.type === "conjugate" && pool && opts.length < 3) {
+      shuffle(pool.filter(function (x) {
+        return x && x.id !== it.id && x.type === "conjugate" && x.prompt === it.prompt && x.answer && !/\|/.test(x.answer);
+      })).forEach(function (x) { if (opts.length < 3) add(String(x.answer)); });
     }
     // 1. conjugation: the same verb in other persons
     if (it.src === "coniugatore" && Conj) {

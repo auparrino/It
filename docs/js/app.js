@@ -1068,7 +1068,9 @@
     round = {
       kind: kind,
       arg: arg,
-      from: view.screen === "briefing" || view.screen === "sfide" ||
+      // A round that starts from the week (its briefing, its sfide, its
+      // lesson's «A entrenar», a reading opened from it) goes back to the week.
+      from: view.screen === "briefing" || view.screen === "sfide" || view.screen === "lezione" ||
             (view.screen === "lettura" && view.epFrom === "briefing") ? "briefing" : null,
       items: items,
       i: 0,
@@ -1403,8 +1405,10 @@
         '<br><span class="k">bien</span> ' + tokHtml(d.fixed, "fix") + "</div>" : "";
     return '<div class="diag"><span class="tag">' + esc(d.label || "") + "</span>" + diff +
       "<p>" + mk(d.explain || "") + "</p>" +
-      (d.all && d.all.length > 1 ? '<div class="muted">También: ' + d.all.slice(1).map(function (c) {
-        return esc(Diagnosi.LABEL[c] || c); }).join(", ") + "</div>" : "") +
+      (d.all && d.all.length > 1 ? (function () {
+        var seen = {}, rest = d.all.slice(1).filter(function (c) { if (seen[c] || c === d.cat) return false; seen[c] = 1; return true; });
+        return rest.length ? '<div class="muted">También: ' + rest.map(function (c) { return esc(Diagnosi.LABEL[c] || c); }).join(", ") + "</div>" : "";
+      })() : "") +
       "</div>";
   }
 
@@ -2551,7 +2555,11 @@
         var extra = "";
         if (r.verdict !== Engine.VERDICT.RIGHT && window.Diagnosi) {
           var d = Diagnosi.diagnose(r.given, [it.answer], { stem: it.stem });
-          if (d.cat && !GENERIC[d.cat]) { recordError(d, r.given); extra = diagHtml(d, true); }
+          // Tiles are all Italian words handed over: a wrong pick is order,
+          // a tile too many or too few, or the wrong form; never a «false
+          // friend» or a «Spanish word».
+          var TILE_SKIP = { falso_amico: 1, parola_spagnola: 1, lessico: 1 };
+          if (d.cat && !GENERIC[d.cat] && !TILE_SKIP[d.cat]) { recordError(d, r.given); extra = diagHtml(d, true); }
         }
         settle(r.verdict, r.given, extra);
       });
