@@ -834,7 +834,10 @@
   /* One request at a time through the models, best first: each attempt
      waits at most 20 s, the whole thing at most 60 s.  The model that
      answered last time goes first next time. */
-  var MODEL_KEY = "laviac1.cerebras.model", LIST_KEY = "laviac1.cerebras.models";
+  var MODEL_KEY = "laviac1.cerebras.model", LIST_KEY = "laviac1.cerebras.models", PAID_KEY = "laviac1.cerebras.paid";
+  // Models that answered 402 (payment required) with this key: never asked again.
+  function paid() { try { return JSON.parse(localStorage.getItem(PAID_KEY) || "{}") || {}; } catch (e) { return {}; } }
+  function markPaid(model) { var p = paid(); p[model] = Date.now(); try { localStorage.setItem(PAID_KEY, JSON.stringify(p)); } catch (e) { /* */ } }
   function models(key, cb) {
     try {
       var c = JSON.parse(localStorage.getItem(LIST_KEY) || "null");
@@ -864,7 +867,9 @@
   function llm(prompt, key, done) {
     if (typeof fetch !== "function") return done(new Error("sin fetch"));
     models(key, function (list) {
-      var order = list.slice(0, 6), deadline = Date.now() + 60000, lastErr = null, plain = {};
+      // every model of the key, the free-tier-sized ones too, minus those known to be paid
+      var skip = paid(), order = list.filter(function (m) { return !skip[m]; }), deadline = Date.now() + 60000, lastErr = null, plain = {}, n402 = 0;
+      if (!order.length) order = list.slice();
       try {
         var good = localStorage.getItem(MODEL_KEY);
         if (good && order.indexOf(good) > 0) { order.splice(order.indexOf(good), 1); order.unshift(good); }
@@ -873,7 +878,8 @@
       function next(err) {
         if (err) lastErr = err;
         if (k >= order.length || Date.now() > deadline) {
-          var m = lastErr && /abort/i.test(String(lastErr.message || lastErr)) ? "la IA no respondió a tiempo" : String((lastErr && lastErr.message) || lastErr || "sin respuesta");
+          var m = n402 && n402 === k ? "Cerebras pide un plan pago para todos los modelos de tu cuenta (402): fijate en cloud.cerebras.ai que tengas el plan gratuito (Free) activo"
+                : lastErr && /abort/i.test(String(lastErr.message || lastErr)) ? "la IA no respondió a tiempo" : String((lastErr && lastErr.message) || lastErr || "sin respuesta");
           return done(new Error(m));
         }
         attempt(order[k++]);
@@ -896,6 +902,7 @@
             // a model that rejects the JSON mode or the reasoning option: again without them
             if (r.status === 400 && !plain[model] && /response_format|json|reasoning/i.test(b)) { plain[model] = 1; attempt(model); return null; }
             if (r.status === 401 || r.status === 403) return done(new Error("HTTP " + r.status + ", clave"));
+            if (r.status === 402) { n402++; markPaid(model); next(new Error("HTTP 402")); return null; }
             next(new Error(r.status === 429 ? "se terminó el cupo por ahora (429)" : r.status >= 500 ? "Cerebras está saturado ahora (" + r.status + ")" : "HTTP " + r.status));
             return null;
           });
