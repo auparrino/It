@@ -1291,7 +1291,7 @@ def main() -> None:
             for show, _ in texts:
                 ex = re.sub(r"\s+", " ", show).strip()
                 # a real sentence, not a table row («zio → zii», «zia: femminile»)
-                if not ex or "_" in ex or len(ex) > 70 or re.search(r"[→:=]|\s[.,?!]", ex):
+                if not ex or "_" in ex or len(ex) > 70 or re.search(r"[→:=]|\s[.,?!]|\s—\s[a-zà-ù]|\b(?:a|da|di|su) (?:(?:il|lo|la|i|gli|le)(?![a-zà-ù])|l')", ex):
                     continue
                 toks = lessico.words_of(ex)
                 if len(ex.split()) < 3:
@@ -1308,7 +1308,10 @@ def main() -> None:
                     continue
                 if best_ex is None or rank < best_ex[0]:
                     best_ex = (rank, ex)
-            entry[2] = best_ex[1] if best_ex else (bank_example(key, w["week"]) or ESEMPI.get(key, ""))
+            # A reviewed sentence wins over one lifted from an exercise (which
+            # may use the word in another sense, or be a false statement of a
+            # true/false exercise).
+            entry[2] = ESEMPI.get(key) or (best_ex[1] if best_ex else (bank_example(key, w["week"]) or ""))
         n = 12 if w["week"] <= 26 else 15
         best = sorted(cand.values(), key=lambda v: -freq[v[0]])[:0 if w["boss"] else n]
         w["vocab"] = best

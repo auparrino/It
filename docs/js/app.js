@@ -2583,10 +2583,18 @@
       '<button class="tab" id="smodel">👀 Ver un modelo</button></div>' +
       '<label class="muted small ltopt"><input type="checkbox" id="slt"' + (state.ltOff ? "" : " checked") + "> " +
         "Pedir también la corrección de LanguageTool (gratis; el texto se envía a su servidor)</label>" +
+      '<details class="aibox"' + (aiKey() ? "" : " open") + '><summary class="muted small">🤖 Corrector con IA ' + (aiKey() ? "(activado)" : "(opcional, gratis)") + "</summary>" +
+        '<p class="muted small">Marca todo y explica en castellano. Usa Gemini, de Google, con tu propia clave gratuita: ' +
+        'entrá a <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a>, tocá «Create API key», copiala y pegala acá. ' +
+        "Queda solo en este teléfono y el texto se envía a Google.</p>" +
+        '<div class="row"><input id="aikey" type="password" autocomplete="off" placeholder="Pegá tu clave (AIza…)" value="' + esc(aiKey()) + '">' +
+        '<button class="tab" id="aisave">Guardar</button></div></details>' +
       '<div id="sout"></div>';
   }
 
   var scriviTimer = null;
+  var AI_KEY = "laviac1.gemini.key";
+  function aiKey() { try { return localStorage.getItem(AI_KEY) || ""; } catch (e) { return ""; } }
   function wireScrivi() {
     if (view.screen !== "scrivi") return;
     var w = course.weeks[view.week - 1], box = $("#stext");
@@ -2609,16 +2617,46 @@
     });
     var lt = $("#slt");
     if (lt) lt.onchange = function () { state.ltOff = !lt.checked; persist(); };
+    on("#aisave", function () {
+      var k = (($("#aikey") || {}).value || "").trim();
+      try { if (k) localStorage.setItem(AI_KEY, k); else localStorage.removeItem(AI_KEY); } catch (e) { /* */ }
+      if (box && state.scrittiDraft) { state.scrittiDraft[w.week] = box.value; persist(); }
+      toast(k ? "Clave guardada: la próxima revisión usa la IA." : "Clave borrada.");
+      render();
+    });
     on("#scheck", function () {
       var text = box.value, r = Scrivi.check(text, w.week), out = $("#sout");
+      var ai = aiKey();
+      r.ai = ai && text.trim() ? "…" : null;
       showScrivi(w, text, r, state.ltOff ? null : "…");
+      if (r.ai) Scrivi.aiCheck(text, w.week, ai, function (err, data) {
+        if (view.screen !== "scrivi" || $("#stext") !== box || box.value !== text) return;
+        if (err) { r.ai = "error"; r.aiErr = String(err.message || err); }
+        else {
+          r.ai = "ok"; r.aiData = data;
+          // the AI's word goes before LanguageTool's on the same words
+          // what the local checker or LanguageTool said inside a fragment the
+          // AI marked is the same error: the AI's version stays
+          var aiF = Scrivi.fromAI(text, data, []), aiTok = {};
+          aiF.forEach(function (f) { for (var j = 0; j < f.n; j++) aiTok[f.i + j] = 1; });
+          r.findings = r.findings.filter(function (f) {
+            for (var j = 0; j < f.n; j++) if (!aiTok[f.i + j]) return true;
+            return false;
+          }).concat(aiF).sort(function (a, b) { return a.i - b.i; });
+          r.hard = r.findings.filter(function (f) { return !f.soft; }).length;
+        }
+        showScrivi(w, text, r, r.lt || (state.ltOff ? null : "…"));
+      });
       if (state.ltOff || !text.trim()) return;
       // The local check shows at once; LanguageTool's opinion joins it when it arrives.
       Scrivi.ltCheck(text, function (err, matches) {
         if (view.screen !== "scrivi" || $("#stext") !== box || box.value !== text) return;
-        if (err) { showScrivi(w, text, r, "error"); return; }
-        r.findings = r.findings.concat(Scrivi.fromLT(text, matches, r.findings)).sort(function (a, b) { return a.i - b.i; });
+        if (err) { r.lt = "error"; showScrivi(w, text, r, "error"); return; }
+        var ltF = Scrivi.fromLT(text, matches, r.findings.filter(function (f) { return !f.ai; })), aiT = {};
+        r.findings.forEach(function (f) { if (f.ai) for (var j = 0; j < f.n; j++) aiT[f.i + j] = 1; });
+        r.findings = r.findings.concat(ltF.filter(function (f) { return !aiT[f.i]; })).sort(function (a, b) { return a.i - b.i; });
         r.hard = r.findings.filter(function (f) { return !f.soft; }).length;
+        r.lt = "ok";
         showScrivi(w, text, r, "ok");
       });
     });
@@ -2638,6 +2676,13 @@
         (ltState === "…" ? '<p class="muted small">⏳ Consultando LanguageTool…</p>'
           : ltState === "error" ? '<p class="muted small">No pude consultar LanguageTool (sin conexión o límite de uso): esta es solo la revisión local.</p>'
           : ltState === "ok" ? '<p class="muted small">✓ Revisado también por LanguageTool.</p>' : "") +
+        (r.ai === "…" ? '<p class="muted small">⏳ La IA está leyendo tu texto…</p>'
+          : r.ai === "error" ? '<p class="muted small">No pude usar la IA (' + esc(r.aiErr || "") + "). " +
+              (/clave|400|403/.test(r.aiErr || "") ? "Revisá la clave." : "Probá de nuevo en un rato.") + "</p>"
+          : r.ai === "ok" && r.aiData ? '<div class="aiout">' +
+              (r.aiData.comentario ? "<p>🤖 " + esc(r.aiData.comentario) + "</p>" : "") +
+              (r.aiData.corregido ? '<p class="muted small">Versión corregida:</p><p class="model it">' + esc(r.aiData.corregido) + "</p>" : "") +
+            "</div>" : "") +
         (missing.length ? '<p class="muted">Todavía falta: ' + missing.map(function (q) { return esc(q.label) + " (" + q.n + " / " + q.need + ")"; }).join(" · ") + ".</p>"
                         : '<p>Cumple la consigna.' + (hard.length ? " Corregí lo marcado si querés, o entregalo así: los errores quedan anotados para la clínica." : "") + "</p>" +
                           '<button class="btn" id="sdone">✓ Entregar el texto</button>') +
