@@ -172,7 +172,7 @@ NOUNS = [
 NOUNS += [
     ("cibo", "m", "cibi", "comida", "cibo", "A1", ""),
     ("pane", "m", "pani", "pan", "cibo", "A1", ""),
-    ("latte", "m", "latte", "leche", "cibo", "A1", "En español es femenino: la leche → il latte."),
+    ("latte", "m", "latti", "leche", "cibo", "A1", "En español es femenino: la leche → il latte."),
     ("acqua", "f", "acque", "agua", "cibo", "A1", "Femenino con artículo femenino: l'acqua (en español 'el agua')."),
     ("vino", "m", "vini", "vino", "cibo", "A1", ""),
     ("birra", "f", "birre", "cerveza", "cibo", "A1", "Doble r: birra."),
