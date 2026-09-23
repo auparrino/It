@@ -78,7 +78,7 @@
          model: "Buongiorno, vorrei prenotare una camera doppia per tre notti, dal dieci al tredici maggio. Sarebbe possibile avere una camera con vista sul mare? Mi piacerebbe anche sapere se la colazione è inclusa. Potrebbe rispondermi entro venerdì? Grazie mille." },
     21: { t: "Contá qué comprás en el mercado (cuánto de cada cosa) y cada cuánto vas: usá ne y ci.", min: 35,
          use: [["ne", 2, "2 veces ne"], ["ci", 2, "2 veces ci"]],
-         model: "Al mercato compro sempre la frutta: oggi ne prendo due chili. Le uova? Ne compro sei. Il pane lo prendo dal fornaio. Ci vado ogni sabato mattina, e ci resto un'ora perché ci sono sempre tante persone." },
+         model: "Al mercato compro sempre la frutta: oggi ne prendo due chili. Le uova? Ne compro sei. Il pane, invece, lo prendo dal fornaio. Al mercato ci vado ogni sabato mattina, e ci resto un'ora perché ci sono sempre tante persone." },
     22: { t: "Organizás un cumpleaños: contá quién le da qué a quién, con pronombres combinados.", min: 35,
          use: [["combinati", 3, "3 pronombres combinados (glielo, me la, te le…)"]],
          model: "Sabato è il compleanno di Giulia. Il regalo gliel'ho già comprato: è un libro, e glielo do alla festa. La torta? Me la prepara la nonna. Marco vuole sapere l'indirizzo: glielo mando stasera. E tu hai bisogno delle foto? Te le porto io." },
@@ -123,16 +123,16 @@
          model: "Per fare la pizza napoletana si usa una farina speciale. Si impasta la farina con acqua, sale e lievito e si lascia riposare l'impasto per molte ore. Poi si stende la pasta, si mettono il pomodoro e la mozzarella e si cuoce nel forno a legna. Si mangia calda, con le mani!" },
     37: { t: "Contá la vida de un personaje histórico en passato remoto.", min: 45,
          use: [["remoto", 6, "6 verbos en passato remoto"]],
-         model: "Giuseppe Garibaldi nacque a Nizza nel 1807. Da giovane fece il marinaio e viaggiò in tutto il mondo. Visse molti anni in America del Sud, dove combatté in Brasile e in Uruguay. Nel 1860 partì da Quarto con mille volontari e conquistò la Sicilia. Morì a Caprera nel 1882. Ancora oggi in molte città italiane c'è una piazza che porta il suo nome, e in Argentina lo ricordano come un eroe." },
+         model: "Giuseppe Garibaldi nacque a Nizza nel 1807. Da giovane fece il marinaio e viaggiò in tutto il mondo. Visse molti anni in America del Sud, dove combatté in Brasile e in Uruguay. Nel 1860 partì da Quarto con mille volontari e conquistò la Sicilia. Morì a Caprera nel 1882. Ancora oggi in molte città italiane c'è una piazza che porta il suo nome, e lo chiamano ancora «l'eroe dei due mondi»." },
     38: { t: "Contá una conversación reciente en estilo indirecto: qué te dijo, qué te preguntó, qué respondiste.", min: 45,
          use: [["indiretto", 4, "4 verbos de decir con che, se o di (mi ha detto che…)"]],
-         model: "Ieri ho incontrato Paola. Mi ha detto che aveva cambiato lavoro e che era molto contenta. Mi ha chiesto se volessi andare con lei a una festa il sabato dopo. Le ho risposto che mi sarebbe piaciuto, ma che dovevo lavorare. Allora mi ha detto di chiamarla la settimana successiva. Le ho promesso che l'avrei fatto e ci siamo salutati davanti al bar." },
+         model: "Il mese scorso ho incontrato Paola. Mi ha detto che aveva cambiato lavoro e che era molto contenta. Mi ha chiesto se volessi andare con lei a una festa il sabato dopo. Le ho risposto che mi sarebbe piaciuto, ma che dovevo lavorare. Allora mi ha detto di chiamarla la settimana successiva. Le ho promesso che l'avrei fatto e ci siamo salutati davanti al bar." },
     40: { t: "Contá qué cosas hacés hacer y cuáles dejás hacer (el auto, el pelo, los chicos…).", min: 60,
          use: [["causativo", 5, "5 causativos (faccio riparare, lascio fare…)"]],
-         model: "Quando la macchina si rompe, la faccio riparare dal meccanico sotto casa, perché io non ne capisco niente. Ogni mese mi faccio tagliare i capelli da Gino, un barbiere che conosco da anni. A casa, invece, lascio fare molte cose ai miei figli: li lascio cucinare la domenica e li faccio aiutare a pulire. Mia figlia vorrebbe farsi fare un tatuaggio, ma io non glielo lascio fare: è troppo giovane." },
+         model: "Quando la macchina si rompe, la faccio riparare dal meccanico sotto casa, perché io non ne capisco niente. Ogni mese mi faccio tagliare i capelli da Gino, un barbiere che conosco da anni. A casa, invece, lascio fare molte cose ai miei figli: li lascio cucinare la domenica e gli faccio pulire la loro camera. Mia figlia vorrebbe farsi fare un tatuaggio, ma io non glielo lascio fare: è troppo giovane." },
     41: { t: "Contá lo que viste y oíste esta mañana desde tu ventana o en la calle.", min: 60,
          use: [["percezione", 5, "5 verbos de percepción con infinitivo (ho visto… attraversare)"]],
-         model: "Stamattina, dalla finestra, ho visto un signore anziano attraversare la strada molto lentamente. Poi ho sentito due vicini litigare per un parcheggio: gridavano così forte che li ho sentiti anche con la finestra chiusa. Più tardi ho visto dei bambini giocare nel cortile e ho sentito una ragazza cantare una vecchia canzone di Mina. Alla fine ho visto il sole sparire dietro le nuvole e ho sentito cominciare la pioggia." },
+         model: "Stamattina, dalla finestra, ho visto un signore anziano attraversare la strada molto lentamente. Poi ho sentito due vicini litigare per un parcheggio: gridavano così forte che li ho sentiti anche con la finestra chiusa. Più tardi ho visto dei bambini giocare nel cortile e ho sentito una ragazza cantare una vecchia canzone di Mina. Alla fine ho visto il sole sparire dietro le nuvole e ho sentito la pioggia battere sui vetri." },
     42: { t: "Escribí un mail formal a una escuela de idiomas: qué decidiste, qué intentás, qué necesitás.", min: 60,
          use: [["infPrep", 5, "5 verbos con a o di + infinitivo (decidere di, riuscire a…)"]],
          model: "Gentile segreteria, vi scrivo perché ho deciso di iscrivermi al vostro corso di italiano avanzato. Da qualche mese cerco di leggere un giornale italiano ogni giorno, ma non riesco ancora a capire tutti gli articoli di politica. Vorrei cominciare a frequentare le lezioni a settembre e continuare a studiare fino a dicembre. Vi chiedo di inviarmi il programma e di indicarmi il costo. Spero di ricevere presto una vostra risposta. Distinti saluti, Laura Gómez" },
@@ -144,7 +144,7 @@
          model: "Ho imparato a cucinare guardando mia nonna. Stando accanto a lei in cucina, ho capito i segreti della pasta fatta in casa. Sbagliando molte volte, ho imparato a dosare la farina e le uova. Finito il corso di cucina che ho fatto l'anno scorso, ho cominciato a preparare la cena per gli amici. Arrivati a casa mia, tutti chiedono sempre la stessa cosa: le lasagne della nonna!" },
     45: { t: "Contá una situación difícil: si al final lo lograste, si te fuiste, si te enojaste (farcela, andarsene, prendersela…).", min: 60,
          use: [["pronominali", 5, "5 verbos pronominales (farcela, andarsene, metterci…)"]],
-         model: "Il mese scorso ho dovuto traslocare da solo. Ci sono volute tre settimane per trovare un appartamento, e ci ho messo due giorni a riempire gli scatoloni. A un certo punto ho pensato di non farcela e volevo andarmene in vacanza. Il padrone di casa se l'è presa perché ho graffiato il pavimento, ma alla fine me la sono cavata con una piccola multa. Quando è finito tutto, ho detto: ce l'ho fatta!" },
+         model: "Il mese scorso ho dovuto traslocare da solo. Ci sono volute tre settimane per trovare un appartamento, e ci ho messo due giorni a riempire gli scatoloni. A un certo punto ho pensato di non farcela e volevo andarmene in vacanza. Il padrone di casa se l'è presa perché ho graffiato il pavimento, ma alla fine me la sono cavata pagando un piccolo risarcimento. Quando è finito tutto, ho detto: ce l'ho fatta!" },
     46: { t: "Describí tu casa y tu barrio con diminutivos, aumentativos y despectivos (casetta, gattone, tempaccio…).", min: 60,
          use: [["suffissi", 6, "6 palabras con sufijo (-etto, -ino, -one, -accio…)"]],
          model: "Abito in una casetta con un giardinetto pieno di fiorellini. Il vicino ha un gattone grasso che dorme tutto il giorno sul muretto. Purtroppo in questi giorni fa un tempaccio: piove sempre e il cielo è grigio. In fondo alla strada c'è un localino dove fanno dei panini buonissimi. Il proprietario è un omone simpatico con un vocione che si sente da lontano. La sera i ragazzini giocano a pallone nella piazzetta." },
@@ -153,7 +153,7 @@
          model: "Per la cena di sabato siamo in otto. Mi servono un chilo e mezzo di pasta, tre etti di parmigiano e mezzo litro di panna. Per l'antipasto compro una dozzina di uova e un paio di etti di prosciutto crudo. Il vino? Direi una decina di bottiglie. Ho un budget di cento euro: il trenta per cento va per il vino e metà per la carne. Il resto lo spendo per il dolce, che deve bastare per una ventina di fette." },
     48: { t: "Contá una anécdota de una fiesta con dislocaciones y frases escindidas (La torta l'ha fatta…, È stata lei a…).", min: 60,
          use: [["dislocazioni", 4, "4 dislocaciones o frases escindidas"]],
-         model: "La torta l'ha fatta mia sorella, non io. È stata lei a decidere il menù della festa, e i biglietti d'invito li ha scritti a mano. Io, il vino, l'ho scelto all'ultimo momento. Alla festa è arrivato anche Paolo, che non vedevamo da anni. È stato lui che ha portato la chitarra, e le canzoni le abbiamo cantate fino alle tre. I vicini, però, non li abbiamo invitati, e se ne sono ricordati il giorno dopo." },
+         model: "La torta l'ha fatta mia sorella, non io. È stata lei a decidere il menù della festa, e i biglietti d'invito li ha scritti a mano. Io, il vino, l'ho scelto all'ultimo momento. Alla festa è arrivato anche Paolo, che non vedevamo da anni. È stato lui che ha portato la chitarra, e le canzoni le abbiamo cantate fino alle tre. I vicini, però, non li abbiamo invitati, e il giorno dopo si sono lamentati del rumore." },
     49: { t: "Texto argumentativo formal: ¿las ciudades deberían prohibir los autos en el centro? Introducción, argumentos y conclusión.", min: 60,
          use: [["connettiviAlti", 5, "5 conectores de registro alto (pertanto, inoltre, sebbene, in conclusione…)"]],
          model: "In primo luogo, occorre ricordare che il traffico è una delle principali cause dell'inquinamento urbano. Chiudere il centro alle automobili, pertanto, migliorerebbe la qualità dell'aria. Inoltre, le strade liberate potrebbero diventare spazi per i pedoni e per il commercio. D'altro canto, sebbene i vantaggi siano evidenti, non si può ignorare il problema di chi lavora in centro e non dispone di mezzi pubblici adeguati. In conclusione, ritengo che il divieto sia auspicabile, purché venga accompagnato da un serio investimento nel trasporto pubblico." },
@@ -483,9 +483,40 @@
     return g === "m" ? (snd === "sz" ? "uno" : "un") : (snd === "v" ? "un'" : "una");
   }
 
+  /* Who is talking: a text in first person singular («Mi chiamo…», «io»,
+     «mio», a verb in the io form) with no noi / voi / loro as subject.  In
+     such a text a verb with no subject of its own is the learner's. */
+  var NOT_PERSONAL = /^(piacere|sembrare|mancare|servire|interessare|bastare|dispiacere|volerci|occorrere|succedere|costare|parere|convenire|importare)$/;
+  function speakerIo(tk) {
+    var io = 0, pl = 0;
+    tk.forEach(function (t, i) {
+      if (!t.w) return;
+      if (/^(io|mio|mia|miei|mie|me)$/.test(t.w)) io++;
+      if (t.w === "mi" && t.start) io++;
+      if (/^(noi|voi|loro|nostro|nostra|nostri|nostre)$/.test(t.w)) pl++;
+      if (V(t.w).some(function (v) { return v.p === 0 && v.tense !== "congiuntivo" && v.tense !== "congImperfetto"; }) &&
+          !V(t.w).some(function (v) { return v.p !== 0; })) io++;
+    });
+    return io > 0 && pl === 0;
+  }
+  function ioForm(lemma, tense) {
+    try { var f = Conj.conjugate(lemma, tense)[0]; return f.split(" ").pop(); } catch (e) { return null; }
+  }
+  // An adjective in the other number: felici → felice, argentino → argentini.
+  function adjNumber(w, plural) {
+    var lem = DATA.adj[w];
+    if (!lem) return null;
+    var stem = w.replace(/(he|hi)$/, "h").replace(/[oaie]$/, "");
+    var cands = plural ? (/[ie]$/.test(w) && /e$/.test(lem) ? [stem + "i"] : /a$/.test(w) ? [stem + "e", stem.replace(/(c|g)$/, "$1h") + "e"] : [stem + "i", stem.replace(/(c|g)$/, "$1h") + "i"])
+                       : (/e$/.test(lem) ? [stem + "e"] : /e$/.test(w) ? [stem + "a"] : [stem + "o"]);
+    for (var k = 0; k < cands.length; k++) if (DATA.adj[cands[k]] === lem) return cands[k];
+    return null;
+  }
+
   function lint(text, week) {
     week = week || 52;
     var tk = toks(text), out = [];
+    var isIo = speakerIo(tk), personFlag = {};
     var push = function (i, n, cat, msg, soft) { out.push({ i: i, n: n || 1, cat: cat, msg: msg, soft: !!soft }); };
     var it = function (s) { return "*" + s + "*"; };
     var wi = function (k, dir) { for (var x = k + dir; x >= 0 && x < tk.length; x += dir) if (tk[x].w) return x; return -1; };
@@ -604,6 +635,64 @@
       if (w === "e" && (/^(lui|lei)$/.test(p) || (pi >= 0 && tk[pi].cap && !tk[pi].start)) && ni >= 0 && (DATA.adj[n] || isPart(n)) && !(tk[ni].cap)) {
         push(i, 1, "accento", "El verbo lleva tilde: " + it("è") + " (*e* sin tilde es «y»).");
       }
+      // 15. Persona: hablás de vos y el verbo no tiene sujeto propio
+      //     (Mi chiami → mi chiamo, Hanno 32 anni → ho, e siamo → sono).
+      if (isIo && !proper) {
+        var clauseStart = t.start || /^(e|ma|però|poi|anche|quindi)$/.test(p) ||
+          (pi >= 0 && tk[pi].start && /^(mi|ti|ci|vi|si|non)$/.test(p));
+        var subjBefore = false;
+        for (var sb = i - 1; sb >= 0 && tk[sb].w; sb--) { if (/^(io|tu|lui|lei|noi|voi|loro)$/.test(tk[sb].w) || (tk[sb].cap && !tk[sb].start) || isNoun(tk[sb].w)) { subjBefore = true; break; } }
+        var ind = V(w).filter(function (v) { return !/congiuntivo|congImperfetto/.test(v.tense); });
+        // noi / voi («siamo in tre») only with a singular adjective after it
+        // (siamo argentino); tu in a question is someone else (mi chiami domani?)
+        var nxAdj = ni >= 0 && DATA.adj[n] && !/[ie]$/.test(n) ? n : null;
+        var sEnd = null;
+        for (var se = i + 1; se < tk.length; se++) if (tk[se].p && /[.!?]/.test(tk[se].p)) { sEnd = tk[se].p; break; }
+        if (ind.length && ind.every(function (v) { return v.p === 3 || v.p === 4; }) && !nxAdj) ind = [];
+        if (ind.length && ind.every(function (v) { return v.p === 1; }) && sEnd === "?") ind = [];
+        if (clauseStart && !subjBefore && ind.length && !ind.some(function (v) { return v.p === 0 || v.p === 2; }) &&
+            !NOT_PERSONAL.test(ind[0].lemma)) {
+          var v0 = ind[0] || V(w)[0], f0 = v0 && ioForm(v0.lemma, v0.tense);
+          if (f0 && f0 !== w && !NOT_PERSONAL.test(v0.lemma) || (v0 && v0.lemma === "essere" && f0 && f0 !== w)) {
+            personFlag[i] = 1;
+            push(i, 1, "persona_verbale", "Hablás de vos (*io*): " + it((p === "mi" ? "mi " : "") + f0) + ", no " + it(w) + ".");
+          }
+        }
+      }
+      // 16. Adjetivo con essere: el número del sujeto (è felici, siamo contento, io sono felici)
+      if (ESS_ALL[w] && !personFlag[i]) {
+        var aj = ni;
+        if (aj >= 0 && /^(molto|tanto|così|più|proprio|davvero|un po'|sempre|già)$/.test(n)) aj = wi(ni, 1);
+        var aw = aj >= 0 ? tk[aj].w : "";
+        if (aw && DATA.adj[aw] && !isNoun(aw)) {
+          var subj16 = false;
+          for (var s6 = i - 1; s6 >= 0 && tk[s6].w; s6--) {
+            if (/^(tu|lui|lei|noi|voi|loro)$/.test(tk[s6].w) || (tk[s6].cap && !tk[s6].start) || isNoun(tk[s6].w) || (tk[s6].cap && s6 !== i - 1 && !/^(mi|io|non)$/.test(tk[s6].w))) { subj16 = true; break; }
+            if (tk[s6].w === "e" && s6 > 0 && tk[s6 - 1].cap) { subj16 = true; break; }
+          }
+          var sing = /^(sei|è|ero|eri|era|sarò|sarai|sarà|sarei|saresti|sarebbe|sia)$/.test(w) || (isIo && !subj16 && /^(sono|ero|sarò|sarei)$/.test(w));
+          var plu = /^(siamo|siete|eravamo|eravate|erano|saremo|sarete|saranno|saremmo|sareste|sarebbero|siano)$/.test(w) || (!isIo && w === "sono" && false);
+          var isPl = /[ie]$/.test(aw) && DATA.adj[aw] !== aw && !(/e$/.test(aw) && DATA.adj[aw] === aw);
+          var fix = sing && isPl ? adjNumber(aw, false) : plu && !isPl ? adjNumber(aw, true) : null;
+          if (fix && fix !== aw) push(aj, 1, "accordo", (sing && isIo && w === "sono" ? "Hablás de vos: el adjetivo va en singular: " : "Concuerda con el sujeto de " + it(w) + ": ") + it(fix) + ".");
+        }
+      }
+      // 17. Después de un número, plural: 32 anni (no «anno», ni «anne»)
+      if ((/^\d+$/.test(w) && +w > 1) || (NUMS.test(w) && !/^(uno|una|un|primo|prima|secondo|terzo|quarto|quinto|sesto|settimo|ottavo|nono|decimo|mezzogiorno|mezzanotte|sei)$/.test(w))) {
+        if (ni === i + 1 && !personFlag[ni] && !/^(gennaio|febbraio|marzo|aprile|maggio|giugno|luglio|agosto|settembre|ottobre|novembre|dicembre|euro|per|volte|e|o)$/.test(n)) {
+          var nw = n, pluralOk = DATA.nounsByPlural[nw] && DATA.nounsByPlural[nw].pl === nw;
+          var cand = DATA.nouns[nw] && DATA.nouns[nw].s === nw && DATA.nouns[nw].pl !== nw ? DATA.nouns[nw].pl : null;
+          if (!pluralOk && !cand && !known(nw)) {
+            var st = nw.replace(/[oaie]$/, "");
+            ["i", "e"].forEach(function (x) { if (!cand && DATA.nounsByPlural[st + x] && DATA.nounsByPlural[st + x].pl === st + x) cand = st + x; });
+          }
+          if (cand && !pluralOk) {
+            // a word already flagged as unknown is replaced by this clearer one
+            out = out.filter(function (f) { return f.i !== ni; });
+            push(ni, 1, "plurale", "Después de " + it(t.o) + " va el plural: " + it(cand) + ".");
+          }
+        }
+      }
       // 14. «sono trenta anni» → «ho trent'anni»
       if (w === "sono" && ni >= 0 && (NUMS.test(n) || /^\d+$/.test(n)) && tk[ni + 1] && tk[ni + 1].w === "anni" && !(tk[ni + 2] && /^(che|fa)$/.test(tk[ni + 2].w || ""))) {
         push(i, 1, "lessico", "La edad va con *avere*: " + it("ho " + n + " anni") + ".");
@@ -694,10 +783,73 @@
     return out;
   }
 
+  /* ------------------------------------------------------------ IA
+     Optional: Google's Gemini with the learner's own free key (Google AI
+     Studio).  It reads the whole text like a teacher, marks everything and
+     explains in Spanish; the key never leaves the phone except to Google. */
+  var AI_MODELS = ["gemini-flash-latest", "gemini-2.5-flash", "gemini-2.0-flash"];
+  function aiPrompt(text, week, task) {
+    return "Sos profesor de italiano para un hispanohablante rioplatense que está en la semana " + week +
+      " de 52 de un curso hasta C1. La consigna era: «" + (task ? task.t : "texto libre") + "».\n" +
+      "Corregí su texto. Marcá TODOS los errores: gramática, concordancia, persona del verbo, artículos, " +
+      "preposiciones, léxico, ortografía, tildes, dobles, castellano metido y lo que un italiano no diría. " +
+      "No marques como error algo correcto solo porque se podría decir mejor.\n" +
+      "Respondé SOLO con JSON: {\"errores\":[{\"mal\":\"fragmento EXACTO copiado del texto (lo más corto posible)\"," +
+      "\"bien\":\"la corrección de ese fragmento\",\"explicacion\":\"una oración en castellano rioplatense con la regla\"}]," +
+      "\"corregido\":\"el texto completo corregido\",\"comentario\":\"una o dos oraciones de devolución, en castellano\"}\n\n" +
+      "Texto:\n" + text;
+  }
+  function aiCheck(text, week, key, done, model) {
+    model = model || AI_MODELS[0];
+    if (typeof fetch !== "function") return done(new Error("sin fetch"));
+    var ctl = typeof AbortController === "function" ? new AbortController() : null;
+    var timer = setTimeout(function () { if (ctl) ctl.abort(); }, 30000);
+    fetch("https://generativelanguage.googleapis.com/v1beta/models/" + model + ":generateContent?key=" + encodeURIComponent(key), {
+      method: "POST", signal: ctl ? ctl.signal : undefined, headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ contents: [{ role: "user", parts: [{ text: aiPrompt(text, week, TASKS[week]) }] }],
+                             generationConfig: { temperature: 0.2, responseMimeType: "application/json" } })
+    }).then(function (r) {
+      var k = AI_MODELS.indexOf(model);
+      if (r.status === 404 && k >= 0 && k < AI_MODELS.length - 1) { clearTimeout(timer); aiCheck(text, week, key, done, AI_MODELS[k + 1]); return null; }
+      if (!r.ok) return r.text().then(function (b) { throw new Error("HTTP " + r.status + (/API.?key/i.test(b) ? ", clave" : "")); });
+      return r.json();
+    }).then(function (j) {
+      if (!j) return;
+      clearTimeout(timer);
+      var c = j.candidates && j.candidates[0];
+      var txt = c && c.content && c.content.parts ? c.content.parts.map(function (p) { return p.text || ""; }).join("") : "";
+      done(null, JSON.parse(String(txt || "{}").replace(/^\s*```(json)?/, "").replace(/```\s*$/, "").trim()));
+    }).catch(function (e) { clearTimeout(timer); done(e); });
+  }
+  // The AI's errors as findings on the text's tokens (each fragment is found
+  // in the text; what the local checker already marked is not repeated).
+  function fromAI(text, data, local) {
+    var tk = toks(text), taken = {}, low = String(text).replace(/[’‘`´]/g, "'").toLowerCase(), from = 0, out = [];
+    (local || []).forEach(function (f) { if (!f.lt) for (var j = 0; j < f.n; j++) taken[f.i + j] = 1; });
+    ((data && data.errores) || []).forEach(function (e) {
+      var bad = String(e.mal || "").replace(/[’‘`´]/g, "'").trim();
+      if (!bad) return;
+      var at = low.indexOf(bad.toLowerCase(), from);
+      if (at < 0) at = low.indexOf(bad.toLowerCase());
+      if (at < 0) return;
+      from = at + bad.length;
+      var first = -1, n = 0;
+      tk.forEach(function (t, i) { if (t.w && t.at < at + bad.length && t.at + t.len > at) { if (first < 0) first = i; n = i - first + 1; } });
+      if (first < 0) return;
+      var dup = true;
+      for (var j = 0; j < n; j++) if (!taken[first + j]) dup = false;
+      if (dup) return;
+      out.push({ i: first, n: n, cat: "ia", soft: false, ai: true,
+                 msg: "IA: " + (e.bien ? "*" + bad + "* → *" + String(e.bien).trim() + "*. " : "") + String(e.explicacion || "").trim() });
+    });
+    return out;
+  }
+
   function weeks() { return Object.keys(TASKS).map(Number); }
 
   var api = { TASKS: TASKS, features: features, lint: lint, check: check, markup: markup, weeks: weeks, toks: toks,
-              learn: learn, learnCourse: learnCourse, ltCheck: ltCheck, fromLT: fromLT };
+              learn: learn, learnCourse: learnCourse, ltCheck: ltCheck, fromLT: fromLT,
+              aiCheck: aiCheck, fromAI: fromAI, aiPrompt: aiPrompt };
   if (typeof module === "object" && module.exports) module.exports = api;
   else root.Scrivi = api;
 })(typeof window !== "undefined" ? window : globalThis);
