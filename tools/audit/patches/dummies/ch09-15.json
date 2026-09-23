@@ -189,7 +189,9 @@
    "type": "translate",
    "stem": "(voi) Duerman. (Váyanse a dormir.)",
    "answer": "Dormite.",
-   "alt": [],
+   "alt": [
+    "Andate a dormire."
+   ],
    "drop": false
   },
   "d09-024": {
@@ -1606,7 +1608,8 @@
    "answer": "parecchie case",
    "alt": [
     "diverse case",
-    "varie case"
+    "varie case",
+    "alcune case"
    ],
    "drop": false
   },
@@ -1690,7 +1693,9 @@
    "type": "translate",
    "stem": "Algo cambió.",
    "answer": "Qualcosa è cambiato.",
-   "alt": [],
+   "alt": [
+    "È cambiato qualcosa."
+   ],
    "drop": false
   },
   "d13-028": {

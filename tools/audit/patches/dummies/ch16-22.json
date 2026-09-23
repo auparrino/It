@@ -1057,7 +1057,7 @@
    "drop": false
   },
   "d18-031": {
-   "consigna": "Traducí al italiano. Ojo: después de se, quando y appena, si la acción es futura, en italiano va futuro (no presente ni subjuntivo como en castellano).",
+   "consigna": "Traducí al italiano. Ojo: después de quando y appena, si la acción es futura, en italiano va futuro (no presente ni subjuntivo como en castellano); después de se sirven el futuro o el presente.",
    "type": "translate",
    "stem": "Apenas lo sepan, nos lo van a decir.",
    "answer": "Appena lo sapranno, ce lo diranno.",
@@ -1071,7 +1071,7 @@
    "drop": false
   },
   "d18-032": {
-   "consigna": "Traducí al italiano. Ojo: después de se, quando y appena, si la acción es futura, en italiano va futuro (no presente ni subjuntivo como en castellano).",
+   "consigna": "Traducí al italiano. Ojo: después de quando y appena, si la acción es futura, en italiano va futuro (no presente ni subjuntivo como en castellano); después de se sirven el futuro o el presente.",
    "type": "translate",
    "stem": "Cuando ustedes lleguen, vamos a comer.",
    "answer": "Quando arriverete, mangeremo.",
@@ -1083,19 +1083,23 @@
    "drop": false
   },
   "d18-033": {
-   "consigna": "Traducí al italiano. Ojo: después de se, quando y appena, si la acción es futura, en italiano va futuro (no presente ni subjuntivo como en castellano).",
+   "consigna": "Traducí al italiano. Ojo: después de quando y appena, si la acción es futura, en italiano va futuro (no presente ni subjuntivo como en castellano); después de se sirven el futuro o el presente.",
    "type": "translate",
    "stem": "Si Mario no va, no va a ver a sus amigos.",
    "answer": "Se Mario non andrà, non vedrà gli amici.",
    "alt": [
     "Se Mario non andrà non vedrà gli amici",
     "Se Mario non andrà, non vedrà i suoi amici.",
-    "Se Mario non andrà non vedrà i suoi amici"
+    "Se Mario non andrà non vedrà i suoi amici",
+    "Se Mario non va, non vedrà gli amici.",
+    "Se Mario non va non vedrà gli amici",
+    "Se Mario non va, non vedrà i suoi amici.",
+    "Se Mario non va non vedrà i suoi amici"
    ],
    "drop": false
   },
   "d18-034": {
-   "consigna": "Traducí al italiano. Ojo: después de se, quando y appena, si la acción es futura, en italiano va futuro (no presente ni subjuntivo como en castellano).",
+   "consigna": "Traducí al italiano. Ojo: después de quando y appena, si la acción es futura, en italiano va futuro (no presente ni subjuntivo como en castellano); después de se sirven el futuro o el presente.",
    "type": "translate",
    "stem": "Apenas reciba una carta, te aviso.",
    "answer": "Appena riceverò una lettera, ti farò sapere.",
@@ -1104,20 +1108,28 @@
     "Appena riceverò una lettera, te lo farò sapere.",
     "Appena riceverò una lettera te lo farò sapere",
     "Non appena riceverò una lettera, ti farò sapere.",
-    "Non appena riceverò una lettera ti farò sapere"
+    "Non appena riceverò una lettera ti farò sapere",
+    "Appena riceverò una lettera, ti avviserò.",
+    "Appena riceverò una lettera ti avviserò",
+    "Non appena riceverò una lettera, ti avviserò.",
+    "Non appena riceverò una lettera ti avviserò"
    ],
    "drop": false,
-   "note": "Farsi sapere / far sapere = avisar, hacer saber."
+   "note": "Far sapere = avisar, hacer saber."
   },
   "d18-035": {
-   "consigna": "Traducí al italiano. Ojo: después de se, quando y appena, si la acción es futura, en italiano va futuro (no presente ni subjuntivo como en castellano).",
+   "consigna": "Traducí al italiano. Ojo: después de quando y appena, si la acción es futura, en italiano va futuro (no presente ni subjuntivo como en castellano); después de se sirven el futuro o el presente.",
    "type": "translate",
    "stem": "Si tienen un rato libre, van a venir a visitarnos.",
    "answer": "Se avranno un momento libero, verranno a trovarci.",
    "alt": [
     "Se avranno un momento libero verranno a trovarci",
     "Se avranno un attimo libero, verranno a trovarci.",
-    "Se avranno un attimo libero verranno a trovarci"
+    "Se avranno un attimo libero verranno a trovarci",
+    "Se hanno un momento libero, verranno a trovarci.",
+    "Se hanno un momento libero verranno a trovarci",
+    "Se hanno un attimo libero, verranno a trovarci.",
+    "Se hanno un attimo libero verranno a trovarci"
    ],
    "drop": false,
    "note": "Venire a trovare qualcuno = ir a visitar a alguien."
@@ -2256,7 +2268,9 @@
    "alt": [
     "Lei sarebbe partita",
     "Se ne sarebbe andata",
-    "Lei se ne sarebbe andata"
+    "Lei se ne sarebbe andata",
+    "Sarebbe andata via",
+    "Lei sarebbe andata via"
    ],
    "drop": false
   },
@@ -2305,7 +2319,13 @@
    "alt": [
     "Lei sarebbe dovuta partire",
     "Avrebbe dovuto partire",
-    "Lei avrebbe dovuto partire"
+    "Lei avrebbe dovuto partire",
+    "Avrebbe dovuto andarsene",
+    "Lei avrebbe dovuto andarsene",
+    "Se ne sarebbe dovuta andare",
+    "Lei se ne sarebbe dovuta andare",
+    "Sarebbe dovuta andare via",
+    "Lei sarebbe dovuta andare via"
    ],
    "drop": false
   },
@@ -2344,7 +2364,13 @@
    "alt": [
     "Lei sarebbe potuta partire",
     "Avrebbe potuto partire",
-    "Lei avrebbe potuto partire"
+    "Lei avrebbe potuto partire",
+    "Avrebbe potuto andarsene",
+    "Lei avrebbe potuto andarsene",
+    "Se ne sarebbe potuta andare",
+    "Lei se ne sarebbe potuta andare",
+    "Sarebbe potuta andare via",
+    "Lei sarebbe potuta andare via"
    ],
    "drop": false
   },
@@ -2535,7 +2561,7 @@
   "d22-022": {
    "consigna": "Completá con el congiuntivo passato o trapassato según la concordancia de tiempos (o con el infinitivo pasado si no hay «che»). El auxiliar está indicado.",
    "type": "cloze",
-   "stem": "Le ragazze volevano che i genitori gli ___ (avere/dare) dei soldi.",
+   "stem": "Le ragazze speravano che i genitori gli ___ (avere/dare) dei soldi.",
    "answer": "avessero dato",
    "alt": [],
    "drop": false

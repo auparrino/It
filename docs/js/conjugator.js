@@ -123,7 +123,8 @@
       pres: ["voglio", "vuoi", "vuole", "vogliamo", "volete", "vogliono"],
       futStem: "vorr",
       cong: ["voglia", "voglia", "voglia", "vogliamo", "vogliate", "vogliano"],
-      prStem: "voll"
+      prStem: "voll",
+      noImpv: true
     },
     dovere: {
       es: "deber/tener que", aux: "both",
@@ -162,7 +163,7 @@
       cong: ["esca", "esca", "esca", "usciamo", "usciate", "escano"]
     },
     salire: {
-      es: "subir", aux: "both",
+      es: "subir", aux: "essere",
       pres: ["salgo", "sali", "sale", "saliamo", "salite", "salgono"],
       cong: ["salga", "salga", "salga", "saliamo", "saliate", "salgano"]
     },
@@ -176,7 +177,6 @@
     morire: {
       es: "morir", aux: "essere", pp: "morto",
       pres: ["muoio", "muori", "muore", "moriamo", "morite", "muoiono"],
-      futStem: "morr",
       cong: ["muoia", "muoia", "muoia", "moriamo", "moriate", "muoiano"]
     },
     sedere: {

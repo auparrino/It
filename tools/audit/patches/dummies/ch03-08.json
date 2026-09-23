@@ -1766,7 +1766,9 @@
    "stem": "Paolo llama por teléfono a Marisa y hablan.",
    "answer": "Paolo telefona a Marisa e parlano.",
    "alt": [
-    "Paolo telefona a Marisa e loro parlano."
+    "Paolo telefona a Marisa e loro parlano.",
+    "Paolo chiama Marisa e parlano.",
+    "Paolo chiama Marisa e loro parlano."
    ],
    "drop": false,
    "note": "En italiano se telefona a qualcuno (con a), igual que en castellano."
@@ -2083,7 +2085,9 @@
    "alt": [
     "Nonna ha ottanta anni.",
     "La nonna ha 80 anni.",
-    "Nonna ha 80 anni."
+    "Nonna ha 80 anni.",
+    "La nonna ha ottant'anni.",
+    "Nonna ha ottant'anni."
    ],
    "drop": false
   },

@@ -62,8 +62,17 @@
 
   var PERSON_LABEL = ["io", "tu", "lui/lei", "noi", "voi", "loro"];
 
+  /* Verbs marked aux "both" (mancare, guarire, servire, salire...) take
+     essere when intransitive: the essere forms are right too. */
+  function otherAux(verb, tense) {
+    var info = Conj.info(verb);
+    if (info.aux !== "both" || info.refl || Conj.SIMPLE_TENSES.indexOf(tense) >= 0) return null;
+    return Conj.conjugate(verb, tense, { aux: "essere" });
+  }
+
   function conjugationDrill(verb, tense) {
     var forms = Conj.conjugate(verb, tense);
+    var alt = otherAux(verb, tense);
     var p = Math.floor(Math.random() * 6);
     var answer = forms[p];
 
@@ -73,7 +82,8 @@
     // the same option shows up twice.
     var pool = [];
     function add(f) {
-      if (f && f !== answer && pool.indexOf(f) < 0) pool.push(f);
+      if (f && f !== answer && pool.indexOf(f) < 0 &&
+          !(alt && alt.indexOf(f) >= 0)) pool.push(f);
     }
     forms.forEach(add);
     shuffle(Conj.ALL_TENSES).forEach(function (t) {
@@ -100,13 +110,15 @@
       stem: PERSON_LABEL[p] + " ___",
       options: options,
       answer: answer,
-      accept: [answer],
-      note: verb + " · " + Conj.TENSE_LABELS[tense] + ": " + forms.join(", ")
+      accept: alt ? [answer, alt[p]] : [answer],
+      note: verb + " · " + Conj.TENSE_LABELS[tense] + ": " + forms.join(", ") +
+            (alt ? " (o con essere: " + alt.join(", ") + ")" : "")
     };
   }
 
   function conjugationTyped(verb, tense) {
     var forms = Conj.conjugate(verb, tense);
+    var alt = otherAux(verb, tense);
     var p = Math.floor(Math.random() * 6);
     var info = Conj.info(verb);
     return {
@@ -118,8 +130,9 @@
               Conj.TENSE_LABELS[tense],
       stem: PERSON_LABEL[p] + " ___ (" + verb + ")",
       answer: forms[p],
-      accept: [forms[p]],
-      note: verb + " · " + Conj.TENSE_LABELS[tense] + ": " + forms.join(", ")
+      accept: alt ? [forms[p], alt[p]] : [forms[p]],
+      note: verb + " · " + Conj.TENSE_LABELS[tense] + ": " + forms.join(", ") +
+            (alt ? " (o con essere: " + alt.join(", ") + ")" : "")
     };
   }
 
