@@ -91,71 +91,265 @@
 
   /* ------------------------------------------------- ripetizione dilazionata */
 
-  /* SM-2 semplificato.  Ogni scheda tiene: ease, interval (giorni), due (ms). */
+  /* FSRS (Free Spaced Repetition Scheduler, Jarrett Ye / open-spaced-
+     repetition, versione 5) con i parametri predefiniti, che nel benchmark
+     pubblico (519 M di ripassi) predicono meglio di SM-2 e dell'HLR di
+     Duolingo.  Ogni scheda tiene: s (stabilità in giorni: quanto ci vuole
+     perché la probabilità di ricordo scenda al 90 %), d (difficoltà 1-10),
+     due, last, reps (successi di fila), lapses, ok, state.
+     Niente si «ritira»: dopo quattro successi la scheda passa a
+     «mantenimento» (Rawson & Dunlosky 2022; Bahrick 1993) e torna a
+     intervalli di mesi, con un tetto giornaliero (drills.dueList). */
   var DAY = 86400000;
+  var W = [0.40255, 1.18385, 3.173, 15.69105, 7.1949, 0.5345, 1.4604, 0.0046, 1.54575, 0.1192,
+           1.01925, 1.9395, 0.11, 0.29605, 2.2698, 0.2315, 2.9898, 0.51655, 0.6621];
+  var DECAY = -0.5, FACTOR = 19 / 81;
+  var MAINT_S = 60;          // stabilità (giorni) da cui la scheda è in mantenimento
+  var RETENTIONS = [0.85, 0.9, 0.95];
 
+  // Probability of recall after t days for a card of stability s.
+  function retrievability(t, s) {
+    if (!(s > 0)) return 0;
+    return Math.pow(1 + FACTOR * Math.max(0, t) / s, DECAY);
+  }
+  // Days until recall drops to the desired retention r.
+  function intervalFor(s, r) {
+    return Math.max(1, Math.round(s / FACTOR * (Math.pow(r, 1 / DECAY) - 1)));
+  }
+  function clampD(d) { return Math.min(10, Math.max(1, d)); }
+  function initS(g) { return W[g - 1]; }
+  function initD(g) { return clampD(W[4] - Math.exp(W[5] * (g - 1)) + 1); }
+  function nextD(d, g) {
+    var d1 = d + (-W[6] * (g - 3)) * (10 - d) / 9;
+    return clampD(W[7] * initD(4) + (1 - W[7]) * d1);
+  }
+  function recallS(d, s, r, g) {
+    var hard = g === 2 ? W[15] : 1, easy = g === 4 ? W[16] : 1;
+    return s * (Math.exp(W[8]) * (11 - d) * Math.pow(s, -W[9]) * (Math.exp(W[10] * (1 - r)) - 1) * hard * easy + 1);
+  }
+  function forgetS(d, s, r) {
+    return Math.min(s, W[11] * Math.pow(d, -W[12]) * (Math.pow(s + 1, W[13]) - 1) * Math.exp(W[14] * (1 - r)));
+  }
+  function shortS(s, g) { return s * Math.exp(W[17] * (g - 3 + W[18])); }
+
+  /* The rating (1 Again, 2 Hard, 3 Good, 4 Easy) from what the app knows:
+     the verdict, whether a hint was needed, the second easier pass, the
+     learner's confidence (Butterfield & Metcalfe: «Seguro» and wrong is the
+     error that gets corrected best; «Adivino» and right is not knowledge:
+     Memory 2019).  A slip (an accent, a typo) is knowledge with a finger
+     error: it keeps moving forward. */
+  function ratingFor(q, o) {
+    o = o || {};
+    if (q === 0) return 1;
+    if (q === 1) return o.kind === "slip" ? 3 : 2;
+    if (o.retry || o.hint || o.conf === "adivino") return 2;
+    if (o.light || (o.conf === "seguro" && o.fast)) return 4;
+    return 3;
+  }
+
+  // Vocabulary forgets at another pace than grammar: two speeds are fitted.
+  function cardKind(id) {
+    id = String(id || "");
+    return id.indexOf("v:") === 0 || id.indexOf("b:voc:") === 0 || id.indexOf("frase:") === 0 || id.indexOf("ponte:") === 0 ? "v" : "g";
+  }
+
+  /* A card from the SM-2 days (ease, interval) gets a stability and a
+     difficulty so nothing is lost on the way. */
+  function upgradeCard(card) {
+    if (!card) return null;
+    if (card.s != null && card.d != null) return card;
+    var ivl = +card.interval || 0, ease = +card.ease || 2.5;
+    card.s = Math.max(0.5, ivl || (card.reps ? 1 : 0.5));
+    card.d = clampD(5 + (2.5 - ease) * 4);
+    card.lapses = card.lapses || 0;
+    card.state = ivl >= 45 || ((card.ok || 0) >= 3 && ease >= 2.5) ? "maint" : card.reps ? "rev" : "learn";
+    return card;
+  }
+
+  // 7 am of the next morning (or of today, before 7).
+  function nextMorning(now) {
+    var d = new Date(now);
+    if (d.getHours() >= 7) d.setDate(d.getDate() + 1);
+    d.setHours(7, 0, 0, 0);
+    return d.getTime();
+  }
+
+  /* schedule(card, quality, opts): quality 0 sbagliato, 1 quasi, 2 giusto.
+     opts: kind (slip/vocab/rule), light (right at first sight in the
+     training), retry, hint, conf ("seguro"/"creo"/"adivino"), fast,
+     rating (1-4, overrides), now, id, state (for the review log, the
+     retention target and the fitted speeds), notte (false to switch off
+     the night → morning schedule). */
   function schedule(card, quality, opts) {
-    // quality: 0 sbagliato, 1 quasi, 2 giusto
-    // opts.light: right at first sight in the training, so it comes back in
-    // two weeks, not tomorrow (20-30 new cards a day at most, no backlog).
-    if (!card && quality === 2 && opts && opts.light) {
-      card = { ease: 2.5, interval: 14, reps: 2, light: true };
-      card.due = Date.now() + 14 * DAY;
-      card.last = Date.now();
-      card.seen = 1;
-      return card;
-    }
-    card = card || { ease: 2.5, interval: 0, reps: 0 };
-    // A light card that comes back right is learnt: it retires at once.
-    if (card.light && quality === 2) {
-      card.light = false; card.reps += 1; card.interval = 90;
-      card.due = Date.now() + 90 * DAY; card.last = Date.now(); card.seen = (card.seen || 0) + 1;
-      return card;
-    }
-    if (card.light) card.light = false;
-    // What kind of mistake it was decides how far back the card goes:
-    // a slip (a typo, an accent) is knowledge with a finger error, so the
-    // card keeps moving forward; a rule error (auxiliary, agreement, mode)
-    // starts over; a vocabulary gap starts over and loses less ease (the
-    // word comes back soon, the rule does not need to be relearnt).
-    var kind = (opts && opts.kind) || null;
-    var step = function () {
-      return card.reps === 1 ? 1 : card.reps === 2 ? 3 : Math.round(Math.max(card.interval, 1) * card.ease);
-    };
-    if (quality === 0) {
-      card.reps = 0;
-      card.interval = 0;
-      card.ok = 0;
-      card.ease = Math.max(1.3, card.ease - (kind === "vocab" ? 0.1 : 0.2));
-    } else if (quality === 1 && kind === "slip") {
-      card.reps += 1;
-      card.interval = step();
+    opts = opts || {};
+    var now = opts.now || Date.now();
+    var st = opts.state || null;
+    var r = opts.rating || ratingFor(quality, opts);
+    var kind = cardKind(opts.id);
+    var speed = (st && st.speed && st.speed[kind] && st.speed[kind].k) || 1;
+    var retention = opts.retention || (st && st.retention) || 0.9;
+    var isNew = !card;
+    card = upgradeCard(card);
+    var elapsed = card && card.last ? Math.max(0, (now - card.last) / DAY) : 0;
+    var sameDay = !!(card && card.last && daysBetween(dayKey(new Date(card.last)), dayKey(new Date(now))) === 0);
+    var sBefore = card ? card.s : 0;
+    if (!card) {
+      card = { s: initS(r), d: initD(r), reps: 0, lapses: 0, seen: 0, ok: 0, state: "learn" };
+    } else if (sameDay) {
+      card.s = shortS(card.s, r);
+      card.d = nextD(card.d, r);
     } else {
-      card.reps += 1;
-      if (quality === 1) {
-        card.ease = Math.max(1.3, card.ease - 0.15);
-        card.interval = card.reps === 1 ? 1 : Math.max(1, Math.round(card.interval * 1.2));
-      } else {
-        card.ease = Math.min(2.8, card.ease + 0.1);
-        card.ok = (card.ok || 0) + 1;
-        card.interval = step();
-      }
+      var R = retrievability(elapsed, card.s * speed);
+      card.s = r === 1 ? forgetS(card.d, card.s, R) : recallS(card.d, card.s, R, r);
+      card.d = nextD(card.d, r);
     }
-    card.due = Date.now() + Math.max(card.interval, 0) * DAY;
-    card.last = Date.now();
+    if (r === 1) {
+      card.reps = 0; card.ok = 0; card.lapses = (card.lapses || 0) + 1;
+      card.state = "learn";
+    } else {
+      card.reps = (card.reps || 0) + 1;
+      if (r >= 3) card.ok = (card.ok || 0) + 1;
+      if (card.state === "learn" && card.s >= 3) card.state = "rev";
+    }
+    if (card.s * speed >= MAINT_S) card.state = "maint";
+    var ivl = intervalFor(card.s * speed, retention);
+    if (r === 1) ivl = 1;                        // an error comes back tomorrow
+    card.interval = ivl;
+    card.due = now + ivl * DAY;
+    delete card.night; delete card.hyper;
+    var hour = new Date(now).getHours();
+    var hyper = r === 1 && opts.conf === "seguro";
+    // Learn at night, review in the morning, with sleep in between (Mazza
+    // et al. 2016): what is new after 8 pm is asked again at breakfast.
+    if (opts.notte !== false && hour >= 20 && (isNew || hyper)) {
+      card.due = nextMorning(now); card.night = dayKey(new Date(card.due));
+    } else if (hyper) {
+      // Hypercorrection: the confident error is retested the next morning.
+      card.due = Math.min(card.due, nextMorning(now)); card.hyper = 1;
+    }
+    delete card.light; delete card.ease;
+    card.last = now;
     card.seen = (card.seen || 0) + 1;
+    if (st && opts.id) logReview(st, opts.id, now, r, elapsed, sBefore, kind);
     return card;
   }
 
   function isDue(card, now) {
     return !card || !card.due || card.due <= (now || Date.now());
   }
-  // Learnt: twenty days of interval, or three right answers in a row with
-  // a healthy ease (1, 3 and 8 days without a slip back).  It leaves the
-  // review queue for good, so the queue never becomes a debt.
+  // In maintenance: known.  It still comes back, months apart, capped a day.
   function retired(card) {
-    return !!card && ((card.interval || 0) >= 20 || ((card.ok || 0) >= 3 && (card.ease || 0) >= 2.5));
+    return !!card && (card.state === "maint" || (card.s == null && ((card.interval || 0) >= 45 || ((card.ok || 0) >= 3 && (card.ease || 0) >= 2.5))));
   }
+
+  /* ------------------------------------------------ registro dei ripassi */
+
+  /* Every review is logged (id, minute, rating, days elapsed, stability
+     before, kind): with it the app fits, on the phone, how fast this
+     learner forgets vocabulary and grammar (a «speed» that scales the
+     default stabilities), and shows the calibration. */
+  var LOG_MAX = 2500;
+  function logReview(state, id, now, r, elapsed, sBefore, kind) {
+    if (!state.log) state.log = [];
+    state.log.push([String(id), Math.round(now / 60000), r, Math.round(elapsed * 10) / 10, Math.round(sBefore * 10) / 10, kind]);
+    if (state.log.length > LOG_MAX) state.log = state.log.slice(-LOG_MAX);
+  }
+
+  // Log-loss of the predicted recall against what happened, for one speed.
+  function logLoss(rows, k) {
+    var loss = 0;
+    rows.forEach(function (x) {
+      var p = Math.min(0.9999, Math.max(0.0001, retrievability(x[3], x[4] * k)));
+      loss += x[2] > 1 ? -Math.log(p) : -Math.log(1 - p);
+    });
+    return loss / rows.length;
+  }
+  /* fitSpeed: grid search of the speed factor per kind over the log.
+     Under 100 reviews of a kind the default (1) stays: Anki found that
+     fitting on too little makes things worse. */
+  function fitSpeed(state) {
+    var out = {};
+    ["v", "g"].forEach(function (kind) {
+      var rows = (state.log || []).filter(function (x) { return x[5] === kind && x[3] >= 0.5 && x[4] > 0; });
+      if (rows.length < 100) { out[kind] = { k: 1, n: rows.length }; return; }
+      var best = 1, bestLoss = Infinity;
+      for (var k = 0.5; k <= 2.001; k += 0.1) {
+        var l = logLoss(rows, k);
+        if (l < bestLoss - 1e-9) { bestLoss = l; best = Math.round(k * 10) / 10; }
+      }
+      out[kind] = { k: best, n: rows.length, loss: Math.round(bestLoss * 1000) / 1000 };
+    });
+    out.at = Date.now();
+    state.speed = out;
+    return out;
+  }
+  // Refit every 200 reviews.
+  function maybeFit(state) {
+    var n = (state.log || []).length;
+    if (n < 100 || (state.speed && state.speed.n && n - state.speed.n < 200)) return null;
+    var f = fitSpeed(state);
+    f.n = n;
+    return f;
+  }
+
+  /* What the memory looks like today: how many cards learning, in review,
+     in maintenance, and the average chance of recalling them right now. */
+  function memoryStats(state, now) {
+    now = now || Date.now();
+    var out = { learn: 0, rev: 0, maint: 0, n: 0, recall: 0 };
+    var sum = 0;
+    Object.keys(state.cards || {}).forEach(function (id) {
+      var c = upgradeCard(state.cards[id]);
+      if (!c) return;
+      out.n++;
+      out[c.state || "learn"] = (out[c.state || "learn"] || 0) + 1;
+      sum += retrievability(Math.max(0, (now - (c.last || now)) / DAY), c.s);
+    });
+    out.recall = out.n ? Math.round(sum / out.n * 100) : 0;
+    return out;
+  }
+
+  /* ----------------------------------------------------- calibrazione */
+
+  // conf: "seguro" | "creo" | "adivino"; right: boolean.
+  function noteConfidence(state, conf, right, now) {
+    if (!conf) return;
+    var k = dayKey(now);
+    if (!state.conf) state.conf = {};
+    var d = state.conf[k] || (state.conf[k] = {});
+    var c = d[conf] || (d[conf] = [0, 0]);
+    c[0]++;
+    if (!right) c[1]++;
+    Object.keys(state.conf).forEach(function (kk) { if (daysBetween(kk, k) > 28) delete state.conf[kk]; });
+  }
+  // Over-confidence: the share of «Seguro» answers that were wrong, this
+  // week and the one before.
+  function calibration(state, now) {
+    var k = dayKey(now), cur = { n: 0, wrong: 0, guessRight: 0, guesses: 0 }, prev = { n: 0, wrong: 0 };
+    Object.keys(state.conf || {}).forEach(function (kk) {
+      var age = daysBetween(kk, k), d = state.conf[kk];
+      var s = d.seguro || [0, 0], a = d.adivino || [0, 0];
+      if (age < 7) { cur.n += s[0]; cur.wrong += s[1]; cur.guesses += a[0]; cur.guessRight += a[0] - a[1]; }
+      else if (age < 14) { prev.n += s[0]; prev.wrong += s[1]; }
+    });
+    return { n: cur.n, over: cur.n ? Math.round(cur.wrong / cur.n * 100) : null,
+             overPrev: prev.n ? Math.round(prev.wrong / prev.n * 100) : null,
+             guesses: cur.guesses, guessRight: cur.guessRight };
+  }
+
+  /* --------------------------------------------- la regola come scheda */
+
+  /* A grammar rule is consolidated after productive practice on three
+     different days (Serfaty & Serrano 2024; Suzuki 2019): each week keeps
+     the days on which its own exercises were written right. */
+  function noteProduction(state, week, now) {
+    if (!week) return;
+    var ws = state.weekStats[week] || (state.weekStats[week] = { attempts: 0, right: 0, bossPassed: false });
+    var k = dayKey(now);
+    if (!ws.prodDays) ws.prodDays = [];
+    if (ws.prodDays.indexOf(k) < 0) { ws.prodDays.push(k); ws.prodDays = ws.prodDays.slice(-6); }
+  }
+  function consolidated(ws) { return !!(ws && ws.prodDays && ws.prodDays.length >= 3); }
 
   /* Fin de semana liviano (la guía): la meta baja a la mitad el sábado y el
      domingo, para no cortar la racha ni pedir las tres horas. */
@@ -241,7 +435,22 @@
       written: 0,         // frasi scritte a memoria senza errori
       letture: {},        // puntata -> { pct, at } delle letture fatte
       errs: {},           // categoria d'errore -> { n, fixed, last }
-      errLog: []          // ultimi errori: { cat, g, e, at }
+      errLog: [],         // ultimi errori: { cat, g, e, at }
+      srsV: 2,            // versione dello scheduler (2 = FSRS)
+      retention: 0.9,     // ritenzione desiderata (0.85 / 0.9 / 0.95)
+      notte: true,        // nuovo di sera, ripasso al mattino
+      confOn: true,       // chiede «¿qué tan seguro?» dopo ogni risposta
+      log: [],            // registro dei ripassi: [id, minuto, voto, giorni, s, tipo]
+      speed: {},          // velocità d'oblio stimate: { v: {k, n}, g: {k, n} }
+      conf: {},           // "aaaa-m-g" -> { seguro: [n, errori], creo: [..], adivino: [..] }
+      sessions: {},       // "aaaa-m-g" -> sessioni giocate quel giorno
+      plan: null,         // intenzione d'implementazione: { when, where, at }
+      ideal: null,        // il «yo ideal»: { why, text, at }
+      goals: null,        // sotto-obiettivi settimanali: { words, rules, weeks, start }
+      reflect: {},        // chiusura settimanale: "aaaa-w" -> { hard, change, when }
+      records: {},        // record personali per metrica
+      pauses: [],         // pause di 3+ giorni: { from, to, why }
+      keywords: {}        // parola -> immagine mnemonica scritta dall'alunno
     };
   }
 
@@ -286,11 +495,19 @@
     Object.keys(s.cards).forEach(function (id) {
       var c = s.cards[id];
       if (!isObj(c)) { delete s.cards[id]; return; }
-      c.ease = num(c.ease, 2.5, 1.3, 2.8);
+      if (c.ease != null) c.ease = num(c.ease, 2.5, 1.3, 2.8);
       c.interval = num(c.interval, 0, 0);
       c.reps = num(c.reps, 0, 0);
       c.due = num(c.due, 0, 0);
+      if (c.s != null) { c.s = num(c.s, 1, 0.1, 36500); c.d = num(c.d, 5, 1, 10); }
+      if (c.state && ["learn", "rev", "maint"].indexOf(c.state) < 0) delete c.state;
     });
+    if (RETENTIONS.indexOf(s.retention) < 0) s.retention = 0.9;
+    s.log = s.log.filter(Array.isArray).slice(-LOG_MAX);
+    Object.keys(s.conf).forEach(function (k) { if (!isObj(s.conf[k])) delete s.conf[k]; });
+    Object.keys(s.sessions).forEach(function (k) { s.sessions[k] = num(s.sessions[k], 0, 0); });
+    Object.keys(s.keywords).forEach(function (k) { if (typeof s.keywords[k] !== "string") delete s.keywords[k]; });
+    s.pauses = s.pauses.filter(isObj).slice(-30);
     Object.keys(s.days).forEach(function (k) {
       if (!isFinite(+s.days[k])) delete s.days[k]; else s.days[k] = +s.days[k];
     });
@@ -351,7 +568,13 @@
         s.goal = { 20: 100, 50: 200, 100: 350, 150: 500 }[s.goal] || 200;
         s.goalV = 2;
       }
-      return sanitize(s);
+      s = sanitize(s);
+      // The SM-2 cards get a stability and a difficulty (nothing is lost).
+      if (s.srsV !== 2) {
+        Object.keys(s.cards).forEach(function (id) { upgradeCard(s.cards[id]); });
+        s.srsV = 2;
+      }
+      return s;
     } catch (e) {
       // Unreadable: keep a copy aside before a new save overwrites it.
       try { if (raw) root.localStorage.setItem(KEY + ".damaged", raw); } catch (e2) { /* */ }
@@ -572,6 +795,21 @@
     schedule: schedule,
     isDue: isDue,
     retired: retired,
+    ratingFor: ratingFor,
+    cardKind: cardKind,
+    upgradeCard: upgradeCard,
+    retrievability: retrievability,
+    intervalFor: intervalFor,
+    nextMorning: nextMorning,
+    fitSpeed: fitSpeed,
+    maybeFit: maybeFit,
+    memoryStats: memoryStats,
+    noteConfidence: noteConfidence,
+    calibration: calibration,
+    noteProduction: noteProduction,
+    consolidated: consolidated,
+    RETENTIONS: RETENTIONS,
+    MAINT_S: MAINT_S,
     goalFor: goalFor,
     STRANDS: STRANDS,
     addStrand: addStrand,

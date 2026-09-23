@@ -146,8 +146,9 @@ ok(Engine.grade("grandi", { answer: "grandi, buone", accept: ["grandi, buone"] }
 var card = null;
 for (var k = 0; k < 5; k++) card = Engine.schedule(card, 2);
 ok(card.interval > 10, "l'intervallo cresce con i successi: " + card.interval);
+var sBefore = card.s;
 card = Engine.schedule(card, 0);
-ok(card.interval === 0 && card.reps === 0, "l'errore riazzera la scheda");
+ok(card.interval <= 1 && card.reps === 0 && card.s < sBefore, "l'errore riazzera la scheda e abbassa la stabilità");
 
 ok(Engine.levelFor(0).level === 1, "livello iniziale");
 ok(Engine.levelFor(100).level === 2, "secondo livello a 100 xp");

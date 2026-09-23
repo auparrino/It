@@ -305,7 +305,7 @@ ok(Engine.sanitize(null).xp === 0 && Engine.sanitize([1, 2]).xp === 0, "salvatag
 var goodSave = Engine.blankSave();
 goodSave.xp = 1234; goodSave.cards["frase:bar:1"] = Engine.schedule(null, 2);
 var kept = Engine.sanitize(JSON.parse(JSON.stringify(goodSave)));
-ok(kept.xp === 1234 && kept.cards["frase:bar:1"].interval === 1, "un salvataggio sano non si tocca");
+ok(kept.xp === 1234 && kept.cards["frase:bar:1"].interval === goodSave.cards["frase:bar:1"].interval && kept.cards["frase:bar:1"].s === goodSave.cards["frase:bar:1"].s, "un salvataggio sano non si tocca");
 
 var fdg = Frasi.ofTheDay(day(2026, 6, 1));
 ok(fdg === Frasi.ofTheDay(day(2026, 6, 1, 23)), "la frase del giorno non cambia nel giorno");
