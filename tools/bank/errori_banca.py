@@ -1280,6 +1280,9 @@ _RAW = [
 ]
 
 
+# Other corrections that are just as right as `good` (key: the wrong sentence).
+ALT = {}
+
 ERRORS = []
 _seen = set()
 for _lvl, _cat, _wrong, _bad, _good, _why in _RAW:
@@ -1296,6 +1299,7 @@ for _lvl, _cat, _wrong, _bad, _good, _why in _RAW:
         cat=_cat,
         why=_why,
         lvl=_lvl,
+        alt=list(ALT.get(_wrong, [])),
     ))
 
 del _lvl, _cat, _wrong, _bad, _good, _why, _seen
