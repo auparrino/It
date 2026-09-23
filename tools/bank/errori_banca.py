@@ -1282,6 +1282,9 @@ _RAW = [
 
 # Other corrections that are just as right as `good` (key: the wrong sentence).
 ALT = {
+    "Prima che parti, chiamami.": ["parta"],
+    "Affinché capisci, te lo spiego di nuovo.": ["capisca"],
+    "Qualunque cosa dici, non ti credo.": ["dica"],
     "Marco ha detto che verrebbe alla festa.": ["verrà"],
     "Pensavo che il film finirebbe prima.": ["finisse"],
     "Sono salito al treno all'ultimo minuto.": ["in"],
