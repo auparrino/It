@@ -129,6 +129,15 @@ function structure(u) {
       var set = {}; d.options.forEach(function (o) { var k = Engine.normalise(o); if (set[k]) flag(u, "opciones", "opción repetida: " + o); set[k] = 1; });
     }
   }
+  // A choice where more than one option counts as right tests nothing.
+  function multiRight(q, where) {
+    if (!q.options || !q.accept) return;
+    var acc = q.accept.map(Engine.normalise);
+    var n = q.options.filter(function (o) { return acc.indexOf(Engine.normalise(o)) >= 0; }).length;
+    if (n > 1) flag(u, "opciones", where + n + " opciones aceptadas como correctas: " + q.options.join(" / "));
+  }
+  if (u.kind === "esercizio") multiRight(d, "");
+  if (u.kind === "sfida" && d.play) d.play.forEach(function (q) { multiRight(q, (q.label || "") + ": "); });
   if (u.kind === "trova_errore") {
     if (d.wrong === d.right) flag(u, "errore", "wrong = right");
     var tw = D.tokens(d.wrong), tr = D.tokens(d.right);
