@@ -1057,7 +1057,7 @@
    "drop": false
   },
   "d18-031": {
-   "consigna": "Traducí al italiano. Ojo: después de quando y appena, si la acción es futura, en italiano va futuro (no presente ni subjuntivo como en castellano); después de se sirven el futuro o el presente.",
+   "consigna": "Traducí al italiano. Ojo: después de «quando» y «appena», si la acción es futura, en italiano va futuro (no presente ni subjuntivo como en castellano); después de «se» sirven el futuro o el presente.",
    "type": "translate",
    "stem": "Apenas lo sepan, nos lo van a decir.",
    "answer": "Appena lo sapranno, ce lo diranno.",
@@ -1071,7 +1071,7 @@
    "drop": false
   },
   "d18-032": {
-   "consigna": "Traducí al italiano. Ojo: después de quando y appena, si la acción es futura, en italiano va futuro (no presente ni subjuntivo como en castellano); después de se sirven el futuro o el presente.",
+   "consigna": "Traducí al italiano. Ojo: después de «quando» y «appena», si la acción es futura, en italiano va futuro (no presente ni subjuntivo como en castellano); después de «se» sirven el futuro o el presente.",
    "type": "translate",
    "stem": "Cuando ustedes lleguen, vamos a comer.",
    "answer": "Quando arriverete, mangeremo.",
@@ -1083,7 +1083,7 @@
    "drop": false
   },
   "d18-033": {
-   "consigna": "Traducí al italiano. Ojo: después de quando y appena, si la acción es futura, en italiano va futuro (no presente ni subjuntivo como en castellano); después de se sirven el futuro o el presente.",
+   "consigna": "Traducí al italiano. Ojo: después de «quando» y «appena», si la acción es futura, en italiano va futuro (no presente ni subjuntivo como en castellano); después de «se» sirven el futuro o el presente.",
    "type": "translate",
    "stem": "Si Mario no va, no va a ver a sus amigos.",
    "answer": "Se Mario non andrà, non vedrà gli amici.",
@@ -1099,7 +1099,7 @@
    "drop": false
   },
   "d18-034": {
-   "consigna": "Traducí al italiano. Ojo: después de quando y appena, si la acción es futura, en italiano va futuro (no presente ni subjuntivo como en castellano); después de se sirven el futuro o el presente.",
+   "consigna": "Traducí al italiano. Ojo: después de «quando» y «appena», si la acción es futura, en italiano va futuro (no presente ni subjuntivo como en castellano); después de «se» sirven el futuro o el presente.",
    "type": "translate",
    "stem": "Apenas reciba una carta, te aviso.",
    "answer": "Appena riceverò una lettera, ti farò sapere.",
@@ -1118,7 +1118,7 @@
    "note": "Far sapere = avisar, hacer saber."
   },
   "d18-035": {
-   "consigna": "Traducí al italiano. Ojo: después de quando y appena, si la acción es futura, en italiano va futuro (no presente ni subjuntivo como en castellano); después de se sirven el futuro o el presente.",
+   "consigna": "Traducí al italiano. Ojo: después de «quando» y «appena», si la acción es futura, en italiano va futuro (no presente ni subjuntivo como en castellano); después de «se» sirven el futuro o el presente.",
    "type": "translate",
    "stem": "Si tienen un rato libre, van a venir a visitarnos.",
    "answer": "Se avranno un momento libero, verranno a trovarci.",
@@ -1644,7 +1644,8 @@
    "answer": "se per caso lo incontri",
    "alt": [
     "se lo incontri per caso",
-    "se per caso tu lo incontri"
+    "se per caso tu lo incontri",
+    "se per caso lo incroci"
    ],
    "drop": false
   },
@@ -2023,7 +2024,9 @@
     "Credeva che stessimo dormendo.",
     "Lui credeva che stessimo dormendo.",
     "Pensava che dormissimo.",
-    "Lui pensava che dormissimo."
+    "Lui pensava che dormissimo.",
+    "Pensava che stessimo dormendo.",
+    "Lui pensava che stessimo dormendo."
    ],
    "drop": false,
    "note": "Después de credere/pensare en pasado, el italiano usa congiuntivo imperfetto aunque el castellano use indicativo."
@@ -2431,7 +2434,9 @@
    "type": "cloze",
    "stem": "Siamo sorpresi che loro ___ (essere/venire).",
    "answer": "siano venuti",
-   "alt": [],
+   "alt": [
+    "siano venute"
+   ],
    "drop": false
   },
   "d22-007": {
@@ -2461,7 +2466,7 @@
   "d22-010": {
    "consigna": "Completá con el congiuntivo passato. El auxiliar está indicado (auxiliar/verbo).",
    "type": "cloze",
-   "stem": "È necessario che lei ___ (essere/andare).",
+   "stem": "È probabile che lei ___ (essere/andare).",
    "answer": "sia andata",
    "alt": [],
    "drop": false
@@ -2469,7 +2474,7 @@
   "d22-011": {
    "consigna": "Completá con el congiuntivo trapassato. El auxiliar está indicado (auxiliar/verbo).",
    "type": "cloze",
-   "stem": "Lui voleva che noi ___ (essere/arrivare) presto.",
+   "stem": "Lui pensava che noi ___ (essere/arrivare) presto.",
    "answer": "fossimo arrivati",
    "alt": [
     "fossimo arrivate"
@@ -2571,7 +2576,9 @@
    "type": "cloze",
    "stem": "Tu pensi che loro ___ (essere/partire)?",
    "answer": "siano partiti",
-   "alt": [],
+   "alt": [
+    "siano partite"
+   ],
    "drop": false
   },
   "d22-024": {
@@ -2588,8 +2595,8 @@
   "d22-025": {
    "consigna": "Completá con el congiuntivo passato o trapassato según la concordancia de tiempos (o con el infinitivo pasado si no hay «che»). El auxiliar está indicado.",
    "type": "cloze",
-   "stem": "I gatti insistevano che noi gli ___ (avere/dare) da mangiare.",
-   "answer": "avessimo dato",
+   "stem": "I gatti miagolavano, ma io credevo che tu gli ___ (avere/dare) già da mangiare.",
+   "answer": "avessi dato",
    "alt": [],
    "drop": false
   },

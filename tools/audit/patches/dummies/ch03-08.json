@@ -764,8 +764,7 @@
    "stem": "dentista, ___ (jueves 15)",
    "answer": "giovedì quindici",
    "alt": [
-    "giovedì il quindici",
-    "giovedì 15"
+    "giovedì il quindici"
    ],
    "drop": false,
    "note": "Con el día de la semana no hace falta artículo: giovedì quindici."
@@ -2171,8 +2170,8 @@
   "d07-033": {
    "consigna": "Completá con essere o avere, conjugado en presente.",
    "type": "conjugate",
-   "stem": "Io ___ di mangiare. (tengo ganas)",
-   "answer": "ho voglia",
+   "stem": "Io ___ voglia di mangiare. (tengo ganas)",
+   "answer": "ho",
    "alt": [],
    "drop": false,
    "note": "avere voglia di = tener ganas de; avere bisogno di = necesitar."

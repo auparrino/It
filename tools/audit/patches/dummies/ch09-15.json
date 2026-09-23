@@ -1661,11 +1661,11 @@
   "d13-024": {
    "consigna": "Traducí al italiano usando un pronombre indefinido (pochi, nessuno, ognuno, qualcosa, alcuni…).",
    "type": "translate",
-   "stem": "Tengo tantos (de eso).",
+   "stem": "Tengo tantos (de esos).",
    "answer": "Ne ho tanti.",
    "alt": [],
    "drop": false,
-   "note": "Ne reemplaza «de eso»: ne ho tanti = tengo tantos (de eso)."
+   "note": "Ne reemplaza «de esos»: ne ho tanti = tengo tantos (de esos)."
   },
   "d13-025": {
    "consigna": "Traducí al italiano usando un pronombre indefinido (pochi, nessuno, ognuno, qualcosa, alcuni…).",
@@ -1962,7 +1962,8 @@
    "answer": "perciò",
    "alt": [
     "quindi",
-    "dunque"
+    "dunque",
+    "così"
    ],
    "drop": false
   },
