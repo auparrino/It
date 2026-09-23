@@ -1112,7 +1112,11 @@
     "Appena riceverò una lettera, ti avviserò.",
     "Appena riceverò una lettera ti avviserò",
     "Non appena riceverò una lettera, ti avviserò.",
-    "Non appena riceverò una lettera ti avviserò"
+    "Non appena riceverò una lettera ti avviserò",
+    "Appena riceverò una lettera, ti faccio sapere.",
+    "Appena riceverò una lettera, ti avviso.",
+    "Non appena riceverò una lettera, ti faccio sapere.",
+    "Non appena riceverò una lettera, ti avviso."
    ],
    "drop": false,
    "note": "Far sapere = avisar, hacer saber."
@@ -1343,7 +1347,7 @@
   "d19-001": {
    "consigna": "Completá la parte con «se» usando el indicativo (presente, futuro o imperfetto) según la otra parte de la frase. Puede haber más de una respuesta.",
    "type": "cloze",
-   "stem": "Se tu ___ (avere) il tempo libero, ci andremo domani.",
+   "stem": "Se tu ___ (avere) tempo libero, ci andremo domani.",
    "answer": "hai",
    "alt": [
     "avrai"
@@ -2547,7 +2551,7 @@
   "d22-019": {
    "consigna": "Completá con el congiuntivo trapassato. El auxiliar está indicado (auxiliar/verbo).",
    "type": "cloze",
-   "stem": "Conveniva che noi ___ (essere/stare) a casa.",
+   "stem": "Sarebbe convenuto che noi ___ (essere/stare) a casa.",
    "answer": "fossimo stati",
    "alt": [
     "fossimo state"
@@ -2591,7 +2595,7 @@
   "d22-024": {
    "consigna": "Completá con el congiuntivo passato o trapassato según la concordancia de tiempos (o con el infinitivo pasado si no hay «che»). El auxiliar está indicado.",
    "type": "cloze",
-   "stem": "Il presidente voleva ___ (avere/cambiare) la legge.",
+   "stem": "Il presidente era contento di ___ (avere/cambiare) la legge.",
    "answer": "avere cambiato",
    "alt": [
     "aver cambiato"
@@ -2636,7 +2640,7 @@
   "d22-029": {
    "consigna": "Completá con el congiuntivo passato o trapassato según la concordancia de tiempos (o con el infinitivo pasado si no hay «che»). El auxiliar está indicado.",
    "type": "cloze",
-   "stem": "Volevo ___ (avere/visitare) i musei.",
+   "stem": "Speravo di ___ (avere/visitare) tutti i musei prima di partire.",
    "answer": "avere visitato",
    "alt": [
     "aver visitato"

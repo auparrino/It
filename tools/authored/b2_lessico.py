@@ -121,7 +121,7 @@ ITEMS = [
               "también es correcto «sono dovuti partire»."),
     dict(id="b2-pass-05", type="translate", topic="passato",
          prompt="Traducí al italiano.",
-         stem="Cuando era chico, iba al mar todos los veranos.",
+         stem="Cuando (yo) era chico, iba al mar todos los veranos.",
          answer="Quando ero piccolo, andavo al mare tutte le estati",
          alt=["Quando ero piccola, andavo al mare tutte le estati",
               "Quando ero piccolo, andavo al mare ogni estate",

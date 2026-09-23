@@ -1228,8 +1228,8 @@ _RAW = [
      "«Quedar» (acordar un encuentro) se dice darsi appuntamento o vedersi: ci vediamo alle otto."),
     ("A2", "lessico", "Questa giacca ti resta benissimo.", "resta", "sta",
      "«Quedar bien» (ropa) se dice stare bene: ti sta benissimo."),
-    ("A2", "lessico", "Il museo resta lontano da qui.", "resta", "è",
-     "Para la ubicación («queda lejos») lo natural es essere: il museo è lontano. Restare con este sentido existe, pero es poco común."),
+    ("A2", "lessico", "Com'è restata la partita ieri sera?", "restata", "finita",
+     "«¿Cómo quedó el partido?» se dice com'è finita (o com'è andata) la partita: restare/rimanere no sirve para hablar de un resultado."),
     ("A2", "lessico", "Ogni mattina prendo una doccia.", "prendo una doccia", "faccio la doccia",
      "Se dice fare la doccia, fare il bagno. «Tomar una ducha» no se traduce con prendere."),
     ("A2", "lessico", "Posso prendere una foto?", "prendere", "fare",
@@ -1282,6 +1282,7 @@ _RAW = [
 
 # Other corrections that are just as right as `good` (key: the wrong sentence).
 ALT = {
+    "Pensavo che il film finirebbe prima.": ["finisse"],
     "Sono salito al treno all'ultimo minuto.": ["in"],
     "Ho visto la partita nella televisione.": ["alla"],
     "Studio per la mattina e lavoro il pomeriggio.": ["la mattina", "al mattino"],
@@ -1341,7 +1342,7 @@ ALT = {
     "Mentre ho cucinato, è arrivato Marco.": ["stavo cucinando"],
     "Il bagno sta in fondo al corridoio.": ["si trova"],
     "Rimaniamo alle otto davanti al cinema.": ["Ci troviamo"],
-    "Il museo resta lontano da qui.": ["si trova"],
+    "Com'è restata la partita ieri sera?": ["andata"],
     "Ogni mattina prendo una doccia.": ["faccio una doccia"],
     "Posso prendere una foto?": ["scattare"],
     "Finisco di arrivare a casa.": ["Sono appena arrivata"],

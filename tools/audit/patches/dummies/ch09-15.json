@@ -558,7 +558,7 @@
    "answer": "bastano",
    "alt": [],
    "drop": false,
-   "note": "Concuerda con «tre tuorli» (plural): mi bastano (me alcanzan tres yemas). El libro pone «basta», pero lo correcto es el plural."
+   "note": "Concuerda con «tre tuorli» (plural): mi bastano (me alcanzan tres yemas)."
   },
   "d10-043": {
    "consigna": "Conjugá en presente el verbo entre paréntesis. Funciona como piacere: concuerda con lo que interesa, alcanza, parece o importa.",
@@ -981,7 +981,7 @@
   "d11-028": {
    "consigna": "Completá con el pronombre interrogativo (che cosa, chi, quanto/a/i/e, quale…).",
    "type": "cloze",
-   "stem": "Ragazze, ___ di voi avete telefonini? (Chicas, ¿cuántas de ustedes tienen celular?)",
+   "stem": "Ragazze, ___ di voi hanno il telefonino? (Chicas, ¿cuántas de ustedes tienen celular?)",
    "answer": "quante",
    "alt": [],
    "drop": false
@@ -2012,7 +2012,11 @@
    "type": "cloze",
    "stem": "___ so io, le ragazze sono a scuola. (por lo que sé)",
    "answer": "per quanto",
-   "alt": [],
+   "alt": [
+    "da quanto",
+    "da quel che",
+    "da quello che"
+   ],
    "drop": false,
    "note": "Per quanto so io = por lo que yo sé."
   },

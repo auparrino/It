@@ -2363,7 +2363,9 @@
     "type": "cloze",
     "stem": "Ci vediamo giovedì. → Non so se ___ giovedì.",
     "answer": "ci vediamo",
-    "alt": [],
+    "alt": [
+     "ci vedremo"
+    ],
     "note": "Con verbo conjugado el pronombre va delante."
    },
    {
@@ -2411,7 +2413,7 @@
   ]
  },
  "r07-02f": {
-  "consigna": "Reemplazá los sustantivos por pronombres y ubicálos correctamente (con el gerundio van pegados).",
+  "consigna": "Reemplazá los sustantivos por pronombres y ubicalos correctamente (con el gerundio van pegados).",
   "interactive": true,
   "items": [
    {
@@ -2451,7 +2453,7 @@
   ]
  },
  "r07-03f": {
-  "consigna": "En estas órdenes, reemplazá los sustantivos por pronombres y ubicálos correctamente.",
+  "consigna": "En estas órdenes, reemplazá los sustantivos por pronombres y ubicalos correctamente.",
   "interactive": true,
   "items": [
    {

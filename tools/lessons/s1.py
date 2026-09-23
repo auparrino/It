@@ -88,8 +88,8 @@ LESSONS = {
                       "chiave → chiavi"]]},
   "p": ["Los que terminan en *-e* son el problema: hay que aprender el género "
         "junto con la palabra. Ayudan algunas terminaciones: *-zione*, *-sione*, "
-        "*-tà*, *-tù*, *-ice* son femeninas (*la stazione*, *la città*, *la "
-        "virtù*, *l'attrice*); *-ore*, *-ale*, *-ame* suelen ser masculinas "
+        "*-tà*, *-tù* son femeninas, y también casi siempre *-trice* (*la "
+        "stazione*, *la città*, *la virtù*, *l'attrice*); *-ore*, *-ale*, *-ame* suelen ser masculinas "
         "(*il dottore*, *il giornale*)."]},
 
  {"h": "Plurales que cambian de letra para no cambiar de sonido",

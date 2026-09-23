@@ -3155,8 +3155,10 @@
     "type": "cloze",
     "stem": "Lidia, se non capisci ___ chiedere aiuto. (bastare)",
     "answer": "basta",
-    "alt": [],
-    "note": "Uso impersonal: basta + infinitivo, sin pronombre."
+    "alt": [
+     "ti basta"
+    ],
+    "note": "Uso impersonal: basta + infinitivo (también sirve «ti basta»)."
    },
    {
     "label": "f",
@@ -3507,14 +3509,14 @@
    {
     "label": "f",
     "type": "choice",
-    "stem": "Come si dice 'ragazzi' in tedesco?",
+    "stem": "Come si dicono queste parole in tedesco?",
     "options": [
      "passivante",
      "impersonale"
     ],
     "answer": "passivante",
     "alt": [],
-    "note": "La palabra 'ragazzi' es el sujeto (singular): pasivante."
+    "note": "El verbo concuerda con «queste parole» (sujeto plural): pasivante."
    },
    {
     "label": "g",
@@ -4410,10 +4412,10 @@
     "label": "c",
     "type": "translate",
     "stem": "Non ho più visto Franco, dov'è? – ___ (¿No lo ves que se va con Gina?)",
-    "answer": "Non lo vedi che esce con Gina?",
+    "answer": "Non lo vedi che se ne va con Gina?",
     "alt": [
+     "Non lo vedi che esce con Gina?",
      "Non lo vedi uscire con Gina?",
-     "Non lo vedi che se ne va con Gina?",
      "Non lo vedi andare via con Gina?"
     ],
     "note": "Vedere + pronombre + che + presente."
@@ -5037,7 +5039,9 @@
     "stem": "Quiero mucho a mis abuelos. (voler bene)",
     "answer": "Voglio bene ai nonni.",
     "alt": [
-     "Voglio bene ai miei nonni."
+     "Voglio bene ai miei nonni.",
+     "Voglio molto bene ai nonni.",
+     "Voglio molto bene ai miei nonni."
     ],
     "note": "Voler bene a + persona (indirecto)."
    },

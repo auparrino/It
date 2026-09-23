@@ -1335,7 +1335,9 @@
      "Quando è che parte l'aereo?",
      "Quando parte esattamente l'aereo?",
      "A che ora parte esattamente l'aereo?",
-     "Quando parte l'aereo esattamente?"
+     "Quando parte l'aereo esattamente?",
+     "A che ora parte l'aereo esattamente?",
+     "A che ora è che parte l'aereo?"
     ],
     "note": "Quand'è che… da precisión a la pregunta."
    },
@@ -1986,8 +1988,7 @@
     "stem": "No estás disfrutando del concierto: ¡Qué mal que tocan!",
     "answer": "Come suonano male!",
     "alt": [
-     "Quanto suonano male!",
-     "Che male che suonano!"
+     "Quanto suonano male!"
     ],
     "note": "Come + verbo + adverbio."
    },

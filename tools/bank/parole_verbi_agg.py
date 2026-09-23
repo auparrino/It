@@ -1140,7 +1140,7 @@ WORDS = [
     # --- Preposizioni ---
     ("di", "de", "preposizione", "A1", "Origen: sono di Buenos Aires. Posesión y materia. Di + il = del."),
     ("a", "a / en", "preposizione", "A1", "Ciudades: vivo a Roma, vado a Roma. Ante vocal a veces ad: ad Alba."),
-    ("da", "desde / de / en lo de", "preposizione", "A1", "Vengo da Milano; vado da Marco = voy a lo de Marco; studio da due anni = hace dos años."),
+    ("da", "desde / de / en lo de", "preposizione", "A1", "Vengo da Milano; vado da Marco = voy a lo de Marco; studio da due anni = estudio desde hace dos años."),
     ("in", "en / a", "preposizione", "A1", "Países y regiones: vivo in Italia, vado in Italia. In macchina, in treno."),
     ("con", "con", "preposizione", "A1", ""),
     ("su", "sobre / en / arriba", "preposizione", "A1", "Sul tavolo = sobre la mesa. Como adverbio: vieni su! = ¡subí!"),

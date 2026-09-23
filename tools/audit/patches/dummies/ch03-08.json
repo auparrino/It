@@ -921,7 +921,10 @@
     "Sono le sette e quarantacinque.",
     "Sono le otto meno un quarto del mattino.",
     "Sono le sette e quarantacinque del mattino.",
-    "Sono le sette e tre quarti."
+    "Sono le sette e tre quarti.",
+    "Sono le otto meno quindici.",
+    "Sono le otto meno quindici di mattina.",
+    "Sono le otto meno quindici del mattino."
    ],
    "drop": false
   },
@@ -944,7 +947,10 @@
    "alt": [
     "Verso le sei del pomeriggio.",
     "Verso le sei.",
-    "Verso le diciotto."
+    "Verso le diciotto.",
+    "Intorno alle sei.",
+    "Intorno alle sei del pomeriggio.",
+    "Intorno alle sei di sera."
    ],
    "drop": false
   },
@@ -980,7 +986,10 @@
     "Sono le cinque e quarantacinque del pomeriggio.",
     "Sono le cinque e quarantacinque.",
     "Sono le diciassette e quarantacinque.",
-    "Sono le cinque e tre quarti."
+    "Sono le cinque e tre quarti.",
+    "Sono le sei meno quindici.",
+    "Sono le sei meno quindici del pomeriggio.",
+    "Sono le sei meno quindici di sera."
    ],
    "drop": false
   },
