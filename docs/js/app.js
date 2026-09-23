@@ -347,7 +347,14 @@
             "Android: menú ⋮ → <b>Instalar app</b>.</p>") +
         "</div>";
     }
-    return html;
+    return html + versionLine();
+  }
+
+  /* The version, so a glance says whether the phone already loaded the
+     latest one (it must match VERSION in sw.js: test_game checks it). */
+  var APP_VERSION = "v28";
+  function versionLine() {
+    return '<p class="muted small version">La Via C1 · versión ' + APP_VERSION + "</p>";
   }
 
   function isStandalone() {
@@ -2185,7 +2192,7 @@
       "</table>" +
       '<div class="row" style="margin-top:14px">' +
         '<button class="btn ghost" id="reset">Borrar mi progreso</button>' +
-      "</div></div>";
+      "</div></div>" + versionLine();
   }
 
   /* Il quaderno dell'itañol (la guida, Della Putta 2011): le interferenze
