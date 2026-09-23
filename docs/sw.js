@@ -3,7 +3,7 @@
  * Strategia: rispondi subito dalla cache, aggiorna in background.
  * Cambiare VERSION a ogni rilascio per buttare la cache vecchia.
  */
-var VERSION = "laviac1-v14";
+var VERSION = "laviac1-v15";
 var FILES = [
   "./",
   "index.html",
@@ -35,7 +35,11 @@ var FILES = [
 ];
 
 self.addEventListener("install", function (e) {
-  e.waitUntil(caches.open(VERSION).then(function (c) { return c.addAll(FILES); })
+  // cache: "reload" skips the browser's HTTP cache (GitHub Pages keeps files
+  // 10 minutes): otherwise a new version could be filled with old files.
+  e.waitUntil(caches.open(VERSION).then(function (c) {
+    return c.addAll(FILES.map(function (f) { return new Request(f, { cache: "reload" }); }));
+  })
     .then(function () { return self.skipWaiting(); }));
 });
 
