@@ -500,15 +500,19 @@ y los dos bancos extraídos de libros (este último con ~125 respuestas corregid
 en *Dummies* y errores de extracción limpiados en *Soluzioni*). Las reglas que
 el corrector enuncia en español también se revisaron una por una.
 
-**Diseño.** «La Via» es una calle: el logo y el título de cada semana son
-**placas de calle romanas** en travertino, con la semana en números romanos
-(*Settimana XVII*). Las tarjetas grandes llevan un patrón de **maiólica** de
-Vietri sobre verde botella, limón de Amalfi, terracota y azul cobalto, y la
-Pausa caffè tiene el **toldo a rayas** de un bar. Tipografías: *Bodoni Moda*
-(Bodoni era de Parma) solo para los títulos grandes, y *Atkinson Hyperlegible
-Next*, diseñada para leer fácil, para todo lo demás, servidas desde
-`docs/fonts/` (licencia SIL OFL, incluida) para que funcionen sin red. Con
-modo oscuro.
+**Diseño: la piazza.** La Italia quieta de un final de tarde: una franja de
+cielo arriba, muros de revoque cálido, tarjetas color crema con un filete fino,
+terracota para lo que se toca y verde botella cuando sale bien. Sin patrones ni
+sombras gruesas: todo plano y legible. «La Via» es una calle, así que el logo y
+el título de cada semana siguen siendo **placas de calle romanas** en
+travertino (*Settimana XVII*). En cada ejercicio la ficha lleva el filete de
+terracota de una carta de menú, el contador dice *3 di 10* en Bodoni cursiva y,
+cuando falta poco, un aliento en italiano (*Ci sei quasi. — Ultima!*); el
+veredicto llega en italiano (*Bravo!*, *Quasi! Ci sei.*, *Capita. Era così:*) y
+el botón es *Avanti*. Tipografías: *Bodoni Moda* (Bodoni era de Parma) solo
+para los títulos grandes y el veredicto, y *Atkinson Hyperlegible Next*,
+diseñada para leer fácil, para todo lo demás, servidas desde `docs/fonts/`
+(licencia SIL OFL, incluida) para que funcionen sin red. Con modo oscuro.
 
 El gimnasio de verbos genera preguntas en vez de almacenarlas: 96 verbos × 14
 tiempos × 6 personas dan más de 8.000 formas distintas, con distractores tomados
