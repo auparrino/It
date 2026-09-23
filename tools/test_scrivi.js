@@ -122,12 +122,16 @@ ERR.forEach(function (e) {
 // acepta el modo JSON → el mismo sin él; clave mala → error claro; lee el
 // JSON aunque venga con <think> o ```.
 var GEM = [];
-function gem(name, plan, check) { GEM.push([name, plan, check]); }
+function gem(name, plan, check, keys) { GEM.push([name, plan, check, keys]); }
 function runGem() {
   if (!GEM.length) return console.log("\ncontrolli: " + checks + "   errori: " + fails);
   var g = GEM.shift(), calls = [], mem = {};
   global.localStorage = { getItem: function (k) { return mem[k] || null; }, setItem: function (k, v) { mem[k] = v; } };
   global.fetch = function (url, opt) {
+    if (/\/models$/.test(url) && /googleapis/.test(url)) {
+      return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve({ data: [
+        { id: "models/gemini-2.0-flash" }, { id: "models/text-embedding-004" }, { id: "models/gemini-2.5-flash" }, { id: "models/gemma-3-27b-it" }] }); } });
+    }
     if (/\/models$/.test(url)) {
       return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve({ data: [
         { id: "llama-3.1-8b-instant" }, { id: "openai/gpt-oss-120b" }, { id: "moonshotai/kimi-k2-instruct" },
@@ -139,7 +143,7 @@ function runGem() {
     return Promise.resolve({ ok: a.status === 200, status: a.status, json: function () { return Promise.resolve(a.body); },
                              text: function () { return Promise.resolve(JSON.stringify(a.body || {})); } });
   };
-  S.explain({ prompt: "p", stem: "s", given: "a", answer: "b" }, "K", function (err, data) {
+  S.explain({ prompt: "p", stem: "s", given: "a", answer: "b" }, g[3] || "K", function (err, data) {
     ok(g[2](err, data, calls), "groq " + g[0] + ": " + (err ? err.message : "ok") + " · " + calls.join(" → "));
     runGem();
   });
@@ -162,4 +166,16 @@ gem("todo pago", function () { return { status: 402, body: {} }; },
     function (e, d, c) { return e && /plan pago/.test(e.message) && c.length === 4; });
 gem("todo saturado", function () { return { status: 503, body: {} }; },
     function (e, d, c) { return e && /saturado/.test(e.message) && c.length === 4; });
+// Gemini de respaldo, con su propia búsqueda de modelos
+var BOTH = { groq: "gsk_x", gemini: "AIza_x" };
+gem("Groq saturado → Gemini", function (n, b) { return /gemini/.test(b.model) ? { status: 200, body: GOOD } : { status: 503, body: {} }; },
+    function (e, d, c) { var gi = c.filter(function (m) { return /gemini/.test(m); }); return !e && d.explicacion === "x" && gi[0] === "gemini-2.5-flash~" && !c.some(function (m) { return /embed|gemma/.test(m); }); }, BOTH);
+gem("clave de Groq mala → Gemini", function (n, b) { return /gemini/.test(b.model) ? { status: 200, body: GOOD } : { status: 401, body: {} }; },
+    function (e, d, c) { return !e && c.length === 2 && c[1] === "gemini-2.5-flash~"; }, BOTH);
+gem("solo Gemini", function () { return { status: 200, body: GOOD }; },
+    function (e, d, c) { return !e && c.length === 1 && c[0] === "gemini-2.5-flash~"; }, { gemini: "AIza_x" });
+gem("Gemini: modelo retirado (404) → el siguiente", function (n) { return n === 1 ? { status: 404, body: {} } : { status: 200, body: GOOD }; },
+    function (e, d, c) { return !e && c[1] === "gemini-2.0-flash~"; }, { gemini: "AIza_x" });
+gem("los dos fallan", function () { return { status: 503, body: {} }; },
+    function (e) { return e && /Groq: /.test(e.message) && /Gemini: /.test(e.message); }, BOTH);
 runGem();

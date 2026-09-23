@@ -1668,7 +1668,7 @@
       var fbText = ($("#fb") || {}).innerText || "";
       var x = { prompt: it.prompt, stem: it.stem, options: it.options, given: given, answer: sol,
                 accept: it.accept, feedback: fbText.split("Continuar")[0].replace(/\s+/g, " ").slice(0, 600) };
-      Scrivi.explain(x, aiKey(), function (err, data) {
+      Scrivi.explain(x, aiKeys(), function (err, data) {
         var o = $("#aiexpout");
         if (!o) return;
         if (err) { o.innerHTML = '<p class="muted small">No pude usar la IA (' + esc(String(err.message || err)) + ").</p>"; if (b) b.disabled = false; return; }
@@ -2208,10 +2208,8 @@
   function aiCard() {
     var notes = state.aiNotes || [];
     return '<div class="card"><h2>🤖 Corrector con IA</h2>' +
-      '<p class="muted small">Con una clave gratuita de Groq (sin tarjeta), Scrivi corrige tu texto entero y en cualquier ejercicio aparece «🤖 Explicame». ' +
-      'Sacala en <a href="https://console.groq.com/keys" target="_blank" rel="noopener">console.groq.com/keys</a> → «Create API Key». Queda solo en este teléfono.</p>' +
-      '<div class="row"><input id="aikey" type="password" autocomplete="off" placeholder="Pegá tu clave (gsk_…)" value="' + esc(aiKey()) + '">' +
-      '<button class="tab" id="aisave">Guardar</button></div>' +
+      '<p class="muted small">Con una clave gratuita, Scrivi corrige tu texto entero y en cualquier ejercicio aparece «🤖 Explicame».</p>' +
+      aiKeyFields() +
       (notes.length ? "<h3>Correcciones para revisar (" + notes.length + ")</h3>" +
         '<p class="muted small">La IA cree que en estos casos tu respuesta también valía o la corrección de la app no era buena. Copialas y pegámelas todas juntas.</p>' +
         '<ul class="ainotes">' + notes.slice(0, 8).map(function (n) {
@@ -2636,17 +2634,35 @@
       '<label class="muted small ltopt"><input type="checkbox" id="slt"' + (state.ltOff ? "" : " checked") + "> " +
         "Pedir también la corrección de LanguageTool (gratis; el texto se envía a su servidor)</label>" +
       '<details class="aibox"' + (aiKey() ? "" : " open") + '><summary class="muted small">🤖 Corrector con IA ' + (aiKey() ? "(activado)" : "(opcional, gratis)") + "</summary>" +
-        '<p class="muted small">Marca todo y explica en castellano. Usa Groq con tu propia clave gratuita (sin tarjeta): ' +
-        'entrá a <a href="https://console.groq.com/keys" target="_blank" rel="noopener">console.groq.com/keys</a>, tocá «Create API Key», copiala y pegala acá. ' +
-        "Queda solo en este teléfono y el texto se envía a Groq.</p>" +
-        '<div class="row"><input id="aikey" type="password" autocomplete="off" placeholder="Pegá tu clave (gsk_…)" value="' + esc(aiKey()) + '">' +
-        '<button class="tab" id="aisave">Guardar</button></div></details>' +
+        '<p class="muted small">Marca todo y explica en castellano, con tus propias claves gratuitas (sin tarjeta).</p>' +
+        aiKeyFields() + "</details>" +
       '<div id="sout"></div>';
   }
 
   var scriviTimer = null;
-  var AI_KEY = "laviac1.groq.key";
-  function aiKey() { try { return localStorage.getItem(AI_KEY) || ""; } catch (e) { return ""; } }
+  /* The AI keys: Groq first, Gemini as fallback.  Only in this phone's
+     storage, never in the backup. */
+  var AI_KEY = "laviac1.groq.key", GEM_KEY = "laviac1.gemini.key";
+  function readKey(k) { try { return localStorage.getItem(k) || ""; } catch (e) { return ""; } }
+  function aiKeys() { return { groq: readKey(AI_KEY), gemini: readKey(GEM_KEY) }; }
+  function aiKey() { var k = aiKeys(); return k.groq || k.gemini; }
+  function aiKeyFields() {
+    var k = aiKeys();
+    return '<p class="muted small"><b>Groq</b> (principal): <a href="https://console.groq.com/keys" target="_blank" rel="noopener">console.groq.com/keys</a> → «Create API Key».</p>' +
+      '<input id="aikey" type="password" autocomplete="off" placeholder="Clave de Groq (gsk_…)" value="' + esc(k.groq) + '">' +
+      '<p class="muted small"><b>Gemini</b> (respaldo, si Groq falla): <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a> → «Create API key».</p>' +
+      '<input id="gemkey" type="password" autocomplete="off" placeholder="Clave de Gemini (AIza…)" value="' + esc(k.gemini) + '">' +
+      '<div class="row"><button class="tab" id="aisave">Guardar</button></div>' +
+      '<p class="muted small">Quedan solo en este teléfono; el texto se envía a Groq o a Google.</p>';
+  }
+  function saveKeys() {
+    var g = (($("#aikey") || {}).value || "").trim(), m = (($("#gemkey") || {}).value || "").trim();
+    try {
+      if (g) localStorage.setItem(AI_KEY, g); else localStorage.removeItem(AI_KEY);
+      if (m) localStorage.setItem(GEM_KEY, m); else localStorage.removeItem(GEM_KEY);
+    } catch (e) { /* */ }
+    return (g ? "Groq" : "") + (g && m ? " y " : "") + (m ? "Gemini" : "");
+  }
   function wireScrivi() {
     if (view.screen !== "scrivi") return;
     var w = course.weeks[view.week - 1], box = $("#stext");
@@ -2670,16 +2686,15 @@
     var lt = $("#slt");
     if (lt) lt.onchange = function () { state.ltOff = !lt.checked; persist(); };
     on("#aisave", function () {
-      var k = (($("#aikey") || {}).value || "").trim();
-      try { if (k) localStorage.setItem(AI_KEY, k); else localStorage.removeItem(AI_KEY); } catch (e) { /* */ }
+      var k = saveKeys();
       if (box && state.scrittiDraft) { state.scrittiDraft[w.week] = box.value; persist(); }
-      toast(k ? "Clave guardada: la próxima revisión usa la IA." : "Clave borrada.");
+      toast(k ? "Guardado (" + k + "): la próxima revisión usa la IA." : "Claves borradas.");
       render();
     });
     on("#scheck", function () {
       var text = box.value, r = Scrivi.check(text, w.week), out = $("#sout");
-      var ai = aiKey();
-      r.ai = ai && text.trim() ? "…" : null;
+      var ai = aiKeys();
+      r.ai = aiKey() && text.trim() ? "…" : null;
       showScrivi(w, text, r, state.ltOff ? null : "…");
       if (r.ai) Scrivi.aiCheck(text, w.week, ai, function (err, data) {
         if (view.screen !== "scrivi" || $("#stext") !== box || box.value !== text) return;
@@ -3031,9 +3046,8 @@
   function wireIo() {
     if (view.screen !== "io") return;
     on("#aisave", function () {
-      var k = (($("#aikey") || {}).value || "").trim();
-      try { if (k) localStorage.setItem(AI_KEY, k); else localStorage.removeItem(AI_KEY); } catch (e) { /* */ }
-      toast(k ? "Clave guardada." : "Clave borrada.");
+      var k = saveKeys();
+      toast(k ? "Guardado: " + k + "." : "Claves borradas.");
       render();
     });
     on("#aicopy", function () {

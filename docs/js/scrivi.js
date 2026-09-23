@@ -1434,15 +1434,24 @@
   }
 
   /* ------------------------------------------------------------ IA
-     Optional: Groq (free key of the learner, no card, OpenAI-style API,
-     answers in a second or two).  It reads the whole text like a teacher,
-     marks everything and explains in Spanish; the key never leaves the
-     phone except to Groq.  Which models a key can use changes over time, so
-     the app asks Groq for the list and takes the best one available. */
-  var AI_PREFER = [/kimi-k2/i, /gpt-oss-120b/i, /llama-3\.3-70b/i, /qwen3?-32b|qwen\//i, /llama-4-maverick/i, /llama-4-scout/i, /gpt-oss-20b/i, /llama-3\.1-8b/i];
-  var AI_SKIP = /whisper|tts|guard|playai|orpheus|distil|compound|allam|embed/i;   // not chat models
-  var AI_FALLBACK = ["moonshotai/kimi-k2-instruct", "openai/gpt-oss-120b", "llama-3.3-70b-versatile", "qwen/qwen3-32b", "llama-3.1-8b-instant"];
-  var AI_URL = "https://api.groq.com/openai/v1";
+     Optional: the learner's own free keys.  Groq first (no card, answers in
+     a second or two), Gemini as fallback when Groq fails or has no key.
+     Both speak the OpenAI-style API.  Which models a key can use changes
+     over time, so the app asks each provider for its list and takes the
+     best one available.  The keys never leave the phone except to them. */
+  var PROVIDERS = [
+    { id: "groq", name: "Groq", url: "https://api.groq.com/openai/v1", maxKey: "max_completion_tokens",
+      prefer: [/kimi-k2/i, /gpt-oss-120b/i, /llama-3\.3-70b/i, /qwen3?-32b|qwen\//i, /llama-4-maverick/i, /llama-4-scout/i, /gpt-oss-20b/i, /llama-3\.1-8b/i],
+      skip: /whisper|tts|guard|playai|orpheus|distil|compound|allam|embed/i,
+      fallback: ["moonshotai/kimi-k2-instruct", "openai/gpt-oss-120b", "llama-3.3-70b-versatile", "qwen/qwen3-32b", "llama-3.1-8b-instant"],
+      reasoning: function (m) { return /gpt-oss/i.test(m) ? "low" : /qwen3/i.test(m) ? "none" : null; } },
+    { id: "gemini", name: "Gemini", url: "https://generativelanguage.googleapis.com/v1beta/openai", maxKey: "max_tokens",
+      prefer: [/^gemini-2\.5-flash$/, /^gemini-flash-latest$/, /^gemini-2\.0-flash$/, /^gemini-2\.5-flash-lite$/, /^gemini-flash-lite-latest$/,
+               /^gemini-2\.0-flash-lite$/, /^gemini-2\.5-pro$/, /^gemini-[\d.]+-flash$/, /^gemini-.*flash/],
+      skip: /embed|imagen|veo|tts|aqa|image|audio|live|native|learnlm|gemma|robotics|computer|thinking/i,
+      fallback: ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-2.5-flash-lite"],
+      reasoning: function (m) { return /pro/i.test(m) ? "low" : /2\.5|latest/i.test(m) ? "none" : null; } }
+  ];
   function aiPrompt(text, week, task) {
     return "Sos profesor de italiano para un hispanohablante rioplatense que está en la semana " + week +
       " de 52 de un curso hasta C1. La consigna era: «" + (task ? task.t : "texto libre") + "».\n" +
@@ -1454,7 +1463,7 @@
       "\"corregido\":\"el texto completo corregido\",\"comentario\":\"una o dos oraciones de devolución, en castellano\"}\n\n" +
       "Texto:\n" + text;
   }
-  function aiCheck(text, week, key, done) { llm(aiPrompt(text, week, TASKS[week]), key, done); }
+  function aiCheck(text, week, keys, done) { llm(aiPrompt(text, week, TASKS[week]), keys, done); }
 
   /* Any exercise: why is my answer wrong (or is it right after all)? */
   function explainPrompt(x) {
@@ -1468,35 +1477,36 @@
       "con un ejemplo corto en italiano. Si su respuesta en realidad también es correcta, o si la corrección de la app está mal o confunde, decilo claro.\n" +
       "Respondé SOLO con JSON: {\"tambien_correcta\": true o false, \"app_equivocada\": true o false, \"explicacion\": \"...\"}";
   }
-  function explain(x, key, done) { llm(explainPrompt(x), key, done); }
+  function explain(x, keys, done) { llm(explainPrompt(x), keys, done); }
 
-  /* One request at a time through the models, best first: each attempt
-     waits at most 20 s, the whole thing at most 60 s.  The model that
-     answered last time goes first next time. */
-  var MODEL_KEY = "laviac1.groq.model", LIST_KEY = "laviac1.groq.models", PAID_KEY = "laviac1.groq.paid";
+  /* One request at a time through the models of each provider, best first:
+     each attempt waits at most 20 s, each provider at most 40 s.  The model
+     that answered last time goes first next time. */
+  function store(P, k) { return "laviac1." + P.id + "." + k; }
   // Models that answered 402 (payment required) with this key: never asked again.
-  function paid() { try { return JSON.parse(localStorage.getItem(PAID_KEY) || "{}") || {}; } catch (e) { return {}; } }
-  function markPaid(model) { var p = paid(); p[model] = Date.now(); try { localStorage.setItem(PAID_KEY, JSON.stringify(p)); } catch (e) { /* */ } }
-  function models(key, cb) {
+  function paid(P) { try { return JSON.parse(localStorage.getItem(store(P, "paid")) || "{}") || {}; } catch (e) { return {}; } }
+  function markPaid(P, model) { var p = paid(P); p[model] = Date.now(); try { localStorage.setItem(store(P, "paid"), JSON.stringify(p)); } catch (e) { /* */ } }
+  function models(P, key, cb) {
     try {
-      var c = JSON.parse(localStorage.getItem(LIST_KEY) || "null");
+      var c = JSON.parse(localStorage.getItem(store(P, "models")) || "null");
       if (c && c.at > Date.now() - 86400000 && c.ids && c.ids.length) return cb(c.ids);
     } catch (e) { /* */ }
     var ctl = typeof AbortController === "function" ? new AbortController() : null;
     var timer = setTimeout(function () { if (ctl) ctl.abort(); }, 8000);
-    fetch(AI_URL + "/models", { headers: { Authorization: "Bearer " + key }, signal: ctl ? ctl.signal : undefined })
+    fetch(P.url + "/models", { headers: { Authorization: "Bearer " + key }, signal: ctl ? ctl.signal : undefined })
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (j) {
         clearTimeout(timer);
-        var ids = ((j && j.data) || []).filter(function (m) { return m && m.id && m.active !== false && !AI_SKIP.test(m.id); })
-          .map(function (m) { return m.id; });
+        var ids = ((j && j.data) || []).filter(function (m) { return m && m.id && m.active !== false; })
+          .map(function (m) { return String(m.id).replace(/^models\//, ""); })
+          .filter(function (id) { return !P.skip.test(id); });
         var ranked = [];
-        AI_PREFER.forEach(function (rx) { ids.forEach(function (id) { if (rx.test(id) && ranked.indexOf(id) < 0) ranked.push(id); }); });
-        ids.forEach(function (id) { if (ranked.indexOf(id) < 0) ranked.push(id); });
-        if (ranked.length) { try { localStorage.setItem(LIST_KEY, JSON.stringify({ at: Date.now(), ids: ranked })); } catch (e) { /* */ } }
-        cb(ranked.length ? ranked : AI_FALLBACK.slice());
+        P.prefer.forEach(function (rx) { ids.forEach(function (id) { if (rx.test(id) && ranked.indexOf(id) < 0) ranked.push(id); }); });
+        if (P.id === "groq") ids.forEach(function (id) { if (ranked.indexOf(id) < 0) ranked.push(id); });
+        if (ranked.length) { try { localStorage.setItem(store(P, "models"), JSON.stringify({ at: Date.now(), ids: ranked })); } catch (e) { /* */ } }
+        cb(ranked.length ? ranked : P.fallback.slice());
       })
-      .catch(function () { clearTimeout(timer); cb(AI_FALLBACK.slice()); });
+      .catch(function () { clearTimeout(timer); cb(P.fallback.slice()); });
   }
   // The JSON inside a reply (some models think aloud in <think>…</think> or wrap it in ```).
   function jsonOf(txt) {
@@ -1504,35 +1514,52 @@
     var a = txt.indexOf("{"), b = txt.lastIndexOf("}");
     return JSON.parse(a >= 0 && b > a ? txt.slice(a, b + 1) : txt);
   }
-  function llm(prompt, key, done) {
+  // keys: {groq, gemini}, or just the Groq key as a string.
+  function llm(prompt, keys, done) {
     if (typeof fetch !== "function") return done(new Error("sin fetch"));
-    models(key, function (list) {
+    if (typeof keys === "string") keys = { groq: keys };
+    keys = keys || {};
+    var todo = PROVIDERS.filter(function (P) { return keys[P.id]; }), errs = [];
+    if (!todo.length) return done(new Error("sin clave"));
+    (function nextProvider() {
+      var P = todo.shift();
+      if (!P) return done(new Error(errs.length > 1 ? errs.join(" · ") : errs[0].replace(/^\w+: /, "")));
+      ask(P, prompt, keys[P.id], function (err, data) {
+        if (!err) return done(null, data);
+        errs.push(P.name + ": " + String(err.message || err));
+        nextProvider();
+      });
+    })();
+  }
+  function ask(P, prompt, key, done) {
+    models(P, key, function (list) {
       // every model of the key, the free-tier-sized ones too, minus those known to be paid
-      var skip = paid(), order = list.filter(function (m) { return !skip[m]; }), deadline = Date.now() + 60000, lastErr = null, plain = {}, n402 = 0;
+      var skip = paid(P), order = list.filter(function (m) { return !skip[m]; }), deadline = Date.now() + 40000, lastErr = null, plain = {}, n402 = 0;
       if (!order.length) order = list.slice();
       try {
-        var good = localStorage.getItem(MODEL_KEY);
+        var good = localStorage.getItem(store(P, "model"));
         if (good && order.indexOf(good) > 0) { order.splice(order.indexOf(good), 1); order.unshift(good); }
       } catch (e) { /* */ }
-      var k = 0;
+      var k = 0, over = false;
+      function finish(err, data) { if (over) return; over = true; done(err, data); }
       function next(err) {
         if (err) lastErr = err;
         if (k >= order.length || Date.now() > deadline) {
-          var m = n402 && n402 === k ? "Groq pide un plan pago para todos los modelos de tu cuenta (402)"
+          var m = n402 && n402 === k ? P.name + " pide un plan pago para todos los modelos de tu cuenta (402)"
                 : lastErr && /abort/i.test(String(lastErr.message || lastErr)) ? "la IA no respondió a tiempo" : String((lastErr && lastErr.message) || lastErr || "sin respuesta");
-          return done(new Error(m));
+          return finish(new Error(m));
         }
         attempt(order[k++]);
       }
       function attempt(model) {
         var ctl = typeof AbortController === "function" ? new AbortController() : null;
         var timer = setTimeout(function () { if (ctl) ctl.abort(); }, Math.min(20000, Math.max(3000, deadline - Date.now())));
-        var body = { model: model, temperature: 0.2, max_completion_tokens: 4096,
+        var body = { model: model, temperature: 0.2,
                      messages: [{ role: "system", content: "Respondés solo con JSON válido." }, { role: "user", content: prompt }] };
-        if (!plain[model]) body.response_format = { type: "json_object" };
-        if (/gpt-oss/i.test(model) && !plain[model]) body.reasoning_effort = "low";
-        if (/qwen3/i.test(model) && !plain[model]) body.reasoning_effort = "none";
-        fetch(AI_URL + "/chat/completions", {
+        body[P.maxKey] = 4096;
+        var re = P.reasoning(model);
+        if (!plain[model]) { body.response_format = { type: "json_object" }; if (re) body.reasoning_effort = re; }
+        fetch(P.url + "/chat/completions", {
           method: "POST", signal: ctl ? ctl.signal : undefined,
           headers: { "Content-Type": "application/json", Authorization: "Bearer " + key },
           body: JSON.stringify(body)
@@ -1540,11 +1567,11 @@
           if (r.ok) return r.json();
           return r.text().then(function (b) {
             clearTimeout(timer);
+            if ((r.status === 400 && /api.?key/i.test(b)) || r.status === 401 || r.status === 403) { finish(new Error("HTTP " + r.status + ", clave")); return null; }
             // a model that rejects the JSON mode or the reasoning option: again without them
             if (r.status === 400 && !plain[model] && /response_format|json|reasoning/i.test(b)) { plain[model] = 1; attempt(model); return null; }
-            if (r.status === 401 || r.status === 403) return done(new Error("HTTP " + r.status + ", clave"));
-            if (r.status === 402) { n402++; markPaid(model); next(new Error("HTTP 402")); return null; }
-            next(new Error(r.status === 429 ? "se terminó el cupo por ahora (429)" : r.status >= 500 ? "Groq está saturado ahora (" + r.status + ")" : "HTTP " + r.status));
+            if (r.status === 402) { n402++; markPaid(P, model); next(new Error("HTTP 402")); return null; }
+            next(new Error(r.status === 429 ? "se terminó el cupo por ahora (429)" : r.status >= 500 ? P.name + " está saturado ahora (" + r.status + ")" : "HTTP " + r.status));
             return null;
           });
         }).then(function (j) {
@@ -1553,8 +1580,8 @@
           var msg = j.choices && j.choices[0] && j.choices[0].message;
           var data;
           try { data = jsonOf(msg && msg.content); } catch (e) { return next(new Error("respuesta ilegible")); }
-          try { localStorage.setItem(MODEL_KEY, model); } catch (e) { /* */ }
-          done(null, data);
+          try { localStorage.setItem(store(P, "model"), model); } catch (e) { /* */ }
+          finish(null, data);
         }).catch(function (e) { clearTimeout(timer); next(e); });
       }
       next();
@@ -1588,7 +1615,7 @@
 
   var api = { TASKS: TASKS, features: features, lint: lint, check: check, markup: markup, weeks: weeks, toks: toks,
               learn: learn, learnCourse: learnCourse, ltCheck: ltCheck, fromLT: fromLT,
-              aiCheck: aiCheck, fromAI: fromAI, aiPrompt: aiPrompt, explain: explain, explainPrompt: explainPrompt };
+              aiCheck: aiCheck, fromAI: fromAI, aiPrompt: aiPrompt, explain: explain, explainPrompt: explainPrompt, PROVIDERS: PROVIDERS };
   if (typeof module === "object" && module.exports) module.exports = api;
   else root.Scrivi = api;
 })(typeof window !== "undefined" ? window : globalThis);

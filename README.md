@@ -427,15 +427,18 @@ texto se envía a sus servidores.
 **Corrector con IA (opcional).** LanguageTool casi no controla la
 concordancia ni la persona del verbo en italiano. Para una corrección
 completa, la app usa **Groq** con una clave gratuita del usuario
-(*console.groq.com/keys → Create API Key*, empieza con `gsk_`): la IA marca
-cada error del texto con su explicación en castellano y agrega la versión
-corregida y una devolución. La app le pide a Groq la lista de modelos de esa
-clave y usa el mejor disponible (Kimi K2, gpt-oss-120b, Llama 3.3 70B…), así
-no depende de nombres que cambian; descarta los de audio y los inactivos. Si
-un modelo tarda más de 20 segundos, está saturado, pide plan pago o no acepta
-el modo JSON, prueba el siguiente, y recuerda el que anduvo. La clave queda
-solo en el teléfono (no entra en las copias de seguridad) y el texto se envía
-a Groq. Lo que la IA marca reemplaza lo que el corrector
+(*console.groq.com/keys → Create API Key*, empieza con `gsk_`) y, de
+respaldo, **Gemini** (*aistudio.google.com/apikey*, empieza con `AIza`):
+si Groq falla, no responde a tiempo o no hay clave de Groq, pregunta a
+Gemini. La IA marca cada error del texto con su explicación en castellano y
+agrega la versión corregida y una devolución. A cada servicio la app le pide
+la lista de modelos de esa clave y usa el mejor disponible (en Groq Kimi K2,
+gpt-oss-120b, Llama 3.3 70B…; en Gemini 2.5 Flash, 2.0 Flash, Flash-Lite…),
+así no depende de nombres que cambian; descarta los de audio, imagen,
+embeddings y los inactivos. Si un modelo tarda más de 20 segundos, está
+saturado, pide plan pago o no acepta el modo JSON, prueba el siguiente, y
+recuerda el que anduvo. Las claves quedan solo en el teléfono (no entran en
+las copias de seguridad) y el texto se envía a Groq o a Google. Lo que la IA marca reemplaza lo que el corrector
 propio o LanguageTool dijeron sobre las mismas palabras.
 
 **«🤖 Explicame» en cualquier ejercicio.** Con la clave guardada (en Scrivi o
