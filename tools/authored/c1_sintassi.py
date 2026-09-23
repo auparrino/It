@@ -75,7 +75,7 @@ ITEMS = [
               "«Mi sono tagliato i capelli» = te lo cortaste vos."),
     dict(id="c1-caus-05", type="choice", topic="percezione",
          prompt="Elegí la forma correcta.",
-         stem="Ho visto Maria ___ dalla finestra.",
+         stem="Dalla finestra ho visto Maria ___.",
          options=["uscire", "di uscire", "uscendo"],
          answer="uscire",
          note="Verbos de percepción + infinitivo sin preposición. «Che usciva» "

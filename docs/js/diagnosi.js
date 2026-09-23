@@ -281,7 +281,7 @@
     manana: "domani", "mañana": "domani", ahora: "adesso / ora", despues: "dopo", antes: "prima",
     entonces: "allora", sobre: "su / sopra", sin: "senza", hasta: "fino a", desde: "da",
     tus: "i tuoi", sus: "i suoi", mis: "i miei", nuestro: "nostro", nuestra: "nostra",
-    tarde: "pomeriggio / sera", noche: "notte / sera", hora: "ora", horas: "ore", cuarto: "quarto",
+    tarde: "tardi / pomeriggio / sera", noche: "notte / sera", hora: "ora", horas: "ore", cuarto: "quarto",
     minutos: "minuti", mediodia: "mezzogiorno", medianoche: "mezzanotte", semana: "settimana",
     dia: "giorno", dias: "giorni", mes: "mese", meses: "mesi", anos: "anni", "años": "anni",
     tener: "avere", ser: "essere", estar: "stare / essere", hacer: "fare", ir: "andare",
@@ -359,8 +359,8 @@
     if (s === e) rule = "no cambia en plural (" + (/[àèéìòù]$/.test(s) ? "termina en vocal acentuada" : /[^aeiou]$/.test(s) ? "termina en consonante" : "es invariable") + ")";
     else if (/[cg]a$/.test(s) && /(che|ghe)$/.test(e)) rule = "-ca / -ga hacen -che / -ghe para conservar el sonido duro";
     else if (/[cg]o$/.test(s) && /(chi|ghi)$/.test(e)) rule = "-co / -go hacen -chi / -ghi, con el sonido duro";
-    else if (/[cg]o$/.test(s) && /(ci|gi)$/.test(e)) rule = "-co / -go hacen -ci / -gi cuando el acento cae dos sílabas antes (amico → amici, medico → medici)";
-    else if (/[cg]ia$/.test(s) && /(ce|ge)$/.test(e)) rule = "-cia / -gia con i átona pierden la i: -ce / -ge";
+    else if (/[cg]o$/.test(s) && /(ci|gi)$/.test(e)) rule = "-co / -go suelen hacer -ci / -gi en las palabras esdrújulas (medico → medici, psicologo → psicologi); amico, nemico, greco y porco son excepciones llanas";
+    else if (/[cg]ia$/.test(s) && /(ce|ge)$/.test(e)) rule = "-cia / -gia con i átona pierden la i después de consonante: -ce / -ge (arancia → arance, spiaggia → spiagge); después de vocal la conservan (camicia → camicie, valigia → valigie)";
     else if (/io$/.test(s) && e === s.slice(0, -2) + "i") rule = "-io con i átona hace una sola -i";
     else if (/a$/.test(s) && /e$/.test(e)) rule = "los sustantivos en -a hacen -e";
     else if (/a$/.test(s) && /i$/.test(e)) rule = "los masculinos en -a (problema, poeta, turista) hacen -i";
@@ -436,6 +436,9 @@
       ["gi", "ghi", "Para el sonido /gi/ se escribe *ghi* (laghi, ghiaccio); *gi* suena /dʒi/."],
       ["cie", "zie", "El sonido /ts/ se escribe con z: grazie, zio, piazza."],
       ["ci", "zi", "El sonido /ts/ se escribe con z: stazione, grazie."]]);
+    // A plural written wrong (arancie → arance) is the plural rule, not spelling.
+    var npE = DATA.nounsByPlural[e];
+    if (npE && npE.s !== e) spellings = [];
     for (var k = 0; k < spellings.length; k++) {
       var sp = spellings[k];
       var src = sp[0] === "ñ" ? graw.replace(/\u0000/g, "ñ") : gs;
@@ -537,6 +540,12 @@
         explain: it(g) + " es el infinitivo; conjugado para esta persona queda " + it(e) + "." };
     }
 
+    // 12d. Dos palabras italianas que se confunden (volta / tempo, largo / lungo)
+    var lc = lexConfusion(g, e);
+    if (lc) return { cat: "lessico", slip: false,
+      hint: it(g) + " existe, pero acá va otra palabra parecida en el uso.",
+      explain: lc + " Acá: " + it(e) + "." };
+
     // 13. Falsi amici
     var fa = DATA.falsi[g];
     if (fa && g !== e) return { cat: "falso_amico", slip: false,
@@ -621,6 +630,12 @@
       explain: it(g) + " es español; en italiano: " + it(sp2[0].split(" / ")[0]) +
         (e !== sp2[0] && sp2[0].split(" / ").indexOf(e) < 0 ? " (acá: " + it(e) + ")" : "") +
         "." + (sp2[1] ? " " + sp2[1] : "") };
+
+    // 18a. Un nombre propio, un título o un lugar dicho en castellano
+    //      (Isabel → Elisabetta, Londres → Londra).
+    if (ctx.names && ctx.names.indexOf(e) >= 0 && !isItalian(g) && g !== e) return { cat: "lessico", slip: false,
+      hint: "Ese nombre también se dice distinto en italiano.",
+      explain: "En italiano: " + it(e.charAt(0).toUpperCase() + e.slice(1)) + ". Muchos nombres propios, títulos y lugares se traducen (Isabel → Elisabetta, Juan → Giovanni, Londres → Londra)." };
 
     // 18b. Una palabra que no está en ningún diccionario pero suena a
     // castellano (entiendo, tienes, señor).
@@ -773,6 +788,65 @@
     return { cat: "pronome", slip: false,
       hint: "Revisá el pronombre marcado.",
       explain: "Acá va " + it(e) + "." };
+  }
+
+  /* Two Italian words a Spanish speaker mixes up (not false friends: both
+     exist and both are «right» somewhere).  Each entry: the forms of each
+     word, separated by «|», and the difference in one line.  It only fires
+     when the learner wrote one word and the other was expected. */
+  var LEX_CONFUSIONS = [
+    ["volta volte|tempo tempi|ora ore", "«Vez» es *volta* (la prima volta, tre volte); *tempo* es el tiempo (que pasa o que hace); *ora*, la hora."],
+    ["lungo lunga lunghi lunghe|largo larga larghi larghe", "*largo* en italiano es ancho; «largo» es *lungo*."],
+    ["ancora|già|sempre", "«Todavía» es *ancora* (y también «otra vez»); «ya» es *già*; *sempre* es siempre."],
+    ["presto|subito|prima|pronto pronta pronti pronte", "*presto* = temprano o pronto (dentro de poco); *subito* = enseguida; *prima* = antes; *pronto* = listo (y «hola» al teléfono)."],
+    ["buono buona buoni buone buon|bravo brava bravi brave|bene", "*buono* = bueno (de sabor o de carácter); *bravo* = hábil, bueno en lo que hace; *bene* = bien, el adverbio."],
+    ["molto molta molti molte|troppo troppa troppi troppe", "*molto* = mucho, muy; *troppo* = demasiado."],
+    ["colazione|pranzo|cena", "*colazione* = desayuno; *pranzo* = almuerzo; *cena* = cena."],
+    ["negozio negozi|affare affari", "*negozio* = tienda; un «negocio» (un trato) es *affare*."],
+    ["moglie mogli|sposa spose|donna donne", "*moglie* = esposa; *sposa* = la novia el día de la boda; *donna* = mujer."],
+    ["marito mariti|sposo sposi|uomo uomini", "*marito* = esposo; *sposo* = el novio el día de la boda; *uomo* = hombre."],
+    ["sera sere|notte notti|pomeriggio pomeriggi", "*pomeriggio* = la tarde (después de comer); *sera* = desde que oscurece hasta la hora de dormir; *notte* = la noche de dormir."],
+    ["tardi|pomeriggio", "*tardi* = tarde (la hora: è tardi); «la tarde» es *il pomeriggio*."],
+    ["mattina mattino|domani", "«Mañana» es *mattina* (la parte del día) o *domani* (el día siguiente)."],
+    ["fa|da", "*fa* = hace, para lo terminado (due anni fa); *da* = desde hace, para lo que sigue (studio da due anni)."],
+    ["chi|che cosa|quale quali qual", "*chi* = quién; *che* o *cosa* = qué; *quale* = cuál."],
+    ["anche pure|neanche nemmeno neppure", "*anche* = también; «tampoco» (y «ni siquiera») es *neanche* o *nemmeno*."],
+    ["niente nulla|nessuno nessuna nessun", "*niente* = nada; *nessuno* = nadie, ninguno."],
+    ["qualcosa|qualcuno qualcuna|qualche", "*qualcosa* = algo; *qualcuno* = alguien; *qualche* = algún, algunos (siempre con singular: qualche giorno)."],
+    ["ogni|tutti tutte tutto tutta", "*ogni* = cada, va con singular (ogni giorno); *tutti* va con plural y artículo (tutti i giorni)."],
+    ["vecchio vecchia vecchi vecchie|anziano anziana anziani anziane", "*anziano* = mayor, para personas y con respeto; *vecchio* = viejo."],
+    ["fino|fine", "*fino a* = hasta; *la fine* = el final."],
+    ["tra fra|entro", "*tra* (o *fra*) = dentro de, en el futuro (tra due giorni); *entro* = antes de un plazo (entro venerdì)."],
+    ["esperienza esperienze|esperimento esperimenti", "*esperienza* = experiencia; *esperimento* = experimento."],
+    ["gente|persone persona", "*la gente* es singular (la gente è gentile); *le persone* es plural."],
+    ["bambino bambina bambini bambine|ragazzo ragazza ragazzi ragazze|figlio figlia figli figlie", "*bambino* = niño; *ragazzo* = chico, joven (y novio); *figlio* = hijo."],
+    ["nipote nipoti|cugino cugina cugini cugine", "*nipote* = nieto o sobrino; *cugino* = primo."],
+    ["genitori|parenti", "*genitori* = padres (madre y padre); *parenti* = parientes."],
+    ["mezzo mezza mezzi mezze mezz'|metà", "*mezzo* = medio (mezz'ora, mezzo litro); *metà* = la mitad (la metà della torta)."],
+    ["giorno giorni|giornata giornate", "*giorno* = el día como fecha o unidad; *giornata* = el día vivido, con lo que pasó (una bella giornata)."],
+    ["sera|serata", "*sera* = la noche como momento; *serata* = la velada, lo que se hizo esa noche."],
+    ["ora adesso|allora", "«Ahora» es *ora* o *adesso*; *allora* = entonces."],
+    ["conto conti|racconto racconti", "*conto* = la cuenta (del restaurante, del banco); «cuento» es *racconto*."],
+    ["caro cara cari care|faccia facce viso", "*caro* = querido, o caro de precio; «la cara» es *la faccia* (o *il viso*)."],
+    ["ufficio uffici|lavoro lavori", "*ufficio* = oficina; *lavoro* = trabajo."],
+    ["compleanno compleanni|anniversario anniversari", "*compleanno* = cumpleaños; *anniversario* = aniversario (de un casamiento, de un hecho)."],
+    ["piano piani|pavimento pavimenti", "*piano* = piso de un edificio (y despacio); el piso que se pisa es *pavimento*."],
+    ["perché|perciò", "*perché* = porque, por qué; *perciò* = por eso."],
+    ["cosa cose|causa cause", "*cosa* = cosa, qué; *causa* = causa."],
+    ["salute|saluto saluti", "*salute* = salud; *saluto* = saludo."],
+  ];
+  var LEX_CONF = dict();
+  LEX_CONFUSIONS.forEach(function (c, ci) {
+    c[0].split("|").forEach(function (lemma, li) {
+      lemma.split(" ").forEach(function (f) { (LEX_CONF[f] = LEX_CONF[f] || []).push([ci, li]); });
+    });
+  });
+  function lexConfusion(g, e) {
+    var a = LEX_CONF[g] || [], b = LEX_CONF[e] || [];
+    for (var i = 0; i < a.length; i++) for (var j = 0; j < b.length; j++) {
+      if (a[i][0] === b[j][0] && a[i][1] !== b[j][1]) return LEX_CONFUSIONS[a[i][0]][1];
+    }
+    return null;
   }
 
   // Verbs often confused by Spanish speakers: [lemma sbagliato, lemma giusto, spiegazione]
@@ -1052,7 +1126,7 @@
   }
 
   function soundRule(noun) {
-    if (/^(s[bcdfgklmnpqrstvz]|z|gn|ps|pn|x|y)/.test(noun)) return "sz";
+    if (/^(s[bcdfghklmnpqrstvz]|z|gn|ps|pn|x|y)/.test(noun)) return "sz";
     if (/^[aeiouàèéìòùh]/.test(noun)) return "v";
     return "c";
   }
@@ -1224,7 +1298,7 @@
           ", la Toscana, l'Europa). Las ciudades no: Roma è bella, vado a Roma." };
       return { cat: "articolo", slip: false,
         hint: "Falta el artículo.",
-        explain: "Falta " + it(w) + ": en italiano el sustantivo casi siempre lleva artículo, incluso donde el español lo omite a veces (mi piace *la* musica, *la* signora Rossi)." };
+        explain: "Falta " + it(w) + ": en italiano el sustantivo casi siempre lleva artículo, incluso donde el español lo omite (*la* mia casa = mi casa, *nel* 2020 = en 2020, *l'*Italia = Italia)." };
     }
     if (prepInfo(w)) return { cat: "preposizione", slip: false,
       hint: "Falta una preposición.",
@@ -1294,6 +1368,7 @@
   };
 
   var LABEL = {
+    grammatica: "Gramática",
     ausiliare: "Auxiliar essere/avere", congiuntivo: "Congiuntivo",
     periodo_ipotetico: "Periodo hipotético", a_personale: "«a» personal",
     preposizione: "Preposiciones", preposizione_articolata: "Preposición + artículo",
@@ -1705,7 +1780,15 @@
     SEVERITY: SEVERITY,
     verbForms: verbForms,
     participleOf: participleOf,
-    DATA: DATA
+    DATA: DATA,
+    // For the free-writing checker (scrivi.js): the same tables and tests.
+    util: {
+      ARTICLES: ARTICLES, CLITICS: CLITICS, SUBJECTS: SUBJECTS, POSSESSIVE: POSSESSIVE,
+      FAMILY: FAMILY, AVERE: AVERE, ESSERE: ESSERE, prepInfo: prepInfo, contract: contract,
+      isItalian: isItalian, spanishWord: spanishWord, looksSpanish: looksSpanish,
+      isInfinitive: isInfinitive, soundRule: soundRule, deaccent: deaccent,
+      degeminate: degeminate, editDistance: editDistance, lexConfusion: lexConfusion
+    }
   };
 
   if (typeof module === "object" && module.exports) module.exports = api;

@@ -631,7 +631,7 @@
     var st = weekStat(w.week);
     if (w.boss) return st.bossPassed ? 3 : 0;
     return (lessonRead(w.week) || !w.lesson ? 1 : 0) + (st.right >= 20 ? 1 : 0) +
-      (Drills.mastered(st) && Drills.coverage(w, state).ok ? 1 : 0);
+      (Drills.dominated(st, w, state) ? 1 : 0);
   }
   function starsHtml(n, of) {
     var h = ""; for (var i = 0; i < (of || 3); i++) h += '<i class="' + (i < n ? "on" : "") + '">★</i>';
@@ -867,8 +867,19 @@
     var pct = st.attempts ? Math.round(st.right / st.attempts * 100) : 0;
     var m = function (o) { out.push(o); };
     if (w.boss) {
+      // Before the boss: the season again, one theme at a time, and a round
+      // with what you got wrong.  Optional: the boss is the gate.
+      var psb = partsOf(w);
+      if (w.lesson && psb) psb.forEach(function (p, k) {
+        m({ kind: "lez", arg: String(k), done: partRead(w.week, k) || lessonRead(w.week), ico: "📘", opt: true,
+            title: p.h, sub: (partRead(w.week, k) || lessonRead(w.week) ? "Hecho · " : "Opcional · ") +
+              "la regla en pasos cortos y " + p.items.length + " ejercicios del tema" });
+      });
+      var weak = Drills.weakItems(course, w, state, itemMap).length;
+      m({ kind: "debil", done: !!(state.weakDone || {})[w.week], ico: "🩹", opt: true, title: "Tus puntos débiles",
+          sub: weak ? "Opcional · " + weak + " ejercicios de la estación que fallaste o casi no viste" : "Opcional · no fallaste nada todavía: repaso al azar" });
       m({ kind: "play", done: st.bossPassed, ico: "⚔️", title: "Vencé al jefe",
-          sub: "85% de aciertos. Superarlo te da las 3 estrellas.", cls: "boss" });
+          sub: "85% de aciertos. Pregunta más de lo que más te costó. Superarlo te da las 3 estrellas.", cls: "boss" });
       return out;
     }
     var psw = partsOf(w);
@@ -888,6 +899,12 @@
     }
     m({ kind: "play", done: st.right >= 20, ico: "🎯", title: "Superá la semana",
         sub: Math.min(st.right, 20) + " / 20 respuestas correctas con los ejercicios de la semana" });
+    if (window.Scrivi && Scrivi.TASKS[w.week]) {
+      var sd = (state.scritti || {})[w.week], task = Scrivi.TASKS[w.week];
+      m({ kind: "scrivi", done: !!sd, ico: "✍️", title: "Scrivi: tu texto de la semana",
+          sub: sd ? "Entregado · " + sd.n + " palabras" + (sd.errs ? " · " + sd.errs + " cosas para revisar" : " · sin errores marcados")
+                  : task.min + " palabras o más · " + task.use.map(function (u) { return u[2]; }).join(" · ") });
+    }
     if (window.Drills && window.Frasi) Drills.scenesOfWeek(w.week).forEach(function (sc) {
       var p = Frasi.progress(sc.id, state.cards);
       m({ kind: "scene", arg: sc.id, done: p.seen >= p.total, ico: sc.emoji, title: "Frases: " + sc.name,
@@ -931,11 +948,11 @@
       if (w.week === Banca.GAP_WEEK) m({ kind: "b-gap", done: bankDone(/^b:gap:/), ico: "🔧", title: "Banco: Coniuga in contesto",
         sub: "El verbo justo dentro de una oración real." });
     }
-    var cov = Drills.coverage(w, state), last = (st.last || []).slice(-30);
-    var lastPct = last.length ? Math.round(last.reduce(function (a, b) { return a + b; }, 0) / last.length * 100) : 0;
-    m({ kind: "play2", done: Drills.mastered(st) && cov.ok, ico: "🏆", title: "Dominala",
-        sub: "85 % en las últimas 30 respuestas (vas " + lastPct + " % en " + last.length + ") · ejercicios vistos " +
-             cov.seen + " / " + cov.total });
+    var domDone = Drills.dominated(st, w, state);
+    m({ kind: "play2", done: domDone, ico: "🏆", title: "Dominala",
+        sub: domDone ? "Dominada" + (st.domPct ? " · " + st.domPct + " %" : "")
+          : "Una sola sesión de " + Drills.DOMINA_SIZE + " preguntas de toda la semana, sin vidas: con 85 % la ganás" +
+            (st.domBest ? " · tu mejor intento: " + st.domBest + " %" : "") });
     return out;
   }
 
@@ -963,7 +980,9 @@
     if (kind === "lez") startLezione(arg != null ? +arg : undefined);
     else if (kind === "vocab") startRound("vocab");
     else if (kind === "play") startRound(w.boss ? "boss" : "round");
-    else if (kind === "play2") startRound("round");
+    else if (kind === "play2") startRound("domina");
+    else if (kind === "debil") startRound("debil");
+    else if (kind === "scrivi") { view.screen = "scrivi"; render(); window.scrollTo(0, 0); }
     else if (kind === "scene" || kind === "ponte" || kind === "falsi" || kind === "capire" ||
              kind === "b-forme" || kind === "b-tr" || kind === "b-gap") startRound(kind, arg);
     else if (kind === "ep") { view.ep = arg; view.epFrom = "briefing"; view.screen = "lettura"; render(); window.scrollTo(0, 0); }
@@ -974,7 +993,8 @@
     var left = pendingToAdvance(w);
     var html = '<div class="card"><h2>Misiones ' + starsHtml(weekStars(w)) +
       ' <small class="muted">' + doneN + " / " + plan.length + "</small></h2>" +
-      (w.boss ? "" : w.week < 52 && state.unlocked <= w.week
+      (w.boss ? (w.week < 52 ? '<p class="muted">⚔️ El jefe abre la semana ' + (w.week + 1) + ". Los repasos por tema y tus puntos débiles son opcionales: sirven para llegar preparado.</p>" : "")
+        : w.week < 52 && state.unlocked <= w.week
         ? '<p class="muted">🔒 La semana ' + (w.week + 1) + " se abre al completar " + (left.length === 1 ? "esta misión" : "estas " + left.length + " misiones") +
           " (todas menos Dominala).</p>"
         : '<p class="muted">🔓 Semana ' + (w.week + 1) + " abierta.</p>") +
@@ -1042,9 +1062,9 @@
      in half teaches nothing).  Phrase sessions have none: they are for flow. */
   var WITH_LIVES = { round: 1, boss: 1, gym: 1 };
   // Only these rounds count towards unlocking the next grammar week.
-  var WEEK_KINDS = { round: 1, gym: 1, pausa: 1, vocab: 1, giorno: 1 };
+  var WEEK_KINDS = { round: 1, gym: 1, pausa: 1, vocab: 1, giorno: 1, debil: 1, domina: 1 };
   // Rounds whose answers count as the week's progress (review mixes weeks).
-  var COUNT_KINDS = { round: 1, gym: 1, pausa: 1, boss: 1, vocab: 1, giorno: 1 };
+  var COUNT_KINDS = { round: 1, gym: 1, pausa: 1, boss: 1, vocab: 1, giorno: 1, debil: 1, domina: 1 };
 
   /* Le quattro corde di Nation (la guida): input, output, forma, fluidez. */
   function strandOf(it, kind) {
@@ -1063,7 +1083,9 @@
       view.week = w.week;
       items = Drills.buildRound(course, w, { map: itemMap, state: state, silent: state.silent, size: 6, only: partItems(w) });
     }
-    else if (kind === "boss") items = Drills.buildBoss(course, w, state);
+    else if (kind === "boss") items = Drills.buildBoss(course, w, state, { map: itemMap });
+    else if (kind === "debil") items = Drills.buildWeak(course, w, state, { map: itemMap, size: 15 });
+    else if (kind === "domina") items = Drills.buildDomina(course, w, state, { map: itemMap, silent: state.silent });
     else if (kind === "review") items = Drills.buildReview(course, state, 20, drillOpts());
     else if (kind === "scene") items = Frasi.sceneSession(arg, state.cards, drillOpts());
     else if (kind === "pausa") {
@@ -1351,6 +1373,7 @@
   }
 
   var GENERIC = { lessico: 1, parola_mancante: 1, parola_in_piu: 1, refuso: 1, vuoto: 1 };
+  var LEXICAL = { lessico: 1, parola_spagnola: 1, falso_amico: 1, vuoto: 1 };
 
   // Multiple choice: say why *that* option is wrong (Shute 2008).
   function answer(given) {
@@ -1389,6 +1412,7 @@
     });
     var diagCtx = { stem: it.stem, prompt: it.prompt, nominal: it.type === "plural" || /plural/i.test(it.prompt || "") };
     var d = window.Diagnosi ? Diagnosi.diagnose(given, accept, diagCtx) : { verdict: "sbagliato" };
+    round.lastDiag = d;
     // The whole answer in Spanish: a hint about one word is useless.
     var esText = it.frase ? it.frase.es : it.type === "translate" ? it.stem : "";
     if (d.hint && esText) {
@@ -1530,7 +1554,7 @@
     if (round.boost) gained *= 2;
     round.xp += gained;
     Engine.addStrand(state, strandOf(it, round.kind), gained);
-    round.log.push({ id: it.id, verdict: verdict, given: given, answer: it.answer,
+    round.log.push({ id: it.id, verdict: verdict, given: given, answer: it.answer, retry: !!it.retry,
                      es: it.frase ? it.frase.es : "", stem: it.stem || "", prompt: it.prompt || "" });
 
     // SRS only tracks the fixed bank and the phrases; generated conjugation
@@ -1540,8 +1564,12 @@
     // every exercise ever seen.
     if (it.src !== "coniugatore" && it.src !== "lettura") {
       var light = !it.frase && it.src !== "vocab" && it.src !== "lab" && it.src !== "banca" && !it.retry &&
-                  (round.kind === "round" || round.kind === "sfida" || round.kind === "giorno" || round.kind === "boss");
-      state.cards[it.id] = Engine.schedule(state.cards[it.id], q, { light: light });
+                  (round.kind === "round" || round.kind === "sfida" || round.kind === "giorno" || round.kind === "boss" || round.kind === "domina");
+      // The diagnosis says what kind of mistake it was (a slip, a word, a rule).
+      var dg = round.lastDiag; round.lastDiag = null;
+      var ekind = q === 1 && (!dg || dg.slip) ? "slip"
+        : q === 0 && dg && LEXICAL[dg.cat] ? "vocab" : q === 0 ? "rule" : null;
+      state.cards[it.id] = Engine.schedule(state.cards[it.id], q, { light: light, kind: ekind });
     }
 
     /* Successive relearning (Rawson & Dunlosky 2011): what you miss comes
@@ -1703,7 +1731,7 @@
       return p;
     } catch (e) { return null; }
   }
-  var KIND_NAME = { round: "Entrenamiento", giorno: "Sfida del giorno", boss: "Jefe", gym: "Gimnasio de verbos", pausa: "Pausa caffè", review: "Ripasso",
+  var KIND_NAME = { debil: "Puntos débiles", domina: "Dominala", round: "Entrenamiento", giorno: "Sfida del giorno", boss: "Jefe", gym: "Gimnasio de verbos", pausa: "Pausa caffè", review: "Ripasso",
                     scene: "Frases", vocab: "Palabras de la semana", lettura: "Lectura", sfida: "Sfida", ponte: "Ponte",
                     falsi: "Falsi amici", capire: "Capire", "b-voc": "Parole", "b-tr": "Traduci", "b-gap": "Coniuga in contesto",
                     "b-forme": "Forme", "b-err": "Trova l'errore", clinica: "Clínica" };
@@ -1767,6 +1795,24 @@
     }
     // (the next week opens from missionCheck, once every mission is done)
 
+    if (round.kind === "debil") { if (!state.weakDone) state.weakDone = {}; state.weakDone[view.week] = true; }
+
+    // Dominala: the first answer to each question counts (the second, easier
+    // pass after a miss is for learning, not for the score).
+    var domExtra = null;
+    if (round.kind === "domina") {
+      var firsts = round.log.filter(function (x) { return !x.retry; });
+      var okN = firsts.filter(function (x) { return x.verdict === Engine.VERDICT.RIGHT || x.verdict === Engine.VERDICT.CLOSE; }).length;
+      var dp = firsts.length ? Math.round(okN / firsts.length * 100) : 0;
+      var dws = state.weekStats[view.week] || (state.weekStats[view.week] = { attempts: 0, right: 0, bossPassed: false });
+      dws.domBest = Math.max(dws.domBest || 0, dp);
+      if (dp >= 85 && firsts.length >= Math.min(20, round.items.length)) {
+        if (!dws.dominated) gain(60);
+        dws.dominated = true; dws.domPct = Math.max(dws.domPct || 0, dp);
+        domExtra = "🏆 ¡Semana dominada! " + dp + " % en " + firsts.length + " preguntas";
+      } else domExtra = "🏆 Dominala: " + dp + " % (hace falta 85 %). Tu mejor intento: " + dws.domBest + " %.";
+    }
+
     if (round.kind === "sfida") {
       var prevS = state.challengeLog[round.arg];
       state.challengeLog[round.arg] = { q: pct >= 80 ? 2 : pct >= 50 ? 1 : 0,
@@ -1791,6 +1837,7 @@
       gain(25);
       extras.push("☀️ Primera ronda del día: +25 xp");
     }
+    if (domExtra) extras.push(domExtra);
     extras = extras.concat(missionCheck(round.week, round.planDone));
 
     var won = Engine.checkBadges(state);
@@ -2270,10 +2317,12 @@
     else if (s === "leggi") html = renderLeggi();
     else if (s === "lettura") html = renderLettura(Letture.byId(view.ep));
     else if (s === "lezione") html = renderLezione();
+    else if (s === "scrivi") html = renderScrivi(course.weeks[view.week - 1]);
 
     var gb = $("#glossbox");
     if (gb) gb.classList.remove("on");
     guardUntil = Date.now() + 300;
+    guardAt = lastTap;
     // Inside a game or a text, the phone's back button returns to the tab
     // instead of closing the app.
     if (TABS.every(function (t) { return t[0] !== s; }) && !subEntry && window.history && history.pushState) {
@@ -2320,9 +2369,14 @@
 
   /* A double tap on «Continuar» must not answer the next question: taps
      right after a screen change are swallowed. */
-  var guardUntil = 0;
+  /* Only a tap in the same spot as the one that changed the screen is a
+     double tap; a quick tap somewhere else is the learner answering fast. */
+  var guardUntil = 0, lastTap = null, guardAt = null;
+  document.addEventListener("pointerdown", function (e) { lastTap = { x: e.clientX, y: e.clientY }; }, true);
   document.addEventListener("click", function (e) {
-    if (Date.now() < guardUntil && !(window.__test && window.__test.fast) && app().contains(e.target)) {
+    var near = !guardAt || e.clientX == null ||
+      (Math.abs(e.clientX - guardAt.x) < 48 && Math.abs(e.clientY - guardAt.y) < 48);
+    if (Date.now() < guardUntil && near && !(window.__test && window.__test.fast) && app().contains(e.target)) {
       e.stopPropagation();
       e.preventDefault();
     }
@@ -2481,6 +2535,7 @@
 
     wireGioco();
     wireIo();
+    wireScrivi();
 
     document.querySelectorAll("[data-self]").forEach(function (b) {
       b.onclick = function () {
@@ -2494,6 +2549,129 @@
         toast("Anotado.");
       };
     });
+  }
+
+  /* ---------------------------------------------------------------- scrivi */
+
+  // Everything Italian the course shows, as the checker's dictionary.
+  function scriviLexicon() {
+    if (!window.Scrivi) return;
+    Scrivi.learnCourse({ items: course.items, bank: Banca.loaded() ? Banca.bank() : null,
+      phrases: window.Frasi ? Frasi.ALL : [], readings: window.Letture ? Letture.EPISODI : [], glossario: glossario || {} });
+  }
+
+  function reqsHtml(r) {
+    return r.reqs.map(function (q) {
+      return '<li class="' + (q.ok ? "ok" : "") + '">' + (q.ok ? "✓" : "○") + " " + esc(q.label) +
+        ' <small class="muted">' + Math.min(q.n, 999) + " / " + q.need + "</small></li>";
+    }).join("");
+  }
+
+  function renderScrivi(w) {
+    var task = Scrivi.TASKS[w.week];
+    if (!task) return '<button class="btn ghost" id="sback">← a la semana</button><p>Esta semana no tiene texto.</p>';
+    scriviLexicon();
+    var draft = ((state.scrittiDraft || {})[w.week]) || ((state.scritti || {})[w.week] || {}).t || "";
+    var r = Scrivi.check(draft, w.week);
+    return '<button class="btn ghost" id="sback">← a la semana</button>' +
+      '<h1 class="targa"><span class="t-sup">Scrivi · Settimana ' + romano(w.week) + "</span>" +
+      '<span class="t-via">' + esc(w.fare || w.title) + "</span></h1>" +
+      '<div class="card"><p>' + mk(task.t) + '</p><ul class="reqs" id="sreqs">' + reqsHtml(r) + "</ul>" +
+      '<p class="muted small">Escribí sin traductor: lo que te equivoques es lo que más vas a aprender. Podés dejarlo a medias y volver.</p></div>' +
+      '<textarea id="stext" class="grow scrivi" rows="7" spellcheck="false" autocapitalize="sentences" placeholder="Scrivi qui, in italiano…">' + esc(draft) + "</textarea>" +
+      '<div class="row" style="margin-top:10px"><button class="btn" id="scheck">🔎 Revisar</button>' +
+      '<button class="tab" id="smodel">👀 Ver un modelo</button></div>' +
+      '<label class="muted small ltopt"><input type="checkbox" id="slt"' + (state.ltOff ? "" : " checked") + "> " +
+        "Pedir también la corrección de LanguageTool (gratis; el texto se envía a su servidor)</label>" +
+      '<div id="sout"></div>';
+  }
+
+  var scriviTimer = null;
+  function wireScrivi() {
+    if (view.screen !== "scrivi") return;
+    var w = course.weeks[view.week - 1], box = $("#stext");
+    on("#sback", function () { view.screen = "briefing"; render(); window.scrollTo(0, 0); });
+    if (!box) return;
+    box.addEventListener("input", function () {
+      clearTimeout(scriviTimer);
+      scriviTimer = setTimeout(function () {
+        var r = Scrivi.check(box.value, w.week), ul = $("#sreqs");
+        if (ul) ul.innerHTML = reqsHtml(r);
+        if (!state.scrittiDraft) state.scrittiDraft = {};
+        state.scrittiDraft[w.week] = box.value.slice(0, 4000);
+        persist();
+      }, 400);
+    });
+    on("#smodel", function () {
+      var out = $("#sout");
+      if (out) out.innerHTML = '<div class="card"><h3>Un modelo</h3><p class="model it">' + esc(Scrivi.TASKS[w.week].model) +
+        '</p><p class="muted small">No es la única forma: compará las estructuras, no las palabras.</p></div>';
+    });
+    var lt = $("#slt");
+    if (lt) lt.onchange = function () { state.ltOff = !lt.checked; persist(); };
+    on("#scheck", function () {
+      var text = box.value, r = Scrivi.check(text, w.week), out = $("#sout");
+      showScrivi(w, text, r, state.ltOff ? null : "…");
+      if (state.ltOff || !text.trim()) return;
+      // The local check shows at once; LanguageTool's opinion joins it when it arrives.
+      Scrivi.ltCheck(text, function (err, matches) {
+        if (view.screen !== "scrivi" || $("#stext") !== box || box.value !== text) return;
+        if (err) { showScrivi(w, text, r, "error"); return; }
+        r.findings = r.findings.concat(Scrivi.fromLT(text, matches, r.findings)).sort(function (a, b) { return a.i - b.i; });
+        r.hard = r.findings.filter(function (f) { return !f.soft; }).length;
+        showScrivi(w, text, r, "ok");
+      });
+    });
+  }
+
+  function showScrivi(w, text, r, ltState) {
+      var out = $("#sout");
+      if (!out) return;
+      var hard = r.findings.filter(function (f) { return !f.soft; });
+      var list = r.findings.map(function (f, k) {
+        return '<li class="' + (f.soft ? "soft" : "bad") + '"><b>' + (k + 1) + ".</b> " + mk(f.msg) + "</li>";
+      }).join("");
+      var missing = r.reqs.filter(function (q) { return !q.ok; });
+      out.innerHTML = '<div class="card">' +
+        (r.findings.length ? '<p class="scrivi-marked it">' + Scrivi.markup(text, r.findings, esc) + "</p><ol class=\"findings\">" + list + "</ol>"
+                           : '<p>✨ No encontré errores' + (ltState === "ok" ? ", y LanguageTool tampoco." : " de los que sé buscar.") + "</p>") +
+        (ltState === "…" ? '<p class="muted small">⏳ Consultando LanguageTool…</p>'
+          : ltState === "error" ? '<p class="muted small">No pude consultar LanguageTool (sin conexión o límite de uso): esta es solo la revisión local.</p>'
+          : ltState === "ok" ? '<p class="muted small">✓ Revisado también por LanguageTool.</p>' : "") +
+        (missing.length ? '<p class="muted">Todavía falta: ' + missing.map(function (q) { return esc(q.label) + " (" + q.n + " / " + q.need + ")"; }).join(" · ") + ".</p>"
+                        : '<p>Cumple la consigna.' + (hard.length ? " Corregí lo marcado si querés, o entregalo así: los errores quedan anotados para la clínica." : "") + "</p>" +
+                          '<button class="btn" id="sdone">✓ Entregar el texto</button>') +
+        "</div>";
+      on("#sdone", function () { deliverScrivi(w, text, r); });
+      if (ltState !== "ok" && ltState !== "error") out.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function deliverScrivi(w, text, r) {
+    var before = doneCount(w), first = !(state.scritti || {})[w.week];
+    var hard = r.findings.filter(function (f) { return !f.soft; });
+    if (!state.scritti) state.scritti = {};
+    state.scritti[w.week] = { t: text.slice(0, 4000), at: Date.now(), n: r.words, errs: hard.length };
+    if (state.scrittiDraft) delete state.scrittiDraft[w.week];
+    // The mistakes go to the error profile, like any other answer.
+    var toks = Scrivi.toks(text);
+    hard.forEach(function (f) {
+      var tk = toks[f.i] || {};
+      recordError({ cat: f.cat, target: f.msg.replace(/\*/g, "").slice(0, 80) }, tk.o || "");
+    });
+    var xp = first ? 40 + Math.min(40, Math.floor(r.words / 5)) + (hard.length ? 0 : 20) : 10;
+    gain(xp);
+    Engine.addStrand(state, "output", xp);
+    if (first) state.written = (state.written || 0) + 1;
+    Engine.touchStreak(state);
+    var extras = missionCheck(w.week, before);
+    Engine.checkBadges(state);
+    persist();
+    renderHeader();
+    view.screen = "briefing";
+    render();
+    window.scrollTo(0, 0);
+    var news = extras.filter(function (x) { return /abierta|perfetta/.test(x); })[0] || extras[0];
+    toast("✍️ Texto entregado · +" + xp + " xp" + (news ? " · " + news : ""), 3500);
   }
 
   function wireGioco() {

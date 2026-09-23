@@ -28,7 +28,7 @@ var ctx = { console: console, Math: Math, Date: FakeDate, JSON: JSON, Object: Ob
             isNaN: isNaN, isFinite: isFinite, Infinity: Infinity, NaN: NaN, undefined: undefined,
             setTimeout: setTimeout, clearTimeout: clearTimeout, localStorage: null, navigator: {}, document: null };
 ctx.window = ctx; ctx.self = ctx;
-["conjugator", "engine", "frasi", "lab", "letture", "lezione", "diagnosi", "banca", "drills"].forEach(function (f) {
+["conjugator", "engine", "frasi", "lab", "letture", "lezione", "diagnosi", "scrivi", "banca", "drills"].forEach(function (f) {
   vm.runInNewContext(fs.readFileSync(path.join(ROOT, "docs/js", f + ".js"), "utf8"), ctx, { filename: f + ".js" });
 });
 var Engine = ctx.Engine, Drills = ctx.Drills, Frasi = ctx.Frasi, Lab = ctx.Lab, Letture = ctx.Letture,
@@ -36,6 +36,9 @@ var Engine = ctx.Engine, Drills = ctx.Drills, Frasi = ctx.Frasi, Lab = ctx.Lab, 
 var course = JSON.parse(fs.readFileSync(path.join(ROOT, "docs/data/course.json"), "utf8"));
 Banca.load(JSON.parse(fs.readFileSync(path.join(ROOT, "docs/data/bank.json"), "utf8")));
 var map = Drills.itemsById(course);
+var Scrivi = ctx.Scrivi;
+Scrivi.learnCourse({ items: course.items, bank: Banca.bank(), phrases: Frasi.ALL, readings: Letture.EPISODI,
+  glossario: JSON.parse(fs.readFileSync(path.join(ROOT, "docs/data/glossario.json"), "utf8")) });
 var glossario = JSON.parse(fs.readFileSync(path.join(ROOT, "docs/data/glossario.json"), "utf8"));
 var isItalian = function (w) { return !!glossario[String(w).toLowerCase()]; };
 
@@ -84,8 +87,12 @@ function play(items, kind, week, acc) {
     if (it.type === "hunt") p = 0.95;
     var right = rnd() < p;
     var q = right ? 2 : 0;
+    // A third of the misses on what you write are slips (a typo, an accent).
+    var ekind = right ? null : (TYPED[it.type] && rnd() < 0.33) ? "slip" : "rule";
+    if (ekind === "slip") q = 1;
     acc.asked++;
     if (right) { acc.right++; combo++; } else combo = 0;
+    if (!it.retry) { acc.firstAsked = (acc.firstAsked || 0) + 1; if (right || q === 1) acc.firstRight = (acc.firstRight || 0) + 1; }
     var gained = Engine.xpFor(right ? "giusto" : "sbagliato", combo);
     if (it.retry) gained = Math.ceil(gained / 2);
     acc.xp += gained;
@@ -93,7 +100,7 @@ function play(items, kind, week, acc) {
     if (it.src !== "coniugatore" && it.src !== "lettura") {
       var light = !it.frase && it.src !== "vocab" && it.src !== "lab" && it.src !== "banca" && !it.retry &&
                   (kind === "round" || kind === "sfida" || kind === "boss");
-      state.cards[it.id] = Engine.schedule(state.cards[it.id], q, { light: light });
+      state.cards[it.id] = Engine.schedule(state.cards[it.id], q, { light: light, kind: ekind });
     }
     state.totals.attempts++;
     if (right) state.totals.right++; else state.totals.wrong++;
@@ -222,6 +229,18 @@ course.weeks.forEach(function (w) {
   }
   extras();
 
+  // 1b. Scrivi: el texto de la semana (la simulación entrega el modelo y
+  // comprueba que cumpla la consigna; escribir, a unas 8 palabras por minuto)
+  if (Scrivi.TASKS[w.week]) {
+    var sr = Scrivi.check(Scrivi.TASKS[w.week].model, w.week);
+    if (!sr.ok || sr.hard) log.itemIssues.push({ id: "scrivi:" + w.week, wk: w.week, type: "scrivi", msg: "el modelo no cumple la consigna o tiene errores marcados" });
+    totalSec += Math.round(sr.words / 8 * 60) + 120;
+    state.scritti = state.scritti || {}; state.scritti[w.week] = { n: sr.words, errs: sr.hard, at: clock.t };
+    state.written = (state.written || 0) + 1;
+    Engine.addXp(state, 40 + Math.min(40, Math.floor(sr.words / 5)) + 20, new FakeDate());
+    missions.push({ m: "scrivi", words: sr.words });
+  }
+
   // 2. palabras de la semana
   if (w.vocab && w.vocab.length) {
     var acc = play(Drills.withWordIntros(Drills.vocabSession(course, w, state, 14), state), "vocab", w.week);
@@ -234,11 +253,15 @@ course.weeks.forEach(function (w) {
   var poolServed = {};
   if (w.boss) {
     newDay();
-    var bacc = play(Drills.buildBoss(course, w, state), "boss", w.week);
+    // Antes del jefe, la ronda de puntos débiles (opcional en la app; la
+    // simulación la juega una vez).
+    var wacc = play(Drills.buildWeak(course, w, state, { map: map, size: 15 }), "debil", w.week);
+    missions.push({ m: "puntos débiles", asked: wacc.asked, weak: Drills.weakItems(course, w, state, map).length });
+    var bacc = play(Drills.buildBoss(course, w, state, { map: map }), "boss", w.week);
     var pct = bacc.asked ? bacc.right / bacc.asked : 0;
     var ws0 = state.weekStats[w.week] || (state.weekStats[w.week] = { attempts: 0, right: 0, bossPassed: false });
     var tries = 1;
-    while (pct < 0.85 && tries < 4) { tries++; bacc = play(Drills.buildBoss(course, w, state), "boss", w.week); pct = bacc.asked ? bacc.right / bacc.asked : 0; }
+    while (pct < 0.85 && tries < 4) { tries++; bacc = play(Drills.buildBoss(course, w, state, { map: map }), "boss", w.week); pct = bacc.asked ? bacc.right / bacc.asked : 0; }
     ws0.bossPassed = pct >= 0.85;
     if (ws0.bossPassed) { Engine.addXp(state, Engine.XP.boss, new FakeDate()); state.unlocked = Math.min(52, w.week + 1); }
     // composición: de qué semanas vienen los ítems del jefe
@@ -256,12 +279,23 @@ course.weeks.forEach(function (w) {
       var racc = play(items, "round", w.week);
       roundAsked += racc.asked; roundSec += racc.sec;
       ws = state.weekStats[w.week] || { attempts: 0, right: 0 };
-    } while (!(ws.right >= 20 && Drills.mastered(ws) && Drills.coverage(w, state).ok) && rounds < 12);
+    } while (ws.right < 20 && rounds < 12);
+    // Dominala: una sola sesión; si no llega al 85 %, otra ronda y otro intento.
+    var domTries = 0;
+    while (!ws.dominated && domTries < 4) {
+      domTries++;
+      var dItems = Drills.buildDomina(course, w, state, { map: map });
+      dItems.forEach(function (it) { if (map[it.id]) poolServed[it.id] = (poolServed[it.id] || 0) + 1; });
+      var dacc = play(dItems, "round", w.week, null, true);
+      roundAsked += dacc.asked; roundSec += dacc.sec;
+      if (dacc.firstAsked && dacc.firstRight / dacc.firstAsked >= 0.85) ws.dominated = true;
+      else { var r2 = play(Drills.buildRound(course, w, { map: map, state: state }), "round", w.week); roundAsked += r2.asked; roundSec += r2.sec; }
+    }
     if (ws.right >= 20) state.unlocked = Math.min(52, w.week + 1);
     var distinct = Object.keys(poolServed).length;
     var maxRep = 0; Object.keys(poolServed).forEach(function (k) { maxRep = Math.max(maxRep, poolServed[k]); });
     missions.push({ m: "entrenamiento", rounds: rounds, asked: roundAsked, sec: roundSec, pool: pool.length,
-                    distinctServed: distinct, maxRepeat: maxRep, mastered: Drills.mastered(ws) && Drills.coverage(w, state).ok });
+                    distinctServed: distinct, maxRepeat: maxRep, mastered: Drills.dominated(ws, w, state), domTries: domTries });
     // gimnasio: una sesión, y todas las combinaciones verbo × tiempo
     var gymErr = 0, gymItems = [];
     (w.verbs || []).forEach(function (v) { (w.tenses || []).forEach(function (t) {

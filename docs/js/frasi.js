@@ -243,7 +243,7 @@
         ["Non ho dormito bene.", "No dormí bien."],
         ["Sono appena arrivato.", "Acabo de llegar.", "«Acabar de» = *appena* + passato prossimo."],
         ["Stavo per chiamarti.", "Estaba por llamarte."],
-        ["Domani vado dal medico.", "Mañana voy al médico.", "A casa de una persona: *da*. *Vado dal medico*, no «al medico»."],
+        ["Domani vado dal medico.", "Mañana voy al médico.", "Para ir a lo de una persona (su casa, consultorio o negocio): *da*. *Vado dal medico*, no «al medico»."],
         ["Quest'estate andrò in Sicilia.", "Este verano voy a ir a Sicilia."],
         ["Ci sono stato l'anno scorso.", "Estuve ahí el año pasado."],
         ["Quando ero piccolo, giocavo a calcio.", "Cuando era chico, jugaba al fútbol."],
@@ -408,7 +408,7 @@
         ["Faccio seguito alla telefonata di stamattina.", "Doy seguimiento al llamado de esta mañana."],
         ["Come da accordi, le invio la fattura.", "Según lo acordado, le envío la factura."],
         ["Nel caso in cui non fosse possibile, mi faccia sapere.", "En caso de que no fuera posible, avíseme.", "*Nel caso in cui* + congiuntivo; *mi faccia sapere* es imperativo de cortesía."],
-        ["Con la presente comunico le mie dimissioni.", "Por la presente comunico mi renuncia.", "*Dimissioni* = renuncia; «dimisión» en italiano no existe."],
+        ["Con la presente comunico le mie dimissioni.", "Por la presente comunico mi renuncia.", "*Dimissioni* = renuncia (dimisión); casi siempre en plural: *dare le dimissioni*."],
         ["Distinti saluti,", "Atentamente,"],
         ["A presto e buon lavoro!", "¡Hasta pronto y buen trabajo!"]
       ] },
@@ -623,22 +623,33 @@
     };
   }
 
-  function listenItem(f) {
-    var used = {};
-    used[f.es] = true;
-    var others = shuffle(ALL).filter(function (g) {
-      if (used[g.es]) return false;
-      used[g.es] = true;
+  /* The phrases that look most like f on one side («es» or «it»): same
+     scene, words in common, similar length, both questions or neither.
+     Distractors that could be told apart by their look give the answer away. */
+  function similar(f, n, side) {
+    var key = function (x) { return String(x[side] || ""); };
+    var toks = function (x) { return key(x).toLowerCase().split(/[^a-záéíóúñüàèéìòù']+/).filter(function (w) { return w.length > 2; }); };
+    var mine = toks(f), used = {};
+    used[key(f)] = true;
+    var score = function (g) {
+      var gw = toks(g);
+      return mine.filter(function (w) { return gw.indexOf(w) >= 0; }).length * 2 + (g.scene === f.scene ? 2 : 0) -
+        Math.abs(key(g).length - key(f).length) / 12 + (/\?$/.test(key(g)) === /\?$/.test(key(f)) ? 1 : 0);
+    };
+    return shuffle(ALL).filter(function (g) {
+      if (g.id === f.id || used[key(g)]) return false;
+      used[key(g)] = true;
       return true;
-    });
-    var near = others.filter(function (g) { return g.scene === f.scene; }).slice(0, 2);
-    var far = others.filter(function (g) { return g.scene !== f.scene; }).slice(0, 1);
+    }).slice(0, 120).sort(function (a, b) { return score(b) - score(a); }).slice(0, n);
+  }
+
+  function listenItem(f) {
+    var best = similar(f, 3, "es");
     return {
       id: f.id, frase: f, src: "frasi", type: "listen",
       prompt: "Escuchá: ¿qué significa?",
       stem: f.it,
-      options: shuffle([f.es].concat(near.map(function (g) { return g.es; }),
-                                     far.map(function (g) { return g.es; }))),
+      options: shuffle([f.es].concat(best.map(function (g) { return g.es; }))),
       answer: f.es, accept: [f.es], note: f.note
     };
   }
@@ -796,6 +807,7 @@
     gradeWritten: gradeWritten,
     tilesItem: tilesItem,
     listenItem: listenItem,
+    similar: similar,
     writeItem: writeItem,
     clozeItem: clozeItem,
     dictationItem: dictationItem,

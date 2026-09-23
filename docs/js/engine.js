@@ -113,10 +113,23 @@
       return card;
     }
     if (card.light) card.light = false;
+    // What kind of mistake it was decides how far back the card goes:
+    // a slip (a typo, an accent) is knowledge with a finger error, so the
+    // card keeps moving forward; a rule error (auxiliary, agreement, mode)
+    // starts over; a vocabulary gap starts over and loses less ease (the
+    // word comes back soon, the rule does not need to be relearnt).
+    var kind = (opts && opts.kind) || null;
+    var step = function () {
+      return card.reps === 1 ? 1 : card.reps === 2 ? 3 : Math.round(Math.max(card.interval, 1) * card.ease);
+    };
     if (quality === 0) {
       card.reps = 0;
       card.interval = 0;
-      card.ease = Math.max(1.3, card.ease - 0.2);
+      card.ok = 0;
+      card.ease = Math.max(1.3, card.ease - (kind === "vocab" ? 0.1 : 0.2));
+    } else if (quality === 1 && kind === "slip") {
+      card.reps += 1;
+      card.interval = step();
     } else {
       card.reps += 1;
       if (quality === 1) {
@@ -124,9 +137,8 @@
         card.interval = card.reps === 1 ? 1 : Math.max(1, Math.round(card.interval * 1.2));
       } else {
         card.ease = Math.min(2.8, card.ease + 0.1);
-        card.interval = card.reps === 1 ? 1
-          : card.reps === 2 ? 3
-          : Math.round(card.interval * card.ease);
+        card.ok = (card.ok || 0) + 1;
+        card.interval = step();
       }
     }
     card.due = Date.now() + Math.max(card.interval, 0) * DAY;
@@ -138,10 +150,12 @@
   function isDue(card, now) {
     return !card || !card.due || card.due <= (now || Date.now());
   }
-  // Twenty days of interval (four successes in a row: 1, 3, 8, 22 days):
-  // learnt.  It leaves the review queue for good, so the queue never
-  // becomes a debt (the year's simulation drains it at 20 reviews a day).
-  function retired(card) { return !!card && (card.interval || 0) >= 20; }
+  // Learnt: twenty days of interval, or three right answers in a row with
+  // a healthy ease (1, 3 and 8 days without a slip back).  It leaves the
+  // review queue for good, so the queue never becomes a debt.
+  function retired(card) {
+    return !!card && ((card.interval || 0) >= 20 || ((card.ok || 0) >= 3 && (card.ease || 0) >= 2.5));
+  }
 
   /* Fin de semana liviano (la guía): la meta baja a la mitad el sábado y el
      domingo, para no cortar la racha ni pedir las tres horas. */

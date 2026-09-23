@@ -16,6 +16,7 @@ LESSONS = {
 ],
 "blocks": [
  {"h": "Un alfabeto de 21 letras",
+  "q": [{"prompt": "¿Cómo se escribe «señor» en italiano?", "answer": "signore", "options": ["signore", "señore", "sinnore"]}, {"prompt": "¿Qué letra no suena nunca en italiano?", "answer": "h", "options": ["h", "g", "s"]}],
   "r": "Sin *j, k, w, x, y* (salvo préstamos) ni *ñ*. La *h* no suena nunca. "
        "Las cinco vocales, limpias como en castellano.",
   "ex": [["il jazz, il weekend", "préstamos: se escriben como en el original"],
@@ -67,6 +68,7 @@ LESSONS = {
            "que aprenderlas con el oído."]},
 
  {"h": "Detalles que se pegan rápido",
+  "q": [{"prompt": "¿Cómo suena «questo»?", "answer": "«cuésto»", "options": ["«cuésto»", "«késto»", "«güésto»"]}, {"prompt": "¿Cuál se pronuncia con r vibrante, como «perro»?", "answer": "carro", "options": ["carro", "caro", "cara"]}],
   "r": "*qu* suena «cu». La *s* entre vocales suele ser sonora. La *r* "
        "simple es un toque; la *rr*, vibrante.",
   "ex": [["questo", "«cuésto», nunca «késto»"],
@@ -172,6 +174,7 @@ LESSONS = {
                      ["il dio", "gli dei", "el dios"]]}},
 
  {"h": "Géneros que no coinciden",
+  "q": [{"prompt": "¿Cuál está bien? «la leche»", "answer": "il latte", "options": ["il latte", "la latte", "lo latte"]}, {"prompt": "¿Cuál está bien? «la sangre»", "answer": "il sangue", "options": ["il sangue", "la sangue", "lo sangue"]}, {"prompt": "¿Cuál está bien? «los problemas»", "answer": "i problemi", "options": ["i problemi", "le probleme", "i problema"]}],
   "r": "No confíes en el castellano: *il latte, il sale, il fiore, il miele* "
        "son masculinos; *la fine, l'origine, la domenica, l'arte* son "
        "femeninos.",
@@ -439,6 +442,12 @@ LESSONS = {
 7: {
 "intro": "Números, fechas y horas: tres o cuatro convenciones distintas del "
          "castellano que vas a usar todos los días.",
+"parts": [
+ {"h": "Cardinales y ordinales", "blocks": [0, 1],
+  "match": r"^(?!.*(hora|agenda|fecha|siglo)).*(número|ordinal|cifra)"},
+ {"h": "Fechas y la hora", "blocks": [2, 3],
+  "match": r"hora|agenda|fecha|siglo"},
+],
 "blocks": [
  {"h": "Cardinales: una sola palabra",
   "r": "Se escriben **pegados**: *ventidue, centoventitré*. *-uno* y *-otto* "
@@ -497,6 +506,12 @@ LESSONS = {
 "intro": "Preguntar en italiano es casi igual que en castellano: sin "
          "inversión ni auxiliar. Cambian la posición de la preposición y "
          "algunas formas fijas.",
+"parts": [
+ {"h": "Sí o no, los interrogativos y la preposición", "blocks": [0, 1, 2],
+  "match": r"^(?!.*(sujeto al final|\bquale\b|qual è|\bquali\b)).*\S"},
+ {"h": "che o quale, y el sujeto al final", "blocks": [3, 4],
+  "match": r"sujeto|quale|qual"},
+],
 "blocks": [
  {"h": "Sí o no: solo entonación",
   "r": "La pregunta es la afirmación con **entonación** de pregunta. Se "
@@ -619,6 +634,12 @@ LESSONS = {
 "intro": "Los pronombres son el corazón del italiano hablado. Esta semana, "
          "el mapa completo: directos, indirectos y tónicos, y dónde se "
          "ponen.",
+"parts": [
+ {"h": "El cuadro: directo o indirecto, sin leísmo", "blocks": [0, 1, 2],
+  "match": r"^(?!.*(posición|ubicando|tónico|preposición|sé, lui, lei|Enfatizá)).*\S"},
+ {"h": "Dónde va el pronombre y los tónicos", "blocks": [3],
+  "match": r"posición|tónico"},
+],
 "blocks": [
  {"h": "El cuadro entero",
   "r": "Los **átonos** van delante del verbo: *ti vedo*. Los **tónicos**, "
@@ -635,6 +656,7 @@ LESSONS = {
   "ex": [["Lo dico a te, non a lui.", "Te lo digo a vos, no a él."]]},
 
  {"h": "Directo o indirecto",
+  "q": [{"prompt": "Reemplazá con un pronombre.", "stem": "Telefono a Marco → ___ telefono.", "answer": "Gli", "options": ["Gli", "Lo", "Le"]}, {"prompt": "Reemplazá con un pronombre.", "stem": "Vedo Anna → ___ vedo.", "answer": "La", "options": ["La", "Le", "Gli"]}],
   "r": "Directo: sin preposición (*vedo Marco → lo vedo*). Indirecto: con "
        "*a* (*telefono a Marco → gli telefono*). Solo cambia en tercera "
        "persona.",
@@ -645,6 +667,7 @@ LESSONS = {
          ["Conosco i tuoi amici → Li conosco.", "Conozco a tus amigos."]]},
 
  {"h": "Sin leísmo y sin «a» personal",
+  "q": [{"prompt": "¿Cuál está bien? «Lo veo» (a Marco).", "answer": "Lo vedo.", "options": ["Lo vedo.", "Le vedo.", "Gli vedo."]}, {"prompt": "¿Cuál está bien? «Veo a Marco.»", "answer": "Vedo Marco.", "options": ["Vedo Marco.", "Vedo a Marco.", "Vedo di Marco."]}],
   "r": "*le* singular es **siempre indirecto** femenino. Y el objeto directo "
        "de persona va **sin *a***: *vedo Marco*.",
   "warn": "«Le vedo» por «lo veo» es error grave: *le vedo* solo significa "
@@ -752,6 +775,7 @@ LESSONS = {
   "tip": "Los largos en *-mente* van después: *ho parlato chiaramente*."},
 
  {"h": "Pronombre directo: el participio concuerda",
+  "q": [{"prompt": "Completá: «Las leí» (las cartas).", "stem": "Le ho ___.", "answer": "lette", "options": ["lette", "letto", "letti"]}, {"prompt": "¿Cuál está bien? «La vi» (a Anna).", "answer": "L'ho vista.", "options": ["L'ho vista.", "L'ho visto.", "La ho visto."]}],
   "r": "Con *lo, la, li, le* delante, el participio **concuerda** aunque el "
        "auxiliar sea *avere*. Con *mi, ti, ci, vi*, es opcional.",
   "ex": [["Ho visto Anna → L'ho vista.", "La vi."],
@@ -834,6 +858,14 @@ LESSONS = {
 13: {
 "intro": "Semana de jefe final: no hay teoría nueva. Es la hoja de repaso "
          "del examen A2. Leela antes de entrar y volvé cada vez que falles.",
+"parts": [
+ {"h": "Repaso: artículos, presente e irregulares", "blocks": [0, 1, 2, 3],
+  "match": r"^(?!.*(pronombre|passato|particip|reflexiv|imperativ|auxiliar)).*(artículo|presente|essere|avere|plural|masculino|adjetivo|número|hora|pregunt)"},
+ {"h": "Repaso: pronombres, passato prossimo, reflexivos", "blocks": [4, 5, 6],
+  "match": r"pronombre|passato|particip|reflexiv|imperativ|auxiliar"},
+ {"h": "Repaso: las cinco trampas y todo lo demás", "blocks": [7],
+  "match": r"\S"},
+],
 "blocks": [
  {"h": "Artículos, de un vistazo",
   "r": "Mirá **género** y **primer sonido** de la palabra siguiente.",
@@ -879,6 +911,7 @@ LESSONS = {
                      ["loro", "possono", "vogliono", "devono", "dicono", "escono"]]}},
 
  {"h": "Pronombres",
+  "q": [{"prompt": "¿Cuál está bien? «Vengo con vos.»", "answer": "Vengo con te.", "options": ["Vengo con te.", "Vengo con ti.", "Vengo con tu."]}, {"prompt": "¿Cuál está bien? «Le escribo» (a ella).", "answer": "Le scrivo.", "options": ["Le scrivo.", "Gli scrivo.", "La scrivo."]}],
   "r": "Átonos **delante** del verbo conjugado; tónicos **después** de "
        "preposición.",
   "table": {"head": ["Directo", "Indirecto", "Reflexivo", "Tónico"],
@@ -906,6 +939,7 @@ LESSONS = {
          ["Dimmi!", "¡Decime!"]]},
 
  {"h": "Las cinco trampas del hispanohablante",
+  "q": [{"prompt": "¿Cuál está bien? «Estudio italiano desde hace dos años.»", "answer": "Studio italiano da due anni.", "options": ["Studio italiano da due anni.", "Ho studiato italiano da due anni.", "Studio italiano fa due anni."]}, {"prompt": "¿Cuál está bien? «Mi libro es nuevo.»", "answer": "Il mio libro è nuovo.", "options": ["Il mio libro è nuovo.", "Mio libro è nuovo.", "Mi libro è nuovo."]}],
   "r": "Repasalas antes del examen: son las que más puntos cuestan.",
   "ex": [["posso, dormo, penso", "1. No diptongar."],
          ["PAR-lano, A-bitano", "2. loro: acento en la raíz."],

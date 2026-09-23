@@ -192,7 +192,8 @@ ok(badges.length >= 4, "medaglie sbloccate a fine anno: " + badges.length);
 
 var review = Drills.buildReview(course, state, 20);
 ok(Array.isArray(review), "la coda di ripasso è una lista");
-Object.keys(state.cards).slice(0, 30).forEach(function (id) {
+// (cards already learnt are retired and never come back: only the others)
+Object.keys(state.cards).filter(function (id) { return !Engine.retired(state.cards[id]); }).slice(0, 30).forEach(function (id) {
   state.cards[id].due = Date.now() - 1000;
 });
 ok(Drills.dueCount(course, state) >= 30, "le schede scadute rientrano in coda");
@@ -212,6 +213,45 @@ ok(Drills.dueCount(course, state) >= 30, "le schede scadute rientrano in coda");
   ok(s.unlocked === 8, "migrazione: sbloccata la prima settimana nuova non fatta (" + s.unlocked + ")");
   ok(Engine.migrateSyllabus(s).unlocked === 8, "migrazione: una sola volta");
   ok(Engine.blankSave().syllabusV === 2, "un salvataggio nuovo nasce col nuovo ordine");
+})();
+
+/* ------------------------------------------- opciones que no regalan la respuesta */
+
+// Una pregunta de opción múltiple no se acierta por parecido: la lección
+// ofrece la misma frase con un error (o frases que comparten la mitad de las
+// palabras), y la versión de reconocimiento de un ejercicio escrito da
+// otras formas de la misma palabra o del mismo verbo.
+(function () {
+  var Lez = require(path.join(ROOT, "docs/js/lezione.js"));
+  var words = function (x) { return String(x).toLowerCase().replace(/[.,;:!?¿¡«»"()’']/g, " ").split(/\s+/).filter(Boolean); };
+  var shared = function (a, b) { var bw = words(b); return words(a).filter(function (w) { return bw.indexOf(w) >= 0; }).length; };
+  var seed = 11, rnd = function () { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return seed / 0x7fffffff; };
+  var bad = 0, seen = 0;
+  course.weeks.forEach(function (w) {
+    if (!w.lesson) return;
+    for (var r = 0; r < 4; r++) Lez.steps(w.lesson, rnd, w.week, null).forEach(function (st) {
+      if (st.kind !== "quiz" || (st.q.kind !== "ex" && st.q.kind !== "trap")) return;
+      seen++;
+      var need = Math.ceil(words(st.q.answer).length / 2);
+      if (words(st.q.answer).length === 1) return;   // una palabra: la trampa es otra forma de ella
+      st.q.options.forEach(function (o) { if (o !== st.q.answer && shared(o, st.q.answer) < need) { bad++; if (bad < 4) console.log("  lejana: " + st.q.answer + " / " + o); } });
+    });
+  });
+  ok(seen > 500 && bad === 0, "lección: " + bad + " distractores de otra frase en " + seen + " preguntas");
+  // Reconocimiento de «traducí»: las opciones comparten la mitad de las palabras.
+  var map = {}; course.items.forEach(function (it) { map[it.id] = it; });
+  var far = 0, n = 0;
+  course.weeks.forEach(function (w) {
+    var pool = w.items.map(function (id) { return map[id]; }).filter(Boolean);
+    pool.forEach(function (it) {
+      if (it.type !== "translate" || words(it.answer).length < 3) return;
+      var q = Drills.firstRecognize([it], { cards: {} }, w.week, pool)[0];
+      if (!q || !q.recog) return;
+      n++;
+      q.options.forEach(function (o) { if (o !== it.answer && shared(o, it.answer) < Math.ceil(words(it.answer).length / 3)) { far++; console.log("  lejana: " + it.answer + " / " + o); } });
+    });
+  });
+  ok(n > 300 && far === 0, "reconocimiento: " + far + " opciones de otra frase en " + n + " traducciones");
 })();
 
 console.log("\ncontrolli: " + checks + "   errori: " + fails);

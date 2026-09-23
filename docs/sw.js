@@ -3,7 +3,7 @@
  * Strategia: rispondi subito dalla cache, aggiorna in background.
  * Cambiare VERSION a ogni rilascio per buttare la cache vecchia.
  */
-var VERSION = "laviac1-v23";
+var VERSION = "laviac1-v24";
 var FILES = [
   "./",
   "index.html",
@@ -23,6 +23,7 @@ var FILES = [
   "js/letture.js",
   "js/lezione.js",
   "js/diagnosi.js",
+  "js/scrivi.js",
   "js/banca.js",
   "js/drills.js",
   "js/app.js",
