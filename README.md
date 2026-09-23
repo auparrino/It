@@ -205,11 +205,21 @@ sobre todo lo ya jugado, racha diaria y once medallas.
 |---|---|
 | Ejercicios auto-corregibles de *For Dummies* | 871 |
 | Ítems propios de nivel B2/C1 en español | 144 |
-| Desafíos abiertos del *Soluzioni* | 338 grupos / 1.632 sub-ítems |
+| Desafíos abiertos del *Soluzioni* | 339 grupos / 1.637 sub-ítems |
 | Lecciones de teoría (una por semana) | 52, con 221 bloques |
 | Tablas gramaticales y ejemplos bilingües | 76 tablas / 349 ejemplos |
 | Verbos en el motor de conjugación | 96 |
 | Tiempos y modos generables | 14 |
+
+**Revisión lingüística.** Todo el contenido pasó por una revisión de italiano
+nativo: banco de frases y errores, palabras, lecciones, ítems propios, lecturas
+y los dos bancos extraídos de libros (este último con ~125 respuestas corregidas
+en *Dummies* y errores de extracción limpiados en *Soluzioni*). Las reglas que
+el corrector enuncia en español también se revisaron una por una.
+
+**Diseño.** Paleta de café italiano (papel, basílico, terracota, azafrán) con
+modo oscuro; *Fraunces* para el italiano y *Nunito* para la interfaz, servidas
+desde `docs/fonts/` (licencia SIL OFL, incluida) para que funcionen sin red.
 
 El gimnasio de verbos genera preguntas en vez de almacenarlas: 96 verbos × 14
 tiempos × 6 personas dan más de 8.000 formas distintas, con distractores tomados
