@@ -1006,7 +1006,8 @@
 
   // Verbs that are interchangeable in everyday Italian.
   var SYN = [["finire", "terminare"], ["cominciare", "iniziare"], ["rimanere", "restare"],
-             ["tornare", "ritornare"], ["mandare", "inviare", "spedire"], ["continuare", "proseguire"]];
+             ["tornare", "ritornare"], ["mandare", "inviare", "spedire"], ["continuare", "proseguire"],
+             ["chiedere", "domandare"]];
   function synFamily(lemma) {
     for (var i = 0; i < SYN.length; i++) if (SYN[i].indexOf(lemma) >= 0) return i;
     return -1;
