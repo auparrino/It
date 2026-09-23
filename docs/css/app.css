@@ -828,3 +828,14 @@ body.ingame .feedback.sbagliato #lesnext2 { background: var(--rosso-chiaro); box
   border: none; border-radius: 8px; background: color-mix(in srgb, var(--oro) 22%, transparent); color: var(--oro-scuro);
   font-family: var(--sans); font-size: .85rem; font-weight: 900; vertical-align: middle; }
 @media (prefers-color-scheme: dark) { .stem .gap.n { color: var(--oro); } }
+
+/* caselle di risposta su più righe */
+.typed { flex-wrap: wrap; align-items: stretch; }
+.typed textarea { flex: 1 1 100%; min-width: 0; resize: none; overflow: hidden; line-height: 1.4;
+  padding: 14px 16px; border-radius: 16px; border: 2px solid var(--grigio-chiaro); background: var(--sfondo);
+  color: inherit; font: inherit; font-size: 1.08rem; font-weight: 700; min-height: 54px; }
+.typed textarea:focus { outline: none; border-color: var(--verde); background: var(--carta);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--verde) 18%, transparent); }
+.typed textarea:disabled { opacity: .8; }
+.typed .btn { flex: 1 1 100%; padding: 14px; font-size: 1.05rem; }
+.typed .accents { flex: 1 1 100%; margin-top: 0; }

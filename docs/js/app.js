@@ -245,7 +245,7 @@
     // Azioni principali
     html += '<div class="big">' +
       '<button class="bigbtn pausa" id="pausa"><span class="e">☕</span>' +
-        "<b>Pausa caffè</b><small>3 minutos, entre dos mails</small></button>" +
+        "<b>Pausa caffè</b><small>3 minutos, entre dos correos</small></button>" +
       '<button class="bigbtn lampo" id="lampo"' + (known < 12 ? " disabled" : "") +
         '><span class="e">⚡</span>' +
         "<b>Lampo 60″</b><small>" + (known < 12
@@ -893,8 +893,8 @@
       body = '<div class="center"><button class="bigplay" id="play1">🔊</button>' +
         '<div><button class="tab" id="slow">🐢 más lento</button></div></div>' +
         '<div class="typed">' +
-        '<input id="wans" autocomplete="off" autocapitalize="sentences" ' +
-        'autocorrect="off" spellcheck="false" enterkeyhint="done" placeholder="lo que escuchás…">' +
+        '<textarea id="wans" class="grow" rows="1" autocomplete="off" autocapitalize="sentences" ' +
+        'autocorrect="off" spellcheck="false" enterkeyhint="send" placeholder="lo que escuchás…"></textarea>' +
         '<button class="btn" id="wsend">Controlla</button></div>';
       stem = "";
     } else if (it.type === "tiles") {
@@ -914,8 +914,8 @@
       stem = "";
     } else if (it.type === "write") {
       body = '<div class="typed">' +
-        '<input id="wans" autocomplete="off" autocapitalize="sentences" ' +
-        'autocorrect="off" spellcheck="false" enterkeyhint="done" placeholder="in italiano…">' +
+        '<textarea id="wans" class="grow" rows="1" autocomplete="off" autocapitalize="sentences" ' +
+        'autocorrect="off" spellcheck="false" enterkeyhint="send" placeholder="in italiano…"></textarea>' +
         '<button class="btn" id="wsend">Controlla</button></div>' +
         '<div class="row" style="margin-top:8px">' +
           '<button class="tab" id="hint">💡 pista</button>' +
@@ -927,16 +927,16 @@
       /* handled above */
     } else {
       body = '<div class="typed">' +
-        '<input id="ans" autocomplete="off" autocapitalize="off" ' +
-        'autocorrect="off" spellcheck="false" placeholder="' +
+        '<textarea id="ans" class="grow" rows="1" autocomplete="off" autocapitalize="off" ' +
+        'autocorrect="off" spellcheck="false" enterkeyhint="send" placeholder="' +
           (multi ? "las " + gaps + " respuestas en orden: 1 / 2" + (gaps > 2 ? " / 3" : "")
-                 : it.type === "translate" ? "in italiano…" : "tu respuesta…") + '">' +
-        '<button class="btn" id="send">Controlla</button></div>' +
+                 : it.type === "translate" ? "in italiano…" : "tu respuesta…") + '"></textarea>' +
         '<div class="accents">' +
           ["à", "è", "é", "ì", "ò", "ù", "'"].map(function (c) {
             return '<button data-ins="' + c + '">' + c + "</button>";
           }).join("") +
-        "</div>";
+        "</div>" +
+        '<button class="btn" id="send">Controlla</button></div>';
     }
 
     var sayBtn = it.src === "frasi" || it.src === "lettura" || it.src === "lab" ? "" :
@@ -1240,7 +1240,7 @@
         ' <span class="xpgain">+' + gained + " xp</span></div>" +
       '<div class="sol">' + esc(it.answer) + "</div>" +
       '<div class="note">🔬 Intentar adivinar antes de aprender ayuda a recordar, ' +
-        "aunque le erres (efecto del pretest).</div>" +
+        "aunque le erres (efecto de la prueba previa).</div>" +
       '<div class="row" style="margin-top:10px"><button class="btn" id="next">Continuar →</button></div></div>';
     document.querySelectorAll(".opt").forEach(function (o) {
       o.disabled = true;
@@ -1722,6 +1722,7 @@
     if (pl) requestAnimationFrame(function () { requestAnimationFrame(function () { pl.style.width = pl.dataset.to + "%"; }); });
     renderNav();
     wire();
+    growBoxes();
   }
 
   var subEntry = false;
@@ -1741,6 +1742,16 @@
     renderHeader();
     if (["gioco", "lampo", "lettura"].indexOf(view.screen) < 0) render();
   });
+
+  /* Answer boxes are textareas: long answers wrap and stay visible.  Enter
+     sends (as before); Shift+Enter is a new line; the box grows with the text. */
+  function growBoxes() {
+    document.querySelectorAll("textarea.grow").forEach(function (t) {
+      var fit = function () { t.style.height = "auto"; t.style.height = Math.min(t.scrollHeight + 2, 220) + "px"; };
+      t.addEventListener("input", fit);
+      fit();
+    });
+  }
 
   function on(sel, fn) { var b = $(sel); if (b) b.onclick = fn; }
 
@@ -1906,7 +1917,7 @@
     if (send && input) {
       send.onclick = function () { produce(input.value); };
       input.onkeydown = function (e) {
-        if (e.key === "Enter") { e.preventDefault(); produce(input.value); }
+        if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); produce(input.value); }
       };
       input.focus();
       document.querySelectorAll("[data-ins]").forEach(function (b) {
@@ -2013,7 +2024,7 @@
       var check = function () { produce(w.value); };
       on("#wsend", check);
       w.onkeydown = function (e) {
-        if (e.key === "Enter") { e.preventDefault(); check(); }
+        if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); check(); }
       };
       w.focus();
       on("#hint", function () {
@@ -2059,10 +2070,11 @@
     function askFix() {
       $("#fixbox").innerHTML = '<p class="muted">¡Bien visto! Ahora corregila: escribí lo que va en su lugar' +
         ' o, si sobra, borrala.</p>' +
-        '<div class="typed"><input id="fxin" autocomplete="off" autocapitalize="off" spellcheck="false" value="' +
-        esc(it.bad) + '"><button class="btn" id="fxsend">Controlla</button></div>' +
+        '<div class="typed"><textarea id="fxin" class="grow" rows="1" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="send">' +
+        esc(it.bad) + '</textarea><button class="btn" id="fxsend">Controlla</button></div>' +
         '<div class="row" style="margin-top:8px"><button class="tab" id="fxdel">🗑️ sobra: borrarla</button></div>';
       var inp = $("#fxin");
+      growBoxes();
       inp.focus(); inp.select();
       var tries = 0;
       function judge(val) {
@@ -2092,7 +2104,7 @@
           (it.good ? "<b class=\"fix\">" + esc(it.good) + "</b>" : "<i>(se borra)</i>") + "</div></div>");
       }
       on("#fxsend", function () { judge(inp.value); });
-      inp.onkeydown = function (e) { if (e.key === "Enter") { e.preventDefault(); judge(inp.value); } };
+      inp.onkeydown = function (e) { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); judge(inp.value); } };
       on("#fxdel", function () { judge(""); });
     }
     document.querySelectorAll("[data-ft]").forEach(function (el) {

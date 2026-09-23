@@ -296,7 +296,7 @@ _A1 = [
      "En la plaza = in piazza."),
     ("Hacemos una pausa a las once.", ["Facciamo una pausa alle undici."], "presente", ("Facciamo", "fare"),
      "Fare: faccio, fai, fa, facciamo, fate, fanno."),
-    ("Escribo muchos mails en el trabajo.", ["Scrivo molte email al lavoro.", "Scrivo molte mail al lavoro.", "Scrivo tante email al lavoro."], "presente lessico", ("Scrivo", "scrivere"),
+    ("Escribo muchos correos en el trabajo.", ["Scrivo molte email al lavoro.", "Scrivo molte mail al lavoro.", "Scrivo tante email al lavoro."], "presente lessico", ("Scrivo", "scrivere"),
      "Email es femenino e invariable: molte email."),
     ("¿Qué hacés el fin de semana?", ["Cosa fai nel fine settimana?", "Cosa fai il fine settimana?", "Che fai nel weekend?", "Cosa fai nel weekend?"], "presente", ("fai", "fare"),
      "Vos hacés = tu fai."),

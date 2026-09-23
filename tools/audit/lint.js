@@ -52,7 +52,9 @@ function strings(x, out) {
 var unknown = {};
 var ALLWORDS = new Set();
 var lexQueue = [];
-function lexCheck(u, s) { lexQueue.push([u, s]);
+function lexCheck(u, s) {
+  s = s.replace(/Italian Grammar For Dummies/g, " ");   // titolo di un libro
+  lexQueue.push([u, s]);
   (s.match(/[A-Za-zÀ-ÖØ-öø-ÿ]+/g) || []).forEach(function (w) { ALLWORDS.add(w.toLowerCase()); });
 }
 function lexCheckNow(u, s) {
@@ -151,8 +153,9 @@ function visible(u) {
   if (u.kind === "sfida" && d.play) {
     return { consigna: d.consigna, play: d.play.map(function (x) { var y = Object.assign({}, x); delete y.options; delete y.type; delete y.label; return y; }) };
   }
-  if (/^testi:/.test(u.id)) return d.filter(function (x) { return !/^[a-z0-9 _-]+$/.test(x.trim()); })
+  if (/^testi:/.test(u.id)) return d.filter(function (x) { return !/^[a-z0-9 _-]+$/.test(x.trim()) && !/[<>=]/.test(x) && !/^[A-Z]+[:;]/.test(x.trim()); })
     .map(function (x) { return x.replace(/<[^>]*>/g, " "); });
+  if (/^verbi:/.test(u.id)) return d.map(function (v) { return [v[0], v[1]]; });   // aux/isc: codici
   if (/^esit:/.test(u.id)) return d.map(function (r) { return r.slice(1); });   // la chiave è lo spagnolo senza tilde
   return d;
 }
@@ -173,6 +176,29 @@ var ask = Array.from(ALLWORDS).filter(function (w) { return !LEX.has(w) && !WL.h
 var res = cp.spawnSync("python3", [path.join(__dirname, "spell.py")], { input: ask.join("\n"), maxBuffer: 64 << 20 });
 if (res.status !== 0) { console.error(String(res.stderr)); process.exit(2); }
 UNKNOWN = new Set(String(res.stdout).split("\n").filter(Boolean));
+// Only one contrast language: Spanish.  English-only words are flagged, except
+// the loanwords Italian really uses (tools/audit/prestiti.txt).
+var LOANS = new Set();
+var lf = path.join(__dirname, "prestiti.txt");
+if (fs.existsSync(lf)) fs.readFileSync(lf, "utf8").split("\n").forEach(function (l) {
+  l = l.replace(/#.*/, "").trim().toLowerCase(); if (l) LOANS.add(l);
+});
+var resEn = cp.spawnSync("python3", [path.join(__dirname, "spell.py"), "--english"],
+  { input: Array.from(ALLWORDS).filter(function (w) { return !LEX.has(w) && !LOANS.has(w); }).join("\n"), maxBuffer: 64 << 20 });
+var ENONLY = new Set(String(resEn.stdout).split("\n").filter(Boolean));
+var english = {};
+lexQueue.forEach(function (x) {
+  (x[1].match(/[A-Za-zÀ-ÖØ-öø-ÿ]+/g) || []).forEach(function (w) {
+    w = w.toLowerCase();
+    if (!ENONLY.has(w) || WL.has(w)) return;
+    var e = english[x[0].id] || (english[x[0].id] = { u: x[0], w: {} , s: x[1] });
+    e.w[w] = 1;
+  });
+});
+Object.keys(english).forEach(function (id) {
+  var e = english[id];
+  flag(e.u, "inglés", Object.keys(e.w).join(", ") + " — " + e.s.slice(0, 110));
+});
 lexQueue.forEach(function (x) { lexCheckNow(x[0], x[1]); });
 
 Object.keys(unknown).sort().forEach(function (w) {

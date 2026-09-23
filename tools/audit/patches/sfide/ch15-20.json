@@ -1716,7 +1716,7 @@
    {
     "label": "d",
     "type": "translate",
-    "stem": "È meglio parlargli direttamente ___ (en vez de mandar un mail).",
+    "stem": "È meglio parlargli direttamente ___ (en vez de mandar un correo).",
     "answer": "invece di mandare un'email",
     "alt": [
      "invece di mandargli un'email",
@@ -1724,7 +1724,6 @@
      "anziché mandargli un'email",
      "invece di mandare una mail",
      "invece di mandargli una mail",
-     "invece di mandare un email",
      "anziché mandare una mail"
     ],
     "note": "Invece di / anziché + infinitivo = en vez de."

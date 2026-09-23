@@ -605,10 +605,10 @@ LESSONS = {
 
 51: {
 "intro": "Última semana antes del examen final. No hay teoría nueva: hay un "
-         "barrido de todo lo que suele fallar. Leelo como una checklist y "
+         "barrido de todo lo que suele fallar. Leelo como una lista de control y "
          "volvé a las semanas donde algo no te cierre.",
 "blocks": [
- {"h": "Checklist de congiuntivo",
+ {"h": "Lista de control: congiuntivo",
   "p": ["¿Verbo de opinión, duda, deseo, emoción o voluntad? → congiuntivo. "
         "¿Sujetos distintos? → *che* + congiuntivo. ¿Mismo sujeto? → *di* + "
         "infinitivo. ¿Principal en pasado? → imperfetto o trapassato. "
@@ -616,7 +616,7 @@ LESSONS = {
         "*prima che*, *senza che*, *a meno che non*)? → congiuntivo sí o sí. "
         "¿Superlativo relativo o *l'unico che*? → congiuntivo."]},
 
- {"h": "Checklist de tiempos",
+ {"h": "Lista de control: tiempos",
   "table": {"head": ["Si querés decir", "Usá"],
             "rows": [["dijo que vendría", "disse che sarebbe venuto"],
                      ["si tuviera, iría", "se avessi, andrei"],
@@ -628,7 +628,7 @@ LESSONS = {
                      ["después de salir", "dopo essere uscito"],
                      ["hay que hacerlo", "va fatto / bisogna farlo"]]}},
 
- {"h": "Checklist de pronombres",
+ {"h": "Lista de control: pronombres",
   "p": ["*me lo, te la, glielo, ce ne, ve li, se ne*: la *i* pasa a *e* y "
         "*gli+lo* se pega. *ne* obligatorio con cantidades. *ci* para lugar y "
         "para *a/in/su*. Participio concuerda con *lo, la, li, le* y con "

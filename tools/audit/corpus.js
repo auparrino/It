@@ -95,7 +95,9 @@ chunk(bv, 12).forEach(function (c, i) {
 });
 // Testi dell'interfaccia e spiegazioni del correttore (stringhe letterali)
 ["docs/js/diagnosi.js", "docs/js/app.js", "docs/js/banca.js", "docs/js/drills.js", "docs/js/engine.js"].forEach(function (f) {
-  var src = fs.readFileSync(path.join(ROOT, f), "utf8");
+  // Comments are for developers: strip them before looking for strings.
+  var src = fs.readFileSync(path.join(ROOT, f), "utf8")
+    .replace(/\/\*[\s\S]*?\*\//g, "").replace(/(^|[^:"'\\])\/\/.*$/gm, "$1");
   var strs = [];
   var re = /"((?:[^"\\\n]|\\.)*)"/g, m;
   while ((m = re.exec(src))) {

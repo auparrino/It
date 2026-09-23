@@ -122,7 +122,7 @@
       ] },
 
     { id: "lavoro", emoji: "💼", name: "In ufficio",
-      blurb: "Reuniones, mails y charla de oficina.",
+      blurb: "Reuniones, correos y charla de oficina.",
       phrases: [
         ["Ho una riunione alle tre.", "Tengo una reunión a las tres."],
         ["Sono di fretta, ne parliamo dopo?", "Estoy apurado, ¿lo hablamos después?"],
@@ -270,7 +270,7 @@
         ["Ho lasciato la borsa in macchina.", "Dejé la cartera en el auto.", "*Macchina* = auto (y máquina)."],
         ["Questo burro è salato.", "Esta manteca es salada.", "*Burro* es manteca; el animal es *asino*."],
         ["Ho una camera doppia.", "Tengo una habitación doble.", "*Camera* = habitación; *cámara* de fotos = *macchina fotografica*."],
-        ["Mi piace il salone.", "Me gusta el living.", "*Salone* = sala amplia."],
+        ["Mi piace il salone.", "Me gusta la sala.", "*Salone* = sala amplia."],
         ["Guarda che è tardi.", "Mirá que es tarde."],
         ["Faccio colazione alle otto.", "Desayuno a las ocho.", "*Colazione* = desayuno."],
         ["Che guaio!", "¡Qué problema!"],

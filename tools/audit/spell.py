@@ -39,7 +39,17 @@ def ok(w):
             return True
     return voseo(w)
 
+EN = DICTS[2]
+
+# --english: words that only English knows (not Italian, not Spanish).
+ENGLISH = "--english" in sys.argv
 for line in sys.stdin:
     w = line.strip()
-    if w and not ok(w):
+    if not w:
+        continue
+    if ENGLISH:
+        if (EN.lookup(w) or EN.lookup(w.capitalize())) and not any(
+                d.lookup(w) or d.lookup(w.capitalize()) for d in DICTS[:2]) and not voseo(w):
+            print(w)
+    elif not ok(w):
         print(w)

@@ -1858,7 +1858,7 @@
    {
     "label": "a",
     "type": "translate",
-    "stem": "Le aconsejé (a ella) que se fuera temprano. (consigliare a qlcu. di)",
+    "stem": "Le aconsejé (a ella) que se fuera temprano. (consigliare a qualcuno di)",
     "answer": "Le ho consigliato di partire presto.",
     "alt": [
      "Le ho consigliato di andare via presto.",
@@ -1870,7 +1870,7 @@
    {
     "label": "b",
     "type": "translate",
-    "stem": "Tenemos que convencerla de que ayude. (convincere qlcu. a)",
+    "stem": "Tenemos que convencerla de que ayude. (convincere qualcuno a)",
     "answer": "Dobbiamo convincerla ad aiutare.",
     "alt": [
      "La dobbiamo convincere ad aiutare."
@@ -1880,7 +1880,7 @@
    {
     "label": "c",
     "type": "translate",
-    "stem": "No podés obligarlo a venir. (costringere qlcu. a)",
+    "stem": "No podés obligarlo a venir. (costringere qualcuno a)",
     "answer": "Non puoi costringerlo a venire.",
     "alt": [
      "Non lo puoi costringere a venire."
@@ -1890,7 +1890,7 @@
    {
     "label": "d",
     "type": "translate",
-    "stem": "Le permití (a él) ir a la fiesta. (permettere a qlcu. di)",
+    "stem": "Le permití (a él) ir a la fiesta. (permettere a qualcuno di)",
     "answer": "Gli ho permesso di andare alla festa.",
     "alt": [],
     "note": "«Permettere a qualcuno»: objeto indirecto, gli."

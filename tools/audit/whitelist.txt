@@ -254,3 +254,71 @@ zz                       # errore:259: Pizza lleva doble z. Muchas palabras ital
 ía                       # ponte:colte: Palabras cultas: -ía → -ia, -cia → -zia
 ñoqui                    # nomi:6: ñoqui
 ñoquis                   # item:d03-037: ___ gnocchi (ñoquis)
+
+# Desafíos del Soluzioni: nombres, topónimos en español, formas con el blanco pegado (comprat___)
+arriveder                # chal:r07-03c: Arriveder___, signore, ___ richiamerò più tardi. (usted)
+assimo                   # chal:r24-03b: Noi en -are: -assimo.
+aviv                     # chal:r02-08: La capitale ___ Israele è Tel Aviv.
+bev                      # chal:r18-01b: Bere: bevete (raíz bev-).
+binni                    # chal:r13-01b: Il professor Binni è un insegnante. Ho molto rispetto per il profe
+blanc                    # chal:r14-01c: Nunca vio el Mont Blanc.
+brav                     # chal:r01-03: Maria è diventat___ un architetto molto brav___.
+bruciat                  # chal:r07-06c: La mia fidanzata si è bruciata le mani. – Poveretta, se le è bruci
+campari                  # chal:r07-01h: In Italia, di solito, il Campari si beve come digestivo. – Ma no, 
+cercher                  # chal:r21-01: Los verbos en -care agregan una h para conservar el sonido duro: ce
+cerdeña                  # chal:r20-04: Conosco bene la Sardegna. Ci ___ molte volte. Mi è sempre ___. (Con
+comprat                  # chal:r07-02j: Mi puoi comprare gli stuzzicadenti? – Ma te ___ ho comprat___ stam
+conosciut                # chal:r01-03: Mio figlio è diventat___ una guida molto conosciut___.
+contracto                # chal:r19-03: Dovere → dovrai; potere → potrai (futuro contracto).
+córcega                  # chal:r20-01c: El año pasado fui a Córcega. Me gustó mucho.
+debolina                 # chal:r06-01: debolina
+discorsoni               # chal:r06-01: discorsoni
+distrutt                 # chal:r07-03j: Sai che ho distrutto il computer di Fabio? – Come! ___ hai distrut
+diventat                 # chal:r01-03: Maria è diventat___ un architetto molto brav___.
+dresda                   # chal:r02-01b: A Dresda ho visto della porcellana antica. Ho visto ___ antica por
+duc                      # chal:r18-02: Los verbos en -durre toman la raíz -duc-: traduco.
+ebridi                   # chal:r02-10: Alistair va a las Hébridas. (le Ebridi)
+enel                     # chal:r21-03c: L'ENEL ci ha fatto sapere che ci avrebbe inviato la bolletta, ma c
+eranno                   # chal:r19-02b: -are → -eranno.
+ette                     # chal:r20-01e: Passato remoto de -ere, lui/lei: -ette o -é.
+ettino                   # chal:r06-01b: Los diminutivos -ino/-ettino también se aplican a «poco».
+feroni                   # chal:r13-01b: Il signor Feroni è il nostro capo. Secondo lui, siamo tutti pigri.
+gigino                   # chal:r15-07: Ci vediamo ___ ‘Gigino’.
+grassotto                # chal:r06-01: grassotto
+guardavidas              # chal:r06-05: «Il bagnino» es el guardavidas.
+hébridas                 # chal:r02-10: Alistair va a las Hébridas. (le Ebridi)
+iare                     # chal:r18-03: Los verbos en -iare no duplican la i: tu mangi.
+ipad                     # chal:r28-01d: Estoy buscando mi iPad.
+kwai                     # chal:r15-21: ‘Il ponte ___’ è un film piuttosto vecchio. (El puente sobre el río
+laver                    # chal:r21-01: En los verbos en -are la -a- de la raíz pasa a -e- en el condiciona
+lett                     # chal:r20-06: Avete lett___ i giornali? Li avete lett___?
+londres                  # chal:r13-04b: La casa de Londres en la que vivía fue bombardeada durante la guer
+lugarcito                # chal:r06-05: «Posticino» es un diminutivo afectivo de «posto»: un lugarcito lind
+mandat                   # chal:r07-02j: Ci mandi le fatture domani? – Ma ve ___ abbiamo mandat___ la setti
+manin                    # chal:r08-02: L'appartamento dei signori Mancini è in via Manin. → ___ è in via M
+nno                      # chal:r19-01: Los verbos en -are cambian la a por e: torneranno (con -nno).
+orcadi                   # chal:r02-10: Donald vive en las Órcadas. (le Orcadi)
+ordinat                  # chal:r07-04i: Quante pizze hai ordinato? Ne ho ordinat___ molte. / Ne ho ordinat
+palladino                # chal:r08-01b: La esposa del señor Palladino está de vacaciones.
+parlat                   # chal:r20-06: Hai parlat___ con Franca? – No, non le ho parlat___.
+portat                   # chal:r07-02j: Ci puoi portare la carta igienica? – Ma ve ___ abbiamo portat___ i
+prestat                  # chal:r07-02j: Mi presti i tuoi appunti? – Ma te ___ ho prestat___ l'altro giorno
+pulóver                  # chal:r08-01c: Fa freddo, perché non ti metti ___ (tu pulóver)?
+páseme                   # chal:r22-01b: Páseme la sal.
+realma                   # chal:r21-03c: Realma mi aveva assicurato che avrebbe risposto presto, e infatti 
+rodolfi                  # chal:r07-13: Signora Rodolfi, ___ disturbo?
+rott                     # chal:r07-03j: Sai che ho rotto i piatti nuovi di Giulia? – Come! ___ hai rott___
+rovinat                  # chal:r07-03j: Sai che ho rovinato la lavatrice di Antonio? – Come! ___ hai rovin
+scritt                   # chal:r20-06: Hanno scritt___ la lettera? L'hanno scritt___?
+segesta                  # chal:r16-01: Durante le vacanze sono andato in giro con mio fratello. Abbiamo vi
+sfasciat                 # chal:r07-03j: Sai che ho sfasciato la macchina di Rina e Roberto? – Come! ___ ha
+simpatiquísima           # chal:r10-01c: La ragazza ___ esci è simpaticissima. (La chica con la que salís e
+slogat                   # chal:r07-06c: Mio figlio si è slogato la caviglia. – Poveretto, se l'è slogat___
+sporchissima             # chal:r15-03c: La vasca del bagno è ___ acqua sporchissima. (llena de)
+stort                    # chal:r07-06c: Mia figlia si è storta il piede. – Poveretta, se l'è stort___ corr
+traduc                   # chal:r22-03: Tradurre se conjuga sobre la raíz traduc-: traduci, traduca.
+tradurr                  # chal:r21-04: Los verbos en -durre forman el condicional sobre tradurr-: tradurre
+usb                      # chal:r16-01g: Siamo tornati sul Web. Scusate il ritardo! ___, ecco alcune spiega
+vezzani                  # chal:r08-02: I figli del signor Vezzani frequentano l'università. → ___ frequent
+viena                    # chal:r02-09: Bratislava è ___ Slovacchia, ma non è lontana ___ Vienna. (Bratisla
+órcadas                  # chal:r02-10: Donald vive en las Órcadas. (le Orcadi)
