@@ -254,5 +254,12 @@ ok(Drills.dueCount(course, state) >= 30, "le schede scadute rientrano in coda");
   ok(n > 300 && far === 0, "reconocimiento: " + far + " opciones de otra frase en " + n + " traducciones");
 })();
 
+// La versión que muestra la app (Oggi, Io) es la del service worker.
+(function () {
+  var sw = fs.readFileSync(path.join(ROOT, "docs/sw.js"), "utf8").match(/VERSION = "laviac1-(v\d+)"/);
+  var app = fs.readFileSync(path.join(ROOT, "docs/js/app.js"), "utf8").match(/APP_VERSION = "(v\d+)"/);
+  ok(sw && app && sw[1] === app[1], "versión de la app (" + (app && app[1]) + ") = versión del service worker (" + (sw && sw[1]) + ")");
+})();
+
 console.log("\ncontrolli: " + checks + "   errori: " + fails);
 process.exit(fails ? 1 : 0);

@@ -565,7 +565,9 @@ node tools/test_scrivi.js       # los textos modelo de Scrivi cumplen; el correc
 node tools/sim_carriera.js      # una carrera entera: carga por semana, ripasso, cobertura, jefes
 ```
 
-Si cambiás algún archivo de `docs/`, subí `VERSION` en `docs/sw.js` para que los
+Si cambiás algún archivo de `docs/`, subí `VERSION` en `docs/sw.js` y `APP_VERSION` en
+`docs/js/app.js` (la versión que se ve abajo de Oggi e Io; `test_game.js` controla que
+coincidan) para que los
 teléfonos descarguen la versión nueva.
 
 `test_conjugator.js` valida las 14 conjugaciones contra formas verificadas

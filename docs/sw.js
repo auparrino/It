@@ -1,9 +1,10 @@
 /*
  * Service worker: tutta l'app resta nel telefono e funziona senza rete.
  * Strategia: rispondi subito dalla cache, aggiorna in background.
- * Cambiare VERSION a ogni rilascio per buttare la cache vecchia.
+ * Cambiare VERSION a ogni rilascio per buttare la cache vecchia (e APP_VERSION
+ * in js/app.js, che si vede in Oggi e Io: test_game.js controlla che coincidano).
  */
-var VERSION = "laviac1-v27";
+var VERSION = "laviac1-v28";
 var FILES = [
   "./",
   "index.html",

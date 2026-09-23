@@ -1100,3 +1100,4 @@ ul.ainotes { padding-left: 18px; margin: 8px 0; }
 ul.ainotes li { margin: 4px 0; }
 .card input#aikey { flex: 1 1 60%; min-width: 0; padding: 10px 12px; border-radius: 12px; border: 2px solid var(--grigio-chiaro);
   background: var(--carta); color: var(--inchiostro); font: inherit; }
+p.version { text-align: center; margin: 18px 0 8px; opacity: .8; }
