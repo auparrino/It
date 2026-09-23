@@ -1198,6 +1198,15 @@
     if (genderFree(g, e, target)) { res.verdict = "giusto"; return res; }
     // Termino for finisco, resto for rimango: same meaning, same person and tense.
     if (synonymFree(g, e)) { res.verdict = "giusto"; return res; }
+    // (tanto) buono quanto, (così) alto come: the first term of an equality is optional.
+    if (g.length === e.length - 1) {
+      for (var oi = 0; oi < e.length; oi++) {
+        if (/^(tanto|tanta|tanti|tante|così)$/.test(e[oi]) && /^(quanto|quanta|quanti|quante|come)$/.test(e[oi + 2] || "")) {
+          var rest = e.slice(0, oi).concat(e.slice(oi + 1));
+          if (rest.join(" ") === g.join(" ") || synonymFree(g, rest)) { res.verdict = "giusto"; return res; }
+        }
+      }
+    }
 
     var found = [];
     var nm = names(target).concat(ctx.names || []);
