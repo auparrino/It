@@ -114,6 +114,7 @@
       }
     }
     card.due = Date.now() + Math.max(card.interval, 0) * DAY;
+    card.last = Date.now();
     card.seen = (card.seen || 0) + 1;
     return card;
   }

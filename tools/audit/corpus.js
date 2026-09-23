@@ -19,14 +19,16 @@ function chunk(list, n) { var out = []; for (var i = 0; i < list.length; i += n)
 // Corso: item
 var authoredSrc = function (id) {
   return /^a2-/.test(id) ? "tools/authored/a2_base.py" : /^b2-/.test(id) ? "tools/authored/b2_lessico.py"
-    : "tools/authored/c1_*.py";
+    : /^rf-/.test(id) ? "tools/authored/refuerzo.py" : "tools/authored/c1_*.py";
 };
 course.items.forEach(function (it) {
   if (it.src === "sfida") return;
   var d = {}; ["type", "prompt", "stem", "options", "answer", "accept", "example", "hint", "note"].forEach(function (k) {
     if (it[k] != null && it[k] !== "") d[k] = it[k];
   });
-  add("item:" + it.id, it.src === "dummies" ? "docs/data/bank_dummies.json" : authoredSrc(it.id), "esercizio", d);
+  var ch = +String(it.id).slice(1, 3);
+  var dsrc = "tools/audit/patches/dummies/" + (ch <= 8 ? "ch03-08" : ch <= 15 ? "ch09-15" : "ch16-22") + ".json";
+  add("item:" + it.id, it.src === "dummies" ? dsrc : authoredSrc(it.id), "esercizio", d);
 });
 // Corso: settimane e lezioni
 var lessonSrc = function (w) { return "tools/lessons/s" + Math.ceil(w / 13) + ".py"; };

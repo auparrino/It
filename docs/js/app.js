@@ -776,7 +776,7 @@
       var ch = course.challenges.filter(function (c) { return c.id === arg; })[0];
       items = ch && ch.play ? ch.play.map(function (id) { return itemMap[id]; }).filter(Boolean) : [];
     }
-    else items = Drills.buildRound(course, w, { map: itemMap });
+    else items = Drills.buildRound(course, w, { map: itemMap, state: state });
 
     if (!items.length) { toast("No hay preguntas para este modo todavía."); return; }
 
@@ -1239,6 +1239,7 @@
       '<div class="verdict">' + (q === 2 ? "¡Buen olfato!" : "Era esta. Ahora ya la conocés.") +
         ' <span class="xpgain">+' + gained + " xp</span></div>" +
       '<div class="sol">' + esc(it.answer) + "</div>" +
+      (it.note ? '<div class="note">' + mk(it.note) + "</div>" : "") +
       '<div class="note">🔬 Intentar adivinar antes de aprender ayuda a recordar, ' +
         "aunque le erres (efecto de la prueba previa).</div>" +
       '<div class="row" style="margin-top:10px"><button class="btn" id="next">Continuar →</button></div></div>';

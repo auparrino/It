@@ -27,6 +27,37 @@
 
   function sample(a, n) { return shuffle(a).slice(0, n); }
 
+  /* Variety: never-seen items first, then the ones due, then those seen
+     longest ago.  What was answered well in the last two days only comes
+     back if there is nothing else. */
+  function pickFresh(pool, n, state) {
+    var cards = (state && state.cards) || {};
+    var now = Date.now(), DAY = 86400000;
+    var rank = function (it) {
+      var c = cards[it.id];
+      if (!c) return 0 + Math.random();
+      if (!c.due || c.due <= now) return 1 + Math.random();
+      var last = c.last || (c.due - (c.interval || 0) * DAY);
+      return now - last < 2 * DAY ? 4 + Math.random() : 2 + Math.random() + (c.due - now) / (365 * DAY);
+    };
+    var seen = {};
+    return pool.filter(function (it) { if (!it || seen[it.id]) return false; seen[it.id] = 1; return true; })
+      .map(function (it) { return { it: it, r: rank(it) }; })
+      .sort(function (a, b) { return a.r - b.r; })
+      .slice(0, n).map(function (x) { return x.it; });
+  }
+
+  // Bank items near the week's level, to top up a short week without repeating.
+  function bankFill(state, n) {
+    var out = [];
+    if (!Banca || !Banca.loaded()) return out;
+    for (var i = 0; i < n * 3 && out.length < n; i++) {
+      var it = Banca.pausaItem(state);
+      if (it && !out.some(function (o) { return o.id === it.id; })) out.push(it);
+    }
+    return out;
+  }
+
   /* ------------------------------------------------ domande di coniugazione */
 
   var PERSON_LABEL = ["io", "tu", "lui/lei", "noi", "voi", "loro"];
@@ -108,7 +139,13 @@
     var map = opts.map || itemsById(course);
     var out = [];
 
-    var bookItems = (week.items || [])
+    // The week's own items plus its challenges (now graded): more variety.
+    var chIds = {}; (week.challenges || []).forEach(function (id) { chIds[id] = 1; });
+    var sfida = [];
+    (course.challenges || []).forEach(function (c) {
+      if (chIds[c.id] && c.play) sfida = sfida.concat(c.play);
+    });
+    var bookItems = (week.items || []).concat(sfida)
       .map(function (id) { return map[id]; })
       .filter(Boolean);
 
@@ -118,7 +155,7 @@
     );
     var wantBook = size - wantConj;
 
-    sample(bookItems, wantBook).forEach(function (it) { out.push(it); });
+    pickFresh(bookItems, wantBook, opts.state).forEach(function (it) { out.push(it); });
 
     for (var i = 0; i < wantConj; i++) {
       var verb = week.verbs[Math.floor(Math.random() * week.verbs.length)];
@@ -129,10 +166,14 @@
       } catch (e) { /* salta i verbi non coniugabili in quel tempo */ }
     }
 
-    // Top up from the book bank if the conjugation gym came up short.
-    while (out.length < size && bookItems.length) {
-      out.push(bookItems[Math.floor(Math.random() * bookItems.length)]);
+    // Short: top up with other items of the week, then from the big bank,
+    // never with a repeat.
+    if (out.length < size) {
+      var inRound = {}; out.forEach(function (it) { inRound[it.id] = 1; });
+      pickFresh(bookItems.filter(function (it) { return !inRound[it.id]; }), size - out.length, opts.state)
+        .forEach(function (it) { out.push(it); });
     }
+    if (out.length < size) bankFill(opts.state, size - out.length).forEach(function (it) { out.push(it); });
     return shuffle(out).slice(0, size);
   }
 
@@ -245,7 +286,12 @@
     // Del libro solo domande a scelta: in pausa si va veloci.
     var bookChoice = (week.items || []).map(function (id) { return map[id]; })
       .filter(function (it) { return it && it.type === "choice" && !seenIds[it.id]; });
-    sample(bookChoice, 2).forEach(function (it) { filler.push(it); });
+    var fresh = pickFresh(bookChoice, 2, state).filter(function (it) {
+      var c = state.cards[it.id];
+      return !c || !c.due || c.due <= Date.now();   // already known and not due: leave it
+    });
+    fresh.forEach(function (it) { filler.push(it); });
+    bankFill(state, 2 - fresh.length).forEach(function (it) { filler.push(it); });
     if (week.verbs && week.verbs.length) {
       try {
         filler.push(conjugationDrill(
@@ -295,6 +341,7 @@
     conjugationDrill: conjugationDrill,
     conjugationTyped: conjugationTyped,
     buildRound: buildRound,
+    pickFresh: pickFresh,
     buildBoss: buildBoss,
     buildReview: buildReview,
     dueCount: dueCount,

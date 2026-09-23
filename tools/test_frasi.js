@@ -97,8 +97,11 @@ ok(Frasi.gradeWritten("dove il bagno", "Dov'è il bagno?").verdict === "giusto",
 var cards = {};
 Frasi.SCENES.forEach(function (s) {
   var sess = Frasi.sceneSession(s.id, cards, {});
-  var intros = sess.filter(function (it) { return it.type === "intro"; });
+  // A new phrase is met once (presented or guessed) and retrieved once.
+  var intros = sess.filter(function (it) { return it.type === "intro" || it.type === "guess"; });
   ok(intros.length === 4, "4 frasi nuove per sessione: " + s.id);
+  var times = {}; sess.forEach(function (it) { times[it.id] = (times[it.id] || 0) + 1; });
+  ok(Object.keys(times).every(function (k) { return times[k] <= 2; }), "ogni frase al massimo 2 volte per sessione: " + s.id);
   ok(sess.length >= 8, "sessione troppo corta: " + s.id);
   sess.forEach(function (it) {
     ok(it.answer && it.frase && Frasi.BY_ID[it.id], "item di scena malformato: " + s.id);

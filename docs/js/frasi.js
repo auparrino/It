@@ -656,20 +656,23 @@
     var known = list.filter(function (f) { return cards[f.id]; });
     var newOnes = fresh.slice(0, opts.newCount || 4);
     var out = [];
+    // Each new phrase appears twice: once to meet it (guessed before being
+    // shown, or presented), once to retrieve it.  More phrases, fewer repeats.
     newOnes.forEach(function (f, i) {
-      // Half of the new phrases are guessed before being shown.
-      if (i % 2 === 0) out.push(guessItem(f));
-      out.push({ id: f.id, frase: f, src: "frasi", type: "intro",
+      out.push(i % 2 === 0 ? guessItem(f) : { id: f.id, frase: f, src: "frasi", type: "intro",
                  prompt: "Frase nueva", stem: f.it, answer: f.it, note: f.note });
     });
     var isNew = {};
     newOnes.forEach(function (f) { isNew[f.id] = true; });
-    var drill = newOnes.concat(shuffle(known).slice(0, Math.max(0, 8 - newOnes.length)));
-    shuffle(drill).forEach(function (f) {
-      out.push(pickItem(f, { silent: opts.silent, fresh: isNew[f.id] }));
+    // Known phrases: the ones due or seen longest ago first.
+    var byAge = known.slice().sort(function (a, b) {
+      return ((cards[a.id] || {}).due || 0) - ((cards[b.id] || {}).due || 0) + (Math.random() - 0.5) * 86400000;
     });
-    // Chiudere scrivendo le nuove a memoria, perché restino.
-    newOnes.slice(0, 2).forEach(function (f) { out.push(writeItem(f)); });
+    var drill = newOnes.concat(byAge.slice(0, Math.max(0, 10 - newOnes.length)));
+    shuffle(drill).forEach(function (f) {
+      // New ones are recalled by writing them half the time: that is the retrieval.
+      out.push(isNew[f.id] && Math.random() < 0.5 ? writeItem(f) : pickItem(f, { silent: opts.silent, fresh: isNew[f.id] }));
+    });
     return out;
   }
 
