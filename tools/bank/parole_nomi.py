@@ -1263,7 +1263,7 @@ NOUNS += [
 
 # -------------------------------------------------------------------- salute
 NOUNS += [
-    ("salute", "f", "saluti", "salud", "salute", "A1", "Casi siempre en singular. Salute! = ¡salud! (brindis o estornudo)."),
+    ("salute", "f", "salute", "salud", "salute", "A1", "Sin plural en el uso (saluti es el plural de saluto). Salute! = ¡salud! (brindis o estornudo)."),
     ("medico", "m", "medici", "médico", "salute", "A1", "Plural medici (sin h)."),
     ("dottore", "m", "dottori", "doctor / médico", "salute", "A1", "Femenino: la dottoressa. Ante apellido: il dottor Rossi."),
     ("infermiere", "m", "infermieri", "enfermero", "salute", "A2", "Vocal inicial: l'infermiere; femenino l'infermiera."),

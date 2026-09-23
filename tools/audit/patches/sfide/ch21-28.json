@@ -516,7 +516,11 @@
     "stem": "Sabían que ella se iría / se iba a ir.",
     "answer": "Sapevano che sarebbe partita.",
     "alt": [
-     "Sapevano che partiva."
+     "Sapevano che partiva.",
+     "Sapevano che se ne sarebbe andata.",
+     "Sapevano che se ne andava.",
+     "Sapevano che sarebbe andata via.",
+     "Sapevano che andava via."
     ],
     "note": "Futuro en el pasado: sarebbe partita (o, coloquial, partiva)."
    },
@@ -2857,7 +2861,9 @@
     "stem": "«Quando avremo risolto la situazione finanziaria, potremo finalmente andar avanti.» → Il ministro disse che quando ___ la situazione finanziaria ___ finalmente andare avanti.",
     "answer": "avessero risolto | avrebbero potuto",
     "alt": [
-     "avessero risolto | sarebbero potuti"
+     "avessero risolto | sarebbero potuti",
+     "avrebbero risolto | avrebbero potuto",
+     "avrebbero risolto | sarebbero potuti"
     ],
     "note": "Futuro anterior → trapassato del subjuntivo; futuro → condicional compuesto."
    }
