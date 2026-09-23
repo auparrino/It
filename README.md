@@ -391,7 +391,24 @@ hispanohablante comete de verdad, con la explicación: español metido
 (*cansado*), artículo que no va con el sustantivo (*una amica*, *la
 problema*), *ho andato*, *mi ho lavato*, «a» personal, *il mio padre*, *mio
 libro*, *a il*, *se avrei*, *penso che è* (desde el congiuntivo), *molto
-pasta*, *c'è due*, *lui e alto*, *sono trenta anni*, dobles y tildes. Después
+pasta*, *c'è due*, *lui e alto*, *sono trenta anni*, dobles y tildes, y
+además familias enteras: castellano escrito a la italiana (*perfectamente*,
+*manejare*, *casita*, *andarò*), calcos (*ho che studiare*, *lo che*, *di
+accordo*), preposiciones con ciudades, países, lugares y personas (*in Roma*,
+*a Toscana*, *al medico*, *alla banca*) y con infinitivos (*comincio
+studiare*, *voglio di*), artículos por sonido (*i snack*, *la aranciata*),
+pronombres combinados (*mi la*, *gli la*), relativos (*in che*),
+concordancias (*questo foto*, *i miei chiavi*, *vino rossi*), persona con
+sujeto (*io aiutava*, *la gente sono*, *mi piace i*), auxiliares y
+participios en todos los tiempos (*avrei andato*, *siamo tornato*, *li ho
+visto*, *vivuto*), congiuntivo después de *penso che*, *benché*, *pensavo
+che*, *come se*, y falsos amigos en contexto (*salgo di casa*, *un vaso
+d'acqua*, *toccare la chitarra*). Las reglas se miden con un corpus de 96
+textos de estudiantes con 502 errores anotados (`tools/scrivi_corpus.json`):
+el corrector propio marca el 61 % sin marcar nada en las versiones
+corregidas ni en las frases del curso, y `tools/test_scrivi.js` fija esos
+pisos por familia. Lo que se escapa (pronombres por referente, tiempos
+según el contexto, léxico) lo agarran la IA y LanguageTool. Después
 podés ver un texto modelo. Lo que entregás cuenta como **output** en las
 cuatro cuerdas, suma xp y los errores van al perfil de la clínica. La misión
 es obligatoria para abrir la semana siguiente: es el único lugar del curso
