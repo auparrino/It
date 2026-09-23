@@ -513,7 +513,8 @@ Parma) solo en la placa «VIA C1», porque sus trazos finos desaparecen en la
 pantalla del teléfono, y *Atkinson Hyperlegible Next*, diseñada para leer
 fácil, para todo lo demás, servidas desde `docs/fonts/` (licencia SIL OFL,
 incluida) para que funcionen sin red. Con modo oscuro: cielo de noche sobre el
-mar.
+mar. Sigue al teléfono, y el ☀️/🌙 de la cabecera (o el ajuste *Tema* en Io)
+lo fuerza claro u oscuro.
 
 El gimnasio de verbos genera preguntas en vez de almacenarlas: 96 verbos × 14
 tiempos × 6 personas dan más de 8.000 formas distintas, con distractores tomados
