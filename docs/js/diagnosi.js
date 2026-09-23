@@ -1369,6 +1369,7 @@
 
   var LABEL = {
     grammatica: "Gramática",
+    ia: "Corrección de la IA",
     ausiliare: "Auxiliar essere/avere", congiuntivo: "Congiuntivo",
     periodo_ipotetico: "Periodo hipotético", a_personale: "«a» personal",
     preposizione: "Preposiciones", preposizione_articolata: "Preposición + artículo",

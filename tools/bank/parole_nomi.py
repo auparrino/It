@@ -1189,7 +1189,7 @@ NOUNS += [
     ("gesso", "m", "gessi", "tiza / yeso", "scuola", "B1", "Género distinto: la tiza → il gesso."),
     ("banco", "m", "banchi", "pupitre / banco", "scuola", "A2", "Plural banchi. El banco (financiero) es la banca."),
     ("colla", "f", "colle", "pegamento / plasticola", "scuola", "B1", ""),
-    ("cartella", "f", "cartelle", "portafolio / carpeta", "scuola", "B1", ""),
+    ("cartella", "f", "cartelle", "carpeta / portafolio", "scuola", "B1", ""),
     ("foglio", "m", "fogli", "hoja (de papel)", "scuola", "A2", "La hoja de planta es la foglia."),
     ("dizionario", "m", "dizionari", "diccionario", "scuola", "A2", ""),
     ("vocabolario", "m", "vocabolari", "vocabulario / diccionario", "scuola", "B1", ""),

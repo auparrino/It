@@ -305,7 +305,7 @@ LESSONS = {
          "antes, a la vez o después?",
 "blocks": [
  {"h": "El cuadro con congiuntivo",
-  "q": [{"prompt": "Principal en pasado, acción anterior.", "stem": "Credevo che Marco ___ già partito.", "answer": "fosse", "options": ["fosse", "sia", "sarebbe"]}, {"prompt": "Principal en pasado, acción posterior.", "stem": "Credevo che Marco ___ il giorno dopo.", "answer": "sarebbe partito", "options": ["sarebbe partito", "partisse", "parta"]}],
+  "q": [{"prompt": "Principal en pasado, acción anterior.", "stem": "Credevo che Marco ___ già partito.", "answer": "fosse", "options": ["fosse", "sia", "sarebbe"]}, {"prompt": "Principal en pasado, acción posterior.", "stem": "Credevo che Marco ___ il giorno dopo.", "answer": "sarebbe partito", "options": ["sarebbe partito", "partirà", "parta"]}],
   "r": "Elegí la forma según **el principal** (presente o pasado) y **el "
        "momento** de la subordinada (antes, a la vez, después).",
   "table": {"head": ["Principal", "Anterior", "Simultáneo", "Posterior"],

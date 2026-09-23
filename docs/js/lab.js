@@ -125,7 +125,7 @@
     ["negozio", "tienda / negocio", "negocio (empresa)", "Una empresa es *azienda* o *ditta*."],
     ["lontano", "lejos", "lento", "Suena a «lento», pero es lejos. *Vicino* = cerca."],
     ["compito", "tarea", "cómputo", "*I compiti* = los deberes."],
-    ["squadra", "equipo", "escuadra", "*La mia squadra* = mi equipo de fútbol."],
+    ["squadra", "equipo", "cuadra (de la calle)", "La cuadra es *isolato*. *La mia squadra* = mi equipo de fútbol."],
     ["stanza", "habitación / cuarto", "estancia (campo)", "*Una stanza doppia* = una habitación doble."]
   ];
 

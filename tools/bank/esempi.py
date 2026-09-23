@@ -7,6 +7,8 @@ oraciones de la semana y de las del banco cuyo «w» ya se enseñó)."""
 ESEMPI = {
     # semanas 1-4: essere, avere, sustantivos, artículos, adjetivos
     "volere": "Vuole un caffè, signore?",
+    "prendere": "Prendo un caffè, grazie.",
+    "cugino": "Mio cugino ha vent'anni.",
     "dovere": "Devo studiare stasera.",
     "signore": "Buongiorno, signore!",
     "zia": "Mia zia è di Roma.",
@@ -28,6 +30,7 @@ ESEMPI = {
     "albero": "L'albero davanti a casa mia è altissimo.",
     # 11-13: passato prossimo, reflexivos
     "scegliere": "Ho scelto il vino rosso.",
+    "nonno": "Mio nonno ha novant'anni.",
     "ritornare": "Siamo ritornati a casa tardi.",
     "fermarsi": "Il treno si ferma a Bologna.",
     "povero": "Povero Luca, ha perso il treno!",
@@ -47,6 +50,7 @@ ESEMPI = {
     "boh": "Dov'è Marco? — Boh, non lo so.",
     # 19-23: futuro, condicional, ne/ci, combinados, comparativos
     "stipendio": "Lo stipendio arriverà il ventisette.",
+    "leggero": "Stasera vorrei una cena leggera.",
     "inquinare": "Le macchine inquinano l'aria della città.",
     "sistemare": "Domani sistemerò la camera.",
     "abituarsi": "Mi sono abituato al caffè senza zucchero.",
@@ -123,11 +127,34 @@ ESEMPI = {
     "backup": "Ho fatto il backup prima di aggiornare.",
     "sedersi": "Si è seduto in prima fila.",
     "parcheggiare": "Ho parcheggiato in doppia fila.",
-    "destro": "Gira a destra, poi prendi il lato destro.",
+    "destro": "Mi fa male il ginocchio destro.",
+    "pasticceria": "Compro i cornetti nella pasticceria sotto casa.",
     "biondo": "Ha i capelli biondi e gli occhi verdi.",
     "baffo": "Mio nonno aveva i baffi.",
     "tradire": "Non tradirò mai la sua fiducia.",
+    "ristrutturare": "Faremo ristrutturare la cucina dall'architetto.",
+    "pitturare": "Abbiamo fatto pitturare le camere di bianco.",
+    "imbianchino": "L'imbianchino viene lunedì a pitturare le camere.",
     "stoffa": "Questa stoffa è di ottima qualità.",
+    # revisión: ejemplos que usan la palabra con el sentido que muestra la lista
+    "sposarsi": "Si sono sposati l'anno scorso.",
+    "salire": "Salgo le scale a piedi.",
+    "purtroppo": "Purtroppo non posso venire alla festa.",
+    "gonna": "Ho scelto quella gonna rossa.",
+    "successo": "Il libro ha avuto un grande successo.",
+    "seccato": "Sono un po' seccato con Marco.",
+    "lieti": "Siamo lieti che siate venuti.",
+    "comunque": "Piove, ma usciamo comunque.",
+    "pregare": "Ti prego, non dirlo a nessuno.",
+    "formaggio": "Sono tre etti di formaggio, signore. Gliene tolgo un po'?",
+    "bocciati": "Siamo stati bocciati tutti quanti. – Davvero? Chi ve l'ha detto?",
+    "soltanto": "Ce n'è soltanto uno: non ci basta.",
+    "bistecca": "A Mario piace la bistecca alla fiorentina.",
+    "postino": "Il postino passa ogni mattina alle dieci.",
+    "mattone": "La casa è fatta di mattoni rossi.",
+    "uscire": "Esco di casa alle otto.",
+    "trovare": "Non trovo le chiavi.",
+    "dipinto": "Questo dipinto è di Caravaggio.",
 }
 
 # Formas y nombres que el índice del glosario trae como si fueran palabras y

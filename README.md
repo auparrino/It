@@ -407,6 +407,21 @@ instante y la de LanguageTool cuando llega; sin conexión o sin cupo, queda
 solo la local. Se puede apagar con la casilla de la pantalla, porque el
 texto se envía a sus servidores.
 
+**Corrector con IA (opcional).** LanguageTool casi no controla la
+concordancia ni la persona del verbo en italiano. Para una corrección
+completa, la pantalla de Scrivi acepta una clave gratuita de Gemini (Google
+AI Studio, *aistudio.google.com/apikey*): con ella, la IA marca cada error
+del texto con su explicación en castellano y agrega la versión corregida y
+una devolución. La clave queda solo en el teléfono (no entra en las copias
+de seguridad) y el texto se envía a Google. Lo que la IA marca reemplaza lo
+que el corrector propio o LanguageTool dijeron sobre las mismas palabras.
+
+El corrector propio también sabe **quién habla**: en un texto en primera
+persona («Mi chiamo…», «io», «mio»), un verbo sin sujeto en otra persona se
+marca (*Mi chiami → mi chiamo*, *Hanno 32 anni → ho*), igual que un adjetivo
+en otro número (*sono felici → felice*, *siamo contento → contenti*) y el
+singular después de un número (*32 anno*, *due fratello*).
+
 El corrector (`docs/js/scrivi.js`) usa como diccionario todo el italiano del
 curso (respuestas, frases, lecturas, banco y glosario): una palabra que no
 conoce no se marca como error, porque en un texto libre es más probable que
