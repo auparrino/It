@@ -95,8 +95,8 @@ ERR.forEach(function (e) {
       falsos.push("semana " + o.week + " «" + tc.slice(x.i, x.i + x.n).map(function (z) { return z.o; }).join(" ") + "»: " + x.msg);
     });
   });
-  ok(hit / tot >= 0.60, "corpus: el corrector propio marca " + hit + "/" + tot + " errores (piso 60%)");
-  var FLOOR = { spagnolo: 0.75, preposizione: 0.75, articolo: 0.85, ausiliare: 0.85, accento: 0.9, concordanza: 0.55, a_personale: 0.7, ortografia: 0.6 };
+  ok(hit / tot >= 0.61, "corpus: el corrector propio marca " + hit + "/" + tot + " errores (piso 61%)");
+  var FLOOR = { spagnolo: 0.85, preposizione: 0.75, articolo: 0.9, ausiliare: 0.9, accento: 0.9, concordanza: 0.55, a_personale: 0.75, ortografia: 0.6, doppie: 0.8 };
   Object.keys(FLOOR).forEach(function (k) {
     var c = byCat[k] || [0, 1];
     ok(c[0] / c[1] >= FLOOR[k], "corpus, " + k + ": " + c[0] + "/" + c[1] + " (piso " + Math.round(FLOOR[k] * 100) + "%)");
