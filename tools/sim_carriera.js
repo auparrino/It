@@ -88,12 +88,18 @@ function play(items, kind, week, acc) {
     if (it.retry) gained = Math.ceil(gained / 2);
     acc.xp += gained;
     Engine.addXp(state, gained, new FakeDate());
-    if (it.src !== "coniugatore" && it.src !== "lettura") state.cards[it.id] = Engine.schedule(state.cards[it.id], q);
+    if (it.src !== "coniugatore" && it.src !== "lettura") {
+      var light = !it.frase && it.src !== "vocab" && it.src !== "lab" && it.src !== "banca" && !it.retry &&
+                  (kind === "round" || kind === "sfida" || kind === "boss");
+      state.cards[it.id] = Engine.schedule(state.cards[it.id], q, { light: light });
+    }
     state.totals.attempts++;
     if (right) state.totals.right++; else state.totals.wrong++;
-    if (!it.frase && it.src !== "lab" && it.src !== "lettura" && it.src !== "banca" && COUNT_KINDS[kind]) {
+    if (!it.frase && it.src !== "lab" && it.src !== "lettura" && it.src !== "banca" &&
+        it.src !== "coniugatore" && it.src !== "vocab" && COUNT_KINDS[kind]) {
       var ws = state.weekStats[week] || (state.weekStats[week] = { attempts: 0, right: 0, bossPassed: false });
       ws.attempts++; if (right) ws.right++;
+      ws.last = (ws.last || []).concat([right ? 1 : 0]).slice(-30);
     }
     if (!right && kind !== "boss" && it.src !== "lettura" && !it.retry && !again[it.id]) {
       again[it.id] = 1;
@@ -244,12 +250,12 @@ course.weeks.forEach(function (w) {
       var racc = play(items, "round", w.week);
       roundAsked += racc.asked; roundSec += racc.sec;
       ws = state.weekStats[w.week] || { attempts: 0, right: 0 };
-    } while (!(ws.right >= 20 && ws.attempts >= 30 && ws.right / ws.attempts >= 0.85) && rounds < 12);
+    } while (!(ws.right >= 20 && Drills.mastered(ws) && Drills.coverage(w, state).ok) && rounds < 12);
     if (ws.right >= 20) state.unlocked = Math.min(52, w.week + 1);
     var distinct = Object.keys(poolServed).length;
     var maxRep = 0; Object.keys(poolServed).forEach(function (k) { maxRep = Math.max(maxRep, poolServed[k]); });
     missions.push({ m: "entrenamiento", rounds: rounds, asked: roundAsked, sec: roundSec, pool: pool.length,
-                    distinctServed: distinct, maxRepeat: maxRep, mastered: ws.right / Math.max(1, ws.attempts) >= 0.85 && ws.attempts >= 30 });
+                    distinctServed: distinct, maxRepeat: maxRep, mastered: Drills.mastered(ws) && Drills.coverage(w, state).ok });
     // gimnasio: una sesión, y todas las combinaciones verbo × tiempo
     var gymErr = 0, gymItems = [];
     (w.verbs || []).forEach(function (v) { (w.tenses || []).forEach(function (t) {
@@ -310,6 +316,9 @@ course.weeks.forEach(function (w) {
   if (ch.length) missions.push({ m: "sfide", groups: ch.length, playable: playable.length, selfScored: selfScored, asked: sfAsked, sec: sfSec });
   if (playable.length) extras();
 
+  // The rest of the week, as in real life: a pausa and a ripasso every day.
+  while (day - day0 < 7) { newDay(); extras(); }
+
   Engine.checkBadges(state);
   var lv = Engine.levelFor(state.xp);
   Object.assign(W, {
@@ -355,6 +364,13 @@ if (process.argv.indexOf("--json") >= 0) {
                                neverServed: neverServed.slice(0, 200).map(function (i) { return i.id; }) }, null, 1));
 } else {
   console.log("RESUMEN", JSON.stringify(summary, null, 1));
+  console.log("no dominadas:", log.weeks.filter(function (W) { return W && W.missions.some(function (m) { return m.m === "entrenamiento" && !m.mastered; }); }).map(function (W) { return W.week; }));
+  [[40, 52]].forEach(function (r) {
+    var kinds = {};
+    log.weeks.filter(function (W) { return W && W.week >= r[0] && W.week <= r[1]; }).forEach(function (W) { W.missions.forEach(function (m) { kinds[m.m] = (kinds[m.m] || 0) + 1; }); });
+    console.log("misiones semanas " + r[0] + "-" + r[1] + ":", JSON.stringify(kinds));
+  });
+  console.log("jefes:", JSON.stringify(log.weeks.filter(function (W) { return W && W.boss; }).map(function (W) { return W.missions.filter(function (m) { return m.m === "jefe"; })[0]; })));
   console.log("\nsem  nivel  días  min  xp    misiones  rondas  pool  distintos  rep.máx  due.máx  sfide(auto/manual)");
   log.weeks.filter(Boolean).forEach(function (W) {
     var tr = W.missions.filter(function (m) { return m.m === "entrenamiento"; })[0] || {};

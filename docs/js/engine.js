@@ -94,9 +94,25 @@
   /* SM-2 semplificato.  Ogni scheda tiene: ease, interval (giorni), due (ms). */
   var DAY = 86400000;
 
-  function schedule(card, quality) {
+  function schedule(card, quality, opts) {
     // quality: 0 sbagliato, 1 quasi, 2 giusto
+    // opts.light: right at first sight in the training, so it comes back in
+    // two weeks, not tomorrow (20-30 new cards a day at most, no backlog).
+    if (!card && quality === 2 && opts && opts.light) {
+      card = { ease: 2.5, interval: 14, reps: 2, light: true };
+      card.due = Date.now() + 14 * DAY;
+      card.last = Date.now();
+      card.seen = 1;
+      return card;
+    }
     card = card || { ease: 2.5, interval: 0, reps: 0 };
+    // A light card that comes back right is learnt: it retires at once.
+    if (card.light && quality === 2) {
+      card.light = false; card.reps += 1; card.interval = 90;
+      card.due = Date.now() + 90 * DAY; card.last = Date.now(); card.seen = (card.seen || 0) + 1;
+      return card;
+    }
+    if (card.light) card.light = false;
     if (quality === 0) {
       card.reps = 0;
       card.interval = 0;
@@ -121,6 +137,39 @@
 
   function isDue(card, now) {
     return !card || !card.due || card.due <= (now || Date.now());
+  }
+  // Twenty days of interval (four successes in a row: 1, 3, 8, 22 days):
+  // learnt.  It leaves the review queue for good, so the queue never
+  // becomes a debt (the year's simulation drains it at 20 reviews a day).
+  function retired(card) { return !!card && (card.interval || 0) >= 20; }
+
+  /* Fin de semana liviano (la guía): la meta baja a la mitad el sábado y el
+     domingo, para no cortar la racha ni pedir las tres horas. */
+  function goalFor(state, now) {
+    var d = now || new Date(), goal = state.goal || 200;
+    var wd = d.getDay();
+    return wd === 0 || wd === 6 ? Math.max(50, Math.round(goal / 2 / 50) * 50) : goal;
+  }
+
+  /* Las cuatro destrezas de Nation: input, output, forma y fluidez, xp por
+     día, para mostrar el equilibrio de la semana. */
+  var STRANDS = ["input", "output", "forma", "fluidez"];
+  function addStrand(state, strand, n, now) {
+    if (!n || STRANDS.indexOf(strand) < 0) return;
+    var k = dayKey(now);
+    if (!state.strands) state.strands = {};
+    var d = state.strands[k] || (state.strands[k] = {});
+    d[strand] = (d[strand] || 0) + n;
+    // Only the last 14 days are kept.
+    Object.keys(state.strands).forEach(function (kk) { if (daysBetween(kk, k) > 14) delete state.strands[kk]; });
+    if (STRANDS.every(function (x) { return d[x] > 0; })) state.balancedDay = true;
+  }
+  function strandsLast(state, days, now) {
+    var out = { input: 0, output: 0, forma: 0, fluidez: 0 }, k = dayKey(now);
+    Object.keys(state.strands || {}).forEach(function (kk) {
+      if (daysBetween(kk, k) < (days || 7)) STRANDS.forEach(function (x) { out[x] += (state.strands[kk][x] || 0); });
+    });
+    return out;
   }
 
   /* --------------------------------------------------------------- progressi */
@@ -348,7 +397,7 @@
     var before = state.days[k] || 0;
     state.days[k] = before + n;
     state.xp += n;
-    var goal = state.goal || 200;
+    var goal = goalFor(state, now);
     return before < goal && state.days[k] >= goal;
   }
 
@@ -372,7 +421,7 @@
   function openChest(state, rnd, now) {
     var k = dayKey(now);
     if (state.chest === k) return null;
-    if (todayXp(state, now) < (state.goal || 200)) return null;
+    if (todayXp(state, now) < goalFor(state, now)) return null;
     state.chest = k;
     var r = (rnd || Math.random)();
     var prize;
@@ -381,6 +430,9 @@
       prize = { kind: "shield", label: "🛡️ ¡Un escudo de racha!" };
     } else if (r < 0.35) {
       prize = { kind: "xp", xp: 50, label: "💎 ¡Premio gordo: +50 xp!" };
+    } else if (r < 0.6) {
+      state.boost = (state.boost || 0) + 1;
+      prize = { kind: "boost", label: "🎟️ ¡Doble xp en tu próxima ronda!" };
     } else {
       var n = 10 + Math.floor((rnd || Math.random)() * 4) * 5;
       prize = { kind: "xp", xp: n, label: "✨ +" + n + " xp" };
@@ -392,9 +444,11 @@
 
   /* I gradi: un titolo per ogni tappa, da turista a madrelingua. */
   var RANKS = [
+    // Calibrati su una carriera intera: chi gioca tutto il corso arriva al
+    // livello 40 (tools/sim_carriera.js).  Madrelingua è la fine del corso.
     [1, "Turista"], [3, "Viaggiatore"], [6, "Studente Erasmus"],
-    [10, "Pendolare"], [15, "Cittadino"], [21, "Chiacchierone"],
-    [28, "Oratore"], [36, "Poeta"], [45, "Dantesco"], [55, "Madrelingua"]
+    [10, "Pendolare"], [14, "Cittadino"], [18, "Chiacchierone"],
+    [23, "Oratore"], [28, "Poeta"], [34, "Dantesco"], [40, "Madrelingua"]
   ];
   function rankFor(level) {
     var r = RANKS[0][1];
@@ -447,7 +501,7 @@
     { id: "lettore", name: "Lettore", desc: "Terminá 5 lecturas.",
       test: function (s) { return Object.keys(s.letture || {}).length >= 5; } },
     { id: "bologna", name: "Bolognese", desc: "Terminá la historia de Martín.",
-      test: function (s) { return !!(s.letture || {}).ep10; } },
+      test: function (s) { return !!(s.letture || {}).ep13; } },
     { id: "umanista", name: "Umanista", desc: "Leé las 10 lecturas de cultura.",
       test: function (s) {
         return Object.keys(s.letture || {}).filter(function (k) {
@@ -460,6 +514,18 @@
           return k.indexOf("ponte:") === 0;
         }).length >= 50;
       } },
+    { id: "perfetta", name: "Settimana perfetta", desc: "Completá todas las misiones de una semana.",
+      test: function (s) { return Object.keys(s.perfectWeeks || {}).length >= 1; } },
+    { id: "dieci-perfette", name: "Dieci perfette", desc: "Diez semanas con todas las misiones.",
+      test: function (s) { return Object.keys(s.perfectWeeks || {}).length >= 10; } },
+    { id: "equilibrio", name: "Quattro corde", desc: "Un día con las cuatro destrezas: input, output, forma y fluidez.",
+      test: function (s) { return !!s.balancedDay; } },
+    { id: "cinquecento", name: "Cinquecento parole", desc: "500 palabras practicadas.",
+      test: function (s) {
+        return Object.keys(s.cards).filter(function (k) { return k.indexOf("v:") === 0 || k.indexOf("b:voc:") === 0; }).length >= 500;
+      } },
+    { id: "giornaliera", name: "Sfidante del giorno", desc: "Diez sfide del giorno ganadas.",
+      test: function (s) { return (s.dailyWon || 0) >= 10; } },
     { id: "costante", name: "Costante", desc: "Cumplí la meta diaria 5 días.",
       test: function (s) {
         var g = s.goal || 200;
@@ -490,6 +556,11 @@
     grade: grade,
     schedule: schedule,
     isDue: isDue,
+    retired: retired,
+    goalFor: goalFor,
+    STRANDS: STRANDS,
+    addStrand: addStrand,
+    strandsLast: strandsLast,
     levelFor: levelFor,
     xpFor: xpFor,
     blankSave: blankSave,

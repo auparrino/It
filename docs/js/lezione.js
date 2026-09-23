@@ -124,6 +124,32 @@
              options: shuffle([pick[0]].concat(others), rnd) };
   }
 
+  // A block with only text: blank one Italian form of its rule and offer
+  // forms from the rest of the lesson («Completá la regla»).
+  function ruleQuestion(lesson, b, rnd) {
+    var text = [b.r].concat(b.p || [], [b.warn, b.tip]).filter(Boolean).join(" ");
+    var forms = (text.match(/\*([^*]{3,24})\*/g) || []).map(function (x) { return x.replace(/\*/g, ""); })
+      .filter(function (f) { return /^[a-zà-ù' ]+$/i.test(f) && f.indexOf("/") < 0; });
+    forms = uniq(forms);
+    if (!forms.length) return null;
+    var pick = forms[Math.floor(rnd() * forms.length)];
+    var all = [];
+    lesson.blocks.forEach(function (bb) {
+      var t = [bb.r].concat(bb.p || [], bb.ex ? bb.ex.map(function (e) { return e[0]; }) : [], [bb.warn, bb.tip]).filter(Boolean).join(" ");
+      (t.match(/\*([^*]{3,24})\*/g) || []).forEach(function (x) { all.push(x.replace(/\*/g, "")); });
+    });
+    var others = uniq(shuffle(all, rnd).filter(function (f) {
+      return f.toLowerCase() !== pick.toLowerCase() && /^[a-zà-ù' ]+$/i.test(f) && f.indexOf("/") < 0 &&
+        Math.abs(f.length - pick.length) <= 4 && forms.indexOf(f) < 0;
+    })).slice(0, 2);
+    if (others.length < 2) return null;
+    var src = [b.r].concat(b.p || []).filter(function (t) { return t && t.indexOf("*" + pick + "*") >= 0; })[0] || b.r || "";
+    var stem = strip(src.replace("*" + pick + "*", "___"));
+    if (stem.length > 160) stem = stem.slice(0, 157) + "…";
+    return { kind: "rule", prompt: "Completá la regla", stem: stem, answer: pick,
+             options: shuffle([pick].concat(others), rnd) };
+  }
+
   // «Completá la tabla» from one cell of the block's table.
   function tableQuestion(b, rnd) {
     var t = b.table;
@@ -159,7 +185,8 @@
         out.push({ kind: "block", i: i, part: "a" });
         out.push({ kind: "block", i: i, part: "b" });
       } else out.push({ kind: "block", i: i });
-      var q = (b.table && tableQuestion(b, rnd)) || (b.ex && exQuestion(lesson, b, rnd, week));
+      var q = (b.table && tableQuestion(b, rnd)) || (b.ex && exQuestion(lesson, b, rnd, week)) ||
+              (!b.table && !(b.ex && b.ex.length) && ruleQuestion(lesson, b, rnd));
       if (q) { q.block = i; out.push({ kind: "quiz", q: q }); }
     });
     return out;

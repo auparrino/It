@@ -860,6 +860,26 @@ def place_by_syllabus(weeks: list, by_id: dict, challenges: list) -> None:
         target = by_week.get(groups[gid]["week"])
         if target and gid not in target["challenges"]:
             target["challenges"].append(gid)
+    # Las semanas de repaso (los jefes, 49-51) recogían todas las sfide de su
+    # tramo: 118 grupos en la semana 52, cuatro horas.  Se quedan con una
+    # muestra pareja de a lo sumo SFIDE_CAP.
+    SFIDE_CAP = 12
+    for w in weeks:
+        if review(w) and len(w["challenges"]) > SFIDE_CAP:
+            lst = w["challenges"]
+            step = len(lst) / SFIDE_CAP
+            w["challenges"] = [lst[int(i * step)] for i in range(SFIDE_CAP)]
+    # Una semana propia con más de SFIDE_CAP grupos (la 19 tenía 40) pasa el
+    # sobrante a las semanas siguientes con lugar: la teoría ya está.
+    carry = []
+    for w in weeks:
+        if review(w):
+            continue
+        lst = w["challenges"] + [g for g in carry if g not in w["challenges"]]
+        carry = lst[SFIDE_CAP:]
+        w["challenges"] = lst[:SFIDE_CAP]
+    if carry:
+        weeks[-1]["challenges"] += [g for g in carry if g not in weeks[-1]["challenges"]]
     for c in challenges:
         del c["ok"]
     # Which tenses the conjugation gym may use as distractors in each week.

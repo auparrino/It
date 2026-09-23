@@ -235,7 +235,37 @@ alcanzables.
 
 ---
 
-## Prioridad
+## Estado de las correcciones (23/9)
+
+| Punto | Qué se hizo |
+|---|---|
+| 1 Ripasso | Fichas **ligeras** para lo que sale bien a la primera en el entrenamiento (vuelven a los 14 días y, si salen bien, se retiran); toda ficha con 45 días de intervalo (cuatro aciertos) se retira; la cola prioriza errores y la semana en curso; Oggi muestra «hoy: 20 (quedan N)». La pausa toma 4 del ripasso. |
+| 2 Cobertura | El gimnasio y las palabras ya no cuentan para las estrellas; «Dominala» exige el 60 % del pool visto (o 40 ítems); cada ronda arrastra un par de ejercicios no vistos de las cuatro semanas anteriores. Nunca vistos: de 777 a 262. |
+| 3 Maestría | 85 % sobre las **últimas 30** respuestas (`ws.last`), no sobre el acumulado. Ninguna semana queda sin dominar en la simulación. |
+| 4 Sfide | Tope de 12 grupos por semana: las semanas de repaso toman una muestra pareja y las semanas propias pasan el sobrante a las siguientes. La 52 baja de 118 a 12. README actualizado. |
+| 5 Estación 4 | Cuatro escenas C1 nuevas (mail formal, discutir, aneddoto, burocracia: 64 frases) en las semanas 42-48; Martín 11-13 (C1) en 41, 45 y 49; Cultura repartida (Beccaria 36, Machiavelli 38, Levi 42, Gramsci 45, Ginzburg 48). |
+| 6 Jefes | Mitad de la estación que cierra, un cuarto de la anterior, el resto libre; gimnasio al 20 %; resultado por abilità. |
+| 7 Rangos | *Poeta* 28, *Dantesco* 34, *Madrelingua* 40: quien termina el curso llega a Madrelingua. |
+| 8 Palabras | Meta 800 / 1.800 / 2.800 / 3.800 y *Parole* del banco a un toque en Oggi. Los ejemplos que faltan siguen pendientes. |
+| 9 Carga | Con 3 y 4 corregidos, sin picos de Sfide; las semanas quedan entre 60 y 130 minutos. |
+| 10 Lecciones | Chequeo «Completá la regla» para los bloques de texto suelto. |
+
+Con todo aplicado, la misma carrera simulada (ahora siete días por semana,
+con pausa y ripasso diarios) da: 364 días, 106 horas, nivel 44 *Madrelingua*,
+ninguna semana sin dominar, 263 ejercicios nunca vistos (antes 777), cola de
+ripasso con máximo 672 y 446 al final (antes 2.722 y 2.206), Sfide a lo sumo
+12 por semana, jefes con una o dos preguntas de cada semana de su estación y
+el gimnasio al 20 %.
+
+Y, de la guía y para el enganche: sfida del giorno con doble xp, bono de
+primera ronda, xp ×1,2 con racha de 7, 🎟️ de doble xp en el cofre, misión
+completada y settimana perfetta con +100 xp y medallas, meta de fin de semana
+a la mitad, medidor de las cuatro cuerdas, cuaderno itañol. El simulador
+(`tools/sim_carriera.js`) ahora juega siete días por semana.
+
+---
+
+## Prioridad (original)
 
 1. Ripasso: fichas solo para errores, frases y palabras; graduación; cola
    priorizada y «hoy: 20» (sección 1).

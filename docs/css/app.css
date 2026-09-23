@@ -1060,3 +1060,14 @@ h3 { letter-spacing: .08em; font-size: .8rem; }
 .hero .row .btn { margin: 0; }
 .node .nm { display: block; font-size: .7rem; color: var(--grigio); font-weight: 700; }
 .hero .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+
+/* Le quattro corde, la sfida del giorno, il quaderno itañol. */
+.strands { display: flex; height: 12px; border-radius: 6px; overflow: hidden; margin: 10px 0 8px; background: var(--grigio-chiaro); }
+.strands i { display: block; height: 100%; }
+.strands .s-input { background: #2f6fb3; } .strands .s-output { background: #c0392b; }
+.strands .s-forma { background: #0e7c5a; } .strands .s-fluidez { background: #d4a017; }
+.bigbtn.giorno { background: linear-gradient(135deg, #b8860b, #e0b030); }
+.bigbtn.parole { background: linear-gradient(135deg, #2f6fb3, #4f8fd3); }
+.stat.boost b { font-size: .95rem; }
+.itanol { list-style: none; padding: 0; margin: 8px 0 0; display: grid; gap: 6px; }
+.itanol li { display: grid; grid-template-columns: 24px 1fr; gap: 8px; align-items: start; }

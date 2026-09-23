@@ -166,7 +166,7 @@
   function renderHeader() {
     var lv = Engine.levelFor(state.xp);
     var todayXp = Engine.todayXp(state);
-    var goal = state.goal || 200;
+    var goal = Engine.goalFor(state);
     var pct = Math.min(100, Math.round(todayXp / goal * 100));
     $("#hdr").innerHTML =
       '<div class="bar">' +
@@ -178,6 +178,8 @@
           '<div class="stat"><b>' + (state.shields || 0) + '🛡️</b><span>escudos</span></div>' +
           '<div class="ring" style="--p:' + pct + '" title="meta diaria">' +
             '<b>' + (pct >= 100 ? "✓" : todayXp) + '</b></div>' +
+          (state.streak >= 7 ? '<div class="stat boost" title="racha de 7: xp ×1,2"><b>×1,2</b><span>xp</span></div>' : "") +
+          (state.boost > 0 ? '<div class="stat boost" title="doble xp en la próxima ronda"><b>🎟️' + state.boost + '</b><span>doble</span></div>' : "") +
           '<button class="mode" id="mode" title="modo oficina">' +
             (state.silent ? "🤫" : "🔊") + '</button>' +
         '</div>' +
@@ -210,11 +212,15 @@
   /* ------------------------------------------------------------------ oggi */
 
   function renderOggi() {
-    var goal = state.goal || 200;
+    var goal = Engine.goalFor(state);
     var todayXp = Engine.todayXp(state);
     var reached = todayXp >= goal;
     var chestOpen = state.chest === Engine.dayKey();
     var due = Drills.dueCount(course, state, itemMap);
+    var dueToday = Math.min(due, 20);
+    var weekend = Engine.goalFor(state) < (state.goal || 200);
+    var strands = Engine.strandsLast(state, 7);
+    var dailyDone = state.dailyDone === Engine.dayKey();
     var w = course.weeks[Math.min(state.unlocked, 52) - 1];
     var f = Frasi.ofTheDay();
     var known = Frasi.ALL.filter(function (x) { return state.cards[x.id]; }).length;
@@ -223,9 +229,17 @@
 
     var plan = weekPlan(w), doneN = plan.filter(function (x) { return x.done; }).length;
     var nm = nextMission(w);
+    // Words: the course brings 9-15 a week; the bank (Parole) adds 12 a session.
+    var nWords = Object.keys(state.cards).filter(function (id) {
+      return id.indexOf("v:") === 0 || id.indexOf("b:voc:") === 0;
+    }).length;
+    var wordGoal = state.unlocked <= 13 ? 800 : state.unlocked <= 26 ? 1800 : state.unlocked <= 39 ? 2800 : 3800;
     var html = '<h1>' + hello + '! 👋</h1>' +
-      '<p class="lead">' + (state.streak > 1
-        ? "Llevás <b>" + dias(state.streak) + "</b> seguidos. No cortes la racha."
+      '<p class="lead">' + (weekend
+        ? "Fin de semana: meta a la mitad (" + goal + " xp). Algo liviano alcanza: una lectura, una pausa." +
+          (state.streak > 1 ? " Llevás <b>" + dias(state.streak) + "</b>." : "")
+        : state.streak > 1
+        ? "Llevás <b>" + dias(state.streak) + "</b> seguidos" + (state.streak >= 7 ? " y tu xp vale ×1,2" : "") + ". No cortes la racha."
         : !lessonRead(1) ? "Empezás de cero. Tu camino es el percorso: un paso por vez."
         : "Tu próximo paso está marcado. Si tenés tres minutos, una pausa caffè.") + "</p>";
 
@@ -269,13 +283,33 @@
     html += '<div class="big">' +
       '<button class="bigbtn pausa" id="pausa"><span class="e">☕</span>' +
         "<b>Pausa caffè</b><small>3 minutos con lo de tu semana</small></button>" +
+      '<button class="bigbtn giorno" id="giorno"' + (dailyDone ? " disabled" : "") + '>' +
+        '<span class="e">🎯</span><b>Sfida del giorno</b><small>' +
+        (dailyDone ? "✓ hecha · mañana hay otra" : "6 preguntas · doble xp") + "</small></button>" +
       '<button class="bigbtn ripasso" id="rev"' + (due ? "" : " disabled") + '>' +
         '<span class="e">🔁</span><b>Ripasso</b><small>' +
-        (due ? due + " para repasar" : "nada pendiente") + "</small></button>" +
+        (due ? "hoy: " + dueToday + (due > 20 ? " (quedan " + due + ")" : " para repasar") : "nada pendiente") + "</small></button>" +
+      (state.unlocked >= 2 && Banca.loaded() ? '<button class="bigbtn parole" data-bank="b-voc"><span class="e">📚</span><b>Parole</b><small>' +
+        nWords.toLocaleString("es-AR") + " / " + wordGoal.toLocaleString("es-AR") + " palabras</small></button>" : "") +
       (known >= 12 ? '<button class="bigbtn lampo" id="lampo"><span class="e">⚡</span>' +
         "<b>Lampo 60″</b><small>récord: " + ((state.best || {}).lampo || 0) + "</small></button>" : "") +
       "</div>" +
       (known < 12 ? '<p class="muted" style="margin:-6px 0 12px">⚡ Lampo 60″ se abre con 12 frases vistas (llevás ' + known + ").</p>" : "");
+
+    // Le quattro corde della settimana (Nation): dove manca, un suggerimento.
+    var tot = strands.input + strands.output + strands.forma + strands.fluidez;
+    if (tot > 0) {
+      var NAMES = { input: "Input", output: "Output", forma: "Forma", fluidez: "Fluidez" };
+      var TIP = { input: "leé un episodio o escuchá una escena", output: "escribí frases de memoria o traducí",
+                  forma: "una ronda de la semana", fluidez: "un Lampo o repasá una escena" };
+      var low = Engine.STRANDS.slice().sort(function (a, b) { return strands[a] - strands[b]; })[0];
+      html += '<div class="card"><b>🎻 Tus cuatro cuerdas · últimos 7 días</b>' +
+        '<div class="strands">' + Engine.STRANDS.map(function (k) {
+          return '<i class="s-' + k + '" style="width:' + Math.round(strands[k] / tot * 100) + '%" title="' + NAMES[k] + '"></i>';
+        }).join("") + "</div>" +
+        '<p class="muted">' + Engine.STRANDS.map(function (k) { return NAMES[k] + " " + Math.round(strands[k] / tot * 100) + " %"; }).join(" · ") +
+        ". Te falta <b>" + NAMES[low].toLowerCase() + "</b>: " + TIP[low] + ".</p></div>";
+    }
 
     // La clinica: gli errori che si ripetono
     var weakO = Banca.loaded() ? Banca.weakest(state, 2) : [];
@@ -564,7 +598,7 @@
     var st = weekStat(w.week);
     if (w.boss) return st.bossPassed ? 3 : 0;
     return (lessonRead(w.week) || !w.lesson ? 1 : 0) + (st.right >= 20 ? 1 : 0) +
-      (st.attempts >= 30 && st.right / st.attempts >= 0.85 ? 1 : 0);
+      (Drills.mastered(st) && Drills.coverage(w, state).ok ? 1 : 0);
   }
   function starsHtml(n, of) {
     var h = ""; for (var i = 0; i < (of || 3); i++) h += '<i class="' + (i < n ? "on" : "") + '">★</i>';
@@ -676,6 +710,7 @@
         "<h1>¡Lección completa!</h1>" +
         '<p class="lead">Semana ' + w.week + " · " + esc(w.title) + "</p>" +
         '<div class="scorebig"><b>' + les.right + "/" + les.asked + '</b><span>+' + les.xp + " xp</span></div>" +
+        (les.extras || []).map(function (x) { return '<p class="note selfrepair">' + esc(x) + "</p>"; }).join("") +
         '<p class="muted">' + (pct === 100 ? "Perfecta: ni un error en los chequeos." :
           pct >= 70 ? "Bien. Lo que fallaste vuelve en el entrenamiento." : "Repasala cuando quieras: se puede jugar de nuevo.") + "</p>" +
         '<div class="row centerrow" style="margin-top:14px"><button class="btn" id="lesplay">🎯 A entrenar</button>' +
@@ -739,7 +774,9 @@
       if (!state.lessonScore) state.lessonScore = {};
       var pct = les.asked ? Math.round(les.right / les.asked * 100) : 100;
       les.xp = (first ? Engine.XP.lesson : 5) + les.right * 2;
+      var planBefore = doneCount(w);
       if (first) state.read[w.week] = Date.now();
+      les.extras = missionCheck(w.week, planBefore);
       state.lessonScore[w.week] = Math.max(pct, state.lessonScore[w.week] || 0);
       gain(les.xp);
       Engine.checkBadges(state);
@@ -833,8 +870,11 @@
       if (w.week === Banca.GAP_WEEK) m({ kind: "b-gap", done: bankDone(/^b:gap:/), ico: "🔧", title: "Banco: Coniuga in contesto",
         sub: "El verbo justo dentro de una oración real." });
     }
-    m({ kind: "play2", done: st.attempts >= 30 && pct >= 85, ico: "🏆", title: "Dominala",
-        sub: "85% de acierto en al menos 30 respuestas (vas " + (st.attempts ? pct + "% en " + st.attempts : "0") + ")" });
+    var cov = Drills.coverage(w, state), last = (st.last || []).slice(-30);
+    var lastPct = last.length ? Math.round(last.reduce(function (a, b) { return a + b; }, 0) / last.length * 100) : 0;
+    m({ kind: "play2", done: Drills.mastered(st) && cov.ok, ico: "🏆", title: "Dominala",
+        sub: "85 % en las últimas 30 respuestas (vas " + lastPct + " % en " + last.length + ") · ejercicios vistos " +
+             cov.seen + " / " + cov.total });
     return out;
   }
 
@@ -918,14 +958,28 @@
      in half teaches nothing).  Phrase sessions have none: they are for flow. */
   var WITH_LIVES = { round: 1, boss: 1, gym: 1 };
   // Only these rounds count towards unlocking the next grammar week.
-  var WEEK_KINDS = { round: 1, gym: 1, pausa: 1, vocab: 1 };
+  var WEEK_KINDS = { round: 1, gym: 1, pausa: 1, vocab: 1, giorno: 1 };
   // Rounds whose answers count as the week's progress (review mixes weeks).
-  var COUNT_KINDS = { round: 1, gym: 1, pausa: 1, boss: 1, vocab: 1 };
+  var COUNT_KINDS = { round: 1, gym: 1, pausa: 1, boss: 1, vocab: 1, giorno: 1 };
+
+  /* Le quattro corde di Nation (la guida): input, output, forma, fluidez. */
+  function strandOf(it, kind) {
+    if (kind === "lettura" || kind === "capire" || it.type === "listen" || it.type === "dictation") return "input";
+    if (it.type === "write" || it.type === "translate" || it.type === "typed" || it.type === "fixerr" || kind === "b-tr") return "output";
+    if (kind === "scene" || it.type === "flash") return "fluidez";
+    return "forma";
+  }
+  function doneCount(w) { return weekPlan(w).filter(function (x) { return x.done; }).length; }
 
   function startRound(kind, arg) {
     var w = course.weeks[view.week - 1];
     var items;
-    if (kind === "boss") items = Drills.buildBoss(course, w, state);
+    if (kind === "giorno") {
+      w = course.weeks[Math.min(state.unlocked, 52) - 1];
+      view.week = w.week;
+      items = Drills.buildRound(course, w, { map: itemMap, state: state, silent: state.silent, size: 6 });
+    }
+    else if (kind === "boss") items = Drills.buildBoss(course, w, state);
     else if (kind === "review") items = Drills.buildReview(course, state, 20, drillOpts());
     else if (kind === "scene") items = Frasi.sceneSession(arg, state.cards, drillOpts());
     else if (kind === "pausa") {
@@ -993,8 +1047,13 @@
       again: {},
       tried: false,
       log: [],
-      fixed: 0
+      fixed: 0,
+      week: view.week,
+      planDone: doneCount(course.weeks[view.week - 1]),
+      // A chest ticket or the daily challenge: double xp for this round.
+      boost: kind === "giorno" || (state.boost > 0 && kind !== "review" && kind !== "pausa")
     };
+    if (round.boost && kind !== "giorno") { state.boost--; persist(); renderHeader(); }
     view.screen = "gioco";
     render();
     savePending();
@@ -1377,14 +1436,22 @@
 
     var gained = Engine.xpFor(verdict, round.combo);
     if (it.retry) gained = Math.ceil(gained / 2);     // the easier second pass pays half
+    if (state.streak >= 7) gained = Math.round(gained * 1.2);   // a week of streak pays more
+    if (round.boost) gained *= 2;
     round.xp += gained;
+    Engine.addStrand(state, strandOf(it, round.kind), gained);
     round.log.push({ id: it.id, verdict: verdict, given: given, answer: it.answer,
                      es: it.frase ? it.frase.es : "", stem: it.stem || "", prompt: it.prompt || "" });
 
     // SRS only tracks the fixed bank and the phrases; generated conjugation
     // drills are endless by design, so they are not scheduled as cards.
+    // Right at first sight in the training: a light card (back in two
+    // weeks), so the review queue holds errors, phrases and words, not
+    // every exercise ever seen.
     if (it.src !== "coniugatore" && it.src !== "lettura") {
-      state.cards[it.id] = Engine.schedule(state.cards[it.id], q);
+      var light = !it.frase && it.src !== "vocab" && it.src !== "lab" && it.src !== "banca" && !it.retry &&
+                  (round.kind === "round" || round.kind === "sfida" || round.kind === "giorno" || round.kind === "boss");
+      state.cards[it.id] = Engine.schedule(state.cards[it.id], q, { light: light });
     }
 
     /* Successive relearning (Rawson & Dunlosky 2011): what you miss comes
@@ -1402,13 +1469,15 @@
     else if (q === 1) state.totals.close++;
     else state.totals.wrong++;
 
-    // Only the week's own grammar counts towards unlocking the next week.
+    // Only the week's own exercises count towards its stars: not the gym,
+    // not the words (that is how a week got «mastered» after seeing 7 items).
     if (!it.frase && it.src !== "lab" && it.src !== "lettura" && it.src !== "banca" &&
-        COUNT_KINDS[round.kind]) {
+        it.src !== "coniugatore" && it.src !== "vocab" && COUNT_KINDS[round.kind]) {
       var ws = state.weekStats[view.week] ||
         (state.weekStats[view.week] = { attempts: 0, right: 0, bossPassed: false });
       ws.attempts++;
       if (q === 2) ws.right++;
+      ws.last = (ws.last || []).concat([q === 2 ? 1 : 0]).slice(-30);
     }
 
     gain(gained);
@@ -1540,7 +1609,7 @@
       return p;
     } catch (e) { return null; }
   }
-  var KIND_NAME = { round: "Entrenamiento", boss: "Jefe", gym: "Gimnasio de verbos", pausa: "Pausa caffè", review: "Ripasso",
+  var KIND_NAME = { round: "Entrenamiento", giorno: "Sfida del giorno", boss: "Jefe", gym: "Gimnasio de verbos", pausa: "Pausa caffè", review: "Ripasso",
                     scene: "Frases", vocab: "Palabras de la semana", lettura: "Lectura", sfida: "Sfida", ponte: "Ponte",
                     falsi: "Falsi amici", capire: "Capire", "b-voc": "Parole", "b-tr": "Traduci", "b-gap": "Coniuga in contesto",
                     "b-forme": "Forme", "b-err": "Trova l'errore", clinica: "Clínica" };
@@ -1622,14 +1691,45 @@
       if (!prev) gain(20);
     }
 
+    var extras = [];
+    if (round.kind === "giorno") {
+      state.dailyDone = Engine.dayKey();
+      if (pct >= 80) { state.dailyWon = (state.dailyWon || 0) + 1; extras.push("🎯 Sfida del giorno ganada · " + state.dailyWon + " en total"); }
+    }
+    if (total >= 5 && state.firstRound !== Engine.dayKey()) {
+      state.firstRound = Engine.dayKey();
+      gain(25);
+      extras.push("☀️ Primera ronda del día: +25 xp");
+    }
+    extras = extras.concat(missionCheck(round.week, round.planDone));
+
     var won = Engine.checkBadges(state);
     persist();
     renderHeader();
 
     view.screen = "risultato";
-    view.result = { pct: pct, passed: passed, won: won };
+    view.result = { pct: pct, passed: passed, won: won, extras: extras };
     if (pct >= 80 && total >= 5) setTimeout(confetti, 150);
     render();
+  }
+
+  /* A mission just closed, or the whole week: say so, loudly. */
+  function missionCheck(week, before) {
+    var w = course.weeks[week - 1];
+    if (!w) return [];
+    var plan = weekPlan(w), now = plan.filter(function (x) { return x.done; }).length, out = [];
+    if (now > (before || 0)) {
+      fx.goal();
+      out.push("★ Misión completada · " + now + " / " + plan.length + " de la semana " + w.week);
+    }
+    if (now === plan.length && plan.length && !(state.perfectWeeks || {})[w.week]) {
+      state.perfectWeeks = state.perfectWeeks || {};
+      state.perfectWeeks[w.week] = Date.now();
+      gain(100);
+      setTimeout(confetti, 400);
+      out.push("🏁 ¡Settimana perfetta! Todas las misiones de la semana " + w.week + ": +100 xp");
+    }
+    return out;
   }
 
   function renderRisultato() {
@@ -1637,7 +1737,7 @@
     var title = round.kind === "boss"
       ? (r.passed ? "⚔️ Jefe vencido" : "Jefe no vencido")
       : r.pct >= 90 ? "🏆 ¡Fantastico!" : r.pct >= 70 ? "👏 ¡Molto bene!" : "💪 Sesión terminada";
-    var goal = state.goal || 200, tx = Engine.todayXp(state);
+    var goal = Engine.goalFor(state), tx = Engine.todayXp(state);
 
     var html = '<h1>' + title + "</h1>" +
       '<div class="card">' +
@@ -1655,6 +1755,26 @@
         "<tr><td>Racha</td><td>" + dias(state.streak) + " 🔥</td></tr>" +
       "</table>";
 
+    (r.extras || []).forEach(function (x) { html += '<p class="note selfrepair">' + esc(x) + "</p>"; });
+    if (round.boost) html += '<p class="muted">🎟️ Ronda con doble xp.</p>';
+
+    if (round.kind === "boss") {
+      // Like the CILS: one mark per ability, each one has to pass.
+      var AB = { ascolto: "Ascolto", lettura: "Lettura", strutture: "Strutture", produzione: "Produzione" };
+      var ab = {};
+      round.log.forEach(function (l) {
+        var it = round.items.filter(function (x) { return x.id === l.id; })[0] || {};
+        var k = it.type === "listen" || it.type === "dictation" ? "ascolto"
+              : it.type === "translate" || it.type === "write" || it.type === "typed" ? "produzione"
+              : it.type === "choice" && !it.recog ? "lettura" : "strutture";
+        var a = ab[k] || (ab[k] = { n: 0, ok: 0 });
+        a.n++; if (l.verdict === Engine.VERDICT.RIGHT) a.ok++;
+      });
+      html += '<h3>Por abilità</h3><table class="res">' + Object.keys(ab).map(function (k) {
+        var a = ab[k], p = Math.round(a.ok / a.n * 100);
+        return "<tr><td>" + AB[k] + "</td><td>" + a.ok + " / " + a.n + " · " + (p >= 55 ? "✓" : "✗ (mínimo 55 %)") + "</td></tr>";
+      }).join("") + "</table>";
+    }
     if (round.kind === "boss") {
       html += r.passed
         ? '<p style="margin-top:14px">Semana ' + Math.min(52, view.week + 1) +
@@ -1767,6 +1887,7 @@
     if (record) state.best.lampo = lampo.right;
     var xp = lampo.right * 3;
     gain(xp);
+    Engine.addStrand(state, "fluidez", xp);
     var won = Engine.checkBadges(state);
     persist();
     renderHeader();
@@ -1849,7 +1970,7 @@
 
       '<div class="card"><h2>Ajustes</h2>' +
         '<label class="set"><span>Meta diaria</span><select id="goal">' +
-          [[100, "Relajada · 100 xp (2 o 3 pausas)"], [200, "Normal · 200 xp (4 o 5 pausas)"],
+          [[100, "Relajada · 100 xp (2 o 3 pausas; 50 el finde)"], [200, "Normal · 200 xp (4 o 5 pausas; 100 el finde)"],
            [350, "Seria · 350 xp"], [500, "Intensa · 500 xp"]].map(function (g) {
             return '<option value="' + g[0] + '"' + (state.goal === g[0] ? " selected" : "") +
               ">" + g[1] + "</option>";
@@ -1896,10 +2017,29 @@
       "</div></div>";
   }
 
+  /* Il quaderno dell'itañol (la guida, Della Putta 2011): le interferenze
+     che si fossilizzano, con lo stato di ognuna. */
+  var ITANOL = [["a_personale", "«a» personal: conosco Jorge, no *a Jorge*"], ["doppie", "dobles: nonno / nono"],
+                ["accento", "è / e, vocales abiertas y cerradas"], ["ausiliare", "essere / avere"],
+                ["participio_accordo", "sono andata: el participio concuerda"], ["ci_ne", "ci y ne"],
+                ["articolo", "il / lo, artículo donde el español no lo pone"], ["preposizione_articolata", "nel, sul, dalla"],
+                ["congiuntivo", "congiuntivo: penso che sia"], ["falso_amico", "falsos amigos: caldo, burro, salire"],
+                ["parola_spagnola", "palabras en español dentro del italiano"]];
+  function itanolCard() {
+    var errs = state.errs || {}, now = Date.now();
+    return '<div class="card"><h2>📓 Cuaderno itañol</h2>' +
+      '<p class="muted">Las interferencias del español que se fosilizan (Della Putta). Verde: catorce días sin ese error.</p>' +
+      '<ul class="itanol">' + ITANOL.map(function (x) {
+        var e = errs[x[0]], quiet = !e || now - (e.last || 0) > 14 * 86400000;
+        return "<li><span>" + (quiet ? "🟢" : "🔴") + "</span><span>" + esc(x[1]) +
+          (e ? ' <small class="muted">· ' + e.n + (e.fixed ? " · " + e.fixed + " corregidos" : "") + "</small>" : "") + "</span></li>";
+      }).join("") + "</ul></div>";
+  }
+
   function errorsCard() {
     var errs = state.errs || {};
     var cats = Object.keys(errs).sort(function (a, b) { return errs[b].n - errs[a].n; });
-    if (!cats.length) return "";
+    if (!cats.length) return itanolCard();
     var max = errs[cats[0]].n;
     return '<div class="card"><h2>Tus errores</h2>' +
       '<p class="muted">Se registran solos cuando te equivocás. Los que corregís vos mismo cuentan como avance.</p>' +
@@ -1914,7 +2054,7 @@
       }).join("") + "</table>" : "") +
       (Banca.loaded() && Banca.weakest(state, 1).length
         ? '<div class="row" style="margin-top:12px"><button class="btn" data-bank="clinica">🩺 Ir a la clínica</button></div>' : "") +
-      "</div>";
+      "</div>" + itanolCard();
   }
 
   function stamp() {
@@ -2110,6 +2250,7 @@
 
     // oggi
     on("#pausa", function () { startRound("pausa"); });
+    on("#giorno", function () { startRound("giorno"); });
     on("#lampo", startLampo);
     on("#scena", function () { startRound("scene", Drills.nextScene(state).id); });
     on("#rev", function () { startRound("review"); });
@@ -2194,7 +2335,7 @@
       if (round.from === "briefing") { view.tab = "percorso"; view.screen = "briefing"; render(); window.scrollTo(0, 0); }
       else if (round.kind === "lettura") go("leggi");
       else if (["ponte", "falsi", "capire", "scene", "b-voc", "b-forme", "b-tr", "b-gap", "b-err", "clinica"].indexOf(round.kind) >= 0) go("frasi");
-      else if (round.kind === "pausa" || round.kind === "review") go("oggi");
+      else if (round.kind === "pausa" || round.kind === "review" || round.kind === "giorno") go("oggi");
       else if (round.kind === "sfida") { view.screen = "sfide"; render(); }
       else { view.screen = "briefing"; render(); }
     });

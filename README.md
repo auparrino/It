@@ -47,14 +47,30 @@ tu teléfono**. No usa cuentas, servidores, micrófono ni IA externa.
 ### Lo que te mantiene enganchado
 
 - **Meta diaria** (100, 200, 350 o 500 xp; una Pausa da entre 30 y 60) con anillo de progreso en la cabecera.
+  El sábado y el domingo la meta baja a la mitad: el fin de semana es para algo
+  liviano, no para cortar la racha.
+- **Sfida del giorno**: seis preguntas de tu semana con doble xp, una vez por
+  día. La primera ronda de cada día suma +25 xp.
+- **Racha de 7 días: xp ×1,2** mientras dure. El cofre puede dar un 🎟️ de
+  doble xp para la próxima ronda.
+- **Misiones y semana perfecta**: cada misión que cerrás se anuncia con su
+  cuenta (★ 4/7), y completar todas las de una semana da +100 xp, confeti y
+  las medallas *Settimana perfetta* y *Dieci perfette*.
+- **Tus cuatro cuerdas** (Nation): Oggi muestra cuánto de tu semana fue input,
+  output, forma y fluidez, y qué te falta.
+- **Cuaderno itañol** en *Io*: las interferencias del español que se fosilizan
+  (a personal, dobles, è/e, essere/avere, ci/ne, artículos…), en verde cuando
+  llevás catorce días sin ese error.
 - **🎁 Cofre diario** al cumplir la meta: premio sorpresa (xp, premio gordo o un
   escudo).
 - **🔥 Racha con 🛡️ escudos**: cada 7 días de racha ganás un escudo, y cada
   escudo salva la racha por un día que no pudiste jugar (máximo 3).
 - **Rangos**, de *Turista* a *Madrelingua*, además del nivel.
 - **Calendario** de tus últimas 4 semanas, combos, confeti, sonidos y vibración.
-- **Repaso espaciado** que mezcla gramática y frases: cada frase vuelve cuando
-  estás por olvidarla, y cada vez con otro tipo de ejercicio.
+- **Repaso espaciado sin deuda**: lo que fallás, las frases y las palabras
+  entran en la cola; lo que sale bien a la primera en el entrenamiento vuelve
+  una sola vez a las dos semanas, y una ficha con cuatro aciertos seguidos se
+  retira. La cola muestra «hoy: 20», nunca un total de miles.
 - **Seguí donde estabas**: si cerrás la app a mitad de una ronda o de una
   lección, Oggi te ofrece retomarla en el mismo punto (queda en el teléfono
   dos días).
@@ -220,9 +236,14 @@ tiene **3 estrellas**, una por misión:
 2. **Superá la semana** — 20 respuestas correctas en el *Allenamento*: 12
    preguntas con ejercicios del libro, banco propio y gimnasio de verbos, cinco
    vidas y combo de XP.
-3. **Dominala** — 85% de acierto en al menos 30 respuestas.
+3. **Dominala** — 85% de acierto en las **últimas 30** respuestas de la semana
+   (ventana móvil, no el histórico) y al menos el 60 % de los ejercicios de la
+   semana vistos. El gimnasio y las palabras no cuentan para las estrellas.
 
-Los **boss** cierran cada estación: examen acumulativo, 85% para pasar.
+Los **boss** cierran cada estación: examen acumulativo (la mitad de la estación
+que cierra, un cuarto de la anterior, el resto libre; el gimnasio pesa un
+20 %), 85% para pasar, con el resultado por *abilità* (ascolto, lettura,
+strutture, produzione), como el CILS.
 Las **vidas** son un indicador, no un castigo: cada error vacía un corazón para que
 veas dónde te equivocaste, pero la ronda se juega siempre hasta el final.
 Aparte están el **gimnasio de verbos** (conjugación generada al vuelo) y las
@@ -361,6 +382,20 @@ tools/
   bank/                  el banco en Python legible
 ```
 
+## Qué toma de la guía «Aprender italiano hasta C1 en un año»
+
+| La guía dice | En la app |
+|---|---|
+| Retención sin backlog: 20-30 fichas nuevas por día, cola al día | Fichas ligeras para lo que sale bien, retiro a los cuatro aciertos, «hoy: 20» |
+| Recuperación y espaciado son las únicas técnicas de alta utilidad | Todo es recuperación: ronda, ripasso, escribir de memoria, sfida del giorno |
+| Cuatro destrezas de Nation en partes iguales | Medidor «Tus cuatro cuerdas» con el consejo de lo que falta |
+| Cuaderno de errores itañol | Cuaderno itañol en *Io*, Clínica de errores, diagnóstico por categoría |
+| Fin de semana liviano, sin parar del todo | Meta a la mitad sábado y domingo |
+| Simulacros CILS por *abilità* al cierre de cada fase | Los jefes ponderan la estación y muestran el resultado por abilità |
+| Vocabulario escalonado y medible | Meta de palabras por trimestre alcanzable (800 / 1.800 / 2.800 / 3.800) y *Parole* a un toque en Oggi |
+| Registro formal y colocaciones en C1 | Escenas C1: la mail formal, discutir, el aneddoto, la burocracia; Martín 11-13 |
+| Pronunciación explícita temprana | Escucha sin texto en la semana 1, audio en las tablas de sonidos |
+
 ## Reconstruir los datos
 
 Los `.epub` no están en el repo. Con tus propias copias:
@@ -411,6 +446,10 @@ el sitio del editor, así que sus 1.632 sub-ítems **no se corrigen solos**: el
 juego los presenta como desafíos abiertos que resolvés por escrito, verificás
 contra el capítulo y puntuás vos. Todo lo que el juego corrige automáticamente
 sale del banco de *For Dummies*, del motor de conjugación y del banco propio.
+
+**Los desafíos del *Soluzioni* se corrigen.** (Aviso viejo, ya resuelto: 338
+de los 339 grupos se juegan con corrección automática; quedan repartidos a lo
+sumo 12 por semana.)
 
 **Esto es gramática, no un curso completo.** Un año de este juego te da el
 sistema gramatical del C1 con solidez, pero el C1 real también exige volumen de
