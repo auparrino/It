@@ -500,19 +500,20 @@ y los dos bancos extraídos de libros (este último con ~125 respuestas corregid
 en *Dummies* y errores de extracción limpiados en *Soluzioni*). Las reglas que
 el corrector enuncia en español también se revisaron una por una.
 
-**Diseño: la piazza.** La Italia quieta de un final de tarde: una franja de
-cielo arriba, muros de revoque cálido, tarjetas color crema con un filete fino,
-terracota para lo que se toca y verde botella cuando sale bien. Sin patrones ni
-sombras gruesas: todo plano y legible. «La Via» es una calle, así que el logo y
-el título de cada semana siguen siendo **placas de calle romanas** en
-travertino (*Settimana XVII*). En cada ejercicio la ficha lleva el filete de
-terracota de una carta de menú, el contador dice *3 di 10* en Bodoni cursiva y,
-cuando falta poco, un aliento en italiano (*Ci sei quasi. — Ultima!*); el
-veredicto llega en italiano (*Bravo!*, *Quasi! Ci sei.*, *Capita. Era così:*) y
-el botón es *Avanti*. Tipografías: *Bodoni Moda* (Bodoni era de Parma) solo
-para los títulos grandes y el veredicto, y *Atkinson Hyperlegible Next*,
-diseñada para leer fácil, para todo lo demás, servidas desde `docs/fonts/`
-(licencia SIL OFL, incluida) para que funcionen sin red. Con modo oscuro.
+**Diseño: la Riviera.** La Italia de mediodía: un cielo azul de verdad
+arriba, blanco de sol abajo y los colores de las casas de Positano para todo
+lo que se toca: coral, limón, albahaca y mar. Sin patrones ni sombras
+gruesas: plano, vivo y legible. «La Via» es una calle, así que el logo sigue
+siendo una **placa de calle romana** en travertino. En cada ejercicio la ficha
+lleva un filete de sol (limón a coral), el contador dice *3 di 10* en cursiva
+azul y, cuando falta poco, un aliento en italiano (*Ci sei quasi. — Ultima!*);
+el veredicto llega en italiano (*Bravo!*, *Quasi! Ci sei.*, *Capita. Era
+così:*) y el botón es *Avanti*. Tipografías: *Bodoni Moda* (Bodoni era de
+Parma) solo en la placa «VIA C1», porque sus trazos finos desaparecen en la
+pantalla del teléfono, y *Atkinson Hyperlegible Next*, diseñada para leer
+fácil, para todo lo demás, servidas desde `docs/fonts/` (licencia SIL OFL,
+incluida) para que funcionen sin red. Con modo oscuro: cielo de noche sobre el
+mar.
 
 El gimnasio de verbos genera preguntas en vez de almacenarlas: 96 verbos × 14
 tiempos × 6 personas dan más de 8.000 formas distintas, con distractores tomados
