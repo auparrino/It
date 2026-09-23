@@ -93,6 +93,20 @@
 
   /* -------------------------------------------------------- xp e obiettivo */
 
+  // «+10» rises from the answer towards the daily ring.
+  function xpFly(n) {
+    var ring = document.querySelector(".ring");
+    var fb = $("#fb");
+    var y = fb && fb.getBoundingClientRect().top ? Math.min(window.innerHeight * 0.55, fb.getBoundingClientRect().top) : window.innerHeight * 0.4;
+    var el = document.createElement("div");
+    el.className = "xpfloat";
+    el.textContent = "+" + n;
+    el.style.left = (window.innerWidth / 2 - 20) + "px";
+    el.style.top = y + "px";
+    document.body.appendChild(el);
+    setTimeout(function () { el.remove(); if (ring) ring.classList.add("bump"); }, 900);
+  }
+
   function dias(n) { return n + (n === 1 ? " día" : " días"); }
 
   function gain(n) {
@@ -160,7 +174,7 @@
           '<small>liv. ' + lv.level + ' · ' + esc(Engine.rankFor(lv.level)) +
           '</small></button>' +
         '<div class="stats">' +
-          '<div class="stat"><b>' + state.streak + '🔥</b><span>racha</span></div>' +
+          '<div class="stat' + (state.streak > 0 ? " hot" : "") + '"><b>' + state.streak + "<i>🔥</i></b><span>racha</span></div>" +
           '<div class="stat"><b>' + (state.shields || 0) + '🛡️</b><span>escudos</span></div>' +
           '<div class="ring" style="--p:' + pct + '" title="meta diaria">' +
             '<b>' + (pct >= 100 ? "✓" : todayXp) + '</b></div>' +
@@ -683,8 +697,10 @@
     }
     return '<div class="hud">' +
         (hearts ? '<span class="hearts">' + hearts + "</span>" : "") +
+        // Drawn at the previous step and grown after paint, so it visibly advances.
         '<span class="progressline"><i style="width:' +
-          Math.round(round.i / round.items.length * 100) + '%"></i></span>' +
+          Math.round(Math.max(0, round.i - 1) / round.items.length * 100) + '%" data-to="' +
+          Math.round(round.i / round.items.length * 100) + '"></i></span>' +
         "<span class=\"muted\">" + (round.i + 1) + "/" + round.items.length + "</span>" +
         (round.combo > 1 ? '<span class="combo pop">🔥×' + round.combo + "</span>" : "") +
         '<button class="btn ghost" id="quit">✕</button>' +
@@ -694,7 +710,8 @@
   function renderGioco() {
     var it = currentItem();
     if (!it) return "";
-    var body = "", stem = esc(it.stem).replace(/___/g, '<span class="gap">&nbsp;</span>');
+    var body = "", stem = /^\s*_+\s*$/.test(it.stem || "") ? ""
+      : esc(it.stem).replace(/___/g, '<span class="gap">&nbsp;</span>');
     var prompt = '<div class="prompt">' + esc(it.prompt || "") + "</div>";
 
     if (it.type === "intro") {
@@ -1037,6 +1054,7 @@
     gain(gained);
     persist();
     renderHeader();
+    if (gained) xpFly(gained);
 
     var label = opts.label || { giusto: pick(["¡Perfetto!", "¡Bravo!", "¡Esatto!", "¡Grande!", "¡Benissimo!"]),
                   quasi: "Quasi…", sbagliato: "No, era así:" }[verdict];
@@ -1558,6 +1576,8 @@
     }
     app().innerHTML = html;
     document.body.classList.toggle("ingame", s === "gioco" || s === "lampo");
+    var pl = document.querySelector(".progressline i[data-to]");
+    if (pl) requestAnimationFrame(function () { requestAnimationFrame(function () { pl.style.width = pl.dataset.to + "%"; }); });
     renderNav();
     wire();
   }

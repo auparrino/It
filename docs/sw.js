@@ -3,12 +3,15 @@
  * Strategia: rispondi subito dalla cache, aggiorna in background.
  * Cambiare VERSION a ogni rilascio per buttare la cache vecchia.
  */
-var VERSION = "laviac1-v5";
+var VERSION = "laviac1-v6";
 var FILES = [
   "./",
   "index.html",
   "manifest.webmanifest",
   "css/app.css",
+  "fonts/fraunces-normal.woff2",
+  "fonts/fraunces-italic.woff2",
+  "fonts/nunito-normal.woff2",
   "js/conjugator.js",
   "js/engine.js",
   "js/frasi.js",
