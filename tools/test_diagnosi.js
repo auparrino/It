@@ -213,6 +213,23 @@ if (bank) {
 /* ------------------------------------------- tentativi di romperla */
 
 // Words that are also JavaScript property names must not break anything.
+// Real-world typing and the learner's own gender
+[["sono stanca", "Sono stanco.", "giusto"], ["Ieri sono andata a casa", "Ieri sono andato a casa.", "giusto"],
+ ["Sei pronta?", "Sei pronto?", "giusto"], ["siamo arrivate", "Siamo arrivati.", "giusto"],
+ ["Maria è andato a casa", "Maria è andata a casa.", "sbagliato"], ["Lei è stanco", "Lei è stanca.", "sbagliato"],
+ ["Ti è piaciuta il film?", "Ti è piaciuto il film?", "sbagliato"], ["La casa è bello", "La casa è bella.", "sbagliato"],
+ ["Tutti le mattine bevo un caffè", "Tutte le mattine bevo un caffè.", "sbagliato"],
+ ["L'amico di Marco \u00e8\u200b arrivato", "L'amico di Marco è arrivato.", "giusto"],
+ ["L'amico di Marco è arrivato 😀", "L'amico di Marco è arrivato.", "giusto"],
+ ["L' amico di Marco è arrivato", "L'amico di Marco è arrivato.", "giusto"]
+].forEach(function (c) {
+  var d = D.diagnose(c[0], [c[1]]);
+  ok(d.verdict === c[2], "«" + c[0] + "» dovrebbe essere " + c[2] + ", è " + d.verdict + " " + d.cat);
+});
+ok(D.diagnose("L'amico e' arrivato", ["L'amico è arrivato."]).cat === "accento", "e' per è = accento");
+ok(D.diagnose("Lei è stanco", ["Lei è stanca."]).cat === "accordo", "stanco/stanca è accordo, non persona");
+ok(D.diagnose("Le ragazze sono partiti", ["Le ragazze sono partite."]).cat === "participio_accordo", "partiti/partite dopo essere");
+
 ["constructor", "__proto__", "toString", "hasOwnProperty", "valueOf", "prototype"].forEach(function (w) {
   ["Ieri sono andato al cinema.", w, "__proto__"].forEach(function (t) {
     var ok1 = true;

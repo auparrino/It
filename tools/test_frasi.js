@@ -307,5 +307,18 @@ ok(kept.xp === 1234 && kept.cards["frase:bar:1"].interval === 1, "un salvataggio
 var fdg = Frasi.ofTheDay(day(2026, 6, 1));
 ok(fdg === Frasi.ofTheDay(day(2026, 6, 1, 23)), "la frase del giorno non cambia nel giorno");
 
+// Clock moved back a day: the streak survives.
+var sb = Engine.blankSave(); sb.streak = 10; sb.lastPlayed = Engine.dayKey(day(2026, 9, 23));
+Engine.touchStreak(sb, day(2026, 9, 22));
+ok(sb.streak === 10, "l'orologio indietro non azzera la serie");
+Engine.touchStreak(sb, day(2026, 9, 24));
+ok(sb.streak === 11, "e il giorno dopo la serie continua");
+// Calendar strip: every day once, also across a DST change.
+[day(2026, 3, 30, 0), day(2026, 10, 26, 23), day(2026, 3, 29, 12)].forEach(function (d) {
+  var ks = Engine.lastDays({}, 7, d).map(function (x) { return x.key; });
+  var uniq = ks.filter(function (k, i) { return ks.indexOf(k) === i; });
+  ok(uniq.length === 7 && ks[6] === Engine.dayKey(d), "7 giorni distinti fino a oggi: " + ks.join(" "));
+});
+
 console.log("\ncontrolli: " + checks + "   errori: " + fails);
 process.exit(fails ? 1 : 0);

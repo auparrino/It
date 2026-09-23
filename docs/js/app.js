@@ -182,7 +182,12 @@
     };
   }
 
+  function stopLampo() {
+    if (lampo && !lampo.done) { lampo.done = true; clearInterval(lampo.timer); }
+  }
+
   function go(tab) {
+    stopLampo();
     view.tab = view.screen = tab;
     render();
     window.scrollTo(0, 0);
@@ -1546,11 +1551,34 @@
     var gb = $("#glossbox");
     if (gb) gb.classList.remove("on");
     guardUntil = Date.now() + 300;
+    // Inside a game or a text, the phone's back button returns to the tab
+    // instead of closing the app.
+    if (TABS.every(function (t) { return t[0] !== s; }) && !subEntry && window.history && history.pushState) {
+      try { history.pushState({ sub: 1 }, ""); subEntry = true; } catch (e) { /* */ }
+    }
     app().innerHTML = html;
     document.body.classList.toggle("ingame", s === "gioco" || s === "lampo");
     renderNav();
     wire();
   }
+
+  var subEntry = false;
+  window.addEventListener("popstate", function () {
+    subEntry = false;
+    if (!course || TABS.some(function (t) { return t[0] === view.screen; })) return;
+    if (view.screen === "gioco") toast("Ronda interrumpida. Lo que respondiste ya quedó guardado.");
+    go(view.tab || "oggi");
+  });
+
+  /* Another tab (or the installed app next to the browser) saved: take its
+     progress instead of overwriting it with ours on the next save. */
+  window.addEventListener("storage", function (e) {
+    if (e.key !== "laviac1.save.v1" || !e.newValue) return;
+    state = Engine.load();
+    if (!course) return;
+    renderHeader();
+    if (["gioco", "lampo", "lettura"].indexOf(view.screen) < 0) render();
+  });
 
   function on(sel, fn) { var b = $(sel); if (b) b.onclick = fn; }
 
@@ -1672,7 +1700,7 @@
     document.querySelectorAll("[data-lopt]").forEach(function (b) {
       b.onclick = function () { lampoAnswer(b); };
     });
-    on("#lquit", function () { if (lampo) { lampo.done = true; clearInterval(lampo.timer); } go("oggi"); });
+    on("#lquit", function () { go("oggi"); });
     on("#lagain", startLampo);
 
     wireGioco();

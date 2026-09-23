@@ -40,7 +40,7 @@
     return d;
   }
 
-  var DATA = { esIt: dict(), falsi: dict(), spelling: [], lex: dict(), nouns: dict(), nounsByPlural: dict() };
+  var DATA = { esIt: dict(), falsi: dict(), spelling: [], lex: dict(), adj: dict(), nouns: dict(), nounsByPlural: dict() };
 
   /* --------------------------------------------------------- strumenti */
 
@@ -54,6 +54,8 @@
     return String(s == null ? "" : s)
       .toLowerCase()
       .replace(/[’‘`´]/g, "'")
+      .replace(/[\u200b-\u200d\u2060\ufeff]/g, "")
+      .replace(/\p{Extended_Pictographic}|[\ufe0f\u{1f3fb}-\u{1f3ff}]/gu, " ")
       .replace(/[«»"“”.,;:!?¿¡()…—–-]+/g, " ")
       .replace(/'/g, "' ")
       .split(/\s+/)
@@ -257,7 +259,10 @@
   function pairRules(g, e, ctx) {
     var r, gs = deaccent(g), es = deaccent(e);
 
-    // 1. Accento
+    // 1. Accento (anche e' per è: la tastiera senza tilde)
+    if (/[aeiou]'$/.test(g) && /[àèéìòù]$/.test(e) && deaccent(g.slice(0, -1)) === es) return { cat: "accento", slip: true,
+      hint: "La tilde no se reemplaza con apóstrofo.",
+      explain: "Se escribe " + it(e) + ", con la tilde sobre la vocal (no " + it(g) + "). Tenés los botones à è é ì ò ù abajo del cuadro." };
     if (gs === es) {
       if (e === "è" && g === "e") return { cat: "accento", slip: false,
         hint: "Mirá la palabra marcada: ¿es el verbo o la conjunción?",
@@ -563,6 +568,13 @@
     var fe = verbForms(e), fg = verbForms(g);
     var prevE = ctx.e[ctx.ei - 1] || "", nextE = ctx.e[ctx.ei + 1] || "";
     var before = ctx.e.slice(0, ctx.ei).join(" ");
+    // stanco/stanca are also «io stanco» (stancare): read them as the
+    // adjective unless a subject pronoun or a clitic points to the verb.
+    if (DATA.adj[e] && DATA.adj[e] === DATA.adj[g] &&
+        !/^(io|tu|noi|voi|loro|mi|ti|ci|vi|si|lo|la|li|le|gli|ne)$/.test(prevE)) return null;
+    // arrivati/arrivate after essere: agreement, not «voi arrivate».
+    if (participleOf(e) && participleOf(e) === participleOf(g) && ESSERE.indexOf(prevE) >= 0 &&
+        e.slice(0, -1) === g.slice(0, -1)) return null;
     // c'è / ci sono, ci vuole / ci vogliono
     if ((prevE === "ci" || prevE === "c'") && /^(è|sono|era|erano|sarà|saranno|vuole|vogliono|voleva|volevano)$/.test(e)) {
       return { cat: "ci_ne", slip: false,
@@ -992,6 +1004,34 @@
     return (String(s).match(/\b[A-ZÀ-Ý][a-zà-ÿ]+/g) || []).map(function (w) { return w.toLowerCase(); });
   }
 
+  var CLOSED = ["io", "tu", "noi", "voi", "loro", "sono", "è", "ieri", "oggi", "domani", "anche", "non", "ma", "e",
+    "poi", "adesso", "ora", "qui", "così", "sempre", "mai", "già", "ancora", "forse", "quando", "se", "che", "come",
+    "perché", "dopo", "prima", "stamattina", "stasera", "stanotte", "finalmente", "purtroppo", "davvero", "molto", "troppo",
+    "tanto", "tutto", "ci", "mi", "ti", "si", "vi", "ne", "ecco"];
+  var GENDER_FIXERS = ["lui", "lei", "la", "lo", "li", "le", "l'", "gli", "esso", "essa", "essi", "esse"];
+  function genderFree(g, e, target) {
+    if (g.length !== e.length) return false;
+    var named = names(String(target).replace(/^\s*\S+/, ""));
+    var first = e[0];
+    if (/^\s*[A-ZÀ-Ý]/.test(String(target)) && !DATA.lex[first] && !verbForms(first).length &&
+        CLOSED.indexOf(first) < 0) named.push(first);
+    var isNoun = function (w) { return !!(w && (DATA.nouns[w] || DATA.nounsByPlural[w] || named.indexOf(w) >= 0)); };
+    var diff = 0;
+    for (var i = 0; i < e.length; i++) {
+      if (g[i] === e[i]) continue;
+      var a = g[i], b = e[i];
+      if (a.length < 3 || a.slice(0, -1) !== b.slice(0, -1)) return false;
+      var pair = a.slice(-1) + b.slice(-1);
+      if (["oa", "ao", "ie", "ei"].indexOf(pair) < 0) return false;
+      if (!DATA.adj[b] && !participleOf(b)) return false;
+      if (isNoun(e[i + 1]) || ARTICLES[e[i + 1]] || ARTICLES[e[i - 1]]) return false;
+      if (isNoun(e[i + 2]) && !/^(di|a|da|in|con|su|per|tra|fra)$/.test(e[i + 1])) return false;
+      for (var k = 0; k < i; k++) if (isNoun(e[k]) || GENDER_FIXERS.indexOf(e[k]) >= 0) return false;
+      diff++;
+    }
+    return diff > 0;
+  }
+
   /* Contrazioni non fatte: "a il" → al, "de il" → del … */
   function uncontracted(gtoks, etoks) {
     for (var i = 0; i < gtoks.length - 1; i++) {
@@ -1033,7 +1073,7 @@
     for (var i = 0; i < g.length; i++) {
       if (e.indexOf(g[i]) >= 0) continue;
       var fg = verbForms(g[i]);
-      if (!fg.length) continue;
+      if (!fg.length || participleOf(g[i])) continue;   // partite/partiti: agreement
       for (var j = 1; j < e.length; j++) {
         var lem = participleOf(e[j]);
         var aux = e[j - 1];
@@ -1056,7 +1096,7 @@
         var lemG = participleOf(g[a + 1]);
         for (var b = 0; b < e.length; b++) {
           var fe = verbForms(e[b]).filter(function (x) { return x.lemma === lemG; });
-          if (fe.length && g.indexOf(e[b]) < 0) {
+          if (fe.length && g.indexOf(e[b]) < 0 && participleOf(e[b]) !== lemG) {
             var daTime = /\bda\b/.test(e.join(" "));
             return { gi: a + 1, ei: [b],
               hint: daTime ? "Mirá el *da* + tiempo: ¿la acción terminó o sigue?" : "Acá no hace falta un tiempo compuesto.",
@@ -1095,6 +1135,9 @@
       return res;
     }
     if (g.join(" ") === e.join(" ")) { res.verdict = "giusto"; return res; }
+    // «Sono stanca» for «Sono stanco»: with nobody named, the gender is the
+    // learner's own (or the listener's), and both are right.
+    if (genderFree(g, e, target)) { res.verdict = "giusto"; return res; }
 
     var found = [];
     var nm = names(target).concat(ctx.names || []);
@@ -1219,8 +1262,9 @@
       DATA.lex[n[0]] = n[3];
       if (!DATA.lex[n[2]]) DATA.lex[n[2]] = n[3];
     });
+    DATA.adj = dict();
     (bank.adjectives || []).forEach(function (a) {
-      for (var i = 0; i < 4; i++) if (!DATA.lex[a[i]]) DATA.lex[a[i]] = a[4];
+      for (var i = 0; i < 4; i++) { if (!DATA.lex[a[i]]) DATA.lex[a[i]] = a[4]; DATA.adj[a[i]] = a[0]; }
     });
     (bank.words || []).forEach(function (w) {
       var k = w[0].toLowerCase();

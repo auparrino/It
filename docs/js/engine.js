@@ -293,6 +293,8 @@
     var t = dayKey(now);
     if (state.lastPlayed === t) return state.streak;
     var gap = state.lastPlayed ? daysBetween(state.lastPlayed, t) : 99;
+    // The phone's clock went back (manual change, travel): keep the streak.
+    if (gap < 0) return state.streak;
     var missed = gap - 1;
     if (gap === 1) state.streak += 1;
     else if (missed > 0 && missed <= (state.shields || 0) && state.streak > 0) {
@@ -323,9 +325,10 @@
 
   // The last n days as [{key, xp}] from oldest to today.
   function lastDays(state, n, now) {
-    var out = [], base = now ? now.getTime() : Date.now();
+    var out = [], base = now || new Date();
     for (var i = n - 1; i >= 0; i--) {
-      var k = dayKey(new Date(base - i * DAY));
+      // Calendar arithmetic, not 24 h steps: DST days have 23 or 25 hours.
+      var k = dayKey(new Date(base.getFullYear(), base.getMonth(), base.getDate() - i, 12));
       out.push({ key: k, xp: (state.days || {})[k] || 0 });
     }
     return out;
