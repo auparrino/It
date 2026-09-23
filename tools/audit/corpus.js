@@ -91,7 +91,10 @@ chunk(bv, 12).forEach(function (c, i) {
   add("formebanca:" + i, "tools/bank/parole_verbi_agg.py (flag aux/isc/irregolare)", "forme generate dei verbi della banca",
     c.map(function (v) {
       var f = function (tn) { try { return Conj.conjugate(v[0], tn).join(", "); } catch (e) { return "ERR"; } };
-      return { inf: v[0], es: v[1], presente: f("presente"), passato_prossimo: f("passatoProssimo"), futuro: f("futuro"),
+      // aux "both": the drills accept avere and essere; show both so the review sees what the learner can use.
+      var pp = f("passatoProssimo");
+      if (v[2] === "both") pp += "  (también con essere, que los ejercicios aceptan)";
+      return { inf: v[0], es: v[1], ausiliare: v[2], presente: f("presente"), passato_prossimo: pp, futuro: f("futuro"),
         congiuntivo: f("congiuntivo"), passato_remoto: f("passatoRemoto"), participio: Conj.participle(v[0]) };
     }));
 });

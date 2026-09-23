@@ -1004,6 +1004,35 @@
     return (String(s).match(/\b[A-ZÀ-Ý][a-zà-ÿ]+/g) || []).map(function (w) { return w.toLowerCase(); });
   }
 
+  // Verbs that are interchangeable in everyday Italian.
+  var SYN = [["finire", "terminare"], ["cominciare", "iniziare"], ["rimanere", "restare"],
+             ["tornare", "ritornare"], ["mandare", "inviare", "spedire"], ["continuare", "proseguire"]];
+  function synFamily(lemma) {
+    for (var i = 0; i < SYN.length; i++) if (SYN[i].indexOf(lemma) >= 0) return i;
+    return -1;
+  }
+  function synonymFree(g, e) {
+    if (g.length !== e.length) return false;
+    var diff = 0;
+    for (var i = 0; i < e.length; i++) {
+      if (g[i] === e[i]) continue;
+      var fg = verbForms(g[i]), fe = verbForms(e[i]);
+      var pg = participleOf(g[i]), pe = participleOf(e[i]);
+      var ok = fe.some(function (a) {
+        var fam = synFamily(a.lemma);
+        return fam >= 0 && fg.some(function (b) {
+          return b.lemma !== a.lemma && synFamily(b.lemma) === fam && b.tense === a.tense && b.p === a.p;
+        });
+      });
+      // participles: sono rimasto / sono restato (same ending)
+      if (!ok && pg && pe && pg !== pe && synFamily(pg) >= 0 && synFamily(pg) === synFamily(pe) &&
+          g[i].slice(-1) === e[i].slice(-1)) ok = true;
+      if (!ok) return false;
+      diff++;
+    }
+    return diff > 0;
+  }
+
   var CLOSED = ["io", "tu", "noi", "voi", "loro", "sono", "è", "ieri", "oggi", "domani", "anche", "non", "ma", "e",
     "poi", "adesso", "ora", "qui", "così", "sempre", "mai", "già", "ancora", "forse", "quando", "se", "che", "come",
     "perché", "dopo", "prima", "stamattina", "stasera", "stanotte", "finalmente", "purtroppo", "davvero", "molto", "troppo",
@@ -1138,6 +1167,8 @@
     // «Sono stanca» for «Sono stanco»: with nobody named, the gender is the
     // learner's own (or the listener's), and both are right.
     if (genderFree(g, e, target)) { res.verdict = "giusto"; return res; }
+    // Termino for finisco, resto for rimango: same meaning, same person and tense.
+    if (synonymFree(g, e)) { res.verdict = "giusto"; return res; }
 
     var found = [];
     var nm = names(target).concat(ctx.names || []);
