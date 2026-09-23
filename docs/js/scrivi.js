@@ -799,18 +799,34 @@
       "\"corregido\":\"el texto completo corregido\",\"comentario\":\"una o dos oraciones de devolución, en castellano\"}\n\n" +
       "Texto:\n" + text;
   }
-  function aiCheck(text, week, key, done, model) {
+  function aiCheck(text, week, key, done) { gemini(aiPrompt(text, week, TASKS[week]), key, done); }
+
+  /* Any exercise: why is my answer wrong (or is it right after all)? */
+  function explainPrompt(x) {
+    return "Sos profesor de italiano para un hispanohablante rioplatense. Un alumno respondió un ejercicio de una app.\n" +
+      "Consigna: " + (x.prompt || "") + "\nEnunciado: " + (x.stem || "") +
+      (x.options && x.options.length ? "\nOpciones: " + x.options.join(" | ") : "") +
+      "\nRespuesta del alumno: " + (x.given || "(vacía)") + "\nRespuesta que la app da por correcta: " + (x.answer || "") +
+      (x.accept && x.accept.length > 1 ? "\nOtras respuestas que la app acepta: " + x.accept.join(" | ") : "") +
+      (x.feedback ? "\nCorrección que mostró la app: " + x.feedback : "") +
+      "\n\nExplicale al alumno, en 2 a 4 oraciones en castellano rioplatense, qué está mal en su respuesta y cuál es la regla, " +
+      "con un ejemplo corto en italiano. Si su respuesta en realidad también es correcta, o si la corrección de la app está mal o confunde, decilo claro.\n" +
+      "Respondé SOLO con JSON: {\"tambien_correcta\": true o false, \"app_equivocada\": true o false, \"explicacion\": \"...\"}";
+  }
+  function explain(x, key, done) { gemini(explainPrompt(x), key, done); }
+
+  function gemini(prompt, key, done, model) {
     model = model || AI_MODELS[0];
     if (typeof fetch !== "function") return done(new Error("sin fetch"));
     var ctl = typeof AbortController === "function" ? new AbortController() : null;
     var timer = setTimeout(function () { if (ctl) ctl.abort(); }, 30000);
     fetch("https://generativelanguage.googleapis.com/v1beta/models/" + model + ":generateContent?key=" + encodeURIComponent(key), {
       method: "POST", signal: ctl ? ctl.signal : undefined, headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ contents: [{ role: "user", parts: [{ text: aiPrompt(text, week, TASKS[week]) }] }],
+      body: JSON.stringify({ contents: [{ role: "user", parts: [{ text: prompt }] }],
                              generationConfig: { temperature: 0.2, responseMimeType: "application/json" } })
     }).then(function (r) {
       var k = AI_MODELS.indexOf(model);
-      if (r.status === 404 && k >= 0 && k < AI_MODELS.length - 1) { clearTimeout(timer); aiCheck(text, week, key, done, AI_MODELS[k + 1]); return null; }
+      if (r.status === 404 && k >= 0 && k < AI_MODELS.length - 1) { clearTimeout(timer); gemini(prompt, key, done, AI_MODELS[k + 1]); return null; }
       if (!r.ok) return r.text().then(function (b) { throw new Error("HTTP " + r.status + (/API.?key/i.test(b) ? ", clave" : "")); });
       return r.json();
     }).then(function (j) {
@@ -849,7 +865,7 @@
 
   var api = { TASKS: TASKS, features: features, lint: lint, check: check, markup: markup, weeks: weeks, toks: toks,
               learn: learn, learnCourse: learnCourse, ltCheck: ltCheck, fromLT: fromLT,
-              aiCheck: aiCheck, fromAI: fromAI, aiPrompt: aiPrompt };
+              aiCheck: aiCheck, fromAI: fromAI, aiPrompt: aiPrompt, explain: explain, explainPrompt: explainPrompt };
   if (typeof module === "object" && module.exports) module.exports = api;
   else root.Scrivi = api;
 })(typeof window !== "undefined" ? window : globalThis);
