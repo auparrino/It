@@ -7,6 +7,12 @@ LESSONS = {
 "intro": "Vas a usar el causativo: *fare* + infinitivo para «hacer que "
          "alguien haga» o «mandar a hacer», donde el castellano arma una "
          "subordinada entera.",
+"parts": [
+ {"h": "fare + infinito: quién hace qué", "blocks": [0, 1, 2, 3],
+  "match": r"^(?!.*(lasciare|Lascia|Consejos|Problemas de viaje|Dejo que)).*\S"},
+ {"h": "lasciare y expresiones con fare", "blocks": [4, 5],
+  "match": r"lasciare|Lascia|Consejos|Problemas de viaje|Dejo que"},
+],
 "blocks": [
  {"h": "fare + infinito",
   "r": "*fare* conjugado + infinitivo, **sin nada en el medio**: los dos "
@@ -24,6 +30,7 @@ LESSONS = {
          ["Si è fatta operare.", "Se operó."]]},
 
  {"h": "Quién hace qué",
+  "q": [{"prompt": "Reemplazá «il libro» y «a Marco».", "stem": "Faccio leggere il libro a Marco → ___ faccio leggere.", "answer": "Glielo", "options": ["Glielo", "Lo gli", "Gli"]}, {"prompt": "Reemplazá «Marco».", "stem": "Faccio lavorare Marco → ___ faccio lavorare.", "answer": "Lo", "options": ["Lo", "Gli", "Le"]}],
   "r": "Si el infinitivo no tiene objeto propio, el que ejecuta es objeto "
        "**directo**. Si ya lleva objeto directo, el que ejecuta pasa a "
        "**indirecto**, con *a*.",
@@ -229,6 +236,12 @@ LESSONS = {
 "intro": "Vas a comprimir dos frases en una con gerundio y participio, el "
          "recurso estrella de la prosa italiana donde el castellano pone "
          "«como», «cuando» o «después de que».",
+"parts": [
+ {"h": "El gerundio", "blocks": [0, 1, 2, 3],
+  "match": r"^(?!.*(particip|concisa|terminación)).*(gerundio|mientras|Cómo lo hacés|\bstare\b|ando\b|endo\b|Continuo a)"},
+ {"h": "Los participios", "blocks": [4, 5],
+  "match": r"particip|concisa|terminación"},
+],
 "blocks": [
  {"h": "El gerundio simple",
   "r": "*-ando* para *-are*, *-endo* para *-ere* e *-ire*. Irregulares por "
@@ -502,6 +515,7 @@ LESSONS = {
          "la estructura que esperan los examinadores.",
 "blocks": [
  {"h": "Conectores de registro alto",
+  "q": [{"prompt": "¿Qué conector sirve para oponer?", "answer": "tuttavia", "options": ["tuttavia", "inoltre", "pertanto"]}, {"prompt": "¿Qué conector expresa una consecuencia?", "answer": "pertanto", "options": ["pertanto", "altresì", "ovvero"]}],
   "r": "Un conector por función, **variado**: escribir culto es elegir bien "
        "el conector, no escribir difícil.",
   "table": {"head": ["Función", "Formas"],
@@ -560,6 +574,12 @@ LESSONS = {
 50: {
 "intro": "Vas a esquivar la última trampa, la que parece más fácil: los "
          "falsos amigos, y a elegir el registro justo para cada situación.",
+"parts": [
+ {"h": "Falsos amigos y pares que el castellano no distingue", "blocks": [0, 1, 2],
+  "match": r"significa|falso|Verdadero|burro|salire"},
+ {"h": "Registro y preposiciones de nivel", "blocks": [3, 4],
+  "match": r"preposici|\bdi\b|\bda\b|\bsu\b|\bfra\b"},
+],
 "blocks": [
  {"h": "Los clásicos que hay que saber",
   "r": "Se parecen a una palabra castellana y **significan otra cosa**. "
@@ -604,6 +624,7 @@ LESSONS = {
                      ["andare via", "irse", "también andarsene"]]}},
 
  {"h": "Palabras que el castellano no distingue",
+  "q": [{"prompt": "¿Cuál está bien? «¿Venís a la fiesta? — Sí, voy.»", "answer": "Sì, vengo.", "options": ["Sì, vengo.", "Sì, vado.", "Sì, sto."]}, {"prompt": "¿Cuál está bien? «¿Conocés a Marco?»", "answer": "Conosci Marco?", "options": ["Conosci Marco?", "Sai Marco?", "Conosci a Marco?"]}],
   "r": "Donde el castellano usa una palabra, el italiano **elige entre dos**.",
   "table": {"head": ["Par", "Diferencia"],
             "rows": [["sapere / conoscere", "saber un dato / conocer a alguien o un lugar"],
@@ -627,11 +648,20 @@ LESSONS = {
                      ["dai!", "su!", "la prego"]]},
   "tip": "Reconocer que *un casino* es coloquial y *notevole confusione* es "
          "de informe es exactamente lo que evalúa el examen oral."},
+ {"h": "Preposiciones de nivel: da, di, a, fra", "r": "*da*: para qué sirve algo o un rasgo (*scarpe da ginnastica*, *la ragazza dagli occhi verdi*); *di*, el material (*una giacca di lana*); *a*, el dibujo (*una camicia a righe*).", "ex": [["una tazza da tè / una tazza di tè", "una taza para té / una taza de té (llena)"], ["una gonna a quadri", "una pollera a cuadros"], ["Torno fra un'ora.", "Vuelvo dentro de una hora."]], "warn": "*fra* o *tra* + tiempo = dentro de (*torno fra un'ora*). *Vado da Marco* = voy a lo de Marco; *vado a Roma*, *vado in centro*."},
 ]},
 
 51: {
 "intro": "Sin teoría nueva: vas a repasar con listas de control todo lo que "
          "suele fallar y volver a las semanas donde algo no te cierre.",
+"parts": [
+ {"h": "Lista de control: congiuntivo", "blocks": [0],
+  "match": r"congiuntivo|subjuntivo|subordinante|«se»"},
+ {"h": "Lista de control: tiempos", "blocks": [1],
+  "match": r"condicional|condizionale|futuro|imperfetto|passato|remoto|puedo / podría"},
+ {"h": "Pronombres y las faltas más caras", "blocks": [2, 3, 4],
+  "match": r"pronombre|\bne\b|\bci\b"},
+],
 "blocks": [
  {"h": "Lista de control: congiuntivo",
   "r": "Opinión, duda, deseo, emoción o voluntad → **congiuntivo**. Recorré "
@@ -658,6 +688,7 @@ LESSONS = {
                      ["hay que hacerlo", "va fatto / bisogna farlo"]]}},
 
  {"h": "Lista de control: pronombres",
+  "q": [{"prompt": "¿Cuál está bien? «Te lo digo.»", "answer": "Te lo dico.", "options": ["Te lo dico.", "Ti lo dico.", "Lo ti dico."]}, {"prompt": "¿Cuál está bien? «Tengo tres» (hermanos).", "answer": "Ne ho tre.", "options": ["Ne ho tre.", "Ho tre.", "Li ho tre."]}],
   "r": "Pronombres **delante** del verbo conjugado; **pegados** al "
        "infinitivo, gerundio e imperativo informal.",
   "table": {"head": ["Punto", "Regla"],
@@ -698,8 +729,15 @@ LESSONS = {
 "intro": "El examen del año: cuarenta preguntas, todo el programa, sin "
          "ayudas. Esta hoja es el mapa completo de lo que cubriste en 52 "
          "semanas.",
+"parts": [
+ {"h": "Repaso: el sistema verbal y las cinco reglas", "blocks": [0, 1],
+  "match": r"presente|essere|avere|plural|artículo|masculino|adjetivo|passato prossimo|futuro|condicional simple|condizionale presente|imperfetto|pronombre|reflexiv|piace"},
+ {"h": "Repaso: lo que separa un B2 de un C1", "blocks": [2, 3, 4],
+  "match": r"\S"},
+],
 "blocks": [
  {"h": "El sistema verbal entero",
+  "q": [{"prompt": "¿Qué forma es «che io parlassi»?", "answer": "congiuntivo imperfetto", "options": ["congiuntivo imperfetto", "condizionale presente", "indicativo imperfetto"]}, {"prompt": "¿Qué forma toma el imperativo de Lei?", "answer": "la del congiuntivo presente", "options": ["la del congiuntivo presente", "la del indicativo presente", "la del condizionale"]}],
   "r": "Cuatro modos finitos y tres formas no finitas. **Todos** entran en "
        "el examen.",
   "table": {"head": ["Modo", "Tiempos"],
@@ -710,6 +748,7 @@ LESSONS = {
                      ["Formas no finitas", "infinito, gerundio, participio (simples y compuestos)"]]}},
 
  {"h": "Las cinco reglas que sostienen todo",
+  "q": [{"prompt": "Futuro visto desde el pasado.", "stem": "Disse che ___.", "answer": "sarebbe venuto", "options": ["sarebbe venuto", "verrebbe", "verrà"]}, {"prompt": "Completá el período hipotético.", "stem": "Se ___ tempo, verrei.", "answer": "avessi", "options": ["avessi", "avrei", "ho avuto"]}],
   "r": "Si dudás, volvé a estas cinco: resuelven **la mayoría** de las "
        "preguntas.",
   "table": {"head": ["Qué decide", "Regla"],

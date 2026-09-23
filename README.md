@@ -190,6 +190,29 @@ lenguas y en psicología de la memoria:
 | Aprender del error propio, con análisis | Perfil de errores y Clínica | Metcalfe 2017 |
 | Interferencias típicas del hispanohablante (preposiciones, auxiliar, «a» personal) | Categorías del diagnóstico y *Trova l'errore* | Calvi; Schmid; corpus VALICO |
 
+### El repaso según el error
+
+No todos los errores pesan lo mismo en el ripasso. Un desliz (un tipeo, una
+tilde) deja la tarjeta avanzando; un error de regla (auxiliar, concordancia,
+modo) la vuelve a empezar; un error de vocabulario también, pero pierde menos
+«facilidad» y vuelve antes. Y lo que respondiste bien tres veces seguidas,
+en días distintos (1, 3 y 8 días), se retira del repaso. En la simulación
+del año la cola de ripasso nunca pasa de unas 150 tarjetas.
+
+### Opciones que no regalan la respuesta
+
+En una pregunta de opción múltiple las opciones se parecen: la misma frase
+con un error típico (*La ragazze*, *Le ragaze*), las otras formas del mismo
+verbo (*sono / sei / siamo*), los otros miembros de la misma clase de palabra
+(*dove / quando / come*; *a / in / da*). Nunca otra frase que se descarta por
+su significado. Vale para todos los tipos: en «Completá la tabla» las otras
+celdas más parecidas a la respuesta (y nunca la única que repite palabras de
+la fila), en «Completá la regla» formas de la misma clase, en «¿Qué
+significa?» palabras del mismo campo (*fratello*: hermano / hija / tío) y del
+mismo tipo, en las escuchas y en el Lampo las frases que más se parecen.
+`test_game.js` lo controla en las lecciones y en las versiones de
+reconocimiento.
+
 ### Tu memoria
 
 Todo queda en el `localStorage` del teléfono. La app le pide al navegador
@@ -248,9 +271,12 @@ tiene **3 estrellas**, una por misión:
    semana en el *Allenamento*: 12 preguntas con ejercicios del libro, banco
    propio y gimnasio de verbos, cinco vidas y combo de XP (el gimnasio y las
    palabras no cuentan para la estrella).
-3. **Dominala** — 85% de acierto en las **últimas 30** respuestas de la semana
-   (ventana móvil, no el histórico) y al menos el 60 % de los ejercicios de la
-   semana vistos. El gimnasio y las palabras no cuentan para las estrellas.
+3. **Dominala** — **una sola sesión** de 30 preguntas de toda la semana, sin
+   vidas, con lo no visto primero: con 85 % de acierto se gana. Cuenta la
+   primera respuesta de cada pregunta (la segunda vuelta, más fácil, es para
+   aprender); lo escrito se escribe, no se reconoce. Si no llega, el briefing
+   muestra el mejor intento. El gimnasio y las palabras no cuentan para las
+   estrellas.
 
 **La semana siguiente se abre al completar todas las misiones de la semana
 menos *Dominala***: la lección, las palabras, las 20 correctas, la escena de
@@ -329,8 +355,8 @@ calcula **la primera semana cuya teoría lo cubre todo**:
 ### Lecciones en partes
 
 Una semana cargada no se estudia de una sentada. Las semanas 1, 2, 3, 5, 6,
-9, 11, 12, 15, 17, 30 y 42 tienen la lección dividida en **partes** (dos a
-cuatro), cada una con sus propios bloques de teoría y sus propios ejercicios:
+7, 8, 9, 10, 11, 12, 15, 17, 18, 19, 21, 23, 24, 28, 30, 33, 34, 40, 42, 44,
+50 y 51 tienen la lección dividida en **partes** (dos a cuatro), cada una con sus propios bloques de teoría y sus propios ejercicios:
 en la semana 3, por ejemplo, *Determinados*, *Indeterminados*, *Preposiciones
 articuladas* y *Partitivo y usos del artículo*. En el percorso cada parte es
 una misión («Lección 2/4: Indeterminados»), y «A entrenar esta parte» arma
@@ -341,6 +367,51 @@ Las partes se declaran en `tools/lessons/` (`"parts"`: título, bloques y una
 expresión regular que reparte los ejercicios por su consigna);
 `tools/build_course.py` comprueba que cubran todos los bloques una sola vez y
 manda lo que no encaja en ninguna a la última parte.
+
+### Antes del jefe
+
+Las semanas de jefe (13, 26, 39 y 52) traen la teoría de la estación en
+repasos por tema («Repaso: pronombres, passato prossimo, reflexivos»), cada
+uno con sus ejercicios, y la misión **🩹 Tus puntos débiles**: una ronda con
+lo que fallaste de la estación y lo que casi no viste. Son opcionales: la
+semana siguiente la abre el jefe. El jefe pregunta más de las semanas donde
+acertaste menos (hasta tres turnos por semana en vez de uno) y, dentro de
+cada semana, primero lo que fallaste.
+
+### ✍️ Scrivi: tu texto de la semana
+
+Cada semana, menos las de jefe, pide un texto corto con la función de la
+semana: presentarte (semana 1), contar el fin de semana (11), pedir una
+habitación con cortesía (20), opinar con congiuntivo (25), contar la vida de
+Garibaldi en passato remoto (37), un texto argumentativo formal (49). La
+consigna pide un mínimo de palabras (15 en A1, 60 en C1) y las estructuras de
+la semana («4 verbos en passato prossimo»), y la lista se va tildando
+mientras escribís. **Revisar** marca en el texto los errores que el
+hispanohablante comete de verdad, con la explicación: español metido
+(*cansado*), artículo que no va con el sustantivo (*una amica*, *la
+problema*), *ho andato*, *mi ho lavato*, «a» personal, *il mio padre*, *mio
+libro*, *a il*, *se avrei*, *penso che è* (desde el congiuntivo), *molto
+pasta*, *c'è due*, *lui e alto*, *sono trenta anni*, dobles y tildes. Después
+podés ver un texto modelo. Lo que entregás cuenta como **output** en las
+cuatro cuerdas, suma xp y los errores van al perfil de la clínica. La misión
+es obligatoria para abrir la semana siguiente: es el único lugar del curso
+donde escribís sin respuesta cerrada.
+
+**Segunda opinión de LanguageTool.** Al revisar, la app también manda el
+texto a la API pública y gratuita de LanguageTool (sin clave; unas 20
+consultas por minuto, de sobra para una persona). Lo que encuentra se suma a
+la lista, con su mensaje en italiano y la corrección propuesta («Gramática
+(LanguageTool): … → *piena*»); lo que el corrector propio ya marcó, con su
+explicación en castellano, no se repite. La revisión local aparece al
+instante y la de LanguageTool cuando llega; sin conexión o sin cupo, queda
+solo la local. Se puede apagar con la casilla de la pantalla, porque el
+texto se envía a sus servidores.
+
+El corrector (`docs/js/scrivi.js`) usa como diccionario todo el italiano del
+curso (respuestas, frases, lecturas, banco y glosario): una palabra que no
+conoce no se marca como error, porque en un texto libre es más probable que
+sea rara que mal escrita. `tools/test_scrivi.js` comprueba que los 48 textos
+modelo cumplan su consigna sin marcas y que los errores típicos se detecten.
 
 `test_game.js` verifica que ninguna semana pida nada antes de su teoría, y
 `python3 tools/sillabo.py` lista qué ejercicio esperó a qué semana y por qué.
@@ -469,6 +540,7 @@ node tools/test_game.js         # integridad del curso, corrección, SRS, progre
 node tools/test_frasi.js        # frases, ejercicios, pausa, lampo, racha, escudos, cofre
 python3 tools/build_bank.py     # valida y compila el banco
 node tools/test_diagnosi.js     # el diagnóstico reconoce los errores típicos
+node tools/test_scrivi.js       # los textos modelo de Scrivi cumplen; el corrector marca los errores típicos
 node tools/sim_carriera.js      # una carrera entera: carga por semana, ripasso, cobertura, jefes
 ```
 

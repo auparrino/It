@@ -1306,7 +1306,10 @@
      "Non so come funziona: che faccio?",
      "Non so come funziona questo: cosa faccio?",
      "Non so come funziona, cosa faccio?",
-     "Non so come funziona, che cosa faccio?"
+     "Non so come funziona, che cosa faccio?",
+     "Non so come funzioni: cosa faccio?",
+     "Non so come funzioni: che cosa faccio?",
+     "Non so come funzioni, cosa faccio?"
     ],
     "note": "Come introduce la pregunta indirecta de modo."
    }
@@ -1515,7 +1518,9 @@
     "type": "translate",
     "stem": "¿Cuánta salsa querés? (tu)",
     "answer": "Quanto sugo vuoi?",
-    "alt": [],
+    "alt": [
+     "Quanta salsa vuoi?"
+    ],
     "note": "Sugo es masculino singular: quanto."
    },
    {
@@ -2382,7 +2387,9 @@
     "stem": "No necesito nada.",
     "answer": "Non ho bisogno di niente.",
     "alt": [
-     "Non ho bisogno di nulla."
+     "Non ho bisogno di nulla.",
+     "Non mi serve niente.",
+     "Non mi serve nulla."
     ],
     "note": "Non … niente/nulla."
    },

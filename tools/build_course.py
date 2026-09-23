@@ -782,9 +782,13 @@ def check_lesson(week: int, lesson: dict) -> list:
     blocks = lesson.get("blocks") or []
     if len(blocks) < 3:
         bad.append("settimana %s: solo %d blocchi" % (week, len(blocks)))
-    known = {"h", "r", "table", "ex", "warn", "tip", "more"}
+    known = {"h", "r", "table", "ex", "warn", "tip", "more", "q"}
     for i, b in enumerate(blocks, 1):
         extra = set(b) - known
+        # «q»: checks written by hand, 3 options with the answer among them
+        for q in b.get("q") or []:
+            if q.get("answer") not in (q.get("options") or []) or len(set(q.get("options") or [])) != 3:
+                bad.append("settimana %s blocco %d: chequeo «q» mal armado: %s" % (week, i, q.get("prompt")))
         if extra:
             bad.append("settimana %s blocco %d: chiavi ignote %s"
                        % (week, i, sorted(extra)))
@@ -1187,7 +1191,10 @@ def main() -> None:
             ans = str(it.get("answer") or "").strip()
             home = len(parts) - 1
             for k, p in enumerate(parts):
-                if re.search(p["match"], text, re.I) or re.search(p["match"], ans, re.I):
+                # The answer alone may name the part («il», «uno»), except for
+                # patterns that exclude by lookahead: those read the whole text.
+                if re.search(p["match"], text, re.I) or (
+                        not p["match"].startswith("^(?!") and re.search(p["match"], ans, re.I)):
                     home = k
                     break
             compiled[home]["items"].append(iid)

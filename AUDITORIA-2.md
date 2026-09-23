@@ -227,3 +227,52 @@ clases». Detalle en el README («Cómo se acomoda a los cursos oficiales»).
 carrera: 52 semanas, 4 jefes al primer intento, *Madrelingua* nivel 44, cola
 de ripasso máx. 710 / final 368, 242 ejercicios nunca servidos (188 fuera de
 las sfide), 0 errores. Service worker en v23.
+
+## Vuelta 4: escribir, repasar mejor, opciones parecidas
+
+Pedido del usuario: hacer los puntos 2 a 8 de la lista de mejoras. En el
+medio mandó dos capturas.
+
+### Las dos capturas
+
+- **«Le città ___ (grande) → grandi».** La corrección está bien: *città* no
+  cambia en plural, el artículo *le* dice que es plural, y los adjetivos en
+  *-e* hacen *-i* en plural.
+- **Opciones parecidas.** La traducción con *La ragazze / Le ragazze / Le
+  ragaze* es el formato correcto. Lo que el usuario vio en otras preguntas
+  («todas distintas salvo la que aplica la regla») existía: las preguntas de
+  la lección «¿Cómo se dice en italiano?» usaban como distractores otras
+  frases del bloque (90 % de esas preguntas se contestaban por el
+  significado), la versión «más fácil» de un conjugar mezclaba otros verbos
+  (la mitad de esas preguntas), y algunas tomaban palabras en castellano de la consigna (*vos,
+  usted*) o de la pista (*amiga, amigas*). Ahora las trampas cubren más
+  errores (preposición articulada de la misma familia, *è/e*, tilde,
+  preposición simple, pronombre, la otra vocal final, la doble), un conjugar
+  ofrece las otras personas del mismo verbo, una palabra de clase cerrada
+  ofrece su clase (*dove / quando / come*), y otra frase solo entra si
+  comparte la mitad de las palabras. Barrido de todas las preguntas: las
+  frases de la lección y las traducciones, 0 % con distractores regalados.
+  `test_game.js` lo controla.
+
+### Lo que se hizo
+
+| Punto | Qué quedó |
+|---|---|
+| 2. Producción libre | Misión **✍️ Scrivi** en 48 semanas: consigna con la función de la semana, mínimo de palabras, estructuras que se tildan mientras escribís, corrector de texto libre con 15 tipos de error del hispanohablante, texto modelo. Obligatoria para avanzar. |
+| 3. Repasos y jefes | Semanas de jefe con repasos por tema (lección en partes) y **Tus puntos débiles**; el jefe pregunta más de lo que peor te fue. Semanas 50 y 51 en partes; la 50 suma un bloque de preposiciones de nivel, porque sus ejercicios eran de eso y la lección no lo explicaba. |
+| 4. Partes | 27 semanas con la lección en partes (antes 12). |
+| 5. Confusiones | 40 pares de palabras italianas que se confunden (*volta/tempo*, *largo/lungo*, *ancora/già*, *presto/subito/pronto*, *buono/bravo/bene*, *fa/da*…) con su diferencia. |
+| 6. Repaso | El desliz no reinicia la tarjeta; tres aciertos seguidos la retiran. Cola máxima del año: de 641 a 154. |
+| 7. Revisión | Revisión completa de 2.919 ejercicios y 864 oraciones: 0 errores de italiano; 13 arreglos (una pista en masculino, 11 variantes correctas que faltaban, una frase ambigua). |
+| 8. Arreglos chicos | La guardia contra el doble toque solo descarta un toque en el mismo lugar; 22 bloques de teoría con chequeo escrito a mano; los nombres propios en castellano (*Isabel → Elisabetta*) tienen su mensaje. |
+
+### Verificación
+
+`test_game` 42.596 · `test_frasi` 29.319 · `test_diagnosi` 6.161 ·
+`test_conjugator` 1.442 · `test_scrivi` 184 · `check_lessons` 0 problemas.
+Simulación del año: 52 semanas, 4 jefes al primer intento, *Madrelingua*
+nivel 43, 100 horas, cola de ripasso máx. 154 / final 0, ejercicios nunca
+servidos 155 (antes 245), 0 errores. En el navegador: la misión Scrivi de la
+semana 11 marca los siete errores de un texto de prueba y guarda texto, xp y
+perfil de errores; la semana 13 muestra los repasos opcionales y la ronda de
+puntos débiles. Service worker en v24.

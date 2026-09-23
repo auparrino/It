@@ -173,13 +173,45 @@
                    da: ["dal", "dallo", "dalla", "dall'", "dai", "dagli", "dalle"],
                    in: ["nel", "nello", "nella", "nell'", "nei", "negli", "nelle"],
                    su: ["sul", "sullo", "sulla", "sull'", "sui", "sugli", "sulle"] };
+  var WORD_CLASSES = [
+    ["chi", "che", "cosa", "come", "dove", "quando", "quanto", "quanta", "quanti", "quante", "quale", "quali", "perché"],
+    ["a", "di", "da", "in", "su", "con", "per", "tra"],
+    ["lo", "la", "li", "le", "gli", "ne", "ci"],
+    ["mi", "ti", "si", "ci", "vi"],
+    ["io", "tu", "lui", "lei", "noi", "voi", "loro"],
+    ["san", "santo", "santa", "sant'"], ["buon", "buono", "buona", "buon'"], ["bel", "bello", "bella", "bell'", "bei", "begli", "belle"],
+    ["gran", "grande", "grand'", "grandi"],
+    ["me", "te", "lui", "lei", "noi", "voi", "loro", "sé"],
+    ["mio", "mia", "miei", "mie", "tuo", "tua", "tuoi", "tue", "suo", "sua", "suoi", "sue", "nostro", "nostra", "nostri", "nostre", "vostro", "vostra", "vostri", "vostre", "loro"],
+    ["questo", "questa", "questi", "queste", "quel", "quello", "quella", "quei", "quegli", "quelle"],
+    ["ma", "però", "quindi", "perché", "invece", "infatti", "anche", "mentre", "siccome", "perciò", "comunque", "dunque", "tuttavia", "allora", "cioè", "oppure"],
+    ["che", "cui", "chi", "il quale", "la quale"],
+    ["niente", "nessuno", "mai", "più", "neanche", "affatto", "mica"],
+    ["molto", "molta", "molti", "molte", "tanto", "troppo", "poco", "poca", "pochi", "poche"],
+    ["sempre", "mai", "spesso", "già", "ancora", "appena", "ormai", "subito"]
+  ];
   function wordVariants(it) {
-    var ans = String(it.answer || "").trim(), low = ans.toLowerCase(), out = [];
+    var ans = String(it.answer || "").trim().replace(/’/g, "'"), low = ans.toLowerCase(), out = [];
     if (!ans || /\s/.test(ans) || ans.length < 2) return out;
     var push = function (v) { if (v && v.toLowerCase() !== low && out.indexOf(v) < 0) out.push(v); };
     if (ART_SG.indexOf(low) >= 0) shuffle(ART_SG).forEach(push);
     else if (ART_PL.indexOf(low) >= 0) shuffle(ART_PL).forEach(push);
     Object.keys(PREP_ART).forEach(function (p) { if (PREP_ART[p].indexOf(low) >= 0) shuffle(PREP_ART[p]).forEach(push); });
+    // A word of a closed class: the other members of the class (dove →
+    // quando, come, quanto; ma → però, quindi), never another verb.
+    WORD_CLASSES.forEach(function (cl) { if (cl.indexOf(low) >= 0) shuffle(cl).forEach(push); });
+    // An imperative or infinitive with a pronoun glued on (Fagli, Lasciala):
+    // the same verb with the other pronouns.
+    var cm = /^(.{2,}?)(glielo|gliela|gli|lo|la|li|le|ne)$/.exec(low);
+    if (cm && /_{3,}/.test(it.stem || "") && out.length < 3) {
+      var st = cm[1], mono = /^(fa|da|di|sta|va)$/.test(st.replace(/(.)\1$/, "$1"));
+      var st1 = st.replace(/([lnm])\1$/, "$1");
+      ["lo", "la", "li", "le", "gli", "ne"].forEach(function (c) {
+        if (c === cm[2]) return;
+        var v = (mono && c !== "gli" ? st1 + c.charAt(0) : st1) + c;
+        push(ans[0] !== low[0] ? v.charAt(0).toUpperCase() + v.slice(1) : v);
+      });
+    }
     if (out.length >= 3) return out;
     // Only for nouns, adjectives and articles: a verb form with another
     // vowel («siame» for «siamo») is not a form anybody writes, and the
@@ -192,6 +224,10 @@
     // The word in the stem («fantasma → ___», «(parco)»): left unchanged, or
     // with the Spanish plural; then the answer with another ending vowel,
     // then without its double consonant.
+    var itaW = root.Diagnosi && root.Diagnosi.util ? root.Diagnosi.util.isItalian : null;
+    // «(mamá)», «(amiga)»: a Spanish gloss is not the word to transform.
+    if (base && /[áéíóúñ]/.test(base)) base = null;
+    if (base && itaW && !itaW(base.toLowerCase())) base = null;
     if (base && base.toLowerCase() !== low) { push(base); push(base + "s"); }
     var stem = ans.replace(/[aeio]$/, "");
     if (stem !== ans) shuffle(["a", "e", "i", "o"]).forEach(function (v) { push(stem + v); });
@@ -212,13 +248,41 @@
     }
     // 0. the alternatives the prompt itself names («o» (conjunción) o «ho»
     //    (verbo)): that contrast is the whole point of the exercise
-    (String(it.prompt || "").match(/«([^»]{1,20})»/g) || []).forEach(function (q) { add(q.replace(/[«»]/g, "")); });
-    // 0b. a book conjugation item: the other answers asked with the same
-    //     prompt are the other persons of the same verb
-    if (it.type === "conjugate" && pool && opts.length < 3) {
-      shuffle(pool.filter(function (x) {
-        return x && x.id !== it.id && x.type === "conjugate" && x.prompt === it.prompt && x.answer && !/\|/.test(x.answer);
-      })).forEach(function (x) { if (opts.length < 3) add(String(x.answer)); });
+    //    (only for a one- or two-word answer: a sentence is not «o» or «ho»)
+    var itaQ = root.Diagnosi && root.Diagnosi.util ? root.Diagnosi.util.isItalian : function () { return true; };
+    if (answer.trim().split(/\s+/).length <= 2)
+      (String(it.prompt || "").match(/«([^»]{1,20})»/g) || []).forEach(function (q) {
+        q = q.replace(/[«»]/g, "");
+        // «vos», «usted»: Spanish named in the prompt is not an option
+        if (q.split(/\s+/).every(function (w) { return itaQ(w.toLowerCase().replace(/’/g, "'")); })) add(q);
+      });
+    // 0b. a verb in parentheses («Tu ___ (frequentare)»): the other persons
+    //     of that same verb in the same tense, never another verb.
+    var infM = /\(([a-zà-ù]+(?:are|ere|ire|rre|rsi))\)/i.exec(it.stem || "");
+    if (infM && Conj && opts.length < 3) {
+      var inf = infM[1].toLowerCase(), forms = null;
+      if (!Conj.VERBS[inf]) { try { Conj.register(inf, {}); } catch (e) { /* */ } }
+      (Conj.ALL_TENSES || Conj.SIMPLE_TENSES).forEach(function (t) {
+        if (forms) return;
+        try {
+          var f = Conj.conjugate(inf, t);
+          if (f.some(function (x) { return norm(x) === norm(answer) || norm(x.split(" ").slice(1).join(" ")) === norm(answer) || norm(x.split(" ").pop()) === norm(answer); })) forms = f;
+        } catch (e) { /* */ }
+      });
+      var multi = answer.trim().split(/\s+/).length;
+      addForms(forms, multi);
+    }
+    // 0c. a conjugated form without the infinitive in sight (___ brutto
+    //     tempo → fa): the other persons of the verb the answer belongs to.
+    if (!infM && it.type === "conjugate" && Conj && root.Diagnosi && opts.length < 3) {
+      var vf = root.Diagnosi.verbForms(norm(answer).split(" ").pop())[0];
+      if (vf) { try { addForms(Conj.conjugate(vf.lemma, vf.tense), answer.trim().split(/\s+/).length); } catch (e) { /* */ } }
+    }
+    function addForms(forms, multi) {
+      if (forms) shuffle(forms).forEach(function (x) {
+        var xs = x.split(" ");
+        if (opts.length < 3) add(xs.length > multi ? xs.slice(xs.length - multi).join(" ") : x);
+      });
     }
     // 1. conjugation: the same verb in other persons
     if (it.src === "coniugatore" && Conj) {
@@ -229,7 +293,11 @@
     }
     // 2. the typical errors on the answer itself
     if (opts.length < 3 && Lez) {
-      Lez.traps(answer, Math.random, week || 52).slice(0, 3).forEach(add);
+      var itaOk = root.Diagnosi && root.Diagnosi.util ? root.Diagnosi.util.isItalian : null;
+      var tr = Lez.traps(answer, Math.random, week || 52, itaOk);
+      tr.slice(0, 3).forEach(add);
+      // Only one mistake possible: the next option carries two.
+      if (opts.length < 2 && tr.length) Lez.traps(tr[0], Math.random, week || 52, itaOk).slice(0, 2).forEach(add);
     }
     // 2b. the same word in another shape (never another word that merely
     //     looks like a plural next to the only plural of the right word)
@@ -251,8 +319,14 @@
         var xa = String(x.answer);
         if (it.topic && x.topic && x.topic !== it.topic) return false;
         if (short) return xa.indexOf(" ") < 0 && Math.abs(xa.length - len) <= 2;
+        // One word in a gap tests a rule: only a near miss of the same word.
+        if (nWords === 1 && /_{3,}/.test(it.stem || "") && xa.indexOf(" ") < 0 &&
+            Engine && Engine.editDistance && Engine.editDistance(norm(xa), norm(answer)) > Math.max(2, answer.length / 2)) return false;
         // «la gente» against «le genti» or «la casa», never against «appena»
         if (nWords <= 3 && xa.trim().split(/\s+/).length !== nWords) return false;
+        // Another sentence only if it shares half the words: otherwise its
+        // meaning gives the right one away.
+        if (nWords >= 2 && shared(xa) < Math.ceil(nWords / 2)) return false;
         return Math.abs(xa.length - len) <= Math.max(4, len / 2);
       });
       shuffle(cands).sort(function (a, b) { return shared(b.answer) - shared(a.answer); })
@@ -305,6 +379,49 @@
     });
   }
 
+  // What kind of word: verb, noun, adjective, adverb, expression.
+  function wordKind(it, es) {
+    var D = root.Diagnosi && root.Diagnosi.DATA;
+    var first = String(es || "").split(/[,;/(]/)[0].trim().toLowerCase();
+    if (/(are|ere|ire|rre|rsi)$/.test(it) && /(ar|er|ir|ír)(se|lo|la|le)?$/.test(first)) return "v";
+    if (/^[¡¿]/.test(es || "")) return "x";
+    if (/mente$/.test(it)) return "adv";
+    if (D && D.nouns && (D.nouns[it] || D.nounsByPlural[it])) return "n";
+    if ((D && D.adj && D.adj[it]) || /(at|ut|it)[oaie]$/.test(it) || /(oso|osa|ivo|iva|ico|ica)$/.test(it)) return "a";
+    return "o";
+  }
+  // Closed fields by the Spanish meaning: numbers, days, colours, family…
+  var FIELDS = [
+    ["num", /^(uno|dos|tres|cuatro|cinco|seis|siete|ocho|nueve|diez|once|doce|trece|catorce|quince|veinte|treinta|cuarenta|cincuenta|cien|mil|millón|docena|centenar)\b/],
+    ["ord", /^(primer[oa]?|segund[oa]|tercer[oa]?|cuart[oa]|quint[oa]|sext[oa]|séptim[oa]|octav[oa]|noven[oa]|décim[oa]|undécim[oa]|vigésim[oa]|centésim[oa]|último)\b/],
+    ["dia", /^(lunes|martes|miércoles|jueves|viernes|sábado|domingo)\b/],
+    ["mes", /^(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre)\b/],
+    ["hora", /^(mañana|tarde|noche|mediodía|medianoche|madrugada|hoy|ayer|anteayer|pasado mañana|esta noche)\b/],
+    ["dir", /^(norte|sur|este|oeste|derecha|izquierda|derecho|arriba|abajo|adelante|atrás)\b/],
+    ["color", /^(rojo|azul|verde|amarillo|blanco|negro|gris|marrón|rosa|violeta|celeste|naranja)\b/],
+    ["fam", /^(madre|padre|hermano|hermana|hijo|hija|tío|tía|abuel[oa]|prim[oa]|espos[oa]|marido|mujer|novi[oa]|sobrin[oa]|niet[oa]|suegr[oa]|cuñad[oa]|mamá|papá|padres|parientes)\b/]];
+  function fieldOf(es) {
+    var e = String(es || "").toLowerCase().trim();
+    for (var i = 0; i < FIELDS.length; i++) if (FIELDS[i][1].test(e)) return FIELDS[i][0];
+    return null;
+  }
+
+  // The topic of a noun in the bank (casa, famiglia, cibo…).
+  var TOPIC = null;
+  function wordTopic(it) {
+    if (!TOPIC) {
+      TOPIC = {};
+      var b = root.Banca && root.Banca.loaded() ? root.Banca.bank() : null;
+      ((b && b.nouns) || []).forEach(function (n) { if (n[4]) { TOPIC[n[0]] = n[4]; TOPIC[n[2]] = n[4]; } });
+    }
+    return TOPIC[String(it).replace(/^(il|lo|la|l'|i|gli|le)\s+/, "")] || null;
+  }
+  function topicGlosses(topic, v) {
+    var b = root.Banca && root.Banca.loaded() ? root.Banca.bank() : null;
+    return ((b && b.nouns) || []).filter(function (n) { return n[4] === topic && n[0] !== v[0] && n[3] !== v[1]; })
+      .map(function (n) { return n[3]; });
+  }
+
   function vocabItem(word, state) {
     var e = VOC && VOC[word];
     if (!e) return null;
@@ -314,11 +431,22 @@
       var near = Object.keys(VOC).map(function (k) { return VOC[k]; }).filter(function (x) {
         return x.v[0] !== v[0] && x.v[1] !== v[1] && Math.abs(x.week - e.week) <= 3;
       });
-      // same kind of word: a verb among nouns gives itself away
-      var isVerb = function (it) { return /(are|ere|ire|rre|rsi)$/.test(it); };
-      var same = shuffle(near.filter(function (x) { return isVerb(x.v[0]) === isVerb(v[0]); }));
+      // Same field first (hermano among hija, tío, abuelo), then the same
+      // kind of word: a verb among nouns, or «ventana» next to «hermano»,
+      // gives itself away.
+      var kind = wordKind(v[0], v[1]), topic = wordTopic(v[0]), fld = fieldOf(v[1]);
+      // the whole list when the week has too few of the same kind
+      var all = Object.keys(VOC).map(function (k) { return VOC[k]; }).filter(function (x) { return x.v[0] !== v[0] && x.v[1] !== v[1]; });
+      var ranked = shuffle(all).map(function (x) {
+        return { x: x, s: (fld && fieldOf(x.v[1]) === fld ? 8 : 0) + (topic && wordTopic(x.v[0]) === topic ? 4 : 0) +
+                          (wordKind(x.v[0], x.v[1]) === kind ? 3 : 0) + (Math.abs(x.week - e.week) <= 3 ? 1 : 0) +
+                          (Math.abs(x.v[1].length - v[1].length) <= 6 ? 1 : 0) };
+      }).sort(function (a, b) { return b.s - a.s; });
       var opts = [v[1]];
-      same.concat(shuffle(near)).forEach(function (x) { if (opts.length < 4 && opts.indexOf(x.v[1]) < 0) opts.push(x.v[1]); });
+      var field = topic ? topicGlosses(topic, v) : [];
+      ranked.filter(function (r) { return r.s >= 4; }).forEach(function (r) { if (opts.length < 4 && opts.indexOf(r.x.v[1]) < 0) opts.push(r.x.v[1]); });
+      shuffle(field).forEach(function (g) { if (opts.length < 4 && opts.indexOf(g) < 0) opts.push(g); });
+      ranked.forEach(function (r) { if (opts.length < 4 && opts.indexOf(r.x.v[1]) < 0) opts.push(r.x.v[1]); });
       return { id: id, src: "vocab", type: "choice", topic: "vocabolario",
                prompt: "¿Qué significa?", stem: v[0], options: shuffle(opts), answer: v[1],
                accept: [v[1]], note: v[2] ? "Ejemplo: *" + v[2] + "*" : "", say: v[0] };
@@ -433,11 +561,63 @@
     return withWordIntros(firstRecognize(shuffle(out).slice(0, size), opts.state, week.week, bookItems), opts.state);
   }
 
+  /* How badly the learner knows an item: a card that went back to zero or
+     lost ease is weak; one never seen is unknown; a retired one is known. */
+  function weakness(state, id) {
+    var c = state && state.cards && state.cards[id];
+    if (!c) return 1;
+    if (Engine && Engine.retired && Engine.retired(c)) return 0;
+    if (c.reps === 0 && c.seen) return 3;
+    if ((c.ease || 2.5) < 2.3) return 2;
+    return 0.5;
+  }
+
+  /* The season a boss closes (or the one a week belongs to). */
+  function seasonWeeks(course, week) {
+    var s = (course.seasons || []).filter(function (x) { return week.week >= x.weeks[0] && week.week <= x.weeks[1]; })[0];
+    return s ? s.weeks : [1, week.week];
+  }
+
+  /* Before the boss: the season's items the learner failed (first) or has
+     not met yet, from the weeks where the accuracy was lowest. */
+  function weakItems(course, week, state, map) {
+    map = map || itemsById(course);
+    var sw = seasonWeeks(course, week), out = [], seen = {};
+    course.weeks.forEach(function (w) {
+      if (w.week < sw[0] || w.week > week.week) return;
+      (w.items || []).forEach(function (id) {
+        var it = map[id];
+        if (!it || seen[id] || it.type === "listen") return;
+        seen[id] = 1;
+        var k = weakness(state, id);
+        if (k >= 2) out.push({ it: it, k: k });
+      });
+    });
+    return out.sort(function (a, b) { return b.k - a.k; }).map(function (x) { return x.it; });
+  }
+
+  function buildWeak(course, week, state, opts) {
+    opts = opts || {};
+    var map = opts.map || itemsById(course), size = opts.size || 15;
+    var out = shuffle(weakItems(course, week, state, map).slice(0, size * 2)).slice(0, size);
+    if (out.length < size) {
+      var sw = seasonWeeks(course, week), have = {};
+      out.forEach(function (it) { have[it.id] = 1; });
+      var rest = [];
+      course.weeks.forEach(function (w) {
+        if (w.week < sw[0] || w.week > week.week) return;
+        (w.items || []).forEach(function (id) { if (map[id] && !have[id] && map[id].type !== "listen") { have[id] = 1; rest.push(map[id]); } });
+      });
+      pickFresh(rest, size - out.length, state).forEach(function (it) { out.push(it); });
+    }
+    return firstRecognize(out, state, week.week);
+  }
+
   /* Il boss pesca da tutte le settimane già sbloccate, non solo dall'ultima. */
   function buildBoss(course, week, state, opts) {
     opts = opts || {};
     var size = opts.size || (week.week === 52 ? 40 : 25);
-    var map = itemsById(course);
+    var map = opts.map || itemsById(course);
     // Half from the season it closes, a quarter from the one before, the
     // rest from anywhere earlier: the C1 exam examines C1, not «io sono».
     var season = (course.seasons || []).filter(function (s) { return week.week >= s.weeks[0] && week.week <= s.weeks[1]; })[0];
@@ -455,16 +635,27 @@
     });
     // Inside a season, one week at a time in turn: the boss of week 13 asks
     // about every week of the season, not thirteen times about essere.
+    // A week the learner got wrong more often gets more turns (up to three
+    // per round), and inside each week what was failed comes first.
+    var accOf = function (wk) {
+      var ws = (state && state.weekStats && state.weekStats[wk]) || {};
+      return ws.attempts >= 10 ? ws.right / ws.attempts : 0.85;
+    };
     var byWeek = function (pool, n) {
       var groups = {};
       pool.forEach(function (it) { (groups[it.wk || 0] = groups[it.wk || 0] || []).push(it); });
-      var keys = shuffle(Object.keys(groups)), picked = [], k = 0;
-      keys.forEach(function (key) { groups[key] = shuffle(groups[key]); });
-      while (picked.length < n && keys.length) {
-        var key = keys[k % keys.length];
-        if (groups[key].length) picked.push(groups[key].pop());
-        else { keys.splice(k % keys.length, 1); continue; }
-        k++;
+      var keys = shuffle(Object.keys(groups)), picked = [], turns = [];
+      keys.forEach(function (key) {
+        groups[key] = shuffle(groups[key]).sort(function (a, b) { return weakness(state, a.id) - weakness(state, b.id); });
+        var miss = 1 - accOf(+key);
+        var t = miss > 0.3 ? 3 : miss > 0.2 ? 2 : 1;
+        for (var x = 0; x < t; x++) turns.push(key);
+      });
+      var k = 0;
+      while (picked.length < n && turns.length) {
+        var key = turns[k % turns.length];
+        if (groups[key].length) { picked.push(groups[key].pop()); k++; }
+        else turns = turns.filter(function (t) { return t !== key; });
       }
       return picked;
     };
@@ -541,6 +732,25 @@
     var sum = 0; l.slice(-30).forEach(function (x) { sum += x; });
     return sum >= 26;
   }
+  /* Dominala: one long session over the whole week, no lives, the unseen
+     exercises first (so one pass also covers the week).  Written items stay
+     written: mastering is producing, not recognising. */
+  var DOMINA_SIZE = 30;
+  function buildDomina(course, week, state, opts) {
+    opts = opts || {};
+    var map = opts.map || itemsById(course);
+    var pool = (week.items || []).map(function (id) { return map[id]; })
+      .filter(function (it) { return it && !(opts.silent && it.type === "listen"); });
+    var out = pickFresh(pool, DOMINA_SIZE, state);
+    if (out.length < DOMINA_SIZE) bankFill(state, DOMINA_SIZE - out.length).forEach(function (it) { out.push(it); });
+    return shuffle(out);
+  }
+  // The week is mastered by passing that session, or (saves from before it
+  // existed) by 85 % over the last 30 answers with the week covered.
+  function dominated(ws, week, state) {
+    return !!(ws && ws.dominated) || (mastered(ws) && coverage(week, state).ok);
+  }
+
   function coverage(week, state) {
     var cards = (state && state.cards) || {}, ids = week.items || [];
     var seen = ids.filter(function (id) { return cards[id]; }).length;
@@ -647,11 +857,7 @@
     var pool = Frasi.ALL.filter(function (f) { return state.cards[f.id]; });
     if (pool.length < 8) pool = Frasi.ALL.slice(0, 40);
     var f = pool[Math.floor(Math.random() * pool.length)];
-    var others = shuffle(Frasi.ALL.filter(function (g) {
-      return g.id !== f.id && g.it !== f.it;
-    }));
-    var near = others.filter(function (g) { return g.scene === f.scene; }).slice(0, 2);
-    var far = others.filter(function (g) { return g.scene !== f.scene; }).slice(0, 1);
+    var near = Frasi.similar(f, 3, "it"), far = [];
     return {
       id: f.id, frase: f, src: "frasi", type: "choice",
       prompt: "¿Cómo se dice?",
@@ -678,6 +884,11 @@
     recognitionOf: recognitionOf,
     pickFresh: pickFresh,
     buildBoss: buildBoss,
+    buildWeak: buildWeak,
+    buildDomina: buildDomina,
+    dominated: dominated,
+    DOMINA_SIZE: DOMINA_SIZE,
+    weakItems: weakItems,
     buildReview: buildReview,
     mastered: mastered,
     coverage: coverage,

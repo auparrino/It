@@ -271,7 +271,7 @@
         "Martín un'ora davanti al suo ufficio.\n\n" +
         "«Lo sento urlare dal corridoio» dice Giulia al telefono. «Non lasciarti mettere i piedi in testa.»\n" +
         "Martín ci pensa. Il giorno dopo si fa ricevere alle otto, prima di tutti, e gli porta un " +
-        "piano di lavoro di una pagina. Fabrizio lo guarda leggere in silenzio, poi sorride per la prima volta.\n\n" +
+        "piano di lavoro di una pagina. Martín lo guarda leggere in silenzio; poi Fabrizio sorride per la prima volta.\n\n" +
         "«Finalmente qualcuno che mi fa risparmiare tempo» dice. Da quel giorno lo fa sedere accanto a sé.",
       gloss: { azienda: "empresa", rifare: "rehacer", rapporti: "informes", trimestre: "trimestre",
                urlare: "gritar", corridoio: "pasillo", "testa": "(mettere i piedi in testa) pisotear, abusar",
@@ -323,7 +323,7 @@
         ["¿Qué agradece?", ["que lo corrigiera sin impaciencia y sin dejar pasar errores", "que le regalara un libro", "que le diera trabajo", "que le enseñara a cocinar"], "que lo corrigiera sin impaciencia y sin dejar pasar errores"],
         ["¿Qué descubrió después de un año?", ["que se aprende enseñando", "que el italiano es fácil", "que no quiere volver", "que odia las preposiciones"], "que se aprende enseñando"]
       ],
-      hunt: { label: "Tocá los conectores de registro alto (affinché, nonostante, tuttavia, qualora, infatti)", targets:
+      hunt: { label: "Tocá los conectores (affinché, nonostante, tuttavia, qualora, infatti)", targets:
         ["affinché", "nonostante", "tuttavia", "qualora", "infatti"] } },
 
     /* ---------------------------------------------- Cultura: storia, idee, libri.
@@ -508,7 +508,7 @@
     { id: "c-calvino", week: 34, series: "cultura", area: "Letteratura", n: 8, level: "B1", emoji: "🏙️",
       title: "Calvino e le città invisibili", grammar: "congiuntivo imperfetto",
       text:
-        "In Le città invisibili, pubblicato nel 1972, Italo Calvino immagina un dialogo " +
+        "Nel libro Le città invisibili, pubblicato nel 1972, Italo Calvino immagina un dialogo " +
         "tra Marco Polo e l'imperatore dei Tartari, Kublai Kan. Marco Polo racconta le " +
         "città che ha visitato nei suoi viaggi: città sottili, città continue, città " +
         "nascoste. Ogni città ha un nome di donna: Zaira, Despina, Ottavia.\n\n" +
@@ -535,7 +535,7 @@
         "Nel 1764 un giovane nobile milanese di ventisei anni, Cesare Beccaria, pubblica " +
         "un libretto che fa il giro d'Europa: Dei delitti e delle pene. In un'epoca in " +
         "cui la tortura era normale, Beccaria sostiene che è inutile e crudele: un " +
-        "innocente robusto può resistere, e un colpevole debole può confessare pur di " +
+        "colpevole robusto può resistere, e un innocente debole può confessare pur di " +
         "smettere di soffrire.\n\n" +
         "Si oppone anche alla pena di morte: secondo lui, a scoraggiare il crimine non è " +
         "la crudeltà della pena, ma la sua certezza. Voltaire lo commenta con entusiasmo, " +
@@ -547,7 +547,7 @@
                smettere: "dejar de", scoraggiare: "desalentar", certezza: "certeza",
                nonno: "abuelo" },
       questions: [
-        ["¿Por qué la tortura es inútil según Beccaria?", ["un inocente fuerte resiste y un culpable débil confiesa", "porque es cara", "porque la prohíbe la Iglesia", "porque nadie confiesa"], "un inocente fuerte resiste y un culpable débil confiesa"],
+        ["¿Por qué la tortura es inútil según Beccaria?", ["un culpable fuerte resiste y un inocente débil confiesa", "porque es cara", "porque la prohíbe la Iglesia", "porque nadie confiesa"], "un culpable fuerte resiste y un inocente débil confiesa"],
         ["¿Qué desalienta el crimen, según él?", ["la certeza de la pena", "la crueldad de la pena", "la religión", "la pobreza"], "la certeza de la pena"],
         ["¿Qué pasó en Toscana en 1786?", ["abolió la pena de muerte", "prohibió el libro", "coronó a Beccaria", "invadió Milán"], "abolió la pena de muerte"]
       ],
