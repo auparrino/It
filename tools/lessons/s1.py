@@ -708,7 +708,7 @@ LESSONS = {
 ]},
 
 13: {
-"intro": "Semana de boss: no hay teoría nueva. Esto es la hoja de repaso de "
+"intro": "Semana de jefe final: no hay teoría nueva. Esto es la hoja de repaso de "
          "todo lo que entra en el examen A2. Leela entera antes de entrar, y "
          "volvé a ella cada vez que falles una pregunta.",
 "blocks": [

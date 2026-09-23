@@ -638,7 +638,7 @@ LESSONS = {
 ]},
 
 39: {
-"intro": "Boss de la tercera estación. Es el examen más duro hasta acá porque "
+"intro": "Jefe de la tercera estación. Es el examen más duro hasta acá porque "
          "junta el congiuntivo, la concordancia de tiempos, los hipotéticos, "
          "la pasiva y los pronombres. Esta hoja es el resumen operativo.",
 "blocks": [

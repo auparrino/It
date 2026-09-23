@@ -648,7 +648,7 @@ LESSONS = {
 ]},
 
 26: {
-"intro": "Boss de la segunda estación. No hay teoría nueva: esta es la hoja "
+"intro": "Jefe de la segunda estación. No hay teoría nueva: esta es la hoja "
          "que resume todo el sistema de pasados y futuros, que es lo que el "
          "examen va a atacar.",
 "blocks": [

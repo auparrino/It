@@ -475,7 +475,7 @@
     course.weeks.forEach(function (w) { total += 3; got += weekStars(w); });
     var html = '<h1>Il percorso</h1>' +
       '<p class="lead">De base a C1 en 52 misiones. Cada una tiene <b>3 estrellas</b>: ' +
-      'jugar la lección, superar la semana y dominarla. Los <b>boss</b> cierran cada tramo.</p>' +
+      'jugar la lección, superar la semana y dominarla. Los <b>jefes</b> cierran cada tramo.</p>' +
       '<div class="card pathsum"><b>' + got + ' / ' + total + ' ★</b>' +
       '<span class="goalbar"><i style="width:' + Math.round(got / total * 100) + '%"></i></span></div>';
 
@@ -687,7 +687,7 @@
     };
     var html = '<div class="card"><h2>Misiones ' + starsHtml(weekStars(w)) + "</h2><div class=\"missions\">";
     if (w.boss) {
-      html += m("play", st.bossPassed, "⚔️", "Vencé al boss", "85% con 3 vidas. Superarlo te da las 3 estrellas.", "boss");
+      html += m("play", st.bossPassed, "⚔️", "Vencé al jefe", "85% con 3 vidas. Superarlo te da las 3 estrellas.", "boss");
     } else {
       if (w.lesson) html += m("lez", lessonRead(w.week), "📘", "Jugá la lección",
         lessonRead(w.week) ? "Hecha" + (state.lessonScore && state.lessonScore[w.week] != null ? " · " + state.lessonScore[w.week] + "% en los chequeos" : "") : "Teoría en pasos cortos, con preguntas.");
@@ -1322,7 +1322,7 @@
   function renderRisultato() {
     var r = view.result;
     var title = round.kind === "boss"
-      ? (r.passed ? "⚔️ Boss superado" : "Boss no superado")
+      ? (r.passed ? "⚔️ Jefe vencido" : "Jefe no vencido")
       : r.pct >= 90 ? "🏆 ¡Fantastico!" : r.pct >= 70 ? "👏 ¡Molto bene!" : "💪 Sesión terminada";
     var goal = state.goal || 200, tx = Engine.todayXp(state);
 

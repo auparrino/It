@@ -1011,11 +1011,26 @@
     for (var i = 0; i < SYN.length; i++) if (SYN[i].indexOf(lemma) >= 0) return i;
     return -1;
   }
+  // Everyday words that mean the same (singular, plural).
+  var NSYN = [["papà", "padre"], ["papà", "babbo"], ["mamma", "madre"], ["giacca", "giubbotto"], ["giacche", "giubbotti"],
+              ["macchina", "auto", "automobile"], ["macchine", "auto", "automobili"], ["bici", "bicicletta"],
+              ["biciclette", "bici"], ["televisione", "tv", "tivù"], ["cellulare", "telefonino"], ["cellulari", "telefonini"],
+              ["adesso", "ora"], ["tra", "fra"], ["niente", "nulla"], ["qui", "qua"], ["lì", "là"], ["subito", "immediatamente"]];
+  function nounSyn(a, b) {
+    return NSYN.some(function (f) { return f.indexOf(a) >= 0 && f.indexOf(b) >= 0; });
+  }
+  var MODAL_PP = ["potuto", "voluto", "dovuto", "potuta", "voluta", "dovuta", "potuti", "voluti", "dovuti", "potute", "volute", "dovute"];
   function synonymFree(g, e) {
     if (g.length !== e.length) return false;
     var diff = 0;
     for (var i = 0; i < e.length; i++) {
       if (g[i] === e[i]) continue;
+      if (nounSyn(g[i], e[i])) { diff++; continue; }
+      // non ho potuto venire = non sono potuto venire: modals take either auxiliary
+      if ((AVERE.indexOf(g[i]) >= 0 || ESSERE.indexOf(g[i]) >= 0) && (AVERE.indexOf(e[i]) >= 0 || ESSERE.indexOf(e[i]) >= 0) &&
+          MODAL_PP.indexOf(e[i + 1]) >= 0 && g[i + 1] && g[i + 1].slice(0, -1) === e[i + 1].slice(0, -1)) { diff++; continue; }
+      if (MODAL_PP.indexOf(g[i]) >= 0 && MODAL_PP.indexOf(e[i]) >= 0 && g[i].slice(0, -1) === e[i].slice(0, -1) &&
+          (AVERE.indexOf(g[i - 1]) >= 0 || ESSERE.indexOf(g[i - 1]) >= 0)) { diff++; continue; }
       var fg = verbForms(g[i]), fe = verbForms(e[i]);
       var pg = participleOf(g[i]), pe = participleOf(e[i]);
       var ok = fe.some(function (a) {

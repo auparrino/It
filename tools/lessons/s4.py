@@ -652,7 +652,7 @@ LESSONS = {
           "14. *sto studiando quest'anno* → más natural: *studio quest'anno*. "
           "15. *puedo* italianizado a «poso» → *posso*, con doble s."},
 
- {"h": "Cómo llegar al boss",
+ {"h": "Cómo llegar al jefe final",
   "tip": "Hacé una pasada por el gimnasio de verbos con congiuntivo imperfetto "
          "y trapassato, que son las formas que menos se automatizan. Después "
          "repasá esta hoja en voz alta: leer las trampas en voz alta las fija "
