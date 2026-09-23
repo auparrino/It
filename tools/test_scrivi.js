@@ -110,6 +110,10 @@ gem("clave mala", function () { return { status: 401, body: { message: "Wrong AP
     function (e) { return e && /clave/.test(e.message); });
 gem("JSON con <think> y ```", function () { return { status: 200, body: reply('<think>mmm</think>```json\n{"tambien_correcta":true,"explicacion":"y"}\n```') }; },
     function (e, d) { return !e && d.tambien_correcta === true && d.explicacion === "y"; });
+gem("pagos (402) hasta llegar al gratuito", function (n, b) { return /8b/.test(b.model) ? { status: 200, body: GOOD } : { status: 402, body: { message: "payment required" } }; },
+    function (e, d, c) { return !e && c.length === 4 && /llama3\.1-8b/.test(c[3]); });
+gem("todo pago", function () { return { status: 402, body: {} }; },
+    function (e, d, c) { return e && /plan pago/.test(e.message) && c.length === 4; });
 gem("todo saturado", function () { return { status: 503, body: {} }; },
     function (e, d, c) { return e && /saturado/.test(e.message) && c.length === 4; });
 runGem();
