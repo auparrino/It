@@ -1583,7 +1583,7 @@
      "Mia sorella è esperta dell'Italia medievale.",
      "Mia sorella è un'esperta dell'Italia medioevale."
     ],
-    "note": "Esperto di: en italiano no se usa in."
+    "note": "Esperto di (también esperto in, sobre todo con materias: esperto in informatica): esperta dell'Italia medievale."
    },
    {
     "label": "c",
@@ -1663,7 +1663,9 @@
     "type": "cloze",
     "stem": "Dopo la festa Giorgio è tornato ubriaco. ___: è stato fermato dalla polizia. (Y no solo eso: lo paró la policía.)",
     "answer": "Non solo",
-    "alt": [],
+    "alt": [
+     "E non solo"
+    ],
     "note": "Non solo = no solo eso; anuncia algo más."
    }
   ]

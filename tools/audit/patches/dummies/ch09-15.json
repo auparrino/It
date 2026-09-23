@@ -1362,7 +1362,9 @@
    "type": "translate",
    "stem": "sobre el jardín",
    "answer": "sul giardino",
-   "alt": [],
+   "alt": [
+    "sopra il giardino"
+   ],
    "drop": false
   },
   "d12-032": {

@@ -1129,7 +1129,11 @@
     "Se hanno un momento libero, verranno a trovarci.",
     "Se hanno un momento libero verranno a trovarci",
     "Se hanno un attimo libero, verranno a trovarci.",
-    "Se hanno un attimo libero verranno a trovarci"
+    "Se hanno un attimo libero verranno a trovarci",
+    "Se avranno un po' di tempo libero, verranno a trovarci.",
+    "Se avranno un po' di tempo libero verranno a trovarci",
+    "Se hanno un po' di tempo libero, verranno a trovarci.",
+    "Se hanno un po' di tempo libero verranno a trovarci"
    ],
    "drop": false,
    "note": "Venire a trovare qualcuno = ir a visitar a alguien."
@@ -2060,13 +2064,16 @@
     "Io credevo che lui fosse vecchio.",
     "Credevo che fosse vecchio.",
     "Pensavo che lui fosse vecchio.",
-    "Pensavo che fosse vecchio."
+    "Pensavo che fosse vecchio.",
+    "Io pensavo che lui fosse vecchio.",
+    "Io pensavo che fosse vecchio.",
+    "Io credevo che fosse vecchio."
    ],
    "drop": false,
    "note": "Credevo che + congiuntivo imperfetto (fosse), aunque en castellano digamos «era»."
   },
   "d21-001": {
-   "consigna": "Completá con el condicional compuesto (condizionale passato) del verbo entre paréntesis. Del 1 al 5 van con avere; del 6 al 10, con essere.",
+   "consigna": "Completá con el condicional compuesto (condizionale passato) del verbo entre paréntesis, con avere o essere según el verbo.",
    "type": "cloze",
    "stem": "Tu ___ (leggere) il libro.",
    "answer": "avresti letto",
@@ -2074,7 +2081,7 @@
    "drop": false
   },
   "d21-002": {
-   "consigna": "Completá con el condicional compuesto (condizionale passato) del verbo entre paréntesis. Del 1 al 5 van con avere; del 6 al 10, con essere.",
+   "consigna": "Completá con el condicional compuesto (condizionale passato) del verbo entre paréntesis, con avere o essere según el verbo.",
    "type": "cloze",
    "stem": "Marco e Laura ___ (scrivere).",
    "answer": "avrebbero scritto",
@@ -2082,7 +2089,7 @@
    "drop": false
   },
   "d21-003": {
-   "consigna": "Completá con el condicional compuesto (condizionale passato) del verbo entre paréntesis. Del 1 al 5 van con avere; del 6 al 10, con essere.",
+   "consigna": "Completá con el condicional compuesto (condizionale passato) del verbo entre paréntesis, con avere o essere según el verbo.",
    "type": "cloze",
    "stem": "Noi ___ (imparare) l’italiano.",
    "answer": "avremmo imparato",
@@ -2090,7 +2097,7 @@
    "drop": false
   },
   "d21-004": {
-   "consigna": "Completá con el condicional compuesto (condizionale passato) del verbo entre paréntesis. Del 1 al 5 van con avere; del 6 al 10, con essere.",
+   "consigna": "Completá con el condicional compuesto (condizionale passato) del verbo entre paréntesis, con avere o essere según el verbo.",
    "type": "cloze",
    "stem": "Voi ___ (usare) la macchina.",
    "answer": "avreste usato",
@@ -2098,7 +2105,7 @@
    "drop": false
   },
   "d21-005": {
-   "consigna": "Completá con el condicional compuesto (condizionale passato) del verbo entre paréntesis. Del 1 al 5 van con avere; del 6 al 10, con essere.",
+   "consigna": "Completá con el condicional compuesto (condizionale passato) del verbo entre paréntesis, con avere o essere según el verbo.",
    "type": "cloze",
    "stem": "Loro ___ (comprare) la macchina.",
    "answer": "avrebbero comprato",
@@ -2106,7 +2113,7 @@
    "drop": false
   },
   "d21-006": {
-   "consigna": "Completá con el condicional compuesto (condizionale passato) del verbo entre paréntesis. Del 1 al 5 van con avere; del 6 al 10, con essere.",
+   "consigna": "Completá con el condicional compuesto (condizionale passato) del verbo entre paréntesis, con avere o essere según el verbo.",
    "type": "cloze",
    "stem": "Io ___ (arrivare).",
    "answer": "sarei arrivato",
@@ -2116,7 +2123,7 @@
    "drop": false
   },
   "d21-007": {
-   "consigna": "Completá con el condicional compuesto (condizionale passato) del verbo entre paréntesis. Del 1 al 5 van con avere; del 6 al 10, con essere.",
+   "consigna": "Completá con el condicional compuesto (condizionale passato) del verbo entre paréntesis, con avere o essere según el verbo.",
    "type": "cloze",
    "stem": "Lui ___ (partire).",
    "answer": "sarebbe partito",
@@ -2124,7 +2131,7 @@
    "drop": false
   },
   "d21-008": {
-   "consigna": "Completá con el condicional compuesto (condizionale passato) del verbo entre paréntesis. Del 1 al 5 van con avere; del 6 al 10, con essere.",
+   "consigna": "Completá con el condicional compuesto (condizionale passato) del verbo entre paréntesis, con avere o essere según el verbo.",
    "type": "cloze",
    "stem": "Tu e Chiara ___ (stare).",
    "answer": "sareste stati",
@@ -2134,7 +2141,7 @@
    "drop": false
   },
   "d21-009": {
-   "consigna": "Completá con el condicional compuesto (condizionale passato) del verbo entre paréntesis. Del 1 al 5 van con avere; del 6 al 10, con essere.",
+   "consigna": "Completá con el condicional compuesto (condizionale passato) del verbo entre paréntesis, con avere o essere según el verbo.",
    "type": "cloze",
    "stem": "I signori ___ (venire).",
    "answer": "sarebbero venuti",
@@ -2142,7 +2149,7 @@
    "drop": false
   },
   "d21-010": {
-   "consigna": "Completá con el condicional compuesto (condizionale passato) del verbo entre paréntesis. Del 1 al 5 van con avere; del 6 al 10, con essere.",
+   "consigna": "Completá con el condicional compuesto (condizionale passato) del verbo entre paréntesis, con avere o essere según el verbo.",
    "type": "cloze",
    "stem": "Noi ___ (andare).",
    "answer": "saremmo andati",
@@ -2540,7 +2547,7 @@
   "d22-019": {
    "consigna": "Completá con el congiuntivo trapassato. El auxiliar está indicado (auxiliar/verbo).",
    "type": "cloze",
-   "stem": "Conveniva che noi ___ (essere/stare).",
+   "stem": "Conveniva che noi ___ (essere/stare) a casa.",
    "answer": "fossimo stati",
    "alt": [
     "fossimo state"

@@ -125,7 +125,7 @@ NOUNS = [
     ("soffitta", "f", "soffitte", "altillo", "casa", "B2", ""),
     ("culla", "f", "culle", "cuna", "casa", "B2", ""),
     ("stufa", "f", "stufe", "estufa", "casa", "B2", "S + consonante pero femenino: la stufa."),
-    ("candela", "f", "candele", "vela", "casa", "B1", "Falso amigo: candela = vela de cera."),
+    ("candela", "f", "candele", "vela", "casa", "B1", "Candela = vela de cera: en castellano «candela» existe, pero se dice vela."),
     ("fiammifero", "m", "fiammiferi", "fósforo", "casa", "B1", "Doble m: fiammifero."),
     ("accendino", "m", "accendini", "encendedor", "casa", "B1", ""),
     ("spugna", "f", "spugne", "esponja", "casa", "B2", "S + consonante pero femenino: la spugna."),
@@ -1468,7 +1468,7 @@ NOUNS += [
 
 # ------------------------------------------------------------------ società
 NOUNS += [
-    ("gente", "f", "genti", "gente", "società", "A1", "Siempre singular: la gente è simpatica (nunca 'sono')."),
+    ("gente", "f", "genti", "gente", "società", "A1", "Concuerda en singular: la gente è simpatica (nunca 'sono'). Le genti = los pueblos."),
     ("società", "f", "società", "sociedad / empresa", "società", "B1", "Invariable."),
     ("stato", "m", "stati", "estado", "società", "B1", "S + consonante: lo stato."),
     ("governo", "m", "governi", "gobierno", "società", "B1", ""),

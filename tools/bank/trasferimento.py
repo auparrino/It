@@ -992,7 +992,7 @@ ES_IT.update({
     "tercero": ("terzo", ""),
     # comida
     "pan": ("pane", ""),
-    "leche": ("latte", "Y es masculino: il latte."),
+    "leche": ("latte", "Femenino en español, masculino en italiano: il latte."),
     "sal": ("sale", "Femenino en español, masculino en italiano: il sale."),
     "miel": ("miele", "Masculino: il miele."),
     "pescado": ("pesce", "Pescado y pez se dicen igual: pesce."),

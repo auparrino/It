@@ -170,7 +170,7 @@ WEEKS = [
          v=["essere", "fare", "dire", "bere", "avere", "parlare"],
          tenses=["imperfetto", "passatoProssimo"], t=["passato"]),
     dict(w=19, title="Riflessivi al passato", level="B1", d=[17], r=[20],
-         focus="Todos los reflexivos van con essere, sin excepción.",
+         focus="Todos los reflexivos van con essere (salvo con modal y el pronombre pegado al infinitivo: ho dovuto alzarmi).",
          keys=["mi sono alzato/a, ci siamo divertiti/e.",
                "El participio concuerda con el sujeto.",
                "Con objeto directo propio: si è lavata le mani.",

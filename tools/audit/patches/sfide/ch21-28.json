@@ -1328,7 +1328,11 @@
     "alt": [
      "non esserci andata",
      "non esserci andati",
-     "non esserci andate"
+     "non esserci andate",
+     "non essere andato",
+     "non essere andata",
+     "non essere andati",
+     "non essere andate"
     ],
     "note": "Andare va con essere; ci (allí) se pega a essere."
    },
@@ -1408,7 +1412,11 @@
      "Ti verrò a trovare dopo avergli parlato.",
      "Verrò a trovarti dopo aver parlato con lui.",
      "Ti verrò a trovare dopo aver parlato con lui.",
-     "Verrò a vederti dopo avergli parlato."
+     "Verrò a vederti dopo avergli parlato.",
+     "Vengo a trovarti dopo avergli parlato.",
+     "Vengo a trovarti dopo aver parlato con lui.",
+     "Ti vengo a trovare dopo avergli parlato.",
+     "Ti vengo a trovare dopo aver parlato con lui."
     ],
     "note": "Dopo + infinitivo siempre compuesto."
    }
@@ -1423,7 +1431,9 @@
     "type": "translate",
     "stem": "Creo que me voy el lunes.",
     "answer": "Credo di partire lunedì.",
-    "alt": [],
+    "alt": [
+     "Penso di partire lunedì."
+    ],
     "note": "Infinitivo simple: acción posterior o simultánea."
    },
    {
@@ -3899,7 +3909,7 @@
    {
     "label": "b",
     "type": "choice",
-    "stem": "Faremo ristrutturare la veranda ___ l'architetto.",
+    "stem": "Faremo ristrutturare la veranda ___ l'architetto. (a + l' / da + l')",
     "options": [
      "a",
      "da"
@@ -3911,7 +3921,7 @@
    {
     "label": "c",
     "type": "choice",
-    "stem": "Faremo pitturare le camere ___ l'imbianchino.",
+    "stem": "Faremo pitturare le camere ___ l'imbianchino. (a + l' / da + l')",
     "options": [
      "a",
      "da"
@@ -3948,7 +3958,9 @@
      "Farò imbucare la lettera a Barbara.",
      "Farò imbucare la lettera da Barbara.",
      "Faccio spedire la lettera a Barbara.",
-     "Faccio imbucare la lettera a Barbara."
+     "Faccio imbucare la lettera a Barbara.",
+     "Faccio spedire la lettera da Barbara.",
+     "Faccio imbucare la lettera da Barbara."
     ],
     "note": "Fare + infinitivo + objeto: quien lo hace va con da (o a, pero con a Barbara podría ser la destinataria)."
    },
@@ -3971,7 +3983,8 @@
     "answer": "Farò scrivere la lettera da Giacomo.",
     "alt": [
      "Farò scrivere la lettera a Giacomo.",
-     "Faccio scrivere la lettera da Giacomo."
+     "Faccio scrivere la lettera da Giacomo.",
+     "Faccio scrivere la lettera a Giacomo."
     ],
     "note": "Con a sería ambiguo («escribir la carta a Giacomo»): conviene da."
    },
@@ -4202,7 +4215,9 @@
     "type": "cloze",
     "stem": "___ e poi ___ in cucina. (lo escucho bañarse; bajar)",
     "answer": "lo sento fare la doccia | scendere",
-    "alt": [],
+    "alt": [
+     "lo sento farsi la doccia | scendere"
+    ],
     "note": "Sentire + pronombre + infinitivo."
    },
    {
@@ -4598,7 +4613,9 @@
      "Faresti meglio ad andartene adesso perché non gli piace aspettare.",
      "Faresti meglio ad andare ora perché non gli piace aspettare.",
      "Faresti meglio ad andare adesso perché a loro non piace aspettare.",
-     "Faresti meglio ad andartene ora perché non gli piace aspettare."
+     "Faresti meglio ad andartene ora perché non gli piace aspettare.",
+     "Faresti meglio ad andare subito perché non gli piace aspettare.",
+     "Faresti meglio ad andartene subito perché non gli piace aspettare."
     ],
     "note": "Fare meglio a + infinitivo; piacere + infinitivo sin preposición."
    },
@@ -4872,7 +4889,9 @@
     "stem": "Me canso estudiando de noche. (stancarsi)",
     "answer": "Mi stanco a studiare la sera.",
     "alt": [
-     "Mi stanco a studiare di sera."
+     "Mi stanco a studiare di sera.",
+     "Mi stanco a studiare di notte.",
+     "Mi stanco a studiare la notte."
     ],
     "note": "Stancarsi a = cansarse haciendo algo (stancarsi di = hartarse de)."
    },

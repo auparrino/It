@@ -100,7 +100,7 @@ LESSONS = {
                       "amica → amiche; riga → righe"],
                      ["-co, -go (llanas)", "-chi, -ghi",
                       "banco → banchi; lago → laghi"],
-                     ["-co, -go (esdrújulas)", "-ci, -gi",
+                     ["-co, -go (esdrújulas)", "-ci, -gi (con excepciones: dialogo → dialoghi, carico → carichi)",
                       "medico → medici; biologo → biologi"],
                      ["-cia, -gia (vocal antes)", "-cie, -gie",
                       "camicia → camicie; valigia → valigie"],

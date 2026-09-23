@@ -2136,7 +2136,13 @@
      "Sì, e ne sono stato sconvolto.",
      "Sì, e ne sono stata sconvolta.",
      "Sì, e ne sono sconvolto.",
-     "Sì, e ne sono sconvolta."
+     "Sì, e ne sono sconvolta.",
+     "Sì, e ne sono rimasto molto sconvolto.",
+     "Sì, e ne sono rimasta molto sconvolta.",
+     "Sì, e ne sono stato molto sconvolto.",
+     "Sì, e ne sono stata molto sconvolta.",
+     "Sì, e ne sono molto sconvolto.",
+     "Sì, e ne sono molto sconvolta."
     ],
     "note": "«Ne» también reemplaza complementos con «da»: ne sono rimasto sconvolto."
    },
@@ -3064,7 +3070,10 @@
      "Anna, quando partirai, me lo dici?",
      "Anna, quando parti, mi avvisi?",
      "Anna, quando te ne vai, mi avvisi?",
-     "Anna, quando partirai, mi avvisi?"
+     "Anna, quando partirai, mi avvisi?",
+     "Anna, quando vai via, me lo fai sapere?",
+     "Anna, quando vai via, me lo dici?",
+     "Anna, quando vai via, mi avvisi?"
     ],
     "note": "Mi + lo = me lo."
    },
@@ -3118,7 +3127,9 @@
     "alt": [
      "Allora ce ne compriamo qualcuna?",
      "Ce ne compriamo un po', allora?",
-     "Allora ce ne compriamo un po'?"
+     "Allora ce ne compriamo un po'?",
+     "Ce ne compriamo alcune, allora?",
+     "Allora ce ne compriamo alcune?"
     ],
     "note": "Ci + ne = ce ne."
    },

@@ -70,7 +70,7 @@ LESSONS = {
   "p": ["El imperativo formal que estudiaste en la semana 9 es congiuntivo "
         "puro: *Scusi!*, *Senta!*, *Prenda!*, *Venga!*, *Mi dica!*, "
         "*Si accomodi!*. Si esas frases ya te salen solas, la forma del "
-        "congiuntivo ya está media aprendida."]},
+        "congiuntivo ya está medio aprendida."]},
 ]},
 
 28: {
@@ -211,7 +211,9 @@ LESSONS = {
  {"h": "Cuándo aparecen",
   "p": ["Regla simple: **si el verbo principal está en pasado o en condicional, "
         "la subordinada no puede llevar congiuntivo presente.** Baja al "
-        "imperfetto (simultáneo o posterior) o al trapassato (anterior)."],
+        "imperfetto (simultáneo; también posterior tras un condicional o un verbo de "
+        "voluntad: volevo che venisse) o al trapassato (anterior). Con verbos de "
+        "opinión, lo posterior va en condizionale passato (lo ves en la semana 31)."],
   "table": {"head": ["Principal", "Subordinada", "Ejemplo"],
             "rows": [["presente", "congiuntivo presente", "Credo che venga."],
                      ["presente", "congiuntivo passato", "Credo che sia venuto."],

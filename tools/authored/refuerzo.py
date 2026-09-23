@@ -301,7 +301,7 @@ ITEMS = [
     dict(id="rf-16-15", type="cloze", topic="avverbi", level="B1",
          prompt="Completá con un adverbio (despacito, en voz baja).",
          stem="Parla ___, il bambino dorme.", answer="piano",
-         alt=["sottovoce"],
+         alt=["sottovoce", "a bassa voce"],
          note="«Piano» es adverbio: en voz baja o despacio. «Sottovoce» = en voz baja."),
     dict(id="rf-16-16", type="choice", topic="avverbi", level="B1",
          prompt=CE, stem="Mia nonna abita qui ___.", options=["vicino", "vicina", "vicinamente"],
