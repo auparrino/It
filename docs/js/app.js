@@ -198,6 +198,13 @@
     };
   }
 
+  /* Un aliento en italiano cuando falta poco: se muestra junto al contador. */
+  function dai(i, n) {
+    var t = n < 3 ? "" : i === n - 1 ? "Ultima!" : i >= Math.ceil(n * 0.75) ? "Ci sei quasi."
+          : n >= 6 && i === Math.floor(n / 2) ? "A metà." : "";
+    return t ? '<span class="dai">' + t + "</span>" : "";
+  }
+
   function stopLampo() {
     if (lampo && !lampo.done) { lampo.done = true; clearInterval(lampo.timer); }
   }
@@ -352,7 +359,7 @@
 
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION in sw.js: test_game checks it). */
-  var APP_VERSION = "v37";
+  var APP_VERSION = "v38";
   function versionLine() {
     return '<p class="muted small version">La Via C1 · versión ' + APP_VERSION + "</p>";
   }
@@ -751,7 +758,7 @@
     var n = les.steps.length;
     var hudH = '<div class="hud"><span class="progressline"><i style="width:' +
       Math.round(Math.max(0, les.i - 1) / n * 100) + '%" data-to="' + Math.round(les.i / n * 100) + '"></i></span>' +
-      '<span class="muted">' + (les.i + 1) + "/" + n + "</span>" +
+      '<span class="muted">' + (les.i + 1) + " di " + n + "</span>" + dai(les.i, n) +
       '<button class="btn ghost" id="lesquit">✕</button></div>';
     if (!st) {
       var pct = les.asked ? Math.round(les.right / les.asked * 100) : 100;
@@ -802,10 +809,10 @@
       else if (b === btn) b.classList.add("wrong");
     });
     $("#lesfb").innerHTML = '<div class="feedback ' + (ok ? "giusto" : "sbagliato") + '">' +
-      '<div class="verdict">' + (ok ? pick(["¡Esatto!", "¡Bravo!", "¡Perfetto!"]) : "Era esta:") + "</div>" +
+      '<div class="verdict">' + (ok ? pick(["Esatto!", "Bravo!", "Perfetto!"]) : "Era così:") + "</div>" +
       '<div class="sol">' + esc(q.answer) + "</div>" +
       (ok ? "" : lesRule(q)) +
-      '<div class="row" style="margin-top:10px"><button class="btn" id="lesnext2">Seguir →</button></div></div>';
+      '<div class="row" style="margin-top:10px"><button class="btn" id="lesnext2">Avanti →</button></div></div>';
     on("#lesnext2", lesNext);
   }
 
@@ -1188,7 +1195,8 @@
         '<span class="progressline"><i style="width:' +
           Math.round(Math.max(0, round.i - 1) / round.items.length * 100) + '%" data-to="' +
           Math.round(round.i / round.items.length * 100) + '"></i></span>' +
-        "<span class=\"muted\">" + (round.i + 1) + "/" + round.items.length + "</span>" +
+        '<span class="muted">' + (round.i + 1) + " di " + round.items.length + "</span>" +
+        dai(round.i, round.items.length) +
         (round.combo > 1 ? '<span class="combo pop">🔥×' + round.combo + "</span>" : "") +
         '<button class="btn ghost" id="quit">✕</button>' +
       "</div>";
@@ -1611,8 +1619,9 @@
     renderHeader();
     if (gained) xpFly(gained);
 
-    var label = opts.label || { giusto: pick(["¡Perfetto!", "¡Bravo!", "¡Esatto!", "¡Grande!", "¡Benissimo!"]),
-                  quasi: "Quasi…", sbagliato: "No, era así:" }[verdict];
+    var label = opts.label || { giusto: pick(["Bravo!", "Perfetto!", "Esatto!", "Benissimo!", "Ottimo!", "Così si fa!"]),
+                  quasi: "Quasi! Ci sei.",
+                  sbagliato: pick(["Non fa niente. Era così:", "Capita. Era così:", "Dai, era così:"]) }[verdict];
     var sol = it.type === "listen" && it.frase ? it.frase.it + " — " + it.answer
             : it.frase ? it.frase.it : it.answer;
     var fb = '<div class="feedback ' + verdict + '">' +
@@ -1627,7 +1636,7 @@
         ? '<div class="note">Consigna original: ' + esc(it.hint) + "</div>" : "") +
       relearn +
       '<div class="row" style="margin-top:10px">' +
-        '<button class="btn" id="next">Continuar →</button>' +
+        '<button class="btn" id="next">Avanti →</button>' +
         '<button class="tab" id="say2">🔊 escuchar</button>' +
         (q < 2 && aiKey() && window.Scrivi && it.type !== "hunt" ? '<button class="tab" id="aiexp">🤖 Explicame</button>' : "") +
       '</div><div id="aiexpout"></div></div>';
@@ -1667,7 +1676,7 @@
       if (outE) outE.innerHTML = '<p class="muted small">⏳ Preguntándole a la IA…</p>';
       var fbText = ($("#fb") || {}).innerText || "";
       var x = { prompt: it.prompt, stem: it.stem, options: it.options, given: given, answer: sol,
-                accept: it.accept, feedback: fbText.split("Continuar")[0].replace(/\s+/g, " ").slice(0, 600) };
+                accept: it.accept, feedback: fbText.split("Avanti")[0].replace(/\s+/g, " ").slice(0, 600) };
       Scrivi.explain(x, aiKeys(), function (err, data, meta) {
         var o = $("#aiexpout");
         if (!o) return;
@@ -1723,7 +1732,7 @@
       (it.note ? '<div class="note">' + mk(it.note) + "</div>" : "") +
       '<div class="note">🔬 Intentar adivinar antes de aprender ayuda a recordar, ' +
         "aunque te equivoques (efecto de la prueba previa).</div>" +
-      '<div class="row" style="margin-top:10px"><button class="btn" id="next">Continuar →</button></div></div>';
+      '<div class="row" style="margin-top:10px"><button class="btn" id="next">Avanti →</button></div></div>';
     document.querySelectorAll(".opt").forEach(function (o) {
       o.disabled = true;
       if (o.textContent === it.answer) o.classList.add("right");
@@ -2417,7 +2426,7 @@
 
   function on(sel, fn) { var b = $(sel); if (b) b.onclick = fn; }
 
-  /* A double tap on «Continuar» must not answer the next question: taps
+  /* A double tap on «Avanti» must not answer the next question: taps
      right after a screen change are swallowed. */
   /* Only a tap in the same spot as the one that changed the screen is a
      double tap; a quick tap somewhere else is the learner answering fast. */
