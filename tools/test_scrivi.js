@@ -72,6 +72,19 @@ ERR.forEach(function (e) {
   ok(!f.length, "«" + t + "» no debería marcar nada: " + f.map(function (x) { return x.msg; }).join(" | "));
 });
 
+// La IA clasifica cada error con las categorías de la clínica; «stile» es
+// sugerencia, no error; una «corrección» igual al original no se muestra.
+(function () {
+  var f = S.fromAI("Io ho andato a casa. Mi piace molto.", { errores: [
+    { mal: "Mi piace molto", bien: "Mi piace tanto", tipo: "stile", explicacion: "y" },
+    { mal: "ho andato", bien: "sono andato", tipo: "ausiliare", explicacion: "x" },
+    { mal: "casa", bien: "casa", tipo: "lessico", explicacion: "z" },
+    { mal: "Io", bien: "", tipo: "inventado", explicacion: "w" }] }, []);
+  ok(f.length === 3 && f[0].cat === "ia" && f[1].cat === "ausiliare" && !f[1].soft && f[2].cat === "stile" && f[2].soft,
+     "IA: tipos de error: " + JSON.stringify(f.map(function (x) { return [x.cat, x.soft]; })));
+  ok(/ausiliare/.test(S.aiPrompt("x", 11, S.TASKS[11])) && /passato prossimo/.test(S.aiPrompt("x", 11, S.TASKS[11])), "IA: el pedido lleva la lista de tipos y las estructuras de la semana");
+})();
+
 // Corpus de textos de estudiantes hispanohablantes con cada error anotado
 // (tools/scrivi_corpus.json): cuántos errores marca el corrector propio
 // por familia, y que no marque nada en las versiones corregidas ni en las
