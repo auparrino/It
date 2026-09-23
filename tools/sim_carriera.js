@@ -36,6 +36,8 @@ var Engine = ctx.Engine, Drills = ctx.Drills, Frasi = ctx.Frasi, Lab = ctx.Lab, 
 var course = JSON.parse(fs.readFileSync(path.join(ROOT, "docs/data/course.json"), "utf8"));
 Banca.load(JSON.parse(fs.readFileSync(path.join(ROOT, "docs/data/bank.json"), "utf8")));
 var map = Drills.itemsById(course);
+var glossario = JSON.parse(fs.readFileSync(path.join(ROOT, "docs/data/glossario.json"), "utf8"));
+var isItalian = function (w) { return !!glossario[String(w).toLowerCase()]; };
 
 /* ------------------------------------------------------------ el jugador */
 
@@ -158,7 +160,7 @@ course.weeks.forEach(function (w) {
   var binary = 0, quizzes = 0, blocks = w.lesson.blocks.length, noCheck = 0;
   for (var s = 0; s < 5; s++) {
     var steps;
-    try { steps = Lezione.steps(w.lesson, rnd, w.week); }
+    try { steps = Lezione.steps(w.lesson, rnd, w.week, isItalian); }
     catch (e) { log.lessonIssues.push({ wk: w.week, msg: "Lezione.steps lanza: " + e.message }); break; }
     var qs = steps.filter(function (x) { return x.kind === "quiz"; });
     qs.forEach(function (x) {
@@ -205,7 +207,7 @@ course.weeks.forEach(function (w) {
   // 1. lección
   newDay();
   if (w.lesson) {
-    var steps = Lezione.steps(w.lesson, rnd, w.week), right = 0, asked = 0;
+    var steps = Lezione.steps(w.lesson, rnd, w.week, isItalian), right = 0, asked = 0;
     steps.forEach(function (s) {
       totalSec += s.kind === "quiz" ? 8 : 14;
       if (s.kind === "quiz") { asked++; if (rnd() < P.lesson) right++; }

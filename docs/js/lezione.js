@@ -126,10 +126,18 @@
 
   // A block with only text: blank one Italian form of its rule and offer
   // forms from the rest of the lesson («Completá la regla»).
-  function ruleQuestion(lesson, b, rnd) {
+  function ruleQuestion(lesson, b, rnd, isItalian) {
+    if (!isItalian) return null;
+    // Only clean Italian forms (every word known to the glossary), never a
+    // Spanish word that happened to sit between two asterisks.
+    var clean = function (f) {
+      f = f.trim();
+      return f.length >= 3 && /^[a-zà-ù' ]+$/i.test(f) && f.indexOf("/") < 0 && !/^\s|\s$/.test(f) &&
+        f.split(/\s+/).every(function (w) { return isItalian(w.replace(/^[a-zà-ù]+'/, "")) || isItalian(w); }) ? f : null;
+    };
     var text = [b.r].concat(b.p || [], [b.warn, b.tip]).filter(Boolean).join(" ");
-    var forms = (text.match(/\*([^*]{3,24})\*/g) || []).map(function (x) { return x.replace(/\*/g, ""); })
-      .filter(function (f) { return /^[a-zà-ù' ]+$/i.test(f) && f.indexOf("/") < 0; });
+    var forms = (text.match(/\*([^*]{3,24})\*/g) || []).map(function (x) { return clean(x.replace(/\*/g, "")); })
+      .filter(Boolean);
     forms = uniq(forms);
     if (!forms.length) return null;
     var pick = forms[Math.floor(rnd() * forms.length)];
@@ -138,13 +146,15 @@
       var t = [bb.r].concat(bb.p || [], bb.ex ? bb.ex.map(function (e) { return e[0]; }) : [], [bb.warn, bb.tip]).filter(Boolean).join(" ");
       (t.match(/\*([^*]{3,24})\*/g) || []).forEach(function (x) { all.push(x.replace(/\*/g, "")); });
     });
-    var others = uniq(shuffle(all, rnd).filter(function (f) {
-      return f.toLowerCase() !== pick.toLowerCase() && /^[a-zà-ù' ]+$/i.test(f) && f.indexOf("/") < 0 &&
+    var others = uniq(shuffle(all, rnd).map(clean).filter(function (f) {
+      return f && f.toLowerCase() !== pick.toLowerCase() &&
         Math.abs(f.length - pick.length) <= 4 && forms.indexOf(f) < 0;
     })).slice(0, 2);
     if (others.length < 2) return null;
     var src = [b.r].concat(b.p || []).filter(function (t) { return t && t.indexOf("*" + pick + "*") >= 0; })[0] || b.r || "";
     var stem = strip(src.replace("*" + pick + "*", "___"));
+    // A hole glued to letters or a stray asterisk: the markup was uneven.
+    if (/[a-zà-ù]___|___[a-zà-ù]/i.test(stem) || stem.indexOf("*") >= 0) return null;
     if (stem.length > 160) stem = stem.slice(0, 157) + "…";
     return { kind: "rule", prompt: "Completá la regla", stem: stem, answer: pick,
              options: shuffle([pick].concat(others), rnd) };
@@ -176,7 +186,7 @@
   }
 
   // The playable sequence: intro, then each block followed by its check.
-  function steps(lesson, rnd, week) {
+  function steps(lesson, rnd, week, isItalian) {
     rnd = rnd || Math.random;
     var out = [{ kind: "intro" }];
     lesson.blocks.forEach(function (b, i) {
@@ -186,7 +196,7 @@
         out.push({ kind: "block", i: i, part: "b" });
       } else out.push({ kind: "block", i: i });
       var q = (b.table && tableQuestion(b, rnd)) || (b.ex && exQuestion(lesson, b, rnd, week)) ||
-              (!b.table && !(b.ex && b.ex.length) && ruleQuestion(lesson, b, rnd));
+              (!b.table && !(b.ex && b.ex.length) && ruleQuestion(lesson, b, rnd, isItalian));
       if (q) { q.block = i; out.push({ kind: "quiz", q: q }); }
     });
     return out;

@@ -520,6 +520,22 @@
     }).join("");
   }
 
+  // Italian text that is not a stem (the solution in the feedback): every
+  // word tappable, the ones not yet seen underlined.
+  function glossifyAny(raw) {
+    raw = String(raw || "");
+    if (!glossario) return esc(raw);
+    var week = Math.min(state.unlocked || 1, 52);
+    return raw.split(/([A-Za-zÀ-ÿ]+)/).map(function (t, k) {
+      if (k % 2 === 0) return esc(t);
+      var g = glossario[t.toLowerCase()];
+      if (!g) return esc(t);
+      stemGloss.push(g[0] + " — " + g[1]);
+      return '<span class="w gl' + (g[2] > week ? " new" : "") + '" data-sg="' +
+        (stemGloss.length - 1) + '">' + esc(t) + "</span>";
+    }).join("");
+  }
+
   function showGloss(txt) {
     var box = $("#glossbox");
     if (!box) {
@@ -690,7 +706,8 @@
 
   function startLezione() {
     var w = course.weeks[view.week - 1];
-    les = { w: w, steps: Lezione.steps(w.lesson, Math.random, w.week), i: 0, right: 0, asked: 0, answered: false };
+    var isItalian = function (word) { return !!(glossario && glossario[String(word).toLowerCase()]); };
+    les = { w: w, steps: Lezione.steps(w.lesson, Math.random, w.week, isItalian), i: 0, right: 0, asked: 0, answered: false };
     view.screen = "lezione";
     render();
     savePending();
@@ -1493,7 +1510,7 @@
       '<div class="verdict">' + label +
         (gained ? ' <span class="xpgain">+' + gained + " xp</span>" : "") + "</div>" +
       (extra || "") +
-      (it.type === "hunt" ? "" : '<div class="sol">' + esc(sol) + "</div>") +
+      (it.type === "hunt" ? "" : '<div class="sol">' + (it.frase || it.src === "lettura" ? esc(sol) : glossifyAny(sol)) + "</div>") +
       (it.frase && it.type !== "listen" ? '<div class="note">' + esc(it.frase.es) + "</div>" : "") +
       (it.note ? '<div class="note">' + mk(it.note) + "</div>" : "") +
       (q === 2 && it.recogNote ? '<div class="note">' + esc(it.recogNote) + "</div>" : "") +
@@ -1506,6 +1523,9 @@
       "</div></div>";
 
     $("#fb").innerHTML = fb;
+    $("#fb").querySelectorAll("[data-sg]").forEach(function (b) {
+      b.onclick = function (e) { e.stopPropagation(); showGloss(stemGloss[+b.dataset.sg]); };
+    });
     // Reading: after a miss, the text opens so the answer can be found in it.
     var qt = $("#qtext");
     if (qt && q < 2) qt.hidden = false;

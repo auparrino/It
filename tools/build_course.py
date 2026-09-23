@@ -1109,7 +1109,39 @@ def main() -> None:
     import collections
     import lessico
     import sillabo
+    from bank.esempi import ESEMPI, NON_PAROLE
     by_id_all = {i["id"]: i for i in course["items"]}
+    # Bank sentences whose grammar («w») is already taught can illustrate a
+    # word its own week does not show in a full sentence.
+    with open(os.path.join(DATA, "bank.json"), encoding="utf-8") as fh:
+        bank_sents = [(it, snt.get("w", 1)) for snt in json.load(fh)["sentences"] for it in snt["it"]]
+
+    def word_forms(word):
+        fs = {word}
+        if re.search(r"(are|ere|ire|rsi|rre)$", word):
+            stem = re.sub(r"rsi$", "re", word)[:-3]
+            for e in ("o", "i", "a", "e", "iamo", "ate", "ete", "ite", "ano", "ono", "isco", "isci", "isce",
+                      "iscono", "ato", "ata", "ati", "ate", "uto", "uta", "uti", "ute", "ito", "ita", "iti",
+                      "ite", "ava", "avo", "avano", "erà", "erò", "irà", "irò", "ai", "ò", "à"):
+                fs.add(stem + e)
+        elif word.endswith("o"):
+            fs.update({word[:-1] + "i", word[:-1] + "a", word[:-1] + "e"})
+        elif word.endswith("a"):
+            fs.add(word[:-1] + "e")
+        elif word.endswith("e"):
+            fs.add(word[:-1] + "i")
+        return fs
+
+    def bank_example(word, week):
+        best = None
+        for it, w in bank_sents:
+            if w > week or not 3 <= len(it.split()) <= 14:
+                continue
+            low = it.lower()
+            if any(re.search(r"(?<![a-zà-ù'])" + re.escape(f) + r"(?![a-zà-ù])", low) for f in word_forms(word)):
+                if best is None or len(it) < len(best):
+                    best = it
+        return best
     freq = collections.Counter()
     for it in course["items"]:
         r, wtxt = lessico.item_texts(it)
@@ -1142,6 +1174,9 @@ def main() -> None:
                     continue
                 if tok in ("soldi", "soldo") or lm[0] == "soldo" or "'" in lm[0] or "’" in lm[0]:
                     continue
+                # names and conjugated forms are not words of the week
+                if lm[0] in NON_PAROLE or lm[2].strip().lower() == "nombre":
+                    continue
                 if lm[1] > max(w["week"], 1) and lm[1] != 1:
                     continue           # not yet in play at this level
                 cand[lm[0]] = [lm[0], lm[2].split(" / ")[0].split(";")[0].strip(), ""]
@@ -1170,7 +1205,7 @@ def main() -> None:
                     continue
                 if best_ex is None or rank < best_ex[0]:
                     best_ex = (rank, ex)
-            entry[2] = best_ex[1] if best_ex else ""
+            entry[2] = best_ex[1] if best_ex else (bank_example(key, w["week"]) or ESEMPI.get(key, ""))
         n = 12 if w["week"] <= 26 else 15
         best = sorted(cand.values(), key=lambda v: -freq[v[0]])[:0 if w["boss"] else n]
         w["vocab"] = best
