@@ -85,6 +85,13 @@ ERR.forEach(function (e) {
   ok(/ausiliare/.test(S.aiPrompt("x", 11, S.TASKS[11])) && /passato prossimo/.test(S.aiPrompt("x", 11, S.TASKS[11])), "IA: el pedido lleva la lista de tipos y las estructuras de la semana");
 })();
 
+(function () {
+  var f = S.fromAI("Hanno 32 annos e sono qui.", { errores: [
+    { mal: "Hanno 32 annos", bien: "Ho 32 anni", tipo: "persona_verbale", explicacion: "a" },
+    { mal: "annos", bien: "anni", tipo: "parola_spagnola", explicacion: "b" }] }, []);
+  ok(f.length === 1, "IA: un error adentro de otro ya marcado no se repite (" + f.length + ")");
+})();
+
 // Corpus de textos de estudiantes hispanohablantes con cada error anotado
 // (tools/scrivi_corpus.json): cuántos errores marca el corrector propio
 // por familia, y que no marque nada en las versiones corregidas ni en las
@@ -135,7 +142,7 @@ ERR.forEach(function (e) {
 // acepta el modo JSON → el mismo sin él; clave mala → error claro; lee el
 // JSON aunque venga con <think> o ```.
 var GEM = [];
-function gem(name, plan, check, keys) { GEM.push([name, plan, check, keys]); }
+function gem(name, plan, check, keys, mode) { GEM.push([name, plan, check, keys, mode]); }
 function runGem() {
   if (!GEM.length) return console.log("\ncontrolli: " + checks + "   errori: " + fails);
   var g = GEM.shift(), calls = [], mem = {};
@@ -151,15 +158,17 @@ function runGem() {
         { id: "llama-3.3-70b-versatile" }, { id: "whisper-large-v3" }, { id: "viejo-70b", active: false }] }); } });
     }
     var body = JSON.parse(opt.body);
-    calls.push(body.model + (body.response_format ? "~" : ""));
+    calls.push(body.model + (body.response_format ? "~" : "") + (/segundo profesor/.test(body.messages[1].content) ? "#rev" : ""));
     var a = g[1](calls.length, body);
     return Promise.resolve({ ok: a.status === 200, status: a.status, json: function () { return Promise.resolve(a.body); },
                              text: function () { return Promise.resolve(JSON.stringify(a.body || {})); } });
   };
-  S.explain({ prompt: "p", stem: "s", given: "a", answer: "b" }, g[3] || "K", function (err, data) {
-    ok(g[2](err, data, calls), "groq " + g[0] + ": " + (err ? err.message : "ok") + " · " + calls.join(" → "));
+  var cb = function (err, data, meta) {
+    ok(g[2](err, data, calls, meta), "groq " + g[0] + ": " + (err ? err.message : "ok") + " · " + calls.join(" → "));
     runGem();
-  });
+  };
+  if (g[4] === "aicheck") S.aiCheck("Io ho andato a casa.", 11, g[3] || "K", cb);
+  else S.explain({ prompt: "p", stem: "s", given: "a", answer: "b" }, g[3] || "K", cb);
 }
 function reply(txt) { return { choices: [{ message: { content: txt } }] }; }
 var GOOD = reply('{"tambien_correcta":false,"explicacion":"x"}');
@@ -191,4 +200,13 @@ gem("Gemini: modelo retirado (404) → el siguiente", function (n) { return n ==
     function (e, d, c) { return !e && c[1] === "gemini-2.0-flash~"; }, { gemini: "AIza_x" });
 gem("los dos fallan", function () { return { status: 503, body: {} }; },
     function (e) { return e && /Groq: /.test(e.message) && /Gemini: /.test(e.message); }, BOTH);
+// Scrivi: corrige y un segundo profesor revisa; si la revisión falla, queda la primera.
+var FIRST = reply(JSON.stringify({ errores: [{ mal: "ho andato", bien: "sono andato", tipo: "ausiliare", explicacion: "a" },
+                                             { mal: "andato", bien: "andato", tipo: "ausiliare", explicacion: "dup" }], corregido: "x" }));
+var REV = reply(JSON.stringify({ errores: [{ mal: "ho andato", bien: "sono andato", tipo: "ausiliare", explicacion: "revisada" }], corregido: "x" }));
+gem("corrige y revisa", function (n, b) { return { status: 200, body: /segundo profesor/.test(b.messages[1].content) ? REV : FIRST }; },
+    function (e, d, c, m) { return !e && d.errores.length === 1 && d.errores[0].explicacion === "revisada" && c.length === 2 && /#rev$/.test(c[1]) &&
+      m && m.first.provider === "Groq" && m.first.model === "moonshotai/kimi-k2-instruct" && m.review && m.review.model === "moonshotai/kimi-k2-instruct"; }, "K", "aicheck");
+gem("la revisión falla → queda la primera", function (n, b) { return /segundo profesor/.test(b.messages[1].content) ? { status: 503, body: {} } : { status: 200, body: FIRST }; },
+    function (e, d, c, m) { return !e && d.errores.length === 2 && m && m.first && !m.review; }, "K", "aicheck");
 runGem();

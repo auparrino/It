@@ -352,7 +352,7 @@
 
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION in sw.js: test_game checks it). */
-  var APP_VERSION = "v36";
+  var APP_VERSION = "v37";
   function versionLine() {
     return '<p class="muted small version">La Via C1 · versión ' + APP_VERSION + "</p>";
   }
@@ -1668,7 +1668,7 @@
       var fbText = ($("#fb") || {}).innerText || "";
       var x = { prompt: it.prompt, stem: it.stem, options: it.options, given: given, answer: sol,
                 accept: it.accept, feedback: fbText.split("Continuar")[0].replace(/\s+/g, " ").slice(0, 600) };
-      Scrivi.explain(x, aiKeys(), function (err, data) {
+      Scrivi.explain(x, aiKeys(), function (err, data, meta) {
         var o = $("#aiexpout");
         if (!o) return;
         if (err) { o.innerHTML = '<p class="muted small">No pude usar la IA (' + esc(String(err.message || err)) + ").</p>"; if (b) b.disabled = false; return; }
@@ -1683,7 +1683,7 @@
         }
         o.innerHTML = '<div class="aiout"><p>🤖 ' + mk(esc(String((data && data.explicacion) || ""))) + "</p>" +
           (dispute ? '<p class="muted small">La IA cree que ' + (data.tambien_correcta ? "tu respuesta también vale" : "la corrección de la app no es buena") +
-             ". Quedó anotado en Io → «Correcciones para revisar».</p>" : "") + "</div>";
+             ". Quedó anotado en Io → «Correcciones para revisar».</p>" : "") + modelLine(meta) + "</div>";
       });
     });
     $("#say2").onclick = function () { speak(spoken, true); };
@@ -2647,6 +2647,12 @@
   function readKey(k) { try { return localStorage.getItem(k) || ""; } catch (e) { return ""; } }
   function aiKeys() { return { groq: readKey(AI_KEY), gemini: readKey(GEM_KEY) }; }
   function aiKey() { var k = aiKeys(); return k.groq || k.gemini; }
+  // Which AI answered: «Groq · moonshotai/kimi-k2-instruct».
+  function modelLine(m, m2) {
+    var one = function (x) { return x ? esc(x.provider + " · " + x.model) : ""; };
+    if (!m) return "";
+    return '<p class="muted small modelline">' + (m2 ? "Corrigió " + one(m) + " · revisó " + one(m2) : "IA: " + one(m)) + "</p>";
+  }
   function aiKeyFields() {
     var k = aiKeys();
     return '<p class="muted small"><b>Groq</b> (principal): <a href="https://console.groq.com/keys" target="_blank" rel="noopener">console.groq.com/keys</a> → «Create API Key».</p>' +
@@ -2703,16 +2709,20 @@
       if (aiKey() && text.trim()) { r.findings = []; r.hard = 0; runAI(); }
       else fallback();
       function runAI() {
-        r.ai = "…"; r.findings = []; r.hard = 0;
+        r.ai = "…"; r.aiStage = null; r.findings = []; r.hard = 0;
         showScrivi(w, text, r, null);
-        Scrivi.aiCheck(text, w.week, aiKeys(), function (err, data) {
+        Scrivi.aiCheck(text, w.week, aiKeys(), function (err, data, meta) {
           if (view.screen !== "scrivi" || $("#stext") !== box || box.value !== text) return;
           if (err) { r.ai = "error"; r.aiErr = String(err.message || err); fallback(); return; }
-          r.ai = "ok"; r.aiData = data;
+          r.ai = "ok"; r.aiData = data; r.aiMeta = meta;
           r.findings = Scrivi.fromAI(text, data, []);
           r.hard = r.findings.filter(function (f) { return !f.soft; }).length;
           showScrivi(w, text, r, null);
           on("#sretry", runAI);
+        }, function (stage) {
+          if (view.screen !== "scrivi" || $("#stext") !== box || box.value !== text) return;
+          r.aiStage = stage;
+          showScrivi(w, text, r, null);
         });
       }
       function fallback() {
@@ -2744,7 +2754,8 @@
       var missing = r.reqs.filter(function (q) { return !q.ok; });
       var busy = r.ai === "…";
       out.innerHTML = '<div class="card">' +
-        (busy ? '<p>⏳ La IA está corrigiendo tu texto…</p><p class="muted small">Suele tardar menos de 20 segundos.</p>'
+        (busy ? (r.aiStage === "review" ? '<p>⏳ Un segundo profesor está revisando la corrección…</p>' : '<p>⏳ La IA está corrigiendo tu texto…</p>') +
+                '<p class="muted small">Corrige y después revisa: suele tardar menos de 30 segundos.</p>'
           : r.findings.length ? '<p class="scrivi-marked it">' + Scrivi.markup(text, r.findings, esc) + "</p><ol class=\"findings\">" + list + "</ol>"
           : r.ai === "ok" ? "<p>✨ La IA no encontró errores.</p>"
           : '<p>✨ No encontré errores' + (ltState === "ok" ? ", y LanguageTool tampoco." : " de los que sé buscar.") + "</p>") +
@@ -2752,6 +2763,7 @@
               (r.aiData.consigna ? '<p class="muted small">📋 ' + esc(r.aiData.consigna) + "</p>" : "") +
               (r.aiData.comentario ? "<p>🤖 " + esc(r.aiData.comentario) + "</p>" : "") +
               (r.aiData.corregido ? '<p class="muted small">Versión corregida:</p><p class="model it">' + esc(r.aiData.corregido) + "</p>" : "") +
+              (r.aiMeta ? modelLine(r.aiMeta.first, r.aiMeta.review) : "") +
             "</div>" : "") +
         (r.ai === "error" ? '<p class="muted small">⚠️ No pude usar la IA (' + esc(r.aiErr || "") + "). " +
               (/clave|401|403/.test(r.aiErr || "") ? "Revisá las claves en Io. " : "") +
