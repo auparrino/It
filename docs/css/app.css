@@ -19,7 +19,7 @@
   --ombra: 0 1px 2px rgba(60,35,15,.06), 0 10px 28px rgba(60,35,15,.08);
   --raggio: 20px;
   --serif: "Bodoni Moda", "Didot", Georgia, "Times New Roman", serif;
-  --sans: "Titillium Web", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --sans: "Atkinson", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   color-scheme: light;
 }
@@ -41,20 +41,23 @@
   }
 }
 
-/* Bodoni Moda (Bodoni era de Parma) y Titillium Web (Accademia di Belle
-   Arti di Urbino): dos tipografías italianas, servidas desde el propio sitio. */
+/* Bodoni Moda (Bodoni era de Parma), solo para los títulos grandes, y
+   Atkinson Hyperlegible Next para leer: letras bien distintas (I/l/1, a/o),
+   trazos parejos, cómoda en pantallas chicas y en modo oscuro. */
 @font-face { font-family: "Bodoni Moda"; font-style: normal; font-weight: 400 900; font-display: swap;
   src: url(../fonts/bodoni-normal.woff2) format("woff2"); }
 @font-face { font-family: "Bodoni Moda"; font-style: italic; font-weight: 400 900; font-display: swap;
   src: url(../fonts/bodoni-italic.woff2) format("woff2"); }
-@font-face { font-family: "Titillium Web"; font-style: normal; font-weight: 400; font-display: swap;
-  src: url(../fonts/titillium-normal-400.woff2) format("woff2"); }
-@font-face { font-family: "Titillium Web"; font-style: normal; font-weight: 600; font-display: swap;
-  src: url(../fonts/titillium-normal-600.woff2) format("woff2"); }
-@font-face { font-family: "Titillium Web"; font-style: normal; font-weight: 700 800; font-display: swap;
-  src: url(../fonts/titillium-normal-700.woff2) format("woff2"); }
-@font-face { font-family: "Titillium Web"; font-style: normal; font-weight: 900; font-display: swap;
-  src: url(../fonts/titillium-normal-900.woff2) format("woff2"); }
+@font-face { font-family: "Atkinson"; font-style: normal; font-weight: 300 550; font-display: swap;
+  src: url(../fonts/atkinson-400-normal.woff2) format("woff2"); }
+@font-face { font-family: "Atkinson"; font-style: normal; font-weight: 551 760; font-display: swap;
+  src: url(../fonts/atkinson-700-normal.woff2) format("woff2"); }
+@font-face { font-family: "Atkinson"; font-style: normal; font-weight: 761 1000; font-display: swap;
+  src: url(../fonts/atkinson-800-normal.woff2) format("woff2"); }
+@font-face { font-family: "Atkinson"; font-style: italic; font-weight: 300 550; font-display: swap;
+  src: url(../fonts/atkinson-400-italic.woff2) format("woff2"); }
+@font-face { font-family: "Atkinson"; font-style: italic; font-weight: 551 1000; font-display: swap;
+  src: url(../fonts/atkinson-700-italic.woff2) format("woff2"); }
 
 * { box-sizing: border-box; }
 
@@ -870,7 +873,7 @@ body.ingame .feedback.sbagliato #lesnext2 { background: var(--rosso-chiaro); box
    Estetica italiana.  «La Via» è una strada: il logo e le settimane sono
    targhe di via romane in travertino; le schede grandi sono maioliche di
    Vietri e la pausa caffè ha la tenda a righe del bar.  Bodoni per i
-   titoli, Titillium per il resto.
+   titoli, Atkinson per il resto.
    ===================================================================== */
 
 :root {
@@ -1034,3 +1037,20 @@ ul.vocab { list-style: none; padding: 0; margin: 6px 0 0; display: grid; gap: 6p
 ul.vocab li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px; padding: 6px 0; border-bottom: 1px dashed var(--line, #ddd); }
 ul.vocab li small { flex-basis: 100%; color: var(--muted, #777); padding-left: 34px; }
 ul.vocab .say { padding: 2px 6px; }
+
+/* ---------- leggibilità: Bodoni solo nei titoli grandi; tutto ciò che si
+   legge (frasi dell'esercizio, opzioni, lezioni, schede) in Atkinson. */
+body { font-size: 17px; line-height: 1.55; }
+h2, .stem, .fit, .rk, .lsec, .fdg .fit, .bigbtn b, .weekcard b, .pathsum b,
+.mission b, .scene b, .lab b, .ep b, .week .t, .opt::before, .node .dot,
+body.ingame .feedback .verdict, body.ingame .feedback .sol {
+  font-family: var(--sans); font-variation-settings: normal; letter-spacing: 0; }
+h2 { font-weight: 800; }
+.stem { font-weight: 700; line-height: 1.45; }
+.bigbtn b { font-style: normal; font-weight: 800; font-size: 1.2rem; }
+.weekcard b, .mission b, .scene b, .lab b, .ep b, .week .t { font-weight: 700; }
+/* l'italiano dentro il testo: corsivo leggibile, non il Bodoni sottile */
+.lesson i.it, ul.exs .it, .note i.it, .call i.it, .diag i.it, body.ingame .feedback .sol {
+  font-family: var(--sans); font-style: italic; font-weight: 700; }
+.opt { font-weight: 700; }
+h3 { letter-spacing: .08em; font-size: .8rem; }
