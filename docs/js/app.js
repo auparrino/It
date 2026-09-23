@@ -607,6 +607,23 @@
   }
 
   function lessonRead(n) { return !!(state.read || {})[n]; }
+  /* A lesson in parts (week.parts): each part is read on its own and the
+     training only asks what the parts already read cover. */
+  function partsOf(w) { return w && w.parts && w.parts.length ? w.parts : null; }
+  function partRead(week, k) { return !!((state.readParts || {})[week] || {})[k]; }
+  function partsRead(w) {
+    var ps = partsOf(w); if (!ps) return null;
+    return ps.map(function (p, k) { return partRead(w.week, k) || lessonRead(w.week); });
+  }
+  // Item ids the learner may be asked, given the parts read (none read: the
+  // first part, so that training before reading is not a wall).
+  function partItems(w) {
+    var ps = partsOf(w); if (!ps) return null;
+    var read = partsRead(w), ids = {}, any = false;
+    ps.forEach(function (p, k) { if (read[k]) { any = true; p.items.forEach(function (id) { ids[id] = 1; }); } });
+    if (!any) ps[0].items.forEach(function (id) { ids[id] = 1; });
+    return ids;
+  }
 
   /* Tre stelle per settimana: la lezione giocata, la settimana superata
      (20 giuste), la padronanza (85% su almeno 30).  Il boss: superato = 3. */
@@ -704,10 +721,18 @@
 
   var les = null;
 
-  function startLezione() {
+  function startLezione(part) {
     var w = course.weeks[view.week - 1];
     var isItalian = function (word) { return !!(glossario && glossario[String(word).toLowerCase()]); };
-    les = { w: w, steps: Lezione.steps(w.lesson, Math.random, w.week, isItalian), i: 0, right: 0, asked: 0, answered: false };
+    var ps = partsOf(w);
+    if (ps && (part == null || isNaN(part))) {
+      // the first part not yet read (or the first one again)
+      part = 0;
+      for (var k = 0; k < ps.length; k++) { if (!partRead(w.week, k)) { part = k; break; } }
+    }
+    var only = ps ? ps[part].blocks : null;
+    les = { w: w, part: ps ? part : null, steps: Lezione.steps(w.lesson, Math.random, w.week, isItalian, only),
+            i: 0, right: 0, asked: 0, answered: false };
     view.screen = "lezione";
     render();
     savePending();
@@ -723,23 +748,29 @@
       '<button class="btn ghost" id="lesquit">✕</button></div>';
     if (!st) {
       var pct = les.asked ? Math.round(les.right / les.asked * 100) : 100;
+      var psd = partsOf(w), nextPart = null;
+      if (psd) for (var kk = 0; kk < psd.length; kk++) { if (!partRead(w.week, kk)) { nextPart = kk; break; } }
       return '<div class="card lesdone center"><div class="bigstar">★</div>' +
-        "<h1>¡Lección completa!</h1>" +
-        '<p class="lead">Semana ' + w.week + " · " + esc(w.title) + "</p>" +
+        "<h1>" + (psd ? (nextPart == null ? "¡Lección completa!" : "¡Parte " + (les.part + 1) + " de " + psd.length + " lista!") : "¡Lección completa!") + "</h1>" +
+        '<p class="lead">Semana ' + w.week + " · " + esc(psd ? psd[les.part].h : w.title) + "</p>" +
         '<div class="scorebig"><b>' + les.right + "/" + les.asked + '</b><span>+' + les.xp + " xp</span></div>" +
         (les.extras || []).map(function (x) { return '<p class="note selfrepair">' + esc(x) + "</p>"; }).join("") +
         '<p class="muted">' + (pct === 100 ? "Perfecta: ni un error en los chequeos." :
           pct >= 70 ? "Bien. Lo que fallaste vuelve en el entrenamiento." : "Repasala cuando quieras: se puede jugar de nuevo.") + "</p>" +
-        '<div class="row centerrow" style="margin-top:14px"><button class="btn" id="lesplay">🎯 A entrenar</button>' +
+        '<div class="row centerrow" style="margin-top:14px"><button class="btn" id="lesplay">🎯 A entrenar' +
+          (psd ? " esta parte" : "") + "</button>" +
+        (psd && nextPart != null ? '<button class="btn ghost" id="lesnextpart" data-part="' + nextPart + '">📘 Parte ' + (nextPart + 1) + " →</button>" : "") +
         '<button class="btn ghost" id="lesback">Volver a la semana</button></div></div>';
     }
+    var partLabel = les.part != null ? " · parte " + (les.part + 1) + " de " + partsOf(w).length : "";
     if (st.kind === "intro") {
-      return hudH + '<div class="card lescard"><div class="badge-new">📘 Lección · semana ' + w.week + "</div>" +
+      return hudH + '<div class="card lescard"><div class="badge-new">📘 Lección · semana ' + w.week + partLabel + "</div>" +
         "<h1>" + esc(w.title) + "</h1><p class=\"intro\">" + mk(w.lesson.intro) + "</p>" +
         '<button class="btn wide" id="lesnext">Empezar →</button></div>';
     }
     if (st.kind === "block") {
-      return hudH + '<div class="card lescard lesson">' + renderBlock(w.lesson.blocks[st.i], st.i, st.part) +
+      return hudH + (partLabel && les.i === 0 ? '<div class="badge-new">📘 Lección · semana ' + w.week + partLabel + "</div>" : "") +
+        '<div class="card lescard lesson">' + renderBlock(w.lesson.blocks[st.i], st.i, st.part) +
         '<button class="btn wide" id="lesnext">Seguir →</button></div>';
     }
     var q = st.q;
@@ -790,9 +821,16 @@
       if (!state.read) state.read = {};
       if (!state.lessonScore) state.lessonScore = {};
       var pct = les.asked ? Math.round(les.right / les.asked * 100) : 100;
-      les.xp = (first ? Engine.XP.lesson : 5) + les.right * 2;
       var planBefore = doneCount(w);
-      if (first) state.read[w.week] = Date.now();
+      if (les.part != null) {
+        if (!state.readParts) state.readParts = {};
+        var rp = state.readParts[w.week] || (state.readParts[w.week] = {});
+        first = !rp[les.part];
+        rp[les.part] = Date.now();
+        var all = partsOf(w).every(function (p, k) { return !!rp[k]; });
+        if (all && !state.read[w.week]) state.read[w.week] = Date.now();
+      } else if (first) state.read[w.week] = Date.now();
+      les.xp = (first ? Engine.XP.lesson : 5) + les.right * 2;
       les.extras = missionCheck(w.week, planBefore);
       state.lessonScore[w.week] = Math.max(pct, state.lessonScore[w.week] || 0);
       gain(les.xp);
@@ -833,7 +871,13 @@
           sub: "85% de aciertos. Superarlo te da las 3 estrellas.", cls: "boss" });
       return out;
     }
-    if (w.lesson) m({ kind: "lez", done: lessonRead(w.week), ico: "📘", title: "Jugá la lección",
+    var psw = partsOf(w);
+    if (w.lesson && psw) psw.forEach(function (p, k) {
+      m({ kind: "lez", arg: String(k), done: partRead(w.week, k) || lessonRead(w.week), ico: "📘",
+          title: "Lección " + (k + 1) + "/" + psw.length + ": " + p.h,
+          sub: (partRead(w.week, k) || lessonRead(w.week) ? "Hecha · " : "") + p.items.length + " ejercicios de esta parte entran al entrenamiento" });
+    });
+    else if (w.lesson) m({ kind: "lez", done: lessonRead(w.week), ico: "📘", title: "Jugá la lección",
       sub: lessonRead(w.week)
         ? "Hecha" + (state.lessonScore && state.lessonScore[w.week] != null ? " · " + state.lessonScore[w.week] + "% en los chequeos" : "")
         : "Teoría en pasos cortos, con preguntas." });
@@ -916,7 +960,7 @@
 
   function goMission(kind, arg) {
     var w = course.weeks[view.week - 1];
-    if (kind === "lez") startLezione();
+    if (kind === "lez") startLezione(arg != null ? +arg : undefined);
     else if (kind === "vocab") startRound("vocab");
     else if (kind === "play") startRound(w.boss ? "boss" : "round");
     else if (kind === "play2") startRound("round");
@@ -979,6 +1023,8 @@
       '<h1 class="targa big"><span class="t-sup">Settimana ' + romano(w.week) + " · " + esc(w.level) +
         '</span><span class="t-via">' + esc(w.title) + "</span></h1>" +
       '<p class="lead">' + esc(w.focus) + '</p>' +
+      (w.fare ? '<p class="fare">🎯 Al final de la semana: <b>' + esc(w.fare) + '</b>' +
+        (w.tema ? ' <span class="muted">· ' + esc(w.tema) + '</span>' : '') + '</p>' : '') +
       missions(w, st, nChal) +
       vocabCard(w) +
       '<div class="card"><h2>Lo que se juega esta semana</h2>' +
@@ -1015,7 +1061,7 @@
     if (kind === "giorno") {
       w = course.weeks[Math.min(state.unlocked, 52) - 1];
       view.week = w.week;
-      items = Drills.buildRound(course, w, { map: itemMap, state: state, silent: state.silent, size: 6 });
+      items = Drills.buildRound(course, w, { map: itemMap, state: state, silent: state.silent, size: 6, only: partItems(w) });
     }
     else if (kind === "boss") items = Drills.buildBoss(course, w, state);
     else if (kind === "review") items = Drills.buildReview(course, state, 20, drillOpts());
@@ -1061,7 +1107,7 @@
       items = ch && ch.play ? ch.play.map(function (id) { return itemMap[id]; }).filter(Boolean) : [];
       items = Drills.firstRecognize(items, state, w.week);
     }
-    else items = Drills.buildRound(course, w, { map: itemMap, state: state, silent: state.silent });
+    else items = Drills.buildRound(course, w, { map: itemMap, state: state, silent: state.silent, only: partItems(w) });
 
     if (!items.length) { toast("No hay preguntas para este modo todavía."); return; }
 
@@ -1313,7 +1359,8 @@
     var verdict = Engine.grade(given, it);
     if (verdict === Engine.VERDICT.RIGHT || !window.Diagnosi) { settle(verdict, given); return; }
     var cd = it.choiceDiag || { before: "", after: "" };
-    var d = Diagnosi.explainChoice(cd.before + given + cd.after, cd.before + it.answer + cd.after);
+    var d = Diagnosi.explainChoice(cd.before + given + cd.after, cd.before + it.answer + cd.after,
+                                   it.choiceDiag ? {} : { stem: it.stem, nominal: it.type === "plural" || /plural/i.test(it.prompt || "") });
     // Only when the options are Italian: diagnosing a Spanish gloss as if it
     // were Italian would be nonsense.
     // Spanish glosses (the week's words, the bank) are never diagnosed as
@@ -1340,7 +1387,8 @@
     var accept = (it.accept && it.accept.length ? it.accept : [it.answer]).map(function (x) {
       return String(x).replace(/\s*\|\s*/g, " ");   // two blanks: typed one after the other
     });
-    var d = window.Diagnosi ? Diagnosi.diagnose(given, accept, { stem: it.stem }) : { verdict: "sbagliato" };
+    var diagCtx = { stem: it.stem, prompt: it.prompt, nominal: it.type === "plural" || /plural/i.test(it.prompt || "") };
+    var d = window.Diagnosi ? Diagnosi.diagnose(given, accept, diagCtx) : { verdict: "sbagliato" };
     // The whole answer in Spanish: a hint about one word is useless.
     var esText = it.frase ? it.frase.es : it.type === "translate" ? it.stem : "";
     if (d.hint && esText) {
@@ -1639,7 +1687,7 @@
                        lives: round.lives === Infinity ? null : round.lives, maxLives: round.maxLives,
                        xp: round.xp, again: round.again, log: round.log } };
       } else if (view.screen === "lezione" && les && les.i < les.steps.length) {
-        p = { type: "lezione", week: les.w.week, at: Date.now(), steps: les.steps, i: les.i, right: les.right, asked: les.asked };
+        p = { type: "lezione", week: les.w.week, part: les.part, at: Date.now(), steps: les.steps, i: les.i, right: les.right, asked: les.asked };
       }
       if (p) localStorage.setItem(PENDING_KEY, JSON.stringify(p));
       else localStorage.removeItem(PENDING_KEY);
@@ -1671,7 +1719,7 @@
       if (round.lives === null) round.lives = Infinity;
       view.week = p.week; view.tab = p.tab || "oggi"; view.screen = "gioco";
     } else {
-      les = { w: course.weeks[p.week - 1], steps: p.steps, i: p.i, right: p.right, asked: p.asked, answered: false };
+      les = { w: course.weeks[p.week - 1], part: p.part == null ? null : p.part, steps: p.steps, i: p.i, right: p.right, asked: p.asked, answered: false };
       view.week = p.week; view.tab = "percorso"; view.screen = "lezione";
     }
     render();
@@ -2351,7 +2399,8 @@
     });
     on("#gym", function () { startRound("gym"); });
     on("#vocab", function () { startRound("vocab"); });
-    on("#lez", startLezione);
+    on("#lez", function () { startLezione(); });
+    on("#lesnextpart", function () { var b = $("#lesnextpart"); startLezione(+b.dataset.part); });
     on("#play2", function () { startRound("round"); });
     document.querySelectorAll("[data-m]").forEach(function (b) {
       b.onclick = function () { goMission(b.dataset.m, b.dataset.arg); };

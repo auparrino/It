@@ -194,10 +194,13 @@
   }
 
   // The playable sequence: intro, then each block followed by its check.
-  function steps(lesson, rnd, week, isItalian) {
+  function steps(lesson, rnd, week, isItalian, only) {
     rnd = rnd || Math.random;
-    var out = [{ kind: "intro" }];
+    // only: the block indices of one part of the lesson (a week studied in
+    // several short sessions); the intro opens the first part only.
+    var out = (!only || only.indexOf(0) >= 0) ? [{ kind: "intro" }] : [];
     lesson.blocks.forEach(function (b, i) {
+      if (only && only.indexOf(i) < 0) return;
       // Tabla y ejemplos juntos no entran en una pantalla: dos pasos.
       if (b.table && b.ex && b.ex.length) {
         out.push({ kind: "block", i: i, part: "a" });

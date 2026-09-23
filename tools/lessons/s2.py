@@ -56,6 +56,12 @@ LESSONS = {
 "intro": "LA semana difícil del B1: passato prossimo o imperfetto. No se "
          "decide por «puntual o duradero», sino por lo que mira quien habla: "
          "los hechos o el decorado.",
+"parts": [
+ {"h": "El imperfetto: forma e irregulares", "blocks": [0, 1],
+  "match": r"Conjugá el verbo en imperfetto|usando el imperfetto|ya no son como antes|estabas preparado|robar|Completá con el imperfetto"},
+ {"h": "Imperfetto o passato prossimo: el contraste", "blocks": [2, 3, 4, 5],
+  "match": r"passato prossimo|tiempo|trapassato|auxiliar|cortes"},
+],
 "blocks": [
  {"h": "La forma del imperfetto",
   "r": "Raíz + *-a-*, *-e-* o *-i-* según la conjugación, y las mismas "
@@ -170,6 +176,14 @@ LESSONS = {
 "intro": "Demostrativos, posesivos e indefinidos: las piezas chicas que "
          "arman cualquier frase larga. Casi todo calca el castellano; esta "
          "semana fijás los pocos puntos donde no.",
+"parts": [
+ {"h": "Demostrativos: questo y quello", "blocks": [0],
+  "match": r"questo|quello|demostrativ"},
+ {"h": "Posesivos: con artículo, salvo la familia", "blocks": [1, 2],
+  "match": r"posesiv|suo o loro|invitados|devolviendo|\bmio\b|\btuo\b|\bsuo\b|\bloro\b|famil"},
+ {"h": "Indefinidos y molto", "blocks": [3, 4],
+  "match": r"indefinid|tutto|molto|alcun|qualche|nessun|ogn|poch|tropp"},
+],
 "blocks": [
  {"h": "Demostrativos: solo dos grados",
   "r": "Dos grados, no tres: *questo* (cerca de quien habla) y *quello* "
@@ -573,7 +587,7 @@ LESSONS = {
                      ["piccolo", "minore", "il minore", "minimo"],
                      ["bene (adv.)", "meglio", "—", "benissimo"],
                      ["male (adv.)", "peggio", "—", "malissimo"]]},
-  "ex": [["È il migliore amico che ho.", "Es el mejor amigo que tengo."],
+  "ex": [["È il mio migliore amico.", "Es mi mejor amigo."],
          ["Canta meglio di me.", "Canta mejor que yo."]],
   "warn": "*migliore* es adjetivo (*un libro migliore*); *meglio* es "
           "adverbio (*canta meglio*). Confundirlos es como decir «canta "
@@ -735,8 +749,9 @@ LESSONS = {
   "r": "*essere* con desplazamiento, cambio de estado, reflexivos, "
        "pronominales, impersonales y familia de *piacere*: el participio "
        "concuerda con el sujeto. *avere* con todo lo demás.",
-  "warn": "Con *avere*, el participio solo concuerda si hay *lo, la, li, le* "
-          "delante: *le ho viste*. Y *camminare, viaggiare* van con *avere*."},
+  "warn": "Con *avere*, el participio concuerda con *lo, la, li, le, ne* "
+          "delante (*le ho viste, ne ho comprate due*); con *mi, ti, ci, vi* "
+          "es opcional. *Camminare, viaggiare*: con *avere*."},
 
  {"h": "Raíces de futuro y condicional",
   "r": "Una raíz, dos tiempos: la raíz irregular del futuro es la misma del "

@@ -25,6 +25,69 @@ DATA = os.path.join(ROOT, "docs", "data")
 #                       t = temas del banco de ítems propios
 #                       v = verbos y tiempos del gimnasio de conjugación
 # --------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# Lo que se aprende a hacer cada semana y su campo léxico, siguiendo la
+# estructura por unidades comunicativas de los cursos oficiales (Dante, IIC,
+# Università per Stranieri; síntesis del Profilo della lingua italiana y de
+# Nuovo Espresso / Nuovo Contatto): cada semana de gramática es también una
+# unidad con una función y un tema, como en esos programas.
+# --------------------------------------------------------------------------
+SAI_FARE = {
+    1: ("Saludar, despedirte y deletrear tu nombre", "Saludos, tu / Lei, alfabeto"),
+    2: ("Nombrar cosas y decir qué hay (c'è / ci sono)", "Aula y objetos cotidianos"),
+    3: ("Pedir algo en el bar y decir qué hay", "Café y bar italiano; partitivo"),
+    4: ("Presentarte y describir personas: nacionalidad, edad, trabajo", "Países, profesiones, aspecto físico"),
+    5: ("Pedir, pagar y contar tu rutina", "Bar y restaurante; la jornada"),
+    6: ("Moverte por la ciudad: ir, hacer, venir, salir", "Lugares de la ciudad"),
+    7: ("Decir la hora, las fechas y los horarios", "Días, meses, estaciones, precios"),
+    8: ("Preguntar y dar direcciones", "Indicaciones, la ciudad"),
+    9: ("Decir dónde estás, adónde vas y de dónde venís", "Lugares y medios de transporte"),
+    10: ("Ofrecer, agradecer y pedir favores sin repetir nombres", "Regalos, favores"),
+    11: ("Contar lo que hiciste el fin de semana", "ieri, la settimana scorsa"),
+    12: ("Contar tu jornada; dar instrucciones y consejos", "Rutina, cuerpo, farmacia"),
+    13: ("Manejarte en las situaciones cotidianas de A1 y A2", "Repaso de la primera estación"),
+    14: ("Hablar de gustos, invitar, aceptar y rechazar", "Hobbies, deporte, salidas"),
+    15: ("Describir cómo eran las cosas y contar una historia ordenada", "Infancia, escuela; regiones de Italia"),
+    16: ("Contar lo que hiciste ayer, de la mañana a la noche", "Rutina y viajes"),
+    17: ("Describir la familia y la casa; señalar y cuantificar", "Familia, ambientes y muebles"),
+    18: ("Negar, exclamar y reaccionar", "Conversación cotidiana"),
+    19: ("Hablar de planes y hacer suposiciones", "Vacaciones, trabajo"),
+    20: ("Pedir con cortesía y expresar deseos", "Servicios, oficina"),
+    21: ("Comprar, pedir cantidades y dar una receta", "Mercado, envases, cocina regional"),
+    22: ("Contar experiencias y anécdotas", "Viajes, estudio"),
+    23: ("Comparar y elegir", "Ropa, colores, talles"),
+    24: ("Dar y pedir opiniones", "Temas de actualidad"),
+    25: ("Expresar deseos, esperanzas y dudas", "Relaciones personales"),
+    26: ("Contar, opinar y planificar con soltura", "Repaso de la segunda estación"),
+    27: ("Matizar cómo, cuándo y cuánto", "Sociedad italiana"),
+    28: ("Argumentar a favor y en contra", "Italia hoy"),
+    29: ("Opinar sobre lo que ya pasó", "Actualidad"),
+    30: ("Resumir una noticia y contar lo que otros querían", "Prensa, TV, redes"),
+    31: ("Aconsejar y arrepentirte", "Vida laboral"),
+    32: ("Discutir estereotipos con precisión temporal", "Italianos y extranjeros"),
+    33: ("Poner condiciones e imaginar alternativas", "Mercado laboral; decisiones de vida"),
+    34: ("Describir personas y cosas con precisión", "Amistad, pareja"),
+    35: ("Hablar de problemas colectivos y describir normas", "Ecología, instituciones"),
+    36: ("Describir usos y costumbres", "Ciudad y sociedad"),
+    37: ("Leer relatos históricos y comentar un cuento", "Historia de Italia; narrativa"),
+    38: ("Relatar lo que dijo otro", "Entrevistas, declaraciones"),
+    39: ("Argumentar, relatar y matizar", "Repaso de la tercera estación"),
+    40: ("Describir procesos: hacer hacer, dejar hacer", "Servicios y trámites"),
+    41: ("Contar lo que viste y oíste", "Crónica"),
+    42: ("Escribir un mail formal sin errores de régimen", "Lenguaje burocrático básico"),
+    43: ("Condensar información con el infinitivo", "Ciencia y tecnología"),
+    44: ("Condensar información con formas implícitas", "Ciencia y tecnología"),
+    45: ("Usar lenguaje idiomático", "Modi di dire, humor e ironía"),
+    46: ("Ampliar vocabulario por derivación", "Formación de palabras"),
+    47: ("Leer y producir textos con datos", "Economía y política; periodismo"),
+    48: ("Manejar el italiano neostandard hablado", "Variedades sociales y geográficas"),
+    49: ("Sostener una tesis por escrito y oralmente; redactar informe y reseña", "Debate público; registro culto y coloquial"),
+    50: ("Analizar textos y usar colocaciones sin caer en falsos amigos", "Autores del Novecento"),
+    51: ("Matizar concesión, hipótesis y relación", "Sintaxis compleja"),
+    52: ("Certificar tu C1", "PLIDA / CILS / CELI C1"),
+}
+
+
 WEEKS = [
     # ---------------- Stagione 1: Le Fondamenta (A1 -> A2) ----------------
     dict(w=1, title="Suoni e ortografia", level="A1", d=[], r=[],
@@ -1024,6 +1087,8 @@ def main() -> None:
             "title": spec["title"],
             "level": spec["level"],
             "focus": spec["focus"],
+            "fare": SAI_FARE[spec["w"]][0],
+            "tema": SAI_FARE[spec["w"]][1],
             "keys": spec["keys"],
             "lesson": lessons.get(spec["w"]),
             "boss": bool(spec.get("boss")),
@@ -1103,6 +1168,34 @@ def main() -> None:
         "challenges": flat,
         "sources": [dummies["source"], routledge["source"]],
     }
+    # Lesson parts (tools/lessons: "parts"): a week studied in several short
+    # sessions, each with its own practice.  Each exercise of the week goes
+    # to the first part whose pattern matches its prompt, stem or answer;
+    # what matches nothing goes to the last part (the sillabo already placed
+    # it in this week, so the whole lesson covers it).
+    by_id_all = {i["id"]: i for i in course["items"]}
+    for w in weeks:
+        lesson = w.get("lesson") or {}
+        parts = lesson.get("parts")
+        if not parts:
+            w["parts"] = None
+            continue
+        compiled = [{"h": p["h"], "blocks": list(p["blocks"]), "items": []} for p in parts]
+        for iid in w["items"]:
+            it = by_id_all[iid]
+            text = " ".join([it.get("prompt") or "", it.get("stem") or "", str(it.get("answer") or "")])
+            ans = str(it.get("answer") or "").strip()
+            home = len(parts) - 1
+            for k, p in enumerate(parts):
+                if re.search(p["match"], text, re.I) or re.search(p["match"], ans, re.I):
+                    home = k
+                    break
+            compiled[home]["items"].append(iid)
+        w["parts"] = compiled
+        blocks_in_parts = sorted(b for p in parts for b in p["blocks"])
+        if blocks_in_parts != list(range(len(lesson["blocks"]))):
+            raise SystemExit("semana %d: las partes no cubren todos los bloques una vez" % w["week"])
+
     # Words of the week: the new, not transparent words its exercises use most,
     # with the meaning and a sentence of the course where they appear.  They
     # are presented and practised before (and inside) the week's rounds.

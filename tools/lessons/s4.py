@@ -112,6 +112,12 @@ LESSONS = {
 42: {
 "intro": "Vas a usar la preposición correcta entre verbo e infinitivo. No "
          "hay regla: se memoriza, pero por grupos bastante estables.",
+"parts": [
+ {"h": "Verbos con a y con di + infinitivo", "blocks": [0, 1],
+  "match": r"di o a|a \+ infinitivo|pensare|di \+|con di|con a\b|credere y parlare"},
+ {"h": "Sin preposición, los que cambian y cómo estudiarlos", "blocks": [2, 3, 4],
+  "match": r"sin preposición|verbo indicado|preposición de cada verbo|distinto|Elegí"},
+],
 "blocks": [
  {"h": "Verbos con a + infinitivo",
   "r": "Empezar, seguir, lograr, aprender, ayudar y empujar a otro llevan "
@@ -420,7 +426,8 @@ LESSONS = {
 
  {"h": "Porcentajes",
   "r": "Llevan **artículo masculino**: *il 20% degli italiani*. El verbo "
-       "suele concordar con el sustantivo que sigue.",
+       "puede ir en singular (con *il 20%*) o en plural (con el "
+       "sustantivo que sigue): las dos formas se aceptan.",
   "ex": [["Il 30% degli studenti sono stranieri.", "El 30% de los estudiantes son extranjeros."],
          ["Il 20% degli italiani vive qui.", "El 20% de los italianos vive acá."]]},
 
