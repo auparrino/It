@@ -123,7 +123,7 @@ acierto; está bien que un principiante que juega 25 minutos la alcance.
 Sobre el código de esta vuelta: `test_game`, `test_frasi`, `test_diagnosi`,
 `test_conjugator` y `check_lessons` pasan; la simulación de la carrera da
 los números de la tabla de arriba; la partida del principiante, 0
-anomalías. Service worker en v22.
+anomalías. Service worker en v23.
 
 ## Lo que queda
 
@@ -145,3 +145,85 @@ anomalías. Service worker en v22.
   hacen falta las *Parole* del banco). Son alcanzables jugando.
 - **La guardia contra el doble toque** (300 ms después de cada pantalla)
   también se traga un toque rápido legítimo; un dedo ansioso lo nota.
+
+## Vuelta 3: correcciones revisadas, lecciones en partes, teoría
+
+Pedido del usuario: revisar que las correcciones tengan sentido (algunas
+hacían ruido), partir las semanas demasiado cargadas (los artículos, y las
+que estén igual), revisar la teoría, y lo raro con las ciudades y el artículo.
+
+### Las correcciones, a escala
+
+Un harness (`scratchpad/diag_review.js`) toma los ejercicios escritos de las
+semanas 1 a 14 y les inyecta los errores que comete un hispanohablante:
+palabra en español, sin doble, sin tilde, vocal final cambiada, otro artículo,
+otra persona del verbo, el infinitivo sin conjugar y la consigna copiada en
+español. 3.295 casos; se leyó una muestra de cada combinación (tipo de error →
+categoría) y se buscaron familias de sinsentido. Lo que había y quedó
+corregido en `docs/js/diagnosi.js`:
+
+| Lo que decía | Ahora |
+|---|---|
+| «*gle* → concordancia: artículos, posesivos, adjetivos… toman el género del sustantivo» | «*gle* no es una palabra italiana. El artículo de *errori* es *gli*: *gli errori*» |
+| «*ritornare* por *ritornate*: error de tipeo» | «Escribiste el infinitivo; conjugado para esta persona queda *ritornate*» (también cuando el infinitivo viene de la consigna: *inviare*, *interessare*) |
+| «*prendere* existe en italiano, pero no significa lo que creés» (falso amigo) al escribir el infinitivo de *prendi* | el infinitivo, no un falso amigo |
+| «*Entiendo.* → Acá va *capisco*» (sin decir qué pasó) | «Copiaste la consigna en español. En italiano: *Capisco*»; y *tienes, señor, televisión, esperen* se reconocen como español aunque no estén en el diccionario (-s final, ñ, tilde aguda, -ción, -ar/-ir, -en/-an) |
+| «*la* por *lo* (l'albero → ___): ** es masculino: *lo *» | un pronombre: la consigna dice «pronombre» y no hay sustantivo después |
+| «*quele scarpe le compro*: el pronombre va pegado al final» | una doble consonante; el chequeo de enclíticos exige que el pronombre esté junto al verbo |
+| «*ha avuto* por *hai avuto*: acá va un tiempo compuesto» | la persona (*ha* es de *lui/lei*; el sujeto es *tu*) |
+| «*Ci è piaciuto*: c'è + singular, ci sono + plural» | *piacere* concuerda con lo que gustó |
+| «*prepararsi* por *prepararci*: error de tipeo» | el pronombre reflexivo concuerda con el sujeto también en infinitivo |
+| «*la genti*: la forma es *gente*» como concordancia | «*genti* es el plural; acá va el singular *gente*» / «*mangie* no existe; la forma es *mangia* (mangiare, lui/lei, presente)» |
+| «*la* por *le*: acá el sustantivo está en plural: *le*» | «*arance* está en plural: *le arance* (singular: *arancia*)»; con *città*: «no cambia en plural: solo el artículo lo marca» |
+| «*prime* por *primi*: concordancia: *primi*» sin decir con qué | el artículo de adelante dice con qué concuerda: «concuerda con *cugini* (masculino plural)» |
+| «*dove que*: *que* es español y acá sobra» | «Hay español mezclado: *que*. Mezcla español e italiano (*dove* = dónde). En italiano: *dovere* (*que* = *che*)» |
+| «Falta el artículo: en italiano el sustantivo casi siempre lleva artículo» ante *Italia è bella* | «los países, las regiones y los continentes llevan artículo (*l'Italia*, la Toscana); las ciudades no: Roma è bella, vado a Roma»; y al revés, «*La Roma è bella*: las ciudades y los nombres de persona van sin artículo» |
+
+Además, un hueco se juzga dentro de su oración («___ casa», «Sono le ___»),
+así el artículo ve el sustantivo y la hora ve el *sono*. El harness cerró con
+0 mensajes rotos y sin ninguna de esas familias; lo que queda marcado son
+artefactos del propio harness (*un* por *uno* contado como español, nombres
+propios). `test_diagnosi` pasa con 6.153 controles.
+
+### Lecciones en partes
+
+La semana 3 (artículos) era una sola lección con cinco bloques y 69
+ejercicios. Ahora está en cuatro partes (determinados 20 ejercicios ·
+indeterminados 10 · preposiciones articuladas 23 · partitivo y usos 16), cada
+una como misión del percorso con su propio entrenamiento. Con el mismo
+criterio (bloques y ejercicios) quedaron en partes las semanas 1 (3), 2 (2),
+5 (2), 6 (2), 9 (3), 11 passato prossimo (3), 12 (3), 15 (2), 17 (3), 30 (2)
+y 42 (2). Probado en el navegador en las semanas 1 y 3: las partes se juegan
+en orden, «A entrenar esta parte» trae solo ejercicios de esa parte (más el
+gimnasio y las palabras), el briefing va contando y la semana siguiente se
+abre al terminar la última.
+
+### La teoría
+
+Una revisión completa de las 52 lecciones (260 bloques) por un revisor
+independiente no encontró formas italianas incorrectas. Encontró cuatro
+inconsistencias, corregidas: *sognare di* (semana 9) contradecía a *sognare
+qualcuno* (42); la semana 26 decía que con *avere* el participio concuerda
+«solo» con *lo, la, li, le* (y 21 exige *ne*); un ejemplo con superlativo
+relativo sin congiuntivo (23); la regla de los porcentajes (47) contradecía su
+propio ejemplo. Lo de las ciudades: el bloque «Artículo donde el castellano no
+lo pone» (semana 3) mezclaba en una regla los que llevan artículo (países,
+regiones, lenguas, posesivos) con la excepción de las ciudades, que iba en una
+nota aparte. Ahora dice la regla corta: **país con artículo, ciudad sin
+artículo** (*l'Italia*, *Roma è bella*, *abito in Italia*, *abito a Roma*),
+con ejemplo propio, y el diagnóstico lo explica igual.
+
+### La estructura de los cursos oficiales
+
+Con el documento sobre Dante, IIC y Università per Stranieri: cada semana
+lleva ahora qué se aprende a hacer y en qué campo léxico (unidad
+comunicativa), y las partes de lección responden a «una unidad son tres
+clases». Detalle en el README («Cómo se acomoda a los cursos oficiales»).
+
+### Verificación
+
+`test_game` 42.552 · `test_frasi` 29.319 · `test_diagnosi` 6.153 ·
+`test_conjugator` 1.442 · `check_lessons` 0 problemas · simulación de la
+carrera: 52 semanas, 4 jefes al primer intento, *Madrelingua* nivel 44, cola
+de ripasso máx. 710 / final 368, 242 ejercicios nunca servidos (188 fuera de
+las sfide), 0 errores. Service worker en v23.

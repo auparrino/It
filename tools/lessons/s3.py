@@ -174,6 +174,12 @@ LESSONS = {
 "intro": "Congiuntivo imperfetto y trapassato: los necesitás después de un "
          "verbo en pasado o en condicional, y para desear lo imposible. Son "
          "sorprendentemente regulares.",
+"parts": [
+ {"h": "Congiuntivo imperfetto: forma e irregulares", "blocks": [0, 1],
+  "match": r"Completá con el imperfecto del subjuntivo|Completá con el congiuntivo imperfetto|formas irregulares"},
+ {"h": "Trapassato, cuándo aparecen, «ojalá» y «como si»", "blocks": [2, 3, 4],
+  "match": r"trapassato|pluscuamperfecto|si…|Ojalá|magari|come se|Traducí"},
+],
 "blocks": [
  {"h": "Imperfetto: la forma",
   "r": "Raíz del infinitivo + *-assi*, *-essi*, *-issi*. El único irregular "

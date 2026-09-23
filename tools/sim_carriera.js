@@ -140,7 +140,11 @@ course.items.forEach(function (it) {
   var parts = String(it.answer || "").split("|").length;
   if (gaps > 1 && parts !== gaps && it.type !== "choice") iss("huecos (" + gaps + ") y respuestas (" + parts + ") no coinciden");
   if (String(it.answer || "").length > 90 && TYPED[it.type]) iss("respuesta de más de 90 caracteres: nunca tendrá versión de reconocimiento");
-  if (/[{}<>\[\]\\]|\bnull\b|undefined/.test((it.stem || "") + (it.prompt || "") + (it.answer || ""))) iss("restos de formato en el texto");
+  // [entre corchetes] marca la parte que hay que reemplazar: no es un resto.
+  var txt = (it.stem || "") + (it.prompt || "") + (it.answer || "");
+  if (/corchetes/i.test(it.prompt || "")) txt = txt.replace(/[\[\]]/g, "");
+  txt = txt.replace(/\[[^\[\]]{1,4}\]/g, "");   // notación fonética: [k], [ʎ], [dʒ]
+  if (/[{}<>\[\]\\]|\bnull\b|undefined/.test(txt)) iss("restos de formato en el texto");
   if (!it.prompt && it.type !== "hunt") iss("sin consigna");
   if (it.type === "listen" && !it.stem) iss("escucha sin texto que leer en voz alta");
 });

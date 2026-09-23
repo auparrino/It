@@ -379,7 +379,9 @@
     var audible = function (it) { return it && !(opts.silent && it.type === "listen"); };
     var bookItems = (week.items || [])
       .map(function (id) { return map[id]; })
-      .filter(audible);
+      .filter(audible)
+      // a lesson in parts: only the exercises of the parts already read
+      .filter(function (it) { return !opts.only || opts.only[it.id]; });
     // Review moved here from earlier weeks (a nouns exercise in passato
     // prossimo lands in week 17): a few per round, interleaved.
     var extra = (week.extra || [])
