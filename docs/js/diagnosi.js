@@ -1016,7 +1016,8 @@
   var NSYN = [["papà", "padre"], ["papà", "babbo"], ["mamma", "madre"], ["giacca", "giubbotto"], ["giacche", "giubbotti"],
               ["macchina", "auto", "automobile"], ["macchine", "auto", "automobili"], ["bici", "bicicletta"],
               ["biciclette", "bici"], ["televisione", "tv", "tivù"], ["cellulare", "telefonino"], ["cellulari", "telefonini"],
-              ["adesso", "ora"], ["tra", "fra"], ["niente", "nulla"], ["qui", "qua"], ["lì", "là"], ["subito", "immediatamente"]];
+              ["adesso", "ora"], ["tra", "fra"], ["niente", "nulla"], ["qui", "qua"], ["lì", "là"], ["subito", "immediatamente"],
+              ["molto", "tanto"], ["molti", "tanti"], ["molta", "tanta"], ["molte", "tante"]];
   function nounSyn(a, b) {
     return NSYN.some(function (f) { return f.indexOf(a) >= 0 && f.indexOf(b) >= 0; });
   }
