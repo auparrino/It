@@ -205,6 +205,34 @@ español) con la regla explicada al responder; 80% o más gana su estrella.
 Además hay una cola de **ripasso** con repetición espaciada (SM-2 simplificado)
 sobre todo lo ya jugado, racha diaria y once medallas.
 
+### Nada antes de su teoría
+
+Cada semana toma ejercicios de los dos libros, y un capítulo de sustantivos
+puede traer frases en imperfetto (*il popolo danese era contro…*) o un
+superlativo en passato prossimo (*le vittime più tragiche sono state…*).
+`tools/sillabo.py` lee cada ejercicio, reconoce los tiempos verbales que usa
+(con un léxico de formas generado por el conjugador: `tools/forms_lexicon.js`)
+y otras construcciones (pronombres combinados, *ne*, *cui*, gerundio,
+comparativos), y calcula **la primera semana cuya teoría lo cubre todo**:
+
+- En el enunciado, que solo se lee, el presente vale desde el principio.
+- En la respuesta, lo que escribís o elegís, el presente cuenta desde la
+  semana 6; *essere* y *avere* se enseñan en la semana 1.
+- Lo que una semana todavía no puede pedir pasa, como repaso, a la semana
+  donde ya se enseñó; ahí cada ronda mezcla unos pocos (la cuarta parte como
+  máximo).
+- Los ejercicios de *For Dummies* se reparten por tema, bloque por bloque, y
+  no por capítulo: el capítulo 3 mezcla sustantivos (semana 2), artículos
+  (semana 3) y sufijos (semana 24).
+- El gimnasio de verbos solo usa como distractores tiempos ya vistos; el
+  banco (*Traduci*, *Completa*, *Trova l'errore*, la Clínica y la Pausa)
+  y los juegos de *Capire* filtran por la semana a la que llegaste.
+
+`test_game.js` verifica que ninguna semana pida nada antes de su teoría, y
+`python3 tools/sillabo.py` lista qué ejercicio esperó a qué semana y por qué.
+Si se reordena el programa, las semanas de cada tiempo se ajustan en
+`TENSE_WEEK`, dentro de `tools/sillabo.py`.
+
 ## Contenido
 
 | Fuente | Cantidad |
@@ -254,6 +282,8 @@ tools/
   extract_dummies.py     EPUB -> banco auto-corregible
   extract_routledge.py   EPUB -> temario + desafíos
   build_course.py        arma docs/data/course.json
+  sillabo.py             desde qué semana se puede pedir cada ejercicio
+  forms_lexicon.js       léxico de formas verbales para el sillabo
   authored/              banco de ítems propios (Python legible)
   lessons/               teoría de las 52 semanas (s1..s4, una por estación)
   test_conjugator.js     1.442 comprobaciones de formas verbales
