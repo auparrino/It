@@ -293,9 +293,9 @@ el corrector enuncia en español también se revisaron una por una.
 **placas de calle romanas** en travertino, con la semana en números romanos
 (*Settimana XVII*). Las tarjetas grandes llevan un patrón de **maiólica** de
 Vietri sobre verde botella, limón de Amalfi, terracota y azul cobalto, y la
-Pausa caffè tiene el **toldo a rayas** de un bar. Tipografías italianas:
-*Bodoni Moda* (Bodoni era de Parma) para títulos y el italiano, y *Titillium
-Web* (Accademia di Belle Arti di Urbino) para la interfaz, servidas desde
+Pausa caffè tiene el **toldo a rayas** de un bar. Tipografías: *Bodoni Moda*
+(Bodoni era de Parma) solo para los títulos grandes, y *Atkinson Hyperlegible
+Next*, diseñada para leer fácil, para todo lo demás, servidas desde
 `docs/fonts/` (licencia SIL OFL, incluida) para que funcionen sin red. Con
 modo oscuro.
 

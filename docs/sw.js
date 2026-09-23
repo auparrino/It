@@ -3,7 +3,7 @@
  * Strategia: rispondi subito dalla cache, aggiorna in background.
  * Cambiare VERSION a ogni rilascio per buttare la cache vecchia.
  */
-var VERSION = "laviac1-v15";
+var VERSION = "laviac1-v16";
 var FILES = [
   "./",
   "index.html",
@@ -11,10 +11,11 @@ var FILES = [
   "css/app.css",
   "fonts/bodoni-normal.woff2",
   "fonts/bodoni-italic.woff2",
-  "fonts/titillium-normal-400.woff2",
-  "fonts/titillium-normal-600.woff2",
-  "fonts/titillium-normal-700.woff2",
-  "fonts/titillium-normal-900.woff2",
+  "fonts/atkinson-400-normal.woff2",
+  "fonts/atkinson-400-italic.woff2",
+  "fonts/atkinson-700-normal.woff2",
+  "fonts/atkinson-700-italic.woff2",
+  "fonts/atkinson-800-normal.woff2",
   "js/conjugator.js",
   "js/engine.js",
   "js/frasi.js",
