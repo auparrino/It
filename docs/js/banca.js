@@ -315,7 +315,7 @@
     var e = B.errors[i];
     return { id: "b:err:" + i, src: "banca", bank: "err", type: "fixerr",
              prompt: "Trova l'errore: tocá la palabra que está mal", stem: e.wrong,
-             answer: e.right, accept: [e.right], bad: e.bad, good: e.good,
+             answer: e.right, accept: [e.right], bad: e.bad, good: e.good, goodAlt: e.alt || [],
              cat: e.cat, note: e.why, lvl: e.lvl, say: e.right };
   }
 

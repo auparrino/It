@@ -191,7 +191,10 @@ def build_errors(raw):
             warn("errore incoerente: %s | %s -> %s | %s" % (e["wrong"], e["bad"], e["good"], e["right"]))
             continue
         seen.add(e["wrong"])
-        out.append({k: e[k] for k in ("wrong", "right", "bad", "good", "cat", "why", "lvl")})
+        row = {k: e[k] for k in ("wrong", "right", "bad", "good", "cat", "why", "lvl")}
+        if e.get("alt"):
+            row["alt"] = [clean(a) for a in e["alt"] if clean(a)]
+        out.append(row)
     return out
 
 

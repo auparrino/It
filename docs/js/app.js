@@ -2081,8 +2081,10 @@
       function judge(val) {
         if (round.answered) return;
         val = String(val).trim();
+        // Other corrections that are just as right (fra/tra, ora/adesso…).
+        var goods = [it.good].concat(it.goodAlt || []).filter(Boolean);
         var right = it.good === "" ? val === "" : window.Diagnosi &&
-          Diagnosi.diagnose(val, [it.good]).verdict === "giusto";
+          Diagnosi.diagnose(val, goods).verdict === "giusto";
         if (right) {
           if (tries) markFixed(it.cat);
           settle(tries ? "quasi" : "giusto", val, '<div class="diag"><span class="tag">' + esc(label) + "</span></div>",
