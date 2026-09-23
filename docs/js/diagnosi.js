@@ -281,7 +281,7 @@
     manana: "domani", "mañana": "domani", ahora: "adesso / ora", despues: "dopo", antes: "prima",
     entonces: "allora", sobre: "su / sopra", sin: "senza", hasta: "fino a", desde: "da",
     tus: "i tuoi", sus: "i suoi", mis: "i miei", nuestro: "nostro", nuestra: "nostra",
-    tarde: "pomeriggio / sera", noche: "notte / sera", hora: "ora", horas: "ore", cuarto: "quarto",
+    tarde: "tardi / pomeriggio / sera", noche: "notte / sera", hora: "ora", horas: "ore", cuarto: "quarto",
     minutos: "minuti", mediodia: "mezzogiorno", medianoche: "mezzanotte", semana: "settimana",
     dia: "giorno", dias: "giorni", mes: "mese", meses: "mesi", anos: "anni", "años": "anni",
     tener: "avere", ser: "essere", estar: "stare / essere", hacer: "fare", ir: "andare",
@@ -359,8 +359,8 @@
     if (s === e) rule = "no cambia en plural (" + (/[àèéìòù]$/.test(s) ? "termina en vocal acentuada" : /[^aeiou]$/.test(s) ? "termina en consonante" : "es invariable") + ")";
     else if (/[cg]a$/.test(s) && /(che|ghe)$/.test(e)) rule = "-ca / -ga hacen -che / -ghe para conservar el sonido duro";
     else if (/[cg]o$/.test(s) && /(chi|ghi)$/.test(e)) rule = "-co / -go hacen -chi / -ghi, con el sonido duro";
-    else if (/[cg]o$/.test(s) && /(ci|gi)$/.test(e)) rule = "-co / -go hacen -ci / -gi cuando el acento cae dos sílabas antes (amico → amici, medico → medici)";
-    else if (/[cg]ia$/.test(s) && /(ce|ge)$/.test(e)) rule = "-cia / -gia con i átona pierden la i: -ce / -ge";
+    else if (/[cg]o$/.test(s) && /(ci|gi)$/.test(e)) rule = "-co / -go suelen hacer -ci / -gi en las palabras esdrújulas (medico → medici, psicologo → psicologi); amico, nemico, greco y porco son excepciones llanas";
+    else if (/[cg]ia$/.test(s) && /(ce|ge)$/.test(e)) rule = "-cia / -gia con i átona pierden la i después de consonante: -ce / -ge (arancia → arance, spiaggia → spiagge); después de vocal la conservan (camicia → camicie, valigia → valigie)";
     else if (/io$/.test(s) && e === s.slice(0, -2) + "i") rule = "-io con i átona hace una sola -i";
     else if (/a$/.test(s) && /e$/.test(e)) rule = "los sustantivos en -a hacen -e";
     else if (/a$/.test(s) && /i$/.test(e)) rule = "los masculinos en -a (problema, poeta, turista) hacen -i";
@@ -436,6 +436,9 @@
       ["gi", "ghi", "Para el sonido /gi/ se escribe *ghi* (laghi, ghiaccio); *gi* suena /dʒi/."],
       ["cie", "zie", "El sonido /ts/ se escribe con z: grazie, zio, piazza."],
       ["ci", "zi", "El sonido /ts/ se escribe con z: stazione, grazie."]]);
+    // A plural written wrong (arancie → arance) is the plural rule, not spelling.
+    var npE = DATA.nounsByPlural[e];
+    if (npE && npE.s !== e) spellings = [];
     for (var k = 0; k < spellings.length; k++) {
       var sp = spellings[k];
       var src = sp[0] === "ñ" ? graw.replace(/\u0000/g, "ñ") : gs;
@@ -1295,7 +1298,7 @@
           ", la Toscana, l'Europa). Las ciudades no: Roma è bella, vado a Roma." };
       return { cat: "articolo", slip: false,
         hint: "Falta el artículo.",
-        explain: "Falta " + it(w) + ": en italiano el sustantivo casi siempre lleva artículo, incluso donde el español lo omite a veces (mi piace *la* musica, *la* signora Rossi)." };
+        explain: "Falta " + it(w) + ": en italiano el sustantivo casi siempre lleva artículo, incluso donde el español lo omite (*la* mia casa = mi casa, *nel* 2020 = en 2020, *l'*Italia = Italia)." };
     }
     if (prepInfo(w)) return { cat: "preposizione", slip: false,
       hint: "Falta una preposición.",
@@ -1365,6 +1368,7 @@
   };
 
   var LABEL = {
+    grammatica: "Gramática",
     ausiliare: "Auxiliar essere/avere", congiuntivo: "Congiuntivo",
     periodo_ipotetico: "Periodo hipotético", a_personale: "«a» personal",
     preposizione: "Preposiciones", preposizione_articolata: "Preposición + artículo",

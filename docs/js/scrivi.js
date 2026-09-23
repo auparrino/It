@@ -459,7 +459,7 @@
 
   var DO_VERBS = /^(conoscere|vedere|aspettare|chiamare|salutare|incontrare|visitare|ascoltare|guardare|amare|trovare|accompagnare|invitare|ringraziare|aiutare)$/;
   var DO_PART = /^(conosciut|vist|aspettat|chiamat|salutat|incontrat|visitat|ascoltat|guardat|amat|trovat|accompagnat|invitat|ringraziat|aiutat)[oaie]$/;
-  var TO_SUBJ = { "è": "sia", sono: "siano", ha: "abbia", hanno: "abbiano", va: "vada", vanno: "vadano", fa: "faccia", fanno: "facciano",
+  var TO_SUBJ = { "è": "sia", sono: "sia (io) / siano (loro)", ha: "abbia", hanno: "abbiano", va: "vada", vanno: "vadano", fa: "faccia", fanno: "facciano",
                   "può": "possa", possono: "possano", vuole: "voglia", vogliono: "vogliano", deve: "debba", devono: "debbano",
                   sa: "sappia", sanno: "sappiano", viene: "venga", vengono: "vengano", vieni: "venga", esce: "esca", dice: "dica",
                   sta: "stia", stanno: "stiano", "c'è": "ci sia" };
@@ -541,7 +541,7 @@
           var refl = { mi: "ho", ti: "hai", si: "ha", vi: "avete" }[p] === w || (p === "si" && w === "hanno");
           if (refl || (lem && auxOf(lem) === "essere" && lem !== "essere")) {
             push(i, pk - i + 1, "ausiliare", (refl ? "Los reflexivos van con *essere*: " : "Con " + it(lem) + " va *essere*: ") +
-              it(({ ho: "sono", hai: "sei", ha: "è", abbiamo: "siamo", avete: "siete", hanno: "sono" })[w] + " " + tk[pk].w.replace(/[aie]$/, "o")) + " (y el participio concuerda con el sujeto).");
+              it(({ ho: "sono", hai: "sei", ha: "è", abbiamo: "siamo", avete: "siete", hanno: "sono" })[w] + " " + tk[pk].w.replace(/[oaie]$/, /^(abbiamo|avete|hanno)$/.test(w) ? "i" : "o")) + " (y el participio concuerda con el sujeto).");
           }
         }
       }
@@ -589,7 +589,7 @@
       // 11. «molto amici»
       if (/^(molto|tanto|poco|troppo)$/.test(w) && ni >= 0 && DATA.nounsByPlural[n] && DATA.nounsByPlural[n].s !== n) {
         var g11 = DATA.nounsByPlural[n].g;
-        push(i, 1, "accordo", "Delante de un sustantivo concuerda: " + it(w.slice(0, -1) + (g11 === "f" ? "e" : "i") + " " + n) + ".");
+        push(i, 1, "accordo", "Delante de un sustantivo concuerda: " + it((w === "poco" ? "poch" : w.slice(0, -1)) + (g11 === "f" ? "e" : "i") + " " + n) + ".");
       }
       // 11b. «molto pasta» → «molta pasta»
       if (/^(molto|tanto|poco|troppo)$/.test(w) && ni >= 0 && DATA.nouns[n] && DATA.nouns[n].s === n && DATA.nouns[n].g === "f" &&
@@ -605,7 +605,7 @@
         push(i, 1, "accento", "El verbo lleva tilde: " + it("è") + " (*e* sin tilde es «y»).");
       }
       // 14. «sono trenta anni» → «ho trent'anni»
-      if (w === "sono" && ni >= 0 && (NUMS.test(n) || /^\d+$/.test(n)) && tk[ni + 1] && tk[ni + 1].w === "anni") {
+      if (w === "sono" && ni >= 0 && (NUMS.test(n) || /^\d+$/.test(n)) && tk[ni + 1] && tk[ni + 1].w === "anni" && !(tk[ni + 2] && /^(che|fa)$/.test(tk[ni + 2].w || ""))) {
         push(i, 1, "lessico", "La edad va con *avere*: " + it("ho " + n + " anni") + ".");
       }
     });
@@ -642,10 +642,62 @@
     return html + esc(src.slice(last));
   }
 
+  /* ------------------------------------------------------ LanguageTool
+     A second opinion from the free public API of LanguageTool (no key; 20
+     requests a minute, plenty for one learner).  It knows far more Italian
+     than the local checker; the local findings keep their Spanish
+     explanation, and what LanguageTool adds goes after them. */
+  var LT_URL = "https://api.languagetool.org/v2/check";
+  var LT_KIND = {
+    GRAMMAR: ["grammatica", "Gramática", false], TYPOS: ["refuso", "Ortografía", false],
+    CONFUSED_WORDS: ["lessico", "Palabra", false], PUNCTUATION: ["puntuazione", "Puntuación", true],
+    CASING: ["maiuscole", "Mayúsculas", true], STYLE: ["stile", "Estilo", true], REDUNDANCY: ["stile", "Estilo", true],
+    SEMANTICS: ["lessico", "Sentido", true], TYPOGRAPHY: ["stile", "Tipografía", true], COLLOCATIONS: ["lessico", "Combinación", true]
+  };
+  function ltCheck(text, done) {
+    if (typeof fetch !== "function") return done(new Error("sin fetch"));
+    var ctl = typeof AbortController === "function" ? new AbortController() : null;
+    var timer = setTimeout(function () { if (ctl) ctl.abort(); }, 12000);
+    var body = "text=" + encodeURIComponent(String(text).slice(0, 18000)) + "&language=it&motherTongue=es";
+    fetch(LT_URL, { method: "POST", body: body, signal: ctl ? ctl.signal : undefined,
+                    headers: { "Content-Type": "application/x-www-form-urlencoded" } })
+      .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+      .then(function (j) { clearTimeout(timer); done(null, (j && j.matches) || []); })
+      .catch(function (e) { clearTimeout(timer); done(e); });
+  }
+  // LanguageTool's matches as findings on the same tokens, minus what the
+  // local checker already said and what is noise for a learner (a name, a
+  // word the course itself uses, a space).
+  function fromLT(text, matches, local) {
+    var tk = toks(text), taken = {};
+    (local || []).forEach(function (f) { for (var j = 0; j < f.n; j++) taken[f.i + j] = 1; });
+    var out = [];
+    (matches || []).forEach(function (m) {
+      var cat = (m.rule && m.rule.category && m.rule.category.id) || "";
+      if (/WHITESPACE|DOUBLE_PUNCT|UNPAIRED/.test((m.rule && m.rule.id) || "")) return;
+      var kind = LT_KIND[cat] || ["lt", "Revisar", true];
+      var first = -1, n = 0;
+      tk.forEach(function (t, i) {
+        if (!t.w) return;
+        if (t.at < m.offset + m.length && t.at + t.len > m.offset) { if (first < 0) first = i; n = i - first + 1; }
+      });
+      if (first < 0) return;
+      for (var j = 0; j < n; j++) if (taken[first + j] && tk[first + j].w) return;
+      var w = tk[first];
+      if (cat === "TYPOS" && (w.cap && !w.start || known(w.w))) return;   // names and words of the course
+      for (var q = 0; q < n; q++) taken[first + q] = 1;
+      var rep = (m.replacements || []).slice(0, 2).map(function (r) { return "*" + r.value + "*"; }).join(" o ");
+      out.push({ i: first, n: n, cat: kind[0], soft: kind[2], lt: true,
+                 msg: kind[1] + " (LanguageTool): " + String(m.message || m.shortMessage || "").replace(/\s+/g, " ").trim() +
+                      (rep ? " → " + rep : "") });
+    });
+    return out;
+  }
+
   function weeks() { return Object.keys(TASKS).map(Number); }
 
   var api = { TASKS: TASKS, features: features, lint: lint, check: check, markup: markup, weeks: weeks, toks: toks,
-              learn: learn, learnCourse: learnCourse };
+              learn: learn, learnCourse: learnCourse, ltCheck: ltCheck, fromLT: fromLT };
   if (typeof module === "object" && module.exports) module.exports = api;
   else root.Scrivi = api;
 })(typeof window !== "undefined" ? window : globalThis);

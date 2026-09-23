@@ -397,6 +397,16 @@ cuatro cuerdas, suma xp y los errores van al perfil de la clínica. La misión
 es obligatoria para abrir la semana siguiente: es el único lugar del curso
 donde escribís sin respuesta cerrada.
 
+**Segunda opinión de LanguageTool.** Al revisar, la app también manda el
+texto a la API pública y gratuita de LanguageTool (sin clave; unas 20
+consultas por minuto, de sobra para una persona). Lo que encuentra se suma a
+la lista, con su mensaje en italiano y la corrección propuesta («Gramática
+(LanguageTool): … → *piena*»); lo que el corrector propio ya marcó, con su
+explicación en castellano, no se repite. La revisión local aparece al
+instante y la de LanguageTool cuando llega; sin conexión o sin cupo, queda
+solo la local. Se puede apagar con la casilla de la pantalla, porque el
+texto se envía a sus servidores.
+
 El corrector (`docs/js/scrivi.js`) usa como diccionario todo el italiano del
 curso (respuestas, frases, lecturas, banco y glosario): una palabra que no
 conoce no se marca como error, porque en un texto libre es más probable que

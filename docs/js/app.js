@@ -2581,6 +2581,8 @@
       '<textarea id="stext" class="grow scrivi" rows="7" spellcheck="false" autocapitalize="sentences" placeholder="Scrivi qui, in italiano…">' + esc(draft) + "</textarea>" +
       '<div class="row" style="margin-top:10px"><button class="btn" id="scheck">🔎 Revisar</button>' +
       '<button class="tab" id="smodel">👀 Ver un modelo</button></div>' +
+      '<label class="muted small ltopt"><input type="checkbox" id="slt"' + (state.ltOff ? "" : " checked") + "> " +
+        "Pedir también la corrección de LanguageTool (gratis; el texto se envía a su servidor)</label>" +
       '<div id="sout"></div>';
   }
 
@@ -2605,8 +2607,26 @@
       if (out) out.innerHTML = '<div class="card"><h3>Un modelo</h3><p class="model it">' + esc(Scrivi.TASKS[w.week].model) +
         '</p><p class="muted small">No es la única forma: compará las estructuras, no las palabras.</p></div>';
     });
+    var lt = $("#slt");
+    if (lt) lt.onchange = function () { state.ltOff = !lt.checked; persist(); };
     on("#scheck", function () {
       var text = box.value, r = Scrivi.check(text, w.week), out = $("#sout");
+      showScrivi(w, text, r, state.ltOff ? null : "…");
+      if (state.ltOff || !text.trim()) return;
+      // The local check shows at once; LanguageTool's opinion joins it when it arrives.
+      Scrivi.ltCheck(text, function (err, matches) {
+        if (view.screen !== "scrivi" || $("#stext") !== box || box.value !== text) return;
+        if (err) { showScrivi(w, text, r, "error"); return; }
+        r.findings = r.findings.concat(Scrivi.fromLT(text, matches, r.findings)).sort(function (a, b) { return a.i - b.i; });
+        r.hard = r.findings.filter(function (f) { return !f.soft; }).length;
+        showScrivi(w, text, r, "ok");
+      });
+    });
+  }
+
+  function showScrivi(w, text, r, ltState) {
+      var out = $("#sout");
+      if (!out) return;
       var hard = r.findings.filter(function (f) { return !f.soft; });
       var list = r.findings.map(function (f, k) {
         return '<li class="' + (f.soft ? "soft" : "bad") + '"><b>' + (k + 1) + ".</b> " + mk(f.msg) + "</li>";
@@ -2614,14 +2634,16 @@
       var missing = r.reqs.filter(function (q) { return !q.ok; });
       out.innerHTML = '<div class="card">' +
         (r.findings.length ? '<p class="scrivi-marked it">' + Scrivi.markup(text, r.findings, esc) + "</p><ol class=\"findings\">" + list + "</ol>"
-                           : '<p>✨ No encontré errores de los que sé buscar.</p>') +
+                           : '<p>✨ No encontré errores' + (ltState === "ok" ? ", y LanguageTool tampoco." : " de los que sé buscar.") + "</p>") +
+        (ltState === "…" ? '<p class="muted small">⏳ Consultando LanguageTool…</p>'
+          : ltState === "error" ? '<p class="muted small">No pude consultar LanguageTool (sin conexión o límite de uso): esta es solo la revisión local.</p>'
+          : ltState === "ok" ? '<p class="muted small">✓ Revisado también por LanguageTool.</p>' : "") +
         (missing.length ? '<p class="muted">Todavía falta: ' + missing.map(function (q) { return esc(q.label) + " (" + q.n + " / " + q.need + ")"; }).join(" · ") + ".</p>"
                         : '<p>Cumple la consigna.' + (hard.length ? " Corregí lo marcado si querés, o entregalo así: los errores quedan anotados para la clínica." : "") + "</p>" +
                           '<button class="btn" id="sdone">✓ Entregar el texto</button>') +
         "</div>";
       on("#sdone", function () { deliverScrivi(w, text, r); });
-      out.scrollIntoView({ behavior: "smooth", block: "start" });
-    });
+      if (ltState !== "ok" && ltState !== "error") out.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   function deliverScrivi(w, text, r) {
