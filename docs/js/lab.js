@@ -43,7 +43,7 @@
       words: [["posible", "possibile"], ["imposible", "impossibile"], ["terrible", "terribile"],
               ["increíble", "incredibile"], ["responsable", "responsabile"], ["probable", "probabile"],
               ["flexible", "flessibile"], ["horrible", "orribile"], ["visible", "visibile"],
-              ["sensible", "sensibile"], ["amable", "amabile"], ["admirable", "ammirabile"]] },
+              ["sensible", "sensibile"], ["inevitable", "inevitabile"], ["admirable", "ammirabile"]] },
 
     { id: "tt", h: "-ct- / -pt- → -tt-",
       body: "Donde el español tiene **ct** o **pt**, el italiano dobla la **t**: *perfecto → perfetto*, *septiembre → settembre*. Lo mismo con **x** → **ss** entre vocales: *máximo → massimo*, *próximo → prossimo* (pero *exacto → esatto*: **ex-** + vocal da **es-**). Y a veces donde el español ya simplificó el grupo latino: *escrito → scritto*, *objeto → oggetto*.",

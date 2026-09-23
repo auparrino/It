@@ -554,7 +554,7 @@ LESSONS = {
                      ["gamba", "pierna", "gamba (= gambero)"],
                      ["caldo", "calor / caliente", "caldo (= brodo)"],
                      ["equipaggio", "tripulación", "equipaje (= bagaglio)"],
-                     ["cartone", "cartón / dibujo animado", "cartón de bingo"],
+                     ["cartone", "cartón / dibujo animado", "cartón de bingo (= cartella)"],
                      ["negozio", "negocio (tienda)", "negocio como trato (= affare)"]]},
   "warn": "*Sono imbarazzata* significa «estoy avergonzada», no «estoy "
           "embarazada». Y *un burro* en el plato es manteca. Estos dos son los "

@@ -919,7 +919,7 @@ _RAW = [
     # CONDIZIONALE
     # ------------------------------------------------------------------
     ("B2", "condizionale", "Marco ha detto che verrebbe alla festa.", "verrebbe", "sarebbe venuto",
-     "El futuro en el pasado usa condizionale composto: ha detto che sarebbe venuto. En español «dijo que vendría» es simple."),
+     "El futuro en el pasado usa condizionale composto: ha detto che sarebbe venuto. En español «dijo que vendría» es simple. Si la fiesta todavía no pasó, también vale ha detto che verrà."),
     ("B2", "condizionale", "Pensavo che il film finirebbe prima.", "finirebbe", "sarebbe finito",
      "Para un futuro visto desde el pasado, el italiano usa condizionale passato: pensavo che sarebbe finito."),
     ("B2", "condizionale", "Mi aveva promesso che mi chiamerebbe.", "chiamerebbe", "avrebbe chiamato",
@@ -1282,6 +1282,7 @@ _RAW = [
 
 # Other corrections that are just as right as `good` (key: the wrong sentence).
 ALT = {
+    "Marco ha detto che verrebbe alla festa.": ["verrà"],
     "Pensavo che il film finirebbe prima.": ["finisse"],
     "Sono salito al treno all'ultimo minuto.": ["in"],
     "Ho visto la partita nella televisione.": ["alla"],

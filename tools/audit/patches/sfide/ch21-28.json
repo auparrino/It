@@ -1451,7 +1451,9 @@
     "type": "translate",
     "stem": "Estoy feliz de verlo mañana.",
     "answer": "Sono felice di vederlo domani.",
-    "alt": [],
+    "alt": [
+     "Sono contento di vederlo domani."
+    ],
     "note": "Infinitivo simple para el futuro."
    },
    {

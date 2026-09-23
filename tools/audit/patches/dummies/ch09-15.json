@@ -1372,7 +1372,9 @@
    "type": "translate",
    "stem": "por las buenas o por las malas",
    "answer": "per amore o per forza",
-   "alt": [],
+   "alt": [
+    "con le buone o con le cattive"
+   ],
    "drop": false
   },
   "d12-033": {
@@ -1638,7 +1640,9 @@
    "answer": "Pochi sono venuti oggi.",
    "alt": [
     "Oggi sono venuti pochi.",
-    "Sono venuti pochi oggi."
+    "Sono venuti pochi oggi.",
+    "Oggi sono venuti in pochi.",
+    "Sono venuti in pochi oggi."
    ],
    "drop": false
   },

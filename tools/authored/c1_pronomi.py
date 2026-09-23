@@ -141,6 +141,7 @@ ITEMS = [
          stem="La casa en la que vivo es pequeña.",
          answer="La casa in cui abito è piccola",
          alt=["La casa in cui vivo è piccola", "La casa dove abito è piccola",
-              "La casa dove vivo è piccola"],
+              "La casa dove vivo è piccola", "La casa nella quale abito è piccola",
+              "La casa nella quale vivo è piccola"],
          note="«in cui» o «dove»; «che» solo sin preposición."),
 ]

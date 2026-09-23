@@ -30,14 +30,14 @@ LESSONS = {
           "casi nunca lo necesita («quiero que vengas»: la terminación ya dice "
           "quién) y por eso al hispanohablante se le olvida."},
 
- {"h": "La inversión que confunde",
+ {"h": "La vocal que confunde",
   "warn": "En castellano el subjuntivo de los verbos en *-ar* usa *e* "
           "(que hable) y el de *-er/-ir* usa *a* (que coma, que viva). En "
-          "italiano es exactamente al revés: *-are* hace *-i* (*che parli*) y "
-          "*-ere/-ire* hacen *-a* (*che prenda*, *che dorma*). Tu instinto va a "
-          "producir «che parla» y «che prendi», que son indicativo. Esta sola "
-          "confusión explica la mitad de los errores de congiuntivo del "
-          "hispanohablante.",
+          "italiano *-ere/-ire* también hacen *-a* (*che prenda*, *che dorma*), "
+          "pero *-are* no hace *-e* sino *-i* (*che parli*). Ahí está la trampa: "
+          "como el indicativo es *parla*, tu instinto va a producir «che parla», "
+          "que es indicativo. Esta confusión explica buena parte de los errores "
+          "de congiuntivo del hispanohablante.",
   "ex": [["Credo che lui parli bene.", "Creo que él habla bien."],
          ["Credo che lui prenda il treno.", "Creo que toma el tren."],
          ["Spero che tu dorma bene.", "Espero que duermas bien."]]},
@@ -671,7 +671,7 @@ LESSONS = {
 
  {"h": "Las trampas de la estación",
   "warn": "1. *Credo che SIA*, no «credo che è». "
-          "2. *-are* → *-i*, *-ere/-ire* → *-a* (al revés del castellano). "
+          "2. *-are* → *-i* (no *-e* como en castellano), *-ere/-ire* → *-a*. "
           "3. «Dijo que vendría» = *ha detto che SAREBBE VENUTO*. "
           "4. *Si vendONO libri* (plural). "
           "5. *Quando si è STANCHI* (plural masculino). "

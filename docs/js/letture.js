@@ -271,13 +271,13 @@
         "fiorentino e non in latino, la lingua dei dotti. È una scelta rivoluzionaria: " +
         "vuole essere letto da tutti, non solo dai professori.\n\n" +
         "Il poema racconta un viaggio immaginario in tre parti: l'Inferno, il Purgatorio " +
-        "e il Paradiso. Nei primi due regni la guida di Dante è il poeta latino Virgilio; " +
-        "in Paradiso lo accompagna Beatrice, la donna che ha amato da giovane.\n\n" +
+        "e il Paradiso. Nel primo regno e in quasi tutto il secondo la guida di Dante è il poeta latino Virgilio; " +
+        "poi lo accompagna Beatrice, la donna che ha amato da giovane.\n\n" +
         "Dante muore in esilio a Ravenna nel 1321, lontano dalla sua città. Ancora oggi " +
         "molti italiani sanno a memoria il primo verso: «Nel mezzo del cammin di nostra " +
         "vita». Non a caso lo chiamano il padre della lingua italiana.",
       gloss: { volgare: "lengua vulgar, la hablada por el pueblo", dotti: "sabios, eruditos",
-               scelta: "elección", poema: "poema", regni: "reinos", guida: "guía",
+               scelta: "elección", poema: "poema", regno: "reino", guida: "guía",
                accompagna: "acompaña", esilio: "exilio", cammin: "(cammino) camino",
                verso: "verso" },
       questions: [

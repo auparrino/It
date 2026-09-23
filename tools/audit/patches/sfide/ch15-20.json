@@ -65,7 +65,9 @@
      "C'è un film interessante alla tv.",
      "C'è un film interessante in tv.",
      "Danno un film interessante alla televisione.",
-     "Danno un film interessante in televisione."
+     "Danno un film interessante in televisione.",
+     "Fanno un film interessante in televisione.",
+     "Fanno un film interessante alla televisione."
     ],
     "note": "‘En la tele’ se dice alla televisione o in televisione."
    },
@@ -1769,8 +1771,7 @@
     "stem": "Io sono nato a Torino, Leonardo ___ è nato a Palermo. (en cambio)",
     "answer": "invece",
     "alt": [
-     "però",
-     "tuttavia"
+     "però"
     ],
     "note": "Invece, después del sujeto, marca el contraste: en cambio."
    },
@@ -1994,7 +1995,10 @@
      "casomai",
      "caso mai",
      "semmai",
-     "nel caso"
+     "nel caso",
+     "in ogni caso",
+     "comunque",
+     "in tutti i casi"
     ],
     "note": "Eventualmente en italiano significa ‘en todo caso, si hace falta’, no ‘finalmente’."
    },
@@ -2020,6 +2024,7 @@
      "Qualora",
      "Nel caso che",
      "Nel caso in cui",
+     "Nel caso",
      "Caso mai",
      "Casomai",
      "Semmai"
@@ -3282,7 +3287,8 @@
      "Mia sorella dice che nostro zio mangiava sempre troppo ma adesso non mangia quasi niente.",
      "Mia sorella dice che nostro zio mangiava sempre troppo ma che ora non mangia quasi niente.",
      "Mia sorella dice che nostro zio prima mangiava sempre troppo ma che adesso non mangia quasi niente.",
-     "Mia sorella dice che nostro zio mangiava sempre troppo, ma che adesso non mangia quasi niente."
+     "Mia sorella dice che nostro zio mangiava sempre troppo, ma che adesso non mangia quasi niente.",
+     "Mia sorella dice che nostro zio prima mangiava sempre troppo ma adesso non mangia quasi niente."
     ],
     "note": "Imperfetto para el hábito pasado, presente para el actual; nostro zio sin artículo."
    },
@@ -3792,7 +3798,9 @@
     "type": "translate",
     "stem": "Habrá tenido un accidente.",
     "answer": "Avrà avuto un incidente.",
-    "alt": [],
+    "alt": [
+     "Avrà fatto un incidente."
+    ],
     "note": "Accidente de tránsito = incidente."
    },
    {

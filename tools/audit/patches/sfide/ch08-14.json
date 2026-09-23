@@ -1378,8 +1378,7 @@
     "answer": "Dove l'hai trovato quel libro",
     "alt": [
      "Ma dove l'hai trovato quel libro",
-     "Dove l'hai trovato, quel libro",
-     "Dov'è che hai trovato quel libro"
+     "Dove l'hai trovato, quel libro"
     ],
     "note": "En el habla se anticipa el objeto con un pronombre (l') y se lo pone al final."
    },
@@ -1389,8 +1388,7 @@
     "stem": "Quando hai visto il film? → ___?",
     "answer": "Quando l'hai visto il film",
     "alt": [
-     "Quando l'hai visto, il film",
-     "Quand'è che hai visto il film"
+     "Quando l'hai visto, il film"
     ],
     "note": "Pronombre + participio concordado (visto) y el sustantivo al final."
    },
@@ -3825,7 +3823,9 @@
      "Non è ancora uscita.",
      "Non è ancora partito.",
      "Non se n'è ancora andato.",
-     "Non è ancora uscito."
+     "Non è ancora uscito.",
+     "Non è ancora andata via.",
+     "Non è ancora andato via."
     ],
     "note": "Ancora va entre el auxiliar y el participio."
    },
@@ -3907,7 +3907,9 @@
     "alt": [
      "Non devi partire assolutamente.",
      "Non devi assolutamente andartene.",
-     "Non devi andartene assolutamente."
+     "Non devi andartene assolutamente.",
+     "Non devi assolutamente andare via.",
+     "Non devi andare via assolutamente."
     ],
     "note": "Non … assolutamente refuerza una prohibición."
    }
@@ -4017,7 +4019,7 @@
      "Non ho trovato assolutamente niente.",
      "Non ho trovato assolutamente nulla."
     ],
-    "note": "Mica refuerza la negación: non … mica … niente."
+    "note": "Mica refuerza la negación (≈ para nada): non … mica … niente. También sirven proprio niente o assolutamente niente."
    },
    {
     "label": "f",

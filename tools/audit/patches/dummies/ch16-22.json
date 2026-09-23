@@ -1057,7 +1057,7 @@
    "drop": false
   },
   "d18-031": {
-   "consigna": "Traducí al italiano. Ojo: después de «quando» y «appena», si la acción es futura, en italiano va futuro (no presente ni subjuntivo como en castellano); después de «se» sirven el futuro o el presente.",
+   "consigna": "Traducí al italiano. Ojo: después de «quando» y «appena», si la acción es futura, el italiano prefiere el futuro (no el subjuntivo como en castellano; en la lengua hablada también se oye el presente); después de «se» sirven el futuro o el presente.",
    "type": "translate",
    "stem": "Apenas lo sepan, nos lo van a decir.",
    "answer": "Appena lo sapranno, ce lo diranno.",
@@ -1071,7 +1071,7 @@
    "drop": false
   },
   "d18-032": {
-   "consigna": "Traducí al italiano. Ojo: después de «quando» y «appena», si la acción es futura, en italiano va futuro (no presente ni subjuntivo como en castellano); después de «se» sirven el futuro o el presente.",
+   "consigna": "Traducí al italiano. Ojo: después de «quando» y «appena», si la acción es futura, el italiano prefiere el futuro (no el subjuntivo como en castellano; en la lengua hablada también se oye el presente); después de «se» sirven el futuro o el presente.",
    "type": "translate",
    "stem": "Cuando ustedes lleguen, vamos a comer.",
    "answer": "Quando arriverete, mangeremo.",
@@ -1083,7 +1083,7 @@
    "drop": false
   },
   "d18-033": {
-   "consigna": "Traducí al italiano. Ojo: después de «quando» y «appena», si la acción es futura, en italiano va futuro (no presente ni subjuntivo como en castellano); después de «se» sirven el futuro o el presente.",
+   "consigna": "Traducí al italiano. Ojo: después de «quando» y «appena», si la acción es futura, el italiano prefiere el futuro (no el subjuntivo como en castellano; en la lengua hablada también se oye el presente); después de «se» sirven el futuro o el presente.",
    "type": "translate",
    "stem": "Si Mario no va, no va a ver a sus amigos.",
    "answer": "Se Mario non andrà, non vedrà gli amici.",
@@ -1099,7 +1099,7 @@
    "drop": false
   },
   "d18-034": {
-   "consigna": "Traducí al italiano. Ojo: después de «quando» y «appena», si la acción es futura, en italiano va futuro (no presente ni subjuntivo como en castellano); después de «se» sirven el futuro o el presente.",
+   "consigna": "Traducí al italiano. Ojo: después de «quando» y «appena», si la acción es futura, el italiano prefiere el futuro (no el subjuntivo como en castellano; en la lengua hablada también se oye el presente); después de «se» sirven el futuro o el presente.",
    "type": "translate",
    "stem": "Apenas reciba una carta, te aviso.",
    "answer": "Appena riceverò una lettera, ti farò sapere.",
@@ -1122,7 +1122,7 @@
    "note": "Far sapere = avisar, hacer saber."
   },
   "d18-035": {
-   "consigna": "Traducí al italiano. Ojo: después de «quando» y «appena», si la acción es futura, en italiano va futuro (no presente ni subjuntivo como en castellano); después de «se» sirven el futuro o el presente.",
+   "consigna": "Traducí al italiano. Ojo: después de «quando» y «appena», si la acción es futura, el italiano prefiere el futuro (no el subjuntivo como en castellano; en la lengua hablada también se oye el presente); después de «se» sirven el futuro o el presente.",
    "type": "translate",
    "stem": "Si tienen un rato libre, van a venir a visitarnos.",
    "answer": "Se avranno un momento libero, verranno a trovarci.",

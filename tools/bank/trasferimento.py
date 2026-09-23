@@ -384,7 +384,7 @@ ES_IT.update({
     "teneis": ("avete", ""),
     "tienen": ("hanno", ""),
     # haber
-    "haber": ("avere / esserci", "Auxiliar haber = avere (o essere con movimiento y reflexivos). Hay = c'è."),
+    "haber": ("avere / esserci", "Auxiliar haber = avere (o essere con muchos verbos de movimiento o cambio de estado, y con los reflexivos). Hay = c'è."),
     "he": ("ho", "He comido = ho mangiato; con movimiento: sono andato."),
     "has": ("hai", ""),
     "ha": ("ha / è", "Ha comido = ha mangiato; pero ha ido = è andato."),
