@@ -1019,13 +1019,25 @@
   function nounSyn(a, b) {
     return NSYN.some(function (f) { return f.indexOf(a) >= 0 && f.indexOf(b) >= 0; });
   }
+  // The article agrees with the word the learner chose (l'auto, la macchina).
+  function artFits(art, noun) {
+    var n = DATA.nouns[noun] || DATA.nounsByPlural[noun];
+    var plural = !!(DATA.nounsByPlural[noun] && n && n.pl === noun && n.s !== noun);
+    if (plural) return n.g === "f" ? art === "le" : /^(i|gli)$/.test(art);
+    if (/^[aeiouàèéìòù]/.test(noun)) return art === "l'";
+    if (!n) return art !== "l'";
+    if (n.g === "f") return art === "la";
+    return /^(s[^aeiou]|z|gn|ps|x|y)/.test(noun) ? art === "lo" : art === "il";
+  }
   var MODAL_PP = ["potuto", "voluto", "dovuto", "potuta", "voluta", "dovuta", "potuti", "voluti", "dovuti", "potute", "volute", "dovute"];
   function synonymFree(g, e) {
     if (g.length !== e.length) return false;
     var diff = 0;
     for (var i = 0; i < e.length; i++) {
       if (g[i] === e[i]) continue;
-      if (nounSyn(g[i], e[i])) { diff++; continue; }
+      if (nounSyn(g[i], e[i]) && (!ARTICLES[g[i - 1]] || artFits(g[i - 1], g[i]))) { diff++; continue; }
+      // la macchina / l'auto: the article follows the synonym
+      if (ARTICLES[g[i]] && ARTICLES[e[i]] && g[i + 1] && e[i + 1] && nounSyn(g[i + 1], e[i + 1]) && artFits(g[i], g[i + 1])) { diff++; continue; }
       // non ho potuto venire = non sono potuto venire: modals take either auxiliary
       if ((AVERE.indexOf(g[i]) >= 0 || ESSERE.indexOf(g[i]) >= 0) && (AVERE.indexOf(e[i]) >= 0 || ESSERE.indexOf(e[i]) >= 0) &&
           MODAL_PP.indexOf(e[i + 1]) >= 0 && g[i + 1] && g[i + 1].slice(0, -1) === e[i + 1].slice(0, -1)) { diff++; continue; }
