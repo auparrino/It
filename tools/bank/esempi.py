@@ -7,6 +7,7 @@ oraciones de la semana y de las del banco cuyo «w» ya se enseñó)."""
 ESEMPI = {
     # semanas 1-4: essere, avere, sustantivos, artículos, adjetivos
     "volere": "Vuole un caffè, signore?",
+    "dovere": "Devo studiare stasera.",
     "signore": "Buongiorno, signore!",
     "zia": "Mia zia è di Roma.",
     "valigia": "La valigia è grande.",
@@ -60,6 +61,8 @@ ESEMPI = {
     "panino": "Te lo preparo io, il panino.",
     "permettere": "Non me lo permettono.",
     "stretto": "Questa strada è più stretta di quella.",
+    "accomodarsi": "Prego, si accomodi!",
+    "laurearsi": "Mi sono laureata in giugno.",
     "prete": "Il prete del paese è più giovane di me.",
     # 27-31: adverbios, conectores, congiuntivo pasado, condicional pasado
     "raro": "È un caso raro.",

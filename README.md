@@ -233,12 +233,19 @@ tiene **3 estrellas**, una por misión:
    elegir la frase bien escrita entre dos trampas con el error típico
    (auxiliar, concordancia, contracción, dobles). Leer y enseguida recuperar
    fija más que releer.
-2. **Superá la semana** — 20 respuestas correctas en el *Allenamento*: 12
-   preguntas con ejercicios del libro, banco propio y gimnasio de verbos, cinco
-   vidas y combo de XP.
+2. **Superá la semana** — 20 respuestas correctas con los ejercicios de la
+   semana en el *Allenamento*: 12 preguntas con ejercicios del libro, banco
+   propio y gimnasio de verbos, cinco vidas y combo de XP (el gimnasio y las
+   palabras no cuentan para la estrella).
 3. **Dominala** — 85% de acierto en las **últimas 30** respuestas de la semana
    (ventana móvil, no el histórico) y al menos el 60 % de los ejercicios de la
    semana vistos. El gimnasio y las palabras no cuentan para las estrellas.
+
+**La semana siguiente se abre al completar todas las misiones de la semana
+menos *Dominala***: la lección, las palabras, las 20 correctas, la escena de
+frases, la lectura, el laboratorio y el banco que le tocan. El briefing dice
+qué falta. Cada sesión de escena trae seis frases nuevas y las de laboratorio
+dan primero lo no visto, así el contador avanza en cada sesión.
 
 Los **boss** cierran cada estación: examen acumulativo (la mitad de la estación
 que cierra, un cuarto de la anterior, el resto libre; el gimnasio pesa un

@@ -308,7 +308,10 @@
     var g = groupId ? RULES.filter(function (r) { return r.id === groupId; })[0]
                     : freshestGroup(RULES, "ponte:", cards);
     var out = [card(g.h, g.body, g.ex)];
-    shuffle(ids("ponte:" + g.id + ":")).slice(0, 8).forEach(function (k) { out.push(item(k)); });
+    // The words not yet seen first: every session moves the rule forward.
+    var all = ids("ponte:" + g.id + ":");
+    shuffle(all.filter(function (k) { return !cards[k]; })).concat(shuffle(all.filter(function (k) { return cards[k]; })))
+      .slice(0, 8).forEach(function (k) { out.push(item(k)); });
     var otherSeen = ids("ponte:").filter(function (k) {
       return cards[k] && k.indexOf("ponte:" + g.id + ":") !== 0;
     });
@@ -335,9 +338,10 @@
     var g = groupId ? CAPIRE.filter(function (s) { return s.id === groupId; })[0]
                     : freshestGroup(open, "capire:", cards);
     var out = [card(g.h, g.body)];
-    shuffle(ids("capire:" + g.id + ":").filter(function (k) {
-      return !week || BY_ID[k].week <= week;
-    })).slice(0, 10).forEach(function (k) { out.push(item(k)); });
+    var pool = ids("capire:" + g.id + ":").filter(function (k) { return !week || BY_ID[k].week <= week; });
+    // unseen first, then the rest
+    shuffle(pool.filter(function (k) { return !cards[k]; })).concat(shuffle(pool.filter(function (k) { return cards[k]; })))
+      .slice(0, 10).forEach(function (k) { out.push(item(k)); });
     return out;
   }
 

@@ -3,7 +3,7 @@
  * Strategia: rispondi subito dalla cache, aggiorna in background.
  * Cambiare VERSION a ogni rilascio per buttare la cache vecchia.
  */
-var VERSION = "laviac1-v20";
+var VERSION = "laviac1-v22";
 var FILES = [
   "./",
   "index.html",

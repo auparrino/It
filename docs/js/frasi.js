@@ -741,7 +741,9 @@
     var list = ofScene(sceneId);
     var fresh = list.filter(function (f) { return !cards[f.id]; });
     var known = list.filter(function (f) { return cards[f.id]; });
-    var newOnes = fresh.slice(0, opts.newCount || 4);
+    // Six new phrases a session: a scene of 18 closes in three sessions, and
+    // each session visibly moves the counter (4 a session felt like repeats).
+    var newOnes = fresh.slice(0, opts.newCount || 6);
     var out = [];
     // Each new phrase appears twice: once to meet it (guessed before being
     // shown, or presented), once to retrieve it.  More phrases, fewer repeats.

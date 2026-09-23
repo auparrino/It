@@ -29,7 +29,15 @@
   // «il jazz, il weekend = préstamos: se escriben…» is a comment, not a
   // translation, and makes a meaningless question.
   function translation(p) {
-    return usable(p[0]) && usable(p[1]) && !/[:«»→]/.test(p[1]) && !/,\s*\S+,/.test(p[0]) &&
+    // «la crisi → le crisi = en -i» is a table row with a comment, not a
+    // sentence with its translation: no arrows, no lists, no suffix notes.
+    if (/[→;=]|\s\/\s/.test(p[0]) || /[:«»→;=]|\s\/\s|(^|\s)-[a-zà-ù]/i.test(p[1])) return false;
+    // «3. Artículo con el posesivo»: a numbered note or grammar talk, not a translation
+    if (/^\d+\./.test(p[1].trim()) ||
+        /\b(artículo|posesivo|plural|singular|verbo|adjetivo|pronombre|sustantivo|preposici|conjuga|regla|tiempo verbal|auxiliar|participio)/i.test(p[1])) return false;
+    var esWords = p[1].trim().split(/\s+/).length, itWords = p[0].trim().split(/\s+/).length;
+    if (esWords < 2 && itWords > 1) return false;
+    return usable(p[0]) && usable(p[1]) && !/,\s*\S+,/.test(p[0]) &&
       p[1].length <= p[0].length * 2 + 6;        // «rosa = s sonora, como una z inglesa»: no
   }
 

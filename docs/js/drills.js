@@ -163,6 +163,43 @@
     return String(x).toLowerCase().replace(/[’]/g, "'").replace(/[.,!?¿¡;:«»"]/g, "").replace(/\s+/g, " ").trim();
   }
 
+  /* Distractors that test the rule, not the eye: wrong forms of the same
+     word (fantasme, fantasmas, fantasma), the other articles of the same
+     number, the other forms of an articulated preposition.  «cani / temi /
+     baci» next to «fantasmi» gives itself away by mere resemblance. */
+  var ART_SG = ["il", "lo", "la", "l'", "un", "uno", "una", "un'"], ART_PL = ["i", "gli", "le"];
+  var PREP_ART = { a: ["al", "allo", "alla", "all'", "ai", "agli", "alle"],
+                   di: ["del", "dello", "della", "dell'", "dei", "degli", "delle"],
+                   da: ["dal", "dallo", "dalla", "dall'", "dai", "dagli", "dalle"],
+                   in: ["nel", "nello", "nella", "nell'", "nei", "negli", "nelle"],
+                   su: ["sul", "sullo", "sulla", "sull'", "sui", "sugli", "sulle"] };
+  function wordVariants(it) {
+    var ans = String(it.answer || "").trim(), low = ans.toLowerCase(), out = [];
+    if (!ans || /\s/.test(ans) || ans.length < 2) return out;
+    var push = function (v) { if (v && v.toLowerCase() !== low && out.indexOf(v) < 0) out.push(v); };
+    if (ART_SG.indexOf(low) >= 0) shuffle(ART_SG).forEach(push);
+    else if (ART_PL.indexOf(low) >= 0) shuffle(ART_PL).forEach(push);
+    Object.keys(PREP_ART).forEach(function (p) { if (PREP_ART[p].indexOf(low) >= 0) shuffle(PREP_ART[p]).forEach(push); });
+    if (out.length >= 3) return out;
+    // Only for nouns, adjectives and articles: a verb form with another
+    // vowel («siame» for «siamo») is not a form anybody writes, and the
+    // diagnosis would then talk about agreement.  Verb items keep the pool
+    // of other persons (step 3).
+    var nominal = it.type === "plural" || /plural|singular|concordan|adjetiv|femenin|masculin|sustantiv|artículo/i.test(it.prompt || "");
+    var m = /([a-zà-ù']+)\s*→/i.exec(it.stem || "") || /\(([a-zà-ù']+)\)/i.exec(it.stem || "");
+    var base = m ? m[1] : null;
+    if (it.type === "conjugate" || (!nominal && !base)) return out;
+    // The word in the stem («fantasma → ___», «(parco)»): left unchanged, or
+    // with the Spanish plural; then the answer with another ending vowel,
+    // then without its double consonant.
+    if (base && base.toLowerCase() !== low) { push(base); push(base + "s"); }
+    var stem = ans.replace(/[aeio]$/, "");
+    if (stem !== ans) shuffle(["a", "e", "i", "o"]).forEach(function (v) { push(stem + v); });
+    var undoubled = ans.replace(/([bcdfglmnprstvz])\1/, "$1");
+    if (undoubled !== ans) push(undoubled);
+    return out;
+  }
+
   function recognitionOf(it, pool, week) {
     if (!it || !TYPED[it.type] || /\|/.test(it.answer || "") || !it.answer) return null;
     var answer = String(it.answer);
@@ -172,6 +209,16 @@
     var opts = [];
     function add(o) {
       if (o && !accepted[norm(o)] && opts.every(function (x) { return norm(x) !== norm(o); })) opts.push(o);
+    }
+    // 0. the alternatives the prompt itself names («o» (conjunción) o «ho»
+    //    (verbo)): that contrast is the whole point of the exercise
+    (String(it.prompt || "").match(/«([^»]{1,20})»/g) || []).forEach(function (q) { add(q.replace(/[«»]/g, "")); });
+    // 0b. a book conjugation item: the other answers asked with the same
+    //     prompt are the other persons of the same verb
+    if (it.type === "conjugate" && pool && opts.length < 3) {
+      shuffle(pool.filter(function (x) {
+        return x && x.id !== it.id && x.type === "conjugate" && x.prompt === it.prompt && x.answer && !/\|/.test(x.answer);
+      })).forEach(function (x) { if (opts.length < 3) add(String(x.answer)); });
     }
     // 1. conjugation: the same verb in other persons
     if (it.src === "coniugatore" && Conj) {
@@ -184,6 +231,11 @@
     if (opts.length < 3 && Lez) {
       Lez.traps(answer, Math.random, week || 52).slice(0, 3).forEach(add);
     }
+    // 2b. the same word in another shape (never another word that merely
+    //     looks like a plural next to the only plural of the right word)
+    if (opts.length < 3 && it.src !== "coniugatore") {
+      wordVariants(it).forEach(function (v) { if (opts.length < 3) add(v); });
+    }
     // 3. answers of the same kind from the same week: same shape (a letter
     //    group against letter groups, never «ho» against «sc»), same topic
     //    when there is one, and the sentences that share most words first
@@ -193,11 +245,14 @@
       var words = function (x) { return norm(x).split(" "); };
       var aw = words(answer);
       var shared = function (x) { return words(x).filter(function (w) { return aw.indexOf(w) >= 0; }).length; };
+      var nWords = answer.trim().split(/\s+/).length;
       var cands = pool.filter(function (x) {
         if (!x || x.id === it.id || x.type !== it.type || !x.answer || /\|/.test(x.answer)) return false;
         var xa = String(x.answer);
         if (it.topic && x.topic && x.topic !== it.topic) return false;
         if (short) return xa.indexOf(" ") < 0 && Math.abs(xa.length - len) <= 2;
+        // «la gente» against «le genti» or «la casa», never against «appena»
+        if (nWords <= 3 && xa.trim().split(/\s+/).length !== nWords) return false;
         return Math.abs(xa.length - len) <= Math.max(4, len / 2);
       });
       shuffle(cands).sort(function (a, b) { return shared(b.answer) - shared(a.answer); })
