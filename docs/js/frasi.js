@@ -387,6 +387,93 @@
         ["Considerate se questo è un uomo", "Consideren si esto es un hombre", "Primo Levi, del poema que abre *Se questo è un uomo*."],
         ["Un paese ci vuole, non fosse che per il gusto di andarsene via", "Hace falta un pueblo, aunque sea por el gusto de irse", "Pavese, *La luna e i falò* (1950)."],
         ["Eppur si muove", "Y sin embargo se mueve", "Atribuida a Galileo tras el proceso de 1633. No hay pruebas de que la haya dicho."]
+      ] },
+
+    /* ---------------------------------------------- C1: l'ultima stagione.
+       Quattro scene per le settimane 41-52, dove prima c'era solo grammatica:
+       la mail formale, la discussione, l'aneddoto e lo sportello. */
+    { id: "email", emoji: "📧", name: "Scrivere una mail",
+      blurb: "El correo formal: abrir, pedir, adjuntar, cerrar. Lo que se escribe todos los días en una oficina italiana.",
+      phrases: [
+        ["Gentile dottoressa Rossi, le scrivo in merito alla sua richiesta.", "Estimada doctora Rossi, le escribo con respecto a su pedido.", "*Gentile* + título es la apertura formal estándar; *Egregio* es más ceremonioso."],
+        ["In allegato trova il documento aggiornato.", "Adjunto encontrará el documento actualizado."],
+        ["Resto a disposizione per qualsiasi chiarimento.", "Quedo a disposición para cualquier aclaración."],
+        ["La ringrazio in anticipo per la cortese attenzione.", "Le agradezco de antemano su atención."],
+        ["Cordiali saluti,", "Saludos cordiales,", "El cierre neutro. *Distinti saluti* es más frío y formal."],
+        ["Le confermo la nostra riunione di giovedì alle dieci.", "Le confirmo nuestra reunión del jueves a las diez."],
+        ["Purtroppo devo rimandare l'appuntamento.", "Lamentablemente tengo que postergar la cita."],
+        ["Potrebbe inviarmi il preventivo entro venerdì?", "¿Podría enviarme el presupuesto antes del viernes?", "*Entro* = «antes de, a más tardar»; no es «entre»."],
+        ["Mi scuso per il ritardo nella risposta.", "Pido disculpas por la demora en responder."],
+        ["Le sarei grato se potesse confermare la ricezione.", "Le agradecería que confirmara la recepción.", "*Sarei grato se* + congiuntivo imperfetto: la cortesía en dos tiempos."],
+        ["Faccio seguito alla telefonata di stamattina.", "Doy seguimiento al llamado de esta mañana."],
+        ["Come da accordi, le invio la fattura.", "Según lo acordado, le envío la factura."],
+        ["Nel caso in cui non fosse possibile, mi faccia sapere.", "En caso de que no fuera posible, avíseme.", "*Nel caso in cui* + congiuntivo; *mi faccia sapere* es imperativo de cortesía."],
+        ["Con la presente comunico le mie dimissioni.", "Por la presente comunico mi renuncia.", "*Dimissioni* = renuncia; «dimisión» en italiano no existe."],
+        ["Distinti saluti,", "Atentamente,"],
+        ["A presto e buon lavoro!", "¡Hasta pronto y buen trabajo!"]
+      ] },
+
+    { id: "dibattito", emoji: "🗣️", name: "Discutere e argomentare",
+      blurb: "Dar la opinión, conceder, contradecir sin pelear: lo que pide el orale del C1.",
+      phrases: [
+        ["Da un lato hai ragione, dall'altro però…", "Por un lado tenés razón, pero por el otro…"],
+        ["Non sono affatto d'accordo.", "No estoy para nada de acuerdo.", "*Affatto* refuerza la negación: «en absoluto»."],
+        ["Mi permetta di dissentire.", "Permítame disentir.", "Formal: *mi permetta* es congiuntivo con valor de imperativo de cortesía."],
+        ["Il punto è un altro.", "El punto es otro."],
+        ["Ammettiamo pure che sia così.", "Admitamos que sea así.", "*Ammettere che* + congiuntivo."],
+        ["Non è detto che funzioni.", "No es seguro que funcione.", "*Non è detto che* + congiuntivo: «no está dicho que»."],
+        ["A mio avviso, è una questione di priorità.", "A mi entender, es una cuestión de prioridades."],
+        ["Sarà anche vero, ma non mi convince.", "Será verdad, pero no me convence.", "El futuro *sarà* expresa concesión o suposición."],
+        ["Prendiamo ad esempio il caso di Milano.", "Tomemos por ejemplo el caso de Milán."],
+        ["Detto questo, resto della mia idea.", "Dicho esto, sigo pensando lo mismo."],
+        ["Lasciami finire, per favore.", "Dejame terminar, por favor.", "*Lasciare* + infinitivo: permitir."],
+        ["In fin dei conti, siamo d'accordo.", "A fin de cuentas, estamos de acuerdo."],
+        ["Non vorrei sembrare polemico, ma…", "No quisiera parecer polémico, pero…"],
+        ["Quali sarebbero le alternative?", "¿Cuáles serían las alternativas?"],
+        ["I dati dicono il contrario.", "Los datos dicen lo contrario."],
+        ["Su questo non transigo.", "En esto no transo."]
+      ] },
+
+    { id: "aneddoto", emoji: "🎙️", name: "Raccontare un aneddoto",
+      blurb: "Contar algo que te pasó con suspenso, presente narrativo y remate. La fluidez se entrena contando.",
+      phrases: [
+        ["Ti devo raccontare una cosa assurda.", "Te tengo que contar algo absurdo."],
+        ["Ero appena uscito di casa quando…", "Recién había salido de casa cuando…", "*Ero appena uscito*: trapassato prossimo, la acción anterior."],
+        ["A un certo punto si spegne tutto.", "En un momento se apaga todo.", "Presente narrativo: en italiano se cuenta en presente para dar vida."],
+        ["Non ci crederai mai.", "No lo vas a creer nunca."],
+        ["Figurati che non avevo neanche le chiavi.", "Imaginate que ni siquiera tenía las llaves.", "*Figurati* = «imaginate»; también «de nada»."],
+        ["Per farla breve, ho dormito dal vicino.", "Para hacerla corta, dormí en lo del vecino.", "*Dal vicino* = en casa del vecino: *da* + persona."],
+        ["Morale della favola: mai fidarsi delle app.", "Moraleja: nunca confiar en las apps."],
+        ["E indovina chi c'era?", "¿Y adiviná quién estaba?"],
+        ["Mi sono sentito morire.", "Me quería morir."],
+        ["Alla fine è andata bene.", "Al final salió bien.", "*È andata*: impersonal en femenino, «la cosa fue»."],
+        ["Roba da matti!", "¡Cosa de locos!"],
+        ["Se l'avessi saputo, sarei rimasto a casa.", "Si lo hubiera sabido, me habría quedado en casa.", "Periodo hipotético del pasado: congiuntivo trapassato + condizionale passato."],
+        ["Ci siamo fatti una risata.", "Nos reímos un montón."],
+        ["Non me lo dimenticherò mai.", "No me lo voy a olvidar nunca."],
+        ["Tutto è bene quel che finisce bene.", "Bien está lo que bien acaba."],
+        ["Comunque, dov'ero rimasto?", "Bueno, ¿en qué estaba?"]
+      ] },
+
+    { id: "sportello", emoji: "🏛️", name: "Burocrazia e sportelli",
+      blurb: "Codice fiscale, permesso di soggiorno, marca da bollo: sobrevivir a la ventanilla italiana.",
+      phrases: [
+        ["Vorrei fare la richiesta del codice fiscale.", "Quisiera solicitar el codice fiscale.", "El *codice fiscale* es el número que Italia pide para todo, del alquiler al celular."],
+        ["Ho preso il numero, tocca a me?", "Saqué número, ¿me toca?"],
+        ["Mi manca un documento, posso tornare domani?", "Me falta un documento, ¿puedo volver mañana?"],
+        ["Serve la fotocopia del passaporto.", "Hace falta la fotocopia del pasaporte.", "*Serve* = hace falta; no «sirve»."],
+        ["Dove devo firmare?", "¿Dónde tengo que firmar?"],
+        ["La pratica è in lavorazione.", "El trámite está en curso.", "*Pratica* = trámite, expediente."],
+        ["Quanto ci vuole per il permesso di soggiorno?", "¿Cuánto tarda el permiso de residencia?", "*Ci vuole* = se necesita, tarda."],
+        ["Ho bisogno di una marca da bollo.", "Necesito un sello fiscal.", "La *marca da bollo* es una estampilla que se pega en muchos formularios."],
+        ["Mi hanno rimandato a un altro ufficio.", "Me mandaron a otra oficina."],
+        ["Posso prenotare un appuntamento online?", "¿Puedo reservar un turno en línea?"],
+        ["La residenza va richiesta al Comune.", "La residencia se pide en la municipalidad.", "*Va richiesta* = debe pedirse: *andare* + participio."],
+        ["Ha una copia della ricevuta?", "¿Tiene una copia del recibo?"],
+        ["Mi scusi, lo sportello chiude alle dodici?", "Disculpe, ¿la ventanilla cierra a las doce?"],
+        ["Mi hanno respinto la domanda.", "Me rechazaron la solicitud.", "*Domanda* = solicitud, además de pregunta."],
+        ["Faccio ricorso entro trenta giorni.", "Presento un recurso dentro de los treinta días."],
+        ["Finalmente ce l'ho fatta!", "¡Por fin lo logré!", "*Farcela* = lograrlo: *ce l'ho fatta*, *ce la fai?*"]
       ] }
   ];
 

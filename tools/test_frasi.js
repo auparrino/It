@@ -192,7 +192,7 @@ ok(Drills.buildReview(course, lst, 50).length === 20, "il ripasso include il lab
 
 /* ----------------------------------------------------------- letture */
 
-ok(Letture.ofSeries("martin").length === 10, "10 puntate di Martín");
+ok(Letture.ofSeries("martin").length === 13, "13 puntate di Martín");
 ok(Letture.ofSeries("cultura").length >= 10, "almeno 10 letture di cultura");
 ok(uniq(Letture.EPISODI.map(function (e) { return e.id; })), "id di lettura unici");
 Letture.EPISODI.forEach(function (ep) {

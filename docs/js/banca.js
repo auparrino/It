@@ -250,6 +250,7 @@
   }
 
   function formsSession(state, size, focus) {
+    if ((state.unlocked || 1) < FORME_WEEK) return [];
     var lvl = levelOf(state);
     var nouns = B.nouns.filter(function (n) { return within(n[5], lvl); });
     var special = nouns.filter(function (n) { return soundOf(n[0]) !== "c" || n[6]; });
@@ -344,7 +345,13 @@
     return shuffle(due).concat(shuffle(fresh), shuffle(rest));
   }
 
+  /* Translating needs articles and a verb behind you; the forms drill needs
+     the articles.  Before that the bank is a wall of possessives and plurals
+     nobody explained (audit, 1.3). */
+  var TR_WEEK = 5, GAP_WEEK = 5, FORME_WEEK = 3;
+
   function translateSession(state, size, tagFilter) {
+    if ((state.unlocked || 1) < TR_WEEK) return [];
     var ids = sentencePool(state, tagFilter && function (s) {
       return s.tags.some(function (t) { return tagFilter.indexOf(t) >= 0; });
     });
@@ -352,6 +359,7 @@
   }
 
   function gapSession(state, size, tagFilter) {
+    if ((state.unlocked || 1) < GAP_WEEK) return [];
     var ids = sentencePool(state, function (s) {
       return s.gap && (!tagFilter || s.tags.some(function (t) { return tagFilter.indexOf(t) >= 0; }));
     }, "wg");
@@ -501,6 +509,7 @@
     errorItem: errorItem,
     errorSession: errorSession,
     ERR_WEEK: ERR_WEEK,
+    TR_WEEK: TR_WEEK, GAP_WEEK: GAP_WEEK, FORME_WEEK: FORME_WEEK,
     weakest: weakest,
     clinicaSession: clinicaSession,
     CURE: CURE,

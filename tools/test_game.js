@@ -163,6 +163,7 @@ course.weeks.forEach(function (w) {
                      : Drills.buildRound(course, w, { size: 25 });
   var right = 0;
   round.forEach(function (it) {
+    if (it.type === "word") return;     // la scheda di una parola nuova non si risponde
     // Un giocatore che risponde sempre giusto deve poter avanzare.
     var verdict = Engine.grade(it.answer, it);
     if (verdict === "giusto") right++;
@@ -173,10 +174,11 @@ course.weeks.forEach(function (w) {
     state.totals.right++;
     state.xp += Engine.xpFor(verdict, 0);
   });
-  ok(right === round.length,
+  var gradable = round.filter(function (it) { return it.type !== "word"; }).length;
+  ok(right === gradable,
      "settimana " + w.week + ": la risposta del libro deve essere accettata (" +
-     right + "/" + round.length + ")");
-  var ws = state.weekStats[w.week] = { attempts: round.length, right: right,
+     right + "/" + gradable + ")");
+  var ws = state.weekStats[w.week] = { attempts: gradable, right: right,
                                        bossPassed: w.boss };
   if (ws.right >= 20) weeksCleared++;
 });
