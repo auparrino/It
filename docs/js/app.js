@@ -1599,13 +1599,13 @@
   }
 
   function exportSave() {
-    var name = "italiano-backup-" + stamp() + ".json";
+    var name = "italiano-copia-" + stamp() + ".json";
     var blob = new Blob([JSON.stringify(state)], { type: "application/json" });
     // On phones, the share sheet lets you drop the file in Drive, mail or chat.
     try {
       var file = new File([blob], name, { type: "application/json" });
       if (navigator.canShare && navigator.canShare({ files: [file] })) {
-        navigator.share({ files: [file], title: "Backup La Via C1" })
+        navigator.share({ files: [file], title: "Copia de La Via C1" })
           .catch(function () { download(blob, name); });
         return;
       }
