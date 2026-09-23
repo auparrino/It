@@ -56,7 +56,9 @@
     // Some book answers are a list of equally valid words ("grandi, buone").
     var expanded = accepted.slice();
     accepted.forEach(function (a) {
-      if (a.indexOf(",") >= 0) {
+      // Only a list of single words is a list of alternatives; a sentence
+      // with commas is one answer and its pieces are not right on their own.
+      if (a.indexOf(",") >= 0 && a.split(",").every(function (p) { return p.trim().split(/\s+/).length <= 2; })) {
         a.split(",").forEach(function (p) {
           p = normalise(p);
           if (p) expanded.push(p);
@@ -158,6 +160,7 @@
       lastPlayed: null,
       cards: {},          // itemId -> scheda SRS
       read: {},           // week -> timestamp della lezione letta
+      lessonScore: {},    // week -> miglior % nei controlli della lezione giocata
       weekStats: {},      // week -> { attempts, right, bossPassed }
       challengeLog: {},   // challengeId -> autovalutazione
       badges: [],

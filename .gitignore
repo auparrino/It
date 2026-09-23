@@ -2,3 +2,4 @@ node_modules/
 *.epub
 .DS_Store
 __pycache__/
+tools/audit/out/

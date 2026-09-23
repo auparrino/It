@@ -754,3 +754,73 @@ body.ingame:has(.feedback:not(.prompt)) .wrap { padding-bottom: 62vh; }
 .typed input { min-width: 0; }
 .typed .btn { flex: none; padding-left: 16px; padding-right: 16px; }
 @media (prefers-color-scheme: dark) { .xpfloat { color: var(--oro); text-shadow: 0 2px 0 rgba(0,0,0,.6); } }
+
+/* ---------- percorso: un cammino con nodi e stelle */
+.pathsum { display: flex; align-items: center; gap: 14px; padding: 14px 18px; }
+.pathsum b { font-size: 1.15rem; white-space: nowrap; color: var(--oro-scuro); }
+.pathsum .goalbar { flex: 1; margin: 0; }
+@media (prefers-color-scheme: dark) { .pathsum b { color: var(--oro); } }
+.banner { position: relative; border-radius: 22px; padding: 16px 18px; color: #fff; margin-top: 8px;
+  background: linear-gradient(135deg, var(--verde-scuro), var(--verde) 60%, var(--verde-chiaro)); box-shadow: 0 5px 0 rgba(0,0,0,.18); }
+.season:nth-of-type(3n+2) .banner { background: linear-gradient(135deg, #8f3322, var(--rosso) 60%, var(--rosso-chiaro)); }
+.season:nth-of-type(3n) .banner { background: linear-gradient(135deg, #264f7a, var(--blu) 60%, #4a86bd); }
+.season:nth-of-type(3n+1) .banner { background: linear-gradient(135deg, #a8761a, var(--oro) 70%, #f3c450); color: #3a2a05; }
+.banner h2 { margin: 2px 0 2px; font-size: 1.35rem; }
+.banner p { margin: 0; font-size: .86rem; opacity: .9; color: inherit; }
+.banner .lvl { background: rgba(255,255,255,.25); color: inherit; font-size: .72rem; font-weight: 900; padding: 2px 10px; border-radius: 99px; }
+.path { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 18px 0 8px; }
+.node { position: relative; display: flex; flex-direction: column; align-items: center; transform: translateX(var(--x));
+  width: 150px; text-align: center; }
+.node .dot { width: 72px; height: 72px; border-radius: 50%; border: none; font-size: 1.5rem; font-weight: 900; font-family: var(--serif);
+  color: #fff; background: radial-gradient(circle at 35% 30%, var(--verde-chiaro), var(--verde) 70%);
+  box-shadow: 0 6px 0 var(--verde-scuro), 0 10px 18px rgba(30,60,40,.25); transition: transform .07s, box-shadow .07s; }
+.node .dot:active:not(:disabled) { transform: translateY(5px); box-shadow: 0 1px 0 var(--verde-scuro); }
+.node.full .dot { background: radial-gradient(circle at 35% 30%, #f6cf62, var(--oro) 70%); box-shadow: 0 6px 0 var(--oro-scuro), 0 10px 18px rgba(120,80,10,.25); color: #3a2a05; }
+.node.boss .dot { width: 86px; height: 86px; font-size: 2rem; border-radius: 26px;
+  background: radial-gradient(circle at 35% 30%, #ef7a60, var(--rosso) 75%); box-shadow: 0 6px 0 var(--rosso-scuro), 0 10px 18px rgba(120,30,10,.25); }
+.node.locked .dot { background: var(--grigio-chiaro); color: var(--grigio); box-shadow: 0 6px 0 color-mix(in srgb, var(--grigio-chiaro) 60%, #000 12%); font-size: 1.2rem; }
+.node.current .dot { animation: nodepulse 1.6s ease-in-out infinite; }
+@keyframes nodepulse { 50% { box-shadow: 0 6px 0 var(--verde-scuro), 0 0 0 10px color-mix(in srgb, var(--verde-chiaro) 25%, transparent); } }
+.node .bubble { position: absolute; top: -30px; background: var(--carta); color: var(--verde); font-weight: 900; font-size: .72rem;
+  letter-spacing: .06em; padding: 4px 12px; border-radius: 10px; border: 2px solid var(--grigio-chiaro); animation: bob 1.4s ease-in-out infinite; z-index: 2; }
+.node .bubble::after { content: ""; position: absolute; left: 50%; bottom: -7px; margin-left: -6px; border: 6px solid transparent; border-top-color: var(--grigio-chiaro); border-bottom: 0; }
+@keyframes bob { 50% { transform: translateY(-4px); } }
+.node .nt { font-size: .74rem; font-weight: 800; line-height: 1.2; margin-top: 8px; color: var(--inchiostro); }
+.node.locked .nt { color: var(--grigio); }
+.stars { display: inline-flex; gap: 1px; font-style: normal; }
+.stars i { font-style: normal; color: var(--grigio-chiaro); font-size: .95rem; }
+.stars i.on { color: var(--oro); text-shadow: 0 1px 0 var(--oro-scuro); }
+h2 .stars i { font-size: 1.2rem; }
+
+/* ---------- missioni della settimana */
+.missions { display: grid; gap: 10px; }
+.mission { display: grid; grid-template-columns: 48px 1fr auto; gap: 12px; align-items: center; text-align: left;
+  border: 2px solid var(--grigio-chiaro); background: var(--carta); color: inherit; border-radius: 18px; padding: 12px 14px;
+  box-shadow: 0 4px 0 var(--grigio-chiaro); transition: transform .06s, box-shadow .06s; }
+.mission:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--grigio-chiaro); }
+.mission .mi { width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; font-size: 1.4rem;
+  background: var(--sfondo); }
+.mission.done .mi { background: var(--oro); color: #fff; font-size: 1.6rem; text-shadow: 0 1px 0 var(--oro-scuro); }
+.mission b { display: block; font-family: var(--serif); font-size: 1.08rem; font-weight: 700; }
+.mission small { display: block; color: var(--grigio); font-weight: 700; font-size: .78rem; line-height: 1.3; }
+.mission .go { font-size: 1.6rem; color: var(--grigio); font-weight: 900; }
+.mission.boss { border-color: var(--rosso-chiaro); box-shadow: 0 4px 0 var(--rosso-chiaro); }
+
+/* ---------- lezione giocata */
+.lescard.lesson { box-shadow: var(--ombra); margin-top: 0; }
+.lescard .blk { border-top: none; margin-top: 0; padding-top: 0; }
+.lescard .btn.wide { margin-top: 16px; padding: 15px; font-size: 1.05rem; }
+.lescard.quiz .badge-new { display: inline-block; font-size: .72rem; font-weight: 900; text-transform: uppercase; letter-spacing: .06em;
+  color: var(--rosso); background: color-mix(in srgb, var(--rosso) 12%, transparent); padding: 3px 10px; border-radius: 99px; margin-bottom: 8px; }
+.lescard .badge-new { display: inline-block; font-size: .72rem; font-weight: 900; text-transform: uppercase; letter-spacing: .06em;
+  color: var(--verde); background: color-mix(in srgb, var(--verde) 12%, transparent); padding: 3px 10px; border-radius: 99px; }
+.lescard .intro { font-size: 1.05rem; line-height: 1.6; }
+.lesdone .bigstar { font-size: 5rem; line-height: 1; color: var(--oro); text-shadow: 0 4px 0 var(--oro-scuro);
+  animation: starpop .7s cubic-bezier(.3,1.6,.5,1); }
+@keyframes starpop { from { transform: scale(0) rotate(-60deg); } }
+.lesdone .scorebig { justify-content: center; }
+@media (prefers-reduced-motion: reduce) { .node.current .dot, .node .bubble, .lesdone .bigstar { animation: none; } }
+body.ingame .feedback #lesnext2 { width: 100%; padding: 15px; font-size: 1.08rem; }
+body.ingame .feedback.giusto #lesnext2 { background: var(--verde-chiaro); box-shadow: 0 4px 0 var(--verde-scuro); }
+body.ingame .feedback.sbagliato #lesnext2 { background: var(--rosso-chiaro); box-shadow: 0 4px 0 var(--rosso-scuro); }
+#lesquit { padding: 6px 12px; box-shadow: none; border: none; background: transparent; font-size: 1.1rem; color: var(--grigio); }

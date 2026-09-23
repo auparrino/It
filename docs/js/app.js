@@ -471,34 +471,31 @@
   }
 
   function renderPercorso() {
+    var total = 0, got = 0;
+    course.weeks.forEach(function (w) { total += 3; got += weekStars(w); });
     var html = '<h1>Il percorso</h1>' +
-      '<p class="lead">La gramática de base a C1: cuatro estaciones, 52 misiones semanales. ' +
-      'Cada semana se desbloquea al superar la anterior; los <b>boss</b> son exámenes con nota mínima.</p>';
+      '<p class="lead">De base a C1 en 52 misiones. Cada una tiene <b>3 estrellas</b>: ' +
+      'jugar la lección, superar la semana y dominarla. Los <b>boss</b> cierran cada tramo.</p>' +
+      '<div class="card pathsum"><b>' + got + ' / ' + total + ' ★</b>' +
+      '<span class="goalbar"><i style="width:' + Math.round(got / total * 100) + '%"></i></span></div>';
 
     course.seasons.forEach(function (s) {
-      html += '<div class="season"><h2>' + esc(s.name) +
-        ' <span class="lvl">' + esc(s.level) + '</span></h2>' +
-        '<p>' + esc(s.blurb) + '</p><div class="weeks">';
-      course.weeks.filter(function (w) { return w.season === s.n; })
-        .forEach(function (w) {
-          var st = weekStat(w.week);
-          var open = w.week <= state.unlocked;
-          var pct = st.attempts ? Math.round(st.right / st.attempts * 100) : 0;
-          var done = w.boss ? st.bossPassed : st.right >= 20;
-          html += '<button class="week' + (done ? " done" : "") +
-            (w.boss ? " bossweek" : "") + '" data-week="' + w.week + '"' +
-            (open ? "" : " disabled") + '>' +
-            '<span class="n">settimana ' + w.week + ' · ' + esc(w.level) + '</span>' +
-            '<span class="t">' + esc(w.title) + '</span>' +
-            '<span class="meta">' + (w.boss ? "⚔️ boss · " : "") +
-              st.right + " aciertos" + (st.attempts ? " · " + pct + "%" : "") +
-            '</span>' +
-            '<span class="prog"><i style="width:' +
-              Math.min(100, Math.round(st.right / (w.boss ? 21 : 20) * 100)) +
-              '%"></i></span>' +
-            '</button>';
-        });
-      html += '</div></div>';
+      html += '<div class="season"><div class="banner"><span class="lvl">' + esc(s.level) + "</span>" +
+        "<h2>" + esc(s.name) + "</h2><p>" + esc(s.blurb) + '</p></div><div class="path">';
+      course.weeks.filter(function (w) { return w.season === s.n; }).forEach(function (w, k) {
+        var open = w.week <= state.unlocked;
+        var stars = weekStars(w);
+        var current = w.week === Math.min(state.unlocked, 52) && stars < 3;
+        var x = Math.round(Math.sin(k * 0.9) * 32);
+        html += '<div class="node' + (w.boss ? " boss" : "") + (open ? "" : " locked") +
+            (current ? " current" : "") + (stars === 3 ? " full" : "") + '" style="--x:' + x + '%">' +
+          (current ? '<span class="bubble">' + (weekStat(w.week).attempts || lessonRead(w.week) ? "SEGUÍ" : "EMPEZÁ") + "</span>" : "") +
+          '<button class="dot" data-week="' + w.week + '"' + (open ? "" : " disabled") + ">" +
+            (w.boss ? "⚔️" : open ? w.week : "🔒") + "</button>" +
+          '<span class="nt">' + esc(w.title) + "</span>" + starsHtml(stars) +
+          "</div>";
+      });
+      html += "</div></div>";
     });
     return html;
   }
@@ -514,7 +511,56 @@
 
   function lessonRead(n) { return !!(state.read || {})[n]; }
 
+  /* Tre stelle per settimana: la lezione giocata, la settimana superata
+     (20 giuste), la padronanza (85% su almeno 30).  Il boss: superato = 3. */
+  function weekStars(w) {
+    var st = weekStat(w.week);
+    if (w.boss) return st.bossPassed ? 3 : 0;
+    return (lessonRead(w.week) || !w.lesson ? 1 : 0) + (st.right >= 20 ? 1 : 0) +
+      (st.attempts >= 30 && st.right / st.attempts >= 0.85 ? 1 : 0);
+  }
+  function starsHtml(n, of) {
+    var h = ""; for (var i = 0; i < (of || 3); i++) h += '<i class="' + (i < n ? "on" : "") + '">★</i>';
+    return '<span class="stars">' + h + "</span>";
+  }
+
   var sayIndex = {};
+
+  function renderBlock(b, i) {
+    var html = '<section class="blk">';
+    if (b.h) html += "<h2>" + mk(b.h) + "</h2>";
+    (b.p || []).forEach(function (par) { html += "<p>" + mk(par) + "</p>"; });
+
+    if (b.table) {
+      html += '<div class="tw"><table class="gram">';
+      if (b.table.head && b.table.head.join("")) {
+        html += "<thead><tr>" + b.table.head.map(function (c) {
+          return "<th>" + mk(c) + "</th>";
+        }).join("") + "</tr></thead>";
+      }
+      html += "<tbody>" + (b.table.rows || []).map(function (r) {
+        return "<tr>" + r.map(function (c, k) {
+          return "<td" + (k === 0 ? ' class="k"' : "") + ">" + mk(c) + "</td>";
+        }).join("") + "</tr>";
+      }).join("") + "</tbody></table></div>";
+    }
+
+    if (b.ex) {
+      html += '<ul class="exs">' + b.ex.map(function (pair, k) {
+        sayIndex[i + "-" + k] = pair[0];
+        return '<li><span class="it">' + esc(pair[0]) + "</span>" +
+          '<span class="es">' + esc(pair[1]) + "</span>" +
+          '<button class="say" data-say="' + i + "-" + k + '" ' +
+          'aria-label="escuchar">🔊</button></li>';
+      }).join("") + "</ul>";
+    }
+
+    if (b.warn) html += '<div class="call warn"><b>La trampa</b>' +
+      "<p>" + mk(b.warn) + "</p></div>";
+    if (b.tip) html += '<div class="call tip"><b>El atajo</b>' +
+      "<p>" + mk(b.tip) + "</p></div>";
+    return html + "</section>";
+  }
 
   function renderTeoria(w) {
     var L = w.lesson;
@@ -527,41 +573,7 @@
       '<p class="lead">' + esc(w.title) + '</p>' +
       '<div class="lesson"><p class="intro">' + mk(L.intro) + '</p>';
 
-    L.blocks.forEach(function (b, i) {
-      html += '<section class="blk">';
-      if (b.h) html += "<h2>" + mk(b.h) + "</h2>";
-      (b.p || []).forEach(function (par) { html += "<p>" + mk(par) + "</p>"; });
-
-      if (b.table) {
-        html += '<div class="tw"><table class="gram">';
-        if (b.table.head && b.table.head.join("")) {
-          html += "<thead><tr>" + b.table.head.map(function (c) {
-            return "<th>" + mk(c) + "</th>";
-          }).join("") + "</tr></thead>";
-        }
-        html += "<tbody>" + (b.table.rows || []).map(function (r) {
-          return "<tr>" + r.map(function (c, k) {
-            return "<td" + (k === 0 ? ' class="k"' : "") + ">" + mk(c) + "</td>";
-          }).join("") + "</tr>";
-        }).join("") + "</tbody></table></div>";
-      }
-
-      if (b.ex) {
-        html += '<ul class="exs">' + b.ex.map(function (pair, k) {
-          sayIndex[i + "-" + k] = pair[0];
-          return '<li><span class="it">' + esc(pair[0]) + "</span>" +
-            '<span class="es">' + esc(pair[1]) + "</span>" +
-            '<button class="say" data-say="' + i + "-" + k + '" ' +
-            'aria-label="escuchar">🔊</button></li>';
-        }).join("") + "</ul>";
-      }
-
-      if (b.warn) html += '<div class="call warn"><b>La trampa</b>' +
-        "<p>" + mk(b.warn) + "</p></div>";
-      if (b.tip) html += '<div class="call tip"><b>El atajo</b>' +
-        "<p>" + mk(b.tip) + "</p></div>";
-      html += "</section>";
-    });
+    L.blocks.forEach(function (b, i) { html += renderBlock(b, i); });
 
     html += "</div>" +
       '<div class="card"><div class="row">' +
@@ -574,7 +586,124 @@
     return html;
   }
 
+  /* ------------------------------------------------------- lezione giocata */
+
+  var les = null;
+
+  function startLezione() {
+    var w = course.weeks[view.week - 1];
+    les = { w: w, steps: Lezione.steps(w.lesson), i: 0, right: 0, asked: 0, answered: false };
+    view.screen = "lezione";
+    render();
+    window.scrollTo(0, 0);
+  }
+
+  function renderLezione() {
+    var st = les.steps[les.i], w = les.w;
+    var n = les.steps.length;
+    var hudH = '<div class="hud"><span class="progressline"><i style="width:' +
+      Math.round(Math.max(0, les.i - 1) / n * 100) + '%" data-to="' + Math.round(les.i / n * 100) + '"></i></span>' +
+      '<span class="muted">' + (les.i + 1) + "/" + n + "</span>" +
+      '<button class="btn ghost" id="lesquit">✕</button></div>';
+    if (!st) {
+      var pct = les.asked ? Math.round(les.right / les.asked * 100) : 100;
+      return '<div class="card lesdone center"><div class="bigstar">★</div>' +
+        "<h1>¡Lección completa!</h1>" +
+        '<p class="lead">Semana ' + w.week + " · " + esc(w.title) + "</p>" +
+        '<div class="scorebig"><b>' + les.right + "/" + les.asked + '</b><span>+' + les.xp + " xp</span></div>" +
+        '<p class="muted">' + (pct === 100 ? "Perfecta: ni un error en los chequeos." :
+          pct >= 70 ? "Bien. Lo que fallaste vuelve en el entrenamiento." : "Repasala cuando quieras: se puede jugar de nuevo.") + "</p>" +
+        '<div class="row centerrow" style="margin-top:14px"><button class="btn" id="lesplay">🎯 A entrenar</button>' +
+        '<button class="btn ghost" id="lesback">Volver a la semana</button></div></div>';
+    }
+    if (st.kind === "intro") {
+      return hudH + '<div class="card lescard"><div class="badge-new">📘 Lección · semana ' + w.week + "</div>" +
+        "<h1>" + esc(w.title) + "</h1><p class=\"intro\">" + mk(w.lesson.intro) + "</p>" +
+        '<button class="btn wide" id="lesnext">Empezar →</button></div>';
+    }
+    if (st.kind === "block") {
+      return hudH + '<div class="card lescard lesson">' + renderBlock(w.lesson.blocks[st.i], st.i) +
+        '<button class="btn wide" id="lesnext">Seguir →</button></div>';
+    }
+    var q = st.q;
+    return hudH + '<div class="card lescard quiz"><div class="badge-new">⚡ Chequeo rápido</div>' +
+      '<div class="prompt">' + esc(q.prompt) + "</div>" +
+      (q.stem ? '<div class="stem">' + esc(q.stem) + "</div>" : "") +
+      '<div class="options">' + q.options.map(function (o, k) {
+        return '<button class="opt" data-lq="' + k + '">' + esc(o) + "</button>";
+      }).join("") + '</div><div id="lesfb"></div></div>';
+  }
+
+  function lesAnswer(btn) {
+    if (les.answered) return;
+    les.answered = true;
+    var q = les.steps[les.i].q;
+    var ok = btn.textContent === q.answer;
+    les.asked++;
+    if (ok) { les.right++; fx.right(); } else fx.wrong();
+    document.querySelectorAll("[data-lq]").forEach(function (b) {
+      b.disabled = true;
+      if (b.textContent === q.answer) b.classList.add("right");
+      else if (b === btn) b.classList.add("wrong");
+    });
+    $("#lesfb").innerHTML = '<div class="feedback ' + (ok ? "giusto" : "sbagliato") + '">' +
+      '<div class="verdict">' + (ok ? pick(["¡Esatto!", "¡Bravo!", "¡Perfetto!"]) : "Era esta:") + "</div>" +
+      '<div class="sol">' + esc(q.answer) + "</div>" +
+      '<div class="row" style="margin-top:10px"><button class="btn" id="lesnext2">Seguir →</button></div></div>';
+    on("#lesnext2", lesNext);
+  }
+
+  function lesNext() {
+    les.i++;
+    les.answered = false;
+    if (les.i >= les.steps.length) {
+      var w = les.w;
+      var first = !lessonRead(w.week);
+      if (!state.read) state.read = {};
+      if (!state.lessonScore) state.lessonScore = {};
+      var pct = les.asked ? Math.round(les.right / les.asked * 100) : 100;
+      les.xp = (first ? Engine.XP.lesson : 5) + les.right * 2;
+      if (first) state.read[w.week] = Date.now();
+      state.lessonScore[w.week] = Math.max(pct, state.lessonScore[w.week] || 0);
+      gain(les.xp);
+      Engine.checkBadges(state);
+      persist();
+      renderHeader();
+      fx.goal();
+      confetti();
+    }
+    render();
+    window.scrollTo(0, 0);
+  }
+
   /* -------------------------------------------------------------- briefing */
+
+  function missions(w, st, nChal) {
+    var pct = st.attempts ? Math.round(st.right / st.attempts * 100) : 0;
+    var m = function (id, done, ico, title, sub, cls) {
+      return '<button class="mission' + (done ? " done" : "") + (cls ? " " + cls : "") + '" id="' + id + '">' +
+        '<span class="mi">' + (done ? "★" : ico) + "</span><span><b>" + title + "</b><small>" + sub + "</small></span>" +
+        '<span class="go">›</span></button>';
+    };
+    var html = '<div class="card"><h2>Misiones ' + starsHtml(weekStars(w)) + "</h2><div class=\"missions\">";
+    if (w.boss) {
+      html += m("play", st.bossPassed, "⚔️", "Vencé al boss", "85% con 3 vidas. Superarlo te da las 3 estrellas.", "boss");
+    } else {
+      if (w.lesson) html += m("lez", lessonRead(w.week), "📘", "Jugá la lección",
+        lessonRead(w.week) ? "Hecha" + (state.lessonScore && state.lessonScore[w.week] != null ? " · " + state.lessonScore[w.week] + "% en los chequeos" : "") : "Teoría en pasos cortos, con preguntas.");
+      html += m("play", st.right >= 20, "🎯", "Superá la semana", Math.min(st.right, 20) + " / 20 respuestas correctas" +
+        (st.right >= 20 ? " · semana siguiente abierta" : ""));
+      html += m("play2", st.attempts >= 30 && pct >= 85, "🏆", "Dominala", "85% de acierto en al menos 30 respuestas (vas " +
+        (st.attempts ? pct + "% en " + st.attempts : "0") + ")");
+    }
+    html += "</div>";
+    html += '<div class="row" style="margin-top:12px">' +
+      (w.lesson ? '<button class="tab" id="teo">📄 Ver la teoría entera</button>' : "") +
+      (w.boss ? "" : '<button class="tab" id="gym">🏋️ Gimnasio de verbos</button>') +
+      (nChal ? '<button class="tab" id="chal">📖 Sfide del Maestro (' + nChal + ")</button>" : "") +
+      "</div></div>";
+    return html;
+  }
 
   function renderBriefing(w) {
     var st = weekStat(w.week);
@@ -586,37 +715,18 @@
       refs.push("<b>Soluzioni</b> (Routledge), cap. " + w.refs.routledge.join(", "));
     }
 
-    var sections = (w.refs.sections || []).slice(0, 12).map(function (s) {
-      return '<span class="tag">' + esc(s.n + " " + s.title) + "</span>";
-    }).join("");
-
     var nChal = (w.challenges || []).length;
 
     return '<button class="btn ghost" id="back">← al percorso</button>' +
       '<h1>Settimana ' + w.week + " · " + esc(w.title) + '</h1>' +
       '<p class="lead">' + esc(w.focus) + '</p>' +
+      missions(w, st, nChal) +
       '<div class="card"><h2>Lo que se juega esta semana</h2>' +
         '<ul class="keys">' +
           w.keys.map(function (k) { return "<li>" + esc(k) + "</li>"; }).join("") +
         '</ul>' +
         '<h3>Lectura de apoyo</h3><p class="refs">' + refs.join(" · ") + "</p>" +
-        (sections ? '<h3>Secciones del Soluzioni</h3>' + sections : "") +
-      '</div>' +
-      '<div class="card"><h2>Modos de juego</h2><div class="row">' +
-        (w.lesson ? '<button class="btn ' + (lessonRead(w.week) ? "ghost" : "") +
-          '" id="teo">📘 Teoria' + (lessonRead(w.week) ? " ✓" : "") + "</button>" : "") +
-        '<button class="btn" id="play">' +
-          (w.boss ? "⚔️ Entrar al boss" : "▶︎ Allenamento (12 preguntas)") + '</button>' +
-        (w.boss ? "" : '<button class="btn ghost" id="gym">🏋️ Gimnasio de verbos</button>') +
-        (nChal ? '<button class="btn ghost" id="chal">📖 Sfide del Maestro (' +
-          nChal + ")</button>" : "") +
-      '</div>' +
-      '<p class="muted" style="margin-top:12px">' +
-        (w.boss
-          ? "Para aprobar necesitás 85% y te quedan 3 vidas."
-          : "Superá 20 respuestas correctas para desbloquear la semana siguiente. " +
-            "Llevás " + st.right + ".") +
-      '</p></div>';
+      '</div>';
   }
 
   /* ------------------------------------------------------------ allenamento */
@@ -897,7 +1007,9 @@
     if (round.answered) return;
     var it = currentItem();
     if (!String(given || "").trim()) return;
-    var accept = it.accept && it.accept.length ? it.accept : [it.answer];
+    var accept = (it.accept && it.accept.length ? it.accept : [it.answer]).map(function (x) {
+      return String(x).replace(/\s*\|\s*/g, " ");   // two blanks: typed one after the other
+    });
     var d = window.Diagnosi ? Diagnosi.diagnose(given, accept, {}) : { verdict: "sbagliato" };
     // The old graders forgive a letter or two; the diagnosis knows whether
     // those letters were a typo or grammar (a il / al, la / il lunedì).
@@ -1538,7 +1650,7 @@
   function renderNav() {
     var nav = $("#nav");
     if (!nav) return;
-    var inGame = ["gioco", "lampo"].indexOf(view.screen) >= 0;
+    var inGame = ["gioco", "lampo", "lezione"].indexOf(view.screen) >= 0;
     nav.hidden = inGame;
     nav.innerHTML = TABS.map(function (t) {
       return '<button class="' + (view.tab === t[0] ? "on" : "") + '" data-tab="' + t[0] + '">' +
@@ -1565,6 +1677,7 @@
     else if (s === "lampofine") html = renderLampoFine();
     else if (s === "leggi") html = renderLeggi();
     else if (s === "lettura") html = renderLettura(Letture.byId(view.ep));
+    else if (s === "lezione") html = renderLezione();
 
     var gb = $("#glossbox");
     if (gb) gb.classList.remove("on");
@@ -1575,7 +1688,7 @@
       try { history.pushState({ sub: 1 }, ""); subEntry = true; } catch (e) { /* */ }
     }
     app().innerHTML = html;
-    document.body.classList.toggle("ingame", s === "gioco" || s === "lampo");
+    document.body.classList.toggle("ingame", s === "gioco" || s === "lampo" || s === "lezione");
     var pl = document.querySelector(".progressline i[data-to]");
     if (pl) requestAnimationFrame(function () { requestAnimationFrame(function () { pl.style.width = pl.dataset.to + "%"; }); });
     renderNav();
@@ -1680,6 +1793,13 @@
       startRound(course.weeks[view.week - 1].boss ? "boss" : "round");
     });
     on("#gym", function () { startRound("gym"); });
+    on("#lez", startLezione);
+    on("#play2", function () { startRound("round"); });
+    on("#lesnext", lesNext);
+    on("#lesquit", function () { view.screen = "briefing"; render(); });
+    on("#lesback", function () { view.screen = "briefing"; render(); });
+    on("#lesplay", function () { startRound(course.weeks[view.week - 1].boss ? "boss" : "round"); });
+    document.querySelectorAll("[data-lq]").forEach(function (b) { b.onclick = function () { lesAnswer(b); }; });
     on("#chal", function () { view.screen = "sfide"; render(); });
     on("#again", function () { startRound(round.kind, round.arg); });
     on("#quit", function () {

@@ -619,9 +619,31 @@ def main() -> None:
                 x["id"] = x["id"] + "abcdefghijklmnopqrstuvwxyz"[n]
 
     # --- graded items from the Dummies bank -----------------------------
+    # tools/audit/patches/dummies/*.json rewrites each exercise for a Spanish
+    # speaker: specific instruction, blank where the answer goes, no English.
+    patches = {}
+    pdir = os.path.join(ROOT, "tools", "audit", "patches", "dummies")
+    for fn in sorted(os.listdir(pdir)) if os.path.isdir(pdir) else []:
+        if fn.endswith(".json"):
+            with open(os.path.join(pdir, fn), encoding="utf-8") as fh:
+                patches.update(json.load(fh)["items"])
     items = []
     for ch in dummies["chapters"]:
         for it in ch["items"]:
+            pt = patches.get(it["id"])
+            if pt:
+                if pt.get("drop"):
+                    continue
+                accept = [pt["answer"]] + [a for a in pt.get("alt", []) if a and a != pt["answer"]]
+                item = {"id": it["id"], "src": "dummies", "chapter": ch["chapter"],
+                        "type": pt["type"], "prompt": pt["consigna"], "stem": pt["stem"],
+                        "answer": pt["answer"], "accept": accept}
+                if pt.get("options"):
+                    item["options"] = pt["options"]
+                if pt.get("note"):
+                    item["note"] = pt["note"]
+                items.append(item)
+                continue
             kind, prompt = classify(it["directions"] or "")
             items.append({
                 "id": it["id"],
