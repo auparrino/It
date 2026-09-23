@@ -53,6 +53,8 @@ FEATURE_WEEK = {
     "ne": 21,
     "cui": 34,
     "si impersonale": 36,
+    "riflessivi": 12,
+    "riflessivi passato": 16,
 }
 ESSERE_AVERE = {"sono", "sei", "è", "siamo", "siete", "ho", "hai", "ha",
                 "abbiamo", "avete", "hanno", "c'è"}
@@ -127,6 +129,7 @@ def lexicon():
         _LEX = json.loads(out)
         _LEX["gerunds"] = set(_LEX["gerunds"])
         _LEX["imperatives"] = set(_LEX["imperatives"])
+        _LEX["irrPres"] = set(_LEX.get("irrPres", []))
     return _LEX
 
 
@@ -207,7 +210,11 @@ def analyze(text, answer=False):
             need(tense, wk)
         elif (tense == "presente" and answer and tok not in ESSERE_AVERE
               and tok not in nominal_forms()):
-            need("presente", wk)
+            # vado, faccio, esco: el presente irregular es de la semana 6
+            need("presente", 6 if tok in lex["irrPres"] else wk)
+            # mi alzo, ti chiami: el reflexivo se enseña en la semana 12
+            if i and toks[i - 1] in ("mi", "ti", "si", "vi"):
+                need("riflessivi", FEATURE_WEEK["riflessivi"])
         if tok in lex["gerunds"] and len(tok) > 5:
             # stare + gerundio se enseña en la semana 6, y desde ahí un
             # gerundio se entiende leyendo; producirlo suelto es de la 44
@@ -235,9 +242,20 @@ def analyze(text, answer=False):
     if COMBINED.search(low) or any(ENCLITIC.match(t) and t not in nominal_forms()
                                    for t in toks):
         need("pronomi combinati", FEATURE_WEEK["pronomi combinati"])
-    # «ci si veste», «ci si diverte»: si impersonale con un verbo reflexivo
-    if re.search(r"\bci si\b", low):
+    # «ci si veste», «mi si è rotto»: si impersonale con otro pronombre
+    if re.search(r"\b(ci|mi|ti|gli|le|vi) si\b", low):
         need("si impersonale", FEATURE_WEEK["si impersonale"])
+    # «mi sono alzato», «si è sentita»: reflexivos en pasado (semana 16)
+    if re.search(r"\b(mi|ti|si|vi) (sono|sei|è|siamo|siete|ero|era|eravamo|saremo|sarei)\s+"
+                 r"(?:già |mai |appena )?(?!stat)\w+[aeiou]\b", low):
+        m = re.search(r"\b(mi|ti|si|vi) (?:sono|sei|è|siamo|siete|ero|era|eravamo|saremo|sarei)\s+"
+                      r"(?:già |mai |appena )?(\w+)", low)
+        # mi è piaciuto, ti è mancata: piacere y su familia llevan un
+        # pronombre indirecto, no reflexivo
+        indiretti = ("piaciut", "dispiaciut", "mancat", "sembrat", "pars", "servit",
+                     "bastat", "successo", "success", "capitat", "interessat", "costat")
+        if m and m.group(2) in lex["participles"] and not m.group(2).startswith(indiretti):
+            need("riflessivi passato", FEATURE_WEEK["riflessivi passato"])
     return feats
 
 

@@ -100,7 +100,7 @@ WEEKS = [
                "Con preposición, esta va delante: Di chi è? A che ora?",
                "quale ante è se apocopa: qual è (sin apóstrofo)."],
          v=["essere", "fare", "andare"],
-         tenses=["presente"], t=[]),
+         tenses=["presente"], t=["interrogativi"]),
     dict(w=9, title="Preposizioni di base", level="A2", d=[12], r=[15],
          focus="Las preposiciones que no se pueden traducir del español una a una.",
          keys=["in + países y regiones; a + ciudades.",
@@ -160,6 +160,7 @@ WEEKS = [
                "En pasado va con essere: mi è piaciuta la mostra.",
                "Familia: mancare, servire, bastare, interessare, sembrare."],
          v=["piacere"],
+         persons=[2, 5],
          tenses=["presente", "passatoProssimo"], t=["piacere"]),
     dict(w=15, title="Imperfetto e il contrasto con il passato prossimo", level="A2", d=[16], r=[20],
          focus="No es cuestión de duración: es cuestión de qué estás mirando.",
@@ -866,6 +867,12 @@ def place_by_syllabus(weeks: list, by_id: dict, challenges: list) -> None:
         w["known"] = ["presente"] + [t for t, k in sorted(sillabo.TENSE_WEEK.items(), key=lambda x: x[1])
                                      if t != "presente" and k <= w["week"]
                                      and t not in ("imperativo", "passivo", "gerundio")]
+    # The conjugation gym weighs 35% of a round when the week (or its season
+    # start) brings a new tense, 15% when it would only repeat old ones.
+    for w in weeks:
+        new = any(sillabo.TENSE_WEEK.get(t) == w["week"] for t in w["tenses"])
+        # 6 irregular present, 16 reflexive past: new forms, same tense name
+        w["gymShare"] = 0.35 if new or w["week"] in (1, 6, 16) else 0.15
     print("sillabo: %d ejercicios pasan a una semana posterior, a su teoría" % len(moved))
 
 
@@ -1009,6 +1016,7 @@ def main() -> None:
             "items": pool,
             "challenges": chal,
             "verbs": spec.get("v", []),
+            "persons": spec.get("persons"),
             "tenses": spec.get("tenses", ["presente"]),
         })
 

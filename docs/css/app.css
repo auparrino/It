@@ -1027,3 +1027,5 @@ table.gram th { letter-spacing: .12em; }
 .nav button { font-weight: 700; letter-spacing: .02em; }
 .brand.targa { text-align: center; font-size: 1rem; letter-spacing: 0; }
 .mission b, .weekcard b, .scene b, .lab b, .ep b, .week .t { font-weight: 800; }
+.weekcard.first { border: 2px solid var(--verde); background: color-mix(in srgb, var(--verde) 8%, var(--carta)); }
+.weekcard.first b { color: var(--verde); }

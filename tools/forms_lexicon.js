@@ -25,6 +25,7 @@ var gerunds = {};
 var imperatives = {};   // solo le forme che non coincidono con altri tempi
 var aux = {};           // forme di essere/avere/venire -> [verbo:tempo]
 var lemmas = {};        // qualsiasi forma -> [infinito], per il lessico
+var irrPres = {};       // presente irregolare (vado, faccio): si impara nella settimana 6
 
 function add(map, form, val) {
   form = form.toLowerCase();
@@ -44,6 +45,13 @@ Conj.list().forEach(function (inf) {
       if (inf === "essere" || inf === "avere" || inf === "venire") add(aux, f, inf + ":" + t);
     });
   });
+  try {
+    var reg = Conj.regular(inf, "presente"), pres = Conj.conjugate(inf, "presente");
+    pres.forEach(function (f, i) {
+      var w = f.split(" ").pop();
+      if (w !== reg[i].split(" ").pop()) irrPres[w.toLowerCase()] = 1;
+    });
+  } catch (e) { /* no */ }
   try {
     var pp = Conj.participle(inf);
     var ausiliare = info.refl ? "essere" : info.aux;
@@ -87,5 +95,6 @@ bank.verbs.forEach(function (v) {
 
 process.stdout.write(JSON.stringify({
   simple: simple, participles: participles, aux: aux, lemmas: lemmas,
-  gerunds: Object.keys(gerunds), imperatives: Object.keys(imperatives)
+  gerunds: Object.keys(gerunds), imperatives: Object.keys(imperatives),
+  irrPres: Object.keys(irrPres)
 }));

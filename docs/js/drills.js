@@ -72,10 +72,16 @@
 
   /* known: the tenses already taught (week.known).  Distractors come only
      from those, so a week-6 learner never sees a congiuntivo as an option. */
-  function conjugationDrill(verb, tense, known) {
+  // persons: which persons make sense (piacere: only lui/lei and loro).
+  function pickPerson(persons) {
+    return persons && persons.length ? persons[Math.floor(Math.random() * persons.length)]
+                                     : Math.floor(Math.random() * 6);
+  }
+
+  function conjugationDrill(verb, tense, known, persons) {
     var forms = Conj.conjugate(verb, tense);
     var alt = otherAux(verb, tense);
-    var p = Math.floor(Math.random() * 6);
+    var p = pickPerson(persons);
     var answer = forms[p];
 
     // Distractors: the same verb in other persons, then the same person in
@@ -119,10 +125,10 @@
     };
   }
 
-  function conjugationTyped(verb, tense) {
+  function conjugationTyped(verb, tense, persons) {
     var forms = Conj.conjugate(verb, tense);
     var alt = otherAux(verb, tense);
-    var p = Math.floor(Math.random() * 6);
+    var p = pickPerson(persons);
     var info = Conj.info(verb);
     return {
       id: "conjw:" + verb + ":" + tense + ":" + p,
@@ -166,8 +172,10 @@
       .map(function (id) { return map[id]; })
       .filter(Boolean);
 
+    // The gym weighs more when the week brings a new tense (gymShare, from
+    // build_course.py); in review weeks it would only repeat «voi siete».
     var wantConj = Math.min(
-      week.verbs && week.verbs.length ? Math.ceil(size * 0.35) : 0,
+      week.verbs && week.verbs.length ? Math.ceil(size * (week.gymShare || 0.35)) : 0,
       size
     );
     var wantBook = size - wantConj;
@@ -180,8 +188,8 @@
       var verb = week.verbs[Math.floor(Math.random() * week.verbs.length)];
       var tense = week.tenses[Math.floor(Math.random() * week.tenses.length)];
       try {
-        out.push(i % 2 === 0 ? conjugationDrill(verb, tense, week.known)
-                             : conjugationTyped(verb, tense));
+        out.push(i % 2 === 0 ? conjugationDrill(verb, tense, week.known, week.persons)
+                             : conjugationTyped(verb, tense, week.persons));
       } catch (e) { /* salta i verbi non coniugabili in quel tempo */ }
     }
 
@@ -300,22 +308,24 @@
     }
 
     // Interleaving (Rohrer & Taylor 2007): una domanda del laboratorio.
-    if (Lab) filler.push(Lab.randomItem(state.cards, week.week));
+    // week: the last week whose lesson the learner has read.  Before the
+    // first lesson there is no grammar to practise: only phrases and words.
+    if (Lab) filler.push(Lab.randomItem(state.cards, week ? week.week : 1));
 
     // Del libro solo domande a scelta: in pausa si va veloci.
-    var bookChoice = (week.items || []).map(function (id) { return map[id]; })
+    var bookChoice = ((week && week.items) || []).map(function (id) { return map[id]; })
       .filter(function (it) { return it && it.type === "choice" && !seenIds[it.id]; });
     var fresh = pickFresh(bookChoice, 2, state).filter(function (it) {
       var c = state.cards[it.id];
       return !c || !c.due || c.due <= Date.now();   // already known and not due: leave it
     });
     fresh.forEach(function (it) { filler.push(it); });
-    bankFill(state, 2 - fresh.length).forEach(function (it) { filler.push(it); });
-    if (week.verbs && week.verbs.length) {
+    if (week) bankFill(state, 2 - fresh.length).forEach(function (it) { filler.push(it); });
+    if (week && week.verbs && week.verbs.length) {
       try {
         filler.push(conjugationDrill(
           week.verbs[Math.floor(Math.random() * week.verbs.length)],
-          week.tenses[Math.floor(Math.random() * week.tenses.length)], week.known));
+          week.tenses[Math.floor(Math.random() * week.tenses.length)], week.known, week.persons));
       } catch (e) { /* salta */ }
     }
     filler = shuffle(filler);

@@ -26,7 +26,7 @@ ITEMS = [
          stem="___", options=["città", "cittá", "cìtta"], answer="città",
          note="El italiano usa acento grave en la mayoría de las oxítonas; "
               "agudo en la é cerrada: perché, né, sé, affinché, ventitré."),
-    dict(id="a2-ort-05", type="choice", topic="ortografia", level="A1",
+    dict(id="a2-ort-05", type="choice", topic="interrogativi", level="A1",
          prompt="¿Cuál es la forma correcta?",
          stem="___ è il tuo indirizzo?", options=["Qual", "Qual'", "Quale'"],
          answer="Qual",

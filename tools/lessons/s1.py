@@ -63,14 +63,14 @@ LESSONS = {
        "simple es un toque; la *rr*, vibrante.",
   "ex": [["questo", "«cuésto», nunca «késto»"],
          ["rosa", "s sonora, como una z inglesa"],
-         ["caro / carro", "r simple / rr vibrante"]]},
+         ["caro / carro", "querido (r simple) / carro (rr vibrante)"]]},
 
  {"h": "Siete vocales, no cinco",
   "r": "La *e* y la *o* acentuadas pueden ser **abiertas** (*è*, *ò*) o "
        "**cerradas** (*é*, *ó*). A veces cambian la palabra.",
   "ex": [["pèsca / pésca", "durazno / pesca (de pescar)"],
          ["è / e", "es (abierta) / y"],
-         ["pòrta / sóle", "o abierta / o cerrada"]],
+         ["pòrta / sóle", "puerta (o abierta) / sol (o cerrada)"]],
   "warn": "Ni *b* = *v* ni «e» delante de *s* + consonante: *vino* con v de "
           "labios y dientes, *scuola* y *studente*, nunca «escuola».",
   "tip": "Escuchá cada ejemplo con 🔊 y repetilo en voz alta: la diferencia "

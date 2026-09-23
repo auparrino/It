@@ -226,7 +226,17 @@
     var html = '<h1>' + hello + '! 👋</h1>' +
       '<p class="lead">' + (state.streak > 1
         ? "Llevás <b>" + dias(state.streak) + "</b> seguidos. No cortes la racha."
+        : !lessonRead(1) ? "Empezás de cero: primero la lección 1, después la práctica."
         : "Tres minutos alcanzan. Arrancá con una pausa caffè.") + "</p>";
+
+    // Primera vez: antes que nada, la lección 1 (teoría antes que práctica).
+    if (!lessonRead(1)) {
+      html += '<button class="card weekcard first" id="firstles">' +
+        '<span class="muted">👋 Primera vez · 5 minutos</span>' +
+        "<b>Empezá por acá: la lección 1</b>" +
+        '<span class="muted">Cómo suena el italiano y tus dos primeros verbos, <i>essere</i> y ' +
+        "<i>avere</i>. Después, la pausa caffè ya tiene con qué practicar.</span></button>";
+    }
 
     // Obiettivo del giorno + forziere
     html += '<div class="card goal">' +
@@ -640,7 +650,7 @@
 
   function startLezione() {
     var w = course.weeks[view.week - 1];
-    les = { w: w, steps: Lezione.steps(w.lesson), i: 0, right: 0, asked: 0, answered: false };
+    les = { w: w, steps: Lezione.steps(w.lesson, Math.random, w.week), i: 0, right: 0, asked: 0, answered: false };
     view.screen = "lezione";
     render();
     window.scrollTo(0, 0);
@@ -796,8 +806,14 @@
     else if (kind === "pausa") {
       w = course.weeks[Math.min(state.unlocked, 52) - 1];
       view.week = w.week;
-      items = Drills.buildPausa(course, state, w, drillOpts());
-      if (Banca.loaded()) {
+      // Grammar only from lessons already read: before lesson 1 the coffee
+      // break is phrases and words, never «conjugá essere».
+      var taught = null;
+      for (var tw = Math.min(state.unlocked, 52); tw >= 1; tw--) {
+        if (lessonRead(tw)) { taught = course.weeks[tw - 1]; break; }
+      }
+      items = Drills.buildPausa(course, state, taught, drillOpts());
+      if (Banca.loaded() && taught && taught.week >= 2) {
         var bi = Banca.pausaItem(state);
         if (bi) items.splice(Math.min(5, items.length), 0, bi);
       }
@@ -807,8 +823,8 @@
         var v = w.verbs[Math.floor(Math.random() * w.verbs.length)];
         var t = w.tenses[Math.floor(Math.random() * w.tenses.length)];
         try {
-          items.push(i % 3 === 0 ? Drills.conjugationDrill(v, t, w.known)
-                                 : Drills.conjugationTyped(v, t));
+          items.push(i % 3 === 0 ? Drills.conjugationDrill(v, t, w.known, w.persons)
+                                 : Drills.conjugationTyped(v, t, w.persons));
         } catch (e) { /* salta */ }
       }
     } else if (kind === "ponte") items = Lab.ponteSession(state.cards, arg);
@@ -839,7 +855,9 @@
       wrong: 0,
       combo: 0,
       bestCombo: 0,
-      lives: kind === "boss" ? 3 : WITH_LIVES[kind] ? 5 : Infinity,
+      // In the first season errors are how you learn: rounds never end
+      // early.  Lives come from week 14; the bosses always have 3.
+      lives: kind === "boss" ? 3 : WITH_LIVES[kind] && w.week > 13 ? 5 : Infinity,
       xp: 0,
       answered: false,
       picked: [],
@@ -1200,7 +1218,7 @@
        back later in the same session, until you get it (at most twice). */
     var relearn = "";
     if (q < 2 && round.kind !== "boss" && it.src !== "lettura" &&
-        (round.again[it.id] || 0) < 2) {
+        (round.again[it.id] || 0) < (round.kind === "pausa" ? 1 : 2)) {   // la pausa dura 3 minutos
       round.again[it.id] = (round.again[it.id] || 0) + 1;
       var copy = it.frase ? Frasi.pickItem(it.frase, { silent: state.silent }) : it;
       // Same question, new order: remember the answer, not its position.
@@ -1839,6 +1857,7 @@
     on("#scena", function () { startRound("scene", Drills.nextScene(state).id); });
     on("#rev", function () { startRound("review"); });
     on("#sayfdg", function () { speak(Frasi.ofTheDay().it, true); });
+    on("#firstles", function () { view.week = 1; startLezione(); });
     on("#install", function () {
       if (!installPrompt) return;
       installPrompt.prompt();
@@ -1968,10 +1987,28 @@
     });
 
     var send = $("#send"), input = $("#ans");
+    // A beginner often copies the whole sentence into the blank: say what
+    // the blank is instead of grading «Voi insegnanti?» as a vocabulary error.
+    function wholeSentence(v) {
+      if (!/_{3,}/.test(it.stem || "")) return false;
+      var words = function (x) { return String(x).toLowerCase().match(/[a-zà-ÿ']+/g) || []; };
+      var stemW = words(String(it.stem).replace(/\([^)]*\)/g, " ").replace(/_{3,}/g, " "));
+      var ans = String(it.answer).toLowerCase();
+      return words(v).filter(function (w) { return stemW.indexOf(w) >= 0 && ans.indexOf(w) < 0; }).length >= 2;
+    }
+    function send1() {
+      if (!round.answered && wholeSentence(input.value)) {
+        $("#fb").innerHTML = '<div class="feedback prompt"><div class="verdict">Solo el hueco</div>' +
+          "<p>Escribí únicamente lo que va en la raya ___, no la frase entera.</p></div>";
+        input.focus();
+        return;
+      }
+      produce(input.value);
+    }
     if (send && input) {
-      send.onclick = function () { produce(input.value); };
+      send.onclick = send1;
       input.onkeydown = function (e) {
-        if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); produce(input.value); }
+        if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send1(); }
       };
       input.focus();
       document.querySelectorAll("[data-ins]").forEach(function (b) {

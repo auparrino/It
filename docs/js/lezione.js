@@ -25,12 +25,19 @@
   }
 
   function usable(s) { return s && s.length <= 60 && s.indexOf(" / ") < 0 && !/^[-—–…]*$/.test(s); }
+  // An example is a real pair only if the right side translates the left one:
+  // «il jazz, il weekend = préstamos: se escriben…» is a comment, not a
+  // translation, and makes a meaningless question.
+  function translation(p) {
+    return usable(p[0]) && usable(p[1]) && !/[:«»→]/.test(p[1]) && !/,\s*\S+,/.test(p[0]) &&
+      p[1].length <= p[0].length * 2 + 6;        // «rosa = s sonora, como una z inglesa»: no
+  }
 
   // All examples of the lesson, as distractor material.
   function allEx(lesson) {
     var out = [];
     lesson.blocks.forEach(function (b) { (b.ex || []).forEach(function (p) { out.push([strip(p[0]), strip(p[1])]); }); });
-    return out.filter(function (p) { return usable(p[0]) && usable(p[1]); });
+    return out.filter(translation);
   }
 
   /* Trap versions of a right sentence: the errors a Spanish speaker makes
@@ -43,7 +50,10 @@
   var ENDS = [["ata", "ato"], ["ato", "ata"], ["ati", "ate"], ["ate", "ati"], ["uto", "uta"], ["ito", "ita"],
               ["ano", "a"], ["iamo", "ano"], ["ete", "ono"], ["ebbe", "ebbero"], ["essi", "esse"],
               ["oso", "osa"], ["osi", "ose"], ["ivo", "iva"], ["ico", "ica"], ["ale", "ali"], ["ente", "enti"]];
-  function traps(sentence, rnd) {
+  /* week: the traps test only what has been taught by then (articles from
+     week 3, the auxiliary from week 11, articulated prepositions from 3). */
+  function traps(sentence, rnd, week) {
+    week = week || 52;
     var toks = sentence.split(" ");
     var cands = [];
     toks.forEach(function (t, i) {
@@ -55,9 +65,9 @@
         var c = toks.slice(); c[i] = m[1] + nw + m[3]; cands.push(c.join(" "));
       };
       var next = (toks[i + 1] || "").toLowerCase();
-      if (AUX[low] && /(at|ut|it|ss|tt|rt|st|nt|ls|lt)[oaie]\b/.test(next)) put(AUX[low]);
-      if (ART[low] && toks[i + 1]) put(ART[low]);
-      if (SPLIT[low]) put(SPLIT[low]);
+      if (week >= 11 && AUX[low] && /(at|ut|it|ss|tt|rt|st|nt|ls|lt)[oaie]\b/.test(next)) put(AUX[low]);
+      if (week >= 3 && ART[low] && toks[i + 1]) put(ART[low]);
+      if (week >= 3 && SPLIT[low]) put(SPLIT[low]);
       if (/([bcdfglmnprstvz])\1/.test(low) && low.length > 4) put(low.replace(/([bcdfglmnprstvz])\1/, "$1"));
       if (low.length > 4) for (var k = 0; k < ENDS.length; k++) {
         if (low.slice(-ENDS[k][0].length) === ENDS[k][0]) { put(low.slice(0, -ENDS[k][0].length) + ENDS[k][1]); break; }
@@ -67,14 +77,27 @@
   }
 
   // «¿Cómo se dice…?» from one of the block's examples.
-  function exQuestion(lesson, b, rnd) {
+  // Minimal pairs, «nono / nonno = noveno / abuelo»: which one means…?
+  function pairQuestion(b, rnd) {
+    var pairs = (b.ex || []).map(function (p) { return [strip(p[0]).split(" / "), strip(p[1]).split(" / ")]; })
+      .filter(function (p) { return p[0].length === 2 && p[1].length === 2 && p[0][0] !== p[0][1] &&
+                                   p[1][0] !== p[1][1] && !/[:«»]/.test(p[1].join("")) &&
+                                   // «pena / penna = pena / lapicera»: asking «pena» gives it away
+                                   p[1].every(function (es) { return p[0].indexOf(es.replace(/\s*\(.*\)/, "")) < 0; }); });
+    if (!pairs.length) return null;
+    var pk = pairs[Math.floor(rnd() * pairs.length)], k = rnd() < 0.5 ? 0 : 1;
+    return { kind: "pair", prompt: "¿Cuál significa «" + pk[1][k] + "»?", stem: "", answer: pk[0][k],
+             options: shuffle(pk[0].slice(), rnd) };
+  }
+
+  function exQuestion(lesson, b, rnd, week) {
     var pool = allEx(lesson);
     var mine = (b.ex || []).map(function (p) { return [strip(p[0]), strip(p[1])]; })
-      .filter(function (p) { return usable(p[0]) && usable(p[1]); });
-    if (!mine.length) return null;
+      .filter(translation);
+    if (!mine.length) return pairQuestion(b, rnd);
     var pick = mine[Math.floor(rnd() * mine.length)];
     var known = {}; pool.forEach(function (p) { known[p[0].toLowerCase()] = 1; });
-    var tr = traps(pick[0], rnd).filter(function (t) { return !known[t.toLowerCase()]; }).slice(0, 2);
+    var tr = traps(pick[0], rnd, week).filter(function (t) { return !known[t.toLowerCase()]; }).slice(0, 2);
     if (tr.length === 2) {
       return { kind: "trap", prompt: "¿Cuál está bien? «" + pick[1] + "»", stem: "", answer: pick[0],
                options: shuffle([pick[0]].concat(tr), rnd) };
@@ -122,7 +145,7 @@
   }
 
   // The playable sequence: intro, then each block followed by its check.
-  function steps(lesson, rnd) {
+  function steps(lesson, rnd, week) {
     rnd = rnd || Math.random;
     var out = [{ kind: "intro" }];
     lesson.blocks.forEach(function (b, i) {
@@ -131,7 +154,7 @@
         out.push({ kind: "block", i: i, part: "a" });
         out.push({ kind: "block", i: i, part: "b" });
       } else out.push({ kind: "block", i: i });
-      var q = (b.table && tableQuestion(b, rnd)) || (b.ex && exQuestion(lesson, b, rnd));
+      var q = (b.table && tableQuestion(b, rnd)) || (b.ex && exQuestion(lesson, b, rnd, week));
       if (q) { q.block = i; out.push({ kind: "quiz", q: q }); }
     });
     return out;

@@ -174,7 +174,7 @@
               ["Sono arrivati tardi.", "varios (algún hombre)"], ["Sono arrivate tardi.", "varias mujeres"],
               ["È uscita alle otto.", "una mujer"], ["Sono usciti alle otto.", "varios (algún hombre)"],
               ["È partito ieri.", "un hombre"], ["Sono partite ieri.", "varias mujeres"],
-              ["Si è svegliata presto.", "una mujer"], ["Si sono svegliati presto.", "varios (algún hombre)"],
+              ["Si è svegliata presto.", "una mujer", 16], ["Si sono svegliati presto.", "varios (algún hombre)", 16],
               ["È tornato stanco.", "un hombre"], ["Sono tornate stanche.", "varias mujeres"]] },
 
     { id: "certezza", week: 25, h: "¿Está seguro o es una opinión?",

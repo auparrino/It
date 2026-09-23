@@ -122,7 +122,7 @@ ITEMS = [
     dict(id="rf-1-23", type="translate", topic="ortografia", level="A1",
          prompt=TR, stem="¿Dónde está el cine?",
          answer="Dov'è il cinema?",
-         alt=["Dove è il cinema?", "Dov'è il cine?"],
+         alt=["Dove è il cinema?"],
          note="«Dov'è» con apóstrofo; «cinema» se lee [tʃ]inema y es masculino: il cinema."),
     dict(id="rf-1-24", type="translate", topic="ortografia", level="A1",
          prompt=TR, stem="La ciudad es linda.",
