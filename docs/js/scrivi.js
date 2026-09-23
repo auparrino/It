@@ -168,13 +168,13 @@
   /* ------------------------------------------------------------ tokens */
 
   function toks(text) {
-    var out = [], re = /[A-Za-zÀ-ÖØ-öø-ÿ]+'?|\d+|[.!?,;:]/g, m, start = true, clause = true;
+    var out = [], re = /[A-Za-zÀ-ÖØ-öø-ÿ]+'?|\d+|[.!?,;:]/g, m, start = true, clause = true, sentAt = 0;
     var src = String(text || "").replace(/[’‘`´]/g, "'");
     while ((m = re.exec(src))) {
       var o = m[0];
-      if (/^[.!?,;:]$/.test(o)) { out.push({ p: o, at: m.index }); clause = true; if (/[.!?]/.test(o)) start = true; continue; }
+      if (/^[.!?,;:]$/.test(o)) { out.push({ p: o, at: m.index }); clause = true; if (/[.!?]/.test(o)) { start = true; sentAt = m.index + 1; } continue; }
       out.push({ o: o, w: o.toLowerCase(), at: m.index, len: o.length, start: start, clause: clause || start,
-                 cap: /^[A-ZÀ-Ý]/.test(o) });
+                 cap: /^[A-ZÀ-Ý]/.test(o), dlg: /[–—«"“]/.test(src.slice(sentAt, m.index)) });
       start = false; clause = false;
     }
     return out;
@@ -215,6 +215,12 @@
            "severo severa severi severe gentile gentili felice felici stanco stanca stanchi stanche contento contenta contenti contente"]);
   }
   function known(w) { return !!(LEXI[w] || (U.isItalian && U.isItalian(w))); }
+  // An adverb in -mente whose adjective the course knows (velocemente, facilmente).
+  function menteOK(w) {
+    if (!/mente$/.test(w)) return false;
+    var b = w.replace(/mente$/, "");
+    return [b + "e", b + "o", b.replace(/a$/, "o"), b.replace(/l$/, "le"), b.replace(/r$/, "re"), b].some(function (x) { return x !== w && known(x); });
+  }
 
   function words(tk) { return tk.filter(function (t) { return t.w && /[a-zà-ÿ]/.test(t.w); }); }
 
@@ -531,7 +537,7 @@
       var truncated = /^(aver|esser|far|dir|star|andar|poter|voler|dover|saper|fin|per|cuor|buon|bel|gran|san|qual|tal|signor|dottor|professor|mar|ben|son|vien)$/.test(w);
       // 1. Español metido
       if (!already && !proper && !truncated && !LEXI[w] && U.spanishWord && (U.spanishWord(w) || U.looksSpanish(w))) {
-        var tr = U.spanishWord(w);
+        var tr = ES_EXTRA[w] || U.spanishWord(w);
         // a Spanish plural: translate the singular and make it plural (gatos → gatti)
         if (!tr && /s$/.test(w)) {
           [w.replace(/es$/, ""), w.replace(/s$/, "")].some(function (sg) {
@@ -547,19 +553,49 @@
         return;
       }
       // 2. Palabra que no existe: tipeo, doble, tilde
-      if (!already && !proper && !truncated && /^[a-zà-ÿ]+'?$/.test(w) && w.length > 2 && !known(w) && !isPart(w) && !isInfCl(w) &&
-          !suffixed(w) && !/(ando|endo|mente)$/.test(w)) {
+      if (!already && !proper && !truncated && /^[a-zà-ÿ]+'?$/.test(w) && w.length > 2 && !known(w) && !partStrict(w) && !isInfCl(w) &&
+          !suffixed(w) && !/(ando|endo)$/.test(w) && !menteOK(w)) {
+        var grave = w.replace(/ó$/, "ò").replace(/á$/, "à").replace(/í$/, "ì").replace(/ú$/, "ù");
+        if (grave !== w && (known(grave) || V(grave).length)) { push(i, 1, "accento", "La tilde final va hacia el otro lado: " + it(grave) + "."); return; }
         if (!lexKeys) lexKeys = Object.keys(LEXI).concat(Object.keys(DATA.lex));
         var best = null, bd = 9, lim = w.length > 6 ? 2 : 1;
         for (var k = 0; k < lexKeys.length; k++) {
           var c = lexKeys[k];
           if (Math.abs(c.length - w.length) > lim || c.indexOf(" ") >= 0) continue;
-          if (U.deaccent(c) === U.deaccent(w) || U.degeminate(c) === U.degeminate(w)) { best = c; bd = 0; break; }
+          if (U.deaccent(c) === U.deaccent(w) || U.degeminate(c) === U.degeminate(w)) {
+            if (best && bd === 0 && !(/[àèéìòù]/.test(w) && /[àèéìòù]/.test(c) && !/[àèéìòù]/.test(best))) continue;
+            best = c; bd = 0; if (!/[àèéìòù]/.test(w)) break; continue;
+          }
+          if (bd === 0) continue;
           var d = U.editDistance(c, w);
           if (d < bd) { bd = d; best = c; }
         }
-        if (best && bd === 0 && U.deaccent(best) === U.deaccent(w)) push(i, 1, "accento", "Falta la tilde: " + it(best) + ".");
-        else if (best && bd === 0) push(i, 1, "doppie", "Se escribe " + it(best) + " (" + (best.length > w.length ? "con doble" : "sin doble") + ").");
+        if (ES_EXTRA[w]) { push(i, 1, "parola_spagnola", it(t.o) + " es español; en italiano: " + it(ES_EXTRA[w]) + "."); return; }
+        if (best && bd === 0 && U.deaccent(best) === U.deaccent(w)) { push(i, 1, "accento", "Falta la tilde: " + it(best) + "."); return; }
+        var sibling = /[oaie]$/.test(w) && ["o", "a", "i", "e"].some(function (e) { return known(w.slice(0, -1) + e); });
+        if (!(best && bd === 0) && !t.cap && !sibling) {   // matta is a form of matto, not a typo
+          // Another form of a known word: clasica ~ classico, piati ~ piatto, tranquilamente ~ tranquillo.
+          var mm = /^(.+?)(amente|emente|mente)$/.exec(w), stemW = mm ? mm[1] : w.slice(0, -1), endW = mm ? mm[2] : w.slice(-1);
+          var dW = U.degeminate(stemW);
+          for (var k2 = 0; k2 < lexKeys.length && !(best && bd === 0); k2++) {
+            var c3 = lexKeys[k2];
+            if (!/[oaie]$/.test(c3) || Math.abs(c3.length - 1 - stemW.length) > 2) continue;
+            var st3 = c3.slice(0, -1);
+            if (st3 !== stemW && U.degeminate(st3) === dW && (!mm || DATA.adj[c3] || /[oe]$/.test(c3))) { best = st3 + endW; bd = 0; }
+          }
+        }
+        if (best && bd === 0) { push(i, 1, "doppie", "Se escribe " + it(best) + " (" + (best.length > w.length ? "con doble" : "sin doble") + ")."); return; }
+        var esT = esLookup(w), ff = !esT && futureFix(w), trx = !esT && !ff && esTransform(w);
+        if (esT) { if (/a$/.test(w) && /o$/.test(esT)) esT = esT.slice(0, -1) + "a"; push(i, 1, "parola_spagnola", it(t.o) + " es español; en italiano: " + it(esT) + "."); return; }
+        if (ff) { push(i, 1, "ortografia", "La forma es " + it(ff) + "."); return; }
+        if (trx) { push(i, 1, trx.es ? "parola_spagnola" : "ortografia", trx.es ? it(t.o) + " es español; en italiano: " + it(trx.it) + "." : "Se escribe " + it(trx.it) + "."); return; }
+        var dm = /^(.+?)c?it([oa])s?$/.exec(w), dbase = dm && [dm[1] + "a", dm[1] + "o", dm[1] + "e"].filter(known)[0];
+        if (dbase && !t.cap && !isInf(dm[1] + "ire") && !isInf(dm[1] + "are")) {
+          var dsug = [dm[1] + "ett" + dm[2], dm[1] + "in" + dm[2], dm[1] + "cin" + dm[2]].filter(known)[0] || dm[1] + "ett" + dm[2];
+          push(i, 1, "parola_spagnola", "El diminutivo castellano " + it("-ito") + " no existe en italiano: " + it(dsug) + " (" + it("-etto") + ", " + it("-ino") + ")."); return;
+        }
+        if (/[^aeiou]s$/.test(w) && known(w.slice(0, -1))) { push(i, 1, "plurale", "En italiano " + it(w.slice(0, -1)) + " no cambia en plural (sin *-s*)."); return; }
+        if (sibling) return;
         // A near word is only a guess: with the whole course as lexicon, a
         // word it does not know is more often rare than wrong (pertanto is
         // not a typo of portato), so no guess then.
@@ -568,7 +604,9 @@
         return;
       }
       // 3. Artículo y sustantivo
-      if (U.ARTICLES[w] && n && isNoun(n) && !V(n).length && !DATA.adj[n] && !(ni >= 0 && tk[ni].cap)) {
+      if (U.ARTICLES[w] && n && isNoun(n) && !V(n).length && !DATA.adj[n] && !(ni >= 0 && tk[ni].cap) && !AMBI_GENDER.test(n) && !NUMS.test(n) &&
+          !(w === "lo" && U.soundRule(n) === "c" && (DATA.nouns[n] || {}).g === "f") &&
+          !(/^(lo|la|l'|li|le|gli)$/.test(w) && (/^(me|te|se|ce|ve|non|mi|ti|ci|vi)$/.test(p) || (/([ae]|ano|ono|ava|eva)$/.test(n) && pi >= 0 && pi === i - 1 && (tk[pi].cap || (isNoun(p) && !V(p).length) || /^(lui|lei|chi|che|io|tu|noi|voi|loro)$/.test(p)))))) {
         var ea = expectedArticle(w, n);
         if (ea && ea !== w && !(w === "l'" && ea === "l'")) {
           var gen = U.ARTICLES[ea][0] !== U.ARTICLES[w][0] && U.ARTICLES[w][0] !== "?";
@@ -583,37 +621,42 @@
           if (lem && /rsi$/.test(lem)) lem = lem.slice(0, -3) + "re";   // li ho sentiti: sentire, not sentirsi
           var refl = { mi: "ho", ti: "hai", si: "ha", vi: "avete" }[p] === w || (p === "si" && w === "hanno");
           if (refl || (lem && auxOf(lem) === "essere" && lem !== "essere")) {
-            push(i, pk - i + 1, "ausiliare", (refl ? "Los reflexivos van con *essere*: " : "Con " + it(lem) + " va *essere*: ") +
-              it(({ ho: "sono", hai: "sei", ha: "è", abbiamo: "siamo", avete: "siete", hanno: "sono" })[w] + " " + tk[pk].w.replace(/[oaie]$/, /^(abbiamo|avete|hanno)$/.test(w) ? "i" : "o")) + " (y el participio concuerda con el sujeto).");
+            var pw4 = tk[pk].w, pl4 = /^(abbiamo|avete|hanno)$/.test(w), end4 = pl4 ? (/e$/.test(pw4) ? "e" : "i") : (/a$/.test(pw4) ? "a" : "o");
+            push(i, pk - i + 1, "ausiliare", (refl ? "Los reflexivos van con *essere*: " : /^stat/.test(pw4) ? it(pw4) + " va con *essere*: " : "Con " + it(lem) + " va *essere*: ") +
+              it((refl ? p + " " : "") + ({ ho: "sono", hai: "sei", ha: "è", abbiamo: "siamo", avete: "siete", hanno: "sono" })[w] + " " + pw4.replace(/[oaie]$/, end4)) + " (el participio concuerda con el sujeto).");
           }
         }
       }
       // 5. «a» personal
       if (w === "a" && pi >= 0 && (V(p).some(function (v) { return DO_VERBS.test(v.lemma); }) || DO_PART.test(p)) &&
-          ni >= 0 && (tk[ni].cap || POSS[n] || /^(lui|lei|loro)$/.test(n)) && !/^(casa|scuola|letto)$/.test(n)) {
-        push(i, 1, "a_personale", "Sin «a»: el objeto directo de persona va directo (" + it(p + " " + tk[ni].o) + ").");
+          ni >= 0 && (tk[ni].cap || POSS[n] || /^(lui|lei|loro)$/.test(n)) && !/^(casa|scuola|letto)$/.test(n) && !CITIES.test(n) && !COUNTRY[n] &&
+          !/^(si|ci|vi|mi|ti)$/.test(pi > 0 ? (tk[wi(pi, -1)] || {}).w || "" : "")) {
+        push(i, 1, "a_personale", "Sin «a»: el objeto directo de persona va directo (" + it(p + " " + tk[ni].o + (POSS[n] && tk[ni + 1] && tk[ni + 1].w ? " " + tk[ni + 1].o : "")) + ").");
       }
       // 6. «il mio padre»
-      if (/^(il|la|lo)$/.test(w) && POSS[n] && tk[ni + 1] && /^(madre|padre|fratello|sorella|moglie|marito|figlio|figlia|nonno|nonna|zio|zia|cugino|cugina|suocero|suocera|cognato|cognata|nipote)$/.test(tk[ni + 1].w || "")) {
+      if (/^(il|la|lo)$/.test(w) && POSS[n] && tk[ni + 1] && !(tk[ni + 2] && tk[ni + 2].w && (DATA.adj[tk[ni + 2].w] || /^(più|che|di)$/.test(tk[ni + 2].w))) && /^(madre|padre|fratello|sorella|moglie|marito|figlio|figlia|nonno|nonna|zio|zia|cugino|cugina|suocero|suocera|cognato|cognata|nipote)$/.test(tk[ni + 1].w || "")) {
         push(i, 1, "articolo_possessivo", "Con un familiar en singular, sin artículo: " + it(n + " " + tk[ni + 1].w) + ".");
       }
       // 7. Posesivo sin artículo con una cosa: «mio libro»
-      if (POSS[w] && ni >= 0 && isNoun(n) && !/^(madre|padre|fratello|sorella|moglie|marito|figlio|figlia|nonno|nonna|zio|zia|cugino|cugina|mamma|papà|suocero|suocera|nipote|cognato|cognata)$/.test(n) &&
-          !(U.ARTICLES[p] || (U.prepInfo(p) || {}).art || ESS_ALL[p] || DEM.test(p) || /^(un|una|uno|un')$/.test(p))) {
-        var eaP = expectedArticle("il", n);
+      if (POSS[w] && ni === i + 1 && isNoun(n) && !(isNoun(p) && !U.ARTICLES[p]) && !/^(avviso|parere|volta|vita|conto|insaputa|disposizione)$/.test(n) && !/^(madre|padre|fratello|sorella|moglie|marito|figlio|figlia|nonno|nonna|zio|zia|cugino|cugina|mamma|papà|suocero|suocera|nipote|cognato|cognata)$/.test(n) &&
+          !(U.ARTICLES[p] || (U.prepInfo(p) || {}).art || ESS_ALL[p] || DEM.test(p) || /^(un|una|uno|un'|alcuni|alcune|molti|molte|pochi|poche|tanti|tante|troppi|troppe|certi|certe|parecchi|parecchie|diversi|diverse|vari|varie|qualche|ogni|nessun|nessuna|tutti|tutte)$/.test(p) || NUMS.test(p) || /^\d+$/.test(p))) {
+        var gP = nounGN(n), gnP = gP && gP.g + (gP.n || (/^(miei|mie|tuoi|tue|suoi|sue|nostri|nostre|vostri|vostre)$/.test(w) ? "p" : "s")), sP = U.soundRule(w);
+        var eaP = gnP && { ms: sP === "c" ? "il" : sP === "sz" ? "lo" : "l'", fs: sP === "v" ? "l'" : "la", mp: sP === "c" ? "i" : "gli", fp: "le" }[gnP];
         if (eaP) push(i, 2, "articolo_possessivo", "Con el posesivo va el artículo: " + it(eaP + (eaP.slice(-1) === "'" ? "" : " ") + w + " " + n) + ".");
       }
       // 8. «a il» → «al»
-      if (/^(a|di|da|in|su)$/.test(w) && /^(il|lo|la|i|gli|le|l')$/.test(n) && ni === i + 1) {
+      if (/^(a|di|da|in|su)$/.test(w) && /^(il|lo|la|i|gli|le|l')$/.test(n) && ni === i + 1 && !tk[ni].cap) {
         var cf = U.contract(w, n);
-        if (cf) push(i, 2, "preposizione_articolata", it(w + " " + n) + " se escribe junto: " + it(cf) + ".");
+        var n8 = tk[ni + 1] && tk[ni + 1].w;
+        if (cf && w === "a" && n8 && IN_PLACES.test(n8)) push(i, 3, "preposizione", "Con " + it(n8) + " va " + it("in " + n8) + ".");
+        else if (cf) push(i, 2, "preposizione_articolata", it(w + " " + n) + " se escribe junto: " + it(cf + (cf.slice(-1) === "'" ? "" : " ") + (n8 || "")) + ".");
       }
       // 9. «se avrei»
       if (w === "se" && !/^(lo|la|li|le|ne|l')$/.test(n) && !ASK.test(p) && !ASK.test(pi > 0 ? (tk[wi(pi, -1)] || {}).w || "" : "")) {
         for (var s = i + 1; s < tk.length && s <= i + 4 && tk[s].w; s++) {
           var sw = tk[s].w;
           if (/^(non|mi|ti|ci|vi|si|lo|la|li|le|gli|ne|io|tu|lui|lei|noi|voi|loro|già|mai|davvero)$/.test(sw)) continue;
-          if (V(sw).some(function (v) { return v.tense === "condizionale"; }) || /(rei|resti|rebbe|remmo|reste|rebbero)$/.test(sw)) {
+          if (V(sw).some(function (v) { return v.tense === "condizionale"; }) || (!V(sw).length && /(rei|resti|rebbe|remmo|reste|rebbero)$/.test(sw) && sw.length > 5)) {
             push(s, 1, "periodo_ipotetico", "Después de *se* hipotético no va condicional: *se avessi…*, *se potessi…* (el condicional va en la otra parte).");
           }
           break;
@@ -630,12 +673,12 @@
         }
       }
       // 11. «molto amici»
-      if (/^(molto|tanto|poco|troppo)$/.test(w) && ni >= 0 && DATA.nounsByPlural[n] && DATA.nounsByPlural[n].s !== n) {
+      if (/^(molto|tanto|poco|troppo)$/.test(w) && ni === i + 1 && DATA.nounsByPlural[n] && DATA.nounsByPlural[n].s !== n) {
         var g11 = DATA.nounsByPlural[n].g;
         push(i, 1, "accordo", "Delante de un sustantivo concuerda: " + it((w === "poco" ? "poch" : w.slice(0, -1)) + (g11 === "f" ? "e" : "i") + " " + n) + ".");
       }
       // 11b. «molto pasta» → «molta pasta»
-      if (/^(molto|tanto|poco|troppo)$/.test(w) && ni >= 0 && DATA.nouns[n] && DATA.nouns[n].s === n && DATA.nouns[n].g === "f" &&
+      if (/^(molto|tanto|poco|troppo)$/.test(w) && ni === i + 1 && DATA.nouns[n] && DATA.nouns[n].s === n && DATA.nouns[n].g === "f" &&
           !DATA.adj[n] && !V(n).length) {
         push(i, 1, "accordo", "Delante de un sustantivo concuerda: " + it(w.slice(0, -1) + "a " + n) + ".");
       }
@@ -653,7 +696,8 @@
         var clauseStart = t.start || /^(e|ma|però|poi|anche|quindi)$/.test(p) ||
           (pi >= 0 && tk[pi].start && /^(mi|ti|ci|vi|si|non)$/.test(p));
         var subjBefore = false;
-        for (var sb = i - 1; sb >= 0 && tk[sb].w; sb--) { if (/^(io|tu|lui|lei|noi|voi|loro)$/.test(tk[sb].w) || (tk[sb].cap && !tk[sb].start) || isNoun(tk[sb].w)) { subjBefore = true; break; } }
+        for (var sb = i - 1; sb >= 0 && (tk[sb].w || (tk[sb].p === "," && /^(e|ma|però|poi|quindi)$/.test(p))); sb--) {
+          if (!tk[sb].w) continue; if (/^(io|tu|lui|lei|noi|voi|loro)$/.test(tk[sb].w) || (tk[sb].cap && !tk[sb].start) || isNoun(tk[sb].w)) { subjBefore = true; break; } }
         var ind = V(w).filter(function (v) { return !/congiuntivo|congImperfetto/.test(v.tense); });
         // noi / voi («siamo in tre») only with a singular adjective after it
         // (siamo argentino); tu in a question is someone else (mi chiami domani?)
@@ -662,7 +706,12 @@
         for (var se = i + 1; se < tk.length; se++) if (tk[se].p && /[.!?]/.test(tk[se].p)) { sEnd = tk[se].p; break; }
         if (ind.length && ind.every(function (v) { return v.p === 3 || v.p === 4; }) && !nxAdj) ind = [];
         if (ind.length && ind.every(function (v) { return v.p === 1; }) && sEnd === "?") ind = [];
-        if (clauseStart && !subjBefore && ind.length && !ind.some(function (v) { return v.p === 0 || v.p === 2; }) &&
+        var objCl = /^(mi|ti|ci|vi|gli|le|lo|la|li|ne)$/.test(p) && (AVE_PRES[w] || !REFLEXIVE_L.test(ind.length ? ind[0].lemma : "") || ind.some(function (v) { return v.p === 5; }));
+        var alone = (tk[i + 1] && tk[i + 1].p && t.start) || isNoun(w) || (t.start && IMPV_WORDS.test(w)) || p === "si";
+        if (t.dlg) alone = true;
+        if (ind.length && ind.every(function (v) { return v.p === 5; }) && !(NUMS.test(n) || /^\d+$/.test(n) || (DATA.adj[n] && !isNoun(n)) || /^(chiamare|chiamarsi)$/.test(ind[0].lemma))) alone = true;
+        if (ESS_ALL[w] && /^(anni|mesi|giorni|ore|settimane|secoli|tempo)$/.test(n)) alone = true;
+        if (clauseStart && !subjBefore && !objCl && !alone && ind.length && !ind.some(function (v) { return v.p === 0 || v.p === 2; }) &&
             !NOT_PERSONAL.test(ind[0].lemma)) {
           var v0 = ind[0] || V(w)[0], f0 = v0 && ioForm(v0.lemma, v0.tense);
           if (f0 && f0 !== w && !NOT_PERSONAL.test(v0.lemma) || (v0 && v0.lemma === "essere" && f0 && f0 !== w)) {
@@ -672,7 +721,7 @@
         }
       }
       // 16. Adjetivo con essere: el número del sujeto (è felici, siamo contento, io sono felici)
-      if (ESS_ALL[w] && !personFlag[i]) {
+      if (ESS_ALL[w] && !personFlag[i] && !/^(si|mi|ti|ci|vi)$/.test(p)) {
         var aj = ni;
         if (aj >= 0 && /^(molto|tanto|così|più|proprio|davvero|un po'|sempre|già)$/.test(n)) aj = wi(ni, 1);
         var aw = aj >= 0 ? tk[aj].w : "";
@@ -694,7 +743,8 @@
         if (ni === i + 1 && !personFlag[ni] && !/^(gennaio|febbraio|marzo|aprile|maggio|giugno|luglio|agosto|settembre|ottobre|novembre|dicembre|euro|per|volte|e|o)$/.test(n)) {
           var nw = n, pluralOk = DATA.nounsByPlural[nw] && DATA.nounsByPlural[nw].pl === nw;
           var cand = DATA.nouns[nw] && DATA.nouns[nw].s === nw && DATA.nouns[nw].pl !== nw ? DATA.nouns[nw].pl : null;
-          if (!pluralOk && !cand && !known(nw)) {
+          if (ES_EXTRA[nw]) cand = null;
+          else if (!pluralOk && !cand && !known(nw)) {
             var st = nw.replace(/s$/, "").replace(/[oaie]$/, "");   // annos, anne → anni
             ["i", "e"].forEach(function (x) { if (!cand && DATA.nounsByPlural[st + x] && DATA.nounsByPlural[st + x].pl === st + x) cand = st + x; });
           }
@@ -710,7 +760,595 @@
         push(i, 1, "lessico", "La edad va con *avere*: " + it("ho " + n + " anni") + ".");
       }
     });
+    lint2(tk, week, out, isIo);
     return out.sort(function (a, b) { return a.i - b.i; });
+  }
+
+  /* ------------------------------------------------ más familias de errores
+     Reglas por familia de error, medidas con un corpus de textos de
+     estudiantes hispanohablantes anotados a mano (tools/scrivi_corpus.json):
+     castellano metido y calcos, preposiciones con lugares y con infinitivos,
+     artículos por sonido, pronombres combinados, concordancias, persona del
+     verbo, auxiliares y congiuntivo.  Cada regla mira una construcción, no
+     una palabra suelta, y no marca nada que ya marcó otra. */
+
+  // Palabras frecuentes del castellano rioplatense que no están en las glosas del curso.
+  var ES_EXTRA = {};
+  ("pesado:pesante aburrido:noioso receta:ricetta abrazo:abbraccio abrazos:abbracci besos:baci beso:bacio mudanza:trasloco plata:soldi " +
+   "vergüenza:vergogna verguenza:vergogna propina:mancia relleno:ripieno casado:sposato enojado:arrabbiato cansado:stanco lindo:carino " +
+   "flaco:magro gordo:grasso rubio:biondo morocho:moro colectivo:autobus subte:metro celular:cellulare computadora:computer " +
+   "heladera:frigorifero pileta:piscina laburo:lavoro pibe:ragazzo chico:ragazzo chica:ragazza cumpleaños:compleanno apellido:cognome " +
+   "ciudad:città pueblo:paese calle:strada esquina:angolo barrio:quartiere cuadra:isolato departamento:appartamento alquiler:affitto " +
+   "vereda:marciapiede zapatos:scarpe zapatillas:scarpe remera:maglietta pollera:gonna campera:giacca anteojos:occhiali sueño:sonno " +
+   "almuerzo:pranzo desayuno:colazione merienda:merenda manteca:burro huevo:uovo huevos:uova leche:latte jugo:succo queso:formaggio " +
+   "jamón:prosciutto durazno:pesca frutilla:fragola azúcar:zucchero cuchara:cucchiaio cuchillo:coltello tenedor:forchetta taza:tazza " +
+   "olla:pentola sartén:padella horno:forno baño:bagno cocina:cucina ventana:finestra puerta:porta techo:tetto pared:parete silla:sedia " +
+   "mesa:tavolo almohada:cuscino llave:chiave trabajo:lavoro empleo:impiego jefe:capo sueldo:stipendio oficina:ufficio reunión:riunione " +
+   "mejor:meglio peor:peggio siempre:sempre nunca:mai todavía:ancora ahora:adesso mañana:domani ayer:ieri hoy:oggi también:anche " +
+   "cariñoso:affettuoso cariñosa:affettuosa negro:nero tinto:rosso rico:buono rica:buona lluvia:pioggia nieve:neve playa:spiaggia " +
+   "fútbol:calcio futbol:calcio perro:cane perros:cani hermano:fratello hermana:sorella hijo:figlio hija:figlia abuela:nonna abuelo:nonno " +
+   "primos:cugini primas:cugine novio:fidanzato novia:fidanzata amigo:amico amiga:amica gente:gente plata:soldi guita:soldi auto:auto").split(" ").forEach(function (x) {
+    var p = x.split(":"); if (p[0] !== p[1]) ES_EXTRA[p[0]] = p[1];
+  });
+  // Verbos castellanos con terminación italiana: manejare, pintare, ho lograto, ganassi.
+  var ES_VERB = { manejar: "guidare", pintar: "dipingere", regar: "annaffiare", lograr: "riuscire", ganar: "vincere / guadagnare",
+                  mirar: "guardare", hablar: "parlare", llamar: "chiamare", llegar: "arrivare", llevar: "portare", buscar: "cercare",
+                  encontrar: "trovare", olvidar: "dimenticare", empezar: "cominciare", querer: "volere", necesitar: "avere bisogno di",
+                  ayudar: "aiutare", esperar: "aspettare / sperare", escuchar: "ascoltare", tomar: "prendere", bajar: "scendere",
+                  subir: "salire", volver: "tornare", dejar: "lasciare", elegir: "scegliere", escribir: "scrivere", leer: "leggere",
+                  caminar: "camminare", cocinar: "cucinare", limpiar: "pulire", gastar: "spendere", ahorrar: "risparmiare",
+                  pedir: "chiedere", preguntar: "chiedere", alquilar: "affittare", laburar: "lavorare", enojar: "arrabbiare",
+                  casar: "sposare", aburrir: "annoiare", manejando: "guidare", disfrutar: "godersi", extrañar: "sentire la mancanza",
+                  quedar: "restare", pasear: "passeggiare", charlar: "chiacchierare", arreglar: "aggiustare", mudar: "traslocare" };
+  var ES_STRONG = { de: "di / da", el: "il", los: "i / gli", las: "le", y: "e", muy: "molto", que: "che", porque: "perché",
+                    cuando: "quando", donde: "dove", pero: "però", como: "come", es: "è", está: "è / sta",
+                    estoy: "sto", soy: "sono", hay: "c'è / ci sono", también: "anche", más: "più", entonces: "allora" };
+  // Préstamos que el italiano usa tal cual (comida, cultura).
+  learn(["empanada empanadas mate asado tango alfajor alfajores gaucho gauchos milonga locro chimichurri tapas paella tortilla " +
+         "dulce leche churros choripán fernet malbec"]);
+
+  // Transformaciones castellano → italiano en una palabra desconocida.
+  var ES_TR = [[/ct/g, "tt", 1], [/pt/g, "tt", 1], [/ns/g, "s", 1], [/x/g, "ss", 1], [/ñ/g, "gn", 1], [/j/g, "g", 1], [/j/g, "gi", 1],
+               [/^es(?=[cpqtm])/, "s", 1], [/ie/g, "e", 1], [/ie/g, "i", 1], [/ue/g, "o", 1], [/ado$/, "ato", 1], [/ada$/, "ata", 1],
+               [/ados$/, "ati", 1], [/adas$/, "ate", 1], [/ido$/, "ito", 1], [/ida$/, "ita", 1], [/cc(?=i)/g, "z", 1], [/ci(?=on)/g, "zi", 1],
+               [/ción$/, "zione", 1], [/sión$/, "sione", 1], [/dad$/, "tà", 1], [/ble$/, "bile", 1], [/qu(?=[ei])/g, "ch", 1],
+               [/^(vent|trent|quarant|cinquant|sessant|settant|ottant|novant)[ia](uno|otto)$/, "$1$2", 0],
+               [/k(?=[ei])/g, "ch", 0], [/k/g, "c", 0], [/ph/g, "f", 0], [/th/g, "t", 0], [/y/g, "i", 0],
+               [/([lr])emente$/, "$1mente", 0], [/(un|do|tre|quattor|quin|se)dice$/, "$1dici", 0], [/([cg])([ei])$/, "$1h$2", 0], [/^ri(?=st)/, "re", 0], [/^re(?=st)/, "ri", 0]];
+  function esTransform(w) {
+    var tried = {};
+    var one = function (x, k) { var r = ES_TR[k], y = x.replace(r[0], r[1]); return y !== x ? y : null; };
+    for (var a = 0; a < ES_TR.length; a++) {
+      var c1 = one(w, a);
+      if (!c1) continue;
+      if (known(c1) || menteOK(c1) || partStrict(c1)) return { it: c1, es: !!ES_TR[a][2] };
+      tried[c1] = a;
+    }
+    for (var x in tried) for (var b = 0; b < ES_TR.length; b++) {
+      if (b === tried[x]) continue;
+      var c2 = one(x, b);
+      if (c2 && (known(c2) || menteOK(c2) || partStrict(c2))) return { it: c2, es: !!(ES_TR[tried[x]][2] || ES_TR[b][2]) };
+    }
+    return null;
+  }
+  function esLookup(w) {
+    var cands = [w, w.replace(/a$/, "o"), w.replace(/as$/, "o"), w.replace(/os$/, "o"), w.replace(/es$/, ""), w.replace(/s$/, "")];
+    for (var k = 0; k < cands.length; k++) if (ES_EXTRA[cands[k]]) return ES_EXTRA[cands[k]];
+    var m = /^(.+?)(are|ato|ata|ati|ate|ando|assi|asse|assero|avo|ava|avano|ere|ire|ito|ita|uto|o|i|a|iamo|ano|ono|erò|erà|erei)$/.exec(w);
+    if (m) for (var e = 0; e < 3; e++) { var inf = m[1] + ["ar", "er", "ir"][e]; if (ES_VERB[inf]) return ES_VERB[inf]; }
+    return null;
+  }
+  // Futuro y condicional mal armados: andarò, mangiaremo, comprarei, vederò.
+  var FUT_END = ["ò", "ai", "à", "emo", "ete", "anno"], COND_END = ["ei", "esti", "ebbe", "emmo", "este", "ebbero"];
+  function conjSafe(lemma, tense) {
+    var C = Conj && Conj.VERBS;
+    if (!C) return null;
+    var tmp = false;
+    if (!C[lemma] && C[lemma.replace(/e$/, "si")]) lemma = lemma.replace(/e$/, "si");
+    if (!C[lemma]) {
+      if (!known(lemma) || !/(are|ere)$/.test(lemma)) return null;
+      C[lemma] = { es: "", aux: "avere" }; tmp = true;
+    }
+    try { return Conj.conjugate(lemma, tense).map(function (f) { return f.split(" ").pop(); }); }
+    catch (e) { return null; }
+    finally { if (tmp) delete C[lemma]; }
+  }
+  function futureFix(w) {
+    var m = /^(.+?)([aei])r(ò|ai|à|emo|ete|anno|ei|esti|ebbe|emmo|este|ebbero)$/.exec(w);
+    if (!m) return null;
+    var cond = COND_END.indexOf(m[3]) >= 0, p = (cond ? COND_END : FUT_END).indexOf(m[3]);
+    if (p < 0) return null;
+    var lemmas = [m[1] + "are", m[1] + "ere", m[1] + "ire", m[1] + "rre"];
+    for (var k = 0; k < lemmas.length; k++) {
+      var forms = conjSafe(lemmas[k], cond ? "condizionale" : "futuro");
+      if (forms && forms[p] && forms[p] !== w) return forms[p];
+    }
+    return null;
+  }
+  function partStrict(w) {
+    if (PP(w)) return true;
+    var m = /^(.+)(at|ut|it)[oaie]$/.exec(w);
+    if (!m || DATA.nouns[w] || DATA.nounsByPlural[w]) return false;
+    var inf = m[1] + { at: "are", ut: "ere", it: "ire" }[m[2]];
+    return known(inf) || !!(U.isInfinitive && U.isInfinitive(inf)) || !!(Conj && Conj.VERBS && Conj.VERBS[inf]);
+  }
+
+  var CITIES = /^(roma|milano|napoli|torino|firenze|venezia|bologna|genova|palermo|bari|verona|padova|pisa|siena|trieste|parma|modena|catania|cagliari|perugia|lecce|bergamo|brescia|rimini|ravenna|trento|bolzano|salerno|sorrento|amalfi|assisi|lucca|mantova|ferrara|urbino|matera|taormina|montevideo|rosario|mendoza|córdoba|cordoba|tigre|ushuaia|bariloche|salta|madrid|barcellona|parigi|londra|berlino|lisbona|vienna|praga|atene|bruxelles|amsterdam|mosca|dublino|varsavia|budapest|ginevra|zurigo|tokyo|pechino|lima|bogotá|caracas|miami|chicago|boston|toronto|buenos|new|san)$/;
+  var COUNTRY = { italia: "f", argentina: "f", spagna: "f", francia: "f", germania: "f", inghilterra: "f", grecia: "f", svizzera: "f",
+                  austria: "f", olanda: "f", irlanda: "f", scozia: "f", svezia: "f", norvegia: "f", russia: "f", cina: "f", india: "f",
+                  australia: "f", colombia: "f", bolivia: "f", europa: "f", america: "f", asia: "f", africa: "f", patagonia: "f",
+                  toscana: "f", sicilia: "f", sardegna: "f", puglia: "f", calabria: "f", campania: "f", lombardia: "f", liguria: "f",
+                  umbria: "f", basilicata: "f", lazio: "m", piemonte: "m", veneto: "m", molise: "m", trentino: "m", friuli: "m",
+                  abruzzo: "m", brasile: "m", cile: "m", "perù": "m", paraguay: "m", uruguay: "m", messico: "m", canada: "m",
+                  giappone: "m", portogallo: "m", belgio: "m", marocco: "m", egitto: "m", ecuador: "m", venezuela: "m", stati: "mp" };
+  var IN_PLACES = /^(banca|montagna|ufficio|farmacia|biblioteca|lavanderia|cucina|piscina|palestra|pizzeria|libreria|chiesa|campagna|macelleria|panetteria|salumeria|gelateria|discoteca|città|vacanza|periferia|profumeria|tabaccheria|questura)$/;
+  var PLACES = /^(ristorante|bar|supermercato|mercato|negozio|cinema|teatro|museo|albergo|hotel|ospedale|parco|aeroporto|stazione|scuola|università|trattoria|osteria|agenzia|ufficio|banca|farmacia|biblioteca|lavanderia|piscina|palestra|pizzeria|libreria|chiesa|macelleria|panetteria|gelateria|discoteca|azienda|fabbrica|negozio)$/;
+  var DA_PERSONS = /^(medico|dottore|dottoressa|dentista|meccanico|parrucchiere|parrucchiera|barbiere|avvocato|avvocata|veterinario|idraulico|commercialista|elettricista|estetista|macellaio|fornaio|panettiere|fruttivendolo|oculista|pediatra|notaio|sarto|calzolaio|psicologo|psicologa|fisioterapista)$/;
+  var FAMILY = /^(madre|padre|fratello|sorella|moglie|marito|figlio|figlia|nonno|nonna|zio|zia|cugino|cugina|mamma|papà|suocero|suocera|nipote|cognato|cognata|fidanzato|fidanzata|amico|amica|ragazzo|ragazza|genitori|nonni|zii|cugini|amici)$/;
+  var PERSON_N = /^(ragazzo|ragazza|ragazzi|ragazze|uomo|uomini|donna|donne|bambino|bambina|bambini|bambine|amico|amica|amici|amiche|persona|persone|gente|signore|signora|signori|professore|professoressa|collega|colleghi|vicino|vicina|vicini|turisti|turista|clienti|cliente|studenti|studente|cane|gatto|cani|gatti|parenti|genitori|figli|nonni)$/;
+  var A_VERBS = /^(cominciare|iniziare|imparare|continuare|aiutare|riuscire|insegnare|abituare|abituarsi|prepararsi|mettersi|provare|andare|venire|tornare|invitare|obbligare|costringere|rinunciare|convincere)$/;
+  var DI_VERBS = /^(finire|decidere|cercare|smettere|sperare|dimenticare|ricordare|ricordarsi|promettere|evitare|tentare|sognare|temere|fingere|accettare|rifiutare|minacciare|pensare|credere|dire|chiedere|permettere|ordinare)$/;
+  var DI_STRICT = /^(finire|decidere|cercare|smettere|sperare|dimenticare|promettere|evitare|tentare|sognare|accettare|rifiutare)$/;
+  var DI_NOUNS = /^(bisogno|voglia|intenzione|paura|occasione|possibilità|diritto)$/;
+  var ZERO_VERBS = /^(volere|potere|dovere|bisognare|piacere)$/;
+  var IMPERS_ADJ = /^(difficile|facile|importante|necessario|possibile|impossibile|bello|utile|inutile|meglio|vietato|pericoloso|giusto|normale|strano|interessante|fondamentale|essenziale)$/;
+  var NUMW = /^(due|tre|quattro|cinque|sei|sette|otto|nove|dieci|undici|dodici|tredici|quattordici|quindici|venti|trenta|cento|\d+)$/;
+  var HOURW = /^(una|due|tre|quattro|cinque|sei|sette|otto|nove|dieci|undici|dodici|mezzogiorno|mezzanotte|\d{1,2})$/;
+  var PL_DET = /^(i|gli|le|questi|queste|quei|quegli|quelle|molti|molte|tanti|tante|alcuni|alcune|pochi|poche|diversi|diverse|parecchi|parecchie|troppi|troppe|miei|mie|tuoi|tue|suoi|sue|nostri|nostre|vostri|vostre|due|tre|quattro|cinque|sei|sette|otto|nove|dieci|dei|degli|delle)$/;
+  var CLITIC = /^(mi|ti|ci|vi|si|lo|la|li|le|gli|ne|me|te|ce|ve|se|l'|glielo|gliela|glieli|gliele|gliene|m'|t'|c'|v'|s')$/;
+  var SKIP_V = /^(non|mi|ti|ci|vi|si|lo|la|li|le|gli|ne|me|te|ce|ve|se|l'|glielo|gliela|glieli|gliele|gliene|già|mai|sempre|ancora|anche|spesso|poi|proprio|davvero|solo|soltanto|forse|pure|m'|t'|c'|v'|s')$/;
+  var ADV_SKIP = /^(non|già|mai|sempre|ancora|anche|più|spesso|poi|proprio|davvero|solo|soltanto|subito|molto|tanto|forse|pure|quasi|appena)$/;
+  var PREPS = /^(a|ad|di|da|in|con|su|per|tra|fra|senza|verso|come|anche|pure|neanche|nemmeno|quanto|più|meno|dopo|prima|contro|secondo|tranne|oltre|dietro|sopra|sotto)$/;
+  var REFLEXIVE_L = /^(chiamare|svegliare|alzare|lavare|vestire|sentire|trovare|trasferire|preparare|divertire|annoiare|riposare|sedere|fermare|sposare|laureare|iscrivere|arrabbiare|preoccupare|ricordare|innamorare|abituare|occupare|addormentare|pettinare|truccare|radere|trovare|chiedere|domandare|rilassare|muovere|perdere|trasferirsi|chiamarsi|svegliarsi|alzarsi|sentirsi|trovarsi)$/;
+  var IMPV_WORDS = /^(scusi|scusa|senti|senta|guarda|guardi|dai|tieni|tenga|aspetta|aspetti|ascolta|ascolti|dimmi|mi|figurati|prego|pensa|immagina|vieni|vai|stai|hai|sai)$/;
+  var AMBI_GENDER = /^(fine|presente|metro|capitale|fronte|carcere|eco|fronte|radice)$/;
+  var INTR_AVERE = /^(dormire|lavorare|camminare|viaggiare|telefonare|nuotare|ridere|piangere|cenare|pranzare|giocare|passeggiare|sciare|ballare|litigare|chiacchierare|sorridere|russare)$/;
+  var AV2ES = { avevo: "ero", avevi: "eri", aveva: "era", avevamo: "eravamo", avevate: "eravate", avevano: "erano", "avrò": "sarò",
+                avrai: "sarai", "avrà": "sarà", avremo: "saremo", avrete: "sarete", avranno: "saranno", avrei: "sarei", avresti: "saresti",
+                avrebbe: "sarebbe", avremmo: "saremmo", avreste: "sareste", avrebbero: "sarebbero", abbia: "sia", abbiano: "siano",
+                avessi: "fossi", avesse: "fosse", avessimo: "fossimo", aveste: "foste", avessero: "fossero", avere: "essere", aver: "esser",
+                avendo: "essendo" };
+  var COMMON_G = /^(nipote|nipoti|collega|colleghi|colleghe|cantante|cantanti|insegnante|insegnanti|giornalista|giornalisti|giornaliste|turista|turisti|turiste|artista|artisti|artiste|pianista|dentista|cliente|clienti|parente|parenti|abitante|abitanti|paziente|pazienti|agente|agenti|musicista|musicisti|atleta|atleti|atlete|interprete|interpreti|custode|preside|giovane|giovani|utente|utenti|docente|docenti)$/;
+  var TIME_N = /^(sera|mattina|pomeriggio|notte|giorno|giorni|anno|anni|mese|mesi|settimana|settimane|domenica|lunedì|martedì|mercoledì|giovedì|venerdì|sabato|estate|inverno|primavera|autunno|volta|volte|fine|weekend|mattino|ora|ore|momento|tempo|secolo|periodo|scorso|prossimo|giornata|serata|stagione|vacanze|dopo)$/;
+  var AV_PERSON = { avevo: "0", avevi: "1", aveva: "2", avevamo: "3", avevate: "4", avevano: "5", "avrò": "0", avrai: "1", "avrà": "2",
+                    avremo: "3", avrete: "4", avranno: "5", avrei: "0", avresti: "1", avrebbe: "2", avremmo: "3", avreste: "4", avrebbero: "5",
+                    abbia: "012", abbiano: "5", avessi: "01", avesse: "2", avessimo: "3", aveste: "4", avessero: "5" };
+  var PRES_TRIG = /^(penso|pensi|pensa|pensiamo|pensate|pensano|credo|credi|crede|crediamo|credono|spero|speri|spera|speriamo|sperano|voglio|vuoi|vuole|vogliamo|volete|vogliono|dubito|dubiti|dubita|immagino|temo|sembra|pare|bisogna|occorre|importante|possibile|probabile|meglio|peccato|necessario|preferisco|preferisce|desidero|suppongo|impossibile|giusto|normale|naturale|strano|sufficiente|basta)$/;
+  var PAST_TRIG = /^(pensavo|pensava|pensavamo|pensavano|credevo|credeva|credevano|speravo|sperava|speravano|volevo|voleva|volevano|dubitavo|immaginavo|temevo|sembrava|pareva|bisognava|occorreva|pensato|creduto|sperato|voluto|vorrei|vorresti|vorrebbe|vorremmo|vorrebbero|preferirei|preferivo|desideravo|piacerebbe|sarebbe)$/;
+  var CONJ_TRIG = /^(benché|sebbene|affinché|purché|nonostante|qualora|malgrado)$/;
+  var CONJ_TRIG2 = { prima: "che", senza: "che", meno: "che", patto: "che", modo: "che" };
+  var DET_F = { questo: "ms", questa: "fs", questi: "mp", queste: "fp", nessun: "ms", nessuno: "ms", nessuna: "fs", molti: "mp", molte: "fp",
+                tanti: "mp", tante: "fp", pochi: "mp", poche: "fp", alcuni: "mp", alcune: "fp", troppi: "mp", troppe: "fp", quella: "fs",
+                quelle: "fp", quei: "mp", quegli: "mp", quel: "ms" };
+  var DET_FORMS = { quest: ["questo", "questa", "questi", "queste"], nessun: ["nessun", "nessuna", null, null], molt: ["molto", "molta", "molti", "molte"],
+                    tant: ["tanto", "tanta", "tanti", "tante"], poc: ["poco", "poca", "pochi", "poche"], alcun: [null, null, "alcuni", "alcune"],
+                    tropp: ["troppo", "troppa", "troppi", "troppe"], quel: ["quel", "quella", "quei", "quelle"] };
+  var POSS_FORMS = { mi: ["mio", "mia", "miei", "mie"], tu: ["tuo", "tua", "tuoi", "tue"], su: ["suo", "sua", "suoi", "sue"],
+                     nostr: ["nostro", "nostra", "nostri", "nostre"], vostr: ["vostro", "vostra", "vostri", "vostre"] };
+  function possKey(w) { return /^(mio|mia|miei|mie)$/.test(w) ? "mi" : /^(tuo|tua|tuoi|tue)$/.test(w) ? "tu" : /^(suo|sua|suoi|sue)$/.test(w) ? "su" : /^nostr/.test(w) ? "nostr" : /^vostr/.test(w) ? "vostr" : null; }
+  function gnOfPoss(w) { return /^(mio|tuo|suo|nostro|vostro)$/.test(w) ? "ms" : /^(mia|tua|sua|nostra|vostra)$/.test(w) ? "fs" : /^(miei|tuoi|suoi|nostri|vostri)$/.test(w) ? "mp" : /^(mie|tue|sue|nostre|vostre)$/.test(w) ? "fp" : null; }
+  var GN_IX = { ms: 0, fs: 1, mp: 2, fp: 3 };
+  // Gender and number of a noun, when the lexicon knows it: {g, n} (n null if invariable).
+  function nounGN(w) {
+    var s = DATA.nouns[w], p = DATA.nounsByPlural[w];
+    if (s && p && s.s === w && p.pl === w) return s.s === s.pl ? { g: s.g, n: null } : null;
+    if (s && s.s === w) return { g: s.g, n: s.s === s.pl ? null : "s" };
+    if (p && p.pl === w) { var g = p.g; if (/a$/.test(w) && /o$/.test(p.s)) g = "f"; return { g: g, n: "p" }; }
+    return null;
+  }
+  function adjForm(lemma, gn) {
+    if (!lemma) return null;
+    var st = lemma.replace(/[oe]$/, ""), hard = /[cg]o$/.test(lemma);
+    var out = /o$/.test(lemma) ? [lemma, st + "a", st + (hard ? "hi" : "i"), st + (hard ? "he" : "e")] :
+              /e$/.test(lemma) ? [lemma, lemma, st + "i", st + "i"] : [lemma, lemma, lemma, lemma];
+    var f = out[GN_IX[gn]];
+    if (hard && DATA.adj[f] !== lemma) f = f.replace(/h([ie])$/, "$1");   // simpatici, amici
+    return DATA.adj[f] === lemma ? f : null;
+  }
+  function sndArt(art, word, fem) {
+    if (!word || /^[hwyxjk]|^i[aeiou]/.test(word)) return null;
+    var s = U.soundRule(word);
+    switch (art) {
+      case "il": return s === "sz" ? "lo" : s === "v" ? "l'" : null;
+      case "lo": return s === "v" ? "l'" : s === "c" ? "il" : null;
+      case "la": return s === "v" ? "l'" : null;
+      case "i": return s === "c" ? null : "gli";
+      case "gli": return s === "c" ? "i" : null;
+      case "un": return s === "sz" && !fem ? "uno" : s === "v" && fem ? "un'" : null;
+      case "uno": return s === "sz" ? null : "un" + (fem && s === "v" ? "'" : "");
+      case "una": return s === "v" ? "un'" : null;
+    }
+    return null;
+  }
+  function feminine(w) {
+    var gn = nounGN(w);
+    if (gn) return gn.g === "f";
+    if (DATA.adj[w]) return /a$/.test(w);
+    return /a$/.test(w) && !/(ma|ista|ga)$/.test(w);
+  }
+
+  function lint2(tk, week, out, isIo) {
+    var it = function (s) { return "*" + s + "*"; };
+    var W = function (k) { return tk[k] && tk[k].w || ""; };
+    var taken = function (a, n) { return out.some(function (f) { return a < f.i + f.n && f.i < a + (n || 1); }); };
+    var push = function (i, n, cat, msg, soft) { if (!taken(i, n)) out.push({ i: i, n: n || 1, cat: cat, msg: msg, soft: !!soft }); };
+    var lem = function (w) { return V(w).map(function (v) { return v.lemma; }); };
+    var hasLem = function (w, re) { return lem(w).some(function (l) { return re.test(l); }) || (PP(w) && re.test(PP(w))); };
+    var nextW = function (k, skip) { for (var x = k + 1; x < tk.length && tk[x].w; x++) if (!(skip && skip.test(tk[x].w))) return x; return -1; };
+    var finite = function (w) { return V(w).length > 0 && !isInf(w); };
+
+    for (var i = 0; i < tk.length; i++) {
+      var t = tk[i];
+      if (!t.w) continue;
+      var w = t.w, n = W(i + 1), n2 = W(i + 2), p = W(i - 1), p2 = W(i - 2);
+      var cap1 = tk[i + 1] && tk[i + 1].cap;
+
+      /* --- castellano en contexto --- */
+      if (!t.cap && ES_STRONG[w] && !known(w) && w !== "come") push(i, 1, "parola_spagnola", it(w) + " es español; en italiano: " + it(ES_STRONG[w]) + ".");
+      if (w === "de" && !t.cap && !(tk[i - 1] && tk[i - 1].cap && tk[i + 1] && tk[i + 1].cap)) push(i, 1, "parola_spagnola", it("de") + " es español: en italiano " + it("di") + " (o " + it("da") + ").");
+      if (w === "di" && n === "accordo") push(i, 2, "parola_spagnola", "«De acuerdo» es " + it("d'accordo") + ".");
+      if (w === "dentro" && /^(di|de)$/.test(n) && (NUMW.test(n2) || /^(un|una|qualche|pochi|poche)$/.test(n2)))
+        push(i, 2, "parola_spagnola", "«Dentro de» + tiempo es " + it("fra") + " o " + it("tra") + ": " + it("fra " + n2 + "…") + ".");
+      if (n === "la" && n2 === "compra" && hasLem(w, /^fare$/)) push(i + 1, 2, "parola_spagnola", "«Hacer las compras» es " + it("fare la spesa") + ".");
+      if (/^(molti|tanti|alcuni|pochi)$/.test(w) && n === "tempi") push(i, 2, "lessico", "«Muchas veces» es " + it("molte volte") + " (" + it("tempo") + " es el tiempo).");
+      if (w === "media" && /^(ora|dozzina|bottiglia|porzione|chilo|litro|pizza|giornata|pagina|mela)$/.test(n))
+        push(i, 1, "parola_spagnola", "«Media» + sustantivo es " + it(n === "ora" ? "mezz'ora" : "mezza " + n) + ".");
+      if (w === "media" && p === "e" && HOURW.test(p2)) push(i, 1, "parola_spagnola", "En la hora, «y media» es " + it("e mezza") + ".");
+      if (w === "da" && n === "dove" && /^(sei|è|siete)$/.test(n2) && !partStrict(W(i + 3))) push(i, 1, "preposizione", "Para el origen: " + it("di dove " + n2) + "?");
+      if (w === "che" && n === "se" && /^(chiesto|chiede|chiedo|chiese|chiedere|domandato|domanda|domando|chiedevo|chiedeva)$/.test(p)) push(i, 1, "parola_spagnola", "Después de " + it(p) + " va " + it("se") + " solo, sin " + it("che") + ".");
+      if (w === "qual'" && n === "è") push(i, 2, "ortografia", "Se escribe " + it("qual è") + ", sin apóstrofo.");
+      if (w === "quale" && n === "è") push(i, 2, "ortografia", "Se escribe " + it("qual è") + ".");
+      if (w === "in" && /^1\d{3}$|^20\d\d$/.test(n)) push(i, 1, "preposizione", "Con el año va " + it("nel " + n) + ".");
+      if (w === "alle" && n === "una") push(i, 2, "preposizione", "La una es singular: " + it("all'una") + ".");
+      if (/^(siamo|siete|eravamo|eravate|saremo)$/.test(w) && NUMW.test(n) && (!tk[i + 2] || tk[i + 2].p || /^(a|e|in|al|alla|per|con|oggi|stasera)$/.test(n2)))
+        push(i, 2, "preposizione", "Para decir cuántos son: " + it(w + " in " + n) + ".");
+      if (w === "mai" && n === "non") push(i, 2, "ordine", "En italiano: " + it("non … mai") + " (" + it("non gioco mai") + ").");
+      if (w === "a" && /^(me mi|te ti|lui gli|lei le|noi ci|voi vi|loro gli)$/.test(n + " " + n2)) push(i + 2, 1, "pronome", it("A " + n) + " y " + it(n2) + " dicen lo mismo: " + it("a " + n + " piace") + " o " + it(n2 + " piace") + ".");
+      if (w === "più" && /^(meglio|migliore|migliori|peggio|peggiore|peggiori|maggiore|minore)$/.test(n)) push(i, 2, "lessico", it(n) + " ya es comparativo: sin " + it("più") + ".");
+      if (/^(tanto|tanta|tanti|tante)$/.test(w) && DATA.adj[n] && n2 === "come") push(i, 3, "lessico", "Comparación de igualdad: " + it("tanto " + n + " quanto") + " o " + it("così " + n + " come") + ".");
+      if (w === "prima" && isInfCl(n)) push(i, 2, "preposizione", "Antes de un infinitivo: " + it("prima di " + n) + ".");
+      if (w === "senza" && n === "di" && isInfCl(n2)) push(i, 2, "preposizione", "Con infinitivo, " + it("senza") + " va solo: " + it("senza " + n2) + ".");
+      if (w === "dopo" && n === "di" && isInfCl(n2)) push(i, 3, "tempo_modo", "«Después de» + acción: " + it("dopo aver/esser + participio") + " (" + it("dopo aver studiato") + ").");
+      if (w === "invece" && isInfCl(n)) push(i, 2, "preposizione", it("invece di " + n) + ".");
+      if (/^(niente|nulla|qualcosa|qualcos')$/.test(w) && /^(per|di)$/.test(n) && isInfCl(n2)) push(i + 1, 1, "preposizione", "Algo para + infinitivo: " + it(w + " da " + n2) + ".");
+      if ((AVE_PRES[w] || /^(avevo|aveva|avevi|avevamo|avevano)$/.test(w)) && n === "che" && isInfCl(n2)) push(i, 3, "parola_spagnola", "«Tener que» es " + it("dovere") + ": " + it("devo " + n2) + ".");
+      if (w === "no" && n && finite(n) && !isNoun(n) && !DATA.adj[n] && !/^(se|o|di|che)$/.test(p)) push(i, 1, "parola_spagnola", "Delante del verbo, la negación es " + it("non") + ".");
+      if (/^(me|te)$/.test(w) && finite(n) && !CLITIC.test(n) && !PREPS.test(p) && !/^(e|o|che)$/.test(p) && !isNoun(n))
+        push(i, 1, "parola_spagnola", "Delante del verbo: " + it((w === "me" ? "mi " : "ti ") + n) + ".");
+      if (w === "se" && finite(n) && !isNoun(n) && !CLITIC.test(n) && (p === "non" || (tk[i - 1] && tk[i - 1].w && (isNoun(p) || /^(lui|lei|loro)$/.test(p) || (tk[i - 1].cap && !tk[i - 1].start)))) &&
+          V(n).some(function (v) { return v.p === 2 || v.p === 5; })) push(i, 1, "parola_spagnola", "El reflexivo es " + it("si " + n) + " (" + it("se") + " es «si» condicional).");
+      if (w === "lo" && n === "che") push(i, 2, "parola_spagnola", "«Lo que» es " + it("quello che") + " o " + it("ciò che") + ".");
+      if (w === "lo" && p !== "per" && /^(peggio|meglio|migliore|peggiore|importante|bello|brutto|strano|difficile|facile|mejor|peor|più)$/.test(n) && !V(n).length)
+        push(i, 2, "parola_spagnola", "El «lo» neutro no existe: " + it("la cosa " + (n === "peggio" ? "peggiore" : n === "meglio" ? "migliore" : n)) + " o " + it("il " + n) + ".");
+      if (/^(mi|tu)$/.test(w) && isNoun(n) && !V(n).length && !DATA.adj[n] && !NUMS.test(n) && !/^(cosa|stesso|stessa|solo|sola)$/.test(n)) {
+        var gnN = nounGN(n), pk0 = POSS_FORMS[w === "mi" ? "mi" : "tu"];
+        push(i, 1, "possessivo", "El posesivo es " + it((gnN ? pk0[GN_IX[gnN.g + (gnN.n || "s")]] : pk0[0] + "/" + pk0[1]) + " " + n) + ".");
+      }
+      if (/^(tengo|tieni|tiene|teniamo|tenete|tengono|tenevo|teneva|tenevamo)$/.test(w)) {
+        var tn = nextW(i, /^(un|una|uno|un'|due|tre|quattro|cinque|molti|molte|tanti|tante|tanta|tanto|molto|molta|poco|poca|il|la|i|le|dei|delle|degli|mal|di)$/);
+        var obj = tn >= 0 ? tk[tn].w : "";
+        if (/^(anni|fame|sete|sonno|freddo|caldo|paura|ragione|fretta|voglia|bisogno|figli|figlio|figlia|fratelli|fratello|sorella|sorelle|gatto|gatti|cane|cani|macchina|casa|tempo|problema|problemi|lezione|esame|febbre|testa|amici|lavoro|soldi)$/.test(obj) || (p === "anni" && p2 === "quanti")) {
+          var vt = V(w)[0], av = vt && conjSafe("avere", vt.tense);
+          push(i, 1, "parola_spagnola", "«Tener» es " + it("avere") + (av ? ": " + it(av[vt.p]) : "") + ".");
+        }
+      }
+      if (/^(miro|miri|miriamo|mirate|mirano|miravo|mirava|miravano|mirando|mira)$/.test(w) && !(w === "mira" && (U.ARTICLES[p] || /^(di|la)$/.test(p))) &&
+          (U.ARTICLES[n] || DEM.test(n) || POSS[n])) {
+        var mv = V(w)[0], gv = mv && conjSafe("guardare", mv.tense);
+        push(i, 1, "parola_spagnola", "«Mirar» es " + it("guardare") + (gv ? ": " + it(gv[mv.p]) : "") + ".");
+      }
+
+      /* --- preposiciones --- */
+      var place = cap1 ? tk[i + 1].o + (tk[i + 2] && tk[i + 2].cap && tk[i + 2].w ? " " + tk[i + 2].o : "") : "";
+      if (w === "in" && cap1 && CITIES.test(n)) push(i, 1, "preposizione", "Con ciudades va " + it("a") + ": " + it("a " + place) + ".");
+      if (/^(a|ad)$/.test(w) && cap1 && COUNTRY[n]) push(i, 1, "preposizione", "Con países y regiones va " + it("in") + ": " + it((COUNTRY[n] === "mp" ? "negli " : "in ") + place) + ".");
+      if (w === "da" && cap1 && COUNTRY[n] && COUNTRY[n] !== "mp") {
+        var dA = COUNTRY[n] === "f" ? (/^[aeiou]/.test(n) ? "dall'" : "dalla ") : (/^[aeiou]/.test(n) ? "dall'" : "dal ");
+        push(i, 1, "articolo", "Los países y regiones llevan artículo: " + it(dA + tk[i + 1].o) + ".");
+      }
+      if (/^(a|al|alla|all')$/.test(w) && IN_PLACES.test(n) && !/^(di|del|della|dello|dei|delle|degli|che|dove)$/.test(n2) && !DATA.adj[n2] && !tk[i + 1].cap &&
+          !/^(vicino|vicina|vicini|accanto|davanti|intorno|fronte|fianco|fino|dietro|insieme|rispetto|grazie|oltre|uguale|simile|attaccato|vicinissimo)$/.test(p)) push(i, 2, "preposizione", "Con " + it(n) + " va " + it("in " + n) + ".");
+      if (/^(a|ad)$/.test(w) && /^(un|una|uno|un')$/.test(n) && PLACES.test(n2)) push(i, 1, "preposizione", "Con un lugar indeterminado va " + it("in " + n + " " + n2) + ".");
+      if (/^(al|alla|allo|all')$/.test(w) && DA_PERSONS.test(n)) push(i, 1, "preposizione", "A la casa o consultorio de alguien: " + it((w === "alla" ? "dalla " : w === "all'" ? "dall'" : w === "allo" ? "dallo " : "dal ") + n) + ".");
+      if (w === "a" && POSS[n] && FAMILY.test(n2) && hasLem(p, /^(andare|venire|tornare|passare|restare|rimanere|dormire)$/)) push(i, 1, "preposizione", "A la casa de alguien: " + it("da " + n + " " + n2) + ".");
+      if (/^(vicino|accanto|intorno|davanti|lontano|lontana|lontani|lontane|fondo)$/.test(w) && /^(del|della|dello|dell'|dei|degli|delle)$/.test(n) && !U.ARTICLES[p] && !POSS[p]) {
+        var toA = /^lontan/.test(w) ? "da" : "a", pi2 = U.prepInfo(n);
+        var fixP = pi2 && U.contract(toA, pi2.art);
+        if (fixP && !(w === "vicino" && n2 === "casa")) push(i + 1, 1, "preposizione", "Se dice " + it((w === "fondo" && p === "in" ? "in " : "") + w + " " + fixP + (fixP.slice(-1) === "'" ? "" : " ") + (tk[i + 2] && tk[i + 2].w ? tk[i + 2].o : "")) + ".");
+      }
+      if (/^(nel|nello)$/.test(w) && /^(primo|secondo|terzo|quarto|quinto|sesto|settimo|ottavo|ultimo)$/.test(n) && n2 === "piano") push(i, 1, "preposizione", "El piso va con " + it("al") + ": " + it("al " + n + " piano") + ".");
+      if (/^(al|alla)$/.test(w) && /^(pranzo|cena|colazione)$/.test(n) && (!tk[i + 2] || tk[i + 2].p || /^(e|con|insieme|oggi|domani|stasera)$/.test(n2))) push(i, 2, "preposizione", "Con las comidas: " + it("a " + n) + ".");
+      // verbo + preposición + infinitivo
+      var inf1 = isInfCl(n) && !isNoun(n) ? i + 1 : (/^(a|ad|di)$/.test(n) && isInfCl(n2) ? i + 2 : -1);
+      if (inf1 > 0 && (finite(w) || partStrict(w) || isInf(w)) && !U.ARTICLES[p] && !POSS[p] && !DI_NOUNS.test(w) && w !== "piacere" && !isNoun(w) &&
+          !(/^(va|andava|andrebbe|vada)$/.test(w) && /^(mi|ti|gli|le|ci|vi)$/.test(p))) {
+        var prep = inf1 === i + 2 ? n : "", lems = lem(w).concat(PP(w) ? [PP(w)] : []).concat(isInf(w) ? [w] : []);
+        var refl = /^(mi|ti|si|ci|vi)$/.test(p) || /^(mi|ti|si|ci|vi)$/.test(p2) || /^(mi|ti|si|ci|vi)$/.test(W(i - 3)) || (partStrict(w) && (ESS_ALL[p] || (ESS_ALL[p2] && ADV_SKIP.test(p))));
+        if (lems.some(function (l) { return A_VERBS.test(l); }) && prep !== "a" && prep !== "ad" && !lems.some(function (l) { return DI_VERBS.test(l) || ZERO_VERBS.test(l); }))
+          push(i + 1, prep ? 1 : 1, "preposizione", "Se dice " + it(w + " a " + W(inf1)) + ".");
+        else if (lems.some(function (l) { return DI_STRICT.test(l); }) && !refl && prep !== "di" && !lems.some(function (l) { return A_VERBS.test(l) || ZERO_VERBS.test(l); }))
+          push(i + 1, 1, "preposizione", "Se dice " + it(w + " di " + W(inf1)) + ".");
+        else if (lems.some(function (l) { return ZERO_VERBS.test(l); }) && prep && !lems.some(function (l) { return A_VERBS.test(l) || DI_VERBS.test(l); }))
+          push(i + 1, 1, "preposizione", "Después de " + it(w) + " el infinitivo va directo: " + it(w + " " + W(inf1)) + ".");
+      }
+      if (DI_NOUNS.test(w) && (AVE_PRES[p] || /^(avevo|aveva|avrei|avere)$/.test(p) || hasLem(p, /^avere$/))) {
+        if (isInfCl(n) && !isNoun(n)) push(i + 1, 1, "preposizione", "Se dice " + it(w + " di " + n) + ".");
+        else if (/^(a|ad|per)$/.test(n) && isInfCl(n2) && w !== "paura") push(i + 1, 1, "preposizione", "Se dice " + it(w + " di " + n2) + ".");
+      }
+      if (IMPERS_ADJ.test(w) && n === "di" && isInfCl(n2) && /^(è|era|sarebbe|sarà|fu|sembra|diventa)$/.test(p)) push(i + 1, 1, "preposizione", "Después de " + it(p + " " + w) + " el infinitivo va directo: " + it(w + " " + n2) + ".");
+      if (w === "bisogna" && n === "di" && isInfCl(n2)) push(i + 1, 1, "preposizione", it("bisogna") + " va sin " + it("di") + ": " + it("bisogna " + n2) + ".");
+      // comparativo: più grande che Roma → di Roma
+      if (/^(più|meno)$/.test(w) && DATA.adj[n] && !isNoun(n)) {
+        var ck = n2 === "che" ? i + 2 : -1;
+        if (ck > 0) {
+          var after = W(ck + 1), ta = tk[ck + 1];
+          if (ta && ta.w && (U.ARTICLES[after] || /^(me|te|lui|lei|noi|voi|loro|quello|quella|questo|questa)$/.test(after) || (ta.cap && !COUNTRY[after] && CITIES.test(after)) || (ta.cap && COUNTRY[after]) || (ta.cap && !ta.start))) {
+            var art = U.ARTICLES[after] ? U.contract("di", after) : null;
+            push(ck, 1, "preposizione", "En la comparación de dos cosas va " + it("di") + ": " + it(w + " " + n + " " + (art ? art + (art.slice(-1) === "'" ? "" : " ") + (tk[ck + 2] && tk[ck + 2].o || "") : "di " + ta.o)) + ".");
+          }
+        }
+      }
+
+      /* --- artículos por sonido y elisión --- */
+      var fem1 = n ? feminine(n) : false;
+      if (tk[i + 1] && tk[i + 1].w && !taken(i, 2) && !/^(e|o|a|ed|ad)$/.test(n)) {
+        var pronLike = /^(lo|la|gli)$/.test(w) && (isVerb(n) || isInf(n) || AVE_PRES[n]);
+        if (U.ARTICLES[w] && !pronLike && !(w === "gli" && !isNoun(n) && !DATA.adj[n] && known(n)) && !(w === "uno" && !isNoun(n) && !DATA.adj[n]) &&
+            !(w === "una" && !isNoun(n) && !DATA.adj[n] && known(n)) && !(w === "lo" && !isNoun(n) && !DATA.adj[n]) && !NUMS.test(n)) {
+          var fa = sndArt(w, n, fem1);
+          if (fa && fa !== w) push(i, 2, "articolo", "Por el sonido de " + it(n) + " va " + it(fa + (fa.slice(-1) === "'" ? "" : " ") + tk[i + 1].o) + ".");
+        }
+        var pi3 = U.prepInfo(w);
+        if (pi3 && pi3.art && !NUMS.test(n) && (isNoun(n) || DATA.adj[n] || !known(n))) {
+          var fa2 = sndArt(pi3.art, n, fem1), cf2 = fa2 && U.contract(pi3.base, fa2);
+          if (cf2 && cf2 !== w) push(i, 2, "articolo", "Por el sonido de " + it(n) + " va " + it(cf2 + (cf2.slice(-1) === "'" ? "" : " ") + tk[i + 1].o) + ".");
+        }
+        if (/^(quello|quelli)$/.test(w) && (isNoun(n) || (!known(n) && !isVerb(n))) && !DATA.adj[n] && !/^(che|di|lì|là|chi|con|in|a|da|per)$/.test(n)) {
+          var qf = { il: "quel", lo: "quello", "l'": "quell'", i: "quei", gli: "quegli" }[w === "quello" ? (U.soundRule(n) === "c" ? "il" : U.soundRule(n) === "v" ? "l'" : "lo") : (U.soundRule(n) === "c" ? "i" : "gli")];
+          if (qf && qf !== w) push(i, 2, "articolo", "Delante del sustantivo: " + it(qf + (qf.slice(-1) === "'" ? "" : " ") + n) + ".");
+        }
+      }
+      if (/^(lo|la)$/.test(w) && /^(ho|hai|ha)$/.test(n)) push(i, 2, "ortografia", "Delante de " + it(n) + " se apostrofa: " + it("l'" + n) + ".");
+      if (/^(la|lo)$/.test(w) && n === "è" && /^(me|te|se|ce|ve)$/.test(p) && partStrict(n2)) push(i, 2, "ortografia", "Se apostrofa: " + it(p + " l'è " + n2) + ".");
+      if (w === "glie" && /^(lo|la|li|le|ne)$/.test(n)) push(i, 2, "ortografia", "Va todo junto: " + it("glie" + n) + ".");
+
+      /* --- pronombres combinados y relativos --- */
+      if (/^(mi|ti|ci|vi|si)$/.test(w) && /^(lo|la|li|le|ne|l')$/.test(n)) push(i, 2, "pronome", "Antes de " + it(n) + ", " + it(w) + " pasa a " + it(w.charAt(0) + "e") + ": " + it(w.charAt(0) + "e " + n) + ".");
+      if (/^(gli|le)$/.test(w) && /^(lo|la|li|ne)$/.test(n) && !(w === "le" && U.ARTICLES[p])) push(i, 2, "pronome", "Juntos: " + it("glie" + n) + ".");
+      if (w === "gli" && n === "le" && isVerb(n2)) push(i, 2, "pronome", "Juntos: " + it("gliele") + ".");
+      if (/^(lo|la|li|le)$/.test(w) && /^(mi|ti|gli|ci|vi)$/.test(n) && isVerb(n2)) push(i, 2, "pronome", "El orden es al revés: " + it(n === "gli" ? "glie" + w : n.charAt(0) + "e " + w) + ".");
+      if (/^(in|di|a|da|con|per|su|tra|fra)$/.test(w) && /^(che|chi)$/.test(n) && isNoun(p) && !V(p).length && !/^(cosa|cos')$/.test(n2) && !isInf(n2) && tk[i - 1] && tk[i - 1].w && !(n === "chi" && w === "di"))
+        push(i, 2, "pronome", "Después de preposición, el relativo es " + it("cui") + ": " + it(w + " cui") + ".", n === "chi");
+      if (/^(lui|lei|quello|quella|quelli|quelle|tutti|persona|persone|gente)$/.test(w) && n === "chi" && finite(n2)) push(i + 1, 1, "pronome", "Relativo después de " + it(w) + ": " + it("che") + ".");
+
+      /* --- acentos --- */
+      if (w === "e" && tk[i - 1] && tk[i - 1].w && /^(chi|dove|come|cosa|quando|quanto|quale|perché|cos'|com'|dov'|qual|non|c')$/.test(p) && !/^(chi|dove|come|cosa|quando|quanto|quale|perché|non)$/.test(n) && (tk[i - 1].start || tk[i - 1].clause || /^(non|c')$/.test(p)))
+        push(i, 1, "accento", "El verbo lleva tilde: " + it(p === "c'" ? "c'è" : p + (/'$/.test(p) ? "" : " ") + "è") + ".");
+      if (w === "e" && /^(perché|quando|ma|però|se|dove|mentre)$/.test(p) && !/^(chi|dove|come|cosa|quando|quanto|quale|perché|non|poi|anche)$/.test(n) &&
+          (/^(lunedì|martedì|mercoledì|giovedì|venerdì|sabato|domenica|vero|tardi|presto|ora|meglio|facile|difficile)$/.test(n) || ((DATA.adj[n] || partStrict(n)) && !isNoun(n) && !V(n).length)))
+        push(i, 1, "accento", "El verbo lleva tilde: " + it(p + " è " + n) + ".");
+      if (w === "e" && /^(oggi|domani|ieri)$/.test(p) && tk[i - 1].start && !/^(oggi|domani|ieri|dopodomani)$/.test(n) && n) push(i, 1, "accento", "El verbo lleva tilde: " + it(p + " è") + ".");
+      if (w === "li" && (!tk[i + 1] || tk[i + 1].p || /^(tutto|tutti|per|vicino|sopra|sotto|dentro|fuori|davanti|dietro|accanto|dove|quando|c')$/.test(n)) && !isVerb(n))
+        push(i, 1, "accento", "El adverbio lleva tilde: " + it("lì") + ".");
+      if (w === "si" && ((t.start && tk[i + 1] && /^[,!]$/.test(tk[i + 1].p || "")) || (p === "di" && (!tk[i + 1] || tk[i + 1].p))))
+        push(i, 1, "accento", "La afirmación lleva tilde: " + it("sì") + ".");
+
+      /* --- concordancia --- */
+      if (/^(molta|molti|molte|tanta|tanti|tante|troppa|troppi|troppe|poca|pochi|poche)$/.test(w) && DATA.adj[n] && !isNoun(n) && !V(n).length && !isNoun(n2) && !DATA.adj[n2] && (ESS_ALL[p] || isVerb(p)))
+        push(i, 1, "accordo", "Delante de un adjetivo es adverbio y no cambia: " + it(w.replace(/(hi|he|a|i|e)$/, "o") + " " + n) + ".");
+      var dgn = DET_F[w];
+      if (dgn) {
+        var nk = i + 1, nn = W(nk);
+        if (POSS[nn]) { nk++; nn = W(nk); }
+        var ng = nn && !V(nn).length && !DATA.adj[nn] && !AMBI_GENDER.test(nn) ? nounGN(nn) : null;
+        if (ng && dgn && ((ng.g !== dgn[0] && !COMMON_G.test(nn)) || (ng.n && ng.n !== dgn[1]))) {
+          var stemD = Object.keys(DET_FORMS).filter(function (k) { return w.indexOf(k) === 0; })[0];
+          var fx = stemD && DET_FORMS[stemD][GN_IX[ng.g + (ng.n || dgn[1])]];
+          if (stemD === "quel" && fx) fx = fx === "quel" ? (U.soundRule(nn) === "sz" ? "quello" : U.soundRule(nn) === "v" ? "quell'" : "quel") : fx === "quei" ? (U.soundRule(nn) === "c" ? "quei" : "quegli") : fx === "quella" && U.soundRule(nn) === "v" ? "quell'" : fx;
+          if (fx && fx !== w) push(i, nk - i + 1, "accordo", "Con " + it(nn) + " va " + it(fx + (fx.slice(-1) === "'" ? "" : " ") + (nk > i + 1 ? W(i + 1) + " " : "") + nn) + ".");
+        }
+      }
+      if (U.ARTICLES[w] && U.ARTICLES[w][2] === "det" && (POSS[n] || n === "loro")) {
+        var ng2 = n2 && !V(n2).length && !DATA.adj[n2] ? nounGN(n2) : null;
+        if (ng2 && COMMON_G.test(n2)) ng2 = { g: U.ARTICLES[w][0] === "f" ? "f" : "m", n: ng2.n };
+        if (ng2 && !AMBI_GENDER.test(n2) && !(FAMILY.test(n2) && ng2.n !== "p" && n !== "loro")) {
+          var gnK = ng2.g + (ng2.n || U.ARTICLES[w][1]), sn = U.soundRule(n);
+          var ea2 = { ms: sn === "c" ? "il" : sn === "sz" ? "lo" : "l'", fs: sn === "v" ? "l'" : "la", mp: sn === "c" ? "i" : "gli", fp: "le" }[gnK];
+          var pf = n === "loro" ? "loro" : POSS_FORMS[possKey(n)][GN_IX[gnK]];
+          if (ea2 && pf && (ea2 !== w || pf !== n)) push(i, 3, "accordo", "Con " + it(n2) + " va " + it(ea2 + (ea2.slice(-1) === "'" ? "" : " ") + pf + " " + n2) + ".");
+        }
+      }
+      // sustantivo + adjetivo pegado
+      if (isNoun(w) && !V(w).length && !DATA.adj[w] && tk[i + 1] && tk[i + 1].w && !tk[i + 1].cap && !COMMON_G.test(w) && DATA.adj[n] && !isNoun(n) && !V(n).length && !POSS[n] && !partStrict(n) &&
+          !/^(blu|rosa|viola|beige|marrone|arancione|lilla|ogni|qualche|tale|pari|dispari|stesso|stessa|stessi|stesse|tutto|tutta|tutti|tutte|altro|altra|altri|altre|primo|prima|solo|piano|forte|chiaro|giusto|veloce|lento|diritto|dritto|sodo|caro|presto|tardi|meglio|peggio)$/.test(n) &&
+          !(isNoun(p) && !U.ARTICLES[p] && !V(p).length) &&
+          !isNoun(n2) && !(PREPS.test(p) && !/^(di|da)$/.test(p)) && !(/^(di|da)$/.test(p) && !isNoun(p2)) && !AMBI_GENDER.test(w)) {
+        var gnw = nounGN(w), lemA = DATA.adj[n];
+        if (gnw) {
+          var okForms = (gnw.n ? [gnw.g + gnw.n] : [gnw.g + "s", gnw.g + "p"]).map(function (k) { return adjForm(lemA, k); });
+          var heads = [okForms];
+          if (/^(di|da)$/.test(p) && isNoun(p2) && nounGN(p2)) { var g2 = nounGN(p2); heads.push((g2.n ? [g2.g + g2.n] : [g2.g + "s", g2.g + "p"]).map(function (k) { return adjForm(lemA, k); })); }
+          var good = okForms.filter(Boolean)[0];
+          if (good && !heads.some(function (h) { return h.indexOf(n) >= 0; }))
+            push(i + 1, 1, "accordo", "Concuerda con " + it(w) + ": " + it(w + " " + good) + ".");
+        }
+      }
+
+      /* --- persona del verbo --- */
+      if (/^(io|tu|noi|voi)$/.test(w) && !PREPS.test(p) && !/^(e|ed|,)$/.test(n) && !(tk[i + 1] && tk[i + 1].p) && p !== "anch'") {
+        var target = { io: 0, tu: 1, noi: 3, voi: 4 }[w];
+        var vk = nextW(i, SKIP_V);
+        var vw = vk >= 0 ? W(vk) : "", rd = V(vw);
+        var coord = /^(e|ed)$/.test(p) && (isNoun(p2) || /^(tu|lui|lei|io|noi|voi)$/.test(p2) || (tk[i - 2] && tk[i - 2].cap));
+        if (rd.length && !isNoun(vw) && !DATA.adj[vw] && !rd.some(function (v) { return v.p === target || (coord && v.p === (target === 0 ? 3 : target === 1 ? 4 : target)); }) && !isInf(vw) && !partStrict(vw)) {
+          var r0 = rd[0], forms = conjSafe(r0.lemma, r0.tense);
+          if (forms && forms[target] && forms[target] !== vw) push(vk, 1, "persona_verbale", "Con " + it(w) + " el verbo es " + it(forms[target]) + ".");
+        }
+      }
+      if (w === "gente" && p === "la") {
+        var gk = nextW(i, /^(non|mi|ti|ci|vi|si|lo|la|li|le|gli|ne|già|mai|sempre|ancora|anche|spesso|poi)$/), gw = W(gk), gr = V(gw);
+        if (gr.length && gr.every(function (v) { return v.p === 5; })) { var gf = conjSafe(gr[0].lemma, gr[0].tense); if (gf) push(gk, 1, "persona_verbale", it("La gente") + " es singular: " + it(gf[2]) + "."); }
+      }
+      var piac = V(w).filter(function (v) { return /^(piacere|servire|bastare|mancare|interessare|occorrere)$/.test(v.lemma); });
+      if (piac.length && (piac[0].lemma === "piacere" || /^(mi|ti|gli|le|ci|vi)$/.test(p))) {
+        var pk2 = nextW(i, /^(anche|molto|tanto|davvero|ancora|più|proprio|tantissimo|moltissimo|sempre|poi|solo|soltanto)$/), pw = W(pk2);
+        var pl = PL_DET.test(pw) || /^\d+$/.test(pw) && +pw > 1 || (DATA.nounsByPlural[pw] && DATA.nounsByPlural[pw].s !== pw && !DATA.nouns[pw]);
+        var pf2 = piac[0], forms2 = conjSafe(pf2.lemma, pf2.tense);
+        if (pf2.p === 2 && pl && pk2 >= 0 && forms2 && !(pw === "le" && isVerb(W(pk2 + 1)))) push(i, 1, "persona_verbale", (pf2.lemma === "piacere" ? "Lo que gusta es plural: " : "El verbo concuerda con lo que viene después, que es plural: ") + it(forms2[5]) + ".");
+        if (pf2.p === 5 && pk2 >= 0 && isInfCl(pw) && forms2) push(i, 1, "persona_verbale", "Con un infinitivo va en singular: " + it(forms2[2]) + ".");
+      }
+      if (p === "c'" && /^(era|sarà|sarebbe|fu|sia|fosse|è)$/.test(w)) {
+        var ck2 = nextW(i, /^(anche|sempre|ancora|solo|soltanto|già|però|davvero)$/), cw = W(ck2);
+        if (ck2 >= 0 && PL_DET.test(cw) && !taken(i - 1, 2))
+          push(i - 1, 2, "ci_ne", "Con plural: " + it({ "è": "ci sono", era: "c'erano", "sarà": "ci saranno", sarebbe: "ci sarebbero", fu: "ci furono", sia: "ci siano", fosse: "ci fossero" }[w] + " " + cw) + ".");
+      }
+      if (w === "si" && tk[i + 1] && tk[i + 1].w) {
+        var sr = V(n).filter(function (v) { return v.p === 2; });
+        if (sr.length && (NUMW.test(n2) || /^(molti|molte|tanti|tante|alcuni|alcune|diversi|diverse|parecchi|parecchie)$/.test(n2))) {
+          var sf = conjSafe(sr[0].lemma, sr[0].tense);
+          if (sf) push(i + 1, 1, "persona_verbale", "Con un objeto plural, el verbo va en plural: " + it("si " + sf[5]) + ".");
+        }
+      }
+
+      /* --- auxiliares --- */
+      if (AV2ES[w]) {
+        var ak = nextPart(tk, i);
+        if (ak > 0) {
+          var al = PP(tk[ak].w);
+          if (al && /rsi$/.test(al)) al = al.slice(0, -3) + "re";
+          var avP = AV_PERSON[w] || "", reflA = !!avP && ((p === "mi" && avP === "0") || (p === "ti" && avP === "1") || (p === "si" && /^[25]+$/.test(avP)));
+          if (reflA || (al && auxOf(al) === "essere")) push(i, ak - i + 1, "ausiliare", (reflA ? "Los reflexivos van con *essere*: " : "Con " + it(al) + " va *essere*: ") + it(AV2ES[w] + " " + tk[ak].w) + ".");
+        }
+      }
+      if (ESS_ALL[w] && !/^(mi|ti|si|ci|vi|se|me|te|ce|ve)$/.test(p)) {
+        var ek = nextPart(tk, i);
+        if (ek > 0) { var el = PP(tk[ek].w); if (el && INTR_AVERE.test(el)) push(i, ek - i + 1, "ausiliare", "Con " + it(el) + " va *avere*: " + it("ho " + tk[ek].w.replace(/[aie]$/, "o")) + "."); }
+      }
+
+      /* --- a personal con más objetos --- */
+      if (/^(a|ad|al|alla|allo|ai|alle|agli|all')$/.test(w) && tk[i - 1] && tk[i - 1].w) {
+        var vp = i - 1;
+        if (/mente$/.test(W(vp)) || /^(sempre|spesso|mai|ancora|anche|già|bene)$/.test(W(vp))) vp--;
+        var vw2 = W(vp);
+        var isDo = !isNoun(vw2) && V(vw2).some(function (v) { return DO_VERBS.test(v.lemma) || v.lemma === "svegliare"; }) || DO_PART.test(vw2) ||
+                   /^(conoscend|vedend|aspettand|chiamand|salutand|incontrand|visitand|ascoltand|guardand|amand|trovand|accompagnand|invitand|ringraziand|aiutand|svegliand)o$/.test(vw2);
+        var tgt = w === "a" || w === "ad" ? n : n;
+        var person = (w === "a" || w === "ad") ? (/^(nessuno|qualcuno|tutti|tutte|ognuno)$/.test(n) || (/^(un|una|uno|un'|il|la|lo|i|le|gli|l')$/.test(n) && PERSON_N.test(n2)) || (POSS[n] && (FAMILY.test(n2) || PERSON_N.test(n2))))
+                                                : (PERSON_N.test(n) || FAMILY.test(n) || POSS[n] && (FAMILY.test(n2) || PERSON_N.test(n2)) || /^(miei|tuoi|suoi)$/.test(n));
+        if (isDo && person && !isInfCl(n)) push(i, 1, "a_personale", "Sin «a»: el objeto directo de persona va directo" + (w.length > 2 ? " (" + it({ al: "il", alla: "la", allo: "lo", ai: "i", alle: "le", agli: "gli", "all'": "l'" }[w] + " " + n) + ")" : "") + ".");
+      }
+
+      /* --- participio --- */
+      var mP = /^(.+)(ut|it|at)([oaie])$/.exec(w);
+      if (mP && !known(w)) {
+        var lemP = mP[1] + { ut: "ere", it: "ire", at: "are" }[mP[2]];
+        if (Conj && Conj.VERBS && Conj.VERBS[lemP]) {
+          var ppR = Conj.participle(lemP);
+          if (ppR && ppR !== mP[1] + mP[2] + "o") push(i, 1, "participio", "El participio de " + it(lemP) + " es irregular: " + it(ppR.replace(/o$/, mP[3])) + ".");
+        }
+      }
+      var ESS_PL = /^(siamo|siete|eravamo|eravate|erano|saremo|sarete|saranno|saremmo|sareste|sarebbero|siano|fossimo|foste|fossero)$/;
+      var ESS_SG = /^(sei|è|ero|eri|era|sarò|sarai|sarà|sarei|saresti|sarebbe|sia|fossi|fosse)$/;
+      if ((ESS_PL.test(w) || ESS_SG.test(w)) && !/^(ci|si)$/.test(p) || (/^(ci|vi)$/.test(p) && ESS_PL.test(w))) {
+        var qk = nextPart(tk, i), qw = qk > 0 ? tk[qk].w : "";
+        if (qk > 0 && /^(stati|state)$/.test(qw)) { var q2 = nextPart(tk, qk); if (q2 > 0 && /[oa]$/.test(tk[q2].w) && !/^(stato|stata)$/.test(tk[q2].w)) push(q2, 1, "participio", "Concuerda con " + it(qw) + ": " + it(tk[q2].w.replace(/o$/, "i").replace(/a$/, "e")) + "."); }
+        else if (qk > 0 && PP(qw) && (auxOf(PP(qw)) === "essere" || /^(stato|stata|stati|state)$/.test(qw) || /^(ci|vi)$/.test(p))) {
+          if (ESS_PL.test(w) && /[oa]$/.test(qw) && !(/^(siete|foste)$/.test(w)))
+            push(qk, 1, "participio", "Con " + it(w) + " el participio va en plural: " + it(qw.replace(/o$/, "i").replace(/a$/, "e")) + ".");
+          else if (ESS_SG.test(w) && /[ie]$/.test(qw) && p !== "si" && !/^(voi|loro)$/.test(p))
+            push(qk, 1, "participio", "Con " + it(w) + " el participio va en singular: " + it(qw.replace(/i$/, "o").replace(/e$/, "a")) + ".");
+        }
+      }
+      if (w === "li" && (AVE_PRES[n] || /^(avevo|aveva|avevamo|avevano|avrei|avrebbe|abbia|avessi|avesse)$/.test(n))) {
+        var lk = nextPart(tk, i + 1);
+        if (lk > 0 && /[oa]$/.test(tk[lk].w) && (U.ARTICLES[p] === undefined)) push(lk, 1, "participio", "Con " + it(w) + " delante, el participio concuerda: " + it(tk[lk].w.replace(/[oa]$/, w === "li" ? "i" : "e")) + ".");
+      }
+      if (w === "ce" && n === "l'" && /^(ho|hai|ha|abbiamo|avete|hanno)$/.test(n2) && /^fatto$/.test(W(i + 3))) push(i + 3, 1, "participio", "En " + it("farcela") + " el participio va en femenino: " + it("ce l'" + n2 + " fatta") + ".");
+      if (/^(me|te|se|ce|ve)$/.test(w) && n === "la" && ESS_ALL[n2]) { var ck3 = nextPart(tk, i + 2); if (ck3 > 0 && /o$/.test(tk[ck3].w) && /^(cavat|pres|sentit|fatt)o$/.test(tk[ck3].w)) push(ck3, 1, "participio", "Con " + it(w + " la") + " el participio va en femenino: " + it(tk[ck3].w.replace(/o$/, "a")) + "."); }
+
+      /* --- sujeto sustantivo y verbo --- */
+      if ((U.ARTICLES[w] && U.ARTICLES[w][2] === "det" || /^(tutti|tutte)$/.test(w)) && (t.start || t.clause || /^(e|ma|poi|quando|perché|mentre|anche|però|se|dove)$/.test(p)) && !PREPS.test(p)) {
+        var sx = i + 1;
+        if (/^(tutti|tutte)$/.test(w) && U.ARTICLES[W(sx)]) sx++;
+        if (POSS[W(sx)] || W(sx) === "loro") sx++;
+        var sn2 = W(sx), sg2 = sn2 && !V(sn2).length && !DATA.adj[sn2] && !TIME_N.test(sn2) ? nounGN(sn2) : null;
+        if (sg2 && sg2.n) {
+          var vx = sx + 1;
+          if (DATA.adj[W(vx)] && !V(W(vx)).length) vx++;
+          var disl = false;
+          while (tk[vx] && tk[vx].w && /^(non|mi|ti|ci|vi|si|lo|la|li|le|gli|ne|l'|già|sempre|ancora|anche|spesso|poi|proprio|davvero|mai)$/.test(tk[vx].w)) { if (/^(lo|la|li|le|l'|ne)$/.test(tk[vx].w)) disl = true; vx++; }
+          var vr = tk[vx] && tk[vx].w ? V(tk[vx].w) : [];
+          var wantP = sg2.n === "p" ? 5 : 2;
+          if (vr.length && !disl && !isNoun(tk[vx].w) && !DATA.adj[tk[vx].w] && !(wantP === 2 && (p === "e" || ESS_ALL[tk[vx].w]))) {
+            if (!vr.some(function (v) { return v.p === wantP || /cong/.test(v.tense); }) && vr.some(function (v) { return v.p === (wantP === 5 ? 2 : 5); })) {
+              var r5 = vr.filter(function (v) { return v.p === (wantP === 5 ? 2 : 5); })[0], f5 = conjSafe(r5.lemma, r5.tense);
+              if (f5 && f5[wantP]) push(vx, 1, "persona_verbale", "El sujeto (" + it(sn2) + ") es " + (wantP === 5 ? "plural" : "singular") + ": " + it(f5[wantP]) + ".");
+            }
+          }
+        }
+      }
+
+      /* --- essere / stare --- */
+      if (ESS_ALL[w] && /^(bene|male|benissimo|malissimo)$/.test(n) && !/^(che|a|da|per)$/.test(n2) && !isInfCl(n2) && w !== "è" && w !== "era" && w !== "sarebbe") {
+        var sv2 = V(w)[0], stf = sv2 && conjSafe("stare", sv2.tense);
+        push(i, 1, "lessico", "Para cómo estás se usa " + it("stare") + ": " + it((stf ? stf[sv2.p] : "sto") + " " + n) + ".");
+      }
+      if (V(w).some(function (v) { return v.lemma === "stare"; }) && !/^(stato|stata|stati|state)$/.test(w)) {
+        var ax = i + 1;
+        if (/^(molto|un|così|proprio|tanto|troppo|abbastanza|davvero)$/.test(W(ax))) ax += W(ax) === "un" ? 2 : 1;
+        var aw2 = W(ax);
+        if (aw2 && DATA.adj[aw2] && !isNoun(aw2) && !V(aw2).length && !/^(zitt|tranquill|attent|ferm|svegli|calm|comod|sedut|buon|bravo|brava|bravi|brave|fresc|allegr|in|sol|simpatic|antipatic)/.test(aw2) && !/(ando|endo)$/.test(aw2) && !/^(mi|ti|gli|le|ci|vi)$/.test(p)) {
+          var sv3 = V(w).filter(function (v) { return v.lemma === "stare"; })[0], esf = conjSafe("essere", sv3.tense);
+          push(i, 1, "lessico", "Con un adjetivo de estado va " + it("essere") + ": " + it((esf ? esf[sv3.p] : "sono") + " " + aw2) + ".");
+        }
+      }
+
+      /* --- falsos amigos en contexto --- */
+      if (hasLem(w, /^salire$/) && /^(di|da|dal|dalla|dall')$/.test(n) && /^(casa|lavoro|ufficio|scuola|palestra|università|cinema|teatro|negozio|bar|ristorante)$/.test(n2))
+        push(i, 1, "falso_amico", it("Salire") + " es subir; salir de un lugar es " + it("uscire") + ".");
+      if (/^(vaso|vasi)$/.test(w) && /^(d'|di)$/.test(n) && /^(acqua|vino|latte|birra|succo)$/.test(n2)) push(i, 1, "falso_amico", "El vaso para tomar es " + it(w === "vaso" ? "bicchiere" : "bicchieri") + " (" + it("vaso") + " es un florero).");
+      if (hasLem(w, /^toccare$/) && (U.ARTICLES[n] ? /^(chitarra|pianoforte|piano|violino|batteria|flauto|basso|tromba|sassofono)$/.test(n2) : /^(chitarra|pianoforte|piano|violino|batteria)$/.test(n)))
+        push(i, 1, "falso_amico", "Tocar un instrumento es " + it("suonare") + ".");
+      if (/^(accidente|accidenti)$/.test(w) && (U.ARTICLES[p] || /^(un|l')$/.test(p))) push(i, 1, "falso_amico", "Un accidente es " + it("un incidente") + " (" + it("accidente") + " es una desgracia o un insulto).");
+      if (hasLem(w, /^contestare$/) && /^(a|al|alla|ai|alle|all')$/.test(n)) push(i, 1, "falso_amico", "Contestar es " + it("rispondere") + " (" + it("contestare") + " es impugnar).");
+      if (w === "attentamente" && t.start && tk[i + 1] && tk[i + 1].p === ",") push(i, 1, "falso_amico", "Para cerrar una carta: " + it("Cordiali saluti") + " (" + it("attentamente") + " es «con atención»).");
+      if (w === "già" && (t.start || t.clause) && (AVE_PRES[n] || ESS_ALL[n]) && nextPart(tk, i + 1) > 0) push(i, 2, "ordine", "El adverbio va entre auxiliar y participio: " + it(n + " già " + tk[nextPart(tk, i + 1)].w) + ".", true);
+
+      /* --- congiuntivo --- */
+      if (week >= 24) {
+        var trig = null;
+        var imper = /^(pensa|pensate|immagina|immaginate|considera|guarda|senti)$/.test(p) && tk[i - 1] && (tk[i - 1].start || tk[i - 1].clause);
+        if (w === "che" && PRES_TRIG.test(p) && !imper) trig = /^(sarebbe|era|fu|sembrava|sarebbe stato)$/.test(p2) ? (week >= 30 ? "past" : null) : "pres";
+        if (w === "che" && PAST_TRIG.test(p)) trig = week >= 30 ? "past" : null;
+        if (w === "che" && CONJ_TRIG2[p] && (p !== "meno" || p2 === "a")) trig = "any";
+        if (CONJ_TRIG.test(w) || (w === "che" && p === "nonostante")) trig = "any";
+        if (w === "se" && p === "come") trig = week >= 30 ? "past" : null;
+        if (trig) {
+          var sk = -1, subjP = null, sawNoun = false;
+          for (var x = i + 1; x < tk.length && x <= i + 6 && tk[x].w; x++) {
+            var xw = tk[x].w;
+            if (/^(io|tu|lui|lei|noi|voi|loro)$/.test(xw)) { subjP = { io: 0, tu: 1, lui: 2, lei: 2, noi: 3, voi: 4, loro: 5 }[xw]; continue; }
+            if (/^(tutti|tutte)$/.test(xw)) { subjP = 5; continue; }
+            if (SKIP_V.test(xw) || U.ARTICLES[xw] || POSS[xw] || DEM.test(xw) || xw === "c'") continue;
+            if ((isNoun(xw) && !V(xw).length) || (tk[x].cap && x > i + 1)) { sawNoun = true; var gx = nounGN(xw); if (gx && gx.n) subjP = gx.n === "p" ? 5 : 2; continue; }
+            if (DATA.adj[xw] && !V(xw).length) continue;
+            sk = x; break;
+          }
+          if (sawNoun && /^(nonostante|malgrado)$/.test(w)) sk = -1;
+          var sw = W(sk), sv = V(sw);
+          if (sk >= 0 && !tk[sk].cap && sv.length && !isNoun(sw) && !sv.some(function (v) { return /cong/.test(v.tense); })) {
+            var pick = function (tn) { var rs = sv.filter(function (v) { return v.tense === tn; }); return rs.filter(function (v) { return v.p === subjP; })[0] || rs.filter(function (v) { return v.p === 2; })[0] || rs[0]; };
+            var pres = pick("presente"), imp = pick("imperfetto");
+            var want = null, fromV = null;
+            if (pres && (trig === "pres" || trig === "any")) { fromV = pres; want = "congiuntivo"; }
+            else if ((pres || imp) && trig === "past") { fromV = pres || imp; want = "congImperfetto"; }
+            else if (imp && trig === "any") { fromV = imp; want = "congImperfetto"; }
+            var cf3 = fromV && conjSafe(fromV.lemma, want);
+            if (cf3 && cf3[fromV.p] && cf3[fromV.p] !== sw && !tk[sk].cap) push(sk, 1, "congiuntivo", "Después de " + it((CONJ_TRIG.test(w) ? w : p + " " + w)) + " va congiuntivo: " + it(cf3[fromV.p]) + ".");
+          }
+        }
+      }
+    }
   }
 
   /* ------------------------------------------------------------ revisión */
@@ -796,15 +1434,24 @@
   }
 
   /* ------------------------------------------------------------ IA
-     Optional: Groq (free key of the learner, no card, OpenAI-style API,
-     answers in a second or two).  It reads the whole text like a teacher,
-     marks everything and explains in Spanish; the key never leaves the
-     phone except to Groq.  Which models a key can use changes over time, so
-     the app asks Groq for the list and takes the best one available. */
-  var AI_PREFER = [/kimi-k2/i, /gpt-oss-120b/i, /llama-3\.3-70b/i, /qwen3?-32b|qwen\//i, /llama-4-maverick/i, /llama-4-scout/i, /gpt-oss-20b/i, /llama-3\.1-8b/i];
-  var AI_SKIP = /whisper|tts|guard|playai|orpheus|distil|compound|allam|embed/i;   // not chat models
-  var AI_FALLBACK = ["moonshotai/kimi-k2-instruct", "openai/gpt-oss-120b", "llama-3.3-70b-versatile", "qwen/qwen3-32b", "llama-3.1-8b-instant"];
-  var AI_URL = "https://api.groq.com/openai/v1";
+     Optional: the learner's own free keys.  Groq first (no card, answers in
+     a second or two), Gemini as fallback when Groq fails or has no key.
+     Both speak the OpenAI-style API.  Which models a key can use changes
+     over time, so the app asks each provider for its list and takes the
+     best one available.  The keys never leave the phone except to them. */
+  var PROVIDERS = [
+    { id: "groq", name: "Groq", url: "https://api.groq.com/openai/v1", maxKey: "max_completion_tokens",
+      prefer: [/kimi-k2/i, /gpt-oss-120b/i, /llama-3\.3-70b/i, /qwen3?-32b|qwen\//i, /llama-4-maverick/i, /llama-4-scout/i, /gpt-oss-20b/i, /llama-3\.1-8b/i],
+      skip: /whisper|tts|guard|playai|orpheus|distil|compound|allam|embed/i,
+      fallback: ["moonshotai/kimi-k2-instruct", "openai/gpt-oss-120b", "llama-3.3-70b-versatile", "qwen/qwen3-32b", "llama-3.1-8b-instant"],
+      reasoning: function (m) { return /gpt-oss/i.test(m) ? "low" : /qwen3/i.test(m) ? "none" : null; } },
+    { id: "gemini", name: "Gemini", url: "https://generativelanguage.googleapis.com/v1beta/openai", maxKey: "max_tokens",
+      prefer: [/^gemini-2\.5-flash$/, /^gemini-flash-latest$/, /^gemini-2\.0-flash$/, /^gemini-2\.5-flash-lite$/, /^gemini-flash-lite-latest$/,
+               /^gemini-2\.0-flash-lite$/, /^gemini-2\.5-pro$/, /^gemini-[\d.]+-flash$/, /^gemini-.*flash/],
+      skip: /embed|imagen|veo|tts|aqa|image|audio|live|native|learnlm|gemma|robotics|computer|thinking/i,
+      fallback: ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-2.5-flash-lite"],
+      reasoning: function (m) { return /pro/i.test(m) ? "low" : /2\.5|latest/i.test(m) ? "none" : null; } }
+  ];
   function aiPrompt(text, week, task) {
     return "Sos profesor de italiano para un hispanohablante rioplatense que está en la semana " + week +
       " de 52 de un curso hasta C1. La consigna era: «" + (task ? task.t : "texto libre") + "».\n" +
@@ -816,7 +1463,7 @@
       "\"corregido\":\"el texto completo corregido\",\"comentario\":\"una o dos oraciones de devolución, en castellano\"}\n\n" +
       "Texto:\n" + text;
   }
-  function aiCheck(text, week, key, done) { llm(aiPrompt(text, week, TASKS[week]), key, done); }
+  function aiCheck(text, week, keys, done) { llm(aiPrompt(text, week, TASKS[week]), keys, done); }
 
   /* Any exercise: why is my answer wrong (or is it right after all)? */
   function explainPrompt(x) {
@@ -830,35 +1477,36 @@
       "con un ejemplo corto en italiano. Si su respuesta en realidad también es correcta, o si la corrección de la app está mal o confunde, decilo claro.\n" +
       "Respondé SOLO con JSON: {\"tambien_correcta\": true o false, \"app_equivocada\": true o false, \"explicacion\": \"...\"}";
   }
-  function explain(x, key, done) { llm(explainPrompt(x), key, done); }
+  function explain(x, keys, done) { llm(explainPrompt(x), keys, done); }
 
-  /* One request at a time through the models, best first: each attempt
-     waits at most 20 s, the whole thing at most 60 s.  The model that
-     answered last time goes first next time. */
-  var MODEL_KEY = "laviac1.groq.model", LIST_KEY = "laviac1.groq.models", PAID_KEY = "laviac1.groq.paid";
+  /* One request at a time through the models of each provider, best first:
+     each attempt waits at most 20 s, each provider at most 40 s.  The model
+     that answered last time goes first next time. */
+  function store(P, k) { return "laviac1." + P.id + "." + k; }
   // Models that answered 402 (payment required) with this key: never asked again.
-  function paid() { try { return JSON.parse(localStorage.getItem(PAID_KEY) || "{}") || {}; } catch (e) { return {}; } }
-  function markPaid(model) { var p = paid(); p[model] = Date.now(); try { localStorage.setItem(PAID_KEY, JSON.stringify(p)); } catch (e) { /* */ } }
-  function models(key, cb) {
+  function paid(P) { try { return JSON.parse(localStorage.getItem(store(P, "paid")) || "{}") || {}; } catch (e) { return {}; } }
+  function markPaid(P, model) { var p = paid(P); p[model] = Date.now(); try { localStorage.setItem(store(P, "paid"), JSON.stringify(p)); } catch (e) { /* */ } }
+  function models(P, key, cb) {
     try {
-      var c = JSON.parse(localStorage.getItem(LIST_KEY) || "null");
+      var c = JSON.parse(localStorage.getItem(store(P, "models")) || "null");
       if (c && c.at > Date.now() - 86400000 && c.ids && c.ids.length) return cb(c.ids);
     } catch (e) { /* */ }
     var ctl = typeof AbortController === "function" ? new AbortController() : null;
     var timer = setTimeout(function () { if (ctl) ctl.abort(); }, 8000);
-    fetch(AI_URL + "/models", { headers: { Authorization: "Bearer " + key }, signal: ctl ? ctl.signal : undefined })
+    fetch(P.url + "/models", { headers: { Authorization: "Bearer " + key }, signal: ctl ? ctl.signal : undefined })
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (j) {
         clearTimeout(timer);
-        var ids = ((j && j.data) || []).filter(function (m) { return m && m.id && m.active !== false && !AI_SKIP.test(m.id); })
-          .map(function (m) { return m.id; });
+        var ids = ((j && j.data) || []).filter(function (m) { return m && m.id && m.active !== false; })
+          .map(function (m) { return String(m.id).replace(/^models\//, ""); })
+          .filter(function (id) { return !P.skip.test(id); });
         var ranked = [];
-        AI_PREFER.forEach(function (rx) { ids.forEach(function (id) { if (rx.test(id) && ranked.indexOf(id) < 0) ranked.push(id); }); });
-        ids.forEach(function (id) { if (ranked.indexOf(id) < 0) ranked.push(id); });
-        if (ranked.length) { try { localStorage.setItem(LIST_KEY, JSON.stringify({ at: Date.now(), ids: ranked })); } catch (e) { /* */ } }
-        cb(ranked.length ? ranked : AI_FALLBACK.slice());
+        P.prefer.forEach(function (rx) { ids.forEach(function (id) { if (rx.test(id) && ranked.indexOf(id) < 0) ranked.push(id); }); });
+        if (P.id === "groq") ids.forEach(function (id) { if (ranked.indexOf(id) < 0) ranked.push(id); });
+        if (ranked.length) { try { localStorage.setItem(store(P, "models"), JSON.stringify({ at: Date.now(), ids: ranked })); } catch (e) { /* */ } }
+        cb(ranked.length ? ranked : P.fallback.slice());
       })
-      .catch(function () { clearTimeout(timer); cb(AI_FALLBACK.slice()); });
+      .catch(function () { clearTimeout(timer); cb(P.fallback.slice()); });
   }
   // The JSON inside a reply (some models think aloud in <think>…</think> or wrap it in ```).
   function jsonOf(txt) {
@@ -866,35 +1514,52 @@
     var a = txt.indexOf("{"), b = txt.lastIndexOf("}");
     return JSON.parse(a >= 0 && b > a ? txt.slice(a, b + 1) : txt);
   }
-  function llm(prompt, key, done) {
+  // keys: {groq, gemini}, or just the Groq key as a string.
+  function llm(prompt, keys, done) {
     if (typeof fetch !== "function") return done(new Error("sin fetch"));
-    models(key, function (list) {
+    if (typeof keys === "string") keys = { groq: keys };
+    keys = keys || {};
+    var todo = PROVIDERS.filter(function (P) { return keys[P.id]; }), errs = [];
+    if (!todo.length) return done(new Error("sin clave"));
+    (function nextProvider() {
+      var P = todo.shift();
+      if (!P) return done(new Error(errs.length > 1 ? errs.join(" · ") : errs[0].replace(/^\w+: /, "")));
+      ask(P, prompt, keys[P.id], function (err, data) {
+        if (!err) return done(null, data);
+        errs.push(P.name + ": " + String(err.message || err));
+        nextProvider();
+      });
+    })();
+  }
+  function ask(P, prompt, key, done) {
+    models(P, key, function (list) {
       // every model of the key, the free-tier-sized ones too, minus those known to be paid
-      var skip = paid(), order = list.filter(function (m) { return !skip[m]; }), deadline = Date.now() + 60000, lastErr = null, plain = {}, n402 = 0;
+      var skip = paid(P), order = list.filter(function (m) { return !skip[m]; }), deadline = Date.now() + 40000, lastErr = null, plain = {}, n402 = 0;
       if (!order.length) order = list.slice();
       try {
-        var good = localStorage.getItem(MODEL_KEY);
+        var good = localStorage.getItem(store(P, "model"));
         if (good && order.indexOf(good) > 0) { order.splice(order.indexOf(good), 1); order.unshift(good); }
       } catch (e) { /* */ }
-      var k = 0;
+      var k = 0, over = false;
+      function finish(err, data) { if (over) return; over = true; done(err, data); }
       function next(err) {
         if (err) lastErr = err;
         if (k >= order.length || Date.now() > deadline) {
-          var m = n402 && n402 === k ? "Groq pide un plan pago para todos los modelos de tu cuenta (402)"
+          var m = n402 && n402 === k ? P.name + " pide un plan pago para todos los modelos de tu cuenta (402)"
                 : lastErr && /abort/i.test(String(lastErr.message || lastErr)) ? "la IA no respondió a tiempo" : String((lastErr && lastErr.message) || lastErr || "sin respuesta");
-          return done(new Error(m));
+          return finish(new Error(m));
         }
         attempt(order[k++]);
       }
       function attempt(model) {
         var ctl = typeof AbortController === "function" ? new AbortController() : null;
         var timer = setTimeout(function () { if (ctl) ctl.abort(); }, Math.min(20000, Math.max(3000, deadline - Date.now())));
-        var body = { model: model, temperature: 0.2, max_completion_tokens: 4096,
+        var body = { model: model, temperature: 0.2,
                      messages: [{ role: "system", content: "Respondés solo con JSON válido." }, { role: "user", content: prompt }] };
-        if (!plain[model]) body.response_format = { type: "json_object" };
-        if (/gpt-oss/i.test(model) && !plain[model]) body.reasoning_effort = "low";
-        if (/qwen3/i.test(model) && !plain[model]) body.reasoning_effort = "none";
-        fetch(AI_URL + "/chat/completions", {
+        body[P.maxKey] = 4096;
+        var re = P.reasoning(model);
+        if (!plain[model]) { body.response_format = { type: "json_object" }; if (re) body.reasoning_effort = re; }
+        fetch(P.url + "/chat/completions", {
           method: "POST", signal: ctl ? ctl.signal : undefined,
           headers: { "Content-Type": "application/json", Authorization: "Bearer " + key },
           body: JSON.stringify(body)
@@ -902,11 +1567,11 @@
           if (r.ok) return r.json();
           return r.text().then(function (b) {
             clearTimeout(timer);
+            if ((r.status === 400 && /api.?key/i.test(b)) || r.status === 401 || r.status === 403) { finish(new Error("HTTP " + r.status + ", clave")); return null; }
             // a model that rejects the JSON mode or the reasoning option: again without them
             if (r.status === 400 && !plain[model] && /response_format|json|reasoning/i.test(b)) { plain[model] = 1; attempt(model); return null; }
-            if (r.status === 401 || r.status === 403) return done(new Error("HTTP " + r.status + ", clave"));
-            if (r.status === 402) { n402++; markPaid(model); next(new Error("HTTP 402")); return null; }
-            next(new Error(r.status === 429 ? "se terminó el cupo por ahora (429)" : r.status >= 500 ? "Groq está saturado ahora (" + r.status + ")" : "HTTP " + r.status));
+            if (r.status === 402) { n402++; markPaid(P, model); next(new Error("HTTP 402")); return null; }
+            next(new Error(r.status === 429 ? "se terminó el cupo por ahora (429)" : r.status >= 500 ? P.name + " está saturado ahora (" + r.status + ")" : "HTTP " + r.status));
             return null;
           });
         }).then(function (j) {
@@ -915,8 +1580,8 @@
           var msg = j.choices && j.choices[0] && j.choices[0].message;
           var data;
           try { data = jsonOf(msg && msg.content); } catch (e) { return next(new Error("respuesta ilegible")); }
-          try { localStorage.setItem(MODEL_KEY, model); } catch (e) { /* */ }
-          done(null, data);
+          try { localStorage.setItem(store(P, "model"), model); } catch (e) { /* */ }
+          finish(null, data);
         }).catch(function (e) { clearTimeout(timer); next(e); });
       }
       next();
@@ -950,7 +1615,7 @@
 
   var api = { TASKS: TASKS, features: features, lint: lint, check: check, markup: markup, weeks: weeks, toks: toks,
               learn: learn, learnCourse: learnCourse, ltCheck: ltCheck, fromLT: fromLT,
-              aiCheck: aiCheck, fromAI: fromAI, aiPrompt: aiPrompt, explain: explain, explainPrompt: explainPrompt };
+              aiCheck: aiCheck, fromAI: fromAI, aiPrompt: aiPrompt, explain: explain, explainPrompt: explainPrompt, PROVIDERS: PROVIDERS };
   if (typeof module === "object" && module.exports) module.exports = api;
   else root.Scrivi = api;
 })(typeof window !== "undefined" ? window : globalThis);

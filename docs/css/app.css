@@ -1093,11 +1093,11 @@ p.model { font-size: 1.02rem; line-height: 1.6; }
 label.ltopt { display: flex; gap: 8px; align-items: flex-start; margin: 10px 2px 0; }
 details.aibox { margin: 10px 2px 0; }
 details.aibox summary { cursor: pointer; }
-details.aibox input { flex: 1 1 60%; min-width: 0; padding: 10px 12px; border-radius: 12px; border: 2px solid var(--grigio-chiaro);
+details.aibox input, .card input#gemkey { display: block; width: 100%; box-sizing: border-box; min-width: 0; padding: 10px 12px; border-radius: 12px; border: 2px solid var(--grigio-chiaro);
   background: var(--carta); color: var(--inchiostro); font: inherit; }
 .aiout { border-top: 1px solid var(--grigio-chiaro); margin-top: 10px; padding-top: 8px; }
 ul.ainotes { padding-left: 18px; margin: 8px 0; }
 ul.ainotes li { margin: 4px 0; }
-.card input#aikey { flex: 1 1 60%; min-width: 0; padding: 10px 12px; border-radius: 12px; border: 2px solid var(--grigio-chiaro);
+.card input#aikey, .card input#gemkey { display: block; width: 100%; box-sizing: border-box; min-width: 0; padding: 10px 12px; border-radius: 12px; border: 2px solid var(--grigio-chiaro);
   background: var(--carta); color: var(--inchiostro); font: inherit; }
 p.version { text-align: center; margin: 18px 0 8px; opacity: .8; }

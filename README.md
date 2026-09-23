@@ -391,7 +391,24 @@ hispanohablante comete de verdad, con la explicación: español metido
 (*cansado*), artículo que no va con el sustantivo (*una amica*, *la
 problema*), *ho andato*, *mi ho lavato*, «a» personal, *il mio padre*, *mio
 libro*, *a il*, *se avrei*, *penso che è* (desde el congiuntivo), *molto
-pasta*, *c'è due*, *lui e alto*, *sono trenta anni*, dobles y tildes. Después
+pasta*, *c'è due*, *lui e alto*, *sono trenta anni*, dobles y tildes, y
+además familias enteras: castellano escrito a la italiana (*perfectamente*,
+*manejare*, *casita*, *andarò*), calcos (*ho che studiare*, *lo che*, *di
+accordo*), preposiciones con ciudades, países, lugares y personas (*in Roma*,
+*a Toscana*, *al medico*, *alla banca*) y con infinitivos (*comincio
+studiare*, *voglio di*), artículos por sonido (*i snack*, *la aranciata*),
+pronombres combinados (*mi la*, *gli la*), relativos (*in che*),
+concordancias (*questo foto*, *i miei chiavi*, *vino rossi*), persona con
+sujeto (*io aiutava*, *la gente sono*, *mi piace i*), auxiliares y
+participios en todos los tiempos (*avrei andato*, *siamo tornato*, *li ho
+visto*, *vivuto*), congiuntivo después de *penso che*, *benché*, *pensavo
+che*, *come se*, y falsos amigos en contexto (*salgo di casa*, *un vaso
+d'acqua*, *toccare la chitarra*). Las reglas se miden con un corpus de 96
+textos de estudiantes con 502 errores anotados (`tools/scrivi_corpus.json`):
+el corrector propio marca el 61 % sin marcar nada en las versiones
+corregidas ni en las frases del curso, y `tools/test_scrivi.js` fija esos
+pisos por familia. Lo que se escapa (pronombres por referente, tiempos
+según el contexto, léxico) lo agarran la IA y LanguageTool. Después
 podés ver un texto modelo. Lo que entregás cuenta como **output** en las
 cuatro cuerdas, suma xp y los errores van al perfil de la clínica. La misión
 es obligatoria para abrir la semana siguiente: es el único lugar del curso
@@ -410,15 +427,18 @@ texto se envía a sus servidores.
 **Corrector con IA (opcional).** LanguageTool casi no controla la
 concordancia ni la persona del verbo en italiano. Para una corrección
 completa, la app usa **Groq** con una clave gratuita del usuario
-(*console.groq.com/keys → Create API Key*, empieza con `gsk_`): la IA marca
-cada error del texto con su explicación en castellano y agrega la versión
-corregida y una devolución. La app le pide a Groq la lista de modelos de esa
-clave y usa el mejor disponible (Kimi K2, gpt-oss-120b, Llama 3.3 70B…), así
-no depende de nombres que cambian; descarta los de audio y los inactivos. Si
-un modelo tarda más de 20 segundos, está saturado, pide plan pago o no acepta
-el modo JSON, prueba el siguiente, y recuerda el que anduvo. La clave queda
-solo en el teléfono (no entra en las copias de seguridad) y el texto se envía
-a Groq. Lo que la IA marca reemplaza lo que el corrector
+(*console.groq.com/keys → Create API Key*, empieza con `gsk_`) y, de
+respaldo, **Gemini** (*aistudio.google.com/apikey*, empieza con `AIza`):
+si Groq falla, no responde a tiempo o no hay clave de Groq, pregunta a
+Gemini. La IA marca cada error del texto con su explicación en castellano y
+agrega la versión corregida y una devolución. A cada servicio la app le pide
+la lista de modelos de esa clave y usa el mejor disponible (en Groq Kimi K2,
+gpt-oss-120b, Llama 3.3 70B…; en Gemini 2.5 Flash, 2.0 Flash, Flash-Lite…),
+así no depende de nombres que cambian; descarta los de audio, imagen,
+embeddings y los inactivos. Si un modelo tarda más de 20 segundos, está
+saturado, pide plan pago o no acepta el modo JSON, prueba el siguiente, y
+recuerda el que anduvo. Las claves quedan solo en el teléfono (no entran en
+las copias de seguridad) y el texto se envía a Groq o a Google. Lo que la IA marca reemplaza lo que el corrector
 propio o LanguageTool dijeron sobre las mismas palabras.
 
 **«🤖 Explicame» en cualquier ejercicio.** Con la clave guardada (en Scrivi o
