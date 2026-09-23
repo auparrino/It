@@ -43,7 +43,7 @@
         ["Cosa vuol dire questa parola?", "¿Qué significa esta palabra?"],
         ["Come si scrive?", "¿Cómo se escribe?"],
         ["Non lo so.", "No sé."],
-        ["Non mi ricordo la parola.", "No me acuerdo la palabra."],
+        ["Non mi ricordo la parola.", "No me acuerdo de la palabra."],
         ["Sto imparando l'italiano.", "Estoy aprendiendo italiano."],
         ["Mi puoi correggere se sbaglio?", "¿Me podés corregir si me equivoco?"],
         ["Ho sbagliato.", "Me equivoqué."],

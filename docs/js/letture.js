@@ -254,7 +254,7 @@
                scherza: "bromea", perfino: "hasta, incluso", portici: "soportales, galerías techadas" },
       questions: [
         ["¿Cómo va Martín a Módena?", ["en tren, todos los días", "en auto", "se mudó allá", "en bicicleta"], "en tren, todos los días"],
-        ["¿Dónde festejan?", ["en el bar donde se conocieron", "en Florencia", "en la empresa", "en Nápoles"], "en el bar donde se conocieron"],
+        ["¿Dónde festejan?", ["en el bar donde tomaron el primer café juntos", "en Florencia", "en la empresa", "en Nápoles"], "en el bar donde tomaron el primer café juntos"],
         ["¿Qué extrañaría Martín si volviera?", ["hasta los portici", "solo la comida", "el trabajo", "nada"], "hasta los portici"]
       ],
       hunt: { label: "Tocá el verbo de cada condición con «se» (congiuntivo)", targets:

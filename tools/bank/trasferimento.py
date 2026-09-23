@@ -308,7 +308,7 @@ ES_IT.update({
     "como te llamas": ("come ti chiami", ""),
     "de donde sos": ("di dove sei", ""),
     "cuanto cuesta": ("quanto costa", ""),
-    "que hora es": ("che ore sono", "Se pregunta en plural: che ore sono? → sono le tre (è l'una)."),
+    "que hora es": ("che ore sono", "Se pregunta en plural (che ore sono?) o en singular (che ora è?): sono le tre / è l'una."),
 })
 
 # ---------------------------------------------------------------------------

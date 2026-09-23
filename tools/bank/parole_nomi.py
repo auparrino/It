@@ -1349,7 +1349,7 @@ NOUNS += [
     ("mouse", "m", "mouse", "mouse", "tecnologia", "B1", "Invariable."),
     ("stampante", "f", "stampanti", "impresora", "tecnologia", "A2", "S + consonante pero femenino: la stampante."),
     ("internet", "m", "internet", "internet", "tecnologia", "A1", "Invariable; se usa casi siempre sin artículo."),
-    ("rete", "f", "reti", "red / arco (gol)", "tecnologia", "B1", ""),
+    ("rete", "f", "reti", "red / gol (fútbol)", "tecnologia", "B1", ""),
     ("sito", "m", "siti", "sitio (web)", "tecnologia", "A2", ""),
     ("email", "f", "email", "mail / correo electrónico", "tecnologia", "A1", "Femenino e invariable: l'email, le email."),
     ("messaggio", "m", "messaggi", "mensaje", "tecnologia", "A1", "Doble s y doble g: messaggio."),

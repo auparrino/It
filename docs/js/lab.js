@@ -46,7 +46,7 @@
               ["sensible", "sensibile"], ["amable", "amabile"], ["admirable", "ammirabile"]] },
 
     { id: "tt", h: "-ct- / -pt- → -tt-",
-      body: "Donde el español tiene **ct** o **pt**, el italiano dobla la **t**: *perfecto → perfetto*, *septiembre → settembre*. Lo mismo con **x** → **ss**: *exacto → esatto*. Y a veces donde el español ya simplificó el grupo latino: *escrito → scritto*, *objeto → oggetto*.",
+      body: "Donde el español tiene **ct** o **pt**, el italiano dobla la **t**: *perfecto → perfetto*, *septiembre → settembre*. Lo mismo con **x** → **ss** entre vocales: *máximo → massimo*, *próximo → prossimo* (pero *exacto → esatto*: **ex-** + vocal da **es-**). Y a veces donde el español ya simplificó el grupo latino: *escrito → scritto*, *objeto → oggetto*.",
       ex: [["perfecto", "perfetto"], ["exacto", "esatto"]],
       words: [["perfecto", "perfetto"], ["efecto", "effetto"], ["director", "direttore"],
               ["actor", "attore"], ["exacto", "esatto"], ["proyecto", "progetto"],
