@@ -250,7 +250,7 @@ LESSONS = {
                      ["noi", "parlavamo", "vendevamo", "dormivamo", "eravamo"],
                      ["voi", "parlavate", "vendevate", "dormivate", "eravate"],
                      ["loro", "parlavano", "vendevano", "dormivano", "erano"]]},
-  "p": ["Solo cuatro verbos son irregulares, y siempre por la misma razón "
+  "p": ["Solo unos pocos verbos son irregulares, y siempre por la misma razón "
         "(recuperan la raíz latina): *essere* → *ero*; *fare* → *facevo*; "
         "*dire* → *dicevo*; *bere* → *bevevo*. También *tradurre* → *traducevo* "
         "y *porre* → *ponevo*."]},
@@ -293,7 +293,7 @@ LESSONS = {
  {"h": "Otros usos del imperfetto",
   "p": ["Cortesía: *Volevo un caffè* (quería un café, más suave que *voglio*). "
         "Petición: *Cercavo il signor Rossi*. Y en el italiano coloquial, el "
-        "imperfetto sustituye al condicional compuesto en las hipótesis: "
+        "imperfetto sustituye al congiuntivo trapassato y al condicional compuesto en las hipótesis: "
         "*Se lo sapevo, non venivo* por *se l'avessi saputo, non sarei venuto*. "
         "Reconocelo, pero en el examen escribí la forma culta."]},
 ]},

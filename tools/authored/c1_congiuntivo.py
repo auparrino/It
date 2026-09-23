@@ -32,7 +32,7 @@ ITEMS = [
          note="La negación de un verbo declarativo lo vuelve subjetivo: «dico che è» "
               "pero «non dico che sia»."),
     dict(id="c1-cong-05", type="choice", topic="congiuntivo",
-         prompt="Elegí la forma correcta.",
+         prompt="Elegí la forma correcta (registro cuidado).",
          stem="Si dice che ___ molto brava.",
          options=["sia", "è", "era"], answer="sia",
          note="«Si dice che» (se dice que) introduce rumor, no hecho: congiuntivo."),
@@ -97,7 +97,7 @@ ITEMS = [
     dict(id="c1-conc-02", type="choice", topic="concordanza",
          prompt="Elegí la forma correcta.",
          stem="Credo che ieri ___ troppo.",
-         options=["abbia lavorato", "lavorasse", "avesse lavorato"],
+         options=["abbia lavorato", "lavori", "avesse lavorato"],
          answer="abbia lavorato",
          note="Principal en presente + acción pasada → congiuntivo passato."),
     dict(id="c1-conc-03", type="choice", topic="concordanza",

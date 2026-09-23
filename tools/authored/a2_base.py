@@ -134,7 +134,7 @@ ITEMS = [
     dict(id="a2-pr-03", type="cloze", topic="passato remoto", level="C1",
          prompt="Completá con el passato remoto.",
          stem="Tu ___ (dire) la verità.", answer="dicesti",
-         note="La 2ª persona es siempre regular: dicesti, no «dissesti»."),
+         note="En los pretéritos fuertes la 2ª persona es regular: dicesti, no «dissesti»."),
     dict(id="a2-pr-04", type="choice", topic="passato remoto", level="C1",
          prompt="Elegí la forma correcta.",
          stem="Appena ___ finito, uscimmo.",

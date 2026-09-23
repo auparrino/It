@@ -268,7 +268,7 @@ ITEMS = [
     dict(id="rf-16-08", type="choice", topic="avverbi", level="B1",
          prompt=CE, stem="Stanotte ho dormito ___ del solito.",
          options=["peggio", "peggiore", "più male"], answer="peggio",
-         note="Comparativo de «male» = peggio. «Più male» no se usa."),
+         note="Comparativo de «male» = peggio. «Più male» es coloquial y se evita en la lengua cuidada."),
     dict(id="rf-16-09", type="choice", topic="avverbi", level="B1",
          prompt="Elegí el orden natural (ya comí).",
          stem="___", options=["Ho già mangiato", "Ho mangiato già", "Già ho mangiato"],
@@ -804,7 +804,7 @@ ITEMS = [
     # ================= Settimana 46: Costruzioni verbali speciali =================
     dict(id="rf-46-01", type="choice", topic="costruzioni", level="C1",
          prompt=CE, stem="Se la festa non ti piace, ___ pure.",
-         options=["vattene", "vatti", "vanne"], answer="vattene",
+         options=["vattene", "vatti", "vanno"], answer="vattene",
          note="Imperativo de andarsene: vattene (tú), andatevene (vosotros)."),
     dict(id="rf-46-02", type="choice", topic="costruzioni", level="C1",
          prompt="Elegí el futuro de «farcela» (noi).",

@@ -109,9 +109,9 @@ ITEMS = [
     dict(id="b2-pass-03", type="choice", topic="passato",
          prompt="Elegí el auxiliar correcto.",
          stem="___ molto ieri sera.", options=["Ho piovuto", "È piovuto",
-                                               "Era piovuto"], answer="È piovuto",
+                                               "Sono piovuto"], answer="È piovuto",
          note="Verbos meteorológicos admiten los dos (è piovuto / ha piovuto); "
-              "«ho piovuto» falla por la persona."),
+              "«ho piovuto» y «sono piovuto» fallan por la persona."),
     dict(id="b2-pass-04", type="cloze", topic="passato",
          prompt="Completá con el passato prossimo.",
          stem="Loro ___ (dovere) partire presto.",

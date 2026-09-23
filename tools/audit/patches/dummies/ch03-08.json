@@ -1755,7 +1755,9 @@
    "stem": "Ellos siguen.",
    "answer": "Seguono.",
    "alt": [
-    "Loro seguono."
+    "Loro seguono.",
+    "Continuano.",
+    "Loro continuano."
    ],
    "drop": false
   },
@@ -1780,7 +1782,9 @@
    "alt": [
     "Parto domani ma torno sabato.",
     "Io parto domani ma ritorno sabato.",
-    "Io parto domani ma torno sabato."
+    "Io parto domani ma torno sabato.",
+    "Vado via domani ma torno sabato.",
+    "Vado via domani ma ritorno sabato."
    ],
    "drop": false
   },

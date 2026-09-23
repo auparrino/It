@@ -1166,10 +1166,10 @@
     "stem": "Mauro è ___ oggi.",
     "answer": "fuori città",
     "alt": [],
-    "note": "Fuori città es una expresión fija sin di.",
+    "note": "Fuori città: expresión fija, sin di (a veces fuori di città) y nunca con a.",
     "options": [
      "fuori città",
-     "fuori di città"
+     "fuori a città"
     ]
    },
    {
@@ -1576,10 +1576,10 @@
     "label": "b",
     "type": "translate",
     "stem": "Mi hermana es experta en la Italia medieval.",
-    "answer": "Mia sorella è un'esperta di Italia medievale.",
+    "answer": "Mia sorella è un'esperta dell'Italia medievale.",
     "alt": [
+     "Mia sorella è un'esperta di Italia medievale.",
      "Mia sorella è esperta di Italia medievale.",
-     "Mia sorella è un'esperta dell'Italia medievale.",
      "Mia sorella è esperta dell'Italia medievale.",
      "Mia sorella è un'esperta dell'Italia medioevale."
     ],
@@ -2313,7 +2313,9 @@
     "type": "translate",
     "stem": "un millón de pesetas",
     "answer": "un milione di pesete",
-    "alt": [],
+    "alt": [
+     "un milione di pesetas"
+    ],
     "note": "Milione es sustantivo y va con di."
    },
    {

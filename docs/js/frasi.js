@@ -133,7 +133,7 @@
         ["Sono d'accordo con te.", "Estoy de acuerdo con vos."],
         ["Non sono del tutto convinto.", "No estoy del todo convencido."],
         ["Facciamo il punto della situazione.", "Hagamos un resumen de la situación."],
-        ["Ci aggiorniamo la settimana prossima.", "Nos actualizamos la semana que viene."],
+        ["Ci aggiorniamo la settimana prossima.", "Nos ponemos al día la semana que viene."],
         ["Oggi lavoro da casa.", "Hoy trabajo desde casa."],
         ["Che noia questa riunione!", "¡Qué aburrida esta reunión!"],
         ["Ho un sacco di lavoro.", "Tengo un montón de trabajo."],

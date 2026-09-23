@@ -1241,7 +1241,7 @@
       '<div class="sol">' + esc(it.answer) + "</div>" +
       (it.note ? '<div class="note">' + mk(it.note) + "</div>" : "") +
       '<div class="note">🔬 Intentar adivinar antes de aprender ayuda a recordar, ' +
-        "aunque le erres (efecto de la prueba previa).</div>" +
+        "aunque te equivoques (efecto de la prueba previa).</div>" +
       '<div class="row" style="margin-top:10px"><button class="btn" id="next">Continuar →</button></div></div>';
     document.querySelectorAll(".opt").forEach(function (o) {
       o.disabled = true;

@@ -175,7 +175,7 @@ _A1 = [
     ("Espero a Laura en la estación.", ["Aspetto Laura alla stazione.", "Aspetto Laura in stazione."], "a_personale", ("Aspetto", "aspettare"),
      "Esperar a alguien = aspettare qualcuno, sin a."),
     ("Busco a mi perro.", ["Cerco il mio cane."], "a_personale possessivi", ("Cerco", "cercare"),
-     "Buscar = cercare, sin a. Animales llevan artículo: il mio cane."),
+     "Buscar = cercare, sin a. Con posesivo va artículo (salvo familiares en singular): il mio cane."),
     ("Veo a mis amigos el sábado.", ["Vedo i miei amici sabato.", "Sabato vedo i miei amici."], "a_personale possessivi", ("Vedo", "vedere"),
      "Sin a personal: vedo i miei amici."),
     ("Quiero mucho a mi abuela.", ["Voglio molto bene a mia nonna.", "Voglio tanto bene a mia nonna."], "lessico possessivi", ("Voglio", "volere"),

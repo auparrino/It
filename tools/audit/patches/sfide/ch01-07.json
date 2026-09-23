@@ -565,7 +565,9 @@
     "type": "cloze",
     "stem": "Nel 1861 Vittorio Emanuele II, re ___ Sardegna, fu proclamato Re ___ Italia. (di/della – d'/dell')",
     "answer": "di | d'",
-    "alt": [],
+    "alt": [
+     "di | di"
+    ],
     "note": "En los títulos se usa «di» sin artículo: re di Sardegna, Re d'Italia."
    }
   ]

@@ -776,8 +776,7 @@
     "alt": [
      "Grazie, molto gentile.",
      "Grazie, sei gentilissimo.",
-     "Grazie, sei gentilissima.",
-     "Grazie, è molto gentile."
+     "Grazie, sei gentilissima."
     ],
     "note": "En italiano se dice 'sei gentile' (o 'molto gentile'), no 'quello è gentile'."
    }
@@ -879,13 +878,17 @@
     "label": "d",
     "type": "translate",
     "stem": "Come lo sai che Tilda si separa dal marito? – Mi hermano es amigo del marido; así me enteré.",
-    "answer": "Mio fratello è amico di suo marito, ecco come lo so.",
+    "answer": "Mio fratello è amico di suo marito, ecco come l'ho saputo.",
     "alt": [
+     "Mio fratello è un amico di suo marito, ecco come l'ho saputo.",
+     "Mio fratello è amico del marito, ecco come l'ho saputo.",
+     "Mio fratello è un amico del marito, ecco come l'ho saputo.",
+     "Mio fratello è amico di suo marito, ecco come lo so.",
      "Mio fratello è un amico di suo marito, ecco come lo so.",
      "Mio fratello è amico del marito, ecco come lo so.",
      "Mio fratello è un amico del marito, ecco come lo so."
     ],
-    "note": "Ecco come lo so = así es como lo sé."
+    "note": "Ecco come l'ho saputo = así me enteré (ecco come lo so = así es como lo sé)."
    }
   ]
  },
@@ -1077,7 +1080,8 @@
     "stem": "No pagaste, ¿no? (tu)",
     "answer": "Non hai pagato, vero?",
     "alt": [
-     "Non hai pagato, no?"
+     "Non hai pagato, no?",
+     "Non hai pagato, non è vero?"
     ],
     "note": "Tras una frase negativa también se usa vero?"
    },
@@ -1144,7 +1148,9 @@
     "type": "translate",
     "stem": "¿Cuándo se van? (voi)",
     "answer": "Quando partite?",
-    "alt": [],
+    "alt": [
+     "Quando ve ne andate?"
+    ],
     "note": "Con pronombre sujeto implícito: interrogativo + verbo."
    },
    {
@@ -1957,7 +1963,7 @@
   ]
  },
  "r11-03": {
-  "consigna": "¿Qué comentás? Escribí en italiano la exclamación entre paréntesis (con come o quanto).",
+  "consigna": "¿Qué comentás? Escribí en italiano la exclamación (con come o quanto).",
   "interactive": true,
   "items": [
    {
@@ -2058,7 +2064,7 @@
     "options": [
      "Che bella!",
      "Che bello!",
-     "Com'è bello!"
+     "Com'è bella!"
     ],
     "answer": "Che bello!",
     "alt": [],
@@ -4003,7 +4009,10 @@
     "stem": "No encontré absolutamente nada.",
     "answer": "Non ho mica trovato niente.",
     "alt": [
-     "Non ho mica trovato nulla."
+     "Non ho mica trovato nulla.",
+     "Non ho trovato proprio niente.",
+     "Non ho trovato proprio nulla.",
+     "Non ho trovato niente di niente."
     ],
     "note": "Mica refuerza la negación: non … mica … niente."
    },

@@ -191,9 +191,9 @@ LESSONS = {
                      ["noi", "parlassimo", "vendessimo", "dormissimo", "fossimo"],
                      ["voi", "parlaste", "vendeste", "dormiste", "foste"],
                      ["loro", "parlassero", "vendessero", "dormissero", "fossero"]]},
-  "p": ["Los únicos irregulares son los mismos de siempre, y por la misma razón "
+  "p": ["Los irregulares principales son los mismos de siempre, y por la misma razón "
         "latina: *essere → fossi*; *fare → facessi*; *dire → dicessi*; "
-        "*bere → bevessi*; *dare → dessi*; *stare → stessi*. Todo lo demás es "
+        "*bere → bevessi*; *dare → dessi*; *stare → stessi* (y *porre → ponessi*, *tradurre → traducessi*). Todo lo demás es "
         "raíz del infinitivo + *-assi / -essi / -issi*."],
   "warn": "*noi* lleva doble ese y termina en *-ssimo* (*parlassimo*), que se "
           "parece peligrosamente al superlativo. Y las dos primeras personas "
@@ -243,7 +243,7 @@ LESSONS = {
   "table": {"head": ["Principal", "Anterior", "Simultáneo", "Posterior"],
             "rows": [["presente / futuro", "congiuntivo passato",
                       "congiuntivo presente", "congiuntivo presente"],
-                     ["pasado / condicional", "congiuntivo trapassato",
+                     ["pasado", "congiuntivo trapassato",
                       "congiuntivo imperfetto", "condizionale passato"]]},
   "ex": [["Credo che sia partito / parta / parta domani.",
           "Creo que salió / sale / sale mañana."],

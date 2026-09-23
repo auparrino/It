@@ -356,7 +356,7 @@ LESSONS = {
           "*se l'è presa*. Es un automatismo que hay que fijar."},
 
  {"h": "avercela y averci",
-  "p": ["En el italiano hablado, *avere* casi siempre lleva un *ci* de apoyo "
+  "p": ["En el italiano hablado, *avere* con *lo, la, li, le, ne* lleva casi siempre un *ci* de apoyo "
         "sin significado: *ce l'ho*, *ce n'hai?*, *ci ho fame* (regional). "
         "*Hai una penna? — Sì, ce l'ho.* Sin el *ce* suena antinatural."]},
 

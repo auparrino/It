@@ -189,7 +189,7 @@
               ["Immagino che siano stanchi.", "como opinión / deseo"], ["È chiaro che sono stanchi.", "como un hecho"]] },
 
     { id: "cortesia", h: "¿Pedido cortés o directo?",
-      body: "El **condizionale** (*vorrei, potrebbe, sarebbe*) suaviza: es la forma educada de pedir en un bar, una oficina o un mail. El presente (*voglio, può*) suena directo y hasta brusco con desconocidos.",
+      body: "El **condizionale** (*vorrei, potrebbe, sarebbe*) suaviza: es la forma educada de pedir en un bar, una oficina o un mail. El presente (*voglio, può*) es más directo; *voglio* puede sonar brusco con desconocidos.",
       q: "¿Cómo suena?",
       opts: ["cortés / suave", "directo"],
       items: [["Vorrei un caffè.", "cortés / suave"], ["Voglio un caffè.", "directo"],

@@ -247,7 +247,7 @@
   "d16-031": {
    "consigna": "Reemplazá el objeto directo [entre corchetes] por un pronombre (lo, la, li, le) y hacé concordar el participio.",
    "type": "cloze",
-   "stem": "La nonna ha mandato [baci] a noi. → La nonna ___ a noi.",
+   "stem": "La nonna ha mandato [i baci] a noi. → La nonna ___ a noi.",
    "answer": "li ha mandati",
    "alt": [],
    "drop": false,
@@ -291,7 +291,7 @@
   "d16-036": {
    "consigna": "Reemplazá el objeto directo [entre corchetes] por un pronombre (lo, la, li, le) y hacé concordar el participio.",
    "type": "cloze",
-   "stem": "Gli studenti hanno ordinato [vino ed acqua]. → Gli studenti ___.",
+   "stem": "Gli studenti hanno ordinato [il vino e l'acqua]. → Gli studenti ___.",
    "answer": "li hanno ordinati",
    "alt": [],
    "drop": false

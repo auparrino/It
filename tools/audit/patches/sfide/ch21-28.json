@@ -3051,7 +3051,7 @@
    {
     "label": "b",
     "type": "cloze",
-    "stem": "___ tutti gli amici ___ viaggiare all'estero? (¿A todos tus amigos les gusta viajar al exterior?)",
+    "stem": "___ tutti i tuoi amici ___ viaggiare all'estero? (¿A todos tus amigos les gusta viajar al exterior?)",
     "answer": "A | piace",
     "alt": [],
     "note": "A + persona; con infinitivo, piace en singular."
@@ -3942,15 +3942,15 @@
     "label": "a",
     "type": "translate",
     "stem": "Voy a hacer que Barbara despache la carta.",
-    "answer": "Farò spedire la lettera a Barbara.",
+    "answer": "Farò spedire la lettera da Barbara.",
     "alt": [
+     "Farò spedire la lettera a Barbara.",
      "Farò imbucare la lettera a Barbara.",
-     "Farò spedire la lettera da Barbara.",
      "Farò imbucare la lettera da Barbara.",
      "Faccio spedire la lettera a Barbara.",
      "Faccio imbucare la lettera a Barbara."
     ],
-    "note": "Fare + infinitivo + objeto: quien lo hace va con a (o da)."
+    "note": "Fare + infinitivo + objeto: quien lo hace va con da (o a, pero con a Barbara podría ser la destinataria)."
    },
    {
     "label": "b",
@@ -3984,7 +3984,7 @@
      "Farò portare Carla da Patrizio.",
      "Faccio accompagnare Carla da Patrizio."
     ],
-    "note": "Con a se entendería «llevar a Carla a lo de Patrizio»: se usa da."
+    "note": "Con a se entendería que Carla es llevada a Patrizio (como destinatario): se usa da."
    }
   ]
  },

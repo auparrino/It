@@ -458,7 +458,7 @@
   "d10-031": {
    "consigna": "Completá con piacere en pasado: passato prossimo (è piaciuto/a, sono piaciuti/e: una vez, «gustó») o imperfetto (piaceva, piacevano: costumbre o estado, «gustaba»).",
    "type": "conjugate",
-   "stem": "Questo ultimo disegno non ci ___. (no nos gustó)",
+   "stem": "Quest'ultimo disegno non ci ___. (no nos gustó)",
    "answer": "è piaciuto",
    "alt": [],
    "drop": false,
