@@ -149,23 +149,37 @@
 
   /* ------------------------------------------------------------- pronuncia */
 
-  var voice = null;
+  var voice = null, voices = [];
   // force: the learner tapped 🔊 explicitly, so play even in office mode
-  // (they may have earphones on).
-  function speak(text, force, rate) {
-    if (!window.speechSynthesis) return;
-    if (state.silent && !force) return;
+  // (they may have earphones on).  opts: { pitch, vi (which Italian voice),
+  // onboundary, onend, onstart, keep (do not cancel what is playing) }.
+  function speak(text, force, rate, opts) {
+    if (!window.speechSynthesis) return null;
+    if (state.silent && !force) return null;
+    opts = opts || {};
     var u = new SpeechSynthesisUtterance(String(text).replace(/_+/g, " "));
     u.lang = "it-IT";
-    if (voice) u.voice = voice;
+    var v = opts.vi != null && voices.length ? voices[opts.vi % voices.length] : voice;
+    if (v) u.voice = v;
     u.rate = rate || 0.95;
-    window.speechSynthesis.cancel();
+    if (opts.pitch) u.pitch = opts.pitch;
+    if (opts.onboundary) u.onboundary = opts.onboundary;
+    if (opts.onend) u.onend = opts.onend;
+    if (opts.onstart) u.onstart = opts.onstart;
+    if (!opts.keep) window.speechSynthesis.cancel();
     window.speechSynthesis.speak(u);
+    return u;
+  }
+  // An item of the listening module carries its own voice (variability).
+  function speakItem(it, force, rate) {
+    var v = it.voice || {};
+    return speak(it.say || it.stem, force, rate || v.rate, { pitch: v.pitch, vi: v.vi });
   }
   function pickVoice() {
     if (!window.speechSynthesis) return;
     var vs = window.speechSynthesis.getVoices();
-    voice = vs.filter(function (v) { return /^it/i.test(v.lang); })[0] || null;
+    voices = vs.filter(function (v) { return /^it/i.test(v.lang); });
+    voice = voices[0] || null;
   }
   if (window.speechSynthesis) {
     pickVoice();
@@ -235,6 +249,7 @@
 
   function go(tab) {
     stopLampo();
+    if (karaoke) { stopKaraoke(); document.body.classList.remove("kar-partial", "kar-audio"); }
     view.tab = view.screen = tab;
     render();
     window.scrollTo(0, 0);
@@ -321,7 +336,10 @@
         '<span class="e">🔁</span><b>Ripasso</b><small>' +
         (due ? "hoy: " + dueToday + (due > 20 ? " (quedan " + due + ")" : " para repasar") : "nada pendiente") + "</small></button>" +
       (state.unlocked >= 2 && Banca.loaded() ? '<button class="bigbtn parole" data-bank="b-voc"><span class="e">📚</span><b>Parole</b><small>' +
-        nWords.toLocaleString("es-AR") + " / " + wordGoal.toLocaleString("es-AR") + " palabras</small></button>" : "") +
+        nWords.toLocaleString("es-AR") + " / " + wordGoal.toLocaleString("es-AR") + " palabras" +
+        (window.Freq && Freq.loaded() ? " · " + Freq.coverage(knownWords()).fundamental[0] + " de las 2.000 frecuentes" : "") + "</small></button>" : "") +
+      (matureWords().length >= 30 ? '<button class="bigbtn lampo" id="lampoparole"><span class="e">🧠</span>' +
+        "<b>Parola o no?</b><small>reconocer en un segundo · récord: " + ((state.best || {}).lampoParole || 0) + "</small></button>" : "") +
       (known >= 12 ? '<button class="bigbtn lampo" id="lampo"><span class="e">⚡</span>' +
         "<b>Lampo 60″</b><small>récord: " + ((state.best || {}).lampo || 0) + "</small></button>" : "") +
       "</div>" +
@@ -421,6 +439,9 @@
         '<button class="lab" data-lab="capire"><span class="e">🎯</span><b>Capire</b>' +
           '<span class="muted">Leer la gramática: quién, cuándo, cuántos, seguro o no.</span>' +
           '<span class="meta">' + pc.seen + "/" + pc.total + "</span></button>" +
+        (window.Suoni && Suoni.data() ? '<button class="lab" data-lab="suoni"><span class="e">🎧</span><b>Suoni</b>' +
+          '<span class="muted">Dobles, vocales, z, gli: ¿cuál escuchaste? Habla conectada, entonación y dictado.</span>' +
+          '<span class="meta">' + Suoni.progress(state.unlocked, state.cards).seen + "/" + Suoni.progress(state.unlocked, state.cards).total + " pares</span></button>" : "") +
       "</div>" +
       '<p class="muted science">🔬 Ponte usa la transferencia desde tu lengua (Ringbom); ' +
       "Capire es input estructurado: primero interpretar la forma, después producirla (VanPatten).</p>";
@@ -490,6 +511,12 @@
       });
       html += "</div>";
     });
+    var doneN = Object.keys(done).filter(function (id) { return Letture.byId(id); }).length;
+    if (doneN) {
+      html += '<div class="card"><b>🎧 Ascolto facile</b><p class="muted">Re-escuchá las ' + doneN + " lecturas que ya hiciste, solo audio, una tras otra: " +
+        "material conocido a velocidad normal es lo que hace crecer la fluidez del oído (Chang & Millett 2014). Esta semana: " + listeningWeek() + " min.</p>" +
+        '<button class="btn" id="playlib">▶ Escuchar todas</button></div>';
+    }
     html += '<p class="muted science">🔬 Input comprensible (Krashen) con glosario para cubrir ' +
       "el ~98% del vocabulario (Hu y Nation); después, la caza de formas te hace notar la " +
       "gramática dentro de un texto que ya entendiste (Schmidt).</p>";
@@ -500,10 +527,12 @@
 
   // Text of an episode as tappable words.  mode "read": glossed words open
   // their meaning; mode "hunt": every word can be selected.
-  function renderText(ep, mode) {
+  function renderText(ep, mode, enh) {
     var k = 0;
     glossIndex = [];
-    return '<div class="text' + (mode === "hunt" ? " hunt" : "") + '">' +
+    var forms = enh && ep.flood ? ep.flood.forms : null;
+    var isForm = function (t) { return forms && (forms.indexOf(Letture.bare(t)) >= 0 || forms.indexOf(Letture.core(t)) >= 0); };
+    return '<div class="text' + (mode === "hunt" ? " hunt" : "") + (enh ? " enh" : "") + '">' +
       Letture.paragraphs(ep).map(function (par) {
         return "<p>" + Letture.tokens(par).map(function (t) {
           var i = k++;
@@ -513,21 +542,35 @@
           var g = Letture.glossFor(ep, t);
           if (g) {
             glossIndex[i] = Letture.bare(t) + " — " + g;
-            return '<span class="w gl" data-gl="' + i + '">' + esc(t) + "</span>";
+            return '<span class="w gl' + (isForm(t) ? " form" : "") + '" data-k="' + i + '" data-gl="' + i + '">' + esc(t) + "</span>";
           }
-          return esc(t);
+          return '<span class="w' + (isForm(t) ? " form" : "") + '" data-k="' + i + '">' + esc(t) + "</span>";
         }).join(" ") + "</p>";
       }).join("") + "</div>";
   }
 
   function renderLettura(ep) {
+    stopKaraoke();
+    var rate = view.karRate || 1, enh = !!view.enh && !!ep.flood;
     return '<button class="btn ghost" id="lback">' + (view.epFrom === "briefing" ? "← a la semana" : "← a Leggi") + "</button>" +
       "<h1>" + ep.emoji + " " + esc(ep.title) + "</h1>" +
-      '<p class="lead">' + (ep.area ? esc(ep.area) + " · " : "Martín a Bologna · episodio " + ep.n + " · ") +
+      '<p class="lead">' + (ep.area ? esc(ep.area) + " · " : ep.series === "flood" ? "Inondazione · " + esc(ep.grammar) + " · " : "Martín a Bologna · episodio " + ep.n + " · ") +
         esc(ep.level) + "</p>" +
-      '<div class="card">' + renderText(ep, "read") +
-        '<div class="row"><button class="tab" id="readall">🔊 escuchar todo</button>' +
-        '<button class="tab" id="readslow">🐢 lento</button></div></div>' +
+      (enh ? '<div class="note flood">🌊 Segunda lectura: <b>' + esc(ep.flood.es) + "</b> Mirá cada forma resaltada y preguntate por qué está así. " +
+        '<button class="tab" id="enhoff">sin marcas</button></div>' : "") +
+      '<div class="card">' + renderText(ep, "read", enh) +
+        '<div class="karbar">' +
+          '<button class="btn" id="karplay">🎧 Leggi e ascolta</button>' +
+          '<span class="seg">' + [[0.8, "0,8×"], [1, "1×"], [1.15, "1,15×"]].map(function (r) {
+            return '<button class="tab' + (rate === r[0] ? " on" : "") + '" data-rate="' + r[0] + '">' + r[1] + "</button>";
+          }).join("") + "</span>" +
+          '<span class="seg"><button class="tab on" data-karmode="full">texto</button>' +
+            '<button class="tab" data-karmode="partial">solo claves</button>' +
+            '<button class="tab" data-karmode="audio">solo audio</button></span>' +
+        "</div>" +
+        '<p class="muted small">Primera pasada con el texto a 0,8×, segunda a 1× solo con las palabras clave, tercera solo audio: la escucha ' +
+        "cuenta como input y suma xp. Esta semana llevás " + listeningWeek() + " min de escucha.</p></div>" +
+      (ep.flood && !enh ? '<button class="btn wide ghost" id="enh">🌊 Segunda lectura con la estructura resaltada</button>' : "") +
       '<button class="btn wide" id="lquiz">Lo leí → preguntas y caza de formas</button>';
   }
 
@@ -986,6 +1029,16 @@
       if (w.week === Banca.GAP_WEEK) m({ kind: "b-gap", done: bankDone(/^b:gap:/), ico: "🔧", title: "Banco: Coniuga in contesto",
         sub: "El verbo justo dentro de una oración real." });
     }
+    if (window.Suoni && Suoni.data() && w.week <= 40) {
+      var sp = Suoni.progress(w.week, state.cards), sdone = !!(state.suoniDone || {})[w.week];
+      m({ kind: "suoni", done: sdone, ico: "🎧", title: "Suoni: el oído",
+          sub: (sdone ? "Hecha · " : "") + "pares mínimos, habla conectada, entonación y un dictado · " + sp.seen + " / " + sp.total + " pares oídos" });
+    }
+    if (window.Suoni && Suoni.dgFor(w.week)) {
+      var dgt = Suoni.dgFor(w.week), dgd = (state.dictogloss || {})[w.week];
+      m({ kind: "dictogloss", done: !!dgd, ico: "📝", title: "Dictogloss: " + dgt.title,
+          sub: dgd ? "Hecho · " + dgd.found + " / " + dgd.n + " bloques recuperados" : "Escuchalo dos veces, anotá y reconstruilo: seis bloques a recuperar" });
+    }
     var domDone = Drills.dominated(st, w, state);
     m({ kind: "play2", done: domDone, ico: "🏆", title: "Dominala",
         sub: domDone ? "Dominada" + (st.domPct ? " · " + st.domPct + " %" : "")
@@ -1024,6 +1077,8 @@
     else if (kind === "scene" || kind === "ponte" || kind === "falsi" || kind === "capire" ||
              kind === "b-forme" || kind === "b-tr" || kind === "b-gap") startRound(kind, arg);
     else if (kind === "ep") { view.ep = arg; view.epFrom = "briefing"; view.screen = "lettura"; render(); window.scrollTo(0, 0); }
+    else if (kind === "suoni") startRound("suoni");
+    else if (kind === "dictogloss") { dg = null; view.screen = "dictogloss"; render(); window.scrollTo(0, 0); }
   }
 
   function missions(w, st, nChal) {
@@ -1106,8 +1161,8 @@
 
   /* Le quattro corde di Nation (la guida): input, output, forma, fluidez. */
   function strandOf(it, kind) {
-    if (kind === "lettura" || kind === "capire" || it.type === "listen" || it.type === "dictation") return "input";
-    if (it.type === "write" || it.type === "translate" || it.type === "typed" || it.type === "fixerr" || kind === "b-tr") return "output";
+    if (kind === "lettura" || kind === "capire" || kind === "suoni" || it.type === "listen" || it.type === "dictation" || SAY_TYPES[it.type]) return "input";
+    if (it.type === "write" || it.type === "translate" || it.type === "typed" || it.type === "fixerr" || it.type === "combina" || kind === "b-tr") return "output";
     if (kind === "scene" || it.type === "flash") return "fluidez";
     return "forma";
   }
@@ -1140,6 +1195,11 @@
         var bi = Banca.pausaItem(state);
         if (bi) items.splice(Math.min(5, items.length), 0, bi);
       }
+      // one listening item (a pair, a bit of connected speech), never in the office
+      if (!state.silent && window.Suoni && Suoni.data()) {
+        var si = Suoni.randomItem(state, taught ? taught.week : 1);
+        if (si) items.splice(Math.min(3, items.length), 0, si);
+      }
     } else if (kind === "gym") {
       items = [];
       for (var i = 0; i < 15; i++) {
@@ -1156,7 +1216,9 @@
     else if (kind === "falsi") items = Lab.falsiSession(state.cards);
     else if (kind === "capire") items = Lab.capireSession(state.cards, arg, state.unlocked);
     else if (kind === "lettura") items = Letture.session(Letture.byId(arg));
+    else if (kind === "suoni") items = Suoni.session(state, Math.min(state.unlocked, 52), { silent: state.silent });
     else if (kind === "b-voc") items = Banca.vocabSession(state, 12);
+    else if (kind === "b-freq") items = Banca.vocabSessionFor(state, freqGaps(24), 12);
     else if (kind === "b-forme") items = Banca.formsSession(state, 12);
     else if (kind === "b-tr") items = Banca.translateSession(state, 8);
     else if (kind === "b-gap") items = Banca.gapSession(state, 10);
@@ -1226,6 +1288,8 @@
       "</div>";
   }
 
+  // Items of the listening module: the audio is the question.
+  var SAY_TYPES = { coppia: 1, conta: 1, scegli: 1, intonazione: 1, accento: 1 };
   var CONF_TYPES = { choice: 1, cloze: 1, translate: 1, conjugate: 1, plural: 1, numbers: 1, qa: 1, typed: 1, write: 1,
                      dictation: 1, tiles: 1, listen: 1, fixerr: 1, combina: 1, garden: 1, scopri: 1, conta: 1, scegli: 1,
                      coppia: 1, intonazione: 1, accento: 1, dettato: 1, pseudo: 1 };
@@ -1309,6 +1373,7 @@
         (wv[2] ? '<div class="note">' + esc(wv[2]) + "</div>" : "") +
         '<div class="row" style="margin-top:14px"><button class="btn ghost" id="sayit">🔊 Escuchar</button></div>' +
         '<p class="muted">Decila en voz alta: en un rato te pregunto qué significa.</p>' +
+        keywordBox(wv[0]) +
         '<button class="btn wide" id="next">La tengo →</button>' +
         "</div>";
     }
@@ -1344,8 +1409,17 @@
         '<div id="fb"></div></div>';
     }
 
-    if (it.type === "guess" || (it.type === "choice" && it.options)) {
-      body = '<div class="options">' + it.options.map(function (o, k) {
+    var lead = "";
+    if (it.type === "garden" && it.lead) {
+      lead = '<div class="lead-ex"><span class="muted small">Seguí el patrón:</span><ul class="exs">' + it.lead.map(function (e) {
+        return '<li><span class="es">' + esc(e[0]) + '</span><span class="it">→ ' + esc(e[1]) + "</span></li>";
+      }).join("") + "</ul></div>";
+    }
+    if (it.type === "scopri" && it.data) {
+      lead = '<div class="lead-ex data"><ol class="exs">' + it.data.map(function (d) { return "<li>" + glossifyAny(d) + "</li>"; }).join("") + "</ol></div>";
+    }
+    if (it.type === "scopri" || it.type === "guess" || (it.type === "choice" && it.options)) {
+      body = '<div class="options' + (it.type === "scopri" ? " rules" : "") + '">' + it.options.map(function (o, k) {
         return '<button class="opt" data-opt="' + k + '">' + esc(o) + "</button>";
       }).join("") + "</div>";
       if (it.withText) {
@@ -1366,6 +1440,14 @@
         '<div class="row" style="margin-top:12px">' +
           '<button class="btn" id="tcheck">Controlla</button>' +
           '<button class="btn ghost" id="tclear">Borrar</button></div>';
+    } else if (SAY_TYPES[it.type]) {
+      body = '<div class="center"><button class="bigplay" id="play1">🔊</button>' +
+        '<div><button class="tab" id="slow">🐢 más lento</button>' +
+        (it.type === "coppia" ? '<button class="tab" id="both">👂 las dos</button>' : "") + "</div></div>" +
+        '<div class="options' + (it.type === "coppia" ? " pair" : "") + '">' + it.options.map(function (o, k) {
+          return '<button class="opt" data-opt="' + k + '">' + esc(o) + "</button>";
+        }).join("") + "</div>";
+      stem = "";
     } else if (it.type === "listen") {
       body = '<div class="center"><button class="bigplay" id="play1">🔊</button>' +
         '<div><button class="tab" id="slow">🐢 más lento</button>' +
@@ -1403,12 +1485,13 @@
         '<button class="btn" id="send">Controlla</button></div>';
     }
 
-    var sayBtn = it.src === "frasi" || it.src === "lettura" || it.src === "lab" ? "" :
+    var sayBtn = it.src === "frasi" || it.src === "lettura" || it.src === "lab" || it.src === "ascolto" || it.type === "scopri" ? "" :
       ' <button class="tab" id="say" title="escuchar">🔊</button>';
 
     return hud() + fatigue +
       '<div class="card">' +
         prompt.replace("</div>", sayBtn + "</div>") +
+        lead +
         (stem ? '<div class="stem">' + stem + "</div>" : "") +
         body +
         '<div id="fb"></div>' +
@@ -1461,6 +1544,8 @@
     if (round.answered || round.confPending) return;
     var it = currentItem();
     var verdict = Engine.grade(given, it);
+    if (it.type === "coppia") { settle(verdict, given, pairHtml(it)); return; }
+    if (SAY_TYPES[it.type]) { settle(verdict, given, it.es ? '<div class="note">' + esc(it.es) + "</div>" : ""); return; }
     if (verdict === Engine.VERDICT.RIGHT || !window.Diagnosi) { settle(verdict, given); return; }
     var cd = it.choiceDiag || { before: "", after: "" };
     var d = Diagnosi.explainChoice(cd.before + given + cd.after, cd.before + it.answer + cd.after,
@@ -1470,11 +1555,23 @@
     // Spanish glosses (the week's words, the bank) are never diagnosed as
     // Italian, and picking another whole sentence is not a word-level error.
     var italianOptions = (it.choiceDiag || it.src === "coniugatore" ||
-      (it.src !== "banca" && it.src !== "lab" && it.src !== "lettura" && it.src !== "frasi" && it.src !== "vocab") ||
+      (it.src !== "banca" && it.src !== "lab" && it.src !== "lettura" && it.src !== "frasi" && it.src !== "vocab" && it.src !== "ascolto" && it.type !== "scopri") ||
       (it.src === "frasi" && it.type === "choice")) && !(it.recog && it.orig === "translate");
     var useful = italianOptions && d && d.cat && !GENERIC[d.cat];
     if (useful) recordError(d, given);
     settle(verdict, given, useful ? diagHtml(d, false) : "");
+  }
+
+  // The pair after the answer: both words, their meanings and, for the
+  // double consonants, a bar that shows the longer sound.
+  function pairHtml(it) {
+    var p = it.pair, shown = p.written || [p.a, p.b];
+    var bar = function (w, k) {
+      var gem = p.cat === "geminate" && /([bcdfglmnprstvz])\1/.test(w);
+      return '<div class="pairrow"><b>' + esc(shown[k]) + "</b> <span class=\"muted\">" + esc((p.es || [])[k] || "") + "</span>" +
+        (p.cat === "geminate" ? '<i class="dur' + (gem ? " long" : "") + '"></i>' : "") + "</div>";
+    };
+    return '<div class="pairbox">' + bar(p.a, 0) + bar(p.b, 1) + "</div>";
   }
 
   /* -------------------------------------------- produzione e correzione */
@@ -1491,8 +1588,21 @@
     var accept = (it.accept && it.accept.length ? it.accept : [it.answer]).map(function (x) {
       return String(x).replace(/\s*\|\s*/g, " ");   // two blanks: typed one after the other
     });
+    if (it.dir === "it-es") {
+      // the learner writes Spanish: no Italian diagnosis, just the match
+      var ves = Engine.grade(given, it);
+      settle(ves, given, ves === "giusto" ? "" : '<div class="note">Otras formas de decirlo: ' + esc((it.accept || [it.answer]).join(" · ")) + "</div>");
+      return;
+    }
     var diagCtx = { stem: it.stem, prompt: it.prompt, nominal: it.type === "plural" || /plural/i.test(it.prompt || "") };
     var d = window.Diagnosi ? Diagnosi.diagnose(given, accept, diagCtx) : { verdict: "sbagliato" };
+    // Garden path (Tomasello & Herron 1988): the learner was led into the
+    // transfer error on purpose; the correction is the lesson.
+    if (it.type === "garden" && it.trap && Engine.normalise(given) === Engine.normalise(it.trap)) {
+      round.lastDiag = d;
+      settle("sbagliato", given, '<div class="diag"><span class="tag">🪤 La trampa</span><p>' + mk(it.note || "") + "</p></div>", { label: "Caíste, y eso era la idea. Era así:" });
+      return;
+    }
     round.lastDiag = d;
     // The whole answer in Spanish: a hint about one word is useless.
     var esText = it.frase ? it.frase.es : it.type === "translate" ? it.stem : "";
@@ -1712,12 +1822,16 @@
       '<div class="verdict">' + label +
         (gained ? ' <span class="xpgain">+' + gained + " xp</span>" : "") + "</div>" +
       (extra || "") +
-      (it.type === "hunt" ? "" : '<div class="sol">' + (it.frase || it.src === "lettura" ? esc(sol) : glossifyAny(sol)) + "</div>") +
+      (it.type === "hunt" ? "" : '<div class="sol">' + (it.frase || it.src === "lettura" || it.dir === "it-es" || it.type === "scopri" ? esc(sol) : glossifyAny(sol)) + "</div>") +
       (it.frase && it.type !== "listen" ? '<div class="note">' + esc(it.frase.es) + "</div>" : "") +
-      (it.note ? '<div class="note">' + mk(it.note) + "</div>" : "") +
+      (it.note && !(it.type === "garden" && extra && extra.indexOf("La trampa") >= 0) ? '<div class="note">' + mk(it.note) + "</div>" : "") +
       (q === 2 && it.recogNote ? '<div class="note">' + esc(it.recogNote) + "</div>" : "") +
       (it.hint && it.src === "dummies"
         ? '<div class="note">Consigna original: ' + esc(it.hint) + "</div>" : "") +
+      (function () {
+        var vw = vocabWordOf(it), kw = vw && (state.keywords || {})[vw];
+        return kw ? '<div class="note">🧷 Tu imagen: ' + esc(kw) + "</div>" : q < 2 && vw ? keywordBox(vw) : "";
+      })() +
       relearn +
       '<div class="row" style="margin-top:10px">' +
         '<button class="btn" id="next">Avanti →</button>' +
@@ -1726,6 +1840,7 @@
       '</div><div id="aiexpout"></div></div>';
 
     $("#fb").innerHTML = fb;
+    wireKeyword();
     $("#fb").querySelectorAll("[data-sg]").forEach(function (b) {
       b.onclick = function (e) { e.stopPropagation(); showGloss(stemGloss[+b.dataset.sg]); };
     });
@@ -1750,7 +1865,8 @@
     });
     if (it.type === "tiles") drawTiles();
 
-    var spoken = it.frase ? it.frase.it : it.src === "lettura" ? "" : it.answer;
+    var spoken = it.frase ? it.frase.it : it.src === "lettura" ? "" : it.dir === "it-es" || it.type === "scopri" ? it.stem : it.answer;
+    if (SAY_TYPES[it.type] || it.dettato) spoken = it.say;
     // False friends and structured input: read the Italian prompt aloud.
     if (it.lab === "falsi" || it.lab === "capire") spoken = it.stem;
     $("#next").onclick = nextItem;
@@ -1787,6 +1903,36 @@
   /* The second time comes in another shape: two options with the rule in
      sight, or a recognition version of what had to be typed, or the phrase
      with tiles.  Never the same screen again (audit 2.1). */
+  /* Keyword mnemonic (Atkinson & Raugh 1975): only for the opaque words,
+     and written by the learner, which works better than one handed over.
+     Shown again on the first encounter and whenever the word fails. */
+  function keywordBox(word) {
+    if (!word) return "";
+    var kw = (state.keywords || {})[word] || "";
+    return '<div class="keyword"><label class="muted small">🧷 Tu imagen para recordarla <small>(opcional: «burro» → un burro untado en manteca)</small></label>' +
+      '<div class="typed"><input id="kwin" data-kw="' + esc(word) + '" maxlength="80" placeholder="una imagen, una rima…" value="' + esc(kw) + '">' +
+      '<button class="tab" id="kwsave">Guardar</button></div></div>';
+  }
+  function wireKeyword() {
+    var inp = $("#kwin");
+    if (!inp) return;
+    var save = function () {
+      if (!state.keywords) state.keywords = {};
+      var v = inp.value.trim();
+      if (v) state.keywords[inp.dataset.kw] = v.slice(0, 80); else delete state.keywords[inp.dataset.kw];
+      persist();
+      toast(v ? "🧷 Guardada." : "Borrada.");
+    };
+    on("#kwsave", save);
+    inp.onkeydown = function (e) { if (e.key === "Enter") { e.preventDefault(); save(); } };
+  }
+  function vocabWordOf(it) {
+    if (!it) return null;
+    if (it.id.indexOf("v:") === 0) return it.id.slice(2);
+    if (it.id.indexOf("b:voc:") === 0) return it.id.slice(6);
+    return null;
+  }
+
   function retryVersion(it) {
     var copy;
     if (it.frase) copy = Frasi.pickItem(it.frase, { silent: state.silent, fresh: true });
@@ -1860,7 +2006,7 @@
   var KIND_NAME = { debil: "Puntos débiles", domina: "Dominala", round: "Entrenamiento", giorno: "Sfida del giorno", boss: "Jefe", gym: "Gimnasio de verbos", pausa: "Pausa caffè", review: "Ripasso",
                     scene: "Frases", vocab: "Palabras de la semana", lettura: "Lectura", sfida: "Sfida", ponte: "Ponte",
                     falsi: "Falsi amici", capire: "Capire", "b-voc": "Parole", "b-tr": "Traduci", "b-gap": "Coniuga in contesto",
-                    "b-forme": "Forme", "b-err": "Trova l'errore", clinica: "Clínica" };
+                    "b-forme": "Forme", "b-err": "Trova l'errore", clinica: "Clínica", suoni: "Suoni", "b-freq": "Parole frecuentes" };
   function pendingTitle(p) {
     if (p.type === "lezione") return "Lección · semana " + p.week + " · " + (p.i + 1) + "/" + p.steps.length;
     return (KIND_NAME[p.round.kind] || "Ronda") + " · " + (p.round.i + 1) + "/" + p.round.items.length;
@@ -1924,6 +2070,7 @@
     // (the next week opens from missionCheck, once every mission is done)
 
     if (round.kind === "debil") { if (!state.weakDone) state.weakDone = {}; state.weakDone[view.week] = true; }
+    if (round.kind === "suoni" && total >= 6) { if (!state.suoniDone) state.suoniDone = {}; state.suoniDone[Math.min(state.unlocked, 52)] = Date.now(); }
 
     // Dominala: the first answer to each question counts (the second, easier
     // pass after a miss is for learning, not for the score).
@@ -2037,7 +2184,7 @@
       round.log.forEach(function (l) {
         var it = round.items.filter(function (x) { return x.id === l.id; })[0] || {};
         var k = it.type === "listen" || it.type === "dictation" ? "ascolto"
-              : it.type === "translate" || it.type === "write" || it.type === "typed" ? "produzione"
+              : it.type === "translate" || it.type === "write" || it.type === "typed" || it.type === "combina" ? "produzione"
               : it.type === "choice" && !it.recog ? "lettura" : "strutture";
         var a = ab[k] || (ab[k] = { n: 0, ok: 0 });
         a.n++; if (l.verdict === Engine.VERDICT.RIGHT) a.ok++;
@@ -2094,9 +2241,31 @@
 
   var LAMPO_MS = 60000;
 
-  function startLampo() {
-    lampo = { end: Date.now() + LAMPO_MS, right: 0, wrong: 0, item: Drills.lampoItem(state),
+  /* The words the learner holds (two successes or more): the material of
+     the recognition-fluency game (Nation 2007: fluency is built on known
+     material, under time pressure). */
+  function matureWords() {
+    var out = [];
+    Object.keys(state.cards).forEach(function (id) {
+      var w = id.indexOf("v:") === 0 ? id.slice(2) : id.indexOf("b:voc:") === 0 ? id.slice(6) : null;
+      if (w && w.length >= 4 && w.indexOf(" ") < 0 && (state.cards[id].ok || 0) >= 2) out.push(w);
+    });
+    return out;
+  }
+  // Real word or pseudo-word, in under a second (Segalowitz 2010; Elgort 2011).
+  function parolaItem() {
+    var pool = matureWords();
+    var w = pool[Math.floor(Math.random() * pool.length)] || "casa";
+    var fake = window.Freq && Freq.loaded() && Math.random() < 0.5 ? Freq.pseudo(w) : null;
+    return { kind: "parole", stem: fake || w, real: !fake, options: ["✓ Parola", "✗ Non è una parola"],
+             answer: fake ? "✗ Non è una parola" : "✓ Parola" };
+  }
+  function lampoNext() { return lampo.mode === "parole" ? parolaItem() : Drills.lampoItem(state); }
+
+  function startLampo(mode) {
+    lampo = { end: Date.now() + LAMPO_MS, right: 0, wrong: 0, mode: mode === "parole" ? "parole" : "frasi",
               lock: false, timer: null, done: false };
+    lampo.item = lampoNext();
     view.screen = "lampo";
     render();
     lampo.timer = setInterval(tickLampo, 100);
@@ -2118,13 +2287,13 @@
       '<span class="combo">✓ ' + lampo.right + "</span>" +
       '<button class="btn ghost" id="lquit">✕</button></div>' +
       '<div class="card lampocard">' +
-        '<div class="prompt">⚡ ¿Cómo se dice?</div>' +
-        '<div class="stem">' + esc(it.stem) + "</div>" +
+        '<div class="prompt">' + (lampo.mode === "parole" ? "🧠 ¿Es una palabra italiana?" : "⚡ ¿Cómo se dice?") + "</div>" +
+        '<div class="stem' + (lampo.mode === "parole" ? " big" : "") + '">' + esc(it.stem) + "</div>" +
         '<div class="options">' + it.options.map(function (o, k) {
           return '<button class="opt" data-lopt="' + k + '">' + esc(o) + "</button>";
         }).join("") + "</div>" +
       "</div>" +
-      '<p class="muted center">Error = −3 segundos. Récord: ' + ((state.best || {}).lampo || 0) + "</p>";
+      '<p class="muted center">Error = −3 segundos. Récord: ' + ((state.best || {})[lampo.mode === "parole" ? "lampoParole" : "lampo"] || 0) + "</p>";
   }
 
   function lampoAnswer(btn) {
@@ -2143,7 +2312,7 @@
     }
     setTimeout(function () {
       if (lampo.done) return;
-      lampo.item = Drills.lampoItem(state);
+      lampo.item = lampoNext();
       lampo.lock = false;
       render();
       tickLampo();
@@ -2155,9 +2324,10 @@
     lampo.done = true;
     clearInterval(lampo.timer);
     if (!state.best) state.best = {};
-    var record = lampo.right > (state.best.lampo || 0);
-    if (record) state.best.lampo = lampo.right;
-    var xp = lampo.right * 3;
+    var key = lampo.mode === "parole" ? "lampoParole" : "lampo";
+    var record = lampo.right > (state.best[key] || 0);
+    if (record) state.best[key] = lampo.right;
+    var xp = lampo.right * (lampo.mode === "parole" ? 2 : 3);
     gain(xp);
     Engine.addStrand(state, "fluidez", xp);
     var won = Engine.checkBadges(state);
@@ -2174,7 +2344,7 @@
     return "<h1>" + (r.record ? "⚡ ¡Nuevo récord!" : "⚡ Tiempo") + "</h1>" +
       '<div class="card center"><div class="scorebig"><b>' + lampo.right +
       "</b><span>aciertos</span><span>+" + r.xp + " xp</span></div>" +
-      '<p class="muted">Errores: ' + lampo.wrong + " · récord: " + state.best.lampo + "</p>" +
+      '<p class="muted">Errores: ' + lampo.wrong + " · récord: " + state.best[lampo.mode === "parole" ? "lampoParole" : "lampo"] + "</p>" +
       ((r.won || []).map(function (b) {
         return "<p>🏅 <b>" + esc(b.name) + "</b> — " + esc(b.desc) + "</p>";
       }).join("")) +
@@ -2259,6 +2429,7 @@
       "</div>" +
 
       memoriaCard() +
+      lessicoCard() +
       '<div class="card"><h2>Tu copia</h2>' +
         '<p class="muted">Todo tu progreso vive <b>solo en este teléfono</b>, sin cuentas ni servidores. ' +
         "Si borrás los datos del navegador se pierde: guardá una copia de vez en cuando.</p>" +
@@ -2293,6 +2464,37 @@
       '<div class="row" style="margin-top:14px">' +
         '<button class="btn ghost" id="reset">Borrar mi progreso</button>' +
       "</div></div>" + versionLine();
+  }
+
+  /* Il lessico per frequenza (Nation 2006; KELLY per il livello): quanto
+     del vocabolario di ogni livello conosci, e le parole frequenti che
+     mancano, pronte da praticare. */
+  function knownWords() {
+    return Freq.knownLemmas(state, {
+      phrase: function (id) { var f = Frasi.BY_ID[id]; return f ? f.it : ""; },
+      texts: Object.keys(state.letture || {}).map(function (id) { var ep = Letture.byId(id); return ep ? ep.text : ""; })
+    });
+  }
+  // The frequent words up to the learner's level that the bank can teach.
+  function freqGaps(n) {
+    if (!window.Freq || !Freq.loaded() || !Banca.loaded()) return [];
+    var lvl = state.unlocked <= 13 ? "A1" : state.unlocked <= 26 ? "A2" : state.unlocked <= 39 ? "B1" : "B2";
+    return Freq.nextWords(knownWords(), lvl, 400).filter(Banca.hasWord).slice(0, n || 10);
+  }
+  function lessicoCard() {
+    if (!window.Freq || !Freq.loaded()) return "";
+    var known = knownWords(), cov = Freq.coverage(known), gaps = freqGaps(8);
+    var bars = ["A1", "A2", "B1", "B2", "C1"].map(function (l) {
+      var c = cov.levels[l], p = c[1] ? Math.round(c[0] / c[1] * 100) : 0;
+      return '<div class="eb"><span>' + l + "</span><i style=\"width:" + p + '%"></i><b>' + c[0] + " / " + c[1] + "</b></div>";
+    }).join("");
+    return '<div class="card"><h2>📚 Tu vocabulario</h2>' +
+      '<p class="muted">Palabras por frecuencia (KELLY, itWaC): las 2.000 más frecuentes cubren el 86 % de lo que se dice. ' +
+      "Conocés <b>" + cov.fundamental[0] + " / " + cov.fundamental[1] + "</b> de las fundamentales (A1 y A2).</p>" +
+      '<div class="errbars">' + bars + "</div>" +
+      (gaps.length ? '<p class="muted small" style="margin-top:10px">Frecuentes que te faltan: <i>' + gaps.map(esc).join(", ") + "</i>.</p>" +
+        '<div class="row"><button class="btn" data-bank="b-freq">Practicar estas</button></div>' : "") +
+      "</div>";
   }
 
   /* La memoria: quante schede in apprendimento, in ripasso e in
@@ -2502,6 +2704,7 @@
     else if (s === "lettura") html = renderLettura(Letture.byId(view.ep));
     else if (s === "lezione") html = renderLezione();
     else if (s === "scrivi") html = renderScrivi(course.weeks[view.week - 1]);
+    else if (s === "dictogloss") html = renderDictogloss(course.weeks[view.week - 1]);
 
     var gb = $("#glossbox");
     if (gb) gb.classList.remove("on");
@@ -2586,7 +2789,7 @@
     // oggi
     on("#pausa", function () { startRound("pausa"); });
     on("#giorno", function () { startRound("giorno"); });
-    on("#lampo", startLampo);
+    on("#lampo", function () { startLampo("frasi"); });
     on("#scena", function () { startRound("scene", Drills.nextScene(state).id); });
     on("#rev", function () { startRound("review"); });
     on("#sayfdg", function () { speak(Frasi.ofTheDay().it, true); });
@@ -2670,7 +2873,7 @@
       clearPending();
       if (round.from === "briefing") { view.tab = "percorso"; view.screen = "briefing"; render(); window.scrollTo(0, 0); }
       else if (round.kind === "lettura") go("leggi");
-      else if (["ponte", "falsi", "capire", "scene", "b-voc", "b-forme", "b-tr", "b-gap", "b-err", "clinica"].indexOf(round.kind) >= 0) go("frasi");
+      else if (["ponte", "falsi", "capire", "scene", "b-voc", "b-forme", "b-tr", "b-gap", "b-err", "b-freq", "clinica", "suoni"].indexOf(round.kind) >= 0) go("frasi");
       else if (round.kind === "pausa" || round.kind === "review" || round.kind === "giorno") go("oggi");
       else if (round.kind === "sfida") { view.screen = "sfide"; render(); }
       else { view.screen = "briefing"; render(); }
@@ -2698,8 +2901,11 @@
       else go("leggi");
     });
     on("#lquiz", function () { startRound("lettura", view.ep); });
-    on("#readall", function () { speak(Letture.byId(view.ep).text, true); });
-    on("#readslow", function () { speak(Letture.byId(view.ep).text, true, 0.7); });
+    on("#playlib", function () {
+      var ids = Object.keys(state.letture || {}).filter(function (id) { return Letture.byId(id); });
+      if (!ids.length) return toast("Todavía no terminaste ninguna lectura.");
+      playLibrary(Drills.shuffle(ids));
+    });
     document.querySelectorAll("[data-sg]").forEach(function (b) {
       b.onclick = function () { showGloss(stemGloss[+b.dataset.sg]); };
     });
@@ -2715,11 +2921,14 @@
       b.onclick = function () { lampoAnswer(b); };
     });
     on("#lquit", function () { go("oggi"); });
-    on("#lagain", startLampo);
+    on("#lagain", function () { startLampo(lampo.mode); });
+    on("#lampoparole", function () { startLampo("parole"); });
 
     wireGioco();
     wireIo();
     wireScrivi();
+    wireDictogloss();
+    wireLettura();
 
     document.querySelectorAll("[data-self]").forEach(function (b) {
       b.onclick = function () {
@@ -2733,6 +2942,220 @@
         toast("Anotado.");
       };
     });
+  }
+
+  /* ------------------------------------------------------------ dictogloss */
+
+  /* Dictogloss (Wajnryb 1990; Swain & Lapkin): hear the text twice, note
+     key words the second time, reconstruct it in writing.  Scored by the
+     six chunks recovered (Yu, Boers & Tremblay 2025), then the local
+     checker marks the rest. */
+  var dg = null;
+  function renderDictogloss(w) {
+    var t = Suoni.dgFor(w.week);
+    if (!t) return '<button class="btn ghost" id="dgback">← a la semana</button><p>Esta semana no tiene dictogloss.</p>';
+    if (!dg || dg.week !== w.week) dg = { week: w.week, step: 0, plays: 0 };
+    var done = (state.dictogloss || {})[w.week];
+    var head = '<button class="btn ghost" id="dgback">← a la semana</button>' +
+      '<h1 class="targa"><span class="t-sup">Dictogloss · Settimana ' + romano(w.week) + '</span><span class="t-via">' + esc(t.title) + "</span></h1>";
+    if (dg.step === 0) {
+      return head + '<div class="card"><p>' + esc(t.es) + "</p>" +
+        '<p class="muted">Vas a escuchar el texto <b>dos veces</b> a velocidad normal. La primera, solo escuchá. La segunda, ' +
+        "anotá palabras clave. Después lo reconstruís por escrito: no hace falta que sea igual, sino que diga lo mismo con las " +
+        "expresiones del texto. Se puntúan <b>seis bloques</b>.</p>" +
+        (done ? '<p class="note">Ya lo hiciste: ' + done.found + " / " + done.n + " bloques. Podés repetirlo.</p>" : "") +
+        '<div class="center"><button class="bigplay" id="dgplay">🔊</button><p class="muted" id="dgstate">Escucha 1 de 2</p></div>' +
+        '<div id="dgkeys"></div>' +
+        '<button class="btn wide" id="dgwrite" disabled>Ya escuché las dos → reconstruir</button></div>';
+    }
+    if (dg.step === 1) {
+      return head + '<div class="card"><p class="muted">Palabras clave que anotaste (te las dejo a la vista): <i>' + t.keywords.map(esc).join(" · ") + "</i></p>" +
+        '<p class="muted small">Bloques a recuperar: ' + t.chunks.length + '. Escribí en italiano lo que recordás, con tus palabras donde haga falta.</p>' +
+        '<textarea id="dgtext" class="grow scrivi" rows="6" spellcheck="false" autocapitalize="sentences" placeholder="Ricostruisci il testo…">' + esc(dg.given || "") + "</textarea>" +
+        '<div class="row" style="margin-top:10px"><button class="btn" id="dgcheck">Controlla</button>' +
+        '<button class="tab" id="dgagain">🔊 escuchar otra vez (cuenta como ayuda)</button></div>' +
+        '<div id="dgout"></div></div>';
+    }
+    var r = dg.result;
+    return head + '<div class="card"><div class="scorebig"><b>' + r.found.length + " / " + r.n + '</b><span>bloques recuperados</span><span>+' + dg.xp + " xp</span></div>" +
+      '<h3>Recuperados</h3><p>' + (r.found.length ? r.found.map(function (c) { return "<b>" + esc(c) + "</b>"; }).join(" · ") : "—") + "</p>" +
+      (r.missed.length ? '<h3>Faltaron</h3><p>' + r.missed.map(esc).join(" · ") + "</p>" : "") +
+      (dg.findings && dg.findings.length ? "<h3>Para revisar</h3><ol class=\"findings\">" + dg.findings.map(function (f) { return "<li>" + mk(f.msg) + "</li>"; }).join("") + "</ol>" : "") +
+      '<h3>El texto</h3><p class="model it">' + esc(t.text) + "</p>" +
+      '<div class="row" style="margin-top:14px"><button class="btn" id="dgback2">← Seguir el percorso</button>' +
+      '<button class="btn ghost" id="dgredo">Otra vez</button></div></div>';
+  }
+  function wireDictogloss() {
+    if (view.screen !== "dictogloss") return;
+    var w = course.weeks[view.week - 1], t = Suoni.dgFor(w.week);
+    var back = function () { dg = null; window.speechSynthesis && speechSynthesis.cancel(); view.tab = "percorso"; view.screen = "briefing"; render(); window.scrollTo(0, 0); };
+    on("#dgback", back); on("#dgback2", back);
+    if (!t) return;
+    on("#dgplay", function () {
+      var b = $("#dgplay"), st = $("#dgstate");
+      if (!b || b.disabled) return;
+      b.disabled = true;
+      var second = dg.plays >= 1;
+      if (second) { var k = $("#dgkeys"); if (k) k.innerHTML = '<p class="muted">Palabras clave: <i>' + t.keywords.map(esc).join(" · ") + "</i></p>"; }
+      if (st) st.textContent = second ? "Escucha 2 de 2…" : "Escucha 1 de 2…";
+      speak(t.text, true, 0.95, { onend: function () {
+        dg.plays++;
+        b.disabled = false;
+        if (st) st.textContent = dg.plays >= 2 ? "Listo: ahora reconstruilo" : "Escucha 2 de 2 (anotá palabras clave)";
+        var wbtn = $("#dgwrite");
+        if (wbtn && dg.plays >= 2) wbtn.disabled = false;
+        noteListening(t.text.split(/\s+/).length * 0.45);
+      } });
+    });
+    on("#dgwrite", function () { dg.step = 1; render(); });
+    on("#dgagain", function () { dg.help = (dg.help || 0) + 1; speak(t.text, true, 0.95); });
+    on("#dgcheck", function () {
+      var box = $("#dgtext"), given = box ? box.value : "";
+      if (!given.trim()) return;
+      dg.given = given;
+      var r = Suoni.dgScore(t, given);
+      scriviLexicon();
+      var chk = Scrivi.check(given, w.week);
+      dg.findings = (chk.findings || []).filter(function (f) { return !f.soft; }).slice(0, 8);
+      var first = !(state.dictogloss || {})[w.week];
+      var xp = r.found.length * 8 + (r.found.length >= 5 ? 20 : 0) - Math.min(20, (dg.help || 0) * 5);
+      xp = Math.max(5, first ? xp : Math.round(xp / 3));
+      if (!state.dictogloss) state.dictogloss = {};
+      var prev = state.dictogloss[w.week];
+      state.dictogloss[w.week] = { found: Math.max(r.found.length, prev ? prev.found : 0), n: r.n, at: Date.now() };
+      var before = doneCount(w);
+      gain(xp);
+      Engine.addStrand(state, "input", Math.round(xp / 2));
+      Engine.addStrand(state, "output", Math.round(xp / 2));
+      Engine.touchStreak(state);
+      dg.findings.forEach(function (f) { recordError({ cat: f.cat, target: f.msg.replace(/\*/g, "").slice(0, 80) }, ""); });
+      dg.extras = missionCheck(w.week, before);
+      Engine.checkBadges(state);
+      persist();
+      renderHeader();
+      dg.result = r; dg.xp = xp; dg.step = 2;
+      render();
+      if (r.found.length >= 5) setTimeout(confetti, 200);
+      window.scrollTo(0, 0);
+    });
+    on("#dgredo", function () { dg = { week: w.week, step: 0, plays: 0 }; render(); });
+  }
+
+  /* --------------------------------------------------- leggi e ascolta */
+
+  /* Listening time counts as input (Nation's first strand): one xp per
+     ten seconds, thirty a day at most. */
+  function noteListening(seconds) {
+    if (!seconds) return;
+    var k = Engine.dayKey();
+    if (!state.ascolto) state.ascolto = {};
+    var d = state.ascolto[k] || (state.ascolto[k] = { sec: 0, xp: 0 });
+    d.sec += Math.round(seconds);
+    var xp = Math.min(30 - d.xp, Math.floor(seconds / 10));
+    if (xp > 0) { d.xp += xp; gain(xp); Engine.addStrand(state, "input", xp); }
+    Object.keys(state.ascolto).forEach(function (kk) { if (Engine.daysBetween(kk, k) > 30) delete state.ascolto[kk]; });
+    persist();
+  }
+  function listeningWeek() {
+    var k = Engine.dayKey(), sec = 0;
+    Object.keys(state.ascolto || {}).forEach(function (kk) { if (Engine.daysBetween(kk, k) < 7) sec += state.ascolto[kk].sec || 0; });
+    return Math.round(sec / 60);
+  }
+
+  var karaoke = null;   // { ep, rate, mode: "full" | "partial" | "audio", par, u }
+  function stopKaraoke() {
+    if (karaoke && window.speechSynthesis) speechSynthesis.cancel();
+    karaoke = null;
+    document.querySelectorAll(".text .w.now").forEach(function (e) { e.classList.remove("now"); });
+  }
+  /* Reading while listening (Webb & Chang 2015): the word being said lights
+     up (SpeechSynthesisUtterance.onboundary); a speed ladder 0.8 → 1 →
+     1.15 (Zhao 1997: the learner controls the pace, then goes faster);
+     partial captions (Mirzaei et al. 2017): only the glossed words stay. */
+  function startKaraoke(ep, rate, mode) {
+    stopKaraoke();
+    karaoke = { ep: ep, rate: rate || 1, mode: mode || "full", par: 0, started: Date.now() };
+    var pars = Letture.paragraphs(ep);
+    var offsets = [], k = 0;
+    pars.forEach(function (p) { var toks = Letture.tokens(p), o = [], pos = 0; toks.forEach(function (t) { var at = p.indexOf(t, pos); o.push([at, k++]); pos = at + t.length; }); offsets.push(o); });
+    document.body.classList.toggle("kar-partial", karaoke.mode === "partial");
+    document.body.classList.toggle("kar-audio", karaoke.mode === "audio");
+    function next() {
+      if (!karaoke || karaoke.par >= pars.length) {
+        if (karaoke) noteListening((Date.now() - karaoke.started) / 1000);
+        stopKaraoke();
+        document.body.classList.remove("kar-partial", "kar-audio");
+        var b = $("#karplay"); if (b) b.textContent = "🎧 Leggi e ascolta";
+        return;
+      }
+      var i = karaoke.par, off = offsets[i];
+      speak(pars[i], true, karaoke.rate, { keep: true,
+        onboundary: function (e) {
+          if (!karaoke || e.name !== "word") return;
+          var idx = -1;
+          for (var j = 0; j < off.length; j++) if (off[j][0] <= e.charIndex) idx = off[j][1];
+          document.querySelectorAll(".text .w.now").forEach(function (x) { x.classList.remove("now"); });
+          var el = document.querySelector('.text .w[data-k="' + idx + '"]');
+          if (el) { el.classList.add("now"); }
+        },
+        onend: function () { if (karaoke) { karaoke.par++; next(); } } });
+    }
+    next();
+    mediaSession(ep.title, function () { stopKaraoke(); });
+  }
+  // The lock screen shows what plays and can pause it (Media Session API).
+  function mediaSession(title, onStop) {
+    if (!("mediaSession" in navigator)) return;
+    try {
+      navigator.mediaSession.metadata = new MediaMetadata({ title: title, artist: "La Via C1", album: "Leggi e ascolta" });
+      navigator.mediaSession.setActionHandler("pause", function () { speechSynthesis.pause(); });
+      navigator.mediaSession.setActionHandler("play", function () { speechSynthesis.resume(); });
+      navigator.mediaSession.setActionHandler("stop", function () { onStop && onStop(); });
+    } catch (e) { /* niente */ }
+  }
+  // Extensive listening: every reading already done, one after the other,
+  // audio only (familiar material: Nation's fluency condition).
+  function playLibrary(ids) {
+    var list = ids.slice(), started = Date.now();
+    (function next() {
+      var id = list.shift();
+      if (!id) { noteListening((Date.now() - started) / 1000); toast("🎧 Fin de la biblioteca de audio."); return; }
+      var ep = Letture.byId(id);
+      if (!ep) return next();
+      toast("🎧 " + ep.title, 2500);
+      mediaSession(ep.title, function () { list = []; speechSynthesis.cancel(); });
+      speak(ep.text, true, 1, { onend: next });
+    })();
+  }
+  function wireLettura() {
+    if (view.screen !== "lettura") return;
+    var ep = Letture.byId(view.ep);
+    if (!ep) return;
+    var rate = view.karRate || 1;
+    on("#karplay", function () {
+      var b = $("#karplay");
+      if (karaoke) { stopKaraoke(); document.body.classList.remove("kar-partial", "kar-audio"); if (b) b.textContent = "🎧 Leggi e ascolta"; return; }
+      var mode = (document.querySelector("[data-karmode].on") || {}).dataset ? document.querySelector("[data-karmode].on").dataset.karmode : "full";
+      if (b) b.textContent = "⏹ Parar";
+      startKaraoke(ep, rate, mode);
+    });
+    document.querySelectorAll("[data-rate]").forEach(function (b) {
+      b.onclick = function () {
+        view.karRate = +b.dataset.rate;
+        document.querySelectorAll("[data-rate]").forEach(function (x) { x.classList.toggle("on", x === b); });
+        if (karaoke) startKaraoke(ep, view.karRate, karaoke.mode);
+      };
+    });
+    document.querySelectorAll("[data-karmode]").forEach(function (b) {
+      b.onclick = function () {
+        document.querySelectorAll("[data-karmode]").forEach(function (x) { x.classList.toggle("on", x === b); });
+        document.body.classList.toggle("kar-partial", b.dataset.karmode === "partial" && !!karaoke);
+        document.body.classList.toggle("kar-audio", b.dataset.karmode === "audio" && !!karaoke);
+        if (karaoke) karaoke.mode = b.dataset.karmode;
+      };
+    });
+    on("#enh", function () { view.enh = true; render(); window.scrollTo(0, 0); });
+    on("#enhoff", function () { view.enh = false; render(); });
   }
 
   /* ---------------------------------------------------------------- scrivi */
@@ -2998,6 +3421,7 @@
     if (it.type === "word") {
       on("#next", nextItem);
       on("#sayit", function () { speak(it.stem, true); });
+      wireKeyword();
       speak(it.stem);
     }
 
@@ -3035,9 +3459,9 @@
     }
 
     if (it.type === "dictation") {
-      on("#play1", function () { speak(it.answer, true); });
-      on("#slow", function () { speak(it.answer, true, 0.6); });
-      setTimeout(function () { speak(it.answer); }, 250);
+      on("#play1", function () { it.voice ? speakItem(it, true) : speak(it.answer, true); });
+      on("#slow", function () { it.voice ? speakItem(it, true, 0.6) : speak(it.answer, true, 0.6); });
+      setTimeout(function () { it.voice ? speakItem(it) : speak(it.answer); }, 250);
     }
 
     if (it.type === "intro") {
@@ -3071,6 +3495,18 @@
       on("#slow", function () { speak(it.stem, true, 0.6); });
       on("#peek", function () { $("#peektxt").hidden = false; });
       setTimeout(function () { speak(it.stem); }, 250);
+    }
+    if (SAY_TYPES[it.type]) {
+      on("#play1", function () { speakItem(it, true); });
+      on("#slow", function () { speakItem(it, true, 0.6); });
+      on("#both", function () {
+        // both words of the pair, one after the other, same voice
+        var v = it.voice || {};
+        speak(it.pair.a, true, v.rate, { pitch: v.pitch, vi: v.vi, onend: function () {
+          speak(it.pair.b, true, v.rate, { pitch: v.pitch, vi: v.vi, keep: true });
+        } });
+      });
+      setTimeout(function () { speakItem(it); }, 250);
     }
 
     if (it.type === "flash") {
@@ -3331,6 +3767,12 @@
     .then(function (r) { return r.ok ? r.json() : null; })
     .then(function (g) { glossario = g; })
     .catch(function () { /* senza glossario */ });
+
+  // The frequency layer is optional too: without it, no coverage meter.
+  fetch("data/frequenza.json")
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (f) { if (f && window.Freq) { Freq.load(f); if (view.screen === "io" || view.screen === "oggi") render(); } })
+    .catch(function () { /* senza frequenze */ });
 
   // The bank is optional: without it the app still works, just smaller.
   var bankP = fetch("data/bank.json")

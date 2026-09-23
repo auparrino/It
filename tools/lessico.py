@@ -322,13 +322,25 @@ def word_week(tok, lesson_seen):
 
 def item_texts(item):
     """(what the learner reads, what the learner writes) of a course item."""
+    typ = item.get("type")
+    # the rule to discover is chosen in Spanish: only the Italian data counts
+    if typ == "scopri":
+        return " ".join(item.get("data") or []), ""
+    # italiano → castellano: the learner reads Italian and writes Spanish
+    if typ == "translate" and item.get("dir") == "it-es":
+        return item.get("stem") or "", ""
+    # trova l'errore: the corrected sentence is read, one word is written
+    if typ == "fixerr":
+        return item.get("answer") or "", item.get("good") or ""
     answers = [a.strip() for a in re.split(r"\s*\|\s*", item.get("answer") or "") if a.strip()]
     read = ""
+    if typ == "garden":
+        read = " ".join(w for pair in (item.get("lead") or []) for w in pair)
     if item.get("type") != "translate":           # translate: the stem is Spanish
         stem = re.sub(r"\([^)]*\)", " ", item.get("stem") or "")
         for a in answers:
             stem = stem.replace("___", a, 1)
-        read = stem          # options stay out: some are misspelt on purpose
+        read = (read + " " + stem).strip()   # options stay out: some are misspelt on purpose
     return read, " ".join(answers)
 
 

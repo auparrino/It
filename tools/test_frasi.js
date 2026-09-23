@@ -197,7 +197,9 @@ ok(Letture.ofSeries("cultura").length >= 10, "almeno 10 letture di cultura");
 ok(uniq(Letture.EPISODI.map(function (e) { return e.id; })), "id di lettura unici");
 Letture.EPISODI.forEach(function (ep) {
   var toks = Letture.allTokens(ep);
-  ok(toks.length >= 80 && toks.length <= 140, "lunghezza della lettura " + ep.id + ": " + toks.length);
+  // Le inondazioni (input flood) sono più lunghe: la struttura deve ripetersi.
+  var lo = ep.series === "flood" ? 150 : 80, hi = ep.series === "flood" ? 240 : 140;
+  ok(toks.length >= lo && toks.length <= hi, "lunghezza della lettura " + ep.id + ": " + toks.length);
   Object.keys(ep.gloss).forEach(function (k) {
     ok(toks.some(function (t) { return Letture.glossFor(ep, t) === ep.gloss[k]; }),
        "glossa senza parola nel testo: " + ep.id + "/" + k);
