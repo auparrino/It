@@ -613,7 +613,7 @@
     { id: "martin", name: "Martín a Bologna", emoji: "📖",
       blurb: "Una historia por capítulos, de A1 a B2. Cada episodio usa la gramática que estás viendo y abre el siguiente." },
     { id: "cultura", name: "Cultura", emoji: "🏛️",
-      blurb: "Historia, filosofía, sociología y literatura italianas en textos graduados. Elegí el que te interese." }
+      blurb: "Historia, filosofía, sociología y literatura italianas en textos graduados. Cada uno se abre con la gramática que usa; entre los abiertos, elegí el que te interese." }
   ];
 
   function ofSeries(id) {

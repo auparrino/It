@@ -86,8 +86,13 @@
                                    p[1].every(function (es) { return p[0].indexOf(es.replace(/\s*\(.*\)/, "")) < 0; }); });
     if (!pairs.length) return null;
     var pk = pairs[Math.floor(rnd() * pairs.length)], k = rnd() < 0.5 ? 0 : 1;
+    // Two options are a coin toss: a form from another pair of the block
+    // makes it a real question (nono / nonno / penna).
+    var opts = pk[0].slice();
+    var others = shuffle(pairs.filter(function (p) { return p !== pk; }), rnd);
+    if (others.length) opts.push(others[0][0][Math.floor(rnd() * 2)]);
     return { kind: "pair", prompt: "¿Cuál significa «" + pk[1][k] + "»?", stem: "", answer: pk[0][k],
-             options: shuffle(pk[0].slice(), rnd) };
+             options: shuffle(opts, rnd) };
   }
 
   function exQuestion(lesson, b, rnd, week) {

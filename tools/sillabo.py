@@ -268,9 +268,48 @@ def _answers(item):
     return [a.strip() for a in re.split(r"\s*\|\s*", item.get("answer") or "") if a.strip()]
 
 
+# Construcciones que la teoría presenta en una semana concreta y que un
+# ejercicio puede pedir sin usar ningún tiempo verbal nuevo: la elisión
+# (un'amica, dov'è, un po'), los plurales en -chi/-ghi, los números escritos,
+# los posesivos y el «Lei» de cortesía.  Sin esto, «un amico / un'amico» caía
+# en la semana 1 porque solo usa el presente.
+CONSTR_WEEK = {"elisione": 3, "plurale": 2, "numeri": 7, "possessivi": 3, "Lei formale": 5}
+_POSS = re.compile(r"\b(mio|mia|miei|mie|tuo|tua|tuoi|tue|suo|sua|suoi|sue|nostr[oaie]|vostr[oaie])\b")
+_NUM = re.compile(r"\b(due|tre|quattro|cinque|sette|otto|nove|dieci|undici|dodici|tredici|"
+                  r"quattordici|quindici|sedici|diciassette|diciotto|diciannove|venti|trenta|quaranta|"
+                  r"cinquanta|sessanta|settanta|ottanta|novanta|cento|mille|\w+(anta|enta|otto|uno|due|tre|"
+                  r"sette|nove|cento|mila))\b")
+
+
+def construction_features(item):
+    feats = {}
+    typ = item.get("type")
+    answers = _answers(item)
+    ans = " ".join(answers).replace("’", "'").lower()
+    produced = typ not in ("choice", "listen")
+    if typ != "listen":
+        # c'è / c'era se enseñan en la semana 1; cualquier otro apóstrofo, en la
+        # 3.  En una elección cuentan también las opciones (un amico / un'amico).
+        shown = ans + " " + " ".join(item.get("options") or []).replace("’", "'").lower()
+        if "'" in re.sub(r"\bc'(è|era|erano|e)\b", "", shown):
+            feats["elisione"] = CONSTR_WEEK["elisione"]
+    if produced:
+        if _NUM.search(ans):
+            feats["numeri"] = CONSTR_WEEK["numeri"]
+        if _POSS.search(ans):
+            feats["possessivi"] = CONSTR_WEEK["possessivi"]
+        stem = item.get("stem") or ""
+        # «Lei, signora, ___»: el Lei de cortesía; «Lei è simpatica» es «ella»
+        if re.search(r"(^|[\s(])Lei,", stem) or re.search(r"\bsignor[ae]?\b", stem, re.I):
+            feats["Lei formale"] = CONSTR_WEEK["Lei formale"]
+    if re.search(r"plural", item.get("prompt") or "", re.I):
+        feats["plurale"] = CONSTR_WEEK["plurale"]
+    return feats
+
+
 def item_features(item):
     """{feature: week} for one graded item of the course."""
-    feats = {}
+    feats = construction_features(item)
     typ = item.get("type")
     answers = _answers(item)
     context = ""

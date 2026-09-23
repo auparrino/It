@@ -182,22 +182,35 @@
     if (opts.length < 3 && Lez) {
       Lez.traps(answer, Math.random, week || 52).slice(0, 3).forEach(add);
     }
-    // 3. answers of the same kind from the same week, of similar length
+    // 3. answers of the same kind from the same week: same shape (a letter
+    //    group against letter groups, never «ho» against «sc»), same topic
+    //    when there is one, and the sentences that share most words first
+    //    («Paolo ha caldo» against «Micia ha sete», not «La città è bella»).
     if (opts.length < 2 && pool) {
-      var len = answer.length;
-      shuffle(pool.filter(function (x) {
-        return x && x.id !== it.id && x.type === it.type && x.answer && !/\|/.test(x.answer) &&
-               Math.abs(String(x.answer).length - len) <= Math.max(4, len / 2);
-      })).slice(0, 6).forEach(function (x) { add(String(x.answer)); });
+      var len = answer.length, short = len <= 4 && answer.indexOf(" ") < 0;
+      var words = function (x) { return norm(x).split(" "); };
+      var aw = words(answer);
+      var shared = function (x) { return words(x).filter(function (w) { return aw.indexOf(w) >= 0; }).length; };
+      var cands = pool.filter(function (x) {
+        if (!x || x.id === it.id || x.type !== it.type || !x.answer || /\|/.test(x.answer)) return false;
+        var xa = String(x.answer);
+        if (it.topic && x.topic && x.topic !== it.topic) return false;
+        if (short) return xa.indexOf(" ") < 0 && Math.abs(xa.length - len) <= 2;
+        return Math.abs(xa.length - len) <= Math.max(4, len / 2);
+      });
+      shuffle(cands).sort(function (a, b) { return shared(b.answer) - shared(a.answer); })
+        .slice(0, 6).forEach(function (x) { add(String(x.answer)); });
     }
     if (opts.length < 2) return null;
     var copy = {};
     Object.keys(it).forEach(function (k) { copy[k] = it[k]; });
     copy.type = "choice";
     copy.recog = true;
+    copy.orig = it.type;
     copy.options = shuffle(opts.slice(0, 3).concat([answer]));
     copy.prompt = it.type === "translate" ? "¿Cuál es la traducción en italiano?" : it.prompt;
-    copy.note = "La próxima vez esta la vas a escribir." + (it.note ? " " + it.note : "");
+    // Said once, and only after a right answer: after a miss it reads as a threat.
+    copy.recogNote = "La próxima vez esta la vas a escribir.";
     return copy;
   }
 
@@ -256,6 +269,28 @@
     return { id: id, src: "vocab", type: "cloze", topic: "vocabolario",
              prompt: "¿Cómo se dice en italiano?", stem: "«" + v[1] + "» → ___", answer: v[0],
              accept: [v[0]], note: v[2] ? "Ejemplo: *" + v[2] + "*" : "", say: v[0] };
+  }
+
+  /* A word is met before it is asked (as the phrases are): a card with the
+     word, its meaning, audio and the example, two or three items before the
+     first question about it. */
+  function wordIntro(v) {
+    return { id: "vi:" + v[0], src: "vocab", type: "word", prompt: "Palabra nueva",
+             stem: v[0], answer: v[0], word: v, say: v[0] };
+  }
+  function withWordIntros(list, state) {
+    var cards = (state && state.cards) || {}, out = list.slice(), done = {};
+    for (var i = 0; i < out.length; i++) {
+      var it = out[i];
+      if (!it || it.src !== "vocab" || it.type !== "choice" || cards[it.id] || done[it.id]) continue;
+      var v = VOC && VOC[it.stem];
+      if (!v) continue;
+      done[it.id] = 1;
+      var at = Math.max(0, i - 2);
+      out.splice(at, 0, wordIntro(v.v));
+      i++;
+    }
+    return out;
   }
 
   // The week's words, new ones first, plus a few of earlier weeks that are due.
@@ -328,7 +363,7 @@
       var vs = vocabSession(course, week, opts.state || {}, 2);
       out = out.slice(0, size - vs.length).concat(vs);
     }
-    return firstRecognize(shuffle(out).slice(0, size), opts.state, week.week, bookItems);
+    return withWordIntros(firstRecognize(shuffle(out).slice(0, size), opts.state, week.week, bookItems), opts.state);
   }
 
   /* Il boss pesca da tutte le settimane già sbloccate, non solo dall'ultima. */
@@ -458,7 +493,7 @@
     // Interleaving (Rohrer & Taylor 2007): una domanda del laboratorio.
     // week: the last week whose lesson the learner has read.  Before the
     // first lesson there is no grammar to practise: only phrases and words.
-    if (Lab) filler.push(Lab.randomItem(state.cards, week ? week.week : 1));
+    if (Lab && week) filler.push(Lab.randomItem(state.cards, week.week));
 
     // Del libro solo domande a scelta: in pausa si va veloci.
     var bookChoice = ((week && week.items) || []).map(function (id) { return map[id]; })
@@ -518,6 +553,8 @@
     conjugationDrill: conjugationDrill,
     conjugationTyped: conjugationTyped,
     buildRound: buildRound,
+    recognitionOf: recognitionOf,
+    withWordIntros: withWordIntros,
     sceneWeek: sceneWeek,
     scenesOfWeek: scenesOfWeek,
     firstRecognize: firstRecognize,

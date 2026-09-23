@@ -46,7 +46,7 @@ tu teléfono**. No usa cuentas, servidores, micrófono ni IA externa.
 
 ### Lo que te mantiene enganchado
 
-- **Meta diaria** (100, 200, 350 o 500 xp; una Pausa da unos 100) con anillo de progreso en la cabecera.
+- **Meta diaria** (100, 200, 350 o 500 xp; una Pausa da entre 30 y 60) con anillo de progreso en la cabecera.
 - **🎁 Cofre diario** al cumplir la meta: premio sorpresa (xp, premio gordo o un
   escudo).
 - **🔥 Racha con 🛡️ escudos**: cada 7 días de racha ganás un escudo, y cada
@@ -55,6 +55,9 @@ tu teléfono**. No usa cuentas, servidores, micrófono ni IA externa.
 - **Calendario** de tus últimas 4 semanas, combos, confeti, sonidos y vibración.
 - **Repaso espaciado** que mezcla gramática y frases: cada frase vuelve cuando
   estás por olvidarla, y cada vez con otro tipo de ejercicio.
+- **Seguí donde estabas**: si cerrás la app a mitad de una ronda o de una
+  lección, Oggi te ofrece retomarla en el mismo punto (queda en el teléfono
+  dos días).
 - **Recordatorio diario**: en *Io* elegís una hora y se agrega a tu calendario
   un evento que se repite todos los días. Anda sin servidor ni notificaciones push.
 
@@ -100,6 +103,10 @@ Según lo que dice la investigación:
 - **Segundo intento:** ves tu respuesta al lado de la correcta, con la
   diferencia marcada, y la regla explicada. La retroalimentación específica a
   *tu* respuesta supera a la simple verificación (Shute 2008).
+- **Lo que fallás vuelve una vez, más fácil:** una pregunta de opciones vuelve
+  con dos opciones y la regla a la vista; una de escribir vuelve como
+  reconocimiento; una frase vuelve con fichas. Nunca la misma pantalla dos
+  veces, y la segunda vez paga la mitad de xp.
 - **Errores de regla y de vocabulario:** los de regla (auxiliar, concordancia,
   artículo, tiempo) se corrigen con la regla; los de vocabulario, con el
   significado de la palabra que usaste ("*caldo* significa caliente"),
@@ -231,7 +238,10 @@ contra la meta del trimestre (2.000 en el primero).
 
 **Reconocer antes de producir**: la primera vez que aparece un ejercicio de
 escribir (conjugar, completar, traducir) llega como opción múltiple; la
-próxima vez, ya lo escribís. La semana 1 incluye **escucha sin texto**
+próxima vez, ya lo escribís. Cada palabra de la semana se presenta primero
+(tarjeta con significado, audio y ejemplo) y recién después se pregunta.
+El banco se abre con su gramática: *Forme* en la semana 3 (artículos),
+*Traduci* y *Coniuga in contesto* en la 5 (presente), *Trova l'errore* en la 5. La semana 1 incluye **escucha sin texto**
 (*nonno* o *nono*, *casa* o *cassa*, *cena* o *scena*) y *Trova l'errore* se
 abre en la semana 5, cuando ya podés leer la oración.
 
@@ -246,7 +256,10 @@ superlativo en passato prossimo (*le vittime più tragiche sono state…*).
 `tools/sillabo.py` lee cada ejercicio, reconoce los tiempos verbales que usa
 (con un léxico de formas generado por el conjugador: `tools/forms_lexicon.js`)
 y otras construcciones (pronombres combinados, *ne*, *cui*, gerundio,
-comparativos), y calcula **la primera semana cuya teoría lo cubre todo**:
+comparativos, y también la elisión *un'amica / dov'è / un po'*, los plurales
+en *-chi/-ghi*, los números escritos, los posesivos y el *Lei* de cortesía,
+que no usan ningún tiempo nuevo pero sí una regla de una semana concreta), y
+calcula **la primera semana cuya teoría lo cubre todo**:
 
 - En el enunciado, que solo se lee, el presente vale desde el principio.
 - En la respuesta, lo que escribís o elegís, el presente cuenta desde la

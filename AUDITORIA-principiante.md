@@ -362,7 +362,42 @@ Queda para después, en la misma línea: que el nodo del percorso muestre
 
 ---
 
-## 7. Prioridad sugerida
+## 7. Estado de las correcciones (23/9)
+
+Todo lo de las secciones 1 a 5 quedó corregido en el código, salvo lo que se
+indica. Resumen por punto:
+
+| Punto | Qué se hizo |
+|---|---|
+| 1.1 | `tools/sillabo.py` reconoce elisión/apóstrofo (semana 3), plural pedido en la consigna (2), números escritos (7), posesivos producidos (3) y *Lei* de cortesía (5). Nueve ítems salieron de la semana 1 hacia su semana; el curso se reconstruyó (`build_course.py`). |
+| 1.2 | Tarjeta **Palabra nueva** (palabra, significado, audio, ejemplo) dos ítems antes de la primera pregunta sobre esa palabra, en el entrenamiento y en *Palabras de la semana* (`Drills.withWordIntros`). |
+| 1.3 | El banco se abre con su gramática: *Forme* en la semana 3, *Traduci* y *Coniuga in contesto* en la 5 (`Banca.FORME_WEEK`, `TR_WEEK`, `GAP_WEEK`); en *Allena* aparecen apagados con la semana en que se abren, y entran como misión de esa semana en el percorso. |
+| 1.4 | 🔊 en cada celda «Ejemplo» de las tablas de la lección. |
+| 1.5 | Los chequeos de pares mínimos tienen tres opciones; al errar se muestra la regla del bloque (📐). |
+| 1.6 | La Pausa caffè no mete una pregunta del laboratorio antes de la primera lección. |
+| 2.1 | Un solo reintento por ítem y en otra forma: dos opciones con la nota a la vista, versión de reconocimiento de lo que había que escribir, o la frase con fichas. La segunda vez paga la mitad de xp. |
+| 2.2 | `recognitionOf`: distractores de la misma forma (grupo de letras contra grupos de letras), del mismo tema, y las oraciones que comparten más palabras primero. |
+| 2.3 | Sin cambio (el gimnasio sigue siendo un drill formal). |
+| 2.5 | Al errar una pregunta de comprensión se abre el texto para buscar la respuesta. La caza de formas queda igual. |
+| 2.6 | El texto de *Cultura* dice que cada texto se abre con su gramática. |
+| 3.1 | Las opciones en español (`src: "vocab"`) ya no se diagnostican. |
+| 3.2 | Una oración entera elegida mal en el reconocimiento de una traducción no se diagnostica palabra a palabra. |
+| 3.3 | La diagnosis recibe el enunciado: «el sujeto acá es *loro*» cuando el sujeto es *loro*, y el *Lei* de cortesía solo si la frase trata de usted. |
+| 3.4 | Respuesta entera en español → «Eso está en español. Escribila en italiano; si todavía no la sabés, pedí las fichas». |
+| 3.5 | Las fichas pasan por el diagnóstico (marca la palabra y explica). |
+| 3.6 | «+ 3 detalles más» → «También: Artículos, Concordancia». |
+| 3.7 | «La próxima vez esta la vas a escribir» solo al acertar. |
+| 4.1 / 4.2 | Lo autocorregido cuenta como acierto en el porcentaje y en la tabla («Corregidas por vos»); «Lo que aprendiste hoy» lista cada ítem una sola vez con la pregunta a la izquierda; la segunda vuelta paga la mitad. |
+| 4.3 | Textos de la meta: 100 xp (2 o 3 pausas), 200 xp (4 o 5). README corregido. |
+| 4.4 | **Seguí donde estabas**: la ronda o la lección a medias se guardan (`laviac1.pending.v1`) y Oggi ofrece retomarlas en el mismo punto. |
+| 4.5 | Oggi con un solo próximo paso (sección 6). |
+| 4.6 | Sin contador «+N» al vaciarse los corazones. |
+| 5 | Lampo aparece como línea de texto hasta abrirse; segundo nivel de pista (💡 más pista: *c_me*) antes de «Ver la respuesta»; ofrecimiento del recordatorio al terminar las primeras sesiones; «Lectura de apoyo» no se muestra vacía. Pendiente: glosario al tocar palabras dentro de opciones y feedback. |
+| Percorso | Cada nodo muestra «n/m misiones»; el banco entra como misión en las semanas 3 y 5. |
+
+---
+
+## 8. Prioridad sugerida (original)
 
 1. **Bug 3.1** (diagnóstico sobre opciones en español, contamina el perfil de
    errores y la Clínica). Una línea en `app.js:1109`.

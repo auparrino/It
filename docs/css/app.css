@@ -1058,3 +1058,5 @@ h3 { letter-spacing: .08em; font-size: .8rem; }
 /* Oggi: il percorso davanti a tutto. */
 .hero .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
 .hero .row .btn { margin: 0; }
+.node .nm { display: block; font-size: .7rem; color: var(--grigio); font-weight: 700; }
+.hero .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
