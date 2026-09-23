@@ -72,17 +72,66 @@ ERR.forEach(function (e) {
   ok(!f.length, "«" + t + "» no debería marcar nada: " + f.map(function (x) { return x.msg; }).join(" | "));
 });
 
+// Corpus de textos de estudiantes hispanohablantes con cada error anotado
+// (tools/scrivi_corpus.json): cuántos errores marca el corrector propio
+// por familia, y que no marque nada en las versiones corregidas ni en las
+// frases del curso.  Los pisos de abajo son el nivel medido: si una regla
+// nueva los baja, algo se rompió.
+(function () {
+  var C = JSON.parse(fs.readFileSync(path.join(__dirname, "scrivi_corpus.json"), "utf8"));
+  var hit = 0, tot = 0, falsos = [], byCat = {};
+  C.forEach(function (o) {
+    var tk = S.toks(o.text), f = S.lint(o.text, o.week).filter(function (x) { return !x.soft; });
+    o.errors.forEach(function (e) {
+      var a = o.text.indexOf(e.wrong), b = a + e.wrong.length, ids = [];
+      tk.forEach(function (t, i) { if (t.w && t.at < b && t.at + t.len > a) ids.push(i); });
+      var got = f.some(function (x) { for (var k = x.i; k < x.i + x.n; k++) if (ids.indexOf(k) >= 0) return true; return false; });
+      var c = byCat[e.cat] = byCat[e.cat] || [0, 0];
+      c[1]++; tot++;
+      if (got) { c[0]++; hit++; }
+    });
+    var tc = S.toks(o.corrected);
+    S.lint(o.corrected, o.week).filter(function (x) { return !x.soft; }).forEach(function (x) {
+      falsos.push("semana " + o.week + " «" + tc.slice(x.i, x.i + x.n).map(function (z) { return z.o; }).join(" ") + "»: " + x.msg);
+    });
+  });
+  ok(hit / tot >= 0.60, "corpus: el corrector propio marca " + hit + "/" + tot + " errores (piso 60%)");
+  var FLOOR = { spagnolo: 0.75, preposizione: 0.75, articolo: 0.85, ausiliare: 0.85, accento: 0.9, concordanza: 0.55, a_personale: 0.7, ortografia: 0.6 };
+  Object.keys(FLOOR).forEach(function (k) {
+    var c = byCat[k] || [0, 1];
+    ok(c[0] / c[1] >= FLOOR[k], "corpus, " + k + ": " + c[0] + "/" + c[1] + " (piso " + Math.round(FLOOR[k] * 100) + "%)");
+  });
+  ok(!falsos.length, "corpus: marca errores en textos corregidos: " + falsos.slice(0, 5).join(" | "));
+  if (verbose) console.log("  corpus: " + hit + "/" + tot + " · " + Object.keys(byCat).map(function (k) { return k + " " + byCat[k][0] + "/" + byCat[k][1]; }).join(", "));
+
+  var clean = [];
+  Frasi.ALL.forEach(function (f) { clean.push(f.it); });
+  Letture.EPISODI.forEach(function (e) { e.text.split(/\n+/).forEach(function (l) { clean.push(l); }); });
+  (Banca.bank().sentences || []).forEach(function (x) { (x.it || []).forEach(function (a) { clean.push(a); }); });
+  clean = clean.filter(function (t) { return t && !/→|_{2,}|\/|[¡¿]|\s{3,}/.test(t); });
+  var bad = [];
+  clean.forEach(function (t) {
+    var tk = S.toks(t);
+    S.lint(t, 52).filter(function (x) { return !x.soft; }).forEach(function (x) { bad.push("«" + tk.slice(x.i, x.i + x.n).map(function (z) { return z.o; }).join(" ") + "» en «" + t.slice(0, 60) + "»: " + x.msg); });
+  });
+  ok(!bad.length, "frases del curso (" + clean.length + "): " + bad.length + " marcadas: " + bad.slice(0, 5).join(" | "));
+})();
+
 // La llamada a Groq, con fetch simulado: elige el mejor modelo de la
 // lista que devuelve la clave; saturado → otro modelo; un modelo que no
 // acepta el modo JSON → el mismo sin él; clave mala → error claro; lee el
 // JSON aunque venga con <think> o ```.
 var GEM = [];
-function gem(name, plan, check) { GEM.push([name, plan, check]); }
+function gem(name, plan, check, keys) { GEM.push([name, plan, check, keys]); }
 function runGem() {
   if (!GEM.length) return console.log("\ncontrolli: " + checks + "   errori: " + fails);
   var g = GEM.shift(), calls = [], mem = {};
   global.localStorage = { getItem: function (k) { return mem[k] || null; }, setItem: function (k, v) { mem[k] = v; } };
   global.fetch = function (url, opt) {
+    if (/\/models$/.test(url) && /googleapis/.test(url)) {
+      return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve({ data: [
+        { id: "models/gemini-2.0-flash" }, { id: "models/text-embedding-004" }, { id: "models/gemini-2.5-flash" }, { id: "models/gemma-3-27b-it" }] }); } });
+    }
     if (/\/models$/.test(url)) {
       return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve({ data: [
         { id: "llama-3.1-8b-instant" }, { id: "openai/gpt-oss-120b" }, { id: "moonshotai/kimi-k2-instruct" },
@@ -94,7 +143,7 @@ function runGem() {
     return Promise.resolve({ ok: a.status === 200, status: a.status, json: function () { return Promise.resolve(a.body); },
                              text: function () { return Promise.resolve(JSON.stringify(a.body || {})); } });
   };
-  S.explain({ prompt: "p", stem: "s", given: "a", answer: "b" }, "K", function (err, data) {
+  S.explain({ prompt: "p", stem: "s", given: "a", answer: "b" }, g[3] || "K", function (err, data) {
     ok(g[2](err, data, calls), "groq " + g[0] + ": " + (err ? err.message : "ok") + " · " + calls.join(" → "));
     runGem();
   });
@@ -117,4 +166,16 @@ gem("todo pago", function () { return { status: 402, body: {} }; },
     function (e, d, c) { return e && /plan pago/.test(e.message) && c.length === 4; });
 gem("todo saturado", function () { return { status: 503, body: {} }; },
     function (e, d, c) { return e && /saturado/.test(e.message) && c.length === 4; });
+// Gemini de respaldo, con su propia búsqueda de modelos
+var BOTH = { groq: "gsk_x", gemini: "AIza_x" };
+gem("Groq saturado → Gemini", function (n, b) { return /gemini/.test(b.model) ? { status: 200, body: GOOD } : { status: 503, body: {} }; },
+    function (e, d, c) { var gi = c.filter(function (m) { return /gemini/.test(m); }); return !e && d.explicacion === "x" && gi[0] === "gemini-2.5-flash~" && !c.some(function (m) { return /embed|gemma/.test(m); }); }, BOTH);
+gem("clave de Groq mala → Gemini", function (n, b) { return /gemini/.test(b.model) ? { status: 200, body: GOOD } : { status: 401, body: {} }; },
+    function (e, d, c) { return !e && c.length === 2 && c[1] === "gemini-2.5-flash~"; }, BOTH);
+gem("solo Gemini", function () { return { status: 200, body: GOOD }; },
+    function (e, d, c) { return !e && c.length === 1 && c[0] === "gemini-2.5-flash~"; }, { gemini: "AIza_x" });
+gem("Gemini: modelo retirado (404) → el siguiente", function (n) { return n === 1 ? { status: 404, body: {} } : { status: 200, body: GOOD }; },
+    function (e, d, c) { return !e && c[1] === "gemini-2.0-flash~"; }, { gemini: "AIza_x" });
+gem("los dos fallan", function () { return { status: 503, body: {} }; },
+    function (e) { return e && /Groq: /.test(e.message) && /Gemini: /.test(e.message); }, BOTH);
 runGem();
