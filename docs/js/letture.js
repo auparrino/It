@@ -175,11 +175,11 @@
         "«Allora stasera festeggiamo lo stesso. Compro una pizza e te la porto a casa.»\n" +
         "«Portamene due, ho una fame da lupo!»",
       gloss: { subito: "enseguida", ancora: "todavía", chiesto: "pedido",
-               spiegato: "explicado", entro: "antes de, dentro de",
+               spiegato: "explicado", entro: "a más tardar, dentro de",
                festeggiamo: "festejamos", stesso: "(lo stesso) igual, de todos modos" },
       questions: [
         ["¿Qué le pidió el director?", ["el currículum, otra vez", "una carta de recomendación", "que hablara en inglés", "el pasaporte"], "el currículum, otra vez"],
-        ["¿Cuándo le van a contestar?", ["antes del viernes", "mañana", "en un mes", "no le dijeron"], "antes del viernes"],
+        ["¿Cuándo le van a contestar?", ["a más tardar el viernes", "mañana", "en un mes", "no le dijeron"], "a más tardar el viernes"],
         ["¿Qué pide Martín al final?", ["dos pizzas", "una cerveza", "que Giulia lo llame", "silencio"], "dos pizzas"]
       ],
       hunt: { label: "Tocá los pronombres de objeto indirecto sueltos (mi, ti, gli, me, te)", targets:

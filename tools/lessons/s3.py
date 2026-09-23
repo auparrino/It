@@ -99,7 +99,7 @@ LESSONS = {
 
  {"h": "El choque frontal con el castellano",
   "warn": "*Credo che sia tardi* = «Creo que ES tarde». *Penso che tu abbia "
-          "ragione* = «Pienso que TIENES razón». *Mi sembra che non stia bene* = "
+          "ragione* = «Pienso que TENÉS razón». *Mi sembra che non stia bene* = "
           "«Me parece que no ESTÁ bien». En castellano estos verbos, en "
           "afirmativa, van con indicativo; en italiano cuidado piden congiuntivo. "
           "Es el error que más rápido identifica a un hispanohablante, "
@@ -556,7 +556,8 @@ LESSONS = {
   "ex": [["Vai a Roma? — Sì, ci vado domani.", "¿Vas a Roma? — Sí, voy mañana."],
          ["Sei mai stato in Grecia? — No, non ci sono mai stato.",
           "Nunca estuve ahí."],
-         ["Quanto tempo ci vuole?", "¿Cuánto tiempo lleva?"]]},
+         ["Abiti ancora a Roma? — Sì, ci abito da dieci anni.",
+          "¿Seguís viviendo en Roma? — Sí, vivo ahí hace diez años."]]},
 
  {"h": "CI, valor de a + algo",
   "ex": [["Pensi al lavoro? — Sì, ci penso sempre.", "Sí, pienso en eso siempre."],

@@ -108,7 +108,7 @@
     ["subito", "enseguida", "súbito / repentino", "*Torno subito* = vuelvo enseguida."],
     ["presto", "temprano / pronto", "prestado", "*A presto!* = ¡hasta pronto!"],
     ["gamba", "pierna", "gamba (camarón)", "El camarón es *gambero*."],
-    ["topo", "ratón", "tope", "*Topolino* es Mickey Mouse."],
+    ["topo", "ratón", "topo (animal)", "El topo es *talpa*. *Topolino* es Mickey Mouse."],
     ["cattivo", "malo", "cautivo", "*Un cattivo ragazzo* = un chico malo."],
     ["aceto", "vinagre", "aceite", "El aceite es *olio*."],
     ["tasca", "bolsillo", "tasca (bar)", "*Ce l'ho in tasca* = lo tengo en el bolsillo."],

@@ -48,7 +48,7 @@ LESSONS = {
          ["sete / sette", "sed / siete"]],
   "warn": "En castellano no hay consonantes largas que distingan palabras "
           "(la *rr* y la *ll* son sonidos distintos, no alargados), así que el "
-          "oído no está entrenado. Al escribir vas a olvidarte dobles todo el "
+          "oído no está entrenado. Al escribir vas a olvidarte de las dobles todo el "
           "tiempo: *bello*, *sorella*, *professore*, *appartamento*, *mamma*. "
           "Es la falta más frecuente del hispanohablante en los exámenes."},
 
@@ -123,7 +123,7 @@ LESSONS = {
   "table": {"head": ["Singular", "Plural", "Nota"],
             "rows": [["l'uomo", "gli uomini", "el hombre"],
                      ["l'uovo (m.)", "le uova (f.)", "cambia de género"],
-                     ["il braccio", "le braccia", "partes del cuerpo en pares"],
+                     ["il braccio", "le braccia", "partes del cuerpo: plural en -a"],
                      ["il dito", "le dita", "íd."],
                      ["il ginocchio", "le ginocchia", "íd."],
                      ["la mano", "le mani", "femenino aunque termine en -o"],

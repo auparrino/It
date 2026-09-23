@@ -141,7 +141,7 @@
         ["Stacco alle sei.", "Salgo (del trabajo) a las seis."],
         ["Il capo è di buon umore oggi.", "El jefe está de buen humor hoy."],
         ["Mi è venuta un'idea.", "Se me ocurrió una idea."],
-        ["Tienimi aggiornato.", "Mantenéme al tanto."]
+        ["Tienimi aggiornato.", "Manteneme al tanto."]
       ] },
 
     { id: "chiacchiere", emoji: "💬", name: "Chiacchiere",

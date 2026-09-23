@@ -182,7 +182,7 @@ ITEMS = [
                   "Sapevo e sono venuto.",
                   "Se so, vengo."],
          answer="Avessi saputo, sarei venuto!",
-         note="En registro alto se puede omitir «se» y dejar el congiuntivo solo."),
+         note="Se puede omitir «se» y dejar el congiuntivo solo; es frecuente sobre todo en exclamaciones y en la lengua expresiva."),
     dict(id="c1-ipot-08", type="choice", topic="periodo ipotetico",
          prompt="Elegí la forma correcta.",
          stem="Magari ___ vero!",

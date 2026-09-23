@@ -235,9 +235,10 @@ LESSONS = {
   "ex": [["Sto mangiando.", "Estoy comiendo."],
          ["Stavo dormendo quando hai chiamato.",
           "Estaba durmiendo cuando llamaste."]],
-  "warn": "«Estoy estudiando italiano este año» NO es *sto studiando* sino "
-          "*studio italiano quest'anno*. El progresivo italiano es "
-          "estrictamente puntual: lo que está pasando ahora mismo."},
+  "warn": "«Estoy estudiando italiano este año» se dice normalmente "
+          "*studio italiano quest'anno*. El progresivo italiano se usa sobre "
+          "todo para lo que está pasando ahora mismo, aunque también admite "
+          "un período en curso: *in questo periodo sto studiando molto*."},
 
  {"h": "El participio pasado absoluto",
   "p": ["Un participio solo, al principio de la frase, con valor temporal o "
@@ -648,7 +649,7 @@ LESSONS = {
           "11. *facilemente* → *facilmente*. "
           "12. *qual'è* → *qual è*. "
           "13. *parleremo* (futuro) usado por *parleremmo* (condicional). "
-          "14. *sto studiando quest'anno* → *studio quest'anno*. "
+          "14. *sto studiando quest'anno* → más natural: *studio quest'anno*. "
           "15. *puedo* italianizado a «poso» → *posso*, con doble s."},
 
  {"h": "Cómo llegar al boss",

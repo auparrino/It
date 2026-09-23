@@ -289,7 +289,7 @@
     if (g.replace(/'/g, "") === e.replace(/'/g, "")) return { cat: "ortografia", slip: true,
       hint: "Revisá el apóstrofo.",
       explain: e.indexOf("'") >= 0 ? "Acá va apóstrofo: " + it(e) + "."
-        : "Sin apóstrofo: " + it(e) + ". *Qual è* y *un amico* no llevan: no hay vocal que se pierda." };
+        : "Sin apóstrofo: " + it(e) + ". *Qual è* y *un amico* no llevan: son truncamientos (*qual* y *un* existen también ante consonante: *qual buon vento*, *un libro*)." };
 
     // 4. Doppie
     if (degeminate(gs) === degeminate(es)) {
@@ -305,7 +305,7 @@
     var graw = g.replace(/ñ/g, "\u0000");
     var spellings = DATA.spelling.concat([
       ["lli", "gli", "El sonido de la ll tradicional (no la rioplatense) se escribe gli: famiglia, figlio."],
-      ["aqu", "acqu", "*Acqua* y sus derivados se escriben con cq: acqua, acquisto."],
+      ["aqu", "acqu", "*Acqua*, sus derivados y algunas palabras más se escriben con cq: acqua, acquario, acquisto."],
       ["ge", "ghe", "Para el sonido /ge/ se escribe *ghe* (spaghetti, laghetto); *ge* suena /dʒe/."],
       ["gi", "ghi", "Para el sonido /gi/ se escribe *ghi* (laghi, ghiaccio); *gi* suena /dʒi/."],
       ["cie", "zie", "El sonido /ts/ se escribe con z: grazie, zio, piazza."],

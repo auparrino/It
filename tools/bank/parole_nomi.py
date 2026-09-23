@@ -1281,7 +1281,7 @@ NOUNS += [
     ("febbre", "f", "febbri", "fiebre", "salute", "A1", "Doble b: febbre."),
     ("tosse", "f", "tossi", "tos", "salute", "A2", ""),
     ("raffreddore", "m", "raffreddori", "resfrío", "salute", "A2", "Doble f y doble d: raffreddore."),
-    ("influenza", "f", "influenze", "gripe", "salute", "A2", "Falso amigo: influenza = gripe. Género distinto: la gripe → l'influenza (f.)."),
+    ("influenza", "f", "influenze", "gripe", "salute", "A2", "Falso amigo: influenza = gripe. Femenino, como en español: l'influenza (f.)."),
     ("nausea", "f", "nausee", "náusea", "salute", "B2", ""),
     ("allergia", "f", "allergie", "alergia", "salute", "B1", "Doble l: allergia."),
     ("infezione", "f", "infezioni", "infección", "salute", "B1", ""),
