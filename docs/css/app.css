@@ -839,3 +839,21 @@ body.ingame .feedback.sbagliato #lesnext2 { background: var(--rosso-chiaro); box
 .typed textarea:disabled { opacity: .8; }
 .typed .btn { flex: 1 1 100%; padding: 14px; font-size: 1.05rem; }
 .typed .accents { flex: 1 1 100%; margin-top: 0; }
+
+/* Teoría en formato corto: la regla destacada, el detalle plegado. */
+.lesson p.rule { font-size: 1.06rem; line-height: 1.5; color: var(--inchiostro);
+  background: rgba(31,122,77,.07); border-left: 4px solid var(--verde);
+  border-radius: 0 10px 10px 0; padding: 10px 12px; margin: 0 0 12px; }
+.lesson details.more { margin-top: 12px; border-top: 1px dashed rgba(0,0,0,.12); padding-top: 8px; }
+.lesson details.more summary { cursor: pointer; font-weight: 700; font-size: .9rem;
+  color: var(--verde); list-style: none; padding: 6px 0; }
+.lesson details.more summary::-webkit-details-marker { display: none; }
+.lesson details.more summary::before { content: "＋ "; }
+.lesson details.more[open] summary::before { content: "− "; }
+.lesson details.more p { font-size: .95rem; opacity: .9; }
+
+/* Toque en la palabra, en los ejercicios. */
+.stem .w.gl { cursor: pointer; border-radius: 3px; }
+.stem .w.gl:active { background: rgba(31,122,77,.15); }
+.stem .w.gl.new { text-decoration: underline dotted; text-underline-offset: 4px;
+  text-decoration-color: var(--verde); }

@@ -24,6 +24,7 @@ var participles = {};   // participio (4 desinenze) -> [ausiliari]
 var gerunds = {};
 var imperatives = {};   // solo le forme che non coincidono con altri tempi
 var aux = {};           // forme di essere/avere/venire -> [verbo:tempo]
+var lemmas = {};        // qualsiasi forma -> [infinito], per il lessico
 
 function add(map, form, val) {
   form = form.toLowerCase();
@@ -39,6 +40,7 @@ Conj.list().forEach(function (inf) {
     forms.forEach(function (f) {
       var w = f.split(" ");
       add(simple, w[w.length - 1], t);
+      add(lemmas, w[w.length - 1], inf);
       if (inf === "essere" || inf === "avere" || inf === "venire") add(aux, f, inf + ":" + t);
     });
   });
@@ -47,16 +49,43 @@ Conj.list().forEach(function (inf) {
     var ausiliare = info.refl ? "essere" : info.aux;
     ["o", "a", "i", "e"].forEach(function (e) {
       add(participles, pp.replace(/[oaie]$/, e), ausiliare);
+      add(lemmas, pp.replace(/[oaie]$/, e), inf);
     });
   } catch (e) { /* senza participio */ }
-  try { add(gerunds, Conj.gerund(inf).replace(/si$/, ""), inf); } catch (e) { /* no */ }
+  try {
+    add(gerunds, Conj.gerund(inf).replace(/si$/, ""), inf);
+    add(lemmas, Conj.gerund(inf).replace(/si$/, ""), inf);
+  } catch (e) { /* no */ }
+  add(lemmas, inf, inf);
+  add(lemmas, inf.replace(/rsi$/, "re"), inf);
+  add(lemmas, inf.replace(/rsi$/, "r").replace(/re$/, "r"), inf);   // tronco: far, dir
+
   try {
     var im = Conj.imperative(inf);
-    if (im) add(imperatives, im.tu.split(" ").pop(), inf);
+    if (im) {
+      add(imperatives, im.tu.split(" ").pop(), inf);
+      ["tu", "Lei", "noi", "voi"].forEach(function (k) { add(lemmas, im[k].split(" ").pop(), inf); });
+    }
   } catch (e) { /* no */ }
 });
 
+// Irregular verbs of the bank that the conjugator does not describe: their
+// regular-looking forms still identify the lemma (cadere → caduto, cadrà),
+// only for the lexicon, never as tenses.
+bank.verbs.forEach(function (v) {
+  if (!v[4] || Conj.VERBS[v[0]]) return;
+  if (!Conj.register(v[0], { es: v[1], aux: v[2], isc: v[3] })) return;
+  Conj.SIMPLE_TENSES.forEach(function (t) {
+    try { Conj.conjugate(v[0], t).forEach(function (f) { add(lemmas, f.split(" ").pop(), v[0]); }); } catch (e) { /* no */ }
+  });
+  try {
+    var pp = Conj.participle(v[0]);
+    ["o", "a", "i", "e"].forEach(function (e) { add(lemmas, pp.replace(/[oaie]$/, e), v[0]); });
+  } catch (e) { /* no */ }
+  add(lemmas, v[0], v[0]);
+});
+
 process.stdout.write(JSON.stringify({
-  simple: simple, participles: participles, aux: aux,
+  simple: simple, participles: participles, aux: aux, lemmas: lemmas,
   gerunds: Object.keys(gerunds), imperatives: Object.keys(imperatives)
 }));

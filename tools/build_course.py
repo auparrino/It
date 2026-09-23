@@ -595,22 +595,46 @@ def load_lessons() -> dict:
     return out
 
 
+# The lesson is read on a phone: short rule, then the table or the examples.
+# Longer explanations go in "more", folded under «Más detalle».
+LIMITS = {"intro": 35, "r": 30, "warn": 30, "tip": 30, "more": 70}
+
+
+def _words(s: str) -> int:
+    return len(re.sub(r"[*]", "", s).split())
+
+
 def check_lesson(week: int, lesson: dict) -> list:
     """Sanity check on one lesson; returns a list of problems."""
     bad = []
     if not lesson.get("intro"):
         bad.append("settimana %s: manca l'intro" % week)
+    elif _words(lesson["intro"]) > LIMITS["intro"]:
+        bad.append("settimana %s: intro di %d parole (max %d)"
+                   % (week, _words(lesson["intro"]), LIMITS["intro"]))
     blocks = lesson.get("blocks") or []
     if len(blocks) < 3:
         bad.append("settimana %s: solo %d blocchi" % (week, len(blocks)))
-    known = {"h", "p", "table", "ex", "warn", "tip"}
+    known = {"h", "r", "table", "ex", "warn", "tip", "more"}
     for i, b in enumerate(blocks, 1):
         extra = set(b) - known
         if extra:
             bad.append("settimana %s blocco %d: chiavi ignote %s"
                        % (week, i, sorted(extra)))
-        if not (set(b) & {"p", "table", "ex", "warn", "tip"}):
-            bad.append("settimana %s blocco %d: senza contenuto" % (week, i))
+        if not b.get("r"):
+            bad.append("settimana %s blocco %d: manca la regola corta (r)" % (week, i))
+        for k in ("r", "warn", "tip"):
+            if b.get(k) and _words(b[k]) > LIMITS[k]:
+                bad.append("settimana %s blocco %d: %s di %d parole (max %d)"
+                           % (week, i, k, _words(b[k]), LIMITS[k]))
+        for par in b.get("more") or []:
+            if _words(par) > LIMITS["more"]:
+                bad.append("settimana %s blocco %d: paragrafo di «more» di %d parole (max %d)"
+                           % (week, i, _words(par), LIMITS["more"]))
+        if len(b.get("more") or []) > 2:
+            bad.append("settimana %s blocco %d: più di 2 paragrafi in «more»" % (week, i))
+        if len(b.get("ex") or []) > 5:
+            bad.append("settimana %s blocco %d: più di 5 esempi" % (week, i))
         t = b.get("table")
         if t:
             width = len(t.get("head", []))
@@ -661,7 +685,12 @@ def place_by_syllabus(weeks: list, by_id: dict, challenges: list) -> None:
     def weeks_ok(feats, week):
         return all(v <= week or k in local.get(week, ()) for k, v in feats.items())
 
+    import lessico
+    seen_words = lessico.lesson_words({"weeks": weeks})
     feats = {iid: sillabo.min_week(it)[1] for iid, it in by_id.items()}
+    for iid, it in by_id.items():
+        # vocabulary: what the learner writes must be known by then
+        feats[iid].update(lessico.item_vocab(it, seen_words))
     need = {iid: max(f.values()) if f else 1 for iid, f in feats.items()}
     for iid, it in by_id.items():
         # first week that can ask it: test_game.js checks every week against it
@@ -906,6 +935,17 @@ def main() -> None:
         "challenges": flat,
         "sources": [dummies["source"], routledge["source"]],
     }
+    # Tap a word, see what it means: every Italian word of the exercises and
+    # of the lessons, with its lemma, Spanish and the week it is in play.
+    import lessico
+    texts = [(i.get("stem") or "") + " " + (i.get("answer") or "") for i in course["items"]
+             if i.get("type") != "translate"]
+    for w in weeks:
+        for b in (w.get("lesson") or {}).get("blocks", []):
+            texts += [p[0] for p in b.get("ex", [])]
+    with open(os.path.join(DATA, "glossario.json"), "w", encoding="utf-8") as fh:
+        json.dump(lessico.gloss_table(texts), fh, ensure_ascii=False, separators=(",", ":"))
+
     out = os.path.join(DATA, "course.json")
     with open(out, "w", encoding="utf-8") as fh:
         json.dump(course, fh, ensure_ascii=False, separators=(",", ":"))

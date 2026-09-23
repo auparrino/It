@@ -450,6 +450,33 @@
       '<button class="btn wide" id="lquiz">Lo leí → preguntas y caza de formas</button>';
   }
 
+  /* Toque en la palabra: cualquier palabra italiana de un ejercicio muestra
+     qué significa (data/glossario.json, armado por build_course.py).  Las que
+     todavía no viste en el curso van subrayadas.  No en los ejercicios que
+     preguntan justamente el significado, ni en los enunciados en castellano. */
+  var glossario = null;
+  var stemGloss = [];
+
+  function glossable(it) {
+    if (!glossario || !it || it.type === "translate" || it.type === "listen" ||
+        it.type === "dictation" || it.src === "frasi") return false;
+    return !/signific|traduc|qué quiere decir|qué expresa|cómo suena|se pronuncia/i.test(it.prompt || "");
+  }
+
+  function glossify(it, raw) {
+    raw = String(raw || "");
+    if (!glossable(it)) return esc(raw);
+    var week = Math.min(state.unlocked || 1, 52);
+    return raw.split(/([A-Za-zÀ-ÿ]+)/).map(function (t, k) {
+      if (k % 2 === 0) return esc(t);
+      var g = glossario[t.toLowerCase()];
+      if (!g) return esc(t);
+      stemGloss.push(g[0] + " — " + g[1]);
+      return '<span class="w gl' + (g[2] > week ? " new" : "") + '" data-sg="' +
+        (stemGloss.length - 1) + '">' + esc(t) + "</span>";
+    }).join("");
+  }
+
   function showGloss(txt) {
     var box = $("#glossbox");
     if (!box) {
@@ -526,12 +553,17 @@
 
   var sayIndex = {};
 
-  function renderBlock(b, i) {
+  /* part: undefined = el bloque entero (teoría completa); "a" = título,
+     regla y tabla; "b" = ejemplos, trampa, atajo y detalle (lección jugada). */
+  function renderBlock(b, i, part) {
+    var A = part !== "b", B = part !== "a";
     var html = '<section class="blk">';
-    if (b.h) html += "<h2>" + mk(b.h) + "</h2>";
-    (b.p || []).forEach(function (par) { html += "<p>" + mk(par) + "</p>"; });
+    if (b.h) html += "<h2>" + mk(b.h) + (part === "b" ? ' <span class="muted">· ejemplos</span>' : "") + "</h2>";
+    // La regla corta primero; el detalle, plegado.
+    if (b.r && A) html += '<p class="rule">' + mk(b.r) + "</p>";
+    if (A) (b.p || []).forEach(function (par) { html += "<p>" + mk(par) + "</p>"; });
 
-    if (b.table) {
+    if (b.table && A) {
       html += '<div class="tw"><table class="gram">';
       if (b.table.head && b.table.head.join("")) {
         html += "<thead><tr>" + b.table.head.map(function (c) {
@@ -545,7 +577,7 @@
       }).join("") + "</tbody></table></div>";
     }
 
-    if (b.ex) {
+    if (b.ex && B) {
       html += '<ul class="exs">' + b.ex.map(function (pair, k) {
         sayIndex[i + "-" + k] = pair[0];
         return '<li><span class="it">' + esc(pair[0]) + "</span>" +
@@ -555,10 +587,15 @@
       }).join("") + "</ul>";
     }
 
+    if (!B) return html + "</section>";
     if (b.warn) html += '<div class="call warn"><b>La trampa</b>' +
       "<p>" + mk(b.warn) + "</p></div>";
     if (b.tip) html += '<div class="call tip"><b>El atajo</b>' +
       "<p>" + mk(b.tip) + "</p></div>";
+    if (b.more && b.more.length) {
+      html += '<details class="more"><summary>¿Por qué? Más detalle</summary>' +
+        b.more.map(function (par) { return "<p>" + mk(par) + "</p>"; }).join("") + "</details>";
+    }
     return html + "</section>";
   }
 
@@ -622,7 +659,7 @@
         '<button class="btn wide" id="lesnext">Empezar →</button></div>';
     }
     if (st.kind === "block") {
-      return hudH + '<div class="card lescard lesson">' + renderBlock(w.lesson.blocks[st.i], st.i) +
+      return hudH + '<div class="card lescard lesson">' + renderBlock(w.lesson.blocks[st.i], st.i, st.part) +
         '<button class="btn wide" id="lesnext">Seguir →</button></div>';
     }
     var q = st.q;
@@ -824,12 +861,13 @@
   function renderGioco() {
     var it = currentItem();
     if (!it) return "";
+    stemGloss = [];
     // Several blanks: numbered, answered in order («a / b»).
     var gaps = (String(it.stem || "").match(/_{3,}/g) || []).length;
     var multi = gaps > 1 && /\|/.test(it.answer || "");
     var gi = 0;
     var body = "", stem = /^\s*_+\s*$/.test(it.stem || "") ? ""
-      : esc(it.stem).replace(/_{3,}/g, function () {
+      : glossify(it, it.stem).replace(/_{3,}/g, function () {
         return multi ? '<span class="gap n">' + (++gi) + "</span>" : '<span class="gap">&nbsp;</span>';
       });
     var prompt = '<div class="prompt">' + esc(it.prompt || "") + "</div>";
@@ -1875,6 +1913,9 @@
     on("#lquiz", function () { startRound("lettura", view.ep); });
     on("#readall", function () { speak(Letture.byId(view.ep).text, true); });
     on("#readslow", function () { speak(Letture.byId(view.ep).text, true, 0.7); });
+    document.querySelectorAll("[data-sg]").forEach(function (b) {
+      b.onclick = function () { showGloss(stemGloss[+b.dataset.sg]); };
+    });
     document.querySelectorAll("[data-gl]").forEach(function (b) {
       b.onclick = function () {
         showGloss(glossIndex[+b.dataset.gl]);
@@ -2211,6 +2252,12 @@
       state: function () { return state; }
     };
   }
+
+  // The glossary is optional too: without it words are just not tappable.
+  fetch("data/glossario.json")
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (g) { glossario = g; })
+    .catch(function () { /* senza glossario */ });
 
   // The bank is optional: without it the app still works, just smaller.
   var bankP = fetch("data/bank.json")

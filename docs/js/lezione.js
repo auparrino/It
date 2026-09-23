@@ -126,7 +126,11 @@
     rnd = rnd || Math.random;
     var out = [{ kind: "intro" }];
     lesson.blocks.forEach(function (b, i) {
-      out.push({ kind: "block", i: i });
+      // Tabla y ejemplos juntos no entran en una pantalla: dos pasos.
+      if (b.table && b.ex && b.ex.length) {
+        out.push({ kind: "block", i: i, part: "a" });
+        out.push({ kind: "block", i: i, part: "b" });
+      } else out.push({ kind: "block", i: i });
       var q = (b.table && tableQuestion(b, rnd)) || (b.ex && exQuestion(lesson, b, rnd));
       if (q) { q.block = i; out.push({ kind: "quiz", q: q }); }
     });

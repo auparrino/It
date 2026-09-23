@@ -228,6 +228,17 @@ comparativos), y calcula **la primera semana cuya teoría lo cubre todo**:
   banco (*Traduci*, *Completa*, *Trova l'errore*, la Clínica y la Pausa)
   y los juegos de *Capire* filtran por la semana a la que llegaste.
 
+- **Vocabulario**: `tools/lessico.py` sabe desde qué semana se conoce cada
+  palabra (el nivel del banco, lo que ya mostró la teoría, o cognado
+  transparente para un hispanohablante, que se comprueba contra el diccionario
+  de castellano con las reglas del Ponte). Lo que escribís tiene que ser
+  vocabulario ya visto; en lo que leés se toleran hasta dos palabras nuevas.
+  Las palabras que no están en el banco tienen significado y nivel en
+  `tools/bank/glossario.py`.
+- **Toque en la palabra**: en cualquier ejercicio (salvo los que preguntan el
+  significado) tocás una palabra italiana y ves qué significa; las que todavía
+  no viste en el curso aparecen subrayadas (`docs/data/glossario.json`).
+
 `test_game.js` verifica que ninguna semana pida nada antes de su teoría, y
 `python3 tools/sillabo.py` lista qué ejercicio esperó a qué semana y por qué.
 Si se reordena el programa, las semanas de cada tiempo se ajustan en
@@ -283,6 +294,8 @@ tools/
   extract_routledge.py   EPUB -> temario + desafíos
   build_course.py        arma docs/data/course.json
   sillabo.py             desde qué semana se puede pedir cada ejercicio
+  lessico.py             desde qué semana se conoce cada palabra; glosario
+  check_lessons.py       formato y sillabo de la teoría
   forms_lexicon.js       léxico de formas verbales para el sillabo
   authored/              banco de ítems propios (Python legible)
   lessons/               teoría de las 52 semanas (s1..s4, una por estación)
@@ -325,9 +338,14 @@ libro se acepte siempre como correcta. `build_course.py` valida además que las
 52 semanas tengan lección, que ninguna tabla tenga filas desparejas y que no
 queden bloques vacíos.
 
-La teoría vive en `tools/lessons/*.py` como diccionarios legibles: cada bloque
-admite título, párrafos, una tabla, ejemplos `[italiano, castellano]`, una
-trampa y un atajo. Dentro del texto, `*forma*` marca una forma italiana y
+La teoría vive en `tools/lessons/*.py` como diccionarios legibles, en formato
+corto para leer en el teléfono: cada bloque es una idea, con título, **la regla
+en ≤ 30 palabras** (`r`), una tabla y/o hasta 5 ejemplos `[italiano,
+castellano]`, una trampa y un atajo (≤ 30 palabras cada uno), y el detalle
+opcional (`more`) plegado bajo «¿Por qué? Más detalle». En la lección jugada,
+un bloque con tabla y ejemplos se muestra en dos pantallas.
+`python3 tools/check_lessons.py` controla el formato, los límites y que los
+ejemplos no usen tiempos de semanas posteriores (salvo bloques «Adelanto»). Dentro del texto, `*forma*` marca una forma italiana y
 `**texto**` una regla clave. Para editar una lección se toca ese archivo y se
 vuelve a correr `python3 tools/build_course.py`.
 

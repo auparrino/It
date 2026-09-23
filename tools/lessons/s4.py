@@ -4,46 +4,52 @@
 LESSONS = {
 
 40: {
-"intro": "El causativo es la construcción que más rápido delata a un extranjero "
-         "cuando falta. *Fare* + infinitivo significa «hacer que alguien haga» "
-         "o «mandar a hacer», y el italiano la usa donde el castellano arma una "
-         "subordinada entera.",
+"intro": "Vas a usar el causativo: *fare* + infinitivo para «hacer que alguien "
+         "haga» o «mandar a hacer», donde el castellano arma una subordinada entera.",
 "blocks": [
  {"h": "fare + infinito",
-  "p": ["Un solo bloque: *fare* conjugado + infinitivo, sin nada en el medio. "
-        "Los dos verbos funcionan como una unidad."],
+  "r": "*fare* conjugado + infinitivo, **sin nada en el medio**: los dos verbos "
+       "funcionan como una unidad.",
   "ex": [["Ho fatto riparare la macchina.", "Mandé a arreglar el auto."],
          ["Mi fai ridere.", "Me hacés reír."],
-         ["Il professore ci fa studiare molto.",
-          "El profesor nos hace estudiar mucho."],
-         ["Fammi sapere.", "Avisame. (literalmente: hacé que yo sepa)"],
-         ["Si è fatto tagliare i capelli.", "Se cortó el pelo (fue a la peluquería)."]],
-  "tip": "*Farsi* + infinitivo indica que la acción se hizo hacer para uno "
-         "mismo: *mi sono fatto fare un vestito*, *si è fatta operare*. Es la "
-         "forma normal de decir «me corté el pelo» o «me hice un traje»."},
+         ["Il professore ci fa studiare molto.", "El profesor nos hace estudiar mucho."],
+         ["Fammi sapere.", "Avisame. (literalmente: hacé que yo sepa)"]]},
 
- {"h": "Quién hace qué: el reparto de los complementos",
-  "p": ["Si el infinitivo no tiene objeto propio, el que ejecuta la acción es "
-        "objeto DIRECTO. Si el infinitivo ya lleva un objeto directo, el que "
-        "ejecuta pasa a INDIRECTO, introducido por *a*."],
+ {"h": "farsi + infinito: para uno mismo",
+  "r": "*farsi* + infinitivo = hacerse hacer algo. Es la forma normal de decir "
+       "«me corté el pelo» o «me hice un traje».",
+  "ex": [["Si è fatto tagliare i capelli.", "Se cortó el pelo (en la peluquería)."],
+         ["Mi sono fatto fare un vestito.", "Me hice hacer un traje."],
+         ["Si è fatta operare.", "Se operó."]]},
+
+ {"h": "Quién hace qué",
+  "r": "Si el infinitivo no tiene objeto propio, el que ejecuta es objeto "
+       "**directo**. Si ya lleva objeto directo, el que ejecuta pasa a "
+       "**indirecto**, con *a*.",
   "ex": [["Faccio lavorare Marco. → Lo faccio lavorare.",
           "Hago trabajar a Marco. → Lo hago trabajar."],
          ["Faccio leggere il libro a Marco. → Glielo faccio leggere.",
-          "Le hago leer el libro a Marco. → Se lo hago leer."]],
-  "warn": "El detalle de examen: los pronombres van SIEMPRE delante de *fare*, "
-          "no del infinitivo. *Lo faccio venire*, jamás «faccio venirlo». Solo "
-          "cuando *fare* está en imperativo informal, infinitivo o gerundio se "
-          "pegan a *fare*: *fallo entrare*, *devo farlo venire*."},
+          "Le hago leer el libro a Marco. → Se lo hago leer."]]},
+
+ {"h": "Los pronombres van delante de fare",
+  "r": "Los pronombres van **delante de *fare***, no del infinitivo: *lo faccio "
+       "venire*, jamás «faccio venirlo».",
+  "ex": [["Lo faccio venire.", "Lo hago venir."],
+         ["Fallo entrare.", "Hacelo entrar."],
+         ["Devo farlo venire.", "Tengo que hacerlo venir."]],
+  "warn": "Solo se pegan a *fare* cuando *fare* está en imperativo informal, "
+          "infinitivo o gerundio: *fallo entrare*, *devo farlo venire*."},
 
  {"h": "lasciare: permitir en vez de obligar",
-  "p": ["Funciona igual que *fare* pero significa «dejar que». Admite además "
-        "la construcción con *che* + congiuntivo."],
+  "r": "*lasciare* + infinitivo funciona igual que *fare* pero significa «dejar "
+       "que». También admite *lasciare che* + congiuntivo.",
   "ex": [["Lascia parlare tuo fratello.", "Dejá hablar a tu hermano."],
          ["Non mi lasciano uscire.", "No me dejan salir."],
          ["Lascialo stare.", "Dejalo en paz."],
          ["Lascia che ti spieghi.", "Dejá que te explique."]]},
 
  {"h": "Expresiones fijas con fare",
+  "r": "Estas combinaciones se usan todo el tiempo: aprendelas enteras.",
   "table": {"head": ["Expresión", "Sentido"],
             "rows": [["far vedere", "mostrar"],
                      ["far sapere", "avisar"],
@@ -54,43 +60,44 @@ LESSONS = {
                      ["far finta di", "hacer de cuenta que"],
                      ["dare da fare", "dar trabajo"],
                      ["farcela", "lograrlo"]]},
-  "tip": "*Far vedere* es lo que un italiano dice donde el castellano usa "
-         "«mostrar»: *fammi vedere*, no «mostrami» (que existe pero suena "
-         "raro en el habla cotidiana)."},
+  "tip": "Para «mostrar» un italiano dice *far vedere*: *fammi vedere*. "
+         "*Mostrami* existe, pero suena raro en el habla cotidiana."},
 ]},
 
 41: {
-"intro": "Ver, oír y sentir seguidos de otro verbo admiten tres construcciones "
-         "distintas, y cada una enfoca la escena de otra manera. El castellano "
-         "casi siempre usa una sola. Elegir bien es puro nivel C1.",
+"intro": "Vas a elegir entre tres construcciones después de ver, oír y sentir, "
+         "cada una con otro enfoque. El castellano casi siempre usa una sola.",
 "blocks": [
  {"h": "Las tres opciones",
+  "r": "*vedere, sentire, guardare, ascoltare, osservare, notare* + otro verbo: "
+       "tres construcciones. En el habla, la más frecuente es la del **infinitivo**.",
   "table": {"head": ["Construcción", "Enfoque", "Ejemplo"],
-            "rows": [["+ infinitivo", "el hecho completo",
-                      "Ho visto Maria uscire."],
+            "rows": [["+ infinitivo", "el hecho completo", "Ho visto Maria uscire."],
                      ["+ che + indicativo", "la circunstancia, con más detalle",
                       "Ho visto che Maria usciva."],
                      ["+ che (relativa)", "la acción en curso, sorprendida",
                       "Ho visto Maria che usciva."]]},
-  "p": ["Con *vedere*, *sentire*, *udire*, *guardare*, *ascoltare*, "
-        "*osservare*, *notare*. La más frecuente en el habla es la del "
-        "infinitivo."]},
+  "more": ["*udire* (oír) funciona igual, pero es de registro escrito."]},
 
- {"h": "Colocación del objeto",
+ {"h": "Dónde va el objeto",
+  "r": "El sustantivo puede ir antes o después del infinitivo. El pronombre va "
+       "**delante del verbo de percepción**.",
   "ex": [["Ho sentito cantare Maria.", "Oí cantar a María."],
          ["Ho sentito Maria cantare.", "Oí a María cantar."],
          ["L'ho sentita cantare.", "La oí cantar."],
          ["Li ho visti entrare.", "Los vi entrar."]],
-  "warn": "El participio concuerda con el pronombre directo, igual que "
-          "siempre: *l'ho vista uscire*, *li ho sentiti parlare*. Es un detalle "
-          "que los correctores buscan."},
+  "warn": "El participio concuerda con el pronombre directo, como siempre: "
+          "*l'ho vista uscire*, *li ho sentiti parlare*. Los correctores lo buscan."},
 
  {"h": "La pasiva de percepción",
-  "p": ["Cuando el sujeto es quien recibe la acción, el italiano usa el verbo "
-        "de percepción en forma reflexiva + infinitivo: *Si è sentito chiamare* (oyó que lo llamaban), *si è visto "
-        "rifiutare la richiesta* (le rechazaron el pedido, y lo vio)."]},
+  "r": "Si el sujeto recibe la acción: verbo de percepción **reflexivo** + "
+       "infinitivo.",
+  "ex": [["Si è sentito chiamare.", "Oyó que lo llamaban."],
+         ["Si è visto rifiutare la richiesta.", "Vio cómo le rechazaban el pedido."]]},
 
- {"h": "Sentire, un verbo que abarca mucho",
+ {"h": "sentire, un verbo que abarca mucho",
+  "r": "*sentire* cubre oír, sentir, probar y enterarse. Con pronombres forma "
+       "*sentirsi* y *sentirsela*.",
   "table": {"head": ["Uso", "Ejemplo", "Castellano"],
             "rows": [["oír", "Non ti sento.", "No te escucho."],
                      ["sentir físicamente", "Sento freddo.", "Tengo frío."],
@@ -99,189 +106,190 @@ LESSONS = {
                       "Me enteré de que te vas."],
                      ["sentirsi", "Come ti senti?", "¿Cómo te sentís?"],
                      ["sentirsela", "Non me la sento.", "No me animo."]]},
-  "tip": "*Ci sentiamo!* es la despedida telefónica estándar: «hablamos». Y "
-         "*Senti...* es la muletilla para introducir un tema, como el «mirá» "
-         "rioplatense."},
+  "tip": "*Ci sentiamo!* = «hablamos» (despedida telefónica). *Senti...* abre "
+         "un tema, como el «mirá» rioplatense."},
 ]},
 
 42: {
-"intro": "La lista de verbo + preposición es lo que separa al que habla "
-         "correcto del que habla bien. No hay regla: hay que memorizarla. Pero "
-         "se puede memorizar por grupos, y los grupos son bastante estables.",
+"intro": "Vas a usar la preposición correcta entre verbo e infinitivo. No hay "
+         "regla: se memoriza, pero por grupos bastante estables.",
 "blocks": [
  {"h": "Verbos con a + infinitivo",
-  "p": ["*cominciare a*, *iniziare a*, *continuare a*, *riuscire a*, "
-        "*provare a*, *imparare a*, *insegnare a*, *aiutare a*, *invitare a*, "
-        "*abituarsi a*, *rinunciare a*, *decidersi a*, *mettersi a*, "
-        "*sbrigarsi a*, *convincere a*, *costringere a*."],
+  "r": "Empezar, seguir, lograr, aprender, ayudar y empujar a otro llevan **a** "
+       "(*ad* ante vocal).",
+  "table": {"head": ["Idea", "Verbos"],
+            "rows": [["empezar / seguir", "cominciare a, iniziare a, continuare a, mettersi a"],
+                     ["lograr / intentar", "riuscire a, provare a"],
+                     ["aprender / enseñar / ayudar", "imparare a, insegnare a, aiutare a"],
+                     ["empujar a otro", "invitare a, convincere a, costringere a"],
+                     ["actitud", "abituarsi a, rinunciare a, decidersi a, sbrigarsi a"]]},
   "ex": [["Ho cominciato a studiare italiano.", "Empecé a estudiar italiano."],
          ["Non riesco a capire.", "No logro entender."],
          ["Mi sono messo a ridere.", "Me puse a reír."]]},
 
  {"h": "Verbos con di + infinitivo",
-  "p": ["*finire di*, *smettere di*, *cercare di*, *decidere di*, *sperare di*, "
-        "*credere di*, *pensare di*, *dimenticare di*, *ricordarsi di*, "
-        "*promettere di*, *accettare di*, *rifiutare di*, *avere bisogno di*, "
-        "*avere voglia di*, *avere paura di*, *essere contento di*."],
+  "r": "Terminar, dejar, tratar, decidir, pensar, recordar, prometer y las "
+       "expresiones con *avere* o *essere* llevan **di**.",
+  "table": {"head": ["Idea", "Verbos"],
+            "rows": [["terminar / dejar", "finire di, smettere di"],
+                     ["intentar / decidir", "cercare di, decidere di"],
+                     ["pensar / creer / esperar", "pensare di, credere di, sperare di"],
+                     ["memoria", "dimenticare di, ricordarsi di"],
+                     ["compromiso", "promettere di, accettare di, rifiutare di"],
+                     ["expresiones", "avere bisogno di, avere voglia di, avere paura di, "
+                      "essere contento di"]]},
   "ex": [["Ho smesso di fumare.", "Dejé de fumar."],
          ["Cerca di capire.", "Tratá de entender."],
          ["Ho voglia di uscire.", "Tengo ganas de salir."]]},
 
  {"h": "Verbos sin preposición",
-  "p": ["Los modales y los de percepción y voluntad: *volere*, *potere*, "
-        "*dovere*, *sapere*, *preferire*, *desiderare*, *osare*, *fare*, "
-        "*lasciare*, *vedere*, *sentire*, *piacere*, *bisognare*, y los "
-        "impersonales *è meglio*, *basta*, *conviene*."],
+  "r": "**Sin preposición**: modales (*volere, potere, dovere, sapere*), "
+       "*preferire, desiderare, osare, fare, lasciare, vedere, sentire, piacere, "
+       "bisognare* y *è meglio, basta, conviene*.",
   "ex": [["Preferisco restare a casa.", "Prefiero quedarme en casa."],
          ["So nuotare.", "Sé nadar."],
          ["Conviene partire presto.", "Conviene salir temprano."]]},
 
  {"h": "Los que cambian respecto del castellano",
-  "warn": "*pensare A qualcosa* (pensar EN algo) pero *pensare DI fare* (pensar "
-          "hacer). *Sognare qualcuno* sin preposición (soñar con alguien). "
-          "*Entrare IN casa* (entrar a/en). *Salire SU un treno*. "
-          "*Innamorarsi DI* (enamorarse de). *Sposare qualcuno* sin *a*. "
-          "*Telefonare A qualcuno* (llamar a alguien, indirecto). "
-          "*Cercare qualcosa* sin preposición (buscar algo). "
-          "*Aspettare qualcuno* sin *a* (esperar a alguien). "
-          "*Chiedere A qualcuno DI fare* (pedirle a alguien que haga). "
-          "*Dipendere DA*, *fidarsi DI*, *accorgersi DI*, *occuparsi DI*, "
-          "*servire A*, *credere IN/A*."},
+  "r": "Estos verbos rigen **distinto** que en castellano: con otra "
+       "preposición o sin ninguna.",
+  "table": {"head": ["Italiano", "Castellano"],
+            "rows": [["pensare a qualcosa / pensare di fare", "pensar en algo / pensar hacer"],
+                     ["sognare qualcuno", "soñar con alguien"],
+                     ["entrare in casa", "entrar a / en casa"],
+                     ["salire su un treno", "subir a un tren"],
+                     ["innamorarsi di", "enamorarse de"],
+                     ["sposare qualcuno", "casarse con alguien"],
+                     ["telefonare a qualcuno", "llamar a alguien (indirecto: gli telefono)"],
+                     ["cercare qualcosa / aspettare qualcuno", "buscar algo / esperar a alguien"],
+                     ["chiedere a qualcuno di fare", "pedirle a alguien que haga"],
+                     ["dipendere da, fidarsi di, accorgersi di", "depender de, fiarse de, darse cuenta de"],
+                     ["occuparsi di, servire a, credere in / a", "ocuparse de, servir para, creer en"]]},
+  "warn": "*Sposare* y *aspettare* van sin *a*: *ho sposato Laura*, *aspetto "
+          "Marco*. Y *telefonare* pide indirecto: *le telefono*, nunca «la telefono»."},
 
  {"h": "Cómo estudiar esto",
-  "tip": "No memorices listas: memorizá la frase entera. *Non riesco a "
-         "capire*, *ho smesso di fumare*, *mi sono abituato ad alzarmi presto*. "
-         "La preposición viaja pegada al verbo dentro de una frase completa, y "
-         "así se recupera automáticamente al hablar."},
+  "r": "No memorices listas: memorizá **la frase entera**, con la preposición "
+       "pegada al verbo.",
+  "ex": [["Non riesco a capire.", "No logro entender."],
+         ["Mi sono abituato ad alzarmi presto.", "Me acostumbré a levantarme temprano."]],
+  "tip": "Así la preposición se recupera sola al hablar: sale con la frase."},
 ]},
 
 43: {
-"intro": "El infinitivo italiano hace bastante más trabajo que el castellano: "
-         "es sustantivo, es orden impersonal, es subordinada completa. "
-         "Aprovecharlo acorta las frases y sube el registro.",
+"intro": "Vas a aprovechar el infinitivo como sustantivo, como orden impersonal "
+         "y en lugar de una subordinada. Acorta las frases y sube el registro.",
 "blocks": [
  {"h": "El infinitivo sustantivado",
-  "p": ["Con artículo, funciona como un sustantivo masculino: *il mangiare*, "
-        "*il bere*, *un continuo andare e venire*, *il dolce far niente*. Es "
-        "más frecuente que en castellano y suena literario pero natural."],
+  "r": "Con artículo, el infinitivo es un **sustantivo masculino**: *il mangiare*, "
+       "*un continuo andare e venire*, *il dolce far niente*.",
   "ex": [["Il camminare fa bene alla salute.", "Caminar hace bien a la salud."],
          ["Con l'andare del tempo.", "Con el paso del tiempo."],
-         ["Sul far del giorno.", "Al despuntar el día."]]},
+         ["Sul far del giorno.", "Al despuntar el día."]],
+  "more": ["Es más frecuente que en castellano y suena literario pero natural."]},
 
  {"h": "El infinitivo compuesto",
-  "p": ["*avere* o *essere* + participio. Obligatorio detrás de *dopo* y muy "
-        "frecuente con verbos de opinión referidos al pasado."],
+  "r": "*avere* o *essere* + participio. **Obligatorio después de *dopo*** y "
+       "frecuente con verbos de opinión sobre el pasado.",
   "ex": [["Dopo aver mangiato, siamo usciti.", "Después de comer, salimos."],
-         ["Dopo essere arrivati, ci siamo riposati.",
-          "Después de llegar, descansamos."],
+         ["Dopo essere arrivati, ci siamo riposati.", "Después de llegar, descansamos."],
          ["Credo di aver capito.", "Creo haber entendido."],
          ["Mi dispiace di essere arrivato tardi.", "Lamento haber llegado tarde."]],
-  "warn": "*Dopo* + infinitivo SIMPLE es un error. Siempre *dopo aver...* o "
-          "*dopo essere...*. En cambio *prima di* pide infinitivo simple: "
-          "*prima di uscire*."},
+  "warn": "*Dopo* + infinitivo simple es un error: siempre *dopo aver...* o "
+          "*dopo essere...*. En cambio *prima di* pide infinitivo simple: *prima di uscire*."},
 
- {"h": "El infinitivo como imperativo impersonal",
-  "p": ["Las instrucciones, recetas, carteles y prospectos usan el infinitivo. "
-        "Es la forma neutra de dar una orden a nadie en particular."],
+ {"h": "El infinitivo como orden impersonal",
+  "r": "Instrucciones, recetas, carteles y prospectos dan la orden **en "
+       "infinitivo**, a nadie en particular.",
   "ex": [["Non fumare.", "No fumar."],
          ["Spingere / Tirare.", "Empujar / Tirar."],
          ["Cuocere per dieci minuti.", "Cocinar diez minutos."],
          ["Agitare prima dell'uso.", "Agitar antes de usar."]]},
 
- {"h": "Sustituyendo a una subordinada",
-  "p": ["Cuando los dos verbos tienen el mismo sujeto, el italiano prefiere el "
-        "infinitivo a la subordinada con *che*, y esto es una marca fuerte de "
-        "buen estilo."],
+ {"h": "En lugar de una subordinada",
+  "r": "Con **el mismo sujeto** en los dos verbos, preferí el infinitivo a la "
+       "subordinada con *che*. Es marca de buen estilo.",
   "ex": [["Penso di partire domani.", "Pienso salir mañana."],
          ["Sono uscito senza salutare.", "Salí sin saludar."],
          ["È troppo tardi per telefonare.", "Es muy tarde para llamar."],
          ["Ho abbastanza tempo per finire.", "Tengo tiempo suficiente para terminar."]],
-  "tip": "*per* + infinitivo cubre la finalidad; *senza* + infinitivo la "
-         "ausencia; *invece di* + infinitivo la sustitución; *oltre a* + "
-         "infinitivo la adición. Cuatro conectores que resuelven medio texto "
-         "argumentativo."},
+  "tip": "Cuatro conectores + infinitivo: *per* (finalidad), *senza* (ausencia), "
+         "*invece di* (sustitución), *oltre a* (adición)."},
 ]},
 
 44: {
-"intro": "Gerundio y participio comprimen dos frases en una. Son el recurso "
-         "estrella de la prosa italiana escrita, y el italiano los usa donde "
-         "el castellano pone «como», «cuando», «después de que».",
+"intro": "Vas a comprimir dos frases en una con gerundio y participio, el "
+         "recurso estrella de la prosa italiana donde el castellano pone «como», "
+         "«cuando» o «después de que».",
 "blocks": [
  {"h": "El gerundio simple",
-  "p": ["*-ando* para *-are*, *-endo* para *-ere* e *-ire*. Irregulares por la "
-        "raíz latina de siempre: *facendo*, *dicendo*, *bevendo*, "
-        "*traducendo*, *ponendo*."],
+  "r": "*-ando* para *-are*, *-endo* para *-ere* e *-ire*. Irregulares por la "
+       "raíz latina: *facendo, dicendo, bevendo, traducendo, ponendo*.",
   "ex": [["Studiando, si impara.", "Estudiando, se aprende."],
-         ["Sbagliando s'impara.", "Errando se aprende."],
-         ["Essendo stanco, sono rimasto a casa.",
-          "Como estaba cansado, me quedé en casa."],
-         ["Pur sapendolo, non ha detto niente.",
-          "Aun sabiéndolo, no dijo nada."]],
-  "warn": "Regla de hierro: el gerundio italiano exige que el sujeto sea el "
-          "MISMO que el de la frase principal. *Uscendo di casa, ho incontrato "
-          "Marco* está bien porque el que sale y el que encuentra soy yo. "
-          "«Uscendo di casa, ha cominciato a piovere» está mal: la lluvia no "
-          "salió de casa."},
+         ["Sbagliando s'impara.", "Equivocándose se aprende."],
+         ["Essendo stanco, sono rimasto a casa.", "Como estaba cansado, me quedé en casa."],
+         ["Pur sapendolo, non ha detto niente.", "Aun sabiéndolo, no dijo nada."]]},
+
+ {"h": "El gerundio exige el mismo sujeto",
+  "r": "El sujeto del gerundio tiene que ser **el mismo** que el de la frase "
+       "principal.",
+  "ex": [["Uscendo di casa, ho incontrato Marco.",
+          "Al salir de casa, me encontré con Marco."]],
+  "warn": "«Uscendo di casa, ha cominciato a piovere» está mal: la lluvia no "
+          "salió de casa. Decí *mentre uscivo di casa, ha cominciato a piovere*."},
 
  {"h": "El gerundio compuesto",
-  "p": ["*avendo* o *essendo* + participio: expresa anterioridad. "
-        "*Avendo finito il lavoro, sono uscito.* *Essendo arrivati tardi, "
-        "abbiamo perso il treno.* Es de registro escrito y muy elegante."]},
+  "r": "*avendo* o *essendo* + participio: expresa **anterioridad**. Registro "
+       "escrito y elegante.",
+  "ex": [["Avendo finito il lavoro, sono uscito.", "Como había terminado el trabajo, salí."],
+         ["Essendo arrivati tardi, abbiamo perso il treno.",
+          "Como llegamos tarde, perdimos el tren."]]},
 
  {"h": "stare + gerundio: el progresivo",
-  "p": ["Indica acción en desarrollo en este momento. A diferencia del "
-        "castellano, el italiano NO lo usa para el futuro cercano ni para "
-        "acciones habituales."],
+  "r": "*stare* + gerundio = acción **en desarrollo ahora**. No sirve para el "
+       "futuro cercano ni para lo habitual.",
   "ex": [["Sto mangiando.", "Estoy comiendo."],
-         ["Stavo dormendo quando hai chiamato.",
-          "Estaba durmiendo cuando llamaste."]],
-  "warn": "«Estoy estudiando italiano este año» se dice normalmente "
-          "*studio italiano quest'anno*. El progresivo italiano se usa sobre "
-          "todo para lo que está pasando ahora mismo, aunque también admite "
-          "un período en curso: *in questo periodo sto studiando molto*."},
+         ["Stavo dormendo quando hai chiamato.", "Estaba durmiendo cuando llamaste."],
+         ["In questo periodo sto studiando molto.", "En este período estoy estudiando mucho."]],
+  "warn": "«Estoy estudiando italiano este año» se dice normalmente *studio "
+          "italiano quest'anno*."},
 
  {"h": "El participio pasado absoluto",
-  "p": ["Un participio solo, al principio de la frase, con valor temporal o "
-        "causal. Concuerda con el sustantivo al que se refiere (en los transitivos, "
-        "con el objeto: *letta la lettera*) y es la construcción más culta "
-        "de esta semana."],
+  "r": "Un participio solo al principio, con valor temporal o causal. Concuerda "
+       "con su sustantivo; en los transitivos, **con el objeto**: *letta la lettera*.",
   "ex": [["Finito il lavoro, siamo usciti.", "Terminado el trabajo, salimos."],
-         ["Arrivata la primavera, tutto cambia.",
-          "Llegada la primavera, todo cambia."],
-         ["Letta la lettera, si mise a piangere.",
-          "Leída la carta, se puso a llorar."],
-         ["Una volta capito il meccanismo, è facile.",
-          "Una vez entendido el mecanismo, es fácil."]]},
+         ["Arrivata la primavera, tutto cambia.", "Llegada la primavera, todo cambia."],
+         ["Letta la lettera, si è messa a piangere.", "Leída la carta, se puso a llorar."],
+         ["Una volta capito il meccanismo, è facile.", "Una vez entendido el mecanismo, es fácil."]],
+  "tip": "Es la construcción más culta de la semana: un solo participio "
+         "reemplaza a «después de que...»."},
 
  {"h": "El participio presente",
-  "p": ["Termina en *-ante* / *-ente* y casi siempre se ha lexicalizado como "
-        "adjetivo o sustantivo: *interessante*, *seguente*, *cantante*, "
-        "*insegnante*, *dirigente*, *proveniente*. Como verbo activo sobrevive "
-        "en registro jurídico: *i cittadini residenti all'estero*."]},
+  "r": "*-ante* / *-ente*. Casi siempre ya es **adjetivo o sustantivo**: "
+       "*interessante, seguente, cantante, insegnante, dirigente, proveniente*.",
+  "ex": [["i cittadini residenti all'estero", "los ciudadanos residentes en el exterior"]],
+  "more": ["Como verbo activo sobrevive en el registro jurídico y administrativo: "
+           "*i cittadini residenti all'estero*, *le persone aventi diritto*."]},
 ]},
 
 45: {
-"intro": "El passato remoto es el tiempo de la narración literaria y del habla "
-         "del sur de Italia. En el norte casi no se usa al hablar, pero está en "
-         "todos los libros, y un C1 tiene que reconocerlo sin esfuerzo y "
-         "producirlo cuando escribe un relato.",
+"intro": "Vas a reconocer sin esfuerzo el passato remoto, el tiempo de la "
+         "narración literaria, y a producirlo cuando escribas un relato.",
 "blocks": [
  {"h": "Las formas regulares",
+  "r": "Terminaciones propias para cada conjugación. En *-ere* hay **dos series** "
+       "en tres personas; las dos valen, la de *-etti* es más común.",
   "table": {"head": ["", "parlare", "vendere", "dormire"],
             "rows": [["io", "parlai", "vendei / vendetti", "dormii"],
                      ["tu", "parlasti", "vendesti", "dormisti"],
                      ["lui/lei", "parlò", "vendé / vendette", "dormì"],
                      ["noi", "parlammo", "vendemmo", "dormimmo"],
                      ["voi", "parlaste", "vendeste", "dormiste"],
-                     ["loro", "parlarono", "venderono / vendettero", "dormirono"]]},
-  "p": ["Los verbos en *-ere* tienen dos series posibles en tres personas. Las "
-        "dos son correctas; la de *-etti* es algo más común."]},
+                     ["loro", "parlarono", "venderono / vendettero", "dormirono"]]}},
 
  {"h": "El patrón 1-3-6 de los irregulares",
-  "p": ["Casi todos los irregulares del passato remoto lo son SOLO en tres "
-        "personas: *io*, *lui/lei* y *loro*. Las otras tres son regulares. Y "
-        "las tres irregulares se construyen sobre la misma raíz: "
-        "*-i*, *-e*, *-ero*."],
+  "r": "Los irregulares lo son **solo en *io*, *lui/lei* y *loro***, sobre la "
+       "misma raíz: *-i, -e, -ero*. Las otras tres personas son regulares.",
   "table": {"head": ["Verbo", "io", "tu", "lui", "noi", "voi", "loro"],
             "rows": [["prendere", "presi", "prendesti", "prese", "prendemmo",
                       "prendeste", "presero"],
@@ -297,36 +305,38 @@ LESSONS = {
                       "vennero"],
                      ["avere", "ebbi", "avesti", "ebbe", "avemmo", "aveste",
                       "ebbero"]]},
-  "tip": "*essere* es el único totalmente irregular: *fui, fosti, fu, fummo, "
-         "foste, furono*. Y *dare* y *stare*: *diedi/detti*, *stetti*."},
+  "tip": "*essere* es el único irregular entero: *fui, fosti, fu, fummo, foste, "
+         "furono*. Y *dare*: *diedi / detti*; *stare*: *stetti*."},
 
  {"h": "Cuándo se usa",
-  "p": ["Para hechos puntuales y concluidos, sin relación con el presente: la "
-        "narración histórica y literaria. El passato prossimo, en cambio, "
-        "mantiene el vínculo con el ahora."],
+  "r": "Para hechos **concluidos y sin relación con el presente**: narración "
+       "histórica y literaria. El passato prossimo mantiene el vínculo con el ahora.",
   "ex": [["Dante nacque a Firenze nel 1265.", "Dante nació en Florencia en 1265."],
          ["La guerra finì nel 1945.", "La guerra terminó en 1945."],
          ["Un giorno arrivò uno straniero.", "Un día llegó un forastero."],
          ["Stamattina ho preso il treno.", "Esta mañana tomé el tren."]],
-  "warn": "En el norte de Italia se usa el passato prossimo para todo, incluso "
-          "para hechos remotos. En Sicilia y Nápoles se usa el passato remoto "
-          "incluso para lo de esta mañana. Ninguna de las dos costumbres es "
-          "incorrecta, pero en la escritura formal la distinción se respeta."},
+  "warn": "El norte usa el passato prossimo para todo; Sicilia y Nápoles, el "
+          "remoto hasta para lo de esta mañana. En la escritura formal, la "
+          "distinción se respeta.",
+  "more": ["Ninguna de las dos costumbres regionales es incorrecta al hablar. "
+           "Pero en un texto escrito, un hecho histórico va en passato remoto y "
+           "lo que todavía pesa en el presente, en passato prossimo."]},
 
  {"h": "Trapassato remoto",
-  "p": ["*ebbi* / *fui* + participio. Solo aparece en subordinadas temporales "
-        "detrás de *quando*, *dopo che*, *appena*, cuando el verbo principal "
-        "está en passato remoto. Es puramente literario: *Appena ebbe finito, "
-        "uscì*. Reconocerlo alcanza."]},
+  "r": "*ebbi* / *fui* + participio, solo detrás de *quando, dopo che, appena* "
+       "con la principal en passato remoto. Es literario: **alcanza con reconocerlo**.",
+  "ex": [["Appena ebbe finito, uscì.", "Apenas hubo terminado, salió."],
+         ["Dopo che fu partito, tutti tacquero.", "Después de que se fue, todos callaron."]]},
 ]},
 
 46: {
-"intro": "Los verbos pronominales idiomáticos son las combinaciones fijas de "
-         "verbo + *ci*, *ne*, *la* o dos partículas juntas. No se deducen: "
-         "significan otra cosa que el verbo suelto, y son altísima frecuencia "
-         "en el italiano real.",
+"intro": "Vas a usar los verbos pronominales idiomáticos (*andarsene, farcela, "
+         "prendersela*): no se deducen del verbo suelto y están en todas las "
+         "conversaciones.",
 "blocks": [
  {"h": "Los imprescindibles",
+  "r": "Verbo + *ci*, *ne*, *la* o dos partículas: **significan otra cosa** que "
+       "el verbo solo. Se aprenden como palabras nuevas.",
   "table": {"head": ["Verbo", "Sentido", "Ejemplo"],
             "rows": [["andarsene", "irse", "Me ne vado, ciao."],
                      ["farcela", "lograrlo, poder con algo", "Non ce la faccio più."],
@@ -342,25 +352,35 @@ LESSONS = {
                      ["starci", "estar de acuerdo, caber", "Ci sto!"]]}},
 
  {"h": "Cómo se conjugan",
-  "p": ["El pronombre reflexivo cambia con la persona, y *la*, *ne* o *ci* se "
-        "quedan fijos. En los tiempos compuestos, los que llevan reflexivo van "
-        "con *essere* (*me ne sono andato*, *se l'è presa*); *farcela*, "
-        "*avercela* y *metterci* conservan *avere* (*ce l'ho fatta*, *ci ho "
-        "messo un'ora*). Con las formas en *la* el participio termina en *-a*."],
+  "r": "El reflexivo cambia con la persona; *la*, *ne* o *ci* **quedan fijos**. "
+       "Con reflexivo, tiempos compuestos con *essere*; *farcela, avercela, "
+       "metterci* conservan *avere*.",
   "ex": [["Me ne sono andato / Ce ne siamo andati.", "Me fui / Nos fuimos."],
          ["Ce l'ho fatta!", "¡Lo logré!"],
          ["Se l'è presa.", "Se ofendió."],
-         ["Non me la sono sentita.", "No me animé."]],
-  "warn": "*Ce l'ho fatta* lleva el participio en *-a* porque concuerda con esa "
-          "*la* que no se refiere a nada concreto. Lo mismo *se l'è cavata*, "
-          "*se l'è presa*. Es un automatismo que hay que fijar."},
+         ["Non me la sono sentita.", "No me animé."],
+         ["Ci ho messo un'ora.", "Tardé una hora."]]},
 
- {"h": "avercela y averci",
-  "p": ["En el italiano hablado, *avere* con *lo, la, li, le, ne* lleva casi siempre un *ci* de apoyo "
-        "sin significado: *ce l'ho*, *ce n'hai?*, *ci ho fame* (regional). "
-        "*Hai una penna? — Sì, ce l'ho.* Sin el *ce* suena antinatural."]},
+ {"h": "El participio en -a",
+  "r": "Con las formas en *la*, el participio **termina en -a**: concuerda con "
+       "esa *la* que no se refiere a nada concreto.",
+  "ex": [["Ce l'ho fatta.", "Lo logré."],
+         ["Se l'è cavata.", "Se las arregló."],
+         ["Se l'è presa.", "Se ofendió."]],
+  "warn": "«Ce l'ho fatto» es la falta típica. Es un automatismo: fijalo "
+          "repitiendo *ce l'ho fatta* hasta que salga solo."},
+
+ {"h": "averci: el ci de apoyo",
+  "r": "En el habla, *avere* delante de *lo, la, li, le, ne* lleva casi siempre "
+       "un *ci* sin significado: *ce l'ho*, *ce n'hai?*",
+  "ex": [["Hai una penna? — Sì, ce l'ho.", "¿Tenés una lapicera? — Sí, tengo."],
+         ["Ce n'hai ancora?", "¿Te queda?"]],
+  "warn": "Sin el *ce*, «l'ho» suena antinatural. *Ci ho fame* también se oye, "
+          "pero es regional: no lo escribas."},
 
  {"h": "Otras construcciones fijas de nivel",
+  "r": "Perífrasis frecuentes que conviene tener listas: **aspecto** (a punto "
+       "de, empezar, seguir) y **matiz** (terminar por, no hacer más que).",
   "table": {"head": ["Expresión", "Sentido"],
             "rows": [["stare per + infinito", "estar a punto de"],
                      ["finire per + infinito", "terminar por"],
@@ -370,31 +390,32 @@ LESSONS = {
                      ["non fare che + infinito", "no hacer más que"],
                      ["avere un bel + infinito", "por más que (hai un bel dire)"],
                      ["fare a meno di", "prescindir de"]]},
-  "tip": "*Sto per uscire* = «estoy por salir». Es la forma normal de expresar "
-         "el futuro inminente: *stare* + gerundio NO sirve para eso."},
+  "tip": "*Sto per uscire* = «estoy por salir»: así se dice el futuro inminente. "
+         "*stare* + gerundio NO sirve para eso."},
 ]},
 
 47: {
-"intro": "El discurso indirecto junta todo lo que estudiaste: concordancia de "
-         "tiempos, condicional compuesto, congiuntivo, pronombres. Es el examen "
-         "integrador natural del C1.",
+"intro": "Vas a pasar cualquier frase al discurso indirecto, integrando "
+         "concordancia de tiempos, condicional compuesto, congiuntivo y pronombres.",
 "blocks": [
  {"h": "Los desplazamientos de tiempo",
-  "p": ["Si el verbo de decir está en pasado, todo baja un escalón."],
+  "r": "Si el verbo de decir está **en pasado**, todo baja un escalón.",
   "table": {"head": ["Discurso directo", "Discurso indirecto"],
             "rows": [["presente", "imperfetto"],
                      ["passato prossimo / remoto", "trapassato prossimo"],
                      ["imperfetto", "imperfetto (no cambia)"],
                      ["futuro", "condizionale passato"],
                      ["condizionale presente", "condizionale passato"],
-                     ["imperativo", "di + infinito (o congiuntivo imperfetto)"],
+                     ["imperativo", "di + infinito (o che + congiuntivo imperfetto)"],
                      ["congiuntivo presente", "congiuntivo imperfetto"]]},
   "ex": [["«Sono stanco» → Disse che era stanco.", "Dijo que estaba cansado."],
          ["«Ho finito» → Disse che aveva finito.", "Dijo que había terminado."],
          ["«Verrò» → Disse che sarebbe venuto.", "Dijo que vendría."],
          ["«Vieni!» → Mi disse di venire.", "Me dijo que fuera."]]},
 
- {"h": "Los otros desplazamientos",
+ {"h": "Personas, lugares y tiempos",
+  "r": "También se desplazan **personas, demostrativos, lugar y tiempo**: el "
+       "punto de vista ya no es el del que habla.",
   "table": {"head": ["Directo", "Indirecto"],
             "rows": [["io, tu", "lui, lei (según el caso)"],
                      ["questo", "quello"],
@@ -409,80 +430,82 @@ LESSONS = {
           "Dijo que iría allá al día siguiente."]]},
 
  {"h": "Preguntas indirectas",
-  "p": ["Se introducen con *se* (si) o con la palabra interrogativa. El italiano "
-        "culto suele poner congiuntivo, sobre todo con *chiedere* y con verbos "
-        "de duda."],
-  "ex": [["«Dove abiti?» → Mi chiese dove abitassi.",
-          "Me preguntó dónde vivía."],
+  "r": "Van con *se* (si) o con la palabra interrogativa. El italiano culto "
+       "suele poner **congiuntivo**, sobre todo con *chiedere* y verbos de duda.",
+  "ex": [["«Dove abiti?» → Mi chiese dove abitassi.", "Me preguntó dónde vivía."],
          ["«Vieni?» → Mi chiese se venissi.", "Me preguntó si iba."],
          ["Non so se sia vero.", "No sé si es cierto."]],
-  "warn": "*Se* del discurso indirecto no es el *se* hipotético: acá "
-          "significa «si» de pregunta y admite congiuntivo o indicativo, sin la "
-          "prohibición del condicional. *Mi chiedo se sarebbe d'accordo* es "
-          "perfectamente correcto."},
+  "warn": "Este *se* no es el hipotético: es «si» de pregunta y admite "
+          "condicional. *Mi chiedo se sarebbe d'accordo* es perfectamente correcto."},
 
  {"h": "Los verbos para reportar",
-  "p": ["No repitas *dire*. El C1 se nota en la variedad: *affermare*, "
-        "*sostenere*, *dichiarare*, *ammettere*, *negare*, *aggiungere*, "
-        "*precisare*, *ribadire*, *suggerire*, *proporre*, *promettere*, "
-        "*minacciare*, *lamentarsi*, *far notare*. Ojo: muchos piden "
-        "congiuntivo (*negare che sia*, *ammettere che sia*)."]},
+  "r": "**No repitas *dire***: el C1 se nota en la variedad del verbo que "
+       "introduce lo dicho.",
+  "table": {"head": ["Para", "Verbos"],
+            "rows": [["afirmar", "affermare, sostenere, dichiarare"],
+                     ["agregar o insistir", "aggiungere, precisare, ribadire"],
+                     ["reconocer o negar", "ammettere, negare"],
+                     ["proponer", "suggerire, proporre"],
+                     ["comprometer o amenazar", "promettere, minacciare"],
+                     ["quejarse o señalar", "lamentarsi, far notare"]]},
+  "warn": "Varios piden congiuntivo: *nega che sia vero*, *ammette che sia "
+          "difficile*."},
 ]},
 
 48: {
-"intro": "El italiano tiene un orden de palabras mucho más flexible que el "
-         "castellano y lo usa activamente para marcar el foco. Las "
-         "dislocaciones no son un descuido del habla: son la forma normal de "
-         "hablar, y aparecen en literatura y periodismo.",
+"intro": "Vas a mover el orden de las palabras para marcar el foco, como hace "
+         "el italiano en el habla, la literatura y el periodismo.",
 "blocks": [
  {"h": "Dislocación a la izquierda",
-  "p": ["El objeto se pone al principio y se retoma con un pronombre. Es la "
-        "estructura más frecuente del italiano hablado y muchos manuales ni la "
-        "mencionan."],
+  "r": "El objeto va **al principio** y se retoma con un pronombre. Es la "
+       "estructura más frecuente del italiano hablado.",
   "ex": [["Il pane lo compro io.", "El pan lo compro yo."],
          ["A Marco non gli ho detto niente.", "A Marco no le dije nada."],
          ["Di soldi non ne ho.", "Plata no tengo."],
          ["Questo film l'ho già visto.", "Esta película ya la vi."]],
-  "tip": "El castellano rioplatense hace exactamente lo mismo («el pan lo "
-         "compro yo»), así que esta te sale gratis. Usala: sin ella el "
-         "italiano suena a libro de texto."},
+  "tip": "El rioplatense hace lo mismo («el pan lo compro yo»): te sale gratis. "
+         "Usala, sin ella el italiano suena a libro de texto."},
 
  {"h": "Dislocación a la derecha",
-  "p": ["El pronombre va primero y el elemento se agrega al final, como "
-        "aclaración. Marca oralidad e intimidad."],
+  "r": "El pronombre va primero y el elemento se agrega **al final**, como "
+       "aclaración. Marca oralidad e intimidad.",
   "ex": [["Non ci credo, a queste storie.", "No me las creo, esas historias."],
          ["L'ho vista ieri, Maria.", "La vi ayer, a María."],
          ["Ce l'hai, il biglietto?", "¿Lo tenés, el boleto?"]]},
 
- {"h": "Frase escindida (è... che)",
-  "p": ["Para poner un elemento en foco exclusivo, igual que el castellano «es "
-        "X el que...»."],
+ {"h": "Frase escindida: è... che",
+  "r": "*è* + elemento + *che* pone un elemento en **foco exclusivo**, como «es "
+       "X el que...».",
   "ex": [["È Marco che ha telefonato.", "Fue Marco el que llamó."],
          ["È per questo che sono venuto.", "Es por esto que vine."],
          ["Sono io che ho sbagliato.", "Soy yo el que se equivocó."]]},
 
  {"h": "Sujeto después del verbo",
-  "p": ["Con verbos intransitivos y de acontecimiento, el sujeto va detrás "
-        "cuando es información nueva. Es obligatorio con *c'è / ci sono*."],
+  "r": "Con intransitivos y verbos de acontecimiento, el sujeto nuevo va **detrás "
+       "del verbo**. Con *c'è / ci sono* es obligatorio.",
   "ex": [["È arrivato Marco.", "Llegó Marco."],
          ["Mi ha telefonato tua sorella.", "Me llamó tu hermana."],
          ["C'è un problema.", "Hay un problema."],
          ["Manca il sale.", "Falta la sal."]]},
 
  {"h": "Anteponer para enfatizar",
+  "r": "Un adjetivo o un complemento adelantado **enfatiza**: lo que va primero "
+       "es lo que importa.",
   "ex": [["Bello, questo quadro!", "¡Lindo, este cuadro!"],
          ["Stanco sono, non malato.", "Cansado estoy, no enfermo."],
          ["Di lavorare non ha nessuna voglia.", "Ganas de trabajar no tiene ninguna."]],
-  "warn": "Estas anteposiciones son marcadas: usalas para enfatizar, no por "
-          "defecto. Un texto entero con orden invertido suena artificial."},
+  "warn": "Son órdenes marcados: usalos para enfatizar, no por defecto. Un texto "
+          "entero invertido suena artificial."},
 ]},
 
 49: {
-"intro": "Escribir en italiano culto no es escribir difícil: es elegir los "
-         "conectores correctos, mantener la cohesión y no repetir. Esta semana "
-         "es la caja de herramientas del texto argumentativo del examen C1.",
+"intro": "Vas a escribir un texto argumentativo de nivel C1: conectores de "
+         "registro alto, fórmulas impersonales, cohesión sin repeticiones y la "
+         "estructura que esperan los examinadores.",
 "blocks": [
  {"h": "Conectores de registro alto",
+  "r": "Un conector por función, **variado**: escribir culto es elegir bien el "
+       "conector, no escribir difícil.",
   "table": {"head": ["Función", "Formas"],
             "rows": [["añadir", "inoltre, per di più, altresì, non solo... ma anche"],
                      ["oponer", "tuttavia, ciononostante, per contro, "
@@ -498,48 +521,58 @@ LESSONS = {
                      ["reformular", "ovvero, vale a dire, in altri termini, "
                       "per meglio dire"],
                      ["concluir", "in conclusione, in definitiva, "
-                      "tutto sommato, in ultima analisi"]]},
-  "warn": "Varios de estos piden congiuntivo: *nonostante*, *benché*, "
-          "*sebbene*, *qualora*, *affinché*, *a condizione che*, *nel caso in "
-          "cui*, *prima che*, *senza che*, *a meno che non*. Usar el conector "
-          "elegante con el indicativo detrás anula el efecto."},
+                      "tutto sommato, in ultima analisi"]]}},
+
+ {"h": "Conectores que piden congiuntivo",
+  "r": "*benché, sebbene, nonostante, qualora, affinché, a condizione che, nel "
+       "caso in cui, prima che, senza che, a meno che non* → **congiuntivo**.",
+  "ex": [["Benché sia tardi, continuiamo.", "Aunque es tarde, seguimos."],
+         ["Qualora ci fossero problemi, avvisateci.", "En caso de que hubiera problemas, avísennos."]],
+  "warn": "El conector elegante con indicativo detrás anula el efecto: "
+          "«benché è tardi» es un error."},
 
  {"h": "Las fórmulas impersonales",
-  "p": ["Distancian al autor y elevan el texto: *va detto che*, *va rilevato "
-        "che*, *si tratta di*, *è opportuno*, *occorre notare*, *risulta "
-        "evidente*, *è lecito supporre*, *non si può prescindere da*, "
-        "*giova ricordare*."],
-  "ex": [["Va detto che il problema è complesso.",
-          "Hay que decir que el problema es complejo."],
+  "r": "Distancian al autor y elevan el texto. **Una por párrafo** alcanza.",
+  "table": {"head": ["Fórmula", "Castellano"],
+            "rows": [["va detto che", "hay que decir que"],
+                     ["va rilevato che", "cabe señalar que"],
+                     ["si tratta di", "se trata de"],
+                     ["è opportuno", "es oportuno, conviene"],
+                     ["occorre notare", "cabe notar"],
+                     ["risulta evidente", "resulta evidente"],
+                     ["è lecito supporre", "es lícito suponer"],
+                     ["non si può prescindere da", "no se puede prescindir de"],
+                     ["giova ricordare", "conviene recordar"]]},
+  "ex": [["Va detto che il problema è complesso.", "Hay que decir que el problema es complejo."],
          ["Si tratta di una questione delicata.", "Se trata de un asunto delicado."],
-         ["Occorre precisare che non tutti concordano.",
-          "Cabe precisar que no todos coinciden."]]},
+         ["Occorre precisare che non tutti concordano.", "Cabe precisar que no todos coinciden."]]},
 
  {"h": "Cohesión: no repetir",
-  "p": ["El italiano escrito evita repetir el sustantivo. Los recursos son "
-        "cuatro: pronombres (*lo, ne, ci*), sinónimos, hiperónimos "
-        "(*il fenomeno*, *la questione*, *tale situazione*) y demostrativos "
-        "(*ciò*, *tale*, *questi*, *il suddetto*)."],
+  "r": "No repitas el sustantivo: usá **pronombres** (*lo, ne, ci*), sinónimos, "
+       "hiperónimos (*il fenomeno, la questione*) o demostrativos (*ciò, tale, il suddetto*).",
   "ex": [["Il governo ha approvato la riforma; tale provvedimento entrerà in "
           "vigore a gennaio.",
           "El gobierno aprobó la reforma; dicha medida entrará en vigor en enero."],
          ["Ciò comporta un aumento dei costi.", "Ello implica un aumento de costos."]]},
 
  {"h": "Estructura del testo argomentativo",
-  "tip": "El esquema que esperan los examinadores: (1) *introduzione* que "
-         "plantea el tema; (2) *tesi* explícita; (3) dos o tres *argomenti* con "
-         "ejemplos; (4) *controargomento* reconocido y refutado —acá es donde "
-         "se usan *certo... tuttavia* y el congiuntivo concesivo—; "
-         "(5) *conclusione* que retoma la tesis sin repetirla textualmente. "
-         "Cuatro párrafos bien conectados valen más que ocho sueltos."},
+  "r": "Cinco partes, en este orden. **Cuatro párrafos bien conectados** valen "
+       "más que ocho sueltos.",
+  "table": {"head": ["Parte", "Qué hace"],
+            "rows": [["introduzione", "plantea el tema"],
+                     ["tesi", "tu posición, explícita"],
+                     ["argomenti", "dos o tres, con ejemplos"],
+                     ["controargomento", "lo reconocés y lo refutás: *certo... tuttavia* + congiuntivo concesivo"],
+                     ["conclusione", "retoma la tesis sin repetirla textualmente"]]}},
 ]},
 
 50: {
-"intro": "La última trampa del hispanohablante es la que parece más fácil: el "
-         "vocabulario que se parece. Los falsos amigos italiano-castellano son "
-         "muchos, y algunos producen malentendidos graves o cómicos.",
+"intro": "Vas a esquivar la última trampa, la que parece más fácil: los falsos "
+         "amigos, y a elegir el registro justo para cada situación.",
 "blocks": [
  {"h": "Los clásicos que hay que saber",
+  "r": "Se parecen a una palabra castellana y **significan otra cosa**. Aprendé "
+       "también la palabra italiana para lo que creías.",
   "table": {"head": ["Italiano", "Significa", "No significa"],
             "rows": [["burro", "manteca", "burro (= asino)"],
                      ["salire", "subir", "salir (= uscire)"],
@@ -556,40 +589,42 @@ LESSONS = {
                      ["equipaggio", "tripulación", "equipaje (= bagaglio)"],
                      ["cartone", "cartón / dibujo animado", "cartón de bingo (= cartella)"],
                      ["negozio", "negocio (tienda)", "negocio como trato (= affare)"]]},
-  "warn": "*Sono imbarazzata* significa «estoy avergonzada», no «estoy "
-          "embarazada». Y *un burro* en el plato es manteca. Estos dos son los "
-          "que producen las anécdotas."},
+  "warn": "*Sono imbarazzata* = «estoy avergonzada», no «embarazada». Y *il "
+          "burro* en el plato es manteca. Estos dos producen las anécdotas."},
 
  {"h": "Segunda tanda, más sutil",
-  "table": {"head": ["Italiano", "Significa"],
-            "rows": [["attendere", "esperar (no atender)"],
-                     ["assistere a", "presenciar"],
-                     ["pretendere", "exigir (no pretender)"],
-                     ["sopportare", "soportar, aguantar"],
-                     ["rimanere", "quedarse"],
-                     ["tornare", "volver"],
-                     ["cercare", "buscar"],
-                     ["lasciare", "dejar"],
-                     ["ricordare", "recordar y también recordarle a alguien"],
-                     ["accostare", "acercar, arrimar"],
-                     ["rubare", "robar"],
-                     ["salire su", "subirse a"],
-                     ["licenziare", "despedir (no licenciar)"],
-                     ["fermare", "detener (no firmar = firmare)"],
-                     ["andare via", "irse"]]}},
+  "r": "Verbos que parecen transparentes y **no lo son**. Mirá la columna de la "
+       "derecha: ahí está el error.",
+  "table": {"head": ["Italiano", "Significa", "Ojo"],
+            "rows": [["attendere", "esperar", "atender = servire, assistere"],
+                     ["assistere a", "presenciar", "asistir a clase = frequentare"],
+                     ["pretendere", "exigir", "pretender (aspirar) = aspirare a"],
+                     ["sopportare", "soportar, aguantar a alguien", "soportar un peso = reggere"],
+                     ["ricordare", "recordar y recordarle algo a alguien", "ricordami di chiamare = recordame que llame"],
+                     ["accostare", "acercar, arrimar", "acostar = mettere a letto"],
+                     ["licenziare", "despedir", "licenciarse = laurearsi"],
+                     ["fermare", "detener", "firmar = firmare"],
+                     ["salire su", "subirse a", "salir = uscire"],
+                     ["rimanere / restare", "quedarse", "restar = sottrarre"],
+                     ["tornare", "volver", "tornarse = diventare"],
+                     ["cercare", "buscar", "cerca (adverbio) = vicino"],
+                     ["lasciare", "dejar algo o a alguien", "dejar de = smettere di"],
+                     ["rubare", "robar", "robarle algo a alguien = rubare qualcosa a qualcuno"],
+                     ["andare via", "irse", "también andarsene"]]}},
 
  {"h": "Palabras que el castellano no distingue",
-  "p": ["*sapere* (saber un dato) contra *conoscere* (conocer a alguien o un "
-        "lugar). *Portare* (llevar y también traer: *portami l'acqua*) contra "
-        "*prendere* (tomar, agarrar, ir a buscar). *Andare* (ir) contra *venire* (venir hacia donde está "
-        "el que escucha: *vengo da te* = «voy a tu casa»). *Buono* (bueno de "
-        "sabor o de carácter) contra *bravo* (hábil, bueno en lo suyo): "
-        "*un bravo cuoco*, *un bravo studente*."],
-  "warn": "*Vengo* se usa para moverse hacia el interlocutor, aunque en "
-          "castellano digamos «voy». *Vieni alla festa? — Sì, vengo.* Decir "
-          "«sì, vado» ahí es un error de lógica deíctica."},
+  "r": "Donde el castellano usa una palabra, el italiano **elige entre dos**.",
+  "table": {"head": ["Par", "Diferencia"],
+            "rows": [["sapere / conoscere", "saber un dato / conocer a alguien o un lugar"],
+                     ["portare / prendere", "llevar y traer (*portami l'acqua*) / tomar, agarrar, ir a buscar"],
+                     ["andare / venire", "ir / ir hacia donde está el que escucha (*vengo da te* = voy a tu casa)"],
+                     ["buono / bravo", "bueno de sabor o carácter / hábil (*un bravo cuoco*)"]]},
+  "warn": "Hacia el interlocutor se usa *venire*, aunque en castellano digamos "
+          "«voy»: *Vieni alla festa? — Sì, vengo.* «Sì, vado» ahí es un error."},
 
  {"h": "Registro: la misma idea, tres niveles",
+  "r": "Para el C1 no hace falta hablar siempre formal: hace falta **elegir** "
+       "el nivel según la situación.",
   "table": {"head": ["Coloquial", "Neutro", "Formal"],
             "rows": [["un sacco di", "molto", "notevolmente"],
                      ["roba", "cose", "elementi, aspetti"],
@@ -598,73 +633,82 @@ LESSONS = {
                      ["fregare", "ingannare", "raggirare"],
                      ["un casino", "molto disordine", "notevole confusione"],
                      ["dai!", "su!", "la prego"]]},
-  "tip": "Para el C1 no hace falta hablar solo formal: hace falta ELEGIR. "
-         "Reconocer que *un casino* es coloquial y *notevole confusione* es de "
+  "tip": "Reconocer que *un casino* es coloquial y *notevole confusione* es de "
          "informe es exactamente lo que evalúa el examen oral."},
 ]},
 
 51: {
-"intro": "Última semana antes del examen final. No hay teoría nueva: hay un "
-         "barrido de todo lo que suele fallar. Leelo como una lista de control y "
-         "volvé a las semanas donde algo no te cierre.",
+"intro": "Sin teoría nueva: vas a repasar con listas de control todo lo que "
+         "suele fallar y volver a las semanas donde algo no te cierre.",
 "blocks": [
  {"h": "Lista de control: congiuntivo",
-  "p": ["¿Verbo de opinión, duda, deseo, emoción o voluntad? → congiuntivo. "
-        "¿Sujetos distintos? → *che* + congiuntivo. ¿Mismo sujeto? → *di* + "
-        "infinitivo. ¿Principal en pasado? → imperfetto o trapassato. "
-        "¿Conector concesivo o final (*benché*, *affinché*, *nonostante*, "
-        "*prima che*, *senza che*, *a meno che non*)? → congiuntivo sí o sí. "
-        "¿Superlativo relativo o *l'unico che*? → congiuntivo."]},
+  "r": "Opinión, duda, deseo, emoción o voluntad → **congiuntivo**. Recorré la "
+       "tabla de arriba abajo antes de decidir el modo.",
+  "table": {"head": ["Si...", "Entonces"],
+            "rows": [["verbo de opinión, duda, deseo, emoción o voluntad", "congiuntivo"],
+                     ["sujetos distintos", "che + congiuntivo"],
+                     ["mismo sujeto", "di + infinito"],
+                     ["principal en pasado", "congiuntivo imperfetto o trapassato"],
+                     ["benché, affinché, nonostante, prima che, senza che, a meno che non",
+                      "congiuntivo sí o sí"],
+                     ["superlativo relativo o l'unico che", "congiuntivo"]]}},
 
  {"h": "Lista de control: tiempos",
+  "r": "Las ocho frases que **más se equivocan**. Si dudás, buscá la tuya acá.",
   "table": {"head": ["Si querés decir", "Usá"],
             "rows": [["dijo que vendría", "disse che sarebbe venuto"],
                      ["si tuviera, iría", "se avessi, andrei"],
                      ["si hubiera tenido, habría ido", "se avessi avuto, sarei andato"],
                      ["hace dos años que estudio", "studio da due anni"],
-                     ["estaba comiendo cuando llamó",
-                      "stavo mangiando quando ha chiamato"],
+                     ["estaba comiendo cuando llamó", "stavo mangiando quando ha chiamato"],
                      ["antes de salir", "prima di uscire"],
                      ["después de salir", "dopo essere uscito"],
                      ["hay que hacerlo", "va fatto / bisogna farlo"]]}},
 
  {"h": "Lista de control: pronombres",
-  "p": ["*me lo, te la, glielo, ce ne, ve li, se ne*: la *i* pasa a *e* y "
-        "*gli+lo* se pega. *ne* obligatorio con cantidades. *ci* para lugar y "
-        "para *a/in/su*. Participio concuerda con *lo, la, li, le* y con "
-        "*essere*. Pronombres delante del verbo conjugado y pegados al "
-        "infinitivo, gerundio e imperativo informal."]},
+  "r": "Pronombres **delante** del verbo conjugado; **pegados** al infinitivo, "
+       "gerundio e imperativo informal.",
+  "table": {"head": ["Punto", "Regla"],
+            "rows": [["combinados", "me lo, te la, ce ne, ve li, se ne: la i pasa a e"],
+                     ["gli + lo", "se pega: glielo, gliela, gliene"],
+                     ["ne", "obligatorio con cantidades: ne ho tre"],
+                     ["ci", "lugar y complementos con a / in / su"],
+                     ["participio", "concuerda con lo, la, li, le y con essere"]]}},
 
  {"h": "Las quince faltas más caras",
-  "warn": "1. *credo che è* → *credo che sia*. "
-          "2. *mi ho lavato* → *mi sono lavato*. "
-          "3. *se avrei* → *se avessi*. "
-          "4. *ha detto che verrebbe* → *sarebbe venuto*. "
-          "5. *si vende libri* → *si vendono libri*. "
-          "6. *dopo mangiare* → *dopo aver mangiato*. "
-          "7. *ho tre* → *ne ho tre*. "
-          "8. *vedo a Marco* → *vedo Marco*. "
-          "9. *mi libro* → *il mio libro*. "
-          "10. *qualche amici* → *qualche amico*. "
-          "11. *facilemente* → *facilmente*. "
-          "12. *qual'è* → *qual è*. "
-          "13. *parleremo* (futuro) usado por *parleremmo* (condicional). "
-          "14. *sto studiando quest'anno* → más natural: *studio quest'anno*. "
-          "15. *puedo* italianizado a «poso» → *posso*, con doble s."},
+  "r": "Quince errores que **bajan la nota** siempre. Leelos en voz alta hasta "
+       "que la forma correcta te salga sola.",
+  "table": {"head": ["Error", "Correcto"],
+            "rows": [["credo che è", "credo che sia"],
+                     ["mi ho lavato", "mi sono lavato"],
+                     ["se avrei", "se avessi"],
+                     ["ha detto che verrebbe", "ha detto che sarebbe venuto"],
+                     ["si vende libri", "si vendono libri"],
+                     ["dopo mangiare", "dopo aver mangiato"],
+                     ["ho tre (de algo ya nombrado)", "ne ho tre"],
+                     ["vedo a Marco", "vedo Marco"],
+                     ["mi libro", "il mio libro"],
+                     ["qualche amici", "qualche amico"],
+                     ["facilemente", "facilmente"],
+                     ["qual'è → sin apóstrofo", "qual è"],
+                     ["parleremo por «hablaríamos»", "parleremmo (condicional)"],
+                     ["sto studiando quest'anno", "más natural: studio quest'anno"],
+                     ["poso (por «puedo»)", "posso, con doble s"]]}},
 
  {"h": "Cómo llegar al jefe final",
-  "tip": "Hacé una pasada por el gimnasio de verbos con congiuntivo imperfetto "
-         "y trapassato, que son las formas que menos se automatizan. Después "
-         "repasá esta hoja en voz alta: leer las trampas en voz alta las fija "
-         "mejor que releerlas."},
+  "r": "Antes del examen, **gimnasio de verbos**: congiuntivo imperfetto y "
+       "trapassato, las formas que menos se automatizan.",
+  "tip": "Después repasá esta hoja en voz alta: leer las trampas en voz alta "
+         "las fija mejor que releerlas."},
 ]},
 
 52: {
-"intro": "El examen del año. Cuarenta preguntas, todo el programa, sin ayudas. "
-         "Esta hoja no enseña nada nuevo: es el mapa completo del italiano que "
-         "cubriste en 52 semanas, para mirarlo una vez antes de entrar.",
+"intro": "El examen del año: cuarenta preguntas, todo el programa, sin ayudas. "
+         "Esta hoja es el mapa completo de lo que cubriste en 52 semanas.",
 "blocks": [
  {"h": "El sistema verbal entero",
+  "r": "Cuatro modos finitos y tres formas no finitas. **Todos** entran en el "
+       "examen.",
   "table": {"head": ["Modo", "Tiempos"],
             "rows": [["Indicativo", "presente, imperfetto, passato prossimo, "
                       "trapassato prossimo, passato remoto, trapassato remoto, "
@@ -676,37 +720,40 @@ LESSONS = {
                       "(simples y compuestos)"]]}},
 
  {"h": "Las cinco reglas que sostienen todo",
-  "p": ["1. El auxiliar decide la concordancia: con *essere*, el participio "
-        "sigue al sujeto. "
-        "2. La subjetividad decide el modo: opinión, deseo, duda y emoción "
-        "piden congiuntivo. "
-        "3. El tiempo de la principal decide el de la subordinada. "
-        "4. Detrás de *se* hipotético va indicativo (realidad) o congiuntivo "
-        "(posibilidad e irrealidad), nunca condicional. "
-        "5. El futuro visto desde el pasado es condicional COMPUESTO."]},
+  "r": "Si dudás, volvé a estas cinco: resuelven **la mayoría** de las "
+       "preguntas.",
+  "table": {"head": ["Qué decide", "Regla"],
+            "rows": [["el auxiliar → la concordancia", "con essere, el participio sigue al sujeto"],
+                     ["la subjetividad → el modo", "opinión, deseo, duda y emoción piden congiuntivo"],
+                     ["la principal → la subordinada", "el tiempo de la principal decide el de la subordinada"],
+                     ["se hipotético", "indicativo (realidad) o congiuntivo (posibilidad, irrealidad), nunca condicional"],
+                     ["futuro desde el pasado", "condicional COMPUESTO: disse che sarebbe venuto"]]}},
 
  {"h": "Lo que separa un B2 de un C1",
-  "p": ["No es saber más reglas: es usar los recursos que el B2 evita. "
-        "Causativo (*fare fare*), participio absoluto (*finito il lavoro*), "
-        "gerundio compuesto (*avendo capito*), dislocaciones (*il pane lo "
-        "compro io*), pronominales idiomáticos (*non ce la faccio*), *ne* y "
-        "*ci* en todos sus valores, pasiva con *andare* y *venire*, y "
-        "conectores de registro alto con el modo correcto detrás."]},
+  "r": "No es saber más reglas: es **usar los recursos que el B2 evita**.",
+  "table": {"head": ["Recurso", "Ejemplo"],
+            "rows": [["causativo", "ho fatto riparare la macchina"],
+                     ["participio absoluto", "finito il lavoro"],
+                     ["gerundio compuesto", "avendo capito"],
+                     ["dislocaciones", "il pane lo compro io"],
+                     ["pronominales idiomáticos", "non ce la faccio"],
+                     ["ne y ci en todos sus valores", "ne ho tre, ci penso io"],
+                     ["pasiva con andare y venire", "va fatto, viene pubblicato"],
+                     ["conectores de registro alto", "benché sia, qualora fosse"]]}},
 
  {"h": "Antes de entrar",
-  "tip": "Leé una vez la hoja de la semana 51 con las quince faltas. En el "
-         "examen, cuando dudes entre indicativo y congiuntivo detrás de un "
-         "verbo de opinión, poné congiuntivo: en italiano acierta casi "
-         "siempre. Y cuando dudes entre condicional simple y compuesto en una "
-         "frase que mira al futuro desde el pasado, poné el compuesto."},
+  "r": "Leé una vez las **quince faltas** de la semana 51.",
+  "tip": "¿Dudás entre indicativo y congiuntivo tras un verbo de opinión? "
+         "Congiuntivo. ¿Entre condicional simple y compuesto mirando al futuro "
+         "desde el pasado? Compuesto."},
 
  {"h": "Después del examen",
-  "p": ["El C1 no es un punto de llegada sino el nivel donde el idioma empieza "
-        "a devolverte cosas: podés leer a Calvino, a Ferrante y a Buzzati sin "
-        "diccionario, seguir un debate en la radio y escribir un texto "
-        "argumentativo defendible. El repaso espaciado sigue abierto para "
-        "siempre: cinco minutos por día alcanzan para no perder lo ganado. "
-        "*In bocca al lupo!*"]},
+  "r": "El C1 no es la meta: es donde el idioma empieza a devolverte cosas. "
+       "**Cinco minutos por día** alcanzan para no perderlo.",
+  "more": ["Podés leer a Calvino, a Ferrante y a Buzzati sin diccionario, "
+           "seguir un debate en la radio y escribir un texto argumentativo "
+           "defendible. El repaso espaciado sigue abierto para siempre. "
+           "*In bocca al lupo!*"]},
 ]},
 
 }
