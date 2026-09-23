@@ -39,7 +39,7 @@ ITEMS = [
          note="Sonido palatal lateral. Excepciones donde sí se lee [gl]: "
               "glicerina, negligente, anglicano."),
 
-    # --- negazioni ed esclamazioni (settimana 23) ---
+    # --- negazioni ed esclamazioni (settimana 18) ---
     dict(id="a2-neg-01", type="choice", topic="negazioni", level="B1",
          prompt="Elegí la forma correcta.",
          stem="Non ho visto ___.", options=["nessuno", "nessun", "qualche"],
@@ -81,7 +81,7 @@ ITEMS = [
          answer="Come",
          note="Ante verbo conjugado se usa «come» o «quanto», nunca «che»."),
 
-    # --- numerali, misure e quantità (settimana 25) ---
+    # --- numerali, misure e quantità (settimana 47) ---
     dict(id="a2-num-01", type="choice", topic="numerali", level="B1",
          prompt="Elegí el ordinal correcto.",
          stem="Abito al ___ piano (11º).",
@@ -119,7 +119,7 @@ ITEMS = [
          note="Los porcentajes llevan artículo: il 20 per cento. El verbo va en "
               "singular o concuerda con el sustantivo que sigue."),
 
-    # --- passato remoto (settimana 45) ---
+    # --- passato remoto (settimana 37) ---
     dict(id="a2-pr-01", type="choice", topic="passato remoto", level="C1",
          prompt="Elegí el passato remoto correcto.",
          stem="Dante ___ la Divina Commedia.",

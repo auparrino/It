@@ -68,6 +68,9 @@ tu teléfono**. No usa cuentas, servidores, micrófono ni IA externa.
   filosofía, sociología y literatura italianas: Dante, Maquiavelo, Galileo,
   Garibaldi, Gramsci, Primo Levi, el *boom* económico, Calvino, Beccaria y
   Natalia Ginzburg. Donde una frase famosa es apócrifa, el texto lo dice.
+- Cada texto se abre en la semana cuya gramática usa (el episodio del
+  imperfetto, en la 15; los de passato remoto, en la 37), así nunca leés
+  antes de la teoría.
 - Cada lectura tiene glosario (tocás la palabra subrayada), preguntas de
   comprensión y una **caza de formas**: marcar en el texto los verbos en
   passato remoto, los congiuntivi, etc.
@@ -177,10 +180,18 @@ aprobar con 85% para desbloquear la siguiente:
 
 | Estación | Semanas | Nivel | Contenido |
 |---|---|---|---|
-| Le Fondamenta | 1–13 | A1 → A2 | Sonidos, género, artículos, presente completo |
-| Il Ponte | 14–26 | A2 → B1 | Pasados, futuro, condicional, comparativos |
-| La Corrente | 27–39 | B1 → B2 | Congiuntivo, periodo hipotético, pasiva, *ne* y *ci* |
-| La Vetta | 40–52 | B2 → C1 | Causativo, formas no finitas, discurso indirecto, registro |
+| Le Fondamenta | 1–13 | A1 → A2 | Sonidos (vocales abiertas y cerradas, dobles), essere y avere, género, artículos, presente completo, pronombres, **passato prossimo**, reflexivos e imperativo |
+| Il Ponte | 14–26 | A2 → B1 | Piacere, imperfetto, futuro, condicional, **ne y ci**, **pronombres combinados**, comparativos, **congiuntivo presente** |
+| La Corrente | 27–39 | B1 → B2 | Congiuntivo pasado e imperfecto, concordancia, periodo hipotético, pasiva, relativos, **passato remoto**, **discurso indirecto** |
+| La Vetta | 40–52 | B2 → C1 | Causativo, percepción, formas no finitas, construcciones especiales, orden de palabras, registro alto, léxico C1 |
+
+El orden sigue la guía basada en evidencia del proyecto (y la secuencia de
+adquisición del italiano L2 del Progetto di Pavia: presente → passato prossimo
+→ imperfetto → futuro → condicional → congiuntivo): el passato prossimo llega
+en el primer trimestre, y los clíticos *ne/ci*, los pronombres combinados y el
+congiuntivo presente en el segundo. Desde la primera semana se atacan las
+interferencias del castellano (dobles, vocales abiertas, *a* personal,
+*essere/avere*).
 
 El percorso es un **camino** de 52 nodos. Cada semana tiene **3 estrellas**, una
 por misión:
@@ -217,13 +228,15 @@ comparativos), y calcula **la primera semana cuya teoría lo cubre todo**:
 
 - En el enunciado, que solo se lee, el presente vale desde el principio.
 - En la respuesta, lo que escribís o elegís, el presente cuenta desde la
-  semana 6; *essere* y *avere* se enseñan en la semana 1.
+  semana 5; *essere* y *avere* se enseñan en la semana 1.
 - Lo que una semana todavía no puede pedir pasa, como repaso, a la semana
   donde ya se enseñó; ahí cada ronda mezcla unos pocos (la cuarta parte como
   máximo).
 - Los ejercicios de *For Dummies* se reparten por tema, bloque por bloque, y
   no por capítulo: el capítulo 3 mezcla sustantivos (semana 2), artículos
-  (semana 3) y sufijos (semana 24).
+  (semana 3) y sufijos (semana 46). Lo mismo con las secciones de cada capítulo del
+  *Soluzioni*: cada una va a la semana de su tema, y cada ejercicio aparece una sola
+  vez fuera de los exámenes y repasos.
 - El gimnasio de verbos solo usa como distractores tiempos ya vistos; el
   banco (*Traduci*, *Completa*, *Trova l'errore*, la Clínica y la Pausa)
   y los juegos de *Capire* filtran por la semana a la que llegaste.

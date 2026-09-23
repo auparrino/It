@@ -13,7 +13,7 @@ Reglas:
 - En el contexto (el enunciado que se lee) vale todo lo que ya se enseñó; el
   presente se tolera desde el principio porque se entiende por cognados.
 - En la respuesta (lo que el alumno escribe o elige) el presente cuenta
-  desde la semana 6, salvo essere/avere, que se enseñan en la semana 1.
+  desde la semana 5, salvo essere/avere, que se enseñan en la semana 1.
 - Una forma ambigua (parli = presente o congiuntivo) cuenta por su lectura
   más temprana: el detector prefiere dejar pasar a descartar de más.
 
@@ -29,29 +29,30 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Semana en la que la teoría presenta cada tiempo o construcción.  Si se
 # reordena el programa (WEEKS en build_course.py), esto se ajusta acá.
 TENSE_WEEK = {
-    "presente": 6,
-    "imperativo": 9,
-    "passatoProssimo": 17,
-    "imperfetto": 18,
-    "futuro": 20,
-    "futuroAnteriore": 20,
-    "condizionale": 21,
+    "presente": 5,
+    "imperativo": 12,
+    "passatoProssimo": 11,
+    "imperfetto": 15,
+    "futuro": 19,
+    "futuroAnteriore": 19,
+    "condizionale": 20,
+    "congiuntivo": 24,
     "trapassatoProssimo": 26,
-    "congiuntivo": 27,
     "congiuntivoPassato": 29,
     "congImperfetto": 30,
     "congiuntivoTrapassato": 30,
     "condizionalePassato": 31,
-    "passivo": 34,
-    "passatoRemoto": 45,
-    "trapassatoRemoto": 45,
+    "passivo": 35,
+    "passatoRemoto": 37,
+    "trapassatoRemoto": 37,
     "gerundio": 44,
 }
 FEATURE_WEEK = {
-    "comparativo": 22,
-    "pronomi combinati": 36,
-    "ne": 36,
-    "cui": 38,
+    "comparativo": 23,
+    "pronomi combinati": 22,
+    "ne": 21,
+    "cui": 34,
+    "si impersonale": 36,
 }
 ESSERE_AVERE = {"sono", "sei", "è", "siamo", "siete", "ho", "hai", "ha",
                 "abbiamo", "avete", "hanno", "c'è"}
@@ -78,7 +79,8 @@ NOT_VERBS = {"porta", "pesca", "sale", "canto", "ama", "fine", "vite", "volta",
              "tema", "fiore", "sete", "mente", "vino", "piano", "ballo",
              "dubbio", "odio", "grazie", "cara", "caro", "molto", "tanto",
              "poco", "sia", "fossi", "canti", "conti", "speri", "senti",
-             "voglia", "paia", "quanta", "quante", "quanti", "quanto"}
+             "voglia", "paia", "quanta", "quante", "quanti", "quanto",
+             "telefonino", "telefonini", "cammino", "destino", "vicino"}
 # Casos dudosos que sí deben contar como verbo cuando no hay otra lectura.
 AMBIGUOUS_OK = {"era": "imperfetto", "sia": "congiuntivo", "fossi": "congImperfetto"}
 
@@ -141,6 +143,12 @@ def _simple_week(tok):
     lex = lexicon()
     if tok in NOT_VERBS and tok not in AMBIGUOUS_OK:
         return None, None
+    # telefonino, sale, parte: a noun or adjective of the bank reads first
+    # as what it is, not as a rare verb form
+    if tok not in AMBIGUOUS_OK and tok in nominal_forms():
+        tenses = lex["simple"].get(tok) or []
+        if "presente" not in tenses:
+            return None, None
     tenses = lex["simple"].get(tok)
     if not tenses:
         if tok in lex["imperatives"]:
@@ -201,10 +209,10 @@ def analyze(text, answer=False):
               and tok not in nominal_forms()):
             need("presente", wk)
         if tok in lex["gerunds"] and len(tok) > 5:
-            # stare + gerundio se enseña en la semana 7, y desde ahí un
+            # stare + gerundio se enseña en la semana 6, y desde ahí un
             # gerundio se entiende leyendo; producirlo suelto es de la 44
             if (i and toks[i - 1] in STARE) or not answer:
-                need("stare + gerundio", 7)
+                need("stare + gerundio", 6)
             else:
                 need("gerundio", TENSE_WEEK["gerundio"])
         if tok == "cui":
@@ -227,6 +235,9 @@ def analyze(text, answer=False):
     if COMBINED.search(low) or any(ENCLITIC.match(t) and t not in nominal_forms()
                                    for t in toks):
         need("pronomi combinati", FEATURE_WEEK["pronomi combinati"])
+    # «ci si veste», «ci si diverte»: si impersonale con un verbo reflexivo
+    if re.search(r"\bci si\b", low):
+        need("si impersonale", FEATURE_WEEK["si impersonale"])
     return feats
 
 

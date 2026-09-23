@@ -3,8 +3,8 @@
 
 Cada semana tiene al menos 25 ítems suyos, así las rondas de
 entrenamiento no repiten siempre las mismas frases.  Semanas cubiertas:
-1 ortografía, 4 adjetivos, 16 adverbios, 22 comparativos, 24 sufijos,
-35 «si» pasivo e impersonal, 38 relativos, 46 construcciones verbales,
+1 ortografía, 4 adjetivos, 23 comparativos, 27 adverbios, 34 relativos,
+36 «si» pasivo e impersonal, 45 construcciones verbales, 46 sufijos,
 48 orden de palabras.
 """
 
@@ -236,7 +236,7 @@ ITEMS = [
          prompt=TR, stem="¡Qué lindos zapatos!", answer="Che belle scarpe!",
          note="«Scarpe» es femenino: belle scarpe. En exclamaciones, «che» + adjetivo delante."),
 
-    # ================= Settimana 16: Avverbi =================
+    # ================= Settimana 27: Avverbi =================
     dict(id="rf-16-01", type="cloze", topic="avverbi", level="B1",
          prompt="Formá el adverbio en -mente.",
          stem="Il nonno parla ___ (lento).", answer="lentamente",
@@ -352,7 +352,7 @@ ITEMS = [
          options=["soprattutto", "sopratutto", "sopra tuto"], answer="soprattutto",
          note="«Soprattutto» con tt: sopra + tutto se funden y la t se duplica."),
 
-    # ================= Settimana 22: Comparativi e superlativi =================
+    # ================= Settimana 23: Comparativi e superlativi =================
     dict(id="rf-22-01", type="choice", topic="comparativi", level="B1",
          prompt=CE, stem="Roma è più antica ___ Buenos Aires.",
          options=["di", "che", "come"], answer="di",
@@ -462,7 +462,7 @@ ITEMS = [
          alt=["Questo caffè è ottimo"],
          note="Superlativo absoluto: buonissimo u ottimo. «Estar rico» → essere buono."),
 
-    # ================= Settimana 24: Suffissi e alterazione =================
+    # ================= Settimana 46: Suffissi e alterazione =================
     dict(id="rf-24-01", type="choice", topic="suffissi", level="B1",
          prompt="¿Qué significa «casetta»?", stem="casetta",
          options=["casita", "casona", "casucha"], answer="casita",
@@ -577,7 +577,7 @@ ITEMS = [
          alt=["Ha passato una giornataccia"],
          note="giornata + -accia = giornataccia: día de porquería."),
 
-    # ================= Settimana 35: Si passivante e si impersonale =================
+    # ================= Settimana 36: Si passivante e si impersonale =================
     dict(id="rf-35-01", type="choice", topic="si impersonale", level="B2",
          prompt=CE, stem="In questo negozio si ___ biciclette usate.",
          options=["vendono", "vende", "venduto"], answer="vendono",
@@ -688,7 +688,7 @@ ITEMS = [
               "Quando si è giovani ci si innamora con facilità"],
          note="«Uno» impersonal → si; con reflexivo → ci si; adjetivo en plural (giovani)."),
 
-    # ================= Settimana 38: Pronomi relativi =================
+    # ================= Settimana 34: Pronomi relativi =================
     dict(id="rf-38-01", type="choice", topic="relativi", level="B2",
          prompt=CE, stem="Il romanzo ___ sto leggendo è di Calvino.",
          options=["che", "cui", "il quale"], answer="che",
@@ -801,7 +801,7 @@ ITEMS = [
          answer=_PAESE[0], alt=_PAESE[1:],
          note="Lugar: in cui, dove o nel quale. Pueblo = paese."),
 
-    # ================= Settimana 46: Costruzioni verbali speciali =================
+    # ================= Settimana 45: Costruzioni verbali speciali =================
     dict(id="rf-46-01", type="choice", topic="costruzioni", level="C1",
          prompt=CE, stem="Se la festa non ti piace, ___ pure.",
          options=["vattene", "vatti", "vanno"], answer="vattene",

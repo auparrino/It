@@ -171,8 +171,8 @@
     $("#hdr").innerHTML =
       '<div class="bar">' +
         // El logo es una placa de calle romana: «La Via» es el camino.
-        '<button class="brand targa" id="home"><span class="t-sup">liv. ' + lv.level + ' · ' +
-          esc(Engine.rankFor(lv.level)) + '</span><span class="t-via">Via C1</span></button>' +
+        '<button class="brand targa" id="home" title="' + esc(Engine.rankFor(lv.level)) +
+          '"><span class="t-sup">livello ' + lv.level + '</span><span class="t-via">Via C1</span></button>' +
         '<div class="stats">' +
           '<div class="stat' + (state.streak > 0 ? " hot" : "") + '"><b>' + state.streak + "<i>🔥</i></b><span>racha</span></div>" +
           '<div class="stat"><b>' + (state.shields || 0) + '🛡️</b><span>escudos</span></div>' +
@@ -278,7 +278,7 @@
 
     // La storia di Martín: la prossima puntata
     var ep = Letture.next(state.letture);
-    if (ep) {
+    if (ep && Letture.isOpen(ep, state.letture, state.unlocked)) {
       html += '<button class="card weekcard" data-ep="' + ep.id + '">' +
         '<span class="muted">Lectura · Martín a Bologna · episodio ' + ep.n + " · " +
           esc(ep.level) + "</span>" +
@@ -397,13 +397,15 @@
       html += "<h2>" + sr.emoji + " " + esc(sr.name) + "</h2>" +
         '<p class="muted">' + esc(sr.blurb) + '</p><div class="eps">';
       Letture.ofSeries(sr.id).forEach(function (ep) {
-        var d = done[ep.id], open = Letture.isOpen(ep, done);
+        var d = done[ep.id], open = Letture.isOpen(ep, done, state.unlocked);
+        var wait = !open && ep.week > state.unlocked;
         html += '<button class="ep' + (d ? " done" : "") + '" data-ep="' + ep.id + '"' +
           (open ? "" : " disabled") + ">" +
           '<span class="e">' + (open ? ep.emoji : "🔒") + "</span>" +
           "<span><b>" + esc(ep.title) + "</b>" +
           '<span class="muted">' + (ep.area ? esc(ep.area) + " · " : "episodio " + ep.n + " · ") +
-            esc(ep.level) + " · " + esc(ep.grammar) + "</span></span>" +
+            esc(ep.level) + " · " + (wait ? "se abre en la semana " + ep.week : esc(ep.grammar)) +
+            "</span></span>" +
           (d ? '<span class="score">' + d.pct + "%</span>" : "") +
           "</button>";
       });
@@ -517,7 +519,9 @@
       html += '<div class="season"><div class="banner s' + s.n + '"><span class="lvl">' + esc(s.level) + "</span>" +
         "<h2>" + esc(s.name) + "</h2><p>" + esc(s.blurb) + '</p></div><div class="path">';
       course.weeks.filter(function (w) { return w.season === s.n; }).forEach(function (w, k) {
-        var open = w.week <= state.unlocked;
+        // Una semana ya jugada sigue abierta aunque, tras el reordenamiento
+        // del programa, quede después de la sbloccata.
+        var open = w.week <= state.unlocked || !!state.weekStats[w.week] || lessonRead(w.week);
         var stars = weekStars(w);
         var current = w.week === Math.min(state.unlocked, 52) && stars < 3;
         var x = Math.round(Math.sin(k * 0.9) * 32);
@@ -1676,7 +1680,7 @@
         if (typeof s.xp !== "number" || !s.cards) throw new Error("formato");
         if (!confirm("Esto reemplaza tu progreso actual por la copia (" + s.xp +
                      " xp). ¿Seguir?")) return;
-        state = Engine.sanitize(s);
+        state = Engine.sanitize(Engine.migrateSyllabus(s));
         persist();
         renderHeader();
         render();

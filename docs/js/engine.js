@@ -169,6 +169,7 @@
       days: {},           // "aaaa-m-g" -> xp guadagnata quel giorno
       goal: 200,          // obiettivo di xp al giorno (~2 pause caffè)
       goalV: 2,           // versione della scala dell'obiettivo
+      syllabusV: 2,       // versione dell'ordine delle settimane (v. migrateSyllabus)
       shields: 1,         // scudi che salvano la serie se salti un giorno
       chest: null,        // giorno in cui hai aperto il forziere
       best: {},           // record personali: lampo, combo
@@ -247,12 +248,40 @@
     return s;
   }
 
+  /* Il programma è stato riordinato secondo la guida (passato prossimo nel
+     primo trimestre; ci/ne, pronomi combinati e congiuntivo nel secondo).
+     Chi aveva già giocato ha le settimane numerate col vecchio ordine: le
+     rinumeriamo, e la settimana sbloccata diventa la prima del nuovo ordine
+     che non aveva ancora fatto (niente salti di teoria). */
+  var OLD_TO_NEW = { 1: 1, 2: 2, 3: 3, 4: 4, 5: 7, 6: 5, 7: 6, 8: 10, 9: 12, 10: 14, 11: 8, 12: 9, 13: 13,
+    14: 17, 15: 28, 16: 27, 17: 11, 18: 15, 19: 16, 20: 19, 21: 20, 22: 23, 23: 18, 24: 46, 25: 47, 26: 26,
+    27: 24, 28: 25, 29: 29, 30: 30, 31: 32, 32: 33, 33: 31, 34: 35, 35: 36, 36: 22, 37: 21, 38: 34, 39: 39,
+    40: 40, 41: 41, 42: 42, 43: 43, 44: 44, 45: 37, 46: 45, 47: 38, 48: 48, 49: 49, 50: 50, 51: 51, 52: 52 };
+
+  function migrateSyllabus(s) {
+    if (!isObj(s) || s.syllabusV === 2) return s;
+    ["read", "lessonScore", "weekStats"].forEach(function (k) {
+      if (!isObj(s[k])) return;
+      var out = {};
+      Object.keys(s[k]).forEach(function (w) { if (OLD_TO_NEW[w]) out[OLD_TO_NEW[w]] = s[k][w]; });
+      s[k] = out;
+    });
+    var done = {};
+    for (var w = 1; w < (+s.unlocked || 1); w++) done[OLD_TO_NEW[w]] = true;
+    var u = 1;
+    while (u < 52 && done[u]) u++;
+    s.unlocked = u;
+    s.week = OLD_TO_NEW[s.week] || 1;
+    s.syllabusV = 2;
+    return s;
+  }
+
   function load() {
     var raw = null;
     try {
       raw = root.localStorage && root.localStorage.getItem(KEY);
       if (!raw) return blankSave();
-      var s = JSON.parse(raw);
+      var s = migrateSyllabus(JSON.parse(raw));
       if (isObj(s) && s.goalV !== 2) {
         // The first goal scale (20-150) was reached with a single session.
         s.goal = { 20: 100, 50: 200, 100: 350, 150: 500 }[s.goal] || 200;
@@ -466,6 +495,7 @@
     blankSave: blankSave,
     load: load,
     sanitize: sanitize,
+    migrateSyllabus: migrateSyllabus,
     save: save,
     touchStreak: touchStreak,
     dayKey: dayKey,

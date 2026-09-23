@@ -57,7 +57,7 @@ _RULES = [("zione", "cion"), ("zioni", "ciones"), ("tà", "dad"), ("bile", "ble"
           ("ore", "or"), ("ori", "ores"), ("are", "ar"), ("ere", "er"), ("ire", "ir"),
           ("ico", "ico"), ("ica", "ica"), ("ici", "icos"), ("iche", "icas"),
           ("ente", "ente"), ("enti", "entes"), ("ante", "ante"), ("anti", "antes"),
-          ("i", "os"), ("e", "es"), ("e", "as"), ("i", "es"), ("o", "o"), ("a", "a"),
+          ("i", "os"), ("i", "as"), ("e", "es"), ("e", "as"), ("i", "es"), ("o", "o"), ("a", "a"),
           ("e", "e"), ("e", ""), ("o", ""), ("i", "")]
 
 
@@ -139,6 +139,9 @@ nessuno nessuna nessun ciascuno ciascuna ognuno ognuna qualcuno qualcuna qualcos
 niente nulla qualsiasi qualunque chiunque stesso stessa stessi stesse altro altra
 altri altre ogni alcuni alcune alcuno alcuna qualche po' po tutta
 maschile femminile singolare plurale signor
+verso tranne ciò piuttosto proprio fuori dentro sopra sotto davanti dietro vicino
+lontano circa insieme presto tardi subito spesso anche pure neanche nemmeno mica
+senza dopo durante mentre finché oppure invece però eppure dunque perciò
 """.split())
 NUMBERS = re.compile(r"^(?:(?:un|due|tre|quattro|cinque|sei|sette|otto|nove|dieci|undici|"
                      r"dodici|tredici|quattordici|quindici|sedici|diciassette|diciotto|"
