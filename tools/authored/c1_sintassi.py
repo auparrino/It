@@ -43,6 +43,7 @@ ITEMS = [
          prompt="Traducí al italiano (pasiva refleja).",
          stem="Aquí se venden libros usados.",
          answer="Qui si vendono libri usati",
+         alt=["Qua si vendono libri usati", "Si vendono libri usati qui"],
          note="Plural obligatorio en el verbo: «si vendono», no «si vende»."),
 
     # --- causativo ---
@@ -75,10 +76,10 @@ ITEMS = [
     dict(id="c1-caus-05", type="choice", topic="percezione",
          prompt="Elegí la forma correcta.",
          stem="Ho visto Maria ___ dalla finestra.",
-         options=["uscire", "che usciva", "uscendo"],
+         options=["uscire", "di uscire", "uscendo"],
          answer="uscire",
-         note="Verbos de percepción + infinitivo. «Che usciva» también existe, "
-              "pero el infinitivo es la construcción básica."),
+         note="Verbos de percepción + infinitivo sin preposición. «Che usciva» "
+              "también vale; «uscendo» se referiría al sujeto (yo)."),
 
     # --- infinito, gerundio, participio ---
     dict(id="c1-nonfin-01", type="choice", topic="gerundio",
@@ -111,22 +112,22 @@ ITEMS = [
          note="«Seguir + gerundio» NO se calca: italiano usa «continuare A + "
               "infinito». «Sto studiando» es solo acción en curso ahora."),
     dict(id="c1-nonfin-06", type="choice", topic="gerundio",
-         prompt="¿Cuál es incorrecta?",
-         stem="___ il treno, ho comprato il biglietto.",
+         prompt="Elegí la forma correcta (mientras esperaba).",
+         stem="___ il treno, ho letto il giornale.",
          options=["Aspettando", "Avendo aspettato", "Aspettato"],
-         answer="Aspettato",
-         note="El participio absoluto de un transitivo necesita su objeto delante: "
-              "«aspettato il treno» suena mal aquí; con gerundio va bien."),
+         answer="Aspettando",
+         note="Simultaneidad con el mismo sujeto → gerundio simple. «Avendo "
+              "aspettato» y «aspettato» marcan anterioridad: la espera ya terminó."),
 
     # --- connettivi e registro ---
     dict(id="c1-conn-01", type="choice", topic="connettivi",
          prompt="Elegí el conector adecuado (concesivo, registro alto).",
-         stem="___ le difficoltà, il progetto è andato avanti.",
+         stem="___ le difficoltà, il progetto va avanti.",
          options=["Nonostante", "Siccome", "Affinché"], answer="Nonostante",
          note="«Nonostante/malgrado» + sustantivo o + congiuntivo."),
     dict(id="c1-conn-02", type="choice", topic="connettivi",
          prompt="Elegí el conector adecuado (causal, al inicio).",
-         stem="___ pioveva, siamo rimasti a casa.",
+         stem="___ piove, restiamo a casa.",
          options=["Siccome", "Perché", "Quindi"], answer="Siccome",
          note="«Perché» causal no abre la frase; «siccome/poiché/dato che» sí."),
     dict(id="c1-conn-03", type="choice", topic="connettivi",
@@ -136,12 +137,12 @@ ITEMS = [
          note="«Affinché/perché» final + congiuntivo = para que."),
     dict(id="c1-conn-04", type="choice", topic="connettivi",
          prompt="Elegí la correcta.",
-         stem="Non è venuto; ___, non ha nemmeno avvisato.",
+         stem="Non mi aiuta; ___, mi critica.",
          options=["anzi", "invece di", "piuttosto che"], answer="anzi",
          note="«Anzi» refuerza o corrige lo dicho: es más / al contrario."),
     dict(id="c1-conn-05", type="choice", topic="connettivi",
          prompt="Elegí el conector adecuado.",
-         stem="Era stanco; ___ ha finito il lavoro.",
+         stem="È stanco; ___ finisce il lavoro.",
          options=["tuttavia", "dunque", "ossia"], answer="tuttavia",
          note="«Tuttavia/eppure» = sin embargo. «Dunque» = por lo tanto."),
 
@@ -166,18 +167,19 @@ ITEMS = [
          prompt="Traducí al italiano con dislocación a la derecha.",
          stem="Ya lo sabía, eso.",
          answer="Lo sapevo già, questo",
+         alt=["Già lo sapevo, questo"],
          note="Dislocación a la derecha: el pronombre anticipa y el elemento "
               "aparece al final como refuerzo."),
 
     # --- preposizioni con verbi (cap. 28) ---
     dict(id="c1-prep-01", type="choice", topic="preposizioni",
          prompt="Elegí la preposición correcta.",
-         stem="Ho cominciato ___ studiare il tedesco.",
+         stem="Domani comincio ___ studiare il tedesco.",
          options=["a", "di", "—"], answer="a",
          note="cominciare A, continuare A, riuscire A, provare A."),
     dict(id="c1-prep-02", type="choice", topic="preposizioni",
          prompt="Elegí la preposición correcta.",
-         stem="Ho deciso ___ partire domani.",
+         stem="Allora, decidi ___ partire o no?",
          options=["di", "a", "per"], answer="di",
          note="decidere DI, cercare DI, finire DI, smettere DI."),
     dict(id="c1-prep-03", type="choice", topic="preposizioni",
@@ -187,15 +189,15 @@ ITEMS = [
          note="Modales y preferire/desiderare/amare van con infinitivo desnudo."),
     dict(id="c1-prep-04", type="choice", topic="preposizioni",
          prompt="Elegí la correcta.",
-         stem="Mi sono dimenticato ___ chiamarla.",
+         stem="Mi dimentico sempre ___ chiamarla.",
          options=["di", "a", "per"], answer="di",
          note="dimenticarsi DI, ricordarsi DI, accorgersi DI, pentirsi DI."),
     dict(id="c1-prep-05", type="translate", topic="preposizioni",
          prompt="Traducí al italiano.",
-         stem="Logré terminar a tiempo.",
-         answer="Sono riuscito a finire in tempo",
-         alt=["Sono riuscita a finire in tempo"],
-         note="«riuscire A» + infinitivo, y con auxiliar «essere»."),
+         stem="No logro terminar a tiempo.",
+         answer="Non riesco a finire in tempo",
+         alt=["Non riesco a terminare in tempo"],
+         note="«riuscire A» + infinitivo: riesco a finire, no «riesco finire»."),
 
     # --- comparativi e superlativi (cap. 5) ---
     dict(id="c1-comp-01", type="choice", topic="comparativi",

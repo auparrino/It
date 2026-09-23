@@ -168,7 +168,7 @@
     {
      "id": "d03-017",
      "stem": "valigia ___",
-     "answer": "valigia",
+     "answer": "valigie; valige",
      "directions": "Make the following singular nouns plural by changing the last letter(s) of each word. See the example.",
      "example": {
       "q": "orologio",
@@ -268,7 +268,7 @@
     {
      "id": "d03-027",
      "stem": "fantasma ___",
-     "answer": "fantamsi, fantasme",
+     "answer": "fantasmi",
      "directions": "Change the following singular nouns to their plural forms. Some nouns have two plural forms, one masculine and one feminine. If the nouns are already plural, change them to their singular forms.",
      "example": {
       "q": "problema",
@@ -518,7 +518,7 @@
     {
      "id": "d03-052",
      "stem": "vegetables ___",
-     "answer": "la verdura",
+     "answer": "la verdura; le verdure",
      "directions": "Translate the following nouns into Italian. Don’t forget to use the definite article that goes with each noun.",
      "example": {
       "q": "sports",
@@ -548,7 +548,7 @@
     {
      "id": "d03-055",
      "stem": "marriage ___",
-     "answer": "le nozze",
+     "answer": "le nozze; il matrimonio",
      "directions": "Translate the following nouns into Italian. Don’t forget to use the definite article that goes with each noun.",
      "example": {
       "q": "sports",
@@ -558,8 +558,8 @@
     {
      "id": "d03-056",
      "stem": "Mariuccia (Maria) ___",
-     "answer": "dear little Maria",
-     "directions": "Give the English equivalent of the following nouns. Each has a suffix or a prefix. I include a translation of each root word — the original word as defined when it doesn’t have a suffix or prefix.",
+     "answer": "dear little Maria; little Maria",
+     "directions": "Give the English equivalent of the following nouns. Each has a suffix or a prefix. I include a translation of each root word — the original word as defined when it doesn’t have a suffix or prefix. Translate them into English.",
      "example": {
       "q": "una casuccia (house)",
       "a": "A little, squalid house"
@@ -568,8 +568,8 @@
     {
      "id": "d03-057",
      "stem": "mezz’oretta (half hour) ___",
-     "answer": "bare half-hour",
-     "directions": "Give the English equivalent of the following nouns. Each has a suffix or a prefix. I include a translation of each root word — the original word as defined when it doesn’t have a suffix or prefix.",
+     "answer": "a short half hour; just half an hour; a bare half-hour",
+     "directions": "Give the English equivalent of the following nouns. Each has a suffix or a prefix. I include a translation of each root word — the original word as defined when it doesn’t have a suffix or prefix. Translate them into English.",
      "example": {
       "q": "una casuccia (house)",
       "a": "A little, squalid house"
@@ -578,8 +578,8 @@
     {
      "id": "d03-058",
      "stem": "stradone (street) ___",
-     "answer": "big road",
-     "directions": "Give the English equivalent of the following nouns. Each has a suffix or a prefix. I include a translation of each root word — the original word as defined when it doesn’t have a suffix or prefix.",
+     "answer": "big road; big street; wide street",
+     "directions": "Give the English equivalent of the following nouns. Each has a suffix or a prefix. I include a translation of each root word — the original word as defined when it doesn’t have a suffix or prefix. Translate them into English.",
      "example": {
       "q": "una casuccia (house)",
       "a": "A little, squalid house"
@@ -589,7 +589,7 @@
      "id": "d03-059",
      "stem": "reazione (action) ___",
      "answer": "reaction",
-     "directions": "Give the English equivalent of the following nouns. Each has a suffix or a prefix. I include a translation of each root word — the original word as defined when it doesn’t have a suffix or prefix.",
+     "directions": "Give the English equivalent of the following nouns. Each has a suffix or a prefix. I include a translation of each root word — the original word as defined when it doesn’t have a suffix or prefix. Translate them into English.",
      "example": {
       "q": "una casuccia (house)",
       "a": "A little, squalid house"
@@ -598,8 +598,8 @@
     {
      "id": "d03-060",
      "stem": "prenotazione (notation) ___",
-     "answer": "reservation",
-     "directions": "Give the English equivalent of the following nouns. Each has a suffix or a prefix. I include a translation of each root word — the original word as defined when it doesn’t have a suffix or prefix.",
+     "answer": "reservation; booking",
+     "directions": "Give the English equivalent of the following nouns. Each has a suffix or a prefix. I include a translation of each root word — the original word as defined when it doesn’t have a suffix or prefix. Translate them into English.",
      "example": {
       "q": "una casuccia (house)",
       "a": "A little, squalid house"
@@ -624,7 +624,7 @@
     {
      "id": "d04-002",
      "stem": "(31) ___",
-     "answer": "trentuo",
+     "answer": "trentuno",
      "directions": "Write out the numbers in parentheses, following the example.",
      "example": {
       "q": "(464) ___",
@@ -654,7 +654,7 @@
     {
      "id": "d04-005",
      "stem": "(5,612,423) ___",
-     "answer": "cinquemilioneseicentododicimilaquattrocentoventitré",
+     "answer": "cinque milioni seicentododicimilaquattrocentoventitré; cinquemilioniseicentododicimilaquattrocentoventitré",
      "directions": "Write out the numbers in parentheses, following the example.",
      "example": {
       "q": "(464) ___",
@@ -784,7 +784,7 @@
     {
      "id": "d04-018",
      "stem": "La ___ casa (thousandth)",
-     "answer": "millesimo",
+     "answer": "millesima",
      "directions": "In the following sentences, fill in the blanks with the correct ordinal number in Italian. Use the spelled-out form of the number rather than the abbreviation. Remember to make the ordinal number agree in number and gender with the noun being modified. (To review number and gender, see Chapter 3.)",
      "example": {
       "q": "il ___ libro (first)",
@@ -914,7 +914,7 @@
     {
      "id": "d04-031",
      "stem": "It’s noon. ___",
-     "answer": "È mezzogiorno",
+     "answer": "È mezzogiorno.",
      "directions": "Write the following times in Italian, spelling out the numbers. Some will require the 24-hour clock.",
      "example": {
       "q": "It’s 2:14 a.m.",
@@ -924,7 +924,7 @@
     {
      "id": "d04-032",
      "stem": "It’s 3:30 p.m. ___",
-     "answer": "Sono le tre e mezza; sono le tre e trenta del pomeriggio.",
+     "answer": "Sono le tre e mezza; sono le tre e trenta del pomeriggio; sono le quindici e trenta.",
      "directions": "Write the following times in Italian, spelling out the numbers. Some will require the 24-hour clock.",
      "example": {
       "q": "It’s 2:14 a.m.",
@@ -974,7 +974,7 @@
     {
      "id": "d04-037",
      "stem": "Around 6:00 p.m. ___",
-     "answer": "Vero le sei di sera.",
+     "answer": "Verso le sei di sera; verso le diciotto.",
      "directions": "Write the following times in Italian, spelling out the numbers. Some will require the 24-hour clock.",
      "example": {
       "q": "It’s 2:14 a.m.",
@@ -984,7 +984,7 @@
     {
      "id": "d04-038",
      "stem": "At 17:00 hours ___",
-     "answer": "Alle diciassette ore.",
+     "answer": "Alle diciassette; alle ore diciassette.",
      "directions": "Write the following times in Italian, spelling out the numbers. Some will require the 24-hour clock.",
      "example": {
       "q": "It’s 2:14 a.m.",
@@ -1004,7 +1004,7 @@
     {
      "id": "d04-040",
      "stem": "It’s 5:45 p.m. ___",
-     "answer": "Sono le cinque e quarantacinque; sono le sei meno un quarto di sera.",
+     "answer": "Sono le cinque e quarantacinque del pomeriggio; sono le sei meno un quarto di sera; sono le diciassette e quarantacinque.",
      "directions": "Write the following times in Italian, spelling out the numbers. Some will require the 24-hour clock.",
      "example": {
       "q": "It’s 2:14 a.m.",
@@ -1060,7 +1060,7 @@
     {
      "id": "d05-005",
      "stem": "gli insegnanti ___",
-     "answer": "piccoli, grandi pigri",
+     "answer": "piccoli, grandi, pigri",
      "directions": "Choose adjectives from the word bank that agree in number and gender with the nouns and that make sense. You may have more than one answer in some cases. Occasionally, you may have to look at the article accompanying the noun to figure out gender.",
      "example": {
       "q": "l’università",
@@ -1140,7 +1140,7 @@
     {
      "id": "d05-013",
      "stem": "(santo) ___ Apostoli",
-     "answer": "santi",
+     "answer": "Santi",
      "directions": "Fill in the appropriate forms of buono, santo, or bello in the following phrases. Remember to make buono, santo, or bello agree in number and gender with the word being modified.",
      "example": {
       "q": "(santo) ___ Clemente",
@@ -1220,7 +1220,7 @@
     {
      "id": "d05-021",
      "stem": "(piccola) scuola",
-     "answer": "piccola scuola",
+     "answer": "piccola scuola; scuola piccola",
      "directions": "Place the adjective in parentheses either before or after the noun it modifies.",
      "example": {
       "q": "(tedesco) ragazzo",
@@ -1240,7 +1240,7 @@
     {
      "id": "d05-023",
      "stem": "(grande) casa",
-     "answer": "grande casa",
+     "answer": "grande casa; casa grande",
      "directions": "Place the adjective in parentheses either before or after the noun it modifies.",
      "example": {
       "q": "(tedesco) ragazzo",
@@ -1260,7 +1260,7 @@
     {
      "id": "d05-025",
      "stem": "(care) gatte",
-     "answer": "care gatte (sweet cats, expensive cats)",
+     "answer": "care gatte; gatte care",
      "directions": "Place the adjective in parentheses either before or after the noun it modifies.",
      "example": {
       "q": "(tedesco) ragazzo",
@@ -1290,7 +1290,7 @@
     {
      "id": "d05-028",
      "stem": "(alto) edificio",
-     "answer": "edificio alto",
+     "answer": "edificio alto; alto edificio",
      "directions": "Place the adjective in parentheses either before or after the noun it modifies.",
      "example": {
       "q": "(tedesco) ragazzo",
@@ -1435,7 +1435,7 @@
     },
     {
      "id": "d06-012",
-     "stem": "Tonio ___ (giocare) a calico ogni giorno.",
+     "stem": "Tonio ___ (giocare) a calcio ogni giorno.",
      "answer": "gioca",
      "directions": "Conjugate the -care and -gare verbs in parentheses according to the subject pronouns in the following sentences. Follow the example.",
      "example": {
@@ -1446,7 +1446,7 @@
     {
      "id": "d06-013",
      "stem": "Tu ___ (negare) questo?",
-     "answer": "nega",
+     "answer": "neghi",
      "directions": "Conjugate the -care and -gare verbs in parentheses according to the subject pronouns in the following sentences. Follow the example.",
      "example": {
       "q": "Pago io o ___ (pagare) tu?",
@@ -1645,7 +1645,7 @@
     },
     {
      "id": "d06-033",
-     "stem": "Tu ___ (prendere) thè o caffè?",
+     "stem": "Tu ___ (prendere) tè o caffè?",
      "answer": "prendi",
      "directions": "Conjugate the verbs in parentheses according to the subject pronouns, as shown in the example.",
      "example": {
@@ -1896,7 +1896,7 @@
     {
      "id": "d06-058",
      "stem": "He wears.",
-     "answer": "Porta.",
+     "answer": "Porta.; Indossa.",
      "directions": "Translate the following short sentences and phrases into Italian. Be sure the subject and verb agree. Don’t worry if you haven’t learned all the verbs from this chapter yet. After referring back to them, even more than once, you’ll find them taking up permanent residence in your vocabulary.",
      "example": {
       "q": "Beppe is teaching.",
@@ -2016,7 +2016,7 @@
     {
      "id": "d06-070",
      "stem": "Do you (familiar, singular) ski or play a sport?",
-     "answer": "Scii o giochi a uno sport?",
+     "answer": "Scii o fai uno sport?; Scii o pratichi uno sport?",
      "directions": "Put the sentences into Italian, using the basic conjunctions. Here is an example:",
      "example": {
       "q": "I don’t understand, but he does, always.",
@@ -2139,7 +2139,7 @@
     {
      "id": "d07-011",
      "stem": "Luigi ___ un gatto che è vecchio vecchio.",
-     "answer": "Ha",
+     "answer": "ha",
      "directions": "Fill in the appropriately conjugated form of avere in the sentences that follow. Here’s an example:",
      "example": {
       "q": "Noi ___ molto da fare.",
@@ -2149,7 +2149,7 @@
     {
      "id": "d07-012",
      "stem": "Voi ___ una bellissima casa.",
-     "answer": "Avete",
+     "answer": "avete",
      "directions": "Fill in the appropriately conjugated form of avere in the sentences that follow. Here’s an example:",
      "example": {
       "q": "Noi ___ molto da fare.",
@@ -2159,7 +2159,7 @@
     {
      "id": "d07-013",
      "stem": "Lei, signora, ___ il biglietto?",
-     "answer": "Ha",
+     "answer": "ha",
      "directions": "Fill in the appropriately conjugated form of avere in the sentences that follow. Here’s an example:",
      "example": {
       "q": "Noi ___ molto da fare.",
@@ -2169,7 +2169,7 @@
     {
      "id": "d07-014",
      "stem": "Io non ___ una macchina.",
-     "answer": "Ho",
+     "answer": "ho",
      "directions": "Fill in the appropriately conjugated form of avere in the sentences that follow. Here’s an example:",
      "example": {
       "q": "Noi ___ molto da fare.",
@@ -2179,7 +2179,7 @@
     {
      "id": "d07-015",
      "stem": "Tu ___ un amico che si chiama Leonardo?",
-     "answer": "Hai",
+     "answer": "hai",
      "directions": "Fill in the appropriately conjugated form of avere in the sentences that follow. Here’s an example:",
      "example": {
       "q": "Noi ___ molto da fare.",
@@ -2229,7 +2229,7 @@
     {
      "id": "d07-020",
      "stem": "Are you (formal plural) cold?",
-     "answer": "Ha freddo?",
+     "answer": "Hanno freddo?; Avete freddo?",
      "directions": "Using avere as your verb, translate the following short sentences into Italian. Don’t be shy about looking back at the definitions as you work. The more you study them, the sooner they’ll become natural to you.",
      "example": {
       "q": "You’re right.",
@@ -2289,7 +2289,7 @@
     {
      "id": "d07-026",
      "stem": "Noi ___ studenti.",
-     "answer": "Siamo",
+     "answer": "siamo",
      "directions": "Now decide whether to use avere or essere in the following phrases. Make sure whichever verb you choose agrees with the subject.",
      "example": {
       "q": "Io ___ americana.",
@@ -2299,7 +2299,7 @@
     {
      "id": "d07-027",
      "stem": "Il bambino ___ fame.",
-     "answer": "Ha",
+     "answer": "ha",
      "directions": "Now decide whether to use avere or essere in the following phrases. Make sure whichever verb you choose agrees with the subject.",
      "example": {
       "q": "Io ___ americana.",
@@ -2359,7 +2359,7 @@
     {
      "id": "d07-033",
      "stem": "Io ___ di mangiare.",
-     "answer": "ho voglia di, ho bisogno di",
+     "answer": "ho voglia, ho bisogno",
      "directions": "Now decide whether to use avere or essere in the following phrases. Make sure whichever verb you choose agrees with the subject.",
      "example": {
       "q": "Io ___ americana.",
@@ -2509,7 +2509,7 @@
     {
      "id": "d07-048",
      "stem": "Io ___ studiare.",
-     "answer": "devo, posso, vorrei",
+     "answer": "devo, posso, voglio, vorrei",
      "directions": "From the verbs listed, choose the one most appropriate to the context of each sentence. Be sure the subject and verb agree in number. Some sentences may have more than one correct answer.",
      "example": {
       "q": "Noi ___ all’albergo in centro città.",
@@ -2785,7 +2785,7 @@
     {
      "id": "d08-005",
      "stem": "(talking to someone) Dottor Bianchi ___",
-     "answer": "lei",
+     "answer": "Lei",
      "directions": "Fill in the appropriate subject pronouns to replace the subjects in the following phrases. In each case, you’re talking about the subjects, not to them, unless otherwise indicated.",
      "example": {
       "q": "Riccardo",
@@ -2795,7 +2795,7 @@
     {
      "id": "d08-006",
      "stem": "(talking to someone) Signori e signore (ladies and gentlemen) ___",
-     "answer": "loro or voi",
+     "answer": "Loro; voi",
      "directions": "Fill in the appropriate subject pronouns to replace the subjects in the following phrases. In each case, you’re talking about the subjects, not to them, unless otherwise indicated.",
      "example": {
       "q": "Riccardo",
@@ -3055,7 +3055,7 @@
     {
      "id": "d08-032",
      "stem": "ve la ___",
-     "answer": "it/her to you all",
+     "answer": "it/her to you all; it to you all; her to you all",
      "directions": "Translate the following double object pronouns into English. Keep in mind that some of the forms have more than one meaning.",
      "example": {
       "q": "me la",
@@ -3075,7 +3075,7 @@
     {
      "id": "d08-034",
      "stem": "glielo ___",
-     "answer": "it to him/her/it/you/them",
+     "answer": "it to him/her/it/you/them; it to him; it to her; it to you; it to them",
      "directions": "Translate the following double object pronouns into English. Keep in mind that some of the forms have more than one meaning.",
      "example": {
       "q": "me la",
@@ -3105,7 +3105,7 @@
     {
      "id": "d08-037",
      "stem": "glieli ___",
-     "answer": "them to him/her/it/you/them",
+     "answer": "them to him/her/it/you/them; them to him; them to her; them to you; them to them",
      "directions": "Translate the following double object pronouns into English. Keep in mind that some of the forms have more than one meaning.",
      "example": {
       "q": "me la",
@@ -3115,7 +3115,7 @@
     {
      "id": "d08-038",
      "stem": "gliele ___",
-     "answer": "them to him/her/it/you/them",
+     "answer": "them to him/her/it/you/them; them to him; them to her; them to you; them to them",
      "directions": "Translate the following double object pronouns into English. Keep in mind that some of the forms have more than one meaning.",
      "example": {
       "q": "me la",
@@ -3144,8 +3144,8 @@
     },
     {
      "id": "d08-041",
-     "stem": "Ci sono . . .",
-     "answer": "there are",
+     "stem": "Ci sono…",
+     "answer": "There are…",
      "directions": "Translate the following phrases and sentences into idiomatic English.",
      "example": {
       "q": "C’è un medico qui?",
@@ -3165,7 +3165,7 @@
     {
      "id": "d08-043",
      "stem": "Non c’è.",
-     "answer": "She/he/it isn’t here.",
+     "answer": "She/he/it isn’t here.; She isn’t here.; He isn’t here.; It isn’t here.",
      "directions": "Translate the following phrases and sentences into idiomatic English.",
      "example": {
       "q": "C’è un medico qui?",
@@ -3210,7 +3210,7 @@
     },
     {
      "id": "d09-002",
-     "stem": "Primo mi faccio la doccia, poi ___ (pettinarsi).",
+     "stem": "Prima mi faccio la doccia, poi ___ (pettinarsi).",
      "answer": "mi pettino",
      "directions": "Complete the following sentences with the appropriate conjugations of the verbs in parentheses. Here’s an example:",
      "example": {
@@ -3441,7 +3441,7 @@
     {
      "id": "d09-025",
      "stem": "[tu] Don’t call.",
-     "answer": "non telefonare",
+     "answer": "non telefonare; non chiamare",
      "directions": "Use the subjects, indicated in brackets, to translate the following sentences in Italian. The sentences may seem somewhat stilted because you have no pronouns attached to them — yet. You will later in this section. Here’s an example.",
      "example": {
       "q": "[noi] Let’s read.",
@@ -3708,7 +3708,7 @@
      "id": "d10-031",
      "stem": "Questo ultimo disegno non ci ___.",
      "answer": "è piaciuto",
-     "directions": "For Questions 21 through 30, use the tense or mood in parentheses to fill in the blank with the verb piacere. Here’s an example:",
+     "directions": "Fill in the blank with the right past form of piacere: the present perfect (passato prossimo) or the imperfect.",
      "example": {
       "q": "La domenica ci ___ leggere i fumetti.",
       "a": "piaceva"
@@ -3717,8 +3717,8 @@
     {
      "id": "d10-032",
      "stem": "Non le ___ l’opera di Michelangelo.",
-     "answer": "piaceva",
-     "directions": "For Questions 21 through 30, use the tense or mood in parentheses to fill in the blank with the verb piacere. Here’s an example:",
+     "answer": "piaceva; è piaciuta",
+     "directions": "Fill in the blank with the right past form of piacere: the present perfect (passato prossimo) or the imperfect.",
      "example": {
       "q": "La domenica ci ___ leggere i fumetti.",
       "a": "piaceva"
@@ -3728,7 +3728,7 @@
      "id": "d10-033",
      "stem": "A Rodolfo ___ di solito mangiare presto.",
      "answer": "piaceva",
-     "directions": "For Questions 21 through 30, use the tense or mood in parentheses to fill in the blank with the verb piacere. Here’s an example:",
+     "directions": "Fill in the blank with the right past form of piacere: the present perfect (passato prossimo) or the imperfect.",
      "example": {
       "q": "La domenica ci ___ leggere i fumetti.",
       "a": "piaceva"
@@ -3738,7 +3738,7 @@
      "id": "d10-034",
      "stem": "Ieri ho letto un libro che mi ___.",
      "answer": "è piaciuto",
-     "directions": "For Questions 21 through 30, use the tense or mood in parentheses to fill in the blank with the verb piacere. Here’s an example:",
+     "directions": "Fill in the blank with the right past form of piacere: the present perfect (passato prossimo) or the imperfect.",
      "example": {
       "q": "La domenica ci ___ leggere i fumetti.",
       "a": "piaceva"
@@ -3748,7 +3748,7 @@
      "id": "d10-035",
      "stem": "Ogni estate ci ___ visitare la nonna.",
      "answer": "piaceva",
-     "directions": "For Questions 21 through 30, use the tense or mood in parentheses to fill in the blank with the verb piacere. Here’s an example:",
+     "directions": "Fill in the blank with the right past form of piacere: the present perfect (passato prossimo) or the imperfect.",
      "example": {
       "q": "La domenica ci ___ leggere i fumetti.",
       "a": "piaceva"
@@ -3756,9 +3756,9 @@
     },
     {
      "id": "d10-036",
-     "stem": "Mentre gli ___ il computer, non l’ha comprato.",
+     "stem": "Anche se gli ___ il computer, non l’ha comprato.",
      "answer": "piaceva",
-     "directions": "For Questions 21 through 30, use the tense or mood in parentheses to fill in the blank with the verb piacere. Here’s an example:",
+     "directions": "Fill in the blank with the right past form of piacere: the present perfect (passato prossimo) or the imperfect.",
      "example": {
       "q": "La domenica ci ___ leggere i fumetti.",
       "a": "piaceva"
@@ -3767,8 +3767,8 @@
     {
      "id": "d10-037",
      "stem": "Ai bambini ___ mangiare dolci.",
-     "answer": "piacevano",
-     "directions": "For Questions 21 through 30, use the tense or mood in parentheses to fill in the blank with the verb piacere. Here’s an example:",
+     "answer": "piaceva",
+     "directions": "Fill in the blank with the right past form of piacere: the present perfect (passato prossimo) or the imperfect.",
      "example": {
       "q": "La domenica ci ___ leggere i fumetti.",
       "a": "piaceva"
@@ -3778,7 +3778,7 @@
      "id": "d10-038",
      "stem": "Da bambina mi ___ leggere e scrivere.",
      "answer": "piaceva",
-     "directions": "For Questions 21 through 30, use the tense or mood in parentheses to fill in the blank with the verb piacere. Here’s an example:",
+     "directions": "Fill in the blank with the right past form of piacere: the present perfect (passato prossimo) or the imperfect.",
      "example": {
       "q": "La domenica ci ___ leggere i fumetti.",
       "a": "piaceva"
@@ -3788,7 +3788,7 @@
      "id": "d10-039",
      "stem": "Mi ___ quel film.",
      "answer": "è piaciuto",
-     "directions": "For Questions 21 through 30, use the tense or mood in parentheses to fill in the blank with the verb piacere. Here’s an example:",
+     "directions": "Fill in the blank with the right past form of piacere: the present perfect (passato prossimo) or the imperfect.",
      "example": {
       "q": "La domenica ci ___ leggere i fumetti.",
       "a": "piaceva"
@@ -3798,7 +3798,7 @@
      "id": "d10-040",
      "stem": "Al gatto non ___ il nuovo cibo.",
      "answer": "è piaciuto",
-     "directions": "For Questions 21 through 30, use the tense or mood in parentheses to fill in the blank with the verb piacere. Here’s an example:",
+     "directions": "Fill in the blank with the right past form of piacere: the present perfect (passato prossimo) or the imperfect.",
      "example": {
       "q": "La domenica ci ___ leggere i fumetti.",
       "a": "piaceva"
@@ -3808,7 +3808,7 @@
      "id": "d10-041",
      "stem": "I film di lui non mi ___ (interessare).",
      "answer": "interessano",
-     "directions": "For Questions 21 through 30, use the tense or mood in parentheses to fill in the blank with the verb piacere. Here’s an example:",
+     "directions": "Fill in the blank with the present-tense form of the verb in parentheses, which works like piacere.",
      "example": {
       "q": "Ci ___ (interessare) le sue idee.",
       "a": "interessano"
@@ -3818,7 +3818,7 @@
      "id": "d10-042",
      "stem": "Mi ___ (bastare) tre tuorli.",
      "answer": "basta",
-     "directions": "For Questions 21 through 30, use the tense or mood in parentheses to fill in the blank with the verb piacere. Here’s an example:",
+     "directions": "Fill in the blank with the present-tense form of the verb in parentheses, which works like piacere.",
      "example": {
       "q": "Ci ___ (interessare) le sue idee.",
       "a": "interessano"
@@ -3828,7 +3828,7 @@
      "id": "d10-043",
      "stem": "Loro ci ___ (sembrare) onesti.",
      "answer": "sembrano",
-     "directions": "For Questions 21 through 30, use the tense or mood in parentheses to fill in the blank with the verb piacere. Here’s an example:",
+     "directions": "Fill in the blank with the present-tense form of the verb in parentheses, which works like piacere.",
      "example": {
       "q": "Ci ___ (interessare) le sue idee.",
       "a": "interessano"
@@ -3838,7 +3838,7 @@
      "id": "d10-044",
      "stem": "Queste cose non le ___ (importare).",
      "answer": "importano",
-     "directions": "For Questions 21 through 30, use the tense or mood in parentheses to fill in the blank with the verb piacere. Here’s an example:",
+     "directions": "Fill in the blank with the present-tense form of the verb in parentheses, which works like piacere.",
      "example": {
       "q": "Ci ___ (interessare) le sue idee.",
       "a": "interessano"
@@ -3848,7 +3848,7 @@
      "id": "d10-045",
      "stem": "La ragazza non gli ___ (sembrare) sincera.",
      "answer": "sembra",
-     "directions": "For Questions 21 through 30, use the tense or mood in parentheses to fill in the blank with the verb piacere. Here’s an example:",
+     "directions": "Fill in the blank with the present-tense form of the verb in parentheses, which works like piacere.",
      "example": {
       "q": "Ci ___ (interessare) le sue idee.",
       "a": "interessano"
@@ -3857,8 +3857,8 @@
     {
      "id": "d10-046",
      "stem": "Questo posto mi ___ (sembrare) ideale.",
-     "answer": "importano",
-     "directions": "For Questions 21 through 30, use the tense or mood in parentheses to fill in the blank with the verb piacere. Here’s an example:",
+     "answer": "sembra",
+     "directions": "Fill in the blank with the present-tense form of the verb in parentheses, which works like piacere.",
      "example": {
       "q": "Ci ___ (interessare) le sue idee.",
       "a": "interessano"
@@ -3866,9 +3866,9 @@
     },
     {
      "id": "d10-047",
-     "stem": "C’è soltanto uno. Non ci ___ (bastare) questo.",
+     "stem": "Ce n’è soltanto uno. Non ci ___ (bastare) questo.",
      "answer": "basta",
-     "directions": "For Questions 21 through 30, use the tense or mood in parentheses to fill in the blank with the verb piacere. Here’s an example:",
+     "directions": "Fill in the blank with the present-tense form of the verb in parentheses, which works like piacere.",
      "example": {
       "q": "Ci ___ (interessare) le sue idee.",
       "a": "interessano"
@@ -3878,7 +3878,7 @@
      "id": "d10-048",
      "stem": "Non gli ___ (interessare) le idee degli altri.",
      "answer": "interessano",
-     "directions": "For Questions 21 through 30, use the tense or mood in parentheses to fill in the blank with the verb piacere. Here’s an example:",
+     "directions": "Fill in the blank with the present-tense form of the verb in parentheses, which works like piacere.",
      "example": {
       "q": "Ci ___ (interessare) le sue idee.",
       "a": "interessano"
@@ -3888,7 +3888,7 @@
      "id": "d10-049",
      "stem": "A me ___ (interessare) la moda.",
      "answer": "interessa",
-     "directions": "For Questions 21 through 30, use the tense or mood in parentheses to fill in the blank with the verb piacere. Here’s an example:",
+     "directions": "Fill in the blank with the present-tense form of the verb in parentheses, which works like piacere.",
      "example": {
       "q": "Ci ___ (interessare) le sue idee.",
       "a": "interessano"
@@ -3898,7 +3898,7 @@
      "id": "d10-050",
      "stem": "A Paolo e Giuseppe ___ (importare) gli sport.",
      "answer": "importano",
-     "directions": "For Questions 21 through 30, use the tense or mood in parentheses to fill in the blank with the verb piacere. Here’s an example:",
+     "directions": "Fill in the blank with the present-tense form of the verb in parentheses, which works like piacere.",
      "example": {
       "q": "Ci ___ (interessare) le sue idee.",
       "a": "interessano"
@@ -3908,7 +3908,7 @@
      "id": "d10-051",
      "stem": "I miss them.",
      "answer": "Mi mancano.",
-     "directions": "For Questions 21 through 30, use the tense or mood in parentheses to fill in the blank with the verb piacere. Here’s an example:",
+     "directions": "Translate the following sentences into Italian, using mancare.",
      "example": {
       "q": "He misses them.",
       "a": "Gli mancano."
@@ -3918,7 +3918,7 @@
      "id": "d10-052",
      "stem": "You miss her.",
      "answer": "Ti manca.",
-     "directions": "For Questions 21 through 30, use the tense or mood in parentheses to fill in the blank with the verb piacere. Here’s an example:",
+     "directions": "Translate the following sentences into Italian, using mancare.",
      "example": {
       "q": "He misses them.",
       "a": "Gli mancano."
@@ -3928,7 +3928,7 @@
      "id": "d10-053",
      "stem": "They miss me.",
      "answer": "Gli manco.",
-     "directions": "For Questions 21 through 30, use the tense or mood in parentheses to fill in the blank with the verb piacere. Here’s an example:",
+     "directions": "Translate the following sentences into Italian, using mancare.",
      "example": {
       "q": "He misses them.",
       "a": "Gli mancano."
@@ -3938,7 +3938,7 @@
      "id": "d10-054",
      "stem": "We miss you (plural).",
      "answer": "Ci mancate.",
-     "directions": "For Questions 21 through 30, use the tense or mood in parentheses to fill in the blank with the verb piacere. Here’s an example:",
+     "directions": "Translate the following sentences into Italian, using mancare.",
      "example": {
       "q": "He misses them.",
       "a": "Gli mancano."
@@ -3948,7 +3948,7 @@
      "id": "d10-055",
      "stem": "They miss them.",
      "answer": "Gli mancano.",
-     "directions": "For Questions 21 through 30, use the tense or mood in parentheses to fill in the blank with the verb piacere. Here’s an example:",
+     "directions": "Translate the following sentences into Italian, using mancare.",
      "example": {
       "q": "He misses them.",
       "a": "Gli mancano."
@@ -3973,7 +3973,7 @@
     {
      "id": "d11-002",
      "stem": "I ragazzi sono a scuola.",
-     "answer": "Sono a scuola, i bambini?",
+     "answer": "Sono a scuola, i ragazzi?",
      "directions": "Change the following statements into questions by moving the subject from the beginning to the end of the sentence. I underline the subject so it’s easily recognizable. Don’t forget to add a question mark.",
      "example": {
       "q": "Marisa studia molto.",
@@ -4113,7 +4113,7 @@
     {
      "id": "d11-016",
      "stem": "___ ragazza è la più bella? (Which girl is the prettiest?)",
-     "answer": "qual",
+     "answer": "quale",
      "directions": "Choose the form of quanto (quanto, quanti, quanta, or quante) or quale (quale or quali) that best completes the following questions.",
      "example": {
       "q": "___ libri ha letto? (How many books did he read?)",
@@ -4143,7 +4143,7 @@
     {
      "id": "d11-019",
      "stem": "___ materia è la tua preferita? (Which subject is your favorite?)",
-     "answer": "qual",
+     "answer": "quale",
      "directions": "Choose the form of quanto (quanto, quanti, quanta, or quante) or quale (quale or quali) that best completes the following questions.",
      "example": {
       "q": "___ libri ha letto? (How many books did he read?)",
@@ -4163,7 +4163,7 @@
     {
      "id": "d11-021",
      "stem": "___ i musicisti? (What are the musicians like?)",
-     "answer": "come",
+     "answer": "come sono",
      "directions": "Choose from the following words to complete the questions. Use each word only once.",
      "example": {
       "q": "___ arriva il treno? (When does the train arrive?)",
@@ -4599,7 +4599,7 @@
     {
      "id": "d12-024",
      "stem": "in central Asia ___",
-     "answer": "nell’Asia centrale",
+     "answer": "nell’Asia centrale; in Asia centrale",
      "directions": "Translate the following phrases into Italian. Here’s an example.",
      "example": {
       "q": "to Sicily",
@@ -4619,7 +4619,7 @@
     {
      "id": "d12-026",
      "stem": "at Giorgio’s house ___",
-     "answer": "da Giorgio",
+     "answer": "da Giorgio; a casa di Giorgio",
      "directions": "Translate the following phrases into Italian. Here’s an example.",
      "example": {
       "q": "to Sicily",
@@ -4834,7 +4834,7 @@
     },
     {
      "id": "d13-007",
-     "stem": "(Those) ___ stati sono vicino a Messico.",
+     "stem": "(Those) ___ stati sono vicino al Messico.",
      "answer": "Quegli",
      "directions": "Complete the phrases or sentences with the word in parentheses (in Italian, of course).",
      "example": {
@@ -4875,7 +4875,7 @@
     {
      "id": "d13-011",
      "stem": "some books (libri)",
-     "answer": "alcuni, parecchi",
+     "answer": "alcuni libri, qualche libro, dei libri",
      "directions": "Translate the following phrases into Italian, using indefinite adjectives. If you can translate the phrase in more than one way, do so. I provide the nouns in parentheses so you don’t have to look up that vocabulary.",
      "example": {
       "q": "every car (macchina)",
@@ -4885,7 +4885,7 @@
     {
      "id": "d13-012",
      "stem": "too many boys (ragazzi)",
-     "answer": "troppi",
+     "answer": "troppi ragazzi",
      "directions": "Translate the following phrases into Italian, using indefinite adjectives. If you can translate the phrase in more than one way, do so. I provide the nouns in parentheses so you don’t have to look up that vocabulary.",
      "example": {
       "q": "every car (macchina)",
@@ -4895,7 +4895,7 @@
     {
      "id": "d13-013",
      "stem": "so many tourists (turisti)",
-     "answer": "tanti",
+     "answer": "tanti turisti, così tanti turisti",
      "directions": "Translate the following phrases into Italian, using indefinite adjectives. If you can translate the phrase in more than one way, do so. I provide the nouns in parentheses so you don’t have to look up that vocabulary.",
      "example": {
       "q": "every car (macchina)",
@@ -4905,7 +4905,7 @@
     {
      "id": "d13-014",
      "stem": "few students (studenti)",
-     "answer": "pochi",
+     "answer": "pochi studenti",
      "directions": "Translate the following phrases into Italian, using indefinite adjectives. If you can translate the phrase in more than one way, do so. I provide the nouns in parentheses so you don’t have to look up that vocabulary.",
      "example": {
       "q": "every car (macchina)",
@@ -4915,7 +4915,7 @@
     {
      "id": "d13-015",
      "stem": "much (a lot of) wine (vino)",
-     "answer": "molto",
+     "answer": "molto vino, tanto vino",
      "directions": "Translate the following phrases into Italian, using indefinite adjectives. If you can translate the phrase in more than one way, do so. I provide the nouns in parentheses so you don’t have to look up that vocabulary.",
      "example": {
       "q": "every car (macchina)",
@@ -4925,7 +4925,7 @@
     {
      "id": "d13-016",
      "stem": "any girl (ragazza)",
-     "answer": "ogni, qualsiasi, qualunque",
+     "answer": "qualsiasi ragazza, qualunque ragazza",
      "directions": "Translate the following phrases into Italian, using indefinite adjectives. If you can translate the phrase in more than one way, do so. I provide the nouns in parentheses so you don’t have to look up that vocabulary.",
      "example": {
       "q": "every car (macchina)",
@@ -4935,7 +4935,7 @@
     {
      "id": "d13-017",
      "stem": "various politicians (politici)",
-     "answer": "vari, diversi",
+     "answer": "vari politici, diversi politici",
      "directions": "Translate the following phrases into Italian, using indefinite adjectives. If you can translate the phrase in more than one way, do so. I provide the nouns in parentheses so you don’t have to look up that vocabulary.",
      "example": {
       "q": "every car (macchina)",
@@ -4945,7 +4945,7 @@
     {
      "id": "d13-018",
      "stem": "several houses (case)",
-     "answer": "parecchie",
+     "answer": "parecchie case, diverse case, varie case",
      "directions": "Translate the following phrases into Italian, using indefinite adjectives. If you can translate the phrase in more than one way, do so. I provide the nouns in parentheses so you don’t have to look up that vocabulary.",
      "example": {
       "q": "every car (macchina)",
@@ -4955,7 +4955,7 @@
     {
      "id": "d13-019",
      "stem": "other words (parole)",
-     "answer": "altre",
+     "answer": "altre parole",
      "directions": "Translate the following phrases into Italian, using indefinite adjectives. If you can translate the phrase in more than one way, do so. I provide the nouns in parentheses so you don’t have to look up that vocabulary.",
      "example": {
       "q": "every car (macchina)",
@@ -4965,7 +4965,7 @@
     {
      "id": "d13-020",
      "stem": "no reason (ragione)",
-     "answer": "nessuna",
+     "answer": "nessuna ragione",
      "directions": "Translate the following phrases into Italian, using indefinite adjectives. If you can translate the phrase in more than one way, do so. I provide the nouns in parentheses so you don’t have to look up that vocabulary.",
      "example": {
       "q": "every car (macchina)",
@@ -5054,8 +5054,8 @@
     },
     {
      "id": "d13-029",
-     "stem": "Ci sono vari da considerare.",
-     "answer": "There are various [things] to consider.",
+     "stem": "Ce ne sono vari da considerare.",
+     "answer": "There are various ones to consider.",
      "directions": "Translate the following phrases or sentences from Italian into idiomatic English. Here’s an example.",
      "example": {
       "q": "Mamma, non c’è niente da fare.",
@@ -5079,7 +5079,7 @@
      "directions": "Translate the following phrases into Italian, using possessive adjectives. Use the article if necessary.",
      "example": {
       "q": "his house",
-      "a": "la sua casa _______________"
+      "a": "la sua casa"
      }
     },
     {
@@ -5089,7 +5089,7 @@
      "directions": "Translate the following phrases into Italian, using possessive adjectives. Use the article if necessary.",
      "example": {
       "q": "his house",
-      "a": "la sua casa _______________"
+      "a": "la sua casa"
      }
     },
     {
@@ -5099,7 +5099,7 @@
      "directions": "Translate the following phrases into Italian, using possessive adjectives. Use the article if necessary.",
      "example": {
       "q": "his house",
-      "a": "la sua casa _______________"
+      "a": "la sua casa"
      }
     },
     {
@@ -5109,7 +5109,7 @@
      "directions": "Translate the following phrases into Italian, using possessive adjectives. Use the article if necessary.",
      "example": {
       "q": "his house",
-      "a": "la sua casa _______________"
+      "a": "la sua casa"
      }
     },
     {
@@ -5119,17 +5119,17 @@
      "directions": "Translate the following phrases into Italian, using possessive adjectives. Use the article if necessary.",
      "example": {
       "q": "his house",
-      "a": "la sua casa _______________"
+      "a": "la sua casa"
      }
     },
     {
      "id": "d13-036",
      "stem": "her mother ___",
-     "answer": "la loro madre",
+     "answer": "sua madre",
      "directions": "Translate the following phrases into Italian, using possessive adjectives. Use the article if necessary.",
      "example": {
       "q": "his house",
-      "a": "la sua casa _______________"
+      "a": "la sua casa"
      }
     },
     {
@@ -5139,7 +5139,7 @@
      "directions": "Translate the following phrases into Italian, using possessive adjectives. Use the article if necessary.",
      "example": {
       "q": "his house",
-      "a": "la sua casa _______________"
+      "a": "la sua casa"
      }
     },
     {
@@ -5149,7 +5149,7 @@
      "directions": "Translate the following phrases into Italian, using possessive adjectives. Use the article if necessary.",
      "example": {
       "q": "his house",
-      "a": "la sua casa _______________"
+      "a": "la sua casa"
      }
     },
     {
@@ -5159,7 +5159,7 @@
      "directions": "Translate the following phrases into Italian, using possessive adjectives. Use the article if necessary.",
      "example": {
       "q": "his house",
-      "a": "la sua casa _______________"
+      "a": "la sua casa"
      }
     },
     {
@@ -5169,7 +5169,7 @@
      "directions": "Translate the following phrases into Italian, using possessive adjectives. Use the article if necessary.",
      "example": {
       "q": "his house",
-      "a": "la sua casa _______________"
+      "a": "la sua casa"
      }
     },
     {
@@ -5214,8 +5214,8 @@
     },
     {
      "id": "d13-045",
-     "stem": "quel libro? È ___ (hers).",
-     "answer": "suo",
+     "stem": "Quel libro? È ___ (hers).",
+     "answer": "suo; il suo",
      "directions": "Use possessive pronouns to complete the following sentences and phrases, according to the English word in parentheses.",
      "example": {
       "q": "Luigi legge il suo libro; io leggo ___ (mine).",
@@ -5311,7 +5311,7 @@
     {
      "id": "d14-004",
      "stem": "Non è ___ (either) carne ___ (or) pesce.",
-     "answer": "né . . . né",
+     "answer": "né | né",
      "directions": "Fill in the blanks in the following sentences, using the coordinating conjunction in parentheses. Here’s an example.",
      "example": {
       "q": "Lui ___ (and) lei cantano e ballano.",
@@ -5321,7 +5321,7 @@
     {
      "id": "d14-005",
      "stem": "Io vorrei studiare ___ (not only) giapponese ___ (but also) cinese.",
-     "answer": "non solo . . . ma anche",
+     "answer": "non solo | ma anche",
      "directions": "Fill in the blanks in the following sentences, using the coordinating conjunction in parentheses. Here’s an example.",
      "example": {
       "q": "Lui ___ (and) lei cantano e ballano.",
@@ -5381,10 +5381,10 @@
     {
      "id": "d14-011",
      "stem": "La nonna non è ___ vecchia ___ credevo.",
-     "answer": "così . . . come",
+     "answer": "così | come",
      "directions": "Choose from the subordinating conjunctions in the word bank, and fill in the blanks in the following sentences. You may use some of the words twice. An example follows.",
      "example": {
-      "q": "___ verrà lui, verrai te?",
+      "q": "___ verrà lui, verrai anche tu?",
       "a": "Se"
      }
     },
@@ -5394,7 +5394,7 @@
      "answer": "per quanto",
      "directions": "Choose from the subordinating conjunctions in the word bank, and fill in the blanks in the following sentences. You may use some of the words twice. An example follows.",
      "example": {
-      "q": "___ verrà lui, verrai te?",
+      "q": "___ verrà lui, verrai anche tu?",
       "a": "Se"
      }
     },
@@ -5404,7 +5404,7 @@
      "answer": "se",
      "directions": "Choose from the subordinating conjunctions in the word bank, and fill in the blanks in the following sentences. You may use some of the words twice. An example follows.",
      "example": {
-      "q": "___ verrà lui, verrai te?",
+      "q": "___ verrà lui, verrai anche tu?",
       "a": "Se"
      }
     },
@@ -5414,7 +5414,7 @@
      "answer": "a tal punto",
      "directions": "Choose from the subordinating conjunctions in the word bank, and fill in the blanks in the following sentences. You may use some of the words twice. An example follows.",
      "example": {
-      "q": "___ verrà lui, verrai te?",
+      "q": "___ verrà lui, verrai anche tu?",
       "a": "Se"
      }
     },
@@ -5424,17 +5424,17 @@
      "answer": "quando",
      "directions": "Choose from the subordinating conjunctions in the word bank, and fill in the blanks in the following sentences. You may use some of the words twice. An example follows.",
      "example": {
-      "q": "___ verrà lui, verrai te?",
+      "q": "___ verrà lui, verrai anche tu?",
       "a": "Se"
      }
     },
     {
      "id": "d14-016",
      "stem": "Gli animali mangiano ___ hanno fame.",
-     "answer": "perché",
+     "answer": "perché; quando",
      "directions": "Choose from the subordinating conjunctions in the word bank, and fill in the blanks in the following sentences. You may use some of the words twice. An example follows.",
      "example": {
-      "q": "___ verrà lui, verrai te?",
+      "q": "___ verrà lui, verrai anche tu?",
       "a": "Se"
      }
     },
@@ -5444,7 +5444,7 @@
      "answer": "siccome",
      "directions": "Choose from the subordinating conjunctions in the word bank, and fill in the blanks in the following sentences. You may use some of the words twice. An example follows.",
      "example": {
-      "q": "___ verrà lui, verrai te?",
+      "q": "___ verrà lui, verrai anche tu?",
       "a": "Se"
      }
     },
@@ -5454,7 +5454,7 @@
      "answer": "mentre",
      "directions": "Choose from the subordinating conjunctions in the word bank, and fill in the blanks in the following sentences. You may use some of the words twice. An example follows.",
      "example": {
-      "q": "___ verrà lui, verrai te?",
+      "q": "___ verrà lui, verrai anche tu?",
       "a": "Se"
      }
     },
@@ -5464,17 +5464,17 @@
      "answer": "come",
      "directions": "Choose from the subordinating conjunctions in the word bank, and fill in the blanks in the following sentences. You may use some of the words twice. An example follows.",
      "example": {
-      "q": "___ verrà lui, verrai te?",
+      "q": "___ verrà lui, verrai anche tu?",
       "a": "Se"
      }
     },
     {
      "id": "d14-020",
-     "stem": "La professoresa era ___ intelligente ___ gli studenti la temevano.",
-     "answer": "così che",
+     "stem": "La professoressa era ___ intelligente ___ gli studenti la temevano.",
+     "answer": "così | che",
      "directions": "Choose from the subordinating conjunctions in the word bank, and fill in the blanks in the following sentences. You may use some of the words twice. An example follows.",
      "example": {
-      "q": "___ verrà lui, verrai te?",
+      "q": "___ verrà lui, verrai anche tu?",
       "a": "Se"
      }
     },
@@ -5551,7 +5551,7 @@
     {
      "id": "d14-028",
      "stem": "the books in which ___",
-     "answer": "i libri nei quali",
+     "answer": "i libri nei quali; i libri in cui",
      "directions": "Translate the following phrases and sentences into Italian, using relative pronouns as necessary. Here’s an example.",
      "example": {
       "q": "the book that I bought",
@@ -5571,7 +5571,7 @@
     {
      "id": "d14-030",
      "stem": "he who ___",
-     "answer": "chi",
+     "answer": "chi; colui che",
      "directions": "Translate the following phrases and sentences into Italian, using relative pronouns as necessary. Here’s an example.",
      "example": {
       "q": "the book that I bought",
@@ -5687,7 +5687,7 @@
     {
      "id": "d15-011",
      "stem": "in a little while ___",
-     "answer": "fra poco",
+     "answer": "fra poco, tra poco",
      "directions": "Translate the following adverbs into Italian. Feel free to refer to the list of original adverbs; the more you look at these words, the more familiar they become. Some adverbs may have more than one answer.",
      "example": {
       "q": "then",
@@ -5717,7 +5717,7 @@
     {
      "id": "d15-014",
      "stem": "as soon as ___",
-     "answer": "appena",
+     "answer": "appena, non appena",
      "directions": "Translate the following adverbs into Italian. Feel free to refer to the list of original adverbs; the more you look at these words, the more familiar they become. Some adverbs may have more than one answer.",
      "example": {
       "q": "then",
@@ -5757,7 +5757,7 @@
     {
      "id": "d15-018",
      "stem": "only ___",
-     "answer": "solo",
+     "answer": "solo, soltanto, solamente",
      "directions": "Translate the following adverbs into Italian. Feel free to refer to the list of original adverbs; the more you look at these words, the more familiar they become. Some adverbs may have more than one answer.",
      "example": {
       "q": "then",
@@ -6293,7 +6293,7 @@
     {
      "id": "d16-041",
      "stem": "Il teatro ___ (chiudere).",
-     "answer": "è chiuso",
+     "answer": "ha chiuso; è stato chiuso",
      "directions": "Complete the following sentences by filling in the past tense of the specified verb. If you’re unsure whether the past participle is regular or irregular, refer to the earlier section “Forming the Present Perfect Tense.” Remember that each answer has two words. Here’s an example:",
      "example": {
       "q": "I ragazzi e le ragazze ___ (andare) in campagna.",
@@ -6323,7 +6323,7 @@
     {
      "id": "d16-044",
      "stem": "Tu, quando ___ (andare)?",
-     "answer": "sei andato/andata",
+     "answer": "sei andato; sei andata",
      "directions": "Complete the following sentences by filling in the past tense of the specified verb. If you’re unsure whether the past participle is regular or irregular, refer to the earlier section “Forming the Present Perfect Tense.” Remember that each answer has two words. Here’s an example:",
      "example": {
       "q": "I ragazzi e le ragazze ___ (andare) in campagna.",
@@ -6433,7 +6433,7 @@
     {
      "id": "d16-055",
      "stem": "Tu e Laura ___ (ripetere)",
-     "answer": "ripetevano",
+     "answer": "ripetevate",
      "directions": "Fill in conjugated forms of the verbs in parentheses, according to subject, as shown in the example.",
      "example": {
       "q": "Io ___ (leggere)",
@@ -6473,7 +6473,7 @@
     {
      "id": "d16-059",
      "stem": "Voi ___ (giocare)",
-     "answer": "giocavi",
+     "answer": "giocavate",
      "directions": "Fill in conjugated forms of the verbs in parentheses, according to subject, as shown in the example.",
      "example": {
       "q": "Io ___ (leggere)",
@@ -6523,7 +6523,7 @@
     {
      "id": "d16-064",
      "stem": "He was happy. ___",
-     "answer": "era contento",
+     "answer": "era contento; era felice",
      "directions": "Translate the following phrases from English into Italian, using the imperfect form. Here’s an example.",
      "example": {
       "q": "I was waiting.",
@@ -6629,7 +6629,7 @@
     {
      "id": "d17-004",
      "stem": "Io ___ (prepararsi).",
-     "answer": "mi sono preparato/preparata",
+     "answer": "mi sono preparato; mi sono preparata",
      "directions": "Using the reflexive present perfect, fill in the sentences with the conjugated forms of the verbs in parentheses. Here’s an example:",
      "example": {
       "q": "I bambini ___ (svegliarsi) molto presto.",
@@ -6669,7 +6669,7 @@
     {
      "id": "d17-008",
      "stem": "Voi ___ (alzarsi) tardi.",
-     "answer": "vi siete alzati/alzate",
+     "answer": "vi siete alzati; vi siete alzate",
      "directions": "Using the reflexive present perfect, fill in the sentences with the conjugated forms of the verbs in parentheses. Here’s an example:",
      "example": {
       "q": "I bambini ___ (svegliarsi) molto presto.",
@@ -6678,8 +6678,8 @@
     },
     {
      "id": "d17-009",
-     "stem": "Loro ___ (divorziarsi).",
-     "answer": "si sono divorziati",
+     "stem": "Loro ___ (separarsi).",
+     "answer": "si sono separati",
      "directions": "Using the reflexive present perfect, fill in the sentences with the conjugated forms of the verbs in parentheses. Here’s an example:",
      "example": {
       "q": "I bambini ___ (svegliarsi) molto presto.",
@@ -6689,7 +6689,7 @@
     {
      "id": "d17-010",
      "stem": "Tu ___ (lamentarsi).",
-     "answer": "ti sei lamentato/lamentata",
+     "answer": "ti sei lamentato; ti sei lamentata",
      "directions": "Using the reflexive present perfect, fill in the sentences with the conjugated forms of the verbs in parentheses. Here’s an example:",
      "example": {
       "q": "I bambini ___ (svegliarsi) molto presto.",
@@ -6749,7 +6749,7 @@
     {
      "id": "d17-016",
      "stem": "Ieri sera, io ___ (addormentarsi) presto.",
-     "answer": "mi sono addormentato/addormentata",
+     "answer": "mi sono addormentato; mi sono addormentata",
      "directions": "Keeping in mind the clues that help you distinguish between use of the present perfect and the imperfect, complete the following sentences with the reflexive or reciprocal reflexive form of the verb in parentheses, using one of the past tenses. Here’s an example:",
      "example": {
       "q": "Da bambini, loro ___ (volersi) bene.",
@@ -6769,7 +6769,7 @@
     {
      "id": "d17-018",
      "stem": "Io ___ (trovarsi) molto bene a Venezia.",
-     "answer": "mi trovavo",
+     "answer": "mi trovavo; mi sono trovato; mi sono trovata",
      "directions": "Keeping in mind the clues that help you distinguish between use of the present perfect and the imperfect, complete the following sentences with the reflexive or reciprocal reflexive form of the verb in parentheses, using one of the past tenses. Here’s an example:",
      "example": {
       "q": "Da bambini, loro ___ (volersi) bene.",
@@ -7045,7 +7045,7 @@
     {
      "id": "d18-025",
      "stem": "Voi saprete studiare.",
-     "answer": "You all will study.",
+     "answer": "You all will know how to study.",
      "directions": "Translate the following sentences into English from Italian. Follow the example.",
      "example": {
       "q": "I ragazzi saranno italiani.",
@@ -7095,7 +7095,7 @@
     {
      "id": "d18-030",
      "stem": "Tu ___ (essere informarsi)?",
-     "answer": "ti sarai informata",
+     "answer": "ti sarai informata; ti sarai informato",
      "directions": "Complete the following sentences, using the future perfect tense of the verbs in parentheses. I include the helping verbs along with the main verbs so you can focus on the form and not whether to use avere or essere. Here’s an example:",
      "example": {
       "q": "Noi ___ (essere tornare).",
@@ -7115,7 +7115,7 @@
     {
      "id": "d18-032",
      "stem": "Quando arriverete, noi mangeremo.",
-     "answer": "When they arrive, we’ll eat.",
+     "answer": "When you arrive, we’ll eat.",
      "directions": "Translate the following sentences from Italian into English, being as idiomatic as possible. Here’s an example:",
      "example": {
       "q": "Se Luigi studierà, vedrà i risultati.",
@@ -7215,7 +7215,7 @@
     {
      "id": "d18-042",
      "stem": "Loro ___ (cercare) biglietti per il viaggio.",
-     "answer": "cercheranno",
+     "answer": "cercherebbero",
      "directions": "Fill in the conditional form of the verbs in parentheses, according to the subject. Here’s an example.",
      "example": {
       "q": "Riccardo e Lorenzo ___ (cominciare) il lavoro domani.",
@@ -7395,7 +7395,7 @@
     {
      "id": "d18-060",
      "stem": "Tu ___ (essere informarsi)?",
-     "answer": "ti saresti informato",
+     "answer": "ti saresti informato; ti saresti informata",
      "directions": "Complete the following sentences, using the conditional perfect of the verbs in parentheses. I include the helping verbs along with the main verbs so you can focus on the form and not whether to use avere or essere. Here’s an example:",
      "example": {
       "q": "Noi ___ (essere tornare).",
@@ -7481,7 +7481,7 @@
     {
      "id": "d19-008",
      "stem": "Se ___ (succedere) un’altra volta, griderò!",
-     "answer": "succeed, succederà",
+     "answer": "succede, succederà",
      "directions": "Choose the verb tense and conjugation that completes the se clause in the following sentences. Some questions may have more than one answer. Here’s an example.",
      "example": {
       "q": "Se tu ___ (desiderare), lo facciamo.",
@@ -7550,7 +7550,7 @@
     },
     {
      "id": "d19-015",
-     "stem": "Se loro ___ (visitare), ci saremmo divertiti.",
+     "stem": "Se loro ci ___ (visitare), ci divertiremmo.",
      "answer": "visitassero",
      "directions": "Using the imperfect subjunctive, complete the se clauses in the exercises. You may have to look at the poi, or second, clause to determine the subject of the se clause.",
      "example": {
@@ -7600,7 +7600,7 @@
     },
     {
      "id": "d19-020",
-     "stem": "Se lui ___ (mentire), come sapresti?",
+     "stem": "Se lui ___ (mentire), come lo sapresti?",
      "answer": "mentisse",
      "directions": "Using the imperfect subjunctive, complete the se clauses in the exercises. You may have to look at the poi, or second, clause to determine the subject of the se clause.",
      "example": {
@@ -7640,7 +7640,7 @@
     },
     {
      "id": "d19-024",
-     "stem": "Se tu ___ (avere/prendere) thè, avresti potuto dormire.",
+     "stem": "Se tu non ___ (avere/prendere) il tè, avresti potuto dormire.",
      "answer": "avessi preso",
      "directions": "Fill in the appropriate form of the pluperfect subjunctive to complete the se phrase (if this had happened). Remember that the pluperfect is a compound verb tense and requires two verbs. Here is an example.",
      "example": {
@@ -7650,7 +7650,7 @@
     },
     {
      "id": "d19-025",
-     "stem": "Se voi mi ___ (avere/chiedere), vi avrei detto di sì.",
+     "stem": "Se voi me lo ___ (avere/chiedere), vi avrei detto di sì.",
      "answer": "aveste chiesto",
      "directions": "Fill in the appropriate form of the pluperfect subjunctive to complete the se phrase (if this had happened). Remember that the pluperfect is a compound verb tense and requires two verbs. Here is an example.",
      "example": {
@@ -7670,8 +7670,8 @@
     },
     {
      "id": "d19-027",
-     "stem": "Se ___ (essere/stare), ti avrei visto.",
-     "answer": "fossi stato",
+     "stem": "Se ___ (essere/stare) lì, ti avrei visto.",
+     "answer": "fossi stato; fossi stata",
      "directions": "Fill in the appropriate form of the pluperfect subjunctive to complete the se phrase (if this had happened). Remember that the pluperfect is a compound verb tense and requires two verbs. Here is an example.",
      "example": {
       "q": "Se ___ (avere/sapere), gli avrei telefonato.",
@@ -7700,8 +7700,8 @@
     },
     {
      "id": "d19-030",
-     "stem": "Se Antonietta ___ (essere/correre), non avrebbe perso il treno.",
-     "answer": "fosse corsa",
+     "stem": "Se Antonietta ___ (avere/correre), non avrebbe perso il treno.",
+     "answer": "avesse corso",
      "directions": "Fill in the appropriate form of the pluperfect subjunctive to complete the se phrase (if this had happened). Remember that the pluperfect is a compound verb tense and requires two verbs. Here is an example.",
      "example": {
       "q": "Se ___ (avere/sapere), gli avrei telefonato.",
@@ -7720,8 +7720,8 @@
     },
     {
      "id": "d19-032",
-     "stem": "se avessi la voglia",
-     "answer": "if you felt like it",
+     "stem": "se ne avessi voglia",
+     "answer": "if I felt like it; if you felt like it",
      "directions": "The following phrases express certainty, possibility, and impossibility. Translate them into idiomatic English. See the example.",
      "example": {
       "q": "se desideravi",
@@ -7741,7 +7741,7 @@
     {
      "id": "d19-034",
      "stem": "se vuole",
-     "answer": "if you wish",
+     "answer": "if you wish; if he wants; if she wants",
      "directions": "The following phrases express certainty, possibility, and impossibility. Translate them into idiomatic English. See the example.",
      "example": {
       "q": "se desideravi",
@@ -7846,7 +7846,7 @@
     },
     {
      "id": "d20-004",
-     "stem": "Mi dispiace che loro mi ___ (dubitare).",
+     "stem": "Mi dispiace che loro ___ (dubitare) di me.",
      "answer": "dubitino",
      "directions": "Fill in the subjunctive form of the regular verbs in the following sentences, as per the example.",
      "example": {
@@ -7976,8 +7976,8 @@
     },
     {
      "id": "d20-017",
-     "stem": "Dubito che lui ___ già ___ (essere arrivata).",
-     "answer": "sia arrivata",
+     "stem": "Dubito che lei ___ già ___ (essere/arrivare).",
+     "answer": "sia | arrivata",
      "directions": "Fill in the appropriately conjugated forms of the verbs in parentheses in the following sentences. Refer back to the subjunctive clues and forms presented in this chapter as needed. Here’s an example:",
      "example": {
       "q": "Non lo faccio prima che tu lo ___ (fare).",
@@ -8007,7 +8007,7 @@
     {
      "id": "d20-020",
      "stem": "Hai cercato le chiavi? È possibile che ___ (essere) nella macchina?",
-     "answer": "ci siano",
+     "answer": "siano; ci siano",
      "directions": "Fill in the appropriately conjugated forms of the verbs in parentheses in the following sentences. Refer back to the subjunctive clues and forms presented in this chapter as needed. Here’s an example:",
      "example": {
       "q": "Non lo faccio prima che tu lo ___ (fare).",
@@ -8066,7 +8066,7 @@
     },
     {
      "id": "d20-026",
-     "stem": "Io penso a ___ (andare).",
+     "stem": "Io penso di ___ (andare).",
      "answer": "andare",
      "directions": "Fill in the sentences with the appropriate subjunctive conjugation. I include the verbs to use in parentheses. Be careful, though, because not all these sentences need the subjunctive. Hint: If the word che isn’t visible, you probably don’t need the subjunctive, though that isn’t always the case.",
      "example": {
@@ -8273,7 +8273,7 @@
     {
      "id": "d21-006",
      "stem": "Io ___ (arrivare).",
-     "answer": "sarei arrivato/arrivata",
+     "answer": "sarei arrivato; sarei arrivata",
      "directions": "Fill in the past conditional forms of the verbs (in parentheses) in the following phrases and sentences. The first five sentences use the helping verb avere; the second five sentences use essere. Here is an example:",
      "example": {
       "q": "Io ___ (mangiare).",
@@ -8313,7 +8313,7 @@
     {
      "id": "d21-010",
      "stem": "Noi ___ (andare).",
-     "answer": "saremmo andati/andate",
+     "answer": "saremmo andati; saremmo andate",
      "directions": "Fill in the past conditional forms of the verbs (in parentheses) in the following phrases and sentences. The first five sentences use the helping verb avere; the second five sentences use essere. Here is an example:",
      "example": {
       "q": "Io ___ (mangiare).",
@@ -8423,7 +8423,7 @@
     {
      "id": "d21-021",
      "stem": "He would have stayed.",
-     "answer": "sarebbe restato",
+     "answer": "sarebbe restato; sarebbe rimasto",
      "directions": "Keeping in mind the differences among would have, could have, and should have, translate the following phrases into Italian. Here’s an example:",
      "example": {
       "q": "I would have studied.",
@@ -8463,7 +8463,7 @@
     {
      "id": "d21-025",
      "stem": "He should have stayed.",
-     "answer": "sarebbe dovuto restare",
+     "answer": "sarebbe dovuto restare; avrebbe dovuto restare; sarebbe dovuto rimanere",
      "directions": "Keeping in mind the differences among would have, could have, and should have, translate the following phrases into Italian. Here’s an example:",
      "example": {
       "q": "I would have studied.",
@@ -8473,7 +8473,7 @@
     {
      "id": "d21-026",
      "stem": "She should have left.",
-     "answer": "sarebbe dovuta partire",
+     "answer": "sarebbe dovuta partire; avrebbe dovuto partire",
      "directions": "Keeping in mind the differences among would have, could have, and should have, translate the following phrases into Italian. Here’s an example:",
      "example": {
       "q": "I would have studied.",
@@ -8493,7 +8493,7 @@
     {
      "id": "d21-028",
      "stem": "He could have stayed.",
-     "answer": "sarebbe potuto restare",
+     "answer": "sarebbe potuto restare; avrebbe potuto restare; sarebbe potuto rimanere",
      "directions": "Keeping in mind the differences among would have, could have, and should have, translate the following phrases into Italian. Here’s an example:",
      "example": {
       "q": "I would have studied.",
@@ -8503,7 +8503,7 @@
     {
      "id": "d21-029",
      "stem": "She could have left.",
-     "answer": "sarebbe potuta partire",
+     "answer": "sarebbe potuta partire; avrebbe potuto partire",
      "directions": "Keeping in mind the differences among would have, could have, and should have, translate the following phrases into Italian. Here’s an example:",
      "example": {
       "q": "I would have studied.",
@@ -8779,7 +8779,7 @@
     {
      "id": "d22-026",
      "stem": "È possibile che la nonna ___ (essere/perdersi)?",
-     "answer": "si sia perduta",
+     "answer": "si sia perduta; si sia persa",
      "directions": "Fill in the following sentences, using the present perfect or pluperfect subjunctives according to verb sequencing rules. Here’s an example.",
      "example": {
       "q": "Credo che lui ___ (avere/mangiare) tutti i biscotti.",
@@ -8798,8 +8798,8 @@
     },
     {
      "id": "d22-028",
-     "stem": "Noi abbiamo paura che loro non ___ ( avere/finire).",
-     "answer": "avessero finito",
+     "stem": "Noi abbiamo paura che loro non ___ (avere/finire).",
+     "answer": "abbiano finito",
      "directions": "Fill in the following sentences, using the present perfect or pluperfect subjunctives according to verb sequencing rules. Here’s an example.",
      "example": {
       "q": "Credo che lui ___ (avere/mangiare) tutti i biscotti.",

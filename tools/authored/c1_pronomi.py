@@ -57,7 +57,7 @@ ITEMS = [
          note="«Andarsene» es pronominal doble: me ne vado, te ne vai, se ne va."),
     dict(id="c1-ne-05", type="translate", topic="ne",
          prompt="Traducí al italiano.",
-         stem="No puedo más. (con andarsene no; usá «farcela»)",
+         stem="No puedo más. (usá «farcela»)",
          answer="Non ce la faccio più",
          note="«Farcela» = arreglárselas/poder. Otro verbo pronominale idiomático."),
 
@@ -70,8 +70,8 @@ ITEMS = [
     dict(id="c1-ci-02", type="choice", topic="ci",
          prompt="Elegí la forma correcta.",
          stem="Sei mai stato a Roma? — Sì, ___ sono stato l'anno scorso.",
-         options=["ci", "ne", "vi"], answer="ci",
-         note="«Ci» locativo = allí. «Vi» es la variante formal/escrita."),
+         options=["ci", "ne", "lo"], answer="ci",
+         note="«Ci» locativo = allí («vi» es la variante formal/escrita)."),
     dict(id="c1-ci-03", type="choice", topic="ci",
          prompt="¿Qué significa «Ci vuole un'ora»?",
          stem="Ci vuole un'ora.",
@@ -83,6 +83,7 @@ ITEMS = [
          prompt="Completá con volerci o metterci.",
          stem="Io ___ due ore per arrivare, ma in generale ___ un'ora.",
          answer="ci metto | ci vuole",
+         alt=["ci ho messo | ci vuole"],
          multi=True,
          note="«Metterci» lleva sujeto personal; «volerci» es impersonal y concuerda "
               "con la cantidad: ci vuole un'ora / ci vogliono due ore."),
@@ -98,7 +99,7 @@ ITEMS = [
          stem="Ho visto le ragazze. → Le ho vist___.",
          answer="e",
          note="Con «avere» concuerda solo si el objeto directo va ANTES en forma "
-              "de pronombre lo/la/li/le."),
+              "de pronombre lo/la/li/le (y con «ne» partitivo)."),
     dict(id="c1-part-03", type="choice", topic="participio",
          prompt="Elegí la forma correcta.",
          stem="Ho ___ le ragazze.",
@@ -108,14 +109,15 @@ ITEMS = [
          prompt="Completá la terminación.",
          stem="Maria si è lava___ le mani.",
          answer="ta",
+         alt=["te"],
          note="Reflexivo con objeto directo propio: en uso corriente concuerda con "
               "el sujeto (lavata). Con el objeto delante en pronombre: «se le è lavate»."),
     dict(id="c1-part-05", type="choice", topic="participio",
-         prompt="Elegí la correcta.",
+         prompt="Elegí la forma más usual en el italiano actual.",
          stem="Quella è la lettera che ho ___ ieri.",
          options=["scritto", "scritta"], answer="scritto",
-         note="Tras «che» relativo la concordancia es opcional; «scritto» es la "
-              "forma no marcada y siempre segura."),
+         note="Tras «che» relativo el participio normalmente no concuerda: «la "
+              "lettera che ho scritto». «Scritta» es literario o anticuado."),
 
     # --- pronomi relativi (cap. 13) ---
     dict(id="c1-rel-01", type="choice", topic="relativi",
@@ -140,6 +142,7 @@ ITEMS = [
          stem="La casa en la que vivo es pequeña.",
          answer="La casa in cui abito è piccola",
          alt=["La casa in cui vivo è piccola", "La casa dove abito è piccola",
-              "La casa dove vivo è piccola"],
+              "La casa dove vivo è piccola", "La casa nella quale abito è piccola",
+              "La casa nella quale vivo è piccola"],
          note="«in cui» o «dove»; «che» solo sin preposición."),
 ]
