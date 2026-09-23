@@ -22,6 +22,7 @@ var authoredSrc = function (id) {
     : "tools/authored/c1_*.py";
 };
 course.items.forEach(function (it) {
+  if (it.src === "sfida") return;
   var d = {}; ["type", "prompt", "stem", "options", "answer", "accept", "example", "hint", "note"].forEach(function (k) {
     if (it[k] != null && it[k] !== "") d[k] = it[k];
   });
@@ -36,8 +37,15 @@ course.weeks.forEach(function (w) {
     w.lesson.blocks.forEach(function (b, i) { add("lesson:" + w.week + ":" + i, lessonSrc(w.week), "lezione", b); });
   }
 });
+var byId = {}; course.items.forEach(function (it) { byId[it.id] = it; });
 course.challenges.forEach(function (c) {
-  add("chal:" + c.id, "docs/data/bank_routledge.json", "sfida", { instruction: c.instruction, items: c.items });
+  if (c.play) {
+    add("chal:" + c.id, "tools/audit/patches/sfide/*.json", "sfida", { consigna: c.consigna,
+      play: c.play.map(function (id) { var it = byId[id]; var o = { label: id.split(":").pop(), type: it.type, stem: it.stem, answer: it.answer, accept: it.accept }; if (it.options) o.options = it.options; if (it.note) o.note = it.note; return o; }) });
+  } else {
+    add("chal:" + c.id, c.consigna ? "tools/audit/patches/sfide/*.json" : "docs/data/bank_routledge.json", "sfida",
+      { consigna: c.consigna || c.instruction, items: c.items });
+  }
 });
 // Banca
 bank.sentences.forEach(function (s, i) { add("frase:" + i, "tools/bank/frasi_banca.py", "frase", s); });

@@ -74,22 +74,23 @@ function lexCheckNow(u, s) {
 }
 
 /* ------------------------------------------------------------ regole */
+// Word boundaries that know accented letters (\b does not).
+var L = "A-Za-zÀ-ÖØ-öø-ÿ";
+function W(src, flags) { return new RegExp(src.replace(/\\</g, "(?<![" + L + "'’])").replace(/\\>/g, "(?![" + L + "])"), flags || ""); }
 var RULES = [
-  [/\b(perch|bench|poich|affinch|giacch|finch|sicch|nonch|cosicch|anzich|purch)è/i, "chè → ché (acento agudo)"],
-  [/\bn[èe]'?(?=\s+(?:io|tu|lui|lei|noi|voi|loro|il|la|lo|i|gli|le|un|una|con|a|di|per|mai|più))/i, null], // placeholder no-op
-  [/\bnè\b/i, "nè → né"],
-  [/\bpò\b/i, "pò → po'"],
-  [/\bqual'\s?è/i, "qual'è → qual è"],
-  [/\b(qu[ìà]|s[ùì]|f[àò]|st[àò]|v[àò]|tr[èé]|r[èé]|m[èé]|t[èé])\b/i, "tilde sobrante en monosílabo italiano"],
+  [W("\\<(perch|bench|poich|affinch|giacch|finch|sicch|nonch|cosicch|anzich|purch)è\\>", "i"), "chè → ché (acento agudo)"],
+  [W("\\<nè\\>", "i"), "nè → né"],
+  [W("\\<pò\\>", "i"), "pò → po'"],
+  [W("\\<qual'\\s?è\\>", "i"), "qual'è → qual è", /→|SIN apóstrofo|sin apóstrofo/],
+  [W("\\<(quì|quà|sù|fà|stà|và|trè|rè|mè)\\>", "i"), "tilde sobrante en monosílabo italiano"],
   [/(^|[.!?]\s+|«|")E'(?=\s)/, "E' → È"],
-  [/\s{2,}/, "espacio doble"],
-  [/\s[,.;:!?](?!\.)/, "espacio antes de puntuación"],
+  [/ {2,}/, "espacio doble"],
+  [/[^\S\n][,.;:!?](?!\.)/, "espacio antes de puntuación"],
   [/\(\s|\s\)/, "espacio junto a paréntesis"],
-  [/\b(il|la|lo|le|gli|un|una|di|a|da|in|che|non|el|los|las|de|que|en|y|the|to)\s+\1\b/i, "palabra repetida"],
+  [W("\\<(il|la|lo|le|gli|un|una|di|da|in|che|non|el|los|las|de|que|en|the|to)\\s+\\1\\>", "i"), "palabra repetida"],
   [/[a-zà-ù][.!?][A-ZÀ-Ù][a-zà-ù]/, "falta espacio después del punto"],
-  [/\bsè\b/i, "sè → sé"],
-  [/\bun'(?=[a-zàèéìòù])/i, null]
-].filter(function (r) { return r[1]; });
+  [W("\\<sè\\>", "i"), "sè → sé"]
+];
 
 function balance(s) {
   var errs = [];
@@ -98,7 +99,7 @@ function balance(s) {
     var o = s.split(p[0]).length - 1, c = s.split(p[1]).length - 1;
     if (o !== c) errs.push("desbalanceado " + p[0] + p[1]);
   });
-  if (/¿/.test(s) && (s.split("¿").length !== s.split("?").length) && !/\?\s*$/.test(s)) errs.push("¿ sin ?");
+  if (s.split("¿").length > s.split("?").length) errs.push("¿ sin ?");
   if ((s.match(/\*\*/g) || []).length % 2) errs.push("** sin cerrar");
   return errs;
 }
@@ -139,12 +140,30 @@ function structure(u) {
   }
 }
 
+// Campi che contengono errori voluti o chiavi tecniche: esclusi dal lessico.
+function visible(u) {
+  var d = u.data;
+  if (u.kind === "trova_errore") return { right: d.right, good: d.good, why: d.why };
+  if (u.kind === "esercizio") {
+    // Wrong options are wrong on purpose: only the right answer must be real Italian.
+    var c = Object.assign({}, d); delete c.type; delete c.options; return c;
+  }
+  if (u.kind === "sfida" && d.play) {
+    return { consigna: d.consigna, play: d.play.map(function (x) { var y = Object.assign({}, x); delete y.options; return y; }) };
+  }
+  if (/^testi:/.test(u.id)) return d.filter(function (x) { return !/^[a-z0-9 _-]+$/.test(x.trim()); })
+    .map(function (x) { return x.replace(/<[^>]*>/g, " "); });
+  if (/^esit:/.test(u.id)) return d.map(function (r) { return r.slice(1); });   // la chiave è lo spagnolo senza tilde
+  return d;
+}
+
 units.forEach(function (u) {
   structure(u);
   if (/^coniuga:|^formebanca:/.test(u.id)) return;   // generate: le rivede l'audit umano
-  strings(u.data).forEach(function (s) {
-    RULES.forEach(function (r) { if (r[0].test(s)) flag(u, "regla", r[1] + " — " + s.slice(0, 100)); });
-    balance(s).forEach(function (e) { flag(u, "balance", e + " — " + s.slice(0, 100)); });
+  strings(visible(u)).forEach(function (s) {
+    var frag = /^testi:/.test(u.id);   // pezzi di stringhe del codice: gli spazi li mette il template
+    RULES.forEach(function (r) { if (frag && /espacio/.test(r[1])) return; if (r[0].test(s) && !(r[2] && r[2].test(s))) flag(u, "regla", r[1] + " — " + s.slice(0, 100)); });
+    if (!/^testi:/.test(u.id)) balance(s).forEach(function (e) { flag(u, "balance", e + " — " + s.slice(0, 100)); });
     elision(u, s);
     lexCheck(u, s);
   });

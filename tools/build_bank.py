@@ -141,7 +141,12 @@ def build_sentences(raw):
     out, seen = [], set()
     for s in raw or []:
         es = clean(s.get("es"))
-        its = [clean(x) for x in (s.get("it") or []) if clean(x)]
+        its = []
+        for x in (s.get("it") or []):
+            x = clean(x)
+            # variants that differ only in case or final dot are one answer
+            if x and x.lower().rstrip(".") not in [y.lower().rstrip(".") for y in its]:
+                its.append(x)
         lvl = s.get("lvl")
         if not es or not its or lvl not in LEVELS or es in seen:
             if es not in seen:

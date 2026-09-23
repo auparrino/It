@@ -772,6 +772,10 @@
     else if (kind === "b-gap") items = Banca.gapSession(state, 10);
     else if (kind === "b-err") items = Banca.errorSession(state, 8);
     else if (kind === "clinica") items = Banca.clinicaSession(state, 12);
+    else if (kind === "sfida") {
+      var ch = course.challenges.filter(function (c) { return c.id === arg; })[0];
+      items = ch && ch.play ? ch.play.map(function (id) { return itemMap[id]; }).filter(Boolean) : [];
+    }
     else items = Drills.buildRound(course, w, { map: itemMap });
 
     if (!items.length) { toast("No hay preguntas para este modo todavía."); return; }
@@ -820,8 +824,14 @@
   function renderGioco() {
     var it = currentItem();
     if (!it) return "";
+    // Several blanks: numbered, answered in order («a / b»).
+    var gaps = (String(it.stem || "").match(/_{3,}/g) || []).length;
+    var multi = gaps > 1 && /\|/.test(it.answer || "");
+    var gi = 0;
     var body = "", stem = /^\s*_+\s*$/.test(it.stem || "") ? ""
-      : esc(it.stem).replace(/___/g, '<span class="gap">&nbsp;</span>');
+      : esc(it.stem).replace(/_{3,}/g, function () {
+        return multi ? '<span class="gap n">' + (++gi) + "</span>" : '<span class="gap">&nbsp;</span>';
+      });
     var prompt = '<div class="prompt">' + esc(it.prompt || "") + "</div>";
 
     if (it.type === "intro") {
@@ -919,7 +929,8 @@
       body = '<div class="typed">' +
         '<input id="ans" autocomplete="off" autocapitalize="off" ' +
         'autocorrect="off" spellcheck="false" placeholder="' +
-          (it.type === "translate" ? "in italiano…" : "tu respuesta…") + '">' +
+          (multi ? "las " + gaps + " respuestas en orden: 1 / 2" + (gaps > 2 ? " / 3" : "")
+                 : it.type === "translate" ? "in italiano…" : "tu respuesta…") + '">' +
         '<button class="btn" id="send">Controlla</button></div>' +
         '<div class="accents">' +
           ["à", "è", "é", "ì", "ò", "ù", "'"].map(function (c) {
@@ -1006,6 +1017,8 @@
   function produce(given) {
     if (round.answered) return;
     var it = currentItem();
+    // Several blanks typed as «a / b» (or a | b): same as a b.
+    if (/\|/.test(it.answer || "")) given = String(given).replace(/\s*[\/|]\s*/g, " ");
     if (!String(given || "").trim()) return;
     var accept = (it.accept && it.accept.length ? it.accept : [it.answer]).map(function (x) {
       return String(x).replace(/\s*\|\s*/g, " ");   // two blanks: typed one after the other
@@ -1281,6 +1294,13 @@
       }
     }
 
+    if (round.kind === "sfida") {
+      var prevS = state.challengeLog[round.arg];
+      state.challengeLog[round.arg] = { q: pct >= 80 ? 2 : pct >= 50 ? 1 : 0,
+        pct: Math.max(pct, prevS && prevS.pct || 0), at: Date.now() };
+      if (!prevS) gain(Engine.XP.challenge);
+    }
+
     if (round.kind === "lettura") {
       if (!state.letture) state.letture = {};
       var prev = state.letture[round.arg];
@@ -1449,32 +1469,41 @@
     var ids = {};
     (w.challenges || []).forEach(function (id) { ids[id] = true; });
     var list = course.challenges.filter(function (c) { return ids[c.id]; });
+    var playable = list.filter(function (c) { return c.play && c.play.length; });
+    var doneN = playable.filter(function (c) { return (state.challengeLog[c.id] || {}).q === 2; }).length;
 
-    var html = '<button class="btn ghost" id="back">← al percorso</button>' +
+    var html = '<button class="btn ghost" id="back2">← a la semana</button>' +
       "<h1>Sfide del Maestro</h1>" +
-      '<p class="lead">Ejercicios abiertos tomados del <b>Soluzioni</b>. ' +
-      "El libro digital no trae las soluciones, así que estos no se corrigen solos: " +
-      "resolvelos por escrito, verificá contra el capítulo y puntuate vos. " +
-      "Lo que marques alimenta igual tu racha y tu repaso.</p>";
+      '<p class="lead">Los desafíos del <b>Soluzioni</b>, ahora con corrección: cada uno es una ronda corta. ' +
+      "Con 80% o más lo ganás ★.</p>" +
+      (playable.length ? '<div class="card pathsum"><b>' + doneN + " / " + playable.length + ' ★</b>' +
+        '<span class="goalbar"><i style="width:' + Math.round(doneN / playable.length * 100) + '%"></i></span></div>' : "") +
+      '<div class="missions">';
 
     list.forEach(function (c) {
       var done = state.challengeLog[c.id];
-      html += '<div class="card chal"><div class="inst">' +
-        esc(c.instruction) + "</div><ol>" +
-        c.items.map(function (i) { return "<li>" + esc(i.text) + "</li>"; }).join("") +
-        "</ol>" +
-        '<div class="muted">Soluzioni, cap. ' + c.chapter + " — " +
-          esc(c.chapterTitle) + "</div>" +
-        '<div class="selfscore">' +
-          '<button class="btn ghost" data-self="' + c.id + '" data-q="2">Lo tuve bien</button>' +
-          '<button class="btn ghost" data-self="' + c.id + '" data-q="1">A medias</button>' +
-          '<button class="btn ghost" data-self="' + c.id + '" data-q="0">No me salió</button>' +
-          (done ? '<span class="muted" style="align-self:center">✓ ' +
-            ["no salió", "a medias", "bien"][done.q] + "</span>" : "") +
-        "</div></div>";
+      var title = esc(c.consigna || c.instruction);
+      if (c.play && c.play.length) {
+        html += '<button class="mission' + (done && done.q === 2 ? " done" : "") + '" data-sfida="' + c.id + '">' +
+          '<span class="mi">' + (done && done.q === 2 ? "★" : "📖") + "</span>" +
+          "<span><b>" + title + "</b><small>" + c.play.length + " preguntas · cap. " + c.chapter +
+          (done && done.pct != null ? " · mejor: " + done.pct + "%" : "") + "</small></span>" +
+          '<span class="go">›</span></button>';
+      } else {
+        html += '<div class="card chal"><div class="inst">' + title + "</div><ol>" +
+          c.items.map(function (i) { return "<li>" + esc(i.text) + "</li>"; }).join("") + "</ol>" +
+          '<p class="muted">Ejercicio libre: resolvelo por escrito y puntuate.</p>' +
+          '<div class="selfscore">' +
+            '<button class="btn ghost" data-self="' + c.id + '" data-q="2">Lo tuve bien</button>' +
+            '<button class="btn ghost" data-self="' + c.id + '" data-q="1">A medias</button>' +
+            '<button class="btn ghost" data-self="' + c.id + '" data-q="0">No me salió</button>' +
+            (done ? '<span class="muted" style="align-self:center">✓ ' + ["no salió", "a medias", "bien"][done.q] + "</span>" : "") +
+          "</div></div>";
+      }
     });
-    return html;
+    return html + "</div>";
   }
+
 
   /* ------------------------------------------------------------------- io */
 
@@ -1800,12 +1829,17 @@
     on("#lesback", function () { view.screen = "briefing"; render(); });
     on("#lesplay", function () { startRound(course.weeks[view.week - 1].boss ? "boss" : "round"); });
     document.querySelectorAll("[data-lq]").forEach(function (b) { b.onclick = function () { lesAnswer(b); }; });
-    on("#chal", function () { view.screen = "sfide"; render(); });
+    on("#chal", function () { view.screen = "sfide"; render(); window.scrollTo(0, 0); });
+    on("#back2", function () { view.screen = "briefing"; render(); });
+    document.querySelectorAll("[data-sfida]").forEach(function (b) {
+      b.onclick = function () { startRound("sfida", b.dataset.sfida); };
+    });
     on("#again", function () { startRound(round.kind, round.arg); });
     on("#quit", function () {
       if (round.kind === "lettura") go("leggi");
       else if (["ponte", "falsi", "capire", "scene", "b-voc", "b-forme", "b-tr", "b-gap", "b-err", "clinica"].indexOf(round.kind) >= 0) go("frasi");
       else if (round.kind === "pausa" || round.kind === "review") go("oggi");
+      else if (round.kind === "sfida") { view.screen = "sfide"; render(); }
       else { view.screen = "briefing"; render(); }
     });
 

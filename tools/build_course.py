@@ -727,23 +727,52 @@ def main() -> None:
         for m in missing:
             print("  -", m)
 
-    # Routledge challenges, flattened for the self-scored mode.
+    # Routledge challenges.  tools/audit/patches/sfide/*.json holds the answer
+    # key: with it a challenge becomes a graded round (items "s:<id>:<label>"),
+    # without it it stays self-scored.
+    keys = {}
+    sdir = os.path.join(ROOT, "tools", "audit", "patches", "sfide")
+    for fn in sorted(os.listdir(sdir)) if os.path.isdir(sdir) else []:
+        if fn.endswith(".json"):
+            with open(os.path.join(sdir, fn), encoding="utf-8") as fh:
+                keys.update(json.load(fh))
     flat = []
+    sfida_items = []
     for c in routledge["chapters"]:
         for x in c["challenges"]:
-            flat.append({
+            ch = {
                 "id": x["id"],
                 "chapter": c["chapter"],
                 "chapterTitle": c["title"],
                 "instruction": x["instruction"],
                 "items": x["items"],
-            })
+            }
+            k = keys.get(x["id"])
+            if k:
+                ch["consigna"] = k.get("consigna") or x["instruction"]
+                if k.get("interactive") and k.get("items"):
+                    ch["play"] = []
+                    for n, ki in enumerate(k["items"]):
+                        iid = "s:%s:%s" % (x["id"], ki.get("label") or n)
+                        typ = ki.get("type", "cloze")
+                        if typ == "choice" and not ki.get("options"):
+                            typ = "cloze"
+                        item = {"id": iid, "src": "sfida", "type": typ, "prompt": ch["consigna"],
+                                "stem": ki["stem"], "answer": ki["answer"],
+                                "accept": [ki["answer"]] + [a for a in ki.get("alt", []) if a and a != ki["answer"]]}
+                        if typ == "choice":
+                            item["options"] = ki["options"]
+                        if ki.get("note"):
+                            item["note"] = ki["note"]
+                        sfida_items.append(item)
+                        ch["play"].append(iid)
+            flat.append(ch)
 
     course = {
         "title": "La Via C1",
         "seasons": SEASONS,
         "weeks": weeks,
-        "items": items + authored,
+        "items": items + authored + sfida_items,
         "challenges": flat,
         "sources": [dummies["source"], routledge["source"]],
     }

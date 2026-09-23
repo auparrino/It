@@ -824,3 +824,7 @@ body.ingame .feedback #lesnext2 { width: 100%; padding: 15px; font-size: 1.08rem
 body.ingame .feedback.giusto #lesnext2 { background: var(--verde-chiaro); box-shadow: 0 4px 0 var(--verde-scuro); }
 body.ingame .feedback.sbagliato #lesnext2 { background: var(--rosso-chiaro); box-shadow: 0 4px 0 var(--rosso-scuro); }
 #lesquit { padding: 6px 12px; box-shadow: none; border: none; background: transparent; font-size: 1.1rem; color: var(--grigio); }
+.stem .gap.n { display: inline-grid; place-items: center; min-width: 30px; height: 26px; padding: 0 8px; margin: 0 2px;
+  border: none; border-radius: 8px; background: color-mix(in srgb, var(--oro) 22%, transparent); color: var(--oro-scuro);
+  font-family: var(--sans); font-size: .85rem; font-weight: 900; vertical-align: middle; }
+@media (prefers-color-scheme: dark) { .stem .gap.n { color: var(--oro); } }

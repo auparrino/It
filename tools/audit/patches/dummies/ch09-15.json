@@ -916,7 +916,7 @@
    ]
   },
   "d11-021": {
-   "consigna": "Completá la pregunta con una de estas opciones (cada una una sola vez): come sono, dov'è, dove, quando, dove sono.",
+   "consigna": "Completá la pregunta con una de estas opciones (sin repetir ninguna): come sono, dov'è, dove, quando, dove sono.",
    "type": "cloze",
    "stem": "___ i musicisti? (¿Cómo son los músicos?)",
    "answer": "come sono",
@@ -924,7 +924,7 @@
    "drop": false
   },
   "d11-022": {
-   "consigna": "Completá la pregunta con una de estas opciones (cada una una sola vez): come sono, dov'è, dove, quando, dove sono.",
+   "consigna": "Completá la pregunta con una de estas opciones (sin repetir ninguna): come sono, dov'è, dove, quando, dove sono.",
    "type": "cloze",
    "stem": "___ la scuola elementare? (¿Dónde está la escuela primaria?)",
    "answer": "dov'è",
@@ -934,7 +934,7 @@
    "drop": false
   },
   "d11-023": {
-   "consigna": "Completá la pregunta con una de estas opciones (cada una una sola vez): come sono, dov'è, dove, quando, dove sono.",
+   "consigna": "Completá la pregunta con una de estas opciones (sin repetir ninguna): come sono, dov'è, dove, quando, dove sono.",
    "type": "cloze",
    "stem": "___ vai? (¿Adónde vas?)",
    "answer": "dove",
@@ -942,7 +942,7 @@
    "drop": false
   },
   "d11-024": {
-   "consigna": "Completá la pregunta con una de estas opciones (cada una una sola vez): come sono, dov'è, dove, quando, dove sono.",
+   "consigna": "Completá la pregunta con una de estas opciones (sin repetir ninguna): come sono, dov'è, dove, quando, dove sono.",
    "type": "cloze",
    "stem": "___ parti? (¿Cuándo te vas?)",
    "answer": "quando",
@@ -950,7 +950,7 @@
    "drop": false
   },
   "d11-025": {
-   "consigna": "Completá la pregunta con una de estas opciones (cada una una sola vez): come sono, dov'è, dove, quando, dove sono.",
+   "consigna": "Completá la pregunta con una de estas opciones (sin repetir ninguna): come sono, dov'è, dove, quando, dove sono.",
    "type": "cloze",
    "stem": "___ le chiavi? (¿Dónde están las llaves?)",
    "answer": "dove sono",

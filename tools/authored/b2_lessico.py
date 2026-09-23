@@ -98,7 +98,7 @@ ITEMS = [
     # --- passato prossimo vs imperfetto ---
     dict(id="b2-pass-01", type="choice", topic="passato",
          prompt="Elegí el tiempo correcto.",
-         stem="Mentre ___ , è suonato il telefono.",
+         stem="Mentre ___, è suonato il telefono.",
          options=["mangiavo", "ho mangiato", "mangiai"], answer="mangiavo",
          note="Fondo/duración → imperfetto; acción puntual que irrumpe → passato prossimo."),
     dict(id="b2-pass-02", type="choice", topic="passato",
