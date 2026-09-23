@@ -129,6 +129,17 @@ Según lo que dice la investigación:
   siguiendo la distinción de Ferris entre errores tratables y no tratables.
 - **Deslices:** un tipeo, una tilde o un pronombre sujeto de más se marcan sin
   hacerte repetir (Corder: *mistakes* y *errors*).
+- **Un hueco se juzga en su oración:** en «___ casa» o «Sono le ___» el
+  diagnóstico rellena el hueco y mira la frase entera, así el artículo ve el
+  sustantivo que lo sigue y la hora ve el *sono* de antes.
+- **Español dentro del italiano:** *los, que, muy, tengo* y también palabras
+  que ningún diccionario trae pero suenan a castellano (*tienes, señor,
+  televisión*) se reconocen como español, no como tipeo; si copiaste la
+  consigna entera, te lo dice.
+- **Lo que no es ninguna palabra** (*gle* por *gli*, *mangie* por *mangia*,
+  *genti* por *gente*) se explica como lo que es: el artículo de ese
+  sustantivo, la terminación del verbo, la ortografía de la palabra; nunca
+  como «concordancia» a secas.
 - **Opción múltiple:** si elegiste mal, te explica por qué *esa* opción está
   mal ("*vai* es la forma de *tu*; el sujeto es *noi*").
 - **Tu perfil de errores:** cada error se anota por tipo. La **Clínica** arma
@@ -315,6 +326,22 @@ calcula **la primera semana cuya teoría lo cubre todo**:
   significado) tocás una palabra italiana y ves qué significa; las que todavía
   no viste en el curso aparecen subrayadas (`docs/data/glossario.json`).
 
+### Lecciones en partes
+
+Una semana cargada no se estudia de una sentada. Las semanas 1, 2, 3, 5, 6,
+9, 11, 12, 15, 17, 30 y 42 tienen la lección dividida en **partes** (dos a
+cuatro), cada una con sus propios bloques de teoría y sus propios ejercicios:
+en la semana 3, por ejemplo, *Determinados*, *Indeterminados*, *Preposiciones
+articuladas* y *Partitivo y usos del artículo*. En el percorso cada parte es
+una misión («Lección 2/4: Indeterminados»), y «A entrenar esta parte» arma
+una ronda solo con los ejercicios de esa parte (más el repaso que toque). La
+semana siguiente se abre cuando están todas las partes.
+
+Las partes se declaran en `tools/lessons/` (`"parts"`: título, bloques y una
+expresión regular que reparte los ejercicios por su consigna);
+`tools/build_course.py` comprueba que cubran todos los bloques una sola vez y
+manda lo que no encaja en ninguna a la última parte.
+
 `test_game.js` verifica que ninguna semana pida nada antes de su teoría, y
 `python3 tools/sillabo.py` lista qué ejercicio esperó a qué semana y por qué.
 Si se reordena el programa, las semanas de cada tiempo se ajustan en
@@ -388,6 +415,27 @@ tools/
   build_bank.py          valida y compila el banco
   bank/                  el banco en Python legible
 ```
+
+## Cómo se acomoda a los cursos oficiales
+
+Las instituciones (Dante Alighieri, Istituto Italiano di Cultura, Università
+per Stranieri, con el *Profilo della lingua italiana* y manuales como *Nuovo
+Espresso* o *Nuovo Contatto*) organizan el italiano en **unidades
+comunicativas**: cada una dice qué se aprende a hacer, con qué gramática y en
+qué campo léxico, y ocupa unas tres clases. El curso toma esa estructura sin
+romper su orden gramatical:
+
+- Cada semana lleva, además del tema de gramática, **lo que vas a poder hacer
+  al final** y su campo léxico (en el briefing: «🎯 Al final de la semana:
+  pedir algo en el bar y decir qué hay · Café y bar italiano»). La tabla está
+  en `SAI_FARE`, dentro de `tools/build_course.py`, semana por semana.
+- Una unidad son varias clases: por eso las semanas cargadas tienen la lección
+  en partes (ver «Lecciones en partes»).
+- Las cuatro estaciones siguen las bandas del MCER como esos programas: A1 en
+  las semanas 1–6, A2 en 7–18, B1 en 19–28, B2 en 29–39 y C1 en 40–52, con un
+  examen al cerrar cada banda. En horas, el año (~105 h con las siete sesiones
+  semanales de la simulación) queda dentro del rango que esas escuelas dan a
+  cada nivel sumado a lo que se practica en la app fuera de clase.
 
 ## Qué toma de la guía «Aprender italiano hasta C1 en un año»
 

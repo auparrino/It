@@ -6,6 +6,14 @@ LESSONS = {
 1: {
 "intro": "El italiano se escribe casi como el castellano pero suena "
          "distinto. Antes de la gramática, a leer en voz alta.",
+"parts": [
+ {"h": "Alfabeto, c/g y dobles", "blocks": [0, 1, 2],
+  "match": r"Escuchá|sonido duro|sonido suave|doble"},
+ {"h": "Acento, detalles y vocales", "blocks": [3, 4, 5],
+  "match": r"Cómo se escribe|«è»|«o»|tilde|acento|vocal"},
+ {"h": "Tus dos primeros verbos: essere y avere", "blocks": [6],
+  "match": r"essere|avere"},
+],
 "blocks": [
  {"h": "Un alfabeto de 21 letras",
   "r": "Sin *j, k, w, x, y* (salvo préstamos) ni *ñ*. La *h* no suena nunca. "
@@ -109,6 +117,12 @@ LESSONS = {
 "intro": "El género y el número del sustantivo mandan sobre artículo y "
          "adjetivo. Esta semana: las terminaciones, los plurales con trampa "
          "y los géneros que no coinciden con el castellano.",
+"parts": [
+ {"h": "Género: el esquema y las sorpresas", "blocks": [0, 4, 5],
+  "match": r"masculino o femenino|género"},
+ {"h": "Plural: regulares, con h, invariables e irregulares", "blocks": [1, 2, 3],
+  "match": r"plural"},
+],
 "blocks": [
  {"h": "El esquema básico",
   "r": "*-o → -i* (masculino), *-a → -e* (femenino), *-e → -i* (**cualquiera "
@@ -179,6 +193,19 @@ LESSONS = {
 "intro": "El artículo depende del género y también del **sonido** con que "
          "empieza la palabra siguiente. Además, el italiano pone artículo en "
          "lugares donde el castellano no.",
+# La semana se estudia en cuatro sesiones cortas, cada una con su práctica:
+# los determinados, los indeterminados, las preposiciones articuladas y el
+# partitivo con los usos del artículo.  "match" reparte los ejercicios.
+"parts": [
+ {"h": "Determinados: il, lo, la, l', i, gli, le", "blocks": [0],
+  "match": r"determinado \(il|artículo correcto|Traducí al italiano con el artículo|por el artícu|^(il|lo|la|l'|l’|i|gli|le)$"},
+ {"h": "Indeterminados: un, uno, una, un'", "blocks": [1],
+  "match": r"indeterminado|^(un|uno|una|un'|un’)$"},
+ {"h": "Preposiciones articuladas", "blocks": [2],
+  "match": r"preposición articulada|«in» y «di»|«di» con el|cada palabra una sola vez|«di» o «di» \+|donde corresponda"},
+ {"h": "Partitivo y usos del artículo", "blocks": [3, 4],
+  "match": r"partitivo|reformul|alcun|qualche|nessun|posesiv|artículo donde"},
+],
 "blocks": [
  {"h": "Determinados: el sonido decide",
   "r": "*il / i* ante consonante; *l' / gli* ante vocal; *lo / gli* ante **s "
@@ -220,15 +247,17 @@ LESSONS = {
          ["C'è dell'acqua in frigo.", "Hay agua en la heladera."],
          ["Ho degli amici a Roma.", "Tengo (unos) amigos en Roma."]]},
 
- {"h": "Artículo donde el castellano no lo pone",
+ {"h": "Artículo donde el castellano no lo pone (y dónde no va)",
   "r": "Llevan artículo: **posesivos** (*il mio libro*), años (*nel 1999*), "
-       "países y regiones (*l'Italia*), lenguas (*studio l'italiano*).",
+       "**países y regiones** (*l'Italia, la Toscana*), lenguas (*studio "
+       "l'italiano*).",
   "ex": [["La mia casa è grande.", "Mi casa es grande."],
          ["L'Italia è bella.", "Italia es linda."],
+         ["Roma è bella.", "Roma es linda."],
          ["il lunedì", "los lunes (costumbre)"]],
-  "warn": "Sin artículo: ciudades (*Roma è bella*) y parientes en singular "
-          "sin adjetivo (*mio padre, mia sorella*). Pero *i miei fratelli*, "
-          "*il loro padre*, *la mia sorellina*."},
+  "warn": "**Sin artículo**: ciudades (*Roma è bella, vado a Roma*) y parientes "
+          "en singular sin adjetivo (*mio padre*; pero *i miei fratelli*). Con "
+          "*in* el país lo pierde: *abito in Italia*."},
 ]},
 
 4: {
@@ -283,6 +312,12 @@ LESSONS = {
 "intro": "El presente sostiene casi todo lo que vas a decir los primeros "
          "meses. Las tres conjugaciones se parecen al castellano, pero el "
          "acento y algunas grafías cambian.",
+"parts": [
+ {"h": "Las tres conjugaciones y los verbos en -isc-", "blocks": [0, 1],
+  "match": r"en presente\. |-isc-|reflexivos"},
+ {"h": "Ortografía de la raíz, sujeto omitido y Lei", "blocks": [2, 3],
+  "match": r"ortografía|Escribilo bien|Lei|perché|Desde cuándo|Traducí"},
+],
 "blocks": [
  {"h": "Las tres conjugaciones",
   "r": "*tu* termina **siempre en -i** y *noi* **siempre en -iamo**, en las "
@@ -326,6 +361,12 @@ LESSONS = {
 "intro": "Unos quince irregulares cubren media conversación. Y una "
          "diferencia grande con el castellano: el italiano casi nunca "
          "diptonga.",
+"parts": [
+ {"h": "Los pilares, los modales y seis irregulares más", "blocks": [0, 1, 2],
+  "match": r"andare, d|de fare|modales|infinitivo|pregunta y la respuesta|de avere"},
+ {"h": "No diptonga, essere o stare, stare + gerundio", "blocks": [3, 4, 5],
+  "match": r"stare|gerundio|essere|diptong"},
+],
 "blocks": [
  {"h": "Los cuatro pilares",
   "r": "*essere, avere, andare, stare*: de memoria. La *h* de *ho, hai, ha, "
@@ -511,6 +552,14 @@ LESSONS = {
 "intro": "Las preposiciones son donde la traducción literal falla más "
          "rápido. Unos pocos patrones cubren la mayoría de los casos y "
          "evitan los errores más visibles.",
+"parts": [
+ {"h": "Las simples: a o in (y da para ir a lo de alguien)", "blocks": [0, 1],
+  "match": r"Vado|Ci vediamo|a o in|a, in, da|\(a, in, da, di\)|a o di|in con el verbo"},
+ {"h": "da: origen, agente, «desde hace»", "blocks": [2, 3],
+  "match": r"Completá con da|desde|Desde cuándo|presente \+ da|da \+|hace .* que|da quanto|\bda\b"},
+ {"h": "Verbos con su preposición", "blocks": [4],
+  "match": r"verbo|expresión|su, in, per"},
+],
 "blocks": [
  {"h": "Las ocho preposiciones simples",
   "r": "*di, a, da, in, con, su, per, tra / fra*. Cada una tiene varios "
@@ -557,7 +606,7 @@ LESSONS = {
   "r": "Muchos verbos llevan una preposición fija, distinta del castellano. "
        "Aprendé **verbo + preposición** juntos.",
   "ex": [["pensare a, credere a / in", "pensar en, creer en"],
-         ["sognare di, innamorarsi di", "soñar con, enamorarse de"],
+         ["sognare di + infinitivo; sognare qualcuno (sin preposición); innamorarsi di", "soñar con hacer algo; soñar con alguien; enamorarse de"],
          ["entrare in, salire su", "entrar en / a, subir a"],
          ["dipendere da, sposarsi con", "depender de, casarse con"],
          ["cominciare a, finire di", "empezar a, terminar de"]],
@@ -614,6 +663,14 @@ LESSONS = {
 "intro": "El passato prossimo cubre el «comí» y el «he comido» castellanos: "
          "*ieri ho mangiato* = ayer comí. La forma es fácil; lo que se "
          "entrena es elegir el auxiliar.",
+"parts": [
+ {"h": "La forma y los participios irregulares", "blocks": [0, 5],
+  "match": r"^Escribí el participio|preguntas con el participio"},
+ {"h": "Cuál auxiliar y cómo concuerda", "blocks": [1, 2, 3, 4],
+  "match": r"auxiliar|passato prossimo|modal"},
+ {"h": "già, mai, ancora y el pronombre directo", "blocks": [6, 7],
+  "match": r"pronombre|objeto|già|mai|ancora|corchetes"},
+],
 "blocks": [
  {"h": "La forma",
   "r": "Presente de *avere* o *essere* + participio. Participios regulares: "
@@ -707,6 +764,14 @@ LESSONS = {
 12: {
 "intro": "Reflexivos e imperativo: la rutina diaria y las órdenes. Comparten "
          "un rasgo clave: el pronombre se pega al final del verbo.",
+"parts": [
+ {"h": "Reflexivos y recíprocos", "blocks": [0, 1],
+  "match": r"reflexiv|recíproc"},
+ {"h": "Imperativo de tu y voi, negativo y formas cortas", "blocks": [2, 3, 5],
+  "match": r"imperativo de tu y de voi|tu y después el de voi|sugerencias|hagamos|persona \(tu|de tu\b|negativ|corta"},
+ {"h": "Imperativo formal: Lei", "blocks": [4],
+  "match": r"Lei|formal"},
+],
 "blocks": [
  {"h": "Los reflexivos",
   "r": "Pronombre *mi, ti, si, ci, vi, si* delante del verbo. El infinitivo "
