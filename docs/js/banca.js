@@ -291,8 +291,11 @@
   function gapAccept(s) {
     var main = s.it[0], form = s.gap[0], at = wordAt(main, form), out = [form];
     var pre = main.slice(0, at), post = main.slice(at + form.length);
+    var preL = pre.toLowerCase(), postL = post.toLowerCase();
     s.it.slice(1).forEach(function (v) {
-      if (v.indexOf(pre) === 0 && v.slice(-post.length || v.length) === post && post.length) {
+      var vl = v.toLowerCase();
+      if (post.length && v.length > pre.length + post.length &&
+          vl.indexOf(preL) === 0 && vl.slice(-post.length) === postL) {
         var mid = v.slice(pre.length, v.length - post.length).trim();
         if (mid && out.indexOf(mid) < 0 && mid.split(" ").length <= 4) out.push(mid);
       }
