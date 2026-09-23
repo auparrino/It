@@ -801,7 +801,7 @@
      explains in Spanish; the key never leaves the phone except to Google. */
   // When one model is busy (503), overloaded or rate-limited (429) or gone
   // (404), the next one is tried; after the whole list, one more round.
-  var AI_MODELS = ["gemini-2.5-flash", "gemini-flash-latest", "gemini-2.5-flash-lite", "gemini-flash-lite-latest", "gemini-2.0-flash"];
+  var AI_MODELS = ["gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-flash-latest", "gemini-flash-lite-latest", "gemini-2.0-flash"];
   function aiPrompt(text, week, task) {
     return "Sos profesor de italiano para un hispanohablante rioplatense que está en la semana " + week +
       " de 52 de un curso hasta C1. La consigna era: «" + (task ? task.t : "texto libre") + "».\n" +
@@ -829,34 +829,61 @@
   }
   function explain(x, key, done) { gemini(explainPrompt(x), key, done); }
 
-  function gemini(prompt, key, done, model, round) {
-    model = model || AI_MODELS[0]; round = round || 0;
+  /* One request at a time through the list of models: each attempt waits at
+     most 20 s, the whole thing at most 60 s.  Gemini 2.5 «thinks» before
+     answering unless told not to, which can take more than half a minute:
+     for correcting a text that is not needed, so the thinking is switched
+     off.  The model that answered last time goes first next time. */
+  var MODEL_KEY = "laviac1.gemini.model";
+  function gemini(prompt, key, done) {
     if (typeof fetch !== "function") return done(new Error("sin fetch"));
-    var ctl = typeof AbortController === "function" ? new AbortController() : null;
-    var timer = setTimeout(function () { if (ctl) ctl.abort(); }, 30000);
-    fetch("https://generativelanguage.googleapis.com/v1beta/models/" + model + ":generateContent?key=" + encodeURIComponent(key), {
-      method: "POST", signal: ctl ? ctl.signal : undefined, headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ contents: [{ role: "user", parts: [{ text: prompt }] }],
-                             generationConfig: { temperature: 0.2, responseMimeType: "application/json" } })
-    }).then(function (r) {
-      var k = AI_MODELS.indexOf(model);
-      if (/^(404|429|500|503)$/.test(String(r.status))) {
-        clearTimeout(timer);
-        if (k >= 0 && k < AI_MODELS.length - 1) { gemini(prompt, key, done, AI_MODELS[k + 1], round); return null; }
-        if (round < 1) { setTimeout(function () { gemini(prompt, key, done, AI_MODELS[0], round + 1); }, 2500); return null; }
+    var order = AI_MODELS.slice(), deadline = Date.now() + 60000, lastErr = null, noThink = {};
+    try {
+      var good = localStorage.getItem(MODEL_KEY);
+      if (good && order.indexOf(good) > 0) { order.splice(order.indexOf(good), 1); order.unshift(good); }
+    } catch (e) { /* */ }
+    var k = 0;
+    function next(err) {
+      if (err) lastErr = err;
+      if (k >= order.length || Date.now() > deadline) {
+        var m = lastErr && /abort/i.test(String(lastErr.message || lastErr)) ? "la IA no respondió a tiempo" : String((lastErr && lastErr.message) || lastErr || "sin respuesta");
+        return done(new Error(m));
       }
-      if (!r.ok) return r.text().then(function (b) {
-        throw new Error(r.status === 503 || r.status === 429 ? "Google tiene la IA saturada ahora (" + r.status + ")" :
-                        "HTTP " + r.status + (/API.?key/i.test(b) ? ", clave" : ""));
-      });
-      return r.json();
-    }).then(function (j) {
-      if (!j) return;
-      clearTimeout(timer);
-      var c = j.candidates && j.candidates[0];
-      var txt = c && c.content && c.content.parts ? c.content.parts.map(function (p) { return p.text || ""; }).join("") : "";
-      done(null, JSON.parse(String(txt || "{}").replace(/^\s*```(json)?/, "").replace(/```\s*$/, "").trim()));
-    }).catch(function (e) { clearTimeout(timer); done(e); });
+      attempt(order[k++]);
+    }
+    function attempt(model) {
+      var ctl = typeof AbortController === "function" ? new AbortController() : null;
+      var timer = setTimeout(function () { if (ctl) ctl.abort(); }, Math.min(20000, Math.max(3000, deadline - Date.now())));
+      var gen = { temperature: 0.2, responseMimeType: "application/json", maxOutputTokens: 4096 };
+      if (/^gemini-2\.5/.test(model) && !noThink[model]) gen.thinkingConfig = { thinkingBudget: 0 };
+      fetch("https://generativelanguage.googleapis.com/v1beta/models/" + model + ":generateContent?key=" + encodeURIComponent(key), {
+        method: "POST", signal: ctl ? ctl.signal : undefined, headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ contents: [{ role: "user", parts: [{ text: prompt }] }], generationConfig: gen })
+      }).then(function (r) {
+        if (r.ok) return r.json();
+        return r.text().then(function (b) {
+          clearTimeout(timer);
+          // a model that does not accept the thinking switch: same model without it
+          if (r.status === 400 && /thinking/i.test(b) && !noThink[model]) { noThink[model] = 1; attempt(model); return null; }
+          if (r.status === 400 || r.status === 401 || r.status === 403) {
+            return done(new Error("HTTP " + r.status + (/API.?key|permission|denied/i.test(b) ? ", clave" : "")));
+          }
+          next(new Error(r.status === 503 || r.status === 429 ? "Google tiene la IA saturada ahora (" + r.status + ")" : "HTTP " + r.status));
+          return null;
+        });
+      }).then(function (j) {
+        if (!j) return;
+        clearTimeout(timer);
+        var c = j.candidates && j.candidates[0];
+        var txt = c && c.content && c.content.parts ? c.content.parts.map(function (p) { return p.text || ""; }).join("") : "";
+        var data;
+        try { data = JSON.parse(String(txt || "").replace(/^\s*```(json)?/, "").replace(/```\s*$/, "").trim()); }
+        catch (e) { return next(new Error("respuesta ilegible")); }
+        try { localStorage.setItem(MODEL_KEY, model); } catch (e) { /* */ }
+        done(null, data);
+      }).catch(function (e) { clearTimeout(timer); next(e); });
+    }
+    next();
   }
   // The AI's errors as findings on the text's tokens (each fragment is found
   // in the text; what the local checker already marked is not repeated).

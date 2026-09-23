@@ -72,4 +72,34 @@ ERR.forEach(function (e) {
   ok(!f.length, "«" + t + "» no debería marcar nada: " + f.map(function (x) { return x.msg; }).join(" | "));
 });
 
-console.log("\ncontrolli: " + checks + "   errori: " + fails);
+// La llamada a Gemini, con fetch simulado: saturado → otro modelo; un
+// modelo que no acepta apagar el razonamiento → el mismo sin esa opción;
+// clave mala → error claro; sin razonamiento en los 2.5.
+var GEM = [];
+function gem(name, plan, check) { GEM.push([name, plan, check]); }
+function runGem() {
+  if (!GEM.length) return console.log("\ncontrolli: " + checks + "   errori: " + fails);
+  var g = GEM.shift(), calls = [], mem = {};
+  global.localStorage = { getItem: function (k) { return mem[k] || null; }, setItem: function (k, v) { mem[k] = v; } };
+  global.fetch = function (url, opt) {
+    var model = url.match(/models\/([^:]+):/)[1], body = JSON.parse(opt.body);
+    calls.push(model + (body.generationConfig.thinkingConfig ? "~" : ""));
+    var a = g[1](calls.length, body);
+    return Promise.resolve({ ok: a.status === 200, status: a.status, json: function () { return Promise.resolve(a.body); },
+                             text: function () { return Promise.resolve(JSON.stringify(a.body || {})); } });
+  };
+  S.explain({ prompt: "p", stem: "s", given: "a", answer: "b" }, "K", function (err, data) {
+    ok(g[2](err, data, calls), "gemini " + g[0] + ": " + (err ? err.message : "ok") + " · " + calls.join(" → "));
+    runGem();
+  });
+}
+var GOOD = { candidates: [{ content: { parts: [{ text: '{"tambien_correcta":false,"explicacion":"x"}' }] } }] };
+gem("saturado", function (n) { return n === 1 ? { status: 503, body: {} } : { status: 200, body: GOOD }; },
+    function (e, d, c) { return !e && c.length === 2 && /~$/.test(c[0]); });
+gem("sin razonamiento no admitido", function (n, b) { return b.generationConfig.thinkingConfig ? { status: 400, body: { error: { message: "thinking not supported" } } } : { status: 200, body: GOOD }; },
+    function (e, d, c) { return !e && c.length === 2 && c[0] === c[1] + "~"; });
+gem("clave mala", function () { return { status: 400, body: { error: { message: "API key not valid" } } }; },
+    function (e) { return e && /clave/.test(e.message); });
+gem("todo saturado", function () { return { status: 503, body: {} }; },
+    function (e, d, c) { return e && /saturada/.test(e.message) && c.length === 5; });
+runGem();
