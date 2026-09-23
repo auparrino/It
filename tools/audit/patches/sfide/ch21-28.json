@@ -272,7 +272,9 @@
     "stem": "A ella le gustaría quedarse en Pisa.",
     "answer": "Le piacerebbe rimanere a Pisa.",
     "alt": [
-     "Le piacerebbe restare a Pisa."
+     "Le piacerebbe restare a Pisa.",
+     "A lei piacerebbe rimanere a Pisa.",
+     "A lei piacerebbe restare a Pisa."
     ],
     "note": "Piacerebbe concuerda con el infinitivo (singular) y lleva el pronombre le."
    }
@@ -474,13 +476,13 @@
     "label": "b",
     "type": "cloze",
     "stem": "Alla radio avevo sentito che ___ (el avión tendría que haber salido una hora antes) / che ___ (la autopista podría haber estado bloqueada por la nieve).",
-    "answer": "l'aereo sarebbe dovuto partire un'ora prima | l'autostrada sarebbe potuta essere bloccata dalla neve",
+    "answer": "l'aereo sarebbe dovuto partire un'ora prima | l'autostrada avrebbe potuto essere bloccata dalla neve",
     "alt": [
      "l'aereo avrebbe dovuto partire un'ora prima | l'autostrada avrebbe potuto essere bloccata dalla neve",
-     "l'aereo sarebbe dovuto partire un'ora prima | l'autostrada avrebbe potuto essere bloccata dalla neve",
+     "l'aereo sarebbe dovuto partire un'ora prima | l'autostrada sarebbe potuta essere bloccata dalla neve",
      "l'aereo avrebbe dovuto partire un'ora prima | l'autostrada sarebbe potuta essere bloccata dalla neve"
     ],
-    "note": "En el pasado se usa el condicional compuesto de dovere/potere (con essere o avere)."
+    "note": "En el pasado se usa el condicional compuesto de dovere/potere (con essere o avere); con el infinitivo essere se prefiere avere: avrebbe potuto essere."
    }
   ]
  },
@@ -520,7 +522,9 @@
     "alt": [
      "Mi ha detto che arrivava alle quattro.",
      "Mi disse che sarebbe arrivato alle quattro.",
-     "Mi disse che arrivava alle quattro."
+     "Mi disse che arrivava alle quattro.",
+     "Mi ha detto che sarebbe arrivata alle quattro.",
+     "Mi disse che sarebbe arrivata alle quattro."
     ],
     "note": "Después de un verbo de decir en pasado, el futuro se expresa con condicional compuesto, no simple."
    }
@@ -594,7 +598,9 @@
     "stem": "Al parecer, el ministro no estaría dispuesto a renunciar.",
     "answer": "Il ministro non sarebbe disposto a dare le dimissioni.",
     "alt": [
-     "Il ministro non sarebbe disposto a dimettersi."
+     "Il ministro non sarebbe disposto a dimettersi.",
+     "A quanto pare, il ministro non sarebbe disposto a dare le dimissioni.",
+     "A quanto pare, il ministro non sarebbe disposto a dimettersi."
     ],
     "note": "El condicional simple presenta un dato presente no confirmado."
    },
@@ -603,7 +609,10 @@
     "type": "translate",
     "stem": "Según las fuentes, el avión se habría caído diez minutos después del despegue.",
     "answer": "L'aereo sarebbe caduto dieci minuti dopo il decollo.",
-    "alt": [],
+    "alt": [
+     "Secondo le fonti, l'aereo sarebbe caduto dieci minuti dopo il decollo.",
+     "Secondo le fonti l'aereo sarebbe caduto dieci minuti dopo il decollo."
+    ],
     "note": "El condicional compuesto presenta un hecho pasado no confirmado."
    },
    {
@@ -611,7 +620,10 @@
     "type": "translate",
     "stem": "Según parece, el asaltante habría disparado dos veces.",
     "answer": "Il rapinatore avrebbe sparato due volte.",
-    "alt": [],
+    "alt": [
+     "A quanto pare, il rapinatore avrebbe sparato due volte.",
+     "A quanto sembra, il rapinatore avrebbe sparato due volte."
+    ],
     "note": "Condicional compuesto de rumor o fuente no verificada: avrebbe sparato."
    }
   ]
@@ -720,7 +732,9 @@
     "type": "cloze",
     "stem": "Decile que venga / Dígale que venga. (dire a) → tu: ___ · Lei: ___",
     "answer": "dille di venire | le dica di venire",
-    "alt": [],
+    "alt": [
+     "digli di venire | gli dica di venire"
+    ],
     "note": "Di' + le da dille; con Lei el pronombre precede: le dica. Dire a qualcuno di + infinitivo."
    },
    {
@@ -766,7 +780,9 @@
     "type": "cloze",
     "stem": "Pedile que venga. / Pídanle que venga. (chiedere a) → tu: ___ · voi: ___",
     "answer": "chiedigli di venire | chiedetegli di venire",
-    "alt": [],
+    "alt": [
+     "chiedile di venire | chiedetele di venire"
+    ],
     "note": "Chiedere a qualcuno di + infinitivo; gli se une al imperativo."
    },
    {
@@ -1327,7 +1343,9 @@
     "answer": "di aver dovuto partire",
     "alt": [
      "di avere dovuto partire",
-     "aver dovuto partire"
+     "aver dovuto partire",
+     "di essere dovuto partire",
+     "di essere dovuta partire"
     ],
     "note": "Dispiacere di + infinitivo compuesto de dovere."
    }
@@ -2015,7 +2033,11 @@
     "alt": [
      "Può darsi che se ne sia già andato.",
      "Può darsi che sia partito già.",
-     "Forse è già partito."
+     "Forse è già partito.",
+     "Può essere che sia già partito.",
+     "Può darsi che sia già partita.",
+     "Può darsi che se ne sia già andata.",
+     "Può essere che sia già partita."
     ],
     "note": "Può darsi che + subjuntivo (con forse iría indicativo)."
    },
@@ -2254,7 +2276,9 @@
     "stem": "___, non avremmo perso il treno. (Si hubieran llegado antes…)",
     "answer": "Se fossero arrivati prima",
     "alt": [
-     "Se fossero arrivate prima"
+     "Se fossero arrivate prima",
+     "Se foste arrivati prima",
+     "Se foste arrivate prima"
     ],
     "note": "Hipótesis irreal del pasado: se + trapassato del subjuntivo."
    },
@@ -2264,7 +2288,9 @@
     "stem": "___, sarebbe un disastro. (Si perdiera el trabajo…)",
     "answer": "Se perdessi il lavoro",
     "alt": [
-     "Se perdessi il posto"
+     "Se perdessi il posto",
+     "Se perdesse il lavoro",
+     "Se perdesse il posto"
     ],
     "note": "Se + imperfecto del subjuntivo + condicional simple."
    },
@@ -3259,7 +3285,10 @@
     "type": "translate",
     "stem": "Según los bomberos la casa no podía ser salvada.",
     "answer": "Secondo i vigili del fuoco la casa non poteva essere salvata.",
-    "alt": [],
+    "alt": [
+     "Secondo i pompieri la casa non poteva essere salvata.",
+     "Secondo i pompieri, la casa non poteva essere salvata."
+    ],
     "note": "Imperfecto de potere + infinitivo pasivo."
    }
   ]
@@ -3337,9 +3366,7 @@
     "type": "cloze",
     "stem": "Le finestre ___ pulite. (tendrían que haber sido)",
     "answer": "andavano",
-    "alt": [
-     "sarebbero andate"
-    ],
+    "alt": [],
     "note": "Imperfecto de andare = tendrían que haber sido."
    }
   ]
@@ -3770,9 +3797,7 @@
     "type": "translate",
     "stem": "Dovresti far fare i lavori all'architetto. (reemplazá «i lavori» y «all'architetto») → Dovresti ___.",
     "answer": "farglieli fare",
-    "alt": [
-     "fargliele fare"
-    ],
+    "alt": [],
     "note": "Gli + li = glieli, pegado a far."
    },
    {
@@ -4138,7 +4163,9 @@
     "answer": "Gli ho fatto notare che non aveva pagato.",
     "alt": [
      "Gli ho fatto presente che non aveva pagato.",
-     "Gli ho fatto ricordare che non aveva pagato."
+     "Gli ho fatto ricordare che non aveva pagato.",
+     "Le ho fatto notare che non aveva pagato.",
+     "Le ho fatto presente che non aveva pagato."
     ],
     "note": "Far notare / far presente = hacer notar, recordar."
    }
@@ -4281,10 +4308,8 @@
     "type": "translate",
     "stem": "¿Los oyó dar un portazo? (sbattere)",
     "answer": "Li ha sentiti sbattere la porta?",
-    "alt": [
-     "Li ha sentito sbattere la porta?"
-    ],
-    "note": "Pronombre directo delante del auxiliar; el participio puede concordar."
+    "alt": [],
+    "note": "Pronombre directo delante del auxiliar; el participio concuerda: li ha sentiti."
    },
    {
     "label": "d",
@@ -4310,7 +4335,9 @@
     "stem": "¿Ayer viste al abuelo trepar al árbol?",
     "answer": "Ieri hai visto il nonno arrampicarsi all'albero?",
     "alt": [
-     "Hai visto ieri il nonno arrampicarsi all'albero?"
+     "Hai visto ieri il nonno arrampicarsi all'albero?",
+     "Ieri hai visto il nonno arrampicarsi sull'albero?",
+     "Hai visto ieri il nonno arrampicarsi sull'albero?"
     ],
     "note": "Infinitivo: se percibe la acción entera."
    },
@@ -4384,8 +4411,7 @@
     "answer": "le ho viste arrivare poco fa",
     "alt": [
      "le ho viste arrivare un momento fa",
-     "le ho viste arrivare poco tempo fa",
-     "le ho visto arrivare poco fa"
+     "le ho viste arrivare poco tempo fa"
     ],
     "note": "Pronombre directo le + participio concordado (viste) + infinitivo."
    }
@@ -5192,7 +5218,6 @@
     "answer": "Li ho ringraziati per i fiori.",
     "alt": [
      "Li ho ringraziati dei fiori.",
-     "Li ho ringraziato per i fiori.",
      "Le ho ringraziate per i fiori."
     ],
     "note": "Ringraziare qualcuno (directo) per/di qualcosa."

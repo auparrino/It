@@ -830,8 +830,7 @@
     "stem": "Quella lì è una pasticceria rinomata. – ¿Ahí es donde trabaja su hija?",
     "answer": "È lì che lavora Sua figlia?",
     "alt": [
-     "È là che lavora Sua figlia?",
-     "È lì che lavora la Sua figlia?"
+     "È là che lavora Sua figlia?"
     ],
     "note": "È lì che…; Sua figlia sin artículo por ser pariente en singular."
    }
@@ -1244,7 +1243,10 @@
     "type": "translate",
     "stem": "¿Cómo es que llegan tarde? (voi)",
     "answer": "Come mai siete in ritardo?",
-    "alt": [],
+    "alt": [
+     "Come mai arrivate in ritardo?",
+     "Come mai arrivate tardi?"
+    ],
     "note": "'Cómo es que…' = come mai."
    },
    {
@@ -2069,9 +2071,10 @@
     ],
     "answer": "Che strano!",
     "alt": [
-     "Com'è strano!"
+     "Com'è strano!",
+     "Quant'è strano!"
     ],
-    "note": "Che + adjetivo o com'è + adjetivo."
+    "note": "Che + adjetivo, o com'è / quant'è + adjetivo."
    },
    {
     "label": "c",
@@ -2347,9 +2350,9 @@
     "label": "b",
     "type": "translate",
     "stem": "No conozco a nadie que se llame Orazio.",
-    "answer": "Non conosco nessuno che si chiama Orazio.",
+    "answer": "Non conosco nessuno che si chiami Orazio.",
     "alt": [
-     "Non conosco nessuno che si chiami Orazio.",
+     "Non conosco nessuno che si chiama Orazio.",
      "Non conosco nessuno di nome Orazio."
     ],
     "note": "Non … nessuno: doble negación obligatoria."
@@ -2622,7 +2625,7 @@
   ]
  },
  "r12-11": {
-  "consigna": "Traducí al italiano con chiunque (el original pedía la traducción inversa).",
+  "consigna": "Traducí al italiano con chiunque.",
   "interactive": true,
   "items": [
    {
@@ -2647,7 +2650,12 @@
      "È semplice, lo sa fare chiunque.",
      "È semplice: chiunque lo sa fare.",
      "È semplice: chiunque sa farlo.",
-     "È semplice, chiunque lo sa fare."
+     "È semplice, chiunque lo sa fare.",
+     "È facile: lo sa fare chiunque.",
+     "È facile, lo sa fare chiunque.",
+     "È facile: chiunque lo sa fare.",
+     "È facile: chiunque sa farlo.",
+     "È facile, chiunque lo sa fare."
     ],
     "note": "Chiunque como sujeto va con verbo en singular."
    },
@@ -2844,7 +2852,7 @@
   ]
  },
  "r12-06": {
-  "consigna": "Traducí al italiano con qualunque o qualsiasi (el original pedía la traducción inversa).",
+  "consigna": "Traducí al italiano con qualunque o qualsiasi.",
   "interactive": true,
   "items": [
    {
@@ -3000,7 +3008,7 @@
   ]
  },
  "r12-01e": {
-  "consigna": "Traducí al italiano (el original pedía la traducción inversa).",
+  "consigna": "Traducí al italiano.",
   "interactive": true,
   "items": [
    {
@@ -3038,7 +3046,6 @@
     "stem": "¿No se vende en ningún otro lado?",
     "answer": "Non si vende da nessun'altra parte?",
     "alt": [
-     "Non si vende da nessun altra parte?",
      "Non si vende in nessun altro posto?"
     ],
     "note": "Nessun'altra con apóstrofo delante del femenino."
@@ -3116,7 +3123,6 @@
     "stem": "No quiero ir a ningún otro lado.",
     "answer": "Non voglio andare da nessun'altra parte.",
     "alt": [
-     "Non voglio andare da nessun altra parte.",
      "Non voglio andare in nessun altro posto."
     ],
     "note": "Da nessun'altra parte = a ningún otro lado."
@@ -3137,7 +3143,7 @@
   ]
  },
  "r12-03c": {
-  "consigna": "Traducí al italiano estas frases de avisos publicitarios (el original pedía la traducción inversa).",
+  "consigna": "Traducí al italiano estas frases de avisos publicitarios.",
   "interactive": true,
   "items": [
    {
@@ -3290,7 +3296,8 @@
     "answer": "L'uomo che hai conosciuto è il marito della padrona, che parte oggi.",
     "alt": [
      "L'uomo che hai conosciuto è il marito della padrona, il quale parte oggi.",
-     "L'uomo che hai conosciuto è il marito della padrona che parte oggi."
+     "L'uomo che hai conosciuto è il marito della padrona che parte oggi.",
+     "L'uomo che hai conosciuto è il marito della padrona, la quale parte oggi."
     ],
     "note": "Il quale evita la ambigüedad: se refiere al marido."
    },
@@ -3487,9 +3494,11 @@
     "stem": "Il signor Feroni è il nostro capo. Secondo lui, siamo tutti pigri. → ___.",
     "answer": "Il signor Feroni è il nostro capo, secondo il quale siamo tutti pigri",
     "alt": [
-     "Il signor Feroni è il nostro capo secondo il quale siamo tutti pigri"
+     "Il signor Feroni è il nostro capo secondo il quale siamo tutti pigri",
+     "Il signor Feroni è il nostro capo, secondo cui siamo tutti pigri",
+     "Il signor Feroni è il nostro capo secondo cui siamo tutti pigri"
     ],
-    "note": "Con secondo solo se usa il quale."
+    "note": "Con secondo se usa sobre todo il quale (secondo il quale), aunque secondo cui también es correcto."
    }
   ]
  },
@@ -3800,7 +3809,10 @@
     "answer": "Non è ancora partita.",
     "alt": [
      "Non se n'è ancora andata.",
-     "Non è ancora uscita."
+     "Non è ancora uscita.",
+     "Non è ancora partito.",
+     "Non se n'è ancora andato.",
+     "Non è ancora uscito."
     ],
     "note": "Ancora va entre el auxiliar y el participio."
    },
@@ -3903,7 +3915,10 @@
      "Non ti sei mica dimenticata di spedire la lettera?",
      "Non avrai mica dimenticato di spedire la lettera?",
      "Non hai mica dimenticato di spedire la lettera?",
-     "Non ti sarai mica dimenticato di imbucare la lettera?"
+     "Non ti sarai mica dimenticato di imbucare la lettera?",
+     "Non ti sarai mica dimenticato di mandare la lettera?",
+     "Non ti sarai mica dimenticata di mandare la lettera?",
+     "Non avrai mica dimenticato di mandare la lettera?"
     ],
     "note": "Non … mica expresa el temor de que algo haya pasado."
    },

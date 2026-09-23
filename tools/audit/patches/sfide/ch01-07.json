@@ -388,10 +388,10 @@
    {
     "label": "c",
     "type": "cloze",
-    "stem": "La capitale ___ Israele è Tel Aviv.",
+    "stem": "La capitale ___ Malta è La Valletta.",
     "answer": "di",
     "alt": [],
-    "note": "Israele no lleva artículo, como las ciudades."
+    "note": "Malta no lleva artículo, como las ciudades."
    },
    {
     "label": "d",
@@ -549,7 +549,7 @@
    {
     "label": "a",
     "type": "cloze",
-    "stem": "Il futuro re ___ Inghilterra è Carlo, Principe ___ Galles. (di/dell' – di/del)",
+    "stem": "Enrico VIII, re ___ Inghilterra, era stato Principe ___ Galles. (di/dell' – di/del)",
     "answer": "d' | di",
     "alt": [
      "di | di"
@@ -1032,7 +1032,7 @@
    {
     "label": "a",
     "type": "cloze",
-    "stem": "Mina e Elena, siete voi? – No, ___. (somos nosotras, Marta e Ida)",
+    "stem": "Mina ed Elena, siete voi? – No, ___. (somos nosotras, Marta e Ida)",
     "answer": "siamo noi, Marta e Ida",
     "alt": [],
     "note": "«Somos nosotras» se dice «siamo noi»: el verbo concuerda con el pronombre."
@@ -2587,7 +2587,7 @@
    {
     "label": "b",
     "type": "cloze",
-    "stem": "Le vuoi telefonare? Gli vuoi telefonare? → Vuoi telefonare ___? (¿Le querés llamar a ella o a él?)",
+    "stem": "Le vuoi telefonare? Gli vuoi telefonare? → Vuoi telefonare ___? (¿Querés llamarla a ella o llamarlo a él?)",
     "answer": "a lei o a lui",
     "alt": [],
     "note": "Objeto indirecto con contraste: a lei o a lui."
@@ -2738,7 +2738,7 @@
     ],
     "answer": "tónico",
     "alt": [],
-    "note": "Es el objeto de «conosci»: conocete a ti mismo."
+    "note": "Es el objeto de «conosci»: conócete a ti mismo."
    },
    {
     "label": "d",
@@ -3047,7 +3047,9 @@
     "answer": "Se non potete venire, ce lo dite?",
     "alt": [
      "Se non potete venire, ce lo direte?",
-     "Se non potete venire, ce lo fate sapere?"
+     "Se non potete venire, ce lo fate sapere?",
+     "Se non potete venire, ci avvisate?",
+     "Se non potete venire, ci avviserete?"
     ],
     "note": "Ci + lo = ce lo; «lo» reemplaza el hecho de no poder venir."
    },
@@ -3061,7 +3063,10 @@
      "Anna, quando te ne vai, me lo fai sapere?",
      "Anna, quando te ne vai, me lo dici?",
      "Anna, quando partirai, me lo fai sapere?",
-     "Anna, quando partirai, me lo dici?"
+     "Anna, quando partirai, me lo dici?",
+     "Anna, quando parti, mi avvisi?",
+     "Anna, quando te ne vai, mi avvisi?",
+     "Anna, quando partirai, mi avvisi?"
     ],
     "note": "Mi + lo = me lo."
    },
@@ -3166,7 +3171,7 @@
    {
     "label": "c",
     "type": "translate",
-    "stem": "¿Tenés ganas de venir al cine? (tu)",
+    "stem": "¿Te animás a venir al cine? (tu)",
     "answer": "Te la senti di venire al cinema?",
     "alt": [],
     "note": "«Sentirsela di»: te la senti di…?"

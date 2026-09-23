@@ -1964,7 +1964,7 @@
    {
     "label": "a",
     "type": "cloze",
-    "stem": "___ lo so, è sposato da due anni. (Por lo que)",
+    "stem": "___ so, è sposato da due anni. (Por lo que)",
     "answer": "Per quanto",
     "alt": [
      "Per quello che",
@@ -2068,7 +2068,7 @@
    {
     "label": "d",
     "type": "cloze",
-    "stem": "Gli perdono solo ___ chieda scusa a mia sorella. (con tal de que)",
+    "stem": "Lo perdono solo ___ chieda scusa a mia sorella. (con tal de que)",
     "answer": "a patto che",
     "alt": [
      "a condizione che",
@@ -2248,11 +2248,11 @@
     "label": "e",
     "type": "translate",
     "stem": "treinta y un estudiantes",
-    "answer": "trentun studenti",
+    "answer": "trentuno studenti",
     "alt": [
-     "trentuno studenti"
+     "trentun studenti"
     ],
-    "note": "Ventuno, trentuno… pierden la -o delante del sustantivo: trentun studenti."
+    "note": "Ventuno, trentuno… suelen perder la -o delante del sustantivo (trentun giorni), pero delante de s + consonante se prefiere la forma entera: trentuno studenti."
    },
    {
     "label": "f",
@@ -2671,7 +2671,7 @@
     "stem": "Tu ___ troppo. (mangiare)",
     "answer": "mangi",
     "alt": [],
-    "note": "Los verbos en -iare no duplican la i: tu mangi."
+    "note": "Los verbos en -iare con i átona no duplican la i: tu mangi (pero tu invii, tu scii)."
    },
    {
     "label": "b",
@@ -2938,7 +2938,9 @@
     "stem": "¿Desayunan en el bar?",
     "answer": "Fanno colazione al bar?",
     "alt": [
-     "Fanno colazione nel bar?"
+     "Fanno colazione nel bar?",
+     "Fate colazione al bar?",
+     "Fate colazione nel bar?"
     ],
     "note": "Fare colazione = desayunar."
    },
@@ -3230,8 +3232,6 @@
     "answer": "il loro padre li ha lasciati due anni fa, ma lo vedono ogni tanto",
     "alt": [
      "il loro padre li ha lasciati due anni fa ma lo vedono ogni tanto",
-     "loro padre li ha lasciati due anni fa, ma lo vedono ogni tanto",
-     "loro padre li ha lasciati due anni fa ma lo vedono ogni tanto",
      "il padre li ha lasciati due anni fa, ma lo vedono ogni tanto",
      "il padre li ha lasciati due anni fa ma lo vedono ogni tanto"
     ],
@@ -4531,7 +4531,9 @@
     "type": "translate",
     "stem": "No la veía desde diciembre.",
     "answer": "Non la vedevo da dicembre.",
-    "alt": [],
+    "alt": [
+     "Non la vedeva da dicembre."
+    ],
     "note": "Imperfetto + da: acción que seguía en ese momento del pasado."
    },
    {
@@ -4539,7 +4541,10 @@
     "type": "translate",
     "stem": "La conocía desde que tenía tres años.",
     "answer": "La conoscevo da quando avevo tre anni.",
-    "alt": [],
+    "alt": [
+     "La conosceva da quando aveva tre anni.",
+     "La conoscevo da quando aveva tre anni."
+    ],
     "note": "Imperfetto + da quando."
    },
    {
@@ -4548,7 +4553,9 @@
     "stem": "Hacía una hora que esperaba.",
     "answer": "Aspettava da un'ora.",
     "alt": [
-     "Era da un'ora che aspettava."
+     "Era da un'ora che aspettava.",
+     "Aspettavo da un'ora.",
+     "Era da un'ora che aspettavo."
     ],
     "note": "Imperfetto + da + duración."
    },
@@ -4558,7 +4565,9 @@
     "stem": "Desde 1980 había tenido tres maridos.",
     "answer": "Dal 1980 aveva avuto tre mariti.",
     "alt": [
-     "Dal 1980 aveva già avuto tre mariti."
+     "Dal 1980 aveva già avuto tre mariti.",
+     "Dal 1980 avevo avuto tre mariti.",
+     "Dal 1980 avevo già avuto tre mariti."
     ],
     "note": "Hechos contados: trapassato prossimo (aveva avuto)."
    }
@@ -4926,7 +4935,11 @@
      "Finiti gli esami mi sono trovato un lavoro.",
      "Finiti gli esami, mi sono trovata un lavoro.",
      "Finiti gli esami mi sono trovata un lavoro.",
-     "Dopo avere finito gli esami mi sono trovato un lavoro."
+     "Dopo avere finito gli esami mi sono trovato un lavoro.",
+     "Dopo aver finito gli esami ho trovato un lavoro.",
+     "Dopo aver finito gli esami, ho trovato un lavoro.",
+     "Finiti gli esami, ho trovato un lavoro.",
+     "Finiti gli esami ho trovato un lavoro."
     ],
     "note": "Dopo + infinitivo compuesto (aver finito) o participio absoluto (finiti gli esami)."
    },
@@ -4941,7 +4954,9 @@
      "Ero già uscita quando sono arrivati.",
      "Quando sono arrivati ero già partito.",
      "Quando sono arrivati ero già partita.",
-     "Ero già andato via quando sono arrivati."
+     "Ero già andato via quando sono arrivati.",
+     "Me n'ero già andato quando sono arrivati.",
+     "Me n'ero già andata quando sono arrivati."
     ],
     "note": "Acá el trapassato es inevitable: anterioridad respecto de otro pasado."
    },
