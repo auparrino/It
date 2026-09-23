@@ -1072,3 +1072,21 @@ h3 { letter-spacing: .08em; font-size: .8rem; }
 .stat.boost b { font-size: .95rem; }
 .itanol { list-style: none; padding: 0; margin: 8px 0 0; display: grid; gap: 6px; }
 .itanol li { display: grid; grid-template-columns: 24px 1fr; gap: 8px; align-items: start; }
+
+/* ---------------------------------------------------------------- scrivi */
+ul.reqs { list-style: none; padding: 0; margin: 10px 0 6px; }
+ul.reqs li { padding: 3px 0; color: var(--grigio); }
+ul.reqs li.ok { color: var(--verde); font-weight: 700; }
+textarea.scrivi { width: 100%; box-sizing: border-box; min-height: 160px; resize: none; overflow: hidden;
+  font: inherit; font-size: 1.05rem; line-height: 1.5; padding: 14px; border-radius: 14px;
+  border: 2px solid var(--grigio-chiaro); background: var(--carta); color: var(--inchiostro); }
+textarea.scrivi:focus { outline: none; border-color: var(--verde); }
+.scrivi-marked { line-height: 1.8; font-size: 1.02rem; }
+.scrivi-marked mark { border-radius: 4px; padding: 0 2px; color: inherit; }
+.scrivi-marked mark.bad { background: color-mix(in srgb, var(--rosso) 22%, transparent); text-decoration: underline wavy var(--rosso); }
+.scrivi-marked mark.soft { background: color-mix(in srgb, var(--oro) 20%, transparent); }
+.scrivi-marked sup { font-size: .65em; font-weight: 800; margin-left: 1px; }
+ol.findings { padding-left: 0; list-style: none; margin: 12px 0; }
+ol.findings li { padding: 6px 0; border-top: 1px solid var(--grigio-chiaro); }
+ol.findings li.soft { color: var(--grigio); }
+p.model { font-size: 1.02rem; line-height: 1.6; }

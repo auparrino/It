@@ -1839,7 +1839,7 @@
   "d13-043": {
    "consigna": "Completá con el pronombre posesivo en italiano, con su artículo, según la pista entre paréntesis.",
    "type": "cloze",
-   "stem": "le vostre macchine, ___ (los míos).",
+   "stem": "le vostre macchine, ___ (las mías).",
    "answer": "le mie",
    "alt": [],
    "drop": false,
@@ -1998,7 +1998,9 @@
    "type": "cloze",
    "stem": "Il professore è di Firenze, ___ (o sea) è fiorentino.",
    "answer": "cioè",
-   "alt": [],
+   "alt": [
+    "ossia"
+   ],
    "drop": false
   },
   "d14-011": {
@@ -2352,7 +2354,9 @@
    "type": "translate",
    "stem": "ya (a esta altura)",
    "answer": "ormai",
-   "alt": [],
+   "alt": [
+    "oramai"
+   ],
    "drop": false
   },
   "d15-020": {

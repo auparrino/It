@@ -131,6 +131,7 @@ LESSONS = {
          "castellano empuja justo al revés. Esta semana la automatizás.",
 "blocks": [
  {"h": "Todos con essere. Todos.",
+  "q": [{"prompt": "¿Cuál está bien? «Me lavé» (dice Anna).", "answer": "Mi sono lavata.", "options": ["Mi sono lavata.", "Mi ho lavata.", "Mi sono lavato."]}, {"prompt": "Completá: «Se divirtieron» (los chicos).", "stem": "I ragazzi si ___ divertiti.", "answer": "sono", "options": ["sono", "hanno", "è"]}],
   "r": "Reflexivos y pronominales van **siempre con *essere***, aunque sin "
        "pronombre el verbo lleve *avere*. El participio concuerda con el "
        "sujeto.",
@@ -217,6 +218,7 @@ LESSONS = {
          ["È la loro casa.", "Es la casa de ellos."]]},
 
  {"h": "Familia: sin artículo",
+  "q": [{"prompt": "¿Cuál está bien? «Mi padre es médico.»", "answer": "Mio padre è medico.", "options": ["Mio padre è medico.", "Il mio padre è medico.", "Lo mio padre è medico."]}, {"prompt": "¿Cuál está bien? «El padre de ellos es alto.»", "answer": "Il loro padre è alto.", "options": ["Il loro padre è alto.", "Loro padre è alto.", "Suo padre è alto."]}],
   "r": "Parentesco en **singular y sin adjetivo**: el posesivo va sin "
        "artículo. *mio padre*, *tua sorella*, *suo figlio*.",
   "ex": [["mio padre, tua sorella", "singular: sin artículo"],
@@ -256,6 +258,12 @@ LESSONS = {
 "intro": "En italiano la doble negación es obligatoria, igual que en "
          "castellano. Esta semana ordenás el inventario completo, las "
          "trampas y las exclamaciones de todos los días.",
+"parts": [
+ {"h": "Negar: non … niente, mai, mica", "blocks": [0, 1, 2],
+  "match": r"negaci|negativ|\bnon\b|affatto|mica|neanche"},
+ {"h": "Exclamaciones", "blocks": [3, 4],
+  "match": r"exclama|che!|quanto o come|interjecci|reaccion"},
+],
 "blocks": [
  {"h": "El esquema non ... X",
   "r": "Palabra negativa **después** del verbo → *non* delante. Palabra "
@@ -314,6 +322,12 @@ LESSONS = {
 "intro": "El futuro italiano es muy regular. Además de hablar del porvenir, "
          "sirve para suponer sobre el presente: *sarà a casa* = estará en "
          "casa.",
+"parts": [
+ {"h": "Futuro simple y sus raíces", "blocks": [0, 1],
+  "match": r"^(?!.*(anteriore|compuesto|probabilidad|quando|appena|parientes)).*(futuro|planes|Promesas|Decisiones)"},
+ {"h": "Futuro anteriore, suposición y quando", "blocks": [2, 3, 4],
+  "match": r"anteriore|probabilidad|quando|appena"},
+],
 "blocks": [
  {"h": "Futuro semplice",
   "r": "Infinitivo sin la *-e* final + *-ò, -ai, -à, -emo, -ete, -anno*. En "
@@ -418,6 +432,12 @@ LESSONS = {
 21: {
 "intro": "*ne* y *ci* no existen en castellano y el italiano los usa en casi "
          "cada frase. Sin ellos, tu italiano suena correcto pero extranjero.",
+"parts": [
+ {"h": "NE: cantidades y «de eso»", "blocks": [0, 1],
+  "match": r"^(?!.*(\bci\b|c'è|ci sono|volerci|metterci|lugar)).*(\bne\b|«ne»)"},
+ {"h": "CI: lugar, «a algo» y expresiones", "blocks": [2, 3, 4],
+  "match": r"\bci\b|c'è|lugar"},
+],
 "blocks": [
  {"h": "NE: una cantidad",
   "r": "*ne* reemplaza **una cantidad** de algo ya mencionado. En castellano "
@@ -530,6 +550,12 @@ LESSONS = {
 "intro": "Comparar es fácil hasta que hay que elegir entre *di* y *che*: en "
          "castellano los dos son «que». Es pregunta fija de todos los "
          "exámenes.",
+"parts": [
+ {"h": "Comparativos: di o che, igualdad", "blocks": [0, 1],
+  "match": r"^(?!.*(superlativ|issimo|más largo|mayor|malísima|máxima|mínima)).*(compar|tan alto|menos|di \+ artículo)"},
+ {"h": "Superlativos e irregulares", "blocks": [2, 3, 4],
+  "match": r"superlativ|issimo|mayor|más"},
+],
 "blocks": [
  {"h": "di o che",
   "r": "*di* ante sustantivo, pronombre o número. *che* entre dos adjetivos, "
@@ -598,6 +624,12 @@ LESSONS = {
 "intro": "Llega el congiuntivo. Esta semana, solo la forma del presente: "
          "regulares, irregulares y la trampa de la vocal. El uso, la semana "
          "que viene.",
+"parts": [
+ {"h": "Cómo se arma el congiuntivo", "blocks": [0, 1, 2],
+  "match": r"^(?!.*(irregular|prefieren|registro cuidado)).*(congiuntivo|subjuntivo)"},
+ {"h": "Irregulares y usos", "blocks": [3, 4],
+  "match": r"irregular|prefieren"},
+],
 "blocks": [
  {"h": "Cómo se arma",
   "r": "Tomá el *io* del presente, sacale la *-o* y agregá las "
@@ -723,6 +755,14 @@ LESSONS = {
 "intro": "Cierre de la segunda estación: pasados y futuros ordenados, el "
          "trapassato prossimo, los pronombres combinados con *ne* y *ci*, y "
          "el congiuntivo presente.",
+"parts": [
+ {"h": "Repaso: los tiempos del pasado y del futuro", "blocks": [0, 1, 2, 3],
+  "match": r"^(?!.*piac).*(futuro|condicional|condizionale|imperfetto|passato|trapassato|tiempo|auxiliar|reflexivo)"},
+ {"h": "Repaso: pronombres combinados, ne, ci y congiuntivo", "blocks": [4, 5],
+  "match": r"^(?!.*piac).*(pronombre|combinad|«ne»|\bne\b|\bci\b|congiuntivo|subjuntivo|posesiv|indefinid)"},
+ {"h": "Repaso: trampas de los verbos y de la frase", "blocks": [6, 7],
+  "match": r"\S"},
+],
 "blocks": [
  {"h": "El mapa de los tiempos",
   "r": "Dos mecanismos: terminación sobre la raíz (presente, imperfetto, "

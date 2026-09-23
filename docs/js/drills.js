@@ -173,13 +173,45 @@
                    da: ["dal", "dallo", "dalla", "dall'", "dai", "dagli", "dalle"],
                    in: ["nel", "nello", "nella", "nell'", "nei", "negli", "nelle"],
                    su: ["sul", "sullo", "sulla", "sull'", "sui", "sugli", "sulle"] };
+  var WORD_CLASSES = [
+    ["chi", "che", "cosa", "come", "dove", "quando", "quanto", "quanta", "quanti", "quante", "quale", "quali", "perché"],
+    ["a", "di", "da", "in", "su", "con", "per", "tra"],
+    ["lo", "la", "li", "le", "gli", "ne", "ci"],
+    ["mi", "ti", "si", "ci", "vi"],
+    ["io", "tu", "lui", "lei", "noi", "voi", "loro"],
+    ["san", "santo", "santa", "sant'"], ["buon", "buono", "buona", "buon'"], ["bel", "bello", "bella", "bell'", "bei", "begli", "belle"],
+    ["gran", "grande", "grand'", "grandi"],
+    ["me", "te", "lui", "lei", "noi", "voi", "loro", "sé"],
+    ["mio", "mia", "miei", "mie", "tuo", "tua", "tuoi", "tue", "suo", "sua", "suoi", "sue", "nostro", "nostra", "nostri", "nostre", "vostro", "vostra", "vostri", "vostre", "loro"],
+    ["questo", "questa", "questi", "queste", "quel", "quello", "quella", "quei", "quegli", "quelle"],
+    ["ma", "però", "quindi", "perché", "invece", "infatti", "anche", "mentre", "siccome", "perciò", "comunque", "dunque", "tuttavia", "allora", "cioè", "oppure"],
+    ["che", "cui", "chi", "il quale", "la quale"],
+    ["niente", "nessuno", "mai", "più", "neanche", "affatto", "mica"],
+    ["molto", "molta", "molti", "molte", "tanto", "troppo", "poco", "poca", "pochi", "poche"],
+    ["sempre", "mai", "spesso", "già", "ancora", "appena", "ormai", "subito"]
+  ];
   function wordVariants(it) {
-    var ans = String(it.answer || "").trim(), low = ans.toLowerCase(), out = [];
+    var ans = String(it.answer || "").trim().replace(/’/g, "'"), low = ans.toLowerCase(), out = [];
     if (!ans || /\s/.test(ans) || ans.length < 2) return out;
     var push = function (v) { if (v && v.toLowerCase() !== low && out.indexOf(v) < 0) out.push(v); };
     if (ART_SG.indexOf(low) >= 0) shuffle(ART_SG).forEach(push);
     else if (ART_PL.indexOf(low) >= 0) shuffle(ART_PL).forEach(push);
     Object.keys(PREP_ART).forEach(function (p) { if (PREP_ART[p].indexOf(low) >= 0) shuffle(PREP_ART[p]).forEach(push); });
+    // A word of a closed class: the other members of the class (dove →
+    // quando, come, quanto; ma → però, quindi), never another verb.
+    WORD_CLASSES.forEach(function (cl) { if (cl.indexOf(low) >= 0) shuffle(cl).forEach(push); });
+    // An imperative or infinitive with a pronoun glued on (Fagli, Lasciala):
+    // the same verb with the other pronouns.
+    var cm = /^(.{2,}?)(glielo|gliela|gli|lo|la|li|le|ne)$/.exec(low);
+    if (cm && /_{3,}/.test(it.stem || "") && out.length < 3) {
+      var st = cm[1], mono = /^(fa|da|di|sta|va)$/.test(st.replace(/(.)\1$/, "$1"));
+      var st1 = st.replace(/([lnm])\1$/, "$1");
+      ["lo", "la", "li", "le", "gli", "ne"].forEach(function (c) {
+        if (c === cm[2]) return;
+        var v = (mono && c !== "gli" ? st1 + c.charAt(0) : st1) + c;
+        push(ans[0] !== low[0] ? v.charAt(0).toUpperCase() + v.slice(1) : v);
+      });
+    }
     if (out.length >= 3) return out;
     // Only for nouns, adjectives and articles: a verb form with another
     // vowel («siame» for «siamo») is not a form anybody writes, and the
@@ -192,6 +224,10 @@
     // The word in the stem («fantasma → ___», «(parco)»): left unchanged, or
     // with the Spanish plural; then the answer with another ending vowel,
     // then without its double consonant.
+    var itaW = root.Diagnosi && root.Diagnosi.util ? root.Diagnosi.util.isItalian : null;
+    // «(mamá)», «(amiga)»: a Spanish gloss is not the word to transform.
+    if (base && /[áéíóúñ]/.test(base)) base = null;
+    if (base && itaW && !itaW(base.toLowerCase())) base = null;
     if (base && base.toLowerCase() !== low) { push(base); push(base + "s"); }
     var stem = ans.replace(/[aeio]$/, "");
     if (stem !== ans) shuffle(["a", "e", "i", "o"]).forEach(function (v) { push(stem + v); });
@@ -212,13 +248,41 @@
     }
     // 0. the alternatives the prompt itself names («o» (conjunción) o «ho»
     //    (verbo)): that contrast is the whole point of the exercise
-    (String(it.prompt || "").match(/«([^»]{1,20})»/g) || []).forEach(function (q) { add(q.replace(/[«»]/g, "")); });
-    // 0b. a book conjugation item: the other answers asked with the same
-    //     prompt are the other persons of the same verb
-    if (it.type === "conjugate" && pool && opts.length < 3) {
-      shuffle(pool.filter(function (x) {
-        return x && x.id !== it.id && x.type === "conjugate" && x.prompt === it.prompt && x.answer && !/\|/.test(x.answer);
-      })).forEach(function (x) { if (opts.length < 3) add(String(x.answer)); });
+    //    (only for a one- or two-word answer: a sentence is not «o» or «ho»)
+    var itaQ = root.Diagnosi && root.Diagnosi.util ? root.Diagnosi.util.isItalian : function () { return true; };
+    if (answer.trim().split(/\s+/).length <= 2)
+      (String(it.prompt || "").match(/«([^»]{1,20})»/g) || []).forEach(function (q) {
+        q = q.replace(/[«»]/g, "");
+        // «vos», «usted»: Spanish named in the prompt is not an option
+        if (q.split(/\s+/).every(function (w) { return itaQ(w.toLowerCase().replace(/’/g, "'")); })) add(q);
+      });
+    // 0b. a verb in parentheses («Tu ___ (frequentare)»): the other persons
+    //     of that same verb in the same tense, never another verb.
+    var infM = /\(([a-zà-ù]+(?:are|ere|ire|rre|rsi))\)/i.exec(it.stem || "");
+    if (infM && Conj && opts.length < 3) {
+      var inf = infM[1].toLowerCase(), forms = null;
+      if (!Conj.VERBS[inf]) { try { Conj.register(inf, {}); } catch (e) { /* */ } }
+      (Conj.ALL_TENSES || Conj.SIMPLE_TENSES).forEach(function (t) {
+        if (forms) return;
+        try {
+          var f = Conj.conjugate(inf, t);
+          if (f.some(function (x) { return norm(x) === norm(answer) || norm(x.split(" ").slice(1).join(" ")) === norm(answer) || norm(x.split(" ").pop()) === norm(answer); })) forms = f;
+        } catch (e) { /* */ }
+      });
+      var multi = answer.trim().split(/\s+/).length;
+      addForms(forms, multi);
+    }
+    // 0c. a conjugated form without the infinitive in sight (___ brutto
+    //     tempo → fa): the other persons of the verb the answer belongs to.
+    if (!infM && it.type === "conjugate" && Conj && root.Diagnosi && opts.length < 3) {
+      var vf = root.Diagnosi.verbForms(norm(answer).split(" ").pop())[0];
+      if (vf) { try { addForms(Conj.conjugate(vf.lemma, vf.tense), answer.trim().split(/\s+/).length); } catch (e) { /* */ } }
+    }
+    function addForms(forms, multi) {
+      if (forms) shuffle(forms).forEach(function (x) {
+        var xs = x.split(" ");
+        if (opts.length < 3) add(xs.length > multi ? xs.slice(xs.length - multi).join(" ") : x);
+      });
     }
     // 1. conjugation: the same verb in other persons
     if (it.src === "coniugatore" && Conj) {
@@ -229,7 +293,11 @@
     }
     // 2. the typical errors on the answer itself
     if (opts.length < 3 && Lez) {
-      Lez.traps(answer, Math.random, week || 52).slice(0, 3).forEach(add);
+      var itaOk = root.Diagnosi && root.Diagnosi.util ? root.Diagnosi.util.isItalian : null;
+      var tr = Lez.traps(answer, Math.random, week || 52, itaOk);
+      tr.slice(0, 3).forEach(add);
+      // Only one mistake possible: the next option carries two.
+      if (opts.length < 2 && tr.length) Lez.traps(tr[0], Math.random, week || 52, itaOk).slice(0, 2).forEach(add);
     }
     // 2b. the same word in another shape (never another word that merely
     //     looks like a plural next to the only plural of the right word)
@@ -251,8 +319,14 @@
         var xa = String(x.answer);
         if (it.topic && x.topic && x.topic !== it.topic) return false;
         if (short) return xa.indexOf(" ") < 0 && Math.abs(xa.length - len) <= 2;
+        // One word in a gap tests a rule: only a near miss of the same word.
+        if (nWords === 1 && /_{3,}/.test(it.stem || "") && xa.indexOf(" ") < 0 &&
+            Engine && Engine.editDistance && Engine.editDistance(norm(xa), norm(answer)) > Math.max(2, answer.length / 2)) return false;
         // «la gente» against «le genti» or «la casa», never against «appena»
         if (nWords <= 3 && xa.trim().split(/\s+/).length !== nWords) return false;
+        // Another sentence only if it shares half the words: otherwise its
+        // meaning gives the right one away.
+        if (nWords >= 2 && shared(xa) < Math.ceil(nWords / 2)) return false;
         return Math.abs(xa.length - len) <= Math.max(4, len / 2);
       });
       shuffle(cands).sort(function (a, b) { return shared(b.answer) - shared(a.answer); })
@@ -433,11 +507,63 @@
     return withWordIntros(firstRecognize(shuffle(out).slice(0, size), opts.state, week.week, bookItems), opts.state);
   }
 
+  /* How badly the learner knows an item: a card that went back to zero or
+     lost ease is weak; one never seen is unknown; a retired one is known. */
+  function weakness(state, id) {
+    var c = state && state.cards && state.cards[id];
+    if (!c) return 1;
+    if (Engine && Engine.retired && Engine.retired(c)) return 0;
+    if (c.reps === 0 && c.seen) return 3;
+    if ((c.ease || 2.5) < 2.3) return 2;
+    return 0.5;
+  }
+
+  /* The season a boss closes (or the one a week belongs to). */
+  function seasonWeeks(course, week) {
+    var s = (course.seasons || []).filter(function (x) { return week.week >= x.weeks[0] && week.week <= x.weeks[1]; })[0];
+    return s ? s.weeks : [1, week.week];
+  }
+
+  /* Before the boss: the season's items the learner failed (first) or has
+     not met yet, from the weeks where the accuracy was lowest. */
+  function weakItems(course, week, state, map) {
+    map = map || itemsById(course);
+    var sw = seasonWeeks(course, week), out = [], seen = {};
+    course.weeks.forEach(function (w) {
+      if (w.week < sw[0] || w.week > week.week) return;
+      (w.items || []).forEach(function (id) {
+        var it = map[id];
+        if (!it || seen[id] || it.type === "listen") return;
+        seen[id] = 1;
+        var k = weakness(state, id);
+        if (k >= 2) out.push({ it: it, k: k });
+      });
+    });
+    return out.sort(function (a, b) { return b.k - a.k; }).map(function (x) { return x.it; });
+  }
+
+  function buildWeak(course, week, state, opts) {
+    opts = opts || {};
+    var map = opts.map || itemsById(course), size = opts.size || 15;
+    var out = shuffle(weakItems(course, week, state, map).slice(0, size * 2)).slice(0, size);
+    if (out.length < size) {
+      var sw = seasonWeeks(course, week), have = {};
+      out.forEach(function (it) { have[it.id] = 1; });
+      var rest = [];
+      course.weeks.forEach(function (w) {
+        if (w.week < sw[0] || w.week > week.week) return;
+        (w.items || []).forEach(function (id) { if (map[id] && !have[id] && map[id].type !== "listen") { have[id] = 1; rest.push(map[id]); } });
+      });
+      pickFresh(rest, size - out.length, state).forEach(function (it) { out.push(it); });
+    }
+    return firstRecognize(out, state, week.week);
+  }
+
   /* Il boss pesca da tutte le settimane già sbloccate, non solo dall'ultima. */
   function buildBoss(course, week, state, opts) {
     opts = opts || {};
     var size = opts.size || (week.week === 52 ? 40 : 25);
-    var map = itemsById(course);
+    var map = opts.map || itemsById(course);
     // Half from the season it closes, a quarter from the one before, the
     // rest from anywhere earlier: the C1 exam examines C1, not «io sono».
     var season = (course.seasons || []).filter(function (s) { return week.week >= s.weeks[0] && week.week <= s.weeks[1]; })[0];
@@ -455,16 +581,27 @@
     });
     // Inside a season, one week at a time in turn: the boss of week 13 asks
     // about every week of the season, not thirteen times about essere.
+    // A week the learner got wrong more often gets more turns (up to three
+    // per round), and inside each week what was failed comes first.
+    var accOf = function (wk) {
+      var ws = (state && state.weekStats && state.weekStats[wk]) || {};
+      return ws.attempts >= 10 ? ws.right / ws.attempts : 0.85;
+    };
     var byWeek = function (pool, n) {
       var groups = {};
       pool.forEach(function (it) { (groups[it.wk || 0] = groups[it.wk || 0] || []).push(it); });
-      var keys = shuffle(Object.keys(groups)), picked = [], k = 0;
-      keys.forEach(function (key) { groups[key] = shuffle(groups[key]); });
-      while (picked.length < n && keys.length) {
-        var key = keys[k % keys.length];
-        if (groups[key].length) picked.push(groups[key].pop());
-        else { keys.splice(k % keys.length, 1); continue; }
-        k++;
+      var keys = shuffle(Object.keys(groups)), picked = [], turns = [];
+      keys.forEach(function (key) {
+        groups[key] = shuffle(groups[key]).sort(function (a, b) { return weakness(state, a.id) - weakness(state, b.id); });
+        var miss = 1 - accOf(+key);
+        var t = miss > 0.3 ? 3 : miss > 0.2 ? 2 : 1;
+        for (var x = 0; x < t; x++) turns.push(key);
+      });
+      var k = 0;
+      while (picked.length < n && turns.length) {
+        var key = turns[k % turns.length];
+        if (groups[key].length) { picked.push(groups[key].pop()); k++; }
+        else turns = turns.filter(function (t) { return t !== key; });
       }
       return picked;
     };
@@ -678,6 +815,8 @@
     recognitionOf: recognitionOf,
     pickFresh: pickFresh,
     buildBoss: buildBoss,
+    buildWeak: buildWeak,
+    weakItems: weakItems,
     buildReview: buildReview,
     mastered: mastered,
     coverage: coverage,

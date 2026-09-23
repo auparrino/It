@@ -60,28 +60,60 @@
               ["oso", "osa"], ["osi", "ose"], ["ivo", "iva"], ["ico", "ica"], ["ale", "ali"], ["ente", "enti"]];
   /* week: the traps test only what has been taught by then (articles from
      week 3, the auxiliary from week 11, articulated prepositions from 3). */
-  function traps(sentence, rnd, week) {
+  // Another articulated preposition of the same family (del → della, dello).
+  var PREP_FAM = [["al", "allo", "alla", "all'", "ai", "agli", "alle"], ["del", "dello", "della", "dell'", "dei", "degli", "delle"],
+                  ["nel", "nello", "nella", "nell'", "nei", "negli", "nelle"], ["dal", "dallo", "dalla", "dall'", "dai", "dagli", "dalle"],
+                  ["sul", "sullo", "sulla", "sull'", "sui", "sugli", "sulle"]];
+  var SWAP_END = { o: "a", a: "o", e: "i", i: "e" };
+  // The simple preposition a Spanish speaker puts instead (en → in, a Roma).
+  var PREP_SWAP = { a: ["in", "da"], "in": ["a"], da: ["a", "di"], di: ["da", "de"], su: ["in"], per: ["a", "da"], con: ["di"], fra: ["in", "a"], tra: ["in", "a"] };
+  var PRON_SWAP = { io: ["tu", "me"], tu: ["te", "io"], me: ["mi", "io"], te: ["ti", "tu"], noi: ["ci", "voi"], voi: ["vi", "noi"] };
+  var DEACC = { "à": "a", "è": "e", "é": "e", "ì": "i", "ò": "o", "ù": "u" };
+  function traps(sentence, rnd, week, isItalian) {
     week = week || 52;
     var toks = sentence.split(" ");
-    var cands = [];
+    var rule = [], loose = [];
     toks.forEach(function (t, i) {
       var m = t.match(/^([«"(]*)([A-Za-zÀ-ÿ']+)([.,;:!?»")]*)$/);
       if (!m) return;
       var w = m[2], low = w.toLowerCase();
-      var put = function (nw) {
+      if (i > 0 && w[0] !== low[0]) return;          // a name (Roma, Marco) stays as it is
+      var put = function (nw, bag) {
         if (w[0] !== low[0]) nw = nw.charAt(0).toUpperCase() + nw.slice(1);
-        var c = toks.slice(); c[i] = m[1] + nw + m[3]; cands.push(c.join(" "));
+        var c = toks.slice(); c[i] = m[1] + nw + m[3]; (bag || rule).push(c.join(" "));
       };
       var next = (toks[i + 1] || "").toLowerCase();
       if (week >= 11 && AUX[low] && /(at|ut|it|ss|tt|rt|st|nt|ls|lt)[oaie]\b/.test(next)) put(AUX[low]);
       if (week >= 3 && ART[low] && toks[i + 1]) put(ART[low]);
       if (week >= 3 && SPLIT[low]) put(SPLIT[low]);
+      if (PREP_SWAP[low] && toks[i + 1]) put(PREP_SWAP[low][Math.floor(rnd() * PREP_SWAP[low].length)]);
+      if (PRON_SWAP[low]) put(PRON_SWAP[low][Math.floor(rnd() * PRON_SWAP[low].length)]);
+      if (week >= 3) PREP_FAM.forEach(function (fam) {
+        if (fam.indexOf(low) < 0) return;
+        var vow = /^[aeiouàèéìòùh]/.test(next);
+        var alt = fam.filter(function (x) { return x !== low && !/'$/.test(x) && (!vow || !/^(al|del|nel|dal|sul|allo|dello|nello|dallo|sullo|alla|della|nella|dalla|sulla)$/.test(x)); });
+        if (alt.length) put(alt[Math.floor(rnd() * alt.length)]);
+      });
+      if (low === "è") put("e");
+      if (/[àèéìòù]$/.test(low) && low.length > 2) put(low.slice(0, -1) + DEACC[low.slice(-1)]);
       if (/([bcdfglmnprstvz])\1/.test(low) && low.length > 4) put(low.replace(/([bcdfglmnprstvz])\1/, "$1"));
+      var done = false;
       if (low.length > 4) for (var k = 0; k < ENDS.length; k++) {
-        if (low.slice(-ENDS[k][0].length) === ENDS[k][0]) { put(low.slice(0, -ENDS[k][0].length) + ENDS[k][1]); break; }
+        if (low.slice(-ENDS[k][0].length) === ENDS[k][0]) { put(low.slice(0, -ENDS[k][0].length) + ENDS[k][1]); done = true; break; }
       }
+      // The same word with the other ending (pane → pana, simpatiche →
+      // simpatichi): wrong in the same way a learner is wrong, never
+      // another sentence.
+      // «Marco …»: maybe a name, no spelling games (unless the dictionary knows it)
+      var capStart = w[0] !== low[0] && !(isItalian && isItalian(low));
+      if (!done && !capStart && low.length > 3 && SWAP_END[low.slice(-1)] && !/^(sono|come|dove|anche|molto|questo|questa|quando|perché|nostro|nostra)$/.test(low))
+        put(low.slice(0, -1) + SWAP_END[low.slice(-1)], loose);
+      if (!capStart && /^[^aeiou]*[aeiou][lmnrt][aeiou]/.test(low) && low.length > 3 && low.length < 8)
+        put(low.replace(/^([^aeiou]*[aeiou])([lmnrt])/, "$1$2$2"), loose);
     });
-    return uniq(shuffle(cands, rnd)).filter(function (c) { return c !== sentence; });
+    var clean = function (l) { return uniq(shuffle(l, rnd)).filter(function (c) { return c !== sentence; }); };
+    var r = clean(rule);
+    return r.concat(clean(loose).filter(function (c) { return r.indexOf(c) < 0; }));
   }
 
   // «¿Cómo se dice…?» from one of the block's examples.
@@ -103,14 +135,23 @@
              options: shuffle(opts, rnd) };
   }
 
-  function exQuestion(lesson, b, rnd, week) {
+  function exQuestion(lesson, b, rnd, week, isItalian) {
     var pool = allEx(lesson);
     var mine = (b.ex || []).map(function (p) { return [strip(p[0]), strip(p[1])]; })
       .filter(translation);
     if (!mine.length) return pairQuestion(b, rnd);
     var pick = mine[Math.floor(rnd() * mine.length)];
     var known = {}; pool.forEach(function (p) { known[p[0].toLowerCase()] = 1; });
-    var tr = traps(pick[0], rnd, week).filter(function (t) { return !known[t.toLowerCase()]; }).slice(0, 2);
+    var tr = traps(pick[0], rnd, week, isItalian).filter(function (t) { return !known[t.toLowerCase()]; }).slice(0, 2);
+    // Only one mistake possible: the second option carries two.
+    if (tr.length === 1) {
+      var t2 = traps(tr[0], rnd, week, isItalian).filter(function (t) {
+        return t !== pick[0] && t.toLowerCase() !== tr[0].toLowerCase() && !known[t.toLowerCase()];
+      })[0];
+      if (t2) tr.push(t2);
+    }
+    // Always the same sentence with a mistake in it: other sentences of the
+    // block give the answer away by their meaning, not by the rule.
     if (tr.length === 2) {
       return { kind: "trap", prompt: "¿Cuál está bien? «" + pick[1] + "»", stem: "", answer: pick[0],
                options: shuffle([pick[0]].concat(tr), rnd) };
@@ -127,6 +168,9 @@
     var others = uniq(shuffle(pool, rnd).map(function (p) { return p[0]; })
       .filter(function (x) { return x.toLowerCase() !== pick[0].toLowerCase(); })
       .sort(function (a, b) { return sim(b) - sim(a); })).slice(0, 2);
+    // Another sentence of the block is a distractor only if it shares most of
+    // the words: otherwise the meaning gives the answer away, not the rule.
+    others = others.filter(function (x) { return sim(x) >= mw.length; });
     if (others.length < 2) return null;
     return { kind: "ex", prompt: "¿Cómo se dice en italiano?", stem: pick[1], answer: pick[0],
              options: shuffle([pick[0]].concat(others), rnd) };
@@ -193,6 +237,17 @@
              answer: p.cell, options: shuffle([p.cell].concat(shuffle(p.col, rnd).slice(0, 2)), rnd) };
   }
 
+  // A check written by hand in tools/lessons («q»), for the blocks whose
+  // text gives the generators nothing to work with (advice, a rule without
+  // Italian forms, a table of labels).
+  function handQuestion(b, rnd) {
+    var qs = b.q || [];
+    if (!qs.length) return null;
+    var q = qs[Math.floor(rnd() * qs.length)];
+    return { kind: "hand", prompt: q.prompt, stem: q.stem || "", answer: q.answer,
+             options: shuffle(q.options.slice(), rnd) };
+  }
+
   // The playable sequence: intro, then each block followed by its check.
   function steps(lesson, rnd, week, isItalian, only) {
     rnd = rnd || Math.random;
@@ -206,8 +261,9 @@
         out.push({ kind: "block", i: i, part: "a" });
         out.push({ kind: "block", i: i, part: "b" });
       } else out.push({ kind: "block", i: i });
-      var q = (b.table && tableQuestion(b, rnd)) || (b.ex && exQuestion(lesson, b, rnd, week)) ||
-              (!b.table && !(b.ex && b.ex.length) && ruleQuestion(lesson, b, rnd, isItalian));
+      var q = (b.table && tableQuestion(b, rnd)) || (b.ex && exQuestion(lesson, b, rnd, week, isItalian)) ||
+              (!b.table && ruleQuestion(lesson, b, rnd, isItalian)) ||
+              handQuestion(b, rnd);
       if (q) { q.block = i; out.push({ kind: "quiz", q: q }); }
     });
     return out;

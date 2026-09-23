@@ -2067,7 +2067,9 @@
     "type": "translate",
     "stem": "Hai bisogno di aiuto? – (No, gracias, no necesito.) (avere bisogno di)",
     "answer": "No grazie, non ne ho bisogno.",
-    "alt": [],
+    "alt": [
+     "No, grazie, non ne ho bisogno."
+    ],
     "note": "«Ne» reemplaza «di aiuto»."
    },
    {

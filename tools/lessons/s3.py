@@ -9,6 +9,7 @@ LESSONS = {
          "dentro de la frase.",
 "blocks": [
  {"h": "Formación en -mente",
+  "q": [{"prompt": "Formá el adverbio.", "stem": "facile → ___", "answer": "facilmente", "options": ["facilmente", "facilemente", "facilamente"]}, {"prompt": "Formá el adverbio.", "stem": "lento → ___", "answer": "lentamente", "options": ["lentamente", "lentomente", "lentemente"]}],
   "r": "Femenino singular del adjetivo + *-mente*: *lento → lentamente*. Los "
        "terminados en *-e* lo agregan directo: *veloce → velocemente*.",
   "ex": [["vero → veramente", "verdaderamente"],
@@ -65,6 +66,12 @@ LESSONS = {
 "intro": "Los conectivos convierten una lista de oraciones en un texto: son "
          "la diferencia visible entre un A2 y un B1. Esta semana aprendés a "
          "sumar, oponer, explicar causas y ordenar.",
+"parts": [
+ {"h": "Sumar, oponer, causa y tiempo", "blocks": [0, 1, 2],
+  "match": r"^(?!.*(subordinante|condición|congiuntivo|concesivo|intrusa)).*(conjunción|conector|Contrastar|equivalente)"},
+ {"h": "Ordenar un argumento; conectores con congiuntivo", "blocks": [3, 4],
+  "match": r"subordinante|condición|concesivo|intrusa"},
+],
 "blocks": [
  {"h": "Sumar, oponer, corregir",
   "r": "*e* suma, *ma* opone, *invece* contrasta dos sujetos. Ante vocal, "
@@ -298,6 +305,7 @@ LESSONS = {
          "antes, a la vez o después?",
 "blocks": [
  {"h": "El cuadro con congiuntivo",
+  "q": [{"prompt": "Principal en pasado, acción anterior.", "stem": "Credevo che Marco ___ già partito.", "answer": "fosse", "options": ["fosse", "sia", "sarebbe"]}, {"prompt": "Principal en pasado, acción posterior.", "stem": "Credevo che Marco ___ il giorno dopo.", "answer": "sarebbe partito", "options": ["sarebbe partito", "partisse", "parta"]}],
   "r": "Elegí la forma según **el principal** (presente o pasado) y **el "
        "momento** de la subordinada (antes, a la vez, después).",
   "table": {"head": ["Principal", "Anterior", "Simultáneo", "Posterior"],
@@ -320,6 +328,7 @@ LESSONS = {
            "viste en la semana 31."]},
 
  {"h": "Con indicativo, la misma lógica",
+  "q": [{"prompt": "Principal en pasado, acción simultánea.", "stem": "Sapevo che Luca ___ a Milano.", "answer": "abitava", "options": ["abitava", "abita", "abiterà"]}, {"prompt": "Principal en presente, acción posterior.", "stem": "So che domani Luca ___.", "answer": "partirà", "options": ["partirà", "partiva", "sarebbe partito"]}],
   "r": "Sin congiuntivo también hay concordancia. Principal en presente: "
        "passato prossimo, presente, futuro. En pasado: trapassato, "
        "imperfetto, condizionale passato.",
@@ -339,6 +348,12 @@ LESSONS = {
 33: {
 "intro": "El período hipotético: tres tipos y una prohibición. Si lo tenés "
          "automatizado, tenés el B2.",
+"parts": [
+ {"h": "Realidad y posibilidad", "blocks": [0, 1],
+  "match": r"indicativo|congiuntivo imperfetto|imperfecto del subjuntivo|irrealtà nel presente|\(realtà\)"},
+ {"h": "Irrealidad en el pasado, mixtos y otras formas", "blocks": [2, 3, 4],
+  "match": r"trapassato|pluscuamperfecto|misto"},
+],
 "blocks": [
  {"h": "Los tres tipos",
   "r": "**I** real: indicativo. **II** posible o irreal: congiuntivo "
@@ -389,6 +404,12 @@ LESSONS = {
 34: {
 "intro": "Los relativos alargan la frase sin romperla. *che* sirve para casi "
          "todo, hasta que aparece una preposición.",
+"parts": [
+ {"h": "che, cui, il cui", "blocks": [0, 1, 2],
+  "match": r"^(?!.*(\bquale\b|lo que|\bchi\b|quello che|il che|refrán|familia)).*\S"},
+ {"h": "il quale, chi y «lo que»", "blocks": [3, 4, 5],
+  "match": r"quale|lo que|\bchi\b"},
+],
 "blocks": [
  {"h": "che: sin preposición",
   "r": "*che* es invariable: personas y cosas, sujeto u objeto directo. "
@@ -476,6 +497,7 @@ LESSONS = {
          "que»."},
 
  {"h": "Cuándo conviene evitarla",
+  "q": [{"prompt": "¿Cuál es lo más natural? «Se dice que va a llover.»", "answer": "Si dice che pioverà.", "options": ["Si dice che pioverà.", "È detto che pioverà.", "Viene detto che pioverà."]}],
   "r": "Si el agente no importa, lo natural suele ser el *si passivante* "
        "(semana 36) o la tercera plural impersonal: *dicono che...* (dicen "
        "que...).",
@@ -620,6 +642,7 @@ LESSONS = {
   "ex": [["«Vengo qui domani» → Disse che sarebbe andato lì il giorno dopo.", "Dijo que iría allá al día siguiente."]]},
 
  {"h": "Preguntas indirectas",
+  "q": [{"prompt": "¿Cuál está bien? «Me preguntó si iba.»", "answer": "Mi chiese se venissi.", "options": ["Mi chiese se venissi.", "Mi chiese se vengo.", "Mi chiese che venissi."]}, {"prompt": "Completá: «No sé si es cierto.»", "stem": "Non so ___ sia vero.", "answer": "se", "options": ["se", "si", "che"]}],
   "r": "Van con *se* (si) o con la palabra interrogativa. El italiano culto "
        "suele poner **congiuntivo**, sobre todo con *chiedere* y verbos de "
        "duda.",
@@ -648,8 +671,15 @@ LESSONS = {
 "intro": "Jefe de la tercera estación: congiuntivo y concordancia, "
          "hipotéticos, pasiva y *si*, relativos, passato remoto y discurso "
          "indirecto. Esta es tu hoja de repaso.",
+"parts": [
+ {"h": "Repaso: congiuntivo e hipotético", "blocks": [0, 1],
+  "match": r"congiuntivo|subjuntivo|«se»|condicional compuesto|condizionale passato|hipot"},
+ {"h": "Repaso: pasiva, si, remoto, discurso indirecto", "blocks": [2, 3, 4],
+  "match": r"\S"},
+],
 "blocks": [
  {"h": "Los cuatro congiuntivos",
+  "q": [{"prompt": "Principal en presente, acción anterior.", "stem": "Penso che Anna ___ ieri.", "answer": "sia partita", "options": ["sia partita", "partisse", "fosse partita"]}, {"prompt": "Principal en pasado, acción simultánea.", "stem": "Pensavo che Anna ___ a casa.", "answer": "fosse", "options": ["fosse", "sia", "sarà"]}],
   "r": "Elegí por **el tiempo del principal** y **el momento de la acción**. "
        "Lo posterior a un pasado va en condizionale passato.",
   "table": {"head": ["Tiempo", "Forma", "Cuándo"],
