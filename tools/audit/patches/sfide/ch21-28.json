@@ -193,7 +193,13 @@
     "type": "translate",
     "stem": "Tendría que salir a las tres pero no saqué el pasaje.",
     "answer": "Dovrei partire alle tre ma non ho fatto il biglietto.",
-    "alt": [],
+    "alt": [
+     "Dovrei partire alle tre, ma non ho fatto il biglietto.",
+     "Dovrei partire alle tre ma non ho comprato il biglietto.",
+     "Dovrei partire alle tre, ma non ho comprato il biglietto.",
+     "Dovrei partire alle tre ma non ho preso il biglietto.",
+     "Dovrei partire alle tre, ma non ho preso il biglietto."
+    ],
     "note": "Dovrei = tendría que: una obligación que quizás no se cumpla."
    },
    {
@@ -1020,14 +1026,14 @@
     "type": "choice",
     "stem": "No podés creer lo que escuchás:",
     "options": [
-     "Non dirmelo!",
+     "Non dimmelo!",
      "Non me lo dire!"
     ],
     "answer": "Non me lo dire!",
     "alt": [
      "Non dirmelo!"
     ],
-    "note": "«¡No me digas!»: las dos posiciones del pronombre son correctas en el imperativo negativo."
+    "note": "«¡No me digas!»: el imperativo negativo de tu es non + infinitivo (non me lo dire / non dirmelo); «non dimmelo» es incorrecto."
    },
    {
     "label": "c",
@@ -1798,7 +1804,9 @@
     "stem": "Silvana e Giorgio non hanno spedito il pacco? ___ (Es importante que lo manden mañana.)",
     "answer": "È importante che lo spediscano domani.",
     "alt": [
-     "È importante che loro lo spediscano domani."
+     "È importante che loro lo spediscano domani.",
+     "È importante che lo mandino domani.",
+     "È importante che loro lo mandino domani."
     ],
     "note": "È importante che + subjuntivo: spediscano (con -isc-)."
    },
@@ -2552,12 +2560,8 @@
    },
    {
     "label": "e",
-    "type": "choice",
-    "stem": "Mi rendo conto di quanto ___ dato da fare in questi giorni.",
-    "options": [
-     "si sia",
-     "si è"
-    ],
+    "type": "cloze",
+    "stem": "Mi rendo conto di quanto ___ dato da fare in questi giorni. (darsi, lui)",
     "answer": "si sia",
     "alt": [
      "si è"
@@ -2651,17 +2655,15 @@
    {
     "label": "g",
     "type": "choice",
-    "stem": "Sarebbe assurdo che pagasse lui.",
+    "stem": "Sarebbe assurdo che pagasse lui domani.",
     "options": [
      "futuro",
      "simultáneo",
      "pasado"
     ],
     "answer": "futuro",
-    "alt": [
-     "simultáneo"
-    ],
-    "note": "Imperfecto del subjuntivo tras condicional: acción hipotética posterior."
+    "alt": [],
+    "note": "Imperfecto del subjuntivo tras condicional: acción hipotética posterior (domani)."
    },
    {
     "label": "h",
@@ -3303,7 +3305,7 @@
     "stem": "Le finestre sono pulite ogni mese. → Le finestre ___ pulite ogni mese.",
     "answer": "vengono",
     "alt": [],
-    "note": "Venire marca la acción habitual en tiempos simples."
+    "note": "Venire (solo en tiempos simples) forma la pasiva de acción; acá la limpieza se hace cada mes."
    },
    {
     "label": "b",
@@ -3879,7 +3881,7 @@
   ]
  },
  "r27-02": {
-  "consigna": "Te mudás: ¿quién hace qué? Elegí a o da.",
+  "consigna": "Te mudás: ¿quién hace qué? Elegí a (alguien a quien le pedís un favor) o da (un profesional que presta el servicio).",
   "interactive": true,
   "items": [
    {
@@ -4485,19 +4487,16 @@
   ]
  },
  "r27-04d": {
-  "consigna": "Elegí entre stare a + infinitivo y stare + gerundio. En dos oraciones valen las dos.",
+  "consigna": "Elegí o completá con stare a + infinitivo o stare + gerundio. En las dos oraciones para escribir valen las dos formas.",
   "interactive": true,
   "items": [
    {
     "label": "a",
-    "type": "choice",
-    "stem": "Di solito mia nonna stava tutto il giorno ___ i pettegolezzi dei vicini.",
-    "options": [
-     "ad ascoltare",
-     "ascoltando"
-    ],
+    "type": "cloze",
+    "stem": "Di solito mia nonna stava tutto il giorno ___ (ascoltare) i pettegolezzi dei vicini.",
     "answer": "ad ascoltare",
     "alt": [
+     "a ascoltare",
      "ascoltando"
     ],
     "note": "Stare + expresión de tiempo + a + infinitivo; el gerundio también se admite."
@@ -4540,14 +4539,11 @@
    },
    {
     "label": "e",
-    "type": "choice",
-    "stem": "Mio nonno stava ___ mio cugino che chiacchierava su Skype con la sua ragazza.",
-    "options": [
-     "ad osservare",
-     "osservando"
-    ],
+    "type": "cloze",
+    "stem": "Mio nonno stava ___ (osservare) mio cugino che chiacchierava su Skype con la sua ragazza.",
     "answer": "ad osservare",
     "alt": [
+     "a osservare",
      "osservando"
     ],
     "note": "Stare seguido directamente del verbo admite las dos construcciones."
@@ -5035,7 +5031,9 @@
     "stem": "Participé en un congreso interesante.",
     "answer": "Ho partecipato a un convegno interessante.",
     "alt": [
-     "Ho partecipato ad un convegno interessante."
+     "Ho partecipato ad un convegno interessante.",
+     "Ho partecipato a un congresso interessante.",
+     "Ho partecipato ad un congresso interessante."
     ],
     "note": "Partecipare a (no «in»)."
    },
@@ -5044,7 +5042,10 @@
     "type": "translate",
     "stem": "Renuncié a la idea de mudarme. (rinunciare)",
     "answer": "Ho rinunciato all'idea di cambiare casa.",
-    "alt": [],
+    "alt": [
+     "Ho rinunciato all'idea di traslocare.",
+     "Ho rinunciato all'idea di trasferirmi."
+    ],
     "note": "Rinunciare a + algo."
    }
   ]

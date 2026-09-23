@@ -1175,13 +1175,13 @@
    {
     "label": "f",
     "type": "choice",
-    "stem": "Non è mai stato ___.",
-    "answer": "fuori d'Italia",
+    "stem": "Quando l'ha saputo era ___ dalla rabbia.",
+    "answer": "fuori di sé",
     "alt": [],
-    "note": "Con nombres de países, fuori lleva di (o da + artículo).",
+    "note": "Delante de un pronombre, fuori lleva di: fuori di sé.",
     "options": [
-     "fuori Italia",
-     "fuori d'Italia"
+     "fuori sé",
+     "fuori di sé"
     ]
    },
    {
@@ -1198,20 +1198,18 @@
    },
    {
     "label": "h",
-    "type": "choice",
-    "stem": "___ non riesco a lavorare.",
+    "type": "cloze",
+    "stem": "___ (sin vos) non riesco a lavorare.",
     "answer": "Senza di te",
-    "alt": [],
-    "note": "Delante de un pronombre, senza lleva di.",
-    "options": [
-     "Senza te",
-     "Senza di te"
-    ]
+    "alt": [
+     "Senza te"
+    ],
+    "note": "Delante de un pronombre, senza suele llevar di (senza di te); senza te también es correcto."
    }
   ]
  },
  "r15-02b": {
-  "consigna": "Completá con di, con a + artículo o solo con el artículo, según corresponda.",
+  "consigna": "Completá con di, con a (sola o con artículo) o solo con el artículo, según corresponda.",
   "interactive": true,
   "items": [
    {
@@ -4705,12 +4703,8 @@
     "answer": "Martedì, mentre Anna ascoltava la radio, Pietro ha preparato la cena.",
     "alt": [
      "Martedì mentre Anna ascoltava la radio Pietro ha preparato la cena.",
-     "Martedì, mentre Anna ascoltava la radio, Pietro preparava la cena.",
-     "Martedì mentre Anna ascoltava la radio Pietro preparava la cena.",
      "Martedì, mentre Anna ascoltava la radio, Pietro ha fatto la cena.",
-     "Martedì mentre Anna ascoltava la radio Pietro ha fatto la cena.",
-     "Martedì, mentre Anna ascoltava la radio, Pietro faceva la cena.",
-     "Martedì mentre Anna ascoltava la radio Pietro faceva la cena."
+     "Martedì mentre Anna ascoltava la radio Pietro ha fatto la cena."
     ],
     "note": "Mentre + imperfetto para la acción de fondo."
    },
@@ -4720,7 +4714,6 @@
     "stem": "El miércoles Anna limpió la casa mientras Pietro preparaba una clase. (una lezione)",
     "answer": "Mercoledì Anna ha pulito la casa mentre Pietro preparava una lezione.",
     "alt": [
-     "Mercoledì Anna puliva la casa mentre Pietro preparava una lezione.",
      "Mercoledì, Anna ha pulito la casa mentre Pietro preparava una lezione."
     ],
     "note": "Acción completa: passato prossimo; acción de fondo: imperfetto."

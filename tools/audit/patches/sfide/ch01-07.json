@@ -29,12 +29,8 @@
    },
    {
     "label": "c",
-    "type": "choice",
-    "stem": "___ un centinaio di ospiti. (Llegaron unos cien invitados.)",
-    "options": [
-     "È arrivato",
-     "Sono arrivati"
-    ],
+    "type": "cloze",
+    "stem": "___ un centinaio di ospiti. (Llegaron unos cien invitados.) (arrivare, passato prossimo)",
     "answer": "Sono arrivati",
     "alt": [
      "È arrivato"
@@ -1772,13 +1768,13 @@
     "options": [
      "lo",
      "gli",
-     "loro"
+     "le"
     ],
     "answer": "gli",
     "alt": [
      "loro"
     ],
-    "note": "A ellas = gli (delante del verbo) o loro (después: leggerò loro l'articolo)."
+    "note": "A ellas = gli (delante del verbo) o loro (después: leggerò loro l'articolo); le es solo singular (a lei)."
    },
    {
     "label": "f",
@@ -1787,13 +1783,13 @@
     "options": [
      "li",
      "gli",
-     "loro"
+     "le"
     ],
     "answer": "gli",
     "alt": [
      "loro"
     ],
-    "note": "Objeto indirecto plural: gli, o loro detrás del verbo."
+    "note": "Objeto indirecto plural: gli, o loro detrás del verbo; le es solo singular (a lei)."
    }
   ]
  },

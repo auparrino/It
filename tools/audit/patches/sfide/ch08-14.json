@@ -449,7 +449,7 @@
    {
     "label": "d",
     "type": "cloze",
-    "stem": "Ho pagato con ___ (mi propia) soldi.",
+    "stem": "Ho pagato con ___ (mis propios) soldi.",
     "answer": "i miei",
     "alt": [
      "i miei propri"
@@ -1559,7 +1559,14 @@
      "Quanto tempo ci mette ad arrivarci?",
      "Quanto impiega ad arrivarci?",
      "Quanto tempo impiega ad arrivarci?",
-     "Quanto ci mette per arrivarci?"
+     "Quanto ci mette per arrivarci?",
+     "Quanto ci mette ad arrivare?",
+     "Quanto tempo ci mette ad arrivare?",
+     "Quanto ci mette per arrivare?",
+     "Quanto tempo impiega ad arrivare?",
+     "Quanto tempo impiega per arrivare?",
+     "Quanto impiega ad arrivare?",
+     "Quanto impiega per arrivare?"
     ],
     "note": "Quanto (tempo) ci mette / impiega para la duración."
    },
@@ -1729,15 +1736,12 @@
   "items": [
    {
     "label": "a",
-    "type": "choice",
+    "type": "cloze",
     "stem": "Dimmi ___ vuoi. (Decime qué querés.)",
-    "options": [
-     "che cosa",
-     "quello che",
-     "ciò che"
-    ],
     "answer": "che cosa",
     "alt": [
+     "cosa",
+     "che",
      "quello che",
      "ciò che"
     ],
@@ -1750,7 +1754,7 @@
     "options": [
      "che cosa",
      "quello che",
-     "ciò che"
+     "chi"
     ],
     "answer": "quello che",
     "alt": [
@@ -1824,18 +1828,18 @@
     "stem": "Non so ___ penna funziona. (No sé qué birome funciona.)",
     "options": [
      "quale",
-     "che"
+     "chi"
     ],
     "answer": "quale",
     "alt": [
      "che"
     ],
-    "note": "Interrogativo para elegir entre varias: quale (che es coloquial)."
+    "note": "Interrogativo para elegir entre varias cosas: quale (che es coloquial); chi solo se usa para personas."
    }
   ]
  },
  "r11-01": {
-  "consigna": "¿Cómo reaccionás? Elegí la exclamación más adecuada (puede haber más de una).",
+  "consigna": "¿Cómo reaccionás? Elegí la exclamación más adecuada.",
   "interactive": true,
   "items": [
    {
@@ -1843,15 +1847,15 @@
     "type": "choice",
     "stem": "Tus amigos te dicen que no pueden venir:",
     "options": [
-     "Che delusione!",
      "Che peccato!",
-     "Che noia!"
+     "Che noia!",
+     "Che fortuna!"
     ],
     "answer": "Che peccato!",
     "alt": [
      "Che delusione!"
     ],
-    "note": "Peccato y delusione expresan pena; noia es aburrimiento."
+    "note": "Peccato (o delusione) expresa pena; noia es aburrimiento y fortuna, suerte."
    },
    {
     "label": "b",
@@ -1859,14 +1863,14 @@
     "stem": "Perdiste el vuelo:",
     "options": [
      "Che guaio!",
-     "Che disastro!",
-     "Che sorpresa!"
+     "Che sorpresa!",
+     "Che fortuna!"
     ],
     "answer": "Che guaio!",
     "alt": [
      "Che disastro!"
     ],
-    "note": "Guaio y disastro son problemas; sorpresa no encaja."
+    "note": "Guaio (o disastro) es un problema; sorpresa y fortuna no encajan."
    },
    {
     "label": "c",
@@ -1874,14 +1878,14 @@
     "stem": "Tu amigo fue al lugar de encuentro equivocado:",
     "options": [
      "Che pasticcio!",
-     "Che rabbia!",
-     "Che meraviglia!"
+     "Che meraviglia!",
+     "Che bellezza!"
     ],
     "answer": "Che pasticcio!",
     "alt": [
      "Che rabbia!"
     ],
-    "note": "Pasticcio (lío) y rabbia (bronca); meraviglia es positivo."
+    "note": "Pasticcio (lío; también che rabbia!); meraviglia y bellezza son positivos."
    }
   ]
  },
@@ -2044,7 +2048,7 @@
   ]
  },
  "r11-06": {
-  "consigna": "¿Qué decís? Elegí la exclamación adecuada para cada situación (puede haber más de una).",
+  "consigna": "¿Qué decís? Elegí la exclamación adecuada para cada situación.",
   "interactive": true,
   "items": [
    {
@@ -2065,39 +2069,41 @@
     "type": "choice",
     "stem": "Qué raro, tu amigo no apareció.",
     "options": [
-     "Com'è strano!",
-     "Quant'è strano!",
-     "Che strano!"
+     "Che strana!",
+     "Che strano!",
+     "Com'è strana!"
     ],
     "answer": "Che strano!",
     "alt": [
      "Com'è strano!",
      "Quant'è strano!"
     ],
-    "note": "Che + adjetivo, o com'è / quant'è + adjetivo."
+    "note": "Para una situación, masculino neutro: che strano! (o com'è / quant'è strano!)."
    },
    {
     "label": "c",
     "type": "choice",
     "stem": "El helado está riquísimo.",
     "options": [
-     "Che squisito!",
+     "Che buona!",
      "Che buono!",
-     "Che gelato squisito!"
+     "Com'è buona!"
     ],
     "answer": "Che buono!",
     "alt": [
-     "Che gelato squisito!"
+     "Che gelato squisito!",
+     "Che squisito!",
+     "Com'è buono!"
     ],
-    "note": "Che buono! o che + sustantivo + adjetivo."
+    "note": "Gelato es masculino: che buono! (o che gelato squisito!)."
    },
    {
     "label": "d",
     "type": "choice",
     "stem": "Ese chico es muy capo.",
     "options": [
-     "Com'è bravo!",
-     "Quant'è bravo!",
+     "Com'è brava!",
+     "Che brava!",
      "Che bravo!"
     ],
     "answer": "Che bravo!",
@@ -2105,7 +2111,7 @@
      "Com'è bravo!",
      "Quant'è bravo!"
     ],
-    "note": "Con una persona sirven las tres formas."
+    "note": "Ragazzo es masculino: che bravo! (también com'è bravo! / quant'è bravo!)."
    }
   ]
  },
@@ -2922,7 +2928,7 @@
    {
     "label": "e",
     "type": "cloze",
-    "stem": "Sono stato a letto ___ (todo el) giornata.",
+    "stem": "Sono stato a letto ___ (toda la) giornata.",
     "answer": "tutta la",
     "alt": [],
     "note": "Giornata es femenino: tutta la giornata."
@@ -3358,7 +3364,7 @@
   ]
  },
  "r13-04": {
-  "consigna": "Traducí al italiano (tu). Ojo: en cuatro oraciones 'lo que' es relativo (quello che / ciò che); en las demás es exclamativo o interrogativo.",
+  "consigna": "Traducí al italiano (tu). Ojo: en cuatro oraciones 'lo que' es relativo (quello che / ciò che); en las demás, 'qué' es exclamativo o interrogativo.",
   "interactive": true,
   "items": [
    {
@@ -3671,7 +3677,7 @@
   ]
  },
  "r14-01b": {
-  "consigna": "La palabra justa para cada situación. Elegí la respuesta adecuada (en algunos casos sirven las dos).",
+  "consigna": "La palabra justa para cada situación. Elegí la respuesta adecuada.",
   "interactive": true,
   "items": [
    {
@@ -3691,14 +3697,14 @@
     "type": "choice",
     "stem": "Hai studiato il testo? –",
     "options": [
-     "Niente!",
+     "Meno male!",
      "Nient'affatto!"
     ],
     "answer": "Nient'affatto!",
     "alt": [
      "Niente!"
     ],
-    "note": "Nient'affatto = para nada; niente = no estudié nada."
+    "note": "Nient'affatto = para nada (también niente = no estudié nada); meno male = menos mal."
    },
    {
     "label": "c",
@@ -3729,28 +3735,28 @@
     "type": "choice",
     "stem": "Ti piacerebbe tornarci? –",
     "options": [
-     "Mai!",
-     "Mai più!"
+     "Mai più!",
+     "Meno male!"
     ],
     "answer": "Mai più!",
     "alt": [
      "Mai!"
     ],
-    "note": "Volver a un lugar: mai più (nunca más), o simplemente mai."
+    "note": "Volver a un lugar: mai più (nunca más), o simplemente mai; meno male = menos mal."
    },
    {
     "label": "f",
     "type": "choice",
     "stem": "È stato interessante? –",
     "options": [
-     "Assolutamente no!",
+     "Niente.",
      "Per niente!"
     ],
     "answer": "Per niente!",
     "alt": [
      "Assolutamente no!"
     ],
-    "note": "Per niente = para nada; assolutamente no es más tajante."
+    "note": "Per niente = para nada (assolutamente no es más tajante); niente = nada, no responde a la pregunta."
    },
    {
     "label": "g",
@@ -3758,13 +3764,13 @@
     "stem": "Hai capito? –",
     "options": [
      "Per niente!",
-     "Nient'affatto!"
+     "Mai più!"
     ],
     "answer": "Per niente!",
     "alt": [
      "Nient'affatto!"
     ],
-    "note": "Ambas significan 'para nada'."
+    "note": "Per niente (o nient'affatto) = para nada; mai più = nunca más."
    },
    {
     "label": "h",
@@ -3772,13 +3778,13 @@
     "stem": "Hai intenzione di pagare la multa? –",
     "options": [
      "Assolutamente no!",
-     "Mai!"
+     "Mica male!"
     ],
     "answer": "Assolutamente no!",
     "alt": [
      "Mai!"
     ],
-    "note": "Ambas rechazan con fuerza."
+    "note": "Assolutamente no (o mai!) rechaza con fuerza; mica male = nada mal."
    }
   ]
  },
