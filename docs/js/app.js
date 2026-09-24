@@ -553,7 +553,7 @@
 
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION in sw.js: test_game checks it). */
-  var APP_VERSION = "v40";
+  var APP_VERSION = "v41";
   function versionLine() {
     return '<p class="muted small version">La Via C1 · versión ' + APP_VERSION + "</p>";
   }
@@ -1119,7 +1119,9 @@
       var weak = Drills.weakItems(course, w, state, itemMap).length;
       m({ kind: "debil", done: !!(state.weakDone || {})[w.week], ico: "🩹", opt: true, title: "Tus puntos débiles",
           sub: weak ? "Opcional · " + weak + " ejercicios de la estación que fallaste o casi no viste" : "Opcional · no fallaste nada todavía: repaso al azar" });
-      m({ kind: "play", done: st.bossPassed, ico: "⚔️", title: "Vencé al jefe",
+      if (w.week === 52 && window.EsameData) m({ kind: "play", done: st.bossPassed, ico: "🎓", title: "Esame C1",
+          sub: "Cinco pruebas como en el CILS: ascolto, lettura, strutture, lessico, scrittura. Mínimo 55 % en cada una.", cls: "boss" });
+      else m({ kind: "play", done: st.bossPassed, ico: "⚔️", title: "Vencé al jefe",
           sub: "85% de aciertos. Pregunta más de lo que más te costó. Superarlo te da las 3 estrellas.", cls: "boss" });
       return out;
     }
@@ -1238,7 +1240,10 @@
     var w = course.weeks[view.week - 1];
     if (kind === "lez") startLezione(arg != null ? +arg : undefined);
     else if (kind === "vocab") startRound("vocab");
-    else if (kind === "play") startRound(w.boss ? "boss" : "round");
+    else if (kind === "play") {
+      if (w.week === 52 && window.EsameData) { view.screen = "esame"; render(); window.scrollTo(0, 0); }
+      else startRound(w.boss ? "boss" : "round");
+    }
     else if (kind === "play2") startRound("domina");
     else if (kind === "debil") startRound("debil");
     else if (kind === "scrivi") { view.screen = "scrivi"; render(); window.scrollTo(0, 0); }
@@ -1392,6 +1397,10 @@
     }
     else if (kind === "suoni") items = Suoni.session(state, Math.min(state.unlocked, 52), { silent: state.silent });
     else if (kind === "ritorno") items = ritornoItems();
+    else if (kind === "esame") {
+      var pool = course.items.filter(function (it) { return it.topic === "esame" && it.prova === arg; });
+      items = Drills.shuffle(pool).slice(0, arg === "strutture" ? 20 : 12);
+    }
     else if (kind === "micro") items = Drills.buildReview(course, state, 5, drillOpts());
     else if (kind === "b-voc") items = Banca.vocabSession(state, 12);
     else if (kind === "b-freq") items = Banca.vocabSessionFor(state, freqGaps(24), 12);
@@ -1819,7 +1828,7 @@
       if (inp0) { inp0.classList.remove("shake"); void inp0.offsetWidth; inp0.classList.add("shake"); inp0.focus(); }
       return;
     }
-    if (verdict === "sbagliato" && !round.tried && round.kind !== "boss" && d.hint && d.cat !== "vuoto") {
+    if (verdict === "sbagliato" && !round.tried && round.kind !== "boss" && round.kind !== "esame" && d.hint && d.cat !== "vuoto") {
       round.tried = true;
       round.lastGiven = String(given).trim();
       round.promptAt = Date.now();
@@ -1960,7 +1969,7 @@
       relearn = '<div class="note hyper">🎯 Estabas seguro y no era: los errores con confianza son los que mejor se corrigen ' +
         "si ahora mirás bien la regla. Te la vuelvo a preguntar en un rato y mañana a la mañana.</div>";
     }
-    if (q < 2 && round.kind !== "boss" && it.src !== "lettura" && !it.retry && !(round.again[it.id])) {
+    if (q < 2 && round.kind !== "boss" && round.kind !== "esame" && it.src !== "lettura" && !it.retry && !(round.again[it.id])) {
       round.again[it.id] = 1;
       var at = Math.min(round.items.length, round.i + 3);
       round.items.splice(at, 0, retryVersion(it));
@@ -2201,7 +2210,7 @@
                     scene: "Frases", vocab: "Palabras de la semana", lettura: "Lectura", sfida: "Sfida", ponte: "Ponte",
                     falsi: "Falsi amici", capire: "Capire", "b-voc": "Parole", "b-tr": "Traduci", "b-gap": "Coniuga in contesto",
                     "b-forme": "Forme", "b-err": "Trova l'errore", clinica: "Clínica", suoni: "Suoni", "b-freq": "Parole frecuentes",
-                    ritorno: "Cinco minutos para retomar", micro: "Ripasso 2 min" };
+                    ritorno: "Cinco minutos para retomar", micro: "Ripasso 2 min", esame: "Esame C1" };
   function pendingTitle(p) {
     if (p.type === "lezione") return "Lección · semana " + p.week + " · " + (p.i + 1) + "/" + p.steps.length;
     return (KIND_NAME[p.round.kind] || "Ronda") + " · " + (p.round.i + 1) + "/" + p.round.items.length;
@@ -2256,6 +2265,17 @@
     if (Engine.noteRecord(state, "parole", Engine.newWordsThisWeek(state))) records.push("🏅 Récord personal: " + Engine.newWordsThisWeek(state) + " palabras nuevas en una semana");
     if (Engine.noteRecord(state, "corrette", round.fixed || 0)) records.push("🏅 Récord personal: " + round.fixed + " errores corregidos por vos en una ronda");
 
+    if (round.kind === "esame") {
+      var firsts0 = round.log.filter(function (x) { return !x.retry; });
+      var okE = firsts0.filter(function (x) { return x.verdict === Engine.VERDICT.RIGHT; }).length;
+      esameSet(round.arg, okE, firsts0.length);
+      persist();
+      renderHeader();
+      view.screen = "esame";
+      render();
+      toast("Prova di " + round.arg + ": " + Math.round(okE / Math.max(1, firsts0.length) * 100) + " %", 3000);
+      return;
+    }
     var passed = false;
     if (round.kind === "boss") {
       passed = pct >= 85;
@@ -2937,6 +2957,10 @@
     else if (s === "scrivi") html = renderScrivi(course.weeks[view.week - 1]);
     else if (s === "dictogloss") html = renderDictogloss(course.weeks[view.week - 1]);
     else if (s === "parla") html = renderParla(course.weeks[view.week - 1]);
+    else if (s === "esame") html = renderEsame();
+    else if (s === "esame-asc") html = renderEsameAscolto();
+    else if (s === "esame-let") html = renderEsameLettura();
+    else if (s === "esame-scr") html = renderEsameScrittura();
     else if (s === "storia") html = renderStoria(course.weeks[view.week - 1]);
 
     var gb = $("#glossbox");
@@ -3110,6 +3134,7 @@
       else if (["ponte", "falsi", "capire", "scene", "b-voc", "b-forme", "b-tr", "b-gap", "b-err", "b-freq", "clinica", "suoni"].indexOf(round.kind) >= 0) go("frasi");
       else if (round.kind === "pausa" || round.kind === "review" || round.kind === "giorno" || round.kind === "ritorno" || round.kind === "micro") go("oggi");
       else if (round.kind === "sfida") { view.screen = "sfide"; render(); }
+      else if (round.kind === "esame") { view.screen = "esame"; render(); }
       else { view.screen = "briefing"; render(); }
     });
 
@@ -3165,6 +3190,7 @@
     wireLettura();
     wireParla();
     wireStoria();
+    wireEsame();
 
     document.querySelectorAll("[data-self]").forEach(function (b) {
       b.onclick = function () {
@@ -3613,6 +3639,251 @@
                  stem: sent.replace(new RegExp("(^|[^a-zà-ù])" + t + "(?![a-zà-ù])", "i"), "$1___"), options: Drills.shuffle(opts), answer: t, accept: [t] });
     });
     return out;
+  }
+
+  /* ------------------------------------------------------------------ esame */
+
+  /* The C1 exam, shaped like the CILS TRE-C1 / CELI 4 / PLIDA C1 (without
+     the oral part): a long listening with two voices, a long text with
+     paragraph-title matching and true/false, structures (rational cloze
+     and transformations), lexicon (word formation, register) and two
+     written texts graded with the rubric.  Each prova needs 55 %, like the
+     certifications; the exam passes with an average of 60 %. */
+  var PROVE = [["ascolto", "Ascolto", "🎧"], ["lettura", "Lettura", "📖"], ["strutture", "Strutture", "🧩"], ["lessico", "Lessico", "📚"], ["scrittura", "Scrittura", "✍️"]];
+  var es = null;   // transient state of the prova on screen
+  function esameSet(prova, ok, n) {
+    if (!state.esame) state.esame = {};
+    var pct = n ? Math.round(ok / n * 100) : 0, prev = state.esame[prova];
+    if (!prev || pct >= prev.pct) state.esame[prova] = { ok: ok, n: n, pct: pct, at: Date.now() };
+  }
+  function esameResult() {
+    var r = state.esame || {}, all = PROVE.every(function (p) { return r[p[0]]; });
+    if (!all) return null;
+    var sum = 0, minOk = true;
+    PROVE.forEach(function (p) { sum += r[p[0]].pct; if (r[p[0]].pct < 55) minOk = false; });
+    return { avg: Math.round(sum / PROVE.length), minOk: minOk, passed: minOk && sum / PROVE.length >= 60 };
+  }
+  function renderEsame() {
+    var r = state.esame || {}, res = esameResult(), st = weekStat(52);
+    var html = '<button class="btn ghost" id="eback">← a la semana</button>' +
+      '<h1 class="targa big"><span class="t-sup">Esame finale</span><span class="t-via">Livello C1</span></h1>' +
+      '<p class="lead">Cinco pruebas, como en el CILS: cada una necesita el <b>55 %</b> y el promedio, el 60 %. Podés hacerlas en el orden que quieras y repetir una.</p>' +
+      '<div class="missions">' + PROVE.map(function (p, k) {
+        var x = r[p[0]];
+        return '<button class="mission' + (x && x.pct >= 55 ? " done" : "") + '" data-prova="' + p[0] + '"><span class="mi">' + (x && x.pct >= 55 ? "★" : p[2]) + "</span>" +
+          "<span><b>" + (k + 1) + ". " + p[1] + "</b><small>" + (x ? x.pct + " % · " + x.ok + " / " + x.n + (x.pct < 55 ? " · por debajo del mínimo" : "") : {
+            ascolto: "una entrevista larga con dos voces · 8 preguntas y 4 huecos",
+            lettura: "un texto de 600 palabras · títulos por párrafo y vero/falso",
+            strutture: "20 huecos y transformaciones: preposiciones, congiuntivo, relativos, pasiva…",
+            lessico: "12 de formación de palabras y registro",
+            scrittura: "un argumentativo de 200 palabras y una carta formal de 120" }[p[0]]) + "</small></span><span class=\"go\">›</span></button>";
+      }).join("") + "</div>" +
+      (res ? '<div class="card"><div class="scorebig"><b>' + res.avg + " %</b><span>promedio</span></div>" +
+        (res.passed ? "<p>🎓 <b>Esame superato.</b> " + (st.bossPassed ? "Ya figura en tu percorso." : "") + "</p>" +
+          (!st.bossPassed ? '<button class="btn wide" id="econsegna">Registrar el resultado</button>' : "")
+          : "<p>" + (res.minOk ? "Falta llegar al 60 % de promedio." : "Alguna prueba está por debajo del 55 %: repetila.") + "</p>") + "</div>" : "") +
+      '<div class="row" style="margin-top:12px"><button class="tab" id="eboss">⚔️ Ronda clásica de jefe (práctica)</button></div>';
+    return html;
+  }
+  function wireEsame() {
+    var sc = view.screen;
+    if (sc === "esame") {
+      on("#eback", function () { view.tab = "percorso"; view.screen = "briefing"; render(); window.scrollTo(0, 0); });
+      on("#eboss", function () { startRound("boss"); });
+      document.querySelectorAll("[data-prova]").forEach(function (b) {
+        b.onclick = function () {
+          var p = b.dataset.prova;
+          es = { prova: p, plays: 0, answers: {} };
+          if (p === "strutture" || p === "lessico") startRound("esame", p);
+          else { view.screen = p === "ascolto" ? "esame-asc" : p === "lettura" ? "esame-let" : "esame-scr"; render(); window.scrollTo(0, 0); }
+        };
+      });
+      on("#econsegna", function () {
+        var ws = state.weekStats[52] || (state.weekStats[52] = { attempts: 0, right: 0, bossPassed: false });
+        ws.bossPassed = true;
+        gain(Engine.XP.boss);
+        var won = Engine.checkBadges(state);
+        persist(); renderHeader(); confetti();
+        toast("🎓 C1 registrado" + (won.length ? " · 🏅 " + won[0].name : ""), 4000);
+        render();
+      });
+      return;
+    }
+    if (sc === "esame-asc") wireEsameAscolto();
+    if (sc === "esame-let") wireEsameLettura();
+    if (sc === "esame-scr") wireEsameScrittura();
+  }
+  function esBack() { view.screen = "esame"; render(); window.scrollTo(0, 0); }
+
+  /* Ascolto: the interview is read turn by turn, two voices; two listenings. */
+  function renderEsameAscolto() {
+    var a = EsameData.ascolto[es.k != null ? es.k : (es.k = Math.floor(Math.random() * EsameData.ascolto.length))];
+    var head = '<button class="btn ghost" id="eback2">← al examen</button><h1>🎧 ' + esc(a.title) + "</h1>";
+    if (!es.done) {
+      return head + '<div class="card"><p class="muted">Vas a escuchar la grabación <b>dos veces</b>. Las preguntas se muestran ahora: leelas antes.</p>' +
+        '<div class="center"><button class="bigplay" id="eplay">🔊</button><p class="muted" id="estate">Escucha ' + Math.min(2, es.plays + 1) + " de 2</p></div>" +
+        esameQuestionsHtml(a) +
+        '<button class="btn wide" id="econsegna2">Consegnare</button></div>';
+    }
+    return head + esameProvaResult(a);
+  }
+  function esameQuestionsHtml(a) {
+    return '<ol class="equestions">' + a.questions.map(function (q, i) {
+      return "<li><b>" + esc(q[0]) + "</b>" + Drills.shuffle(q[1]).map(function (o) {
+        return '<label class="eopt"><input type="radio" name="q' + i + '" value="' + esc(o) + '"> ' + esc(o) + "</label>";
+      }).join("") + "</li>";
+    }).join("") + "</ol><h3>Completá con una palabra del audio</h3><ol class=\"equestions\">" + a.completa.map(function (c, i) {
+      return "<li>" + esc(c[0]) + ' <input class="egap" data-gap="' + i + '" autocapitalize="off" autocorrect="off" spellcheck="false"></li>';
+    }).join("") + "</ol>";
+  }
+  function esameProvaResult(a) {
+    var r = es.result;
+    return '<div class="card"><div class="scorebig"><b>' + r.pct + " %</b><span>" + r.ok + " / " + r.n + "</span></div>" +
+      (r.detail ? '<table class="res">' + r.detail.map(function (d) { return "<tr><td>" + esc(d[0]) + "</td><td>" + (d[1] ? "✓" : "✗ " + esc(d[2] || "")) + "</td></tr>"; }).join("") + "</table>" : "") +
+      (a.turns ? '<h3>La trascrizione</h3><p class="model it">' + a.turns.map(function (t) { return "<b>" + esc(a.speakers[t[0] === "A" ? 0 : 1]) + ":</b> " + esc(t[1]); }).join("<br>") + "</p>" : "") +
+      '<div class="row" style="margin-top:12px"><button class="btn" id="eback3">← Volver al examen</button></div></div>';
+  }
+  function wireEsameAscolto() {
+    on("#eback2", esBack); on("#eback3", esBack);
+    var a = EsameData.ascolto[es.k];
+    on("#eplay", function () {
+      var b = $("#eplay");
+      if (!b || b.disabled || es.plays >= 2) return;
+      b.disabled = true;
+      var i = 0;
+      (function next() {
+        if (i >= a.turns.length) { es.plays++; b.disabled = es.plays >= 2; var st = $("#estate"); if (st) st.textContent = es.plays >= 2 ? "Dos escuchas hechas" : "Escucha 2 de 2"; noteListening(a.turns.length * 12); return; }
+        var t = a.turns[i++];
+        speak(t[1], true, 1, { keep: true, pitch: t[0] === "A" ? 0.9 : 1.1, vi: t[0] === "A" ? 0 : 1, onend: next });
+      })();
+    });
+    on("#econsegna2", function () {
+      var ok = 0, detail = [];
+      a.questions.forEach(function (q, i) {
+        var sel = document.querySelector('input[name="q' + i + '"]:checked');
+        var right = !!sel && sel.value === q[2];
+        if (right) ok++;
+        detail.push([q[0], right, q[2]]);
+      });
+      a.completa.forEach(function (c, i) {
+        var inp = document.querySelector('[data-gap="' + i + '"]');
+        var right = !!inp && Engine.grade(inp.value, { answer: c[1], accept: [c[1]] }) !== "sbagliato";
+        if (right) ok++;
+        detail.push([c[0], right, c[1]]);
+      });
+      var n = a.questions.length + a.completa.length;
+      es.done = true; es.result = { ok: ok, n: n, pct: Math.round(ok / n * 100), detail: detail };
+      esameSet("ascolto", ok, n);
+      Engine.addStrand(state, "input", ok * 3); gain(ok * 3);
+      persist(); renderHeader(); render(); window.scrollTo(0, 0);
+    });
+  }
+
+  /* Lettura: a title for every paragraph (two titles too many), then true/false. */
+  function renderEsameLettura() {
+    var l = EsameData.lettura[es.k != null ? es.k : (es.k = Math.floor(Math.random() * EsameData.lettura.length))];
+    var head = '<button class="btn ghost" id="eback2">← al examen</button><h1>📖 ' + esc(l.title) + "</h1>";
+    if (es.done) return head + esameProvaResult(l);
+    return head + '<div class="card"><p class="muted">Elegí el título de cada párrafo (sobran dos) y después decidí si cada afirmación es vera o falsa.</p>' +
+      '<div class="text">' + l.paragraphs.map(function (p, i) {
+        return '<p><select class="etitle" data-par="' + i + '"><option value="">— título del párrafo ' + (i + 1) + " —</option>" +
+          l.titles.map(function (t, k) { return '<option value="' + k + '">' + esc(t) + "</option>"; }).join("") + "</select><br>" + esc(p) + "</p>";
+      }).join("") + "</div>" +
+      '<h3>Vero o falso</h3><ol class="equestions">' + l.vf.map(function (v, i) {
+        return "<li>" + esc(v[0]) + '<label class="eopt"><input type="radio" name="vf' + i + '" value="v"> vero</label><label class="eopt"><input type="radio" name="vf' + i + '" value="f"> falso</label></li>';
+      }).join("") + "</ol>" +
+      '<button class="btn wide" id="econsegna3">Consegnare</button></div>';
+  }
+  function wireEsameLettura() {
+    on("#eback2", esBack); on("#eback3", esBack);
+    var l = EsameData.lettura[es.k];
+    on("#econsegna3", function () {
+      var ok = 0, detail = [];
+      l.match.forEach(function (want, i) {
+        var sel = document.querySelector('[data-par="' + i + '"]');
+        var right = !!sel && +sel.value === want && sel.value !== "";
+        if (right) ok++;
+        detail.push(["Párrafo " + (i + 1), right, l.titles[want]]);
+      });
+      l.vf.forEach(function (v, i) {
+        var sel = document.querySelector('input[name="vf' + i + '"]:checked');
+        var right = !!sel && (sel.value === "v") === v[1];
+        if (right) ok++;
+        detail.push([v[0], right, (v[1] ? "vero" : "falso") + (v[2] ? " · " + v[2] : "")]);
+      });
+      var n = l.match.length + l.vf.length;
+      es.done = true; es.result = { ok: ok, n: n, pct: Math.round(ok / n * 100), detail: detail };
+      esameSet("lettura", ok, n);
+      Engine.addStrand(state, "input", ok * 3); gain(ok * 3);
+      persist(); renderHeader(); render(); window.scrollTo(0, 0);
+    });
+  }
+
+  /* Scrittura: two texts; with a key the AI grades them with the rubric,
+     otherwise the local checker counts words and hard errors. */
+  function renderEsameScrittura() {
+    var head = '<button class="btn ghost" id="eback2">← al examen</button><h1>✍️ Produzione scritta</h1>';
+    if (es.done) return head + '<div class="card"><div class="scorebig"><b>' + es.result.pct + ' %</b><span>' + es.result.ok + " / " + es.result.n + " puntos</span></div>" +
+      es.result.parts.map(function (p) {
+        return "<h3>" + esc(p.title) + "</h3><p>" + (p.rubric ? Object.keys(p.rubric).map(function (k) { return esc(k) + " " + p.rubric[k] + "/5"; }).join(" · ") : p.local) + "</p>" +
+          (p.comment ? "<p>🤖 " + esc(p.comment) + "</p>" : "") +
+          (p.errors && p.errors.length ? '<table class="res">' + p.errors.map(function (e) { return "<tr><td>" + esc(e[0]) + "</td><td>" + esc(e[1]) + "</td></tr>"; }).join("") + "</table>" : "");
+      }).join("") +
+      '<div class="row" style="margin-top:12px"><button class="btn" id="eback3">← Volver al examen</button></div></div>';
+    return head + '<div class="card"><p class="muted">Dos textos. ' + (aiKey() ? "La IA los califica con la rúbrica de la certificación." : "Sin clave de IA, el corrector propio cuenta palabras y errores marcados.") + "</p>" +
+      EsameData.scrittura.map(function (t, i) {
+        var d = (state.esameDraft || {})[t.id] || "";
+        return "<h3>" + (i + 1) + ". " + esc(t.kind === "argomentativo" ? "Testo argomentativo" : "Lettera formale") + " · " + t.words + " palabras</h3><p>" + esc(t.t) + "</p>" +
+          '<textarea class="grow scrivi edraft" data-id="' + t.id + '" rows="8" spellcheck="false" autocapitalize="sentences">' + esc(d) + "</textarea>" +
+          '<p class="muted small ewords" data-for="' + t.id + '">' + d.split(/\s+/).filter(Boolean).length + " palabras</p>";
+      }).join("") +
+      '<button class="btn wide" id="econsegna4"' + (es.busy ? " disabled" : "") + ">" + (es.busy ? "⏳ Corrigiendo…" : "Consegnare") + "</button></div>";
+  }
+  function wireEsameScrittura() {
+    on("#eback2", esBack); on("#eback3", esBack);
+    document.querySelectorAll(".edraft").forEach(function (t) {
+      t.addEventListener("input", function () {
+        if (!state.esameDraft) state.esameDraft = {};
+        state.esameDraft[t.dataset.id] = t.value.slice(0, 6000);
+        var c = document.querySelector('.ewords[data-for="' + t.dataset.id + '"]');
+        if (c) c.textContent = t.value.split(/\s+/).filter(Boolean).length + " palabras";
+        persist();
+      });
+    });
+    on("#econsegna4", function () {
+      var texts = EsameData.scrittura.map(function (t) { return [t, ((state.esameDraft || {})[t.id] || "").trim()]; });
+      if (texts.some(function (x) { return x[1].split(/\s+/).filter(Boolean).length < x[0].words * 0.5; })) return toast("Cada texto necesita al menos la mitad de las palabras pedidas.", 3500);
+      es.busy = true; render();
+      scriviLexicon();
+      var parts = [], pending = texts.length, sum = 0, max = 0;
+      var finish = function () {
+        es.busy = false; es.done = true;
+        es.result = { ok: Math.round(sum), n: max, pct: Math.round(sum / max * 100), parts: parts };
+        esameSet("scrittura", Math.round(sum), max);
+        Engine.addStrand(state, "output", Math.round(sum * 2)); gain(Math.round(sum * 2));
+        persist(); renderHeader(); render(); window.scrollTo(0, 0);
+      };
+      texts.forEach(function (x) {
+        var task = x[0], text = x[1], title = task.kind === "argomentativo" ? "Testo argomentativo" : "Lettera formale";
+        var local = function () {
+          var chk = Scrivi.check(text, 52), hard = chk.findings.filter(function (f) { return !f.soft; }).length;
+          var words = text.split(/\s+/).filter(Boolean).length, wordsOk = Math.min(1, words / task.words);
+          var score = Math.round((wordsOk * 8 + Math.max(0, 12 - hard * 1.5)) * 10) / 10;
+          parts.push({ title: title, local: words + " palabras · " + hard + " errores marcados por el corrector propio → " + score + " / 20", errors: [] });
+          sum += score; max += 20;
+          if (--pending === 0) finish();
+        };
+        if (!aiKey()) return local();
+        Scrivi.esame(task, text, aiKeys(), function (err, data) {
+          if (err || !data || !data.punteggi) return local();
+          var pz = data.punteggi, sc = 0;
+          ["adeguatezza", "coesione", "correttezza", "lessico"].forEach(function (k) { pz[k] = Math.max(0, Math.min(5, +pz[k] || 0)); sc += pz[k]; });
+          parts.push({ title: title, rubric: pz, comment: String(data.commento || ""), errors: (data.errori || []).slice(0, 8) });
+          sum += sc; max += 20;
+          if (--pending === 0) finish();
+        });
+      });
+    });
   }
 
   /* ---------------------------------------------------------------- scrivi */

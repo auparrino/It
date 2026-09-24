@@ -1747,6 +1747,19 @@
       "\nRispondi SOLO con JSON: {\"testo\": \"...\"}";
   }
   function storia(ctx, keys, done) { llm(storiaPrompt(ctx), keys, done); }
+
+  /* The written part of the C1 exam, graded with the certification rubric
+     (adeguatezza, coesione, correttezza, lessico), 0-5 each. */
+  function esamePrompt(task, text) {
+    return "Sos examinador de italiano de una certificación C1 (CILS / CELI / PLIDA). Un candidato hispanohablante escribió este texto.\n" +
+      "Consigna: " + task.t + "\nExtensión pedida: unas " + task.words + " palabras.\n\nTexto:\n" + text + "\n\n" +
+      "Evaluá con la rúbrica oficial, de 0 a 5 cada criterio: adeguatezza (cumple la consigna, el registro y la extensión), " +
+      "coesione (párrafos, conectores, progresión), correttezza (gramática y ortografía; un C1 tolera muy pocos errores), lessico (riqueza y precisión). " +
+      "Sé exigente y justo: un texto A2 no pasa de 2 en correttezza y lessico. Listá los errores más importantes (máximo 8) con su corrección mínima.\n" +
+      "Respondé SOLO con JSON: {\"punteggi\": {\"adeguatezza\": 0-5, \"coesione\": 0-5, \"correttezza\": 0-5, \"lessico\": 0-5}, " +
+      "\"commento\": \"3 oraciones en castellano rioplatense: qué está bien, qué le falta para C1\", \"errori\": [[\"fragmento mal\", \"corrección\"], ...]}";
+  }
+  function esame(task, text, keys, done) { llm(esamePrompt(task, text), keys, done); }
   function storiaRewrite(text, miss, known, keys, done) { llm(storiaRewritePrompt(text, miss, known), keys, done); }
 
   /* One request at a time through the models of each provider, best first:
@@ -1890,7 +1903,7 @@
               learn: learn, learnCourse: learnCourse, ltCheck: ltCheck, fromLT: fromLT,
               aiCheck: aiCheck, fromAI: fromAI, aiPrompt: aiPrompt, explain: explain, explainPrompt: explainPrompt, reviewPrompt: reviewPrompt,
               hints: hints, hintsPrompt: hintsPrompt, parlaStart: parlaStart, parlaTurn: parlaTurn, parlaRewrite: parlaRewrite,
-              parlaScenarioPrompt: parlaScenarioPrompt, parlaTurnPrompt: parlaTurnPrompt, storia: storia, storiaRewrite: storiaRewrite, storiaPrompt: storiaPrompt, PROVIDERS: PROVIDERS, AI_TYPES: AI_TYPES };
+              parlaScenarioPrompt: parlaScenarioPrompt, parlaTurnPrompt: parlaTurnPrompt, storia: storia, storiaRewrite: storiaRewrite, storiaPrompt: storiaPrompt, esame: esame, esamePrompt: esamePrompt, PROVIDERS: PROVIDERS, AI_TYPES: AI_TYPES };
   if (typeof module === "object" && module.exports) module.exports = api;
   else root.Scrivi = api;
 })(typeof window !== "undefined" ? window : globalThis);

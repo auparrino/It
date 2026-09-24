@@ -794,3 +794,10 @@ body.kar-audio .text { filter: blur(6px); pointer-events: none; }
 .planline { margin: -4px 0 12px; }
 .card.goalweek { padding-bottom: 12px; }
 .weekcard.ritorno { border-left: 4px solid var(--oro); }
+
+/* --- esame --- */
+.equestions { padding-left: 20px; }
+.equestions li { margin: 10px 0; }
+.eopt { display: block; padding: 4px 0; }
+.egap { width: 100%; max-width: 220px; }
+.etitle { width: 100%; margin-bottom: 4px; }
