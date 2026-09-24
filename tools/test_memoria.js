@@ -145,5 +145,20 @@ var san = Engine.sanitize(JSON.parse(JSON.stringify(raw)));
 ok(san.cards["frase:bar:1"].s === 9 && san.cards["frase:bar:1"].d === 10 && !san.cards["frase:bar:1"].state, "scheda ripulita");
 ok(san.retention === 0.9 && Array.isArray(san.log), "impostazioni ripulite");
 
+/* ------------------------------------------------- abitudine e mete */
+var s8 = Engine.blankSave();
+var MON = new Date(2026, 2, 9, 12);   // a Monday
+[0, 1, 2, 7, 8, 9, 14].forEach(function (d) { s8.days[Engine.dayKey(new Date(2026, 2, 9 + d, 12))] = 50; });
+ok(Engine.weekStreak(s8, new Date(2026, 2, 23, 12)) === 2, "due settimane di fila con tre giorni: " + Engine.weekStreak(s8, new Date(2026, 2, 23, 12)));
+ok(Engine.noteSession(s8, MON) === 1 && Engine.noteSession(s8, MON) === 2 && Engine.sessionsToday(s8, MON) === 2, "sessioni del giorno");
+s8.lastPlayed = Engine.dayKey(MON);
+ok(Engine.daysAway(s8, new Date(2026, 2, 13, 12)) === 4, "giorni di pausa");
+ok(Engine.freshStart(MON) === "semana" && Engine.freshStart(new Date(2026, 3, 1, 12)) === "mes" && !Engine.freshStart(new Date(2026, 2, 11, 12)), "nuovo inizio");
+s8.log = [["v:casa", Math.round(Date.now() / 60000), 3, 0, 0, "v"], ["d1", Math.round(Date.now() / 60000), 3, 0, 0, "g"], ["v:vecchia", Math.round(Date.now() / 60000) - 20 * 1440, 3, 0, 0, "v"]];
+ok(Engine.newWordsThisWeek(s8) === 1, "parole nuove della settimana");
+var sg = Engine.subGoals(s8);
+ok(sg.boss === 13 && sg.level === "A2" && sg.wordsPerWeek >= 10 && sg.weeksLeft === 13, "sotto-obiettivi: " + JSON.stringify(sg));
+ok(!Engine.noteRecord(s8, "sessione", 80) && Engine.noteRecord(s8, "sessione", 90) && !Engine.noteRecord(s8, "sessione", 85), "record personale");
+
 console.log("controlli: " + checks + "   errori: " + fails);
 process.exit(fails ? 1 : 0);

@@ -337,6 +337,84 @@
              guesses: cur.guesses, guessRight: cur.guessRight };
   }
 
+  /* ------------------------------------------------- abitudine e mete */
+
+  /* Sessions a day (frequency predicts gains better than minutes: Sudina &
+     Plonsky 2024) and the weekly streak: weeks in a row with at least
+     three active days, sturdier and less anxious than the daily one. */
+  function noteSession(state, now) {
+    var k = dayKey(now);
+    if (!state.sessions) state.sessions = {};
+    state.sessions[k] = (state.sessions[k] || 0) + 1;
+    Object.keys(state.sessions).forEach(function (kk) { if (daysBetween(kk, k) > 70) delete state.sessions[kk]; });
+    return state.sessions[k];
+  }
+  function sessionsToday(state, now) { return (state.sessions || {})[dayKey(now)] || 0; }
+  // Monday of the week that holds d.
+  function weekStart(d) {
+    var x = new Date(d.getFullYear(), d.getMonth(), d.getDate(), 12);
+    var wd = (x.getDay() + 6) % 7;
+    x.setDate(x.getDate() - wd);
+    return x;
+  }
+  function weekKey(d) { return dayKey(weekStart(d || new Date())); }
+  function activeDaysIn(state, start) {
+    var n = 0;
+    for (var i = 0; i < 7; i++) {
+      var d = new Date(start.getFullYear(), start.getMonth(), start.getDate() + i, 12);
+      if ((state.days || {})[dayKey(d)] > 0) n++;
+    }
+    return n;
+  }
+  function weekStreak(state, now) {
+    var d = weekStart(now || new Date()), streak = 0;
+    // the current week counts once it has three days; otherwise start from last week
+    if (activeDaysIn(state, d) >= 3) streak++;
+    for (var w = 1; w < 60; w++) {
+      var prev = new Date(d.getFullYear(), d.getMonth(), d.getDate() - 7 * w, 12);
+      if (activeDaysIn(state, prev) >= 3) streak++; else break;
+    }
+    return streak;
+  }
+  // Days since the last session; a pause is three days or more.
+  function daysAway(state, now) {
+    if (!state.lastPlayed) return 0;
+    return Math.max(0, daysBetween(state.lastPlayed, dayKey(now)));
+  }
+  // New words (first review of a vocabulary card) in the last 7 days, from the log.
+  function newWordsThisWeek(state, now) {
+    var t = Math.round((now || Date.now()) / 60000) - 7 * 1440, n = 0;
+    (state.log || []).forEach(function (x) { if (x[5] === "v" && x[4] === 0 && x[1] >= t) n++; });
+    return n;
+  }
+  /* Sub-goals (Bandura & Schunk 1981): the distal goal is the next boss;
+     the weekly share of words and course weeks follows from what is left,
+     and shrinks by itself when the learner falls behind. */
+  function subGoals(state, now) {
+    var wk = state.unlocked || 1;
+    var boss = wk <= 13 ? 13 : wk <= 26 ? 26 : wk <= 39 ? 39 : 52;
+    var wordGoal = boss === 13 ? 800 : boss === 26 ? 1800 : boss === 39 ? 2800 : 3800;
+    var nWords = Object.keys(state.cards || {}).filter(function (id) { return id.indexOf("v:") === 0 || id.indexOf("b:voc:") === 0; }).length;
+    var weeksLeft = Math.max(1, boss - wk + 1);
+    var perWeek = Math.max(10, Math.ceil(Math.max(0, wordGoal - nWords) / weeksLeft));
+    return { boss: boss, level: boss === 13 ? "A2" : boss === 26 ? "B1" : boss === 39 ? "B2" : "C1", wordGoal: wordGoal, nWords: nWords,
+             weeksLeft: weeksLeft, wordsPerWeek: perWeek, wordsThisWeek: newWordsThisWeek(state, now) };
+  }
+  /* Personal records (beat yourself, not a leaderboard: Hanus & Fox 2015). */
+  function noteRecord(state, key, value) {
+    if (!state.records) state.records = {};
+    var prev = state.records[key] || 0;
+    if (value > prev) { state.records[key] = value; return prev > 0; }
+    return false;
+  }
+  // The fresh-start moments (Dai, Milkman & Riis 2014): a Monday, the 1st.
+  function freshStart(now) {
+    var d = now || new Date();
+    if (d.getDate() === 1) return "mes";
+    if (d.getDay() === 1) return "semana";
+    return null;
+  }
+
   /* --------------------------------------------- la regola come scheda */
 
   /* A grammar rule is consolidated after productive practice on three
@@ -808,6 +886,15 @@
     calibration: calibration,
     noteProduction: noteProduction,
     consolidated: consolidated,
+    noteSession: noteSession,
+    sessionsToday: sessionsToday,
+    weekKey: weekKey,
+    weekStreak: weekStreak,
+    daysAway: daysAway,
+    newWordsThisWeek: newWordsThisWeek,
+    subGoals: subGoals,
+    noteRecord: noteRecord,
+    freshStart: freshStart,
     RETENTIONS: RETENTIONS,
     MAINT_S: MAINT_S,
     goalFor: goalFor,

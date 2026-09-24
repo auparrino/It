@@ -90,10 +90,11 @@
 
   function dueFirst(list, cards) {
     var now = Date.now();
+    // due first (a review is worth more than a new item), then unseen
     var rank = function (x) {
       var c = cards["suoni:" + x.id];
-      if (!c) return 0 + Math.random();
-      if (c.due <= now) return 1 + Math.random();
+      if (!c) return 1 + Math.random();
+      if (c.due <= now) return 0 + Math.random();
       return 2 + Math.random() + (c.due - now) / 3.15e10;
     };
     return list.map(function (x) { return { x: x, r: rank(x) }; }).sort(function (a, b) { return a.r - b.r; }).map(function (o) { return o.x; });

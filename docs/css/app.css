@@ -781,3 +781,16 @@ body.kar-audio .text { filter: blur(6px); pointer-events: none; }
 .lead-ex.data ol.exs { padding-left: 20px; }
 .lead-ex.data ol.exs li { display: list-item; font-size: 1.05rem; margin: 4px 0; }
 .options.rules .opt { text-align: left; white-space: normal; line-height: 1.35; }
+
+/* --- parla --- */
+.chat { display: flex; flex-direction: column; gap: 8px; margin: 12px 0; }
+.bubble { max-width: 88%; padding: 10px 14px; border-radius: 16px; line-height: 1.4; }
+.bubble.ia { align-self: flex-start; background: var(--travertino); border-bottom-left-radius: 4px; }
+.bubble.me { align-self: flex-end; background: color-mix(in srgb, var(--azzurro) 18%, transparent); border-bottom-right-radius: 4px; }
+
+/* --- abitudine e mete --- */
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0; }
+.chips .tab.on { background: var(--azzurro); color: #fff; border-color: var(--azzurro); }
+.planline { margin: -4px 0 12px; }
+.card.goalweek { padding-bottom: 12px; }
+.weekcard.ritorno { border-left: 4px solid var(--oro); }

@@ -297,6 +297,8 @@
         '<button class="tab" id="discard">Descartar</button></span></div>';
     }
 
+    html += oggiHabitCards();
+
     // Il percorso davanti a tutto: la settimana in corso e la prossima missione.
     html += '<div class="card weekcard first hero">' +
       '<span class="muted">🗺️ Il percorso · semana ' + w.week + " · " + esc(w.level) + " · " + doneN + " / " + plan.length + " misiones</span>" +
@@ -397,6 +399,156 @@
         "</div>";
     }
     return html + versionLine();
+  }
+
+  /* ------------------------------------------------ abitudine e mete */
+
+  var WHY = [["viaje", "🧳 Viajar"], ["familia", "👵 Familia, nonni"], ["ciudadania", "🇮🇹 Ciudadanía"], ["trabajo", "💼 Trabajo"],
+             ["musica", "🎶 Música, ópera, cine"], ["pareja", "❤️ Pareja, amigos"], ["estudio", "🎓 Estudiar allá"]];
+  var CHANGES = [["escucha", "más escucha"], ["escritura", "más escritura"], ["repaso", "más repaso"], ["cortas", "sesiones más cortas"], ["frases", "más frases"]];
+  var WHENS = [["manana", "a la mañana"], ["mediodia", "al mediodía"], ["noche", "a la noche"]];
+
+  /* The cards of habit and motivation on Oggi: the return after a pause
+     (no debt, a five-minute restart: Lally 2010; Mazza 2016), the plan
+     (implementation intention, Gollwitzer & Sheeran 2006, d = 0,65), the
+     ideal self (Dörnyei), the weekly sub-goal (Bandura & Schunk 1981) and
+     the weekly reflective close. */
+  function oggiHabitCards() {
+    var html = "", away = Engine.daysAway(state), fresh = Engine.freshStart();
+    var sg = Engine.subGoals(state), ses = Engine.sessionsToday(state);
+    var ideal = state.ideal && state.ideal.text ? state.ideal.text : "";
+    if (away >= 3 && state.totals.attempts > 0) {
+      html += '<div class="card weekcard first ritorno"><span class="muted">👋 Volviste después de ' + away + " días</span>" +
+        "<b>Lo que aprendiste no se borró: re-aprender lleva una fracción del tiempo.</b>" +
+        '<span class="muted">' + (fresh === "semana" ? "Y es lunes: buen día para retomar el plan. " : fresh === "mes" ? "Y empieza el mes: reiniciamos el plan. " : "") +
+          "Cinco minutos con lo que más se enfrió y seguimos" + (ideal ? " hacia lo tuyo: «" + esc(ideal) + "»" : "") + ".</span>" +
+        '<span class="row" style="margin-top:10px"><button class="btn" id="ritorno">▶︎ 5 minutos para retomar</button></span>' +
+        (state.pauseAsk !== Engine.dayKey() ? '<span class="muted small">¿Qué pasó? <button class="tab" data-why="tiempo">sin tiempo</button> ' +
+          '<button class="tab" data-why="dificil">se puso difícil</button> <button class="tab" data-why="aburrido">me aburrí</button> ' +
+          '<button class="tab" data-why="olvide">me olvidé</button></span>' : "") + "</div>";
+    }
+    if (!state.plan && state.totals.attempts >= 30) {
+      html += '<div class="card weekcard"><span class="muted">📌 Un plan concreto rinde más que la voluntad</span>' +
+        "<b>«Cuando ___, abro la app cinco minutos en ___»</b>" +
+        '<span class="muted">Decidir de antemano cuándo y dónde duplica la chance de hacerlo (Gollwitzer). Se arma en un minuto.</span>' +
+        '<span class="row" style="margin-top:10px"><button class="btn" id="toplan">Armar mi plan</button></span></div>';
+    } else if (state.plan) {
+      html += '<p class="muted small planline">📌 Tu plan: cuando <b>' + esc(state.plan.when) + "</b>, " + state.plan.min + " min en <b>" + esc(state.plan.where) + "</b>" +
+        " · hoy " + ses + " / 3 sesiones" + (Engine.weekStreak(state) ? " · " + Engine.weekStreak(state) + " semanas seguidas con 3 días" : "") + "</p>";
+    }
+    if (!state.ideal && state.totals.attempts >= 10) {
+      html += '<div class="card weekcard"><span class="muted">🎯 ¿Para qué querés italiano?</span>' +
+        '<span class="chips">' + WHY.map(function (w) { return '<button class="tab" data-why2="' + w[0] + '">' + w[1] + "</button>"; }).join("") + "</span>" +
+        '<span class="muted small">Tener la meta a la vista sostiene el esfuerzo (Dörnyei: el yo ideal). Después la escribís con tus palabras en Io.</span></div>';
+    }
+    if (state.unlocked >= 2) {
+      var left = Math.max(0, sg.wordsPerWeek - sg.wordsThisWeek);
+      html += '<div class="card goalweek"><b>🪜 Esta semana</b> <span class="muted">· hacia el ' + esc(sg.level) + " en la semana " + sg.boss + "</span>" +
+        '<div class="goalbar" style="margin:8px 0 4px"><i style="width:' + Math.min(100, Math.round(sg.wordsThisWeek / Math.max(1, sg.wordsPerWeek) * 100)) + '%"></i></div>' +
+        '<p class="muted" style="margin:0">' + sg.wordsThisWeek + " / " + sg.wordsPerWeek + " palabras nuevas" +
+          (left ? " · faltan " + left : " ✓") + " · " + sg.nWords.toLocaleString("es-AR") + " / " + sg.wordGoal.toLocaleString("es-AR") + " para el jefe" +
+          (sg.weeksLeft > 1 ? " en " + sg.weeksLeft + " semanas" : "") + ". La cuota se recalcula sola si te atrasás.</p></div>";
+    }
+    // weekly close: on the first visit of a new week, about the week before
+    var wk = Engine.weekKey(), prevWk = Engine.weekKey(new Date(Date.now() - 7 * 86400000));
+    if (state.totals.attempts >= 50 && !(state.reflect || {})[prevWk] && (state.reflect || {}).skip !== wk && Engine.weekStreak(state) + Engine.daysAway(state) > 0 && new Date().getDay() <= 2) {
+      var errs = state.errs || {}, cats = Object.keys(errs).sort(function (a, b) { return errs[b].n - errs[a].n; }).slice(0, 3);
+      html += '<div class="card weekcard reflect"><span class="muted">📓 Cierre de la semana pasada · tres toques</span>' +
+        '<span class="muted small">¿Qué te costó más?</span><span class="chips">' +
+          cats.map(function (c) { return '<button class="tab" data-rf="hard" data-v="' + esc(c) + '">' + esc(Diagnosi.LABEL[c] || c) + "</button>"; }).join("") +
+          '<button class="tab" data-rf="hard" data-v="nada">nada en especial</button></span>' +
+        '<span class="muted small">¿Qué cambiás esta semana?</span><span class="chips">' +
+          CHANGES.map(function (c) { return '<button class="tab" data-rf="change" data-v="' + c[0] + '">' + c[1] + "</button>"; }).join("") + "</span>" +
+        '<span class="muted small">¿Cuándo estudiás?</span><span class="chips">' +
+          WHENS.map(function (c) { return '<button class="tab" data-rf="when" data-v="' + c[0] + '">' + c[1] + "</button>"; }).join("") + "</span>" +
+        '<span class="row"><button class="btn" id="rfsave">Guardar</button><button class="tab" id="rfskip">Ahora no</button></span></div>';
+    } else if ((state.reflect || {})[prevWk] && (state.reflect || {})[prevWk].change) {
+      var rf = state.reflect[prevWk], ch = CHANGES.filter(function (c) { return c[0] === rf.change; })[0];
+      var sw = Engine.strandsLast(state, 7);
+      var done = rf.change === "escucha" ? sw.input : rf.change === "escritura" ? sw.output : rf.change === "frases" ? sw.fluidez : null;
+      html += '<p class="muted small planline">📓 Dijiste: <b>' + esc(ch ? ch[1] : rf.change) + "</b>" +
+        (done != null ? " · llevás " + done + " xp de eso esta semana" : "") + ".</p>";
+    }
+    return html;
+  }
+
+  /* A five-minute restart after a pause: the ten cards with the lowest
+     chance of recall, no backlog shown, the rest redistributes itself. */
+  function ritornoItems() {
+    var items = Drills.buildReview(course, state, 10, drillOpts());
+    if (items.length < 6) items = items.concat(Drills.buildRound(course, course.weeks[Math.min(state.unlocked, 52) - 1], { map: itemMap, state: state, silent: state.silent, size: 8 - items.length }));
+    return items;
+  }
+
+  /* The shareable card: a PNG drawn on a canvas (week, xp, streak, words),
+     handed to the share sheet (Web Share) or downloaded. */
+  function shareCard() {
+    var c = document.createElement("canvas"), W = 720, H = 400;
+    c.width = W; c.height = H;
+    var g = c.getContext("2d");
+    var grad = g.createLinearGradient(0, 0, 0, H); grad.addColorStop(0, "#7dbdf0"); grad.addColorStop(1, "#fbf8f1");
+    g.fillStyle = grad; g.fillRect(0, 0, W, H);
+    g.fillStyle = "#f3ebdb"; g.fillRect(40, 40, W - 80, H - 80);
+    g.strokeStyle = "#1f2630"; g.lineWidth = 6; g.strokeRect(40, 40, W - 80, H - 80);
+    g.fillStyle = "#1f2630"; g.textAlign = "center";
+    g.font = "bold 22px Georgia, serif"; g.fillText("LA VIA C1 · SETTIMANA " + romano(Math.min(state.unlocked, 52)), W / 2, 90);
+    g.font = "bold 64px Georgia, serif"; g.fillText(Engine.rankFor(Engine.levelFor(state.xp).level).toUpperCase(), W / 2, 170);
+    var sg = Engine.subGoals(state), cov = window.Freq && Freq.loaded() ? Freq.coverage(knownWords()).fundamental[0] : null;
+    g.font = "26px system-ui, sans-serif";
+    g.fillText("🔥 " + state.streak + " días · " + Engine.weekStreak(state) + " semanas · nivel " + Engine.levelFor(state.xp).level, W / 2, 230);
+    g.fillText(sg.nWords.toLocaleString("es-AR") + " palabras" + (cov != null ? " · " + cov + " de las 2.000 frecuentes" : ""), W / 2, 275);
+    g.font = "20px system-ui, sans-serif"; g.fillStyle = "#6b6a66";
+    g.fillText("Esta semana: " + sg.wordsThisWeek + " palabras nuevas · " + Engine.strandsLast(state, 7).output + " xp de output", W / 2, 320);
+    c.toBlob(function (blob) {
+      var name = "la-via-c1-" + stamp() + ".png";
+      try {
+        var file = new File([blob], name, { type: "image/png" });
+        if (navigator.canShare && navigator.canShare({ files: [file] })) { navigator.share({ files: [file], title: "Mi semana de italiano" }).catch(function () { download(blob, name); }); return; }
+      } catch (e) { /* niente share */ }
+      download(blob, name);
+    }, "image/png");
+  }
+
+  function wireHabit() {
+    on("#ritorno", function () { state.pauseAsk = Engine.dayKey(); persist(); startRound("ritorno"); });
+    document.querySelectorAll("[data-why]").forEach(function (b) {
+      b.onclick = function () {
+        if (!state.pauses) state.pauses = [];
+        state.pauses.push({ days: Engine.daysAway(state), why: b.dataset.why, at: Date.now() });
+        state.pauses = state.pauses.slice(-30);
+        state.pauseAsk = Engine.dayKey();
+        if (b.dataset.why === "dificil" && state.retention > 0.85) { state.retention = 0.85; toast("Anotado. Bajé la retención a 85 %: menos repasos por día.", 3500); }
+        else if (b.dataset.why === "tiempo") toast("Anotado. Con tres sesiones de dos minutos ya cuenta: el atajo «Ripasso 2 min» está en el ícono de la app.", 4000);
+        else toast("Anotado. Gracias.");
+        persist();
+        render();
+      };
+    });
+    on("#toplan", function () { go("io"); var c = $("#plancard"); if (c) c.scrollIntoView({ block: "start" }); });
+    document.querySelectorAll("[data-why2]").forEach(function (b) {
+      b.onclick = function () {
+        var w = WHY.filter(function (x) { return x[0] === b.dataset.why2; })[0];
+        state.ideal = { why: b.dataset.why2, text: "", at: Date.now() };
+        persist();
+        toast("🎯 " + (w ? w[1] : "") + ". En Io podés escribir tu meta con tus palabras.", 3500);
+        render();
+      };
+    });
+    var rf = {};
+    document.querySelectorAll("[data-rf]").forEach(function (b) {
+      b.onclick = function () {
+        rf[b.dataset.rf] = b.dataset.v;
+        document.querySelectorAll('[data-rf="' + b.dataset.rf + '"]').forEach(function (x) { x.classList.toggle("on", x === b); });
+      };
+    });
+    on("#rfsave", function () {
+      if (!state.reflect) state.reflect = {};
+      state.reflect[Engine.weekKey(new Date(Date.now() - 7 * 86400000))] = { hard: rf.hard || "", change: rf.change || "", when: rf.when || "", at: Date.now() };
+      persist();
+      toast("📓 Guardado. La semana que viene te lo recuerdo.");
+      render();
+    });
+    on("#rfskip", function () { if (!state.reflect) state.reflect = {}; state.reflect.skip = Engine.weekKey(); persist(); render(); });
   }
 
   /* The version, so a glance says whether the phone already loaded the
@@ -511,6 +663,14 @@
       });
       html += "</div>";
     });
+    if ((state.storie || []).length) {
+      html += "<h2>✨ Storie della settimana</h2><p class=\"muted\">Cuentos generados con las palabras de tu repaso.</p><div class=\"eps\">" +
+        state.storie.map(function (x) {
+          var d = done[x.id];
+          return '<button class="ep' + (d ? " done" : "") + '" data-ep="' + esc(x.id) + '"><span class="e">✨</span><span><b>' + esc(x.title) +
+            "</b><span class=\"muted\">semana " + x.week + " · " + esc(x.targets.join(", ")) + "</span></span>" + (d ? '<span class="score">' + d.pct + "%</span>" : "") + "</button>";
+        }).join("") + "</div>";
+    }
     var doneN = Object.keys(done).filter(function (id) { return Letture.byId(id); }).length;
     if (doneN) {
       html += '<div class="card"><b>🎧 Ascolto facile</b><p class="muted">Re-escuchá las ' + doneN + " lecturas que ya hiciste, solo audio, una tras otra: " +
@@ -1039,6 +1199,14 @@
       m({ kind: "dictogloss", done: !!dgd, ico: "📝", title: "Dictogloss: " + dgt.title,
           sub: dgd ? "Hecho · " + dgd.found + " / " + dgd.n + " bloques recuperados" : "Escuchalo dos veces, anotá y reconstruilo: seis bloques a recuperar" });
     }
+    if (aiKey() && w.week >= 3) {
+      var pl = (state.parlaLog || {})[w.week];
+      m({ kind: "parla", done: !!pl, ico: "🗣️", title: "Parla: role-play con la IA", opt: true,
+          sub: pl ? "Hecho · " + pl.obj + " / 3 objetivos en " + pl.turns + " turnos" : "Opcional · un personaje, tres objetivos, tu italiano escrito; la IA te corrige al final" });
+      var sto = (state.storie || []).filter(function (x) { return x.week === w.week; })[0];
+      m({ kind: "storia", done: !!sto, ico: "📖", title: "Storia della settimana (IA)", opt: true,
+          sub: sto ? "Generada · " + sto.title : "Opcional · un cuento con las palabras que te toca repasar" });
+    }
     var domDone = Drills.dominated(st, w, state);
     m({ kind: "play2", done: domDone, ico: "🏆", title: "Dominala",
         sub: domDone ? "Dominada" + (st.domPct ? " · " + st.domPct + " %" : "")
@@ -1056,7 +1224,7 @@
      answers, the phrases, the reading, the lab and the bank of the week. */
   function pendingToAdvance(w) {
     if (w.boss) return weekStat(w.week).bossPassed ? [] : ["Vencé al jefe"];
-    return weekPlan(w).filter(function (x) { return !x.done && x.kind !== "play2"; }).map(function (x) { return x.title; });
+    return weekPlan(w).filter(function (x) { return !x.done && x.kind !== "play2" && !x.opt; }).map(function (x) { return x.title; });
   }
   function tryAdvance(week) {
     var w = course.weeks[week - 1];
@@ -1079,6 +1247,8 @@
     else if (kind === "ep") { view.ep = arg; view.epFrom = "briefing"; view.screen = "lettura"; render(); window.scrollTo(0, 0); }
     else if (kind === "suoni") startRound("suoni");
     else if (kind === "dictogloss") { dg = null; view.screen = "dictogloss"; render(); window.scrollTo(0, 0); }
+    else if (kind === "parla") { view.screen = "parla"; render(); window.scrollTo(0, 0); }
+    else if (kind === "storia") { view.screen = "storia"; render(); window.scrollTo(0, 0); }
   }
 
   function missions(w, st, nChal) {
@@ -1215,8 +1385,14 @@
     else if (kind === "ponte") items = Lab.ponteSession(state.cards, arg);
     else if (kind === "falsi") items = Lab.falsiSession(state.cards);
     else if (kind === "capire") items = Lab.capireSession(state.cards, arg, state.unlocked);
-    else if (kind === "lettura") items = Letture.session(Letture.byId(arg));
+    else if (kind === "lettura") {
+      var epL = Letture.byId(arg);
+      items = Letture.session(epL);
+      if (epL && epL.series === "ai") items = items.slice(0, -1).concat(storyCloze(epL), items.slice(-1));
+    }
     else if (kind === "suoni") items = Suoni.session(state, Math.min(state.unlocked, 52), { silent: state.silent });
+    else if (kind === "ritorno") items = ritornoItems();
+    else if (kind === "micro") items = Drills.buildReview(course, state, 5, drillOpts());
     else if (kind === "b-voc") items = Banca.vocabSession(state, 12);
     else if (kind === "b-freq") items = Banca.vocabSessionFor(state, freqGaps(24), 12);
     else if (kind === "b-forme") items = Banca.formsSession(state, 12);
@@ -1877,7 +2053,10 @@
       var fbText = ($("#fb") || {}).innerText || "";
       var x = { prompt: it.prompt, stem: it.stem, options: it.options, given: given, answer: sol,
                 accept: it.accept, feedback: fbText.split("Avanti")[0].replace(/\s+/g, " ").slice(0, 600) };
-      Scrivi.explain(x, aiKeys(), function (err, data, meta) {
+      // Graded hints (dynamic assessment): implicit → the rule as a
+      // question → the explanation.  The level reached is kept as a
+      // signal of how much mediation the learner needed.
+      Scrivi.hints(x, aiKeys(), function (err, data, meta) {
         var o = $("#aiexpout");
         if (!o) return;
         if (err) { o.innerHTML = '<p class="muted small">No pude usar la IA (' + esc(String(err.message || err)) + ").</p>"; if (b) b.disabled = false; return; }
@@ -1890,9 +2069,24 @@
           state.aiNotes = state.aiNotes.slice(0, 80);
           persist();
         }
-        o.innerHTML = '<div class="aiout"><p>🤖 ' + mk(esc(String((data && data.explicacion) || ""))) + "</p>" +
-          (dispute ? '<p class="muted small">La IA cree que ' + (data.tambien_correcta ? "tu respuesta también vale" : "la corrección de la app no es buena") +
-             ". Quedó anotado en Io → «Correcciones para revisar».</p>" : "") + modelLine(meta) + "</div>";
+        var lvl = 1;
+        var show = function () {
+          o.innerHTML = '<div class="aiout">' +
+            '<p>🤖 <b>Pista 1:</b> ' + esc(String(data.pista1 || "")) + "</p>" +
+            (lvl >= 2 ? '<p><b>Pista 2:</b> ' + esc(String(data.pista2 || "")) + "</p>" : "") +
+            (lvl >= 3 ? "<p>" + mk(esc(String(data.explicacion || ""))) + "</p>" +
+              (dispute ? '<p class="muted small">La IA cree que ' + (data.tambien_correcta ? "tu respuesta también vale" : "la corrección de la app no es buena") +
+                 ". Quedó anotado en Io → «Correcciones para revisar».</p>" : "") + modelLine(meta) : "") +
+            (lvl < 3 ? '<div class="row"><button class="tab" id="morehint2">' + (lvl === 1 ? "💡 Más pista" : "📐 La explicación") + "</button></div>" : "") +
+            "</div>";
+          on("#morehint2", function () {
+            lvl++;
+            if (!state.hintLevels) state.hintLevels = { 1: 0, 2: 0, 3: 0 };
+            show();
+          });
+          if (lvl === 3 && state.hintLevels) state.hintLevels[3] = (state.hintLevels[3] || 0) + 1;
+        };
+        show();
       });
     });
     $("#say2").onclick = function () { speak(spoken, true); };
@@ -2006,7 +2200,8 @@
   var KIND_NAME = { debil: "Puntos débiles", domina: "Dominala", round: "Entrenamiento", giorno: "Sfida del giorno", boss: "Jefe", gym: "Gimnasio de verbos", pausa: "Pausa caffè", review: "Ripasso",
                     scene: "Frases", vocab: "Palabras de la semana", lettura: "Lectura", sfida: "Sfida", ponte: "Ponte",
                     falsi: "Falsi amici", capire: "Capire", "b-voc": "Parole", "b-tr": "Traduci", "b-gap": "Coniuga in contesto",
-                    "b-forme": "Forme", "b-err": "Trova l'errore", clinica: "Clínica", suoni: "Suoni", "b-freq": "Parole frecuentes" };
+                    "b-forme": "Forme", "b-err": "Trova l'errore", clinica: "Clínica", suoni: "Suoni", "b-freq": "Parole frecuentes",
+                    ritorno: "Cinco minutos para retomar", micro: "Ripasso 2 min" };
   function pendingTitle(p) {
     if (p.type === "lezione") return "Lección · semana " + p.week + " · " + (p.i + 1) + "/" + p.steps.length;
     return (KIND_NAME[p.round.kind] || "Ronda") + " · " + (p.round.i + 1) + "/" + p.round.items.length;
@@ -2052,8 +2247,14 @@
 
     clearPending();
     Engine.touchStreak(state);
+    Engine.noteSession(state);
     if (!state.best) state.best = {};
     state.best.combo = Math.max(state.best.combo || 0, round.bestCombo);
+    var records = [];
+    if (total >= 8 && Engine.noteRecord(state, "sessione", pct)) records.push("🏅 Récord personal: tu mejor sesión, " + pct + " %");
+    if (Engine.noteRecord(state, "settimane", Engine.weekStreak(state))) records.push("🏅 Récord personal: " + Engine.weekStreak(state) + " semanas seguidas con tres días");
+    if (Engine.noteRecord(state, "parole", Engine.newWordsThisWeek(state))) records.push("🏅 Récord personal: " + Engine.newWordsThisWeek(state) + " palabras nuevas en una semana");
+    if (Engine.noteRecord(state, "corrette", round.fixed || 0)) records.push("🏅 Récord personal: " + round.fixed + " errores corregidos por vos en una ronda");
 
     var passed = false;
     if (round.kind === "boss") {
@@ -2113,6 +2314,7 @@
       extras.push("☀️ Primera ronda del día: +25 xp");
     }
     if (domExtra) extras.push(domExtra);
+    extras = extras.concat(records);
     extras = extras.concat(missionCheck(round.week, round.planDone));
 
     var won = Engine.checkBadges(state);
@@ -2224,9 +2426,9 @@
         }).join("") + "</table>" +
         (wrong.length > 10 ? '<p class="muted">y ' + (wrong.length - 10) + " más en el ripasso.</p>" : "");
     }
-    if (!state.remind && state.totals.attempts <= 80) {
-      html += '<p class="muted" style="margin-top:12px">📅 Tres minutos por día rinden más que una hora el domingo. ' +
-        '<button class="tab" id="toremind">Elegir una hora</button></p>';
+    if (!state.plan && state.totals.attempts <= 120) {
+      html += '<p class="muted" style="margin-top:12px">📌 Tres minutos por día rinden más que una hora el domingo. ' +
+        '<button class="tab" id="toremind">Armar mi plan (cuándo y dónde)</button></p>';
     }
 
     html += '<div class="row" style="margin-top:16px">' +
@@ -2428,6 +2630,7 @@
             esc(state.remind || "13:30") + '"><button class="btn ghost" id="remind">📅 Agregar</button></span></label>' +
       "</div>" +
 
+      planCard() +
       memoriaCard() +
       lessicoCard() +
       '<div class="card"><h2>Tu copia</h2>' +
@@ -2464,6 +2667,34 @@
       '<div class="row" style="margin-top:14px">' +
         '<button class="btn ghost" id="reset">Borrar mi progreso</button>' +
       "</div></div>" + versionLine();
+  }
+
+  /* Piano, meta e record: l'intenzione d'implementazione («quando X, apro
+     l'app N minuti in Y»), il «yo ideal» con le parole dell'alunno, i
+     record personali e la scheda da condividere. */
+  function planCard() {
+    var pl = state.plan || {}, id = state.ideal || {}, rec = state.records || {};
+    var why = WHY.filter(function (w) { return w[0] === id.why; })[0];
+    return '<div class="card" id="plancard"><h2>📌 Tu plan</h2>' +
+      '<p class="muted small">Una intención de implementación: cuándo y dónde, decidido de antemano (Gollwitzer y Sheeran 2006: d = 0,65 en 94 estudios).</p>' +
+      '<label class="set"><span>Cuando…<small>por ejemplo: termine el café de la mañana</small></span><input id="planwhen" maxlength="60" value="' + esc(pl.when || "") + '" placeholder="termine el café"></label>' +
+      '<label class="set"><span>…abro la app</span><select id="planmin">' + [2, 5, 10, 15].map(function (m) { return '<option value="' + m + '"' + ((pl.min || 5) === m ? " selected" : "") + ">" + m + " minutos</option>"; }).join("") + "</select></label>" +
+      '<label class="set"><span>en…<small>el lugar de siempre</small></span><input id="planwhere" maxlength="60" value="' + esc(pl.where || "") + '" placeholder="la cocina"></label>' +
+      '<div class="row"><button class="btn" id="plansave">Guardar el plan</button></div>' +
+      '<h3>🎯 Tu meta</h3>' +
+      '<span class="chips">' + WHY.map(function (w) { return '<button class="tab' + (id.why === w[0] ? " on" : "") + '" data-why3="' + w[0] + '">' + w[1] + "</button>"; }).join("") + "</span>" +
+      '<label class="set"><span>Con tus palabras<small>«En seis meses pido un café en Nápoles sin pensar»</small></span></label>' +
+      '<div class="typed"><input id="idealtext" maxlength="120" value="' + esc(id.text || "") + '" placeholder="En seis meses…"><button class="tab" id="idealsave">Guardar</button></div>' +
+      (why || id.text ? '<p class="muted small">Tu meta: ' + (why ? esc(why[1]) : "") + (id.text ? " · «" + esc(id.text) + "»" : "") + "</p>" : "") +
+      '<h3>🏅 Récords personales</h3><table class="res">' +
+        "<tr><td>Mejor sesión</td><td>" + (rec.sessione || 0) + " %</td></tr>" +
+        "<tr><td>Semanas seguidas con tres días</td><td>" + (rec.settimane || Engine.weekStreak(state)) + "</td></tr>" +
+        "<tr><td>Palabras nuevas en una semana</td><td>" + (rec.parole || 0) + "</td></tr>" +
+        "<tr><td>Errores corregidos por vos en una ronda</td><td>" + (rec.corrette || 0) + "</td></tr>" +
+        "<tr><td>Lampo · Parola o no?</td><td>" + ((state.best || {}).lampo || 0) + " · " + ((state.best || {}).lampoParole || 0) + "</td></tr>" +
+      "</table>" +
+      '<div class="row" style="margin-top:10px"><button class="btn ghost" id="share">📤 Compartir mi semana</button></div>' +
+      "</div>";
   }
 
   /* Il lessico per frequenza (Nation 2006; KELLY per il livello): quanto
@@ -2658,7 +2889,7 @@
       "DTSTART:" + local,
       "DTEND:" + localEnd,
       "RRULE:FREQ=DAILY",
-      "SUMMARY:☕ Pausa caffè: 3 minutos de italiano",
+      "SUMMARY:☕ " + (state.plan ? "Cuando " + state.plan.when + ": " + state.plan.min + " min de italiano" : "Pausa caffè: 3 minutos de italiano"),
       "DESCRIPTION:Racha en juego. Abrí La Via C1: " + url,
       "URL:" + url,
       "BEGIN:VALARM", "TRIGGER:PT0M", "ACTION:DISPLAY",
@@ -2705,6 +2936,8 @@
     else if (s === "lezione") html = renderLezione();
     else if (s === "scrivi") html = renderScrivi(course.weeks[view.week - 1]);
     else if (s === "dictogloss") html = renderDictogloss(course.weeks[view.week - 1]);
+    else if (s === "parla") html = renderParla(course.weeks[view.week - 1]);
+    else if (s === "storia") html = renderStoria(course.weeks[view.week - 1]);
 
     var gb = $("#glossbox");
     if (gb) gb.classList.remove("on");
@@ -2859,7 +3092,8 @@
     on("#lesquit", function () { clearPending(); view.screen = "briefing"; render(); });
     on("#resume", resumePending);
     on("#discard", function () { clearPending(); render(); });
-    on("#toremind", function () { go("io"); });
+    on("#toremind", function () { go("io"); var c = $("#plancard"); if (c) c.scrollIntoView({ block: "start" }); });
+    wireHabit();
     on("#lesback", function () { view.screen = "briefing"; render(); });
     on("#lesplay", function () { startRound(course.weeks[view.week - 1].boss ? "boss" : "round"); });
     document.querySelectorAll("[data-lq]").forEach(function (b) { b.onclick = function () { lesAnswer(b); }; });
@@ -2874,7 +3108,7 @@
       if (round.from === "briefing") { view.tab = "percorso"; view.screen = "briefing"; render(); window.scrollTo(0, 0); }
       else if (round.kind === "lettura") go("leggi");
       else if (["ponte", "falsi", "capire", "scene", "b-voc", "b-forme", "b-tr", "b-gap", "b-err", "b-freq", "clinica", "suoni"].indexOf(round.kind) >= 0) go("frasi");
-      else if (round.kind === "pausa" || round.kind === "review" || round.kind === "giorno") go("oggi");
+      else if (round.kind === "pausa" || round.kind === "review" || round.kind === "giorno" || round.kind === "ritorno" || round.kind === "micro") go("oggi");
       else if (round.kind === "sfida") { view.screen = "sfide"; render(); }
       else { view.screen = "briefing"; render(); }
     });
@@ -2929,6 +3163,8 @@
     wireScrivi();
     wireDictogloss();
     wireLettura();
+    wireParla();
+    wireStoria();
 
     document.querySelectorAll("[data-self]").forEach(function (b) {
       b.onclick = function () {
@@ -3158,6 +3394,227 @@
     on("#enhoff", function () { view.enh = false; render(); });
   }
 
+  /* ------------------------------------------------------------------ parla */
+
+  // The level, tenses and vocabulary the AI must stay inside this week.
+  function aiContext(w) {
+    var level = w.week <= 8 ? "A1" : w.week <= 18 ? "A2" : w.week <= 30 ? "B1" : w.week <= 42 ? "B2" : "C1";
+    var tenses = (w.known || ["presente"]).map(function (t) { return Conj.TENSE_LABELS[t] || t; }).join(", ");
+    var known = window.Freq && Freq.loaded() ? knownWords() : {};
+    // the words to hand the model: the learner's most frequent known words plus the week's
+    var list = Object.keys(known).filter(function (l) { return Freq.STOP.indexOf(l) < 0 && l.length > 2; });
+    if (window.Freq && Freq.loaded()) list.sort(function (a, b) { return Freq.zipf(b) - Freq.zipf(a); });
+    (w.vocab || []).forEach(function (v) { if (list.indexOf(v[0]) < 0) list.unshift(v[0]); });
+    return { level: level, week: w.week, fare: w.fare || w.title, tema: w.tema || "", tenses: tenses,
+             maxWords: w.week <= 8 ? 10 : w.week <= 18 ? 14 : w.week <= 30 ? 18 : 25,
+             words: list.slice(0, 220), known: known };
+  }
+  // Token miss rate against what the learner knows: above 15 % the reply
+  // is sent back to be rewritten (Dugan et al. 2026).
+  function tooHard(text) {
+    if (!window.Freq || !Freq.loaded()) return null;
+    var mr = Freq.missRate(text, knownWords());
+    return mr.n >= 4 && mr.rate > 0.15 ? mr : null;
+  }
+
+  var parla = null;   // { week, scen, history, done, recasts, notes, obj, turns, busy }
+  function renderParla(w) {
+    var head = '<button class="btn ghost" id="pback">← a la semana</button>' +
+      '<h1 class="targa"><span class="t-sup">Parla · Settimana ' + romano(w.week) + '</span><span class="t-via">' + esc(parla && parla.scen ? parla.scen.titolo : "Role-play") + "</span></h1>";
+    if (!aiKey()) return head + '<div class="card"><p>Para hablar con la IA hace falta una clave gratuita. <a href="#" id="aigo2">Cargala en Io →</a></p></div>';
+    if (!parla || parla.week !== w.week) {
+      return head + '<div class="card"><p>Un personaje te espera con una situación de la semana (<b>' + esc(w.fare || w.title) + "</b>). " +
+        "Tenés que conseguir <b>tres objetivos</b> escribiendo en italiano. La IA no te corrige mientras hablan: al final ves tus frases " +
+        "junto a la versión corregida, con una observación por turno.</p>" +
+        '<p class="muted small">🔬 Vacío de información con reglas duras (Wang et al. 2025, g = 0,48). La app controla que el personaje use ' +
+        "palabras que ya conocés; si se pasa, le pide que lo reescriba.</p>" +
+        '<button class="btn wide" id="pstart">🎭 Empezar</button><div id="pout"></div></div>';
+    }
+    var sc = parla.scen;
+    var objs = '<ul class="reqs">' + sc.obiettivi.map(function (o, i) {
+      var ok = parla.obj.indexOf(i + 1) >= 0;
+      return '<li class="' + (ok ? "ok" : "") + '">' + (ok ? "✓" : "○") + " " + esc(o) + "</li>";
+    }).join("") + "</ul>";
+    var chat = '<div class="chat">' + parla.history.map(function (h) {
+      return '<div class="bubble ' + (h[0] === "ia" ? "ia" : "me") + '">' + esc(h[1]) + "</div>";
+    }).join("") + (parla.busy ? '<div class="bubble ia muted">…</div>' : "") + "</div>";
+    if (parla.done) {
+      var rec = parla.recasts.length ? '<h3>Tus frases, corregidas</h3><table class="res">' + parla.recasts.map(function (r) {
+        return "<tr><td>" + esc(r[0]) + "</td><td><b>" + esc(r[1]) + "</b>" + (r[2] ? '<br><small class="muted">' + esc(r[2]) + "</small>" : "") + "</td></tr>";
+      }).join("") + "</table>" : "<p>✨ Ninguna frase necesitó corrección.</p>";
+      return head + '<div class="card"><div class="scorebig"><b>' + parla.obj.length + " / 3</b><span>objetivos</span><span>+" + parla.xp + " xp</span></div>" +
+        objs + rec + chat +
+        '<div class="row" style="margin-top:12px"><button class="btn" id="pback2">← Seguir el percorso</button><button class="btn ghost" id="pagain">Otro role-play</button></div></div>';
+    }
+    return head + '<div class="card"><p class="muted">' + esc(sc.situazione_es) + "</p>" + objs +
+      '<p class="muted small">Palabras útiles: <i>' + (sc.parole_utili || []).map(esc).join(" · ") + "</i></p>" + chat +
+      '<div class="typed"><textarea id="ptext" class="grow" rows="1" autocomplete="off" autocapitalize="sentences" autocorrect="off" spellcheck="false" enterkeyhint="send" placeholder="Scrivi in italiano…"' + (parla.busy ? " disabled" : "") + "></textarea>" +
+      '<button class="btn" id="psend"' + (parla.busy ? " disabled" : "") + ">Invia</button></div>" +
+      '<div class="row" style="margin-top:8px"><button class="tab" id="pend">Terminar acá</button></div></div>';
+  }
+  function wireParla() {
+    if (view.screen !== "parla") return;
+    var w = course.weeks[view.week - 1];
+    var back = function () { view.tab = "percorso"; view.screen = "briefing"; render(); window.scrollTo(0, 0); };
+    on("#pback", back); on("#pback2", back);
+    on("#aigo2", function (e) { e.preventDefault(); go("io"); });
+    on("#pstart", function () {
+      var ctx = aiContext(w), out = $("#pout"), b = $("#pstart");
+      if (b) b.disabled = true;
+      if (out) out.innerHTML = '<p class="muted small">⏳ La IA arma la escena…</p>';
+      Scrivi.parlaStart(ctx, aiKeys(), function (err, data) {
+        if (view.screen !== "parla") return;
+        if (err || !data || !data.obiettivi) { if (out) out.innerHTML = '<p class="muted small">No pude usar la IA (' + esc(String(err && err.message || "respuesta rara")) + ").</p>"; if (b) b.disabled = false; return; }
+        data.obiettivi = data.obiettivi.slice(0, 3);
+        parla = { week: w.week, scen: data, history: [["ia", String(data.apertura || "Ciao!")]], done: false, recasts: [], obj: [], turns: 0, busy: false, ctx: ctx };
+        render();
+        speak(data.apertura);
+      });
+    });
+    var send = function () {
+      var box = $("#ptext"), text = box ? box.value.trim() : "";
+      if (!text || parla.busy) return;
+      parla.history.push(["me", text]);
+      parla.turns++;
+      parla.busy = true;
+      render();
+      Scrivi.parlaTurn(parla.scen, parla.history.slice(-8), text, parla.ctx, aiKeys(), function (err, data) {
+        if (view.screen !== "parla" || !parla) return;
+        var finish = function (reply) {
+          parla.busy = false;
+          parla.history.push(["ia", reply]);
+          if (data.recast && Engine.normalise(data.recast) !== Engine.normalise(text)) parla.recasts.push([text, String(data.recast), String(data.nota_es || "")]);
+          (data.obiettivi_raggiunti || []).forEach(function (n) { n = +n; if (n >= 1 && n <= 3 && parla.obj.indexOf(n) < 0) parla.obj.push(n); });
+          render();
+          speak(reply);
+          if (data.fine || parla.obj.length >= 3 || parla.turns >= 12) endParla(w);
+          else { var bx = $("#ptext"); if (bx) bx.focus(); }
+        };
+        if (err || !data) { parla.busy = false; parla.history.push(["ia", "(La IA no respondió: " + esc(String(err && err.message || "")) + ". Probá de nuevo.)"]); render(); return; }
+        var reply = String(data.risposta || "").trim() || "Capisco.";
+        var hard = tooHard(reply);
+        if (hard) {
+          // too many unknown words: one rewrite inside the learner's vocabulary
+          Scrivi.parlaRewrite(reply, parla.ctx.words.slice(0, 150), aiKeys(), function (e2, d2) {
+            finish(!e2 && d2 && d2.risposta ? String(d2.risposta) : reply);
+          });
+        } else finish(reply);
+      });
+    };
+    on("#psend", send);
+    var box = $("#ptext");
+    if (box) { box.onkeydown = function (e) { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } }; if (!parla.busy) box.focus(); }
+    on("#pend", function () { endParla(w); });
+    on("#pagain", function () { parla = null; render(); });
+  }
+  function endParla(w) {
+    if (!parla || parla.done) return;
+    parla.done = true;
+    var first = !(state.parlaLog || {})[w.week];
+    var xp = parla.obj.length * 10 + Math.min(30, parla.turns * 5);
+    if (!first) xp = Math.round(xp / 3);
+    parla.xp = xp;
+    if (!state.parlaLog) state.parlaLog = {};
+    var before = doneCount(w);
+    state.parlaLog[w.week] = { obj: parla.obj.length, turns: parla.turns, at: Date.now() };
+    gain(xp);
+    Engine.addStrand(state, "output", xp);
+    Engine.touchStreak(state);
+    missionCheck(w.week, before);
+    Engine.checkBadges(state);
+    persist();
+    renderHeader();
+    render();
+    if (parla.obj.length >= 3) setTimeout(confetti, 200);
+  }
+
+  /* ------------------------------------------------------------------ storia */
+
+  var storia = null;   // { week, busy, err }
+  function storyEp(st) {
+    var gloss = {};
+    (st.gloss || []).forEach(function (g) { if (g && g[0]) gloss[String(g[0]).toLowerCase()] = String(g[1] || ""); });
+    return { id: st.id, week: st.week, n: 0, level: st.level, emoji: "✨", title: st.title, series: "ai", grammar: "las palabras de tu repaso",
+             text: st.text, gloss: gloss, questions: st.questions || [], area: "Storia della settimana",
+             hunt: { label: "Tocá las palabras que te tocaba repasar: " + st.targets.join(", "), targets: st.targets } };
+  }
+  // The generated stories stay readable offline: registered again on boot.
+  function registerStories() {
+    (state.storie || []).forEach(function (st) { if (!Letture.byId(st.id)) Letture.EPISODI.push(storyEp(st)); });
+  }
+  function renderStoria(w) {
+    var head = '<button class="btn ghost" id="sback2">← a la semana</button>' +
+      '<h1 class="targa"><span class="t-sup">Storia · Settimana ' + romano(w.week) + '</span><span class="t-via">della settimana</span></h1>';
+    if (!aiKey()) return head + '<div class="card"><p>Para generar la historia hace falta una clave gratuita. <a href="#" id="aigo3">Cargala en Io →</a></p></div>';
+    var mine = (state.storie || []).filter(function (x) { return x.week === w.week; });
+    var due = Drills.buildReview(course, state, 40, drillOpts()).map(function (it) { return vocabWordOf(it); }).filter(Boolean);
+    var targets = due.slice(0, 8);
+    return head + '<div class="card"><p>Un cuento corto con <b>las palabras que te tocaba repasar</b> y solo vocabulario que ya conocés: ' +
+      "leerlas dentro de una historia las fija mejor que la ficha sola.</p>" +
+      (targets.length ? '<p class="muted small">Palabras de hoy: <i>' + targets.map(esc).join(", ") + "</i></p>" : '<p class="muted small">Hoy no hay palabras vencidas: la historia usa las de la semana.</p>') +
+      '<p class="muted small">🔬 SRS-Stories (Kamzela, Lango & Dušek 2025): la app mide cuántas palabras del cuento no conocés y, si son más del 15 %, pide que lo reescriba.</p>' +
+      '<button class="btn wide" id="sgen"' + (storia && storia.busy ? " disabled" : "") + ">✨ " + (storia && storia.busy ? "Escribiendo…" : "Generar la historia") + "</button>" +
+      (storia && storia.err ? '<p class="muted small">⚠️ ' + esc(storia.err) + "</p>" : "") +
+      (mine.length ? "<h3>Tus historias de esta semana</h3><div class=\"eps\">" + mine.map(function (x) {
+        return '<button class="ep" data-ep="' + esc(x.id) + '"><span class="e">✨</span><span><b>' + esc(x.title) + "</b><span class=\"muted\">" + esc(x.targets.join(", ")) + "</span></span></button>";
+      }).join("") + "</div>" : "") + "</div>";
+  }
+  function wireStoria() {
+    if (view.screen !== "storia") return;
+    var w = course.weeks[view.week - 1];
+    on("#sback2", function () { view.tab = "percorso"; view.screen = "briefing"; render(); window.scrollTo(0, 0); });
+    on("#aigo3", function (e) { e.preventDefault(); go("io"); });
+    on("#sgen", function () {
+      var ctx = aiContext(w);
+      var due = Drills.buildReview(course, state, 40, drillOpts()).map(function (it) { return vocabWordOf(it); }).filter(Boolean);
+      var targets = due.slice(0, 8);
+      if (targets.length < 4) (w.vocab || []).forEach(function (v) { if (targets.length < 8 && targets.indexOf(v[0]) < 0) targets.push(v[0]); });
+      storia = { week: w.week, busy: true, err: null };
+      render();
+      var req = { level: ctx.level, week: w.week, tema: ctx.tema || ctx.fare, tenses: ctx.tenses, targets: targets,
+                  known: ctx.words.slice(0, 200), words: w.week <= 13 ? 120 : w.week <= 26 ? 160 : 220, maxNew: 6 };
+      Scrivi.storia(req, aiKeys(), function (err, data) {
+        if (err || !data || !data.testo) { storia = { week: w.week, busy: false, err: String(err && err.message || "respuesta rara") }; if (view.screen === "storia") render(); return; }
+        var accept = function (text) {
+          var st = { id: "ai-" + Date.now().toString(36), week: w.week, level: ctx.level, title: String(data.titolo || "Storia"), text: String(text),
+                     gloss: (data.glossario || []).slice(0, 20), questions: (data.domande || []).filter(function (q) { return q && q[1] && q[1].indexOf(q[2]) >= 0; }).slice(0, 3),
+                     targets: targets, at: Date.now() };
+          if (!state.storie) state.storie = [];
+          state.storie.unshift(st);
+          state.storie = state.storie.slice(0, 6);
+          Letture.EPISODI.push(storyEp(st));
+          storia = { week: w.week, busy: false, err: null };
+          persist();
+          view.ep = st.id; view.epFrom = "briefing"; view.tab = "leggi"; view.screen = "lettura";
+          render(); window.scrollTo(0, 0);
+        };
+        var hard = tooHard(String(data.testo));
+        if (hard && hard.miss.length > 3) {
+          Scrivi.storiaRewrite(String(data.testo), hard.miss.slice(0, 12), ctx.words.slice(0, 150), aiKeys(), function (e2, d2) {
+            accept(!e2 && d2 && d2.testo ? d2.testo : data.testo);
+          });
+        } else accept(data.testo);
+      });
+    });
+  }
+  /* Cloze on the story with distractors of the same class and frequency
+     band (the client builds the options: model-made distractors are too
+     rare and give themselves away). */
+  function storyCloze(ep) {
+    var out = [];
+    if (!window.Freq || !Freq.loaded()) return out;
+    var sents = ep.text.split(/(?<=[.!?])\s+/);
+    (ep.hunt.targets || []).slice(0, 3).forEach(function (t, k) {
+      var sent = sents.filter(function (x) { return new RegExp("(^|[^a-zà-ù])" + t + "(?![a-zà-ù])", "i").test(x); })[0];
+      if (!sent) return;
+      var opts = [t].concat(Freq.sameBand(t, 3));
+      if (opts.length < 3) return;
+      out.push({ id: "storia:" + ep.id + ":" + k, src: "lettura", ep: ep.id, type: "choice", prompt: "Completá con la palabra del cuento",
+                 stem: sent.replace(new RegExp("(^|[^a-zà-ù])" + t + "(?![a-zà-ù])", "i"), "$1___"), options: Drills.shuffle(opts), answer: t, accept: [t] });
+    });
+    return out;
+  }
+
   /* ---------------------------------------------------------------- scrivi */
 
   // Everything Italian the course shows, as the checker's dictionary.
@@ -3268,6 +3725,20 @@
       function runAI() {
         r.ai = "…"; r.aiStage = null; r.findings = []; r.hard = 0;
         showScrivi(w, text, r, null);
+        // The evidence for the reviewer: the rule checker now, LanguageTool
+        // when it answers (at most twelve seconds; without it, the review
+        // goes ahead with the local findings only).
+        var ltMsgs = null, waiting = [];
+        if (!state.ltOff) Scrivi.ltCheck(text, function (e2, matches) {
+          ltMsgs = e2 ? [] : Scrivi.fromLT(text, matches, []).map(function (f) { return f.msg.replace(/\*/g, ""); });
+          waiting.splice(0).forEach(function (fn) { fn(); });
+        }); else ltMsgs = [];
+        var evidence = function (go) {
+          var pack = function () { return { local: r.local.filter(function (f) { return !f.soft; }).map(function (f) { return f.msg.replace(/\*/g, ""); }), lt: ltMsgs || [] }; };
+          if (ltMsgs) return go(pack());
+          var t = setTimeout(function () { if (waiting.length) { waiting.length = 0; go(pack()); } }, 6000);
+          waiting.push(function () { clearTimeout(t); go(pack()); });
+        };
         Scrivi.aiCheck(text, w.week, aiKeys(), function (err, data, meta) {
           if (view.screen !== "scrivi" || $("#stext") !== box || box.value !== text) return;
           if (err) { r.ai = "error"; r.aiErr = String(err.message || err); fallback(); return; }
@@ -3280,7 +3751,7 @@
           if (view.screen !== "scrivi" || $("#stext") !== box || box.value !== text) return;
           r.aiStage = stage;
           showScrivi(w, text, r, null);
-        });
+        }, { evidence: evidence });
       }
       function fallback() {
         r.findings = r.local;
@@ -3676,6 +4147,21 @@
       persist();
       renderHeader();
     };
+    on("#plansave", function () {
+      var when = ($("#planwhen").value || "").trim(), where = ($("#planwhere").value || "").trim();
+      if (!when || !where) return toast("Completá cuándo y dónde.");
+      state.plan = { when: when, where: where, min: +$("#planmin").value || 5, at: Date.now() };
+      persist();
+      toast("📌 Plan guardado: cuando " + when + ", " + state.plan.min + " min en " + where + ".", 3500);
+    });
+    document.querySelectorAll("[data-why3]").forEach(function (b) {
+      b.onclick = function () { state.ideal = Object.assign({}, state.ideal || {}, { why: b.dataset.why3, at: Date.now() }); persist(); render(); };
+    });
+    on("#idealsave", function () {
+      state.ideal = Object.assign({}, state.ideal || {}, { text: ($("#idealtext").value || "").trim().slice(0, 120), at: Date.now() });
+      persist(); toast("🎯 Guardado."); render();
+    });
+    on("#share", shareCard);
     var ret = $("#retention");
     if (ret) ret.onchange = function () { state.retention = +ret.value; persist(); toast("Retención: " + Math.round(state.retention * 100) + " %"); };
     var notte = $("#notte");
@@ -3751,7 +4237,18 @@
       renderHeader();
       if (view.screen === "oggi") render();
     }
+    if (document.hidden && course) updateBadge();
   });
+  // The app icon shows how many cards are due (Badging API; a passive
+  // reminder that needs no server and no permission on Android).
+  function updateBadge() {
+    if (!navigator.setAppBadge || !course) return;
+    try {
+      var n = Drills.dueCount(course, state, itemMap);
+      if (n) navigator.setAppBadge(Math.min(n, 20)).catch(function () { /* */ });
+      else navigator.clearAppBadge().catch(function () { /* */ });
+    } catch (e) { /* */ }
+  }
 
   // Test hook (only with ?test in the URL): lets the automated playthrough
   // read the current question so it can answer right or wrong on purpose.
@@ -3789,8 +4286,11 @@
     .then(function (data) {
       course = data;
       itemMap = Drills.itemsById(course);
+      registerStories();
       view.week = Math.min(state.unlocked, 52);
       if (location.hash === "#pausa") { renderHeader(); startRound("pausa"); return; }
+      if (location.hash === "#micro") { renderHeader(); startRound("micro"); return; }
+      updateBadge();
       renderHeader();
       render();
     })
