@@ -1600,7 +1600,8 @@
       "Corregí su texto con mucho cuidado, oración por oración. Marcá TODOS los errores, sin dejar pasar ninguno: gramática, " +
       "concordancia, persona y tiempo del verbo, auxiliares, participios, pronombres, artículos, preposiciones, léxico, falsos amigos, " +
       "castellano metido, ortografía, tildes, dobles, orden. Lo que es correcto pero un italiano no diría así, marcalo como \"stile\". " +
-      "No marques como error algo correcto solo porque se podría decir mejor, y no cambies el contenido.\n" +
+      "No marques como error algo correcto solo porque se podría decir mejor, y no cambies el contenido. Corrección MÍNIMA: " +
+      "arreglá cada error con el menor cambio posible y no reescribas el estilo (los correctores automáticos tienden a sobrecorregir; no lo hagas).\n" +
       "Cada error lleva un \"tipo\" de esta lista: " + Object.keys(AI_TYPES).map(function (k) { return k + " (" + AI_TYPES[k] + ")"; }).join(", ") + ".\n" +
       "Respondé SOLO con JSON: {\"errores\":[{\"mal\":\"fragmento EXACTO copiado del texto, lo más corto posible\"," +
       "\"bien\":\"la corrección de ese fragmento\",\"tipo\":\"uno de la lista\"," +
@@ -1614,30 +1615,44 @@
   }
   /* A second teacher checks the first one's correction: drops what is not
      an error or is repeated, fixes wrong explanations, adds what was missed. */
-  function reviewPrompt(text, week, task, data) {
+  function reviewPrompt(text, week, task, data, evidence) {
+    var ev = "";
+    if (evidence && ((evidence.local || []).length || (evidence.lt || []).length)) {
+      // A model cannot check its own work without outside evidence (Kamoi
+      // et al. 2024): the rule checker and LanguageTool are that evidence.
+      ev = "\nEvidencia externa, para contrastar (verificá cada punto: puede tener falsos positivos, no la copies a ciegas):\n" +
+        (evidence.local || []).slice(0, 12).map(function (m) { return "- corrector de reglas: " + m; }).join("\n") +
+        ((evidence.lt || []).length ? "\n" + evidence.lt.slice(0, 12).map(function (m) { return "- LanguageTool: " + m; }).join("\n") : "") + "\n";
+    }
     return "Sos un segundo profesor de italiano, nativo, que revisa la corrección que un colega hizo del texto de un alumno " +
       "hispanohablante rioplatense (semana " + week + " de 52 de un curso hasta C1; consigna: «" + (task ? task.t : "texto libre") + "»).\n\n" +
-      "Texto del alumno:\n" + text + "\n\nCorrección del colega (JSON):\n" + JSON.stringify(data) + "\n\n" +
+      "Texto del alumno:\n" + text + "\n\nCorrección del colega (JSON):\n" + JSON.stringify(data) + "\n" + ev + "\n" +
       "Revisala y devolvé la versión buena:\n" +
       "1. Cada error tiene que ser un error de verdad en italiano estándar; sacá los que no lo sean.\n" +
       "2. \"mal\" tiene que estar copiado EXACTO del texto del alumno, lo más corto posible.\n" +
       "3. Ningún error repetido ni uno adentro de otro: si un fragmento tiene dos errores, separalos en dos fragmentos cortos.\n" +
       "4. Cada explicación tiene que ser cierta y precisa, en castellano rioplatense, con italiano solo en los ejemplos; corregí las que estén mal.\n" +
       "5. El \"tipo\" tiene que ser el que corresponde de esta lista: " + Object.keys(AI_TYPES).join(", ") + ".\n" +
-      "6. Agregá los errores que el colega no vio.\n" +
+      "6. Agregá los errores que el colega no vio (la evidencia externa puede señalarlos; confirmalos vos).\n" +
+      "6b. Corrección mínima: cada \"bien\" cambia lo menos posible; sacá las correcciones de estilo disfrazadas de error.\n" +
       "7. \"corregido\" tiene que tener todos los arreglos y nada más; \"consigna\" y \"comentario\" tienen que ser ciertos y hablar del texto del alumno.\n" +
       "Respondé SOLO con el JSON revisado, con el mismo formato.";
   }
   // done(err, data, meta): meta says which provider and model corrected and which reviewed.
-  function aiCheck(text, week, keys, done, onStage) {
+  function aiCheck(text, week, keys, done, onStage, opts) {
     var task = TASKS[week];
+    opts = opts || {};
     llm(aiPrompt(text, week, task), keys, function (err, data, meta) {
       if (err) return done(err);
       if (onStage) onStage("review", meta);
-      llm(reviewPrompt(text, week, task, data), keys, function (err2, data2, meta2) {
-        var good = !err2 && data2 && Array.isArray(data2.errores);
-        done(null, good ? data2 : data, { first: meta, review: good ? meta2 : null });
-      });
+      // the evidence may still be on its way (LanguageTool): wait for it a moment
+      var go = function (evidence) {
+        llm(reviewPrompt(text, week, task, data, evidence), keys, function (err2, data2, meta2) {
+          var good = !err2 && data2 && Array.isArray(data2.errores);
+          done(null, good ? data2 : data, { first: meta, review: good ? meta2 : null, evidence: !!evidence });
+        });
+      };
+      if (typeof opts.evidence === "function") opts.evidence(go); else go(opts.evidence || null);
     });
   }
 
@@ -1651,9 +1666,101 @@
       (x.feedback ? "\nCorrección que mostró la app: " + x.feedback : "") +
       "\n\nExplicale al alumno, en 2 a 4 oraciones en castellano rioplatense, qué está mal en su respuesta y cuál es la regla, " +
       "con un ejemplo corto en italiano. Si su respuesta en realidad también es correcta, o si la corrección de la app está mal o confunde, decilo claro.\n" +
+      "No le des la razón por cortesía ni porque insista: «tambien_correcta» solo si su respuesta es italiano estándar correcto y cumple la consigna; " +
+      "ante la duda, mantené la corrección de la app y explicá por qué. Verificá la regla antes de afirmarla; si no estás seguro, decilo.\n" +
       "Respondé SOLO con JSON: {\"tambien_correcta\": true o false, \"app_equivocada\": true o false, \"explicacion\": \"...\"}";
   }
   function explain(x, keys, done) { llm(explainPrompt(x), keys, done); }
+
+  /* Graded hints (dynamic assessment, Aljaafreh & Lantolf 1994; LearnLM
+     2024): first an implicit nudge, then the rule as a question, and only
+     then the explanation.  One request, revealed step by step. */
+  function hintsPrompt(x) {
+    return "Sos profesor de italiano para un hispanohablante rioplatense, y tu método es no dar la respuesta de entrada: " +
+      "primero una pista implícita, después la regla como pregunta, y solo al final la explicación.\n" +
+      "Consigna: " + (x.prompt || "") + "\nEnunciado: " + (x.stem || "") +
+      (x.options && x.options.length ? "\nOpciones: " + x.options.join(" | ") : "") +
+      "\nRespuesta del alumno: " + (x.given || "(vacía)") + "\nRespuesta correcta según la app: " + (x.answer || "") +
+      (x.accept && x.accept.length > 1 ? "\nOtras respuestas aceptadas: " + x.accept.join(" | ") : "") +
+      "\n\nDevolvé tres niveles de mediación, cada uno más explícito que el anterior, SIN revelar la respuesta en los dos primeros:\n" +
+      "pista1: una frase corta en italiano fácil que señale dónde está el problema (ej.: «C'è un errore nel verbo. Rileggi.»).\n" +
+      "pista2: una pregunta en castellano que apunte a la regla (ej.: «Con los verbos de movimiento, ¿qué auxiliar va?»).\n" +
+      "explicacion: 2 a 4 oraciones en castellano rioplatense con la regla y un ejemplo en italiano.\n" +
+      "Si la respuesta del alumno también es correcta en italiano estándar, decilo en la explicación; no le des la razón por cortesía.\n" +
+      "Respondé SOLO con JSON: {\"pista1\": \"...\", \"pista2\": \"...\", \"explicacion\": \"...\", \"tambien_correcta\": true o false, \"app_equivocada\": true o false}";
+  }
+  function hints(x, keys, done) { llm(hintsPrompt(x), keys, done); }
+
+  /* ------------------------------------------------------------ parla
+     Role-play with a goal (Wang et al. 2025; Dugan et al. 2026): hard,
+     measurable rules instead of a persona; a vocabulary list the reply
+     must stay inside (the app measures the miss rate and asks for a
+     rewrite); one recast and at most one note per turn. */
+  function parlaScenarioPrompt(ctx) {
+    return "Diseñá un role-play breve en italiano para un hispanohablante rioplatense de nivel " + ctx.level + " (semana " + ctx.week +
+      " de 52). Función de la semana: «" + ctx.fare + "». Tema: «" + ctx.tema + "».\n" +
+      "Reglas: el alumno tiene que conseguir TRES objetivos comunicativos concretos y verificables hablando con vos. " +
+      "Vos hacés un personaje con un rol claro (empleado, vecino, amigo…), no un profesor. Frases de máximo " + ctx.maxWords + " palabras. " +
+      "Usá solo estos tiempos verbales: " + ctx.tenses + ". Vocabulario permitido: palabras muy frecuentes y esta lista: " + ctx.words.join(", ") + ".\n" +
+      "Respondé SOLO con JSON: {\"titolo\": \"título corto en italiano\", \"ruolo_ia\": \"quién sos, en italiano\", " +
+      "\"situazione_es\": \"la situación explicada al alumno en castellano, 2 oraciones\", " +
+      "\"obiettivi\": [\"objetivo 1 en castellano\", \"objetivo 2\", \"objetivo 3\"], " +
+      "\"apertura\": \"tu primera frase en italiano, en personaje\", \"parole_utili\": [\"6 palabras o expresiones italianas útiles\"]}";
+  }
+  function parlaTurnPrompt(scen, history, userText, ctx) {
+    return "Seguís un role-play en italiano con un alumno hispanohablante de nivel " + ctx.level + ". Tu personaje: " + scen.ruolo_ia +
+      ". Situación: " + scen.situazione_es + ". Objetivos del alumno: " + scen.obiettivi.map(function (o, i) { return (i + 1) + ") " + o; }).join(" ") + "\n" +
+      "Reglas duras: respondé en personaje, en italiano, máximo " + ctx.maxWords + " palabras, solo estos tiempos: " + ctx.tenses +
+      ", vocabulario muy frecuente y de esta lista: " + ctx.words.join(", ") + ". Si el alumno se traba, hacele una pregunta cerrada. " +
+      "No corrijas explícitamente dentro del diálogo: si su frase tiene un error, dala en \"recast\" corregida con el cambio mínimo, y " +
+      "en \"nota_es\" UNA sola observación breve en castellano sobre el error más importante (o vacío). No inventes reglas: si no estás seguro, nota vacía.\n" +
+      "Conversación hasta ahora:\n" + history.map(function (h) { return (h[0] === "ia" ? "Personaje: " : "Alumno: ") + h[1]; }).join("\n") +
+      "\nAlumno: " + userText + "\n\n" +
+      "Respondé SOLO con JSON: {\"risposta\": \"tu turno en italiano\", \"recast\": \"la frase del alumno corregida, o \\\"\\\" si estaba bien\", " +
+      "\"nota_es\": \"una observación o vacío\", \"obiettivi_raggiunti\": [números de los objetivos ya cumplidos por el alumno hasta ahora], \"fine\": true si los tres objetivos están cumplidos}";
+  }
+  function parlaRewritePrompt(reply, words) {
+    return "Riscrivi questa battuta in italiano usando solo parole molto frequenti e di questa lista: " + words.join(", ") +
+      ". Stesso significato, massimo 25 parole. Battuta: «" + reply + "». Rispondi SOLO con JSON: {\"risposta\": \"...\"}";
+  }
+  function parlaStart(ctx, keys, done) { llm(parlaScenarioPrompt(ctx), keys, done); }
+  function parlaTurn(scen, history, userText, ctx, keys, done) { llm(parlaTurnPrompt(scen, history, userText, ctx), keys, done); }
+  function parlaRewrite(reply, words, keys, done) { llm(parlaRewritePrompt(reply, words), keys, done); }
+
+  /* ------------------------------------------------------- storia
+     A short story built on the words due for review plus what the learner
+     already knows (SRS-Stories, Kamzela, Lango & Dušek 2025): the app
+     measures the miss rate and asks for a rewrite when it is too high. */
+  function storiaPrompt(ctx) {
+    return "Escribí un cuento corto en italiano para un hispanohablante de nivel " + ctx.level + " (semana " + ctx.week + " de 52; tema de la semana: «" +
+      ctx.tema + "»). Tres párrafos, " + ctx.words + " palabras en total, frases cortas, gramática de estos tiempos solamente: " + ctx.tenses + ".\n" +
+      "OBLIGATORIO: usá cada una de estas palabras al menos una vez (son las que el alumno tiene que repasar): " + ctx.targets.join(", ") + ".\n" +
+      "Vocabulario: solo palabras muy frecuentes y esta lista de palabras que el alumno ya conoce: " + ctx.known.join(", ") + ". " +
+      "Fuera de esa lista, como máximo " + ctx.maxNew + " palabras nuevas, y ponelas en el glosario.\n" +
+      "Respondé SOLO con JSON: {\"titolo\": \"...\", \"testo\": \"párrafo uno\\n\\npárrafo dos\\n\\npárrafo tres\", " +
+      "\"glossario\": [[\"palabra italiana tal como aparece\", \"significado en castellano\"], ...], " +
+      "\"domande\": [[\"pregunta de comprensión en castellano\", [\"opción correcta\", \"distractor\", \"distractor\", \"distractor\"], \"opción correcta\"], ...3 preguntas]}";
+  }
+  function storiaRewritePrompt(text, miss, known) {
+    return "Riscrivi questo testo in italiano sostituendo o eliminando queste parole, troppo difficili per l'alunno: " + miss.join(", ") +
+      ". Usa solo parole molto frequenti e di questa lista: " + known.join(", ") + ". Stesso contenuto e stessa lunghezza. Testo:\n" + text +
+      "\nRispondi SOLO con JSON: {\"testo\": \"...\"}";
+  }
+  function storia(ctx, keys, done) { llm(storiaPrompt(ctx), keys, done); }
+
+  /* The written part of the C1 exam, graded with the certification rubric
+     (adeguatezza, coesione, correttezza, lessico), 0-5 each. */
+  function esamePrompt(task, text) {
+    return "Sos examinador de italiano de una certificación C1 (CILS / CELI / PLIDA). Un candidato hispanohablante escribió este texto.\n" +
+      "Consigna: " + task.t + "\nExtensión pedida: unas " + task.words + " palabras.\n\nTexto:\n" + text + "\n\n" +
+      "Evaluá con la rúbrica oficial, de 0 a 5 cada criterio: adeguatezza (cumple la consigna, el registro y la extensión), " +
+      "coesione (párrafos, conectores, progresión), correttezza (gramática y ortografía; un C1 tolera muy pocos errores), lessico (riqueza y precisión). " +
+      "Sé exigente y justo: un texto A2 no pasa de 2 en correttezza y lessico. Listá los errores más importantes (máximo 8) con su corrección mínima.\n" +
+      "Respondé SOLO con JSON: {\"punteggi\": {\"adeguatezza\": 0-5, \"coesione\": 0-5, \"correttezza\": 0-5, \"lessico\": 0-5}, " +
+      "\"commento\": \"3 oraciones en castellano rioplatense: qué está bien, qué le falta para C1\", \"errori\": [[\"fragmento mal\", \"corrección\"], ...]}";
+  }
+  function esame(task, text, keys, done) { llm(esamePrompt(task, text), keys, done); }
+  function storiaRewrite(text, miss, known, keys, done) { llm(storiaRewritePrompt(text, miss, known), keys, done); }
 
   /* One request at a time through the models of each provider, best first:
      each attempt waits at most 20 s, each provider at most 40 s.  The model
@@ -1794,7 +1901,9 @@
 
   var api = { TASKS: TASKS, features: features, lint: lint, check: check, markup: markup, weeks: weeks, toks: toks,
               learn: learn, learnCourse: learnCourse, ltCheck: ltCheck, fromLT: fromLT,
-              aiCheck: aiCheck, fromAI: fromAI, aiPrompt: aiPrompt, explain: explain, explainPrompt: explainPrompt, reviewPrompt: reviewPrompt, PROVIDERS: PROVIDERS, AI_TYPES: AI_TYPES };
+              aiCheck: aiCheck, fromAI: fromAI, aiPrompt: aiPrompt, explain: explain, explainPrompt: explainPrompt, reviewPrompt: reviewPrompt,
+              hints: hints, hintsPrompt: hintsPrompt, parlaStart: parlaStart, parlaTurn: parlaTurn, parlaRewrite: parlaRewrite,
+              parlaScenarioPrompt: parlaScenarioPrompt, parlaTurnPrompt: parlaTurnPrompt, storia: storia, storiaRewrite: storiaRewrite, storiaPrompt: storiaPrompt, esame: esame, esamePrompt: esamePrompt, PROVIDERS: PROVIDERS, AI_TYPES: AI_TYPES };
   if (typeof module === "object" && module.exports) module.exports = api;
   else root.Scrivi = api;
 })(typeof window !== "undefined" ? window : globalThis);

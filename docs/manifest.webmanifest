@@ -1,7 +1,7 @@
 {
   "name": "La Via C1 — italiano",
   "short_name": "Italiano",
-  "description": "Hablá italiano rápido: frases, micrófono, pausas de 3 minutos y gramática hasta C1.",
+  "description": "Hablá italiano rápido: frases, escucha, pausas de 3 minutos y gramática hasta C1.",
   "lang": "es",
   "start_url": "./",
   "scope": "./",
@@ -17,6 +17,8 @@
   ],
   "shortcuts": [
     { "name": "Pausa caffè", "short_name": "Pausa", "url": "./#pausa",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Ripasso 2 min", "short_name": "2 min", "url": "./#micro",
       "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] }
   ]
 }

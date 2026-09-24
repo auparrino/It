@@ -197,7 +197,9 @@ ok(Letture.ofSeries("cultura").length >= 10, "almeno 10 letture di cultura");
 ok(uniq(Letture.EPISODI.map(function (e) { return e.id; })), "id di lettura unici");
 Letture.EPISODI.forEach(function (ep) {
   var toks = Letture.allTokens(ep);
-  ok(toks.length >= 80 && toks.length <= 140, "lunghezza della lettura " + ep.id + ": " + toks.length);
+  // Le inondazioni (input flood) sono più lunghe: la struttura deve ripetersi.
+  var lo = ep.series === "flood" ? 150 : 80, hi = ep.series === "flood" ? 240 : 140;
+  ok(toks.length >= lo && toks.length <= hi, "lunghezza della lettura " + ep.id + ": " + toks.length);
   Object.keys(ep.gloss).forEach(function (k) {
     ok(toks.some(function (t) { return Letture.glossFor(ep, t) === ep.gloss[k]; }),
        "glossa senza parola nel testo: " + ep.id + "/" + k);
@@ -305,7 +307,7 @@ ok(Engine.sanitize(null).xp === 0 && Engine.sanitize([1, 2]).xp === 0, "salvatag
 var goodSave = Engine.blankSave();
 goodSave.xp = 1234; goodSave.cards["frase:bar:1"] = Engine.schedule(null, 2);
 var kept = Engine.sanitize(JSON.parse(JSON.stringify(goodSave)));
-ok(kept.xp === 1234 && kept.cards["frase:bar:1"].interval === 1, "un salvataggio sano non si tocca");
+ok(kept.xp === 1234 && kept.cards["frase:bar:1"].interval === goodSave.cards["frase:bar:1"].interval && kept.cards["frase:bar:1"].s === goodSave.cards["frase:bar:1"].s, "un salvataggio sano non si tocca");
 
 var fdg = Frasi.ofTheDay(day(2026, 6, 1));
 ok(fdg === Frasi.ofTheDay(day(2026, 6, 1, 23)), "la frase del giorno non cambia nel giorno");

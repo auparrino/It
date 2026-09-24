@@ -752,3 +752,52 @@ ul.ainotes li { margin: 4px 0; }
   .toast, .xpgain, .tiles-answer .tile, .node.current .dot, .node .bubble, .lesdone .bigstar, .ring.bump, .hud .dai {
     animation: none !important; }
 }
+
+/* --- fiducia, ipercorrezione, stanchezza --- */
+.feedback.conf { border-color: var(--azzurro); }
+.confrow { justify-content: space-between; }
+.confrow .tab { flex: 1; text-align: center; }
+.note.hyper { border-left: 3px solid var(--oro); }
+.note.fatigue { background: var(--travertino); margin: 0 0 10px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.keyword { margin-top: 12px; }
+.keyword .typed input { flex: 1; min-width: 0; }
+.stem.big { font-size: 1.9rem; text-align: center; }
+
+/* --- suoni, dictogloss, leggi e ascolta --- */
+.options.pair .opt { font-size: 1.35rem; }
+.pairbox { margin: 8px 0; }
+.pairrow { display: flex; align-items: center; gap: 10px; padding: 4px 0; }
+.pairrow i.dur { display: inline-block; height: 8px; width: 34px; border-radius: 4px; background: var(--azzurro); }
+.pairrow i.dur.long { width: 68px; background: var(--terracotta); }
+.karbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 10px; }
+.seg { display: inline-flex; gap: 4px; }
+.seg .tab.on { background: var(--azzurro); color: #fff; border-color: var(--azzurro); }
+.text .w.now { background: color-mix(in srgb, var(--oro) 45%, transparent); border-radius: 4px; }
+.text.enh .w.form { background: color-mix(in srgb, var(--azzurro) 22%, transparent); border-radius: 4px; padding: 0 2px; font-weight: 700; }
+body.kar-partial .text .w:not(.gl):not(.now) { color: transparent; border-bottom: 2px solid var(--grigio-chiaro); }
+body.kar-audio .text { filter: blur(6px); pointer-events: none; }
+.note.flood { border-left: 3px solid var(--azzurro); }
+.lead-ex { margin: 6px 0 10px; }
+.lead-ex.data ol.exs { padding-left: 20px; }
+.lead-ex.data ol.exs li { display: list-item; font-size: 1.05rem; margin: 4px 0; }
+.options.rules .opt { text-align: left; white-space: normal; line-height: 1.35; }
+
+/* --- parla --- */
+.chat { display: flex; flex-direction: column; gap: 8px; margin: 12px 0; }
+.bubble { max-width: 88%; padding: 10px 14px; border-radius: 16px; line-height: 1.4; }
+.bubble.ia { align-self: flex-start; background: var(--travertino); border-bottom-left-radius: 4px; }
+.bubble.me { align-self: flex-end; background: color-mix(in srgb, var(--azzurro) 18%, transparent); border-bottom-right-radius: 4px; }
+
+/* --- abitudine e mete --- */
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0; }
+.chips .tab.on { background: var(--azzurro); color: #fff; border-color: var(--azzurro); }
+.planline { margin: -4px 0 12px; }
+.card.goalweek { padding-bottom: 12px; }
+.weekcard.ritorno { border-left: 4px solid var(--oro); }
+
+/* --- esame --- */
+.equestions { padding-left: 20px; }
+.equestions li { margin: 10px 0; }
+.eopt { display: block; padding: 4px 0; }
+.egap { width: 100%; max-width: 220px; }
+.etitle { width: 100%; margin-bottom: 4px; }
