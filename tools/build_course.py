@@ -1037,8 +1037,12 @@ def main() -> None:
     for it in items:
         by_chapter.setdefault(it["chapter"], []).append(it["id"])
     by_topic = {}
+    by_week_authored = {}
     for it in authored:
-        by_topic.setdefault(it["topic"], []).append(it["id"])
+        if it.get("w"):
+            by_week_authored.setdefault(int(it["w"]), []).append(it["id"])
+        else:
+            by_topic.setdefault(it["topic"], []).append(it["id"])
 
     challenges = {c["chapter"]: c for c in routledge["chapters"]}
 
@@ -1068,6 +1072,9 @@ def main() -> None:
             if t not in by_topic:
                 missing.append("tema '%s' (settimana %s)" % (t, spec["w"]))
             pool += by_topic.get(t, [])
+        # authored items that name their own week («w»): garden path,
+        # scopri la regola, output empujado, contrastes, colocaciones…
+        pool += [i for i in by_week_authored.get(spec["w"], []) if i not in pool]
 
         chal = []
         review = spec.get("boss") or spec["w"] in (49, 50, 51)

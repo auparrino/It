@@ -100,7 +100,8 @@ function play(items, kind, week, acc) {
     if (it.src !== "coniugatore" && it.src !== "lettura") {
       var light = !it.frase && it.src !== "vocab" && it.src !== "lab" && it.src !== "banca" && !it.retry &&
                   (kind === "round" || kind === "sfida" || kind === "boss");
-      state.cards[it.id] = Engine.schedule(state.cards[it.id], q, { light: light, kind: ekind });
+      state.cards[it.id] = Engine.schedule(state.cards[it.id], q, { light: light, kind: ekind, id: it.id, state: state, retry: !!it.retry, now: clock.t });
+      Engine.maybeFit(state);
     }
     state.totals.attempts++;
     if (right) state.totals.right++; else state.totals.wrong++;

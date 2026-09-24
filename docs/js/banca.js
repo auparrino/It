@@ -150,6 +150,9 @@
              note: kindNote(n, kind), diag: true, say: ans };
   }
 
+  // The frequency layer (docs/js/frequenza.js), when the app loaded it.
+  function Freq() { return root.Freq && root.Freq.loaded() ? root.Freq : null; }
+
   function vocabSession(state, size) {
     var lvl = levelOf(state), cards = state.cards || {};
     var pool = [];
@@ -158,6 +161,10 @@
     B.adjectives.forEach(function (a) { if (within(a[5], lvl)) pool.push([a, "a"]); });
     B.words.forEach(function (w) { if (within(w[3], lvl)) pool.push([w, "w"]); });
     var fresh = shuffle(pool.filter(function (x) { return !cards["b:voc:" + x[0][0]]; }));
+    // The most frequent unknown words first (Nation 2006): a shuffle within
+    // the same band keeps the sessions varied.
+    var F = Freq();
+    if (F) fresh.sort(function (a, b) { return Math.round(F.zipf(b[0][0]) * 2) - Math.round(F.zipf(a[0][0]) * 2); });
     var seen = shuffle(pool.filter(function (x) { return cards["b:voc:" + x[0][0]]; }));
     var out = [];
     // New words: recognise first; known words: produce (desirable difficulty).
@@ -168,6 +175,20 @@
     }
     return shuffle(out);
   }
+
+  /* A session on given lemmas (the frequent words the learner lacks, from
+     the coverage meter): the bank entries that match, recognised first. */
+  function vocabSessionFor(state, lemmas, size) {
+    var cards = state.cards || {}, out = [];
+    (lemmas || []).forEach(function (l) {
+      var n = IDX.noun[l] ? [IDX.noun[l], "n"] : IDX.verb[l] ? [IDX.verb[l], "v"] : IDX.adj[l] ? [IDX.adj[l], "a"] : IDX.word[l] ? [IDX.word[l], "w"] : null;
+      if (!n || out.length >= (size || 12)) return;
+      out.push(cards["b:voc:" + n[0][0]] ? vocabWrite(n[0], n[1]) : vocabChoice(n[0], n[1]));
+    });
+    return out;
+  }
+  // Is a lemma in the bank at all (so the coverage meter can offer it)?
+  function hasWord(l) { return !!(IDX.noun[l] || IDX.verb[l] || IDX.adj[l] || IDX.word[l]); }
 
   /* ------------------------------------------------------------ forme */
 
@@ -497,6 +518,8 @@
     vocabChoice: vocabChoice,
     vocabWrite: vocabWrite,
     vocabSession: vocabSession,
+    vocabSessionFor: vocabSessionFor,
+    hasWord: hasWord,
     articleItem: articleItem,
     pluralItem: pluralItem,
     prepItem: prepItem,

@@ -568,7 +568,7 @@
     if (!c) return 1;
     if (Engine && Engine.retired && Engine.retired(c)) return 0;
     if (c.reps === 0 && c.seen) return 3;
-    if ((c.ease || 2.5) < 2.3) return 2;
+    if ((c.d != null ? c.d >= 7 : (c.ease || 2.5) < 2.3)) return 2;
     return 0.5;
   }
 
@@ -700,16 +700,25 @@
   /* La coda di ripasso: prima gli errori (reps 0), poi la settimana in
      corso, poi il resto per scadenza.  Le schede con 90 giorni di intervallo
      sono imparate e non tornano (niente arretrato di 2.000 schede). */
+  /* Order: what was learnt last night (sleep in between: Mazza 2016) and
+     the confident errors (hypercorrection), then the errors, then the
+     current week, then the rest by due date; the cards in maintenance
+     (months apart) last, at most MAINT_A_DAY a day, so the queue never
+     becomes a debt. */
+  var MAINT_A_DAY = 6;
   function dueList(map, state) {
-    var now = Date.now(), week = (state && state.unlocked) || 1, due = [];
+    var now = Date.now(), week = (state && state.unlocked) || 1, due = [], today = Engine ? Engine.dayKey() : "";
+    var maint = 0;
     Object.keys(state.cards).forEach(function (id) {
       var card = state.cards[id];
-      if (!knownId(map, id) || !card.due || card.due > now || (Engine && Engine.retired && Engine.retired(card))) return;
-      var pri = card.reps === 0 ? 0 : (map[id] && map[id].wk === week) ? 1 : 2;
-      due.push({ id: id, due: card.due, pri: pri });
+      if (!knownId(map, id) || !card.due || card.due > now) return;
+      var isMaint = card.state === "maint" || (card.s == null && Engine && Engine.retired && Engine.retired(card));
+      var pri = (card.night && card.night === today) || card.hyper ? -1
+              : card.reps === 0 ? 0 : (map[id] && map[id].wk === week) ? 1 : isMaint ? 3 : 2;
+      due.push({ id: id, due: card.due, pri: pri, maint: isMaint });
     });
     due.sort(function (a, b) { return a.pri - b.pri || a.due - b.due; });
-    return due;
+    return due.filter(function (d) { if (!d.maint) return true; return ++maint <= MAINT_A_DAY; });
   }
 
   function buildReview(course, state, size, opts) {
@@ -890,6 +899,7 @@
     DOMINA_SIZE: DOMINA_SIZE,
     weakItems: weakItems,
     buildReview: buildReview,
+    dueList: dueList,
     mastered: mastered,
     coverage: coverage,
     dueCount: dueCount,

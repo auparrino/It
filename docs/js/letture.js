@@ -576,7 +576,394 @@
         ["¿Cuál es el tono del libro?", ["irónico y liviano", "trágico y solemne", "político y agresivo", "técnico"], "irónico y liviano"]
       ],
       hunt: { label: "Tocá las palabras que remiten a la historia del siglo XX", targets:
-        ["dopoguerra", "fascismo", "razziali", "guerra", "arresto"] } }
+        ["dopoguerra", "fascismo", "razziali", "guerra", "arresto"] } },
+
+    /* ---------------------------------------------- Inondazioni.
+       Input flood + textual enhancement (Trahey & White 1993; Lee & Huang
+       2008): una struttura ripetuta molte volte in un testo naturale; prima
+       si legge senza segni, poi con la struttura evidenziata.  `flood.forms`
+       sono i token esatti (minuscoli) da evidenziare alla seconda lettura;
+       la caccia usa gli stessi bersagli. */
+
+    { id: "fl-da", week: 9, series: "flood", n: 1, level: "A2", emoji: "⏳",
+      title: "Da quanto tempo?", grammar: "da + tempo (presente)",
+      flood: { target: "da + tiempo", forms: ["da"], n: 14,
+               es: "Fijate en «da» + tiempo: en italiano va con el presente («vivo qui da tre anni» = vivo acá desde hace tres años), nunca con el pasado." },
+      text:
+        "Martín è a Bologna da tre mesi. Abita in via Zamboni da settembre, con Giulia. " +
+        "Giulia abita in questa casa da due anni e conosce tutti nel palazzo.\n\n" +
+        "Ogni mattina, alle otto, Martín va al bar sotto casa. Il barista, Paolo, lavora lì da vent'anni " +
+        "e conosce tutti i clienti. «Da quanto tempo sei in Italia?» chiede Paolo. " +
+        "«Da tre mesi» risponde Martín. «E parli già bene!» «Grazie. Studio l'italiano da un " +
+        "anno, ma parlo solo da poco.»\n\n" +
+        "Al bar c'è anche Paola, una studentessa di Roma. Paola studia a Bologna da quattro " +
+        "anni e ha un gatto da sei mesi. Il gatto ha un nome strano: Dante, come il poeta. «Penso a questo " +
+        "nome da molto tempo» dice Paola. «Dante è un nome perfetto per un gatto.»\n\n" +
+        "Martín e Paola parlano da mezz'ora, e Martín non guarda il telefono da mezz'ora! " +
+        "È un record. Da oggi Martín ha una nuova amica.",
+      gloss: { palazzo: "edificio", sotto: "debajo de", barista: "el que atiende el bar",
+               "vent'anni": "veinte años", già: "ya", poco: "(da poco) hace poco",
+               gatto: "gato", strano: "raro", penso: "pienso", "mezz'ora": "media hora",
+               guarda: "mira", oggi: "hoy" },
+      questions: [
+        ["¿Desde cuándo vive Martín en Bolonia?", ["desde hace tres meses", "desde hace un año", "desde hace dos años", "desde ayer"], "desde hace tres meses"],
+        ["¿Desde cuándo trabaja Paolo en el bar?", ["desde hace veinte años", "desde hace tres meses", "desde septiembre", "desde hace seis meses"], "desde hace veinte años"],
+        ["¿Qué tiene Paola desde hace seis meses?", ["un gato", "un perro", "un departamento", "un novio"], "un gato"]
+      ],
+      hunt: { label: "Tocá todos los da", targets: ["da"] } },
+
+    { id: "fl-mica", week: 18, series: "flood", n: 2, level: "A2", emoji: "🚫",
+      title: "Non è mica tardi", grammar: "mica e le negazioni",
+      flood: { target: "mica / negazioni", forms: ["mica", "niente", "nulla", "nessuno", "mai", "neanche", "nemmeno", "più"], n: 19,
+               es: "Mirá cómo «mica» refuerza la negación («non è mica tardi» = no es tarde para nada) y cómo niente, mai, nessuno van después del verbo, con «non» adelante." },
+      text:
+        "Domenica sera. Martín apre il frigorifero: non c'è niente. Nemmeno un uovo.\n\n" +
+        "«Giulia, non hai fatto la spesa?»\n" +
+        "«No, non ho avuto tempo. E tu? Non hai mica comprato qualcosa?»\n" +
+        "«Neanche io. Non ho comprato nulla, ieri il mercato era chiuso.»\n\n" +
+        "Giulia guarda l'orologio: le nove. «Non è mica tardi. Il ristorante di Marco è " +
+        "aperto fino a mezzanotte.»\n" +
+        "«Non ho mica voglia di uscire. Piove.»\n" +
+        "«Non piove più, guarda! E poi non c'è nessuno per strada, è tranquillo.»\n" +
+        "«Ma io non ho mica soldi, oggi. Lo stipendio arriva domani.»\n" +
+        "«Pago io. Non è mica un problema.»\n\n" +
+        "Martín sorride. Con Giulia non è mai un problema. Non ha mai visto una persona " +
+        "così: non si arrabbia mai, non si lamenta mai, non dice mai di no.\n\n" +
+        "Al ristorante Marco porta due piatti di tagliatelle. Martín mangia tutto, non " +
+        "lascia niente nel piatto. Giulia ride: «Non avevi mica fame, eh?» «Non tanto» " +
+        "risponde Martín. «Mica tanto.»",
+      gloss: { uovo: "huevo", spesa: "(fare la spesa) hacer las compras",
+               mica: "para nada, ni (refuerza la negación)", orologio: "reloj", tardi: "tarde",
+               voglia: "(avere voglia di) tener ganas de", piove: "llueve", soldi: "plata",
+               stipendio: "sueldo", arrabbia: "(si arrabbia) se enoja", lamenta: "(si lamenta) se queja",
+               piatti: "platos", lascia: "deja", ride: "se ríe" },
+      questions: [
+        ["¿Por qué no hay nada en la heladera?", ["ninguno de los dos hizo las compras", "Giulia se comió todo", "se rompió la heladera", "Martín está de viaje"], "ninguno de los dos hizo las compras"],
+        ["¿Por qué Martín no quiere pagar?", ["el sueldo le llega mañana", "es tacaño", "Giulia se lo prohibió", "el restaurante es gratis"], "el sueldo le llega mañana"],
+        ["¿Qué hace Martín con las tagliatelle?", ["se come todo", "deja la mitad", "no las prueba", "las comparte con Marco"], "se come todo"]
+      ],
+      hunt: { label: "Tocá todas las palabras negativas (mica, niente, mai, nessuno…)", targets:
+        ["mica", "niente", "nulla", "nessuno", "mai", "neanche", "nemmeno", "più"] } },
+
+    { id: "fl-ne", week: 21, series: "flood", n: 3, level: "B1", emoji: "🥟",
+      title: "Quanti ne vuole?", grammar: "ne partitivo",
+      flood: { target: "ne partitivo", forms: ["ne"], n: 14,
+               es: "Fijate en «ne»: reemplaza «de eso / de ellos» y aparece siempre que hay una cantidad («ne prendo un chilo», «non ne ho neanche uno»). En castellano no lo decimos; acá es obligatorio." },
+      text:
+        "Sabato Martín organizza una cena a casa. Al mercato compra i tortellini: «Quanti " +
+        "ne vuole?» chiede il signore del banco. «Siamo in sei… ne prendo un chilo.» «Un " +
+        "chilo? Ne basta la metà. I tortellini sono piccoli ma pesanti.» Martín ne prende " +
+        "mezzo chilo.\n\n" +
+        "Poi passa dal fornaio. «Ha il pane di ieri?» «Ne ho ancora un po', ma oggi è " +
+        "meglio quello fresco. Quanto ne vuole?» «Ne vorrei due filoni.» «Con sei persone " +
+        "ne basta uno.»\n\n" +
+        "A casa Giulia guarda le buste: «Hai comprato il vino?» «Ne ho comprate tre " +
+        "bottiglie, di rosso.» «E il parmigiano?» «Ne ho preso un pezzo grande.» «E i tovaglioli?» " +
+        "Silenzio. «Non ne ho neanche uno.» Giulia ride: «Ne ho io, tranquillo.»\n\n" +
+        "Alle otto arrivano gli amici, tutti con fame. Alla fine della cena Paola chiede: «Sono rimasti " +
+        "tortellini?» Martín guarda la pentola: «No, non ne è rimasto nemmeno uno. Ma di " +
+        "dolce ne ho fatti due!»",
+      gloss: { banco: "puesto (del mercado)", metà: "mitad", pesanti: "pesados", fornaio: "panadero",
+               filoni: "(filone) pan largo, flauta", buste: "bolsas", pezzo: "pedazo",
+               tovaglioli: "servilletas", neanche: "ni siquiera", tranquillo: "quedate tranquilo",
+               rimasti: "quedado (rimanere = quedar, sobrar)", pentola: "olla", nemmeno: "ni siquiera",
+               dolce: "postre" },
+      questions: [
+        ["¿Cuántos tortellini compra al final?", ["medio kilo", "un kilo", "dos kilos", "ninguno"], "medio kilo"],
+        ["¿Qué se olvidó de comprar?", ["las servilletas", "el vino", "el pan", "el queso"], "las servilletas"],
+        ["¿Qué sobró al final de la cena?", ["ni un tortellino, pero hay dos postres", "medio kilo de tortellini", "todo el vino", "el pan"], "ni un tortellino, pero hay dos postres"]
+      ],
+      hunt: { label: "Tocá todos los ne", targets: ["ne"] } },
+
+    { id: "fl-ci", week: 21, series: "flood", n: 4, level: "B1", emoji: "📚",
+      title: "Ci vado ogni giorno", grammar: "ci locativo",
+      flood: { target: "ci locativo", forms: ["ci"], n: 15,
+               es: "Mirá «ci» = ahí/allá: reemplaza el lugar ya nombrado («ci vado», «ci lavora»). En castellano lo omitimos («voy», «trabaja»); en italiano casi siempre hace falta." },
+      text:
+        "Martín ha scoperto una biblioteca in via del Piombo. Ci va quasi ogni pomeriggio, " +
+        "perché a casa non riesce a studiare. Ci sono lunghe tavole di legno, luce calda e " +
+        "silenzio.\n\n" +
+        "«Ci vieni anche tu?» chiede a Paola. «Io ci sono già stata, ma non ci torno: ci " +
+        "fa troppo freddo d'inverno.» «Freddo? Io ci sto benissimo. Ci resto fino alle sette " +
+        "e nessuno mi disturba.»\n\n" +
+        "Giulia invece conosce un posto diverso: il bar sotto i portici di via Saragozza. " +
+        "«Ci lavora mia cugina. Ci puoi stare tutto il giorno con un solo caffè.» Martín ci " +
+        "prova il giorno dopo. Ci arriva alle tre, si siede vicino alla finestra e apre il " +
+        "libro. Alle tre e mezza ci entra un gruppo di studenti che parlano forte. Alle " +
+        "quattro ci passa la cugina di Giulia con un piatto di cornetti. Alle cinque Martín " +
+        "chiude il libro: non ha letto nemmeno una pagina.\n\n" +
+        "Il giorno dopo torna in biblioteca. Al bar ci andrà la domenica, per i cornetti.",
+      gloss: { scoperto: "descubierto", riesce: "(riuscire a) logra", tavole: "mesas grandes",
+               legno: "madera", freddo: "frío", disturba: "molesta", posto: "lugar",
+               portici: "soportales", cugina: "prima", prova: "(ci prova) lo intenta",
+               finestra: "ventana", forte: "(parlare forte) hablar alto", cornetti: "medialunas",
+               nemmeno: "ni siquiera" },
+      questions: [
+        ["¿Por qué Paola no vuelve a la biblioteca?", ["hace demasiado frío", "es muy ruidosa", "queda lejos", "cierra temprano"], "hace demasiado frío"],
+        ["¿Quién trabaja en el bar de via Saragozza?", ["la prima de Giulia", "la mamá de Paola", "Marco", "un amigo de Martín"], "la prima de Giulia"],
+        ["¿Cuántas páginas lee Martín en el bar?", ["ninguna", "una", "diez", "todo el libro"], "ninguna"]
+      ],
+      hunt: { label: "Tocá todos los ci", targets: ["ci"] } },
+
+    { id: "fl-combinati", week: 22, series: "flood", n: 5, level: "B1", emoji: "🎁",
+      title: "Glielo porto io", grammar: "pronomi combinati",
+      flood: { target: "pronomi combinati", forms: ["glielo", "gliela", "glieli", "gliene", "restituirglielo", "dirglielo", "portaglielo"], n: 14,
+               es: "Fijate en los pronombres combinados: gli/le + lo/la/li/le/ne se funden en una sola palabra (glielo, gliela, gliene), sea para él o para ella, y van pegados al infinitivo y al imperativo (portaglielo)." },
+      text:
+        "Martín ha un problema piccolo ma fastidioso: ha ancora il libro della professoressa " +
+        "Bianchi, un dizionario che lei gli ha prestato a settembre. Il corso è finito e lui " +
+        "non sa come restituirglielo.\n\n" +
+        "«Glielo porto in ufficio?» chiede a Giulia. «Non so se lei è ancora all'università.»\n" +
+        "«Glielo puoi lasciare in portineria. Oppure glielo mandi per posta.»\n" +
+        "«Per posta? È pesante, e poi vorrei anche ringraziarla. Vorrei dirglielo di persona.»\n" +
+        "«Allora scrivile. Chiedile un appuntamento e portaglielo tu.»\n\n" +
+        "Martín scrive. La professoressa risponde in cinque minuti: «Il dizionario? Glielo " +
+        "regalo: a lei serve più che a me. E gli appunti del corso, se li ha ancora, glieli lascio " +
+        "volentieri.»\n" +
+        "Martín legge il messaggio a Giulia due volte. «Gliene devo almeno uno, di caffè.»\n" +
+        "«Gliene devi una decina, direi. E anche una torta.»\n" +
+        "«La torta gliela faccio io, tu però mi dai la ricetta.»\n" +
+        "«Certo. Ma la crema gliela prepari tu, che io sono stanca.»\n\n" +
+        "La settimana dopo Martín porta la torta in ufficio. La professoressa la assaggia e " +
+        "sorride: «Glielo dico subito: la prossima gliela chiedo per il mio compleanno.»",
+      gloss: { fastidioso: "molesto (no «aburrido»)", prestato: "prestado", restituirglielo: "(restituire) devolvérselo",
+               portineria: "portería, conserjería", oppure: "o bien", pesante: "pesado",
+               ringraziarla: "agradecerle", appuntamento: "cita", serve: "(servire a) le sirve, le hace falta",
+               decina: "unos diez", direi: "diría", ricetta: "receta", assaggia: "prueba",
+               compleanno: "cumpleaños" },
+      questions: [
+        ["¿Qué tiene que devolver Martín?", ["un diccionario", "una torta", "una receta", "un libro de poesía"], "un diccionario"],
+        ["¿Qué decide la profesora?", ["se lo regala", "quiere que se lo mande por correo", "lo pide de vuelta enseguida", "se olvidó del libro"], "se lo regala"],
+        ["¿Quién prepara la torta?", ["Martín, con la receta de Giulia", "Giulia sola", "la profesora", "la prima de Giulia"], "Martín, con la receta de Giulia"]
+      ],
+      hunt: { label: "Tocá todos los pronombres combinados (glielo, gliela, gliene…)", targets:
+        ["glielo", "gliela", "glieli", "gliene", "restituirglielo", "dirglielo", "portaglielo"] } },
+
+    { id: "fl-congiuntivo", week: 25, series: "flood", n: 6, level: "B1", emoji: "💭",
+      title: "Credo che sia stanco", grammar: "congiuntivo presente dopo opinione",
+      flood: { target: "congiuntivo presente dopo verbi di opinione", forms: ["sia", "lavori", "abbia", "manchi", "stia", "voglia", "racconti", "faccia"], n: 12,
+               es: "Mirá qué pasa después de «penso che», «credo che», «mi sembra che», «spero che»: el verbo va en congiuntivo (sia, abbia, faccia). En castellano decimos «creo que es»; en italiano, «credo che sia»." },
+      text:
+        "Da qualche settimana Martín parla meno del solito, e al bar tutti hanno un'opinione.\n\n" +
+        "«Secondo me è innamorato» dice Paolo, il barista. «Credo che sia una del corso di italiano.»\n" +
+        "«Non credo», risponde Giulia. «Penso che sia stanco e basta. Mi sembra che lavori troppo: " +
+        "esce alle sette e torna alle nove.»\n" +
+        "«Io invece penso che abbia nostalgia» dice Paola. «Non credo che sia facile stare " +
+        "così lontano dalla famiglia. Immagino che sua madre gli manchi molto.»\n" +
+        "«È possibile che abbia semplicemente bisogno di dormire» aggiunge la cugina di Giulia.\n\n" +
+        "A mezzogiorno Martín entra, ordina un caffè e non dice una parola.\n" +
+        "«Ho l'impressione che stia male» sussurra Paolo.\n" +
+        "«Dubito che voglia parlarne» dice Giulia. «Ma spero che ci racconti qualcosa.»\n\n" +
+        "Martín beve il caffè, guarda tutti e sorride: «Vi sento, sapete. Non sono innamorato, " +
+        "non sono malato e mia madre sta benissimo. È che studio l'inglese per il lavoro, e mi " +
+        "sembra che il cervello non ce la faccia con due lingue nuove.»\n" +
+        "Giulia ride: «Allora credo che tu abbia bisogno di una birra, non di un caffè.»",
+      gloss: { solito: "(meno del solito) menos que de costumbre", innamorato: "enamorado",
+               basta: "(e basta) y nada más", nostalgia: "(avere nostalgia) extrañar",
+               manchi: "(gli manchi) la extrañe (mancare = hacer falta)", aggiunge: "agrega",
+               impressione: "(avere l'impressione) tener la sensación", sussurra: "susurra",
+               dubito: "dudo", parlarne: "hablar de eso", racconti: "cuente", cervello: "cerebro",
+               faccia: "(ce la faccia) pueda, dé abasto", birra: "cerveza" },
+      questions: [
+        ["¿Qué cree Paolo, el barista?", ["que Martín está enamorado", "que está enfermo", "que trabaja demasiado", "que extraña a su madre"], "que Martín está enamorado"],
+        ["¿Qué le pasa en realidad a Martín?", ["estudia inglés y el cerebro no le da abasto", "está enamorado", "está enfermo", "su madre está enferma"], "estudia inglés y el cerebro no le da abasto"],
+        ["¿Qué le propone Giulia al final?", ["una cerveza", "un café", "dormir", "dejar el inglés"], "una cerveza"]
+      ],
+      hunt: { label: "Tocá todos los verbos en congiuntivo (sia, abbia, faccia…)", targets:
+        ["sia", "lavori", "abbia", "manchi", "stia", "voglia", "racconti", "faccia"] } },
+
+    { id: "fl-condpassato", week: 31, series: "flood", n: 7, level: "B2", emoji: "🚆",
+      title: "Avrei dovuto chiamare", grammar: "condizionale passato",
+      flood: { target: "condizionale passato", forms: ["avrei", "avresti", "avrebbe", "avremmo", "sarei", "saresti", "dovuto", "potuto", "voluto"], n: 24,
+               es: "Fijate en el condizionale passato: avrei/avresti/avrebbe + participio («avrei dovuto chiamare» = tendría que haber llamado). Lo que en castellano son dos verbos, acá es un solo tiempo compuesto." },
+      text:
+        "Lunedì è stato un disastro, e Martín lo sa. Seduto al bar con Giulia, fa la lista di " +
+        "tutto quello che avrebbe dovuto fare diversamente.\n\n" +
+        "«Avrei dovuto mettere la sveglia alle sei, non alle sei e mezza. Avrei potuto prendere " +
+        "il treno delle 7:20 e sarei arrivato in tempo alla riunione.»\n" +
+        "«E invece?»\n" +
+        "«E invece ho perso quello delle 7:40, e alla riunione il direttore ha presentato il mio " +
+        "progetto senza di me. Avrei voluto vedere la sua faccia quando ha aperto le slide sbagliate.»\n\n" +
+        "Giulia ride, ma poi diventa seria. «Avresti dovuto chiamarlo dal treno. Ti avrebbe " +
+        "aspettato dieci minuti.»\n" +
+        "«Lo so. Avrei dovuto chiamare, avrei dovuto scrivere, avrei dovuto fare qualcosa. Invece " +
+        "ho guardato il finestrino per quaranta minuti.»\n" +
+        "«Ti saresti sentito meglio?»\n" +
+        "«No. Ma almeno sarei stato una persona che ci prova.»\n\n" +
+        "Giulia gli passa il suo cornetto. «Sai cosa avrei fatto io? La stessa cosa. E poi avrei " +
+        "mangiato due cornetti invece di uno.»\n" +
+        "Martín sorride per la prima volta in tutto il giorno. «Avremmo dovuto aprire un bar, noi " +
+        "due, invece di lavorare per gli altri.»",
+      gloss: { seduto: "sentado", sveglia: "despertador", riunione: "reunión",
+               perso: "(ho perso il treno) perdí", faccia: "cara", sbagliate: "equivocadas",
+               seria: "(diventa seria) se pone seria", finestrino: "ventanilla", almeno: "al menos",
+               prova: "(ci prova) lo intenta", passa: "(gli passa) le alcanza", cornetto: "medialuna",
+               stessa: "misma", altri: "(gli altri) los demás" },
+      questions: [
+        ["¿A qué hora debería haber puesto el despertador?", ["a las seis", "a las seis y media", "a las siete", "a las siete y veinte"], "a las seis"],
+        ["¿Qué pasó en la reunión?", ["el director presentó el proyecto sin él", "la cancelaron", "Martín llegó tarde pero presentó", "el director no fue"], "el director presentó el proyecto sin él"],
+        ["¿Qué habría hecho Giulia en su lugar?", ["lo mismo, y comer dos medialunas", "llamar desde el tren", "renunciar", "escribir un mail"], "lo mismo, y comer dos medialunas"]
+      ],
+      hunt: { label: "Tocá los verbos del condizionale passato (avrei dovuto, sarei arrivato…)", targets:
+        ["avrei", "avresti", "avrebbe", "avremmo", "sarei", "saresti", "dovuto", "potuto", "voluto"] } },
+
+    { id: "fl-relativi", week: 34, series: "flood", n: 8, level: "B2", emoji: "🏛️",
+      title: "La città in cui vivo", grammar: "pronomi relativi cui e il quale",
+      flood: { target: "cui / il quale", forms: ["cui", "quale", "quali"], n: 16,
+               es: "Mirá los relativos: «cui» va siempre después de una preposición (in cui, per cui, a cui) y no cambia; «il quale / la quale / i quali / le quali» concuerda en género y número y suena más formal." },
+      text:
+        "Per il corso di scrittura, la professoressa Bianchi chiede un testo sulla città. " +
+        "Martín scrive di Bologna.\n\n" +
+        "«La città in cui vivo ha quaranta chilometri di portici, sotto i quali è possibile " +
+        "camminare per ore senza bagnarsi. Il palazzo in cui abito è in via Zamboni, la strada " +
+        "nella quale passano ogni giorno migliaia di studenti. La ragione per cui sono venuto " +
+        "qui era il lavoro; il motivo per cui resto è un altro, e non so ancora spiegarlo.\n\n" +
+        "Il bar a cui sono più affezionato è quello sotto casa. Il barista, con il quale parlo " +
+        "ogni mattina, si chiama Paolo e conosce le storie di tutto il quartiere. Ci sono due " +
+        "amiche senza le quali non avrei capito niente di questa città: Giulia, con cui divido " +
+        "la casa, e Paola, grazie alla quale ho scoperto la biblioteca in cui studio.\n\n" +
+        "C'è un momento della giornata a cui tengo molto: le sette di sera, l'ora in cui le " +
+        "torri diventano rosse e le campane suonano insieme. È il momento durante il quale, per " +
+        "qualche minuto, mi sembra di essere a casa.»\n\n" +
+        "La professoressa scrive in fondo alla pagina: «Ottimo. Ma il motivo per cui resti, " +
+        "prima o poi, dovrai dirlo.»",
+      gloss: { portici: "soportales", bagnarsi: "mojarse", migliaia: "miles", motivo: "motivo, razón", affezionato: "(essere affezionato a) tenerle cariño a",
+               quartiere: "barrio", divido: "(dividere la casa) comparto", scoperto: "descubierto",
+               tengo: "(tenerci a) le doy mucha importancia", torri: "torres", campane: "campanas",
+               suonano: "suenan", fondo: "(in fondo a) al pie de", prima: "(prima o poi) tarde o temprano" },
+      questions: [
+        ["¿Cuántos kilómetros de portici tiene Bolonia?", ["cuarenta", "cuatro", "catorce", "cuatrocientos"], "cuarenta"],
+        ["¿Por qué vino Martín a Bolonia?", ["por el trabajo", "por Giulia", "por la universidad", "por la comida"], "por el trabajo"],
+        ["¿Qué pasa a las siete de la tarde?", ["las torres se ponen rojas y suenan las campanas", "cierra el bar", "llegan los estudiantes", "empieza el curso"], "las torres se ponen rojas y suenan las campanas"]
+      ],
+      hunt: { label: "Tocá todos los cui, quale y quali", targets: ["cui", "quale", "quali"] } },
+
+    { id: "fl-si", week: 36, series: "flood", n: 9, level: "B2", emoji: "☕",
+      title: "Come si fa in Italia", grammar: "si impersonale e passivante",
+      flood: { target: "si impersonale / passivante", forms: ["si"], n: 20,
+               es: "Fijate en «si» + verbo en tercera persona: «si beve», «si mangia». Es el «se» impersonal del castellano («se come tarde»); con objeto plural el verbo va en plural («i tortellini si mangiano in brodo»)." },
+      text:
+        "A Bologna, e in genere in Italia, il caffè si beve in piedi, al banco, e si paga prima " +
+        "o dopo a seconda del bar. Si ordina «un caffè» e arriva un espresso: se si vuole quello " +
+        "lungo, bisogna dirlo. Il cappuccino si prende solo la mattina; dopo pranzo, se lo si " +
+        "chiede, nessuno dice niente, ma si capisce subito che uno è straniero.\n\n" +
+        "A tavola si comincia tardi. La cena è verso le otto e mezza, e la domenica si mangia " +
+        "anche per tre ore. I tortellini si mangiano in brodo, non con la panna. Il pane non " +
+        "si mangia con la pasta: si lascia per il secondo, o per pulire il piatto, cosa normale " +
+        "in famiglia ma non al ristorante. L'acqua si chiede «naturale» o «frizzante», e il " +
+        "vino si versa poco alla volta.\n\n" +
+        "Nelle case si entra senza scarpe solo se lo dice il padrone di casa. Ai vicini si dice " +
+        "«buongiorno» in ascensore, anche a chi non si conosce. In città si va in bicicletta e " +
+        "si protesta ogni giorno contro il traffico, ma nessuno rinuncia alla macchina.\n\n" +
+        "Martín ha imparato tutto questo in un anno. Ora, quando un amico argentino arriva, " +
+        "glielo spiega in un pomeriggio. Poi lo porta al bar, dove si beve il caffè in piedi.",
+      gloss: { banco: "barra, mostrador", seconda: "(a seconda di) según", bisogna: "hay que",
+               straniero: "extranjero", brodo: "caldo", panna: "crema de leche", pulire: "limpiar",
+               frizzante: "con gas", versa: "sirve, vuelca", volta: "(poco alla volta) de a poco",
+               scarpe: "zapatos", padrone: "(padrone di casa) dueño de casa", vicini: "vecinos",
+               ascensore: "ascensor", rinuncia: "renuncia", macchina: "auto" },
+      questions: [
+        ["¿Cómo se toma el café en Italia?", ["de pie, en la barra", "sentado y con leche", "siempre como cappuccino", "en la calle"], "de pie, en la barra"],
+        ["¿Cuándo se come el pan, según el texto?", ["con el segundo plato o para limpiar el plato", "con la pasta", "antes de la comida", "nunca"], "con el segundo plato o para limpiar el plato"],
+        ["¿Qué hace la gente con el auto?", ["protesta contra el tráfico pero no renuncia al auto", "lo deja en casa", "lo usa solo el domingo", "lo vende"], "protesta contra el tráfico pero no renuncia al auto"]
+      ],
+      hunt: { label: "Tocá todos los si", targets: ["si"] } },
+
+    { id: "fl-remoto", week: 37, series: "flood", n: 10, level: "B2", emoji: "🍲",
+      title: "La leggenda del tortellino", grammar: "passato remoto narrativo",
+      flood: { target: "passato remoto", forms: ["scesero", "viaggiarono", "fermarono", "diede", "preparò", "bevve", "raccontò", "andò", "riuscì", "salì", "guardò", "vide", "corse", "prese", "riempì", "chiuse", "nacque", "partirono", "servì", "trovarono", "passò", "fu"], n: 22,
+               es: "Mirá el passato remoto, el tiempo de los cuentos y de la historia (scese, diede, vide, nacque). Se parece al pretérito castellano en forma y en uso escrito, pero en el norte de Italia casi no se habla." },
+      text:
+        "Sul tortellino esiste una leggenda che a Bologna tutti conoscono. Una notte, molti " +
+        "secoli fa, tre dèi scesero sulla terra: Venere, Bacco e Marte. Viaggiarono a lungo e, " +
+        "stanchi, si fermarono in una locanda di Castelfranco Emilia, a metà strada tra Bologna " +
+        "e Modena.\n\n" +
+        "L'oste diede loro la stanza migliore e preparò la cena. Bacco bevve tutto il vino della " +
+        "casa, Marte raccontò le sue battaglie e Venere andò a dormire presto. L'oste, però, non " +
+        "riuscì a dimenticare la bellezza della dea. Salì le scale in silenzio, guardò dal buco " +
+        "della serratura e vide il suo ombelico.\n\n" +
+        "Corse in cucina, prese un pezzo di pasta, lo riempì di carne e lo chiuse intorno al " +
+        "dito, per ripetere quella forma perfetta. Nacque così il tortellino.\n\n" +
+        "La mattina dopo gli dèi partirono senza dire niente. L'oste servì i tortellini in brodo " +
+        "ai clienti, che li trovarono deliziosi. La ricetta passò di madre in figlia fino a oggi.\n\n" +
+        "Bologna e Modena discutono ancora su chi fu il vero inventore. Castelfranco, che sta " +
+        "nel mezzo, sorride e non dice nulla.",
+      gloss: { dèi: "dioses", scesero: "bajaron (scendere)", locanda: "posada", oste: "posadero",
+               battaglie: "batallas", riuscì: "(riuscire a) logró", scale: "escaleras", buco: "agujero",
+               serratura: "cerradura", ombelico: "ombligo", riempì: "llenó (riempire)", dito: "dedo",
+               brodo: "caldo", inventore: "inventor", mezzo: "(nel mezzo) en el medio" },
+      questions: [
+        ["¿Dónde se detienen los dioses?", ["en una posada de Castelfranco Emilia", "en Bolonia", "en Módena", "en Venecia"], "en una posada de Castelfranco Emilia"],
+        ["¿Qué vio el posadero por la cerradura?", ["el ombligo de Venus", "a Baco borracho", "a Marte dormido", "la cocina"], "el ombligo de Venus"],
+        ["¿Quién ganó la discusión sobre el inventor?", ["nadie: Bolonia y Módena siguen discutiendo", "Bolonia", "Módena", "Castelfranco"], "nadie: Bolonia y Módena siguen discutiendo"]
+      ],
+      hunt: { label: "Tocá todos los verbos en passato remoto", targets:
+        ["scesero", "viaggiarono", "fermarono", "diede", "preparò", "bevve", "raccontò", "andò", "riuscì", "salì", "guardò", "vide", "corse", "prese", "riempì", "chiuse", "nacque", "partirono", "servì", "trovarono", "passò", "fu"] } },
+
+    { id: "fl-causativo", week: 40, series: "flood", n: 11, level: "C1", emoji: "🍝",
+      title: "La madre di Giulia", grammar: "causativo fare + infinito",
+      flood: { target: "fare / lasciare + infinito", forms: ["fa", "faccio", "fai", "fare", "fatto", "lasciare", "lascia", "lasciamo"], n: 19,
+               es: "Mirá «fare + infinitivo»: hacer que otro haga algo («fa lavare le tende a Giulia» = le hace lavar las cortinas a Giulia). «Lasciare + infinitivo» es dejar hacer. Quien hace la acción va con «a» cuando hay objeto directo." },
+      text:
+        "La madre di Giulia arriva da Napoli per tre giorni e in tre giorni cambia la casa. Il " +
+        "primo giorno fa spostare il divano a Martín, fa lavare le tende a Giulia e fa venire un " +
+        "idraulico per il rubinetto che gocciola da mesi.\n\n" +
+        "«Non lasciare mai un rubinetto così» dice a Martín. «L'acqua fa marcire tutto.» Martín, " +
+        "che non ha mai toccato un rubinetto in vita sua, annuisce e la lascia parlare.\n\n" +
+        "Il secondo giorno la signora fa assaggiare a tutti il suo ragù. Lo fa cuocere per sei ore " +
+        "e non lascia entrare nessuno in cucina. «Lo faccio riposare una notte, domani è meglio.» " +
+        "Fa comprare a Giulia il pane giusto, quello di Altamura, e fa sedere Martín a capotavola, " +
+        "come un ospite importante.\n\n" +
+        "Il terzo giorno vuole vedere Bologna. Martín le fa visitare le torri e i portici e la fa " +
+        "salire fino a San Luca a piedi. In cima lei si ferma e lo guarda: «Tu mi fai camminare " +
+        "troppo, ma mi hai fatto vedere una città bellissima.»\n\n" +
+        "Quando riparte, la casa è pulita, il rubinetto non gocciola più e in frigorifero c'è ragù " +
+        "per una settimana. Giulia sospira: «Mia madre fa fare a tutti quello che vuole. Ma poi la " +
+        "lasciamo tornare, e già ci manca.»",
+      gloss: { spostare: "mover, correr de lugar", tende: "cortinas", idraulico: "plomero",
+               rubinetto: "canilla", gocciola: "gotea", marcire: "pudrirse", annuisce: "asiente con la cabeza",
+               cuocere: "cocinar (al fuego)", riposare: "reposar", capotavola: "cabecera de la mesa",
+               ospite: "invitado", cima: "(in cima) en la cima", sospira: "suspira", manca: "(ci manca) la extrañamos" },
+      questions: [
+        ["¿Para qué hace venir a un plomero?", ["por una canilla que gotea", "por el sofá", "por las cortinas", "por la heladera"], "por una canilla que gotea"],
+        ["¿Cuánto tiempo hace cocinar el ragú?", ["seis horas", "una hora", "tres días", "una noche"], "seis horas"],
+        ["¿Adónde lleva Martín a la madre de Giulia a pie?", ["a San Luca", "a Módena", "al mercado", "a Nápoles"], "a San Luca"]
+      ],
+      hunt: { label: "Tocá las formas de fare y lasciare seguidas de infinitivo", targets:
+        ["fa", "faccio", "fai", "fare", "fatto", "lasciare", "lascia", "lasciamo"] } },
+
+    { id: "fl-gerundio", week: 44, series: "flood", n: 12, level: "C1", emoji: "🏃",
+      title: "Salendo a San Luca", grammar: "gerundio",
+      flood: { target: "gerundio", forms: ["ridendo", "pensando", "attraversando", "arrivando", "sudando", "contando", "correndo", "sapendo", "appoggiandosi", "guardando", "riprendendo", "camminando", "parlando", "sedendosi", "essendo", "scendendo", "vedendolo"], n: 17,
+               es: "Fijate en el gerundio (-ando / -endo): dice cómo o cuándo pasa algo («ridendo», «guardando in basso») y lleva los pronombres pegados (appoggiandosi, vedendolo). Con «stare» arma el progresivo: «sta sudando»." },
+      text:
+        "Paola convince Martín a correre con lei fino a San Luca, la basilica sulla collina: 666 " +
+        "arcate di portico in salita. Martín accetta ridendo, pensando che sia uno scherzo. Non lo è.\n\n" +
+        "Partono alle sette, attraversando la città ancora vuota. Arrivando all'arco del Meloncello, " +
+        "dove comincia la salita, Martín sta già sudando. «Respira contando i gradini» dice Paola, " +
+        "correndo davanti a lui senza fatica. «Sapendo quanti ne mancano, ti stanchi meno.» Martín " +
+        "prova, ma perde il conto dopo il primo tornante.\n\n" +
+        "A metà strada si ferma, appoggiandosi a una colonna. Guardando in basso vede Bologna " +
+        "intera: le torri, i tetti rossi, la nebbia sulla pianura. «Vale la pena» pensa, riprendendo " +
+        "fiato. Paola torna indietro e lo aspetta camminando al suo fianco. Salgono l'ultimo tratto " +
+        "parlando di tutto, tranne che della salita.\n\n" +
+        "In cima, sedendosi sui gradini della basilica, Martín tira fuori il telefono e manda una " +
+        "foto a sua madre: «Ce l'ho fatta». Lei risponde subito, essendo le tre di notte a Buenos " +
+        "Aires: «Sapevo che ce la facevi. Ora scendi con calma.»\n\n" +
+        "Scendendo, Martín capisce che Paola l'ha ingannato: la corsa era la scusa. Vedendolo " +
+        "felice, lei sorride e non dice niente.",
+      gloss: { collina: "colina", arcate: "arcos (de un pórtico)", salita: "subida", scherzo: "broma",
+               sudando: "sudando (sudare)", gradini: "escalones", stanchi: "(ti stanchi) te cansás",
+               tornante: "curva cerrada de una subida", appoggiandosi: "apoyándose", tetti: "techos",
+               nebbia: "niebla", pianura: "llanura", fiato: "(riprendere fiato) recuperar el aliento",
+               tratto: "tramo", fatta: "(ce l'ho fatta) lo logré", ingannato: "engañado" },
+      questions: [
+        ["¿Cuántos arcos tiene el pórtico de San Luca?", ["666", "66", "1000", "40"], "666"],
+        ["¿Qué consejo le da Paola para cansarse menos?", ["respirar contando los escalones", "no mirar hacia arriba", "correr más rápido", "tomar agua"], "respirar contando los escalones"],
+        ["¿A qué hora recibe la foto la madre?", ["a las tres de la mañana", "a las siete", "al mediodía", "a las nueve de la noche"], "a las tres de la mañana"]
+      ],
+      hunt: { label: "Tocá todos los gerundios", targets:
+        ["ridendo", "pensando", "attraversando", "arrivando", "sudando", "contando", "correndo", "sapendo", "appoggiandosi", "guardando", "riprendendo", "camminando", "parlando", "sedendosi", "essendo", "scendendo", "vedendolo"] } }
   ];
 
   /* ------------------------------------------------------------ testo */
@@ -678,7 +1065,9 @@
     { id: "martin", name: "Martín a Bologna", emoji: "📖",
       blurb: "Una historia por capítulos, de A1 a B2. Cada episodio usa la gramática que estás viendo y abre el siguiente." },
     { id: "cultura", name: "Cultura", emoji: "🏛️",
-      blurb: "Historia, filosofía, sociología y literatura italianas en textos graduados. Cada uno se abre con la gramática que usa; entre los abiertos, elegí el que te interese." }
+      blurb: "Historia, filosofía, sociología y literatura italianas en textos graduados. Cada uno se abre con la gramática que usa; entre los abiertos, elegí el que te interese." },
+    { id: "flood", name: "Inondazioni", emoji: "🌊",
+      blurb: "Textos que repiten una estructura muchas veces: primero la leés sin marcas, después con la estructura resaltada. Así el oído y el ojo la fijan." }
   ];
 
   function ofSeries(id) {

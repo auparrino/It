@@ -17,7 +17,7 @@ como para hacerte tropezar.
 
 Es una **app web instalable** (PWA): se publica una vez y queda en tu pantalla de
 inicio como cualquier app, **funciona sin internet** y guarda tu progreso **solo en
-tu teléfono**. No usa cuentas, servidores, micrófono ni IA externa.
+tu teléfono**. No usa cuentas ni servidores; la IA es opcional, con una clave gratuita tuya.
 
 1. Publicá la carpeta `docs/` con GitHub Pages: *Settings → Pages → Deploy from a
    branch →* la rama que tenga estos cambios, carpeta `/docs`.
@@ -35,7 +35,7 @@ tu teléfono**. No usa cuentas, servidores, micrófono ni IA externa.
 - **⚡ Lampo 60″**: contrarreloj de un minuto, del castellano al italiano, con
   frases que ya viste (se abre con 12). Cada error resta 3 segundos. Guarda tu
   récord.
-- **🗣️ Frasi**: 17 escenas y 294 frases de conversación de alta frecuencia (bar,
+- **🗣️ Frasi**: 21 escenas y 358 frases de conversación de alta frecuencia (bar,
   oficina, charla, reacciones, conectores, opiniones con congiuntivo, falsos
   amigos). Cada escena te presenta frases nuevas y después te las pide de cinco
   maneras: armarla con fichas, escucharla, tarjeta rápida y, sobre todo,
@@ -146,6 +146,195 @@ Según lo que dice la investigación:
   sesiones con lo que más te cuesta, y los errores que corregís vos solo cuentan
   como avance (Metcalfe 2017: equivocarse y analizar el error enseña).
 
+### 🧠 La memoria: FSRS, confianza y mantenimiento
+
+Desde la v41 el repaso lo programa **FSRS** (Free Spaced Repetition
+Scheduler, Jarrett Ye / open-spaced-repetition, versión 5, parámetros por
+defecto), que en el benchmark público de 519 millones de repasos predice
+mejor que SM-2 y que el algoritmo de Duolingo. Cada ficha tiene una
+*estabilidad* (los días hasta que la probabilidad de recordarla baja al
+90 %) y una *dificultad*. Lo que cambia para el que estudia:
+
+- **Nada se retira.** Antes, cuatro aciertos sacaban la ficha del repaso;
+  la investigación dice que la retención larga exige re-aprendizaje
+  espaciado (Rawson & Dunlosky 2022; Bahrick 1993; Serfaty & Serrano 2024).
+  Ahora la ficha pasa a **mantenimiento**: vuelve a intervalos de meses,
+  con un tope de seis por día para que la cola nunca sea una deuda.
+- **¿Qué tan seguro?** Después de responder y antes del veredicto, un
+  toque: *Seguro / Creo / Adivino*. El error con confianza es el que mejor
+  se corrige si mirás la regla ahora (hipercorrección, Butterfield &
+  Metcalfe 2001): vuelve en la misma ronda y a la mañana siguiente. Lo
+  adivinado no es conocimiento y se programa como difícil. La calibración
+  de la semana (qué porcentaje de tus «seguro» estaban mal) está en *Io*.
+  Se puede apagar.
+- **Noche y mañana.** Lo nuevo después de las 20 h se repasa al desayuno,
+  con el sueño en el medio (Mazza et al. 2016: la mitad de intentos y mejor
+  retención a seis meses).
+- **Retención elegible**: 85, 90 o 95 %. Menos retención, menos repasos por
+  día.
+- **Tu curva de olvido.** Cada repaso queda en un registro; con cien, la
+  app estima en el teléfono cuánto más rápido o más lento olvidás
+  vocabulario y gramática que el promedio, y ajusta los intervalos.
+- **Cada regla es una ficha**: la semana cuenta sus días de práctica
+  productiva y la regla se da por consolidada a los tres.
+- **Corte por fatiga**: si la precisión de las últimas ocho respuestas cae
+  veinte puntos, la ronda ofrece cerrar ahí.
+
+`tools/test_memoria.js` prueba las fórmulas, el mantenimiento, la
+migración de las fichas viejas, el modo noche, la estimación de velocidad
+y la calibración.
+
+### 🎧 Suoni: el oído
+
+Los hispanohablantes son de los grupos menos sensibles a las consonantes
+dobles del italiano, y la escucha era el punto más flojo del curso. Ahora
+cada semana trae la misión **Suoni**: seis pares mínimos con identificación
+y feedback inmediato (HVPT: Uchihara, Karas & Thomson 2025, g = 0,92 en
+percepción), dos de habla conectada, dos de entonación, uno de acento
+tónico y un dictado por fragmentos.
+
+- **190 pares mínimos** en `docs/js/ascolto_data.js`, repartidos en 40
+  semanas: dobles (*pala/palla, nono/nonno, sete/sette*), vocales abiertas y
+  cerradas (*pésca/pèsca*), africadas (*zio, pazzo/passo, mezzo/messo*),
+  palatales (*figlio/filo, sogno/sono, pesce/pese*), v/b y s sonora,
+  r/rr, c/g/qu. La variabilidad de hablantes que el HVPT necesita se simula
+  con las voces italianas del teléfono a tres velocidades y tres tonos.
+- **Habla conectada** (50): ¿cuántas palabras escuchaste? (*dov'è andato*,
+  *ce l'ho fatta*, *andiamocene*) y elegir la transcripción correcta.
+- **Entonación** (50 pares): pregunta o afirmación con las mismas palabras;
+  el signo de interrogación cambia la curva del TTS.
+- **Acento tónico** (30): *àncora/ancóra*, *prìncipi/princìpi*, *sùbito/subìto*,
+  y las esdrújulas que el español desplaza (*tàvolo, càmera, mèdico*).
+- **Dictado por fragmentos**: oraciones del banco de la semana, con las
+  dobles y las tildes contadas.
+- La Pausa caffè trae un ítem de escucha, y *Allena* tiene el módulo libre.
+
+### 📝 Dictogloss
+
+Cada semana (menos las de jefe) un texto de 50 a 110 palabras
+(`docs/js/dictogloss_data.js`, 47 textos): lo escuchás dos veces, la
+segunda con las palabras clave a la vista, y lo reconstruís por escrito.
+Se puntúan seis bloques léxicos (*ci vediamo*, *per fortuna*, *sono andato a
+trovare*): lo recuperado es lo que queda (Yu, Boers & Tremblay 2025). El
+corrector propio marca después lo demás.
+
+### 🎧 Leggi e ascolta
+
+Cada lectura se puede **leer mientras se escucha**: la palabra que se dice
+se ilumina (Webb & Chang 2015: 37 % más vocabulario a los tres meses), con
+una escalera de velocidad 0,8 → 1 → 1,15, subtítulos parciales (solo las
+palabras glosadas) y modo solo audio. Los minutos de escucha cuentan como
+input y suman xp. Con las lecturas ya hechas, *Ascolto facile* las
+reproduce una tras otra, solo audio, y se controla desde la pantalla de
+bloqueo (Media Session).
+
+**Inondazioni**: doce textos de 150 a 230 palabras que repiten ocho veces o
+más una estructura que el español no tiene (*ne*, *ci*, *da* + tiempo,
+*mica*, pronombres combinados, congiuntivo, condizionale passato, relativos,
+*si* impersonal, passato remoto, causativo, gerundio). Primera lectura sin
+marcas; segunda con la estructura resaltada y la pregunta de por qué está
+así (Trahey & White 1993; Rassaei & Jabbarpoor 2025).
+
+### 🪤 Garden path, Scopri la regola y compañía
+
+`tools/authored/grammatica2.py` (435 ítems) trae seis tipos nuevos:
+
+- **Garden path** (60): tres ejemplos regulares, pedir el cuarto, dejar
+  caer en la trampa del español (*aprito, ho andato, la mia madre*) y
+  corregir (Tomasello & Herron 1988: inducir el error supera explicar la
+  excepción antes).
+- **Scopri la regola** (25 conjuntos con 75 aplicaciones): seis oraciones y
+  elegir la regla entre tres formulaciones (Fotos & Ellis 1991).
+- **Output empujado** (72): después de cada *Capire*, producir la forma en
+  bloques de doce (Shintani, Li & Ellis 2013; DeKeyser & Suzuki 2025).
+- **Traducción contrastiva** (75): frases del español con tres o cuatro
+  contrastes juntos, y diez del italiano al español para colocaciones
+  opacas (Laufer & Girsai 2008).
+- **Combinación de oraciones** (44, B2 a C1): dos o tres oraciones y el
+  conector (*benché, purché, pur + gerundio, dopo aver*).
+- **Ítems tipo VALICO** (84): frases de aprendices hispanohablantes con un
+  error real que hay que encontrar y corregir.
+
+### 📚 Vocabulario por frecuencia
+
+`tools/build_frequenza.py` compila tres listas abiertas en
+`docs/data/frequenza.json`: itWaC (Baroni et al. 2009; listas de franfranz,
+MIT), OpenSubtitles 2018 (CC BY-SA) y KELLY (Kilgarriff et al. 2014, 6.900
+palabras con nivel A1-C2). Con eso la app:
+
+- muestra en *Io* la **cobertura** por nivel y cuántas de las 2.000
+  fundamentales conocés (De Mauro 2016: cubren el 86 % de lo que se dice);
+- ofrece las **frecuentes que faltan** y las practica desde el banco;
+- prioriza lo frecuente en *Parole*;
+- verifica en el teléfono que un texto generado por la IA use solo palabras
+  conocidas (tasa de palabras fuera de lista; Dugan et al. 2026);
+- arma **distractores de la misma clase y banda de frecuencia**;
+- genera **pseudopalabras** para *Parola o no?*, sesenta segundos de
+  reconocer palabras reales en menos de un segundo (fluidez léxica).
+
+Además: **colocaciones con verbo soporte** (98 ítems: *fare colazione, dare
+un esame, prendere in giro*) y **marcadores discursivos** (60: *magari, mica,
+appunto, ormai, anzi, comunque, insomma, addirittura*), en
+`tools/authored/lessico2.py`; una **imagen mnemónica** escrita por vos para
+las palabras opacas (*burro* → «un burro untado en manteca»), que reaparece
+cuando la palabra falla; un verbo cuenta como conocido recién con tres
+aciertos.
+
+### 🤖 Con la clave: Parla, Storia y pistas graduadas
+
+- **Parla**: un role-play con un personaje, una situación de la semana y
+  tres objetivos verificables. Reglas duras en vez de persona: tiempos
+  permitidos, largo máximo y una lista de palabras que ya conocés; si la
+  respuesta del personaje supera el 15 % de palabras fuera de lista, la app
+  le pide que la reescriba. Sin corrección en el diálogo: al final ves tus
+  frases junto a la versión corregida, con una observación por turno
+  (Wang et al. 2025, g = 0,48; Dugan et al. 2026).
+- **Storia della settimana**: un cuento con las ocho palabras que te tocaba
+  repasar y solo vocabulario conocido (SRS-Stories, EMNLP 2025), con
+  glosario, preguntas y cloze con distractores de la misma banda. Queda
+  guardado y se lee sin conexión.
+- **Pistas graduadas**: «Explicame» ya no da la explicación de entrada:
+  primero una pista implícita, después la regla como pregunta, al final la
+  explicación (evaluación dinámica; LearnLM 2024).
+- **Revisión con evidencia**: el segundo profesor recibe las marcas del
+  corrector propio y de LanguageTool para contrastar, porque un modelo no
+  corrige su propio trabajo sin evidencia externa (Kamoi et al. 2024), y se
+  le exige corrección mínima (los correctores automáticos sobrecorrigen,
+  Park et al. 2025). Y no da la razón por cortesía.
+
+### 📌 Hábito
+
+- **Tu plan**: «cuando ___, abro la app N minutos en ___» (intención de
+  implementación, Gollwitzer & Sheeran 2006: d = 0,65 en 94 estudios). Va al
+  recordatorio del calendario.
+- **Tu meta**: para qué querés italiano, con tus palabras (el yo ideal de
+  Dörnyei; Al-Hoorie 2018).
+- **Esta semana**: la cuota de palabras nuevas hacia el próximo jefe, que se
+  recalcula sola si te atrasás (Bandura & Schunk 1981).
+- **Regreso sin castigo**: después de tres días o más, cinco minutos con
+  las diez fichas más frías, sin mostrar deuda, y una pregunta de un toque
+  (¿qué pasó?) que ajusta la retención si se puso difícil. Los lunes y los
+  primeros de mes se anuncian como nuevo comienzo (Dai, Milkman & Riis 2014).
+- **Cierre de la semana**: tres toques (qué costó, qué cambiás, cuándo
+  estudiás) y la semana siguiente te lo recuerda.
+- **Récords personales** en vez de tablas (Hanus & Fox 2015), racha semanal
+  (tres días por semana), sesiones por día como medida principal (Sudina &
+  Plonsky 2024), tarjeta de la semana para compartir, atajo «Ripasso 2 min»
+  en el ícono y el número de fichas vencidas en el badge de la app.
+
+### 🎓 Esame C1
+
+La semana 52 ya no es una ronda más: cinco pruebas como en el CILS TRE-C1,
+el CELI 4 y el PLIDA C1 (sin la parte oral), cada una con mínimo del 55 % y
+promedio del 60 %: **Ascolto** (una entrevista larga leída a dos voces, ocho
+preguntas y cuatro huecos), **Lettura** (un texto de 600 palabras con título
+por párrafo y vero/falso), **Strutture** (20 huecos racionales y
+transformaciones: *Sebbene fosse tardi → Pur essendo tardi*), **Lessico**
+(formación de palabras y registro) y **Scrittura** (argumentativo de 200
+palabras y carta formal de 120, calificados con la rúbrica de la
+certificación por la IA, o por el corrector propio sin clave). Datos en
+`docs/js/esame_data.js` y `tools/authored/esame_c1.py`.
+
 ### 🏦 El banco
 
 `tools/bank/` tiene el contenido en Python legible y `tools/build_bank.py` lo
@@ -177,7 +366,7 @@ lenguas y en psicología de la memoria:
 | Espaciado dentro de la sesión | La frase nueva se pregunta después de otras | Cepeda et al. 2006 |
 | Intercalado | Pausa y repaso mezclan tipos y temas | Rohrer & Taylor 2007 |
 | Dificultad deseable | Primero reconocer (fichas), después producir (escribir) | Bjork 1994 |
-| Bloques léxicos y frases hechas | 17 escenas, 294 frases | Wray 2002; Boers & Lindstromberg 2012 |
+| Bloques léxicos y frases hechas | 21 escenas, 358 frases | Wray 2002; Boers & Lindstromberg 2012 |
 | Input comprensible con 98% de cobertura | Lecturas graduadas con glosario | Krashen 1985; Hu & Nation 2000 |
 | Noticing: notar la forma en el texto | Caza de formas | Schmidt 1990 |
 | Input estructurado: interpretar la forma antes de producirla | Laboratorio *Capire* | VanPatten & Cadierno 1993 |
@@ -253,7 +442,7 @@ interferencias del castellano (dobles, vocales abiertas, *a* personal,
 El percorso es **el eje de la app**: la pantalla Oggi muestra la semana en
 curso y su próximo paso, y cada semana lista **en orden** todo lo que trae:
 la lección, las palabras de la semana, el entrenamiento, la escena de frases
-que le corresponde (cada una de las 17 escenas tiene su semana: *Primi passi*
+que le corresponde (cada una de las 21 escenas tiene su semana: *Primi passi*
 en la 1, *Al bar* en la 3, *Opinioni* con congiuntivo en la 27), la lectura
 que se abre esa semana, el laboratorio (*Ponte* una regla por semana de la 2 a
 la 10, *Falsi amici* en la 11, *Capire* cuando llega su forma) y la maestría.
@@ -605,38 +794,24 @@ python3 tools/build_course.py
 ## Tests
 
 ```sh
-node tools/test_conjugator.js   # formas verbales contra las tablas de los libros
-node tools/test_game.js         # integridad del curso, corrección, SRS, progresión
-node tools/test_frasi.js        # frases, ejercicios, pausa, lampo, racha, escudos, cofre
-python3 tools/build_bank.py     # valida y compila el banco
-node tools/test_diagnosi.js     # el diagnóstico reconoce los errores típicos
-node tools/test_scrivi.js       # los textos modelo de Scrivi cumplen; el corrector marca los errores típicos
-node tools/sim_carriera.js      # una carrera entera: carga por semana, ripasso, cobertura, jefes
+npm test            # los siete juegos de tests
+npm run build       # recompila el banco y el curso
+npm run sim         # la carrera simulada de un año
 ```
 
-Si cambiás algún archivo de `docs/`, subí `VERSION` en `docs/sw.js` y `APP_VERSION` en
-`docs/js/app.js` (la versión que se ve abajo de Oggi e Io; `test_game.js` controla que
-coincidan) para que los
-teléfonos descarguen la versión nueva.
+| Test | Qué comprueba |
+|---|---|
+| `tools/test_conjugator.js` | 1.442 formas verbales |
+| `tools/test_game.js` | datos del curso, rondas, sillabo, opciones que no regalan la respuesta |
+| `tools/test_frasi.js` | frases, laboratorio, lecturas (incluidas las inundaciones), pausa, racha, cofre, guardado |
+| `tools/test_diagnosi.js` | ~1.600 errores típicos inyectados en oraciones del banco |
+| `tools/test_scrivi.js` | los textos modelo cumplen su consigna sin marcas; el corpus de errores |
+| `tools/test_memoria.js` | FSRS, mantenimiento, noche y mañana, hipercorrección, registro, velocidad, calibración, hábito |
+| `tools/test_suoni.js` | datos de escucha, sesiones de Suoni, dictogloss, capa de frecuencia, examen, inundaciones |
 
-`test_conjugator.js` valida las 14 conjugaciones contra formas verificadas
-(incluidas las irregularidades del *passato remoto* en patrón 1-3-3 y las reglas
-ortográficas de *-care/-gare/-ciare/-giare*). `test_game.js` comprueba, entre
-otras cosas, que las 52 semanas sean superables y que la respuesta impresa en el
-libro se acepte siempre como correcta. `build_course.py` valida además que las
-52 semanas tengan lección, que ninguna tabla tenga filas desparejas y que no
-queden bloques vacíos.
-
-La teoría vive en `tools/lessons/*.py` como diccionarios legibles, en formato
-corto para leer en el teléfono: cada bloque es una idea, con título, **la regla
-en ≤ 30 palabras** (`r`), una tabla y/o hasta 5 ejemplos `[italiano,
-castellano]`, una trampa y un atajo (≤ 30 palabras cada uno), y el detalle
-opcional (`more`) plegado bajo «¿Por qué? Más detalle». En la lección jugada,
-un bloque con tabla y ejemplos se muestra en dos pantallas.
-`python3 tools/check_lessons.py` controla el formato, los límites y que los
-ejemplos no usen tiempos de semanas posteriores (salvo bloques «Adelanto»). Dentro del texto, `*forma*` marca una forma italiana y
-`**texto**` una regla clave. Para editar una lección se toca ese archivo y se
-vuelve a correr `python3 tools/build_course.py`.
+GitHub Actions (`.github/workflows/test.yml`) corre todo en cada push y
+comprueba que `docs/data` esté al día con `tools/` y que la versión del
+service worker coincida con la de la app.
 
 ## Dos advertencias honestas
 

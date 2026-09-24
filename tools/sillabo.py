@@ -313,11 +313,21 @@ def item_features(item):
     typ = item.get("type")
     answers = _answers(item)
     context = ""
-    if typ not in ("translate",):          # en translate el enunciado es castellano
+    if typ == "scopri":                    # las frases italianas a observar
+        context = " ".join(item.get("data") or [])
+        answers = []
+    elif typ == "fixerr":                  # la frase corregida
+        context = item.get("answer") or ""
+        answers = []
+    elif typ == "garden":
+        context = " ".join(w for pair in (item.get("lead") or []) for w in pair)
+    if typ not in ("translate", "scopri", "fixerr"):   # en translate el enunciado es castellano
         stem = _strip_glosses(item.get("stem"))
         for a in answers:
             stem = stem.replace("___", a, 1)     # diventat___ → diventata
-        context = stem
+        context = (context + " " + stem).strip()
+    if typ == "translate" and item.get("dir") == "it-es":
+        context, answers = item.get("stem") or "", []
     for text, is_answer in ((context, False), (" ".join(answers), True),
                             (" ".join(item.get("options") or []), False)):
         for k, v in analyze(text, answer=is_answer).items():
