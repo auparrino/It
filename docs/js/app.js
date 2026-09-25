@@ -295,6 +295,28 @@
   /* A gap exercise, answered: the whole sentence with the gaps filled
      («Eu gosto de estudar», «Gli piace studiare», not just the gap); in «A → ___» only what is
      after the arrow.  The Spanish hints in brackets are left out. */
+  /* «Cómo se arma»: the sentence word by word (docs/js/desglose.js): the
+     verb each form comes from with its tense and person, the contractions,
+     what each piece means.  Open when it is new or was missed. */
+  function desgloseHtml(text, open) {
+    if (!window.Desglose || !glossario || !text || spanishText(text)) return "";
+    var ls;
+    try { ls = Desglose.lines(text, { gloss: glossario }); } catch (e) { return ""; }
+    if (!ls.length) return "";
+    return '<details class="desglose"' + (open ? " open" : "") + "><summary>🔎 Palabra por palabra</summary><ul>" +
+      ls.slice(0, 7).map(function (l) { return "<li>" + mk(l) + "</li>"; }).join("") + "</ul></details>";
+  }
+  /* The target-language text of an item: the phrase, the sentence with its
+     gaps filled, the word asked about, or the answer. */
+  function targetText(it) {
+    if (!it) return "";
+    if (it.frase) return it.frase.t || it.frase.it;
+    if (it.type === "hunt" || it.type === "scopri" || it.type === "listen" || it.type === "coppia") return "";
+    if (it.dir === "it-es" || asksMeaning(it)) return String(it.stem || "").replace(/_{3,}/g, " ");
+    var f = filledStem(it);
+    return f || String(it.answer || "").split(/\s*\|\s*/)[0];
+  }
+
   function filledStem(it) {
     var stem = String(it.stem || "");
     if (!/_{3,}/.test(stem)) return null;
@@ -692,7 +714,7 @@
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION = "c1-vN" in sw.js: test_game
      and the CI check it).  One version for the app and both languages. */
-  var APP_VERSION = "v2.0";
+  var APP_VERSION = "v2.1";
   // Settimana XVII: Roman numerals on the street signs (LANG.ui.romanWeeks).
   function romano(n) {
     var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
@@ -1918,7 +1940,8 @@
         '<div class="badge-new">✨ ' + esc(it.prompt) + "</div>" +
         '<div class="fit big">' + esc(it.frase.it) + "</div>" +
         '<div class="fes">' + esc(it.frase.es) + "</div>" +
-        (it.note ? '<div class="call tip"><b>Ojo</b><p>' + mk(it.note) + "</p></div>" : "") +
+        (it.note ? '<div class="call tip"><b>Cómo se arma</b><p>' + mk(it.note) + "</p></div>" : "") +
+        desgloseHtml(it.frase.t || it.frase.it, true) +
         '<div class="row" style="margin-top:14px">' +
           '<button class="btn ghost" id="sayit">🔊 Escuchar</button>' +
           '<button class="btn ghost" id="slow">🐢 Lento</button>' +
@@ -1937,6 +1960,7 @@
         '<div class="fes">' + esc(wv[1]) + "</div>" +
         (wv[3] ? '<div class="call tip"><b>Cómo se usa</b><p>' + mk(wv[3]) + "</p></div>" : "") +
         (wv[2] ? '<div class="note">' + esc(wv[2]) + "</div>" : "") +
+        desgloseHtml(wv[2], false) +
         '<div class="row" style="margin-top:14px"><button class="btn ghost" id="sayit">🔊 Escuchar</button></div>' +
         '<p class="muted">Decila en voz alta: en un rato te pregunto qué significa.</p>' +
         keywordBox(wv[0]) +
@@ -2396,6 +2420,7 @@
       (it.frase && it.type !== "listen" ? '<div class="note">' + esc(it.frase.es) + "</div>" : "") +
       (it.note && !(it.type === "garden" && extra && extra.indexOf("La trampa") >= 0) ? '<div class="note">' + mk(it.note) + "</div>" : "") +
       (q === 2 && it.recogNote ? '<div class="note">' + esc(it.recogNote) + "</div>" : "") +
+      desgloseHtml(targetText(it), verdict !== "giusto" || it.type === "guess") +
       (it.hint && it.src === "dummies"
         ? '<div class="note">Consigna original: ' + esc(it.hint) + "</div>" : "") +
       (function () {
@@ -2553,6 +2578,7 @@
         ' <span class="xpgain">+' + gained + " xp</span></div>" +
       '<div class="sol">' + esc(it.answer) + "</div>" +
       (it.note ? '<div class="note">' + mk(it.note) + "</div>" : "") +
+      desgloseHtml(targetText(it), true) +
       '<div class="note">🔬 Intentar adivinar antes de aprender ayuda a recordar, ' +
         "aunque te equivoques (efecto de la prueba previa).</div>" +
       '<div class="row" style="margin-top:10px"><button class="btn" id="next">' + UI.next + "</button></div></div>";

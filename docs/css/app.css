@@ -357,3 +357,13 @@ html[data-lang="pick"] header.top, html[data-lang="pick"] nav.nav { display: non
   background: radial-gradient(circle at 20px -6px, transparent 16px, #fff 17px, #fff 22px, transparent 23px) 0 0 / 40px 26px repeat-x; }
 .pick-lang.pt .plate { background: #0f4c85; color: #fff; border: 2px solid #fff; box-shadow: 0 0 0 1px #0f4c85; }
 .pick-foot { text-align: center; color: var(--pk-gris); font-size: .85rem; margin-top: 18px; }
+
+/* «Cómo se arma»: la frase palabra por palabra (docs/js/desglose.js) */
+.desglose { margin: 10px 0 4px; padding: 8px 12px; border-radius: 12px;
+  background: color-mix(in srgb, currentColor 6%, transparent); font-size: .95em; }
+.desglose summary { cursor: pointer; font-weight: 700; list-style: none; }
+.desglose summary::-webkit-details-marker { display: none; }
+.desglose summary::after { content: " ▾"; opacity: .6; }
+.desglose:not([open]) summary::after { content: " ▸"; }
+.desglose ul { margin: 6px 0 0; padding-left: 18px; }
+.desglose li { margin: 3px 0; line-height: 1.35; }

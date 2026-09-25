@@ -4,7 +4,7 @@
   "private": true,
   "description": "Una app, dos idiomas: italiano (La Via C1) y portugués de Brasil (Rumo C1) hasta C1 en un año, para hispanohablantes. Sitio estático sin dependencias.",
   "scripts": {
-    "test": "npm run test:it && npm run test:pt",
+    "test": "npm run test:it && npm run test:pt && node tools/lib/test_desglose.js",
     "test:it": "node tools/it/test_conjugator.js && node tools/it/test_game.js && node tools/it/test_frasi.js && node tools/it/test_diagnosi.js && node tools/it/test_scrivi.js && node tools/it/test_memoria.js && node tools/it/test_suoni.js",
     "test:pt": "node tools/pt/test_conjugator.js && node tools/pt/test_game.js && node tools/pt/test_frasi.js && node tools/pt/test_diagnosi.js && node tools/pt/test_scrivi.js && node tools/pt/test_memoria.js && node tools/pt/test_suoni.js",
     "build": "python3 tools/it/build_bank.py && python3 tools/it/build_course.py && python3 tools/pt/build_bank.py && python3 tools/pt/build_course.py",
