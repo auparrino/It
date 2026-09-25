@@ -639,6 +639,7 @@ LESSONS = {
          ["*Estou te esperando* no calçadão.", "Te estoy esperando en la rambla."]]},
 
  {"h": "Habla y escritura",
+  "q": [{"prompt": "En la escritura formal, «Vi ele ontem.» es…", "answer": "Vi-o ontem.", "options": ["Vi-o ontem.", "Vi-lo ontem.", "Vi-lhe ontem."]}, {"prompt": "En la escritura formal, «Me dá um café?» es…", "answer": "Dê-me um café.", "options": ["Dê-me um café.", "Me dê-me um café.", "Dá-me-lo um café."]}],
   "r": "Brasil hablado: próclise siempre (*me dá*, *te amo*) y *ele* como "
        "objeto (*vi ele*). En la escritura culta: *dá-me*, *vi-o*.",
   "table": {"head": ["Habla", "Escritura formal"],
