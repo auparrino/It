@@ -34,6 +34,9 @@
 
   var course = null;
   var state = Engine.load();
+  // Devoluciones: the names of tenses follow the week the learner is in.
+  var DV = window.Devolucion || null;
+  if (DV) DV.weekFrom(function () { return Math.min(state.unlocked || 1, 52); });
 
   /* Tema: "" sigue al teléfono; "light" u "dark" lo fuerzan.  Se aplica antes
      de dibujar nada, así no hay parpadeo. */
@@ -1938,8 +1941,10 @@
         return multi ? '<span class="gap n">' + (++gi) + "</span>" : '<span class="gap">&nbsp;</span>';
       });
     var prompt = (it.retry ? '<div class="badge-new">🔁 Segunda vez, más fácil</div>' : "") +
-      '<div class="prompt">' + esc(it.prompt || "") + "</div>" +
-      (it.retry && it.note && !it.recog ? '<div class="note">📐 ' + mk(it.note) + "</div>" : "");
+      '<div class="prompt">' + esc(DV ? DV.plain(it.prompt || "") : it.prompt || "") + "</div>" +
+      // the second time, the rule with the answer covered: it shows after answering
+      (it.retry && it.note && !it.recog ? '<div class="note">📐 ' +
+        mk(DV ? DV.plain(DV.maskNote(it.note, [it.answer].concat(it.accept || []), it.stem)) : it.note) + "</div>" : "");
 
     if (it.type === "intro") {
       return hud() + '<div class="card intro">' +
@@ -2166,6 +2171,9 @@
       (it.src !== "banca" && it.src !== "lab" && it.src !== "lettura" && it.src !== "frasi" && it.src !== "vocab" && it.src !== "ascolto" && it.type !== "scopri") ||
       (it.src === "frasi" && it.type === "choice")) && !(it.recog && it.orig === "translate");
     var useful = tgOptions && d && d.cat && !GENERIC[d.cat];
+    // Another sentence or a word unlike the answer: no rule to invent.
+    if (useful && DV && DV.far(given, [it.answer], d)) useful = false;
+    if (useful && DV) DV.tidy(d);
     if (useful) recordError(d, given);
     settle(verdict, given, useful ? diagHtml(d, false) : "");
   }
@@ -2204,8 +2212,10 @@
       settle(ves, given, ves === "giusto" ? "" : '<div class="note">Otras formas de decirlo: ' + esc((it.accept || [it.answer]).join(" · ")) + "</div>");
       return;
     }
-    var diagCtx = { stem: it.stem, prompt: it.prompt, nominal: it.type === "plural" || /plural/i.test(it.prompt || "") };
+    var diagCtx = { stem: it.stem, prompt: it.prompt, nominal: it.type === "plural" || /plural/i.test(it.prompt || ""),
+                    week: DV ? DV.weekNow() : undefined };
     var d = window.Diagnosi ? Diagnosi.diagnose(given, accept, diagCtx) : { verdict: "sbagliato" };
+    if (DV) DV.tidy(d);
     // Garden path (Tomasello & Herron 1988): the learner was led into the
     // transfer error on purpose; the correction is the lesson.
     if (it.type === "garden" && it.trap && Engine.normalise(given) === Engine.normalise(it.trap)) {
@@ -2221,7 +2231,17 @@
       var inEs = gW.filter(function (w) { return w.length > 1 && esW.indexOf(w) >= 0; }).length;
       if (gW.length >= 2 && inEs * 2 >= gW.length) {
         d.hint = "Eso está en español. Escribila en " + UI.langEs + "; si todavía no la sabés, pedí las fichas 🧩.";
+        d.inSpanish = true;
       }
+    }
+    // Nothing like the answer («boh», «xx», another sentence): no rule to
+    // invent and nothing for the Clínica; the answer, its note and how it
+    // is built (Aljaafreh & Lantolf 1994).
+    if (DV && d.verdict !== "giusto" && d.cat !== "vuoto" && !d.inSpanish && DV.far(given, accept, d) &&
+        !(it.type === "garden" && it.trap)) {
+      round.lastDiag = null;
+      settle("sbagliato", given, DV.farHtml(given, accept));
+      return;
     }
     // The old graders forgive a letter or two; the diagnosis knows whether
     // those letters were a typo or grammar (a il / al, em o / no).
@@ -2259,7 +2279,7 @@
       round.promptAt = Date.now();
       round.firstCat = d.cat;
       recordError(d, given);
-      showPrompt(d);
+      showPrompt(d, DV ? DV.promptVerdict(given, accept, d) : null);
       return;
     }
     if (!round.tried && d.cat) recordError(d, given);
@@ -2285,14 +2305,14 @@
       "</div>";
   }
 
-  function showPrompt(d) {
+  function showPrompt(d, verdictText) {
     fx.close();
     // The word(s) to fix, with the first letter showing: c_mo.
     var masked = (d.fixed || []).filter(function (t) { return t.fix; }).map(function (t) {
       return t.w.charAt(0) + t.w.slice(1).replace(/[^' ]/g, "_");
     }).join(" ");
     $("#fb").innerHTML = '<div class="feedback prompt">' +
-      '<div class="verdict">🔎 Casi. Revisalo:</div>' +
+      '<div class="verdict">' + esc(verdictText || "🔎 Casi. Revisalo:") + "</div>" +
       (d.given && d.given.length <= 24 ? '<div class="diff">' + tokHtml(d.given, "bad") + "</div>" : "") +
       "<p>" + mk(d.hint) + "</p>" +
       '<div class="row">' + (masked ? '<button class="tab" id="morehint">💡 más pista</button>' : "") +
@@ -2424,7 +2444,7 @@
       (extra || "") +
       (it.type === "hunt" ? "" : '<div class="sol">' + (it.frase || it.src === "lettura" || it.dir === "it-es" || it.type === "scopri" ? esc(sol) : glossifyAny(sol)) + "</div>") +
       (it.frase && it.type !== "listen" ? '<div class="note">' + esc(it.frase.es) + "</div>" : "") +
-      (it.note && !(it.type === "garden" && extra && extra.indexOf("La trampa") >= 0) ? '<div class="note">' + mk(it.note) + "</div>" : "") +
+      (it.note && !(it.type === "garden" && extra && extra.indexOf("La trampa") >= 0) ? '<div class="note">' + mk(DV ? DV.plain(it.note) : it.note) + "</div>" : "") +
       (q === 2 && it.recogNote ? '<div class="note">' + esc(it.recogNote) + "</div>" : "") +
       desgloseHtml(targetText(it), verdict !== "giusto" || it.type === "guess") +
       (it.hint && it.src === "dummies"
@@ -4767,7 +4787,7 @@
           // Tiles are all words of the language handed over: a wrong pick is order,
           // a tile too many or too few, or the wrong form; never a «false
           // friend» or a «Spanish word».
-          if (d.cat && !GENERIC[d.cat] && !TILE_SKIP[d.cat]) { recordError(d, r.given); extra = diagHtml(d, true); }
+          if (d.cat && !GENERIC[d.cat] && !TILE_SKIP[d.cat]) { if (DV) DV.tidy(d); recordError(d, r.given); extra = diagHtml(d, true); }
         }
         settle(r.verdict, r.given, extra);
       });
@@ -4888,7 +4908,9 @@
         if (tries === 1) {
           recordError({ cat: it.cat, target: it.answer }, it.stem);
           var d = it.good && window.Diagnosi ? Diagnosi.diagnose(val || "—", [it.good]) : null;
-          $("#fb").innerHTML = '<div class="feedback prompt"><div class="verdict">🔎 Casi.</div><p>' +
+          if (d && DV) DV.tidy(d);
+          var closeTo = !DV || !it.good || !val || DV.near(val, goods, d);
+          $("#fb").innerHTML = '<div class="feedback prompt"><div class="verdict">' + (closeTo ? "🔎 Casi." : "🔎 Todavía no.") + "</div><p>" +
             (it.good === "" ? "Esa palabra no hay que cambiarla por otra: sobra." :
              d && d.hint && !GENERIC[d.cat] ? mk(d.hint) : "Pista: es un error de <b>" + esc(label) + "</b>.") +
             "</p></div>";
