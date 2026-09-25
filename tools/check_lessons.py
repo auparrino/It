@@ -4,6 +4,7 @@
 
     python3 tools/check_lessons.py              tutte
     python3 tools/check_lessons.py s1           solo tools/lessons/s1.py
+    python3 tools/check_lessons.py --estilo s2  además, el estilo de la lección en pasos
 
 Per ogni settimana: formato (regola corta, limiti di parole, tabelle) e gli
 esempi italiani che usano tempi o costruzioni che arrivano più avanti
@@ -21,8 +22,34 @@ import build_course  # noqa: E402
 import sillabo       # noqa: E402
 
 
+# The style of the lesson in steps (Mirá → regla → tabla → trampa): every
+# block shows examples, the rule fits in one or two lines, and each example
+# marks with *…* the form it teaches.
+MAX_RULE = 22
+
+
+def style(week, lesson):
+    bad = []
+    for i, b in enumerate(lesson.get("blocks", []), 1):
+        where = "settimana %s blocco %d «%s»" % (week, i, b.get("h", ""))
+        ex = b.get("ex") or []
+        if len(ex) < 2:
+            bad.append(where + ": menos de 2 ejemplos")
+        words = len(re.sub(r"[*]", "", b.get("r", "")).split())
+        if words > MAX_RULE:
+            bad.append(where + ": regla de %d palabras (máx. %d)" % (words, MAX_RULE))
+        for pair in ex:
+            if not re.search(r"\*[^*]+\*", pair[0]):
+                bad.append(where + ": ejemplo sin forma marcada: «%s»" % pair[0])
+            if pair[0].count("*") % 2:
+                bad.append(where + ": asteriscos desparejos: «%s»" % pair[0])
+    return bad
+
+
 def main():
-    only = sys.argv[1] if len(sys.argv) > 1 else None
+    args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    estilo = "--estilo" in sys.argv
+    only = args[0] if args else None
     folder = os.path.join(HERE, "lessons")
     problems = []
     for fn in sorted(os.listdir(folder)):
@@ -35,6 +62,8 @@ def main():
         spec.loader.exec_module(mod)
         for week, lesson in sorted(mod.LESSONS.items()):
             problems += build_course.check_lesson(week, lesson)
+            if estilo:
+                problems += style(week, lesson)
             for i, b in enumerate(lesson.get("blocks", []), 1):
                 if (b.get("h") or "").startswith("Adelanto"):
                     continue

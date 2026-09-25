@@ -1066,8 +1066,8 @@
 
     if (b.ex && B) {
       html += '<ul class="exs">' + b.ex.map(function (pair, k) {
-        sayIndex[i + "-" + k] = pair[0];
-        return '<li><span class="it">' + esc(pair[0]) + "</span>" +
+        sayIndex[i + "-" + k] = Lezione.strip(pair[0]);
+        return '<li><span class="it">' + exHtml(pair[0]) + "</span>" +
           '<span class="es">' + esc(pair[1]) + "</span>" +
           '<button class="say" data-say="' + i + "-" + k + '" ' +
           'aria-label="escuchar">🔊</button></li>';
@@ -1117,6 +1117,12 @@
     marks.forEach(function (m) { out += esc(t.slice(pos, m.s)) + '<mark class="hl">' + esc(t.slice(m.s, m.e)) + "</mark>"; pos = m.e; });
     return out + esc(t.slice(pos));
   }
+  // An example with its key form marked by hand («Credo che *abbia* ragione»).
+  function exHtml(text) {
+    return String(text).split(/\*([^*]+)\*/).map(function (x, k) {
+      return k % 2 ? '<mark class="hl">' + esc(x) + "</mark>" : esc(x);
+    }).join("");
+  }
   function stepBadge(ico, txt) { return '<div class="stepbadge">' + ico + " " + txt + "</div>"; }
   // 👀 The examples first, the forms marked: the rule comes on the next screen.
   /* The forms of the tenses a week teaches (conjugator): the congiuntivo
@@ -1145,8 +1151,10 @@
     var fs = Lezione.forms(b).concat(les && les.w ? weekTenseForms(les.w) : []);
     return '<section class="blk">' + stepBadge("👀", "Mirá") + (b.h ? "<h2>" + mk(b.h) + "</h2>" : "") +
       '<ul class="exs look">' + b.ex.map(function (pair, k) {
-        sayIndex[i + "-" + k] = pair[0];
-        return '<li><span class="it">' + markForms(pair[0], fs) + '</span><span class="es">' + esc(pair[1]) + "</span>" +
+        sayIndex[i + "-" + k] = Lezione.strip(pair[0]);
+        // marked by hand when the lesson says which form matters; else, guessed
+        var itHtml = /\*[^*]+\*/.test(pair[0]) ? exHtml(pair[0]) : markForms(pair[0], fs);
+        return '<li><span class="it">' + itHtml + '</span><span class="es">' + esc(pair[1]) + "</span>" +
           '<button class="say" data-say="' + i + "-" + k + '" aria-label="escuchar">🔊</button></li>';
       }).join("") + "</ul>" +
       '<p class="muted small">Fijate en lo marcado. La regla, en la pantalla siguiente.</p></section>';
