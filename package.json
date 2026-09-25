@@ -11,7 +11,7 @@
     "sim": "node tools/it/sim_carriera.js && node tools/pt/sim_carriera.js",
     "smoke": "NODE_PATH=$(npm root -g) node tools/lib/smoke_browser.js",
     "start": "cd docs && python3 -m http.server 8000",
-    "test:lib": "node tools/lib/test_desglose.js && node tools/lib/test_referencia.js && node tools/lib/test_fix_feedback.js && node tools/lib/test_fix_frases.js && node tools/lib/test_mapas_ubicacion.js && node tools/lib/test_tres_lenguas.js && node tools/lib/test_porque.js && node tools/lib/test_escritura_plus.js && node tools/lib/test_ejercicios.js && node tools/lib/test_notas_it.js"
+    "test:lib": "node tools/lib/test_desglose.js && node tools/lib/test_referencia.js && node tools/lib/test_fix_feedback.js && node tools/lib/test_fix_frases.js && node tools/lib/test_mapas_ubicacion.js && node tools/lib/test_tres_lenguas.js && node tools/lib/test_porque.js && node tools/lib/test_escritura_plus.js && node tools/lib/test_ejercicios.js && node tools/lib/test_notas_it.js && node tools/lib/test_lecciones.js && node tools/lib/test_fix_contenido_pt.js && node tools/lib/test_tema_it.js"
   },
   "license": "UNLICENSED"
 }
