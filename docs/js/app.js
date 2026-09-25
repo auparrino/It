@@ -304,7 +304,10 @@
     try { ls = Desglose.lines(text, { gloss: glossario }); } catch (e) { return ""; }
     if (!ls.length) return "";
     return '<details class="desglose"' + (open ? " open" : "") + "><summary>🔎 Palabra por palabra</summary><ul>" +
-      ls.slice(0, 7).map(function (l) { return "<li>" + mk(l) + "</li>"; }).join("") + "</ul></details>";
+      ls.slice(0, 7).map(function (l) {
+        var w = window.Referencia && /^\*([^*]+)\*/.exec(l);   // «usos»: la palabra en oraciones del curso (referencia.js)
+        return "<li>" + mk(l) + (w ? " " + Referencia.button(w[1]) : "") + "</li>";
+      }).join("") + "</ul></details>";
   }
   /* The target-language text of an item: the phrase, the sentence with its
      gaps filled, the word asked about, or the answer. */
@@ -775,6 +778,7 @@
       '<p class="muted science">🔬 Ponte usa la transferencia desde tu lengua (Ringbom); ' +
       UI.capire + " es input estructurado: primero interpretar la forma, después producirla (VanPatten).</p>";
 
+    if (window.Referencia) html += Referencia.entry();
     if (window.Duelli) {
       var wkD = Math.min(state.unlocked || 1, 52);
       html += "<h2>⚔️ Duelos</h2>" +
@@ -1027,9 +1031,10 @@
       document.body.appendChild(box);
     }
     box.textContent = txt;
+    var withRef = window.Referencia && Referencia.onGloss(box, txt);   // «¿Cómo se usa?» (referencia.js)
     box.classList.add("on");
     clearTimeout(showGloss.t);
-    showGloss.t = setTimeout(function () { box.classList.remove("on"); }, 3200);
+    showGloss.t = setTimeout(function () { box.classList.remove("on"); }, withRef ? 6000 : 3200);
   }
 
   /* -------------------------------------------------------------- trilha */
@@ -1705,7 +1710,8 @@
     return '<div class="card"><h2>📚 Palabras de la semana <small class="muted">' + seen + " / " + w.vocab.length + "</small></h2>" +
       '<ul class="vocab">' + w.vocab.map(function (v) {
         return '<li><button class="say" data-say="' + esc(v[0]) + '" aria-label="Escuchar">🔊</button> <b>' + esc(v[0]) +
-          "</b> <span>" + esc(v[1]) + "</span>" + (v[2] ? '<small><i>' + esc(v[2]) + "</i></small>" : "") + "</li>";
+          "</b> <span>" + esc(v[1]) + "</span>" + (window.Referencia ? " " + Referencia.button(v[0]) : "") +
+          (v[2] ? '<small><i>' + esc(v[2]) + "</i></small>" : "") + "</li>";
       }).join("") + "</ul>" +
       '<div class="row" style="margin-top:10px"><button class="btn" id="vocab">Practicar las palabras</button></div></div>';
   }
@@ -3101,6 +3107,7 @@
         '<p class="muted" id="persistmsg" style="margin-top:10px"></p>' +
       "</div>" +
 
+      (window.Referencia ? Referencia.entry() : "") +
       errorsCard() +
       aiCard() +
       (window.Voci && Voci.count() ? (function () {
@@ -3393,6 +3400,7 @@
     else if (s === "esame-let") html = renderEsameLettura();
     else if (s === "esame-scr") html = renderEsameScrittura();
     else if (s === "storia") html = renderStoria(course.weeks[view.week - 1]);
+    else if (s === "gramatica") html = Referencia.page();
 
     var gb = $("#glossbox");
     if (gb) gb.classList.remove("on");
@@ -5065,6 +5073,15 @@
       round: function () { return round; }
     };
   }
+
+  // Concordancias y «Mi gramática» (docs/js/referencia.js).
+  if (window.Referencia) Referencia.attach({
+    state: function () { return state; }, persist: persist,
+    course: function () { return course; }, glossary: function () { return glossario; },
+    fx: function (ok) { if (ok) fx.right(); else fx.wrong(); gain(ok ? 3 : 1); },
+    open: function () { view.screen = "gramatica"; render(); window.scrollTo(0, 0); },
+    back: function () { go(view.tab || "io"); }
+  });
 
   // The glossary is optional too: without it words are just not tappable.
   fetch(DATA("glossario.json"))

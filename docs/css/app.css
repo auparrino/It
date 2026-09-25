@@ -367,3 +367,46 @@ html[data-lang="pick"] header.top, html[data-lang="pick"] nav.nav { display: non
 .desglose:not([open]) summary::after { content: " ▸"; }
 .desglose ul { margin: 6px 0 0; padding-left: 18px; }
 .desglose li { margin: 3px 0; line-height: 1.35; }
+
+/* --- Tarea: concordancias + «Mi gramática» (docs/js/referencia.js) --- */
+.ref-go { font: inherit; font-size: .78rem; font-weight: 700; padding: 1px 8px; margin-left: 2px; border-radius: 999px;
+  border: 1px solid color-mix(in srgb, currentColor 35%, transparent); background: transparent; color: inherit;
+  cursor: pointer; vertical-align: 1px; white-space: nowrap; }
+.glossbox.has-ref { pointer-events: auto; }
+.glossbox .ref-gl { display: inline-block; margin: 6px 0 0; font-size: .85rem; padding: 3px 10px;
+  border-color: currentColor; }
+.refsheet { width: min(94vw, 480px); max-height: calc(100vh - 150px); max-height: calc(100dvh - 150px);
+  overflow-y: auto; overscroll-behavior: contain; z-index: 66; box-sizing: border-box; }
+.refsheet h2 { margin: 2px 0 4px; font-size: 1.2rem; }
+.refsheet h3 { margin: 14px 0 6px; font-size: 1rem; }
+.ref-top { display: flex; justify-content: flex-end; margin: -4px -6px 0 0; }
+.ref-gloss { margin: 0 0 6px; }
+ol.ref-hits { margin: 6px 0 4px; padding-left: 22px; }
+ol.ref-hits li { margin: 8px 0; line-height: 1.4; }
+.ref-t { display: block; font-size: 1.02rem; }
+.ref-es { display: block; font-size: .88rem; opacity: .75; }
+.ref-src { display: block; font-size: .72rem; opacity: .6; margin-top: 1px; }
+mark.ref-hl { background: color-mix(in srgb, #f5c531 50%, transparent); color: inherit; border-radius: 4px; padding: 0 2px;
+  font-weight: 700; }
+.ref-opts .opt { text-align: left; white-space: normal; line-height: 1.35; width: 100%; }
+.ref-why { margin-top: 8px; font-size: .92rem; line-height: 1.4; }
+.ref-why .tab { margin-left: 4px; }
+.ref-counts { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 10px; }
+.ref-st { display: inline-block; font-size: .74rem; font-weight: 700; padding: 2px 8px; border-radius: 999px; white-space: nowrap;
+  background: color-mix(in srgb, currentColor 8%, transparent); }
+.ref-st.practicada { background: color-mix(in srgb, #1a6fd8 16%, transparent); }
+.ref-st.dominada { background: color-mix(in srgb, #1d9b58 20%, transparent); }
+.ref-q { width: 100%; box-sizing: border-box; font: inherit; font-size: 1rem; padding: 10px 12px; margin: 6px 0 8px;
+  border-radius: 12px; border: 1px solid color-mix(in srgb, currentColor 25%, transparent); background: transparent; color: inherit; }
+.ref-filters { margin: 0 0 10px; }
+h3.ref-wk { margin: 18px 0 6px; font-size: .95rem; opacity: .8; }
+details.ref-item { margin: 6px 0; padding: 10px 12px; border-radius: 12px;
+  background: color-mix(in srgb, currentColor 5%, transparent); }
+details.ref-item summary { cursor: pointer; list-style: none; display: flex; flex-wrap: wrap; gap: 4px 8px;
+  align-items: baseline; justify-content: space-between; }
+details.ref-item summary::-webkit-details-marker { display: none; }
+.ref-h { font-weight: 700; flex: 1 1 60%; min-width: 0; }
+.ref-meta { display: inline-flex; gap: 6px; align-items: baseline; flex-wrap: wrap; }
+.ref-score { font-size: .78rem; opacity: .75; white-space: nowrap; }
+.ref-body .tw { overflow-x: auto; }
+.ref-body .rule { margin: 10px 0 6px; }
