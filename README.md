@@ -214,7 +214,12 @@ tónico y un dictado por fragmentos.
 - **Acento tónico** (30): *àncora/ancóra*, *prìncipi/princìpi*, *sùbito/subìto*,
   y las esdrújulas que el español desplaza (*tàvolo, càmera, mèdico*).
 - **Dictado por fragmentos**: oraciones del banco de la semana, con las
-  dobles y las tildes contadas.
+  dobles y las tildes contadas; dos de cada tres veces, una oración grabada
+  por una persona real (Common Voice).
+- **¿Qué forma escuchaste?** (26): una oración grabada con el verbo en
+  blanco y dos formas que compiten (*andassi / andavo*, *esca / esce*,
+  *dedicata / dedicato*); decide solo el oído. Se abre con la semana de
+  cada forma.
 - La Pausa caffè trae un ítem de escucha, y *Allena* tiene el módulo libre.
 
 **Voces reales en Suoni** (`docs/js/voci.js`): las palabras de los pares
@@ -223,7 +228,13 @@ mínimos suenan con grabaciones de hablantes reales de Lingua Libre
 con su nombre a la vista; *Io* lista los créditos. La app las busca desde el
 teléfono la primera vez y el service worker guarda el audio para usarlo sin
 conexión; si no hay grabación (o es un par de vocal abierta/cerrada), suena
-la voz del teléfono. Lo que falta (Common Voice) está en `VOCES.md`.
+la voz del teléfono.
+
+**Oraciones grabadas** (`docs/js/voci_cv_data.js`, `docs/audio/cv/`): 128
+oraciones de Common Voice (Mozilla, CC0) leídas por voluntarios distintos,
+revisadas a mano, con su semana. Suenan en el dictado y en «¿Qué forma
+escuchaste?»; el service worker las guarda la primera vez que suenan. Cómo
+se eligieron y cómo sumar más: `VOCES.md`.
 
 ### 📝 Dictogloss
 

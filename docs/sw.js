@@ -4,7 +4,7 @@
  * Cambiare VERSION a ogni rilascio per buttare la cache vecchia (e APP_VERSION
  * in js/app.js, che si vede in Oggi e Io: test_game.js controlla che coincidano).
  */
-var VERSION = "laviac1-v1.48";
+var VERSION = "laviac1-v1.49";
 var FILES = [
   "./",
   "index.html",
@@ -34,6 +34,7 @@ var FILES = [
   "js/suoni.js",
   "js/duelli.js",
   "js/voci.js",
+  "js/voci_cv_data.js",
   "js/drills.js",
   "js/app.js",
   "data/course.json",
@@ -80,6 +81,22 @@ self.addEventListener("fetch", function (e) {
     return;
   }
   if (url.origin !== location.origin) return;
+  // The sentences of Common Voice (audio/cv/): cached the first time they
+  // play, in the same lasting cache, so a session works offline afterwards
+  // without downloading 5 MB at install.
+  if (/\/audio\/cv\//.test(url.pathname)) {
+    e.respondWith(caches.open(VOCI).then(function (cache) {
+      return cache.match(url.href).then(function (hit) {
+        // the player asks by ranges (206, which cannot be cached): ask for
+        // the whole file, a few KB, and answer with it
+        return hit || fetch(url.href).then(function (res) {
+          if (res && res.status === 200) cache.put(url.href, res.clone()).catch(function () {});
+          return res;
+        });
+      });
+    }));
+    return;
+  }
   e.respondWith(caches.open(VERSION).then(function (cache) {
     return cache.match(e.request, { ignoreSearch: true }).then(function (hit) {
       var net = fetch(e.request).then(function (res) {

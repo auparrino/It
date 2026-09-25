@@ -170,10 +170,28 @@
     window.speechSynthesis.speak(u);
     return u;
   }
+  var realAudio = null;
   // An item of the listening module carries its own voice (variability).
   function speakItem(it, force, rate) {
     var v = it.voice || {};
     var tts = function () { return speak(it.say || it.stem, force, rate || v.rate, { pitch: v.pitch, vi: v.vi }); };
+    // A sentence of Common Voice: the recording itself; the phone's voice
+    // only when it cannot play (offline the first time, an old browser).
+    if (it.audio && typeof Audio === "function") {
+      if (state.silent && !force) return null;
+      if (window.speechSynthesis) speechSynthesis.cancel();
+      try {
+        if (realAudio) realAudio.pause();
+        var a = realAudio = new Audio(it.audio), fell = false;
+        var fall = function () { if (!fell) { fell = true; tts(); } };
+        if (rate && rate < 0.9) a.playbackRate = 0.75;
+        a.onerror = fall;
+        var pr = a.play();
+        if (pr && pr.catch) pr.catch(fall);
+        var c = $("#vcredit"); if (c) c.textContent = "🎙️ Voz real · " + (window.VociCV ? VociCV.LICENSE : "Common Voice");
+      } catch (e) { tts(); }
+      return null;
+    }
     // A pair of Suoni: a real speaker of Lingua Libre when there is one
     // (not for open/closed vowels: the file name cannot tell pèsca from pésca).
     if (window.Voci && it.type === "coppia" && it.cat !== "vocali" && Voci.usable(it.say)) {
@@ -564,7 +582,7 @@
 
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION in sw.js: test_game checks it). */
-  var APP_VERSION = "v1.48";
+  var APP_VERSION = "v1.49";
   function versionLine() {
     return '<p class="muted small version">La Via C1 · versión ' + APP_VERSION + "</p>";
   }
@@ -1566,7 +1584,7 @@
   }
 
   // Items of the listening module: the audio is the question.
-  var SAY_TYPES = { coppia: 1, conta: 1, scegli: 1, intonazione: 1, accento: 1 };
+  var SAY_TYPES = { coppia: 1, conta: 1, scegli: 1, intonazione: 1, accento: 1, forma: 1 };
   /* Fatigue: when the accuracy of the last eight answers drops twenty
      points under the session's, the round offers to stop (no new items
      are learnt tired: intra-session dropout models, Riiid 2020). */
@@ -1679,7 +1697,8 @@
       }
     } else if (it.type === "dictation") {
       body = '<div class="center"><button class="bigplay" id="play1">🔊</button>' +
-        '<div><button class="tab" id="slow">🐢 más lento</button></div></div>' +
+        '<div><button class="tab" id="slow">🐢 más lento</button></div>' +
+        (it.audio ? '<p class="muted small" id="vcredit"></p>' : "") + "</div>" +
         '<div class="typed">' +
         '<textarea id="wans" class="grow" rows="1" autocomplete="off" autocapitalize="sentences" ' +
         'autocorrect="off" spellcheck="false" enterkeyhint="send" placeholder="lo que escuchás…"></textarea>' +
@@ -1695,7 +1714,9 @@
       body = '<div class="center"><button class="bigplay" id="play1">🔊</button>' +
         '<div><button class="tab" id="slow">🐢 más lento</button>' +
         (it.type === "coppia" ? '<button class="tab" id="both">👂 las dos</button>' : "") + "</div>" +
-        (it.type === "coppia" ? '<p class="muted small" id="vcredit"></p>' : "") + "</div>" +
+        (it.type === "coppia" || it.audio ? '<p class="muted small" id="vcredit"></p>' : "") + "</div>" +
+        // «¿Qué forma escuchaste?»: the sentence with the form blanked out
+        (it.type === "forma" ? '<div class="stem">' + esc(it.stem).replace("___", "<b>___</b>") + "</div>" : "") +
         '<div class="options' + (it.type === "coppia" ? " pair" : "") + '">' + it.options.map(function (o, k) {
           return '<button class="opt" data-opt="' + k + '">' + esc(o) + "</button>";
         }).join("") + "</div>";
@@ -2157,8 +2178,8 @@
         show();
       });
     });
-    $("#say2").onclick = function () { speak(spoken, true); };
-    if (q === 2 || it.frase) speak(spoken);
+    $("#say2").onclick = function () { if (it.audio) speakItem(it, true); else speak(spoken, true); };
+    if (q === 2 || it.frase) { if (it.audio) speakItem(it); else speak(spoken); }
     $("#fb").scrollIntoView({ behavior: "smooth", block: "nearest" });
   }
 
@@ -2754,6 +2775,8 @@
         return '<div class="card"><h2>🎙️ Voces reales</h2><p class="muted small">Suoni usa grabaciones de hablantes reales para ' + Voci.count() +
           " palabras. Voces de Lingua Libre (Wikimedia Commons), licencia CC BY-SA 4.0: " + Object.keys(cr).map(esc).join(", ") + ".</p></div>";
       })() : "") +
+      (window.VociCV ? '<div class="card"><h2>🗣️ Oraciones grabadas</h2><p class="muted small">El dictado de Suoni y «¿Qué forma escuchaste?» usan ' +
+        VociCV.ALL.length + " oraciones leídas por voluntarios de Common Voice (Mozilla), de dominio público (CC0).</p></div>" : "") +
       '<div class="card"><h2>Medallas</h2><div class="badges">' +
         Engine.BADGES.map(function (b) {
           var won = state.badges.indexOf(b.id) >= 0;
