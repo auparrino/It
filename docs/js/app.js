@@ -303,7 +303,7 @@
     var ls;
     try { ls = Desglose.lines(text, { gloss: glossario }); } catch (e) { return ""; }
     if (!ls.length) return "";
-    return '<details class="desglose"' + (open ? " open" : "") + "><summary>🔎 Cómo se arma</summary><ul>" +
+    return '<details class="desglose"' + (open ? " open" : "") + "><summary>🔎 Palabra por palabra</summary><ul>" +
       ls.slice(0, 7).map(function (l) { return "<li>" + mk(l) + "</li>"; }).join("") + "</ul></details>";
   }
   /* The target-language text of an item: the phrase, the sentence with its

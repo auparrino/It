@@ -80,10 +80,11 @@
   function articles() {
     if (ARTS) return ARTS;
     ARTS = {};
-    var L = root.LANG, c = L && L.rules && L.rules.banca && L.rules.banca.contr;
+    var L = root.LANG, R = L && L.rules, c = R && R.banca && R.banca.contr, d = R && R.distract;
     Object.keys(c || {}).forEach(function (prep) {
       Object.keys(c[prep]).forEach(function (art) { ARTS[art.toLowerCase()] = 1; ARTS[String(c[prep][art]).toLowerCase()] = 1; });
     });
+    ((d && d.artSg) || []).concat((d && d.artPl) || []).forEach(function (a) { ARTS[String(a).toLowerCase()] = 1; });
     return ARTS;
   }
 
@@ -123,6 +124,24 @@
     return out;
   }
 
+  /* Nouns, adjectives and other words of the bank (Banca, or opts.bank):
+     they are read as what they are before being read as a verb form. */
+  var NOMINAL = null, SUBJ = {}, EXPR = {};
+  function nominalFrom(bank) {
+    NOMINAL = {};
+    (bank && bank.nouns || []).forEach(function (n) { NOMINAL[String(n[0]).toLowerCase()] = 1; NOMINAL[String(n[2]).toLowerCase()] = 1; });
+    (bank && bank.adjectives || []).forEach(function (a) { for (var k = 0; k < 4; k++) NOMINAL[String(a[k]).toLowerCase()] = 1; });
+    (bank && bank.words || []).forEach(function (x) {
+      var w = String(x[0]).toLowerCase();
+      // expressions (valeu, falou) are verb forms worth explaining
+      if (/espress|express/i.test(String(x[2] || ""))) EXPR[w] = 1;
+      else if (!/verb/i.test(String(x[2] || ""))) NOMINAL[w] = 1;
+    });
+    var C = conj();
+    SUBJ = {};
+    ((C && C.PERSONS) || []).forEach(function (p) { String(p).split("/").forEach(function (x) { SUBJ[x.trim().toLowerCase()] = 1; }); });
+  }
+
   function tokens(text) {
     return (String(text || "").toLowerCase().match(/[a-zà-ÿ]+(?:[-'’][a-zà-ÿ]+)*/g) || []);
   }
@@ -135,6 +154,8 @@
     opts = opts || {};
     var gloss = opts.gloss || {}, out = [], seen = {};
     var idx = index(), contr = contractions();
+    if (opts.bank && !NOMINAL) nominalFrom(opts.bank);
+    else if (!NOMINAL && root.Banca && root.Banca.loaded && root.Banca.loaded()) nominalFrom(root.Banca.bank());
     var toks = tokens(text), arts = articles();
     toks.forEach(function (w, i) {
       if (seen[w]) return;
@@ -153,7 +174,16 @@
       }
       // after an article it is a noun: il sale, o canto
       var afterArt = i > 0 && arts[toks[i - 1]];
-      if (hits.length && !(afterArt && g && hits.every(function (h) { return h[0] !== g[0]; }))) {
+      // A noun or adjective of the bank reads as what it is (um mate, em
+      // casa, o trabalho, como), unless it follows a subject pronoun.
+      var nominal = NOMINAL && NOMINAL[w] && !(i > 0 && SUBJ[toks[i - 1]]);
+      // after an article a verb reading is wrong (um mate, un giro); if the
+      // glossary only knows the verb, better say nothing than say «matar»
+      if (afterArt && hits.length && !nominal) {
+        if (!g || hits.some(function (h) { return h[0] === g[0]; })) return;
+        hits = [];
+      }
+      if (hits.length && !nominal && !(afterArt && (!g || hits.every(function (h) { return h[0] !== g[0]; })))) {
         var lemmas = [];
         if (g && hits.some(function (h) { return h[0] === g[0]; })) lemmas.push(g[0]);
         hits.forEach(function (h) { if (lemmas.indexOf(h[0]) < 0) lemmas.push(h[0]); });
@@ -165,12 +195,12 @@
           if (h[2] >= 0 && persons.indexOf(h[2]) < 0) persons.push(h[2]);
         });
         var lemma = lemmas[0], lg = gloss[lemma];
-        var es = (lg && lg[1]) || "";
+        var es = lemmas.map(function (l) { var x = gloss[l]; return x && x[1]; }).filter(Boolean).join(" / ") || "";
         if (!es && C && C.info) { try { es = (C.info(lemma) || {}).es || ""; } catch (e) { /* no */ } }
         // the gloss of the word itself, when it says more than the verb
         // (valeu: gracias, dale)
         if (!es && g && lemmas.indexOf(g[0]) >= 0) es = g[1] || "";
-        var idiom = g && lemmas.indexOf(g[0]) < 0 && g[1] && g[1] !== es ? g[1] : "";
+        var idiom = g && EXPR[w] && lemmas.indexOf(g[0]) < 0 && g[1] && g[1] !== es ? g[1] : "";
         out.push({ w: w, kind: "verb", lemma: lemma, lemmas: lemmas, tenses: tenses, persons: persons, es: es, idiom: idiom });
         return;
       }
@@ -195,7 +225,7 @@
     });
   }
 
-  var api = { of: of, lines: lines, _reset: function () { FORMS = null; CONTR = null; } };
+  var api = { of: of, lines: lines, _reset: function () { FORMS = null; CONTR = null; NOMINAL = null; } };
   if (typeof module === "object" && module.exports) module.exports = api;
   else root.Desglose = api;
 })(typeof window !== "undefined" ? window : globalThis);
