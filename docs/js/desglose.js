@@ -227,7 +227,7 @@
     });
   }
 
-  var api = { of: of, lines: lines, _reset: function () { FORMS = null; CONTR = null; NOMINAL = null; } };
+  var api = { of: of, lines: lines, transparent: transparent, _reset: function () { FORMS = null; CONTR = null; NOMINAL = null; } };
   if (typeof module === "object" && module.exports) module.exports = api;
   else root.Desglose = api;
 })(typeof window !== "undefined" ? window : globalThis);

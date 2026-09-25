@@ -548,3 +548,10 @@ ul.exs.look .it { font-size: 1.08rem; color: var(--inchiostro); font-weight: 600
 /* ---- mapas de preposiciones (docs/js/mapas.js): los colores del dibujo ---- */
 :root { --mapa-tr: var(--terracotta); --mapa-lm: var(--azzurro); --mapa-soft: var(--cielo-chiaro);
         --mapa-ink: var(--inchiostro); --mapa-bg: var(--carta); --mapa-line: var(--grigio-chiaro); }
+
+/* --- Biblioteca: los colores del lector (docs/css/app.css usa --bx-*) --- */
+:root { --bx-ok: var(--verde-scuro); --bx-mid: var(--oro-scuro); --bx-hard: var(--terracotta-scura); --bx-sub: var(--terracotta); --bx-line: var(--grigio-chiaro); }
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) { --bx-ok: var(--verde-chiaro); --bx-mid: var(--oro); --bx-hard: var(--terracotta-chiara); --bx-sub: var(--oro); }
+}
+html[data-theme="dark"] { --bx-ok: var(--verde-chiaro); --bx-mid: var(--oro); --bx-hard: var(--terracotta-chiara); --bx-sub: var(--oro); }

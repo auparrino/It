@@ -5,7 +5,9 @@
  *
  * Todas de autores muertos hace más de 70 años (dominio público).  El orden
  * de cada idioma es el de la biblioteca: cuentos cortos primero, novelas
- * después; build_biblioteca.js lo confirma con la cobertura léxica.
+ * después; build_biblioteca.js lo confirma con la cobertura léxica.  (Cuore
+ * y las novelle de Verga no están en GITenberg en italiano: solo en
+ * traducción.)
  *
  * Por obra:
  *   repo, file, enc      el repositorio de GITenberg y el .txt (latin1 o utf8)
@@ -34,7 +36,7 @@ module.exports = {
     {
       id: "historias-sem-data", title: "Histórias sem data", author: "Machado de Assis", died: 1908, year: 1884,
       kind: "cuentos", gutenberg: 33056, repo: "Historias-Sem-Data_33056", file: "33056-8.txt", enc: "latin1",
-      from: ["A EGREJA DO DIABO", 3], to: /^\*\*\* ?END OF/,
+      from: ["A EGREJA DO DIABO", 1], to: /^\*\*\* ?END OF/,
       stories: [["A igreja do Diabo", "A EGREJA DO DIABO"], ["O lapso", "O LAPSO"], ["Último capítulo", "ULTIMO CAPITULO"],
         ["Cantiga de esponsais", "CANTIGA DE ESPONSAES"], ["Singular ocorrência", "SINGULAR OCCURRENCIA"],
         ["Galeria póstuma", "GALERIA POSTHUMA"], ["Capítulo dos chapéus", "CAPITULO DOS CHAPÉOS"],
@@ -49,7 +51,7 @@ module.exports = {
     {
       id: "papeis-avulsos", title: "Papéis avulsos", author: "Machado de Assis", died: 1908, year: 1882,
       kind: "cuentos", gutenberg: 57001, repo: "Papeis-Avulsos_57001", file: "57001-0.txt", enc: "utf8",
-      from: ["O ALIENISTA", 2], to: /^INDICE$/,
+      from: ["O ALIENISTA", 1], to: /^INDICE$/,
       stories: [["O alienista", "O ALIENISTA"], ["Teoria do medalhão", "THEORIA DO MEDALHÃO"],
         ["A chinela turca", "A CHINELA TURCA[1]"], ["Na arca", "NA ARCA"], ["D. Benedita", "D. BENEDICTA"],
         ["O segredo do bonzo", "O SEGREDO DO BONZO[1]"], ["O anel de Polícrates", "O ANNEL DE POLYCRATES"],
@@ -151,7 +153,7 @@ module.exports = {
     {
       id: "nuove-paesane", title: "Nuove «Paesane»", author: "Luigi Capuana", died: 1915, year: 1898,
       kind: "cuentos", gutenberg: 42608, repo: "Nuove--Paesane-_42608", file: "42608-8.txt", enc: "latin1",
-      from: ["IL BARONE DI FONTANE ASCIUTTE", 2], to: /^FINE\.$/,
+      from: ["IL BARONE DI FONTANE ASCIUTTE", 1], to: /^FINE\.$/,
       stories: [["Il barone di Fontane Asciutte", "IL BARONE DI FONTANE ASCIUTTE"], ["Un tipo", "UN TIPO"],
         ["Il «mulo» di Rosa", "IL «MULO» DI ROSA"], ["Un eccentrico", "UN ECCENTRICO"], ["Il fascio del cavaliere", "IL FASCIO DEL CAVALIERE"],
         ["Le verginelle", "LE VERGINELLE"], ["Donna Stràula", "DONNA STRÀULA"], ["La casa nuova", "LA CASA NUOVA"]],

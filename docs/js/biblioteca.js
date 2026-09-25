@@ -42,8 +42,9 @@
   var BD = root.BIBLIO_DATA || {};
   var TX = BD.ui || {};
   var WEEKS = 52;
-  var RANK_PER_WEEK = 100;     // lemmas de frecuencia que se suman por semana de curso
-  var PAGE_WORDS = 170;        // una pantalla de teléfono con letra de lectura
+  var RANK_PER_WEEK = 150;     // lemmas de frecuencia que se suman por semana de curso
+  var COG_WEEK = 10;           // un cognado transparente raro se lee solo desde esta semana
+  var PAGE_WORDS = 130;        // una pantalla de teléfono con letra de lectura
   var TARGET = 95;             // cobertura recomendada para empezar (Hu y Nation 2000)
   var MAX_WPM = 350;           // más rápido que esto no es leer: la página no cuenta
   var XP_PAGE = 2, XP_DAY = 40;
@@ -109,22 +110,57 @@
 
   /* The model of what a learner of week N knows.  o: { lemmi (frequenza.json),
      gloss (glossario.json), stop (FREQ_DATA.STOP), lemma(w), tokens(text),
-     transparent(w, es), cognates: [regex] }. */
+     transparent(w, es), cognates: [regex], stems: [[regex, reemplazo]]
+     (plural, femenino, diminutivos, clíticos: BIBLIO_DATA.stems), verbs:
+     {forma: [infinitivos]} (the conjugator backwards: the build tool has
+     it), cognate(w) (true for a transparent cognate: the build tool has
+     it), rankPerWeek, learnAfter (a word met that many times in a chapter
+     is known from then on: the reader looked it up) }. */
   function Model(o) {
     this.o = o;
     var lemmi = o.lemmi || {};
-    var rank = this.rank = Object.create(null);
+    var rank = this.rank = Object.create(null), plain = this.plain = Object.create(null);
     Object.keys(lemmi).map(function (l) { var r = lemmi[l]; return [l, Math.max(r[0], r[1])]; })
       .sort(function (a, b) { return b[1] - a[1]; })
-      .forEach(function (x, i) { rank[x[0]] = i + 1; });
+      .forEach(function (x, i) { rank[x[0]] = i + 1; var k = strip(x[0]); if (!plain[k]) plain[k] = x[0]; });
     var stop = this.stop = Object.create(null);
     (o.stop || []).forEach(function (w) { stop[w] = 1; });
     this.gloss = Object.create(null);
     var g = o.gloss || {}, G = this.gloss;
     Object.keys(g).forEach(function (k) { if (k.indexOf(" ") < 0) G[k] = g[k]; });
     this.cog = (o.cognates || []).map(function (c) { return c instanceof RegExp ? c : new RegExp(c); });
+    this.stems = (o.stems || []).map(function (x) { return [x[0] instanceof RegExp ? x[0] : new RegExp(x[0]), x[1]]; });
+    this.perWeek = o.rankPerWeek || RANK_PER_WEEK;
     this.memo = Object.create(null);
   }
+  /* The lemmas a form can come from: the frequency layer's own, the
+     conjugator's, the same word with its old accents (potè, sè), and the
+     forms without inflection, diminutive or clitic (tutti → tutto,
+     casinha → casa, voltandosi → voltando → voltare). */
+  Model.prototype.lemmas = function (w) {
+    var o = this.o, out = [], self = this;
+    var add = function (x) {
+      if (!x || out.indexOf(x) >= 0) return;
+      out.push(x);
+      if (o.lemma) { var l = o.lemma(x); if (l && out.indexOf(l) < 0) out.push(l); }
+      ((o.verbs && o.verbs[x]) || []).forEach(function (v) { if (out.indexOf(v) < 0) out.push(v); });
+      var p = self.plain[strip(x)];
+      if (p && out.indexOf(p) < 0) out.push(p);
+    };
+    add(w);
+    var n0 = out.length;
+    var step = function (v) {
+      self.stems.forEach(function (st) {
+        if (!st[0].test(v)) return;
+        var x = v.replace(st[0], st[1]);
+        if (x.length >= 2 && x !== v) add(x);
+      });
+    };
+    step(w);
+    // one more step for a form with a clitic and an inflection
+    out.slice(n0).forEach(step);
+    return out;
+  };
   /* The first week at which a word (lower case, no punctuation) counts as
      known: 1 for the grammar words and the transparent cognates, the week
      the course teaches it, or the week its lemma enters the frequency band;
@@ -136,46 +172,90 @@
     if (!/[a-zà-ÿ]/.test(w) || /\d/.test(w)) best = 1;
     else if (this.stop[w] || this.stop[w.replace(/'$/, "")]) best = 1;
     else {
-      var l = o.lemma ? o.lemma(w) : w;
-      [this.gloss[w], this.gloss[l]].forEach(function (x) {
-        if (!x) return;
-        if (o.transparent && (o.transparent(w, x[1]) || o.transparent(x[0], x[1]))) best = 1;
-        else if (+x[2] && +x[2] < best) best = +x[2];
+      var ls = this.lemmas(w);
+      ls.forEach(function (l, i) {
+        if (i > 0 && self.stop[l]) best = 1;
+        var x = self.gloss[l];
+        if (x) {
+          if (o.transparent && (o.transparent(w, x[1]) || o.transparent(x[0], x[1]))) best = 1;
+          else if (+x[2] && +x[2] < best) best = +x[2];
+        }
+        var r = self.rank[l];
+        if (r) best = Math.min(best, Math.max(1, Math.ceil(r / self.perWeek)));
       });
-      var r = this.rank[l] || this.rank[w];
-      if (r) best = Math.min(best, Math.max(1, Math.ceil(r / RANK_PER_WEEK)));
-      if (best > 1 && this.cog.some(function (re) { return re.test(w); })) best = 1;
+      // A transparent cognate (a suffix a Spanish speaker reads alone, or
+      // o.cognate: a Spanish word spelled almost the same, which the build
+      // tool checks against a Spanish word list) comes three times sooner
+      // than its frequency says; a rare one, once the basics are in.
+      if (best > 1 && (this.cog.some(function (re) { return re.test(w); }) ||
+          (o.cognate && ls.some(function (l, i) { return (i === 0 || self.rank[l]) && o.cognate(l); })))) {
+        var rk = 0;
+        ls.forEach(function (l) { if (self.rank[l] && (!rk || self.rank[l] < rk)) rk = self.rank[l]; });
+        best = Math.min(best, rk ? Math.max(1, Math.ceil(rk / (3 * self.perWeek))) : COG_WEEK);
+      }
       if (best > WEEKS) best = 99;
-      self = self;
     }
     this.memo[w] = best;
     return best;
   };
-  /* The words of a text, each with the week it becomes known: names
-     (capitalised inside a sentence) count as known. */
-  Model.prototype.words = function (text) {
+  function capInfo(raw) {
+    var bare = raw.replace(/^[^A-Za-zÀ-ÿ]+/, "");
+    return { bare: bare, cap: /^[A-ZÀ-Ý]/.test(bare) && !/^[A-ZÀ-Ý]{2,}/.test(bare) };
+  }
+  /* The words of a text, each with the week it becomes known.  Names count
+     as known: with «names» (the words the book never writes in lower case,
+     namesOf) a capitalised word among them; without it, any word
+     capitalised inside a sentence. */
+  Model.prototype.words = function (text, names) {
     var o = this.o, self = this, out = [];
     var toks = o.tokens || function (s) { return String(s).toLowerCase().match(/[a-zà-ÿ']+/g) || []; };
     sentences(text).forEach(function (sent) {
       sent.split(/\s+/).forEach(function (raw, i) {
-        var bare = raw.replace(/^[^A-Za-zÀ-ÿ]+/, "");
-        if (!bare) return;
-        var name = i > 0 && /^[A-ZÀ-Ý]/.test(bare) && !/^[A-ZÀ-Ý]{2,}/.test(bare);
+        var c = capInfo(raw);
+        if (!c.bare) return;
         toks(raw).forEach(function (w) {
+          var name = c.cap && (names ? !!names[w] : i > 0);
           out.push({ w: w, week: name ? 1 : self.week(w), name: name });
         });
       });
     });
     return out;
   };
+  /* The names of a book: words it writes with a capital inside sentences
+     and never in lower case. */
+  function namesOf(paras, tokens) {
+    var cap = Object.create(null), low = Object.create(null), out = {};
+    tokens = tokens || function (s) { return String(s).toLowerCase().match(/[a-zà-ÿ']+/g) || []; };
+    (paras || []).forEach(function (p) {
+      if (isHeading(p)) return;
+      sentences(p).forEach(function (sent) {
+        sent.split(/\s+/).forEach(function (raw, i) {
+          var c = capInfo(raw), upper = /^[A-ZÀ-Ý]/.test(c.bare);
+          if (!c.bare) return;
+          tokens(raw).forEach(function (w) {
+            if (!upper) low[w] = 1;
+            else if (i > 0 && c.cap) cap[w] = 1;
+          });
+        });
+      });
+    });
+    Object.keys(cap).forEach(function (w) { if (!low[w]) out[w] = 1; });
+    return out;
+  }
   /* A histogram of the text: how many words become known at each week
      (index 0..51) and how many not in the course (index 52). */
-  Model.prototype.histogram = function (paras) {
-    var h = [], self = this;
+  Model.prototype.histogram = function (paras, names) {
+    var h = [], self = this, met = Object.create(null), learn = this.o.learnAfter || 0;
     for (var i = 0; i <= WEEKS; i++) h.push(0);
     (paras || []).forEach(function (p) {
       if (isHeading(p) || isBreak(p)) return;
-      self.words(p).forEach(function (x) { h[x.week > WEEKS ? WEEKS : x.week - 1]++; });
+      self.words(p, names).forEach(function (x) {
+        var wk = x.week;
+        // a word that keeps coming back in the chapter: after «learn»
+        // meetings, with its meaning a tap away, it no longer stops the reading
+        if (learn && wk > 1) { met[x.w] = (met[x.w] || 0) + 1; if (met[x.w] > learn) wk = 1; }
+        h[wk > WEEKS ? WEEKS : wk - 1]++;
+      });
     });
     return h;
   };
@@ -242,7 +322,7 @@
     if (sec < minSeconds(words)) return { counted: false, xp: 0, words: 0, why: "fast" };
     seen.push(info.pg);
     // idle time does not count: at most a slow reading of the page
-    var s = Math.min(sec, Math.round(words * 60 / 40) + 60, 900);
+    var s = Math.round(Math.min(sec, Math.round(words * 60 / 40) + 60, 900));
     var k = dayKey(now), d = b.days[k] || (b.days[k] = { w: 0, s: 0, pg: 0, xp: 0 });
     d.w += words; d.s += s; d.pg++;
     b.total.w += words; b.total.s += s; b.total.pg++;
@@ -287,19 +367,27 @@
   }
 
   /* What to read now: a book already started if its next chapter is still
-     comfortable, otherwise the first chapter (in library order) at ≥ 95 %
-     for the reading week; if nothing is there yet, the easiest one. */
+     comfortable; otherwise the first text (in library order) at ≥ 95 % for
+     the reading week — in a collection any story that is not the middle of
+     a long one, in a novel its next chapter; if nothing is there yet, the
+     most accessible one. */
+  function startsHere(bk, i) {
+    return bk.kind !== "cuentos" ? false : !/\((?!1\/)\d+\/\d+/.test(bk.chapters[i].t || "");
+  }
   function recommend(index, state) {
     var week = readingWeek(state), best = null, easiest = null, started = null;
     ((index && index.books) || []).forEach(function (bk) {
       var c = nextChapter(state, bk);
       if (c < 0) return;
-      var cov = covAt(bk.chapters[c], week);
-      var cand = { book: bk, ch: c, cov: cov };
       var p = ensure(state).pos[bk.id];
-      if (p && !started && cov >= TARGET - 3) started = cand;
-      if (!best && cov >= TARGET) best = cand;
-      if (!easiest || cov > easiest.cov) easiest = cand;
+      var cands = [c];
+      if (!p) bk.chapters.forEach(function (x, i) { if (i !== c && !isRead(state, bk.id, i) && startsHere(bk, i)) cands.push(i); });
+      cands.forEach(function (i) {
+        var cand = { book: bk, ch: i, cov: covAt(bk.chapters[i], week) };
+        if (p && i === c && !started && cand.cov >= TARGET - 3) started = cand;
+        if (!best && cand.cov >= TARGET) best = cand;
+        if (!easiest || cand.cov > easiest.cov) easiest = cand;
+      });
     });
     var r = started || best || easiest;
     if (r) r.ok = r.cov >= TARGET;
@@ -337,6 +425,17 @@
     for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(rnd() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; }
     return a;
   }
+  // Meanings of the course's glossary, for the options of a lib: card.
+  var POOL = null;
+  function glossPool() {
+    if (POOL) return POOL;
+    var g = DATA.gloss || (H && H.glossary && H.glossary());
+    if (!g) return [];
+    var seen = {};
+    POOL = Object.keys(g).slice(0, 4000).map(function (k) { return g[k][1]; })
+      .filter(function (x) { if (!x || x.length >= 40 || seen[x]) return false; seen[x] = 1; return true; }).slice(0, 400);
+    return POOL;
+  }
   /* The review item of a lib: card, like the words of the week: first the
      meaning among options, then the word from its meaning. */
   function reviewItem(id, state, rnd) {
@@ -348,7 +447,7 @@
     if (!card || !(card.ok >= 1)) {
       var pool = Object.keys(b.words).filter(function (k) { return k !== lemma && b.words[k].es !== e.es; })
         .map(function (k) { return b.words[k].es; });
-      var G = root.__biblioGlossPool || [];
+      var G = glossPool();
       var opts = [e.es];
       shuffle(pool, rnd).concat(shuffle(G, rnd)).forEach(function (x) { if (opts.length < 4 && opts.indexOf(x) < 0) opts.push(x); });
       if (opts.length >= 3) {
@@ -388,13 +487,15 @@
   }
   function loadModel() {
     if (DATA.model) return Promise.resolve(DATA.model);
+    // what the app already has in memory is not downloaded again
+    var hg = H && H.glossary && H.glossary(), hf = H && H.freq && H.freq();
+    if (hg) DATA.gloss = hg;
+    if (hf) DATA.freq = hf;
     return Promise.all([
-      load("freq", base() + "data/frequenza.json", function (x) { DATA.freq = x; }),
-      load("gloss", base() + "data/glossario.json", function (x) { DATA.gloss = x; })
+      DATA.freq ? null : load("freq", base() + "data/frequenza.json", function (x) { DATA.freq = x; }),
+      DATA.gloss ? null : load("gloss", base() + "data/glossario.json", function (x) { DATA.gloss = x; })
     ]).then(function () {
       DATA.model = makeModel(DATA.freq, DATA.gloss);
-      root.__biblioGlossPool = Object.keys(DATA.gloss).slice(0, 4000).map(function (k) { return DATA.gloss[k][1]; })
-        .filter(function (x, i, a) { return x && x.length < 40 && a.indexOf(x) === i; }).slice(0, 400);
       return DATA.model;
     });
   }
@@ -458,9 +559,10 @@
       '<div class="row"><button class="btn ghost" id="bx-open">📚 ' + esc(TX.name || "Biblioteca") + "</button></div></div>";
   }
 
-  function renderBiblioteca() {
-    var s = st(), b = ensure(s), idx = DATA.index;
-    var html = '<button class="btn ghost" id="bx-back">← a ' + esc((root.LANG && root.LANG.ui && root.LANG.ui.read) || "leer") + "</button>" +
+  function renderBiblioteca(view) {
+    var s = st(), b = ensure(s), idx = DATA.index, ui = (root.LANG && root.LANG.ui) || {};
+    var from = view && view.tab === "io" ? ui.me : ui.read;
+    var html = '<button class="btn ghost" id="bx-back">← a ' + esc(from || "leer") + "</button>" +
       "<h1>📚 " + esc(TX.name || "Biblioteca") + "</h1>" +
       '<p class="lead">' + esc(TX.lead || "Libros de verdad para leer mucho.") + "</p>";
     if (!idx) {
@@ -525,19 +627,23 @@
 
   /* The reader. */
   var reading = null;       // { book, ch, pages, pg, t0 }
+  var warnedFast = 0;       // the «too fast» notice, once per session
   var tapWords = [];
 
-  function tokenSpans(par, k0) {
-    var i = k0, W = /[A-Za-zÀ-ÖØ-öø-ÿ'’-]+/;
-    var model = DATA.model, s = st(), b = ensure(s), week = readingWeek(s);
+  // The week a word of the book becomes known (the build tool computed it
+  // with the same model as the coverage): 1 when the book does not list it.
+  function wordWeek(book, w) { return (book && book.wk && book.wk[w]) || 1; }
+  function toks(t) {
+    var F = root.Freq;
+    return F && F.tokens ? F.tokens(t) : (String(t).toLowerCase().match(/[a-zà-öø-ÿ']+/g) || []);
+  }
+  function tokenSpans(par, k0, book) {
+    var i = k0, W = /[A-Za-zÀ-ÖØ-öø-ÿ]/;
+    var s = st(), b = ensure(s), week = readingWeek(s);
     var html = par.split(/\s+/).filter(Boolean).map(function (t) {
       var k = i++;
-      var m = W.exec(t);
       var cls = "w";
-      if (m && model && b.under) {
-        var ws = model.words(t);
-        if (ws.some(function (x) { return !x.name && x.week > week; })) cls += " bx-new";
-      }
+      if (b.under && W.test(t) && toks(t).some(function (w) { return wordWeek(book, w) > week; })) cls += " bx-new";
       tapWords[k] = t;
       return '<span class="' + cls + '" data-k="' + k + '">' + esc(t) + "</span>";
     }).join(" ");
@@ -567,7 +673,7 @@
     tapWords = [];
     var k = 0, body = page.map(function (p) {
       if (isBreak(p)) return '<p class="bx-break">⁂</p>';
-      var r = tokenSpans(isHeading(p) ? headingText(p) : p, k);
+      var r = tokenSpans(isHeading(p) ? headingText(p) : p, k, book);
       k = r.next;
       return isHeading(p) ? '<p class="bx-h">' + r.html + "</p>" : "<p>" + r.html + "</p>";
     }).join("");
@@ -618,13 +724,27 @@
     var model = DATA.model, F = root.Freq, gloss = DATA.gloss || {};
     var toks = F ? F.tokens(raw) : [String(raw).toLowerCase()];
     var w = toks.filter(function (x) { return !(model && model.stop[x]); }).pop() || toks[toks.length - 1] || "";
-    var g = gloss[w], lemma = g ? g[0] : F && F.loaded() ? F.lemma(w) : w, gl = gloss[lemma];
-    var es = g ? g[1] : gl ? gl[1] : "";
-    var info = F && F.loaded() ? F.info(w) : null;
+    // the lemma: the glossary's, else the first candidate the frequency
+    // list knows (tutti → tutto, casinhas → casa, domandò → domandare)
+    var cands = model ? model.lemmas(w) : [w];
+    var g = gloss[w], lemma = g ? g[0] : null;
+    if (!lemma) cands.some(function (c) { if (gloss[c]) { lemma = gloss[c][0]; return true; } return false; });
+    if (!lemma && model) cands.some(function (c) { if (model.rank[c]) { lemma = c; return true; } return false; });
+    // the bank of the course also knows meanings (its nouns, verbs, adjectives)
+    var Bk = root.Banca, bankEs = function (l) {
+      if (!Bk || !Bk.loaded || !Bk.loaded() || !Bk.hasWord(l)) return "";
+      try { var it = Bk.vocabSessionFor({ cards: {} }, [l], 1)[0]; return it && it.type === "choice" ? it.answer : ""; } catch (e) { return ""; }
+    };
+    if (!lemma) cands.some(function (c) { if (bankEs(c)) { lemma = c; return true; } return false; });
+    lemma = lemma || w;
+    var gl = gloss[lemma];
+    var es = g ? g[1] : gl ? gl[1] : bankEs(lemma);
+    var info = F && F.loaded() ? (F.info(w) || F.info(lemma)) : null;
     var lines = [];
     try { if (root.Desglose) lines = root.Desglose.lines(w, { gloss: gloss }); } catch (e) { lines = []; }
+    var book = reading && DATA.books[reading.book];
     return { w: w, lemma: lemma, es: es, level: info ? info[2] : "", zipf: info ? Math.max(info[0], info[1]) : 0,
-             week: model ? model.week(w) : 99, lines: lines };
+             week: book ? wordWeek(book, w) : model ? model.week(w) : 99, lines: lines };
   }
   function freqWord(z) {
     return !z ? "muy rara (no está en la lista de frecuencias)" : z >= 5 ? "muy frecuente" : z >= 4 ? "frecuente" : z >= 3 ? "poco frecuente" : "rara";
@@ -672,7 +792,7 @@
       (reading.pages[reading.pg] || []).forEach(function (p) { if (!isHeading(p)) words += wordCount(p); });
       var r = notePage(s, { book: reading.book, ch: reading.ch, pg: reading.pg, words: words, sec: (Date.now() - (reading.t0 || Date.now())) / 1000 });
       if (r.counted && r.xp && H) { H.gain(r.xp); if (H.strand) H.strand(r.xp); }
-      if (!r.counted && r.why === "fast" && H) H.toast("Esa página fue muy rápida: no la cuento como leída.", 1800);
+      if (!r.counted && r.why === "fast" && H && !warnedFast++) H.toast("Esa página fue muy rápida: no la cuento como leída.", 1800);
     }
     if (H && H.karaoke) H.karaoke.stop();
   }
@@ -686,7 +806,8 @@
     var doc = root.document;
     if (!doc) return;
     var on = function (id, fn) { var e = doc.getElementById(id); if (e) e.onclick = fn; };
-    on("bx-back", function () { if (H) H.go("leggi"); });
+    on("bx-open", function () { go(view, "biblioteca"); });
+    on("bx-back", function () { if (H) H.go(view.tab || "leggi"); });
     on("bx-lib", function () { go(view, "biblioteca"); });
     on("bx-tobook", function () { leavePage(false); go(view, "libro"); });
     doc.querySelectorAll("[data-bxbook]").forEach(function (e) {
@@ -743,12 +864,17 @@
       var text = page.filter(function (p) { return !isBreak(p); }).map(function (p) { return isHeading(p) ? headingText(p) : p; }).join("\n");
       if (btn) btn.textContent = "⏹ Parar";
       H.karaoke.start({ id: "bx:" + reading.book, title: (bookById(reading.book) || {}).title || "", text: text }, 1, "full");
+      // back to «Leer en voz alta» when the page is over
+      var t = root.setInterval(function () {
+        var b2 = doc.getElementById("bx-kar");
+        if (!b2 || !H.karaoke.playing()) { root.clearInterval(t); if (b2) b2.textContent = "🎧 Leer en voz alta"; }
+      }, 800);
     });
   }
 
   var api = {
     WEEKS: WEEKS, TARGET: TARGET, PAGE_WORDS: PAGE_WORDS, RANK_PER_WEEK: RANK_PER_WEEK,
-    Model: Model, coverageOf: coverageOf, addHist: addHist, covAt: covAt, weekFor: weekFor, levelOfWeek: levelOfWeek,
+    Model: Model, namesOf: namesOf, coverageOf: coverageOf, addHist: addHist, covAt: covAt, weekFor: weekFor, levelOfWeek: levelOfWeek,
     wordCount: wordCount, chapterWords: chapterWords, sentences: sentences, pages: pages, isHeading: isHeading, strip: strip,
     ensure: ensure, readingWeek: readingWeek, minSeconds: minSeconds, notePage: notePage, statsDays: statsDays,
     selfAssess: selfAssess, markRead: markRead, isRead: isRead, nextChapter: nextChapter, recommend: recommend,

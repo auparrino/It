@@ -55,3 +55,16 @@ quien ya estudiaba italiano no pierde nada. El idioma elegido queda en
 
 **Tests.** `npm test` corre la batería de cada idioma (`tools/it/test_*.js`,
 `tools/pt/test_*.js`) contra el mismo núcleo, cargado con `tools/lib/pack.js`.
+
+**Biblioteca.** Libros enteros de dominio público (Project Gutenberg,
+espejado en GitHub por GITenberg) para la lectura extensiva, en la pestaña
+Leggi / Ler: `js/biblioteca.js` (el lector, la cobertura, el input del
+perfil, las tarjetas `lib:` del repaso), `lang/<código>/biblioteca_data.js`
+(los cognados, los lemas y los textos de la sección) y
+`lang/<código>/biblioteca/` (`index.json` con las fichas y la cobertura por
+semana; un `<id>.json` por libro, que se baja cuando se abre y no se
+precachea).  Los arma `tools/lib/build_biblioteca.js` con la lista de
+`tools/lib/biblioteca_fuentes.js`; el portugués pasa por
+`tools/pt/ortografia.js`, que moderniza la ortografía al Acuerdo de 1990
+(qué hace y cómo está documentado en su encabezado).  Test:
+`tools/lib/test_biblioteca.js`.

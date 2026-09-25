@@ -2,7 +2,7 @@
  * Moderniza la ortografía de los textos portugueses de Project Gutenberg
  * (ediciones de 1880-1915, antes de la reforma de 1943) a la del Acuerdo
  * Ortográfico de 1990, en su variante brasileña.  Solo cambia la GRAFÍA:
- * nunca una palabra por otra ni la sintaxis (dous, cousa, peor, fallecer…
+ * nunca una palabra por otra ni la sintaxis (dous, cousa, fallecer…
  * quedan como están si hoy se escriben así o son otra palabra).
  *
  *   pharmacia → farmácia    Ayres → Aires       estylo → estilo
@@ -10,41 +10,56 @@
  *   theatro → teatro         escripto → escrito  acção → ação
  *   portuguez → português    idéa → ideia        pae, vae → pai, vai
  *   ouvil-o → ouvi-lo        fazel-o → fazê-lo   á → à, ha → há
+ *   sahia → saía             bocca → boca        somno → sono
  *   póde → pode, fôra → fora (los acentos diferenciales que ya no van)
+ *   ha-de → há de, lh'o → lho
  *
  * Cómo trabaja, palabra por palabra (conserva mayúsculas y puntuación):
  *
  *  1. Excepciones revisadas a mano (EXC): nombres propios y casos que las
- *     reglas no resuelven solas (Itaguahy → Itaguaí, Capitú → Capitu).
+ *     reglas no resuelven solas (Itaguahy → Itaguaí, Capitú → Capitu,
+ *     sahio → saiu, máo → mau, hade → há de).  Muchas salieron de revisar
+ *     el informe de tools/lib/build_biblioteca.js --report.
  *  2. Si la palabra ya es una forma moderna del léxico, queda igual.  El
  *     léxico sale del paquete pt (frecuencias, glosario, frases, lecturas y
  *     todas las formas del conjugador de cada verbo de la lista de
- *     frecuencias), sin las entradas con grafía antigua que traen los corpus
- *     (ella, tambem, ha…).
+ *     frecuencias) y, con opts.wordlist, de la lista de palabras del
+ *     corrector VERO (pt-BR, posterior a 1990) con sus plurales, femeninos
+ *     y las formas de sus verbos; sin las entradas con grafía antigua que
+ *     traen los corpus (ella, tambem, ha…).
  *  3. Reglas seguras, siempre: ph → f, th → t, rh → r, chr/chl → cr/cl,
- *     y → i, consonante doble → simple (salvo rr, ss), cc ante e/i y cç →
- *     c/ç, -ae(s) final → -ai(s), á/ás sueltos → à/às, ha → há, ü → u, el
+ *     y → i, consonante doble → simple (salvo rr, ss), cc ante vocal y cç →
+ *     c/ç, prehen → preen, fruct → frut, -ae(s) final → -ai(s), ü → u, el
  *     enclítico antiguo (-l-o, -l-a: ouvil-o → ouvi-lo, fazel-o → fazê-lo).
  *  4. Si todavía no es una forma moderna, se prueban las transformaciones
  *     históricas (hasta tres a la vez): z ↔ s (portuguez, analysar →
- *     analisar), x → s (extranho), g → j (magestade), e ↔ i (quasi, egreja,
- *     deante), o ↔ u (logar), consonantes mudas (director, escripto,
- *     assumpto, signal, augmentar, subtil), h mudo (hontem, comprehender),
- *     m → n (emquanto), ch → qu/c (chimica, archivo), sc- → c- (scena), -ão →
- *     -am (disserão), -oe → -oi, -ea → -eia; y la acentuación moderna
- *     (tambem → também, fôra → fora, póde → pode).  Gana la variante que es
- *     forma moderna con menos cambios (a igualdad, la más frecuente).
- *  5. Si nada da una forma conocida: solo los sufijos de acento fijo
- *     (-encia → -ência, -avel → -ável, -ivel → -ível, -issimo → -íssimo…).
+ *     analisar), s → ss (socego), ns → nç (dansar), x → s (extranho), g → j
+ *     (magestade), ç → s, e ↔ i (quasi, egreja, deante), o ↔ u (logar),
+ *     consonantes mudas (director, escripto, assumpto, signal), mn → n
+ *     (somno), h mudo tras vocal, con el acento del hiato (sahia → saía,
+ *     comprehender), m → n (emquanto), ch → qu/c (chimica, archivo), sc- →
+ *     c- (scena), -io → -iu (abrio), -ão → -am (disserão), -oe → -oi, -ea →
+ *     -eia, ei → e (passeiar); y la acentuación moderna (tambem → também,
+ *     fôra → fora, póde → pode).  Gana la variante que es forma moderna con
+ *     menos cambios (a igualdad, la más frecuente).
+ *  5. Si nada da una forma conocida: un adverbio en -mente se arma con su
+ *     adjetivo modernizado sin tilde (distinctamente → distintamente); si
+ *     no, solo los sufijos de acento fijo (-encia → -ência, -avel → -ável…).
  *
- * Las palabras entre _guiones bajos_ (las cursivas de Gutenberg: citas en
- * francés, latín o italiano) no se tocan.
+ * Los nombres (palabras que el texto escribe con mayúscula dentro de la
+ * oración y nunca en minúscula: Homero, Humanitas, Shelley) solo pasan por
+ * las excepciones y las reglas seguras, y solo si el resultado es una
+ * palabra conocida: learn(texto) los junta antes de text().  Los números
+ * romanos no se tocan.  Las cursivas de Gutenberg (_entre guiones bajos_)
+ * se modernizan si son portugués (el énfasis: _Elle se irá_) y se dejan
+ * como están si son una cita en otra lengua (_Eppur si muove_).
  *
  * Uso:
  *   var Orto = require("./ortografia.js");
- *   var m = Orto.modernizer();          // arma el léxico con tools/lib/pack.js
- *   m.text("Ella sahiu da pharmacia.")  // → "Ela saiu da farmácia."
- *   m.unresolved()                      // lo que no encontró en el léxico, por frecuencia
+ *   var m = Orto.modernizer({ wordlist: [...] });   // arma el léxico con tools/lib/pack.js
+ *   m.learn(libro); m.text("Ella sahiu da pharmacia.")  // → "Ela saiu da farmácia."
+ *   m.changed()      // lo que cambió por transformación o acento (para revisar)
+ *   m.unresolved()   // lo que no encontró en el léxico, por frecuencia
  *
  *   node tools/pt/ortografia.js "Ella sahiu da pharmacia."
  *
@@ -149,11 +164,43 @@ var EXC = {
   "d'essa": "dessa", "d'isso": "disso", "d'isto": "disto", "d'aquelle": "daquele", "d'aquella": "daquela",
   "d'aquillo": "daquilo", "n'este": "neste", "n'esta": "nesta", "n'esse": "nesse", "n'essa": "nessa",
   "n'isso": "nisso", "n'isto": "nisto", "n'aquelle": "naquele", "n'aquella": "naquela", "n'aquillo": "naquilo",
-  "d'outro": "doutro", "d'outra": "doutra", "d'onde": "donde", "d'antes": "dantes"
+  "d'outro": "doutro", "d'outra": "doutra", "d'onde": "donde", "d'antes": "dantes",
+  // revisadas en el informe de build_biblioteca.js --report
+  "hade": "há de", "heide": "hei de", "hasde": "hás de", "hãode": "hão de",
+  "dahi": "daí", "pateo": "pátio", "pateos": "pátios", "padua": "pádua", "vio": "viu", "sahio": "saiu", "cahio": "caiu",
+  "servio": "serviu", "sahi": "saí", "cahi": "caí", "sahira": "saíra", "cahira": "caíra",
+  "marquez": "marquês", "marqueza": "marquesa", "mãi": "mãe", "mãis": "mães", "mamãi": "mamãe", "chicara": "xícara", "chicaras": "xícaras",
+  "propoz": "propôs", "compoz": "compôs", "dispoz": "dispôs", "suppoz": "supôs", "expoz": "expôs", "oppoz": "opôs", "impoz": "impôs",
+  "trez": "três", "setim": "cetim", "teem": "têm", "veem": "veem", "ltaguahy": "Itaguaí", "aldêa": "aldeia", "aldêas": "aldeias",
+  "ancia": "ânsia", "ancias": "ânsias", "ancioso": "ansioso", "anciosa": "ansiosa", "anciosos": "ansiosos", "anciosas": "ansiosas",
+  "magua": "mágoa", "maguas": "mágoas", "retinir": "retinir", "descompostura": "descompostura",
+  "scintillantes": "cintilantes", "scintillante": "cintilante", "scintillar": "cintilar", "ecclesiastica": "eclesiástica",
+  "ecclesiastico": "eclesiástico", "ecclesiasticos": "eclesiásticos", "hymno": "hino", "hymnos": "hinos",
+  "monosyllabos": "monossílabos", "monosyllabo": "monossílabo", "verosimil": "verossímil", "inverosimil": "inverossímil",
+  "giráos": "jiraus", "giráo": "jirau", "máo": "mau", "máos": "maus", "páo": "pau", "páos": "paus", "cháo": "chão",
+  "anecdota": "anedota", "anecdotas": "anedotas", "peior": "pior", "peiores": "piores", "poude": "pôde", "cincoenta": "cinquenta",
+  "joven": "jovem", "dezesete": "dezessete", "dezeseis": "dezesseis", "dezenove": "dezenove", "extasis": "êxtase",
+  "comensaes": "comensais", "qne": "que", "nalguma": "nalguma", "outrosim": "outrossim", "kerozene": "querosene",
+  "assucar": "açúcar", "dansar": "dançar", "dansa": "dança", "dansas": "danças", "dansava": "dançava", "dansou": "dançou",
+  "pretenção": "pretensão", "resurreição": "ressurreição", "sobresalto": "sobressalto", "sobresaltos": "sobressaltos",
+  "socego": "sossego", "socegado": "sossegado", "socegada": "sossegada", "socegar": "sossegar", "socega": "sossega",
+  "kiosque": "quiosque", "kiosques": "quiosques", "apolices": "apólices", "incognita": "incógnita", "incognito": "incógnito",
+  "recondita": "recôndita", "invalidos": "inválidos", "invalido": "inválido", "incredulo": "incrédulo", "incredulos": "incrédulos",
+  "desanimo": "desânimo", "exquisita": "esquisita", "exquisito": "esquisito", "carcassa": "carcaça", "machinalmente": "maquinalmente",
+  "paletot": "paletó", "divan": "divã", "vagalumes": "vaga-lumes", "vagalume": "vaga-lume", "bemaventurança": "bem-aventurança",
+  "internuncio": "internúncio", "protonotario": "protonotário", "galilea": "galileia", "ptolomeu": "ptolomeu",
+  "solemnidade": "solenidade", "solemnidades": "solenidades", "ascenção": "ascensão", "rectidão": "retidão",
+  "rectilineo": "retilíneo", "rectilinea": "retilínea", "indirecto": "indireto", "indirecta": "indireta",
+  "prescriptas": "prescritas", "prescripto": "prescrito", "aecrescentou": "acrescentou", "vermouth": "vermute",
+  "lady": "lady", "dollars": "dólares", "acccento": "acento", "subtil": "sutil", "subtis": "sutis", "subtileza": "sutileza",
+  "subtilezas": "sutilezas", "subtilmente": "sutilmente", "logarsinho": "lugarzinho"
 };
 
+// No inherited keys: «constructor» or «toString» are words of the texts too.
+EXC = Object.assign(Object.create(null), EXC);
+
 // Brazilian spellings that keep the c or p before t / ç (it is pronounced).
-var KEEP_CT = {};
+var KEEP_CT = Object.create(null);
 ("pacto pactos apto apta aptos aptas compacto compacta ficção ficções convicção convicções fricção facção facções " +
  "eucalipto egípcio egípcia egípcios núpcias opção opções adepto adeptos rapto raptou abrupto abrupta inepto inepta " +
  "erupção interrupção corrupção corrupto corrupta recepção recepções perspectiva perspectivas aspecto aspectos " +
@@ -191,6 +238,26 @@ function marks(s) {
 // Letters that look like the old orthography (never in a modern lexicon entry).
 var OLDPAT = /ph|th|rh|y|([bdfglmnpt])\1|cc[eiéí]|cç|ü|^h[aeiou]nt|sah|cah|ahi$|ae$|aes$|éa$|éas$|éo$|éos$/;
 
+/* The regular plural and feminine of a word of the list (casa → casas,
+   papel → papéis, nação → nações, inglês → inglesa, bonito → bonita). */
+function inflect(w) {
+  var out = [];
+  if (/[aeiouáéíóúâêô]$/.test(w)) out.push(w + "s");
+  if (/ão$/.test(w)) { var r = w.slice(0, -2); out.push(r + "ões", r + "ães", r + "ãos"); }
+  if (/[rz]$/.test(w)) out.push(w + "es");
+  if (/m$/.test(w)) out.push(w.slice(0, -1) + "ns");
+  if (/al$/.test(w)) out.push(w.slice(0, -1) + "is");
+  if (/el$/.test(w)) out.push(/[áéíóúâêô]/.test(w) ? w.slice(0, -1) + "is" : w.slice(0, -2) + "éis");
+  if (/ol$/.test(w)) out.push(w.slice(0, -2) + "óis");
+  if (/ul$/.test(w)) out.push(w.slice(0, -1) + "is");
+  if (/il$/.test(w)) out.push(/[áéíóúâêô]/.test(w) ? w.slice(0, -2) + "eis" : w.slice(0, -1) + "s");
+  if (/o$/.test(w)) out.push(w.slice(0, -1) + "a", w.slice(0, -1) + "as");
+  if (/ês$/.test(w)) { var b = w.slice(0, -2) + "es"; out.push(b + "a", b + "as", b + "es"); }
+  if (/or$/.test(w)) out.push(w + "a", w + "as");
+  if (/ão$/.test(w)) out.push(w.slice(0, -2) + "ã", w.slice(0, -2) + "ãs");
+  return out;
+}
+
 /* The lexicon of modern forms: the frequency lists, the glossary, the
    phrases and readings of the course, and every form of the conjugator for
    the verbs of the frequency list.  zipf: the frequency of the lemmas. */
@@ -201,7 +268,7 @@ function buildLexicon(opts) {
   var freq = pack.data("pt", "frequenza.json"), gloss = pack.data("pt", "glossario.json");
   var lex = Object.create(null), zipf = Object.create(null), sure = Object.create(null);
   var tok = function (s) { return (String(s || "").toLowerCase().match(/[a-zà-öø-ÿ]+/g) || []); };
-  var conjForm = Object.create(null);
+  var conjForm = Object.create(null), wl2 = null;
   var add = function (w, z, trust) {
     w = String(w).toLowerCase();
     if (!w || /[^a-zà-öø-ÿ-]/.test(w)) return;
@@ -239,6 +306,34 @@ function buildLexicon(opts) {
       if (p && /o$/.test(p)) [p.slice(0, -1) + "a", p + "s", p.slice(0, -1) + "as"].forEach(function (f) { add(f, z, true); });
     } catch (e) { /* */ }
   });
+  // The word list of a modern spell checker (opts.wordlist: VERO, the
+  // pt-BR dictionary of LibreOffice, one word per line): its words, their
+  // regular plural and feminine, and every form of its verbs.
+  if (opts.wordlist) {
+    var wverbs = [];
+    wl2 = Object.create(null);   // forms of the list's verbs only (suplicio: supliciar)
+    opts.wordlist.forEach(function (w) {
+      if (!/^[a-zà-öø-ÿ]+(-[a-zà-öø-ÿ]+)*$/.test(w)) return;
+      add(w, null, true);
+      inflect(w).forEach(function (f) { add(f, null, false); });
+      if (/^[a-zà-öø-ÿ]{2,}(ar|er|ir|or)$/.test(w) && verbs.indexOf(w) < 0) wverbs.push(w);
+    });
+    var known = Object.create(null);
+    C.list().forEach(function (v) { known[v] = 1; });
+    wverbs.forEach(function (v) {
+      try { if (!known[v]) { C.register(v, { es: "" }); known[v] = 1; } } catch (e) { return; }
+      (C.SIMPLE_TENSES || []).forEach(function (t) {
+        var fs;
+        try { fs = C.conjugate(v, t, { partial: true }); } catch (e) { return; }
+        (fs || []).forEach(function (f) { if (f) tok(f).forEach(function (w) { add(w, null, false); wl2[w] = 1; }); });
+      });
+      try {
+        var p = C.participle(v);
+        if (p) { add(p, null, false); if (/o$/.test(p)) [p.slice(0, -1) + "a", p + "s", p.slice(0, -1) + "as"].forEach(function (f) { add(f, null, false); }); }
+        var g = C.gerund(v); if (g) add(g, null, false);
+      } catch (e) { /* */ }
+    });
+  }
   // Out: the old spellings the corpora bring (ella, tambem, anno…) and an
   // unaccented misspelling next to a much more frequent accented form.
   var byKey = Object.create(null);
@@ -255,6 +350,10 @@ function buildLexicon(opts) {
         return (byKey[strip(x)] || []).some(function (y) { return lex[y] && y !== w && (sure[y] || (zipf[y] || 0) > zw + 0.5); });
       })) { delete lex[w]; return; }
     }
+    // a form only the list's rare verbs give (suplicio, obliquo) next to
+    // a word of the list with accents (suplício, oblíquo): the word
+    if (wl2 && wl2[w] && !sure[w] && !conjForm[w] &&
+        (byKey[strip(w)] || []).some(function (x) { return x !== w && sure[x]; })) { delete lex[w]; return; }
     if (strip(w) === w && !sure[w]) {
       var z = zipf[w] == null ? 0 : zipf[w];
       var better = (byKey[w] || []).some(function (x) { return x !== w && (zipf[x] || 0) > z + 1; });
@@ -274,7 +373,9 @@ function rules(w) {
   x = x.replace(/ph/g, "f").replace(/th/g, "t").replace(/rh/g, "r").replace(/ch(?=[rl])/g, "c");
   x = x.replace(/y/g, "i");
   x = x.replace(/([bdfglmnpt])\1/g, "$1");
-  x = x.replace(/cc(?=[eiéíê])/g, "c").replace(/cç/g, "ç");
+  x = x.replace(/cc(?=[eiéíê])/g, "c").replace(/cç/g, "ç").replace(/cc(?=[aouáóúâôãõrl])/g, "c");
+  // always: comprehender, apprehensão, reprehensível; acquiescer; fructo
+  x = x.replace(/prehen/g, "preen").replace(/^acqu/, "aqu").replace(/fruct/g, "frut");
   // -ae(s), -aes → -ai(s): pae, vae, animaes, geraes
   x = x.replace(/([^ã])ae(s?)$/, "$1ai$2");
   return x;
@@ -284,8 +385,15 @@ function rules(w) {
 var TRANSFORMS = [
   function (w) { return subAll(w, /z/g, "s"); },
   function (w) { return subAll(w, /s(?=[aeiouáéíóúâêô])/g, "z"); },
-  function (w) { return subAll(w, /x(?=[ctp])/g, "s"); },
+  function (w) { return subAll(w, /x(?=[ctpq])/g, "s"); },
+  function (w) { return subAll(w, /([aeiouáéíóúâêô])s(?=[aeiouáéíóúâêô])/g, "$1ss"); },
+  function (w) { return subAll(w, /mn/g, "n"); },
+  function (w) { return subAll(w, /ns(?=[aouáóú])/g, "nç"); },
+  function (w) { return subAll(w, /ei(?=[aeo])/g, "e"); },
+  function (w) { return /[^aeiou]io$/.test(w) ? [w.replace(/io$/, "iu")] : []; },
+  function (w) { return /[aeiou]n$/.test(w) ? [w.replace(/n$/, "m")] : []; },
   function (w) { return subAll(w, /g(?=[eiéí])/g, "j"); },
+  function (w) { return subAll(w, /ç(?=[aouáóú])/g, "s"); },
   function (w) { return subAll(w, /e/g, "i"); },
   function (w) { return subAll(w, /i/g, "e"); },
   function (w) { return subAll(w, /o/g, "u"); },
@@ -295,7 +403,22 @@ var TRANSFORMS = [
   function (w) { return subAll(w, /b(?=[t])/g, ""); },
   function (w) { return subAll(w, /g(?=[mn])/g, ""); },
   function (w) { return subAll(w, /m(?=[^pbaeiouáéíóúâêôãõ])/g, "n"); },
-  function (w) { return subAll(w, /(?!^)h/g, "").filter(function (v) { return !/[cln]$/.test(v) || true; }); },
+  // the mute h after a vowel (sahir, comprehender, Bahia), never the digraphs
+  // ch, lh, nh; an i or u after it keeps its hiatus accent (sahia → saía)
+  function (w) {
+    var out = [], re = /([aeiouáéíóúâêô])h([aeiouáéíóúâêô])/g, m;
+    while ((m = re.exec(w))) {
+      var v = m[2], rest = w.slice(m.index + 3);
+      // saía, saída, saí, caíram; not sair, caiu, raiz, caindo, rainha
+      if ((v === "i" || v === "u") && !(v === "i" && /^u/.test(rest)) && !/^(nh|[rlzmn](?![aeiouáéíóúâêô]))/.test(rest)) {
+        v = v === "i" ? "í" : "ú";
+      }
+      out.push(w.slice(0, m.index) + m[1] + v + rest);
+      re.lastIndex = m.index + 1;
+    }
+    if (out.length > 1) out.push(w.replace(/([aeiouáéíóúâêô])h(?=[aeiouáéíóúâêô])/g, "$1"));   // all at once
+    return out;
+  },
   function (w) { return /^h/.test(w) ? [w.slice(1)] : []; },
   function (w) { return subAll(w, /ch(?=[eiéí])/g, "qu").concat(subAll(w, /ch(?=[aouáóúrl])/g, "c")); },
   function (w) { return /^sc[eiéí]/.test(w) ? [w.slice(1)] : []; },
@@ -328,7 +451,7 @@ function modernizer(opts) {
   var LEX = opts.lexicon || buildLexicon(opts);
   var byKey = Object.create(null);
   Object.keys(LEX.words).forEach(function (w) { var k = strip(w); (byKey[k] = byKey[k] || []).push(w); });
-  var cache = Object.create(null), missing = Object.create(null);
+  var cache = Object.create(null), missing = Object.create(null), how = Object.create(null), seen = Object.create(null);
 
   function accentCost(o, c) {
     var a = marks(o), b = marks(c), s = 0;
@@ -374,10 +497,40 @@ function modernizer(opts) {
     return best ? best.w : null;
   }
 
+  /* Names: the words a text writes with a capital inside a sentence and
+     never in lower case (Homero, Humanitas, Shelley, Sanchinha).  They get
+     only the exceptions and the safe rules, and only when the result is a
+     known word; otherwise they stay as they are.  learn(text) collects
+     them before text(). */
+  var lowSeen = Object.create(null), capMid = Object.create(null);
+  function learn(t) {
+    String(t).split(/(_)/).forEach(function (chunk, i, all) {
+      var it = all.slice(0, i).filter(function (x) { return x === "_"; }).length % 2 === 1;
+      if (it || chunk === "_") return;
+      var re = new RegExp(WORD_RE.source, "g"), m;
+      while ((m = re.exec(chunk))) {
+        var w = m[0], low = w.toLowerCase();
+        if (w === low) { lowSeen[low] = 1; continue; }
+        var before = chunk.slice(0, m.index).replace(/\s+$/, "");
+        if (before && !/[.!?…:—«"“(\[]$/.test(before)) capMid[low] = 1;
+      }
+    });
+  }
+  function isName(raw, low) {
+    return raw !== low && raw !== raw.toUpperCase() && capMid[low] && !lowSeen[low];
+  }
+
   function word(raw) {
     if (!raw) return raw;
     var low = raw.toLowerCase();
+    // chapter numbers
+    if (/^[IVXLCDM]+$/.test(raw)) return raw;
+    if (isName(raw, low) && !EXC[low]) {
+      var rn = rules(low);
+      return recase(raw, LEX.has(rn) ? rn : low);
+    }
     if (cache[low] == null) cache[low] = lower(low);
+    seen[low] = (seen[low] || 0) + 1;
     return recase(raw, cache[low]);
   }
 
@@ -398,11 +551,21 @@ function modernizer(opts) {
     if (LEX.has(w)) return w;
     var r = rules(w);
     if (EXC[r]) return EXC[r];
+    if (LEX.has(r)) return r;
     var hit = resolve(r);
-    if (hit) return hit;
+    if (hit) { how[w] = hit; return hit; }
+    // an adverb: its adjective, modernized, without its written accent
+    // (distinctamente → distintamente, magníficamente → magnificamente)
+    if (/.{4,}mente$/.test(w)) {
+      var adj = lower(w.slice(0, -5));
+      var adv = adj.normalize("NFD").replace(/[́̂̀]/g, "").normalize("NFC") + "mente";
+      if (adv !== w) how[w] = adv;
+      return adv;
+    }
     var s = r;
     for (var i = 0; i < SUFFIX.length; i++) if (SUFFIX[i][0].test(s)) { s = s.replace(SUFFIX[i][0], SUFFIX[i][1]); break; }
     missing[w] = (missing[w] || 0) + 1;
+    if (s !== w) how[w] = s;
     return s;
   }
 
@@ -422,11 +585,26 @@ function modernizer(opts) {
   }
 
   // A text: every word outside _italics_ (foreign quotations).
+  /* An italic passage (Gutenberg marks every italic with _) is a foreign
+     quotation when most of its words are not Portuguese, old or new:
+     _Elle se irá, mas ficará ella_ is emphasis and gets modernized;
+     _Eppur si muove_ or _c'est la vie_ stays as it is. */
+  function foreign(chunk) {
+    var ws = (chunk.toLowerCase().match(WORD_RE) || []).filter(function (w) { return w.length > 3; }), pt = 0;
+    ws.forEach(function (w) {
+      if (EXC[w] || /nh|lh|ã|õ/.test(w) || LEX.has(w) || LEX.has(rules(w)) || LEX.has(word(w))) pt++;
+    });
+    return ws.length > 0 && pt / ws.length < 0.75;
+  }
+
   function text(s) {
     var out = "", italic = false;
     String(s).split(/(_)/).forEach(function (chunk) {
       if (chunk === "_") { italic = !italic; out += chunk; return; }
-      if (italic) { out += chunk; return; }
+      if (italic && foreign(chunk)) { out += chunk; return; }
+      // lh'o, m'a, t'os → lho, ma, tos; há-de, hei-de → há de, hei de
+      chunk = chunk.replace(/\b([lL]h|[mMtT])['’]([oa]s?)\b/g, "$1$2")
+        .replace(/\b(hei|hás|has|há|ha|hão|havemos|haveis)-de\b/gi, function (m0, a) { return a + " de"; });
       // the old contracted forms with an apostrophe: d'elle, n'um
       chunk = chunk.replace(/\b([dnDN])['’]([A-Za-zÀ-ÿ]+)/g, function (m0, a, b) {
         var k = (a + "'" + b).toLowerCase();
@@ -439,11 +617,19 @@ function modernizer(opts) {
   }
 
   function unresolved(min) {
-    return Object.keys(missing).filter(function (w) { return missing[w] >= (min || 1); })
-      .sort(function (a, b) { return missing[b] - missing[a]; }).map(function (w) { return [w, missing[w]]; });
+    var n = function (w) { return seen[w] || missing[w]; };
+    return Object.keys(missing).filter(function (w) { return n(w) >= (min || 1); })
+      .sort(function (a, b) { return n(b) - n(a); }).map(function (w) { return [w, how[w] || w, n(w)]; });
   }
 
-  return { word: word, text: text, unresolved: unresolved, lexicon: LEX };
+  // What was changed by the historical transformations or the accents (not
+  // by the exceptions or the safe rules): [old, new, times], to review.
+  function changed() {
+    return Object.keys(how).filter(function (w) { return how[w] !== w; })
+      .sort(function (a, b) { return (seen[b] || 0) - (seen[a] || 0); }).map(function (w) { return [w, how[w], seen[w] || 0]; });
+  }
+
+  return { word: word, text: text, learn: learn, unresolved: unresolved, changed: changed, lexicon: LEX };
 }
 
 module.exports = { modernizer: modernizer, buildLexicon: buildLexicon, rules: rules, EXC: EXC, OLD: OLD, strip: strip };
