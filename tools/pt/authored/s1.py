@@ -175,6 +175,9 @@ gd(W, 1, [["España", "Espanha"], ["señor", "senhor"], ["montaña", "montanha"]
    "No todas las ñ del español tienen nh en portugués.")
 gd(W, 1, [["ciudad", "cidade"], ["verdad", "verdade"], ["universidad", "universidade"]], "mitad → ___", "metade", "mitade",
    "-dad → -dade, pero la raíz también cambia: mitad es metade, con e. Mirá la palabra entera, no solo el final.")
+# La regla -dad → -dade la presenta Ponte en la semana 3: esta excepción va
+# ahí (conserva su id, s1-01-42, para no mover el repaso de nadie).
+ITEMS[-1].update(w=3, part=2)
 gd(W, 1, [["nación", "nação"], ["canción", "canção"], ["estación", "estação"]], "corazón → ___", "coração", "corazão",
    "-ción → -ção, y también -zón → -ção: coração, razão. La z del español no se conserva: se escribe ç.")
 
@@ -186,7 +189,7 @@ sc(W, 0, ["Você é argentino?", "Você está cansada?", "Você tem irmãos?", "
 sc(W, 2, ["Estou com fome.", "Ela está com sede.", "Estamos com frio.", "Eles estão com sono.", "Tenho trinta anos.", "Ela tem vinte anos."],
    "¿Cuándo va «estar com» y cuándo «ter»?",
    ["Sensaciones (hambre, sed, frío, sueño) con «estar com»; la edad con «ter».",
-    "Todo lo físico va con «ter», como en español.",
+    "Todo lo físico va con «ter» (tenho fome, tenho sede, tenho frio), como en español.",
     "«estar com» en plural y «ter» en singular."],
    "Sensaciones (hambre, sed, frío, sueño) con «estar com»; la edad con «ter».",
    "Lo que en español «tenés» por un rato (hambre, frío) en Brasil se «está con»: estou com fome. La edad, como en español, con ter.")
@@ -305,7 +308,7 @@ sc(W, 0, ["pão → pães (pan → panes)", "mão → mãos (mano → manos)", "
           "alemão → alemães (alemán → alemanes)", "irmão → irmãos (hermano → hermanos)", "estação → estações (estación → estaciones)"],
    "¿Qué pista te da el español para el plural de -ão?",
    ["Si en español el plural es -anes, -ães; si es -anos, -ãos; si es -ones, -ões.",
-    "Depende del género: femeninos en -ãos, masculinos en -ões.",
+    "Depende del género: los femeninos hacen -ãos y los masculinos, -ões o -ães (limões, pães).",
     "Las palabras cortas hacen -ães y las largas -ões."],
    "Si en español el plural es -anes, -ães; si es -anos, -ãos; si es -ones, -ões.",
    "El plural de -ão refleja la palabra latina, igual que el español: panes → pães, manos → mãos, limones → limões.")
@@ -416,12 +419,12 @@ gd(W, 0, [["o livro", "um livro"], ["o amigo", "um amigo"], ["o bar", "um bar"]]
 
 sc(W, 1, ["Estou no Rio.", "Ela está na praia.", "Eles estão nos bares da Lapa.", "Estamos nas lojas.", "Estou em Copacabana.", "Ela está em casa."],
    "¿Cuándo «em» se convierte en no / na / nos / nas?",
-   ["Cuando va seguido del artículo o, a, os, as.", "Cuando el lugar es una ciudad.", "Siempre, delante de cualquier lugar."],
+   ["Cuando va seguido del artículo o, a, os, as.", "Cuando el lugar es una ciudad.", "Siempre, delante de cualquier lugar (em Copacabana → no Copacabana)."],
    "Cuando va seguido del artículo o, a, os, as.",
    "em se funde con el artículo que sigue. Si el lugar no lleva artículo (Copacabana, em casa), em queda solo.")
 sc(W, 2, ["O João é carioca.", "A Bia está em casa.", "O Rafa tem dois irmãos.", "A Ana é de Rosario.", "A minha casa é em Botafogo.", "O meu amigo é baiano."],
    "¿Qué tienen en común estas frases de Río?",
-   ["Los nombres propios y los posesivos llevan artículo.", "Los nombres propios nunca llevan artículo.", "Solo los nombres de mujer llevan artículo."],
+   ["Los nombres propios y los posesivos llevan artículo.", "Los nombres de ciudad llevan artículo; los de persona, no.", "Solo los nombres de mujer llevan artículo."],
    "Los nombres propios y los posesivos llevan artículo.",
    "En Río y buena parte de Brasil se dice o João, a Bia, a minha casa. Es opcional, pero muy común.")
 
@@ -529,14 +532,14 @@ gd(W, 0, [["fácil", "fáceis"], ["difícil", "difíceis"], ["útil", "úteis"]]
 sc(W, 2, ["Ela é muito bonita.", "Eles são muito altos.", "Tenho muitos amigos.", "Tem muita gente aqui.", "Está muito calor.", "Ela tem muitas amigas."],
    "¿Cuándo cambia «muito»?",
    ["Cambia ante sustantivos (muitos amigos); ante adjetivos queda igual (muito bonita).",
-    "Cambia siempre según el género y el número.", "No cambia nunca."],
+    "Cambia siempre según el género y el número de lo que sigue (muitas bonitas, muitos altos).", "No cambia nunca."],
    "Cambia ante sustantivos (muitos amigos); ante adjetivos queda igual (muito bonita).",
    "muito + sustantivo = mucho/a/os/as (concuerda); muito + adjetivo = muy (invariable).")
 sc(W, 0, ["O Pedro é alto; a Bia é alta.", "O carro é branco; a casa é branca.", "O dia é alegre; a noite é alegre.",
           "O menino é feliz; a menina é feliz.", "O exercício é fácil; a lição é fácil.", "O bairro é tranquilo; a rua é tranquila."],
    "¿Qué adjetivos cambian del masculino al femenino?",
    ["Los terminados en -o; los en -e o consonante tienen una sola forma.",
-    "Todos los adjetivos cambian en el femenino.", "Solo los de colores."],
+    "Todos los adjetivos cambian en el femenino: -o → -a, -e → -a, consonante + -a.", "Solo los de colores."],
    "Los terminados en -o; los en -e o consonante tienen una sola forma.",
    "Como en español: alto/alta, pero alegre, feliz, fácil sirven para los dos géneros.")
 
@@ -570,7 +573,7 @@ ch(W, 2, "Sou ___.", ["engenheira", "uma engenheira", "a engenheira"], "engenhei
    "La profesión con ser va sin artículo: sou engenheira.", prompt="«Soy ingeniera.»")
 ch(W, 2, "Trabalho num ___.", ["escritório", "oficina", "ofício"], "escritório",
    "Escritório = oficina (de trabajo). Oficina = taller mecánico.", prompt="«Trabajo en una oficina.»")
-ch(W, 2, "Eu ___ cedo.", ["acordo", "me acordo", "acordo-me"], "acordo",
+ch(W, 2, "Eu ___ cedo.", ["acordo", "me acordo", "acorda"], "acordo",
    "Acordar = despertarse, sin pronombre: eu acordo cedo.", prompt="«Me despierto temprano.»")
 ch(W, 2, "Eu ___ ao meio-dia.", ["almoço", "almorzo", "almoça"], "almoço",
    "almoçar → eu almoço, con ç.", prompt="«Almuerzo al mediodía.»")
@@ -651,7 +654,7 @@ sc(W, 0, ["A gente mora aqui.", "A gente come muito.", "A gente trabalha cedo.",
    "¿Qué cambia entre «a gente» y «nós»?",
    ["El significado es el mismo, pero «a gente» lleva el verbo en tercera del singular.",
     "«a gente» significa «la gente» y «nós», «nosotros».",
-    "«a gente» lleva el verbo en plural, como «nós»."],
+    "El significado es el mismo y los dos llevan el verbo en primera del plural (moramos)."],
    "El significado es el mismo, pero «a gente» lleva el verbo en tercera del singular.",
    "a gente es el «nosotros» del habla: a gente mora = nós moramos.")
 
@@ -751,7 +754,7 @@ gd(W, 1, [["abrir", "eu abro"], ["partir", "eu parto"], ["decidir", "eu decido"]
 sc(W, 2, ["Eu durmo cedo.", "Ela dorme cedo.", "Eu prefiro praia.", "Ele prefere praia.", "Eu sinto frio.", "Você sente frio."],
    "¿Dónde cambia la vocal de la raíz?",
    ["Solo en «eu»: durmo, prefiro; en «ele» vuelve la vocal del infinitivo.",
-    "En todas las personas, como en español (duermo, duerme).", "Solo en «ele»."],
+    "En todas las personas, como en español: eu durmo, ele durme, você sinte.", "Solo en «ele»."],
    "Solo en «eu»: durmo, prefiro; en «ele» vuelve la vocal del infinitivo.",
    "El portugués no diptonga: ela dorme, ele prefere. La vocal cambia solo en eu.")
 sc(W, 0, ["Eu faço.", "Ele faz.", "Eu digo.", "Ele diz.", "Eu trago.", "Ele traz."],
@@ -852,12 +855,12 @@ gd(W, 1, [["lunes", "segunda-feira"], ["martes", "terça-feira"], ["miércoles",
 sc(W, 2, ["É uma hora.", "São duas horas.", "São três e meia.", "É meio-dia.", "São dez horas.", "É meia-noite."],
    "¿Cuándo va «é» y cuándo «são»?",
    ["«É» con una hora, mediodía y medianoche; «são» con las demás.",
-    "«É» por la mañana y «são» por la tarde.", "«São» siempre, como «son las»."],
+    "«É» para las horas de la mañana y «são» para las de la tarde y la noche.", "«São» siempre, como «son las»."],
    "«É» con una hora, mediodía y medianoche; «são» con las demás.",
    "El verbo concuerda con el número: é uma hora, é meio-dia; são duas, são dez.")
 sc(W, 0, ["uma cerveja", "duas cervejas", "um chope", "dois chopes", "duzentas pessoas", "duzentos reais"],
    "¿Qué números cambian según el género?",
-   ["um/uma, dois/duas y las centenas (duzentos/duzentas).", "Todos los números.", "Ninguno: los números no tienen género."],
+   ["um/uma, dois/duas y las centenas (duzentos/duzentas).", "Todos los números.", "Solo um/uma; dois y las centenas quedan iguales (dois cervejas)."],
    "um/uma, dois/duas y las centenas (duzentos/duzentas).",
    "Como en español (un/una, doscientos/as), pero además dois/duas.")
 
@@ -954,7 +957,7 @@ sc(W, 0, ["Por que você está aqui?", "Porque eu moro aqui.", "Você está aqui
           "Porque ela está cansada.", "Ela não vem por quê?"],
    "¿Cuándo va «por que», «porque» y «por quê»?",
    ["«por que» para preguntar, «porque» para responder y «por quê» al final de la frase.",
-    "«porque» para preguntar y «por que» para responder.", "Son intercambiables; es solo ortografía."],
+    "«porque» para preguntar, «por que» para responder y «por quê» cuando hay sorpresa.", "Son intercambiables; es solo ortografía."],
    "«por que» para preguntar, «porque» para responder y «por quê» al final de la frase.",
    "Igual que en español (¿por qué? / porque), pero sin tilde en la pregunta y con circunflejo al final: por quê?")
 sc(W, 1, ["Vou viajar amanhã.", "Ela vai comer na feira.", "Vamos sair hoje.", "Eles vão ver o jogo.",
@@ -1060,7 +1063,7 @@ gd(W, 0, [["a Argentina", "na Argentina"], ["o Brasil", "no Brasil"], ["o Urugua
 sc(W, 1, ["Vou de carro.", "Vou de ônibus.", "Vou de metrô.", "Vou de bicicleta.", "Vou de avião.", "Vou a pé."],
    "¿Cómo se dice el medio de transporte?",
    ["«de» + el medio, sin artículo; solo «a pé» es distinto.", "«em» + el medio, como en español.",
-    "«de» + artículo + el medio: do carro, do ônibus."],
+    "«de» + artículo + el medio (do carro, do ônibus); «a pé» también."],
    "«de» + el medio, sin artículo; solo «a pé» es distinto.",
    "Vou de ônibus = voy en colectivo. La única excepción es a pé.")
 sc(W, 0, ["Chego ao aeroporto às dez. (norma)", "Chego no aeroporto às dez. (habla)", "Vou ao mercado. (norma)",
@@ -1170,14 +1173,14 @@ sc(W, 0, ["O carro dele é preto.", "A casa dela é linda.", "Os filhos deles s�
           "O Rafa e a mãe dele.", "A Ana e o irmão dela."],
    "¿Cómo se dice «su» de él / de ella en Brasil?",
    ["Con «dele / dela» después del sustantivo; «seu» queda para «de você».",
-    "Siempre con «seu / sua», como en español.", "Con «dele / dela» antes del sustantivo."],
+    "Siempre con «seu / sua», como en español.", "Con «dele / dela» antes del sustantivo (dele carro); «seu» es solo formal."],
    "Con «dele / dela» después del sustantivo; «seu» queda para «de você».",
    "En Brasil seu se entiende como «tuyo» (de você). Para terceros: o carro dele, a casa dela.")
 sc(W, 1, ["Moro neste prédio.", "O dono desse bar é baiano.", "Naquela rua tem uma feira.", "Não sei nada disso.",
           "Nessa praia tem ondas.", "O Cristo fica naquele morro."],
    "¿Qué pasa con «em» y «de» ante los demostrativos?",
    ["Se funden con ellos: neste, desse, naquela, disso.", "Quedan separados: em este, de esse.",
-    "Solo «em» se funde; «de» queda separado."],
+    "Solo «em» se funde (neste, naquela); «de» queda separado: de esse."],
    "Se funden con ellos: neste, desse, naquela, disso.",
    "Es la misma regla que no / do: em y de se contraen con este, esse, aquele, isso.")
 
@@ -1280,12 +1283,12 @@ sc(W, 2, ["Hoje eu acordei cedo.", "Ontem eu acordei cedo.", "Você já foi ao R
           "Ano passado fui a Salvador."],
    "¿Cómo traduce el perfeito los dos pasados del español?",
    ["Una sola forma (acordei) sirve para «me desperté» y «me he despertado».",
-    "Para «he comido» se usa «tenho comido».", "El perfeito solo sirve para el pasado lejano."],
+    "Para «he comido» se usa «tenho comido».", "El perfeito solo sirve para el pasado lejano (ontem, ano passado); para hoy, tenho acordado."],
    "Una sola forma (acordei) sirve para «me desperté» y «me he despertado».",
    "El perfeito cubre hablé y he hablado. Tenho falado es otro tiempo (semana 21).")
 sc(W, 1, ["Eu vi o mar.", "Eu vim de ônibus.", "Ele viu o jogo.", "Ele veio de carro.", "Eles viram o Cristo.", "Eles vieram ontem."],
    "¿Cómo distinguís «ver» de «vir» en el perfeito?",
-   ["ver: vi, viu, viram; vir: vim, veio, vieram.", "Son iguales: el contexto decide.", "ver: vim, veio; vir: vi, viu."],
+   ["ver: vi, viu, viram; vir: vim, veio, vieram.", "Son iguales: el contexto decide.", "ver: vim, veio, vieram; vir: vi, viu, viram."],
    "ver: vi, viu, viram; vir: vim, veio, vieram.",
    "Una m o una e cambian el verbo: vi (vi) / vim (vine); viu (vio) / veio (vino).")
 
@@ -1399,12 +1402,12 @@ gd(W, 0, [["escrever", "escreva"], ["correr", "corra"], ["vender", "venda"]], "d
 sc(W, 0, ["Eu falo → Fale!", "Eu como → Coma!", "Eu abro → Abra!", "Eu faço → Faça!", "Eu digo → Diga!", "Eu venho → Venha!"],
    "¿De dónde sale el imperativo de você?",
    ["Del «eu» del presente, cambiando la -o por -e (-ar) o por -a (-er, -ir).",
-    "Del infinitivo, sacando la -r.", "De la forma de «ele» del presente."],
+    "Del infinitivo, sacando la -r.", "De la forma de «ele» del presente, sin cambios: fala, come, abre, faz, diz."],
    "Del «eu» del presente, cambiando la -o por -e (-ar) o por -a (-er, -ir).",
    "Por eso los irregulares de eu pasan al imperativo: faço → faça, digo → diga, venho → venha.")
 sc(W, 0, ["Olha!", "Vem cá!", "Fala sério!", "Senta aí.", "Come mais!", "Faz isso pra mim?"],
    "¿Qué forma usan los brasileños al hablar entre amigos?",
-   ["La forma de «ele» del presente (olha, vem, fala).", "La forma de «você» escrita (olhe, venha, fale).",
+   ["La forma de «ele» del presente (olha, vem, fala).", "La forma de «você» de los carteles (olhe, venha, fale).",
     "El infinitivo (olhar, vir, falar)."],
    "La forma de «ele» del presente (olha, vem, fala).",
    "Es el imperativo de tu, que coincide con la tercera del presente. Es lo normal en la charla; en lo escrito, fale.")

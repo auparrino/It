@@ -50,11 +50,14 @@
                "açúcar": "azúcar (Pão de Açúcar: el morro más famoso de Río)",
                minha: "mi (a minha = mi)", colega: "(colega de apartamento) compañera de departamento",
                carioca: "de la ciudad de Río", muito: "muy", preto: "negro", sempre: "siempre",
-               amanhã: "mañana", feira: "feria (mercado callejero)" },
+               amanhã: "mañana", feira: "feria (mercado callejero)",
+               // Semana 1: las contracciones llegan en la 3; acá se glosan.
+               no: "en el (em + o; no es la negación, que es não)", na: "en la (em + a)",
+               da: "desde la (de + a)", em: "en (é em Santa Teresa = queda en Santa Teresa)" },
       questions: [
         ["¿De dónde es Bia?", ["de Río de Janeiro", "de Buenos Aires", "de São Paulo", "de Salvador"], "de Río de Janeiro"],
-        ["¿Cómo es el departamento?", ["chico pero lindo", "grande y viejo", "nuevo y caro", "lejos del mar"], "chico pero lindo"],
-        ["¿Qué se ve desde la ventana?", ["el mar, las montañas y el Pan de Azúcar", "solo edificios", "un estadio", "un parque"], "el mar, las montañas y el Pan de Azúcar"]
+        ["¿Cómo es el departamento?", ["chico pero lindo", "grande pero muy oscuro", "nuevo y caro", "lejos del mar"], "chico pero lindo"],
+        ["¿Qué se ve desde la ventana?", ["el mar, las montañas y el Pan de Azúcar", "el mar y los edificios altos de Copacabana", "un estadio", "un parque"], "el mar, las montañas y el Pan de Azúcar"]
       ],
       hunt: { label: "Tocá todas las formas de ser y estar (sou, é, estou, está)", targets: ["sou", "é", "estou", "está"] } },
 
@@ -83,7 +86,7 @@
                conta: "(por minha conta) invito yo", combinado: "trato hecho", passeio: "paseo" },
       questions: [
         ["¿Dónde compra Bia siempre la fruta?", ["en el puesto de don Zé", "en el supermercado", "en un puesto de la esquina", "en Santa Teresa"], "en el puesto de don Zé"],
-        ["¿Qué le pasa a Martín con el cajú?", ["le deja la boca áspera", "le encanta", "le da alergia", "no lo quiere probar"], "le deja la boca áspera"],
+        ["¿Qué le pasa a Martín con el cajú?", ["le deja la boca áspera", "le encanta", "le da alergia en la boca", "no lo quiere probar"], "le deja la boca áspera"],
         ["¿Qué hay el sábado?", ["un paseo al Pan de Azúcar", "otra feria", "una fiesta", "trabajo"], "un paseo al Pan de Azúcar"]
       ],
       hunt: { label: "Tocá las contracciones (no, na, da, do, numa, à)", targets:
@@ -115,9 +118,9 @@
                vivo: "(ao vivo) en vivo", sambar: "bailar samba", pisou: "pisó", chorou: "lloró",
                menina: "nena", cachorro: "perro", molhado: "mojado" },
       questions: [
-        ["¿Cómo subieron al Morro da Urca?", ["a pie, por un sendero", "en teleférico", "en colectivo", "en taxi"], "a pie, por un sendero"],
+        ["¿Cómo subieron al Morro da Urca?", ["a pie, por un sendero", "en el teleférico, desde la Urca", "en colectivo", "en taxi"], "a pie, por un sendero"],
         ["¿Qué pasó cuando Martín intentó bailar samba?", ["pisó a todo el mundo", "bailó muy bien", "se cayó", "se fue temprano"], "pisó a todo el mundo"],
-        ["¿Cómo volvieron a casa?", ["en taxi, porque perdieron el último subte", "en subte", "caminando", "en colectivo"], "en taxi, porque perdieron el último subte"]
+        ["¿Cómo volvieron a casa?", ["en taxi, porque perdieron el último subte", "en subte, antes de que cerrara la estación", "caminando", "en colectivo"], "en taxi, porque perdieron el último subte"]
       ],
       hunt: { label: "Tocá los verbos en pretérito perfeito", targets:
         ["pegaram", "compraram", "subiram", "viram", "explicou", "tirou", "vi", "disse", "foram",
@@ -183,7 +186,7 @@
       questions: [
         ["¿Qué fabrica la empresa?", ["paneles solares", "barcos", "autos eléctricos", "software"], "paneles solares"],
         ["¿Por qué Bia habla «como un libro»?", ["porque en una entrevista todo es más formal", "porque está nerviosa", "porque es profesora", "porque está leyendo"], "porque en una entrevista todo es más formal"],
-        ["¿Cómo va a ir Martín a Niterói?", ["en ferry, cruzando la bahía", "en subte", "en taxi", "en bicicleta"], "en ferry, cruzando la bahía"]
+        ["¿Cómo va a ir Martín a Niterói?", ["en ferry, cruzando la bahía", "en subte", "en colectivo, por el puente", "en bicicleta"], "en ferry, cruzando la bahía"]
       ],
       hunt: { label: "Tocá los verbos en futuro simple (perguntarão, saberei…)", targets:
         ["perguntarão", "responderá", "falará", "usará", "pedirá", "saberei", "será"] } },
@@ -273,8 +276,8 @@
                saudade: "(estar com saudade) extrañar", beijo: "beso", tomara: "ojalá",
                cozinhar: "cocinar", jantar: "cena" },
       questions: [
-        ["¿Por qué la respuesta llega a la mañana?", ["porque la madre estaba durmiendo", "por la diferencia horaria", "porque se cortó internet", "porque estaba ocupada"], "porque la madre estaba durmiendo"],
-        ["Según la madre, ¿qué es lo importante?", ["hacer un trabajo que lo apasione", "la ciudad", "ganar mucho", "estar cerca de ella"], "hacer un trabajo que lo apasione"],
+        ["¿Por qué la respuesta llega a la mañana?", ["porque la madre estaba durmiendo", "por la diferencia horaria con Buenos Aires", "porque se cortó internet", "porque estaba ocupada"], "porque la madre estaba durmiendo"],
+        ["Según la madre, ¿qué es lo importante?", ["hacer un trabajo que lo apasione", "la ciudad", "ganar mucha plata y ahorrar para el futuro", "estar cerca de ella"], "hacer un trabajo que lo apasione"],
         ["¿Qué hace Martín al final?", ["le escribe a la empresa que acepta", "llama a su madre", "rechaza el puesto", "le pregunta a Bia"], "le escribe a la empresa que acepta"]
       ],
       hunt: { label: "Tocá los verbos en subjuntivo (importe, faça, seja…)", targets:
@@ -307,8 +310,8 @@
                "sapucaí": "(la Sapucaí) la pasarela del Carnaval de Río", prata: "plata", chapéu: "sombrero",
                esquece: "olvida", mexo: "muevo", sorrio: "sonrío", contas: "(fazer as contas) sacar la cuenta" },
       questions: [
-        ["¿Qué plan tiene Bia?", ["desfilar con él en una escuela de samba", "ir a Buenos Aires", "mudarse a Niterói", "ver el Carnaval por televisión"], "desfilar con él en una escuela de samba"],
-        ["¿Qué tiene que hacer Martín mientras aprende?", ["quedarse en el medio del sector y hacer lo que hacen los demás", "no desfilar", "tomar clases privadas", "desfilar adelante de todos"], "quedarse en el medio del sector y hacer lo que hacen los demás"],
+        ["¿Qué plan tiene Bia?", ["desfilar con él en una escuela de samba", "ir a Buenos Aires", "mudarse a Niterói", "ver el desfile por televisión desde casa"], "desfilar con él en una escuela de samba"],
+        ["¿Qué tiene que hacer Martín mientras aprende?", ["quedarse en el medio del sector y hacer lo que hacen los demás", "no desfilar", "tomar clases privadas con un maestro de la escuela todas las noches", "desfilar adelante de todos"], "quedarse en el medio del sector y hacer lo que hacen los demás"],
         ["¿De qué se da cuenta Martín en el subte?", ["de que en dos meses cumple un año en Río", "de que perdió el sombrero", "de que llega tarde al trabajo", "de que se olvidó la letra"], "de que en dos meses cumple un año en Río"]
       ],
       hunt: { label: "Tocá los verbos en futuro do subjuntivo (quiser, tiver…)", targets:
@@ -337,9 +340,9 @@
                piada: "(fazer piada) hacer chistes", estranho: "raro", falta: "(sentir falta) extrañar",
                ladeiras: "calles en pendiente", embora: "(ir embora) irse", brinde: "brindis" },
       questions: [
-        ["¿Dónde festejan?", ["en el bar de seu Almir, donde tomaron el primer chopp", "en Niterói", "en la escuela de samba", "en Copacabana"], "en el bar de seu Almir, donde tomaron el primer chopp"],
+        ["¿Dónde festejan?", ["en el bar de seu Almir, donde tomaron el primer chopp", "en Niterói", "en la escuela de samba, en la fiesta después del último ensayo", "en Copacabana"], "en el bar de seu Almir, donde tomaron el primer chopp"],
         ["¿Qué no habría pasado si Martín no hubiera venido?", ["Bia no habría probado el alfajor", "Bia no habría aprendido español", "no habría habido Carnaval", "seu Almir no tendría el bar"], "Bia no habría probado el alfajor"],
-        ["¿Qué extrañaría Martín si volviera a Buenos Aires?", ["hasta las calles en pendiente de Santa Teresa", "solo la comida", "el trabajo", "nada"], "hasta las calles en pendiente de Santa Teresa"]
+        ["¿Qué extrañaría Martín si volviera a Buenos Aires?", ["hasta las calles en pendiente de Santa Teresa", "solo la comida, el mar y los amigos de la escuela", "el trabajo", "nada"], "hasta las calles en pendiente de Santa Teresa"]
       ],
       hunt: { label: "Tocá los infinitivos personales (comemorarem…) y los verbos de las hipótesis (tivesse, teria, sentiria)", targets:
         ["comemorarem", "pensarmos", "irmos", "tivesse", "teria", "sentiria"] } },
@@ -373,7 +376,7 @@
                letras: "letras (de canciones)", garota: "chica", moça: "muchacha",
                caminho: "(a caminho de) camino a", frente: "(em frente a) enfrente de" },
       questions: [
-        ["¿Cómo era la nueva forma de tocar samba?", ["más baja, más lenta, casi susurrada", "más rápida y fuerte", "con muchos tambores", "solo con piano"], "más baja, más lenta, casi susurrada"],
+        ["¿Cómo era la nueva forma de tocar samba?", ["más baja, más lenta, casi susurrada", "más rápida, más fuerte, casi gritada", "con muchos tambores", "solo con piano"], "más baja, más lenta, casi susurrada"],
         ["¿Quién tocaba la guitarra en el disco de Elizeth Cardoso?", ["João Gilberto", "Tom Jobim", "Vinicius de Moraes", "Stan Getz"], "João Gilberto"],
         ["¿Qué inspiró «Garota de Ipanema»?", ["una chica que pasaba camino a la playa", "una novia de Vinicius", "una película", "un viaje a Estados Unidos"], "una chica que pasaba camino a la playa"]
       ],
@@ -406,8 +409,8 @@
                projetado: "proyectado", inaugurado: "inaugurado", ensaios: "ensayos",
                quadra: "galpón (de la escuela de samba)" },
       questions: [
-        ["¿Qué era la «Pequeña África»?", ["la zona del puerto y la Praça Onze, donde vivían muchos negros bahianos", "un barrio de Salvador", "una escuela de samba", "un país africano"], "la zona del puerto y la Praça Onze, donde vivían muchos negros bahianos"],
-        ["¿Por qué se discute «Pelo Telefone»?", ["otros músicos decían que la canción era de todos", "no es un samba", "nunca se grabó", "la prohibió la policía"], "otros músicos decían que la canción era de todos"],
+        ["¿Qué era la «Pequeña África»?", ["la zona del puerto y la Praça Onze, donde vivían muchos negros bahianos", "un barrio de Salvador, en Bahía, donde nacieron los primeros sambistas", "una escuela de samba", "un país africano"], "la zona del puerto y la Praça Onze, donde vivían muchos negros bahianos"],
+        ["¿Por qué se discute «Pelo Telefone»?", ["otros músicos decían que la canción era de todos", "no es un samba", "nunca se grabó en disco, solo se cantaba en fiestas", "la prohibió la policía"], "otros músicos decían que la canción era de todos"],
         ["Según Ismael Silva, ¿de dónde viene el nombre «escola»?", ["de una escuela de maestros que quedaba cerca", "de una escuela de baile", "de la policía", "de la iglesia"], "de una escuela de maestros que quedaba cerca"]
       ],
       hunt: { label: "Tocá los lugares de Río (Praça, Onze, Estácio, Mangueira…)", targets:
@@ -435,8 +438,8 @@
                sucesso: "éxito", frieza: "frialdad", enterrada: "enterrada", enterro: "entierro",
                aterro: "(Aterro do Flamengo) parque junto a la bahía", estrangeiros: "extranjeros" },
       questions: [
-        ["¿Dónde nació Carmen Miranda?", ["en el norte de Portugal", "en la Lapa, en Río", "en Salvador", "en Hollywood"], "en el norte de Portugal"],
-        ["¿Qué imitaba su ropa de «baiana»?", ["la ropa de las mujeres negras que vendían comida en Salvador", "la ropa de Hollywood", "un traje portugués", "la ropa de los marineros"], "la ropa de las mujeres negras que vendían comida en Salvador"],
+        ["¿Dónde nació Carmen Miranda?", ["en el norte de Portugal", "en la Lapa, en el centro de Río", "en Salvador", "en Hollywood"], "en el norte de Portugal"],
+        ["¿Qué imitaba su ropa de «baiana»?", ["la ropa de las mujeres negras que vendían comida en Salvador", "la ropa de Hollywood", "un traje portugués", "la ropa de las bailarinas de los casinos de Río en los años treinta"], "la ropa de las mujeres negras que vendían comida en Salvador"],
         ["¿Qué le criticaron al volver en 1940?", ["que se había americanizado", "que cantaba mal", "que había engordado", "que ya no bailaba"], "que se había americanizado"]
       ],
       hunt: { label: "Tocá los lugares (Portugal, Lapa, Salvador, Hollywood…)", targets:
@@ -466,7 +469,7 @@
                lembrança: "recuerdo", leitor: "lector", apaixonou: "(se apaixonou) se enamoró",
                ressaca: "resaca (del mar)", desconfiar: "sospechar", traiu: "traicionó" },
       questions: [
-        ["¿Cómo aprendió Machado?", ["solo, casi sin ir a la escuela", "en la universidad", "en Portugal", "con un profesor privado"], "solo, casi sin ir a la escuela"],
+        ["¿Cómo aprendió Machado?", ["solo, casi sin ir a la escuela", "en la universidad", "en Portugal", "con un profesor privado en casa"], "solo, casi sin ir a la escuela"],
         ["¿Quién narra Memórias Póstumas de Brás Cubas?", ["un muerto", "un gusano", "Capitu", "el propio Machado"], "un muerto"],
         ["¿Qué no sabe nunca el lector de Dom Casmurro?", ["si Capitu lo traicionó de verdad", "quién es Bentinho", "dónde pasa la historia", "cómo termina el matrimonio"], "si Capitu lo traicionó de verdad"]
       ],
@@ -496,8 +499,8 @@
                prédios: "edificios", pinturas: "cuadros", joias: "joyas", tecidos: "telas",
                mato: "yuyos", sítio: "quinta, finca" },
       questions: [
-        ["¿De dónde viene el dibujo de las ondas?", ["de una plaza de Lisboa, el Rossio", "de un cuadro de Burle Marx", "de las olas de Ipanema", "de una bandera"], "de una plaza de Lisboa, el Rossio"],
-        ["¿Qué cambió Burle Marx en 1970?", ["puso las ondas paralelas al mar", "borró las ondas", "cambió los colores", "hizo las ondas más chicas"], "puso las ondas paralelas al mar"],
+        ["¿De dónde viene el dibujo de las ondas?", ["de una plaza de Lisboa, el Rossio", "de un cuadro de Burle Marx", "de las olas del mar de Copacabana", "de una bandera"], "de una plaza de Lisboa, el Rossio"],
+        ["¿Qué cambió Burle Marx en 1970?", ["puso las ondas paralelas al mar", "borró las ondas", "cambió los colores", "hizo las ondas más chicas y más juntas"], "puso las ondas paralelas al mar"],
         ["¿Qué tenían de nuevo sus jardines?", ["usaban plantas nativas de Brasil", "eran muy chicos", "solo tenían flores europeas", "no tenían árboles"], "usaban plantas nativas de Brasil"]
       ],
       hunt: { label: "Tocá las palabras del diseño (ondas, desenho, paralelas…)", targets:
@@ -531,7 +534,7 @@
                voador: "(disco voador) plato volador", pousado: "posado" },
       questions: [
         ["¿Quién hizo el plano urbano de Brasilia?", ["Lúcio Costa", "Oscar Niemeyer", "Burle Marx", "Juscelino Kubitschek"], "Lúcio Costa"],
-        ["¿Quiénes eran los candangos?", ["los obreros que construyeron la ciudad, venidos sobre todo del Nordeste", "los políticos de la nueva capital", "los arquitectos", "los indígenas del cerrado"], "los obreros que construyeron la ciudad, venidos sobre todo del Nordeste"],
+        ["¿Quiénes eran los candangos?", ["los obreros que construyeron la ciudad, venidos sobre todo del Nordeste", "los políticos de la nueva capital", "los arquitectos", "los indígenas que vivían en el cerrado antes de que se construyera la capital"], "los obreros que construyeron la ciudad, venidos sobre todo del Nordeste"],
         ["¿Qué atraía a Niemeyer, según él?", ["la curva libre y sensual", "el ángulo recto", "el hormigón gris", "las torres altas"], "la curva libre y sensual"]
       ],
       hunt: { label: "Tocá los edificios (Congresso, Catedral, Palácio, Museu)", targets:
@@ -570,9 +573,9 @@
                moleque: "pibe", senzalas: "barracas de los esclavos", sobras: "sobras",
                feijão: "poroto", provas: "pruebas", feriado: "feriado" },
       questions: [
-        ["¿Qué es el Cais do Valongo?", ["el muelle de Río donde desembarcaron cientos de miles de africanos", "un museo de samba", "una playa de Salvador", "una ley de 1888"], "el muelle de Río donde desembarcaron cientos de miles de africanos"],
+        ["¿Qué es el Cais do Valongo?", ["el muelle de Río donde desembarcaron cientos de miles de africanos", "un museo del centro de Río sobre la historia del samba y del puerto", "una playa de Salvador", "una ley de 1888"], "el muelle de Río donde desembarcaron cientos de miles de africanos"],
         ["¿Qué no les dio la Ley Áurea a los liberados?", ["tierra, escuela ni indemnización", "la libertad", "el derecho a irse", "un nombre"], "tierra, escuela ni indemnización"],
-        ["¿Qué dice el texto del origen de la feijoada?", ["que nació en las senzalas es probablemente un mito", "que la inventó la princesa Isabel", "que viene de Angola", "que se creó en 1888"], "que nació en las senzalas es probablemente un mito"]
+        ["¿Qué dice el texto del origen de la feijoada?", ["que nació en las senzalas es probablemente un mito", "que la inventó la cocinera de la princesa Isabel en 1888", "que viene de Angola", "que se creó en 1888"], "que nació en las senzalas es probablemente un mito"]
       ],
       hunt: { label: "Tocá los nombres de las leyes (Eusébio, Ventre, Sexagenários, Áurea)", targets:
         ["eusébio", "ventre", "sexagenários", "áurea"] } },
@@ -605,8 +608,8 @@
                marido: "marido", aniversário: "cumpleaños", pertence: "pertenece",
                colecionador: "coleccionista" },
       questions: [
-        ["¿Cómo reaccionó parte del público en 1922?", ["abucheó, gritó, ladró y maulló", "aplaudió de pie", "se durmió", "compró todos los cuadros"], "abucheó, gritó, ladró y maulló"],
-        ["¿Qué proponía el Manifesto Antropófago?", ["«devorar» la cultura europea y transformarla en algo propio", "copiar los modelos europeos", "volver a la cultura indígena y rechazar Europa", "prohibir el arte extranjero"], "«devorar» la cultura europea y transformarla en algo propio"],
+        ["¿Cómo reaccionó parte del público en 1922?", ["abucheó, gritó, ladró y maulló", "aplaudió de pie y pidió otra lectura", "se durmió", "compró todos los cuadros"], "abucheó, gritó, ladró y maulló"],
+        ["¿Qué proponía el Manifesto Antropófago?", ["«devorar» la cultura europea y transformarla en algo propio", "copiar los modelos europeos", "volver a la cultura indígena y rechazar todo lo que venía de Europa", "prohibir el arte extranjero"], "«devorar» la cultura europea y transformarla en algo propio"],
         ["¿Dónde está hoy el Abaporu?", ["en el MALBA, en Buenos Aires", "en el Theatro Municipal", "en Lisboa", "en la casa de Tarsila"], "en el MALBA, en Buenos Aires"]
       ],
       hunt: { label: "Tocá los nombres de los artistas (Mário, Oswald, Anita, Tarsila…)", targets:
@@ -639,8 +642,8 @@
                desmentindo: "desmintiendo" },
       questions: [
         ["¿Dónde nació Clarice Lispector?", ["en una aldea de Ucrania", "en Recife", "en Río", "en Lisboa"], "en una aldea de Ucrania"],
-        ["¿Qué pasa en A Paixão segundo G.H.?", ["una mujer ve una cucaracha y entra en una crisis sobre lo que es existir", "una empleada se va de la casa", "una familia huye de la guerra", "un escritor cuenta la vida de Macabéa"], "una mujer ve una cucaracha y entra en una crisis sobre lo que es existir"],
-        ["¿Qué recomienda el texto sobre las citas de Clarice en internet?", ["desconfiar: muchas son falsas", "compartirlas", "usarlas en los exámenes", "traducirlas"], "desconfiar: muchas son falsas"]
+        ["¿Qué pasa en A Paixão segundo G.H.?", ["una mujer ve una cucaracha y entra en una crisis sobre lo que es existir", "una empleada se va de la casa", "una familia huye de la guerra", "un escritor cuenta la vida de Macabéa, una chica nordestina que vive en Río"], "una mujer ve una cucaracha y entra en una crisis sobre lo que es existir"],
+        ["¿Qué recomienda el texto sobre las citas de Clarice en internet?", ["desconfiar: muchas son falsas", "compartirlas", "compartirlas: casi todas son suyas", "traducirlas"], "desconfiar: muchas son falsas"]
       ],
       hunt: { label: "Tocá los verbos en pretérito perfeito de la vida de Clarice", targets:
         ["nasceu", "chegou", "cresceu", "mudou-se", "estudou", "trabalhou", "publicou", "espantou", "morreu", "escreveu"] } },
@@ -672,9 +675,9 @@
                oração: "oración", afaste: "aparte", censor: "censor", vetar: "vetar", farsa: "farsa",
                entrelinhas: "entrelíneas" },
       questions: [
-        ["¿Qué pasó con «Apesar de Você»?", ["pasó la censura, pero después retiraron el disco", "la prohibieron antes de grabarla", "nunca se editó", "la cantó Gilberto Gil"], "pasó la censura, pero después retiraron el disco"],
+        ["¿Qué pasó con «Apesar de Você»?", ["pasó la censura, pero después retiraron el disco", "la prohibieron antes de grabarla y nunca salió en disco", "nunca se editó", "la cantó Gilberto Gil"], "pasó la censura, pero después retiraron el disco"],
         ["¿Qué juego de palabras hay en «Cálice»?", ["suena igual que «cale-se», callate", "es el nombre de una mujer", "significa «vino» en latín", "es una palabra inventada"], "suena igual que «cale-se», callate"],
-        ["¿Para qué inventó Chico a Julinho da Adelaide?", ["para que los censores no reconocieran sus canciones", "para vender más discos", "para cantar en Italia", "para escribir novelas"], "para que los censores no reconocieran sus canciones"]
+        ["¿Para qué inventó Chico a Julinho da Adelaide?", ["para que los censores no reconocieran sus canciones", "para vender más discos con un nombre nuevo y más joven", "para cantar en Italia", "para escribir novelas"], "para que los censores no reconocieran sus canciones"]
       ],
       hunt: { label: "Tocá las palabras de la censura (censura, censores, proibida, vetar…)", targets:
         ["censura", "censores", "proibida", "vetar", "recolhido", "silêncio"] } },
@@ -706,8 +709,8 @@
                compartilhada: "compartida", libertadora: "liberadora", resumo: "resumen",
                patrono: "patrono", brigas: "peleas" },
       questions: [
-        ["¿De dónde partía el método de Freire?", ["de palabras de la vida de los alumnos", "de frases como «Eva viu a uva»", "de textos clásicos", "de la gramática latina"], "de palabras de la vida de los alumnos"],
-        ["¿Qué es la «educación bancaria»?", ["el profesor «deposita» contenidos en el alumno", "enseñar economía", "cobrar por estudiar", "estudiar en un banco"], "el profesor «deposita» contenidos en el alumno"],
+        ["¿De dónde partía el método de Freire?", ["de palabras de la vida de los alumnos", "de frases de cartilla como «Eva viu a uva»", "de textos clásicos", "de la gramática latina"], "de palabras de la vida de los alumnos"],
+        ["¿Qué es la «educación bancaria»?", ["el profesor «deposita» contenidos en el alumno", "enseñar economía", "que el alumno le pague al profesor por cada clase", "estudiar en un banco"], "el profesor «deposita» contenidos en el alumno"],
         ["¿Qué pasa con la frase sobre el oprimido y el opresor?", ["no está así en el libro: es un resumen", "es la primera frase del libro", "la dijo en Angicos", "es de otro autor chileno"], "no está así en el libro: es un resumen"]
       ],
       hunt: { label: "Tocá las formas de «educar» y «educação»", targets:
@@ -746,9 +749,9 @@
                riqueza: "riqueza", cotidiano: "vida cotidiana", gostemos: "(gostemos ou não) nos guste o no",
                "discuti-lo": "discutirlo" },
       questions: [
-        ["¿Qué pensaba Freyre del mestizaje?", ["que era la gran originalidad de Brasil", "que condenaba al país al atraso", "que había que evitarlo", "que era un invento europeo"], "que era la gran originalidad de Brasil"],
+        ["¿Qué pensaba Freyre del mestizaje?", ["que era la gran originalidad de Brasil", "que condenaba al país al atraso y a la pobreza", "que había que evitarlo", "que era un invento europeo"], "que era la gran originalidad de Brasil"],
         ["¿Qué critica el texto del libro?", ["que suaviza la violencia de la esclavitud", "que está mal escrito", "que habla de comida", "que es demasiado corto"], "que suaviza la violencia de la esclavitud"],
-        ["¿Qué pasa con la expresión «democracia racial»?", ["no aparece en el libro de 1933, pero quedó asociada a él", "es el título del libro", "la inventó Florestan Fernandes para elogiarlo", "es de Franz Boas"], "no aparece en el libro de 1933, pero quedó asociada a él"],
+        ["¿Qué pasa con la expresión «democracia racial»?", ["no aparece en el libro de 1933, pero quedó asociada a él", "es el título del libro", "la inventó Florestan Fernandes en los años sesenta para elogiarlo", "es de Franz Boas"], "no aparece en el libro de 1933, pero quedó asociada a él"],
         ["¿Por qué se sigue leyendo a Freyre, según el texto?", ["por la riqueza con que describe la colonia y porque creó imágenes con que Brasil se piensa", "porque tiene razón en todo", "porque es obligatorio en la escuela", "porque es corto"], "por la riqueza con que describe la colonia y porque creó imágenes con que Brasil se piensa"]
       ],
       hunt: { label: "Tocá los dos espacios del libro (casa-grande, senzala)", targets:
@@ -788,10 +791,10 @@
                cais: "muelle", ameaça: "amenaza", tormentas: "tormentas", prêmio: "premio",
                leva: "lleva" },
       questions: [
-        ["¿Qué pasó en 1498?", ["Vasco da Gama llegó a la India", "Cabral llegó a Brasil", "se conquistó Ceuta", "se publicó Os Lusíadas"], "Vasco da Gama llegó a la India"],
-        ["¿Qué hay de leyenda en la vida de Camões?", ["que salvó el manuscrito nadando con él en alto", "que perdió un ojo", "que vivió en Oriente", "que murió en Lisboa"], "que salvó el manuscrito nadando con él en alto"],
+        ["¿Qué pasó en 1498?", ["Vasco da Gama llegó a la India", "Cabral llegó a Brasil con su flota", "se conquistó Ceuta", "se publicó Os Lusíadas"], "Vasco da Gama llegó a la India"],
+        ["¿Qué hay de leyenda en la vida de Camões?", ["que salvó el manuscrito nadando con él en alto", "que perdió un ojo peleando en el norte de África", "que vivió en Oriente", "que murió en Lisboa"], "que salvó el manuscrito nadando con él en alto"],
         ["¿Quién es el héroe del poema?", ["un pueblo, los portugueses", "Vasco da Gama solo", "Adamastor", "el propio Camões"], "un pueblo, los portugueses"],
-        ["¿Qué hace el viejo del Restelo?", ["condena la ambición de los viajes", "amenaza a los navegantes", "guía la flota", "escribe el poema"], "condena la ambición de los viajes"]
+        ["¿Qué hace el viejo del Restelo?", ["condena la ambición de los viajes", "amenaza a los navegantes con una tormenta", "guía la flota", "escribe el poema"], "condena la ambición de los viajes"]
       ],
       hunt: { label: "Tocá los lugares del viaje (Ceuta, Calecute, Índia, Mekong…)", targets:
         ["ceuta", "calecute", "índia", "brasil", "oriente", "mekong", "taprobana", "restelo"] } },
@@ -831,8 +834,8 @@
                equívoco: "malentendido", desfazer: "deshacer" },
       questions: [
         ["¿De dónde viene la palabra «cordial» en el sentido de Sérgio Buarque?", ["del latín cor, corazón", "de la cortesía francesa", "de una palabra tupí", "de Ribeiro Couto, que la inventó con otro sentido"], "del latín cor, corazón"],
-        ["¿Cómo actúa el «hombre cordial»?", ["movido por las emociones y la intimidad, no por reglas impersonales", "siempre con amabilidad", "según la ley", "con frialdad"], "movido por las emociones y la intimidad, no por reglas impersonales"],
-        ["¿Qué error cometió Cassiano Ricardo?", ["entendió la cordialidad como bondad", "dijo que el libro era suyo", "negó la herencia ibérica", "reescribió el libro"], "entendió la cordialidad como bondad"],
+        ["¿Cómo actúa el «hombre cordial»?", ["movido por las emociones y la intimidad, no por reglas impersonales", "siempre con amabilidad", "según la ley", "con frialdad y distancia, siempre según reglas impersonales y escritas"], "movido por las emociones y la intimidad, no por reglas impersonales"],
+        ["¿Qué error cometió Cassiano Ricardo?", ["entendió la cordialidad como bondad", "dijo que el libro era suyo", "dijo que el libro negaba la herencia ibérica", "reescribió el libro"], "entendió la cordialidad como bondad"],
         ["¿Qué relación tiene Sérgio Buarque con Chico Buarque?", ["es su padre", "es su hermano", "es su abuelo", "ninguna"], "es su padre"]
       ],
       hunt: { label: "Tocá las palabras de la familia de «coração» (cordial, cordialidade…)", targets:
@@ -875,9 +878,9 @@
                anulada: "anulada", fruto: "fruto" },
       questions: [
         ["¿Por qué Vieira les predica a los peces?", ["porque los colonos no querían escucharlo", "porque era una tradición de Maranhão", "porque se lo pidió el rey", "porque estaba en un barco"], "porque los colonos no querían escucharlo"],
-        ["¿Quiénes son los «peces grandes que comen a los chicos»?", ["los colonos que esclavizaban a los indígenas", "los jesuitas", "los holandeses", "los reyes de Portugal"], "los colonos que esclavizaban a los indígenas"],
-        ["¿Qué límite de su pensamiento señala el texto?", ["aceptaba la esclavitud africana", "no creía en Dios", "odiaba a los indígenas", "defendía a la Inquisición"], "aceptaba la esclavitud africana"],
-        ["¿Por qué lo procesó la Inquisición?", ["por sus profecías del Quinto Imperio", "por defender a los indígenas", "por robar", "por escribir en portugués"], "por sus profecías del Quinto Imperio"]
+        ["¿Quiénes son los «peces grandes que comen a los chicos»?", ["los colonos que esclavizaban a los indígenas", "los jesuitas", "los holandeses", "los reyes de Portugal y sus gobernadores en Brasil"], "los colonos que esclavizaban a los indígenas"],
+        ["¿Qué límite de su pensamiento señala el texto?", ["aceptaba la esclavitud africana", "no creía en Dios", "odiaba a los indígenas", "defendía a la Inquisición y sus castigos"], "aceptaba la esclavitud africana"],
+        ["¿Por qué lo procesó la Inquisición?", ["por sus profecías del Quinto Imperio", "por defender a los indígenas contra los colonos", "por robar", "por escribir en portugués"], "por sus profecías del Quinto Imperio"]
       ],
       hunt: { label: "Tocá las formas de «pregar» y «sermão» (pregado, pregou, sermões…)", targets:
         ["sermões", "sermão", "pregado", "pregou", "pregador", "pregar", "prega"] } },
@@ -918,8 +921,8 @@
       questions: [
         ["¿Qué pasó con quienes huyeron a la orilla del Tajo?", ["los alcanzó un tsunami", "se salvaron en barcos", "los detuvo la policía", "vieron el incendio desde lejos"], "los alcanzó un tsunami"],
         ["¿Qué ridiculiza Voltaire en Cándido?", ["el optimismo de Leibniz", "a los jesuitas", "al rey de Portugal", "la ciencia moderna"], "el optimismo de Leibniz"],
-        ["¿Qué se sabe de la frase «enterrar a los muertos y cuidar a los vivos»?", ["no hay pruebas de que la dijera Pombal", "la dijo Pombal en un discurso", "es de Voltaire", "está en la ley de reconstrucción"], "no hay pruebas de que la dijera Pombal"],
-        ["¿Qué relación tiene Pombal con Río de Janeiro?", ["en su gobierno Río pasó a ser la capital de Brasil", "nació en Río", "reconstruyó Río después de un terremoto", "expulsó a los cariocas"], "en su gobierno Río pasó a ser la capital de Brasil"]
+        ["¿Qué se sabe de la frase «enterrar a los muertos y cuidar a los vivos»?", ["no hay pruebas de que la dijera Pombal", "la dijo Pombal en un discurso", "es de Voltaire", "está escrita en la ley de reconstrucción"], "no hay pruebas de que la dijera Pombal"],
+        ["¿Qué relación tiene Pombal con Río de Janeiro?", ["en su gobierno Río pasó a ser la capital de Brasil", "nació en Río", "reconstruyó Río después de un terremoto que la destruyó", "expulsó a los cariocas"], "en su gobierno Río pasó a ser la capital de Brasil"]
       ],
       hunt: { label: "Tocá las palabras de la catástrofe (abalos, tsunami, incêndios…)", targets:
         ["abalos", "desabamentos", "tsunami", "incêndios", "ruínas", "catástrofe", "tremores", "terremoto"] } },
@@ -960,9 +963,9 @@
                leem: "leen" },
       questions: [
         ["¿Qué hizo Darcy Ribeiro en los años 1960?", ["fue el primer rector de la Universidad de Brasilia", "construyó el Sambódromo", "escribió O Povo Brasileiro", "fue presidente"], "fue el primer rector de la Universidad de Brasilia"],
-        ["¿Cuáles son las tres matrices del pueblo brasileño según Darcy?", ["la indígena, la portuguesa y la africana", "la europea, la asiática y la americana", "la del Norte, el Sur y el Centro", "la católica, la judía y la africana"], "la indígena, la portuguesa y la africana"],
+        ["¿Cuáles son las tres matrices del pueblo brasileño según Darcy?", ["la indígena, la portuguesa y la africana", "la europea, la asiática y la americana del norte", "la del Norte, el Sur y el Centro", "la católica, la judía y la africana"], "la indígena, la portuguesa y la africana"],
         ["¿Qué es la «ninguendade»?", ["no reconocerse ni como indígena, ni como portugués, ni como africano", "la falta de escuelas", "el exilio de Darcy", "un pueblo indígena"], "no reconocerse ni como indígena, ni como portugués, ni como africano"],
-        ["¿Qué critican hoy algunos del libro?", ["que generaliza y habla por pueblos que observaba desde afuera", "que es demasiado corto", "que no habla de Brasil", "que no tiene humor"], "que generaliza y habla por pueblos que observaba desde afuera"]
+        ["¿Qué critican hoy algunos del libro?", ["que generaliza y habla por pueblos que observaba desde afuera", "que es demasiado corto y deja afuera a los pueblos indígenas del Sur", "que no habla de Brasil", "que no tiene humor"], "que generaliza y habla por pueblos que observaba desde afuera"]
       ],
       hunt: { label: "Tocá los «Brasis» regionales y las tres matrices", targets:
         ["indígena", "portuguesa", "africana", "crioulo", "caboclo", "sertanejo", "caipira", "sulino"] } },
@@ -1000,9 +1003,9 @@
                preciso: "necesario", remonta: "se remonta", discordam: "discrepan",
                justamente: "justamente" },
       questions: [
-        ["¿Qué es un heterónimo, según el texto?", ["un autor completo, con biografía y estilo propios", "un seudónimo cualquiera", "un personaje de novela", "un poema largo"], "un autor completo, con biografía y estilo propios"],
-        ["¿Qué descubrieron los especialistas sobre el «día triunfal»?", ["que la historia fue, como mínimo, embellecida", "que fue en 1935", "que los poemas eran de Reis", "que nunca existió Caeiro"], "que la historia fue, como mínimo, embellecida"],
-        ["¿De quién viene «Navegar é preciso»?", ["del general romano Pompeyo, según Plutarco", "de Pessoa", "de Camões", "de Caetano Veloso"], "del general romano Pompeyo, según Plutarco"],
+        ["¿Qué es un heterónimo, según el texto?", ["un autor completo, con biografía y estilo propios", "un seudónimo cualquiera, sin biografía ni estilo propio", "un personaje de novela", "un poema largo"], "un autor completo, con biografía y estilo propios"],
+        ["¿Qué descubrieron los especialistas sobre el «día triunfal»?", ["que la historia fue, como mínimo, embellecida", "que fue en 1935", "que los poemas de ese día eran de Ricardo Reis", "que nunca existió Caeiro"], "que la historia fue, como mínimo, embellecida"],
+        ["¿De quién viene «Navegar é preciso»?", ["del general romano Pompeyo, según Plutarco", "de Pessoa", "de Camões, en el canto primero de Os Lusíadas", "de Caetano Veloso"], "del general romano Pompeyo, según Plutarco"],
         ["¿Qué quiere decir «preciso» en esa frase?", ["necesario", "exacto", "caro", "rápido"], "necesario"]
       ],
       hunt: { label: "Tocá los apellidos de los heterónimos (Caeiro, Reis, Campos, Soares)", targets:
@@ -1043,9 +1046,9 @@
                fuzil: "fusil", rendeu: "(se rendeu) se rindió", retornados: "repatriados",
                saudou: "saludó", censurada: "censurada", gravação: "grabación" },
       questions: [
-        ["¿Qué fue el Estado Novo?", ["la dictadura de Salazar en Portugal", "la dictadura militar de Brasil", "un partido de oposición", "una revolución de 1974"], "la dictadura de Salazar en Portugal"],
-        ["¿Qué señal hizo salir a las tropas?", ["la canción «Grândola, Vila Morena» en la radio", "un disparo de cañón", "un discurso de Caetano", "las campanas de Lisboa"], "la canción «Grândola, Vila Morena» en la radio"],
-        ["¿Por qué se llama Revolución de los Claveles?", ["porque los soldados pusieron claveles en los fusiles", "porque se hizo en primavera", "porque Salazar odiaba las flores", "por una canción de Chico Buarque"], "porque los soldados pusieron claveles en los fusiles"],
+        ["¿Qué fue el Estado Novo?", ["la dictadura de Salazar en Portugal", "la dictadura militar de Brasil en los sesenta", "un partido de oposición", "una revolución de 1974"], "la dictadura de Salazar en Portugal"],
+        ["¿Qué señal hizo salir a las tropas?", ["la canción «Grândola, Vila Morena» en la radio", "un disparo de cañón", "un discurso de Marcelo Caetano por la televisión", "las campanas de Lisboa"], "la canción «Grândola, Vila Morena» en la radio"],
+        ["¿Por qué se llama Revolución de los Claveles?", ["porque los soldados pusieron claveles en los fusiles", "porque se hizo en primavera", "porque Salazar había prohibido vender flores en Lisboa", "por una canción de Chico Buarque"], "porque los soldados pusieron claveles en los fusiles"],
         ["¿Dónde murió Marcelo Caetano?", ["en Río de Janeiro", "en Lisboa", "en París", "en Luanda"], "en Río de Janeiro"]
       ],
       hunt: { label: "Tocá los países que se independizaron (Angola, Moçambique…)", targets:
@@ -1087,8 +1090,8 @@
                perante: "ante", escravista: "esclavista", serviam: "servían", desajuste: "desajuste",
                estrangeiro: "extranjero", demora: "tarda", marcar: "(vamos marcar) arreglemos un día" },
       questions: [
-        ["¿Cuándo aparece el «¿Usted sabe con quién está hablando?», según DaMatta?", ["cuando una regla impersonal amenaza a alguien", "en el Carnaval", "cuando alguien se presenta", "en las procesiones"], "cuando una regla impersonal amenaza a alguien"],
-        ["¿Cómo veía DaMatta el «jeitinho»?", ["como una forma de navegar entre la ley y las relaciones, no solo como corrupción", "como pura corrupción", "como algo inofensivo", "como un invento portugués"], "como una forma de navegar entre la ley y las relaciones, no solo como corrupción"],
+        ["¿Cuándo aparece el «¿Usted sabe con quién está hablando?», según DaMatta?", ["cuando una regla impersonal amenaza a alguien", "en el Carnaval", "cuando alguien se presenta en una fiesta formal", "en las procesiones"], "cuando una regla impersonal amenaza a alguien"],
+        ["¿Cómo veía DaMatta el «jeitinho»?", ["como una forma de navegar entre la ley y las relaciones, no solo como corrupción", "como pura corrupción, un vicio que habría que eliminar con leyes más duras y castigos", "como algo inofensivo", "como un invento portugués"], "como una forma de navegar entre la ley y las relaciones, no solo como corrupción"],
         ["¿Por qué las ideas liberales estaban «fuera de lugar»?", ["porque se adoptaron en una sociedad esclavista", "porque venían de Asia", "porque nadie las conocía", "porque las prohibió el Imperio"], "porque se adoptaron en una sociedad esclavista"],
         ["¿Qué relación dominaba entre propietarios y hombres libres pobres, según Schwarz?", ["el favor", "el contrato", "la ley", "la amistad"], "el favor"]
       ],
@@ -1134,9 +1137,9 @@
                comboio: "tren (en Portugal)", rapariga: "chica (en Portugal); ofensivo en Brasil" },
       questions: [
         ["¿Quién era el hombre más sabio que conoció Saramago?", ["su abuelo, que no sabía leer ni escribir", "su maestro de la escuela técnica", "Fernando Pessoa", "un rey portugués"], "su abuelo, que no sabía leer ni escribir"],
-        ["¿Qué tiene de raro la puntuación de Saramago?", ["diálogos sin rayas ni comillas, separados por comas y mayúsculas", "no usa puntos", "escribe todo en mayúsculas", "usa signos de pregunta al principio"], "diálogos sin rayas ni comillas, separados por comas y mayúsculas"],
-        ["¿Por qué se fue a Lanzarote?", ["porque el gobierno vetó la candidatura de su libro a un premio", "porque ganó el Nobel", "porque se jubiló", "por el clima"], "porque el gobierno vetó la candidatura de su libro a un premio"],
-        ["¿Qué encuentra el lector brasileño en sus libros?", ["el portugués europeo: «estava a fazer», «o comboio»", "portugués de Brasil", "traducciones al español", "notas en inglés"], "el portugués europeo: «estava a fazer», «o comboio»"]
+        ["¿Qué tiene de raro la puntuación de Saramago?", ["diálogos sin rayas ni comillas, separados por comas y mayúsculas", "no usa puntos", "escribe todo en mayúsculas", "usa signos de pregunta y de exclamación al principio, como en español"], "diálogos sin rayas ni comillas, separados por comas y mayúsculas"],
+        ["¿Por qué se fue a Lanzarote?", ["porque el gobierno vetó la candidatura de su libro a un premio", "porque ganó el Nobel y quería vivir tranquilo, lejos de los periodistas", "porque se jubiló", "por el clima"], "porque el gobierno vetó la candidatura de su libro a un premio"],
+        ["¿Qué encuentra el lector brasileño en sus libros?", ["el portugués europeo: «estava a fazer», «o comboio»", "el portugués de Brasil de siempre: «estava fazendo», «o trem»", "traducciones al español", "notas en inglés"], "el portugués europeo: «estava a fazer», «o comboio»"]
       ],
       hunt: { label: "Tocá las palabras de la puntuación (pontuação, travessão, aspas…)", targets:
         ["pontuação", "travessão", "aspas", "vírgulas", "maiúsculas"] } },
@@ -1179,9 +1182,9 @@
                modinha: "canción sentimental brasileña", imaterial: "inmaterial", leve: "liviana",
                matar: "(matar a saudade) volver a ver lo que se extrañaba", tuas: "tuyas" },
       questions: [
-        ["¿Es verdad que «saudade» solo existe en portugués?", ["no: el gallego también la tiene, y otras lenguas tienen palabras parecidas", "sí, es única en el mundo", "sí, pero solo en Brasil", "no: viene del español"], "no: el gallego también la tiene, y otras lenguas tienen palabras parecidas"],
+        ["¿Es verdad que «saudade» solo existe en portugués?", ["no: el gallego también la tiene, y otras lenguas tienen palabras parecidas", "sí, es única en el mundo", "sí: ninguna otra lengua del mundo tiene una palabra para eso, ni el gallego", "no: viene del español"], "no: el gallego también la tiene, y otras lenguas tienen palabras parecidas"],
         ["¿Quién escribió sobre la saudade ya en el siglo XV?", ["el rey D. Duarte", "Camões", "Eduardo Lourenço", "Amália Rodrigues"], "el rey D. Duarte"],
-        ["Según Lourenço, ¿qué obligó a Portugal a enfrentar su propio tamaño?", ["el 25 de Abril y la pérdida de las colonias", "el terremoto de 1755", "la entrada en la Unión Europea", "el fado"], "el 25 de Abril y la pérdida de las colonias"],
+        ["Según Lourenço, ¿qué obligó a Portugal a enfrentar su propio tamaño?", ["el 25 de Abril y la pérdida de las colonias", "el terremoto de 1755", "la entrada de Portugal en la Comunidad Europea", "el fado"], "el 25 de Abril y la pérdida de las colonias"],
         ["¿Cómo se dice «te extraño» en Portugal, según el texto?", ["tenho saudades tuas", "estou com saudade de você", "vim matar a saudade", "que saudade"], "tenho saudades tuas"]
       ],
       hunt: { label: "Tocá todas las saudades", targets: ["saudade", "saudades"] } },
@@ -1225,7 +1228,7 @@
                sotaques: "tonadas, acentos" },
       questions: [
         ["¿Dónde podría decidirse el futuro del portugués, según el texto?", ["en África", "en Portugal", "en Brasil", "en Asia"], "en África"],
-        ["¿Qué encuentran el viejo y el chico en Terra Sonâmbula?", ["cuadernos que cuentan otra historia", "un tesoro", "un camión", "a sus padres"], "cuadernos que cuentan otra historia"],
+        ["¿Qué encuentran el viejo y el chico en Terra Sonâmbula?", ["cuadernos que cuentan otra historia", "un tesoro escondido debajo de un baobab", "un camión", "a sus padres"], "cuadernos que cuentan otra historia"],
         ["¿Qué une el título «Estórias Abensonhadas»?", ["«abençoadas» y «sonhadas»", "«histórias» y «estrelas»", "dos lenguas bantúes", "portugués e inglés"], "«abençoadas» y «sonhadas»"],
         ["¿Cómo se dice «estoy leyendo» en Maputo?", ["estou a ler", "estou lendo", "estou ler", "leio agora"], "estou a ler"]
       ],
@@ -1267,9 +1270,9 @@
                peixe: "pescado", feijão: "porotos", aplaude: "aplaude", "pôr": "(pôr do sol) atardecer",
                pedras: "piedras" },
       questions: [
-        ["¿Dónde desayuna Martín?", ["en la panadería de la esquina", "en la playa", "en casa de Bia", "en un quiosco"], "en la panadería de la esquina"],
+        ["¿Dónde desayuna Martín?", ["en la panadería de la esquina", "en la playa", "en la casa de Bia, en la cocina", "en un quiosco"], "en la panadería de la esquina"],
         ["¿Qué extraña el vendedor de coco?", ["la comida de su tierra", "a su familia", "el frío", "el mar de Bahía"], "la comida de su tierra"],
-        ["¿Qué hace la gente al final de la tarde en el Arpoador?", ["aplaude la puesta del sol", "se va a su casa", "baila samba", "surfea"], "aplaude la puesta del sol"]
+        ["¿Qué hace la gente al final de la tarde en el Arpoador?", ["aplaude la puesta del sol", "se va a su casa antes de que oscurezca", "baila samba", "surfea"], "aplaude la puesta del sol"]
       ],
       hunt: { label: "Tocá todas las contracciones (no, na, do, da, num, dela…)", targets:
         ["no", "na", "nas", "do", "da", "dos", "num", "numa", "neste", "dela"] } },
@@ -1297,9 +1300,9 @@
                mímica: "mímica", ri: "se ríe", janta: "cena", varanda: "balcón",
                embaixo: "(lá embaixo) allá abajo", dinheiro: "plata" },
       questions: [
-        ["¿Por qué se despiertan temprano?", ["por el tranvía, que pasa a las siete", "por el gato", "por el trabajo", "por la feria"], "por el tranvía, que pasa a las siete"],
-        ["¿Qué hacen el sábado?", ["limpieza general y después van a la feria", "van a la playa", "duermen hasta tarde", "cocinan pizza"], "limpieza general y después van a la feria"],
-        ["¿Qué hacen cuando Martín no sabe una palabra?", ["la buscan en el diccionario o él hace mímica", "hablan en español", "llaman a la mamá de Bia", "no hablan más"], "la buscan en el diccionario o él hace mímica"]
+        ["¿Por qué se despiertan temprano?", ["por el tranvía, que pasa a las siete", "por el gato", "por el trabajo, que empieza a las ocho", "por la feria"], "por el tranvía, que pasa a las siete"],
+        ["¿Qué hacen el sábado?", ["limpieza general y después van a la feria", "van a la playa", "duermen hasta tarde y después van a la playa", "cocinan pizza"], "limpieza general y después van a la feria"],
+        ["¿Qué hacen cuando Martín no sabe una palabra?", ["la buscan en el diccionario o él hace mímica", "hablan en español", "llaman a la mamá de Bia para que les traduzca", "no hablan más"], "la buscan en el diccionario o él hace mímica"]
       ],
       hunt: { label: "Tocá todos los «gente» de «a gente»", targets: ["gente"] } },
 
@@ -1333,7 +1336,7 @@
                chegando: "llegando", saindo: "saliendo", parado: "quieto" },
       questions: [
         ["¿Qué hace el señor de ochenta años?", ["corre en malla", "vende choclo", "juega al fútbol-vóley", "hace yoga"], "corre en malla"],
-        ["¿Qué vende el vendedor del isopor?", ["mate y galletitas", "choclo", "agua de coco", "helados"], "mate y galletitas"],
+        ["¿Qué vende el vendedor del isopor?", ["mate y galletitas", "choclo", "agua de coco y cerveza", "helados"], "mate y galletitas"],
         ["¿Dónde está Bia cuando llama?", ["saliendo del subte", "en la playa", "en casa", "en el colectivo"], "saliendo del subte"]
       ],
       hunt: { label: "Tocá todos los gerundios (olhando, correndo…)", targets:
@@ -1368,7 +1371,7 @@
                vermelha: "colorada", "tá": "(tá bom) bueno, está bien (coloquial)" },
       questions: [
         ["¿De quién es el estante de arriba?", ["de Bia", "de Martín", "de Carol", "de Rafa"], "de Bia"],
-        ["¿Por qué los brasileños prefieren «dele» y «dela»?", ["porque «seu» puede ser de você, de él o de ella", "porque «seu» es grosero", "porque es más corto", "porque «seu» es de Portugal"], "porque «seu» puede ser de você, de él o de ella"],
+        ["¿Por qué los brasileños prefieren «dele» y «dela»?", ["porque «seu» puede ser de você, de él o de ella", "porque «seu» es grosero", "porque es más corto", "porque «seu» se usa solo en Portugal, no en Brasil"], "porque «seu» puede ser de você, de él o de ella"],
         ["¿De quién es el chocolate?", ["de Carol", "de Bia", "de Martín", "de Rafa"], "de Carol"]
       ],
       hunt: { label: "Tocá todos los dele, dela, deles, delas", targets: ["dele", "dela", "deles", "delas"] } },
@@ -1402,7 +1405,7 @@
                acordar: "despertarse", cedo: "temprano", menos: "menos", serve: "sirve",
                pudim: "flan", leite: "leche", adorei: "me encantó", receita: "receta" },
       questions: [
-        ["¿Qué pasa con la caipirinha?", ["a Martín le gusta, pero solo una", "no le gusta", "toma muchas", "no la conoce"], "a Martín le gusta, pero solo una"],
+        ["¿Qué pasa con la caipirinha?", ["a Martín le gusta, pero solo una", "no le gusta", "toma muchas", "no le gusta: prefiere la cerveza"], "a Martín le gusta, pero solo una"],
         ["¿De qué equipo es la familia de Bia?", ["del Botafogo", "del Flamengo", "de Boca", "del Vasco"], "del Botafogo"],
         ["¿Qué pide Martín al final?", ["la receta del flan", "otra caipirinha", "más feijoada", "un café"], "la receta del flan"]
       ],
@@ -1437,8 +1440,8 @@
                pede: "pide", escrita: "escritura" },
       questions: [
         ["¿Adónde se mudó Carol?", ["a Botafogo", "a Santa Teresa", "a Niterói", "a Copacabana"], "a Botafogo"],
-        ["¿Dónde se encuentran el sábado?", ["en la puerta del subte, a las ocho", "en la casa de Carol", "en la playa", "en el trabajo de Martín"], "en la puerta del subte, a las ocho"],
-        ["¿Qué dice el texto de la escritura formal en Brasil?", ["la gramática pide no empezar la frase con «me» o «te»", "que se usa siempre «me liga»", "que se escribe como en los mensajes", "que no se usan pronombres"], "la gramática pide no empezar la frase con «me» o «te»"]
+        ["¿Dónde se encuentran el sábado?", ["en la puerta del subte, a las ocho", "en la casa de Carol", "en la playa", "en la puerta del trabajo de Martín, a las siete"], "en la puerta del subte, a las ocho"],
+        ["¿Qué dice el texto de la escritura formal en Brasil?", ["la gramática pide no empezar la frase con «me» o «te»", "que se usa siempre «me liga»", "que se escribe exactamente igual que en los mensajes de WhatsApp", "que no se usan pronombres"], "la gramática pide no empezar la frase con «me» o «te»"]
       ],
       hunt: { label: "Tocá todos los pronombres me, te, se (y los de Portugal)", targets:
         ["me", "te", "se", "liga-me", "espero-te"] } },
@@ -1471,8 +1474,8 @@
                séries: "series", cozinhado: "cocinado", acabou: "terminó", sonhado: "soñado",
                chovido: "llovido", janela: "ventana" },
       questions: [
-        ["¿Por qué Martín viene llegando tarde al trabajo?", ["porque el tranvía no pasa y las calles parecen ríos", "porque se queda dormido", "porque se mudó", "porque trabaja de noche"], "porque el tranvía no pasa y las calles parecen ríos"],
-        ["¿Qué viene vendiendo seu Almir?", ["más caldo verde que chopp", "más chopp que nunca", "paraguas", "nada"], "más caldo verde que chopp"],
+        ["¿Por qué Martín viene llegando tarde al trabajo?", ["porque el tranvía no pasa y las calles parecen ríos", "porque se queda dormido todas las mañanas desde que se mudó", "porque se mudó", "porque trabaja de noche"], "porque el tranvía no pasa y las calles parecen ríos"],
+        ["¿Qué viene vendiendo seu Almir?", ["más caldo verde que chopp", "más chopp que caldo verde", "paraguas", "nada"], "más caldo verde que chopp"],
         ["¿Cómo se traduce casi siempre «he estudiado»?", ["estudei", "tenho estudado", "estudava", "tinha estudado"], "estudei"]
       ],
       hunt: { label: "Tocá los auxiliares (tenho, tem, têm) y sus participios", targets:
@@ -1505,7 +1508,7 @@
       questions: [
         ["¿De qué color hay que vestirse según la tradición?", ["de blanco", "de rojo", "de amarillo", "de negro"], "de blanco"],
         ["¿Qué pasa si dejás el boleto del subte para último momento?", ["vas a hacer horas de fila", "no podés entrar a la playa", "es más barato", "no pasa nada"], "vas a hacer horas de fila"],
-        ["¿Qué se hace en el mar después de los fuegos?", ["saltar siete olas pidiendo un deseo en cada una", "nadar hasta una boya", "tirar botellas", "bañarse con ropa roja"], "saltar siete olas pidiendo un deseo en cada una"]
+        ["¿Qué se hace en el mar después de los fuegos?", ["saltar siete olas pidiendo un deseo en cada una", "nadar hasta una boya y volver antes del amanecer", "tirar botellas", "bañarse con ropa roja"], "saltar siete olas pidiendo un deseo en cada una"]
       ],
       hunt: { label: "Tocá los verbos en futuro do subjuntivo (quiser, puder, der…)", targets:
         ["passar", "sair", "quiser", "puder", "deixar", "vier", "der", "tiver", "chover", "houver", "acabar"] } },
@@ -1538,7 +1541,7 @@
                pernas: "piernas", descansar: "descansar", desce: "baja", devagar: "despacio",
                lixo: "basura", escuta: "escucha" },
       questions: [
-        ["¿Por qué conviene salir temprano?", ["para no agarrar el sol fuerte en la subida", "porque la favela cierra", "porque el subte deja de andar", "para ver el amanecer"], "para no agarrar el sol fuerte en la subida"],
+        ["¿Por qué conviene salir temprano?", ["para no agarrar el sol fuerte en la subida", "porque la favela cierra", "porque el subte deja de andar a media mañana", "para ver el amanecer"], "para no agarrar el sol fuerte en la subida"],
         ["¿Cómo llegan al comienzo del sendero?", ["en mototaxi", "a pie desde Ipanema", "en colectivo", "en teleférico"], "en mototaxi"],
         ["Según Bia, ¿para qué sirve el infinitivo personal?", ["para que no haya dudas de quién hace qué", "para hablar más formal", "para hablar del pasado", "para dar órdenes"], "para que no haya dudas de quién hace qué"]
       ],
@@ -1574,8 +1577,8 @@
                ajudante: "ayudante", perdido: "perdido", atende: "(atende pelo nome de) responde al nombre de",
                pipoca: "pochoclo", tomara: "ojalá" },
       questions: [
-        ["¿Qué se hace en la cerrajería de Lapa?", ["copias de llaves en el momento", "bicicletas", "tablas de surf", "hielo"], "copias de llaves en el momento"],
-        ["¿Por qué el verbo va a veces en plural?", ["porque concuerda con la cosa: pranchas son vendidas", "porque hay muchos vendedores", "porque es más educado", "porque es un error"], "porque concuerda con la cosa: pranchas son vendidas"],
+        ["¿Qué se hace en la cerrajería de Lapa?", ["copias de llaves en el momento", "bicicletas", "arreglos de tablas de surf y bicicletas", "hielo"], "copias de llaves en el momento"],
+        ["¿Por qué el verbo va a veces en plural?", ["porque concuerda con la cosa: pranchas son vendidas", "porque hay muchos vendedores: los que venden pranchas", "porque es más educado", "porque es un error"], "porque concuerda con la cosa: pranchas son vendidas"],
         ["¿Cómo se llama el perro perdido?", ["Pipoca", "Pranchas", "Botafogo", "Catete"], "Pipoca"]
       ],
       hunt: { label: "Tocá todos los verbos con se (aluga-se, vendem-se…)", targets:
@@ -1610,8 +1613,8 @@
                barca: "ferry", volta: "vuelta", devolve: "devuelve", repara: "fijate",
                academia: "gimnasio" },
       questions: [
-        ["¿Dónde cenan el viernes a la noche?", ["en el bar de seu Almir, en la mesa de la ventana", "en Niterói", "en un restaurante de Ipanema", "en casa"], "en el bar de seu Almir, en la mesa de la ventana"],
-        ["¿Por qué «ida a Niterói» no lleva crase?", ["porque se dice «venho de Niterói», sin artículo", "porque Niterói es masculino", "porque es una ciudad chica", "porque es un error"], "porque se dice «venho de Niterói», sin artículo"],
+        ["¿Dónde cenan el viernes a la noche?", ["en el bar de seu Almir, en la mesa de la ventana", "en Niterói", "en un restaurante de Ipanema, en la mesa de afuera", "en casa"], "en el bar de seu Almir, en la mesa de la ventana"],
+        ["¿Por qué «ida a Niterói» no lleva crase?", ["porque se dice «venho de Niterói», sin artículo", "porque Niterói es masculino: se dice «o Niterói»", "porque es una ciudad chica", "porque es un error"], "porque se dice «venho de Niterói», sin artículo"],
         ["¿A dónde no quiere ir la madre?", ["al gimnasio", "a la playa", "a la feria", "al museo"], "al gimnasio"]
       ],
       hunt: { label: "Tocá todas las crases (à, às, àquela, àquele)", targets: ["à", "às", "àquela", "àquele"] } },
@@ -1646,9 +1649,9 @@
                "paliçada": "empalizada", "vê-la": "verla", flecha: "flecha", atingiu: "alcanzó",
                rosto: "cara", tio: "tío", cronistas: "cronistas" },
       questions: [
-        ["¿Por qué, según la tradición, se llama «Rio de Janeiro»?", ["los navegantes creyeron que la bahía era la desembocadura de un río", "había un río enorme en enero", "así se llamaba el barco", "por un santo de enero"], "los navegantes creyeron que la bahía era la desembocadura de un río"],
+        ["¿Por qué, según la tradición, se llama «Rio de Janeiro»?", ["los navegantes creyeron que la bahía era la desembocadura de un río", "en enero había un río enorme que desembocaba en la bahía de Guanabara", "así se llamaba el barco", "por un santo de enero"], "los navegantes creyeron que la bahía era la desembocadura de un río"],
         ["¿Qué fundaron los franceses en 1555?", ["la Francia Antártica, en una isla de la bahía", "la ciudad de Río", "un fuerte en el Pan de Azúcar", "una aldea tupinambá"], "la Francia Antártica, en una isla de la bahía"],
-        ["¿Cómo murió Estácio de Sá?", ["por una flecha en la cara, en la batalla de 1567", "de viejo, en Lisboa", "en un naufragio", "en el fuerte francés en 1560"], "por una flecha en la cara, en la batalla de 1567"]
+        ["¿Cómo murió Estácio de Sá?", ["por una flecha en la cara, en la batalla de 1567", "de viejo, en Lisboa", "en un naufragio", "en el ataque al fuerte francés de la isla, en 1560"], "por una flecha en la cara, en la batalla de 1567"]
       ],
       hunt: { label: "Tocá todos los verbos en mais-que-perfeito simples (entrara, fizera…)", targets:
         ["entrara", "achara", "dera", "fizera", "demorara", "esquecera", "destruíra", "fora", "mandara", "lutara", "chegara", "dissera"] } }
