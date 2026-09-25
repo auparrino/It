@@ -910,6 +910,19 @@
     // congiuntivo after a trigger; same grammatical person otherwise.
     var trig = OPINION.some(function (w) { return (" " + before + " ").indexOf(" " + w + " ") >= 0; }) ||
                /\b(che|prima che|benché|sebbene|affinché|purché)\s*$/.test(before);
+    // mangi, paghi, frequenti are presente (tu) and congiuntivo: without
+    // anything that asks for the congiuntivo (a trigger, *che/se* from its
+    // week on, a prompt that names it) they are read as presente, and a
+    // wrong person is a wrong person, not «acá va congiuntivo».
+    var CONG = /congiuntivo|congImperfetto/;
+    var congOk = trig || /congiuntiv|subjuntiv/i.test(String(ctx.prompt || "")) ||
+      (/\b(che|se)\b/.test(before) && (ctx.week == null || ctx.week >= 24));
+    if (!congOk) {
+      var feInd = fe.filter(function (x) { return !CONG.test(x.tense); });
+      if (feInd.length) fe = feInd;
+      var fgInd = fg.filter(function (x) { return !CONG.test(x.tense); });
+      if (fgInd.length) fg = fgInd;
+    }
     if (trig) fe = fe.slice().sort(function (a, b) {
       return (/congiuntivo|congImperfetto/.test(b.tense) ? 1 : 0) - (/congiuntivo|congImperfetto/.test(a.tense) ? 1 : 0);
     });
@@ -1686,7 +1699,7 @@
     } else {
       var ops = align(g, e);
       ops.forEach(function (o) {
-        var c = { e: e, ei: o.ei, g: g, gi: o.gi, names: nm, stem: ctx.stem, prompt: ctx.prompt, nominal: ctx.nominal };
+        var c = { e: e, ei: o.ei, g: g, gi: o.gi, names: nm, stem: ctx.stem, prompt: ctx.prompt, nominal: ctx.nominal, week: ctx.week };
         if (o.op === "sub") {
           var d = pairRules(o.g, o.e, c);
           found.push({ d: d, gi: o.gi, ei: o.ei });

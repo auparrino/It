@@ -429,6 +429,8 @@
     copy.orig = it.type;
     copy.options = shuffle(opts.slice(0, 3).concat([answer]));
     copy.prompt = it.type === "translate" ? (TX.translateQ || it.prompt) : it.prompt;
+    // Buttons, not a box: the prompt says choose («Escribí…» → «Elegí…»).
+    if (root.Devolucion) copy.prompt = root.Devolucion.choicePrompt(copy.prompt);
     // Said once, and only after a right answer: after a miss it reads as a threat.
     copy.recogNote = "La próxima vez esta la vas a escribir.";
     return copy;

@@ -67,7 +67,9 @@
     var C = conj(), L = C && C.TENSE_LABELS;
     if (t === "participio") return "participio";
     if (t === "gerundio") return "gerundio";
-    return (L && L[t]) || t;
+    var s = (L && L[t]) || t;
+    // the name of a tense not taught yet, in plain words (Devolucion)
+    return root.Devolucion ? root.Devolucion.tense(s) : s;
   }
 
   function personLabel(p) {
