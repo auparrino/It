@@ -278,6 +278,7 @@ LESSONS = {
          ["Paulo Freire alfabetizava adultos *para eles lerem* o mundo, não só a palavra.", "Paulo Freire alfabetizaba adultos para que leyeran el mundo, no solo la palabra."]]},
 
  {"h": "Cuándo no se flexiona",
+  "q": [{"prompt": "¿Cuál está bien? «Queremos vivir en Floripa.»", "answer": "Queremos morar em Floripa.", "options": ["Queremos morar em Floripa.", "Queremos morarmos em Floripa.", "Queremos a morar em Floripa."]}, {"prompt": "¿Cuál está bien? «Pueden salir ahora.»", "answer": "Eles podem sair agora.", "options": ["Eles podem sair agora.", "Eles podem saírem agora.", "Eles podem de sair agora."]}, {"prompt": "Elegí la que va", "stem": "Nós vamos ___ para o vestibular.", "answer": "estudar", "options": ["estudar", "estudarmos", "estudamos"]}],
   "r": "Con el mismo sujeto y verbos como *querer, poder, dever, ir, "
        "saber*, el infinitivo queda simple: *queremos viajar*, nunca "
        "«queremos viajarmos».",
@@ -639,6 +640,7 @@ LESSONS = {
          ["*Estou te esperando* no calçadão.", "Te estoy esperando en la rambla."]]},
 
  {"h": "Habla y escritura",
+  "q": [{"prompt": "En la escritura formal, «Vi ele ontem.» es…", "answer": "Vi-o ontem.", "options": ["Vi-o ontem.", "Vi-lo ontem.", "Vi-lhe ontem."]}, {"prompt": "En la escritura formal, «Me dá um café?» es…", "answer": "Dê-me um café.", "options": ["Dê-me um café.", "Me dê-me um café.", "Dá-me-lo um café."]}],
   "r": "Brasil hablado: próclise siempre (*me dá*, *te amo*) y *ele* como "
        "objeto (*vi ele*). En la escritura culta: *dá-me*, *vi-o*.",
   "table": {"head": ["Habla", "Escritura formal"],

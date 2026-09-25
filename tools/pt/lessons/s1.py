@@ -90,6 +90,7 @@ LESSONS = {
            "casi «cáhu»."]},
 
  {"h": "Vocales nasales",
+  "q": [{"prompt": "¿Cómo se escribe «pan» en portugués?", "answer": "pão", "options": ["pão", "pan", "pao"]}, {"prompt": "¿Cómo se escribe «madre» en portugués?", "answer": "mãe", "options": ["mãe", "mae", "mâe"]}, {"prompt": "¿Cuál tiene una vocal nasal?", "answer": "bom", "options": ["bom", "bola", "boa"]}],
   "r": "Con tilde (*ã, õ*) o ante *m, n* en la sílaba, la vocal suena "
        "**por la nariz**. La *-m* final no se cierra: nasaliza.",
   "ex": [["*mão*, *pão*, *não*", "mano, pan, no: «ão» por la nariz"],
@@ -176,6 +177,7 @@ LESSONS = {
 ],
 "blocks": [
  {"h": "El plural básico: -s y -ns",
+  "q": [{"prompt": "Plural de «o homem»", "answer": "os homens", "options": ["os homens", "os homems", "os homes"]}, {"prompt": "Plural de «a viagem»", "answer": "as viagens", "options": ["as viagens", "as viagems", "as viages"]}, {"prompt": "Plural de «o livro»", "answer": "os livros", "options": ["os livros", "os livroes", "os livro"]}],
   "r": "Vocal + *-s*: *casa → casas*. Las palabras en *-m* cambian a "
        "*-ns*: *homem → homens*, *som → sons*.",
   "ex": [["o livr*o* → os livr*os*", "el libro → los libros"],
@@ -220,6 +222,7 @@ LESSONS = {
           "*papéis*. Fijate en la tilde de *papéis* y *lençóis*."},
 
  {"h": "Masculino y femenino: lo general",
+  "q": [{"prompt": "¿Cuál está bien? «la ciudad»", "answer": "a cidade", "options": ["a cidade", "o cidade", "a cidada"]}, {"prompt": "¿Cuál está bien? «el problema»", "answer": "o problema", "options": ["o problema", "a problema", "o problemo"]}, {"prompt": "¿Cuál está bien? «la foto»", "answer": "a foto", "options": ["a foto", "o foto", "a fota"]}],
   "r": "Como en español: *-o* suele ser masculino y *-a* femenino. *-dade* "
        "es femenino; *-agem*, también: **siempre**.",
   "ex": [["*o* amigo / *a* amiga", "el amigo / la amiga"],
@@ -323,6 +326,7 @@ LESSONS = {
          "Pero con *o, a, os, as* la contracción es obligatoria."},
 
  {"h": "de + artículo: do, da, dos, das",
+  "q": [{"prompt": "Elegí la que va", "stem": "a praia ___ Leblon", "answer": "do", "options": ["do", "de o", "da"]}, {"prompt": "Elegí la que va", "stem": "a casa ___ Bia", "answer": "da", "options": ["da", "de a", "do"]}, {"prompt": "Elegí la que va", "stem": "Sou ___ Salvador.", "answer": "de", "options": ["de", "do", "da"]}],
   "r": "*de + o = do*, *de + a = da*: *a praia do Leblon*, *a casa da "
        "Bia*. Sin artículo, *de* queda solo: *de Buenos Aires*.",
   "table": {"head": ["de +", "o", "a", "os", "as"],

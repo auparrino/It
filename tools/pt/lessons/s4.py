@@ -50,6 +50,7 @@ LESSONS = {
           "Y *pesquisa* es investigación o encuesta, no «pesquisa» policial."},
 
  {"h": "La frase nominal: el estilo del informe",
+  "q": [{"prompt": "En estilo de informe: «Os preços aumentaram.»", "answer": "O aumento dos preços", "options": ["O aumento dos preços", "O aumento de os preços", "O aumentar dos preços"]}, {"prompt": "En estilo de informe: «O museu fechou.»", "answer": "O fechamento do museu", "options": ["O fechamento do museu", "O fechamento de o museu", "O fechar do museu"]}],
   "r": "El informe convierte la oración en un sustantivo con *de*: *os "
        "preços aumentaram → o aumento dos preços*.",
   "ex": [["Os preços aumentaram. → *O aumento dos preços*.", "Los precios subieron. → El aumento de los precios."],
@@ -116,6 +117,7 @@ LESSONS = {
          "«este / aquel» en español."},
 
  {"h": "Impersonalidad: constata-se, observa-se",
+  "q": [{"prompt": "¿Cuál va en un informe?", "answer": "Realizaram-se três reuniões.", "options": ["Realizaram-se três reuniões.", "Realizou-se três reuniões.", "Eu acho que teve três reuniões."]}, {"prompt": "¿Cuál va en un informe?", "answer": "Observa-se um aumento das chuvas.", "options": ["Observa-se um aumento das chuvas.", "Se observa um aumento das chuvas.", "Eu observo um aumento das chuvas."]}],
   "r": "El informe esconde al autor: pasiva con *se* (*observa-se*, "
        "*constatou-se*) o un *nós* de modestia (*analisamos*). Nada de *eu "
        "acho*.",
@@ -334,6 +336,7 @@ LESSONS = {
 ],
 "blocks": [
  {"h": "Abrir: Prezado, Caro, Olá",
+  "q": [{"prompt": "Un mail formal a una profesora que no conocés empieza…", "answer": "Prezada professora,", "options": ["Prezada professora,", "Querida professora,", "Oi, professora,"]}, {"prompt": "Un mail formal a una empresa, sin nombre, empieza…", "answer": "Prezados senhores,", "options": ["Prezados senhores,", "Queridos senhores,", "Olá, pessoal,"]}],
   "r": "El saludo formal es *Prezado(a)* + tratamiento o nombre. *Caro(a)* "
        "es más cercano; *Olá* u *Oi*, entre colegas.",
   "table": {"head": ["Registro", "Apertura"],
@@ -744,6 +747,7 @@ LESSONS = {
            "*giro* (PT) = *bonito* (BR)."]},
 
  {"h": "Sonidos: Portugal se come las vocales",
+  "q": [{"prompt": "Un portugués dice algo como «tlfón». ¿Qué palabra es?", "answer": "telefone", "options": ["telefone", "talvez", "tufão"]}, {"prompt": "¿Dónde se pronuncian todas las vocales átonas?", "answer": "en Brasil", "options": ["en Brasil", "en Portugal", "en los dos"]}],
   "r": "En Portugal las vocales átonas casi desaparecen (*telefone* ≈ "
        "«tlfón»). En Brasil se pronuncian todas, y *ti / di* suenan «chi / "
        "yi».",
@@ -774,6 +778,7 @@ LESSONS = {
          "portuguesa de 1808."},
 
  {"h": "África y Asia: el portugués de allá",
+  "q": [{"prompt": "En Luanda: «Gosto bué desta música.» ¿Qué quiere decir?", "answer": "Me gusta mucho esta música.", "options": ["Me gusta mucho esta música.", "Me gusta un poco esta música.", "No me gusta esta música."]}, {"prompt": "En Angola y Moçambique, la norma escrita sigue a…", "answer": "Portugal", "options": ["Portugal", "Brasil", "Cabo Verde"]}],
   "r": "Es oficial en Angola, Moçambique, Cabo Verde, Guiné-Bissau, São Tomé "
        "e Príncipe y Timor-Leste. Allá la norma escrita sigue a Portugal.",
   "ex": [["Em Luanda: Gosto *bué* desta música.", "En Luanda: me gusta mucho esta música."],
@@ -1010,6 +1015,7 @@ LESSONS = {
           "gente vai*, o *nós vamos*."},
 
  {"h": "vi ele → vi-o",
+  "q": [{"prompt": "En lo formal: «Vou ajudar ele.»", "answer": "Vou ajudá-lo.", "options": ["Vou ajudá-lo.", "Vou ajudar-lo.", "Vou ajudar-o."]}, {"prompt": "En lo formal: «Conheço ela.»", "answer": "Conheço-a.", "options": ["Conheço-a.", "Conheço-la.", "Conheço-lhe."]}],
   "r": "En el habla, *ele / ela* sirven de objeto (*vi ele*). En lo formal: "
        "*o, a, os, as* (*vi-o*, *eu o vi*) y *lhe* para el indirecto.",
   "table": {"head": ["Habla", "Formal"],
@@ -1026,6 +1032,7 @@ LESSONS = {
           "parti-los*."},
 
  {"h": "tem → há",
+  "q": [{"prompt": "En lo escrito: «Teve show no Circo Voador.»", "answer": "Houve show no Circo Voador.", "options": ["Houve show no Circo Voador.", "Há show no Circo Voador.", "Haverá show no Circo Voador."]}, {"prompt": "Completá (escrito)", "stem": "___ protestos no centro ontem.", "answer": "Houve", "options": ["Houve", "Houveram", "Tiveram"]}],
   "r": "El *tem* del habla pasa a *há* en lo escrito: *tinha → havia*, "
        "*teve → houve*, *vai ter → haverá*.",
   "ex": [["*Tem* muita gente na praia. → *Há* muitas pessoas na praia.", "Hay mucha gente en la playa."],

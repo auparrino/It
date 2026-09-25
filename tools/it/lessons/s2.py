@@ -339,6 +339,7 @@ LESSONS = {
   "tip": "Al principio de la frase, *mica* va solo, sin *non*: *Mica male!*"},
 
  {"h": "Exclamaciones con che, come, quanto",
+  "q": [{"prompt": "¿Cuál está bien? «¡Qué lindo día!»", "answer": "Che bella giornata!", "options": ["Che bella giornata!", "Che una bella giornata!", "Come bella giornata!"]}, {"prompt": "¿Cuál está bien? «¡Qué lástima!»", "answer": "Che peccato!", "options": ["Che peccato!", "Che un peccato!", "Come peccato!"]}],
   "r": "*Che* + sustantivo o adjetivo, **sin artículo**: *Che bello!* *Come* "
        "o *quanto* + verbo: *Come sei elegante!*",
   "ex": [["*Che* peccato!", "¡Qué lástima!"],
@@ -413,6 +414,7 @@ LESSONS = {
          "= ya se habrán ido."},
 
  {"h": "Futuro para suponer",
+  "q": [{"prompt": "¿Cuál está bien? «¿Dónde está Marco? — Estará en casa.»", "answer": "Dov'è Marco? — Sarà a casa.", "options": ["Dov'è Marco? — Sarà a casa.", "Dov'è Marco? — Starà a casa.", "Dov'è Marco? — Sarebbe a casa."]}, {"prompt": "«Avrà quarant'anni» quiere decir…", "answer": "Debe tener unos cuarenta años.", "options": ["Debe tener unos cuarenta años.", "Va a cumplir cuarenta años.", "Tuvo cuarenta años."]}],
   "r": "El futuro sirve para **suponer sobre el presente**: *Sarà a casa* = "
        "estará en casa.",
   "ex": [["Che ora è? — *Saranno* le tre.", "¿Qué hora es? — Serán las tres."],
@@ -498,6 +500,7 @@ LESSONS = {
 ],
 "blocks": [
  {"h": "NE: una cantidad",
+  "q": [{"prompt": "Elegí la que va", "stem": "Quanti fratelli hai? — ___ ho due.", "answer": "Ne", "options": ["Ne", "Li", "Ci"]}, {"prompt": "¿Cuál está bien? «¿Tenés cigarrillos? — No, no tengo.»", "answer": "No, non ne ho.", "options": ["No, non ne ho.", "No, non ho.", "No, non lo ho."]}, {"prompt": "¿Cuál está bien? «¿Querés pan? — Sí, agarro un poco.»", "answer": "Sì, ne prendo un po'.", "options": ["Sì, ne prendo un po'.", "Sì, prendo un po'.", "Sì, lo prendo un po'."]}],
   "r": "*ne* reemplaza **una cantidad** de algo ya nombrado. En castellano "
        "no se dice nada; en italiano es **obligatorio**.",
   "ex": [["Quanti libri hai? — *Ne* ho tre.", "¿Cuántos libros tenés? — Tengo tres."],
@@ -509,6 +512,7 @@ LESSONS = {
          "ho comprati tre* (libros), *ne ho comprate due* (revistas)."},
 
  {"h": "NE: di + algo",
+  "q": [{"prompt": "Elegí la que va", "stem": "Che ___ pensi? (¿Qué pensás de eso?)", "answer": "ne", "options": ["ne", "ci", "lo"]}, {"prompt": "¿Cuál está bien? «Estoy contento con eso.»", "answer": "Ne sono contento.", "options": ["Ne sono contento.", "Ci sono contento.", "Lo sono contento."]}],
   "r": "*ne* también reemplaza **di + algo**: *parlare del viaggio → "
        "parlarne*; *sono contento del risultato → ne sono contento*.",
   "ex": [["*Ne* parliamo domani.", "Hablamos de eso mañana."],
@@ -517,6 +521,7 @@ LESSONS = {
          ["*Ne* ho sentito parlare.", "Oí hablar de eso."]]},
 
  {"h": "CI: un lugar",
+  "q": [{"prompt": "Elegí la que va", "stem": "Vai a Roma? — Sì, ___ vado domani.", "answer": "ci", "options": ["ci", "ne", "lo"]}, {"prompt": "¿Cuál está bien? «¿Estuviste en Grecia? — No, nunca.»", "answer": "No, non ci sono mai stato.", "options": ["No, non ci sono mai stato.", "No, non ne sono mai stato.", "No, non sono mai ci stato."]}],
   "r": "*ci* reemplaza **un lugar** ya nombrado: «ahí». En castellano muchas "
        "veces no se dice; en italiano, sí.",
   "ex": [["Vai a Roma? — Sì, *ci* vado domani.", "¿Vas a Roma? — Sí, voy mañana."],
@@ -526,6 +531,7 @@ LESSONS = {
           "vado domani*."},
 
  {"h": "CI: a + algo",
+  "q": [{"prompt": "Elegí la que va", "stem": "Credi ai fantasmi? — No, non ___ credo.", "answer": "ci", "options": ["ci", "ne", "li"]}, {"prompt": "Elegí la que va", "stem": "Pensi al lavoro? — Sì, ___ penso sempre.", "answer": "ci", "options": ["ci", "ne", "li"]}],
   "r": "*ci* también reemplaza **a / in / su + algo**: *pensare al lavoro → "
        "ci penso*; *credere ai fantasmi → ci credo*.",
   "ex": [["Pensi al lavoro? — Sì, *ci* penso sempre.", "¿Pensás en el trabajo? — Sí, pienso en eso siempre."],
@@ -611,6 +617,7 @@ LESSONS = {
           "participio te dice si era «lo» o «la»: *me l'ha dato / data*."},
 
  {"h": "Con infinitivo e imperativo, pegados",
+  "q": [{"prompt": "¿Cuál está bien? «¡Dámelo!»", "answer": "Dammelo!", "options": ["Dammelo!", "Damelo!", "Me lo da'!"]}, {"prompt": "¿Cuál está bien? «Quiero decírtelo.»", "answer": "Voglio dirtelo.", "options": ["Voglio dirtelo.", "Voglio dirtilo.", "Voglio dirlo ti."]}, {"prompt": "¿Cuál está bien? «¡Decíselo ya!»", "answer": "Diglielo subito!", "options": ["Diglielo subito!", "Digglielo subito!", "Digli lo subito!"]}],
   "r": "Con infinitivo e imperativo van **pegados al final**, como en "
        "castellano: *dirtelo*, *dammelo*.",
   "ex": [["Voglio *dirtelo*.", "Quiero decírtelo."],
@@ -813,6 +820,7 @@ LESSONS = {
          ["È possibile che *piova*.", "Puede que llueva."]]},
 
  {"h": "«Creo que es»: congiuntivo",
+  "q": [{"prompt": "¿Cuál está bien? «Creo que tiene razón.»", "answer": "Credo che abbia ragione.", "options": ["Credo che abbia ragione.", "Credo che ha ragione.", "Credo che avrà ragione."]}, {"prompt": "Elegí la que va", "stem": "Penso che ___ una buona idea.", "answer": "sia", "options": ["sia", "è", "sarà"]}, {"prompt": "Elegí la que va", "stem": "Mi sembra che Marco ___ stanco.", "answer": "sia", "options": ["sia", "è", "sta"]}],
   "r": "*credere*, *pensare*, *sembrare* piden **congiuntivo**, aunque en "
        "castellano vayan con indicativo: *Credo che sia tardi*.",
   "ex": [["Credo che *abbia* ragione.", "Creo que tiene razón."],
@@ -823,6 +831,7 @@ LESSONS = {
           "noticia: la regla es muy estable y se corrige rápido."},
 
  {"h": "Cuándo NO va congiuntivo",
+  "q": [{"prompt": "¿Cuál está bien? «Es verdad que tiene razón.»", "answer": "È vero che ha ragione.", "options": ["È vero che ha ragione.", "È vero che abbia ragione.", "È vero che avesse ragione."]}, {"prompt": "Elegí la que va", "stem": "So che ___ tardi.", "answer": "è", "options": ["è", "sia", "fosse"]}, {"prompt": "Elegí la que va", "stem": "Secondo me, ___ una buona idea.", "answer": "è", "options": ["è", "sia", "che sia"]}],
   "r": "Si el principal presenta **un hecho** (*so che*, *è vero che*, *vedo "
        "che*) o hay *secondo me*: **indicativo**.",
   "ex": [["*So che è* tardi.", "Sé que es tarde."],
@@ -835,6 +844,7 @@ LESSONS = {
            "*è chiaro che*, *dico che*, *sono sicuro che*."]},
 
  {"h": "Mismo sujeto: infinitivo",
+  "q": [{"prompt": "¿Cuál está bien? «Creo tener razón.»", "answer": "Credo di avere ragione.", "options": ["Credo di avere ragione.", "Credo che io abbia ragione.", "Credo avere ragione."]}, {"prompt": "¿Cuál está bien? «Quiero irme mañana.»", "answer": "Voglio partire domani.", "options": ["Voglio partire domani.", "Voglio di partire domani.", "Voglio che parta domani."]}, {"prompt": "Elegí la que va", "stem": "Spero ___ in tempo.", "answer": "di arrivare", "options": ["di arrivare", "che arrivi", "arrivare"]}],
   "r": "Si el sujeto es **el mismo**, nada de *che*: *di* + infinitivo. Como "
        "en castellano: «creo tener razón».",
   "ex": [["Credo *di avere* ragione.", "Creo tener razón."],
