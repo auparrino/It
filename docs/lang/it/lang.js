@@ -21,7 +21,7 @@
     base: "lang/it/",
     lt: "it",                   // LanguageTool
     lingualibre: { q: "Q652", code: "ita", tag: "ita" },
-    themeColor: { light: "#7dbdf0", dark: "#12356a" },
+    themeColor: { light: "#9fcdec", dark: "#13294a" },   // the sky over the Tyrrhenian (theme.css --cielo)
     hyphenWords: false,         // «-» is not part of a word (it is in Portuguese: chama-se)
 
     /* Spanish or Italian?  What is read aloud after an answer is only the
@@ -111,33 +111,47 @@
       writing: "Produzione scritta"
     },
 
-    /* The shareable card of the week (a canvas): the frame and where the
-       lines go. */
+    /* The shareable card of the week (a canvas): the sky over the
+       Tyrrhenian turning peach, a painted majolica tile with a cobalt frame
+       and a yellow thread, flowers in the corners and a lemon. */
     card: {
       file: "la-via-c1-",
       frame: function (g, W, H) {
-        var grad = g.createLinearGradient(0, 0, 0, H); grad.addColorStop(0, "#7dbdf0"); grad.addColorStop(1, "#fbf8f1");
+        var grad = g.createLinearGradient(0, 0, 0, H); grad.addColorStop(0, "#a9d4ee"); grad.addColorStop(0.55, "#fbe0cc"); grad.addColorStop(1, "#f8b98f");
         g.fillStyle = grad; g.fillRect(0, 0, W, H);
-        g.fillStyle = "#f3ebdb"; g.fillRect(40, 40, W - 80, H - 80);
-        g.strokeStyle = "#1f2630"; g.lineWidth = 6; g.strokeRect(40, 40, W - 80, H - 80);
-        g.fillStyle = "#1f2630";
+        g.fillStyle = "#fffaf0"; g.fillRect(40, 36, W - 80, H - 72);
+        g.strokeStyle = "#2257a6"; g.lineWidth = 8; g.strokeRect(44, 40, W - 88, H - 80);
+        g.strokeStyle = "#f2b705"; g.lineWidth = 3; g.strokeRect(54, 50, W - 108, H - 100);
+        [[48, 44], [W - 48, 44], [48, H - 44], [W - 48, H - 44]].forEach(function (c) {
+          g.fillStyle = "#2257a6"; g.beginPath(); g.arc(c[0], c[1], 22, 0, 2 * Math.PI); g.fill();
+          g.fillStyle = "#f2b705"; g.beginPath(); g.arc(c[0], c[1], 9, 0, 2 * Math.PI); g.fill();
+        });
+        g.save(); g.translate(W - 110, 100); g.rotate(-0.35);
+        g.fillStyle = "#2f8a43"; g.beginPath(); g.ellipse(-26, -10, 16, 7, -0.6, 0, 2 * Math.PI); g.fill();
+        g.fillStyle = "#f7c600"; g.beginPath(); g.ellipse(0, 0, 26, 19, 0, 0, 2 * Math.PI); g.fill();
+        g.restore();
+        g.fillStyle = "#16427f";
       },
-      head: { y: 90 },                // the title line, in the frame's color
-      text: "#1f2630", muted: "#6b6a66",
-      rank: { font: "bold 64px Georgia, serif", y: 170 },
-      lines: [230, 275, 320]
+      head: { y: 96, color: "#16427f" },  // the title line
+      text: "#172437", muted: "#5f6570",
+      rank: { font: "italic bold 60px Georgia, serif", y: 175 },
+      lines: [232, 276, 318]
     },
 
-    // Confetti: emoji only.
-    confetti: { bits: ["🇮🇹", "🍕", "✨", "🎉", "🍝", "⭐", "☕"], n: 16, ms: 1900 },
+    /* Confeti de la Costiera: azulejos de mayólica (el cobalto, el Tirreno,
+       el limón, la terracota, la hoja, la buganvilia) y algún limón,
+       velero o bandera. */
+    confetti: { bits: ["🍋", "⛵", "🇮🇹", "🍋", "☀️"], n: 30, ms: 2900,
+                colors: ["--cobalto", "--oro", "--azzurro", "--terracotta-chiara", "--verde-chiaro", "--buganvillea", "--azzurro-chiaro"], fallback: "#1d4f9c" },
 
     ui: {
       langEs: "italiano",            // «en italiano», «tu italiano escrito»
       wordAdj: "italiana",           // «¿Es una palabra italiana?»
-      tabs: [["oggi", "🏠", "Oggi"], ["frasi", "🏋️", "Allena"], ["leggi", "📖", "Leggi"], ["percorso", "🗺️", "Percorso"], ["io", "👤", "Io"]],
+      tabs: [["oggi", "🍋", "Oggi"], ["frasi", "🚣", "Allena"], ["leggi", "📖", "Leggi"], ["percorso", "⛵", "Percorso"], ["io", "👤", "Io"]],
       today: "Oggi", train: "Allena", read: "Leggi", me: "Io",
       path: "Il percorso", pathEl: "el percorso", pathAl: "al percorso", pathTu: "tu percorso",
-      // The logo and the titles are a street sign (a Roman «targa»): «La Via» is the way.
+      // The logo and the titles are a hand-painted majolica plate, like the
+      // house numbers of Positano (the class keeps its old name, «targa»).
       plate: { cls: "targa", sup: "t-sup", main: "t-via" },
       logo: "Via C1", level: "livello",
       week: "Settimana", weekLow: "settimana", romanWeeks: true,

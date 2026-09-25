@@ -21,9 +21,9 @@
 
   var LANGS = {
     it: { name: "Italiano", flag: "🇮🇹", brand: "La Via C1", storage: "laviac1",
-          blurb: "De cero a C1 en un año, con la Italia de las plazas y el espresso.",
-          themeColor: { light: "#7dbdf0", dark: "#12356a" }, bg: "#fbf8f1",
-          fonts: ["fonts/bodoni-normal.woff2", "fonts/bodoni-italic.woff2"] },
+          blurb: "De cero a C1 en un año, con los limones y el mar de la Costa Amalfitana.",
+          themeColor: { light: "#9fcdec", dark: "#13294a" }, bg: "#fcf7ee",
+          fonts: ["fonts/playfair-normal.woff2", "fonts/playfair-italic.woff2"] },
     pt: { name: "Português", flag: "🇧🇷", brand: "Rumo C1", storage: "rumoc1",
           blurb: "Portugués de Brasil hasta C1, con el calçadão de Copacabana de fondo.",
           themeColor: { light: "#9fdcea", dark: "#071a26" }, bg: "#fbf4e6",
