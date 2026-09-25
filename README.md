@@ -79,9 +79,9 @@ tu teléfono**. No usa cuentas ni servidores; la IA es opcional, con una clave g
 
 ### 📖 Leggi: lectura graduada
 
-- **La settimana**: 19 textos cortos (90 a 105 palabras), uno para cada
-  semana que no tenía lectura (menos las de jefe), con la gramática de esa
-  semana y palabras ya vistas o glosadas. `tools/check_letture.py` controla
+- **La settimana**: 52 textos cortos (80 a 110 palabras) escritos a mano,
+  uno por semana, jefes incluidos, con la gramática de esa semana y palabras
+  ya vistas o glosadas. Reemplazan al cuento generado con IA. `tools/check_letture.py` controla
   que la gramática no pase de la semana y que queden como mucho tres
   palabras desconocidas sin glosa (Jeon & Day 2016; Hu & Nation 2000).
 - **Glosas de opción múltiple**: en cada lectura, tres o cuatro palabras
@@ -329,12 +329,9 @@ aciertos.
   segundo pedido revisa todas tus frases juntas, con corrección mínima y
   atención a las palabras que cambian el sentido (*cappelli / capelli*,
   *troppo / molto*) (Wang et al. 2025, g = 0,48; Dugan et al. 2026).
-- **Storia della settimana**: un cuento con las ocho palabras que te tocaba
-  repasar, con personajes, un problema y un final (SRS-Stories, EMNLP 2025),
-  glosario, preguntas y cloze con distractores de la misma banda. Antes de
-  mostrarlo, el corrector propio lo lee: si marca errores (*una ragazzo*,
-  *al uomo*), vuelve una vez a la IA para corregirlos, y cada oración empieza
-  con mayúscula. Queda guardado y se lee sin conexión.
+- **Storia della settimana**: ya no se genera con IA. Cada semana tiene su
+  texto escrito a mano en *La settimana* (ver *Leggi*); las historias que ya
+  se habían generado siguen en *Leggi*.
 - **El modelo**: la app prueba los modelos de cada proveedor del mejor al
   peor, y el que respondió la última vez va primero solo si está entre los
   tres mejores (antes, un modelo chico que respondió una vez quedaba fijo).

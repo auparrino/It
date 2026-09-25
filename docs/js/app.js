@@ -553,7 +553,7 @@
 
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION in sw.js: test_game checks it). */
-  var APP_VERSION = "v46";
+  var APP_VERSION = "v47";
   function versionLine() {
     return '<p class="muted small version">La Via C1 · versión ' + APP_VERSION + "</p>";
   }
@@ -1269,9 +1269,8 @@
       var pl = (state.parlaLog || {})[w.week];
       m({ kind: "parla", done: !!pl, ico: "🗣️", title: "Parla: role-play con la IA", opt: true,
           sub: pl ? "Hecho · " + pl.obj + " / 3 objetivos en " + pl.turns + " turnos" : "Opcional · un personaje, tres objetivos, tu italiano escrito; la IA te corrige al final" });
-      var sto = (state.storie || []).filter(function (x) { return x.week === w.week; })[0];
-      m({ kind: "storia", done: !!sto, ico: "📖", title: "Storia della settimana (IA)", opt: true,
-          sub: sto ? "Generada · " + sto.title : "Opcional · un cuento con las palabras que te toca repasar" });
+      // (The AI story of the week gave way to a text written by hand for
+      // every week: «La settimana», in Leggi and as the week's reading.)
     }
     // The duel that opens this week (both forms taught by now): optional.
     if (window.Duelli) Duelli.DUELLI.filter(function (d) { return d.week === w.week; }).forEach(function (d) {

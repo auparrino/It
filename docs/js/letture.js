@@ -1120,7 +1120,7 @@
   EPISODI.forEach(function (e) { if (!e.series) e.series = "martin"; });
   // La settimana: one short text for each week that had none.
   var LS = root.LettureSettimana || (typeof require === "function" ? require("./letture_settimana.js") : null);
-  if (LS) LS.TESTI.forEach(function (e) { e.series = "settimana"; EPISODI.push(e); });
+  if (LS) LS.TESTI.slice().sort(function (a, b) { return a.week - b.week; }).forEach(function (e, k) { e.series = "settimana"; e.n = k + 1; EPISODI.push(e); });
 
   var SERIES = [
     { id: "martin", name: "Martín a Bologna", emoji: "📖",

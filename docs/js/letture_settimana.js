@@ -1,6 +1,6 @@
 /*
- * La settimana: un texto corto por semana, para las semanas que no tenían
- * lectura (Jeon & Day 2016: la lectura extensiva rinde, d = 0,57).  Cada uno
+ * La settimana: un texto corto por cada semana del curso, escrito a mano (no
+ * con IA) (Jeon & Day 2016: la lectura extensiva rinde, d = 0,57).  Cada uno
  * usa la gramática de su semana y palabras ya vistas o glosadas, para leer
  * sin diccionario (Hu & Nation 2000: 98 % de cobertura).  Los controla
  * tools/check_letture.py (gramática y vocabulario por semana).
@@ -408,7 +408,652 @@
         ["¿Por qué se rieron los compañeros?", ["dijo «largo» pensando en «generoso»", "llegó tarde", "habló en español", "se equivocó de oficina"], "dijo «largo» pensando en «generoso»"],
         ["¿Qué hace ahora Valeria?", ["controla en el diccionario las palabras parecidas al español", "habla solo en inglés", "no usa palabras nuevas", "pregunta al jefe"], "controla en el diccionario las palabras parecidas al español"]
       ],
-      hunt: { label: "Tocá los falsos amigos del texto", targets: ["imbarazzata", "salsa", "largo"] } }
+      hunt: { label: "Tocá los falsos amigos del texto", targets: ["imbarazzata", "salsa", "largo"] } },
+
+    { id: "w-01", week: 1, level: "A1", emoji: "👋", title: "Sono Lucia",
+      grammar: "essere e avere",
+      text:
+        "Ciao! Sono Lucia. Sono italiana, di Roma, e ho ventiquattro anni. " +
+        "Sono una studentessa di musica.\n\n" +
+        "Ho un fratello, Paolo. Paolo ha trent'anni ed è medico a Milano. " +
+        "È alto, simpatico e un po' pigro.\n\n" +
+        "Ho anche una gatta, Nina. Nina è piccola e bianca, e ha gli occhi verdi. " +
+        "La mia casa è vecchia ma bella, e ha un balcone con i fiori.\n\n" +
+        "Oggi è domenica: sono a casa, ho un caffè e un libro. Il libro è nuovo ed è molto bello. Sono contenta!",
+      gloss: { studentessa: "estudiante (mujer)", fratello: "hermano", medico: "médico", pigro: "vago, perezoso",
+               anche: "también", gatta: "gata", piccola: "chiquita", bianca: "blanca", occhi: "ojos",
+               vecchia: "vieja", balcone: "balcón", fiori: "flores", oggi: "hoy", contenta: "contenta" },
+      questions: [
+        ["¿Cuántos años tiene Lucia?", ["veinticuatro", "treinta", "veinte", "catorce"], "veinticuatro"],
+        ["¿Qué hace Paolo?", ["es médico en Milán", "es estudiante", "es músico", "trabaja en Roma"], "es médico en Milán"],
+        ["¿Cómo es la gata?", ["chiquita y blanca, de ojos verdes", "grande y negra", "vieja y gorda", "no tiene gata"], "chiquita y blanca, de ojos verdes"]
+      ],
+      hunt: { label: "Tocá las formas de essere y avere", targets: ["sono", "ho", "ha", "è"] } },
+
+    { id: "w-05", week: 5, level: "A1", emoji: "📚", title: "La libraia",
+      grammar: "presente dei verbi regolari",
+      text:
+        "Carla abita a Firenze e lavora in una libreria del centro. La mattina prende " +
+        "l'autobus alle otto e legge il giornale. Alle nove apre la libreria e parla con i clienti.\n\n" +
+        "A mezzogiorno mangia un panino con la collega, Marta. Il pomeriggio ordina i libri nuovi " +
+        "e risponde alle email. Finisce di lavorare alle sette.\n\n" +
+        "La sera cucina qualcosa di semplice, guarda un film o telefona alla madre. " +
+        "Dorme poco, perché legge sempre fino a tardi. \"I libri sono la mia vita\", dice Carla.",
+      gloss: { libreria: "librería", giornale: "diario", clienti: "clientes",
+               mezzogiorno: "mediodía", panino: "sándwich", collega: "compañera de trabajo", ordina: "ordena",
+               risponde: "responde", finisce: "termina", cucina: "cocina", semplice: "simple", tardi: "tarde" },
+      questions: [
+        ["¿Dónde trabaja Carla?", ["en una librería del centro", "en un diario", "en una escuela", "en un bar"], "en una librería del centro"],
+        ["¿A qué hora termina de trabajar?", ["a las siete", "a las nueve", "al mediodía", "a las ocho"], "a las siete"],
+        ["¿Por qué duerme poco?", ["lee hasta tarde", "trabaja de noche", "mira películas", "habla con la madre"], "lee hasta tarde"]
+      ],
+      hunt: { label: "Tocá los verbos en presente de la tercera persona (abita, lavora…)", targets: ["abita", "lavora", "prende", "legge", "apre", "parla", "mangia", "ordina", "risponde", "finisce", "cucina", "guarda", "telefona", "dorme"] } },
+
+    { id: "w-09", week: 9, level: "A2", emoji: "🚆", title: "Da Genova a Lugano",
+      grammar: "preposizioni",
+      text:
+        "Tommaso vive a Genova, ma lavora in Svizzera. Ogni lunedì parte da Genova alle sei " +
+        "e arriva a Lugano in tre ore. Va in treno, con un libro e un caffè.\n\n" +
+        "A Lugano abita da un amico, Marco, in un piccolo appartamento vicino al lago. " +
+        "Lavora per una banca e parla tedesco, francese e italiano.\n\n" +
+        "Il venerdì torna a casa per il fine settimana. Il sabato va al mercato con la moglie " +
+        "e la domenica pranza dai genitori. Tra un viaggio e l'altro Tommaso è sempre stanco, " +
+        "ma dice: \"Per ora va bene così\".",
+      gloss: { svizzera: "Suiza", ogni: "cada", treno: "tren", appartamento: "departamento", lago: "lago",
+               banca: "banco", tedesco: "alemán", torna: "vuelve", moglie: "esposa", pranza: "almuerza",
+               genitori: "padres", viaggio: "viaje", stanco: "cansado" },
+      questions: [
+        ["¿Cómo va Tommaso a Lugano?", ["en tren", "en auto", "en avión", "en colectivo"], "en tren"],
+        ["¿Con quién vive en Lugano?", ["con un amigo", "con su esposa", "solo", "con sus padres"], "con un amigo"],
+        ["¿Qué hace el domingo?", ["almuerza con sus padres", "trabaja", "va al mercado", "viaja a Suiza"], "almuerza con sus padres"]
+      ],
+      hunt: { label: "Tocá las preposiciones simples (a, in, da, con, per, tra)", targets: ["a", "in", "da", "con", "per", "tra"] } },
+
+    { id: "w-11", week: 11, level: "A2", emoji: "🚤", title: "Un sabato a Venezia",
+      grammar: "passato prossimo",
+      text:
+        "Sabato scorso Anna e Luca sono andati a Venezia. Sono partiti da Padova alle nove " +
+        "e sono arrivati in mezz'ora. Hanno camminato per ore tra calli e ponti e hanno visto piazza San Marco.\n\n" +
+        "A pranzo hanno mangiato le sarde in saor in una piccola osteria. Anna ha comprato " +
+        "una maschera per sua sorella, Luca ha fatto molte foto.\n\n" +
+        "Il pomeriggio hanno preso il vaporetto fino a Murano e hanno visitato una fornace del vetro. " +
+        "La sera sono tornati a casa stanchi. \"Abbiamo speso troppo\", ha detto Luca, " +
+        "\"ma è stata una giornata perfetta\".",
+      gloss: { scorso: "pasado", calli: "callecitas (de Venecia)", ponti: "puentes", pranzo: "almuerzo",
+               sarde: "sardinas", osteria: "fonda, bodegón", maschera: "máscara", sorella: "hermana",
+               vaporetto: "lancha colectivo", fornace: "horno", vetro: "vidrio", speso: "gastado", troppo: "demasiado" },
+      questions: [
+        ["¿De dónde salieron?", ["de Padua", "de Roma", "de Murano", "de Milán"], "de Padua"],
+        ["¿Qué compró Anna?", ["una máscara para su hermana", "vidrio de Murano", "sardinas", "un libro"], "una máscara para su hermana"],
+        ["¿Qué dice Luca al final?", ["gastaron mucho, pero fue un día perfecto", "fue un día aburrido", "quiere volver mañana", "Venecia es fea"], "gastaron mucho, pero fue un día perfecto"]
+      ],
+      hunt: { label: "Tocá los participios con essere (andati, partiti…)", targets: ["andati", "partiti", "arrivati", "tornati", "stata"] } },
+
+    { id: "w-12", week: 12, level: "A2", emoji: "👵", title: "Le regole della nonna",
+      grammar: "riflessivi e imperativo",
+      text:
+        "Quando i nipoti arrivano, la nonna Pina dà sempre le sue regole. \"Lavatevi le mani " +
+        "prima di mangiare! Sedetevi a tavola e non alzatevi fino alla frutta.\"\n\n" +
+        "La mattina i ragazzi si svegliano tardi. \"Alzati, Giacomo! Vestiti e fai colazione\", " +
+        "dice la nonna. Giacomo si lamenta, ma si alza.\n\n" +
+        "Il pomeriggio si divertono in giardino e la sera si riposano davanti alla televisione. " +
+        "\"Non vi addormentate sul divano!\" ripete la nonna. Alla fine, però, è la nonna che si " +
+        "addormenta per prima, con gli occhiali sul naso. I nipoti ridono e la coprono con una coperta.",
+      gloss: { nipoti: "nietos", regole: "reglas", mani: "manos", tavola: "mesa", svegliano: "despiertan",
+               colazione: "desayuno", lamenta: "queja", divertono: "divierten", riposano: "descansan",
+               divano: "sillón", occhiali: "anteojos", naso: "nariz", ridono: "se ríen", coperta: "manta" },
+      questions: [
+        ["¿Qué deben hacer antes de comer?", ["lavarse las manos", "vestirse", "ir al jardín", "mirar la tele"], "lavarse las manos"],
+        ["¿Qué hace Giacomo cuando la abuela lo llama?", ["se queja, pero se levanta", "sigue durmiendo", "se enoja y se va", "llora"], "se queja, pero se levanta"],
+        ["¿Quién se duerme primero?", ["la abuela", "Giacomo", "los nietos", "nadie"], "la abuela"]
+      ],
+      hunt: { label: "Tocá los imperativos (lavatevi, sedetevi, alzati…)", targets: ["lavatevi", "sedetevi", "alzatevi", "alzati", "vestiti", "fai", "addormentate"] } },
+
+    { id: "w-13", week: 13, level: "A2", emoji: "🍷", title: "La nuova vicina",
+      grammar: "ripasso: presente, passato prossimo, pronomi",
+      text:
+        "Ieri è arrivata una nuova vicina, Sara. È di Bari e ha ventinove anni. Fa l'architetta " +
+        "e lavora in uno studio del centro.\n\n" +
+        "L'ho incontrata sulle scale con tre scatole pesanti e l'ho aiutata. Lei mi ha ringraziato " +
+        "e mi ha offerto un caffè. Abbiamo parlato di tutto: del lavoro, della città, dei ristoranti. " +
+        "Le ho consigliato la trattoria sotto casa e le ho dato il mio numero.\n\n" +
+        "Stamattina mi ha scritto: \"Grazie per ieri! Stasera vieni a cena da me?\" Ho messo una camicia elegante, " +
+        "ho comprato una bottiglia di vino e alle otto ho suonato alla sua porta.",
+      gloss: { vicina: "vecina", architetta: "arquitecta", studio: "estudio", scale: "escaleras",
+               scatole: "cajas", pesanti: "pesadas", ringraziato: "agradecido", consigliato: "recomendado",
+               trattoria: "bodegón", stamattina: "esta mañana", bottiglia: "botella", suonato: "tocado el timbre" },
+      questions: [
+        ["¿De dónde es Sara?", ["de Bari", "de Roma", "de Milán", "de Nápoles"], "de Bari"],
+        ["¿Cómo se conocieron?", ["en la escalera, con unas cajas", "en un bar", "en el trabajo", "en la trattoria"], "en la escalera, con unas cajas"],
+        ["¿Qué lleva el narrador a la cena?", ["una botella de vino", "flores", "una torta", "nada"], "una botella de vino"]
+      ],
+      hunt: { label: "Tocá los pronombres de objeto (l', le, mi)", targets: ["l'ho", "le", "mi"] } },
+
+    { id: "w-15", week: 15, level: "A2", emoji: "🌳", title: "L'estate dal nonno",
+      grammar: "imperfetto e passato prossimo",
+      text:
+        "Quando ero bambino passavo le estati dal nonno, in un paese della Puglia. La casa era bianca " +
+        "e aveva un grande fico nel cortile.\n\n" +
+        "Ogni mattina il nonno mi svegliava presto e andavamo insieme al mercato. Lui conosceva tutti " +
+        "e parlava con tutti. Il pomeriggio faceva troppo caldo: dormivamo o giocavamo a carte.\n\n" +
+        "Un giorno, però, è successa una cosa strana: mentre raccoglievo i fichi, ho visto un piccolo " +
+        "cane sotto l'albero. Era magro e aveva paura. Il nonno l'ha adottato subito e l'ha chiamato Fico.",
+      gloss: { estati: "veranos", paese: "pueblo", fico: "higuera, higo", fichi: "higos", cortile: "patio",
+               svegliava: "despertaba", presto: "temprano", caldo: "calor", carte: "cartas",
+               successa: "pasado, sucedido", raccoglievo: "juntaba", albero: "árbol", magro: "flaco",
+               paura: "miedo", adottato: "adoptado" },
+      questions: [
+        ["¿Dónde pasaba los veranos?", ["en un pueblo de Apulia", "en Roma", "en la playa", "en la montaña"], "en un pueblo de Apulia"],
+        ["¿Qué hacían a la tarde?", ["dormían o jugaban a las cartas", "iban al mercado", "nadaban", "trabajaban"], "dormían o jugaban a las cartas"],
+        ["¿Cómo se llamó el perro?", ["Fico", "Nonno", "Puglia", "Bianco"], "Fico"]
+      ],
+      hunt: { label: "Tocá los verbos en imperfetto", targets: ["ero", "passavo", "era", "aveva", "svegliava", "andavamo", "conosceva", "parlava", "faceva", "dormivamo", "giocavamo", "raccoglievo"] } },
+
+    { id: "w-18", week: 18, level: "A2", emoji: "😩", title: "Che giornata!",
+      grammar: "negazioni ed esclamazioni",
+      text:
+        "Che giornata! Stamattina non ha suonato la sveglia e non ho fatto colazione. Alla fermata " +
+        "non c'era nessuno: ho perso l'autobus.\n\n" +
+        "In ufficio non funzionava niente, né il computer né la stampante. Il capo non c'era ancora " +
+        "e i colleghi non sapevano cosa fare.\n\n" +
+        "A pranzo non ho mangiato neanche un panino, perché non avevo più soldi nel portafoglio. Che fame! " +
+        "La sera, finalmente, sono arrivato davanti a casa... e non avevo le chiavi! " +
+        "Mai più una giornata così, per favore. Che disastro!",
+      gloss: { sveglia: "despertador", colazione: "desayuno", fermata: "parada", funzionava: "funcionaba",
+               stampante: "impresora", capo: "jefe", colleghi: "compañeros", neanche: "ni siquiera",
+               soldi: "plata", portafoglio: "billetera", fame: "hambre", chiavi: "llaves", disastro: "desastre" },
+      questions: [
+        ["¿Qué pasó en la parada?", ["perdió el colectivo", "era domingo", "llovía", "había paro"], "perdió el colectivo"],
+        ["¿Qué no funcionaba en la oficina?", ["ni la computadora ni la impresora", "el ascensor", "la luz", "el teléfono"], "ni la computadora ni la impresora"],
+        ["¿Qué le faltaba a la noche?", ["las llaves", "la billetera", "el celular", "el colectivo"], "las llaves"]
+      ],
+      hunt: { label: "Tocá las palabras negativas (non, nessuno, niente, né…)", targets: ["non", "nessuno", "niente", "né", "neanche", "più", "mai"] } },
+
+    { id: "w-19", week: 19, level: "B1", emoji: "✈️", title: "Il piano di Giulia",
+      grammar: "futuro",
+      text:
+        "Il prossimo anno Giulia finirà l'università e partirà per un anno in Spagna. Vivrà a Valencia " +
+        "con due amiche e studierà lo spagnolo.\n\n" +
+        "All'inizio cercherà un lavoro in un bar o in un albergo. Poi, quando parlerà bene la lingua, " +
+        "farà domanda in una scuola di italiano.\n\n" +
+        "I genitori sono un po' preoccupati. \"Come farai con i soldi? Dove abiterai?\" chiede la madre. " +
+        "\"Non preoccuparti, mamma: andrà tutto bene\", risponde Giulia. Il padre, invece, sorride: " +
+        "\"Sarà un'esperienza bellissima. E noi verremo a trovarti a Natale!\"",
+      gloss: { prossimo: "próximo", cercherà: "buscará", albergo: "hotel", lingua: "idioma",
+               domanda: "solicitud (fare domanda = postularse)", genitori: "padres", preoccupati: "preocupados",
+               soldi: "plata", sorride: "sonríe", esperienza: "experiencia", trovarti: "visitarte" },
+      questions: [
+        ["¿Adónde se va Giulia?", ["a Valencia, en España", "a Madrid", "a Roma", "a Londres"], "a Valencia, en España"],
+        ["¿Dónde trabajará al principio?", ["en un bar o en un hotel", "en una escuela", "en una oficina", "en la universidad"], "en un bar o en un hotel"],
+        ["¿Qué harán los padres en Navidad?", ["la visitarán", "se quedarán en casa", "irán a la playa", "le mandarán plata"], "la visitarán"]
+      ],
+      hunt: { label: "Tocá los verbos en futuro", targets: ["finirà", "partirà", "vivrà", "studierà", "cercherà", "parlerà", "farà", "farai", "abiterai", "andrà", "sarà", "verremo"] } },
+
+    { id: "w-20", week: 20, level: "B1", emoji: "🌅", title: "Un ristorante al mare",
+      grammar: "condizionale presente",
+      text:
+        "Marco lavora in banca, ma non è felice. \"Mi piacerebbe cambiare vita\", dice all'amico Paolo. " +
+        "\"Vorrei aprire un piccolo ristorante al mare.\"\n\n" +
+        "\"E dove lo apriresti?\" chiede Paolo. \"In Sardegna. Cucinerei pesce fresco e la sera guarderei " +
+        "il tramonto dalla terrazza.\"\n\n" +
+        "\"Sarebbe bello\", risponde Paolo, \"ma dovresti imparare a cucinare! E il ristorante potrebbe anche non " +
+        "guadagnare niente.\" Marco ride: \"Hai ragione. Però almeno sarei libero. Tu verresti a lavorare " +
+        "con me?\" \"Forse... ma solo come cliente!\" Ridono tutti e due, ma Marco non dimentica il suo sogno.",
+      gloss: { felice: "feliz", pesce: "pescado", fresco: "fresco", tramonto: "atardecer", terrazza: "terraza",
+               imparare: "aprender", guadagnare: "ganar (plata)", almeno: "al menos", libero: "libre", forse: "quizás" },
+      questions: [
+        ["¿Qué quiere hacer Marco?", ["abrir un restaurante en el mar", "cambiar de banco", "irse a vivir con Paolo", "aprender a nadar"], "abrir un restaurante en el mar"],
+        ["¿Qué problema ve Paolo?", ["Marco no sabe cocinar", "Cerdeña es cara", "no hay pescado", "Marco es muy joven"], "Marco no sabe cocinar"],
+        ["¿Cómo iría Paolo al restaurante?", ["solo como cliente", "como cocinero", "como socio", "no iría"], "solo como cliente"]
+      ],
+      hunt: { label: "Tocá los verbos en condizionale", targets: ["piacerebbe", "vorrei", "apriresti", "cucinerei", "guarderei", "sarebbe", "dovresti", "potrebbe", "sarei", "verresti"] } },
+
+    { id: "w-21", week: 21, level: "B1", emoji: "🧺", title: "Il mercato del sabato",
+      grammar: "ne e ci",
+      text:
+        "Il sabato vado al mercato di piazza delle Erbe: ci vado da dieci anni. Compro sempre la frutta " +
+        "dal signor Bepi. \"Quante mele vuole?\" \"Ne prendo un chilo.\"\n\n" +
+        "Poi passo dal formaggio. \"Il parmigiano? Ne vorrei due etti.\" Al banco del pesce c'è sempre " +
+        "la fila, ma ci resto volentieri perché le persone chiacchierano.\n\n" +
+        "A volte ci trovo anche la mia amica Lucia. Parliamo del lavoro e dei figli, e ne ridiamo insieme. " +
+        "Quando torno a casa la borsa è pesante: ci sono troppe cose! Ma è il mio momento preferito della settimana.",
+      gloss: { mele: "manzanas", etti: "cien gramos (due etti = 200 g)", banco: "puesto", fila: "fila, cola",
+               volentieri: "con gusto", chiacchierano: "charlan", figli: "hijos", volte: "veces (a volte = a veces)", ridiamo: "nos reímos",
+               borsa: "bolsa", pesante: "pesada" },
+      questions: [
+        ["¿Hace cuánto va a ese mercado?", ["diez años", "un año", "dos meses", "toda la vida"], "diez años"],
+        ["¿Cuánto parmesano pide?", ["doscientos gramos", "un kilo", "cien gramos", "medio kilo"], "doscientos gramos"],
+        ["¿Por qué no le molesta la fila del pescado?", ["la gente charla", "es corta", "no compra pescado", "va con Lucia"], "la gente charla"]
+      ],
+      hunt: { label: "Tocá ci y ne", targets: ["ci", "ne"] } },
+
+    { id: "w-22", week: 22, level: "B1", emoji: "📕", title: "Il libro prestato",
+      grammar: "pronomi combinati",
+      text:
+        "Due mesi fa ho prestato un libro a Giorgio. Ieri gliel'ho chiesto: \"Me lo ridai?\" " +
+        "\"Certo, te lo porto domani\", mi ha detto.\n\n" +
+        "Oggi Giorgio è arrivato senza libro. \"L'ho dato a mia sorella: gliel'ho prestato perché le piace " +
+        "quell'autore. Glielo chiedo stasera.\" Mi sono arrabbiato un po'. \"Ma il libro è mio! " +
+        "Me l'ha regalato mia madre.\"\n\n" +
+        "Giorgio si è scusato: \"Hai ragione. Te lo riporto sabato, te lo prometto.\" " +
+        "Sabato il libro è tornato, con un biglietto di sua sorella: \"Grazie! Me lo presti ancora?\"",
+      gloss: { prestato: "prestado", ridai: "devolvés", porto: "traigo", sorella: "hermana", autore: "autor",
+               arrabbiato: "enojado", regalato: "regalado", scusato: "disculpado", riporto: "devuelvo",
+               prometto: "prometo", biglietto: "notita", presti: "prestás" },
+      questions: [
+        ["¿A quién le dio Giorgio el libro?", ["a su hermana", "a su madre", "a un amigo", "a la biblioteca"], "a su hermana"],
+        ["¿Quién le regaló el libro al narrador?", ["su madre", "Giorgio", "su hermana", "un autor"], "su madre"],
+        ["¿Qué pide la hermana al final?", ["que se lo preste otra vez", "otro libro", "perdón", "nada"], "que se lo preste otra vez"]
+      ],
+      hunt: { label: "Tocá los pronombres combinados (me lo, te lo, glielo…)", targets: ["gliel'ho", "me", "te", "glielo"] } },
+
+    { id: "w-24", week: 24, level: "B1", emoji: "🎂", title: "Il nuovo collega",
+      grammar: "congiuntivo presente",
+      text:
+        "Al lavoro è arrivato un nuovo collega, Stefano. Tutti hanno un'opinione su di lui. Chiara pensa " +
+        "che sia simpatico, ma crede che parli troppo. Marco, invece, pensa che lavori poco e che arrivi sempre tardi.\n\n" +
+        "Io non lo conosco bene. Credo che abbia bisogno di tempo: è nuovo e forse è timido. " +
+        "Spero che si trovi bene con noi.\n\n" +
+        "Oggi Stefano ha portato una torta per tutti. \"È il mio compleanno\", ha detto. " +
+        "Adesso tutti pensano che sia il collega migliore dell'ufficio!",
+      gloss: { collega: "compañero de trabajo", opinione: "opinión", troppo: "demasiado", bisogno: "necesidad (avere bisogno = necesitar)",
+               forse: "quizás", timido: "tímido", trovi: "encuentre (trovarsi bene = sentirse a gusto)", torta: "torta",
+               compleanno: "cumpleaños", migliore: "mejor", ufficio: "oficina" },
+      questions: [
+        ["¿Qué piensa Chiara de Stefano?", ["que es simpático pero habla mucho", "que trabaja poco", "que llega tarde", "que es tímido"], "que es simpático pero habla mucho"],
+        ["¿Qué cree el narrador?", ["que necesita tiempo", "que es antipático", "que se va a ir", "que es el jefe"], "que necesita tiempo"],
+        ["¿Por qué trajo una torta?", ["era su cumpleaños", "para pedir perdón", "se iba", "era viernes"], "era su cumpleaños"]
+      ],
+      hunt: { label: "Tocá los verbos en congiuntivo", targets: ["sia", "parli", "lavori", "arrivi", "abbia", "trovi"] } },
+
+    { id: "w-25", week: 25, level: "B1", emoji: "👔", title: "Consigli per un colloquio",
+      grammar: "congiuntivo: quando si usa",
+      text:
+        "Domani Elena ha un colloquio importante. Sua sorella le dà qualche consiglio. \"È importante che tu " +
+        "arrivi dieci minuti prima. Bisogna che ti vesta in modo semplice ed elegante.\"\n\n" +
+        "\"E se mi fanno domande difficili?\" \"È normale che tu sia nervosa. Prima di rispondere, ascolta " +
+        "bene la domanda. Anche se non sai tutto, è meglio che tu dica la verità.\"\n\n" +
+        "Elena ha paura che il direttore sia antipatico. \"Non credo che sia così\", dice la sorella. " +
+        "\"Basta che tu sorrida e che parli con calma. Sono sicura che andrà bene.\"",
+      gloss: { colloquio: "entrevista de trabajo", consiglio: "consejo", bisogna: "hace falta", vesta: "vistas",
+               semplice: "simple", nervosa: "nerviosa", verità: "verdad", paura: "miedo", direttore: "director",
+               basta: "alcanza con", sorrida: "sonrías", calma: "calma" },
+      questions: [
+        ["¿Cuándo tiene que llegar Elena?", ["diez minutos antes", "a la hora justa", "una hora antes", "tarde"], "diez minutos antes"],
+        ["¿Qué hacer si no sabe algo?", ["decir la verdad", "inventar", "cambiar de tema", "irse"], "decir la verdad"],
+        ["¿De qué tiene miedo Elena?", ["de que el director sea antipático", "de llegar tarde", "de la ropa", "de su hermana"], "de que el director sea antipático"]
+      ],
+      hunt: { label: "Tocá los congiuntivi", targets: ["arrivi", "vesta", "sia", "dica", "sorrida", "parli"] } },
+
+    { id: "w-26", week: 26, level: "B1", emoji: "📔", title: "Caro diario",
+      grammar: "ripasso: futuro, congiuntivo, pronomi",
+      text:
+        "Caro diario, domani comincia il mio nuovo lavoro a Torino e sono un po' agitato. Ho già preparato " +
+        "tutto: i vestiti, la borsa e i documenti. Mia madre me li ha controllati due volte.\n\n" +
+        "Spero che i colleghi siano gentili e che il capo non sia troppo severo. Penso che all'inizio farò " +
+        "qualche errore, ma imparerò in fretta.\n\n" +
+        "Quando ero studente sognavo un lavoro così. Ora ci sono quasi: domani alle nove entrerò in ufficio " +
+        "e dirò \"Buongiorno!\" con il mio sorriso migliore. Chissà come andrà!",
+      gloss: { diario: "diario (íntimo)", agitato: "nervioso", vestiti: "ropa", documenti: "papeles",
+               controllati: "revisado", volte: "veces", severo: "severo", inizio: "principio", fretta: "apuro (in fretta = rápido)",
+               sognavo: "soñaba", quasi: "casi", sorriso: "sonrisa", chissà: "quién sabe" },
+      questions: [
+        ["¿Dónde empieza a trabajar?", ["en Turín", "en Roma", "en Milán", "en casa"], "en Turín"],
+        ["¿Quién revisó los papeles?", ["su madre", "el jefe", "un colega", "nadie"], "su madre"],
+        ["¿Qué espera de los colegas?", ["que sean amables", "que lo ayuden con plata", "que no estén", "que hablen inglés"], "que sean amables"]
+      ],
+      hunt: { label: "Tocá los verbos en futuro", targets: ["farò", "imparerò", "entrerò", "dirò", "andrà"] } },
+
+    { id: "w-29", week: 29, level: "B2", emoji: "🎸", title: "Il concerto",
+      grammar: "congiuntivo passato",
+      text:
+        "Ieri sera c'era il concerto di Vasco Rossi, ma Luca non è venuto. I suoi amici non capiscono perché. " +
+        "\"Credo che abbia perso il treno\", dice Sara. \"Penso che se ne sia dimenticato\", risponde Paolo. " +
+        "\"È strano che non ci abbia scritto niente.\"\n\n" +
+        "Stamattina Luca ha telefonato: \"Scusate! Mi dispiace che siate rimasti ad aspettarmi. Ho avuto " +
+        "la febbre tutta la notte.\"\n\n" +
+        "\"Speriamo che tu sia guarito, almeno\", ha detto Sara. \"Sì, sto meglio. Ma mi dispiace " +
+        "che il concerto sia finito senza di me!\"",
+      gloss: { concerto: "recital", perso: "perdido", dimenticato: "olvidado", strano: "raro", scusate: "disculpen",
+               dispiace: "da pena (mi dispiace = lo siento)", rimasti: "quedado", aspettarmi: "esperarme",
+               febbre: "fiebre", guarito: "curado", almeno: "al menos" },
+      questions: [
+        ["¿Qué cree Sara que pasó?", ["que perdió el tren", "que se olvidó", "que estaba enojado", "que se quedó dormido"], "que perdió el tren"],
+        ["¿Qué le pasó a Luca en realidad?", ["tuvo fiebre", "perdió el tren", "se olvidó", "trabajó"], "tuvo fiebre"],
+        ["¿Qué lamenta Luca al final?", ["que el recital terminara sin él", "haber llamado", "estar enfermo de nuevo", "nada"], "que el recital terminara sin él"]
+      ],
+      hunt: { label: "Tocá los auxiliares del congiuntivo passato (abbia, sia, siate)", targets: ["abbia", "sia", "siate"] } },
+
+    { id: "w-30", week: 30, level: "B2", emoji: "🎹", title: "Il pianoforte",
+      grammar: "congiuntivo imperfetto e trapassato",
+      text:
+        "Da piccola Marta voleva che suo padre la portasse ogni domenica al mare. Sperava che il sole " +
+        "non finisse mai e che l'estate durasse tutto l'anno.\n\n" +
+        "Sua madre, invece, voleva che studiasse il pianoforte. \"Se non studi, non imparerai mai\", diceva. " +
+        "Marta faceva finta che le piacesse, ma pensava solo al mare.\n\n" +
+        "Anni dopo, Marta ha scoperto che sua madre da giovane aveva suonato in un'orchestra. Non immaginava " +
+        "che avesse avuto quel sogno e che ci avesse rinunciato per la famiglia. Quella sera ha riaperto il pianoforte.",
+      gloss: { portasse: "llevara", sperava: "esperaba", durasse: "durara", studiasse: "estudiara",
+               pianoforte: "piano", finta: "de cuenta (fare finta = hacer de cuenta)", scoperto: "descubierto",
+               suonato: "tocado", orchestra: "orquesta", sogno: "sueño", rinunciato: "renunciado", riaperto: "vuelto a abrir" },
+      questions: [
+        ["¿Qué quería Marta de chica?", ["ir al mar los domingos", "tocar el piano", "tocar en una orquesta", "estudiar"], "ir al mar los domingos"],
+        ["¿Qué descubrió después?", ["que su madre había tocado en una orquesta", "que su padre era músico", "que el mar estaba lejos", "que no le gustaba el piano"], "que su madre había tocado en una orquesta"],
+        ["¿Qué hizo esa noche?", ["volvió a abrir el piano", "fue al mar", "llamó a su padre", "lloró"], "volvió a abrir el piano"]
+      ],
+      hunt: { label: "Tocá los congiuntivi imperfetti y trapassati", targets: ["portasse", "finisse", "durasse", "studiasse", "piacesse", "avesse"] } },
+
+    { id: "w-31", week: 31, level: "B2", emoji: "🚕", title: "Il treno perso",
+      grammar: "condizionale passato",
+      text:
+        "Venerdì Paolo doveva partire per Roma alle sette. Avrebbe voluto dormire di più, ma aveva un " +
+        "appuntamento importante. Purtroppo il taxi è arrivato tardi e il treno è partito senza di lui.\n\n" +
+        "\"Sarei dovuto uscire prima\", ha pensato. \"Avrei potuto prendere la metro.\" Ha telefonato al " +
+        "cliente: \"Mi dispiace, sarei arrivato alle dieci, ma adesso arriverò a mezzogiorno.\"\n\n" +
+        "Il cliente è stato gentile: \"Non si preoccupi. Anch'io avrei preferito vederla più tardi: " +
+        "ho avuto una mattinata terribile!\" Paolo ha riso, finalmente tranquillo.",
+      gloss: { appuntamento: "cita", purtroppo: "lamentablemente", metro: "subte",
+               cliente: "cliente", dispiace: "lamento", mezzogiorno: "mediodía", preoccupi: "preocupe",
+               preferito: "preferido", mattinata: "mañana" },
+      questions: [
+        ["¿Por qué perdió el tren?", ["el taxi llegó tarde", "se quedó dormido", "hubo paro", "se olvidó"], "el taxi llegó tarde"],
+        ["¿Qué habría podido hacer?", ["tomar el subte", "ir en auto", "no viajar", "llamar antes"], "tomar el subte"],
+        ["¿Cómo reacciona el cliente?", ["es amable: él también tuvo una mañana terrible", "se enoja", "cancela la cita", "no contesta"], "es amable: él también tuvo una mañana terrible"]
+      ],
+      hunt: { label: "Tocá los condizionali passati (avrebbe voluto, sarei dovuto…)", targets: ["avrebbe", "sarei", "avrei"] } },
+
+    { id: "w-33", week: 33, level: "B2", emoji: "🏛️", title: "Se fossi sindaco",
+      grammar: "periodo ipotetico",
+      text:
+        "A scuola la maestra chiede ai bambini: \"Che cosa fareste se foste sindaci della città?\" Luca risponde " +
+        "subito: \"Se fossi sindaco, costruirei un parco giochi in ogni quartiere.\"\n\n" +
+        "Giulia ci pensa un po': \"Se avessi tanti soldi, darei una casa a tutte le persone che non ce l'hanno.\" " +
+        "Marco, invece, ride: \"Se comandassi io, la scuola comincerebbe alle dieci!\"\n\n" +
+        "La maestra sorride. \"E se foste stati sindaci l'anno scorso, che cosa avreste cambiato?\" \"Avremmo " +
+        "chiuso le strade alle macchine\", dice Giulia. \"Così adesso potremmo giocare fuori!\"",
+      gloss: { maestra: "maestra", sindaco: "intendente", sindaci: "intendentes", costruirei: "construiría",
+               giochi: "juegos (parco giochi = plaza de juegos)", quartiere: "barrio", comandassi: "mandara",
+               chiuso: "cerrado", strade: "calles", fuori: "afuera" },
+      questions: [
+        ["¿Qué construiría Luca?", ["una plaza de juegos en cada barrio", "una escuela", "un estadio", "casas"], "una plaza de juegos en cada barrio"],
+        ["¿Qué cambiaría Marco?", ["la escuela empezaría a las diez", "cerraría las calles", "daría casas", "nada"], "la escuela empezaría a las diez"],
+        ["¿Qué habrían hecho el año pasado?", ["cerrar las calles a los autos", "construir un parque", "cambiar de maestra", "abrir más escuelas"], "cerrar las calles a los autos"]
+      ],
+      hunt: { label: "Tocá los verbos de la «se» (foste, fossi, avessi, comandassi)", targets: ["foste", "fossi", "avessi", "comandassi"] } },
+
+    { id: "w-34", week: 34, level: "B2", emoji: "📖", title: "La mia libreria",
+      grammar: "pronomi relativi",
+      text:
+        "C'è una libreria in cui passo ore intere. È in una piccola via che pochi conoscono, vicino a un ponte " +
+        "da cui vedo il fiume.\n\n" +
+        "Il proprietario, che si chiama Ettore, è un signore anziano con cui parlo sempre di romanzi. " +
+        "Conosce ogni libro che ha sugli scaffali. Gli scaffali sono pieni di libri usati, alcuni dei quali " +
+        "hanno più di cent'anni.\n\n" +
+        "I clienti che entrano per la prima volta restano sorpresi. La cosa che mi piace di più è l'odore " +
+        "della carta. È il posto in cui mi sento a casa.",
+      gloss: { libreria: "librería", intere: "enteras", ponte: "puente", fiume: "río", proprietario: "dueño",
+               anziano: "mayor, viejo", romanzi: "novelas", scaffali: "estantes", usati: "usados",
+               sorpresi: "sorprendidos", odore: "olor", carta: "papel" },
+      questions: [
+        ["¿Qué se ve desde el puente?", ["el río", "el mar", "la librería", "la plaza"], "el río"],
+        ["¿Quién es Ettore?", ["el dueño de la librería", "un cliente", "un escritor", "el narrador"], "el dueño de la librería"],
+        ["¿Qué le gusta más al narrador?", ["el olor del papel", "los precios", "los libros nuevos", "el café"], "el olor del papel"]
+      ],
+      hunt: { label: "Tocá los relativos (che, cui, quali)", targets: ["che", "cui", "quali"] } },
+
+    { id: "w-36", week: 36, level: "B2", emoji: "🍝", title: "In Italia si fa così",
+      grammar: "si passivante e si impersonale",
+      text:
+        "In Italia, a tavola, si seguono alcune regole. Il cappuccino si beve solo la mattina, mai dopo pranzo. " +
+        "La pasta non si taglia con il coltello e sugli spaghetti al pesce non si mette il parmigiano.\n\n" +
+        "Al bar si paga prima alla cassa e poi si ordina al banco. Il caffè si prende in piedi, velocemente.\n\n" +
+        "La domenica si pranza con la famiglia e si sta a tavola per ore. Si parla di tutto: di politica, " +
+        "di calcio, di cucina. E quando si va a casa di qualcuno, non si arriva mai a mani vuote: " +
+        "si porta un dolce o una bottiglia di vino.",
+      gloss: { regole: "reglas", taglia: "corta", coltello: "cuchillo", pesce: "pescado", cassa: "caja",
+               banco: "barra", piedi: "pie (in piedi = parado)", velocemente: "rápido", calcio: "fútbol",
+               mani: "manos", vuote: "vacías", dolce: "postre" },
+      questions: [
+        ["¿Cuándo se toma el capuchino?", ["solo a la mañana", "después del almuerzo", "a la noche", "siempre"], "solo a la mañana"],
+        ["¿Qué se hace primero en el bar?", ["pagar en la caja", "pedir en la barra", "sentarse", "tomar el café"], "pagar en la caja"],
+        ["¿Qué se lleva a una casa?", ["un postre o una botella de vino", "flores", "nada", "pan"], "un postre o una botella de vino"]
+      ],
+      hunt: { label: "Tocá el «si»", targets: ["si"] } },
+
+    { id: "w-37", week: 37, level: "B2", emoji: "🌊", title: "La leggenda di Colapesce",
+      grammar: "passato remoto",
+      text:
+        "Tanto tempo fa, a Messina, visse un ragazzo che si chiamava Cola. Passava le giornate in mare e nuotava " +
+        "come un pesce: per questo lo chiamarono Colapesce.\n\n" +
+        "Un giorno il re volle metterlo alla prova. Gettò una coppa d'oro in mare e Cola la riportò. Poi gettò " +
+        "una corona, e Cola la ritrovò.\n\n" +
+        "Alla fine il re lanciò un anello nel punto più profondo. Cola si tuffò e scoprì che la Sicilia " +
+        "poggiava su tre colonne, e che una era rotta. Decise di restare sotto il mare a sostenerla. " +
+        "Da quel giorno nessuno lo vide più.",
+      gloss: { nuotava: "nadaba", pesce: "pez", prova: "prueba", gettò: "tiró",
+               coppa: "copa", oro: "oro", corona: "corona", anello: "anillo", profondo: "profundo",
+               tuffò: "zambulló", poggiava: "se apoyaba", colonne: "columnas", rotta: "rota", sostenerla: "sostenerla" },
+      questions: [
+        ["¿Por qué lo llamaron Colapesce?", ["nadaba como un pez", "vendía pescado", "era pescador", "tenía escamas"], "nadaba como un pez"],
+        ["¿Qué descubrió en el fondo?", ["que Sicilia se apoya en tres columnas, una rota", "un tesoro", "una ciudad", "al rey"], "que Sicilia se apoya en tres columnas, una rota"],
+        ["¿Qué hizo al final?", ["se quedó bajo el mar sosteniendo la columna", "volvió con el anillo", "se casó", "se fue de Messina"], "se quedó bajo el mar sosteniendo la columna"]
+      ],
+      hunt: { label: "Tocá los verbos en passato remoto", targets: ["visse", "chiamarono", "volle", "gettò", "riportò", "ritrovò", "lanciò", "tuffò", "scoprì", "decise", "vide"] } },
+
+    { id: "w-38", week: 38, level: "B2", emoji: "☎️", title: "La telefonata di Anna",
+      grammar: "discorso indiretto",
+      text:
+        "Ieri Anna mi ha telefonato. Mi ha detto che aveva trovato un nuovo lavoro a Milano e che sarebbe " +
+        "partita la settimana dopo. Mi ha chiesto se potevo aiutarla con il trasloco.\n\n" +
+        "Le ho risposto che quel sabato lavoravo, ma che la domenica ero libero. Lei ha detto che andava " +
+        "benissimo e che mi avrebbe offerto la cena.\n\n" +
+        "Poi mi ha raccontato che il suo capo le aveva promesso uno stipendio più alto. Mi ha detto di non " +
+        "dirlo a nessuno, perché non era ancora sicura. Io le ho promesso che avrei mantenuto il segreto.",
+      gloss: { trasloco: "mudanza", libero: "libre", offerto: "invitado, ofrecido",
+               capo: "jefe", promesso: "prometido", stipendio: "sueldo", sicura: "segura", mantenuto: "guardado",
+               segreto: "secreto" },
+      questions: [
+        ["¿Qué le pidió Anna?", ["ayuda con la mudanza", "plata", "un trabajo", "un consejo"], "ayuda con la mudanza"],
+        ["¿Qué día puede ayudar el narrador?", ["el domingo", "el sábado", "el viernes", "nunca"], "el domingo"],
+        ["¿Qué tiene que guardar en secreto?", ["el sueldo más alto", "la mudanza", "la cena", "el nuevo trabajo"], "el sueldo más alto"]
+      ],
+      hunt: { label: "Tocá los condizionali passati del discurso indirecto", targets: ["sarebbe", "avrebbe", "avrei"] } },
+
+    { id: "w-39", week: 39, level: "B2", emoji: "🚢", title: "Il nonno emigrante",
+      grammar: "ripasso: passato remoto, periodo ipotetico, congiuntivo",
+      text:
+        "Mio nonno partì per l'Argentina nel 1951. Aveva vent'anni e non parlava una parola di spagnolo. " +
+        "Raccontava sempre che, se non fosse partito, avrebbe fatto il contadino come suo padre.\n\n" +
+        "A Buenos Aires trovò lavoro in una fabbrica, dove conobbe mia nonna, che era figlia di italiani. " +
+        "Si sposarono due anni dopo.\n\n" +
+        "Quando gli chiedevo se gli mancasse l'Italia, mi rispondeva che l'Italia era nei suoi ricordi, " +
+        "ma che la sua casa era lì. Credo che sia stato un uomo coraggioso: non so se io ci sarei riuscito.",
+      gloss: { raccontava: "contaba", contadino: "campesino", fabbrica: "fábrica",
+               conobbe: "conoció", sposarono: "casaron", mancasse: "extrañara", ricordi: "recuerdos",
+               coraggioso: "valiente", riuscito: "logrado" },
+      questions: [
+        ["¿Cuándo se fue el abuelo?", ["en 1951", "en 1915", "en 1981", "en 1961"], "en 1951"],
+        ["¿Dónde conoció a la abuela?", ["en una fábrica", "en el barco", "en Italia", "en una fiesta"], "en una fábrica"],
+        ["¿Qué respondía sobre Italia?", ["estaba en sus recuerdos, pero su casa era Argentina", "quería volver", "no la extrañaba nada", "odiaba Italia"], "estaba en sus recuerdos, pero su casa era Argentina"]
+      ],
+      hunt: { label: "Tocá los verbos en passato remoto", targets: ["partì", "trovò", "conobbe", "sposarono"] } },
+
+    { id: "w-40", week: 40, level: "C1", emoji: "🏡", title: "Una casa da sistemare",
+      grammar: "causativo: fare e lasciare",
+      text:
+        "Io e mio marito abbiamo comprato una casa vecchia in campagna. Non sappiamo fare niente, quindi " +
+        "facciamo fare tutto agli altri.\n\n" +
+        "Abbiamo fatto rifare il tetto da un'impresa e abbiamo fatto dipingere le pareti da un amico pittore. " +
+        "Ieri ho fatto controllare l'impianto elettrico, perché le luci si spegnevano da sole.\n\n" +
+        "I vicini ci guardano curiosi. La signora Rosa ci ha lasciato usare il suo giardino per i materiali, " +
+        "e suo figlio ci ha fatto vedere dove comprare la legna. Mio marito dice che si farà crescere la barba " +
+        "e vivrà come un contadino. Io lo lascio sognare.",
+      gloss: { marito: "marido", campagna: "campo", tetto: "techo", impresa: "empresa",
+               dipingere: "pintar", pareti: "paredes", pittore: "pintor", impianto: "instalación",
+               spegnevano: "apagaban", legna: "leña", barba: "barba", contadino: "campesino", sognare: "soñar" },
+      questions: [
+        ["¿Quién pintó las paredes?", ["un amigo pintor", "ellos mismos", "una empresa", "la vecina"], "un amigo pintor"],
+        ["¿Por qué revisaron la instalación eléctrica?", ["las luces se apagaban solas", "era vieja", "la vecina se quejó", "no había luz"], "las luces se apagaban solas"],
+        ["¿Qué sueña el marido?", ["vivir como un campesino", "volver a la ciudad", "vender la casa", "ser pintor"], "vivir como un campesino"]
+      ],
+      hunt: { label: "Tocá fare y lasciare seguidos de infinitivo", targets: ["fare", "fatto", "lasciato", "farà", "lascio"] } },
+
+    { id: "w-41", week: 41, level: "C1", emoji: "🌙", title: "Una notte in campagna",
+      grammar: "verbi di percezione",
+      text:
+        "La prima notte in campagna non riuscivo a dormire. Sentivo le cicale cantare e i cani abbaiare " +
+        "lontano. Dalla finestra vedevo la luna salire dietro le colline.\n\n" +
+        "A un certo punto ho sentito qualcuno camminare in giardino. Ho visto un'ombra passare vicino alla " +
+        "porta e ho sentito il cuore battere forte.\n\n" +
+        "Ho acceso la luce e ho visto... un gatto nero mangiare dalla ciotola del cane! Mi ha guardato un " +
+        "momento e poi è scappato. Ho riso da sola e finalmente mi sono addormentata, mentre sentivo il " +
+        "vento muovere le foglie.",
+      gloss: { riuscivo: "lograba", cicale: "chicharras", abbaiare: "ladrar", lontano: "lejos", colline: "colinas",
+               ombra: "sombra", cuore: "corazón", battere: "latir", acceso: "prendido", ciotola: "cuenco",
+               scappato: "escapado", vento: "viento", foglie: "hojas" },
+      questions: [
+        ["¿Qué oía al principio?", ["las chicharras y perros a lo lejos", "música", "el mar", "autos"], "las chicharras y perros a lo lejos"],
+        ["¿Quién estaba en el jardín?", ["un gato negro", "un ladrón", "el perro", "el vecino"], "un gato negro"],
+        ["¿Cómo termina la noche?", ["se duerme mientras oye el viento", "no duerme nada", "llama a la policía", "se va a la ciudad"], "se duerme mientras oye el viento"]
+      ],
+      hunt: { label: "Tocá los verbos de percepción (sentivo, vedevo, ho visto…)", targets: ["sentivo", "vedevo", "sentito", "visto"] } },
+
+    { id: "w-42", week: 42, level: "C1", emoji: "🏃", title: "Buoni propositi",
+      grammar: "verbi e preposizioni",
+      text:
+        "A gennaio Luca ha deciso di cambiare vita. Ha smesso di fumare e ha cominciato a correre ogni mattina. " +
+        "Ha promesso alla moglie di tornare a casa prima la sera e ha provato a imparare a cucinare.\n\n" +
+        "Ha anche pensato di iscriversi a un corso di chitarra, ma non è riuscito a trovare il tempo. " +
+        "Si è abituato a svegliarsi alle sei, però si è stancato di mangiare solo insalata.\n\n" +
+        "A marzo sua moglie gli ha chiesto: \"Continui a correre?\" Luca ha finto di non sentire. " +
+        "\"Almeno hai smesso di fumare\", ha detto lei. \"Quello sì\", ha risposto lui, orgoglioso.",
+      gloss: { smesso: "dejado", fumare: "fumar", provato: "intentado",
+               iscriversi: "anotarse", chitarra: "guitarra", riuscito: "logrado", abituato: "acostumbrado",
+               stancato: "cansado", insalata: "ensalada", finto: "fingido", orgoglioso: "orgulloso" },
+      questions: [
+        ["¿Qué dejó Luca en enero?", ["de fumar", "de correr", "de trabajar", "de cocinar"], "de fumar"],
+        ["¿Por qué no hizo el curso de guitarra?", ["no encontró tiempo", "era caro", "no le gustaba", "se lastimó"], "no encontró tiempo"],
+        ["¿Qué pasa en marzo?", ["finge no oír si sigue corriendo", "sigue corriendo", "vuelve a fumar", "empieza guitarra"], "finge no oír si sigue corriendo"]
+      ],
+      hunt: { label: "Tocá las preposiciones que siguen al verbo (di, a)", targets: ["di", "a"] } },
+
+    { id: "w-44", week: 44, level: "C1", emoji: "🌉", title: "Tornando a casa",
+      grammar: "gerundio e participio",
+      text:
+        "Tornando a casa dal lavoro, Silvia ha incontrato una vecchia amica. Parlando del passato, si sono " +
+        "accorte di non vedersi da dieci anni.\n\n" +
+        "Finita la cena, hanno camminato lungo il fiume, ridendo come ragazze. Arrivate al ponte, si sono " +
+        "fermate a guardare le luci della città.\n\n" +
+        "\"Pensando a quegli anni, mi viene nostalgia\", ha detto l'amica. Silvia, sorridendo, le ha preso il " +
+        "braccio: \"Vedendoti, mi sembra ieri.\" Prima di salutarsi davanti alla stazione, si sono promesse " +
+        "di rivedersi presto. E questa volta, conoscendole, lo faranno davvero.",
+      gloss: { accorte: "dado cuenta", lungo: "a lo largo de", fiume: "río", ridendo: "riéndose", ponte: "puente",
+               fermate: "detenido", nostalgia: "nostalgia", sorridendo: "sonriendo", braccio: "brazo",
+               salutarsi: "despedirse", promesse: "prometido", davvero: "de verdad" },
+      questions: [
+        ["¿Hace cuánto no se veían?", ["diez años", "un año", "veinte años", "un mes"], "diez años"],
+        ["¿Dónde se detuvieron?", ["en el puente", "en la estación", "en un bar", "en la casa"], "en el puente"],
+        ["¿Qué se prometieron?", ["volver a verse pronto", "escribirse", "viajar juntas", "nada"], "volver a verse pronto"]
+      ],
+      hunt: { label: "Tocá los gerundios y participios (tornando, finita…)", targets: ["tornando", "parlando", "finita", "ridendo", "arrivate", "pensando", "sorridendo", "vedendoti", "conoscendole"] } },
+
+    { id: "w-45", week: 45, level: "C1", emoji: "🏅", title: "La maratona",
+      grammar: "costruzioni verbali speciali",
+      text:
+        "Domenica Paolo ha corso la sua prima maratona. Ci ha messo quattro ore e mezza, ma ce l'ha fatta. " +
+        "Al trentesimo chilometro voleva andarsene a casa: le gambe non ce la facevano più.\n\n" +
+        "Un signore anziano l'ha superato sorridendo, e Paolo se l'è presa un po'. \"Se ce la fa lui, " +
+        "ce la faccio anch'io\", ha pensato.\n\n" +
+        "All'arrivo sua figlia gli ha detto: \"Te la sei cavata bene, papà!\" Paolo non ci credeva: era " +
+        "stanco morto ma felice. \"L'anno prossimo ci metterò meno\", ha promesso. \"Vedremo\", ha detto la moglie ridendo.",
+      gloss: { maratona: "maratón", messo: "tardado (metterci)", trentesimo: "trigésimo", andarsene: "irse",
+               gambe: "piernas", anziano: "mayor", superato: "pasado", presa: "ofendido (prendersela)",
+               arrivo: "llegada", cavata: "arreglado (cavarsela = arreglárselas)", morto: "muerto" },
+      questions: [
+        ["¿Cuánto tardó?", ["cuatro horas y media", "tres horas", "cinco horas", "dos horas"], "cuatro horas y media"],
+        ["¿Qué le molestó?", ["que un señor mayor lo pasara", "el calor", "la lluvia", "su hija"], "que un señor mayor lo pasara"],
+        ["¿Qué promete para el año próximo?", ["tardar menos", "no correr", "correr con su hija", "entrenar menos"], "tardar menos"]
+      ],
+      hunt: { label: "Tocá las partículas de los verbos pronominales (ce, ci, se, te)", targets: ["ce", "ci", "se", "te"] } },
+
+    { id: "w-48", week: 48, level: "C1", emoji: "☕", title: "Il barista Gino",
+      grammar: "ordine delle parole e dislocazioni",
+      text:
+        "Il caffè, lo prendo sempre al bar sotto casa. Il barista, Gino, lo conosco da vent'anni. Di calcio, " +
+        "con lui, ne parlo ogni mattina, anche se tifiamo per squadre diverse.\n\n" +
+        "\"La Juve, quest'anno, non la ferma nessuno\", dice lui. \"Ma che dici? Lo scudetto lo vince l'Inter\", " +
+        "rispondo io.\n\n" +
+        "È stato lui a farmi conoscere mia moglie: era una cliente anche lei. Il cornetto, invece, l'ho sempre " +
+        "preso altrove, perché quelli di Gino sono duri come pietre. Ma questo, a lui, non l'ho mai detto.",
+      gloss: { tifiamo: "somos hinchas", squadre: "equipos", ferma: "para", scudetto: "campeonato",
+               cornetto: "medialuna", altrove: "en otro lado", duri: "duros", pietre: "piedras" },
+      questions: [
+        ["¿Hace cuánto conoce a Gino?", ["veinte años", "dos años", "diez años", "desde chico"], "veinte años"],
+        ["¿Qué le debe a Gino?", ["haber conocido a su esposa", "un trabajo", "plata", "un café gratis"], "haber conocido a su esposa"],
+        ["¿Qué nunca le dijo?", ["que sus medialunas son duras", "que es de otro equipo", "que no le gusta el café", "que se muda"], "que sus medialunas son duras"]
+      ],
+      hunt: { label: "Tocá los pronombres que retoman lo dislocado (lo, la, ne, l')", targets: ["lo", "la", "ne", "l'ho"] } },
+
+    { id: "w-49", week: 49, level: "C1", emoji: "📢", title: "Avviso ai condomini",
+      grammar: "registro alto e coesione",
+      text:
+        "Gentili condomini, si comunica che, a partire da lunedì 3 marzo, avranno inizio i lavori di " +
+        "manutenzione dell'ascensore. Durante tale periodo, la cui durata si prevede di due settimane, " +
+        "l'impianto non sarà utilizzabile.\n\n" +
+        "Si invitano pertanto i residenti a servirsi delle scale e a prestare particolare attenzione ai " +
+        "materiali depositati nell'atrio. Qualora vi fossero esigenze specifiche, in particolare per persone " +
+        "anziane o con disabilità, si prega di contattare l'amministrazione.\n\n" +
+        "Ci scusiamo per il disagio e confidiamo nella consueta collaborazione. Distinti saluti, l'Amministratore.",
+      gloss: { condomini: "vecinos del consorcio", manutenzione: "mantenimiento",
+               ascensore: "ascensor", tale: "dicho", impianto: "instalación", pertanto: "por lo tanto",
+               servirsi: "valerse", atrio: "hall", qualora: "en caso de que", esigenze: "necesidades", utilizzabile: "utilizable", depositati: "depositados", amministrazione: "administración", disabilità: "discapacidad", confidiamo: "confiamos", collaborazione: "colaboración", distinti: "atentos (distinti saluti = saludos atentos)",
+               prega: "ruega", disagio: "molestia", consueta: "habitual" },
+      questions: [
+        ["¿Cuánto duran los trabajos?", ["dos semanas", "un mes", "tres días", "no se sabe"], "dos semanas"],
+        ["¿Qué deben usar los vecinos?", ["las escaleras", "el ascensor de servicio", "la puerta de atrás", "nada"], "las escaleras"],
+        ["¿Quién debe contactar a la administración?", ["quien tenga necesidades específicas", "todos", "nadie", "los niños"], "quien tenga necesidades específicas"]
+      ],
+      hunt: { label: "Tocá los conectores formales (pertanto, qualora, durante…)", targets: ["pertanto", "qualora", "durante", "tale"] } },
+
+    { id: "w-51", week: 51, level: "C1", emoji: "✉️", title: "Lettera a me stesso",
+      grammar: "ripasso generale C1",
+      text:
+        "Caro me, se stai leggendo queste righe, vuol dire che è passato un anno da quando hai cominciato " +
+        "a studiare italiano. Ti ricordi quanto faticavi a distinguere il passato prossimo dall'imperfetto? " +
+        "E quante volte hai sbagliato l'ausiliare di \"andare\"?\n\n" +
+        "Oggi, invece, leggi un giornale senza vocabolario e capisci quasi tutto quello che senti alla radio. " +
+        "Non che tu sia diventato perfetto, sia chiaro: il congiuntivo ti fa ancora qualche scherzo.\n\n" +
+        "Però, se ti fossi arreso a febbraio, non saresti arrivato fin qui. Continua così, e il prossimo anno " +
+        "scrivimi in italiano, possibilmente senza errori.",
+      gloss: { righe: "líneas", faticavi: "te costaba", distinguere: "distinguir", vocabolario: "diccionario",
+               quasi: "casi", chiaro: "claro", scherzo: "broma, jugada", volte: "veces", arreso: "rendido", possibilmente: "si es posible" },
+      questions: [
+        ["¿Cuánto tiempo pasó?", ["un año", "un mes", "diez años", "una semana"], "un año"],
+        ["¿Qué le cuesta todavía?", ["el congiuntivo", "leer el diario", "entender la radio", "el passato prossimo"], "el congiuntivo"],
+        ["¿Qué habría pasado si se rendía en febrero?", ["no habría llegado hasta acá", "hablaría mejor", "nada", "habría viajado"], "no habría llegado hasta acá"]
+      ],
+      hunt: { label: "Tocá los congiuntivi y el condizionale (sia, fossi, saresti)", targets: ["sia", "fossi", "saresti"] } },
+
+    { id: "w-52", week: 52, level: "C1", emoji: "🎓", title: "Il giorno dell'esame",
+      grammar: "tutto l'anno",
+      text:
+        "Alle otto e mezza Martina era già davanti all'università, con il documento in mano e il cuore che " +
+        "batteva forte. Aveva studiato per un anno intero e ora doveva dimostrare di aver raggiunto il livello C1.\n\n" +
+        "La prova di ascolto fu la più difficile: due giornalisti parlavano velocissimi di economia. Nella " +
+        "produzione scritta, invece, si sentì a suo agio: le chiedevano di argomentare sui pro e i contro " +
+        "del lavoro da casa.\n\n" +
+        "Un mese dopo arrivò la mail: \"Esame superato.\" Martina la lesse tre volte prima di crederci. " +
+        "Poi chiamò la sua insegnante: \"Ce l'ho fatta!\"",
+      gloss: { documento: "documento", cuore: "corazón", batteva: "latía", dimostrare: "demostrar",
+               raggiunto: "alcanzado", prova: "prueba", ascolto: "escucha", giornalisti: "periodistas",
+               agio: "gusto (a suo agio = cómoda)", produzione: "producción", volte: "veces", argomentare: "argumentar", superato: "aprobado",
+               insegnante: "profesora" },
+      questions: [
+        ["¿Qué prueba fue la más difícil?", ["la de escucha", "la escrita", "la oral", "la de lectura"], "la de escucha"],
+        ["¿Sobre qué tuvo que argumentar?", ["el trabajo desde casa", "la economía", "la universidad", "el deporte"], "el trabajo desde casa"],
+        ["¿A quién llamó al final?", ["a su profesora", "a su madre", "a un periodista", "a la universidad"], "a su profesora"]
+      ],
+      hunt: { label: "Tocá los verbos en passato remoto", targets: ["fu", "sentì", "arrivò", "lesse", "chiamò"] } }
   ];
 
   var api = { TESTI: TESTI };
