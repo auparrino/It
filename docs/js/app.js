@@ -624,7 +624,7 @@
     c.width = W; c.height = H;
     var g = c.getContext("2d");
     // the frame of the language (LANG.card: the sky and a plaza, the sea
-    // and the calçadão), then the lines where it says
+    // and the waves of a beach), then the lines where it says
     var K = LG.card;
     K.frame(g, W, H);
     g.fillStyle = K.head.color || K.text; g.textAlign = "center";
@@ -1189,7 +1189,7 @@
   var HL_STOP = LG.hlStop || {};
   function markForms(text, fs) {
     var t = String(text), low = t.toLowerCase(), marks = [];
-    // «-ção», «-ato»: an ending the rule teaches, marked on every word that has it
+    // «-ato»: an ending the rule teaches, marked on every word that has it
     var ends = (fs || []).filter(function (f) { return /^-[a-zà-ÿ]+$/.test(f); }).map(function (f) { return f.slice(1); });
     // the words of the table's forms (ho, sono / tenho, sou…), grammar words aside
     var words = [];
@@ -3037,11 +3037,12 @@
     var nextRank = null;
     Engine.RANKS.forEach(function (r) { if (!nextRank && r[0] > lv.level) nextRank = r; });
 
-    return "<h1>" + UI.me + "</h1>" + switchCard() +
+    return "<h1>" + UI.me + "</h1>" +
       '<div class="card rank"><div class="rk">' + esc(Engine.rankFor(lv.level)) + "</div>" +
         '<div class="muted">nivel ' + lv.level + " · " + state.xp + " xp totales" +
         (nextRank ? " · próximo rango: <b>" + esc(nextRank[1]) + "</b> en el nivel " +
           nextRank[0] : "") + "</div></div>" +
+      switchCard() +
 
       '<div class="card"><h2>Ajustes</h2>' +
         '<label class="set"><span>Meta diaria</span><select id="goal">' +
@@ -3753,7 +3754,7 @@
     on("#dgredo", function () { dg = { week: w.week, step: 0, plays: 0 }; render(); });
   }
 
-  /* --------------------------------------------------- leia e ouça */
+  /* --------------------------------------------------- leer y escuchar */
 
   /* Listening time counts as input (Nation's first strand): one xp per
      ten seconds, thirty a day at most. */
@@ -4327,7 +4328,7 @@
     });
   }
 
-  /* Scrittura / Produção escrita: two texts; with a key the AI grades them with the
+  /* The written production: two texts; with a key the AI grades them with the
      rubric, otherwise the local checker counts words and hard errors. */
   function renderEsameScrittura() {
     var head = '<button class="btn ghost" id="eback2">← al examen</button><h1>✍️ ' + EX.writing + "</h1>";

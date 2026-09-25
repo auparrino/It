@@ -370,9 +370,9 @@ ok(Drills.dueCount(course, state) >= 30, "le schede scadute rientrano in coda");
   ok(/k\.indexOf\(PREFIX\) === 0/.test(sw) && /PREFIX = "c1-"/.test(sw), "el service worker solo borra sus propias cachés");
   // Every text app.js reads from the package exists (app.js does not run under node).
   var need = {};
-  (core.match(/\bUI\.[a-zA-Z]+/g) || []).forEach(function (k) { need["ui." + k.slice(3)] = L.ui[k.slice(3)]; });
-  (core.match(/\bEX\.[a-zA-Z]+/g) || []).forEach(function (k) { need["exam." + k.slice(3)] = L.exam[k.slice(3)]; });
-  (core.match(/\bLG\.[a-zA-Z]+/g) || []).forEach(function (k) { need[k.slice(3)] = k.slice(3) in L ? true : undefined; });
+  (core.match(/\bUI\.[a-zA-Z0-9]+/g) || []).forEach(function (k) { need["ui." + k.slice(3)] = L.ui[k.slice(3)]; });
+  (core.match(/\bEX\.[a-zA-Z0-9]+/g) || []).forEach(function (k) { need["exam." + k.slice(3)] = L.exam[k.slice(3)]; });
+  (core.match(/\bLG\.[a-zA-Z0-9]+/g) || []).forEach(function (k) { need[k.slice(3)] = k.slice(3) in L ? true : undefined; });
   var missing = Object.keys(need).filter(function (k) { return need[k] === undefined; });
   ok(!missing.length, "LANG (lang/it/lang.js) trae todo lo que usa app.js; faltan: " + missing.join(", "));
   ok(L.ui.tabs.length === 5 && L.ui.tabs[0][2] === "Oggi" && L.ui.tabs[4][2] === "Io", "las pestañas: Oggi … Io");

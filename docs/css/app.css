@@ -334,7 +334,7 @@ html[data-lang="pick"] header.top, html[data-lang="pick"] nav.nav { display: non
 .pick h1 { font-family: Georgia, "Times New Roman", serif; font-size: 1.75rem; line-height: 1.15; text-align: center; margin: 0 0 6px; }
 .pick > p { text-align: center; color: var(--pk-gris); margin: 0 0 20px; font-size: .95rem; }
 .pick-lang { position: relative; display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 2px 12px;
-  width: 100%; min-height: 150px; margin: 0 0 14px; padding: 18px 18px 16px; text-align: left; overflow: hidden;
+  width: 100%; min-height: 150px; margin: 0 0 14px; padding: 18px 18px 18px; text-align: left; overflow: hidden;
   border: 0; border-radius: 18px; color: #fff; box-shadow: 0 2px 4px rgba(0,0,0,.08), 0 10px 26px rgba(20,40,60,.16);
   transition: transform .12s ease, box-shadow .12s ease; }
 .pick-lang:active { transform: scale(.985); }
@@ -352,7 +352,7 @@ html[data-lang="pick"] header.top, html[data-lang="pick"] nav.nav { display: non
   border-radius: 50% 50% 0 0; border: 14px solid rgba(255,255,255,.14); border-bottom: 0; }
 .pick-lang.it .plate { background: #f3ebdb; color: #1f2630; box-shadow: inset 0 0 0 1px #fff, inset 0 0 0 2px rgba(107,106,102,.55); }
 /* Rumo: el mar de Ipanema, las ondas del calçadão, la placa azul de Río */
-.pick-lang.pt { background: linear-gradient(160deg, #1fb5b0 0, #0a8088 55%, #065a61 100%); }
+.pick-lang.pt { padding-bottom: 36px; background: linear-gradient(160deg, #1fb5b0 0, #0a8088 55%, #065a61 100%); }
 .pick-lang.pt::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 26px; opacity: .22;
   background: radial-gradient(circle at 20px -6px, transparent 16px, #fff 17px, #fff 22px, transparent 23px) 0 0 / 40px 26px repeat-x; }
 .pick-lang.pt .plate { background: #0f4c85; color: #fff; border: 2px solid #fff; box-shadow: 0 0 0 1px #0f4c85; }

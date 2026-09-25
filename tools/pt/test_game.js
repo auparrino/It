@@ -417,9 +417,9 @@ ok(Drills.dueCount(course, state) >= 30, "las fichas vencidas vuelven a la cola"
   ok(!/["']data\/[\w.]+\.json["']|["']it-IT["']|["']pt-BR["']|[ãõç]/.test(core), "app.js no pide docs/data/, no nombra una voz ni escribe letras del idioma");
   // Every text app.js reads from the package exists (app.js does not run under node).
   var need = {};
-  (core.match(/\bUI\.[a-zA-Z]+/g) || []).forEach(function (k) { need["ui." + k.slice(3)] = L.ui[k.slice(3)]; });
-  (core.match(/\bEX\.[a-zA-Z]+/g) || []).forEach(function (k) { need["exam." + k.slice(3)] = L.exam[k.slice(3)]; });
-  (core.match(/\bLG\.[a-zA-Z]+/g) || []).forEach(function (k) { need[k.slice(3)] = k.slice(3) in L ? true : undefined; });
+  (core.match(/\bUI\.[a-zA-Z0-9]+/g) || []).forEach(function (k) { need["ui." + k.slice(3)] = L.ui[k.slice(3)]; });
+  (core.match(/\bEX\.[a-zA-Z0-9]+/g) || []).forEach(function (k) { need["exam." + k.slice(3)] = L.exam[k.slice(3)]; });
+  (core.match(/\bLG\.[a-zA-Z0-9]+/g) || []).forEach(function (k) { need[k.slice(3)] = k.slice(3) in L ? true : undefined; });
   var missing = Object.keys(need).filter(function (k) { return need[k] === undefined; });
   ok(!missing.length, "LANG (lang/pt/lang.js) trae todo lo que usa app.js; faltan: " + missing.join(", "));
   ok(L.ui.tabs.length === 5 && L.ui.tabs[0][2] === "Hoje" && L.ui.tabs[4][2] === "Eu", "las pestañas: Hoje … Eu");

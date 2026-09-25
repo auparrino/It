@@ -124,7 +124,7 @@
   /* El selector: una tarjeta por idioma, cada una con su mundo (el cielo
      de una plaza italiana y su placa de travertino; el mar de Ipanema, las
      ondas del calçadão y la placa azul de Río). */
-  var PLATE = { it: ["via", "C1"], pt: ["rua", "Rumo C1"] };
+  var PLATE = { it: ["la", "Via C1"], pt: ["rua", "Rumo C1"] };
   function picker() {
     var app = document.getElementById("app");
     document.documentElement.setAttribute("data-lang", "pick");

@@ -577,8 +577,12 @@
   /* A new save: the common fields plus the language's own (the versions of
      its syllabus: LANG.rules.save.blank). */
   function blankSave() {
-    var s = baseSave(), extra = SAVE.blank || {};
-    Object.keys(extra).forEach(function (k) { s[k] = extra[k]; });
+    var base = baseSave(), extra = SAVE.blank || {}, s = {};
+    // (right after the goal, where they always were in the saved JSON)
+    Object.keys(base).forEach(function (k) {
+      s[k] = base[k];
+      if (k === "goal") Object.keys(extra).forEach(function (x) { s[x] = extra[x]; });
+    });
     return s;
   }
 
