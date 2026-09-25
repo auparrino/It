@@ -10,7 +10,7 @@ docs/
   index.html            el caparazón: carga js/boot.js
   js/boot.js            elige el idioma y carga paquete + núcleo en ORDER
   js/*.js               el núcleo: engine, drills, lezione, banca, frasi, lab,
-                        letture, duelli, suoni, voci, frequenza, app
+                        letture, duelli, suoni, voci, frequenza, porque, app
   css/app.css           la estructura (usa los tokens del tema)
   fonts/, icons/        lo común (Atkinson Hyperlegible, el ícono de la app)
   sw.js                 un service worker para todo: el núcleo siempre,
