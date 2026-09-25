@@ -466,6 +466,7 @@
         '<button class="tab" id="discard">Descartar</button></span></div>';
     }
 
+    if (window.Ubicacion) html += Ubicacion.banner(state);
     html += oggiHabitCards();
 
     // El camino antes que nada: la semana en curso y la próxima misión.
@@ -1161,6 +1162,7 @@
     // La regla corta primero; el detalle, plegado.
     if (b.r && A) html += '<p class="rule">' + mk(b.r) + "</p>";
     if (A) (b.p || []).forEach(function (par) { html += "<p>" + mk(par) + "</p>"; });
+    if (A && b.fig && window.Mapas) html += Mapas.figure(b.fig);
 
     if (b.table && A) {
       html += '<div class="tw"><table class="gram">';
@@ -1286,6 +1288,7 @@
     var html = '<section class="blk">' + stepBadge("📐", "La regla") + (b.h ? "<h2>" + mk(b.h) + "</h2>" : "") +
       (b.r ? '<p class="rule solo">' + mk(b.r) + "</p>" : "");
     (b.p || []).forEach(function (par) { html += "<p>" + mk(par) + "</p>"; });
+    if (b.fig && window.Mapas) html += Mapas.figure(b.fig);
     if (b.table && Lezione.smallTable(b.table)) html += renderBlock({ table: b.table }, i, "a").replace(/^<section class="blk">|<\/section>$/g, "");
     return html + "</section>";
   }
@@ -1413,6 +1416,7 @@
     var q = st.q;
     return hudH + '<div class="card lescard quiz"><div class="badge-new">⚡ Chequeo rápido</div>' +
       '<div class="prompt">' + esc(q.prompt) + "</div>" +
+      (q.fig && window.Mapas ? Mapas.figure(q.fig, { bare: true }) : "") +
       (q.stem ? '<div class="stem">' + esc(q.stem) + "</div>" : "") +
       '<div class="options">' + q.options.map(function (o, k) {
         return '<button class="opt" data-lq="' + k + '">' + esc(o) + "</button>";
@@ -3110,6 +3114,7 @@
       })() : "") +
       (window.VociCV && (VociCV.ALL || []).length ? '<div class="card"><h2>🗣️ Oraciones grabadas</h2><p class="muted small">El dictado de ' + UI.suoni + " y «¿Qué forma escuchaste?» usan " +
         VociCV.ALL.length + " oraciones leídas por voluntarios de Common Voice (Mozilla), de dominio público (CC0).</p></div>" : "") +
+      (window.Ubicacion ? Ubicacion.card(state) : "") +
       '<div class="card"><h2>Medallas</h2><div class="badges">' +
         Engine.BADGES.map(function (b) {
           var won = state.badges.indexOf(b.id) >= 0;
@@ -3393,6 +3398,7 @@
     else if (s === "esame-let") html = renderEsameLettura();
     else if (s === "esame-scr") html = renderEsameScrittura();
     else if (s === "storia") html = renderStoria(course.weeks[view.week - 1]);
+    else if (s === "ubicacion" && window.Ubicacion) html = Ubicacion.html();
 
     var gb = $("#glossbox");
     if (gb) gb.classList.remove("on");
@@ -3409,7 +3415,23 @@
     if (pl) requestAnimationFrame(function () { requestAnimationFrame(function () { pl.style.width = pl.dataset.to + "%"; }); });
     renderNav();
     wire();
+    if (s === "ubicacion" && window.Ubicacion) Ubicacion.wire(app());
     growBoxes();
+  }
+
+  /* El test de ubicación (ubicacion.js): al empezar un idioma y desde Io / Eu. */
+  function startUbicacion() {
+    if (!window.Ubicacion) return;
+    var from = view.tab || "oggi";
+    Ubicacion.start({ course: course, state: state, render: render, done: function (applied) {
+      persist();
+      renderHeader();
+      if (applied) { view.week = Math.min(state.unlocked, 52); toast("🔓 Semanas 1 a " + (state.unlocked - 1) + " abiertas. Arrancás en la " + state.unlocked + "."); }
+      go(applied ? "percorso" : from);
+    } });
+    view.screen = "ubicacion";
+    render();
+    window.scrollTo(0, 0);
   }
 
   var subEntry = false;
@@ -3473,6 +3495,8 @@
 
     on("#back", function () { go("percorso"); });
     on("#toggi", function () { go("oggi"); });
+    on("#ubicgo", startUbicacion);
+    on("#ubicno", function () { state.ubicacion = { at: Date.now(), no: true }; persist(); render(); });
 
     // hoje
     on("#pausa", function () { startRound("pausa"); });
@@ -5092,6 +5116,7 @@
     .then(function (data) { return bankP.then(function () { return data; }); })
     .then(function (data) {
       course = data;
+      if (window.Mapas) Mapas.install(course);
       itemMap = Drills.itemsById(course);
       registerStories();
       view.week = Math.min(state.unlocked, 52);

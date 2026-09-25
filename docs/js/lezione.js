@@ -255,7 +255,7 @@
     if (!qs.length) return null;
     var q = qs[Math.floor(rnd() * qs.length)];
     return { kind: "hand", prompt: q.prompt, stem: q.stem || "", answer: q.answer,
-             options: shuffle(q.options.slice(), rnd) };
+             options: shuffle(q.options.slice(), rnd), fig: q.fig };
   }
 
   // A table that fits beside the rule: at most three rows of three columns.
@@ -313,7 +313,7 @@
       // «qq»: checks written by hand, all of them asked, in order.
       (b.qq || []).forEach(function (h) {
         out.push({ kind: "quiz", q: { kind: "hand", prompt: h.prompt, stem: h.stem || "", answer: h.answer,
-                                      options: shuffle(h.options.slice(), rnd), block: i } });
+                                      options: shuffle(h.options.slice(), rnd), block: i, fig: h.fig } });
       });
     });
     return out;
