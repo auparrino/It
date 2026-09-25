@@ -204,6 +204,65 @@
     }
     return tts();
   }
+  /* What is read aloud after an answer.  Only Italian: a Spanish gloss or
+     option (¡Ojalá!, botas de montaña) is never read with the Italian voice.
+     Spanish: ñ, ¿, ¡, a Spanish accent (á í ó ú), or more Spanish-only
+     words (function words, or glosses of the glossary that are not Italian
+     forms) than Italian-only ones; words of both (un, casa, libro) do not
+     count, and an unknown word with x, y, j or a final s, d is Spanish. */
+  var ES_WORDS = { el: 1, los: 1, las: 1, y: 1, es: 1, que: 1, por: 1, para: 1, muy: 1, pero: 1, yo: 1,
+                   hay: 1, cuando: 1, como: 1, donde: 1, de: 1, en: 1, usted: 1, ustedes: 1, nada: 1,
+                   algo: 1, bien: 1, tambien: 1, todo: 1, ella: 1, ellos: 1, nosotros: 1, este: 1, esta: 1, ni: 1 };
+  var IT_WORDS = {};
+  ("io lui lei noi voi loro li gli ne ci vi ce ve il i di da in e ed ma che chi non è sono sei ho hai ha " +
+   "allo alla ai agli alle della dei degli delle nel nella dal dalla sul sulla come perché anche più già " +
+   "molto bene fa sta qui là sì mai sempre ancora tutto tutti niente").split(" ").forEach(function (w) { IT_WORDS[w] = 1; });
+  var BOTH = {};         // la, me, con, casa: say nothing about the language
+  ("la lo le los un una uno a me te se si con su mi tu no o al del per va poco cosa solo " +
+   "casa mano foto madre gente radio moda amore ora pasta idea").split(" ").forEach(function (w) { BOTH[w] = 1; });
+  var esGloss = null;
+  function spanishText(text) {
+    text = String(text || "");
+    if (/[ñ¿¡áíóú]/i.test(text)) return true;
+    if (!esGloss && glossario) {
+      esGloss = {};
+      Object.keys(glossario).forEach(function (k) {
+        String(glossario[k][1] || "").toLowerCase().split(/[^a-zñáéíóúü]+/).forEach(function (w) { if (w) esGloss[w] = 1; });
+      });
+    }
+    var es = 0, itn = 0;
+    (text.toLowerCase().match(/[a-zàèéìòù]+/g) || []).forEach(function (w) {
+      if (BOTH[w]) return;
+      var isIt = IT_WORDS[w] || (glossario && glossario[w]), isEs = ES_WORDS[w] || (esGloss && esGloss[w]);
+      if (ES_WORDS[w] || (isEs && !isIt)) es++;
+      else if (isIt && !isEs) itn++;
+      else if (!isIt && !isEs && /[xyj]|[sd]$/.test(w)) es++;      // reflexiva, sujeto, ustedes: not Italian spelling
+    });
+    return es > itn;
+  }
+  // «¿Qué significa?», «¿Qué es «un mattone»?»: the options are Spanish.
+  function asksMeaning(it) {
+    return /¿\s*qu[ée] (significa|es|son|expresa|quiere decir)\b/i.test(it.prompt || "") &&
+      !/(en|al) italiano/i.test(it.prompt || "");
+  }
+  /* A gap exercise, answered: the whole sentence with the gaps filled
+     («Gli piace studiare», not just «piace»); in «A → ___» only what is
+     after the arrow.  The Spanish hints in brackets are left out. */
+  function filledStem(it) {
+    var stem = String(it.stem || "");
+    if (!/_{3,}/.test(stem)) return null;
+    if (stem.indexOf("→") >= 0) stem = stem.slice(stem.lastIndexOf("→") + 1);
+    var answers = String(it.answer || "").split(/\s*\|\s*/).map(function (a) {
+      return /^\(.*\)$/.test(a.trim()) ? "" : a.trim();          // «(sin partitivo)»: nothing goes there
+    });
+    var k = 0;
+    // an elided answer (l’, dell’) joins the next word: l’amica
+    var out = stem.replace(/\([^)]*\)/g, " ").replace(/_{3,}/g, function () {
+      var a = answers[k++] || "";
+      return /[’']$/.test(a) && !/\bpo[’']$/.test(a) ? a + "\u0000" : a;     // un po' di: truncated, not elided
+    });
+    return out.replace(/\u0000\s*/g, "").replace(/\s+([,.;:!?])/g, "$1").replace(/\s+/g, " ").trim();
+  }
   function pickVoice() {
     if (!window.speechSynthesis) return;
     var vs = window.speechSynthesis.getVoices();
@@ -582,7 +641,7 @@
 
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION in sw.js: test_game checks it). */
-  var APP_VERSION = "v1.49";
+  var APP_VERSION = "v1.50";
   function versionLine() {
     return '<p class="muted small version">La Via C1 · versión ' + APP_VERSION + "</p>";
   }
@@ -2130,10 +2189,14 @@
     });
     if (it.type === "tiles") drawTiles();
 
-    var spoken = it.frase ? it.frase.it : it.src === "lettura" ? "" : it.dir === "it-es" || it.type === "scopri" ? it.stem : it.answer;
+    var spoken = it.frase ? it.frase.it : it.src === "lettura" ? "" : it.dir === "it-es" || it.type === "scopri" ? it.stem
+      : filledStem(it) || it.answer;
     if (SAY_TYPES[it.type] || it.dettato) spoken = it.say;
     // False friends and structured input: read the Italian prompt aloud.
     if (it.lab === "falsi" || it.lab === "capire") spoken = it.stem;
+    // A Spanish answer (¿Qué significa «mica»? → No es nada fácil) is not
+    // read: the Italian sentence of the question is, when there is one.
+    if (spanishText(spoken) || (spoken === it.answer && asksMeaning(it))) spoken = it.stem && !/_{3,}/.test(it.stem) && !spanishText(it.stem) ? it.stem : "";
     $("#next").onclick = nextItem;
     on("#aiexp", function () {
       var b = $("#aiexp"), outE = $("#aiexpout");
@@ -2179,7 +2242,8 @@
       });
     });
     $("#say2").onclick = function () { if (it.audio) speakItem(it, true); else speak(spoken, true); };
-    if (q === 2 || it.frase) { if (it.audio) speakItem(it); else speak(spoken); }
+    if (!spoken && !it.audio) $("#say2").hidden = true;
+    else if (q === 2 || it.frase) { if (it.audio) speakItem(it); else speak(spoken); }
     $("#fb").scrollIntoView({ behavior: "smooth", block: "nearest" });
   }
 
@@ -4471,7 +4535,7 @@
             '<button class="btn ghost" data-fq="0">😬 No</button>' +
             '<button class="btn ghost" data-fq="1">🤏 Casi</button>' +
             '<button class="btn" data-fq="2">😎 ¡Sí!</button></div>';
-        speak(it.answer);
+        if (!spanishText(it.answer) && !asksMeaning(it)) speak(it.answer);
         document.querySelectorAll("[data-fq]").forEach(function (b) {
           b.onclick = function () {
             var q = +b.dataset.fq;
