@@ -1,12 +1,14 @@
 {
-  "name": "la-via-c1",
-  "version": "41.0.0",
+  "name": "la-via-rumo-c1",
+  "version": "42.0.0",
   "private": true,
-  "description": "La Via C1: italiano hasta C1 en un año, para hispanohablantes. Sitio estático sin dependencias.",
+  "description": "Una app, dos idiomas: italiano (La Via C1) y portugués de Brasil (Rumo C1) hasta C1 en un año, para hispanohablantes. Sitio estático sin dependencias.",
   "scripts": {
-    "test": "node tools/test_conjugator.js && node tools/test_game.js && node tools/test_frasi.js && node tools/test_diagnosi.js && node tools/test_scrivi.js && node tools/test_memoria.js && node tools/test_suoni.js",
-    "build": "python3 tools/build_bank.py && python3 tools/build_course.py",
-    "sim": "node tools/sim_carriera.js",
+    "test": "npm run test:it && npm run test:pt",
+    "test:it": "node tools/it/test_conjugator.js && node tools/it/test_game.js && node tools/it/test_frasi.js && node tools/it/test_diagnosi.js && node tools/it/test_scrivi.js && node tools/it/test_memoria.js && node tools/it/test_suoni.js",
+    "test:pt": "node tools/pt/test_conjugator.js && node tools/pt/test_game.js && node tools/pt/test_frasi.js && node tools/pt/test_diagnosi.js && node tools/pt/test_scrivi.js && node tools/pt/test_memoria.js && node tools/pt/test_suoni.js",
+    "build": "python3 tools/it/build_bank.py && python3 tools/it/build_course.py && python3 tools/pt/build_bank.py && python3 tools/pt/build_course.py",
+    "sim": "node tools/it/sim_carriera.js && node tools/pt/sim_carriera.js",
     "start": "cd docs && python3 -m http.server 8000"
   },
   "license": "UNLICENSED"
