@@ -170,10 +170,28 @@
     window.speechSynthesis.speak(u);
     return u;
   }
+  var realAudio = null;
   // An item of the listening module carries its own voice (variability).
   function speakItem(it, force, rate) {
     var v = it.voice || {};
     var tts = function () { return speak(it.say || it.stem, force, rate || v.rate, { pitch: v.pitch, vi: v.vi }); };
+    // A sentence of Common Voice: the recording itself; the phone's voice
+    // only when it cannot play (offline the first time, an old browser).
+    if (it.audio && typeof Audio === "function") {
+      if (state.silent && !force) return null;
+      if (window.speechSynthesis) speechSynthesis.cancel();
+      try {
+        if (realAudio) realAudio.pause();
+        var a = realAudio = new Audio(it.audio), fell = false;
+        var fall = function () { if (!fell) { fell = true; tts(); } };
+        if (rate && rate < 0.9) a.playbackRate = 0.75;
+        a.onerror = fall;
+        var pr = a.play();
+        if (pr && pr.catch) pr.catch(fall);
+        var c = $("#vcredit"); if (c) c.textContent = "🎙️ Voz real · " + (window.VociCV ? VociCV.LICENSE : "Common Voice");
+      } catch (e) { tts(); }
+      return null;
+    }
     // A pair of Suoni: a real speaker of Lingua Libre when there is one
     // (not for open/closed vowels: the file name cannot tell pèsca from pésca).
     if (window.Voci && it.type === "coppia" && it.cat !== "vocali" && Voci.usable(it.say)) {
@@ -185,6 +203,65 @@
       return null;
     }
     return tts();
+  }
+  /* What is read aloud after an answer.  Only Italian: a Spanish gloss or
+     option (¡Ojalá!, botas de montaña) is never read with the Italian voice.
+     Spanish: ñ, ¿, ¡, a Spanish accent (á í ó ú), or more Spanish-only
+     words (function words, or glosses of the glossary that are not Italian
+     forms) than Italian-only ones; words of both (un, casa, libro) do not
+     count, and an unknown word with x, y, j or a final s, d is Spanish. */
+  var ES_WORDS = { el: 1, los: 1, las: 1, y: 1, es: 1, que: 1, por: 1, para: 1, muy: 1, pero: 1, yo: 1,
+                   hay: 1, cuando: 1, como: 1, donde: 1, de: 1, en: 1, usted: 1, ustedes: 1, nada: 1,
+                   algo: 1, bien: 1, tambien: 1, todo: 1, ella: 1, ellos: 1, nosotros: 1, este: 1, esta: 1, ni: 1 };
+  var IT_WORDS = {};
+  ("io lui lei noi voi loro li gli ne ci vi ce ve il i di da in e ed ma che chi non è sono sei ho hai ha " +
+   "allo alla ai agli alle della dei degli delle nel nella dal dalla sul sulla come perché anche più già " +
+   "molto bene fa sta qui là sì mai sempre ancora tutto tutti niente").split(" ").forEach(function (w) { IT_WORDS[w] = 1; });
+  var BOTH = {};         // la, me, con, casa: say nothing about the language
+  ("la lo le los un una uno a me te se si con su mi tu no o al del per va poco cosa solo " +
+   "casa mano foto madre gente radio moda amore ora pasta idea").split(" ").forEach(function (w) { BOTH[w] = 1; });
+  var esGloss = null;
+  function spanishText(text) {
+    text = String(text || "");
+    if (/[ñ¿¡áíóú]/i.test(text)) return true;
+    if (!esGloss && glossario) {
+      esGloss = {};
+      Object.keys(glossario).forEach(function (k) {
+        String(glossario[k][1] || "").toLowerCase().split(/[^a-zñáéíóúü]+/).forEach(function (w) { if (w) esGloss[w] = 1; });
+      });
+    }
+    var es = 0, itn = 0;
+    (text.toLowerCase().match(/[a-zàèéìòù]+/g) || []).forEach(function (w) {
+      if (BOTH[w]) return;
+      var isIt = IT_WORDS[w] || (glossario && glossario[w]), isEs = ES_WORDS[w] || (esGloss && esGloss[w]);
+      if (ES_WORDS[w] || (isEs && !isIt)) es++;
+      else if (isIt && !isEs) itn++;
+      else if (!isIt && !isEs && /[xyj]|[sd]$/.test(w)) es++;      // reflexiva, sujeto, ustedes: not Italian spelling
+    });
+    return es > itn;
+  }
+  // «¿Qué significa?», «¿Qué es «un mattone»?»: the options are Spanish.
+  function asksMeaning(it) {
+    return /¿\s*qu[ée] (significa|es|son|expresa|quiere decir)\b/i.test(it.prompt || "") &&
+      !/(en|al) italiano/i.test(it.prompt || "");
+  }
+  /* A gap exercise, answered: the whole sentence with the gaps filled
+     («Gli piace studiare», not just «piace»); in «A → ___» only what is
+     after the arrow.  The Spanish hints in brackets are left out. */
+  function filledStem(it) {
+    var stem = String(it.stem || "");
+    if (!/_{3,}/.test(stem)) return null;
+    if (stem.indexOf("→") >= 0) stem = stem.slice(stem.lastIndexOf("→") + 1);
+    var answers = String(it.answer || "").split(/\s*\|\s*/).map(function (a) {
+      return /^\(.*\)$/.test(a.trim()) ? "" : a.trim();          // «(sin partitivo)»: nothing goes there
+    });
+    var k = 0;
+    // an elided answer (l’, dell’) joins the next word: l’amica
+    var out = stem.replace(/\([^)]*\)/g, " ").replace(/_{3,}/g, function () {
+      var a = answers[k++] || "";
+      return /[’']$/.test(a) && !/\bpo[’']$/.test(a) ? a + "\u0000" : a;     // un po' di: truncated, not elided
+    });
+    return out.replace(/\u0000\s*/g, "").replace(/\s+([,.;:!?])/g, "$1").replace(/\s+/g, " ").trim();
   }
   function pickVoice() {
     if (!window.speechSynthesis) return;
@@ -564,7 +641,7 @@
 
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION in sw.js: test_game checks it). */
-  var APP_VERSION = "v1.49";
+  var APP_VERSION = "v1.51";
   function versionLine() {
     return '<p class="muted small version">La Via C1 · versión ' + APP_VERSION + "</p>";
   }
@@ -1673,7 +1750,7 @@
   }
 
   // Items of the listening module: the audio is the question.
-  var SAY_TYPES = { coppia: 1, conta: 1, scegli: 1, intonazione: 1, accento: 1 };
+  var SAY_TYPES = { coppia: 1, conta: 1, scegli: 1, intonazione: 1, accento: 1, forma: 1 };
   /* Fatigue: when the accuracy of the last eight answers drops twenty
      points under the session's, the round offers to stop (no new items
      are learnt tired: intra-session dropout models, Riiid 2020). */
@@ -1786,7 +1863,8 @@
       }
     } else if (it.type === "dictation") {
       body = '<div class="center"><button class="bigplay" id="play1">🔊</button>' +
-        '<div><button class="tab" id="slow">🐢 más lento</button></div></div>' +
+        '<div><button class="tab" id="slow">🐢 más lento</button></div>' +
+        (it.audio ? '<p class="muted small" id="vcredit"></p>' : "") + "</div>" +
         '<div class="typed">' +
         '<textarea id="wans" class="grow" rows="1" autocomplete="off" autocapitalize="sentences" ' +
         'autocorrect="off" spellcheck="false" enterkeyhint="send" placeholder="lo que escuchás…"></textarea>' +
@@ -1802,7 +1880,9 @@
       body = '<div class="center"><button class="bigplay" id="play1">🔊</button>' +
         '<div><button class="tab" id="slow">🐢 más lento</button>' +
         (it.type === "coppia" ? '<button class="tab" id="both">👂 las dos</button>' : "") + "</div>" +
-        (it.type === "coppia" ? '<p class="muted small" id="vcredit"></p>' : "") + "</div>" +
+        (it.type === "coppia" || it.audio ? '<p class="muted small" id="vcredit"></p>' : "") + "</div>" +
+        // «¿Qué forma escuchaste?»: the sentence with the form blanked out
+        (it.type === "forma" ? '<div class="stem">' + esc(it.stem).replace("___", "<b>___</b>") + "</div>" : "") +
         '<div class="options' + (it.type === "coppia" ? " pair" : "") + '">' + it.options.map(function (o, k) {
           return '<button class="opt" data-opt="' + k + '">' + esc(o) + "</button>";
         }).join("") + "</div>";
@@ -2216,10 +2296,14 @@
     });
     if (it.type === "tiles") drawTiles();
 
-    var spoken = it.frase ? it.frase.it : it.src === "lettura" ? "" : it.dir === "it-es" || it.type === "scopri" ? it.stem : it.answer;
+    var spoken = it.frase ? it.frase.it : it.src === "lettura" ? "" : it.dir === "it-es" || it.type === "scopri" ? it.stem
+      : filledStem(it) || it.answer;
     if (SAY_TYPES[it.type] || it.dettato) spoken = it.say;
     // False friends and structured input: read the Italian prompt aloud.
     if (it.lab === "falsi" || it.lab === "capire") spoken = it.stem;
+    // A Spanish answer (¿Qué significa «mica»? → No es nada fácil) is not
+    // read: the Italian sentence of the question is, when there is one.
+    if (spanishText(spoken) || (spoken === it.answer && asksMeaning(it))) spoken = it.stem && !/_{3,}/.test(it.stem) && !spanishText(it.stem) ? it.stem : "";
     $("#next").onclick = nextItem;
     on("#aiexp", function () {
       var b = $("#aiexp"), outE = $("#aiexpout");
@@ -2264,8 +2348,9 @@
         show();
       });
     });
-    $("#say2").onclick = function () { speak(spoken, true); };
-    if (q === 2 || it.frase) speak(spoken);
+    $("#say2").onclick = function () { if (it.audio) speakItem(it, true); else speak(spoken, true); };
+    if (!spoken && !it.audio) $("#say2").hidden = true;
+    else if (q === 2 || it.frase) { if (it.audio) speakItem(it); else speak(spoken); }
     $("#fb").scrollIntoView({ behavior: "smooth", block: "nearest" });
   }
 
@@ -2861,6 +2946,8 @@
         return '<div class="card"><h2>🎙️ Voces reales</h2><p class="muted small">Suoni usa grabaciones de hablantes reales para ' + Voci.count() +
           " palabras. Voces de Lingua Libre (Wikimedia Commons), licencia CC BY-SA 4.0: " + Object.keys(cr).map(esc).join(", ") + ".</p></div>";
       })() : "") +
+      (window.VociCV ? '<div class="card"><h2>🗣️ Oraciones grabadas</h2><p class="muted small">El dictado de Suoni y «¿Qué forma escuchaste?» usan ' +
+        VociCV.ALL.length + " oraciones leídas por voluntarios de Common Voice (Mozilla), de dominio público (CC0).</p></div>" : "") +
       '<div class="card"><h2>Medallas</h2><div class="badges">' +
         Engine.BADGES.map(function (b) {
           var won = state.badges.indexOf(b.id) >= 0;
@@ -4555,7 +4642,7 @@
             '<button class="btn ghost" data-fq="0">😬 No</button>' +
             '<button class="btn ghost" data-fq="1">🤏 Casi</button>' +
             '<button class="btn" data-fq="2">😎 ¡Sí!</button></div>';
-        speak(it.answer);
+        if (!spanishText(it.answer) && !asksMeaning(it)) speak(it.answer);
         document.querySelectorAll("[data-fq]").forEach(function (b) {
           b.onclick = function () {
             var q = +b.dataset.fq;

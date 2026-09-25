@@ -5,7 +5,9 @@
  * (Yu, Boers & Tremblay 2025) y dictogloss (Wajnryb 1990).  Los datos
  * están en ascolto_data.js y dictogloss_data.js; el audio lo pone el TTS
  * del teléfono, con voces, velocidades y tonos distintos para simular la
- * variabilidad de hablantes.
+ * variabilidad de hablantes.  El dictado y «¿Qué forma escuchaste?» usan
+ * además oraciones grabadas por personas reales (Common Voice,
+ * voci_cv_data.js).
  */
 (function (root) {
   "use strict";
@@ -16,6 +18,7 @@
   var Engine = root.Engine || (typeof require === "function" ? require("./engine.js") : null);
   var Banca = root.Banca || (typeof require === "function" ? require("./banca.js") : null);
   var Frasi = root.Frasi || (typeof require === "function" ? require("./frasi.js") : null);
+  var CV = root.VociCV || req("./voci_cv_data.js");
 
   function shuffle(a, rnd) {
     a = a.slice();
@@ -67,6 +70,10 @@
      (its grammar already taught) or of a phrase the learner knows. */
   function fragments(week, state) {
     var out = [];
+    // Real voices first: a sentence of Common Voice for this week, when
+    // there is one, two times out of three.
+    var real = realFragments(week);
+    if (real.length && Math.random() < 2 / 3) return real;
     var B = Banca && Banca.loaded() ? Banca.bank() : null;
     if (B) B.sentences.forEach(function (s, i) {
       if ((s.w || 1) > week) return;
@@ -81,11 +88,32 @@
     });
     return out;
   }
+  function realFragments(week) {
+    return CV ? CV.ALL.filter(function (x) { return x.w <= week; }).map(function (x) {
+      return { text: x.it, id: "suoni:cv:" + x.f, audio: CV.url(x) };
+    }) : [];
+  }
   function dictItem(fr, k) {
-    return { id: fr.id, src: "ascolto", type: "dictation", voice: voiceOf(k),
+    var it = { id: fr.id, src: "ascolto", type: "dictation", voice: voiceOf(k),
              prompt: "Dictado: escuchá y escribí exactamente lo que oís (dobles y tildes incluidas)",
              say: fr.text, stem: fr.text, answer: fr.text, accept: [fr.text], dettato: true,
              note: "Las dobles se oyen más largas; una sola letra cambia la palabra (nono / nonno)." };
+    if (fr.audio) it.audio = fr.audio;
+    return it;
+  }
+
+  /* «¿Qué forma escuchaste?»: a real sentence, the form it uses blanked
+     out, and the form that competes with it (andassi / andavo, esca /
+     esce).  Like the duels, but by ear: only the audio decides. */
+  function formPool(week) {
+    return CV ? CV.ALL.filter(function (x) { return x.a && x.fw <= week; }) : [];
+  }
+  function formItem(x, k) {
+    var shown = x.it.replace(x.a, "___");
+    return { id: "suoni:cvf:" + x.f, src: "ascolto", type: "forma", voice: voiceOf(k), audio: CV.url(x),
+             prompt: "¿Qué forma escuchaste?", say: x.it, stem: shown,
+             options: shuffle([x.a, x.b]), answer: x.a, accept: [x.a],
+             es: "«" + x.it + "» · " + x.why };
   }
 
   function dueFirst(list, cards) {
@@ -122,6 +150,8 @@
     if (!opts.silent) {
       var fr = fragments(wk, state);
       if (fr.length) out.push(dictItem(pick(fr), k++));
+      dueFirst(formPool(wk).map(function (x) { return { id: "cvf:" + x.f, x: x }; }), cards).slice(0, 1)
+        .forEach(function (o) { out.push(formItem(o.x, k++)); });
     }
     return shuffle(out);
   }
@@ -184,7 +214,7 @@
              pct: text.chunks.length ? Math.round(found.length / text.chunks.length * 100) : 0 };
   }
 
-  var api = { session: session, randomItem: randomItem, progress: progress, pairItem: pairItem, voiceOf: voiceOf,
+  var api = { session: session, randomItem: randomItem, progress: progress, pairItem: pairItem, formItem: formItem, formPool: formPool, realFragments: realFragments, voiceOf: voiceOf,
               fragments: fragments, dictItem: dictItem, CAT_ES: CAT_ES,
               dgFor: dgFor, dgScore: dgScore, chunkFound: chunkFound, norm: norm,
               data: function () { return Data; }, dictogloss: function () { return Dg; } };

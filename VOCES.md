@@ -12,9 +12,24 @@ hay internet la primera vez o es un par de vocal abierta/cerrada
 (*pèsca/pésca*, que el nombre del archivo no distingue), suena la voz del
 teléfono como antes. No hizo falta bajar nada al repositorio.
 
-Lo que falta: **Common Voice** (oraciones para escuchar gramática) y,
-opcionalmente, **Tatoeba**. Esas dos sí necesitan bajar archivos, y la
-máquina en la nube donde trabajo no tiene acceso a esos sitios.
+**Common Voice en Suoni (✓ hecho, v1.49).** Del paquete Common Voice
+Italian 27.0 (bajado en la PC), `tools/voci_cv.py` eligió 446 oraciones por
+votos, largo y semana. Muchas eran fichas de Wikipedia (condados, discos,
+fútbol) o tenían la semana mal asignada, así que las revisé a mano: quedaron
+**128** naturales, con la semana corregida, en `docs/js/voci_cv_data.js`, y
+sus audios en `docs/audio/cv/` (5 MB; los otros 318 se sacaron del repo).
+- **Dictado de Suoni**: dos de cada tres veces, una oración grabada.
+- **«¿Qué forma escuchaste?»** (26 oraciones): el verbo en blanco y la
+  forma que compite (*andassi / andavo*, *esca / esce*), una por sesión desde
+  la semana de esa forma.
+- Crédito en *Io* (CC0, no es obligatorio, pero se agradece).
+
+**Para sumar más:** volver a correr `tools/voci_cv.py` sobre el paquete con
+`--por-semana 40` (o más), revisar a mano y agregar las buenas a
+`voci_cv_data.js`. Hay pocas oraciones en las semanas 1 a 4: ahí conviene
+buscar a mano oraciones simples en `validated.tsv`.
+
+Lo que falta: **Tatoeba** (caso 3), opcional.
 
 ## Cómo seguir en otra sesión (elegí un camino)
 
@@ -88,7 +103,7 @@ grabadas; esas siguen con la voz del teléfono.
 
 ---
 
-## Caso 2 · Common Voice: escuchar gramática con voces reales
+## Caso 2 · Common Voice: escuchar gramática con voces reales (✓ hecho)
 
 **Qué es.** Cientos de horas de **oraciones** leídas por miles de
 voluntarios, con votos que validan cada grabación. Licencia **CC0**: uso

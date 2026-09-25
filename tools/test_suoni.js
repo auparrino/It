@@ -38,7 +38,7 @@ ok(A.INTONAZIONE.every(function (x) { return (x.answer === "pregunta") === /\?$/
 /* ---------------------------------------------------------- sessione */
 var st = Engine.blankSave(); st.unlocked = 12;
 var ses = S.session(st, 12, {});
-ok(ses.length >= 10 && ses.length <= 13, "sessione di suoni: " + ses.length);
+ok(ses.length >= 10 && ses.length <= 14, "sessione di suoni: " + ses.length);
 ok(ses.filter(function (x) { return x.type === "coppia"; }).length === 6, "sei coppie");
 ok(ses.every(function (x) { return x.id && x.src === "ascolto" && x.answer && x.voice; }), "item completi");
 ok(ses.some(function (x) { return x.type === "dictation" && x.dettato; }), "un dettato");
@@ -56,6 +56,37 @@ for (var k = 0; k < 20; k++) {
   var idx = pi.say === pi.pair.a ? 0 : 1;
   ok(pi.options[idx] === pi.answer, "la risposta è la parola detta: " + pi.id);
 }
+
+/* ------------------------------------------------ voci di Common Voice */
+var CV = require(path.join(ROOT, "docs/js/voci_cv_data.js"));
+var cvIds = {};
+ok(CV.ALL.length >= 100, "almeno 100 frasi registrate: " + CV.ALL.length);
+CV.ALL.forEach(function (x) {
+  ok(!cvIds[x.f], "frase duplicata: " + x.f); cvIds[x.f] = 1;
+  ok(fs.existsSync(path.join(ROOT, "docs", CV.url(x))), "manca l'audio: " + CV.url(x));
+  ok(x.w >= 1 && x.w <= 52 && x.it.split(/\s+/).length >= 3, "frase o settimana: " + x.f);
+  ok(!/["“”]|E' /.test(x.it), "virgolette o E' al posto di È: " + x.it);
+  if (x.a) {
+    ok(x.a !== x.b && x.b && x.why && x.fw >= x.w, "forma incompleta: " + x.f);
+    ok(x.it.indexOf(x.a) >= 0, "la forma non è nella frase: " + x.it);
+    var fi = S.formItem(x, 0);
+    ok(fi.stem.indexOf("___") >= 0 && fi.stem.indexOf(x.a) < 0 && fi.options.indexOf(x.a) >= 0 &&
+       fi.answer === x.a && fi.audio === CV.url(x), "item «¿Qué forma?»: " + x.f);
+  }
+});
+// every mp3 in the folder is used (the discarded ones do not stay in the repo)
+fs.readdirSync(path.join(ROOT, "docs/audio/cv")).forEach(function (f) {
+  ok(cvIds[(/^common_voice_it_(\d+)\.mp3$/.exec(f) || [])[1]], "audio che nessuno usa: " + f);
+});
+ok(S.formPool(10).length === 0 && S.formPool(30).length >= 15, "le forme si aprono con la loro settimana");
+ok(S.realFragments(12).every(function (x) { return x.audio; }), "dettato con voce reale");
+var st30 = Engine.blankSave(); st30.unlocked = 30;
+var ses30 = S.session(st30, 30, {});
+ok(ses30.filter(function (x) { return x.type === "forma"; }).length === 1, "una «¿Qué forma?» per sessione");
+ok(S.session(st30, 30, { silent: true }).every(function (x) { return x.type !== "forma"; }), "in ufficio niente forma");
+var sawReal = false;
+for (var r = 0; r < 30 && !sawReal; r++) sawReal = S.session(st30, 30, {}).some(function (x) { return x.type === "dictation" && x.audio; });
+ok(sawReal, "il dettato usa le frasi registrate");
 
 /* --------------------------------------------------------- dictogloss */
 ok(Dg.TESTI.length === 47, "47 testi di dictogloss");
