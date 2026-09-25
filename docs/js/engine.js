@@ -505,6 +505,7 @@
       goal: 200,          // obiettivo di xp al giorno (~2 pause caffè)
       goalV: 2,           // versione della scala dell'obiettivo
       syllabusV: 2,       // versione dell'ordine delle settimane (v. migrateSyllabus)
+      partsV3: 6,         // la settimana 3 in sei parti (v. migrateParts)
       shields: 1,         // scudi che salvano la serie se salti un giorno
       chest: null,        // giorno in cui hai aperto il forziere
       best: {},           // record personali: lampo, combo
@@ -616,7 +617,26 @@
     27: 24, 28: 25, 29: 29, 30: 30, 31: 32, 32: 33, 33: 31, 34: 35, 35: 36, 36: 22, 37: 21, 38: 34, 39: 39,
     40: 40, 41: 41, 42: 42, 43: 43, 44: 44, 45: 37, 46: 45, 47: 38, 48: 48, 49: 49, 50: 50, 51: 51, 52: 52 };
 
+  /* Week 3 (articles) went from four lesson parts to six: determinati →
+     «genere, il, la, l'» and «lo, gli, plurale»; indeterminati → 3;
+     preposizioni → 5; partitivo e usi → «dove va» and «partitivo». */
+  function migrateParts(s) {
+    if (!isObj(s) || s.partsV3 === 6) return s;
+    var rp = isObj(s.readParts) ? s.readParts[3] : null;
+    if (isObj(rp)) {
+      var n = {};
+      if (rp[0]) n[0] = n[1] = true;
+      if (rp[1]) n[2] = true;
+      if (rp[2]) n[4] = true;
+      if (rp[3]) n[3] = n[5] = true;
+      s.readParts[3] = n;
+    }
+    s.partsV3 = 6;
+    return s;
+  }
+
   function migrateSyllabus(s) {
+    s = migrateParts(s);
     if (!isObj(s) || s.syllabusV === 2) return s;
     ["read", "lessonScore", "weekStats"].forEach(function (k) {
       if (!isObj(s[k])) return;

@@ -332,7 +332,9 @@ def item_texts(item):
     # trova l'errore: the corrected sentence is read, one word is written
     if typ == "fixerr":
         return item.get("answer") or "", item.get("good") or ""
-    answers = [a.strip() for a in re.split(r"\s*\|\s*", item.get("answer") or "") if a.strip()]
+    # «(sin partitivo)» is a Spanish label for «nothing goes here», not Italian
+    answers = [a.strip() for a in re.split(r"\s*\|\s*", item.get("answer") or "")
+               if a.strip() and not re.fullmatch(r"\(.*\)", a.strip())]
     read = ""
     if typ == "garden":
         read = " ".join(w for pair in (item.get("lead") or []) for w in pair)

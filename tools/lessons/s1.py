@@ -193,49 +193,207 @@ LESSONS = {
 ]},
 
 3: {
-"intro": "El artículo depende del género y también del **sonido** con que "
-         "empieza la palabra siguiente. Además, el italiano pone artículo en "
-         "lugares donde el castellano no.",
-# La semana se estudia en cuatro sesiones cortas, cada una con su práctica:
-# los determinados, los indeterminados, las preposiciones articuladas y el
-# partitivo con los usos del artículo.  "match" reparte los ejercicios.
+"intro": "El artículo depende del género y del **sonido** con que empieza "
+         "la palabra. Seis partes cortas: género, *lo* y plurales, *un/una*, "
+         "dónde va, preposiciones y partitivo.",
+# Seis sesiones cortas, cada una con su teoría en pasos y su práctica.
+# «ids» pone cada ejercicio en la parte que lo enseña; «match» queda para
+# lo que se agregue después.
 "parts": [
- {"h": "Determinados: il, lo, la, l', i, gli, le", "blocks": [0],
-  "match": r"determinado \(il|artículo correcto|Traducí al italiano con el artículo|por el artícu|^(il|lo|la|l'|l’|i|gli|le)$"},
- {"h": "Indeterminados: un, uno, una, un'", "blocks": [1],
+ {"h": "Género y el, la: il, la, l'", "blocks": [0, 1, 2],
+  "ids": ["d03-031", "d03-032", "d03-055"] + ["ar-g-%02d" % n for n in range(1, 17)],
+  "match": r"^(?!)"},
+ {"h": "lo, gli y el plural", "blocks": [3, 4, 5],
+  "ids": ["d03-033", "d03-034", "d03-035", "d03-036", "d03-037", "d03-039", "d03-040",
+          "d03-051", "d03-052", "d03-053", "d03-054", "b2-prep-05", "b2-prep-06",
+          "g2-gd-37", "g2-sc-05", "g2-sc-05-a", "g2-sc-05-b", "g2-sc-05-c",
+          "g2-va-21", "g2-va-44", "g2-va-45", "s:r02-01:a", "s:r02-02:b", "s:r02-02:c"],
+  "match": r"determinado \(il|artículo correcto|^(il|lo|la|l'|l’|i|gli|le)$"},
+ {"h": "Indeterminados: un, uno, una, un'", "blocks": [6, 7],
   "match": r"indeterminado|^(un|uno|una|un'|un’)$"},
- {"h": "Preposiciones articuladas", "blocks": [2],
+ {"h": "Dónde va el artículo (y dónde no)", "blocks": [8, 9, 10],
+  "ids": ["s:r02-02:a", "b2-prep-07"] + ["ar-u-%02d" % n for n in range(1, 15)],
+  "match": r"posesiv|artículo donde"},
+ {"h": "Preposiciones articuladas", "blocks": [11, 12, 13],
   "match": r"preposición articulada|«in» y «di»|«di» con el|cada palabra una sola vez|«di» o «di» \+|donde corresponda"},
- {"h": "Partitivo y usos del artículo", "blocks": [3, 4],
-  "match": r"partitivo|reformul|alcun|qualche|nessun|posesiv|artículo donde"},
+ {"h": "Partitivo y cantidades", "blocks": [14, 15, 16],
+  "match": r"partitivo|reformul|alcun|qualche|nessun"},
 ],
 "blocks": [
- {"h": "Determinados: el sonido decide",
-  "r": "*il / i* ante consonante; *l' / gli* ante vocal; *lo / gli* ante **s "
-       "+ consonante, z, gn, ps, pn, x, y**. Femenino: *la / le*, *l'* ante "
-       "vocal.",
-  "table": {"head": ["Contexto", "Sing.", "Plur.", "Ejemplo"],
-            "rows": [["masc. ante consonante común", "il", "i", "il libro → i libri"],
-                     ["masc. ante vocal", "l'", "gli", "l'amico → gli amici"],
-                     ["masc. ante s+consonante, z, gn, ps, pn, x, y", "lo", "gli", "lo studente → gli studenti; lo zio → gli zii"],
-                     ["fem. ante consonante", "la", "le", "la casa → le case"],
-                     ["fem. ante vocal", "l'", "le", "l'amica → le amiche"]]},
-  "tip": "*s impura* = *s* seguida de consonante: *lo sport*, *lo studio*, "
-         "*lo specchio*."},
+ # ---------------------------------------------------------------- parte 1
+ {"h": "Masculino o femenino: mirá cómo termina",
+  "r": "Casi siempre: **-o** masculino, **-a** femenino. En **-e** puede ser "
+       "cualquiera de los dos: cada palabra se aprende con su artículo.",
+  "table": {"head": ["Termina en", "Género", "Ejemplo"],
+            "rows": [["-o", "masc.", "il libro, il vino"],
+                     ["-a", "fem.", "la casa, la pizza"],
+                     ["-e", "los dos", "il pane, la chiave"],
+                     ["-tà, -ione", "fem.", "la città, la stazione"],
+                     ["consonante", "masc.", "il bar, il film"]]},
+  "warn": "Distinto del castellano: *il latte* (la leche), *il fiore* (la "
+          "flor), *il sale* (la sal). Y *la mano*, *la foto*, *la radio* son "
+          "femeninos aunque terminen en -o.",
+  "qq": [{"prompt": "¿Qué artículo lleva «latte» (la leche)?", "answer": "il", "options": ["il", "la", "le"]},
+         {"prompt": "¿Masculino o femenino? «stazione»", "answer": "femenino", "options": ["femenino", "masculino", "los dos"]},
+         {"prompt": "¿Qué artículo lleva «mano»?", "answer": "la", "options": ["la", "il", "le"]}]},
 
- {"h": "Indeterminados: un, uno, una, un'",
-  "r": "*un* ante consonante y vocal; *uno* donde iría *lo*; *una* femenino; "
-       "*un'* femenino ante vocal.",
-  "ex": [["un libro, un amico", "masculino: sin apóstrofo"],
-         ["uno studente, uno zaino", "como lo"],
-         ["una casa", "femenino"],
-         ["un'amica", "femenino ante vocal: con apóstrofo"]],
-  "warn": "*un amico* sin apóstrofo, *un'amica* con apóstrofo. El apóstrofo "
-          "marca el femenino: pregunta clásica de examen."},
+ {"h": "il y la: delante de consonante",
+  "r": "Delante de consonante: *il* para el masculino, *la* para el "
+       "femenino. Es el caso más común.",
+  "ex": [["il libro", "el libro"],
+         ["il ragazzo", "el chico"],
+         ["la casa", "la casa"],
+         ["la ragazza", "la chica"],
+         ["il pane e la pasta", "el pan y la pasta"]],
+  "tip": "Nunca aprendas un sustantivo solo: *il pane*, *la chiave*. El "
+         "artículo es la única pista segura del género.",
+  "qq": [{"prompt": "Elegí el artículo", "stem": "___ pane", "answer": "il", "options": ["il", "la", "l'"]},
+         {"prompt": "Elegí el artículo", "stem": "___ chiave (la llave)", "answer": "la", "options": ["la", "il", "l'"]}]},
 
- {"h": "Preposiciones articuladas",
-  "r": "*di, a, da, in, su* + artículo determinado se **fusionan siempre**, "
-       "con todos los artículos: *di + il = del*, *in + la = nella*.",
+ {"h": "l': delante de vocal, para los dos géneros",
+  "r": "Delante de vocal, *il* y *la* pierden la vocal y quedan en *l'*: "
+       "*l'amico*, *l'amica*. La *h* no suena: *l'hotel*.",
+  "ex": [["l'amico", "el amigo"],
+         ["l'amica", "la amiga"],
+         ["l'acqua", "el agua"],
+         ["l'ora", "la hora"],
+         ["l'hotel", "el hotel"]],
+  "warn": "*l'* no dice el género: *l'amico*, *l'amica*. Y ojo: en castellano "
+          "«el agua», pero *l'acqua* es femenino (*l'acqua fresca*).",
+  "qq": [{"prompt": "Elegí el artículo", "stem": "___ amica", "answer": "l'", "options": ["l'", "la", "il"]},
+         {"prompt": "Elegí el artículo", "stem": "___ ora (la hora)", "answer": "l'", "options": ["l'", "la", "il"]}]},
+
+ # ---------------------------------------------------------------- parte 2
+ {"h": "lo: para los comienzos difíciles",
+  "r": "Masculino delante de **s + consonante** (*s impura*), **z**, **gn**, "
+       "**ps**, **x** o **y**: *lo* en vez de *il*.",
+  "ex": [["lo studente", "el estudiante"],
+         ["lo sport", "el deporte"],
+         ["lo zio", "el tío"],
+         ["lo zaino", "la mochila"],
+         ["lo psicologo", "el psicólogo"]],
+  "warn": "*s* + vocal no es s impura: *il sale*, *il sole*. Solo cuenta la "
+          "*s* seguida de consonante.",
+  "tip": "El castellano dice «estudiante», con una *e* de apoyo. El italiano "
+         "no la pone en la palabra: la pone en el artículo, *lo studente*.",
+  "qq": [{"prompt": "Elegí el artículo", "stem": "___ zucchero", "answer": "lo", "options": ["lo", "il", "la"]},
+         {"prompt": "Elegí el artículo", "stem": "___ sole (el sol)", "answer": "il", "options": ["il", "lo", "l'"]},
+         {"prompt": "Elegí el artículo", "stem": "___ specchio (el espejo)", "answer": "lo", "options": ["lo", "il", "la"]}]},
+
+ {"h": "El plural: i, gli, le",
+  "r": "*il* → *i*. *lo* y *l'* masculino → *gli*. *la* y *l'* femenino → "
+       "*le*. El sonido manda igual que en singular.",
+  "table": {"head": ["Singular", "Plural", "Ejemplo"],
+            "rows": [["il", "i", "il libro → i libri"],
+                     ["lo", "gli", "lo zio → gli zii"],
+                     ["l' (masc.)", "gli", "l'amico → gli amici"],
+                     ["la", "le", "la casa → le case"],
+                     ["l' (fem.)", "le", "l'amica → le amiche"]]},
+  "ex": [["i ragazzi", "los chicos"],
+         ["gli studenti", "los estudiantes"],
+         ["gli amici", "los amigos"],
+         ["le amiche", "las amigas"]],
+  "warn": "*gli* y *le* no se apostrofan: *gli amici*, *le amiche*. Y *i "
+          "amici* no existe: delante de vocal, siempre *gli*.",
+  "qq": [{"prompt": "Plural de «lo zaino»", "answer": "gli zaini", "options": ["gli zaini", "i zaini", "le zaini"]},
+         {"prompt": "Plural de «l'amica»", "answer": "le amiche", "options": ["le amiche", "gli amiche", "l'amiche"]},
+         {"prompt": "Plural de «l'errore» (el error)", "answer": "gli errori", "options": ["gli errori", "i errori", "le errori"]}]},
+
+ {"h": "Palabras que no cambian: el artículo dice el número",
+  "r": "Las que terminan en vocal con tilde (*città*, *caffè*), las "
+       "extranjeras (*film*, *sport*) y las acortadas (*foto*, *moto*) no "
+       "cambian en plural: cambia solo el artículo.",
+  "table": {"head": ["Singular", "Plural", "Ejemplo"],
+            "rows": [["la città", "le città", "las ciudades"],
+                     ["il caffè", "i caffè", "los cafés"],
+                     ["il film", "i film", "las películas"],
+                     ["lo sport", "gli sport", "los deportes"],
+                     ["la foto", "le foto", "las fotos"]]},
+  "tip": "*la gente* es singular, como en castellano: *la gente è "
+         "simpatica*.",
+  "qq": [{"prompt": "Traducí: «las ciudades»", "answer": "le città", "options": ["le città", "le cittàs", "i città"]},
+         {"prompt": "Traducí: «las películas»", "answer": "i film", "options": ["i film", "le film", "i films"]}]},
+
+ # ---------------------------------------------------------------- parte 3
+ {"h": "un, uno, una: la misma lógica",
+  "r": "El indeterminado copia al determinado: donde va *il* o *l'* "
+       "masculino, *un*; donde va *lo*, *uno*; en femenino, *una*, y *un'* "
+       "delante de vocal.",
+  "table": {"head": ["el / la", "un / una", "Ejemplo"],
+            "rows": [["il", "un", "un libro"],
+                     ["l' (masc.)", "un", "un amico"],
+                     ["lo", "uno", "uno studente"],
+                     ["la", "una", "una casa"],
+                     ["l' (fem.)", "un'", "un'amica"]]},
+  "qq": [{"prompt": "Elegí el artículo", "stem": "___ zaino", "answer": "uno", "options": ["uno", "un", "una"]},
+         {"prompt": "Elegí el artículo", "stem": "___ succo (el jugo)", "answer": "un", "options": ["un", "uno", "un'"]}]},
+
+ {"h": "El apóstrofo es cosa del femenino",
+  "r": "*un'* existe solo en femenino: *un'amica*, *un'ora*, *un'idea*. El "
+       "masculino nunca lleva apóstrofo: *un amico*, *un errore*.",
+  "ex": [["un amico", "un amigo"],
+         ["un'amica", "una amiga"],
+         ["un'idea", "una idea"],
+         ["un errore", "un error"],
+         ["un'arancia", "una naranja"]],
+  "warn": "Pregunta clásica de examen: *un'amica* con apóstrofo, *un amico* "
+          "sin. Un *un'* delante de un masculino está mal.",
+  "tip": "En plural no hay indeterminado: «unos amigos» es *degli amici* o "
+         "simplemente *amici*. Lo ves en la última parte.",
+  "qq": [{"prompt": "Elegí el artículo", "stem": "___ entrata (la entrada)", "answer": "un'", "options": ["un'", "un", "uno"]},
+         {"prompt": "Elegí el artículo", "stem": "___ errore (el error)", "answer": "un", "options": ["un", "un'", "uno"]}]},
+
+ # ---------------------------------------------------------------- parte 4
+ {"h": "Posesivos: con artículo",
+  "r": "El posesivo lleva artículo: *il mio libro*, *la mia casa*, *i miei "
+       "amici*. Excepción: parientes en singular y sin adjetivo: *mio "
+       "padre*, *mia madre*.",
+  "ex": [["la mia casa", "mi casa"],
+         ["il tuo libro", "tu libro"],
+         ["i miei amici", "mis amigos"],
+         ["mio padre", "mi padre"],
+         ["i miei fratelli", "mis hermanos"]],
+  "warn": "Con parientes el artículo vuelve en plural (*i miei fratelli*), "
+          "con adjetivo (*la mia cara madre*) y siempre con *loro* (*il loro "
+          "padre*).",
+  "tip": "Si se entiende de quién es, alcanza el artículo: *arriva con la "
+         "moglie*, llega con su mujer.",
+  "qq": [{"prompt": "Traducí: «mi libro»", "answer": "il mio libro", "options": ["il mio libro", "mio libro", "la mia libro"]},
+         {"prompt": "Traducí: «mi madre»", "answer": "mia madre", "options": ["mia madre", "la mia madre", "mia la madre"]},
+         {"prompt": "Traducí: «mis hermanos»", "answer": "i miei fratelli", "options": ["i miei fratelli", "miei fratelli", "il mio fratelli"]}]},
+
+ {"h": "Países sí, ciudades no",
+  "r": "Países, regiones y continentes llevan artículo: *l'Italia*, *la "
+       "Toscana*, *l'Europa*, *gli Stati Uniti*. Las ciudades no: *Roma*, "
+       "*Milano*.",
+  "ex": [["L'Italia è bella.", "Italia es linda."],
+         ["La Sicilia è un'isola.", "Sicilia es una isla."],
+         ["Roma è bella.", "Roma es linda."],
+         ["Il Canada è grande.", "Canadá es grande."],
+         ["Le Filippine sono in Asia.", "Filipinas está en Asia."]],
+  "warn": "Las islas chicas y los países-ciudad van como las ciudades, sin "
+          "artículo: *Malta*, *Cuba*, *Capri*. Las islas grandes lo llevan: "
+          "*la Sicilia*, *la Sardegna*.",
+  "qq": [{"prompt": "Completá", "stem": "___ Francia è grande.", "answer": "La", "options": ["La", "(nada)", "Il"]},
+         {"prompt": "Completá", "stem": "___ Milano è in Lombardia.", "answer": "(nada)", "options": ["(nada)", "Il", "La"]}]},
+
+ {"h": "Lo general, los idiomas, los días",
+  "r": "Llevan artículo lo general (*mi piace la musica*), los idiomas "
+       "(*studio l'italiano*), los días que se repiten (*il lunedì*: los "
+       "lunes) y los años (*il 2024*).",
+  "ex": [["Mi piace la musica classica.", "Me gusta la música clásica."],
+         ["Studio l'italiano.", "Estudio italiano."],
+         ["Il sabato lavoro.", "Los sábados trabajo."],
+         ["Il vino italiano è buono.", "El vino italiano es bueno."]],
+  "tip": "*il sabato* = todos los sábados; *sabato*, sin artículo = este "
+         "sábado.",
+  "qq": [{"prompt": "Traducí: «Me gusta el café»", "answer": "Mi piace il caffè", "options": ["Mi piace il caffè", "Mi piace caffè", "Mi piace lo caffè"]},
+         {"prompt": "¿Qué significa «Il sabato lavoro»?", "answer": "Los sábados trabajo.", "options": ["Los sábados trabajo.", "Este sábado trabajo.", "El sábado pasado trabajé."]}]},
+
+ # ---------------------------------------------------------------- parte 5
+ {"h": "Preposición + artículo = una sola palabra",
+  "r": "*di, a, da, in, su* + artículo se **funden siempre**: *di + il = "
+       "del*, *in + la = nella*, *a + gli = agli*.",
   "table": {"head": ["", "il", "lo", "l'", "i", "gli", "la", "le"],
             "rows": [["di", "del", "dello", "dell'", "dei", "degli", "della", "delle"],
                      ["a", "al", "allo", "all'", "ai", "agli", "alla", "alle"],
@@ -243,24 +401,82 @@ LESSONS = {
                      ["in", "nel", "nello", "nell'", "nei", "negli", "nella", "nelle"],
                      ["su", "sul", "sullo", "sull'", "sui", "sugli", "sulla", "sulle"]]}},
 
+ {"h": "Armala sin mirar la tabla",
+  "r": "Tres pasos: 1) elegí el artículo (*lo studio*); 2) *di* → *de*, *in* "
+       "→ *ne*; 3) pegalos y doblá la *l*: *nello studio*.",
+  "ex": [["nello studio", "en el estudio"],
+         ["della macchina", "del auto"],
+         ["dei miei figli", "de mis hijos"],
+         ["sul tavolo", "sobre la mesa"],
+         ["all'amico", "al amigo"]],
+  "tip": "*con* y *per* no se funden en el italiano de hoy: *con il treno*, "
+         "*per la mamma*.",
+  "qq": [{"prompt": "in + lo studio", "answer": "nello studio", "options": ["nello studio", "nel studio", "in lo studio"]},
+         {"prompt": "di + i miei figli", "answer": "dei miei figli", "options": ["dei miei figli", "di i miei figli", "degli miei figli"]},
+         {"prompt": "a + l'amico", "answer": "all'amico", "options": ["all'amico", "al amico", "a l'amico"]}]},
+
+ {"h": "Sin artículo, no hay fusión",
+  "r": "Si la palabra va sin artículo, la preposición queda sola: *di "
+       "Marco*, *a Roma*, *in Italia*, *la ragazza di mio figlio*.",
+  "ex": [["Abito in Italia.", "Vivo en Italia."],
+         ["nell'Italia del sud", "en el sur de Italia"],
+         ["la capitale dell'Italia", "la capital de Italia"],
+         ["la capitale di Malta", "la capital de Malta"],
+         ["negli Stati Uniti", "en Estados Unidos"]],
+  "warn": "Con *in*, países y regiones femeninos van sin artículo (*in "
+          "Toscana*), salvo si llevan algo más (*nell'Italia del sud*). Los "
+          "plurales lo conservan: *negli Stati Uniti*.",
+  "more": ["Los masculinos dudan: se dice *in Piemonte* y también *nel "
+           "Lazio*. Con *di*, en cambio, el artículo vuelve siempre: *il "
+           "capoluogo del Piemonte*, *la capitale della Francia*. Los "
+           "apellidos de familias nobles van sin artículo: *Carlo Alberto di "
+           "Savoia*."],
+  "qq": [{"prompt": "Completá", "stem": "Lavoro ___ Francia.", "answer": "in", "options": ["in", "nella", "alla"]},
+         {"prompt": "Completá", "stem": "La capitale ___ Italia è Roma.", "answer": "dell'", "options": ["dell'", "di", "della"]},
+         {"prompt": "Completá", "stem": "La capitale ___ Cuba è L'Avana.", "answer": "di", "options": ["di", "della", "del"]}]},
+
+ # ---------------------------------------------------------------- parte 6
  {"h": "El partitivo: «algo de», «unos»",
-  "r": "*di* + artículo expresa una cantidad indeterminada, donde el "
-       "castellano no pone nada o pone «unos».",
+  "r": "*di* + artículo (*del, dello, della, dell', dei, degli, delle*) "
+       "expresa una cantidad sin precisar, donde el castellano no pone nada o "
+       "pone «unos».",
   "ex": [["Compro del pane.", "Compro pan."],
          ["C'è dell'acqua in frigo.", "Hay agua en la heladera."],
-         ["Ho degli amici a Roma.", "Tengo (unos) amigos en Roma."]]},
+         ["Ho degli amici a Roma.", "Tengo (unos) amigos en Roma."],
+         ["Compro delle camicie.", "Compro (unas) camisas."],
+         ["Mi serve dello sciroppo.", "Necesito jarabe."]],
+  "tip": "La forma sale del artículo de la palabra: *lo sciroppo* → *dello "
+         "sciroppo*; *l'acqua* → *dell'acqua*.",
+  "qq": [{"prompt": "Completá", "stem": "Avete ___ pasta fresca?", "answer": "della", "options": ["della", "del", "delle"]},
+         {"prompt": "Completá", "stem": "Compro ___ olio.", "answer": "dell'", "options": ["dell'", "del", "dello"]}]},
 
- {"h": "Artículo donde el castellano no lo pone (y dónde no va)",
-  "r": "Llevan artículo: **posesivos** (*il mio libro*), años (*nel 1999*), "
-       "**países y regiones** (*l'Italia, la Toscana*), lenguas (*studio "
-       "l'italiano*).",
-  "ex": [["La mia casa è grande.", "Mi casa es grande."],
-         ["L'Italia è bella.", "Italia es linda."],
-         ["Roma è bella.", "Roma es linda."],
-         ["il lunedì", "los lunes (costumbre)"]],
-  "warn": "**Sin artículo**: ciudades (*Roma è bella, vado a Roma*) y parientes "
-          "en singular sin adjetivo (*mio padre*; pero *i miei fratelli*). Con "
-          "*in* el país lo pierde: *abito in Italia*."},
+ {"h": "Otras maneras: un po' di, qualche, alcuni",
+  "r": "*un po' di* + lo que no se cuenta (*un po' di zucchero*). *qualche* "
+       "+ **singular** (*qualche libro* = algunos libros). *alcuni / "
+       "alcune* + plural.",
+  "ex": [["un po' di zucchero", "un poco de azúcar"],
+         ["un po' d'acqua", "un poco de agua"],
+         ["qualche amico", "algunos amigos"],
+         ["alcune lettere", "algunas cartas"],
+         ["alcuni articoli", "algunos artículos"]],
+  "warn": "*qualche* va siempre con singular aunque signifique «algunos»: "
+          "*qualche giorno*, nunca *qualche giorni*.",
+  "qq": [{"prompt": "«algunos días», con qualche", "answer": "qualche giorno", "options": ["qualche giorno", "qualche giorni", "qualcuni giorni"]},
+         {"prompt": "Completá", "stem": "Ho ___ lettere da scrivere.", "answer": "alcune", "options": ["alcune", "alcuni", "qualche"]}]},
+
+ {"h": "En negativo: nada, o nessun",
+  "r": "En negativo el partitivo desaparece: *non ho fratelli*, *non abbiamo "
+       "burro*. Para insistir, *nessun* + singular: *non ho nessun "
+       "problema*.",
+  "ex": [["Non ho fratelli.", "No tengo hermanos."],
+         ["Non abbiamo burro.", "No tenemos manteca."],
+         ["Non ho nessun problema.", "No tengo ningún problema."],
+         ["Non ho nessuna idea.", "No tengo ni idea."],
+         ["Non c'è nessuno studente.", "No hay ningún estudiante."]],
+  "tip": "*nessun* copia al indeterminado: *nessun libro*, *nessuno "
+         "studente*, *nessuna casa*, *nessun'amica*.",
+  "qq": [{"prompt": "Completá", "stem": "Non ho ___ fratelli.", "answer": "(nada)", "options": ["(nada)", "dei", "nessuni"]},
+         {"prompt": "Completá", "stem": "Non c'è ___ lenzuolo.", "answer": "nessun", "options": ["nessun", "nessuno", "nessuna"]}]},
 ]},
 
 4: {

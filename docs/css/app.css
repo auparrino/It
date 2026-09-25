@@ -648,7 +648,7 @@ html[data-theme="dark"] .diag .tag { color: var(--terracotta-chiara); }
 .lescard .intro { font-size: 1.05rem; line-height: 1.6; }
 
 .tw { overflow-x: auto; margin: 12px 0 14px; -webkit-overflow-scrolling: touch; }
-table.gram { border-collapse: collapse; width: 100%; min-width: 320px; font-size: .88rem; }
+table.gram { border-collapse: collapse; width: 100%; min-width: min(100%, 320px); font-size: .88rem; }
 table.gram th { text-align: left; font-size: .72rem; text-transform: uppercase; letter-spacing: .1em; color: var(--grigio);
   font-weight: 700; padding: 6px 10px 6px 0; border-bottom: 2px solid var(--grigio-chiaro); white-space: nowrap; }
 table.gram td { padding: 7px 10px 7px 0; vertical-align: top; border-bottom: 1px solid var(--grigio-chiaro); }
@@ -797,3 +797,12 @@ body.kar-audio .text { filter: blur(6px); pointer-events: none; }
 .eopt { display: block; padding: 4px 0; }
 .egap { width: 100%; max-width: 220px; }
 .etitle { width: 100%; margin-bottom: 4px; }
+
+/* Dictogloss: las notas y la reconstrucción, dentro de la app */
+.dgnotes { display: block; margin: 12px 0; }
+.dgnotes[hidden] { display: none; }
+.dgnotes textarea { width: 100%; margin-top: 4px; }
+.dgnotesview { white-space: pre-wrap; padding: 8px 10px; border-radius: 8px;
+  background: color-mix(in srgb, var(--oro) 12%, transparent); }
+mark.dgok { background: color-mix(in srgb, var(--verde) 26%, transparent); color: inherit; border-radius: 3px; }
+mark.dgmiss { background: color-mix(in srgb, var(--terracotta) 24%, transparent); color: inherit; border-radius: 3px; }

@@ -303,6 +303,11 @@
               (!b.table && ruleQuestion(lesson, b, rnd, isItalian)) ||
               handQuestion(b, rnd);
       if (q) { q.block = i; out.push({ kind: "quiz", q: q }); }
+      // «qq»: checks written by hand, all of them asked, in order.
+      (b.qq || []).forEach(function (h) {
+        out.push({ kind: "quiz", q: { kind: "hand", prompt: h.prompt, stem: h.stem || "", answer: h.answer,
+                                      options: shuffle(h.options.slice(), rnd), block: i } });
+      });
     });
     return out;
   }

@@ -553,7 +553,7 @@
 
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION in sw.js: test_game checks it). */
-  var APP_VERSION = "v44";
+  var APP_VERSION = "v45";
   function versionLine() {
     return '<p class="muted small version">La Via C1 · versión ' + APP_VERSION + "</p>";
   }
@@ -1416,7 +1416,12 @@
       items = ch && ch.play ? ch.play.map(function (id) { return itemMap[id]; }).filter(Boolean) : [];
       items = Drills.firstRecognize(items, state, w.week);
     }
-    else items = Drills.buildRound(course, w, { map: itemMap, state: state, silent: state.silent, only: partItems(w) });
+    else {
+      // «A entrenar esta parte»: only the exercises of that part.
+      var pk = /^part:\d+$/.test(arg || "") ? +arg.slice(5) : null, pps = partsOf(w);
+      var only = pk != null && pps && pps[pk] ? pps[pk].items.reduce(function (o, id) { o[id] = 1; return o; }, {}) : partItems(w);
+      items = Drills.buildRound(course, w, { map: itemMap, state: state, silent: state.silent, only: only, focus: pk != null });
+    }
 
     if (!items.length) { toast("No hay preguntas para este modo todavía."); return; }
 
@@ -3079,7 +3084,10 @@
     on("#toremind", function () { go("io"); var c = $("#plancard"); if (c) c.scrollIntoView({ block: "start" }); });
     wireHabit();
     on("#lesback", function () { view.screen = "briefing"; render(); });
-    on("#lesplay", function () { startRound(course.weeks[view.week - 1].boss ? "boss" : "round"); });
+    on("#lesplay", function () {
+      var lw = course.weeks[view.week - 1];
+      startRound(lw.boss ? "boss" : "round", !lw.boss && les && les.part != null ? "part:" + les.part : undefined);
+    });
     document.querySelectorAll("[data-lq]").forEach(function (b) { b.onclick = function () { lesAnswer(b); }; });
     on("#chal", function () { view.screen = "sfide"; render(); window.scrollTo(0, 0); });
     on("#back2", function () { view.screen = "briefing"; render(); });
@@ -3181,31 +3189,60 @@
     var head = '<button class="btn ghost" id="dgback">← a la semana</button>' +
       '<h1 class="targa"><span class="t-sup">Dictogloss · Settimana ' + romano(w.week) + '</span><span class="t-via">' + esc(t.title) + "</span></h1>";
     if (dg.step === 0) {
+      var second = dg.plays >= 1;
       return head + '<div class="card"><p>' + esc(t.es) + "</p>" +
-        '<p class="muted">Vas a escuchar el texto <b>dos veces</b> a velocidad normal. La primera, solo escuchá. La segunda, ' +
-        "anotá palabras clave. Después lo reconstruís por escrito: no hace falta que sea igual, sino que diga lo mismo con las " +
-        "expresiones del texto. Se puntúan <b>seis bloques</b>.</p>" +
+        '<p class="muted">Vas a escuchar el texto <b>dos veces</b>. La primera, solo escuchá. En la segunda, anotá acá abajo ' +
+        "las palabras que puedas. Después lo reconstruís en la app, con tus notas a la vista: no hace falta que sea igual, " +
+        "sino que diga lo mismo con las expresiones del texto. Se puntúan <b>seis bloques</b>.</p>" +
         (done ? '<p class="note">Ya lo hiciste: ' + done.found + " / " + done.n + " bloques. Podés repetirlo.</p>" : "") +
-        '<div class="center"><button class="bigplay" id="dgplay">🔊</button><p class="muted" id="dgstate">Escucha 1 de 2</p></div>' +
-        '<div id="dgkeys"></div>' +
-        '<button class="btn wide" id="dgwrite" disabled>Ya escuché las dos → reconstruir</button></div>';
+        '<div class="center"><button class="bigplay" id="dgplay">🔊</button><p class="muted" id="dgstate">' +
+          (dg.plays >= 2 ? "Listo: ahora reconstruilo" : second ? "Escucha 2 de 2: anotá mientras escuchás" : "Escucha 1 de 2") + "</p></div>" +
+        '<div id="dgkeys">' + (second ? dgKeysHtml(t) : "") + "</div>" +
+        '<label class="dgnotes"' + (second ? "" : " hidden") + '><span class="muted small">📝 Tus notas (palabras sueltas, como salgan)</span>' +
+          '<textarea id="dgnotes" class="grow" rows="3" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder="sabato… amici… per fortuna…">' +
+          esc(dg.notes || "") + "</textarea></label>" +
+        '<button class="btn wide" id="dgwrite"' + (dg.plays >= 2 ? "" : " disabled") + '>Ya escuché las dos → reconstruir</button></div>';
     }
     if (dg.step === 1) {
-      return head + '<div class="card"><p class="muted">Palabras clave que anotaste (te las dejo a la vista): <i>' + t.keywords.map(esc).join(" · ") + "</i></p>" +
-        '<p class="muted small">Bloques a recuperar: ' + t.chunks.length + '. Escribí en italiano lo que recordás, con tus palabras donde haga falta.</p>' +
-        '<textarea id="dgtext" class="grow scrivi" rows="6" spellcheck="false" autocapitalize="sentences" placeholder="Ricostruisci il testo…">' + esc(dg.given || "") + "</textarea>" +
+      return head + '<div class="card">' +
+        (dg.notes && dg.notes.trim() ? '<p class="muted small">📝 Tus notas</p><p class="dgnotesview it">' + esc(dg.notes) + "</p>" : "") +
+        dgKeysHtml(t) +
+        '<p class="muted small">Escribí acá el texto en italiano: lo que recordás y tus notas, con tus palabras donde haga falta. ' +
+        "Bloques a recuperar: " + t.chunks.length + ".</p>" +
+        '<textarea id="dgtext" class="grow scrivi" rows="7" spellcheck="false" autocapitalize="sentences" placeholder="Ricostruisci il testo…">' + esc(dg.given || "") + "</textarea>" +
         '<div class="row" style="margin-top:10px"><button class="btn" id="dgcheck">Controlla</button>' +
         '<button class="tab" id="dgagain">🔊 escuchar otra vez (cuenta como ayuda)</button></div>' +
         '<div id="dgout"></div></div>';
     }
     var r = dg.result;
     return head + '<div class="card"><div class="scorebig"><b>' + r.found.length + " / " + r.n + '</b><span>bloques recuperados</span><span>+' + dg.xp + " xp</span></div>" +
-      '<h3>Recuperados</h3><p>' + (r.found.length ? r.found.map(function (c) { return "<b>" + esc(c) + "</b>"; }).join(" · ") : "—") + "</p>" +
+      '<h3>El texto</h3><p class="muted small"><mark class="dgok">verde</mark>: lo recuperaste · <mark class="dgmiss">rojo</mark>: faltó</p>' +
+      '<p class="model it">' + dgMarked(t.text, r) + "</p>" +
       (r.missed.length ? '<h3>Faltaron</h3><p>' + r.missed.map(esc).join(" · ") + "</p>" : "") +
-      (dg.findings && dg.findings.length ? "<h3>Para revisar</h3><ol class=\"findings\">" + dg.findings.map(function (f) { return "<li>" + mk(f.msg) + "</li>"; }).join("") + "</ol>" : "") +
-      '<h3>El texto</h3><p class="model it">' + esc(t.text) + "</p>" +
+      '<h3>Tu versión</h3><p class="dgnotesview it">' + esc(dg.given || "") + "</p>" +
+      (dg.findings && dg.findings.length ? "<h3>Para revisar en tu versión</h3><ol class=\"findings\">" + dg.findings.map(function (f) { return "<li>" + mk(f.msg) + "</li>"; }).join("") + "</ol>" : "") +
       '<div class="row" style="margin-top:14px"><button class="btn" id="dgback2">← Seguir el percorso</button>' +
       '<button class="btn ghost" id="dgredo">Otra vez</button></div></div>';
+  }
+  function dgKeysHtml(t) {
+    return '<p class="muted small">Palabras clave: <i>' + t.keywords.map(esc).join(" · ") + "</i></p>";
+  }
+  // The original text with each chunk marked: recovered in green, missed in red.
+  function dgMarked(text, r) {
+    var marks = [];
+    [[r.found, "dgok"], [r.missed, "dgmiss"]].forEach(function (g) {
+      g[0].forEach(function (c) {
+        var at = text.toLowerCase().indexOf(String(c).toLowerCase());
+        if (at >= 0 && !marks.some(function (m) { return at < m.end && at + c.length > m.at; })) marks.push({ at: at, end: at + c.length, cls: g[1] });
+      });
+    });
+    marks.sort(function (a, b) { return a.at - b.at; });
+    var out = "", pos = 0;
+    marks.forEach(function (m) {
+      out += esc(text.slice(pos, m.at)) + '<mark class="' + m.cls + '">' + esc(text.slice(m.at, m.end)) + "</mark>";
+      pos = m.end;
+    });
+    return out + esc(text.slice(pos));
   }
   function wireDictogloss() {
     if (view.screen !== "dictogloss") return;
@@ -3218,18 +3255,26 @@
       if (!b || b.disabled) return;
       b.disabled = true;
       var second = dg.plays >= 1;
-      if (second) { var k = $("#dgkeys"); if (k) k.innerHTML = '<p class="muted">Palabras clave: <i>' + t.keywords.map(esc).join(" · ") + "</i></p>"; }
-      if (st) st.textContent = second ? "Escucha 2 de 2…" : "Escucha 1 de 2…";
+      if (second) {
+        var k = $("#dgkeys"); if (k) k.innerHTML = dgKeysHtml(t);
+        var nl = document.querySelector(".dgnotes"); if (nl) nl.hidden = false;
+        var nt = $("#dgnotes"); if (nt) nt.focus();
+      }
+      if (st) st.textContent = second ? "Escucha 2 de 2: anotá mientras escuchás…" : "Escucha 1 de 2…";
       speak(t.text, true, 0.95, { onend: function () {
         dg.plays++;
         b.disabled = false;
-        if (st) st.textContent = dg.plays >= 2 ? "Listo: ahora reconstruilo" : "Escucha 2 de 2 (anotá palabras clave)";
+        if (st) st.textContent = dg.plays >= 2 ? "Listo: ahora reconstruilo" : "Escucha 2 de 2: tocá 🔊 y anotá mientras escuchás";
         var wbtn = $("#dgwrite");
         if (wbtn && dg.plays >= 2) wbtn.disabled = false;
         noteListening(t.text.split(/\s+/).length * 0.45);
       } });
     });
-    on("#dgwrite", function () { dg.step = 1; render(); });
+    var notes = $("#dgnotes");
+    if (notes) notes.oninput = function () { dg.notes = notes.value; };
+    var draft = $("#dgtext");
+    if (draft) draft.oninput = function () { dg.given = draft.value; };
+    on("#dgwrite", function () { var n = $("#dgnotes"); if (n) dg.notes = n.value; dg.step = 1; render(); window.scrollTo(0, 0); });
     on("#dgagain", function () { dg.help = (dg.help || 0) + 1; speak(t.text, true, 0.95); });
     on("#dgcheck", function () {
       var box = $("#dgtext"), given = box ? box.value : "";
@@ -4484,7 +4529,8 @@
   if (/[?&]test\b/.test(location.search)) {
     window.__test = {
       item: function () { return round && view.screen === "gioco" ? round.items[round.i] : null; },
-      state: function () { return state; }
+      state: function () { return state; },
+      round: function () { return round; }
     };
   }
 

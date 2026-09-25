@@ -532,12 +532,15 @@
 
     // The gym weighs more when the week brings a new tense (gymShare, from
     // build_course.py); in review weeks it would only repeat «voi siete».
-    var wantConj = Math.min(
+    // focus: the training of one part of the lesson asks that part and
+    // nothing else (no verb gym, no review, no words of the week).
+    var focus = !!opts.focus;
+    var wantConj = focus ? 0 : Math.min(
       week.verbs && week.verbs.length ? Math.ceil(size * (week.gymShare || 0.35)) : 0,
       size
     );
     var wantBook = size - wantConj;
-    var wantExtra = Math.min(extra.length, Math.round(wantBook / 4));
+    var wantExtra = focus ? 0 : Math.min(extra.length, Math.round(wantBook / 4));
 
     pickFresh(bookItems, wantBook - wantExtra, opts.state).forEach(function (it) { out.push(it); });
     // What the last four weeks left unseen comes along, a couple per round,
@@ -563,12 +566,12 @@
     // never with a repeat.
     if (out.length < size) {
       var inRound = {}; out.forEach(function (it) { inRound[it.id] = 1; });
-      pickFresh(bookItems.concat(extra).filter(function (it) { return !inRound[it.id]; }), size - out.length, opts.state)
+      pickFresh(bookItems.concat(focus ? [] : extra).filter(function (it) { return !inRound[it.id]; }), size - out.length, opts.state)
         .forEach(function (it) { out.push(it); });
     }
-    if (out.length < size) bankFill(opts.state, size - out.length).forEach(function (it) { out.push(it); });
+    if (out.length < size && !focus) bankFill(opts.state, size - out.length).forEach(function (it) { out.push(it); });
     // two words of the week, interleaved with the grammar
-    if (week.vocab && week.vocab.length) {
+    if (week.vocab && week.vocab.length && !focus) {
       var vs = vocabSession(course, week, opts.state || {}, 2);
       out = out.slice(0, size - vs.length).concat(vs);
     }

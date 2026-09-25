@@ -782,11 +782,12 @@ def check_lesson(week: int, lesson: dict) -> list:
     blocks = lesson.get("blocks") or []
     if len(blocks) < 3:
         bad.append("settimana %s: solo %d blocchi" % (week, len(blocks)))
-    known = {"h", "r", "table", "ex", "warn", "tip", "more", "q"}
+    known = {"h", "r", "table", "ex", "warn", "tip", "more", "q", "qq"}
     for i, b in enumerate(blocks, 1):
         extra = set(b) - known
         # «q»: checks written by hand, 3 options with the answer among them
-        for q in b.get("q") or []:
+        # («qq»: the same, but every one of them is asked after the block)
+        for q in (b.get("q") or []) + (b.get("qq") or []):
             if q.get("answer") not in (q.get("options") or []) or len(set(q.get("options") or [])) != 3:
                 bad.append("settimana %s blocco %d: chequeo «q» mal armado: %s" % (week, i, q.get("prompt")))
         if extra:
@@ -1197,13 +1198,17 @@ def main() -> None:
             text = " ".join([it.get("prompt") or "", it.get("stem") or "", str(it.get("answer") or "")])
             ans = str(it.get("answer") or "").strip()
             home = len(parts) - 1
-            for k, p in enumerate(parts):
+            # «ids»: exercises placed by hand in a part win over the patterns.
+            fixed = [k for k, p in enumerate(parts) if iid in (p.get("ids") or [])]
+            for k, p in enumerate([] if fixed else parts):
                 # The answer alone may name the part («il», «uno»), except for
                 # patterns that exclude by lookahead: those read the whole text.
                 if re.search(p["match"], text, re.I) or (
                         not p["match"].startswith("^(?!") and re.search(p["match"], ans, re.I)):
                     home = k
                     break
+            if fixed:
+                home = fixed[0]
             compiled[home]["items"].append(iid)
         w["parts"] = compiled
         blocks_in_parts = sorted(b for p in parts for b in p["blocks"])

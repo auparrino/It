@@ -205,8 +205,11 @@ tónico y un dictado por fragmentos.
 ### 📝 Dictogloss
 
 Cada semana (menos las de jefe) un texto de 50 a 110 palabras
-(`docs/js/dictogloss_data.js`, 47 textos): lo escuchás dos veces, la
-segunda con las palabras clave a la vista, y lo reconstruís por escrito.
+(`docs/js/dictogloss_data.js`, 47 textos): lo escuchás dos veces y en la
+segunda anotás en la app, con las palabras clave a la vista. Después lo
+reconstruís en la app con tus notas arriba, y al final ves tu versión y el
+texto original con los bloques recuperados en verde y los que faltaron en
+rojo. No hace falta papel.
 Se puntúan seis bloques léxicos (*ci vediamo*, *per fortuna*, *sono andato a
 trovare*): lo recuperado es lo que queda (Yu, Boers & Tremblay 2025). El
 corrector propio marca después lo demás.
@@ -538,16 +541,21 @@ calcula **la primera semana cuya teoría lo cubre todo**:
 
 Una semana cargada no se estudia de una sentada. Las semanas 1, 2, 3, 5, 6,
 7, 8, 9, 10, 11, 12, 15, 17, 18, 19, 21, 23, 24, 28, 30, 33, 34, 40, 42, 44,
-50 y 51 tienen la lección dividida en **partes** (dos a cuatro), cada una con sus propios bloques de teoría y sus propios ejercicios:
-en la semana 3, por ejemplo, *Determinados*, *Indeterminados*, *Preposiciones
-articuladas* y *Partitivo y usos del artículo*. En el percorso cada parte es
-una misión («Lección 2/4: Indeterminados»), y «A entrenar esta parte» arma
-una ronda solo con los ejercicios de esa parte (más el repaso que toque). La
-semana siguiente se abre cuando están todas las partes.
+50 y 51 tienen la lección dividida en **partes** (dos a seis), cada una con sus propios bloques de teoría y sus propios ejercicios.
+La semana 3, los artículos, tiene seis: *Género y el, la*, *lo, gli y el
+plural*, *Indeterminados*, *Dónde va el artículo (y dónde no)*,
+*Preposiciones articuladas* y *Partitivo y cantidades*, con dos o tres
+bloques por parte y dos o tres chequeos después de cada bloque. En el
+percorso cada parte es una misión («Lección 3/6: Indeterminados»), y «A
+entrenar esta parte» arma una ronda **solo** con los ejercicios de esa
+parte: sin gimnasio de verbos, sin repaso de otras semanas y sin palabras
+sueltas. La semana siguiente se abre cuando están todas las partes.
 
-Las partes se declaran en `tools/lessons/` (`"parts"`: título, bloques y una
-expresión regular que reparte los ejercicios por su consigna);
-`tools/build_course.py` comprueba que cubran todos los bloques una sola vez y
+Las partes se declaran en `tools/lessons/` (`"parts"`: título, bloques, los
+ejercicios puestos a mano en `"ids"` y una expresión regular que reparte el
+resto por su consigna); `"qq"` en un bloque son chequeos escritos a mano que
+se preguntan todos. `tools/build_course.py` comprueba que las partes cubran
+todos los bloques una sola vez y
 manda lo que no encaja en ninguna a la última parte.
 
 ### Antes del jefe
