@@ -20,11 +20,10 @@ jobs:
         run: npm test
       - name: Los datos compilados coinciden con las fuentes
         run: |
-          python3 tools/build_bank.py > /dev/null
-          python3 tools/build_course.py > /dev/null
-          git diff --stat --exit-code docs/data/ || (echo "docs/data no está al día con tools/: corré npm run build" && exit 1)
+          npm run build > /dev/null
+          git diff --stat --exit-code docs/lang/*/data/ || (echo "docs/lang/*/data no está al día con tools/: corré npm run build" && exit 1)
       - name: La versión del service worker coincide con la de la app
         run: |
-          a=$(grep -o 'VERSION = "laviac1-v[0-9]*"' docs/sw.js | grep -o 'v[0-9]*')
-          b=$(grep -o 'APP_VERSION = "v[0-9]*"' docs/js/app.js | grep -o 'v[0-9]*')
-          test "$a" = "$b" || (echo "sw.js $a ≠ app.js $b" && exit 1)
+          a=$(grep -o 'VERSION = "c1-v[0-9.]*"' docs/sw.js | grep -o 'v[0-9.]*')
+          b=$(grep -o 'APP_VERSION = "v[0-9.]*"' docs/js/app.js | grep -o 'v[0-9.]*')
+          test -n "$a" && test "$a" = "$b" || (echo "sw.js $a ≠ app.js $b" && exit 1)
