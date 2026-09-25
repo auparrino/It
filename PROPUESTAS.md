@@ -212,7 +212,7 @@ metadatos de Common Voice) y sumarlos a la caché del service worker.
 
 - De Jong, N. & Perfetti, C. (2011). Fluency training in the ESL classroom. *Language Learning*, 61(2).
 - DeKeyser, R. & Suzuki, Y. (2025). Skill acquisition theory. En VanPatten, Keating & Wulff (eds.), *Theories in SLA* (4.ª ed.). Routledge.
-- Fan, Y. et al. (2025). Beware of metacognitive laziness: Effects of generative AI on learning motivation, processes, and performance. *British Journal of Educational Technology*. arXiv:2412.09315.
+- Fan, Y. et al. (2024). Beware of metacognitive laziness: Effects of generative AI on learning motivation, processes, and performance. *British Journal of Educational Technology*. arXiv:2412.09315.
 - Jeon, E.-Y. & Day, R. (2016). The effectiveness of ER on reading proficiency: A meta-analysis. *Reading in a Foreign Language*, 28(2).
 - Kurokawa, S., Hein, A. & Uchihara, T. (2025). Incidental vocabulary acquisition through captioned viewing: A meta-analysis. *Language Learning*, 75(4), 939–987.
 - Lee, J., Jang, J. & Plonsky, L. (2015). The effectiveness of second language pronunciation instruction: A meta-analysis. *Applied Linguistics*, 36(3), 345–366.
