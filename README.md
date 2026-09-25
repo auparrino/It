@@ -625,6 +625,15 @@ una regla de 22 palabras como máximo y el detalle en *Ojo*, *El atajo* o
 *Más detalle*. `python3 tools/check_lessons.py --estilo` lo controla
 (ejemplos, largo de la regla, forma marcada en cada ejemplo).
 
+### Lecciones cortas
+
+Ninguna lección pasa de unos doce pasos: cada lección (o cada parte) se
+corta en sesiones de bloques enteros, y cada sesión es su propia misión
+del percorso («Lección 2/5: …»). En total son 161 lecciones cortas en vez
+de 95 largas. Una parte cuenta como leída cuando terminaste todas sus
+sesiones, y recién ahí se ofrece «A entrenar esta parte»; lo que ya habías
+leído sigue leído.
+
 ### Lecciones en partes
 
 Una semana cargada no se estudia de una sentada. Las semanas 1, 2, 3, 5, 6,

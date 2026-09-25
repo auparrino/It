@@ -631,7 +631,7 @@
 
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION in sw.js: test_game checks it). */
-  var APP_VERSION = "v1.54";
+  var APP_VERSION = "v1.55";
   function versionLine() {
     return '<p class="muted small version">La Via C1 · versión ' + APP_VERSION + "</p>";
   }
@@ -1008,6 +1008,44 @@
     return ids;
   }
 
+  /* Sessions: every lesson (or part of it) cut into short runs of whole
+     blocks, about a dozen steps each, so no sitting is long.  A part counts
+     as read when all its sessions are; what was read before stays read. */
+  var SESS_MAX = 12, sessCache = {};
+  function sessionsOf(w) {
+    if (!w || !w.lesson) return [];
+    if (sessCache[w.week]) return sessCache[w.week];
+    var ps = partsOf(w), groups = ps ? ps.map(function (p, k) { return { part: k, blocks: p.blocks }; })
+                                     : [{ part: null, blocks: w.lesson.blocks.map(function (_, i) { return i; }) }];
+    var cost = function (i) {
+      return Lezione.steps(w.lesson, function () { return 0.5; }, w.week, null, [i]).filter(function (x) { return x.kind !== "intro"; }).length;
+    };
+    var out = [];
+    groups.forEach(function (g) {
+      var cur = [], n = 0, mine = [];
+      g.blocks.forEach(function (i) {
+        var c = cost(i);
+        if (cur.length && n + c > SESS_MAX) { mine.push(cur); cur = []; n = 0; }
+        cur.push(i); n += c;
+      });
+      if (cur.length) mine.push(cur);
+      mine.forEach(function (bl, k) {
+        out.push({ part: g.part, blocks: bl, k: k, of: mine.length, h: (w.lesson.blocks[bl[0]] || {}).h || "" });
+      });
+    });
+    return (sessCache[w.week] = out);
+  }
+  function sessRead(w, s) {
+    var ss = sessionsOf(w)[s];
+    if (!ss) return false;
+    return !!((state.readSess || {})[w.week] || {})[s] || lessonRead(w.week) || (ss.part != null && partRead(w.week, ss.part));
+  }
+  function nextSession(w) {
+    var ss = sessionsOf(w);
+    for (var k = 0; k < ss.length; k++) if (!sessRead(w, k)) return k;
+    return null;
+  }
+
   /* Tre stelle per settimana: la lezione giocata, la settimana superata
      (20 giuste), la padronanza (85% su almeno 30).  Il boss: superato = 3. */
   function weekStars(w) {
@@ -1217,17 +1255,15 @@
 
   var les = null;
 
-  function startLezione(part) {
+  function startLezione(sess) {
     var w = course.weeks[view.week - 1];
     var isItalian = function (word) { return !!(glossario && glossario[String(word).toLowerCase()]); };
-    var ps = partsOf(w);
-    if (ps && (part == null || isNaN(part))) {
-      // the first part not yet read (or the first one again)
-      part = 0;
-      for (var k = 0; k < ps.length; k++) { if (!partRead(w.week, k)) { part = k; break; } }
-    }
-    var only = ps ? ps[part].blocks : null;
-    les = { w: w, part: ps ? part : null, steps: Lezione.steps(w.lesson, Math.random, w.week, isItalian, only),
+    var ss = sessionsOf(w);
+    // the first session not yet read (or the first one again)
+    if (sess == null || isNaN(sess) || !ss[sess]) { sess = nextSession(w); if (sess == null) sess = 0; }
+    var cur = ss[sess];
+    les = { w: w, sess: sess, part: cur ? cur.part : null,
+            steps: Lezione.steps(w.lesson, Math.random, w.week, isItalian, cur ? cur.blocks : null),
             i: 0, right: 0, asked: 0, answered: false };
     view.screen = "lezione";
     render();
@@ -1244,21 +1280,24 @@
       '<button class="btn ghost" id="lesquit">✕</button></div>';
     if (!st) {
       var pct = les.asked ? Math.round(les.right / les.asked * 100) : 100;
-      var psd = partsOf(w), nextPart = null;
-      if (psd) for (var kk = 0; kk < psd.length; kk++) { if (!partRead(w.week, kk)) { nextPart = kk; break; } }
+      var psd = partsOf(w), ssd = sessionsOf(w), nextS = nextSession(w);
+      // training when the part (or the lesson) is complete; else, the next session
+      var partDone = les.part != null ? partRead(w.week, les.part) : lessonRead(w.week);
       return '<div class="card lesdone center"><div class="bigstar">★</div>' +
-        "<h1>" + (psd ? (nextPart == null ? "¡Lección completa!" : "¡Parte " + (les.part + 1) + " de " + psd.length + " lista!") : "¡Lección completa!") + "</h1>" +
-        '<p class="lead">Semana ' + w.week + " · " + esc(psd ? psd[les.part].h : w.title) + "</p>" +
+        "<h1>" + (nextS == null ? "¡Lección completa!" : "¡Lección " + (les.sess + 1) + " de " + ssd.length + " lista!") + "</h1>" +
+        '<p class="lead">Semana ' + w.week + " · " + esc(ssd[les.sess] ? ssd[les.sess].h : w.title) + "</p>" +
         '<div class="scorebig"><b>' + les.right + "/" + les.asked + '</b><span>+' + les.xp + " xp</span></div>" +
         (les.extras || []).map(function (x) { return '<p class="note selfrepair">' + esc(x) + "</p>"; }).join("") +
         '<p class="muted">' + (pct === 100 ? "Perfecta: ni un error en los chequeos." :
           pct >= 70 ? "Bien. Lo que fallaste vuelve en el entrenamiento." : "Repasala cuando quieras: se puede jugar de nuevo.") + "</p>" +
-        '<div class="row centerrow" style="margin-top:14px"><button class="btn" id="lesplay">🎯 A entrenar' +
-          (psd ? " esta parte" : "") + "</button>" +
-        (psd && nextPart != null ? '<button class="btn ghost" id="lesnextpart" data-part="' + nextPart + '">📘 Parte ' + (nextPart + 1) + " →</button>" : "") +
+        '<div class="row centerrow" style="margin-top:14px">' +
+        (nextS != null && !partDone ? '<button class="btn" id="lesnextpart" data-part="' + nextS + '">📘 Lección ' + (nextS + 1) + " →</button>" :
+          '<button class="btn" id="lesplay">🎯 A entrenar' + (psd ? " esta parte" : "") + "</button>" +
+          (nextS != null ? '<button class="btn ghost" id="lesnextpart" data-part="' + nextS + '">📘 Lección ' + (nextS + 1) + " →</button>" : "")) +
         '<button class="btn ghost" id="lesback">Volver a la semana</button></div></div>';
     }
-    var partLabel = les.part != null ? " · parte " + (les.part + 1) + " de " + partsOf(w).length : "";
+    var partLabel = les.sess != null && sessionsOf(w).length > 1 ? " · lección " + (les.sess + 1) + " de " + sessionsOf(w).length
+                  : les.part != null ? " · parte " + (les.part + 1) + " de " + partsOf(w).length : "";
     if (st.kind === "intro") {
       return hudH + '<div class="card lescard"><div class="badge-new">📘 Lección · semana ' + w.week + partLabel + "</div>" +
         "<h1>" + esc(w.title) + "</h1><p class=\"intro\">" + mk(w.lesson.intro) + "</p>" +
@@ -1326,15 +1365,22 @@
       if (!state.lessonScore) state.lessonScore = {};
       var pct = les.asked ? Math.round(les.right / les.asked * 100) : 100;
       var planBefore = doneCount(w);
+      var ss = sessionsOf(w), mine = ss[les.sess];
+      if (!state.readSess) state.readSess = {};
+      var rs = state.readSess[w.week] || (state.readSess[w.week] = {});
+      if (les.sess != null) { first = !sessRead(w, les.sess); rs[les.sess] = Date.now(); }
+      else ss.forEach(function (x, k) { if (x.part === les.part) rs[k] = rs[k] || Date.now(); });   // an old saved lesson: its whole part
       if (les.part != null) {
         if (!state.readParts) state.readParts = {};
         var rp = state.readParts[w.week] || (state.readParts[w.week] = {});
-        first = !rp[les.part];
-        rp[les.part] = Date.now();
+        // the part is read when every session of it is
+        if (ss.every(function (x, k) { return x.part !== les.part || !!rs[k] || !!rp[les.part]; })) rp[les.part] = rp[les.part] || Date.now();
         var all = partsOf(w).every(function (p, k) { return !!rp[k]; });
         if (all && !state.read[w.week]) state.read[w.week] = Date.now();
-      } else if (first) state.read[w.week] = Date.now();
-      les.xp = (first ? Engine.XP.lesson : 5) + les.right * 2;
+      } else if (ss.every(function (x, k) { return !!rs[k]; }) && !state.read[w.week]) state.read[w.week] = Date.now();
+      // the lesson's xp shared among its sessions
+      var share = mine ? mine.blocks.length / Math.max(1, w.lesson.blocks.length) : 1;
+      les.xp = (first ? Math.max(5, Math.round(Engine.XP.lesson * share)) : 5) + les.right * 2;
       les.extras = missionCheck(w.week, planBefore);
       state.lessonScore[w.week] = Math.max(pct, state.lessonScore[w.week] || 0);
       gain(les.xp);
@@ -1374,10 +1420,12 @@
       // Before the boss: the season again, one theme at a time, and a round
       // with what you got wrong.  Optional: the boss is the gate.
       var psb = partsOf(w);
-      if (w.lesson && psb) psb.forEach(function (p, k) {
-        m({ kind: "lez", arg: String(k), done: partRead(w.week, k) || lessonRead(w.week), ico: "📘", opt: true,
-            title: p.h, sub: (partRead(w.week, k) || lessonRead(w.week) ? "Hecho · " : "Opcional · ") +
-              "la regla en pasos cortos y " + p.items.length + " ejercicios del tema" });
+      if (w.lesson && psb) sessionsOf(w).forEach(function (x, k) {
+        var p = psb[x.part];
+        m({ kind: "lez", arg: String(k), done: sessRead(w, k), ico: "📘", opt: true,
+            title: p.h + (x.of > 1 ? " (" + (x.k + 1) + "/" + x.of + ")" : ""),
+            sub: (sessRead(w, k) ? "Hecho · " : "Opcional · ") + "la regla en pasos cortos" +
+              (x.k === x.of - 1 ? " y " + p.items.length + " ejercicios del tema" : "") });
       });
       var weak = Drills.weakItems(course, w, state, itemMap).length;
       m({ kind: "debil", done: !!(state.weakDone || {})[w.week], ico: "🩹", opt: true, title: "Tus puntos débiles",
@@ -1388,16 +1436,17 @@
           sub: "85% de aciertos. Pregunta más de lo que más te costó. Superarlo te da las 3 estrellas.", cls: "boss" });
       return out;
     }
-    var psw = partsOf(w);
-    if (w.lesson && psw) psw.forEach(function (p, k) {
-      m({ kind: "lez", arg: String(k), done: partRead(w.week, k) || lessonRead(w.week), ico: "📘",
-          title: "Lección " + (k + 1) + "/" + psw.length + ": " + p.h,
-          sub: (partRead(w.week, k) || lessonRead(w.week) ? "Hecha · " : "") + p.items.length + " ejercicios de esta parte entran al entrenamiento" });
+    // One mission per session: short lessons in order (a part's training
+    // comes with its last session).
+    var psw = partsOf(w), ssw = sessionsOf(w);
+    if (w.lesson) ssw.forEach(function (x, k) {
+      var last = x.k === x.of - 1, p = psw ? psw[x.part] : null;
+      m({ kind: "lez", arg: String(k), done: sessRead(w, k), ico: "📘",
+          title: (ssw.length > 1 ? "Lección " + (k + 1) + "/" + ssw.length + ": " : "Lección: ") + x.h,
+          sub: (sessRead(w, k) ? "Hecha · " : "") +
+            (p && last ? p.items.length + " ejercicios de esta parte entran al entrenamiento" :
+             !p && last && k === ssw.length - 1 ? "después, a entrenar la semana" : "teoría en pasos cortos, con chequeos") });
     });
-    else if (w.lesson) m({ kind: "lez", done: lessonRead(w.week), ico: "📘", title: "Jugá la lección",
-      sub: lessonRead(w.week)
-        ? "Hecha" + (state.lessonScore && state.lessonScore[w.week] != null ? " · " + state.lessonScore[w.week] + "% en los chequeos" : "")
-        : "Teoría en pasos cortos, con preguntas." });
     if (w.vocab && w.vocab.length) {
       var seenV = w.vocab.filter(function (v) { return state.cards["v:" + v[0]]; }).length;
       m({ kind: "vocab", done: seenV >= w.vocab.length, ico: "📚", title: "Palabras de la semana",
