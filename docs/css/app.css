@@ -806,3 +806,13 @@ body.kar-audio .text { filter: blur(6px); pointer-events: none; }
   background: color-mix(in srgb, var(--oro) 12%, transparent); }
 mark.dgok { background: color-mix(in srgb, var(--verde) 26%, transparent); color: inherit; border-radius: 3px; }
 mark.dgmiss { background: color-mix(in srgb, var(--terracotta) 24%, transparent); color: inherit; border-radius: 3px; }
+
+/* Glosas de opción múltiple en las lecturas */
+.text .w.mcg { background: color-mix(in srgb, var(--oro) 30%, transparent); border-radius: 4px; padding: 0 2px;
+  border-bottom: 2px dotted var(--oro-scuro); cursor: pointer; }
+.muted .w.mcg, .muted .w.gl { font-style: normal; }
+.mcbox { position: fixed; left: 50%; bottom: 84px; z-index: 60; width: min(92vw, 420px);
+  transform: translate(-50%, 16px); opacity: 0; pointer-events: none; transition: opacity .18s, transform .18s;
+  background: var(--carta); border: 1px solid var(--grigio-chiaro); border-radius: 14px; padding: 12px 14px 10px; box-shadow: var(--ombra); }
+.mcbox.on { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
+.mcbox .options { margin: 8px 0; }

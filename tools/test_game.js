@@ -272,6 +272,66 @@ ok(Drills.dueCount(course, state) >= 30, "le schede scadute rientrano in coda");
   ok(rep === 0, "Dominala: " + rep + " ejercicios repetidos en la misma sesión");
 })();
 
+// Duelos: cada oración tiene sus dos formas, la pista está en la oración y
+// «¿qué te lo dijo?» se puede armar; cada sesión trae los dos lados.
+(function () {
+  var Duelli = require(path.join(ROOT, "docs/js/duelli.js"));
+  Duelli.DUELLI.forEach(function (d) {
+    var sides = [0, 0];
+    d.items.forEach(function (x, k) {
+      sides[Duelli.side(d, x)]++;
+      ok(x.a !== x.b && x.s.indexOf("___") >= 0, "duelo " + d.id + " " + k + ": formas o hueco");
+      ok(Duelli.filled(x).indexOf(x.cue) >= 0, "duelo " + d.id + " " + k + ": la pista no está en la oración");
+      ok(!!Duelli.cueItem(d, k), "duelo " + d.id + " " + k + ": sin «¿qué te lo dijo?»");
+    });
+    ok(Math.abs(sides[0] - sides[1]) <= 2, "duelo " + d.id + ": lados desparejos " + sides);
+    var ses = Duelli.session(d.id, {});
+    var chosen = ses.filter(function (it) { return !it.cue; });
+    ok(chosen.length === 8 && chosen.every(function (it) { return it.options.indexOf(it.answer) >= 0; }), "duelo " + d.id + ": sesión");
+  });
+})();
+
+// «Adiviná»: tres opciones distintas y parecidas a la frase (la misma frase
+// con un error, casi siempre), nunca otra frase entera si hay trampas.
+(function () {
+  var Frasi = require(path.join(ROOT, "docs/js/frasi.js"));
+  var far = 0;
+  Frasi.ALL.forEach(function (f) {
+    var g = Frasi.guessItem(f);
+    ok(g.options.length === 3 && g.options.indexOf(f.it) >= 0 && new Set(g.options).size === 3, "adiviná: opciones " + f.id);
+    // near: at most a third of the letters changed (Esato / Esatto, Me chiamo / Mi chiamo)
+    var lev = function (a, b) {
+      var d = [], i, j;
+      for (i = 0; i <= a.length; i++) d[i] = [i];
+      for (j = 1; j <= b.length; j++) d[0][j] = j;
+      for (i = 1; i <= a.length; i++) for (j = 1; j <= b.length; j++)
+        d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+      return d[a.length][b.length];
+    };
+    var near = g.options.filter(function (o) {
+      return o !== f.it && lev(o.toLowerCase(), f.it.toLowerCase()) <= f.it.length / 3;
+    });
+    if (!near.length) far++;
+  });
+  // the few interjections with no possible mistake (Prego!, Magari!) take the most similar phrases
+  ok(far <= Frasi.ALL.length * 0.07, "adiviná: frases sin ninguna opción parecida: " + far);
+})();
+
+// Glosas de opción múltiple: la respuesta entre tres opciones distintas.
+(function () {
+  var Letture = require(path.join(ROOT, "docs/js/letture.js"));
+  var n = 0;
+  Letture.EPISODI.forEach(function (ep) {
+    var toks = Letture.allTokens(ep);
+    Letture.mcTargets(ep).forEach(function (i) {
+      var o = Letture.mcOptions(ep, toks[i]);
+      n++;
+      ok(o.options.length === 3 && o.options.indexOf(o.answer) >= 0 && new Set(o.options).size === 3, "glosa múltiple: " + ep.id + "/" + o.word);
+    });
+  });
+  ok(n >= 100, "glosas de opción múltiple: " + n);
+})();
+
 // La versión que muestra la app (Oggi, Io) es la del service worker.
 (function () {
   var sw = fs.readFileSync(path.join(ROOT, "docs/sw.js"), "utf8").match(/VERSION = "laviac1-(v\d+)"/);

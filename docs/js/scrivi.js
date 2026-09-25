@@ -1701,31 +1701,59 @@
       " de 52). Función de la semana: «" + ctx.fare + "». Tema: «" + ctx.tema + "».\n" +
       "Reglas: el alumno tiene que conseguir TRES objetivos comunicativos concretos y verificables hablando con vos. " +
       "Vos hacés un personaje con un rol claro (empleado, vecino, amigo…), no un profesor. Frases de máximo " + ctx.maxWords + " palabras. " +
-      "Usá solo estos tiempos verbales: " + ctx.tenses + ". Vocabulario permitido: palabras muy frecuentes y esta lista: " + ctx.words.join(", ") + ".\n" +
+      "Usá solo estos tiempos verbales: " + ctx.tenses + ". " + ITALIANO_PRIMA + " El alumno conoce, entre otras: " + ctx.words.slice(0, 100).join(", ") + ".\n" +
       "Respondé SOLO con JSON: {\"titolo\": \"título corto en italiano\", \"ruolo_ia\": \"quién sos, en italiano\", " +
       "\"situazione_es\": \"la situación explicada al alumno en castellano, 2 oraciones\", " +
       "\"obiettivi\": [\"objetivo 1 en castellano\", \"objetivo 2\", \"objetivo 3\"], " +
       "\"apertura\": \"tu primera frase en italiano, en personaje\", \"parole_utili\": [\"6 palabras o expresiones italianas útiles\"]}";
   }
-  function parlaTurnPrompt(scen, history, userText, ctx) {
+  // Italian first: the vocabulary list is a preference, never a reason to
+  // write broken Italian («uomo grande fare servizio?»).
+  var ITALIANO_PRIMA = "Tu italiano tiene que ser SIEMPRE correcto y natural, como lo diría un italiano: artículos y concordancias bien " +
+    "(un ragazzo, l'uomo, una ragazza), mayúscula al empezar cada oración, frases completas con verbo. Preferí palabras simples y frecuentes, " +
+    "pero nunca sacrifiques la gramática ni el sentido por usar palabras más simples.";
+  function parlaTurnPrompt(scen, history, userText, ctx, done) {
+    var pending = scen.obiettivi.map(function (o, i) { return (done || []).indexOf(i + 1) < 0 ? (i + 1) + ") " + o : null; }).filter(Boolean);
     return "Seguís un role-play en italiano con un alumno hispanohablante de nivel " + ctx.level + ". Tu personaje: " + scen.ruolo_ia +
-      ". Situación: " + scen.situazione_es + ". Objetivos del alumno: " + scen.obiettivi.map(function (o, i) { return (i + 1) + ") " + o; }).join(" ") + "\n" +
-      "Reglas duras: respondé en personaje, en italiano, máximo " + ctx.maxWords + " palabras, solo estos tiempos: " + ctx.tenses +
-      ", vocabulario muy frecuente y de esta lista: " + ctx.words.join(", ") + ". Si el alumno se traba, hacele una pregunta cerrada. " +
-      "No corrijas explícitamente dentro del diálogo: si su frase tiene un error, dala en \"recast\" corregida con el cambio mínimo, y " +
-      "en \"nota_es\" UNA sola observación breve en castellano sobre el error más importante (o vacío). No inventes reglas: si no estás seguro, nota vacía.\n" +
+      ". Situación: " + scen.situazione_es + ". Objetivos del alumno: " + scen.obiettivi.map(function (o, i) { return (i + 1) + ") " + o; }).join(" ") +
+      (pending.length ? ". Todavía le faltan: " + pending.join(" ") : "") + "\n" +
+      "Cómo conversar: respondé primero a lo que el alumno acaba de decir o preguntar (si te pregunta algo, contestalo en personaje, con un dato concreto); " +
+      "no repitas lo que ya dijiste antes; mantené el hilo de la situación; terminá con UNA pregunta simple que lo acerque a un objetivo pendiente. " +
+      "Si el alumno escribe algo raro o fuera de tema, reaccioná con naturalidad y volvé a la situación.\n" +
+      "Reglas: en personaje, en italiano, máximo " + ctx.maxWords + " palabras, solo estos tiempos: " + ctx.tenses + ". " + ITALIANO_PRIMA +
+      " El alumno conoce, entre otras, estas palabras: " + ctx.words.slice(0, 100).join(", ") + ".\n" +
+      "No corrijas dentro del diálogo. En \"recast\" dá la frase del alumno corregida con el cambio mínimo (o \"\" si estaba bien); fijate también en las " +
+      "palabras equivocadas que cambian el sentido (cappelli = sombreros / capelli = pelo; troppo = demasiado / molto = muy). En \"nota_es\", UNA observación " +
+      "breve en castellano sobre el error más importante (o vacío); no inventes reglas.\n" +
+      "Objetivos: un objetivo está cumplido si el alumno lo logró de forma comprensible, aunque sea con errores (por ejemplo «Tu sei troppo alto» describe un rasgo físico).\n" +
       "Conversación hasta ahora:\n" + history.map(function (h) { return (h[0] === "ia" ? "Personaje: " : "Alumno: ") + h[1]; }).join("\n") +
       "\nAlumno: " + userText + "\n\n" +
       "Respondé SOLO con JSON: {\"risposta\": \"tu turno en italiano\", \"recast\": \"la frase del alumno corregida, o \\\"\\\" si estaba bien\", " +
-      "\"nota_es\": \"una observación o vacío\", \"obiettivi_raggiunti\": [números de los objetivos ya cumplidos por el alumno hasta ahora], \"fine\": true si los tres objetivos están cumplidos}";
+      "\"nota_es\": \"una observación o vacío\", \"obiettivi_raggiunti\": [números de TODOS los objetivos cumplidos por el alumno hasta ahora], \"fine\": true si los tres objetivos están cumplidos}";
   }
-  function parlaRewritePrompt(reply, words) {
-    return "Riscrivi questa battuta in italiano usando solo parole molto frequenti e di questa lista: " + words.join(", ") +
-      ". Stesso significato, massimo 25 parole. Battuta: «" + reply + "». Rispondi SOLO con JSON: {\"risposta\": \"...\"}";
+  // Only the hard words, by simpler synonyms: the sentence stays Italian.
+  function parlaRewritePrompt(reply, miss) {
+    return "Riscrivi questa battuta in italiano semplice, sostituendo con sinonimi più comuni solo queste parole difficili: " + miss.join(", ") +
+      ". Stesso significato, frase completa e grammaticalmente perfetta (articoli, accordi, maiuscola iniziale), massimo 25 parole. " +
+      "Battuta: «" + reply + "». Rispondi SOLO con JSON: {\"risposta\": \"...\"}";
+  }
+  /* The learner's sentences reviewed at the end, all together, by a second
+     request that does only that (the role-play model corrects on the fly
+     and misses errors that change the meaning: cappelli for capelli). */
+  function parlaReviewPrompt(scen, history) {
+    var mine = history.map(function (h, i) { return h[0] === "me" ? i : -1; }).filter(function (i) { return i >= 0; });
+    return "Sos profesor de italiano. Un alumno hispanohablante escribió estas frases en un role-play (situación: " + scen.situazione_es + ").\n" +
+      "Conversación:\n" + history.map(function (h, i) { return (h[0] === "ia" ? "Personaje: " : "Alumno [" + i + "]: ") + h[1]; }).join("\n") + "\n\n" +
+      "Revisá cada frase del alumno. Corrección mínima: cambiá solo lo que está mal, no reescribas lo que ya es correcto. Mirá gramática, concordancia, " +
+      "artículos, ortografía y sobre todo las palabras equivocadas que cambian el sentido (cappelli = sombreros / capelli = pelo; troppo = demasiado / " +
+      "molto = muy; grande = grande de tamaño o de edad según el contexto). Si la frase está bien, \"ok\": true. No inventes reglas.\n" +
+      "Respondé SOLO con JSON: {\"frasi\": [{\"i\": número de la frase, \"ok\": true o false, \"corretta\": \"la frase corregida\", " +
+      "\"nota\": \"una observación breve en castellano rioplatense, o vacío\"}]} con una entrada para cada una de estas frases: " + mine.join(", ");
   }
   function parlaStart(ctx, keys, done) { llm(parlaScenarioPrompt(ctx), keys, done); }
-  function parlaTurn(scen, history, userText, ctx, keys, done) { llm(parlaTurnPrompt(scen, history, userText, ctx), keys, done); }
-  function parlaRewrite(reply, words, keys, done) { llm(parlaRewritePrompt(reply, words), keys, done); }
+  function parlaTurn(scen, history, userText, ctx, keys, done, reached) { llm(parlaTurnPrompt(scen, history, userText, ctx, reached), keys, done); }
+  function parlaRewrite(reply, miss, keys, done) { llm(parlaRewritePrompt(reply, miss), keys, done); }
+  function parlaReview(scen, history, keys, done) { llm(parlaReviewPrompt(scen, history), keys, done); }
 
   /* ------------------------------------------------------- storia
      A short story built on the words due for review plus what the learner
@@ -1735,17 +1763,25 @@
     return "Escribí un cuento corto en italiano para un hispanohablante de nivel " + ctx.level + " (semana " + ctx.week + " de 52; tema de la semana: «" +
       ctx.tema + "»). Tres párrafos, " + ctx.words + " palabras en total, frases cortas, gramática de estos tiempos solamente: " + ctx.tenses + ".\n" +
       "OBLIGATORIO: usá cada una de estas palabras al menos una vez (son las que el alumno tiene que repasar): " + ctx.targets.join(", ") + ".\n" +
-      "Vocabulario: solo palabras muy frecuentes y esta lista de palabras que el alumno ya conoce: " + ctx.known.join(", ") + ". " +
-      "Fuera de esa lista, como máximo " + ctx.maxNew + " palabras nuevas, y ponelas en el glosario.\n" +
+      "Una historia de verdad: personajes con nombre, un problema y un final; que cada oración siga a la anterior. " + ITALIANO_PRIMA + "\n" +
+      "Vocabulario: preferí palabras muy frecuentes y estas, que el alumno ya conoce: " + ctx.known.join(", ") + ". " +
+      "Como máximo " + ctx.maxNew + " palabras que no sean frecuentes, y ponelas en el glosario.\n" +
       "Respondé SOLO con JSON: {\"titolo\": \"...\", \"testo\": \"párrafo uno\\n\\npárrafo dos\\n\\npárrafo tres\", " +
       "\"glossario\": [[\"palabra italiana tal como aparece\", \"significado en castellano\"], ...], " +
       "\"domande\": [[\"pregunta de comprensión en castellano\", [\"opción correcta\", \"distractor\", \"distractor\", \"distractor\"], \"opción correcta\"], ...3 preguntas]}";
   }
-  function storiaRewritePrompt(text, miss, known) {
-    return "Riscrivi questo testo in italiano sostituendo o eliminando queste parole, troppo difficili per l'alunno: " + miss.join(", ") +
-      ". Usa solo parole molto frequenti e di questa lista: " + known.join(", ") + ". Stesso contenuto e stessa lunghezza. Testo:\n" + text +
+  function storiaRewritePrompt(text, miss) {
+    return "Riscrivi questo testo in italiano sostituendo con sinonimi più comuni queste parole, troppo difficili per l'alunno: " + miss.join(", ") +
+      ". Tutto il resto resta uguale. Il testo deve restare italiano corretto e naturale: articoli e accordi giusti (un ragazzo, l'uomo), " +
+      "maiuscola all'inizio di ogni frase, la stessa storia. Testo:\n" + text +
       "\nRispondi SOLO con JSON: {\"testo\": \"...\"}";
   }
+  // The errors the local checker found, fixed with the minimal change.
+  function correggiPrompt(text, errs) {
+    return "Correggi SOLO questi errori nel testo italiano, con il cambiamento minimo, senza toccare il resto: " + errs.join(" | ") +
+      ". Controlla anche maiuscole a inizio frase e accordi articolo-nome. Testo:\n" + text + "\nRispondi SOLO con JSON: {\"testo\": \"...\"}";
+  }
+  function correggi(text, errs, keys, done) { llm(correggiPrompt(text, errs), keys, done); }
   function storia(ctx, keys, done) { llm(storiaPrompt(ctx), keys, done); }
 
   /* The written part of the C1 exam, graded with the certification rubric
@@ -1760,7 +1796,7 @@
       "\"commento\": \"3 oraciones en castellano rioplatense: qué está bien, qué le falta para C1\", \"errori\": [[\"fragmento mal\", \"corrección\"], ...]}";
   }
   function esame(task, text, keys, done) { llm(esamePrompt(task, text), keys, done); }
-  function storiaRewrite(text, miss, known, keys, done) { llm(storiaRewritePrompt(text, miss, known), keys, done); }
+  function storiaRewrite(text, miss, keys, done) { llm(storiaRewritePrompt(text, miss), keys, done); }
 
   /* One request at a time through the models of each provider, best first:
      each attempt waits at most 20 s, each provider at most 40 s.  The model
@@ -1820,8 +1856,11 @@
       var skip = paid(P), order = list.filter(function (m) { return !skip[m]; }), deadline = Date.now() + 40000, lastErr = null, plain = {}, n402 = 0;
       if (!order.length) order = list.slice();
       try {
+        // the model that answered last goes first, but only if it is among the
+        // three best: a small model that answered once during an outage would
+        // otherwise stay forever (and write «una ragazzo»)
         var good = localStorage.getItem(store(P, "model"));
-        if (good && order.indexOf(good) > 0) { order.splice(order.indexOf(good), 1); order.unshift(good); }
+        if (good && order.indexOf(good) > 0 && order.indexOf(good) < 3) { order.splice(order.indexOf(good), 1); order.unshift(good); }
       } catch (e) { /* */ }
       var k = 0, over = false;
       function finish(err, data, model) { if (over) return; over = true; done(err, data, model); }
@@ -1902,7 +1941,7 @@
   var api = { TASKS: TASKS, features: features, lint: lint, check: check, markup: markup, weeks: weeks, toks: toks,
               learn: learn, learnCourse: learnCourse, ltCheck: ltCheck, fromLT: fromLT,
               aiCheck: aiCheck, fromAI: fromAI, aiPrompt: aiPrompt, explain: explain, explainPrompt: explainPrompt, reviewPrompt: reviewPrompt,
-              hints: hints, hintsPrompt: hintsPrompt, parlaStart: parlaStart, parlaTurn: parlaTurn, parlaRewrite: parlaRewrite,
+              hints: hints, hintsPrompt: hintsPrompt, parlaStart: parlaStart, parlaTurn: parlaTurn, parlaRewrite: parlaRewrite, parlaReview: parlaReview, parlaReviewPrompt: parlaReviewPrompt, correggi: correggi,
               parlaScenarioPrompt: parlaScenarioPrompt, parlaTurnPrompt: parlaTurnPrompt, storia: storia, storiaRewrite: storiaRewrite, storiaPrompt: storiaPrompt, esame: esame, esamePrompt: esamePrompt, PROVIDERS: PROVIDERS, AI_TYPES: AI_TYPES };
   if (typeof module === "object" && module.exports) module.exports = api;
   else root.Scrivi = api;

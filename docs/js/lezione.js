@@ -68,8 +68,16 @@
   // The simple preposition a Spanish speaker puts instead (en → in, a Roma).
   var PREP_SWAP = { a: ["in", "da"], "in": ["a"], da: ["a", "di"], di: ["da", "de"], su: ["in"], per: ["a", "da"], con: ["di"], fra: ["in", "a"], tra: ["in", "a"] };
   var PRON_SWAP = { io: ["tu", "me"], tu: ["te", "io"], me: ["mi", "io"], te: ["ti", "tu"], noi: ["ci", "voi"], voi: ["vi", "noi"] };
+  // Spanish inside the Italian (me chiamo, de dove, que lavoro): always wrong.
+  var SPAN = { mi: "me", ti: "te", di: "de", che: "que", come: "como", non: "no", e: "y", bene: "bien",
+               grazie: "gracie", ciao: "chao", molto: "muy", sono: "son", anche: "tambien", per: "para",
+               questo: "esto", questa: "esta", dove: "donde", quando: "cuando", sempre: "siempre", tutto: "todo",
+               buona: "buena", buono: "bueno", scusa: "disculpa", scusi: "disculpe", ho: "he", sto: "estoy" };
   var DEACC = { "à": "a", "è": "e", "é": "e", "ì": "i", "ò": "o", "ù": "u" };
-  function traps(sentence, rnd, week, isItalian) {
+  /* safe: only the changes that are always an error (article, preposition,
+     è/e, accents, double consonants).  Another ending, person or auxiliary
+     can be good Italian too (mi piaci, sono stanca, chiudono). */
+  function traps(sentence, rnd, week, isItalian, safe) {
     week = week || 52;
     var toks = sentence.split(" ");
     var rule = [], loose = [];
@@ -83,22 +91,29 @@
         var c = toks.slice(); c[i] = m[1] + nw + m[3]; (bag || rule).push(c.join(" "));
       };
       var next = (toks[i + 1] || "").toLowerCase();
-      if (week >= 11 && AUX[low] && /(at|ut|it|ss|tt|rt|st|nt|ls|lt)[oaie]\b/.test(next)) put(AUX[low]);
+      if (!safe && week >= 11 && AUX[low] && /(at|ut|it|ss|tt|rt|st|nt|ls|lt)[oaie]\b/.test(next)) put(AUX[low]);
       if (week >= 3 && ART[low] && toks[i + 1]) put(ART[low]);
       if (week >= 3 && SPLIT[low]) put(SPLIT[low]);
-      if (PREP_SWAP[low] && toks[i + 1]) put(PREP_SWAP[low][Math.floor(rnd() * PREP_SWAP[low].length)]);
-      if (PRON_SWAP[low]) put(PRON_SWAP[low][Math.floor(rnd() * PRON_SWAP[low].length)]);
+      if (PREP_SWAP[low] && toks[i + 1] && !(safe && low === "per")) put(PREP_SWAP[low][Math.floor(rnd() * PREP_SWAP[low].length)]);
+      if (!safe && PRON_SWAP[low]) put(PRON_SWAP[low][Math.floor(rnd() * PRON_SWAP[low].length)]);
       if (week >= 3) PREP_FAM.forEach(function (fam) {
         if (fam.indexOf(low) < 0) return;
         var vow = /^[aeiouàèéìòùh]/.test(next);
         var alt = fam.filter(function (x) { return x !== low && !/'$/.test(x) && (!vow || !/^(al|del|nel|dal|sul|allo|dello|nello|dallo|sullo|alla|della|nella|dalla|sulla)$/.test(x)); });
         if (alt.length) put(alt[Math.floor(rnd() * alt.length)]);
       });
+      if (safe && SPAN[low]) put(SPAN[low]);
+      // che → ce, chi → ci: the h that keeps the c hard, forgotten
+      if (safe && /ch[ei]/.test(low) && low.length > 2) put(low.replace(/ch([ei])/, "c$1"));
+      // spelled the Spanish way: spagnolo → spañolo, vediamo → bediamo, questo → cuesto
+      if (safe && /gn/.test(low)) put(low.replace("gn", "ñ"));
+      if (safe && /^v[aeiou]/.test(low) && low.length > 3) put("b" + low.slice(1));
+      if (safe && /qu[aeio]/.test(low)) put(low.replace("qu", "cu"));
       if (low === "è") put("e");
       if (/[àèéìòù]$/.test(low) && low.length > 2) put(low.slice(0, -1) + DEACC[low.slice(-1)]);
       if (/([bcdfglmnprstvz])\1/.test(low) && low.length > 4) put(low.replace(/([bcdfglmnprstvz])\1/, "$1"));
       var done = false;
-      if (low.length > 4) for (var k = 0; k < ENDS.length; k++) {
+      if (!safe && low.length > 4) for (var k = 0; k < ENDS.length; k++) {
         if (low.slice(-ENDS[k][0].length) === ENDS[k][0]) { put(low.slice(0, -ENDS[k][0].length) + ENDS[k][1]); done = true; break; }
       }
       // The same word with the other ending (pane → pana, simpatiche →
@@ -106,7 +121,7 @@
       // another sentence.
       // «Marco …»: maybe a name, no spelling games (unless the dictionary knows it)
       var capStart = w[0] !== low[0] && !(isItalian && isItalian(low));
-      if (!done && !capStart && low.length > 3 && SWAP_END[low.slice(-1)] && !/^(sono|come|dove|anche|molto|questo|questa|quando|perché|nostro|nostra)$/.test(low))
+      if (!safe && !done && !capStart && low.length > 3 && SWAP_END[low.slice(-1)] && !/^(sono|come|dove|anche|molto|questo|questa|quando|perché|nostro|nostra)$/.test(low))
         put(low.slice(0, -1) + SWAP_END[low.slice(-1)], loose);
       if (!capStart && /^[^aeiou]*[aeiou][lmnrt][aeiou]/.test(low) && low.length > 3 && low.length < 8)
         put(low.replace(/^([^aeiou]*[aeiou])([lmnrt])/, "$1$2$2"), loose);

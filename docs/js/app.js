@@ -553,7 +553,7 @@
 
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION in sw.js: test_game checks it). */
-  var APP_VERSION = "v45";
+  var APP_VERSION = "v46";
   function versionLine() {
     return '<p class="muted small version">La Via C1 · versión ' + APP_VERSION + "</p>";
   }
@@ -597,6 +597,19 @@
       "</div>" +
       '<p class="muted science">🔬 Ponte usa la transferencia desde tu lengua (Ringbom); ' +
       "Capire es input estructurado: primero interpretar la forma, después producirla (VanPatten).</p>";
+
+    if (window.Duelli) {
+      var wkD = Math.min(state.unlocked || 1, 52);
+      html += "<h2>⚔️ Duelos</h2>" +
+        '<p class="muted">Dos formas que se confunden, mezcladas: elegís una y después tocás la pista que te lo dijo.</p>' +
+        '<div class="labs">' + Duelli.DUELLI.slice().sort(function (a, b) { return a.week - b.week; }).map(function (d) {
+          var best = (state.duelli || {})[d.id];
+          return '<button class="lab" data-duel="' + d.id + '"' + (d.week > wkD ? " disabled" : "") + '><span class="e">⚔️</span><b>' + esc(d.title) + "</b>" +
+            '<span class="muted">' + esc(d.week > wkD ? "Se abre en la semana " + d.week + "." : d.sub) + "</span>" +
+            (best ? '<span class="meta">mejor: ' + best.pct + " %</span>" : "") + "</button>";
+        }).join("") + "</div>" +
+        '<p class="muted science">🔬 Intercalar formas que se parecen (Brunmair y Richter 2019) y explicar por qué (Bisra et al. 2018).</p>';
+    }
 
     if (Banca.loaded()) {
       var st = Banca.stats(), weak = Banca.weakest(state, 2);
@@ -655,7 +668,7 @@
           (open ? "" : " disabled") + ">" +
           '<span class="e">' + (open ? ep.emoji : "🔒") + "</span>" +
           "<span><b>" + esc(ep.title) + "</b>" +
-          '<span class="muted">' + (ep.area ? esc(ep.area) + " · " : "episodio " + ep.n + " · ") +
+          '<span class="muted">' + (ep.area ? esc(ep.area) + " · " : ep.series === "settimana" ? "semana " + ep.week + " · " : "episodio " + ep.n + " · ") +
             esc(ep.level) + " · " + (wait ? "se abre en la semana " + ep.week : esc(ep.grammar)) +
             "</span></span>" +
           (d ? '<span class="score">' + d.pct + "%</span>" : "") +
@@ -692,6 +705,11 @@
     glossIndex = [];
     var forms = enh && ep.flood ? ep.flood.forms : null;
     var isForm = function (t) { return forms && (forms.indexOf(Letture.bare(t)) >= 0 || forms.indexOf(Letture.core(t)) >= 0); };
+    // Multiple-choice glosses: these words are asked, not told, until answered.
+    var mcDone = (state.mcGloss || {})[ep.id] || {}, mc = {};
+    if (mode !== "hunt" && Letture.mcTargets) Letture.mcTargets(ep).forEach(function (i) { mc[i] = 1; });
+    var toks0 = Letture.allTokens(ep);
+    Object.keys(mc).forEach(function (i) { if (mcDone[Letture.core(toks0[i])]) delete mc[i]; });
     return '<div class="text' + (mode === "hunt" ? " hunt" : "") + (enh ? " enh" : "") + '">' +
       Letture.paragraphs(ep).map(function (par) {
         return "<p>" + Letture.tokens(par).map(function (t) {
@@ -700,6 +718,10 @@
             return '<span class="w" data-tok="' + i + '">' + esc(t) + "</span>";
           }
           var g = Letture.glossFor(ep, t);
+          if (g && mc[i]) {
+            glossIndex[i] = Letture.bare(t) + " — " + g;
+            return '<span class="w mcg' + (isForm(t) ? " form" : "") + '" data-k="' + i + '" data-mc="' + i + '">' + esc(t) + "</span>";
+          }
           if (g) {
             glossIndex[i] = Letture.bare(t) + " — " + g;
             return '<span class="w gl' + (isForm(t) ? " form" : "") + '" data-k="' + i + '" data-gl="' + i + '">' + esc(t) + "</span>";
@@ -714,11 +736,13 @@
     var rate = view.karRate || 1, enh = !!view.enh && !!ep.flood;
     return '<button class="btn ghost" id="lback">' + (view.epFrom === "briefing" ? "← a la semana" : "← a Leggi") + "</button>" +
       "<h1>" + ep.emoji + " " + esc(ep.title) + "</h1>" +
-      '<p class="lead">' + (ep.area ? esc(ep.area) + " · " : ep.series === "flood" ? "Inondazione · " + esc(ep.grammar) + " · " : "Martín a Bologna · episodio " + ep.n + " · ") +
+      '<p class="lead">' + (ep.area ? esc(ep.area) + " · " : ep.series === "flood" ? "Inondazione · " + esc(ep.grammar) + " · " :
+        ep.series === "settimana" ? "La settimana · " + esc(ep.grammar) + " · " : "Martín a Bologna · episodio " + ep.n + " · ") +
         esc(ep.level) + "</p>" +
       (enh ? '<div class="note flood">🌊 Segunda lectura: <b>' + esc(ep.flood.es) + "</b> Mirá cada forma resaltada y preguntate por qué está así. " +
         '<button class="tab" id="enhoff">sin marcas</button></div>' : "") +
       '<div class="card">' + renderText(ep, "read", enh) +
+        '<p class="muted small">Las palabras <span class="w mcg">así</span> te las pregunto: tocalas y elegí qué significan por el contexto. Las <span class="w gl">subrayadas</span> te las digo.</p>' +
         '<div class="karbar">' +
           '<button class="btn" id="karplay">🎧 Leggi e ascolta</button>' +
           '<span class="seg">' + [[0.8, "0,8×"], [1, "1×"], [1.15, "1,15×"]].map(function (r) {
@@ -775,6 +799,46 @@
       return '<span class="w gl' + (g[2] > week ? " new" : "") + '" data-sg="' +
         (stemGloss.length - 1) + '">' + esc(t) + "</span>";
     }).join("");
+  }
+
+  /* A multiple-choice gloss: three meanings, the one that fits the context.
+     The word then becomes an ordinary gloss, and goes to the review when the
+     bank knows it (Yanagisawa, Webb & Uchihara 2020). */
+  function askGloss(span) {
+    var ep = Letture.byId(view.ep);
+    if (!ep) return;
+    var i = +span.dataset.mc, tok = Letture.allTokens(ep)[i];
+    var o = Letture.mcOptions(ep, tok);
+    var box = $("#mcbox");
+    if (!box) { box = document.createElement("div"); box.id = "mcbox"; box.className = "mcbox"; document.body.appendChild(box); }
+    box.innerHTML = '<p class="muted small">Por el contexto, ¿qué significa?</p><p class="it"><b>' + esc(Letture.bare(tok)) + "</b></p>" +
+      '<div class="options">' + o.options.map(function (x, k) { return '<button class="opt" data-mco="' + k + '">' + esc(x) + "</button>"; }).join("") + "</div>" +
+      '<button class="tab" id="mcclose">cerrar</button>';
+    box.classList.add("on");
+    on("#mcclose", function () { box.classList.remove("on"); });
+    box.querySelectorAll("[data-mco]").forEach(function (b) {
+      b.onclick = function () {
+        var ok = o.options[+b.dataset.mco] === o.answer;
+        box.querySelectorAll("[data-mco]").forEach(function (x) {
+          x.disabled = true;
+          if (o.options[+x.dataset.mco] === o.answer) x.classList.add("right"); else if (x === b) x.classList.add("wrong");
+        });
+        if (ok) fx.right(); else fx.wrong();
+        if (!state.mcGloss) state.mcGloss = {};
+        (state.mcGloss[ep.id] || (state.mcGloss[ep.id] = {}))[o.word] = ok ? 2 : 1;
+        var g = glossario && glossario[o.word], lemma = g ? g[0] : o.word;
+        if (window.Banca && Banca.loaded() && Banca.hasWord(lemma)) {
+          var id = "b:voc:" + lemma;
+          state.cards[id] = Engine.schedule(state.cards[id], ok ? 2 : 0, { id: id, state: state, kind: ok ? null : "vocab" });
+        }
+        gain(ok ? 3 : 1);
+        persist();
+        span.classList.remove("mcg"); span.classList.add("gl");
+        span.removeAttribute("data-mc"); span.dataset.gl = i;
+        span.onclick = function () { showGloss(glossIndex[i]); speak(Letture.bare(span.textContent), false); };
+        setTimeout(function () { box.classList.remove("on"); }, ok ? 900 : 1800);
+      };
+    });
   }
 
   function showGloss(txt) {
@@ -1158,9 +1222,9 @@
         if (readingWeek(ep) !== w.week) return;
         var d = (state.letture || {})[ep.id];
         m({ kind: "ep", arg: ep.id, done: !!d, ico: ep.emoji,
-            title: (ep.series === "martin" ? "Lectura: " : "Cultura: ") + ep.title,
+            title: (ep.series === "martin" || ep.series === "settimana" ? "Lectura: " : "Cultura: ") + ep.title,
             sub: d ? "Leída · " + d.pct + "%" : esc(ep.level) + " · " + esc(ep.area || ep.grammar || "") +
-                 (ep.series === "martin" ? "" : " · opcional") });
+                 (ep.series === "martin" || ep.series === "settimana" ? "" : " · opcional") });
       });
     });
     if (window.Lab) {
@@ -1209,6 +1273,12 @@
       m({ kind: "storia", done: !!sto, ico: "📖", title: "Storia della settimana (IA)", opt: true,
           sub: sto ? "Generada · " + sto.title : "Opcional · un cuento con las palabras que te toca repasar" });
     }
+    // The duel that opens this week (both forms taught by now): optional.
+    if (window.Duelli) Duelli.DUELLI.filter(function (d) { return d.week === w.week; }).forEach(function (d) {
+      var best = (state.duelli || {})[d.id];
+      m({ kind: "duello", arg: d.id, done: !!best && best.pct >= 80, ico: "⚔️", title: "Duelo: " + d.title, opt: true,
+          sub: best ? "Tu mejor: " + best.pct + " % · con 80 % queda hecho" : "Opcional · " + d.sub + ": las dos formas mezcladas y «¿qué te lo dijo?»" });
+    });
     var domDone = Drills.dominated(st, w, state);
     m({ kind: "play2", done: domDone, ico: "🏆", title: "Dominala",
         sub: domDone ? "Dominada" + (st.domPct ? " · " + st.domPct + " %" : "")
@@ -1251,6 +1321,7 @@
              kind === "b-forme" || kind === "b-tr" || kind === "b-gap") startRound(kind, arg);
     else if (kind === "ep") { view.ep = arg; view.epFrom = "briefing"; view.screen = "lettura"; render(); window.scrollTo(0, 0); }
     else if (kind === "suoni") startRound("suoni", w.week);
+    else if (kind === "duello") startRound("duello", arg);
     else if (kind === "dictogloss") { dg = null; view.screen = "dictogloss"; render(); window.scrollTo(0, 0); }
     else if (kind === "parla") { view.screen = "parla"; render(); window.scrollTo(0, 0); }
     else if (kind === "storia") { view.screen = "storia"; render(); window.scrollTo(0, 0); }
@@ -1404,6 +1475,7 @@
       items = Drills.shuffle(pool).slice(0, arg === "strutture" ? 20 : 12);
     }
     else if (kind === "micro") items = Drills.buildReview(course, state, 5, drillOpts());
+    else if (kind === "duello") items = window.Duelli ? Duelli.session(arg, state.cards) : [];
     else if (kind === "b-voc") items = Banca.vocabSession(state, 12);
     else if (kind === "b-freq") items = Banca.vocabSessionFor(state, freqGaps(24), 12);
     else if (kind === "b-forme") items = Banca.formsSession(state, 12);
@@ -1912,6 +1984,7 @@
     round.xp += gained;
     Engine.addStrand(state, strandOf(it, round.kind), gained);
     round.log.push({ id: it.id, verdict: verdict, given: given, answer: it.answer, retry: !!it.retry,
+                     novel: !!it.novel, fixed: !!opts.fixed,
                      es: it.frase ? it.frase.es : "", stem: it.stem || "", prompt: it.prompt || "" });
 
     // SRS only tracks the fixed bank and the phrases; generated conjugation
@@ -1919,7 +1992,7 @@
     // Right at first sight in the training: a light card (back in two
     // weeks), so the review queue holds errors, phrases and words, not
     // every exercise ever seen.
-    if (it.src !== "coniugatore" && it.src !== "lettura") {
+    if (it.src !== "coniugatore" && it.src !== "lettura" && !it.nocard) {
       var light = !it.frase && it.src !== "vocab" && it.src !== "lab" && it.src !== "banca" && !it.retry &&
                   (round.kind === "round" || round.kind === "sfida" || round.kind === "giorno" || round.kind === "boss" || round.kind === "domina");
       // The diagnosis says what kind of mistake it was (a slip, a word, a rule).
@@ -2182,7 +2255,7 @@
                     scene: "Frases", vocab: "Palabras de la semana", lettura: "Lectura", sfida: "Sfida", ponte: "Ponte",
                     falsi: "Falsi amici", capire: "Capire", "b-voc": "Parole", "b-tr": "Traduci", "b-gap": "Coniuga in contesto",
                     "b-forme": "Forme", "b-err": "Trova l'errore", clinica: "Clínica", suoni: "Suoni", "b-freq": "Parole frecuentes",
-                    ritorno: "Cinco minutos para retomar", micro: "Ripasso 2 min", esame: "Esame C1" };
+                    ritorno: "Cinco minutos para retomar", micro: "Ripasso 2 min", esame: "Esame C1", duello: "Duelo" };
   function pendingTitle(p) {
     if (p.type === "lezione") return "Lección · semana " + p.week + " · " + (p.i + 1) + "/" + p.steps.length;
     return (KIND_NAME[p.round.kind] || "Ronda") + " · " + (p.round.i + 1) + "/" + p.round.items.length;
@@ -2246,8 +2319,16 @@
       toast("Prova di " + round.arg + ": " + Math.round(okE / Math.max(1, firsts0.length) * 100) + " %", 3000);
       return;
     }
-    var passed = false;
+    var passed = false, transfer = null;
     if (round.kind === "boss") {
+      // The new sentences (never practised) measure whether the rule
+      // generalises: reported apart, they do not count for passing.
+      var okL = function (l) { return l.filter(function (x) { return x.verdict === Engine.VERDICT.RIGHT || x.fixed; }).length; };
+      var coreL = round.log.filter(function (x) { return !x.novel; }), novL = round.log.filter(function (x) { return x.novel; });
+      if (novL.length) {
+        pct = coreL.length ? Math.round(okL(coreL) / coreL.length * 100) : pct;
+        transfer = { pct: Math.round(okL(novL) / novL.length * 100), n: novL.length };
+      }
       passed = pct >= 85;
       var ws = state.weekStats[view.week] ||
         (state.weekStats[view.week] = { attempts: 0, right: 0, bossPassed: false });
@@ -2279,6 +2360,17 @@
       } else domExtra = "🏆 Dominala: " + dp + " % (hace falta 85 %). Tu mejor intento: " + dws.domBest + " %.";
     }
 
+    if (round.kind === "duello") {
+      var dF = round.log.filter(function (x) { return !x.retry && !/:cue$/.test(x.id); });
+      var dC = round.log.filter(function (x) { return !x.retry && /:cue$/.test(x.id); });
+      var okD = function (l) { return l.filter(function (x) { return x.verdict === Engine.VERDICT.RIGHT; }).length; };
+      var dpct = dF.length ? Math.round(okD(dF) / dF.length * 100) : 0;
+      if (!state.duelli) state.duelli = {};
+      var prevD = state.duelli[round.arg];
+      state.duelli[round.arg] = { pct: Math.max(dpct, prevD ? prevD.pct : 0), last: dpct, at: Date.now() };
+      var duelExtra = "⚔️ Forma elegida bien: " + dpct + " %" + (dC.length ? " · pista encontrada: " + Math.round(okD(dC) / dC.length * 100) + " %" : "");
+    }
+
     if (round.kind === "sfida") {
       var prevS = state.challengeLog[round.arg];
       state.challengeLog[round.arg] = { q: pct >= 80 ? 2 : pct >= 50 ? 1 : 0,
@@ -2304,6 +2396,7 @@
       extras.push("☀️ Primera ronda del día: +25 xp");
     }
     if (domExtra) extras.push(domExtra);
+    if (duelExtra) extras.push(duelExtra);
     extras = extras.concat(records);
     extras = extras.concat(missionCheck(round.week, round.planDone));
 
@@ -2312,7 +2405,7 @@
     renderHeader();
 
     view.screen = "risultato";
-    view.result = { pct: pct, passed: passed, won: won, extras: extras };
+    view.result = { pct: pct, passed: passed, won: won, extras: extras, transfer: transfer };
     if (pct >= 80 && total >= 5) setTimeout(confetti, 150);
     render();
   }
@@ -2369,11 +2462,19 @@
     (r.extras || []).forEach(function (x) { html += '<p class="note selfrepair">' + esc(x) + "</p>"; });
     if (round.boost) html += '<p class="muted">🎟️ Ronda con doble xp.</p>';
 
+    if (round.kind === "boss" && r.transfer) {
+      html += '<h3>¿La regla generaliza?</h3><table class="res">' +
+        "<tr><td>Con lo que practicaste</td><td>" + r.pct + " %</td></tr>" +
+        "<tr><td>Con " + r.transfer.n + " frases nuevas</td><td>" + r.transfer.pct + " %</td></tr></table>" +
+        '<p class="muted">Las frases nuevas no las viste nunca: no cuentan para aprobar, pero dicen si sabés la regla o te ' +
+        (r.transfer.pct + 15 < r.pct ? "acordás de las frases. <b>Acá hay distancia</b>: la Clínica y los duelos ayudan a generalizar.</p>" : "acordás de las frases. Van parejas: la regla está.</p>");
+    }
     if (round.kind === "boss") {
       // Like the CILS: one mark per ability, each one has to pass.
       var AB = { ascolto: "Ascolto", lettura: "Lettura", strutture: "Strutture", produzione: "Produzione" };
       var ab = {};
       round.log.forEach(function (l) {
+        if (l.novel) return;              // the new sentences are reported apart
         var it = round.items.filter(function (x) { return x.id === l.id; })[0] || {};
         var k = it.type === "listen" || it.type === "dictation" ? "ascolto"
               : it.type === "translate" || it.type === "write" || it.type === "typed" || it.type === "combina" ? "produzione"
@@ -3099,7 +3200,7 @@
       clearPending();
       if (round.from === "briefing") { view.tab = "percorso"; view.screen = "briefing"; render(); window.scrollTo(0, 0); }
       else if (round.kind === "lettura") go("leggi");
-      else if (["ponte", "falsi", "capire", "scene", "b-voc", "b-forme", "b-tr", "b-gap", "b-err", "b-freq", "clinica", "suoni"].indexOf(round.kind) >= 0) go("frasi");
+      else if (["ponte", "falsi", "capire", "scene", "b-voc", "b-forme", "b-tr", "b-gap", "b-err", "b-freq", "clinica", "suoni", "duello"].indexOf(round.kind) >= 0) go("frasi");
       else if (round.kind === "pausa" || round.kind === "review" || round.kind === "giorno" || round.kind === "ritorno" || round.kind === "micro") go("oggi");
       else if (round.kind === "sfida") { view.screen = "sfide"; render(); }
       else if (round.kind === "esame") { view.screen = "esame"; render(); }
@@ -3112,6 +3213,9 @@
     });
     document.querySelectorAll("[data-lab]").forEach(function (b) {
       b.onclick = function () { startRound(b.dataset.lab); };
+    });
+    document.querySelectorAll("[data-duel]").forEach(function (b) {
+      b.onclick = function () { startRound("duello", b.dataset.duel); };
     });
     document.querySelectorAll("[data-ep]").forEach(function (b) {
       b.onclick = function () {
@@ -3136,6 +3240,9 @@
     document.querySelectorAll("[data-sg]").forEach(function (b) {
       b.onclick = function () { showGloss(stemGloss[+b.dataset.sg]); };
     });
+    document.querySelectorAll("[data-mc]").forEach(function (b) {
+      b.onclick = function () { askGloss(b); };
+    });
     document.querySelectorAll("[data-gl]").forEach(function (b) {
       b.onclick = function () {
         showGloss(glossIndex[+b.dataset.gl]);
@@ -3151,6 +3258,8 @@
     on("#lagain", function () { startLampo(lampo.mode); });
     on("#lampoparole", function () { startLampo("parole"); });
 
+    var mcb = $("#mcbox");
+    if (mcb && view.screen !== "lettura") mcb.classList.remove("on");
     wireGioco();
     wireIo();
     wireScrivi();
@@ -3448,6 +3557,19 @@
     return mr.n >= 4 && mr.rate > 0.15 ? mr : null;
   }
 
+  // What the local checker marks in a text the AI wrote: the AI's Italian is
+  // checked before the learner reads it («una ragazzo», «il uomo»).
+  function italianErrors(text, week) {
+    if (!window.Scrivi) return [];
+    scriviLexicon();
+    var r = Scrivi.check(String(text || ""), week || 52);
+    return ((r && r.findings) || []).filter(function (f) { return !f.soft; });
+  }
+  // A capital at the start of every sentence.
+  function sentenceCase(text) {
+    return String(text || "").replace(/(^|[.!?]\s+|\n\s*)([a-zà-ù])/g, function (m, a, b) { return a + b.toUpperCase(); });
+  }
+
   var parla = null;   // { week, scen, history, done, recasts, notes, obj, turns, busy }
   function renderParla(w) {
     var head = '<button class="btn ghost" id="pback">← a la semana</button>' +
@@ -3470,7 +3592,7 @@
       return '<div class="bubble ' + (h[0] === "ia" ? "ia" : "me") + '">' + esc(h[1]) + "</div>";
     }).join("") + (parla.busy ? '<div class="bubble ia muted">…</div>' : "") + "</div>";
     if (parla.done) {
-      var rec = parla.recasts.length ? '<h3>Tus frases, corregidas</h3><table class="res">' + parla.recasts.map(function (r) {
+      var rec = parla.reviewing ? '<p class="muted">⏳ Revisando tus frases…</p>' : parla.recasts.length ? '<h3>Tus frases, corregidas</h3><table class="res">' + parla.recasts.map(function (r) {
         return "<tr><td>" + esc(r[0]) + "</td><td><b>" + esc(r[1]) + "</b>" + (r[2] ? '<br><small class="muted">' + esc(r[2]) + "</small>" : "") + "</td></tr>";
       }).join("") + "</table>" : "<p>✨ Ninguna frase necesitó corrección.</p>";
       return head + '<div class="card"><div class="scorebig"><b>' + parla.obj.length + " / 3</b><span>objetivos</span><span>+" + parla.xp + " xp</span></div>" +
@@ -3509,7 +3631,9 @@
       parla.turns++;
       parla.busy = true;
       render();
-      Scrivi.parlaTurn(parla.scen, parla.history.slice(-8), text, parla.ctx, aiKeys(), function (err, data) {
+      // the conversation before this turn (the turn itself goes apart), and
+      // the goals already reached, so the character leads to the others
+      Scrivi.parlaTurn(parla.scen, parla.history.slice(-9, -1), text, parla.ctx, aiKeys(), function (err, data) {
         if (view.screen !== "parla" || !parla) return;
         var finish = function (reply) {
           parla.busy = false;
@@ -3522,15 +3646,18 @@
           else { var bx = $("#ptext"); if (bx) bx.focus(); }
         };
         if (err || !data) { parla.busy = false; parla.history.push(["ia", "(La IA no respondió: " + esc(String(err && err.message || "")) + ". Probá de nuevo.)"]); render(); return; }
-        var reply = String(data.risposta || "").trim() || "Capisco.";
+        var reply = sentenceCase(String(data.risposta || "").trim() || "Capisco.");
         var hard = tooHard(reply);
         if (hard) {
-          // too many unknown words: one rewrite inside the learner's vocabulary
-          Scrivi.parlaRewrite(reply, parla.ctx.words.slice(0, 150), aiKeys(), function (e2, d2) {
-            finish(!e2 && d2 && d2.risposta ? String(d2.risposta) : reply);
+          // too many unknown words: those words, by simpler synonyms; the
+          // rewrite is taken only if its Italian is not worse
+          var miss = hard.miss.filter(function (x, i, a) { return a.indexOf(x) === i; }).slice(0, 8);
+          Scrivi.parlaRewrite(reply, miss, aiKeys(), function (e2, d2) {
+            var alt = !e2 && d2 && d2.risposta ? sentenceCase(String(d2.risposta)) : "";
+            finish(alt && italianErrors(alt, w.week).length <= italianErrors(reply, w.week).length ? alt : reply);
           });
         } else finish(reply);
-      });
+      }, parla.obj.slice());
     };
     on("#psend", send);
     var box = $("#ptext");
@@ -3555,6 +3682,29 @@
     Engine.checkBadges(state);
     persist();
     renderHeader();
+    // A second request reviews all the learner's sentences together (the
+    // on-the-fly recasts miss what changes the meaning: cappelli, troppo).
+    var mine = parla.history.filter(function (h) { return h[0] === "me"; });
+    if (mine.length) {
+      parla.reviewing = true;
+      var p0 = parla;
+      Scrivi.parlaReview(parla.scen, parla.history, aiKeys(), function (err, data) {
+        if (parla !== p0) return;
+        parla.reviewing = false;
+        var rows = (!err && data && data.frasi) || null;
+        if (rows) {
+          var rec = [];
+          rows.forEach(function (r) {
+            var h = parla.history[+r.i];
+            if (!h || h[0] !== "me" || r.ok === true || !r.corretta) return;
+            if (Engine.normalise(r.corretta) === Engine.normalise(h[1])) return;
+            rec.push([h[1], String(r.corretta), String(r.nota || "")]);
+          });
+          parla.recasts = rec;
+        }
+        if (view.screen === "parla") render();
+      });
+    }
     render();
     if (parla.obj.length >= 3) setTimeout(confetti, 200);
   }
@@ -3619,12 +3769,26 @@
           view.ep = st.id; view.epFrom = "briefing"; view.tab = "leggi"; view.screen = "lettura";
           render(); window.scrollTo(0, 0);
         };
-        var hard = tooHard(String(data.testo));
-        if (hard && hard.miss.length > 3) {
-          Scrivi.storiaRewrite(String(data.testo), hard.miss.slice(0, 12), ctx.words.slice(0, 150), aiKeys(), function (e2, d2) {
-            accept(!e2 && d2 && d2.testo ? d2.testo : data.testo);
+        // Last step: the local checker reads the story; what it marks goes
+        // back once to be fixed, and the fix is taken only if it is better.
+        var polish = function (text) {
+          text = sentenceCase(text);
+          var errs = italianErrors(text, w.week);
+          if (!errs.length) return accept(text);
+          Scrivi.correggi(text, errs.slice(0, 10).map(function (f) { return String(f.msg || "").replace(/\*/g, ""); }), aiKeys(), function (e3, d3) {
+            var fixed = !e3 && d3 && d3.testo ? sentenceCase(String(d3.testo)) : "";
+            accept(fixed && italianErrors(fixed, w.week).length < errs.length ? fixed : text);
           });
-        } else accept(data.testo);
+        };
+        var orig = String(data.testo);
+        var hard = tooHard(orig);
+        if (hard && hard.miss.length > 3) {
+          var missS = hard.miss.filter(function (x, i, a) { return a.indexOf(x) === i; }).slice(0, 12);
+          Scrivi.storiaRewrite(orig, missS, aiKeys(), function (e2, d2) {
+            var alt = !e2 && d2 && d2.testo ? String(d2.testo) : "";
+            polish(alt && italianErrors(alt, w.week).length <= italianErrors(orig, w.week).length ? alt : orig);
+          });
+        } else polish(orig);
       });
     });
   }

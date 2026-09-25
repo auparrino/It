@@ -4,7 +4,7 @@
  * Cambiare VERSION a ogni rilascio per buttare la cache vecchia (e APP_VERSION
  * in js/app.js, che si vede in Oggi e Io: test_game.js controlla che coincidano).
  */
-var VERSION = "laviac1-v45";
+var VERSION = "laviac1-v46";
 var FILES = [
   "./",
   "index.html",
@@ -21,6 +21,7 @@ var FILES = [
   "js/engine.js",
   "js/frasi.js",
   "js/lab.js",
+  "js/letture_settimana.js",
   "js/letture.js",
   "js/lezione.js",
   "js/diagnosi.js",
@@ -31,6 +32,7 @@ var FILES = [
   "js/dictogloss_data.js",
   "js/esame_data.js",
   "js/suoni.js",
+  "js/duelli.js",
   "js/drills.js",
   "js/app.js",
   "data/course.json",

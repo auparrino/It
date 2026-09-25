@@ -711,21 +711,31 @@
   /* Pretest: provare a indovinare prima di vedere la risposta migliora il
      ricordo, anche quando si sbaglia (Kornell, Hays & Bjork 2009; Richland,
      Kornell & Kao 2009).  Non costa vite né entra nel ripasso. */
+  /* The options are the same phrase with the mistake a Spanish speaker
+     makes (Non il so, Grazie mile, dov'e): a guess by the form, never by
+     the meaning.  What has fewer than two such versions is completed with
+     the phrases most like it. */
   function guessItem(f) {
-    var used = {};
-    used[f.it] = true;
-    var others = shuffle(ALL.filter(function (g) { return g.scene === f.scene; }))
-      .concat(shuffle(ALL))
-      .filter(function (g) {
-        if (used[g.it]) return false;
-        used[g.it] = true;
-        return true;
-      }).slice(0, 2);
+    var Lz = root.Lezione || (typeof require === "function" ? require("./lezione.js") : null);
+    var traps = Lz ? Lz.traps(f.it, Math.random, 52, null, true).filter(function (t) {
+      return words(t).join(" ") !== words(f.it).join(" ");
+    }) : [];
+    var others = traps.slice(0, 2);
+    // Only one mistake possible: the second option carries two.
+    if (others.length === 1 && Lz) {
+      var two = Lz.traps(others[0], Math.random, 52, null, true).filter(function (t) {
+        return words(t).join(" ") !== words(f.it).join(" ") && words(t).join(" ") !== words(others[0]).join(" ");
+      })[0];
+      if (two) others.push(two);
+    }
+    if (others.length < 2) similar(f, 4, "it").forEach(function (g) {
+      if (others.length < 2 && others.indexOf(g.it) < 0) others.push(g.it);
+    });
     return {
       id: f.id, frase: f, src: "frasi", type: "guess",
-      prompt: "Adiviná antes de aprenderla (no pasa nada si le errás)",
+      prompt: "Adiviná antes de aprenderla: ¿cuál está bien? (no pasa nada si le errás)",
       stem: f.es,
-      options: shuffle([f.it].concat(others.map(function (g) { return g.it; }))),
+      options: shuffle([f.it].concat(others)),
       answer: f.it, accept: [f.it], note: f.note
     };
   }

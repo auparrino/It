@@ -79,6 +79,16 @@ tu teléfono**. No usa cuentas ni servidores; la IA es opcional, con una clave g
 
 ### 📖 Leggi: lectura graduada
 
+- **La settimana**: 19 textos cortos (90 a 105 palabras), uno para cada
+  semana que no tenía lectura (menos las de jefe), con la gramática de esa
+  semana y palabras ya vistas o glosadas. `tools/check_letture.py` controla
+  que la gramática no pase de la semana y que queden como mucho tres
+  palabras desconocidas sin glosa (Jeon & Day 2016; Hu & Nation 2000).
+- **Glosas de opción múltiple**: en cada lectura, tres o cuatro palabras
+  nuevas (no cognados ni palabras gramaticales) no se dicen: se preguntan.
+  Las tocás y elegís entre tres significados por el contexto; después quedan
+  como glosa normal y, si el banco las tiene, entran al repaso. Son las
+  glosas que más vocabulario dejan (Yanagisawa, Webb & Uchihara 2020).
 - **Martín a Bologna**: una historia en 10 episodios, de A1 a B2. Cada episodio
   usa la gramática del momento (presente, passato prossimo, imperfetto,
   futuro, pronombres, condizionale, congiuntivo, periodo hipotético) y abre el
@@ -231,6 +241,35 @@ más una estructura que el español no tiene (*ne*, *ci*, *da* + tiempo,
 marcas; segunda con la estructura resaltada y la pregunta de por qué está
 así (Trahey & White 1993; Rassaei & Jabbarpoor 2025).
 
+### ⚔️ Duelos: dos formas que se confunden
+
+Ocho duelos en *Allena* (y como misión opcional en la semana en que se
+abren): *essere* o *avere* (semana 11), *lo/la* o *gli/le* (10), *di* o *da*
+(9), passato prossimo o imperfetto (15), futuro o condizionale (20), *ci* o
+*ne* (21), indicativo o congiuntivo (25), *che* o *cui* (34). Cada sesión
+mezcla ocho oraciones, cuatro de cada forma, y después de cada una pregunta
+**«¿qué te lo dijo?»**: tocás la pista de la oración (*ieri*, *penso che*, *a
+Marco*). Intercalar funciona cuando las formas se parecen (Brunmair &
+Richter 2019, g = 0,42) y explicar el porqué suma (Bisra et al. 2018,
+g = 0,55). Datos en `docs/js/duelli.js`; las oraciones entran al repaso.
+
+### 🧪 El jefe mide si la regla generaliza
+
+Cada jefe suma un 20 % de oraciones del banco que **nunca viste**, sobre
+gramática ya enseñada. No cuentan para aprobar ni para la tabla por
+*abilità*, pero el resultado las muestra aparte: «con lo que practicaste:
+88 %; con frases nuevas: 71 %». Si hay distancia, te lo dice.
+
+### 🎯 «Adiviná» con opciones parecidas
+
+Antes de aprender una frase nueva, la adivinás entre tres opciones que son
+**la misma frase con el error típico del hispanohablante** (*Grazie mile*,
+*Me chiamo*, *De dove sei?*, *Il treno è a ritardo*), no otras frases que se
+descartan por el sentido. Solo se usan errores que siempre son error
+(artículo, preposición, *è/e*, tildes, dobles, castellano metido, *gn → ñ*);
+las pocas interjecciones sin error posible (*Prego!*, *Magari!*) usan las
+frases más parecidas.
+
 ### 🪤 Garden path, Scopri la regola y compañía
 
 `tools/authored/grammatica2.py` (435 ítems) trae seis tipos nuevos:
@@ -279,16 +318,26 @@ aciertos.
 ### 🤖 Con la clave: Parla, Storia y pistas graduadas
 
 - **Parla**: un role-play con un personaje, una situación de la semana y
-  tres objetivos verificables. Reglas duras en vez de persona: tiempos
-  permitidos, largo máximo y una lista de palabras que ya conocés; si la
-  respuesta del personaje supera el 15 % de palabras fuera de lista, la app
-  le pide que la reescriba. Sin corrección en el diálogo: al final ves tus
-  frases junto a la versión corregida, con una observación por turno
-  (Wang et al. 2025, g = 0,48; Dugan et al. 2026).
+  tres objetivos verificables: tiempos permitidos y largo máximo. El
+  personaje responde lo que le preguntás, no se repite y apunta a los
+  objetivos que faltan; un objetivo cuenta si lo lograste de forma
+  comprensible, aunque sea con errores. **El italiano va primero**: las
+  palabras que ya conocés son una preferencia, no una lista cerrada; si la
+  respuesta tiene más del 15 % de palabras desconocidas, se piden sinónimos
+  solo para esas, y la versión nueva se toma si el corrector propio no le
+  encuentra más errores. Sin corrección en el diálogo: al terminar, un
+  segundo pedido revisa todas tus frases juntas, con corrección mínima y
+  atención a las palabras que cambian el sentido (*cappelli / capelli*,
+  *troppo / molto*) (Wang et al. 2025, g = 0,48; Dugan et al. 2026).
 - **Storia della settimana**: un cuento con las ocho palabras que te tocaba
-  repasar y solo vocabulario conocido (SRS-Stories, EMNLP 2025), con
-  glosario, preguntas y cloze con distractores de la misma banda. Queda
-  guardado y se lee sin conexión.
+  repasar, con personajes, un problema y un final (SRS-Stories, EMNLP 2025),
+  glosario, preguntas y cloze con distractores de la misma banda. Antes de
+  mostrarlo, el corrector propio lo lee: si marca errores (*una ragazzo*,
+  *al uomo*), vuelve una vez a la IA para corregirlos, y cada oración empieza
+  con mayúscula. Queda guardado y se lee sin conexión.
+- **El modelo**: la app prueba los modelos de cada proveedor del mejor al
+  peor, y el que respondió la última vez va primero solo si está entre los
+  tres mejores (antes, un modelo chico que respondió una vez quedaba fijo).
 - **Pistas graduadas**: «Explicame» ya no da la explicación de entrada:
   primero una pista implícita, después la regla como pregunta, al final la
   explicación (evaluación dinámica; LearnLM 2024).

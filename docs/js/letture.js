@@ -999,6 +999,64 @@
     return null;
   }
 
+  /* Multiple-choice glosses (Yanagisawa, Webb & Uchihara 2020: the most
+     effective kind): a few words per text are not told but asked, three
+     meanings in Spanish, chosen by the context.  Words that are clean
+     meanings, not cognates (mappa = mapa) and not grammar words. */
+  var MC_SKIP = /^(molto|anche|ancora|sempre|poi|però|perché|quando|dove|come|questo|questa|quello|quella|mia|mio|tuo|tua|suo|sua)$/;
+  function plain(x) { return String(x).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""); }
+  function lev(a, b) {
+    var d = [], i, j;
+    for (i = 0; i <= a.length; i++) d[i] = [i];
+    for (j = 1; j <= b.length; j++) d[0][j] = j;
+    for (i = 1; i <= a.length; i++) for (j = 1; j <= b.length; j++)
+      d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+    return d[a.length][b.length];
+  }
+  function cleanMeaning(it, es) {
+    es = String(es || "");
+    if (!/^[a-záéíóúñü ]+$/i.test(es) || es.split(" ").length > 2) return false;
+    var a = plain(it);
+    if (a.length < 4 || MC_SKIP.test(it)) return false;
+    // a cognate (mappa = mapa, esilio = exilio) is read, not guessed
+    return plain(es).split(" ").every(function (w) { return w.length < 3 || lev(a, w) / Math.max(a.length, w.length) > 0.4; });
+  }
+  // Token indices of the asked words: the first time each appears, spread
+  // over the text, the same ones every time the text is opened.
+  function mcTargets(ep, n) {
+    n = n || 4;
+    var seen = {}, cands = [];
+    allTokens(ep).forEach(function (t, i) {
+      var b = core(t), g = glossFor(ep, t);
+      if (!g || seen[b] || !cleanMeaning(b, g)) return;
+      seen[b] = 1;
+      cands.push(i);
+    });
+    if (cands.length <= n) return cands;
+    var out = [];
+    for (var k = 0; k < n; k++) out.push(cands[Math.floor((k + 0.5) * cands.length / n)]);
+    return out;
+  }
+  // The right meaning and two others of the same text (plausible there).
+  function mcOptions(ep, tok, rnd) {
+    rnd = rnd || Math.random;
+    var right = glossFor(ep, tok), me = core(tok);
+    var pool = Object.keys(ep.gloss).filter(function (w) { return w !== me && cleanMeaning(w, ep.gloss[w]) && ep.gloss[w] !== right; })
+      .map(function (w) { return ep.gloss[w]; });
+    if (pool.length < 2) EPISODI.forEach(function (e) {
+      Object.keys(e.gloss).forEach(function (w) { if (cleanMeaning(w, e.gloss[w]) && e.gloss[w] !== right && pool.indexOf(e.gloss[w]) < 0) pool.push(e.gloss[w]); });
+    });
+    // the same number of words as the answer: a long option is not a clue
+    var nw = function (x) { return x.split(" ").length; };
+    var same = pool.filter(function (x) { return nw(x) === nw(right); }), pick = [];
+    while (pick.length < 2 && same.length) pick.push(same.splice(Math.floor(rnd() * same.length), 1)[0]);
+    pool = pool.filter(function (x) { return pick.indexOf(x) < 0; });
+    while (pick.length < 2 && pool.length) pick.push(pool.splice(Math.floor(rnd() * pool.length), 1)[0]);
+    var opts = [right].concat(pick);
+    for (var i = opts.length - 1; i > 0; i--) { var j = Math.floor(rnd() * (i + 1)), t = opts[i]; opts[i] = opts[j]; opts[j] = t; }
+    return { word: me, answer: right, options: opts };
+  }
+
   // The word after an elision: l'inferno → inferno.
   function core(tok) {
     var b = bare(tok), k = b.lastIndexOf("'");
@@ -1060,12 +1118,17 @@
 
   // Everything that isn't marked otherwise is part of Martín's story.
   EPISODI.forEach(function (e) { if (!e.series) e.series = "martin"; });
+  // La settimana: one short text for each week that had none.
+  var LS = root.LettureSettimana || (typeof require === "function" ? require("./letture_settimana.js") : null);
+  if (LS) LS.TESTI.forEach(function (e) { e.series = "settimana"; EPISODI.push(e); });
 
   var SERIES = [
     { id: "martin", name: "Martín a Bologna", emoji: "📖",
       blurb: "Una historia por capítulos, de A1 a B2. Cada episodio usa la gramática que estás viendo y abre el siguiente." },
     { id: "cultura", name: "Cultura", emoji: "🏛️",
       blurb: "Historia, filosofía, sociología y literatura italianas en textos graduados. Cada uno se abre con la gramática que usa; entre los abiertos, elegí el que te interese." },
+    { id: "settimana", name: "La settimana", emoji: "🗞️",
+      blurb: "Un texto corto por semana con la gramática que estás viendo y palabras que ya conocés: para leer sin diccionario." },
     { id: "flood", name: "Inondazioni", emoji: "🌊",
       blurb: "Textos que repiten una estructura muchas veces: primero la leés sin marcas, después con la estructura resaltada. Así el oído y el ojo la fijan." }
   ];
@@ -1102,6 +1165,8 @@
     paragraphs: paragraphs,
     allTokens: allTokens,
     glossFor: glossFor,
+    mcTargets: mcTargets,
+    mcOptions: mcOptions,
     huntTargets: huntTargets,
     gradeHunt: gradeHunt,
     session: session,

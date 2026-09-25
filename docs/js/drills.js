@@ -15,6 +15,8 @@
     (typeof require === "function" ? require("./lab.js") : null);
   var Banca = root.Banca ||
     (typeof require === "function" ? require("./banca.js") : null);
+  var Duelli = root.Duelli ||
+    (typeof require === "function" ? require("./duelli.js") : null);
   var Lez = root.Lezione ||
     (typeof require === "function" ? require("./lezione.js") : null);
   var Engine = root.Engine ||
@@ -694,7 +696,21 @@
       var t = tenses[Math.floor(Math.random() * tenses.length)];
       try { out.push(conjugationTyped(v, t)); } catch (e) { break; }
     }
-    return shuffle(out).slice(0, size);
+    out = shuffle(out).slice(0, size);
+    // One in five more: sentences of the bank never seen, on grammar already
+    // taught, to see whether the rule generalises (reported apart).
+    novelItems(state, Math.round(size * 0.2), out).forEach(function (it, k) {
+      out.splice(Math.floor((k + 1) * out.length / 6), 0, it);
+    });
+    return out;
+  }
+  function novelItems(state, n, have) {
+    if (!Banca || !Banca.loaded() || !n || !state) return [];
+    var cards = state.cards || {}, seen = {};
+    (have || []).forEach(function (it) { seen[sameKey(it)] = 1; });
+    var pool = Banca.gapSession(state, 60).concat(Banca.translateSession(state, 60))
+      .filter(function (it) { return it && !cards[it.id] && !seen[sameKey(it)]; });
+    return shuffle(pool).slice(0, n).map(function (it) { return Object.assign({}, it, { novel: true }); });
   }
 
   /* Le frasi di conversazione vivono fuori dal corso: ogni ripasso ne
@@ -705,12 +721,14 @@
     if (Frasi && Frasi.BY_ID[id]) return Frasi.pickItem(Frasi.BY_ID[id], opts);
     if (Lab && Lab.BY_ID[id]) return Lab.item(id);
     if (Banca && id.indexOf("b:") === 0) return Banca.item(id);
+    if (Duelli && id.indexOf("duel:") === 0) return Duelli.reviewItem(id);
     return null;
   }
 
   function knownId(map, id) {
     return !!(map[id] || (id.indexOf("v:") === 0 && VOC && VOC[id.slice(2)]) || (Frasi && Frasi.BY_ID[id]) || (Lab && Lab.BY_ID[id]) ||
-              (Banca && Banca.loaded() && id.indexOf("b:") === 0 && Banca.item(id)));
+              (Banca && Banca.loaded() && id.indexOf("b:") === 0 && Banca.item(id)) ||
+              (Duelli && id.indexOf("duel:") === 0 && !!Duelli.reviewItem(id)));
   }
 
   /* La coda del ripasso: schede scadute, le più in ritardo per prime. */
