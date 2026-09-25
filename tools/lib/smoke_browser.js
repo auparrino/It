@@ -138,7 +138,8 @@ const NAMES = { it: { today: "Oggi", me: "Io", other: "pt" }, pt: { today: "Hoje
     await snap(page, P("semana1-claro"), true);
     note(code + " · misiones de la semana 1: " + (await page.$$eval(".mission b", els => els.map(e => e.textContent))).join(" | "));
     if (await page.$("[data-m='lez']")) {
-      await page.click("[data-m='lez'] >> nth=0");
+      // a toast or the gloss box can cover the button for a moment: click it directly
+      await page.$eval("[data-m='lez']", b => b.click());
       await page.waitForSelector(".lescard");
       await page.click("#lesnext"); await page.waitForTimeout(300);
       await snap(page, P("leccion-claro"));

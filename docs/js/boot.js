@@ -30,20 +30,36 @@
           fonts: ["fonts/fraunces-normal.woff2", "fonts/fraunces-italic.woff2"] }
   };
 
-  // {lang: archivo} vive en docs/lang/<código>/; {core: archivo} en docs/js/.
+  // {lang: archivo} vive en docs/lang/<código>/; {core: archivo} en docs/js/;
+  // {shared: archivo} en docs/lang/ (datos de los dos idiomas, van con el núcleo).
   var ORDER = [
     { lang: "lang.js" }, { lang: "rules.js" }, { lang: "conjugator.js" },
     { core: "engine.js" },
     { lang: "frasi_data.js" }, { core: "frasi.js" },
+    { lang: "formule_data.js" }, { core: "formule.js" },
     { lang: "lab_data.js" }, { core: "lab.js" },
     { lang: "letture_settimana.js" }, { lang: "letture_data.js" }, { core: "letture.js" },
     { core: "lezione.js" },
+    { lang: "mapas_data.js" }, { core: "mapas.js" },
     { lang: "diagnosi.js" }, { lang: "scrivi.js" },
     { core: "banca.js" }, { lang: "freq_data.js" }, { core: "frequenza.js" },
     { lang: "ascolto_data.js" }, { lang: "dictogloss_data.js" }, { lang: "esame_data.js" }, { lang: "voci_cv_data.js" },
     { core: "suoni.js" },
+    { core: "ubicacion.js" },
     { lang: "duelli_data.js" }, { core: "duelli.js" },
-    { core: "voci.js" }, { core: "drills.js" }, { core: "desglose.js" }, { core: "app.js" }
+    { lang: "devolucion_data.js" }, { core: "devolucion.js" },
+    { lang: "porque_data.js" }, { core: "porque.js" },
+    { lang: "escritura_plus_data.js" }, { core: "escritura_plus.js" },
+    { lang: "variaciones_data.js" },
+    { lang: "escritos_data.js" },
+    { core: "variaciones.js" },
+    { core: "ctest.js" },
+    { core: "ordenar.js" },
+    { core: "escritos.js" },
+    { core: "voci.js" }, { core: "drills.js" }, { core: "desglose.js" },
+    { core: "referencia.js" },
+    { shared: "tres_lenguas_data.js" }, { core: "tres_lenguas.js" },
+    { core: "app.js" }
   ];
 
   // What app.js fetches from the package (lang/<código>/data/).
@@ -52,13 +68,14 @@
   var KEY = "c1.lang";
 
   function src(entry, code) {
+    if (entry.shared) return "lang/" + entry.shared;
     return entry.lang ? "lang/" + code + "/" + entry.lang : "js/" + entry.core;
   }
 
   /* Every file of the core (docs/js/) and of one package, relative to
      docs/: what the service worker keeps for offline use. */
   function coreFiles() {
-    return ORDER.filter(function (e) { return e.core; }).map(function (e) { return src(e); });
+    return ORDER.filter(function (e) { return e.core || e.shared; }).map(function (e) { return src(e); });
   }
   function langFiles(code) {
     var base = "lang/" + code + "/";

@@ -34,6 +34,9 @@
 
   var course = null;
   var state = Engine.load();
+  // Devoluciones: the names of tenses follow the week the learner is in.
+  var DV = window.Devolucion || null;
+  if (DV) DV.weekFrom(function () { return Math.min(state.unlocked || 1, 52); });
 
   /* Tema: "" sigue al teléfono; "light" u "dark" lo fuerzan.  Se aplica antes
      de dibujar nada, así no hay parpadeo. */
@@ -304,7 +307,10 @@
     try { ls = Desglose.lines(text, { gloss: glossario }); } catch (e) { return ""; }
     if (!ls.length) return "";
     return '<details class="desglose"' + (open ? " open" : "") + "><summary>🔎 Palabra por palabra</summary><ul>" +
-      ls.slice(0, 7).map(function (l) { return "<li>" + mk(l) + "</li>"; }).join("") + "</ul></details>";
+      ls.slice(0, 7).map(function (l) {
+        var w = window.Referencia && /^\*([^*]+)\*/.exec(l);   // «usos»: la palabra en oraciones del curso (referencia.js)
+        return "<li>" + mk(l) + (w ? " " + Referencia.button(w[1]) : "") + "</li>";
+      }).join("") + "</ul></details>";
   }
   /* The target-language text of an item: the phrase, the sentence with its
      gaps filled, the word asked about, or the answer. */
@@ -466,6 +472,7 @@
         '<button class="tab" id="discard">Descartar</button></span></div>';
     }
 
+    if (window.Ubicacion) html += Ubicacion.banner(state);
     html += oggiHabitCards();
 
     // El camino antes que nada: la semana en curso y la próxima misión.
@@ -714,7 +721,7 @@
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION = "c1-vN" in sw.js: test_game
      and the CI check it).  One version for the app and both languages. */
-  var APP_VERSION = "v2.1";
+  var APP_VERSION = "v2.2";
   // Settimana XVII: Roman numerals on the street signs (LANG.ui.romanWeeks).
   function romano(n) {
     var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
@@ -774,7 +781,9 @@
       "</div>" +
       '<p class="muted science">🔬 Ponte usa la transferencia desde tu lengua (Ringbom); ' +
       UI.capire + " es input estructurado: primero interpretar la forma, después producirla (VanPatten).</p>";
+    if (window.Escritos) html += Escritos.treinoHtml(state);
 
+    if (window.Referencia) html += Referencia.entry();
     if (window.Duelli) {
       var wkD = Math.min(state.unlocked || 1, 52);
       html += "<h2>⚔️ Duelos</h2>" +
@@ -787,6 +796,7 @@
         }).join("") + "</div>" +
         '<p class="muted science">🔬 Intercalar formas que se parecen (Brunmair y Richter 2019) y explicar por qué (Bisra et al. 2018).</p>';
     }
+    if (window.TresLenguas) html += TresLenguas.card(state);   // italiano ↔ portugués ↔ español (js/tres_lenguas.js)
 
     if (Banca.loaded()) {
       var st = Banca.stats(), weak = Banca.weakest(state, 2);
@@ -815,13 +825,15 @@
     Frasi.SCENES.forEach(function (s) {
       var p = Frasi.progress(s.id, state.cards);
       var pct = Math.round(p.seen / p.total * 100);
-      html += '<button class="scene' + (p.seen === p.total ? " done" : "") +
-        '" data-scene="' + s.id + '">' +
-        '<span class="e">' + s.emoji + "</span>" +
+      // A scene opens with its week: its phrases use the grammar seen by then.
+      var sw = Drills.sceneWeek(s.id), shut = sw > (state.unlocked || 1);
+      html += '<button class="scene' + (p.seen === p.total ? " done" : "") + (shut ? " locked" : "") +
+        '" data-scene="' + s.id + '"' + (shut ? " disabled" : "") + ">" +
+        '<span class="e">' + (shut ? "🔒" : s.emoji) + "</span>" +
         "<b>" + esc(s.name) + "</b>" +
         '<span class="muted">' + esc(s.blurb) + "</span>" +
-        '<span class="meta">' + p.seen + "/" + p.total + " vistas · " +
-          p.strong + " firmes</span>" +
+        '<span class="meta">' + (shut ? "Se abre en la semana " + sw :
+          p.seen + "/" + p.total + " vistas · " + p.strong + " firmes") + "</span>" +
         '<span class="prog"><i style="width:' + pct + '%"></i></span>' +
         "</button>";
     });
@@ -1027,9 +1039,10 @@
       document.body.appendChild(box);
     }
     box.textContent = txt;
+    var withRef = window.Referencia && Referencia.onGloss(box, txt);   // «¿Cómo se usa?» (referencia.js)
     box.classList.add("on");
     clearTimeout(showGloss.t);
-    showGloss.t = setTimeout(function () { box.classList.remove("on"); }, 3200);
+    showGloss.t = setTimeout(function () { box.classList.remove("on"); }, withRef ? 6000 : 3200);
   }
 
   /* -------------------------------------------------------------- trilha */
@@ -1161,6 +1174,7 @@
     // La regla corta primero; el detalle, plegado.
     if (b.r && A) html += '<p class="rule">' + mk(b.r) + "</p>";
     if (A) (b.p || []).forEach(function (par) { html += "<p>" + mk(par) + "</p>"; });
+    if (A && b.fig && window.Mapas) html += Mapas.figure(b.fig);
 
     if (b.table && A) {
       html += '<div class="tw"><table class="gram">';
@@ -1286,6 +1300,7 @@
     var html = '<section class="blk">' + stepBadge("📐", "La regla") + (b.h ? "<h2>" + mk(b.h) + "</h2>" : "") +
       (b.r ? '<p class="rule solo">' + mk(b.r) + "</p>" : "");
     (b.p || []).forEach(function (par) { html += "<p>" + mk(par) + "</p>"; });
+    if (b.fig && window.Mapas) html += Mapas.figure(b.fig);
     if (b.table && Lezione.smallTable(b.table)) html += renderBlock({ table: b.table }, i, "a").replace(/^<section class="blk">|<\/section>$/g, "");
     return html + "</section>";
   }
@@ -1332,6 +1347,10 @@
       '<p class="lead">' + esc(w.title) + '</p>' +
       '<div class="lesson"><p class="intro">' + mk(L.intro) + '</p>';
 
+    if (window.Formule) {
+      var fb = Formule.bridge(w.week, state.cards);
+      if (fb.length) html += '<section class="blk formule">' + formuleBridgeHtml(fb.map(function (x) { return x.f.id; }), w.week) + "</section>";
+    }
     L.blocks.forEach(function (b, i) { html += renderBlock(b, i); });
 
     html += "</div>" +
@@ -1359,6 +1378,8 @@
     les = { w: w, sess: sess, part: cur ? cur.part : null,
             steps: Lezione.steps(w.lesson, Math.random, w.week, isWord, cur ? cur.blocks : null),
             i: 0, right: 0, asked: 0, answered: false };
+    // «Ya lo venías usando»: the phrases that used this week's grammar as a formula
+    if (window.Formule) Formule.addStep(les.steps, w.week, state.cards);
     view.screen = "lezione";
     render();
     savePending();
@@ -1397,6 +1418,10 @@
         "<h1>" + esc(w.title) + "</h1><p class=\"intro\">" + mk(w.lesson.intro) + "</p>" +
         '<button class="btn wide" id="lesnext">Empezar →</button></div>';
     }
+    if (st.kind === "formule") {
+      return hudH + '<div class="card lescard formule">' + formuleBridgeHtml(st.ids, w.week) +
+        '<button class="btn wide" id="lesnext">Seguir →</button></div>';
+    }
     if (st.kind === "look" || st.kind === "rule" || st.kind === "table" || st.kind === "trap") {
       var bk = w.lesson.blocks[st.i];
       var body = st.kind === "look" ? renderLook(bk, st.i) : st.kind === "rule" ? renderRule(bk, st.i)
@@ -1413,6 +1438,7 @@
     var q = st.q;
     return hudH + '<div class="card lescard quiz"><div class="badge-new">⚡ Chequeo rápido</div>' +
       '<div class="prompt">' + esc(q.prompt) + "</div>" +
+      (q.fig && window.Mapas ? Mapas.figure(q.fig, { bare: true }) : "") +
       (q.stem ? '<div class="stem">' + esc(q.stem) + "</div>" : "") +
       '<div class="options">' + q.options.map(function (o, k) {
         return '<button class="opt" data-lq="' + k + '">' + esc(o) + "</button>";
@@ -1623,6 +1649,7 @@
       m({ kind: "duello", arg: d.id, done: !!best && best.pct >= 80, ico: "⚔️", title: "Duelo: " + d.title, opt: true,
           sub: best ? "Tu mejor: " + best.pct + " % · con 80 % queda hecho" : "Opcional · " + d.sub + ": las dos formas mezcladas y «¿qué te lo dijo?»" });
     });
+    if (window.Escritos) Escritos.missions(w, state).forEach(m);   // escritura guiada (escritos.js), opcionales
     var domDone = Drills.dominated(st, w, state);
     m({ kind: "play2", done: domDone, ico: "🏆", title: "Dominala",
         sub: domDone ? "Dominada" + (st.domPct ? " · " + st.domPct + " %" : "")
@@ -1669,6 +1696,7 @@
     else if (kind === "dictogloss") { dg = null; view.screen = "dictogloss"; render(); window.scrollTo(0, 0); }
     else if (kind === "parla") { view.screen = "parla"; render(); window.scrollTo(0, 0); }
     else if (kind === "storia") { view.screen = "storia"; render(); window.scrollTo(0, 0); }
+    else if (window.Escritos && Escritos.handles(kind)) Escritos.go(kind, arg);
   }
 
   function missions(w, st, nChal) {
@@ -1705,7 +1733,8 @@
     return '<div class="card"><h2>📚 Palabras de la semana <small class="muted">' + seen + " / " + w.vocab.length + "</small></h2>" +
       '<ul class="vocab">' + w.vocab.map(function (v) {
         return '<li><button class="say" data-say="' + esc(v[0]) + '" aria-label="Escuchar">🔊</button> <b>' + esc(v[0]) +
-          "</b> <span>" + esc(v[1]) + "</span>" + (v[2] ? '<small><i>' + esc(v[2]) + "</i></small>" : "") + "</li>";
+          "</b> <span>" + esc(v[1]) + "</span>" + (window.Referencia ? " " + Referencia.button(v[0]) : "") +
+          (v[2] ? '<small><i>' + esc(v[2]) + "</i></small>" : "") + "</li>";
       }).join("") + "</ul>" +
       '<div class="row" style="margin-top:10px"><button class="btn" id="vocab">Practicar las palabras</button></div></div>';
   }
@@ -1772,7 +1801,10 @@
     else if (kind === "debil") items = Drills.buildWeak(course, w, state, { map: itemMap, size: 15 });
     else if (kind === "domina") items = Drills.buildDomina(course, w, state, { map: itemMap, silent: state.silent });
     else if (kind === "review") items = Drills.buildReview(course, state, 20, drillOpts());
-    else if (kind === "scene") items = Frasi.sceneSession(arg, state.cards, drillOpts());
+    else if (kind === "scene") {
+      if (Drills.sceneWeek(arg) > (state.unlocked || 1)) { toast("Se abre en la semana " + Drills.sceneWeek(arg) + "."); return; }
+      items = Frasi.sceneSession(arg, state.cards, drillOpts());
+    }
     else if (kind === "pausa") {
       w = course.weeks[Math.min(state.unlocked, 52) - 1];
       view.week = w.week;
@@ -1792,6 +1824,9 @@
         var si = Suoni.randomItem(state, taught ? taught.week : 1);
         if (si) items.splice(Math.min(3, items.length), 0, si);
       }
+      // escritura guiada, con poco peso: a veces un ítem (escritos.js)
+      var ei = window.Escritos && Escritos.pausaItem(state, taught ? taught.week : 0);
+      if (ei) items.splice(Math.min(6, items.length), 0, ei);
     } else if (kind === "gym") {
       items = [];
       for (var i = 0; i < 15; i++) {
@@ -1822,6 +1857,7 @@
     }
     else if (kind === "micro") items = Drills.buildReview(course, state, 5, drillOpts());
     else if (kind === "duello") items = window.Duelli ? Duelli.session(arg, state.cards) : [];
+    else if (kind === "variaciones") items = window.Escritos ? Escritos.variaciones(state, arg, course) : [];
     else if (kind === "b-voc") items = Banca.vocabSession(state, 12);
     else if (kind === "b-freq") items = Banca.vocabSessionFor(state, freqGaps(24), 12);
     else if (kind === "b-forme") items = Banca.formsSession(state, 12);
@@ -1932,22 +1968,26 @@
         return multi ? '<span class="gap n">' + (++gi) + "</span>" : '<span class="gap">&nbsp;</span>';
       });
     var prompt = (it.retry ? '<div class="badge-new">🔁 Segunda vez, más fácil</div>' : "") +
-      '<div class="prompt">' + esc(it.prompt || "") + "</div>" +
-      (it.retry && it.note && !it.recog ? '<div class="note">📐 ' + mk(it.note) + "</div>" : "");
+      '<div class="prompt">' + esc(DV ? DV.plain(it.prompt || "") : it.prompt || "") + "</div>" +
+      (it.type === "guess" ? formulaHtml(it.frase) : "") +
+      // the second time, the rule with the answer covered: it shows after answering
+      (it.retry && it.note && !it.recog ? '<div class="note">📐 ' +
+        mk(DV ? DV.plain(DV.maskNote(it.note, [it.answer].concat(it.accept || []), it.stem)) : it.note) + "</div>" : "");
 
     if (it.type === "intro") {
       return hud() + '<div class="card intro">' +
-        '<div class="badge-new">✨ ' + esc(it.prompt) + "</div>" +
+        '<div class="badge-new">✨ ' + esc(it.prompt) + (it.afterGuess ? " · la que acabás de adivinar" : "") + "</div>" +
         '<div class="fit big">' + esc(it.frase.it) + "</div>" +
         '<div class="fes">' + esc(it.frase.es) + "</div>" +
+        formulaHtml(it.frase) +
         (it.note ? '<div class="call tip"><b>Cómo se arma</b><p>' + mk(it.note) + "</p></div>" : "") +
         desgloseHtml(it.frase.t || it.frase.it, true) +
         '<div class="row" style="margin-top:14px">' +
           '<button class="btn ghost" id="sayit">🔊 Escuchar</button>' +
           '<button class="btn ghost" id="slow">🐢 Lento</button>' +
         "</div>" +
-        '<p class="muted">Leela dos veces y tratá de imaginarte diciéndola: ' +
-          "en un rato te la voy a pedir de memoria.</p>" +
+        '<p class="muted">Leela dos veces y fijate cómo se arma: ' +
+          "en un rato la vas a reconocer y a armar con fichas.</p>" +
         '<button class="btn wide" id="next">La tengo →</button>' +
         "</div>";
     }
@@ -2160,6 +2200,9 @@
       (it.src !== "banca" && it.src !== "lab" && it.src !== "lettura" && it.src !== "frasi" && it.src !== "vocab" && it.src !== "ascolto" && it.type !== "scopri") ||
       (it.src === "frasi" && it.type === "choice")) && !(it.recog && it.orig === "translate");
     var useful = tgOptions && d && d.cat && !GENERIC[d.cat];
+    // Another sentence or a word unlike the answer: no rule to invent.
+    if (useful && DV && DV.far(given, [it.answer], d)) useful = false;
+    if (useful && DV) DV.tidy(d);
     if (useful) recordError(d, given);
     settle(verdict, given, useful ? diagHtml(d, false) : "");
   }
@@ -2198,8 +2241,10 @@
       settle(ves, given, ves === "giusto" ? "" : '<div class="note">Otras formas de decirlo: ' + esc((it.accept || [it.answer]).join(" · ")) + "</div>");
       return;
     }
-    var diagCtx = { stem: it.stem, prompt: it.prompt, nominal: it.type === "plural" || /plural/i.test(it.prompt || "") };
+    var diagCtx = { stem: it.stem, prompt: it.prompt, nominal: it.type === "plural" || /plural/i.test(it.prompt || ""),
+                    week: DV ? DV.weekNow() : undefined };
     var d = window.Diagnosi ? Diagnosi.diagnose(given, accept, diagCtx) : { verdict: "sbagliato" };
+    if (DV) DV.tidy(d);
     // Garden path (Tomasello & Herron 1988): the learner was led into the
     // transfer error on purpose; the correction is the lesson.
     if (it.type === "garden" && it.trap && Engine.normalise(given) === Engine.normalise(it.trap)) {
@@ -2215,7 +2260,17 @@
       var inEs = gW.filter(function (w) { return w.length > 1 && esW.indexOf(w) >= 0; }).length;
       if (gW.length >= 2 && inEs * 2 >= gW.length) {
         d.hint = "Eso está en español. Escribila en " + UI.langEs + "; si todavía no la sabés, pedí las fichas 🧩.";
+        d.inSpanish = true;
       }
+    }
+    // Nothing like the answer («boh», «xx», another sentence): no rule to
+    // invent and nothing for the Clínica; the answer, its note and how it
+    // is built (Aljaafreh & Lantolf 1994).
+    if (DV && d.verdict !== "giusto" && d.cat !== "vuoto" && !d.inSpanish && DV.far(given, accept, d) &&
+        !(it.type === "garden" && it.trap)) {
+      round.lastDiag = null;
+      settle("sbagliato", given, DV.farHtml(given, accept));
+      return;
     }
     // The old graders forgive a letter or two; the diagnosis knows whether
     // those letters were a typo or grammar (a il / al, em o / no).
@@ -2253,7 +2308,7 @@
       round.promptAt = Date.now();
       round.firstCat = d.cat;
       recordError(d, given);
-      showPrompt(d);
+      showPrompt(d, DV ? DV.promptVerdict(given, accept, d) : null);
       return;
     }
     if (!round.tried && d.cat) recordError(d, given);
@@ -2279,14 +2334,14 @@
       "</div>";
   }
 
-  function showPrompt(d) {
+  function showPrompt(d, verdictText) {
     fx.close();
     // The word(s) to fix, with the first letter showing: c_mo.
     var masked = (d.fixed || []).filter(function (t) { return t.fix; }).map(function (t) {
       return t.w.charAt(0) + t.w.slice(1).replace(/[^' ]/g, "_");
     }).join(" ");
     $("#fb").innerHTML = '<div class="feedback prompt">' +
-      '<div class="verdict">🔎 Casi. Revisalo:</div>' +
+      '<div class="verdict">' + esc(verdictText || "🔎 Casi. Revisalo:") + "</div>" +
       (d.given && d.given.length <= 24 ? '<div class="diff">' + tokHtml(d.given, "bad") + "</div>" : "") +
       "<p>" + mk(d.hint) + "</p>" +
       '<div class="row">' + (masked ? '<button class="tab" id="morehint">💡 más pista</button>' : "") +
@@ -2418,7 +2473,7 @@
       (extra || "") +
       (it.type === "hunt" ? "" : '<div class="sol">' + (it.frase || it.src === "lettura" || it.dir === "it-es" || it.type === "scopri" ? esc(sol) : glossifyAny(sol)) + "</div>") +
       (it.frase && it.type !== "listen" ? '<div class="note">' + esc(it.frase.es) + "</div>" : "") +
-      (it.note && !(it.type === "garden" && extra && extra.indexOf("La trampa") >= 0) ? '<div class="note">' + mk(it.note) + "</div>" : "") +
+      (it.note && !(it.type === "garden" && extra && extra.indexOf("La trampa") >= 0) ? '<div class="note">' + mk(DV ? DV.plain(it.note) : it.note) + "</div>" : "") +
       (q === 2 && it.recogNote ? '<div class="note">' + esc(it.recogNote) + "</div>" : "") +
       desgloseHtml(targetText(it), verdict !== "giusto" || it.type === "guess") +
       (it.hint && it.src === "dummies"
@@ -2435,6 +2490,7 @@
       '</div><div id="aiexpout"></div></div>';
 
     $("#fb").innerHTML = fb;
+    if (window.Porque) Porque.after(it, { q: q, given: given, round: round });   // 📖 ¿Por qué? · 🧐 ¿Qué tenía de malo?
     wireKeyword();
     $("#fb").querySelectorAll("[data-sg]").forEach(function (b) {
       b.onclick = function (e) { e.stopPropagation(); showGloss(stemGloss[+b.dataset.sg]); };
@@ -2553,7 +2609,8 @@
 
   function retryVersion(it) {
     var copy;
-    if (it.frase) copy = Frasi.pickItem(it.frase, { silent: state.silent, fresh: true });
+    if (it.retryAs) copy = Object.assign({}, it.retryAs);       // the item says its easier version (variaciones.js)
+    else if (it.frase) copy = Frasi.pickItem(it.frase, { silent: state.silent, fresh: true });
     else if (it.options && it.options.length > 2) {
       var wrong = Drills.shuffle(it.options.filter(function (o) {
         return Engine.normalise(o) !== Engine.normalise(it.answer);
@@ -2566,6 +2623,52 @@
     return copy;
   }
 
+  /* «Adiviná» with the wrong option: what was wrong with *that* option
+     (Kornell, Hays & Bjork 2009: the pretest helps when the feedback
+     explains).  The diagnosis of the language when it has something
+     specific to say; else what the option changes (Frasi.explainOption). */
+  function guessWhy(it, given) {
+    if (!given || given === it.answer) return "";
+    var d = null;
+    if (!(it.why && it.why[given]) && window.Diagnosi && Diagnosi.explainChoice) {
+      try { d = Diagnosi.explainChoice(given, it.answer, {}); } catch (e) { d = null; }
+    }
+    // a «typo» or an empty answer says nothing about a fabricated option
+    if (d && d.cat && d.explain && !UNRECORDED[d.cat]) {
+      return diagHtml(d, true);
+    }
+    var t = Frasi.explainOption ? Frasi.explainOption(given, it) : "";
+    return t ? '<div class="diag"><span class="tag">Tu opción</span><p>' + mk(t) + "</p></div>" : "";
+  }
+
+  // «🧱 Fórmula fija»: a phrase that uses the grammar of a later week.
+  function formulaHtml(f) {
+    var t = window.Formule && f ? Formule.line(f, state.unlocked) : "";
+    return t ? '<div class="note formula">' + mk(t) + "</div>" : "";
+  }
+
+  /* «Ya lo venías usando»: in the lesson of a week, the phrases that used
+     its grammar as a formula, with the form marked (Ellis 2002: the
+     formula becomes a case of the rule). */
+  function formuleBridgeHtml(ids, wk) {
+    var rows = (ids || []).map(function (id) { return Frasi.BY_ID[id]; }).filter(Boolean).map(function (f) {
+      var forms = (Formule.of(f).filter(function (x) { return x[0] === wk; })[0] || [0, ""])[1];
+      var html = esc(f.it);
+      String(forms).split(/,\s*/).filter(Boolean).forEach(function (x) {
+        var re = new RegExp("(^|[^A-Za-zÀ-ÿ'])(" + x.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")(?![A-Za-zÀ-ÿ])", "i");
+        html = html.replace(re, "$1<b>$2</b>");
+      });
+      var seen = !!state.cards[f.id];
+      return '<li><span class="it">' + html + '</span><span class="es">' + esc(f.es) +
+        (seen ? "" : ' <span class="muted small">· de la escena «' + esc((Frasi.scene(f.scene) || {}).name || "") + "»</span>") + "</span></li>";
+    });
+    if (!rows.length) return "";
+    return '<div class="badge-new">🧱 Ya lo venías usando</div>' +
+      "<p>Estas frases las aprendiste enteras, como fórmulas. Lo marcado es justo lo que esta semana " +
+      "tiene su regla: ahora sabés por qué se arman así.</p>" +
+      '<ul class="exs formule-list">' + rows.join("") + "</ul>";
+  }
+
   function settleGuess(it, q, given) {
     var gained = q === 2 ? 5 : 2;
     round.xp += gained;
@@ -2574,8 +2677,9 @@
     renderHeader();
     if (q === 2) fx.right(); else fx.tap();
     $("#fb").innerHTML = '<div class="feedback ' + (q === 2 ? "giusto" : "quasi") + '">' +
-      '<div class="verdict">' + (q === 2 ? "¡Buen olfato!" : "Era esta. Ahora ya la conocés.") +
+      '<div class="verdict">' + (q === 2 ? "¡Buen olfato!" : "Era esta. Mirá qué tenía tu opción:") +
         ' <span class="xpgain">+' + gained + " xp</span></div>" +
+      (q === 2 ? "" : guessWhy(it, given)) +
       '<div class="sol">' + esc(it.answer) + "</div>" +
       (it.note ? '<div class="note">' + mk(it.note) + "</div>" : "") +
       desgloseHtml(targetText(it), true) +
@@ -2588,6 +2692,7 @@
       else if (o.textContent === given) o.classList.add("wrong");
     });
     $("#next").onclick = nextItem;
+    if (window.Porque) Porque.after(it, { q: q, given: given, round: round });   // 📖 ¿Por qué? · 🧐 ¿Qué tenía de malo?
   }
 
   function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
@@ -2756,6 +2861,7 @@
       if (!prev) gain(20);
     }
 
+    if (window.Escritos) Escritos.roundDone(round, pct);
     var extras = [];
     if (round.kind === "giorno") {
       state.dailyDone = Engine.dayKey();
@@ -3101,6 +3207,7 @@
         '<p class="muted" id="persistmsg" style="margin-top:10px"></p>' +
       "</div>" +
 
+      (window.Referencia ? Referencia.entry() : "") +
       errorsCard() +
       aiCard() +
       (window.Voci && Voci.count() ? (function () {
@@ -3110,6 +3217,7 @@
       })() : "") +
       (window.VociCV && (VociCV.ALL || []).length ? '<div class="card"><h2>🗣️ Oraciones grabadas</h2><p class="muted small">El dictado de ' + UI.suoni + " y «¿Qué forma escuchaste?» usan " +
         VociCV.ALL.length + " oraciones leídas por voluntarios de Common Voice (Mozilla), de dominio público (CC0).</p></div>" : "") +
+      (window.Ubicacion ? Ubicacion.card(state) : "") +
       '<div class="card"><h2>Medallas</h2><div class="badges">' +
         Engine.BADGES.map(function (b) {
           var won = state.badges.indexOf(b.id) >= 0;
@@ -3386,6 +3494,7 @@
     else if (s === "lettura") html = renderLettura(Letture.byId(view.ep));
     else if (s === "lezione") html = renderLezione();
     else if (s === "scrivi") html = renderScrivi(course.weeks[view.week - 1]);
+    else if (s === "eplus" && window.EscrituraPlus) html = EscrituraPlus.render(epHost());
     else if (s === "dictogloss") html = renderDictogloss(course.weeks[view.week - 1]);
     else if (s === "parla") html = renderParla(course.weeks[view.week - 1]);
     else if (s === "esame") html = renderEsame();
@@ -3393,6 +3502,10 @@
     else if (s === "esame-let") html = renderEsameLettura();
     else if (s === "esame-scr") html = renderEsameScrittura();
     else if (s === "storia") html = renderStoria(course.weeks[view.week - 1]);
+    else if (s === "gramatica") html = Referencia.page();
+    else if (s === "ubicacion" && window.Ubicacion) html = Ubicacion.html();
+    else if (s === "tres" && window.TresLenguas) html = TresLenguas.render(state);
+    else if (s === "escritos" && window.Escritos) html = Escritos.render();
 
     var gb = $("#glossbox");
     if (gb) gb.classList.remove("on");
@@ -3409,7 +3522,23 @@
     if (pl) requestAnimationFrame(function () { requestAnimationFrame(function () { pl.style.width = pl.dataset.to + "%"; }); });
     renderNav();
     wire();
+    if (s === "ubicacion" && window.Ubicacion) Ubicacion.wire(app());
     growBoxes();
+  }
+
+  /* El test de ubicación (ubicacion.js): al empezar un idioma y desde Io / Eu. */
+  function startUbicacion() {
+    if (!window.Ubicacion) return;
+    var from = view.tab || "oggi";
+    Ubicacion.start({ course: course, state: state, render: render, done: function (applied) {
+      persist();
+      renderHeader();
+      if (applied) { view.week = Math.min(state.unlocked, 52); toast("🔓 Semanas 1 a " + (state.unlocked - 1) + " abiertas. Arrancás en la " + state.unlocked + "."); }
+      go(applied ? "percorso" : from);
+    } });
+    view.screen = "ubicacion";
+    render();
+    window.scrollTo(0, 0);
   }
 
   var subEntry = false;
@@ -3473,6 +3602,11 @@
 
     on("#back", function () { go("percorso"); });
     on("#toggi", function () { go("oggi"); });
+    on("#ubicgo", startUbicacion);
+    on("#ubicno", function () { state.ubicacion = { at: Date.now(), no: true }; persist(); render(); });
+    if (window.TresLenguas) TresLenguas.wire(app(), {
+      show: function () { view.tab = "frasi"; view.screen = "tres"; render(); window.scrollTo(0, 0); },
+      back: function () { go("frasi"); }, gain: function (n) { gain(n); persist(); renderHeader(); }, toast: toast });
 
     // hoje
     on("#pausa", function () { startRound("pausa"); });
@@ -3548,6 +3682,7 @@
     on("#resume", resumePending);
     on("#discard", function () { clearPending(); render(); });
     wireHabit();
+    if (window.Escritos) Escritos.wire(view.screen);
     on("#lesback", function () { view.screen = "briefing"; render(); });
     on("#lesplay", function () {
       var lw = course.weeks[view.week - 1];
@@ -3564,7 +3699,7 @@
       clearPending();
       if (round.from === "briefing") { view.tab = "percorso"; view.screen = "briefing"; render(); window.scrollTo(0, 0); }
       else if (round.kind === "lettura") go("leggi");
-      else if (["ponte", "falsi", "capire", "scene", "b-voc", "b-forme", "b-tr", "b-gap", "b-err", "b-freq", "clinica", "suoni", "duello"].indexOf(round.kind) >= 0) go("frasi");
+      else if (["ponte", "falsi", "capire", "scene", "b-voc", "b-forme", "b-tr", "b-gap", "b-err", "b-freq", "clinica", "suoni", "duello", "variaciones"].indexOf(round.kind) >= 0) go("frasi");
       else if (round.kind === "pausa" || round.kind === "review" || round.kind === "giorno" || round.kind === "ritorno" || round.kind === "micro") go("oggi");
       else if (round.kind === "sfida") { view.screen = "sfide"; render(); }
       else if (round.kind === "esame") { view.screen = "esame"; render(); }
@@ -3627,6 +3762,7 @@
     wireGioco();
     wireIo();
     wireScrivi();
+    if (view.screen === "eplus" && window.EscrituraPlus) EscrituraPlus.wire(epHost());
     wireDictogloss();
     wireLettura();
     wireParla();
@@ -4451,6 +4587,8 @@
       '<textarea id="stext" class="grow scrivi" rows="7" spellcheck="false" autocapitalize="sentences" placeholder="' + UI.scriviIn + '">' + esc(draft) + "</textarea>" +
       '<div class="row" style="margin-top:10px"><button class="btn" id="scheck">🔎 Revisar</button>' +
       '<button class="tab" id="smodel">👀 Ver un modelo</button></div>' +
+      (window.EscrituraPlus ? '<div class="row ep-entry" style="margin-top:8px"><button class="tab" id="eptre">⏱️ Tres vueltas: 5, 4 y 3 min</button>' +
+        '<button class="tab" id="eprif">🪞 Reformulación</button></div>' : "") +
       '<label class="muted small ltopt"><input type="checkbox" id="slt"' + (state.ltOff ? "" : " checked") + "> " +
         "Si la IA no está, pedir la corrección de LanguageTool (gratis; el texto se envía a su servidor)</label>" +
       '<p class="muted small ailine">🤖 ' + (aiKey()
@@ -4494,6 +4632,9 @@
     if (view.screen !== "scrivi") return;
     var w = course.weeks[view.week - 1], box = $("#stext");
     on("#sback", function () { view.screen = "briefing"; render(); window.scrollTo(0, 0); });
+    ["tre", "rif"].forEach(function (m) {   // escritura_plus.js
+      on("#ep" + m, function () { EscrituraPlus.start(m, w.week); view.screen = "eplus"; render(); window.scrollTo(0, 0); });
+    });
     if (!box) return;
     box.addEventListener("input", function () {
       clearTimeout(scriviTimer);
@@ -4576,6 +4717,15 @@
         });
       }
     });
+  }
+
+  /* Tres vueltas y reformulación (docs/js/escritura_plus.js): lo que el
+     módulo necesita de la app. */
+  function epHost() {
+    return { state: state, week: course.weeks[view.week - 1], esc: esc, mk: mk, UI: UI, persist: persist, gain: gain,
+             toast: toast, aiKeys: aiKeys, aiKey: aiKey, lexicon: scriviLexicon,
+             rerender: function () { if (view.screen === "eplus") render(); },
+             back: function () { EscrituraPlus.stop(); view.screen = "scrivi"; render(); window.scrollTo(0, 0); } };
   }
 
   function showScrivi(w, text, r, ltState) {
@@ -4759,7 +4909,7 @@
           // Tiles are all words of the language handed over: a wrong pick is order,
           // a tile too many or too few, or the wrong form; never a «false
           // friend» or a «Spanish word».
-          if (d.cat && !GENERIC[d.cat] && !TILE_SKIP[d.cat]) { recordError(d, r.given); extra = diagHtml(d, true); }
+          if (d.cat && !GENERIC[d.cat] && !TILE_SKIP[d.cat]) { if (DV) DV.tidy(d); recordError(d, r.given); extra = diagHtml(d, true); }
         }
         settle(r.verdict, r.given, extra);
       });
@@ -4880,7 +5030,9 @@
         if (tries === 1) {
           recordError({ cat: it.cat, target: it.answer }, it.stem);
           var d = it.good && window.Diagnosi ? Diagnosi.diagnose(val || "—", [it.good]) : null;
-          $("#fb").innerHTML = '<div class="feedback prompt"><div class="verdict">🔎 Casi.</div><p>' +
+          if (d && DV) DV.tidy(d);
+          var closeTo = !DV || !it.good || !val || DV.near(val, goods, d);
+          $("#fb").innerHTML = '<div class="feedback prompt"><div class="verdict">' + (closeTo ? "🔎 Casi." : "🔎 Todavía no.") + "</div><p>" +
             (it.good === "" ? "Esa palabra no hay que cambiarla por otra: sobra." :
              d && d.hint && !GENERIC[d.cat] ? mk(d.hint) : "Pista: es un error de <b>" + esc(label) + "</b>.") +
             "</p></div>";
@@ -5056,6 +5208,13 @@
     } catch (e) { /* */ }
   }
 
+  // «📖 ¿Por qué?» and «🧐 ¿Qué tenía de malo?» (porque.js): what it needs from here.
+  if (window.Porque) Porque.init({
+    course: function () { return course; }, state: function () { return state; }, week: function () { return view.week; },
+    renderBlock: renderBlock, mk: mk, esc: esc, speak: speak, gain: gain, persist: persist, renderHeader: renderHeader,
+    xpFly: xpFly, weekNum: weekNum, weekLabel: function (n) { return UI.theory + weekNum(n); }
+  });
+
   // Test hook (only with ?test in the URL): lets the automated playthrough
   // read the current question so it can answer right or wrong on purpose.
   if (/[?&]test\b/.test(location.search)) {
@@ -5065,6 +5224,22 @@
       round: function () { return round; }
     };
   }
+
+  // Concordancias y «Mi gramática» (docs/js/referencia.js).
+  if (window.Referencia) Referencia.attach({
+    state: function () { return state; }, persist: persist,
+    course: function () { return course; }, glossary: function () { return glossario; },
+    fx: function (ok) { if (ok) fx.right(); else fx.wrong(); gain(ok ? 3 : 1); },
+    open: function () { view.screen = "gramatica"; render(); window.scrollTo(0, 0); },
+    back: function () { go(view.tab || "io"); }
+  });
+  // Escritura guiada (escritos.js): lo que necesita de la app.
+  if (window.Escritos) Escritos.attach({
+    state: function () { return state; }, persist: persist, gain: gain, render: render, go: go, toast: toast,
+    esc: esc, plate: plate, fx: fx, startRound: startRound,
+    show: function (s) { view.screen = s; render(); window.scrollTo(0, 0); },
+    toWeek: function () { view.tab = "percorso"; view.screen = "briefing"; render(); window.scrollTo(0, 0); }
+  });
 
   // The glossary is optional too: without it words are just not tappable.
   fetch(DATA("glossario.json"))
@@ -5092,6 +5267,7 @@
     .then(function (data) { return bankP.then(function () { return data; }); })
     .then(function (data) {
       course = data;
+      if (window.Mapas) Mapas.install(course);
       itemMap = Drills.itemsById(course);
       registerStories();
       view.week = Math.min(state.unlocked, 52);

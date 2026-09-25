@@ -491,6 +491,12 @@
       write: "Escribilo en italiano (los acentos no cuentan)",
       dictation: "Dettato: escuchá y escribí lo que oís"
     },
-    traps: null
+    traps: null,
+    // «Adiviná» without enough traps: these words always go before the next
+    // one (article, preposition, clitic, non), so swapping them is an error.
+    glue: ["il", "lo", "la", "i", "gli", "le", "un", "uno", "una", "di", "a", "da", "in", "con", "su", "per",
+           "tra", "fra", "al", "allo", "alla", "ai", "agli", "alle", "del", "dello", "della", "dei", "degli",
+           "delle", "nel", "nella", "nei", "sul", "sulla", "dal", "dalla", "mi", "ti", "ci", "vi", "si", "ne",
+           "me", "te", "ce", "ve", "se", "non"]
   };
 })(typeof window !== "undefined" ? window : globalThis);

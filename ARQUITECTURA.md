@@ -10,7 +10,7 @@ docs/
   index.html            el caparazón: carga js/boot.js
   js/boot.js            elige el idioma y carga paquete + núcleo en ORDER
   js/*.js               el núcleo: engine, drills, lezione, banca, frasi, lab,
-                        letture, duelli, suoni, voci, frequenza, app
+                        letture, duelli, suoni, voci, frequenza, porque, app
   css/app.css           la estructura (usa los tokens del tema)
   fonts/, icons/        lo común (Atkinson Hyperlegible, el ícono de la app)
   sw.js                 un service worker para todo: el núcleo siempre,
@@ -31,6 +31,9 @@ docs/
                         lemas, pseudopalabras
     data/*.json         curso, banco, glosario, frecuencia (los compila tools/)
     audio/, fonts/
+  lang/tres_lenguas_data.js   lo de los dos idiomas juntos (modo «Tres lenguas»,
+                        js/tres_lenguas.js): contrastes it ↔ pt ↔ es, el duelo
+                        y las palabras que delatan la otra lengua
 tools/
   lib/pack.js           carga un idioma completo en node, en el orden de boot.js
   lib/smoke_browser.js  recorre los dos idiomas en Chromium (selector, cambio

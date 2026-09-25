@@ -367,3 +367,184 @@ html[data-lang="pick"] header.top, html[data-lang="pick"] nav.nav { display: non
 .desglose:not([open]) summary::after { content: " ▸"; }
 .desglose ul { margin: 6px 0 0; padding-left: 18px; }
 .desglose li { margin: 3px 0; line-height: 1.35; }
+
+/* --- Tarea: concordancias + «Mi gramática» (docs/js/referencia.js) --- */
+.ref-go { font: inherit; font-size: .78rem; font-weight: 700; padding: 1px 8px; margin-left: 2px; border-radius: 999px;
+  border: 1px solid color-mix(in srgb, currentColor 35%, transparent); background: transparent; color: inherit;
+  cursor: pointer; vertical-align: 1px; white-space: nowrap; }
+.glossbox.has-ref { pointer-events: auto; }
+.glossbox .ref-gl { display: inline-block; margin: 6px 0 0; font-size: .85rem; padding: 3px 10px;
+  border-color: currentColor; }
+.refsheet { width: min(94vw, 480px); max-height: calc(100vh - 150px); max-height: calc(100dvh - 150px);
+  overflow-y: auto; overscroll-behavior: contain; z-index: 66; box-sizing: border-box; }
+.refsheet h2 { margin: 2px 0 4px; font-size: 1.2rem; }
+.refsheet h3 { margin: 14px 0 6px; font-size: 1rem; }
+.ref-top { display: flex; justify-content: flex-end; margin: -4px -6px 0 0; }
+.ref-gloss { margin: 0 0 6px; }
+ol.ref-hits { margin: 6px 0 4px; padding-left: 22px; }
+ol.ref-hits li { margin: 8px 0; line-height: 1.4; }
+.ref-t { display: block; font-size: 1.02rem; }
+.ref-es { display: block; font-size: .88rem; opacity: .75; }
+.ref-src { display: block; font-size: .72rem; opacity: .6; margin-top: 1px; }
+mark.ref-hl { background: color-mix(in srgb, #f5c531 50%, transparent); color: inherit; border-radius: 4px; padding: 0 2px;
+  font-weight: 700; }
+.ref-opts .opt { text-align: left; white-space: normal; line-height: 1.35; width: 100%; }
+.ref-why { margin-top: 8px; font-size: .92rem; line-height: 1.4; }
+.ref-why .tab { margin-left: 4px; }
+.ref-counts { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 10px; }
+.ref-st { display: inline-block; font-size: .74rem; font-weight: 700; padding: 2px 8px; border-radius: 999px; white-space: nowrap;
+  background: color-mix(in srgb, currentColor 8%, transparent); }
+.ref-st.practicada { background: color-mix(in srgb, #1a6fd8 16%, transparent); }
+.ref-st.dominada { background: color-mix(in srgb, #1d9b58 20%, transparent); }
+.ref-q { width: 100%; box-sizing: border-box; font: inherit; font-size: 1rem; padding: 10px 12px; margin: 6px 0 8px;
+  border-radius: 12px; border: 1px solid color-mix(in srgb, currentColor 25%, transparent); background: transparent; color: inherit; }
+.ref-filters { margin: 0 0 10px; }
+h3.ref-wk { margin: 18px 0 6px; font-size: .95rem; opacity: .8; }
+details.ref-item { margin: 6px 0; padding: 10px 12px; border-radius: 12px;
+  background: color-mix(in srgb, currentColor 5%, transparent); }
+details.ref-item summary { cursor: pointer; list-style: none; display: flex; flex-wrap: wrap; gap: 4px 8px;
+  align-items: baseline; justify-content: space-between; }
+details.ref-item summary::-webkit-details-marker { display: none; }
+.ref-h { font-weight: 700; flex: 1 1 60%; min-width: 0; }
+.ref-meta { display: inline-flex; gap: 6px; align-items: baseline; flex-wrap: wrap; }
+.ref-score { font-size: .78rem; opacity: .75; white-space: nowrap; }
+.ref-body .tw { overflow-x: auto; }
+.ref-body .rule { margin: 10px 0 6px; }
+
+/* ---------------------------------------------- fix-frases: Treino, «Adiviná», fórmulas */
+
+.scene.locked, .scene:disabled { opacity: .5; cursor: not-allowed; }
+.scene:disabled:active { transform: none; }
+.note.formula { border-left: 3px solid var(--oro, var(--sol, #e0b020)); padding-left: 8px; }
+.formule-list li { display: grid; gap: 2px; }
+.formule-list .it b { background: color-mix(in srgb, var(--oro, var(--sol, #e0b020)) 35%, transparent); border-radius: 3px; padding: 0 2px; }
+.blk.formule { border-left: 3px solid var(--oro, var(--sol, #e0b020)); padding-left: 10px; margin-bottom: 14px; }
+
+/* ---- mapas de preposiciones y test de ubicación (mapas.js, ubicacion.js) ----
+   Los colores del dibujo son tokens del tema (--mapa-*, en theme.css). */
+.mapas { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; margin: 12px 0; }
+.mapas.one, .mapas.bare { grid-template-columns: minmax(0, 280px); justify-content: center; }
+.mapa { margin: 0; padding: 8px 8px 10px; border-radius: 12px; background: var(--mapa-bg, #fff);
+        border: 1px solid var(--mapa-line, rgba(0,0,0,.12)); text-align: center; }
+.mapa-svg { display: block; width: 100%; height: auto; }
+.mapa-svg .lm { fill: var(--mapa-soft, #e8f1fb); stroke: var(--mapa-lm, #1a6fd8); stroke-width: 2.5; }
+.mapa-svg .lm.zona { stroke-dasharray: 6 4; }
+.mapa-svg .leg { stroke: var(--mapa-lm, #1a6fd8); stroke-width: 2.5; stroke-linecap: round; fill: none; }
+.mapa-svg .pin { fill: var(--mapa-lm, #1a6fd8); stroke: none; }
+.mapa-svg .tr { fill: var(--mapa-tr, #e0522b); stroke: var(--mapa-bg, #fff); stroke-width: 2; }
+.mapa-svg .ghost { fill: none; stroke: var(--mapa-tr, #e0522b); stroke-width: 2; stroke-dasharray: 3 3; opacity: .75; }
+.mapa-svg .mv { fill: none; stroke: var(--mapa-tr, #e0522b); stroke-width: 2.5; stroke-linecap: round; }
+.mapa-svg .mv.back { stroke-dasharray: 5 4; opacity: .8; }
+.mapa-svg .mv.ahead { stroke-dasharray: 2 5; }
+.mapa-svg .head { fill: var(--mapa-tr, #e0522b); }
+.mapa-svg .tie { fill: none; stroke: var(--mapa-lm, #1a6fd8); stroke-width: 2; stroke-dasharray: 2 4; stroke-linecap: round; }
+.mapa-svg .heart { fill: var(--mapa-tr, #e0522b); }
+.mapa-svg .lbl { fill: var(--mapa-ink, #1f2630); font: 700 13px var(--sans, system-ui); text-anchor: middle; }
+.mapa figcaption { display: flex; flex-direction: column; gap: 2px; margin-top: 4px; line-height: 1.3; }
+.mapa .mp-prep { font-size: 1.15rem; color: var(--mapa-tr, #e0522b); }
+.mapa .mp-ex { font-size: .92rem; }
+.mapa .mp-es { font-size: .78rem; opacity: .75; }
+.ubic-list { margin: 8px 0 14px; padding-left: 20px; }
+.ubic-list li { margin: 4px 0; line-height: 1.4; }
+.ubic-foot { margin-top: 12px; gap: 8px; }
+.ubic-q .typed { display: flex; gap: 8px; margin-top: 8px; }
+.ubic-q .typed input { flex: 1; min-width: 0; }
+.ubic-banner .row { margin-top: 8px; gap: 8px; }
+/* Tres lenguas: italiano ↔ portugués ↔ español (docs/js/tres_lenguas.js) */
+.tl-list { display: grid; gap: 10px; margin: 12px 0 18px; }
+.tl-c { padding: 12px 14px; margin: 0; }
+.tl-c summary { cursor: pointer; list-style: none; }
+.tl-c summary::-webkit-details-marker { display: none; }
+.tl-t { display: block; font-weight: 800; margin-bottom: 8px; }
+.tl-t::after { content: " ▸"; opacity: .5; font-weight: 400; }
+.tl-c[open] .tl-t::after { content: " ▾"; }
+.tl-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+.tl-cell { min-width: 0; padding: 6px 8px; border-radius: 10px; font-size: .88rem; line-height: 1.3;
+  background: color-mix(in srgb, currentColor 6%, transparent); overflow-wrap: anywhere; }
+.tl-cell .tl-flag { margin-right: 4px; }
+.tl-cell .tl-l { font-size: .68rem; text-transform: uppercase; letter-spacing: .06em; opacity: .7; }
+.tl-cell b { display: block; margin-top: 2px; font-weight: 700; }
+.tl-note { margin: 10px 0 6px; line-height: 1.45; }
+.tl-ex { display: grid; gap: 4px; font-size: .9rem; font-style: italic; opacity: .9; }
+.tl-ex.left { text-align: left; margin: 12px 0; font-style: normal; }
+.tl-hud { margin: 12px 0 8px; font-size: .85rem; }
+.tl-duel .tl-text { text-align: center; }
+.tl-toks { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 14px; }
+.tl-tok { font-size: 1.05rem; padding: 6px 10px; }
+.tl-fb { margin: 0 0 12px; padding: 10px 12px; border-radius: 10px; line-height: 1.4; }
+.tl-fb.ok { background: color-mix(in srgb, #1d9b58 16%, transparent); }
+.tl-fb.ko { background: color-mix(in srgb, #e0522b 16%, transparent); }
+@media (max-width: 360px) { .tl-row { grid-template-columns: 1fr; } }
+/* porque: «📖 ¿Por qué?» (el bloque de teoría en una hoja sobre la ronda) y
+   «🧐 ¿Qué tenía de malo?» (autoexplicación) — docs/js/porque.js */
+.porque-back { position: fixed; inset: 0; z-index: 66; background: rgba(10, 14, 20, .45);
+  display: flex; align-items: flex-end; justify-content: center; animation: rise .2s ease; }
+.porque-back .porque-sheet { width: 100%; max-width: 660px; max-height: 86vh; overflow-y: auto; margin: 0;
+  border-radius: 18px 18px 0 0; border-bottom: none; padding: 14px 16px calc(18px + env(safe-area-inset-bottom));
+  animation: sheet .3s cubic-bezier(.2,.9,.25,1.05); overscroll-behavior: contain; }
+.porque-sheet .ps-top { display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  position: sticky; top: -14px; margin: -14px -16px 0; padding: 12px 16px 8px; background: inherit; z-index: 1; }
+.porque-sheet .ps-where { font-size: .8rem; font-weight: 700; opacity: .75; }
+.porque-sheet .ps-close { padding: 4px 10px; min-width: 0; }
+.porque-sheet .blk:first-of-type { border-top: none; margin-top: 4px; padding-top: 4px; }
+.porque-sheet .ps-nav { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin: 16px 0 10px; }
+.porque-sheet .tw { overflow-x: auto; }
+body.porque-open { overflow: hidden; }
+.feedback .porque-btn { font-weight: 700; }
+body.ingame .feedback .porque-btn { align-self: center; color: inherit; }
+.porque-quiz { margin: 10px 0 6px; padding: 10px 12px; border-radius: 12px;
+  background: color-mix(in srgb, currentColor 7%, transparent); }
+.porque-quiz .pq-h { font-weight: 800; margin-bottom: 8px; }
+.porque-quiz .pq-opts { display: grid; gap: 6px; }
+.porque-quiz .pq-opt { text-align: left; padding: 9px 12px; border-radius: 10px; color: inherit; font-size: .92rem; line-height: 1.35;
+  background: color-mix(in srgb, currentColor 5%, transparent); border: 1.5px solid color-mix(in srgb, currentColor 28%, transparent); }
+.porque-quiz .pq-opt:disabled { cursor: default; opacity: .6; }
+.porque-quiz .pq-opt.right { opacity: 1; border-color: #1f9d55; box-shadow: inset 4px 0 0 #1f9d55; }
+.porque-quiz .pq-opt.wrong { opacity: 1; border-color: #d0492a; box-shadow: inset 4px 0 0 #d0492a; }
+.porque-quiz .pq-verdict { margin: 8px 0 2px; font-weight: 700; }
+/* Escritura plus: tres vueltas y reformulación (docs/js/escritura_plus.js) */
+.ep-entry .tab { flex: 1 1 auto; }
+.ep-head h2 { font-size: 1.2rem; }
+.ep-task { font-weight: 600; }
+.ep-timerrow { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; }
+.ep-round { font-weight: 700; }
+.ep-timer { font-family: var(--mono); font-size: 1.6rem; font-weight: 800; letter-spacing: .02em; }
+.ep-timer.low { color: #d9432a; animation: ep-pulse 1s ease-in-out infinite; }
+@keyframes ep-pulse { 50% { opacity: .55; } }
+table.ep-cmp td:first-child { text-align: left; }
+table.ep-cmp td, table.ep-cmp th { text-align: center; padding: 4px 6px; }
+.ep-up { color: #1d9b58; font-weight: 800; }
+.ep-down { color: #d9432a; font-weight: 800; }
+.ep-lines { padding-left: 18px; margin: 10px 0; }
+.ep-lines li { margin: 4px 0; }
+.ep-texts summary { cursor: pointer; font-weight: 700; margin-top: 8px; }
+.ep-mine { line-height: 1.7; }
+.ep-diff { line-height: 2; overflow-wrap: anywhere; }
+.ep-diff .w { padding: 2px 1px; display: inline-block; }
+.ep-diff .w.ep-missed { text-decoration: underline dashed; text-underline-offset: 4px; }
+.ep-diff .w.ep-nope { animation: ep-shake .35s ease; background: color-mix(in srgb, currentColor 10%, transparent); }
+@keyframes ep-shake { 25% { transform: translateX(-3px); } 75% { transform: translateX(3px); } }
+@media (prefers-color-scheme: dark) { .ep-up { color: #34c47a; } .ep-down, .ep-timer.low { color: #f0674a; } }
+/* ------------------------------------------------ escritura guiada (feat_ejercicios)
+   C-test y cloze sobre lecturas ya leídas, «Ordená el texto»: escritos.js */
+.esc-text { line-height: 2.1; font-size: 1.05rem; }
+.esc-gap { background: none; color: inherit; white-space: nowrap; border-radius: 4px; padding: 0 1px; }
+.esc-in { font: inherit; color: inherit; background: transparent; border: none; border-bottom: 2px solid currentColor;
+  padding: 0 1px; margin: 0; min-width: 2ch; min-height: 0; height: auto; line-height: inherit; box-shadow: none;
+  opacity: .95; border-radius: 0; }
+.esc-in:focus { outline: 2px solid color-mix(in srgb, currentColor 35%, transparent); outline-offset: 1px; }
+.esc-in:disabled { border-bottom-style: dotted; opacity: 1; }
+.esc-close { background: color-mix(in srgb, #e0a100 28%, transparent); }
+.esc-tag { font-size: .62rem; opacity: .6; vertical-align: super; margin-left: 1px; }
+.esc-sol { display: inline-block; font-size: .78rem; font-weight: 700; margin-left: 3px; opacity: .85; }
+.esc-order .esc-piece, .esc-pool .esc-piece { text-align: left; white-space: normal; line-height: 1.4; font-weight: 500; font-size: .98rem; }
+.esc-order .anchor { opacity: .8; }
+.esc-pool { display: grid; gap: 8px; }
+mark.esc-clue { background: color-mix(in srgb, #e0a100 30%, transparent); color: inherit; border-radius: 3px; padding: 0 2px; font-weight: 700; }
+mark.esc-clue.ref { background: none; text-decoration: underline dotted; text-underline-offset: 3px; }
+.esc-hints { margin-top: 12px; font-size: .9rem; }
+.esc-hints ul { margin: 6px 0 0; padding-left: 18px; }
+.esc-model { padding-left: 20px; line-height: 1.5; }
+.esc-model li { margin-bottom: 6px; }
+.mission.esc-pick { cursor: default; }
+.mission.esc-pick .row { display: flex; gap: 6px; margin-top: 6px; flex-wrap: wrap; }

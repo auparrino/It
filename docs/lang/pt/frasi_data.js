@@ -705,6 +705,12 @@
     // Frasi.traps(): the word that slips in (span; alone: when it ends the
     // sentence), the contraction undone (contr, only before a word), the
     // article (art, looser), the spelling (spell) and looser slips (loose).
-    traps: { span: SPAN, alone: { "muito": "mucho" }, contr: CONTR, art: ART, spell: spell, loose: loose }
+    // from: the week each table starts to count (contractions and articles: week 3).
+    traps: { span: SPAN, alone: { "muito": "mucho" }, contr: CONTR, art: ART, spell: spell, loose: loose,
+             from: { contr: 3, art: 3 } },
+    // «Adiviná» without enough traps: these words always go before the next
+    // one (article, preposition, clitic), so swapping them is an error.
+    glue: ["o", "a", "os", "as", "um", "uma", "uns", "umas", "de", "em", "por", "para", "com", "sem", "no", "na",
+           "nos", "nas", "do", "da", "dos", "das", "ao", "à", "pelo", "pela", "num", "numa", "me", "te", "se", "lhe"]
   };
 })(typeof window !== "undefined" ? window : globalThis);

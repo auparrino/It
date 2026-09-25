@@ -429,6 +429,8 @@
     copy.orig = it.type;
     copy.options = shuffle(opts.slice(0, 3).concat([answer]));
     copy.prompt = it.type === "translate" ? (TX.translateQ || it.prompt) : it.prompt;
+    // Buttons, not a box: the prompt says choose («Escribí…» → «Elegí…»).
+    if (root.Devolucion) copy.prompt = root.Devolucion.choicePrompt(copy.prompt);
     // Said once, and only after a right answer: after a miss it reads as a threat.
     copy.recogNote = "La próxima vez esta la vas a escribir.";
     return copy;
@@ -802,12 +804,14 @@
     if (Lab && Lab.BY_ID[id]) return Lab.item(id);
     if (Banca && id.indexOf("b:") === 0) return Banca.item(id);
     if (Duelli && id.indexOf("duel:") === 0) return Duelli.reviewItem(id);
+    if (root.EscrituraPlus && id.indexOf("ep:") === 0) return root.EscrituraPlus.reviewItem(id, opts && opts.state);   // reformulación
     return null;
   }
 
   function knownId(map, id) {
     return !!(map[id] || (id.indexOf("v:") === 0 && VOC && VOC[id.slice(2)]) || (Frasi && Frasi.BY_ID[id]) || (Lab && Lab.BY_ID[id]) ||
               (Banca && Banca.loaded() && id.indexOf("b:") === 0 && Banca.item(id)) ||
+              (root.EscrituraPlus && id.indexOf("ep:") === 0) ||
               (Duelli && id.indexOf("duel:") === 0 && !!Duelli.reviewItem(id)));
   }
 

@@ -4,13 +4,14 @@
   "private": true,
   "description": "Una app, dos idiomas: italiano (La Via C1) y portugués de Brasil (Rumo C1) hasta C1 en un año, para hispanohablantes. Sitio estático sin dependencias.",
   "scripts": {
-    "test": "npm run test:it && npm run test:pt && node tools/lib/test_desglose.js",
+    "test": "npm run test:it && npm run test:pt && npm run test:lib",
     "test:it": "node tools/it/test_conjugator.js && node tools/it/test_game.js && node tools/it/test_frasi.js && node tools/it/test_diagnosi.js && node tools/it/test_scrivi.js && node tools/it/test_memoria.js && node tools/it/test_suoni.js",
     "test:pt": "node tools/pt/test_conjugator.js && node tools/pt/test_game.js && node tools/pt/test_frasi.js && node tools/pt/test_diagnosi.js && node tools/pt/test_scrivi.js && node tools/pt/test_memoria.js && node tools/pt/test_suoni.js",
-    "build": "python3 tools/it/build_bank.py && python3 tools/it/build_course.py && python3 tools/pt/build_bank.py && python3 tools/pt/build_course.py",
+    "build": "python3 tools/it/build_bank.py && python3 tools/it/build_course.py && python3 tools/pt/build_bank.py && python3 tools/pt/build_course.py && python3 tools/lib/formule.py",
     "sim": "node tools/it/sim_carriera.js && node tools/pt/sim_carriera.js",
     "smoke": "NODE_PATH=$(npm root -g) node tools/lib/smoke_browser.js",
-    "start": "cd docs && python3 -m http.server 8000"
+    "start": "cd docs && python3 -m http.server 8000",
+    "test:lib": "node tools/lib/test_desglose.js && node tools/lib/test_referencia.js && node tools/lib/test_fix_feedback.js && node tools/lib/test_fix_frases.js && node tools/lib/test_mapas_ubicacion.js && node tools/lib/test_tres_lenguas.js && node tools/lib/test_porque.js && node tools/lib/test_escritura_plus.js && node tools/lib/test_ejercicios.js && node tools/lib/test_notas_it.js"
   },
   "license": "UNLICENSED"
 }
