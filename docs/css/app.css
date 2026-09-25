@@ -410,3 +410,12 @@ details.ref-item summary::-webkit-details-marker { display: none; }
 .ref-score { font-size: .78rem; opacity: .75; white-space: nowrap; }
 .ref-body .tw { overflow-x: auto; }
 .ref-body .rule { margin: 10px 0 6px; }
+
+/* ---------------------------------------------- fix-frases: Treino, «Adiviná», fórmulas */
+
+.scene.locked, .scene:disabled { opacity: .5; cursor: not-allowed; }
+.scene:disabled:active { transform: none; }
+.note.formula { border-left: 3px solid var(--oro, var(--sol, #e0b020)); padding-left: 8px; }
+.formule-list li { display: grid; gap: 2px; }
+.formule-list .it b { background: color-mix(in srgb, var(--oro, var(--sol, #e0b020)) 35%, transparent); border-radius: 3px; padding: 0 2px; }
+.blk.formule { border-left: 3px solid var(--oro, var(--sol, #e0b020)); padding-left: 10px; margin-bottom: 14px; }

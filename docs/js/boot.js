@@ -35,6 +35,7 @@
     { lang: "lang.js" }, { lang: "rules.js" }, { lang: "conjugator.js" },
     { core: "engine.js" },
     { lang: "frasi_data.js" }, { core: "frasi.js" },
+    { lang: "formule_data.js" }, { core: "formule.js" },
     { lang: "lab_data.js" }, { core: "lab.js" },
     { lang: "letture_settimana.js" }, { lang: "letture_data.js" }, { core: "letture.js" },
     { core: "lezione.js" },
