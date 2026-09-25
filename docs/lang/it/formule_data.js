@@ -24,6 +24,7 @@
     "frase:salva:9": [[6, "puoi"]],
     "frase:salva:10": [[11, "ho sbagliato"]],
     "frase:salva:11": [[5, "penso"]],
+    "frase:salva:12": [[5, "intendi"]],
     "frase:salva:13": [[6, "va"], [11, "ho capito"]],
     "frase:salva:14": [[5, "serve"]],
     "frase:salva:16": [[5, "importa"]],
