@@ -212,7 +212,7 @@ sc(W, 1, ["Há muitos turistas no Rio.", "Havia dois bondes em Santa Teresa.", "
           "Haverá eleições em outubro.", "Pode haver atrasos.", "Deve haver outra saída."],
    "¿Cómo se conjuga «haver» cuando significa «existir»?",
    ["Queda siempre en singular, también el auxiliar.",
-    "Concuerda con el sustantivo que sigue.",
+    "Concuerda con el sustantivo que sigue, como «hubieron» en el habla.",
     "Va en plural solo en el pasado."],
    "Queda siempre en singular, también el auxiliar.",
    "haver existencial es impersonal: há, havia, houve, haverá; y pode haver, deve haver.")
@@ -875,7 +875,7 @@ sc(W, 2, ["casa → casinha", "livro → livrinho", "mesa → mesinha", "café �
           "pão → pãozinho", "flor → florzinha"],
    "¿Cuándo va -zinho en lugar de -inho?",
    ["Tras vocal tónica, nasal o consonante; -inho con -o / -a átonas.",
-    "Con palabras masculinas; -inho con femeninas.",
+    "Con palabras masculinas (cafezinho, pãozinho); -inho con femeninas.",
     "Con palabras cortas; -inho con largas."],
    "Tras vocal tónica, nasal o consonante; -inho con -o / -a átonas.",
    "casa → casinha (a átona); café → cafezinho (é tónica); pão → pãozinho (nasal).")
@@ -1200,7 +1200,7 @@ sc(W, 0, ["BR: Você está bem?", "PT: Estás bem?", "BR: Estou comendo.", "PT: 
           "BR: Me diz.", "PT: Diz-me."],
    "¿Qué rasgos distinguen el portugués europeo?",
    ["Tu, «a» + infinitivo y pronombre después del verbo.",
-    "Você, gerundio y pronombre antes del verbo.",
+    "Você, gerundio y pronombre antes del verbo, como en Brasil.",
     "Solo cambia el vocabulario."],
    "Tu, «a» + infinitivo y pronombre después del verbo.",
    "Tres marcas del europeo: tu, estar a + infinitivo, ênclise.")
@@ -1518,7 +1518,7 @@ sc(W, 2, ["O suspeito teria fugido.", "O ministro teria mentido.", "O jogador es
           "O ministro admitiu: mentiu."],
    "¿Qué diferencia hay entre «teria fugido» y «fugiu»?",
    ["«Teria fugido» no está confirmado; «fugiu» sí.",
-    "«Teria fugido» es futuro; «fugiu», pasado.",
+    "«Teria fugido» es un futuro posible; «fugiu», un pasado.",
     "No hay diferencia de sentido."],
    "«Teria fugido» no está confirmado; «fugiu» sí.",
    "La prensa usa el futuro do pretérito para tomar distancia de lo que no confirmó.")
@@ -1983,14 +1983,14 @@ sc(W, 0, ["Se eu for, te aviso.", "Quando ele vier, a gente sai.", "Assim que so
    "¿De dónde sale la forma del futuro do subjuntivo?",
    ["De la 3.ª plural del perfeito sin -ram (foram → for).",
     "Del infinitivo, siempre igual.",
-    "Del presente del subjuntivo (seja → for)."],
+    "Del presente del subjuntivo cambiando la vocal (seja → for)."],
    "De la 3.ª plural del perfeito sin -ram (foram → for).",
    "vieram → vier, souberam → souber, quiseram → quiser, tiveram → tiver.")
 sc(W, 1, ["Vou à praia.", "Vou ao mercado.", "Chego às três.", "Refiro-me àquele bar.",
           "Vou a pé.", "Começou a chover."],
    "¿Cuándo hay crase?",
    ["Cuando se juntan la preposición «a» y el artículo «a» (o «aquele»).",
-    "Siempre que hay una «a» antes de un sustantivo.",
+    "Siempre que hay una «a» antes de un sustantivo o de un verbo (a chover).",
     "Antes de verbos y masculinos."],
    "Cuando se juntan la preposición «a» y el artículo «a» (o «aquele»).",
    "Truco: si con un masculino queda ao, con el femenino va à.")

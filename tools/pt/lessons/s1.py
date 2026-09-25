@@ -137,8 +137,9 @@ LESSONS = {
  {"h": "ser, estar y ter",
   "q": [{"prompt": "«Tengo hambre.»", "answer": "Estou com fome.", "options": ["Estou com fome.", "Tenho fome.", "Sou com fome."]},
         {"prompt": "«¿Vos sos de Córdoba?»", "answer": "Você é de Córdoba?", "options": ["Você é de Córdoba?", "Você és de Córdoba?", "Você está de Córdoba?"]}],
-  "r": "*ser* y *estar* se reparten casi como en español. *ter* = tener. "
-       "De memoria: son irregulares.",
+  "r": "*ser* y *estar* se reparten casi como en español; *ter* = tener. "
+       "Una diferencia: dónde **queda** algo fijo va con *ser*: *o "
+       "apartamento é em Botafogo*.",
   "table": {"head": ["", "ser", "estar", "ter"],
             "rows": [["eu", "sou", "estou", "tenho"],
                      ["tu", "és", "estás", "tens"],
@@ -146,10 +147,10 @@ LESSONS = {
                      ["nós", "somos", "estamos", "temos"],
                      ["eles / elas / vocês", "são", "estão", "têm"]]},
   "ex": [["*Sou* argentina, de Mendoza.", "Soy argentina, de Mendoza."],
-         ["*Estou* em Copacabana.", "Estoy en Copacabana."],
-         ["*Tenho* trinta anos.", "Tengo treinta años."],
+         ["*Tenho* trinta anos. Eles *têm* dois filhos.", "Tengo treinta años. Ellos tienen dos hijos."],
          ["*Estou com* fome e *com* sede.", "Tengo hambre y sed."],
-         ["Eles *têm* dois filhos.", "Ellos tienen dos hijos."]],
+         ["O apartamento *é* em Botafogo; eu *estou* em Copacabana.", "El departamento queda en Botafogo; yo estoy en Copacabana."],
+         ["*Não* sou carioca: sou argentino.", "No soy carioca: soy argentino (la negación, não, va antes del verbo)."]],
   "warn": "Hambre, sed, frío, sueño y apuro van con *estar com*: *estou com "
           "frio*, *está com sono*. «Tenho fome» se entiende, pero suena raro.",
   "tip": "*tem* (él tiene) y *têm* (ellos tienen) suenan casi igual: el "
@@ -157,7 +158,11 @@ LESSONS = {
   "more": ["La lista de *estar com*: *fome* (hambre), *sede* (sed), *frio* "
            "(frío), *calor*, *sono* (sueño), *pressa* (apuro), *medo* "
            "(miedo), *saudade* (nostalgia). La edad, en cambio, va con "
-           "*ter*, como en español: *tenho vinte anos*."]},
+           "*ter*, como en español: *tenho vinte anos*.",
+           "¿Dónde queda? Lo que no se mueve (un edificio, un barrio) va "
+           "con *ser* o *ficar*: *a escola é em Copacabana*, *onde fica o "
+           "hotel?*. Lo que se mueve, con *estar*: *a Bia está em Ipanema*. "
+           "Y la negación es *não*, antes del verbo: *não sou*, *não estou*."]},
 ]},
 
 2: {
@@ -312,8 +317,8 @@ LESSONS = {
          ["Ela está *na* praia.", "Ella está en la playa."],
          ["*Nos* fins de semana tem feira.", "Los fines de semana hay feria."],
          ["Tem um bar *num* prédio antigo.", "Hay un bar en un edificio viejo."]],
-  "warn": "«Em o» y «em a» **no existen**: siempre *no, na*. «Estou em a "
-          "praia» es el error número uno de las primeras semanas.",
+  "warn": "«Em o» y «em a» **no existen**: siempre *no, na*. Y *no* es "
+          "*em + o* (en el), **no** la negación: esa es *não*.",
   "tip": "*em um* también se escribe (*em um bar*); *num* es más hablado. "
          "Pero con *o, a, os, as* la contracción es obligatoria."},
 

@@ -372,7 +372,7 @@ ITEMS += [
          data=["Marco è partito.", "Anna è partita.", "Marco e Luca sono partiti.", "Anna e Sara sono partite.", "Marco e Anna sono partiti.", "Anna ha mangiato."],
          stem="¿Cuándo cambia la terminación del participio?",
          options=["Con «essere» concuerda con el sujeto; con «avere» queda en -o.",
-                  "Concuerda siempre con el sujeto, con cualquier auxiliar.",
+                  "Concuerda siempre con el sujeto, con cualquier auxiliar (Anna ha mangiata).",
                   "Cambia solo cuando el sujeto es plural."],
          answer="Con «essere» concuerda con el sujeto; con «avere» queda en -o.",
          note="Regla: con essere el participio funciona como adjetivo: -o, -a, -i, -e según el sujeto (Anna e Sara sono partite). "
@@ -451,7 +451,7 @@ ITEMS += [
          data=["Mi piace il gelato.", "Mi piacciono i gelati.", "Ti piace leggere?", "Ti piacciono i libri?", "Le piace Roma.", "Gli piacciono le città grandi."],
          stem="¿Con qué concuerda «piacere»?",
          options=["Con la cosa que gusta: singular → piace, plural → piacciono; con un verbo → piace.",
-                  "Con la persona a la que le gusta: io → piace, loro → piacciono.",
+                  "Con la persona a la que le gusta: a mí, a vos o a él → piace; a ellos → piacciono.",
                   "Siempre va en singular, como «gusta»."],
          answer="Con la cosa que gusta: singular → piace, plural → piacciono; con un verbo → piace.",
          note="Regla: igual que en castellano, el sujeto es lo que gusta: mi piace il gelato / mi piacciono i gelati; con un infinitivo, piace. "
@@ -472,7 +472,7 @@ ITEMS += [
                "Ieri ho comprato una macchina.", "Una volta lavoravo in un bar.", "Nel 2019 ho cambiato lavoro."],
          stem="¿Cuándo va el imperfetto y cuándo el passato prossimo?",
          options=["Imperfetto para hábitos y situaciones de fondo; passato prossimo para hechos puntuales y terminados.",
-                  "Imperfetto para el pasado lejano; passato prossimo para el pasado reciente.",
+                  "Imperfetto para el pasado lejano (da bambino); passato prossimo para el reciente (ieri, stamattina).",
                   "Imperfetto con verbos de estado; passato prossimo con verbos de acción."],
          answer="Imperfetto para hábitos y situaciones de fondo; passato prossimo para hechos puntuales y terminados.",
          note="Regla: el imperfetto describe (andavo ogni estate, mentre studiavo); el passato prossimo cuenta hechos completos (ho comprato, ha suonato). "
@@ -494,7 +494,7 @@ ITEMS += [
          stem="¿Qué auxiliar llevan los reflexivos en pasado?",
          options=["Siempre essere, con el participio concordado con el sujeto.",
                   "Avere, como en castellano «me he levantado».",
-                  "Essere si el sujeto es plural, avere si es singular."],
+                  "Essere si el sujeto es plural (ci siamo divertiti); avere si es singular."],
          answer="Siempre essere, con el participio concordado con el sujeto.",
          note="Regla: todos los reflexivos van con essere y el participio concuerda: mi sono svegliato, Maria si è alzata, le ragazze si sono lavate. "
               "El mismo verbo sin reflexivo va con avere: ho lavato la macchina."),
@@ -515,7 +515,7 @@ ITEMS += [
          stem="¿Cuándo se usa «ne» en vez de lo/la/li/le?",
          options=["Cuando se habla de una cantidad o una parte de algo.",
                   "Cuando la cosa es de comer.",
-                  "Cuando el sustantivo es plural."],
+                  "Cuando el sustantivo es plural (i libri, le mele), con o sin número."],
          answer="Cuando se habla de una cantidad o una parte de algo.",
          note="Regla: si hay un número o una cantidad (due, tre, molti, un po', nessuno), el pronombre es «ne»: ne voglio due. "
               "Si se habla del objeto entero y definido, lo/la/li/le: la voglio. En castellano «quiero dos» no lleva nada."),
@@ -535,7 +535,7 @@ ITEMS += [
                "Abiti ancora a Milano? — Sì, ci abito da dieci anni.", "Ci torno ogni estate.", "Ci penso io!"],
          stem="¿Qué reemplaza «ci» en estas frases?",
          options=["Un lugar ya nombrado (a Roma, in Italia, al cinema).",
-                  "A nosotros, como en «ci vediamo».",
+                  "A nosotros, como en «ci vediamo» y «ci sentiamo domani».",
                   "Una cosa en plural."],
          answer="Un lugar ya nombrado (a Roma, in Italia, al cinema).",
          note="Regla: «ci» retoma un lugar (a/in + lugar) y va delante del verbo: ci vado, ci sono stato. "
@@ -578,7 +578,7 @@ ITEMS += [
          stem="¿Cuándo va el congiuntivo (sia, abbia, venga)?",
          options=["Después de verbos de opinión, duda y deseo (pensare, credere, sperare).",
                   "Después de cualquier «che».",
-                  "Cuando el sujeto de las dos frases es distinto."],
+                  "Cuando el sujeto de las dos frases es distinto, sea cual sea el verbo principal."],
          answer="Después de verbos de opinión, duda y deseo (pensare, credere, sperare).",
          note="Regla: penso / credo / spero / mi sembra che + congiuntivo (sia); so / è vero / sono sicuro che + indicativo (è). "
               "Es la gran diferencia con el castellano, donde «creo que es» va en indicativo."),
@@ -619,7 +619,7 @@ ITEMS += [
                "Chi suona? — Sarà il postino.", "Non risponde: starà dormendo.", "Costerà cento euro, più o meno."],
          stem="¿Qué expresa el futuro en estas respuestas?",
          options=["Una suposición sobre el presente: «serán las ocho», «estará en la oficina».",
-                  "Una acción que va a pasar más tarde.",
+                  "Una acción que va a pasar más tarde: «van a ser las ocho», «va a estar en la oficina».",
                   "Una orden cortés."],
          answer="Una suposición sobre el presente: «serán las ocho», «estará en la oficina».",
          note="Regla: el futuro también sirve para suponer o calcular en el presente (futuro epistémico), igual que en castellano: Sarà in ufficio = estará en la oficina. "
@@ -683,7 +683,7 @@ ITEMS += [
          stem="¿Cómo se construye la hipótesis poco probable o imposible?",
          options=["Se + congiuntivo imperfetto, y condizionale en la principal.",
                   "Se + condizionale en las dos partes.",
-                  "Se + futuro, y condizionale en la principal."],
+                  "Se + condizionale presente (se avrei), y futuro en la principal."],
          answer="Se + congiuntivo imperfetto, y condizionale en la principal.",
          note="Regla: realidad → se + indicativo (se ho tempo, vengo); posibilidad remota → se + congiuntivo imperfetto + condizionale (se avessi tempo, verrei); "
               "imposible en el pasado → se + trapassato congiuntivo + condizionale passato. Nunca «se avrei», como tampoco «si tendría»."),
@@ -703,7 +703,7 @@ ITEMS += [
                "Il libro di cui ti ho parlato è bello.", "La città in cui vivo è piccola.", "L'amico a cui scrivo vive a Roma."],
          stem="¿Cuándo va «che» y cuándo «cui»?",
          options=["«Che» sin preposición (sujeto u objeto directo); «cui» después de una preposición.",
-                  "«Che» con cosas, «cui» con personas.",
+                  "«Che» para cosas (il libro che leggo); «cui» para personas (la ragazza con cui parlo).",
                   "«Che» en singular, «cui» en plural."],
          answer="«Che» sin preposición (sujeto u objeto directo); «cui» después de una preposición.",
          note="Regla: che = que (sujeto u objeto directo); cui = el que / la que / quien detrás de una preposición, y es invariable: con cui, di cui, in cui, a cui. "
@@ -725,7 +725,7 @@ ITEMS += [
          stem="¿Cuándo el verbo con «si» va en plural?",
          options=["Cuando le sigue un sustantivo plural (si vendono case): el verbo concuerda con él.",
                   "Cuando se habla de mucha gente.",
-                  "Nunca: con «si» el verbo va siempre en singular."],
+                  "Nunca: con «si» el verbo va siempre en singular (si vende case, si compra i biglietti)."],
          answer="Cuando le sigue un sustantivo plural (si vendono case): el verbo concuerda con él.",
          note="Regla: sin objeto (si mangia bene) el verbo va en 3ª singular; con un objeto, el verbo concuerda con él: si vende una casa / si vendono case. "
               "Es exactamente como «se venden casas» en castellano."),
@@ -766,7 +766,7 @@ ITEMS += [
                "«Vado a casa.» → Ha detto che andava a casa.", "«Sono stato a Roma.» → Ha detto che era stato a Roma.", "«Partirò presto.» → Ha detto che sarebbe partito presto."],
          stem="¿Cómo cambian los tiempos cuando el verbo principal está en pasado?",
          options=["Presente → imperfetto, passato prossimo → trapassato, futuro → condizionale passato.",
-                  "Presente → passato prossimo, futuro → condizionale presente.",
+                  "Presente → passato prossimo, passato prossimo → remoto, futuro → condizionale presente.",
                   "No cambian: se repite la frase tal cual."],
          answer="Presente → imperfetto, passato prossimo → trapassato, futuro → condizionale passato.",
          note="Regla: como en castellano, el presente pasa a imperfetto y el passato prossimo a trapassato. La diferencia: el futuro pasa al condizionale PASSATO "
@@ -787,7 +787,7 @@ ITEMS += [
                "Faccio venire il medico.", "Ci ha fatto aspettare un'ora.", "Ho fatto tradurre il documento."],
          stem="¿Qué significa «fare + infinito»?",
          options=["Que el sujeto hace que otro realice la acción (hacer arreglar, hacer venir).",
-                  "Que el sujeto realiza la acción con mucho esfuerzo.",
+                  "Que el sujeto realiza la acción él mismo, con esfuerzo (arreglar solo, venir solo).",
                   "Que la acción es obligatoria."],
          answer="Que el sujeto hace que otro realice la acción (hacer arreglar, hacer venir).",
          note="Regla: fare + infinito es el causativo: ho fatto riparare la macchina = la hice arreglar (otro la arregló). "

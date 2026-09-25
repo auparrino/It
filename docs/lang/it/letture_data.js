@@ -40,7 +40,7 @@
       questions: [
         ["¿De dónde es Giulia?", ["de Nápoles", "de Bolonia", "de Buenos Aires", "de Roma"], "de Nápoles"],
         ["¿Cómo es la casa?", ["chica pero linda", "grande y fea", "lejos del centro", "en Nápoles"], "chica pero linda"],
-        ["¿Cómo está Martín?", ["cansado pero contento", "triste", "enojado", "enfermo"], "cansado pero contento"]
+        ["¿Cómo está Martín?", ["cansado pero contento", "triste porque extraña su casa", "enojado", "enfermo"], "cansado pero contento"]
       ],
       hunt: { label: "Tocá todas las formas de essere (sono, è)", targets: ["sono", "è"] } },
 
@@ -61,9 +61,9 @@
                stagionato: "estacionado, curado", provare: "probar",
                occhi: "ojos", ride: "se ríe", spende: "gasta", sembra: "parece" },
       questions: [
-        ["¿Qué compra siempre Giulia?", ["pan fresco y fruta", "queso y mortadela", "tortellini", "vino"], "pan fresco y fruta"],
-        ["¿Qué hace el señor del puesto?", ["le da a probar parmesano", "le cobra de más", "le vende fruta", "no lo atiende"], "le da a probar parmesano"],
-        ["¿Qué dice Giulia de la región?", ["se come bien pero se gasta mucho", "es barata", "la comida es mala", "es muy fría"], "se come bien pero se gasta mucho"]
+        ["¿Qué compra siempre Giulia?", ["pan fresco y fruta", "queso, mortadela y vino", "tortellini", "vino"], "pan fresco y fruta"],
+        ["¿Qué hace el señor del puesto?", ["le da a probar parmesano", "le cobra de más", "le vende fruta de la estación", "no lo atiende"], "le da a probar parmesano"],
+        ["¿Qué dice Giulia de la región?", ["se come bien pero se gasta mucho", "es barata", "la comida es mala y todo es caro", "es muy fría"], "se come bien pero se gasta mucho"]
       ],
       hunt: { label: "Tocá las comidas que aparecen", targets:
         ["pane", "frutta", "tortellini", "mortadella", "formaggi", "parmigiano"] } },
@@ -84,9 +84,9 @@
                tardi: "tarde", colleghi: "compañeros de trabajo", arrabbiati: "enojados",
                pranzo: "almuerzo", stanco: "cansado", addormento: "(me) duermo" },
       questions: [
-        ["¿Por qué Giulia se levanta tarde?", ["trabaja de noche en un restaurante", "está enferma", "no tiene trabajo", "estudia de noche"], "trabaja de noche en un restaurante"],
+        ["¿Por qué Giulia se levanta tarde?", ["trabaja de noche en un restaurante", "está enferma", "no tiene trabajo", "estudia de noche en la universidad"], "trabaja de noche en un restaurante"],
         ["¿Cuándo hablan en dialecto los compañeros?", ["cuando están enojados", "en el almuerzo", "siempre", "con el jefe"], "cuando están enojados"],
-        ["¿Qué hace Martín antes de dormir?", ["estudia italiano veinte minutos", "mira series", "llama a su mamá", "sale a correr"], "estudia italiano veinte minutos"]
+        ["¿Qué hace Martín antes de dormir?", ["estudia italiano veinte minutos", "mira series", "llama a su mamá a Buenos Aires por video", "sale a correr"], "estudia italiano veinte minutos"]
       ],
       hunt: { label: "Tocá los verbos reflexivos (los que van con mi / si)", targets:
         ["sveglio", "alzo", "faccio", "vesto", "alza", "addormento"] } },
@@ -110,7 +110,7 @@
       questions: [
         ["¿Cómo viajaron a Florencia?", ["en tren", "en auto", "en colectivo", "en avión"], "en tren"],
         ["¿Qué opina Giulia del bife?", ["que el de su abuela es mejor", "que está crudo", "que es carísimo", "que es el mejor de su vida"], "que el de su abuela es mejor"],
-        ["¿Por qué volvieron a medianoche?", ["perdieron el tren de las seis", "se quedaron a cenar", "el tren estaba demorado", "se perdieron"], "perdieron el tren de las seis"]
+        ["¿Por qué volvieron a medianoche?", ["perdieron el tren de las seis", "se quedaron a cenar", "el tren estaba demorado por la nieve", "se perdieron"], "perdieron el tren de las seis"]
       ],
       hunt: { label: "Tocá los participios del passato prossimo", targets:
         ["andati", "partiti", "arrivati", "visitato", "camminato", "mangiato", "bevuto",
@@ -158,7 +158,7 @@
                affascina: "fascina", lentamente: "despacio", vergogna: "vergüenza",
                ripassa: "repasa", basta: "alcanza", tisana: "té de hierbas" },
       questions: [
-        ["¿Qué produce la empresa?", ["motores eléctricos", "autos deportivos", "software", "queso"], "motores eléctricos"],
+        ["¿Qué produce la empresa?", ["motores eléctricos", "autos deportivos de lujo", "software", "queso"], "motores eléctricos"],
         ["¿Qué consejo le da Giulia si no entiende?", ["pedir que repitan", "hablar en español", "sonreír y asentir", "cambiar de tema"], "pedir que repitan"],
         ["¿Cómo está Martín el domingo a la noche?", ["nervioso", "tranquilo", "enojado", "aburrido"], "nervioso"]
       ],
@@ -211,7 +211,7 @@
       questions: [
         ["¿Qué le ofrece la empresa?", ["el puesto", "una beca", "un aumento", "un viaje"], "el puesto"],
         ["¿Qué haría Giulia?", ["aceptaría enseguida", "lo pensaría un mes", "rechazaría la oferta", "se mudaría con él"], "aceptaría enseguida"],
-        ["¿Qué alternativa le propone?", ["viajar todos los días en tren", "trabajar desde casa", "volver a Argentina", "buscar otro trabajo"], "viajar todos los días en tren"]
+        ["¿Qué alternativa le propone?", ["viajar todos los días en tren", "trabajar desde casa", "volver a Argentina", "buscar otro trabajo en Bolonia"], "viajar todos los días en tren"]
       ],
       hunt: { label: "Tocá los verbos en condizionale", targets:
         ["dovrebbe", "faresti", "accetterei", "potresti", "mancherebbe", "sarei"] } },
@@ -236,7 +236,7 @@
       questions: [
         ["¿Por qué la respuesta llega a la mañana?", ["por la diferencia horaria", "porque la madre dormía la siesta", "porque se cortó internet", "porque estaba ocupada"], "por la diferencia horaria"],
         ["Según la madre, ¿qué es lo que importa?", ["hacer un trabajo que lo apasione", "la ciudad", "ganar mucho", "estar cerca de ella"], "hacer un trabajo que lo apasione"],
-        ["¿Qué dice la posdata?", ["que ojalá haya aprendido a cocinar", "que lo va a visitar", "que Giulia es su novia", "que vuelva a casa"], "que ojalá haya aprendido a cocinar"]
+        ["¿Qué dice la posdata?", ["que ojalá haya aprendido a cocinar", "que ella lo va a visitar en Navidad", "que Giulia es su novia", "que vuelva a casa"], "que ojalá haya aprendido a cocinar"]
       ],
       hunt: { label: "Tocá los verbos en congiuntivo", targets:
         ["sia", "conti", "faccia", "avessi", "decida", "abbia"] } },
@@ -260,7 +260,7 @@
                scherza: "bromea", perfino: "hasta, incluso", portici: "soportales, galerías techadas" },
       questions: [
         ["¿Cómo va Martín a Módena?", ["en tren, todos los días", "en auto", "se mudó allá", "en bicicleta"], "en tren, todos los días"],
-        ["¿Dónde festejan?", ["en el bar donde tomaron el primer café juntos", "en Florencia", "en la empresa", "en Nápoles"], "en el bar donde tomaron el primer café juntos"],
+        ["¿Dónde festejan?", ["en el bar donde tomaron el primer café juntos", "en Florencia", "en la empresa, con los compañeros de trabajo", "en Nápoles"], "en el bar donde tomaron el primer café juntos"],
         ["¿Qué extrañaría Martín si volviera?", ["hasta los portici", "solo la comida", "el trabajo", "nada"], "hasta los portici"]
       ],
       hunt: { label: "Tocá el verbo de cada condición con «se» (congiuntivo)", targets:
@@ -282,9 +282,9 @@
                urlare: "gritar", corridoio: "pasillo", "testa": "(mettere i piedi in testa) pisotear, abusar",
                ricevere: "(farsi ricevere) conseguir que lo atiendan", risparmiare: "ahorrar", accanto: "al lado" },
       questions: [
-        ["¿Qué hace Fabrizio en su primera semana?", ["hace rehacer los informes", "despide a Martín", "organiza una fiesta", "se va de vacaciones"], "hace rehacer los informes"],
+        ["¿Qué hace Fabrizio en su primera semana?", ["hace rehacer los informes", "despide a Martín", "organiza una fiesta para el equipo", "se va de vacaciones"], "hace rehacer los informes"],
         ["¿Qué le aconseja Giulia?", ["que no se deje pisotear", "que renuncie", "que grite también", "que llegue tarde"], "que no se deje pisotear"],
-        ["¿Cómo termina?", ["Fabrizio lo sienta a su lado", "Martín cambia de trabajo", "Fabrizio se va", "nadie habla más"], "Fabrizio lo sienta a su lado"]
+        ["¿Cómo termina?", ["Fabrizio lo sienta a su lado", "Martín cambia de trabajo y de ciudad", "Fabrizio se va", "nadie habla más"], "Fabrizio lo sienta a su lado"]
       ],
       hunt: { label: "Tocá las formas de «fare» y «lasciare» seguidas de infinitivo (causativo)", targets:
         ["fa", "fatto", "lascia", "lasciarti"] } },
@@ -302,9 +302,9 @@
                ridono: "ríen", "parte": "(prendere da parte) llevar aparte", arrossendo: "sonrojándose",
                lusso: "lujo", portici: "soportales", abita: "(si abita) se habita, se vive" },
       questions: [
-        ["¿Por qué le toca el brindis a Martín?", ["porque es el único extranjero", "porque es el jefe", "porque cumple años", "porque lo pidió"], "porque es el único extranjero"],
+        ["¿Por qué le toca el brindis a Martín?", ["porque es el único extranjero", "porque es el jefe", "porque cumple años ese mismo día", "porque lo pidió"], "porque es el único extranjero"],
         ["¿Qué error comete?", ["una consonante doble", "un verbo en pasado", "el nombre del jefe", "el número de mesa"], "una consonante doble"],
-        ["¿Qué piensa al volver?", ["que la lengua se habita, no se aprende", "que quiere volver a Buenos Aires", "que odia los brindis", "que Fabrizio es malo"], "que la lengua se habita, no se aprende"]
+        ["¿Qué piensa al volver?", ["que la lengua se habita, no se aprende", "que quiere volver a Buenos Aires cuanto antes", "que odia los brindis", "que Fabrizio es malo"], "que la lengua se habita, no se aprende"]
       ],
       hunt: { label: "Tocá todos los gerundios (essendo, sapendo…)", targets:
         ["essendo", "avendo", "sbagliando", "sapendo", "arrossendo", "tornando"] } },
@@ -325,7 +325,7 @@
                lieto: "contento (registro alto)", volontario: "voluntario", stima: "estima", riconoscenza: "gratitud" },
       questions: [
         ["¿A quién le escribe Martín?", ["a su profesora", "a Fabrizio", "a Giulia", "al Comune"], "a su profesora"],
-        ["¿Qué agradece?", ["que lo corrigiera sin impaciencia y sin dejar pasar errores", "que le regalara un libro", "que le diera trabajo", "que le enseñara a cocinar"], "que lo corrigiera sin impaciencia y sin dejar pasar errores"],
+        ["¿Qué agradece?", ["que lo corrigiera sin impaciencia y sin dejar pasar errores", "que le regalara un diccionario y una gramática al final del curso", "que le diera trabajo", "que le enseñara a cocinar"], "que lo corrigiera sin impaciencia y sin dejar pasar errores"],
         ["¿Qué descubrió después de un año?", ["que se aprende enseñando", "que el italiano es fácil", "que no quiere volver", "que odia las preposiciones"], "que se aprende enseñando"]
       ],
       hunt: { label: "Tocá los conectores (affinché, nonostante, tuttavia, qualora, infatti)", targets:
@@ -354,7 +354,7 @@
       questions: [
         ["¿Por qué escribe en volgare y no en latín?", ["para que lo lean todos", "porque no sabía latín", "porque se lo pidió el papa", "para vender más"], "para que lo lean todos"],
         ["¿Quién lo guía en el Paraíso?", ["Beatrice", "Virgilio", "su padre", "nadie"], "Beatrice"],
-        ["¿Dónde muere Dante?", ["en el exilio, en Ravenna", "en Florencia", "en Roma", "en la cárcel"], "en el exilio, en Ravenna"]
+        ["¿Dónde muere Dante?", ["en el exilio, en Ravenna", "en Florencia", "en Roma", "en la cárcel, en Florencia"], "en el exilio, en Ravenna"]
       ],
       hunt: { label: "Tocá los tres reinos del viaje (cada vez que aparecen)", targets:
         ["inferno", "purgatorio", "paradiso"] } },
@@ -377,8 +377,8 @@
                golpe: "zorra (italiano antiguo: volpe)", lione: "león (italiano antiguo: leone)",
                astuto: "astuto", volpe: "zorro", fine: "fin, objetivo", mezzi: "medios" },
       questions: [
-        ["¿Qué le pasó a Maquiavelo en 1513?", ["lo arrestaron y torturaron", "lo nombraron embajador", "se casó", "se fue a Francia"], "lo arrestaron y torturaron"],
-        ["¿Qué describe El Príncipe?", ["la política como es realmente", "el Estado ideal", "la vida de los santos", "la historia de Roma"], "la política como es realmente"],
+        ["¿Qué le pasó a Maquiavelo en 1513?", ["lo arrestaron y torturaron", "lo nombraron embajador en Francia", "se casó", "se fue a Francia"], "lo arrestaron y torturaron"],
+        ["¿Qué describe El Príncipe?", ["la política como es realmente", "el Estado ideal", "la vida de los santos y los papas", "la historia de Roma"], "la política como es realmente"],
         ["¿Qué pasa con «el fin justifica los medios»?", ["no está en el libro", "es la primera frase", "la dijo un Medici", "es el título original"], "no está en el libro"]
       ],
       hunt: { label: "Tocá los animales (en italiano antiguo y moderno)", targets:
@@ -405,8 +405,8 @@
                domiciliari: "(arresti domiciliari) prisión domiciliaria" },
       questions: [
         ["¿Qué descubre Galileo alrededor de Júpiter?", ["cuatro satélites", "anillos", "montañas", "nada"], "cuatro satélites"],
-        ["¿Por qué escribe el Dialogo en italiano?", ["para que lo pueda leer todo el mundo", "porque la Iglesia se lo exigió", "porque no sabía latín", "para esconderlo"], "para que lo pueda leer todo el mundo"],
-        ["¿Dijo realmente «Eppur si muove»?", ["no hay pruebas de que lo haya dicho", "sí, delante del tribunal", "sí, en su libro", "lo dijo Copérnico"], "no hay pruebas de que lo haya dicho"]
+        ["¿Por qué escribe el Dialogo en italiano?", ["para que lo pueda leer todo el mundo", "porque la Iglesia se lo exigió por escrito", "porque no sabía latín", "para esconderlo"], "para que lo pueda leer todo el mundo"],
+        ["¿Dijo realmente «Eppur si muove»?", ["no hay pruebas de que lo haya dicho", "sí, delante del tribunal, en voz baja", "sí, en su libro", "lo dijo Copérnico"], "no hay pruebas de que lo haya dicho"]
       ],
       hunt: { label: "Tocá los verbos en congiuntivo o condizionale", targets:
         ["possano", "avrebbe", "abbia"] } },
@@ -455,7 +455,7 @@
       questions: [
         ["¿Qué quería impedir el fiscal?", ["que su cerebro funcionara", "que escapara", "que hablara con la prensa", "que viera a su familia"], "que su cerebro funcionara"],
         ["Según Gramsci, ¿cómo domina una clase?", ["sobre todo con el consenso", "solo con la fuerza", "con el dinero", "con la religión"], "sobre todo con el consenso"],
-        ["¿Por qué la escuela y los diarios son campos de batalla?", ["porque ahí se construye el consenso", "porque son del Estado", "porque ahí hubo violencia", "porque los cerró el fascismo"], "porque ahí se construye el consenso"]
+        ["¿Por qué la escuela y los diarios son campos de batalla?", ["porque ahí se construye el consenso", "porque son del Estado", "porque ahí hubo violencia", "porque los cerró el fascismo en los años veinte"], "porque ahí se construye el consenso"]
       ],
       hunt: { label: "Tocá los verbos en passato remoto", targets:
         ["fu", "arrestò", "condannò", "scrisse", "morì"] } },
@@ -479,8 +479,8 @@
                carnefici: "verdugos", avvenuto: "ocurrido", dovere: "deber" },
       questions: [
         ["¿Qué lo ayudó a sobrevivir?", ["su oficio de químico", "un amigo guardia", "estar enfermo", "escapar"], "su oficio de químico"],
-        ["¿Cómo escribe sobre el Lager?", ["con una prosa clara, casi científica", "con mucho enojo", "en forma de poesía", "con humor"], "con una prosa clara, casi científica"],
-        ["¿Qué es la «zona gris»?", ["el espacio ambiguo entre víctimas y verdugos", "una parte del campo", "el invierno polaco", "la memoria olvidada"], "el espacio ambiguo entre víctimas y verdugos"]
+        ["¿Cómo escribe sobre el Lager?", ["con una prosa clara, casi científica", "con mucho enojo", "en forma de poesía, con mucha rima y metáfora", "con humor"], "con una prosa clara, casi científica"],
+        ["¿Qué es la «zona gris»?", ["el espacio ambiguo entre víctimas y verdugos", "una parte del campo donde vivían los guardias", "el invierno polaco", "la memoria olvidada"], "el espacio ambiguo entre víctimas y verdugos"]
       ],
       hunt: { label: "Tocá los verbos en passato remoto", targets:
         ["fu", "rimase", "sopravvisse", "sentì", "scrisse"] } },
@@ -504,8 +504,8 @@
                consumi: "consumo", cancellare: "borrar" },
       questions: [
         ["¿Adónde se mudan millones de personas?", ["a las ciudades industriales del norte", "al extranjero", "al campo", "a Roma"], "a las ciudades industriales del norte"],
-        ["¿Qué hacía «Non è mai troppo tardi»?", ["enseñaba a leer y escribir a adultos", "era un concurso", "daba noticias", "vendía electrodomésticos"], "enseñaba a leer y escribir a adultos"],
-        ["¿De qué acusa Pasolini a la sociedad de consumo?", ["de borrar las culturas populares", "de empobrecer al norte", "de censurar la televisión", "de cerrar fábricas"], "de borrar las culturas populares"]
+        ["¿Qué hacía «Non è mai troppo tardi»?", ["enseñaba a leer y escribir a adultos", "era un concurso", "daba noticias", "vendía electrodomésticos por televisión"], "enseñaba a leer y escribir a adultos"],
+        ["¿De qué acusa Pasolini a la sociedad de consumo?", ["de borrar las culturas populares", "de empobrecer al norte", "de censurar la televisión y los diarios", "de cerrar fábricas"], "de borrar las culturas populares"]
       ],
       hunt: { label: "Tocá los aparatos que llegan a las casas", targets:
         ["frigorifero", "lavatrice", "televisione"] } },
@@ -527,7 +527,7 @@
                sogni: "sueños", genitori: "padres", leggerezza: "levedad, liviandad",
                difetto: "defecto" },
       questions: [
-        ["¿Entre quiénes es el diálogo?", ["Marco Polo y Kublai Kan", "Calvino y un lector", "dos emperadores", "Marco Polo y su padre"], "Marco Polo y Kublai Kan"],
+        ["¿Entre quiénes es el diálogo?", ["Marco Polo y Kublai Kan", "Calvino y un lector", "dos emperadores", "Marco Polo y su padre Niccolò"], "Marco Polo y Kublai Kan"],
         ["¿Qué ciudad se esconde detrás de todas?", ["Venecia", "Roma", "Pekín", "La Habana"], "Venecia"],
         ["¿Qué pensaba Calvino de la levedad?", ["que era una virtud", "que era un defecto", "que era imposible", "que era aburrida"], "que era una virtud"]
       ],
@@ -552,7 +552,7 @@
                smettere: "dejar de", scoraggiare: "desalentar", certezza: "certeza",
                nonno: "abuelo" },
       questions: [
-        ["¿Por qué la tortura es inútil según Beccaria?", ["un culpable fuerte resiste y un inocente débil confiesa", "porque es cara", "porque la prohíbe la Iglesia", "porque nadie confiesa"], "un culpable fuerte resiste y un inocente débil confiesa"],
+        ["¿Por qué la tortura es inútil según Beccaria?", ["un culpable fuerte resiste y un inocente débil confiesa", "porque es cara", "porque la Iglesia la prohíbe en todos los tribunales desde hace siglos", "porque nadie confiesa"], "un culpable fuerte resiste y un inocente débil confiesa"],
         ["¿Qué desalienta el crimen, según él?", ["la certeza de la pena", "la crueldad de la pena", "la religión", "la pobreza"], "la certeza de la pena"],
         ["¿Qué pasó en Toscana en 1786?", ["abolió la pena de muerte", "prohibió el libro", "coronó a Beccaria", "invadió Milán"], "abolió la pena de muerte"]
       ],
@@ -577,7 +577,7 @@
                buia: "oscura", sfondo: "fondo", razziali: "raciales", marito: "marido" },
       questions: [
         ["¿Qué sigue el libro, en lugar de una trama?", ["las palabras de la familia", "la vida del padre", "la guerra", "un crimen"], "las palabras de la familia"],
-        ["¿Para qué sirven las expresiones familiares?", ["para reconocerse aun después de años", "para hablar en secreto", "para educar a los hijos", "para escribir libros"], "para reconocerse aun después de años"],
+        ["¿Para qué sirven las expresiones familiares?", ["para reconocerse aun después de años", "para hablar en secreto", "para educar a los hijos con disciplina", "para escribir libros"], "para reconocerse aun después de años"],
         ["¿Cuál es el tono del libro?", ["irónico y liviano", "trágico y solemne", "político y agresivo", "técnico"], "irónico y liviano"]
       ],
       hunt: { label: "Tocá las palabras que remiten a la historia del siglo XX", targets:
@@ -612,7 +612,7 @@
                guarda: "mira", oggi: "hoy" },
       questions: [
         ["¿Desde cuándo vive Martín en Bolonia?", ["desde hace tres meses", "desde hace un año", "desde hace dos años", "desde ayer"], "desde hace tres meses"],
-        ["¿Desde cuándo trabaja Paolo en el bar?", ["desde hace veinte años", "desde hace tres meses", "desde septiembre", "desde hace seis meses"], "desde hace veinte años"],
+        ["¿Desde cuándo trabaja Paolo en el bar?", ["desde hace veinte años", "desde hace treinta años", "desde septiembre", "desde hace seis meses"], "desde hace veinte años"],
         ["¿Qué tiene Paola desde hace seis meses?", ["un gato", "un perro", "un departamento", "un novio"], "un gato"]
       ],
       hunt: { label: "Tocá todos los da", targets: ["da"] } },
@@ -643,7 +643,7 @@
                stipendio: "sueldo", arrabbia: "(si arrabbia) se enoja", lamenta: "(si lamenta) se queja",
                piatti: "platos", lascia: "deja", ride: "se ríe" },
       questions: [
-        ["¿Por qué no hay nada en la heladera?", ["ninguno de los dos hizo las compras", "Giulia se comió todo", "se rompió la heladera", "Martín está de viaje"], "ninguno de los dos hizo las compras"],
+        ["¿Por qué no hay nada en la heladera?", ["ninguno de los dos hizo las compras", "Giulia se comió todo", "se rompió la heladera el fin de semana", "Martín está de viaje"], "ninguno de los dos hizo las compras"],
         ["¿Por qué Martín no quiere pagar?", ["el sueldo le llega mañana", "es tacaño", "Giulia se lo prohibió", "el restaurante es gratis"], "el sueldo le llega mañana"],
         ["¿Qué hace Martín con las tagliatelle?", ["se come todo", "deja la mitad", "no las prueba", "las comparte con Marco"], "se come todo"]
       ],
@@ -676,7 +676,7 @@
       questions: [
         ["¿Cuántos tortellini compra al final?", ["medio kilo", "un kilo", "dos kilos", "ninguno"], "medio kilo"],
         ["¿Qué se olvidó de comprar?", ["las servilletas", "el vino", "el pan", "el queso"], "las servilletas"],
-        ["¿Qué sobró al final de la cena?", ["ni un tortellino, pero hay dos postres", "medio kilo de tortellini", "todo el vino", "el pan"], "ni un tortellino, pero hay dos postres"]
+        ["¿Qué sobró al final de la cena?", ["ni un tortellino, pero hay dos postres", "medio kilo de tortellini y un poco de vino", "todo el vino", "el pan"], "ni un tortellino, pero hay dos postres"]
       ],
       hunt: { label: "Tocá todos los ne", targets: ["ne"] } },
 
@@ -704,7 +704,7 @@
                finestra: "ventana", forte: "(parlare forte) hablar alto", cornetti: "medialunas",
                nemmeno: "ni siquiera" },
       questions: [
-        ["¿Por qué Paola no vuelve a la biblioteca?", ["hace demasiado frío", "es muy ruidosa", "queda lejos", "cierra temprano"], "hace demasiado frío"],
+        ["¿Por qué Paola no vuelve a la biblioteca?", ["hace demasiado frío", "es muy ruidosa", "queda lejos", "cierra temprano los sábados"], "hace demasiado frío"],
         ["¿Quién trabaja en el bar de via Saragozza?", ["la prima de Giulia", "la mamá de Paola", "Marco", "un amigo de Martín"], "la prima de Giulia"],
         ["¿Cuántas páginas lee Martín en el bar?", ["ninguna", "una", "diez", "todo el libro"], "ninguna"]
       ],
@@ -770,7 +770,7 @@
                dubito: "dudo", parlarne: "hablar de eso", racconti: "cuente", cervello: "cerebro",
                faccia: "(ce la faccia) pueda, dé abasto", birra: "cerveza" },
       questions: [
-        ["¿Qué cree Paolo, el barista?", ["que Martín está enamorado", "que está enfermo", "que trabaja demasiado", "que extraña a su madre"], "que Martín está enamorado"],
+        ["¿Qué cree Paolo, el barista?", ["que Martín está enamorado", "que está enfermo", "que trabaja demasiado", "que extraña a su madre y a Buenos Aires"], "que Martín está enamorado"],
         ["¿Qué le pasa en realidad a Martín?", ["estudia inglés y el cerebro no le da abasto", "está enamorado", "está enfermo", "su madre está enferma"], "estudia inglés y el cerebro no le da abasto"],
         ["¿Qué le propone Giulia al final?", ["una cerveza", "un café", "dormir", "dejar el inglés"], "una cerveza"]
       ],
@@ -806,7 +806,7 @@
                stessa: "misma", altri: "(gli altri) los demás" },
       questions: [
         ["¿A qué hora debería haber puesto el despertador?", ["a las seis", "a las seis y media", "a las siete", "a las siete y veinte"], "a las seis"],
-        ["¿Qué pasó en la reunión?", ["el director presentó el proyecto sin él", "la cancelaron", "Martín llegó tarde pero presentó", "el director no fue"], "el director presentó el proyecto sin él"],
+        ["¿Qué pasó en la reunión?", ["el director presentó el proyecto sin él", "la cancelaron", "Martín llegó tarde pero presentó igual el proyecto", "el director no fue"], "el director presentó el proyecto sin él"],
         ["¿Qué habría hecho Giulia en su lugar?", ["lo mismo, y comer dos medialunas", "llamar desde el tren", "renunciar", "escribir un mail"], "lo mismo, y comer dos medialunas"]
       ],
       hunt: { label: "Tocá los verbos del condizionale passato (avrei dovuto, sarei arrivato…)", targets:
@@ -839,7 +839,7 @@
       questions: [
         ["¿Cuántos kilómetros de portici tiene Bolonia?", ["cuarenta", "cuatro", "catorce", "cuatrocientos"], "cuarenta"],
         ["¿Por qué vino Martín a Bolonia?", ["por el trabajo", "por Giulia", "por la universidad", "por la comida"], "por el trabajo"],
-        ["¿Qué pasa a las siete de la tarde?", ["las torres se ponen rojas y suenan las campanas", "cierra el bar", "llegan los estudiantes", "empieza el curso"], "las torres se ponen rojas y suenan las campanas"]
+        ["¿Qué pasa a las siete de la tarde?", ["las torres se ponen rojas y suenan las campanas", "cierra el bar", "llegan los estudiantes a la plaza y abren los bares", "empieza el curso"], "las torres se ponen rojas y suenan las campanas"]
       ],
       hunt: { label: "Tocá todos los cui, quale y quali", targets: ["cui", "quale", "quali"] } },
 
@@ -870,7 +870,7 @@
       questions: [
         ["¿Cómo se toma el café en Italia?", ["de pie, en la barra", "sentado y con leche", "siempre como cappuccino", "en la calle"], "de pie, en la barra"],
         ["¿Cuándo se come el pan, según el texto?", ["con el segundo plato o para limpiar el plato", "con la pasta", "antes de la comida", "nunca"], "con el segundo plato o para limpiar el plato"],
-        ["¿Qué hace la gente con el auto?", ["protesta contra el tráfico pero no renuncia al auto", "lo deja en casa", "lo usa solo el domingo", "lo vende"], "protesta contra el tráfico pero no renuncia al auto"]
+        ["¿Qué hace la gente con el auto?", ["protesta contra el tráfico pero no renuncia al auto", "lo deja en casa", "lo usa solo el domingo, para ir a comer a lo de los suegros", "lo vende"], "protesta contra el tráfico pero no renuncia al auto"]
       ],
       hunt: { label: "Tocá todos los si", targets: ["si"] } },
 
@@ -898,7 +898,7 @@
                serratura: "cerradura", ombelico: "ombligo", riempì: "llenó (riempire)", dito: "dedo",
                brodo: "caldo", inventore: "inventor", mezzo: "(nel mezzo) en el medio" },
       questions: [
-        ["¿Dónde se detienen los dioses?", ["en una posada de Castelfranco Emilia", "en Bolonia", "en Módena", "en Venecia"], "en una posada de Castelfranco Emilia"],
+        ["¿Dónde se detienen los dioses?", ["en una posada de Castelfranco Emilia", "en Bolonia", "en una posada de Módena, cerca del Duomo", "en Venecia"], "en una posada de Castelfranco Emilia"],
         ["¿Qué vio el posadero por la cerradura?", ["el ombligo de Venus", "a Baco borracho", "a Marte dormido", "la cocina"], "el ombligo de Venus"],
         ["¿Quién ganó la discusión sobre el inventor?", ["nadie: Bolonia y Módena siguen discutiendo", "Bolonia", "Módena", "Castelfranco"], "nadie: Bolonia y Módena siguen discutiendo"]
       ],
@@ -930,7 +930,7 @@
                cuocere: "cocinar (al fuego)", riposare: "reposar", capotavola: "cabecera de la mesa",
                ospite: "invitado", cima: "(in cima) en la cima", sospira: "suspira", manca: "(ci manca) la extrañamos" },
       questions: [
-        ["¿Para qué hace venir a un plomero?", ["por una canilla que gotea", "por el sofá", "por las cortinas", "por la heladera"], "por una canilla que gotea"],
+        ["¿Para qué hace venir a un plomero?", ["por una canilla que gotea", "por el sofá", "por las cortinas del living", "por la heladera"], "por una canilla que gotea"],
         ["¿Cuánto tiempo hace cocinar el ragú?", ["seis horas", "una hora", "tres días", "una noche"], "seis horas"],
         ["¿Adónde lleva Martín a la madre de Giulia a pie?", ["a San Luca", "a Módena", "al mercado", "a Nápoles"], "a San Luca"]
       ],
@@ -964,7 +964,7 @@
                tratto: "tramo", fatta: "(ce l'ho fatta) lo logré", ingannato: "engañado" },
       questions: [
         ["¿Cuántos arcos tiene el pórtico de San Luca?", ["666", "66", "1000", "40"], "666"],
-        ["¿Qué consejo le da Paola para cansarse menos?", ["respirar contando los escalones", "no mirar hacia arriba", "correr más rápido", "tomar agua"], "respirar contando los escalones"],
+        ["¿Qué consejo le da Paola para cansarse menos?", ["respirar contando los escalones", "no mirar hacia arriba mientras sube", "correr más rápido", "tomar agua"], "respirar contando los escalones"],
         ["¿A qué hora recibe la foto la madre?", ["a las tres de la mañana", "a las siete", "al mediodía", "a las nueve de la noche"], "a las tres de la mañana"]
       ],
       hunt: { label: "Tocá todos los gerundios", targets:
