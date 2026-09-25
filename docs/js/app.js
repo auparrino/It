@@ -781,6 +781,7 @@
       "</div>" +
       '<p class="muted science">🔬 Ponte usa la transferencia desde tu lengua (Ringbom); ' +
       UI.capire + " es input estructurado: primero interpretar la forma, después producirla (VanPatten).</p>";
+    if (window.Escritos) html += Escritos.treinoHtml(state);
 
     if (window.Referencia) html += Referencia.entry();
     if (window.Duelli) {
@@ -1648,6 +1649,7 @@
       m({ kind: "duello", arg: d.id, done: !!best && best.pct >= 80, ico: "⚔️", title: "Duelo: " + d.title, opt: true,
           sub: best ? "Tu mejor: " + best.pct + " % · con 80 % queda hecho" : "Opcional · " + d.sub + ": las dos formas mezcladas y «¿qué te lo dijo?»" });
     });
+    if (window.Escritos) Escritos.missions(w, state).forEach(m);   // escritura guiada (escritos.js), opcionales
     var domDone = Drills.dominated(st, w, state);
     m({ kind: "play2", done: domDone, ico: "🏆", title: "Dominala",
         sub: domDone ? "Dominada" + (st.domPct ? " · " + st.domPct + " %" : "")
@@ -1694,6 +1696,7 @@
     else if (kind === "dictogloss") { dg = null; view.screen = "dictogloss"; render(); window.scrollTo(0, 0); }
     else if (kind === "parla") { view.screen = "parla"; render(); window.scrollTo(0, 0); }
     else if (kind === "storia") { view.screen = "storia"; render(); window.scrollTo(0, 0); }
+    else if (window.Escritos && Escritos.handles(kind)) Escritos.go(kind, arg);
   }
 
   function missions(w, st, nChal) {
@@ -1821,6 +1824,9 @@
         var si = Suoni.randomItem(state, taught ? taught.week : 1);
         if (si) items.splice(Math.min(3, items.length), 0, si);
       }
+      // escritura guiada, con poco peso: a veces un ítem (escritos.js)
+      var ei = window.Escritos && Escritos.pausaItem(state, taught ? taught.week : 0);
+      if (ei) items.splice(Math.min(6, items.length), 0, ei);
     } else if (kind === "gym") {
       items = [];
       for (var i = 0; i < 15; i++) {
@@ -1851,6 +1857,7 @@
     }
     else if (kind === "micro") items = Drills.buildReview(course, state, 5, drillOpts());
     else if (kind === "duello") items = window.Duelli ? Duelli.session(arg, state.cards) : [];
+    else if (kind === "variaciones") items = window.Escritos ? Escritos.variaciones(state, arg, course) : [];
     else if (kind === "b-voc") items = Banca.vocabSession(state, 12);
     else if (kind === "b-freq") items = Banca.vocabSessionFor(state, freqGaps(24), 12);
     else if (kind === "b-forme") items = Banca.formsSession(state, 12);
@@ -2602,7 +2609,8 @@
 
   function retryVersion(it) {
     var copy;
-    if (it.frase) copy = Frasi.pickItem(it.frase, { silent: state.silent, fresh: true });
+    if (it.retryAs) copy = Object.assign({}, it.retryAs);       // the item says its easier version (variaciones.js)
+    else if (it.frase) copy = Frasi.pickItem(it.frase, { silent: state.silent, fresh: true });
     else if (it.options && it.options.length > 2) {
       var wrong = Drills.shuffle(it.options.filter(function (o) {
         return Engine.normalise(o) !== Engine.normalise(it.answer);
@@ -2853,6 +2861,7 @@
       if (!prev) gain(20);
     }
 
+    if (window.Escritos) Escritos.roundDone(round, pct);
     var extras = [];
     if (round.kind === "giorno") {
       state.dailyDone = Engine.dayKey();
@@ -3496,6 +3505,7 @@
     else if (s === "gramatica") html = Referencia.page();
     else if (s === "ubicacion" && window.Ubicacion) html = Ubicacion.html();
     else if (s === "tres" && window.TresLenguas) html = TresLenguas.render(state);
+    else if (s === "escritos" && window.Escritos) html = Escritos.render();
 
     var gb = $("#glossbox");
     if (gb) gb.classList.remove("on");
@@ -3672,6 +3682,7 @@
     on("#resume", resumePending);
     on("#discard", function () { clearPending(); render(); });
     wireHabit();
+    if (window.Escritos) Escritos.wire(view.screen);
     on("#lesback", function () { view.screen = "briefing"; render(); });
     on("#lesplay", function () {
       var lw = course.weeks[view.week - 1];
@@ -3688,7 +3699,7 @@
       clearPending();
       if (round.from === "briefing") { view.tab = "percorso"; view.screen = "briefing"; render(); window.scrollTo(0, 0); }
       else if (round.kind === "lettura") go("leggi");
-      else if (["ponte", "falsi", "capire", "scene", "b-voc", "b-forme", "b-tr", "b-gap", "b-err", "b-freq", "clinica", "suoni", "duello"].indexOf(round.kind) >= 0) go("frasi");
+      else if (["ponte", "falsi", "capire", "scene", "b-voc", "b-forme", "b-tr", "b-gap", "b-err", "b-freq", "clinica", "suoni", "duello", "variaciones"].indexOf(round.kind) >= 0) go("frasi");
       else if (round.kind === "pausa" || round.kind === "review" || round.kind === "giorno" || round.kind === "ritorno" || round.kind === "micro") go("oggi");
       else if (round.kind === "sfida") { view.screen = "sfide"; render(); }
       else if (round.kind === "esame") { view.screen = "esame"; render(); }
@@ -5221,6 +5232,13 @@
     fx: function (ok) { if (ok) fx.right(); else fx.wrong(); gain(ok ? 3 : 1); },
     open: function () { view.screen = "gramatica"; render(); window.scrollTo(0, 0); },
     back: function () { go(view.tab || "io"); }
+  });
+  // Escritura guiada (escritos.js): lo que necesita de la app.
+  if (window.Escritos) Escritos.attach({
+    state: function () { return state; }, persist: persist, gain: gain, render: render, go: go, toast: toast,
+    esc: esc, plate: plate, fx: fx, startRound: startRound,
+    show: function (s) { view.screen = s; render(); window.scrollTo(0, 0); },
+    toWeek: function () { view.tab = "percorso"; view.screen = "briefing"; render(); window.scrollTo(0, 0); }
   });
 
   // The glossary is optional too: without it words are just not tappable.

@@ -525,3 +525,26 @@ table.ep-cmp td, table.ep-cmp th { text-align: center; padding: 4px 6px; }
 .ep-diff .w.ep-nope { animation: ep-shake .35s ease; background: color-mix(in srgb, currentColor 10%, transparent); }
 @keyframes ep-shake { 25% { transform: translateX(-3px); } 75% { transform: translateX(3px); } }
 @media (prefers-color-scheme: dark) { .ep-up { color: #34c47a; } .ep-down, .ep-timer.low { color: #f0674a; } }
+/* ------------------------------------------------ escritura guiada (feat_ejercicios)
+   C-test y cloze sobre lecturas ya leídas, «Ordená el texto»: escritos.js */
+.esc-text { line-height: 2.1; font-size: 1.05rem; }
+.esc-gap { background: none; color: inherit; white-space: nowrap; border-radius: 4px; padding: 0 1px; }
+.esc-in { font: inherit; color: inherit; background: transparent; border: none; border-bottom: 2px solid currentColor;
+  padding: 0 1px; margin: 0; min-width: 2ch; min-height: 0; height: auto; line-height: inherit; box-shadow: none;
+  opacity: .95; border-radius: 0; }
+.esc-in:focus { outline: 2px solid color-mix(in srgb, currentColor 35%, transparent); outline-offset: 1px; }
+.esc-in:disabled { border-bottom-style: dotted; opacity: 1; }
+.esc-close { background: color-mix(in srgb, #e0a100 28%, transparent); }
+.esc-tag { font-size: .62rem; opacity: .6; vertical-align: super; margin-left: 1px; }
+.esc-sol { display: inline-block; font-size: .78rem; font-weight: 700; margin-left: 3px; opacity: .85; }
+.esc-order .esc-piece, .esc-pool .esc-piece { text-align: left; white-space: normal; line-height: 1.4; font-weight: 500; font-size: .98rem; }
+.esc-order .anchor { opacity: .8; }
+.esc-pool { display: grid; gap: 8px; }
+mark.esc-clue { background: color-mix(in srgb, #e0a100 30%, transparent); color: inherit; border-radius: 3px; padding: 0 2px; font-weight: 700; }
+mark.esc-clue.ref { background: none; text-decoration: underline dotted; text-underline-offset: 3px; }
+.esc-hints { margin-top: 12px; font-size: .9rem; }
+.esc-hints ul { margin: 6px 0 0; padding-left: 18px; }
+.esc-model { padding-left: 20px; line-height: 1.5; }
+.esc-model li { margin-bottom: 6px; }
+.mission.esc-pick { cursor: default; }
+.mission.esc-pick .row { display: flex; gap: 6px; margin-top: 6px; flex-wrap: wrap; }
