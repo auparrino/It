@@ -56,6 +56,7 @@
     { core: "ctest.js" },
     { core: "ordenar.js" },
     { core: "escritos.js" },
+    { lang: "desglose_data.js" },
     { core: "voci.js" }, { core: "drills.js" }, { core: "desglose.js" },
     { core: "referencia.js" },
     { shared: "tres_lenguas_data.js" }, { core: "tres_lenguas.js" },
