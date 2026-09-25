@@ -11,10 +11,10 @@ Lee el índice de oraciones validadas de Common Voice Italian
   sumo una palabra no vista;
 - hablantes distintos dentro de cada semana.
 
-Escribe `docs/audio/cv/elegidas.json` (semana → oraciones con su archivo mp3)
-y `docs/audio/cv/elegidas.txt`, la lista de audios.  Si se le da el paquete
+Escribe `docs/lang/it/audio/cv/elegidas.json` (semana → oraciones con su archivo mp3)
+y `docs/lang/it/audio/cv/elegidas.txt`, la lista de audios.  Si se le da el paquete
 descargado de Mozilla (.tar.gz), lo recorre sin descomprimirlo entero y copia
-solo esos mp3 a `docs/audio/cv/`; con `--clips DIR`, los copia de una carpeta.
+solo esos mp3 a `docs/lang/it/audio/cv/`; con `--clips DIR`, los copia de una carpeta.
 Anda en Windows, Mac o Linux con Python 3 y Node (sillabo usa el conjugador).
 
     python3 tools/voci_cv.py cv-corpus-...-it.tar.gz [--por-semana 10]
@@ -151,7 +151,7 @@ def main():
     else:
         return
     size = sum(os.path.getsize(os.path.join(OUT, f)) for f in files if f not in missing)
-    print("audios copiados: %d (%.1f MB) en docs/audio/cv/ · faltan: %d"
+    print("audios copiados: %d (%.1f MB) en docs/lang/it/audio/cv/ · faltan: %d"
           % (len(files) - len(missing), size / 1e6, len(missing)))
 
 

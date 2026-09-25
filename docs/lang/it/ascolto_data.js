@@ -315,7 +315,19 @@
     { id: "a-030", week: 45, say: "màcchina", answer: "màcchina", options: ["màcchina", "macchìna"], es: "auto, máquina", note: "Esdrújula: MÀC-chi-na.", fake: true }
   ];
 
-  var api = { PAIRS: PAIRS, CONNESSO: CONNESSO, INTONAZIONE: INTONAZIONE, ACCENTO: ACCENTO };
+  // Lo que suoni.js dice de este idioma: el nombre de cada categoría de
+  // pares, las consignas y las notas.
+  var UI = {
+    cats: { geminate: "dobles consonantes", vocali: "vocales abiertas y cerradas", affricate: "z: [ts] y [dz]",
+            palatali: "gli, gn, sc", sonore: "s sonora, v", vibranti: "r simple y rr", altro: "c, g, qu" },
+    conta: "¿Cuántas palabras escuchaste?",
+    intoNote: "En italiano la pregunta sí/no se marca solo con la entonación, que sube al final: no hay «¿» ni cambio de orden.",
+    accPrompt: "¿Qué palabra escuchaste? Fijate dónde cae el acento",
+    dictPrompt: "Dictado: escuchá y escribí exactamente lo que oís (dobles y tildes incluidas)",
+    dictNote: "Las dobles se oyen más largas; una sola letra cambia la palabra (nono / nonno)."
+  };
+
+  var api = { PAIRS: PAIRS, CONNESSO: CONNESSO, INTONAZIONE: INTONAZIONE, ACCENTO: ACCENTO, UI: UI };
   if (typeof module === "object" && module.exports) module.exports = api;
   else root.AscoltoData = api;
 })(typeof window !== "undefined" ? window : globalThis);

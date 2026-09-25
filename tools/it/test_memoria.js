@@ -1,12 +1,12 @@
 /* Il motore della memoria: FSRS, mantenimento, notte/mattina,
    ipercorrezione, registro dei ripassi, velocità stimata, calibrazione,
    regole come schede e coda di ripasso.
-   Run: node tools/test_memoria.js  */
-var path = require("path");
-var ROOT = path.join(__dirname, "..");
-var Engine = require(path.join(ROOT, "docs/js/engine.js"));
-var Frasi = require(path.join(ROOT, "docs/js/frasi.js"));
-var Drills = require(path.join(ROOT, "docs/js/drills.js"));
+   Run: node tools/it/test_memoria.js  */
+var pack = require("../lib/pack.js");
+var ctx = pack("it");
+var Engine = ctx.Engine;
+var Frasi = ctx.Frasi;
+var Drills = ctx.Drills;
 var fails = 0, checks = 0;
 function ok(cond, what) { checks++; if (!cond) { fails++; console.log("FAIL " + what); } }
 function near(a, b, tol) { return Math.abs(a - b) <= tol; }

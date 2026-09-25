@@ -1,19 +1,19 @@
 /* Controles del banco de frases, del laboratorio, de los duelos y de las
    mecánicas de enganche (meta del día, escudos de la racha, cofre, pausa,
    relámpago).
-   Run: node tools/test_frasi.js  */
+   Run: node tools/pt/test_frasi.js  */
 var fs = require("fs");
 var path = require("path");
+var pack = require("../lib/pack.js");
 
-var ROOT = path.join(__dirname, "..");
-var Frasi = require(path.join(ROOT, "docs/js/frasi.js"));
-var Engine = require(path.join(ROOT, "docs/js/engine.js"));
-var Drills = require(path.join(ROOT, "docs/js/drills.js"));
-var Lab = require(path.join(ROOT, "docs/js/lab.js"));
-var Duelli = require(path.join(ROOT, "docs/js/duelli.js"));
-var Letture = require(path.join(ROOT, "docs/js/letture.js"));
-var course = JSON.parse(
-  fs.readFileSync(path.join(ROOT, "docs/data/course.json"), "utf8"));
+var ctx = pack("pt");
+var Frasi = ctx.Frasi;
+var Engine = ctx.Engine;
+var Drills = ctx.Drills;
+var Lab = ctx.Lab;
+var Duelli = ctx.Duelli;
+var Letture = ctx.Letture;
+var course = pack.data("pt", "course.json");
 
 var fails = 0, checks = 0;
 function ok(cond, what) {
@@ -29,7 +29,7 @@ function uniq(a) {
 // TENSE_WEEK del temario (tools/curriculo.py): nada antes de su teoría.
 var TW = {};
 (function () {
-  var src = fs.readFileSync(path.join(ROOT, "tools/curriculo.py"), "utf8");
+  var src = fs.readFileSync(path.join(__dirname, "curriculo.py"), "utf8");
   var m = /TENSE_WEEK\s*=\s*\{([\s\S]*?)\}/.exec(src);
   (m ? m[1] : "").replace(/"(\w+)"\s*:\s*(\d+)/g, function (_, k, w) { TW[k] = +w; });
 })();
@@ -389,7 +389,7 @@ ok(Engine.rankFor(1) === Engine.RANKS[0][1] && Engine.rankFor(60) === Engine.RAN
 
 // A save from the old version loads with the new fields filled in.
 var old = { xp: 10, cards: {}, badges: [], totals: { attempts: 1, right: 1, close: 0, wrong: 0 } };
-global.localStorage = { getItem: function () { return JSON.stringify(old); } };
+ctx.localStorage = { getItem: function () { return JSON.stringify(old); } };
 var loaded = Engine.load();
 ok(loaded.goal === 200 && loaded.days && loaded.shields === 1,
    "una partida vieja se completa con los campos nuevos (meta 200)");
@@ -397,7 +397,7 @@ old = { xp: 10, cards: {}, badges: [], goal: 20, totals: { attempts: 0, right: 0
 ok(Engine.load().goal === 200, "una meta fuera de las opciones vuelve a 200");
 old = { xp: 10, cards: {}, badges: [], goal: 350, goalV: 2, totals: { attempts: 0, right: 0, close: 0, wrong: 0 } };
 ok(Engine.load().goal === 350, "una meta válida no se toca");
-delete global.localStorage;
+ctx.localStorage = null;
 
 // Damaged saves are repaired, not trusted.
 var weird = Engine.sanitize({ xp: "abc", cards: null, days: "x", badges: {}, totals: 5, weekStats: [],

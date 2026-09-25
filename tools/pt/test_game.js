@@ -1,18 +1,20 @@
 /* Rumo C1 — controles del curso compilado y de la lógica del juego.
-   Corre: node tools/test_game.js
-   Lee docs/data/course.json (lo arma tools/build_course.py), el conjugador
-   portugués (docs/js/conjugator.js) y el temario (tools/curriculo.py). */
+   Corre: node tools/pt/test_game.js
+   Lee docs/lang/pt/data/course.json (lo arma tools/pt/build_course.py), el
+   conjugador portugués (docs/lang/pt/conjugator.js) y el temario
+   (tools/pt/curriculo.py), con el núcleo cargado por tools/lib/pack.js. */
 var fs = require("fs");
 var path = require("path");
+var pack = require("../lib/pack.js");
 
-var ROOT = path.join(__dirname, "..");
-var Conj = require(path.join(ROOT, "docs/js/conjugator.js"));
-var Engine = require(path.join(ROOT, "docs/js/engine.js"));
-var Drills = require(path.join(ROOT, "docs/js/drills.js"));
-var Lez = require(path.join(ROOT, "docs/js/lezione.js"));
+var ROOT = pack.ROOT;
+var ctx = pack("pt");
+var Conj = ctx.Conj;
+var Engine = ctx.Engine;
+var Drills = ctx.Drills;
+var Lez = ctx.Lezione;
 
-var course = JSON.parse(
-  fs.readFileSync(path.join(ROOT, "docs/data/course.json"), "utf8"));
+var course = pack.data("pt", "course.json");
 
 var fails = 0, checks = 0;
 function ok(cond, what) {
@@ -59,7 +61,7 @@ course.weeks.forEach(function (w) {
    salen de tools/curriculo.py (TENSE_WEEK); el presente de ser, estar y ter
    se enseña desde la semana 1 (el de los demás verbos, desde la 5). */
 var TENSE_WEEK = (function () {
-  var src = fs.readFileSync(path.join(ROOT, "tools/curriculo.py"), "utf8");
+  var src = fs.readFileSync(path.join(__dirname, "curriculo.py"), "utf8");
   var m = /TENSE_WEEK\s*=\s*\{([\s\S]*?)\}/.exec(src), out = {};
   (m ? m[1] : "").replace(/"(\w+)"\s*:\s*(\d+)/g, function (_, k, v) { out[k] = +v; return ""; });
   return out;
@@ -237,14 +239,15 @@ ok(Drills.dueCount(course, state) >= 30, "las fichas vencidas vuelven a la cola"
   var s = Engine.migrateSyllabus({ unlocked: 3, week: 2 });
   ok(s.syllabusV === 1 && s.unlocked === 3, "migración: marca la versión y no toca nada más");
   ok(/^rumoc1\./.test(Engine.STORAGE_KEY), "la clave de guardado tiene el prefijo propio: " + Engine.STORAGE_KEY);
-  // Nothing of ours may touch the storage of the Italian app on the same origin.
+  // Nothing of ours may touch the storage of the other language: the core
+  // writes no prefix, it takes LANG.storage.
   ["docs/js/app.js", "docs/js/engine.js", "docs/js/drills.js", "docs/js/lezione.js", "docs/sw.js"].forEach(function (f) {
     var src = fs.readFileSync(path.join(ROOT, f), "utf8");
-    var keys = src.match(/["'](laviac1[.\-][^"']*)["']/g) || [];
-    ok(!keys.length, f + ": claves de La Via C1 en el código: " + keys.join(", "));
+    var keys = src.match(/["']((laviac1|rumoc1)[.\-][^"']*)["']/g) || [];
+    ok(!keys.length, f + ": claves de guardado escritas en el código: " + keys.join(", "));
   });
   var sw = fs.readFileSync(path.join(ROOT, "docs/sw.js"), "utf8");
-  ok(/k\.indexOf\(PREFIX\) === 0/.test(sw) && /PREFIX = "rumoc1-"/.test(sw), "el service worker solo borra sus propias cachés");
+  ok(/k\.indexOf\(PREFIX\) === 0/.test(sw) && /PREFIX = "c1-"/.test(sw) && !/rumoc1-/.test(sw), "el service worker solo borra sus propias cachés");
 })();
 
 /* ------------------------------------------- las trampas del hispanohablante */
@@ -327,7 +330,7 @@ ok(Drills.dueCount(course, state) >= 30, "las fichas vencidas vuelven a la cola"
 // Duelos: cada oración tiene sus dos formas, la pista está en la oración y
 // «¿qué te lo dijo?» se puede armar; cada sesión trae los dos lados.
 (function () {
-  var Duelli = require(path.join(ROOT, "docs/js/duelli.js"));
+  var Duelli = ctx.Duelli;
   Duelli.DUELLI.forEach(function (d) {
     var sides = [0, 0];
     d.items.forEach(function (x, k) {
@@ -346,7 +349,7 @@ ok(Drills.dueCount(course, state) >= 30, "las fichas vencidas vuelven a la cola"
 // «Adiviná»: tres opciones distintas y parecidas a la frase (la misma frase
 // con un error, casi siempre), nunca otra frase entera si hay trampas.
 (function () {
-  var Frasi = require(path.join(ROOT, "docs/js/frasi.js"));
+  var Frasi = ctx.Frasi;
   var far = 0;
   var lev = function (a, b) {
     var d = [], i, j;
@@ -371,7 +374,7 @@ ok(Drills.dueCount(course, state) >= 30, "las fichas vencidas vuelven a la cola"
 
 // Glosas de opción múltiple: la respuesta entre tres opciones distintas.
 (function () {
-  var Letture = require(path.join(ROOT, "docs/js/letture.js"));
+  var Letture = ctx.Letture;
   var n = 0;
   Letture.EPISODI.forEach(function (ep) {
     var toks = Letture.allTokens(ep);
@@ -386,7 +389,7 @@ ok(Drills.dueCount(course, state) >= 30, "las fichas vencidas vuelven a la cola"
 
 // Voces reales (Lingua Libre): solo la palabra exacta, un archivo por hablante.
 (function () {
-  var Voci = require(path.join(ROOT, "docs/js/voci.js"));
+  var Voci = ctx.Voci;
   ok(JSON.stringify(Voci.parseTitle("File:LL-Q5146 (por)-Ana Souza-avó.wav")) === JSON.stringify({ user: "Ana Souza", word: "avó" }), "voces: título");
   ok(Voci.parseTitle("File:LL-Q150 (fra)-X-avó.wav") === null, "voces: otro idioma");
   var list = Voci.fromApi("casa", { query: { pages: {
@@ -400,9 +403,29 @@ ok(Drills.dueCount(course, state) >= 30, "las fichas vencidas vuelven a la cola"
 
 // La versión que muestra la app (Hoje, Eu) es la del service worker.
 (function () {
-  var sw = fs.readFileSync(path.join(ROOT, "docs/sw.js"), "utf8").match(/VERSION = "rumoc1-(v[\d.]+)"/);
+  var sw = fs.readFileSync(path.join(ROOT, "docs/sw.js"), "utf8").match(/VERSION = "c1-(v[\d.]+)"/);
   var app = fs.readFileSync(path.join(ROOT, "docs/js/app.js"), "utf8").match(/APP_VERSION = "(v[\d.]+)"/);
   ok(sw && app && sw[1] === app[1], "versión de la app (" + (app && app[1]) + ") = versión del service worker (" + (sw && sw[1]) + ")");
+})();
+
+// La interfaz (app.js) y el paquete: el guardado de siempre, los textos del paquete.
+(function () {
+  var L = ctx.LANG;
+  ok(L.storage === "rumoc1" && Engine.STORAGE_KEY === "rumoc1.save.v1", "el guardado sigue en rumoc1.save.v1: " + Engine.STORAGE_KEY);
+  ok(L.code === "pt" && L.tts === "pt-BR" && L.base === "lang/pt/", "LANG: código, voz y carpeta del paquete");
+  var core = fs.readFileSync(path.join(ROOT, "docs/js/app.js"), "utf8");
+  ok(!/["']data\/[\w.]+\.json["']|["']it-IT["']|["']pt-BR["']|[ãõç]/.test(core), "app.js no pide docs/data/, no nombra una voz ni escribe letras del idioma");
+  // Every text app.js reads from the package exists (app.js does not run under node).
+  var need = {};
+  (core.match(/\bUI\.[a-zA-Z]+/g) || []).forEach(function (k) { need["ui." + k.slice(3)] = L.ui[k.slice(3)]; });
+  (core.match(/\bEX\.[a-zA-Z]+/g) || []).forEach(function (k) { need["exam." + k.slice(3)] = L.exam[k.slice(3)]; });
+  (core.match(/\bLG\.[a-zA-Z]+/g) || []).forEach(function (k) { need[k.slice(3)] = k.slice(3) in L ? true : undefined; });
+  var missing = Object.keys(need).filter(function (k) { return need[k] === undefined; });
+  ok(!missing.length, "LANG (lang/pt/lang.js) trae todo lo que usa app.js; faltan: " + missing.join(", "));
+  ok(L.ui.tabs.length === 5 && L.ui.tabs[0][2] === "Hoje" && L.ui.tabs[4][2] === "Eu", "las pestañas: Hoje … Eu");
+  ok(L.spanish.sure.test("¿Qué tal?") && L.spanish.notEs.test("Não sei") && !L.spanish.sure.test("Tudo bem?"), "español o portugués: ñ ¿ ¡ -ción / ã õ ç -ção");
+  ok(L.glue("-se") === "prev" && L.glue("se") === null, "hueco con guion: chama-se se pega a la palabra de antes");
+  ok(L.skipPersons.indexOf(4) >= 0, "vós no se marca en las lecciones");
 })();
 
 console.log("\ncontroles: " + checks + "   errores: " + fails);

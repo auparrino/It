@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Controla las lecturas de docs/js/letture.js contra el curso.
+"""Controla las lecturas (docs/lang/it/letture_data.js y letture_settimana.js) contra el curso.
 
-    python3 tools/check_letture.py            todas
-    python3 tools/check_letture.py w-         solo las que empiezan con «w-»
+    python3 tools/it/check_letture.py            todas
+    python3 tools/it/check_letture.py w-         solo las que empiezan con «w-»
 
 Para cada texto: la gramática que usa (tools/sillabo.py) no pasa de la
 semana en que se abre, y las palabras que no están en el glosario del texto
@@ -24,7 +24,11 @@ import sillabo  # noqa: E402
 
 
 def episodes():
-    js = "console.log(JSON.stringify(require(%r).EPISODI))" % os.path.join(ROOT, "docs/js/letture.js")
+    # Los textos salen de LETTURE_DATA (docs/lang/it/letture_data.js) más «La
+    # settimana» (letture_settimana.js), tal como los junta el núcleo
+    # (docs/js/letture.js): se cargan con tools/lib/pack.js.
+    js = ("var ctx = require(%r)('it', { upTo: 'letture.js', includeStop: true });"
+          "console.log(JSON.stringify(ctx.Letture.EPISODI))") % os.path.join(ROOT, "tools/lib/pack.js")
     return json.loads(subprocess.check_output(["node", "-e", js]))
 
 

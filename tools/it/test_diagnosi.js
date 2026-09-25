@@ -1,15 +1,16 @@
 /* La diagnosi deve riconoscere l'errore che uno studente ispanofono fa
    davvero.  Il test prende frasi corrette, ci inietta errori tipici (come
    farebbe lo studente) e controlla che la diagnosi dica *quale* errore è.
-   Run: node tools/test_diagnosi.js  */
+   Run: node tools/it/test_diagnosi.js  */
 var fs = require("fs");
 var path = require("path");
-var ROOT = path.join(__dirname, "..");
-var Conj = require(path.join(ROOT, "docs/js/conjugator.js"));
-var D = require(path.join(ROOT, "docs/js/diagnosi.js"));
-var Banca = require(path.join(ROOT, "docs/js/banca.js"));
+var pack = require("../lib/pack.js");
+var ctx = pack("it");
+var Conj = ctx.Conj;
+var D = ctx.Diagnosi;
+var Banca = ctx.Banca;
 
-var bankPath = path.join(ROOT, "docs/data/bank.json");
+var bankPath = pack.dataPath("it", "bank.json");
 var bank = fs.existsSync(bankPath) ? JSON.parse(fs.readFileSync(bankPath, "utf8")) : null;
 if (bank) Banca.load(bank);
 

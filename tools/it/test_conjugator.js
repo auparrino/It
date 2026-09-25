@@ -1,6 +1,6 @@
 /* Validates the conjugation engine against forms checked in the two source
- * grammars. Run: node tools/test_conjugator.js  */
-var C = require("../docs/js/conjugator.js");
+ * grammars. Run: node tools/it/test_conjugator.js  */
+var C = require("../lib/pack.js")("it", { upTo: "conjugator.js", includeStop: true }).Conj;
 var fails = 0, checks = 0;
 
 function eq(got, want, what) {

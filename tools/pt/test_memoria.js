@@ -1,12 +1,12 @@
 /* Rumo C1 — el motor de la memoria: FSRS, mantenimiento, noche y mañana,
    hipercorrección, registro de repasos, velocidad estimada, calibración,
    reglas como fichas, cola de repaso, saneamiento del guardado y hábito.
-   Corre: node tools/test_memoria.js  */
-var path = require("path");
-var ROOT = path.join(__dirname, "..");
-var Engine = require(path.join(ROOT, "docs/js/engine.js"));
-var Frasi = require(path.join(ROOT, "docs/js/frasi.js"));
-var Drills = require(path.join(ROOT, "docs/js/drills.js"));
+   Corre: node tools/pt/test_memoria.js  */
+var pack = require("../lib/pack.js");
+var ctx = pack("pt");
+var Engine = ctx.Engine;
+var Frasi = ctx.Frasi;
+var Drills = ctx.Drills;
 var fails = 0, checks = 0;
 function ok(cond, what) { checks++; if (!cond) { fails++; console.log("FAIL " + what); } }
 function near(a, b, tol) { return Math.abs(a - b) <= tol; }
@@ -163,7 +163,7 @@ ok(!Engine.noteRecord(s8, "sessione", 80) && Engine.noteRecord(s8, "sessione", 9
 /* ------------------------------------------------------ guardado propio */
 // The save lives under «rumoc1.»: the Italian app shares the origin.
 var store = {};
-global.localStorage = { getItem: function (k) { return store[k] == null ? null : store[k]; },
+ctx.localStorage = { getItem: function (k) { return store[k] == null ? null : store[k]; },
                         setItem: function (k, v) { store[k] = String(v); }, removeItem: function (k) { delete store[k]; } };
 var sv = Engine.blankSave(); sv.xp = 123;
 ok(Engine.save(sv) && Object.keys(store).join() === "rumoc1.save.v1", "se guarda con la clave propia: " + Object.keys(store).join());
@@ -172,7 +172,7 @@ ok(Engine.load().xp === 123, "la partida de La Via C1 no se lee ni se pisa");
 store["rumoc1.save.v1"] = "{roto";
 var dam = Engine.load();
 ok(dam.xp === 0 && store["rumoc1.save.v1.damaged"] === "{roto", "un guardado roto se aparta y se empieza de cero");
-delete global.localStorage;
+ctx.localStorage = null;
 
 console.log("controles: " + checks + "   errores: " + fails);
 process.exit(fails ? 1 : 0);

@@ -1,17 +1,14 @@
 /* Controlli sul banco di frasi e sulle meccaniche d'aggancio
    (obiettivo del giorno, scudi della serie, forziere, pausa, lampo).
-   Run: node tools/test_frasi.js  */
-var fs = require("fs");
-var path = require("path");
-
-var ROOT = path.join(__dirname, "..");
-var Frasi = require(path.join(ROOT, "docs/js/frasi.js"));
-var Engine = require(path.join(ROOT, "docs/js/engine.js"));
-var Drills = require(path.join(ROOT, "docs/js/drills.js"));
-var Lab = require(path.join(ROOT, "docs/js/lab.js"));
-var Letture = require(path.join(ROOT, "docs/js/letture.js"));
-var course = JSON.parse(
-  fs.readFileSync(path.join(ROOT, "docs/data/course.json"), "utf8"));
+   Run: node tools/it/test_frasi.js  */
+var pack = require("../lib/pack.js");
+var ctx = pack("it");
+var Frasi = ctx.Frasi;
+var Engine = ctx.Engine;
+var Drills = ctx.Drills;
+var Lab = ctx.Lab;
+var Letture = ctx.Letture;
+var course = pack.data("it", "course.json");
 
 var fails = 0, checks = 0;
 function ok(cond, what) {
@@ -288,7 +285,7 @@ ok(Engine.rankFor(1) === "Turista" && Engine.rankFor(60) === "Madrelingua", "gra
 
 // A save from the old version loads with the new fields filled in.
 var old = { xp: 10, cards: {}, badges: [], totals: { attempts: 1, right: 1, close: 0, wrong: 0 } };
-global.localStorage = { getItem: function () { return JSON.stringify(old); } };
+ctx.localStorage = { getItem: function () { return JSON.stringify(old); } };
 var loaded = Engine.load();
 ok(loaded.goal === 200 && loaded.goalV === 2 && loaded.days && loaded.shields === 1,
    "salvataggio vecchio aggiornato (obiettivo 50 → 200)");
@@ -296,7 +293,7 @@ old = { xp: 10, cards: {}, badges: [], goal: 20, totals: { attempts: 0, right: 0
 ok(Engine.load().goal === 100, "obiettivo rilassato: 20 → 100");
 old = { xp: 10, cards: {}, badges: [], goal: 350, goalV: 2, totals: { attempts: 0, right: 0, close: 0, wrong: 0 } };
 ok(Engine.load().goal === 350, "un obiettivo già nuovo non si tocca");
-delete global.localStorage;
+ctx.localStorage = null;
 
 // Damaged saves are repaired, not trusted.
 var weird = Engine.sanitize({ xp: "abc", cards: null, days: "x", badges: {}, totals: 5, weekStats: [],

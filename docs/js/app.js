@@ -1,10 +1,36 @@
 /*
- * La Via C1 — interfaccia del gioco.
- * Schermate: oggi, frasi, percorso, ripasso, io (profilo), briefing, teoria,
- * sfide, gioco, lampo, risultato.
+ * La interfaz del juego, una para todos los idiomas.  Pantallas: hoy
+ * («oggi»), entrenar («frasi»), leer («leggi»), el camino («percorso»),
+ * el perfil («io»), la semana (briefing), la teoría, la lección jugada, la
+ * ronda, el relámpago («lampo»), el resultado, la escritura, el role-play,
+ * el dictogloss y el examen C1.
+ *
+ * El núcleo no nombra ningún idioma: los textos de la interfaz, la voz, el
+ * prefijo de guardado, las listas de la lengua y la estética salen del
+ * paquete del idioma (window.LANG, docs/lang/<código>/lang.js).  Los nombres
+ * internos de pantallas y rondas («oggi», «gioco», «lampo», «pausa»…) son
+ * los de siempre: el esquema de datos y la API entre módulos no cambian.
  */
 (function () {
   "use strict";
+
+  var LG = window.LANG || {}, UI = LG.ui || {};
+  // Storage keys of the language (LANG.storage + "."): the progress of
+  // each language lives under its own prefix.
+  var SKEY = function (k) { return (LG.storage || "c1") + "." + k; };
+  // A word of the language: letters, the apostrophe, and the hyphen where
+  // the language writes it inside words (chama-se).
+  var WCH = "a-zà-ÿ'" + (LG.hyphenWords ? "-" : "");
+  var DATA = function (f) { return (LG.base || "") + "data/" + f; };
+  // «Settimana XVII» or «Semana 17».
+  function weekNum(n) { return UI.romanWeeks ? romano(n) : String(n); }
+  // The street sign of the logo and the titles (a Roman targa, a sign of Rio).
+  var PL = UI.plate || { cls: "targa", sup: "t-sup", main: "t-via" };
+  function plate(sup, main, big, tag) {
+    tag = tag || "h1";
+    return "<" + tag + ' class="' + PL.cls + (big ? " big" : "") + '"><span class="' + PL.sup + '">' + sup +
+      '</span><span class="' + PL.main + '">' + main + "</span></" + tag + ">";
+  }
 
   var course = null;
   var state = Engine.load();
@@ -19,7 +45,8 @@
     var dark = themeNow() === "dark";
     document.querySelectorAll('meta[name="theme-color"]').forEach(function (m) {
       if (!m.dataset.auto) m.dataset.auto = m.content;
-      m.content = state.theme ? (dark ? "#12356a" : "#7dbdf0") : m.dataset.auto;
+      var tc = LG.themeColor || {};
+      m.content = state.theme ? (dark ? tc.dark : tc.light) || m.dataset.auto : m.dataset.auto;
     });
   }
   applyTheme();
@@ -51,11 +78,11 @@
     if (!Engine.save(state) && !saveWarned) {
       saveWarned = true;
       toast("⚠️ No puedo guardar tu progreso: el teléfono no tiene espacio o bloquea el almacenamiento. " +
-            "Liberá espacio o guardá una copia en Io.", 6000);
+            "Liberá espacio o guardá una copia en " + UI.me + ".", 6000);
     }
   }
 
-  /* --------------------------------------------------- suoni e vibrazione */
+  /* --------------------------------------------------- sonidos y vibración */
 
   var audioCtx = null;
   function tone(freqs, dur, type) {
@@ -75,7 +102,7 @@
         o.connect(g); g.connect(audioCtx.destination);
         o.start(t0 + i * dur); o.stop(t0 + (i + 1) * dur + 0.02);
       });
-    } catch (e) { /* niente audio */ }
+    } catch (e) { /* sin audio */ }
   }
 
   function buzz(pattern) {
@@ -90,23 +117,44 @@
     tap: function () { buzz(8); }
   };
 
+  /* Confetti: the language's emoji (LANG.confetti.bits) and, when the theme
+     gives colors (LANG.confetti.colors, CSS tokens), paper bits in the
+     colors of the palette with an emoji now and then. */
   function confetti() {
-    var bits = ["🇮🇹", "🍕", "✨", "🎉", "🍝", "⭐", "☕"];
+    var cf = LG.confetti || { bits: ["🎉", "✨", "⭐"], n: 16, ms: 1900 };
+    var bits = cf.bits, col = null;
+    if (cf.colors) {
+      var cs = getComputedStyle(document.documentElement);
+      col = cf.colors.map(function (v) {
+        return (cs.getPropertyValue(v) || "").trim() || cf.fallback || "#888888";
+      }).concat(["#ffffff"]);
+    }
     var box = document.createElement("div");
     box.className = "confetti";
-    for (var i = 0; i < 16; i++) {
+    for (var i = 0; i < (cf.n || 16); i++) {
       var s = document.createElement("span");
-      s.textContent = bits[i % bits.length];
+      if (!col) {
+        s.textContent = bits[i % bits.length];
+        s.style.fontSize = 14 + Math.random() * 18 + "px";
+      } else if (i % 6 === 5) {
+        s.textContent = bits[(i / 6 | 0) % bits.length];
+        s.style.fontSize = 16 + Math.random() * 14 + "px";
+      } else {
+        s.className = "bit" + (i % 3 === 0 ? " round" : "");
+        s.style.background = col[i % col.length];
+        s.style.width = 6 + Math.random() * 6 + "px";
+        s.style.height = 10 + Math.random() * 8 + "px";
+      }
       s.style.left = Math.random() * 100 + "%";
       s.style.animationDelay = Math.random() * 0.5 + "s";
-      s.style.fontSize = 14 + Math.random() * 18 + "px";
+      if (col) s.style.animationDuration = 1.8 + Math.random() * 0.9 + "s";
       box.appendChild(s);
     }
     document.body.appendChild(box);
-    setTimeout(function () { box.remove(); }, 1900);
+    setTimeout(function () { box.remove(); }, cf.ms || 1900);
   }
 
-  /* -------------------------------------------------------- xp e obiettivo */
+  /* -------------------------------------------------------- xp y meta */
 
   // «+10» rises from the answer towards the daily ring.
   function xpFly(n) {
@@ -142,23 +190,23 @@
       setTimeout(function () {
         fx.goal();
         confetti();
-        toast("🎯 ¡Meta del día cumplida! Abrí tu cofre en Oggi.", 3200);
+        toast("🎯 ¡Meta del día cumplida! Abrí tu cofre en " + UI.today + ".", 3200);
       }, 350);
     }
   }
 
-  /* ------------------------------------------------------------- pronuncia */
+  /* ------------------------------------------------------------- pronunciación */
 
   var voice = null, voices = [];
   // force: the learner tapped 🔊 explicitly, so play even in office mode
-  // (they may have earphones on).  opts: { pitch, vi (which Italian voice),
+  // (they may have earphones on).  opts: { pitch, vi (which voice of the language),
   // onboundary, onend, onstart, keep (do not cancel what is playing) }.
   function speak(text, force, rate, opts) {
     if (!window.speechSynthesis) return null;
     if (state.silent && !force) return null;
     opts = opts || {};
     var u = new SpeechSynthesisUtterance(String(text).replace(/_+/g, " "));
-    u.lang = "it-IT";
+    u.lang = LG.tts;
     var v = opts.vi != null && voices.length ? voices[opts.vi % voices.length] : voice;
     if (v) u.voice = v;
     u.rate = rate || 0.95;
@@ -192,9 +240,10 @@
       } catch (e) { tts(); }
       return null;
     }
-    // A pair of Suoni: a real speaker of Lingua Libre when there is one
-    // (not for open/closed vowels: the file name cannot tell pèsca from pésca).
-    if (window.Voci && it.type === "coppia" && it.cat !== "vocali" && Voci.usable(it.say)) {
+    // A pair of Suoni / Sons: a real speaker of Lingua Libre when there is
+    // one (Voci.usable decides; LANG.realVoiceSkip: the categories whose file
+    // names cannot tell the pair apart).
+    if (window.Voci && it.type === "coppia" && !(LG.realVoiceSkip || {})[it.cat] && Voci.usable(it.say)) {
       if (state.silent && !force) return null;
       if (window.speechSynthesis) speechSynthesis.cancel();
       Voci.play(it.say, { rate: rate && rate < 0.9 ? 0.75 : 1, onplay: function (who) {
@@ -204,69 +253,77 @@
     }
     return tts();
   }
-  /* What is read aloud after an answer.  Only Italian: a Spanish gloss or
-     option (¡Ojalá!, botas de montaña) is never read with the Italian voice.
-     Spanish: ñ, ¿, ¡, a Spanish accent (á í ó ú), or more Spanish-only
-     words (function words, or glosses of the glossary that are not Italian
-     forms) than Italian-only ones; words of both (un, casa, libro) do not
-     count, and an unknown word with x, y, j or a final s, d is Spanish. */
-  var ES_WORDS = { el: 1, los: 1, las: 1, y: 1, es: 1, que: 1, por: 1, para: 1, muy: 1, pero: 1, yo: 1,
-                   hay: 1, cuando: 1, como: 1, donde: 1, de: 1, en: 1, usted: 1, ustedes: 1, nada: 1,
-                   algo: 1, bien: 1, tambien: 1, todo: 1, ella: 1, ellos: 1, nosotros: 1, este: 1, esta: 1, ni: 1 };
-  var IT_WORDS = {};
-  ("io lui lei noi voi loro li gli ne ci vi ce ve il i di da in e ed ma che chi non è sono sei ho hai ha " +
-   "allo alla ai agli alle della dei degli delle nel nella dal dalla sul sulla come perché anche più già " +
-   "molto bene fa sta qui là sì mai sempre ancora tutto tutti niente").split(" ").forEach(function (w) { IT_WORDS[w] = 1; });
-  var BOTH = {};         // la, me, con, casa: say nothing about the language
-  ("la lo le los un una uno a me te se si con su mi tu no o al del per va poco cosa solo " +
-   "casa mano foto madre gente radio moda amore ora pasta idea").split(" ").forEach(function (w) { BOTH[w] = 1; });
+  /* What is read aloud after an answer.  Only the language studied: a
+     Spanish gloss or option (¡Ojalá!, botas de montaña) is never read with
+     the voice of the language.  Spanish: what LANG.spanish.sure finds (ñ,
+     ¿, ¡…), or more Spanish-only words (function words, or glosses of the
+     glossary that are not forms of the language) than words only of the
+     language; words of both (LANG.spanish.both) do not count.
+     LANG.spanish.notEs: letters only the language has.  An unknown word
+     spelled like LANG.spanish.unknownEs is Spanish. */
+  var SP = LG.spanish || {};
+  var wordSet = function (str) { var o = {}; String(str || "").split(" ").forEach(function (w) { if (w) o[w] = 1; }); return o; };
+  var ES_WORDS = wordSet(SP.es), TARGET_WORDS = wordSet(SP.target);
+  var BOTH = wordSet(SP.both);         // say nothing about the language
   var esGloss = null;
   function spanishText(text) {
     text = String(text || "");
-    if (/[ñ¿¡áíóú]/i.test(text)) return true;
+    if (SP.sure && SP.sure.test(text)) return true;
+    if (SP.notEs && SP.notEs.test(text)) return false;
     if (!esGloss && glossario) {
       esGloss = {};
       Object.keys(glossario).forEach(function (k) {
         String(glossario[k][1] || "").toLowerCase().split(/[^a-zñáéíóúü]+/).forEach(function (w) { if (w) esGloss[w] = 1; });
       });
     }
-    var es = 0, itn = 0;
-    (text.toLowerCase().match(/[a-zàèéìòù]+/g) || []).forEach(function (w) {
+    var es = 0, tg = 0;
+    (text.toLowerCase().match(SP.word || /[a-zà-ÿ]+/g) || []).forEach(function (w) {
       if (BOTH[w]) return;
-      var isIt = IT_WORDS[w] || (glossario && glossario[w]), isEs = ES_WORDS[w] || (esGloss && esGloss[w]);
-      if (ES_WORDS[w] || (isEs && !isIt)) es++;
-      else if (isIt && !isEs) itn++;
-      else if (!isIt && !isEs && /[xyj]|[sd]$/.test(w)) es++;      // reflexiva, sujeto, ustedes: not Italian spelling
+      var isTg = TARGET_WORDS[w] || (glossario && glossario[w]), isEs = ES_WORDS[w] || (esGloss && esGloss[w]);
+      if (ES_WORDS[w] || (isEs && !isTg)) es++;
+      else if (isTg && !isEs) tg++;
+      else if (!isTg && !isEs && SP.unknownEs && SP.unknownEs.test(w)) es++;      // spelled like Spanish
     });
-    return es > itn;
+    return es > tg;
   }
-  // «¿Qué significa?», «¿Qué es «un mattone»?»: the options are Spanish.
+  // «¿Qué significa?», «¿Qué es «…»?»: the options are Spanish (unless it
+  // asks for the language: LANG.spanish.askTarget).
   function asksMeaning(it) {
     return /¿\s*qu[ée] (significa|es|son|expresa|quiere decir)\b/i.test(it.prompt || "") &&
-      !/(en|al) italiano/i.test(it.prompt || "");
+      !(SP.askTarget && SP.askTarget.test(it.prompt || ""));
   }
   /* A gap exercise, answered: the whole sentence with the gaps filled
-     («Gli piace studiare», not just «piace»); in «A → ___» only what is
+     («Eu gosto de estudar», «Gli piace studiare», not just the gap); in «A → ___» only what is
      after the arrow.  The Spanish hints in brackets are left out. */
   function filledStem(it) {
     var stem = String(it.stem || "");
     if (!/_{3,}/.test(stem)) return null;
     if (stem.indexOf("→") >= 0) stem = stem.slice(stem.lastIndexOf("→") + 1);
     var answers = String(it.answer || "").split(/\s*\|\s*/).map(function (a) {
-      return /^\(.*\)$/.test(a.trim()) ? "" : a.trim();          // «(sin partitivo)»: nothing goes there
+      return /^\(.*\)$/.test(a.trim()) ? "" : a.trim();          // «(sin artículo)»: nothing goes there
     });
     var k = 0;
-    // an elided answer (l’, dell’) joins the next word: l’amica
+    // an answer that glues to a neighbour (LANG.glue): an elided one joins
+    // the next word (l’amica), a hyphen one the word before it (chama-se)
     var out = stem.replace(/\([^)]*\)/g, " ").replace(/_{3,}/g, function () {
       var a = answers[k++] || "";
-      return /[’']$/.test(a) && !/\bpo[’']$/.test(a) ? a + "\u0000" : a;     // un po' di: truncated, not elided
+      var gl = LG.glue ? LG.glue(a) : null;
+      return gl === "next" ? a + "\u0000" : gl === "prev" ? "\u0001" + a : a;
     });
-    return out.replace(/\u0000\s*/g, "").replace(/\s+([,.;:!?])/g, "$1").replace(/\s+/g, " ").trim();
+    return out.replace(/\u0000\s*/g, "").replace(/\s*\u0001/g, "").replace(/\s+([,.;:!?])/g, "$1").replace(/\s+/g, " ").trim();
   }
+  /* The voices of the language (LANG.voiceRe); with a preferred variant
+     (LANG.voicePrefer: one variant before the others) those first, and the local ones
+     before the network ones. */
   function pickVoice() {
     if (!window.speechSynthesis) return;
     var vs = window.speechSynthesis.getVoices();
-    voices = vs.filter(function (v) { return /^it/i.test(v.lang); });
+    var re = LG.voiceRe || new RegExp("^" + String(LG.tts || "").slice(0, 2), "i");
+    voices = vs.filter(function (v) { return re.test(v.lang); });
+    if (LG.voicePrefer) {
+      var pref = function (v) { return LG.voicePrefer.test(v.lang) ? 0 : 1; };
+      voices.sort(function (a, b) { return pref(a) - pref(b) || (b.localService ? 1 : 0) - (a.localService ? 1 : 0); });
+    }
     voice = voices[0] || null;
   }
   if (window.speechSynthesis) {
@@ -287,9 +344,9 @@
     var pct = Math.min(100, Math.round(todayXp / goal * 100));
     $("#hdr").innerHTML =
       '<div class="bar">' +
-        // El logo es una placa de calle romana: «La Via» es el camino.
-        '<button class="brand targa" id="home" title="' + esc(Engine.rankFor(lv.level)) +
-          '"><span class="t-sup">livello ' + lv.level + '</span><span class="t-via">Via C1</span></button>' +
+        // The logo is a street sign of the language (LANG.ui.plate).
+        '<button class="brand ' + PL.cls + '" id="home" title="' + esc(Engine.rankFor(lv.level)) +
+          '"><span class="' + PL.sup + '">' + UI.level + " " + lv.level + '</span><span class="' + PL.main + '">' + UI.logo + "</span></button>" +
         '<div class="stats">' +
           '<div class="stat' + (state.streak > 0 ? " hot" : "") + '"><b>' + state.streak + "<i>🔥</i></b><span>racha</span></div>" +
           '<div class="stat"><b>' + (state.shields || 0) + '🛡️</b><span>escudos</span></div>' +
@@ -324,10 +381,11 @@
     };
   }
 
-  /* Un aliento en italiano cuando falta poco: se muestra junto al contador. */
+  /* Un aliento en la lengua cuando falta poco: se muestra junto al contador. */
   function dai(i, n) {
-    var t = n < 3 ? "" : i === n - 1 ? "Ultima!" : i >= Math.ceil(n * 0.75) ? "Ci sei quasi."
-          : n >= 6 && i === Math.floor(n / 2) ? "A metà." : "";
+    var ch = UI.cheer || {};
+    var t = n < 3 ? "" : i === n - 1 ? ch.last : i >= Math.ceil(n * 0.75) ? ch.almost
+          : n >= 6 && i === Math.floor(n / 2) ? ch.half : "";
     return t ? '<span class="dai">' + t + "</span>" : "";
   }
 
@@ -343,7 +401,7 @@
     window.scrollTo(0, 0);
   }
 
-  /* ------------------------------------------------------------------ oggi */
+  /* ------------------------------------------------------------------ hoje */
 
   function renderOggi() {
     var goal = Engine.goalFor(state);
@@ -356,26 +414,27 @@
     var strands = Engine.strandsLast(state, 7);
     var dailyDone = state.dailyDone === Engine.dayKey();
     var w = course.weeks[Math.min(state.unlocked, 52) - 1];
-    var f = Frasi.ofTheDay();
+    var f = Frasi.ofTheDay(new Date(), Math.min(state.unlocked || 1, 52));
+    var fText = f[LG.code] || f.it;
     var known = Frasi.ALL.filter(function (x) { return state.cards[x.id]; }).length;
     var hour = new Date().getHours();
-    var hello = hour < 13 ? "Buongiorno" : hour < 19 ? "Buon pomeriggio" : "Buonasera";
+    var hello = UI.hello(hour);
 
     var plan = weekPlan(w), doneN = plan.filter(function (x) { return x.done; }).length;
     var nm = nextMission(w);
-    // Words: the course brings 9-15 a week; the bank (Parole) adds 12 a session.
+    // Words: the course brings 9-15 a week; the bank (Parole / Palavras) adds 12 a session.
     var nWords = Object.keys(state.cards).filter(function (id) {
       return id.indexOf("v:") === 0 || id.indexOf("b:voc:") === 0;
     }).length;
     var wordGoal = state.unlocked <= 13 ? 800 : state.unlocked <= 26 ? 1800 : state.unlocked <= 39 ? 2800 : 3800;
-    var html = '<h1>' + hello + '! 👋</h1>' +
+    var html = '<h1 class="hello">' + hello + '</h1>' +
       '<p class="lead">' + (weekend
         ? "Fin de semana: meta a la mitad (" + goal + " xp). Algo liviano alcanza: una lectura, una pausa." +
           (state.streak > 1 ? " Llevás <b>" + dias(state.streak) + "</b>." : "")
         : state.streak > 1
         ? "Llevás <b>" + dias(state.streak) + "</b> seguidos" + (state.streak >= 7 ? " y tu xp vale ×1,2" : "") + ". No cortes la racha."
-        : !lessonRead(1) ? "Empezás de cero. Tu camino es el percorso: un paso por vez."
-        : "Tu próximo paso está marcado. Si tenés tres minutos, una pausa caffè.") + "</p>";
+        : !lessonRead(1) ? "Empezás de cero. Tu camino es " + UI.pathEl + ": un paso por vez."
+        : "Tu próximo paso está marcado. Si tenés tres minutos, " + UI.pausaUna + ".") + "</p>";
 
     var pend = loadPending();
     if (pend) {
@@ -387,9 +446,9 @@
 
     html += oggiHabitCards();
 
-    // Il percorso davanti a tutto: la settimana in corso e la prossima missione.
+    // El camino antes que nada: la semana en curso y la próxima misión.
     html += '<div class="card weekcard first hero">' +
-      '<span class="muted">🗺️ Il percorso · semana ' + w.week + " · " + esc(w.level) + " · " + doneN + " / " + plan.length + " misiones</span>" +
+      '<span class="muted">🗺️ ' + UI.path + " · semana " + w.week + " · " + esc(w.level) + " · " + doneN + " / " + plan.length + " misiones</span>" +
       "<b>" + esc(w.title) + "</b>" +
       '<span class="prog"><i style="width:' + Math.round(doneN / Math.max(1, plan.length) * 100) + '%"></i></span>' +
       (nm
@@ -398,10 +457,10 @@
           '<button class="tab" data-week="' + w.week + '">Ver la semana</button></span>'
         : '<span class="muted">Semana completa. ' + (state.unlocked > w.week ? "Seguí con la siguiente." : "Repasá o entrená para abrir la siguiente.") + "</span>" +
           '<span class="row" style="margin-top:10px"><button class="btn" data-week="' + w.week + '">Ver la semana</button>' +
-          '<button class="tab" id="topercorso">Il percorso</button></span>') +
+          '<button class="tab" id="topercorso">' + UI.path + "</button></span>") +
       "</div>";
 
-    // Obiettivo del giorno + forziere
+    // Meta del día + cofre
     html += '<div class="card goal">' +
       '<div class="goalrow"><div><b>Meta de hoy</b>' +
         '<span class="muted"> ' + (reached ? "✓ " + todayXp + " xp hoy" : todayXp + " / " + goal + " xp") +
@@ -415,32 +474,32 @@
         Math.min(100, Math.round(todayXp / goal * 100)) + '%"></i></div>' +
       "</div>";
 
-    // Azioni rapide: la pausa (mescola la settimana in corso), il ripasso, il lampo.
+    // Atajos: la pausa (mezcla la semana en curso), el repaso, el lampo.
     html += '<div class="big">' +
       '<button class="bigbtn pausa" id="pausa"><span class="e">☕</span>' +
-        "<b>Pausa caffè</b><small>3 minutos con lo de tu semana</small></button>" +
+        UI.pausaBtn + "</button>" +
       '<button class="bigbtn giorno" id="giorno"' + (dailyDone ? " disabled" : "") + '>' +
-        '<span class="e">🎯</span><b>Sfida del giorno</b><small>' +
+        '<span class="e">🎯</span><b>' + UI.daily + "</b><small>" +
         (dailyDone ? "✓ hecha · mañana hay otra" : "6 preguntas · doble xp") + "</small></button>" +
       '<button class="bigbtn ripasso" id="rev"' + (due ? "" : " disabled") + '>' +
-        '<span class="e">🔁</span><b>Ripasso</b><small>' +
+        '<span class="e">🔁</span><b>' + UI.review + "</b><small>" +
         (due ? "hoy: " + dueToday + (due > 20 ? " (quedan " + due + ")" : " para repasar") : "nada pendiente") + "</small></button>" +
-      (state.unlocked >= 2 && Banca.loaded() ? '<button class="bigbtn parole" data-bank="b-voc"><span class="e">📚</span><b>Parole</b><small>' +
+      (state.unlocked >= 2 && Banca.loaded() ? '<button class="bigbtn parole" data-bank="b-voc"><span class="e">📚</span><b>' + UI.words + "</b><small>" +
         nWords.toLocaleString("es-AR") + " / " + wordGoal.toLocaleString("es-AR") + " palabras" +
         (window.Freq && Freq.loaded() ? " · " + Freq.coverage(knownWords()).fundamental[0] + " de las 2.000 frecuentes" : "") + "</small></button>" : "") +
       (matureWords().length >= 30 ? '<button class="bigbtn lampo" id="lampoparole"><span class="e">🧠</span>' +
-        "<b>Parola o no?</b><small>reconocer en un segundo · récord: " + ((state.best || {}).lampoParole || 0) + "</small></button>" : "") +
+        "<b>" + UI.wordOrNot + "</b><small>reconocer en un segundo · récord: " + ((state.best || {}).lampoParole || 0) + "</small></button>" : "") +
       (known >= 12 ? '<button class="bigbtn lampo" id="lampo"><span class="e">⚡</span>' +
-        "<b>Lampo 60″</b><small>récord: " + ((state.best || {}).lampo || 0) + "</small></button>" : "") +
+        "<b>" + UI.lampo + " 60″</b><small>récord: " + ((state.best || {}).lampo || 0) + "</small></button>" : "") +
       "</div>" +
-      (known < 12 ? '<p class="muted" style="margin:-6px 0 12px">⚡ Lampo 60″ se abre con 12 frases vistas (llevás ' + known + ").</p>" : "");
+      (known < 12 ? '<p class="muted" style="margin:-6px 0 12px">⚡ ' + UI.lampoEl + " 60″ se abre con 12 frases vistas (llevás " + known + ").</p>" : "");
 
-    // Le quattro corde della settimana (Nation): dove manca, un suggerimento.
+    // Las cuatro cuerdas de la semana (Nation): dónde falta, un consejo.
     var tot = strands.input + strands.output + strands.forma + strands.fluidez;
     if (tot > 0) {
       var NAMES = { input: "Input", output: "Output", forma: "Forma", fluidez: "Fluidez" };
       var TIP = { input: "leé un episodio o escuchá una escena", output: "escribí frases de memoria o traducí",
-                  forma: "una ronda de la semana", fluidez: "un Lampo o repasá una escena" };
+                  forma: "una ronda de la semana", fluidez: "un " + UI.lampo + " o repasá una escena" };
       var low = Engine.STRANDS.slice().sort(function (a, b) { return strands[a] - strands[b]; })[0];
       html += '<div class="card"><b>🎻 Tus cuatro cuerdas · últimos 7 días</b>' +
         '<div class="strands">' + Engine.STRANDS.map(function (k) {
@@ -450,7 +509,7 @@
         ". Te falta <b>" + NAMES[low].toLowerCase() + "</b>: " + TIP[low] + ".</p></div>";
     }
 
-    // La clinica: gli errori che si ripetono
+    // La clínica: los errores que se repiten
     var weakO = Banca.loaded() ? Banca.weakest(state, 2) : [];
     if (weakO.length) {
       html += '<button class="card weekcard clin" data-bank="clinica">' +
@@ -459,24 +518,24 @@
         '<span class="muted">12 ejercicios armados con lo que más te cuesta.</span></button>';
     }
 
-    // Frase del giorno
-    html += '<div class="card fdg"><span class="muted">Frase del giorno</span>' +
-      '<div class="fit">' + esc(f.it) + "</div>" +
+    // Frase del giorno / do dia
+    html += '<div class="card fdg"><span class="muted">' + UI.fraseDay + "</span>" +
+      '<div class="fit">' + esc(fText) + "</div>" +
       '<div class="fes">' + esc(f.es) + "</div>" +
       (f.note ? '<div class="note">' + mk(f.note) + "</div>" : "") +
       '<button class="tab" id="sayfdg">🔊 escuchar</button></div>';
 
-    // Calendario ultimi 28 giorni
+    // Calendario de los últimos 28 días
     var days = Engine.lastDays(state, 28);
     html += '<div class="card"><h3 style="margin-top:0">Tus últimas 4 semanas</h3>' +
       '<div class="heat">' + days.map(function (d) {
         var lvl = d.xp <= 0 ? 0 : d.xp < goal / 2 ? 1 : d.xp < goal ? 2 : 3;
         return '<i class="h' + lvl + '" title="' + d.key + ": " + d.xp + ' xp"></i>';
       }).join("") + "</div>" +
-      '<p class="muted" style="margin:8px 0 0">Cada cuadrado es un día. Verde fuerte = meta cumplida. ' +
+      '<p class="muted" style="margin:8px 0 0">Cada cuadrado es un día. ' + UI.calendarGreen + " = meta cumplida. " +
       "Cada 7 días de racha ganás un 🛡️ escudo que la salva si un día no podés.</p></div>";
 
-    // Installazione
+    // Instalación
     if (!isStandalone()) {
       html += '<div class="card install"><b>📲 Instalala en tu celu</b>' +
         '<p class="muted">Funciona sin internet y tu progreso queda guardado en el teléfono.</p>' +
@@ -489,14 +548,13 @@
     return html + versionLine();
   }
 
-  /* ------------------------------------------------ abitudine e mete */
+  /* ------------------------------------------------ hábito y metas */
 
-  var WHY = [["viaje", "🧳 Viajar"], ["familia", "👵 Familia, nonni"], ["ciudadania", "🇮🇹 Ciudadanía"], ["trabajo", "💼 Trabajo"],
-             ["musica", "🎶 Música, ópera, cine"], ["pareja", "❤️ Pareja, amigos"], ["estudio", "🎓 Estudiar allá"]];
+  var WHY = LG.why || [];
   var CHANGES = [["escucha", "más escucha"], ["escritura", "más escritura"], ["repaso", "más repaso"], ["cortas", "sesiones más cortas"], ["frases", "más frases"]];
   var WHENS = [["manana", "a la mañana"], ["mediodia", "al mediodía"], ["noche", "a la noche"]];
 
-  /* The cards of habit and motivation on Oggi: the return after a pause
+  /* The cards of habit and motivation on Oggi / Hoje: the return after a pause
      (no debt, a five-minute restart: Lally 2010; Mazza 2016), the plan
      (implementation intention, Gollwitzer & Sheeran 2006, d = 0,65), the
      ideal self (Dörnyei), the weekly sub-goal (Bandura & Schunk 1981) and
@@ -516,16 +574,16 @@
           '<button class="tab" data-why="olvide">me olvidé</button></span>' : "") + "</div>";
     }
     if (!state.ideal && state.totals.attempts >= 10) {
-      html += '<div class="card weekcard"><span class="muted">🎯 ¿Para qué querés italiano?</span>' +
+      html += '<div class="card weekcard"><span class="muted">🎯 ¿Para qué querés ' + UI.langEs + "?</span>" +
         '<span class="chips">' + WHY.map(function (w) { return '<button class="tab" data-why2="' + w[0] + '">' + w[1] + "</button>"; }).join("") + "</span>" +
-        '<span class="muted small">Tener la meta a la vista sostiene el esfuerzo (Dörnyei: el yo ideal). Después la escribís con tus palabras en Io.</span></div>';
+        '<span class="muted small">Tener la meta a la vista sostiene el esfuerzo (Dörnyei: el yo ideal). Después la escribís con tus palabras en ' + UI.me + ".</span></div>";
     }
     if (state.unlocked >= 2) {
       var left = Math.max(0, sg.wordsPerWeek - sg.wordsThisWeek);
       html += '<div class="card goalweek"><b>🪜 Esta semana</b> <span class="muted">· hacia el ' + esc(sg.level) + " en la semana " + sg.boss + "</span>" +
         '<div class="goalbar" style="margin:8px 0 4px"><i style="width:' + Math.min(100, Math.round(sg.wordsThisWeek / Math.max(1, sg.wordsPerWeek) * 100)) + '%"></i></div>' +
         '<p class="muted" style="margin:0">' + sg.wordsThisWeek + " / " + sg.wordsPerWeek + " palabras nuevas" +
-          (left ? " · faltan " + left : " ✓") + " · " + sg.nWords.toLocaleString("es-AR") + " / " + sg.wordGoal.toLocaleString("es-AR") + " para el jefe" +
+          (left ? " · faltan " + left : " ✓") + " · " + sg.nWords.toLocaleString("es-AR") + " / " + sg.wordGoal.toLocaleString("es-AR") + " para el " + UI.boss +
           (sg.weeksLeft > 1 ? " en " + sg.weeksLeft + " semanas" : "") + ". La cuota se recalcula sola si te atrasás.</p></div>";
     }
     // weekly close: on the first visit of a new week, about the week before
@@ -565,25 +623,27 @@
     var c = document.createElement("canvas"), W = 720, H = 400;
     c.width = W; c.height = H;
     var g = c.getContext("2d");
-    var grad = g.createLinearGradient(0, 0, 0, H); grad.addColorStop(0, "#7dbdf0"); grad.addColorStop(1, "#fbf8f1");
-    g.fillStyle = grad; g.fillRect(0, 0, W, H);
-    g.fillStyle = "#f3ebdb"; g.fillRect(40, 40, W - 80, H - 80);
-    g.strokeStyle = "#1f2630"; g.lineWidth = 6; g.strokeRect(40, 40, W - 80, H - 80);
-    g.fillStyle = "#1f2630"; g.textAlign = "center";
-    g.font = "bold 22px Georgia, serif"; g.fillText("LA VIA C1 · SETTIMANA " + romano(Math.min(state.unlocked, 52)), W / 2, 90);
-    g.font = "bold 64px Georgia, serif"; g.fillText(Engine.rankFor(Engine.levelFor(state.xp).level).toUpperCase(), W / 2, 170);
+    // the frame of the language (LANG.card: the sky and a plaza, the sea
+    // and the calçadão), then the lines where it says
+    var K = LG.card;
+    K.frame(g, W, H);
+    g.fillStyle = K.head.color || K.text; g.textAlign = "center";
+    g.font = "bold 22px Georgia, serif";
+    g.fillText((LG.brand + " · " + UI.week).toUpperCase() + " " + weekNum(Math.min(state.unlocked, 52)), W / 2, K.head.y);
+    g.fillStyle = K.text;
+    g.font = K.rank.font; g.fillText(Engine.rankFor(Engine.levelFor(state.xp).level).toUpperCase(), W / 2, K.rank.y);
     var sg = Engine.subGoals(state), cov = window.Freq && Freq.loaded() ? Freq.coverage(knownWords()).fundamental[0] : null;
     g.font = "26px system-ui, sans-serif";
-    g.fillText("🔥 " + state.streak + " días · " + Engine.weekStreak(state) + " semanas · nivel " + Engine.levelFor(state.xp).level, W / 2, 230);
-    g.fillText(sg.nWords.toLocaleString("es-AR") + " palabras" + (cov != null ? " · " + cov + " de las 2.000 frecuentes" : ""), W / 2, 275);
-    g.font = "20px system-ui, sans-serif"; g.fillStyle = "#6b6a66";
-    g.fillText("Esta semana: " + sg.wordsThisWeek + " palabras nuevas · " + Engine.strandsLast(state, 7).output + " xp de output", W / 2, 320);
+    g.fillText("🔥 " + state.streak + " días · " + Engine.weekStreak(state) + " semanas · nivel " + Engine.levelFor(state.xp).level, W / 2, K.lines[0]);
+    g.fillText(sg.nWords.toLocaleString("es-AR") + " palabras" + (cov != null ? " · " + cov + " de las 2.000 frecuentes" : ""), W / 2, K.lines[1]);
+    g.font = "20px system-ui, sans-serif"; g.fillStyle = K.muted;
+    g.fillText("Esta semana: " + sg.wordsThisWeek + " palabras nuevas · " + Engine.strandsLast(state, 7).output + " xp de output", W / 2, K.lines[2]);
     c.toBlob(function (blob) {
-      var name = "la-via-c1-" + stamp() + ".png";
+      var name = K.file + stamp() + ".png";
       try {
         var file = new File([blob], name, { type: "image/png" });
-        if (navigator.canShare && navigator.canShare({ files: [file] })) { navigator.share({ files: [file], title: "Mi semana de italiano" }).catch(function () { download(blob, name); }); return; }
-      } catch (e) { /* niente share */ }
+        if (navigator.canShare && navigator.canShare({ files: [file] })) { navigator.share({ files: [file], title: "Mi semana de " + UI.langEs }).catch(function () { download(blob, name); }); return; }
+      } catch (e) { /* sin share */ }
       download(blob, name);
     }, "image/png");
   }
@@ -597,7 +657,7 @@
         state.pauses = state.pauses.slice(-30);
         state.pauseAsk = Engine.dayKey();
         if (b.dataset.why === "dificil" && state.retention > 0.85) { state.retention = 0.85; toast("Anotado. Bajé la retención a 85 %: menos repasos por día.", 3500); }
-        else if (b.dataset.why === "tiempo") toast("Anotado. Con tres sesiones de dos minutos ya cuenta: el atajo «Ripasso 2 min» está en el ícono de la app.", 4000);
+        else if (b.dataset.why === "tiempo") toast("Anotado. Con tres sesiones de dos minutos ya cuenta: el atajo «" + UI.micro + "» está en el ícono de la app.", 4000);
         else toast("Anotado. Gracias.");
         persist();
         render();
@@ -608,7 +668,7 @@
         var w = WHY.filter(function (x) { return x[0] === b.dataset.why2; })[0];
         state.ideal = { why: b.dataset.why2, text: "", at: Date.now() };
         persist();
-        toast("🎯 " + (w ? w[1] : "") + ". En Io podés escribir tu meta con tus palabras.", 3500);
+        toast("🎯 " + (w ? w[1] : "") + ". En " + UI.me + " podés escribir tu meta con tus palabras.", 3500);
         render();
       };
     });
@@ -630,10 +690,27 @@
   }
 
   /* The version, so a glance says whether the phone already loaded the
-     latest one (it must match VERSION in sw.js: test_game checks it). */
-  var APP_VERSION = "v1.56";
+     latest one (it must match VERSION = "c1-vN" in sw.js: test_game
+     and the CI check it).  One version for the app and both languages. */
+  var APP_VERSION = "v2.0";
+  // Settimana XVII: Roman numerals on the street signs (LANG.ui.romanWeeks).
+  function romano(n) {
+    var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
+    v.forEach(function (p) { while (n >= p[0]) { out += p[1]; n -= p[0]; } });
+    return out;
+  }
+
+  /* The other language: one button in Io / Eu (boot.js switches; each
+     language keeps its own progress). */
+  function switchCard() {
+    if (!window.Boot || !UI.switchCode || !Boot.LANGS[UI.switchCode]) return "";
+    var o = Boot.LANGS[UI.switchCode];
+    return '<div class="card switchlang"><div class="row"><button class="btn ghost" id="switchlang">' + esc(UI.switchTo) + "</button></div>" +
+      '<p class="muted small">' + esc(o.brand) + " guarda su propio progreso: podés ir y volver cuando quieras.</p></div>";
+  }
+
   function versionLine() {
-    return '<p class="muted small version">La Via C1 · versión ' + APP_VERSION + "</p>";
+    return '<p class="muted small version">' + esc(LG.brand) + " · versión " + APP_VERSION + "</p>";
   }
 
   function isStandalone() {
@@ -641,7 +718,7 @@
       window.navigator.standalone === true;
   }
 
-  /* ----------------------------------------------------------------- frasi */
+  /* ----------------------------------------------------------------- treino */
 
   function bankBtn(id, emoji, name, desc, week) {
     var locked = (state.unlocked || 1) < week;
@@ -650,7 +727,7 @@
   }
 
   function renderFrasi() {
-    var html = "<h1>Allena</h1>" +
+    var html = "<h1>" + UI.train + "</h1>" +
       '<p class="lead">Bloques listos para hablar ya, sin armar gramática en la cabeza. ' +
       "Cada escena te presenta frases nuevas, te las hace armar con fichas y después " +
       "<b>escribirlas de memoria</b>. Cuanto más rápido te salen escritas, más rápido " +
@@ -661,20 +738,20 @@
     html += "<h2>Laboratorio</h2>" +
       '<div class="labs">' +
         '<button class="lab" data-lab="ponte"><span class="e">🌉</span><b>Ponte</b>' +
-          '<span class="muted">Del español al italiano con reglas: -ción → -zione, h- → f-…</span>' +
+          '<span class="muted">' + UI.ponte + "</span>" +
           '<span class="meta">' + pp.seen + "/" + pp.total + " palabras</span></button>" +
-        '<button class="lab" data-lab="falsi"><span class="e">🪤</span><b>Falsi amici</b>' +
+        '<button class="lab" data-lab="falsi"><span class="e">🪤</span><b>' + UI.falsi + "</b>" +
           '<span class="muted">Las palabras que parecen y no son.</span>' +
           '<span class="meta">' + pf.seen + "/" + pf.total + "</span></button>" +
-        '<button class="lab" data-lab="capire"><span class="e">🎯</span><b>Capire</b>' +
+        '<button class="lab" data-lab="capire"><span class="e">🎯</span><b>' + UI.capire + "</b>" +
           '<span class="muted">Leer la gramática: quién, cuándo, cuántos, seguro o no.</span>' +
           '<span class="meta">' + pc.seen + "/" + pc.total + "</span></button>" +
-        (window.Suoni && Suoni.data() ? '<button class="lab" data-lab="suoni"><span class="e">🎧</span><b>Suoni</b>' +
-          '<span class="muted">Dobles, vocales, z, gli: ¿cuál escuchaste? Habla conectada, entonación y dictado.</span>' +
+        (window.Suoni && Suoni.data() ? '<button class="lab" data-lab="suoni"><span class="e">🎧</span><b>' + UI.suoni + "</b>" +
+          '<span class="muted">' + UI.suoniSub + "</span>" +
           '<span class="meta">' + Suoni.progress(state.unlocked, state.cards).seen + "/" + Suoni.progress(state.unlocked, state.cards).total + " pares</span></button>" : "") +
       "</div>" +
       '<p class="muted science">🔬 Ponte usa la transferencia desde tu lengua (Ringbom); ' +
-      "Capire es input estructurado: primero interpretar la forma, después producirla (VanPatten).</p>";
+      UI.capire + " es input estructurado: primero interpretar la forma, después producirla (VanPatten).</p>";
 
     if (window.Duelli) {
       var wkD = Math.min(state.unlocked || 1, 52);
@@ -699,19 +776,19 @@
           (weak.length ? '<button class="lab clin" data-bank="clinica"><span class="e">🩺</span><b>Clínica de tus errores</b>' +
             '<span class="muted">Práctica armada con lo que más te cuesta: ' +
             weak.map(function (w) { return esc(Diagnosi.LABEL[w.cat] || w.cat); }).join(", ") + ".</span></button>" : "") +
-          '<button class="lab" data-bank="b-voc"><span class="e">📚</span><b>Parole</b>' +
+          '<button class="lab" data-bank="b-voc"><span class="e">📚</span><b>' + UI.words + "</b>" +
             '<span class="muted">Vocabulario de tu nivel: primero reconocer, después escribir con el artículo.</span></button>' +
-          bankBtn("b-tr", "✍️", "Traduci", "Oraciones del español al italiano, con corrección que te explica el error.", Banca.TR_WEEK) +
-          bankBtn("b-gap", "🔧", "Coniuga in contesto", "El verbo justo dentro de una oración real.", Banca.GAP_WEEK) +
+          bankBtn("b-tr", "✍️", UI.tr, "Oraciones del español al " + UI.langEs + ", con corrección que te explica el error.", Banca.TR_WEEK) +
+          bankBtn("b-gap", "🔧", UI.gap, "El verbo justo dentro de una oración real.", Banca.GAP_WEEK) +
           '<button class="lab" data-bank="b-err"' + (state.unlocked < Banca.ERR_WEEK ? " disabled" : "") +
-            '><span class="e">🔍</span><b>Trova l\'errore</b>' +
+            '><span class="e">🔍</span><b>' + esc(UI.err) + "</b>" +
             '<span class="muted">' + (state.unlocked < Banca.ERR_WEEK
               ? "Se abre en la semana " + Banca.ERR_WEEK + ": primero tenés que poder leer la oración."
               : "Encontrá y corregí el error típico de un hispanohablante.") + "</span></button>" +
-          bankBtn("b-forme", "🧩", "Forme", "Artículos, plurales, preposiciones con artículo y concordancia.", Banca.FORME_WEEK) +
+          bankBtn("b-forme", "🧩", UI.forme, UI.formeSub, Banca.FORME_WEEK) +
         "</div>";
     }
-    html += "<h2>Escenas</h2>";
+    html += "<h2>" + UI.scenes + "</h2>";
     html += '<div class="scenes">';
     Frasi.SCENES.forEach(function (s) {
       var p = Frasi.progress(s.id, state.cards);
@@ -729,11 +806,11 @@
     return html + "</div>";
   }
 
-  /* ----------------------------------------------------------------- leggi */
+  /* ----------------------------------------------------------------- ler */
 
   function renderLeggi() {
     var done = state.letture || {};
-    var html = "<h1>Leggi</h1>" +
+    var html = "<h1>" + UI.read + "</h1>" +
       '<p class="lead">Leer mucho, entendiendo casi todo, es de lo que más hace crecer una lengua. ' +
       "Tocá las palabras subrayadas para ver qué significan.</p>";
     Letture.SERIES.forEach(function (sr) {
@@ -755,7 +832,7 @@
       html += "</div>";
     });
     if ((state.storie || []).length) {
-      html += "<h2>✨ Storie della settimana</h2><p class=\"muted\">Cuentos generados con las palabras de tu repaso.</p><div class=\"eps\">" +
+      html += "<h2>✨ " + UI.stories + "</h2><p class=\"muted\">Cuentos generados con las palabras de tu repaso.</p><div class=\"eps\">" +
         state.storie.map(function (x) {
           var d = done[x.id];
           return '<button class="ep' + (d ? " done" : "") + '" data-ep="' + esc(x.id) + '"><span class="e">✨</span><span><b>' + esc(x.title) +
@@ -764,7 +841,7 @@
     }
     var doneN = Object.keys(done).filter(function (id) { return Letture.byId(id); }).length;
     if (doneN) {
-      html += '<div class="card"><b>🎧 Ascolto facile</b><p class="muted">Re-escuchá las ' + doneN + " lecturas que ya hiciste, solo audio, una tras otra: " +
+      html += '<div class="card"><b>🎧 ' + UI.easyListen + '</b><p class="muted">Re-escuchá las ' + doneN + " lecturas que ya hiciste, solo audio, una tras otra: " +
         "material conocido a velocidad normal es lo que hace crecer la fluidez del oído (Chang & Millett 2014). Esta semana: " + listeningWeek() + " min.</p>" +
         '<button class="btn" id="playlib">▶ Escuchar todas</button></div>';
     }
@@ -812,17 +889,17 @@
   function renderLettura(ep) {
     stopKaraoke();
     var rate = view.karRate || 1, enh = !!view.enh && !!ep.flood;
-    return '<button class="btn ghost" id="lback">' + (view.epFrom === "briefing" ? "← a la semana" : "← a Leggi") + "</button>" +
+    return '<button class="btn ghost" id="lback">' + (view.epFrom === "briefing" ? "← a la semana" : "← a " + UI.read) + "</button>" +
       "<h1>" + ep.emoji + " " + esc(ep.title) + "</h1>" +
-      '<p class="lead">' + (ep.area ? esc(ep.area) + " · " : ep.series === "flood" ? "Inondazione · " + esc(ep.grammar) + " · " :
-        ep.series === "settimana" ? "La settimana · " + esc(ep.grammar) + " · " : "Martín a Bologna · episodio " + ep.n + " · ") +
+      '<p class="lead">' + (ep.area ? esc(ep.area) + " · " : ep.series === "flood" ? UI.series.flood + " · " + esc(ep.grammar) + " · " :
+        ep.series === "settimana" ? UI.series.settimana + " · " + esc(ep.grammar) + " · " : UI.series.main + " · episodio " + ep.n + " · ") +
         esc(ep.level) + "</p>" +
       (enh ? '<div class="note flood">🌊 Segunda lectura: <b>' + esc(ep.flood.es) + "</b> Mirá cada forma resaltada y preguntate por qué está así. " +
         '<button class="tab" id="enhoff">sin marcas</button></div>' : "") +
       '<div class="card">' + renderText(ep, "read", enh) +
         '<p class="muted small">Las palabras <span class="w mcg">así</span> te las pregunto: tocalas y elegí qué significan por el contexto. Las <span class="w gl">subrayadas</span> te las digo.</p>' +
         '<div class="karbar">' +
-          '<button class="btn" id="karplay">🎧 Leggi e ascolta</button>' +
+          '<button class="btn" id="karplay">🎧 ' + UI.karaoke + "</button>" +
           '<span class="seg">' + [[0.8, "0,8×"], [1, "1×"], [1.15, "1,15×"]].map(function (r) {
             return '<button class="tab' + (rate === r[0] ? " on" : "") + '" data-rate="' + r[0] + '">' + r[1] + "</button>";
           }).join("") + "</span>" +
@@ -836,7 +913,7 @@
       '<button class="btn wide" id="lquiz">Lo leí → preguntas y caza de formas</button>';
   }
 
-  /* Toque en la palabra: cualquier palabra italiana de un ejercicio muestra
+  /* Toque en la palabra: cualquier palabra de la lengua en un ejercicio muestra
      qué significa (data/glossario.json, armado por build_course.py).  Las que
      todavía no viste en el curso van subrayadas.  No en los ejercicios que
      preguntan justamente el significado, ni en los enunciados en castellano. */
@@ -863,7 +940,7 @@
     }).join("");
   }
 
-  // Italian text that is not a stem (the solution in the feedback): every
+  // Text of the language that is not a stem (the solution in the feedback): every
   // word tappable, the ones not yet seen underlined.
   function glossifyAny(raw) {
     raw = String(raw || "");
@@ -933,25 +1010,17 @@
     showGloss.t = setTimeout(function () { box.classList.remove("on"); }, 3200);
   }
 
-  /* -------------------------------------------------------------- percorso */
+  /* -------------------------------------------------------------- trilha */
 
   function weekStat(n) {
     return state.weekStats[n] || { attempts: 0, right: 0, bossPassed: false };
   }
 
-  // Settimana XVII: numeri romani sulle targhe.
-  function romano(n) {
-    var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
-    v.forEach(function (p) { while (n >= p[0]) { out += p[1]; n -= p[0]; } });
-    return out;
-  }
-
   function renderPercorso() {
     var total = 0, got = 0;
     course.weeks.forEach(function (w) { total += 3; got += weekStars(w); });
-    var html = '<h1>Il percorso</h1>' +
-      '<p class="lead">De base a C1 en 52 misiones. Cada una tiene <b>3 estrellas</b>: ' +
-      'jugar la lección, superar la semana y dominarla. Los <b>jefes</b> cierran cada tramo.</p>' +
+    var html = "<h1>" + UI.path + "</h1>" +
+      '<p class="lead">' + UI.pathLead + "</p>" +
       '<div class="card pathsum"><b>' + got + ' / ' + total + ' ★</b>' +
       '<span class="goalbar"><i style="width:' + Math.round(got / total * 100) + '%"></i></span></div>';
 
@@ -959,8 +1028,8 @@
       html += '<div class="season"><div class="banner s' + s.n + '"><span class="lvl">' + esc(s.level) + "</span>" +
         "<h2>" + esc(s.name) + "</h2><p>" + esc(s.blurb) + '</p></div><div class="path">';
       course.weeks.filter(function (w) { return w.season === s.n; }).forEach(function (w, k) {
-        // Una semana ya jugada sigue abierta aunque, tras el reordenamiento
-        // del programa, quede después de la sbloccata.
+        // Una semana ya jugada sigue abierta aunque, si el programa se
+        // reordena, quede después de la desbloqueada.
         var open = w.week <= state.unlocked || !!state.weekStats[w.week] || lessonRead(w.week);
         var stars = weekStars(w);
         var current = w.week === Math.min(state.unlocked, 52) && stars < 3;
@@ -982,7 +1051,7 @@
 
   /* ---------------------------------------------------------------- teoria */
 
-  /* *parola* marca una forma italiana, **texto** una regla clave. */
+  /* *palabra* marca una forma de la lengua, **texto** una regla clave. */
   function mk(text) {
     return esc(text)
       .replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>")
@@ -1046,8 +1115,8 @@
     return null;
   }
 
-  /* Tre stelle per settimana: la lezione giocata, la settimana superata
-     (20 giuste), la padronanza (85% su almeno 30).  Il boss: superato = 3. */
+  /* Tres estrellas por semana: la lección jugada, la semana superada (20
+     correctas), el dominio (85 % en al menos 30).  El jefe: vencido = 3. */
   function weekStars(w) {
     var st = weekStat(w.week);
     if (w.boss) return st.bossPassed ? 3 : 0;
@@ -1114,19 +1183,19 @@
     return html + "</section>";
   }
 
-  /* ------------------------------------------ la lezione, un'idea per schermo */
+  /* ------------------------------------------ la lección, una idea por pantalla */
 
   // The block's forms marked inside an example (signaling).
-  var HL_STOP = { la: 1, il: 1, lo: 1, le: 1, i: 1, gli: 1, un: 1, una: 1, uno: 1, e: 1, di: 1, a: 1, "in": 1, che: 1, non: 1, da: 1, per: 1, con: 1, si: 1, mi: 1, ti: 1 };
+  var HL_STOP = LG.hlStop || {};
   function markForms(text, fs) {
     var t = String(text), low = t.toLowerCase(), marks = [];
-    // «-ato»: an ending the rule teaches, marked on every word that has it
-    var ends = (fs || []).filter(function (f) { return /^-[a-zà-ù]+$/.test(f); }).map(function (f) { return f.slice(1); });
-    // the words of the table's forms (ho, sono, abbiamo…), grammar words aside
+    // «-ção», «-ato»: an ending the rule teaches, marked on every word that has it
+    var ends = (fs || []).filter(function (f) { return /^-[a-zà-ÿ]+$/.test(f); }).map(function (f) { return f.slice(1); });
+    // the words of the table's forms (ho, sono / tenho, sou…), grammar words aside
     var words = [];
     (fs || []).forEach(function (f) { if (/\s/.test(f)) f.split(/\s+/).forEach(function (w) { if (w.length >= 2 && !HL_STOP[w] && words.indexOf(w) < 0) words.push(w); }); });
     fs = (fs || []).filter(function (f) { return f[0] !== "-"; }).concat(words);
-    low.replace(/[a-zà-ù']+/g, function (w, at) {
+    low.replace(new RegExp("[" + WCH + "]+", "g"), function (w, at) {
       if (ends.some(function (e) { return w.length > e.length + 1 && w.slice(-e.length) === e; })) marks.push({ s: at, e: at + w.length });
       return w;
     });
@@ -1134,7 +1203,7 @@
       var from = 0, at;
       while ((at = low.indexOf(f, from)) >= 0) {
         var before = at === 0 ? "" : low[at - 1], after = low[at + f.length] || "";
-        var edge = function (ch) { return !ch || !/[a-zà-ù']/i.test(ch); };
+        var edge = function (ch) { return !ch || !new RegExp("[" + WCH + "]", "i").test(ch); };
         if (edge(before) && edge(after) && !marks.some(function (m) { return at < m.e && at + f.length > m.s; }))
           marks.push({ s: at, e: at + f.length });
         from = at + f.length;
@@ -1145,7 +1214,7 @@
     marks.forEach(function (m) { out += esc(t.slice(pos, m.s)) + '<mark class="hl">' + esc(t.slice(m.s, m.e)) + "</mark>"; pos = m.e; });
     return out + esc(t.slice(pos));
   }
-  // An example with its key form marked by hand («Credo che *abbia* ragione»).
+  // An example with its key form marked by hand («Espero que você *venha*»).
   function exHtml(text) {
     return String(text).split(/\*([^*]+)\*/).map(function (x, k) {
       return k % 2 ? '<mark class="hl">' + esc(x) + "</mark>" : esc(x);
@@ -1153,13 +1222,13 @@
   }
   function stepBadge(ico, txt) { return '<div class="stepbadge">' + ico + " " + txt + "</div>"; }
   // 👀 The examples first, the forms marked: the rule comes on the next screen.
-  /* The forms of the tenses a week teaches (conjugator): the congiuntivo
-     week marks sia, abbia, venga… in its examples.  Only weeks about a
-     tense, and minus the forms the present shares (abbiamo, siamo). */
+  /* The forms of the tenses a week teaches (conjugator): the subjunctive
+     week marks sia, abbia / seja, tenha… in its examples.  Only weeks about
+     a tense, and minus the forms the present shares. */
   var tenseForms = {};
   function weekTenseForms(w) {
     if (!w || tenseForms[w.week]) return (w && tenseForms[w.week]) || [];
-    var ts = (w.tenses || []).filter(function (t) { return t !== "presente" || w.week === 5 || w.week === 6; });
+    var ts = (w.tenses || []).filter(function (t) { return (t !== "presente" || w.week === 5 || w.week === 6) && (!Conj.TENSE_LABELS || Conj.TENSE_LABELS[t]); });
     var out = {}, pres = {};
     if (ts.length && ts[0] !== "presente") Object.keys(Conj.VERBS).forEach(function (v) {
       try { Conj.conjugate(v, "presente").forEach(function (f) { pres[f.toLowerCase()] = 1; }); } catch (e) { /* */ }
@@ -1167,7 +1236,8 @@
     ts.forEach(function (t) {
       Object.keys(Conj.VERBS).forEach(function (v) {
         try {
-          Conj.conjugate(v, t).forEach(function (f) {
+          Conj.conjugate(v, t).forEach(function (f, pi) {
+            if ((LG.skipPersons || []).indexOf(pi) >= 0) return;          // vós: never marked
             String(f).toLowerCase().split(/\s+/).forEach(function (x) { if (x.length >= 2 && !pres[x] && !HL_STOP[x]) out[x] = 1; });
           });
         } catch (e) { /* un verbo sin ese tiempo */ }
@@ -1230,11 +1300,11 @@
   function renderTeoria(w) {
     var L = w.lesson;
     sayIndex = {};
-    if (!L) return '<button class="btn ghost" id="back">← al percorso</button>' +
+    if (!L) return '<button class="btn ghost" id="back">← ' + UI.pathAl + "</button>" +
       '<p class="lead">Esta semana todavía no tiene teoría.</p>';
 
-    var html = '<button class="btn ghost" id="tback">← alla settimana</button>' +
-      '<h1>Teoria · settimana ' + w.week + '</h1>' +
+    var html = '<button class="btn ghost" id="tback">' + UI.theoryBack + "</button>" +
+      "<h1>" + UI.theory + w.week + "</h1>" +
       '<p class="lead">' + esc(w.title) + '</p>' +
       '<div class="lesson"><p class="intro">' + mk(L.intro) + '</p>';
 
@@ -1251,19 +1321,19 @@
     return html;
   }
 
-  /* ------------------------------------------------------- lezione giocata */
+  /* ------------------------------------------------------- lección jugada */
 
   var les = null;
 
   function startLezione(sess) {
     var w = course.weeks[view.week - 1];
-    var isItalian = function (word) { return !!(glossario && glossario[String(word).toLowerCase()]); };
+    var isWord = function (word) { return !!(glossario && glossario[String(word).toLowerCase()]); };
     var ss = sessionsOf(w);
     // the first session not yet read (or the first one again)
     if (sess == null || isNaN(sess) || !ss[sess]) { sess = nextSession(w); if (sess == null) sess = 0; }
     var cur = ss[sess];
     les = { w: w, sess: sess, part: cur ? cur.part : null,
-            steps: Lezione.steps(w.lesson, Math.random, w.week, isItalian, cur ? cur.blocks : null),
+            steps: Lezione.steps(w.lesson, Math.random, w.week, isWord, cur ? cur.blocks : null),
             i: 0, right: 0, asked: 0, answered: false };
     view.screen = "lezione";
     render();
@@ -1276,7 +1346,7 @@
     var n = les.steps.length;
     var hudH = '<div class="hud"><span class="progressline"><i style="width:' +
       Math.round(Math.max(0, les.i - 1) / n * 100) + '%" data-to="' + Math.round(les.i / n * 100) + '"></i></span>' +
-      '<span class="muted">' + (les.i + 1) + " di " + n + "</span>" + dai(les.i, n) +
+      '<span class="muted">' + (les.i + 1) + UI.of + n + "</span>" + dai(les.i, n) +
       '<button class="btn ghost" id="lesquit">✕</button></div>';
     if (!st) {
       var pct = les.asked ? Math.round(les.right / les.asked * 100) : 100;
@@ -1338,10 +1408,10 @@
       else if (b === btn) b.classList.add("wrong");
     });
     $("#lesfb").innerHTML = '<div class="feedback ' + (ok ? "giusto" : "sbagliato") + '">' +
-      '<div class="verdict">' + (ok ? pick(["Esatto!", "Bravo!", "Perfetto!"]) : "Era così:") + "</div>" +
+      '<div class="verdict">' + (ok ? pick(UI.right) : UI.wasThis) + "</div>" +
       '<div class="sol">' + esc(q.answer) + "</div>" +
       (ok ? "" : lesRule(q)) +
-      '<div class="row" style="margin-top:10px"><button class="btn" id="lesnext2">Avanti →</button></div></div>';
+      '<div class="row" style="margin-top:10px"><button class="btn" id="lesnext2">' + UI.next + "</button></div></div>";
     on("#lesnext2", lesNext);
   }
 
@@ -1396,12 +1466,16 @@
 
   /* -------------------------------------------------------------- briefing */
 
-  /* Il percorso è la diva: tutto quello che porta una settimana (lezione,
-     parole, allenamento, frasi, lettura, laboratorio) è una missione della
-     settimana, in ordine.  Le schede Allena e Leggi restano come scorciatoie
-     libere, ma la strada ordinata è questa. */
-  var PONTE_WEEK = { zione: 2, ta: 3, bile: 4, tt: 5, dittonghi: 6, effe: 7, pi: 8, aggio: 9, colte: 10 };
-  var FALSI_WEEK = 11;
+  /* El camino manda: todo lo que trae una semana (lección, palabras,
+     entrenamiento, frases, lectura, laboratorio) es una misión de la semana,
+     en orden.  Las pestañas de entrenar y leer quedan como atajos libres,
+     pero el camino ordenado es este. */
+  // The week of each rule of Ponte: the rule's own «week» (lab.js) or, if it
+  // has none, the language's table (LANG.ponteWeek), or its place in the
+  // list from week 2.
+  var PONTE_WEEK = LG.ponteWeek || {};
+  function ponteWeek(r, k) { return +r.week || PONTE_WEEK[r.id] || Math.min(10, 2 + k); }
+  function falsiWeek() { return (window.Lab && +Lab.FALSI_WEEK) || 11; }
 
   // Martín's episodes open in order: an episode never lands before the one
   // that precedes it in the story.
@@ -1430,9 +1504,9 @@
       var weak = Drills.weakItems(course, w, state, itemMap).length;
       m({ kind: "debil", done: !!(state.weakDone || {})[w.week], ico: "🩹", opt: true, title: "Tus puntos débiles",
           sub: weak ? "Opcional · " + weak + " ejercicios de la estación que fallaste o casi no viste" : "Opcional · no fallaste nada todavía: repaso al azar" });
-      if (w.week === 52 && window.EsameData) m({ kind: "play", done: st.bossPassed, ico: "🎓", title: "Esame C1",
-          sub: "Cinco pruebas como en el CILS: ascolto, lettura, strutture, lessico, scrittura. Mínimo 55 % en cada una.", cls: "boss" });
-      else m({ kind: "play", done: st.bossPassed, ico: "⚔️", title: "Vencé al jefe",
+      if (w.week === 52 && window.EsameData) m({ kind: "play", done: st.bossPassed, ico: "🎓", title: UI.examC1,
+          sub: EX.missionSub, cls: "boss" });
+      else m({ kind: "play", done: st.bossPassed, ico: "⚔️", title: "Vencé al " + UI.boss,
           sub: "85% de aciertos. Pregunta más de lo que más te costó. Superarlo te da las 3 estrellas.", cls: "boss" });
       return out;
     }
@@ -1456,7 +1530,7 @@
         sub: Math.min(st.right, 20) + " / 20 respuestas correctas con los ejercicios de la semana" });
     if (window.Scrivi && Scrivi.TASKS[w.week]) {
       var sd = (state.scritti || {})[w.week], task = Scrivi.TASKS[w.week];
-      m({ kind: "scrivi", done: !!sd, ico: "✍️", title: "Scrivi: tu texto de la semana",
+      m({ kind: "scrivi", done: !!sd, ico: "✍️", title: UI.scrivi + ": tu texto de la semana",
           sub: sd ? "Entregado · " + sd.n + " palabras" + (sd.errs ? " · " + sd.errs + " cosas para revisar" : " · sin errores marcados")
                   : task.min + " palabras o más · " + task.use.map(function (u) { return u[2]; }).join(" · ") });
     }
@@ -1476,36 +1550,36 @@
       });
     });
     if (window.Lab) {
-      Lab.RULES.forEach(function (r) {
-        if (PONTE_WEEK[r.id] !== w.week) return;
+      Lab.RULES.forEach(function (r, k) {
+        if (ponteWeek(r, k) !== w.week) return;
         var p = Lab.progress("ponte:" + r.id + ":", state.cards);
         m({ kind: "ponte", arg: r.id, done: p.seen >= p.total, ico: "🌉", title: "Ponte: " + r.h,
             sub: p.seen + " / " + p.total + " palabras que ya sabés del español" });
       });
-      if (w.week === FALSI_WEEK) {
+      if (w.week === falsiWeek()) {
         var pf = Lab.progress("falso:", state.cards);
-        m({ kind: "falsi", done: pf.seen >= pf.total, ico: "🪤", title: "Falsi amici",
+        m({ kind: "falsi", done: pf.seen >= pf.total, ico: "🪤", title: UI.falsi,
             sub: pf.seen + " / " + pf.total + " palabras que parecen y no son" });
       }
       Lab.CAPIRE.forEach(function (c) {
         if (c.week !== w.week) return;
         var pc = Lab.progress("capire:" + c.id + ":", state.cards);
-        m({ kind: "capire", arg: c.id, done: pc.seen >= pc.total, ico: "🎯", title: "Capire: " + c.h,
+        m({ kind: "capire", arg: c.id, done: pc.seen >= pc.total, ico: "🎯", title: UI.capire + ": " + c.h,
             sub: pc.seen + " / " + pc.total + " · leer la gramática antes de producirla" });
       });
     }
     if (window.Banca && Banca.loaded()) {
       var bankDone = function (rx) { return Object.keys(state.cards).filter(function (k) { return rx.test(k); }).length >= 8; };
-      if (w.week === Banca.FORME_WEEK) m({ kind: "b-forme", done: bankDone(/^b:(art|pl|prep|agg|acc)/), ico: "🧩", title: "Banco: Forme",
-        sub: "Artículos, plurales y preposiciones con artículo, generados del banco." });
-      if (w.week === Banca.TR_WEEK) m({ kind: "b-tr", done: bankDone(/^b:tr:/), ico: "✍️", title: "Banco: Traduci",
-        sub: "Oraciones del español al italiano, con corrección que explica el error." });
-      if (w.week === Banca.GAP_WEEK) m({ kind: "b-gap", done: bankDone(/^b:gap:/), ico: "🔧", title: "Banco: Coniuga in contesto",
+      if (w.week === Banca.FORME_WEEK) m({ kind: "b-forme", done: bankDone(/^b:(art|pl|prep|agg|acc)/), ico: "🧩", title: "Banco: " + UI.forme,
+        sub: UI.formeMission });
+      if (w.week === Banca.TR_WEEK) m({ kind: "b-tr", done: bankDone(/^b:tr:/), ico: "✍️", title: "Banco: " + UI.tr,
+        sub: "Oraciones del español al " + UI.langEs + ", con corrección que explica el error." });
+      if (w.week === Banca.GAP_WEEK) m({ kind: "b-gap", done: bankDone(/^b:gap:/), ico: "🔧", title: "Banco: " + UI.gap,
         sub: "El verbo justo dentro de una oración real." });
     }
     if (window.Suoni && Suoni.data() && w.week <= 40) {
       var sp = Suoni.progress(w.week, state.cards), sdone = !!(state.suoniDone || {})[w.week];
-      m({ kind: "suoni", done: sdone, ico: "🎧", title: "Suoni: el oído",
+      m({ kind: "suoni", done: sdone, ico: "🎧", title: UI.suoni + ": el oído",
           sub: (sdone ? "Hecha · " : "") + "pares mínimos, habla conectada, entonación y un dictado · " + sp.seen + " / " + sp.total + " pares oídos" });
     }
     if (window.Suoni && Suoni.dgFor(w.week)) {
@@ -1515,10 +1589,10 @@
     }
     if (aiKey() && w.week >= 3) {
       var pl = (state.parlaLog || {})[w.week];
-      m({ kind: "parla", done: !!pl, ico: "🗣️", title: "Parla: role-play con la IA", opt: true,
-          sub: pl ? "Hecho · " + pl.obj + " / 3 objetivos en " + pl.turns + " turnos" : "Opcional · un personaje, tres objetivos, tu italiano escrito; la IA te corrige al final" });
+      m({ kind: "parla", done: !!pl, ico: "🗣️", title: UI.parla + ": role-play con la IA", opt: true,
+          sub: pl ? "Hecho · " + pl.obj + " / 3 objetivos en " + pl.turns + " turnos" : "Opcional · un personaje, tres objetivos, tu " + UI.langEs + " escrito; la IA te corrige al final" });
       // (The AI story of the week gave way to a text written by hand for
-      // every week: «La settimana», in Leggi and as the week's reading.)
+      // every week: «La settimana» / «A semana», in Leggi / Ler and as the week's reading.)
     }
     // The duel that opens this week (both forms taught by now): optional.
     if (window.Duelli) Duelli.DUELLI.filter(function (d) { return d.week === w.week; }).forEach(function (d) {
@@ -1542,7 +1616,7 @@
      aside (that is the third star): the lesson, the words, the twenty right
      answers, the phrases, the reading, the lab and the bank of the week. */
   function pendingToAdvance(w) {
-    if (w.boss) return weekStat(w.week).bossPassed ? [] : ["Vencé al jefe"];
+    if (w.boss) return weekStat(w.week).bossPassed ? [] : ["Vencé al " + UI.boss];
     return weekPlan(w).filter(function (x) { return !x.done && x.kind !== "play2" && !x.opt; }).map(function (x) { return x.title; });
   }
   function tryAdvance(week) {
@@ -1579,7 +1653,7 @@
     var left = pendingToAdvance(w);
     var html = '<div class="card"><h2>Misiones ' + starsHtml(weekStars(w)) +
       ' <small class="muted">' + doneN + " / " + plan.length + "</small></h2>" +
-      (w.boss ? (w.week < 52 ? '<p class="muted">⚔️ El jefe abre la semana ' + (w.week + 1) + ". Los repasos por tema y tus puntos débiles son opcionales: sirven para llegar preparado.</p>" : "")
+      (w.boss ? (w.week < 52 ? '<p class="muted">⚔️ El ' + UI.boss + " abre la semana " + (w.week + 1) + ". Los repasos por tema y tus puntos débiles son opcionales: sirven para llegar preparado.</p>" : "")
         : w.week < 52 && state.unlocked <= w.week
         ? '<p class="muted">🔒 La semana ' + (w.week + 1) + " se abre al completar " + (left.length === 1 ? "esta misión" : "estas " + left.length + " misiones") +
           " (todas menos Dominala).</p>"
@@ -1595,7 +1669,7 @@
     html += '<div class="row" style="margin-top:12px">' +
       (w.lesson ? '<button class="tab" id="teo">📄 Ver la teoría entera</button>' : "") +
       (w.boss ? "" : '<button class="tab" id="gym">🏋️ Gimnasio de verbos</button>') +
-      (nChal ? '<button class="tab" id="chal">📖 Sfide del Maestro (' + nChal + ")</button>" : "") +
+      (nChal ? '<button class="tab" id="chal">📖 ' + UI.chal + " (" + nChal + ")</button>" : "") +
       "</div></div>";
     return html;
   }
@@ -1615,19 +1689,21 @@
 
   function renderBriefing(w) {
     var st = weekStat(w.week);
-    var refs = [];
-    if (w.refs.dummies.length) {
-      refs.push("<b>Italian Grammar For Dummies</b>, cap. " + w.refs.dummies.join(", "));
-    }
-    if (w.refs.routledge.length) {
-      refs.push("<b>Soluzioni</b> (Routledge), cap. " + w.refs.routledge.join(", "));
-    }
+    // Reference reading, when the course brings any (build_course.py:
+    // week.refs, { manual: [chapters] } or a list of strings).
+    var refs = [], R = w.refs || {};
+    if (Array.isArray(R)) refs = R.map(function (x) { return esc(x); });
+    else Object.keys(R).forEach(function (k) {
+      var v = R[k];
+      if (!v || (Array.isArray(v) && !v.length)) return;
+      var name = (LG.refNames || {})[k] || "<b>" + esc(k) + "</b>";     // LANG.refNames: the books by name
+      refs.push(name + (Array.isArray(v) ? ", cap. " + v.map(esc).join(", ") : " · " + esc(v)));
+    });
 
     var nChal = (w.challenges || []).length;
 
-    return '<button class="btn ghost" id="back">← al percorso</button>' +
-      '<h1 class="targa big"><span class="t-sup">Settimana ' + romano(w.week) + " · " + esc(w.level) +
-        '</span><span class="t-via">' + esc(w.title) + "</span></h1>" +
+    return '<button class="btn ghost" id="back">← ' + UI.pathAl + "</button>" +
+      plate(UI.week + " " + weekNum(w.week) + " · " + esc(w.level), esc(w.title), true) +
       '<p class="lead">' + esc(w.focus) + '</p>' +
       (w.fare ? '<p class="fare">🎯 Al final de la semana: <b>' + esc(w.fare) + '</b>' +
         (w.tema ? ' <span class="muted">· ' + esc(w.tema) + '</span>' : '') + '</p>' : '') +
@@ -1641,7 +1717,7 @@
       '</div>';
   }
 
-  /* ------------------------------------------------------------ allenamento */
+  /* ------------------------------------------------------------ entrenamiento */
 
   /* Lives are a gauge, not a wall: each error empties a heart so you see
      where the round went wrong, but you always play to the end (a round cut
@@ -1652,7 +1728,7 @@
   // Rounds whose answers count as the week's progress (review mixes weeks).
   var COUNT_KINDS = { round: 1, gym: 1, pausa: 1, boss: 1, vocab: 1, giorno: 1, debil: 1, domina: 1 };
 
-  /* Le quattro corde di Nation (la guida): input, output, forma, fluidez. */
+  /* Las cuatro cuerdas de Nation (la guía): input, output, forma, fluidez. */
   function strandOf(it, kind) {
     if (kind === "lettura" || kind === "capire" || kind === "suoni" || it.type === "listen" || it.type === "dictation" || SAY_TYPES[it.type]) return "input";
     if (it.type === "write" || it.type === "translate" || it.type === "typed" || it.type === "fixerr" || it.type === "combina" || kind === "b-tr") return "output";
@@ -1677,8 +1753,8 @@
     else if (kind === "pausa") {
       w = course.weeks[Math.min(state.unlocked, 52) - 1];
       view.week = w.week;
-      // Grammar only from lessons already read: before lesson 1 the coffee
-      // break is phrases and words, never «conjugá essere».
+      // Grammar only from lessons already read: before lesson 1 the
+      // coffee break is phrases and words, never a conjugation table.
       var taught = null;
       for (var tw = Math.min(state.unlocked, 52); tw >= 1; tw--) {
         if (lessonRead(tw)) { taught = course.weeks[tw - 1]; break; }
@@ -1714,7 +1790,7 @@
       if (epL && epL.series === "ai") items = items.slice(0, -1).concat(storyCloze(epL), items.slice(-1));
     }
     // From the week's mission: that week's pairs (the ones its counter
-    // counts); from Allena: everything up to where the learner got.
+    // counts); from Allena / Treino: everything up to where the learner got.
     else if (kind === "suoni") items = Suoni.session(state, arg || Math.min(state.unlocked, 52), { silent: state.silent });
     else if (kind === "ritorno") items = ritornoItems();
     else if (kind === "esame") {
@@ -1744,13 +1820,13 @@
 
     if (!items.length) { toast("No hay preguntas para este modo todavía."); return; }
     // the real voices of the pairs, looked up while the round starts
-    if (window.Voci) Voci.prefetch(items.filter(function (x) { return x.type === "coppia" && x.cat !== "vocali"; })
+    if (window.Voci) Voci.prefetch(items.filter(function (x) { return x.type === "coppia" && !(LG.realVoiceSkip || {})[x.cat]; })
       .map(function (x) { return x.say; }));
 
     round = {
       kind: kind,
       arg: arg,
-      // A round that starts from the week (its briefing, its sfide, its
+      // A round that starts from the week (its briefing, its challenges, its
       // lesson's «A entrenar», a reading opened from it) goes back to the week.
       from: view.screen === "briefing" || view.screen === "sfide" || view.screen === "lezione" ||
             (view.screen === "lettura" && view.epFrom === "briefing") ? "briefing" : null,
@@ -1795,7 +1871,7 @@
         '<span class="progressline"><i style="width:' +
           Math.round(Math.max(0, round.i - 1) / round.items.length * 100) + '%" data-to="' +
           Math.round(round.i / round.items.length * 100) + '"></i></span>' +
-        '<span class="muted">' + (round.i + 1) + " di " + round.items.length + "</span>" +
+        '<span class="muted">' + (round.i + 1) + UI.of + round.items.length + "</span>" +
         dai(round.i, round.items.length) +
         (round.combo > 1 ? '<span class="combo pop">🔥×' + round.combo + "</span>" : "") +
         '<button class="btn ghost" id="quit">✕</button>' +
@@ -1893,7 +1969,7 @@
         '<div class="prompt">' + esc(it.prompt) + "</div>" +
         '<div class="stem">' + esc(it.stem) + "</div>" +
         renderText(ep, "hunt") +
-        '<div class="row"><button class="btn" id="hcheck">Controlla</button>' +
+        '<div class="row"><button class="btn" id="hcheck">' + UI.check + "</button>" +
         '<span class="muted" id="hcount" style="align-self:center">0 marcadas</span></div>' +
         '<div id="fb"></div></div>';
     }
@@ -1922,13 +1998,13 @@
         '<div class="typed">' +
         '<textarea id="wans" class="grow" rows="1" autocomplete="off" autocapitalize="sentences" ' +
         'autocorrect="off" spellcheck="false" enterkeyhint="send" placeholder="lo que escuchás…"></textarea>' +
-        '<button class="btn" id="wsend">Controlla</button></div>';
+        '<button class="btn" id="wsend">' + UI.check + "</button></div>";
       stem = "";
     } else if (it.type === "tiles") {
       body = '<div class="tiles-answer" id="tans"></div>' +
         '<div class="tiles-bank" id="tbank"></div>' +
         '<div class="row" style="margin-top:12px">' +
-          '<button class="btn" id="tcheck">Controlla</button>' +
+          '<button class="btn" id="tcheck">' + UI.check + "</button>" +
           '<button class="btn ghost" id="tclear">Borrar</button></div>';
     } else if (SAY_TYPES[it.type]) {
       body = '<div class="center"><button class="bigplay" id="play1">🔊</button>' +
@@ -1954,8 +2030,8 @@
     } else if (it.type === "write") {
       body = '<div class="typed">' +
         '<textarea id="wans" class="grow" rows="1" autocomplete="off" autocapitalize="sentences" ' +
-        'autocorrect="off" spellcheck="false" enterkeyhint="send" placeholder="in italiano…"></textarea>' +
-        '<button class="btn" id="wsend">Controlla</button></div>' +
+        'autocorrect="off" spellcheck="false" enterkeyhint="send" placeholder="' + UI.inLang + '"></textarea>' +
+        '<button class="btn" id="wsend">' + UI.check + "</button></div>" +
         '<div class="row" style="margin-top:8px">' +
           '<button class="tab" id="hint">💡 pista</button>' +
           '<button class="tab" id="easier">🧩 dame fichas</button></div>' +
@@ -1969,13 +2045,15 @@
         '<textarea id="ans" class="grow" rows="1" autocomplete="off" autocapitalize="off" ' +
         'autocorrect="off" spellcheck="false" enterkeyhint="send" placeholder="' +
           (multi ? "las " + gaps + " respuestas en orden: 1 / 2" + (gaps > 2 ? " / 3" : "")
-                 : it.type === "translate" ? "in italiano…" : "tu respuesta…") + '"></textarea>' +
+                 : it.type === "translate" ? UI.inLang : "tu respuesta…") + '"></textarea>' +
+        // the letters a Spanish keyboard does not have at hand (LANG.ui.keys),
+        // for the phones without long press
         '<div class="accents">' +
-          ["à", "è", "é", "ì", "ò", "ù", "'"].map(function (c) {
+          UI.keys.map(function (c) {
             return '<button data-ins="' + c + '">' + c + "</button>";
           }).join("") +
         "</div>" +
-        '<button class="btn" id="send">Controlla</button></div>';
+        '<button class="btn" id="send">' + UI.check + "</button></div>";
     }
 
     var sayBtn = it.src === "frasi" || it.src === "lettura" || it.src === "lab" || it.src === "ascolto" || it.type === "scopri" ? "" :
@@ -1991,7 +2069,7 @@
       "</div>";
   }
 
-  /* Tessere: tocchi per costruire la frase. */
+  /* Fichas: toques para armar la frase. */
   function drawTiles() {
     var it = currentItem();
     var ans = $("#tans"), bank = $("#tbank");
@@ -2029,8 +2107,14 @@
     return { given: built, verdict: ok ? Engine.VERDICT.RIGHT : Engine.VERDICT.WRONG };
   }
 
-  var GENERIC = { lessico: 1, parola_mancante: 1, parola_in_piu: 1, refuso: 1, vuoto: 1 };
-  var LEXICAL = { lessico: 1, parola_spagnola: 1, falso_amico: 1, vuoto: 1 };
+  // Category groups come from the diagnosis of the language (its ids):
+  // Diagnosi.GROUPS, or the package's LANG.diagGroups.
+  var GROUPS = (window.Diagnosi && Diagnosi.GROUPS) || LG.diagGroups || {};
+  var GENERIC = GROUPS.generic || {};
+  var LEXICAL = GROUPS.lexical || {};
+  var SLIPS = GROUPS.slips || {};
+  var UNRECORDED = GROUPS.unrecorded || {};
+  var TILE_SKIP = GROUPS.tileSkip || (LG.diagGroups || {}).tileSkip || LEXICAL;
 
   // Multiple choice: say why *that* option is wrong (Shute 2008).
   function answer(given) {
@@ -2043,31 +2127,33 @@
     var cd = it.choiceDiag || { before: "", after: "" };
     var d = Diagnosi.explainChoice(cd.before + given + cd.after, cd.before + it.answer + cd.after,
                                    it.choiceDiag ? {} : { stem: it.stem, nominal: it.type === "plural" || /plural/i.test(it.prompt || "") });
-    // Only when the options are Italian: diagnosing a Spanish gloss as if it
-    // were Italian would be nonsense.
+    // Only when the options are in the language: diagnosing a Spanish gloss
+    // as if it were the language would be nonsense.
     // Spanish glosses (the week's words, the bank) are never diagnosed as
-    // Italian, and picking another whole sentence is not a word-level error.
-    var italianOptions = (it.choiceDiag || it.src === "coniugatore" ||
+    // the language, and picking another whole sentence is not a word-level error.
+    var tgOptions = (it.choiceDiag || it.src === "coniugatore" ||
       (it.src !== "banca" && it.src !== "lab" && it.src !== "lettura" && it.src !== "frasi" && it.src !== "vocab" && it.src !== "ascolto" && it.type !== "scopri") ||
       (it.src === "frasi" && it.type === "choice")) && !(it.recog && it.orig === "translate");
-    var useful = italianOptions && d && d.cat && !GENERIC[d.cat];
+    var useful = tgOptions && d && d.cat && !GENERIC[d.cat];
     if (useful) recordError(d, given);
     settle(verdict, given, useful ? diagHtml(d, false) : "");
   }
 
   // The pair after the answer: both words, their meanings and, for the
-  // double consonants, a bar that shows the longer sound.
+  // category of LANG.pairBar (the double consonants), a bar that shows the
+  // longer sound.
   function pairHtml(it) {
-    var p = it.pair, shown = p.written || [p.a, p.b];
-    var bar = function (w, k) {
-      var gem = p.cat === "geminate" && /([bcdfglmnprstvz])\1/.test(w);
+    var p = it.pair, shown = p.written || [p.a, p.b], pb = LG.pairBar;
+    var bar = pb && p.cat === pb.cat;
+    var row = function (w, k) {
+      var long = bar && pb.re.test(w);
       return '<div class="pairrow"><b>' + esc(shown[k]) + "</b> <span class=\"muted\">" + esc((p.es || [])[k] || "") + "</span>" +
-        (p.cat === "geminate" ? '<i class="dur' + (gem ? " long" : "") + '"></i>' : "") + "</div>";
+        (bar ? '<i class="dur' + (long ? " long" : "") + '"></i>' : "") + "</div>";
     };
-    return '<div class="pairbox">' + bar(p.a, 0) + bar(p.b, 1) + "</div>";
+    return '<div class="pairbox">' + row(p.a, 0) + row(p.b, 1) + "</div>";
   }
 
-  /* -------------------------------------------- produzione e correzione */
+  /* -------------------------------------------- producción y corrección */
 
   /* Written answers get a diagnosis.  A rule error on the first attempt
      earns a prompt, not the answer: the learner corrects it (Lyster & Ranta
@@ -2082,7 +2168,7 @@
       return String(x).replace(/\s*\|\s*/g, " ");   // two blanks: typed one after the other
     });
     if (it.dir === "it-es") {
-      // the learner writes Spanish: no Italian diagnosis, just the match
+      // the learner writes Spanish: no diagnosis of the language, just the match
       var ves = Engine.grade(given, it);
       settle(ves, given, ves === "giusto" ? "" : '<div class="note">Otras formas de decirlo: ' + esc((it.accept || [it.answer]).join(" · ")) + "</div>");
       return;
@@ -2103,11 +2189,11 @@
       var esW = Engine.normalise(esText).split(/\s+/), gW = Engine.normalise(given).split(/\s+/);
       var inEs = gW.filter(function (w) { return w.length > 1 && esW.indexOf(w) >= 0; }).length;
       if (gW.length >= 2 && inEs * 2 >= gW.length) {
-        d.hint = "Eso está en español. Escribila en italiano; si todavía no la sabés, pedí las fichas 🧩.";
+        d.hint = "Eso está en español. Escribila en " + UI.langEs + "; si todavía no la sabés, pedí las fichas 🧩.";
       }
     }
     // The old graders forgive a letter or two; the diagnosis knows whether
-    // those letters were a typo or grammar (a il / al, la / il lunedì).
+    // those letters were a typo or grammar (a il / al, em o / no).
     // A rule error always wins over typo tolerance.
     var v1 = it.frase && (it.type === "write" || it.type === "dictation")
       ? Frasi.gradeWritten(given, it.answer).verdict : Engine.grade(given, it);
@@ -2115,7 +2201,7 @@
                 : d.verdict === "sbagliato" && d.cat ? "sbagliato"
                 : v1 === "quasi" || d.verdict === "quasi" ? "quasi" : "sbagliato";
     // Phrase drills stay lenient on accents only.
-    if (it.frase && verdict === "sbagliato" && d.all && d.all.every(function (c) { return c === "accento" || c === "refuso"; })) {
+    if (it.frase && verdict === "sbagliato" && d.all && d.all.every(function (c) { return SLIPS[c]; })) {
       verdict = "quasi";
     }
     if (verdict === "giusto") {
@@ -2170,7 +2256,7 @@
 
   function showPrompt(d) {
     fx.close();
-    // The word(s) to fix, with the first letter showing: c_me.
+    // The word(s) to fix, with the first letter showing: c_mo.
     var masked = (d.fixed || []).filter(function (t) { return t.fix; }).map(function (t) {
       return t.w.charAt(0) + t.w.slice(1).replace(/[^' ]/g, "_");
     }).join(" ");
@@ -2192,7 +2278,7 @@
   }
 
   function recordError(d, given) {
-    if (!d || !d.cat || { refuso: 1, soggetto: 1, vuoto: 1 }[d.cat]) return;
+    if (!d || !d.cat || UNRECORDED[d.cat]) return;
     if (!state.errs) state.errs = {};
     if (!state.errLog) state.errLog = [];
     var e = state.errs[d.cat] || (state.errs[d.cat] = { n: 0, fixed: 0, last: 0 });
@@ -2298,9 +2384,7 @@
     renderHeader();
     if (gained) xpFly(gained);
 
-    var label = opts.label || { giusto: pick(["Bravo!", "Perfetto!", "Esatto!", "Benissimo!", "Ottimo!", "Così si fa!"]),
-                  quasi: "Quasi! Ci sei.",
-                  sbagliato: pick(["Non fa niente. Era così:", "Capita. Era così:", "Dai, era così:"]) }[verdict];
+    var label = opts.label || { giusto: pick(UI.giusto), quasi: UI.quasi, sbagliato: pick(UI.sbagliato) }[verdict];
     var sol = it.type === "listen" && it.frase ? it.frase.it + " — " + it.answer
             : it.frase ? it.frase.it : it.answer;
     var fb = '<div class="feedback ' + verdict + '">' +
@@ -2319,7 +2403,7 @@
       })() +
       relearn +
       '<div class="row" style="margin-top:10px">' +
-        '<button class="btn" id="next">Avanti →</button>' +
+        '<button class="btn" id="next">' + UI.next + "</button>" +
         '<button class="tab" id="say2">🔊 escuchar</button>' +
         (q < 2 && aiKey() && window.Scrivi && it.type !== "hunt" ? '<button class="tab" id="aiexp">🤖 Explicame</button>' : "") +
       '</div><div id="aiexpout"></div></div>';
@@ -2353,10 +2437,10 @@
     var spoken = it.frase ? it.frase.it : it.src === "lettura" ? "" : it.dir === "it-es" || it.type === "scopri" ? it.stem
       : filledStem(it) || it.answer;
     if (SAY_TYPES[it.type] || it.dettato) spoken = it.say;
-    // False friends and structured input: read the Italian prompt aloud.
+    // False friends and structured input: read the prompt of the language aloud.
     if (it.lab === "falsi" || it.lab === "capire") spoken = it.stem;
-    // A Spanish answer (¿Qué significa «mica»? → No es nada fácil) is not
-    // read: the Italian sentence of the question is, when there is one.
+    // A Spanish answer (¿Qué significa «saudade»? → nostalgia) is not
+    // read: the sentence of the question is, when there is one.
     if (spanishText(spoken) || (spoken === it.answer && asksMeaning(it))) spoken = it.stem && !/_{3,}/.test(it.stem) && !spanishText(it.stem) ? it.stem : "";
     $("#next").onclick = nextItem;
     on("#aiexp", function () {
@@ -2365,7 +2449,7 @@
       if (outE) outE.innerHTML = '<p class="muted small">⏳ Preguntándole a la IA…</p>';
       var fbText = ($("#fb") || {}).innerText || "";
       var x = { prompt: it.prompt, stem: it.stem, options: it.options, given: given, answer: sol,
-                accept: it.accept, feedback: fbText.split("Avanti")[0].replace(/\s+/g, " ").slice(0, 600) };
+                accept: it.accept, feedback: fbText.split(UI.next)[0].replace(/\s+/g, " ").slice(0, 600) };
       // Graded hints (dynamic assessment): implicit → the rule as a
       // question → the explanation.  The level reached is kept as a
       // signal of how much mediation the learner needed.
@@ -2389,7 +2473,7 @@
             (lvl >= 2 ? '<p><b>Pista 2:</b> ' + esc(String(data.pista2 || "")) + "</p>" : "") +
             (lvl >= 3 ? "<p>" + mk(esc(String(data.explicacion || ""))) + "</p>" +
               (dispute ? '<p class="muted small">La IA cree que ' + (data.tambien_correcta ? "tu respuesta también vale" : "la corrección de la app no es buena") +
-                 ". Quedó anotado en Io → «Correcciones para revisar».</p>" : "") + modelLine(meta) : "") +
+                 ". Quedó anotado en " + UI.me + " → «Correcciones para revisar».</p>" : "") + modelLine(meta) : "") +
             (lvl < 3 ? '<div class="row"><button class="tab" id="morehint2">' + (lvl === 1 ? "💡 Más pista" : "📐 La explicación") + "</button></div>" : "") +
             "</div>";
           on("#morehint2", function () {
@@ -2417,7 +2501,7 @@
   function keywordBox(word) {
     if (!word) return "";
     var kw = (state.keywords || {})[word] || "";
-    return '<div class="keyword"><label class="muted small">🧷 Tu imagen para recordarla <small>(opcional: «burro» → un burro untado en manteca)</small></label>' +
+    return '<div class="keyword"><label class="muted small">🧷 Tu imagen para recordarla <small>(opcional: ' + UI.keywordEx + ")</small></label>" +
       '<div class="typed"><input id="kwin" data-kw="' + esc(word) + '" maxlength="80" placeholder="una imagen, una rima…" value="' + esc(kw) + '">' +
       '<button class="tab" id="kwsave">Guardar</button></div></div>';
   }
@@ -2470,7 +2554,7 @@
       (it.note ? '<div class="note">' + mk(it.note) + "</div>" : "") +
       '<div class="note">🔬 Intentar adivinar antes de aprender ayuda a recordar, ' +
         "aunque te equivoques (efecto de la prueba previa).</div>" +
-      '<div class="row" style="margin-top:10px"><button class="btn" id="next">Avanti →</button></div></div>';
+      '<div class="row" style="margin-top:10px"><button class="btn" id="next">' + UI.next + "</button></div></div>";
     document.querySelectorAll(".opt").forEach(function (o) {
       o.disabled = true;
       if (o.textContent === it.answer) o.classList.add("right");
@@ -2482,8 +2566,8 @@
   function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
 
   /* A distracted learner closes the app mid-round: the round is kept in
-     localStorage and Oggi offers to pick it up where it was. */
-  var PENDING_KEY = "laviac1.pending.v1";
+     localStorage and Oggi / Hoje offers to pick it up where it was. */
+  var PENDING_KEY = SKEY("pending.v1");
   function savePending() {
     try {
       var p = null;
@@ -2499,7 +2583,7 @@
       }
       if (p) localStorage.setItem(PENDING_KEY, JSON.stringify(p));
       else localStorage.removeItem(PENDING_KEY);
-    } catch (e) { /* niente */ }
+    } catch (e) { /* nada */ }
   }
   function clearPending() { try { localStorage.removeItem(PENDING_KEY); } catch (e) { /* */ } }
   function loadPending() {
@@ -2511,11 +2595,11 @@
       return p;
     } catch (e) { return null; }
   }
-  var KIND_NAME = { debil: "Puntos débiles", domina: "Dominala", round: "Entrenamiento", giorno: "Sfida del giorno", boss: "Jefe", gym: "Gimnasio de verbos", pausa: "Pausa caffè", review: "Ripasso",
-                    scene: "Frases", vocab: "Palabras de la semana", lettura: "Lectura", sfida: "Sfida", ponte: "Ponte",
-                    falsi: "Falsi amici", capire: "Capire", "b-voc": "Parole", "b-tr": "Traduci", "b-gap": "Coniuga in contesto",
-                    "b-forme": "Forme", "b-err": "Trova l'errore", clinica: "Clínica", suoni: "Suoni", "b-freq": "Parole frecuentes",
-                    ritorno: "Cinco minutos para retomar", micro: "Ripasso 2 min", esame: "Esame C1", duello: "Duelo" };
+  var KIND_NAME = { debil: "Puntos débiles", domina: "Dominala", round: "Entrenamiento", giorno: UI.daily, boss: UI.Boss, gym: "Gimnasio de verbos", pausa: UI.pausa, review: UI.review,
+                    scene: "Frases", vocab: "Palabras de la semana", lettura: "Lectura", sfida: UI.sfida, ponte: "Ponte",
+                    falsi: UI.falsi, capire: UI.capire, "b-voc": UI.words, "b-tr": UI.tr, "b-gap": UI.gap,
+                    "b-forme": UI.forme, "b-err": UI.err, clinica: "Clínica", suoni: UI.suoni, "b-freq": UI.wordsFreq,
+                    ritorno: "Cinco minutos para retomar", micro: UI.micro, esame: UI.examC1, duello: "Duelo" };
   function pendingTitle(p) {
     if (p.type === "lezione") return "Lección · semana " + p.week + " · " + (p.i + 1) + "/" + p.steps.length;
     return (KIND_NAME[p.round.kind] || "Ronda") + " · " + (p.round.i + 1) + "/" + p.round.items.length;
@@ -2576,7 +2660,7 @@
       renderHeader();
       view.screen = "esame";
       render();
-      toast("Prova di " + round.arg + ": " + Math.round(okE / Math.max(1, firsts0.length) * 100) + " %", 3000);
+      toast(EX.provaToast(round.arg, proveName(round.arg)) + ": " + Math.round(okE / Math.max(1, firsts0.length) * 100) + " %", 3000);
       return;
     }
     var passed = false, transfer = null;
@@ -2648,7 +2732,7 @@
     var extras = [];
     if (round.kind === "giorno") {
       state.dailyDone = Engine.dayKey();
-      if (pct >= 80) { state.dailyWon = (state.dailyWon || 0) + 1; extras.push("🎯 Sfida del giorno ganada · " + state.dailyWon + " en total"); }
+      if (pct >= 80) { state.dailyWon = (state.dailyWon || 0) + 1; extras.push(UI.dailyWon + " · " + state.dailyWon + " en total"); }
     }
     if (total >= 5 && state.firstRound !== Engine.dayKey()) {
       state.firstRound = Engine.dayKey();
@@ -2691,7 +2775,7 @@
       state.perfectWeeks[w.week] = Date.now();
       gain(100);
       setTimeout(confetti, 400);
-      out.push("🏁 ¡Settimana perfetta! Todas las misiones de la semana " + w.week + ": +100 xp");
+      out.push("🏁 " + UI.perfectWeek + " Todas las misiones de la semana " + w.week + ": +100 xp");
     }
     return out;
   }
@@ -2699,8 +2783,8 @@
   function renderRisultato() {
     var r = view.result;
     var title = round.kind === "boss"
-      ? (r.passed ? "⚔️ Jefe vencido" : "Jefe no vencido")
-      : r.pct >= 90 ? "🏆 ¡Fantastico!" : r.pct >= 70 ? "👏 ¡Molto bene!" : "💪 Sesión terminada";
+      ? (r.passed ? "⚔️ " + UI.Boss + " vencido" : UI.Boss + " no vencido")
+      : r.pct >= 90 ? UI.great : r.pct >= 70 ? UI.good : "💪 Sesión terminada";
     var goal = Engine.goalFor(state), tx = Engine.todayXp(state);
 
     var html = '<h1>' + title + "</h1>" +
@@ -2730,8 +2814,8 @@
         (r.transfer.pct + 15 < r.pct ? "acordás de las frases. <b>Acá hay distancia</b>: la Clínica y los duelos ayudan a generalizar.</p>" : "acordás de las frases. Van parejas: la regla está.</p>");
     }
     if (round.kind === "boss") {
-      // Like the CILS: one mark per ability, each one has to pass.
-      var AB = { ascolto: "Ascolto", lettura: "Lettura", strutture: "Strutture", produzione: "Produzione" };
+      // Like the certifications: one mark per ability, each one has to pass.
+      var AB = EX.abilities || {};
       var ab = {};
       round.log.forEach(function (l) {
         if (l.novel) return;              // the new sentences are reported apart
@@ -2742,7 +2826,7 @@
         var a = ab[k] || (ab[k] = { n: 0, ok: 0 });
         a.n++; if (l.verdict === Engine.VERDICT.RIGHT) a.ok++;
       });
-      html += '<h3>Por abilità</h3><table class="res">' + Object.keys(ab).map(function (k) {
+      html += "<h3>" + EX.byAbility + '</h3><table class="res">' + Object.keys(ab).map(function (k) {
         var a = ab[k], p = Math.round(a.ok / a.n * 100);
         return "<tr><td>" + AB[k] + "</td><td>" + a.ok + " / " + a.n + " · " + (p >= 55 ? "✓" : "✗ (mínimo 55 %)") + "</td></tr>";
       }).join("") + "</table>";
@@ -2769,24 +2853,24 @@
       return true;
     });
     if (wrong.length) {
-      html += "<h3>Lo que aprendiste hoy (vuelve en el ripasso)</h3><table class=\"res\">" +
+      html += "<h3>Lo que aprendiste hoy (vuelve en " + UI.reviewEl + ")</h3><table class=\"res\">" +
         wrong.slice(0, 10).map(function (l) {
           var q = l.es || (l.stem && !/^\s*_+\s*$/.test(l.stem) ? l.stem : "") || l.prompt || "—";
           return "<tr><td>" + esc(String(q).replace(/_{3,}/g, "…")) + "</td><td>" +
             esc(l.answer) + "</td></tr>";
         }).join("") + "</table>" +
-        (wrong.length > 10 ? '<p class="muted">y ' + (wrong.length - 10) + " más en el ripasso.</p>" : "");
+        (wrong.length > 10 ? '<p class="muted">y ' + (wrong.length - 10) + " más en " + UI.reviewEl + ".</p>" : "");
     }
 
     html += '<div class="row" style="margin-top:16px">' +
-      (round.from === "briefing" ? '<button class="btn" id="backweek">← Seguir el percorso</button>' : "") +
+      (round.from === "briefing" ? '<button class="btn" id="backweek">← Seguir ' + UI.pathEl + "</button>" : "") +
       '<button class="btn' + (round.from === "briefing" ? " ghost" : "") + '" id="again">Otra ronda</button>' +
       '<button class="btn ghost" id="toggi">Inicio</button>' +
       "</div></div>";
     return html;
   }
 
-  /* ----------------------------------------------------------------- lampo */
+  /* ----------------------------------------------------------------- relâmpago */
 
   var LAMPO_MS = 60000;
 
@@ -2806,8 +2890,8 @@
     var pool = matureWords();
     var w = pool[Math.floor(Math.random() * pool.length)] || "casa";
     var fake = window.Freq && Freq.loaded() && Math.random() < 0.5 ? Freq.pseudo(w) : null;
-    return { kind: "parole", stem: fake || w, real: !fake, options: ["✓ Parola", "✗ Non è una parola"],
-             answer: fake ? "✗ Non è una parola" : "✓ Parola" };
+    return { kind: "parole", stem: fake || w, real: !fake, options: [UI.wordYes, UI.wordNo],
+             answer: fake ? UI.wordNo : UI.wordYes };
   }
   function lampoNext() { return lampo.mode === "parole" ? parolaItem() : Drills.lampoItem(state); }
 
@@ -2836,7 +2920,7 @@
       '<span class="combo">✓ ' + lampo.right + "</span>" +
       '<button class="btn ghost" id="lquit">✕</button></div>' +
       '<div class="card lampocard">' +
-        '<div class="prompt">' + (lampo.mode === "parole" ? "🧠 ¿Es una palabra italiana?" : "⚡ ¿Cómo se dice?") + "</div>" +
+        '<div class="prompt">' + (lampo.mode === "parole" ? "🧠 ¿Es una palabra " + UI.wordAdj + "?" : "⚡ ¿Cómo se dice?") + "</div>" +
         '<div class="stem' + (lampo.mode === "parole" ? " big" : "") + '">' + esc(it.stem) + "</div>" +
         '<div class="options">' + it.options.map(function (o, k) {
           return '<button class="opt" data-lopt="' + k + '">' + esc(o) + "</button>";
@@ -2901,7 +2985,7 @@
       '<button class="btn ghost" id="toggi">Inicio</button></div></div>';
   }
 
-  /* ------------------------------------------------------------ sfide */
+  /* ------------------------------------------------------------ desafíos */
 
   function renderSfide(w) {
     var ids = {};
@@ -2911,8 +2995,8 @@
     var doneN = playable.filter(function (c) { return (state.challengeLog[c.id] || {}).q === 2; }).length;
 
     var html = '<button class="btn ghost" id="back2">← a la semana</button>' +
-      "<h1>Sfide del Maestro</h1>" +
-      '<p class="lead">Los desafíos del <b>Soluzioni</b>, ahora con corrección: cada uno es una ronda corta. ' +
+      "<h1>" + UI.chal + "</h1>" +
+      '<p class="lead">' + UI.chalLead +
       "Con 80% o más lo ganás ★.</p>" +
       (playable.length ? '<div class="card pathsum"><b>' + doneN + " / " + playable.length + ' ★</b>' +
         '<span class="goalbar"><i style="width:' + Math.round(doneN / playable.length * 100) + '%"></i></span></div>' : "") +
@@ -2924,7 +3008,7 @@
       if (c.play && c.play.length) {
         html += '<button class="mission' + (done && done.q === 2 ? " done" : "") + '" data-sfida="' + c.id + '">' +
           '<span class="mi">' + (done && done.q === 2 ? "★" : "📖") + "</span>" +
-          "<span><b>" + title + "</b><small>" + c.play.length + " preguntas · cap. " + c.chapter +
+          "<span><b>" + title + "</b><small>" + c.play.length + " preguntas" + (c.chapter ? " · cap. " + esc(c.chapter) : "") +
           (done && done.pct != null ? " · mejor: " + done.pct + "%" : "") + "</small></span>" +
           '<span class="go">›</span></button>';
       } else {
@@ -2943,7 +3027,7 @@
   }
 
 
-  /* ------------------------------------------------------------------- io */
+  /* ------------------------------------------------------------------- eu */
 
   function renderIo() {
     var lv = Engine.levelFor(state.xp);
@@ -2953,7 +3037,7 @@
     var nextRank = null;
     Engine.RANKS.forEach(function (r) { if (!nextRank && r[0] > lv.level) nextRank = r; });
 
-    return "<h1>Io</h1>" +
+    return "<h1>" + UI.me + "</h1>" + switchCard() +
       '<div class="card rank"><div class="rk">' + esc(Engine.rankFor(lv.level)) + "</div>" +
         '<div class="muted">nivel ' + lv.level + " · " + state.xp + " xp totales" +
         (nextRank ? " · próximo rango: <b>" + esc(nextRank[1]) + "</b> en el nivel " +
@@ -2993,10 +3077,10 @@
       aiCard() +
       (window.Voci && Voci.count() ? (function () {
         var cr = Voci.credits();
-        return '<div class="card"><h2>🎙️ Voces reales</h2><p class="muted small">Suoni usa grabaciones de hablantes reales para ' + Voci.count() +
+        return '<div class="card"><h2>🎙️ Voces reales</h2><p class="muted small">' + UI.suoni + " usa grabaciones de hablantes reales para " + Voci.count() +
           " palabras. Voces de Lingua Libre (Wikimedia Commons), licencia CC BY-SA 4.0: " + Object.keys(cr).map(esc).join(", ") + ".</p></div>";
       })() : "") +
-      (window.VociCV ? '<div class="card"><h2>🗣️ Oraciones grabadas</h2><p class="muted small">El dictado de Suoni y «¿Qué forma escuchaste?» usan ' +
+      (window.VociCV && (VociCV.ALL || []).length ? '<div class="card"><h2>🗣️ Oraciones grabadas</h2><p class="muted small">El dictado de ' + UI.suoni + " y «¿Qué forma escuchaste?» usan " +
         VociCV.ALL.length + " oraciones leídas por voluntarios de Common Voice (Mozilla), de dominio público (CC0).</p></div>" : "") +
       '<div class="card"><h2>Medallas</h2><div class="badges">' +
         Engine.BADGES.map(function (b) {
@@ -3011,7 +3095,7 @@
         "<tr><td>Frases de conversación vistas</td><td>" + phrasesKnown + " / " +
           Frasi.ALL.length + "</td></tr>" +
         "<tr><td>Frases escritas de memoria</td><td>" + (state.written || 0) + "</td></tr>" +
-        "<tr><td>Récord Lampo</td><td>" + ((state.best || {}).lampo || 0) + "</td></tr>" +
+        "<tr><td>Récord " + UI.lampo + "</td><td>" + ((state.best || {}).lampo || 0) + "</td></tr>" +
         "<tr><td>Mejor combo</td><td>" + ((state.best || {}).combo || 0) + "</td></tr>" +
         "<tr><td>Respuestas totales</td><td>" + state.totals.attempts + "</td></tr>" +
         "<tr><td>Correctas</td><td>" + state.totals.right + "</td></tr>" +
@@ -3023,14 +3107,14 @@
       "</div></div>" + versionLine();
   }
 
-  /* Meta e record: il «yo ideal» con le parole dell'alunno, i record
-     personali e la scheda da condividere. */
+  /* Meta y récords: el «yo ideal» con las palabras del alumno, los récords
+     personales y la tarjeta para compartir. */
   function planCard() {
     var id = state.ideal || {}, rec = state.records || {};
     var why = WHY.filter(function (w) { return w[0] === id.why; })[0];
     return '<div class="card" id="plancard"><h2>🎯 Tu meta</h2>' +
       '<span class="chips">' + WHY.map(function (w) { return '<button class="tab' + (id.why === w[0] ? " on" : "") + '" data-why3="' + w[0] + '">' + w[1] + "</button>"; }).join("") + "</span>" +
-      '<label class="set"><span>Con tus palabras<small>«En seis meses pido un café en Nápoles sin pensar»</small></span></label>' +
+      '<label class="set"><span>Con tus palabras<small>' + UI.metaEx + "</small></span></label>" +
       '<div class="typed"><input id="idealtext" maxlength="120" value="' + esc(id.text || "") + '" placeholder="En seis meses…"><button class="tab" id="idealsave">Guardar</button></div>' +
       (why || id.text ? '<p class="muted small">Tu meta: ' + (why ? esc(why[1]) : "") + (id.text ? " · «" + esc(id.text) + "»" : "") + "</p>" : "") +
       '<h3>🏅 Récords personales</h3><table class="res">' +
@@ -3038,15 +3122,15 @@
         "<tr><td>Semanas seguidas con tres días</td><td>" + (rec.settimane || Engine.weekStreak(state)) + "</td></tr>" +
         "<tr><td>Palabras nuevas en una semana</td><td>" + (rec.parole || 0) + "</td></tr>" +
         "<tr><td>Errores corregidos por vos en una ronda</td><td>" + (rec.corrette || 0) + "</td></tr>" +
-        "<tr><td>Lampo · Parola o no?</td><td>" + ((state.best || {}).lampo || 0) + " · " + ((state.best || {}).lampoParole || 0) + "</td></tr>" +
+        "<tr><td>" + UI.lampo + " · " + UI.wordOrNot + "</td><td>" + ((state.best || {}).lampo || 0) + " · " + ((state.best || {}).lampoParole || 0) + "</td></tr>" +
       "</table>" +
       '<div class="row" style="margin-top:10px"><button class="btn ghost" id="share">📤 Compartir mi semana</button></div>' +
       "</div>";
   }
 
-  /* Il lessico per frequenza (Nation 2006; KELLY per il livello): quanto
-     del vocabolario di ogni livello conosci, e le parole frequenti che
-     mancano, pronte da praticare. */
+  /* El léxico por frecuencia (Nation 2006; data/frequenza.json del paquete): cuánto del
+     vocabulario de cada nivel conocés, y las palabras frecuentes que faltan,
+     listas para practicar. */
   function knownWords() {
     return Freq.knownLemmas(state, {
       phrase: function (id) { var f = Frasi.BY_ID[id]; return f ? f.it : ""; },
@@ -3067,7 +3151,7 @@
       return '<div class="eb"><span>' + l + "</span><i style=\"width:" + p + '%"></i><b>' + c[0] + " / " + c[1] + "</b></div>";
     }).join("");
     return '<div class="card"><h2>📚 Tu vocabulario</h2>' +
-      '<p class="muted">Palabras por frecuencia (KELLY, itWaC): las 2.000 más frecuentes cubren el 86 % de lo que se dice. ' +
+      '<p class="muted">' + UI.freqNote +
       "Conocés <b>" + cov.fundamental[0] + " / " + cov.fundamental[1] + "</b> de las fundamentales (A1 y A2).</p>" +
       '<div class="errbars">' + bars + "</div>" +
       (gaps.length ? '<p class="muted small" style="margin-top:10px">Frecuentes que te faltan: <i>' + gaps.map(esc).join(", ") + "</i>.</p>" +
@@ -3075,10 +3159,10 @@
       "</div>";
   }
 
-  /* La memoria: quante schede in apprendimento, in ripasso e in
-     mantenimento, la probabilità media di ricordo oggi, la velocità
-     d'oblio stimata sui propri ripassi, e le regolazioni (ritenzione,
-     notte/mattina). */
+  /* La memoria: cuántas fichas aprendiendo, en repaso y en mantenimiento,
+     la probabilidad media de recordarlas hoy, la velocidad de olvido
+     estimada con tus propios repasos, y los ajustes (retención,
+     noche/mañana). */
   function memoriaCard() {
     var m = Engine.memoryStats(state), sp = state.speed || {};
     var speedLine = function (k, name) {
@@ -3104,20 +3188,17 @@
       "</div>";
   }
 
-  /* Il quaderno dell'itañol (la guida, Della Putta 2011): le interferenze
-     che si fossilizzano, con lo stato di ognuna. */
-  var ITANOL = [["a_personale", "«a» personal: conosco Jorge, no *a Jorge*"], ["doppie", "dobles: nonno / nono"],
-                ["accento", "è / e, vocales abiertas y cerradas"], ["ausiliare", "essere / avere"],
-                ["participio_accordo", "sono andata: el participio concuerda"], ["ci_ne", "ci y ne"],
-                ["articolo", "il / lo, artículo donde el español no lo pone"], ["preposizione_articolata", "nel, sul, dalla"],
-                ["congiuntivo", "congiuntivo: penso che sia"], ["falso_amico", "falsos amigos: caldo, burro, salire"],
-                ["parola_spagnola", "palabras en español dentro del italiano"]];
+  /* El cuaderno de la interlengua (itañol, portuñol): las interferencias
+     que se fosilizan, con el estado de cada una.  La lista es del paquete
+     (LANG.interlang.list, o una función que la lee del diagnóstico); las
+     claves son categorías del diagnóstico (diagnosi.js). */
+  var IL = LG.interlang || { title: "📓 Cuaderno", blurb: "", list: [] };
   /* The AI corrector: the key, and the corrections it disputed (so the
      learner can pass them on in one go instead of explaining each). */
   function aiCard() {
     var notes = state.aiNotes || [];
     return '<div class="card" id="aicard"><h2>🤖 Corrector con IA</h2>' +
-      '<p class="muted small">Con una clave gratuita, Scrivi corrige tu texto entero y en cualquier ejercicio aparece «🤖 Explicame».</p>' +
+      '<p class="muted small">Con una clave gratuita, ' + UI.scrivi + " corrige tu texto entero y en cualquier ejercicio aparece «🤖 Explicame».</p>" +
       aiKeyFields() +
       (notes.length ? "<h3>Correcciones para revisar (" + notes.length + ")</h3>" +
         '<p class="muted small">La IA cree que en estos casos tu respuesta también valía o la corrección de la app no era buena. Copialas y pegámelas todas juntas.</p>' +
@@ -3130,9 +3211,10 @@
 
   function itanolCard() {
     var errs = state.errs || {}, now = Date.now();
-    return '<div class="card"><h2>📓 Cuaderno itañol</h2>' +
-      '<p class="muted">Las interferencias del español que se fosilizan (Della Putta). Verde: catorce días sin ese error.</p>' +
-      '<ul class="itanol">' + ITANOL.map(function (x) {
+    var list = (typeof IL.list === "function" ? IL.list() : IL.list) || [];
+    return '<div class="card"><h2>' + IL.title + "</h2>" +
+      '<p class="muted">' + IL.blurb + "</p>" +
+      '<ul class="itanol">' + list.map(function (x) {
         var e = errs[x[0]], quiet = !e || now - (e.last || 0) > 14 * 86400000;
         return "<li><span>" + (quiet ? "🟢" : "🔴") + "</span><span>" + esc(x[1]) +
           (e ? ' <small class="muted">· ' + e.n + (e.fixed ? " · " + e.fixed + " corregidos" : "") + "</small>" : "") + "</span></li>";
@@ -3167,17 +3249,17 @@
   }
 
   function exportSave() {
-    var name = "italiano-copia-" + stamp() + ".json";
+    var name = UI.exportFile + stamp() + ".json";
     var blob = new Blob([JSON.stringify(state)], { type: "application/json" });
     // On phones, the share sheet lets you drop the file in Drive, mail or chat.
     try {
       var file = new File([blob], name, { type: "application/json" });
       if (navigator.canShare && navigator.canShare({ files: [file] })) {
-        navigator.share({ files: [file], title: "Copia de La Via C1" })
+        navigator.share({ files: [file], title: "Copia de " + LG.brand })
           .catch(function () { download(blob, name); });
         return;
       }
-    } catch (e) { /* niente share */ }
+    } catch (e) { /* sin share */ }
     download(blob, name);
   }
 
@@ -3210,8 +3292,8 @@
     reader.readAsText(file);
   }
 
-  /* Un evento ricorrente .ics: il telefono lo aggiunge al calendario e ti
-     avvisa ogni giorno, senza bisogno di server né notifiche push. */
+  /* Un evento que se repite (.ics): el teléfono lo agrega al calendario y
+     avisa todos los días, sin servidor ni notificaciones push. */
   function reminderIcs(hhmm) {
     var p = hhmm.split(":");
     var d = new Date();
@@ -3224,26 +3306,25 @@
       two(end.getHours()) + two(end.getMinutes()) + "00";
     var url = location.href.split("#")[0];
     return [
-      "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//La Via C1//IT",
+      "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//" + LG.brand + "//" + UI.icsId,
       "BEGIN:VEVENT",
-      "UID:laviac1-daily@" + location.host,
+      "UID:" + LG.storage + "-daily@" + location.host,
       "DTSTAMP:" + new Date().toISOString().replace(/[-:]/g, "").slice(0, 15) + "Z",
       "DTSTART:" + local,
       "DTEND:" + localEnd,
       "RRULE:FREQ=DAILY",
-      "SUMMARY:☕ Pausa caffè: 3 minutos de italiano",
-      "DESCRIPTION:Racha en juego. Abrí La Via C1: " + url,
+      "SUMMARY:" + UI.icsSummary,
+      "DESCRIPTION:Racha en juego. Abrí " + LG.brand + ": " + url,
       "URL:" + url,
       "BEGIN:VALARM", "TRIGGER:PT0M", "ACTION:DISPLAY",
-      "DESCRIPTION:Andiamo! 3 minutos de italiano", "END:VALARM",
+      "DESCRIPTION:" + UI.icsAlarm, "END:VALARM",
       "END:VEVENT", "END:VCALENDAR"
     ].join("\r\n");
   }
 
   /* ---------------------------------------------------------------- router */
 
-  var TABS = [["oggi", "🏠", "Oggi"], ["frasi", "🏋️", "Allena"], ["leggi", "📖", "Leggi"],
-              ["percorso", "🗺️", "Percorso"], ["io", "👤", "Io"]];
+  var TABS = UI.tabs;
 
   function renderNav() {
     var nav = $("#nav");
@@ -3314,7 +3395,7 @@
   /* Another tab (or the installed app next to the browser) saved: take its
      progress instead of overwriting it with ours on the next save. */
   window.addEventListener("storage", function (e) {
-    if (e.key !== "laviac1.save.v1" || !e.newValue) return;
+    if (e.key !== (Engine.STORAGE_KEY || SKEY("save.v1")) || !e.newValue) return;
     state = Engine.load();
     if (!course) return;
     renderHeader();
@@ -3333,7 +3414,7 @@
 
   function on(sel, fn) { var b = $(sel); if (b) b.onclick = fn; }
 
-  /* A double tap on «Avanti» must not answer the next question: taps
+  /* A double tap on «Avanti» / «Próxima» must not answer the next question: taps
      right after a screen change are swallowed. */
   /* Only a tap in the same spot as the one that changed the screen is a
      double tap; a quick tap somewhere else is the learner answering fast. */
@@ -3365,13 +3446,13 @@
     on("#back", function () { go("percorso"); });
     on("#toggi", function () { go("oggi"); });
 
-    // oggi
+    // hoje
     on("#pausa", function () { startRound("pausa"); });
     on("#giorno", function () { startRound("giorno"); });
     on("#lampo", function () { startLampo("frasi"); });
     on("#scena", function () { startRound("scene", Drills.nextScene(state).id); });
     on("#rev", function () { startRound("review"); });
-    on("#sayfdg", function () { speak(Frasi.ofTheDay().it, true); });
+    on("#sayfdg", function () { var fd = Frasi.ofTheDay(new Date(), Math.min(state.unlocked || 1, 52)); speak(fd[LG.code] || fd.it, true); });
     on("#firstles", function () { view.week = 1; startLezione(); });
     on("#install", function () {
       if (!installPrompt) return;
@@ -3462,7 +3543,7 @@
       else { view.screen = "briefing"; render(); }
     });
 
-    // leggi e laboratorio
+    // ler y laboratorio
     document.querySelectorAll("[data-bank]").forEach(function (b) {
       b.onclick = function () { startRound(b.dataset.bank); };
     });
@@ -3505,7 +3586,7 @@
       };
     });
 
-    // lampo
+    // relâmpago
     document.querySelectorAll("[data-lopt]").forEach(function (b) {
       b.onclick = function () { lampoAnswer(b); };
     });
@@ -3551,7 +3632,7 @@
     if (!dg || dg.week !== w.week) dg = { week: w.week, step: 0, plays: 0 };
     var done = (state.dictogloss || {})[w.week];
     var head = '<button class="btn ghost" id="dgback">← a la semana</button>' +
-      '<h1 class="targa"><span class="t-sup">Dictogloss · Settimana ' + romano(w.week) + '</span><span class="t-via">' + esc(t.title) + "</span></h1>";
+      plate("Dictogloss · " + UI.week + " " + weekNum(w.week), esc(t.title));
     if (dg.step === 0) {
       var second = dg.plays >= 1;
       return head + '<div class="card"><p>' + esc(t.es) + "</p>" +
@@ -3563,7 +3644,7 @@
           (dg.plays >= 2 ? "Listo: ahora reconstruilo" : second ? "Escucha 2 de 2: anotá mientras escuchás" : "Escucha 1 de 2") + "</p></div>" +
         '<div id="dgkeys">' + (second ? dgKeysHtml(t) : "") + "</div>" +
         '<label class="dgnotes"' + (second ? "" : " hidden") + '><span class="muted small">📝 Tus notas (palabras sueltas, como salgan)</span>' +
-          '<textarea id="dgnotes" class="grow" rows="3" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder="sabato… amici… per fortuna…">' +
+          '<textarea id="dgnotes" class="grow" rows="3" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder="' + UI.dgNotes + '">' +
           esc(dg.notes || "") + "</textarea></label>" +
         '<button class="btn wide" id="dgwrite"' + (dg.plays >= 2 ? "" : " disabled") + '>Ya escuché las dos → reconstruir</button></div>';
     }
@@ -3571,10 +3652,10 @@
       return head + '<div class="card">' +
         (dg.notes && dg.notes.trim() ? '<p class="muted small">📝 Tus notas</p><p class="dgnotesview it">' + esc(dg.notes) + "</p>" : "") +
         dgKeysHtml(t) +
-        '<p class="muted small">Escribí acá el texto en italiano: lo que recordás y tus notas, con tus palabras donde haga falta. ' +
+        '<p class="muted small">Escribí acá el texto en ' + UI.langEs + ": lo que recordás y tus notas, con tus palabras donde haga falta. " +
         "Bloques a recuperar: " + t.chunks.length + ".</p>" +
-        '<textarea id="dgtext" class="grow scrivi" rows="7" spellcheck="false" autocapitalize="sentences" placeholder="Ricostruisci il testo…">' + esc(dg.given || "") + "</textarea>" +
-        '<div class="row" style="margin-top:10px"><button class="btn" id="dgcheck">Controlla</button>' +
+        '<textarea id="dgtext" class="grow scrivi" rows="7" spellcheck="false" autocapitalize="sentences" placeholder="' + UI.dgText + '">' + esc(dg.given || "") + "</textarea>" +
+        '<div class="row" style="margin-top:10px"><button class="btn" id="dgcheck">' + UI.check + "</button>" +
         '<button class="tab" id="dgagain">🔊 escuchar otra vez (cuenta como ayuda)</button></div>' +
         '<div id="dgout"></div></div>';
     }
@@ -3585,7 +3666,7 @@
       (r.missed.length ? '<h3>Faltaron</h3><p>' + r.missed.map(esc).join(" · ") + "</p>" : "") +
       '<h3>Tu versión</h3><p class="dgnotesview it">' + esc(dg.given || "") + "</p>" +
       (dg.findings && dg.findings.length ? "<h3>Para revisar en tu versión</h3><ol class=\"findings\">" + dg.findings.map(function (f) { return "<li>" + mk(f.msg) + "</li>"; }).join("") + "</ol>" : "") +
-      '<div class="row" style="margin-top:14px"><button class="btn" id="dgback2">← Seguir el percorso</button>' +
+      '<div class="row" style="margin-top:14px"><button class="btn" id="dgback2">← Seguir ' + UI.pathEl + "</button>" +
       '<button class="btn ghost" id="dgredo">Otra vez</button></div></div>';
   }
   function dgKeysHtml(t) {
@@ -3672,7 +3753,7 @@
     on("#dgredo", function () { dg = { week: w.week, step: 0, plays: 0 }; render(); });
   }
 
-  /* --------------------------------------------------- leggi e ascolta */
+  /* --------------------------------------------------- leia e ouça */
 
   /* Listening time counts as input (Nation's first strand): one xp per
      ten seconds, thirty a day at most. */
@@ -3716,7 +3797,7 @@
         if (karaoke) noteListening((Date.now() - karaoke.started) / 1000);
         stopKaraoke();
         document.body.classList.remove("kar-partial", "kar-audio");
-        var b = $("#karplay"); if (b) b.textContent = "🎧 Leggi e ascolta";
+        var b = $("#karplay"); if (b) b.textContent = "🎧 " + UI.karaoke;
         return;
       }
       var i = karaoke.par, off = offsets[i];
@@ -3738,11 +3819,11 @@
   function mediaSession(title, onStop) {
     if (!("mediaSession" in navigator)) return;
     try {
-      navigator.mediaSession.metadata = new MediaMetadata({ title: title, artist: "La Via C1", album: "Leggi e ascolta" });
+      navigator.mediaSession.metadata = new MediaMetadata({ title: title, artist: LG.brand, album: UI.karaoke });
       navigator.mediaSession.setActionHandler("pause", function () { speechSynthesis.pause(); });
       navigator.mediaSession.setActionHandler("play", function () { speechSynthesis.resume(); });
       navigator.mediaSession.setActionHandler("stop", function () { onStop && onStop(); });
-    } catch (e) { /* niente */ }
+    } catch (e) { /* nada */ }
   }
   // Extensive listening: every reading already done, one after the other,
   // audio only (familiar material: Nation's fluency condition).
@@ -3765,7 +3846,7 @@
     var rate = view.karRate || 1;
     on("#karplay", function () {
       var b = $("#karplay");
-      if (karaoke) { stopKaraoke(); document.body.classList.remove("kar-partial", "kar-audio"); if (b) b.textContent = "🎧 Leggi e ascolta"; return; }
+      if (karaoke) { stopKaraoke(); document.body.classList.remove("kar-partial", "kar-audio"); if (b) b.textContent = "🎧 " + UI.karaoke; return; }
       var mode = (document.querySelector("[data-karmode].on") || {}).dataset ? document.querySelector("[data-karmode].on").dataset.karmode : "full";
       if (b) b.textContent = "⏹ Parar";
       startKaraoke(ep, rate, mode);
@@ -3789,7 +3870,7 @@
     on("#enhoff", function () { view.enh = false; render(); });
   }
 
-  /* ------------------------------------------------------------------ parla */
+  /* ------------------------------------------------------------------ fale */
 
   // The level, tenses and vocabulary the AI must stay inside this week.
   function aiContext(w) {
@@ -3812,9 +3893,9 @@
     return mr.n >= 4 && mr.rate > 0.15 ? mr : null;
   }
 
-  // What the local checker marks in a text the AI wrote: the AI's Italian is
-  // checked before the learner reads it («una ragazzo», «il uomo»).
-  function italianErrors(text, week) {
+  // What the local checker marks in a text the AI wrote: the AI's language
+  // is checked before the learner reads it («una ragazzo», «em o Rio»).
+  function langErrors(text, week) {
     if (!window.Scrivi) return [];
     scriviLexicon();
     var r = Scrivi.check(String(text || ""), week || 52);
@@ -3822,17 +3903,17 @@
   }
   // A capital at the start of every sentence.
   function sentenceCase(text) {
-    return String(text || "").replace(/(^|[.!?]\s+|\n\s*)([a-zà-ù])/g, function (m, a, b) { return a + b.toUpperCase(); });
+    return String(text || "").replace(/(^|[.!?]\s+|\n\s*)([a-zà-ÿ])/g, function (m, a, b) { return a + b.toUpperCase(); });
   }
 
   var parla = null;   // { week, scen, history, done, recasts, notes, obj, turns, busy }
   function renderParla(w) {
     var head = '<button class="btn ghost" id="pback">← a la semana</button>' +
-      '<h1 class="targa"><span class="t-sup">Parla · Settimana ' + romano(w.week) + '</span><span class="t-via">' + esc(parla && parla.scen ? parla.scen.titolo : "Role-play") + "</span></h1>";
-    if (!aiKey()) return head + '<div class="card"><p>Para hablar con la IA hace falta una clave gratuita. <a href="#" id="aigo2">Cargala en Io →</a></p></div>';
+      plate(UI.parla + " · " + UI.week + " " + weekNum(w.week), esc(parla && parla.scen ? parla.scen.titolo : "Role-play"));
+    if (!aiKey()) return head + '<div class="card"><p>Para hablar con la IA hace falta una clave gratuita. <a href="#" id="aigo2">Cargala en ' + UI.me + " →</a></p></div>";
     if (!parla || parla.week !== w.week) {
       return head + '<div class="card"><p>Un personaje te espera con una situación de la semana (<b>' + esc(w.fare || w.title) + "</b>). " +
-        "Tenés que conseguir <b>tres objetivos</b> escribiendo en italiano. La IA no te corrige mientras hablan: al final ves tus frases " +
+        "Tenés que conseguir <b>tres objetivos</b> escribiendo en " + UI.langEs + ". La IA no te corrige mientras hablan: al final ves tus frases " +
         "junto a la versión corregida, con una observación por turno.</p>" +
         '<p class="muted small">🔬 Vacío de información con reglas duras (Wang et al. 2025, g = 0,48). La app controla que el personaje use ' +
         "palabras que ya conocés; si se pasa, le pide que lo reescriba.</p>" +
@@ -3852,12 +3933,12 @@
       }).join("") + "</table>" : "<p>✨ Ninguna frase necesitó corrección.</p>";
       return head + '<div class="card"><div class="scorebig"><b>' + parla.obj.length + " / 3</b><span>objetivos</span><span>+" + parla.xp + " xp</span></div>" +
         objs + rec + chat +
-        '<div class="row" style="margin-top:12px"><button class="btn" id="pback2">← Seguir el percorso</button><button class="btn ghost" id="pagain">Otro role-play</button></div></div>';
+        '<div class="row" style="margin-top:12px"><button class="btn" id="pback2">← Seguir ' + UI.pathEl + '</button><button class="btn ghost" id="pagain">Otro role-play</button></div></div>';
     }
     return head + '<div class="card"><p class="muted">' + esc(sc.situazione_es) + "</p>" + objs +
       '<p class="muted small">Palabras útiles: <i>' + (sc.parole_utili || []).map(esc).join(" · ") + "</i></p>" + chat +
-      '<div class="typed"><textarea id="ptext" class="grow" rows="1" autocomplete="off" autocapitalize="sentences" autocorrect="off" spellcheck="false" enterkeyhint="send" placeholder="Scrivi in italiano…"' + (parla.busy ? " disabled" : "") + "></textarea>" +
-      '<button class="btn" id="psend"' + (parla.busy ? " disabled" : "") + ">Invia</button></div>" +
+      '<div class="typed"><textarea id="ptext" class="grow" rows="1" autocomplete="off" autocapitalize="sentences" autocorrect="off" spellcheck="false" enterkeyhint="send" placeholder="' + UI.parlaIn + '"' + (parla.busy ? " disabled" : "") + "></textarea>" +
+      '<button class="btn" id="psend"' + (parla.busy ? " disabled" : "") + ">" + UI.send + "</button></div>" +
       '<div class="row" style="margin-top:8px"><button class="tab" id="pend">Terminar acá</button></div></div>';
   }
   function wireParla() {
@@ -3874,7 +3955,7 @@
         if (view.screen !== "parla") return;
         if (err || !data || !data.obiettivi) { if (out) out.innerHTML = '<p class="muted small">No pude usar la IA (' + esc(String(err && err.message || "respuesta rara")) + ").</p>"; if (b) b.disabled = false; return; }
         data.obiettivi = data.obiettivi.slice(0, 3);
-        parla = { week: w.week, scen: data, history: [["ia", String(data.apertura || "Ciao!")]], done: false, recasts: [], obj: [], turns: 0, busy: false, ctx: ctx };
+        parla = { week: w.week, scen: data, history: [["ia", String(data.apertura || UI.hi)]], done: false, recasts: [], obj: [], turns: 0, busy: false, ctx: ctx };
         render();
         speak(data.apertura);
       });
@@ -3901,15 +3982,15 @@
           else { var bx = $("#ptext"); if (bx) bx.focus(); }
         };
         if (err || !data) { parla.busy = false; parla.history.push(["ia", "(La IA no respondió: " + esc(String(err && err.message || "")) + ". Probá de nuevo.)"]); render(); return; }
-        var reply = sentenceCase(String(data.risposta || "").trim() || "Capisco.");
+        var reply = sentenceCase(String(data.risposta || "").trim() || UI.ok);
         var hard = tooHard(reply);
         if (hard) {
           // too many unknown words: those words, by simpler synonyms; the
-          // rewrite is taken only if its Italian is not worse
+          // rewrite is taken only if its language is not worse
           var miss = hard.miss.filter(function (x, i, a) { return a.indexOf(x) === i; }).slice(0, 8);
           Scrivi.parlaRewrite(reply, miss, aiKeys(), function (e2, d2) {
             var alt = !e2 && d2 && d2.risposta ? sentenceCase(String(d2.risposta)) : "";
-            finish(alt && italianErrors(alt, w.week).length <= italianErrors(reply, w.week).length ? alt : reply);
+            finish(alt && langErrors(alt, w.week).length <= langErrors(reply, w.week).length ? alt : reply);
           });
         } else finish(reply);
       }, parla.obj.slice());
@@ -3938,7 +4019,7 @@
     persist();
     renderHeader();
     // A second request reviews all the learner's sentences together (the
-    // on-the-fly recasts miss what changes the meaning: cappelli, troppo).
+    // on-the-fly recasts miss what changes the meaning: cappelli, avó / avô).
     var mine = parla.history.filter(function (h) { return h[0] === "me"; });
     if (mine.length) {
       parla.reviewing = true;
@@ -3964,14 +4045,14 @@
     if (parla.obj.length >= 3) setTimeout(confetti, 200);
   }
 
-  /* ------------------------------------------------------------------ storia */
+  /* ------------------------------------------------------------------ história */
 
   var storia = null;   // { week, busy, err }
   function storyEp(st) {
     var gloss = {};
     (st.gloss || []).forEach(function (g) { if (g && g[0]) gloss[String(g[0]).toLowerCase()] = String(g[1] || ""); });
     return { id: st.id, week: st.week, n: 0, level: st.level, emoji: "✨", title: st.title, series: "ai", grammar: "las palabras de tu repaso",
-             text: st.text, gloss: gloss, questions: st.questions || [], area: "Storia della settimana",
+             text: st.text, gloss: gloss, questions: st.questions || [], area: UI.storiaArea,
              hunt: { label: "Tocá las palabras que te tocaba repasar: " + st.targets.join(", "), targets: st.targets } };
   }
   // The generated stories stay readable offline: registered again on boot.
@@ -3980,8 +4061,8 @@
   }
   function renderStoria(w) {
     var head = '<button class="btn ghost" id="sback2">← a la semana</button>' +
-      '<h1 class="targa"><span class="t-sup">Storia · Settimana ' + romano(w.week) + '</span><span class="t-via">della settimana</span></h1>';
-    if (!aiKey()) return head + '<div class="card"><p>Para generar la historia hace falta una clave gratuita. <a href="#" id="aigo3">Cargala en Io →</a></p></div>';
+      plate(UI.storia + " · " + UI.week + " " + weekNum(w.week), UI.storiaOf);
+    if (!aiKey()) return head + '<div class="card"><p>Para generar la historia hace falta una clave gratuita. <a href="#" id="aigo3">Cargala en ' + UI.me + " →</a></p></div>";
     var mine = (state.storie || []).filter(function (x) { return x.week === w.week; });
     var due = Drills.buildReview(course, state, 40, drillOpts()).map(function (it) { return vocabWordOf(it); }).filter(Boolean);
     var targets = due.slice(0, 8);
@@ -4012,7 +4093,7 @@
       Scrivi.storia(req, aiKeys(), function (err, data) {
         if (err || !data || !data.testo) { storia = { week: w.week, busy: false, err: String(err && err.message || "respuesta rara") }; if (view.screen === "storia") render(); return; }
         var accept = function (text) {
-          var st = { id: "ai-" + Date.now().toString(36), week: w.week, level: ctx.level, title: String(data.titolo || "Storia"), text: String(text),
+          var st = { id: "ai-" + Date.now().toString(36), week: w.week, level: ctx.level, title: String(data.titolo || UI.storia), text: String(text),
                      gloss: (data.glossario || []).slice(0, 20), questions: (data.domande || []).filter(function (q) { return q && q[1] && q[1].indexOf(q[2]) >= 0; }).slice(0, 3),
                      targets: targets, at: Date.now() };
           if (!state.storie) state.storie = [];
@@ -4028,11 +4109,11 @@
         // back once to be fixed, and the fix is taken only if it is better.
         var polish = function (text) {
           text = sentenceCase(text);
-          var errs = italianErrors(text, w.week);
+          var errs = langErrors(text, w.week);
           if (!errs.length) return accept(text);
           Scrivi.correggi(text, errs.slice(0, 10).map(function (f) { return String(f.msg || "").replace(/\*/g, ""); }), aiKeys(), function (e3, d3) {
             var fixed = !e3 && d3 && d3.testo ? sentenceCase(String(d3.testo)) : "";
-            accept(fixed && italianErrors(fixed, w.week).length < errs.length ? fixed : text);
+            accept(fixed && langErrors(fixed, w.week).length < errs.length ? fixed : text);
           });
         };
         var orig = String(data.testo);
@@ -4041,7 +4122,7 @@
           var missS = hard.miss.filter(function (x, i, a) { return a.indexOf(x) === i; }).slice(0, 12);
           Scrivi.storiaRewrite(orig, missS, aiKeys(), function (e2, d2) {
             var alt = !e2 && d2 && d2.testo ? String(d2.testo) : "";
-            polish(alt && italianErrors(alt, w.week).length <= italianErrors(orig, w.week).length ? alt : orig);
+            polish(alt && langErrors(alt, w.week).length <= langErrors(orig, w.week).length ? alt : orig);
           });
         } else polish(orig);
       });
@@ -4055,25 +4136,33 @@
     if (!window.Freq || !Freq.loaded()) return out;
     var sents = ep.text.split(/(?<=[.!?])\s+/);
     (ep.hunt.targets || []).slice(0, 3).forEach(function (t, k) {
-      var sent = sents.filter(function (x) { return new RegExp("(^|[^a-zà-ù])" + t + "(?![a-zà-ù])", "i").test(x); })[0];
+      var sent = sents.filter(function (x) { return new RegExp("(^|[^a-zà-ÿ])" + t + "(?![a-zà-ÿ])", "i").test(x); })[0];
       if (!sent) return;
       var opts = [t].concat(Freq.sameBand(t, 3));
       if (opts.length < 3) return;
       out.push({ id: "storia:" + ep.id + ":" + k, src: "lettura", ep: ep.id, type: "choice", prompt: "Completá con la palabra del cuento",
-                 stem: sent.replace(new RegExp("(^|[^a-zà-ù])" + t + "(?![a-zà-ù])", "i"), "$1___"), options: Drills.shuffle(opts), answer: t, accept: [t] });
+                 stem: sent.replace(new RegExp("(^|[^a-zà-ÿ])" + t + "(?![a-zà-ÿ])", "i"), "$1___"), options: Drills.shuffle(opts), answer: t, accept: [t] });
     });
     return out;
   }
 
-  /* ------------------------------------------------------------------ esame */
+  /* ------------------------------------------------------------------ exame */
 
-  /* The C1 exam, shaped like the CILS TRE-C1 / CELI 4 / PLIDA C1 (without
-     the oral part): a long listening with two voices, a long text with
+  /* The C1 exam, shaped like the certifications of the language without
+     the oral part: a long listening with two voices, a long text with
      paragraph-title matching and true/false, structures (rational cloze
      and transformations), lexicon (word formation, register) and two
-     written texts graded with the rubric.  Each prova needs 55 %, like the
-     certifications; the exam passes with an average of 60 %. */
-  var PROVE = [["ascolto", "Ascolto", "🎧"], ["lettura", "Lettura", "📖"], ["strutture", "Strutture", "🧩"], ["lessico", "Lessico", "📚"], ["scrittura", "Scrittura", "✍️"]];
+     written texts graded with the rubric of the language (LANG.exam).
+     Each prova needs 55 %, and the exam passes with an average of 60 %.
+     The ids of the provas (ascolto, lettura, strutture, lessico,
+     scrittura) are the data keys of esame_data.js and course.json
+     (item.prova); their names are the package's. */
+  var EX = LG.exam || {};
+  var PROVE = EX.prove || [];
+  function proveName(id) { var p = PROVE.filter(function (x) { return x[0] === id; })[0]; return p ? p[1] : id; }
+  // The rubric of the written texts (esame_data.js, the AI's «punteggi»).
+  var RUBRIC = EX.rubric || [];
+  function kindName(k) { var K = EX.kinds || {}; return K[k] || K.other || k; }
   var es = null;   // transient state of the prova on screen
   function esameSet(prova, ok, n) {
     if (!state.esame) state.esame = {};
@@ -4090,23 +4179,18 @@
   function renderEsame() {
     var r = state.esame || {}, res = esameResult(), st = weekStat(52);
     var html = '<button class="btn ghost" id="eback">← a la semana</button>' +
-      '<h1 class="targa big"><span class="t-sup">Esame finale</span><span class="t-via">Livello C1</span></h1>' +
-      '<p class="lead">Cinco pruebas, como en el CILS: cada una necesita el <b>55 %</b> y el promedio, el 60 %. Podés hacerlas en el orden que quieras y repetir una.</p>' +
+      plate(EX.final, EX.levelC1, true) +
+      '<p class="lead">' + EX.lead + "</p>" +
       '<div class="missions">' + PROVE.map(function (p, k) {
         var x = r[p[0]];
         return '<button class="mission' + (x && x.pct >= 55 ? " done" : "") + '" data-prova="' + p[0] + '"><span class="mi">' + (x && x.pct >= 55 ? "★" : p[2]) + "</span>" +
-          "<span><b>" + (k + 1) + ". " + p[1] + "</b><small>" + (x ? x.pct + " % · " + x.ok + " / " + x.n + (x.pct < 55 ? " · por debajo del mínimo" : "") : {
-            ascolto: "una entrevista larga con dos voces · 8 preguntas y 4 huecos",
-            lettura: "un texto de 600 palabras · títulos por párrafo y vero/falso",
-            strutture: "20 huecos y transformaciones: preposiciones, congiuntivo, relativos, pasiva…",
-            lessico: "12 de formación de palabras y registro",
-            scrittura: "un argumentativo de 200 palabras y una carta formal de 120" }[p[0]]) + "</small></span><span class=\"go\">›</span></button>";
+          "<span><b>" + (k + 1) + ". " + p[1] + "</b><small>" + (x ? x.pct + " % · " + x.ok + " / " + x.n + (x.pct < 55 ? " · por debajo del mínimo" : "") : (EX.sub || {})[p[0]] || "") + "</small></span><span class=\"go\">›</span></button>";
       }).join("") + "</div>" +
       (res ? '<div class="card"><div class="scorebig"><b>' + res.avg + " %</b><span>promedio</span></div>" +
-        (res.passed ? "<p>🎓 <b>Esame superato.</b> " + (st.bossPassed ? "Ya figura en tu percorso." : "") + "</p>" +
+        (res.passed ? "<p>🎓 <b>" + EX.passed + "</b> " + (st.bossPassed ? "Ya figura en " + UI.pathTu + "." : "") + "</p>" +
           (!st.bossPassed ? '<button class="btn wide" id="econsegna">Registrar el resultado</button>' : "")
           : "<p>" + (res.minOk ? "Falta llegar al 60 % de promedio." : "Alguna prueba está por debajo del 55 %: repetila.") + "</p>") + "</div>" : "") +
-      '<div class="row" style="margin-top:12px"><button class="tab" id="eboss">⚔️ Ronda clásica de jefe (práctica)</button></div>';
+      '<div class="row" style="margin-top:12px"><button class="tab" id="eboss">⚔️ Ronda clásica de ' + UI.boss + " (práctica)</button></div>";
     return html;
   }
   function wireEsame() {
@@ -4147,7 +4231,7 @@
       return head + '<div class="card"><p class="muted">Vas a escuchar la grabación <b>dos veces</b>. Las preguntas se muestran ahora: leelas antes.</p>' +
         '<div class="center"><button class="bigplay" id="eplay">🔊</button><p class="muted" id="estate">Escucha ' + Math.min(2, es.plays + 1) + " de 2</p></div>" +
         esameQuestionsHtml(a) +
-        '<button class="btn wide" id="econsegna2">Consegnare</button></div>';
+        '<button class="btn wide" id="econsegna2">' + EX.deliver + "</button></div>";
     }
     return head + esameProvaResult(a);
   }
@@ -4164,7 +4248,7 @@
     var r = es.result;
     return '<div class="card"><div class="scorebig"><b>' + r.pct + " %</b><span>" + r.ok + " / " + r.n + "</span></div>" +
       (r.detail ? '<table class="res">' + r.detail.map(function (d) { return "<tr><td>" + esc(d[0]) + "</td><td>" + (d[1] ? "✓" : "✗ " + esc(d[2] || "")) + "</td></tr>"; }).join("") + "</table>" : "") +
-      (a.turns ? '<h3>La trascrizione</h3><p class="model it">' + a.turns.map(function (t) { return "<b>" + esc(a.speakers[t[0] === "A" ? 0 : 1]) + ":</b> " + esc(t[1]); }).join("<br>") + "</p>" : "") +
+      (a.turns ? "<h3>" + EX.transcript + '</h3><p class="model it">' + a.turns.map(function (t) { return "<b>" + esc(a.speakers[t[0] === "A" ? 0 : 1]) + ":</b> " + esc(t[1]); }).join("<br>") + "</p>" : "") +
       '<div class="row" style="margin-top:12px"><button class="btn" id="eback3">← Volver al examen</button></div></div>';
   }
   function wireEsameAscolto() {
@@ -4191,7 +4275,7 @@
       });
       a.completa.forEach(function (c, i) {
         var inp = document.querySelector('[data-gap="' + i + '"]');
-        var right = !!inp && Engine.grade(inp.value, { answer: c[1], accept: [c[1]] }) !== "sbagliato";
+        var right = !!inp && Engine.grade(inp.value, { answer: c[1], accept: [c[1]] }) !== Engine.VERDICT.WRONG;
         if (right) ok++;
         detail.push([c[0], right, c[1]]);
       });
@@ -4208,15 +4292,15 @@
     var l = EsameData.lettura[es.k != null ? es.k : (es.k = Math.floor(Math.random() * EsameData.lettura.length))];
     var head = '<button class="btn ghost" id="eback2">← al examen</button><h1>📖 ' + esc(l.title) + "</h1>";
     if (es.done) return head + esameProvaResult(l);
-    return head + '<div class="card"><p class="muted">Elegí el título de cada párrafo (sobran dos) y después decidí si cada afirmación es vera o falsa.</p>' +
+    return head + '<div class="card"><p class="muted">Elegí el título de cada párrafo (sobran dos) y después decidí si cada afirmación es ' + EX.vfHelp + ".</p>" +
       '<div class="text">' + l.paragraphs.map(function (p, i) {
         return '<p><select class="etitle" data-par="' + i + '"><option value="">— título del párrafo ' + (i + 1) + " —</option>" +
           l.titles.map(function (t, k) { return '<option value="' + k + '">' + esc(t) + "</option>"; }).join("") + "</select><br>" + esc(p) + "</p>";
       }).join("") + "</div>" +
-      '<h3>Vero o falso</h3><ol class="equestions">' + l.vf.map(function (v, i) {
-        return "<li>" + esc(v[0]) + '<label class="eopt"><input type="radio" name="vf' + i + '" value="v"> vero</label><label class="eopt"><input type="radio" name="vf' + i + '" value="f"> falso</label></li>';
+      "<h3>" + EX.vf + '</h3><ol class="equestions">' + l.vf.map(function (v, i) {
+        return "<li>" + esc(v[0]) + '<label class="eopt"><input type="radio" name="vf' + i + '" value="v"> ' + EX.yes + '</label><label class="eopt"><input type="radio" name="vf' + i + '" value="f"> ' + EX.no + "</label></li>";
       }).join("") + "</ol>" +
-      '<button class="btn wide" id="econsegna3">Consegnare</button></div>';
+      '<button class="btn wide" id="econsegna3">' + EX.deliver + "</button></div>";
   }
   function wireEsameLettura() {
     on("#eback2", esBack); on("#eback3", esBack);
@@ -4233,7 +4317,7 @@
         var sel = document.querySelector('input[name="vf' + i + '"]:checked');
         var right = !!sel && (sel.value === "v") === v[1];
         if (right) ok++;
-        detail.push([v[0], right, (v[1] ? "vero" : "falso") + (v[2] ? " · " + v[2] : "")]);
+        detail.push([v[0], right, (v[1] ? EX.yes : EX.no) + (v[2] ? " · " + v[2] : "")]);
       });
       var n = l.match.length + l.vf.length;
       es.done = true; es.result = { ok: ok, n: n, pct: Math.round(ok / n * 100), detail: detail };
@@ -4243,13 +4327,13 @@
     });
   }
 
-  /* Scrittura: two texts; with a key the AI grades them with the rubric,
-     otherwise the local checker counts words and hard errors. */
+  /* Scrittura / Produção escrita: two texts; with a key the AI grades them with the
+     rubric, otherwise the local checker counts words and hard errors. */
   function renderEsameScrittura() {
-    var head = '<button class="btn ghost" id="eback2">← al examen</button><h1>✍️ Produzione scritta</h1>';
+    var head = '<button class="btn ghost" id="eback2">← al examen</button><h1>✍️ ' + EX.writing + "</h1>";
     if (es.done) return head + '<div class="card"><div class="scorebig"><b>' + es.result.pct + ' %</b><span>' + es.result.ok + " / " + es.result.n + " puntos</span></div>" +
       es.result.parts.map(function (p) {
-        return "<h3>" + esc(p.title) + "</h3><p>" + (p.rubric ? Object.keys(p.rubric).map(function (k) { return esc(k) + " " + p.rubric[k] + "/5"; }).join(" · ") : p.local) + "</p>" +
+        return "<h3>" + esc(p.title) + "</h3><p>" + (p.rubric ? RUBRIC.filter(function (r) { return p.rubric[r[0]] != null; }).map(function (r) { return esc(r[1]) + " " + p.rubric[r[0]] + "/5"; }).join(" · ") : p.local) + "</p>" +
           (p.comment ? "<p>🤖 " + esc(p.comment) + "</p>" : "") +
           (p.errors && p.errors.length ? '<table class="res">' + p.errors.map(function (e) { return "<tr><td>" + esc(e[0]) + "</td><td>" + esc(e[1]) + "</td></tr>"; }).join("") + "</table>" : "");
       }).join("") +
@@ -4257,11 +4341,11 @@
     return head + '<div class="card"><p class="muted">Dos textos. ' + (aiKey() ? "La IA los califica con la rúbrica de la certificación." : "Sin clave de IA, el corrector propio cuenta palabras y errores marcados.") + "</p>" +
       EsameData.scrittura.map(function (t, i) {
         var d = (state.esameDraft || {})[t.id] || "";
-        return "<h3>" + (i + 1) + ". " + esc(t.kind === "argomentativo" ? "Testo argomentativo" : "Lettera formale") + " · " + t.words + " palabras</h3><p>" + esc(t.t) + "</p>" +
+        return "<h3>" + (i + 1) + ". " + esc(kindName(t.kind)) + " · " + t.words + " palabras</h3><p>" + esc(t.t) + "</p>" +
           '<textarea class="grow scrivi edraft" data-id="' + t.id + '" rows="8" spellcheck="false" autocapitalize="sentences">' + esc(d) + "</textarea>" +
           '<p class="muted small ewords" data-for="' + t.id + '">' + d.split(/\s+/).filter(Boolean).length + " palabras</p>";
       }).join("") +
-      '<button class="btn wide" id="econsegna4"' + (es.busy ? " disabled" : "") + ">" + (es.busy ? "⏳ Corrigiendo…" : "Consegnare") + "</button></div>";
+      '<button class="btn wide" id="econsegna4"' + (es.busy ? " disabled" : "") + ">" + (es.busy ? "⏳ Corrigiendo…" : EX.deliver) + "</button></div>";
   }
   function wireEsameScrittura() {
     on("#eback2", esBack); on("#eback3", esBack);
@@ -4288,7 +4372,7 @@
         persist(); renderHeader(); render(); window.scrollTo(0, 0);
       };
       texts.forEach(function (x) {
-        var task = x[0], text = x[1], title = task.kind === "argomentativo" ? "Testo argomentativo" : "Lettera formale";
+        var task = x[0], text = x[1], title = kindName(task.kind);
         var local = function () {
           var chk = Scrivi.check(text, 52), hard = chk.findings.filter(function (f) { return !f.soft; }).length;
           var words = text.split(/\s+/).filter(Boolean).length, wordsOk = Math.min(1, words / task.words);
@@ -4301,7 +4385,7 @@
         Scrivi.esame(task, text, aiKeys(), function (err, data) {
           if (err || !data || !data.punteggi) return local();
           var pz = data.punteggi, sc = 0;
-          ["adeguatezza", "coesione", "correttezza", "lessico"].forEach(function (k) { pz[k] = Math.max(0, Math.min(5, +pz[k] || 0)); sc += pz[k]; });
+          RUBRIC.forEach(function (r) { var k = r[0]; pz[k] = Math.max(0, Math.min(5, +pz[k] || 0)); sc += pz[k]; });
           parts.push({ title: title, rubric: pz, comment: String(data.commento || ""), errors: (data.errori || []).slice(0, 8) });
           sum += sc; max += 20;
           if (--pending === 0) finish();
@@ -4310,9 +4394,9 @@
     });
   }
 
-  /* ---------------------------------------------------------------- scrivi */
+  /* ---------------------------------------------------------------- escreva */
 
-  // Everything Italian the course shows, as the checker's dictionary.
+  // Everything of the language the course shows, as the checker's dictionary.
   function scriviLexicon() {
     if (!window.Scrivi) return;
     Scrivi.learnCourse({ items: course.items, bank: Banca.loaded() ? Banca.bank() : null,
@@ -4333,11 +4417,10 @@
     var draft = ((state.scrittiDraft || {})[w.week]) || ((state.scritti || {})[w.week] || {}).t || "";
     var r = Scrivi.check(draft, w.week);
     return '<button class="btn ghost" id="sback">← a la semana</button>' +
-      '<h1 class="targa"><span class="t-sup">Scrivi · Settimana ' + romano(w.week) + "</span>" +
-      '<span class="t-via">' + esc(w.fare || w.title) + "</span></h1>" +
+      plate(UI.scrivi + " · " + UI.week + " " + weekNum(w.week), esc(w.fare || w.title)) +
       '<div class="card"><p>' + mk(task.t) + '</p><ul class="reqs" id="sreqs">' + reqsHtml(r) + "</ul>" +
       '<p class="muted small">Escribí sin traductor: lo que te equivoques es lo que más vas a aprender. Podés dejarlo a medias y volver.</p></div>' +
-      '<textarea id="stext" class="grow scrivi" rows="7" spellcheck="false" autocapitalize="sentences" placeholder="Scrivi qui, in italiano…">' + esc(draft) + "</textarea>" +
+      '<textarea id="stext" class="grow scrivi" rows="7" spellcheck="false" autocapitalize="sentences" placeholder="' + UI.scriviIn + '">' + esc(draft) + "</textarea>" +
       '<div class="row" style="margin-top:10px"><button class="btn" id="scheck">🔎 Revisar</button>' +
       '<button class="tab" id="smodel">👀 Ver un modelo</button></div>' +
       '<label class="muted small ltopt"><input type="checkbox" id="slt"' + (state.ltOff ? "" : " checked") + "> " +
@@ -4345,14 +4428,14 @@
       '<p class="muted small ailine">🤖 ' + (aiKey()
         ? "Corrector con IA activado (" + [aiKeys().groq ? "Groq" : "", aiKeys().gemini ? (aiKeys().groq ? "Gemini de respaldo" : "Gemini") : ""].filter(Boolean).join(" + ") + "). "
         : "Para que una IA marque todo y lo explique, cargá una clave gratuita. ") +
-        '<a href="#" id="aigo">Claves en Io →</a></p>' +
+        '<a href="#" id="aigo">Claves en ' + UI.me + " →</a></p>" +
       '<div id="sout"></div>';
   }
 
   var scriviTimer = null;
   /* The AI keys: Groq first, Gemini as fallback.  Only in this phone's
      storage, never in the backup. */
-  var AI_KEY = "laviac1.groq.key", GEM_KEY = "laviac1.gemini.key";
+  var AI_KEY = SKEY("groq.key"), GEM_KEY = SKEY("gemini.key");
   function readKey(k) { try { return localStorage.getItem(k) || ""; } catch (e) { return ""; } }
   function aiKeys() { return { groq: readKey(AI_KEY), gemini: readKey(GEM_KEY) }; }
   function aiKey() { var k = aiKeys(); return k.groq || k.gemini; }
@@ -4489,10 +4572,10 @@
               (r.aiMeta ? modelLine(r.aiMeta.first, r.aiMeta.review) : "") +
             "</div>" : "") +
         (r.ai === "error" ? '<p class="muted small">⚠️ No pude usar la IA (' + esc(r.aiErr || "") + "). " +
-              (/clave|401|403/.test(r.aiErr || "") ? "Revisá las claves en Io. " : "") +
+              (/clave|401|403/.test(r.aiErr || "") ? "Revisá las claves en " + UI.me + ". " : "") +
               "Mientras, te muestro la revisión automática, que es mucho más limitada.</p>" +
               '<button class="tab" id="sretry">🤖 Probar la IA de nuevo</button>' : "") +
-        (!r.ai && !aiKey() ? '<p class="muted small">Esta es la revisión automática, que se le escapan muchas cosas. Para una corrección completa, cargá una clave en Io.</p>' : "") +
+        (!r.ai && !aiKey() ? '<p class="muted small">Esta es la revisión automática, que se le escapan muchas cosas. Para una corrección completa, cargá una clave en ' + UI.me + ".</p>" : "") +
         (!busy && r.ai !== "ok" ? (ltState === "…" ? '<p class="muted small">⏳ Consultando LanguageTool…</p>'
           : ltState === "error" ? '<p class="muted small">No pude consultar LanguageTool (sin conexión o límite de uso).</p>'
           : ltState === "ok" ? '<p class="muted small">✓ Revisado también por LanguageTool.</p>' : "") : "") +
@@ -4528,7 +4611,7 @@
     view.screen = "briefing";
     render();
     window.scrollTo(0, 0);
-    var news = extras.filter(function (x) { return /abierta|perfetta/.test(x); })[0] || extras[0];
+    var news = extras.filter(function (x) { return /abierta/.test(x) || x.indexOf(UI.perfectWeek) >= 0; })[0] || extras[0];
     toast("✍️ Texto entregado · +" + xp + " xp" + (news ? " · " + news : ""), 3500);
   }
 
@@ -4549,7 +4632,7 @@
     // the blank is instead of grading «Voi insegnanti?» as a vocabulary error.
     function wholeSentence(v) {
       if (!/_{3,}/.test(it.stem || "")) return false;
-      var words = function (x) { return String(x).toLowerCase().match(/[a-zà-ÿ']+/g) || []; };
+      var words = function (x) { return String(x).toLowerCase().match(new RegExp("[" + WCH + "]+", "g")) || []; };
       var stemW = words(String(it.stem).replace(/\([^)]*\)/g, " ").replace(/_{3,}/g, " "));
       var ans = String(it.answer).toLowerCase();
       return words(v).filter(function (w) { return stemW.indexOf(w) >= 0 && ans.indexOf(w) < 0; }).length >= 2;
@@ -4645,10 +4728,9 @@
         var extra = "";
         if (r.verdict !== Engine.VERDICT.RIGHT && window.Diagnosi) {
           var d = Diagnosi.diagnose(r.given, [it.answer], { stem: it.stem });
-          // Tiles are all Italian words handed over: a wrong pick is order,
+          // Tiles are all words of the language handed over: a wrong pick is order,
           // a tile too many or too few, or the wrong form; never a «false
           // friend» or a «Spanish word».
-          var TILE_SKIP = { falso_amico: 1, parola_spagnola: 1, lessico: 1 };
           if (d.cat && !GENERIC[d.cat] && !TILE_SKIP[d.cat]) { recordError(d, r.given); extra = diagHtml(d, true); }
         }
         settle(r.verdict, r.given, extra);
@@ -4718,10 +4800,10 @@
     }
   }
 
-  /* Trova l'errore: prima trovare (notare), poi correggere (produrre). */
+  /* Trova l'errore / Ache o erro: primero encontrar (notar), después corregir (producir). */
   function wireFixerr(it) {
     var toks = it.stem.split(/\s+/);
-    var core = function (t) { return t.toLowerCase().replace(/^[^a-zàèéìòù']+|[^a-zàèéìòù']+$/g, ""); };
+    var core = function (t) { return t.toLowerCase().replace(new RegExp("^[^" + WCH + "]+|[^" + WCH + "]+$", "g"), ""); };
     var badT = it.bad.split(/\s+/).map(core), start = -1;
     for (var i = 0; i <= toks.length - badT.length && start < 0; i++) {
       var ok = true;
@@ -4747,7 +4829,7 @@
       $("#fixbox").innerHTML = '<p class="muted">¡Bien visto! Ahora corregila: escribí lo que va en su lugar' +
         ' o, si sobra, borrala.</p>' +
         '<div class="typed"><textarea id="fxin" class="grow" rows="1" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="send">' +
-        esc(it.bad) + '</textarea><button class="btn" id="fxsend">Controlla</button></div>' +
+        esc(it.bad) + '</textarea><button class="btn" id="fxsend">' + UI.check + "</button></div>" +
         '<div class="row" style="margin-top:8px"><button class="tab" id="fxdel">🗑️ sobra: borrarla</button></div>';
       var inp = $("#fxin");
       growBoxes();
@@ -4756,10 +4838,10 @@
       function judge(val) {
         if (round.answered) return;
         val = String(val).trim();
-        // Other corrections that are just as right (fra/tra, ora/adesso…).
+        // Other corrections that are just as right (fra/tra, para/pra…).
         var goods = [it.good].concat(it.goodAlt || []).filter(Boolean);
         var right = it.good === "" ? val === "" : window.Diagnosi &&
-          Diagnosi.diagnose(val, goods).verdict === "giusto";
+          Diagnosi.diagnose(val, goods).verdict === Engine.VERDICT.RIGHT;
         if (right) {
           if (tries) markFixed(it.cat);
           settle(tries ? "quasi" : "giusto", val, '<div class="diag"><span class="tag">' + esc(label) + "</span></div>",
@@ -4858,10 +4940,11 @@
       var t = $("#remtime").value || "13:30";
       state.remind = t;
       persist();
-      download(new Blob([reminderIcs(t)], { type: "text/calendar" }), "italiano-diario.ics");
+      download(new Blob([reminderIcs(t)], { type: "text/calendar" }), UI.icsFile);
       toast("Abrí el archivo para agregarlo a tu calendario.", 3000);
     });
     on("#export", exportSave);
+    on("#switchlang", function () { if (window.Boot) Boot.switchTo(UI.switchCode); });
     on("#import", function () { $("#importfile").click(); });
     var file = $("#importfile");
     if (file) file.onchange = function () { if (file.files[0]) importSave(file.files[0]); };
@@ -4885,8 +4968,10 @@
     });
   }
 
-  /* ------------------------------------------------------------------ avvio */
+  /* ------------------------------------------------------------------ arranque */
 
+  // The prompt may have come while boot.js was still loading the scripts.
+  if (window.Boot && Boot.installPrompt) installPrompt = Boot.installPrompt;
   window.addEventListener("beforeinstallprompt", function (e) {
     e.preventDefault();
     installPrompt = e;
@@ -4894,10 +4979,17 @@
   });
 
   if ("serviceWorker" in navigator && location.protocol !== "file:") {
-    window.addEventListener("load", function () {
+    // boot.js loads the scripts one after another: the page may be loaded already.
+    var whenLoaded = function (fn) { if (document.readyState === "complete") fn(); else window.addEventListener("load", fn); };
+    whenLoaded(function () {
       navigator.serviceWorker.register("sw.js").then(function (reg) {
         reg.update().catch(function () { /* offline */ });
       }).catch(function () { /* offline no */ });
+      // The service worker keeps the core; this language's package is kept
+      // offline once it has been chosen (the other one, when it is used).
+      navigator.serviceWorker.ready.then(function (reg) {
+        if (reg.active) reg.active.postMessage({ keep: LG.code });
+      }).catch(function () { /* */ });
       // A new version took over: reload once so the screen runs it too
       // (outside a round, so no answer is lost).
       var hadController = !!navigator.serviceWorker.controller, reloading = false;
@@ -4947,24 +5039,24 @@
   }
 
   // The glossary is optional too: without it words are just not tappable.
-  fetch("data/glossario.json")
+  fetch(DATA("glossario.json"))
     .then(function (r) { return r.ok ? r.json() : null; })
     .then(function (g) { glossario = g; })
-    .catch(function () { /* senza glossario */ });
+    .catch(function () { /* sin glosario */ });
 
   // The frequency layer is optional too: without it, no coverage meter.
-  fetch("data/frequenza.json")
+  fetch(DATA("frequenza.json"))
     .then(function (r) { return r.ok ? r.json() : null; })
     .then(function (f) { if (f && window.Freq) { Freq.load(f); if (view.screen === "io" || view.screen === "oggi") render(); } })
-    .catch(function () { /* senza frequenze */ });
+    .catch(function () { /* sin frecuencias */ });
 
   // The bank is optional: without it the app still works, just smaller.
-  var bankP = fetch("data/bank.json")
+  var bankP = fetch(DATA("bank.json"))
     .then(function (r) { return r.ok ? r.json() : null; })
     .then(function (b) { if (b) Banca.load(b); })
-    .catch(function () { /* senza banca */ });
+    .catch(function () { /* sin banco */ });
 
-  fetch("data/course.json")
+  fetch(DATA("course.json"))
     .then(function (r) {
       if (!r.ok) throw new Error("HTTP " + r.status);
       return r.json();

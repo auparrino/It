@@ -6,13 +6,13 @@
  * cuánto ripasso se acumula, y verifica la integridad de cada ítem y de
  * los chequeos de cada lección.
  *
- *   node tools/sim_carriera.js            resumen por pantalla
- *   node tools/sim_carriera.js --json     todo, en JSON
+ *   node tools/pt/sim_carriera.js            resumen por pantalla
+ *   node tools/pt/sim_carriera.js --json     todo, en JSON
  */
 "use strict";
 var fs = require("fs"), path = require("path"), vm = require("vm");
 
-var ROOT = path.join(__dirname, "..");
+var pack = require("../lib/pack.js");
 var clock = { t: Date.UTC(2026, 0, 5, 12) };          // lunes
 var RealDate = Date;
 function FakeDate() {
@@ -23,23 +23,18 @@ FakeDate.now = function () { return clock.t; };
 FakeDate.UTC = RealDate.UTC; FakeDate.parse = RealDate.parse;
 FakeDate.prototype = RealDate.prototype;
 
-var ctx = { console: console, Math: Math, Date: FakeDate, JSON: JSON, Object: Object, Array: Array,
-            String: String, Number: Number, RegExp: RegExp, Error: Error, parseInt: parseInt, parseFloat: parseFloat,
-            isNaN: isNaN, isFinite: isFinite, Infinity: Infinity, NaN: NaN, undefined: undefined,
-            setTimeout: setTimeout, clearTimeout: clearTimeout, localStorage: null, navigator: {}, document: null };
-ctx.window = ctx; ctx.self = ctx;
-["conjugator", "engine", "frasi", "lab", "letture", "lezione", "diagnosi", "scrivi", "banca", "drills"].forEach(function (f) {
-  vm.runInNewContext(fs.readFileSync(path.join(ROOT, "docs/js", f + ".js"), "utf8"), ctx, { filename: f + ".js" });
-});
+// The whole language (package + core, in the order of boot.js), with the
+// simulated clock.
+var ctx = pack("pt", { extra: { Date: FakeDate } });
 var Engine = ctx.Engine, Drills = ctx.Drills, Frasi = ctx.Frasi, Lab = ctx.Lab, Letture = ctx.Letture,
     Lezione = ctx.Lezione, Banca = ctx.Banca, Conj = ctx.Conjugator || ctx.Conj;
-var course = JSON.parse(fs.readFileSync(path.join(ROOT, "docs/data/course.json"), "utf8"));
-Banca.load(JSON.parse(fs.readFileSync(path.join(ROOT, "docs/data/bank.json"), "utf8")));
+var course = pack.data("pt", "course.json");
+Banca.load(pack.data("pt", "bank.json"));
 var map = Drills.itemsById(course);
 var Scrivi = ctx.Scrivi;
 Scrivi.learnCourse({ items: course.items, bank: Banca.bank(), phrases: Frasi.ALL, readings: Letture.EPISODI,
-  glossario: JSON.parse(fs.readFileSync(path.join(ROOT, "docs/data/glossario.json"), "utf8")) });
-var glossario = JSON.parse(fs.readFileSync(path.join(ROOT, "docs/data/glossario.json"), "utf8"));
+  glossario: pack.data("pt", "glossario.json") });
+var glossario = pack.data("pt", "glossario.json");
 var isItalian = function (w) { return !!glossario[String(w).toLowerCase()]; };
 
 /* ------------------------------------------------------------ el jugador */

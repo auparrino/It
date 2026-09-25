@@ -3,18 +3,16 @@
    (como los haría el alumno) y controla que el diagnóstico diga *cuál*
    error es; además, casos escritos a mano, variantes que el portugués de
    Brasil acepta y entradas absurdas.
-   Run: node tools/test_diagnosi.js  */
+   Run: node tools/pt/test_diagnosi.js  */
 var fs = require("fs");
 var path = require("path");
-var ROOT = path.join(__dirname, "..");
-var Conj = require(path.join(ROOT, "docs/js/conjugator.js"));
-global.Conj = Conj;
-var D = require(path.join(ROOT, "docs/js/diagnosi.js"));
-global.Diagnosi = D;
-var Banca = null;
-try { Banca = require(path.join(ROOT, "docs/js/banca.js")); } catch (e) { Banca = null; }
+var pack = require("../lib/pack.js");
+var ctx = pack("pt");
+var Conj = ctx.Conj;
+var D = ctx.Diagnosi;
+var Banca = ctx.Banca || null;
 
-var bankPath = path.join(ROOT, "docs/data/bank.json");
+var bankPath = pack.dataPath("pt", "bank.json");
 var bank = fs.existsSync(bankPath) ? JSON.parse(fs.readFileSync(bankPath, "utf8")) : null;
 // The bank is used only once it is Portuguese (the port goes file by file).
 if (bank && !/\b(você|não|está|também)\b/.test((bank.sentences || []).slice(0, 200).map(function (s) { return (s.pt || s.it || [])[0]; }).join(" "))) bank = null;
@@ -279,7 +277,7 @@ if (bank) {
 
 /* ------------------------------ los ítems del curso (docs/data/course.json) */
 (function () {
-  var cp = path.join(ROOT, "docs/data/course.json");
+  var cp = pack.dataPath("pt", "course.json");
   var course = fs.existsSync(cp) ? JSON.parse(fs.readFileSync(cp, "utf8")) : null;
   var items = course && course.items || [];
   if (!/\b(você|não|está)\b/.test(items.slice(0, 600).map(function (i) { return String(i.answer || ""); }).join(" "))) {

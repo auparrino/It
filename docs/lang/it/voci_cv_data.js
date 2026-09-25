@@ -141,8 +141,19 @@
     { f: "20065235", w: 51, it: "Il relativo costo era pagato a fine raccolto." },
     { f: "27879456", w: 51, it: "È relativo perché dipende dalla conoscenza delle lingue da parte del traduttore." }
   ];
-  function url(x) { return "audio/cv/common_voice_it_" + x.f + ".mp3"; }
-  var api = { ALL: ALL, url: url, LICENSE: "Common Voice · CC0" };
+  // Relative to docs/ (index.html): the audio lives in the language's package.
+  function url(x) { return "lang/it/audio/cv/common_voice_it_" + x.f + ".mp3"; }
+
+  /* Lingua Libre (voci.js): grabaciones «LL-Q652 (ita)-<hablante>-<palabra>».
+     Solo palabras sin tilde: en italiano la tilde escrita marca una vocal
+     abierta o cerrada o el acento (pèsca / pésca, àncora / ancóra), que el
+     nombre del archivo no dice. */
+  var LINGUA_LIBRE = {
+    q: "Q652", tag: "ita",
+    letters: "a-z"
+  };
+
+  var api = { ALL: ALL, url: url, LICENSE: "Common Voice · CC0", LINGUA_LIBRE: LINGUA_LIBRE };
   if (typeof module === "object" && module.exports) module.exports = api;
   else root.VociCV = api;
 })(typeof window !== "undefined" ? window : globalThis);

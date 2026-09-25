@@ -1,483 +1,34 @@
 /*
- * Le frasi — il banco di conversazione.  La grammatica del percorso ti dà il
- * sistema; queste frasi ti danno la parlata: blocchi pronti, ad alta
- * frequenza, da dire senza pensare.  Ogni frase: [italiano, castellano, nota?].
+ * Las frases — el banco de conversación.  La gramática del recorrido te da
+ * el sistema; estas frases te dan el habla: bloques listos, de alta
+ * frecuencia, para decir sin pensar.
  *
- * Contiene anche la logica degli esercizi di frase (tessere, ascolto,
- * scrittura, lampo), senza dipendenze dal DOM, così si testa sotto Node.
+ * El contenido es del paquete de cada idioma (docs/lang/<código>/
+ * frasi_data.js → window.FRASI_DATA): las escenas (SCENES, cada frase
+ * [lengua meta, castellano, nota?], con `week` opcional: la semana en la
+ * que se abre; sin `week`, abierta desde el principio), las palabras que
+ * el cloze no pregunta (STOP), las consignas (ui) y las tablas de errores
+ * del hispanohablante para el «Adiviná» (traps; sin tablas, las trampas
+ * salen de Lezione.traps y las reglas del idioma).
+ *
+ * El texto en la lengua meta vive en `f.t`, y también en `f.it` y `f.pt`
+ * (los nombres de siempre de cada app, que siguen leyendo el motor y las
+ * pantallas).  Los ids («frase:<escena>:<n>») no cambian: las tarjetas de
+ * repaso guardadas siguen valiendo.
+ *
+ * Acá está la lógica de los ejercicios de frase (fichas, escucha,
+ * escritura, lampo, «Adiviná»), sin dependencias del DOM, así se prueba con
+ * Node.
  */
 (function (root) {
   "use strict";
 
-  var SCENES = [
-    { id: "ciao", emoji: "👋", name: "Primi passi",
-      blurb: "Saludar, presentarte y despedirte como un italiano.",
-      phrases: [
-        ["Ciao, come stai?", "Hola, ¿cómo estás?", "El estado de ánimo va con *stare*: *come stai?*. Con usted cambia a tercera persona: *come sta?*"],
-        ["Sto bene, grazie. E tu?", "Estoy bien, gracias. ¿Y vos?", "*Stare bene* = estar bien. En *E tu?* el pronombre sí se dice, porque contrasta; con usted, *E Lei?*"],
-        ["Buongiorno, come sta?", "Buen día, ¿cómo está (usted)?", "Con *Lei* el verbo va en tercera persona."],
-        ["Mi chiamo Augusto.", "Me llamo Augusto.", "Como en español, verbo pronominal: *mi chiamo, ti chiami, si chiama*. Para preguntar: *Come ti chiami?*"],
-        ["Piacere di conoscerti.", "Un gusto conocerte.", "*Piacere di* + infinitivo, con el pronombre pegado al final: *conoscer-ti*. Con usted: *piacere di conoscerLa*. Solo *Piacere!* también sirve."],
-        ["Di dove sei?", "¿De dónde sos?", "La preposición abre la pregunta: *di dove* = de dónde. Se responde con *di* + ciudad: *sono di Roma*."],
-        ["Sono argentino, di Buenos Aires.", "Soy argentino, de Buenos Aires.", "Nacionalidad sin artículo y en minúscula: *sono argentino/a*. La ciudad de origen va con *di*."],
-        ["Che lavoro fai?", "¿De qué trabajás?", "Literal «¿qué trabajo hacés?»: el oficio va con *fare*. Respuesta: *faccio l'ingegnere* (con artículo) o *sono ingegnere*."],
-        ["Abito qui da due anni.", "Vivo acá hace dos años.", "«Hace X tiempo que…» = *da* + tiempo, con presente."],
-        ["Parli spagnolo?", "¿Hablás español?", "Con *parlare* el idioma suele ir sin artículo: *parlo spagnolo*. Con *studiare* o *imparare*, con artículo: *studio lo spagnolo*."],
-        ["Parlo un po' di italiano.", "Hablo un poco de italiano.", "*Un po' di* + sustantivo = un poco de. *Po'* es *poco* recortado: lleva apóstrofo, no tilde."],
-        ["Tutto a posto?", "¿Todo bien?", "*A posto* = en orden, en su lugar. Sirve de pregunta y de respuesta: *Tutto a posto!*"],
-        ["Non c'è male.", "Nada mal.", "Literal «no hay mal». *C'è* = hay (singular); *ci sono* = hay (plural). Respuesta típica a *come va?*"],
-        ["Ci vediamo dopo!", "¡Nos vemos después!", "*Ci vediamo* = nos vemos (*ci* = nos). Cambiá el final: *ci vediamo domani*, *ci vediamo alle otto*."],
-        ["A domani!", "¡Hasta mañana!", "Patrón de despedida: *a* + momento. *A domani*, *a lunedì*, *a stasera*, *a presto*."],
-        ["Buona serata!", "¡Que tengas buena noche!", "*Buona serata* desea que la noche salga bien; *buonasera* es el saludo al llegar. Igual: *buona giornata* vs *buongiorno*."],
-        ["Salutami tua sorella.", "Saludá a tu hermana de mi parte.", "Imperativo + pronombre pegado: *saluta* + *mi*. Patrón reutilizable: *salutami* + persona. Familiar singular sin artículo: *tua sorella*."],
-        ["Ciao, a presto!", "¡Chau, hasta pronto!", "*Ciao* sirve para llegar y para irse, solo con quien tuteás. *A presto* = hasta pronto."]
-      ] },
+  var DATA = root.FRASI_DATA || { SCENES: [] };
+  var SCENES = DATA.SCENES || [];
+  var UI = DATA.ui || {};
+  var STOP = DATA.STOP || [];
 
-    { id: "salva", emoji: "🛟", name: "Salvavita",
-      blurb: "Las frases que te rescatan cuando no entendés nada.",
-      phrases: [
-        ["Scusa, non ho capito.", "Perdón, no entendí.", "*Scusa* (vos) / *scusi* (usted). La negación va antes del auxiliar: *non ho capito*."],
-        ["Puoi ripetere, per favore?", "¿Podés repetir, por favor?", "*Potere* + infinitivo, sin preposición: *puoi ripetere?*. Con usted: *può ripetere?*"],
-        ["Puoi parlare più piano?", "¿Podés hablar más despacio?", "*Più* + adverbio = más...: *più piano*, *più forte*. *Piano* es despacio (y bajito), no «plano»."],
-        ["Come si dice «ventana» in italiano?", "¿Cómo se dice «ventana» en italiano?", "*Si dice* = se dice, con *si* impersonal. Patrón: *Come si dice X in italiano?*; el idioma va con *in*."],
-        ["Cosa vuol dire questa parola?", "¿Qué significa esta palabra?", "*Voler dire* = significar (literal «querer decir»). *Vuol* es *vuole* recortado. Alternativa: *cosa significa?*"],
-        ["Come si scrive?", "¿Cómo se escribe?", "*Si* impersonal + tercera persona: *come si scrive?*, *come si pronuncia?*. Sirve para cualquier «¿cómo se...?»."],
-        ["Non lo so.", "No sé.", "Lleva *lo*, como «no lo sé». *Non so* solo también existe, pero suena más seco."],
-        ["Non mi ricordo la parola.", "No me acuerdo de la palabra.", "*Ricordarsi* admite objeto directo: *mi ricordo la parola*. También con *di*: *mi ricordo della parola*."],
-        ["Sto imparando l'italiano.", "Estoy aprendiendo italiano.", "*Stare* + gerundio = estar + -ando. Tras *imparare*, el idioma lleva artículo: *l'italiano*."],
-        ["Mi puoi correggere se sbaglio?", "¿Me podés corregir si me equivoco?", "El pronombre va antes del modal o pegado al infinitivo: *mi puoi correggere* = *puoi correggermi*. *Sbagliare* = equivocarse, sin *si*."],
-        ["Ho sbagliato.", "Me equivoqué.", "*Sbagliare* va con *avere*: *ho sbagliato*. La forma pronominal *mi sono sbagliato* dice lo mismo."],
-        ["Un attimo, ci penso.", "Un momento, lo pienso.", "*Pensare a* algo → *ci penso*: *ci* reemplaza a «*a* + eso». No se traduce como «lo pienso»."],
-        ["Intendi dire che…?", "¿Querés decir que…?", "*Intendere* = querer decir, tener la intención. Para «entender» se usa *capire*."],
-        ["Va bene, ho capito.", "Está bien, entendí.", "*Va bene* = está bien, de acuerdo (literal «va bien»). En la charla se acorta: *va be'*."],
-        ["Mi serve aiuto.", "Necesito ayuda.", "*Servire* funciona como «gustar»: lo que necesitás es el sujeto. *Mi serve aiuto*, *mi servono soldi*."],
-        ["Dov'è il bagno?", "¿Dónde está el baño?", "*Dove* + *è* se unen: *dov'è?*. En plural no: *dove sono i bagni?*"],
-        ["Non importa.", "No importa.", "Impersonal como en español. Con frase: *non importa se piove*. *Non fa niente* es sinónimo."],
-        ["Esatto!", "¡Exacto!", "Adjetivo usado solo, como «¡exacto!». Con sustantivo concuerda: *la risposta esatta*."]
-      ] },
-
-    { id: "bar", emoji: "☕", name: "Al bar",
-      blurb: "Pedir un café de pie, a la italiana.",
-      phrases: [
-        ["Un caffè, per favore.", "Un café, por favor.", "*Un caffè* es un espresso. Si querés café con leche, pedí *un caffellatte*."],
-        ["Vorrei un cappuccino e un cornetto.", "Quisiera un cappuccino y una medialuna.", "*Vorrei* (condicional de *volere*) es la forma cortés de pedir. En el norte al *cornetto* le dicen *brioche*."],
-        ["Quant'è?", "¿Cuánto es?", "*Quanto* + *è* = *quant'è?*: se pregunta al pagar. Para el precio de un objeto: *quanto costa?*"],
-        ["Posso pagare con la carta?", "¿Puedo pagar con tarjeta?", "*Potere* + infinitivo. Medio de pago con *con*: *con la carta*; pero en efectivo es *in contanti*."],
-        ["Pago io, offro io!", "¡Pago yo, invito yo!", "El sujeto después del verbo marca «yo, no otro»: *pago io*. *Offrire* = invitar (pagar por otro)."],
-        ["Facciamo alla romana?", "¿Pagamos a medias / cada uno lo suyo?", "*Fare alla romana* = dividir la cuenta. *Facciamo* + propuesta = «¿hacemos...?»: *facciamo una pausa?*"],
-        ["Ci prendiamo un caffè?", "¿Nos tomamos un café?", "*Prendersi* con *ci* le da tono de «darse el gusto». Sin pronombre también vale: *prendiamo un caffè?*"],
-        ["Un bicchiere d'acqua, per favore.", "Un vaso de agua, por favor.", "*Di* se apostrofa ante vocal: *d'acqua*. *Bicchiere di vino* es el vaso lleno; *da vino*, el tipo de vaso."],
-        ["Per me un succo d'arancia.", "Para mí un jugo de naranja.", "*Per me* + cosa es la forma típica de pedir en ronda. El sabor va con *di*: *succo di mela*."],
-        ["È libero questo tavolo?", "¿Está libre esta mesa?", "En estas preguntas el sujeto suele ir al final: *è libero questo tavolo?*. Respuesta: *sì, è libero*."],
-        ["Da portare via.", "Para llevar.", "*Da* + infinitivo = «para»: *da portare via* (para llevar), *qualcosa da bere*. *Via* = afuera, lejos."],
-        ["Lo prendo al banco.", "Lo tomo en la barra.", "*Al banco* = parado en la barra, más barato que en la mesa. *Lo* retoma el café ya nombrado."],
-        ["Tenga il resto.", "Quédese con el vuelto.", "Imperativo de usted: *tenga* (de *tenere*). *Il resto* = el vuelto."],
-        ["Mi fa lo scontrino?", "¿Me hace el ticket?", "*Fare* + cosa + *a* alguien: *mi fa?* = ¿me hace?. *Lo scontrino*: artículo *lo* por *s* + consonante."],
-        ["Grazie mille!", "¡Muchas gracias!", "Literal «mil gracias». Variantes: *grazie tante*, *grazie infinite*."],
-        ["Prego!", "¡De nada!", "*Prego* sirve para «de nada», «pase», «adelante» y «¿qué desea?»."]
-      ] },
-
-    { id: "tavola", emoji: "🍝", name: "A tavola",
-      blurb: "Restaurante, cena con amigos y comida.",
-      phrases: [
-        ["Avete un tavolo per due?", "¿Tienen una mesa para dos?", "Al local se le habla en plural (*voi*): *avete?* = ¿tienen?. *Per due* = para dos."],
-        ["Ho prenotato a nome Parrino.", "Reservé a nombre de Parrino.", "*A nome* + apellido, sin «de». *Ho prenotato*: passato prossimo con *avere*."],
-        ["Possiamo vedere il menù?", "¿Podemos ver el menú?", "*Potere* + infinitivo. *Menù* (o *menu*) es invariable: *i menù*."],
-        ["Cosa mi consiglia?", "¿Qué me recomienda?", "*Consigliare qualcosa a qualcuno*: *mi consiglia?* (usted). Con el mozo se usa *Lei*."],
-        ["Prendo gli spaghetti alle vongole.", "Pido los spaghetti con almejas.", "Para pedir comida se usa *prendo* (o *vorrei*); *chiedo* es pedir algo a alguien o preguntar."],
-        ["Sono allergico alle noci.", "Soy alérgico a las nueces.", "*Allergico a* + artículo: *alle* = *a* + *le*. Plural *allergici*, femenino *allergica*."],
-        ["Il conto, per favore.", "La cuenta, por favor.", "*Il conto* es la cuenta del restorán; *lo scontrino*, el ticket del bar."],
-        ["Era tutto buonissimo.", "Estaba todo riquísimo.", "Imperfecto *era* para describir. *-issimo* intensifica: *buonissimo*. Lo rico es *buono*, no *ricco*."],
-        ["Ho una fame da lupo.", "Tengo un hambre de lobo.", "El hambre va con *avere*: *ho fame*. *Da* + sustantivo = «propio de»: *fame da lupo*."],
-        ["Sono pieno, non ce la faccio più.", "Estoy lleno, no puedo más.", "*Farcela* = poder, aguantar: *non ce la faccio*. *Non... più* = ya no."],
-        ["Buon appetito!", "¡Buen provecho!", "*Buono* se acorta a *buon* ante masculino: *buon appetito*, *buon viaggio*."],
-        ["Cin cin! Alla salute!", "¡Chin chin! ¡Salud!", "Para brindar: *alla* + cosa. *Alla salute!*, *alla nostra!* (¡por nosotros!)."],
-        ["Mi passi il sale?", "¿Me pasás la sal?", "El presente sirve para pedir: *mi passi?* = ¿me pasás?. Patrón: *mi passi* + cosa."],
-        ["Un altro po' di vino?", "¿Un poco más de vino?", "*Un altro po' di* + sustantivo = un poco más de. El italiano usa *altro* donde decimos «más»."],
-        ["Il servizio è incluso?", "¿El servicio está incluido?", "*Incluso* concuerda: *la mancia è inclusa?*. En Italia suele cobrarse aparte *il coperto* (el cubierto)."],
-        ["È troppo salato.", "Está demasiado salado.", "*Troppo* = demasiado, antes del adjetivo. «Muy» es *molto*; *troppo* marca exceso."],
-        ["Faccio io la spesa stasera.", "Hago yo las compras (del súper) esta noche.", "*Fare la spesa* = hacer las compras de comida. *Faccio io*: el sujeto después del verbo marca «yo, no otro»."]
-      ] },
-
-    { id: "giro", emoji: "🚆", name: "In giro",
-      blurb: "Moverse por la ciudad: direcciones, trenes y hoteles.",
-      phrases: [
-        ["Scusi, dov'è la stazione?", "Disculpe, ¿dónde está la estación?", "*Scusi* (usted) para abordar a un desconocido. *Dov'è* + lugar = ¿dónde está?"],
-        ["È lontano da qui?", "¿Está lejos de acá?", "*Lontano da* = lejos de (con *da*); *vicino a* = cerca de (con *a*)."],
-        ["Si va sempre dritto e poi a destra.", "Se va siempre derecho y después a la derecha.", "*Si va* = se va: el *si* impersonal sirve para dar indicaciones. *Sempre dritto* = todo derecho."],
-        ["Giri a sinistra al semaforo.", "Doble a la izquierda en el semáforo.", "Imperativo de usted: *giri* (de *girare*). *A sinistra* / *a destra*, siempre con *a*."],
-        ["Un biglietto per Firenze, andata e ritorno.", "Un pasaje a Florencia, ida y vuelta.", "El destino va con *per*: *un biglietto per Firenze*. Solo ida = *solo andata*."],
-        ["A che ora parte il treno?", "¿A qué hora sale el tren?", "*A che ora* + verbo = ¿a qué hora...?. Respuesta: *alle otto*, *all'una*."],
-        ["Il treno è in ritardo.", "El tren está demorado.", "*Essere in ritardo* = estar demorado o llegar tarde; lo contrario, *in anticipo*."],
-        ["Da quale binario parte?", "¿De qué andén sale?", "El origen va con *da*: *da quale binario*. *Binario* = andén (la vía numerada)."],
-        ["Devo scendere alla prossima fermata.", "Me tengo que bajar en la próxima parada.", "*Dovere* + infinitivo, sin «que». *Scendere* = bajarse, sin pronombre en italiano."],
-        ["Quanto ci vuole a piedi?", "¿Cuánto se tarda a pie?", "*Ci vuole* / *ci vogliono* = se necesita / se tarda."],
-        ["Ci vogliono dieci minuti.", "Se tarda diez minutos.", "*Ci vuole* con singular, *ci vogliono* con plural: concuerda con lo que se necesita."],
-        ["Mi sono perso.", "Me perdí.", "*Perdersi* es pronominal, pasado con *essere*: el participio concuerda, *mi sono persa*."],
-        ["Ho una prenotazione per tre notti.", "Tengo una reserva por tres noches.", "La duración va con *per*: *per tre notti*. *Prenotare* = reservar."],
-        ["A che ora è il check-out?", "¿A qué hora es el check-out?", "*A che ora è* + evento. Los anglicismos son masculinos e invariables: *il check-out*, *i check-out*."],
-        ["C'è una farmacia qui vicino?", "¿Hay una farmacia acá cerca?", "*C'è* = hay (singular); *ci sono* (plural). *Qui vicino* = acá cerca."],
-        ["Mi può chiamare un taxi?", "¿Me puede llamar un taxi?", "*Mi* = para mí (indirecto). Con usted: *può*. Patrón: *mi può* + infinitivo + cosa."],
-        ["Si può andare a piedi?", "¿Se puede ir caminando?", "*Si può* + infinitivo = se puede. *A piedi* = a pie; pero *in macchina*, *in treno*."]
-      ] },
-
-    { id: "lavoro", emoji: "💼", name: "In ufficio",
-      blurb: "Reuniones, correos y charla de oficina.",
-      phrases: [
-        ["Ho una riunione alle tre.", "Tengo una reunión a las tres.", "La hora va con *alle* (*a* + *le*): *alle tre*. La una: *all'una*."],
-        ["Sono di fretta, ne parliamo dopo?", "Estoy apurado, ¿lo hablamos después?", "*Essere di fretta* = estar apurado. *Ne* = de eso: *ne parliamo* = hablamos de eso."],
-        ["Ti mando una mail entro stasera.", "Te mando un mail antes de esta noche.", "*Entro* + momento = antes de, a más tardar. *Mail* es femenino: *una mail*."],
-        ["Mi puoi dare una mano?", "¿Me podés dar una mano?", "*Dare una mano* = ayudar, como en español. El pronombre va antes del modal: *mi puoi*."],
-        ["Ci sentiamo domani.", "Hablamos mañana.", "*Sentirsi* = hablar por teléfono o mensaje. *Ci sentiamo!* es despedida común."],
-        ["Qual è la scadenza?", "¿Cuál es la fecha límite?", "*Qual è* se escribe sin apóstrofo. *Scadenza* = vencimiento, fecha límite; *scadere* = vencer."],
-        ["Sono d'accordo con te.", "Estoy de acuerdo con vos.", "*Essere d'accordo con* + persona. Tras preposición, pronombre tónico: *con te*."],
-        ["Non sono del tutto convinto.", "No estoy del todo convencido.", "*Non... del tutto* = no del todo: suaviza el desacuerdo."],
-        ["Facciamo il punto della situazione.", "Hagamos un resumen de la situación.", "*Fare il punto* = hacer un balance. *Facciamo* = hagamos (imperativo de *noi*)."],
-        ["Ci aggiorniamo la settimana prossima.", "Nos ponemos al día la semana que viene.", "*Aggiornarsi* = ponerse al día o volver a reunirse. *Prossimo* va después: *la settimana prossima*."],
-        ["Oggi lavoro da casa.", "Hoy trabajo desde casa.", "*Da casa* = desde casa; *a casa* = en casa. *Da* marca el origen."],
-        ["Che noia questa riunione!", "¡Qué aburrida esta reunión!", "*Che* + sustantivo para exclamar: *che noia!* = ¡qué aburrimiento!. Igual: *che fame!*, *che caldo!*"],
-        ["Ho un sacco di lavoro.", "Tengo un montón de trabajo.", "*Un sacco di* + sustantivo = un montón de (coloquial). Solo: *mi piace un sacco*."],
-        ["Faccio una pausa.", "Me tomo un descanso.", "El italiano usa *fare* donde decimos «tomarse»: *fare una pausa*, *fare una doccia*."],
-        ["Stacco alle sei.", "Salgo (del trabajo) a las seis.", "*Staccare* (desenganchar) = terminar la jornada, coloquial. *A che ora stacchi?*"],
-        ["Il capo è di buon umore oggi.", "El jefe está de buen humor hoy.", "*Essere di buon / cattivo umore*: *buono* se acorta a *buon* ante masculino."],
-        ["Mi è venuta un'idea.", "Se me ocurrió una idea.", "La idea es el sujeto: *mi è venuta un'idea*, con *essere* y participio en femenino."],
-        ["Tienimi aggiornato.", "Manteneme al tanto.", "Imperativo + pronombre pegado: *tieni* + *mi*. *Tenere* + adjetivo = mantener; concuerda: *aggiornata*."]
-      ] },
-
-    { id: "chiacchiere", emoji: "💬", name: "Chiacchiere",
-      blurb: "Charla casual: el finde, el clima, planes.",
-      phrases: [
-        ["Cosa hai fatto nel fine settimana?", "¿Qué hiciste el fin de semana?", "*Nel* = *in* + *il*. *Fatto* es el participio irregular de *fare*."],
-        ["Sono andato al mare con degli amici.", "Fui a la playa con unos amigos.", "*Andare* usa *essere* en el passato prossimo."],
-        ["Che tempo fa oggi?", "¿Qué tiempo hace hoy?", "El clima se arma con *fare*: *che tempo fa?*, *fa freddo*, *fa bel tempo*."],
-        ["Fa un caldo pazzesco.", "Hace un calor terrible.", "*Fare caldo* = hacer calor. *Pazzesco* (de *pazzo*, loco) = tremendo, coloquial."],
-        ["Sta per piovere.", "Está por llover.", "*Stare per* + infinitivo = estar por, a punto de. *Piovere* es impersonal: *piove*."],
-        ["Che fai stasera?", "¿Qué hacés esta noche?", "*Che* en lugar de *cosa* es más coloquial. El presente sirve para planes: *che fai stasera?*"],
-        ["Ti va di uscire?", "¿Tenés ganas de salir?", "*Ti va di* + infinitivo = ¿te pinta…?"],
-        ["Non vedo l'ora!", "¡No veo la hora!", "Con lo que esperás: *non vedo l'ora di* + infinitivo: *non vedo l'ora di partire*."],
-        ["Da quanto tempo!", "¡Cuánto tiempo!", "Al reencontrarse. Completa: *da quanto tempo non ci vediamo!* (*da* + presente)."],
-        ["Com'è andata?", "¿Cómo te fue?", "*Andare* impersonal en femenino (se sobreentiende «la cosa»): *com'è andata?* = ¿cómo te fue? Pasado con *essere*."],
-        ["È andata benissimo.", "Me fue re bien.", "Mismo patrón: *è andata* + adverbio. *Benissimo* = superlativo de *bene*."],
-        ["Sei mai stato in Italia?", "¿Alguna vez estuviste en Italia?", "*Mai* en pregunta = alguna vez. *Stato* es participio de *essere*; concuerda: *sei mai stata?*"],
-        ["Mi piace un sacco.", "Me encanta / me gusta un montón.", "*Mi piace* + *un sacco* (un montón), coloquial. Más neutro: *mi piace molto*."],
-        ["Mi piacciono i film italiani.", "Me gustan las películas italianas.", "*Piacere* concuerda con lo que gusta: *mi piace il film* / *mi piacciono i film*. *Film* no cambia en plural."],
-        ["Che bella giornata!", "¡Qué lindo día!", "*Che* + adjetivo + sustantivo, sin «tan»: *che bella giornata!*. *Bello* va delante."],
-        ["Ho visto una serie bellissima.", "Vi una serie buenísima.", "*Serie* es femenino e invariable: *una serie*, *le serie*. *Bellissima* = superlativo de *bella*."],
-        ["Cosa ne pensi?", "¿Qué pensás de eso?", "*Ne* = de eso: *pensarne* = opinar sobre algo. Completo: *cosa ne pensi di Roma?*"],
-        ["Dimmi tutto!", "¡Contame todo!", "Imperativo *di'* + *mi* dobla la consonante: *dimmi*. Igual *fammi*, *dammi*."]
-      ] },
-
-    { id: "reazioni", emoji: "🤌", name: "Reazioni",
-      blurb: "Las muletillas que te hacen sonar nativo.",
-      phrases: [
-        ["Dai!", "¡Dale! / ¡Vamos! / ¡No me digas!", "*Dai* cambia con el tono: ánimo, sorpresa o fastidio."],
-        ["Magari!", "¡Ojalá!", "Sola = ¡ojalá!. Con frase pide subjuntivo imperfecto: *magari fosse vero!*"],
-        ["Meno male!", "¡Menos mal!", "Igual que «menos mal». Con frase: *meno male che sei venuto*."],
-        ["Che figata!", "¡Qué bueno! / ¡Qué genial!", "Muy coloquial: *che* + sustantivo. *Figo* = copado, genial; evitalo en contextos formales."],
-        ["Boh, non lo so.", "Ni idea.", "*Boh* es «ni idea», con encogida de hombros. Solo en registro informal."],
-        ["Mamma mia, che casino!", "¡Madre mía, qué lío!", "*Casino* = lío, desorden. El de apostar es *casinò*."],
-        ["Ma dai, davvero?", "¿En serio?", "*Ma dai* expresa sorpresa o incredulidad; *davvero?* = ¿en serio?"],
-        ["Che peccato!", "¡Qué lástima!", "*Che* + sustantivo (literal «¡qué pecado!»). Con frase: *peccato che* + subjuntivo."],
-        ["Figurati!", "¡Faltaba más! / ¡No es nada!", "Imperativo de *figurarsi* (imaginarse): le quita importancia a un gracias. Con usted: *si figuri!*"],
-        ["Non ci posso credere!", "¡No lo puedo creer!", "*Credere a* algo → *crederci*: *ci* = a eso. Va antes del modal: *non ci posso credere*."],
-        ["Ci mancherebbe!", "¡Ni lo menciones! / ¡Obvio!", "Condicional de *mancare*: literal «¡faltaría!». Responde a un gracias o a un pedido de permiso."],
-        ["Pazienza.", "Paciencia / ¿qué le vamos a hacer?", "Sola expresa resignación: «¿qué le vamos a hacer?». No es un pedido de paciencia."],
-        ["Che schifo!", "¡Qué asco!", "*Schifo* = asco. Con persona: *mi fa schifo* = me da asco. Coloquial."],
-        ["Va be', fa niente.", "Bueno, no pasa nada.", "*Va be'* = *va bene* recortado. *Fa niente* = no importa (literal «no hace nada»)."],
-        ["Accidenti!", "¡Uy, caramba!", "Exclamación de fastidio o sorpresa, suave: no es mala palabra. Es el plural de *accidente*."],
-        ["Sul serio?", "¿Posta? / ¿De verdad?", "*Sul* = *su* + *il*: literal «¿sobre lo serio?». Sinónimo: *davvero?*"],
-        ["Ma che dici?", "¿Pero qué decís?", "*Ma* al principio marca sorpresa o desacuerdo; *che* reemplaza a *cosa* en la charla."],
-        ["Ecco!", "¡Ahí está! / ¡Eso!", "Sola = ¡eso!, ¡ahí está!. Con cosa: *ecco il libro*; con pronombre pegado: *eccolo*."]
-      ] },
-
-    { id: "ponti", emoji: "🌉", name: "Connettori",
-      blurb: "Las palabras puente que te dan tiempo para pensar.",
-      phrases: [
-        ["Allora, cosa facciamo?", "Entonces, ¿qué hacemos?", "*Allora* abre o retoma la charla: «bueno, entonces». También es «en ese momento»."],
-        ["Cioè, volevo dire un'altra cosa.", "O sea, quería decir otra cosa.", "*Cioè* corrige o aclara. *Volevo dire* (imperfecto) suaviza: «quería decir»."],
-        ["Comunque, non è un problema.", "De todos modos, no es un problema.", "Al principio, *comunque* cierra un tema: «de todos modos». Al final, «igual»."],
-        ["Insomma, è andata così.", "En fin, fue así.", "*Insomma* resume o corta. *È andata così* = fue así (*andare* impersonal en femenino)."],
-        ["Però non ho tempo.", "Pero no tengo tiempo.", "*Però* (con tilde) = pero, algo más enfático que *ma*. Puede ir al final: *è caro, però*."],
-        ["Quindi ci vediamo lunedì.", "Así que nos vemos el lunes.", "*Quindi* = así que, por lo tanto. Día sin artículo = este lunes."],
-        ["Infatti, hai ragione.", "Justamente, tenés razón.", "*Infatti* confirma lo dicho: no es «de hecho» contradictorio."],
-        ["Anzi, è ancora meglio.", "Es más, es todavía mejor.", "*Anzi* corrige hacia más: «es más, al contrario». *Ancora meglio* = todavía mejor."],
-        ["Tra l'altro, lo conosco.", "Además / por cierto, lo conozco.", "*Tra l'altro* = entre otras cosas, por cierto: agrega un dato al pasar."],
-        ["A proposito, hai sentito Marco?", "A propósito, ¿hablaste con Marco?", "*Sentire* + persona = hablar con alguien, tener noticias. *A proposito* cambia de tema."],
-        ["Secondo me, ha ragione lei.", "Para mí, ella tiene razón.", "*Secondo* + pronombre tónico: *secondo me*, *secondo te*. El sujeto al final destaca: *ha ragione lei*."],
-        ["Da una parte sì, dall'altra no.", "Por un lado sí, por el otro no.", "*Da una parte... dall'altra* = por un lado... por el otro. La segunda lleva artículo."],
-        ["Invece io preferisco il mare.", "Yo, en cambio, prefiero el mar.", "*Invece* marca contraste, «en cambio». *Invece di* + infinitivo = en vez de."],
-        ["Praticamente abbiamo finito.", "Prácticamente terminamos.", "*Praticamente* es también muletilla: «básicamente, o sea». Muy frecuente en la charla."],
-        ["Tipo, non so, domani?", "Tipo, no sé, ¿mañana?", "*Tipo* como muletilla, igual que nuestro «tipo». Coloquial y juvenil."],
-        ["Beh, dipende.", "Bueno, depende.", "*Beh* gana tiempo. *Dipendere da* + algo: *dipende dal tempo*."],
-        ["Ad ogni modo, ti chiamo.", "De cualquier forma, te llamo.", "*Ad ogni modo* = de cualquier forma: *a* toma una *d* ante vocal (*ad ogni*)."],
-        ["Appunto!", "¡Justamente!", "Sola = ¡justamente!, ¡eso mismo!. Confirma lo que dijo el otro."]
-      ] },
-
-    { id: "opinioni", emoji: "🧠", name: "Opinioni",
-      blurb: "Opinar y matizar — con el congiuntivo ya incorporado.",
-      phrases: [
-        ["Penso che sia una buona idea.", "Pienso que es una buena idea.", "Tras *penso che* va congiuntivo: *sia*, no *è*."],
-        ["Credo che abbia ragione.", "Creo que tiene razón.", "*Credere che* + congiuntivo: *abbia*. Como *abbia* sirve para yo, vos y él, a veces se aclara el sujeto."],
-        ["Non credo che venga.", "No creo que venga.", "*Non credo che* + congiuntivo: *venga* (de *venire*)."],
-        ["Mi sembra che tu sia stanco.", "Me parece que estás cansado.", "*Mi sembra che* + congiuntivo. El *tu* aclara el sujeto, porque *sia* sirve para varias personas."],
-        ["Spero che vada tutto bene.", "Espero que salga todo bien.", "*Sperare che* + congiuntivo: *vada* (de *andare*). *Andare bene* = salir bien."],
-        ["È meglio che tu lo sappia.", "Es mejor que lo sepas.", "*È meglio che* + congiuntivo: *sappia* (de *sapere*). Con infinitivo, sin *che*: *è meglio saperlo*."],
-        ["Sono sicuro che è vero.", "Estoy seguro de que es verdad.", "Con certeza (*sono sicuro*) vuelve el indicativo."],
-        ["Non è detto.", "No necesariamente.", "Literal «no está dicho»: no es seguro. Con frase: *non è detto che* + congiuntivo."],
-        ["Dipende dai punti di vista.", "Depende de los puntos de vista.", "*Dipendere da*: *dai* = *da* + *i*. Plural de *punto di vista*: *punti di vista*."],
-        ["Hai ragione, non ci avevo pensato.", "Tenés razón, no lo había pensado.", "*Pensare a* algo → *ci penso*. *Avevo pensato* = trapassato prossimo (había pensado)."],
-        ["Non sono d'accordo per niente.", "No estoy para nada de acuerdo.", "*Per niente* refuerza la negación: «para nada». También *non sono affatto d'accordo*."],
-        ["Può darsi.", "Puede ser.", "Literal «puede darse»: puede ser. Con frase: *può darsi che* + congiuntivo."],
-        ["Se avessi tempo, verrei.", "Si tuviera tiempo, iría.", "Periodo hipotético: *se* + congiuntivo imperfetto + condizionale."],
-        ["Se fossi in te, lo farei.", "Yo que vos, lo haría.", "*Se fossi in te* = yo que vos (literal «si fuera en vos»). Sigue condicional: *lo farei*."],
-        ["Vorrei che tu venissi.", "Quisiera que vinieras.", "*Vorrei che* + congiuntivo imperfetto: *venissi*. Tras condicional, el subjuntivo va en imperfecto."],
-        ["Mi sa che hai ragione.", "Me parece que tenés razón.", "*Mi sa che* es coloquial y va con indicativo."],
-        ["Ne vale la pena.", "Vale la pena.", "*Ne* = eso: vale la pena (hacerlo). Con infinitivo, sin *ne*: *vale la pena provare*."]
-      ] },
-
-    { id: "tempo", emoji: "⏳", name: "Passato e futuro",
-      blurb: "Contar lo que hiciste y lo que vas a hacer.",
-      phrases: [
-        ["Ieri sono uscito tardi.", "Ayer salí tarde.", "*Uscire* va con *essere*: el participio concuerda con el sujeto, *sono uscita*."],
-        ["Ho mangiato troppo.", "Comí demasiado.", "*Mangiare* va con *avere*: *ho mangiato*. *Troppo* = demasiado."],
-        ["Non ho dormito bene.", "No dormí bien.", "La negación va antes del auxiliar: *non ho dormito*. *Dormire* va con *avere*."],
-        ["Sono appena arrivato.", "Acabo de llegar.", "«Acabar de» = *appena* + passato prossimo."],
-        ["Stavo per chiamarti.", "Estaba por llamarte.", "*Stare per* + infinitivo en imperfecto = estaba por. Pronombre pegado: *chiamar-ti*."],
-        ["Domani vado dal medico.", "Mañana voy al médico.", "Para ir a lo de una persona (su casa, consultorio o negocio): *da*. *Vado dal medico*, no «al medico»."],
-        ["Quest'estate andrò in Sicilia.", "Este verano voy a ir a Sicilia.", "Futuro *andrò* (de *andare*). Regiones e islas grandes con *in*: *in Sicilia*, *in Toscana*."],
-        ["Ci sono stato l'anno scorso.", "Estuve ahí el año pasado.", "*Ci* = ahí, el lugar ya nombrado. *Esserci stato* = haber estado; concuerda: *ci sono stata*."],
-        ["Quando ero piccolo, giocavo a calcio.", "Cuando era chico, jugaba al fútbol.", "Imperfecto para hábitos del pasado: *ero*, *giocavo*. *Giocare a* + deporte."],
-        ["Stamattina mi sono svegliato presto.", "Esta mañana me desperté temprano.", "Pronominales con *essere*: *mi sono svegliato/a*. *Presto* = temprano (no «pronto»)."],
-        ["Non l'ho ancora fatto.", "Todavía no lo hice.", "*Ancora* va entre auxiliar y participio. *L'ho* = *lo* + *ho*."],
-        ["L'ho già visto.", "Ya lo vi.", "*Già* va entre auxiliar y participio. *L'* = *lo* apostrofado ante *ho*."],
-        ["Fra un'ora sono lì.", "En una hora estoy ahí.", "*Fra/tra* + tiempo = dentro de. «En una hora» no es *in un'ora*."],
-        ["Tre anni fa vivevo a Roma.", "Hace tres años vivía en Roma.", "*Fa* va después del tiempo: *tre anni fa* = hace tres años. Ciudades con *a*."],
-        ["Sto lavorando, ti richiamo.", "Estoy trabajando, te vuelvo a llamar.", "*Stare* + gerundio para lo que pasa ahora. *Ri-* = volver a: *richiamare* = volver a llamar."],
-        ["Ci ho messo due ore.", "Tardé dos horas.", "*Metterci* + tiempo = tardar (alguien). *Ci vuole* es impersonal; *ci ho messo* dice que vos tardaste."],
-        ["Prima o poi ci riuscirò.", "Tarde o temprano lo voy a lograr.", "*Riuscirci* = lograrlo: *ci* = en eso. Futuro *riuscirò*. *Prima o poi* = tarde o temprano."]
-      ] },
-
-    { id: "trappole", emoji: "🪤", name: "Falsi amici",
-      blurb: "Palabras que parecen españolas y te traicionan.",
-      phrases: [
-        ["Ho mal di testa.", "Me duele la cabeza.", "*Avere mal di* + parte del cuerpo = me duele: *mal di testa*, *mal di pancia*. *Testa* = cabeza."],
-        ["Sono imbarazzato.", "Estoy avergonzado.", "*Imbarazzata* NO es embarazada: embarazada es *incinta*."],
-        ["Mia moglie è incinta.", "Mi esposa está embarazada.", "*Incinta* no cambia: siempre es femenino. Ojo: *imbarazzata* es avergonzada, no embarazada."],
-        ["Esco con i miei amici.", "Salgo con mis amigos.", "*Salire* es subir; salir es *uscire*."],
-        ["Salgo sull'autobus.", "Me subo al colectivo.", "*Salire su* + vehículo = subirse: *sull'autobus* (*su* + *l'*). No lleva pronombre: *salgo*, no «mi salgo»."],
-        ["Ho caldo, apro la finestra.", "Tengo calor, abro la ventana.", "*Avere caldo* = tener calor (la persona); *fa caldo* = hace calor (el clima). «Ventana» es *finestra*."],
-        ["Mi guardo allo specchio.", "Me miro al espejo.", "*Guardarsi* reflexivo, como «mirarse». *Allo* = *a* + *lo* (por *s* + consonante)."],
-        ["Ho lasciato la borsa in macchina.", "Dejé la cartera en el auto.", "*In macchina* = en el auto, sin artículo. *Macchina* es auto (y máquina); *borsa* = cartera."],
-        ["Questo burro è salato.", "Esta manteca es salada.", "*Burro* es manteca; el animal es *asino*."],
-        ["Ho una camera doppia.", "Tengo una habitación doble.", "*Camera* = habitación; *cámara* de fotos = *macchina fotografica*."],
-        ["Mi piace il salone.", "Me gusta la sala.", "*Salone* es la sala grande o el living; el sufijo *-one* agranda. *Salone* también es peluquería o exposición."],
-        ["Guarda che è tardi.", "Mirá que es tarde.", "*Guarda che* + frase = «mirá que»: llama la atención. Con usted: *guardi che*."],
-        ["Faccio colazione alle otto.", "Desayuno a las ocho.", "*Fare colazione* = desayunar: el italiano arma las comidas con *fare*. El almuerzo es *il pranzo*."],
-        ["Che guaio!", "¡Qué problema!", "*Guaio* = problema, lío. Plural *guai*: *essere nei guai* = estar en problemas."],
-        ["Non mi toccare!", "¡No me toques!", "Imperativo negativo de *tu* = *non* + infinitivo. El pronombre va antes o pegado: *non toccarmi*."],
-        ["Il negozio è chiuso.", "El negocio está cerrado.", "*Negozio* = local, tienda. «Negocio» como trato es *affare*."],
-        ["Ho fatto il bucato.", "Lavé la ropa.", "*Fare il bucato* = lavar la ropa. *Bucato* no tiene que ver con la boca (*bocca*)."],
-        ["Mi fa schifo.", "Me da asco.", "*Fare schifo a* alguien = dar asco. Sin persona es «ser malísimo»: *questo film fa schifo*."]
-      ] },
-
-    { id: "casa", emoji: "🏠", name: "Casa e famiglia",
-      blurb: "Tu gente, tu casa, tu rutina.",
-      phrases: [
-        ["Ho due fratelli e una sorella.", "Tengo dos hermanos y una hermana.", "*Fratelli* también sirve para hermanos mixtos; acá se separan porque se aclara el género."],
-        ["Mia madre è molto simpatica.", "Mi mamá es muy simpática.", "Con familiares en singular, sin artículo: *mia madre*."],
-        ["I miei genitori abitano in Argentina.", "Mis padres viven en Argentina.", "En plural el posesivo lleva artículo: *i miei genitori*. Países con *in*."],
-        ["Vivo da solo.", "Vivo solo.", "*Da solo* = solo, sin compañía. Concuerda: *da sola*, *da soli*."],
-        ["Mi alzo alle sette.", "Me levanto a las siete.", "*Alzarsi* es pronominal: *mi alzo*. La hora con *alle*."],
-        ["Mi faccio la doccia.", "Me baño / me doy una ducha.", "*Farsi la doccia*: el *mi* da idea de «para mí»; *faccio la doccia* también vale."],
-        ["Stasera cucino io.", "Esta noche cocino yo.", "El sujeto al final marca contraste: *cucino io* = cocino yo (no vos)."],
-        ["Devo pulire casa.", "Tengo que limpiar la casa.", "*Casa* sin artículo cuando es la propia: *pulire casa*, *sono a casa*."],
-        ["Vado a letto presto.", "Me voy a dormir temprano.", "*Andare a letto* = acostarse, sin artículo. *Presto* = temprano."],
-        ["Ho un cane che si chiama Toto.", "Tengo un perro que se llama Toto.", "*Che* es el relativo para sujeto y objeto: *un cane che si chiama*."],
-        ["Siamo in quattro.", "Somos cuatro.", "*Essere in* + número = ser tantos: *siamo in quattro*, *eravamo in dieci*."],
-        ["Mio figlio va a scuola.", "Mi hijo va a la escuela.", "*Andare a scuola*, sin artículo. Familiar singular con posesivo, sin artículo: *mio figlio*."],
-        ["Stiamo insieme da cinque anni.", "Estamos juntos hace cinco años.", "*Da* + tiempo + presente = hace X que. *Stare insieme* = estar de novios."],
-        ["Mi manca la mia famiglia.", "Extraño a mi familia.", "Estructura invertida: *mi manca* = me falta → extraño."],
-        ["Casa mia è piccola ma carina.", "Mi casa es chica pero linda.", "*Casa mia*, con el posesivo detrás y sin artículo, es la forma natural de «mi casa»."],
-        ["Vieni a cena da me?", "¿Venís a cenar a casa?", "*Da me* = a mi casa (*da* + persona). *A cena* = a cenar; *a pranzo*, a almorzar."]
-      ] },
-
-    { id: "negozi", emoji: "🛍️", name: "Negozi e salute",
-      blurb: "Comprar, probarte ropa y el médico.",
-      phrases: [
-        ["Quanto costa?", "¿Cuánto cuesta?", "Singular *costa*, plural *costano*: *quanto costano queste scarpe?*"],
-        ["Posso provarlo?", "¿Me lo puedo probar?", "Pronombre pegado al infinitivo: *provarlo*; o antes del modal: *lo posso provare?*"],
-        ["Avete una taglia più grande?", "¿Tienen un talle más grande?", "*Taglia* = talle de ropa; en zapatos es *numero*. Al negocio se le habla en *voi*."],
-        ["Sto solo dando un'occhiata.", "Solo estoy mirando.", "*Dare un'occhiata* = echar un vistazo. *Stare* + gerundio: *sto dando*."],
-        ["Lo prendo.", "Me lo llevo.", "Al comprar, *prendere* = llevarse. *Lo* para masculino; *la prendo* si es femenino."],
-        ["È in saldo?", "¿Está en oferta / rebaja?", "*In saldo* = en liquidación. *I saldi* = la temporada de rebajas."],
-        ["Mi fa uno sconto?", "¿Me hace un descuento?", "*Fare uno sconto a* alguien: *mi fa?*. *Uno* por *s* + consonante."],
-        ["È troppo caro.", "Es demasiado caro.", "*Troppo* = demasiado. *Caro* también es «querido»: *caro amico*."],
-        ["Non mi sento bene.", "No me siento bien.", "*Sentirsi* es pronominal. Va *bene* (adverbio), no *buono*."],
-        ["Mi fa male la gola.", "Me duele la garganta.", "*Fare male* funciona como «gustar»: *mi fa male la gola*, *mi fanno male i piedi*."],
-        ["Ho la febbre.", "Tengo fiebre.", "*Avere la febbre*, con artículo. Igual: *ho la tosse* (tengo tos)."],
-        ["Mi sono raffreddato.", "Me resfrié.", "*Raffreddarsi* = resfriarse, con *essere*. El resfrío es *il raffreddore*."],
-        ["Ho bisogno di un medico.", "Necesito un médico.", "*Avere bisogno di* + cosa o infinitivo: *ho bisogno di dormire*."],
-        ["Prenda questa pastiglia due volte al giorno.", "Tome esta pastilla dos veces por día.", "Imperativo de usted: *prenda*. Frecuencia: *due volte al giorno* (*al* = por)."],
-        ["Mi può fare la ricevuta?", "¿Me puede hacer el recibo?", "*Può* = usted puede. *La ricevuta* es el recibo formal; *lo scontrino*, el ticket."],
-        ["A che ora chiudete?", "¿A qué hora cierran?", "Al negocio se le habla en *voi*: *chiudete*. *A che ora* + verbo."]
-      ] },
-
-    { id: "cuore", emoji: "❤️", name: "Sentimenti",
-      blurb: "Decir lo que sentís: gustos, ganas y emociones.",
-      phrases: [
-        ["Ho voglia di un gelato.", "Tengo ganas de un helado.", "*Avere voglia di* + cosa o infinitivo: *ho voglia di uscire*."],
-        ["Non ne ho voglia.", "No tengo ganas.", "*Ne* reemplaza a *di* + eso: *non ne ho voglia* = no tengo ganas (de eso)."],
-        ["Sono stanco morto.", "Estoy muerto de cansancio.", "*Morto* intensifica: *stanco morto* = muerto de cansancio. Concuerda: *stanca morta*."],
-        ["Mi annoio.", "Me aburro.", "*Annoiarsi* es pronominal: *mi annoio*. «Algo me aburre» = *mi annoia*."],
-        ["Sono contento per te.", "Me alegro por vos.", "*Contento per* + persona. Con frase: *sono contento che* + congiuntivo."],
-        ["Mi dispiace tantissimo.", "Lo siento muchísimo.", "*Mi dispiace* funciona como «gustar». *Tantissimo* = muchísimo."],
-        ["Ti voglio bene.", "Te quiero.", "*Ti voglio bene*: familia y amigos. *Ti amo*: pareja."],
-        ["Mi fai ridere.", "Me hacés reír.", "*Fare* + infinitivo = hacer que alguien haga algo: *mi fai ridere*, *mi fai arrabbiare*."],
-        ["Sono nervoso per l'esame.", "Estoy nervioso por el examen.", "*Nervoso per* + cosa. *Esame* es masculino: *l'esame*, *gli esami*."],
-        ["Che bello vederti!", "¡Qué lindo verte!", "*Che bello* + infinitivo = qué lindo... Pronombre pegado: *veder-ti*."],
-        ["Mi hai fatto una bella sorpresa.", "Me diste una linda sorpresa.", "*Fare una sorpresa a* alguien: *mi hai fatto*. *Bella* antes del sustantivo."],
-        ["Non ti preoccupare.", "No te preocupes.", "Imperativo negativo con *tu*: *non* + infinitivo. También *non preoccuparti*."],
-        ["Mi fido di te.", "Confío en vos.", "*Fidarsi di* + persona = confiar en. Tras preposición, pronombre tónico: *di te*."],
-        ["Ne ho abbastanza!", "¡Ya me cansé! / ¡Estoy harto!", "*Averne abbastanza* = estar harto: *ne* = de eso."],
-        ["Sono fiero di te.", "Estoy orgulloso de vos.", "*Essere fiero di* = estar orgulloso de. Sinónimo: *orgoglioso*."],
-        ["In bocca al lupo!", "¡Suerte!", "Se responde *Crepi!* (¡que se muera el lobo!)."]
-      ] },
-
-    { id: "idee", emoji: "🏛️", name: "Parlare di idee",
-      blurb: "Para charlar de historia, política, libros y sociedad sin quedarte mudo.",
-      phrases: [
-        ["Da un punto di vista storico, ha senso.", "Desde un punto de vista histórico, tiene sentido.", "*Avere senso* = tener sentido. *Da un punto di vista* + adjetivo."],
-        ["Bisogna contestualizzare.", "Hay que contextualizar.", "*Bisogna* + infinitivo = hay que. Es impersonal: no cambia."],
-        ["È una questione di classe sociale.", "Es una cuestión de clase social.", "*Una questione di* = una cuestión de. *Questione* es femenino en *-e*."],
-        ["Non sono d'accordo con questa interpretazione.", "No estoy de acuerdo con esta interpretación.", "*Essere d'accordo con* + persona o idea. La negación va antes del verbo."],
-        ["Dipende da cosa intendi per libertà.", "Depende de qué entendés por libertad.", "*Intendere per* = entender por, querer decir con. *Dipendere da*."],
-        ["Il problema è più complesso di così.", "El problema es más complejo que eso.", "*Più... di così* = más... que eso: el segundo término va con *di*."],
-        ["Su questo punto hai ragione.", "En este punto tenés razón.", "*Su questo punto* = en este punto (con *su*, no *in*)."],
-        ["Mi ha fatto riflettere.", "Me hizo reflexionar.", "*Fare* + infinitivo = hacer que alguien haga algo: *mi ha fatto riflettere*."],
-        ["È un libro che mi ha cambiato la vita.", "Es un libro que me cambió la vida.", "*Cambiare la vita a qualcuno*: el pronombre marca a quién (*mi*) y el sustantivo va con artículo: *mi ha cambiato la vita*, no «mia vita»."],
-        ["L'ho letto in traduzione.", "Lo leí traducido.", "*In traduzione* = traducido. *Lo* se apostrofa ante *ho*: *l'ho letto*."],
-        ["Il suo pensiero è ancora attuale.", "Su pensamiento sigue siendo actual.", "*Attuale* = actual, vigente. «Actualmente» es *attualmente*."],
-        ["Non si può ridurre tutto all'economia.", "No se puede reducir todo a la economía.", "*Si può* + infinitivo = se puede. *Ridurre a*: *all'economia*."],
-        ["Si tratta di un luogo comune.", "Se trata de un lugar común.", "*Si tratta di* = se trata de; impersonal, sin sujeto."],
-        ["In altre parole, il potere si basa sul consenso.", "En otras palabras, el poder se basa en el consenso.", "*Basarsi su* = basarse en: *sul* = *su* + *il*."],
-        ["Faccio l'avvocato del diavolo.", "Hago de abogado del diablo.", "*Fare* + artículo + rol = hacer de: *faccio l'avvocato del diavolo*."],
-        ["La storia la scrivono i vincitori.", "La historia la escriben los vencedores.", "Dislocación: el objeto va adelante y se repite con pronombre: *la storia la scrivono*."],
-        ["Sono cresciuto leggendo Borges.", "Crecí leyendo a Borges.", "Con personas no va *a*: *leggo Borges*, *conosco Maria*."],
-        ["Che cosa ne pensi, da sociologo?", "¿Qué opinás, como sociólogo?", "*Da* + rol = como: *da sociologo*. *Ne* = de eso."]
-      ] },
-
-    { id: "citazioni", emoji: "✒️", name: "Citazioni celebri",
-      blurb: "Versos y frases que cualquier italiano reconoce. Aprenderlas es aprender la lengua y la cultura a la vez.",
-      phrases: [
-        ["Nel mezzo del cammin di nostra vita", "En medio del camino de nuestra vida", "Dante, *Inferno* I, 1: el primer verso de la *Commedia*."],
-        ["Lasciate ogni speranza, voi ch'entrate", "Abandonen toda esperanza, ustedes que entran", "Dante, *Inferno* III: la inscripción sobre la puerta del infierno."],
-        ["Amor, ch'a nullo amato amar perdona", "Amor, que a ningún amado permite no amar", "Dante, *Inferno* V: Francesca da Rimini."],
-        ["Fatti non foste a viver come bruti", "No fueron hechos para vivir como bestias", "Dante, *Inferno* XXVI: Ulises; sigue *ma per seguir virtute e canoscenza*."],
-        ["E quindi uscimmo a riveder le stelle", "Y de allí salimos a volver a ver las estrellas", "Dante, *Inferno* XXXIV: el último verso del Infierno. *Uscimmo* es passato remoto."],
-        ["Chi vuol esser lieto, sia: di doman non c'è certezza", "Quien quiera ser feliz, que lo sea: del mañana no hay certeza", "Lorenzo de' Medici, *Canzona di Bacco* (1490)."],
-        ["Sempre caro mi fu quest'ermo colle", "Siempre me fue querida esta colina solitaria", "Leopardi, *L'infinito* (1819). *Fu* = passato remoto de *essere*."],
-        ["E il naufragar m'è dolce in questo mare", "Y naufragar me es dulce en este mar", "Leopardi, el último verso de *L'infinito*."],
-        ["Quel ramo del lago di Como", "Aquel brazo del lago de Como", "Manzoni, el comienzo de *I promessi sposi*."],
-        ["Se vogliamo che tutto rimanga com'è, bisogna che tutto cambi", "Si queremos que todo siga como está, es necesario que todo cambie", "Tomasi di Lampedusa, *Il Gattopardo*. Dos congiuntivi: *rimanga*, *cambi*."],
-        ["M'illumino d'immenso", "Me ilumino de inmensidad", "Ungaretti, *Mattina* (1917): un poema entero de dos versos."],
-        ["Si sta come d'autunno sugli alberi le foglie", "Se está como en otoño en los árboles las hojas", "Ungaretti, *Soldati* (1918): los soldados en la trinchera."],
-        ["Ognuno sta solo sul cuor della terra", "Cada uno está solo sobre el corazón de la tierra", "Quasimodo, *Ed è subito sera*."],
-        ["Odio gli indifferenti", "Odio a los indiferentes", "Gramsci, artículo de 1917."],
-        ["Il pessimismo dell'intelligenza, l'ottimismo della volontà", "El pesimismo de la inteligencia, el optimismo de la voluntad", "Lema que Gramsci tomó de Romain Rolland."],
-        ["Considerate se questo è un uomo", "Consideren si esto es un hombre", "Primo Levi, del poema que abre *Se questo è un uomo*."],
-        ["Un paese ci vuole, non fosse che per il gusto di andarsene via", "Hace falta un pueblo, aunque sea por el gusto de irse", "Pavese, *La luna e i falò* (1950)."],
-        ["Eppur si muove", "Y sin embargo se mueve", "Atribuida a Galileo tras el proceso de 1633. No hay pruebas de que la haya dicho."]
-      ] },
-
-    /* ---------------------------------------------- C1: l'ultima stagione.
-       Quattro scene per le settimane 41-52, dove prima c'era solo grammatica:
-       la mail formale, la discussione, l'aneddoto e lo sportello. */
-    { id: "email", emoji: "📧", name: "Scrivere una mail",
-      blurb: "El correo formal: abrir, pedir, adjuntar, cerrar. Lo que se escribe todos los días en una oficina italiana.",
-      phrases: [
-        ["Gentile dottoressa Rossi, le scrivo in merito alla sua richiesta.", "Estimada doctora Rossi, le escribo con respecto a su pedido.", "*Gentile* + título es la apertura formal estándar; *Egregio* es más ceremonioso."],
-        ["In allegato trova il documento aggiornato.", "Adjunto encontrará el documento actualizado.", "*In allegato* = adjunto. *Trova* = usted encuentra (*Lei*)."],
-        ["Resto a disposizione per qualsiasi chiarimento.", "Quedo a disposición para cualquier aclaración.", "*Restare a disposizione* = quedar a disposición. *Qualsiasi* no cambia: *qualsiasi cosa*."],
-        ["La ringrazio in anticipo per la cortese attenzione.", "Le agradezco de antemano su atención.", "*La ringrazio*: *ringraziare* es transitivo, *La* = a usted. *In anticipo* = de antemano."],
-        ["Cordiali saluti,", "Saludos cordiales,", "El cierre neutro. *Distinti saluti* es más frío y formal."],
-        ["Le confermo la nostra riunione di giovedì alle dieci.", "Le confirmo nuestra reunión del jueves a las diez.", "*Le* = a usted (indirecto). *Di giovedì* = del jueves."],
-        ["Purtroppo devo rimandare l'appuntamento.", "Lamentablemente tengo que postergar la cita.", "*Rimandare* = postergar. *Dovere* + infinitivo, sin «que»."],
-        ["Potrebbe inviarmi il preventivo entro venerdì?", "¿Podría enviarme el presupuesto antes del viernes?", "*Entro* = «antes de, a más tardar»; no es «entre»."],
-        ["Mi scuso per il ritardo nella risposta.", "Pido disculpas por la demora en responder.", "*Scusarsi per* algo. *Nella* = *in* + *la*."],
-        ["Le sarei grato se potesse confermare la ricezione.", "Le agradecería que confirmara la recepción.", "*Sarei grato se* + congiuntivo imperfetto: la cortesía en dos tiempos."],
-        ["Faccio seguito alla telefonata di stamattina.", "Doy seguimiento al llamado de esta mañana.", "*Fare seguito a* = dar seguimiento a: fórmula de mail formal."],
-        ["Come da accordi, le invio la fattura.", "Según lo acordado, le envío la factura.", "*Come da* + sustantivo = según: *come da accordi*. *Le invio* = le envío."],
-        ["Nel caso in cui non fosse possibile, mi faccia sapere.", "En caso de que no fuera posible, avíseme.", "*Nel caso in cui* + congiuntivo; *mi faccia sapere* es imperativo de cortesía."],
-        ["Con la presente comunico le mie dimissioni.", "Por la presente comunico mi renuncia.", "*Dimissioni* = renuncia (dimisión); casi siempre en plural: *dare le dimissioni*."],
-        ["Distinti saluti,", "Atentamente,", "Cierre formal y distante. Para algo más cordial: *Cordiali saluti*."],
-        ["A presto e buon lavoro!", "¡Hasta pronto y buen trabajo!", "*Buon lavoro* = que rinda el trabajo; despedida típica entre colegas."]
-      ] },
-
-    { id: "dibattito", emoji: "🗣️", name: "Discutere e argomentare",
-      blurb: "Dar la opinión, conceder, contradecir sin pelear: lo que pide el orale del C1.",
-      phrases: [
-        ["Da un lato hai ragione, dall'altro però…", "Por un lado tenés razón, pero por el otro…", "*Da un lato... dall'altro* = por un lado... por el otro. *Però* puede ir después."],
-        ["Non sono affatto d'accordo.", "No estoy para nada de acuerdo.", "*Affatto* refuerza la negación: «en absoluto»."],
-        ["Mi permetta di dissentire.", "Permítame disentir.", "Formal: *mi permetta* es congiuntivo con valor de imperativo de cortesía."],
-        ["Il punto è un altro.", "El punto es otro.", "*Un altro* = otro, siempre con artículo indeterminado."],
-        ["Ammettiamo pure che sia così.", "Admitamos que sea así.", "*Ammettere che* + congiuntivo."],
-        ["Non è detto che funzioni.", "No es seguro que funcione.", "*Non è detto che* + congiuntivo: «no está dicho que»."],
-        ["A mio avviso, è una questione di priorità.", "A mi entender, es una cuestión de prioridades.", "*A mio avviso* = en mi opinión, formal. *Priorità* es invariable."],
-        ["Sarà anche vero, ma non mi convince.", "Será verdad, pero no me convence.", "El futuro *sarà* expresa concesión o suposición."],
-        ["Prendiamo ad esempio il caso di Milano.", "Tomemos por ejemplo el caso de Milán.", "*Prendiamo* = tomemos (imperativo de *noi*). *Ad esempio*: *a* toma *d* ante vocal."],
-        ["Detto questo, resto della mia idea.", "Dicho esto, sigo pensando lo mismo.", "*Detto questo* = dicho esto (participio absoluto). *Restare della propria idea* = seguir pensando igual."],
-        ["Lasciami finire, per favore.", "Dejame terminar, por favor.", "*Lasciare* + infinitivo: permitir."],
-        ["In fin dei conti, siamo d'accordo.", "A fin de cuentas, estamos de acuerdo.", "*In fin dei conti* = a fin de cuentas. *Fin* = *fine* recortado."],
-        ["Non vorrei sembrare polemico, ma…", "No quisiera parecer polémico, pero…", "*Vorrei* suaviza. *Sembrare* + adjetivo, sin preposición."],
-        ["Quali sarebbero le alternative?", "¿Cuáles serían las alternativas?", "El condicional *sarebbero* suaviza la pregunta. *Quali* es el plural de *quale*."],
-        ["I dati dicono il contrario.", "Los datos dicen lo contrario.", "*Il contrario* = lo contrario, con artículo masculino."],
-        ["Su questo non transigo.", "En esto no transo.", "*Transigere* = transigir, formal. *Su questo* = en esto."]
-      ] },
-
-    { id: "aneddoto", emoji: "🎙️", name: "Raccontare un aneddoto",
-      blurb: "Contar algo que te pasó con suspenso, presente narrativo y remate. La fluidez se entrena contando.",
-      phrases: [
-        ["Ti devo raccontare una cosa assurda.", "Te tengo que contar algo absurdo.", "*Raccontare* = contar una historia; contar números es *contare*. Pronombre antes del modal: *ti devo*."],
-        ["Ero appena uscito di casa quando…", "Recién había salido de casa cuando…", "*Ero appena uscito*: trapassato prossimo, la acción anterior."],
-        ["A un certo punto si spegne tutto.", "En un momento se apaga todo.", "Presente narrativo: en italiano se cuenta en presente para dar vida."],
-        ["Non ci crederai mai.", "No lo vas a creer nunca.", "*Crederci* = creerlo (*ci* = a eso). Futuro *crederai*. *Mai* va tras el verbo."],
-        ["Figurati che non avevo neanche le chiavi.", "Imaginate que ni siquiera tenía las llaves.", "*Figurati* = «imaginate»; también «de nada»."],
-        ["Per farla breve, ho dormito dal vicino.", "Para hacerla corta, dormí en lo del vecino.", "*Dal vicino* = en casa del vecino: *da* + persona."],
-        ["Morale della favola: mai fidarsi delle app.", "Moraleja: nunca confiar en las apps.", "*Mai* + infinitivo para consejos generales. *Fidarsi di*: *delle app*."],
-        ["E indovina chi c'era?", "¿Y adiviná quién estaba?", "*Indovina* = adiviná (imperativo). *C'era* = había, estaba (imperfecto de *c'è*)."],
-        ["Mi sono sentito morire.", "Me quería morir.", "*Sentirsi* + infinitivo: *mi sono sentito morire*. Hipérbole común."],
-        ["Alla fine è andata bene.", "Al final salió bien.", "*È andata*: impersonal en femenino, «la cosa fue»."],
-        ["Roba da matti!", "¡Cosa de locos!", "*Roba* = cosas (coloquial). *Da* + sustantivo = propio de: *roba da matti*."],
-        ["Se l'avessi saputo, sarei rimasto a casa.", "Si lo hubiera sabido, me habría quedado en casa.", "Periodo hipotético del pasado: congiuntivo trapassato + condizionale passato."],
-        ["Ci siamo fatti una risata.", "Nos reímos un montón.", "*Farsi una risata* = reírse un rato. Pronominal con *essere*: *ci siamo fatti*."],
-        ["Non me lo dimenticherò mai.", "No me lo voy a olvidar nunca.", "*Dimenticarsi* + objeto: *mi* + *lo* = *me lo*. Futuro *dimenticherò*."],
-        ["Tutto è bene quel che finisce bene.", "Bien está lo que bien acaba.", "Refrán fijo. *Quel che* = lo que."],
-        ["Comunque, dov'ero rimasto?", "Bueno, ¿en qué estaba?", "*Rimanere* con *essere*: *ero rimasto* (trapassato). *Dov'ero* = dónde estaba."]
-      ] },
-
-    { id: "sportello", emoji: "🏛️", name: "Burocrazia e sportelli",
-      blurb: "Codice fiscale, permesso di soggiorno, marca da bollo: sobrevivir a la ventanilla italiana.",
-      phrases: [
-        ["Vorrei fare la richiesta del codice fiscale.", "Quisiera solicitar el codice fiscale.", "El *codice fiscale* es el número que Italia pide para todo, del alquiler al celular."],
-        ["Ho preso il numero, tocca a me?", "Saqué número, ¿me toca?", "*Toccare a* + persona = tocarle el turno: *tocca a me*, *a chi tocca?*"],
-        ["Mi manca un documento, posso tornare domani?", "Me falta un documento, ¿puedo volver mañana?", "*Mancare* funciona como «gustar»: *mi manca un documento*, *mi mancano due firme*."],
-        ["Serve la fotocopia del passaporto.", "Hace falta la fotocopia del pasaporte.", "*Serve* = hace falta; no «sirve»."],
-        ["Dove devo firmare?", "¿Dónde tengo que firmar?", "*Dovere* + infinitivo, sin «que». *Firmare* = firmar."],
-        ["La pratica è in lavorazione.", "El trámite está en curso.", "*Pratica* = trámite, expediente."],
-        ["Quanto ci vuole per il permesso di soggiorno?", "¿Cuánto tarda el permiso de residencia?", "*Ci vuole* = se necesita, tarda."],
-        ["Ho bisogno di una marca da bollo.", "Necesito un sello fiscal.", "La *marca da bollo* es una estampilla que se pega en muchos formularios."],
-        ["Mi hanno rimandato a un altro ufficio.", "Me mandaron a otra oficina.", "Tercera plural impersonal: *mi hanno rimandato* (me mandaron). *Rimandare* = mandar de vuelta."],
-        ["Posso prenotare un appuntamento online?", "¿Puedo reservar un turno en línea?", "*Appuntamento* es también el turno. *Prenotare* = reservar."],
-        ["La residenza va richiesta al Comune.", "La residencia se pide en la municipalidad.", "*Va richiesta* = debe pedirse: *andare* + participio."],
-        ["Ha una copia della ricevuta?", "¿Tiene una copia del recibo?", "*Ha* = usted tiene. *Della* = *di* + *la*."],
-        ["Mi scusi, lo sportello chiude alle dodici?", "Disculpe, ¿la ventanilla cierra a las doce?", "*Mi scusi* = disculpe (usted). *Sportello* = ventanilla."],
-        ["Mi hanno respinto la domanda.", "Me rechazaron la solicitud.", "*Domanda* = solicitud, además de pregunta."],
-        ["Faccio ricorso entro trenta giorni.", "Presento un recurso dentro de los treinta días.", "*Fare ricorso* = presentar un recurso. *Entro* = dentro de (plazo máximo)."],
-        ["Finalmente ce l'ho fatta!", "¡Por fin lo logré!", "*Farcela* = lograrlo: *ce l'ho fatta*, *ce la fai?*"]
-      ] }
-  ];
-
-  /* ------------------------------------------------------------- indice */
+  /* ------------------------------------------------------------- índice */
 
   var ALL = [];
   SCENES.forEach(function (s) {
@@ -485,7 +36,10 @@
       ALL.push({
         id: "frase:" + s.id + ":" + i,
         scene: s.id,
-        it: p[0],
+        week: s.week,
+        t: p[0],
+        it: p[0],          // nombres heredados del campo: el motor y la interfaz leen `it`
+        pt: p[0],
         es: p[1],
         note: p[2] || ""
       });
@@ -495,7 +49,7 @@
   var BY_ID = {};
   ALL.forEach(function (f) { BY_ID[f.id] = f; });
 
-  // A word capitalised in mid-sentence is a name (Firenze, Borges).
+  // A word capitalised in mid-sentence is a name (Firenze, Copacabana, Borges).
   var PROPER = {};
   ALL.forEach(function (f) {
     var t = String(f.it).replace(/«|»/g, "").split(/\s+/);
@@ -504,6 +58,10 @@
       if (/^[A-ZÀ-Ý]/.test(w) && !/[.!?…]$/.test(t[i - 1])) PROPER[w] = true;
     }
   });
+
+  // The week each scene opens (none: open from the start).
+  var SCENE_WEEK = {};
+  SCENES.forEach(function (s) { SCENE_WEEK[s.id] = s.week; });
 
   function scene(id) {
     for (var i = 0; i < SCENES.length; i++) if (SCENES[i].id === id) return SCENES[i];
@@ -514,12 +72,17 @@
     return ALL.filter(function (f) { return f.scene === id; });
   }
 
-  /* --------------------------------------------------------- confronto */
+  // The scenes already open in a given week of the course.
+  function openScenes(week) {
+    return SCENES.filter(function (s) { return (s.week || 1) <= (week || 1); });
+  }
 
-  function shuffle(a) {
+  /* --------------------------------------------------------- comparar */
+
+  function shuffle(a, rnd) {
     a = a.slice();
     for (var i = a.length - 1; i > 0; i--) {
-      var j = Math.floor(Math.random() * (i + 1));
+      var j = Math.floor((rnd || Math.random)() * (i + 1));
       var t = a[i]; a[i] = a[j]; a[j] = t;
     }
     return a;
@@ -533,7 +96,6 @@
   /* Tiles as shown on screen: no punctuation and no sentence-initial capital,
      or the tiles give the order away ("Ciao," first, "stai?" last).  Proper
      nouns keep their capital (PROPER is filled at load, see above). */
-
   function tileWords(s) {
     return tiles(s).map(function (t) {
       var w = t.replace(/^[.,!?;:…"]+|[.,!?;:…"]+$/g, "");
@@ -541,15 +103,17 @@
     }).filter(Boolean);
   }
 
-  // Words as the grader compares them: lower case, no punctuation, no accents.
-  // Phrase drills train speed of recall, so a missing accent on a phone
-  // keyboard is not an error here (the grammar rounds stay strict).
+  // Words as the grader compares them: lower case, no punctuation, no
+  // accents or cedilla.  Phrase drills train speed of recall, so a missing
+  // accent on a phone keyboard is not an error here (the grammar rounds stay
+  // strict).  A hyphen counts as a space (chamo-me = chamo me) and the
+  // apostrophe disappears (dov'è = dove, d'água = dagua).
   function words(s) {
     return String(s == null ? "" : s)
       .toLowerCase()
-      .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+      .normalize("NFD").replace(/[̀-ͯ]/g, "")
       .replace(/[’‘`´]/g, "'")
-      .replace(/'/g, "")          // dov'è = dove, po' = po
+      .replace(/'/g, "")
       .replace(/[^a-z0-9 ]+/g, " ")
       .split(/\s+/)
       .filter(Boolean);
@@ -587,7 +151,7 @@
   }
 
   /* A written phrase: exact words = right; one slip in a longer phrase =
-     close.  Word order counts, because that is what makes it Italian. */
+     close.  Word order counts, because that is what makes it sound native. */
   function gradeWritten(given, target) {
     var r = compare(given, target);
     var same = words(given).join(" ") === words(target).join(" ");
@@ -595,11 +159,70 @@
     return r;
   }
 
-  /* --------------------------------------------------------- esercizi */
+  /* ------------------------------------------- errores del hispanohablante
 
-  /* Ogni frase genera esercizi di tipo diverso.  Tutti condividono la forma
-     degli item del corso (id, type, prompt, stem, answer), più il campo
-     `frase` che porta la frase di origine. */
+     traps(frase) devuelve la misma frase con los errores típicos de quien
+     habla español: la palabra española que se cuela, la contracción
+     deshecha a la española, la grafía española…  Nunca un error que se
+     descarte por el sentido: siempre la misma frase.  Con las tablas del
+     paquete (FRASI_DATA.traps: span, alone, contr, art, spell, loose) se
+     recorre la frase acá; sin tablas, las trampas son las de
+     Lezione.traps(…, safe), con las reglas del idioma. */
+
+  function uniq(a) {
+    var seen = {};
+    return a.filter(function (x) { if (seen[x]) return false; seen[x] = 1; return true; });
+  }
+
+  function lezione() {
+    return root.Lezione || (typeof require === "function" ? (function () { try { return require("./lezione.js"); } catch (e) { return null; } })() : null);
+  }
+
+  function tableTraps(T, sentence, rnd) {
+    var toks = String(sentence).split(" ");
+    var rule = [], soft = [];
+    var has = function (o, k) { return !!o && Object.prototype.hasOwnProperty.call(o, k); };
+    toks.forEach(function (t, i) {
+      var m = t.match(/^([«"(¿¡]*)([A-Za-zÀ-ÿ'-]+)([.,;:!?»")…]*)$/);
+      if (!m) return;
+      var w = m[2], low = w.toLowerCase();
+      if (i > 0 && w[0] !== low[0]) return;          // a name (Rio, Bia) stays as it is
+      var hasNext = !!toks[i + 1];
+      var put = function (nw, bag) {
+        if (w[0] !== low[0]) nw = nw.charAt(0).toUpperCase() + nw.slice(1);
+        var c = toks.slice(); c[i] = m[1] + nw + m[3]; bag.push(c.join(" "));
+      };
+      if (has(T.span, low)) {
+        // alone at the end of the sentence it can be another word (muito → mucho, not muy)
+        put(!hasNext && has(T.alone, low) ? T.alone[low] : T.span[low], rule);
+      }
+      if (has(T.contr, low) && hasNext) put(T.contr[low], rule);
+      if (has(T.art, low) && hasNext) put(T.art[low], soft);
+      if (T.spell) T.spell(low).forEach(function (x) { put(x, rule); });
+      if (T.loose) T.loose(low).forEach(function (x) { put(x, soft); });
+    });
+    var same = words(sentence).join(" ");
+    var clean = function (l) {
+      return uniq(shuffle(l, rnd)).filter(function (c) { return words(c).join(" ") !== same; });
+    };
+    var r = clean(rule);
+    return r.concat(clean(soft).filter(function (c) { return r.indexOf(c) < 0; }));
+  }
+
+  function traps(sentence, rnd) {
+    rnd = rnd || Math.random;
+    if (DATA.traps) return tableTraps(DATA.traps, sentence, rnd);
+    var Lz = lezione();
+    if (!Lz || !Lz.traps) return [];
+    var same = words(sentence).join(" ");
+    return Lz.traps(sentence, rnd, 52, null, true).filter(function (t) { return words(t).join(" ") !== same; });
+  }
+
+  /* --------------------------------------------------------- ejercicios */
+
+  /* Cada frase genera ejercicios de tipo distinto.  Todos comparten la
+     forma de los ítems del curso (id, type, prompt, stem, answer), más el
+     campo `frase` que lleva la frase de origen. */
 
   function tilesItem(f) {
     var own = tileWords(f.it);
@@ -616,7 +239,7 @@
     }
     return {
       id: f.id, frase: f, src: "frasi", type: "tiles",
-      prompt: "Armá la frase en italiano",
+      prompt: UI.tiles || "Armá la frase",
       stem: f.es,
       tiles: shuffle(own.concat(extra)),
       answer: f.it, accept: [f.it], note: f.note
@@ -628,7 +251,9 @@
      Distractors that could be told apart by their look give the answer away. */
   function similar(f, n, side) {
     var key = function (x) { return String(x[side] || ""); };
-    var toks = function (x) { return key(x).toLowerCase().split(/[^a-záéíóúñüàèéìòù']+/).filter(function (w) { return w.length > 2; }); };
+    var toks = function (x) {
+      return key(x).toLowerCase().split(/[^a-zà-ÿ']+/).filter(function (w) { return w.length > 2; });
+    };
     var mine = toks(f), used = {};
     used[key(f)] = true;
     var score = function (g) {
@@ -657,7 +282,7 @@
   function writeItem(f) {
     return {
       id: f.id, frase: f, src: "frasi", type: "write",
-      prompt: "Escribilo en italiano (los acentos no cuentan)",
+      prompt: UI.write || "Escribilo (las tildes no cuentan)",
       stem: f.es,
       answer: f.it, accept: [f.it], note: f.note
     };
@@ -672,17 +297,14 @@
     };
   }
 
-  /* Cloze in contesto: la frase intera, una parola da ricordare.  Recuperare
-     una parola dentro il suo blocco la lega al blocco (Nation 2013). */
-  var STOP = ["sono", "come", "questo", "questa", "della", "nella", "alla", "anche",
-              "però", "perché", "molto", "sempre", "ancora"];
-
+  /* Cloze en contexto: la frase entera, una palabra para recordar.
+     Recuperar una palabra dentro de su bloque la ata al bloque (Nation 2013). */
   function clozeItem(f) {
     var toks = tiles(f.it);
     var cands = [];
     toks.forEach(function (t, i) {
       var core = t.replace(/^[^A-Za-zÀ-ÿ]+|[^A-Za-zÀ-ÿ]+$/g, "");
-      if (core.length >= 3 && core.indexOf("'") < 0 && /^[A-Za-zÀ-ÿ]+$/.test(core) &&
+      if (core.length >= 3 && /^[A-Za-zÀ-ÿ]+$/.test(core) &&
           STOP.indexOf(core.toLowerCase()) < 0) cands.push({ i: i, core: core });
     });
     if (!cands.length) return tilesItem(f);
@@ -698,33 +320,31 @@
     };
   }
 
-  /* Dettato: ascoltare e scrivere unisce suono e grafia. */
+  /* Dictado: escuchar y escribir une sonido y grafía. */
   function dictationItem(f) {
     return {
       id: f.id, frase: f, src: "frasi", type: "dictation",
-      prompt: "Dettato: escuchá y escribí lo que oís",
+      prompt: UI.dictation || "Dictado: escuchá y escribí lo que oís",
       stem: f.it,
       answer: f.it, accept: [f.it], note: f.note
     };
   }
 
-  /* Pretest: provare a indovinare prima di vedere la risposta migliora il
-     ricordo, anche quando si sbaglia (Kornell, Hays & Bjork 2009; Richland,
-     Kornell & Kao 2009).  Non costa vite né entra nel ripasso. */
-  /* The options are the same phrase with the mistake a Spanish speaker
-     makes (Non il so, Grazie mile, dov'e): a guess by the form, never by
-     the meaning.  What has fewer than two such versions is completed with
-     the phrases most like it. */
+  /* Pretest: intentar adivinar antes de ver la respuesta mejora el
+     recuerdo, aun cuando se falla (Kornell, Hays & Bjork 2009; Richland,
+     Kornell & Kao 2009).  No cuesta vidas ni entra en el repaso.
+     Las opciones son la misma frase con el error del hispanohablante
+     (Grazie mile, Muy obrigado, Vamos a la praia): se adivina por la forma,
+     nunca por el sentido.  Lo que tiene menos de dos versiones así se
+     completa con las frases más parecidas. */
   function guessItem(f) {
-    var Lz = root.Lezione || (typeof require === "function" ? require("./lezione.js") : null);
-    var traps = Lz ? Lz.traps(f.it, Math.random, 52, null, true).filter(function (t) {
-      return words(t).join(" ") !== words(f.it).join(" ");
-    }) : [];
-    var others = traps.slice(0, 2);
+    var same = words(f.it).join(" ");
+    var tr = traps(f.it).filter(function (t) { return words(t).join(" ") !== same; });
+    var others = tr.slice(0, 2);
     // Only one mistake possible: the second option carries two.
-    if (others.length === 1 && Lz) {
-      var two = Lz.traps(others[0], Math.random, 52, null, true).filter(function (t) {
-        return words(t).join(" ") !== words(f.it).join(" ") && words(t).join(" ") !== words(others[0]).join(" ");
+    if (others.length === 1) {
+      var two = traps(others[0]).filter(function (t) {
+        return words(t).join(" ") !== same && words(t).join(" ") !== words(others[0]).join(" ");
       })[0];
       if (two) others.push(two);
     }
@@ -755,8 +375,8 @@
          : k === "dictation" ? dictationItem(f) : flashItem(f);
   }
 
-  /* Una sessione di scena: prima presenta le frasi nuove, poi le mette alla
-     prova con tipi d'esercizio diversi. */
+  /* Una sesión de escena: primero presenta las frases nuevas, después las
+     pone a prueba con tipos de ejercicio distintos. */
   function sceneSession(sceneId, cards, opts) {
     opts = opts || {};
     var list = ofScene(sceneId);
@@ -796,25 +416,31 @@
     return { total: list.length, seen: seen, strong: strong };
   }
 
-  // Phrase of the day: same for the whole calendar day.
-  function ofTheDay(d) {
+  // Phrase of the day: same for the whole calendar day.  With a week, only
+  // phrases of scenes already open (no Camões for a beginner).
+  function ofTheDay(d, week) {
     d = d || new Date();
+    var pool = week ? ALL.filter(function (f) { return (f.week || 1) <= week; }) : ALL;
+    if (!pool.length) pool = ALL;
     var n = d.getFullYear() * 400 + d.getMonth() * 31 + d.getDate();
-    return ALL[(n * 7919) % ALL.length];
+    return pool[(n * 7919) % pool.length];
   }
 
   var api = {
     SCENES: SCENES,
+    SCENE_WEEK: SCENE_WEEK,
     ALL: ALL,
     BY_ID: BY_ID,
     scene: scene,
     ofScene: ofScene,
+    openScenes: openScenes,
     tiles: tiles,
     tileWords: tileWords,
     PROPER: PROPER,
     words: words,
     compare: compare,
     gradeWritten: gradeWritten,
+    traps: traps,
     tilesItem: tilesItem,
     listenItem: listenItem,
     similar: similar,

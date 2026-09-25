@@ -3,12 +3,12 @@
    el corpus de textos de hispanohablantes (tools/scrivi_corpus.json) mide
    cuántos errores ve el corrector propio y que no marque nada en las
    versiones corregidas ni en las frases del curso.
-   Run: node tools/test_scrivi.js [-v]  */
+   Run: node tools/pt/test_scrivi.js [-v]  */
 var fs = require("fs");
 var path = require("path");
-var ROOT = path.join(__dirname, "..");
-global.Conj = require(path.join(ROOT, "docs/js/conjugator.js"));
-global.Diagnosi = require(path.join(ROOT, "docs/js/diagnosi.js"));
+var pack = require("../lib/pack.js");
+var ctx = pack("pt");
+var Diagnosi = ctx.Diagnosi;
 
 var verbose = process.argv.indexOf("-v") >= 0;
 var fails = 0, checks = 0;
@@ -16,21 +16,21 @@ function ok(c, what) { checks++; if (!c) { fails++; console.log("FAIL " + what);
 
 // The course data, when it is already Portuguese (the port goes module by
 // module): the bank feeds the diagnosis, and everything feeds the lexicon.
-function readJSON(p) { try { return JSON.parse(fs.readFileSync(path.join(ROOT, p), "utf8")); } catch (e) { return null; } }
+function readJSON(p) { try { return pack.data("pt", p); } catch (e) { return null; } }
 function isPt(list) {
   var txt = (list || []).slice(0, 300).join(" ");
   return /\b(você|não|também|está)\b/.test(txt) && !/\b(sono|della|perché|anche)\b/.test(txt);
 }
-var bank = readJSON("docs/data/bank.json");
+var bank = readJSON("bank.json");
 var Banca = null;
 if (bank && isPt((bank.sentences || []).map(function (s) { return (s.pt || s.it || [])[0]; }))) {
-  try { Banca = require(path.join(ROOT, "docs/js/banca.js")); Banca.load(bank); } catch (e) { Diagnosi.init(bank); }
+  try { Banca = ctx.Banca; Banca.load(bank); } catch (e) { Diagnosi.init(bank); }
 } else bank = null;
-var S = require(path.join(ROOT, "docs/js/scrivi.js"));
-var course = readJSON("docs/data/course.json"), glossario = readJSON("docs/data/glossario.json");
+var S = ctx.Scrivi;
+var course = readJSON("course.json"), glossario = readJSON("glossario.json");
 var Frasi = null, Letture = null;
-try { Frasi = require(path.join(ROOT, "docs/js/frasi.js")); } catch (e) { Frasi = null; }
-try { Letture = require(path.join(ROOT, "docs/js/letture.js")); } catch (e) { Letture = null; }
+Frasi = ctx.Frasi || null;
+Letture = ctx.Letture || null;
 var phrases = Frasi && Frasi.ALL && isPt(Frasi.ALL.map(function (f) { return f.pt || f.it; })) ? Frasi.ALL : null;
 var readings = Letture && Letture.EPISODI && isPt(Letture.EPISODI.map(function (e) { return e.text; })) ? Letture.EPISODI : null;
 var items = course && isPt((course.items || []).map(function (i) { return String(i.answer || ""); })) ? course.items : null;
@@ -261,8 +261,8 @@ function runGem() {
     process.exit(fails ? 1 : 0);
   }
   var g = GEM.shift(), calls = [], mem = {};
-  global.localStorage = { getItem: function (k) { return mem[k] || null; }, setItem: function (k, v) { mem[k] = v; } };
-  global.fetch = function (url, opt) {
+  ctx.localStorage = { getItem: function (k) { return mem[k] || null; }, setItem: function (k, v) { mem[k] = v; } };
+  ctx.fetch = function (url, opt) {
     if (/\/models$/.test(url) && /googleapis/.test(url)) {
       return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve({ data: [
         { id: "models/gemini-2.0-flash" }, { id: "models/text-embedding-004" }, { id: "models/gemini-2.5-flash" }, { id: "models/gemma-3-27b-it" }] }); } });

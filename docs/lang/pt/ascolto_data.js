@@ -363,7 +363,21 @@
     A("a-035", 37, "fobia", "fo·BI·a", "FO·bia", "fobia", "fobia: fo-BI-a.")
   ];
 
-  var api = { PAIRS: PAIRS, CONNESSO: CONNESSO, INTONAZIONE: INTONAZIONE, ACCENTO: ACCENTO };
+  // Lo que suoni.js dice de este idioma: el nombre de cada categoría de
+  // pares, las consignas y las notas.
+  var UI = {
+    cats: { vogais: "vocales abiertas y cerradas", nasais: "vocales nasales", palatais: "lh y nh",
+            sibilantes: "s sonora y s sorda", chiadas: "ch, x y j", tidi: "ti, di: «chi», «yi»",
+            erres: "r suave, rr y r inicial", labiais: "v y b", atonas: "e, o finales y acento del verbo",
+            lfinal: "l final = u", tonica: "sílaba tónica" },
+    conta: "¿Cuántas palabras escuchaste? (no, na, do, pelo, à cuentan como una)",
+    intoNote: "En portugués, como en español, la pregunta sí/no no cambia el orden: la marca solo la melodía. En Brasil sube en la última sílaba tónica (y suele caer después); la afirmación baja.",
+    accPrompt: "¿Dónde cae el acento? Elegí la sílaba fuerte",
+    dictPrompt: "Dictado: escuchá y escribí exactamente lo que oís (tildes y ç incluidas)",
+    dictNote: "Una sola letra cambia la palabra: avó / avô, casa / caça, sonho / sono. Y las contracciones van pegadas: no, na, do, pelo."
+  };
+
+  var api = { PAIRS: PAIRS, CONNESSO: CONNESSO, INTONAZIONE: INTONAZIONE, ACCENTO: ACCENTO, UI: UI };
   if (typeof module === "object" && module.exports) module.exports = api;
   else root.AscoltoData = api;
 })(typeof window !== "undefined" ? window : globalThis);

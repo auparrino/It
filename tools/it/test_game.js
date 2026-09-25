@@ -1,15 +1,16 @@
 /* Controlli sul corso costruito e sulla logica di gioco.
-   Run: node tools/test_game.js  */
+   Run: node tools/it/test_game.js  */
 var fs = require("fs");
 var path = require("path");
+var pack = require("../lib/pack.js");
 
-var ROOT = path.join(__dirname, "..");
-var Conj = require(path.join(ROOT, "docs/js/conjugator.js"));
-var Engine = require(path.join(ROOT, "docs/js/engine.js"));
-var Drills = require(path.join(ROOT, "docs/js/drills.js"));
+var ROOT = pack.ROOT;
+var ctx = pack("it");
+var Conj = ctx.Conj;
+var Engine = ctx.Engine;
+var Drills = ctx.Drills;
 
-var course = JSON.parse(
-  fs.readFileSync(path.join(ROOT, "docs/data/course.json"), "utf8"));
+var course = pack.data("it", "course.json");
 
 var fails = 0, checks = 0;
 function ok(cond, what) {
@@ -223,7 +224,7 @@ ok(Drills.dueCount(course, state) >= 30, "le schede scadute rientrano in coda");
 // palabras), y la versión de reconocimiento de un ejercicio escrito da
 // otras formas de la misma palabra o del mismo verbo.
 (function () {
-  var Lez = require(path.join(ROOT, "docs/js/lezione.js"));
+  var Lez = ctx.Lezione;
   var words = function (x) { return String(x).toLowerCase().replace(/[.,;:!?¿¡«»"()’']/g, " ").split(/\s+/).filter(Boolean); };
   var shared = function (a, b) { var bw = words(b); return words(a).filter(function (w) { return bw.indexOf(w) >= 0; }).length; };
   var seed = 11, rnd = function () { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return seed / 0x7fffffff; };
@@ -275,7 +276,7 @@ ok(Drills.dueCount(course, state) >= 30, "le schede scadute rientrano in coda");
 // Duelos: cada oración tiene sus dos formas, la pista está en la oración y
 // «¿qué te lo dijo?» se puede armar; cada sesión trae los dos lados.
 (function () {
-  var Duelli = require(path.join(ROOT, "docs/js/duelli.js"));
+  var Duelli = ctx.Duelli;
   Duelli.DUELLI.forEach(function (d) {
     var sides = [0, 0];
     d.items.forEach(function (x, k) {
@@ -294,7 +295,7 @@ ok(Drills.dueCount(course, state) >= 30, "le schede scadute rientrano in coda");
 // «Adiviná»: tres opciones distintas y parecidas a la frase (la misma frase
 // con un error, casi siempre), nunca otra frase entera si hay trampas.
 (function () {
-  var Frasi = require(path.join(ROOT, "docs/js/frasi.js"));
+  var Frasi = ctx.Frasi;
   var far = 0;
   Frasi.ALL.forEach(function (f) {
     var g = Frasi.guessItem(f);
@@ -319,7 +320,7 @@ ok(Drills.dueCount(course, state) >= 30, "le schede scadute rientrano in coda");
 
 // Glosas de opción múltiple: la respuesta entre tres opciones distintas.
 (function () {
-  var Letture = require(path.join(ROOT, "docs/js/letture.js"));
+  var Letture = ctx.Letture;
   var n = 0;
   Letture.EPISODI.forEach(function (ep) {
     var toks = Letture.allTokens(ep);
@@ -334,7 +335,7 @@ ok(Drills.dueCount(course, state) >= 30, "le schede scadute rientrano in coda");
 
 // Voces reales (Lingua Libre): solo la palabra exacta, un archivo por hablante.
 (function () {
-  var Voci = require(path.join(ROOT, "docs/js/voci.js"));
+  var Voci = ctx.Voci;
   ok(JSON.stringify(Voci.parseTitle("File:LL-Q652 (ita)-Anna Rossi-nonno.wav")) === JSON.stringify({ user: "Anna Rossi", word: "nonno" }), "voci: título");
   ok(Voci.parseTitle("File:LL-Q150 (fra)-X-nonno.wav") === null, "voci: otro idioma");
   var list = Voci.fromApi("nonno", { query: { pages: {
@@ -348,9 +349,35 @@ ok(Drills.dueCount(course, state) >= 30, "le schede scadute rientrano in coda");
 
 // La versión que muestra la app (Oggi, Io) es la del service worker.
 (function () {
-  var sw = fs.readFileSync(path.join(ROOT, "docs/sw.js"), "utf8").match(/VERSION = "laviac1-(v[\d.]+)"/);
+  var sw = fs.readFileSync(path.join(ROOT, "docs/sw.js"), "utf8").match(/VERSION = "c1-(v[\d.]+)"/);
   var app = fs.readFileSync(path.join(ROOT, "docs/js/app.js"), "utf8").match(/APP_VERSION = "(v[\d.]+)"/);
   ok(sw && app && sw[1] === app[1], "versión de la app (" + (app && app[1]) + ") = versión del service worker (" + (sw && sw[1]) + ")");
+})();
+
+// La interfaz (app.js, sw.js) y el paquete: el guardado de siempre, los textos del paquete.
+(function () {
+  var L = ctx.LANG;
+  // Who already studied Italian keeps everything: same prefix, same keys.
+  ok(L.storage === "laviac1" && Engine.STORAGE_KEY === "laviac1.save.v1", "el guardado sigue en laviac1.save.v1: " + Engine.STORAGE_KEY);
+  ok(L.code === "it" && L.tts === "it-IT" && L.base === "lang/it/", "LANG: código, voz y carpeta del paquete");
+  var core = fs.readFileSync(path.join(ROOT, "docs/js/app.js"), "utf8");
+  var sw = fs.readFileSync(path.join(ROOT, "docs/sw.js"), "utf8");
+  [["docs/js/app.js", core], ["docs/sw.js", sw]].forEach(function (x) {
+    var keys = x[1].match(/["'](laviac1|rumoc1)[.\-][^"']*["']/g) || [];
+    ok(!keys.length, x[0] + ": claves de guardado escritas en el código (salen de LANG.storage): " + keys.join(", "));
+  });
+  ok(!/["']data\/[\w.]+\.json["']|["']it-IT["']|["']pt-BR["']/.test(core), "app.js no pide docs/data/ ni nombra una voz: todo sale del paquete");
+  ok(/k\.indexOf\(PREFIX\) === 0/.test(sw) && /PREFIX = "c1-"/.test(sw), "el service worker solo borra sus propias cachés");
+  // Every text app.js reads from the package exists (app.js does not run under node).
+  var need = {};
+  (core.match(/\bUI\.[a-zA-Z]+/g) || []).forEach(function (k) { need["ui." + k.slice(3)] = L.ui[k.slice(3)]; });
+  (core.match(/\bEX\.[a-zA-Z]+/g) || []).forEach(function (k) { need["exam." + k.slice(3)] = L.exam[k.slice(3)]; });
+  (core.match(/\bLG\.[a-zA-Z]+/g) || []).forEach(function (k) { need[k.slice(3)] = k.slice(3) in L ? true : undefined; });
+  var missing = Object.keys(need).filter(function (k) { return need[k] === undefined; });
+  ok(!missing.length, "LANG (lang/it/lang.js) trae todo lo que usa app.js; faltan: " + missing.join(", "));
+  ok(L.ui.tabs.length === 5 && L.ui.tabs[0][2] === "Oggi" && L.ui.tabs[4][2] === "Io", "las pestañas: Oggi … Io");
+  ok(L.spanish.sure.test("¿Qué tal?") && !L.spanish.sure.test("Che cosa fai?"), "español o italiano: la ñ, ¿, ¡ y las tildes agudas");
+  ok(L.glue("l'") === "next" && L.glue("un po'") === null, "hueco elidido: l'amica se pega, un po' no");
 })();
 
 console.log("\ncontrolli: " + checks + "   errori: " + fails);

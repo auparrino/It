@@ -1,18 +1,20 @@
 /* Suoni, dictogloss e capa de frecuencia: datos íntegros, sesiones que se
    arman, puntuación del dictogloss, cobertura y verificador léxico.
-   Run: node tools/test_suoni.js  */
+   Run: node tools/it/test_suoni.js  */
 var fs = require("fs"), path = require("path");
-var ROOT = path.join(__dirname, "..");
-var Engine = require(path.join(ROOT, "docs/js/engine.js"));
-var Frasi = require(path.join(ROOT, "docs/js/frasi.js"));
-var Banca = require(path.join(ROOT, "docs/js/banca.js"));
-Banca.load(JSON.parse(fs.readFileSync(path.join(ROOT, "docs/data/bank.json"), "utf8")));
-var A = require(path.join(ROOT, "docs/js/ascolto_data.js"));
-var Dg = require(path.join(ROOT, "docs/js/dictogloss_data.js"));
-var S = require(path.join(ROOT, "docs/js/suoni.js"));
-var F = require(path.join(ROOT, "docs/js/frequenza.js"));
-var Es = require(path.join(ROOT, "docs/js/esame_data.js"));
-var L = require(path.join(ROOT, "docs/js/letture.js"));
+var pack = require("../lib/pack.js");
+var ROOT = pack.ROOT;
+var ctx = pack("it");
+var Engine = ctx.Engine;
+var Frasi = ctx.Frasi;
+var Banca = ctx.Banca;
+Banca.load(pack.data("it", "bank.json"));
+var A = ctx.AscoltoData;
+var Dg = ctx.DictoglossData;
+var S = ctx.Suoni;
+var F = ctx.Freq;
+var Es = ctx.EsameData;
+var L = ctx.Letture;
 var fails = 0, checks = 0;
 function ok(cond, what) { checks++; if (!cond) { fails++; console.log("FAIL " + what); } }
 
@@ -58,7 +60,7 @@ for (var k = 0; k < 20; k++) {
 }
 
 /* ------------------------------------------------ voci di Common Voice */
-var CV = require(path.join(ROOT, "docs/js/voci_cv_data.js"));
+var CV = ctx.VociCV;
 var cvIds = {};
 ok(CV.ALL.length >= 100, "almeno 100 frasi registrate: " + CV.ALL.length);
 CV.ALL.forEach(function (x) {
@@ -75,7 +77,7 @@ CV.ALL.forEach(function (x) {
   }
 });
 // every mp3 in the folder is used (the discarded ones do not stay in the repo)
-fs.readdirSync(path.join(ROOT, "docs/audio/cv")).forEach(function (f) {
+fs.readdirSync(path.join(pack.langDir("it"), "audio/cv")).forEach(function (f) {
   ok(cvIds[(/^common_voice_it_(\d+)\.mp3$/.exec(f) || [])[1]], "audio che nessuno usa: " + f);
 });
 ok(S.formPool(10).length === 0 && S.formPool(30).length >= 15, "le forme si aprono con la loro settimana");
@@ -102,7 +104,7 @@ ok(S.dgFor(13) === null && S.dgFor(11), "settimane di boss senza testo");
 ok(S.chunkFound("ci vediamo domani", "ci vediamo poi domani") && !S.chunkFound("ci vediamo domani", "domani ci vediamo"), "ordine e finestra");
 
 /* ---------------------------------------------------------- frequenza */
-F.load(JSON.parse(fs.readFileSync(path.join(ROOT, "docs/data/frequenza.json"), "utf8")));
+F.load(pack.data("it", "frequenza.json"));
 ok(F.loaded(), "frequenze caricate");
 ok(F.level("casa") === "A1" && F.zipf("casa") > 5, "casa: A1 e frequente");
 ok(F.lemma("mangiato") === "mangiare" && F.lemma("case") === "casa", "forme → lemma");

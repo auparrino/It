@@ -1,7 +1,7 @@
 /* Validates the conjugation engine against forms checked by hand in the
  * reference grammars (Bechara, Cegalla; tables of Priberam / Conjuga-me,
- * Brazilian norm, 1990 spelling).  Run: node tools/test_conjugator.js      */
-var C = require("../docs/js/conjugator.js");
+ * Brazilian norm, 1990 spelling).  Run: node tools/pt/test_conjugator.js      */
+var C = require("../lib/pack.js")("pt", { upTo: "conjugator.js", includeStop: true }).Conj;
 var fails = 0, checks = 0;
 
 function eq(got, want, what) {

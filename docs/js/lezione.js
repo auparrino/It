@@ -1,11 +1,19 @@
 /*
- * Lezione giocabile: la teoria di ogni settimana diventa una sequenza di
- * schermate brevi, e dopo ogni blocco con esempi o tabella arriva una
- * domanda lampo costruita con il materiale del blocco stesso.  Leggere e
- * subito recuperare (retrieval practice) fissa più che rileggere.
+ * La lección jugable: la teoría de cada semana se vuelve una secuencia de
+ * pantallas cortas (mirá → la regla → la tabla → la trampa), y después de
+ * cada bloque llega un chequeo rápido armado con el material del mismo
+ * bloque.  Leer y recuperar enseguida (práctica de recuperación) fija más
+ * que releer.  Las trampas son los errores del hispanohablante en el idioma
+ * que estudia: las trae el paquete (LANG.rules.traps), igual que las clases
+ * cerradas de «Completá la regla» (LANG.rules.classes) y los textos.
  */
 (function (root) {
   "use strict";
+
+  var LANG = root.LANG || {};
+  var R = LANG.rules || {};
+  var TR = R.traps || {};
+  var TX = R.text || {};
 
   function strip(s) {
     return String(s == null ? "" : s).replace(/\*\*([^*]+)\*\*/g, "$1").replace(/\*([^*]+)\*/g, "$1").trim();
@@ -26,15 +34,15 @@
 
   function usable(s) { return s && s.length <= 60 && s.indexOf(" / ") < 0 && !/^[-—–…]*$/.test(s); }
   // An example is a real pair only if the right side translates the left one:
-  // «il jazz, il weekend = préstamos: se escriben…» is a comment, not a
+  // «il jazz, o show = préstamos: se escriben…» is a comment, not a
   // translation, and makes a meaningless question.
   function translation(p) {
-    // «la crisi → le crisi = en -i» is a table row with a comment, not a
+    // «o leite → os leites = masculino» is a table row with a comment, not a
     // sentence with its translation: no arrows, no lists, no suffix notes.
-    if (/[→;=]|\s\/\s/.test(p[0]) || /[:«»→;=]|\s\/\s|(^|\s)-[a-zà-ù]/i.test(p[1])) return false;
+    if (/[→;=]|\s\/\s/.test(p[0]) || /[:«»→;=]|\s\/\s|(^|\s)-[a-zà-ÿ]/i.test(p[1])) return false;
     // «3. Artículo con el posesivo»: a numbered note or grammar talk, not a translation
     if (/^\d+\./.test(p[1].trim()) ||
-        /\b(artículo|posesivo|plural|singular|verbo|adjetivo|pronombre|sustantivo|preposici|conjuga|regla|tiempo verbal|auxiliar|participio)/i.test(p[1])) return false;
+        /\b(artículo|posesivo|plural|singular|verbo|adjetivo|pronombre|sustantivo|preposici|contracci|conjuga|regla|tiempo verbal|auxiliar|participio|infinitivo|subjuntivo)/i.test(p[1])) return false;
     var esWords = p[1].trim().split(/\s+/).length, itWords = p[0].trim().split(/\s+/).length;
     if (esWords < 2 && itWords > 1) return false;
     return usable(p[0]) && usable(p[1]) && !/,\s*\S+,/.test(p[0]) &&
@@ -49,82 +57,30 @@
   }
 
   /* Trap versions of a right sentence: the errors a Spanish speaker makes
-     (auxiliary, agreement, article, contraction, double consonants). */
-  var AUX = { "sono": "ho", "sei": "hai", "è": "ha", "siamo": "abbiamo", "siete": "avete", "ero": "avevo", "era": "aveva",
-              "ho": "sono", "hai": "sei", "ha": "è", "abbiamo": "siamo", "avete": "siete", "hanno": "sono" };
-  var ART = { "il": "lo", "lo": "il", "la": "le", "le": "la", "gli": "i", "i": "gli", "un": "uno", "uno": "un" };
-  var SPLIT = { "al": "a il", "del": "di il", "nel": "in il", "dal": "da il", "sul": "su il", "alla": "a la",
-                "della": "di la", "nella": "in la", "ai": "a i", "dei": "di i", "nei": "in i", "alle": "a le", "delle": "di le" };
-  var ENDS = [["ata", "ato"], ["ato", "ata"], ["ati", "ate"], ["ate", "ati"], ["uto", "uta"], ["ito", "ita"],
-              ["ano", "a"], ["iamo", "ano"], ["ete", "ono"], ["ebbe", "ebbero"], ["essi", "esse"],
-              ["oso", "osa"], ["osi", "ose"], ["ivo", "iva"], ["ico", "ica"], ["ale", "ali"], ["ente", "enti"]];
-  /* week: the traps test only what has been taught by then (articles from
-     week 3, the auxiliary from week 11, articulated prepositions from 3). */
-  // Another articulated preposition of the same family (del → della, dello).
-  var PREP_FAM = [["al", "allo", "alla", "all'", "ai", "agli", "alle"], ["del", "dello", "della", "dell'", "dei", "degli", "delle"],
-                  ["nel", "nello", "nella", "nell'", "nei", "negli", "nelle"], ["dal", "dallo", "dalla", "dall'", "dai", "dagli", "dalle"],
-                  ["sul", "sullo", "sulla", "sull'", "sui", "sugli", "sulle"]];
-  var SWAP_END = { o: "a", a: "o", e: "i", i: "e" };
-  // The simple preposition a Spanish speaker puts instead (en → in, a Roma).
-  var PREP_SWAP = { a: ["in", "da"], "in": ["a"], da: ["a", "di"], di: ["da", "de"], su: ["in"], per: ["a", "da"], con: ["di"], fra: ["in", "a"], tra: ["in", "a"] };
-  var PRON_SWAP = { io: ["tu", "me"], tu: ["te", "io"], me: ["mi", "io"], te: ["ti", "tu"], noi: ["ci", "voi"], voi: ["vi", "noi"] };
-  // Spanish inside the Italian (me chiamo, de dove, que lavoro): always wrong.
-  var SPAN = { mi: "me", ti: "te", di: "de", che: "que", come: "como", non: "no", e: "y", bene: "bien",
-               grazie: "gracie", ciao: "chao", molto: "muy", sono: "son", anche: "tambien", per: "para",
-               questo: "esto", questa: "esta", dove: "donde", quando: "cuando", sempre: "siempre", tutto: "todo",
-               buona: "buena", buono: "bueno", scusa: "disculpa", scusi: "disculpe", ho: "he", sto: "estoy" };
-  var DEACC = { "à": "a", "è": "e", "é": "e", "ì": "i", "ò": "o", "ù": "u" };
-  /* safe: only the changes that are always an error (article, preposition,
-     è/e, accents, double consonants).  Another ending, person or auxiliary
-     can be good Italian too (mi piaci, sono stanca, chiudono). */
-  function traps(sentence, rnd, week, isItalian, safe) {
+     in the language (LANG.rules.traps.word, one word at a time: the
+     article, the contraction or articulated preposition, the Spanish word
+     or spelling inside, accents, double consonants, plurals, endings…).
+     week: the traps test only what has been taught by then.
+     safe: only the changes that are always an error; another ending,
+     person or auxiliary can be good language too.
+     isWord: the glossary as a dictionary of the language's words (a
+     capital that the dictionary knows is not a name). */
+  var TOKEN = TR.tokenRe || /^([«"(¿¡]*)([A-Za-zÀ-ÿ']+(?:-[A-Za-zÀ-ÿ']+)*)([.,;:!?»")…]*)$/;
+  function traps(sentence, rnd, week, isWord, safe) {
     week = week || 52;
     var toks = sentence.split(" ");
     var rule = [], loose = [];
     toks.forEach(function (t, i) {
-      var m = t.match(/^([«"(]*)([A-Za-zÀ-ÿ']+)([.,;:!?»")]*)$/);
+      var m = t.match(TOKEN);
       if (!m) return;
       var w = m[2], low = w.toLowerCase();
-      if (i > 0 && w[0] !== low[0]) return;          // a name (Roma, Marco) stays as it is
+      if (i > 0 && w[0] !== low[0]) return;          // a name (Roma, Rio, João) stays as it is
       var put = function (nw, bag) {
         if (w[0] !== low[0]) nw = nw.charAt(0).toUpperCase() + nw.slice(1);
         var c = toks.slice(); c[i] = m[1] + nw + m[3]; (bag || rule).push(c.join(" "));
       };
-      var next = (toks[i + 1] || "").toLowerCase();
-      if (!safe && week >= 11 && AUX[low] && /(at|ut|it|ss|tt|rt|st|nt|ls|lt)[oaie]\b/.test(next)) put(AUX[low]);
-      if (week >= 3 && ART[low] && toks[i + 1]) put(ART[low]);
-      if (week >= 3 && SPLIT[low]) put(SPLIT[low]);
-      if (PREP_SWAP[low] && toks[i + 1] && !(safe && low === "per")) put(PREP_SWAP[low][Math.floor(rnd() * PREP_SWAP[low].length)]);
-      if (!safe && PRON_SWAP[low]) put(PRON_SWAP[low][Math.floor(rnd() * PRON_SWAP[low].length)]);
-      if (week >= 3) PREP_FAM.forEach(function (fam) {
-        if (fam.indexOf(low) < 0) return;
-        var vow = /^[aeiouàèéìòùh]/.test(next);
-        var alt = fam.filter(function (x) { return x !== low && !/'$/.test(x) && (!vow || !/^(al|del|nel|dal|sul|allo|dello|nello|dallo|sullo|alla|della|nella|dalla|sulla)$/.test(x)); });
-        if (alt.length) put(alt[Math.floor(rnd() * alt.length)]);
-      });
-      if (safe && SPAN[low]) put(SPAN[low]);
-      // che → ce, chi → ci: the h that keeps the c hard, forgotten
-      if (safe && /ch[ei]/.test(low) && low.length > 2) put(low.replace(/ch([ei])/, "c$1"));
-      // spelled the Spanish way: spagnolo → spañolo, vediamo → bediamo, questo → cuesto
-      if (safe && /gn/.test(low)) put(low.replace("gn", "ñ"));
-      if (safe && /^v[aeiou]/.test(low) && low.length > 3) put("b" + low.slice(1));
-      if (safe && /qu[aeio]/.test(low)) put(low.replace("qu", "cu"));
-      if (low === "è") put("e");
-      if (/[àèéìòù]$/.test(low) && low.length > 2) put(low.slice(0, -1) + DEACC[low.slice(-1)]);
-      if (/([bcdfglmnprstvz])\1/.test(low) && low.length > 4) put(low.replace(/([bcdfglmnprstvz])\1/, "$1"));
-      var done = false;
-      if (!safe && low.length > 4) for (var k = 0; k < ENDS.length; k++) {
-        if (low.slice(-ENDS[k][0].length) === ENDS[k][0]) { put(low.slice(0, -ENDS[k][0].length) + ENDS[k][1]); done = true; break; }
-      }
-      // The same word with the other ending (pane → pana, simpatiche →
-      // simpatichi): wrong in the same way a learner is wrong, never
-      // another sentence.
-      // «Marco …»: maybe a name, no spelling games (unless the dictionary knows it)
-      var capStart = w[0] !== low[0] && !(isItalian && isItalian(low));
-      if (!safe && !done && !capStart && low.length > 3 && SWAP_END[low.slice(-1)] && !/^(sono|come|dove|anche|molto|questo|questa|quando|perché|nostro|nostra)$/.test(low))
-        put(low.slice(0, -1) + SWAP_END[low.slice(-1)], loose);
-      if (!capStart && /^[^aeiou]*[aeiou][lmnrt][aeiou]/.test(low) && low.length > 3 && low.length < 8)
-        put(low.replace(/^([^aeiou]*[aeiou])([lmnrt])/, "$1$2$2"), loose);
+      if (TR.word) TR.word({ w: w, low: low, i: i, toks: toks, week: week, safe: safe, rnd: rnd,
+                             isWord: isWord, put: put, rule: rule, loose: loose });
     });
     var clean = function (l) { return uniq(shuffle(l, rnd)).filter(function (c) { return c !== sentence; }); };
     var r = clean(rule);
@@ -132,17 +88,18 @@
   }
 
   // «¿Cómo se dice…?» from one of the block's examples.
-  // Minimal pairs, «nono / nonno = noveno / abuelo»: which one means…?
+  // Minimal pairs, «nono / nonno = noveno / abuelo», «avó / avô = abuela /
+  // abuelo»: which one means…?
   function pairQuestion(b, rnd) {
     var pairs = (b.ex || []).map(function (p) { return [strip(p[0]).split(" / "), strip(p[1]).split(" / ")]; })
       .filter(function (p) { return p[0].length === 2 && p[1].length === 2 && p[0][0] !== p[0][1] &&
                                    p[1][0] !== p[1][1] && !/[:«»]/.test(p[1].join("")) &&
-                                   // «pena / penna = pena / lapicera»: asking «pena» gives it away
+                                   // «pelo / pêlo = por el / pelo»: asking «pelo» gives it away
                                    p[1].every(function (es) { return p[0].indexOf(es.replace(/\s*\(.*\)/, "")) < 0; }); });
     if (!pairs.length) return null;
     var pk = pairs[Math.floor(rnd() * pairs.length)], k = rnd() < 0.5 ? 0 : 1;
     // Two options are a coin toss: a form from another pair of the block
-    // makes it a real question (nono / nonno / penna).
+    // makes it a real question (avó / avô / avós).
     var opts = pk[0].slice();
     var others = shuffle(pairs.filter(function (p) { return p !== pk; }), rnd);
     if (others.length) opts.push(others[0][0][Math.floor(rnd() * 2)]);
@@ -150,17 +107,17 @@
              options: shuffle(opts, rnd) };
   }
 
-  function exQuestion(lesson, b, rnd, week, isItalian) {
+  function exQuestion(lesson, b, rnd, week, isWord) {
     var pool = allEx(lesson);
     var mine = (b.ex || []).map(function (p) { return [strip(p[0]), strip(p[1])]; })
       .filter(translation);
     if (!mine.length) return pairQuestion(b, rnd);
     var pick = mine[Math.floor(rnd() * mine.length)];
     var known = {}; pool.forEach(function (p) { known[p[0].toLowerCase()] = 1; });
-    var tr = traps(pick[0], rnd, week, isItalian).filter(function (t) { return !known[t.toLowerCase()]; }).slice(0, 2);
+    var tr = traps(pick[0], rnd, week, isWord).filter(function (t) { return !known[t.toLowerCase()]; }).slice(0, 2);
     // Only one mistake possible: the second option carries two.
     if (tr.length === 1) {
-      var t2 = traps(tr[0], rnd, week, isItalian).filter(function (t) {
+      var t2 = traps(tr[0], rnd, week, isWord).filter(function (t) {
         return t !== pick[0] && t.toLowerCase() !== tr[0].toLowerCase() && !known[t.toLowerCase()];
       })[0];
       if (t2) tr.push(t2);
@@ -173,7 +130,7 @@
     }
     // The most similar sentences are the useful distractors: same words,
     // another form (capiamo / capisco), not something obviously unrelated.
-    var words = function (x) { return x.toLowerCase().replace(/[^a-zàèéìòù' ]/g, "").split(/\s+/); };
+    var words = function (x) { return x.toLowerCase().replace(/[^a-zà-ÿ' -]/g, "").split(/\s+/); };
     var mw = words(pick[0]);
     var sim = function (x) {
       var w = words(x), n = 0;
@@ -187,20 +144,22 @@
     // the words: otherwise the meaning gives the answer away, not the rule.
     others = others.filter(function (x) { return sim(x) >= mw.length; });
     if (others.length < 2) return null;
-    return { kind: "ex", prompt: "¿Cómo se dice en italiano?", stem: pick[1], answer: pick[0],
+    return { kind: "ex", prompt: TX.howSay || "¿Cómo se dice?", stem: pick[1], answer: pick[0],
              options: shuffle([pick[0]].concat(others), rnd) };
   }
 
-  // A block with only text: blank one Italian form of its rule and offer
-  // forms from the rest of the lesson («Completá la regla»).
-  function ruleQuestion(lesson, b, rnd, isItalian) {
-    if (!isItalian) return null;
-    // Only clean Italian forms (every word known to the glossary), never a
-    // Spanish word that happened to sit between two asterisks.
+  // A block with only text: blank one form of its rule and offer forms from
+  // the rest of the lesson («Completá la regla»).
+  // isWord: the glossary as a dictionary of the language's words.
+  function ruleQuestion(lesson, b, rnd, isWord) {
+    if (!isWord) return null;
+    // Only clean forms of the language (every word known to the glossary,
+    // an elided article aside: l'amica), never a Spanish word that happened
+    // to sit between two asterisks.
     var clean = function (f) {
       f = f.trim();
-      return f.length >= 3 && /^[a-zà-ù' ]+$/i.test(f) && f.indexOf("/") < 0 && !/^\s|\s$/.test(f) &&
-        f.split(/\s+/).every(function (w) { return isItalian(w.replace(/^[a-zà-ù]+'/, "")) || isItalian(w); }) ? f : null;
+      return f.length >= 3 && /^[a-zà-ÿ' -]+$/i.test(f) && f.indexOf("/") < 0 && !/^\s|\s$/.test(f) &&
+        f.split(/[\s-]+/).every(function (w) { return isWord(w.replace(/^[a-zà-ÿ]+'/, "")) || isWord(w); }) ? f : null;
     };
     var text = [b.r].concat(b.p || [], [b.warn, b.tip]).filter(Boolean).join(" ");
     var forms = (text.match(/\*([^*]{3,24})\*/g) || []).map(function (x) { return clean(x.replace(/\*/g, "")); })
@@ -214,8 +173,8 @@
       (t.match(/\*([^*]{3,24})\*/g) || []).forEach(function (x) { all.push(x.replace(/\*/g, "")); });
     });
     // Distractors of the same kind as the gap: same number of words and
-    // either the same class (essere / avere, a / in / da) or a near shape
-    // (parlo / parla); «avere | migliore / parleremo» gives itself away.
+    // either the same class (ser / estar, em / de / a, no / na) or a near
+    // shape (falo / fala); «ter | melhor / falaremos» gives itself away.
     var others = uniq(shuffle(all, rnd).map(clean).filter(function (f) {
       return f && f.toLowerCase() !== pick.toLowerCase() && forms.indexOf(f) < 0 &&
         f.split(/\s+/).length === pick.split(/\s+/).length && akin(f.toLowerCase(), pick.toLowerCase());
@@ -224,16 +183,14 @@
     var src = [b.r].concat(b.p || []).filter(function (t) { return t && t.indexOf("*" + pick + "*") >= 0; })[0] || b.r || "";
     var stem = strip(src.replace("*" + pick + "*", "___"));
     // A hole glued to letters or a stray asterisk: the markup was uneven.
-    if (/[a-zà-ù]___|___[a-zà-ù]/i.test(stem) || stem.indexOf("*") >= 0) return null;
+    if (/[a-zà-ÿ]___|___[a-zà-ÿ]/i.test(stem) || stem.indexOf("*") >= 0) return null;
     if (stem.length > 160) stem = stem.slice(0, 157) + "…";
     return { kind: "rule", prompt: "Completá la regla", stem: stem, answer: pick,
              options: shuffle([pick].concat(others), rnd) };
   }
 
-  var CLASSES = [["essere", "avere", "stare", "fare"], ["il", "lo", "la", "l'", "i", "gli", "le", "un", "uno", "una", "un'"],
-                 ["a", "di", "da", "in", "su", "con", "per", "tra", "fra"], ["io", "tu", "lui", "lei", "noi", "voi", "loro", "Lei"],
-                 ["mi", "ti", "si", "ci", "vi", "lo", "la", "li", "le", "gli", "ne"], ["che", "cui", "chi", "quale", "il quale"],
-                 ["presente", "imperfetto", "futuro", "condizionale", "congiuntivo", "passato prossimo", "passato remoto", "trapassato"]];
+  // Closed classes (LANG.rules.classes): «essere / avere», «em / de / a».
+  var CLASSES = R.classes || [];
   function lev(a, b) {
     var m = [], i, j;
     for (i = 0; i <= a.length; i++) m[i] = [i];
@@ -248,8 +205,8 @@
     return lev(a, b) <= Math.max(2, Math.floor(Math.max(a.length, b.length) / 2));
   }
   function overlap(a, b) {
-    var wa = a.toLowerCase().split(/[^a-zà-ù']+/).filter(function (w) { return w.length > 2; });
-    var wb = b.toLowerCase().split(/[^a-zà-ù']+/);
+    var wa = a.toLowerCase().split(/[^a-zà-ÿ']+/).filter(function (w) { return w.length > 2; });
+    var wb = b.toLowerCase().split(/[^a-zà-ÿ']+/);
     return wa.filter(function (w) { return wb.indexOf(w) >= 0; }).length;
   }
 
@@ -268,7 +225,7 @@
         if (col.length >= 2 && strip(r[0])) tries.push({ ri: ri, c: c, cell: cell, col: col });
       }
     });
-    // A cell that repeats words of its own row label («come se è → come se
+    // A cell that repeats words of its own row label («se eu for → se eu
     // fosse») is found by matching, not by knowing: only if the other
     // options repeat them too.  The options closest in shape go first.
     tries = shuffle(tries, rnd);
@@ -292,7 +249,7 @@
 
   // A check written by hand in tools/lessons («q»), for the blocks whose
   // text gives the generators nothing to work with (advice, a rule without
-  // Italian forms, a table of labels).
+  // forms of the language, a table of labels).
   function handQuestion(b, rnd) {
     var qs = b.q || [];
     if (!qs.length) return null;
@@ -312,7 +269,7 @@
     var add = function (x) {
       strip(x).split(/\s*(?:\/|,|;|→|\+|=)\s*/).forEach(function (f) {
         f = f.replace(/[.!?¿¡«»()]/g, "").trim();
-        if (f && f.length >= 2 && f.split(/\s+/).length <= 3 && /[a-zà-ù]/i.test(f)) out.push(f.toLowerCase());
+        if (f && f.length >= 2 && f.split(/\s+/).length <= 3 && /[a-zà-ÿ]/i.test(f)) out.push(f.toLowerCase());
       });
     };
     [b.r, b.warn, b.tip].concat(b.p || []).forEach(function (t) {
@@ -323,7 +280,7 @@
   }
 
   // The playable sequence: intro, then each block followed by its check.
-  function steps(lesson, rnd, week, isItalian, only) {
+  function steps(lesson, rnd, week, isWord, only) {
     rnd = rnd || Math.random;
     // only: the block indices of one part of the lesson (a week studied in
     // several short sessions); the intro opens the first part only.
@@ -349,8 +306,8 @@
         }
       }
       if (b.warn || b.tip || (b.more && b.more.length)) out.push({ kind: "trap", i: i });
-      var q = (b.table && tableQuestion(b, rnd)) || (b.ex && exQuestion(lesson, b, rnd, week, isItalian)) ||
-              (!b.table && ruleQuestion(lesson, b, rnd, isItalian)) ||
+      var q = (b.table && tableQuestion(b, rnd)) || (b.ex && exQuestion(lesson, b, rnd, week, isWord)) ||
+              (!b.table && ruleQuestion(lesson, b, rnd, isWord)) ||
               handQuestion(b, rnd);
       if (q) { q.block = i; out.push({ kind: "quiz", q: q }); }
       // «qq»: checks written by hand, all of them asked, in order.

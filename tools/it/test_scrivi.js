@@ -1,19 +1,18 @@
 /* Scrivi: cada texto modelo cumple su consigna y el corrector no le marca
    nada; los errores típicos escritos a mano sí se marcan, con su categoría.
-   Run: node tools/test_scrivi.js  */
+   Run: node tools/it/test_scrivi.js  */
 var fs = require("fs");
 var path = require("path");
-var ROOT = path.join(__dirname, "..");
-global.Conj = require(path.join(ROOT, "docs/js/conjugator.js"));
-global.Diagnosi = require(path.join(ROOT, "docs/js/diagnosi.js"));
-var Banca = require(path.join(ROOT, "docs/js/banca.js"));
-Banca.load(JSON.parse(fs.readFileSync(path.join(ROOT, "docs/data/bank.json"), "utf8")));
-var S = require(path.join(ROOT, "docs/js/scrivi.js"));
-var Frasi = require(path.join(ROOT, "docs/js/frasi.js"));
-var Letture = require(path.join(ROOT, "docs/js/letture.js"));
-S.learnCourse({ items: JSON.parse(fs.readFileSync(path.join(ROOT, "docs/data/course.json"), "utf8")).items,
+var pack = require("../lib/pack.js");
+var ctx = pack("it");
+var Banca = ctx.Banca;
+Banca.load(pack.data("it", "bank.json"));
+var S = ctx.Scrivi;
+var Frasi = ctx.Frasi;
+var Letture = ctx.Letture;
+S.learnCourse({ items: pack.data("it", "course.json").items,
   bank: Banca.bank(), phrases: Frasi.ALL, readings: Letture.EPISODI,
-  glossario: JSON.parse(fs.readFileSync(path.join(ROOT, "docs/data/glossario.json"), "utf8")) });
+  glossario: pack.data("it", "glossario.json") });
 
 var fails = 0, checks = 0, verbose = process.argv.indexOf("-v") >= 0;
 function ok(c, what) { checks++; if (!c) { fails++; console.log("FAIL " + what); } }
@@ -146,8 +145,8 @@ function gem(name, plan, check, keys, mode) { GEM.push([name, plan, check, keys,
 function runGem() {
   if (!GEM.length) return console.log("\ncontrolli: " + checks + "   errori: " + fails);
   var g = GEM.shift(), calls = [], mem = {};
-  global.localStorage = { getItem: function (k) { return mem[k] || null; }, setItem: function (k, v) { mem[k] = v; } };
-  global.fetch = function (url, opt) {
+  ctx.localStorage = { getItem: function (k) { return mem[k] || null; }, setItem: function (k, v) { mem[k] = v; } };
+  ctx.fetch = function (url, opt) {
     if (/\/models$/.test(url) && /googleapis/.test(url)) {
       return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve({ data: [
         { id: "models/gemini-2.0-flash" }, { id: "models/text-embedding-004" }, { id: "models/gemini-2.5-flash" }, { id: "models/gemma-3-27b-it" }] }); } });

@@ -1,18 +1,19 @@
 /* Sons, dictogloss, voces y capa de frecuencia: datos íntegros, sesiones que
    se arman, puntuación del dictogloss, voces de Lingua Libre (portugués),
    Common Voice vacío pero funcional, cobertura y verificador léxico.
-   Run: node tools/test_suoni.js  */
+   Run: node tools/pt/test_suoni.js  */
 var fs = require("fs"), path = require("path");
-var ROOT = path.join(__dirname, "..");
-var Engine = require(path.join(ROOT, "docs/js/engine.js"));
-var Banca = require(path.join(ROOT, "docs/js/banca.js"));
-var bankFile = path.join(ROOT, "docs/data/bank.json");
+var pack = require("../lib/pack.js");
+var ctx = pack("pt");
+var Engine = ctx.Engine;
+var Banca = ctx.Banca;
+var bankFile = pack.dataPath("pt", "bank.json");
 if (fs.existsSync(bankFile)) Banca.load(JSON.parse(fs.readFileSync(bankFile, "utf8")));
-var A = require(path.join(ROOT, "docs/js/ascolto_data.js"));
-var Dg = require(path.join(ROOT, "docs/js/dictogloss_data.js"));
-var S = require(path.join(ROOT, "docs/js/suoni.js"));
-var V = require(path.join(ROOT, "docs/js/voci.js"));
-var CV = require(path.join(ROOT, "docs/js/voci_cv_data.js"));
+var A = ctx.AscoltoData;
+var Dg = ctx.DictoglossData;
+var S = ctx.Suoni;
+var V = ctx.Voci;
+var CV = ctx.VociCV;
 var fails = 0, checks = 0;
 function ok(cond, what) { checks++; if (!cond) { fails++; console.log("FAIL " + what); } }
 function optional(name, fn) {
@@ -160,8 +161,8 @@ ok(S.chunkFound("tinha percebido", "tinha percebdo"), "un error de tipeo perdona
 
 /* ------------------------------------------------ frecuencia (opcional) */
 optional("frequenza", function () {
-  var F = require(path.join(ROOT, "docs/js/frequenza.js"));
-  F.load(JSON.parse(fs.readFileSync(path.join(ROOT, "docs/data/frequenza.json"), "utf8")));
+  var F = ctx.Freq;
+  F.load(pack.data("pt", "frequenza.json"));
   if (!F.info("você")) throw new Error("frequenza.json todavía no es portugués");
   ok(F.level("casa") === "A1" && F.zipf("casa") > 5, "casa: A1 y frecuente");
   ok(F.lemma("casas") === "casa", "formas → lema");

@@ -73,7 +73,7 @@ CONSTR = {
 FIXED = {"tomara": 23, "chamo-me": 1, "chama-se": 1, "pudera": 41}
 # Palabras que coinciden con una forma verbal tardía pero acá no lo son.
 NOT_VERBS = set("""
-fora sobre entre tarde livre conforme segundo cara caso canto sede meio medo nada passo
+fora colher colheres sobre entre tarde livre conforme segundo cara caso canto sede meio medo nada passo
 casa como pena rede sorte parte janta porta volta certo junto vale base corte ante saia
 venda verão sério nossa graça pé gente jogo baixo alto fundo espera mesa conta cedo acordo
 chefe prova marco batida suma letra vindo pois morro combinado passados prezados falta
