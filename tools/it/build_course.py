@@ -1266,8 +1266,31 @@ def main() -> None:
             if lm:
                 freq[lm[0]] += 1
     given = set()
+    # Weeks 1-4: words of the week's field, chosen by hand, with examples that
+    # use only the grammar already seen (tools/it/bank/parole_settimana.py).
+    # Every example is checked with the detector of the bank weeks: what a
+    # week shows must not need a later week's grammar.
+    import rasgos_banco
+    from bank.parole_settimana import PAROLE
+
+    ex_weeks = {}
+
+    def ex_week(ex):
+        if ex not in ex_weeks:
+            ex_weeks[ex] = rasgos_banco.grammar(ex, produce=True)
+        return ex_weeks[ex]
+    late_examples = []
     for w in weeks:
+        if w["week"] in PAROLE:
+            for entry in PAROLE[w["week"]]:
+                if ex_week(entry[2]) > w["week"]:
+                    raise SystemExit("semana %d: el ejemplo de «%s» usa gramática de la semana %d: %s"
+                                     % (w["week"], entry[0], ex_week(entry[2]), entry[2]))
+            w["vocab"] = [list(e) for e in PAROLE[w["week"]]]
+            given.update(e[0] for e in PAROLE[w["week"]])
+            continue
         cand = collections.OrderedDict()
+        late_now = set()        # words whose only example is for a later week
         texts = []
         for iid in w["items"]:
             it = by_id_all[iid]
@@ -1295,6 +1318,8 @@ def main() -> None:
                     continue
                 if lm[1] > max(w["week"], 1) and lm[1] != 1:
                     continue           # not yet in play at this level
+                if w["week"] < rasgos_banco.W["numeri"] and rasgos_banco._NUM.match(lm[0]):
+                    continue           # the numbers are taught in week 7
                 cand[lm[0]] = [lm[0], lm[2].split(" / ")[0].split(";")[0].strip(), ""]
         lex = sillabo.lexicon()
         # The example: the shortest complete sentence of the week that has the
@@ -1309,6 +1334,8 @@ def main() -> None:
                 toks = lessico.words_of(ex)
                 if len(ex.split()) < 3:
                     continue
+                if ex_week(ex) > w["week"]:
+                    continue           # a tense or a construction not seen yet
                 if key in toks:
                     rank = (0, len(ex))
                 # a conjugated form of the verb, once the presente is known,
@@ -1324,15 +1351,28 @@ def main() -> None:
             # A reviewed sentence wins over one lifted from an exercise (which
             # may use the word in another sense, or be a false statement of a
             # true/false exercise).
-            entry[2] = ESEMPI.get(key) or (best_ex[1] if best_ex else (bank_example(key, w["week"]) or ""))
+            auto = best_ex[1] if best_ex else (bank_example(key, w["week"]) or "")
+            if auto and ex_week(auto) > w["week"]:
+                auto = ""
+            entry[2] = ESEMPI.get(key) or auto
+            if ESEMPI.get(key) and ex_week(ESEMPI[key]) > w["week"]:
+                if auto:
+                    entry[2] = auto
+                else:
+                    late_now.add(key)      # the word waits for its grammar
+                    late_examples.append((w["week"], key, ESEMPI[key]))
             # how the word is used: gender, preposition, irregular forms,
             # the contrast with Spanish (tools/bank/consigli.py)
             entry.append(TIPS.get(key, ""))
         n = 12 if w["week"] <= 26 else 15
-        best = sorted(cand.values(), key=lambda v: -freq[v[0]])[:0 if w["boss"] else n]
+        best = sorted([v for v in cand.values() if v[0] not in late_now],
+                      key=lambda v: -freq[v[0]])[:0 if w["boss"] else n]
         w["vocab"] = best
         given.update(v[0] for v in best)
     print("palabras de la semana: %d en total" % sum(len(w["vocab"]) for w in weeks))
+    if late_examples:
+        print("  palabras que esperan a una semana posterior (su ejemplo usa gramática que falta): %d"
+              % len({k for _, k, _ in late_examples}))
 
     # Tap a word, see what it means: every Italian word of the exercises and
     # of the lessons, with its lemma, Spanish and the week it is in play.

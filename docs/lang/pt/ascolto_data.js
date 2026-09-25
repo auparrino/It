@@ -29,7 +29,7 @@
   var LH = "lh es una sola consonante palatal, como la «ll» de «calle» pronunciada a la antigua (la lengua pegada al paladar), nunca «l» ni «li».";
   var NH = "nh es la ñ: sonho = «soño».";
   var SZ = "Entre vocales, una s sola suena z (zumbido, como una abeja); ss, ç y c suenan s. El español no tiene esa z sonora.";
-  var CHJ = "ch y x suenan «sh» (sin la t de la ch española); j y g ante e, i suenan como la «ll» rioplatense de «calle».";
+  var CHJ = "ch y x suenan «sh» (sin la t de la ch española); j y g ante e, i suenan como la «y» de «yo» en un rioplatense que la hace zumbar: sonora, no la «sh» sorda que muchos porteños hacen en «calle».";
   var TIDI = "En casi todo Brasil ti y di suenan «chi» y «yi» (con un toque de d); también la te y la de finales: leite = «leichi», tarde = «tarlle».";
   var RR = "r entre vocales es un toque suave, como en español (caro); rr y r inicial suenan como una j suave, aspirada: carro = «caju», Rio = «Jío».";
   var VB = "La v portuguesa es labiodental (los dientes de arriba tocan el labio de abajo) y la b, bilabial. El español las confunde; el portugués no.";
@@ -62,7 +62,7 @@
     P("p-020", "nasais", 1, "mão", "mau", "mano", "malo", NAS),
     P("p-021", "nasais", 1, "pão", "pau", "pan", "palo", NAS),
     P("p-022", "nasais", 1, "lã", "lá", "lana", "allá", NAS),
-    P("p-023", "nasais", 1, "sim", "si", "sí", "si (nota musical)", "sim: la i nasal, sin cerrar los labios en m."),
+    P("p-023", "nasais", 1, "sim", "sem", "sí", "sin", "sim, con i nasal; sem, con e nasal («sẽi»). En las dos la m final no cierra los labios."),
     P("p-024", "nasais", 1, "som", "sou", "sonido", "soy", NAS),
     P("p-025", "nasais", 1, "irmã", "irmão", "hermana", "hermano", "ã sola contra ão: el diptongo nasal termina cerrándose hacia la u."),
     P("p-026", "nasais", 2, "são", "sal", "son; sano", "sal", "são es nasal; sal es oral y suena «sau»."),
@@ -121,14 +121,14 @@
     P("p-077", "sibilantes", 19, "preso", "preço", "preso", "precio", SZ),
     P("p-078", "sibilantes", 19, "rasa", "raça", "rasa, poco profunda", "raza", SZ),
     // ------------------------------------------------------------ chiadas
-    P("p-079", "chiadas", 1, "chá", "já", "té", "ya", "chá con «sh» sorda; já con la «ll» rioplatense, sonora."),
+    P("p-079", "chiadas", 1, "chá", "já", "té", "ya", "chá suena como la «sh» de «show», sorda; já, como la «y» de «yo» en un rioplatense que la hace zumbar, sonora."),
     P("p-080", "chiadas", 2, "queixo", "queijo", "mentón", "queso", CHJ),
     P("p-081", "chiadas", 3, "chão", "são", "piso, suelo", "son; sano", "ch es «sh», no s: chão ≠ são."),
     P("p-082", "chiadas", 8, "chato", "jato", "aburrido, pesado", "chorro; jet", CHJ),
     P("p-083", "chiadas", 14, "acho", "ajo", "creo; encuentro", "actúo (agir)", CHJ),
     P("p-084", "chiadas", 14, "acha", "assa", "cree; encuentra", "asa (de assar)", "ch es «sh»: acha ≠ assa."),
     P("p-085", "chiadas", 14, "cheio", "seio", "lleno", "seno", "ch es «sh»: cheio ≠ seio."),
-    P("p-086", "chiadas", 17, "gelo", "zelo", "hielo", "celo, cuidado", "g ante e suena como la «ll» rioplatense; z, como un zumbido. gelo ≠ zelo."),
+    P("p-086", "chiadas", 17, "gelo", "zelo", "hielo", "celo, cuidado", "g ante e suena como la «y» zumbada de «yo», sonora; z, como un zumbido. gelo ≠ zelo."),
     // --------------------------------------------------------------- tidi
     P("p-087", "tidi", 1, "tia", "chia", "tía", "chía (semilla); chirría", "tia suena «chía», con un golpecito de t; chia, «shía», sin t."),
     P("p-088", "tidi", 1, "dia", "tia", "día", "tía", "dia suena «yía» (sonora); tia, «chía» (sorda)."),
@@ -149,13 +149,13 @@
     P("p-102", "erres", 5, "era", "erra", "era, época", "se equivoca", RR),
     P("p-103", "erres", 5, "moro", "morro", "vivo (morar)", "morro, cerro", "El morro carioca (Morro da Urca, dos Irmãos) lleva rr aspirada: «mojo»."),
     P("p-104", "erres", 9, "para", "parra", "para", "parra, vid", RR),
-    P("p-105", "erres", 9, "rato", "jato", "ratón", "chorro; jet", "r inicial (una j suave, sin voz) contra j (la «ll» rioplatense, sonora)."),
+    P("p-105", "erres", 9, "rato", "jato", "ratón", "chorro; jet", "r inicial (una j suave, sin voz) contra j (la «y» zumbada de «yo», sonora)."),
     P("p-106", "erres", 10, "carinho", "carrinho", "cariño", "carrito", RR),
     P("p-107", "erres", 12, "vara", "varra", "vara", "barra (imperativo de varrer)", RR),
     P("p-108", "erres", 14, "ramo", "amo", "ramo", "amo (amar)", "La r inicial se oye como una j suave; la h no suena: ramo ≠ amo."),
-    P("p-109", "erres", 14, "jogo", "rogo", "juego", "ruego", "j sonora («ll» rioplatense) contra r inicial aspirada."),
+    P("p-109", "erres", 14, "jogo", "rogo", "juego", "ruego", "j sonora (la «y» zumbada de «yo») contra r inicial aspirada."),
     P("p-110", "erres", 16, "rir", "ir", "reír", "ir", "rir empieza con una j suave («jir»); ir, con vocal."),
-    P("p-111", "erres", 17, "gente", "rente", "gente", "al ras", "g sonora («ll» rioplatense) contra r aspirada, sin voz."),
+    P("p-111", "erres", 17, "gente", "rente", "gente", "al ras", "g sonora (la «y» zumbada de «yo») contra r aspirada, sin voz."),
     P("p-112", "erres", 19, "careta", "carreta", "mueca", "carreta", RR),
     P("p-113", "erres", 20, "ralo", "halo", "rejilla; ralo", "halo", "La h no suena: halo = «alo». La r inicial, sí: ralo = «jalo»."),
     P("p-114", "erres", 23, "mora", "morra", "vive (morar)", "muera (morrer)", RR),

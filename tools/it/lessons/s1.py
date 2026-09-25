@@ -170,6 +170,7 @@ LESSONS = {
           "*nemico → nemici*."},
 
  {"h": "Los que no cambian",
+  "q": [{"prompt": "Plural de «la città»", "answer": "le città", "options": ["le città", "le cittàs", "le citte"]}, {"prompt": "Plural de «il film»", "answer": "i film", "options": ["i film", "i filmi", "i films"]}, {"prompt": "Plural de «la crisi»", "answer": "le crisi", "options": ["le crisi", "le crise", "le crisis"]}],
   "r": "**Invariables**: terminados en consonante, en vocal con tilde, "
        "monosílabos y en *-i*. Solo cambia el artículo.",
   "ex": [["*il* film → *i* film", "la película → las películas"],
@@ -217,6 +218,7 @@ LESSONS = {
            "problemi*, *il programma, il sistema, il tema, il poeta*."]},
 
  {"h": "Los de -ista",
+  "q": [{"prompt": "Plural de «la turista» (mujeres)", "answer": "le turiste", "options": ["le turiste", "le turisti", "le turista"]}, {"prompt": "Plural de «il giornalista»", "answer": "i giornalisti", "options": ["i giornalisti", "i giornaliste", "i giornalista"]}],
   "r": "En singular sirven para los dos géneros (*il / la giornalista*); en "
        "plural se separan: *i giornalisti* / *le giornaliste*.",
   "ex": [["*il* turista / *la* turista", "el turista / la turista"],
@@ -1009,6 +1011,7 @@ LESSONS = {
           "«las veo». Y nunca «vedo a Marco»."},
 
  {"h": "Dónde se coloca el pronombre",
+  "q": [{"prompt": "¿Cuál está bien? «Quiero llamarte.»", "answer": "Voglio chiamarti.", "options": ["Voglio chiamarti.", "Voglio ti chiamare.", "Ti voglio chiamarti."]}, {"prompt": "¿Cuál está bien? «No lo conozco.»", "answer": "Non lo conosco.", "options": ["Non lo conosco.", "Lo non conosco.", "Non conoscolo."]}],
   "r": "Delante del verbo conjugado (*ti chiamo*); **pegado** al infinitivo "
        "(*chiamarti*). Con modales, las dos: *ti voglio vedere* = *voglio "
        "vederti*.",

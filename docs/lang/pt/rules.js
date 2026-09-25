@@ -383,13 +383,11 @@
        así las frases llegan cuando la gramática que usan ya se vio (las
        opiniones con subjuntivo después de la semana 23, no el primer día).
        La semana la trae la escena misma (frasi: scene.week); si no la trae,
-       esta tabla (ids posibles de las escenas) o la 52. */
-    sceneWeek: { oi: 1, ola: 1, ciao: 1, socorro: 2, salva: 2, padaria: 3, bar: 3, boteco: 4, tavola: 4,
-                 rua: 5, giro: 5, casa: 6, trabalho: 7, lavoro: 7, feira: 8, negozi: 8, compras: 8,
-                 reacoes: 9, reazioni: 9, pontes: 10, ponti: 10, armadilhas: 12, trappole: 12,
-                 papo: 14, chiacchiere: 14, coracao: 15, cuore: 15, tempo: 19, opinioes: 23, opinioni: 27,
-                 ideias: 30, idee: 30, citacoes: 40, citazioni: 40, email: 43, debate: 44, dibattito: 44,
-                 causo: 46, aneddoto: 46, reparticao: 48, sportello: 48 },
+       esta tabla (la copia de scene.week de frasi_data.js) o la 52. */
+    sceneWeek: { oi: 1, socorro: 2, boteco: 3, padaria: 4, trabalho: 5, planos: 6, feira: 7, praia: 8,
+                 metro: 9, familia: 10, passado: 11, saude: 12, reacoes: 13, falsos: 14, sentimentos: 15,
+                 conectores: 16, papo: 17, restaurante: 18, whatsapp: 19, opinioes: 23, ideias: 30,
+                 burocracia: 35, giria: 38, citacoes: 40, email: 43, debate: 47 },
 
     traps: {
       tokenRe: /^([«"(¿¡]*)([A-Za-zÀ-ÿ]+(?:-[A-Za-zÀ-ÿ]+)*)([.,;:!?»")…]*)$/,

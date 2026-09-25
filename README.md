@@ -4,7 +4,7 @@ Una sola app para hispanohablantes rioplatenses con dos cursos completos:
 
 | | Idioma | Estética | Detalle |
 |---|---|---|---|
-| 🇮🇹 **La Via C1** | Italiano, de cero a C1 (CILS / CELI / PLIDA) | Plazas, carteles de calle, Bodoni | [README-italiano.md](README-italiano.md) |
+| 🇮🇹 **La Via C1** | Italiano, de cero a C1 (CILS / CELI / PLIDA) | La Costiera Amalfitana: mayólicas, limones, Playfair Display | [README-italiano.md](README-italiano.md) |
 | 🇧🇷 **Rumo C1** | Portugués de Brasil, de cero a C1 (Celpe-Bras) | Carioca: el calçadão, el mar de Ipanema, el Pão de Açúcar | [README-portugues.md](README-portugues.md) |
 
 Los dos comparten el mismo motor y la misma didáctica: 52 semanas en cuatro

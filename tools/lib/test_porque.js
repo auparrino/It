@@ -115,7 +115,7 @@ pack.LANGS.forEach(function (code) {
 
   /* ---- 3. el gimnasio */
   GYM[code].forEach(function (g) {
-    var it = c.Drills.conjugationTyped(g[0], g[1], [0, 1, 2, 3, 4, 5]);
+    var it = c.Drills.conjugationTyped(g[0], g[1], code === "pt" ? [0, 1, 2, 3, 5] : [0, 1, 2, 3, 4, 5]);
     var b = P.blockFor(it, { course: course, week: g[2], unlocked: g[2] });
     ok(b && b.week === g[2], code + ": gimnasio " + g[1] + " → semana " + (b && b.week) + ", quería " + g[2]);
   });

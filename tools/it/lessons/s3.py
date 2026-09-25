@@ -21,6 +21,7 @@ LESSONS = {
           "es falta segura."},
 
  {"h": "Los que no llevan -mente",
+  "q": [{"prompt": "¿Cuál está bien? «Lo hace bien.»", "answer": "Lo fa bene.", "options": ["Lo fa bene.", "Lo fa buonamente.", "Lo fa buono."]}, {"prompt": "¿Cuál está bien? «Voy con gusto.»", "answer": "Vengo volentieri.", "options": ["Vengo volentieri.", "Vengo volentieramente.", "Vengo volentiero."]}, {"prompt": "¿Cuál está bien? «Llega siempre tarde.»", "answer": "Arriva sempre tardi.", "options": ["Arriva sempre tardi.", "Arriva sempre tarde.", "Arriva sempre tardamente."]}],
   "r": "Los más usados son formas propias: *bene, male, presto, tardi, "
        "spesso, sempre, subito, insieme, volentieri*.",
   "ex": [["Arrivo *subito*.", "Llego enseguida."],
@@ -462,6 +463,7 @@ LESSONS = {
 ],
 "blocks": [
  {"h": "che: sin preposición",
+  "q": [{"prompt": "Elegí el relativo", "stem": "Il libro ___ ho letto è bellissimo.", "answer": "che", "options": ["che", "cui", "a che"]}, {"prompt": "Elegí el relativo", "stem": "La ragazza ___ parla è mia sorella.", "answer": "che", "options": ["che", "cui", "di che"]}],
   "r": "*che* es invariable: personas y cosas, sujeto u objeto directo. "
        "**Nunca** lleva preposición delante.",
   "ex": [["Il libro *che* ho letto è bellissimo.", "El libro que leí es hermoso."],
@@ -500,6 +502,7 @@ LESSONS = {
          "duda."},
 
  {"h": "chi: sin antecedente",
+  "q": [{"prompt": "Elegí el relativo", "stem": "___ cerca trova.", "answer": "Chi", "options": ["Chi", "Che", "Cui"]}, {"prompt": "Elegí el verbo", "stem": "Chi ___ finito può uscire.", "answer": "ha", "options": ["ha", "hanno", "hai"]}],
   "r": "*chi* = «quien, el que», solo para personas y **sin antecedente**. "
        "El verbo va en singular.",
   "ex": [["*Chi* cerca trova.", "El que busca encuentra."],
@@ -607,6 +610,7 @@ LESSONS = {
          ["A tutto *ci si abitua*.", "Uno se acostumbra a todo."]]},
 
  {"h": "El si toscano por noi",
+  "q": [{"prompt": "En el habla toscana, «andiamo al cinema» es…", "answer": "si va al cinema", "options": ["si va al cinema", "si andiamo al cinema", "si vanno al cinema"]}, {"prompt": "«Allora, si mangia?» quiere decir…", "answer": "Bueno, ¿comemos?", "options": ["Bueno, ¿comemos?", "Bueno, ¿comés?", "Bueno, ¿come él?"]}],
   "r": "En el habla, sobre todo en Toscana, *si* + tercera singular "
        "reemplaza a *noi*: *si va* = *andiamo*.",
   "ex": [["Stasera *si va* al cinema.", "Esta noche vamos al cine."],

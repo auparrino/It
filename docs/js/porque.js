@@ -292,8 +292,10 @@
     var homes = [], byKind = false;
     if (it.src === "coniugatore") {
       var t = String(it.id || "").split(":")[2];
-      if (I.tenseWeek[t]) homes.push(I.tenseWeek[t]);
-      if (I.firstTense[t] && homes.indexOf(I.firstTense[t]) < 0) homes.push(I.firstTense[t]);
+      // the week that practises the tense first (terei feito: the compound
+      // tenses), then the one whose title names it (futuro)
+      if (I.firstTense[t]) homes.push(I.firstTense[t]);
+      if (I.tenseWeek[t] && homes.indexOf(I.tenseWeek[t]) < 0) homes.push(I.tenseWeek[t]);
     } else if (!it.frase) {
       var W = P.weeks || {};
       var kind = String(it.id || "").split(":").slice(0, 2).join(":");      // b:art, b:pl, b:prep…
@@ -307,9 +309,9 @@
     }
     if (homes.length) {
       var inHome = I.blocks.filter(function (x) { return homes.indexOf(x.week) >= 0; });
-      // (the gym: the week that names the tense and the one that first
-      // practises it weigh the same; terei feito is in the compound tenses)
-      r = bestOf(inHome, q, meta, I, function (x) { return x.week === homes[0] && it.src !== "coniugatore" ? 1.3 : 1; });
+      // (the first home weighs more: for the gym, the week that practises
+      // the tense; terei feito is in the compound tenses)
+      r = bestOf(inHome, q, meta, I, function (x) { return x.week === homes[0] ? 1.3 : 1; });
       if (r.x && r.s >= MIN / 2) return found(r.x, r.s, r.s >= MIN);
       // a form of the bank (an article, a plural), a tense of the gym: the
       // first block of the week that teaches it says it

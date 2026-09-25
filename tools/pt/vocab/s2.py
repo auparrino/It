@@ -10,7 +10,7 @@ VOCAB = {
 
 14: [
     ["gostoso", "rico, sabroso (comida); agradable", "Esse pastel de queijo está muito gostoso!", "Para comida suele ir con *estar*: *está gostoso*. Aplicado a una persona significa «está buena/o», con tono sexual: cuidado."],
-    ["pastel", "empanada frita (no «pastel» de torta)", "Na feira de domingo a gente come pastel com caldo de cana.", "Falso amigo: empanada frita de feria. La torta es *bolo*. Combo clásico: *pastel com caldo de cana*."],
+    ["pastel", "empanada frita", "Na feira de domingo a gente come pastel com caldo de cana.", "Falso amigo: empanada frita de feria. La torta es *bolo*. Combo clásico: *pastel com caldo de cana*."],
     ["aipim", "mandioca, yuca (así se dice en Río)", "No boteco pedimos aipim frito com o chope.", "Mismo tubérculo, tres nombres: *aipim* en Río, *mandioca* en São Paulo, *macaxeira* en el Nordeste. Masculino: *o aipim*."],
     ["farofa", "harina de mandioca tostada (acompaña la feijoada)", "Feijoada sem farofa não é feijoada!", "Femenino: *a farofa*. Coloquial: *farofeiro* = el que lleva la comida de casa a la playa, algo despectivo."],
     ["petisco", "algo para picar, picada", "Os petiscos desse bar são ótimos: bolinho de bacalhau e pastel.", "Masculino; el verbo es *petiscar* = picar. Diminutivo muy usado: *um petisquinho*."],
@@ -20,7 +20,7 @@ VOCAB = {
     ["time", "equipo (de fútbol)", "Qual é o seu time do coração?", "Del inglés *team*, masculino: *o time*. *Time do coração* = el cuadro del que sos hincha. En Portugal: *equipa*."],
     ["goleiro", "arquero", "O goleiro defendeu o pênalti no último minuto.", "*Gol* + sufijo de oficio *-eiro*. Atajar se dice *defender*: *o goleiro defendeu o pênalti*."],
     ["pelada", "picado de fútbol, partido informal", "Toda quinta tem pelada na areia de Copacabana.", "Coloquial y femenino: *jogar uma pelada*. Ojo: *pelado* / *pelada* también es «desnudo»."],
-    ["academia", "gimnasio (no una academia de estudios)", "Vou à academia três vezes por semana.", "Falso amigo: gimnasio. *Ir à academia*; entrenar en el habla es *malhar*."],
+    ["academia", "gimnasio", "Vou à academia três vezes por semana.", "Falso amigo: gimnasio. *Ir à academia*; entrenar en el habla es *malhar*. La academia de estudios es *academia* solo en sentido culto (*Academia Brasileira de Letras*)."],
 ],
 
 15: [
@@ -39,13 +39,13 @@ VOCAB = {
 ],
 
 16: [
-    ["presente", "regalo (y también «presente»)", "Comprei um presente para a minha mãe e dei para ela ontem.", "Regalo: *dar um presente para alguém*; *de presente* = de regalo. También es el tiempo verbal y «presente» (que está)."],
+    ["presente", "regalo", "Comprei um presente para a minha mãe e dei para ela ontem.", "Regalo: *dar um presente para alguém*; *de presente* = de regalo. También es el tiempo verbal y «presente» (que está)."],
     ["embrulhar", "envolver (para regalo)", "Você pode embrulhar para presente, por favor?", "*Embrulhar para presente* = envolver para regalo. *Embrulhar o estômago* = revolver el estómago."],
     ["lembrancinha", "recuerdito, souvenir", "Trouxe uma lembrancinha do Rio para você.", "Diminutivo de *lembrança* (recuerdo). *Mande lembranças* = mandá saludos."],
     ["emprestar", "prestar", "Me empresta seu carregador? Te devolvo amanhã.", "Prestar: *me empresta?* Pedir prestado se dice *pegar emprestado*: *peguei o livro emprestado*."],
     ["sacola", "bolsa (de compras)", "— Quer uma sacola? — Não precisa, obrigado.", "Bolsa de compras. *Bolsa* es la cartera de mujer, y también la beca: *bolsa de estudos*."],
     ["vitrine", "vidriera", "Vi um tênis lindo na vitrine e comprei.", "Femenino: *a vitrine*, del francés. *Olhar vitrine* = mirar vidrieras sin comprar."],
-    ["fiado", "al fiado (pagar después)", "O dono da padaria vendia fiado para os vizinhos.", "Sin artículo, como adverbio: *vender fiado*, *comprar fiado*. Viene de *fiar* (confiar)."],
+    ["fiado", "a cuenta (pagar después)", "O dono da padaria vendia fiado para os vizinhos.", "Sin artículo, como adverbio: *vender fiado*, *comprar fiado*. Viene de *fiar* (confiar)."],
     ["quebrar o galho", "dar una mano, sacar de un apuro", "Obrigado pelo guarda-chuva: você quebrou o galho!", "Coloquial, literal «romper la rama». Se conjuga *quebrar*: *você quebrou o galho*. *Um quebra-galho* = solución provisoria."],
     ["camelô", "vendedor ambulante", "Comprei esses óculos de sol de um camelô no centro.", "Aguda con *ô*. *Comprar no camelô*; *camelódromo* = mercado de vendedores ambulantes."],
     ["pechinchar", "regatear", "Na feira, a Bia sempre pechincha e consegue um desconto.", "Regatear. El precio regalado es *uma pechincha*: *essa camisa foi uma pechincha*."],
@@ -72,7 +72,7 @@ VOCAB = {
     ["cardápio", "menú, carta", "Você poderia me trazer o cardápio, por favor?", "Masculino: *o cardápio*. En Portugal se dice *ementa*; *menu* también se entiende."],
     ["freguês", "cliente (habitual)", "O dono do boteco conhece cada freguês pelo nome.", "Cliente habitual; femenino *freguesa*. *A freguesia* = la clientela."],
     ["gorjeta", "propina", "No Brasil, a gorjeta de dez por cento já vem na conta.", "En restaurantes suele venir en la cuenta como *os dez por cento*, que es opcional. *Deixar gorjeta* = dejar propina."],
-    ["sobremesa", "postre (no «sobremesa»)", "De sobremesa, eu gostaria de um pudim.", "Falso amigo: postre. *De sobremesa* = de postre. La charla de después de comer no tiene nombre fijo."],
+    ["sobremesa", "postre", "De sobremesa, eu gostaria de um pudim.", "Falso amigo: postre. *De sobremesa* = de postre. La charla de después de comer no tiene nombre fijo."],
     ["guardanapo", "servilleta", "Moço, você poderia me trazer mais guardanapos?", "Masculino: *o guardanapo*. *Guardanapo de papel* = servilleta de papel."],
     ["talheres", "cubiertos", "Faltam os talheres na nossa mesa.", "Casi siempre plural; singular *o talher*. Las piezas: *garfo* (tenedor), *faca* (cuchillo), *colher* (cuchara)."],
     ["diária", "tarifa por noche (en un hotel)", "A diária do hotel inclui café da manhã.", "Precio por día; en hoteles, por noche. La *diarista* es la empleada doméstica que cobra por día."],

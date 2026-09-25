@@ -26,27 +26,44 @@
   function B(s, a, b, cue, why) { return { s: s, a: a, b: b, cue: cue, why: why, k: 1 }; }
 
   var DUELLI = [
-    { id: "serestar", week: 1, title: "ser o estar", sub: "lo que algo es o cómo está", items: [
-      A("Eu ___ argentino, mas moro no Rio.", "sou", "estou", "argentino", "Nacionalidad y origen: ser."),
-      A("A Bia ___ médica num hospital de Botafogo.", "é", "está", "médica", "Profesión: ser."),
+    // Semana 1: solo ser, estar y ter, sin contracciones ni presente regular
+    // (llegan en las semanas 3 y 5).  El contraste que de verdad hace
+    // tropezar: dónde queda algo fijo va con ser (o ficar), dónde está una
+    // persona, con estar.  Los ítems nuevos van al final: el repaso guarda
+    // las tarjetas por índice.
+    { id: "serestar", week: 1, title: "ser o estar", sub: "lo que algo es, dónde queda, o cómo y dónde está", items: [
+      A("Eu ___ argentino, de Buenos Aires.", "sou", "estou", "argentino", "Nacionalidad y origen: ser."),
+      A("A Bia ___ médica e muito simpática.", "é", "está", "médica", "Profesión: ser."),
       A("O Rio ___ uma cidade muito bonita.", "é", "está", "cidade", "Definir, clasificar: ser."),
-      A("Nós ___ irmãos e moramos juntos em Niterói.", "somos", "estamos", "irmãos", "Parentesco: ser."),
-      A("A reunião ___ às três, na sala grande.", "é", "está", "às três", "La hora de un evento: ser."),
+      A("O João e eu ___ irmãos e temos um gato.", "somos", "estamos", "irmãos", "Parentesco: ser."),
+      A("A aula de português ___ hoje ou amanhã?", "é", "está", "aula", "Cuándo es un evento: ser."),
       A("Hoje ___ sábado, dia de feira.", "é", "está", "sábado", "Días y fechas: ser (*hoje é sábado*)."),
       A("Vocês ___ de Salvador ou de Recife?", "são", "estão", "de Salvador", "Origen: ser de."),
-      A("Meu irmão ___ alto e muito simpático.", "é", "está", "simpático", "Rasgos de carácter y de aspecto: ser."),
-      A("Essa casa amarela ___ do meu avô.", "é", "está", "do meu avô", "Posesión: ser de."),
-      A("O show ___ no sábado, na Lapa.", "é", "está", "no sábado", "Cuándo y dónde es un evento: ser."),
+      A("O João ___ alto e muito simpático.", "é", "está", "simpático", "Rasgos de carácter y de aspecto: ser."),
+      A("A casa grande ___ de uma amiga carioca.", "é", "está", "de uma amiga", "Posesión: ser de."),
+      A("A festa ___ sábado, em Botafogo.", "é", "está", "festa", "Cuándo y dónde es un evento (una fiesta, un show): ser."),
       B("Eu ___ muito cansado hoje.", "estou", "sou", "hoje", "Un estado de ahora: estar."),
-      B("Onde você ___ agora? No metrô?", "está", "é", "agora", "Dónde está alguien: estar."),
-      B("A sopa ___ fria, pode esquentar?", "está", "é", "fria", "Un estado que cambió (se enfrió): estar."),
-      B("Eles ___ na praia de Ipanema agora.", "estão", "são", "na praia", "Ubicación de personas: estar."),
+      B("Onde você ___ agora? Em Copacabana?", "está", "é", "agora", "Dónde está una persona: estar."),
+      B("A sopa ___ fria, não quente.", "está", "é", "fria", "Un estado que cambió (se enfrió): estar."),
+      B("A Bia e o João ___ em Ipanema agora.", "estão", "são", "agora", "Ubicación de personas: estar."),
       B("Cuidado, o café ___ muito quente!", "está", "é", "Cuidado", "Cómo está algo en este momento: estar."),
-      B("Hoje o mar ___ calmo, dá para nadar.", "está", "é", "Hoje", "El mar de hoy, no el de siempre: estar."),
-      B("Nós ___ com fome, vamos comer?", "estamos", "somos", "com fome", "*Estar com* fome, sede, frio, sono."),
-      B("A Bia ___ doente e fica em casa hoje.", "está", "é", "doente", "Salud: estar."),
-      B("O banco ___ fechado por causa do feriado.", "está", "é", "fechado", "Resultado, estado: estar + participio."),
-      B("Hoje o céu ___ nublado sobre o Corcovado.", "está", "é", "nublado", "El tiempo de hoy: estar.")
+      B("Hoje o mar ___ calmo e azul.", "está", "é", "Hoje", "El mar de hoy, no el de siempre: estar."),
+      B("Nós ___ com fome e com sede.", "estamos", "somos", "com fome", "*Estar com* fome, sede, frio, sono."),
+      B("A Bia ___ doente e muito cansada hoje.", "está", "é", "doente", "Salud: estar."),
+      B("Hoje o banco ___ fechado, e o metrô também.", "está", "é", "fechado", "Resultado, estado: estar + participio."),
+      B("Hoje o céu ___ nublado em Copacabana.", "está", "é", "nublado", "El tiempo de hoy: estar."),
+      A("O apartamento ___ em Botafogo, um bairro tranquilo.", "é", "está", "apartamento",
+        "Dónde queda algo que no se mueve: ser (o ficar), no estar: *o apartamento é / fica em Botafogo*."),
+      A("A escola de português ___ em Copacabana.", "é", "está", "escola",
+        "Un edificio no se mueve: su lugar va con ser (o ficar): *a escola é / fica em Copacabana*."),
+      A("Onde ___ o hotel? Em Copacabana?", "é", "está", "hotel",
+        "¿Dónde queda un lugar fijo? Lo natural en Brasil es *onde é* o *onde fica o hotel?*"),
+      A("A praia de Ipanema ___ perto ou longe?", "é", "está", "praia",
+        "Un lugar fijo, cerca o lejos: *é perto*, *é longe* (o *fica perto*)."),
+      B("O Martín ___ em Copacabana agora, com a Bia.", "está", "é", "agora",
+        "Una persona se mueve: dónde está hoy va con estar. El barrio, que no se mueve, iría con ser."),
+      B("A Bia ___ em casa hoje, com o gato.", "está", "é", "em casa",
+        "Dónde está una persona: estar (*estou em casa*). La casa misma *é* en Botafogo.")
     ] },
 
     { id: "porpara", week: 9, title: "por o para", sub: "por dónde y por qué, o hacia dónde y para qué", items: [

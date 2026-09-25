@@ -304,7 +304,8 @@
   function desgloseHtml(text, open) {
     if (!window.Desglose || !glossario || !text || spanishText(text)) return "";
     var ls;
-    try { ls = Desglose.lines(text, { gloss: glossario }); } catch (e) { return ""; }
+    // the student's week: tense names only once the theory has taught them
+    try { ls = Desglose.lines(text, { gloss: glossario, week: (state && state.unlocked) || 1, max: 7 }); } catch (e) { return ""; }
     if (!ls.length) return "";
     return '<details class="desglose"' + (open ? " open" : "") + "><summary>🔎 Palabra por palabra</summary><ul>" +
       ls.slice(0, 7).map(function (l) {
@@ -721,7 +722,7 @@
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION = "c1-vN" in sw.js: test_game
      and the CI check it).  One version for the app and both languages. */
-  var APP_VERSION = "v2.2";
+  var APP_VERSION = "v2.3";
   // Settimana XVII: Roman numerals on the street signs (LANG.ui.romanWeeks).
   function romano(n) {
     var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];

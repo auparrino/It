@@ -146,12 +146,12 @@ cl(2, "Se ___ (haver) algum problema com o aluguel, me liga.", "houver",
    "haver → houveram → houver. Se houver = si hay (en el futuro).")
 
 tr(0, "Cuando tenga tiempo, voy a visitar el Cristo.", "Quando eu tiver tempo, vou visitar o Cristo",
-   "«Cuando tenga» = quando eu tiver (futuro do subjuntivo), nunca «quando eu tenha».",
+   "Después de *quando* con valor futuro va el futuro do subjuntivo: *quando eu tiver tempo* «cuando tenga tiempo». ✗*quando eu tenha* es un calco del español.",
    alt=["Quando tiver tempo, vou visitar o Cristo", "Quando eu tiver tempo, visitarei o Cristo",
         "Quando tiver tempo, visitarei o Cristo", "Quando eu tiver tempo, vou visitar o Cristo Redentor",
         "Quando tiver tempo, vou visitar o Cristo Redentor"])
 tr(0, "Si hacés la feijoada, yo llevo la caipiriña.", "Se você fizer a feijoada, eu levo a caipirinha",
-   "«Si hacés» con valor futuro = se você fizer. La otra mitad, en presente.",
+   "Un *se* con valor futuro pide futuro do subjuntivo: *se você fizer a feijoada*; la otra mitad va en presente: *eu levo*. El español usa presente en las dos.",
    alt=["Se fizer a feijoada, eu levo a caipirinha", "Se você fizer feijoada, eu levo caipirinha",
         "Se você fizer a feijoada, levo a caipirinha", "Se você fizer a feijoada, eu vou levar a caipirinha",
         "Se tu fizeres a feijoada, eu levo a caipirinha"])
@@ -168,7 +168,7 @@ tr(1, "Apenas lleguemos a Río, te llamamos.", "Assim que chegarmos ao Rio, te l
         "Assim que a gente chegar no Rio, te liga", "Assim que chegarmos ao Rio, ligamos para você",
         "Assim que chegarmos ao Rio, ligamos pra você", "Assim que chegarmos ao Rio, nós te ligamos"])
 tr(1, "Mientras estés acá, la casa es tuya.", "Enquanto você estiver aqui, a casa é sua",
-   "«Mientras estés» = enquanto você estiver. Con você, el posesivo es seu / sua.",
+   "*Enquanto* referido al futuro pide futuro do subjuntivo: *enquanto você estiver aqui*. Con *você*, el posesivo es *seu / sua*: *a casa é sua*.",
    alt=["Enquanto estiver aqui, a casa é sua", "Enquanto você estiver aqui a casa é sua",
         "Enquanto tu estiveres aqui, a casa é tua"])
 tr(2, "Si querés, vamos a la playa.", "Se você quiser, a gente vai à praia",
@@ -217,7 +217,7 @@ sc(0, ["Quando eu falar com ela, te conto.", "Quando eu fizer o bolo, te chamo."
    "¿De dónde sale la forma del verbo después de «quando» (futuro)?",
    ["De la 3.ª persona plural del perfeito sin -ram (fizeram → fizer).",
     "Del presente de subjuntivo (faça → faça).",
-    "Del infinitivo, siempre igual (fazer → fazer)."],
+    "Del infinitivo, siempre igual (fazer → fazer, ter → ter, poder → poder)."],
    "De la 3.ª persona plural del perfeito sin -ram (fizeram → fizer).",
    "Regla: tronco de eles en el perfeito: falaram → falar, fizeram → fizer, tiveram → tiver, foram → for. En los regulares coincide con el infinitivo.")
 sc(2, ["Se você quiser, a gente vai.", "Se chover, fico em casa.", "Quando ele chegar, jantamos.",
@@ -368,7 +368,7 @@ sc(1, ["Se eu tivesse tempo, viajaria.", "Se ele pudesse, ajudaria.", "Se choves
        "Se você viesse, seria ótimo.", "Se nós soubéssemos, contaríamos.", "Se fosse barato, eu compraria."],
    "¿Qué tiempo va en cada mitad de la hipótesis?",
    ["Imperfeito do subjuntivo tras «se»; futuro do pretérito en la otra mitad.",
-    "Futuro do pretérito tras «se»; imperfeito do subjuntivo en la otra.",
+    "Futuro do pretérito tras «se»; imperfeito do subjuntivo en la otra mitad.",
     "Imperfeito do subjuntivo en las dos mitades."],
    "Imperfeito do subjuntivo tras «se»; futuro do pretérito en la otra mitad.",
    "Regla: se + imperfeito do subjuntivo, y consecuencia en futuro do pretérito (en el habla, imperfeito de indicativo).")
@@ -432,7 +432,7 @@ cl(0, "O professor pediu para os alunos ___ (ler) «Vidas Secas».", "lerem",
 cl(0, "Esperei até eles ___ (vir).", "virem",
    "vir → virem (infinitivo pessoal). No lo confundas con vierem (futuro do subjuntivo de vir).")
 cl(1, "Ao ___ (chegar) à rodoviária, nós ligamos.", "chegarmos",
-   "«ao» + infinitivo = al + infinitivo. Con sujeto nós, chegarmos (también se acepta ao chegar).",
+   "*Ao* + infinitivo es «al + infinitivo», y el infinitivo puede conjugarse (infinitivo pessoal): *ao chegarmos* con sujeto *nós*. También se acepta *ao chegar*.",
    alt=["chegar"])
 cl(1, "Está na hora de ___ (ir), galera!", "irmos",
    "El que habla se incluye: de irmos. Con a gente: de a gente ir.",
@@ -452,7 +452,7 @@ cl(2, "Saímos cedo para ___ (pegar) a praia vazia.", "pegar",
    alt=["pegarmos"])
 
 trv(0, "Traje el mapa para que encuentren el Cristo.",
-    "«Para que encuentren» = para vocês acharem / encontrarem (o para que vocês achem).",
+    "«Para que + subjuntivo» se puede decir con infinitivo pessoal: *para vocês acharem*. También vale *para que vocês achem*, más formal.",
     ["Trouxe", "Eu trouxe"], " o mapa ",
     ["para vocês acharem", "para vocês encontrarem", "pra vocês acharem", "pra vocês encontrarem",
      "para que vocês achem", "para que vocês encontrem", "para eles acharem", "para eles encontrarem"],
@@ -538,7 +538,7 @@ cb(1, "Vocês vão sair. Fechem a janela antes. (antes de)", "Antes de vocês sa
    alt=["Fechem a janela antes de vocês saírem.", "Antes de saírem, fechem a janela.",
         "Fechem a janela antes de saírem.", "Antes de vocês saírem fechem a janela."])
 cb(2, "Eles saíram. Nós não sabíamos. (sem)", "Eles saíram sem nós sabermos.",
-   "sem + sujeto + infinitivo pessoal = sin que + subjuntivo.",
+   "*Sem* + sujeto + infinitivo pessoal reemplaza a «sin que + subjuntivo»: *sem nós sabermos* «sin que supiéramos».",
    alt=["Saíram sem nós sabermos.", "Eles saíram sem a gente saber.", "Eles saíram sem que nós soubéssemos.",
         "Saíram sem a gente saber.", "Eles saíram sem sabermos."])
 
@@ -955,7 +955,7 @@ sc(0, ["Vende-se casa.", "Vendem-se casas.", "Aluga-se quarto.", "Alugam-se quar
    "¿Cuándo el verbo con «se» va en plural?",
    ["Cuando la cosa es plural y el verbo no lleva preposición.",
     "Siempre que la cosa es plural.",
-    "Nunca: con «se» el verbo va siempre en singular."],
+    "Nunca: con «se» el verbo va siempre en singular, sea cual sea la cosa."],
    "Cuando la cosa es plural y el verbo no lleva preposición.",
    "Regla: sin preposición, la cosa es sujeto y concuerda (vendem-se casas); con preposición, singular (precisa-se de garçons).")
 sc(1, ["Dizem que vai chover.", "Roubaram meu celular.", "Ligaram pra você.",
@@ -963,7 +963,7 @@ sc(1, ["Dizem que vai chover.", "Roubaram meu celular.", "Ligaram pra você.",
    "¿Cómo se expresa un sujeto que no se conoce o no importa?",
    ["Con el verbo en 3.ª plural, sin pronombre sujeto.",
     "Con «eles» delante del verbo.",
-    "Con «se» delante de cualquier verbo."],
+    "Con «se» delante de cualquier verbo, en 3.ª singular."],
    "Con el verbo en 3.ª plural, sin pronombre sujeto.",
    "Regla: sujeto indeterminado = 3.ª plural sin eles (roubaram, dizem). Con «eles», hablás de personas concretas.")
 
@@ -1145,7 +1145,7 @@ wk(34, "B2", "conectores")
 
 _CC = "Elegí el conector correcto."
 ch(0, "O Rio é lindo, ___ a violência preocupa.", ["mas", "mais", "más"], "mas",
-   "«mas» (sin i) = pero. «mais» = más. «más» no existe en portugués (má = mala).", prompt=_CC)
+   "«Pero» es *mas*, sin *i*; *mais* es «más». Y *más* no existe en portugués (*má* es «mala»).", prompt=_CC)
 ch(0, "En portugués, «todavia» significa…", ["sin embargo", "todavía", "mientras tanto"], "sin embargo",
    "Falso amigo: todavia = sin embargo, como porém y contudo. «Todavía» se dice ainda.",
    prompt="Elegí el significado.")
@@ -1155,11 +1155,11 @@ ch(0, "A Constituição de 1988 garante o direito à moradia; ___, milhões aind
 ch(0, "O projeto era bom. O plano, ___, falhou.", ["porém", "mas", "nem"], "porém",
    "«porém» puede ir entre comas en medio de la oración; «mas» va siempre al principio.", prompt=_CC)
 ch(0, "«Todavía no llegó.» → ___ não chegou.", ["Ainda", "Todavia", "Entretanto"], "Ainda",
-   "«Todavía» (aún) = ainda. «Todavia» y «entretanto» significan «sin embargo».")
+   "«Todavía» (aún) se dice *ainda*. *Todavia* y *entretanto* son falsos amigos: significan «sin embargo».")
 ch(1, "Choveu muito; ___, houve enchentes na Zona Norte.", ["por isso", "porque", "embora"], "por isso",
    "Consecuencia: por isso (= por eso). «Porque» daría la causa.", prompt=_CC)
 ch(1, "Penso, ___ existo.", ["logo", "luego", "depois"], "logo",
-   "«logo» conclusivo = luego, por lo tanto. «Luego» no existe en portugués.", prompt=_CC)
+   "*Logo* conclusivo es «luego, por lo tanto»: *penso, logo existo*. En portugués no existe *luego*.", prompt=_CC)
 ch(1, "___ você está aqui, me ajuda com a mudança.", ["Já que", "Embora", "Portanto"], "Já que",
    "Causa conocida al inicio: já que (= ya que).", prompt=_CC)
 ch(1, "Leve guarda-chuva, ___ vai chover.", ["pois", "portanto", "contudo"], "pois",
@@ -1169,7 +1169,7 @@ ch(2, "Todos reciclam, ___ o prédio vizinho.", ["inclusive", "incluso", "aliás
 ch(2, "O show foi ótimo. ___, você viu o Gilberto Gil no final?", ["Aliás", "Portanto", "Contudo"], "Aliás",
    "«aliás» = por cierto, a propósito; también «es más».", prompt=_CC)
 ch(2, "___ esteja cansado, vou ao debate.", ["Embora", "Apesar de", "Mesmo"], "Embora",
-   "«embora» + subjuntivo = aunque. «Apesar de» pide sustantivo o infinitivo.", prompt=_CC)
+   "*Embora* («aunque») pide subjuntivo: *embora esteja cansado*. *Apesar de* va con sustantivo o infinitivo.", prompt=_CC)
 
 _CO34 = "Completá con el conector adecuado (en paréntesis, el sentido)."
 cl(0, "O bairro é caro; ___ (sin embargo), vale a pena.", "no entanto",
@@ -1179,9 +1179,9 @@ cl(0, "Freyre valorizou a mistura cultural; ___ (sin embargo), seus críticos di
    "Adversativo formal. «Casa-Grande & Senzala» (1933), de Gilberto Freyre, sigue siendo tan leído como discutido.",
    alt=["no entanto", "porém", "todavia", "entretanto"], prompt=_CO34)
 cl(0, "Queria ir ao show, ___ (pero) não consegui ingresso.", "mas",
-   "«mas» sin i = pero.", alt=["porém"], prompt=_CO34)
+   "«Pero» es *mas*, sin *i* (se opone a lo anterior); *mais* es «más». Ojo: en el habla suenan parecido.", alt=["porém"], prompt=_CO34)
 cl(0, "Ela ___ (todavía) mora em Niterói.", "ainda",
-   "«Todavía» = ainda. «Todavia» es «sin embargo».", prompt=_CO34)
+   "«Todavía» (aún) es *ainda*: *ainda mora*. *Todavia* es un falso amigo que significa «sin embargo».", prompt=_CO34)
 cl(1, "Desmataram a encosta; ___ (por lo tanto), houve deslizamento.", "portanto",
    "Conclusivo formal, en una sola palabra: portanto.", alt=["por isso", "logo", "então"], prompt=_CO34)
 cl(1, "Não trouxe dinheiro; ___ (por eso), não comprei nada.", "por isso",
@@ -1200,13 +1200,13 @@ cl(2, "___ (aunque) chova muito no litoral, falta água no sertão.", "Embora",
    "Concesión con subjuntivo: embora, mesmo que, ainda que.", alt=["Mesmo que", "Ainda que"], prompt=_CO34)
 
 trv(0, "Río es hermoso, pero es caro.",
-    "«pero» = mas (o porém, más formal).",
+    "«Pero» se dice *mas* (sin *i*) o *porém*, más formal. *Mais* sería «más».",
     ["O Rio é lindo", "O Rio é bonito"], ", ", ["mas", "porém"], " é caro")
 trv(0, "Todavía no llegó.",
-    "«todavía» = ainda. Nunca todavia.",
+    "«Todavía no» es *ainda não*. Nunca uses *todavia*, que en portugués significa «sin embargo».",
     ["Ainda não chegou", "Ele ainda não chegou", "Ela ainda não chegou"])
 trv(0, "La ley existe; sin embargo, nadie la cumple.",
-    "«sin embargo» = no entanto / porém / contudo / todavia / entretanto.",
+    "«Sin embargo» tiene varias formas: *no entanto*, *porém*, *contudo*, *todavia*, *entretanto*. Ojo: *todavia* no es «todavía».",
     "A lei existe; ", ["no entanto", "porém", "contudo", "todavia", "entretanto"], ", ninguém ",
     ["a cumpre", "cumpre", "cumpre ela"])
 trv(1, "Estaba lloviendo, por eso nos quedamos.",
@@ -1214,13 +1214,13 @@ trv(1, "Estaba lloviendo, por eso nos quedamos.",
     ["Estava chovendo", "Chovia"], ", ", ["por isso", "então", "portanto"], " ",
     ["ficamos", "a gente ficou", "nós ficamos"])
 trv(1, "Ya que estás acá, ayudame.",
-    "«ya que» = já que.",
+    "«Ya que» se dice *já que*, como en español: *já que você está aqui*. En el habla, el imperativo con *você* va con pronombre delante: *me ajuda*.",
     "Já que ", ["você está", "está", "você tá", "tá"], " aqui, ", ["me ajuda", "me ajude", "ajude-me"])
 trv(2, "Vinieron todos, incluso el administrador.",
-    "«incluso» = inclusive / até. Administrador del edificio = síndico.",
+    "«Incluso» es *inclusive* o *até*: *vieram todos, inclusive o síndico*. El administrador de un edificio es el *síndico*.",
     ["Vieram todos", "Todos vieram"], ", ", ["inclusive", "até", "até mesmo"], " o síndico")
 trv(2, "Es carioca, o sea, ama la playa.",
-    "«o sea» = ou seja / isto é.",
+    "«O sea» se dice *ou seja* o *isto é*, para reformular. Ojo: *amar praia* va sin artículo cuando es genérico.",
     ["Ela é carioca", "Ele é carioca", "É carioca"], ", ", ["ou seja", "isto é", "quer dizer"], ", ",
     ["ama", "adora"], " ", ["praia", "a praia"])
 trv(2, "Aunque llueve mucho, falta agua.",
@@ -1232,7 +1232,7 @@ fx(0, "O filme era longo, mais valeu a pena.", "mais", "mas",
    "«mas» (pero) sin i; «mais» es «más». Suenan casi igual en Río, por eso se confunden al escribir.")
 fx(0, "Todavia não terminei o livro de Saramago.", "Todavia", "Ainda",
    "Ainda não terminei o livro de Saramago.", "falso_amigo",
-   "«todavia» = sin embargo. «Todavía no» se dice ainda não. Saramago, Nobel de Literatura 1998.")
+   "*Todavia* significa «sin embargo»; «todavía no» se dice *ainda não*. Saramago, Nobel de Literatura 1998.")
 fx(2, "Todos vieram à reunião, incluso o prefeito.", "incluso", "inclusive",
    "Todos vieram à reunião, inclusive o prefeito.", "falso_amigo",
    "«incluso» en portugués es «incluido» (o café está incluso). Para «incluso»: inclusive o até.",
@@ -1324,9 +1324,9 @@ _CP = "Completá con la preposición (contraída con el artículo si hace falta)
 cl(0, "Assisti ___ uma palestra sobre Paulo Freire.", "a",
    "assistir a (presenciar). Ante «uma» no hay contracción obligatoria.", prompt=_CP)
 cl(0, "Assistimos ___ desfile das escolas de samba na Sapucaí.", "ao",
-   "assistir a + o desfile = ao desfile.", prompt=_CP)
+   "*Assistir* con el sentido de «ver un espectáculo» pide *a*: *assistir ao desfile*. Sin preposición (*assistir o paciente*) es «asistir, atender».", prompt=_CP)
 cl(0, "Os filhos devem obedecer ___ pais?", "aos",
-   "obedecer a + os pais = aos pais.", prompt=_CP)
+   "*Obedecer* pide *a* (objeto indirecto), que se contrae con el artículo: *obedecer aos pais*. En español también «obedecer a los padres».", prompt=_CP)
 cl(0, "Prefiro cinema ___ teatro.", "ao",
    "preferir X a Y: a + o teatro = ao teatro.", prompt=_CP)
 cl(0, "Clarice Lispector casou ___ um diplomata e morou anos fora do Brasil.", "com",
@@ -1340,7 +1340,7 @@ cl(1, "Convidei ___ Lucas para o churrasco.", "o",
 cl(1, "Os turistas chegaram ___ aeroporto do Galeão.", "ao",
    "Norma: chegar a + o = ao. En el habla, no aeroporto.", alt=["no"], prompt=_CP)
 cl(1, "Moro ___ Rua do Catete desde criança.", "na",
-   "morar em + a rua = na rua.", prompt=_CP)
+   "*Morar* lleva *em*, que se contrae con el artículo: *moro na Rua do Catete*. En el habla nunca *moro a*.", prompt=_CP)
 cl(2, "Não me lembro ___ nome dele.", "do",
    "lembrar-se de: me lembro do nome. Sin pronombre: não lembro o nome.", prompt=_CP)
 cl(2, "Esqueci-me ___ senha do banco.", "da",
@@ -1409,7 +1409,7 @@ sc(0, ["Assisti ao jogo.", "Assistimos a um show.", "O médico assiste o pacient
    "¿Cuándo «assistir» lleva «a»?",
    ["Cuando significa «ver, presenciar»; sin «a» significa «atender, ayudar».",
     "Siempre lleva «a».",
-    "Solo cuando el objeto es una persona."],
+    "Solo cuando el objeto es una persona; con cosas (o jogo, o filme), sin «a»."],
    "Cuando significa «ver, presenciar»; sin «a» significa «atender, ayudar».",
    "Regla: assistir a (espectáculo) = ver; assistir alguém = atender. En el habla se dice assistir o jogo, pero en un texto, assistir ao jogo.")
 sc(1, ["Espero o ônibus.", "Ajudei a Ana.", "Visitei meus avós.", "Convidei o Rafa.", "Conheço a Bia.", "Vi o João."],
@@ -1445,11 +1445,11 @@ wk(36, "B2", "crase")
 
 _CR = "Elegí: ¿con crase o sin crase?"
 ch(0, "Vou ___ praia de Ipanema.", ["à", "a", "á"], "à",
-   "ir a + a praia = à praia. Acento grave (à), nunca agudo.", prompt=_CR)
+   "*Ir a* + *a praia* se funde en *à*, con acento grave (*crase*); el acento agudo ✗*á* no existe sobre una *a* sola.", prompt=_CR)
 ch(0, "Entreguei o livro ___ professora.", ["à", "a", "na"], "à",
    "entregar algo a alguém + a professora = à professora (truco: ao professor).", prompt=_CR)
 ch(0, "Fomos ___ lojas do Saara.", ["às", "as", "à"], "às",
-   "a + as lojas = às lojas. El Saara es el mercado popular del centro de Río.", prompt=_CR)
+   "*A* + *as lojas* da *às lojas*, con *crase* en plural. El Saara es el mercado popular del centro de Río.", prompt=_CR)
 ch(0, "O show começa ___ nove.", ["às", "as", "à"], "às",
    "Hora determinada: siempre crase, às nove.", prompt=_CR)
 ch(0, "Estou aqui desde ___ sete.", ["as", "às", "das"], "as",
@@ -1465,19 +1465,19 @@ ch(1, "Amanhã vou ___ Lapa.", ["à", "a", "á"], "à",
 ch(1, "Em 1808, a família real chegou ___ Bahia antes de ir para o Rio.", ["à", "a", "ao"], "à",
    "A Bahia lleva artículo (volto da Bahia): chegou à Bahia. La corte desembarcó en Salvador en enero de 1808.", prompt=_CR)
 ch(2, "Refiro-me ___ reunião de ontem.", ["àquela", "a aquela", "à aquela"], "àquela",
-   "a + aquela = àquela, en una sola palabra.", prompt=_CR)
+   "La preposición *a* se funde con *aquela*: *àquela*, en una sola palabra con acento grave. Igual *àquele*, *àquilo*.", prompt=_CR)
 ch(2, "Um filé ___ parmegiana, por favor.", ["à", "a", "ao"], "à",
    "«à parmegiana» = à moda parmegiana: la crase marca «a la manera de».", prompt=_CR)
 
 _CRC = "Completá con a, à, às o ao."
 cl(0, "Obedeça ___ placas.", "às",
-   "obedecer a + as placas = às placas.", prompt=_CRC)
+   "*Obedecer* pide *a*, y con un sustantivo femenino plural hay *crase*: *obedeça às placas*.", prompt=_CRC)
 cl(0, "A padaria abre ___ seis da manhã.", "às",
    "Hora determinada: às seis.", prompt=_CRC)
 cl(0, "Chegou ___ uma da manhã.", "à",
    "Ante «uma» solo hay crase cuando es hora: à uma.", prompt=_CRC)
 cl(0, "Vamos ___ feira de São Cristóvão no sábado.", "à",
-   "ir a + a feira = à feira (ao mercado → à feira).", prompt=_CRC)
+   "La prueba de la *crase*: si con un masculino dirías *ao* (*vamos ao mercado*), con el femenino va *à*: *vamos à feira*.", prompt=_CRC)
 cl(0, "Voltamos ___ meio-dia.", "ao",
    "meio-dia es masculino: ao meio-dia (pero à meia-noite).", prompt=_CRC)
 cl(1, "Disse isso ___ ela.", "a",
@@ -1487,7 +1487,7 @@ cl(1, "Falou ___ pessoas importantes.", "a",
 cl(1, "Nunca fui ___ Salvador.", "a",
    "Salvador va sin artículo (volto de Salvador): a Salvador.", prompt=_CRC)
 cl(1, "Em abril de 1974, os capitães levaram a revolução ___ ruas de Lisboa.", "às",
-   "levar algo a + as ruas = às ruas. Los capitanes del MFA derribaron el Estado Novo el 25 de Abril.", prompt=_CRC)
+   "*Levar algo a* + *as ruas* da *às ruas* (*crase* en plural). Los capitanes del MFA derribaron el Estado Novo el 25 de Abril.", prompt=_CRC)
 cl(2, "Fique ___ vontade!", "à",
    "Locución femenina: à vontade (ponete cómodo).", prompt=_CRC)
 cl(2, "Saímos ___ pressas.", "às",
@@ -1496,7 +1496,7 @@ cl(2, "Moramos ___ beira-mar.", "à",
    "Locución: à beira-mar (frente al mar).", prompt=_CRC)
 
 trv(0, "Voy a la playa.",
-    "ir a + a praia = à praia.",
+    "*Ir a* + *a praia* se contrae en *à praia*: la *crase* une preposición y artículo. En el habla, *vou pra praia*.",
     ["Vou à praia", "Eu vou à praia"])
 trv(0, "El museo abre de diez a cinco.",
     "de ... a con horas: das dez às cinco.",
@@ -1515,7 +1515,7 @@ trv(2, "Pagué al contado.",
     "Locución: à vista.",
     ["Paguei", "Eu paguei"], " à vista")
 trv(2, "Me refiero a aquella ley.",
-    "a + aquela = àquela.",
+    "*Referir-se a* + *aquela* se funde en *àquela*, con acento grave. En español «a aquella» queda separado.",
     ["Refiro-me", "Me refiro", "Eu me refiro"], " àquela lei")
 trv(0, "Llegamos a las tres.",
     "Hora determinada: às três.",
@@ -1558,7 +1558,7 @@ sc(1, ["Vou à Lapa. / Volto da Lapa.", "Vou à Bahia. / Volto da Bahia.", "Vou 
        "Vou a Ipanema. / Volto de Ipanema.", "Vou à Tijuca. / Volto da Tijuca.", "Vou a Salvador. / Volto de Salvador."],
    "¿Cómo sabés si un lugar lleva crase?",
    ["Si al volver decís «da», va crase; si decís «de», no.",
-    "Todos los barrios de Río llevan crase.",
+    "Todos los barrios de Río llevan crase; las ciudades, nunca.",
     "Solo las ciudades llevan crase."],
    "Si al volver decís «da», va crase; si decís «de», no.",
    "Regla: vou a, volto da, crase há; vou a, volto de, crase pra quê?")
@@ -1566,7 +1566,7 @@ sc(1, ["Vou à Lapa. / Volto da Lapa.", "Vou à Bahia. / Volto da Bahia.", "Vou 
 ty(0, "Escribí la forma correcta: a, à, as o às.", "O ônibus para Petrópolis sai ___ quatro.", "às",
    "Hora determinada: às quatro.")
 ty(2, "Uní: a + aquilo.", "a + aquilo → ___", "àquilo",
-   "a + aquilo = àquilo, con acento grave.")
+   "La preposición *a* también se funde con el neutro *aquilo*: *àquilo*, con acento grave. Igual con *aquele* y *aquela*.")
 
 cb(0, "Fui à praia. Depois fui à feira. (e)", "Fui à praia e à feira.",
    "Coordinadas con el mismo verbo: se repite la crase ante cada femenino.",
@@ -1690,7 +1690,7 @@ sc(0, ["ter → tenho / manter → mantenho", "ter → teve / obter → obteve",
    "¿Cómo se conjugan los derivados de ter, vir, pôr y ver?",
    ["Exactamente como el verbo base, con el prefijo delante.",
     "Como verbos regulares en -er / -ir.",
-    "Como el verbo base solo en presente."],
+    "Como el verbo base solo en presente; en el pasado, regulares."],
    "Exactamente como el verbo base, con el prefijo delante.",
    "Regla: manter, obter, conter (ter); intervir, convir (vir); propor, compor, supor (pôr); prever, rever (ver).")
 sc(2, ["passear → passeio", "frear → freio", "odiar → odeio", "mediar → medeio", "copiar → copio", "anunciar → anuncio"],
@@ -1740,7 +1740,7 @@ ch(0, "Tá quente hoje, ___?", ["né", "no", "não é que"], "né",
 ch(0, "— O aluguel tá caro, né? — ___. Tá tudo caro.", ["Pois é", "Pois não", "Então é"], "Pois é",
    "«pois é» = y sí, así es. Ojo: «pois não» significa «¿en qué lo ayudo?» o «¡cómo no!».", prompt=_HB)
 ch(0, "«Qué sé yo.»", ["Sei lá.", "Que sei eu.", "O que sei."], "Sei lá.",
-   "«sei lá» = qué sé yo, ni idea.", prompt=_HB)
+   "*Sei lá* es «qué sé yo, ni idea»: *lá* («allá») refuerza sin sentido de lugar. ✗*Que sei eu* es calco.", prompt=_HB)
 ch(1, "«¿Dónde está mi celular?»", ["Cadê meu celular?", "Cadê está meu celular?", "Onde cadê meu celular?"], "Cadê meu celular?",
    "«cadê» ya incluye el verbo: cadê meu celular?", prompt=_HB)
 ch(1, "«Había mucha gente en el bloco.»", ["Tinha muita gente no bloco.", "Tinham muita gente no bloco.", "Estava muita gente no bloco."],
@@ -1755,7 +1755,7 @@ ch(2, "¿Cuál va en un mail formal?", ["Estou a caminho.", "Tô chegando, pera 
    "Las reducciones (tô, pera aí) y los marcadores (beleza) son del habla y los chats; en un mail formal, forma plena.",
    prompt="Elegí la opción adecuada para el registro formal.")
 ch(2, "«¡Qué show copado!» (carioca)", ["Que show maneiro!", "Que show copado!", "Que show manero!"], "Que show maneiro!",
-   "«maneiro» = copado, en el habla carioca. «Copado» no existe en portugués.", prompt=_HB)
+   "En el habla carioca, «copado» se dice *maneiro* (*que show maneiro!*). *Copado* no existe en portugués.", prompt=_HB)
 
 _RD = "Escribí la forma reducida del habla."
 cl(0, "Eu ___ (estou) cansado.", "tô", "estou → tô.", prompt=_RD)
@@ -1781,13 +1781,13 @@ trv(0, "(Habla) Voy a la playa, ¿venís?",
     "para a → pra; você → cê delante del verbo.",
     ["Vou pra praia", "Tô indo pra praia", "Vou à praia", "Vou para a praia"], ", ", ["cê vem", "você vem", "vem"])
 trv(0, "(Habla) Qué sé yo, creo que viene.",
-    "«qué sé yo» = sei lá; «creo que» = acho que.",
+    "«Qué sé yo» es *sei lá*, y «creo que» se dice *acho que* (*achar* «opinar»), no *creio que*, que es formal.",
     "Sei lá, ", ["acho que ele vem", "acho que ela vem", "acho que vem"])
 trv(1, "(Habla) ¿Dónde están las llaves?",
-    "cadê = ¿dónde está / están?",
+    "*Cadê?* es «¿dónde está / están?» en el habla brasileña: invariable, sin verbo: *cadê as chaves?* En la escritura: *onde estão*.",
     ["Cadê as chaves", "Onde estão as chaves", "Onde tão as chaves"])
 trv(1, "(Habla) Hay un bar buenísimo en la esquina.",
-    "«hay» = tem en el habla.",
+    "En el habla, «hay» se dice *tem*: *tem um boteco ótimo*. *Há* queda para la escritura, y *boteco* es el bar de barrio.",
     "Tem um ", ["boteco", "bar"], " ", ["ótimo", "muito bom", "maneiro", "excelente", "incrível"], " na esquina")
 trv(1, "(Habla) No hay problema.",
     "não tem problema (habla) / não há problema (escrito).",
@@ -1828,7 +1828,7 @@ sc(0, ["Tá quente hoje, né?", "Você vem, né?", "Ele é carioca, né?", "Tá 
    "¿Para qué sirve «né» al final de la frase?",
    ["Para pedir acuerdo al que escucha, como «¿no?» o «¿viste?».",
     "Para negar lo que se acaba de decir.",
-    "Para hacer una pregunta formal de sí o no."],
+    "Para hacer una pregunta formal de sí o no, como «¿es cierto que…?»."],
    "Para pedir acuerdo al que escucha, como «¿no?» o «¿viste?».",
    "Regla: né (de não é) es una muletilla de acuerdo. No niega nada.")
 sc(1, ["Cadê o Rafa?", "Cadê meu celular?", "Cadê vocês?", "Cadê as chaves?", "Cadê a Bia?", "Cadê o biscoito?"],
@@ -1842,7 +1842,7 @@ sc(1, ["Cadê o Rafa?", "Cadê meu celular?", "Cadê vocês?", "Cadê as chaves?
 ty(0, "Escribí la reducción de «para o».", "para o → ___", "pro",
    "para o → pro.")
 ty(1, "Escribí en una palabra «¿dónde está?» (habla).", "___ o Rafa?", "Cadê",
-   "cadê = ¿dónde está?")
+   "*Cadê* es «¿dónde está?», propio del habla brasileña; no lleva verbo: *cadê o Rafa?*")
 
 cb(0, "Fui no bar. Encontrei o Rafa. (aí)", "Fui no bar, aí encontrei o Rafa.",
    "«aí» hace avanzar el relato en el habla: y entonces.",
@@ -1880,7 +1880,7 @@ trv(0, "Si hubiera sabido, habría ido.",
     "se + tivesse sabido; consecuencia teria ido (habla: tinha ido).",
     ["Se eu tivesse sabido", "Se tivesse sabido"], ", ", ["teria ido", "eu teria ido", "tinha ido", "eu tinha ido"])
 trv(0, "Cuando llegue a Lisboa, te llamo.",
-    "«Cuando llegue» = quando eu chegar (futuro do subjuntivo).",
+    "*Quando* con valor futuro pide futuro do subjuntivo: *quando eu chegar*. El español usa presente de subjuntivo («cuando llegue»).",
     ["Quando eu chegar", "Quando chegar"], " ", ["a Lisboa", "em Lisboa"], ", ",
     ["te ligo", "eu te ligo", "ligo pra você", "ligo para você", "vou te ligar"])
 fx(0, "Se eu poderia, viajaria para Angola e Moçambique.", "poderia", "pudesse",
@@ -1903,7 +1903,7 @@ trv(1, "Prefiero el samba al funk.",
     "preferir X a Y.",
     "Prefiro ", ["samba a funk", "o samba ao funk"])
 trv(1, "Todavía no leí Os Lusíadas.",
-    "«todavía» = ainda. «Os Lusíadas» (1572) es la epopeya de Camões.",
+    "«Todavía» es *ainda*: *ainda não li*. *Os Lusíadas* (1572) es la epopeya de Camões.",
     ["Ainda não li", "Eu ainda não li"], " Os Lusíadas")
 fx(1, "A Bia namora com um português de Coimbra.", "namora com", "namora",
    "A Bia namora um português de Coimbra.", "regencia",
@@ -1912,4 +1912,4 @@ fx(1, "Vou à Ipanema depois do trabalho.", "à Ipanema", "a Ipanema",
    "Vou a Ipanema depois do trabalho.", "crase",
    "Volto de Ipanema (sin artículo) → vou a Ipanema, sin crase.")
 ty(1, "Escribí el conector formal de una palabra que empieza con «c» y significa «sin embargo».", "sin embargo → ___", "contudo",
-   "contudo = sin embargo, como porém, todavia y no entanto.")
+   "«Sin embargo» tiene varias formas: *contudo*, *porém*, *todavia*, *no entanto*. *Contudo* es de registro escrito.")
