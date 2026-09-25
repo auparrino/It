@@ -419,3 +419,34 @@ details.ref-item summary::-webkit-details-marker { display: none; }
 .formule-list li { display: grid; gap: 2px; }
 .formule-list .it b { background: color-mix(in srgb, var(--oro, var(--sol, #e0b020)) 35%, transparent); border-radius: 3px; padding: 0 2px; }
 .blk.formule { border-left: 3px solid var(--oro, var(--sol, #e0b020)); padding-left: 10px; margin-bottom: 14px; }
+
+/* ---- mapas de preposiciones y test de ubicación (mapas.js, ubicacion.js) ----
+   Los colores del dibujo son tokens del tema (--mapa-*, en theme.css). */
+.mapas { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; margin: 12px 0; }
+.mapas.one, .mapas.bare { grid-template-columns: minmax(0, 280px); justify-content: center; }
+.mapa { margin: 0; padding: 8px 8px 10px; border-radius: 12px; background: var(--mapa-bg, #fff);
+        border: 1px solid var(--mapa-line, rgba(0,0,0,.12)); text-align: center; }
+.mapa-svg { display: block; width: 100%; height: auto; }
+.mapa-svg .lm { fill: var(--mapa-soft, #e8f1fb); stroke: var(--mapa-lm, #1a6fd8); stroke-width: 2.5; }
+.mapa-svg .lm.zona { stroke-dasharray: 6 4; }
+.mapa-svg .leg { stroke: var(--mapa-lm, #1a6fd8); stroke-width: 2.5; stroke-linecap: round; fill: none; }
+.mapa-svg .pin { fill: var(--mapa-lm, #1a6fd8); stroke: none; }
+.mapa-svg .tr { fill: var(--mapa-tr, #e0522b); stroke: var(--mapa-bg, #fff); stroke-width: 2; }
+.mapa-svg .ghost { fill: none; stroke: var(--mapa-tr, #e0522b); stroke-width: 2; stroke-dasharray: 3 3; opacity: .75; }
+.mapa-svg .mv { fill: none; stroke: var(--mapa-tr, #e0522b); stroke-width: 2.5; stroke-linecap: round; }
+.mapa-svg .mv.back { stroke-dasharray: 5 4; opacity: .8; }
+.mapa-svg .mv.ahead { stroke-dasharray: 2 5; }
+.mapa-svg .head { fill: var(--mapa-tr, #e0522b); }
+.mapa-svg .tie { fill: none; stroke: var(--mapa-lm, #1a6fd8); stroke-width: 2; stroke-dasharray: 2 4; stroke-linecap: round; }
+.mapa-svg .heart { fill: var(--mapa-tr, #e0522b); }
+.mapa-svg .lbl { fill: var(--mapa-ink, #1f2630); font: 700 13px var(--sans, system-ui); text-anchor: middle; }
+.mapa figcaption { display: flex; flex-direction: column; gap: 2px; margin-top: 4px; line-height: 1.3; }
+.mapa .mp-prep { font-size: 1.15rem; color: var(--mapa-tr, #e0522b); }
+.mapa .mp-ex { font-size: .92rem; }
+.mapa .mp-es { font-size: .78rem; opacity: .75; }
+.ubic-list { margin: 8px 0 14px; padding-left: 20px; }
+.ubic-list li { margin: 4px 0; line-height: 1.4; }
+.ubic-foot { margin-top: 12px; gap: 8px; }
+.ubic-q .typed { display: flex; gap: 8px; margin-top: 8px; }
+.ubic-q .typed input { flex: 1; min-width: 0; }
+.ubic-banner .row { margin-top: 8px; gap: 8px; }
