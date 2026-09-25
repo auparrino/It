@@ -1290,6 +1290,7 @@ def main() -> None:
             given.update(e[0] for e in PAROLE[w["week"]])
             continue
         cand = collections.OrderedDict()
+        late_now = set()        # words whose only example is for a later week
         texts = []
         for iid in w["items"]:
             it = by_id_all[iid]
@@ -1317,6 +1318,8 @@ def main() -> None:
                     continue
                 if lm[1] > max(w["week"], 1) and lm[1] != 1:
                     continue           # not yet in play at this level
+                if w["week"] < rasgos_banco.W["numeri"] and rasgos_banco._NUM.match(lm[0]):
+                    continue           # the numbers are taught in week 7
                 cand[lm[0]] = [lm[0], lm[2].split(" / ")[0].split(";")[0].strip(), ""]
         lex = sillabo.lexicon()
         # The example: the shortest complete sentence of the week that has the
@@ -1356,17 +1359,20 @@ def main() -> None:
                 if auto:
                     entry[2] = auto
                 else:
+                    late_now.add(key)      # the word waits for its grammar
                     late_examples.append((w["week"], key, ESEMPI[key]))
             # how the word is used: gender, preposition, irregular forms,
             # the contrast with Spanish (tools/bank/consigli.py)
             entry.append(TIPS.get(key, ""))
         n = 12 if w["week"] <= 26 else 15
-        best = sorted(cand.values(), key=lambda v: -freq[v[0]])[:0 if w["boss"] else n]
+        best = sorted([v for v in cand.values() if v[0] not in late_now],
+                      key=lambda v: -freq[v[0]])[:0 if w["boss"] else n]
         w["vocab"] = best
         given.update(v[0] for v in best)
     print("palabras de la semana: %d en total" % sum(len(w["vocab"]) for w in weeks))
     if late_examples:
-        print("  ejemplos con gramática de una semana posterior (sin otro ejemplo a mano): %d" % len(late_examples))
+        print("  palabras que esperan a una semana posterior (su ejemplo usa gramática que falta): %d"
+              % len({k for _, k, _ in late_examples}))
 
     # Tap a word, see what it means: every Italian word of the exercises and
     # of the lessons, with its lemma, Spanish and the week it is in play.

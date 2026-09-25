@@ -31,6 +31,8 @@ function anyVariant(s, re) { return s.it.every(function (v) { return re.test(v);
   ok(wOf(bank, /è cresciuto/) >= 11, "it: è cresciuto → passato prossimo (11)");
   ok(wOf(bank, /paese è cambiato/) >= 11, "it: è cambiato → passato prossimo (11)");
   // gramática no verbal y etiquetas
+  // «ci vediamo» es recíproco (12), no el «ci» de lugar (21)
+  ok(wOf(bank, /^Ci vediamo domani/) === 12, "it: Ci vediamo domani → recíproco (12): " + wOf(bank, /^Ci vediamo domani/));
   ok(wOf(bank, /^Mi manchi/) >= 14, "it: Mi manchi → piacere y familia (14)");
   ok(wOf(bank, /^In Svizzera si parla/) >= 36, "it: si impersonale (36)");
   ok(wOf(bank, /^Chiudi la porta/) >= 12, "it: imperativo (12)");
@@ -51,7 +53,7 @@ function anyVariant(s, re) { return s.it.every(function (v) { return re.test(v);
   // el conjugador de la app no cambió: el gimnasio sigue con sus verbos
   ok(!c.Conj.VERBS.piovere && !c.Conj.VERBS.succedere, "it: los irregulares del banco no entran al conjugador de la app");
   // la lexicón de formas sí los conoce
-  var lex = JSON.parse(require("child_process").execFileSync("node", [require("path").join(pack.ROOT, "tools", "it", "forms_lexicon.js")]).toString());
+  var lex = JSON.parse(require("child_process").execFileSync("node", [require("path").join(pack.ROOT, "tools", "it", "forms_lexicon.js")], { maxBuffer: 64 * 1024 * 1024 }).toString());
   ["pioverà", "crebbe", "sorprese", "produrrà", "appaio"].forEach(function (f) {
     ok(lex.simple[f], "it: el léxico de formas no conoce «" + f + "»");
   });
@@ -121,11 +123,24 @@ function anyVariant(s, re) { return s.it.every(function (v) { return re.test(v);
       ok(s.w >= 5, "pt: «" + p[0] + "» todavía en la semana " + s.w + ": " + s.it[0]);
     });
   });
-  ["cachorro", "vizinhos"].forEach(function (w) {
-    var fs = firstSeen(w);
+  // o su semana en «Palabras» del banco: las de A1 (semanas 1-8), de la
+  // más frecuente a la menos, repartidas entre las semanas del nivel
+  var lemmi = (pack.data("pt", "frequenza.json") || {}).lemmi || {};
+  var A1 = [];
+  bank.nouns.concat(bank.verbs, bank.adjectives).forEach(function (x) { if (x[5] === "A1" && A1.indexOf(x[0]) < 0) A1.push(x[0]); });
+  bank.words.forEach(function (x) { if (x[3] === "A1" && A1.indexOf(x[0]) < 0) A1.push(x[0]); });
+  var order = A1.map(function (wd, k) { return [wd, k]; }).sort(function (a, b) {
+    return (((lemmi[b[0]] || [0])[0] || 0) - ((lemmi[a[0]] || [0])[0] || 0)) || a[1] - b[1];
+  }).map(function (x) { return x[0]; });
+  function bankWeek(lemma) {
+    var r = order.indexOf(lemma);
+    return r < 0 ? 99 : 1 + Math.floor(r * 8 / order.length);
+  }
+  [["cachorro", "cachorro"], ["vizinhos", "vizinho"]].forEach(function (p) {
+    var w = p[0], fs = Math.min(firstSeen(w), firstSeen(p[1]), bankWeek(p[1]));
     find(bank, new RegExp("\\b" + w + "\\b")).forEach(function (s) {
       if (s.it.every(function (v) { return v.indexOf(w) >= 0; }) && fs < 99)
-        ok(s.w >= Math.min(fs, 8), "pt: «" + w + "» (vista en la semana " + fs + ") pedida en la " + s.w + ": " + s.it[0]);
+        ok(s.w >= fs, "pt: «" + w + "» (vista en la semana " + fs + ") pedida en la " + s.w + ": " + s.it[0]);
     });
   });
   // gramática no verbal

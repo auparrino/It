@@ -143,7 +143,12 @@ def rasgos(text, produce):
             need("piacere")
         # ci + verbo que no es essere: ci vado, ci vuole, ci penso
         if t == "ci" and nxt and _is_verb(nxt) and not _is_essere(nxt):
-            if not any(l.endswith("rsi") for l in _lemmas(nxt)):     # ci alziamo
+            if any(l.endswith("rsi") for l in _lemmas(nxt)):          # ci alziamo
+                pass
+            elif nxt.endswith("iamo") and (not prev or prev in ("non", "e", "ma", "allora")) \
+                    and not re.search(r"\b(noi )?ci (andiamo|pensiamo|restiamo|torniamo)\b", low_f):
+                need("riflessivo")                  # ci vediamo, ci sentiamo: recíproco
+            else:
                 need("ci")
         if not produce:
             continue
