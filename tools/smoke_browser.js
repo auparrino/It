@@ -13,7 +13,9 @@ const { spawn } = require("child_process");
   const page = await ctx.newPage();
   const errors = global.errors = [];
   page.on("pageerror", e => errors.push("pageerror: " + e.message));
-  page.on("console", m => { if (m.type() === "error") errors.push("console: " + m.text()); });
+  // a network failure towards an outside host (Commons, without internet) is
+  // not a bug: the app falls back to the phone's voice
+  page.on("console", m => { if (m.type() === "error" && !/Failed to load resource: net::ERR_/.test(m.text())) errors.push("console: " + m.text()); });
   await page.goto("http://localhost:8765/?test", { waitUntil: "networkidle" });
   await page.waitForSelector("#pausa", { timeout: 15000 });
   const seen = global.seen = [];

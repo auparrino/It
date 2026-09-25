@@ -4,7 +4,7 @@
  * Cambiare VERSION a ogni rilascio per buttare la cache vecchia (e APP_VERSION
  * in js/app.js, che si vede in Oggi e Io: test_game.js controlla che coincidano).
  */
-var VERSION = "laviac1-v47";
+var VERSION = "laviac1-v1.48";
 var FILES = [
   "./",
   "index.html",
@@ -33,6 +33,7 @@ var FILES = [
   "js/esame_data.js",
   "js/suoni.js",
   "js/duelli.js",
+  "js/voci.js",
   "js/drills.js",
   "js/app.js",
   "data/course.json",
@@ -56,14 +57,28 @@ self.addEventListener("install", function (e) {
 
 self.addEventListener("activate", function (e) {
   e.waitUntil(caches.keys().then(function (keys) {
-    return Promise.all(keys.filter(function (k) { return k !== VERSION; })
+    return Promise.all(keys.filter(function (k) { return k !== VERSION && k !== VOCI; })
       .map(function (k) { return caches.delete(k); }));
   }).then(function () { return self.clients.claim(); }));
 });
 
+// Real voices (Lingua Libre, on upload.wikimedia.org): kept in a cache of
+// their own that survives new versions, so a word heard once plays offline.
+var VOCI = "laviac1-voci";
 self.addEventListener("fetch", function (e) {
   if (e.request.method !== "GET") return;
   var url = new URL(e.request.url);
+  if (url.hostname === "upload.wikimedia.org") {
+    e.respondWith(caches.open(VOCI).then(function (cache) {
+      return cache.match(e.request).then(function (hit) {
+        return hit || fetch(e.request).then(function (res) {
+          if (res && (res.ok || res.type === "opaque")) cache.put(e.request, res.clone());
+          return res;
+        });
+      });
+    }));
+    return;
+  }
   if (url.origin !== location.origin) return;
   e.respondWith(caches.open(VERSION).then(function (cache) {
     return cache.match(e.request, { ignoreSearch: true }).then(function (hit) {

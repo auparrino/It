@@ -332,10 +332,24 @@ ok(Drills.dueCount(course, state) >= 30, "le schede scadute rientrano in coda");
   ok(n >= 100, "glosas de opción múltiple: " + n);
 })();
 
+// Voces reales (Lingua Libre): solo la palabra exacta, un archivo por hablante.
+(function () {
+  var Voci = require(path.join(ROOT, "docs/js/voci.js"));
+  ok(JSON.stringify(Voci.parseTitle("File:LL-Q652 (ita)-Anna Rossi-nonno.wav")) === JSON.stringify({ user: "Anna Rossi", word: "nonno" }), "voci: título");
+  ok(Voci.parseTitle("File:LL-Q150 (fra)-X-nonno.wav") === null, "voci: otro idioma");
+  var list = Voci.fromApi("nonno", { query: { pages: {
+    1: { title: "File:LL-Q652 (ita)-Anna-nonno.wav", imageinfo: [{ url: "u1" }] },
+    2: { title: "File:LL-Q652 (ita)-Anna-nonno.wav", imageinfo: [{ url: "u2" }] },
+    3: { title: "File:LL-Q652 (ita)-Beppe-nonna.wav", imageinfo: [{ url: "u3" }] },
+    4: { title: "File:LL-Q652 (ita)-Carla-nonno.wav", imageinfo: [{ url: "u4" }] } } } });
+  ok(list.length === 2 && list[0].url === "u1" && list[1].user === "Carla", "voci: palabra exacta, un archivo por hablante");
+  ok(!Voci.usable("pèsca") && Voci.usable("pesca"), "voci: sin tildes (pèsca / pésca no se distinguen por el nombre)");
+})();
+
 // La versión que muestra la app (Oggi, Io) es la del service worker.
 (function () {
-  var sw = fs.readFileSync(path.join(ROOT, "docs/sw.js"), "utf8").match(/VERSION = "laviac1-(v\d+)"/);
-  var app = fs.readFileSync(path.join(ROOT, "docs/js/app.js"), "utf8").match(/APP_VERSION = "(v\d+)"/);
+  var sw = fs.readFileSync(path.join(ROOT, "docs/sw.js"), "utf8").match(/VERSION = "laviac1-(v[\d.]+)"/);
+  var app = fs.readFileSync(path.join(ROOT, "docs/js/app.js"), "utf8").match(/APP_VERSION = "(v[\d.]+)"/);
   ok(sw && app && sw[1] === app[1], "versión de la app (" + (app && app[1]) + ") = versión del service worker (" + (sw && sw[1]) + ")");
 })();
 

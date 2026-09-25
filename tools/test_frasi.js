@@ -217,7 +217,11 @@ Letture.EPISODI.forEach(function (ep) {
   var all = toks.map(function (_, i) { return i; });
   ok(Letture.gradeHunt(ep, all).verdict === "sbagliato", "toccare tutto non paga: " + ep.id);
   var sess = Letture.session(ep);
-  ok(sess.length === ep.questions.length + 1 && sess[sess.length - 1].type === "hunt",
+  (ep.vf || []).forEach(function (x) {
+    ok(["vero", "falso", "non si dice"].indexOf(x[1]) >= 0 && x[0].length > 8, "vero/falso malformato: " + ep.id + " " + x[0]);
+  });
+  if (ep.series === "settimana") ok((ep.vf || []).length === 3, "la settimana: tres afirmaciones vero/falso: " + ep.id);
+  ok(sess.length === ep.questions.length + (ep.vf || []).length + 1 && sess[sess.length - 1].type === "hunt",
      "sessione di lettura: domande e poi caccia: " + ep.id);
 });
 ok(Letture.isOpen(Letture.byId("ep1"), {}) && !Letture.isOpen(Letture.byId("ep2"), {}),

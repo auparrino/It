@@ -1,10 +1,39 @@
-# Voces reales: paso a paso para más adelante
+# Voces reales: paso a paso
 
-Hoy la app usa la voz sintética del teléfono (TTS). La idea es reemplazarla,
-donde se pueda, por grabaciones de personas reales y libres de uso. Hay tres
-fuentes y cada una sirve para algo distinto. Con cualquiera, el trabajo se
-divide en dos: lo que tenés que hacer vos (dar acceso) y lo que hago yo
-(bajar, elegir, recortar, integrar y probar).
+## Lo que ya está hecho (v1.48)
+
+**Lingua Libre en Suoni, desde el teléfono.** La app busca en Wikimedia
+Commons la grabación real de cada palabra de los pares mínimos la primera
+vez que aparece (`docs/js/voci.js`). Cada toque del 🔊 usa un hablante
+distinto y muestra su nombre y la licencia (CC BY-SA 4.0), y el service
+worker guarda el audio para usarlo sin conexión. En *Io* aparecen los
+créditos de todas las voces usadas. Si una palabra no tiene grabación, no
+hay internet la primera vez o es un par de vocal abierta/cerrada
+(*pèsca/pésca*, que el nombre del archivo no distingue), suena la voz del
+teléfono como antes. No hizo falta bajar nada al repositorio.
+
+Lo que falta: **Common Voice** (oraciones para escuchar gramática) y,
+opcionalmente, **Tatoeba**. Esas dos sí necesitan bajar archivos, y la
+máquina en la nube donde trabajo no tiene acceso a esos sitios.
+
+## Cómo seguir en otra sesión (elegí un camino)
+
+**Camino A: dar acceso a la red a la sesión en la nube.** Seguí «Antes que
+nada», acá abajo, y en una sesión nueva decime «voces: caso 2».
+
+**Camino B: una sesión que corra en tu PC.** Tu PC sí tiene internet sin
+restricciones. Yo no puedo entrar a tu navegador desde la nube, pero una
+sesión que corre en tu PC sí descarga con tu conexión:
+1. Instalá la app **Claude** de escritorio (o Claude Code en la terminal) y
+   abrí la carpeta del repositorio clonado en tu PC
+   (`git clone https://github.com/auparrino/It`).
+2. En la app de escritorio, abrí una sesión de Claude Code en esa carpeta.
+   Desde la terminal también sirve: `claude remote-control` dentro de la
+   carpeta, y la sesión aparece en la app de Claude Code, así la seguís
+   desde el celular.
+3. Pedile: «seguí VOCES.md, caso 2 (Common Voice)». Para Common Voice
+   igual vas a necesitar la cuenta de Mozilla Data Collective (paso 1 del
+   caso 2), porque Mozilla exige aceptar sus términos para descargarlo.
 
 ---
 
@@ -27,7 +56,7 @@ Documentación: <https://code.claude.com/docs/en/claude-code-on-the-web>
 
 ---
 
-## Caso 1 · Lingua Libre: los pares mínimos de Suoni (recomendado primero)
+## Caso 1 · Lingua Libre: los pares mínimos de Suoni (✓ hecho, desde el teléfono)
 
 **Qué es.** Unas 11.900 grabaciones de **palabras sueltas** en italiano, de
 varios hablantes, en Wikimedia Commons. Licencia **CC BY-SA 4.0**: se puede

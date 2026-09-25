@@ -173,7 +173,18 @@
   // An item of the listening module carries its own voice (variability).
   function speakItem(it, force, rate) {
     var v = it.voice || {};
-    return speak(it.say || it.stem, force, rate || v.rate, { pitch: v.pitch, vi: v.vi });
+    var tts = function () { return speak(it.say || it.stem, force, rate || v.rate, { pitch: v.pitch, vi: v.vi }); };
+    // A pair of Suoni: a real speaker of Lingua Libre when there is one
+    // (not for open/closed vowels: the file name cannot tell pèsca from pésca).
+    if (window.Voci && it.type === "coppia" && it.cat !== "vocali" && Voci.usable(it.say)) {
+      if (state.silent && !force) return null;
+      if (window.speechSynthesis) speechSynthesis.cancel();
+      Voci.play(it.say, { rate: rate && rate < 0.9 ? 0.75 : 1, onplay: function (who) {
+        var c = $("#vcredit"); if (c) c.textContent = "🎙️ Voz real: " + who;
+      } }, tts);
+      return null;
+    }
+    return tts();
   }
   function pickVoice() {
     if (!window.speechSynthesis) return;
@@ -553,7 +564,7 @@
 
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION in sw.js: test_game checks it). */
-  var APP_VERSION = "v47";
+  var APP_VERSION = "v1.48";
   function versionLine() {
     return '<p class="muted small version">La Via C1 · versión ' + APP_VERSION + "</p>";
   }
@@ -1222,7 +1233,7 @@
         if (readingWeek(ep) !== w.week) return;
         var d = (state.letture || {})[ep.id];
         m({ kind: "ep", arg: ep.id, done: !!d, ico: ep.emoji,
-            title: (ep.series === "martin" || ep.series === "settimana" ? "Lectura: " : "Cultura: ") + ep.title,
+            title: (ep.series === "settimana" ? "Lectura y comprensión: " : ep.series === "martin" ? "Lectura: " : "Cultura: ") + ep.title,
             sub: d ? "Leída · " + d.pct + "%" : esc(ep.level) + " · " + esc(ep.area || ep.grammar || "") +
                  (ep.series === "martin" || ep.series === "settimana" ? "" : " · opcional") });
       });
@@ -1495,6 +1506,9 @@
     }
 
     if (!items.length) { toast("No hay preguntas para este modo todavía."); return; }
+    // the real voices of the pairs, looked up while the round starts
+    if (window.Voci) Voci.prefetch(items.filter(function (x) { return x.type === "coppia" && x.cat !== "vocali"; })
+      .map(function (x) { return x.say; }));
 
     round = {
       kind: kind,
@@ -1680,7 +1694,8 @@
     } else if (SAY_TYPES[it.type]) {
       body = '<div class="center"><button class="bigplay" id="play1">🔊</button>' +
         '<div><button class="tab" id="slow">🐢 más lento</button>' +
-        (it.type === "coppia" ? '<button class="tab" id="both">👂 las dos</button>' : "") + "</div></div>" +
+        (it.type === "coppia" ? '<button class="tab" id="both">👂 las dos</button>' : "") + "</div>" +
+        (it.type === "coppia" ? '<p class="muted small" id="vcredit"></p>' : "") + "</div>" +
         '<div class="options' + (it.type === "coppia" ? " pair" : "") + '">' + it.options.map(function (o, k) {
           return '<button class="opt" data-opt="' + k + '">' + esc(o) + "</button>";
         }).join("") + "</div>";
@@ -2734,6 +2749,11 @@
 
       errorsCard() +
       aiCard() +
+      (window.Voci && Voci.count() ? (function () {
+        var cr = Voci.credits();
+        return '<div class="card"><h2>🎙️ Voces reales</h2><p class="muted small">Suoni usa grabaciones de hablantes reales para ' + Voci.count() +
+          " palabras. Voces de Lingua Libre (Wikimedia Commons), licencia CC BY-SA 4.0: " + Object.keys(cr).map(esc).join(", ") + ".</p></div>";
+      })() : "") +
       '<div class="card"><h2>Medallas</h2><div class="badges">' +
         Engine.BADGES.map(function (b) {
           var won = state.badges.indexOf(b.id) >= 0;

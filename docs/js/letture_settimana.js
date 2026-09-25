@@ -27,6 +27,7 @@
         ["¿Qué hay en la heladera?", ["huevos, leche, quesos y verduras", "solo café", "pasta y arroz", "nada"], "huevos, leche, quesos y verduras"],
         ["¿Quién es Otto?", ["el perro", "el abuelo", "un primo", "el rey de Italia"], "el perro"]
       ],
+      vf: [["Nella cucina ci sono quattro sedie.", "vero"], ["Il frigorifero è vuoto.", "falso"], ["Anna ha una cucina grande.", "falso"]],
       hunt: { label: "Tocá los sustantivos en plural", targets: ["sedie", "bicchieri", "piatti", "fiori", "uova", "formaggi", "verdure", "foto", "nonni", "zii", "cugini"] } },
 
     { id: "w-03", week: 3, n: 2, level: "A1", emoji: "🏘️", title: "La mia via",
@@ -49,6 +50,7 @@
         ["¿Qué pasa los sábados?", ["hay mercado", "cierra el bar", "no hay nadie", "hay misa"], "hay mercado"],
         ["¿Cómo está la calle de noche?", ["vacía y tranquila", "llena de gente", "con música", "con tráfico"], "vacía y tranquila"]
       ],
+      vf: [["Il barista è un amico.", "vero"], ["Il mercato c'è la domenica.", "falso"], ["La fontana è molto antica.", "non si dice"]],
       hunt: { label: "Tocá las preposiciones articuladas (alla, al, nella…)", targets: ["alla", "al", "nella", "della", "del", "dei", "degli", "dalla"] } },
 
     { id: "w-04", week: 4, n: 3, level: "A1", emoji: "👯", title: "Due sorelle diverse",
@@ -70,6 +72,7 @@
         ["¿Qué tiene Elisa?", ["una bici roja", "un auto nuevo", "zapatos negros", "vestidos elegantes"], "una bici roja"],
         ["¿Qué tienen en común?", ["son buenas amigas y aman la pizza", "el mismo pelo", "la misma ropa", "nada"], "son buenas amigas y aman la pizza"]
       ],
+      vf: [["Marta ha i capelli biondi.", "falso"], ["Elisa ha una bici rossa.", "vero"], ["Marta ed Elisa abitano insieme.", "non si dice"]],
       hunt: { label: "Tocá los adjetivos de color", targets: ["neri", "verdi", "biondi", "nere", "colorate", "rossa"] } },
 
     { id: "w-06", week: 6, n: 4, level: "A1", emoji: "⏰", title: "Una giornata di Sara",
@@ -90,6 +93,7 @@
         ["¿Qué hace al mediodía?", ["toma un café rápido", "almuerza en casa", "duerme", "va al cine"], "toma un café rápido"],
         ["¿Por qué no puede quedarse hasta tarde?", ["mañana trabaja temprano", "está enferma", "no le gusta el cine", "no tiene plata"], "mañana trabaja temprano"]
       ],
+      vf: [["Sara fa l'infermiera.", "vero"], ["Sara esce di casa alle otto.", "falso"], ["Laura lavora con Sara in ospedale.", "non si dice"]],
       hunt: { label: "Tocá los verbos irregulares (fa, esce, va, dice…)", targets: ["fa", "esce", "va", "dice", "può", "deve", "beve", "viene", "vuoi", "vengo", "devo"] } },
 
     { id: "w-07", week: 7, n: 5, level: "A1", emoji: "📅", title: "L'agenda di Paolo",
@@ -111,6 +115,7 @@
         ["¿Cuántos años cumple la madre?", ["sesenta y cinco", "cincuenta y seis", "setenta", "sesenta"], "sesenta y cinco"],
         ["¿Cuánto cuesta el pasaje?", ["treinta y ocho euros", "veintiocho euros", "cuarenta euros", "dieciocho euros"], "treinta y ocho euros"]
       ],
+      vf: [["Martedì è il compleanno della madre di Paolo.", "vero"], ["Paolo va in palestra il venerdì.", "falso"], ["Il treno per Napoli è in ritardo.", "non si dice"]],
       hunt: { label: "Tocá los números escritos en letras", targets: ["dodici", "otto", "dieci", "tredici", "sessantacinque", "ventiquattro", "diciannove", "sette", "sedici", "quindici", "quaranta", "trentotto", "nove", "cinque"] } },
 
     { id: "w-08", week: 8, n: 6, level: "A1", emoji: "🎙️", title: "Un'intervista alla radio",
@@ -133,6 +138,7 @@
         ["¿Dónde trabaja?", ["en un restaurante cerca del puerto", "en un hotel", "en la radio", "en Milán"], "en un restaurante cerca del puerto"],
         ["¿Por qué hace este trabajo?", ["ama el mar y a la gente", "gana mucho", "no tiene otra opción", "por su padre"], "ama el mar y a la gente"]
       ],
+      vf: [["Luca è un cuoco di Palermo.", "vero"], ["Il ristorante apre alle otto.", "falso"], ["Luca ha due figli.", "non si dice"]],
       hunt: { label: "Tocá las palabras interrogativas", targets: ["chi", "dove", "quando", "che", "quanti", "perché", "come"] } },
 
     { id: "w-10", week: 10, n: 7, level: "A2", emoji: "🎁", title: "Il regalo per la nonna",
@@ -154,6 +160,7 @@
         ["¿Qué le regalan al final?", ["una orquídea blanca", "un libro", "una torta", "un viaje"], "una orquídea blanca"],
         ["¿Qué hace la abuela?", ["sonríe y les dice que los quiere", "llora", "se enoja", "no abre el paquete"], "sonríe y les dice que los quiere"]
       ],
+      vf: [["La nonna ha già molti libri.", "vero"], ["I nipoti regalano un libro alla nonna.", "falso"], ["L'orchidea costa molto.", "non si dice"]],
       hunt: { label: "Tocá los pronombres de objeto (le, la, li, gli, mi, vi)", targets: ["le", "la", "li", "gli", "mi", "vi"] } },
 
     { id: "w-14", week: 14, n: 8, level: "A2", emoji: "🍕", title: "Gusti di famiglia",
@@ -174,6 +181,7 @@
         ["¿Qué le gusta a Tommaso?", ["los videojuegos", "bailar", "los libros", "la montaña"], "los videojuegos"],
         ["¿Qué extraña Tommaso en la playa?", ["su computadora", "a su mamá", "la pizza", "la montaña"], "su computadora"]
       ],
+      vf: [["Al papà piace il calcio.", "vero"], ["A Tommaso piace andare al mare.", "falso"], ["La mamma va in montagna ogni settimana.", "non si dice"]],
       hunt: { label: "Tocá las formas de piacere y mancare", targets: ["piace", "piacciono", "piaciuta", "manca"] } },
 
     { id: "w-16", week: 16, n: 9, level: "A2", emoji: "😴", title: "Una mattina storta",
@@ -195,6 +203,7 @@
         ["¿Qué tenía de raro?", ["dos medias distintas", "dos zapatos distintos", "la camisa al revés", "no tenía zapatos"], "dos medias distintas"],
         ["¿Cómo terminó el día?", ["contándose el día con su mujer", "enojado", "en la oficina", "sin cenar"], "contándose el día con su mujer"]
       ],
+      vf: [["Giorgio si è svegliato tardi.", "vero"], ["Giorgio aveva due calzini uguali.", "falso"], ["Giorgio è arrivato in ufficio in ritardo.", "non si dice"]],
       hunt: { label: "Tocá los auxiliares de los reflexivos (è, sono)", targets: ["è", "sono"] } },
 
     { id: "w-17", week: 17, n: 10, level: "A2", emoji: "📦", title: "Il trasloco",
@@ -215,6 +224,7 @@
         ["¿Qué lleva Anna?", ["el espejo viejo de la abuela", "las sillas", "una caja de libros", "nada"], "el espejo viejo de la abuela"],
         ["¿De qué se queja Marco al final?", ["de las escaleras", "del departamento", "de los amigos", "del precio"], "de las escaleras"]
       ],
+      vf: [["Nella scatola di Elena ci sono i libri.", "vero"], ["Luca porta lo specchio della nonna.", "falso"], ["Il nuovo appartamento è al quinto piano.", "non si dice"]],
       hunt: { label: "Tocá los demostrativos (questa, quella, quel…)", targets: ["questa", "quella", "quel", "questo", "quelle"] } },
 
     { id: "w-23", week: 23, n: 11, level: "B1", emoji: "⚖️", title: "Bologna o Milano?",
@@ -236,6 +246,7 @@
         ["¿Qué ofrece Milán?", ["un sueldo más alto", "mejor comida", "más tranquilidad", "casas más baratas"], "un sueldo más alto"],
         ["¿Qué decide Francesca?", ["vivir en Bolonia y trabajar dos días en Milán", "vivir en Milán", "quedarse en su casa", "irse al exterior"], "vivir en Bolonia y trabajar dos días en Milán"]
       ],
+      vf: [["Milano è più cara di Bologna.", "vero"], ["Francesca sceglie di vivere a Milano.", "falso"], ["Francesca ha un fidanzato a Bologna.", "non si dice"]],
       hunt: { label: "Tocá las formas de comparación (più, meno, migliore…)", targets: ["più", "meno", "migliore", "buonissimi", "quanto"] } },
 
     { id: "w-27", week: 27, n: 12, level: "B1", emoji: "💼", title: "Il primo mese di Chiara",
@@ -258,6 +269,7 @@
         ["¿Qué hacía al principio?", ["escuchaba con atención y tomaba apuntes", "hablaba mucho", "llegaba tarde", "discutía con el jefe"], "escuchaba con atención y tomaba apuntes"],
         ["¿Cómo se siente ahora?", ["contenta: hace el trabajo que soñaba", "aburrida", "quiere renunciar", "enojada con el jefe"], "contenta: hace el trabajo que soñaba"]
       ],
+      vf: [["Chiara lavora in una casa editrice.", "vero"], ["All'inizio Chiara parlava molto.", "falso"], ["Chiara guadagna bene.", "non si dice"]],
       hunt: { label: "Tocá los adverbios en -mente", targets: ["puntualmente", "attentamente", "tranquillamente", "velocemente", "completamente", "finalmente"] } },
 
     { id: "w-28", week: 28, n: 13, level: "B1", emoji: "🏙️", title: "Città o campagna?",
@@ -278,6 +290,7 @@
         ["¿Qué problema tiene el campo?", ["pocos servicios y hace falta el auto", "el ruido", "los alquileres altos", "el tráfico"], "pocos servicios y hace falta el auto"],
         ["¿Qué cambió con el trabajo desde casa?", ["algunos jóvenes vuelven a los pueblos", "nadie vuelve", "las ciudades se vaciaron", "subieron los alquileres del campo"], "algunos jóvenes vuelven a los pueblos"]
       ],
+      vf: [["In città gli affitti sono alti.", "vero"], ["In campagna ci sono molti servizi.", "falso"], ["Il lavoro da casa ha aiutato alcuni giovani a tornare nei paesi.", "vero"]],
       hunt: { label: "Tocá los conectores (infatti, inoltre, tuttavia…)", targets: ["infatti", "inoltre", "tuttavia", "quindi", "invece", "però", "insomma", "comunque"] } },
 
     { id: "w-32", week: 32, n: 14, level: "B2", emoji: "✉️", title: "La lettera del nonno",
@@ -298,6 +311,7 @@
         ["¿Qué temía el abuelo?", ["que el padre de ella le prohibiera escribirle", "perder el trabajo", "que la carta no llegara", "mudarse"], "que el padre de ella le prohibiera escribirle"],
         ["¿Qué no se imaginaba Laura?", ["que hubiera sido tan difícil", "que se hubieran casado", "que el abuelo escribiera", "que existiera la carta"], "que hubiera sido tan difícil"]
       ],
+      vf: [["Il nonno ha scritto la lettera nel 1962.", "vero"], ["I nonni si sono sposati nel 1962.", "falso"], ["La nonna ha risposto subito alla lettera.", "non si dice"]],
       hunt: { label: "Tocá los congiuntivi (rispondessi, avesse, abbia, aspetti, fosse)", targets: ["rispondessi", "avesse", "abbia", "aspetti", "fosse"] } },
 
     { id: "w-35", week: 35, n: 15, level: "B2", emoji: "🧀", title: "Com'è fatto il parmigiano",
@@ -320,6 +334,7 @@
         ["¿Cuánto tiempo se estaciona como mínimo?", ["doce meses", "veinte días", "dos años", "seis meses"], "doce meses"],
         ["¿Para qué el experto golpea la horma?", ["para oír si está perfecta", "para cortarla", "para limpiarla", "para darla vuelta"], "para oír si está perfecta"]
       ],
+      vf: [["Il parmigiano si stagiona almeno dodici mesi.", "vero"], ["Il latte si lavora in caldaie di plastica.", "falso"], ["Un chilo di parmigiano costa venti euro.", "non si dice"]],
       hunt: { label: "Tocá los participios de la pasiva (prodotto, munto…)", targets: ["prodotto", "munto", "lavorato", "immersa", "sistemate", "girate", "controllate", "stagionato", "esaminata", "citato"] } },
 
     { id: "w-43", week: 43, n: 16, level: "C1", emoji: "🎓", title: "Imparare da adulti",
@@ -343,6 +358,7 @@
         ["¿Por qué repasar antes de dormir?", ["el sueño ayuda a recordar", "hay más tiempo", "se está más despierto", "es más divertido"], "el sueño ayuda a recordar"],
         ["¿Qué enseña más?", ["corregirse solo", "recibir la respuesta correcta", "no equivocarse nunca", "estudiar de memoria"], "corregirse solo"]
       ],
+      vf: [["Studiare un po' ogni giorno è più utile che studiare molto la domenica.", "vero"], ["Secondo il testo, sbagliare non serve a niente.", "falso"], ["Il testo consiglia di usare un'app.", "non si dice"]],
       hunt: { label: "Tocá los infinitivos usados como sustantivo o después de preposición", targets: ["imparare", "studiare", "passare", "aver", "andare", "dormire", "ripassare", "ricordarle", "avere", "sbagliare", "perdere", "fissarsi", "festeggiare"] } },
 
     { id: "w-46", week: 46, n: 17, level: "C1", emoji: "🐱", title: "Il gattino del vicino",
@@ -365,6 +381,7 @@
         ["¿Dónde encontraron al gatito?", ["dormido en una caja grande", "en el bar", "en el jardín", "en la calle"], "dormido en una caja grande"],
         ["¿Cómo festejó Bruno?", ["los invitó a un cafecito", "hizo una fiesta", "compró una torta", "no festejó"], "los invitó a un cafecito"]
       ],
+      vf: [["Il signor Bruno ha un gattino e un cagnolino.", "vero"], ["Il gattino si era perso in strada.", "falso"], ["Il signor Bruno vive al primo piano.", "non si dice"]],
       hunt: { label: "Tocá las palabras con sufijo (-ino, -etto, -one…)", targets: ["palazzone", "vecchietto", "gattino", "cagnolino", "cappellino", "giornalino", "giardinetto", "briciolina", "passerotti", "angolino", "scatolone", "furbacchione", "caffettino"] } },
 
     { id: "w-47", week: 47, n: 18, level: "C1", emoji: "🧮", title: "La ricetta della nonna",
@@ -387,6 +404,7 @@
         ["¿Para cuántas personas alcanza la receta?", ["unas diez", "seis", "dos", "veinte"], "unas diez"],
         ["¿Qué hacen con lo que sobra?", ["va al freezer y a los tíos", "lo tiran", "lo venden", "lo comen al día siguiente"], "va al freezer y a los tíos"]
       ],
+      vf: [["Il ragù cuoce almeno tre ore.", "vero"], ["La famiglia è di dieci persone.", "falso"], ["La nonna usa carne di maiale.", "non si dice"]],
       hunt: { label: "Tocá las medidas y cantidades (mezzo, etto, decina…)", targets: ["mezzo", "chilo", "etto", "mezza", "litro", "decina", "terzo", "metà"] } },
 
     { id: "w-50", week: 50, n: 19, level: "C1", emoji: "🔤", title: "Parole che ingannano",
@@ -408,6 +426,7 @@
         ["¿Por qué se rieron los compañeros?", ["dijo «largo» pensando en «generoso»", "llegó tarde", "habló en español", "se equivocó de oficina"], "dijo «largo» pensando en «generoso»"],
         ["¿Qué hace ahora Valeria?", ["controla en el diccionario las palabras parecidas al español", "habla solo en inglés", "no usa palabras nuevas", "pregunta al jefe"], "controla en el diccionario las palabras parecidas al español"]
       ],
+      vf: [["Valeria ha chiesto una salsa e le hanno dato il ketchup.", "vero"], ["I colleghi hanno capito subito cosa voleva dire con largo.", "falso"], ["Valeria studia medicina.", "non si dice"]],
       hunt: { label: "Tocá los falsos amigos del texto", targets: ["imbarazzata", "salsa", "largo"] } },
 
     { id: "w-01", week: 1, level: "A1", emoji: "👋", title: "Sono Lucia",
@@ -428,6 +447,7 @@
         ["¿Qué hace Paolo?", ["es médico en Milán", "es estudiante", "es músico", "trabaja en Roma"], "es médico en Milán"],
         ["¿Cómo es la gata?", ["chiquita y blanca, de ojos verdes", "grande y negra", "vieja y gorda", "no tiene gata"], "chiquita y blanca, de ojos verdes"]
       ],
+      vf: [["Lucia è di Milano.", "falso"], ["Paolo è il fratello di Lucia.", "vero"], ["Lucia suona il pianoforte.", "non si dice"]],
       hunt: { label: "Tocá las formas de essere y avere", targets: ["sono", "ho", "ha", "è"] } },
 
     { id: "w-05", week: 5, level: "A1", emoji: "📚", title: "La libraia",
@@ -447,6 +467,7 @@
         ["¿A qué hora termina de trabajar?", ["a las siete", "a las nueve", "al mediodía", "a las ocho"], "a las siete"],
         ["¿Por qué duerme poco?", ["lee hasta tarde", "trabaja de noche", "mira películas", "habla con la madre"], "lee hasta tarde"]
       ],
+      vf: [["Carla lavora in una libreria.", "vero"], ["Carla va al lavoro in bicicletta.", "falso"], ["Marta è la sorella di Carla.", "falso"]],
       hunt: { label: "Tocá los verbos en presente de la tercera persona (abita, lavora…)", targets: ["abita", "lavora", "prende", "legge", "apre", "parla", "mangia", "ordina", "risponde", "finisce", "cucina", "guarda", "telefona", "dorme"] } },
 
     { id: "w-09", week: 9, level: "A2", emoji: "🚆", title: "Da Genova a Lugano",
@@ -467,6 +488,7 @@
         ["¿Con quién vive en Lugano?", ["con un amigo", "con su esposa", "solo", "con sus padres"], "con un amigo"],
         ["¿Qué hace el domingo?", ["almuerza con sus padres", "trabaja", "va al mercado", "viaja a Suiza"], "almuerza con sus padres"]
       ],
+      vf: [["Tommaso lavora in Svizzera.", "vero"], ["A Lugano Tommaso vive da solo.", "falso"], ["Marco lavora in banca con Tommaso.", "non si dice"]],
       hunt: { label: "Tocá las preposiciones simples (a, in, da, con, per, tra)", targets: ["a", "in", "da", "con", "per", "tra"] } },
 
     { id: "w-11", week: 11, level: "A2", emoji: "🚤", title: "Un sabato a Venezia",
@@ -487,6 +509,7 @@
         ["¿Qué compró Anna?", ["una máscara para su hermana", "vidrio de Murano", "sardinas", "un libro"], "una máscara para su hermana"],
         ["¿Qué dice Luca al final?", ["gastaron mucho, pero fue un día perfecto", "fue un día aburrido", "quiere volver mañana", "Venecia es fea"], "gastaron mucho, pero fue un día perfecto"]
       ],
+      vf: [["Anna e Luca sono partiti da Padova.", "vero"], ["Luca ha comprato una maschera.", "falso"], ["A Murano hanno comprato un vaso.", "non si dice"]],
       hunt: { label: "Tocá los participios con essere (andati, partiti…)", targets: ["andati", "partiti", "arrivati", "tornati", "stata"] } },
 
     { id: "w-12", week: 12, level: "A2", emoji: "👵", title: "Le regole della nonna",
@@ -507,6 +530,7 @@
         ["¿Qué hace Giacomo cuando la abuela lo llama?", ["se queja, pero se levanta", "sigue durmiendo", "se enoja y se va", "llora"], "se queja, pero se levanta"],
         ["¿Quién se duerme primero?", ["la abuela", "Giacomo", "los nietos", "nadie"], "la abuela"]
       ],
+      vf: [["La nonna vuole che i nipoti si lavino le mani.", "vero"], ["Giacomo si sveglia presto.", "falso"], ["La nonna guarda un film alla televisione.", "non si dice"]],
       hunt: { label: "Tocá los imperativos (lavatevi, sedetevi, alzati…)", targets: ["lavatevi", "sedetevi", "alzatevi", "alzati", "vestiti", "fai", "addormentate"] } },
 
     { id: "w-13", week: 13, level: "A2", emoji: "🍷", title: "La nuova vicina",
@@ -527,6 +551,7 @@
         ["¿Cómo se conocieron?", ["en la escalera, con unas cajas", "en un bar", "en el trabajo", "en la trattoria"], "en la escalera, con unas cajas"],
         ["¿Qué lleva el narrador a la cena?", ["una botella de vino", "flores", "una torta", "nada"], "una botella de vino"]
       ],
+      vf: [["Sara è di Bari.", "vero"], ["Il narratore ha incontrato Sara al bar.", "falso"], ["Sara ha cucinato il pesce.", "non si dice"]],
       hunt: { label: "Tocá los pronombres de objeto (l', le, mi)", targets: ["l'ho", "le", "mi"] } },
 
     { id: "w-15", week: 15, level: "A2", emoji: "🌳", title: "L'estate dal nonno",
@@ -547,6 +572,7 @@
         ["¿Qué hacían a la tarde?", ["dormían o jugaban a las cartas", "iban al mercado", "nadaban", "trabajaban"], "dormían o jugaban a las cartas"],
         ["¿Cómo se llamó el perro?", ["Fico", "Nonno", "Puglia", "Bianco"], "Fico"]
       ],
+      vf: [["La casa del nonno era in Puglia.", "vero"], ["Il pomeriggio andavano al mercato.", "falso"], ["Il cane è vissuto molti anni.", "non si dice"]],
       hunt: { label: "Tocá los verbos en imperfetto", targets: ["ero", "passavo", "era", "aveva", "svegliava", "andavamo", "conosceva", "parlava", "faceva", "dormivamo", "giocavamo", "raccoglievo"] } },
 
     { id: "w-18", week: 18, level: "A2", emoji: "😩", title: "Che giornata!",
@@ -567,6 +593,7 @@
         ["¿Qué no funcionaba en la oficina?", ["ni la computadora ni la impresora", "el ascensor", "la luz", "el teléfono"], "ni la computadora ni la impresora"],
         ["¿Qué le faltaba a la noche?", ["las llaves", "la billetera", "el celular", "el colectivo"], "las llaves"]
       ],
+      vf: [["Stamattina il narratore non ha fatto colazione.", "vero"], ["A pranzo ha mangiato un panino.", "falso"], ["Il narratore ha chiamato un fabbro.", "non si dice"]],
       hunt: { label: "Tocá las palabras negativas (non, nessuno, niente, né…)", targets: ["non", "nessuno", "niente", "né", "neanche", "più", "mai"] } },
 
     { id: "w-19", week: 19, level: "B1", emoji: "✈️", title: "Il piano di Giulia",
@@ -587,6 +614,7 @@
         ["¿Dónde trabajará al principio?", ["en un bar o en un hotel", "en una escuela", "en una oficina", "en la universidad"], "en un bar o en un hotel"],
         ["¿Qué harán los padres en Navidad?", ["la visitarán", "se quedarán en casa", "irán a la playa", "le mandarán plata"], "la visitarán"]
       ],
+      vf: [["Giulia vivrà a Valencia.", "vero"], ["La madre chiede dove abiterà Giulia.", "vero"], ["Giulia ha già un lavoro in Spagna.", "falso"]],
       hunt: { label: "Tocá los verbos en futuro", targets: ["finirà", "partirà", "vivrà", "studierà", "cercherà", "parlerà", "farà", "farai", "abiterai", "andrà", "sarà", "verremo"] } },
 
     { id: "w-20", week: 20, level: "B1", emoji: "🌅", title: "Un ristorante al mare",
@@ -606,6 +634,7 @@
         ["¿Qué problema ve Paolo?", ["Marco no sabe cocinar", "Cerdeña es cara", "no hay pescado", "Marco es muy joven"], "Marco no sabe cocinar"],
         ["¿Cómo iría Paolo al restaurante?", ["solo como cliente", "como cocinero", "como socio", "no iría"], "solo como cliente"]
       ],
+      vf: [["Marco lavora in banca.", "vero"], ["Marco vorrebbe un ristorante in montagna.", "falso"], ["Paolo sa cucinare molto bene.", "non si dice"]],
       hunt: { label: "Tocá los verbos en condizionale", targets: ["piacerebbe", "vorrei", "apriresti", "cucinerei", "guarderei", "sarebbe", "dovresti", "potrebbe", "sarei", "verresti"] } },
 
     { id: "w-21", week: 21, level: "B1", emoji: "🧺", title: "Il mercato del sabato",
@@ -625,6 +654,7 @@
         ["¿Cuánto parmesano pide?", ["doscientos gramos", "un kilo", "cien gramos", "medio kilo"], "doscientos gramos"],
         ["¿Por qué no le molesta la fila del pescado?", ["la gente charla", "es corta", "no compra pescado", "va con Lucia"], "la gente charla"]
       ],
+      vf: [["Il narratore va al mercato da dieci anni.", "vero"], ["Compra un chilo di parmigiano.", "falso"], ["Lucia vende il pesce al mercato.", "non si dice"]],
       hunt: { label: "Tocá ci y ne", targets: ["ci", "ne"] } },
 
     { id: "w-22", week: 22, level: "B1", emoji: "📕", title: "Il libro prestato",
@@ -645,6 +675,7 @@
         ["¿Quién le regaló el libro al narrador?", ["su madre", "Giorgio", "su hermana", "un autor"], "su madre"],
         ["¿Qué pide la hermana al final?", ["que se lo preste otra vez", "otro libro", "perdón", "nada"], "que se lo preste otra vez"]
       ],
+      vf: [["Giorgio ha dato il libro a sua sorella.", "vero"], ["Il libro è di Giorgio.", "falso"], ["La sorella di Giorgio fa la scrittrice.", "non si dice"]],
       hunt: { label: "Tocá los pronombres combinados (me lo, te lo, glielo…)", targets: ["gliel'ho", "me", "te", "glielo"] } },
 
     { id: "w-24", week: 24, level: "B1", emoji: "🎂", title: "Il nuovo collega",
@@ -664,6 +695,7 @@
         ["¿Qué cree el narrador?", ["que necesita tiempo", "que es antipático", "que se va a ir", "que es el jefe"], "que necesita tiempo"],
         ["¿Por qué trajo una torta?", ["era su cumpleaños", "para pedir perdón", "se iba", "era viernes"], "era su cumpleaños"]
       ],
+      vf: [["Stefano è un nuovo collega.", "vero"], ["Chiara pensa che Stefano parli poco.", "falso"], ["Stefano ha fatto la torta da solo.", "non si dice"]],
       hunt: { label: "Tocá los verbos en congiuntivo", targets: ["sia", "parli", "lavori", "arrivi", "abbia", "trovi"] } },
 
     { id: "w-25", week: 25, level: "B1", emoji: "👔", title: "Consigli per un colloquio",
@@ -683,6 +715,7 @@
         ["¿Qué hacer si no sabe algo?", ["decir la verdad", "inventar", "cambiar de tema", "irse"], "decir la verdad"],
         ["¿De qué tiene miedo Elena?", ["de que el director sea antipático", "de llegar tarde", "de la ropa", "de su hermana"], "de que el director sea antipático"]
       ],
+      vf: [["Elena ha un colloquio domani.", "vero"], ["La sorella le consiglia di arrivare in ritardo.", "falso"], ["Il colloquio è in una banca.", "non si dice"]],
       hunt: { label: "Tocá los congiuntivi", targets: ["arrivi", "vesta", "sia", "dica", "sorrida", "parli"] } },
 
     { id: "w-26", week: 26, level: "B1", emoji: "📔", title: "Caro diario",
@@ -702,6 +735,7 @@
         ["¿Quién revisó los papeles?", ["su madre", "el jefe", "un colega", "nadie"], "su madre"],
         ["¿Qué espera de los colegas?", ["que sean amables", "que lo ayuden con plata", "que no estén", "que hablen inglés"], "que sean amables"]
       ],
+      vf: [["Il nuovo lavoro è a Torino.", "vero"], ["La madre ha controllato i documenti una volta sola.", "falso"], ["Il capo è una donna.", "non si dice"]],
       hunt: { label: "Tocá los verbos en futuro", targets: ["farò", "imparerò", "entrerò", "dirò", "andrà"] } },
 
     { id: "w-29", week: 29, level: "B2", emoji: "🎸", title: "Il concerto",
@@ -722,6 +756,7 @@
         ["¿Qué le pasó a Luca en realidad?", ["tuvo fiebre", "perdió el tren", "se olvidó", "trabajó"], "tuvo fiebre"],
         ["¿Qué lamenta Luca al final?", ["que el recital terminara sin él", "haber llamado", "estar enfermo de nuevo", "nada"], "que el recital terminara sin él"]
       ],
+      vf: [["Luca non è andato al concerto.", "vero"], ["Luca ha perso il treno.", "falso"], ["Il concerto è finito a mezzanotte.", "non si dice"]],
       hunt: { label: "Tocá los auxiliares del congiuntivo passato (abbia, sia, siate)", targets: ["abbia", "sia", "siate"] } },
 
     { id: "w-30", week: 30, level: "B2", emoji: "🎹", title: "Il pianoforte",
@@ -741,6 +776,7 @@
         ["¿Qué descubrió después?", ["que su madre había tocado en una orquesta", "que su padre era músico", "que el mar estaba lejos", "que no le gustaba el piano"], "que su madre había tocado en una orquesta"],
         ["¿Qué hizo esa noche?", ["volvió a abrir el piano", "fue al mar", "llamó a su padre", "lloró"], "volvió a abrir el piano"]
       ],
+      vf: [["Da piccola Marta amava il mare.", "vero"], ["Il padre voleva che Marta suonasse il pianoforte.", "falso"], ["La madre suonava il violino.", "non si dice"]],
       hunt: { label: "Tocá los congiuntivi imperfetti y trapassati", targets: ["portasse", "finisse", "durasse", "studiasse", "piacesse", "avesse"] } },
 
     { id: "w-31", week: 31, level: "B2", emoji: "🚕", title: "Il treno perso",
@@ -760,6 +796,7 @@
         ["¿Qué habría podido hacer?", ["tomar el subte", "ir en auto", "no viajar", "llamar antes"], "tomar el subte"],
         ["¿Cómo reacciona el cliente?", ["es amable: él también tuvo una mañana terrible", "se enoja", "cancela la cita", "no contesta"], "es amable: él también tuvo una mañana terrible"]
       ],
+      vf: [["Paolo ha perso il treno delle sette.", "vero"], ["Il cliente si è arrabbiato.", "falso"], ["Paolo lavora a Roma.", "non si dice"]],
       hunt: { label: "Tocá los condizionali passati (avrebbe voluto, sarei dovuto…)", targets: ["avrebbe", "sarei", "avrei"] } },
 
     { id: "w-33", week: 33, level: "B2", emoji: "🏛️", title: "Se fossi sindaco",
@@ -779,6 +816,7 @@
         ["¿Qué cambiaría Marco?", ["la escuela empezaría a las diez", "cerraría las calles", "daría casas", "nada"], "la escuela empezaría a las diez"],
         ["¿Qué habrían hecho el año pasado?", ["cerrar las calles a los autos", "construir un parque", "cambiar de maestra", "abrir más escuelas"], "cerrar las calles a los autos"]
       ],
+      vf: [["Luca costruirebbe un parco giochi.", "vero"], ["Marco vorrebbe cominciare la scuola alle otto.", "falso"], ["La maestra è stata sindaca.", "non si dice"]],
       hunt: { label: "Tocá los verbos de la «se» (foste, fossi, avessi, comandassi)", targets: ["foste", "fossi", "avessi", "comandassi"] } },
 
     { id: "w-34", week: 34, level: "B2", emoji: "📖", title: "La mia libreria",
@@ -799,6 +837,7 @@
         ["¿Quién es Ettore?", ["el dueño de la librería", "un cliente", "un escritor", "el narrador"], "el dueño de la librería"],
         ["¿Qué le gusta más al narrador?", ["el olor del papel", "los precios", "los libros nuevos", "el café"], "el olor del papel"]
       ],
+      vf: [["Il proprietario si chiama Ettore.", "vero"], ["La libreria vende solo libri nuovi.", "falso"], ["Ettore ha scritto un romanzo.", "non si dice"]],
       hunt: { label: "Tocá los relativos (che, cui, quali)", targets: ["che", "cui", "quali"] } },
 
     { id: "w-36", week: 36, level: "B2", emoji: "🍝", title: "In Italia si fa così",
@@ -818,6 +857,7 @@
         ["¿Qué se hace primero en el bar?", ["pagar en la caja", "pedir en la barra", "sentarse", "tomar el café"], "pagar en la caja"],
         ["¿Qué se lleva a una casa?", ["un postre o una botella de vino", "flores", "nada", "pan"], "un postre o una botella de vino"]
       ],
+      vf: [["In Italia il cappuccino si beve la mattina.", "vero"], ["Al bar si ordina prima di pagare.", "falso"], ["In Italia si cena alle nove.", "non si dice"]],
       hunt: { label: "Tocá el «si»", targets: ["si"] } },
 
     { id: "w-37", week: 37, level: "B2", emoji: "🌊", title: "La leggenda di Colapesce",
@@ -838,6 +878,7 @@
         ["¿Qué descubrió en el fondo?", ["que Sicilia se apoya en tres columnas, una rota", "un tesoro", "una ciudad", "al rey"], "que Sicilia se apoya en tres columnas, una rota"],
         ["¿Qué hizo al final?", ["se quedó bajo el mar sosteniendo la columna", "volvió con el anillo", "se casó", "se fue de Messina"], "se quedó bajo el mar sosteniendo la columna"]
       ],
+      vf: [["Cola nuotava come un pesce.", "vero"], ["Cola non riuscì a riportare la coppa.", "falso"], ["Il re aveva tre figlie.", "non si dice"]],
       hunt: { label: "Tocá los verbos en passato remoto", targets: ["visse", "chiamarono", "volle", "gettò", "riportò", "ritrovò", "lanciò", "tuffò", "scoprì", "decise", "vide"] } },
 
     { id: "w-38", week: 38, level: "B2", emoji: "☎️", title: "La telefonata di Anna",
@@ -857,6 +898,7 @@
         ["¿Qué día puede ayudar el narrador?", ["el domingo", "el sábado", "el viernes", "nunca"], "el domingo"],
         ["¿Qué tiene que guardar en secreto?", ["el sueldo más alto", "la mudanza", "la cena", "el nuevo trabajo"], "el sueldo más alto"]
       ],
+      vf: [["Anna ha trovato un lavoro a Milano.", "vero"], ["Il narratore è libero il sabato.", "falso"], ["Anna si trasferisce con il fidanzato.", "non si dice"]],
       hunt: { label: "Tocá los condizionali passati del discurso indirecto", targets: ["sarebbe", "avrebbe", "avrei"] } },
 
     { id: "w-39", week: 39, level: "B2", emoji: "🚢", title: "Il nonno emigrante",
@@ -876,6 +918,7 @@
         ["¿Dónde conoció a la abuela?", ["en una fábrica", "en el barco", "en Italia", "en una fiesta"], "en una fábrica"],
         ["¿Qué respondía sobre Italia?", ["estaba en sus recuerdos, pero su casa era Argentina", "quería volver", "no la extrañaba nada", "odiaba Italia"], "estaba en sus recuerdos, pero su casa era Argentina"]
       ],
+      vf: [["Il nonno partì per l'Argentina a vent'anni.", "vero"], ["Il nonno parlava bene lo spagnolo.", "falso"], ["Il nonno tornò in Italia da vecchio.", "non si dice"]],
       hunt: { label: "Tocá los verbos en passato remoto", targets: ["partì", "trovò", "conobbe", "sposarono"] } },
 
     { id: "w-40", week: 40, level: "C1", emoji: "🏡", title: "Una casa da sistemare",
@@ -896,6 +939,7 @@
         ["¿Por qué revisaron la instalación eléctrica?", ["las luces se apagaban solas", "era vieja", "la vecina se quejó", "no había luz"], "las luces se apagaban solas"],
         ["¿Qué sueña el marido?", ["vivir como un campesino", "volver a la ciudad", "vender la casa", "ser pintor"], "vivir como un campesino"]
       ],
+      vf: [["La casa è in campagna.", "vero"], ["Hanno rifatto il tetto da soli.", "falso"], ["La signora Rosa vive da sola.", "non si dice"]],
       hunt: { label: "Tocá fare y lasciare seguidos de infinitivo", targets: ["fare", "fatto", "lasciato", "farà", "lascio"] } },
 
     { id: "w-41", week: 41, level: "C1", emoji: "🌙", title: "Una notte in campagna",
@@ -916,6 +960,7 @@
         ["¿Quién estaba en el jardín?", ["un gato negro", "un ladrón", "el perro", "el vecino"], "un gato negro"],
         ["¿Cómo termina la noche?", ["se duerme mientras oye el viento", "no duerme nada", "llama a la policía", "se va a la ciudad"], "se duerme mientras oye el viento"]
       ],
+      vf: [["La prima notte la narratrice non riusciva a dormire.", "vero"], ["In giardino c'era un ladro.", "falso"], ["Il cane dormiva in casa.", "non si dice"]],
       hunt: { label: "Tocá los verbos de percepción (sentivo, vedevo, ho visto…)", targets: ["sentivo", "vedevo", "sentito", "visto"] } },
 
     { id: "w-42", week: 42, level: "C1", emoji: "🏃", title: "Buoni propositi",
@@ -935,6 +980,7 @@
         ["¿Por qué no hizo el curso de guitarra?", ["no encontró tiempo", "era caro", "no le gustaba", "se lastimó"], "no encontró tiempo"],
         ["¿Qué pasa en marzo?", ["finge no oír si sigue corriendo", "sigue corriendo", "vuelve a fumar", "empieza guitarra"], "finge no oír si sigue corriendo"]
       ],
+      vf: [["Luca ha smesso di fumare.", "vero"], ["Luca si è iscritto a un corso di chitarra.", "falso"], ["Luca ha perso cinque chili.", "non si dice"]],
       hunt: { label: "Tocá las preposiciones que siguen al verbo (di, a)", targets: ["di", "a"] } },
 
     { id: "w-44", week: 44, level: "C1", emoji: "🌉", title: "Tornando a casa",
@@ -955,6 +1001,7 @@
         ["¿Dónde se detuvieron?", ["en el puente", "en la estación", "en un bar", "en la casa"], "en el puente"],
         ["¿Qué se prometieron?", ["volver a verse pronto", "escribirse", "viajar juntas", "nada"], "volver a verse pronto"]
       ],
+      vf: [["Silvia e l'amica non si vedevano da dieci anni.", "vero"], ["Si sono salutate al ponte.", "falso"], ["L'amica abita in un'altra città.", "non si dice"]],
       hunt: { label: "Tocá los gerundios y participios (tornando, finita…)", targets: ["tornando", "parlando", "finita", "ridendo", "arrivate", "pensando", "sorridendo", "vedendoti", "conoscendole"] } },
 
     { id: "w-45", week: 45, level: "C1", emoji: "🏅", title: "La maratona",
@@ -974,6 +1021,7 @@
         ["¿Qué le molestó?", ["que un señor mayor lo pasara", "el calor", "la lluvia", "su hija"], "que un señor mayor lo pasara"],
         ["¿Qué promete para el año próximo?", ["tardar menos", "no correr", "correr con su hija", "entrenar menos"], "tardar menos"]
       ],
+      vf: [["Paolo ci ha messo quattro ore e mezza.", "vero"], ["Paolo si è ritirato al trentesimo chilometro.", "falso"], ["La figlia di Paolo ha corso con lui.", "non si dice"]],
       hunt: { label: "Tocá las partículas de los verbos pronominales (ce, ci, se, te)", targets: ["ce", "ci", "se", "te"] } },
 
     { id: "w-48", week: 48, level: "C1", emoji: "☕", title: "Il barista Gino",
@@ -992,6 +1040,7 @@
         ["¿Qué le debe a Gino?", ["haber conocido a su esposa", "un trabajo", "plata", "un café gratis"], "haber conocido a su esposa"],
         ["¿Qué nunca le dijo?", ["que sus medialunas son duras", "que es de otro equipo", "que no le gusta el café", "que se muda"], "que sus medialunas son duras"]
       ],
+      vf: [["Il narratore conosce Gino da vent'anni.", "vero"], ["Il narratore compra i cornetti da Gino.", "falso"], ["Gino tifa per la Juventus.", "vero"]],
       hunt: { label: "Tocá los pronombres que retoman lo dislocado (lo, la, ne, l')", targets: ["lo", "la", "ne", "l'ho"] } },
 
     { id: "w-49", week: 49, level: "C1", emoji: "📢", title: "Avviso ai condomini",
@@ -1013,6 +1062,7 @@
         ["¿Qué deben usar los vecinos?", ["las escaleras", "el ascensor de servicio", "la puerta de atrás", "nada"], "las escaleras"],
         ["¿Quién debe contactar a la administración?", ["quien tenga necesidades específicas", "todos", "nadie", "los niños"], "quien tenga necesidades específicas"]
       ],
+      vf: [["I lavori riguardano l'ascensore.", "vero"], ["I lavori durano un mese.", "falso"], ["I lavori costano mille euro.", "non si dice"]],
       hunt: { label: "Tocá los conectores formales (pertanto, qualora, durante…)", targets: ["pertanto", "qualora", "durante", "tale"] } },
 
     { id: "w-51", week: 51, level: "C1", emoji: "✉️", title: "Lettera a me stesso",
@@ -1032,6 +1082,7 @@
         ["¿Qué le cuesta todavía?", ["el congiuntivo", "leer el diario", "entender la radio", "el passato prossimo"], "el congiuntivo"],
         ["¿Qué habría pasado si se rendía en febrero?", ["no habría llegado hasta acá", "hablaría mejor", "nada", "habría viajado"], "no habría llegado hasta acá"]
       ],
+      vf: [["È passato un anno da quando ha cominciato a studiare.", "vero"], ["Il congiuntivo non è più un problema.", "falso"], ["Ha studiato in Italia.", "non si dice"]],
       hunt: { label: "Tocá los congiuntivi y el condizionale (sia, fossi, saresti)", targets: ["sia", "fossi", "saresti"] } },
 
     { id: "w-52", week: 52, level: "C1", emoji: "🎓", title: "Il giorno dell'esame",
@@ -1053,9 +1104,11 @@
         ["¿Sobre qué tuvo que argumentar?", ["el trabajo desde casa", "la economía", "la universidad", "el deporte"], "el trabajo desde casa"],
         ["¿A quién llamó al final?", ["a su profesora", "a su madre", "a un periodista", "a la universidad"], "a su profesora"]
       ],
+      vf: [["La prova di ascolto è stata la più difficile.", "vero"], ["Martina ha saputo il risultato il giorno stesso.", "falso"], ["Martina ha preso il voto massimo.", "non si dice"]],
       hunt: { label: "Tocá los verbos en passato remoto", targets: ["fu", "sentì", "arrivò", "lesse", "chiamò"] } }
   ];
 
+  // «Vero, falso o non si dice?»: comprehension in Italian, as in the CILS.
   var api = { TESTI: TESTI };
   if (typeof module === "object" && module.exports) module.exports = api;
   else root.LettureSettimana = api;

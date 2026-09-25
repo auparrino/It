@@ -1105,6 +1105,13 @@
                type: "choice", prompt: "Comprensión", stem: q[0],
                options: shuffle(q[1]), answer: q[2], accept: [q[2]], withText: true };
     });
+    // Comprehension in Italian (CILS, CELI): true, false or not said.
+    (ep.vf || []).forEach(function (x, i) {
+      out.push({ id: "lettura:" + ep.id + ":vf" + i, src: "lettura", ep: ep.id, type: "choice",
+                 prompt: "Vero, falso o non si dice?", stem: x[0], options: ["vero", "falso", "non si dice"],
+                 answer: x[1], accept: [x[1]], withText: true,
+                 note: x[1] === "non si dice" ? "El texto no lo dice: no alcanza con que sea posible." : "" });
+    });
     out.push({ id: "caccia:" + ep.id, src: "lettura", ep: ep.id, type: "hunt",
                prompt: "Caccia alle forme · " + ep.grammar, stem: ep.hunt.label,
                answer: ep.hunt.targets.join(", ") });

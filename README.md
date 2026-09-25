@@ -81,7 +81,12 @@ tu teléfono**. No usa cuentas ni servidores; la IA es opcional, con una clave g
 
 - **La settimana**: 52 textos cortos (80 a 110 palabras) escritos a mano,
   uno por semana, jefes incluidos, con la gramática de esa semana y palabras
-  ya vistas o glosadas. Reemplazan al cuento generado con IA. `tools/check_letture.py` controla
+  ya vistas o glosadas. Reemplazan al cuento generado con IA.
+  Cada uno trae, además de las preguntas, **tres afirmaciones en italiano
+  para juzgar: *vero*, *falso* o *non si dice***, el formato de la
+  comprensión lectora del CILS y el CELI: hay que entender el texto en
+  italiano, no reconocer una respuesta. En el percorso es la misión
+  «Lectura y comprensión». `tools/check_letture.py` controla
   que la gramática no pase de la semana y que queden como mucho tres
   palabras desconocidas sin glosa (Jeon & Day 2016; Hu & Nation 2000).
 - **Glosas de opción múltiple**: en cada lectura, tres o cuatro palabras
@@ -211,6 +216,14 @@ tónico y un dictado por fragmentos.
 - **Dictado por fragmentos**: oraciones del banco de la semana, con las
   dobles y las tildes contadas.
 - La Pausa caffè trae un ítem de escucha, y *Allena* tiene el módulo libre.
+
+**Voces reales en Suoni** (`docs/js/voci.js`): las palabras de los pares
+mínimos suenan con grabaciones de hablantes reales de Lingua Libre
+(Wikimedia Commons, CC BY-SA 4.0), un hablante distinto en cada toque y
+con su nombre a la vista; *Io* lista los créditos. La app las busca desde el
+teléfono la primera vez y el service worker guarda el audio para usarlo sin
+conexión; si no hay grabación (o es un par de vocal abierta/cerrada), suena
+la voz del teléfono. Lo que falta (Common Voice) está en `VOCES.md`.
 
 ### 📝 Dictogloss
 
