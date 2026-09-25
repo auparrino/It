@@ -65,7 +65,7 @@ const NAMES = { it: { today: "Oggi", me: "Io", other: "pt" }, pt: { today: "Hoje
 
   for (const code of langs) {
     const N = NAMES[code], P = (n) => code + "-" + n;
-    const page = await newPage("light");
+    const page = await newPage("light"); global.lastPage = page;
     // the first visit: the language picker
     await page.goto(base + "?test", { waitUntil: "networkidle" });
     await page.waitForSelector(".pick-lang[data-lang='" + code + "']", { timeout: 10000 });
@@ -262,4 +262,12 @@ const NAMES = { it: { today: "Oggi", me: "Io", other: "pt" }, pt: { today: "Hoje
   await browser.close();
   srv.kill();
   process.exit(errors.length ? 1 : 0);
-})().catch(e => { console.log("SMOKE FAIL", e.message.split("\n")[0]); console.log((global.seen || []).join("\n")); console.log((global.errors || []).join("\n")); process.exit(2); });
+})().catch(async e => {
+  // Where it got stuck: the text on screen and, with SHOTS, a capture.
+  try {
+    if (global.lastPage) {
+      console.log("pantalla:", (await global.lastPage.textContent("#app")).replace(/\s+/g, " ").slice(0, 300));
+      if (process.env.SHOTS) await global.lastPage.screenshot({ path: require("path").join(process.env.SHOTS, "fallo.png") });
+    }
+  } catch (x) { /* la página ya no está */ }
+  console.log("SMOKE FAIL", e.message.split("\n")[0]); console.log((global.seen || []).join("\n")); console.log((global.errors || []).join("\n")); process.exit(2); });

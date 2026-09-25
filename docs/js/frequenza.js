@@ -8,7 +8,7 @@
  * palabras conocidas (Dugan et al. 2026).
  *
  * Datos: data/frequenza.json del paquete de cada idioma.  Lo que es de la
- * lengua viene de window.FREQ_DATA (en letture_data.js): letters (las
+ * lengua viene de window.FREQ_DATA (en lang/<código>/freq_data.js): letters (las
  * letras, una clase de regex), elision (partir l'amico en l', amico), STOP
  * (las palabras gramaticales, que nunca cuentan como desconocidas),
  * stopLemmas (contar también el lema de esas palabras),

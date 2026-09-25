@@ -23,7 +23,6 @@
     lingualibre: { q: "Q652", code: "ita", tag: "ita" },
     themeColor: { light: "#7dbdf0", dark: "#12356a" },
     hyphenWords: false,         // «-» is not part of a word (it is in Portuguese: chama-se)
-    skipPersons: [],            // every person of the conjugator is marked in the lessons
 
     /* Spanish or Italian?  What is read aloud after an answer is only the
        language studied: a Spanish gloss or option is never read with the
@@ -50,9 +49,6 @@
 
     // Lesson highlighting: grammar words that are never marked.
     hlStop: { la: 1, il: 1, lo: 1, le: 1, i: 1, gli: 1, un: 1, una: 1, uno: 1, e: 1, di: 1, a: 1, "in": 1, che: 1, non: 1, da: 1, per: 1, con: 1, si: 1, mi: 1, ti: 1 },
-
-    // The week of each rule of Ponte (lab.js RULES ids).
-    ponteWeek: { zione: 2, ta: 3, bile: 4, tt: 5, dittonghi: 6, effe: 7, pi: 8, aggio: 9, colte: 10 },
 
     // A pair of Suoni with a real speaker, except these categories (the
     // file name cannot tell pèsca from pésca).

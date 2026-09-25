@@ -9,6 +9,7 @@
     "test:pt": "node tools/pt/test_conjugator.js && node tools/pt/test_game.js && node tools/pt/test_frasi.js && node tools/pt/test_diagnosi.js && node tools/pt/test_scrivi.js && node tools/pt/test_memoria.js && node tools/pt/test_suoni.js",
     "build": "python3 tools/it/build_bank.py && python3 tools/it/build_course.py && python3 tools/pt/build_bank.py && python3 tools/pt/build_course.py",
     "sim": "node tools/it/sim_carriera.js && node tools/pt/sim_carriera.js",
+    "smoke": "NODE_PATH=$(npm root -g) node tools/lib/smoke_browser.js",
     "start": "cd docs && python3 -m http.server 8000"
   },
   "license": "UNLICENSED"

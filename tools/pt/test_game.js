@@ -425,7 +425,7 @@ ok(Drills.dueCount(course, state) >= 30, "las fichas vencidas vuelven a la cola"
   ok(L.ui.tabs.length === 5 && L.ui.tabs[0][2] === "Hoje" && L.ui.tabs[4][2] === "Eu", "las pestañas: Hoje … Eu");
   ok(L.spanish.sure.test("¿Qué tal?") && L.spanish.notEs.test("Não sei") && !L.spanish.sure.test("Tudo bem?"), "español o portugués: ñ ¿ ¡ -ción / ã õ ç -ção");
   ok(L.glue("-se") === "prev" && L.glue("se") === null, "hueco con guion: chama-se se pega a la palabra de antes");
-  ok(L.skipPersons.indexOf(4) >= 0, "vós no se marca en las lecciones");
+  ok(L.rules.persons.skip.indexOf(4) >= 0, "vós no se marca en las lecciones (LANG.rules.persons.skip)");
 })();
 
 console.log("\ncontroles: " + checks + "   errores: " + fails);

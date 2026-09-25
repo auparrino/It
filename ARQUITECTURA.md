@@ -13,7 +13,8 @@ docs/
                         letture, duelli, suoni, voci, frequenza, app
   css/app.css           la estructura (usa los tokens del tema)
   fonts/, icons/        lo común (Atkinson Hyperlegible, el ícono de la app)
-  sw.js                 un service worker para todo
+  sw.js                 un service worker para todo: el núcleo siempre,
+                        el paquete del idioma en uso (el otro, a demanda)
   lang/it/, lang/pt/    un paquete por idioma:
     lang.js             window.LANG: código, marca, TTS, prefijo de guardado,
                         textos de la interfaz (pestañas, secciones, rangos…)
@@ -26,10 +27,14 @@ docs/
     scrivi.js           la escritura libre (window.Scrivi)
     *_data.js           el contenido de frases, laboratorio, lecturas,
                         duelos, sonidos, dictogloss, examen
+    freq_data.js        la capa de frecuencia: letras, palabras vacías,
+                        lemas, pseudopalabras
     data/*.json         curso, banco, glosario, frecuencia (los compila tools/)
-    audio/, fonts/, icons/
+    audio/, fonts/
 tools/
   lib/pack.js           carga un idioma completo en node, en el orden de boot.js
+  lib/smoke_browser.js  recorre los dos idiomas en Chromium (selector, cambio
+                        de idioma, pantallas, service worker)
   it/, pt/              las herramientas y los tests de cada idioma
 ```
 

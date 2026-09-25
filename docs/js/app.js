@@ -1226,6 +1226,8 @@
      week marks sia, abbia / seja, tenha… in its examples.  Only weeks about
      a tense, and minus the forms the present shares. */
   var tenseForms = {};
+  // The persons the language does not use (LANG.rules.persons.skip: vós).
+  var SKIP_PERSONS = ((LG.rules || {}).persons || {}).skip || [];
   function weekTenseForms(w) {
     if (!w || tenseForms[w.week]) return (w && tenseForms[w.week]) || [];
     var ts = (w.tenses || []).filter(function (t) { return (t !== "presente" || w.week === 5 || w.week === 6) && (!Conj.TENSE_LABELS || Conj.TENSE_LABELS[t]); });
@@ -1237,7 +1239,7 @@
       Object.keys(Conj.VERBS).forEach(function (v) {
         try {
           Conj.conjugate(v, t).forEach(function (f, pi) {
-            if ((LG.skipPersons || []).indexOf(pi) >= 0) return;          // vós: never marked
+            if (SKIP_PERSONS.indexOf(pi) >= 0) return;          // vós: never marked
             String(f).toLowerCase().split(/\s+/).forEach(function (x) { if (x.length >= 2 && !pres[x] && !HL_STOP[x]) out[x] = 1; });
           });
         } catch (e) { /* un verbo sin ese tiempo */ }
@@ -1470,12 +1472,11 @@
      entrenamiento, frases, lectura, laboratorio) es una misión de la semana,
      en orden.  Las pestañas de entrenar y leer quedan como atajos libres,
      pero el camino ordenado es este. */
-  // The week of each rule of Ponte: the rule's own «week» (lab.js) or, if it
-  // has none, the language's table (LANG.ponteWeek), or its place in the
-  // list from week 2.
-  var PONTE_WEEK = LG.ponteWeek || {};
-  function ponteWeek(r, k) { return +r.week || PONTE_WEEK[r.id] || Math.min(10, 2 + k); }
-  function falsiWeek() { return (window.Lab && +Lab.FALSI_WEEK) || 11; }
+  // The week of each rule of Ponte: the rule's own «week» (LAB_DATA) or, if
+  // it has none, its place in the list from week 2; the false friends come
+  // in Lab.FALSI_WEEK.
+  function ponteWeek(r, k) { return +r.week || Math.min(10, 2 + k); }
+  function falsiWeek() { return (window.Lab && +Lab.FALSI_WEEK) || 0; }
 
   // Martín's episodes open in order: an episode never lands before the one
   // that precedes it in the story.

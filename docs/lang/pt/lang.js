@@ -36,7 +36,6 @@
     lingualibre: { q: "Q5146", code: "por", tag: "por" },
     themeColor: { light: "#9fdcea", dark: "#071a26" },
     hyphenWords: true,            // chama-se, fala-se: the hyphen is inside a word
-    skipPersons: [4],             // vós: never marked in the lessons
 
     /* Spanish or Portuguese?  What is read aloud after an answer is only
        Portuguese: a Spanish gloss or option is never read with the
@@ -65,11 +64,6 @@
 
     hlStop: { o: 1, a: 1, os: 1, as: 1, um: 1, uma: 1, e: 1, de: 1, em: 1, no: 1, na: 1, "do": 1, da: 1, ao: 1,
               que: 1, "não": 1, por: 1, para: 1, com: 1, se: 1, me: 1, te: 1, eu: 1, "é": 1 },
-
-    // The week of each rule of Ponte when the rule has no «week» of its own
-    // (lab.js): likely ids; otherwise its place in the list from week 2.
-    ponteWeek: { cao: 2, cion: 2, "ção": 2, dade: 3, dad: 3, vel: 4, ble: 4, nh: 5, lh: 5, "nh-lh": 5,
-                 ue: 6, ditongos: 6, ie: 7, f: 8, h: 8, agem: 9, aje: 9, pl: 10, cl: 10 },
 
     // Portuguese spelling writes the accents, so avó / avô can be told
     // apart by the file name: every pair may use a real speaker.
