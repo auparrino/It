@@ -802,12 +802,14 @@
     if (Lab && Lab.BY_ID[id]) return Lab.item(id);
     if (Banca && id.indexOf("b:") === 0) return Banca.item(id);
     if (Duelli && id.indexOf("duel:") === 0) return Duelli.reviewItem(id);
+    if (root.EscrituraPlus && id.indexOf("ep:") === 0) return root.EscrituraPlus.reviewItem(id, opts && opts.state);   // reformulación
     return null;
   }
 
   function knownId(map, id) {
     return !!(map[id] || (id.indexOf("v:") === 0 && VOC && VOC[id.slice(2)]) || (Frasi && Frasi.BY_ID[id]) || (Lab && Lab.BY_ID[id]) ||
               (Banca && Banca.loaded() && id.indexOf("b:") === 0 && Banca.item(id)) ||
+              (root.EscrituraPlus && id.indexOf("ep:") === 0) ||
               (Duelli && id.indexOf("duel:") === 0 && !!Duelli.reviewItem(id)));
   }
 

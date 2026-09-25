@@ -367,3 +367,27 @@ html[data-lang="pick"] header.top, html[data-lang="pick"] nav.nav { display: non
 .desglose:not([open]) summary::after { content: " ▸"; }
 .desglose ul { margin: 6px 0 0; padding-left: 18px; }
 .desglose li { margin: 3px 0; line-height: 1.35; }
+
+/* Escritura plus: tres vueltas y reformulación (docs/js/escritura_plus.js) */
+.ep-entry .tab { flex: 1 1 auto; }
+.ep-head h2 { font-size: 1.2rem; }
+.ep-task { font-weight: 600; }
+.ep-timerrow { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; }
+.ep-round { font-weight: 700; }
+.ep-timer { font-family: var(--mono); font-size: 1.6rem; font-weight: 800; letter-spacing: .02em; }
+.ep-timer.low { color: #d9432a; animation: ep-pulse 1s ease-in-out infinite; }
+@keyframes ep-pulse { 50% { opacity: .55; } }
+table.ep-cmp td:first-child { text-align: left; }
+table.ep-cmp td, table.ep-cmp th { text-align: center; padding: 4px 6px; }
+.ep-up { color: #1d9b58; font-weight: 800; }
+.ep-down { color: #d9432a; font-weight: 800; }
+.ep-lines { padding-left: 18px; margin: 10px 0; }
+.ep-lines li { margin: 4px 0; }
+.ep-texts summary { cursor: pointer; font-weight: 700; margin-top: 8px; }
+.ep-mine { line-height: 1.7; }
+.ep-diff { line-height: 2; overflow-wrap: anywhere; }
+.ep-diff .w { padding: 2px 1px; display: inline-block; }
+.ep-diff .w.ep-missed { text-decoration: underline dashed; text-underline-offset: 4px; }
+.ep-diff .w.ep-nope { animation: ep-shake .35s ease; background: color-mix(in srgb, currentColor 10%, transparent); }
+@keyframes ep-shake { 25% { transform: translateX(-3px); } 75% { transform: translateX(3px); } }
+@media (prefers-color-scheme: dark) { .ep-up { color: #34c47a; } .ep-down, .ep-timer.low { color: #f0674a; } }

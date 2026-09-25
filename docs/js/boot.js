@@ -43,6 +43,7 @@
     { lang: "ascolto_data.js" }, { lang: "dictogloss_data.js" }, { lang: "esame_data.js" }, { lang: "voci_cv_data.js" },
     { core: "suoni.js" },
     { lang: "duelli_data.js" }, { core: "duelli.js" },
+    { lang: "escritura_plus_data.js" }, { core: "escritura_plus.js" },
     { core: "voci.js" }, { core: "drills.js" }, { core: "desglose.js" }, { core: "app.js" }
   ];
 

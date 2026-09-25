@@ -3386,6 +3386,7 @@
     else if (s === "lettura") html = renderLettura(Letture.byId(view.ep));
     else if (s === "lezione") html = renderLezione();
     else if (s === "scrivi") html = renderScrivi(course.weeks[view.week - 1]);
+    else if (s === "eplus" && window.EscrituraPlus) html = EscrituraPlus.render(epHost());
     else if (s === "dictogloss") html = renderDictogloss(course.weeks[view.week - 1]);
     else if (s === "parla") html = renderParla(course.weeks[view.week - 1]);
     else if (s === "esame") html = renderEsame();
@@ -3627,6 +3628,7 @@
     wireGioco();
     wireIo();
     wireScrivi();
+    if (view.screen === "eplus" && window.EscrituraPlus) EscrituraPlus.wire(epHost());
     wireDictogloss();
     wireLettura();
     wireParla();
@@ -4451,6 +4453,8 @@
       '<textarea id="stext" class="grow scrivi" rows="7" spellcheck="false" autocapitalize="sentences" placeholder="' + UI.scriviIn + '">' + esc(draft) + "</textarea>" +
       '<div class="row" style="margin-top:10px"><button class="btn" id="scheck">🔎 Revisar</button>' +
       '<button class="tab" id="smodel">👀 Ver un modelo</button></div>' +
+      (window.EscrituraPlus ? '<div class="row ep-entry" style="margin-top:8px"><button class="tab" id="eptre">⏱️ Tres vueltas: 5, 4 y 3 min</button>' +
+        '<button class="tab" id="eprif">🪞 Reformulación</button></div>' : "") +
       '<label class="muted small ltopt"><input type="checkbox" id="slt"' + (state.ltOff ? "" : " checked") + "> " +
         "Si la IA no está, pedir la corrección de LanguageTool (gratis; el texto se envía a su servidor)</label>" +
       '<p class="muted small ailine">🤖 ' + (aiKey()
@@ -4494,6 +4498,9 @@
     if (view.screen !== "scrivi") return;
     var w = course.weeks[view.week - 1], box = $("#stext");
     on("#sback", function () { view.screen = "briefing"; render(); window.scrollTo(0, 0); });
+    ["tre", "rif"].forEach(function (m) {   // escritura_plus.js
+      on("#ep" + m, function () { EscrituraPlus.start(m, w.week); view.screen = "eplus"; render(); window.scrollTo(0, 0); });
+    });
     if (!box) return;
     box.addEventListener("input", function () {
       clearTimeout(scriviTimer);
@@ -4576,6 +4583,15 @@
         });
       }
     });
+  }
+
+  /* Tres vueltas y reformulación (docs/js/escritura_plus.js): lo que el
+     módulo necesita de la app. */
+  function epHost() {
+    return { state: state, week: course.weeks[view.week - 1], esc: esc, mk: mk, UI: UI, persist: persist, gain: gain,
+             toast: toast, aiKeys: aiKeys, aiKey: aiKey, lexicon: scriviLexicon,
+             rerender: function () { if (view.screen === "eplus") render(); },
+             back: function () { EscrituraPlus.stop(); view.screen = "scrivi"; render(); window.scrollTo(0, 0); } };
   }
 
   function showScrivi(w, text, r, ltState) {
