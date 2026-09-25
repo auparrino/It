@@ -496,6 +496,29 @@ def main():
     with open(path, "w", encoding="utf-8") as fh:
         json.dump(bank, fh, ensure_ascii=False, separators=(",", ":"))
 
+    # La semana escrita a mano es un piso: además, las palabras que el alumno
+    # tiene que escribir (vistas en el curso, en el banco de su nivel o
+    # transparentes) y la gramática que no es un tiempo (contracciones,
+    # posesivos, clíticos, gerúndio, números…): tools/lib/semanas_banco.py
+    # con tools/pt/rasgos_banco.py.  Necesita el banco ya escrito (el léxico
+    # lo lee del disco).
+    rep = None
+    try:
+        sys.path.insert(0, os.path.join(ROOT, "tools", "lib"))
+        import rasgos_banco
+        import semanas_banco
+        rep = semanas_banco.run(bank, rasgos_banco, "pt")
+    except subprocess.CalledProcessError as e:        # sin node: sin léxico de formas
+        warn("semanas: no se pudo leer el léxico de formas (%s)" % e)
+    if rep:
+        with open(path, "w", encoding="utf-8") as fh:
+            json.dump(bank, fh, ensure_ascii=False, separators=(",", ":"))
+        print("semanas: %d oraciones (traducir) y %d huecos esperan a su vocabulario o su gramática; "
+              "%d errores" % (rep["sentences"], rep["sentences_wg"], rep["errors"]))
+        if rep["unknown"]:
+            print("  palabras del banco que no aparecen en ningún lado: %s" % ", ".join(
+                "%s %d" % x for x in rep["unknown"][:25]))
+
     for p in problems[:80]:
         print("  ! " + p)
     if len(problems) > 80:

@@ -18,6 +18,9 @@ var bank = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "..", "docs", "
 bank.verbs.forEach(function (v) {
   if (!v[4]) Conj.register(v[0], { es: v[1], aux: v[2], isc: v[3] });
 });
+// The irregular verbs of the bank (piovere, succedere, crescere…), described
+// in tools/it/verbi_irregolari.js: their tenses count too.
+require(path.join(__dirname, "verbi_irregolari.js")).install(Conj, bank.verbs.filter(function (v) { return v[4]; }));
 
 var simple = {};        // forma -> [tempi]
 var participles = {};   // participio (4 desinenze) -> [ausiliari]
@@ -56,7 +59,10 @@ Conj.list().forEach(function (inf) {
     var pp = Conj.participle(inf);
     var ausiliare = info.refl ? "essere" : info.aux;
     ["o", "a", "i", "e"].forEach(function (e) {
-      add(participles, pp.replace(/[oaie]$/, e), ausiliare);
+      // «both» (piovere, crescere, vivere): è piovuto and ha piovuto
+      (ausiliare === "both" ? ["essere", "avere"] : [ausiliare]).forEach(function (a) {
+        add(participles, pp.replace(/[oaie]$/, e), a);
+      });
       add(lemmas, pp.replace(/[oaie]$/, e), inf);
     });
   } catch (e) { /* senza participio */ }
