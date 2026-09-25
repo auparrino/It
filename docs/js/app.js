@@ -2483,6 +2483,7 @@
       '</div><div id="aiexpout"></div></div>';
 
     $("#fb").innerHTML = fb;
+    if (window.Porque) Porque.after(it, { q: q, given: given, round: round });   // 📖 ¿Por qué? · 🧐 ¿Qué tenía de malo?
     wireKeyword();
     $("#fb").querySelectorAll("[data-sg]").forEach(function (b) {
       b.onclick = function (e) { e.stopPropagation(); showGloss(stemGloss[+b.dataset.sg]); };
@@ -2683,6 +2684,7 @@
       else if (o.textContent === given) o.classList.add("wrong");
     });
     $("#next").onclick = nextItem;
+    if (window.Porque) Porque.after(it, { q: q, given: given, round: round });   // 📖 ¿Por qué? · 🧐 ¿Qué tenía de malo?
   }
 
   function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
@@ -5178,6 +5180,13 @@
       else navigator.clearAppBadge().catch(function () { /* */ });
     } catch (e) { /* */ }
   }
+
+  // «📖 ¿Por qué?» and «🧐 ¿Qué tenía de malo?» (porque.js): what it needs from here.
+  if (window.Porque) Porque.init({
+    course: function () { return course; }, state: function () { return state; }, week: function () { return view.week; },
+    renderBlock: renderBlock, mk: mk, esc: esc, speak: speak, gain: gain, persist: persist, renderHeader: renderHeader,
+    xpFly: xpFly, weekNum: weekNum, weekLabel: function (n) { return UI.theory + weekNum(n); }
+  });
 
   // Test hook (only with ?test in the URL): lets the automated playthrough
   // read the current question so it can answer right or wrong on purpose.
