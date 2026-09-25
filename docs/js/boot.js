@@ -49,6 +49,7 @@
     { lang: "duelli_data.js" }, { core: "duelli.js" },
     { lang: "devolucion_data.js" }, { core: "devolucion.js" },
     { lang: "porque_data.js" }, { core: "porque.js" },
+    { lang: "escritura_plus_data.js" }, { core: "escritura_plus.js" },
     { core: "voci.js" }, { core: "drills.js" }, { core: "desglose.js" },
     { core: "referencia.js" },
     { shared: "tres_lenguas_data.js" }, { core: "tres_lenguas.js" },
