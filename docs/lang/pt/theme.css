@@ -576,3 +576,10 @@ ul.exs.look .it { font-size: 1.08rem; color: var(--tinta); font-weight: 600; }
 /* ---- mapas de preposiciones (docs/js/mapas.js): los colores del dibujo ---- */
 :root { --mapa-tr: var(--coral); --mapa-lm: var(--mar); --mapa-soft: var(--ceu-claro);
         --mapa-ink: var(--tinta); --mapa-bg: var(--papel); --mapa-line: var(--cinza-claro); }
+
+/* --- Biblioteca: los colores del lector (docs/css/app.css usa --bx-*) --- */
+:root { --bx-ok: var(--mata-escuro); --bx-mid: var(--sol-escuro); --bx-hard: var(--coral-escuro); --bx-sub: var(--coral); --bx-line: var(--cinza-claro); }
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) { --bx-ok: var(--mata-claro); --bx-mid: var(--sol); --bx-hard: var(--coral-claro); --bx-sub: var(--sol); }
+}
+html[data-theme="dark"] { --bx-ok: var(--mata-claro); --bx-mid: var(--sol); --bx-hard: var(--coral-claro); --bx-sub: var(--sol); }

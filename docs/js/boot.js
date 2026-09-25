@@ -59,6 +59,7 @@
     { lang: "desglose_data.js" },
     { core: "voci.js" }, { core: "drills.js" }, { core: "desglose.js" },
     { core: "referencia.js" },
+    { lang: "biblioteca_data.js" }, { core: "biblioteca.js" },
     { shared: "tres_lenguas_data.js" }, { core: "tres_lenguas.js" },
     { core: "app.js" }
   ];

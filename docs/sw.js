@@ -130,6 +130,21 @@ self.addEventListener("fetch", function (e) {
     e.respondWith(lasting(null, url.href, function (res) { return res.status === 200; }));
     return;
   }
+  // The books of the Biblioteca (lang/<código>/biblioteca/): kept in the
+  // lasting cache, so a book opened once reads offline after a new version
+  // too; the copy is refreshed in the background when there is network.
+  if (/\/biblioteca\//.test(url.pathname)) {
+    e.respondWith(caches.open(VOCI).then(function (c) {
+      return c.match(e.request, { ignoreSearch: true }).then(function (hit) {
+        var net = fetch(e.request).then(function (res) {
+          if (res && res.ok) c.put(e.request, res.clone());
+          return res;
+        }).catch(function () { return hit; });
+        return hit || net;
+      });
+    }));
+    return;
+  }
   e.respondWith(caches.open(VERSION).then(function (cache) {
     return cache.match(e.request, { ignoreSearch: true }).then(function (hit) {
       var net = fetch(e.request).then(function (res) {
