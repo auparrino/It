@@ -1222,6 +1222,7 @@ def main() -> None:
     import lessico
     import sillabo
     from bank.esempi import ESEMPI, NON_PAROLE
+    from bank.consigli import TIPS
     by_id_all = {i["id"]: i for i in course["items"]}
     # Bank sentences whose grammar («w») is already taught can illustrate a
     # word its own week does not show in a full sentence.
@@ -1324,6 +1325,9 @@ def main() -> None:
             # may use the word in another sense, or be a false statement of a
             # true/false exercise).
             entry[2] = ESEMPI.get(key) or (best_ex[1] if best_ex else (bank_example(key, w["week"]) or ""))
+            # how the word is used: gender, preposition, irregular forms,
+            # the contrast with Spanish (tools/bank/consigli.py)
+            entry.append(TIPS.get(key, ""))
         n = 12 if w["week"] <= 26 else 15
         best = sorted(cand.values(), key=lambda v: -freq[v[0]])[:0 if w["boss"] else n]
         w["vocab"] = best

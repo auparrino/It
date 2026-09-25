@@ -631,7 +631,7 @@
 
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION in sw.js: test_game checks it). */
-  var APP_VERSION = "v1.55";
+  var APP_VERSION = "v1.56";
   function versionLine() {
     return '<p class="muted small version">La Via C1 · versión ' + APP_VERSION + "</p>";
   }
@@ -1858,6 +1858,7 @@
         '<div class="badge-new">📚 Palabra nueva</div>' +
         '<div class="fit big">' + esc(wv[0]) + "</div>" +
         '<div class="fes">' + esc(wv[1]) + "</div>" +
+        (wv[3] ? '<div class="call tip"><b>Cómo se usa</b><p>' + mk(wv[3]) + "</p></div>" : "") +
         (wv[2] ? '<div class="note">' + esc(wv[2]) + "</div>" : "") +
         '<div class="row" style="margin-top:14px"><button class="btn ghost" id="sayit">🔊 Escuchar</button></div>' +
         '<p class="muted">Decila en voz alta: en un rato te pregunto qué significa.</p>' +
