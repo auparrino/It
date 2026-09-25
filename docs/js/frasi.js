@@ -178,7 +178,11 @@
     return root.Lezione || (typeof require === "function" ? (function () { try { return require("./lezione.js"); } catch (e) { return null; } })() : null);
   }
 
-  function tableTraps(T, sentence, rnd) {
+  function tableTraps(T, sentence, rnd, week) {
+    // T.from: the week each table starts to count (a contraction is not a
+    // trap before the week that teaches it).
+    var from = T.from || {};
+    var on = function (k) { return !from[k] || (week || 52) >= from[k]; };
     var toks = String(sentence).split(" ");
     var rule = [], soft = [];
     var has = function (o, k) { return !!o && Object.prototype.hasOwnProperty.call(o, k); };
@@ -192,14 +196,14 @@
         if (w[0] !== low[0]) nw = nw.charAt(0).toUpperCase() + nw.slice(1);
         var c = toks.slice(); c[i] = m[1] + nw + m[3]; bag.push(c.join(" "));
       };
-      if (has(T.span, low)) {
+      if (on("span") && has(T.span, low)) {
         // alone at the end of the sentence it can be another word (muito → mucho, not muy)
         put(!hasNext && has(T.alone, low) ? T.alone[low] : T.span[low], rule);
       }
-      if (has(T.contr, low) && hasNext) put(T.contr[low], rule);
-      if (has(T.art, low) && hasNext) put(T.art[low], soft);
-      if (T.spell) T.spell(low).forEach(function (x) { put(x, rule); });
-      if (T.loose) T.loose(low).forEach(function (x) { put(x, soft); });
+      if (on("contr") && has(T.contr, low) && hasNext) put(T.contr[low], rule);
+      if (on("art") && has(T.art, low) && hasNext) put(T.art[low], soft);
+      if (on("spell") && T.spell) T.spell(low).forEach(function (x) { put(x, rule); });
+      if (on("loose") && T.loose) T.loose(low).forEach(function (x) { put(x, soft); });
     });
     var same = words(sentence).join(" ");
     var clean = function (l) {
@@ -209,13 +213,51 @@
     return r.concat(clean(soft).filter(function (c) { return r.indexOf(c) < 0; }));
   }
 
-  function traps(sentence, rnd) {
+  /* week: the week of the phrase's scene.  The traps test only the grammar
+     taught by then (no «em o» before the contractions, no «lo bagno»
+     before the articles); without a week, everything (52). */
+  function traps(sentence, rnd, week) {
     rnd = rnd || Math.random;
-    if (DATA.traps) return tableTraps(DATA.traps, sentence, rnd);
+    week = week || 52;
+    if (DATA.traps) return tableTraps(DATA.traps, sentence, rnd, week);
     var Lz = lezione();
     if (!Lz || !Lz.traps) return [];
     var same = words(sentence).join(" ");
-    return Lz.traps(sentence, rnd, 52, null, true).filter(function (t) { return words(t).join(" ") !== same; });
+    return Lz.traps(sentence, rnd, week, null, true).filter(function (t) { return words(t).join(" ") !== same; });
+  }
+
+  /* The same phrase with a word that always goes first (FRASI_DATA.glue:
+     article, preposition, clitic) swapped with the next one (a palavra →
+     palavra a, ci vediamo → vediamo ci): wrong by its form, never by its
+     sense, and never another right order (Não sei / Sei não).  The
+     punctuation stays where it was. */
+  var GLUE = {};
+  (DATA.glue || []).forEach(function (w) { GLUE[w] = true; });
+  function orderVariants(sentence) {
+    var toks = String(sentence).split(" ");
+    var parts = toks.map(function (t) {
+      var m = t.match(/^([«"(¿¡]*)(.*?)([.,;:!?»")…]*)$/);
+      return { pre: m[1], w: m[2], post: m[3] };
+    });
+    var out = [];
+    for (var i = 0; i + 1 < parts.length; i++) {
+      var a = parts[i], b = parts[i + 1];
+      // not across a comma or a stop, not with a name or a quoted word
+      if (!a.w || !b.w || a.post || b.pre || a.pre || /[«"]/.test(b.post)) continue;
+      if (!GLUE[a.w.toLowerCase()] || a.w.toLowerCase() === b.w.toLowerCase()) continue;
+      if ((i > 0 && PROPER[a.w]) || PROPER[b.w] || !/^[A-Za-zÀ-ÿ']+$/.test(b.w)) continue;
+      var c = parts.map(function (p) { return { pre: p.pre, w: p.w, post: p.post }; });
+      var first = a.w.charAt(0) !== a.w.charAt(0).toLowerCase();
+      var wa = b.w, wb = a.w;
+      if (first) {
+        wa = wa.charAt(0).toUpperCase() + wa.slice(1);
+        if (!PROPER[wb]) wb = wb.charAt(0).toLowerCase() + wb.slice(1);
+      }
+      c[i].w = wa; c[i + 1].w = wb;
+      out.push(c.map(function (p) { return p.pre + p.w + p.post; }).join(" "));
+    }
+    var same = words(sentence).join(" ");
+    return uniq(out).filter(function (o) { return words(o).join(" ") !== same; });
   }
 
   /* --------------------------------------------------------- ejercicios */
@@ -334,30 +376,67 @@
      recuerdo, aun cuando se falla (Kornell, Hays & Bjork 2009; Richland,
      Kornell & Kao 2009).  No cuesta vidas ni entra en el repaso.
      Las opciones son la misma frase con el error del hispanohablante
-     (Grazie mile, Muy obrigado, Vamos a la praia): se adivina por la forma,
-     nunca por el sentido.  Lo que tiene menos de dos versiones así se
-     completa con las frases más parecidas. */
-  function guessItem(f) {
-    var same = words(f.it).join(" ");
-    var tr = traps(f.it).filter(function (t) { return words(t).join(" ") !== same; });
-    var others = tr.slice(0, 2);
+     (Grazie mile, Muy obrigado, Vamos a la praia), con solo la gramática
+     ya enseñada en la semana de la escena: se adivina por la forma, nunca
+     por el sentido.  Nunca otra frase entera: si no alcanzan las trampas,
+     la misma frase con dos errores o con dos palabras cambiadas de lugar,
+     y si tampoco, dos opciones.  Sin ninguna versión equivocada posible
+     no hay «Adiviná»: null, y la frase se presenta con su tarjeta.
+     `why` marca las opciones armadas sin una regla del diagnóstico (el
+     orden), para poder decir qué tienen de malo. */
+  function guessItem(f, rnd) {
+    rnd = rnd || Math.random;
+    var seen = {};
+    seen[words(f.it).join(" ")] = true;
+    var fresh = function (t) { var k = words(t).join(" "); if (seen[k]) return false; seen[k] = true; return true; };
+    var others = traps(f.it, rnd, f.week).filter(fresh).slice(0, 2);
+    var why = {};
     // Only one mistake possible: the second option carries two.
     if (others.length === 1) {
-      var two = traps(others[0]).filter(function (t) {
-        return words(t).join(" ") !== same && words(t).join(" ") !== words(others[0]).join(" ");
-      })[0];
+      var two = traps(others[0], rnd, f.week).filter(fresh)[0];
       if (two) others.push(two);
     }
-    if (others.length < 2) similar(f, 4, "it").forEach(function (g) {
-      if (others.length < 2 && others.indexOf(g.it) < 0) others.push(g.it);
-    });
+    // Still short: the same words in another order.
+    if (others.length < 2) {
+      shuffle(orderVariants(f.it), rnd).filter(fresh).slice(0, 2 - others.length).forEach(function (o) {
+        others.push(o); why[o] = "order";
+      });
+    }
+    if (!others.length) return null;
     return {
       id: f.id, frase: f, src: "frasi", type: "guess",
       prompt: "Adiviná antes de aprenderla: ¿cuál está bien? (no pasa nada si le errás)",
       stem: f.es,
-      options: shuffle([f.it].concat(others)),
-      answer: f.it, accept: [f.it], note: f.note
+      options: shuffle([f.it].concat(others), rnd),
+      answer: f.it, accept: [f.it], note: f.note, why: why
     };
+  }
+
+  /* What a wrong option of the «Adiviná» changes, in words: the fallback
+     when the diagnosis of the language has nothing specific to say
+     («Tu opción dice *dos* donde va *dois*.»). */
+  function explainOption(option, it) {
+    var clean = function (s) { return tiles(s).map(function (t) { return t.replace(/^[.,!?;:…"¿¡()]+|[.,!?;:…"()]+$/g, ""); }); };
+    var o = clean(option), a = clean(it.answer);
+    var low = function (x) { return x.toLowerCase(); };
+    var i = 0;
+    while (i < o.length && i < a.length && low(o[i]) === low(a[i])) i++;
+    var j = 0;
+    while (j < o.length - i && j < a.length - i && low(o[o.length - 1 - j]) === low(a[a.length - 1 - j])) j++;
+    var bad = o.slice(i, o.length - j).join(" "), good = a.slice(i, a.length - j).join(" ");
+    if (it.why && it.why[option] === "order") {
+      return "Es el orden: se dice *" + low(good) + "*, no *" + low(bad) + "*. El artículo, la preposición y el pronombre van antes de su palabra.";
+    }
+    if (!bad && !good) return "";
+    if (!bad) return "A tu opción le falta *" + good + "*.";
+    if (!good) return "Tu opción tiene *" + bad + "* de más.";
+    return "Tu opción dice *" + bad + "* donde va *" + good + "*.";
+  }
+
+  // The «Frase nueva» card (afterGuess: it comes right after its «Adiviná»).
+  function introItem(f, afterGuess) {
+    return { id: f.id, frase: f, src: "frasi", type: "intro",
+             prompt: "Frase nueva", stem: f.it, answer: f.it, note: f.note, afterGuess: !!afterGuess };
   }
 
   function pickItem(f, opts) {
@@ -368,7 +447,10 @@
     // recognised (tiles); once it is known, it has to be produced.
     var kinds = opts.silent ? ["tiles", "cloze", "flash", "write", "write"]
                             : ["tiles", "cloze", "listen", "dictation", "flash", "write", "write"];
-    if (opts.fresh) kinds = ["tiles", "tiles", "cloze"];
+    // A phrase met for the first time today is recognised before it is
+    // produced: tiles (the words are given) or its meaning by ear; writing
+    // it from memory waits for another session.
+    if (opts.fresh) kinds = opts.silent ? ["tiles"] : ["tiles", "tiles", "listen"];
     var k = kinds[Math.floor(Math.random() * kinds.length)];
     return k === "tiles" ? tilesItem(f) : k === "listen" ? listenItem(f)
          : k === "write" ? writeItem(f) : k === "cloze" ? clozeItem(f)
@@ -386,11 +468,14 @@
     // each session visibly moves the counter (4 a session felt like repeats).
     var newOnes = fresh.slice(0, opts.newCount || 6);
     var out = [];
-    // Each new phrase appears twice: once to meet it (guessed before being
-    // shown, or presented), once to retrieve it.  More phrases, fewer repeats.
+    // Each new phrase is met (half of them guessed first, and then always
+    // shown on its «Frase nueva» card, with its note and how it is built),
+    // then recognised later in the session: tiles or by ear, never written
+    // from memory the day it was first seen.
     newOnes.forEach(function (f, i) {
-      out.push(i % 2 === 0 ? guessItem(f) : { id: f.id, frase: f, src: "frasi", type: "intro",
-                 prompt: "Frase nueva", stem: f.it, answer: f.it, note: f.note });
+      var g = i % 2 === 0 ? guessItem(f) : null;
+      if (g) out.push(g);
+      out.push(introItem(f, !!g));
     });
     var isNew = {};
     newOnes.forEach(function (f) { isNew[f.id] = true; });
@@ -400,8 +485,7 @@
     });
     var drill = newOnes.concat(byAge.slice(0, Math.max(0, 10 - newOnes.length)));
     shuffle(drill).forEach(function (f) {
-      // New ones are recalled by writing them half the time: that is the retrieval.
-      out.push(isNew[f.id] && Math.random() < 0.5 ? writeItem(f) : pickItem(f, { silent: opts.silent, fresh: isNew[f.id] }));
+      out.push(pickItem(f, { silent: opts.silent, fresh: isNew[f.id] }));
     });
     return out;
   }
@@ -448,6 +532,9 @@
     clozeItem: clozeItem,
     dictationItem: dictationItem,
     guessItem: guessItem,
+    introItem: introItem,
+    explainOption: explainOption,
+    orderVariants: orderVariants,
     flashItem: flashItem,
     pickItem: pickItem,
     sceneSession: sceneSession,

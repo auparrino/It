@@ -367,3 +367,12 @@ html[data-lang="pick"] header.top, html[data-lang="pick"] nav.nav { display: non
 .desglose:not([open]) summary::after { content: " ▸"; }
 .desglose ul { margin: 6px 0 0; padding-left: 18px; }
 .desglose li { margin: 3px 0; line-height: 1.35; }
+
+/* ---------------------------------------------- fix-frases: Treino, «Adiviná», fórmulas */
+
+.scene.locked, .scene:disabled { opacity: .5; cursor: not-allowed; }
+.scene:disabled:active { transform: none; }
+.note.formula { border-left: 3px solid var(--oro, var(--sol, #e0b020)); padding-left: 8px; }
+.formule-list li { display: grid; gap: 2px; }
+.formule-list .it b { background: color-mix(in srgb, var(--oro, var(--sol, #e0b020)) 35%, transparent); border-radius: 3px; padding: 0 2px; }
+.blk.formule { border-left: 3px solid var(--oro, var(--sol, #e0b020)); padding-left: 10px; margin-bottom: 14px; }

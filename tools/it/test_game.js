@@ -292,14 +292,17 @@ ok(Drills.dueCount(course, state) >= 30, "le schede scadute rientrano in coda");
   });
 })();
 
-// «Adiviná»: tres opciones distintas y parecidas a la frase (la misma frase
-// con un error, casi siempre), nunca otra frase entera si hay trampas.
+// «Adiviná»: dos o tres opciones distintas, todas la misma frase (con un
+// error o con el orden cambiado), nunca otra frase entera.
 (function () {
   var Frasi = ctx.Frasi;
-  var far = 0;
+  var far = 0, none = 0;
   Frasi.ALL.forEach(function (f) {
     var g = Frasi.guessItem(f);
-    ok(g.options.length === 3 && g.options.indexOf(f.it) >= 0 && new Set(g.options).size === 3, "adiviná: opciones " + f.id);
+    // no possible mistake (Prego!, Sério?): no «Adiviná», the phrase is presented
+    if (!g) { none++; return; }
+    ok(g.options.length >= 2 && g.options.length <= 3 && g.options.indexOf(f.it) >= 0 &&
+       new Set(g.options).size === g.options.length, "adiviná: opciones " + f.id);
     // near: at most a third of the letters changed (Esato / Esatto, Me chiamo / Mi chiamo)
     var lev = function (a, b) {
       var d = [], i, j;
@@ -310,12 +313,16 @@ ok(Drills.dueCount(course, state) >= 30, "le schede scadute rientrano in coda");
       return d[a.length][b.length];
     };
     var near = g.options.filter(function (o) {
-      return o !== f.it && lev(o.toLowerCase(), f.it.toLowerCase()) <= f.it.length / 3;
+      // (short ones: the same number of words, Saúde! / Salud!, and never an existing phrase)
+      return o !== f.it && !Frasi.ALL.some(function (h) { return h.it === o; }) &&
+        (lev(o.toLowerCase(), f.it.toLowerCase()) <= f.it.length / 3 || g.why[o] === "order" ||
+         o.split(" ").length === f.it.split(" ").length);
     });
-    if (!near.length) far++;
+    // every wrong option is the same phrase: never another whole phrase
+    if (near.length !== g.options.length - 1) far++;
   });
-  // the few interjections with no possible mistake (Prego!, Magari!) take the most similar phrases
-  ok(far <= Frasi.ALL.length * 0.07, "adiviná: frases sin ninguna opción parecida: " + far);
+  ok(far === 0, "adiviná: opciones que no son la misma frase: " + far);
+  ok(none <= Frasi.ALL.length * 0.07, "adiviná: frases sin ningún error posible: " + none);
 })();
 
 // Glosas de opción múltiple: la respuesta entre tres opciones distintas.

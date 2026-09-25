@@ -95,10 +95,11 @@ var cards = {};
 Frasi.SCENES.forEach(function (s) {
   var sess = Frasi.sceneSession(s.id, cards, {});
   // A new phrase is met once (presented or guessed) and retrieved once.
-  var intros = sess.filter(function (it) { return it.type === "intro" || it.type === "guess"; });
+  // (a guessed one is also shown on its card: «Adiviná», then «Frase nueva»)
+  var intros = sess.filter(function (it) { return it.type === "intro"; });
   ok(intros.length === 6, "6 frasi nuove per sessione: " + s.id);
   var times = {}; sess.forEach(function (it) { times[it.id] = (times[it.id] || 0) + 1; });
-  ok(Object.keys(times).every(function (k) { return times[k] <= 2; }), "ogni frase al massimo 2 volte per sessione: " + s.id);
+  ok(Object.keys(times).every(function (k) { return times[k] <= 3; }), "ogni frase al massimo 3 volte per sessione: " + s.id);
   ok(sess.length >= 8, "sessione troppo corta: " + s.id);
   sess.forEach(function (it) {
     ok(it.answer && it.frase && Frasi.BY_ID[it.id], "item di scena malformato: " + s.id);
@@ -238,7 +239,8 @@ Frasi.ALL.forEach(function (f) {
     ok(Engine.grade(c.answer, c) === "giusto", "cloze: la parola è accettata: " + f.id);
   }
   var g = Frasi.guessItem(f);
-  ok(g.options.indexOf(f.it) >= 0 && uniq(g.options) && g.options.length === 3,
+  // null: no possible mistake, the phrase is presented; else 2 or 3 options
+  ok(!g || (g.options.indexOf(f.it) >= 0 && uniq(g.options) && g.options.length >= 2 && g.options.length <= 3),
      "indovina: opzioni valide: " + f.id);
   ok(Frasi.gradeWritten(f.it, Frasi.dictationItem(f).answer).verdict === "giusto",
      "dettato accetta la frase: " + f.id);

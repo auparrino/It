@@ -815,13 +815,15 @@
     Frasi.SCENES.forEach(function (s) {
       var p = Frasi.progress(s.id, state.cards);
       var pct = Math.round(p.seen / p.total * 100);
-      html += '<button class="scene' + (p.seen === p.total ? " done" : "") +
-        '" data-scene="' + s.id + '">' +
-        '<span class="e">' + s.emoji + "</span>" +
+      // A scene opens with its week: its phrases use the grammar seen by then.
+      var sw = Drills.sceneWeek(s.id), shut = sw > (state.unlocked || 1);
+      html += '<button class="scene' + (p.seen === p.total ? " done" : "") + (shut ? " locked" : "") +
+        '" data-scene="' + s.id + '"' + (shut ? " disabled" : "") + ">" +
+        '<span class="e">' + (shut ? "🔒" : s.emoji) + "</span>" +
         "<b>" + esc(s.name) + "</b>" +
         '<span class="muted">' + esc(s.blurb) + "</span>" +
-        '<span class="meta">' + p.seen + "/" + p.total + " vistas · " +
-          p.strong + " firmes</span>" +
+        '<span class="meta">' + (shut ? "Se abre en la semana " + sw :
+          p.seen + "/" + p.total + " vistas · " + p.strong + " firmes") + "</span>" +
         '<span class="prog"><i style="width:' + pct + '%"></i></span>' +
         "</button>";
     });
@@ -1332,6 +1334,10 @@
       '<p class="lead">' + esc(w.title) + '</p>' +
       '<div class="lesson"><p class="intro">' + mk(L.intro) + '</p>';
 
+    if (window.Formule) {
+      var fb = Formule.bridge(w.week, state.cards);
+      if (fb.length) html += '<section class="blk formule">' + formuleBridgeHtml(fb.map(function (x) { return x.f.id; }), w.week) + "</section>";
+    }
     L.blocks.forEach(function (b, i) { html += renderBlock(b, i); });
 
     html += "</div>" +
@@ -1359,6 +1365,8 @@
     les = { w: w, sess: sess, part: cur ? cur.part : null,
             steps: Lezione.steps(w.lesson, Math.random, w.week, isWord, cur ? cur.blocks : null),
             i: 0, right: 0, asked: 0, answered: false };
+    // «Ya lo venías usando»: the phrases that used this week's grammar as a formula
+    if (window.Formule) Formule.addStep(les.steps, w.week, state.cards);
     view.screen = "lezione";
     render();
     savePending();
@@ -1396,6 +1404,10 @@
       return hudH + '<div class="card lescard"><div class="badge-new">📘 Lección · semana ' + w.week + partLabel + "</div>" +
         "<h1>" + esc(w.title) + "</h1><p class=\"intro\">" + mk(w.lesson.intro) + "</p>" +
         '<button class="btn wide" id="lesnext">Empezar →</button></div>';
+    }
+    if (st.kind === "formule") {
+      return hudH + '<div class="card lescard formule">' + formuleBridgeHtml(st.ids, w.week) +
+        '<button class="btn wide" id="lesnext">Seguir →</button></div>';
     }
     if (st.kind === "look" || st.kind === "rule" || st.kind === "table" || st.kind === "trap") {
       var bk = w.lesson.blocks[st.i];
@@ -1772,7 +1784,10 @@
     else if (kind === "debil") items = Drills.buildWeak(course, w, state, { map: itemMap, size: 15 });
     else if (kind === "domina") items = Drills.buildDomina(course, w, state, { map: itemMap, silent: state.silent });
     else if (kind === "review") items = Drills.buildReview(course, state, 20, drillOpts());
-    else if (kind === "scene") items = Frasi.sceneSession(arg, state.cards, drillOpts());
+    else if (kind === "scene") {
+      if (Drills.sceneWeek(arg) > (state.unlocked || 1)) { toast("Se abre en la semana " + Drills.sceneWeek(arg) + "."); return; }
+      items = Frasi.sceneSession(arg, state.cards, drillOpts());
+    }
     else if (kind === "pausa") {
       w = course.weeks[Math.min(state.unlocked, 52) - 1];
       view.week = w.week;
@@ -1933,21 +1948,23 @@
       });
     var prompt = (it.retry ? '<div class="badge-new">🔁 Segunda vez, más fácil</div>' : "") +
       '<div class="prompt">' + esc(it.prompt || "") + "</div>" +
+      (it.type === "guess" ? formulaHtml(it.frase) : "") +
       (it.retry && it.note && !it.recog ? '<div class="note">📐 ' + mk(it.note) + "</div>" : "");
 
     if (it.type === "intro") {
       return hud() + '<div class="card intro">' +
-        '<div class="badge-new">✨ ' + esc(it.prompt) + "</div>" +
+        '<div class="badge-new">✨ ' + esc(it.prompt) + (it.afterGuess ? " · la que acabás de adivinar" : "") + "</div>" +
         '<div class="fit big">' + esc(it.frase.it) + "</div>" +
         '<div class="fes">' + esc(it.frase.es) + "</div>" +
+        formulaHtml(it.frase) +
         (it.note ? '<div class="call tip"><b>Cómo se arma</b><p>' + mk(it.note) + "</p></div>" : "") +
         desgloseHtml(it.frase.t || it.frase.it, true) +
         '<div class="row" style="margin-top:14px">' +
           '<button class="btn ghost" id="sayit">🔊 Escuchar</button>' +
           '<button class="btn ghost" id="slow">🐢 Lento</button>' +
         "</div>" +
-        '<p class="muted">Leela dos veces y tratá de imaginarte diciéndola: ' +
-          "en un rato te la voy a pedir de memoria.</p>" +
+        '<p class="muted">Leela dos veces y fijate cómo se arma: ' +
+          "en un rato la vas a reconocer y a armar con fichas.</p>" +
         '<button class="btn wide" id="next">La tengo →</button>' +
         "</div>";
     }
@@ -2566,6 +2583,52 @@
     return copy;
   }
 
+  /* «Adiviná» with the wrong option: what was wrong with *that* option
+     (Kornell, Hays & Bjork 2009: the pretest helps when the feedback
+     explains).  The diagnosis of the language when it has something
+     specific to say; else what the option changes (Frasi.explainOption). */
+  function guessWhy(it, given) {
+    if (!given || given === it.answer) return "";
+    var d = null;
+    if (!(it.why && it.why[given]) && window.Diagnosi && Diagnosi.explainChoice) {
+      try { d = Diagnosi.explainChoice(given, it.answer, {}); } catch (e) { d = null; }
+    }
+    // a «typo» or an empty answer says nothing about a fabricated option
+    if (d && d.cat && d.explain && !UNRECORDED[d.cat]) {
+      return diagHtml(d, true);
+    }
+    var t = Frasi.explainOption ? Frasi.explainOption(given, it) : "";
+    return t ? '<div class="diag"><span class="tag">Tu opción</span><p>' + mk(t) + "</p></div>" : "";
+  }
+
+  // «🧱 Fórmula fija»: a phrase that uses the grammar of a later week.
+  function formulaHtml(f) {
+    var t = window.Formule && f ? Formule.line(f, state.unlocked) : "";
+    return t ? '<div class="note formula">' + mk(t) + "</div>" : "";
+  }
+
+  /* «Ya lo venías usando»: in the lesson of a week, the phrases that used
+     its grammar as a formula, with the form marked (Ellis 2002: the
+     formula becomes a case of the rule). */
+  function formuleBridgeHtml(ids, wk) {
+    var rows = (ids || []).map(function (id) { return Frasi.BY_ID[id]; }).filter(Boolean).map(function (f) {
+      var forms = (Formule.of(f).filter(function (x) { return x[0] === wk; })[0] || [0, ""])[1];
+      var html = esc(f.it);
+      String(forms).split(/,\s*/).filter(Boolean).forEach(function (x) {
+        var re = new RegExp("(^|[^A-Za-zÀ-ÿ'])(" + x.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")(?![A-Za-zÀ-ÿ])", "i");
+        html = html.replace(re, "$1<b>$2</b>");
+      });
+      var seen = !!state.cards[f.id];
+      return '<li><span class="it">' + html + '</span><span class="es">' + esc(f.es) +
+        (seen ? "" : ' <span class="muted small">· de la escena «' + esc((Frasi.scene(f.scene) || {}).name || "") + "»</span>") + "</span></li>";
+    });
+    if (!rows.length) return "";
+    return '<div class="badge-new">🧱 Ya lo venías usando</div>' +
+      "<p>Estas frases las aprendiste enteras, como fórmulas. Lo marcado es justo lo que esta semana " +
+      "tiene su regla: ahora sabés por qué se arman así.</p>" +
+      '<ul class="exs formule-list">' + rows.join("") + "</ul>";
+  }
+
   function settleGuess(it, q, given) {
     var gained = q === 2 ? 5 : 2;
     round.xp += gained;
@@ -2574,8 +2637,9 @@
     renderHeader();
     if (q === 2) fx.right(); else fx.tap();
     $("#fb").innerHTML = '<div class="feedback ' + (q === 2 ? "giusto" : "quasi") + '">' +
-      '<div class="verdict">' + (q === 2 ? "¡Buen olfato!" : "Era esta. Ahora ya la conocés.") +
+      '<div class="verdict">' + (q === 2 ? "¡Buen olfato!" : "Era esta. Mirá qué tenía tu opción:") +
         ' <span class="xpgain">+' + gained + " xp</span></div>" +
+      (q === 2 ? "" : guessWhy(it, given)) +
       '<div class="sol">' + esc(it.answer) + "</div>" +
       (it.note ? '<div class="note">' + mk(it.note) + "</div>" : "") +
       desgloseHtml(targetText(it), true) +
