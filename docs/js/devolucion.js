@@ -154,7 +154,9 @@
     }).join("").replace(/'/g, "['’]");
   }
   function maskOne(text, w) {
-    var re = new RegExp("(^|[^\\p{L}\\p{N}'’])(" + foldRe(w) + ")(?=$|[^\\p{L}\\p{N}])", "giu");
+    // after an elided article too (l’ennesima), when the word is not tiny
+    var pre = String(w).length >= 3 ? "(^|[^\\p{L}\\p{N}])" : "(^|[^\\p{L}\\p{N}'’])";
+    var re = new RegExp(pre + "(" + foldRe(w) + ")(?=$|[^\\p{L}\\p{N}])", "giu");
     return text.replace(re, "$1___");
   }
   /* The rule of the note with the answer covered: on the second try the
