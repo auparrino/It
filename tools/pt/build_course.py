@@ -228,6 +228,7 @@ def main():
 
     # Las partes de la lección: cada ejercicio va a la parte que declara
     # («part»); si no declara, a la última.
+    unparted = []
     for wk in weeks:
         lesson = wk["lesson"] or {}
         parts = lesson.get("parts")
@@ -239,9 +240,19 @@ def main():
             it = by_id[iid]
             k = it.get("part") if int(it["w"]) == wk["week"] else None
             if not isinstance(k, int) or not 0 <= k < len(parts):
+                if int(it["w"]) == wk["week"]:
+                    # sin «part» cae en la última parte, que quizá no es la suya
+                    unparted.append((wk["week"], iid, parts[-1]["h"]))
                 k = len(parts) - 1 if int(it["w"]) == wk["week"] else _review_part(it, parts)
             compiled[k]["items"].append(iid)
         wk["parts"] = compiled
+    if unparted:
+        per = {}
+        for w, iid, h in unparted:
+            per.setdefault((w, h), []).append(iid)
+        print("aviso: %d ítems sin «part» van a la última parte de su semana:" % len(unparted))
+        for (w, h), ids in sorted(per.items()):
+            print("    semana %d, «%s»: %d (%s…)" % (w, h, len(ids), ids[0]))
 
     # Las palabras de la semana: [palabra, significado, ejemplo].  Una
     # palabra se enseña una sola vez: en la primera semana que la trae.

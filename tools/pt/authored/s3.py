@@ -217,7 +217,7 @@ sc(0, ["Quando eu falar com ela, te conto.", "Quando eu fizer o bolo, te chamo."
    "¿De dónde sale la forma del verbo después de «quando» (futuro)?",
    ["De la 3.ª persona plural del perfeito sin -ram (fizeram → fizer).",
     "Del presente de subjuntivo (faça → faça).",
-    "Del infinitivo, siempre igual (fazer → fazer)."],
+    "Del infinitivo, siempre igual (fazer → fazer, ter → ter, poder → poder)."],
    "De la 3.ª persona plural del perfeito sin -ram (fizeram → fizer).",
    "Regla: tronco de eles en el perfeito: falaram → falar, fizeram → fizer, tiveram → tiver, foram → for. En los regulares coincide con el infinitivo.")
 sc(2, ["Se você quiser, a gente vai.", "Se chover, fico em casa.", "Quando ele chegar, jantamos.",
@@ -368,7 +368,7 @@ sc(1, ["Se eu tivesse tempo, viajaria.", "Se ele pudesse, ajudaria.", "Se choves
        "Se você viesse, seria ótimo.", "Se nós soubéssemos, contaríamos.", "Se fosse barato, eu compraria."],
    "¿Qué tiempo va en cada mitad de la hipótesis?",
    ["Imperfeito do subjuntivo tras «se»; futuro do pretérito en la otra mitad.",
-    "Futuro do pretérito tras «se»; imperfeito do subjuntivo en la otra.",
+    "Futuro do pretérito tras «se»; imperfeito do subjuntivo en la otra mitad.",
     "Imperfeito do subjuntivo en las dos mitades."],
    "Imperfeito do subjuntivo tras «se»; futuro do pretérito en la otra mitad.",
    "Regla: se + imperfeito do subjuntivo, y consecuencia en futuro do pretérito (en el habla, imperfeito de indicativo).")
@@ -955,7 +955,7 @@ sc(0, ["Vende-se casa.", "Vendem-se casas.", "Aluga-se quarto.", "Alugam-se quar
    "¿Cuándo el verbo con «se» va en plural?",
    ["Cuando la cosa es plural y el verbo no lleva preposición.",
     "Siempre que la cosa es plural.",
-    "Nunca: con «se» el verbo va siempre en singular."],
+    "Nunca: con «se» el verbo va siempre en singular, sea cual sea la cosa."],
    "Cuando la cosa es plural y el verbo no lleva preposición.",
    "Regla: sin preposición, la cosa es sujeto y concuerda (vendem-se casas); con preposición, singular (precisa-se de garçons).")
 sc(1, ["Dizem que vai chover.", "Roubaram meu celular.", "Ligaram pra você.",
@@ -963,7 +963,7 @@ sc(1, ["Dizem que vai chover.", "Roubaram meu celular.", "Ligaram pra você.",
    "¿Cómo se expresa un sujeto que no se conoce o no importa?",
    ["Con el verbo en 3.ª plural, sin pronombre sujeto.",
     "Con «eles» delante del verbo.",
-    "Con «se» delante de cualquier verbo."],
+    "Con «se» delante de cualquier verbo, en 3.ª singular."],
    "Con el verbo en 3.ª plural, sin pronombre sujeto.",
    "Regla: sujeto indeterminado = 3.ª plural sin eles (roubaram, dizem). Con «eles», hablás de personas concretas.")
 
@@ -1409,7 +1409,7 @@ sc(0, ["Assisti ao jogo.", "Assistimos a um show.", "O médico assiste o pacient
    "¿Cuándo «assistir» lleva «a»?",
    ["Cuando significa «ver, presenciar»; sin «a» significa «atender, ayudar».",
     "Siempre lleva «a».",
-    "Solo cuando el objeto es una persona."],
+    "Solo cuando el objeto es una persona; con cosas (o jogo, o filme), sin «a»."],
    "Cuando significa «ver, presenciar»; sin «a» significa «atender, ayudar».",
    "Regla: assistir a (espectáculo) = ver; assistir alguém = atender. En el habla se dice assistir o jogo, pero en un texto, assistir ao jogo.")
 sc(1, ["Espero o ônibus.", "Ajudei a Ana.", "Visitei meus avós.", "Convidei o Rafa.", "Conheço a Bia.", "Vi o João."],
@@ -1558,7 +1558,7 @@ sc(1, ["Vou à Lapa. / Volto da Lapa.", "Vou à Bahia. / Volto da Bahia.", "Vou 
        "Vou a Ipanema. / Volto de Ipanema.", "Vou à Tijuca. / Volto da Tijuca.", "Vou a Salvador. / Volto de Salvador."],
    "¿Cómo sabés si un lugar lleva crase?",
    ["Si al volver decís «da», va crase; si decís «de», no.",
-    "Todos los barrios de Río llevan crase.",
+    "Todos los barrios de Río llevan crase; las ciudades, nunca.",
     "Solo las ciudades llevan crase."],
    "Si al volver decís «da», va crase; si decís «de», no.",
    "Regla: vou a, volto da, crase há; vou a, volto de, crase pra quê?")
@@ -1690,7 +1690,7 @@ sc(0, ["ter → tenho / manter → mantenho", "ter → teve / obter → obteve",
    "¿Cómo se conjugan los derivados de ter, vir, pôr y ver?",
    ["Exactamente como el verbo base, con el prefijo delante.",
     "Como verbos regulares en -er / -ir.",
-    "Como el verbo base solo en presente."],
+    "Como el verbo base solo en presente; en el pasado, regulares."],
    "Exactamente como el verbo base, con el prefijo delante.",
    "Regla: manter, obter, conter (ter); intervir, convir (vir); propor, compor, supor (pôr); prever, rever (ver).")
 sc(2, ["passear → passeio", "frear → freio", "odiar → odeio", "mediar → medeio", "copiar → copio", "anunciar → anuncio"],
@@ -1828,7 +1828,7 @@ sc(0, ["Tá quente hoje, né?", "Você vem, né?", "Ele é carioca, né?", "Tá 
    "¿Para qué sirve «né» al final de la frase?",
    ["Para pedir acuerdo al que escucha, como «¿no?» o «¿viste?».",
     "Para negar lo que se acaba de decir.",
-    "Para hacer una pregunta formal de sí o no."],
+    "Para hacer una pregunta formal de sí o no, como «¿es cierto que…?»."],
    "Para pedir acuerdo al que escucha, como «¿no?» o «¿viste?».",
    "Regla: né (de não é) es una muletilla de acuerdo. No niega nada.")
 sc(1, ["Cadê o Rafa?", "Cadê meu celular?", "Cadê vocês?", "Cadê as chaves?", "Cadê a Bia?", "Cadê o biscoito?"],
