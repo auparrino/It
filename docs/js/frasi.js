@@ -388,7 +388,15 @@
     rnd = rnd || Math.random;
     var seen = {};
     seen[words(f.it).join(" ")] = true;
-    var fresh = function (t) { var k = words(t).join(" "); if (seen[k]) return false; seen[k] = true; return true; };
+    var n0 = words(f.it).length;
+    var fresh = function (t) {
+      var k = words(t).join(" ");
+      // a one- or two-word phrase keeps its shape: «Dai!» is «come on!», not
+      // «da + i» to be split into «Da il!»
+      if (seen[k] || (n0 <= 2 && words(t).length !== n0)) return false;
+      seen[k] = true;
+      return true;
+    };
     var others = traps(f.it, rnd, f.week).filter(fresh).slice(0, 2);
     var why = {};
     // Only one mistake possible: the second option carries two.
