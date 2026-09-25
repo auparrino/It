@@ -795,6 +795,7 @@
         }).join("") + "</div>" +
         '<p class="muted science">🔬 Intercalar formas que se parecen (Brunmair y Richter 2019) y explicar por qué (Bisra et al. 2018).</p>';
     }
+    if (window.TresLenguas) html += TresLenguas.card(state);   // italiano ↔ portugués ↔ español (js/tres_lenguas.js)
 
     if (Banca.loaded()) {
       var st = Banca.stats(), weak = Banca.weakest(state, 2);
@@ -3491,6 +3492,7 @@
     else if (s === "storia") html = renderStoria(course.weeks[view.week - 1]);
     else if (s === "gramatica") html = Referencia.page();
     else if (s === "ubicacion" && window.Ubicacion) html = Ubicacion.html();
+    else if (s === "tres" && window.TresLenguas) html = TresLenguas.render(state);
 
     var gb = $("#glossbox");
     if (gb) gb.classList.remove("on");
@@ -3589,6 +3591,9 @@
     on("#toggi", function () { go("oggi"); });
     on("#ubicgo", startUbicacion);
     on("#ubicno", function () { state.ubicacion = { at: Date.now(), no: true }; persist(); render(); });
+    if (window.TresLenguas) TresLenguas.wire(app(), {
+      show: function () { view.tab = "frasi"; view.screen = "tres"; render(); window.scrollTo(0, 0); },
+      back: function () { go("frasi"); }, gain: function (n) { gain(n); persist(); renderHeader(); }, toast: toast });
 
     // hoje
     on("#pausa", function () { startRound("pausa"); });

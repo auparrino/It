@@ -37,7 +37,7 @@ function pack(code, opts) {
   vm.createContext(ctx);
   var stop = opts.upTo || "app.js";
   for (var i = 0; i < Boot.ORDER.length; i++) {
-    var e = Boot.ORDER[i], name = e.lang || e.core;
+    var e = Boot.ORDER[i], name = e.lang || e.core || e.shared;
     if (name === stop && !opts.includeStop) break;
     var f = file(e, code);
     if (!fs.existsSync(f)) {

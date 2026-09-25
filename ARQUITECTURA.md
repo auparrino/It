@@ -31,6 +31,9 @@ docs/
                         lemas, pseudopalabras
     data/*.json         curso, banco, glosario, frecuencia (los compila tools/)
     audio/, fonts/
+  lang/tres_lenguas_data.js   lo de los dos idiomas juntos (modo «Tres lenguas»,
+                        js/tres_lenguas.js): contrastes it ↔ pt ↔ es, el duelo
+                        y las palabras que delatan la otra lengua
 tools/
   lib/pack.js           carga un idioma completo en node, en el orden de boot.js
   lib/smoke_browser.js  recorre los dos idiomas en Chromium (selector, cambio
