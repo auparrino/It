@@ -370,9 +370,6 @@ aciertos.
 
 ### 📌 Hábito
 
-- **Tu plan**: «cuando ___, abro la app N minutos en ___» (intención de
-  implementación, Gollwitzer & Sheeran 2006: d = 0,65 en 94 estudios). Va al
-  recordatorio del calendario.
 - **Tu meta**: para qué querés italiano, con tus palabras (el yo ideal de
   Dörnyei; Al-Hoorie 2018).
 - **Esta semana**: la cuota de palabras nuevas hacia el próximo jefe, que se

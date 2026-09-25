@@ -508,21 +508,12 @@
     if (away >= 3 && state.totals.attempts > 0) {
       html += '<div class="card weekcard first ritorno"><span class="muted">👋 Volviste después de ' + away + " días</span>" +
         "<b>Lo que aprendiste no se borró: re-aprender lleva una fracción del tiempo.</b>" +
-        '<span class="muted">' + (fresh === "semana" ? "Y es lunes: buen día para retomar el plan. " : fresh === "mes" ? "Y empieza el mes: reiniciamos el plan. " : "") +
+        '<span class="muted">' + (fresh === "semana" ? "Y es lunes: buen día para retomar. " : fresh === "mes" ? "Y empieza el mes: buen momento para volver. " : "") +
           "Cinco minutos con lo que más se enfrió y seguimos" + (ideal ? " hacia lo tuyo: «" + esc(ideal) + "»" : "") + ".</span>" +
         '<span class="row" style="margin-top:10px"><button class="btn" id="ritorno">▶︎ 5 minutos para retomar</button></span>' +
         (state.pauseAsk !== Engine.dayKey() ? '<span class="muted small">¿Qué pasó? <button class="tab" data-why="tiempo">sin tiempo</button> ' +
           '<button class="tab" data-why="dificil">se puso difícil</button> <button class="tab" data-why="aburrido">me aburrí</button> ' +
           '<button class="tab" data-why="olvide">me olvidé</button></span>' : "") + "</div>";
-    }
-    if (!state.plan && state.totals.attempts >= 30) {
-      html += '<div class="card weekcard"><span class="muted">📌 Un plan concreto rinde más que la voluntad</span>' +
-        "<b>«Cuando ___, abro la app cinco minutos en ___»</b>" +
-        '<span class="muted">Decidir de antemano cuándo y dónde duplica la chance de hacerlo (Gollwitzer). Se arma en un minuto.</span>' +
-        '<span class="row" style="margin-top:10px"><button class="btn" id="toplan">Armar mi plan</button></span></div>';
-    } else if (state.plan) {
-      html += '<p class="muted small planline">📌 Tu plan: cuando <b>' + esc(state.plan.when) + "</b>, " + state.plan.min + " min en <b>" + esc(state.plan.where) + "</b>" +
-        " · hoy " + ses + " / 3 sesiones" + (Engine.weekStreak(state) ? " · " + Engine.weekStreak(state) + " semanas seguidas con 3 días" : "") + "</p>";
     }
     if (!state.ideal && state.totals.attempts >= 10) {
       html += '<div class="card weekcard"><span class="muted">🎯 ¿Para qué querés italiano?</span>' +
@@ -612,7 +603,6 @@
         render();
       };
     });
-    on("#toplan", function () { go("io"); var c = $("#plancard"); if (c) c.scrollIntoView({ block: "start" }); });
     document.querySelectorAll("[data-why2]").forEach(function (b) {
       b.onclick = function () {
         var w = WHY.filter(function (x) { return x[0] === b.dataset.why2; })[0];
@@ -641,7 +631,7 @@
 
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION in sw.js: test_game checks it). */
-  var APP_VERSION = "v1.52";
+  var APP_VERSION = "v1.53";
   function versionLine() {
     return '<p class="muted small version">La Via C1 · versión ' + APP_VERSION + "</p>";
   }
@@ -2731,10 +2721,6 @@
         }).join("") + "</table>" +
         (wrong.length > 10 ? '<p class="muted">y ' + (wrong.length - 10) + " más en el ripasso.</p>" : "");
     }
-    if (!state.plan && state.totals.attempts <= 120) {
-      html += '<p class="muted" style="margin-top:12px">📌 Tres minutos por día rinden más que una hora el domingo. ' +
-        '<button class="tab" id="toremind">Armar mi plan (cuándo y dónde)</button></p>';
-    }
 
     html += '<div class="row" style="margin-top:16px">' +
       (round.from === "briefing" ? '<button class="btn" id="backweek">← Seguir el percorso</button>' : "") +
@@ -2981,19 +2967,12 @@
       "</div></div>" + versionLine();
   }
 
-  /* Piano, meta e record: l'intenzione d'implementazione («quando X, apro
-     l'app N minuti in Y»), il «yo ideal» con le parole dell'alunno, i
-     record personali e la scheda da condividere. */
+  /* Meta e record: il «yo ideal» con le parole dell'alunno, i record
+     personali e la scheda da condividere. */
   function planCard() {
-    var pl = state.plan || {}, id = state.ideal || {}, rec = state.records || {};
+    var id = state.ideal || {}, rec = state.records || {};
     var why = WHY.filter(function (w) { return w[0] === id.why; })[0];
-    return '<div class="card" id="plancard"><h2>📌 Tu plan</h2>' +
-      '<p class="muted small">Una intención de implementación: cuándo y dónde, decidido de antemano (Gollwitzer y Sheeran 2006: d = 0,65 en 94 estudios).</p>' +
-      '<label class="set"><span>Cuando…<small>por ejemplo: termine el café de la mañana</small></span><input id="planwhen" maxlength="60" value="' + esc(pl.when || "") + '" placeholder="termine el café"></label>' +
-      '<label class="set"><span>…abro la app</span><select id="planmin">' + [2, 5, 10, 15].map(function (m) { return '<option value="' + m + '"' + ((pl.min || 5) === m ? " selected" : "") + ">" + m + " minutos</option>"; }).join("") + "</select></label>" +
-      '<label class="set"><span>en…<small>el lugar de siempre</small></span><input id="planwhere" maxlength="60" value="' + esc(pl.where || "") + '" placeholder="la cocina"></label>' +
-      '<div class="row"><button class="btn" id="plansave">Guardar el plan</button></div>' +
-      '<h3>🎯 Tu meta</h3>' +
+    return '<div class="card" id="plancard"><h2>🎯 Tu meta</h2>' +
       '<span class="chips">' + WHY.map(function (w) { return '<button class="tab' + (id.why === w[0] ? " on" : "") + '" data-why3="' + w[0] + '">' + w[1] + "</button>"; }).join("") + "</span>" +
       '<label class="set"><span>Con tus palabras<small>«En seis meses pido un café en Nápoles sin pensar»</small></span></label>' +
       '<div class="typed"><input id="idealtext" maxlength="120" value="' + esc(id.text || "") + '" placeholder="En seis meses…"><button class="tab" id="idealsave">Guardar</button></div>' +
@@ -3196,7 +3175,7 @@
       "DTSTART:" + local,
       "DTEND:" + localEnd,
       "RRULE:FREQ=DAILY",
-      "SUMMARY:☕ " + (state.plan ? "Cuando " + state.plan.when + ": " + state.plan.min + " min de italiano" : "Pausa caffè: 3 minutos de italiano"),
+      "SUMMARY:☕ Pausa caffè: 3 minutos de italiano",
       "DESCRIPTION:Racha en juego. Abrí La Via C1: " + url,
       "URL:" + url,
       "BEGIN:VALARM", "TRIGGER:PT0M", "ACTION:DISPLAY",
@@ -3403,7 +3382,6 @@
     on("#lesquit", function () { clearPending(); view.screen = "briefing"; render(); });
     on("#resume", resumePending);
     on("#discard", function () { clearPending(); render(); });
-    on("#toremind", function () { go("io"); var c = $("#plancard"); if (c) c.scrollIntoView({ block: "start" }); });
     wireHabit();
     on("#lesback", function () { view.screen = "briefing"; render(); });
     on("#lesplay", function () {
@@ -4808,13 +4786,6 @@
       persist();
       renderHeader();
     };
-    on("#plansave", function () {
-      var when = ($("#planwhen").value || "").trim(), where = ($("#planwhere").value || "").trim();
-      if (!when || !where) return toast("Completá cuándo y dónde.");
-      state.plan = { when: when, where: where, min: +$("#planmin").value || 5, at: Date.now() };
-      persist();
-      toast("📌 Plan guardado: cuando " + when + ", " + state.plan.min + " min en " + where + ".", 3500);
-    });
     document.querySelectorAll("[data-why3]").forEach(function (b) {
       b.onclick = function () { state.ideal = Object.assign({}, state.ideal || {}, { why: b.dataset.why3, at: Date.now() }); persist(); render(); };
     });
