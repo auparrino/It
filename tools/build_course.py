@@ -1273,7 +1273,7 @@ def main() -> None:
             r, wtxt = lessico.item_texts(it)
             texts.append((r if it.get("type") != "translate" else wtxt, r + " " + wtxt))
         for b in (w.get("lesson") or {}).get("blocks", []):
-            texts += [(p[0], p[0]) for p in b.get("ex", [])]
+            texts += [(p[0].replace("*", ""), p[0].replace("*", "")) for p in b.get("ex", [])]
         for show, t in texts:
             for tok in lessico.words_of(t):
                 lm = lessico.lemma_of(tok)
@@ -1337,7 +1337,7 @@ def main() -> None:
              if i.get("type") != "translate"]
     for w in weeks:
         for b in (w.get("lesson") or {}).get("blocks", []):
-            texts += [p[0] for p in b.get("ex", [])]
+            texts += [p[0].replace("*", "") for p in b.get("ex", [])]
     with open(os.path.join(DATA, "glossario.json"), "w", encoding="utf-8") as fh:
         json.dump(lessico.gloss_table(texts), fh, ensure_ascii=False, separators=(",", ":"))
 

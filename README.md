@@ -622,6 +622,12 @@ investigación de diseño multimedia: segmentar (g ≈ 0,3) y resaltar lo
 importante (d = 0,38). La *Teoria* completa sigue disponible como
 referencia, en una sola página.
 
+La teoría de las 52 semanas está escrita para ese formato: cada bloque
+tiene 2 a 4 ejemplos con la forma que enseña marcada a mano (`*abbia*`),
+una regla de 22 palabras como máximo y el detalle en *Ojo*, *El atajo* o
+*Más detalle*. `python3 tools/check_lessons.py --estilo` lo controla
+(ejemplos, largo de la regla, forma marcada en cada ejemplo).
+
 ### Lecciones en partes
 
 Una semana cargada no se estudia de una sentada. Las semanas 1, 2, 3, 5, 6,

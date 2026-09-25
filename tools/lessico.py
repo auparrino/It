@@ -287,7 +287,7 @@ def lesson_words(course):
         txt = []
         for b in L.get("blocks", []):
             for pair in b.get("ex", []):
-                txt.append(pair[0])
+                txt.append(pair[0].replace("*", ""))    # *…* marks the form taught
             t = b.get("table")
             if t:
                 for r in t.get("rows", []):
