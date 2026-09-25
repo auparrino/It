@@ -753,11 +753,7 @@ ul.ainotes li { margin: 4px 0; }
     animation: none !important; }
 }
 
-/* --- fiducia, ipercorrezione, stanchezza --- */
-.feedback.conf { border-color: var(--azzurro); }
-.confrow { justify-content: space-between; }
-.confrow .tab { flex: 1; text-align: center; }
-.note.hyper { border-left: 3px solid var(--oro); }
+/* --- stanchezza --- */
 .note.fatigue { background: var(--travertino); margin: 0 0 10px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 .keyword { margin-top: 12px; }
 .keyword .typed input { flex: 1; min-width: 0; }

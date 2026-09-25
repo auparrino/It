@@ -160,13 +160,6 @@ mejor que SM-2 y que el algoritmo de Duolingo. Cada ficha tiene una
   espaciado (Rawson & Dunlosky 2022; Bahrick 1993; Serfaty & Serrano 2024).
   Ahora la ficha pasa a **mantenimiento**: vuelve a intervalos de meses,
   con un tope de seis por día para que la cola nunca sea una deuda.
-- **¿Qué tan seguro?** Después de responder y antes del veredicto, un
-  toque: *Seguro / Creo / Adivino*. El error con confianza es el que mejor
-  se corrige si mirás la regla ahora (hipercorrección, Butterfield &
-  Metcalfe 2001): vuelve en la misma ronda y a la mañana siguiente. Lo
-  adivinado no es conocimiento y se programa como difícil. La calibración
-  de la semana (qué porcentaje de tus «seguro» estaban mal) está en *Io*.
-  Se puede apagar.
 - **Noche y mañana.** Lo nuevo después de las 20 h se repasa al desayuno,
   con el sueño en el medio (Mazza et al. 2016: la mitad de intentos y mejor
   retención a seis meses).
