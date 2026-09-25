@@ -553,7 +553,7 @@
 
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION in sw.js: test_game checks it). */
-  var APP_VERSION = "v41";
+  var APP_VERSION = "v42";
   function versionLine() {
     return '<p class="muted small version">La Via C1 · versión ' + APP_VERSION + "</p>";
   }
@@ -1475,31 +1475,6 @@
 
   // Items of the listening module: the audio is the question.
   var SAY_TYPES = { coppia: 1, conta: 1, scegli: 1, intonazione: 1, accento: 1 };
-  var CONF_TYPES = { choice: 1, cloze: 1, translate: 1, conjugate: 1, plural: 1, numbers: 1, qa: 1, typed: 1, write: 1,
-                     dictation: 1, tiles: 1, listen: 1, fixerr: 1, combina: 1, garden: 1, scopri: 1, conta: 1, scegli: 1,
-                     coppia: 1, intonazione: 1, accento: 1, dettato: 1, pseudo: 1 };
-  /* After answering, before the verdict: «¿qué tan seguro?».  The
-     confident error is the one that gets corrected best (hypercorrection,
-     Butterfield & Metcalfe 2001); the lucky guess is not knowledge and is
-     scheduled as Hard.  Never before studying (reactive judgements). */
-  function needConf(it) {
-    return state.confOn !== false && !!CONF_TYPES[it.type] && !it.retry && !round.tried && round.kind !== "boss" &&
-      round.kind !== "esame" && !it.recog;
-  }
-  function askConf(done) {
-    round.confPending = true;
-    var fb = $("#fb");
-    if (!fb) { round.confPending = false; done(null); return; }
-    fb.innerHTML = '<div class="feedback conf"><div class="verdict">¿Qué tan seguro estás?</div>' +
-      '<div class="row confrow">' +
-        '<button class="tab" data-conf="seguro">😎 Seguro</button>' +
-        '<button class="tab" data-conf="creo">🤔 Creo</button>' +
-        '<button class="tab" data-conf="adivino">🎲 Adivino</button></div></div>';
-    fb.querySelectorAll("[data-conf]").forEach(function (b) {
-      b.onclick = function () { round.confPending = false; done(b.dataset.conf); };
-    });
-    fb.scrollIntoView({ behavior: "smooth", block: "nearest" });
-  }
   /* Fatigue: when the accuracy of the last eight answers drops twenty
      points under the session's, the round offers to stop (no new items
      are learnt tired: intra-session dropout models, Riiid 2020). */
@@ -1514,7 +1489,6 @@
     var it = currentItem();
     if (!it) return "";
     stemGloss = [];
-    round.askedAt = Date.now();
     var fatigue = "";
     if (fatigued()) {
       round.fatigueShown = true;
@@ -1726,7 +1700,7 @@
 
   // Multiple choice: say why *that* option is wrong (Shute 2008).
   function answer(given) {
-    if (round.answered || round.confPending) return;
+    if (round.answered) return;
     var it = currentItem();
     var verdict = Engine.grade(given, it);
     if (it.type === "coppia") { settle(verdict, given, pairHtml(it)); return; }
@@ -1765,7 +1739,7 @@
      earns a prompt, not the answer: the learner corrects it (Lyster & Ranta
      1997; Lyster & Saito 2010).  Slips (accents, typos) are just flagged. */
   function produce(given) {
-    if (round.answered || round.confPending) return;
+    if (round.answered) return;
     var it = currentItem();
     // Several blanks typed as «a / b» (or a | b): same as a b.
     if (/\|/.test(it.answer || "")) given = String(given).replace(/\s*[\/|]\s*/g, " ");
@@ -1905,10 +1879,6 @@
     if (round.answered) return;
     opts = opts || {};
     var it = currentItem();
-    if (it.type !== "guess" && round.conf === undefined && needConf(it)) {
-      askConf(function (c) { round.conf = c || null; settle(verdict, given, extra, opts); });
-      return;
-    }
     round.answered = true;
     if (opts.fixed) round.fixed = (round.fixed || 0) + 1;
 
@@ -1951,10 +1921,9 @@
         : q === 0 && dg && LEXICAL[dg.cat] ? "vocab" : q === 0 ? "rule" : null;
       state.cards[it.id] = Engine.schedule(state.cards[it.id], q, {
         light: light, kind: ekind, id: it.id, state: state, retry: !!it.retry, hint: !!round.tried || !!opts.fixed,
-        conf: round.conf, fast: round.askedAt ? Date.now() - round.askedAt < 4000 : false, notte: state.notte !== false });
+        notte: state.notte !== false });
       Engine.maybeFit(state);
     }
-    if (round.conf) Engine.noteConfidence(state, round.conf, q === 2);
     // Productive practice of the week's own rule, day by day (a rule is a
     // card of its own: three days of writing it right consolidate it).
     if (q === 2 && !it.recog && !it.options && !it.frase && it.src !== "coniugatore" && it.src !== "vocab" &&
@@ -1965,15 +1934,11 @@
     /* Successive relearning (Rawson & Dunlosky 2011): what you miss comes
        back later in the same session, until you get it (at most twice). */
     var relearn = "";
-    if (q === 0 && round.conf === "seguro") {
-      relearn = '<div class="note hyper">🎯 Estabas seguro y no era: los errores con confianza son los que mejor se corrigen ' +
-        "si ahora mirás bien la regla. Te la vuelvo a preguntar en un rato y mañana a la mañana.</div>";
-    }
     if (q < 2 && round.kind !== "boss" && round.kind !== "esame" && it.src !== "lettura" && !it.retry && !(round.again[it.id])) {
       round.again[it.id] = 1;
       var at = Math.min(round.items.length, round.i + 3);
       round.items.splice(at, 0, retryVersion(it));
-      if (!relearn) relearn = '<div class="note">🔁 Te la vuelvo a preguntar en un rato, más fácil.</div>';
+      relearn = '<div class="note">🔁 Te la vuelvo a preguntar en un rato, más fácil.</div>';
     }
 
     state.totals.attempts++;
@@ -2219,7 +2184,7 @@
     var p = loadPending();
     if (!p) return;
     if (p.type === "round") {
-      round = Object.assign({ answered: false, picked: [], tried: false, lastGiven: null, firstCat: null, conf: undefined, confPending: false }, p.round);
+      round = Object.assign({ answered: false, picked: [], tried: false, lastGiven: null, firstCat: null }, p.round);
       if (round.lives === null) round.lives = Infinity;
       view.week = p.week; view.tab = p.tab || "oggi"; view.screen = "gioco";
     } else {
@@ -2237,8 +2202,6 @@
     round.lastGiven = null;
     round.firstCat = null;
     round.picked = [];
-    round.conf = undefined;
-    round.confPending = false;
     if (round.i >= round.items.length) {
       finishRound();
       return;
@@ -2750,10 +2713,10 @@
 
   /* La memoria: quante schede in apprendimento, in ripasso e in
      mantenimento, la probabilità media di ricordo oggi, la velocità
-     d'oblio stimata sui propri ripassi, la calibrazione della fiducia e le
-     tre regolazioni (ritenzione, notte/mattina, domanda di fiducia). */
+     d'oblio stimata sui propri ripassi, e le regolazioni (ritenzione,
+     notte/mattina). */
   function memoriaCard() {
-    var m = Engine.memoryStats(state), cal = Engine.calibration(state), sp = state.speed || {};
+    var m = Engine.memoryStats(state), sp = state.speed || {};
     var speedLine = function (k, name) {
       var x = sp[k];
       if (!x || !x.n || x.n < 100) return name + ": todavía pocos repasos (" + ((x && x.n) || 0) + " de 100) para medir tu curva.";
@@ -2768,17 +2731,12 @@
         "<tr><td>Probabilidad media de recordarlas hoy</td><td>" + m.recall + " %</td></tr>" +
       "</table>" +
       '<p class="muted small">' + speedLine("v", "Vocabulario") + " " + speedLine("g", "Gramática") + "</p>" +
-      (cal.n >= 5 ? '<p class="muted"><b>Calibración:</b> de ' + cal.n + " respuestas «seguro» esta semana, " + cal.over + " % estaban mal" +
-        (cal.overPrev != null ? " (la semana pasada " + cal.overPrev + " %)" : "") +
-        (cal.guesses ? "; de " + cal.guesses + " «adivino», acertaste " + cal.guessRight : "") + ".</p>" : "") +
       '<label class="set"><span>Qué tan seguro querés recordar<small>menos = menos repasos por día</small></span><select id="retention">' +
         [[0.85, "Relajado · 85 %"], [0.9, "Normal · 90 %"], [0.95, "Examen · 95 %"]].map(function (r) {
           return '<option value="' + r[0] + '"' + ((state.retention || 0.9) === r[0] ? " selected" : "") + ">" + r[1] + "</option>";
         }).join("") + "</select></label>" +
       '<label class="set"><span>Noche y mañana 🌙☀️<small>lo nuevo después de las 20 h vuelve al desayuno, con el sueño en el medio</small></span>' +
         '<input type="checkbox" id="notte"' + (state.notte !== false ? " checked" : "") + "></label>" +
-      '<label class="set"><span>Preguntar «¿qué tan seguro?»<small>un toque después de cada respuesta; afina el repaso</small></span>' +
-        '<input type="checkbox" id="confon"' + (state.confOn !== false ? " checked" : "") + "></label>" +
       "</div>";
   }
 
@@ -4437,8 +4395,6 @@
     if (ret) ret.onchange = function () { state.retention = +ret.value; persist(); toast("Retención: " + Math.round(state.retention * 100) + " %"); };
     var notte = $("#notte");
     if (notte) notte.onchange = function () { state.notte = notte.checked; persist(); };
-    var confon = $("#confon");
-    if (confon) confon.onchange = function () { state.confOn = confon.checked; persist(); };
     on("#remind", function () {
       var t = $("#remtime").value || "13:30";
       state.remind = t;

@@ -35,7 +35,6 @@ const { spawn } = require("child_process");
     else if (await page.$("#reveal")) { await page.click("#reveal"); await page.click("[data-fq='2']"); }
     else break;
     await page.waitForTimeout(400);
-    if (await page.$("[data-conf]")) { await page.click("[data-conf='creo']"); await page.waitForTimeout(400); }
     if (await page.$("#next")) { await page.click("#next"); await page.waitForTimeout(400); }
   }
   await shot("pausa played, items answered");
@@ -47,7 +46,7 @@ const { spawn } = require("child_process");
   await page.waitForSelector(".bigplay, .options", { timeout: 5000 });
   const it2 = await page.evaluate(() => window.__test.item());
   await shot("suoni item: " + it2.type + " / " + it2.say);
-  if (await page.$("[data-opt]")) { await page.click("[data-opt] >> nth=0"); await page.waitForTimeout(400); if (await page.$("[data-conf]")) await page.click("[data-conf='seguro']"); }
+  if (await page.$("[data-opt]")) { await page.click("[data-opt] >> nth=0"); await page.waitForTimeout(400); }
   await page.waitForTimeout(400);
   await shot("suoni answered: " + (await page.$("#fb .feedback") ? "feedback shown" : "no feedback"));
   await page.click("#quit");

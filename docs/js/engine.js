@@ -517,7 +517,6 @@
       srsV: 2,            // versione dello scheduler (2 = FSRS)
       retention: 0.9,     // ritenzione desiderata (0.85 / 0.9 / 0.95)
       notte: true,        // nuovo di sera, ripasso al mattino
-      confOn: true,       // chiede «¿qué tan seguro?» dopo ogni risposta
       log: [],            // registro dei ripassi: [id, minuto, voto, giorni, s, tipo]
       speed: {},          // velocità d'oblio stimate: { v: {k, n}, g: {k, n} }
       conf: {},           // "aaaa-m-g" -> { seguro: [n, errori], creo: [..], adivino: [..] }
