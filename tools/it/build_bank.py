@@ -18,8 +18,8 @@ import re
 import sys
 import unicodedata
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0, os.path.join(ROOT, "tools"))
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0, os.path.join(ROOT, "tools", "it"))
 
 LEVELS = {"A1", "A2", "B1", "B2", "C1"}
 ERROR_CATS = {
@@ -234,7 +234,7 @@ def main():
         "falsi": f,
         "spelling": sp,
     }
-    path = os.path.join(ROOT, "docs", "data", "bank.json")
+    path = os.path.join(ROOT, "docs", "lang", "it", "data", "bank.json")
     with open(path, "w", encoding="utf-8") as fh:
         json.dump(bank, fh, ensure_ascii=False, separators=(",", ":"))
 

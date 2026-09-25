@@ -12,9 +12,9 @@
 "use strict";
 var path = require("path");
 var fs = require("fs");
-var Conj = require(path.join(__dirname, "..", "docs", "js", "conjugator.js"));
+var Conj = require(path.join(__dirname, "..", "..", "docs", "lang", "it", "conjugator.js"));
 
-var bank = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "docs", "data", "bank.json"), "utf8"));
+var bank = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "..", "docs", "lang", "it", "data", "bank.json"), "utf8"));
 bank.verbs.forEach(function (v) {
   if (!v[4]) Conj.register(v[0], { es: v[1], aux: v[2], isc: v[3] });
 });

@@ -28,9 +28,9 @@ import re
 import sys
 import urllib.request
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-OUT = os.path.join(ROOT, "docs", "data", "frequenza.json")
-CACHE = os.path.join(ROOT, "tools", ".cache", "frequenza")
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+OUT = os.path.join(ROOT, "docs", "lang", "it", "data", "frequenza.json")
+CACHE = os.path.join(ROOT, "tools", "it", ".cache", "frequenza")
 
 SOURCES = {
     "itwac_nouns_lemmas_notail_2_0_0.csv":

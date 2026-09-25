@@ -16,8 +16,8 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA = os.path.join(ROOT, "docs", "data")
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+DATA = os.path.join(ROOT, "docs", "lang", "it", "data")
 
 # --------------------------------------------------------------------------
 # El programa del año.  d = capítulos de "Italian Grammar For Dummies"
@@ -747,7 +747,7 @@ def split_answers(answer: str) -> list:
 def load_lessons() -> dict:
     """Import tools/lessons/*.py and merge their LESSONS dicts."""
     out = {}
-    folder = os.path.join(ROOT, "tools", "lessons")
+    folder = os.path.join(ROOT, "tools", "it", "lessons")
     for fn in sorted(os.listdir(folder)):
         if not fn.endswith(".py") or fn == "__init__.py":
             continue
@@ -823,7 +823,7 @@ def check_lesson(week: int, lesson: dict) -> list:
 def load_authored() -> list:
     """Import every tools/authored/*.py module and collect its ITEMS."""
     out = []
-    folder = os.path.join(ROOT, "tools", "authored")
+    folder = os.path.join(ROOT, "tools", "it", "authored")
     for fn in sorted(os.listdir(folder)):
         if not fn.endswith(".py"):
             continue
@@ -992,7 +992,7 @@ def main() -> None:
     # tools/audit/patches/dummies/*.json rewrites each exercise for a Spanish
     # speaker: specific instruction, blank where the answer goes, no English.
     patches = {}
-    pdir = os.path.join(ROOT, "tools", "audit", "patches", "dummies")
+    pdir = os.path.join(ROOT, "tools", "it", "audit", "patches", "dummies")
     for fn in sorted(os.listdir(pdir)) if os.path.isdir(pdir) else []:
         if fn.endswith(".json"):
             with open(os.path.join(pdir, fn), encoding="utf-8") as fh:
@@ -1133,7 +1133,7 @@ def main() -> None:
     # key: with it a challenge becomes a graded round (items "s:<id>:<label>"),
     # without it it stays self-scored.
     keys = {}
-    sdir = os.path.join(ROOT, "tools", "audit", "patches", "sfide")
+    sdir = os.path.join(ROOT, "tools", "it", "audit", "patches", "sfide")
     for fn in sorted(os.listdir(sdir)) if os.path.isdir(sdir) else []:
         if fn.endswith(".json"):
             with open(os.path.join(sdir, fn), encoding="utf-8") as fh:

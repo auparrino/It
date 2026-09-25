@@ -24,7 +24,7 @@ import os
 import re
 import subprocess
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Semana en la que la teoría presenta cada tiempo o construcción.  Si se
 # reordena el programa (WEEKS en build_course.py), esto se ajusta acá.
@@ -108,7 +108,7 @@ def nominal_forms():
     in an answer are not a present tense."""
     global _NOMI
     if _NOMI is None:
-        with open(os.path.join(ROOT, "docs", "data", "bank.json"), encoding="utf-8") as fh:
+        with open(os.path.join(ROOT, "docs", "lang", "it", "data", "bank.json"), encoding="utf-8") as fh:
             bank = json.load(fh)
         _NOMI = set()
         for n in bank["nouns"]:
@@ -124,7 +124,7 @@ def nominal_forms():
 def lexicon():
     global _LEX
     if _LEX is None:
-        out = subprocess.run(["node", os.path.join(ROOT, "tools", "forms_lexicon.js")],
+        out = subprocess.run(["node", os.path.join(ROOT, "tools", "it", "forms_lexicon.js")],
                              check=True, capture_output=True, text=True).stdout
         _LEX = json.loads(out)
         _LEX["gerunds"] = set(_LEX["gerunds"])
@@ -343,7 +343,7 @@ def min_week(item):
 
 def main():
     """Report: what each week receives from earlier weeks, and why."""
-    with open(os.path.join(ROOT, "docs", "data", "course.json"), encoding="utf-8") as fh:
+    with open(os.path.join(ROOT, "docs", "lang", "it", "data", "course.json"), encoding="utf-8") as fh:
         course = json.load(fh)
     items = {i["id"]: i for i in course["items"]}
     total = 0

@@ -25,7 +25,7 @@ import os
 import re
 import unicodedata
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 LEVEL_WEEK = {"A1": 1, "A2": 9, "B1": 19, "B2": 31, "C1": 43}
 
 _IDX = None
@@ -155,7 +155,7 @@ def index():
     if _IDX is not None:
         return _IDX
     import sillabo
-    with open(os.path.join(ROOT, "docs", "data", "bank.json"), encoding="utf-8") as fh:
+    with open(os.path.join(ROOT, "docs", "lang", "it", "data", "bank.json"), encoding="utf-8") as fh:
         bank = json.load(fh)
     idx = {}          # forma → (lemma, week, gloss)
 
@@ -197,7 +197,7 @@ def glossary():
     if _GLOSS is None:
         import importlib.util
         spec = importlib.util.spec_from_file_location(
-            "glossario", os.path.join(ROOT, "tools", "bank", "glossario.py"))
+            "glossario", os.path.join(ROOT, "tools", "it", "bank", "glossario.py"))
         mod = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(mod)
         _GLOSS = mod.GLOSS
@@ -267,7 +267,7 @@ def names():
     global _NAMES
     if _NAMES is None:
         _NAMES = set()
-        path = os.path.join(ROOT, "docs", "data", "course.json")
+        path = os.path.join(ROOT, "docs", "lang", "it", "data", "course.json")
         with open(path, encoding="utf-8") as fh:
             course = json.load(fh)
         texts = [(i.get("stem") or "") + " " + (i.get("answer") or "") for i in course["items"]]
@@ -402,7 +402,7 @@ def gloss_table(texts):
 
 def main():
     import collections
-    with open(os.path.join(ROOT, "docs", "data", "course.json"), encoding="utf-8") as fh:
+    with open(os.path.join(ROOT, "docs", "lang", "it", "data", "course.json"), encoding="utf-8") as fh:
         course = json.load(fh)
     seen = lesson_words(course)
     items = {i["id"]: i for i in course["items"]}

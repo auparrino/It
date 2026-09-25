@@ -34,8 +34,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import lessico  # noqa: E402
 import sillabo  # noqa: E402
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-OUT = os.path.join(ROOT, "docs", "audio", "cv")
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+OUT = os.path.join(ROOT, "docs", "lang", "it", "audio", "cv")
 
 
 def candidates(tsv):
@@ -107,7 +107,7 @@ def main():
         print("buscando validated.tsv en el paquete (puede tardar unos minutos)…")
     tsv = tsv_from_tar(args.fuente) if is_tar else args.fuente
 
-    with open(os.path.join(ROOT, "docs", "data", "course.json"), encoding="utf-8") as fh:
+    with open(os.path.join(ROOT, "docs", "lang", "it", "data", "course.json"), encoding="utf-8") as fh:
         seen = lessico.lesson_words(json.load(fh))
 
     by_week = collections.defaultdict(list)
