@@ -722,7 +722,7 @@
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION = "c1-vN" in sw.js: test_game
      and the CI check it).  One version for the app and both languages. */
-  var APP_VERSION = "v2.3";
+  var APP_VERSION = "v2.4";
   // Settimana XVII: Roman numerals on the street signs (LANG.ui.romanWeeks).
   function romano(n) {
     var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
@@ -848,6 +848,7 @@
     var html = "<h1>" + UI.read + "</h1>" +
       '<p class="lead">Leer mucho, entendiendo casi todo, es de lo que más hace crecer una lengua. ' +
       "Tocá las palabras subrayadas para ver qué significan.</p>";
+    if (window.Biblioteca) html += Biblioteca.leggiCard();   // libros de dominio público (js/biblioteca.js)
     Letture.SERIES.forEach(function (sr) {
       html += "<h2>" + sr.emoji + " " + esc(sr.name) + "</h2>" +
         '<p class="muted">' + esc(sr.blurb) + '</p><div class="eps">';
@@ -3199,6 +3200,7 @@
       planCard() +
       memoriaCard() +
       lessicoCard() +
+      (window.Biblioteca ? Biblioteca.ioCard() : "") +   // input: palabras y minutos de lectura (js/biblioteca.js)
       '<div class="card"><h2>Tu copia</h2>' +
         '<p class="muted">Todo tu progreso vive <b>solo en este teléfono</b>, sin cuentas ni servidores. ' +
         "Si borrás los datos del navegador se pierde: guardá una copia de vez en cuando.</p>" +
@@ -3507,6 +3509,7 @@
     else if (s === "ubicacion" && window.Ubicacion) html = Ubicacion.html();
     else if (s === "tres" && window.TresLenguas) html = TresLenguas.render(state);
     else if (s === "escritos" && window.Escritos) html = Escritos.render();
+    else if (window.Biblioteca && Biblioteca.owns(s)) html = Biblioteca.render(s, view);
 
     var gb = $("#glossbox");
     if (gb) gb.classList.remove("on");
@@ -3684,6 +3687,7 @@
     on("#discard", function () { clearPending(); render(); });
     wireHabit();
     if (window.Escritos) Escritos.wire(view.screen);
+    if (window.Biblioteca) Biblioteca.wire(view.screen, view);
     on("#lesback", function () { view.screen = "briefing"; render(); });
     on("#lesplay", function () {
       var lw = course.weeks[view.week - 1];
@@ -5240,6 +5244,15 @@
     esc: esc, plate: plate, fx: fx, startRound: startRound,
     show: function (s) { view.screen = s; render(); window.scrollTo(0, 0); },
     toWeek: function () { view.tab = "percorso"; view.screen = "briefing"; render(); window.scrollTo(0, 0); }
+  });
+
+  // La Biblioteca (biblioteca.js): libros enteros, con el lector y el input.
+  if (window.Biblioteca) Biblioteca.init({
+    state: function () { return state; }, view: function () { return view; }, persist: persist, gain: gain,
+    render: render, go: go, toast: toast, speak: speak, glossary: function () { return glossario; },
+    strand: function (n) { Engine.addStrand(state, "input", n); },
+    karaoke: { start: startKaraoke, stop: function () { stopKaraoke(); document.body.classList.remove("kar-partial", "kar-audio"); },
+               playing: function () { return !!karaoke; } }
   });
 
   // The glossary is optional too: without it words are just not tappable.

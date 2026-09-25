@@ -560,3 +560,39 @@ mark.esc-clue.ref { background: none; text-decoration: underline dotted; text-un
   box-shadow: inset 0 0 0 2px #2257a6, inset 0 0 0 3.5px #fffaf0, inset 0 0 0 4.5px #f2b705, 0 2px 6px rgba(0,0,0,.2); }
 .pick-lang.it .plate small { color: #a63a17; opacity: 1; }
 .pick-lang.it .plate b { font-style: italic; text-transform: none; letter-spacing: .01em; }
+/* --- Biblioteca (js/biblioteca.js): los colores salen de --bx-* del tema --- */
+.bx-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; text-align: center; margin: 4px 0 10px; }
+.bx-stats b { display: block; font-size: 1.15rem; font-variant-numeric: tabular-nums; }
+.bx-stats span { display: block; font-size: .7rem; opacity: .75; line-height: 1.2; }
+.bx-cov { flex: none; margin-left: auto; padding: 3px 8px; border-radius: 99px; font-size: .78rem; font-weight: 800; white-space: nowrap;
+  color: var(--bx-hard); background: color-mix(in srgb, var(--bx-hard) 14%, transparent); }
+.bx-cov.ok { color: var(--bx-ok); background: color-mix(in srgb, var(--bx-ok) 16%, transparent); }
+.bx-cov.mid { color: var(--bx-mid); background: color-mix(in srgb, var(--bx-mid) 18%, transparent); }
+.muted .bx-cov, .bx-rec .bx-cov, .bx-head .bx-cov { margin-left: 2px; }
+.bx-rec { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; margin-top: 8px; padding: 12px 14px; border-radius: 12px;
+  background: color-mix(in srgb, var(--bx-ok) 9%, transparent); }
+.bx-rec > span:first-child { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; opacity: .8; }
+.bx-rec .btn { margin-top: 6px; }
+.bx-book b { display: block; }
+.bx-head { display: flex; flex-direction: column; gap: 2px; margin: 12px 2px 4px; }
+.bx-prog { margin: 4px 0 10px; flex: none; }
+.bx-page { padding: 18px 18px 8px; }
+.bx-text { font-size: 1.12rem; line-height: 1.8; text-align: left; overflow-wrap: break-word; -webkit-hyphens: auto; hyphens: auto; }
+.bx-text p { margin: 0 0 .85em; }
+.bx-text.bx-s-1 { font-size: 1rem; }
+.bx-text.bx-s1 { font-size: 1.24rem; }
+.bx-text.bx-s2 { font-size: 1.38rem; }
+.bx-text.bx-s3 { font-size: 1.54rem; }
+.bx-text.bx-serif { font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif; }
+.bx-text .w { cursor: pointer; border-radius: 4px; }
+.bx-text .w.bx-new, .w.bx-new { text-decoration: underline dotted var(--bx-sub); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.bx-text .bx-h { font-weight: 800; line-height: 1.4; }
+.bx-break { text-align: center; letter-spacing: .6em; opacity: .55; }
+.bx-nav { display: flex; gap: 8px; margin: 12px 0 8px; }
+.bx-nav .btn { flex: 1 1 auto; }
+.bx-nav #bx-prev { flex: 0 0 72px; }
+.bx-tools { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 8px; }
+.bx-tools .tab { border: 1px solid var(--bx-line); }
+.bx-box .bx-es { font-size: 1.1rem; font-weight: 700; margin: 4px 0; }
+.bx-box .typed input { flex: 1 1 160px; min-width: 0; }
+.bx-self { margin-top: 12px; }

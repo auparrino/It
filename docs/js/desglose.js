@@ -942,7 +942,7 @@
     });
   }
 
-  var api = { of: of, lines: lines, label: label,
+  var api = { of: of, lines: lines, label: label, transparent: transparent,
     _reset: function () { FORMS = null; CONTR = null; NOMINAL = null; ARTS = null; } };
   if (typeof module === "object" && module.exports) module.exports = api;
   else root.Desglose = api;

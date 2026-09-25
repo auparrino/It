@@ -18,7 +18,7 @@
  * las viejas de esta misma app (La Via C1: «laviac1-v…») se borran las
  * versiones; las voces ya descargadas («laviac1-voci») se siguen leyendo.
  */
-var VERSION = "c1-v2.3";
+var VERSION = "c1-v2.4";
 var PREFIX = "c1-";
 var VOCI = "c1-voci";
 var LEGACY = /^laviac1-v\d/;          // the old versions of this same app
@@ -128,6 +128,21 @@ self.addEventListener("fetch", function (e) {
   // and answer with it.
   if (/\/audio\/cv\//.test(url.pathname)) {
     e.respondWith(lasting(null, url.href, function (res) { return res.status === 200; }));
+    return;
+  }
+  // The books of the Biblioteca (lang/<código>/biblioteca/): kept in the
+  // lasting cache, so a book opened once reads offline after a new version
+  // too; the copy is refreshed in the background when there is network.
+  if (/\/biblioteca\//.test(url.pathname)) {
+    e.respondWith(caches.open(VOCI).then(function (c) {
+      return c.match(e.request, { ignoreSearch: true }).then(function (hit) {
+        var net = fetch(e.request).then(function (res) {
+          if (res && res.ok) c.put(e.request, res.clone());
+          return res;
+        }).catch(function () { return hit; });
+        return hit || net;
+      });
+    }));
     return;
   }
   e.respondWith(caches.open(VERSION).then(function (cache) {
