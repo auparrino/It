@@ -553,7 +553,7 @@
 
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION in sw.js: test_game checks it). */
-  var APP_VERSION = "v43";
+  var APP_VERSION = "v44";
   function versionLine() {
     return '<p class="muted small version">La Via C1 · versión ' + APP_VERSION + "</p>";
   }
@@ -1250,7 +1250,7 @@
     else if (kind === "scene" || kind === "ponte" || kind === "falsi" || kind === "capire" ||
              kind === "b-forme" || kind === "b-tr" || kind === "b-gap") startRound(kind, arg);
     else if (kind === "ep") { view.ep = arg; view.epFrom = "briefing"; view.screen = "lettura"; render(); window.scrollTo(0, 0); }
-    else if (kind === "suoni") startRound("suoni");
+    else if (kind === "suoni") startRound("suoni", w.week);
     else if (kind === "dictogloss") { dg = null; view.screen = "dictogloss"; render(); window.scrollTo(0, 0); }
     else if (kind === "parla") { view.screen = "parla"; render(); window.scrollTo(0, 0); }
     else if (kind === "storia") { view.screen = "storia"; render(); window.scrollTo(0, 0); }
@@ -1395,7 +1395,9 @@
       items = Letture.session(epL);
       if (epL && epL.series === "ai") items = items.slice(0, -1).concat(storyCloze(epL), items.slice(-1));
     }
-    else if (kind === "suoni") items = Suoni.session(state, Math.min(state.unlocked, 52), { silent: state.silent });
+    // From the week's mission: that week's pairs (the ones its counter
+    // counts); from Allena: everything up to where the learner got.
+    else if (kind === "suoni") items = Suoni.session(state, arg || Math.min(state.unlocked, 52), { silent: state.silent });
     else if (kind === "ritorno") items = ritornoItems();
     else if (kind === "esame") {
       var pool = course.items.filter(function (it) { return it.topic === "esame" && it.prova === arg; });
@@ -2254,7 +2256,7 @@
     // (the next week opens from missionCheck, once every mission is done)
 
     if (round.kind === "debil") { if (!state.weakDone) state.weakDone = {}; state.weakDone[view.week] = true; }
-    if (round.kind === "suoni" && total >= 6) { if (!state.suoniDone) state.suoniDone = {}; state.suoniDone[Math.min(state.unlocked, 52)] = Date.now(); }
+    if (round.kind === "suoni" && total >= 6) { if (!state.suoniDone) state.suoniDone = {}; state.suoniDone[round.arg || Math.min(state.unlocked, 52)] = Date.now(); }
 
     // Dominala: the first answer to each question counts (the second, easier
     // pass after a miss is for learning, not for the score).
