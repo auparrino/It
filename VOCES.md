@@ -14,7 +14,15 @@ teléfono como antes. No hizo falta bajar nada al repositorio.
 
 Lo que falta: **Common Voice** (oraciones para escuchar gramática) y,
 opcionalmente, **Tatoeba**. Esas dos sí necesitan bajar archivos, y la
-máquina en la nube donde trabajo no tiene acceso a esos sitios.
+máquina en la nube donde trabajo no tiene acceso a esos sitios (comprobado
+de nuevo el 25/9: la red del entorno rechaza Common Voice, Mozilla Data
+Collective, Tatoeba, Wikimedia y Hugging Face; solo deja pasar GitHub).
+
+**Ya preparado para Common Voice:** `tools/voci_cv.py` hace los pasos 1 a 4
+del caso 2 sin red: lee `validated.tsv`, filtra por votos y largo, asigna la
+semana con `sillabo.py` y `lessico.py` (a lo sumo una palabra no vista),
+elige hablantes distintos y escribe la lista de audios a bajar. Con
+`--clips` los convierte a Opus. Solo falta el archivo de Mozilla.
 
 ## Cómo seguir en otra sesión (elegí un camino)
 
