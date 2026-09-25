@@ -12,7 +12,8 @@
    "options": [
     "maschile",
     "femminile"
-   ]
+   ],
+   "note": "Los sustantivos en -a suelen ser femeninos, como en castellano: *la bambina*."
   },
   "d03-002": {
    "consigna": "¿El sustantivo es masculino o femenino? Elegí.",
@@ -26,7 +27,8 @@
    "options": [
     "maschile",
     "femminile"
-   ]
+   ],
+   "note": "Terminado en -a, femenino: *la macchina*. Ojo: «el auto» es masculino en castellano, pero *macchina* es femenino."
   },
   "d03-003": {
    "consigna": "¿El sustantivo es masculino o femenino? Elegí.",
@@ -40,7 +42,8 @@
    "options": [
     "maschile",
     "femminile"
-   ]
+   ],
+   "note": "Los sustantivos en -o son casi siempre masculinos, como en castellano: *il libro*."
   },
   "d03-004": {
    "consigna": "¿El sustantivo es masculino o femenino? Elegí.",
@@ -54,7 +57,8 @@
    "options": [
     "maschile",
     "femminile"
-   ]
+   ],
+   "note": "Los terminados en -e pueden ser de los dos géneros; *signore* es masculino porque designa a un hombre (femenino: *signora*)."
   },
   "d03-005": {
    "consigna": "¿El sustantivo es masculino o femenino? Elegí.",
@@ -68,7 +72,8 @@
    "options": [
     "maschile",
     "femminile"
-   ]
+   ],
+   "note": "En -e el género no se ve en la terminación: *padre* es masculino por el significado, igual que en castellano."
   },
   "d03-006": {
    "consigna": "¿El sustantivo es masculino o femenino? Elegí.",
@@ -82,7 +87,8 @@
    "options": [
     "maschile",
     "femminile"
-   ]
+   ],
+   "note": "Terminado en -o y referido a un hombre: masculino, *lo zio* (lleva *lo* porque empieza con z)."
   },
   "d03-007": {
    "consigna": "¿El sustantivo es masculino o femenino? Elegí.",
@@ -96,7 +102,8 @@
    "options": [
     "maschile",
     "femminile"
-   ]
+   ],
+   "note": "En -o, masculino: *il medico*. Para una mujer se dice *la dottoressa* o *il/la medico*, no «la médica»."
   },
   "d03-008": {
    "consigna": "¿El sustantivo es masculino o femenino? Elegí.",
@@ -140,7 +147,8 @@
    "options": [
     "maschile",
     "femminile"
-   ]
+   ],
+   "note": "En -a, femenino como en castellano: *la casa*."
   },
   "d03-011": {
    "consigna": "Escribí el plural del sustantivo.",
@@ -148,7 +156,8 @@
    "stem": "fratello → ___",
    "answer": "fratelli",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Masculino en -o: el plural cambia -o por -i (*fratello → fratelli*); el italiano no agrega -s nunca."
   },
   "d03-012": {
    "consigna": "Escribí el plural del sustantivo.",
@@ -156,7 +165,8 @@
    "stem": "idea → ___",
    "answer": "idee",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Femenino en -a: el plural cambia -a por -e (*idea → idee*), no se agrega -s como en castellano."
   },
   "d03-013": {
    "consigna": "Escribí el plural del sustantivo.",
@@ -173,7 +183,8 @@
    "stem": "cugino → ___",
    "answer": "cugini",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Masculino en -o → -i: *cugino → cugini* (sin -s, que en italiano no marca plural)."
   },
   "d03-015": {
    "consigna": "Escribí el plural del sustantivo.",
@@ -181,7 +192,8 @@
    "stem": "zia → ___",
    "answer": "zie",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Los femeninos en -a hacen el plural en -e (*zia → zie*): el italiano nunca agrega -s como el castellano."
   },
   "d03-016": {
    "consigna": "Escribí el plural del sustantivo.",
@@ -189,7 +201,8 @@
    "stem": "cane → ___",
    "answer": "cani",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Los sustantivos en -e hacen el plural en -i, sean masculinos o femeninos: *cane → cani*."
   },
   "d03-017": {
    "consigna": "Escribí el plural del sustantivo.",
@@ -208,7 +221,8 @@
    "stem": "medico → ___",
    "answer": "medici",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*medico* es esdrújula: pierde el sonido duro y hace *medici* (como *amico → amici*); las graves suelen conservarlo (*fuoco → fuochi*)."
   },
   "d03-019": {
    "consigna": "Escribí el plural del sustantivo.",
@@ -216,7 +230,8 @@
    "stem": "bacio → ___",
    "answer": "baci",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "En -cio con i átona la i desaparece en plural: *bacio → baci* (no «bacii»)."
   },
   "d03-020": {
    "consigna": "Escribí el plural del sustantivo.",
@@ -224,7 +239,8 @@
    "stem": "vecchio → ___",
    "answer": "vecchi",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "En -io con i átona queda una sola i: *vecchio → vecchi*; se escriben dos solo si la i es tónica (*zio → zii*)."
   },
   "d03-021": {
    "consigna": "Escribí el plural. Ojo: algunos sustantivos no cambian y otros tienen plural masculino y femenino.",
@@ -292,7 +308,7 @@
    "answer": "fantasmi",
    "alt": [],
    "drop": false,
-   "note": "il fantasma → i fantasmi."
+   "note": "Los masculinos en -ma de origen griego hacen el plural en -i, no en -e: *il fantasma → i fantasmi*, como *il problema → i problemi*."
   },
   "d03-028": {
    "consigna": "Escribí el plural. Ojo: algunos sustantivos no cambian y otros tienen plural masculino y femenino.",
@@ -338,7 +354,8 @@
    "stem": "___ casa (casa)",
    "answer": "la",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Femenino singular ante consonante: *la*, igual que en castellano."
   },
   "d03-033": {
    "consigna": "Escribí el artículo determinado (il, lo, l', la, i, gli, le) que va delante de la palabra.",
@@ -355,7 +372,8 @@
    "stem": "___ padri (padres)",
    "answer": "i",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Masculino plural ante consonante simple: *i* (*i padri*); *gli* queda para vocal, s + consonante, z, gn, ps."
   },
   "d03-035": {
    "consigna": "Escribí el artículo determinado (il, lo, l', la, i, gli, le) que va delante de la palabra.",
@@ -372,7 +390,8 @@
    "stem": "___ entrate (entradas)",
    "answer": "le",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Femenino plural: siempre *le*, también ante vocal y sin apóstrofo (*le entrate*)."
   },
   "d03-037": {
    "consigna": "Escribí el artículo determinado (il, lo, l', la, i, gli, le) que va delante de la palabra.",
@@ -389,7 +408,8 @@
    "stem": "___ signora (señora)",
    "answer": "la",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Femenino singular ante consonante: *la signora*."
   },
   "d03-039": {
    "consigna": "Escribí el artículo determinado (il, lo, l', la, i, gli, le) que va delante de la palabra.",
@@ -397,7 +417,8 @@
    "stem": "___ oche (gansas)",
    "answer": "le",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Femenino plural: *le*, aunque la palabra empiece con vocal (*le oche*); en plural no hay apóstrofo."
   },
   "d03-040": {
    "consigna": "Escribí el artículo determinado (il, lo, l', la, i, gli, le) que va delante de la palabra.",
@@ -423,7 +444,8 @@
    "stem": "___ aeroplano (avión)",
    "answer": "un",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Masculino ante vocal: *un*, sin apóstrofo (*un aeroplano*); el apóstrofo *un’* es solo para el femenino."
   },
   "d03-043": {
    "consigna": "Escribí el artículo indeterminado (un, uno, una, un') que va delante de la palabra.",
@@ -440,7 +462,8 @@
    "stem": "___ madre (madre)",
    "answer": "una",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Femenino ante consonante: *una*, como en castellano."
   },
   "d03-045": {
    "consigna": "Escribí el artículo indeterminado (un, uno, una, un') que va delante de la palabra.",
@@ -459,7 +482,8 @@
    "stem": "___ finestra (ventana)",
    "answer": "una",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Femenino ante consonante: *una*, igual que en castellano; el apóstrofo (*un’*) queda solo para vocal."
   },
   "d03-047": {
    "consigna": "Escribí el artículo indeterminado (un, uno, una, un') que va delante de la palabra.",
@@ -487,7 +511,8 @@
    "stem": "___ scuola (escuela)",
    "answer": "una",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Femenino: *una*, aunque empiece con s + consonante (*uno* es solo para masculinos): *una scuola*."
   },
   "d03-050": {
    "consigna": "Escribí el artículo indeterminado (un, uno, una, un') que va delante de la palabra.",
@@ -495,7 +520,8 @@
    "stem": "___ succo (jugo)",
    "answer": "un",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Masculino ante consonante simple: *un*. *uno* se usa solo ante s + consonante, z, gn, ps (*uno zaino*); *succo* empieza con s + vocal."
   },
   "d03-051": {
    "consigna": "Traducí al italiano con el artículo determinado.",
@@ -581,7 +607,8 @@
    "stem": "reacción (azione + prefijo re-) → ___",
    "answer": "reazione",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "El prefijo *re-/ri-* indica repetición o respuesta, como en castellano; y *-zione* equivale a nuestro *-ción*: *reazione*."
   },
   "d03-060": {
    "consigna": "Escribí en italiano la palabra formada con el sufijo o prefijo indicado.",
@@ -590,7 +617,7 @@
    "answer": "prenotazione",
    "alt": [],
    "drop": false,
-   "note": "prenotare = reservar; la prenotazione = la reserva."
+   "note": "Con *pre-* + *notare* sale *prenotare*, «reservar» (no «prenotar»); de ahí *la prenotazione*, «la reserva», con *-zione* = «-ción»."
   },
   "d04-001": {
    "consigna": "Escribí el número en letras, en italiano.",
@@ -598,7 +625,8 @@
    "stem": "1947 → ___",
    "answer": "millenovecentoquarantasette",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Los años se escriben en una sola palabra: *mille* + *novecento* + *quarantasette*, sin «y» entre decenas y unidades como en castellano."
   },
   "d04-002": {
    "consigna": "Escribí el número en letras, en italiano.",
@@ -615,7 +643,8 @@
    "stem": "212 → ___",
    "answer": "duecentododici",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Los números se pegan en una sola palabra: *duecento* + *dodici* = *duecentododici* (nada de «doscientos doce» separado)."
   },
   "d04-004": {
    "consigna": "Escribí el número en letras, en italiano.",
@@ -623,7 +652,8 @@
    "stem": "19 → ___",
    "answer": "diciannove",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Del 17 al 19 las unidades van después: *diciassette, diciotto, diciannove* (como nuestro «diecinueve», pero con doble n)."
   },
   "d04-005": {
    "consigna": "Escribí el número en letras, en italiano.",
@@ -634,7 +664,8 @@
     "cinquemilioniseicentododicimilaquattrocentoventitré",
     "cinque milioni e seicentododicimilaquattrocentoventitré"
    ],
-   "drop": false
+   "drop": false,
+   "note": "*milione* es sustantivo y va separado y en plural (*cinque milioni*); lo que sigue va pegado, y *tre* final lleva acento: *-ventitré*."
   },
   "d04-006": {
    "consigna": "Escribí el número en letras, en italiano.",
@@ -642,7 +673,8 @@
    "stem": "88 → ___",
    "answer": "ottantotto",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*ottanta* + *otto* pierde la a final ante la vocal: *ottantotto* (igual con *uno*: *ottantuno*)."
   },
   "d04-007": {
    "consigna": "Escribí el número en letras, en italiano.",
@@ -650,7 +682,8 @@
    "stem": "966 → ___",
    "answer": "novecentosessantasei",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Todo en una palabra: *novecento* + *sessanta* + *sei*; el italiano no pone «y» entre decenas y unidades."
   },
   "d04-008": {
    "consigna": "Escribí el número en letras, en italiano.",
@@ -667,7 +700,8 @@
    "stem": "6298 → ___",
    "answer": "seimiladuecentonovantotto",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Miles en plural es *mila* (*seimila*, pero *mille* para uno) y todo va pegado: *seimiladuecentonovantotto*; *novanta* + *otto* pierde la a."
   },
   "d04-010": {
    "consigna": "Escribí el número en letras, en italiano.",
@@ -675,7 +709,8 @@
    "stem": "861 → ___",
    "answer": "ottocentosessantuno",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*sessanta* + *uno* pierde la vocal: *sessantuno*; y todo va pegado a *ottocento*."
   },
   "d04-011": {
    "consigna": "Escribí el número ordinal en letras, concordado con el sustantivo.",
@@ -683,7 +718,8 @@
    "stem": "I ___ cugini (primero)",
    "answer": "primi",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Los ordinales concuerdan como adjetivos en -o: masculino plural *primi*."
   },
   "d04-012": {
    "consigna": "Escribí el número ordinal en letras, concordado con el sustantivo.",
@@ -691,7 +727,8 @@
    "stem": "La ___ attrice (segunda)",
    "answer": "seconda",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Ordinal en femenino singular: *seconda*, porque *attrice* es femenino."
   },
   "d04-013": {
    "consigna": "Escribí el número ordinal en letras, concordado con el sustantivo.",
@@ -699,7 +736,8 @@
    "stem": "Il ___ edificio (noveno)",
    "answer": "nono",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Los diez primeros ordinales son propios (*nono*, «noveno»); concuerdan con el sustantivo: *il nono edificio*."
   },
   "d04-014": {
    "consigna": "Escribí el número ordinal en letras, concordado con el sustantivo.",
@@ -707,7 +745,8 @@
    "stem": "La ___ città (cuarta)",
    "answer": "quarta",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*quarto* concuerda en femenino: *la quarta città*."
   },
   "d04-015": {
    "consigna": "Escribí el número ordinal en letras, concordado con el sustantivo.",
@@ -715,7 +754,8 @@
    "stem": "La ___ settimana (sexta)",
    "answer": "sesta",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "«Sexto» es *sesto*, femenino *sesta* (sin x, a diferencia del castellano)."
   },
   "d04-016": {
    "consigna": "Escribí el número ordinal en letras, concordado con el sustantivo.",
@@ -723,7 +763,8 @@
    "stem": "L’___ volta (enésima)",
    "answer": "ennesima",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*ennesimo* se forma como los ordinales en *-esimo* (de la letra *n*): *l’ennesima volta*, «la enésima vez»."
   },
   "d04-017": {
    "consigna": "Escribí el número ordinal en letras, concordado con el sustantivo.",
@@ -731,7 +772,8 @@
    "stem": "Il ___ cliente (millonésimo)",
    "answer": "milionesimo",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Desde el 11, los ordinales se forman con número + *-esimo*: *milione → milionesimo*, concordado con *cliente*."
   },
   "d04-018": {
    "consigna": "Escribí el número ordinal en letras, concordado con el sustantivo.",
@@ -739,7 +781,8 @@
    "stem": "La ___ casa (milésima)",
    "answer": "millesima",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Número + *-esimo* (cae la vocal final): *mille → millesimo*, en femenino *millesima*."
   },
   "d04-019": {
    "consigna": "Escribí el número ordinal en letras, concordado con el sustantivo.",
@@ -747,7 +790,8 @@
    "stem": "Le ___ scene (primeras)",
    "answer": "prime",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Femenino plural del ordinal: *prime*, concordado con *scene*."
   },
   "d04-020": {
    "consigna": "Escribí el número ordinal en letras, concordado con el sustantivo.",
@@ -777,7 +821,8 @@
    "alt": [
     "tre"
    ],
-   "drop": false
+   "drop": false,
+   "note": "Las fechas usan el número cardinal con artículo: *il tre* («el 3»), como en castellano, sin «de»."
   },
   "d04-023": {
    "consigna": "Completá la anotación de la agenda: escribí en italiano el día y/o la fecha, con los números en letras.",
@@ -787,7 +832,8 @@
    "alt": [
     "trenta"
    ],
-   "drop": false
+   "drop": false,
+   "note": "Para las fechas el italiano usa el número cardinal con *il*, como nuestro «el 30»: *il trenta*. Solo el día 1 va con ordinal (*il primo*)."
   },
   "d04-024": {
    "consigna": "Completá la anotación de la agenda: escribí en italiano el día y/o la fecha, con los números en letras.",
@@ -797,7 +843,8 @@
    "alt": [
     "sei"
    ],
-   "drop": false
+   "drop": false,
+   "note": "Fecha = *il* + cardinal (*il sei*), sin «de» ni ordinal; el ordinal queda para el día 1."
   },
   "d04-025": {
    "consigna": "Completá la anotación de la agenda: escribí en italiano el día y/o la fecha, con los números en letras.",
@@ -807,7 +854,8 @@
    "alt": [
     "venti"
    ],
-   "drop": false
+   "drop": false,
+   "note": "Fecha = *il* + cardinal: *il venti*, como «el 20»."
   },
   "d04-026": {
    "consigna": "Completá la anotación de la agenda: escribí en italiano el día y/o la fecha, con los números en letras.",
@@ -837,7 +885,8 @@
    "alt": [
     "ventotto"
    ],
-   "drop": false
+   "drop": false,
+   "note": "Cardinal con artículo: *il ventotto*; *venti* + *otto* pierde la i."
   },
   "d04-029": {
    "consigna": "Completá la anotación de la agenda: escribí en italiano el día y/o la fecha, con los números en letras.",
@@ -847,7 +896,8 @@
    "alt": [
     "nove"
    ],
-   "drop": false
+   "drop": false,
+   "note": "Fecha = *il* + cardinal: *il nove*. El artículo es siempre *il* (se sobreentiende *giorno*)."
   },
   "d04-030": {
    "consigna": "Completá la anotación de la agenda: escribí en italiano el día y/o la fecha, con los números en letras.",
@@ -857,7 +907,8 @@
    "alt": [
     "ventiquattro"
    ],
-   "drop": false
+   "drop": false,
+   "note": "Cardinal con artículo: *il ventiquattro*, en una sola palabra."
   },
   "d04-031": {
    "consigna": "Escribí la hora en italiano, con los números en letras.",
@@ -882,7 +933,8 @@
     "Sono le tre e mezzo del pomeriggio.",
     "Sono le tre e mezzo."
    ],
-   "drop": false
+   "drop": false,
+   "note": "Para la hora: *sono le* + número (*le ore*, en plural); «y media» es *e mezza* y la franja se agrega con *del pomeriggio*."
   },
   "d04-033": {
    "consigna": "Escribí la hora en italiano, con los números en letras.",
@@ -896,7 +948,8 @@
     "Sono le nove e un quarto del mattino.",
     "Sono le nove e quindici del mattino."
    ],
-   "drop": false
+   "drop": false,
+   "note": "«Y cuarto» es *e un quarto* (con artículo *un*); a la mañana se dice *di mattina*."
   },
   "d04-034": {
    "consigna": "Escribí la hora en italiano, con los números en letras.",
@@ -926,7 +979,8 @@
     "Sono le otto meno quindici di mattina.",
     "Sono le otto meno quindici del mattino."
    ],
-   "drop": false
+   "drop": false,
+   "note": "Como en castellano, «menos cuarto» se cuenta desde la hora siguiente: *le otto meno un quarto* («las ocho menos cuarto»)."
   },
   "d04-036": {
    "consigna": "Escribí la hora en italiano, con los números en letras.",
@@ -937,7 +991,8 @@
     "Alle due e venti.",
     "Alle quattordici e venti."
    ],
-   "drop": false
+   "drop": false,
+   "note": "«A las» + hora es *alle* (*a + le*): *alle due e venti*."
   },
   "d04-037": {
    "consigna": "Escribí la hora en italiano, con los números en letras.",
@@ -952,7 +1007,8 @@
     "Intorno alle sei del pomeriggio.",
     "Intorno alle sei di sera."
    ],
-   "drop": false
+   "drop": false,
+   "note": "«A eso de» es *verso*, y la hora mantiene su artículo: *verso le sei*."
   },
   "d04-038": {
    "consigna": "Escribí la hora en italiano, con los números en letras.",
@@ -962,7 +1018,8 @@
    "alt": [
     "Alle ore diciassette."
    ],
-   "drop": false
+   "drop": false,
+   "note": "«A las» = *alle*, con la preposición unida al artículo femenino plural (*le ore*): *alle diciassette*."
   },
   "d04-039": {
    "consigna": "Escribí la hora en italiano, con los números en letras.",
@@ -991,7 +1048,8 @@
     "Sono le sei meno quindici del pomeriggio.",
     "Sono le sei meno quindici di sera."
    ],
-   "drop": false
+   "drop": false,
+   "note": "«Menos cuarto» se cuenta desde la hora siguiente, como en castellano: *le sei meno un quarto*."
   },
   "d05-001": {
    "consigna": "Concordá el adjetivo entre paréntesis con el sustantivo (género y número).",
@@ -999,7 +1057,8 @@
    "stem": "i ragazzi ___ (pigro)",
    "answer": "pigri",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Los adjetivos en -o tienen cuatro formas y concuerdan como en castellano: masculino plural *pigri*."
   },
   "d05-002": {
    "consigna": "Concordá el adjetivo entre paréntesis con el sustantivo (género y número).",
@@ -1007,7 +1066,8 @@
    "stem": "le bimbe ___ (buono)",
    "answer": "buone",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Femenino plural de un adjetivo en -o: -e (*buone*), sin -s."
   },
   "d05-003": {
    "consigna": "Concordá el adjetivo entre paréntesis con el sustantivo (género y número).",
@@ -1015,7 +1075,8 @@
    "stem": "Giuliano è ___ (alto)",
    "answer": "alto",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Masculino singular: *alto*. Con *essere* el adjetivo concuerda con el sujeto, igual que en castellano."
   },
   "d05-004": {
    "consigna": "Concordá el adjetivo entre paréntesis con el sustantivo (género y número).",
@@ -1032,7 +1093,8 @@
    "stem": "gli insegnanti ___ (bravo)",
    "answer": "bravi",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Masculino plural: -o → -i (*bravi*). *insegnanti* es masculino aquí por el artículo *gli*."
   },
   "d05-006": {
    "consigna": "Concordá el adjetivo entre paréntesis con el sustantivo (género y número).",
@@ -1040,7 +1102,8 @@
    "stem": "i gatti ___ (piccolo)",
    "answer": "piccoli",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Adjetivo en -o, masculino plural: -o → -i (*piccoli*), sin la -s del castellano."
   },
   "d05-007": {
    "consigna": "Concordá el adjetivo entre paréntesis con el sustantivo (género y número).",
@@ -1048,7 +1111,8 @@
    "stem": "le camere da letto ___ (nuovo)",
    "answer": "nuove",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Femenino plural: *nuove*, porque concuerda con *camere*, no con *letto*."
   },
   "d05-008": {
    "consigna": "Concordá el adjetivo entre paréntesis con el sustantivo (género y número).",
@@ -1083,7 +1147,8 @@
    "stem": "(buono) ___ giorno",
    "answer": "buon",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*buono* ante sustantivo masculino se acorta como *un*: *buon giorno* (y *buono* solo ante s + consonante o z, como *uno*)."
   },
   "d05-012": {
    "consigna": "Escribí la forma correcta de buono, santo o bello (entre paréntesis) delante del sustantivo.",
@@ -1100,7 +1165,8 @@
    "stem": "(santo) ___ Apostoli",
    "answer": "Santi",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "En plural *santo* es regular: *Santi Apostoli*. Solo se acorta en singular (*San Pietro*, *Sant’Anna*, *Santo Stefano*)."
   },
   "d05-014": {
    "consigna": "Escribí la forma correcta de buono, santo o bello (entre paréntesis) delante del sustantivo.",
@@ -1108,7 +1174,8 @@
    "stem": "(buono) ___ studentessa",
    "answer": "buona",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "En femenino *buono* es regular: *buona studentessa*."
   },
   "d05-015": {
    "consigna": "Escribí la forma correcta de buono, santo o bello (entre paréntesis) delante del sustantivo.",
@@ -1116,7 +1183,8 @@
    "stem": "(bello) ___ montagne",
    "answer": "belle",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*bello* delante del sustantivo imita al artículo: *le montagne* → *belle montagne*."
   },
   "d05-016": {
    "consigna": "Escribí la forma correcta de buono, santo o bello (entre paréntesis) delante del sustantivo.",
@@ -1124,7 +1192,8 @@
    "stem": "(bello) ___ giornata",
    "answer": "bella",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*bello* imita al artículo: *la giornata* → *bella giornata*."
   },
   "d05-017": {
    "consigna": "Escribí la forma correcta de buono, santo o bello (entre paréntesis) delante del sustantivo.",
@@ -1162,7 +1231,8 @@
    "stem": "(buono) ___ notte",
    "answer": "buona",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "En femenino *buono* es regular: *buona notte*."
   },
   "d05-021": {
    "consigna": "Escribí el sustantivo con el adjetivo entre paréntesis, antes o después según corresponda.",
@@ -1172,7 +1242,8 @@
    "alt": [
     "scuola piccola"
    ],
-   "drop": false
+   "drop": false,
+   "note": "*piccolo*, como *grande, bello, buono*, va a menudo delante del sustantivo: *piccola scuola*."
   },
   "d05-022": {
    "consigna": "Escribí el sustantivo con el adjetivo entre paréntesis, antes o después según corresponda.",
@@ -1180,7 +1251,8 @@
    "stem": "(interessante) libro → ___",
    "answer": "libro interessante",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "La mayoría de los adjetivos va detrás del sustantivo, igual que en castellano: *libro interessante*."
   },
   "d05-023": {
    "consigna": "Escribí el sustantivo con el adjetivo entre paréntesis, antes o después según corresponda.",
@@ -1190,7 +1262,8 @@
    "alt": [
     "casa grande"
    ],
-   "drop": false
+   "drop": false,
+   "note": "*grande* delante significa «importante, gran» (*una grande casa*, también *una gran casa*); detrás es solo tamaño."
   },
   "d05-024": {
    "consigna": "Escribí el sustantivo con el adjetivo entre paréntesis, antes o después según corresponda.",
@@ -1209,7 +1282,8 @@
    "alt": [
     "gatte care"
    ],
-   "drop": false
+   "drop": false,
+   "note": "*caro* delante significa «querido» (*care gatte*); detrás significa «caro, costoso»."
   },
   "d05-026": {
    "consigna": "Escribí el sustantivo con el adjetivo entre paréntesis, antes o después según corresponda.",
@@ -1217,7 +1291,8 @@
    "stem": "(intelligente) donna → ___",
    "answer": "donna intelligente",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Los adjetivos que clasifican o describen con peso propio van detrás: *donna intelligente*."
   },
   "d05-027": {
    "consigna": "Escribí el sustantivo con el adjetivo entre paréntesis, antes o después según corresponda.",
@@ -1225,7 +1300,8 @@
    "stem": "(simpatico) zio → ___",
    "answer": "zio simpatico",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Los adjetivos de carácter suelen ir detrás: *zio simpatico*."
   },
   "d05-028": {
    "consigna": "Escribí el sustantivo con el adjetivo entre paréntesis, antes o después según corresponda.",
@@ -1235,7 +1311,8 @@
    "alt": [
     "alto edificio"
    ],
-   "drop": false
+   "drop": false,
+   "note": "Detrás, *alto* describe el tamaño: *edificio alto*. (Delante: *alto funzionario*, «alto cargo».)"
   },
   "d05-029": {
    "consigna": "Escribí el sustantivo con el adjetivo entre paréntesis, antes o después según corresponda.",
@@ -1252,7 +1329,8 @@
    "stem": "(preferito) film → ___",
    "answer": "film preferito",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*preferito* es un participio usado como adjetivo: va detrás del sustantivo, como en castellano."
   },
   "d06-001": {
    "consigna": "Conjugá el verbo entre paréntesis en presente.",
@@ -1260,7 +1338,8 @@
    "stem": "Noi ___ (abitare) in una vecchia casa.",
    "answer": "abitiamo",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Presente de -are: *noi* termina siempre en *-iamo* (*abitiamo*), no en «-amos» como en castellano."
   },
   "d06-002": {
    "consigna": "Conjugá el verbo entre paréntesis en presente.",
@@ -1268,7 +1347,8 @@
    "stem": "Tu ___ (frequentare) una scuola molto famosa.",
    "answer": "frequenti",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Presente de -are: *tu* termina en *-i* (*frequenti*), no en -as/-ás."
   },
   "d06-003": {
    "consigna": "Conjugá el verbo entre paréntesis en presente.",
@@ -1276,7 +1356,8 @@
    "stem": "Loro ___ (insegnare) le lingue.",
    "answer": "insegnano",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*loro* de -are termina en *-ano* y el acento va en la raíz: *inSEgnano*."
   },
   "d06-004": {
    "consigna": "Conjugá el verbo entre paréntesis en presente.",
@@ -1284,7 +1365,8 @@
    "stem": "Lui ___ (imparare) molto.",
    "answer": "impara",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*lui/lei* de -are termina en *-a*: *impara*, como en castellano."
   },
   "d06-005": {
    "consigna": "Conjugá el verbo entre paréntesis en presente.",
@@ -1292,7 +1374,8 @@
    "stem": "Lei ___ (aspettare) un tassì.",
    "answer": "aspetta",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*lei* de -are: *-a* (*aspetta*). *Aspettare* es «esperar»; no confundir con *sperare*, «tener esperanza»."
   },
   "d06-006": {
    "consigna": "Conjugá el verbo entre paréntesis en presente.",
@@ -1300,7 +1383,8 @@
    "stem": "Guido ___ (portare) sempre una cravatta.",
    "answer": "porta",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Tercera persona de -are: *porta*. *Portare* es «llevar», también ropa: *porta una cravatta*."
   },
   "d06-007": {
    "consigna": "Conjugá el verbo entre paréntesis en presente.",
@@ -1308,7 +1392,8 @@
    "stem": "Voi ___ (ritornare) tardi?",
    "answer": "ritornate",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*voi* de -are termina en *-ate*: *ritornate*, con el acento en la a (*ritorNAte*)."
   },
   "d06-008": {
    "consigna": "Conjugá el verbo entre paréntesis en presente.",
@@ -1316,7 +1401,8 @@
    "stem": "Loro ___ (parlare) spesso.",
    "answer": "parlano",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*loro* de -are: *-ano*, con el acento en la raíz: *PARlano*."
   },
   "d06-009": {
    "consigna": "Conjugá el verbo entre paréntesis en presente.",
@@ -1324,7 +1410,8 @@
    "stem": "Angelo ___ (guidare) una macchina molto elegante.",
    "answer": "guida",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Tercera persona de -are: *guida*. «Manejar» un auto es *guidare*."
   },
   "d06-010": {
    "consigna": "Conjugá el verbo entre paréntesis en presente.",
@@ -1332,7 +1419,8 @@
    "stem": "Voi due ___ (ballare) assai bene.",
    "answer": "ballate",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*voi* de -are termina en *-ate* (*ballate*): es nuestro «ustedes bailan», pero en segunda persona plural."
   },
   "d06-011": {
    "consigna": "Conjugá el verbo entre paréntesis en presente (ojo con la ortografía de -care y -gare).",
@@ -1340,7 +1428,8 @@
    "stem": "Noi ___ (cercare) il museo.",
    "answer": "cerchiamo",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*cercare* agrega una h ante -iamo para que la c siga sonando k: *cerchiamo*."
   },
   "d06-012": {
    "consigna": "Conjugá el verbo entre paréntesis en presente (ojo con la ortografía de -care y -gare).",
@@ -1348,7 +1437,8 @@
    "stem": "Tonio ___ (giocare) a calcio ogni giorno.",
    "answer": "gioca",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Ante a, la c ya suena k: *gioca* no necesita h (la h solo aparece ante i/e)."
   },
   "d06-013": {
    "consigna": "Conjugá el verbo entre paréntesis en presente (ojo con la ortografía de -care y -gare).",
@@ -1365,7 +1455,8 @@
    "stem": "La professoressa ___ (spiegare) tutto.",
    "answer": "spiega",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "La h solo se agrega ante i/e para conservar el sonido duro; ante a no hace falta: *spiega*."
   },
   "d06-015": {
    "consigna": "Conjugá el verbo entre paréntesis en presente (ojo con la ortografía de -care y -gare).",
@@ -1373,7 +1464,8 @@
    "stem": "Noi ___ (pagare) oggi.",
    "answer": "paghiamo",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*pagare* agrega h ante i para que la g siga sonando dura: *paghiamo*."
   },
   "d06-016": {
    "consigna": "Conjugá el verbo entre paréntesis en presente (ojo con la ortografía de -care y -gare).",
@@ -1381,7 +1473,8 @@
    "stem": "Lui ___ (criticare) tutto.",
    "answer": "critica",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Ante a la c ya suena k, así que no lleva h: *critica* (acentuado en la i: *CRItica*)."
   },
   "d06-017": {
    "consigna": "Conjugá el verbo entre paréntesis en presente (ojo con la ortografía de -care y -gare).",
@@ -1398,7 +1491,8 @@
    "stem": "Tu, cosa ___ (cercare)?",
    "answer": "cerchi",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Ante la i de *tu* hace falta la h para mantener la k: *cerchi* (sin h se leería «cherchi»)."
   },
   "d06-019": {
    "consigna": "Conjugá el verbo entre paréntesis en presente (ojo con la ortografía de -care y -gare).",
@@ -1406,7 +1500,8 @@
    "stem": "Loro non ___ (comunicare) con il pubblico.",
    "answer": "comunicano",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Ante a y o la c suena k sin ayuda: *comunicano*, sin h (la h aparece en *comunichi, comunichiamo*)."
   },
   "d06-020": {
    "consigna": "Conjugá el verbo entre paréntesis en presente (ojo con la ortografía de -care y -gare).",
@@ -1414,7 +1509,8 @@
    "stem": "Tu ___ (giocare) a pallavolo?",
    "answer": "giochi",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*giocare* con *tu*: se agrega h ante i para conservar la k: *giochi*."
   },
   "d06-021": {
    "consigna": "Conjugá el verbo entre paréntesis en presente, cuidando la ortografía.",
@@ -1431,7 +1527,8 @@
    "stem": "Voi ___ (cambiare).",
    "answer": "cambiate",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*cambiare*: la i de la raíz se mantiene ante -ate (*cambiate*); solo desaparece ante otra i (*tu cambi*)."
   },
   "d06-023": {
    "consigna": "Conjugá el verbo entre paréntesis en presente, cuidando la ortografía.",
@@ -1439,7 +1536,8 @@
    "stem": "Noi ___ (mangiare).",
    "answer": "mangiamo",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*mangiare*: la i es solo una marca gráfica y cae ante -iamo: *mangiamo*, no «mangiiamo»."
   },
   "d06-024": {
    "consigna": "Conjugá el verbo entre paréntesis en presente, cuidando la ortografía.",
@@ -1456,7 +1554,8 @@
    "stem": "Lui ___ (cercare).",
    "answer": "cerca",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*cercare* solo necesita h ante i/e (*cerchi*); ante a no: *cerca*."
   },
   "d06-026": {
    "consigna": "Conjugá el verbo entre paréntesis en presente, cuidando la ortografía.",
@@ -1482,7 +1581,8 @@
    "stem": "Noi ___ (pagare).",
    "answer": "paghiamo",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*pagare* agrega h ante i para mantener la g dura: *paghiamo*."
   },
   "d06-029": {
    "consigna": "Conjugá el verbo entre paréntesis en presente, cuidando la ortografía.",
@@ -1490,7 +1590,8 @@
    "stem": "Loro ___ (studiare).",
    "answer": "studiano",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*loro* de -iare: *studiano*, con la i de la raíz y el acento en *STU-*."
   },
   "d06-030": {
    "consigna": "Conjugá el verbo entre paréntesis en presente, cuidando la ortografía.",
@@ -1498,7 +1599,8 @@
    "stem": "Lei ___ (indicare).",
    "answer": "indica",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Ante a no hace falta h: *indica*, con el acento en la i (*INdica*)."
   },
   "d06-031": {
    "consigna": "Conjugá el verbo entre paréntesis en presente.",
@@ -1506,7 +1608,8 @@
    "stem": "Io ___ (scrivere) cartoline agli amici.",
    "answer": "scrivo",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*io* termina siempre en *-o* en las tres conjugaciones: *scrivo*."
   },
   "d06-032": {
    "consigna": "Conjugá el verbo entre paréntesis en presente.",
@@ -1514,7 +1617,8 @@
    "stem": "Noi ___ (vivere) ad Arezzo.",
    "answer": "viviamo",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*noi* termina en *-iamo* también en -ere: *viviamo* (no «vivemos»)."
   },
   "d06-033": {
    "consigna": "Conjugá el verbo entre paréntesis en presente.",
@@ -1522,7 +1626,8 @@
    "stem": "Tu ___ (prendere) tè o caffè?",
    "answer": "prendi",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*tu* de -ere termina en *-i*: *prendi*, no «prendes»."
   },
   "d06-034": {
    "consigna": "Conjugá el verbo entre paréntesis en presente.",
@@ -1530,7 +1635,8 @@
    "stem": "Lui ___ (chiudere) la porta.",
    "answer": "chiude",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*lui* de -ere termina en *-e*: *chiude*, como «cierra» pero con la vocal de la conjugación."
   },
   "d06-035": {
    "consigna": "Conjugá el verbo entre paréntesis en presente.",
@@ -1538,7 +1644,8 @@
    "stem": "Loro ___ (vendere) frutta e verdura.",
    "answer": "vendono",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*loro* de -ere termina en *-ono*: *vendono* (no «venden»), con el acento en la raíz."
   },
   "d06-036": {
    "consigna": "Conjugá el verbo entre paréntesis en presente.",
@@ -1546,7 +1653,8 @@
    "stem": "Voi ___ (vedere) quello?",
    "answer": "vedete",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*voi* de -ere termina en *-ete*: *vedete*."
   },
   "d06-037": {
    "consigna": "Conjugá el verbo entre paréntesis en presente.",
@@ -1554,7 +1662,8 @@
    "stem": "Mirella ___ (rispondere) subito.",
    "answer": "risponde",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Tercera persona de -ere: *-e* (*risponde*)."
   },
   "d06-038": {
    "consigna": "Conjugá el verbo entre paréntesis en presente.",
@@ -1562,7 +1671,8 @@
    "stem": "Gli studenti ___ (ripetere) le parole.",
    "answer": "ripetono",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*loro* de -ere: *-ono*, acento en la raíz: *riPEtono*."
   },
   "d06-039": {
    "consigna": "Conjugá el verbo entre paréntesis en presente.",
@@ -1570,7 +1680,8 @@
    "stem": "Lei ___ (credere) di sì.",
    "answer": "crede",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Tercera persona de -ere: *crede*. *Credere di sì* = «creer que sí»."
   },
   "d06-040": {
    "consigna": "Conjugá el verbo entre paréntesis en presente.",
@@ -1587,7 +1698,8 @@
    "stem": "Tu ___ (sentire) qualcosa?",
    "answer": "senti",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*sentire* no lleva -isc- (se conjuga como *dormire*): *tu senti*, con la *-i* de *tu*."
   },
   "d06-042": {
    "consigna": "Conjugá el verbo entre paréntesis en presente (algunos -ire llevan -isc-).",
@@ -1595,7 +1707,8 @@
    "stem": "Riccardo ___ (dormire) fino a tardi.",
    "answer": "dorme",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*dormire* no lleva -isc- y no diptonga como en castellano: *dorme* (no «duerme»)."
   },
   "d06-043": {
    "consigna": "Conjugá el verbo entre paréntesis en presente (algunos -ire llevan -isc-).",
@@ -1603,7 +1716,8 @@
    "stem": "Noi ___ (aprire) i libri.",
    "answer": "apriamo",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*noi* termina siempre en *-iamo*, en las tres conjugaciones: *apriamo* (no «abrimos»)."
   },
   "d06-044": {
    "consigna": "Conjugá el verbo entre paréntesis en presente (algunos -ire llevan -isc-).",
@@ -1611,7 +1725,8 @@
    "stem": "Loro ___ (finire) le lezioni all’una.",
    "answer": "finiscono",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*finire* lleva -isc- en todas las personas menos *noi* y *voi*: *finiscono*."
   },
   "d06-045": {
    "consigna": "Conjugá el verbo entre paréntesis en presente (algunos -ire llevan -isc-).",
@@ -1619,7 +1734,8 @@
    "stem": "Voi ___ (partire) domani, vero?",
    "answer": "partite",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*voi* de -ire: *-ite* (*partite*); *partire* no lleva -isc-."
   },
   "d06-046": {
    "consigna": "Conjugá el verbo entre paréntesis en presente (algunos -ire llevan -isc-).",
@@ -1627,7 +1743,8 @@
    "stem": "Francesca ___ (capire) sempre.",
    "answer": "capisce",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*capire* es un verbo en -isc-: *capisce* (con sc ante e, que suena como sh)."
   },
   "d06-047": {
    "consigna": "Conjugá el verbo entre paréntesis en presente (algunos -ire llevan -isc-).",
@@ -1635,7 +1752,8 @@
    "stem": "Loro ___ (seguire) gli altri.",
    "answer": "seguono",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*seguire* no lleva -isc- ni cambia la vocal como en castellano («siguen»): *seguono*."
   },
   "d06-048": {
    "consigna": "Conjugá el verbo entre paréntesis en presente (algunos -ire llevan -isc-).",
@@ -1643,7 +1761,8 @@
    "stem": "Io ___ (preferire) i gatti ai cani.",
    "answer": "preferisco",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*preferire* lleva -isc-: *preferisco* (no «prefiero» con diptongo)."
   },
   "d06-049": {
    "consigna": "Conjugá el verbo entre paréntesis en presente (algunos -ire llevan -isc-).",
@@ -1651,7 +1770,8 @@
    "stem": "Tu ___ (pulire) la casa il sabato, no?",
    "answer": "pulisci",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*pulire* es de los -ire con -isc- (como *finire, capire*): *pulisci*."
   },
   "d06-050": {
    "consigna": "Conjugá el verbo entre paréntesis en presente (algunos -ire llevan -isc-).",
@@ -1659,7 +1779,8 @@
    "stem": "Io non ___ (sentire) nulla.",
    "answer": "sento",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*sentire* no lleva -isc-: *io sento*, con la -o de *io*."
   },
   "d06-051": {
    "consigna": "Traducí al italiano.",
@@ -1667,7 +1788,8 @@
    "stem": "Luisa canta.",
    "answer": "Luisa canta.",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Tercera persona de -are: *canta*, igual que en castellano."
   },
   "d06-052": {
    "consigna": "Traducí al italiano.",
@@ -1677,7 +1799,8 @@
    "alt": [
     "Io capisco."
    ],
-   "drop": false
+   "drop": false,
+   "note": "*capire* («entender») lleva -isc-: *capisco*. El sujeto se omite, como en castellano."
   },
   "d06-053": {
    "consigna": "Traducí al italiano.",
@@ -1689,7 +1812,8 @@
     "Stiamo leggendo.",
     "Noi stiamo leggendo."
    ],
-   "drop": false
+   "drop": false,
+   "note": "*noi* termina en *-iamo*: *leggiamo* (la g suena dura en *leggo* y blanda ante e/i)."
   },
   "d06-054": {
    "consigna": "Traducí al italiano.",
@@ -1699,7 +1823,8 @@
    "alt": [
     "Tu mangi."
    ],
-   "drop": false
+   "drop": false,
+   "note": "*tu* termina en *-i*; *mangiare* pierde la i de la raíz ante esa -i: *mangi*."
   },
   "d06-055": {
    "consigna": "Traducí al italiano.",
@@ -1709,7 +1834,8 @@
    "alt": [
     "Loro pagano."
    ],
-   "drop": false
+   "drop": false,
+   "note": "*loro* de -are: *-ano*, y *pagare* ante a no lleva h: *pagano*."
   },
   "d06-056": {
    "consigna": "Traducí al italiano.",
@@ -1732,7 +1858,8 @@
    "alt": [
     "Io finisco."
    ],
-   "drop": false
+   "drop": false,
+   "note": "*finire* («terminar») lleva -isc- en *io*: *finisco*; el sujeto se omite, como en castellano."
   },
   "d06-058": {
    "consigna": "Traducí al italiano.",
@@ -1756,7 +1883,8 @@
     "Loro aprono.",
     "Lui e lei aprono."
    ],
-   "drop": false
+   "drop": false,
+   "note": "Él y ella = *loro*: *aprono*, con la terminación *-ono* de -ire."
   },
   "d06-060": {
    "consigna": "Traducí al italiano.",
@@ -1768,7 +1896,8 @@
     "Continuano.",
     "Loro continuano."
    ],
-   "drop": false
+   "drop": false,
+   "note": "*seguire* no cambia la vocal como «siguen»: *seguono*."
   },
   "d06-061": {
    "consigna": "Traducí al italiano usando e, ma, o, perché.",
@@ -1797,7 +1926,8 @@
     "Me ne vado domani ma torno sabato.",
     "Me ne vado domani ma ritorno sabato."
    ],
-   "drop": false
+   "drop": false,
+   "note": "«Pero» es *ma*; *partire* es «irse, salir de viaje» y los días de la semana van sin artículo para un día concreto: *sabato*."
   },
   "d06-063": {
    "consigna": "Traducí al italiano usando e, ma, o, perché.",
@@ -1808,7 +1938,8 @@
     "Lei ascolta la radio e lui guarda la tv.",
     "Lei ascolta la radio e lui guarda la tivù."
    ],
-   "drop": false
+   "drop": false,
+   "note": "«Mirar televisión» es *guardare la televisione* (con artículo); los pronombres sujeto se dicen porque hay contraste."
   },
   "d06-064": {
    "consigna": "Traducí al italiano usando e, ma, o, perché.",
@@ -1831,7 +1962,8 @@
     "Iniziano ma non finiscono.",
     "Loro iniziano ma non finiscono."
    ],
-   "drop": false
+   "drop": false,
+   "note": "«Pero» es *ma*; *cominciare* no cambia la c: *cominciano*."
   },
   "d06-066": {
    "consigna": "Traducí al italiano usando e, ma, o, perché.",
@@ -1839,7 +1971,8 @@
    "stem": "Edo y Giulia duermen porque Rosa lee.",
    "answer": "Edo e Giulia dormono perché Rosa legge.",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "«Porque» es *perché*, con acento agudo (é cerrada)."
   },
   "d06-067": {
    "consigna": "Traducí al italiano usando e, ma, o, perché.",
@@ -1850,7 +1983,8 @@
     "Conoscono Firenze ma non conoscono Roma.",
     "Loro conoscono Firenze ma non Roma."
    ],
-   "drop": false
+   "drop": false,
+   "note": "«Conocer» a lugares y personas es *conoscere* (*conoscono*); y el italiano no pone *a* ante nombres de ciudades objeto."
   },
   "d06-068": {
    "consigna": "Traducí al italiano usando e, ma, o, perché.",
@@ -1860,7 +1994,8 @@
    "alt": [
     "Lui legge, lei scrive ed io studio."
    ],
-   "drop": false
+   "drop": false,
+   "note": "Los pronombres sujeto se expresan para contrastar (*lui... lei... io*); *e* es «y»."
   },
   "d06-069": {
    "consigna": "Traducí al italiano usando e, ma, o, perché.",
@@ -1871,7 +2006,8 @@
     "Loro comprano o vendono libri.",
     "Comprano o vendono dei libri."
    ],
-   "drop": false
+   "drop": false,
+   "note": "«O» es *o*, como en castellano; *vendere* hace *vendono*."
   },
   "d06-070": {
    "consigna": "Traducí al italiano usando e, ma, o, perché.",
@@ -1884,7 +2020,8 @@
     "Scii o fai qualche sport?",
     "Scii o fai sport?"
    ],
-   "drop": false
+   "drop": false,
+   "note": "*sciare* conserva las dos i en *tu scii* porque la i es tónica; «hacer un deporte» = *fare uno sport* (con *uno* ante s + consonante)."
   },
   "d06-071": {
    "consigna": "Traducí al italiano.",
@@ -1901,7 +2038,8 @@
    "stem": "Loro ___ simpatici.",
    "answer": "sono",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*essere* en presente: *loro sono*, la misma forma que *io sono*."
   },
   "d07-002": {
    "consigna": "Completá con la forma correcta de essere en presente.",
@@ -1909,7 +2047,8 @@
    "stem": "Tu ___ americana?",
    "answer": "sei",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*tu sei* («sos»); ojo, *sei* también es el número seis."
   },
   "d07-003": {
    "consigna": "Completá con la forma correcta de essere en presente.",
@@ -1917,7 +2056,8 @@
    "stem": "Voi ___ insegnanti?",
    "answer": "siete",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*essere* con *voi*: *siete* («ustedes son»); el adjetivo o sustantivo concuerda en plural."
   },
   "d07-004": {
    "consigna": "Completá con la forma correcta de essere en presente.",
@@ -1925,7 +2065,8 @@
    "stem": "Giulia e Chiara ___ cugine.",
    "answer": "sono",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Dos personas de las que hablás suman *loro*: *sono*, la misma forma que *io sono*."
   },
   "d07-005": {
    "consigna": "Completá con la forma correcta de essere en presente.",
@@ -1933,7 +2074,8 @@
    "stem": "Io ___ felice.",
    "answer": "sono",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*io sono*: la forma coincide con *loro sono*; el contexto (o el sujeto) aclara la persona."
   },
   "d07-006": {
    "consigna": "Completá con la forma correcta de essere en presente.",
@@ -1941,7 +2083,8 @@
    "stem": "I bambini ___ a casa.",
    "answer": "sono",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*essere* sirve también para lugar: *sono a casa* («están en casa»); el italiano no distingue ser y estar como el castellano."
   },
   "d07-007": {
    "consigna": "Completá con la forma correcta de essere en presente.",
@@ -1949,7 +2092,8 @@
    "stem": "Tu e Paola ___ amici.",
    "answer": "siete",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*tu* + otra persona equivale a *voi*: *siete*, como «vos y Paola» = «ustedes son»."
   },
   "d07-008": {
    "consigna": "Completá con la forma correcta de essere en presente.",
@@ -1957,7 +2101,8 @@
    "stem": "Laura ___ molto giovane.",
    "answer": "è",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*lei è*, con acento: *è* es verbo y *e* sin acento es «y»."
   },
   "d07-009": {
    "consigna": "Completá con la forma correcta de essere en presente.",
@@ -1966,7 +2111,7 @@
    "answer": "siamo",
    "alt": [],
    "drop": false,
-   "note": "Io ed Emilio = noi → siamo."
+   "note": "Si en el sujeto estás vos (*io ed Emilio*), el verbo va en *noi*: *siamo*. Delante de vocal, *e* suele volverse *ed*."
   },
   "d07-010": {
    "consigna": "Completá con la forma correcta de essere en presente.",
@@ -1975,7 +2120,7 @@
    "answer": "siete",
    "alt": [],
    "drop": false,
-   "note": "Tu e loro = voi → siete."
+   "note": "*tu* + otras personas suman *voi*: *siete*, como «vos y ellos» = «ustedes» en castellano."
   },
   "d07-011": {
    "consigna": "Completá con la forma correcta de avere en presente.",
@@ -1983,7 +2128,8 @@
    "stem": "Luigi ___ un gatto che è vecchio vecchio.",
    "answer": "ha",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*avere* en presente: *lui ha*, con h muda (se pronuncia «a»); la h distingue *ha* de la preposición *a*."
   },
   "d07-012": {
    "consigna": "Completá con la forma correcta de avere en presente.",
@@ -1991,7 +2137,8 @@
    "stem": "Voi ___ una bellissima casa.",
    "answer": "avete",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*avere* con *voi*: *avete*; «tener» algo se dice con *avere*, no con *tenere*."
   },
   "d07-013": {
    "consigna": "Completá con la forma correcta de avere en presente.",
@@ -2008,7 +2155,8 @@
    "stem": "Io non ___ una macchina.",
    "answer": "ho",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*io ho*, con h muda: se pronuncia «o»; la h lo distingue de *o* («o»)."
   },
   "d07-015": {
    "consigna": "Completá con la forma correcta de avere en presente.",
@@ -2016,7 +2164,8 @@
    "stem": "Tu ___ un amico che si chiama Leonardo?",
    "answer": "hai",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*tu hai*: la h no se pronuncia y distingue el verbo de *ai* (preposición + artículo)."
   },
   "d07-016": {
    "consigna": "Traducí al italiano usando avere.",
@@ -2026,7 +2175,8 @@
    "alt": [
     "Io ho fame."
    ],
-   "drop": false
+   "drop": false,
+   "note": "Las sensaciones se dicen con *avere* + sustantivo, como «tener hambre»: *ho fame*; sin artículo."
   },
   "d07-017": {
    "consigna": "Traducí al italiano usando avere.",
@@ -2037,7 +2187,7 @@
     "Ha torto."
    ],
    "drop": false,
-   "note": "Estar equivocado = avere torto; tener razón = avere ragione."
+   "note": "Donde decimos «estar equivocado», el italiano usa *avere torto* (*ha torto*); lo contrario es *avere ragione*, «tener razón»."
   },
   "d07-018": {
    "consigna": "Traducí al italiano usando avere.",
@@ -2047,7 +2197,8 @@
    "alt": [
     "Loro hanno sonno."
    ],
-   "drop": false
+   "drop": false,
+   "note": "*avere sonno* = «tener sueño»: misma construcción con *avere* + sustantivo sin artículo."
   },
   "d07-019": {
    "consigna": "Traducí al italiano usando avere.",
@@ -2058,7 +2209,7 @@
     "Lui ha fretta."
    ],
    "drop": false,
-   "note": "Estar apurado = avere fretta."
+   "note": "«Estar apurado» se dice con *avere* + sustantivo: *avere fretta* (*ha fretta*), como *avere fame, avere sonno*."
   },
   "d07-020": {
    "consigna": "Traducí al italiano usando avere.",
@@ -2071,7 +2222,7 @@
     "Loro hanno freddo?"
    ],
    "drop": false,
-   "note": "Voi es lo normal; Loro es muy formal."
+   "note": "«Tener frío» = *avere freddo*: *avere* + sensación sin artículo, igual que en castellano."
   },
   "d07-021": {
    "consigna": "Traducí al italiano usando avere.",
@@ -2079,7 +2230,8 @@
    "stem": "Paolo tiene calor.",
    "answer": "Paolo ha caldo.",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*avere caldo* = «tener calor»: *avere* + sensación."
   },
   "d07-022": {
    "consigna": "Traducí al italiano usando avere.",
@@ -2089,7 +2241,8 @@
    "alt": [
     "Io ho paura."
    ],
-   "drop": false
+   "drop": false,
+   "note": "*avere paura* = «tener miedo»: misma construcción que en castellano."
   },
   "d07-023": {
    "consigna": "Traducí al italiano usando avere.",
@@ -2103,7 +2256,8 @@
     "La nonna ha ottant'anni.",
     "Nonna ha ottant'anni."
    ],
-   "drop": false
+   "drop": false,
+   "note": "La edad va con *avere*, como en castellano: *ha ottanta anni* (en la lengua hablada, *ottant’anni*)."
   },
   "d07-024": {
    "consigna": "Traducí al italiano usando avere.",
@@ -2111,7 +2265,8 @@
    "stem": "Micia (la gata) tiene sed.",
    "answer": "Micia ha sete.",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*avere sete* = «tener sed»; *sete* con una t (*sette* es siete)."
   },
   "d07-025": {
    "consigna": "Traducí al italiano usando avere.",
@@ -2121,7 +2276,8 @@
    "alt": [
     "Lui non ha vergogna."
    ],
-   "drop": false
+   "drop": false,
+   "note": "*avere vergogna* = «tener vergüenza»; la negación va antes del verbo: *non ha*."
   },
   "d07-026": {
    "consigna": "Completá con essere o avere, conjugado en presente.",
@@ -2129,7 +2285,8 @@
    "stem": "Noi ___ studenti.",
    "answer": "siamo",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Para decir qué es alguien se usa *essere*: *siamo studenti*, sin artículo, como en castellano."
   },
   "d07-027": {
    "consigna": "Completá con essere o avere, conjugado en presente.",
@@ -2138,7 +2295,7 @@
    "answer": "ha",
    "alt": [],
    "drop": false,
-   "note": "Tener hambre = avere fame."
+   "note": "Las sensaciones físicas van con *avere* + sustantivo, como en castellano: *ha fame*; es *essere* solo si sigue un adjetivo."
   },
   "d07-028": {
    "consigna": "Completá con essere o avere, conjugado en presente.",
@@ -2147,7 +2304,7 @@
    "answer": "hai",
    "alt": [],
    "drop": false,
-   "note": "No tener razón = avere torto."
+   "note": "*avere torto* es «estar equivocado, no tener razón»: *avere* + sustantivo, donde el castellano usa «estar»."
   },
   "d07-029": {
    "consigna": "Completá con essere o avere, conjugado en presente.",
@@ -2155,7 +2312,8 @@
    "stem": "Lei ___ simpatica.",
    "answer": "è",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Con un adjetivo que describe va *essere*: *è simpatica*."
   },
   "d07-030": {
    "consigna": "Completá con essere o avere, conjugado en presente.",
@@ -2164,7 +2322,7 @@
    "answer": "ho",
    "alt": [],
    "drop": false,
-   "note": "Tener frío = avere freddo."
+   "note": "*freddo* acá es sustantivo (la sensación), así que va *avere*: *ho freddo*; *sono freddo* sería «soy frío» (de carácter)."
   },
   "d07-031": {
    "consigna": "Completá con essere o avere, conjugado en presente.",
@@ -2172,7 +2330,8 @@
    "stem": "Loro ___ molto vecchi.",
    "answer": "sono",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Adjetivo después → *essere*: *sono molto vecchi*."
   },
   "d07-032": {
    "consigna": "Completá con essere o avere, conjugado en presente.",
@@ -2180,7 +2339,8 @@
    "stem": "La maestra ___ intelligente.",
    "answer": "è",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Adjetivo después → *essere*: *è intelligente*."
   },
   "d07-033": {
    "consigna": "Completá con essere o avere, conjugado en presente.",
@@ -2189,7 +2349,7 @@
    "answer": "ho",
    "alt": [],
    "drop": false,
-   "note": "avere voglia di = tener ganas de; avere bisogno di = necesitar."
+   "note": "*avere voglia di* + infinitivo = «tener ganas de»: construcción con *avere* + sustantivo, igual que *avere bisogno di* («necesitar»)."
   },
   "d07-034": {
    "consigna": "Completá con essere o avere, conjugado en presente.",
@@ -2197,7 +2357,8 @@
    "stem": "Lui ___ molto ricco.",
    "answer": "è",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Adjetivo después → *essere*: *è molto ricco*."
   },
   "d07-035": {
    "consigna": "Completá con essere o avere, conjugado en presente.",
@@ -2206,7 +2367,7 @@
    "answer": "avete",
    "alt": [],
    "drop": false,
-   "note": "Estar apurado = avere fretta."
+   "note": "*fretta* es sustantivo: *avere fretta* («estar apurado»); el castellano usa «estar» + adjetivo, el italiano *avere* + sustantivo."
   },
   "d07-036": {
    "consigna": "Completá con la forma correcta de fare en presente.",
@@ -2223,7 +2384,8 @@
    "stem": "Mario, cosa ___?",
    "answer": "fai",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*fare* es irregular: *tu fai*. *Cosa fai?* = «¿Qué hacés?»."
   },
   "d07-038": {
    "consigna": "Completá con la forma correcta de fare en presente.",
@@ -2231,7 +2393,8 @@
    "stem": "Noi ___ pranzo fuori.",
    "answer": "facciamo",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*noi facciamo* (con doble c). *Fare pranzo* = «almorzar»."
   },
   "d07-039": {
    "consigna": "Completá con la forma correcta de fare en presente.",
@@ -2239,7 +2402,8 @@
    "stem": "L’acqua gassata ___ male.",
    "answer": "fa",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*fare male* = «hacer mal, doler»: *fa male*."
   },
   "d07-040": {
    "consigna": "Completá con la forma correcta de fare en presente.",
@@ -2247,7 +2411,8 @@
    "stem": "Voi ___ le valigie?",
    "answer": "fate",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*voi fate*. «Hacer las valijas» también es *fare le valigie*."
   },
   "d07-041": {
    "consigna": "Completá con la forma correcta de fare en presente.",
@@ -2255,7 +2420,8 @@
    "stem": "Emilio ___ una telefonata.",
    "answer": "fa",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*fare una telefonata* = «hacer una llamada»: *lui fa*."
   },
   "d07-042": {
    "consigna": "Completá con la forma correcta de fare en presente.",
@@ -2263,7 +2429,8 @@
    "stem": "I turisti ___ molte fotografie.",
    "answer": "fanno",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*loro fanno*; «sacar fotos» se dice *fare fotografie*, con *fare*."
   },
   "d07-043": {
    "consigna": "Completá con la forma correcta de fare en presente.",
@@ -2272,7 +2439,7 @@
    "answer": "fanno",
    "alt": [],
    "drop": false,
-   "note": "fare la conoscenza di = conocer (a alguien por primera vez)."
+   "note": "«Conocer a alguien por primera vez» puede decirse *fare la conoscenza di* (*fanno*): una de las muchas expresiones con *fare* donde el castellano usa otro verbo."
   },
   "d07-044": {
    "consigna": "Completá con la forma correcta de fare en presente.",
@@ -2281,7 +2448,7 @@
    "answer": "fa",
    "alt": [],
    "drop": false,
-   "note": "fare lo spiritoso = hacerse el gracioso."
+   "note": "*fare* + *lo* + adjetivo = «hacerse el...»: *fa lo spiritoso*, «se hace el gracioso»; sin «se»."
   },
   "d07-045": {
    "consigna": "Completá con la forma correcta de fare en presente.",
@@ -2289,7 +2456,8 @@
    "stem": "Dopo cena, io ___ la doccia.",
    "answer": "faccio",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*io faccio* (doble c). «Bañarse, ducharse» = *fare la doccia*."
   },
   "d07-046": {
    "consigna": "Conjugá en presente el verbo italiano que corresponde a la pista (andare, dare, dovere, potere, stare, venire, volere).",
@@ -2306,7 +2474,8 @@
    "stem": "A che ora ___ loro? (ir)",
    "answer": "vanno",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*andare*: *io vado, tu vai, lui va, loro vanno*."
   },
   "d07-048": {
    "consigna": "Conjugá en presente el verbo italiano que corresponde a la pista (andare, dare, dovere, potere, stare, venire, volere).",
@@ -2316,7 +2485,8 @@
    "alt": [
     "debbo"
    ],
-   "drop": false
+   "drop": false,
+   "note": "*dovere* + infinitivo = «tener que»: *devo studiare*, sin «que»."
   },
   "d07-049": {
    "consigna": "Conjugá en presente el verbo italiano que corresponde a la pista (andare, dare, dovere, potere, stare, venire, volere).",
@@ -2324,7 +2494,8 @@
    "stem": "Voi ___ a teatro domani? (ir)",
    "answer": "andate",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*voi andate* es regular; el cambio a *vad-/va-* se da en las otras personas."
   },
   "d07-050": {
    "consigna": "Conjugá en presente el verbo italiano que corresponde a la pista (andare, dare, dovere, potere, stare, venire, volere).",
@@ -2333,7 +2504,7 @@
    "answer": "stai",
    "alt": [],
    "drop": false,
-   "note": "Come stai? = ¿Cómo estás?"
+   "note": "Para la salud y el ánimo se usa *stare*, no *essere*: *Come stai?* (*io sto, tu stai*)."
   },
   "d07-051": {
    "consigna": "Conjugá en presente el verbo italiano que corresponde a la pista (andare, dare, dovere, potere, stare, venire, volere).",
@@ -2341,7 +2512,8 @@
    "stem": "Tu ___ venire con noi? (querer)",
    "answer": "vuoi",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*volere*: *io voglio, tu vuoi, lui vuole*; va directo + infinitivo: *vuoi venire*."
   },
   "d07-052": {
    "consigna": "Conjugá en presente el verbo italiano que corresponde a la pista (andare, dare, dovere, potere, stare, venire, volere).",
@@ -2351,7 +2523,8 @@
    "alt": [
     "debbono"
    ],
-   "drop": false
+   "drop": false,
+   "note": "*dovere* («deber, tener que»): *loro devono*."
   },
   "d07-053": {
    "consigna": "Conjugá en presente el verbo italiano que corresponde a la pista (andare, dare, dovere, potere, stare, venire, volere).",
@@ -2359,7 +2532,8 @@
    "stem": "Tu e Marco ___ molti regali ai bambini. (dar)",
    "answer": "date",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*dare*: *voi date*, regular; solo *lui dà* lleva acento."
   },
   "d07-054": {
    "consigna": "Conjugá en presente el verbo italiano que corresponde a la pista (andare, dare, dovere, potere, stare, venire, volere).",
@@ -2367,7 +2541,8 @@
    "stem": "Noi ___ arrivare presto. (poder)",
    "answer": "possiamo",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*potere* es irregular: *posso, puoi, può, possiamo, potete, possono*; va directo + infinitivo, sin preposición."
   },
   "d07-055": {
    "consigna": "Conjugá en presente el verbo italiano que corresponde a la pista (andare, dare, dovere, potere, stare, venire, volere).",
@@ -2375,7 +2550,8 @@
    "stem": "Io ___ stasera. (venir)",
    "answer": "vengo",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*venire*: *io vengo* (con g, como «vengo»)."
   },
   "d07-056": {
    "consigna": "Conjugá en presente el verbo italiano que corresponde a la pista (andare, dire, partire, uscire).",
@@ -2392,7 +2568,8 @@
    "stem": "Loro ___ domani mattina per Milano. (partir, irse de viaje)",
    "answer": "partono",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*partire* es «irse de viaje»: *partono*; «para Milán» es *per Milano*."
   },
   "d07-058": {
    "consigna": "Conjugá en presente el verbo italiano que corresponde a la pista (andare, dire, partire, uscire).",
@@ -2400,7 +2577,8 @@
    "stem": "Io non ___ a scuola. (ir)",
    "answer": "vado",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*andare*: *io vado*; «ir a la escuela» es *andare a scuola*, sin artículo."
   },
   "d07-059": {
    "consigna": "Conjugá en presente el verbo italiano que corresponde a la pista (andare, dire, partire, uscire).",
@@ -2408,7 +2586,8 @@
    "stem": "Marco ___ sempre con gli amici. (salir)",
    "answer": "esce",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*uscire* cambia la raíz a *esc-* en las personas acentuadas en la raíz: *esce*."
   },
   "d07-060": {
    "consigna": "Conjugá en presente el verbo italiano que corresponde a la pista (andare, dire, partire, uscire).",
@@ -2416,7 +2595,8 @@
    "stem": "Figlio mio, dove ___? (ir)",
    "answer": "vai",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*andare*: *tu vai*; «¿adónde?» es simplemente *dove*."
   },
   "d07-061": {
    "consigna": "Conjugá en presente el verbo italiano que corresponde a la pista (andare, dire, partire, uscire).",
@@ -2424,7 +2604,8 @@
    "stem": "I parenti ___ oggi. Tornano a casa. (partir, irse de viaje)",
    "answer": "partono",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*partire* es «irse de viaje, salir para»; con *loro*: *partono*."
   },
   "d07-062": {
    "consigna": "Conjugá en presente el verbo italiano que corresponde a la pista (andare, dire, partire, uscire).",
@@ -2432,7 +2613,8 @@
    "stem": "Noi ___ di sì. (decir)",
    "answer": "diciamo",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*dire*: *noi diciamo*; «decir que sí» = *dire di sì*, con *di*."
   },
   "d07-063": {
    "consigna": "Conjugá en presente el verbo italiano que corresponde a la pista (andare, dire, partire, uscire).",
@@ -2440,7 +2622,8 @@
    "stem": "Io ___ con un’amica. (salir)",
    "answer": "esco",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*uscire*: *io esco*; «salir con alguien» = *uscire con*."
   },
   "d07-064": {
    "consigna": "Conjugá en presente el verbo italiano que corresponde a la pista (andare, dire, partire, uscire).",
@@ -2448,7 +2631,8 @@
    "stem": "Voi ___ di no. (decir)",
    "answer": "dite",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*dire*: *voi dite*; «decir que no» = *dire di no*."
   },
   "d07-065": {
    "consigna": "Conjugá en presente el verbo italiano que corresponde a la pista (andare, dire, partire, uscire).",
@@ -2456,7 +2640,8 @@
    "stem": "Lui ___ che non vieni. (decir)",
    "answer": "dice",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*dire* («decir») es irregular: *dico, dici, dice*; *dice che...* como «dice que»."
   },
   "d07-066": {
    "consigna": "Traducí al italiano usando la expresión con essere que se indica.",
@@ -2466,7 +2651,8 @@
    "alt": [
     "È un Cincinnato."
    ],
-   "drop": false
+   "drop": false,
+   "note": "*essere un Cincinnato* = «ser una persona íntegra»: *essere* + nombre de un personaje, como nuestro «ser un Quijote»."
   },
   "d07-067": {
    "consigna": "Traducí al italiano usando la expresión con essere que se indica.",
@@ -2476,7 +2662,8 @@
    "alt": [
     "Loro non sono in vena."
    ],
-   "drop": false
+   "drop": false,
+   "note": "*essere in vena* = «estar de humor»; el italiano usa *essere* también para estados: *non sono in vena*."
   },
   "d07-068": {
    "consigna": "Traducí al italiano usando la expresión con essere que se indica.",
@@ -2487,7 +2674,7 @@
     "Io sono al verde."
    ],
    "drop": false,
-   "note": "essere al verde = no tener plata."
+   "note": "«Estar sin un peso» se dice *essere al verde*: *essere* cubre también nuestro «estar», y la expresión va con *al* (*a + il*)."
   },
   "d07-069": {
    "consigna": "Traducí al italiano usando la expresión con essere que se indica.",
@@ -2497,7 +2684,8 @@
    "alt": [
     "È una Cassandra."
    ],
-   "drop": false
+   "drop": false,
+   "note": "*essere una Cassandra* = «anunciar desgracias sin que nadie te crea»: *essere* + personaje, en femenino."
   },
   "d07-070": {
    "consigna": "Traducí al italiano usando la expresión con essere que se indica.",
@@ -2509,7 +2697,8 @@
     "Lui è in gamba.",
     "È in gamba."
    ],
-   "drop": false
+   "drop": false,
+   "note": "*essere in gamba* = «ser capo, muy capaz»; se intensifica con *molto*."
   },
   "d08-001": {
    "consigna": "Escribí el pronombre personal sujeto que reemplaza a las palabras (hablando de ellos, salvo que diga que les hablás).",
@@ -2519,7 +2708,8 @@
    "alt": [
     "essi"
    ],
-   "drop": false
+   "drop": false,
+   "note": "Varias personas de las que hablás: *loro* («ellos, ellas»)."
   },
   "d08-002": {
    "consigna": "Escribí el pronombre personal sujeto que reemplaza a las palabras (hablando de ellos, salvo que diga que les hablás).",
@@ -2529,7 +2719,8 @@
    "alt": [
     "essi"
    ],
-   "drop": false
+   "drop": false,
+   "note": "Dos personas de las que hablás: *loro*, sin distinguir género."
   },
   "d08-003": {
    "consigna": "Escribí el pronombre personal sujeto que reemplaza a las palabras (hablando de ellos, salvo que diga que les hablás).",
@@ -2537,7 +2728,8 @@
    "stem": "tu e gli altri (vos y los demás) → ___",
    "answer": "voi",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Cuando el sujeto incluye a *tu* y a otros, el pronombre es *voi*: el mismo cálculo que hacemos con «vos y los demás» = «ustedes»."
   },
   "d08-004": {
    "consigna": "Escribí el pronombre personal sujeto que reemplaza a las palabras (hablando de ellos, salvo que diga que les hablás).",
@@ -2547,7 +2739,8 @@
    "alt": [
     "egli"
    ],
-   "drop": false
+   "drop": false,
+   "note": "Un hombre del que hablás: *lui* (*egli* es escrito y formal)."
   },
   "d08-005": {
    "consigna": "Escribí el pronombre personal sujeto que reemplaza a las palabras (hablando de ellos, salvo que diga que les hablás).",
@@ -2577,7 +2770,8 @@
    "alt": [
     "essa"
    ],
-   "drop": false
+   "drop": false,
+   "note": "Para animales hembra (y en la lengua hablada) se usa *lei*: *la gatta → lei*."
   },
   "d08-008": {
    "consigna": "Escribí el pronombre personal sujeto que reemplaza a las palabras (hablando de ellos, salvo que diga que les hablás).",
@@ -2585,7 +2779,8 @@
    "stem": "io ed un gruppo di amici (yo y un grupo de amigos) → ___",
    "answer": "noi",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Si te incluís vos, es *noi*."
   },
   "d08-009": {
    "consigna": "Escribí el pronombre personal sujeto que reemplaza a las palabras (hablando de ellos, salvo que diga que les hablás).",
@@ -2593,7 +2788,8 @@
    "stem": "(les hablás) Ragazzi (chicos) → ___",
    "answer": "voi",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Si les hablás a varios en confianza: *voi*."
   },
   "d08-010": {
    "consigna": "Escribí el pronombre personal sujeto que reemplaza a las palabras (hablando de ellos, salvo que diga que les hablás).",
@@ -2601,7 +2797,8 @@
    "stem": "(le hablás) Mamma (mamá) → ___",
    "answer": "tu",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "A tu mamá la tuteás: *tu*. El italiano no tiene «vos»: el tuteo es siempre *tu*."
   },
   "d08-011": {
    "consigna": "Escribí el pronombre de objeto directo (lo, la, li, le, ci, vi…) que reemplaza a las palabras.",
@@ -2609,7 +2806,8 @@
    "stem": "l’albero (el árbol) → ___",
    "answer": "lo",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Objeto directo masculino singular: *lo* (*l’albero* → *lo*); delante de vocal se apostrofa: *l’ho visto*."
   },
   "d08-012": {
    "consigna": "Escribí el pronombre de objeto directo (lo, la, li, le, ci, vi…) que reemplaza a las palabras.",
@@ -2626,7 +2824,8 @@
    "stem": "le ragazze (las chicas) → ___",
    "answer": "le",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Objeto directo femenino plural: *le*, como «las»."
   },
   "d08-014": {
    "consigna": "Escribí el pronombre de objeto directo (lo, la, li, le, ci, vi…) que reemplaza a las palabras.",
@@ -2634,7 +2833,8 @@
    "stem": "te e me (a vos y a mí) → ___",
    "answer": "ci",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "«A vos y a mí» suma *noi*, y el directo de *noi* es *ci* («nos»): *ci vedono*."
   },
   "d08-015": {
    "consigna": "Escribí el pronombre de objeto directo (lo, la, li, le, ci, vi…) que reemplaza a las palabras.",
@@ -2642,7 +2842,8 @@
    "stem": "gli studenti (los estudiantes) → ___",
    "answer": "li",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Masculino plural: *li* («los»), no *gli*, que es indirecto."
   },
   "d08-016": {
    "consigna": "Escribí el pronombre de objeto directo (lo, la, li, le, ci, vi…) que reemplaza a las palabras.",
@@ -2668,7 +2869,8 @@
    "stem": "il museo (el museo) → ___",
    "answer": "lo",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Masculino singular como objeto directo: *lo* («lo»), delante del verbo conjugado."
   },
   "d08-019": {
    "consigna": "Escribí el pronombre de objeto directo (lo, la, li, le, ci, vi…) que reemplaza a las palabras.",
@@ -2676,7 +2878,8 @@
    "stem": "Giovanni → ___",
    "answer": "lo",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Una persona masculina como objeto directo: *lo* («lo»); nunca «le» como en el leísmo castellano."
   },
   "d08-020": {
    "consigna": "Escribí el pronombre de objeto directo (lo, la, li, le, ci, vi…) que reemplaza a las palabras.",
@@ -2684,7 +2887,8 @@
    "stem": "la mamma (la mamá) → ___",
    "answer": "la",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Femenino singular como objeto directo: *la*, como en castellano."
   },
   "d08-021": {
    "consigna": "Escribí en italiano el pronombre de objeto indirecto (una sola palabra).",
@@ -2703,7 +2907,8 @@
    "stem": "para mí → ___",
    "answer": "mi",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Indirecto de *io*: *mi*, igual que en castellano."
   },
   "d08-023": {
    "consigna": "Escribí en italiano el pronombre de objeto indirecto (una sola palabra).",
@@ -2711,7 +2916,8 @@
    "stem": "a ella → ___",
    "answer": "le",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Indirecto femenino: *le* («a ella»). Ojo: *le* no sirve para «a él», que es *gli*."
   },
   "d08-024": {
    "consigna": "Escribí en italiano el pronombre de objeto indirecto (una sola palabra).",
@@ -2719,7 +2925,8 @@
    "stem": "a nosotros → ___",
    "answer": "ci",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "El indirecto de *noi* es *ci*: la misma forma que el directo, como nuestro «nos»."
   },
   "d08-025": {
    "consigna": "Escribí en italiano el pronombre de objeto indirecto (una sola palabra).",
@@ -2738,7 +2945,8 @@
    "stem": "a ustedes → ___",
    "answer": "vi",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Indirecto de *voi*: *vi* («les» a ustedes)."
   },
   "d08-027": {
    "consigna": "Escribí en italiano el pronombre de objeto indirecto (una sola palabra).",
@@ -2746,7 +2954,8 @@
    "stem": "para vos y para mí → ___",
    "answer": "ci",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "«Para vos y para mí» suma *noi*, y su indirecto es *ci* («nos»)."
   },
   "d08-028": {
    "consigna": "Escribí en italiano el pronombre de objeto indirecto (una sola palabra).",
@@ -2754,7 +2963,8 @@
    "stem": "a él → ___",
    "answer": "gli",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "«A él» es *gli*, no *le*: el italiano distingue el género en el indirecto singular."
   },
   "d08-029": {
    "consigna": "Escribí en italiano el pronombre de objeto indirecto (una sola palabra).",
@@ -2762,7 +2972,8 @@
    "stem": "a vos → ___",
    "answer": "ti",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "El indirecto de *tu* es *ti*, igual que en castellano."
   },
   "d08-030": {
    "consigna": "Escribí en italiano el pronombre de objeto indirecto (una sola palabra).",
@@ -2790,7 +3001,8 @@
    "stem": "a ustedes + la → ___",
    "answer": "ve la",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Ante *lo, la, li, le, ne* la *i* pasa a *e*: *vi* → *ve la*."
   },
   "d08-033": {
    "consigna": "Escribí en italiano los dos pronombres juntos (indirecto + directo), como en castellano «me lo», «te la».",
@@ -2798,7 +3010,8 @@
    "stem": "a mí + los → ___",
    "answer": "me li",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*mi* + *li* → *me li*: la i pasa a e delante del directo."
   },
   "d08-034": {
    "consigna": "Escribí en italiano los dos pronombres juntos (indirecto + directo), como en castellano «me lo», «te la».",
@@ -2815,7 +3028,8 @@
    "stem": "a vos + los → ___",
    "answer": "te li",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "Delante de *lo, la, li, le, ne*, *ti* se vuelve *te*: *te li*, como «te los»."
   },
   "d08-036": {
    "consigna": "Escribí en italiano los dos pronombres juntos (indirecto + directo), como en castellano «me lo», «te la».",
@@ -2823,7 +3037,8 @@
    "stem": "a nosotros + lo → ___",
    "answer": "ce lo",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*ci* se vuelve *ce* delante del directo: *ce lo*, como «nos lo»."
   },
   "d08-037": {
    "consigna": "Escribí en italiano los dos pronombres juntos (indirecto + directo), como en castellano «me lo», «te la».",
@@ -2849,7 +3064,8 @@
    "stem": "a mí + lo → ___",
    "answer": "me lo",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*mi* + *lo* → *me lo*, igual que en castellano."
   },
   "d08-040": {
    "consigna": "Escribí en italiano los dos pronombres juntos (indirecto + directo), como en castellano «me lo», «te la».",
@@ -2857,7 +3073,8 @@
    "stem": "a vos + la → ___",
    "answer": "te la",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "*ti* se vuelve *te* delante de *la*: *te la*, igual que en castellano."
   },
   "d08-041": {
    "consigna": "Traducí al italiano usando ci o ne.",
@@ -2866,7 +3083,7 @@
    "answer": "Ci sono due gatti.",
    "alt": [],
    "drop": false,
-   "note": "Hay + plural = ci sono."
+   "note": "«Hay» es *c’è* con singular y *ci sono* con plural: el italiano concuerda el verbo con lo que hay, el castellano no."
   },
   "d08-042": {
    "consigna": "Traducí al italiano usando ci o ne.",
@@ -2875,7 +3092,7 @@
    "answer": "C’è Francesca?",
    "alt": [],
    "drop": false,
-   "note": "Estar (presente en un lugar) = esserci."
+   "note": "«Estar» en un lugar, presente, se dice *esserci*: *C’è Francesca?* (*ci* = «ahí»), no *è*."
   },
   "d08-043": {
    "consigna": "Traducí al italiano usando ci o ne.",
@@ -2883,7 +3100,8 @@
    "stem": "No está. (hablando de una persona)",
    "answer": "Non c’è.",
    "alt": [],
-   "drop": false
+   "drop": false,
+   "note": "«No está» (una persona ausente) = *non c’è*: *esserci* con la negación antes de *ci*."
   },
   "d08-044": {
    "consigna": "Traducí al italiano usando ci o ne.",
@@ -2896,7 +3114,7 @@
     "Mi piacerebbe averne due."
    ],
    "drop": false,
-   "note": "ne = de eso / de esos."
+   "note": "*ne* reemplaza «de eso/de esos» cuando hay una cantidad (*due*); el castellano lo calla, el italiano no. Con infinitivo se pega al final: *averne*."
   },
   "d08-045": {
    "consigna": "Traducí al italiano usando ci o ne.",
@@ -2905,7 +3123,7 @@
    "answer": "Non ce n’è.",
    "alt": [],
    "drop": false,
-   "note": "ci + ne → ce n’è."
+   "note": "«No hay de eso» = *non ce n’è*: *ci* pasa a *ce* ante *ne*, y *ne* se apostrofa ante *è*."
   }
  }
 }

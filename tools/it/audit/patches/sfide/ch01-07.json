@@ -271,7 +271,7 @@
     "stem": "Il finestrino ___ macchina è chiuso? (di)",
     "answer": "della",
     "alt": [],
-    "note": "di + la = della."
+    "note": "*di* se une al artículo: *di* + *la* = *della*. El castellano solo contrae «del»; el italiano contrae con todos los artículos."
    },
    {
     "label": "c",
@@ -287,7 +287,7 @@
     "stem": "Il gatto dorme ___ studio. (in)",
     "answer": "nello",
     "alt": [],
-    "note": "in + lo = nello (delante de s + consonante)."
+    "note": "*in* + artículo cambia a *ne-*: *in* + *lo* = *nello*; *lo* porque *studio* empieza con s + consonante."
    },
    {
     "label": "e",
@@ -379,7 +379,7 @@
     "stem": "La capitale ___ Italia è Roma.",
     "answer": "dell'",
     "alt": [],
-    "note": "di + l' = dell' delante de vocal."
+    "note": "Los países llevan artículo en italiano (*l'Italia*), así que «de Italia» es *di* + *l'* = *dell'Italia*."
    },
    {
     "label": "c",
@@ -395,7 +395,7 @@
     "stem": "La capitale ___ Canada è Ottawa.",
     "answer": "del",
     "alt": [],
-    "note": "di + il = del."
+    "note": "Con artículo: *il Canada*, y *di* + *il* = *del Canada*. En castellano «de Canadá» va sin artículo."
    },
    {
     "label": "e",
@@ -961,7 +961,7 @@
     "stem": "Aspettiamo mezz'ora, è ancora ___ (un po' presto) per partire.",
     "answer": "prestino",
     "alt": [],
-    "note": "«Prestino» = un poco temprano."
+    "note": "El sufijo *-ino* también atenúa adverbios: *presto → prestino* («un poco temprano»), como nuestro «tempranito»."
    },
    {
     "label": "d",
@@ -971,7 +971,7 @@
     "alt": [
      "Malino"
     ],
-    "note": "«Maluccio» o «malino» = no muy bien."
+    "note": "*-uccio* o *-ino* atenúan: *male → maluccio / malino* («no muy bien»), como «medio mal»."
    }
   ]
  },
@@ -1259,7 +1259,7 @@
     ],
     "answer": "recíproca",
     "alt": [],
-    "note": "«Ci troviamo» = nos encontramos (uno con el otro)."
+    "note": "Con sujeto plural, *ci/si* puede ser recíproco («uno con el otro»): *ci troviamo* = «nos encontramos (entre nosotros)»."
    },
    {
     "label": "c",
@@ -1271,7 +1271,7 @@
     ],
     "answer": "recíproca",
     "alt": [],
-    "note": "«Ci sentiamo» = hablamos (el uno con el otro)."
+    "note": "*sentirsi* recíproco = «hablarse» (por teléfono): *ci sentiamo domani*, «hablamos mañana»."
    },
    {
     "label": "d",
@@ -1295,7 +1295,7 @@
     ],
     "answer": "reflexiva",
     "alt": [],
-    "note": "«Si chiamano» = cómo se llaman (su nombre)."
+    "note": "*chiamarsi* es reflexivo, cada uno se llama a sí mismo: *come si chiamano?* = «¿cómo se llaman?»."
    },
    {
     "label": "f",
@@ -1307,7 +1307,7 @@
     ],
     "answer": "recíproca",
     "alt": [],
-    "note": "«Si chiamano» = se llaman por teléfono una a la otra."
+    "note": "Acá *si chiamano* es recíproco: se llaman por teléfono una a la otra. El sujeto plural y *spesso* lo indican."
    }
   ]
  },
@@ -1539,7 +1539,7 @@
     "stem": "Ho prestato 50 euro a Riccardo. Ieri ___ ho prestato 50 euro.",
     "answer": "gli",
     "alt": [],
-    "note": "A él = gli."
+    "note": "Indirecto masculino singular = *gli* («le» a él). El italiano distingue *gli* (él) de *le* (ella), el castellano no."
    },
    {
     "label": "b",
@@ -1547,7 +1547,7 @@
     "stem": "Devi restituire i soldi a Rina. ___ devi restituire i soldi domani.",
     "answer": "Le",
     "alt": [],
-    "note": "A ella = le."
+    "note": "Indirecto femenino singular = *le*, con mayúscula al principio: *Le devi restituire*."
    },
    {
     "label": "c",
@@ -1555,7 +1555,7 @@
     "stem": "Anna deve 100 euro a suo fratello. Purtroppo ___ deve 100 euro.",
     "answer": "gli",
     "alt": [],
-    "note": "A él = gli."
+    "note": "*a suo fratello* → *gli*: masculino singular."
    },
    {
     "label": "d",
@@ -1563,7 +1563,7 @@
     "stem": "Lucio dovrà pagare 2.000 euro alla moglie. È vero, ___ dovrà pagare 2.000 euro.",
     "answer": "le",
     "alt": [],
-    "note": "A ella = le."
+    "note": "*alla moglie* → *le*: indirecto femenino. *gli* sería para un hombre."
    }
   ]
  },
@@ -1623,7 +1623,7 @@
     "stem": "___ puoi aggiustare i freni? (¿Me arreglás los frenos?)",
     "answer": "Mi",
     "alt": [],
-    "note": "A mí = mi."
+    "note": "El indirecto de *io* es *mi*, igual que en castellano: *mi puoi aggiustare...?*"
    },
    {
     "label": "b",
@@ -1631,7 +1631,7 @@
     "stem": "___ potresti riparare la bicicletta? (¿Le podrías arreglar la bici a ella?)",
     "answer": "Le",
     "alt": [],
-    "note": "A ella = le."
+    "note": "«A ella» = *le*: indirecto femenino singular."
    },
    {
     "label": "c",
@@ -1639,7 +1639,7 @@
     "stem": "___ può cambiare 1.000 euro? (¿Nos puede cambiar 1.000 euros?)",
     "answer": "Ci",
     "alt": [],
-    "note": "A nosotros = ci."
+    "note": "«A nosotros» = *ci*: la misma forma sirve para directo e indirecto."
    }
   ]
  },
@@ -1661,7 +1661,7 @@
     "stem": "Giulio è rimasto male, la cameriera ___ ha macchiato la camicia. (su, de él)",
     "answer": "gli",
     "alt": [],
-    "note": "A él = gli."
+    "note": "Donde el castellano usa posesivo o «le» (le manchó la camisa), el italiano usa el indirecto: *gli ha macchiato la camicia*."
    },
    {
     "label": "c",
@@ -1669,7 +1669,7 @@
     "stem": "Maria ___ ha bruciato la caffettiera. (su, de ellos)",
     "answer": "gli",
     "alt": [],
-    "note": "A ellos, delante del verbo, = gli."
+    "note": "En el italiano de hoy *gli* sirve también para «a ellos» delante del verbo; *loro* va detrás del verbo y suena formal."
    }
   ]
  },
@@ -2054,7 +2054,7 @@
     "alt": [
      "le"
     ],
-    "note": "«Ne volete?» = ¿quieren algunas? («le volete?» serían todas)."
+    "note": "*ne* toma una parte («algunas»); *le* tomaría todas. El castellano suele omitirlo: «¿quieren?»."
    }
   ]
  },
@@ -2184,7 +2184,7 @@
     "stem": "Andate in centro? – Sì, ___ andiamo fra poco.",
     "answer": "ci",
     "alt": [],
-    "note": "«Ci» = en el centro."
+    "note": "*ci* reemplaza un lugar ya nombrado (*in centro*) y no se puede omitir como en castellano: *ci andiamo*."
    },
    {
     "label": "c",
@@ -2440,7 +2440,7 @@
     "stem": "È caduto, lasciando cadere i bicchieri. → È caduto, ___ cadere.",
     "answer": "lasciandoli",
     "alt": [],
-    "note": "«I bicchieri» = li, pegado al gerundio."
+    "note": "Con el gerundio el pronombre va pegado al final, como en castellano: *lasciandoli*."
    },
    {
     "label": "d",
@@ -2694,7 +2694,7 @@
     ],
     "answer": "sé",
     "alt": [],
-    "note": "«Da sé» = solos, por sí mismos."
+    "note": "*da sé* = «por sí mismos, solos»: *sé* es el pronombre reflexivo tónico, con acento."
    },
    {
     "label": "f",
@@ -2824,7 +2824,7 @@
     "stem": "Ti manderò il pacco stasera. → ___ manderò stasera.",
     "answer": "Te lo",
     "alt": [],
-    "note": "Ti + lo = te lo."
+    "note": "Ante *lo/la/li/le/ne*, *ti* pasa a *te*: *te lo*. En castellano es «te lo», igual."
    },
    {
     "label": "b",
@@ -2832,7 +2832,7 @@
     "stem": "Alberto vi spiegherà la situazione domani. → Alberto ___ spiegherà domani.",
     "answer": "ve la",
     "alt": [],
-    "note": "Vi + la = ve la."
+    "note": "*vi* + *la* = *ve la*: la i pasa a e delante del directo."
    },
    {
     "label": "c",
@@ -2848,7 +2848,7 @@
     "stem": "Fra poco ci spediranno i biglietti. → Fra poco ___ spediranno.",
     "answer": "ce li",
     "alt": [],
-    "note": "Ci + li = ce li."
+    "note": "Delante de *lo, la, li, le, ne* los pronombres *mi, ti, ci, vi* cambian la i por e: *ci* + *li* da *ce li*."
    },
    {
     "label": "e",
@@ -2856,7 +2856,7 @@
     "stem": "Le porterò le riviste lunedì, signora. → ___ porterò lunedì, signora.",
     "answer": "Gliele",
     "alt": [],
-    "note": "Le + le = gliele (una sola palabra)."
+    "note": "*le* (a usted) + *le* (las revistas) = *gliele*, en una sola palabra; donde el castellano dice «se las»."
    },
    {
     "label": "f",
@@ -2864,7 +2864,7 @@
     "stem": "Gli daresti un altro po' di vino? → ___ daresti un altro po'?",
     "answer": "Gliene",
     "alt": [],
-    "note": "Gli + ne = gliene."
+    "note": "*gli* + *ne* = *gliene*, una sola palabra; *ne* retoma «un poco de vino»."
    }
   ]
  },
@@ -2878,7 +2878,7 @@
     "stem": "Mi presti i tuoi appunti? ___ presti stasera? (¿Me los prestás esta noche?)",
     "answer": "Me li",
     "alt": [],
-    "note": "Mi + li = me li."
+    "note": "*mi* + *li* = *me li*: la i pasa a e delante del directo."
    },
    {
     "label": "b",
@@ -2886,7 +2886,7 @@
     "stem": "Ti posso spedire le informazioni? ___ spedisco adesso?",
     "answer": "Te le",
     "alt": [],
-    "note": "Ti + le = te le."
+    "note": "Delante del directo, *ti* se vuelve *te*: *te le*, como el castellano «te las»."
    },
    {
     "label": "c",
@@ -2894,7 +2894,7 @@
     "stem": "Signore, Le posso dare il mio numero di casa? ___ posso dare adesso?",
     "answer": "Glielo",
     "alt": [],
-    "note": "Le + lo = glielo."
+    "note": "*Le* (usted) + *lo* = *glielo*: el italiano usa *glie-* para él, ella y usted, como nuestro «se»."
    },
    {
     "label": "d",
@@ -2902,7 +2902,7 @@
     "stem": "Vi mandiamo la chiave, allora? ___ mandiamo domani?",
     "answer": "Ve la",
     "alt": [],
-    "note": "Vi + la = ve la."
+    "note": "*vi* se vuelve *ve* delante de *la*: *ve la*; el castellano diría «se la» para ustedes."
    },
    {
     "label": "e",
@@ -2910,7 +2910,7 @@
     "stem": "Ti troverò della rucola al mercato. ___ troverò di sicuro.",
     "answer": "Te ne",
     "alt": [],
-    "note": "Ti + ne = te ne (ne reemplaza el partitivo)."
+    "note": "*ti* + *ne* = *te ne*: *ne* retoma el partitivo «della rucola»."
    },
    {
     "label": "f",
@@ -2918,7 +2918,7 @@
     "stem": "Le parlo spesso dei miei figli. ___ parlo spesso.",
     "answer": "Gliene",
     "alt": [],
-    "note": "Le + ne = gliene (ne reemplaza «dei miei figli»)."
+    "note": "*le* + *ne* = *gliene*: *ne* retoma «dei miei figli» (de ellos)."
    }
   ]
  },
@@ -2932,7 +2932,7 @@
     "stem": "Devo stirare queste camicie. ___ stiro io, se vuoi. (vos) (Te las plancho yo, si querés.)",
     "answer": "Te le",
     "alt": [],
-    "note": "Ti + le = te le."
+    "note": "*ti* + *le* = *te le* («te las»): la i pasa a e."
    },
    {
     "label": "b",
@@ -2940,7 +2940,7 @@
     "stem": "Devo imbucare questa lettera. ___ imbuco io, se vuole. (usted)",
     "answer": "Gliela",
     "alt": [],
-    "note": "Le (formal) + la = gliela."
+    "note": "Con *Le* (usted) el indirecto toma la forma *glie-* y se pega al directo: *gliela*, en una sola palabra, donde el castellano dice «se la»."
    },
    {
     "label": "c",
@@ -2948,7 +2948,7 @@
     "stem": "Dobbiamo aprire questo pacco. ___ apro io, se volete. (ustedes)",
     "answer": "Ve lo",
     "alt": [],
-    "note": "Vi + lo = ve lo."
+    "note": "*vi* se vuelve *ve* delante de *lo*: *ve lo* («se lo» a ustedes)."
    }
   ]
  },
@@ -2962,7 +2962,7 @@
     "stem": "Queste pere sono mature, signora, ___ scelgo qualcuna? (¿Le elijo algunas?)",
     "answer": "Gliene",
     "alt": [],
-    "note": "Le (formal) + ne = gliene."
+    "note": "*Le* (usted) + *ne* = *gliene*: *ne* toma una parte de las peras."
    },
    {
     "label": "b",
@@ -2970,7 +2970,7 @@
     "stem": "Sono tre etti di formaggio, signore, ___ tolgo un po'? (¿Le saco un poco?)",
     "answer": "Gliene",
     "alt": [],
-    "note": "Le (formal) + ne = gliene."
+    "note": "*Le* + *ne* = *gliene*: *ne* toma «un poco» del queso."
    },
    {
     "label": "c",
@@ -2978,7 +2978,7 @@
     "stem": "I panini sono freschi, ragazzi, ___ incarto un paio? (¿Les envuelvo un par?)",
     "answer": "Ve ne",
     "alt": [],
-    "note": "Vi + ne = ve ne."
+    "note": "*vi* + *ne* = *ve ne*: *ne* toma «un par» de los panes."
    }
   ]
  },
@@ -2994,7 +2994,7 @@
     "alt": [
      "te lo"
     ],
-    "note": "Ti + lo = te lo, que se apostrofa delante de «ha»."
+    "note": "*ti* + *lo* = *te lo*, y *lo* se apostrofa ante *ha*: *te l'ha detto*."
    },
    {
     "label": "b",
@@ -3004,7 +3004,7 @@
     "alt": [
      "glielo"
     ],
-    "note": "Le (formal) + lo = glielo → gliel'ha detto."
+    "note": "*Le* (usted) + *lo* = *glielo*, que ante *ha* se apostrofa: *gliel'ha detto*."
    },
    {
     "label": "c",
@@ -3014,7 +3014,7 @@
     "alt": [
      "ve lo"
     ],
-    "note": "Vi + lo = ve lo → ve l'ha detto."
+    "note": "*vi* se vuelve *ve* delante de *lo*, y *lo* se apostrofa ante *ha*: *ve l'ha detto*."
    }
   ]
  },
@@ -3036,7 +3036,7 @@
     "stem": "Scusi, mi sa dire quando sarà pronto il lavoro? ___ dirò domani, signora, ___ prometto.",
     "answer": "Glielo | glielo",
     "alt": [],
-    "note": "Le (formal) + lo = glielo."
+    "note": "*Le* (a usted) + *lo* = *glielo*: una sola palabra, como «se lo»."
    },
    {
     "label": "c",
@@ -3044,7 +3044,7 @@
     "stem": "Facci sapere com'è andato, mi raccomando! Certo, ___ racconterò di sicuro, ___ prometto!",
     "answer": "ve lo | ve lo",
     "alt": [],
-    "note": "Vi + lo = ve lo."
+    "note": "*vi* + *lo* = *ve lo*: la i pasa a e delante de *lo*."
    }
   ]
  },
@@ -3083,7 +3083,7 @@
      "Anna, quando vai via, me lo dici?",
      "Anna, quando vai via, mi avvisi?"
     ],
-    "note": "Mi + lo = me lo."
+    "note": "«Avisar» = *far sapere*; el italiano retoma lo que se avisa con *lo*: *me lo fai sapere?* (*mi* + *lo* = *me lo*)."
    },
    {
     "label": "c",
@@ -3093,7 +3093,7 @@
     "alt": [
      "Ivo, se vuoi venire, puoi dirglielo?"
     ],
-    "note": "Gli + lo = glielo, delante del modal o pegado al infinitivo."
+    "note": "*gli* + *lo* = *glielo*: va delante del modal o pegado al infinitivo (*puoi dirglielo*)."
    },
    {
     "label": "d",
@@ -3103,7 +3103,7 @@
     "alt": [
      "Ti aiuto, Mina, te lo prometto!"
     ],
-    "note": "Ti + lo = te lo prometto."
+    "note": "Delante de *lo*, *ti* se vuelve *te*: *te lo prometto*, el mismo orden que en castellano."
    }
   ]
  },
@@ -3125,7 +3125,7 @@
     "stem": "Mi tiene troppo caldo questo cappotto! – (¿Por qué no se lo saca, señora?)",
     "answer": "Perché non se lo toglie, signora?",
     "alt": [],
-    "note": "Si + lo = se lo, con el verbo formal «toglie»."
+    "note": "El reflexivo *si* + *lo* = *se lo*: *se lo toglie* («se lo saca»); con *Lei* el verbo va en tercera persona."
    },
    {
     "label": "c",
@@ -3139,7 +3139,7 @@
      "Ce ne compriamo alcune, allora?",
      "Allora ce ne compriamo alcune?"
     ],
-    "note": "Ci + ne = ce ne."
+    "note": "*ci* + *ne* = *ce ne*: *ne* retoma «algunas» de las frutillas."
    },
    {
     "label": "d",
@@ -3289,7 +3289,7 @@
     "stem": "Su questo materasso si dorme bene. ___ dorme benissimo!",
     "answer": "Ci si",
     "alt": [],
-    "note": "«Ci» (sobre el colchón) + si impersonal = ci si."
+    "note": "*ci* (sobre el colchón) + *si* impersonal = *ci si*, en ese orden: *ci si dorme benissimo*."
    },
    {
     "label": "b",
@@ -3305,7 +3305,7 @@
     "stem": "In questo compito non si capisce niente. Non ___ capisce assolutamente niente!",
     "answer": "ci si",
     "alt": [],
-    "note": "«Ci» = en este trabajo."
+    "note": "*ci* retoma el lugar (en este trabajo) y va delante del *si* impersonal: *non ci si capisce niente*."
    },
    {
     "label": "d",
@@ -3373,7 +3373,7 @@
     "stem": "C'è della birra in casa? – (No, no hay.)",
     "answer": "No, non ce n'è.",
     "alt": [],
-    "note": "Ce ne + è = ce n'è."
+    "note": "«No hay (de eso)» = *non ce n'è*: *ci* pasa a *ce* ante *ne*, y *ne* se apostrofa ante *è*."
    },
    {
     "label": "c",

@@ -24,8 +24,9 @@ ITEMS = [
          prompt="Elegí la forma que expresa obligación.",
          stem="Questo modulo ___ compilato entro venerdì.",
          options=["va", "viene", "è stato"], answer="va",
-         note="«Andare» + participio = debe ser + participio. Muy frecuente en "
-              "lenguaje administrativo."),
+         note="*andare* + participio expresa obligación en pasiva: *va compilato*, "
+              "«tiene que ser completado». No tiene equivalente directo en castellano "
+              "y es muy frecuente en el lenguaje administrativo."),
     dict(id="c1-pass-04", type="cloze", topic="passivo",
          prompt="Reescribí con el «si passivante».",
          stem="In Italia si ___ (mangiare) molte verdure.",
@@ -51,8 +52,9 @@ ITEMS = [
          prompt="Elegí la forma correcta.",
          stem="___ riparare la macchina.",
          options=["Ho fatto", "Ho fatta", "Sono fatto"], answer="Ho fatto",
-         note="Causativo «fare + infinito» = mandar/hacer que. «Ho fatto riparare "
-              "la macchina» = hice reparar el auto."),
+         note="Para decir que otro hace el trabajo se usa *fare* + infinitivo: "
+              "*ho fatto riparare la macchina*. El castellano dice «hice arreglar» o "
+              "«mandé a arreglar»; el participio *fatto* no concuerda."),
     dict(id="c1-caus-02", type="choice", topic="causativo",
          prompt="¿Cómo se dice «se lo hice leer (a él)»?",
          stem="___ ho fatto leggere.",
@@ -65,7 +67,7 @@ ITEMS = [
          options=["Dejo que Marco hable", "Hago que Marco hable",
                   "Marco me deja hablar"],
          answer="Dejo que Marco hable",
-         note="«Lasciare + infinito» = permitir; «fare + infinito» = provocar."),
+         note="*lasciare* + infinitivo = «dejar que» (permiso: *lascio parlare Marco*); *fare* + infinitivo = «hacer que» (causa). Los dos van sin «que»."),
     dict(id="c1-caus-04", type="translate", topic="causativo",
          prompt="Traducí al italiano.",
          stem="Me corté el pelo (fui a la peluquería).",
@@ -91,7 +93,7 @@ ITEMS = [
          prompt="Elegí la forma correcta.",
          stem="Pur ___ stanco, ha continuato.",
          options=["essendo", "essere", "stato"], answer="essendo",
-         note="«Pur + gerundio» = aunque. Alternativa culta a «benché sia»."),
+         note="*pur* + gerundio tiene valor concesivo («aunque»): *pur essendo stanco*. Es una alternativa culta a *benché* + congiuntivo."),
     dict(id="c1-nonfin-03", type="choice", topic="participio",
          prompt="Elegí la forma correcta.",
          stem="___ la lettera, uscì di casa.",
@@ -134,7 +136,7 @@ ITEMS = [
          prompt="Elegí el conector final.",
          stem="Te lo spiego ___ tu capisca.",
          options=["affinché", "perché non", "sebbene"], answer="affinché",
-         note="«Affinché/perché» final + congiuntivo = para que."),
+         note="Para expresar finalidad con otro sujeto: *affinché* (o *perché*) + congiuntivo, como «para que» + subjuntivo."),
     dict(id="c1-conn-04", type="choice", topic="connettivi",
          prompt="Elegí la correcta.",
          stem="Non mi aiuta; ___, mi critica.",
@@ -144,7 +146,7 @@ ITEMS = [
          prompt="Elegí el conector adecuado.",
          stem="È stanco; ___ finisce il lavoro.",
          options=["tuttavia", "dunque", "ossia"], answer="tuttavia",
-         note="«Tuttavia/eppure» = sin embargo. «Dunque» = por lo tanto."),
+         note="*tuttavia* y *eppure* oponen («sin embargo»); *dunque* saca una consecuencia («por lo tanto»). Acá hay oposición: está cansado pero termina."),
 
     # --- ordine delle parole e dislocazioni (cap. 29) ---
     dict(id="c1-ord-01", type="choice", topic="ordine",

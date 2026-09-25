@@ -10,15 +10,15 @@ P = "Escuchá: ¿qué palabra dice?"
 
 # (dice, altre opzioni, nota)
 PAIRS = [
-    ("nonno", ["nono"], "nonno = abuelo, con doble n larga; nono = noveno."),
+    ("nonno", ["nono"], "En italiano la doble consonante se sostiene más tiempo y cambia la palabra: *nonno* (abuelo) contra *nono* (noveno). El castellano no tiene este contraste."),
     ("nono", ["nonno"], "nono = noveno, n simple; nonno (abuelo) alarga la n."),
     ("palla", ["pala"], "palla = pelota: la l doble dura más. pala = pala."),
-    ("sette", ["sete"], "sette = siete (doble t, se frena antes); sete = sed."),
+    ("sette", ["sete"], "Las dobles se pronuncian con una pequeña pausa antes: *set-te* (siete) contra *sete* (sed). Si no la marcás, decís otra palabra."),
     ("casa", ["cassa"], "casa, con s simple (suena casi como z suave); cassa = caja."),
-    ("penna", ["pena"], "penna = lapicera, doble n; pena = pena."),
-    ("caro", ["carro"], "caro = caro, r simple; carro = carro, r fuerte."),
-    ("sono", ["sonno"], "sono = soy / son; sonno = sueño, con doble n."),
-    ("cappello", ["capello"], "cappello = sombrero (doble p); capello = pelo."),
+    ("penna", ["pena"], "*penna* (lapicera) sostiene la n; *pena* (pena) no. En italiano la duración de la consonante distingue palabras."),
+    ("caro", ["carro"], "La r simple suena como la de «caro» y la doble *rr* vibra como la de «carro»: acá el contraste es el mismo que en castellano."),
+    ("sono", ["sonno"], "*sono* (soy/son) con n simple; *sonno* (sueño) la sostiene. La doble consonante es la única diferencia entre las dos palabras."),
+    ("cappello", ["capello"], "*cappello* (sombrero) con p doble, *capello* (un pelo) con una sola: en italiano duplicar la consonante cambia el significado."),
     ("anno", ["ano"], "anno = año: la doble n es la que en español es ñ."),
     ("chiesa", ["ciesa", "cesa"], "ch + i suena como k (como «quie» en español): chiesa = iglesia."),
     ("cena", ["chena", "scena"], "c + e suena como la ch española: cena = cena. Para el sonido k se escribe ch."),
