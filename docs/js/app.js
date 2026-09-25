@@ -564,7 +564,7 @@
 
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION in sw.js: test_game checks it). */
-  var APP_VERSION = "v1.48";
+  var APP_VERSION = "v1.49";
   function versionLine() {
     return '<p class="muted small version">La Via C1 · versión ' + APP_VERSION + "</p>";
   }
@@ -1009,6 +1009,105 @@
     return html + "</section>";
   }
 
+  /* ------------------------------------------ la lezione, un'idea per schermo */
+
+  // The block's forms marked inside an example (signaling).
+  var HL_STOP = { la: 1, il: 1, lo: 1, le: 1, i: 1, gli: 1, un: 1, una: 1, uno: 1, e: 1, di: 1, a: 1, "in": 1, che: 1, non: 1, da: 1, per: 1, con: 1, si: 1, mi: 1, ti: 1 };
+  function markForms(text, fs) {
+    var t = String(text), low = t.toLowerCase(), marks = [];
+    // «-ato»: an ending the rule teaches, marked on every word that has it
+    var ends = (fs || []).filter(function (f) { return /^-[a-zà-ù]+$/.test(f); }).map(function (f) { return f.slice(1); });
+    // the words of the table's forms (ho, sono, abbiamo…), grammar words aside
+    var words = [];
+    (fs || []).forEach(function (f) { if (/\s/.test(f)) f.split(/\s+/).forEach(function (w) { if (w.length >= 2 && !HL_STOP[w] && words.indexOf(w) < 0) words.push(w); }); });
+    fs = (fs || []).filter(function (f) { return f[0] !== "-"; }).concat(words);
+    low.replace(/[a-zà-ù']+/g, function (w, at) {
+      if (ends.some(function (e) { return w.length > e.length + 1 && w.slice(-e.length) === e; })) marks.push({ s: at, e: at + w.length });
+      return w;
+    });
+    (fs || []).forEach(function (f) {
+      var from = 0, at;
+      while ((at = low.indexOf(f, from)) >= 0) {
+        var before = at === 0 ? "" : low[at - 1], after = low[at + f.length] || "";
+        var edge = function (ch) { return !ch || !/[a-zà-ù']/i.test(ch); };
+        if (edge(before) && edge(after) && !marks.some(function (m) { return at < m.e && at + f.length > m.s; }))
+          marks.push({ s: at, e: at + f.length });
+        from = at + f.length;
+      }
+    });
+    marks.sort(function (a, b) { return a.s - b.s; });
+    var out = "", pos = 0;
+    marks.forEach(function (m) { out += esc(t.slice(pos, m.s)) + '<mark class="hl">' + esc(t.slice(m.s, m.e)) + "</mark>"; pos = m.e; });
+    return out + esc(t.slice(pos));
+  }
+  function stepBadge(ico, txt) { return '<div class="stepbadge">' + ico + " " + txt + "</div>"; }
+  // 👀 The examples first, the forms marked: the rule comes on the next screen.
+  /* The forms of the tenses a week teaches (conjugator): the congiuntivo
+     week marks sia, abbia, venga… in its examples.  Only weeks about a
+     tense, and minus the forms the present shares (abbiamo, siamo). */
+  var tenseForms = {};
+  function weekTenseForms(w) {
+    if (!w || tenseForms[w.week]) return (w && tenseForms[w.week]) || [];
+    var ts = (w.tenses || []).filter(function (t) { return t !== "presente" || w.week === 5 || w.week === 6; });
+    var out = {}, pres = {};
+    if (ts.length && ts[0] !== "presente") Object.keys(Conj.VERBS).forEach(function (v) {
+      try { Conj.conjugate(v, "presente").forEach(function (f) { pres[f.toLowerCase()] = 1; }); } catch (e) { /* */ }
+    });
+    ts.forEach(function (t) {
+      Object.keys(Conj.VERBS).forEach(function (v) {
+        try {
+          Conj.conjugate(v, t).forEach(function (f) {
+            String(f).toLowerCase().split(/\s+/).forEach(function (x) { if (x.length >= 2 && !pres[x] && !HL_STOP[x]) out[x] = 1; });
+          });
+        } catch (e) { /* un verbo sin ese tiempo */ }
+      });
+    });
+    return (tenseForms[w.week] = Object.keys(out));
+  }
+  function renderLook(b, i) {
+    var fs = Lezione.forms(b).concat(les && les.w ? weekTenseForms(les.w) : []);
+    return '<section class="blk">' + stepBadge("👀", "Mirá") + (b.h ? "<h2>" + mk(b.h) + "</h2>" : "") +
+      '<ul class="exs look">' + b.ex.map(function (pair, k) {
+        sayIndex[i + "-" + k] = pair[0];
+        return '<li><span class="it">' + markForms(pair[0], fs) + '</span><span class="es">' + esc(pair[1]) + "</span>" +
+          '<button class="say" data-say="' + i + "-" + k + '" aria-label="escuchar">🔊</button></li>';
+      }).join("") + "</ul>" +
+      '<p class="muted small">Fijate en lo marcado. La regla, en la pantalla siguiente.</p></section>';
+  }
+  // 📐 The rule, alone (with its table when it is small).
+  function renderRule(b, i) {
+    var html = '<section class="blk">' + stepBadge("📐", "La regla") + (b.h ? "<h2>" + mk(b.h) + "</h2>" : "") +
+      (b.r ? '<p class="rule solo">' + mk(b.r) + "</p>" : "");
+    (b.p || []).forEach(function (par) { html += "<p>" + mk(par) + "</p>"; });
+    if (b.table && Lezione.smallTable(b.table)) html += renderBlock({ table: b.table }, i, "a").replace(/^<section class="blk">|<\/section>$/g, "");
+    return html + "</section>";
+  }
+  // 🗂️ A big table as cards, one row each, to swipe.
+  function renderTableCards(b, i) {
+    var t = b.table, head = t.head || [];
+    var cards = (t.rows || []).map(function (r, ri) {
+      var lines = r.slice(1).map(function (c, k) {
+        var label = strip(head[k + 1] || ""), isEx = /ejemplo/i.test(label);
+        if (isEx && c) sayIndex["t" + i + "-" + ri] = Lezione.strip(c);
+        return '<div class="rc-line">' + (label ? '<span class="rc-k">' + mk(head[k + 1]) + "</span>" : "") +
+          '<span class="rc-v' + (isEx ? " it" : "") + '">' + mk(c) + "</span>" +
+          (isEx && c ? ' <button class="say" data-say="t' + i + "-" + ri + '" aria-label="escuchar">🔊</button>' : "") + "</div>";
+      }).join("");
+      return '<div class="rowcard">' + (strip(head[0] || "") ? '<span class="rc-k">' + mk(head[0]) + "</span>" : "") +
+        '<div class="rc-h">' + mk(r[0]) + '</div>' + lines + '<div class="rc-n">' + (ri + 1) + " / " + t.rows.length + "</div></div>";
+    }).join("");
+    return '<section class="blk">' + stepBadge("🗂️", "La tabla, de a una") + (b.h ? "<h2>" + mk(b.h) + "</h2>" : "") +
+      '<div class="rowcards">' + cards + "</div>" +
+      '<p class="muted small">Deslizá para ver cada fila →</p>' +
+      '<details class="more"><summary>Ver la tabla entera</summary>' + renderBlock({ table: b.table }, i, "a").replace(/^<section class="blk">|<\/section>$/g, "") + "</details></section>";
+  }
+  function strip(x) { return Lezione.strip(x); }
+  // ⚠️ The trap and the shortcut, on their own screen.
+  function renderTrap(b, i) {
+    return renderBlock({ h: b.h, warn: b.warn, tip: b.tip, more: b.more }, i).replace('<section class="blk">',
+      '<section class="blk">' + stepBadge("⚠️", b.warn ? "Ojo" : "El atajo"));
+  }
+
   function renderTeoria(w) {
     var L = w.lesson;
     sayIndex = {};
@@ -1083,6 +1182,14 @@
       return hudH + '<div class="card lescard"><div class="badge-new">📘 Lección · semana ' + w.week + partLabel + "</div>" +
         "<h1>" + esc(w.title) + "</h1><p class=\"intro\">" + mk(w.lesson.intro) + "</p>" +
         '<button class="btn wide" id="lesnext">Empezar →</button></div>';
+    }
+    if (st.kind === "look" || st.kind === "rule" || st.kind === "table" || st.kind === "trap") {
+      var bk = w.lesson.blocks[st.i];
+      var body = st.kind === "look" ? renderLook(bk, st.i) : st.kind === "rule" ? renderRule(bk, st.i)
+               : st.kind === "table" ? renderTableCards(bk, st.i) : renderTrap(bk, st.i);
+      return hudH + (partLabel && les.i === 0 ? '<div class="badge-new">📘 Lección · semana ' + w.week + partLabel + "</div>" : "") +
+        '<div class="card lescard lesson step-' + st.kind + '">' + body +
+        '<button class="btn wide" id="lesnext">Seguir →</button></div>';
     }
     if (st.kind === "block") {
       return hudH + (partLabel && les.i === 0 ? '<div class="badge-new">📘 Lección · semana ' + w.week + partLabel + "</div>" : "") +

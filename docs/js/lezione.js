@@ -301,6 +301,27 @@
              options: shuffle(q.options.slice(), rnd) };
   }
 
+  // A table that fits beside the rule: at most three rows of three columns.
+  function smallTable(t) {
+    return !!t && (t.rows || []).length <= 3 && (t.head || (t.rows[0] || [])).length <= 3;
+  }
+  /* The forms the block teaches, to be marked in its examples (signaling:
+     d = 0,38): the italic forms of the rule and the short cells of its table. */
+  function forms(b) {
+    var out = [];
+    var add = function (x) {
+      strip(x).split(/\s*(?:\/|,|;|→|\+|=)\s*/).forEach(function (f) {
+        f = f.replace(/[.!?¿¡«»()]/g, "").trim();
+        if (f && f.length >= 2 && f.split(/\s+/).length <= 3 && /[a-zà-ù]/i.test(f)) out.push(f.toLowerCase());
+      });
+    };
+    [b.r, b.warn, b.tip].concat(b.p || []).forEach(function (t) {
+      (String(t || "").match(/\*([^*]+)\*/g) || []).forEach(function (m) { add(m.replace(/\*/g, "")); });
+    });
+    if (b.table) (b.table.rows || []).forEach(function (r) { r.slice(1).forEach(function (c) { if (strip(c).length <= 30) add(c); }); });
+    return uniq(out).sort(function (a, b2) { return b2.length - a.length; });
+  }
+
   // The playable sequence: intro, then each block followed by its check.
   function steps(lesson, rnd, week, isItalian, only) {
     rnd = rnd || Math.random;
@@ -309,11 +330,13 @@
     var out = (!only || only.indexOf(0) >= 0) ? [{ kind: "intro" }] : [];
     lesson.blocks.forEach(function (b, i) {
       if (only && only.indexOf(i) < 0) return;
-      // Tabla y ejemplos juntos no entran en una pantalla: dos pasos.
-      if (b.table && b.ex && b.ex.length) {
-        out.push({ kind: "block", i: i, part: "a" });
-        out.push({ kind: "block", i: i, part: "b" });
-      } else out.push({ kind: "block", i: i });
+      // One idea per screen (segmenting: Mayer 2017), the examples first
+      // (PACE: the form in context, then the rule), the big tables as cards,
+      // the trap on its own.
+      if (b.ex && b.ex.length) out.push({ kind: "look", i: i });
+      out.push({ kind: "rule", i: i });
+      if (b.table && !smallTable(b.table)) out.push({ kind: "table", i: i });
+      if (b.warn || b.tip || (b.more && b.more.length)) out.push({ kind: "trap", i: i });
       var q = (b.table && tableQuestion(b, rnd)) || (b.ex && exQuestion(lesson, b, rnd, week, isItalian)) ||
               (!b.table && ruleQuestion(lesson, b, rnd, isItalian)) ||
               handQuestion(b, rnd);
@@ -327,7 +350,7 @@
     return out;
   }
 
-  var api = { steps: steps, traps: traps, strip: strip, exQuestion: exQuestion, tableQuestion: tableQuestion };
+  var api = { steps: steps, traps: traps, strip: strip, exQuestion: exQuestion, tableQuestion: tableQuestion, forms: forms, smallTable: smallTable };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   else root.Lezione = api;
 })(this);

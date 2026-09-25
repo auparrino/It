@@ -596,6 +596,21 @@ calcula **la primera semana cuya teoría lo cubre todo**:
   significado) tocás una palabra italiana y ves qué significa; las que todavía
   no viste en el curso aparecen subrayadas (`docs/data/glossario.json`).
 
+### La lección, una idea por pantalla
+
+Cada bloque de teoría se juega en pasos cortos en vez de una pantalla
+cargada: **👀 Mirá** (los ejemplos solos, con audio y la forma que se
+enseña resaltada: las de la regla, las de la tabla, las terminaciones que
+nombra y, en las semanas de un tiempo verbal, las formas de ese tiempo que
+genera el conjugador), **📐 La regla** (sola, grande), **🗂️ La tabla, de a
+una** (las tablas grandes como tarjetas que se deslizan, una fila cada una,
+con la tabla entera plegada), **⚠️ Ojo / El atajo** y los chequeos. Es lo
+que hacen Babbel, el modelo PACE y los manuales con sección de reflexión:
+primero la forma en contexto, después la regla; y lo que dice la
+investigación de diseño multimedia: segmentar (g ≈ 0,3) y resaltar lo
+importante (d = 0,38). La *Teoria* completa sigue disponible como
+referencia, en una sola página.
+
 ### Lecciones en partes
 
 Una semana cargada no se estudia de una sentada. Las semanas 1, 2, 3, 5, 6,

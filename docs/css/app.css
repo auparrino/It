@@ -816,3 +816,23 @@ mark.dgmiss { background: color-mix(in srgb, var(--terracotta) 24%, transparent)
   background: var(--carta); border: 1px solid var(--grigio-chiaro); border-radius: 14px; padding: 12px 14px 10px; box-shadow: var(--ombra); }
 .mcbox.on { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
 .mcbox .options { margin: 8px 0; }
+
+/* Lección en pasos: Mirá → regla → tabla en tarjetas → trampa */
+.stepbadge { display: inline-block; font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .1em;
+  color: var(--verde-scuro); background: color-mix(in srgb, var(--verde) 12%, transparent); border-radius: 999px; padding: 3px 10px; margin-bottom: 10px; }
+.step-trap .stepbadge { color: var(--terracotta-scura); background: color-mix(in srgb, var(--terracotta) 12%, transparent); }
+mark.hl { background: color-mix(in srgb, var(--oro) 38%, transparent); color: inherit; border-radius: 4px; padding: 0 2px; }
+ul.exs.look li { padding: 12px 0; }
+ul.exs.look .it { font-size: 1.08rem; color: var(--inchiostro); font-weight: 600; }
+.lesson p.rule.solo { font-size: 1.15rem; line-height: 1.55; padding: 14px 16px; }
+.rowcards { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px 2px 10px;
+  -webkit-overflow-scrolling: touch; }
+.rowcard { flex: 0 0 84%; scroll-snap-align: start; border: 1px solid var(--grigio-chiaro); border-radius: 14px;
+  padding: 14px 16px; background: var(--carta); box-shadow: var(--ombra); position: relative; }
+.rowcard .rc-h { font-weight: 800; font-size: 1.1rem; margin-bottom: 8px; color: var(--verde-scuro); }
+.rowcard .rc-line { padding: 6px 0; border-top: 1px dashed var(--grigio-chiaro); }
+.rowcard .rc-k { display: block; font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; color: var(--grigio); }
+.rowcard .rc-v { font-size: 1rem; }
+.rowcard .rc-v.it { font-weight: 600; }
+.rowcard .rc-n { position: absolute; top: 12px; right: 14px; font-size: .75rem; color: var(--grigio); }
+.rowcard .say { border: none; background: transparent; cursor: pointer; }
