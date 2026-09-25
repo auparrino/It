@@ -610,9 +610,9 @@ Cada bloque de teoría se juega en pasos cortos en vez de una pantalla
 cargada: **👀 Mirá** (los ejemplos solos, con audio y la forma que se
 enseña resaltada: las de la regla, las de la tabla, las terminaciones que
 nombra y, en las semanas de un tiempo verbal, las formas de ese tiempo que
-genera el conjugador), **📐 La regla** (sola, grande), **🗂️ La tabla, de a
-una** (las tablas grandes como tarjetas que se deslizan, una fila cada una,
-con la tabla entera plegada), **⚠️ Ojo / El atajo** y los chequeos. Es lo
+genera el conjugador), **📐 La regla** (sola, grande), **🗂️ La tabla** (las tablas
+largas en pantallas de tres o cuatro filas, una debajo de la otra, con un
+chequeo rápido entre pantalla y pantalla y la tabla entera plegada al final), **⚠️ Ojo / El atajo** y los chequeos. Es lo
 que hacen Babbel, el modelo PACE y los manuales con sección de reflexión:
 primero la forma en contexto, después la regla; y lo que dice la
 investigación de diseño multimedia: segmentar (g ≈ 0,3) y resaltar lo

@@ -335,7 +335,19 @@
       // the trap on its own.
       if (b.ex && b.ex.length) out.push({ kind: "look", i: i });
       out.push({ kind: "rule", i: i });
-      if (b.table && !smallTable(b.table)) out.push({ kind: "table", i: i });
+      // A long table in screens of three or four rows, one under the other,
+      // with a quick check on each group before the next one.
+      if (b.table && !smallTable(b.table)) {
+        var rows = b.table.rows || [], n = Math.ceil(rows.length / 4), size = Math.ceil(rows.length / n);
+        for (var c = 0; c < n; c++) {
+          var from = c * size, to = Math.min(rows.length, from + size);
+          out.push({ kind: "table", i: i, from: from, to: to, chunk: c, chunks: n });
+          if (n > 1 && c < n - 1) {
+            var cq = tableQuestion({ table: { head: b.table.head, rows: rows.slice(from, to) } }, rnd);
+            if (cq) { cq.block = i; out.push({ kind: "quiz", q: cq }); }
+          }
+        }
+      }
       if (b.warn || b.tip || (b.more && b.more.length)) out.push({ kind: "trap", i: i });
       var q = (b.table && tableQuestion(b, rnd)) || (b.ex && exQuestion(lesson, b, rnd, week, isItalian)) ||
               (!b.table && ruleQuestion(lesson, b, rnd, isItalian)) ||

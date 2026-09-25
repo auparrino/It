@@ -631,7 +631,7 @@
 
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION in sw.js: test_game checks it). */
-  var APP_VERSION = "v1.53";
+  var APP_VERSION = "v1.54";
   function versionLine() {
     return '<p class="muted small version">La Via C1 · versión ' + APP_VERSION + "</p>";
   }
@@ -1158,23 +1158,29 @@
     return html + "</section>";
   }
   // 🗂️ A big table as cards, one row each, to swipe.
-  function renderTableCards(b, i) {
-    var t = b.table, head = t.head || [];
-    var cards = (t.rows || []).map(function (r, ri) {
-      var lines = r.slice(1).map(function (c, k) {
-        var label = strip(head[k + 1] || ""), isEx = /ejemplo/i.test(label);
+  // 🗂️ A long table, three or four rows per screen, one under the other.
+  function renderTableCards(b, i, st) {
+    var t = b.table, head = t.head || [], rows = t.rows || [];
+    var from = st && st.from != null ? st.from : 0, to = st && st.to != null ? st.to : rows.length;
+    var chunks = (st && st.chunks) || 1, chunk = (st && st.chunk) || 0;
+    var cards = rows.slice(from, to).map(function (r, k) {
+      var ri = from + k;
+      var lines = r.slice(1).map(function (c, j) {
+        var label = strip(head[j + 1] || ""), isEx = /ejemplo/i.test(label);
         if (isEx && c) sayIndex["t" + i + "-" + ri] = Lezione.strip(c);
-        return '<div class="rc-line">' + (label ? '<span class="rc-k">' + mk(head[k + 1]) + "</span>" : "") +
+        return '<div class="rc-line">' + (label ? '<span class="rc-k">' + mk(head[j + 1]) + "</span>" : "") +
           '<span class="rc-v' + (isEx ? " it" : "") + '">' + mk(c) + "</span>" +
           (isEx && c ? ' <button class="say" data-say="t' + i + "-" + ri + '" aria-label="escuchar">🔊</button>' : "") + "</div>";
       }).join("");
       return '<div class="rowcard">' + (strip(head[0] || "") ? '<span class="rc-k">' + mk(head[0]) + "</span>" : "") +
-        '<div class="rc-h">' + mk(r[0]) + '</div>' + lines + '<div class="rc-n">' + (ri + 1) + " / " + t.rows.length + "</div></div>";
+        '<div class="rc-h">' + mk(r[0]) + "</div>" + lines + "</div>";
     }).join("");
-    return '<section class="blk">' + stepBadge("🗂️", "La tabla, de a una") + (b.h ? "<h2>" + mk(b.h) + "</h2>" : "") +
+    return '<section class="blk">' + stepBadge("🗂️", chunks > 1 ? "La tabla · " + (chunk + 1) + " de " + chunks : "La tabla") +
+      (b.h ? "<h2>" + mk(b.h) + "</h2>" : "") +
       '<div class="rowcards">' + cards + "</div>" +
-      '<p class="muted small">Deslizá para ver cada fila →</p>' +
-      '<details class="more"><summary>Ver la tabla entera</summary>' + renderBlock({ table: b.table }, i, "a").replace(/^<section class="blk">|<\/section>$/g, "") + "</details></section>";
+      (chunk === chunks - 1 ? '<details class="more"><summary>Ver la tabla entera</summary>' +
+        renderBlock({ table: b.table }, i, "a").replace(/^<section class="blk">|<\/section>$/g, "") + "</details>" : "") +
+      "</section>";
   }
   function strip(x) { return Lezione.strip(x); }
   // ⚠️ The trap and the shortcut, on their own screen.
@@ -1261,7 +1267,7 @@
     if (st.kind === "look" || st.kind === "rule" || st.kind === "table" || st.kind === "trap") {
       var bk = w.lesson.blocks[st.i];
       var body = st.kind === "look" ? renderLook(bk, st.i) : st.kind === "rule" ? renderRule(bk, st.i)
-               : st.kind === "table" ? renderTableCards(bk, st.i) : renderTrap(bk, st.i);
+               : st.kind === "table" ? renderTableCards(bk, st.i, st) : renderTrap(bk, st.i);
       return hudH + (partLabel && les.i === 0 ? '<div class="badge-new">📘 Lección · semana ' + w.week + partLabel + "</div>" : "") +
         '<div class="card lescard lesson step-' + st.kind + '">' + body +
         '<button class="btn wide" id="lesnext">Seguir →</button></div>';
