@@ -4,9 +4,10 @@
  * regla (la muestra «🔁 Segunda vez, más fácil» y la devolución), y la nota no
  * debería ser solo una equivalencia («Tener frío = avere freddo.»).
  *
- * El italiano es obligatorio (0 ítems sin nota, 0 notas que son solo una
- * equivalencia, asteriscos de cursiva pareados en Dummies y desafíos).  El portugués se informa,
- * sin exigir: su arreglo es otra tarea.
+ * Se exige en los dos idiomas: 0 ítems sin nota, 0 notas que son solo una
+ * equivalencia, 0 asteriscos sueltos (la cursiva de mk() usa *pares*; una
+ * forma incorrecta se marca con «✗», no con un asterisco) y notas de hasta
+ * 320 caracteres.
  *
  *   node tools/lib/test_notas_it.js
  */
@@ -48,17 +49,15 @@ pack.LANGS.forEach(function (code) {
   console.log(code + ": " + items.length + " ítems · sin nota " + sin.length +
               " (semanas 1-12: " + sinW + "/" + Object.keys(semanas).length + ") " + JSON.stringify(porFuente) +
               " · solo equivalencia " + equiv.length + " · asteriscos sueltos " + cursiva.length);
-  if (code !== "it") return;
-  sin.slice(0, 10).forEach(function (x) { mal("it: sin nota " + x.id); });
-  if (sin.length > 10) mal("it: … y " + (sin.length - 10) + " más sin nota");
-  equiv.slice(0, 10).forEach(function (x) { mal("it: nota que es solo equivalencia " + x.id + ": " + x.note); });
-  if (equiv.length > 10) mal("it: … y " + (equiv.length - 10) + " más");
-  // En los ítems propios, «*forma» marca a veces una forma incorrecta (uso
-  // lingüístico); en Dummies y en los desafíos las notas solo usan cursiva.
-  cursiva.filter(function (x) { return x.src === "dummies" || x.src === "sfida"; })
-    .forEach(function (x) { mal("it: asterisco suelto en la nota de " + x.id + ": " + x.note); });
+  sin.slice(0, 10).forEach(function (x) { mal(code + ": sin nota " + x.id); });
+  if (sin.length > 10) mal(code + ": … y " + (sin.length - 10) + " más sin nota");
+  equiv.slice(0, 10).forEach(function (x) { mal(code + ": nota que es solo equivalencia " + x.id + ": " + x.note); });
+  if (equiv.length > 10) mal(code + ": … y " + (equiv.length - 10) + " más");
+  // Un asterisco suelto rompe la cursiva de mk(): las formas incorrectas se
+  // marcan con «✗» (✗ho voglie), nunca con «*».
+  cursiva.forEach(function (x) { mal(code + ": asterisco suelto en la nota de " + x.id + ": " + x.note); });
   items.forEach(function (x) {
-    if (x.note && x.note.length > 320) mal("it: nota demasiado larga (" + x.note.length + ") en " + x.id);
+    if (x.note && x.note.length > 320) mal(code + ": nota demasiado larga (" + x.note.length + ") en " + x.id);
   });
 });
 
