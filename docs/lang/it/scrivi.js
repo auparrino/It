@@ -19,9 +19,9 @@
      t: la consigna; min: palabras; use: [estructura, cuántas, etiqueta];
      model: un texto que cumple todo (tools/test_scrivi.js lo verifica). */
   var TASKS = {
-    1: { t: "Presentate: de dónde sos, cuántos años tenés, qué tenés y cómo estás hoy.", min: 15,
+    1: { t: "Presentate: cómo te llamás, de dónde sos, qué tenés (un perro, un auto, hermanos…) y cómo estás hoy.", min: 15,
          use: [["essere", 2, "2 formas de essere (sono, sei, è…)"], ["avere", 1, "1 forma de avere (ho, hai, ha…)"]],
-         model: "Ciao! Sono Luca e sono argentino. Sono di Buenos Aires. Ho trent'anni e ho un cane. Oggi sono stanco, ma sono contento." },
+         model: "Ciao! Sono Luca e sono argentino. Sono di Buenos Aires. Ho un cane e una bicicletta. Oggi sono stanco, ma sono contento." },
     2: { t: "Contá qué tenés: hermanos, animales, cosas de tu casa. Usá sustantivos en plural.", min: 15,
          use: [["plurali", 4, "4 sustantivos en plural"]],
          model: "Ho due fratelli e tre sorelle. Ho un cane e due gatti. Ho molti libri, tre penne e due computer. I libri sono vecchi." },

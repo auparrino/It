@@ -258,9 +258,22 @@ def main():
         ctx.update({k: v for k, v in sillabo.analyze(er["good"], answer=True).items()
                     if v > ctx.get(k, 0)})
         er["w"] = week(ctx)
+    # And what the tenses do not show: the words the learner has to write
+    # (seen in the course, in the bank of the level, or transparent) and the
+    # grammar that is not a tense (possessives, clitics, piacere, numbers…):
+    # tools/lib/semanas_banco.py with tools/it/rasgos_banco.py.
+    sys.path.insert(0, os.path.join(ROOT, "tools", "lib"))
+    import rasgos_banco
+    import semanas_banco
+    rep = semanas_banco.run(bank, rasgos_banco, "it")
     with open(path, "w", encoding="utf-8") as fh:
         json.dump(bank, fh, ensure_ascii=False, separators=(",", ":"))
 
+    print("semanas: %d oraciones (traducir) y %d huecos esperan a su vocabulario o su gramática; "
+          "%d errores" % (rep["sentences"], rep["sentences_wg"], rep["errors"]))
+    if rep["unknown"]:
+        print("  palabras del banco que no aparecen en ningún lado: %s" % ", ".join(
+            "%s %d" % x for x in rep["unknown"][:25]))
     for p in problems[:60]:
         print("  ! " + p)
     if len(problems) > 60:
