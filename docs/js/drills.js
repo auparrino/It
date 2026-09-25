@@ -44,11 +44,25 @@
       var last = c.last || (c.due - (c.interval || 0) * DAY);
       return now - last < 2 * DAY ? 4 + Math.random() : 2 + Math.random() + (c.due - now) / (365 * DAY);
     };
+    // The same exercise can live under two ids (a book item and an authored
+    // one: «amico → amici»): one session asks it once.
     var seen = {};
-    return pool.filter(function (it) { if (!it || seen[it.id]) return false; seen[it.id] = 1; return true; })
+    return pool.filter(Boolean)
       .map(function (it) { return { it: it, r: rank(it) }; })
       .sort(function (a, b) { return a.r - b.r; })
+      .filter(function (x) {
+        var k = sameKey(x.it);
+        if (seen[x.it.id] || seen[k]) return false;
+        seen[x.it.id] = seen[k] = 1;
+        return true;
+      })
       .slice(0, n).map(function (x) { return x.it; });
+  }
+  function sameKey(it) {
+    var stem = String(it.stem || "").toLowerCase();
+    // a bare «___» says nothing: there the question is in the prompt
+    if (!/[a-zà-ù]/.test(stem)) stem += "|" + String(it.prompt || "").toLowerCase();
+    return "=" + stem + "|" + String(it.answer || "").toLowerCase();
   }
 
   // Bank items near the week's level, to top up a short week without repeating.
@@ -751,7 +765,13 @@
     var pool = (week.items || []).map(function (id) { return map[id]; })
       .filter(function (it) { return it && !(opts.silent && it.type === "listen"); });
     var out = pickFresh(pool, DOMINA_SIZE, state);
-    if (out.length < DOMINA_SIZE) bankFill(state, DOMINA_SIZE - out.length).forEach(function (it) { out.push(it); });
+    if (out.length < DOMINA_SIZE) {
+      var have = {};
+      out.forEach(function (it) { have[sameKey(it)] = 1; });
+      bankFill(state, DOMINA_SIZE - out.length).forEach(function (it) {
+        if (!have[sameKey(it)]) { have[sameKey(it)] = 1; out.push(it); }
+      });
+    }
     return shuffle(out);
   }
   // The week is mastered by passing that session, or (saves from before it

@@ -255,6 +255,23 @@ ok(Drills.dueCount(course, state) >= 30, "le schede scadute rientrano in coda");
   ok(n > 300 && far === 0, "reconocimiento: " + far + " opciones de otra frase en " + n + " traducciones");
 })();
 
+// Dominala no repite un ejercicio: el mismo puede estar con dos ids
+// (d03-013 y g2-gd-32 son «amico → amici»).
+(function () {
+  var rep = 0;
+  course.weeks.forEach(function (w) {
+    for (var r = 0; r < 20; r++) {
+      var seen = {};
+      Drills.buildDomina(course, w, { cards: {}, unlocked: w.week }, {}).forEach(function (it) {
+        var k = (it.prompt + "|" + it.stem + "|" + it.answer).toLowerCase(), k2 = (it.stem + "|" + it.answer).toLowerCase();
+        if (/[a-zà-ù]/.test(it.stem || "") ? seen[k2] : seen[k]) { rep++; if (rep < 4) console.log("  repetida en semana " + w.week + ": " + it.stem); }
+        seen[k] = seen[k2] = 1;
+      });
+    }
+  });
+  ok(rep === 0, "Dominala: " + rep + " ejercicios repetidos en la misma sesión");
+})();
+
 // La versión que muestra la app (Oggi, Io) es la del service worker.
 (function () {
   var sw = fs.readFileSync(path.join(ROOT, "docs/sw.js"), "utf8").match(/VERSION = "laviac1-(v\d+)"/);
