@@ -90,7 +90,7 @@ ch(W, 0, "E → ___", ["é", "ê", "i"], "é",
    "La letra E se dice é (abierta). Al deletrear: «é de escola».",
    prompt="¿Cómo se llama la letra E en portugués?")
 ch(W, 1, "«abuela» → ___", ["avó", "avô", "avõ"], "avó",
-   "avó (o abierta, tilde aguda) = abuela; avô (o cerrada, circunflejo) = abuelo.",
+   "El acento distingue: *avó* (o abierta, tilde aguda) es «abuela» y *avô* (o cerrada, circunflejo) es «abuelo». El español no marca la diferencia entre o abierta y cerrada.",
    prompt="¿Cuál significa «abuela»?")
 ch(W, 1, "«montaña» → ___", ["montanha", "montaña", "montalha"], "montanha",
    "La ñ no existe en portugués: se escribe nh (montanha, Espanha, senhor).",
@@ -114,7 +114,7 @@ ch(W, 2, "Nós ___ de Rosario.", ["somos", "estamos", "são"], "somos",
 cz(W, 0, "Eu me ___ Martín.", "chamo",
    "Para presentarte: eu me chamo… (me llamo). También meu nome é…")
 cz(W, 0, "Muito ___! (mucho gusto)", "prazer",
-   "Muito prazer = mucho gusto. Se puede decir solo prazer.")
+   "*Muito prazer* es «mucho gusto»: *muito* sirve de «mucho» y de «muy». También alcanza con *prazer* solo.")
 cz(W, 0, "Você ___ de onde? (ser)", "é",
    "Você lleva el verbo en tercera: você é. Pregunta típica: você é de onde?")
 cz(W, 0, "Tudo ___? — Tudo ótimo!", "bem", "Tudo bem? es el saludo más común de Brasil; la respuesta repite: tudo bem.",
@@ -159,7 +159,7 @@ tr(W, 2, "Estamos en Copacabana.", "Estamos em Copacabana.",
    ["Nós estamos em Copacabana.", "A gente está em Copacabana.", "A gente tá em Copacabana."],
    "estar + em. Copacabana se usa sin artículo: em Copacabana.")
 tr(W, 2, "Ellos tienen sed.", "Eles estão com sede.", ["Elas estão com sede.", "Eles tão com sede."],
-   "Sede = sed (y también «sede»). Sensaciones con estar com.")
+   "Las sensaciones van con *estar com* + sustantivo, no con «tener»: *estar com sede* «tener sed», *estar com fome* «tener hambre». *Sede* también es «sede».")
 
 fx(W, 0, "persona", "Você és brasileiro?", "és", "é",
    "Con você, siempre tercera persona: você é. «És» es la forma de tu.")
@@ -276,7 +276,7 @@ tr(W, 1, "El puente es nuevo.", "A ponte é nova.", [],
    "Ponte es femenino: a ponte é nova.")
 tr(W, 2, "Hay una farmacia aquí.", "Tem uma farmácia aqui.",
    ["Há uma farmácia aqui.", "Aqui tem uma farmácia.", "Aqui há uma farmácia."],
-   "«Hay» = tem (habla) o há (formal). Farmácia lleva tilde.")
+   "«Hay» se dice *tem* en el habla y *há* en la escritura formal; los dos van en singular. *Farmácia* lleva tilde porque termina en diptongo.")
 tr(W, 2, "Hay mensajes nuevos.", "Tem mensagens novas.", ["Há mensagens novas.", "Tem novas mensagens.", "Há novas mensagens."],
    "Mensagem es femenino: mensagens novas. Plural -m → -ns.")
 
@@ -335,18 +335,18 @@ ch(W, 1, "O hotel é perto ___ metrô.", ["do", "de o", "da"], "do",
 ch(W, 1, "Vou ___ Maracanã.", ["ao", "a o", "à"], "ao",
    "a + o = ao. El Maracanã es masculino (o estádio): ao Maracanã.")
 ch(W, 1, "Vou ___ praia.", ["à", "a", "á"], "à",
-   "a (preposición) + a (artículo) = à, con acento grave. «Á» con acento agudo no existe.")
+   "La preposición *a* + el artículo *a* se funden en *à*, con acento grave (la *crase*): *vou à praia*. *Á* con acento agudo no existe en portugués.")
 ch(W, 1, "Um passeio ___ calçadão.", ["pelo", "por o", "polo"], "pelo",
-   "por + o = pelo. «Por o» no existe.")
+   "*Por* + artículo se contrae siempre: *pelo, pela, pelos, pelas*. ✗*por o* no existe, a diferencia del español «por el».")
 ch(W, 1, "A casa ___ Bia é em Santa Teresa.", ["da", "de a", "do"], "da",
    "de + a = da: a casa da Bia. Bia lleva artículo femenino.")
 ch(W, 1, "Estou ___ bar da Lapa.", ["num", "em o", "numa"], "num",
    "em + um = num (también em um). Bar es masculino: num bar.",
    prompt="«Estoy en un bar de Lapa.» Elegí la forma correcta.")
 ch(W, 2, "A chave está em cima ___ mesa.", ["da", "de a", "de la"], "da",
-   "em cima de + a mesa = em cima da mesa. Las locuciones con de se contraen.")
+   "Las locuciones con *de* contraen con el artículo: *em cima de* + *a mesa* da *em cima da mesa*. Es obligatorio, no como «de la» en español.")
 ch(W, 2, "O gato está embaixo ___ cadeira.", ["da", "de", "na"], "da",
-   "embaixo de + a cadeira = embaixo da cadeira.")
+   "*Embaixo de* («debajo de») contrae su *de* con el artículo: *embaixo da cadeira*, *embaixo do sofá*. En portugués *de + a* nunca queda separado.")
 ch(W, 2, "Estou ___ casa.", ["em", "na", "a"], "em",
    "«En casa» (la propia) va sin artículo: estou em casa. Na casa da Ana = en lo de Ana.",
    prompt="«Estoy en casa.» Elegí la forma correcta.")
@@ -356,23 +356,23 @@ cz(W, 0, "___ amiga da Bia é argentina.", "A", "Artículo femenino singular: a 
 cz(W, 0, "Tem ___ padaria perto do hotel. (una)", "uma", "Indefinido femenino: uma padaria.")
 cz(W, 1, "Estou ___ Rio. (em + o)", "no", "em + o = no. El Rio lleva artículo: no Rio.",
    prompt="Completá con la contracción correcta.")
-cz(W, 1, "O Cristo ___ Corcovado. (de + o)", "do", "de + o = do.",
+cz(W, 1, "O Cristo ___ Corcovado. (de + o)", "do", "*De* + *o* se contrae siempre en *do* (y *da, dos, das*), incluso en nombres propios: *o Cristo do Corcovado*. El español solo contrae «del».",
    prompt="Completá con la contracción correcta.")
-cz(W, 1, "Estamos ___ praias de Ipanema. (em + as)", "nas", "em + as = nas.",
+cz(W, 1, "Estamos ___ praias de Ipanema. (em + as)", "nas", "*Em* + artículo da *no, na, nos, nas*: *nas praias* «en las playas». La contracción es obligatoria; ✗*em as* no existe.",
    prompt="Completá con la contracción correcta.")
 cz(W, 1, "A praia ___ Urca é pequena. (de + a)", "da", "de + a = da: a praia da Urca.",
    prompt="Completá con la contracción correcta.")
-cz(W, 1, "Hoje tem um show. Você vai ___ show? (a + o)", "ao", "a + o = ao.",
+cz(W, 1, "Hoje tem um show. Você vai ___ show? (a + o)", "ao", "*A* + *o* se contrae en *ao* (plural *aos*), como nuestro «al»: *vou ao show*. En femenino es *à* (*vou à praia*).",
    prompt="Completá con la contracción correcta.")
 cz(W, 1, "Às dez ela está ___ trabalho. (em + o)", "no", "em + o = no: no trabalho.",
    prompt="Completá con la contracción correcta.")
-cz(W, 1, "Um passeio ___ praça. (por + a)", "pela", "por + a = pela.",
+cz(W, 1, "Um passeio ___ praça. (por + a)", "pela", "*Por* + *a* da *pela* (y *pelo, pelos, pelas*): *um passeio pela praça*. En portugués se contrae siempre; en español «por la» queda separado.",
    prompt="Completá con la contracción correcta.")
-cz(W, 1, "Tem um restaurante ___ prédio. (em + um)", "num", "em + um = num. También se escribe em um.",
+cz(W, 1, "Tem um restaurante ___ prédio. (em + um)", "num", "*Em* se contrae también con el artículo indefinido: *num, numa, nuns, numas*. En la escritura se admite *em um*, pero en el habla se oye *num*.",
    alt=["em um"], prompt="Completá con la contracción correcta.")
-cz(W, 2, "O hotel é perto ___ praia. (de + a)", "da", "perto de + a praia = perto da praia.",
+cz(W, 2, "O hotel é perto ___ praia. (de + a)", "da", "*Perto de* («cerca de») contrae el *de* con el artículo: *perto da praia*, *perto do centro*. En español «cerca de la» queda separado.",
    prompt="Completá con la contracción correcta.")
-cz(W, 2, "A padaria é ao lado ___ banco. (de + o)", "do", "ao lado de + o banco = ao lado do banco.",
+cz(W, 2, "A padaria é ao lado ___ banco. (de + o)", "do", "*Ao lado de* («al lado de») contrae el *de* con el artículo: *ao lado do banco*, *ao lado da farmácia*. Fijate que *ao* ya es *a + o*.",
    prompt="Completá con la contracción correcta.")
 cz(W, 2, "A chave está ___ mesa. (em + a)", "na", "em + a = na: na mesa.",
    prompt="Completá con la contracción correcta.")
@@ -380,30 +380,30 @@ cz(W, 2, "A chave está ___ mesa. (em + a)", "na", "em + a = na: na mesa.",
 tr(W, 0, "Es una playa linda.", "É uma praia linda.", ["É uma praia bonita.", "É uma linda praia."],
    "Indefinido femenino: uma. É lleva tilde (verbo ser).")
 tr(W, 1, "Estoy en la playa.", "Estou na praia.", ["Eu estou na praia.", "Tô na praia.", "Eu tô na praia."],
-   "em + a = na. «Em a» no existe.")
+   "*Em* + *a* se contrae en *na*: *estou na praia*. ✗*em a* no existe; con «estar en» el portugués usa siempre la contracción.")
 tr(W, 1, "El hotel está en el centro.", "O hotel está no centro.",
    ["O hotel é no centro.", "O hotel fica no centro.", "O hotel está no Centro.", "O hotel é no Centro.", "O hotel fica no Centro."],
-   "em + o = no. Para lugares fijos también se usa ser o ficar.")
+   "*Em* + *o* se contrae en *no*: *o hotel está no centro*. Para ubicar lugares fijos también se usa *ficar*: *o hotel fica no centro*.")
 tr(W, 1, "Estamos en el bar de la esquina.", "Estamos no bar da esquina.",
    ["Nós estamos no bar da esquina.", "A gente está no bar da esquina.", "A gente tá no bar da esquina."],
-   "em + o = no; de + a = da.")
+   "Dos contracciones en la misma frase: *em + o* da *no* y *de + a* da *da*: *no bar da esquina*. El portugués contrae todos los artículos, no solo «al» y «del».")
 tr(W, 1, "Es la playa de los cariocas.", "É a praia dos cariocas.", [],
-   "de + os = dos.")
+   "*De* + *os* se contrae en *dos*: *a praia dos cariocas*. El español solo contrae «del»; el portugués contrae también plurales y femeninos.")
 tr(W, 2, "João está en casa.", "O João está em casa.", ["João está em casa.", "O João tá em casa."],
    "En Río los nombres propios llevan artículo (o João). En casa = em casa, sin artículo.")
 tr(W, 2, "La llave está arriba de la mesa.", "A chave está em cima da mesa.",
    ["A chave está sobre a mesa.", "A chave tá em cima da mesa."],
-   "em cima de + a = em cima da.")
+   "«Arriba de» se dice *em cima de*, y el *de* contrae: *em cima da mesa*. Lo contrario es *embaixo da mesa*.")
 tr(W, 2, "El hotel está cerca de la playa.", "O hotel está perto da praia.",
    ["O hotel é perto da praia.", "O hotel fica perto da praia."],
-   "perto de + a praia = perto da praia.")
+   "*Perto de* contrae con el artículo que sigue: *perto da praia*, *perto do hotel*. En español «cerca de la» va separado; en portugués no.")
 
 fx(W, 1, "contraccion", "Estou em a praia de Copacabana.", "em a", "na",
    "em + a se contrae siempre: na praia.")
 fx(W, 1, "contraccion", "O Cristo de o Corcovado é lindo.", "de o", "do",
    "de + o se contrae siempre: do Corcovado.")
 fx(W, 1, "contraccion", "Um passeio por o calçadão.", "por o", "pelo",
-   "por + o = pelo, obligatorio.")
+   "*Por* + *o* tiene que contraerse en *pelo*: *um passeio pelo calçadão*. ✗*por o* es error, aunque en español digamos «por el».")
 fx(W, 0, "articulo", "La praia é linda.", "La", "A",
    "El artículo femenino es a: a praia. «La» no existe en portugués.")
 
@@ -453,7 +453,7 @@ ch(W, 1, "A camisa do Flamengo é ___ e preta.", ["vermelha", "roxa", "roja"], "
    "Rojo es vermelho. Roxo es violeta: el falso amigo más peligroso de los colores.",
    prompt="«La camiseta del Flamengo es roja y negra.»")
 ch(W, 1, "O açaí é ___.", ["roxo", "vermelho", "rojo"], "roxo",
-   "Roxo = violeta, morado. El açaí es roxo.", prompt="«El asaí es violeta.»")
+   "Falso amigo de colores: *roxo* es «violeta, morado» (el color del *açaí*). «Rojo» se dice *vermelho*.", prompt="«El asaí es violeta.»")
 ch(W, 1, "O céu está ___.", ["cinza", "gris", "cinzo"], "cinza",
    "Gris = cinza (de «ceniza»), que no cambia en masculino: o céu está cinza.",
    prompt="«El cielo está gris.»")
@@ -464,10 +464,10 @@ ch(W, 2, "Tenho ___ amigas no Rio.", ["muitas", "muito", "muy"], "muitas",
 ch(W, 2, "Tem ___ gente na praia.", ["muita", "muito", "muy"], "muita",
    "Gente es femenino: muita gente.")
 ch(W, 2, "Ele é ___.", ["chato", "pesado", "esquisito"], "chato",
-   "Chato = pesado, aburrido (no «chato» de nariz). Esquisito = raro.",
+   "*Chato* es «pesado, aburrido» (una persona que cansa), no «de nariz chata». *Esquisito* sería «raro».",
    prompt="«Él es un pesado.»")
 ch(W, 2, "Ela é ___.", ["esquisita", "rara", "exquisita"], "esquisita",
-   "Esquisito = raro, extraño. Raro en portugués significa «poco frecuente».",
+   "*Esquisito/a* es «raro, extraño». Y ojo: *raro* en portugués significa «poco frecuente», no «extraño».",
    prompt="«Ella es rara (extraña).»")
 
 cz(W, 0, "As casas são ___. (branco)", "brancas", "Adjetivo en -o: cuatro formas. Casas (fem. pl.) → brancas.",
@@ -502,9 +502,9 @@ tr(W, 1, "Ella es argentina y él es brasileño.", "Ela é argentina e ele é br
 tr(W, 1, "Somos uruguayas.", "Somos uruguaias.", ["Nós somos uruguaias.", "A gente é uruguaia."],
    "Uruguaio → uruguaia: la y del español pasa a i.")
 tr(W, 1, "La camiseta es roja.", "A camisa é vermelha.", ["A camiseta é vermelha."],
-   "Rojo = vermelho. Roxo sería violeta.")
+   "«Rojo» se dice *vermelho*, y concuerda: *a camisa é vermelha*. *Roxo* sería violeta, un falso amigo clásico para el hispanohablante.")
 tr(W, 2, "Es muy linda.", "É muito linda.", ["Ela é muito linda.", "É muito bonita.", "Ela é muito bonita."],
-   "«Muy» = muito, invariable ante adjetivo.")
+   "«Muy» se dice *muito* y ante adjetivo es invariable: *muito linda*, *muito lindos*. El portugués no tiene una forma aparte para «muy».")
 tr(W, 2, "Tengo muchos amigos.", "Tenho muitos amigos.", ["Eu tenho muitos amigos."],
    "Ante sustantivo, muito concuerda: muitos amigos.")
 tr(W, 2, "Tiene ojos azules.", "Tem olhos azuis.", ["Ele tem olhos azuis.", "Ela tem olhos azuis.", "Você tem olhos azuis."],
@@ -531,7 +531,7 @@ sc(W, 2, ["Ela é muito bonita.", "Eles são muito altos.", "Tenho muitos amigos
    ["Cambia ante sustantivos (muitos amigos); ante adjetivos queda igual (muito bonita).",
     "Cambia siempre según el género y el número.", "No cambia nunca."],
    "Cambia ante sustantivos (muitos amigos); ante adjetivos queda igual (muito bonita).",
-   "muito + sustantivo = mucho/a/os/as (concuerda); muito + adjetivo = muy (invariable).")
+   "*Muito* concuerda cuando acompaña a un sustantivo (*muitos amigos, muitas praias* «muchos, muchas») y queda invariable ante adjetivo (*muito bonita* «muy linda»).")
 sc(W, 0, ["O Pedro é alto; a Bia é alta.", "O carro é branco; a casa é branca.", "O dia é alegre; a noite é alegre.",
           "O menino é feliz; a menina é feliz.", "O exercício é fácil; a lição é fácil.", "O bairro é tranquilo; a rua é tranquila."],
    "¿Qué adjetivos cambian del masculino al femenino?",
@@ -569,13 +569,13 @@ ch(W, 1, "Eu ___ um táxi.", ["dirijo", "dirigo", "dirijio"], "dirijo",
 ch(W, 2, "Sou ___.", ["engenheira", "uma engenheira", "a engenheira"], "engenheira",
    "La profesión con ser va sin artículo: sou engenheira.", prompt="«Soy ingeniera.»")
 ch(W, 2, "Trabalho num ___.", ["escritório", "oficina", "ofício"], "escritório",
-   "Escritório = oficina (de trabajo). Oficina = taller mecánico.", prompt="«Trabajo en una oficina.»")
+   "Falso amigo: *escritório* es la «oficina» de trabajo; *oficina* es el «taller mecánico». Trabajás *num escritório*.", prompt="«Trabajo en una oficina.»")
 ch(W, 2, "Eu ___ cedo.", ["acordo", "me acordo", "acordo-me"], "acordo",
    "Acordar = despertarse, sin pronombre: eu acordo cedo.", prompt="«Me despierto temprano.»")
 ch(W, 2, "Eu ___ ao meio-dia.", ["almoço", "almorzo", "almoça"], "almoço",
    "almoçar → eu almoço, con ç.", prompt="«Almuerzo al mediodía.»")
 ch(W, 2, "___ noite a gente janta em casa.", ["À", "A", "Na"], "À",
-   "«A la noche» = à noite, con crase (a + a). También de manhã, à tarde.")
+   "«A la noche» se dice *à noite*, con *crase* (*a + a*); igual *à tarde*. Pero «a la mañana» es *de manhã*, con *de*.")
 
 cz(W, 0, "Eu ___ em Copacabana. (morar)", "moro", "morar = vivir (en un lugar): eu moro.",
    prompt="Completá con el presente.")
@@ -599,7 +599,7 @@ cz(W, 1, "Eu ___ em casa hoje. (ficar)", "fico", "ficar → fico: ante o la c ya
    prompt="Completá con el presente.")
 cz(W, 2, "Eu ___ às sete todo dia. (acordar)", "acordo", "acordar = despertarse: eu acordo.",
    prompt="Completá con el presente.")
-cz(W, 2, "A gente ___ às nove da noite. (jantar)", "janta", "jantar = cenar. A gente janta.",
+cz(W, 2, "A gente ___ às nove da noite. (jantar)", "janta", "«Cenar» es *jantar* (y «almorzar», *almoçar*); son verbos regulares en -ar. Con *a gente* el verbo va en 3.ª persona singular: *a gente janta*.",
    prompt="Completá con el presente.")
 cz(W, 2, "Ela trabalha ___ garçonete. (de)", "como", "Trabajar «de» algo: trabalhar como (o de) garçonete.",
    alt=["de"])
@@ -609,7 +609,7 @@ cz(W, 2, "Ela ___ num banco. (trabalhar)", "trabalha", "trabalhar: ela trabalha.
 tr(W, 0, "¿Hablás portugués?", "Você fala português?", ["Tu falas português?", "Tu fala português?"],
    "Você + tercera persona: você fala.")
 tr(W, 0, "Vivimos en Botafogo.", "A gente mora em Botafogo.", ["Nós moramos em Botafogo.", "Moramos em Botafogo."],
-   "Vivir en un lugar = morar. A gente mora / nós moramos.")
+   "«Vivir en un lugar» se dice *morar em*: *a gente mora em Botafogo*. *Viver* se usa para «vivir» en sentido general (*viver bem*).")
 tr(W, 0, "Ellos trabajan mucho.", "Eles trabalham muito.", ["Elas trabalham muito."],
    "eles trabalham (-am); mucho = muito.")
 tr(W, 0, "¿Ustedes comen carne?", "Vocês comem carne?", [],
@@ -619,11 +619,11 @@ tr(W, 1, "Conozco Río.", "Eu conheço o Rio.", ["Conheço o Rio.", "Eu conheço
 tr(W, 2, "Soy profesor.", "Sou professor.", ["Eu sou professor."],
    "Profesión sin artículo: sou professor. Professor con ss.")
 tr(W, 2, "Me despierto temprano.", "Eu acordo cedo.", ["Acordo cedo."],
-   "Despertarse = acordar (sin pronombre); temprano = cedo.")
+   "«Despertarse» es *acordar*, sin pronombre reflexivo: *eu acordo cedo*. «Temprano» es *cedo*; y ojo, *acordar* no es «acordar» (eso es *combinar*).")
 tr(W, 2, "A la noche cenamos en casa.", "À noite a gente janta em casa.",
    ["À noite nós jantamos em casa.", "À noite jantamos em casa.", "A gente janta em casa à noite.",
     "Nós jantamos em casa à noite.", "Jantamos em casa à noite."],
-   "A la noche = à noite; cenar = jantar.")
+   "«A la noche» es *à noite*, con *crase*; «cenar» es *jantar*. Con *a gente* («nosotros» coloquial) el verbo va en 3.ª singular: *a gente janta*.")
 
 fx(W, 0, "persona", "Você falas muito bem.", "falas", "fala",
    "Con você, tercera persona: você fala.")
@@ -769,13 +769,13 @@ ty(W, 1, "Escribí la forma de «pôr» para «eu».", "eu ___", "ponho", "pôr 
 # ============================================================================
 W = 7
 ch(W, 0, "16 → ___", ["dezesseis", "dezeseis", "dieciseis"], "dezesseis",
-   "16 = dezesseis, con doble s.", prompt="¿Cómo se escribe el número?")
+   "Los números del 16 al 19 se escriben con *dez-* y *e*: *dezesseis* lleva doble *s* para que suene [s] entre vocales. Nada de *dieci-* como en español.", prompt="¿Cómo se escribe el número?")
 ch(W, 0, "19 → ___", ["dezenove", "dezenueve", "diecinove"], "dezenove",
    "19 = dezenove: dez + e + nove.", prompt="¿Cómo se escribe el número?")
 ch(W, 0, "500 → ___", ["quinhentos", "cincocentos", "quinientos"], "quinhentos",
-   "500 = quinhentos, con nh.", prompt="¿Cómo se escribe el número?")
+   "Las centenas cambian respecto del español: 500 es *quinhentos*, con *nh* (que suena como nuestra ñ). ✗*cincocentos* no existe.", prompt="¿Cómo se escribe el número?")
 ch(W, 0, "50 → ___", ["cinquenta", "cincuenta", "cinqüenta"], "cinquenta",
-   "50 = cinquenta, sin diéresis desde el Acuerdo de 1990.", prompt="¿Cómo se escribe el número?")
+   "50 es *cinquenta*, con *qu* que suena [kw]; desde el Acuerdo Ortográfico de 1990 ya no lleva diéresis (✗*cinqüenta*).", prompt="¿Cómo se escribe el número?")
 ch(W, 0, "___ cervejas, por favor.", ["Duas", "Dois", "Dos"], "Duas",
    "Dois tiene femenino: duas cervejas.", prompt="«Dos cervezas, por favor.»")
 ch(W, 0, "___ pessoas", ["duzentas", "duzentos", "doscentas"], "duzentas",
@@ -794,43 +794,43 @@ ch(W, 1, "___ de maio", ["primeiro", "um", "uno"], "primeiro",
 ch(W, 2, "Que horas são? — ___ uma hora.", ["É", "São", "Está"], "É",
    "Con una hora, singular: é uma hora. Con las demás, são.")
 ch(W, 2, "A festa começa ___ dez.", ["às", "as", "a las"], "às",
-   "«A las» = às (a + as), con acento grave.")
+   "Para la hora, «a las» se dice *às* (*a + as*, con *crase*): *começa às dez*. Sin acento, *as* sería solo el artículo.")
 ch(W, 2, "___ para as oito.", ["Quinze", "Quarto", "Um quarto"], "Quinze",
    "«Menos cuarto» = quinze para as…: quinze para as oito.", prompt="«Las ocho menos cuarto.»")
 ch(W, 2, "Meu número é nove, ___, dois…", ["meia", "meio", "média"], "meia",
    "Al dictar números, 6 se dice meia (de meia dúzia).", prompt="«Mi número es 9-6-2…»")
 
-cz(W, 0, "Tenho ___ anos. (18)", "dezoito", "18 = dezoito.", prompt="Escribí el número en letras.")
+cz(W, 0, "Tenho ___ anos. (18)", "dezoito", "18 es *dezoito*: el portugués junta *dez* + *oito* sin la *y* que tenemos en «dieciocho». La edad se dice con *ter*: *tenho dezoito anos*.", prompt="Escribí el número en letras.")
 cz(W, 0, "São ___ reais. (22)", "vinte e dois", "22 = vinte e dois: decena + e + unidad.",
    prompt="Escribí el número en letras.")
 cz(W, 0, "Tem ___ pessoas. (21)", "vinte e uma", "Pessoas es femenino: vinte e uma pessoas.",
    prompt="Escribí el número en letras.")
-cz(W, 0, "O açaí custa ___ reais. (15)", "quinze", "15 = quinze.", prompt="Escribí el número en letras.")
-cz(W, 0, "Moro no número ___. (300)", "trezentos", "300 = trezentos.", prompt="Escribí el número en letras.")
+cz(W, 0, "O açaí custa ___ reais. (15)", "quinze", "15 es *quinze*, con *z* que suena [z] sonora. Los precios en reales: *custa quinze reais* (plural de *real*).", prompt="Escribí el número en letras.")
+cz(W, 0, "Moro no número ___. (300)", "trezentos", "300 es *trezentos*, con *z* (suena [z]), no *trescientos*. Las centenas concuerdan en género: *trezentas pessoas*.", prompt="Escribí el número en letras.")
 cz(W, 0, "Quero ___ águas de coco. (2)", "duas", "Água es femenino: duas águas.", prompt="Escribí el número en letras.")
 cz(W, 1, "O carnaval é ___ fevereiro.", "em", "Los meses van con em, sin artículo: em fevereiro.")
 cz(W, 1, "Hoje é ___ 15 de março. (el día)", "dia", "Fechas: hoje é dia 15 de março.")
 cz(W, 1, "Sexta-___ tem samba.", "feira", "Los días de lunes a viernes llevan -feira: sexta-feira.")
 cz(W, 2, "___ duas horas. (ser)", "São", "Con más de una hora: são duas horas.")
-cz(W, 2, "O museu abre ___ uma. (a la)", "à", "«A la una» = à uma (a + a).")
+cz(W, 2, "O museu abre ___ uma. (a la)", "à", "«A la una» es *à uma*: la preposición *a* se funde con el artículo femenino *a* (*crase*). Las demás horas van en plural: *às duas*.")
 cz(W, 2, "É meio-dia e ___. (12:30)", "meia", "Y media = e meia (meia hora): meio-dia e meia.")
-cz(W, 2, "Quanto ___ o mate? (custar)", "custa", "Quanto custa? = ¿cuánto cuesta / sale?")
+cz(W, 2, "Quanto ___ o mate? (custar)", "custa", "Para preguntar el precio se usa *custar*: *quanto custa o mate?* «¿cuánto sale / cuesta?». No se usa *sair* en este sentido.")
 
 tr(W, 0, "Tengo veintiún años.", "Tenho vinte e um anos.", ["Eu tenho vinte e um anos."],
    "21 = vinte e um; ano es masculino.")
 tr(W, 0, "Dos cervezas, por favor.", "Duas cervejas, por favor.", ["Por favor, duas cervejas."],
    "Cerveja es femenino: duas.")
 tr(W, 1, "Hoy es martes.", "Hoje é terça-feira.", ["Hoje é terça."],
-   "Martes = terça-feira.")
+   "Los días de semana se cuentan: *segunda-feira* (lunes), *terça-feira* (martes)... Solo *sábado* y *domingo* tienen nombre propio, como en español.")
 tr(W, 1, "El sábado hay feria.", "No sábado tem feira.", ["No sábado há feira.", "Sábado tem feira.", "Sábado há feira."],
-   "El sábado = no sábado; hay = tem / há.")
+   "«El sábado» (cuándo) se dice *no sábado*, con *em + o*: el portugués pone preposición donde el español no. «Hay» es *tem* en el habla, *há* en la escritura.")
 tr(W, 1, "El carnaval es en febrero.", "O carnaval é em fevereiro.", ["O Carnaval é em fevereiro."],
    "Meses con em y minúscula: em fevereiro.")
 tr(W, 2, "Son las tres y media.", "São três e meia.", ["São três horas e meia.", "São três e trinta."],
-   "Son las… = são…; y media = e meia.")
+   "La hora va con *ser* sin artículo: *são três e meia* «son las tres y media». Para la una, singular: *é uma hora*.")
 tr(W, 2, "¿Cuánto sale?", "Quanto custa?", ["Quanto é?"], "Quanto custa? o quanto é?")
 tr(W, 2, "La fiesta empieza a las diez.", "A festa começa às dez.", ["A festa começa às dez horas."],
-   "A las diez = às dez, con acento grave.")
+   "«A las diez» es *às dez*: preposición *a* + artículo *as* con acento grave (*crase*). El artículo es obligatorio, como en español.")
 
 fx(W, 0, "concordancia", "Dois cervejas, por favor.", "Dois", "Duas",
    "Cerveja es femenino: duas cervejas.")
@@ -861,8 +861,8 @@ sc(W, 0, ["uma cerveja", "duas cervejas", "um chope", "dois chopes", "duzentas p
    "um/uma, dois/duas y las centenas (duzentos/duzentas).",
    "Como en español (un/una, doscientos/as), pero además dois/duas.")
 
-ty(W, 0, "Escribí 17 en letras.", "17 → ___", "dezessete", "17 = dezessete, con doble s.")
-ty(W, 0, "Escribí 700 en letras.", "700 → ___", "setecentos", "700 = setecentos.")
+ty(W, 0, "Escribí 17 en letras.", "17 → ___", "dezessete", "Del 16 al 19, *dez-* se une a la unidad: *dezessete* (17), con doble *s* para que suene [s]. En español decimos «diecisiete».")
+ty(W, 0, "Escribí 700 en letras.", "700 → ___", "setecentos", "700 es *setecentos*: el portugués usa *sete* entero, donde el español dice «setecientos» con *-cientos*.")
 
 # ============================================================================
 # Semana 8 — Perguntas, ir + infinitivo e estar + gerúndio
@@ -876,7 +876,7 @@ ch(W, 0, "___ é o seu telefone?", ["Qual", "O que", "Cuál"], "Qual",
 ch(W, 0, "___ anos você tem?", ["Quantos", "Quanto", "Cuántos"], "Quantos",
    "Quanto concuerda con el sustantivo: quantos anos.")
 ch(W, 0, "___ é ele? — É o meu irmão.", ["Quem", "Quê", "Que"], "Quem",
-   "¿Quién? = quem, con m nasal.")
+   "«¿Quién?» es *quem*, invariable (no tiene plural como «quiénes»); la *m* final solo nasaliza la vocal.")
 ch(W, 0, "___ você é? — De Mendoza.", ["De onde", "Onde", "Aonde"], "De onde",
    "Origen: de onde você é?")
 ch(W, 0, "___ você está aqui? — Porque tenho férias.", ["Por que", "Porque", "Por quê"], "Por que",
@@ -898,14 +898,14 @@ ch(W, 2, "Ela está ___.", ["dormindo", "durmindo", "durmiendo"], "dormindo",
 ch(W, 2, "Onde você está ___?", ["indo", "yendo", "iendo"], "indo",
    "ir → indo.")
 
-cz(W, 0, "___ você mora? (dónde)", "Onde", "¿Dónde? = onde.")
-cz(W, 0, "___ custa? (cuánto)", "Quanto", "¿Cuánto cuesta? = quanto custa?")
-cz(W, 0, "___ é a sua cidade? (cuál)", "Qual", "¿Cuál es…? = qual é…?")
+cz(W, 0, "___ você mora? (dónde)", "Onde", "«¿Dónde?» es *onde*, sin la *d* inicial del español. Con verbos de movimiento se usa *aonde*: *aonde você vai?*")
+cz(W, 0, "___ custa? (cuánto)", "Quanto", "«¿Cuánto?» es *quanto*, que concuerda como en español (*quanta, quantos, quantas*): *quanto custa?* «¿cuánto cuesta?».")
+cz(W, 0, "___ é a sua cidade? (cuál)", "Qual", "«¿Cuál es...?» se dice *qual é...?*; en plural, *quais são...?* Para «¿qué es?» se usa *o que é?*")
 cz(W, 0, "Por que você não vem? — ___ tenho aula.", "Porque", "En la respuesta, porque va junto.")
 cz(W, 1, "No sábado eu ___ ficar em casa. (ir)", "vou", "ir + infinitivo: vou ficar.")
 cz(W, 1, "Eles ___ ver o jogo. (ir)", "vão", "eles vão + infinitivo.")
 cz(W, 1, "O que você ___ fazer no fim de semana? (ir)", "vai", "você vai + infinitivo.")
-cz(W, 1, "No domingo vai ___ churrasco. (haber)", "ter", "«Va a haber» = vai ter (habla) o vai haver.",
+cz(W, 1, "No domingo vai ___ churrasco. (haber)", "ter", "En el habla, «haber» existencial se dice con *ter*: *vai ter churrasco* «va a haber asado». En la escritura, *vai haver*.",
    alt=["haver"])
 cz(W, 2, "Ela está ___ agora. (trabalhar)", "trabalhando", "-ar → -ando.",
    prompt="Completá con el gerúndio.")
@@ -917,7 +917,7 @@ cz(W, 2, "O que você está ___? (dizer)", "dizendo", "dizer → dizendo (no «d
    prompt="Completá con el gerúndio.")
 
 tr(W, 0, "¿Dónde vivís?", "Onde você mora?", ["Onde tu moras?", "Você mora onde?"],
-   "Vivir en un lugar = morar.")
+   "«Vivir en un lugar» es *morar*: *onde você mora?* El voseo rioplatense no existe en Brasil; se usa *você* con el verbo en 3.ª persona.")
 tr(W, 0, "¿Por qué estás en Río?", "Por que você está no Rio?",
    ["Você está no Rio por quê?", "Por que tu estás no Rio?", "Por que você tá no Rio?"],
    "Pregunta: por que, separado; al final, por quê.")
@@ -941,7 +941,7 @@ fx(W, 2, "espanol", "Ela está durmindo no sofá.", "durmindo", "dormindo",
 fx(W, 0, "ortografia", "Porque você não vem à festa?", "Porque", "Por que",
    "En la pregunta, por que va separado; porque (junto) es para responder.")
 fx(W, 0, "espanol", "Cuántos anos você tem?", "Cuántos", "Quantos",
-   "¿Cuántos? = quantos, con qu y sin tilde.")
+   "«¿Cuántos?» se escribe *quantos*: el portugués usa *qu* delante de *a* (suena [kw]) y los interrogativos no llevan tilde. Concuerda: *quantas pessoas?*")
 
 gd(W, 2, [["falar", "falando"], ["comer", "comendo"], ["abrir", "abrindo"]], "pôr → ___", "pondo", "ponhendo",
    "pôr es el único verbo en -or: pondo (compuestos: compondo, propondo).")
@@ -966,7 +966,7 @@ sc(W, 1, ["Vou viajar amanhã.", "Ela vai comer na feira.", "Vamos sair hoje.", 
    "Vou viajar, vamos sair: sin la «a» del español.")
 
 ty(W, 2, "Escribí el gerúndio de «pôr».", "pôr → ___", "pondo", "pôr → pondo.")
-ty(W, 0, "Escribí «¿quién?» en portugués.", "«¿quién?» → ___", "quem", "¿Quién? = quem.",
+ty(W, 0, "Escribí «¿quién?» en portugués.", "«¿quién?» → ___", "quem", "«¿Quién?» es *quem*, invariable: sirve para una o varias personas (no hay «quiénes»). La *m* final solo nasaliza la *e*.",
    alt=["quem?"])
 
 # ============================================================================
@@ -983,7 +983,7 @@ ch(W, 0, "Eles moram ___ Argentina.", ["na", "em", "a"], "na",
 ch(W, 0, "Estou ___ Portugal.", ["em", "no", "na"], "em",
    "Portugal va sin artículo: em Portugal (pero no Brasil).")
 ch(W, 0, "Vou ___ praia.", ["à", "em", "á"], "à",
-   "ir a + a praia = vou à praia, con acento grave.")
+   "*Ir a* + *a praia* se funde en *vou à praia*, con acento grave (*crase*). En el habla se oye mucho *vou pra praia*.")
 ch(W, 0, "Vou ___ Salvador no verão, para morar lá.", ["para", "em", "de"], "para",
    "ir para: destino donde te quedás. ir a: visita corta.")
 ch(W, 0, "Chegamos ___ Rio às oito.", ["ao", "no", "para o"], "ao",
@@ -992,62 +992,62 @@ ch(W, 0, "Chegamos ___ Rio às oito.", ["ao", "no", "para o"], "ao",
 ch(W, 1, "Vou ___ ônibus.", ["de", "em", "a"], "de",
    "Medio de transporte: de + medio sin artículo: de ônibus.")
 ch(W, 1, "A gente vai ___ pé.", ["a", "de", "em"], "a",
-   "A pie = a pé. De pé significa «parado».")
+   "«A pie» es *a pé*, con la misma preposición que en español y tilde en *pé*. Ojo: *de pé* significa «parado, de pie», no el medio de transporte.")
 ch(W, 1, "O ônibus passa ___ praia.", ["pela", "por a", "pola"], "pela",
-   "por + a = pela.")
+   "*Por* + *a* se contrae siempre en *pela*: *o ônibus passa pela praia*. ✗*por a* no existe, aunque en español digamos «por la».")
 ch(W, 1, "Eu ___ o metrô em Botafogo.", ["pego", "pega", "pegamos"], "pego",
    "Tomar un transporte = pegar: eu pego o metrô.")
 ch(W, 2, "Vou a pé ___ a praia.", ["até", "hasta", "desde"], "até",
-   "Hasta = até.")
+   "«Hasta» se dice *até*, con tilde en la *e*: *vou a pé até a praia*. «Desde» es *desde* o *de*.")
 ch(W, 2, "Saio ___ casa às sete.", ["de", "da", "desde"], "de",
    "Salir de casa (la propia): sair de casa, sin artículo.")
 ch(W, 2, "Você vira ___ direita.", ["à", "a", "na"], "à",
-   "A la derecha = à direita (a + a).")
+   "«A la derecha» es *à direita*: la preposición *a* + el artículo *a* dan *à* (*crase*). Lo mismo con *à esquerda*.")
 ch(W, 2, "Você segue em ___.", ["frente", "direito", "derecho"], "frente",
-   "«Seguir derecho» = seguir em frente (o reto). Direito es «derecho» de ley o lado.",
+   "«Seguir derecho» se dice *seguir em frente* (o *seguir reto*). *Direito* es «derecho» como ley o como lado, pero no para indicar el camino.",
    prompt="«Seguís derecho.»")
 
 cz(W, 0, "Estou ___ Copacabana. (en)", "em", "Copacabana se usa sin artículo: em Copacabana.")
 cz(W, 0, "Ela trabalha ___ Lapa. (en la)", "na", "A Lapa lleva artículo: na Lapa.")
 cz(W, 0, "Vocês moram ___ Brasil? (en el)", "no", "O Brasil lleva artículo: no Brasil.")
-cz(W, 0, "Vamos ___ Maracanã? (a + o)", "ao", "a + o = ao.")
+cz(W, 0, "Vamos ___ Maracanã? (a + o)", "ao", "*A* + *o* da *ao*, como nuestro «al»: *vamos ao Maracanã?* En el habla también *pro Maracanã* (*para + o*).")
 cz(W, 0, "Eu vou ___ casa. (para, habla)", "pra", "En el habla para se reduce a pra: vou pra casa.",
    alt=["para"])
 cz(W, 1, "Ela vai ___ metrô. (en subte)", "de", "de + medio de transporte: de metrô.")
-cz(W, 1, "Passo ___ centro todo dia. (por + o)", "pelo", "por + o = pelo.")
-cz(W, 1, "Um passeio ___ ruas de Santa Teresa. (por + as)", "pelas", "por + as = pelas.")
+cz(W, 1, "Passo ___ centro todo dia. (por + o)", "pelo", "*Por* + *o* se contrae en *pelo*: *passo pelo centro*. En portugués la contracción es obligatoria.")
+cz(W, 1, "Um passeio ___ ruas de Santa Teresa. (por + as)", "pelas", "*Por* + *as* da *pelas*: *um passeio pelas ruas*. El portugués contrae *por* con todos los artículos (*pelo, pela, pelos, pelas*).")
 cz(W, 2, "Do Leme ___ Leblon tem muita praia. (a + o)", "ao", "de… a…: do Leme ao Leblon (o até o Leblon).",
    alt=["até o"])
 cz(W, 2, "Venho ___ trabalho. (de + o)", "do", "de + o = do: venho do trabalho.")
-cz(W, 2, "A estação fica ___ esquerda.", "à", "A la izquierda = à esquerda, con crase.")
+cz(W, 2, "A estação fica ___ esquerda.", "à", "«A la izquierda» es *à esquerda*, con *crase* (*a* + artículo *a*). Con *ficar* se ubica algo: *a estação fica à esquerda*.")
 cz(W, 2, "Com ___, como eu chego ao Arpoador?", "licença",
    "Com licença sirve para pedir paso o abordar a alguien por la calle.")
 
 tr(W, 0, "Vivo en Río.", "Moro no Rio.", ["Eu moro no Rio.", "Moro no Rio de Janeiro.", "Eu moro no Rio de Janeiro."],
-   "morar em + o Rio = no Rio.")
+   "«Vivir en» es *morar em*, y *Rio* lleva artículo: *em + o Rio* da *no Rio*. Algunas ciudades llevan artículo (*o Rio*, *o Recife*) y otras no (*São Paulo*).")
 tr(W, 0, "Voy a la playa.", "Vou à praia.", ["Eu vou à praia.", "Vou pra praia.", "Eu vou pra praia.", "Vou para a praia.", "Eu vou para a praia."],
-   "a + a = à. En el habla, vou pra praia.")
+   "*A* + *a* da *à*: *vou à praia*. En el habla se usa más *para* (*pra*): *vou pra praia*.")
 tr(W, 0, "Vivimos en Brasil.", "Moramos no Brasil.", ["Nós moramos no Brasil.", "A gente mora no Brasil."],
    "O Brasil lleva artículo: no Brasil.")
 tr(W, 1, "Voy en colectivo.", "Vou de ônibus.", ["Eu vou de ônibus."],
    "de + medio de transporte; colectivo = ônibus.")
 tr(W, 1, "Vamos a pie.", "Vamos a pé.", ["A gente vai a pé.", "Nós vamos a pé."],
-   "A pie = a pé.")
+   "«A pie» es *a pé*, con la misma preposición que el español y tilde en *pé*. *De pé* significa «parado».")
 tr(W, 1, "El subte pasa por Copacabana.", "O metrô passa por Copacabana.", [],
    "Copacabana sin artículo: por Copacabana (con artículo sería pelo / pela).")
 tr(W, 2, "Salgo de casa a las siete.", "Saio de casa às sete.", ["Eu saio de casa às sete.", "Saio de casa às sete horas."],
    "sair → saio; a las siete = às sete.")
 tr(W, 2, "Doblás a la derecha.", "Você vira à direita.", ["Vira à direita.", "Tu viras à direita."],
-   "Doblar = virar; a la derecha = à direita.")
+   "«Doblar» (en la calle) es *virar*, y «a la derecha» *à direita*, con *crase*. Sin voseo: *você vira* con el verbo en 3.ª persona.")
 
 fx(W, 1, "preposicion", "Vou em ônibus para o trabalho.", "em ônibus", "de ônibus",
    "Medio de transporte: de ônibus, de metrô, de carro.")
 fx(W, 0, "contraccion", "Moro em o Rio, em Botafogo.", "em o Rio", "no Rio",
    "em + o = no: moro no Rio.")
 fx(W, 1, "contraccion", "O ônibus passa por a praia.", "por a", "pela",
-   "por + a = pela, obligatorio.")
+   "*Por* + *a* tiene que contraerse: *pela praia*. ✗*por a* es un error típico de hispanohablante.")
 fx(W, 2, "crase", "A farmácia fica a esquerda.", "a esquerda", "à esquerda",
-   "A la izquierda = à esquerda, con acento grave.")
+   "«A la izquierda» lleva *crase*: *à esquerda*. Sin el acento grave, *a esquerda* sería «la izquierda» (solo el artículo).")
 
 gd(W, 0, [["em + a Lapa", "na Lapa"], ["em + o Leblon", "no Leblon"], ["em + a Tijuca", "na Tijuca"]],
    "em + Copacabana → ___", "em Copacabana", "na Copacabana",
@@ -1062,7 +1062,7 @@ sc(W, 1, ["Vou de carro.", "Vou de ônibus.", "Vou de metrô.", "Vou de biciclet
    ["«de» + el medio, sin artículo; solo «a pé» es distinto.", "«em» + el medio, como en español.",
     "«de» + artículo + el medio: do carro, do ônibus."],
    "«de» + el medio, sin artículo; solo «a pé» es distinto.",
-   "Vou de ônibus = voy en colectivo. La única excepción es a pé.")
+   "El medio de transporte va con *de* sin artículo: *vou de ônibus* «voy en colectivo», *de carro*, *de metrô*. La única excepción es *a pé*.")
 sc(W, 0, ["Chego ao aeroporto às dez. (norma)", "Chego no aeroporto às dez. (habla)", "Vou ao mercado. (norma)",
           "Vou no mercado. (habla)", "Chegamos à praia. (norma)", "Chegamos na praia. (habla)"],
    "¿Qué diferencia hay entre «a» y «em» con verbos de movimiento?",
@@ -1071,8 +1071,8 @@ sc(W, 0, ["Chego ao aeroporto às dez. (norma)", "Chego no aeroporto às dez. (h
    "La norma pide «a»; en el habla de Brasil se usa «em».",
    "chegar a / ir a son la norma; chegar em / ir em son del habla de todo Brasil. Escribí a; entendé los dos.")
 
-ty(W, 1, "Escribí la contracción de «por + as».", "por + as → ___", "pelas", "por + as = pelas.")
-ty(W, 1, "¿Cómo se dice «a pie»?", "«a pie» → ___", "a pé", "A pie = a pé, con tilde en pé.")
+ty(W, 1, "Escribí la contracción de «por + as».", "por + as → ___", "pelas", "*Por* + *as* se contrae en *pelas* (*pelas ruas*). La contracción con *por* es obligatoria, a diferencia del español.")
+ty(W, 1, "¿Cómo se dice «a pie»?", "«a pie» → ___", "a pé", "«A pie» se dice *a pé*, con la preposición *a* y tilde aguda en *pé*. Es la excepción al *de* + transporte (*de ônibus*).")
 
 # ============================================================================
 # Semana 10 — Possessivos e demonstrativos
@@ -1080,34 +1080,34 @@ ty(W, 1, "¿Cómo se dice «a pie»?", "«a pie» → ___", "a pé", "A pie = a 
 # ============================================================================
 W = 10
 ch(W, 0, "___ casa é em Santa Teresa.", ["Minha", "Mia", "Mi"], "Minha",
-   "Mi / mía femenino = minha.", prompt="«Mi casa está en Santa Teresa.»")
+   "El posesivo femenino es *minha* (masculino *meu*), igual para «mi» y «mía». En Brasil suele llevar artículo: *a minha casa*.", prompt="«Mi casa está en Santa Teresa.»")
 ch(W, 0, "___ pais moram em Rosario.", ["Meus", "Mis", "Minhas"], "Meus",
    "Pais es masculino plural: meus pais.", prompt="«Mis padres viven en Rosario.»")
 ch(W, 0, "Essa mala é ___.", ["minha", "mia", "meu"], "minha",
    "El posesivo concuerda con lo poseído (a mala): minha.", prompt="«Esa valija es mía.»")
 ch(W, 0, "Estou ___ minha casa.", ["na", "em a", "em"], "na",
-   "em + a minha casa = na minha casa.")
+   "Con posesivo, *em* + *a minha casa* se contrae: *na minha casa*. ✗*em a* no existe.")
 ch(W, 0, "o carro ___", ["dele", "de ele", "seu"], "dele",
    "«De él» sin ambigüedad: dele, siempre contraído y después del sustantivo. Seu se entiende «de você».",
    prompt="«el auto de él»")
 ch(W, 0, "a mãe ___", ["dela", "de ela", "sua"], "dela",
-   "«De ella» = dela, después del sustantivo.", prompt="«la madre de ella»")
+   "«De ella» se contrae en *dela* y va detrás del sustantivo: *a mãe dela*. Se prefiere a *sua*, que con *você* se entiende «tuya».", prompt="«la madre de ella»")
 ch(W, 0, "a ___ casa", ["nossa", "nosso", "nuestra"], "nossa",
    "Casa es femenino: a nossa casa.", prompt="«nuestra casa»")
 ch(W, 1, "___ morro é o Dois Irmãos.", ["Aquele", "Aquel", "Esse aqui"], "Aquele",
    "Allá lejos: aquele (masc.), aquela (fem.).", prompt="«Aquel cerro es el Dos Hermanos.»")
 ch(W, 1, "O que é ___?", ["isso", "esso", "iso"], "isso",
-   "Neutro «eso» = isso, con i y doble s.", prompt="«¿Qué es eso?»")
+   "El neutro «eso» es *isso*, con *i* y doble *s*; «esto» es *isto* y «aquello» *aquilo*. En el habla, *isso* se usa también por «esto».", prompt="«¿Qué es eso?»")
 ch(W, 1, "Moro ___ prédio.", ["neste", "em este", "nesto"], "neste",
-   "em + este = neste, obligatorio.", prompt="«Vivo en este edificio.»")
+   "*Em* + demostrativo se contrae siempre: *neste, nesse, naquele*. «En este edificio» es *neste prédio*; ✗*em este* no se usa.", prompt="«Vivo en este edificio.»")
 ch(W, 1, "A dona ___ loja é baiana.", ["dessa", "de essa", "desa"], "dessa",
-   "de + essa = dessa.", prompt="«La dueña de esa tienda es bahiana.»")
+   "*De* + *essa* da *dessa*: *a dona dessa loja*. Los demostrativos se contraen con *de* y *em*, cosa que el español no hace.", prompt="«La dueña de esa tienda es bahiana.»")
 ch(W, 1, "Não sei nada ___.", ["disso", "de isso", "deso"], "disso",
-   "de + isso = disso.", prompt="«No sé nada de eso.»")
+   "*De* + *isso* se contrae en *disso*: *não sei nada disso* «no sé nada de eso». Igual *disto*, *daquilo*.", prompt="«No sé nada de eso.»")
 ch(W, 2, "Meus ___ moram em Mendoza.", ["pais", "parentes", "padres"], "pais",
-   "Los padres (papá y mamá) = os pais. Parentes = parientes.", prompt="«Mis padres viven en Mendoza.»")
+   "«Los padres» (papá y mamá) son *os pais*. *Parentes* son «parientes» y *padre* es «cura».", prompt="«Mis padres viven en Mendoza.»")
 ch(W, 2, "a minha ___", ["avó", "avô", "abuela"], "avó",
-   "Abuela = avó (ó abierta); abuelo = avô (ô cerrada).", prompt="«mi abuela»")
+   "*Avó* (ó abierta, tilde aguda) es «abuela»; *avô* (ô cerrada, circunflejo) es «abuelo». El acento marca la diferencia de timbre que el español no tiene.", prompt="«mi abuela»")
 
 cz(W, 0, "___ irmã mora em Niterói. (mi)", "Minha", "Posesivo femenino: minha irmã (o a minha irmã).",
    alt=["A minha"], prompt="Completá con el posesivo.")
@@ -1117,16 +1117,16 @@ cz(W, 0, "As ___ malas estão no carro. (nuestras)", "nossas", "Malas, femenino 
    prompt="Completá con el posesivo.")
 cz(W, 0, "Qual é o ___ telefone? (tu, de você)", "seu", "Para você: seu / sua. Telefone es masculino: o seu telefone.",
    prompt="Completá con el posesivo.")
-cz(W, 0, "O Rafa e a namorada ___. (de él)", "dele", "De él = dele, después del sustantivo.",
+cz(W, 0, "O Rafa e a namorada ___. (de él)", "dele", "«De él» se contrae en *dele* y va detrás del sustantivo: *a namorada dele*. Así se evita la ambigüedad de *sua*.",
    prompt="Completá con el posesivo.")
-cz(W, 0, "O apartamento ___ fica no Leblon. (de ellos)", "deles", "De ellos = deles.",
+cz(W, 0, "O apartamento ___ fica no Leblon. (de ellos)", "deles", "«De ellos» es *deles* (*de + eles*), detrás del sustantivo: *o apartamento deles*. En femenino, *delas*.",
    prompt="Completá con el posesivo.")
-cz(W, 1, "___ camisa é sua? (esa)", "Essa", "Esa (cerca de vos) = essa. En el habla, essa también reemplaza a esta.",
+cz(W, 1, "___ camisa é sua? (esa)", "Essa", "*Essa* es «esa» (cerca de quien escucha); en el habla brasileña *esse/essa* reemplaza también a *este/esta*.",
    alt=["Esta"])
 cz(W, 1, "___ ali é o Cristo? (aquello)", "Aquilo", "Neutro lejano: aquilo.")
-cz(W, 1, "___ rua tem um boteco. (en aquella)", "Naquela", "em + aquela = naquela.")
-cz(W, 1, "___ mesmo! (eso)", "Isso", "Isso mesmo! = ¡eso mismo!, ¡exacto!")
-cz(W, 1, "O dono ___ restaurante é mineiro. (de este)", "deste", "de + este = deste.",
+cz(W, 1, "___ rua tem um boteco. (en aquella)", "Naquela", "*Em* + *aquela* se contrae en *naquela*: *naquela rua* «en aquella calle». Igual *naquele*, *naquilo*.")
+cz(W, 1, "___ mesmo! (eso)", "Isso", "*Isso mesmo!* es «¡eso mismo!, ¡exacto!»: el neutro *isso* más *mesmo*, que refuerza. Muy frecuente para dar la razón.")
+cz(W, 1, "O dono ___ restaurante é mineiro. (de este)", "deste", "*De* + *este* se contrae en *deste*: *o dono deste restaurante*. En español «de este» queda separado.",
    alt=["desse"])
 cz(W, 2, "O pai do meu marido é o meu ___.", "sogro", "El padre del marido o de la esposa es o sogro.")
 cz(W, 2, "Tenho dois ___ e uma irmã. (hermanos)", "irmãos", "irmão → irmãos.")
@@ -1134,30 +1134,30 @@ cz(W, 2, "Tenho dois ___ e uma irmã. (hermanos)", "irmãos", "irmão → irmão
 tr(W, 0, "Mi hermana vive en Niterói.", "Minha irmã mora em Niterói.", ["A minha irmã mora em Niterói."],
    "Minha, con o sin artículo; vivir = morar.")
 tr(W, 0, "Esa valija es mía.", "Essa mala é minha.", ["Esta mala é minha.", "A mala é minha."],
-   "Valija = mala; mía = minha.")
+   "«Valija» se dice *mala*, y el posesivo *minha* sirve para «mi» y para «mía». Con «esa» cerca de vos: *essa mala*.")
 tr(W, 0, "El auto de él es negro.", "O carro dele é preto.", [],
-   "De él = dele, después del sustantivo; negro (color) = preto.")
+   "«De él» es *dele*, detrás del sustantivo: *o carro dele*. Y el color «negro» se dice *preto* (*negro* se reserva para personas).")
 tr(W, 0, "¿Cuál es tu teléfono?", "Qual é o seu telefone?",
    ["Qual é seu telefone?", "Qual é o teu telefone?", "Qual é teu telefone?", "Qual o seu telefone?"],
    "Para você, seu. En el Sur y el Nordeste también teu.")
 tr(W, 1, "¿Qué es eso?", "O que é isso?", ["O que é isto?", "Que é isso?"],
-   "Eso = isso.")
+   "La pregunta «¿qué es?» lleva *o que*: *o que é isso?*; el neutro «eso» es *isso*. Un *que* solo suena incompleto.")
 tr(W, 1, "Vivo en este edificio.", "Moro neste prédio.", ["Eu moro neste prédio.", "Moro nesse prédio.", "Eu moro nesse prédio."],
-   "em + este = neste; edificio = prédio.")
+   "*Em* + *este* se contrae en *neste*; «edificio» se dice *prédio* (*edifício* también existe, más formal). «Vivir» en un lugar es *morar*.")
 tr(W, 2, "Mis padres viven en Rosario.", "Meus pais moram em Rosario.", ["Os meus pais moram em Rosario."],
-   "Padres = pais (no parentes).")
+   "«Padres» (papá y mamá) es *pais*; *parentes* son «parientes». Y «vivir en» se dice *morar em*.")
 tr(W, 2, "Mi abuelo es de Minas.", "Meu avô é de Minas.",
    ["O meu avô é de Minas.", "Meu avô é mineiro.", "O meu avô é mineiro.", "Meu avô é de Minas Gerais.", "O meu avô é de Minas Gerais."],
-   "Abuelo = avô, con circunflejo.")
+   "«Abuelo» es *avô*, con circunflejo (o cerrada); con tilde aguda, *avó*, sería «abuela». Origen con *ser de*: *é de Minas*.")
 
 fx(W, 0, "espanol", "Mia casa é em Botafogo.", "Mia", "Minha",
    "El posesivo femenino es minha: minha casa.")
 fx(W, 0, "contraccion", "O carro de ele é branco.", "de ele", "dele",
    "de + ele se contrae siempre: dele.")
 fx(W, 1, "contraccion", "Moro em este prédio com a minha família.", "em este", "neste",
-   "em + este = neste.")
+   "*Em* + *este* se contrae obligatoriamente: *neste prédio*. Es un error típico dejar ✗*em este* separado como en español.")
 fx(W, 2, "falso_amigo", "Meus padres moram em Córdoba.", "padres", "pais",
-   "Los padres = os pais. Padre en portugués es un cura.")
+   "«Padres» (papá y mamá) es *pais*. *Padre* en portugués es un cura: *meus padres* sonaría a «mis curas».")
 
 gd(W, 0, [["teu", "tua"], ["seu", "sua"], ["nosso", "nossa"]], "meu → ___", "minha", "meua",
    "El femenino de meu es irregular: minha, minhas.")
@@ -1182,7 +1182,7 @@ sc(W, 1, ["Moro neste prédio.", "O dono desse bar é baiano.", "Naquela rua tem
    "Es la misma regla que no / do: em y de se contraen con este, esse, aquele, isso.")
 
 ty(W, 0, "Escribí el femenino plural de «meu».", "meu → ___", "minhas", "meu, minha, meus, minhas.")
-ty(W, 0, "Escribí «de + ela» en una palabra.", "de + ela → ___", "dela", "de + ela = dela.")
+ty(W, 0, "Escribí «de + ela» en una palabra.", "de + ela → ___", "dela", "*De* + *ela* se contrae en *dela* («de ella»): *a casa dela*. Lo mismo *dele, deles, delas*.")
 
 # ============================================================================
 # Semana 11 — Pretérito perfeito
@@ -1221,7 +1221,7 @@ ch(W, 2, "Hoje eu ___ muito.", ["comi", "tenho comido", "hei comido"], "comi",
    "«He comido» = comi: el perfeito cubre los dos pasados del español.",
    prompt="«Hoy he comido mucho.»")
 ch(W, 2, "Você já ___ a Paraty?", ["foi", "fui", "tem ido"], "foi",
-   "«¿Ya fuiste / has ido?» = você já foi? Tem ido significa «viene yendo».")
+   "Para experiencias («¿ya fuiste?, ¿alguna vez fuiste?») se usa el perfeito: *você já foi?* El *tem ido* no equivale a «has ido»: significa «venís yendo».")
 
 cz(W, 0, "Ontem eu ___ muito. (trabalhar)", "trabalhei", "-ar en eu: -ei.", prompt="Completá con el perfeito.")
 cz(W, 0, "A gente ___ na Lapa. (dançar)", "dançou", "a gente + tercera singular: dançou.",
@@ -1238,7 +1238,7 @@ cz(W, 1, "Ela ___ um presente para a mãe. (dar)", "deu", "dar → ela deu.", pr
 cz(W, 1, "Onde você ___ a chave? (pôr)", "pôs", "pôr → você pôs, con circunflejo.",
    alt=["colocou", "botou"], prompt="Completá con el perfeito.")
 cz(W, 2, "Ainda não ___. (almoçar, eu)", "almocei", "-çar → -cei: almocei.", prompt="Completá con el perfeito.")
-cz(W, 2, "___ a gente foi a Niterói. (ayer)", "Ontem", "Ayer = ontem.")
+cz(W, 2, "___ a gente foi a Niterói. (ayer)", "Ontem", "«Ayer» es *ontem*, con *m* final nasal; «anteayer», *anteontem*. Va con perfeito: *ontem a gente foi*.")
 
 tr(W, 0, "Ayer trabajé mucho.", "Ontem eu trabalhei muito.",
    ["Ontem trabalhei muito.", "Eu trabalhei muito ontem.", "Trabalhei muito ontem."],
@@ -1255,10 +1255,10 @@ tr(W, 1, "Vino en colectivo.", "Veio de ônibus.", ["Ele veio de ônibus.", "Ela
 tr(W, 1, "Vi el Cristo.", "Vi o Cristo.", ["Eu vi o Cristo.", "Vi o Cristo Redentor.", "Eu vi o Cristo Redentor."],
    "ver → eu vi.")
 tr(W, 2, "Hoy he comido mucho.", "Hoje eu comi muito.", ["Hoje comi muito.", "Comi muito hoje.", "Eu comi muito hoje."],
-   "«He comido» = comi.")
+   "El portugués casi no usa el compuesto para el pasado cercano: «hoy he comido» es *hoje eu comi*, en perfeito simple, como en el Río de la Plata.")
 tr(W, 2, "¿Ya fuiste a Salvador?", "Você já foi a Salvador?",
    ["Você já foi para Salvador?", "Tu já foste a Salvador?", "Você já esteve em Salvador?", "Já foi a Salvador?"],
-   "já + perfeito = ya / alguna vez.")
+   "*Já* + perfeito expresa «ya / alguna vez»: *você já foi a Salvador?* El compuesto *tem ido* no sirve para eso.")
 
 fx(W, 2, "perfeito_composto", "Hoje eu tenho comido muito.", "tenho comido", "comi",
    "«He comido» es comi. Tenho comido significa «vengo comiendo».")
@@ -1322,13 +1322,13 @@ ch(W, 1, "Como você ___?", ["se chama", "te chama", "te chamas"], "se chama",
 ch(W, 1, "A gente ___ amanhã.", ["se vê", "nos vê", "se vemos"], "se vê",
    "a gente es tercera del singular: a gente se vê.", prompt="«Nos vemos mañana.»")
 ch(W, 1, "Você ___ do João?", ["lembra", "acorda", "se acorda"], "lembra",
-   "Acordarse = lembrar (de). Acordar = despertarse.", prompt="«¿Te acordás de João?»")
+   "«Acordarse de» es *lembrar (de)*, y en el habla sin pronombre: *você lembra do João?* *Acordar* es «despertarse».", prompt="«¿Te acordás de João?»")
 ch(W, 1, "Eu ___ de manhã.", ["tomo banho", "me ducho", "tomo banheiro"], "tomo banho",
-   "Ducharse = tomar banho. Banheiro es el cuarto de baño.", prompt="«Me ducho a la mañana.»")
+   "«Ducharse / bañarse» es *tomar banho*, sin reflexivo. *Banheiro* es el cuarto de baño; ✗*me ducho* no existe.", prompt="«Me ducho a la mañana.»")
 ch(W, 2, "Estou com ___ de cabeça.", ["dor", "dolor", "doença"], "dor",
-   "Dolor = dor (femenino). Doença = enfermedad.", prompt="«Me duele la cabeza.»")
+   "«Dolor» es *dor*, femenino (*a dor*), y se dice con *estar com*: *estou com dor de cabeça*. *Doença* es «enfermedad».", prompt="«Me duele la cabeza.»")
 ch(W, 2, "Estou com dor nas ___.", ["costas", "costa", "espaldas"], "costas",
-   "Espalda = as costas, siempre plural.", prompt="«Me duele la espalda.»")
+   "«Espalda» se dice *as costas*, siempre en plural y femenino: *dor nas costas*. *Costa* en singular es la costa del mar.", prompt="«Me duele la espalda.»")
 ch(W, 2, "___ este remédio de oito em oito horas.", ["Tome", "Tomo", "Tomes"], "Tome",
    "Imperativo formal: tomar → tome.", prompt="Elegí el imperativo formal de «tomar».")
 
@@ -1351,7 +1351,7 @@ cz(W, 1, "Nós ___ cedo. (deitar-se)", "nos deitamos", "nós nos deitamos (acost
    prompt="Completá con el presente.")
 cz(W, 1, "Você ___ do nome dela? (lembrar)", "lembra", "lembrar de = acordarse de; también se lembra.",
    alt=["se lembra"], prompt="Completá con el presente.")
-cz(W, 1, "Ela ___ os dentes. (escovar)", "escova", "Cepillarse los dientes = escovar os dentes, sin reflexivo.",
+cz(W, 1, "Ela ___ os dentes. (escovar)", "escova", "«Cepillarse los dientes» es *escovar os dentes*, sin reflexivo: el portugués no repite el *se* cuando la parte del cuerpo ya lleva artículo.",
    prompt="Completá con el presente.")
 cz(W, 2, "___ o joelho. (doer)", "Dói", "doer: dói (con tilde) cuando duele una parte: dói o joelho.",
    prompt="Completá con el presente.")
@@ -1372,7 +1372,7 @@ tr(W, 1, "¿Cómo te llamás?", "Como você se chama?", ["Qual é o seu nome?", 
    "Con você: se chama.")
 tr(W, 1, "Me olvidé la llave.", "Esqueci a chave.",
    ["Eu esqueci a chave.", "Esqueci da chave.", "Eu esqueci da chave.", "Me esqueci da chave.", "Eu me esqueci da chave."],
-   "Olvidarse = esquecer (sin se en el habla).")
+   "«Olvidarse» es *esquecer*, en el habla sin pronombre: *esqueci a chave*. La forma *esquecer-se de* es escrita y formal.")
 tr(W, 2, "Me duele la cabeza.", "Estou com dor de cabeça.",
    ["Eu estou com dor de cabeça.", "Tô com dor de cabeça.", "Dói a cabeça.", "Minha cabeça dói.", "A minha cabeça dói.",
     "Minha cabeça está doendo.", "Está doendo a cabeça."],
@@ -1383,7 +1383,7 @@ tr(W, 2, "Tome este remedio.", "Tome este remédio.", ["Toma este remédio.", "T
 fx(W, 1, "pronome", "Você te chama Ana?", "te chama", "se chama",
    "Con você, el reflexivo es se: você se chama.")
 fx(W, 1, "espanol", "Eu me acordo às sete.", "me acordo", "acordo",
-   "acordar = despertarse, sin pronombre. Me acordo sonaría a «me despierto a mí mismo».")
+   "*Acordar* es «despertarse» y no lleva pronombre: *eu acordo às sete*. *Me acordo* es error de calco del reflexivo español.")
 fx(W, 0, "espanol", "Não fales alto, por favor.", "fales", "fale",
    "Negativo con você: não fale. «Fales» no se usa en Brasil.")
 fx(W, 2, "genero", "Estou com um dor forte nas costas.", "um dor forte", "uma dor forte",
@@ -1422,7 +1422,7 @@ ch(W, 0, "a estação → as ___", ["estações", "estaçãos", "estaciones"], "
 ch(W, 0, "___ viagem foi ótima.", ["A", "O", "Um"], "A",
    "Todas las palabras en -agem son femeninas: a viagem.")
 ch(W, 0, "Estou ___ praia do Leblon.", ["na", "em a", "no"], "na",
-   "em + a = na, obligatorio.")
+   "*Em* + *a* se contrae en *na*: *estou na praia*. El artículo de *praia* es femenino, así que no puede ser *no*.")
 ch(W, 1, "A gente ___ no Rio.", ["mora", "moramos", "moram"], "mora",
    "a gente + tercera del singular.")
 ch(W, 1, "Ontem eles ___ aqui em casa.", ["vieram", "viram", "vinieram"], "vieram",
@@ -1430,11 +1430,11 @@ ch(W, 1, "Ontem eles ___ aqui em casa.", ["vieram", "viram", "vinieram"], "viera
 ch(W, 1, "Amanhã eu ___ viajar.", ["vou", "vou a", "voy"], "vou",
    "ir + infinitivo sin «a».")
 ch(W, 2, "A casa ___ é linda.", ["dela", "de ela", "sua"], "dela",
-   "De ella = dela, después del sustantivo.", prompt="«La casa de ella es linda.»")
+   "«De ella» es *dela*, detrás del sustantivo: *a casa dela*. *Sua* se entendería «tu» (de *você*).", prompt="«La casa de ella es linda.»")
 ch(W, 2, "___ lindas", ["muito", "muitas", "muy"], "muito",
    "Ante adjetivo, muito es invariable: muito lindas.", prompt="«muy lindas»")
 
-cz(W, 0, "Passo ___ calçadão. (por + o)", "pelo", "por + o = pelo.")
+cz(W, 0, "Passo ___ calçadão. (por + o)", "pelo", "*Por* + *o* da *pelo*: *passo pelo calçadão*. La contracción con *por* es obligatoria.")
 cz(W, 1, "Eu ___ o jantar. (fazer, presente)", "faço", "fazer → eu faço.")
 cz(W, 1, "Ontem eu ___ à praia. (ir)", "fui", "ir en perfeito: eu fui.")
 cz(W, 1, "Estou ___ uma tapioca. (comer)", "comendo", "estar + gerúndio: comendo.")
@@ -1444,7 +1444,7 @@ tr(W, 1, "Ayer vi el Pan de Azúcar.", "Ontem vi o Pão de Açúcar.",
    ["Ontem eu vi o Pão de Açúcar.", "Vi o Pão de Açúcar ontem.", "Eu vi o Pão de Açúcar ontem."],
    "ver → eu vi. Pão de Açúcar con ã y ç.")
 tr(W, 2, "El hermano de ella vive en Niterói.", "O irmão dela mora em Niterói.", [],
-   "De ella = dela, después del sustantivo; vivir = morar.")
+   "«De ella» va detrás del sustantivo como *dela*: *o irmão dela*. «Vivir en» es *morar em*.")
 tr(W, 0, "Hay mucha gente en la playa.", "Tem muita gente na praia.", ["Há muita gente na praia."],
    "Hay = tem / há; muita concuerda con gente; em + a = na.")
 
@@ -1456,4 +1456,4 @@ fx(W, 0, "muito", "Elas são muitas simpáticas.", "muitas", "muito",
 ty(W, 1, "Escribí la forma de «poder» para «eu» en presente.", "eu ___ (poder)", "posso",
    "poder → eu posso, con ss.")
 ty(W, 2, "Escribí «de + aquele» en una palabra.", "de + aquele → ___", "daquele",
-   "de + aquele = daquele.")
+   "*De* + *aquele* se contrae en *daquele* (igual *daquela, daquilo*). En español «de aquel» queda separado.")
