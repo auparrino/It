@@ -301,7 +301,8 @@
   function desgloseHtml(text, open) {
     if (!window.Desglose || !glossario || !text || spanishText(text)) return "";
     var ls;
-    try { ls = Desglose.lines(text, { gloss: glossario }); } catch (e) { return ""; }
+    // the student's week: tense names only once the theory has taught them
+    try { ls = Desglose.lines(text, { gloss: glossario, week: (state && state.unlocked) || 1, max: 7 }); } catch (e) { return ""; }
     if (!ls.length) return "";
     return '<details class="desglose"' + (open ? " open" : "") + "><summary>🔎 Palabra por palabra</summary><ul>" +
       ls.slice(0, 7).map(function (l) { return "<li>" + mk(l) + "</li>"; }).join("") + "</ul></details>";
