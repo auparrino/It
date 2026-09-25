@@ -422,7 +422,7 @@
     "stem": "Vado ___ zoo. (lo zoo)",
     "answer": "allo",
     "alt": [],
-    "note": "A + lo = allo."
+    "note": "*a* + *lo* = *allo*: *lo zoo* lleva *lo* porque empieza con z."
    },
    {
     "label": "n",
@@ -967,7 +967,7 @@
     "stem": "Il gatto è salito ___. (El gato se subió al techo.)",
     "answer": "sul tetto",
     "alt": [],
-    "note": "Salire su = subirse a."
+    "note": "«Subirse a» = *salire su*: *su* + *il* = *sul tetto*."
    },
    {
     "label": "c",
@@ -1034,7 +1034,7 @@
     "alt": [
      "tra le cinque e le sei"
     ],
-    "note": "Fra / tra = entre (dos momentos)."
+    "note": "*fra/tra* = «entre» dos momentos: *fra le cinque e le sei*."
    },
    {
     "label": "b",
@@ -1044,7 +1044,7 @@
     "alt": [
      "tra una settimana"
     ],
-    "note": "Fra + período = dentro de (en el futuro)."
+    "note": "*fra* + período de tiempo = «dentro de» (en el futuro): *fra una settimana*."
    },
    {
     "label": "c",
@@ -1054,7 +1054,7 @@
     "alt": [
      "tra la cugina"
     ],
-    "note": "Fra = entre (dos personas o cosas)."
+    "note": "*fra* (o *tra*, son intercambiables) indica posición en medio de dos personas o cosas, como «entre»."
    },
    {
     "label": "d",
@@ -1064,7 +1064,7 @@
     "alt": [
      "Tra i miei cugini"
     ],
-    "note": "Fra = de entre, dentro de un grupo."
+    "note": "*fra* = «de entre» dentro de un grupo: *fra i miei cugini*."
    },
    {
     "label": "e",
@@ -1074,7 +1074,7 @@
     "alt": [
      "tra due chilometri"
     ],
-    "note": "Fra + distancia = a tantos kilómetros (más adelante)."
+    "note": "*fra* + distancia = «a tantos kilómetros (más adelante)»: *fra due chilometri*."
    },
    {
     "label": "f",
@@ -1084,7 +1084,7 @@
     "alt": [
      "tra Genova"
     ],
-    "note": "Fra = entre dos lugares."
+    "note": "*fra* ubica algo en medio de dos lugares; *fra* y *tra* son intercambiables y se elige por sonido (*tra fratelli*, *fra tre*)."
    },
    {
     "label": "g",
@@ -1094,7 +1094,7 @@
     "alt": [
      "tra gli alberi"
     ],
-    "note": "Fra = entre, en medio de."
+    "note": "*fra* = «entre, en medio de»: *fra gli alberi*."
    },
    {
     "label": "h",
@@ -1282,7 +1282,7 @@
     "stem": "Ho parcheggiato ___ cortile. (en el patio)",
     "answer": "nel",
     "alt": [],
-    "note": "In + il = nel."
+    "note": "*in* + *il* = *nel*: el italiano contrae *in* con el artículo, como «en el»."
    },
    {
     "label": "b",
@@ -1290,7 +1290,7 @@
     "stem": "Ho parcheggiato ___ tua macchina. (al lado de tu auto)",
     "answer": "accanto alla",
     "alt": [],
-    "note": "Accanto a = al lado de."
+    "note": "*accanto a* = «al lado de»: el italiano usa *a*, no «de»: *accanto alla*."
    },
    {
     "label": "c",
@@ -1298,7 +1298,7 @@
     "stem": "Ho parcheggiato ___ cinema. (enfrente del cine)",
     "answer": "di fronte al",
     "alt": [],
-    "note": "Di fronte a = enfrente de."
+    "note": "*di fronte a* = «enfrente de»: *a* + *il* = *al cinema*."
    },
    {
     "label": "d",
@@ -1306,7 +1306,7 @@
     "stem": "Ho parcheggiato ___ strada. (del otro lado de la calle)",
     "answer": "dall'altra parte della",
     "alt": [],
-    "note": "Dall'altra parte di = del otro lado de."
+    "note": "*dall'altra parte di* = «del otro lado de»: *da* + *l'*, y *di* + *la* = *della*."
    },
    {
     "label": "e",
@@ -1314,7 +1314,7 @@
     "stem": "Ho parcheggiato ___ strada. (al fondo de la calle)",
     "answer": "in fondo alla",
     "alt": [],
-    "note": "In fondo a = al final de."
+    "note": "*in fondo a* = «al fondo de»: *a* + *la* = *alla*."
    },
    {
     "label": "f",
@@ -1641,7 +1641,7 @@
     "alt": [
      "Sia | sia"
     ],
-    "note": "Sia… che / sia… sia = tanto… como."
+    "note": "«Tanto ... como» = *sia ... che* (o *sia ... sia*); con dos sujetos el verbo va en plural."
    },
    {
     "label": "b",
@@ -1652,7 +1652,7 @@
      "come anche",
      "e anche"
     ],
-    "note": "Come pure = y también."
+    "note": "*come pure* = «y también»: suma un elemento al final, tras coma."
    },
    {
     "label": "c",
@@ -1701,7 +1701,7 @@
      "possiamo o rimanere qui o andare al cinema",
      "possiamo rimanere qui oppure andare al cinema"
     ],
-    "note": "O… o / oppure = o… o, o si no."
+    "note": "«O ... o» = *o ... o*: la conjunción se repite delante de cada opción, como en castellano."
    },
    {
     "label": "c",
@@ -1715,7 +1715,7 @@
      "sennò perdiamo il contratto",
      "sennò perderemo il contratto"
     ],
-    "note": "Altrimenti / se no = de lo contrario."
+    "note": "*altrimenti* (o *se no*) = «si no, de lo contrario»: introduce la consecuencia de no hacer algo."
    },
    {
     "label": "d",
@@ -1730,7 +1730,7 @@
      "invece di mandargli una mail",
      "anziché mandare una mail"
     ],
-    "note": "Invece di / anziché + infinitivo = en vez de."
+    "note": "*invece di* (o *anziché*) + infinitivo = «en vez de»: *invece di mandare*."
    }
   ]
  },
@@ -1744,7 +1744,7 @@
     "stem": "Io studio legge ___ mia sorella studia architettura. (pero)",
     "answer": "ma",
     "alt": [],
-    "note": "Ma = pero."
+    "note": "*ma* opone dos ideas, como «pero»."
    },
    {
     "label": "b",
@@ -1754,7 +1754,7 @@
     "alt": [
      "invece"
     ],
-    "note": "Mentre = mientras que, para contrastar."
+    "note": "*mentre* no solo marca simultaneidad: también contrasta dos hechos, como «mientras que»; va con indicativo."
    },
    {
     "label": "c",
@@ -1765,7 +1765,7 @@
      "ma",
      "tuttavia"
     ],
-    "note": "Però = pero / sin embargo."
+    "note": "*però* = «pero, sin embargo»: más flexible que *ma* en la posición."
    },
    {
     "label": "d",
@@ -1788,7 +1788,7 @@
      "però",
      "nonostante ciò"
     ],
-    "note": "Eppure = y sin embargo."
+    "note": "*eppure* = «y sin embargo»: opone algo inesperado a lo anterior."
    },
    {
     "label": "f",
@@ -1800,7 +1800,7 @@
      "però",
      "tuttavia"
     ],
-    "note": "D'altra parte = por otro lado."
+    "note": "*d'altra parte* = «por otro lado»: presenta el otro aspecto."
    }
   ]
  },
@@ -1820,7 +1820,7 @@
      "Giacché",
      "Dal momento che"
     ],
-    "note": "Visto che / dato che = ya que."
+    "note": "*visto che* (o *dato che*) = «ya que»: causa conocida, con indicativo."
    },
    {
     "label": "b",
@@ -1834,7 +1834,7 @@
      "Giacché",
      "Dal momento che"
     ],
-    "note": "Siccome = como (causa), al principio de la oración."
+    "note": "*siccome* = «como» causal: va siempre al principio de la oración, como el «como» castellano."
    },
    {
     "label": "c",
@@ -1866,7 +1866,7 @@
      "fuorché",
      "a parte"
     ],
-    "note": "Tranne / eccetto / salvo = excepto."
+    "note": "*tranne* (o *eccetto, salvo*) = «excepto»: va directo, sin preposición: *tranne il baccalà*."
    },
    {
     "label": "b",
@@ -1879,7 +1879,7 @@
      "fuorché",
      "a parte"
     ],
-    "note": "Tranne = salvo, excepto."
+    "note": "*tranne* («salvo») va delante del sustantivo sin preposición: *tranne tuo fratello*, no «tranne a»."
    },
    {
     "label": "c",
@@ -1892,7 +1892,7 @@
      "Salvo",
      "Fuorché"
     ],
-    "note": "A parte = aparte de."
+    "note": "*a parte* = «aparte de»; el sustantivo va directo, sin *di*: *a parte mia madre*."
    },
    {
     "label": "d",
@@ -1922,7 +1922,7 @@
     "stem": "Io voglio andarci ___ è lontano. (aunque)",
     "answer": "anche se",
     "alt": [],
-    "note": "Anche se + indicativo = aunque."
+    "note": "*anche se* = «aunque» con indicativo para un hecho real (el castellano también usa indicativo acá)."
    },
    {
     "label": "b",
@@ -1932,7 +1932,7 @@
     "alt": [
      "malgrado"
     ],
-    "note": "Nonostante / malgrado + sustantivo = a pesar de."
+    "note": "*nonostante* (o *malgrado*) + sustantivo = «a pesar de», sin preposición: *nonostante la pioggia*."
    },
    {
     "label": "c",
@@ -1943,7 +1943,7 @@
      "comunque",
      "ugualmente"
     ],
-    "note": "Lo stesso / comunque = igual, de todos modos."
+    "note": "*lo stesso* al final de la frase significa «igual, de todos modos»: mantiene la decisión pese al obstáculo."
    },
    {
     "label": "d",
@@ -1955,7 +1955,7 @@
      "ugualmente",
      "alla fine"
     ],
-    "note": "Comunque = de todos modos."
+    "note": "*comunque* = «de todos modos» como adverbio; con congiuntivo significa «como sea que»."
    }
   ]
  },
@@ -1975,7 +1975,7 @@
      "Da quello che",
      "Da quel che"
     ],
-    "note": "Per quanto / per quello che = por lo que."
+    "note": "*per quanto* + verbo = «por lo que»: *per quanto so*, «por lo que sé»."
    },
    {
     "label": "b",
@@ -1986,7 +1986,7 @@
      "in qualunque modo",
      "in qualsiasi modo"
     ],
-    "note": "Comunque + subjuntivo = como sea que."
+    "note": "*comunque* + congiuntivo = «como sea que»: *comunque vadano gli affari*."
    },
    {
     "label": "c",
@@ -2049,7 +2049,7 @@
      "a condizione che",
      "sempre che"
     ],
-    "note": "Purché + subjuntivo = siempre que."
+    "note": "*purché* + congiuntivo = «siempre que, con tal de que»: condición indispensable."
    },
    {
     "label": "b",
@@ -2080,7 +2080,7 @@
      "a condizione che",
      "purché"
     ],
-    "note": "A patto che + subjuntivo = con tal de que."
+    "note": "*a patto che* pone una condición indispensable y exige congiuntivo (*chieda*), como «con tal de que» + subjuntivo."
    }
   ]
  },
@@ -2168,7 +2168,7 @@
      "Anzitutto",
      "Per prima cosa"
     ],
-    "note": "Innanzitutto = antes que nada."
+    "note": "*innanzitutto* = «antes que nada»: abre una enumeración."
    },
    {
     "label": "c",
@@ -2181,7 +2181,7 @@
      "in generale",
      "generalmente"
     ],
-    "note": "A grandi linee / grosso modo = a grandes rasgos."
+    "note": "*a grandi linee* (o *grosso modo*) = «a grandes rasgos»: el italiano usa *linee* («líneas») donde nosotros «rasgos»."
    },
    {
     "label": "d",
@@ -2194,7 +2194,7 @@
      "in sostanza",
      "in pratica"
     ],
-    "note": "In fondo / fondamentalmente = en el fondo, básicamente."
+    "note": "*in fondo* = «en el fondo, básicamente»: matiza una conclusión."
    },
    {
     "label": "e",
@@ -2208,7 +2208,7 @@
      "in generale",
      "generalmente"
     ],
-    "note": "Tutto sommato / nel complesso = en general, a fin de cuentas."
+    "note": "*tutto sommato* (o *nel complesso*) = «en general, a fin de cuentas»: resume un balance."
    }
   ]
  },
@@ -2232,7 +2232,7 @@
     "stem": "una feta",
     "answer": "una fetta",
     "alt": [],
-    "note": "Fetta = feta, tajada."
+    "note": "«Feta, tajada» = *fetta*, con doble t; es femenino como en castellano."
    },
    {
     "label": "c",
@@ -2240,7 +2240,7 @@
     "stem": "diecisiete libros",
     "answer": "diciassette libri",
     "alt": [],
-    "note": "17 = diciassette."
+    "note": "Del 17 al 19 las unidades van detrás: *diciassette* (dieci + sette, con doble s)."
    },
    {
     "label": "d",
@@ -2248,7 +2248,7 @@
     "stem": "diecinueve páginas",
     "answer": "diciannove pagine",
     "alt": [],
-    "note": "19 = diciannove."
+    "note": "*diciannove*: dieci + nove, con doble n."
    },
    {
     "label": "e",
@@ -2439,7 +2439,7 @@
      "le otto della sera | le venti",
      "le otto | le venti"
     ],
-    "note": "Le otto di sera = le venti."
+    "note": "Hablando se dice *le otto di sera*; en horarios oficiales se cuenta hasta 24: *le venti*."
    },
    {
     "label": "d",
@@ -2451,7 +2451,7 @@
      "le undici di notte | le ventitré",
      "le undici | le ventitré"
     ],
-    "note": "Le undici di sera = le ventitré."
+    "note": "*le undici di sera* en la charla, *le ventitré* en horarios (con acento en *tré*)."
    }
   ]
  },
@@ -2496,7 +2496,7 @@
      "Quarantacinque diviso per nove e moltiplicato per sei fa trenta.",
      "Quarantacinque diviso nove per sei fa trenta."
     ],
-    "note": "Diviso = dividido; moltiplicato per = multiplicado por."
+    "note": "Las operaciones: *diviso* (dividido), *moltiplicato per* (multiplicado por); «es igual a» = *fa*."
    }
   ]
  },
@@ -2530,7 +2530,7 @@
     "stem": "el Tercer Mundo",
     "answer": "il Terzo Mondo",
     "alt": [],
-    "note": "Terzo = tercero."
+    "note": "Los ordinales del 1 al 10 son formas propias: *terzo* («tercero»), concordado: *il Terzo Mondo*."
    },
    {
     "label": "d",
@@ -2538,7 +2538,7 @@
     "stem": "la décima vez",
     "answer": "la decima volta",
     "alt": [],
-    "note": "Decimo, decima = décimo."
+    "note": "Los ordinales concuerdan en género y número: *decimo → decima volta*."
    },
    {
     "label": "e",
@@ -2607,7 +2607,7 @@
      "il XV secolo",
      "quindicesimo secolo"
     ],
-    "note": "Il Quattrocento = los años 1400, o sea el siglo XV."
+    "note": "Los siglos se nombran por las centenas: *il Quattrocento* = los años 1400, o sea el siglo XV (*quindicesimo secolo*)."
    },
    {
     "label": "d",
@@ -2618,7 +2618,7 @@
      "il XIX secolo",
      "diciannovesimo secolo"
     ],
-    "note": "L'Ottocento = los años 1800, el siglo XIX."
+    "note": "*l'Ottocento* = los años 1800, que son el siglo XIX: *il diciannovesimo secolo*."
    }
   ]
  },
@@ -2635,7 +2635,7 @@
      "C'erano un centinaio di invitati.",
      "C'erano circa cento invitati."
     ],
-    "note": "Un centinaio di = unos cien."
+    "note": "*-aio* forma números aproximados: *un centinaio di* («unos cien»), con *di* delante del sustantivo."
    },
    {
     "label": "b",
@@ -2646,7 +2646,7 @@
      "C'erano una ventina di studenti.",
      "C'erano circa venti studenti."
     ],
-    "note": "Una ventina di = unos veinte."
+    "note": "*-ina* forma aproximados: *una ventina di* («unos veinte»)."
    },
    {
     "label": "c",
@@ -2657,7 +2657,7 @@
      "C'è un migliaio di manifestanti.",
      "Ci sono circa mille manifestanti."
     ],
-    "note": "Un migliaio di = unos mil."
+    "note": "*mille* hace el aproximado *un migliaio di*; el plural *migliaia* es femenino (*migliaia di persone*)."
    },
    {
     "label": "d",
@@ -2665,7 +2665,7 @@
     "stem": "Hay miles de manifestantes.",
     "answer": "Ci sono migliaia di manifestanti.",
     "alt": [],
-    "note": "Migliaia di = miles de (plural femenino de migliaio)."
+    "note": "*migliaia di* = «miles de»: plural femenino de *migliaio*, con *di*."
    }
   ]
  },
@@ -2938,7 +2938,7 @@
      "Che cosa fai di lavoro?",
      "Cosa fai di lavoro?"
     ],
-    "note": "‘¿De qué trabajás?’ = Che lavoro fai?"
+    "note": "Para preguntar el trabajo: *che lavoro fai?* («¿qué trabajo hacés?»), con *fare*."
    },
    {
     "label": "e",
@@ -2950,7 +2950,7 @@
      "Fate colazione al bar?",
      "Fate colazione nel bar?"
     ],
-    "note": "Fare colazione = desayunar."
+    "note": "«Desayunar» = *fare colazione*: el italiano usa *fare* + sustantivo, no un verbo propio."
    },
    {
     "label": "f",
@@ -2973,7 +2973,7 @@
     "alt": [
      "Non riesco a aprire la finestra."
     ],
-    "note": "Riuscire a = lograr, poder (por capacidad)."
+    "note": "«Poder» por capacidad o esfuerzo = *riuscire a* + infinitivo: *non riesco ad aprire*."
    }
   ]
  },
@@ -3632,7 +3632,7 @@
      "Sarà sposato, suppongo.",
      "Sarà sposato suppongo."
     ],
-    "note": "Sarà = supongo que es / está."
+    "note": "El futuro expresa suposición en el presente: *sarà sposato* = «supongo que está casado», igual que «estará» en castellano."
    },
    {
     "label": "d",
@@ -3803,7 +3803,7 @@
     "alt": [
      "Avrà fatto un incidente."
     ],
-    "note": "Accidente de tránsito = incidente."
+    "note": "Futuro anteriore para suponer algo pasado: *avrà avuto*; y «accidente» de tránsito = *incidente*."
    },
    {
     "label": "c",
@@ -4632,7 +4632,7 @@
     "stem": "Nessuno mi aveva detto che… ___ (estaban por vender la casa).",
     "answer": "stavano per vendere la casa",
     "alt": [],
-    "note": "Stare per + infinitivo = estar por."
+    "note": "*stare per* + infinitivo = «estar por», acá en imperfetto: *stavano per vendere*."
    }
   ]
  },
@@ -4648,7 +4648,7 @@
     "alt": [
      "potevano"
     ],
-    "note": "‘Podrían haber…’ = condizionale passato de potere (o imperfetto coloquial)."
+    "note": "«Podrían haber» = condicional compuesto de *potere* + infinitivo simple: *avrebbero potuto dire*."
    },
    {
     "label": "b",
@@ -4658,7 +4658,7 @@
     "alt": [
      "doveva"
     ],
-    "note": "‘Debería haber…’ = avrebbe dovuto."
+    "note": "«Debería haber dicho» se arma con el condicional compuesto del modal + infinitivo simple: *avrebbe dovuto dire*, no «dovuto aver detto»."
    },
    {
     "label": "c",
@@ -4840,7 +4840,7 @@
     "stem": "___ dalla segretaria che il mio capo era in vacanza. (Me enteré)",
     "answer": "Ho saputo",
     "alt": [],
-    "note": "Sapere en passato prossimo = enterarse."
+    "note": "*sapere* en passato prossimo significa «enterarse»: *ho saputo*."
    },
    {
     "label": "f",
@@ -4848,7 +4848,7 @@
     "stem": "___ che il mio capo era in vacanza. (Sabía)",
     "answer": "Sapevo",
     "alt": [],
-    "note": "Sapere en imperfetto = saber, estar al tanto."
+    "note": "*sapere* en imperfetto = «saber, estar al tanto»: *sapevo*."
    }
   ]
  },

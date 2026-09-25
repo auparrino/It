@@ -346,7 +346,7 @@
     "stem": "El gato de los vecinos es negro.",
     "answer": "Il gatto dei vicini è nero.",
     "alt": [],
-    "note": "Di + i = dei."
+    "note": "No hay genitivo sajón: el poseedor va con *di*, unido al artículo: *di* + *i* = *dei vicini*."
    },
    {
     "label": "d",
@@ -848,7 +848,7 @@
      "È per questo che sono in ritardo.",
      "Per questo sono in ritardo."
     ],
-    "note": "'Por eso' = ecco perché."
+    "note": "*ecco perché* presenta la explicación de algo recién dicho («por eso»): *ecco* señala, como «he ahí»."
    },
    {
     "label": "b",
@@ -872,7 +872,7 @@
      "Guarda, funziona così.",
      "Guarda, ecco come funziona…"
     ],
-    "note": "'Así es como…' = ecco come."
+    "note": "*ecco come* = «así es como»: *ecco* presenta y señala, sin verbo."
    },
    {
     "label": "d",
@@ -906,7 +906,7 @@
      "Per avere accesso a internet, ecco ciò che devi fare.",
      "Per avere accesso a internet ecco quello che devi fare."
     ],
-    "note": "'Esto es lo que…' presentando algo = ecco quello che."
+    "note": "*ecco quello che* presenta lo que viene («esto es lo que...»); *quello che* = «lo que», porque el italiano no tiene «lo» neutro."
    },
    {
     "label": "b",
@@ -928,7 +928,7 @@
      "Sì, è ciò che ho intenzione di fare.",
      "Sì, è proprio quello che ho intenzione di fare."
     ],
-    "note": "'Es lo que…' = è quello che (sin ecco)."
+    "note": "Cuando se identifica («es lo que»), va *è quello che*, sin *ecco*, que solo presenta."
    },
    {
     "label": "d",
@@ -1253,7 +1253,7 @@
      "Come mai arrivate in ritardo?",
      "Come mai arrivate tardi?"
     ],
-    "note": "'Cómo es que…' = come mai."
+    "note": "*come mai?* = «¿cómo es que?, ¿por qué?»: pregunta con sorpresa, con el verbo en indicativo."
    },
    {
     "label": "b",
@@ -1611,7 +1611,7 @@
      "Fra quanto ci possiamo vedere?",
      "Tra quanto ci possiamo vedere?"
     ],
-    "note": "Fra/tra quanto = dentro de cuánto tiempo."
+    "note": "*fra/tra* + tiempo = «dentro de»; en pregunta: *fra quanto?*"
    }
   ]
  },
@@ -1707,7 +1707,7 @@
     "stem": "Che ci ___ (vas) a fare a Londra?",
     "answer": "vai",
     "alt": [],
-    "note": "Che ci vai a fare? = ¿a qué vas?"
+    "note": "*che ci vai a fare?* = «¿a qué vas?»: *ci* retoma el lugar (Londres) y es obligatorio."
    },
    {
     "label": "f",
@@ -1715,7 +1715,7 @@
     "stem": "Che ci ___ (hacés) qui?",
     "answer": "fai",
     "alt": [],
-    "note": "Che ci fai qui? = ¿qué hacés acá?"
+    "note": "*che ci fai qui?* = «¿qué hacés acá?»: *ci* es un refuerzo de lugar que el italiano coloquial usa siempre en esta pregunta."
    }
   ]
  },
@@ -1942,7 +1942,7 @@
     "alt": [
      "amore quella ragazza"
     ],
-    "note": "Che amore di… = ¡qué divina esa…!"
+    "note": "*che* + sustantivo + *di* + sustantivo es un elogio: *che amore di ragazza!*, literalmente «¡qué amor de chica!»."
    },
    {
     "label": "e",
@@ -2287,7 +2287,7 @@
      "Macché",
      "Nemmeno per sogno"
     ],
-    "note": "Per carità! = ¡Dios me libre!"
+    "note": "*Per carità!* rechaza algo con énfasis («¡Dios me libre!»)."
    }
   ]
  },
@@ -2301,7 +2301,7 @@
     "stem": "C'è ___ che non capisco.",
     "answer": "qualcosa",
     "alt": [],
-    "note": "Algo = qualcosa."
+    "note": "«Algo» = *qualcosa*, una sola palabra; con *c'è* («hay»)."
    },
    {
     "label": "b",
@@ -2309,7 +2309,7 @@
     "stem": "C'è ___ alla porta.",
     "answer": "qualcuno",
     "alt": [],
-    "note": "Alguien = qualcuno."
+    "note": "«Alguien» = *qualcuno*: *c'è qualcuno alla porta*."
    },
    {
     "label": "c",
@@ -2335,7 +2335,7 @@
     "stem": "C'è ___ in casa?",
     "answer": "qualcuno",
     "alt": [],
-    "note": "En preguntas, 'alguien' = qualcuno."
+    "note": "En preguntas, «alguien» también es *qualcuno* (*nessuno* sería «nadie»)."
    },
    {
     "label": "f",
@@ -2343,7 +2343,7 @@
     "stem": "Posso fare ___?",
     "answer": "qualcosa",
     "alt": [],
-    "note": "¿Puedo hacer algo? = qualcosa."
+    "note": "*qualcosa* («algo») es una sola palabra y funciona como objeto directo sin artículo: *posso fare qualcosa?*"
    }
   ]
  },
@@ -2360,7 +2360,7 @@
      "Desidera qualcosa?",
      "Vuole niente?"
     ],
-    "note": "Algo = qualcosa (niente en pregunta es coloquial)."
+    "note": "«Algo» en preguntas = *qualcosa*; *niente* en pregunta se usa, pero es coloquial."
    },
    {
     "label": "b",
@@ -2379,7 +2379,7 @@
     "stem": "Hay alguien al teléfono.",
     "answer": "C'è qualcuno al telefono.",
     "alt": [],
-    "note": "Alguien = qualcuno."
+    "note": "«Hay alguien» = *c'è qualcuno*: *c'è* porque *qualcuno* es singular."
    },
    {
     "label": "d",
@@ -2657,7 +2657,7 @@
      "Non è niente: chiunque l'avrebbe fatto.",
      "Non è niente, chiunque l'avrebbe fatto."
     ],
-    "note": "Chiunque = cualquiera (persona)."
+    "note": "*chiunque* = «cualquiera» (persona); acá es sujeto y va al final, con el condicional compuesto."
    },
    {
     "label": "b",
@@ -2688,7 +2688,7 @@
      "Chiunque telefoni, digli che non ci sono.",
      "Chiunque chiami, digli che non sono in casa."
     ],
-    "note": "Chiunque + subjuntivo = quienquiera que."
+    "note": "*chiunque* + congiuntivo = «quienquiera que»: *chiunque chiami*."
    },
    {
     "label": "d",
@@ -2716,7 +2716,7 @@
     ],
     "answer": "ogni",
     "alt": [],
-    "note": "Ogni = cada, todas las veces."
+    "note": "*ogni* = «cada», invariable y siempre con singular: *ogni volta*."
    },
    {
     "label": "b",
@@ -2728,7 +2728,7 @@
     ],
     "answer": "qualche",
     "alt": [],
-    "note": "Qualche volta = a veces."
+    "note": "*qualche volta* = «a veces»: *qualche* va con singular aunque signifique «algunas»."
    },
    {
     "label": "c",
@@ -2740,7 +2740,7 @@
     ],
     "answer": "ogni",
     "alt": [],
-    "note": "Ogni anno = todos los años."
+    "note": "*ogni anno* = «todos los años»: *ogni* + singular."
    },
    {
     "label": "d",
@@ -2752,7 +2752,7 @@
     ],
     "answer": "qualche",
     "alt": [],
-    "note": "Fra qualche anno = dentro de algunos años (qualche + singular)."
+    "note": "*qualche* + singular = «algunos»: *fra qualche anno*, «dentro de algunos años»."
    },
    {
     "label": "e",
@@ -2764,7 +2764,7 @@
     ],
     "answer": "ogni",
     "alt": [],
-    "note": "Ogni studente = todos los estudiantes."
+    "note": "*ogni* + singular abarca a todos: *ogni studente*, con el verbo en singular."
    },
    {
     "label": "f",
@@ -2776,7 +2776,7 @@
     ],
     "answer": "qualche",
     "alt": [],
-    "note": "Qualche = algún."
+    "note": "*qualche* + singular = «algún»: *c'è qualche studente...?*"
    }
   ]
  },
@@ -2830,7 +2830,7 @@
     "alt": [
      "A qualunque ora."
     ],
-    "note": "Cualquier = qualsiasi / qualunque, invariables."
+    "note": "«Cualquier» = *qualsiasi* o *qualunque*: invariables y con sustantivo singular."
    },
    {
     "label": "b",
@@ -2853,7 +2853,7 @@
      "Quello che preferisci.",
      "Quello che ti pare."
     ],
-    "note": "'El que quieras' = quello che vuoi."
+    "note": "«El que quieras» = *quello che vuoi*: el italiano usa indicativo donde el castellano pone subjuntivo."
    },
    {
     "label": "d",
@@ -2884,7 +2884,7 @@
      "Accetterò la tua decisione, qualsiasi sia.",
      "Accetterò la tua decisione, qualunque essa sia."
     ],
-    "note": "Qualunque + subjuntivo = sea cual sea."
+    "note": "*qualunque* + congiuntivo = «sea cual sea»: *qualunque sia*."
    },
    {
     "label": "b",
@@ -2897,7 +2897,7 @@
      "Elisabetta farebbe qualunque cosa per lui.",
      "Per lui, Elisabetta farebbe qualsiasi cosa."
     ],
-    "note": "Qualsiasi cosa = cualquier cosa."
+    "note": "«Cualquier cosa» = *qualsiasi cosa*: *qualsiasi* no cambia."
    }
   ]
  },
@@ -2911,7 +2911,7 @@
     "stem": "Abbiamo organizzato ___ (todo).",
     "answer": "tutto",
     "alt": [],
-    "note": "Todo = tutto, invariable como pronombre."
+    "note": "*tutto* como pronombre = «todo»: invariable, masculino singular."
    },
    {
     "label": "b",
@@ -2919,7 +2919,7 @@
     "stem": "Vengono ___ (todos)?",
     "answer": "tutti",
     "alt": [],
-    "note": "Todos (personas) = tutti."
+    "note": "*tutti* como pronombre se refiere a personas y va en masculino plural si el grupo es mixto: *vengono tutti?*"
    },
    {
     "label": "c",
@@ -2953,7 +2953,7 @@
     "stem": "Lavoro ___ (todas las) sere.",
     "answer": "tutte le",
     "alt": [],
-    "note": "Tutte le sere = todas las noches."
+    "note": "*tutto* + artículo + sustantivo, como en castellano: *tutte le sere*."
    },
    {
     "label": "g",
@@ -2977,7 +2977,7 @@
     "stem": "___ (Toda la) commissione sarà rieletta.",
     "answer": "Tutta la",
     "alt": [],
-    "note": "Tutta la commissione = la comisión entera."
+    "note": "*tutto* concuerda y lleva artículo: *tutta la commissione*."
    },
    {
     "label": "j",
@@ -3039,7 +3039,7 @@
     "alt": [
      "Ho lasciato l'agenda da qualche parte."
     ],
-    "note": "En algún lado = da qualche parte."
+    "note": "«En algún lado» = *da qualche parte*: el italiano usa *da* + *parte* para «lado» en estas expresiones."
    },
    {
     "label": "b",
@@ -3050,7 +3050,7 @@
      "Andiamo da un'altra parte.",
      "Andiamo altrove."
     ],
-    "note": "A otro lado = da qualche altra parte / altrove."
+    "note": "Para «lado, lugar» indefinido el italiano usa *da* + *parte*: *da qualche altra parte*; también vale *altrove*."
    },
    {
     "label": "c",
@@ -3058,7 +3058,7 @@
     "stem": "No voy a ningún lado.",
     "answer": "Non vado da nessuna parte.",
     "alt": [],
-    "note": "A ningún lado = non … da nessuna parte."
+    "note": "«A ningún lado» = *da nessuna parte*, con *non* delante del verbo: *non vado da nessuna parte*."
    },
    {
     "label": "d",
@@ -3080,7 +3080,7 @@
      "Queste scarpe si trovano dovunque.",
      "Queste scarpe si trovano da tutte le parti."
     ],
-    "note": "En todos lados = dappertutto / ovunque."
+    "note": "*dappertutto* (o *ovunque*) resume «en todos lados» en una sola palabra, sin preposición."
    },
    {
     "label": "f",
@@ -3090,7 +3090,7 @@
     "alt": [
      "Hanno cercato in tutti gli altri posti."
     ],
-    "note": "Da tutte le altre parti = en todos los demás lados."
+    "note": "«En todos los demás lados» = *da tutte le altre parti*: *da* + *parte* en plural."
    }
   ]
  },
@@ -3116,7 +3116,7 @@
      "Ti ho già conosciuto da qualche parte.",
      "Ti ho già conosciuta da qualche parte."
     ],
-    "note": "Conoscere en pasado = conocer por primera vez."
+    "note": "*conoscere* en passato prossimo significa «conocer a alguien por primera vez»; «en algún lado» se arma con *da qualche parte*."
    },
    {
     "label": "c",
@@ -3127,7 +3127,7 @@
      "Andiamo altrove?",
      "Andiamo da un'altra parte?"
     ],
-    "note": "Otro lado = da qualche altra parte."
+    "note": "«A otro lado» = *da qualche altra parte*: *da* + *parte*."
    },
    {
     "label": "d",
@@ -3145,7 +3145,7 @@
     "alt": [
      "Non voglio andare in nessun altro posto."
     ],
-    "note": "Da nessun'altra parte = a ningún otro lado."
+    "note": "Con *nessuno* después del verbo hace falta *non* delante: *non voglio andare da nessun'altra parte*, igual que «no ... a ningún lado»."
    },
    {
     "label": "f",
@@ -3158,7 +3158,7 @@
      "Ho cercato da tutte le parti.",
      "Ho guardato dappertutto."
     ],
-    "note": "Por todos lados = dappertutto."
+    "note": "*dappertutto* («por todos lados») no lleva preposición: *ho cercato dappertutto*."
    }
   ]
  },
@@ -3176,7 +3176,7 @@
      "Con il nuovo software puoi trovare un tassì in qualsiasi momento.",
      "Con il nuovo software puoi trovare un taxi in qualsiasi momento."
     ],
-    "note": "En cualquier momento = in ogni momento / in qualsiasi momento."
+    "note": "«En cualquier momento» = *in ogni momento* o *in qualsiasi momento*: con *in*, no «a»."
    },
    {
     "label": "b",
@@ -3196,7 +3196,7 @@
      "Devi essere pronta a uscire in qualsiasi momento.",
      "Devi essere pronta a uscire in qualunque momento."
     ],
-    "note": "In ogni momento / in qualsiasi momento = en cualquier momento; salir = partire (de viaje) o uscire (de casa)."
+    "note": "«En cualquier momento» = *in ogni/qualsiasi momento*. Para «salir» de viaje se usa *partire*; *uscire* es salir de un lugar."
    },
    {
     "label": "c",
@@ -3207,7 +3207,7 @@
      "Si può mangiare in qualunque momento della giornata se si ha un'alimentazione sana.",
      "Si può mangiare in ogni momento della giornata se si ha un'alimentazione sana."
     ],
-    "note": "In qualsiasi momento = en cualquier momento."
+    "note": "*in qualsiasi momento*: *qualsiasi* invariable + singular; «si se tiene» = *se si ha*."
    }
   ]
  },
@@ -3225,7 +3225,7 @@
      "Mangio quando voglio, a qualsiasi ora della giornata.",
      "Mangio quando voglio, in qualsiasi momento della giornata."
     ],
-    "note": "A cualquier hora = a qualsiasi / qualunque ora."
+    "note": "*qualsiasi* y *qualunque* son invariables y van con sustantivo singular: *a qualsiasi ora del giorno*."
    },
    {
     "label": "b",
@@ -3238,7 +3238,7 @@
      "Vieni a trovarmi quando ne hai voglia.",
      "Ogni volta che vuoi, vieni a trovarmi."
     ],
-    "note": "Venire a trovare = ir a visitar a alguien."
+    "note": "«Venir a ver, visitar» a alguien = *venire a trovare*; tras *quando* con valor futuro va el presente o futuro, no el subjuntivo."
    },
    {
     "label": "c",
@@ -3251,7 +3251,7 @@
      "Ho bisogno di essere reperibile in qualsiasi momento.",
      "Devo essere raggiungibile in ogni momento."
     ],
-    "note": "In ogni momento = en todo momento."
+    "note": "«En todo momento» = *in ogni momento*: *ogni* + singular."
    }
   ]
  },
@@ -3585,7 +3585,7 @@
     "stem": "Quale piatto prendo? – El que prefieras.",
     "answer": "Quello che preferisci.",
     "alt": [],
-    "note": "'El que' = quello che (en indicativo)."
+    "note": "«El que prefieras» = *quello che preferisci*: el italiano usa indicativo donde el castellano pone subjuntivo."
    },
    {
     "label": "b",
@@ -3601,7 +3601,7 @@
     "stem": "Non mi piace quella ragazza. – Quale? – La que estudia medicina.",
     "answer": "Quella che studia medicina.",
     "alt": [],
-    "note": "Quella che = la que."
+    "note": "«La que» = *quella che*: pronombre demostrativo + *che*, porque el italiano no usa el artículo solo."
    },
    {
     "label": "d",
@@ -3613,7 +3613,7 @@
      "Certo, prendine quanti vuoi.",
      "Certo, prendi quelli che ti pare."
     ],
-    "note": "Quelli che = los que."
+    "note": "«Los que» se dice *quelli che*, y tras él el italiano usa indicativo (*vuoi*) donde el castellano pone subjuntivo («quieras»)."
    },
    {
     "label": "e",
@@ -3626,7 +3626,7 @@
      "Chi arriverà",
      "Quelli che arriveranno"
     ],
-    "note": "Chi (singular) o quelli che (plural) = el que / los que."
+    "note": "*chi* (siempre singular) o *quelli che* (plural) = «el que / los que»: *chi arriva in ritardo dovrà...*"
    }
   ]
  },
@@ -3661,7 +3661,7 @@
      "Non credo. Spero di no!",
      "Non credo. Speriamo di no!"
     ],
-    "note": "'Creo que no' = credo di no."
+    "note": "«Creo que no / espero que no» = *credo di no / spero di no*: el italiano pone *di* delante de *sì/no*."
    },
    {
     "label": "c",
@@ -3672,7 +3672,7 @@
      "Perché vorrei sapere se ha pagato o meno.",
      "Perché vorrei sapere se ha pagato oppure no."
     ],
-    "note": "'O no' = o no / o meno."
+    "note": "Para cerrar una pregunta indirecta con «o no», el italiano dice *o no* o, más formal, *o meno*: *sapere se ha pagato o meno*."
    },
    {
     "label": "d",
@@ -3694,7 +3694,7 @@
      "No, scusa, niente vino oggi.",
      "No, scusa, oggi niente vino."
     ],
-    "note": "'Nada de' + sustantivo = niente + sustantivo."
+    "note": "«Nada de» + sustantivo = *niente* + sustantivo, sin *di*: *niente vino*."
    }
   ]
  },
@@ -3712,7 +3712,7 @@
     ],
     "answer": "Mica male!",
     "alt": [],
-    "note": "Mica male = nada mal; meno male = menos mal."
+    "note": "*mica male* = «nada mal» (un elogio); *meno male* es «menos mal», con otro sentido."
    },
    {
     "label": "b",
@@ -3750,7 +3750,7 @@
     ],
     "answer": "Mai!",
     "alt": [],
-    "note": "Mai = nunca; mai più = nunca más (algo que ya pasó)."
+    "note": "*Mai!* solo es una respuesta tajante («¡nunca!»); *mai più* se usa para algo que ya pasó y no se va a repetir."
    },
    {
     "label": "e",
@@ -3778,7 +3778,7 @@
     "alt": [
      "Assolutamente no!"
     ],
-    "note": "Per niente = para nada (assolutamente no es más tajante); niente = nada, no responde a la pregunta."
+    "note": "*per niente* = «para nada», como respuesta negativa enfática; *niente* solo no responde a la pregunta."
    },
    {
     "label": "g",
@@ -3792,7 +3792,7 @@
     "alt": [
      "Nient'affatto!"
     ],
-    "note": "Per niente (o nient'affatto) = para nada; mai più = nunca más."
+    "note": "*per niente* (o *nient'affatto*) = «para nada»; *mai più* sería «nunca más»."
    },
    {
     "label": "h",
@@ -3875,7 +3875,7 @@
     "alt": [
      "Non voglio venire più."
     ],
-    "note": "'Ya no' = non … più."
+    "note": "«Ya no» = *non ... più*: *non* delante del verbo y *più* después (con modal: *non voglio più venire*)."
    }
   ]
  },
@@ -3892,7 +3892,7 @@
      "Non mi piace affatto.",
      "Non mi piace per nulla."
     ],
-    "note": "Non … per niente = para nada."
+    "note": "*non ... per niente* = «para nada»: doble negación obligatoria, como en castellano."
    },
    {
     "label": "b",
@@ -3903,7 +3903,7 @@
      "Non lo conosco per niente.",
      "Non lo conosco per nulla."
     ],
-    "note": "Non … affatto = en absoluto."
+    "note": "*non ... affatto* = «en absoluto, para nada»: *affatto* solo no niega, necesita *non*."
    },
    {
     "label": "c",

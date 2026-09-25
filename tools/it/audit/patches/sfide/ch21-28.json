@@ -248,7 +248,7 @@
     "alt": [
      "Sapresti dirmi se sono tornati?"
     ],
-    "note": "Sapresti dire = ¿me sabrías decir?, pregunta cortés."
+    "note": "El condicional de *sapere* suaviza la pregunta: *mi sapresti dire...?*, «¿me sabrías decir...?»."
    },
    {
     "label": "h",
@@ -270,7 +270,7 @@
     "alt": [
      "Giulia vorrebbe restare a Pisa."
     ],
-    "note": "Vorrebbe = querría/le gustaría, deseo expresado con cortesía."
+    "note": "*volere* en condicional expresa deseo con cortesía: *vorrebbe rimanere*."
    },
    {
     "label": "j",
@@ -432,7 +432,7 @@
     "stem": "No tendría que haber comprado esos zapatos.",
     "answer": "Non avrei dovuto comprare quelle scarpe.",
     "alt": [],
-    "note": "«No tendría que haber…» = non avrei dovuto + infinitivo."
+    "note": "El arrepentimiento se arma con *avrei dovuto* + infinitivo simple: *non avrei dovuto comprare*; el castellano pone el «haber» en el infinitivo."
    },
    {
     "label": "b",
@@ -1152,7 +1152,7 @@
      "Penso di andare via.",
      "Sto pensando di andare via."
     ],
-    "note": "Pensare di + infinitivo = pensar en hacer algo."
+    "note": "*pensare di* + infinitivo = «pensar (en) hacer algo»: el italiano usa *di*, no *in*."
    },
    {
     "label": "c",
@@ -1276,7 +1276,7 @@
     "alt": [
      "avere pagato i debiti"
     ],
-    "note": "Infinitivo compuesto = avere + participio."
+    "note": "Infinitivo compuesto = *aver(e)* + participio: *di aver pagato*, «de haber pagado»."
    },
    {
     "label": "b",
@@ -1850,7 +1850,7 @@
     "stem": "È difficile che ___ tutti quanti. (venire) (Es poco probable que vengan todos.)",
     "answer": "vengano",
     "alt": [],
-    "note": "È difficile che (= es poco probable) + subjuntivo."
+    "note": "*è difficile che* («es poco probable que») + congiuntivo: *vengano*."
    },
    {
     "label": "b",
@@ -1866,7 +1866,7 @@
     "stem": "Non è detto che loro ___ stasera. (tornare) (No es seguro que vuelvan esta noche.)",
     "answer": "tornino",
     "alt": [],
-    "note": "Non è detto che (= no es seguro) + subjuntivo."
+    "note": "*non è detto che* («no es seguro que») + congiuntivo: *tornino*."
    }
   ]
  },
@@ -2004,7 +2004,7 @@
     "alt": [
      "sia venuta"
     ],
-    "note": "Congiuntivo passato = presente de essere/avere + participio."
+    "note": "Congiuntivo passato = congiuntivo presente de *essere/avere* + participio: *sia venuto*."
    },
    {
     "label": "b",
@@ -3365,7 +3365,7 @@
     "stem": "Il tetto ___ riparato. (tiene que ser)",
     "answer": "va",
     "alt": [],
-    "note": "Andare + participio = tiene que ser."
+    "note": "*andare* + participio = «tiene que ser»: *va riparato*. Solo con verbos transitivos."
    },
    {
     "label": "b",
@@ -3373,7 +3373,7 @@
     "stem": "La cucina ___ rinnovata. (debería ser)",
     "answer": "andrebbe",
     "alt": [],
-    "note": "Condicional de andare = debería ser."
+    "note": "Condicional de *andare* + participio = «debería ser»: *andrebbe rinnovata*."
    },
    {
     "label": "c",
@@ -3381,7 +3381,7 @@
     "stem": "I soffitti ___ rifatti. (tendrán que ser)",
     "answer": "andranno",
     "alt": [],
-    "note": "Futuro de andare = tendrán que ser."
+    "note": "Futuro de *andare* + participio = «tendrán que ser»: *andranno rifatti*."
    },
    {
     "label": "d",
@@ -3389,7 +3389,7 @@
     "stem": "Le finestre ___ pulite. (tendrían que haber sido)",
     "answer": "andavano",
     "alt": [],
-    "note": "Imperfecto de andare = tendrían que haber sido."
+    "note": "Imperfetto de *andare* + participio = «había que, tendrían que haber sido»: *andavano pulite*."
    }
   ]
  },
@@ -3800,7 +3800,7 @@
      "Non gliela far cambiare",
      "Non gliela fare cambiare"
     ],
-    "note": "Gli + la = gliela, pegado al infinitivo del imperativo negativo."
+    "note": "*gli* + *la* = *gliela*; en el imperativo negativo de *tu* (non + infinitivo) se pega al infinitivo: *non fargliela cambiare*."
    },
    {
     "label": "b",
@@ -3820,7 +3820,7 @@
     "stem": "Dovresti far fare i lavori all'architetto. (reemplazá «i lavori» y «all'architetto») → Dovresti ___.",
     "answer": "farglieli fare",
     "alt": [],
-    "note": "Gli + li = glieli, pegado a far."
+    "note": "*gli* + *li* = *glieli*; con *fare* + infinitivo, los pronombres se pegan a *far*: *farglieli fare*."
    },
    {
     "label": "d",
@@ -4089,7 +4089,7 @@
      "non ci hanno fatti partire",
      "non siamo potuti partire"
     ],
-    "note": "Non fare + infinitivo = no permitir."
+    "note": "*non fare* + infinitivo = «no dejar/no permitir»: *non ci hanno fatto partire*."
    },
    {
     "label": "b",
@@ -4114,7 +4114,7 @@
      "non mi hanno lasciata salire sull'aereo",
      "non mi hanno fatto salire in aereo"
     ],
-    "note": "Far salire su = dejar subir."
+    "note": "*far salire* = «dejar subir» (causativo con *fare*); *non mi hanno fatto salire sull'aereo*."
    },
    {
     "label": "d",
@@ -4124,7 +4124,7 @@
     "alt": [
      "la polizia mi ha fatta tornare indietro"
     ],
-    "note": "Fare + infinitivo = obligar."
+    "note": "*fare* + infinitivo puede expresar obligación: *mi ha fatto tornare indietro*, «me hizo volver»."
    }
   ]
  },
@@ -4138,7 +4138,7 @@
     "stem": "Hice pasar a Giuliano.",
     "answer": "Ho fatto entrare Giuliano.",
     "alt": [],
-    "note": "Far entrare = hacer pasar."
+    "note": "Causativo: *far entrare* = «hacer pasar»; la persona va directa, sin «a»: *ho fatto entrare Giuliano*."
    },
    {
     "label": "b",
@@ -4146,7 +4146,7 @@
     "stem": "Tiré el florero (sin querer).",
     "answer": "Ho fatto cadere il vaso.",
     "alt": [],
-    "note": "Far cadere = tirar, dejar caer."
+    "note": "*far cadere* = «tirar, dejar caer» sin querer: *fare* + infinitivo, donde el castellano usa un verbo solo."
    },
    {
     "label": "c",
@@ -4189,7 +4189,7 @@
      "Le ho fatto notare che non aveva pagato.",
      "Le ho fatto presente che non aveva pagato."
     ],
-    "note": "Far notare / far presente = hacer notar, recordar."
+    "note": "*far notare* = «hacer notar»: la persona es indirecto (*gli*) porque el infinitivo ya tiene objeto."
    }
   ]
  },
@@ -4786,7 +4786,7 @@
     "alt": [
      "Non riesco a pagare."
     ],
-    "note": "Farcela a + infinitivo = poder con algo."
+    "note": "*farcela a* + infinitivo = «poder con algo, llegar a»: *non ce la faccio a pagare*."
    }
   ]
  },
@@ -4946,7 +4946,7 @@
     "alt": [
      "Sto cercando il mio iPad."
     ],
-    "note": "Cercare = buscar, objeto directo."
+    "note": "*cercare* lleva objeto directo sin preposición: *cerco il mio iPad*, como «busco mi iPad»."
    },
    {
     "label": "c",
@@ -5004,7 +5004,7 @@
      "Pago per Maria.",
      "Sto pagando per Maria."
     ],
-    "note": "Pagare per qualcuno = pagar en lugar de otro."
+    "note": "*pagare per qualcuno* = «pagar por otro, en su lugar»: *per* marca a quién beneficia."
    },
    {
     "label": "d",
@@ -5273,7 +5273,7 @@
      "Finì per diventare presidente.",
      "Ha finito con il diventare presidente."
     ],
-    "note": "Finire per/col + infinitivo = terminar haciendo algo."
+    "note": "*finire per* (o *col*) + infinitivo cuenta cómo terminó algo: *ha finito per diventare*, donde el castellano usa el gerundio («terminó siendo»)."
    },
    {
     "label": "f",
@@ -5330,7 +5330,7 @@
     "stem": "Che cosa pensi ___ Bruno? (¿Qué opinás de Bruno?)",
     "answer": "di",
     "alt": [],
-    "note": "Pensare di = opinar sobre alguien."
+    "note": "*pensare di* = «opinar sobre»: *che cosa pensi di Bruno?*"
    },
    {
     "label": "c",
@@ -5338,7 +5338,7 @@
     "stem": "Pensi ___ domani? (¿Estás pensando en mañana?)",
     "answer": "a",
     "alt": [],
-    "note": "Pensare a = tener en mente algo."
+    "note": "*pensare a* = «pensar en, tener en mente»: el italiano usa *a* donde decimos «en»."
    },
    {
     "label": "d",
@@ -5346,7 +5346,7 @@
     "stem": "Che cosa pensi ___ fare? (¿Qué pensás hacer?)",
     "answer": "di",
     "alt": [],
-    "note": "Pensare di + infinitivo = tener intención de."
+    "note": "*pensare di* + infinitivo = «tener intención de»: *che cosa pensi di fare?*"
    },
    {
     "label": "e",
@@ -5354,7 +5354,7 @@
     "stem": "Hai pensato ___ Bruno? (¿Pensaste en Bruno?)",
     "answer": "a",
     "alt": [],
-    "note": "Pensare a qualcuno = pensar en alguien."
+    "note": "*pensare a qualcuno* = «pensar en alguien»: con *a*, no *in*."
    },
    {
     "label": "f",
@@ -5398,7 +5398,7 @@
     "stem": "¿Creés en Dios?",
     "answer": "Credi in Dio?",
     "alt": [],
-    "note": "Credere in = tener fe en."
+    "note": "*credere in* = «creer en» (fe); *credere a* es creer lo que alguien dice."
    },
    {
     "label": "d",
