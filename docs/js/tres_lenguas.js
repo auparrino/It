@@ -149,8 +149,10 @@
       if (sign && sign.double) {
         // «muitto» is a typo of muito, «fatto» is Italian
         if (t.length < 4 || isHome(degeminate(t)) || exp[degeminate(t)]) return;
-        // «cidde», «veradde», «ultimmente»: a slip on a word of the answer
-        // (cidade, verdade, ultimamente), not the other language
+      }
+      // «cidde», «veradde», «quaclhe»: only a sign (no known word of the
+      // other language) on a slip of a word of the answer is a typo
+      if (sign) {
         var dt = degeminate(norm(t));
         if (Object.keys(exp).some(function (e) { return e.length >= 4 && editDist(dt, degeminate(norm(e))) <= 2; })) return;
       }

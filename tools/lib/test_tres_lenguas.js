@@ -121,6 +121,7 @@ pack.LANGS.forEach(function (code) {
                       ["Ultimmente trabalho muito", "Ultimamente trabalho muito"]].forEach(function (x) {
     ok(T.intruders(x[0], [x[1]]).length === 0, tag + "tipeo con doble tomado por italiano: " + x[0]);
   });
+  if (code === "it") ok(T.intruders("Vuoi quaclhe cosa?", ["Vuoi qualche cosa?"]).length === 0, tag + "tipeo con lh tomado por portugués");
   // The course's own sentences (bank) are never taken for the other language.
   var sents = (bank.sentences || []).map(function (s) { return s[0]; }).filter(Boolean);
   var fps = sents.filter(function (s) { return T.intruders(s, ["zzz"]).length; });
