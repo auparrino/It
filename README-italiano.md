@@ -975,3 +975,26 @@ largo del CILS y el CELI:
   largos de cada semana, la clave de las preguntas, que el modelo pase la
   revisión y que la basura, la copia y los textos cortos no la pasen.
 
+### Palabras de la semana B2-C1 y un corrector que no molesta al nivel C1 (v2.7)
+
+- **Palabras**: de la semana 27 a la 51, veinte palabras por semana elegidas
+  a mano (`tools/it/bank/parole_c1.py`). Son léxico B2-C1 de la lista de
+  frecuencia (verbos de decir, conectores de registro alto, sustantivos
+  abstractos, falsos amigos), casi siempre tomado de la lectura o la escucha
+  larga de esa semana, así se aprende en el contexto que ya se leyó. Antes
+  eran entre 1 y 15 por semana, elegidas solas de los ejercicios. Palabras
+  enseñadas de las bandas B2 y C1: de 38 y 41 a 105 y 93.
+- **Corrector de *Scrivi* y de las tareas**: en todo el texto nativo del
+  tramo (unas 30.000 palabras) marcaba 41 falsas alarmas y ahora marca 12.
+  - No marca lo que está citado (entre comillas cortas o después de
+    *la parola…*).
+  - Aprende el léxico de las escuchas y los modelos.
+  - Suma *rendere* y *piovere* al conjugador.
+  - Corrige las reglas que confundían *uno dei*, *la regista*, *le orecchie*,
+    *il moto*, *la escluderei*, *si fermò due volte*, *se + congiuntivo*,
+    *Pensi che…* o *Senti, …* dichos a alguien, y la elisión opcional
+    (*lo ha*).
+
+  `tools/lib/test_tramo.js` controla que las falsas alarmas no vuelvan a
+  subir y `test_scrivi.js`, que los errores reales se sigan detectando.
+

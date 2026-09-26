@@ -1,0 +1,178 @@
+# -*- coding: utf-8 -*-
+"""Palabras de la semana — tramo C1 (semanas 27-51): cinco más por semana.
+
+Se suman a las 15 de s3.py y s4.py: léxico B2-C1 de la lista de frecuencia
+tomado de la leitura longa o la escuta longa de esa semana
+(tools/pt/tramo/wNN.json), con un ejemplo sacado o adaptado de ese texto.
+"""
+
+VOCAB = {
+27: [
+    ["o recém-chegado", "el recién llegado", "Nas cidades pequenas, todo mundo se conhece, e o recém-chegado demora a ser convidado.", "*Recém* + participio, con guion: *recém-chegado*, *recém-casado*, *recém-nascido*. Femenino: *a recém-chegada*."],
+    ["o mutirão", "el trabajo comunitario, la jornada solidaria", "Se você quiser fazer amigos, vai ter que participar do mutirão da praça.", "Trabajo voluntario y colectivo de vecinos: *mutirão de limpeza*. También campaña masiva: *mutirão de vacinação*. Muy brasileño."],
+    ["integrar-se", "integrarse, adaptarse (a un grupo o lugar)", "Se vocês forem para o Canadá, pensem também em como a família vai se integrar.", "Con *a* o *em*: *integrar-se à comunidade*, *integrar-se na escola*. Sustantivo: *a integração*."],
+    ["o alerta", "el aviso de peligro, la advertencia", "Quem acompanha esse tipo de mudança faz um alerta: o interior não é o paraíso.", "Masculino en portugués: *o alerta*, *fazer um alerta*, *dar o alerta*. Como adjetivo, *ficar alerta* = estar atento."],
+    ["fazer as contas", "sacar cuentas, calcular si conviene", "Com o trabalho remoto, muitas famílias das grandes capitais começaram a fazer as contas.", "Evaluar costos y beneficios: *fiz as contas e não vale a pena*. Siempre *as contas*, en plural; distinto de *no fim das contas* (al fin y al cabo)."],
+],
+28: [
+    ["a encruzilhada", "la encrucijada", "Aos dezessete anos, muitos jovens se sentem numa encruzilhada diante do vestibular.", "Cruce de caminos y, sobre todo, momento de decisión difícil: *estar numa encruzilhada*. Frecuente en prensa y ensayo."],
+    ["aliviado", "más tranquilo, con alivio", "A senhora levou o iogurte mais simples de todos e pareceu aliviada.", "De *aliviar*; *ficar aliviado*, *suspirar aliviado*. Exclamación: *que alívio!*."],
+    ["o rótulo", "la etiqueta (de un envase), el cartel", "Eu, que tinha passado cinco minutos comparando rótulos, saí com dois iogurtes.", "La etiqueta con datos de un producto: *ler o rótulo*. Figurado: *colocar rótulos nas pessoas* = etiquetarlas. Verbo: *rotular*."],
+    ["largar", "dejar, abandonar; soltar", "Se eu largasse o emprego no banco, abriria uma pousada na Bahia.", "Mucho más usado que en castellano: *largar tudo*, *largar o emprego*, *largar o cigarro*. También soltar: *larga a minha mão!*."],
+    ["desconfiar", "sospechar, no fiarse", "Desconfio que a gente confunde liberdade com quantidade de opções.", "*Desconfiar de alguém* = desconfiar; *desconfiar que* = sospechar que. Sustantivo: *a desconfiança*."],
+],
+29: [
+    ["o estagiário", "el pasante, el practicante", "As boas empresas são as primeiras a quererem estagiários bem informados.", "De *o estágio* = la pasantía (no «estadio», que es *estádio*). Femenino: *a estagiária*."],
+    ["o recesso", "el receso, las vacaciones (de pasantes, escuelas, Congreso)", "Depois de um ano no mesmo lugar, vocês têm direito a um recesso de trinta dias.", "Pausa de actividades: *recesso escolar*, *recesso parlamentar*, *recesso de fim de ano*. Para el pasante reemplaza a *férias*."],
+    ["o lembrete", "el recordatorio", "Por fim, um lembrete: guardem uma cópia do termo de compromisso.", "De *lembrar*. *Deixar um lembrete na geladeira*; en el celular, *criar um lembrete*. Masculino."],
+    ["o encrenqueiro", "el problemático, el que arma lío", "Conhecer os seus direitos não é ser encrenqueiro.", "De *a encrenca* = el lío: *meter-se numa encrenca*. Coloquial. Femenino: *encrenqueira*."],
+    ["o capricho", "el esmero, el cuidado (y también el antojo)", "É importante eles verem que o horário da faculdade é uma coisa séria, não um capricho.", "Como en castellano, antojo; pero también esmero: *fazer com capricho* = hacer con esmero; *caprichado* = bien hecho, abundante."],
+],
+30: [
+    ["enganado", "equivocado", "Eu teria jurado que conhecia todas as histórias da minha avó. Estava enganada.", "*Estar enganado* = estar equivocado (de *enganar* = engañar). *Se não me engano* = si no me equivoco."],
+    ["desperdiçar", "desperdiciar", "Minha avó tinha o costume de quem aprendeu a não desperdiçar nada, nem papel.", "Con *ç*. Sustantivo: *o desperdício*. En el habla también *jogar fora*."],
+    ["o enterro", "el entierro", "Ela só voltou à Paraíba quarenta anos depois, para o enterro de uma irmã.", "*Ir ao enterro*; el velorio es *o velório*. Verbo: *enterrar*."],
+    ["a ferrovia", "el ferrocarril, la vía férrea", "Seu Aurélio tinha quinze anos quando foi trabalhar na ferrovia.", "La red o la vía; el tren es *o trem*. Adjetivo: *ferroviário* (*estação ferroviária*), que también es el empleado."],
+    ["calar", "callar", "A memória de uma família é feita tanto do que se conta quanto do que se cala.", "Transitivo o pronominal: *calar um segredo*, *calar-se*. Refrán: *quem cala consente*. *Cala a boca!* es brusco."],
+],
+31: [
+    ["a redação", "la redacción (de un diario); también la composición escolar", "Na manhã em que visitamos a redação, a jornalista estava revisando os obituários.", "El lugar donde trabajan los periodistas y el texto escrito: *a redação do Enem*. Verbo: *redigir*."],
+    ["o boato", "el rumor", "Um áudio anônimo tinha espalhado o boato de que a água estava contaminada.", "*Espalhar um boato*, *desmentir um boato*. Más de prensa que *fofoca*, que es chisme personal."],
+    ["desmentir", "negar públicamente, decir que es falso", "Ela disse que o prefeito ia desmentir no rádio, mas que ninguém ia acreditar.", "Conjuga como *sentir*: *eu desminto*. Sustantivo: *o desmentido*. Verbo de decir típico de noticias."],
+    ["fiscalizar", "controlar, supervisar", "O professor afirmou que, sem imprensa local, ninguém fiscaliza as contas da prefeitura.", "Más amplio que en castellano: *fiscalizar obras*, *fiscalizar o governo*. Sustantivo: *a fiscalização*; el inspector es *o fiscal*."],
+    ["o esclarecimento", "la aclaración", "O jornal publicou uma nota de esclarecimento dizendo que o título foi alterado.", "De *esclarecer* = aclarar. *Nota de esclarecimento* = comunicado aclaratorio; *pedir esclarecimentos*."],
+],
+32: [
+    ["o receio", "el temor, el recelo", "Entendo a intenção do projeto, mas confesso um receio: perde-se uma forma de ler a cidade.", "*Ter receio de* = temer. Verbo: *recear* (*eu receio*). Más formal y matizado que *medo*."],
+    ["o guincho", "la grúa (de remolque)", "Na frente da farmácia, proíbe-se estacionar: o carro fica sujeito a guincho.", "En carteles: *sujeito a guincho* = se remolcará. Verbo: *guinchar* = remolcar (y también chillar)."],
+    ["a mercearia", "el almacén (de barrio)", "Na parede da mercearia, pintaram a frase: Não se vende fiado.", "Falso amigo: no es «mercería» (esa es *o armarinho*). Negocio chico de comestibles, como el almacén de barrio."],
+    ["estreito", "angosto, estrecho", "Não há nome nem telefone, só uma seta apontando para uma escada estreita.", "*Uma rua estreita*; contrario: *amplo*. Sustantivo: *o estreito* = el estrecho (geografía)."],
+    ["o domicílio", "la casa, el lugar donde se vive", "Na porta, uma placa anuncia: Fazem-se unhas a domicílio.", "*A domicílio* = a domicilio, sin crase: *entrega a domicílio*. En formularios, *domicílio* = dirección legal."],
+],
+33: [
+    ["o cartório", "la escribanía, el registro (civil, de la propiedad)", "Numa tarde de março, entrou no cartório um velho com uma caixa de madeira.", "Oficina donde se certifican firmas, documentos y actos: *reconhecer firma no cartório*. El escribano es *o tabelião*."],
+    ["deparar-se com", "toparse con, encontrarse con", "Em vinte anos de ofício, o tabelião nunca se deparou com uma cláusula assim.", "Pronominal y con *com*: *deparar-se com um problema*. Escrito y formal; en el habla, *dar de cara com*."],
+    ["pregar uma peça", "hacer una broma, jugar una mala pasada", "O engenheiro saiu convencido de que o velho lhe pregou uma peça.", "*Pregar uma peça em alguém* o *pregar-lhe uma peça*. *A peça* también es pieza (de un reloj, de teatro)."],
+    ["as entrelinhas", "las entrelíneas", "Quem lê o testamento com atenção descobre muita coisa nas entrelinhas.", "Casi siempre en plural: *ler nas entrelinhas* = leer entre líneas, captar lo implícito."],
+    ["com vagar", "despacio, sin apuro", "O velho abriu a caixa com vagar sobre a mesa do tabelião.", "Literario: *com vagar* = con calma. Adjetivo: *vagaroso* = lento. En el habla: *devagar*."],
+],
+34: [
+    ["a enchente", "la inundación, la crecida", "A enchente não é um acidente: é consequência do modo como construímos.", "De *encher* (llenar). Sinónimos: *inundação*; *alagamento* es más puntual (una calle anegada)."],
+    ["boiar", "flotar", "Toda vez que a cidade fica debaixo d'água, circulam imagens de carros boiando.", "*A boia* = la boya. Coloquial: *ficar boiando* = no entender nada, quedarse afuera de la conversación."],
+    ["todavia", "sin embargo, no obstante (falso amigo)", "Reconheço o peso desses argumentos. Todavia, eles partem de uma falsa oposição.", "Falso amigo: conector adversativo formal, como *contudo* y *no entanto*. «Todavía» se dice *ainda*."],
+    ["ao passo que", "mientras que (contraste)", "Um parque inundável serve de praça, ao passo que um piscinão passa o ano vazio.", "Conector de contraste, formal, sinónimo de *enquanto*. No indica tiempo ni ritmo."],
+    ["sobrecarregado", "sobrecargado, saturado", "Com calçadas permeáveis, o sistema de drenagem deixa de ficar sobrecarregado.", "De *sobrecarregar*. Con personas: *estou sobrecarregado de trabalho* = tapado de trabajo."],
+],
+35: [
+    ["recorrer a", "recurrir a", "Rodrigo recorreu a um despachante depois de perder três manhãs na fila.", "Régimen con *a*: *recorrer a alguém*. En derecho, *recorrer de uma decisão* = apelarla; *o recurso*."],
+    ["visar", "apuntar a, tener como objetivo", "Nosso trabalho visa à segurança do cidadão, não a burlar regras.", "En la norma, con *a*: *visa ao lucro*, *visa à segurança*; en el habla, sin preposición. *Visar um documento* = visarlo."],
+    ["burlar", "eludir, violar (una norma) (no «burlarse»)", "Um despachante sério não ajuda ninguém a burlar a lei.", "Falso amigo: *burlar a fiscalização* = eludirla. Burlarse de alguien es *zombar de* o *tirar sarro de*."],
+    ["o expediente", "el horario laboral, la jornada", "A gente nem trabalha no mesmo andar: eu mal vejo ele durante o expediente.", "*Durante o expediente*, *fim de expediente*. También «recurso, artimaña». El expediente administrativo es *o processo*."],
+    ["constranger", "incomodar, avergonzar; presionar", "Ninguém pode usar o cargo para constranger o outro na frente dos colegas.", "*Ficar constrangido* = sentir vergüenza o incomodidad; *uma situação constrangedora*. Sustantivo: *o constrangimento*."],
+],
+36: [
+    ["à medida que", "conforme, a la par que (progresivamente)", "A língua se corrige aos poucos, à medida que é lida.", "Con crase: indica proporción. No confundir con *na medida em que* = en tanto que, dado que."],
+    ["à luz de", "a la luz de", "O pedido será analisado à luz da legislação vigente.", "Formal: *à luz dos fatos*, *à luz da lei*. Lleva crase porque *luz* es femenino."],
+    ["convir", "convenir", "Convém lembrar que a crase não é um acento qualquer.", "Casi siempre *convém* + infinitivo = conviene. Conjuga como *vir*: *convém*, *convinha*, *conveio*."],
+    ["o zelo", "el celo, el esmero", "Quem põe crase onde não deve erra por excesso de zelo, não por descaso.", "Cuidado y dedicación: *com zelo*; adjetivo *zeloso*. Los celos amorosos son *o ciúme*."],
+    ["o térreo", "la planta baja", "O balcão de atendimento fica no térreo da prefeitura, à esquerda de quem entra.", "*O térreo* o *o andar térreo*; el primer piso es *o primeiro andar*. En ascensores, *T*."],
+],
+37: [
+    ["a encosta", "la ladera", "Toda vez que o céu escurece sobre as encostas, os moradores ficam em alerta.", "Ladera de un cerro: *contenção de encostas*. No confundir con *a ladeira*, que es la calle en pendiente."],
+    ["íngreme", "empinado, escarpado", "Nos morros, as construções se equilibram em terrenos íngremes.", "Igual en masculino y femenino: *uma rua íngreme*, *uma subida íngreme*. Sinónimo: *inclinado*."],
+    ["a antecedência", "la anticipación", "O sistema emitiu alertas com cerca de quarenta minutos de antecedência.", "*Com antecedência* = con anticipación; *com dois dias de antecedência*. Muy usado en avisos y reservas."],
+    ["ponderar", "señalar con cautela, matizar", "Não estamos falando de prever catástrofes, pondera a geóloga.", "Como verbo de decir = observar, objetar con prudencia (no «elogiar»). También sopesar: *ponderar os prós e os contras*."],
+    ["compensar", "convenir, valer la pena", "Tem modelo de celular que eu nem pego mais, porque não compensa.", "*Não compensa* = no conviene, no rinde. *Compensa mais consertar do que comprar outro*."],
+],
+38: [
+    ["a legenda", "el subtítulo (no «la leyenda»)", "Eu sempre vejo a série com legenda porque o som do meu notebook é horrível.", "Falso amigo: subtítulo y epígrafe de foto; *filme legendado*. La leyenda es *a lenda*."],
+    ["a dublagem", "el doblaje", "Durante décadas, as legendas e a dublagem corrigiam a fala dos personagens.", "Verbo *dublar*: *filme dublado* vs. *legendado*. *O dublador* = actor de doblaje."],
+    ["estranhar", "extrañar lo raro, sorprenderse (no «echar de menos»)", "A gente percebeu que o público estranhava a legenda diferente do ator.", "Falso amigo: *estranhar* = encontrar raro. Echar de menos es *sentir falta* o *ter saudade*."],
+    ["rebater", "rebatir, refutar", "Outros rebatem que o problema está justamente no oposto.", "Verbo de opinión muy de prensa: *rebater um argumento*, *rebater as críticas*."],
+    ["o plantão", "la guardia (turno)", "Vou chegar tarde na festa, porque tenho plantão no hospital até as oito.", "*Estar de plantão*, *farmácia de plantão*; *o plantonista* = el de guardia. En prensa, *plantão de notícias* = último momento."],
+],
+40: [
+    ["a evasão", "la deserción (escolar)", "O estudo identifica os fatores associados à evasão no primeiro ano de graduação.", "*Evasão escolar* = abandono de los estudios; también *evasão fiscal*. Verbo: *evadir-se*."],
+    ["trancar", "cerrar con llave; congelar (la matrícula)", "Dos entrevistados, vinte e sete tinham trancado ou abandonado o curso.", "*Trancar a porta*; en la universidad, *trancar a matrícula* = suspenderla temporalmente. *A tranca* = la traba."],
+    ["decorrer de", "derivar de, resultar de", "A evasão no primeiro ano não decorre de um único fator.", "Formal: *decorrer de* = resultar de. *No decorrer do ano* = en el transcurso del año; *decorrente de* = derivado de."],
+    ["o acolhimento", "el recibimiento, la contención", "Recomenda-se um programa de acolhimento nas primeiras semanas de aula.", "De *acolher* = recibir, amparar. Frecuente en educación, salud y asistencia social."],
+    ["tampouco", "tampoco", "Tampouco se pode desconsiderar a dimensão afetiva da permanência.", "Formal y escrito; en el habla se dice *também não*. Suele ir al inicio: *tampouco* + verbo."],
+],
+41: [
+    ["dar-se ao trabalho de", "tomarse el trabajo de", "O relógio simplesmente parara, e ninguém se dera ao trabalho de consertá-lo.", "Frecuente en negativa: *nem se deu ao trabalho de responder* = ni se molestó en responder."],
+    ["voltar atrás", "echarse atrás, retractarse", "A cada carta, ele achava que não tinha o direito de voltar atrás.", "*Voltar atrás numa decisão*, *não volto atrás*. Con sentido de desdecirse, no de regresar."],
+    ["o maço", "el atado, el paquete", "Numa gaveta, presa por um elástico, Helena encontrou um maço de envelopes.", "*Maço de cigarros*, *maço de cartas*, *maço de coentro*. Con *ç*; no confundir con *massa*."],
+    ["empoeirado", "polvoriento", "Ela subiu a escada da torre e abriu a tampa empoeirada do relógio.", "De *a poeira* = el polvo (ojo: *o polvo* es el pulpo). *Tirar a poeira* = quitar el polvo."],
+    ["cumprir a palavra", "cumplir su palabra", "Concluíra, com a lógica cruel dos jovens, que ele cumprira a palavra.", "Contrario: *faltar com a palavra*. *Dar a palavra* = prometer; *palavra de honra*."],
+],
+42: [
+    ["por via das dúvidas", "por las dudas", "Por via das dúvidas, a dona das flores afixou um cartaz na barraca.", "Equivale al rioplatense «por las dudas». Registro neutro; también *na dúvida*."],
+    ["o tombamento", "la declaración de patrimonio histórico", "Tendo conseguido o tombamento do prédio, os moradores salvaram o cinema.", "De *tombar* = declarar bien protegido (y también caer). *Um prédio tombado* no puede demolerse."],
+    ["a vaquinha", "la colecta, la vaquita", "A reforma foi paga em parte com uma vaquinha on-line de três mil pessoas.", "*Fazer uma vaquinha* = juntar plata entre varios, como «hacer una vaca». *Vaquinha virtual* = financiamiento colectivo."],
+    ["espremido", "apretujado, exprimido", "A notícia saiu espremida entre um acidente na marginal e a previsão de chuva.", "De *espremer* = exprimir (*espremer uma laranja*) y apretar. *Espremido no ônibus* = apretado."],
+    ["lacrado", "sellado, clausurado", "Ela chorou quando viu as portas do cinema lacradas.", "De *lacrar* = sellar, clausurar: *embalagem lacrada*. En redes, *lacrar* = dejar a alguien sin respuesta."],
+],
+43: [
+    ["a posse", "la asunción (de un cargo); la posesión", "Fui aprovada num concurso, e a posse é daqui a três semanas.", "*Tomar posse* = asumir un cargo; *posse do presidente*. También posesión: *ter a posse de um imóvel*."],
+    ["o rodeio", "el rodeo, la vuelta (al hablar)", "Ele gosta de mensagem objetiva: diga logo no começo o que precisa, sem rodeio.", "*Sem rodeios* = sin vueltas; *fazer rodeios*. También el rodeo de ganado."],
+    ["o desabafo", "el desahogo", "Adjetivos excessivos e desabafos emocionais tendem a enfraquecer o pedido.", "Verbo *desabafar* = desahogarse: *precisava desabafar com alguém*."],
+    ["o fecho", "el cierre (de una carta)", "Atenciosamente se tornou o fecho padrão de quase todas as situações formais.", "Cierre de un texto; de *fechar*. *Fecho ecler* = cierre relámpago."],
+    ["o anexo", "el adjunto (de un correo)", "Anexe ao e-mail o comprovante de aprovação no concurso, com a data da posse.", "*Em anexo* = adjunto: *segue em anexo o relatório*. Verbo: *anexar*."],
+],
+44: [
+    ["o deboche", "la burla, la sorna", "Alguns aumentativos carregam desprezo ou deboche, como espertalhão.", "*Em tom de deboche*. Verbo: *debochar de* = burlarse de. Adjetivo: *debochado*."],
+    ["torcer o nariz", "fruncir la nariz, mostrar desagrado", "Os gramáticos mais conservadores torcem o nariz para esses exageros.", "*Torcer o nariz para algo*. Ojo: *torcer* solo = alentar a un equipo."],
+    ["o jeitinho", "la maña, el atajo (a veces trampa)", "O famoso jeitinho resumiria uma maneira de contornar obstáculos com flexibilidade.", "Diminutivo de *jeito*: flexibilidad creativa o pequeña trampa, según quién lo diga. *Dar um jeitinho*."],
+    ["o recado", "el mensaje, el aviso (que se deja)", "Ninguém conjuga eu sexto, mas todo mundo entende o recado.", "*Deixar um recado* = dejar un mensaje; *dar o recado*; *recado dado* = mensaje recibido."],
+    ["o espertalhão", "el vivo, el pícaro", "Um espertalhão é alguém esperto demais, que quer levar vantagem.", "Aumentativo despectivo de *esperto* (vivo, listo). Femenino: *espertalhona*."],
+],
+45: [
+    ["embaraçado", "avergonzado, incómodo (no «embarazada»)", "Perguntar a uma colega se ela está embaraçada pode deixá-la constrangida.", "Falso amigo clásico: embarazada es *grávida*. *Embaraçar* = avergonzar, y también enredar."],
+    ["a escrivaninha", "el escritorio (el mueble)", "O escritório não é o móvel onde escrevo: esse é a escrivaninha.", "El mueble; *o escritório* es la oficina. Femenino: *a escrivaninha*."],
+    ["folgado", "holgado, suelto; (coloquial) aprovechado", "Uma camiseta larga, em português, é uma camiseta folgada.", "*Roupa folgada*. De una persona, *folgado* = fresco, caradura. *A folga* = el franco del trabajo."],
+    ["a pegadinha", "la trampa, la pregunta capciosa; la cámara oculta", "O caminho inverso, do português para o espanhol, também tem as suas pegadinhas.", "*Cair numa pegadinha* = caer en la trampa. En la tele, *programa de pegadinhas* = de cámara oculta."],
+    ["o crachá", "la credencial, la tarjeta identificatoria", "Quando me pediram o apelido para o crachá, respondi com o sobrenome.", "La tarjeta con nombre y foto que se cuelga en el trabajo o en un evento. Masculino, con tilde: *o crachá*."],
+],
+46: [
+    ["o sotaque", "el acento (regional)", "Muitos brasileiros entendem o sotaque angolano melhor que o de Lisboa.", "Tonada de una región: *sotaque carioca*, *sotaque gaúcho*. El acento gráfico es *o acento*."],
+    ["a parcela", "la parte, la porción; también la cuota", "Em Angola, o português é a língua materna de uma parcela crescente da população.", "*Uma parcela da população* = una parte. En compras, *em dez parcelas* = en diez cuotas."],
+    ["o preconceito", "el prejuicio (no «preconcepto»)", "Você já sentiu algum tipo de preconceito por causa da sua forma de falar?", "*Preconceito contra*; adjetivo *preconceituoso*. Ojo: *prejuízo* = pérdida, daño."],
+    ["de mão única", "de una mano, unidireccional", "A influência entre o português e as línguas africanas nunca foi de mão única.", "Literal: *rua de mão única* = de una mano. Contrario: *mão dupla*. Figurado: relación en un solo sentido."],
+    ["saltar aos olhos", "saltar a la vista", "Na pronúncia, a diferença entre Lisboa e São Paulo salta aos olhos.", "Ser evidente. El texto juega con *salta aos ouvidos* porque se trata de pronunciación."],
+],
+47: [
+    ["descambar", "degenerar, derivar (en algo peor)", "O debate sobre a tarifa zero rapidamente descambou para a caricatura.", "*Descambar para* o *em*: siempre hacia algo negativo. *A discussão descambou em briga*."],
+    ["o reajuste", "el aumento, la actualización (de precios o sueldos)", "A cada reajuste da passagem, parte dos usuários desiste do ônibus.", "*Reajuste salarial*, *reajuste da tarifa*. Verbo: *reajustar*."],
+    ["sucateado", "deteriorado, desmantelado (por abandono)", "Um sistema gratuito, porém lotado e sucateado, dificilmente convenceria alguém.", "De *a sucata* = chatarra. *Sucatear* un servicio público = dejarlo deteriorar por falta de inversión."],
+    ["a fatia", "la tajada, la porción", "Os moradores das periferias gastam uma fatia desproporcional da renda com transporte.", "*Fatia de pão* = rebanada; figurado: *fatia do mercado*, *fatia do orçamento*."],
+    ["o afastamento", "la licencia (médica); el alejamiento", "O esgotamento dos funcionários custa caro, com afastamentos por estresse.", "*Afastamento por doença* = licencia por enfermedad. Verbo *afastar(-se)* = alejar(se), apartar(se)."],
+],
+48: [
+    ["sustentar", "sostener (una idea); mantener", "Há também quem sustente que o foco deveria estar no uso de celulares à noite.", "Verbo de opinión: *sustentar que*. También mantener económicamente: *sustentar a família*."],
+    ["queixar-se", "quejarse", "Muitos professores se queixam de turmas apáticas logo cedo.", "*Queixar-se de*, más formal que *reclamar*. *A queixa* = la queja; *prestar queixa* = hacer una denuncia."],
+    ["o ouvidor / a ouvidora", "el defensor del lector, el ombudsman", "A ouvidora do jornal recebe as críticas dos leitores e escreve uma coluna semanal.", "*A ouvidoria* = oficina de reclamos de una empresa, un diario o un organismo público."],
+    ["reacender", "reavivar, reabrir (un debate)", "Os resultados reacenderam uma discussão antiga entre educadores, médicos e famílias.", "Literal: volver a encender (de *acender*). *Reacender o debate*, *reacender a polêmica*."],
+    ["amarrado", "atado", "O horário escolar está amarrado ao horário de trabalho das famílias.", "De *amarrar* = atar: *amarrar o cadarço*. *Estar amarrado a* = depender de."],
+],
+49: [
+    ["a gíria", "la jerga, el argot", "Com cliente, escreva frases claras, completas, sem gíria e sem abreviação.", "Vocabulario coloquial de un grupo: *gíria carioca*, *gíria dos jovens*. Parecido al uso de «lunfardo»."],
+    ["embaralhar", "mezclar, confundir", "As novas tecnologias embaralharam ainda mais as fronteiras entre o formal e o informal.", "De *o baralho* = el mazo: *embaralhar as cartas*. Figurado: *embaralhar as ideias*."],
+    ["a bronca", "el reto, la reprimenda", "Fica tranquilo, não é bronca, tá? É só uma conversa.", "*Dar uma bronca* = retar; *levar uma bronca* = ser retado. No es «enojo» como en el Río de la Plata."],
+    ["em apuros", "en aprietos", "Quem aprende português na rua pode se ver em apuros na hora de escrever uma carta.", "*Estar em apuros*, *ver-se em apuros*. Casi siempre en plural."],
+    ["o posicionamento", "la postura, la respuesta oficial", "O cliente respondeu bem seco: aguardo posicionamento formal da empresa.", "*Posicionamento da empresa* = su postura oficial. *Posicionar-se sobre* = pronunciarse sobre."],
+],
+50: [
+    ["pagar o pato", "pagar los platos rotos", "No fim, quem acaba pagando o pato é sempre o organizador da festa.", "Cargar con la culpa o el costo de lo que hicieron otros. Coloquial y muy frecuente."],
+    ["tirar de letra", "hacer algo con los ojos cerrados", "Pelo que você está contando, você tirou de letra e salvou a festa.", "Resolver algo con facilidad: *tirei a prova de letra*."],
+    ["fazer vista grossa", "hacer la vista gorda", "O dono do bufê queria que a gente fizesse vista grossa para a multa do contrato.", "*Fazer vista grossa para algo*: con *para*. Adjetivo *grossa*, no «gorda»."],
+    ["ao pé da letra", "al pie de la letra, literalmente", "Quem traduz as expressões ao pé da letra acaba pisando na bola.", "*Levar ao pé da letra* = tomar literalmente; *traduzir ao pé da letra*."],
+    ["dar com a língua nos dentes", "irse de boca, contar un secreto", "Ela deu com a língua nos dentes e contou o segredo para todo mundo.", "Revelar lo que no se debía. Coloquial; sinónimo neutro: *deixar escapar*."],
+],
+51: [
+    ["esvaziar-se", "vaciarse", "O centro, que durante décadas foi o coração das cidades, esvaziou-se.", "De *vazio*. Transitivo: *esvaziar a sala*; pronominal: *a cidade se esvazia no feriado*."],
+    ["aquém de", "por debajo de, sin llegar a", "Um técnico admite que os primeiros resultados ficaram aquém do esperado.", "*Ficar aquém do esperado* = no estar a la altura. Contrario: *além de* = más allá de."],
+    ["o cortiço", "el conventillo", "No centro vivem trabalhadores informais e famílias em cortiços.", "Casa antigua dividida en piezas, como el conventillo porteño. Clásico: *O Cortiço*, de Aluísio Azevedo."],
+    ["a incorporadora", "la desarrolladora inmobiliaria", "Os críticos temem que as grandes incorporadoras lucrem com apartamentos pequenos e caros.", "Empresa que promueve y vende edificios nuevos. Distinta de *a construtora*, que los construye."],
+    ["a moradia", "la vivienda", "Milhares de pessoas procuram moradia perto do trabalho e do transporte.", "*Moradia popular*, *movimento de moradia*, *direito à moradia*. De *morar*."],
+],
+}

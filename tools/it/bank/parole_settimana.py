@@ -174,3 +174,7 @@ PAROLE = {
          "Muy usado: *che carino!* = ¡qué lindo! Para personas es «lindo» y también «amable»."],
     ],
 }
+
+# Las semanas 27 a 51: bank/parole_c1.py (tramo C1).
+from bank.parole_c1 import PAROLE_C1
+PAROLE.update(PAROLE_C1)

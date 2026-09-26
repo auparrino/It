@@ -206,6 +206,7 @@
     (src.bank && src.bank.sentences || []).forEach(function (x) { (x.it || []).forEach(function (a) { list.push(a); }); });
     (src.phrases || []).forEach(function (f) { list.push(f.it); });
     (src.readings || []).forEach(function (e) { list.push(e.text); });
+    (src.extra || []).forEach(function (t) { list.push(t); });   // the long listenings and the models (tramo.js)
     learn(list);
     learn(Object.keys(src.glossario || {}));
     learn(Object.keys(DATA.lex || {}));
@@ -259,7 +260,7 @@
   function isInfCl(w) {   // farlo, vederti, andarsene
     if (isInf(w)) return true;
     var m = /^(.+?[aei]r)(mi|ti|si|ci|vi|lo|la|li|le|ne|gli|sene|mene|tene|cela|glielo|gliela|melo|mela|telo|tela)$/.exec(w || "");
-    return !!(m && isInf(m[1] + "e"));
+    return !!(m && isInf(m[1] + "e")) && !PP(w);
   }
 
   var AUX_PRES = { ho: 1, hai: 1, ha: 1, abbiamo: 1, avete: 1, hanno: 1, sono: 1, sei: 1, "è": 1, siamo: 1, siete: 1 };
@@ -524,10 +525,36 @@
     return null;
   }
 
+  /* Words cited, not used: inside a short quote (up to six words: «pisar la
+     pelota», “hacer una vaca”) or right after a word that names them («la
+     parola *slogan*», «a palavra *propina*»).  The text talks about them, so
+     they are not the learner's mistakes. */
+  function citedOut(src, tk, out, NAMES) {
+    var spans = [], re = /“([^”\n]*)”|«([^»\n]*)»|"([^"\n]*)"/g, m;
+    while ((m = re.exec(src))) {
+      var inner = m[1] != null ? m[1] : m[2] != null ? m[2] : m[3];
+      if (inner.split(/\s+/).filter(Boolean).length <= 6) spans.push([m.index, m.index + m[0].length]);
+    }
+    return out.filter(function (f) {
+      var t = tk[f.i];
+      if (!t || t.at == null) return true;
+      if (spans.some(function (s) { return t.at >= s[0] && t.at < s[1]; })) return false;
+      for (var k = f.i - 1; k >= 0 && k >= f.i - 1; k--) if (tk[k].w && NAMES.test(tk[k].w)) return false;
+      return true;
+    });
+  }
+
   function lint(text, week) {
     week = week || 52;
     var tk = toks(text), out = [];
     var isIo = speakerIo(tk), personFlag = {};
+    // A text that talks to someone (tu, ti, tuo…; Lei, La, Sua… with a capital
+    // in mid-sentence; Caro / Gentile at the start): a second person there is
+    // the addressee, not a slip for io.
+    var addressed = tk.some(function (t, k) {
+      return t.w && (/^(tu|ti|te|tuo|tua|tuoi|tue|vi|voi|vostro|vostra)$/.test(t.w) ||
+        (t.cap && !t.start && /^(lei|la|le|sua|suo|sue|suoi)$/.test(t.w)) || (k < 3 && /^(caro|cara|cari|care|gentile|egregio|egregia)$/.test(t.w)));
+    });
     var push = function (i, n, cat, msg, soft) { out.push({ i: i, n: n || 1, cat: cat, msg: msg, soft: !!soft }); };
     var it = function (s) { return "*" + s + "*"; };
     var wi = function (k, dir) { for (var x = k + dir; x >= 0 && x < tk.length; x += dir) if (tk[x].w) return x; return -1; };
@@ -716,6 +743,9 @@
         var objCl = /^(mi|ti|ci|vi|gli|le|lo|la|li|ne)$/.test(p) && (AVE_PRES[w] || !REFLEXIVE_L.test(ind.length ? ind[0].lemma : "") || ind.some(function (v) { return v.p === 5; }));
         var alone = (tk[i + 1] && tk[i + 1].p && t.start) || isNoun(w) || (t.start && IMPV_WORDS.test(w)) || p === "si";
         if (t.dlg) alone = true;
+        // «Pensi che…», «Senti, …», «Vedrai che…»: speaking to someone
+        if (ind.some(function (v) { return v.p === 1; }) && (addressed || (tk[i - 1] && tk[i - 1].p === "," && tk[i + 1] && tk[i + 1].p) ||
+            (t.start && (n === "che" || (tk[i + 1] && tk[i + 1].p) || U.ARTICLES[n] || (U.prepInfo && U.prepInfo(n)))))) alone = true;
         if (ind.length && ind.every(function (v) { return v.p === 5; }) && !(NUMS.test(n) || /^\d+$/.test(n) || (DATA.adj[n] && !isNoun(n)) || /^(chiamare|chiamarsi)$/.test(ind[0].lemma))) alone = true;
         if (ESS_ALL[w] && /^(anni|mesi|giorni|ore|settimane|secoli|tempo)$/.test(n)) alone = true;
         if (clauseStart && !subjBefore && !objCl && !alone && ind.length && !ind.some(function (v) { return v.p === 0 || v.p === 2; }) &&
@@ -775,6 +805,7 @@
       }
     });
     lint2(tk, week, out, isIo);
+    out = citedOut(String(text || "").replace(/[’‘`´]/g, "'"), tk, out, /^(parola|parole|termine|termini|verbo|verbi|espressione|aggettivo|sostantivo|forma|voce)$/);
     return out.sort(function (a, b) { return a.i - b.i; });
   }
 
@@ -940,7 +971,7 @@
                 avendo: "essendo" };
   // Common gender: the article tells the sex (il / la collega), and so do
   // all the nouns in -ista (il / la regista, il / la farmacista).
-  var COMMON_G = /^([a-z]+ist[ai]|nipoti|collega|colleghi|colleghe|cantante|cantanti|insegnante|insegnanti|giornalista|giornalisti|giornaliste|turista|turisti|turiste|artista|artisti|artiste|pianista|dentista|cliente|clienti|parente|parenti|abitante|abitanti|paziente|pazienti|agente|agenti|musicista|musicisti|atleta|atleti|atlete|interprete|interpreti|custode|preside|giovane|giovani|utente|utenti|docente|docenti)$/;
+  var COMMON_G = /^([a-z]+ist[ai]|ospite|ospiti|consorte|erede|coniuge|nipoti|collega|colleghi|colleghe|cantante|cantanti|insegnante|insegnanti|giornalista|giornalisti|giornaliste|turista|turisti|turiste|artista|artisti|artiste|pianista|dentista|cliente|clienti|parente|parenti|abitante|abitanti|paziente|pazienti|agente|agenti|musicista|musicisti|atleta|atleti|atlete|interprete|interpreti|custode|preside|giovane|giovani|utente|utenti|docente|docenti)$/;
   var TIME_N = /^(sera|mattina|pomeriggio|notte|giorno|giorni|anno|anni|mese|mesi|settimana|settimane|domenica|lunedì|martedì|mercoledì|giovedì|venerdì|sabato|estate|inverno|primavera|autunno|volta|volte|fine|weekend|mattino|ora|ore|momento|tempo|secolo|periodo|scorso|prossimo|giornata|serata|stagione|vacanze|dopo)$/;
   var AV_PERSON = { avevo: "0", avevi: "1", aveva: "2", avevamo: "3", avevate: "4", avevano: "5", "avrò": "0", avrai: "1", "avrà": "2",
                     avremo: "3", avrete: "4", avranno: "5", avrei: "0", avresti: "1", avrebbe: "2", avremmo: "3", avreste: "4", avrebbero: "5",
@@ -1026,7 +1057,7 @@
       if (w === "dentro" && /^(di|de)$/.test(n) && (NUMW.test(n2) || /^(un|una|qualche|pochi|poche)$/.test(n2)))
         push(i, 2, "parola_spagnola", "«Dentro de» + tiempo es " + it("fra") + " o " + it("tra") + ": " + it("fra " + n2 + "…") + ".");
       if (n === "la" && n2 === "compra" && hasLem(w, /^fare$/)) push(i + 1, 2, "parola_spagnola", "«Hacer las compras» es " + it("fare la spesa") + ".");
-      if (/^(molti|tanti|alcuni|pochi)$/.test(w) && n === "tempi") push(i, 2, "lessico", "«Muchas veces» es " + it("molte volte") + " (" + it("tempo") + " es el tiempo).");
+      if (/^(molti|tanti|alcuni|pochi)$/.test(w) && n === "tempi" && !/^(morti|supplementari|moderni|antichi|lunghi|brevi|verbali)$/.test(n2)) push(i, 2, "lessico", "«Muchas veces» es " + it("molte volte") + " (" + it("tempo") + " es el tiempo).");
       if (w === "media" && /^(ora|dozzina|bottiglia|porzione|chilo|litro|pizza|giornata|pagina|mela)$/.test(n))
         push(i, 1, "parola_spagnola", "«Media» + sustantivo es " + it(n === "ora" ? "mezz'ora" : "mezza " + n) + ".");
       if (w === "media" && p === "e" && HOURW.test(p2)) push(i, 1, "parola_spagnola", "En la hora, «y media» es " + it("e mezza") + ".");
@@ -1052,11 +1083,13 @@
       if (/^(me|te)$/.test(w) && finite(n) && !CLITIC.test(n) && !PREPS.test(p) && !/^(e|o|che)$/.test(p) && !isNoun(n))
         push(i, 1, "parola_spagnola", "Delante del verbo: " + it((w === "me" ? "mi " : "ti ") + n) + ".");
       if (w === "se" && finite(n) && !isNoun(n) && !CLITIC.test(n) && (p === "non" || (tk[i - 1] && tk[i - 1].w && (isNoun(p) || /^(lui|lei|loro)$/.test(p) || (tk[i - 1].cap && !tk[i - 1].start)))) &&
-          V(n).some(function (v) { return v.p === 2 || v.p === 5; })) push(i, 1, "parola_spagnola", "El reflexivo es " + it("si " + n) + " (" + it("se") + " es «si» condicional).");
+          V(n).some(function (v) { return v.p === 2 || v.p === 5; }) &&
+          !V(n).every(function (v) { return /congiuntivo|congImperfetto/.test(v.tense); })) push(i, 1, "parola_spagnola", "El reflexivo es " + it("si " + n) + " (" + it("se") + " es «si» condicional).");
       if (w === "lo" && n === "che") push(i, 2, "parola_spagnola", "«Lo que» es " + it("quello che") + " o " + it("ciò che") + ".");
       if (w === "lo" && p !== "per" && /^(peggio|meglio|migliore|peggiore|importante|bello|brutto|strano|difficile|facile|mejor|peor|più)$/.test(n) && !V(n).length)
         push(i, 2, "parola_spagnola", "El «lo» neutro no existe: " + it("la cosa " + (n === "peggio" ? "peggiore" : n === "meglio" ? "migliore" : n)) + " o " + it("il " + n) + ".");
-      if (/^(mi|tu)$/.test(w) && isNoun(n) && !V(n).length && !DATA.adj[n] && !NUMS.test(n) && !/^(cosa|stesso|stessa|solo|sola)$/.test(n)) {
+      if (/^(mi|tu)$/.test(w) && isNoun(n) && !V(n).length && !DATA.adj[n] && !NUMS.test(n) && !/^(cosa|stesso|stessa|solo|sola)$/.test(n) &&
+          !(n === "resi" && n2 === "conto")) {   // mi resi conto: rendersi conto, in the passato remoto
         var gnN = nounGN(n), pk0 = POSS_FORMS[w === "mi" ? "mi" : "tu"];
         push(i, 1, "possessivo", "El posesivo es " + it((gnN ? pk0[GN_IX[gnN.g + (gnN.n || "s")]] : pk0[0] + "/" + pk0[1]) + " " + n) + ".");
       }
@@ -1131,7 +1164,8 @@
         var pronLike = /^(lo|la|gli)$/.test(w) && (isVerb(n) || isInf(n) || AVE_PRES[n]);
         if (U.ARTICLES[w] && !pronLike && !(w === "gli" && !isNoun(n) && !DATA.adj[n] && known(n)) && !(w === "uno" && !isNoun(n) && !DATA.adj[n]) &&
             !(/^(uno|una)$/.test(w) && /^(di|d'|dei|degli|delle|del|dello|della|tra|fra|dai|dagli|dalle|che)$/.test(n)) &&   // uno dei, una delle: a pronoun
-            !(w === "una" && !isNoun(n) && !DATA.adj[n] && known(n)) && !(w === "lo" && !isNoun(n) && !DATA.adj[n]) && !NUMS.test(n)) {
+            !(w === "una" && !isNoun(n) && !DATA.adj[n] && known(n)) && !(w === "lo" && !isNoun(n) && !DATA.adj[n]) && !NUMS.test(n) &&
+            !(/^(la|le|li|lo)$/.test(w) && (finite(n) || /(rei|resti|rebbe|remmo|reste|rebbero|ava|avano|eva|evano|iva|ivano)$/.test(n)) && !isNoun(n)) && !(w === "uno" && isPart(n) && /^(su|di|da|in|con|per|a)$/.test(n2))) {   // la escluderei, uno fatto su…
           var fa = sndArt(w, n, fem1);
           if (fa && fa !== w) push(i, 2, "articolo", "Por el sonido de " + it(n) + " va " + it(fa + (fa.slice(-1) === "'" ? "" : " ") + tk[i + 1].o) + ".");
         }
@@ -1145,7 +1179,7 @@
           if (qf && qf !== w) push(i, 2, "articolo", "Delante del sustantivo: " + it(qf + (qf.slice(-1) === "'" ? "" : " ") + n) + ".");
         }
       }
-      if (/^(lo|la)$/.test(w) && /^(ho|hai|ha)$/.test(n)) push(i, 2, "ortografia", "Delante de " + it(n) + " se apostrofa: " + it("l'" + n) + ".");
+      if (/^(lo|la)$/.test(w) && /^(ho|hai|ha)$/.test(n)) push(i, 2, "ortografia", "Delante de " + it(n) + " se suele apostrofar: " + it("l'" + n) + ".", true);
       if (/^(la|lo)$/.test(w) && n === "è" && /^(me|te|se|ce|ve)$/.test(p) && partStrict(n2)) push(i, 2, "ortografia", "Se apostrofa: " + it(p + " l'è " + n2) + ".");
       if (w === "glie" && /^(lo|la|li|le|ne)$/.test(n)) push(i, 2, "ortografia", "Va todo junto: " + it("glie" + n) + ".");
 
@@ -1241,7 +1275,8 @@
       }
       if (w === "si" && tk[i + 1] && tk[i + 1].w) {
         var sr = V(n).filter(function (v) { return v.p === 2; });
-        if (sr.length && (NUMW.test(n2) || /^(molti|molte|tanti|tante|alcuni|alcune|diversi|diverse|parecchi|parecchie)$/.test(n2))) {
+        if (sr.length && (NUMW.test(n2) || /^(molti|molte|tanti|tante|alcuni|alcune|diversi|diverse|parecchi|parecchie)$/.test(n2)) &&
+            !(TIME_N.test(W(i + 3)) || /^(volte|minuti|secondi|chilometri|metri|giorni|anni|ore|mesi|settimane)$/.test(W(i + 3)))) {
           var sf = conjSafe(sr[0].lemma, sr[0].tense);
           if (sf) push(i + 1, 1, "persona_verbale", "Con un objeto plural, el verbo va en plural: " + it("si " + sf[5]) + ".");
         }
@@ -1366,7 +1401,7 @@
             var ak2 = i + 1;
             while (tk[ak2] && tk[ak2].w && /^(molto|più|meno|così|tanto|troppo|davvero|proprio|sempre|già|ancora|abbastanza|stato|stata|stati|state)$/.test(tk[ak2].w)) ak2++;
             var aw3 = W(ak2), gn3 = gS.g + (gS.n || (/^(sono|siamo|siete|erano|saranno|sarebbero|siano|fossero)$/.test(w) ? "p" : "s"));
-            if (aw3 && !isNoun(aw3) && !V(aw3).length && !POSS[aw3] && !/^(lontano|vicino|meglio|peggio|bene|male|presto|tardi|solo|piano|forte|giusto|pari|uguale)$/.test(aw3)) {
+            if (aw3 && !isNoun(aw3) && !V(aw3).length && !POSS[aw3] && !isNoun(W(ak2 + 1)) && !/^(lontano|vicino|meglio|peggio|bene|male|presto|tardi|solo|piano|forte|giusto|pari|uguale)$/.test(aw3)) {
               var lem3 = DATA.adj[aw3], want3 = lem3 ? adjForm(lem3, gn3) : null;
               if (!lem3 && partStrict(aw3) && /^(.+)[oaie]$/.test(aw3) && /^(sono|è|era|erano|sarà|saranno|sia|siano|fosse|fossero|stato|stata)$/.test(w)) want3 = aw3.slice(0, -1) + { ms: "o", fs: "a", mp: "i", fp: "e" }[gn3];
               if (lem3 && /issim[oaie]$/.test(aw3)) want3 = aw3.slice(0, -1) + { ms: "o", fs: "a", mp: "i", fp: "e" }[gn3];

@@ -508,10 +508,21 @@
     });
   }
 
+  // Every word the tramo shows beyond its readings (the listenings and the
+  // model texts): the checker's lexicon learns them too.
+  function lexTexts() {
+    var out = [];
+    (D().SETTIMANE || []).forEach(function (s) {
+      s.ascolto.turns.forEach(function (t) { out.push(t[1]); });
+      out.push(s.compito.model);
+    });
+    return out;
+  }
+
   function attach(host) { H = host; }
 
   var api = { attach: attach, missions: missions, handles: handles, owns: owns, go: go, open: open, render: render, wire: wire,
-              leggiHtml: leggiHtml, episodes: episodes, evaluate: evaluate, variety: variety, connectors: connectors,
+              leggiHtml: leggiHtml, episodes: episodes, lexTexts: lexTexts, evaluate: evaluate, variety: variety, connectors: connectors,
               week: week, weeks: weeks, words: words, copied: copied, readAI: readAI, stop: stop, busy: function () { return !!cur; } };
   if (typeof module === "object" && module.exports) module.exports = api;
   root.Tramo = api;
