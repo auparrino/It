@@ -10,6 +10,8 @@
  *   Devolucion.near(given, accept, d)  «Casi» de verdad: distancia chica o un
  *                                      error de regla identificado
  *   Devolucion.maskNote(note, answers, stem)   la nota con la respuesta tapada
+ *   Devolucion.retryNote(item)         la nota de la segunda vez, tapada, o
+ *                                      nada si igual delata la respuesta
  *   Devolucion.choicePrompt(prompt)    «Escribí…» → «Elegí…» para botones
  *   Devolucion.plain(text, week)       los nombres de tiempos y modos que
  *                                      todavía no se enseñaron, en criollo
@@ -130,7 +132,10 @@
     return ruleFound(d);
   }
 
+  // An answer in Spanish is never «Casi», however few letters it changes
+  // («Vení acá un momento» for «Vieni qui un momento»).
   function promptVerdict(given, accept, d) {
+    if (d && d.inSpanish) return "🔎 Todavía no:";
     return near(given, accept, d) ? "🔎 Casi. Revisalo:" : "🔎 Todavía no. Revisá esto:";
   }
 
@@ -180,6 +185,44 @@
         if (w.length >= 3 && shown.indexOf(words(w)[0]) < 0) out = maskOne(out, w);
       });
     });
+    return out;
+  }
+
+  // The word (accent or not) is in the text, as a word of its own.
+  function hasWord(text, w) {
+    var pre = String(w).length >= 3 ? "(^|[^\\p{L}\\p{N}])" : "(^|[^\\p{L}\\p{N}'’])";
+    return new RegExp(pre + "(" + foldRe(w) + ")(?=$|[^\\p{L}\\p{N}])", "iu").test(String(text || ""));
+  }
+  /* The note of the second time («🔁 Segunda vez, más fácil»), or nothing.
+     With the answer covered, the note may still give it away:
+       - by elimination: the conjugation table lists the other option
+         («piacerei, piaceresti, piacerebbe, ___, …» with «piaceremmo |
+         piacerebbero» below), or its hole is the answer;
+       - by showing what had to be heard: a listening item whose note
+         spells the sentence.
+     Then the item comes with its two options alone: the spacing already
+     makes it easier, and retrieving is what fixes it (Bjork 1994). */
+  function retryNote(it) {
+    if (!it || !it.note) return "";
+    var answers = [it.answer].concat(it.accept || []);
+    var heard = it.say || (it.frase && (it.type === "listen" || it.type === "dictation") ? it.frase.it : "");
+    if (heard) answers.push(heard);
+    var out = maskNote(it.note, answers, heard ? "" : it.stem);
+    var right = {};
+    answers.forEach(function (a) { right[words(a).join(" ")] = 1; });
+    // the table of forms with a hole in it: the hole is the answer
+    if (/(^|[:,;]\s*)___\s*([,;.]|$)/.test(out) && (out.match(/,/g) || []).length >= 3) return "";
+    // what the note writes in the language (*…*) or quotes («…»)
+    var lang = (out.match(/\*[^*]*\*|«[^»]*»/g) || []).join(" ");
+    var leak = (it.options || []).some(function (o) {
+      o = String(o).trim().replace(/^[¿¡"«(]+|[.,;:!?…"»)]+$/g, "");
+      if (!o || right[words(o).join(" ")]) return false;
+      // a short option («il», «a») only where the note writes the language
+      return hasWord(o.length >= 3 ? out : lang, o);
+    });
+    if (leak) return "";
+    // nothing left but the blanks
+    if (!/\p{L}{3,}/u.test(out.replace(/___/g, ""))) return "";
     return out;
   }
 
@@ -262,7 +305,7 @@
 
   var api = {
     far: far, near: near, target: target, promptVerdict: promptVerdict, farHtml: farHtml,
-    maskNote: maskNote, choicePrompt: choicePrompt,
+    maskNote: maskNote, retryNote: retryNote, choicePrompt: choicePrompt,
     plain: plain, tense: tense, tidy: tidy, weekFrom: weekFrom, weekNow: weekNow,
     _words: words, _lev: lev,
     _reset: function () { COMPILED = null; }

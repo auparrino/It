@@ -100,6 +100,58 @@ const NAMES = { it: { today: "Oggi", me: "Io", other: "pt" }, pt: { today: "Hoje
     note(code + " · pausa jugada");
     if (await page.$("#quit")) { await page.click("#quit"); await page.waitForTimeout(300); }
 
+    // The correction: a wrong option and a wrong typed answer (the bank's
+    // translations, week 15).  A wrong option is never «Casi»; the sheet
+    // says the right form before the why, is read aloud (aria-live) and
+    // leaves the focus on «Siguiente»; a sentence in Spanish is not «Casi»;
+    // «Tus errores» keeps the why of each error.
+    await page.evaluate(() => { const s = window.__test.state(); s.unlocked = Math.max(s.unlocked || 1, 15); window.__test.fast = true; window.__test.start("b-tr", null, 15); });
+    await page.waitForTimeout(400);
+    let sawChoice = false, sawTyped = false;
+    for (let i = 0; i < 12 && !(sawChoice && sawTyped); i++) {
+      const it = await page.evaluate(() => { const x = window.__test.item(); return x && JSON.parse(JSON.stringify(x)); });
+      if (!it) break;
+      if (!sawChoice && await page.$("[data-opt]")) {
+        const opts = await page.$$eval("[data-opt]", els => els.map(e => e.textContent));
+        const k = opts.findIndex(o => o.trim().toLowerCase() !== String(it.answer).trim().toLowerCase());
+        await page.click("[data-opt] >> nth=" + k);
+        await page.waitForSelector("#fb .feedback");
+        const fb = await page.evaluate(() => {
+          const box = document.querySelector("#fb .feedback"), all = Array.from(box.querySelectorAll(".sol, .diag, .diff"));
+          return { cls: box.className, live: document.querySelector("#fb").getAttribute("aria-live"),
+                   focus: document.activeElement && document.activeElement.id,
+                   solFirst: all.length > 0 && all[0].classList.contains("sol") };
+        });
+        if (/quasi/.test(fb.cls)) errors.push(code + ": una opción equivocada salió «Casi» (" + opts[k] + ")");
+        if (fb.live !== "polite") errors.push(code + ": la devolución sin aria-live");
+        if (fb.focus !== "next") errors.push(code + ": el foco después de responder está en «" + fb.focus + "», no en «Siguiente»");
+        if (!fb.solFirst) errors.push(code + ": la devolución no empieza por la forma correcta");
+        await snap(page, P("correccion-opcion"));
+        note(code + " · corrección de una opción: " + fb.cls);
+        sawChoice = true;
+      } else if (!sawTyped && await page.$("#ans") && it.type === "translate") {
+        await page.fill("#ans", it.stem); await page.click("#send");
+        await page.waitForSelector("#fb .feedback");
+        const v = await page.textContent("#fb .verdict");
+        if (/Casi/.test(v)) errors.push(code + ": una respuesta en español salió «" + v.trim() + "»");
+        await snap(page, P("correccion-prompt"));
+        note(code + " · respuesta en español: " + v.trim());
+        if (await page.$("#giveup")) await page.click("#giveup");
+        sawTyped = true;
+      } else if (await page.$("[data-opt]")) await page.click("[data-opt] >> nth=0");
+      else if (await page.$("#ans")) { await page.fill("#ans", it.answer.replace(/\s*\|\s*/g, " ")); await page.click("#send"); }
+      else if (await page.$("#wans")) { await page.fill("#wans", it.answer); await page.click("#wsend"); }
+      await page.waitForTimeout(300);
+      if (await page.$("#next")) { await page.click("#next"); await page.waitForTimeout(300); }
+    }
+    if (!sawChoice) note(code + " · (sin opción equivocada que probar en la ronda)");
+    if (await page.$("#quit")) { await page.click("#quit"); await page.waitForTimeout(300); }
+    await page.click("[data-tab='io']");
+    await page.waitForSelector("#retention");
+    const elog = await page.$$eval("ul.errlog li", els => els.map(e => e.textContent.replace(/\s+/g, " ").trim()));
+    if (!elog.length) errors.push(code + ": «Tus errores» sin la lista de los últimos");
+    note(code + " · últimos errores: " + elog.slice(0, 2).join(" / "));
+
     // Allena / Treino → Suoni / Sons
     await page.click("[data-tab='frasi']");
     await page.waitForSelector(".labs");

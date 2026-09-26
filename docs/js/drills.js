@@ -397,6 +397,11 @@
     //    group against letter groups, never «ho» against «sc»), same topic
     //    when there is one, and the sentences that share most words first
     //    («O Rafa está com calor» against «A Bia está com sede», not «A cidade é linda»).
+    // What came before is the answer itself with a mistake (a trap, another
+    // person of the verb, another ending): the feedback can say what is
+    // wrong in it.  What comes next is another answer of the week, where
+    // there is no rule to name (app.js, answer).
+    var ownOpts = opts.length;
     if (opts.length < 2 && pool) {
       var len = answer.length, short = len <= 4 && answer.indexOf(" ") < 0;
       var words = function (x) { return norm(x).split(" "); };
@@ -428,6 +433,7 @@
     copy.recog = true;
     copy.orig = it.type;
     copy.options = shuffle(opts.slice(0, 3).concat([answer]));
+    copy.otherAnswers = opts.slice(ownOpts, 3);
     copy.prompt = it.type === "translate" ? (TX.translateQ || it.prompt) : it.prompt;
     // Buttons, not a box: the prompt says choose («Escribí…» → «Elegí…»).
     if (root.Devolucion) copy.prompt = root.Devolucion.choicePrompt(copy.prompt);
