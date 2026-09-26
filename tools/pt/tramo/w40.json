@@ -34,7 +34,7 @@
       ["Qual é o objetivo da pesquisa?", ["Avaliar a qualidade dos cursos de graduação da região.", "Identificar fatores ligados ao abandono no primeiro ano.", "Comparar a evasão entre universidades públicas e privadas.", "Medir o impacto dos auxílios financeiros nas notas."], "Identificar fatores ligados ao abandono no primeiro ano."],
       ["Por que os pesquisadores optaram por uma abordagem mista?", ["Porque os números mostram padrões, mas não os explicam.", "Porque não conseguiram acesso aos registros acadêmicos completos.", "Porque as entrevistas eram mais baratas que as estatísticas.", "Porque o ministério exigia dois tipos de dados."], "Porque os números mostram padrões, mas não os explicam."],
       ["Segundo o relatório, qual obstáculo costuma ser subestimado pelas instituições?", ["O custo do transporte até a universidade.", "A adaptação às exigências da cultura acadêmica.", "A falta de vagas nas disciplinas introdutórias oferecidas no primeiro semestre.", "O excesso de atividades extracurriculares."], "A adaptação às exigências da cultura acadêmica."],
-      ["A possível existência de «viés» refere-se ao fato de que:", ["os pesquisadores conheciam pessoalmente os entrevistados.", "quem aceitou a entrevista talvez tivesse uma visão menos crítica da universidade.", "os registros acadêmicos continham erros de digitação.", "a amostra incluía apenas estudantes de cálculo."], "quem aceitou a entrevista talvez tivesse uma visão menos crítica da universidade."],
+      ["A possível existência de “viés” refere-se ao fato de que:", ["os pesquisadores conheciam pessoalmente os entrevistados.", "quem aceitou a entrevista talvez tivesse uma visão menos crítica da universidade.", "os registros acadêmicos continham erros de digitação.", "a amostra incluía apenas estudantes de cálculo."], "quem aceitou a entrevista talvez tivesse uma visão menos crítica da universidade."],
       ["Qual recomendação responde mais diretamente ao isolamento dos calouros?", ["A ampliação dos auxílios estudantis.", "A reformulação das disciplinas de cálculo.", "O acolhimento com veteranos como mentores.", "O acompanhamento da frequência às aulas e do desempenho nas primeiras provas."], "O acolhimento com veteranos como mentores."]
     ],
     "vf": [
@@ -82,13 +82,13 @@
       "relativiza": "matiza",
       "destaque": "relieve",
       "prazo": "plazo",
-      "banca": "tribunal (de tesis)",
+      "banca": "jurado (de tesis)",
       "revê": "revisá",
       "desanima": "te desanimes"
     },
     "questions": [
       ["Qual é o principal problema do capítulo, segundo a orientadora?", ["O registro, muito próximo da fala.", "A falta de dados sobre as escolas.", "O excesso de citações de outros autores.", "A escolha do tema da pesquisa."], "O registro, muito próximo da fala."],
-      ["Por que a orientadora sugere «as visitas às escolas revelaram…»?", ["Para deixar o texto mais curto e mais fácil de ler.", "Para deslocar o foco do pesquisador para o fenômeno.", "Para evitar repetir o nome das escolas visitadas.", "Para mostrar que as visitas foram feitas por outra equipe."], "Para deslocar o foco do pesquisador para o fenômeno."],
+      ["Por que a orientadora sugere “as visitas às escolas revelaram…”?", ["Para deixar o texto mais curto e mais fácil de ler.", "Para deslocar o foco do pesquisador para o fenômeno.", "Para evitar repetir o nome das escolas visitadas.", "Para mostrar que as visitas foram feitas por outra equipe."], "Para deslocar o foco do pesquisador para o fenômeno."],
       ["Além do problema gramatical, o que ela aponta na frase sobre os professores?", ["A frase é longa demais para um texto acadêmico.", "A causa aparece como certeza, e não como hipótese.", "Os professores entrevistados não autorizaram a citação.", "O dado contradiz o que Vítor escreveu na introdução."], "A causa aparece como certeza, e não como hipótese."],
       ["Qual é o conselho sobre o uso da nominalização?", ["Usá-la em todas as frases para garantir a formalidade.", "Evitá-la, porque torna o texto pesado.", "Equilibrá-la, mantendo verbos quando o sujeito importa.", "Reservá-la apenas para a conclusão do capítulo."], "Equilibrá-la, mantendo verbos quando o sujeito importa."],
       ["O que a orientadora pede para daqui a duas semanas?", ["A lista de referências completa, separada do capítulo.", "Uma versão revisada, para a banca ler com calma.", "A data da defesa marcada com a secretaria do programa.", "Novas entrevistas com os professores das escolas."], "Uma versão revisada, para a banca ler com calma."]

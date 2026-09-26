@@ -32,6 +32,7 @@
       "rumore": "ruido",
       "appiattirle": "aplanarlas",
       "camino": "chimenea, hogar",
+      "confidenza": "familiaridad, trato de confianza",
       "focolare": "fuego del hogar",
       "accomuna": "tienen en común",
       "postilla": "acotación",
@@ -113,20 +114,7 @@
     ],
     "hunt": {
       "label": "Tocá los falsos amigos del castellano (parecen palabras nuestras, pero significan otra cosa)",
-      "targets": [
-        "burro",
-        "salire",
-        "subire",
-        "imbarazzata",
-        "fermare",
-        "camera",
-        "guardare",
-        "esito",
-        "sale",
-        "largo",
-        "rumore",
-        "camino"
-      ]
+      "targets": ["burro", "salire", "subire", "imbarazzata", "fermare", "camera", "guardare", "esito", "sale", "largo", "rumore", "camino", "confidenza"]
     }
   },
   "ascolto": {

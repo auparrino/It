@@ -3384,7 +3384,7 @@
     "emoji": "🗳️",
     "genre": "racconto",
     "grammar": "passato remoto e trapassato remoto",
-    "text": "Mia nonna Teresa raccontava questa storia soltanto a Natale, e sempre nello stesso modo, come se la leggesse da un libro. Io la sentii per la prima volta a nove anni e non la capii; la capii davvero molto più tardi, quando lei non c'era più.\n\nLa mattina del 2 giugno 1946 Teresa si alzò prima dell'alba. Aveva ventitré anni, un marito tornato da poco dalla prigionia e una bambina di otto mesi che dormiva nella cesta accanto al letto. Si lavò il viso con l'acqua gelata del catino, si pettinò con cura e indossò l'unico vestito buono che possedeva, quello blu che le aveva cucito la madre per il matrimonio. Quando ebbe finito di prepararsi, si guardò a lungo nello specchio incrinato della cucina. Non le sembrò di essere una persona importante. Eppure quel giorno lo Stato le chiedeva un'opinione sul futuro del Paese.\n\nIl seggio era stato allestito nella scuola elementare, in fondo al paese. Teresa ci andò a piedi insieme alla cognata, Rosa, che era più anziana di lei e aveva paura di sbagliare. Per tutta la strada Rosa ripeté le istruzioni che il parroco aveva dato dal pulpito la domenica precedente, e che lei aveva imparato a memoria senza capirle del tutto. Teresa non disse niente. Aveva già deciso, ma non lo aveva detto a nessuno, nemmeno al marito.\n\nDavanti alla scuola c'era una fila lunghissima. Le donne erano tante, più di quante Teresa si aspettasse: contadine con le scarpe della festa, maestre, vedove vestite di nero, ragazze che ridevano per nascondere l'emozione. Qualcuna aveva portato i figli, qualcun'altra teneva in mano un santino. Teresa riconobbe la moglie del fornaio, che durante la guerra aveva perso un figlio, e la salutò con un cenno. La donna le prese la mano e la tenne stretta per qualche secondo, senza dire una parola. Un uomo, passando, fece una battuta sulle donne che adesso volevano comandare; nessuna gli rispose, e dopo un po' se ne andò.\n\nQuando finalmente toccò a lei, Teresa entrò nella cabina e tirò la tenda. Rimase lì dentro più del necessario. Più tardi raccontò che le tremavano le mani, e che per un attimo aveva temuto di non ricordare più come si scriveva. Poi prese la matita, fece il suo segno e piegò la scheda con attenzione, come si piega una lettera d'amore. Appena fu uscita dalla cabina, la consegnò al presidente del seggio, un vecchio maestro che le sorrise e le disse soltanto: «Brava».\n\nTornarono a casa nel primo pomeriggio. Rosa era stanca e di cattivo umore, perché era convinta di aver sbagliato qualcosa. Teresa, invece, si sentiva leggera. Allattò la bambina, preparò la cena e non parlò del voto per tutta la sera. Soltanto quando il marito le chiese, un po' per scherzo, per chi avesse votato, lei rispose che era una cosa sua.\n\nQualche giorno dopo, quando furono annunciati i risultati, in paese ci fu chi festeggiò e chi pianse. L'Italia era diventata una repubblica. Teresa non seppe mai con certezza quanto avesse contato il suo voto, e non le importava. «Non era per il risultato», mi disse l'ultimo Natale che passammo insieme. «Era che per la prima volta qualcuno aveva aspettato anche me.»\n\nDopo che se ne fu andata, trovammo nel suo cassetto il certificato elettorale di quel giorno, piegato in quattro dentro un libro di preghiere. Lo conservo ancora. Non so per chi votò mia nonna nel 1946. So soltanto che quella mattina si mise il vestito più bello che aveva.",
+    "text": "Mia nonna Teresa raccontava questa storia soltanto a Natale, e sempre nello stesso modo, come se la leggesse da un libro. Io la sentii per la prima volta a nove anni e non la capii; la capii davvero molto più tardi, quando lei non c'era più.\n\nLa mattina del 2 giugno 1946 Teresa si alzò prima dell'alba. Aveva ventitré anni, un marito tornato dalla prigionia l'estate prima e una bambina di poche settimane che dormiva nella cesta accanto al letto. Si lavò il viso con l'acqua gelata del catino, si pettinò con cura e indossò l'unico vestito buono che possedeva, quello blu che le aveva cucito la madre per il matrimonio. Quando ebbe finito di prepararsi, si guardò a lungo nello specchio incrinato della cucina. Non le sembrò di essere una persona importante. Eppure quel giorno lo Stato le chiedeva un'opinione sul futuro del Paese.\n\nIl seggio era stato allestito nella scuola elementare, in fondo al paese. Teresa ci andò a piedi insieme alla cognata, Rosa, che era più anziana di lei e aveva paura di sbagliare. Per tutta la strada Rosa ripeté le istruzioni che il parroco aveva dato dal pulpito la domenica precedente, e che lei aveva imparato a memoria senza capirle del tutto. Teresa non disse niente. Aveva già deciso, ma non lo aveva detto a nessuno, nemmeno al marito.\n\nDavanti alla scuola c'era una fila lunghissima. Le donne erano tante, più di quante Teresa si aspettasse: contadine con le scarpe della festa, maestre, vedove vestite di nero, ragazze che ridevano per nascondere l'emozione. Qualcuna aveva portato i figli, qualcun'altra teneva in mano un santino. Teresa riconobbe la moglie del fornaio, che durante la guerra aveva perso un figlio, e la salutò con un cenno. La donna le prese la mano e la tenne stretta per qualche secondo, senza dire una parola. Un uomo, passando, fece una battuta sulle donne che adesso volevano comandare; nessuna gli rispose, e dopo un po' se ne andò.\n\nQuando finalmente toccò a lei, Teresa entrò nella cabina e tirò la tenda. Rimase lì dentro più del necessario. Più tardi raccontò che le tremavano le mani, e che per un attimo aveva temuto di non ricordare più come si scriveva. Poi prese la matita, fece il suo segno e piegò la scheda con attenzione, come si piega una lettera d'amore. Appena fu uscita dalla cabina, la consegnò al presidente del seggio, un vecchio maestro che le sorrise e le disse soltanto: «Brava».\n\nTornarono a casa nel primo pomeriggio. Rosa era stanca e di cattivo umore, perché era convinta di aver sbagliato qualcosa. Teresa, invece, si sentiva leggera. Allattò la bambina, preparò la cena e non parlò del voto per tutta la sera. Soltanto quando il marito le chiese, un po' per scherzo, per chi avesse votato, lei rispose che era una cosa sua.\n\nQualche giorno dopo, quando furono annunciati i risultati, in paese ci fu chi festeggiò e chi pianse. L'Italia era diventata una repubblica. Teresa non seppe mai con certezza quanto avesse contato il suo voto, e non le importava. «Non era per il risultato», mi disse l'ultimo Natale che passammo insieme. «Era che per la prima volta qualcuno aveva aspettato anche me.»\n\nDopo che se ne fu andata, trovammo nel suo cassetto il certificato elettorale di quel giorno, piegato in quattro dentro un libro di preghiere. Lo conservo ancora. Non so per chi votò mia nonna nel 1946. So soltanto che quella mattina si mise il vestito più bello che aveva.",
     "gloss": {
      "alba": "amanecer",
      "prigionia": "cautiverio (como prisionero de guerra)",
@@ -3490,20 +3490,48 @@
      ]
     ],
     "hunt": {
-     "label": "Tocá los verbos en passato remoto y el auxiliar del trapassato remoto",
+     "label": "Tocá los verbos en passato remoto (también el auxiliar del trapassato remoto)",
      "targets": [
+      "sentii",
+      "capii",
       "alzò",
+      "lavò",
+      "pettinò",
       "indossò",
-      "ripeté",
-      "fece",
-      "tirò",
-      "prese",
-      "piegò",
-      "allattò",
-      "seppe",
-      "votò",
       "ebbe",
-      "fu"
+      "guardò",
+      "sembrò",
+      "andò",
+      "ripeté",
+      "disse",
+      "riconobbe",
+      "salutò",
+      "prese",
+      "tenne",
+      "fece",
+      "rispose",
+      "toccò",
+      "entrò",
+      "tirò",
+      "rimase",
+      "raccontò",
+      "piegò",
+      "fu",
+      "consegnò",
+      "sorrise",
+      "tornarono",
+      "allattò",
+      "preparò",
+      "parlò",
+      "chiese",
+      "furono",
+      "festeggiò",
+      "pianse",
+      "seppe",
+      "passammo",
+      "trovammo",
+      "votò",
+      "mise"
      ]
     }
    },
@@ -3813,19 +3841,25 @@
      ]
     ],
     "hunt": {
-     "label": "Tocá los verbos que cambian de tiempo o de modo en el discurso indirecto",
+     "label": "Tocá los verbos que cambian de tiempo o de modo en el discurso indirecto (en los tiempos compuestos, el auxiliar)",
      "targets": [
       "fosse",
-      "avrebbero",
+      "aveva",
+      "era",
+      "erano",
       "trattava",
+      "lavoravano",
+      "considerava",
+      "provasse",
+      "capisse",
+      "faceva",
       "esistevano",
       "diffidava",
       "presentava",
       "sarebbe",
-      "direbbe",
       "avesse",
       "avrebbe",
-      "rifarebbe"
+      "avrebbero"
      ]
     }
    },
@@ -4056,7 +4090,7 @@
     "emoji": "🗂️",
     "genre": "rubrica (articolo di costume)",
     "grammar": "il causativo: fare e lasciare + infinito",
-    "text": "Quando ho deciso di trasferirmi a Torino, un amico italiano mi ha dato un solo consiglio: «Fatti dare tutto per iscritto e non lasciarti mai mandare via senza un numero di protocollo». Lì per lì ho riso. Sei mesi dopo, posso dire che è stato il consiglio più prezioso che abbia mai ricevuto.\n\nLa prima tappa è stata il codice fiscale. In teoria è semplice: si va all'ufficio, si compila un modulo, si esce con un foglio. In pratica, l'impiegata mi ha fatto notare che sul passaporto il mio secondo cognome era scritto in modo diverso rispetto al contratto d'affitto, e mi ha fatto tornare il giorno dopo con una dichiarazione firmata dal padrone di casa. Non era cattiveria, anzi: la seconda volta mi ha perfino lasciato passare davanti a tutti, per non farmi rifare la fila.\n\nPoi è arrivata la residenza. Qui ho imparato che in Italia non basta dichiarare dove si abita: bisogna lasciarselo verificare. Qualche settimana dopo la domanda, un vigile è passato a controllare che vivessi davvero all'indirizzo indicato. Nessuno mi aveva detto quando sarebbe venuto, e naturalmente è venuto mentre ero al lavoro. La mia vicina, la signora Gilda, che abita qui da quarant'anni, l'ha fatto entrare nel portone, gli ha fatto vedere il mio nome sulla cassetta delle lettere e, a quanto pare, gli ha anche offerto un caffè. La residenza è arrivata dieci giorni dopo. Non so se sia merito del caffè, ma da allora porto alla signora Gilda le paste ogni domenica.\n\nPoi c'è stata la banca. Per aprire un conto mi hanno fatto firmare diciassette fogli, li ho contati, e me ne hanno lasciati portare a casa soltanto due. Quando ho chiesto di poter leggere il contratto con calma, l'impiegato mi ha guardato come se gli avessi chiesto di farmi vedere la cassaforte. Alla fine me l'ha mandato via mail, con un sorriso un po' offeso, e ho scoperto che conteneva tre commissioni di cui nessuno mi aveva parlato.\n\nIl capitolo più lungo è stato il riconoscimento della laurea. In Argentina ho studiato architettura, e per esercitare in Italia avrei dovuto far tradurre tutti i documenti da un traduttore giurato, farli legalizzare e farli valutare da una commissione. Ho fatto fare le traduzioni a Buenos Aires, dove costavano meno, ma mi hanno fatto sapere che non bastavano: dovevano essere asseverate qui, davanti a un funzionario del tribunale. Ho pagato due volte, e ho imparato la parola asseverazione, che non dimenticherò mai.\n\nNon voglio però raccontare solo una storia di file e di timbri. In questi mesi ho incontrato anche un'Italia che funziona meglio di quanto dicano gli italiani stessi. All'anagrafe un impiegato giovane mi ha lasciato fotografare tutti i moduli, per farmeli controllare a casa con calma. All'azienda sanitaria, dove sono andato a farmi assegnare un medico di base, una signora allo sportello mi ha fatto scegliere tra tre dottori, spiegandomi con pazienza le differenze di orario. E il servizio online per prenotare gli appuntamenti, quando non si blocca, è più rapido di quanto mi aspettassi.\n\nChe cosa ho imparato, allora? Tre cose, che lascio qui per chi arriva dopo di me. Primo: non lasciatevi scoraggiare dalla prima risposta negativa; spesso è la risposta di quel giorno, non quella definitiva. Secondo: fatevi dire sempre il nome della persona con cui parlate e fatevi rilasciare una ricevuta, anche quando vi dicono che non serve. Terzo: fate amicizia con i vicini. In un paese in cui molte pratiche dipendono dalla possibilità che qualcuno vi trovi in casa, una signora Gilda vale più di qualsiasi app.\n\nL'altro giorno è finalmente arrivata la lettera della commissione: la laurea è riconosciuta. L'ho fatta incorniciare e l'ho appesa in soggiorno, accanto alla prima ricevuta del codice fiscale, quella con il cognome sbagliato. Mi ricorda che la burocrazia, in fondo, è fatta di persone. Alcune ti fanno perdere la pazienza; altre ti lasciano entrare dal portone e ti offrono un caffè.",
+    "text": "Quando ho deciso di trasferirmi a Torino, un amico italiano mi ha dato un solo consiglio: «Fatti dare tutto per iscritto e non lasciarti mai mandare via senza un numero di protocollo». Lì per lì ho riso. Sei mesi dopo, posso dire che è stato il consiglio più prezioso che abbia mai ricevuto.\n\nLa prima tappa è stata il codice fiscale. In teoria è semplice: si va all'ufficio, si compila un modulo, si esce con un foglio. In pratica, l'impiegata mi ha fatto notare che sul passaporto il mio secondo cognome era scritto in modo diverso rispetto al contratto d'affitto, e mi ha fatto tornare il giorno dopo con una dichiarazione firmata dal padrone di casa. Non era cattiveria, anzi: la seconda volta mi ha perfino lasciato passare davanti a tutti, per non farmi rifare la fila.\n\nPoi è arrivata la residenza. Qui ho imparato che in Italia non basta dichiarare dove si abita: bisogna lasciarselo verificare. Qualche settimana dopo la domanda, un vigile è passato a controllare che vivessi davvero all'indirizzo indicato. Nessuno mi aveva detto quando sarebbe venuto, e naturalmente è venuto mentre ero al lavoro. La mia vicina, la signora Gilda, che abita qui da quarant'anni, l'ha fatto entrare nel portone, gli ha fatto vedere il mio nome sulla cassetta delle lettere e, a quanto pare, gli ha anche offerto un caffè. La residenza è arrivata dieci giorni dopo. Non so se sia merito del caffè, ma da allora porto alla signora Gilda le paste ogni domenica.\n\nPoi c'è stata la banca. Per aprire un conto mi hanno fatto firmare diciassette fogli, li ho contati, e me ne hanno lasciati portare a casa soltanto due. Quando ho chiesto di poter leggere il contratto con calma, l'impiegato mi ha guardato come se gli avessi chiesto di farmi vedere la cassaforte. Alla fine me l'ha mandato via mail, con un sorriso un po' offeso, e ho scoperto che conteneva tre commissioni di cui nessuno mi aveva parlato.\n\nIl capitolo più lungo è stato il riconoscimento della laurea. In Argentina ho studiato architettura, e per esercitare in Italia avrei dovuto far tradurre tutti i documenti da un traduttore giurato, farli legalizzare e farli valutare da una commissione. Ho fatto fare le traduzioni a Buenos Aires, dove costavano meno, ma mi hanno fatto sapere che non bastavano: dovevano essere asseverate qui, davanti a un funzionario del tribunale. Ho pagato due volte, e ho imparato la parola asseverazione, che non dimenticherò mai.\n\nNon voglio però raccontare solo una storia di file e di timbri. In questi mesi ho incontrato anche un'Italia che funziona meglio di quanto dicano gli italiani stessi. All'anagrafe un impiegato giovane mi ha lasciato fotografare tutti i moduli, per farmeli controllare a casa con calma. All'azienda sanitaria, dove sono andato a farmi assegnare un medico di base, una signora allo sportello mi ha fatto scegliere tra tre dottori, spiegandomi con pazienza le differenze di orario. E il servizio online per prenotare gli appuntamenti, quando non si blocca, è più rapido di quanto mi aspettassi.\n\nChe cosa ho imparato, allora? Tre cose, che lascio qui per chi arriva dopo di me. Primo: non lasciatevi scoraggiare dalla prima risposta negativa; spesso è la risposta di quel giorno, non quella definitiva. Secondo: fatevi dire sempre il nome della persona con cui parlate e fatevi rilasciare una ricevuta, anche quando vi dicono che non serve. Terzo: fate amicizia con i vicini. In un paese in cui molte pratiche dipendono dalla possibilità che qualcuno vi trovi in casa, una signora Gilda vale più di qualsiasi app.\n\nL'altro giorno è finalmente arrivata la lettera della commissione: la laurea è riconosciuta. L'ho fatta incorniciare e l'ho appesa in soggiorno, accanto alla prima ricevuta del codice fiscale, quella con il cognome sbagliato. Mi ricorda che dietro la burocrazia, in fondo, ci sono sempre delle persone. Alcune ti fanno perdere la pazienza; altre ti lasciano entrare dal portone e ti offrono un caffè.",
     "gloss": {
      "protocollo": "número de expediente, de registro",
      "tappa": "etapa",
@@ -4072,7 +4106,7 @@
      "esercitare": "ejercer (la profesión)",
      "giurato": "(traduttore giurato) traductor público",
      "asseverate": "juradas (ante un funcionario)",
-     "file": "filas, colas",
+     "file": "filas",
      "timbri": "sellos",
      "anagrafe": "registro civil",
      "sportello": "ventanilla",
@@ -4165,13 +4199,17 @@
      "targets": [
       "fatti",
       "lasciarti",
-      "lasciarselo",
+      "fatto",
       "lasciato",
       "farmi",
+      "lasciarselo",
+      "lasciati",
+      "far",
       "farli",
       "farmeli",
       "lasciatevi",
       "fatevi",
+      "fatta",
       "fanno",
       "lasciano"
      ]
@@ -4508,13 +4546,15 @@
       "chiamare",
       "tossire",
       "battere",
+      "illuminargli",
       "arrivare",
       "salire",
       "piangere",
       "pregare",
       "tremare",
       "aiutarsi",
-      "illuminargli"
+      "portare",
+      "prestarsi"
      ]
     }
    },
@@ -4737,11 +4777,11 @@
     "emoji": "📑",
     "genre": "saggio breve",
     "grammar": "verbi e preposizioni (reggenze)",
-    "text": "«Si invita la S.V. a voler provvedere al pagamento entro e non oltre il termine sopra indicato.» Chi vive in Italia ha letto frasi del genere decine di volte, e quasi sempre ha avuto bisogno di rileggerle. Il linguaggio della burocrazia, che gli italiani chiamano con una punta di ironia burocratese, è una lingua a parte: si riconosce subito, ma si capisce a fatica.\n\nIl fenomeno non è nuovo. Già nel 1965 Italo Calvino, in un celebre articolo, lo definì «antilingua» e ne diede un esempio rimasto famoso: un brigadiere che, mettendo a verbale la testimonianza di un uomo sceso in cantina ad accendere la stufa, trasforma il suo racconto semplice in una frase interminabile, dove il vino diventa «prodotti vinicoli» e l'uomo diventa «il sottoscritto». Secondo Calvino, chi parla l'antilingua ha paura delle parole concrete e si rifugia in quelle astratte, perché gli sembrano più serie e più sicure.\n\nDa dove nasce questa paura? In parte dipende dalla storia. Per secoli la scrittura amministrativa è stata un privilegio di pochi, e scrivere difficile serviva a marcare una distanza tra chi comandava e chi doveva obbedire. In parte, però, dipende da ragioni più quotidiane. Il funzionario che redige una comunicazione tiene conto soprattutto delle possibili conseguenze legali: teme che una frase troppo semplice possa essere contestata, e preferisce rifarsi a formule già usate, che nessuno ha mai osato mettere in discussione. Così molti testi si limitano a copiare modelli vecchi di decenni, e nessuno si accorge di quanto siano diventati incomprensibili.\n\nLe caratteristiche del burocratese sono facili da elencare. Si abusa dei verbi generici, come effettuare, procedere, provvedere: non si paga, ma si procede al pagamento; non si chiude un ufficio, ma si provvede alla chiusura dei locali. Si preferiscono i nomi ai verbi, le forme passive e impersonali a quelle attive, le parole lunghe a quelle brevi. Si ricorre a espressioni come «in ottemperanza a», «ai sensi di», «nelle more di», che chi non ha studiato diritto fatica a interpretare. E soprattutto si rinuncia a indicare chi fa che cosa: il soggetto sparisce, e con lui la responsabilità.\n\nUn esempio aiuta a capire. Un avviso appeso nell'atrio di un ufficio pubblico recitava: «Si rende noto all'utenza che, a decorrere dal giorno 1 del mese corrente, si procederà all'interruzione del servizio di ricevimento del pubblico nella fascia pomeridiana». Tradotto: da questo mese l'ufficio è chiuso il pomeriggio. Otto parole contro venticinque, e nessuna informazione persa. La versione breve, anzi, ne aggiunge una: fa capire subito al cittadino che cosa cambia per lui.\n\nIl prezzo di questa lingua lo pagano i cittadini. Un modulo poco chiaro fa perdere tempo, spinge le persone a rivolgersi a intermediari a pagamento, moltiplica gli errori e quindi le pratiche da correggere. A soffrirne di più sono proprio i più deboli: gli anziani, chi ha studiato poco, gli stranieri che stanno imparando l'italiano e che, davanti a una lettera dell'ufficio tributi, non sanno se si tratti di un avviso o di una multa.\n\nNegli ultimi decenni sono stati fatti diversi tentativi per cambiare le cose. Sono stati pubblicati manuali di stile e guide alla scrittura chiara, e alcune amministrazioni hanno cominciato ad avvalersi della consulenza di linguisti. Le regole proposte sono semplici: usare frasi brevi, preferire le parole comuni, rivolgersi direttamente al lettore, mettere all'inizio l'informazione più importante. Eppure i risultati sono stati disomogenei. Molti uffici si sono attenuti alle nuove indicazioni per qualche mese, per poi tornare alle vecchie abitudini.\n\nIl motivo, forse, è che scrivere in modo semplice è più difficile che scrivere in modo complicato. Richiede di sapere esattamente che cosa si vuole dire, di assumersi la responsabilità di dirlo e di fidarsi del lettore. Non basta sostituire qualche parola: bisogna ripensare il rapporto tra l'amministrazione e i cittadini che la finanziano con le loro tasse.\n\nNon si tratta, insomma, di una questione di stile. Una pubblica amministrazione che si fa capire è un'amministrazione che rispetta i cittadini e che accetta di essere controllata da loro. E se un giorno riceveremo una lettera che dice semplicemente «Deve pagare entro il 30 giugno», potremo dire che l'antilingua, finalmente, ha cominciato a perdere terreno.",
+    "text": "«Si invita la S.V. a voler provvedere al pagamento entro e non oltre il termine sopra indicato.» Chi vive in Italia ha letto frasi del genere decine di volte, e quasi sempre ha avuto bisogno di rileggerle. Il linguaggio della burocrazia, che gli italiani chiamano con una punta di ironia burocratese, è una lingua a parte: si riconosce subito, ma si capisce a fatica.\n\nIl fenomeno non è nuovo. Già nel 1965 Italo Calvino, in un celebre articolo, lo definì «antilingua» e ne diede un esempio rimasto famoso: un brigadiere che, mettendo a verbale la testimonianza di un uomo sceso in cantina ad accendere la stufa, trasforma il suo racconto semplice in una frase interminabile, dove il vino diventa «prodotti vinicoli» e l'uomo diventa «il sottoscritto». Secondo Calvino, chi parla l'antilingua ha paura delle parole concrete e si rifugia in quelle astratte, perché gli sembrano più serie e più sicure.\n\nDa dove nasce questa paura? In parte dipende dalla storia. Per secoli la scrittura amministrativa è stata un privilegio di pochi, e scrivere difficile serviva a marcare una distanza tra chi comandava e chi doveva obbedire. In parte, però, dipende da ragioni più quotidiane. Il funzionario che redige una comunicazione tiene conto soprattutto delle possibili conseguenze legali: teme che una frase troppo semplice possa essere contestata, e preferisce rifarsi a formule già usate, che nessuno ha mai osato mettere in discussione. Così molti testi si limitano a copiare modelli vecchi di decenni, e nessuno si accorge di quanto siano diventati incomprensibili.\n\nLe caratteristiche del burocratese sono facili da elencare. Si abusa dei verbi generici, come effettuare, procedere a, provvedere a: non si paga, ma si procede al pagamento; non si chiude un ufficio, ma si provvede alla chiusura dei locali. Si preferiscono i nomi ai verbi, le forme passive e impersonali a quelle attive, le parole lunghe a quelle brevi. Si ricorre a espressioni come «in ottemperanza a», «ai sensi di», «nelle more di», che chi non ha studiato diritto fatica a interpretare. E soprattutto si rinuncia a indicare chi fa che cosa: il soggetto sparisce, e con lui la responsabilità.\n\nUn esempio aiuta a capire. Un avviso appeso nell'atrio di un ufficio pubblico recitava: «Si rende noto all'utenza che, a decorrere dal giorno 1 del mese corrente, si procederà all'interruzione del servizio di ricevimento del pubblico nella fascia pomeridiana». Tradotto: da questo mese l'ufficio è chiuso il pomeriggio. Otto parole contro venticinque, e nessuna informazione persa. La versione breve, anzi, ne aggiunge una: fa capire subito al cittadino che cosa cambia per lui.\n\nIl prezzo di questa lingua lo pagano i cittadini. Un modulo poco chiaro fa perdere tempo, spinge le persone a rivolgersi a intermediari a pagamento, moltiplica gli errori e quindi le pratiche da correggere. A soffrirne di più sono proprio i più deboli: gli anziani, chi ha studiato poco, gli stranieri che stanno imparando l'italiano e che, davanti a una lettera dell'ufficio tributi, non sanno se si tratti di un avviso o di una multa.\n\nNegli ultimi decenni sono stati fatti diversi tentativi per cambiare le cose. Sono stati pubblicati manuali di stile e guide alla scrittura chiara, e alcune amministrazioni hanno cominciato ad avvalersi della consulenza di linguisti. Le regole proposte sono semplici: usare frasi brevi, preferire le parole comuni, rivolgersi direttamente al lettore, mettere all'inizio l'informazione più importante. Eppure i risultati sono stati disomogenei. Molti uffici si sono attenuti alle nuove indicazioni per qualche mese, per poi tornare alle vecchie abitudini.\n\nIl motivo, forse, è che scrivere in modo semplice è più difficile che scrivere in modo complicato. Richiede di sapere esattamente che cosa si vuole dire, di assumersi la responsabilità di dirlo e di fidarsi del lettore. Non basta sostituire qualche parola: bisogna ripensare il rapporto tra l'amministrazione e i cittadini che la finanziano con le loro tasse.\n\nNon si tratta, insomma, di una questione di stile. Una pubblica amministrazione che si fa capire è un'amministrazione che rispetta i cittadini e che accetta di essere controllata da loro. E se un giorno riceveremo una lettera che dice semplicemente «Deve pagare entro il 30 giugno», potremo dire che l'antilingua, finalmente, ha cominciato a perdere terreno.",
     "gloss": {
      "burocratese": "lenguaje burocrático",
      "fatica": "(a fatica) con dificultad",
-     "brigadiere": "suboficial (de carabineros)",
+     "brigadiere": "suboficial (de policía o de carabineros)",
      "verbale": "(mettere a verbale) asentar en un acta",
      "cantina": "sótano",
      "stufa": "estufa",
@@ -4749,7 +4789,7 @@
      "obbedire": "obedecer",
      "redige": "redacta",
      "contestata": "impugnada, cuestionada",
-     "osato": "se atrevido",
+     "osato": "(nessuno ha mai osato) nadie se animó nunca",
      "elencare": "enumerar",
      "effettuare": "efectuar",
      "ottemperanza": "(in ottemperanza a) en cumplimiento de",
@@ -4762,7 +4802,7 @@
      "avvalersi": "valerse, servirse",
      "consulenza": "asesoramiento",
      "disomogenei": "desparejos",
-     "attenuti": "atenido, ajustado",
+     "attenuti": "(si sono attenuti) se atuvieron",
      "finanziano": "financian",
      "terreno": "(perdere terreno) retroceder",
      "atrio": "hall, vestíbulo",
@@ -4847,13 +4887,20 @@
      "label": "Tocá los verbos que rigen una preposición fija (provvedere a, dipendere da, accorgersi di…)",
      "targets": [
       "provvedere",
+      "procedere",
+      "procede",
+      "procederà",
+      "provvede",
       "dipende",
+      "rifugia",
       "rifarsi",
       "limitano",
       "accorge",
       "abusa",
       "ricorre",
       "rinuncia",
+      "tratti",
+      "tratta",
       "rivolgersi",
       "avvalersi",
       "attenuti",
@@ -5079,7 +5126,7 @@
     "emoji": "🔬",
     "genre": "articolo divulgativo",
     "grammar": "l'infinito (soggetto, istruzioni, subordinate)",
-    "text": "«Mangiare cioccolato ogni giorno aiuta a perdere peso.» Un titolo così, quando compare sul telefono, è difficile da ignorare. Condividerlo richiede un secondo; verificarlo, molto di più. Eppure saper distinguere una scoperta seria da una notizia gonfiata è diventata, in pochi anni, una competenza quasi indispensabile, come saper leggere un'etichetta al supermercato o un contratto d'affitto. Leggere di corsa, mentre si aspetta l'autobus o si scorre una bacheca, rende tutto ancora più difficile: si tende a fidarsi di ciò che conferma quello che si pensava già, e a scartare il resto.\n\nIl problema non riguarda soltanto le bufale costruite ad arte. Molto più spesso si parte da uno studio vero, magari pubblicato su una rivista rispettabile, e lo si semplifica passaggio dopo passaggio: il comunicato stampa dell'università esagera un po', il primo sito che lo riprende esagera ancora, e alla fine il titolo dice una cosa che i ricercatori non si sono mai sognati di affermare. Chiedere agli autori che cosa pensino dei titoli sui loro lavori è un esercizio istruttivo: molti allargano le braccia, rassegnati.\n\nPer non cadere nella trappola non serve essere scienziati. Basta prendere l'abitudine di porsi qualche domanda prima di credere a ciò che si legge. Ecco una piccola guida, da tenere a portata di mano.\n\nPrimo: non fermarsi al titolo. Leggere l'articolo fino in fondo, cercando il nome della rivista e degli autori. Se non vengono citati, è già un segnale d'allarme.\n\nSecondo: controllare su chi è stato fatto lo studio. Molte ricerche iniziali si fanno su topi o su cellule in laboratorio. Scoprire che una sostanza ha un effetto su un topo è un risultato interessante, ma pensare che valga automaticamente per le persone è un salto enorme.\n\nTerzo: guardare i numeri. Uno studio condotto su venti volontari per due settimane non ha lo stesso peso di uno condotto su migliaia di persone per dieci anni. Non occorre saper calcolare le statistiche: basta chiedersi se il campione è abbastanza grande e se il periodo è abbastanza lungo per giustificare le conclusioni.\n\nQuarto: non confondere la correlazione con la causa. Osservare che chi mangia più cioccolato pesa meno non significa aver dimostrato che il cioccolato fa dimagrire. Potrebbe essere vero il contrario, oppure potrebbe esserci un terzo fattore: per esempio, chi fa più sport può concedersi qualche dolce in più senza ingrassare.\n\nQuinto: chiedersi chi ha pagato. Essere finanziati da un'azienda non rende automaticamente falsa una ricerca, ma è un'informazione che il lettore ha il diritto di conoscere. Una ricerca sui benefici del cioccolato finanziata da un produttore di dolciumi merita un supplemento di prudenza.\n\nSesto: aspettare. La scienza procede per conferme. Un singolo studio, per quanto brillante, è un indizio, non una prova. Prima di cambiare dieta, abitudini o convinzioni, conviene vedere se altri gruppi di ricerca, lavorando in modo indipendente, arrivano agli stessi risultati.\n\nSettimo: diffidare delle parole magiche. Termini come «svolta», «miracoloso», «definitivo» o «gli scienziati confermano» dovrebbero far suonare un campanello. Nella ricerca vera le conclusioni sono quasi sempre prudenti, piene di «potrebbe», «sembra», «nel campione analizzato». Trovare nel titolo una certezza che nello studio non c'è significa aver già individuato il punto in cui la notizia è stata gonfiata.\n\nSeguire queste regole non vuol dire diventare diffidenti verso la scienza. Anzi: significa prenderla sul serio, rispettandone i tempi e i limiti. Chi ha imparato a dubitare di un titolo sensazionale è anche chi, davanti a un consenso scientifico solido, per esempio sull'efficacia dei vaccini o sul cambiamento climatico, sa riconoscerne il valore invece di considerarlo un'opinione fra tante.\n\nResta una responsabilità che non si può scaricare interamente sui lettori. Scrivere di scienza con correttezza significa, per i giornalisti, rinunciare a volte al titolo più cliccato; per i ricercatori, accettare di spiegare il proprio lavoro con parole semplici senza gonfiarlo; per le università, evitare comunicati stampa che promettono miracoli. Informare bene costa fatica a tutti. Informare male, però, costa molto di più, perché a pagare il prezzo della confusione sono proprio le persone che cercavano una risposta.\n\nE il cioccolato? Mangiarne un quadratino dopo pranzo resta uno dei piccoli piaceri della vita. Aspettarsi che ci faccia dimagrire, per ora, no.",
+    "text": "«Mangiare cioccolato ogni giorno aiuta a perdere peso.» Un titolo così, quando compare sul telefono, è difficile da ignorare. Condividerlo richiede un secondo; verificarlo, molto di più. Eppure saper distinguere una scoperta seria da una notizia gonfiata è diventata, in pochi anni, una competenza quasi indispensabile, come saper leggere un'etichetta al supermercato o un contratto d'affitto. La lettura frettolosa, mentre si aspetta l'autobus o si scorre una bacheca, rende tutto ancora più difficile: si tende a fidarsi di ciò che conferma quello che si pensava già, e a scartare il resto.\n\nIl problema non riguarda soltanto le bufale costruite ad arte. Molto più spesso si parte da uno studio vero, magari pubblicato su una rivista rispettabile, e lo si semplifica passaggio dopo passaggio: il comunicato stampa dell'università esagera un po', il primo sito che lo riprende esagera ancora, e alla fine il titolo dice una cosa che i ricercatori non si sono mai sognati di affermare. Chiedere agli autori che cosa pensino dei titoli sui loro lavori è un esercizio istruttivo: molti allargano le braccia, rassegnati.\n\nPer non cadere nella trappola non serve essere scienziati. Basta prendere l'abitudine di porsi qualche domanda prima di credere a ciò che si legge. Ecco una piccola guida, da tenere a portata di mano.\n\nPrimo: non fermarsi al titolo. Leggere l'articolo fino in fondo, cercando il nome della rivista e degli autori. Se non vengono citati, è già un segnale d'allarme.\n\nSecondo: controllare su chi è stato fatto lo studio. Molte ricerche iniziali si fanno su topi o su cellule in laboratorio. Scoprire che una sostanza ha un effetto su un topo è un risultato interessante, ma pensare che valga automaticamente per le persone è un salto enorme.\n\nTerzo: guardare i numeri. Uno studio condotto su venti volontari per due settimane non ha lo stesso peso di uno condotto su migliaia di persone per dieci anni. Non occorre saper calcolare le statistiche: basta domandarsi se il campione è abbastanza grande e se il periodo è abbastanza lungo per giustificare le conclusioni.\n\nQuarto: non confondere la correlazione con la causa. Osservare che chi mangia più cioccolato pesa meno non significa aver dimostrato che il cioccolato fa dimagrire. Potrebbe valere il contrario, oppure potrebbe esserci un terzo fattore: per esempio, chi fa più sport può concedersi qualche dolce in più senza ingrassare.\n\nQuinto: chiedersi chi ha pagato. Essere finanziati da un'azienda non rende automaticamente falsa una ricerca, ma è un'informazione che il lettore ha il diritto di conoscere. Una ricerca sui benefici del cioccolato finanziata da un produttore di dolciumi merita un supplemento di prudenza.\n\nSesto: aspettare. La scienza procede per conferme. Un singolo studio, per quanto brillante, è un indizio, non una prova. Prima di cambiare dieta, abitudini o convinzioni, conviene vedere se altri gruppi di ricerca, lavorando in modo indipendente, arrivano agli stessi risultati.\n\nSettimo: diffidare delle parole magiche. Termini come «svolta», «miracoloso», «definitivo» o «gli scienziati confermano» dovrebbero far suonare un campanello. Nella ricerca vera le conclusioni sono quasi sempre prudenti, piene di «potrebbe», «sembra», «nel campione analizzato». Trovare nel titolo una certezza che nello studio non c'è significa aver già individuato il punto in cui la notizia è stata gonfiata.\n\nSeguire queste regole non vuol dire diventare diffidenti verso la scienza. Anzi: significa prenderla sul serio, rispettandone i tempi e i limiti. Chi ha imparato a dubitare di un titolo sensazionale è anche chi, davanti a un consenso scientifico solido, per esempio sull'efficacia dei vaccini o sul cambiamento climatico, sa riconoscerne il valore invece di considerarlo un'opinione fra tante.\n\nResta una responsabilità che non si può scaricare interamente sui lettori. Scrivere di scienza con correttezza significa, per i giornalisti, rinunciare a volte al titolo più cliccato; per i ricercatori, accettare di spiegare il proprio lavoro con parole semplici senza gonfiarlo; per le università, evitare comunicati stampa che promettono miracoli. Informare bene costa fatica a tutti. Informare male, però, costa molto di più, perché a pagare il prezzo della confusione sono proprio le persone che cercavano una risposta.\n\nE il cioccolato? Mangiarne un quadratino dopo pranzo resta uno dei piccoli piaceri della vita. Aspettarsi che ci faccia dimagrire, per ora, no.",
     "gloss": {
      "dimagrire": "adelgazar",
      "gonfiata": "inflada, exagerada",
@@ -5186,14 +5233,21 @@
      ]
     ],
     "hunt": {
-     "label": "Tocá los infinitivos que funcionan como sujeto de la oración",
+     "label": "Tocá los infinitivos que funcionan como sujeto de la oración (también después de basta, serve, occorre, conviene)",
      "targets": [
+      "mangiare",
       "condividerlo",
       "verificarlo",
+      "saper",
       "chiedere",
+      "essere",
+      "prendere",
       "scoprire",
       "pensare",
+      "domandarsi",
       "osservare",
+      "vedere",
+      "trovare",
       "seguire",
       "scrivere",
       "informare",
@@ -5416,7 +5470,7 @@
     "emoji": "🔭",
     "genre": "reportage",
     "grammar": "gerundio e participio (anche assoluto)",
-    "text": "Arrivando da L'Aquila in macchina, nessuno immaginerebbe che sotto la montagna che si ha davanti lavorino ogni giorno ricercatori venuti da mezzo mondo. Il Gran Sasso, con le sue cime ancora imbiancate a maggio, sembra fatto apposta per gli escursionisti. Eppure, imboccando il traforo autostradale e percorrendone qualche chilometro, si arriva a una deviazione che nessun automobilista prende per caso: è l'ingresso dei laboratori sotterranei dell'Istituto Nazionale di Fisica Nucleare, uno dei luoghi più silenziosi d'Europa.\n\nSuperati i controlli e indossato il casco, seguiamo Chiara Montanari, fisica trentaseienne di Ancona, lungo una galleria illuminata da lampade al neon. «Qui sopra ci sono circa millequattrocento metri di roccia», spiega camminando a passo svelto. «La roccia fa da scudo: blocca quasi tutti i raggi cosmici che colpiscono continuamente la superficie terrestre. Lavorando in superficie, i nostri rivelatori sarebbero accecati da un rumore di fondo enorme. Quaggiù, invece, possiamo sperare di sentire i segnali più deboli.»\n\nChiara studia i neutrini, particelle quasi prive di massa che attraversano la materia senza quasi mai interagire. «Mentre parliamo, miliardi di neutrini provenienti dal Sole ci stanno passando attraverso», dice sorridendo davanti alla mia espressione perplessa. «Non ce ne accorgiamo perché non lasciano quasi traccia. Il nostro lavoro consiste nel costruire strumenti così sensibili da registrarne uno ogni tanto.» Altri gruppi, lavorando nelle sale accanto, danno la caccia alla materia oscura, quella componente dell'universo di cui si deduce l'esistenza osservando il moto delle galassie, ma che nessuno è ancora riuscito a vedere direttamente.\n\nEntrati nella sala principale, si resta senza parole. Sembra la navata di una cattedrale scavata nella roccia: cilindri d'acciaio alti come palazzi, tubi, cavi, scale metalliche. Tutto è costruito con materiali selezionati uno per uno, essendo perfino la debolissima radioattività naturale di un bullone sufficiente a disturbare le misure. «Una volta abbiamo scartato un intero lotto di rame», racconta Chiara ridendo. «Era perfetto per qualunque altro uso, ma per noi era troppo rumoroso.»\n\nLa vita quaggiù ha i suoi ritmi. Non vedendo mai la luce del sole durante il turno, molti ricercatori raccontano di perdere la cognizione del tempo. «Entri alle otto, esci che è buio e ti chiedi se abbia piovuto», scherza Davide, un dottorando pugliese che incontriamo davanti alla macchinetta del caffè. Eppure nessuno di loro sembra pentito. Parlando con loro, colpisce soprattutto la pazienza: esperimenti progettati quindici anni fa stanno dando solo ora i primi risultati, e alcuni dei rivelatori oggi in costruzione produrranno dati quando i loro ideatori saranno già in pensione.\n\nIl laboratorio, del resto, è un piccolo mondo internazionale. Nella mensa e nei corridoi si sentono l'inglese, il tedesco, il cinese, lo spagnolo, spesso mescolati nella stessa frase. Essendo gli esperimenti troppo costosi per un solo paese, ogni progetto riunisce decine di università, che si dividono compiti e spese. «Qui impari presto a lavorare con persone che la pensano in modo diverso da te», osserva Chiara. «Discutendo per ore su un dettaglio tecnico, si finisce per diventare amici. O, qualche volta, nemici giurati per una settimana.»\n\nÈ inevitabile, a questo punto, porsi la domanda che molti contribuenti si fanno: a che cosa serve tutto questo? Chiara non si sottrae. «Capisco chi, vedendo le cifre, pensa che i soldi andrebbero spesi altrove. Ma la storia della scienza è piena di scoperte nate senza uno scopo pratico. Chi studiava l'elettrone alla fine dell'Ottocento non pensava certo ai telefoni.» Poi aggiunge un argomento meno scontato: le tecnologie sviluppate per costruire i rivelatori, dai sensori ultrasensibili ai sistemi di purificazione dei materiali, finiscono spesso per trovare applicazioni in medicina e nell'industria.\n\nNon sono mancate, negli anni, le polemiche. Trovandosi i laboratori sotto un massiccio che alimenta gli acquedotti della zona, gli abitanti hanno chiesto più volte garanzie sulla sicurezza delle falde, soprattutto dopo un incidente avvenuto all'inizio degli anni Duemila che aveva fatto molto discutere. I responsabili assicurano che i controlli sono stati rafforzati e che il dialogo con i comuni è costante. Resta, comunque, una convivenza delicata tra la ricerca di punta e un territorio che chiede di essere ascoltato.\n\nFinita la visita, riprendiamo la galleria verso l'uscita. Riemergendo alla luce, il paesaggio sembra quasi irreale: pecore, prati, qualche escursionista con lo zaino. Nessuno di loro, probabilmente, sa che a pochi chilometri, sepolti sotto la roccia, strumenti costati anni di lavoro stanno aspettando pazientemente un segnale dall'universo. Chiara, salutandoci, lo dice con una semplicità disarmante: «Il nostro mestiere è aspettare. Ma aspettare nel posto giusto.»",
+    "text": "Arrivando da L'Aquila in macchina, nessuno immaginerebbe che sotto la montagna che si ha davanti lavorino ogni giorno ricercatori venuti da mezzo mondo. Il Gran Sasso, con le sue cime ancora imbiancate a maggio, sembra fatto apposta per gli escursionisti. Eppure, imboccando il traforo autostradale e percorrendone qualche chilometro, si arriva a una deviazione che nessun automobilista prende per caso: è l'ingresso dei laboratori sotterranei dell'Istituto Nazionale di Fisica Nucleare, uno dei luoghi più silenziosi d'Europa.\n\nSuperati i controlli e indossato il casco, seguiamo Chiara Montanari, fisica trentaseienne di Ancona, lungo una galleria illuminata da lampade al neon. «Qui sopra ci sono circa millequattrocento metri di roccia», spiega camminando a passo svelto. «La roccia fa da scudo: blocca quasi tutti i raggi cosmici che colpiscono continuamente la superficie terrestre. Lavorando in superficie, i nostri rivelatori sarebbero accecati da un rumore di fondo enorme. Quaggiù, invece, possiamo sperare di sentire i segnali più deboli.»\n\nChiara studia i neutrini, particelle quasi prive di massa che attraversano la materia senza quasi mai interagire. «Mentre parliamo, miliardi di neutrini provenienti dal Sole ci stanno passando attraverso», dice sorridendo davanti alla mia espressione perplessa. «Non ce ne accorgiamo perché non lasciano quasi traccia. Il nostro lavoro consiste nel costruire strumenti così sensibili da registrarne uno ogni tanto.» Altri gruppi, lavorando nelle sale accanto, danno la caccia alla materia oscura, quella componente dell'universo di cui si deduce l'esistenza osservando il moto delle galassie, ma che nessuno è ancora riuscito a vedere direttamente.\n\nEntrati nella sala principale, si resta senza parole. Sembra la navata di una cattedrale scavata nella roccia: cilindri d'acciaio alti come palazzi, tubi, cavi, scale metalliche. Tutto è costruito con materiali selezionati uno per uno, essendo perfino la debolissima radioattività naturale di un bullone sufficiente a disturbare le misure. «Una volta abbiamo scartato un intero lotto di rame», racconta Chiara ridendo. «Era perfetto per qualunque altro uso, ma per noi era troppo rumoroso.»\n\nLa vita quaggiù ha i suoi ritmi. Non vedendo mai la luce del sole durante il turno, molti ricercatori raccontano di perdere la cognizione del tempo. «Entri alle otto, esci che è buio e ti chiedi se abbia piovuto», scherza Davide, un dottorando pugliese che incontriamo davanti alla macchinetta del caffè. Eppure nessuno di loro sembra pentito. Parlando con loro, notiamo soprattutto la pazienza: esperimenti progettati quindici anni fa stanno dando solo ora i primi risultati, e alcuni dei rivelatori oggi in costruzione produrranno dati quando i loro ideatori saranno già in pensione.\n\nIl laboratorio, del resto, è un piccolo mondo internazionale. Nella mensa e nei corridoi si sentono l'inglese, il tedesco, il cinese, lo spagnolo, spesso mescolati nella stessa frase. Essendo gli esperimenti troppo costosi per un solo paese, ogni progetto riunisce decine di università, che si dividono compiti e spese. «Qui impari presto a lavorare con persone che la pensano in modo diverso da te», osserva Chiara. «Discutendo per ore su un dettaglio tecnico, si finisce per diventare amici. O, qualche volta, nemici giurati per una settimana.»\n\nÈ inevitabile, a questo punto, porsi la domanda che molti contribuenti si fanno: a che cosa serve tutto questo? Chiara non si sottrae. «Capisco chi, vedendo le cifre, pensa che i soldi andrebbero spesi altrove. Ma la storia della scienza è piena di scoperte nate senza uno scopo pratico. Chi studiava l'elettrone alla fine dell'Ottocento non pensava certo ai telefoni.» Poi aggiunge un argomento meno scontato: le tecnologie sviluppate per costruire i rivelatori, dai sensori ultrasensibili ai sistemi di purificazione dei materiali, finiscono spesso per trovare applicazioni in medicina e nell'industria.\n\nNon sono mancate, negli anni, le polemiche. Trovandosi i laboratori sotto un massiccio che alimenta gli acquedotti della zona, gli abitanti hanno chiesto più volte garanzie sulla sicurezza delle falde, soprattutto dopo un incidente avvenuto all'inizio degli anni Duemila che aveva fatto molto discutere. I responsabili assicurano che i controlli sono stati rafforzati e che il dialogo con i comuni è costante. Resta, comunque, una convivenza delicata tra la ricerca di punta e un territorio che chiede di essere ascoltato.\n\nFinita la visita, riprendiamo la galleria verso l'uscita. Riemergendo alla luce, troviamo un paesaggio quasi irreale: pecore, prati, qualche escursionista con lo zaino. Nessuno di loro, probabilmente, sa che a pochi chilometri, sepolti sotto la roccia, strumenti costati anni di lavoro stanno aspettando pazientemente un segnale dall'universo. Chiara, salutandoci, lo dice con una semplicità disarmante: «Il nostro mestiere è aspettare. Ma aspettare nel posto giusto.»",
     "gloss": {
      "imbiancate": "nevadas, cubiertas de blanco",
      "imboccando": "tomando, entrando en",
@@ -5525,17 +5579,27 @@
     "hunt": {
      "label": "Tocá los gerundios y los participios absolutos (Superati i controlli…)",
      "targets": [
+      "arrivando",
       "imboccando",
+      "percorrendone",
       "superati",
+      "indossato",
       "camminando",
       "lavorando",
+      "passando",
       "sorridendo",
+      "osservando",
       "entrati",
       "essendo",
+      "ridendo",
       "vedendo",
+      "parlando",
+      "dando",
+      "discutendo",
       "trovandosi",
       "finita",
       "riemergendo",
+      "aspettando",
       "salutandoci"
      ]
     }
@@ -5702,7 +5766,7 @@
       "vero"
      ],
      [
-      "Secondo Marco, tutti i comuni rimuovono le foglie dalle spiagge.",
+      "Secondo Marco, trapiantare la posidonia costa poco.",
       "falso"
      ],
      [
@@ -5777,7 +5841,7 @@
      "scorta": "escolta, séquito",
      "borse": "bolsas",
      "sospira": "suspira",
-     "mutuo": "hipoteca",
+     "mutuo": "crédito hipotecario",
      "chirurgo": "cirujano",
      "discreta": "considerable, bastante",
      "colpevole": "culpable",
@@ -5785,8 +5849,8 @@
      "sbattendo": "golpeando (la puerta), dando un portazo",
      "minacciare": "amenazar",
      "passante": "transeúnte",
-     "padroneggerai": "dominarás, manejarás bien",
-     "freghi": "te ne freghi: te importa un bledo",
+     "padroneggerai": "vas a dominar, vas a manejar bien",
+     "freghi": "(te ne freghi) te importa un pepino",
      "dosato": "dosificado, usado con medida",
      "dirigente": "gerente, directivo",
      "trucco": "truco",
@@ -5874,6 +5938,7 @@
      "targets": [
       "farcela",
       "cavarsela",
+      "uscirne",
       "prendersela",
       "avercela",
       "prendertela",
@@ -6106,7 +6171,7 @@
       ]
      ]
     ],
-    "model": "Cara Sofía,\n\nche bello ricevere la tua email! Tranquilla, sentirsi persi è normalissimo: capita a tutti, anche a chi parla italiano da anni.\n\nProprio questa settimana ho letto una rubrica divertentissima, la lettera di un giornalista, Beppe, a un collega argentino, e ti assicuro che sembra scritta per te. Beppe spiega che il problema non è la grammatica, ma certi verbi piccolissimi pieni di pronomi. Prendi «farcela»: quando una collega sospira «non ce la faccio più», non vuol dire che ha fallito in qualcosa, ma che è stanca di tutto. Poi c'è «cavarsela»: gli italiani non dicono mai di essere bravi, dicono «me la cavo», anche quando sono dei geni. E attenta a «prendersela», cioè offendersi: se qualcuno ti dice «non prendertela», preparati a una critica!\n\nHo anche ascoltato un'intervista alla comica Serena Galli, secondo cui l'ironia italiana dipende quasi tutta dal tono. Se piove da giorni e il vicino ti dice «che bella giornata», ovviamente scherza. Lei, per far ridere gli stranieri, prende i modi di dire alla lettera, e secondo me è un ottimo esercizio anche per chi impara.\n\nIl mio consiglio? Non cercare di tradurre tutto. Guarda le facce, ascolta il tono e, quando non capisci, chiedi senza vergogna: gli italiani adorano spiegare le proprie battute, anche se poi non fanno più ridere nessuno.\n\nVedrai che in un paio di mesi te la caverai benissimo. E se proprio non ce la fai, chiamami!\n\nUn abbraccio forte,\nMartina"
+    "model": "Cara Sofía,\n\nche bello ricevere la tua email! Tranquilla, sentirsi persi è normalissimo: capita a tutti, anche a chi parla italiano da anni.\n\nProprio questa settimana ho letto una rubrica divertentissima, la lettera di un certo Beppe a un collega argentino, e ti assicuro che sembra scritta per te. Beppe spiega che il problema non è la grammatica, ma certi verbi piccolissimi pieni di pronomi. Prendi «farcela»: quando la vicina di casa sospira «non ce la faccio più», non vuol dire che ha fallito in qualcosa, ma che è stanca di tutto. Poi c'è «cavarsela»: gli italiani non dicono mai di essere bravi, dicono «me la cavo», anche quando sono dei geni. E attenta a «prendersela», cioè offendersi: se qualcuno ti dice «non prendertela», preparati a una critica!\n\nHo anche ascoltato un'intervista alla comica Serena Galli, secondo cui l'ironia italiana dipende quasi tutta dal tono. Se piove da giorni e il vicino ti dice «che bella giornata», ovviamente scherza. Lei, per far ridere gli stranieri, prende i modi di dire alla lettera, e secondo me è un ottimo esercizio anche per chi impara.\n\nIl mio consiglio? Non cercare di tradurre tutto. Guarda le facce, ascolta il tono e, quando non capisci, chiedi senza vergogna: gli italiani adorano spiegare le proprie battute, anche se poi non fanno più ridere nessuno.\n\nVedrai che in un paio di mesi te la caverai benissimo. E se proprio non ce la fai, chiamami!\n\nUn abbraccio forte,\nMartina"
    }
   },
   {
@@ -6223,18 +6288,35 @@
     "hunt": {
      "label": "Tocá los sustantivos y adjetivos alterados (diminutivos, aumentativos, despectivos)",
      "targets": [
+      "attimino",
+      "caffettino",
+      "domandina",
       "casetta",
+      "casina",
+      "casone",
       "casaccia",
       "casupola",
       "fratellino",
-      "caffettino",
-      "attimino",
+      "vestitino",
       "lavoretto",
+      "signorino",
       "librone",
+      "nasone",
       "ragazzone",
       "tempaccio",
+      "parolaccia",
       "poetastro",
-      "giallastro"
+      "giallastro",
+      "verdastro",
+      "dolciastro",
+      "nuvolette",
+      "cavallino",
+      "gattino",
+      "gattetto",
+      "libretto",
+      "casettina",
+      "casinetta",
+      "salutino"
      ]
     }
    },
@@ -6468,7 +6550,7 @@
     "emoji": "📊",
     "genre": "articolo di cronaca economica",
     "grammar": "numerali, misure e quantità",
-    "text": "Trentacinque metri quadri, un angolo cottura, un bagno senza finestra e un canone di 780 euro al mese, spese escluse. È l'annuncio che Federica, ventitré anni, studentessa fuorisede di Ingegneria, ha trovato dopo quasi tre mesi di ricerche. «Ne avrò visti una cinquantina», racconta. «La metà erano già affittati quando chiamavo, e un quarto dei proprietari chiedeva sei mensilità di anticipo.» Alla fine ha rinunciato e oggi divide con altre due ragazze un trilocale in periferia, a quaranta minuti di autobus dalla facoltà.\n\nIl caso di Federica non è un'eccezione. Secondo il rapporto presentato ieri dall'Osservatorio sulla casa dell'Università di Monteverde, negli ultimi cinque anni il canone medio di un monolocale in centro è quasi raddoppiato, passando da circa 410 a 790 euro. Nello stesso periodo i redditi delle famiglie sono cresciuti, in termini reali, di appena il 3 per cento. Tradotto: se nel 2021 per affittare un piccolo appartamento bastava un terzo di uno stipendio medio, oggi ne servono quasi due terzi.\n\nLe cause, spiega il rapporto, sono molteplici. La prima è la crescita degli affitti brevi: gli alloggi offerti sulle piattaforme turistiche sono passati in cinque anni da poco più di seicento a oltre duemilacento, cioè più che triplicati. Nel centro storico, ormai, quasi un appartamento su cinque è destinato ai turisti. La seconda è il numero degli studenti, aumentato di circa il 15 per cento grazie ai nuovi corsi in lingua inglese: una buona notizia per l'ateneo, meno per chi cerca casa. La terza, meno visibile, riguarda gli immobili vuoti: secondo le stime dell'Osservatorio, in città ci sarebbero tra i tremila e i quattromila appartamenti sfitti, spesso perché i proprietari temono inquilini morosi o non hanno i soldi per ristrutturarli.\n\nNon sono soltanto gli studenti a pagarne le conseguenze. Infermieri, insegnanti precari, giovani coppie: il rapporto segnala che, tra i nuovi assunti dell'ospedale cittadino, circa uno su quattro ha rinunciato al posto o ha chiesto il trasferimento entro un anno, citando proprio il costo della casa. E chi resta si sposta sempre più lontano: negli ultimi tre anni i comuni della cintura, nel raggio di una ventina di chilometri, hanno visto crescere i residenti di quasi il 6 per cento, mentre il centro storico ne ha persi circa un migliaio.\n\nLa questione è ormai diventata politica. Il sindaco, al secondo mandato, ha annunciato un piano da 12 milioni di euro in tre anni: un milione e mezzo per incentivare i proprietari ad affittare a canone concordato, sei milioni per recuperare centoventi alloggi pubblici inutilizzati e il resto per costruire uno studentato da duecentocinquanta posti letto nell'ex caserma di via Garibaldi. «Per la prima volta mettiamo sul tavolo risorse vere», ha dichiarato in consiglio comunale.\n\nL'opposizione, però, parla di numeri gonfiati. «Dodici milioni sembrano tanti, ma divisi per tre anni fanno quattro milioni all'anno, meno del 2 per cento del bilancio comunale», ha replicato la capogruppo della lista civica Monteverde Domani. «E lo studentato, se tutto va bene, aprirà tra quattro anni: nel frattempo migliaia di ragazzi continueranno a pagare cifre folli.» L'opposizione chiede invece un tetto agli affitti brevi, sul modello di altre città europee, limitando a novanta il numero di notti all'anno in cui un appartamento può essere affittato ai turisti.\n\nDall'altra parte, le associazioni dei proprietari respingono l'idea. «Chi affitta ai turisti non è uno speculatore, ma spesso una famiglia che integra la pensione», sostiene il presidente della sezione locale. Secondo i loro calcoli, un appartamento di sessanta metri quadri affittato ai turisti rende in media il doppio di uno affittato a lungo termine, e con meno rischi: «Se un inquilino smette di pagare, per sfrattarlo servono in media diciotto mesi. Chi se lo può permettere?»\n\nTra le due posizioni, il rapporto dell'Osservatorio suggerisce una via di mezzo. Gli autori propongono di combinare un limite moderato agli affitti brevi, concentrato nelle zone più richieste, con una garanzia pubblica per i proprietari che affittano a studenti e giovani lavoratori: un fondo che copra fino a dodici mensilità in caso di mancato pagamento. Secondo le loro simulazioni, se anche solo un decimo degli appartamenti sfitti tornasse sul mercato, i canoni potrebbero scendere tra il 5 e l'8 per cento in due anni. Non una rivoluzione, ammettono, ma un primo passo.\n\nFederica, intanto, fa i conti. Tra affitto, bollette e abbonamento all'autobus, spende circa seicento euro al mese, più della metà di quello che guadagna lavorando nei fine settimana in un bar. «I miei genitori mi aiutano, ma non so per quanto ancora», dice. Il consiglio comunale discuterà il piano del sindaco il prossimo 14 ottobre. Per migliaia di studenti come lei, quella seduta vale più di qualunque esame.",
+    "text": "Trentacinque metri quadri, un angolo cottura, un bagno senza finestra e un canone di 780 euro al mese, spese escluse. È l'annuncio che Federica, ventitré anni, studentessa fuorisede di Ingegneria, ha trovato dopo quasi tre mesi di ricerche. «Ne avrò visti una cinquantina», racconta. «La metà erano già affittati quando chiamavo, e un quarto dei proprietari chiedeva sei mensilità di anticipo.» Alla fine ha rinunciato e oggi divide con altre due ragazze un trilocale in periferia, a quaranta minuti di autobus dalla facoltà.\n\nIl caso di Federica non è un'eccezione. Secondo il rapporto presentato ieri dall'Osservatorio sulla casa dell'Università di Monteverde, negli ultimi cinque anni il canone medio di un monolocale in centro è quasi raddoppiato, passando da circa 410 a 790 euro. Nello stesso periodo i redditi delle famiglie sono cresciuti, in termini reali, di appena il 3 per cento. Tradotto: se nel 2021 per affittare un piccolo appartamento bastava un terzo di uno stipendio medio, oggi ne servono quasi due terzi.\n\nLe cause, spiega il rapporto, sono molteplici. La prima è la crescita degli affitti brevi: gli alloggi offerti sulle piattaforme turistiche sono passati in cinque anni da poco più di seicento a oltre duemilacento, cioè più che triplicati. Nel centro storico, ormai, quasi un appartamento su cinque è destinato ai turisti. La seconda è il numero degli studenti, aumentato di circa il 15 per cento grazie ai nuovi corsi in lingua inglese: una buona notizia per l'ateneo, meno per chi cerca casa. La terza, meno visibile, riguarda gli immobili vuoti: secondo le stime dell'Osservatorio, in città ci sarebbero tra i tremila e i quattromila appartamenti sfitti, spesso perché i proprietari temono inquilini morosi o non hanno i soldi per ristrutturarli.\n\nNon sono soltanto gli studenti a pagarne le conseguenze. Infermieri, insegnanti precari, giovani coppie: il rapporto segnala che, tra i nuovi assunti dell'ospedale cittadino, circa un quarto ha rinunciato al posto o ha chiesto il trasferimento entro un anno, citando proprio il costo della casa. E chi resta si sposta sempre più lontano: negli ultimi tre anni i comuni della cintura, nel raggio di una ventina di chilometri, hanno visto crescere i residenti di quasi il 6 per cento, mentre il centro storico ne ha persi circa un migliaio.\n\nLa questione è ormai diventata politica. Il sindaco, al secondo mandato, ha annunciato un piano da 12 milioni di euro in tre anni: un milione e mezzo per incentivare i proprietari ad affittare a canone concordato, sei milioni per recuperare centoventi alloggi pubblici inutilizzati e il resto per costruire uno studentato da duecentocinquanta posti letto nell'ex caserma di via Garibaldi. «Per la prima volta mettiamo sul tavolo risorse vere», ha dichiarato in consiglio comunale.\n\nL'opposizione, però, parla di numeri gonfiati. «Dodici milioni sembrano tanti, ma divisi per tre anni fanno quattro milioni all'anno, meno del 2 per cento del bilancio comunale», ha replicato la capogruppo della lista civica Monteverde Domani. «E lo studentato, se tutto va bene, aprirà tra quattro anni: nel frattempo migliaia di ragazzi continueranno a pagare cifre folli.» L'opposizione chiede invece un tetto agli affitti brevi, sul modello di altre città europee, limitando a novanta il numero di notti all'anno in cui un appartamento può essere affittato ai turisti.\n\nDall'altra parte, le associazioni dei proprietari respingono l'idea. «Chi affitta ai turisti non è uno speculatore, ma spesso una famiglia che integra la pensione», sostiene il presidente della sezione locale. Secondo i loro calcoli, un appartamento di sessanta metri quadri affittato ai turisti rende in media il doppio di uno affittato a lungo termine, e con meno rischi: «Se un inquilino smette di pagare, per sfrattarlo servono in media diciotto mesi. Chi se lo può permettere?»\n\nTra le due posizioni, il rapporto dell'Osservatorio suggerisce una strada intermedia. Gli autori propongono di combinare un limite moderato agli affitti brevi, concentrato nelle zone più richieste, con una garanzia pubblica per i proprietari che affittano a studenti e giovani lavoratori: un fondo che copra fino a dodici mensilità in caso di mancato pagamento. Secondo le loro simulazioni, se anche solo un decimo degli appartamenti sfitti tornasse sul mercato, i canoni potrebbero scendere tra il 5 e l'8 per cento in due anni. Non una rivoluzione, ammettono, ma un primo passo.\n\nFederica, intanto, fa i conti. Tra affitto, bollette e abbonamento all'autobus, spende circa seicento euro al mese, più della metà di quello che guadagna lavorando nei fine settimana in un bar. «I miei genitori mi aiutano, ma non so per quanto ancora», dice. Il consiglio comunale discuterà il piano del sindaco il prossimo 14 ottobre. Per migliaia di studenti come lei, quella seduta vale più di qualunque esame.",
     "gloss": {
      "canone": "alquiler (el monto mensual)",
      "fuorisede": "que estudia lejos de su ciudad",
@@ -6575,16 +6657,37 @@
      "label": "Tocá los numerales escritos con letras (cardinales, fraccionarios, multiplicativos, colectivos)",
      "targets": [
       "trentacinque",
+      "ventitré",
+      "tre",
       "cinquantina",
       "metà",
       "quarto",
+      "sei",
+      "due",
+      "quaranta",
+      "cinque",
       "raddoppiato",
+      "terzo",
       "terzi",
-      "triplicati",
+      "seicento",
       "duemilacento",
+      "triplicati",
+      "tremila",
+      "quattromila",
+      "ventina",
       "migliaio",
+      "milione",
+      "mezzo",
+      "milioni",
+      "centoventi",
       "duecentocinquanta",
+      "dodici",
+      "quattro",
+      "migliaia",
+      "novanta",
+      "sessanta",
       "doppio",
+      "diciotto",
       "decimo"
      ]
     }
@@ -6652,7 +6755,7 @@
      ],
      [
       "B",
-      "Ah, la media è la mia preferita. Facciamo un esperimento mentale: in un bar ci sono dieci persone che guadagnano millecinquecento euro al mese. Entra un calciatore famoso. Il reddito medio del bar schizza a centinaia di migliaia di euro, ma nessuno dei dieci è diventato più ricco."
+      "Ah, la media è la mia preferita. Facciamo un esperimento mentale: in un bar ci sono dieci persone che guadagnano millecinquecento euro al mese. Entra un calciatore famoso. Il reddito medio del bar schizza a decine di migliaia di euro, ma nessuno dei dieci è diventato più ricco."
      ],
      [
       "A",
@@ -6820,7 +6923,7 @@
     "emoji": "🗣️",
     "genre": "inchiesta",
     "grammar": "ordine delle parole: dislocazioni e frase scissa",
-    "text": "A Teresa, il dialetto, a scuola glielo avevano proibito. Era il 1950, in un paese dell'entroterra veneto, e la maestra puniva chi si lasciava scappare una parola «da contadini». Settant'anni dopo, sua nipote Giorgia, diciannove anni, il dialetto lo usa nelle storie su Instagram, per far ridere gli amici. «Non lo parlo bene», ammette, «però certe cose in italiano non rendono. Un'espressione come quella che usava la nonna per dire che sei stanco morto, in italiano non l'ho mai trovata.» È da storie come la sua che è partita questa inchiesta: che fine ha fatto la varietà linguistica dell'Italia, a più di centocinquant'anni dall'Unità?\n\nLa risposta breve è che la varietà non è sparita: si è trasformata. Quando l'Italia fu unificata, l'italiano lo parlava soltanto una piccola minoranza della popolazione; per tutti gli altri, la lingua di casa era il dialetto. Sono stati la scuola, il servizio militare, le migrazioni interne e soprattutto la televisione a portare l'italiano in ogni casa. Oggi l'italiano lo parlano praticamente tutti, e il dialetto, chi lo usa, lo usa accanto all'italiano, non al suo posto. Ma l'italiano che parliamo non è uguale dappertutto.\n\n«Di italiani, in realtà, ce ne sono tanti», spiega la sociolinguista Marta Colonna, che da anni registra conversazioni in diverse città. «C'è l'italiano regionale, prima di tutto. Un milanese e un palermitano usano la stessa grammatica, ma la pronuncia, l'intonazione e una parte del lessico li tradiscono subito.» Il panino, a Roma, lo chiamano rosetta, a Milano michetta; e la gruccia per i vestiti, a seconda della regione, la si sente chiamare stampella, ometto o appendino. Non sono errori: sono italiani regionali, perfettamente legittimi.\n\nPoi ci sono le differenze sociali, che spesso contano quanto quelle geografiche. È nel modo di parlare dei giovani, per esempio, che nascono molte parole nuove, alcune destinate a sparire nel giro di un'estate, altre a entrare nei dizionari. E sono le persone più istruite, paradossalmente, quelle che si concedono più libertà nel parlato informale, perché sanno bene quando possono farlo. «Il registro non lo sceglie solo chi parla», osserva Colonna, «lo sceglie la situazione. Un avvocato con i clienti parla in un modo, con gli amici allo stadio in un altro. Chi sa fare questo passaggio ha una competenza linguistica ricchissima.»\n\nAnche la grammatica si muove. Frasi come «Il caffè lo prendo amaro» o «Di questa storia non ne voglio più sentir parlare», le maestre di una volta le avrebbero sottolineate in rosso. Oggi, invece, si sentono in televisione e si leggono sui giornali, e molti linguisti le considerano parte di un italiano «neostandard», più vicino al parlato. La dislocazione serve a mettere in primo piano ciò di cui si sta parlando: quando dico «Il caffè lo prendo amaro», il tema è il caffè, e il resto è l'informazione nuova. Qualcosa di simile fa la frase scissa: dicendo «È Giorgia che ha scritto il messaggio», sottolineo che è stata lei, e non un'altra persona.\n\nUn ruolo ambiguo, in tutto questo, l'hanno avuto i media. Se la televisione degli anni Cinquanta e Sessanta ha insegnato l'italiano a milioni di persone, quella di oggi, insieme ai social, sembra aver fatto il percorso inverso: gli accenti regionali, un tempo banditi dagli annunciatori, adesso si sentono ovunque, dai comici ai conduttori, dai cuochi ai calciatori. «Non è un impoverimento», sostiene Colonna. «È il segno che l'italiano, ormai, è sicuro di sé. E una lingua sicura di sé può permettersi di avere molte voci.»\n\nE il dialetto? Secondo le ricerche di Colonna, i giovani lo parlano meno dei loro nonni, ma lo usano in modo nuovo: nelle canzoni, nei meme, nei soprannomi, nelle chat di gruppo. «Non è più la lingua della vergogna, ma quella dell'identità e del gioco», dice. Ci sono rapper che il dialetto l'hanno portato in classifica, e scuole che, in certe regioni, organizzano laboratori per impararlo. Non tutti sono entusiasti: c'è chi teme che diventi una specie di folklore da cartolina, svuotato della ricchezza che aveva quando era la lingua di tutti i giorni.\n\nResta un lato meno luminoso. L'accento, soprattutto se meridionale, pesa ancora in certi contesti. Nella nostra inchiesta abbiamo raccolto decine di testimonianze di ragazzi che hanno cercato di nasconderlo per un colloquio di lavoro o che si sono sentiti correggere da un professore. «A Torino, il mio accento calabrese l'ho perso in sei mesi», racconta Salvatore, ventisei anni, ingegnere. «Non me l'ha chiesto nessuno, ma sentivo che era meglio così. Adesso, quando torno a casa, mia madre mi prende in giro: dice che parlo come un telegiornale.»\n\nForse è questa la vera fotografia dell'Italia linguistica di oggi: un paese in cui l'italiano, finalmente, l'abbiamo imparato tutti, ma in cui ognuno lo parla con la voce del posto da cui viene. Il dialetto, Teresa non l'ha mai dimenticato. Giorgia lo sta riscoprendo a modo suo. Salvatore, in fondo, vorrebbe riprenderselo. Tre generazioni, tre rapporti diversi con la lingua di casa: nessuno sbagliato, tutti profondamente italiani.",
+    "text": "A Teresa, il dialetto, a scuola glielo avevano proibito. Era il 1950, in un paese dell'entroterra veneto, e la maestra puniva chi si lasciava scappare una parola «da contadini». Settant'anni dopo, sua nipote Giorgia, diciannove anni, il dialetto lo usa nelle storie su Instagram, per far ridere gli amici. «Non lo parlo bene», ammette, «però certe cose in italiano non rendono. Un'espressione come quella che usava la nonna per dire che sei stanco morto, in italiano non l'ho mai trovata.» È da storie come la sua che è partita questa inchiesta: che fine ha fatto la varietà linguistica dell'Italia, a più di centocinquant'anni dall'Unità?\n\nLa risposta breve è che la varietà non è sparita: si è trasformata. Quando l'Italia fu unificata, l'italiano lo parlava soltanto una piccola minoranza della popolazione; per tutti gli altri, la lingua di casa era il dialetto. Sono stati la scuola, il servizio militare, le migrazioni interne e soprattutto la televisione a portare l'italiano in ogni casa. Oggi l'italiano lo parlano praticamente tutti, e il dialetto, chi lo usa, lo usa accanto all'italiano, non al suo posto. Ma l'italiano che parliamo non è uguale dappertutto.\n\n«Di italiani, in realtà, ce ne sono tanti», spiega la sociolinguista Marta Colonna, che da anni registra conversazioni in diverse città. «C'è l'italiano regionale, prima di tutto. Un milanese e un palermitano usano la stessa grammatica, ma la pronuncia, l'intonazione e una parte del lessico li tradiscono subito.» Il panino, a Roma, lo chiamano rosetta, a Milano michetta; e la gruccia per i vestiti, a seconda della regione, la si sente chiamare stampella, ometto o appendino. Non sono errori: sono italiani regionali, perfettamente legittimi.\n\nPoi ci sono le differenze sociali, che spesso contano quanto quelle geografiche. È nel modo di parlare dei giovani, per esempio, che nascono molte parole nuove, alcune destinate a sparire nel giro di un'estate, altre a entrare nei dizionari. E sono le persone più istruite, paradossalmente, quelle che si concedono più libertà nel parlato informale, perché sanno bene quando possono farlo. «Il registro non lo sceglie solo chi parla», osserva Colonna, «lo sceglie la situazione. Un avvocato con i clienti parla in un modo, con gli amici allo stadio in un altro. Chi sa fare questo passaggio ha una competenza linguistica ricchissima.»\n\nAnche la grammatica si muove. Frasi come «Il caffè lo prendo amaro» o «Di questa storia non ne voglio più sentir parlare», le maestre di una volta le avrebbero sottolineate in rosso. Oggi, invece, si sentono in televisione e si leggono sui giornali, e molti linguisti le considerano parte di un italiano «neostandard», più vicino al parlato. La dislocazione serve a mettere in primo piano ciò di cui si sta parlando: quando dico «Il caffè lo prendo amaro», il tema è il caffè, e il resto è l'informazione nuova. Qualcosa di simile fa la frase scissa: dicendo «È Giorgia che ha scritto il messaggio», sottolineo che è stata lei, e non un'altra persona.\n\nUn ruolo ambiguo, in tutto questo, l'hanno avuto i media. Se la televisione degli anni Cinquanta e Sessanta ha insegnato l'italiano a milioni di persone, quella di oggi, insieme ai social, sembra aver fatto il percorso inverso: gli accenti regionali, un tempo banditi dagli annunciatori, adesso si sentono ovunque, dai comici ai conduttori, dai cuochi ai calciatori. «Non è un impoverimento», sostiene Colonna. «È il segno che l'italiano, ormai, è sicuro di sé. E una lingua sicura di sé può permettersi di avere molte voci.»\n\nE il dialetto? Secondo le ricerche di Colonna, i giovani lo parlano meno dei loro nonni, ma lo usano in modo nuovo: nelle canzoni, nei meme, nei soprannomi, nelle chat di gruppo. «Non è più la lingua della vergogna, ma quella dell'identità e del gioco», dice. Ci sono rapper che il dialetto l'hanno portato in classifica, e scuole che, in certe regioni, organizzano laboratori per impararlo. Non tutti sono entusiasti: c'è chi teme che diventi una specie di folklore da cartolina, svuotato della ricchezza che aveva quando era la lingua di tutti i giorni.\n\nResta un lato meno luminoso. L'accento, soprattutto se meridionale, pesa ancora in certi contesti. Nella nostra inchiesta abbiamo raccolto decine di testimonianze di ragazzi che hanno cercato di nasconderlo per un colloquio di lavoro o che si sono sentiti correggere da un professore. «A Torino, il mio accento calabrese l'ho perso in sei mesi», racconta Salvatore, ventisei anni, ingegnere. «Nessuno me lo ha chiesto, ma sentivo che era meglio così. Adesso, quando torno a casa, mia madre mi prende in giro: dice che parlo come un telegiornale.»\n\nForse è questa la vera fotografia dell'Italia linguistica di oggi: un paese in cui l'italiano, finalmente, l'abbiamo imparato tutti, ma in cui ognuno lo parla con la voce del posto da cui viene. Il dialetto, Teresa non l'ha mai dimenticato. Giorgia lo sta riscoprendo a modo suo. Salvatore, in fondo, vorrebbe riprenderselo. Tre generazioni, tre rapporti diversi con la lingua di casa: nessuno sbagliato, tutti profondamente italiani.",
     "gloss": {
      "entroterra": "interior (zona lejos de la costa)",
      "puniva": "castigaba",
@@ -6921,7 +7024,7 @@
      ]
     ],
     "hunt": {
-     "label": "Tocá los pronombres que retoman un elemento dislocado (A Teresa, il dialetto, glielo…; il dialetto l'hanno…)",
+     "label": "Tocá los pronombres combinados o apostrofados que retoman un elemento dislocado (A Teresa, il dialetto, glielo…; il dialetto l'hanno…)",
      "targets": [
       "glielo",
       "l'ho",
@@ -7298,14 +7401,20 @@
       "pertanto",
       "infatti",
       "d'altronde",
-      "ciononostante",
+      "beninteso",
       "tuttavia",
+      "ciononostante",
+      "invece",
       "peraltro",
       "anzi",
       "laddove",
       "qualora",
+      "inoltre",
+      "semmai",
+      "anziché",
       "nondimeno",
-      "infine"
+      "infine",
+      "piuttosto"
      ]
     }
    },
@@ -7555,6 +7664,7 @@
      "rumore": "ruido",
      "appiattirle": "aplanarlas",
      "camino": "chimenea, hogar",
+     "confidenza": "familiaridad, trato de confianza",
      "focolare": "fuego del hogar",
      "accomuna": "tienen en común",
      "postilla": "acotación",
@@ -7648,7 +7758,8 @@
       "sale",
       "largo",
       "rumore",
-      "camino"
+      "camino",
+      "confidenza"
      ]
     }
    },
@@ -7997,11 +8108,13 @@
       "scendesse",
       "fosse",
       "restassero",
+      "produca",
       "perda",
       "funzionino",
       "venisse",
       "continui",
       "debba",
+      "sia",
       "dovessero"
      ]
     }

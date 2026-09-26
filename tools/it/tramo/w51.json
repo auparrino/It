@@ -110,20 +110,7 @@
     ],
     "hunt": {
       "label": "Tocá los verbos en congiuntivo",
-      "targets": [
-        "avesse",
-        "nascesse",
-        "offrissero",
-        "scendesse",
-        "fosse",
-        "restassero",
-        "perda",
-        "funzionino",
-        "venisse",
-        "continui",
-        "debba",
-        "dovessero"
-      ]
+      "targets": ["avesse", "nascesse", "offrissero", "scendesse", "fosse", "restassero", "produca", "perda", "funzionino", "venisse", "continui", "debba", "sia", "dovessero"]
     }
   },
   "ascolto": {

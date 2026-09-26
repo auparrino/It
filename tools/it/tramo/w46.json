@@ -111,20 +111,7 @@
     ],
     "hunt": {
       "label": "Tocá los sustantivos y adjetivos alterados (diminutivos, aumentativos, despectivos)",
-      "targets": [
-        "casetta",
-        "casaccia",
-        "casupola",
-        "fratellino",
-        "caffettino",
-        "attimino",
-        "lavoretto",
-        "librone",
-        "ragazzone",
-        "tempaccio",
-        "poetastro",
-        "giallastro"
-      ]
+      "targets": ["attimino", "caffettino", "domandina", "casetta", "casina", "casone", "casaccia", "casupola", "fratellino", "vestitino", "lavoretto", "signorino", "librone", "nasone", "ragazzone", "tempaccio", "parolaccia", "poetastro", "giallastro", "verdastro", "dolciastro", "nuvolette", "cavallino", "gattino", "gattetto", "libretto", "casettina", "casinetta", "salutino"]
     }
   },
   "ascolto": {

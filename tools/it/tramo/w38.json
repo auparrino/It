@@ -107,20 +107,8 @@
       ]
     ],
     "hunt": {
-      "label": "Tocá los verbos que cambian de tiempo o de modo en el discurso indirecto",
-      "targets": [
-        "fosse",
-        "avrebbero",
-        "trattava",
-        "esistevano",
-        "diffidava",
-        "presentava",
-        "sarebbe",
-        "direbbe",
-        "avesse",
-        "avrebbe",
-        "rifarebbe"
-      ]
+      "label": "Tocá los verbos que cambian de tiempo o de modo en el discurso indirecto (en los tiempos compuestos, el auxiliar)",
+      "targets": ["fosse", "aveva", "era", "erano", "trattava", "lavoravano", "considerava", "provasse", "capisse", "faceva", "esistevano", "diffidava", "presentava", "sarebbe", "avesse", "avrebbe", "avrebbero"]
     }
   },
   "ascolto": {

@@ -59,13 +59,13 @@
       ["A", "Calma, eu sei. Só estou te contando o que ele disse. Segundo ele, a frase foi tirada de contexto e o texto deu a entender que ele ia demitir metade da equipe."],
       ["B", "Mas ele disse exatamente isso. Ele falou que, se as vendas não melhorassem até dezembro, ia ter que cortar metade do pessoal. Eu só coloquei no discurso indireto."],
       ["A", "Então, aí é que está. No título, a gente pôs “Empresário anuncia demissão de metade dos funcionários”. Não tem nenhum “se” no título, né?"],
-      ["B", "Tá, o título ficou forte. Mas quem fez o título foi a mesa, não fui eu."],
+      ["B", "Tá, o título ficou forte. Mas quem fez o título foi o pessoal do fechamento, não fui eu."],
       ["A", "Eu sei, não estou te culpando. Estou tentando entender o que a gente responde. Ele pediu uma correção e falou que, se a gente não publicasse até amanhã, ia procurar um advogado."],
       ["B", "Olha, eu acho que o texto está correto. O título, sim, exagerou. A condição sumiu, virou um anúncio."],
       ["A", "Concordo. Então vamos fazer assim: a gente mantém o texto, porque a gravação confirma tudo, e publica uma nota de esclarecimento dizendo que o título foi alterado para refletir melhor a declaração."],
       ["B", "Faz sentido. E eu mando para ele o trecho do áudio, para ele ver que a gente não inventou nada."],
       ["A", "Isso. Mas manda com educação, tá? Sem aquele tom de quem ganhou a discussão."],
-      ["B", "Pode deixar. Aliás, acho que vale uma conversa com a mesa sobre títulos. Não é a primeira vez que isso acontece."],
+      ["B", "Pode deixar. Aliás, acho que vale uma conversa com o pessoal do fechamento sobre títulos. Não é a primeira vez que isso acontece."],
       ["A", "Anotado. Vou levar isso para a reunião de pauta de amanhã."]
     ],
     "gloss": {
@@ -74,7 +74,7 @@
       "gravado": "grabado",
       "demitir": "despedir, echar",
       "pessoal": "personal, empleados",
-      "mesa": "mesa de edición (quienes titulan)",
+      "fechamento": "cierre (el equipo que titula y cierra la edición)",
       "sumiu": "desapareció",
       "esclarecimento": "aclaración",
       "trecho": "fragmento",
@@ -84,7 +84,7 @@
     "questions": [
       ["Do que o empresário reclamou?", ["De não ter sido entrevistado pessoalmente.", "De que sua frase teria sido tirada de contexto.", "De que a entrevista foi publicada sem foto.", "De que o repórter gravou a conversa sem permissão."], "De que sua frase teria sido tirada de contexto."],
       ["O que o empresário realmente disse, segundo Gustavo?", ["Que já tinha demitido metade da equipe em dezembro.", "Que nunca demitiria ninguém, mesmo com a crise.", "Que ia demitir metade do pessoal se as vendas não melhorassem.", "Que ia contratar mais gente se as vendas melhorassem."], "Que ia demitir metade do pessoal se as vendas não melhorassem."],
-      ["Onde, de fato, estava o problema da matéria?", ["No título, que transformou uma condição em anúncio.", "No texto do repórter, que inventou a declaração do empresário.", "Na gravação, que estava com trechos incompreensíveis.", "Na foto escolhida pela mesa para ilustrar a matéria."], "No título, que transformou uma condição em anúncio."],
+      ["Onde, de fato, estava o problema da matéria?", ["No título, que transformou uma condição em anúncio.", "No texto do repórter, que inventou a declaração do empresário.", "Na gravação, que estava com trechos incompreensíveis.", "Na foto escolhida pelo fechamento para ilustrar a matéria."], "No título, que transformou uma condição em anúncio."],
       ["Qual é a solução combinada pelos dois?", ["Apagar a matéria do site e pedir desculpas publicamente.", "Esperar o advogado do empresário antes de qualquer ação.", "Refazer a entrevista com outras perguntas.", "Manter o texto, alterar o título e publicar um esclarecimento."], "Manter o texto, alterar o título e publicar um esclarecimento."],
       ["O que Renata pede a Gustavo ao enviar o áudio?", ["Que envie também a transcrição completa.", "Que seja educado e não demonstre triunfo.", "Que não mencione a nota de esclarecimento.", "Que peça ao empresário que retire a ameaça."], "Que seja educado e não demonstre triunfo."]
     ],
@@ -104,12 +104,12 @@
     "min": 143,
     "max": 203,
     "punti": [
-      ["Presentar la reportaje y el diario", ["correio do vale", "semanário", "jornal"]],
+      ["Presentar el reportaje y el diario", ["correio do vale", "semanário", "jornal"]],
       ["Explicar los desertos de notícias", ["deserto"]],
       ["El episodio del agua", ["água", "contaminada", "boato"]],
       ["Posiciones de Marlene y Tiago", ["tiago", "filho", "digital", "site"]],
       ["Discurso indirecto", ["afirmou que", "disse que", "explicou que", "segundo", "contou que"]]
     ],
-    "model": "A reportagem “O último jornal de papel do vale” conta a história do Correio do Vale, semanário fundado em 1974 e hoje o único veículo de imprensa de seis municípios do sul da Bahia. A editora, Marlene Andrade, explicou que a tiragem tinha caído de oito mil para pouco mais de mil exemplares e que a publicidade mal cobria os custos. Ela admitiu que pensava em fechar o jornal todos os dias.\n\nO texto relaciona o caso aos chamados desertos de notícias, municípios sem cobertura jornalística local. Segundo o professor Henrique Sales, nessas cidades ninguém fiscaliza a prefeitura e os boatos circulam sem contraponto. Marlene lembrou que, dois anos antes, um áudio falso sobre água contaminada tinha provocado pânico, e que foi o jornal que publicou a análise do laboratório e acalmou a população.\n\nQuanto ao futuro, o filho de Marlene, Tiago, afirmou que pretendia transformar o jornal em um site com assinatura digital e que quinhentos assinantes bastariam. A mãe disse que respeitava a ideia, mas duvidava que os leitores mais velhos acompanhassem a mudança."
+    "model": "A reportagem “O último jornal de papel do vale” conta a história do Correio do Vale, semanário fundado em 1974 e hoje o único veículo de imprensa de seis municípios do sul da Bahia. A jornalista Marlene Andrade, filha do fundador, explicou que a tiragem tinha caído de oito mil para pouco mais de mil exemplares e que a publicidade mal cobria os custos. Ela admitiu que pensava em fechar o jornal todos os dias.\n\nO texto relaciona o caso aos chamados desertos de notícias, municípios sem cobertura jornalística local. Segundo o professor Henrique Sales, nessas cidades ninguém fiscaliza a prefeitura e os boatos circulam sem contraponto. Marlene lembrou que, dois anos antes, um áudio falso sobre água contaminada tinha provocado pânico, e que foi o jornal que publicou a análise do laboratório e acalmou a população.\n\nQuanto ao futuro, o filho de Marlene, Tiago, afirmou que pretendia transformar o jornal em um site com assinatura digital e que quinhentos assinantes bastariam. A mãe disse que respeitava a ideia, mas duvidava que os leitores mais velhos acompanhassem a mudança."
   }
 }

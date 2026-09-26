@@ -100,7 +100,7 @@
     ],
     "vf": [
       [
-        "A narradora trabalha num escritório em São Paulo.",
+        "Quando chegou a São Paulo, a narradora trabalhava num escritório.",
         "verdadeiro"
       ],
       [
@@ -140,7 +140,7 @@
   "ascolto": {
     "title": "Convidei ela para uma cena",
     "genre": "programa de rádio com participação de ouvintes",
-    "es": "En un programa de radio de consultas sobre la lengua, la conductora, que es profesora, atiende el llamado de un oyente uruguayo que vive en Porto Alegre y cuenta sus problemas con palabras parecidas al español.",
+    "es": "En un programa de radio de consultas sobre la lengua, la conductora atiende el llamado de un oyente uruguayo que vive en Porto Alegre y cuenta sus problemas con palabras parecidas al español.",
     "speakers": [
       "Carla (apresentadora)",
       "Diego (ouvinte)"
@@ -348,6 +348,6 @@
         ]
       ]
     ],
-    "model": "Senhor editor,\n\nSou argentino, moro em Campinas há dois anos e li com um sorriso cúmplice a crônica “Esquisito é o polvo”, publicada no último domingo. Poucas vezes me senti tão bem retratado.\n\nComo a cronista, também tive o meu almoço desastroso. No meu caso, o problema foi a palavra propina: depois de uma reunião com clientes num restaurante, perguntei em voz alta ao meu chefe se deixávamos propina para o garçom. O silêncio na mesa foi tão longo quanto o descrito no texto. Só mais tarde me explicaram que, no Brasil, propina é suborno e que o que eu queria deixar era uma gorjeta.\n\nConcordo plenamente com o amigo professor citado pela cronista. As palavras que não entendemos nos obrigam a perguntar; as que achamos que entendemos nos deixam confiantes demais. Esquisito, borracha, escritório ou apelido parecem transparentes justamente porque existem no espanhol, e é essa falsa segurança que provoca os tropeços. Acrescentaria apenas que o risco não é só linguístico: um mal-entendido desses pode passar uma impressão de grosseria ou até de desonestidade, como quase aconteceu comigo diante dos clientes.\n\nPor isso, gostaria de sugerir ao jornal que publique mais textos como este. Além de divertidos, eles ajudam os muitos hispanofalantes que vivem no Brasil a perder o medo de errar e, ao mesmo tempo, a desconfiar do que parece fácil demais.\n\nAtenciosamente,\nGustavo Ferreyra, analista de sistemas, Campinas (SP)"
+    "model": "Senhor editor,\n\nSou argentino, moro em Campinas há dois anos e li com um sorriso cúmplice a crônica “Esquisito é o polvo”, publicada no último domingo. Poucas vezes me senti tão bem retratado.\n\nComo a cronista, também tive o meu almoço desastroso. No meu caso, o problema foi a palavra sobremesa: depois de um almoço de negócios, comentei com o meu chefe, diante dos clientes, que o melhor do encontro tinha sido a sobremesa, pensando na conversa tranquila depois da refeição. O silêncio na mesa foi tão longo quanto o descrito no texto. Só mais tarde me explicaram que, no Brasil, sobremesa é o doce servido no fim, e que os clientes tinham entendido que a reunião só valera pelo pudim.\n\nConcordo plenamente com o amigo professor citado pela cronista. As palavras que não entendemos nos obrigam a perguntar; as que achamos que entendemos nos deixam confiantes demais. Esquisito, borracha, escritório ou apelido parecem transparentes justamente porque existem no espanhol, e é essa falsa segurança que provoca os tropeços. Acrescentaria apenas que o risco não é só linguístico: um mal-entendido desses pode passar uma impressão de grosseria ou de desinteresse, como quase aconteceu comigo diante dos clientes.\n\nPor isso, gostaria de sugerir ao jornal que publique mais textos como este. Além de divertidos, eles ajudam os muitos hispanofalantes que vivem no Brasil a perder o medo de errar e, ao mesmo tempo, a desconfiar do que parece fácil demais.\n\nAtenciosamente,\nGustavo Ferreyra, analista de sistemas, Campinas (SP)"
   }
 }

@@ -114,20 +114,7 @@
     ],
     "hunt": {
       "label": "Tocá los infinitivos que dependen de un verbo de percepción (vedere, sentire, guardare)",
-      "targets": [
-        "uscire",
-        "scoppiare",
-        "chiamare",
-        "tossire",
-        "battere",
-        "arrivare",
-        "salire",
-        "piangere",
-        "pregare",
-        "tremare",
-        "aiutarsi",
-        "illuminargli"
-      ]
+      "targets": ["uscire", "scoppiare", "chiamare", "tossire", "battere", "illuminargli", "arrivare", "salire", "piangere", "pregare", "tremare", "aiutarsi", "portare", "prestarsi"]
     }
   },
   "ascolto": {

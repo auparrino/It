@@ -113,20 +113,7 @@
     ],
     "hunt": {
       "label": "Tocá los conectores textuales (dunque, pertanto, tuttavia…)",
-      "targets": [
-        "dunque",
-        "pertanto",
-        "infatti",
-        "d'altronde",
-        "ciononostante",
-        "tuttavia",
-        "peraltro",
-        "anzi",
-        "laddove",
-        "qualora",
-        "nondimeno",
-        "infine"
-      ]
+      "targets": ["dunque", "pertanto", "infatti", "d'altronde", "beninteso", "tuttavia", "ciononostante", "invece", "peraltro", "anzi", "laddove", "qualora", "inoltre", "semmai", "anziché", "nondimeno", "infine", "piuttosto"]
     }
   },
   "ascolto": {

@@ -6,7 +6,7 @@
     "emoji": "🚚",
     "genre": "reportagem",
     "grammar": "futuro do subjuntivo",
-    "text": "Quando a Renata Siqueira fala da mudança, ela ainda ri do caminhão. Foram onze horas de estrada entre São Paulo e uma cidadezinha no sul de Minas Gerais, com dois filhos, um cachorro e uma geladeira que não passava pela porta da casa nova. “Se alguém me perguntar se valeu a pena, eu vou dizer que sim. Mas vou dizer também que não foi o paraíso que eu tinha imaginado”, conta a designer, de 41 anos.\n\nA história dela não é rara. Nos últimos anos, com o trabalho remoto, muitas famílias das grandes capitais começaram a fazer as contas: aluguel mais barato, menos trânsito, mais tempo com as crianças. Quem acompanha esse tipo de mudança, porém, faz um alerta. “Quem sair da cidade grande só para fugir dos problemas vai encontrar outros”, resume o psicólogo Álvaro Tenório, que atende famílias em transição. Segundo ele, a primeira pergunta não é para onde ir, mas o que a pessoa espera encontrar lá.\n\nOs obstáculos costumam aparecer depois da lua de mel. A internet cai quando chove, o hospital mais próximo fica a quarenta minutos e a escola nem sempre oferece o que os pais queriam. Além disso, a vida social exige paciência: nas cidades pequenas, todo mundo se conhece, e o recém-chegado demora a ser convidado. “Se você quiser fazer amigos, vai ter que participar da festa da igreja, do mutirão da praça, da reunião da escola. Ninguém vai bater na sua porta”, diz Renata.\n\nPara quem estiver pensando em dar esse passo, Tenório sugere um período de teste. “Alugue uma casa por alguns meses antes de vender tudo. Se as crianças se adaptarem e o trabalho continuar funcionando, aí sim vale a pena pensar em algo definitivo.” Ele também recomenda conversar com os moradores antigos, e não só com outros paulistanos que fizeram o mesmo caminho. “Eles vão dizer como é o inverno, onde fica o médico bom, quem conserta o telhado. Isso não aparece em nenhum anúncio de imobiliária.”\n\nRenata, por enquanto, não pensa em voltar. “Enquanto eu puder trabalhar daqui e os meninos estiverem felizes, a gente fica. Quando eles forem para a faculdade, talvez a gente repense. Mas isso é assunto para daqui a dez anos.” Na janela da cozinha, a geladeira que não cabia na porta finalmente encontrou o seu lugar.",
+    "text": "Quando a Renata Siqueira fala da mudança, ela ainda ri do caminhão. Foram onze horas de estrada entre São Paulo e uma cidadezinha no sul de Minas Gerais, com dois filhos, um cachorro e uma geladeira que não passava pela porta da casa nova. “Se alguém me perguntar se valeu a pena, eu vou dizer que sim. Mas vou dizer também que não foi o paraíso que eu tinha imaginado”, conta a designer, de 41 anos.\n\nA história dela não é rara. Nos últimos anos, com o trabalho remoto, muitas famílias das grandes capitais começaram a fazer as contas: aluguel mais barato, menos trânsito, mais tempo com as crianças. Quem acompanha esse tipo de mudança, porém, faz um alerta. “Quem sair da cidade grande só para fugir dos problemas vai encontrar outros”, resume o psicólogo Álvaro Tenório, que atende famílias em transição. Segundo ele, a primeira pergunta não é para onde ir, mas o que a pessoa espera encontrar lá.\n\nOs obstáculos costumam aparecer depois da lua de mel. A internet cai quando chove, o hospital mais próximo fica a quarenta minutos e a escola nem sempre oferece o que os pais queriam. Além disso, a vida social exige paciência: nas cidades pequenas, todo mundo se conhece, e o recém-chegado demora a ser convidado. “Se você quiser fazer amigos, vai ter que participar da festa da igreja, do mutirão da praça, da reunião da escola. Ninguém vai bater na sua porta”, diz Renata.\n\nPara quem estiver pensando em dar esse passo, Tenório sugere um período de teste. “Alugue uma casa por alguns meses antes de vender tudo. Se as crianças se adaptarem e o trabalho continuar funcionando, aí sim vale a pena pensar em algo definitivo.” Ele também recomenda conversar com os moradores antigos, e não só com outros paulistanos que fizeram o mesmo caminho. “Eles vão dizer como é o inverno, onde fica o médico bom, quem conserta o telhado. Isso não aparece em nenhum anúncio de imobiliária.”\n\nRenata, por enquanto, não pensa em voltar. “Enquanto eu puder trabalhar daqui e os meninos estiverem felizes, a gente fica. Quando eles forem para a faculdade, talvez a gente repense. Mas isso é assunto para daqui a dez anos.” Na cozinha, ao lado da janela, a geladeira que não cabia na porta finalmente encontrou o seu lugar.",
     "gloss": {
       "caminhão": "camión",
       "estrada": "ruta",
@@ -25,7 +25,7 @@
       "conserta": "arregla",
       "telhado": "techo (de tejas)",
       "imobiliária": "inmobiliaria",
-      "repense": "lo repensemos",
+      "repense": "repensemos",
       "janela": "ventana",
       "cabia": "cabía"
     },
@@ -45,7 +45,7 @@
     ],
     "hunt": {
       "label": "Tocá los verbos en futuro do subjuntivo",
-      "targets": ["perguntar", "sair", "quiser", "estiver", "adaptarem", "puder", "estiverem", "forem"]
+      "targets": ["perguntar", "sair", "quiser", "estiver", "adaptarem", "continuar", "puder", "estiverem", "forem"]
     }
   },
   "ascolto": {
@@ -85,8 +85,8 @@
     ],
     "vf": [
       ["Paulo trabalha com mudanças internacionais há mais de dez anos.", "verdadeiro"],
-      ["Juliana já tem uma oferta de emprego no Canadá.", "não se diz"],
-      ["Rodrigo pretende se mudar sozinho e levar a família depois.", "falso"],
+      ["Juliana já tem parentes morando no Canadá.", "não se diz"],
+      ["Rodrigo pretende se mudar sem a mulher e os filhos.", "falso"],
       ["Paulo diz que a saudade pode ser evitada com planejamento.", "falso"]
     ]
   },

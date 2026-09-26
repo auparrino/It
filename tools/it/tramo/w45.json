@@ -14,7 +14,7 @@
       "scorta": "escolta, séquito",
       "borse": "bolsas",
       "sospira": "suspira",
-      "mutuo": "hipoteca",
+      "mutuo": "crédito hipotecario",
       "chirurgo": "cirujano",
       "discreta": "considerable, bastante",
       "colpevole": "culpable",
@@ -22,8 +22,8 @@
       "sbattendo": "golpeando (la puerta), dando un portazo",
       "minacciare": "amenazar",
       "passante": "transeúnte",
-      "padroneggerai": "dominarás, manejarás bien",
-      "freghi": "te ne freghi: te importa un bledo",
+      "padroneggerai": "vas a dominar, vas a manejar bien",
+      "freghi": "(te ne freghi) te importa un pepino",
       "dosato": "dosificado, usado con medida",
       "dirigente": "gerente, directivo",
       "trucco": "truco",
@@ -48,7 +48,7 @@
     ],
     "hunt": {
       "label": "Tocá los verbos pronominales en infinitivo o imperativo (farcela, prendertela…)",
-      "targets": ["farcela", "cavarsela", "prendersela", "avercela", "prendertela", "andarsene", "metterci", "volerci", "fregarsene", "smetterla", "smettila", "sentirsela"]
+      "targets": ["farcela", "cavarsela", "uscirne", "prendersela", "avercela", "prendertela", "andarsene", "metterci", "volerci", "fregarsene", "smetterla", "smettila", "sentirsela"]
     }
   },
   "ascolto": {
@@ -120,6 +120,6 @@
       ["referirse a la columna o a la entrevista", ["rubrica", "intervista", "comica", "serena", "beppe"]],
       ["dar un consejo sobre la ironía", ["ironi", "tono", "consigli"]]
     ],
-    "model": "Cara Sofía,\n\nche bello ricevere la tua email! Tranquilla, sentirsi persi è normalissimo: capita a tutti, anche a chi parla italiano da anni.\n\nProprio questa settimana ho letto una rubrica divertentissima, la lettera di un giornalista, Beppe, a un collega argentino, e ti assicuro che sembra scritta per te. Beppe spiega che il problema non è la grammatica, ma certi verbi piccolissimi pieni di pronomi. Prendi «farcela»: quando una collega sospira «non ce la faccio più», non vuol dire che ha fallito in qualcosa, ma che è stanca di tutto. Poi c'è «cavarsela»: gli italiani non dicono mai di essere bravi, dicono «me la cavo», anche quando sono dei geni. E attenta a «prendersela», cioè offendersi: se qualcuno ti dice «non prendertela», preparati a una critica!\n\nHo anche ascoltato un'intervista alla comica Serena Galli, secondo cui l'ironia italiana dipende quasi tutta dal tono. Se piove da giorni e il vicino ti dice «che bella giornata», ovviamente scherza. Lei, per far ridere gli stranieri, prende i modi di dire alla lettera, e secondo me è un ottimo esercizio anche per chi impara.\n\nIl mio consiglio? Non cercare di tradurre tutto. Guarda le facce, ascolta il tono e, quando non capisci, chiedi senza vergogna: gli italiani adorano spiegare le proprie battute, anche se poi non fanno più ridere nessuno.\n\nVedrai che in un paio di mesi te la caverai benissimo. E se proprio non ce la fai, chiamami!\n\nUn abbraccio forte,\nMartina"
+    "model": "Cara Sofía,\n\nche bello ricevere la tua email! Tranquilla, sentirsi persi è normalissimo: capita a tutti, anche a chi parla italiano da anni.\n\nProprio questa settimana ho letto una rubrica divertentissima, la lettera di un certo Beppe a un collega argentino, e ti assicuro che sembra scritta per te. Beppe spiega che il problema non è la grammatica, ma certi verbi piccolissimi pieni di pronomi. Prendi «farcela»: quando la vicina di casa sospira «non ce la faccio più», non vuol dire che ha fallito in qualcosa, ma che è stanca di tutto. Poi c'è «cavarsela»: gli italiani non dicono mai di essere bravi, dicono «me la cavo», anche quando sono dei geni. E attenta a «prendersela», cioè offendersi: se qualcuno ti dice «non prendertela», preparati a una critica!\n\nHo anche ascoltato un'intervista alla comica Serena Galli, secondo cui l'ironia italiana dipende quasi tutta dal tono. Se piove da giorni e il vicino ti dice «che bella giornata», ovviamente scherza. Lei, per far ridere gli stranieri, prende i modi di dire alla lettera, e secondo me è un ottimo esercizio anche per chi impara.\n\nIl mio consiglio? Non cercare di tradurre tutto. Guarda le facce, ascolta il tono e, quando non capisci, chiedi senza vergogna: gli italiani adorano spiegare le proprie battute, anche se poi non fanno più ridere nessuno.\n\nVedrai che in un paio di mesi te la caverai benissimo. E se proprio non ce la fai, chiamami!\n\nUn abbraccio forte,\nMartina"
   }
 }

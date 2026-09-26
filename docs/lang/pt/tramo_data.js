@@ -129,7 +129,7 @@
     "emoji": "🚚",
     "genre": "reportagem",
     "grammar": "futuro do subjuntivo",
-    "text": "Quando a Renata Siqueira fala da mudança, ela ainda ri do caminhão. Foram onze horas de estrada entre São Paulo e uma cidadezinha no sul de Minas Gerais, com dois filhos, um cachorro e uma geladeira que não passava pela porta da casa nova. “Se alguém me perguntar se valeu a pena, eu vou dizer que sim. Mas vou dizer também que não foi o paraíso que eu tinha imaginado”, conta a designer, de 41 anos.\n\nA história dela não é rara. Nos últimos anos, com o trabalho remoto, muitas famílias das grandes capitais começaram a fazer as contas: aluguel mais barato, menos trânsito, mais tempo com as crianças. Quem acompanha esse tipo de mudança, porém, faz um alerta. “Quem sair da cidade grande só para fugir dos problemas vai encontrar outros”, resume o psicólogo Álvaro Tenório, que atende famílias em transição. Segundo ele, a primeira pergunta não é para onde ir, mas o que a pessoa espera encontrar lá.\n\nOs obstáculos costumam aparecer depois da lua de mel. A internet cai quando chove, o hospital mais próximo fica a quarenta minutos e a escola nem sempre oferece o que os pais queriam. Além disso, a vida social exige paciência: nas cidades pequenas, todo mundo se conhece, e o recém-chegado demora a ser convidado. “Se você quiser fazer amigos, vai ter que participar da festa da igreja, do mutirão da praça, da reunião da escola. Ninguém vai bater na sua porta”, diz Renata.\n\nPara quem estiver pensando em dar esse passo, Tenório sugere um período de teste. “Alugue uma casa por alguns meses antes de vender tudo. Se as crianças se adaptarem e o trabalho continuar funcionando, aí sim vale a pena pensar em algo definitivo.” Ele também recomenda conversar com os moradores antigos, e não só com outros paulistanos que fizeram o mesmo caminho. “Eles vão dizer como é o inverno, onde fica o médico bom, quem conserta o telhado. Isso não aparece em nenhum anúncio de imobiliária.”\n\nRenata, por enquanto, não pensa em voltar. “Enquanto eu puder trabalhar daqui e os meninos estiverem felizes, a gente fica. Quando eles forem para a faculdade, talvez a gente repense. Mas isso é assunto para daqui a dez anos.” Na janela da cozinha, a geladeira que não cabia na porta finalmente encontrou o seu lugar.",
+    "text": "Quando a Renata Siqueira fala da mudança, ela ainda ri do caminhão. Foram onze horas de estrada entre São Paulo e uma cidadezinha no sul de Minas Gerais, com dois filhos, um cachorro e uma geladeira que não passava pela porta da casa nova. “Se alguém me perguntar se valeu a pena, eu vou dizer que sim. Mas vou dizer também que não foi o paraíso que eu tinha imaginado”, conta a designer, de 41 anos.\n\nA história dela não é rara. Nos últimos anos, com o trabalho remoto, muitas famílias das grandes capitais começaram a fazer as contas: aluguel mais barato, menos trânsito, mais tempo com as crianças. Quem acompanha esse tipo de mudança, porém, faz um alerta. “Quem sair da cidade grande só para fugir dos problemas vai encontrar outros”, resume o psicólogo Álvaro Tenório, que atende famílias em transição. Segundo ele, a primeira pergunta não é para onde ir, mas o que a pessoa espera encontrar lá.\n\nOs obstáculos costumam aparecer depois da lua de mel. A internet cai quando chove, o hospital mais próximo fica a quarenta minutos e a escola nem sempre oferece o que os pais queriam. Além disso, a vida social exige paciência: nas cidades pequenas, todo mundo se conhece, e o recém-chegado demora a ser convidado. “Se você quiser fazer amigos, vai ter que participar da festa da igreja, do mutirão da praça, da reunião da escola. Ninguém vai bater na sua porta”, diz Renata.\n\nPara quem estiver pensando em dar esse passo, Tenório sugere um período de teste. “Alugue uma casa por alguns meses antes de vender tudo. Se as crianças se adaptarem e o trabalho continuar funcionando, aí sim vale a pena pensar em algo definitivo.” Ele também recomenda conversar com os moradores antigos, e não só com outros paulistanos que fizeram o mesmo caminho. “Eles vão dizer como é o inverno, onde fica o médico bom, quem conserta o telhado. Isso não aparece em nenhum anúncio de imobiliária.”\n\nRenata, por enquanto, não pensa em voltar. “Enquanto eu puder trabalhar daqui e os meninos estiverem felizes, a gente fica. Quando eles forem para a faculdade, talvez a gente repense. Mas isso é assunto para daqui a dez anos.” Na cozinha, ao lado da janela, a geladeira que não cabia na porta finalmente encontrou o seu lugar.",
     "gloss": {
      "caminhão": "camión",
      "estrada": "ruta",
@@ -148,7 +148,7 @@
      "conserta": "arregla",
      "telhado": "techo (de tejas)",
      "imobiliária": "inmobiliaria",
-     "repense": "lo repensemos",
+     "repense": "repensemos",
      "janela": "ventana",
      "cabia": "cabía"
     },
@@ -234,6 +234,7 @@
       "quiser",
       "estiver",
       "adaptarem",
+      "continuar",
       "puder",
       "estiverem",
       "forem"
@@ -362,11 +363,11 @@
       "verdadeiro"
      ],
      [
-      "Juliana já tem uma oferta de emprego no Canadá.",
+      "Juliana já tem parentes morando no Canadá.",
       "não se diz"
      ],
      [
-      "Rodrigo pretende se mudar sozinho e levar a família depois.",
+      "Rodrigo pretende se mudar sem a mulher e os filhos.",
       "falso"
      ],
      [
@@ -570,7 +571,7 @@
      ],
      [
       "B",
-      "Olha, se eu fosse sincero, diria que é medo. Medo de largar um salário garantido e depois dar tudo errado."
+      "Olha, sendo bem sincero, é medo. Medo de largar um salário garantido e depois dar tudo errado."
      ],
      [
       "A",
@@ -754,7 +755,7 @@
     "emoji": "🎓",
     "genre": "guia informativo",
     "grammar": "infinitivo pessoal",
-    "text": "Todo semestre, milhares de universitários começam o primeiro estágio com a mesma mistura de entusiasmo e insegurança. Querem aprender, querem causar boa impressão e, muitas vezes, aceitam qualquer condição por medo de perderem a vaga. Preparamos este guia para vocês conhecerem seus direitos antes de assinarem qualquer papel.\n\nO que é, afinal, um estágio? Pela lei, o estágio é um ato educativo. Isso significa que a prioridade não é a produção da empresa, mas o aprendizado do estudante. Por isso, a instituição de ensino, a empresa e o estagiário assinam um termo de compromisso que descreve as atividades previstas. Recomendamos vocês guardarem uma cópia desse documento: é ele que vai servir de prova se algo der errado.\n\nHorário e descanso. Para quem está no ensino superior, a jornada não pode passar de seis horas por dia. É comum, porém, os estagiários ficarem até mais tarde “só hoje”, e depois todos os dias, sem ninguém se dar conta. Hora extra não faz parte do estágio. Além disso, depois de um ano no mesmo lugar, vocês têm direito a um recesso de trinta dias, de preferência coincidindo com as férias escolares, justamente para poderem descansar da rotina dupla.\n\nBolsa e transporte. No estágio não obrigatório, aquele que o estudante faz por escolha própria, a empresa deve pagar uma bolsa e um auxílio-transporte. Desconfiem de propostas que oferecem apenas “experiência” como recompensa: experiência não paga aluguel nem passagem de ônibus.\n\nQuando algo não vai bem. Muitos colegas contam que passam o dia tirando cópias ou atendendo o telefone, tarefas que nada têm a ver com o curso. Antes de pedirem demissão, conversem com o supervisor da empresa e com o professor orientador. Eles existem justamente para os estágios cumprirem sua função. Se a situação não mudar, procurem a coordenação do curso: vocês têm o direito de serem ouvidos sem sofrerem represálias.\n\nPor fim, um lembrete: conhecer os direitos não é ser encrenqueiro. As boas empresas são as primeiras a quererem estagiários bem informados, porque sabem que um estágio bem feito é o começo de uma carreira sólida. Ao terminarem a leitura, compartilhem este guia com os colegas. Quanto mais estudantes souberem disso, mais difícil vai ser alguém abusar.\n\nColetivo Estágio Justo, centro acadêmico da Faculdade de Administração",
+    "text": "Todo semestre, milhares de universitários começam o primeiro estágio com a mesma mistura de entusiasmo e insegurança. Querem aprender, querem causar boa impressão e, muitas vezes, aceitam qualquer condição por medo de perderem a vaga. Preparamos este guia para vocês conhecerem seus direitos antes de assinarem qualquer papel.\n\nO que é, afinal, um estágio? Pela lei, o estágio é um ato educativo. Isso significa que a prioridade não é a produção da empresa, mas o aprendizado do estudante. Por isso, a instituição de ensino, a empresa e o estagiário assinam um termo de compromisso que descreve as atividades previstas. É fundamental vocês guardarem uma cópia desse documento: é ele que vai servir de prova se algo der errado.\n\nHorário e descanso. Para quem está no ensino superior, a jornada não pode passar de seis horas por dia. É comum, porém, os estagiários ficarem até mais tarde “só hoje”, e depois todos os dias, sem ninguém se dar conta. Hora extra não faz parte do estágio. Além disso, depois de um ano no mesmo lugar, vocês têm direito a um recesso de trinta dias, de preferência coincidindo com as férias escolares, justamente para poderem descansar da rotina dupla.\n\nBolsa e transporte. No estágio não obrigatório, aquele que o estudante faz por escolha própria, a empresa deve pagar uma bolsa e um auxílio-transporte. Desconfiem de propostas que oferecem apenas “experiência” como recompensa: experiência não paga aluguel nem passagem de ônibus.\n\nQuando algo não vai bem. Muitos colegas contam que passam o dia tirando cópias ou atendendo o telefone, tarefas que nada têm a ver com o curso. Antes de pedirem demissão, conversem com o supervisor da empresa e com o professor orientador. Eles existem justamente para os estágios cumprirem sua função. Se a situação não mudar, procurem a coordenação do curso: vocês têm o direito de serem ouvidos sem sofrerem represálias.\n\nPor fim, um lembrete: conhecer os direitos não é ser encrenqueiro. As boas empresas são as primeiras a quererem estagiários bem informados, porque sabem que um estágio bem feito é o começo de uma carreira sólida. Ao terminarem a leitura, compartilhem este guia com os colegas. Quanto mais estudantes souberem disso, mais difícil vai ser alguém abusar.\n\nColetivo Estágio Justo, centro acadêmico da Faculdade de Administração",
     "gloss": {
      "estágio": "pasantía",
      "vaga": "puesto, lugar",
@@ -1071,7 +1072,7 @@
     "emoji": "✉️",
     "genre": "crônica memorialística",
     "grammar": "tempos compostos e hipótese no passado",
-    "text": "Minha avó Zefinha morreu no ano passado, aos noventa e dois anos, e deixou uma caixa de sapatos cheia de cartas. Eu tinha passado a infância inteira na casa dela, na Zona Leste de São Paulo, e nunca tinha reparado naquela caixa, escondida no alto do guarda-roupa. Se alguém me tivesse perguntado, eu teria jurado que conhecia todas as histórias dela. Estava enganada.\n\nAs cartas eram de um rapaz chamado Severino, escritas entre 1958 e 1961, de uma cidadezinha do sertão da Paraíba. Pelas datas, entendi que ela já tinha vindo para São Paulo quando as recebeu. Ele falava da seca, da mãe doente, de um roçado que não tinha dado nada naquele ano. E, em quase todas, perguntava a mesma coisa: quando ela ia voltar.\n\nMinha avó nunca voltou. Casou com meu avô, um pedreiro pernambucano que ela tinha conhecido na fila de um posto de saúde, criou cinco filhos e só pisou de novo na Paraíba quarenta anos depois, para o enterro de uma irmã. Nunca mencionou nenhum Severino. Minha mãe, quando mostrei as cartas, ficou um tempo em silêncio e depois disse: “Se ela tivesse ficado lá, eu não teria nascido. Nem você.”\n\nÉ uma frase óbvia, mas me acompanhou por semanas. Fiquei imaginando a outra vida possível: a moça que teria se casado com Severino, que teria plantado feijão em vez de costurar para fora, que talvez tivesse sido mais feliz, ou menos. Não há como saber. O que sei é que, se eu não tivesse encontrado aquela caixa, teria continuado a ver minha avó como uma personagem simples, sem segredos, a senhora que fazia cuscuz aos domingos.\n\nA memória de uma família, percebo agora, é feita tanto do que se conta quanto do que se cala. Minha avó tinha guardado aquelas cartas durante mais de sessenta anos. Não as tinha queimado nem jogado fora. Terá sido saudade? Arrependimento? Ou apenas o costume de quem aprendeu a não desperdiçar nada, nem papel?\n\nTentei procurar o Severino. Um primo que ainda mora no sertão descobriu que ele tinha morrido nos anos noventa, depois de ter trabalhado a vida inteira na mesma terra. Tinha tido filhos, netos. Talvez algum deles guarde, numa gaveta, as cartas que minha avó escreveu de volta. Gosto de pensar que sim. Gosto de pensar que, em algum lugar, a outra metade da conversa também sobreviveu.",
+    "text": "Minha avó Zefinha morreu no ano passado, aos noventa e dois anos, e deixou uma caixa de sapatos cheia de cartas. Eu tinha passado a infância inteira na casa dela, na Zona Leste de São Paulo, e nunca tinha reparado naquela caixa, escondida no alto do guarda-roupa. Se alguém tivesse me perguntado, eu teria jurado que conhecia todas as histórias dela. Estava enganada.\n\nAs cartas eram de um rapaz chamado Severino, escritas entre 1958 e 1961, de uma cidadezinha do sertão da Paraíba. Pelas datas, entendi que ela já tinha vindo para São Paulo quando as recebeu. Ele falava da seca, da mãe doente, de um roçado que não tinha dado nada naquele ano. E, em quase todas, perguntava a mesma coisa: quando ela ia voltar.\n\nMinha avó nunca voltou. Casou com meu avô, um pedreiro pernambucano que ela tinha conhecido na fila de um posto de saúde, criou cinco filhos e só pisou de novo na Paraíba quarenta anos depois, para o enterro de uma irmã. Nunca mencionou nenhum Severino. Minha mãe, quando mostrei as cartas, ficou um tempo em silêncio e depois disse: “Se ela tivesse ficado lá, eu não teria nascido. Nem você.”\n\nÉ uma frase óbvia, mas me acompanhou por semanas. Fiquei imaginando a outra vida possível: a moça que teria se casado com Severino, que teria plantado feijão em vez de costurar para fora, que talvez tivesse sido mais feliz, ou menos. Não há como saber. O que sei é que, se eu não tivesse encontrado aquela caixa, teria continuado a ver minha avó como uma personagem simples, sem segredos, a senhora que fazia cuscuz aos domingos.\n\nA memória de uma família, percebo agora, é feita tanto do que se conta quanto do que se cala. Minha avó tinha guardado aquelas cartas durante mais de sessenta anos. Não as tinha queimado nem jogado fora. Terá sido saudade? Arrependimento? Ou apenas o costume de quem aprendeu a não desperdiçar nada, nem papel?\n\nTentei procurar o Severino. Um primo que ainda mora no sertão descobriu que ele tinha morrido nos anos noventa, depois de ter trabalhado a vida inteira na mesma terra. Tinha tido filhos, netos. Talvez algum deles guarde, numa gaveta, as cartas que minha avó escreveu de volta. Gosto de pensar que sim. Gosto de pensar que, em algum lugar, a outra metade da conversa também sobreviveu.",
     "gloss": {
      "reparado": "notado, prestado atención",
      "guarda-roupa": "ropero",
@@ -1100,10 +1101,10 @@
       [
        "Que o avô tinha escrito cartas de amor para uma moça de Pernambuco.",
        "Que a avó tinha voltado várias vezes para a Paraíba.",
-       "Que a avó tinha tido um pretendente no sertão antes de casar.",
-       "Que a mãe já conhecia a história de Severino."
+       "Que a avó tinha deixado no sertão um rapaz que esperava a sua volta.",
+       "Que Severino era um irmão da avó que ficou no sertão."
       ],
-      "Que a avó tinha tido um pretendente no sertão antes de casar."
+      "Que a avó tinha deixado no sertão um rapaz que esperava a sua volta."
      ],
      [
       "A frase da mãe, “Nem você”, tem o efeito de…",
@@ -1148,7 +1149,7 @@
     ],
     "vf": [
      [
-      "As cartas foram escritas ao longo de alguns anos, no fim da década de 1950.",
+      "As cartas foram escritas ao longo de alguns anos, entre o fim dos anos 1950 e o início dos anos 1960.",
       "verdadeiro"
      ],
      [
@@ -1169,14 +1170,12 @@
      ]
     ],
     "hunt": {
-     "label": "Tocá los auxiliares de los tiempos compuestos (ter, ser)",
+     "label": "Tocá las formas del auxiliar ter en los tiempos compuestos (tinha, tivesse, teria…)",
      "targets": [
       "tinha",
       "tivesse",
       "teria",
       "terá",
-      "tido",
-      "sido",
       "ter"
      ]
     }
@@ -1372,7 +1371,7 @@
       ]
      ]
     ],
-    "model": "O relógio que parou em Buenos Aires\n\nA crônica “As cartas da caixa de sapatos” me fez pensar que a memória de uma família também é feita de silêncios. Às vezes, um único objeto guarda uma história que ninguém teve coragem de contar.\n\nNa minha casa, esse objeto é um relógio de bolso que pertenceu ao meu bisavô, um espanhol que chegou a Buenos Aires em 1923. O relógio está parado às quatro e dez, e meu pai sempre disse que tinha sido assim desde sempre. Só no ano passado, conversando com uma tia, descobri que meu bisavô tinha comprado uma passagem para o Rio de Janeiro, onde um irmão o esperava. Na véspera da viagem, conheceu minha bisavó num baile e desistiu.\n\nSe ele tivesse embarcado, eu teria nascido brasileiro, e talvez estivesse escrevendo este relato na minha língua materna. Não sei se teríamos sido mais felizes. Sei que o relógio parado, hoje, me parece menos um defeito e mais uma lembrança daquela noite em que tudo poderia ter sido diferente."
+    "model": "O relógio que parou em Buenos Aires\n\nA crônica “As cartas da caixa de sapatos” me fez pensar que a memória de uma família também é feita de silêncios. Às vezes, um único objeto guarda uma história que ninguém teve coragem de contar.\n\nNa minha casa, esse objeto é um relógio de bolso que pertenceu ao meu bisavô, um espanhol que chegou a Buenos Aires em 1923. O relógio está parado às quatro e dez, e meu pai sempre disse que ninguém sabia por quê. Só no ano passado, conversando com uma tia, descobri que meu bisavô tinha comprado uma passagem para o Rio de Janeiro, onde um irmão o esperava. Na véspera da viagem, conheceu minha bisavó num baile e desistiu.\n\nSe ele tivesse embarcado, eu teria nascido brasileiro, e talvez estivesse escrevendo este relato na minha língua materna. Não sei se teríamos sido mais felizes. Sei que o relógio parado, hoje, me parece menos um defeito e mais uma lembrança daquela noite em que tudo poderia ter sido diferente."
    }
   },
   {
@@ -1525,7 +1524,7 @@
      ],
      [
       "B",
-      "Tá, o título ficou forte. Mas quem fez o título foi a mesa, não fui eu."
+      "Tá, o título ficou forte. Mas quem fez o título foi o pessoal do fechamento, não fui eu."
      ],
      [
       "A",
@@ -1549,7 +1548,7 @@
      ],
      [
       "B",
-      "Pode deixar. Aliás, acho que vale uma conversa com a mesa sobre títulos. Não é a primeira vez que isso acontece."
+      "Pode deixar. Aliás, acho que vale uma conversa com o pessoal do fechamento sobre títulos. Não é a primeira vez que isso acontece."
      ],
      [
       "A",
@@ -1562,7 +1561,7 @@
      "gravado": "grabado",
      "demitir": "despedir, echar",
      "pessoal": "personal, empleados",
-     "mesa": "mesa de edición (quienes titulan)",
+     "fechamento": "cierre (el equipo que titula y cierra la edición)",
      "sumiu": "desapareció",
      "esclarecimento": "aclaración",
      "trecho": "fragmento",
@@ -1596,7 +1595,7 @@
        "No título, que transformou uma condição em anúncio.",
        "No texto do repórter, que inventou a declaração do empresário.",
        "Na gravação, que estava com trechos incompreensíveis.",
-       "Na foto escolhida pela mesa para ilustrar a matéria."
+       "Na foto escolhida pelo fechamento para ilustrar a matéria."
       ],
       "No título, que transformou uma condição em anúncio."
      ],
@@ -1650,7 +1649,7 @@
     "max": 203,
     "punti": [
      [
-      "Presentar la reportaje y el diario",
+      "Presentar el reportaje y el diario",
       [
        "correio do vale",
        "semanário",
@@ -1691,7 +1690,7 @@
       ]
      ]
     ],
-    "model": "A reportagem “O último jornal de papel do vale” conta a história do Correio do Vale, semanário fundado em 1974 e hoje o único veículo de imprensa de seis municípios do sul da Bahia. A editora, Marlene Andrade, explicou que a tiragem tinha caído de oito mil para pouco mais de mil exemplares e que a publicidade mal cobria os custos. Ela admitiu que pensava em fechar o jornal todos os dias.\n\nO texto relaciona o caso aos chamados desertos de notícias, municípios sem cobertura jornalística local. Segundo o professor Henrique Sales, nessas cidades ninguém fiscaliza a prefeitura e os boatos circulam sem contraponto. Marlene lembrou que, dois anos antes, um áudio falso sobre água contaminada tinha provocado pânico, e que foi o jornal que publicou a análise do laboratório e acalmou a população.\n\nQuanto ao futuro, o filho de Marlene, Tiago, afirmou que pretendia transformar o jornal em um site com assinatura digital e que quinhentos assinantes bastariam. A mãe disse que respeitava a ideia, mas duvidava que os leitores mais velhos acompanhassem a mudança."
+    "model": "A reportagem “O último jornal de papel do vale” conta a história do Correio do Vale, semanário fundado em 1974 e hoje o único veículo de imprensa de seis municípios do sul da Bahia. A jornalista Marlene Andrade, filha do fundador, explicou que a tiragem tinha caído de oito mil para pouco mais de mil exemplares e que a publicidade mal cobria os custos. Ela admitiu que pensava em fechar o jornal todos os dias.\n\nO texto relaciona o caso aos chamados desertos de notícias, municípios sem cobertura jornalística local. Segundo o professor Henrique Sales, nessas cidades ninguém fiscaliza a prefeitura e os boatos circulam sem contraponto. Marlene lembrou que, dois anos antes, um áudio falso sobre água contaminada tinha provocado pânico, e que foi o jornal que publicou a análise do laboratório e acalmou a população.\n\nQuanto ao futuro, o filho de Marlene, Tiago, afirmou que pretendia transformar o jornal em um site com assinatura digital e que quinhentos assinantes bastariam. A mãe disse que respeitava a ideia, mas duvidava que os leitores mais velhos acompanhassem a mudança."
    }
   },
   {
@@ -2028,7 +2027,7 @@
     "emoji": "🕰️",
     "genre": "conto",
     "grammar": "colocação pronominal na escrita",
-    "text": "Numa tarde de março de 1911, entrou no cartório de Vila Rica do Norte um velho de chapéu gasto, que trazia debaixo do braço uma caixa de madeira. O tabelião, Dr. Anselmo Valadares, recebeu-o com a cortesia um tanto cansada de quem já ouvira todas as histórias da cidade e não esperava ouvir nenhuma nova.\n\n— Venho fazer o meu testamento — disse o velho, sentando-se antes que lhe oferecessem a cadeira.\n\n— Pois não. Diga-me o seu nome e os bens que possui.\n\nO velho chamava-se Joaquim Pereira e fora, durante quarenta anos, o único relojoeiro da vila. Não tinha mulher nem filhos, e os seus bens resumiam-se a uma casa de dois cômodos e àquela caixa, que abriu com vagar sobre a mesa. Dentro havia um relógio de parede desmontado, peça por peça, cada uma embrulhada em papel de seda.\n\n— Deixo a casa à Santa Casa de Misericórdia — explicou. — O relógio, deixá-lo-ei a quem conseguir montá-lo.\n\nO tabelião ergueu os olhos. Em vinte anos de ofício, nunca se deparara com cláusula semelhante. Tentou dissuadi-lo: a lei exigia herdeiros determinados, e um testamento assim abrir-se-ia a toda sorte de disputas. O velho, porém, não se deixou convencer.\n\n— O senhor escreva. Os juízes que se entendam depois.\n\nAnselmo escreveu. Enquanto a pena corria sobre o papel, perguntou-lhe, por pura curiosidade, por que razão desmontara o relógio. Joaquim demorou a responder.\n\n— Porque me ensinaram que um relógio só é nosso quando sabemos refazê-lo. Quem o montar há de entender o que eu entendi.\n\nMeses depois, o relojoeiro morreu, e a notícia do estranho legado espalhou-se pela vila. Apareceram candidatos de toda parte: ferreiros, estudantes, um padre com fama de engenhoso, até um engenheiro vindo da capital. Todos se debruçaram sobre as peças, e todos desistiram. Faltava sempre alguma coisa, ou sobrava.\n\nO engenheiro, dizem, passou três semanas trancado numa sala da prefeitura, cercado de desenhos e cálculos, e saiu de lá convencido de que o velho lhe pregara uma peça. Escreveu ao tabelião uma carta indignada, exigindo que se anulasse o testamento. Anselmo respondeu-lhe em duas linhas: a cláusula era clara, e o prazo ainda não se esgotara.\n\nFoi uma menina de onze anos, filha da lavadeira que servia ao cartório, quem pediu para tentar. Os adultos riram-se dela, mas o tabelião, por um impulso que nunca soube explicar, entregou-lhe a caixa. A menina levou-a para casa e só a devolveu na primavera seguinte, com o relógio funcionando.\n\n— Como conseguiu? — perguntou-lhe Anselmo, incrédulo.\n\n— Seu Joaquim me ensinou, quando eu era pequena. Eu ficava na janela da oficina, e ele me explicava cada peça. Disse-me que um dia eu ia entender para quê.\n\nO tabelião registrou a entrega com a solenidade de um ato público. Contam na vila que, ao fechar o livro, murmurou para si mesmo: “Far-se-á justiça, afinal, ainda que por caminhos tortos.” E contam também que, até o fim da vida, nunca mais se atrasou para compromisso algum.",
+    "text": "Numa tarde de março de 1911, entrou no cartório de Vila Rica do Norte um velho de chapéu gasto, que trazia debaixo do braço uma caixa de madeira. O tabelião, Dr. Anselmo Valadares, recebeu-o com a cortesia um tanto cansada de quem já ouvira todas as histórias da cidade e não esperava ouvir nenhuma nova.\n\n— Venho fazer o meu testamento — disse o velho, sentando-se antes que lhe oferecessem a cadeira.\n\n— Pois não. Diga-me o seu nome e os bens que possui.\n\nO velho chamava-se Joaquim Pereira e fora, durante quarenta anos, o único relojoeiro da vila. Não tinha mulher nem filhos, e os seus bens resumiam-se a uma casa de dois cômodos e àquela caixa, que abriu com vagar sobre a mesa. Dentro havia um relógio de parede desmontado, peça por peça, cada uma embrulhada em papel de seda.\n\n— Deixo a casa à Santa Casa de Misericórdia — explicou. — O relógio, deixá-lo-ei a quem conseguir montá-lo.\n\nO tabelião ergueu os olhos. Em vinte anos de ofício, nunca se deparara com cláusula semelhante. Tentou dissuadi-lo: os juízes costumavam desconfiar de herdeiros incertos, e um testamento assim abrir-se-ia a toda sorte de disputas. O velho, porém, não se deixou convencer.\n\n— O senhor escreva. Os juízes que se entendam depois.\n\nAnselmo escreveu. Enquanto a pena corria sobre o papel, perguntou-lhe, por pura curiosidade, por que razão desmontara o relógio. Joaquim demorou a responder.\n\n— Porque me ensinaram que um relógio só é nosso quando sabemos refazê-lo. Quem o montar há de entender o que eu entendi.\n\nMeses depois, o relojoeiro morreu, e a notícia do estranho legado espalhou-se pela vila. Apareceram candidatos de toda parte: ferreiros, estudantes, um padre com fama de engenhoso, até um engenheiro vindo da capital. Todos se debruçaram sobre as peças, e todos desistiram. Faltava sempre alguma coisa, ou sobrava.\n\nO engenheiro, dizem, passou três semanas trancado numa sala da prefeitura, cercado de desenhos e cálculos, e saiu de lá convencido de que o velho lhe pregara uma peça. Escreveu ao tabelião uma carta indignada, exigindo que se anulasse o testamento. Anselmo respondeu-lhe em duas linhas: a cláusula era clara, e o prazo ainda não se esgotara.\n\nFoi uma menina de onze anos, filha da lavadeira que servia ao cartório, quem pediu para tentar. Os adultos riram-se dela, mas o tabelião, por um impulso que nunca soube explicar, entregou-lhe a caixa. A menina levou-a para casa e só a devolveu na primavera seguinte, com o relógio funcionando.\n\n— Como conseguiu? — perguntou-lhe Anselmo, incrédulo.\n\n— Seu Joaquim me ensinou, quando eu era pequena. Eu ficava na janela da oficina, e ele me explicava cada peça. Ele me disse que um dia eu ia entender para quê.\n\nO tabelião registrou a entrega com a solenidade de um ato público. Contam na vila que, ao fechar o livro, murmurou para si mesmo: “Far-se-á justiça, afinal, ainda que por caminhos tortos.” E contam também que, até o fim da vida, nunca mais se atrasou para compromisso algum.",
     "gloss": {
      "cartório": "escribanía",
      "gasto": "gastado",
@@ -2037,7 +2036,7 @@
      "cômodos": "ambientes, cuartos",
      "vagar": "calma, lentitud",
      "embrulhada": "envuelta",
-     "seda": "seda (“papel de seda”: papel manteca fino)",
+     "seda": "seda (“papel de seda”: papel finito para envolver)",
      "deixá-lo-ei": "lo dejaré",
      "ergueu": "levantó",
      "deparara": "se había topado",
@@ -2111,7 +2110,7 @@
       "verdadeiro"
      ],
      [
-      "A menina montou o relógio em poucos dias.",
+      "A menina montou o relógio ali mesmo, no cartório.",
       "falso"
      ],
      [
@@ -2140,7 +2139,6 @@
       "espalhou-se",
       "entregou-lhe",
       "levou-a",
-      "disse-me",
       "far-se-á"
      ]
     }
@@ -2330,7 +2328,7 @@
       ]
      ]
     ],
-    "model": "Um relógio que ensina a esperar\n\n“O testamento do relojoeiro” é um conto curto que se passa numa pequena vila, em 1911. Um velho relojoeiro, Joaquim Pereira, procura o tabelião da cidade para fazer um testamento curioso: deixará um relógio desmontado a quem conseguir montá-lo. Após a morte de Joaquim, candidatos de toda parte tentam resolver o enigma, sem sucesso. O desfecho, que não convém revelar aqui, surpreende pela simplicidade e emociona sem apelar para o sentimentalismo.\n\nO que mais me chamou a atenção foi a linguagem. O narrador escreve num registro formal, quase antigo, cheio de ênclises e até de mesóclises, como “deixá-lo-ei” e “far-se-á”. As personagens, porém, falam de modo mais simples, e uma delas diz “me ensinou”, como qualquer brasileiro diria. Esse contraste cria um efeito interessante: sente-se a distância entre o mundo solene do cartório e o saber transmitido de forma afetiva, na janela de uma oficina.\n\nRecomendo a leitura a quem gosta de histórias que parecem pequenas, mas guardam uma reflexão sobre o tempo e sobre aquilo que só se aprende com paciência. Lê-se em dez minutos e fica na memória por muito mais."
+    "model": "Um relógio que ensina a esperar\n\n“O testamento do relojoeiro” é um conto curto que se passa numa pequena vila, em 1911. Um velho relojoeiro, Joaquim Pereira, procura o tabelião da cidade para fazer um testamento curioso: deixará um relógio desmontado a quem conseguir montá-lo. Após a morte de Joaquim, candidatos de toda parte tentam resolver o enigma, sem sucesso. O desfecho, que não convém revelar aqui, surpreende pela simplicidade e emociona sem apelar para o sentimentalismo.\n\nO que mais me chamou a atenção foi a linguagem. O narrador escreve num registro formal, quase antigo, cheio de ênclises e até de mesóclises, como “recebeu-o” e “abrir-se-ia”. Nem todas as personagens, porém, falam desse modo: a menina diz “me ensinou”, como qualquer brasileiro diria. Esse contraste cria um efeito interessante: sente-se a distância entre o mundo solene do cartório e o saber transmitido de forma afetiva, na janela de uma oficina.\n\nRecomendo a leitura a quem gosta de histórias que parecem pequenas, mas guardam uma reflexão sobre o tempo e sobre aquilo que só se aprende com paciência. Lê-se em dez minutos e fica na memória por muito mais."
    }
   },
   {
@@ -2453,7 +2451,7 @@
     }
    },
    "ascolto": {
-    "title": "Canudo, copo e sacola: proibir resolve?",
+    "title": "Canudo, copo e talher: proibir resolve?",
     "genre": "debate radiofônico",
     "es": "En un debate de radio, una bióloga de una ONG ambiental y el dueño de un restaurante discuten un proyecto municipal que prohibiría los descartables de plástico en bares y restaurantes.",
     "speakers": [
@@ -2595,7 +2593,7 @@
     "genre": "artigo",
     "title": "Cidade preparada para o clima",
     "fonte": "entrambi",
-    "t": "Você é estudante universitário(a) e a revista do diretório acadêmico da sua faculdade vai publicar um número especial sobre meio ambiente urbano. Após ler o artigo “Concreto demais, chão de menos” e ouvir o debate “Canudo, copo e sacola: proibir resolve?”, escreva um artigo para a revista discutindo o que a sua cidade poderia fazer para enfrentar os problemas ambientais. Use pelo menos uma informação ou argumento de cada fonte, apresente uma objeção possível às medidas que você defende e responda a ela. Não se esqueça de dar um título ao artigo, de articular as ideias com conectores variados (no entanto, aliás, portanto…) e de usar um registro formal. Seu texto deve ter entre 160 e 220 palavras.",
+    "t": "Você é estudante universitário(a) e a revista do diretório acadêmico da sua faculdade vai publicar um número especial sobre meio ambiente urbano. Após ler o artigo “Concreto demais, chão de menos” e ouvir o debate “Canudo, copo e talher: proibir resolve?”, escreva um artigo para a revista discutindo o que a sua cidade poderia fazer para enfrentar os problemas ambientais. Use pelo menos uma informação ou argumento de cada fonte, apresente uma objeção possível às medidas que você defende e responda a ela. Não se esqueça de dar um título ao artigo, de articular as ideias com conectores variados (no entanto, aliás, portanto…) e de usar um registro formal. Seu texto deve ter entre 160 e 220 palavras.",
     "es": "Un artículo con título: usá un dato o argumento del texto y otro del debate, planteá una objeción y respondela. Lo que se evalúa esta semana es la cohesión: conectores variados y bien usados.",
     "min": 160,
     "max": 220,
@@ -2658,7 +2656,7 @@
     "emoji": "🗂️",
     "genre": "perfil jornalístico",
     "grammar": "regência verbal",
-    "text": "Às oito da manhã, quando as portas do cartório ainda estão fechadas, Neide Araújo já está sentada no banquinho de plástico que carrega consigo há quase trinta anos. Despachante no centro de São Paulo, ela assiste diariamente a um espetáculo que conhece de cor: gente que chega com a pasta errada, que se esqueceu de uma cópia autenticada, que não sabe a qual guichê se dirigir. «Meu trabalho é traduzir», resume. «O cidadão fala português, o Estado fala outra língua.»\n\nA profissão, que muitos consideravam condenada ao desaparecimento com a digitalização dos serviços públicos, resiste. E não só resiste: em certos nichos, cresce. Transferência de veículos, regularização de imóveis, pedidos de segunda via de documentos antigos, processos de cidadania para descendentes de imigrantes — tudo isso ainda exige alguém que saiba a que norma obedecer e em que ordem proceder. «O aplicativo resolve o simples», diz Neide. «Quando o caso foge do padrão, ninguém quer depender de um robô.»\n\nOs clientes confirmam. Rodrigo, engenheiro de 41 anos, recorreu a um despachante depois de perder três manhãs tentando registrar um terreno herdado do avô. «Eu preferia mil vezes pagar a taxa a voltar àquela fila», conta. Ele admite que, no início, desconfiava da categoria. «Tem muita gente que associa despachante a jeitinho, a atalho. Mas o que eu encontrei foi alguém que simplesmente conhecia o caminho.»\n\nEssa desconfiança, aliás, é um tema recorrente entre os próprios profissionais. Carlos Menezes, que preside uma associação regional da categoria, afirma que o setor aspira a um reconhecimento que nunca teve. «Nosso trabalho visa à segurança do cidadão, não a burlar regras», insiste. Segundo ele, a formalização do ofício implica responsabilidades claras: contrato por escrito, recibo, prestação de contas. Quem não simpatiza com a categoria, argumenta, costuma confundir o despachante sério com o intermediário informal que circula na porta das repartições.\n\nMas há algo que nenhum regulamento descreve: o vínculo. Neide se lembra do nome de quase todos os clientes antigos. Sabe quem casou, quem se divorciou, quem namora a filha de quem — porque, no fim das contas, a burocracia acompanha a vida. Casamento pede certidão; herança pede inventário; mudança de país pede tradução juramentada. «Eu já atendi três gerações da mesma família», diz, com orgulho. «O avô confiava em mim, o filho confia, e agora o neto me manda mensagem pelo celular.»\n\nÉ justamente nesse ponto que o ofício se transforma. Os despachantes mais jovens trabalham a distância, digitalizam documentos, acompanham processos por plataformas on-line e raramente pisam num cartório. Para eles, o desafio não é mais enfrentar filas, mas explicar ao cliente o que significa cada etapa. «As pessoas não gostam de assinar o que não entendem», observa Juliana Prado, de 29 anos, que abriu seu escritório virtual durante a pandemia. «Eu passo mais tempo respondendo a dúvidas do que preenchendo formulários.»\n\nNeide não pensa em se aposentar tão cedo. Quando lhe perguntam se o computador vai substituí-la, ela ri e aponta para a fila que se forma na calçada. «Enquanto existir papel, carimbo e gente com pressa, alguém vai precisar de mim.» Talvez tenha razão. Talvez a burocracia mude de forma, mas não de natureza: sempre haverá um cidadão perdido diante de uma regra que não compreende — e alguém disposto a lhe mostrar o caminho.",
+    "text": "Às oito da manhã, quando as portas do cartório ainda estão fechadas, Neide Araújo já está sentada no banquinho de plástico que carrega consigo há quase trinta anos. Despachante no centro de São Paulo, ela assiste diariamente a um espetáculo que conhece de cor: gente que chega com a pasta errada, que se esqueceu de uma cópia autenticada, que não sabe a qual guichê se dirigir. “Meu trabalho é traduzir”, resume. “O cidadão fala português, o Estado fala outra língua.”\n\nA profissão, que muitos consideravam condenada ao desaparecimento com a digitalização dos serviços públicos, resiste. E não só resiste: em certos nichos, cresce. Transferência de veículos, regularização de imóveis, pedidos de segunda via de documentos antigos, processos de cidadania para descendentes de imigrantes — tudo isso ainda exige alguém que saiba a que norma obedecer e em que ordem proceder. “O aplicativo resolve o simples”, diz Neide. “Quando o caso foge do padrão, ninguém quer depender de um robô.”\n\nOs clientes confirmam. Rodrigo, engenheiro de 41 anos, recorreu a um despachante depois de perder três manhãs tentando registrar um terreno herdado do avô. “Eu preferia mil vezes pagar a taxa a voltar àquela fila”, conta. Ele admite que, no início, desconfiava da categoria. “Tem muita gente que associa despachante a jeitinho, a atalho. Mas o que eu encontrei foi alguém que simplesmente conhecia o caminho.”\n\nEssa desconfiança, aliás, é um tema recorrente entre os próprios profissionais. Carlos Menezes, que preside uma associação regional da categoria, afirma que o setor aspira a um reconhecimento que nunca teve. “Nosso trabalho visa à segurança do cidadão, não a burlar regras”, insiste. Segundo ele, a formalização do ofício implica responsabilidades claras: contrato por escrito, recibo, prestação de contas. Quem não simpatiza com a categoria, argumenta, costuma confundir o despachante sério com o intermediário informal que circula na porta das repartições.\n\nMas há algo que nenhum regulamento descreve: o vínculo. Neide se lembra do nome de quase todos os clientes antigos. Sabe quem casou, quem se divorciou, quem namora a filha de quem — porque, no fim das contas, a burocracia acompanha a vida. Casamento pede certidão; herança pede inventário; mudança de país pede tradução juramentada. “Eu já atendi três gerações da mesma família”, diz, com orgulho. “O avô confiava em mim, o filho confia, e agora o neto me manda mensagem pelo celular.”\n\nÉ justamente nesse ponto que o ofício se transforma. Os despachantes mais jovens trabalham a distância, digitalizam documentos, acompanham processos por plataformas on-line e raramente pisam num cartório. Para eles, o desafio não é mais enfrentar filas, mas explicar ao cliente o que significa cada etapa. “As pessoas não gostam de assinar o que não entendem”, observa Juliana Prado, de 29 anos, que abriu seu escritório virtual durante a pandemia. “Eu passo mais tempo respondendo a dúvidas do que preenchendo formulários.”\n\nNeide não pensa em se aposentar tão cedo. Quando lhe perguntam se o computador vai substituí-la, ela ri e aponta para a fila que se forma na calçada. “Enquanto existir papel, carimbo e gente com pressa, alguém vai precisar de mim.” Talvez tenha razão. Talvez a burocracia mude de forma, mas não de natureza: sempre haverá um cidadão perdido diante de uma regra que não compreende — e alguém disposto a lhe mostrar o caminho.",
     "gloss": {
      "cartório": "escribanía, registro civil",
      "banquinho": "banquito",
@@ -2696,7 +2694,7 @@
       "O despachante continua útil como mediador entre cidadão e Estado."
      ],
      [
-      "Ao dizer «O cidadão fala português, o Estado fala outra língua», Neide quer dizer que:",
+      "Ao dizer “O cidadão fala português, o Estado fala outra língua”, Neide quer dizer que:",
       [
        "os órgãos públicos atendem mal os imigrantes.",
        "os documentos oficiais são escritos em língua estrangeira.",
@@ -2803,7 +2801,7 @@
      ],
      [
       "A",
-      "Entendi. Vamos por partes. Primeiro: a lei não proíbe ninguém de namorar um colega de trabalho. A vida afetiva é assunto seu, é da sua intimidade. Nenhuma empresa pode demitir alguém simplesmente porque essa pessoa namora outra."
+      "Entendi. Vamos por partes. Primeiro: a lei não proíbe ninguém de namorar um colega de trabalho. A vida afetiva é assunto seu, é da sua intimidade. Nenhuma empresa pode punir alguém, nem demitir por justa causa, simplesmente porque essa pessoa namora outra."
      ],
      [
       "B",
@@ -2835,7 +2833,7 @@
      ],
      [
       "A",
-      "Boa pergunta, e acontece mais do que a gente imagina. Aí o que vale é o comportamento profissional. Ninguém pode usar o cargo pra se vingar, nem constranger o outro na frente dos colegas. Se isso acontecer, é assédio, e a empresa tem o dever de agir."
+      "Boa pergunta, e acontece mais do que a gente imagina. Aí o que vale é o comportamento profissional. Ninguém pode usar o cargo pra se vingar, nem constranger o outro na frente dos colegas. Se isso acontecer, pode configurar assédio, e a empresa tem o dever de agir."
      ],
      [
       "B",
@@ -2882,7 +2880,7 @@
       "Separar o casal quando um chefia o outro."
      ],
      [
-      "Quando Helena diz que a empresa «extrapola o poder de direção», ela quer dizer que a empresa:",
+      "Quando Helena diz que a empresa “extrapola o poder de direção”, ela quer dizer que a empresa:",
       [
        "ultrapassa os limites da sua autoridade.",
        "exerce corretamente o seu direito de mandar.",
@@ -2895,11 +2893,11 @@
       "Qual é a posição de Helena sobre informar o namoro ao RH?",
       [
        "É obrigatório e deve ser feito por escrito.",
-       "É um direito da funcionária, mas pode trazer vantagens.",
+       "Calar é um direito dela, mas informar pode evitar mal-entendidos.",
        "Deve ser evitado, porque pode gerar punição.",
        "Só é necessário se o namoro for sério."
       ],
-      "É um direito da funcionária, mas pode trazer vantagens."
+      "Calar é um direito dela, mas informar pode evitar mal-entendidos."
      ],
      [
       "O que Helena aconselha Patrícia a fazer desde já?",
@@ -2914,7 +2912,7 @@
     ],
     "vf": [
      [
-      "Patrícia e o namorado trabalham no mesmo setor.",
+      "Patrícia e o namorado trabalham no mesmo andar.",
       "falso"
      ],
      [
@@ -2935,7 +2933,7 @@
     "genre": "carta_leitor",
     "title": "Carta ao jornal sobre os despachantes",
     "fonte": "lettura",
-    "t": "Você é leitor(a) de um jornal de circulação nacional e já precisou enfrentar um trâmite burocrático complicado. Após ler o perfil «Despachantes: os tradutores da burocracia», escreva uma carta do leitor para a seção de cartas do jornal, comentando o texto. Na sua carta, retome pelo menos dois argumentos ou depoimentos apresentados no perfil, relate brevemente uma experiência pessoal com a burocracia e posicione-se sobre o futuro da profissão diante da digitalização dos serviços públicos. Não se esqueça de identificar o texto ao qual você se refere, de assinar a carta e de usar registro formal. Seu texto deve ter entre 165 e 225 palavras.",
+    "t": "Você é leitor(a) de um jornal de circulação nacional e já precisou enfrentar um trâmite burocrático complicado. Após ler o perfil “Despachantes: os tradutores da burocracia”, escreva uma carta do leitor para a seção de cartas do jornal, comentando o texto. Na sua carta, retome pelo menos dois argumentos ou depoimentos apresentados no perfil, relate brevemente uma experiência pessoal com a burocracia e posicione-se sobre o futuro da profissão diante da digitalização dos serviços públicos. Não se esqueça de identificar o texto ao qual você se refere, de assinar a carta e de usar registro formal. Seu texto deve ter entre 165 e 225 palavras.",
     "es": "Carta de lector formal: tiene que citar el perfil del diario, usar al menos dos ideas del texto, contar una experiencia propia y opinar. Cuidá la regencia (assistir a, recorrer a, obedecer a, concordar com).",
     "min": 165,
     "max": 225,
@@ -2977,7 +2975,7 @@
       ]
      ]
     ],
-    "model": "Prezados editores,\n\nLi com grande interesse o perfil «Despachantes: os tradutores da burocracia», publicado na última edição, e gostaria de acrescentar o ponto de vista de quem já dependeu desses profissionais.\n\nNo ano passado, precisei regularizar o apartamento que meus pais me deixaram. Assisti a uma verdadeira maratona: três idas ao cartório, duas filas intermináveis e um documento recusado porque faltava uma assinatura reconhecida. Só consegui concluir o processo quando recorri a uma despachante, que, assim como a senhora Neide, sabia exatamente a que regra obedecer e em que ordem agir.\n\nConcordo com o texto quando afirma que o aplicativo resolve apenas o simples. Também me pareceu justo o argumento de Carlos Menezes: não se deve confundir o profissional sério com o intermediário informal que oferece atalhos na porta das repartições.\n\nNo entanto, discordo do otimismo absoluto de Neide. A digitalização não vai eliminar a profissão, mas vai transformá-la, como mostra o exemplo de Juliana Prado. O despachante do futuro será menos um especialista em filas e mais um orientador que explica ao cidadão aquilo que o Estado insiste em complicar.\n\nAtenciosamente,\n\nMariana Lopes\nCampinas (SP)"
+    "model": "Prezados editores,\n\nLi com grande interesse o perfil “Despachantes: os tradutores da burocracia”, publicado na última edição, e gostaria de acrescentar o ponto de vista de quem já dependeu desses profissionais.\n\nNo ano passado, precisei regularizar o apartamento que meus pais me deixaram. Assisti a uma verdadeira maratona: três idas ao cartório, duas filas intermináveis e um documento recusado porque faltava uma firma reconhecida. Só consegui concluir o processo quando recorri a uma despachante, que, assim como a senhora Neide, sabia exatamente a que regra obedecer e em que ordem agir.\n\nConcordo com o texto quando afirma que o aplicativo resolve apenas o simples. Também me pareceu justo o argumento de Carlos Menezes: não se deve confundir o profissional sério com o intermediário informal que oferece atalhos na porta das repartições.\n\nNo entanto, discordo do otimismo absoluto de Neide. A digitalização não vai eliminar a profissão, mas vai transformá-la, como mostra o exemplo de Juliana Prado. O despachante do futuro será menos um especialista em filas e mais um orientador que explica ao cidadão aquilo que o Estado insiste em complicar.\n\nAtenciosamente,\n\nMariana Lopes\nCampinas (SP)"
    }
   },
   {
@@ -2988,7 +2986,7 @@
     "emoji": "🪧",
     "genre": "coluna sobre língua",
     "grammar": "crase",
-    "text": "Quem caminha pelo centro de qualquer capital brasileira faz, sem perceber, um curso intensivo de crase. Basta levantar os olhos. «Farmácia à direita.» «Aberto das 8h às 22h.» «Proibido estacionar à noite.» «Retire sua senha junto à recepção.» As placas, os avisos colados nas portas e os cartazes das repartições formam uma espécie de gramática a céu aberto — nem sempre correta, é verdade, mas surpreendentemente coerente.\n\nA crase, convém lembrar, não é um acento qualquer. O sinal grave indica a fusão de duas vogais: a preposição «a» e o artigo feminino «a». Por isso ela aparece com tanta frequência nas indicações de horário e de direção. Quem diz «chego às nove» está dizendo, no fundo, «chego a as nove horas»; quem diz «vire à esquerda» subentende «vire a a mão esquerda», ou algo parecido. A regra prática que muitos professores ensinam — trocar a palavra feminina por uma masculina e ver se aparece «ao» — funciona bem na maioria dos casos: «vou à praça» corresponde a «vou ao parque».\n\nÉ justamente nos horários que surgem os erros mais curiosos. Numa padaria de bairro, li certa vez: «Funcionamos de segunda à sexta, das 7 as 19h». Dois tropeços numa linha só. Quando a expressão começa sem artigo — «de segunda» —, o par correspondente também dispensa o artigo: «de segunda a sexta». Já quando começa com artigo contraído — «das 7h» —, o segundo termo pede crase: «às 19h». A simetria é a chave: «de… a», «da… à», «das… às».\n\nOs textos formais, por sua vez, adoram as locuções que exigem o sinal grave. Ofícios e comunicados costumam informar que determinado documento está «à disposição» do interessado, que um pedido será analisado «à luz da legislação vigente» ou que as obras avançarão «à medida que» os recursos forem liberados. Nenhuma dessas expressões admite a troca pelo masculino, mas todas são tão fixas que o falante culto as reconhece de ouvido. O mesmo vale para os demonstrativos: um aviso que manda o cidadão dirigir-se «àquele guichê» ou «àquela sala» contrai a preposição com o pronome, e ninguém presta atenção àquilo que já parece óbvio. Há ainda as armadilhas: «devido à chuva» leva crase, porque «devido a» é seguido de um nome feminino com artigo; «devido a problemas técnicos», não.\n\nAntes de verbos, de pronomes de tratamento e de palavras masculinas, a crase simplesmente não existe. Ainda assim, não faltam cartazes anunciando «entrega à domicílio» ou «atendimento à partir das 10h». Esses deslizes, longe de provar que o brasileiro «não sabe português», mostram o contrário: o falante percebe que ali há um «a» importante e tenta marcá-lo, como quem sublinha uma palavra. Erra por excesso de zelo, não por descaso.\n\nOs linguistas lembram que, na fala, a crase é quase sempre imperceptível. Ninguém pronuncia duas vogais em «à tarde». O sinal pertence à escrita, e é natural que a escrita, por ser aprendida na escola, gere insegurança. Talvez por isso muitos redatores de repartições públicas prefiram contornar o problema com fórmulas neutras: «Horário de atendimento: 8h–17h». O traço resolve a questão, mas empobrece o texto.\n\nNo fim das contas, as placas da cidade são um retrato fiel da nossa relação com a norma: respeitosa, às vezes temerosa, frequentemente criativa. Da próxima vez que você esperar o ônibus em frente à estação ou for à biblioteca à tarde, preste atenção aos avisos ao redor. Eles contam, em poucas letras, a história de uma língua que se escreve na rua — e que se corrige, aos poucos, à medida que é lida.",
+    "text": "Quem caminha pelo centro de qualquer capital brasileira faz, sem perceber, um curso intensivo de crase. Basta levantar os olhos. “Farmácia à direita.” “Aberto das 8h às 22h.” “Proibido estacionar à noite.” “Retire sua senha junto à recepção.” As placas, os avisos colados nas portas e os cartazes das repartições formam uma espécie de gramática a céu aberto — nem sempre correta, é verdade, mas surpreendentemente coerente.\n\nA crase, convém lembrar, não é um acento qualquer. O sinal grave indica a fusão de duas vogais: a preposição “a” e o artigo feminino “a”. Por isso ela aparece com tanta frequência nas indicações de horário e de direção. Quem diz “chego às nove” está dizendo, no fundo, “chego a as nove horas”; quem diz “vire à esquerda” subentende “vire a a mão esquerda”, ou algo parecido. A regra prática que muitos professores ensinam — trocar a palavra feminina por uma masculina e ver se aparece “ao” — funciona bem na maioria dos casos: “vou à praça” corresponde a “vou ao parque”.\n\nÉ justamente nos horários que surgem os erros mais curiosos. Numa padaria de bairro, li certa vez: “Funcionamos de segunda à sexta, das 7 as 19h”. Dois tropeços numa linha só. Quando a expressão começa sem artigo — “de segunda” —, o par correspondente também dispensa o artigo: “de segunda a sexta”. Já quando começa com artigo contraído — “das 7h” —, o segundo termo pede crase: “às 19h”. A simetria é a chave: “de… a”, “da… à”, “das… às”.\n\nOs textos formais, por sua vez, adoram as locuções que exigem o sinal grave. Ofícios e comunicados costumam informar que determinado documento está “à disposição” do interessado, que um pedido será analisado “à luz da legislação vigente” ou que as obras avançarão “à medida que” os recursos forem liberados. Nenhuma dessas expressões admite a troca pelo masculino, mas todas são tão fixas que o falante culto as reconhece de ouvido. O mesmo vale para os demonstrativos: um aviso que manda o cidadão dirigir-se “àquele guichê” ou “àquela sala” contrai a preposição com o pronome, e ninguém presta atenção àquilo que já parece óbvio. Há ainda as armadilhas: “devido à chuva” leva crase, porque “devido a” é seguido de um nome feminino com artigo; “devido a problemas técnicos”, não.\n\nAntes de verbos e de palavras masculinas, a crase, em regra, não existe. Ainda assim, não faltam cartazes anunciando “entrega à domicílio” ou “atendimento à partir das 10h”. Esses deslizes, longe de provar que o brasileiro “não sabe português”, mostram o contrário: o falante percebe que ali há um “a” importante e tenta marcá-lo, como quem sublinha uma palavra. Erra por excesso de zelo, não por descaso.\n\nOs linguistas lembram que, na fala, a crase é quase sempre imperceptível. Ninguém pronuncia duas vogais em “à tarde”. O sinal pertence à escrita, e é natural que a escrita, por ser aprendida na escola, gere insegurança. Talvez por isso muitos redatores de repartições públicas prefiram contornar o problema com fórmulas neutras: “Horário de atendimento: 8h–17h”. O traço resolve a questão, mas empobrece o texto.\n\nNo fim das contas, as placas da cidade são um retrato fiel da nossa relação com a norma: respeitosa, às vezes temerosa, frequentemente criativa. Da próxima vez que você esperar o ônibus em frente à estação ou for à biblioteca à tarde, preste atenção aos avisos ao redor. Eles contam, em poucas letras, a história de uma língua que se escreve na rua — e que se corrige, aos poucos, à medida que é lida.",
     "gloss": {
      "senha": "número (de turno)",
      "placas": "carteles, señales",
@@ -3024,17 +3022,17 @@
       "Mostrar como a crase aparece nos avisos e placas da cidade."
      ],
      [
-      "Por que «de segunda à sexta» está errado, segundo o texto?",
+      "Por que “de segunda à sexta” está errado, segundo o texto?",
       [
        "Porque os dias da semana nunca aceitam artigo.",
        "Porque a crase só aparece antes de números de horas.",
        "Porque, sem artigo no primeiro termo, não há crase no segundo.",
-       "Porque a preposição correta seria «até», e não «a»."
+       "Porque a preposição correta seria “até”, e não “a”."
       ],
       "Porque, sem artigo no primeiro termo, não há crase no segundo."
      ],
      [
-      "Como o autor interpreta erros como «à partir das 10h»?",
+      "Como o autor interpreta erros como “à partir das 10h”?",
       [
        "Como sinal de zelo excessivo.",
        "Como prova de ignorância da norma.",
@@ -3044,7 +3042,7 @@
       "Como sinal de zelo excessivo."
      ],
      [
-      "Que crítica o autor faz à fórmula «8h–17h»?",
+      "Que crítica o autor faz à fórmula “8h–17h”?",
       [
        "Confunde o leitor sobre o horário real.",
        "Evita o erro, mas empobrece o texto.",
@@ -3054,7 +3052,7 @@
       "Evita o erro, mas empobrece o texto."
      ],
      [
-      "No 4º parágrafo, reconhecer uma expressão «de ouvido» significa:",
+      "No 4º parágrafo, reconhecer uma expressão “de ouvido” significa:",
       [
        "ouvi-la pela primeira vez em voz alta.",
        "identificá-la pela familiaridade, sem pensar na regra.",
@@ -3078,7 +3076,7 @@
       "não se diz"
      ],
      [
-      "A expressão «devido a problemas técnicos» não leva crase.",
+      "A expressão “devido a problemas técnicos” não leva crase.",
       "verdadeiro"
      ],
      [
@@ -3087,7 +3085,7 @@
      ]
     ],
     "hunt": {
-     "label": "Tocá las formas con crase (à, às, àquele, àquela, àquilo)",
+     "label": "Tocá todas las formas con acento grave (à, às, àquele, àquela, àquilo), también las mal puestas de los carteles",
      "targets": [
       "à",
       "às",
@@ -3257,7 +3255,7 @@
     "title": "Carta à Secretaria de Cultura",
     "fonte": "ascolto",
     "t": "Você frequenta a Biblioteca Pública Municipal à noite, depois do trabalho. Após ouvir o boletim de serviço da rádio, escreva uma carta formal à Secretaria Municipal de Cultura, dentro do prazo da consulta pública, manifestando-se sobre a redução do horário da biblioteca. Na carta, retome as informações do boletim (horário atual, novo horário e justificativa apresentada), explique como a mudança afeta você e outros usuários e proponha pelo menos uma alternativa. Não se esqueça de incluir local e data, destinatário, assunto, saudação e fecho adequados. Use registro formal e cuide do uso da crase nas indicações de horário. Seu texto deve ter entre 171 e 231 palavras.",
-    "es": "Carta formal de reclamo con propuesta: datos del audio (horarios y motivo), cómo te afecta y una alternativa. Ojo con la crase: «das 10h às 17h», pero «de terça a sábado».",
+    "es": "Carta formal de reclamo con propuesta: datos del audio (horarios y motivo), cómo te afecta y una alternativa. Ojo con la crase: “das 10h às 17h”, pero “de terça a sábado”.",
     "min": 171,
     "max": 231,
     "punti": [
@@ -3313,7 +3311,7 @@
     "emoji": "📡",
     "genre": "artigo de divulgação científica",
     "grammar": "verbos irregulares e derivados; verbos em -ear e -iar",
-    "text": "Toda vez que o céu escurece sobre as encostas do Recife, milhares de moradores fazem a mesma pergunta: vai dar tempo de sair de casa? Nos morros da cidade, onde as construções se equilibram em terrenos íngremes, a chuva forte não é apenas um incômodo; é uma ameaça concreta. Há poucos anos, uma equipe de pesquisadores propôs uma resposta que combina tecnologia de baixo custo e conhecimento local — e os primeiros resultados surpreenderam até os mais céticos.\n\nA ideia partiu da geóloga Tânia Bezerra, que coordena um laboratório de risco geológico numa universidade pública da capital pernambucana. «Os modelos tradicionais preveem a chuva, mas não preveem o que a chuva faz com cada encosta», explica. Para preencher essa lacuna, o grupo instalou dezenas de sensores enterrados no solo, capazes de medir a umidade e pequenos movimentos da terra. Os aparelhos transmitem os dados a cada cinco minutos para uma central que os cruza com as informações meteorológicas.\n\nO desafio técnico era grande, mas não o maior. «Os sensores, a gente compra; a confiança da comunidade, a gente conquista», resume a pesquisadora. Por isso, desde o início, o projeto manteve reuniões mensais com associações de moradores. Foram eles que indicaram onde a água costumava brotar depois das tempestades, quais muros já tinham rachaduras e quais famílias viviam em situação mais delicada. Esse saber, que nenhum satélite detém, orientou a instalação dos equipamentos.\n\nNo primeiro ano, os pesquisadores obtiveram um resultado animador: em três episódios de chuva intensa, o sistema emitiu alertas com cerca de quarenta minutos de antecedência em relação aos pequenos deslizamentos registrados. Quarenta minutos podem parecer pouco, mas bastam para que uma família deixe a casa e se abrigue num ponto seguro. «Não estamos falando de prever catástrofes com dias de antecedência», pondera Tânia. «Estamos falando de ganhar o tempo suficiente para salvar vidas.»\n\nOs críticos, no entanto, receiam que a tecnologia crie uma falsa sensação de segurança. Um engenheiro que acompanhou o projeto como consultor lembra que os sensores cobrem apenas uma fração das áreas de risco e que alertas falsos podem minar a credibilidade do sistema. «Se o celular apita três vezes e nada acontece, na quarta vez ninguém sai de casa», adverte. Há também quem tema que o poder público use o monitoramento como pretexto para adiar obras estruturais, como drenagem e contenção de encostas.\n\nA equipe não ignora essas objeções. Pelo contrário: propõe que o sistema seja visto como complemento, e não substituto, das políticas de habitação. Os pesquisadores defendem que, quando os dados indicarem risco permanente, a prefeitura intervenha com obras e, se necessário, com reassentamento — desde que negociado com os moradores. Nas reuniões, quem medeia essas conversas é uma assistente social ligada ao projeto, que também rastreia, casa por casa, as famílias que ainda não recebem os alertas por falta de celular.\n\nSe o modelo será mantido depois do fim do financiamento, ninguém sabe. Os aparelhos precisam de manutenção, as baterias duram pouco e a verba da pesquisa acaba no ano que vem. Ainda assim, outras cidades já demonstraram interesse, e a equipe prevê publicar um manual aberto para que qualquer município possa reproduzir a experiência. Enquanto isso, nos morros do Recife, os moradores aprenderam a olhar para o celular com a mesma atenção com que olham para o céu. Quando o morro avisa, agora há quem traduza o aviso a tempo.",
+    "text": "Toda vez que o céu escurece sobre as encostas do Recife, milhares de moradores fazem a mesma pergunta: vai dar tempo de sair de casa? Nos morros da cidade, onde as construções se equilibram em terrenos íngremes, a chuva forte não é apenas um incômodo; é uma ameaça concreta. Há poucos anos, uma equipe de pesquisadores propôs uma resposta que combina tecnologia de baixo custo e conhecimento local — e os primeiros resultados surpreenderam até os mais céticos.\n\nA ideia partiu da geóloga Tânia Bezerra, que coordena um laboratório de risco geológico numa universidade pública da capital pernambucana. “Os modelos tradicionais preveem a chuva, mas não preveem o que a chuva faz com cada encosta”, explica. Para preencher essa lacuna, o grupo instalou dezenas de sensores enterrados no solo, capazes de medir a umidade e pequenos movimentos da terra. Os aparelhos transmitem os dados a cada cinco minutos para uma central que os cruza com as informações meteorológicas.\n\nO desafio técnico era grande, mas não o maior. “Os sensores, a gente compra; a confiança da comunidade, a gente conquista”, resume a pesquisadora. Por isso, desde o início, o projeto manteve reuniões mensais com associações de moradores. Foram eles que indicaram onde a água costumava brotar depois das tempestades, quais muros já tinham rachaduras e quais famílias viviam em situação mais delicada. Esse saber, que nenhum satélite detém, orientou a instalação dos equipamentos.\n\nNo primeiro ano, os pesquisadores obtiveram um resultado animador: em três episódios de chuva intensa, o sistema emitiu alertas com cerca de quarenta minutos de antecedência em relação aos pequenos deslizamentos registrados. Quarenta minutos podem parecer pouco, mas bastam para que uma família deixe a casa e se abrigue num ponto seguro. “Não estamos falando de prever catástrofes com dias de antecedência”, pondera Tânia. “Estamos falando de ganhar o tempo suficiente para salvar vidas.”\n\nOs críticos, no entanto, receiam que a tecnologia crie uma falsa sensação de segurança. Um engenheiro que acompanhou o projeto como consultor lembra que os sensores cobrem apenas uma fração das áreas de risco e que alertas falsos podem minar a credibilidade do sistema. “Se o celular apita três vezes e nada acontece, na quarta vez ninguém sai de casa”, adverte. Há também quem tema que o poder público use o monitoramento como pretexto para adiar obras estruturais, como drenagem e contenção de encostas.\n\nA equipe não ignora essas objeções. Pelo contrário: propõe que o sistema seja visto como complemento, e não substituto, das políticas de habitação. Os pesquisadores defendem que, quando os dados indicarem risco permanente, a prefeitura intervenha com obras e, se necessário, com reassentamento — desde que negociado com os moradores. Nas reuniões, quem medeia essas conversas é uma assistente social ligada ao projeto, que também rastreia, casa por casa, as famílias que ainda não recebem os alertas por falta de celular.\n\nSe o modelo será mantido depois do fim do financiamento, ninguém sabe. Os aparelhos precisam de manutenção, as baterias duram pouco e a verba da pesquisa acaba no ano que vem. Ainda assim, outras cidades já demonstraram interesse, e a equipe prevê publicar um manual aberto para que qualquer município possa reproduzir a experiência. Enquanto isso, nos morros do Recife, os moradores aprenderam a olhar para o celular com a mesma atenção com que olham para o céu. Quando o morro avisa, agora há quem traduza o aviso a tempo.",
     "gloss": {
      "encostas": "laderas",
      "morros": "cerros (barrios en las laderas)",
@@ -3359,7 +3357,7 @@
       "Para aproveitar o saber local e ganhar confiança."
      ],
      [
-      "Com a frase «Se o celular apita três vezes e nada acontece…», o engenheiro alerta para:",
+      "Com a frase “Se o celular apita três vezes e nada acontece…”, o engenheiro alerta para:",
       [
        "o alto custo dos aparelhos celulares.",
        "o sinal fraco das operadoras de telefonia nos morros mais altos.",
@@ -3600,7 +3598,7 @@
     "genre": "artigo",
     "title": "Tecnologia a serviço de quem?",
     "fonte": "entrambi",
-    "t": "Você colabora com uma revista de divulgação científica para jovens, que prepara uma edição especial com o tema «Tecnologia a serviço de quem?». Após ler o artigo sobre os sensores contra deslizamentos no Recife e ouvir o episódio do podcast Fio Terra sobre o conserto de celulares, escreva um artigo de opinião para a revista. No seu texto, compare as duas experiências, usando informações do artigo e do podcast, e defenda uma posição sobre o papel da tecnologia e do poder público. Não se esqueça de dar um título ao artigo. Use registro formal, mas acessível ao público jovem. Seu texto deve ter entre 177 e 237 palavras.",
+    "t": "Você colabora com uma revista de divulgação científica para jovens, que prepara uma edição especial com o tema “Tecnologia a serviço de quem?”. Após ler o artigo sobre os sensores contra deslizamentos no Recife e ouvir o episódio do podcast Fio Terra sobre o conserto de celulares, escreva um artigo de opinião para a revista. No seu texto, compare as duas experiências, usando informações do artigo e do podcast, e defenda uma posição sobre o papel da tecnologia e do poder público. Não se esqueça de dar um título ao artigo. Use registro formal, mas acessível ao público jovem. Seu texto deve ter entre 177 e 237 palavras.",
     "es": "Artículo con título que compare los dos casos de la semana (sensores en Recife y derecho a reparar) y tome posición. Aprovechá verbos como propor, manter, obter, intervir, prever.",
     "min": 177,
     "max": 237,
@@ -3608,7 +3606,7 @@
      [
       "Poner un título",
       [
-       "tecnologia a serviço"
+       "tecnologia"
       ]
      ],
      [
@@ -3650,7 +3648,7 @@
     "emoji": "🎬",
     "genre": "reportagem",
     "grammar": "português falado do Brasil (né, tá, cadê, a gente, pra)",
-    "text": "Quem assiste a uma série brasileira com legendas em português talvez nunca tenha reparado num pequeno descompasso: o personagem diz «cadê a chave?», e a legenda escreve «onde está a chave?». Ele diz «a gente tá atrasado», e o texto na tela corrige para «estamos atrasados». Durante décadas, essa tradução silenciosa do português falado para o português escrito foi a regra nas legendas, nas dublagens e até nos roteiros. Nos últimos anos, porém, algo começou a mudar.\n\n«A gente percebeu que o público estranhava», conta Luana Freitas, coordenadora de legendagem de uma produtora paulistana que trabalha para plataformas de streaming. «Nas redes, as pessoas reclamavam: por que a legenda fala diferente do ator? Principalmente quem é surdo ou tem dificuldade auditiva e depende do texto pra acompanhar a história.» A empresa passou então a adotar, em produções nacionais, uma legenda mais próxima da fala: o «pra» substituiu o «para», o «né» ganhou espaço no fim das frases e o «tá» deixou de ser automaticamente convertido em «está».\n\nA mudança não é trivial. Os linguistas lembram que essas formas não são erros, mas traços consolidados do português brasileiro. O «a gente» no lugar de «nós», por exemplo, é amplamente majoritário na fala espontânea de todas as regiões e classes sociais, inclusive entre pessoas com alta escolaridade. O «né», contração de «não é», funciona como um pedido de confirmação ou simplesmente como um marcador que mantém o interlocutor por perto. «Cadê», que vem de uma antiga expressão, «que é de», é tão comum que soa estranho quando alguém pergunta, numa conversa informal, «onde está?».\n\nNem todos aplaudem. Professores de língua ouvidos pela reportagem manifestam receio de que a legenda coloquial confunda estudantes e estrangeiros que aprendem português. «A legenda é, para muita gente, o principal contato diário com a escrita», argumenta um docente de uma escola pública de Salvador. «Se ela reproduz o tô e o pro, onde o aluno vai ver o registro formal?» Outros rebatem que o problema está justamente no oposto: ao corrigir a fala, a legenda transmite a ideia de que o jeito como os brasileiros falam é inferior.\n\nHá ainda uma questão técnica. As legendas têm limite de caracteres por linha e de tempo na tela; por isso, os legendistas sempre precisaram cortar palavras e condensar falas. Curiosamente, as formas orais ajudam nesse ponto: «pra» é mais curto que «para», «tá» é mais curto que «está». Mas o equilíbrio é delicado. «Se eu escrevo tudo como o ator fala, com tipo, assim, sabe, a legenda fica ilegível», explica Luana. «A gente seleciona. O que é marca de identidade do personagem fica; o que é só hesitação sai.»\n\nO debate chegou também às redes sociais, onde o português escrito sempre foi mais livre. Nos comentários, ninguém escreve «estamos chegando»: escreve «a gente tá chegando», quando não abrevia tudo para «tamo chegando». Para alguns pesquisadores, as plataformas digitais aproximaram a escrita cotidiana da fala de um modo inédito, e a legenda apenas acompanha esse movimento.\n\nTalvez o mais interessante seja perceber que a discussão não opõe certo e errado, mas contextos. Ninguém propõe que um contrato diga «a gente se compromete», nem que um boletim médico use «cadê». Assim como um bom falante ajusta o registro conforme a situação, a legenda passa a se ajustar ao gênero que traduz. Numa série sobre adolescentes da periferia, a fala crua é parte da verdade da história; num documentário histórico, a norma culta pode ser mais adequada. No fim, a pergunta que as produtoras começam a fazer é simples: a legenda serve para corrigir o personagem ou para ouvi-lo melhor?",
+    "text": "Quem assiste a uma série brasileira com legendas em português talvez nunca tenha reparado num pequeno descompasso: o personagem diz “cadê a chave?”, e a legenda escreve “onde está a chave?”. Ele diz “a gente tá atrasado”, e o texto na tela corrige para “estamos atrasados”. Durante décadas, essa tradução silenciosa do português falado para o português escrito foi a regra nas legendas, nas dublagens e até nos roteiros. Nos últimos anos, porém, algo começou a mudar.\n\n“A gente percebeu que o público estranhava”, conta Luana Freitas, coordenadora de legendagem de uma produtora paulistana que trabalha para plataformas de streaming. “Nas redes, as pessoas reclamavam: por que a legenda fala diferente do ator? Principalmente quem é surdo ou tem dificuldade auditiva e depende do texto pra acompanhar a história.” A empresa passou então a adotar, em produções nacionais, uma legenda mais próxima da fala: o “pra” substituiu o “para”, o “né” ganhou espaço no fim das frases e o “tá” deixou de ser automaticamente convertido em “está”.\n\nA mudança não é trivial. Os linguistas lembram que essas formas não são erros, mas traços consolidados do português brasileiro. O “a gente” no lugar de “nós”, por exemplo, é muito frequente na fala espontânea de todas as regiões e classes sociais, inclusive entre pessoas com alta escolaridade. O “né”, contração de “não é”, funciona como um pedido de confirmação ou simplesmente como um marcador que mantém o interlocutor por perto. “Cadê”, que vem de uma antiga expressão, “que é de”, é tão comum que soa estranho quando alguém pergunta, numa conversa informal, “onde está?”.\n\nNem todos aplaudem. Professores de língua ouvidos pela reportagem manifestam receio de que a legenda coloquial confunda estudantes e estrangeiros que aprendem português. “A legenda é, para muitos espectadores, o principal contato diário com a escrita”, argumenta um docente de uma escola pública de Salvador. “Se ela reproduz o tô e o pro, onde o aluno vai ver o registro formal?” Outros rebatem que o problema está justamente no oposto: ao corrigir a fala, a legenda transmite a ideia de que o jeito como os brasileiros falam é inferior.\n\nHá ainda uma questão técnica. As legendas têm limite de caracteres por linha e de tempo na tela; por isso, os legendistas sempre precisaram cortar palavras e condensar falas. Curiosamente, as formas orais ajudam nesse ponto: “pra” é mais curto que “para”, “tá” é mais curto que “está”. Mas o equilíbrio é delicado. “Se eu escrevo tudo como o ator fala, com tipo, assim, sabe, a legenda fica ilegível”, explica Luana. “A gente seleciona. O que é marca de identidade do personagem fica; o que é só hesitação sai.”\n\nO debate chegou também às redes sociais, onde o português escrito sempre foi mais livre. Nos comentários, ninguém escreve “estamos chegando”: escreve “a gente tá chegando”, quando não abrevia tudo para “tamo chegando”. Para alguns pesquisadores, as plataformas digitais aproximaram a escrita cotidiana da fala de um modo inédito, e a legenda apenas acompanha esse movimento.\n\nTalvez o mais interessante seja perceber que a discussão não opõe certo e errado, mas contextos. Ninguém propõe que um contrato diga “a gente se compromete”, nem que um boletim médico use “cadê”. Assim como um bom falante ajusta o registro conforme a situação, a legenda passa a se ajustar ao gênero que traduz. Numa série sobre adolescentes da periferia, a fala crua é parte da verdade da história; num documentário histórico, a norma culta pode ser mais adequada. No fim, a pergunta que as produtoras começam a fazer é simples: a legenda serve para corrigir o personagem ou para ouvi-lo melhor?",
     "gloss": {
      "reparado": "notado",
      "descompasso": "desajuste",
@@ -3707,7 +3705,7 @@
       [
        "As gírias regionais dos personagens.",
        "As hesitações sem valor de identidade.",
-       "Todas as formas como «né» e «tá».",
+       "Todas as formas como “né” e “tá”.",
        "Os nomes próprios difíceis."
       ],
       "As hesitações sem valor de identidade."
@@ -3725,7 +3723,7 @@
     ],
     "vf": [
      [
-      "«A gente» é usado sobretudo por pessoas com pouca escolaridade.",
+      "“A gente” é usado sobretudo por pessoas com pouca escolaridade.",
       "falso"
      ],
      [
@@ -3887,7 +3885,7 @@
       "Tem medo de ver o final da série antes da hora."
      ],
      [
-      "O que Bruna mais gosta na série?",
+      "Do que Bruna mais gosta na série?",
       [
        "A história da padaria em Niterói.",
        "O jeito de falar dos personagens.",
@@ -3897,7 +3895,7 @@
       "O jeito de falar dos personagens."
      ],
      [
-      "O que Caio quer dizer com «Uma coisa é mensagem, outra é redação da escola»?",
+      "O que Caio quer dizer com “Uma coisa é mensagem, outra é redação da escola”?",
       [
        "Que a escola deveria ensinar a escrever mensagens.",
        "Que o registro muda conforme a situação de escrita.",
@@ -3907,7 +3905,7 @@
       "Que o registro muda conforme a situação de escrita."
      ],
      [
-      "Quando Caio diz «Boca de siri», ele:",
+      "Quando Caio diz “Boca de siri”, ele:",
       [
        "reclama da comida da festa.",
        "promete não contar nada sobre a série.",
@@ -3940,7 +3938,7 @@
     "genre": "email_informal",
     "title": "E-mail a um amigo que aprende português",
     "fonte": "entrambi",
-    "t": "Você é brasileiro(a) e tem um amigo estrangeiro, Tom, que está aprendendo português. Ele lhe escreveu dizendo que está confuso: na aula aprende «nós estamos» e «onde está», mas nas séries brasileiras e nas legendas vê «a gente tá» e «cadê». Após ler a reportagem «Legenda com sotaque» e ouvir a conversa entre Bruna e Caio, escreva um e-mail para Tom explicando essas formas do português falado, usando informações da reportagem e da conversa, e dando a ele conselhos sobre quando usar cada registro. Use registro informal. Não se esqueça de cumprimentar e de se despedir do seu amigo. Seu texto deve ter entre 182 e 242 palavras.",
+    "t": "Você é brasileiro(a) e tem um amigo estrangeiro, Tom, que está aprendendo português. Ele lhe escreveu dizendo que está confuso: na aula aprende “nós estamos” e “onde está”, mas nas séries brasileiras e nas legendas vê “a gente tá” e “cadê”. Após ler a reportagem “Legenda com sotaque” e ouvir a conversa entre Bruna e Caio, escreva um e-mail para Tom explicando essas formas do português falado, usando informações da reportagem e da conversa, e dando a ele conselhos sobre quando usar cada registro. Use registro informal. Não se esqueça de cumprimentar e de se despedir do seu amigo. Seu texto deve ter entre 182 e 242 palavras.",
     "es": "Mail informal a un amigo: explicá que né, tá, cadê, a gente y pra no son errores sino portugués hablado, usá datos de la lectura y del audio y dale un consejo sobre registros.",
     "min": 182,
     "max": 242,
@@ -3985,7 +3983,7 @@
       ]
      ]
     ],
-    "model": "Oi, Tom!\n\nQue bom receber notícias suas! Adorei saber que você tá maratonando séries brasileiras pra treinar o português. E pode ficar tranquilo: você não tá ficando louco. A confusão tem explicação.\n\nO que você aprende na aula, tipo «nós estamos» e «onde está», é o português escrito, mais formal. Já o que você ouve nas séries é o português falado do Brasil, que tem suas próprias formas. «A gente» no lugar de «nós», «tá» no lugar de «está», «cadê» no lugar de «onde está» e o famoso «né» no fim das frases não são erros: todo mundo usa, até professor universitário.\n\nLi uma reportagem esses dias que explicava justamente isso. Antes, as legendas corrigiam a fala dos atores; agora, em várias produções nacionais, elas respeitam o jeito como a gente fala. Alguns professores reclamam, mas a própria reportagem conclui que tudo depende do contexto: ninguém escreve um contrato com «cadê».\n\nTambém ouvi uma conversa de dois amigos comentando uma série, e um deles resumiu bem: uma coisa é mensagem, outra é redação da escola.\n\nEntão minha dica é: aprende as duas coisas. Usa «a gente» e «pra» quando conversar com os amigos e guarda o «nós» e o «para» pros e-mails de trabalho e pras provas.\n\nUm abraço e boa maratona!\n\nLucas"
+    "model": "Oi, Tom!\n\nQue bom receber notícias suas! Adorei saber que você tá maratonando séries brasileiras pra treinar o português. E pode ficar tranquilo: você não tá ficando louco. A confusão tem explicação.\n\nO que você aprende na aula, tipo “nós estamos” e “onde está”, é o português escrito, mais formal. Já o que você ouve nas séries é o português falado do Brasil, que tem suas próprias formas. “A gente” no lugar de “nós”, “tá” no lugar de “está”, “cadê” no lugar de “onde está” e o famoso “né” no fim das frases não são erros: todo mundo usa, até professor universitário.\n\nLi uma reportagem esses dias que explicava justamente isso. Antes, as legendas corrigiam a fala dos atores; agora, em várias produções nacionais, elas respeitam o jeito como a gente fala. Alguns professores reclamam, mas a própria reportagem conclui que tudo depende do contexto: ninguém escreve um contrato com “cadê”.\n\nTambém ouvi uma conversa de dois amigos comentando uma série, e um deles resumiu bem: uma coisa é mensagem, outra é redação da escola.\n\nEntão minha dica é: aprende as duas coisas. Usa “a gente” e “pra” quando conversar com os amigos e guarda o “nós” e o “para” pros e-mails de trabalho e pras provas.\n\nUm abraço e boa maratona!\n\nLucas"
    }
   },
   {
@@ -4052,7 +4050,7 @@
       "A adaptação às exigências da cultura acadêmica."
      ],
      [
-      "A possível existência de «viés» refere-se ao fato de que:",
+      "A possível existência de “viés” refere-se ao fato de que:",
       [
        "os pesquisadores conheciam pessoalmente os entrevistados.",
        "quem aceitou a entrevista talvez tivesse uma visão menos crítica da universidade.",
@@ -4199,7 +4197,7 @@
      "relativiza": "matiza",
      "destaque": "relieve",
      "prazo": "plazo",
-     "banca": "tribunal (de tesis)",
+     "banca": "jurado (de tesis)",
      "revê": "revisá",
      "desanima": "te desanimes"
     },
@@ -4215,7 +4213,7 @@
       "O registro, muito próximo da fala."
      ],
      [
-      "Por que a orientadora sugere «as visitas às escolas revelaram…»?",
+      "Por que a orientadora sugere “as visitas às escolas revelaram…”?",
       [
        "Para deixar o texto mais curto e mais fácil de ler.",
        "Para deslocar o foco do pesquisador para o fenômeno.",
@@ -4335,7 +4333,7 @@
     "emoji": "🕰️",
     "genre": "conto",
     "grammar": "pretérito mais-que-perfeito simples",
-    "text": "Quando Helena desceu do ônibus em Santa Rita do Pontal, o relógio da praça marcava três e dez, exatamente como marcava no dia em que ela partira, quarenta e dois anos antes. Por um instante, achou que o tempo, por alguma cortesia inexplicável, a esperara. Depois percebeu que o relógio simplesmente parara, e que ninguém se dera ao trabalho de consertá-lo.\n\nViera para o enterro do pai. A notícia chegara por telefone, numa voz de mulher que ela não reconhecera e que se apresentara como vizinha. «Seu Joaquim falava muito da senhora», dissera a voz, e Helena não soube o que responder, porque o pai, que ela soubesse, nunca falara muito de coisa alguma. Era um homem de frases curtas, que consertava relógios num balcão estreito ao lado da estação ferroviária e que, na única vez em que ela lhe pedira explicações, respondera apenas que certas coisas não se explicam, se aguentam.\n\nA casa estava como ela a deixara, ou quase. Os móveis continuavam nos mesmos lugares, embora mais escuros; as cortinas que a mãe costurara tinham perdido a cor; e na parede da sala, onde antes houvera um retrato de casamento, restava apenas um retângulo mais claro na pintura. A vizinha — chamava-se Dona Aurora e tinha a idade que a mãe teria, se não tivesse morrido tão cedo — ofereceu café e contou, sem que ninguém lhe perguntasse, que o velho tirara o retrato da parede no mesmo ano em que a filha fora embora.\n\nHelena lembrava-se bem daquele ano. Tinha dezenove anos e um namorado que o pai detestara desde o primeiro dia. Discutiram uma única vez, na cozinha, em voz baixa, porque naquela família ninguém gritava. Ele dissera que, se ela fosse para São Paulo com aquele rapaz, não precisava voltar. Ela fora. O rapaz, afinal, não durara mais que dois invernos; mas o orgulho durara quarenta e dois anos. Escrevera ao pai algumas vezes, no começo, cartas cuidadosas, sem pedidos de desculpas, e nunca recebera resposta. Concluíra, com a lógica cruel dos jovens, que ele cumprira a palavra.\n\nDepois do enterro, Dona Aurora entregou-lhe uma chave. «É da oficina», explicou. «Ele pediu que ficasse com a senhora.» A oficina ficava ao lado da estação, que deixara de receber trens havia muito tempo. Lá dentro, o cheiro de óleo e de metal era o mesmo da infância. Sobre o balcão, dezenas de relógios de pulso esperavam donos que talvez nunca viessem buscá-los. Numa gaveta, presa por um elástico, Helena encontrou um maço de envelopes. Reconheceu a própria letra antes de reconhecer as cartas. Estavam todas abertas, lidas tantas vezes que o papel se tornara macio como tecido.\n\nEmbaixo delas havia outro maço, menor, de envelopes fechados, selados, endereçados a ela em São Paulo. Nenhum fora enviado. O primeiro tinha a data de um mês depois da partida; o último, de três semanas antes da morte. Helena não os abriu ali. Sentou-se no banco alto em que o pai passara a vida inclinado sobre engrenagens minúsculas e ficou olhando para a praça pela janela suja.\n\nFoi Dona Aurora, horas mais tarde, quem a encontrou do mesmo jeito. Helena mostrou-lhe os envelopes, e a vizinha suspirou. Contou que, anos atrás, o velho lhe confessara que escrevera muitas vezes, mas que, a cada carta, se lembrava do que dissera na cozinha e achava que não tinha o direito de voltar atrás. «Ele era assim», concluiu. «Consertava o relógio dos outros, mas o dele parou naquele dia.»\n\nNa manhã seguinte, antes de pegar o ônibus de volta, Helena atravessou a praça com uma pequena caixa de ferramentas que encontrara na oficina. Não sabia consertar relógios; nunca aprendera, porque nunca quisera aprender o que era dele. Mas subiu a escada estreita da torre, abriu a tampa empoeirada e ficou um longo tempo diante do mecanismo, como quem lê uma carta numa língua esquecida. Quando desceu, o relógio continuava marcando três e dez. Ela olhou para cima e, pela primeira vez em quarenta e dois anos, não teve pressa.",
+    "text": "Quando Helena desceu do ônibus em Santa Rita do Pontal, o relógio da praça marcava três e dez, exatamente como marcava no dia em que ela partira, quarenta e dois anos antes. Por um instante, achou que o tempo, por alguma cortesia inexplicável, a esperara. Depois percebeu que o relógio simplesmente parara, e que ninguém se dera ao trabalho de consertá-lo.\n\nViera para o enterro do pai. A notícia chegara por telefone, numa voz de mulher que ela não reconhecera e que se apresentara como vizinha. “Seu Olavo falava muito da senhora”, dissera a voz, e Helena não soube o que responder, porque o pai, que ela soubesse, nunca falara muito de coisa alguma. Era um homem de frases curtas, que consertava relógios num balcão estreito ao lado da estação ferroviária e que, na única vez em que ela lhe pedira explicações, respondera apenas que certas coisas não se explicam, se aguentam.\n\nA casa estava como ela a deixara, ou quase. Os móveis continuavam nos mesmos lugares, embora mais escuros; as cortinas que a mãe costurara tinham perdido a cor; e na parede da sala, onde antes houvera um retrato de casamento, restava apenas um retângulo mais claro na pintura. A vizinha — chamava-se Dona Aurora e tinha a idade que a mãe teria, se não tivesse morrido tão cedo — ofereceu café e contou, sem que ninguém lhe perguntasse, que o velho tirara o retrato da parede no mesmo ano em que a filha fora embora.\n\nHelena lembrava-se bem daquele ano. Tinha dezenove anos e um namorado que o pai detestara desde o primeiro dia. Discutiram uma única vez, na cozinha, em voz baixa, porque naquela família ninguém gritava. Ele dissera que, se ela fosse para São Paulo com aquele rapaz, não precisava voltar. Ela fora. O rapaz, afinal, não durara mais que dois invernos; mas o orgulho durara quarenta e dois anos. Escrevera ao pai algumas vezes, no começo, cartas cuidadosas, sem pedidos de desculpas, e nunca recebera resposta. Concluíra, com a lógica cruel dos jovens, que ele cumprira a palavra.\n\nDepois do enterro, Dona Aurora entregou-lhe uma chave. “É da oficina”, explicou. “Ele pediu que ficasse com a senhora.” A oficina ficava ao lado da estação, que deixara de receber trens havia muito tempo. Lá dentro, o cheiro de óleo e de metal era o mesmo da infância. Sobre o balcão, dezenas de relógios de pulso esperavam donos que talvez nunca viessem buscá-los. Numa gaveta, presa por um elástico, Helena encontrou um maço de envelopes. Reconheceu a própria letra antes de reconhecer as cartas. Estavam todas abertas, lidas tantas vezes que o papel se tornara macio como tecido.\n\nEmbaixo delas havia outro maço, menor, de envelopes fechados, selados, endereçados a ela em São Paulo. Nenhum fora enviado. O primeiro tinha a data de um mês depois da partida; o último, de três semanas antes da morte. Helena não os abriu ali. Sentou-se no banco alto em que o pai passara a vida inclinado sobre engrenagens minúsculas e ficou olhando para a praça pela janela suja.\n\nFoi Dona Aurora, horas mais tarde, quem a encontrou do mesmo jeito. Helena mostrou-lhe os envelopes, e a vizinha suspirou. Contou que, anos atrás, o velho lhe confessara que escrevera muitas vezes, mas que, a cada carta, se lembrava do que dissera na cozinha e achava que não tinha o direito de voltar atrás. “Ele era assim”, concluiu. “Consertava o relógio dos outros, mas o dele parou naquele dia.”\n\nNa manhã seguinte, antes de pegar o ônibus de volta, Helena atravessou a praça com uma pequena caixa de ferramentas que encontrara na oficina. Não sabia consertar relógios; nunca aprendera, porque nunca quisera aprender o que era dele. Mas subiu a escada estreita da torre, abriu a tampa empoeirada e ficou um longo tempo diante do mecanismo, como quem lê uma carta numa língua esquecida. Quando desceu, o relógio continuava marcando três e dez. Ela olhou para cima e, pela primeira vez em quarenta e dois anos, não teve pressa.",
     "gloss": {
      "partira": "se había ido",
      "esperara": "había esperado",
@@ -4401,7 +4399,7 @@
       "Porque achava que não podia voltar atrás no que dissera."
      ],
      [
-      "O que sugere a última frase do conto, «não teve pressa»?",
+      "O que sugere a última frase do conto, “não teve pressa”?",
       [
        "Que Helena perdeu o ônibus de volta.",
        "Uma reconciliação com o passado e com o tempo do pai.",
@@ -4457,12 +4455,12 @@
     "es": "En un podcast de literatura, la conductora conversa con un profesor sobre un tiempo verbal típico de la narrativa y sobre los narradores de dos novelas brasileñas clásicas.",
     "speakers": [
      "Marina, apresentadora",
-     "Otávio, professor de literatura"
+     "Rubens, professor de literatura"
     ],
     "turns": [
      [
       "A",
-      "Tá no ar mais um Estante Aberta. Hoje a conversa é sobre um tempo verbal que quase ninguém usa falando, mas que aparece em tudo quanto é romance: o mais-que-perfeito. E pra isso eu convidei o professor Otávio, que dá aula de literatura brasileira. Otávio, obrigada por vir."
+      "Tá no ar mais um Estante Aberta. Hoje a conversa é sobre um tempo verbal que quase ninguém usa falando, mas que aparece em tudo quanto é romance: o mais-que-perfeito. E pra isso eu convidei o professor Rubens, que dá aula de literatura brasileira. Rubens, obrigada por vir."
      ],
      [
       "B",
@@ -4518,7 +4516,7 @@
      ],
      [
       "A",
-      "Adorei. Professor Otávio, muito obrigada."
+      "Adorei. Professor Rubens, muito obrigada."
      ]
     ],
     "gloss": {
@@ -4582,14 +4580,14 @@
        "Ler primeiro um resumo de cada romance antes de começar.",
        "Ler com atenção a quem narra e às suas intenções.",
        "Evitar livros com muitos tempos verbais difíceis.",
-       "Começar pela Hora da estrela, que é mais curto."
+       "Começar pela Hora da estrela, que é um livro mais curto."
       ],
       "Ler com atenção a quem narra e às suas intenções."
      ]
     ],
     "vf": [
      [
-      "O professor diz que, na fala, se prefere «tinha feito» a «fizera».",
+      "O professor diz que, na fala, se prefere “tinha feito” a “fizera”.",
       "verdadeiro"
      ],
      [
@@ -4601,17 +4599,17 @@
       "verdadeiro"
      ],
      [
-      "O professor Otávio já publicou um livro sobre Clarice Lispector.",
+      "O professor Rubens já publicou um livro sobre Clarice Lispector.",
       "não se diz"
      ]
     ]
    },
    "compito": {
     "genre": "resenha",
-    "title": "Resenha do conto «O relógio da estação»",
+    "title": "Resenha do conto “O relógio da estação”",
     "fonte": "lettura",
-    "t": "Você colabora com o blog literário da sua universidade, que publica resenhas curtas de contos contemporâneos. Após ler o conto «O relógio da estação», escreva uma resenha para os leitores do blog. Na resenha, apresente brevemente o enredo sem revelar todo o final, comente o papel do passado e da memória na narrativa, observe como o uso dos tempos verbais (em especial o mais-que-perfeito) contribui para esse efeito e faça uma avaliação do conto, recomendando-o ou não. Se quiser, relacione o conto com um dos romances comentados no podcast Estante Aberta. Não se esqueça de dar um título à resenha. Use registro semiformal. Seu texto deve ter entre 193 e 253 palavras.",
-    "es": "Reseña con título: resumí la trama sin spoilear todo, analizá la memoria y el uso del mais-que-perfeito y cerrá con una valoración. Podés usar formas como «rompera», «acreditara».",
+    "t": "Você colabora com o blog literário da sua universidade, que publica resenhas curtas de contos contemporâneos. Após ler o conto “O relógio da estação”, escreva uma resenha para os leitores do blog. Na resenha, apresente brevemente o enredo sem revelar todo o final, comente o papel do passado e da memória na narrativa, observe como o uso dos tempos verbais (em especial o mais-que-perfeito) contribui para esse efeito e faça uma avaliação do conto, recomendando-o ou não. Se quiser, relacione o conto com um dos romances comentados no podcast Estante Aberta. Não se esqueça de dar um título à resenha. Use registro semiformal. Seu texto deve ter entre 193 e 253 palavras.",
+    "es": "Reseña con título: resumí la trama sin spoilear todo, analizá la memoria y el uso del mais-que-perfeito y cerrá con una valoración. Podés usar formas como “rompera”, “acreditara”.",
     "min": 193,
     "max": 253,
     "punti": [
@@ -4648,7 +4646,7 @@
       ]
      ]
     ],
-    "model": "Um relógio parado e quarenta e dois anos de silêncio\n\n«O relógio da estação» é um conto breve que trata de um tema universal: o orgulho que separa pais e filhos. Helena, uma mulher de sessenta e poucos anos, volta à pequena cidade onde nasceu para o enterro do pai, com quem rompera aos dezenove anos. Ao receber a chave da antiga oficina de relógios, ela descobre objetos que a obrigam a rever tudo o que acreditara sobre aquela ruptura.\n\nO grande mérito do texto está na maneira como o passado invade o presente. Quase toda a história da família é contada por meio do mais-que-perfeito simples — «partira», «dissera», «escrevera» —, tempo verbal pouco usado na fala, mas que aqui cria camadas de memória e reforça a sensação de que tudo já estava decidido antes de a protagonista chegar. O relógio da praça, parado há décadas, funciona como símbolo dessa vida congelada.\n\nComo em Dom Casmurro, comentado recentemente no podcast Estante Aberta, o leitor percebe que a versão de uma única pessoa nunca é a história completa. Aqui, porém, a revelação não nasce da desconfiança, e sim da ternura.\n\nTalvez o desfecho pareça um pouco previsível para leitores experientes, mas a delicadeza da linguagem compensa. Recomendo a leitura a quem gosta de narrativas curtas, silenciosas e profundamente humanas."
+    "model": "Um relógio parado e quarenta e dois anos de silêncio\n\n“O relógio da estação” é um conto breve que trata de um tema universal: o orgulho que separa pais e filhos. Helena, uma mulher de sessenta e poucos anos, volta à pequena cidade onde nasceu para o enterro do pai, com quem rompera aos dezenove anos. Ao receber a chave da antiga oficina de relógios, ela descobre objetos que a obrigam a rever tudo o que acreditara sobre aquela ruptura.\n\nO grande mérito do texto está na maneira como o passado invade o presente. Quase toda a história da família é contada por meio do mais-que-perfeito simples — “partira”, “dissera”, “escrevera” —, tempo verbal pouco usado na fala, mas que aqui cria camadas de memória e reforça a sensação de que tudo já estava decidido antes de a protagonista chegar. O relógio da praça, parado há décadas, funciona como símbolo dessa vida congelada.\n\nComo em Dom Casmurro, comentado recentemente no podcast Estante Aberta, o leitor percebe que a versão de uma única pessoa nunca é a história completa. Aqui, porém, a revelação não nasce da desconfiança, e sim da ternura.\n\nTalvez o desfecho pareça um pouco previsível para leitores experientes, mas a delicadeza da linguagem compensa. Recomendo a leitura a quem gosta de narrativas curtas, silenciosas e profundamente humanas."
    }
   },
   {
@@ -4659,7 +4657,7 @@
     "emoji": "🥬",
     "genre": "crônica",
     "grammar": "orações reduzidas de gerúndio, particípio e infinitivo",
-    "text": "A notícia saiu numa quinta-feira, espremida entre um acidente na marginal e a previsão de chuva: «Feira livre da Rua das Acácias será transferida para avenida vizinha». Lida assim, parecia apenas mais uma decisão administrativa, dessas que ninguém comenta. Terminada a leitura, fechei o jornal e fui fazer café. Mas a frase ficou comigo o dia inteiro, zumbindo como mosca em janela fechada.\n\nMoro nesta rua há dezoito anos. Chegando aqui, recém-casado, descobri que as quartas-feiras tinham um som próprio: o estalo dos ferros das barracas sendo montadas às cinco da manhã, o grito do homem do pastel anunciando a primeira fornada, a discussão diária entre a dona da banca de flores e o feirante das bananas sobre quem invadira o espaço de quem. Acordando com aquele barulho, eu reclamava nos primeiros meses. Depois passei a esperar por ele, e hoje, confesso, durmo mal nas terças, ansioso por ouvi-lo.\n\nSegundo a nota oficial, a mudança atende a pedidos de moradores. Pedidos de quem, não se sabe. Perguntando aqui e ali, não encontrei ninguém que tivesse assinado abaixo-assinado algum. Encontrei, isso sim, o seu Tadashi, que vende verduras na mesma esquina desde antes de eu nascer e que, sabendo da transferência pelo sobrinho, passou a noite fazendo contas. «Na avenida, o freguês passa de carro», disse ele, arrumando os maços de coentro com a delicadeza de quem penteia uma criança. «Aqui ele passa a pé. Quem passa a pé para, olha, conversa. Quem passa de carro só buzina.»\n\nNa padaria, ao comentar o assunto, ouvi opiniões divididas. O síndico do prédio da esquina, dizendo-se cansado de lavar a calçada toda quarta-feira, achou a mudança excelente. Uma professora aposentada, interrompendo o síndico sem cerimônia, lembrou que foi na feira que ela conheceu o marido, quarenta anos atrás, disputando o último cacho de uva. O padeiro, prudente, preferiu não tomar partido: vende pão para os dois lados. Saí de lá convencido de que ninguém tinha pedido nada a ninguém.\n\nHá quem diga que a feira suja a rua, atrapalha o trânsito, atrai pombos. Tudo verdade. Vista de cima, por uma janela de apartamento, ela deve parecer uma desordem de lonas coloridas e caixotes empilhados. Vista de perto, porém, é outra coisa. É o lugar onde a aposentada do 302 conversa com alguém pela primeira vez na semana; onde o menino aprende, ajudando o pai, a fazer troco de cabeça; onde a moça recém-chegada da Bahia encontra o tempero que não achava em nenhum mercado. Desmontada a última barraca, fica a rua suja, é verdade. Mas fica também uma cidade um pouco menos solitária.\n\nAo ler de novo a notícia, à noite, reparei num detalhe que me escapara: a transferência seria «provisória», enquanto durassem as obras de recapeamento da avenida — ou seja, a feira iria justamente para a rua em obras. Tentei entender a lógica e desisti. Os jornais, sendo feitos às pressas, às vezes publicam o comunicado sem perguntar nada a ninguém. Não os culpo. Culpo um pouco a mim mesmo, que li a notícia sem estranhar, como quem lê a previsão do tempo.\n\nNa quarta-feira seguinte, levantei cedo e desci. As barracas ainda estavam lá, montadas como sempre. Seu Tadashi me contou, piscando o olho, que os feirantes tinham se reunido com um vereador e que a mudança fora adiada «para estudos». Adiada, não cancelada. Aprendi, com os anos, que nesta cidade as coisas adiadas tanto podem voltar amanhã quanto nunca mais. Por via das dúvidas, a dona das flores já afixou na barraca um cartaz escrito à mão: «Daqui não saio».\n\nComprei coentro de que não precisava, um pastel que não devia comer e flores para ninguém em particular. Voltando para casa, carregando as sacolas, pensei que a crônica talvez sirva para isto: para ler de novo, com vagar, as notícias que passam depressa demais. Por trás de cada nota de três linhas há uma rua, uma quarta-feira, um homem arrumando verduras como quem arruma a vida. Publicada a notícia, a cidade segue. Cabe a alguém lembrar que ela não segue igual.",
+    "text": "A notícia saiu numa quinta-feira, espremida entre um acidente na marginal e a previsão de chuva: “Feira livre da Rua das Acácias será transferida para avenida vizinha”. Lida assim, parecia apenas mais uma decisão administrativa, dessas que ninguém comenta. Terminada a leitura, fechei o jornal e fui fazer café. Mas a frase ficou comigo o dia inteiro, zumbindo como mosca em janela fechada.\n\nMoro nesta rua há dezoito anos. Chegando aqui, recém-casado, descobri que as quartas-feiras tinham um som próprio: o estalo dos ferros das barracas sendo montadas às cinco da manhã, o grito do homem do pastel anunciando a primeira fornada, a discussão diária entre a dona da banca de flores e o feirante das bananas sobre quem invadira o espaço de quem. Acordando com aquele barulho, eu reclamava nos primeiros meses. Depois passei a esperar por ele, e hoje, confesso, durmo mal nas terças, ansioso por ouvi-lo.\n\nSegundo a nota oficial, a mudança atende a pedidos de moradores. Pedidos de quem, não se sabe. Perguntando aqui e ali, não encontrei ninguém que tivesse assinado abaixo-assinado algum. Encontrei, isso sim, o seu Tadashi, que vende verduras na mesma esquina desde antes de eu nascer e que, sabendo da transferência pelo sobrinho, passou a noite fazendo contas. “Na avenida, o freguês passa de carro”, disse ele, arrumando os maços de coentro com a delicadeza de quem penteia uma criança. “Aqui ele passa a pé. Quem passa a pé para, olha, conversa. Quem passa de carro só buzina.”\n\nNa padaria, ao comentar o assunto, ouvi opiniões divididas. O síndico do prédio da esquina, dizendo-se cansado de lavar a calçada toda quarta-feira, achou a mudança excelente. Uma professora aposentada, interrompendo o síndico sem cerimônia, lembrou que foi na feira que ela conheceu o marido, quarenta anos atrás, disputando o último cacho de uva. O padeiro, prudente, preferiu não tomar partido: vende pão para os dois lados. Saí de lá convencido de que ninguém tinha pedido nada a ninguém.\n\nHá quem diga que a feira suja a rua, atrapalha o trânsito, atrai pombos. Tudo verdade. Vista de cima, por uma janela de apartamento, ela deve parecer uma desordem de lonas coloridas e caixotes empilhados. Vista de perto, porém, é outra coisa. É o lugar onde a aposentada do 302 conversa com alguém pela primeira vez na semana; onde o menino aprende, ajudando o pai, a fazer troco de cabeça; onde a moça recém-chegada da Bahia encontra o tempero que não achava em nenhum mercado. Desmontada a última barraca, fica a rua suja, é verdade. Mas fica também uma cidade um pouco menos solitária.\n\nAo ler de novo a notícia, à noite, reparei num detalhe que me escapara: a transferência seria “provisória”, enquanto durassem as obras de recapeamento da avenida — ou seja, a feira iria justamente para a rua em obras. Tentei entender a lógica e desisti. Os jornais, sendo feitos às pressas, às vezes publicam o comunicado sem perguntar nada a ninguém. Não os culpo. Culpo um pouco a mim mesmo, que li a notícia sem estranhar, como quem lê a previsão do tempo.\n\nNa quarta-feira seguinte, levantei cedo e desci. As barracas ainda estavam lá, montadas como sempre. Seu Tadashi me contou, piscando o olho, que os feirantes tinham se reunido com um vereador e que a mudança fora adiada “para estudos”. Adiada, não cancelada. Aprendi, com os anos, que nesta cidade as coisas adiadas tanto podem voltar amanhã quanto nunca mais. Por via das dúvidas, a dona das flores já afixou na barraca um cartaz escrito à mão: “Daqui não saio”.\n\nComprei coentro de que não precisava, um pastel que não devia comer e flores para ninguém em particular. Voltando para casa, carregando as sacolas, pensei que a crônica talvez sirva para isto: para ler de novo, com vagar, as notícias que passam depressa demais. Por trás de cada nota de três linhas há uma rua, uma quarta-feira, um homem arrumando verduras como quem arruma a vida. Publicada a notícia, a cidade segue. Cabe a alguém lembrar que ela não segue igual.",
     "gloss": {
      "espremida": "apretujada",
      "marginal": "autopista urbana",
@@ -4673,7 +4671,7 @@
      "freguês": "cliente",
      "penteia": "peina",
      "buzina": "toca bocina",
-     "atrapalha": "entorpece",
+     "atrapalha": "estorba, complica",
      "pombos": "palomas",
      "caixotes": "cajones",
      "troco": "vuelto",
@@ -4699,14 +4697,14 @@
       "Por que seu Tadashi se preocupa com a mudança?",
       [
        "Porque na avenida o aluguel da barraca é mais caro.",
-       "Porque na avenida perde-se o contato com o freguês a pé.",
+       "Porque na avenida se perde o contato com o freguês que passa a pé.",
        "Porque não tem carro para levar as verduras até lá.",
        "Porque o sobrinho não poderá mais ajudá-lo."
       ],
-      "Porque na avenida perde-se o contato com o freguês a pé."
+      "Porque na avenida se perde o contato com o freguês que passa a pé."
      ],
      [
-      "Qual é a função do contraste entre a feira «vista de cima» e «vista de perto»?",
+      "Qual é a função do contraste entre a feira “vista de cima” e “vista de perto”?",
       [
        "Opor a aparência de desordem ao valor social da feira.",
        "Mostrar que o cronista mora num andar alto.",
@@ -4913,7 +4911,7 @@
       "O dinheiro público deveria ter outro destino."
      ],
      [
-      "O que a gestão quer dizer com «fechar o círculo»?",
+      "O que a gestão quer dizer com “fechar o círculo”?",
       [
        "Reabrir com o mesmo filme da última sessão de 1998.",
        "Encerrar definitivamente a polêmica com os comerciantes.",
@@ -4925,7 +4923,7 @@
     ],
     "vf": [
      [
-      "O prédio do cinema chegou a ser demolido em parte.",
+      "O prédio do cinema chegou a ser demolido.",
       "falso"
      ],
      [
@@ -4946,8 +4944,8 @@
     "genre": "relato",
     "title": "Memórias do bairro",
     "fonte": "entrambi",
-    "t": "O jornal da sua cidade abriu uma seção chamada «Memórias do bairro», com relatos de leitores sobre lugares e hábitos que mudaram ou desapareceram. Após ler a crônica «A feira mudou de rua» e ouvir a reportagem da rádio sobre a reabertura do Cine Glória, escreva um relato para essa seção contando uma experiência sua ligada a um espaço do seu bairro que mudou ou desapareceu (uma feira, uma banca de jornal, um cinema, uma padaria…). No relato, descreva o lugar e as pessoas, conte o que aconteceu, relacione sua experiência com pelo menos um dos casos da semana e termine com uma reflexão. Use registro semiformal e procure empregar orações reduzidas de gerúndio, particípio e infinitivo. Seu texto deve ter entre 199 e 259 palavras.",
-    "es": "Relato personal en pasado para la sección de un diario: un lugar de tu barrio que cambió, desapareció o volvió, conectado con la crónica o con la nota sobre el cine, con reflexión final. Usá reducidas: «chegando em casa», «fechada a banca», «ao passar».",
+    "t": "O jornal da sua cidade abriu uma seção chamada “Memórias do bairro”, com relatos de leitores sobre lugares e hábitos que mudaram ou desapareceram. Após ler a crônica “A feira mudou de rua” e ouvir a reportagem da rádio sobre a reabertura do Cine Glória, escreva um relato para essa seção contando uma experiência sua ligada a um espaço do seu bairro que mudou ou desapareceu (uma feira, uma banca de jornal, um cinema, uma padaria…). No relato, descreva o lugar e as pessoas, conte o que aconteceu, relacione sua experiência com pelo menos um dos casos da semana e termine com uma reflexão. Use registro semiformal e procure empregar orações reduzidas de gerúndio, particípio e infinitivo. Seu texto deve ter entre 199 e 259 palavras.",
+    "es": "Relato personal en pasado para la sección de un diario: un lugar de tu barrio que cambió, desapareció o volvió, conectado con la crónica o con la nota sobre el cine, con reflexión final. Usá reducidas: “chegando em casa”, “fechada a banca”, “ao passar”.",
     "min": 199,
     "max": 259,
     "punti": [
@@ -4997,7 +4995,7 @@
     "emoji": "✉️",
     "genre": "guia prático",
     "grammar": "correspondência formal e formas de tratamento",
-    "text": "Poucos gêneros textuais provocam tanta insegurança quanto a correspondência formal. Estudantes que trocam mensagens espontâneas o dia inteiro travam diante de um e-mail para a coordenação do curso; profissionais experientes hesitam antes de responder a um órgão público. A razão é compreensível: nesses textos, o tom conta tanto quanto o conteúdo. Uma saudação inadequada ou um fecho brusco podem comprometer um pedido perfeitamente legítimo.\n\nComecemos pela abertura. Em cartas e e-mails dirigidos a instituições ou a pessoas com quem não se tem intimidade, «Prezado Senhor» ou «Prezada Senhora», seguidos do nome ou do cargo, continuam sendo a opção mais segura. «Caro» soa um pouco mais próximo e pode ser usado com colegas ou pessoas já conhecidas. Já o «Olá», tão comum nas mensagens do dia a dia, deve ser evitado na primeira comunicação com uma instituição, sobretudo quando o objetivo é fazer uma solicitação. Quando não se sabe o nome do destinatário, fórmulas como «Prezados Senhores» ou «À Coordenação do Curso de…» resolvem o problema com elegância.\n\nAs formas de tratamento merecem atenção especial. No Brasil, a correspondência oficial utiliza «Vossa Senhoria», abreviado como V. Sa., para a maioria das autoridades e chefias, e «Vossa Excelência» para altas autoridades dos três Poderes, como ministros, governadores e juízes. Um detalhe gramatical costuma confundir: embora o pronome contenha «Vossa», a concordância se faz na terceira pessoa. Escreve-se, portanto, «Vossa Senhoria receberá seu certificado», e não «vosso certificado». Na correspondência entre particulares e nos e-mails profissionais, contudo, o tratamento cerimonioso vem cedendo espaço a «o senhor» e «a senhora», que mantêm a cortesia sem soar antiquados: «Gostaria de saber se o senhor poderia…».\n\nO corpo do texto deve ser objetivo. Recomenda-se apresentar logo no primeiro parágrafo quem escreve e qual é o motivo do contato: «Sou aluna do terceiro semestre do curso de Engenharia Ambiental e venho, por meio desta, solicitar…». Expressões como «venho por meio desta» ou «sirvo-me do presente» ainda aparecem com frequência, mas muitos especialistas consideram que podem ser substituídas por formulações mais diretas, como «Escrevo para solicitar». Em seguida, os fatos devem ser expostos em ordem cronológica, com datas e números de protocolo, se houver. Adjetivos excessivos e desabafos emocionais tendem a enfraquecer o pedido: é mais eficaz relatar que o documento foi solicitado há quarenta dias do que afirmar que o atendimento é «uma vergonha».\n\nO fecho também tem suas regras. Os manuais de redação oficial recomendam «Respeitosamente» para autoridades de hierarquia superior e «Atenciosamente» para as de mesma hierarquia ou inferior. Na prática, fora do serviço público, «Atenciosamente» se tornou o fecho padrão para quase todas as situações formais, e «Cordialmente» funciona bem quando já existe algum contato. Antes do fecho, é comum uma frase de cortesia que retome o pedido — «Agradeço desde já a atenção e aguardo retorno» — e, depois dele, o nome completo, o cargo ou a matrícula e, se for o caso, um telefone para contato.\n\nHá, por fim, a questão do suporte. O e-mail, por ser rápido, convida ao descuido: assunto vago, anexos esquecidos, mensagens enviadas de endereços com apelidos pouco sérios. Um bom e-mail formal tem assunto claro e específico («Solicitação de segunda chamada – Cálculo I – Turma B»), anexos nomeados de forma compreensível e uma assinatura completa. Convém ainda reler a mensagem antes do envio, verificando nomes próprios e cargos: poucas coisas desagradam tanto quanto ver o próprio nome escrito errado. Também vale conferir se o destinatário é, de fato, a pessoa responsável pelo assunto; muitas mensagens se perdem simplesmente por terem sido enviadas ao setor errado.\n\nNada disso significa que a correspondência formal precise ser rígida ou fria. Uma carta bem escrita pode ser cordial, até calorosa, desde que respeite a distância que a situação exige. O segredo está em lembrar que, do outro lado, há uma pessoa — muitas vezes sobrecarregada — que vai ler dezenas de mensagens naquele dia. Facilitar o trabalho dela, com clareza e cortesia, é a melhor forma de conseguir o que se pede.",
+    "text": "Poucos gêneros textuais provocam tanta insegurança quanto a correspondência formal. Estudantes que trocam mensagens espontâneas o dia inteiro travam diante de um e-mail para a coordenação do curso; profissionais experientes hesitam antes de responder a um órgão público. A razão é compreensível: nesses textos, o tom conta tanto quanto o conteúdo. Uma saudação inadequada ou um fecho brusco podem comprometer um pedido perfeitamente legítimo.\n\nComecemos pela abertura. Em cartas e e-mails dirigidos a instituições ou a pessoas com quem não se tem intimidade, “Prezado Senhor” ou “Prezada Senhora”, seguidos do nome ou do cargo, continuam sendo a opção mais segura. “Caro” soa um pouco mais próximo e pode ser usado com colegas ou pessoas já conhecidas. Já o “Olá”, tão comum nas mensagens do dia a dia, deve ser evitado na primeira comunicação com uma instituição, sobretudo quando o objetivo é fazer uma solicitação. Quando não se sabe o nome do destinatário, fórmulas como “Prezados Senhores” ou “À Coordenação do Curso de…” resolvem o problema com elegância.\n\nAs formas de tratamento merecem atenção especial. Na tradição da correspondência oficial brasileira, usa-se “Vossa Senhoria”, abreviado como V. Sa., para a maioria das autoridades e chefias, e “Vossa Excelência” para altas autoridades dos três Poderes, como ministros, governadores e juízes; alguns órgãos simplificaram recentemente essas fórmulas, mas elas continuam muito presentes. Um detalhe gramatical costuma confundir: embora o pronome contenha “Vossa”, a concordância se faz na terceira pessoa. Escreve-se, portanto, “Vossa Senhoria receberá seu certificado”, e não “vosso certificado”. Na correspondência entre particulares e nos e-mails profissionais, contudo, o tratamento cerimonioso vem cedendo espaço a “o senhor” e “a senhora”, que mantêm a cortesia sem soar antiquados: “Gostaria de saber se o senhor poderia…”.\n\nO corpo do texto deve ser objetivo. Recomenda-se apresentar logo no primeiro parágrafo quem escreve e qual é o motivo do contato: “Sou aluna do terceiro semestre do curso de Engenharia Ambiental e venho, por meio desta, solicitar…”. Expressões como “venho por meio desta” ou “sirvo-me do presente” ainda aparecem com frequência, mas muitos especialistas consideram que podem ser substituídas por formulações mais diretas, como “Escrevo para solicitar”. Em seguida, os fatos devem ser expostos em ordem cronológica, com datas e números de protocolo, se houver. Adjetivos excessivos e desabafos emocionais tendem a enfraquecer o pedido: é mais eficaz relatar que o documento foi solicitado há quarenta dias do que afirmar que o atendimento é “uma vergonha”.\n\nO fecho também tem suas regras. Os manuais de redação oficial recomendam “Respeitosamente” para autoridades de hierarquia superior e “Atenciosamente” para as de mesma hierarquia ou inferior. Na prática, fora do serviço público, “Atenciosamente” se tornou o fecho padrão para quase todas as situações formais, e “Cordialmente” funciona bem quando já existe algum contato. Antes do fecho, é comum uma frase de cortesia que retome o pedido — “Agradeço desde já a atenção e aguardo retorno” — e, depois dele, o nome completo, o cargo ou a matrícula e, se for o caso, um telefone para contato.\n\nHá, por fim, a questão do suporte. O e-mail, por ser rápido, convida ao descuido: assunto vago, anexos esquecidos, mensagens enviadas de endereços com apelidos pouco sérios. Um bom e-mail formal tem assunto claro e específico (“Solicitação de segunda chamada – Cálculo I – Turma B”), anexos nomeados de forma compreensível e uma assinatura completa. Convém ainda reler a mensagem antes do envio, verificando nomes próprios e cargos: poucas coisas desagradam tanto quanto ver o próprio nome escrito errado. Também vale conferir se o destinatário é, de fato, a pessoa responsável pelo assunto; muitas mensagens se perdem simplesmente por terem sido enviadas ao setor errado.\n\nNada disso significa que a correspondência formal precise ser rígida ou fria. Uma carta bem escrita pode ser cordial, até calorosa, desde que respeite a distância que a situação exige. O segredo está em lembrar que, do outro lado, há uma pessoa — muitas vezes sobrecarregada — que vai ler dezenas de mensagens naquele dia. Facilitar o trabalho dela, com clareza e cortesia, é a melhor forma de conseguir o que se pede.",
     "gloss": {
      "travam": "se traban",
      "hesitam": "dudan",
@@ -5017,7 +5015,7 @@
      "suporte": "medio, soporte",
      "anexos": "adjuntos",
      "apelidos": "apodos",
-     "chamada": "(segunda chamada) examen recuperatorio",
+     "chamada": "(segunda chamada) examen en otra fecha, para quien faltó",
      "convém": "conviene",
      "conferir": "chequear",
      "calorosa": "cálida",
@@ -5037,30 +5035,30 @@
      [
       "Qual forma de abertura o texto desaconselha no primeiro contato com uma instituição?",
       [
-       "«Prezado Senhor»",
-       "«Caro colega»",
-       "«Olá»",
-       "«À Coordenação do Curso»"
+       "“Prezado Senhor”",
+       "“Caro colega”",
+       "“Olá”",
+       "“À Coordenação do Curso”"
       ],
-      "«Olá»"
+      "“Olá”"
      ],
      [
-      "O exemplo «Vossa Senhoria receberá seu certificado» serve para mostrar:",
+      "O exemplo “Vossa Senhoria receberá seu certificado” serve para mostrar:",
       [
-       "que «Vossa Senhoria» é usado apenas para juízes.",
+       "que “Vossa Senhoria” é usado apenas para juízes.",
        "a concordância em terceira pessoa com o pronome de tratamento.",
-       "que o possessivo correto seria «vosso».",
+       "que o possessivo correto seria “vosso”.",
        "um caso de tratamento antiquado que deve ser evitado."
       ],
       "a concordância em terceira pessoa com o pronome de tratamento."
      ],
      [
-      "Por que o autor prefere relatar que o documento foi pedido «há quarenta dias»?",
+      "Por que o autor prefere relatar que o documento foi pedido “há quarenta dias”?",
       [
        "Porque fatos objetivos fortalecem o pedido.",
        "Porque é proibido usar adjetivos em cartas formais.",
        "Porque o prazo legal de resposta é de quarenta dias.",
-       "Porque a palavra «vergonha» é considerada ofensiva por lei."
+       "Porque a palavra “vergonha” é considerada ofensiva por lei."
       ],
       "Porque fatos objetivos fortalecem o pedido."
      ],
@@ -5077,11 +5075,11 @@
     ],
     "vf": [
      [
-      "«Respeitosamente» é recomendado para autoridades de hierarquia superior.",
+      "“Respeitosamente” é recomendado para autoridades de hierarquia superior.",
       "verdadeiro"
      ],
      [
-      "O texto proíbe o uso da expressão «venho por meio desta».",
+      "O texto proíbe o uso da expressão “venho por meio desta”.",
       "falso"
      ],
      [
@@ -5089,11 +5087,11 @@
       "não se diz"
      ],
      [
-      "Fora do serviço público, «Atenciosamente» virou o fecho mais comum.",
+      "Fora do serviço público, “Atenciosamente” virou o fecho mais comum.",
       "verdadeiro"
      ],
      [
-      "Segundo o texto, «Cordialmente» é o fecho mais adequado para escrever a um ministro.",
+      "Segundo o texto, “Cordialmente” é o fecho mais adequado para escrever a um ministro.",
       "falso"
      ]
     ],
@@ -5162,7 +5160,7 @@
      ],
      [
       "B",
-      "Entendi. E o que eu posso fazer? Porque, sendo bem sincera, isso tá me prejudicando. Eu fui aprovada num processo seletivo pra professora substituta, e a posse é daqui a três semanas. Eles exigem o diploma ou, no mínimo, uma declaração de conclusão."
+      "Entendi. E o que eu posso fazer? Porque, sendo bem sincera, isso tá me prejudicando. Eu fui aprovada num concurso pra professora de um instituto federal, e a posse é daqui a três semanas. Eles exigem o diploma ou, no mínimo, uma declaração de conclusão."
      ],
      [
       "A",
@@ -5174,7 +5172,7 @@
      ],
      [
       "A",
-      "Pode ser por e-mail, mas com tudo bem certinho: assunto claro, número do processo, e anexa o comprovante de aprovação no processo seletivo, com a data da posse. Ah, e escreve pro endereço institucional da coordenação, não pro e-mail pessoal dele."
+      "Pode ser por e-mail, mas com tudo bem certinho: assunto claro, número do processo, e anexa o comprovante de aprovação no concurso, com a data da posse. Ah, e escreve pro endereço institucional da coordenação, não pro e-mail pessoal dele."
      ],
      [
       "B",
@@ -5207,9 +5205,8 @@
      "catalográfica": "(ficha catalográfica) ficha bibliográfica",
      "homologação": "aprobación oficial",
      "ata": "acta",
-     "banca": "tribunal (de tesis)",
+     "banca": "jurado (de tesis)",
      "prejudicando": "perjudicando",
-     "substituta": "suplente",
      "posse": "toma de posesión (del cargo)",
      "comprovante": "comprobante",
      "certinho": "en regla",
@@ -5243,7 +5240,7 @@
        "Ela vai se mudar para o exterior daqui a três semanas.",
        "Precisa comprovar o mestrado para tomar posse num cargo.",
        "O prazo para retirar o diploma vai vencer.",
-       "O processo seletivo pede o diploma na inscrição, que termina amanhã."
+       "O concurso pede o diploma na inscrição, que termina amanhã."
       ],
       "Precisa comprovar o mestrado para tomar posse num cargo."
      ],
@@ -5291,8 +5288,8 @@
     "genre": "carta_formal",
     "title": "E-mail formal à coordenação do programa",
     "fonte": "entrambi",
-    "t": "Você é Beatriz Andrade. Após ouvir o telefonema com a secretaria da Pós-Graduação em Letras e ler o guia «Prezado, caro ou olá?», escreva um e-mail formal ao coordenador do programa, Prof. Dr. Paulo Rezende, solicitando em caráter de urgência a emissão de uma declaração de conclusão de mestrado. Seu e-mail deve conter assunto claro, saudação adequada, identificação, número do processo, exposição dos fatos informados pela secretaria, o pedido com a justificativa da urgência, menção ao anexo e fecho adequado com assinatura completa. Use registro formal, tratando o destinatário por «o senhor». Seu texto deve ter entre 205 e 265 palavras.",
-    "es": "Mail formal a una autoridad académica con los datos del audio (proceso, firma pendiente, fecha de toma de posesión) y las convenciones de la lectura: asunto, Prezado, «o senhor», Atenciosamente.",
+    "t": "Você é Beatriz Andrade. Após ouvir o telefonema com a secretaria da Pós-Graduação em Letras e ler o guia “Prezado, caro ou olá?”, escreva um e-mail formal ao coordenador do programa, Prof. Dr. Paulo Rezende, solicitando em caráter de urgência a emissão de uma declaração de conclusão de mestrado. Seu e-mail deve conter assunto claro, saudação adequada, identificação, número do processo, exposição dos fatos informados pela secretaria, o pedido com a justificativa da urgência, menção ao anexo e fecho adequado com assinatura completa. Use registro formal, tratando o destinatário por “o senhor”. Seu texto deve ter entre 205 e 265 palavras.",
+    "es": "Mail formal a una autoridad académica con los datos del audio (proceso, firma pendiente, fecha de toma de posesión) y las convenciones de la lectura: asunto, Prezado, “o senhor”, Atenciosamente.",
     "min": 205,
     "max": 265,
     "punti": [
@@ -5334,7 +5331,7 @@
       ]
      ]
     ],
-    "model": "Assunto: Solicitação urgente de declaração de conclusão de mestrado – Processo 2026/0418\n\nPrezado Professor Rezende,\n\nMeu nome é Beatriz Andrade e defendi minha dissertação de mestrado neste Programa em março deste ano. Escrevo para solicitar, em caráter de urgência, a emissão de uma declaração de conclusão de curso.\n\nLogo após a defesa, dei entrada no pedido de diploma (processo nº 2026/0418) e entreguei toda a documentação exigida. Em contato telefônico com a secretaria, fui informada de que o processo está parado na etapa de homologação, pois um dos membros externos da banca ainda não assinou eletronicamente a ata de defesa. Já escrevi ao professor em questão, a quem expliquei a situação, e aguardo sua resposta.\n\nOcorre que fui aprovada em processo seletivo para professora substituta, e a posse está marcada para o dia 16 de outubro. Para assumir o cargo, preciso apresentar o diploma ou, no mínimo, uma declaração de conclusão. Segundo a secretaria, esse documento pode ser emitido mediante autorização da coordenação.\n\nDiante do exposto, solicito que o senhor autorize a emissão da declaração, a fim de que eu não perca a vaga. Envio em anexo o comprovante de aprovação no processo seletivo, no qual consta a data da posse.\n\nAgradeço desde já a atenção e coloco-me à disposição para quaisquer esclarecimentos.\n\nAtenciosamente,\n\nBeatriz Andrade\nPrograma de Pós-Graduação em Letras\nTelefone: (31) 98765-4321"
+    "model": "Assunto: Solicitação urgente de declaração de conclusão de mestrado – Processo 2026/0418\n\nPrezado Professor Rezende,\n\nMeu nome é Beatriz Andrade e defendi minha dissertação de mestrado neste Programa em março deste ano. Escrevo para solicitar, em caráter de urgência, a emissão de uma declaração de conclusão de curso.\n\nLogo após a defesa, dei entrada no pedido de diploma (processo nº 2026/0418) e entreguei toda a documentação exigida. Em contato telefônico com a secretaria, fui informada de que o processo está parado na etapa de homologação, pois um dos membros externos da banca ainda não assinou eletronicamente a ata de defesa. Já escrevi ao professor em questão, a quem expliquei a situação, e aguardo sua resposta.\n\nOcorre que fui aprovada em concurso público para professora de um instituto federal, e a posse está marcada para o dia 16 de outubro. Para assumir o cargo, preciso apresentar o diploma ou, no mínimo, uma declaração de conclusão. Segundo a secretaria, esse documento pode ser emitido mediante autorização da coordenação.\n\nDiante do exposto, solicito que o senhor autorize a emissão da declaração, a fim de que eu não perca a vaga. Envio em anexo o comprovante de aprovação no concurso, no qual consta a data da posse.\n\nAgradeço desde já a atenção e coloco-me à disposição para quaisquer esclarecimentos.\n\nAtenciosamente,\n\nBeatriz Andrade\nPrograma de Pós-Graduação em Letras\nTelefone: (31) 98765-4321"
    }
   },
   {
@@ -5345,7 +5342,7 @@
     "emoji": "🧩",
     "genre": "artigo de revista",
     "grammar": "formação de palavras",
-    "text": "Numa padaria de qualquer cidade brasileira, a frase “me vê um cafezinho rapidinho?” não espanta ninguém. O cliente não quer necessariamente um café pequeno, nem está pedindo que o atendente saia correndo: está sendo gentil. O diminutivo, nesse caso, suaviza o pedido, aproxima as pessoas e revela algo que os linguistas repetem há décadas — no português do Brasil, as terminações das palavras dizem quase tanto quanto as próprias palavras.\n\nOs sufixos -inho e -zinho talvez sejam o exemplo mais famoso. Eles podem indicar tamanho (uma casinha no alto do morro), carinho (“vem cá, meu filhinho”), ironia (“que trabalhinho, hein?”) ou intensidade (“acordei cedinho”, “o pão está quentinho”). Há até diminutivos que perderam o sentido original e viraram palavras independentes: ninguém pensa em tamanho quando fala em “calcinha” ou na “folhinha” pendurada na parede da cozinha. Para a professora Helena Barros, que pesquisa morfologia numa universidade pública do Recife, o estrangeiro costuma errar menos na forma do que no tom. “O aluno aprende a dizer ‘obrigadinho’, mas não percebe que, dependendo da entonação, a palavra soa irônica”, observa.\n\nOs aumentativos seguem uma lógica parecida, só que ao contrário. Um casarão é uma casa grande, mas um golaço não é um gol comprido: é um gol bonito, digno de replay. Um filmão é um filme excelente, e um “jantarzão” é aquele jantar caprichado de domingo. Ao mesmo tempo, há aumentativos que carregam desprezo ou deboche: um narigão, um livrão chato, um “espertalhão”. Em outros casos, o sufixo -ão criou palavras novas, sem nenhuma ideia de tamanho: cartão, portão e salão nasceram assim, e hoje ninguém os associa a uma carta, uma porta ou uma sala gigantes.\n\nSe os sufixos dão cor, os prefixos costumam dar direção. O prefixo des- inverte (desfazer, desligar, descongelar), re- repete (reler, refazer, reescrever), pré- e pós- situam no tempo (pré-estreia, pós-graduação), e super-, hiper- e mega- exageram. Numa só manhã de trabalho, qualquer brasileiro pode ouvir que a reunião foi superprodutiva, que o trânsito estava hipercomplicado e que a promoção do supermercado é uma megaliquidação imperdível. Os gramáticos mais conservadores torcem o nariz para esses exageros, mas a língua não parece muito preocupada com a opinião deles.\n\nÉ justamente essa liberdade que permite ao idioma criar palavras sem pedir licença. Os sufixos -ção e -mento transformam verbos em substantivos: desmatar deu desmatamento, e lacrar, no sentido que o verbo ganhou nas redes sociais, deu lacração. O sufixo -eiro, que já nomeava ofícios antigos como padeiro e sapateiro, hoje produz concurseiro, quem passa anos estudando para concursos públicos. O -ista cria militâncias inteiras, como a do cicloativista. E a terminação -ar transforma quase qualquer palavra em verbo: printar uma conversa, zapear pelos canais, maratonar uma série. Um dos exemplos mais saborosos é sextou, forma verbal inventada a partir de “sexta-feira” para celebrar o fim da semana de trabalho. Ninguém conjuga “eu sexto, você sexta”, mas todo mundo entende o recado.\n\nAlém dos afixos, o português recorre a outros mecanismos. A composição junta duas palavras numa só: guarda-chuva, beija-flor, arranha-céu. O encurtamento, muito comum entre os jovens, corta a palavra pela metade: refrigerante vira refri, aniversário vira niver, faculdade vira facul. E há os cruzamentos, que fundem duas palavras numa terceira. O mais conhecido entre argentinos e uruguaios talvez seja portunhol, mistura de português e espanhol que muita gente fala sem admitir, especialmente nas cidades de fronteira.\n\nPara Barros, essa criatividade morfológica não é um detalhe técnico, mas uma janela para a cultura. “O diminutivo brasileiro tem muito a ver com a forma como a gente negocia a cortesia”, explica. “Pedir ‘um minutinho’ é pedir tempo sem parecer exigente. Dizer que a conta ficou ‘salgadinha’ é reclamar sem brigar.” Nesse sentido, o famoso jeitinho — ele mesmo um diminutivo — resumiria uma maneira de contornar obstáculos com flexibilidade, para o bem e para o mal.\n\nPara quem aprende português como língua estrangeira, a lição é dupla. Por um lado, conhecer os afixos mais produtivos permite adivinhar o sentido de milhares de palavras: quem sabe o que é fazer e o que significa re- entende refazer sem abrir o dicionário. Por outro, é preciso ouvir muito para captar as nuances de tom. Afinal, entre um cafezinho gentil e um trabalhinho irônico, a diferença não está no dicionário, mas no jeito de dizer.",
+    "text": "Numa padaria de qualquer cidade brasileira, a frase “me vê um cafezinho rapidinho?” não espanta ninguém. O cliente não quer necessariamente um café pequeno, nem está pedindo que o atendente saia correndo: está sendo gentil. O diminutivo, nesse caso, suaviza o pedido, aproxima as pessoas e revela algo que os linguistas repetem há décadas — no português do Brasil, as terminações das palavras dizem quase tanto quanto as próprias palavras.\n\nOs sufixos -inho e -zinho talvez sejam o exemplo mais famoso. Eles podem indicar tamanho (uma casinha no alto do morro), carinho (“vem cá, meu filhinho”), ironia (“que trabalhinho, hein?”) ou intensidade (“acordei cedinho”, “o pão está quentinho”). Há até diminutivos que perderam o sentido original e viraram palavras independentes: ninguém pensa em tamanho quando fala em “calcinha” ou na “folhinha” pendurada na parede da cozinha. Para a professora Helena Barros, que pesquisa morfologia numa universidade pública do Recife, o estrangeiro costuma errar menos na forma do que no tom. “O aluno aprende a dizer ‘obrigadinho’, mas não percebe que, dependendo da entonação, a palavra soa irônica”, observa.\n\nOs aumentativos seguem uma lógica parecida, só que ao contrário. Um casarão é uma casa grande, mas um golaço não é um gol comprido: é um gol bonito, digno de replay. Um filmão é um filme excelente, e um “jantarzão” é aquele jantar caprichado de domingo. Ao mesmo tempo, há aumentativos que carregam desprezo ou deboche: um narigão, um livrão chato, um “espertalhão”. Em outros casos, o sufixo -ão criou palavras novas, sem nenhuma ideia de tamanho: cartão, portão e salão têm parentesco com carta, porta e sala, mas hoje ninguém pensa neles como uma carta, uma porta ou uma sala gigantes.\n\nSe os sufixos dão cor, os prefixos costumam dar direção. O prefixo des- inverte (desfazer, desligar, descongelar), re- repete (reler, refazer, reescrever), pré- e pós- situam no tempo (pré-estreia, pós-graduação), e super-, hiper- e mega- exageram. Numa só manhã de trabalho, qualquer brasileiro pode ouvir que a reunião foi superprodutiva, que o trânsito estava hipercomplicado e que a promoção do supermercado é uma megaliquidação imperdível. Os gramáticos mais conservadores torcem o nariz para esses exageros, mas a língua não parece muito preocupada com a opinião deles.\n\nÉ justamente essa liberdade que permite ao idioma criar palavras sem pedir licença. Os sufixos -ção e -mento transformam verbos em substantivos: desmatar deu desmatamento, e lacrar, no sentido que o verbo ganhou nas redes sociais, deu lacração. O sufixo -eiro, que já nomeava ofícios antigos como padeiro e sapateiro, hoje produz concurseiro, quem passa anos estudando para concursos públicos. O -ista cria militâncias inteiras, como a do cicloativista. E a terminação -ar transforma quase qualquer palavra em verbo: printar uma conversa, zapear pelos canais, maratonar uma série. Um dos exemplos mais saborosos é sextou, forma verbal inventada a partir de “sexta-feira” para celebrar o fim da semana de trabalho. Ninguém conjuga “eu sexto, você sexta”, mas todo mundo entende o recado.\n\nAlém dos afixos, o português recorre a outros mecanismos. A composição junta duas palavras numa só: guarda-chuva, beija-flor, arranha-céu. O encurtamento, muito comum entre os jovens, corta a palavra pela metade: refrigerante vira refri, aniversário vira niver, faculdade vira facul. E há os cruzamentos, que fundem duas palavras numa terceira. O mais conhecido entre argentinos e uruguaios talvez seja portunhol, mistura de português e espanhol que muita gente fala sem admitir, especialmente nas cidades de fronteira.\n\nPara Barros, essa criatividade morfológica não é um detalhe técnico, mas uma janela para a cultura. “O diminutivo brasileiro tem muito a ver com a forma como a gente negocia a cortesia”, explica. “Pedir ‘um minutinho’ é pedir tempo sem parecer exigente. Dizer que a conta ficou ‘salgadinha’ é reclamar sem brigar.” Nesse sentido, o famoso jeitinho — ele mesmo um diminutivo — resumiria uma maneira de contornar obstáculos com flexibilidade, para o bem e para o mal.\n\nPara quem aprende português como língua estrangeira, a lição é dupla. Por um lado, conhecer os afixos mais produtivos permite adivinhar o sentido de milhares de palavras: quem sabe o que é fazer e o que significa re- entende refazer sem abrir o dicionário. Por outro, é preciso ouvir muito para captar as nuances de tom. Afinal, entre um cafezinho gentil e um trabalhinho irônico, a diferença não está no dicionário, mas no jeito de dizer.",
     "gloss": {
      "espanta": "asombra, sorprende",
      "atendente": "el que atiende, el empleado",
@@ -5443,7 +5440,7 @@
       "verdadeiro"
      ],
      [
-      "Helena Barros dá aulas de português para estrangeiros no Recife.",
+      "Helena Barros já morou fora do Brasil.",
       "não se diz"
      ],
      [
@@ -5528,7 +5525,7 @@
      ],
      [
       "B",
-      "Tem uma tendência, pelo menos. O ão aparece mais em apelidos masculinos: Paulão, Marcão, Zezão. Com mulheres, o mais comum é o diminutivo: Aninha, Carolzinha. Mas isso está mudando. Tem jogadora de vôlei que adora ser chamada de Fernandona, por exemplo."
+      "Tem uma tendência, pelo menos. O ão aparece mais em apelidos masculinos: Paulão, Marcão, Zezão. Com mulheres, o mais comum é o diminutivo: Aninha, Carolzinha. Mas isso está mudando. Eu tenho uma amiga que adora ser chamada de Fernandona, por exemplo."
      ],
      [
       "A",
@@ -5782,7 +5779,7 @@
     ],
     "vf": [
      [
-      "A narradora trabalha num escritório em São Paulo.",
+      "Quando chegou a São Paulo, a narradora trabalhava num escritório.",
       "verdadeiro"
      ],
      [
@@ -5822,7 +5819,7 @@
    "ascolto": {
     "title": "Convidei ela para uma cena",
     "genre": "programa de rádio com participação de ouvintes",
-    "es": "En un programa de radio de consultas sobre la lengua, la conductora, que es profesora, atiende el llamado de un oyente uruguayo que vive en Porto Alegre y cuenta sus problemas con palabras parecidas al español.",
+    "es": "En un programa de radio de consultas sobre la lengua, la conductora atiende el llamado de un oyente uruguayo que vive en Porto Alegre y cuenta sus problemas con palabras parecidas al español.",
     "speakers": [
      "Carla (apresentadora)",
      "Diego (ouvinte)"
@@ -6030,7 +6027,7 @@
       ]
      ]
     ],
-    "model": "Senhor editor,\n\nSou argentino, moro em Campinas há dois anos e li com um sorriso cúmplice a crônica “Esquisito é o polvo”, publicada no último domingo. Poucas vezes me senti tão bem retratado.\n\nComo a cronista, também tive o meu almoço desastroso. No meu caso, o problema foi a palavra propina: depois de uma reunião com clientes num restaurante, perguntei em voz alta ao meu chefe se deixávamos propina para o garçom. O silêncio na mesa foi tão longo quanto o descrito no texto. Só mais tarde me explicaram que, no Brasil, propina é suborno e que o que eu queria deixar era uma gorjeta.\n\nConcordo plenamente com o amigo professor citado pela cronista. As palavras que não entendemos nos obrigam a perguntar; as que achamos que entendemos nos deixam confiantes demais. Esquisito, borracha, escritório ou apelido parecem transparentes justamente porque existem no espanhol, e é essa falsa segurança que provoca os tropeços. Acrescentaria apenas que o risco não é só linguístico: um mal-entendido desses pode passar uma impressão de grosseria ou até de desonestidade, como quase aconteceu comigo diante dos clientes.\n\nPor isso, gostaria de sugerir ao jornal que publique mais textos como este. Além de divertidos, eles ajudam os muitos hispanofalantes que vivem no Brasil a perder o medo de errar e, ao mesmo tempo, a desconfiar do que parece fácil demais.\n\nAtenciosamente,\nGustavo Ferreyra, analista de sistemas, Campinas (SP)"
+    "model": "Senhor editor,\n\nSou argentino, moro em Campinas há dois anos e li com um sorriso cúmplice a crônica “Esquisito é o polvo”, publicada no último domingo. Poucas vezes me senti tão bem retratado.\n\nComo a cronista, também tive o meu almoço desastroso. No meu caso, o problema foi a palavra sobremesa: depois de um almoço de negócios, comentei com o meu chefe, diante dos clientes, que o melhor do encontro tinha sido a sobremesa, pensando na conversa tranquila depois da refeição. O silêncio na mesa foi tão longo quanto o descrito no texto. Só mais tarde me explicaram que, no Brasil, sobremesa é o doce servido no fim, e que os clientes tinham entendido que a reunião só valera pelo pudim.\n\nConcordo plenamente com o amigo professor citado pela cronista. As palavras que não entendemos nos obrigam a perguntar; as que achamos que entendemos nos deixam confiantes demais. Esquisito, borracha, escritório ou apelido parecem transparentes justamente porque existem no espanhol, e é essa falsa segurança que provoca os tropeços. Acrescentaria apenas que o risco não é só linguístico: um mal-entendido desses pode passar uma impressão de grosseria ou de desinteresse, como quase aconteceu comigo diante dos clientes.\n\nPor isso, gostaria de sugerir ao jornal que publique mais textos como este. Além de divertidos, eles ajudam os muitos hispanofalantes que vivem no Brasil a perder o medo de errar e, ao mesmo tempo, a desconfiar do que parece fácil demais.\n\nAtenciosamente,\nGustavo Ferreyra, analista de sistemas, Campinas (SP)"
    }
   },
   {
@@ -6041,7 +6038,7 @@
     "emoji": "🌍",
     "genre": "artigo de divulgação",
     "grammar": "variação: Brasil, Portugal e África",
-    "text": "Imagine três jovens conversando na sala de embarque do aeroporto de Lisboa: uma paulistana, um lisboeta e uma luandense. A paulistana comenta que o celular está sem bateria; o lisboeta lhe oferece o carregador do seu telemóvel; a angolana observa que a fila está bué grande. Os três falam a mesma língua, se entendem sem grande esforço e, ainda assim, cada um deixa escapar, a cada frase, marcas inconfundíveis da sua origem. O português, língua oficial de nove países e falado por mais de 250 milhões de pessoas, é um bom exemplo de que unidade e diversidade podem conviver sem drama.\n\nAs diferenças mais visíveis estão no vocabulário. O que no Brasil é ônibus, em Portugal é autocarro; o trem brasileiro é o comboio português; o café da manhã de cá do Atlântico vira pequeno-almoço do lado de lá, e a tela do computador vira ecrã. O banheiro, em Portugal, é a casa de banho, e a geladeira é o frigorífico. Algumas dessas palavras soam engraçadas aos ouvidos brasileiros, e vice-versa. Um português pode achar curioso que um brasileiro chame de moça a jovem que ele chamaria de rapariga — palavra perfeitamente neutra em Portugal, mas que, em várias regiões do Brasil, sobretudo no Nordeste, adquiriu um sentido pejorativo e deve ser evitada.\n\nAs diferenças, porém, não param no léxico. Na gramática, a mais famosa talvez seja a forma de expressar uma ação em curso. O brasileiro diz “estou trabalhando”, com gerúndio; o português europeu prefere “estou a trabalhar”, com a preposição a seguida do infinitivo. A colocação dos pronomes também muda: enquanto no Brasil se diz “me dá um minuto”, com o pronome antes do verbo, em Portugal o padrão é “dá-me um minuto”. E o tratamento é outro mundo. Em boa parte do Brasil, você é a forma neutra para falar com qualquer pessoa; em Portugal, o tu domina entre amigos e familiares, e o você pode até soar distante ou pouco cortês, dependendo do contexto.\n\nNa pronúncia, a diferença salta aos ouvidos. O português europeu tende a “engolir” as vogais átonas, de modo que uma palavra como telefone soa, para um brasileiro, quase como “tlfone”. Por isso, muitos brasileiros dizem que entendem os angolanos com mais facilidade do que os portugueses: nas variedades africanas, as vogais costumam ser pronunciadas com mais clareza, mais perto do que se ouve no Brasil. O contrário também acontece. Portugueses que cresceram assistindo a novelas brasileiras entendem sem dificuldade um sotaque carioca ou paulistano, enquanto muitos brasileiros nunca tiveram contato real com o português de Lisboa.\n\nNos países africanos de língua oficial portuguesa, o idioma convive com dezenas de línguas locais, e dessa convivência nasce um vocabulário próprio. Em Angola, onde o português é a língua materna de uma parcela crescente da população, sobretudo nas cidades, bué quer dizer “muito”, kota é uma pessoa mais velha, tratada com respeito, e candengue é criança. Em Moçambique, o ônibus pode ser chamado de machimbombo, e maningue também significa “muito”. Em Cabo Verde e na Guiné-Bissau, o português divide o espaço com crioulos de base portuguesa, que a maioria da população usa no dia a dia, enquanto o português fica reservado à escola, à administração e à imprensa.\n\nA influência, aliás, nunca foi de mão única. O português do Brasil carrega marcas profundas das línguas africanas trazidas pelas pessoas escravizadas, especialmente as do grupo banto, como o quimbundo. Palavras do cotidiano brasileiro, como caçula, cafuné, moleque, quitanda e samba, têm essa origem. Para muitos linguistas, parte do que distingue o português brasileiro do europeu se explica justamente por esse contato histórico, somado ao das línguas indígenas e ao dos imigrantes que chegaram depois.\n\nDiante de tanta variedade, existe um português “certo”? Os linguistas respondem que não: cada variedade tem as suas regras e a sua norma culta, e nenhuma é mais legítima do que as outras. O Acordo Ortográfico de 1990 tentou aproximar a escrita dos países lusófonos, mas não apagou as diferenças — nem era essa a intenção. Em Portugal, por exemplo, ainda se escreve facto, porque o c é pronunciado, enquanto no Brasil se escreve fato. Afinal, uma ortografia comum não obriga ninguém a falar do mesmo jeito.\n\nPara quem aprende português, sobretudo a partir do espanhol, a lição é dupla: escolher uma variedade como referência — no caso deste curso, a brasileira — e, ao mesmo tempo, treinar o ouvido para as outras. Ouvir um podcast de Maputo, um noticiário de Lisboa ou uma canção de Luanda não é perda de tempo. É uma forma de descobrir que o português, como o espanhol, é uma casa com muitos cômodos, e que em todos eles se fala a mesma língua.",
+    "text": "Imagine três jovens conversando na sala de embarque do aeroporto de Lisboa: uma paulistana, um lisboeta e uma luandense. A paulistana comenta que o celular está sem bateria; o lisboeta lhe oferece o carregador do seu telemóvel; a angolana observa que a fila está bué grande. Os três falam a mesma língua, se entendem sem grande esforço e, ainda assim, cada um deixa escapar, a cada frase, marcas inconfundíveis da sua origem. O português, língua oficial de nove países e falado por mais de 250 milhões de pessoas, é um bom exemplo de que unidade e diversidade podem conviver sem drama.\n\nAs diferenças mais visíveis estão no vocabulário. O que no Brasil é ônibus, em Portugal é autocarro; o trem brasileiro é o comboio português; o café da manhã de cá do Atlântico vira pequeno-almoço do lado de lá, e a tela do computador vira ecrã. O banheiro, em Portugal, é a casa de banho, e a geladeira é o frigorífico. Algumas dessas palavras soam engraçadas aos ouvidos brasileiros, e vice-versa. Um português pode achar curioso que um brasileiro chame de moça a jovem que ele chamaria de rapariga — palavra perfeitamente neutra em Portugal, mas que, em várias regiões do Brasil, sobretudo no Nordeste, adquiriu um sentido pejorativo e deve ser evitada.\n\nAs diferenças, porém, não param no léxico. Na gramática, a mais famosa talvez seja a forma de expressar uma ação em curso. O brasileiro diz “estou trabalhando”, com gerúndio; o português europeu prefere “estou a trabalhar”, com a preposição a seguida do infinitivo. A colocação dos pronomes também muda: enquanto no Brasil se diz “me dá um minuto”, com o pronome antes do verbo, em Portugal o padrão é “dá-me um minuto”. E o tratamento é outro mundo. Em boa parte do Brasil, você é a forma neutra para falar com qualquer pessoa; em Portugal, o tu domina entre amigos e familiares, e o você pode até soar distante ou pouco cortês, dependendo do contexto.\n\nNa pronúncia, a diferença salta aos ouvidos. O português europeu tende a “engolir” as vogais átonas, de modo que uma palavra como telefone soa, para um brasileiro, quase como “tlfone”. Por isso, muitos brasileiros dizem que entendem os angolanos com mais facilidade do que os portugueses: nas variedades africanas, as vogais costumam ser pronunciadas com mais clareza, mais perto do que se ouve no Brasil. O contrário também acontece. Portugueses que cresceram assistindo a novelas brasileiras entendem sem dificuldade um sotaque carioca ou paulistano, enquanto muitos brasileiros nunca tiveram contato real com o português de Lisboa.\n\nNos países africanos de língua oficial portuguesa, o idioma convive com dezenas de línguas locais, e dessa convivência nasce um vocabulário próprio. Em Angola, onde o português é a língua materna de uma parcela crescente da população, sobretudo nas cidades, bué quer dizer “muito”, kota é uma pessoa mais velha, tratada com respeito, e candengue é criança. Em Moçambique, o ônibus pode ser chamado de machimbombo, e maningue também significa “muito”. Em Cabo Verde e na Guiné-Bissau, o português divide o espaço com crioulos de base portuguesa, que a maioria da população usa no dia a dia, enquanto o português fica reservado à escola, à administração e à imprensa.\n\nA influência, aliás, nunca foi de mão única. O português do Brasil carrega marcas profundas das línguas africanas trazidas pelas pessoas escravizadas, especialmente as do grupo banto, como o quimbundo. Palavras do cotidiano brasileiro, como caçula, cafuné, moleque e quitanda, têm essa origem. Para muitos linguistas, parte do que distingue o português brasileiro do europeu se explica justamente por esse contato histórico, somado ao das línguas indígenas e ao dos imigrantes que chegaram depois.\n\nDiante de tanta variedade, existe um português “certo”? Os linguistas respondem que não: cada variedade tem as suas regras e a sua norma culta, e nenhuma é mais legítima do que as outras. O Acordo Ortográfico de 1990 tentou aproximar a escrita dos países lusófonos, mas não apagou as diferenças — nem era essa a intenção. Em Portugal, por exemplo, ainda se escreve facto, porque o c é pronunciado, enquanto no Brasil se escreve fato. Afinal, uma ortografia comum não obriga ninguém a falar do mesmo jeito.\n\nPara quem aprende português, sobretudo a partir do espanhol, a lição é dupla: escolher uma variedade como referência — no caso deste curso, a brasileira — e, ao mesmo tempo, treinar o ouvido para as outras. Ouvir um podcast de Maputo, um noticiário de Lisboa ou uma canção de Luanda não é perda de tempo. É uma forma de descobrir que o português, como o espanhol, é uma casa com muitos cômodos, e que em todos eles se fala a mesma língua.",
     "gloss": {
      "carregador": "cargador",
      "telemóvel": "celular (Portugal)",
@@ -6392,7 +6389,7 @@
     "emoji": "🚌",
     "genre": "coluna de opinião",
     "grammar": "argumentação e modalização",
-    "text": "Poucas propostas têm dividido tanto a nossa cidade quanto a da tarifa zero no transporte coletivo. Nas últimas semanas, a Câmara Municipal voltou a discutir o tema, e o debate, como era de se esperar, rapidamente descambou para a caricatura. De um lado, estão os que veem na gratuidade dos ônibus a solução para todos os males urbanos; do outro, os que a tratam como um delírio populista, supostamente condenado a quebrar os cofres públicos. Convém, talvez, respirar fundo e examinar o assunto com menos paixão e mais argumentos.\n\nComecemos pelo que parece inegável. O modelo atual, em que a maior parte do custo do sistema é paga pelo passageiro na catraca, dá sinais evidentes de esgotamento. A cada reajuste, parte dos usuários desiste do ônibus e migra para a moto, para o carro ou, pior, simplesmente deixa de circular. Com menos passageiros, a receita cai, as empresas pressionam por novos aumentos, e o ciclo se repete. Não é preciso ser economista para perceber que se trata de um círculo vicioso. Quem mais perde, evidentemente, são os moradores das periferias, que gastam uma fatia desproporcional da renda com transporte e que, muitas vezes, deixam de procurar emprego ou de ir ao médico porque não podem pagar a passagem.\n\nOs defensores da tarifa zero argumentam que o transporte deveria ser tratado como um direito, assim como a saúde e a educação, e não como uma mercadoria. É um argumento forte. Afinal, ninguém exige que o aluno pague por aula assistida na escola pública. Além disso, as experiências de cidades brasileiras de pequeno e médio porte que adotaram a gratuidade sugerem que o número de passageiros tende a crescer rapidamente, que o comércio local provavelmente se beneficia e que o trânsito pode, em alguma medida, ficar menos congestionado.\n\nHá ainda um argumento ambiental que costuma ficar em segundo plano, mas que dificilmente pode ser descartado. Cada pessoa que troca o carro pelo ônibus significa menos emissões, menos ruído e menos disputa por espaço nas ruas. Numa cidade que sofre com ilhas de calor e com o ar poluído nos meses secos, esse benefício não é pequeno. É verdade que ele é difícil de medir em reais e centavos, e talvez por isso raramente apareça nas planilhas dos técnicos da prefeitura. Mas o fato de um benefício não caber numa planilha não significa, evidentemente, que ele não exista.\n\nSeria ingênuo, no entanto, ignorar as objeções. A primeira, e certamente a mais séria, é a do financiamento. Ônibus não andam de graça: alguém terá de pagar o combustível, os salários dos motoristas e a renovação da frota. Se a conta for simplesmente transferida para o orçamento municipal, é possível que outras áreas, como a saúde e a educação, acabem sacrificadas. A segunda objeção é a da qualidade. Um sistema gratuito, porém lotado e sucateado, dificilmente convenceria alguém a deixar o carro na garagem. Gratuidade sem investimento poderia, paradoxalmente, afastar justamente os passageiros que se pretendia atrair.\n\nHá ainda um argumento que, a meu ver, é bem mais frágil: o de que aquilo que é gratuito não é valorizado. Esse raciocínio, repetido à exaustão, parece partir de uma desconfiança em relação aos mais pobres que não resiste aos fatos. Ninguém sugere cobrar ingresso nas praças públicas para que elas sejam mais bem cuidadas, nem vender entrada para as bibliotecas municipais para que os livros sejam mais respeitados.\n\nOnde fico, então? Parece-me que a pergunta está mal formulada. Em vez de discutir se a tarifa zero é boa ou má, deveríamos discutir como financiá-la de forma justa e gradual. Algumas alternativas merecem, no mínimo, ser estudadas: uma contribuição maior das empresas, que hoje já pagam o vale-transporte dos seus funcionários; uma taxa sobre estacionamentos privados em áreas centrais; ou a implantação da gratuidade por etapas, começando pelos domingos, pelos estudantes e pelas linhas que atendem os bairros mais pobres. Nenhuma dessas medidas é, sozinha, suficiente, mas, combinadas, poderiam tornar o projeto viável sem pôr em risco outros serviços essenciais.\n\nTampouco se devem esperar milagres. A tarifa zero, por si só, não resolverá o problema da mobilidade numa cidade do nosso tamanho. Sem corredores exclusivos, integração com o metrô e planejamento urbano, os ônibus continuarão presos no mesmo engarrafamento de sempre, só que sem cobrar passagem. Talvez o maior mérito da proposta seja justamente obrigar a cidade a discutir, com seriedade, o que quer para o seu transporte nas próximas décadas.\n\nO pior cenário, sem dúvida, seria a Câmara engavetar o assunto mais uma vez, à espera de uma solução perfeita que provavelmente nunca virá. Entre o populismo irresponsável e o imobilismo confortável, existe um amplo espaço para a política séria. Resta saber se os nossos vereadores estão dispostos a ocupá-lo.",
+    "text": "Poucas propostas têm dividido tanto a nossa cidade quanto a da tarifa zero no transporte coletivo. Nas últimas semanas, a Câmara Municipal voltou a discutir o tema, e o debate, como era de se esperar, rapidamente descambou para a caricatura. De um lado, estão os que veem na gratuidade dos ônibus a solução para todos os males urbanos; do outro, os que a tratam como um delírio populista, supostamente condenado a quebrar os cofres públicos. Convém, talvez, respirar fundo e examinar o assunto com menos paixão e mais argumentos.\n\nComecemos pelo que parece inegável. O modelo atual, em que a maior parte do custo do sistema é paga pelo passageiro na catraca, dá sinais evidentes de esgotamento. A cada reajuste, parte dos usuários desiste do ônibus e migra para a moto, para o carro ou, pior, simplesmente deixa de circular. Com menos passageiros, a receita cai, as empresas pressionam por novos aumentos, e o ciclo se repete. Não é preciso ser economista para perceber que se trata de um círculo vicioso. Quem mais perde, evidentemente, são os moradores das periferias, que gastam uma fatia desproporcional da renda com transporte e que, muitas vezes, deixam de procurar emprego ou de ir ao médico porque não podem pagar a passagem.\n\nOs defensores da tarifa zero argumentam que o transporte deveria ser tratado como um direito, assim como a saúde e a educação, e não como uma mercadoria. É um argumento forte. Afinal, ninguém exige que o aluno pague por aula assistida na escola pública. Além disso, as experiências de cidades brasileiras de pequeno e médio porte que adotaram a gratuidade sugerem que o número de passageiros tende a crescer rapidamente, que o comércio local provavelmente se beneficia e que o trânsito pode, em alguma medida, ficar menos congestionado.\n\nHá ainda um argumento ambiental que costuma ficar em segundo plano, mas que dificilmente pode ser descartado. Cada pessoa que troca o carro pelo ônibus significa menos emissões, menos ruído e menos disputa por espaço nas ruas. Numa cidade que sofre com ilhas de calor e com o ar poluído nos meses secos, esse benefício não é pequeno. É verdade que ele é difícil de medir em reais e centavos, e talvez por isso raramente apareça nas planilhas dos técnicos da prefeitura. Mas o fato de um benefício não caber numa planilha não significa, evidentemente, que ele não exista.\n\nSeria ingênuo, no entanto, ignorar as objeções. A primeira, e certamente a mais séria, é a do financiamento. Ônibus não andam de graça: alguém terá de pagar o combustível, os salários dos motoristas e a renovação da frota. Se a conta for simplesmente transferida para o orçamento municipal, é possível que outras áreas, como a saúde e a educação, acabem sacrificadas. A segunda objeção é a da qualidade. Um sistema gratuito, porém lotado e sucateado, dificilmente convenceria alguém a deixar o carro na garagem. Gratuidade sem investimento poderia, paradoxalmente, afastar justamente os passageiros que se pretendia atrair.\n\nHá ainda um argumento que, a meu ver, é bem mais frágil: o de que aquilo que é gratuito não é valorizado. Esse raciocínio, repetido à exaustão, parece partir de uma desconfiança em relação aos mais pobres que não resiste aos fatos. Ninguém sugere cobrar ingresso nas praças públicas para que elas sejam mais bem cuidadas, nem vender entrada para as bibliotecas municipais para que os livros sejam mais respeitados.\n\nOnde fico, então? Parece-me que a pergunta está mal formulada. Em vez de discutir se a tarifa zero é boa ou má, deveríamos discutir como financiá-la de forma justa e gradual. Algumas alternativas merecem, no mínimo, ser estudadas: uma contribuição maior das empresas, que hoje já custeiam boa parte do vale-transporte dos seus funcionários; uma taxa sobre estacionamentos privados em áreas centrais; ou a implantação da gratuidade por etapas, começando pelos domingos, pelos estudantes e pelas linhas que atendem os bairros mais pobres. Nenhuma dessas medidas é, sozinha, suficiente, mas, combinadas, poderiam tornar o projeto viável sem pôr em risco outros serviços essenciais.\n\nTampouco se devem esperar milagres. A tarifa zero, por si só, não resolverá o problema da mobilidade numa cidade do nosso tamanho. Sem corredores exclusivos, integração com o metrô e planejamento urbano, os ônibus continuarão presos no mesmo engarrafamento de sempre, só que sem cobrar passagem. Talvez o maior mérito da proposta seja justamente obrigar a cidade a discutir, com seriedade, o que quer para o seu transporte nas próximas décadas.\n\nO pior cenário, sem dúvida, seria a Câmara engavetar o assunto mais uma vez, à espera de uma solução perfeita que provavelmente nunca virá. Entre o populismo irresponsável e o imobilismo confortável, existe um amplo espaço para a política séria. Resta saber se os nossos vereadores estão dispostos a ocupá-lo.\n\nMarcelo Antunes é jornalista e escreve às quintas-feiras.",
     "gloss": {
      "descambou": "derivó (para peor)",
      "gratuidade": "gratuidad",
@@ -6878,7 +6875,7 @@
     "turns": [
      [
       "A",
-      "Estamos de volta com o Mídia em Foco. A nossa convidada de hoje é a Sônia Albuquerque, ouvidora do Diário do Vale, ou seja, a pessoa que recebe as críticas dos leitores e escreve uma coluna semanal avaliando o próprio jornal. Sônia, qual foi a reclamação que mais chamou a sua atenção este mês?"
+      "Estamos de volta com o Mídia em Foco. A nossa convidada de hoje é a Sônia Albuquerque, ouvidora do Gazeta das Gerais, ou seja, a pessoa que recebe as críticas dos leitores e escreve uma coluna semanal avaliando o próprio jornal. Sônia, qual foi a reclamação que mais chamou a sua atenção este mês?"
      ],
      [
       "B",
@@ -7180,7 +7177,7 @@
     ],
     "vf": [
      [
-      "Segundo o texto, formas como “dir-se-ia” soam arcaicas até em contextos formais.",
+      "Segundo o texto, formas como “dir-se-ia” soam quase arcaicas até em contextos formais.",
       "verdadeiro"
      ],
      [
@@ -7442,65 +7439,68 @@
       ]
      ]
     ],
-    "model": "Assunto: Proposta comercial – novo prazo de entrega\n\nPrezado Sr. Otávio Mendes,\n\nEm primeiro lugar, gostaria de pedir desculpas pelo atraso na entrega da nossa proposta e, também, pelo tom inadequado da minha mensagem anterior, que não refletiu o cuidado e a seriedade com que a nossa empresa tem conduzido este projeto, nem o respeito que temos pela sua rede e pela sua equipe.\n\nInformo que a proposta encontra-se, no momento, na etapa de validação de custos pelo nosso departamento financeiro. Trata-se de um procedimento necessário para garantirmos que todos os valores apresentados sejam precisos e definitivos, evitando revisões posteriores que poderiam causar novos transtornos à sua equipe.\n\nDiante disso, comprometemo-nos a enviar-lhe a versão final da proposta até a próxima sexta-feira, às 18 horas. Esse prazo já foi confirmado junto ao departamento responsável. Ressalto que a proposta contemplará todos os pontos discutidos em nossa última reunião, incluindo o cronograma de implantação.\n\nAlém disso, gostaríamos de sugerir uma videoconferência na segunda-feira seguinte, em horário de sua conveniência, para apresentarmos a proposta em detalhes e esclarecermos eventuais dúvidas da sua equipe. Caso a data não lhe seja favorável, teremos prazer em propor outras opções.\n\nReitero as nossas desculpas pelo inconveniente e agradeço, desde já, a sua compreensão. Permaneço à disposição para qualquer esclarecimento que se faça necessário, por telefone ou por este endereço de e-mail. Informo, ainda, que a nossa gerente de contas, Renata Campos, está em cópia nesta mensagem e acompanhará pessoalmente as próximas etapas do projeto.\n\nAtenciosamente,\n\nLucas Ferraz\nEstagiário de Atendimento ao Cliente\nAgência Horizonte Digital"
+    "model": "Assunto: Proposta comercial – novo prazo de entrega\n\nPrezado Sr. Otávio Mendes,\n\nEm primeiro lugar, gostaria de pedir desculpas pelo atraso na entrega da nossa proposta e, também, pelo tom inadequado da minha mensagem anterior, que não refletiu o cuidado e a seriedade com que a nossa empresa tem conduzido este projeto, nem o respeito que temos pela sua rede e pela sua equipe.\n\nInformo que a proposta se encontra, no momento, na etapa de validação de custos pelo nosso departamento financeiro. Trata-se de um procedimento necessário para garantirmos que todos os valores apresentados sejam precisos e definitivos, evitando revisões posteriores que poderiam causar novos transtornos à sua equipe.\n\nDiante disso, comprometemo-nos a enviar-lhe a versão final da proposta até a próxima sexta-feira, às 18 horas. Esse prazo já foi confirmado junto ao departamento responsável. Ressalto que a proposta contemplará todos os pontos discutidos em nossa última reunião, incluindo o cronograma de implantação.\n\nAlém disso, gostaríamos de sugerir uma videoconferência na segunda-feira seguinte, em horário de sua conveniência, para apresentarmos a proposta em detalhes e esclarecermos eventuais dúvidas da sua equipe. Caso a data não lhe seja favorável, teremos prazer em propor outras opções.\n\nReitero as nossas desculpas pelo inconveniente e agradeço, desde já, a sua compreensão. Permaneço à disposição para qualquer esclarecimento que se faça necessário, por telefone ou por este endereço de e-mail. Informo, ainda, que a nossa gerente de contas, Renata Campos, está em cópia nesta mensagem e acompanhará pessoalmente as próximas etapas do projeto.\n\nAtenciosamente,\n\nLucas Ferraz\nEstagiário de Atendimento ao Cliente\nAgência Horizonte Digital"
    }
   },
   {
    "week": 50,
    "level": "C1",
    "lettura": {
-    "title": "“Traduzir ao pé da letra é pisar na bola”",
-    "emoji": "🎬",
+    "title": "“Quem aprende ao pé da letra acaba pisando na bola”",
+    "emoji": "📖",
     "genre": "entrevista (pingue-pongue)",
     "grammar": "colocações e expressões idiomáticas",
-    "text": "Há quase vinte anos, Marta Siqueira passa os dias diante de duas telas: numa, um filme ou uma série estrangeira; na outra, o programa em que escreve as legendas que milhões de brasileiros leem sem nem perceber. Tradutora de inglês e espanhol, ela já legendou comédias românticas, documentários sobre a natureza e dramas policiais. Nesta entrevista, conta por que as expressões idiomáticas são, ao mesmo tempo, o seu maior pesadelo e a sua maior diversão.\n\nQual é a parte mais difícil de legendar um filme?\n\nSem dúvida, as expressões idiomáticas. Uma palavra isolada quase sempre tem equivalente. Uma expressão, não. Se um personagem americano diz que alguém “kicked the bucket”, eu não posso escrever que ele chutou o balde, porque em português chutar o balde é outra coisa: é desistir de tudo, perder a paciência de vez. O que o personagem quis dizer é que o sujeito bateu as botas, ou seja, morreu. Se eu traduzir ao pé da letra, o espectador fica perdido ou, pior, entende exatamente o contrário.\n\nE como você resolve esses casos?\n\nProcuro uma expressão que tenha a mesma função, não as mesmas palavras. Às vezes existe um equivalente perfeito, e é uma festa. Quando não existe, eu dou um jeito: uso uma expressão diferente, mas com o mesmo tom, ou abro mão da imagem e explico o sentido de forma simples. O que não pode é a legenda soar como tradução. O público tem que ler e pensar: é assim que a gente fala.\n\nPode dar exemplos de expressões brasileiras difíceis de levar para outras línguas?\n\nTenho várias favoritas. Pisar na bola, por exemplo, que é cometer um erro, decepcionar alguém. Ou enfiar o pé na jaca, que é exagerar, sobretudo na comida ou na bebida. E cair a ficha, que é quando a gente finalmente entende alguma coisa. Essa é linda, porque vem do tempo dos telefones públicos, que funcionavam com fichas: a ligação só se completava quando a ficha caía. Hoje, muitos jovens usam a expressão sem ter a menor ideia de onde ela vem.\n\nVocê também fala muito em colocações. O que são?\n\nSão combinações de palavras que simplesmente andam juntas numa língua, sem uma lógica muito clara. Em português, a gente toma uma decisão, faz uma pergunta, presta atenção, comete um erro. Algumas coincidem com o espanhol, outras não. O brasileiro toma um susto, enquanto o argentino “se lleva” um; tira uma foto, enquanto o argentino “saca”; faz aniversário, enquanto o hispanofalante “cumple” anos; marca uma consulta, enquanto o portenho “saca turno”. O estrangeiro que diz “cumprir anos” ou “sacar uma foto” é entendido, claro, mas denuncia na hora que não é nativo. Numa legenda, uma colocação errada chama tanta atenção quanto um erro de ortografia.\n\nExiste alguma expressão realmente intraduzível?\n\nIntraduzível, não sei, mas algumas dão muito trabalho. Uma que sempre me tira o sono é fazer uma vaquinha, que é juntar dinheiro entre amigos para comprar alguma coisa. Na Argentina, curiosamente, existe “hacer una vaca”, com a mesma imagem, mas em inglês não há nada parecido. Outra é sem eira nem beira, que quer dizer sem recurso nenhum, e cuja origem nem os próprios brasileiros sabem explicar direito. Nesses casos, prefiro perder a imagem e salvar o sentido. O espectador não sabe o que eu deixei de fora; ele só percebe quando a frase não funciona.\n\nVocê já pisou na bola numa legenda?\n\nJá, e feio. No começo da carreira, legendei uma comédia em que um amigo dizia à protagonista “break a leg” antes de um teste de teatro. Traduzi como “quebre a perna”. Só depois me caiu a ficha de que aquilo era um jeito de desejar boa sorte. A distribuidora percebeu a tempo, mas eu paguei o pato: tive que revisar o filme inteiro, de graça, num fim de semana. Aprendi a lição. Hoje, quando uma frase soa estranha demais, desconfio, pesquiso e, se for preciso, pergunto a um falante nativo.\n\nLegendas têm limite de caracteres. Isso atrapalha?\n\nMuito. O espectador precisa ler a legenda enquanto vê a imagem, então cada linha tem um número limitado de caracteres. Não dá para encher linguiça. Às vezes o personagem fala durante dez segundos e eu tenho espaço para meia dúzia de palavras. É aí que as expressões idiomáticas ajudam: “deu com a língua nos dentes” é bem mais curto do que “contou um segredo que não devia ter contado”. É economia pura.\n\nQue conselho você daria a quem aprende português e quer dominar essas expressões?\n\nQue não tente decorar listas. Expressão idiomática se aprende no contexto, ouvindo, lendo, vendo série com legenda, de preferência bem-feita, claro! E que tenha coragem de usar. Vai errar? Vai. Vai trocar uma palavra, dizer “pisar no pé” em vez de “pisar na bola”. Faz parte. Mas, no dia em que você usar “quebrar o galho” no lugar certo e o brasileiro sorrir, vai sentir que está tirando o português de letra. Quer dizer: quase.\n\nA revista convida os leitores a enviar os seus relatos de mal-entendidos com expressões idiomáticas para a seção Tropeços da Língua. Os melhores textos serão publicados na próxima edição.",
+    "text": "Há quase vinte anos, Marta Siqueira coleciona expressões idiomáticas como quem coleciona figurinhas. Professora de português para estrangeiros em Porto Alegre, ela acaba de lançar um dicionário de expressões do português do Brasil pensado para falantes de espanhol, com explicações, exemplos reais e comparações com o castelhano do Rio da Prata. Nesta entrevista, conta por que essas expressões são, ao mesmo tempo, o maior pesadelo e a maior diversão dos seus alunos.\n\nPor que um dicionário só de expressões?\n\nPorque é aí que o aluno tropeça. Uma palavra isolada quase sempre tem equivalente. Uma expressão, não. O aluno argentino chega ao nível avançado, lê jornal, acompanha as aulas na faculdade e, de repente, ouve um colega dizer que o vizinho bateu as botas. Entende cada palavra e não entende nada. Ou, pior, entende exatamente o contrário. Quem conhece o inglês “kick the bucket” pode achar que chutar o balde também é morrer, mas em português é outra coisa: é desistir de tudo, perder a paciência de vez. Nos livros didáticos, as expressões costumam aparecer numa listinha no fim da unidade, sem contexto nenhum, e quem paga o pato é o aluno, que decora sem saber quando usar.\n\nComo vocês escolhem o que entra?\n\nO critério é o uso. Não adianta registrar uma expressão que só aparece em romance do século dezenove. A equipe ouviu rádio, leu comentários nas redes, gravou conversas em feiras e em pontos de ônibus. Se uma expressão aparece em várias regiões, em várias faixas de idade e em vários tipos de situação, ela entra. Pisar na bola, por exemplo, que é cometer um erro, decepcionar alguém, entrou na hora. Enfiar o pé na jaca, que é exagerar, sobretudo na comida ou na bebida, também. E cair a ficha, que é quando a gente finalmente entende alguma coisa. Essa é linda, porque vem do tempo dos orelhões, que funcionavam com fichas: a ligação só se completava quando elas caíam. Hoje, muitos jovens usam a expressão sem ter a menor ideia de onde ela vem.\n\nO dicionário também trata de colocações. O que são?\n\nSão combinações de palavras que simplesmente andam juntas numa língua, sem uma lógica muito clara. Em português, a gente toma uma decisão, faz uma pergunta, presta atenção, comete um erro. Algumas coincidem com o espanhol, outras não. O brasileiro toma um susto, enquanto o argentino “se lleva” um; tira uma foto, enquanto o argentino “saca”; faz aniversário, enquanto o hispanofalante “cumple” anos; marca uma consulta, enquanto o portenho “saca turno”. O estrangeiro que diz “cumprir anos” ou “sacar uma foto” é entendido, claro, mas denuncia na hora que não é nativo. Numa entrevista de emprego ou numa redação de vestibular, uma colocação errada chama tanta atenção quanto um erro de ortografia.\n\nExiste alguma expressão realmente intraduzível?\n\nIntraduzível, não sei, mas algumas dão muito trabalho. Uma que sempre me tira o sono é sem eira nem beira, que quer dizer sem recurso nenhum, e cuja origem nem os próprios brasileiros sabem explicar direito. Outras têm sorte: fazer uma vaquinha, que é juntar dinheiro entre amigos para comprar alguma coisa, tem um primo perfeito na Argentina, “hacer una vaca”, com a mesma imagem. Quando não existe equivalente, a gente dá um jeito: explica o sentido com palavras simples, mostra dois ou três exemplos reais e, se possível, conta a origem. O que não pode é inventar um equivalente forçado.\n\nVocê já pisou na bola com uma expressão?\n\nJá, e feio, só que em espanhol. Quando fiz mestrado em Buenos Aires, contei a uma amiga que tinha “pisado la pelota” numa reunião com o orientador, querendo dizer que tinha feito besteira. Ela me deu os parabéns. Só dias depois me caiu a ficha: no futebol argentino, “pisar la pelota” é ter calma, dominar o jogo. Eu tinha dito exatamente o contrário do que queria. Ela riu muito, e eu virei piada no grupo durante o semestre inteiro. Aprendi a lição. Hoje, quando uma frase soa estranha demais, desconfio, pesquiso e, se for preciso, pergunto a um falante nativo.\n\nPor que os brasileiros usam tantas expressões?\n\nPorque elas são econômicas e expressivas ao mesmo tempo. “Deu com a língua nos dentes” é bem mais curto e mais saboroso do que “contou um segredo que não devia ter contado”. Numa conversa, ninguém gosta de encher linguiça: a expressão resume uma situação inteira e ainda diz o que o falante pensa dela. Por isso mesmo, elas mudam o tempo todo. Todo ano aparecem expressões novas, e algumas desaparecem sem deixar rastro.\n\nQue conselho você daria a quem aprende português e quer dominar essas expressões?\n\nQue não tente decorar listas, nem o meu dicionário, que foi feito para consultar, não para decorar. Expressão idiomática se aprende no contexto: ouvindo, lendo, vendo série, conversando. E que tenha coragem de usar. Vai errar? Vai. Vai trocar uma palavra, dizer “pisar no pé” em vez de “pisar na bola”. Faz parte. Mas, no dia em que você usar “quebrar o galho” no lugar certo e o brasileiro sorrir, vai sentir que está tirando o português de letra. Quer dizer: quase.\n\nA revista convida os leitores a enviar os seus relatos de mal-entendidos com expressões idiomáticas para a seção Tropeços da Língua. Os melhores textos serão publicados na próxima edição.",
     "gloss": {
-     "legendas": "subtítulos",
      "pesadelo": "pesadilla",
-     "chutou": "pateó",
+     "tropeça": "tropieza",
+     "botas": "botas (bater as botas = estirar la pata)",
      "balde": "balde (chutar o balde = mandar todo al diablo)",
      "desistir": "abandonar, rendirse",
-     "botas": "botas (bater as botas = estirar la pata)",
-     "abro": "(abro mão) renuncio",
+     "decora": "memoriza",
+     "pato": "pato (pagar o pato = pagar los platos rotos)",
+     "adianta": "sirve (não adianta = no sirve de nada)",
+     "faixas": "franjas (faixa de idade = franja etaria)",
      "decepcionar": "decepcionar, fallarle a alguien",
      "enfiar": "meter",
      "jaca": "jaca, fruta tropical (enfiar o pé na jaca = zarparse)",
+     "orelhões": "teléfonos públicos",
      "ficha": "cospel (cair a ficha = caer la ficha)",
-     "susto": "susto",
      "denuncia": "delata",
+     "eira": "era, patio (sem eira nem beira = sin un peso)",
+     "vaquinha": "vaquita (fazer uma vaquinha = hacer una vaca)",
+     "jeito": "manera (dar um jeito = arreglárselas)",
      "feio": "feo, mal",
-     "pato": "pato (pagar o pato = pagar los platos rotos)",
-     "atrapalha": "complica, molesta",
-     "linguiça": "longaniza (encher linguiça = meter relleno, hacer paja)",
+     "besteira": "macana, pavada",
+     "piada": "chiste (virar piada = ser el hazmerreír)",
      "dentes": "dientes (dar com a língua nos dentes = irse de boca)",
+     "linguiça": "longaniza (encher linguiça = meter relleno, hacer paja)",
+     "rastro": "rastro",
      "decorar": "memorizar",
      "galho": "rama (quebrar o galho = sacar de un apuro)",
      "letra": "letra (tirar de letra = hacer algo con facilidad)",
-     "relatos": "relatos",
-     "tropeços": "tropiezos",
-     "vaquinha": "vaquita (fazer uma vaquinha = hacer una vaca)",
-     "eira": "era, patio (sem eira nem beira = sin un peso)"
+     "tropeços": "tropiezos"
     },
     "questions": [
      [
-      "Por que as expressões idiomáticas são o “maior pesadelo” de Marta?",
+      "Por que, segundo Marta, as expressões idiomáticas são o “maior pesadelo” dos alunos?",
       [
-       "Porque os espectadores não gostam de expressões populares.",
+       "Porque só aparecem em romances antigos.",
        "Porque raramente têm equivalente palavra por palavra.",
-       "Porque ocupam caracteres demais em cada linha de legenda.",
-       "Porque as distribuidoras proíbem o seu uso."
+       "Porque os professores proíbem o seu uso em sala de aula.",
+       "Porque são vulgares demais para a língua escrita."
       ],
       "Porque raramente têm equivalente palavra por palavra."
      ],
      [
-      "Qual é a estratégia principal de Marta ao traduzir uma expressão?",
+      "Qual é o critério para uma expressão entrar no dicionário?",
       [
-       "Traduzir sempre ao pé da letra, por fidelidade.",
-       "Eliminar a fala do personagem quando é difícil.",
-       "Colocar uma nota explicativa no canto da tela.",
-       "Buscar uma expressão com a mesma função."
+       "Ter uma origem conhecida e bem documentada.",
+       "Ter um equivalente exato no espanhol do Rio da Prata.",
+       "Aparecer em romances clássicos da literatura brasileira.",
+       "Ser usada em várias regiões, idades e situações."
       ],
-      "Buscar uma expressão com a mesma função."
+      "Ser usada em várias regiões, idades e situações."
      ],
      [
       "Segundo Marta, o que acontece com o estrangeiro que erra uma colocação?",
@@ -7513,29 +7513,29 @@
       "É entendido, mas revela que não é nativo."
      ],
      [
-      "O que o episódio de “break a leg” ilustra?",
+      "O que o episódio de “pisar la pelota”, em Buenos Aires, ilustra?",
       [
-       "A falta de cuidado das distribuidoras de filmes.",
-       "O risco de traduzir uma expressão literalmente.",
-       "A dificuldade específica das comédias românticas americanas.",
-       "A necessidade de trabalhar nos fins de semana."
+       "Que o futebol é o assunto preferido dos argentinos.",
+       "Que a mesma imagem pode ter sentidos quase opostos em duas línguas.",
+       "Que o orientador de Marta era exigente demais com os alunos.",
+       "Que os argentinos têm dificuldade para entender o português."
       ],
-      "O risco de traduzir uma expressão literalmente."
+      "Que a mesma imagem pode ter sentidos quase opostos em duas línguas."
      ],
      [
-      "Por que as expressões idiomáticas podem ajudar na legendagem?",
+      "Segundo Marta, por que os brasileiros usam tantas expressões idiomáticas?",
       [
-       "Porque o público as lê mais depressa que outras frases.",
-       "Porque dispensam a revisão de um falante nativo.",
-       "Porque tornam a tradução mais fiel ao texto original.",
-       "Porque condensam uma ideia em poucas palavras."
+       "Porque a norma culta as exige nos textos mais formais.",
+       "Porque são fáceis de traduzir para outras línguas.",
+       "Porque resumem uma situação e mostram o que o falante pensa dela.",
+       "Porque aparecem em listas nos livros didáticos."
       ],
-      "Porque condensam uma ideia em poucas palavras."
+      "Porque resumem uma situação e mostram o que o falante pensa dela."
      ]
     ],
     "vf": [
      [
-      "Marta traduz do inglês e do espanhol.",
+      "O dicionário de Marta foi pensado para falantes de espanhol.",
       "verdadeiro"
      ],
      [
@@ -7547,11 +7547,11 @@
       "verdadeiro"
      ],
      [
-      "Marta recomenda decorar listas de expressões idiomáticas.",
+      "Marta recomenda que os alunos decorem o dicionário dela.",
       "falso"
      ],
      [
-      "Marta também legenda novelas brasileiras para o exterior.",
+      "O dicionário de Marta também será lançado na Argentina.",
       "não se diz"
      ]
     ],
@@ -7739,7 +7739,7 @@
      [
       "Por que Bruno diz que o organizador sempre “paga o pato”?",
       [
-       "Porque ele tem que pagar a comida do próprio bolso.",
+       "Porque os organizadores costumam cobrar pouco pelos eventos.",
        "Porque leva a culpa quando algo dá errado.",
        "Porque ganha menos que os outros fornecedores do evento.",
        "Porque precisa cozinhar nos eventos que organiza."
@@ -7780,7 +7780,7 @@
     "genre": "relato",
     "title": "Tropeços da Língua",
     "fonte": "lettura",
-    "t": "A revista que publicou a entrevista com a legendadora Marta Siqueira convidou os leitores a enviar relatos de mal-entendidos com expressões idiomáticas para a seção Tropeços da Língua. Você é hispanofalante e mora (ou morou) no Brasil. Escreva um relato, em primeira pessoa, contando um mal-entendido (real ou imaginado) com uma expressão idiomática ou uma colocação do português: onde e quando aconteceu, o que você entendeu, o que a expressão significava de fato e o que você aprendeu com isso. Relacione a sua experiência com pelo menos uma ideia da entrevista. Não se esqueça de dar um título ao relato e de usar, além da expressão central, pelo menos outras duas expressões idiomáticas ou colocações. Registro semiformal. Seu texto deve ter entre 244 e 304 palavras.",
+    "t": "A revista que publicou a entrevista com a professora e lexicógrafa Marta Siqueira convidou os leitores a enviar relatos de mal-entendidos com expressões idiomáticas para a seção Tropeços da Língua. Você é hispanofalante e mora (ou morou) no Brasil. Escreva um relato, em primeira pessoa, contando um mal-entendido (real ou imaginado) com uma expressão idiomática ou uma colocação do português: onde e quando aconteceu, o que você entendeu, o que a expressão significava de fato e o que você aprendeu com isso. Relacione a sua experiência com pelo menos uma ideia da entrevista. Não se esqueça de dar um título ao relato e de usar, além da expressão central, pelo menos outras duas expressões idiomáticas ou colocações. Registro semiformal. Seu texto deve ter entre 244 e 304 palavras.",
     "es": "Relato en primera persona para una sección de la revista: situación, qué entendiste, qué significaba y qué aprendiste, conectándolo con algo que dice Marta. Usá varias expresiones idiomáticas bien usadas y ponele título.",
     "min": 244,
     "max": 304,
@@ -7808,7 +7808,7 @@
       [
        "marta",
        "entrevista",
-       "legendadora"
+       "dicionário"
       ]
      ],
      [
@@ -8139,7 +8139,7 @@
       ]
      ],
      [
-      "Usar información de la reportaje",
+      "Usar información del reportaje",
       [
        "camila",
        "rocha",
