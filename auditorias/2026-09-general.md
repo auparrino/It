@@ -19,6 +19,15 @@ En los dos idiomas se volvió a medir lo que marcaron las auditorías anteriores
 pronunciación, shadowing, la entrevista oral del Celpe-Bras). Escuchar audio y la voz del teléfono
 sí entran.
 
+> **Actualización (v2.6).** Los puntos 7 y 8 del resumen (D3, E2 y E3) quedaron
+> resueltos con el **tramo C1**: en las semanas 27 a 51 de los dos idiomas,
+> cada semana suma una lectura larga (350 → 900 palabras), una escucha larga a
+> dos voces (250 → 600) y una tarea integrada de un género (120 → 250
+> palabras), con preguntas en la lengua meta y una revisión que no se engaña
+> con relleno ni con texto copiado. En portugués, la tarea sigue el formato
+> del Celpe-Bras. Ver `README-italiano.md` («Tramo C1») y `js/tramo.js`. El
+> vocabulario B2-C1 (D4) sigue abierto.
+
 ---
 
 ## Resumen: las 12 principales

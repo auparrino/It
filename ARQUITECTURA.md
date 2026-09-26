@@ -68,3 +68,18 @@ precachea).  Los arma `tools/lib/build_biblioteca.js` con la lista de
 `tools/pt/ortografia.js`, que moderniza la ortografía al Acuerdo de 1990
 (qué hace y cómo está documentado en su encabezado).  Test:
 `tools/lib/test_biblioteca.js`.
+
+**Tramo C1.** Las semanas 27-51 suman una lectura larga, una escucha larga
+y una tarea integrada.
+- **Datos**: `tools/<código>/tramo/wNN.json` y `generi.json`. Los junta
+  `tools/lib/build_tramo.js` (en `npm run build`) en
+  `lang/<código>/tramo_data.js` (`window.TRAMO_DATA`), que se carga antes de
+  `letture.js`.
+- **Lectura**: `letture.js` agrega las lecturas como la serie `lunga`, que
+  usa el lector de siempre.
+- **Escucha y tarea**: `js/tramo.js` tiene la escucha (pantalla
+  `tramo-asc`), la tarea (`tramo-scr`) con su revisión local
+  (`Tramo.evaluate`), las misiones de la semana y la lista de escuchas en
+  Leggi / Ler. Guarda en `state.tramo`.
+- **Test**: `tools/lib/test_tramo.js`.
+

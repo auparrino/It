@@ -1,0 +1,389 @@
+{
+  "week": 50,
+  "level": "C1",
+  "lettura": {
+    "title": "“Traduzir ao pé da letra é pisar na bola”",
+    "emoji": "🎬",
+    "genre": "entrevista (pingue-pongue)",
+    "grammar": "colocações e expressões idiomáticas",
+    "text": "Há quase vinte anos, Marta Siqueira passa os dias diante de duas telas: numa, um filme ou uma série estrangeira; na outra, o programa em que escreve as legendas que milhões de brasileiros leem sem nem perceber. Tradutora de inglês e espanhol, ela já legendou comédias românticas, documentários sobre a natureza e dramas policiais. Nesta entrevista, conta por que as expressões idiomáticas são, ao mesmo tempo, o seu maior pesadelo e a sua maior diversão.\n\nQual é a parte mais difícil de legendar um filme?\n\nSem dúvida, as expressões idiomáticas. Uma palavra isolada quase sempre tem equivalente. Uma expressão, não. Se um personagem americano diz que alguém “kicked the bucket”, eu não posso escrever que ele chutou o balde, porque em português chutar o balde é outra coisa: é desistir de tudo, perder a paciência de vez. O que o personagem quis dizer é que o sujeito bateu as botas, ou seja, morreu. Se eu traduzir ao pé da letra, o espectador fica perdido ou, pior, entende exatamente o contrário.\n\nE como você resolve esses casos?\n\nProcuro uma expressão que tenha a mesma função, não as mesmas palavras. Às vezes existe um equivalente perfeito, e é uma festa. Quando não existe, eu dou um jeito: uso uma expressão diferente, mas com o mesmo tom, ou abro mão da imagem e explico o sentido de forma simples. O que não pode é a legenda soar como tradução. O público tem que ler e pensar: é assim que a gente fala.\n\nPode dar exemplos de expressões brasileiras difíceis de levar para outras línguas?\n\nTenho várias favoritas. Pisar na bola, por exemplo, que é cometer um erro, decepcionar alguém. Ou enfiar o pé na jaca, que é exagerar, sobretudo na comida ou na bebida. E cair a ficha, que é quando a gente finalmente entende alguma coisa. Essa é linda, porque vem do tempo dos telefones públicos, que funcionavam com fichas: a ligação só se completava quando a ficha caía. Hoje, muitos jovens usam a expressão sem ter a menor ideia de onde ela vem.\n\nVocê também fala muito em colocações. O que são?\n\nSão combinações de palavras que simplesmente andam juntas numa língua, sem uma lógica muito clara. Em português, a gente toma uma decisão, faz uma pergunta, presta atenção, comete um erro. Algumas coincidem com o espanhol, outras não. O brasileiro toma um susto, enquanto o argentino “se lleva” um; tira uma foto, enquanto o argentino “saca”; faz aniversário, enquanto o hispanofalante “cumple” anos; marca uma consulta, enquanto o portenho “saca turno”. O estrangeiro que diz “cumprir anos” ou “sacar uma foto” é entendido, claro, mas denuncia na hora que não é nativo. Numa legenda, uma colocação errada chama tanta atenção quanto um erro de ortografia.\n\nExiste alguma expressão realmente intraduzível?\n\nIntraduzível, não sei, mas algumas dão muito trabalho. Uma que sempre me tira o sono é fazer uma vaquinha, que é juntar dinheiro entre amigos para comprar alguma coisa. Na Argentina, curiosamente, existe “hacer una vaca”, com a mesma imagem, mas em inglês não há nada parecido. Outra é sem eira nem beira, que quer dizer sem recurso nenhum, e cuja origem nem os próprios brasileiros sabem explicar direito. Nesses casos, prefiro perder a imagem e salvar o sentido. O espectador não sabe o que eu deixei de fora; ele só percebe quando a frase não funciona.\n\nVocê já pisou na bola numa legenda?\n\nJá, e feio. No começo da carreira, legendei uma comédia em que um amigo dizia à protagonista “break a leg” antes de um teste de teatro. Traduzi como “quebre a perna”. Só depois me caiu a ficha de que aquilo era um jeito de desejar boa sorte. A distribuidora percebeu a tempo, mas eu paguei o pato: tive que revisar o filme inteiro, de graça, num fim de semana. Aprendi a lição. Hoje, quando uma frase soa estranha demais, desconfio, pesquiso e, se for preciso, pergunto a um falante nativo.\n\nLegendas têm limite de caracteres. Isso atrapalha?\n\nMuito. O espectador precisa ler a legenda enquanto vê a imagem, então cada linha tem um número limitado de caracteres. Não dá para encher linguiça. Às vezes o personagem fala durante dez segundos e eu tenho espaço para meia dúzia de palavras. É aí que as expressões idiomáticas ajudam: “deu com a língua nos dentes” é bem mais curto do que “contou um segredo que não devia ter contado”. É economia pura.\n\nQue conselho você daria a quem aprende português e quer dominar essas expressões?\n\nQue não tente decorar listas. Expressão idiomática se aprende no contexto, ouvindo, lendo, vendo série com legenda, de preferência bem-feita, claro! E que tenha coragem de usar. Vai errar? Vai. Vai trocar uma palavra, dizer “pisar no pé” em vez de “pisar na bola”. Faz parte. Mas, no dia em que você usar “quebrar o galho” no lugar certo e o brasileiro sorrir, vai sentir que está tirando o português de letra. Quer dizer: quase.\n\nA revista convida os leitores a enviar os seus relatos de mal-entendidos com expressões idiomáticas para a seção Tropeços da Língua. Os melhores textos serão publicados na próxima edição.",
+    "gloss": {
+      "legendas": "subtítulos",
+      "pesadelo": "pesadilla",
+      "chutou": "pateó",
+      "balde": "balde (chutar o balde = mandar todo al diablo)",
+      "desistir": "abandonar, rendirse",
+      "botas": "botas (bater as botas = estirar la pata)",
+      "abro": "(abro mão) renuncio",
+      "decepcionar": "decepcionar, fallarle a alguien",
+      "enfiar": "meter",
+      "jaca": "jaca, fruta tropical (enfiar o pé na jaca = zarparse)",
+      "ficha": "cospel (cair a ficha = caer la ficha)",
+      "susto": "susto",
+      "denuncia": "delata",
+      "feio": "feo, mal",
+      "pato": "pato (pagar o pato = pagar los platos rotos)",
+      "atrapalha": "complica, molesta",
+      "linguiça": "longaniza (encher linguiça = meter relleno, hacer paja)",
+      "dentes": "dientes (dar com a língua nos dentes = irse de boca)",
+      "decorar": "memorizar",
+      "galho": "rama (quebrar o galho = sacar de un apuro)",
+      "letra": "letra (tirar de letra = hacer algo con facilidad)",
+      "relatos": "relatos",
+      "tropeços": "tropiezos",
+      "vaquinha": "vaquita (fazer uma vaquinha = hacer una vaca)",
+      "eira": "era, patio (sem eira nem beira = sin un peso)"
+    },
+    "questions": [
+      [
+        "Por que as expressões idiomáticas são o “maior pesadelo” de Marta?",
+        [
+          "Porque os espectadores não gostam de expressões populares.",
+          "Porque raramente têm equivalente palavra por palavra.",
+          "Porque ocupam caracteres demais em cada linha de legenda.",
+          "Porque as distribuidoras proíbem o seu uso."
+        ],
+        "Porque raramente têm equivalente palavra por palavra."
+      ],
+      [
+        "Qual é a estratégia principal de Marta ao traduzir uma expressão?",
+        [
+          "Traduzir sempre ao pé da letra, por fidelidade.",
+          "Eliminar a fala do personagem quando é difícil.",
+          "Colocar uma nota explicativa no canto da tela.",
+          "Buscar uma expressão com a mesma função."
+        ],
+        "Buscar uma expressão com a mesma função."
+      ],
+      [
+        "Segundo Marta, o que acontece com o estrangeiro que erra uma colocação?",
+        [
+          "É entendido, mas revela que não é nativo.",
+          "Não é entendido pela maioria dos brasileiros.",
+          "Comete um erro gramatical considerado grave.",
+          "Parece muito mais formal do que deveria."
+        ],
+        "É entendido, mas revela que não é nativo."
+      ],
+      [
+        "O que o episódio de “break a leg” ilustra?",
+        [
+          "A falta de cuidado das distribuidoras de filmes.",
+          "O risco de traduzir uma expressão literalmente.",
+          "A dificuldade específica das comédias românticas americanas.",
+          "A necessidade de trabalhar nos fins de semana."
+        ],
+        "O risco de traduzir uma expressão literalmente."
+      ],
+      [
+        "Por que as expressões idiomáticas podem ajudar na legendagem?",
+        [
+          "Porque o público as lê mais depressa que outras frases.",
+          "Porque dispensam a revisão de um falante nativo.",
+          "Porque tornam a tradução mais fiel ao texto original.",
+          "Porque condensam uma ideia em poucas palavras."
+        ],
+        "Porque condensam uma ideia em poucas palavras."
+      ]
+    ],
+    "vf": [
+      [
+        "Marta traduz do inglês e do espanhol.",
+        "verdadeiro"
+      ],
+      [
+        "Segundo Marta, “chutar o balde” significa morrer.",
+        "falso"
+      ],
+      [
+        "A expressão “cair a ficha” vem da época dos telefones públicos.",
+        "verdadeiro"
+      ],
+      [
+        "Marta recomenda decorar listas de expressões idiomáticas.",
+        "falso"
+      ],
+      [
+        "Marta também legenda novelas brasileiras para o exterior.",
+        "não se diz"
+      ]
+    ],
+    "hunt": {
+      "label": "Tocá la palabra clave (el sustantivo que da la imagen) de cada expresión idiomática",
+      "targets": [
+        "balde",
+        "botas",
+        "jeito",
+        "bola",
+        "jaca",
+        "ficha",
+        "pato",
+        "linguiça",
+        "dentes",
+        "galho",
+        "letra"
+      ]
+    }
+  },
+  "ascolto": {
+    "title": "O casamento em que tudo deu errado",
+    "genre": "conversa entre amigos",
+    "es": "Dos amigos se encuentran en un café: él, organizador de eventos, le cuenta a ella cómo fue el casamiento que organizó el fin de semana.",
+    "speakers": [
+      "Carol",
+      "Bruno"
+    ],
+    "turns": [
+      [
+        "A",
+        "Bruno! Finalmente! Achei que você tinha desistido do nosso café. Nossa, que cara é essa?"
+      ],
+      [
+        "B",
+        "Nem me fala, Carol. Passei o fim de semana inteiro de cabelo em pé. Lembra do casamento que eu estava organizando lá em Petrópolis?"
+      ],
+      [
+        "A",
+        "Claro, o da prima da Juliana. Era ontem, né? Deu tudo certo?"
+      ],
+      [
+        "B",
+        "Certo? Olha, se alguma coisa podia dar errado, deu. Pra começar, o bufê pisou na bola feio. Às dez da manhã me ligaram dizendo que o caminhão tinha quebrado na serra e que a comida só chegaria à noite."
+      ],
+      [
+        "A",
+        "Não acredito! E a festa era que horas?"
+      ],
+      [
+        "B",
+        "Às quatro da tarde. Aí, você sabe, não tinha tempo para chorar. Tive que dar um jeito. Liguei para uma amiga que tem um restaurante lá perto e pedi, pelo amor de Deus, que ela quebrasse o meu galho."
+      ],
+      [
+        "A",
+        "E ela topou?"
+      ],
+      [
+        "B",
+        "Topou, mas custou os olhos da cara. Salgadinhos, sanduíches, uma massa… Não era o cardápio que os noivos tinham escolhido, mas ninguém passou fome."
+      ],
+      [
+        "A",
+        "E quem pagou essa conta?"
+      ],
+      [
+        "B",
+        "Por enquanto, eu. Adiantei do meu bolso, porque não dava para esperar a boa vontade de ninguém. Depois vou acertar com o bufê. Mas, sinceramente, naquela hora eu nem pensei em dinheiro. Só pensava nos cento e cinquenta convidados chegando e nas mesas vazias."
+      ],
+      [
+        "A",
+        "Imagino o desespero. E o bufê não deu nenhuma satisfação?"
+      ],
+      [
+        "B",
+        "Deu, mas tarde demais. O dono me ligou às duas da tarde, todo sem graça, pedindo mil desculpas e sugerindo que a gente fizesse vista grossa para a multa do contrato. Quer dizer, ele queria que eu esquecesse o contrato, né? Nem pensar."
+      ],
+      [
+        "A",
+        "Menos mal. E os noivos perceberam?"
+      ],
+      [
+        "B",
+        "No começo, não. Mas aí, na hora do bolo, o bicho pegou. Quando a noiva viu que não tinha o bufê que ela tinha escolhido, a ficha caiu, e ela ficou uma fera. Eu achei que ela ia chutar o balde e cancelar a festa ali mesmo."
+      ],
+      [
+        "A",
+        "Nossa, que saia justa! E você, fez o quê?"
+      ],
+      [
+        "B",
+        "Eu segurei a onda. Levei ela para um canto, expliquei tudo com calma, mostrei as mensagens do bufê. Falei: olha, a culpa não é sua nem minha, mas eu vou resolver. E prometi que a empresa do bufê ia devolver todo o dinheiro."
+      ],
+      [
+        "A",
+        "E vai devolver?"
+      ],
+      [
+        "B",
+        "Vai ter que devolver, né? Está no contrato. Mas eu sei como é: no fim, quem acaba pagando o pato é sempre o organizador. Se a festa sai boa, o mérito é de todo mundo. Se sai ruim, a culpa é minha."
+      ],
+      [
+        "A",
+        "Mas pelo que você está contando, você tirou de letra. Salvou a festa!"
+      ],
+      [
+        "B",
+        "Tirar de letra é exagero. Eu suei a camisa, isso sim. Pus a mão na massa, carreguei caixa, ajudei a montar mesa, servi refrigerante. E o mais engraçado é que, no final, os convidados adoraram a comida da minha amiga. Teve tio pedindo o telefone do restaurante."
+      ],
+      [
+        "A",
+        "Viu só? Tudo acabou bem. E a noiva, no final, fez as pazes com você?"
+      ],
+      [
+        "B",
+        "Fez. Na hora da valsa, ela veio me dar um abraço e disse que, depois do susto, tinha sido a melhor festa da vida dela. Aí eu quase chorei, confesso. Todo aquele cansaço valeu a pena."
+      ],
+      [
+        "A",
+        "Que lindo! E agora, o que você vai fazer?"
+      ],
+      [
+        "B",
+        "Agora eu vou ficar de molho uns dias. Tomei a decisão de não aceitar nenhum evento até o mês que vem. Preciso descansar a cabeça."
+      ],
+      [
+        "A",
+        "Faz muito bem. E olha, se precisar de uma mão para cobrar o bufê, me chama. Advogada serve pra isso."
+      ],
+      [
+        "B",
+        "Vou te cobrar essa promessa, hein!"
+      ]
+    ],
+    "gloss": {
+      "cabelo": "pelo (de cabelo em pé = con los pelos de punta)",
+      "bufê": "catering, servicio de comida",
+      "serra": "sierra (ruta de montaña)",
+      "galho": "rama (quebrar o galho = sacar de un apuro)",
+      "topou": "aceptó, se copó",
+      "cardápio": "menú",
+      "noivos": "novios (los que se casan)",
+      "fera": "fiera (ficar uma fera = ponerse hecha una furia)",
+      "saia": "pollera (saia justa = situación incómoda)",
+      "onda": "ola (segurar a onda = mantener la calma)",
+      "suei": "transpiré (suar a camisa = romperse el lomo)",
+      "molho": "remojo (ficar de molho = quedarse quieto, descansar)",
+      "cobrar": "reclamar (un pago o una promesa)",
+      "adiantei": "adelanté (plata)",
+      "satisfação": "explicación",
+      "vista": "vista (fazer vista grossa = hacerse el distraído)",
+      "multa": "multa"
+    },
+    "questions": [
+      [
+        "Qual foi o primeiro problema do casamento?",
+        [
+          "A noiva quis mudar o cardápio na última hora.",
+          "O caminhão do bufê quebrou na estrada.",
+          "A amiga de Bruno tinha fechado o restaurante.",
+          "Os convidados chegaram bem mais cedo que o previsto."
+        ],
+        "O caminhão do bufê quebrou na estrada."
+      ],
+      [
+        "Na fala de Bruno, o que significa pedir que a amiga “quebrasse o seu galho”?",
+        [
+          "Pedir que ela cortasse os custos da festa.",
+          "Pedir que ela o ajudasse numa emergência.",
+          "Pedir que ela desistisse de outro evento.",
+          "Pedir que ela falasse com os noivos por ele."
+        ],
+        "Pedir que ela o ajudasse numa emergência."
+      ],
+      [
+        "Como a noiva reagiu ao perceber o problema?",
+        [
+          "Ficou furiosa, e Bruno temeu que ela cancelasse a festa.",
+          "Não percebeu nada até o final da festa.",
+          "Pediu aos convidados que fossem embora.",
+          "Agradeceu a Bruno pela solução encontrada."
+        ],
+        "Ficou furiosa, e Bruno temeu que ela cancelasse a festa."
+      ],
+      [
+        "Por que Bruno diz que o organizador sempre “paga o pato”?",
+        [
+          "Porque ele tem que pagar a comida do próprio bolso.",
+          "Porque leva a culpa quando algo dá errado.",
+          "Porque ganha menos que os outros fornecedores do evento.",
+          "Porque precisa cozinhar nos eventos que organiza."
+        ],
+        "Porque leva a culpa quando algo dá errado."
+      ],
+      [
+        "Como Bruno avalia a própria atuação?",
+        [
+          "Acha que resolveu tudo sem nenhum esforço.",
+          "Acha que deveria ter cancelado a festa logo cedo.",
+          "Acha que a amiga fez praticamente todo o trabalho.",
+          "Acha que salvou a festa, mas à custa de muito trabalho."
+        ],
+        "Acha que salvou a festa, mas à custa de muito trabalho."
+      ]
+    ],
+    "vf": [
+      [
+        "A festa estava marcada para as quatro da tarde.",
+        "verdadeiro"
+      ],
+      [
+        "Os convidados reclamaram da comida servida.",
+        "falso"
+      ],
+      [
+        "Bruno já tinha trabalhado antes com a mesma empresa de bufê.",
+        "não se diz"
+      ],
+      [
+        "Bruno pretende aceitar um novo evento já na semana seguinte.",
+        "falso"
+      ]
+    ]
+  },
+  "compito": {
+    "genre": "relato",
+    "title": "Tropeços da Língua",
+    "fonte": "lettura",
+    "t": "A revista que publicou a entrevista com a legendadora Marta Siqueira convidou os leitores a enviar relatos de mal-entendidos com expressões idiomáticas para a seção Tropeços da Língua. Você é hispanofalante e mora (ou morou) no Brasil. Escreva um relato, em primeira pessoa, contando um mal-entendido (real ou imaginado) com uma expressão idiomática ou uma colocação do português: onde e quando aconteceu, o que você entendeu, o que a expressão significava de fato e o que você aprendeu com isso. Relacione a sua experiência com pelo menos uma ideia da entrevista. Não se esqueça de dar um título ao relato e de usar, além da expressão central, pelo menos outras duas expressões idiomáticas ou colocações. Registro semiformal. Seu texto deve ter entre 244 e 304 palavras.",
+    "es": "Relato en primera persona para una sección de la revista: situación, qué entendiste, qué significaba y qué aprendiste, conectándolo con algo que dice Marta. Usá varias expresiones idiomáticas bien usadas y ponele título.",
+    "min": 244,
+    "max": 304,
+    "punti": [
+      [
+        "Situar la anécdota: dónde, cuándo, con quién",
+        [
+          "quando",
+          "cheguei",
+          "semana",
+          "morava"
+        ]
+      ],
+      [
+        "Explicar qué entendió y qué significaba la expresión",
+        [
+          "significa",
+          "entendi",
+          "ao pé da letra",
+          "queria dizer"
+        ]
+      ],
+      [
+        "Relacionar con una idea de la entrevista",
+        [
+          "marta",
+          "entrevista",
+          "legendadora"
+        ]
+      ],
+      [
+        "Usar otras expresiones idiomáticas o colocaciones",
+        [
+          "ficha caiu",
+          "pisado na bola",
+          "pisei na bola",
+          "dar um jeito",
+          "pagar o pato",
+          "tirar de letra"
+        ]
+      ],
+      [
+        "Cerrar con lo que aprendió",
+        [
+          "aprendi",
+          "me mostrou",
+          "lição"
+        ]
+      ]
+    ],
+    "model": "O dia em que enfiei o pé na jaca… ou quase\n\nQuando cheguei ao Recife para fazer intercâmbio, achava que o meu português já estava pronto. Afinal, como diz Marta Siqueira na entrevista, uma palavra isolada quase sempre tem equivalente. O problema, descobri logo, eram as expressões.\n\nNa minha segunda semana, uma colega da faculdade me convidou para o aniversário da avó dela, um almoço enorme num sítio em Olinda. No fim da tarde, depois de comer de tudo, ouvi o tio dela comentar, rindo: “Hoje eu enfiei o pé na jaca!”. Como havia uma jaqueira no quintal e várias frutas caídas no chão, entendi ao pé da letra. Fiquei preocupado e perguntei, com toda a seriedade, se ele tinha se machucado e se precisava lavar o pé.\n\nA mesa inteira caiu na gargalhada. A minha colega, com pena de mim, explicou que “enfiar o pé na jaca” significa exagerar, sobretudo na comida ou na bebida. Aí a ficha caiu, e eu quis sumir de vergonha. Senti que tinha pisado na bola na frente da família toda.\n\nMas o tio foi muito simpático: disse que, a partir daquele dia, eu seria o “gringo da jaca” e me ensinou mais umas dez expressões antes do cafezinho. Tomei a decisão de anotar todas num caderno, que guardo até hoje.\n\nEsse episódio me mostrou que Marta tem razão ao dizer que expressão idiomática não se aprende em lista, mas no contexto. Hoje, quando alguém usa uma frase que parece absurda, desconfio antes de entender tudo literalmente. E, sempre que como demais num almoço de domingo, lembro daquele dia e sorrio."
+  }
+}

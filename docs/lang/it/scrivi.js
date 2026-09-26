@@ -929,14 +929,18 @@
   var PREPS = /^(a|ad|di|da|in|con|su|per|tra|fra|senza|verso|come|anche|pure|neanche|nemmeno|quanto|più|meno|dopo|prima|contro|secondo|tranne|oltre|dietro|sopra|sotto)$/;
   var REFLEXIVE_L = /^(chiamare|svegliare|alzare|lavare|vestire|sentire|trovare|trasferire|preparare|divertire|annoiare|riposare|sedere|fermare|sposare|laureare|iscrivere|arrabbiare|preoccupare|ricordare|innamorare|abituare|occupare|addormentare|pettinare|truccare|radere|trovare|chiedere|domandare|rilassare|muovere|perdere|trasferirsi|chiamarsi|svegliarsi|alzarsi|sentirsi|trovarsi)$/;
   var IMPV_WORDS = /^(scusi|scusa|senti|senta|guarda|guardi|dai|tieni|tenga|aspetta|aspetti|ascolta|ascolti|dimmi|mi|figurati|prego|pensa|immagina|vieni|vai|stai|hai|sai)$/;
-  var AMBI_GENDER = /^(fine|presente|metro|capitale|fronte|carcere|eco|fronte|radice)$/;
+  // Nouns whose gender changes the meaning (il moto / la moto) or with an
+  // irregular plural of the other gender (l'orecchio → le orecchie).
+  var AMBI_GENDER = /^(fine|presente|metro|capitale|fronte|carcere|eco|fronte|radice|moto|orecchie|braccia|dita|ginocchia|labbra|ciglia|lenzuola|mura|ossa|uova|paia|centinaia|migliaia)$/;
   var INTR_AVERE = /^(dormire|lavorare|camminare|viaggiare|telefonare|nuotare|ridere|piangere|cenare|pranzare|giocare|passeggiare|sciare|ballare|litigare|chiacchierare|sorridere|russare)$/;
   var AV2ES = { avevo: "ero", avevi: "eri", aveva: "era", avevamo: "eravamo", avevate: "eravate", avevano: "erano", "avrò": "sarò",
                 avrai: "sarai", "avrà": "sarà", avremo: "saremo", avrete: "sarete", avranno: "saranno", avrei: "sarei", avresti: "saresti",
                 avrebbe: "sarebbe", avremmo: "saremmo", avreste: "sareste", avrebbero: "sarebbero", abbia: "sia", abbiano: "siano",
                 avessi: "fossi", avesse: "fosse", avessimo: "fossimo", aveste: "foste", avessero: "fossero", avere: "essere", aver: "esser",
                 avendo: "essendo" };
-  var COMMON_G = /^(nipote|nipoti|collega|colleghi|colleghe|cantante|cantanti|insegnante|insegnanti|giornalista|giornalisti|giornaliste|turista|turisti|turiste|artista|artisti|artiste|pianista|dentista|cliente|clienti|parente|parenti|abitante|abitanti|paziente|pazienti|agente|agenti|musicista|musicisti|atleta|atleti|atlete|interprete|interpreti|custode|preside|giovane|giovani|utente|utenti|docente|docenti)$/;
+  // Common gender: the article tells the sex (il / la collega), and so do
+  // all the nouns in -ista (il / la regista, il / la farmacista).
+  var COMMON_G = /^([a-z]+ist[ai]|nipoti|collega|colleghi|colleghe|cantante|cantanti|insegnante|insegnanti|giornalista|giornalisti|giornaliste|turista|turisti|turiste|artista|artisti|artiste|pianista|dentista|cliente|clienti|parente|parenti|abitante|abitanti|paziente|pazienti|agente|agenti|musicista|musicisti|atleta|atleti|atlete|interprete|interpreti|custode|preside|giovane|giovani|utente|utenti|docente|docenti)$/;
   var TIME_N = /^(sera|mattina|pomeriggio|notte|giorno|giorni|anno|anni|mese|mesi|settimana|settimane|domenica|lunedì|martedì|mercoledì|giovedì|venerdì|sabato|estate|inverno|primavera|autunno|volta|volte|fine|weekend|mattino|ora|ore|momento|tempo|secolo|periodo|scorso|prossimo|giornata|serata|stagione|vacanze|dopo)$/;
   var AV_PERSON = { avevo: "0", avevi: "1", aveva: "2", avevamo: "3", avevate: "4", avevano: "5", "avrò": "0", avrai: "1", "avrà": "2",
                     avremo: "3", avrete: "4", avranno: "5", avrei: "0", avresti: "1", avrebbe: "2", avremmo: "3", avreste: "4", avrebbero: "5",
@@ -1126,6 +1130,7 @@
       if (tk[i + 1] && tk[i + 1].w && !taken(i, 2) && !/^(e|o|a|ed|ad)$/.test(n)) {
         var pronLike = /^(lo|la|gli)$/.test(w) && (isVerb(n) || isInf(n) || AVE_PRES[n]);
         if (U.ARTICLES[w] && !pronLike && !(w === "gli" && !isNoun(n) && !DATA.adj[n] && known(n)) && !(w === "uno" && !isNoun(n) && !DATA.adj[n]) &&
+            !(/^(uno|una)$/.test(w) && /^(di|d'|dei|degli|delle|del|dello|della|tra|fra|dai|dagli|dalle|che)$/.test(n)) &&   // uno dei, una delle: a pronoun
             !(w === "una" && !isNoun(n) && !DATA.adj[n] && known(n)) && !(w === "lo" && !isNoun(n) && !DATA.adj[n]) && !NUMS.test(n)) {
           var fa = sndArt(w, n, fem1);
           if (fa && fa !== w) push(i, 2, "articolo", "Por el sonido de " + it(n) + " va " + it(fa + (fa.slice(-1) === "'" ? "" : " ") + tk[i + 1].o) + ".");

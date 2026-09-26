@@ -110,7 +110,9 @@
     return (list || []).map(function (s) { try { return new RegExp(s, "i"); } catch (e) { return null; } }).filter(Boolean);
   }
 
-  function evaluate(task, text, weekN, src) {
+  // opts.noCheck: skip the week's checker (the slowest part; the tests use it
+  // for the texts that must fail anyway).
+  function evaluate(task, text, weekN, src, opts) {
     var g = (D().GENRES || {})[task.genre] || {};
     var n = words(text), pars = paragraphs(text), v = variety(text), plainText = plain(text);
     var punti = (task.punti || []).map(function (p) {
@@ -121,7 +123,7 @@
     var head = pars.slice(0, 2).join(" "), tail = pars.slice(-2).join(" ");
     var opens = rx(g.open), closes = rx(g.close);
     var conns = connectors(text);
-    var chk = root.Scrivi && root.Scrivi.check ? root.Scrivi.check(text, weekN) : { findings: [], hard: 0 };
+    var chk = root.Scrivi && root.Scrivi.check && !(opts && opts.noCheck) ? root.Scrivi.check(text, weekN) : { findings: [], hard: 0 };
     var maxHard = Math.max(2, Math.floor(n / 50));
     var crit = [];
     crit.push({ id: "len", need: true, ok: n >= task.min,
@@ -148,7 +150,7 @@
     crit.push({ id: "conn", ok: conns.length >= 4,
       label: "Conectores distintos: " + conns.length + (conns.length ? " (" + conns.slice(0, 6).join(", ") + (conns.length > 6 ? "…" : "") + ")" : "") + " · al menos 4" });
     crit.push({ id: "err", ok: chk.hard <= maxHard,
-      label: chk.hard ? chk.hard + " cosas marcadas por el corrector (revisalas abajo)" : "El corrector de la semana no marcó errores" });
+      label: chk.hard ? chk.hard + " cosas marcadas por el corrector: revisalas abajo (a veces se equivoca con palabras citadas o poco comunes)" : "El corrector de la semana no marcó errores" });
     var ok = crit.filter(function (c) { return c.need; }).every(function (c) { return c.ok; });
     return { ok: ok, n: n, crit: crit, punti: punti, puntiOk: puntiOk, check: chk,
              score: crit.filter(function (c) { return c.ok; }).length, of: crit.length };

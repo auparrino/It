@@ -67,6 +67,7 @@ reales; las apócrifas se dicen apócrifas.
 | Laboratorio (`docs/js/lab.js`) | *Ponte* (16 reglas español → portugués, 196 cognados), 103 falsos amigos, *Entender* (input estructurado) |
 | Duelos (`docs/js/duelli.js`) | ser/estar, por/para, seu/dele, perfeito/imperfeito, simple/composto, indicativo/subjuntivo, futuro do subjuntivo/infinitivo pessoal, a/à |
 | Lecturas | *A semana* (52 textos), *Martín no Rio* (10 episodios), *Cultura* (23), *Enchentes* (12, input flood) |
+| Tramo C1 (`tools/pt/tramo/`, `docs/js/tramo.js`) | Semanas 27-51: *Leituras longas* (350 → 900 palabras, preguntas en portugués), *Escutas longas* a dos voces (250 → 600 palabras) y una tarea integrada al estilo del Celpe-Bras (120 → 250 palabras), con revisión local y rúbrica con IA |
 | Sons (`docs/lang/pt/ascolto_data.js`) | 181 pares mínimos, habla conectada, entonación, acento tónico; 47 dictogloss |
 | Diagnóstico (`docs/lang/pt/diagnosi.js`) | ~33 categorías de error del hispanohablante, pista primero y explicación después |
 | Escreva (`docs/lang/pt/scrivi.js`) | 48 tareas de escritura libre con su corrector |
@@ -96,3 +97,28 @@ Material de apoyo que se usó: *Noções básicas de gramática portuguesa (PLE)
 (José Carlos Silva), *Gramática portuguesa* (Espasa), *Vamos nessa? Vamos!*
 (Ministerio de Educación de Corrientes), la guía de Philipe Brazuca y el
 Documento-base del Celpe-Bras (INEP).
+
+## Tramo C1: la tarea integrada del Celpe-Bras
+
+El Celpe-Bras no pregunta gramática: da un texto o un audio y pide escribir
+otro, de un género, para alguien y con un propósito. Desde la semana 27, cada
+semana trae tres misiones obligatorias que entrenan exactamente eso:
+
+- 📰 **Leitura longa**: reportaje, columna de opinión, crónica, cuento,
+  informe o guía, de 350 palabras en la semana 27 a 900 en la 51, con
+  preguntas y *verdadeiro / falso / não se diz* en portugués.
+- 🎧 **Escuta longa**: un programa de radio, un podcast, un debate o una
+  llamada, a dos voces, de 250 a 600 palabras. Se escucha dos veces con las
+  preguntas a la vista y la transcripción aparece al final.
+- 🖋️ **Tarefa**: el enunciado sigue el formato del examen («Você é… Após
+  ler/ouvir…, escreva um(a)… para…  Não se esqueça de…»). Los géneros son
+  carta formal, e-mail, carta do leitor, artigo, resenha, texto de opinião,
+  resumo y relato, de 120 a 250 palabras.
+  - **Revisión local obligatoria**: extensión, variedad léxica, no copiar de
+    la fuente y los puntos del enunciado.
+  - **Sugerencias**: vocativo y despedida, título, párrafos, conectores y
+    los errores típicos.
+  - **Con IA**: además, la grilla de la producción escrita.
+
+Detalle del funcionamiento en el README del italiano.
+

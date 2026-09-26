@@ -89,6 +89,12 @@ tu teléfono**. No usa cuentas ni servidores; la IA es opcional, con una clave g
   «Lectura y comprensión». `tools/it/check_letture.py` controla
   que la gramática no pase de la semana y que queden como mucho tres
   palabras desconocidas sin glosa (Jeon & Day 2016; Hu & Nation 2000).
+- **Letture lunghe** (tramo C1, semanas 27 a 51): un texto largo por semana
+  de un género real (reportaje, editorial, reseña, relato, ensayo breve,
+  entrevista), que crece de 350 a 900 palabras hasta llegar al largo del
+  examen, con cinco preguntas y cinco *vero / falso / non si dice* en
+  italiano. Tiene el mismo lector, con glosas, karaoke y caza de formas de la
+  gramática de la semana. En el percorso es la misión «Lectura larga».
 - **Glosas de opción múltiple**: en cada lectura, tres o cuatro palabras
   nuevas (no cognados ni palabras gramaticales) no se dicen: se preguntan.
   Las tocás y elegís entre tres significados por el contexto; después quedan
@@ -931,3 +937,41 @@ idioma la tenés que poner aparte.
 Los dos manuales son obra con derechos de autor y no se incluyen en el repo:
 los scripts de extracción trabajan sobre las copias que tengas vos, y el material
 generado es para estudio personal.
+
+## Tramo C1: leer, escuchar y escribir en serio (semanas 27 a 51)
+
+Hasta la semana 26 el curso crece en todo. Desde la 27, la gramática llega a
+C1, pero lo que se leía, se escuchaba y se escribía seguía siendo corto:
+textos de unas 94 palabras, escuchas de 100 y *Scrivi* de 60. El tramo C1 le
+agrega a cada semana tres misiones obligatorias que suben de a poco hasta el
+largo del CILS y el CELI:
+
+| | Semana 27 | Semana 51 |
+|---|---|---|
+| 📰 Lectura larga (preguntas y *vero / falso / non si dice* en italiano) | ~350 palabras | ~900 palabras |
+| 🎧 Escucha larga a dos voces (entrevista, podcast, debate, consulta radial) | ~250 palabras | ~600 palabras |
+| 🖋️ Tarea integrada: un género que parte de lo leído o escuchado | 120 palabras | 250 palabras |
+
+- **Escucha**: las preguntas se leen antes, se escucha dos veces a dos voces
+  distintas (a 1× o 0,9×) y la transcripción aparece después de entregar,
+  con las palabras difíciles. Suma minutos de escucha e input. También están
+  en *Leggi*, en «Ascolti lunghi».
+- **Tarea**: carta formal, e-mail, carta al diario, artículo, reseña,
+  texto argumentativo, síntesis o informe. La consigna está en italiano y
+  pide usar lo leído o escuchado. Sin IA, la revisión no se engaña con
+  relleno:
+  - **Obligatorios**: la extensión mínima, la variedad léxica (relación
+    tipo/token sobre las primeras 150 palabras, y ninguna palabra que tape
+    el texto), no copiar frases de la fuente (secuencias de cinco palabras)
+    y cubrir los puntos de la consigna.
+  - **Sugerencias**: apertura y cierre del género, título, párrafos,
+    conectores y lo que marca el corrector de la semana.
+
+  Con una clave de IA, además se califica con la rúbrica C1 (*adeguatezza,
+  coesione, correttezza, lessico*). El modelo se puede ver después.
+- Datos: `tools/it/tramo/wNN.json` (una semana cada uno) y `generi.json`
+  (los géneros y sus marcas). `npm run build` arma
+  `docs/lang/it/tramo_data.js`, y `tools/lib/test_tramo.js` controla los
+  largos de cada semana, la clave de las preguntas, que el modelo pase la
+  revisión y que la basura, la copia y los textos cortos no la pasen.
+
