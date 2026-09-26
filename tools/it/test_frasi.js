@@ -196,7 +196,8 @@ ok(uniq(Letture.EPISODI.map(function (e) { return e.id; })), "id di lettura unic
 Letture.EPISODI.forEach(function (ep) {
   var toks = Letture.allTokens(ep);
   // Le inondazioni (input flood) sono più lunghe: la struttura deve ripetersi.
-  var lo = ep.series === "flood" ? 150 : 80, hi = ep.series === "flood" ? 240 : 140;
+  // Le letture lunghe del tramo C1 crescono da 350 a 900 parole (test_tramo.js).
+  var lo = ep.series === "flood" ? 150 : ep.series === "lunga" ? 300 : 80, hi = ep.series === "flood" ? 240 : ep.series === "lunga" ? 1100 : 140;
   ok(toks.length >= lo && toks.length <= hi, "lunghezza della lettura " + ep.id + ": " + toks.length);
   Object.keys(ep.gloss).forEach(function (k) {
     ok(toks.some(function (t) { return Letture.glossFor(ep, t) === ep.gloss[k]; }),

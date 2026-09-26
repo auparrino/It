@@ -216,6 +216,7 @@
     if (opts.pitch) u.pitch = opts.pitch;
     if (opts.onboundary) u.onboundary = opts.onboundary;
     if (opts.onend) u.onend = opts.onend;
+    if (opts.onerror) u.onerror = opts.onerror;
     if (opts.onstart) u.onstart = opts.onstart;
     if (!opts.keep) window.speechSynthesis.cancel();
     window.speechSynthesis.speak(u);
@@ -722,7 +723,7 @@
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION = "c1-vN" in sw.js: test_game
      and the CI check it).  One version for the app and both languages. */
-  var APP_VERSION = "v2.5";
+  var APP_VERSION = "v2.6";
   // Settimana XVII: Roman numerals on the street signs (LANG.ui.romanWeeks).
   function romano(n) {
     var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
@@ -859,7 +860,7 @@
           (open ? "" : " disabled") + ">" +
           '<span class="e">' + (open ? ep.emoji : "🔒") + "</span>" +
           "<span><b>" + esc(ep.title) + "</b>" +
-          '<span class="muted">' + (ep.area ? esc(ep.area) + " · " : ep.series === "settimana" ? "semana " + ep.week + " · " : "episodio " + ep.n + " · ") +
+          '<span class="muted">' + (ep.area ? esc(ep.area) + " · " : ep.series === "settimana" || ep.series === "lunga" ? "semana " + ep.week + " · " : "episodio " + ep.n + " · ") +
             esc(ep.level) + " · " + (wait ? "se abre en la semana " + ep.week : esc(ep.grammar)) +
             "</span></span>" +
           (d ? '<span class="score">' + d.pct + "%</span>" : "") +
@@ -867,6 +868,7 @@
       });
       html += "</div>";
     });
+    if (window.Tramo) html += Tramo.leggiHtml(state);   // las escuchas largas del tramo C1
     if ((state.storie || []).length) {
       html += "<h2>✨ " + UI.stories + "</h2><p class=\"muted\">Cuentos generados con las palabras de tu repaso.</p><div class=\"eps\">" +
         state.storie.map(function (x) {
@@ -928,7 +930,8 @@
     return '<button class="btn ghost" id="lback">' + (view.epFrom === "briefing" ? "← a la semana" : "← a " + UI.read) + "</button>" +
       "<h1>" + ep.emoji + " " + esc(ep.title) + "</h1>" +
       '<p class="lead">' + (ep.area ? esc(ep.area) + " · " : ep.series === "flood" ? UI.series.flood + " · " + esc(ep.grammar) + " · " :
-        ep.series === "settimana" ? UI.series.settimana + " · " + esc(ep.grammar) + " · " : UI.series.main + " · episodio " + ep.n + " · ") +
+        ep.series === "settimana" ? UI.series.settimana + " · " + esc(ep.grammar) + " · " :
+        ep.series === "lunga" ? '<span lang="' + LG.tts + '">' + esc(ep.genre) + "</span> · " + esc(ep.grammar) + " · " : UI.series.main + " · episodio " + ep.n + " · ") +
         esc(ep.level) + "</p>" +
       (enh ? '<div class="note flood">🌊 Segunda lectura: <b>' + esc(ep.flood.es) + "</b> Mirá cada forma resaltada y preguntate por qué está así. " +
         '<button class="tab" id="enhoff">sin marcas</button></div>' : "") +
@@ -1595,11 +1598,13 @@
         if (readingWeek(ep) !== w.week) return;
         var d = (state.letture || {})[ep.id];
         m({ kind: "ep", arg: ep.id, done: !!d, ico: ep.emoji,
-            title: (ep.series === "settimana" ? "Lectura y comprensión: " : ep.series === "martin" ? "Lectura: " : "Cultura: ") + ep.title,
-            sub: d ? "Leída · " + d.pct + "%" : esc(ep.level) + " · " + esc(ep.area || ep.grammar || "") +
-                 (ep.series === "martin" || ep.series === "settimana" ? "" : " · opcional") });
+            title: (ep.series === "settimana" ? "Lectura y comprensión: " : ep.series === "lunga" ? "Lectura larga: " : ep.series === "martin" ? "Lectura: " : "Cultura: ") + ep.title,
+            sub: d ? "Leída · " + d.pct + "%" : esc(ep.level) + " · " + (ep.series === "lunga" ? esc(ep.genre) + " · " + Letture.allTokens(ep).length + " palabras, preguntas en " + UI.langEs
+                   : esc(ep.area || ep.grammar || "")) +
+                 (ep.series === "martin" || ep.series === "settimana" || ep.series === "lunga" ? "" : " · opcional") });
       });
     });
+    if (window.Tramo) Tramo.missions(w, state).forEach(m);   // tramo C1 (tramo.js): escucha larga y tarea
     if (window.Lab) {
       Lab.RULES.forEach(function (r, k) {
         if (ponteWeek(r, k) !== w.week) return;
@@ -1699,6 +1704,7 @@
     else if (kind === "parla") { view.screen = "parla"; render(); window.scrollTo(0, 0); }
     else if (kind === "storia") { view.screen = "storia"; render(); window.scrollTo(0, 0); }
     else if (window.Escritos && Escritos.handles(kind)) Escritos.go(kind, arg);
+    else if (window.Tramo && Tramo.handles(kind)) Tramo.go(kind, arg);
   }
 
   function missions(w, st, nChal) {
@@ -3756,6 +3762,7 @@
     else if (s === "tres" && window.TresLenguas) html = TresLenguas.render(state);
     else if (s === "escritos" && window.Escritos) html = Escritos.render();
     else if (window.Biblioteca && Biblioteca.owns(s)) html = Biblioteca.render(s, view);
+    else if (window.Tramo && Tramo.owns(s)) html = Tramo.render(s);
 
     var gb = $("#glossbox");
     if (gb) gb.classList.remove("on");
@@ -3934,6 +3941,7 @@
     wireHabit();
     if (window.Escritos) Escritos.wire(view.screen);
     if (window.Biblioteca) Biblioteca.wire(view.screen, view);
+    if (window.Tramo) Tramo.wire(view.screen);
     on("#lesback", function () { view.screen = "briefing"; render(); });
     on("#lesplay", function () {
       var lw = course.weeks[view.week - 1];
@@ -5435,7 +5443,7 @@
       navigator.serviceWorker.addEventListener("controllerchange", function () {
         if (!hadController || reloading) return;
         var go = function () {
-          if (["gioco", "lampo", "lezione", "lettura"].indexOf(view.screen) >= 0) { setTimeout(go, 5000); return; }
+          if (["gioco", "lampo", "lezione", "lettura", "tramo-asc", "tramo-scr"].indexOf(view.screen) >= 0) { setTimeout(go, 5000); return; }
           reloading = true;
           location.reload();
         };
@@ -5510,6 +5518,18 @@
     esc: esc, plate: plate, fx: fx, startRound: startRound,
     show: function (s) { view.screen = s; render(); window.scrollTo(0, 0); },
     toWeek: function () { view.tab = "percorso"; view.screen = "briefing"; render(); window.scrollTo(0, 0); }
+  });
+
+  // Tramo C1 (tramo.js): la escucha larga y la tarea integrada de las semanas 27-51.
+  if (window.Tramo) Tramo.attach({
+    state: function () { return state; }, persist: persist, render: render, go: go, toast: toast,
+    esc: esc, mk: mk, plate: plate, speak: speak, listened: noteListening, shuffle: Drills.shuffle, lexicon: scriviLexicon,
+    gain: function (n, strand) { gain(n); if (strand && n) Engine.addStrand(state, strand, n); renderHeader(); },
+    aiKey: aiKey, aiKeys: aiKeys, ui: function () { return UI; }, langName: function () { return UI.langEs; },
+    screen: function () { return view.screen; },
+    show: function (sc) { view.screen = sc; render(); window.scrollTo(0, 0); },
+    toWeek: function () { view.tab = "percorso"; view.screen = "briefing"; render(); window.scrollTo(0, 0); },
+    openReading: function (id) { view.ep = id; view.epFrom = "briefing"; view.screen = "lettura"; render(); window.scrollTo(0, 0); }
   });
 
   // La Biblioteca (biblioteca.js): libros enteros, con el lector y el input.
