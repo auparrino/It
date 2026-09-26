@@ -68,6 +68,8 @@
     return String(s).normalize("NFD").replace(/[̀-ͯ]/g, "");
   }
   function it(w) { return "*" + w + "*"; }
+  // A whole sentence in italics, closed by its own punctuation or a period.
+  function sentEnd(x) { x = String(x).trim(); return it(x) + (/[.!?…»]$/.test(x) ? "" : "."); }
   var LETTER = "a-zà-ÿ";
 
   // Tokens for comparison: lower case, punctuation out; hyphens between
@@ -84,6 +86,17 @@
       .replace(/[-']+(?=[^a-zà-ÿ]|$)/g, " ")
       .split(/\s+/)
       .filter(Boolean);
+  }
+
+  // For each token of tokens(s): whether a pause (comma, colon, period…)
+  // comes before it.  A pronoun after a pause is not attracted by the word
+  // before the comma (Já que você está aqui, me ajuda).
+  function pauses(s) {
+    var out = [];
+    String(s == null ? "" : s).split(/[,;:.!?—–]+/).forEach(function (chunk, ci) {
+      tokens(chunk).forEach(function (t, k) { out.push(ci > 0 && k === 0); });
+    });
+    return out;
   }
 
   function degeminate(s) { return s.replace(/([rs])\1/g, "$1"); }
@@ -222,11 +235,15 @@
     argentina: "f", bahia: "f", "itália": "f", "frança": "f", espanha: "f", alemanha: "f", inglaterra: "f",
     "amazônia": "f", europa: "f", "áfrica": "f", "ásia": "f", "américa": "f", bolívia: "f", colômbia: "f", venezuela: "f",
     china: "f", "índia": "f", "estados": "m", eua: "m", amazonas: "m", "ceará": "m", "espírito": "m", "pará": "m", "paraná": "m",
-    "maranhão": "m", "piauí": "m", acre: "m", "amapá": "m", tocantins: "m", mato: "m", distrito: "m", pantanal: "m", "sertão": "m" });
-  var PLACE_NOART = /^(portugal|lisboa|são|sao|salvador|brasília|brasilia|curitiba|florianópolis|manaus|belém|fortaleza|natal|niterói|paraty|petrópolis|búzios|olinda|ouro|buenos|rosario|córdoba|cordoba|mendoza|montevidéu|madri|paris|londres|roma|cuba|israel|angola|moçambique)$/;
+    "maranhão": "m", "piauí": "m", acre: "m", "amapá": "m", tocantins: "m", mato: "m", distrito: "m", pantanal: "m", "sertão": "m",
+    // Barrios y lugares de Río que llevan artículo (no Leblon, na Lapa, no Centro).
+    leblon: "m", flamengo: "m", lapa: "f", tijuca: "f", centro: "m", catete: "m", arpoador: "m", corcovado: "m", "maracanã": "m", aterro: "m" });
+  var PLACE_NOART = /^(portugal|lisboa|são|sao|salvador|brasília|brasilia|curitiba|florianópolis|manaus|belém|fortaleza|natal|niterói|paraty|petrópolis|búzios|olinda|ouro|buenos|rosario|córdoba|cordoba|mendoza|montevidéu|madri|paris|londres|roma|cuba|israel|angola|moçambique|copacabana|ipanema|botafogo|laranjeiras|santa|urca|niterói|maceió)$/;
 
   /* Disparadores del subjuntivo presente e imperfecto. */
-  var SUBJ_TRIG = ["espero", "espera", "esperamos", "esperam", "quero", "quer", "queremos", "querem", "tomara", "talvez",
+  var SUBJ_TRIG = ["não acho que", "não acredito que", "não creio que", "não penso que", "pode ser que", "a menos que",
+    "recomenda", "recomendam", "sugere", "sugerem", "proponho", "propõe", "exige", "exigem", "fundamental", "essencial",
+    "espero", "espera", "esperamos", "esperam", "quero", "quer", "queremos", "querem", "tomara", "talvez",
     "importante", "necessário", "preciso", "possível", "impossível", "provável", "melhor", "pena", "embora", "caso",
     "duvido", "duvida", "peço", "pede", "pedem", "prefiro", "prefere", "recomendo", "sugiro", "aconselho", "proíbo",
     "quisera", "queria", "esperava", "pedi", "pediu", "mandou", "exigiu", "exijo", "desejo", "deseja", "lamento", "receio", "tenho medo",
@@ -289,7 +306,7 @@
       });
       participlesOf(lemma).forEach(function (pp) {
         pp = pp.toLowerCase();
-        [pp, pp.replace(/o$/, "a"), pp.replace(/o$/, "os"), pp.replace(/o$/, "as")].forEach(function (x) { if (!PIDX[x]) PIDX[x] = lemma; });
+        [pp, pp.replace(/o$/, "a"), pp.replace(/o$/, "os"), pp.replace(/o$/, "as"), pp.replace(/e$/, "es")].forEach(function (x) { if (!PIDX[x]) PIDX[x] = lemma; });
       });
       try { var gg = bareForm(K.gerund(lemma)); if (gg) GIDX[gg.toLowerCase()] = lemma; } catch (e) { /* */ }
     });
@@ -587,6 +604,18 @@
     if (/(ón|én|ués|ía[sn]?)$/.test(x) && !/(ía|ías)$/.test(x)) return true;
     if (/[^qg]ue/.test(x) && x.length > 3 && !/(ue[mi]|uen|uei|ueu)$/.test(x)) return true;
     if (/(aba|abas|aban|ábamos)$/.test(x) && x.length > 4) return true;
+    // gerundio en -iendo, pasados y futuros con la tilde del español
+    // (entendí, volveré, prometió) y el diptongo ie (tiene, hicieron)
+    if (/(iendo|ió)$/.test(x)) return true;
+    // the accent of the Spanish verb endings on a Portuguese verb (comí, hablé, volveré);
+    // not jiló, jacaré, forró, Piauí: those are Portuguese words the lexicon may lack
+    if (/[aei]ré$/.test(x) && isInfinitive(x.slice(0, -1)) || /[éí]$/.test(x) && x.length > 3 && verbForms(deaccent(x)).length) return true;
+    // the Spanish diphthong ie where Portuguese has e (tiempo → tempo, siempre → sempre),
+    // not hierarquia, frieza, piedade, Vieira
+    if (/[^c]ie/.test(x) && x.length > 4) {
+      var noIe = x.replace(/ie/g, "e");
+      if (isPortuguese(noIe) || isPortuguese(deaccent(noIe)) || DATA.esPt[deaccent(x)]) return true;
+    }
     if (/(amos|emos|imos)$/.test(x)) return false;
     if (/[^aeiou]os$/.test(x) && x.length > 5 && DATA.lex[x.slice(0, -1)]) return false;
     if (/(ar|er|ir)se$/.test(x)) return true;
@@ -615,11 +644,11 @@
    "grandes pequeno pequena novo nova velho velha lindo linda bonito bonita feio feia maior menor jovem legal chato chata " +
    "carioca cariocas brasileiro brasileira brasileiros brasileiras português portuguesa argentino argentina argentinos " +
    "homem homens mulher mulheres menino menina criança crianças pai mãe pais filho filha irmão irmã avô avó amigo amiga " +
-   "copacabana ipanema arpoador lapa botafogo leblon niterói samba bossa nova calçadão boteco feira metrô ônibus carro").split(" ").forEach(function (w) { PT_COMMON[w] = 1; });
+   "copacabana ipanema arpoador lapa botafogo leblon niterói maceió samba bossa nova calçadão boteco feira metrô ônibus carro").split(" ").forEach(function (w) { PT_COMMON[w] = 1; });
 
   function isPortuguese(w) {
     return !!(PT_COMMON[w] || DATA.lex[w] || ARTICLES[w] || prepInfo(w) || verbForms(w).length ||
-              participleOf(w) || CLITICS.indexOf(w) >= 0 || SUBJECTS.indexOf(w) >= 0 ||
+              participleOf(w) || (GIDX || buildVerbIndex() || GIDX)[w] || CLITICS.indexOf(w) >= 0 || SUBJECTS.indexOf(w) >= 0 ||
               TER.indexOf(w) >= 0 || HAVER.indexOf(w) >= 0 || SER.indexOf(w) >= 0 || POSSESSIVE.indexOf(w) >= 0);
   }
 
@@ -629,6 +658,10 @@
   function expandGap(stem, given, targets) {
     if (!stem || !/_{3,}/.test(stem)) return null;
     var clean = String(stem).replace(/\([^)]*\)/g, " ").replace(/\s+/g, " ").trim();
+    // «de + aquele → ___», «a flor → as ___»: what is before the arrow is
+    // the prompt, not the sentence the answer goes into.
+    var arrow = clean.lastIndexOf("→", clean.search(/_{3,}/)), lead = "";
+    if (arrow >= 0) { lead = clean.slice(0, arrow).trim(); clean = clean.slice(arrow + 1).trim(); }
     var pieces = clean.split(/_{3,}/);
     var nGaps = pieces.length - 1;
     for (var i = 0; i < nGaps; i++) {
@@ -655,7 +688,7 @@
     var g2 = fill(gParts);
     var t2 = targetParts.map(fill).filter(Boolean);
     if (!g2 || !t2.length) return null;
-    return { given: g2, targets: t2 };
+    return { given: g2, targets: t2, lead: lead };
   }
 
   // The singular an exercise names («limão → ___», «___ (papel)»).
@@ -702,12 +735,14 @@
     "da|dá": "*dá* con tilde es el verbo dar (da); *da* sin tilde es *de + a*.",
     "de|dê": "*dê* con circunflejo es el subjuntivo de dar; *de* es la preposición.",
     "esta|está": "*está* con tilde es el verbo estar; *esta* sin tilde es el demostrativo (esta casa).",
+    "que|quê": "*quê* con circunflejo va solo al final de la frase (por quê?, o quê?); en el medio, *que* (por que você não vem?).",
     "por|pôr": "*pôr* con circunflejo es el verbo (poner); *por* es la preposición.",
     "pode|pôde": "*pôde* con circunflejo es el pasado (pudo); *pode*, el presente (puede).",
     "tem|têm": "*têm* con circunflejo es el plural (eles têm); *tem*, el singular (ele tem).",
     "vem|vêm": "*vêm* con circunflejo es el plural (eles vêm); *vem*, el singular (ele vem).",
     "nos|nós": "*nós* con tilde es el pronombre sujeto (nosotros); *nos* es átono (nos vemos) o *em + os*.",
     "a|há": "*há* es el verbo haver (hay, hace: há dois anos); *a* es artículo o preposición.",
+    "ha|há": "*há* lleva tilde: es el verbo haver (hay, hace: há dois anos).",
     "avo|avó": "*avó* (ó abierta) es la abuela; *avô* (ô cerrada), el abuelo.",
     "avo|avô": "*avô* (ô cerrada) es el abuelo; *avó* (ó abierta), la abuela.",
     "avó|avô": "*avó* (ó abierta) es la abuela; *avô* (ô cerrada), el abuelo.",
@@ -723,11 +758,58 @@
   // Tildes que el Acuerdo de 1990 sacó.
   var PRE1990 = /^(idéia|idéias|assembléia|européia|européias|platéia|jóia|jóias|heróico|heróica|paranóia|estréia|colméia|geléia|boléia|apóio|vôo|vôos|enjôo|enjôos|lêem|crêem|dêem|vêem|pára|pêlo|pêra|pólo|lingüiça|lingüística|freqüente|freqüência|tranqüilo|tranqüila|conseqüência|agüentar|cinqüenta|seqüestro|bilíngüe|argüir)$/;
 
+  // Fixed expressions: the word is not the verb form it looks like.
+  var FIXED = dict({
+    "ou seja": ["subjuntivo", "*Ou seja* es una fórmula fija, como «o sea» en español: siempre con *seja*."],
+    "em suma": ["lexico", "*Em suma* («en suma») es una expresión fija: *suma* es el sustantivo, no un verbo."],
+    "me livre": ["subjuntivo", "*Deus me livre!* es una fórmula fija, como «¡Dios me libre!»: el subjuntivo de *livrar*."]
+  });
+
+  /* Why a word carries its accent: the rule, in one line (the same rules as
+     in Spanish, except the llanas ending in a diphthong: história, água). */
+  function accentWhy(e) {
+    if (/[áêô]-(lo|la|los|las)$/.test(e)) return " Con *-lo, -la* el verbo pierde la *-r* y queda agudo: lleva tilde si termina en -a, -e, -o (comprá-lo, fazê-lo, pô-lo; pero parti-lo).";
+    var m = /^(.*?)([áéíóúâêô])([^áéíóúâêô]*)$/.exec(e);
+    if (!m) return "";
+    var after = m[3], before = m[1];
+    if (/[íú]/.test(m[2]) && (/[aeiou]$/.test(before) || /^[aeiou]/.test(after))) {
+      return " La *i* o la *u* tónica en hiato lleva tilde, como en español: país, saída, saúde.";
+    }
+    if (/[éó]/.test(m[2]) && /^[iu]s?$/.test(after)) return " Los diptongos abiertos *éi, éu, ói* de las agudas llevan tilde: papéis, céu, herói, espanhóis.";
+    // vowel groups after the accent; two strong vowels together are two syllables (gêmeos)
+    var groups = [];
+    (after.match(/[aeiouãõ]+/g) || []).forEach(function (v) { groups.push(v); for (var q = 1; q < v.length; q++) if (/[aeo]/.test(v[q]) && /[aeo]/.test(v[q - 1])) groups.push(v[q]); });
+    if (!groups.length) return " Las agudas y los monosílabos tónicos terminados en -a, -e, -o (con o sin -s) y en -em, -ens llevan tilde: você, café, três, já, também.";
+    if (groups.length === 1 && /^[iu][aeo]s?$/.test(after.replace(/^[^aeiou]+/, ""))) {
+      return " Las llanas terminadas en diptongo (-ia, -io, -ua) llevan tilde: história, água, ciência (en español «historia» y «agua» van sin tilde).";
+    }
+    if (groups.length === 1 && /(l|r|x|n|ps|ão|ãos|ã|ãs|i|is|us|um|uns|ei|eis)$/.test(e)) {
+      return " Las llanas terminadas en -l, -r, -x, -i, -us, -ão llevan tilde: fácil, possível, açúcar, táxi, vírus, órfão.";
+    }
+    if (groups.length >= 2) return " Las esdrújulas llevan siempre tilde, como en español: música, rápido, último.";
+    return "";
+  }
+
   // Each rule returns null or {cat, slip, hint, explain}.  Order matters:
   // grammar that a form reveals beats «that looks Spanish» or «a typo».
   function pairRules(g, e, ctx) {
     var r, gs = deaccent(g), es = deaccent(e);
     var next = ctx.e[ctx.ei + 1] || "", prev = ctx.e[ctx.ei - 1] || "";
+
+    // 0. Two verbs with the same pronoun attached (observa-se / observam-se):
+    //    the verbs are what differs.
+    var spG = g.indexOf("-") > 0 && splitEnclitic(g), spE = e.indexOf("-") > 0 && splitEnclitic(e);
+    if (spG && spE && spG.c === spE.c && spG.v !== spE.v && gs !== es && g.split("-").length === e.split("-").length && !ctx.inner) {
+      var inner = pairRules(spG.v, spE.v, { e: ctx.e, ei: ctx.ei, g: ctx.g, gi: ctx.gi, names: ctx.names, stem: ctx.stem, nominal: false, inner: true });
+      if (inner) {
+        if (spE.c === "se" && inner.cat === "persona") inner = prepInfo(next) && !/m$/.test(spE.v) ? { cat: "persona", slip: false,
+          hint: "Con *se*, ¿el verbo va en singular o en plural? Mirá lo que viene después.",
+          explain: "Cuando el verbo lleva preposición (assistir a, precisar de, gostar de) el *se* es indeterminado y el verbo queda en singular: " + it(e + " " + next) + " (precisa-se de garçons). Solo concuerda sin preposición: vendem-se casas." } : { cat: "persona", slip: false,
+          hint: "Con *se*, ¿el verbo va en singular o en plural?",
+          explain: "Con el *se* pasivo el verbo concuerda con lo que viene después: " + it(e) + " (vendem-se casas, aluga-se um quarto; como «se venden casas» en español)." };
+        return inner;
+      }
+    }
 
     // 1. Crase
     var CR = { "a|à": 1, "as|às": 1, "aquele|àquele": 1, "aquela|àquela": 1, "aqueles|àqueles": 1, "aquelas|àquelas": 1, "aquilo|àquilo": 1 };
@@ -743,7 +825,7 @@
         : "Acá no hay dos *a* que se junten: va " + it(e) + " sin acento grave. Si no hay artículo (vou a Copacabana, de segunda a sexta) o antes de verbo o de masculino, no hay crase." };
 
     // 2. Tildes y nasales (la misma palabra con otros signos)
-    if (gs === es && g !== e) {
+    if (gs === es && g !== e && !/ñ/.test(g)) {
       var key = [g, e].sort().join("|"), key2 = g + "|" + e, key3 = gs + "|" + e;
       if (PRE1990.test(g)) return { cat: "ortografia", slip: true,
         hint: "Revisá la tilde de la palabra marcada: la ortografía cambió.",
@@ -770,17 +852,38 @@
       if (/ês?$/.test(e) && /és?$/.test(g)) return { cat: "tilde", slip: true,
         hint: "Revisá la tilde: ¿aguda o circunfleja?",
         explain: "Con circunflejo: " + it(e) + ". La *ê* es cerrada (português, você, três, mês); la tilde aguda *é* marca la *e* abierta (café, pé)." };
+      if (/és?$/.test(e) && /ês?$/.test(g)) return { cat: "tilde", slip: true,
+        hint: "Revisá la tilde: ¿aguda o circunfleja?",
+        explain: "Con tilde aguda: " + it(e) + ". La *é* es abierta (é, café, pé); la *ê* circunfleja es cerrada (você, três, mês)." };
       if (/[áéíóúâêô]/.test(e) && !/[áéíóúâêô]/.test(g)) return { cat: "tilde", slip: true,
         hint: "Te falta una tilde.",
-        explain: "Falta la tilde: " + it(e) + "." };
+        explain: "Falta la tilde: " + it(e) + "." + accentWhy(e) };
+      var openClose = function (a, b) {
+        for (var q = 0; q < a.length && q < b.length; q++) if (a[q] !== b[q]) return [a[q], b[q]];
+        return null;
+      };
+      var oc = openClose(g, e);
+      if (oc && /[éó]/.test(oc[0]) && /[êô]/.test(oc[1])) return { cat: "tilde", slip: true,
+        hint: "Revisá la tilde: ¿aguda o circunfleja?",
+        explain: "Con circunflejo: " + it(e) + ". La vocal es cerrada (*ê, ô*: você, avô, vendê-la); la tilde aguda marca la abierta (*é, ó*: café, avó)." };
+      if (oc && /[êô]/.test(oc[0]) && /[éó]/.test(oc[1])) return { cat: "tilde", slip: true,
+        hint: "Revisá la tilde: ¿aguda o circunfleja?",
+        explain: "Con tilde aguda: " + it(e) + ". La vocal es abierta (*é, ó*: café, avó, pé); el circunflejo marca la cerrada (*ê, ô*: você, avô)." };
+      if (!/[áéíóúâêô]/.test(e) && /[áéíóúâêô]/.test(g) && !/[ãõ]/.test(g)) return { cat: "tilde", slip: true,
+        hint: "Sobra una tilde.",
+        explain: it(e) + " va sin tilde en portugués." +
+          (/[íú][aeo]s?$/.test(g) ? " En español «" + g + "» la lleva para separar las vocales; en portugués " + it(e) + " se lee igual sin ella (dia, rio, tia)." :
+           /[éíó]$/.test(g) && !isPortuguese(g) ? " Esa tilde es la del español." :
+           /([aeo]s?|em|ens)$/.test(e) && (e.match(/[aeiou]+/g) || []).length >= 2 ? " Las llanas terminadas en -a, -e, -o, -s, -em no llevan tilde, como en español: meses, inglesa, homem." : "") };
       return { cat: "tilde", slip: true, hint: "Revisá las tildes.",
-        explain: "La tilde va así: " + it(e) + "." };
+        explain: "La tilde va así: " + it(e) + "." + accentWhy(e) };
     }
 
     // 3. Nasal: -m final (bom, um, sim, homem) y la n española
     if (/m$/.test(e) && g === e.slice(0, -1) + "n") return { cat: "nasal", slip: false,
       hint: "Revisá cómo termina la palabra marcada.",
-      explain: "En portugués la nasal final se escribe con *m*: " + it(e) + " (bom, um, sim, bem, homem, também, jovem)." };
+      explain: (ES_PT[g] || /^(con|en|un|sin|bien|también|algún|ningún)$/.test(g) ? it(g) + " es la forma del español. " : "") +
+        "En portugués la nasal final se escribe con *m*: " + it(e) + " (bom, um, sim, bem, homem, também, jovem)." };
     if (/[mn][pb]/.test(g) || /n[pb]/.test(gs)) {
       var mpb = g.replace(/n([pb])/g, "m$1");
       if (mpb === e) return { cat: "nasal", slip: false, hint: "Revisá la nasal antes de p o b.",
@@ -803,15 +906,16 @@
       explain: "El «hay» existencial y el «hace» de tiempo son *há* (há muita gente, há dois anos); en el habla, *tem*." };
 
     // 4b. Una palabra del español que el diccionario conoce (mucho, tan, tengo)
-    var early = muitoRule(g, e, ctx);
+    var early = muitoRule(g, e, ctx) || vosRule(g, e);
     if (early) return early;
     var sw0 = spanishWord(g);
     if (sw0 && (sw0.split(" / ").indexOf(e) >= 0 || sw0.split(" ").indexOf(e) >= 0)) return spanishExplain(g, e, sw0, ctx);
 
     // 5. Grafías del español (ñ, ll, -ción, -dad, -ble, -aje, -aba…)
     var SPELL = [
-      [/ñ/g, "nh", "La ñ se escribe *nh*: senhor, amanhã, sonho."],
-      [/ll/g, "lh", "La ll se escribe *lh*: trabalho, mulher, filho."],
+      [/ñ/g, "nh", "La ñ se escribe *nh*: senhor, amanhã, sonho.", "La *ñ* no existe en portugués: ¿cómo se escribe ese sonido?"],
+      [/ñ/g, "n", "Acá la ñ del español es *n* simple (año → ano, pequeño → pequeno).", "La *ñ* no existe en portugués: ¿cómo se escribe esa palabra?"],
+      [/ll/g, "lh", "La ll se escribe *lh*: trabalho, mulher, filho.", "La *ll* no existe en portugués: ¿cómo se escribe ese sonido?"],
       [/ciones$/, "ções", "-ciones se escribe *-ções*."], [/ción$/, "ção", "-ción se escribe *-ção*: canção, nação, informação."],
       [/siones$/, "sões", "-siones es *-sões*."], [/sión$/, "são", "-sión es *-são*: televisão, decisão."],
       [/zón$/, "ção", "-zón es *-ção*: coração, razão."], [/ón$/, "ão", "-ón es *-ão*: melão, avião."],
@@ -822,15 +926,15 @@
       [/aba$/, "ava", "El imperfecto portugués va con *v*: falava, estava, morava."], [/abas$/, "avas", "El imperfecto va con *v*."],
       [/aban$/, "avam", "El imperfecto va con *v* y la 3.ª plural termina en *-am*: falavam, estavam."],
       [/ábamos$/, "ávamos", "El imperfecto va con *v*: falávamos."],
-      [/ue/g, "o", "El diptongo *ue* del español es *o* en portugués: porta, novo, bom, fogo."],
-      [/ie/g, "e", "El diptongo *ie* del español es *e* en portugués: terra, tempo, pedra."],
-      [/^h/, "", "Esa palabra no lleva h."], [/^/, "h", "Esa palabra lleva h (que no suena): hoje, hora, homem."],
-      [/j/g, "lh", "La *j* del español suele ser *lh* en portugués: mulher, olho, conselho."],
-      [/ss/g, "s", "Entre vocales, *s* sola suena /z/: casa, mesa."], [/([aeiouãõ])s(?=[aeiou])/g, "$1ss", "Entre vocales la *s* sorda se escribe *ss*: passar, pássaro, nosso."],
-      [/([aeiou])r(?=[aeiou])/g, "$1rr", "La *r* fuerte entre vocales se escribe *rr*: carro, terra, correr."],
-      [/b/g, "v", "Esa palabra se escribe con *v*: em português v y b suenan distinto (livro, trabalhava)."],
-      [/z/g, "ç", "Esa palabra lleva *ç*: cabeça, praça, preguiça."], [/c(?=[ei])/g, "ç", "Esa palabra lleva *ç*."],
-      [/n$/, "m", "La nasal final se escribe *m*."], [/y/g, "i", "La *y* del español es *i* en portugués."]
+      [/ue/g, "o", "El diptongo *ue* del español es *o* en portugués: porta, novo, bom, fogo.", "Ese diptongo *ue* es del español: ¿cómo queda en portugués?"],
+      [/ie/g, "e", "El diptongo *ie* del español es *e* en portugués: terra, tempo, pedra.", "Ese diptongo *ie* es del español: ¿cómo queda en portugués?"],
+      [/^h/, "", "Esa palabra no lleva h.", "¿Esa palabra lleva *h* en portugués?"], [/^/, "h", "Esa palabra lleva h (que no suena): hoje, hora, homem.", "¿Esa palabra lleva *h* en portugués?"],
+      [/j/g, "lh", "La *j* del español suele ser *lh* en portugués: mulher, olho, conselho.", "Esa *j* es del español: ¿cómo se escribe en portugués?"],
+      [/ss/g, "s", "Entre vocales, *s* sola suena /z/: casa, mesa.", "¿*s* o *ss*?"], [/([aeiouãõ])s(?=[aeiou])/g, "$1ss", "Entre vocales la *s* sorda se escribe *ss*: passar, pássaro, nosso.", "¿*s* o *ss*? Entre vocales suenan distinto."],
+      [/([aeiou])r(?=[aeiou])/g, "$1rr", "La *r* fuerte entre vocales se escribe *rr*: carro, terra, correr.", "¿*r* o *rr*?"],
+      [/b/g, "v", "Esa palabra se escribe con *v*: em português v y b suenan distinto (livro, trabalhava).", "¿*b* o *v*? En portugués suenan distinto."],
+      [/z/g, "ç", "Esa palabra lleva *ç*: cabeça, praça, preguiça.", "¿Con qué letra se escribe ese sonido /s/?"], [/c(?=[ei])/g, "ç", "Esa palabra lleva *ç*.", "¿Con qué letra se escribe ese sonido /s/?"],
+      [/n$/, "m", "La nasal final se escribe *m*.", "¿Cómo se escribe la nasal al final de la palabra?"], [/y/g, "i", "La *y* del español es *i* en portugués.", "¿*y* o *i*?"]
     ];
     var ESPAN = /ción|sión|zón|dad|tad|ble|aje|miento|aba|ue|ie|^h/;
     for (var k = 0; k < SPELL.length; k++) {
@@ -842,7 +946,7 @@
         var isEs = span || (/ñ|ll/.test(g) && !!spanishWord(g));
         if (/^\/b\/g$|^\/z\/g$|^\/y\/g$/.test(String(sp[0])) && spanishWord(g)) isEs = true;
         return { cat: isEs ? "espanol" : "ortografia", slip: false,
-          hint: isEs ? it(g) + " está escrita «a la española». ¿Cómo se escribe en portugués?" : "La palabra marcada está mal escrita.",
+          hint: isEs ? it(g) + " está escrita «a la española». ¿Cómo se escribe en portugués?" : sp[3] || (/\$\/g?$/.test(String(sp[0])) ? "Esa terminación es la del español: ¿cómo termina en portugués?" : "La palabra marcada está mal escrita."),
           explain: it(e) + ": " + sp[2] };
       }
     }
@@ -858,21 +962,41 @@
       explain: "Se escribe " + it(e) + ". En portugués solo se duplican *rr* y *ss*: *rr* es la r fuerte entre vocales (carro ≠ caro) y *ss* la s sorda (passo ≠ paso: no existe; casa suena con z)." };
 
     // 6. Artículos del español
-    if (ES_ARTICLES[g] && (ARTICLES[e] || CLITICS.indexOf(e) >= 0 || prepInfo(e))) return { cat: "espanol", slip: false,
-      hint: it(g) + " es un artículo del español.",
-      explain: "*" + g + "* es español; en portugués " + (ARTICLES[ES_ARTICLES[g]] ? "el artículo es " + it(ES_ARTICLES[g]) : "va " + it(e)) +
-        (ES_ARTICLES[g] !== e ? " (acá: " + it(e) + ")" : "") + ". Los artículos portugueses son *o, a, os, as, um, uma*." };
+    // «eu lo vi»: lo, la before a verb are the Spanish object pronoun (rule 8)
+    var esPron = /^(lo|la|los|las)$/.test(g) && /^(o|a|os|as)$/.test(e) && finite(next) && !isInfinitive(next) &&
+      !(DATA.nouns[next] || DATA.nounsByPlural[next]);
+    if (ES_ARTICLES[g] && !esPron && (ARTICLES[e] || CLITICS.indexOf(e) >= 0 || prepInfo(e))) {
+      var asArt = ARTICLES[ES_ARTICLES[g]] && ARTICLES[e] && !isVerbish(next);
+      return { cat: "espanol", slip: false,
+        hint: it(g) + (asArt ? " es un artículo del español." : " es español."),
+        explain: "*" + g + "* es español; en portugués " + (asArt ? "el artículo es " + it(ES_ARTICLES[g]) : "va " + it(e)) +
+          (asArt && ES_ARTICLES[g] !== e ? " (acá: " + it(e) + ")" : "") + (asArt ? ". Los artículos portugueses son *o, a, os, as, um, uma*." : ".") };
+    }
     if (/^(del|al)$/.test(g) && prepInfo(e)) return { cat: "contraccion", slip: false,
       hint: it(g) + " es la contracción del español. ¿Cuál es la portuguesa?",
       explain: (g === "del" ? "*de + o = do* (da, dos, das)" : "*a + o = ao* (à, aos, às)") + ": acá " + it(e) + "." };
 
     // 7. «a» personal escondida en una contracción (vi ao João → vi o João)
+    //    and a preposition with its article where only the article goes
+    //    (ganhou ao prêmio → ganhou o prêmio; para ao Rio → para o Rio)
     var pgA = prepInfo(g);
-    if (pgA && pgA.base === "a" && pgA.art && ARTICLES[e] && pgA.art === e && doVerbBefore(ctx)) return { cat: "a_personal", slip: false,
-      hint: "Hay una preposición que en español va y en portugués no.",
-      explain: "El objeto directo de persona no lleva «a» en portugués: " + it(e + " " + capN(next, ctx)) + ", conheço o João, visitei os meus pais. (En *vi a Maria* la *a* es el artículo, no preposición.)" };
+    if (pgA && pgA.art && ARTICLES[e] && pgA.art === e && !PREP_BASE[g]) {
+      var lemA = verbLemmas(prev);
+      var ioVerb = lemA.some(function (l) { return IO_VERB.test(l) || (REGENCIA[l] && REGENCIA[l][0] === pgA.base && !/^(ajudar|ensinar)$/.test(l)); });
+      // verbs of things (ganhou o Nobel, escreveu o livro): the object is not a person
+      var thingVerb = lemA.some(function (l) { return /^(ganhar|escrever|ler|comprar|vender|tirar|fazer|perder|receber|publicar|assinar|derrubar|lançar|abrir|fechar|pagar|construir|pintar|compor|filmar)$/.test(l); });
+      var obj = e + " " + capN(next, ctx) + (POSSESSIVE.indexOf(next) >= 0 && ctx.e[ctx.ei + 2] ? " " + ctx.e[ctx.ei + 2] : "");
+      if (pgA.base === "a" && lemA.length && !ioVerb && !thingVerb && (doVerbBefore(ctx) || personAt(ctx, ctx.ei + 1))) return { cat: "a_personal", slip: false,
+        hint: "Hay una preposición que en español va y en portugués no.",
+        explain: "El objeto directo de persona no lleva «a» en portugués: " + it(obj) + ", conheço o João, visitei os meus pais. (En *vi a Maria* la *a* es el artículo, no preposición.)" };
+      return { cat: "preposicion", slip: false,
+        hint: "Sobra una preposición en la palabra marcada.",
+        explain: it(g) + " es *" + pgA.base + " + " + e + "*: acá sobra la preposición y va solo el artículo, " + it(obj) +
+          (PREP_BASE[prev] ? ": después de *" + prev + "* no va otra preposición." :
+           lemA.length && !ioVerb ? ": *" + lemA[0] + "* lleva objeto directo, sin preposición." : ".") };
+    }
 
-    if (g === "a" && e === "o" && ctx.names && ctx.names.indexOf(next) >= 0 && doVerbBefore(ctx)) return { cat: "a_personal", slip: false,
+    if (g === "a" && e === "o" && ctx.names && ctx.names.indexOf(next) >= 0 && !PLACE_ART[next] && !DATA.nouns[next] && doVerbBefore(ctx)) return { cat: "a_personal", slip: false,
       hint: "Esa «a» delante del nombre, ¿es un artículo o la «a» personal del español?",
       explain: "El objeto directo de persona no lleva «a» en portugués; delante de un nombre masculino va el artículo *o*: " + it("o " + capN(next, ctx)) + " (vi o Pedro, espero o Lucas). *A Maria* sí, porque ahí *a* es el artículo femenino." };
     if (g === "desde" && e === "há") return { cat: "preposicion", slip: false,
@@ -887,8 +1011,18 @@
 
     // 9. Artículos
     if (ARTICLES[g] && ARTICLES[e]) return articleRule(g, e, ctx);
+    // «a» is also the preposition: before a verb, a city, a name, a number
+    // (Sou a Rosario → de; vou a comer) it is a preposition choice.
+    if (/^a$/.test(g) && prepInfo(e) && !ARTICLES[e] &&
+        (isVerbish(next) || PLACE_NOART.test(next) || /^\d/.test(next) || (ctx.names || []).indexOf(next) >= 0 && !PLACE_ART[next]) && !prepInfo(e).art) {
+      return prepRule(g, e, { base: "a", art: null }, prepInfo(e), ctx);
+    }
     if (ARTICLES[g] && prepInfo(e) && !ARTICLES[e]) {
       var pe0 = prepInfo(e);
+      var lpv = verbLemmasBefore(ctx);
+      for (var r1 = 0; r1 < lpv.length; r1++) if (!pe0.art && REGENCIA[lpv[r1]] && REGENCIA[lpv[r1]][0] === pe0.base) return { cat: "regencia", slip: false,
+        hint: "Ese verbo pide una preposición: ¿cuál?",
+        explain: "*" + lpv[r1] + " " + pe0.base + "*: " + REGENCIA[lpv[r1]][1] + ". Acá: " + it(prev + " " + e) + "." };
       if (pe0.art === g) {
         var lp0 = verbLemmas(prev);
         if (lp0.indexOf("gostar") >= 0) return { cat: "gostar", slip: false,
@@ -921,6 +1055,23 @@
       hint: "«Gustar» no se dice así en portugués: el que gusta es el sujeto.",
       explain: "Gostar va al revés que gustar: la persona es el sujeto y lo que gusta va con *de*: eu gosto de café, ela gosta de dançar. Acá: " + it(e) + "." };
 
+    // 12. Expresiones fijas (ou seja, em suma, Deus me livre)
+    var fx = FIXED[prev + " " + e];
+    if (fx && g !== e) return { cat: fx[0], slip: false,
+      hint: "Es una expresión fija: ¿cómo se dice entera?",
+      explain: fx[1] };
+
+    // 12a. La terminación del español en un verbo portugués (cheguê → cheguei, falaré → falarei, chegó → chegou)
+    if (/[éó]$/.test(g) && !isPortuguese(g) && verbForms(e).length && (/ei$/.test(e) && gs === es.slice(0, -1) || /ou$/.test(e) && gs.slice(0, -1) === es.slice(0, -2))) return { cat: "espanol", slip: false,
+      hint: it(g) + " tiene la terminación del español. ¿Cómo termina en portugués?",
+      explain: /ei$/.test(e)
+        ? "La terminación *-é* del español es *-ei* en portugués, sin tilde: " + it(e) + " (falei, cheguei, falarei; «hablé» → falei)."
+        : "La terminación *-ó* del español es *-ou* en portugués: " + it(e) + " (falou, chegou; «habló» → falou)." };
+
+    // 12b. El voseo rioplatense (querés, podés; abrí, hablá)
+    r = vosRule(g, e);
+    if (r) return r;
+
     // 13. Participios y verbos
     r = participleRule(g, e, ctx);
     if (r) return r;
@@ -930,13 +1081,33 @@
     var infG = g !== e && isInfinitive(g) && !isInfinitive(e) && !participleOf(e) &&
       verbForms(e).some(function (x) { return x.lemma === g || x.lemma === g + "-se"; });
     if (!infG && stemInf && stemInf[1].toLowerCase() === g && verbForms(e).length) infG = true;
+    if (ARTICLES[prev] && (DATA.nouns[e] || DATA.nounsByPlural[e])) infG = false;   // a venda: the noun
     if (infG) {
-      var fe0 = verbForms(e).filter(function (x) { return x.lemma.replace(/-se$/, "") === g; })[0] || verbForms(e)[0];
+      // «chegarem» is futuro do subjuntivo after quando / se, infinitivo pessoal elsewhere
+      var fut0 = futCtx(ctx);
+      var fes = verbForms(e).filter(function (x) { return x.lemma.replace(/-se$/, "") === g; });
+      if (!fes.length) fes = verbForms(e);
+      fes = fes.slice().sort(function (a, b) {
+        var ra = a.tense === "subjFuturo" ? (fut0 ? 0 : 2) : a.tense === "infPessoal" ? 1 : 1.5;
+        var rb = b.tense === "subjFuturo" ? (fut0 ? 0 : 2) : b.tense === "infPessoal" ? 1 : 1.5;
+        return ra - rb;
+      });
+      var fe0 = fes[0];
       if (fe0 && fe0.tense === "subjFuturo") return futSubjExplain(g, e, fe0, ctx, true);
       if (fe0 && fe0.tense === "infPessoal") return infPessExplain(g, e, ctx);
+      if (fe0 && fe0.tense === "subjPresente" && imperativeCtx(ctx)) return imperativeExplain(g, e, ctx, true);
+      if (fe0 && /^subj(Presente|Imperfeito)$/.test(fe0.tense)) {
+        var bef14 = ctx.e.slice(0, ctx.ei).join(" ");
+        var trig14 = SUBJ_TRIG.filter(function (w) { return (" " + bef14 + " ").indexOf(" " + w + " ") >= 0; })[0] ||
+          (/\b(acho|acha|creio|penso)\s+que\b/.test(bef14) && /\bnão\b/.test(bef14) ? "não acho que" : null);
+        return { cat: "subjuntivo", slip: false,
+          hint: "Escribiste el infinitivo: ¿qué forma pide lo que viene antes?",
+          explain: it(g) + " es el infinitivo; " + (trig14 ? "después de " + it(trig14) + " va el subjuntivo" : "acá va el subjuntivo") + ": " + it(e) +
+            ". Deseo, duda, pedido, emoción, *para que, embora, talvez* → subjuntivo, como en español." };
+      }
       return { cat: "persona", slip: false,
         hint: "Escribiste el infinitivo: hay que conjugarlo para la persona de la frase.",
-        explain: it(g) + " es el infinitivo; conjugado para esta persona queda " + it(e) + (fe0 ? " (" + TENSE_ES[fe0.tense] + ")" : "") + "." };
+        explain: it(g) + " es el infinitivo; conjugado para esta persona queda " + it(e) + (fe0 ? " (" + tensesOf(e, fe0) + ")" : "") + "." };
     }
 
     // 14b. El mismo adjetivo en otro género o número (alemão / alemã); dois / duas
@@ -956,7 +1127,9 @@
 
     // 16. Falsos amigos
     var fa = DATA.falsi[g] || FALSOS[g] || (/s$/.test(g) && (DATA.falsi[g.slice(0, -1)] || FALSOS[g.slice(0, -1)]));
-    if (fa && g !== e && fa[0]) return { cat: "falso_amigo", slip: false,
+    // the same word in another form (fechas / fecha, jornals / jornais) is not a false friend
+    var sameWord = gs.slice(0, 4) === es.slice(0, 4) && editDistance(gs, es) <= 2;
+    if (fa && g !== e && fa[0] && !sameWord) return { cat: "falso_amigo", slip: false,
       hint: it(g) + " existe en portugués, pero no significa lo que creés.",
       explain: it(g) + " en portugués significa «" + fa[0] + "». Acá va " + it(e) + "." + (fa[2] ? " " + fa[2] : "") };
 
@@ -976,7 +1149,9 @@
     // 18. Plural en un ejercicio de plurales
     if (ctx.nominal) {
       var sg = singularFromStem(ctx.stem) || (DATA.nounsByPlural[e] || {}).s;
-      if (sg || /s$/.test(e)) return { cat: "plural", slip: false,
+      // a slip of the finger (floes, floers) is not a plural rule
+      var slipOnly = editDistance(gs, es) === 1 && es.length >= 4 && !(sg && naivePlurals(sg).indexOf(g) >= 0) && !/(ões|ães|ãos|ais|éis|óis|ns)$/.test(e);
+      if ((sg || /s$/.test(e)) && !slipOnly) return { cat: "plural", slip: false,
         hint: "Revisá el plural de la palabra marcada.",
         explain: pluralExplain(sg, e) };
     }
@@ -994,7 +1169,7 @@
     if (/(ões|ães|ãos)$/.test(e) && /(ões|ães|ãos|ãoes|ones|aos|ãos)$/.test(g) && g.slice(0, 2) === e.slice(0, 2)) return { cat: "plural", slip: false,
       hint: "Revisá el plural de la palabra marcada: ¿-ões, -ães o -ãos?",
       explain: pluralExplain(e.replace(/(ões|ães|ãos)$/, "ão"), e) };
-    if (/(ais|éis|óis|uis|eis)$/.test(e) && /(ales|eles|oles|uls|als|els|ols|les)$/.test(g) && g.slice(0, 2) === e.slice(0, 2)) {
+    if (/(ais|éis|óis|uis|eis)$/.test(e) && /(ales|eles|oles|uls|als|els|ols|les|ils|iles)$/.test(g) && g.slice(0, 2) === e.slice(0, 2)) {
       var sgl = e.replace(/ais$/, "al").replace(/éis$/, "el").replace(/óis$/, "ol").replace(/uis$/, "ul").replace(/eis$/, "il");
       return { cat: "plural", slip: false, hint: "Revisá el plural de la palabra terminada en -l.", explain: pluralExplain(sgl, e) };
     }
@@ -1015,7 +1190,7 @@
     }
 
     // 22. Nombre propio en español (Juan → João, Londres → Londres)
-    if (ctx.names && ctx.names.indexOf(e) >= 0 && !isPortuguese(g) && g !== e) return { cat: "lexico", slip: false,
+    if (ctx.names && ctx.names.indexOf(e) >= 0 && !isPortuguese(g) && g !== e && !isVerbish(e) && !DATA.lex[e]) return { cat: "lexico", slip: false,
       hint: "Ese nombre también se dice distinto en portugués.",
       explain: "En portugués: " + it(e.charAt(0).toUpperCase() + e.slice(1)) + ". Muchos nombres propios se adaptan (Juan → João, José → José, Pedro → Pedro, Nueva York → Nova York)." };
 
@@ -1035,7 +1210,7 @@
       explain: it(g) + " significa «" + lx + "». Acá va " + it(e) + (DATA.lex[e] ? " («" + DATA.lex[e] + "»)" : "") + "." };
 
     // 26. Tipeo más largo
-    if (dist <= (es.length > 7 ? 2 : 1) && !verbForms(g).length) return { cat: "tipeo", slip: true,
+    if (dist <= (es.length > 7 ? 2 : 1) && !verbForms(g).length && !ARTICLES[g] && !prepInfo(g) && !PT_COMMON[g]) return { cat: "tipeo", slip: true,
       hint: "Hay un error de tipeo en la palabra marcada.",
       explain: "Error de tipeo: " + it(e) + "." };
 
@@ -1045,6 +1220,19 @@
     return { cat: "lexico", slip: false,
       hint: "La palabra marcada no es la que va.",
       explain: "Acá va " + it(e) + (DATA.lex[e] ? " («" + DATA.lex[e] + "»)" : "") + "." };
+  }
+
+  // The Rioplatense voseo (querés, podés; imperative abrí, hablá).
+  function vosRule(g, e) {
+    var vos = /^(.+?)(á|é|í)(s?)$/.exec(g);
+    if (!vos || isPortuguese(g)) return null;
+    var infV = deaccent(vos[1]) + { "á": "ar", "é": "er", "í": "ir" }[vos[2]];
+    if (!verbForms(e).some(function (x) { return x.lemma.replace(/-se$/, "") === infV; })) return null;
+    return { cat: "espanol", slip: false,
+      hint: it(g) + " es el voseo del español. ¿Cómo va con *você*?",
+      explain: vos[3]
+        ? it(g) + " es el voseo rioplatense («vos " + g + "»); en portugués *você* va con la 3.ª persona: " + it(e) + " (você quer, você pode, você tem)."
+        : it(g) + " es el imperativo del voseo («" + g + "»); en portugués, para pedirle algo a *você*, el imperativo toma la forma del subjuntivo: " + it(e) + " (fale, coma, abra; en el habla de Brasil también *fala!*)." };
   }
 
   function spanishExplain(g, e, tr, ctx) {
@@ -1089,6 +1277,14 @@
   var DO_VERB = /^(ver|conhecer|amar|ajudar|convidar|visitar|esperar|chamar|encontrar|abraçar|beijar|cumprimentar|levar|buscar|procurar|escutar|ouvir|olhar|entender|acompanhar|admirar|respeitar|odiar|adorar|assistir|deixar|acordar|apresentar|receber)$/;
   var IO_VERB = /^(dar|dizer|perguntar|pedir|escrever|telefonar|responder|mandar|enviar|mostrar|contar|explicar|emprestar|oferecer|devolver|ensinar|agradecer|obedecer)$/;
 
+  // A person at e[i]: a name, a relative, a pronoun, «o meu irmão».
+  function personAt(ctx, i) {
+    var w = ctx.e[i] || "", w2 = ctx.e[i + 1] || "";
+    if (FAMILY.indexOf(w) >= 0 || /^(ele|ela|eles|elas|você|vocês|todos|ninguém|alguém)$/.test(w)) return true;
+    if (POSSESSIVE.indexOf(w) >= 0 && FAMILY.indexOf(w2) >= 0) return true;
+    return !!(ctx.names && ctx.names.indexOf(w) >= 0 && !PLACE_ART[w] && !PLACE_NOART.test(w) && !DATA.nouns[w] && !DATA.lex[w]);
+  }
+
   function doVerbBefore(ctx) {
     for (var k = ctx.ei - 1; k >= 0 && k >= ctx.ei - 3; k--) {
       var w = ctx.e[k];
@@ -1120,9 +1316,12 @@
     if (/^(le|les)$/.test(g) && /^(lhe|lhes|o|a|os|as)$/.test(e)) return { cat: "pronome", slip: false,
       hint: it(g) + " es el pronombre del español.",
       explain: "*" + g + "* es español: en portugués el indirecto es *lhe / lhes* y el directo *o, a, os, as*. Acá: " + it(e) + ". En el habla de Brasil también se oye *te* (para você) o *ele* (vi ele)." };
+    if (/^(lo|la|los|las|le|les)$/.test(g) && /^(ele|ela|eles|elas)$/.test(e) && PREP_BASE[prev]) return { cat: "pronome", slip: false,
+      hint: "Ese pronombre es del español: ¿cómo se dice «a ella» en portugués?",
+      explain: "El «le / se lo» del español no se traduce así: en el habla de Brasil el indirecto va con preposición, " + it(prev + " " + e) + " (dei para ela, contei para ele); en lo formal, *lhe* (dei-lhe)." };
     if (/^(lo|la|los|las)$/.test(g) && /^(o|a|os|as|lhe|ele|ela)$/.test(e)) return { cat: "pronome", slip: false,
       hint: "Ese pronombre es del español.",
-      explain: "Suelto, *" + g + "* es español: el objeto directo es " + it(e) + " (eu o vi, eu a conheço). *-lo, -la* solo existen pegados a un verbo que terminaba en -r, -s o -z: vou comprá-lo, fi-lo." };
+      explain: "Suelto, *" + g + "* es español: el objeto directo es " + it(e) + " (eu o vi, eu a conheço; en el habla de Brasil, *vi ele*). *-lo, -la* solo existen pegados a un verbo que terminaba en -r, -s o -z: vou comprá-lo, fi-lo." };
     if (/^(seu|sua|seus|suas)$/.test(g) && /^(dele|dela|deles|delas)$/.test(e)) return { cat: "pronome", slip: false,
       hint: "*seu* en Brasil se entiende como «de você». ¿De quién es?",
       explain: "En Brasil *seu / sua* se entiende «de você»; para «de él, de ella» va " + it((prev ? "" : "o ") + (ctx.e[ctx.ei - 1] || "") + " " + e).replace(/\*\s+/, "*") + " detrás del sustantivo: o carro " + e + "." };
@@ -1154,6 +1353,7 @@
     ["mau má maus más|mal", "*mau / má* = malo (adjetivo); *mal* = mal (adverbio: dormi mal)."],
     ["tudo|todo toda todos todas", "*tudo* = todo, pronombre invariable (comi tudo, tudo bem); *todo / toda* acompaña a un sustantivo (todo dia, toda a cidade)."],
     ["mas|mais", "*mas* = pero; *mais* = más."],
+    ["mas|porém contudo entretanto todavia", "*mas* va siempre al comienzo de lo que se opone (…, mas falhou); *porém, contudo, entretanto* también pueden ir en el medio, entre comas (o plano, porém, falhou)."],
     ["almoço almoços|jantar jantares|lanche lanches", "*almoço* = almuerzo; *jantar* = cena; *lanche* = merienda o algo liviano."],
     ["loja lojas|negócio negócios", "*loja* = tienda; *negócio* = negocio (el trato, la empresa)."],
     ["amanhã|manhã manhãs", "*amanhã* = mañana (el día siguiente); *manhã* = la mañana (parte del día: de manhã)."],
@@ -1228,9 +1428,65 @@
       if (SUBJ[toks[i]] != null) return SUBJ[toks[i]];
       if (toks[i] === "gente" && toks[i - 1] === "a") return 2;
     }
+    if (/(^|\s)a gente$/.test(ctx.lead || "")) return 2;
     var stem = String(ctx && ctx.stem || "").replace(/\(.*?\)/g, " ").toLowerCase();
     var m = /(^|[^a-zà-ÿ])(eu|tu|ele|ela|você|nós|eles|elas|vocês)(?=[^a-zà-ÿ]|$)/.exec(stem);
     return m ? SUBJ[m[2]] : null;
+  }
+
+  /* The verb is in a clause about the future with quando, se, assim que…
+     (quando eu chegar), not after a modal or a preposition (vou chegar). */
+  // The tenses a form has for one person (conseguimos: presente o pretérito perfeito).
+  function tensesOf(e, f) {
+    var ts = [];
+    verbForms(e).forEach(function (x) { if (x.lemma === f.lemma && x.p === f.p && ts.indexOf(TENSE_ES[x.tense]) < 0 && TENSE_ES[x.tense]) ts.push(TENSE_ES[x.tense]); });
+    return ts.length ? ts.join(" o ") : TENSE_ES[f.tense];
+  }
+
+  function futCtx(ctx) {
+    for (var k = ctx.ei - 1; k >= 0 && k >= ctx.ei - 4; k--) {
+      var w = ctx.e[k], p = ctx.e[k - 1] || "";
+      if (w === "se" && (finite(p) || isInfinitive(p))) continue;   // vai se casar: the pronoun
+      if (/^(quando|se|enquanto|conforme|caso|onde|quem|como)$/.test(w)) return true;
+      if (w === "que" && /^(assim|logo|sempre|depois|o)$/.test(p)) return true;
+      // another verb in between: «quando você vai voltar?» is ir + infinitive
+      if (finite(w) && !SUBJ_P[w] && !ARTICLES[w] && !CLITIC_ONLY[w]) return false;
+    }
+    return false;
+  }
+  /* An order: nothing before the verb but «não», a pronoun, «por favor» or a
+     vocative, or the exercise asks for the imperative. */
+  function imperativeCtx(ctx) {
+    var w0 = ctx.e[ctx.ei] || "";
+    if (DATA.nouns[w0] || DATA.nounsByPlural[w0]) return false;
+    if (/imperativ|orden|pedile|pedí|decile que/i.test(String(ctx.prompt || ""))) return true;
+    var before = ctx.e.slice(0, ctx.ei);
+    var epz = ctx.epz || [];
+    for (var k = ctx.ei; k > 0; k--) if (epz[k]) { before = ctx.e.slice(k, ctx.ei); break; }
+    if (before.some(function (w) { return w === "que" || SUBJ_TRIG.indexOf(w) >= 0; })) return false;
+    return before.every(function (w) { return /^(não|nunca|me|te|se|nos|lhe|lhes|o|a|os|as|por|favor|e|então|agora|já|gente|moço|moça|pessoal)$/.test(w); });
+  }
+  function imperativeExplain(g, e, ctx, fromInf) {
+    return { cat: "subjuntivo", slip: false,
+      hint: "Es una orden o un pedido: ¿qué forma toma el verbo con *você*?",
+      explain: (fromInf ? it(g) + " es el infinitivo. " : "") + "Para dar una orden o pedir algo a *você* se usa la forma del subjuntivo: " + it(e) +
+        " (fale, coma, abra, venha; no la de «ele fala»). Como el «hable usted» del español. En el habla de Brasil también se oye *fala!*, *vem!*." };
+  }
+  // A conjugated verb where the infinitive goes (vou viajo, posso saio, gosto de danço).
+  function infinitiveExplain(g, e, ctx) {
+    var prev = ctx.e[ctx.ei - 1] || "", lp = verbLemmas(prev);
+    var prep = PREP_BASE[prev] || CONTR[prev] || /^(pra|ao)$/.test(prev);
+    var goes = lp.indexOf("ir") >= 0;
+    var shown = !ctx.g || ctx.g.indexOf(prev) >= 0;   // the hint names only what the learner wrote
+    return { cat: "persona", slip: false,
+      hint: !shown ? "Cuando van dos verbos juntos, o un verbo después de una preposición, ¿el segundo se conjuga?"
+        : prep ? "Después de la preposición *" + prev + "*, ¿el verbo se conjuga?" : lp.length ? "Después de *" + prev + "*, ¿el segundo verbo se conjuga?" : "¿Ese verbo se conjuga acá?",
+      explain: prep
+        ? "Después de una preposición el verbo va en infinitivo, como en español: " + it(prev + " " + e) + " (gosto de dançar, para conhecer, sem saber)."
+        : lp.length
+          ? "Cuando dos verbos van juntos, el segundo queda en infinitivo: " + it(prev + " " + e) +
+            (goes ? ". Es el «voy a…» del español, pero sin *a*: vou comer, vamos sair." : " (posso sair, quero ir, preciso trabalhar), como en español «puedo salir».")
+          : "Acá va el infinitivo: " + it(e) + ", no la forma conjugada " + it(g) + "." };
   }
 
   function futSubjExplain(g, e, a, ctx, fromInf) {
@@ -1242,10 +1498,17 @@
     return { cat: "futuro_subj", slip: false,
       hint: (trig ? "Después de *" + trig + "* hablando del futuro, " : "Hablando de algo futuro o hipotético, ") + "el portugués tiene un tiempo que el español perdió.",
       explain: "Va el futuro do subjuntivo: " + it(e) + (fromInf || /^(ter|ser|ir|fazer|poder|querer|vir|ver|saber|estar|dizer|trazer|pôr)$/.test(g) ? ", no el infinitivo " + it(g) : ", no " + it(g)) +
-        ". Se forma con la 3.ª plural del perfeito sin *-ram*" + (p3 && /ram$/.test(p3) ? " (" + p3 + " → " + p3.replace(/ram$/, "r") + ")" : "") +
+        ". Se forma con la 3.ª plural del perfeito sin *-ram*" + (p3 && /ram$/.test(p3) ? " (" + p3 + " → " + p3.replace(/ram$/, "r").replace(/([aeiou])[íú]r$/, function (m) { return deaccent(m); }) + ")" : "") +
         ": quando eu for, se você quiser, assim que eles chegarem." };
   }
-  function infPessExplain(g, e, ctx) {
+  function infPessExplain(g, e, ctx, b, a) {
+    var before = ctx.e.slice(0, ctx.ei).join(" ");
+    if (/\ba gente\s*$/.test(before)) return { cat: "inf_pessoal", slip: false,
+      hint: "*a gente* significa «nosotros», pero ¿con qué persona va el verbo?",
+      explain: "*A gente* va con la 3.ª del singular, también en el infinitivo: " + it("a gente " + e) + " (para a gente ir, antes de a gente sair)." };
+    if (b && a && b.tense === "infPessoal" && a.tense === "infPessoal" && b.p !== a.p && !isInfinitive(g)) return { cat: "inf_pessoal", slip: false,
+      hint: "El infinitivo concuerda con su sujeto: ¿quién es?",
+      explain: it(g) + " es la forma de *" + PERS_ES[b.p] + "*; el sujeto del infinitivo es *" + PERS_ES[a.p] + "*: " + it(e) + " (para nós irmos, para eles irem)." };
     return { cat: "inf_pessoal", slip: false,
       hint: "Ese infinitivo tiene su propio sujeto: en portugués lleva persona.",
       explain: "Infinitivo pessoal: " + it(e) + ". Cuando el infinitivo tiene sujeto propio lleva la terminación de la persona: para nós *irmos*, antes de vocês *saírem*, é bom eles *saberem*." };
@@ -1262,6 +1525,10 @@
     }
     var gl = participleOf(g);
     var real = participlesOf(lem);
+    if (!gl && (SER.indexOf(prev) >= 0 || TER.indexOf(prev) >= 0 || HAVER.indexOf(prev) >= 0) &&
+        verbForms(g).some(function (v) { return v.lemma === lem; })) return { cat: "participio", slip: false,
+      hint: "Después de *" + prev + "*, ¿qué forma del verbo va?",
+      explain: "Después de *" + prev + "* va el participio: " + it(prev + " " + e) + " (de *" + lem.replace(/-se$/, "") + "*), no una forma conjugada como " + it(g) + "." };
     var regP = regularForm(lem, "participio");
     // doble participio (pago/pagado): ter/haver + regular, ser/estar/ficar + irregular
     if (gl === lem && g !== e && g.replace(/(a|os|as)$/, "o") !== e.replace(/(a|os|as)$/, "o")) {
@@ -1278,12 +1545,23 @@
       explain: "Participio irregular: " + it(lem) + " → " + it(e) + ", no *" + g + "*. Los más frecuentes: feito, dito, escrito, visto, vindo, aberto, posto, coberto." };
     // concordancia del participio en la pasiva / con estar y ficar
     if (gl === lem && g.replace(/(a|os|as)$/, "o") === e.replace(/(a|os|as)$/, "o")) {
-      if (SER.indexOf(prev) >= 0 || /^(sido)$/.test(prev)) return { cat: "participio", slip: false,
-        hint: "El participio concuerda con el sujeto. Revisá la terminación.",
-        explain: "Con *ser, estar* y *ficar* el participio concuerda en género y número con el sujeto: " + it(e) + " (a casa foi construída, os livros foram vendidos)." };
+      if (SER.indexOf(prev) >= 0 || /^(sido)$/.test(prev)) {
+        var subjN = null;
+        for (var k = ctx.ei - 2; k >= 0 && !subjN; k--) if (DATA.nouns[ctx.e[k]] || DATA.nounsByPlural[ctx.e[k]]) subjN = ctx.e[k];
+        var sgN = subjN && nounGender(subjN);
+        return { cat: "participio", slip: false,
+          hint: "El participio concuerda con el sujeto. Revisá la terminación.",
+          explain: "Con *ser, estar* y *ficar* el participio concuerda en género y número con el sujeto: " + it(e) +
+            (subjN ? ", como *" + subjN + "*" + (sgN ? " (" + (sgN === "m" ? "masculino" : "femenino") + " " + (DATA.nounsByPlural[subjN] && DATA.nounsByPlural[subjN].pl === subjN && DATA.nounsByPlural[subjN].s !== subjN ? "plural" : "singular") + ")" : "") : "") +
+            ". A casa foi construída, os livros foram vendidos." };
+      }
       if (TER.indexOf(prev) >= 0 || HAVER.indexOf(prev) >= 0) return { cat: "participio", slip: false,
         hint: "Con *ter*, ¿el participio cambia?",
         explain: "Con *ter* y *haver* el participio no cambia: " + it(prev + " " + e) + " (ela tinha saído, eles têm trabalhado)." };
+      // the participle on its own (pôr → posto): the dictionary form
+      if (ctx.e.length === 1) return { cat: "participio", slip: false,
+        hint: "El participio suelto, ¿en qué género y número se cita?",
+        explain: "El participio de *" + lem.replace(/-se$/, "") + "* es " + it(e) + "; solo cambia (" + it(g) + ") cuando concuerda con un sustantivo: a mesa posta, as cartas escritas." };
     }
     return null;
   }
@@ -1293,6 +1571,11 @@
     var prevE = ctx.e[ctx.ei - 1] || "";
     var before = ctx.e.slice(0, ctx.ei).join(" ");
     if (!fe.length) return null;
+    if (prepInfo(e) || PT_COMMON[e] && !finite(g)) return null;
+    if ((ARTICLES[prevE] || POSSESSIVE.indexOf(prevE) >= 0 || /^(este|esta|esse|essa|aquele|aquela)$/.test(prevE)) && (DATA.nouns[e] || DATA.nounsByPlural[e])) return null;
+    if (SER.indexOf(prevE) >= 0 && DATA.adj[e] && !fg.some(function (b) { return fe.some(function (a) { return a.lemma === b.lemma && a.tense === b.tense; }); })) return null;
+    if (/^(à|às|ao|aos|da|do|das|dos|pela|pelo|pelas|pelos|na|no|nas|num|numa)$/.test(prevE) && (DATA.nouns[e] || DATA.nounsByPlural[e]) &&
+        !isInfinitive(e) && !/(rmos|rem|res)$/.test(e)) return null;
     // Existential haver is impersonal: houve, havia (never houveram, haviam)
     if (/^(houveram|haviam|haverão|haveriam|hajam|houvessem)$/.test(g) && /^(houve|havia|haverá|haveria|haja|houvesse)$/.test(e)) return { cat: "persona", slip: false,
       hint: "*haver* con el sentido de «existir», ¿tiene plural?",
@@ -1311,6 +1594,13 @@
     var subjP = subjectPerson(ctx);
     if (subjP != null) fe = fe.slice().sort(function (a, b) { return (b.p === subjP ? 1 : 0) - (a.p === subjP ? 1 : 0); });
     else fe = fe.slice().sort(function (a, b) { return (b.p === 2 ? 1 : 0) - (a.p === 2 ? 1 : 0); });
+    // The future subjunctive only after quando, se, assim que… (vou viajar
+    // is an infinitive, even if «viajar» is also the form of «quando eu viajar»).
+    var futC = futCtx(ctx);
+    fe = fe.slice().sort(function (a, b) {
+      var ra = a.tense === "subjFuturo" ? (futC ? 0 : 2) : 1, rb = b.tense === "subjFuturo" ? (futC ? 0 : 2) : 1;
+      return ra - rb;
+    });
     var lemE = fe[0].lemma;
     var lemG = fg.length ? fg[0].lemma : null;
 
@@ -1319,19 +1609,30 @@
       hint: "Con *gostar* la persona es el sujeto: sin pronombre delante.",
       explain: "*Me gosta* es un calco de «me gusta»: en portugués la persona es el sujeto de gostar: " + it("eu " + e) + " de…" };
 
+    // A conjugated verb where the infinitive goes (vou viajo → vou viajar)
+    if (isInfinitive(e) && !futC && !isInfinitive(g) && fg.some(function (b) {
+      return b.tense !== "infPessoal" && fe.some(function (a) { return a.lemma === b.lemma; });
+    })) return infinitiveExplain(g, e, ctx);
+
     // Same lemma
     for (var i = 0; i < fe.length; i++) {
       for (var j = 0; j < fg.length; j++) {
         var a = fe[i], b = fg[j];
         if (a.lemma !== b.lemma) continue;
         if (a.tense === b.tense && a.p !== b.p) {
-          if (a.tense === "infPessoal") return infPessExplain(g, e, ctx);
+          if (a.tense === "infPessoal") return infPessExplain(g, e, ctx, b, a);
           if (a.lemma === "gostar" && b.p === 2 && a.p === 0) return { cat: "gostar", slip: false,
             hint: "Con *gostar* el sujeto es la persona que gusta, no la cosa.",
             explain: "Gostar va al revés que gustar: *eu gosto* (a mí me gusta), *ela gosta* (a ella le gusta). Acá: " + it(e) + "." };
+          // «tinham muita gente»: ter meaning «there is» is impersonal, like haver
+          if (a.lemma === "ter" && a.p === 2 && b.p === 5 && subjP == null &&
+              /^(muita|muito|muitas|muitos|pouca|pouco|poucas|poucos|um|uma|uns|umas|gente|alguém|ninguém|algum|alguma|nenhum|nenhuma|\d+|dois|duas|três|mais|menos|tanta|tanto)$/.test(ctx.e[ctx.ei + 1] || "")) return { cat: "persona", slip: false,
+            hint: "*ter* con el sentido de «hay / había», ¿tiene plural?",
+            explain: "*Ter* con el sentido de «hay / había» (en el habla) es impersonal y va siempre en singular: " + it(e + " " + ctx.e.slice(ctx.ei + 1, ctx.ei + 3).join(" ")) + ", como «había mucha gente» (nunca «habían»). Lo mismo con *haver*: havia, houve." };
           var alt = subjP != null && subjP !== a.p ? fe.filter(function (x) { return x.lemma === a.lemma && x.tense === a.tense && x.p === subjP; })[0] : null;
           if (alt) a = alt;
-          var gente = /\ba gente\s*$/.test(before.replace(/\s+(não|já|também|sempre|nunca|me|se|te|lhe|nos)\s*$/, " "));
+          var gente = /\ba gente\s*$/.test(before.replace(/\s+(não|já|também|sempre|nunca|me|se|te|lhe|nos)\s*$/, " ")) ||
+            (!before && /(^|\s)a gente$/.test(ctx.lead || ""));
           var voce = /\b(você|vocês|o senhor|a senhora)\s*$/.test(before.replace(/\s+(não|já|também|sempre|nunca|me|se|te|lhe|nos)\s*$/, " "));
           return { cat: "persona", slip: false,
             hint: gente ? "*a gente* significa «nosotros», pero ¿con qué persona del verbo va?"
@@ -1368,6 +1669,12 @@
     // A mix of the Spanish and Portuguese irregular (tuvo, hizo, fizo, esteje, seje)
     if (!fg.length) {
       var f0 = fe[0];
+      if (/ie|[^qg]ue/.test(g) && !/ie|[^qg]ue/.test(e) && !isPortuguese(g) && !spanishWord(g) &&
+          editDistance(deaccent(g), deaccent(e)) <= 4 && /(am|em|mos|ou|eu|iu)$/.test(g) &&
+          editDistance(deaccent(g.replace(/ie/, "e").replace(/([^qg])ue/, "$1o")), deaccent(e)) < editDistance(deaccent(g), deaccent(e))) return { cat: "espanol", slip: false,
+        hint: it(g) + " tiene el diptongo del español. ¿Cómo es ese verbo en portugués?",
+        explain: it(g) + " mezcla el español con el portugués: el diptongo *ie* / *ue* del español no va en portugués (tenho, quero, pode, fizeram). Acá: " +
+          it(e) + " (" + it(f0.lemma) + ", " + PERS_ES[f0.p] + ", " + TENSE_ES[f0.tense] + ")." };
       if (/^(seje|sejem|sejemos|esteje|estejem|estejemos)$/.test(g)) return { cat: "verbo_irregular", slip: false,
         hint: "Revisá la terminación de ese subjuntivo.",
         explain: "El subjuntivo de *ser* y *estar* es " + it(e) + " (seja, esteja), aunque en el habla se oiga «seje»." };
@@ -1375,9 +1682,15 @@
         var sp = spanishWord(g);
         if (sp) return spanishExplain(g, e, sp, ctx);
         var regE = regularForm(f0.lemma, f0.tense, f0.p);
+        // a slip of one letter (estve, tinahm) is a typo, not the irregular verb
+        if (editDistance(deaccent(g), deaccent(e)) === 1 && e.length >= 4 && !spanishWord(g) &&
+            (!regE || editDistance(deaccent(g), deaccent(regE)) > 1)) return null;
+        var dipt = /[^qg]ue|ie/.test(g) && !/[^qg]ue|ie/.test(e) &&
+          editDistance(deaccent(g.replace(/ie/, "e").replace(/([^qg])ue/, "$1o")), deaccent(e)) < editDistance(deaccent(g), deaccent(e));
         if (regE && regE !== e) return { cat: "verbo_irregular", slip: false,
-          hint: "Revisá la forma de ese verbo irregular.",
-          explain: it(g) + " no existe; " + it(f0.lemma) + " es irregular en " + TENSE_ES[f0.tense] + ": " + it(e) + " (" + PERS_ES[f0.p] + ")." };
+          hint: dipt ? "Ese diptongo es del español: ¿cómo es ese verbo en portugués?" : "Revisá la forma de ese verbo irregular.",
+          explain: it(g) + " no existe; " + it(f0.lemma) + " es irregular en " + TENSE_ES[f0.tense] + ": " + it(e) + " (" + PERS_ES[f0.p] + ")." +
+            (dipt ? " El diptongo *ie* / *ue* del español no va en portugués (quero, tenho, pode, mantêm)." : "") };
         if (!isPortuguese(g) && editDistance(deaccent(g), deaccent(e)) === 1 && e.length >= 4) return null;
         return { cat: "persona", slip: false,
           hint: "Revisá la terminación del verbo.",
@@ -1389,6 +1702,11 @@
       var lg = lemG.replace(/-se$/, ""), le = lemE.replace(/-se$/, "");
       if (lg === le) return { cat: "pronome", slip: false,
         hint: "Revisá el pronombre del verbo.", explain: "Acá va " + it(e) + "." };
+      if (/^(ser|estar|ficar)$/.test(lg) && /^(ser|estar|ficar)$/.test(le)) return serEstar(g, e, lg, le, ctx);
+      if (lg === "haver" && le === "ter" && participleOf(ctx.e[ctx.ei + 1] || "")) return { cat: "perfeito_composto", slip: false,
+        hint: "¿Con qué auxiliar se forma ese tiempo compuesto en el portugués de hoy?",
+        explain: it(g) + " es de *haver*: los tiempos compuestos se forman con *ter*: " + it(e + " " + ctx.e[ctx.ei + 1]) +
+          ". *Haver* + participio solo queda en lo escrito formal y en pasado (havia feito = tinha feito); *hei feito* no se usa (no es el «he hecho» del español)." };
       for (var c = 0; c < VERB_CONFUSIONS.length; c++) {
         var vc = VERB_CONFUSIONS[c];
         if (vc[0] === lg && vc[1] === le) return { cat: "lexico", slip: lg === "ter" && le === "haver",
@@ -1401,11 +1719,29 @@
           "; acá va " + it(e) + ", de *" + le + "*" + (DATA.lex[le] ? " («" + DATA.lex[le] + "»)" : "") + "." };
     }
     if (fg.length && fe.length) return { cat: "tempo", slip: false,
-      hint: "Revisá el verbo marcado: forma y tiempo.",
-      explain: "Acá va " + it(e) + " (" + TENSE_ES[fe[0].tense] + " de " + it(fe[0].lemma) + ")." };
+      hint: "Revisá el verbo marcado: ¿qué tiempo y qué persona van?",
+      explain: it(g) + " es " + TENSE_ES[fg[0].tense] + " (" + PERS_ES[fg[0].p] + "); acá va " + it(e) + " (" + TENSE_ES[fe[0].tense] + ", " + PERS_ES[fe[0].p] + ", de " + it(fe[0].lemma) + ")." };
     return null;
   }
 
+  /* ser, estar, ficar: the rule, the learner's verb and, where the Spanish
+     speaker is led astray, the contrast. */
+  function serEstar(g, e, lg, le, ctx) {
+    var next = ctx.e[ctx.ei + 1] || "";
+    var pass = le === "ser" && participleOf(next) && !DATA.adj[next];
+    var why = pass ? "La voz pasiva se forma con *ser* + participio: " + it(e + " " + next) + " (como «fue escrita»). *Estar* + participio es el estado que queda después (a carta está escrita = ya está escrita)."
+      : le === "ser" ? "Acá va *ser*: identidad, origen, profesión, características, y dónde es un evento (ele é carioca, sou de Rosario, a festa é no sábado). *Estar* es para estados y para dónde está alguien."
+      : le === "estar" && lg === "ser" ? "Acá va *estar*: estados pasajeros (estou cansado), dónde está alguien o algo en este momento (ela está em casa) y *estar + gerúndio*. *Ser* es para lo que algo es."
+      : le === "ficar" ? "Para dónde queda algo que no se mueve, el portugués prefiere *ficar*: o Cristo fica no Corcovado, o hotel fica no centro (en español «está»). Y *ficar* es también «quedarse» y «ponerse» (fiquei feliz)."
+      : "Acá va *estar*: el estado o el lugar en este momento; *ficar* es quedarse, ponerse o quedar (un lugar fijo).";
+    return { cat: "ser_estar", slip: false,
+      hint: pass ? "¿Es una voz pasiva (lo que alguien hizo) o un estado?"
+        : le === "ficar" || lg === "ficar" ? "¿Algo que está siempre en el mismo lugar, un cambio de estado o un estado de ahora?"
+        : "¿Es lo que algo es (una característica, el origen) o cómo o dónde está ahora?",
+      explain: it(g) + " es de *" + lg + "*. " + why + " Acá: " + it(e) + "." };
+  }
+
+  var SUBJ_ES = ["yo haga", "hagas", "haga", "hagamos", "hagáis", "hagan"];
   function tenseRule(g, e, a, b, ctx) {
     var before = ctx.e.slice(0, ctx.ei).join(" ");
     var trigger = SUBJ_TRIG.filter(function (w) { return (" " + before + " ").indexOf(" " + w + " ") >= 0; })[0];
@@ -1415,16 +1751,17 @@
     if (a.tense === "subjImperfeito" && se) return { cat: "subjuntivo", slip: false,
       hint: "Es una condición con *se* sobre algo que no es real: ¿qué modo va?",
       explain: "Condición irreal: *se* + imperfeito do subjuntivo (" + it(e) + ") y en la otra parte el condicional: se eu tivesse tempo, viajaria. Igual que «si tuviera», pero solo con la forma en *-sse*." };
+    if (a.tense === "subjPresente" && !trigger && !/\bque\s*$/.test(before) && imperativeCtx(ctx)) return imperativeExplain(g, e, ctx);
     if (a.tense === "subjPresente" || a.tense === "subjImperfeito") return { cat: "subjuntivo", slip: false,
       hint: (trigger ? "Mirá lo que viene antes: " + it(trigger) + ". " : "") + "¿Qué modo pide?",
-      explain: (trigger ? "Después de " + it(trigger) + " va subjuntivo" : "Acá va subjuntivo") + ": " + it(e) + ", no " + it(g) +
+      explain: (trigger ? "Después de " + it(trigger) + " va subjuntivo" : /(^|\s)que(\s+\S+)?\s*$/.test(before) ? "Con *que* delante, acá va el subjuntivo" : "Acá va subjuntivo") + ": " + it(e) + ", no " + it(g) +
         ". Deseo, duda, pedido, emoción, *para que, embora, talvez* → subjuntivo, como en español." };
     if ((a.tense === "presente" || a.tense === "perfeito" || a.tense === "imperfeito" || a.tense === "futuro") && /^subj/.test(b.tense)) {
       if (b.tense === "subjFuturo" || /\b(achar|acho|acha|acredito|creio|penso|sei|parece|é certo|tenho certeza)\s+que\s*$/.test(before) || true) return { cat: "subjuntivo", slip: false,
         hint: "¿Hace falta el subjuntivo acá?",
         explain: /\b(acho|acha|achamos|acham|acredito|creio|penso)\s+que\s*$/.test(before)
           ? "*Achar que, acreditar que, pensar que* afirman una opinión: van con indicativo, como en español: " + it(e) + " (acho que ele vem)."
-          : "Acá el hablante afirma un hecho: va indicativo, " + it(e) + "." };
+          : it(g) + " es subjuntivo (como «que " + (SUBJ_ES[b.p] || "haga") + "»); acá se afirma un hecho: va " + it(e) + ", como en español." };
     }
     if (a.tense === "condicional" && b.tense === "subjImperfeito") return { cat: "subjuntivo", slip: false,
       hint: "Esta es la consecuencia, no la condición.",
@@ -1451,6 +1788,18 @@
     var lem = verbLemmas(prev);
     for (var i = 0; i < lem.length; i++) if (REGENCIA[lem[i]]) return " (" + lem[i] + " " + REGENCIA[lem[i]][0] + ")";
     return "";
+  }
+  // The verb before the word, skipping adverbs (penso muito em você).
+  var ADV_SKIP = /^(muito|sempre|também|não|já|mais|bem|nunca|ainda|só|tanto|pouco|logo|hoje|ontem|agora|me|te|se|lhe|nos)$/;
+  function verbLemmasBefore(ctx) {
+    for (var k = ctx.ei - 1; k >= 0 && k >= ctx.ei - 3; k--) {
+      var w = ctx.e[k];
+      if (!w) break;
+      var l = verbLemmas(w);
+      if (l.length) return l;
+      if (!ADV_SKIP.test(w)) break;
+    }
+    return [];
   }
   function verbLemmas(w) {
     if (!w) return [];
@@ -1482,7 +1831,17 @@
 
   function prepRule(g, e, pg, pe, ctx) {
     var next = ctx.e[ctx.ei + 1] || "", prev = ctx.e[ctx.ei - 1] || "";
-    var lemPrev = verbLemmas(prev);
+    var lemPrev = verbLemmasBefore(ctx);
+    if (pg.base === pe.base && pg.art && pe.art && !ARTICLES[pe.art]) {
+      // desta / dessa: este (lo de acá, lo de ahora) and esse (lo de ahí)
+      var dem = function (w) { return /^(est|isto)/.test(w) ? 1 : /^(ess|isso)/.test(w) ? 2 : /^(aquel|aquilo)/.test(w) ? 3 : 0; };
+      if (dem(pg.art) && dem(pe.art) && dem(pg.art) !== dem(pe.art)) return { cat: "pronome", slip: false,
+        hint: "¿Lo de acá, lo de ahí o lo de allá?",
+        explain: it(e) + " = *" + pe.base + " + " + pe.art + "*. *Este* es lo de acá y lo de ahora (neste momento, desta vez); *esse*, lo de ahí o lo que ya se dijo; *aquele*, lo de allá. En el habla de Brasil *este* y *esse* se mezclan; en lo escrito se distinguen." };
+      if (/^(ele|ela|eles|elas)$/.test(pg.art) && /^(ele|ela|eles|elas)$/.test(pe.art)) return { cat: "pronome", slip: false,
+        hint: "¿De quién es? Mirá quién tiene la cosa.",
+        explain: it(e) + " = *" + pe.base + " + " + pe.art + "*: *dele, dela, deles, delas* concuerdan con quien tiene la cosa, no con la cosa (a casa dele = la casa de él). El «su» del español no lo marca; el portugués sí." };
+    }
     if (pg.base === pe.base) {
       if (pe.art && pg.art) {
         var ag = ARTICLES[pg.art], ae = ARTICLES[pe.art];
@@ -1511,7 +1870,7 @@
       }
       if (!pe.art && pg.art) return { cat: "articulo", slip: false,
         hint: "Acá la preposición va sola, sin artículo.",
-        explain: "Acá va " + it(e) + " sin artículo" + (next && PLACE_NOART.test(next) ? ": las ciudades van sin artículo (em São Paulo, de Lisboa), salvo o Rio, o Recife, o Porto" : "") + "." };
+        explain: "Acá va " + it(e) + " sin artículo" + (next && PLACE_NOART.test(next) ? ": las ciudades y muchos barrios van sin artículo (em São Paulo, de Lisboa, em Copacabana), salvo o Rio, o Recife, o Porto" : "") + "." };
       return { cat: "preposicion", slip: false, hint: "Revisá la preposición.", explain: "Acá va " + it(e) + "." };
     }
     // Regencia del verbo anterior
@@ -1543,6 +1902,16 @@
       why = "*há* + tiempo = hace (cheguei há dois anos); *desde* = desde (moro aqui desde 2020).";
     } else if (pe.base === "em" && pg.base === "de" && /^(\d{4}|janeiro|fevereiro|março|abril|maio|junho|julho|agosto|setembro|outubro|novembro|dezembro)$/.test(next)) {
       why = "Con años y meses va *em*: em 2024, em janeiro.";
+    } else if (pe.base === "de" && pg.base === "desde") {
+      why = "El punto de partida en el espacio va con *de* (saio de casa, venho do Rio); *desde* es para el tiempo (desde 2020, desde criança) o para subrayar la distancia (desde o Rio até São Paulo).";
+    } else if (pe.base === "até" && /^(desde|a|para|hasta)$/.test(pg.base)) {
+      why = "«Hasta» es *até*: vou a pé até a praia, até amanhã, de segunda até sexta.";
+    } else if ((pe.base === "para" || pe.base === "a") && pg.base === "de") {
+      why = "*de* marca el origen (venho de Salvador); el destino va con *para* o *a* (vou para Salvador, vou a Salvador).";
+    } else if (pe.base === "de" && (pg.base === "para" || pg.base === "a")) {
+      why = "El origen va con *de* (venho de Salvador, saí de casa); *para* y *a* marcan el destino.";
+    } else if (pe.base === "com" && pg.base !== "com") {
+      why = "Acá va *com*: con quién o con qué (falei com ela, sonhei com você).";
     } else {
       why = "El portugués usa acá " + it(e) + ", no " + it(g) + ". Las preposiciones no se traducen una a una desde el español: conviene aprenderlas con su verbo o su expresión.";
     }
@@ -1626,8 +1995,11 @@
 
   function missRule(w, ctx) {
     var next = ctx.e[ctx.ei + 1] || "", prev = ctx.e[ctx.ei - 1] || "";
-    var lemPrev = verbLemmas(prev);
-    if (PREP_BASE[w] || CONTR[w]) {
+    var lemPrev = verbLemmasBefore(ctx);
+    // «Argentina é…» → «A Argentina»: «a» before a feminine noun or place is the article
+    var artFirst = ARTICLES[w] && !isVerbish(next) && (PLACE_ART[next] || DATA.nouns[next] || DATA.nounsByPlural[next] || HETERO[next]) &&
+      (!/^(a|as)$/.test(w) || nounGender(next) === "f" || PLACE_ART[next] === "f");
+    if ((PREP_BASE[w] || CONTR[w]) && !artFirst) {
       if (lemPrev.indexOf("gostar") >= 0 || (ctx.g && /^(gosto|gosta|gostam|gostamos|gostei|gostou|gostava)$/.test(prev))) return { cat: "gostar", slip: false,
         hint: "*gostar* nunca va solo: ¿qué le falta?",
         explain: "*Gostar* lleva siempre *de* (con artículo, *do, da, dos, das*): eu gosto " + it(w + " " + next) + ", ela gosta de dançar." };
@@ -1658,6 +2030,12 @@
       return { cat: "articulo", slip: false,
         hint: "Falta el artículo.",
         explain: "Falta " + it(w) + (next ? " antes de " + it(next) : "") + "." };
+    }
+    if (w === "a" && next === "gente") {
+      var infNext = isInfinitive(ctx.e[ctx.ei + 2] || "");
+      return { cat: infNext ? "inf_pessoal" : "faltante", slip: false,
+        hint: "Falta el sujeto.",
+        explain: "Falta el sujeto *a gente*" + (infNext ? ": el infinitivo tiene acá su propio sujeto y en portugués se dice (é importante a gente saber), o va en la terminación (é importante sabermos)." : ".") };
     }
     if (w === "que" && TER.indexOf(prev) >= 0) return { cat: "faltante", slip: false,
       hint: "Obligación: ¿cómo se une *ter* con el infinitivo?",
@@ -1735,7 +2113,7 @@
     perfeito_composto: 9, subjuntivo: 9, futuro_subj: 9, inf_pessoal: 9,
     gostar: 8, a_personal: 8, contraccion: 8, regencia: 8, preposicion: 8, persona: 8, tempo: 8,
     regularizacion: 8, verbo_irregular: 8, crase: 7, participio: 7, genero: 7, concordancia: 7,
-    articulo: 7, plural: 7, pronome: 7, muito: 7, colocacao: 6, espanol: 6, falso_amigo: 6, orden: 6,
+    articulo: 7, plural: 7, pronome: 7, muito: 7, ser_estar: 8, colocacao: 6, espanol: 6, falso_amigo: 6, orden: 6,
     lexico: 5, nasal: 5, faltante: 5, sobrante: 4, ortografia: 4, tilde: 2, tipeo: 1
   };
 
@@ -1752,7 +2130,7 @@
     falso_amigo: "Falsos amigos", tempo: "Tiempo verbal", persona: "Persona del verbo", participio: "Participios",
     verbo_irregular: "Verbos irregulares", regularizacion: "Irregulares regularizados", nasal: "Nasales (ã, õ, -m)",
     faltante: "Palabras que faltan", sobrante: "Palabras de más", tipeo: "Tipeo", orden: "Orden de las palabras",
-    lexico: "Vocabulario"
+    lexico: "Vocabulario", ser_estar: "ser, estar y ficar"
   };
 
   // Capitalized words: names.  At the start of a sentence only when the word
@@ -1785,22 +2163,27 @@
   function nounSyn(a, b) {
     return NSYN.some(function (f) { return f.indexOf(a) >= 0 && f.indexOf(b) >= 0; }) && !(/^(em|no|num|numa)$/.test(a));
   }
-  function synonymFree(g, e) {
+  function synonymFree(g, e, midMas) {
     if (g.length !== e.length) return false;
     var diff = 0;
     for (var i = 0; i < e.length; i++) {
       if (g[i] === e[i]) continue;
-      if (nounSyn(g[i], e[i])) { diff++; continue; }
+      if (nounSyn(g[i], e[i]) && !(midMas && g[i] === "mas")) {
+        var gA = nounGender(g[i]), gB = nounGender(e[i]);
+        if (gA && gB && gA !== gB) return false;
+        diff++; continue;
+      }
       // ter / haver as auxiliary: tinha feito = havia feito
       if (TER.indexOf(g[i]) >= 0 && HAVER.indexOf(e[i]) >= 0 && participleOf(e[i + 1] || "") ||
           HAVER.indexOf(g[i]) >= 0 && TER.indexOf(e[i]) >= 0 && participleOf(e[i + 1] || "")) {
         var gf = verbForms(g[i]), ef = verbForms(e[i]);
-        if (gf.some(function (a) { return ef.some(function (b) { return a.tense === b.tense && a.p === b.p; }); })) { diff++; continue; }
+        if (gf.some(function (a) { return a.tense !== "presente" && ef.some(function (b) { return a.tense === b.tense && a.p === b.p; }); })) { diff++; continue; }
       }
       var fg = verbForms(g[i]), fe = verbForms(e[i]);
       var ok = fe.some(function (a) {
         var fam = synFamily(a.lemma);
         return fam >= 0 && fg.some(function (b) {
+          if (/^(ter|haver)$/.test(a.lemma) && (a.p !== 2 || participleOf(e[i + 1] || ""))) return false;
           return b.lemma !== a.lemma && synFamily(b.lemma) === fam && b.tense === a.tense && b.p === a.p;
         });
       });
@@ -1830,8 +2213,14 @@
                (a.length >= 4 && a.slice(0, -2) === b.slice(0, -2) && /^(osas|asos)$/.test(a.slice(-2) + b.slice(-2))) ||
                (/^(obrigado|obrigada)$/.test(a) && /^(obrigado|obrigada)$/.test(b));
       if (!ok) return false;
-      if (!DATA.adj[b] && !participleOf(b) && !/^(obrigad[oa]|sozinh[oa]s?|cansad[oa]s?|pront[oa]s?|content[ea]s?|brasileir[oa]s?|argentin[oa]s?|carioca|preocupad[oa]s?|ocupad[oa]s?|atrasad[oa]s?|nervos[oa]s?|feliz|animad[oa]s?|apaixonad[oa]s?|casad[oa]s?|solteir[oa]s?|sentad[oa]s?|nascid[oa]s?|chegad[oa]s?|acostumad[oa]s?|perdid[oa]s?|convidad[oa]s?|lindo|linda|bonit[oa]s?|velh[oa]s?|nov[oa]s?|alt[oa]s?|baix[oa]s?|magr[oa]s?|gord[oa]s?|curios[oa]s?|tímid[oa]s?|simpátic[oa]s?|antipátic[oa]s?|chatead[oa]s?|irritad[oa]s?|assustad[oa]s?|surpres[oa]s?|decepcionad[oa]s?|orgulhos[oa]s?|emocionad[oa]s?|filh[oa]s?|únic[oa]s?|mesm[oa]s?|própri[oa]s?)$/.test(b)) return false;
-      if (isNoun(e[i + 1]) || ARTICLES[e[i - 1]]) return false;
+      var listed = /^(obrigad[oa]|sozinh[oa]s?|cansad[oa]s?|pront[oa]s?|content[ea]s?|brasileir[oa]s?|argentin[oa]s?|carioca|preocupad[oa]s?|ocupad[oa]s?|atrasad[oa]s?|nervos[oa]s?|feliz|animad[oa]s?|apaixonad[oa]s?|casad[oa]s?|solteir[oa]s?|sentad[oa]s?|nascid[oa]s?|chegad[oa]s?|acostumad[oa]s?|perdid[oa]s?|convidad[oa]s?|lindo|linda|bonit[oa]s?|velh[oa]s?|nov[oa]s?|alt[oa]s?|baix[oa]s?|magr[oa]s?|gord[oa]s?|curios[oa]s?|tímid[oa]s?|simpátic[oa]s?|antipátic[oa]s?|chatead[oa]s?|irritad[oa]s?|assustad[oa]s?|surpres[oa]s?|decepcionad[oa]s?|orgulhos[oa]s?|emocionad[oa]s?|filh[oa]s?|únic[oa]s?|mesm[oa]s?|própri[oa]s?)$/.test(b);
+      if (!DATA.adj[b] && !participleOf(b) && !listed) return false;
+      // a participle alone (pôr → posto) names the form; before its noun
+      // phrase it agrees with it (Assinada a Lei Áurea)
+      if (e.length === 1 && participleOf(b) && !listed) return false;
+      if (ARTICLES[e[i + 1]] || POSSESSIVE.indexOf(e[i + 1]) >= 0) return false;
+      if (isNoun(e[i + 1]) || ARTICLES[e[i - 1]] || (CONTR[e[i - 1]] && ARTICLES[CONTR[e[i - 1]][1]])) return false;
+      if (participleOf(b) && (TER.indexOf(e[i - 1]) >= 0 || HAVER.indexOf(e[i - 1]) >= 0)) return false;
       if (/^(obrigad)/.test(b)) { diff++; continue; }
       for (var k = 0; k < i; k++) if (isNoun(e[k]) || GENDER_FIXERS.indexOf(e[k]) >= 0) return false;
       diff++;
@@ -1912,7 +2301,7 @@
     }
     // 3. article before possessive and before a person's name: optional
     var poss = function (w) { return POSSESSIVE.indexOf(w) >= 0; };
-    var person = function (w) { return !!nm && nm.indexOf(w) >= 0 && !PLACE_ART[w] && FAMILY.indexOf(w) < 0; };
+    var person = function (w) { return !!nm && nm.indexOf(w) >= 0 && !PLACE_ART[w] && !PLACE_NOART.test(w) && FAMILY.indexOf(w) < 0 && !DATA.nouns[w] && !DATA.nounsByPlural[w]; };
     var res = [];
     for (i = 0; i < out.length; i++) {
       t = out[i].w;
@@ -1995,15 +2384,29 @@
   }
 
   // Enclisis after a word that attracts the pronoun (não disse-me → não me disse).
-  function badEnclisis(g) {
+  function badEnclisis(g, pz) {
     for (var i = 1; i < g.length; i++) {
       var sp = splitEnclitic(g[i]);
       if (!sp || /^(o|a|os|as)$/.test(sp.c) && /^(lo|la|los|las)$/.test(g[i].split("-")[1]) && isInfinitive(sp.v)) continue;
-      if (isInfinitive(sp.v) || gerundOf(sp.v)) continue;
       var p = g[i - 1];
-      if (ATTRACTORS.test(p) || (p === "a" && false)) return { i: i, prev: p, c: sp.c, v: sp.v };
+      // «ela se chama-se»: the same pronoun twice
+      if (p === sp.c && CLITIC_ONLY[p]) return { i: i, prev: p, c: sp.c, v: sp.v, dup: true };
+      if (isInfinitive(sp.v) || gerundOf(sp.v)) continue;
+      if (pz && pz.length === g.length && pz[i]) continue;
+      if (ATTRACTORS.test(p)) return { i: i, prev: p, c: sp.c, v: sp.v };
     }
     return null;
+  }
+  function attractExplain(be) {
+    return { cat: "colocacao", slip: false,
+      hint: "Las palabras están bien; mirá dónde va el pronombre después de *" + be.prev + "*.",
+      explain: "*" + be.prev + "* atrae el pronombre delante del verbo: " + it(be.prev + " " + be.c + " " + be.v) +
+        ". Lo mismo pasa después de *não, nunca, que, quem, já, também* y los adverbios: ahí el pronombre nunca va pegado atrás." };
+  }
+  function dupClitic(be) {
+    return { cat: "pronome", slip: false,
+      hint: "Hay un pronombre repetido.",
+      explain: "El pronombre va una sola vez: " + it(be.c + " " + be.v) + " o " + it(be.v + "-" + be.c) + ", nunca en los dos lugares. En Brasil lo normal es antes del verbo." };
   }
 
   /* Contracciones sin hacer: «em o» → no, «de ele» → dele, «a a» → à. */
@@ -2014,6 +2417,7 @@
       if (!PREP_BASE[p]) continue;
       var c = contract(p, w2);
       if (!c || etoks.indexOf(c) < 0) continue;
+      if (etoks.some(function (x, k) { return x === gtoks[i] && etoks[k + 1] === gtoks[i + 1]; })) continue;
       // antes de ele chegar: the pronoun is the subject of an infinitive
       if (/^(ele|ela|eles|elas|este|esse|aquele)$/.test(w2) && isInfinitive(gtoks[i + 2] || "")) continue;
       if (/^(o|a|os|as)$/.test(w2) && /^(de|em)$/.test(p) && [gtoks[i + 2], gtoks[i + 3], gtoks[i + 4]].some(function (x) {
@@ -2021,13 +2425,32 @@
       var art = ARTICLES[w2];
       var d = c.charAt(0) === "à" ? { cat: "crase", slip: false,
           hint: "Dos palabras marcadas se tienen que fundir en una.",
-          explain: "*a* (preposición) + *" + w2 + "* se funden: " + it(c) + " (con acento grave: es la crase). Vou à praia, àquela hora." }
+          explain: "*a* (preposición) + *" + w2 + "* se funden: " + it(c) + " (con acento grave: es la crase). Vou à praia, àquela hora." +
+            (/^(la|las)$/.test(gtoks[i + 1]) ? " Y ojo: *a " + gtoks[i + 1] + "* es español." : "") }
         : { cat: "contraccion", slip: false,
           hint: "Dos palabras marcadas se tienen que fundir en una.",
           explain: "*" + p + " + " + w2 + "* se contrae: " + it(c) + ". En portugués la contracción es obligatoria: " +
             (art ? "no, na, do, da, ao, pelo (estou no Brasil, venho da praia, passo pela Lapa)." : "dele, dela, neste, nisso, daquele (o carro dele, nesta casa).") +
             (gtoks[i] === "en" || /^(el|la|los|las)$/.test(gtoks[i + 1]) ? " Y ojo: *" + gtoks[i] + " " + gtoks[i + 1] + "* es español." : "") };
       return { i: i, form: c, d: d };
+    }
+    return null;
+  }
+
+  function agenteSwap(g, e) {
+    for (var i = 0; i < g.length - 2; i++) {
+      if (g[i] !== "a" || g[i + 1] !== "gente") continue;
+      for (var k = i + 2; k < g.length && k <= i + 4; k++) {
+        var v = verbForms(g[k]).filter(function (x) { return x.p === 3 && x.tense !== "infPessoal"; })[0];
+        if (v) {
+          if (e.indexOf("gente") >= 0) return null;   // «a gente vai»: the verb rule says it
+          var n = e.indexOf("nós");
+          var ev = e.map(function (w, j) { return j; }).filter(function (j) { return verbForms(e[j]).some(function (x) { return x.lemma === v.lemma; }); })[0];
+          if (n < 0 || ev == null) return null;
+          return { i: i, k: k, ei: [n, ev], fix: "nós " + e[ev] };
+        }
+        if (!/^(não|já|também|sempre|nunca|me|te|se|nos|lhe|o|a|os|as|só)$/.test(g[k])) break;
+      }
     }
     return null;
   }
@@ -2090,6 +2513,10 @@
 
   function pickTarget(given, expected) {
     var g = tokens(given), best = null, bestScore = -1;
+    // The variant that differs only in accents is the one the learner meant
+    // («Vou a praia» → «Vou à praia», not «Vou para a praia»).
+    var gd = deaccent(g.join(" "));
+    for (var i = 0; i < expected.length; i++) if (deaccent(tokens(expected[i]).join(" ")) === gd) return expected[i];
     expected.forEach(function (x) {
       var s = lcsLen(g, tokens(x)) - Math.abs(tokens(x).length - g.length) * 0.1;
       if (s > bestScore) { bestScore = s; best = x; }
@@ -2105,13 +2532,14 @@
     var rawG = tokens(given);
     var target0 = pickTarget(given, list) || list[0];
     var exp = expandGap(ctx.stem, given, list);
-    if (exp) { given = exp.given; list = exp.targets; }
+    var lead = "";
+    if (exp) { given = exp.given; list = exp.targets; lead = exp.lead || ""; }
     // An uncontracted «em o», «de a»: compare with the variants that have the contraction.
     var gT = tokens(given), withC = list.filter(function (v) { return uncontracted(gT, tokens(v)); });
     if (withC.length && withC.length < list.length) list = withC.concat(list.filter(function (v) { return withC.indexOf(v) < 0; }));
     if (withC.length) target0 = pickTarget(given, withC) || target0;
     var target = (withC.length ? pickTarget(given, withC) : null) || pickTarget(given, list) || list[0];
-    var g = tokens(given), e = tokens(target);
+    var g = tokens(given), e = tokens(target), pz = pauses(given), epz = pauses(target);
     var res = { cat: null, slip: false, hint: "", explain: "", target: target,
                 given: g.map(function (w) { return { w: w }; }),
                 fixed: e.map(function (w) { return { w: w }; }), others: 0, all: [] };
@@ -2119,7 +2547,7 @@
     if (!rawG.length) {
       res.verdict = "sbagliato"; res.cat = "vuoto"; res.label = LABEL.vuoto;
       res.hint = "Escribí algo, aunque no estés seguro: equivocarse y corregirse enseña.";
-      res.explain = "La respuesta era " + it(target0) + ".";
+      res.explain = "La respuesta era " + sentEnd(target0);
       return res;
     }
     if (g.join(" ") === e.join(" ")) { res.verdict = "giusto"; return res; }
@@ -2154,50 +2582,107 @@
         // Sentence or clause opened with an unstressed pronoun where the
         // answer (formal writing) has it after the verb: close, not wrong.
         var fm = /(^|[.,;:!?—]\s*)(me|te|se|lhe|lhes|nos)\s+([a-zà-ÿ]+)/i.exec(String(given));
-        if (fm && e2.some(function (x) { var sp2 = splitEnclitic(x); return sp2 && sp2.c === fm[2].toLowerCase() && sp2.v === fm[3].toLowerCase(); }) &&
-            !list.some(function (x) { return new RegExp("(^|[.,;:!?—]\\s*)" + fm[2] + "\\s+" + fm[3] + "\\b", "i").test(x); })) {
-          formalHit = formalHit || { c: fm[2].toLowerCase(), v: fm[3].toLowerCase() };
+        var fmTok = fm && e2.filter(function (x) { var sp2 = splitEnclitic(x); return sp2 && sp2.c === fm[2].toLowerCase() && sp2.v === fm[3].toLowerCase(); })[0];
+        if (fmTok && !list.some(function (x) { return new RegExp("(^|[.,;:!?—]\\s*)" + fm[2] + "\\s+" + fm[3] + "\\b", "i").test(x); })) {
+          formalHit = formalHit || { c: fm[2].toLowerCase(), v: fm[3].toLowerCase(), form: fmTok };
           continue;
         }
-        var be = badEnclisis(g);
-        if (be && !badEnclisis(e2)) {
-          res.cat = "colocacao"; res.label = LABEL.colocacao; res.verdict = "sbagliato"; res.all = ["colocacao"];
-          res.hint = "Las palabras están bien; mirá dónde va el pronombre después de *" + be.prev + "*.";
-          res.explain = "*" + be.prev + "* atrae el pronombre delante del verbo: " + it(be.prev + " " + be.c + " " + be.v) +
-            ". Lo mismo pasa después de *não, nunca, que, quem, já, também* y los adverbios: ahí el pronombre nunca va pegado atrás.";
+        var be = badEnclisis(g, pz);
+        if (be && !badEnclisis(e2, pauses(list[li]))) {
+          var bd = be.dup ? dupClitic(be) : attractExplain(be);
+          res.cat = bd.cat; res.label = LABEL[bd.cat]; res.verdict = "sbagliato"; res.all = [bd.cat];
+          res.hint = bd.hint;
+          res.explain = bd.explain;
           if (res.given[be.i]) res.given[be.i].bad = true;
           res.fixed.forEach(function (w) { if (w.w === be.c || w.w === be.v) w.fix = true; });
           return res;
         }
+        // «contou te»: after the verb the pronoun goes with a hyphen
+        var loose = -1;
+        g.forEach(function (t, k) {
+          if (loose < 0 && k > 0 && CLITIC_ONLY[t] && finite(g[k - 1]) && !(g[k + 1] && isVerbish(g[k + 1])) &&
+              !e2.some(function (x, q) { return x === t && e2[q - 1] === g[k - 1]; })) loose = k;
+        });
+        if (loose > 0) {
+          res.cat = "colocacao"; res.label = LABEL.colocacao; res.verdict = "sbagliato"; res.all = ["colocacao"];
+          res.hint = "Revisá el pronombre que va después del verbo: ¿cómo se une?";
+          var vL = g[loose - 1], fut = verbForms(vL).length && verbForms(vL).every(function (v) { return v.tense === "futuro" || v.tense === "condicional"; });
+          var stL = vL.replace(/(ei|ás|á|emos|eis|ão|ia|ias|íamos|íeis|iam)$/, "");
+          res.explain = fut
+            ? "Con futuro y condicional el pronombre no va después del verbo: en lo formal va en el medio (mesóclise: " + it(stL + "-" + g[loose] + "-" + vL.slice(stL.length)) + "); en el habla, antes: " + it(g[loose] + " " + vL) + "."
+            : "Si el pronombre va después del verbo, se une con guion: " + it(vL + "-" + g[loose]) +
+              ". En el habla de Brasil lo normal es ponerlo antes: " + it(g[loose] + " " + vL) + ".";
+          if (res.given[loose]) res.given[loose].bad = true;
+          res.fixed.forEach(function (w) { if (w.w === g[loose]) w.fix = true; });
+          return res;
+        }
+        // A choice between registers (me dá / dá-me): both exist, but the
+        // question asked for one of them.
+        if (ctx.choice) {
+          var encTok = function (arr) { return arr.filter(function (x) { return splitEnclitic(x); })[0]; };
+          var gE = encTok(g), eE = encTok(e2);
+          if (!!gE !== !!eE) {
+            var spE = splitEnclitic(gE || eE), mes = (eE || "").split("-").length === 3;
+            res.cat = "colocacao"; res.label = LABEL.colocacao; res.verdict = "quasi"; res.slip = true; res.all = ["colocacao"];
+            res.hint = "Las dos formas existen: ¿cuál es la del registro que se pide?";
+            res.explain = gE
+              ? it(gE) + " es de lo escrito formal (y de Portugal); en el habla de Brasil el pronombre va antes del verbo: " + it(spE.c + " " + spE.v) + "."
+              : mes ? "En el registro formal, con futuro y condicional va la mesóclise: " + it(eE) + "; " + it(spE.c + " " + spE.v) + " es lo corriente."
+              : "En lo escrito formal el pronombre va después del verbo: " + it(eE) + "; " + it(spE.c + " " + spE.v) + " es del habla.";
+            res.given.forEach(function (w) { if (w.w === gE || w.w === spE.c) w.bad = true; });
+            res.fixed.forEach(function (w) { if (w.w === eE || w.w === spE.c) w.fix = true; });
+            return res;
+          }
+        }
         res.verdict = "giusto"; return res;
       }
       var gS = stripSubj(g), eS = stripSubj(e2);
-      if (genderFree(gS, eS, list[li]) || synonymFree(gS, eS)) { res.verdict = "giusto"; return res; }
+      if (genderFree(gS, eS, list[li]) || synonymFree(gS, eS, /,\s*mas\s*[,.]/i.test(given))) { res.verdict = "giusto"; return res; }
     }
     if (formalHit) {
       res.cat = "colocacao"; res.label = LABEL.colocacao; res.verdict = "quasi"; res.slip = true; res.all = ["colocacao"];
       res.hint = "En el habla está bien; en lo escrito formal, ¿se empieza con un pronombre átono?";
-      res.explain = "En la escritura formal no se empieza una oración (ni una parte después de coma) con pronombre átono: " + it(formalHit.v + "-" + formalHit.c) + ". En el habla de Brasil, *" + formalHit.c + " " + formalHit.v + "* es lo normal.";
+      var mesoc = formalHit.form.split("-").length === 3;
+      res.explain = "En la escritura formal no se empieza una oración (ni una parte después de coma) con pronombre átono: " + it(formalHit.form) +
+        (mesoc ? " (con futuro y condicional, el pronombre va en el medio: es la mesóclise)" : "") +
+        ". En el habla de Brasil, *" + formalHit.c + " " + formalHit.v + "* es lo normal.";
       res.given.forEach(function (w) { if (w.w === formalHit.c) w.bad = true; });
-      res.fixed.forEach(function (w) { if (w.w === formalHit.v + "-" + formalHit.c) w.fix = true; });
+      res.fixed.forEach(function (w) { if (w.w === formalHit.form) w.fix = true; });
       return res;
     }
 
     // The whole answer in Spanish: one finding, not five.
     var wordsG = rawG.filter(function (t) { return /[a-zà-ÿ]/i.test(t); });
-    var esToks = wordsG.filter(spanishish);
-    var stemToks = ctx.stem && !/_{3,}/.test(ctx.stem) ? tokens(String(ctx.stem).replace(/\([^)]*\)/g, " ")) : [];
-    var copied = stemToks.length && esToks.length && rawG.join(" ") === stemToks.join(" ");
+    // What the answers use is not Spanish (Rosario, José, a typo of a
+    // Portuguese word is not Spanish either: entrgeue).
+    var allT = [];
+    list.forEach(function (v) { tokens(v).forEach(function (t) { allT.push(t); }); });
+    var typoOfT = function (t) { return allT.some(function (x) { return x.length >= 4 && editDistance(deaccent(t), deaccent(x)) <= 1; }); };
+    var stemRaw = ctx.stem && !/_{3,}/.test(ctx.stem) ? String(ctx.stem) : "";
+    var stemToks = stemRaw ? tokens(stemRaw.replace(/\([^)]*\)/g, " ")) : [];
+    // A prompt in Spanish (¿Qué…?, ñ, words that are not Portuguese).
+    var stemEs = stemToks.length && (/[¿¡ñ]/.test(stemRaw) || stemToks.some(spanishish) ||
+                 stemToks.filter(function (t) { return !isPortuguese(t); }).length * 2 >= stemToks.length);
+    var fromStem = function (t) { return stemEs && stemToks.indexOf(t) >= 0 && allT.indexOf(t) < 0 && !isPortuguese(t); };
+    var esToks = wordsG.filter(function (t) {
+      if (allT.indexOf(t) >= 0) return false;
+      if (spanishWord(t)) return true;
+      if (fromStem(t)) return true;
+      return looksSpanish(t) && !typoOfT(t);
+    });
+    var gNoPar = tokens(given.replace(/\([^)]*\)/g, " "));
+    var copied = gNoPar.length && gNoPar.join(" ") === stemToks.join(" ") &&
+      (stemEs || /traduc/i.test(String(ctx.prompt || "")) || stemToks.some(function (t) { return !isPortuguese(t); }));
     if (copied) {
       res.cat = "espanol"; res.label = LABEL.espanol;
       res.hint = "Eso es la consigna, en español. Escribila en portugués; si todavía no lo sabés, pedí las fichas 🧩.";
-      res.explain = "Copiaste la consigna en español. En portugués: " + it(target0) + ".";
+      res.explain = "Copiaste la consigna en español. En portugués: " + sentEnd(target0);
       res.given.forEach(function (w) { w.bad = true; });
       res.fixed.forEach(function (w) { w.fix = true; });
       res.verdict = "sbagliato"; res.all = ["espanol"];
       return res;
     }
-    if (wordsG.length >= 2 && (esToks.length * 2 >= wordsG.length || (esToks.length >= 3 && esToks.length * 3 >= wordsG.length))) {
+    if (wordsG.length >= 2 && esToks.length >= 2 && (esToks.length * 2 >= wordsG.length || (esToks.length >= 3 && esToks.length * 3 >= wordsG.length))) {
       var pairsEs = esToks.filter(spanishWord).slice(0, 3).map(function (t) { return it(t) + " = " + it(String(spanishWord(t)).split(" / ")[0]); });
       var allEs = esToks.length === wordsG.length;
       var ptGloss = allEs ? [] : wordsG.filter(function (t) { return !spanishish(t) && DATA.lex[t]; })
@@ -2206,8 +2691,8 @@
       res.hint = allEs ? "Eso está en español. Escribilo en portugués; si todavía no lo sabés, pedí las fichas 🧩."
                        : "Hay español mezclado: " + esToks.slice(0, 3).map(it).join(", ") + ". Escribilo todo en portugués.";
       res.explain = (allEs ? "Está en español. " : "Mezcla español y portugués" + (ptGloss.length ? " (" + ptGloss.join(", ") + ")" : "") + ". ") +
-        "En portugués: " + it(target0) + "." + (pairsEs.length ? " (" + pairsEs.join(", ") + ")" : "");
-      res.given.forEach(function (w) { if (spanishish(w.w)) w.bad = true; });
+        "En portugués: " + sentEnd(target0) + (pairsEs.length ? " (" + pairsEs.join(", ") + ")" : "");
+      res.given.forEach(function (w) { if (esToks.indexOf(w.w) >= 0) w.bad = true; });
       res.fixed.forEach(function (w) { if (!rawG.some(function (t) { return t === w.w; })) w.fix = true; });
       res.verdict = "sbagliato"; res.all = ["espanol"];
       return res;
@@ -2226,6 +2711,18 @@
     }
     if (found.length && g.join(" ") === e.join(" ")) return finish(res, found);
     if (found.length && canon(g, nm) === canon(e, nm)) return finish(res, found);
+
+    // «a gente vamos» where the answer says «nós vamos» (or «a gente vai»)
+    var agS = agenteSwap(g, e);
+    if (agS) {
+      res.cat = "persona"; res.label = LABEL.persona; res.verdict = "sbagliato";
+      res.all = found.map(function (f) { return f.d.cat; }).concat(["persona"]);
+      res.hint = "*a gente* significa «nosotros», pero ¿con qué persona del verbo va?";
+      res.explain = "*A gente* va con la 3.ª del singular (a gente vai, a gente fala); *nós*, con la 1.ª del plural (nós vamos). *A gente " + g[agS.k] + "* mezcla los dos: acá, " + it(agS.fix) + ".";
+      [agS.i, agS.i + 1, agS.k].forEach(function (i) { if (res.given[i]) res.given[i].bad = true; });
+      agS.ei.forEach(function (i) { if (res.fixed[i]) res.fixed[i].fix = true; });
+      return res;
+    }
 
     // porque / por que / por quê
     for (var pq = 0; pq < g.length; pq++) {
@@ -2247,11 +2744,9 @@
     if (found.length && g.join(" ") === e.join(" ")) return finish(res, found);
 
     // Enclisis after an attractor, with everything else right.
-    var be2 = badEnclisis(g);
-    if (be2 && !badEnclisis(e)) {
-      found.push({ d: { cat: "colocacao", slip: false,
-        hint: "Mirá dónde va el pronombre después de *" + be2.prev + "*.",
-        explain: "*" + be2.prev + "* atrae el pronombre delante del verbo: " + it(be2.prev + " " + be2.c + " " + be2.v) + ". Lo mismo después de *não, nunca, que, quem, já, também* y los adverbios." }, gi: be2.i, ei: -1 });
+    var be2 = badEnclisis(g, pz);
+    if (be2 && !badEnclisis(e, pauses(target))) {
+      found.push({ d: be2.dup ? dupClitic(be2) : attractExplain(be2), gi: be2.i, ei: -1 });
     }
 
     // «tenho comido» / «he comido» where the perfeito goes, and vice versa;
@@ -2280,7 +2775,7 @@
     } else {
       var ops = align(g, e);
       ops.forEach(function (o) {
-        var c = { e: e, ei: o.ei, g: g, gi: o.gi, names: nm, stem: ctx.stem, prompt: ctx.prompt, nominal: ctx.nominal };
+        var c = { e: e, ei: o.ei, g: g, gi: o.gi, names: nm, stem: ctx.stem, prompt: ctx.prompt, nominal: ctx.nominal, lead: lead.toLowerCase(), epz: epz };
         if (o.op === "sub") {
           if (be2 && o.gi === be2.i) return;
           var d = pairRules(o.g, o.e, c);
@@ -2306,7 +2801,7 @@
       while (e[k] && /^(não|já|também|sempre|nunca|me|te|se|nos|lhe|lhes|o|a|os|as|só)$/.test(e[k])) k++;
       if (verbForms(e[k] || "").some(function (v) { return SUBJ_P[w].indexOf(v.p) >= 0; })) return true;
     }
-    if (/^(o|a|os|as)$/.test(w) && !/^(de|em|por|a)$/.test(e[o.ei - 1] || "") && ((POSSESSIVE.indexOf(next) >= 0 && possAgrees(w, next)) || (nm.indexOf(next) >= 0 && !PLACE_ART[next] && !PLACE_NOART.test(next) && nameAgrees(w, next)))) return true;
+    if (/^(o|a|os|as)$/.test(w) && !/^(de|em|por|a)$/.test(e[o.ei - 1] || "") && ((POSSESSIVE.indexOf(next) >= 0 && possAgrees(w, next)) || (nm.indexOf(next) >= 0 && !PLACE_ART[next] && !PLACE_NOART.test(next) && !DATA.nouns[next] && nameAgrees(w, next)))) return true;
     return false;
   }
   function canonExtraOk(w, g, e, o, nm) {
@@ -2316,7 +2811,7 @@
       while (g[k] && /^(não|já|também|sempre|nunca|me|te|se|nos|lhe|lhes|o|a|os|as|só)$/.test(g[k])) k++;
       if (verbForms(g[k] || "").some(function (v) { return SUBJ_P[w].indexOf(v.p) >= 0; })) return true;
     }
-    if (/^(o|a|os|as)$/.test(w) && !/^(de|em|por|a)$/.test(g[o.gi - 1] || "") && ((POSSESSIVE.indexOf(next) >= 0 && possAgrees(w, next)) || (nm.indexOf(next) >= 0 && !PLACE_ART[next] && !PLACE_NOART.test(next) && nameAgrees(w, next)))) return true;
+    if (/^(o|a|os|as)$/.test(w) && !/^(de|em|por|a)$/.test(g[o.gi - 1] || "") && ((POSSESSIVE.indexOf(next) >= 0 && possAgrees(w, next)) || (nm.indexOf(next) >= 0 && !PLACE_ART[next] && !PLACE_NOART.test(next) && !DATA.nouns[next] && nameAgrees(w, next)))) return true;
     return false;
   }
 
@@ -2345,7 +2840,23 @@
   /* A wrong option in a multiple-choice question: explain why *that* option
      is wrong (response-specific feedback). */
   function explainChoice(chosen, answer, ctx) {
-    var d = diagnose(chosen, [answer], ctx);
+    ctx = ctx || {};
+    // «esquisito» = raro / exquisito / aburrido: the options are Spanish
+    // meanings, not Portuguese to diagnose.
+    var gloss = /«([^»]+)»\s*=\s*$/.exec(String(ctx.stem || "")) || (/=\s*$/.test(String(ctx.stem || "")) ? [] : null);
+    if (gloss) {
+      var w = String(gloss[1] || "").toLowerCase(), fa = w && (FALSOS[w] || DATA.falsi[w]);
+      if (!fa || !fa[0]) return null;
+      var d0 = { verdict: "sbagliato", cat: "falso_amigo", label: LABEL.falso_amigo, slip: false,
+        hint: it(w) + " se parece a una palabra del español, pero no significa lo mismo.",
+        explain: it(w) + " en portugués significa «" + fa[0] + "»" + (deaccent(String(chosen).toLowerCase()) === deaccent(w) ? ", no «" + chosen + "»" : "") + "." + (fa[2] ? " " + fa[2] : ""),
+        given: [{ w: String(chosen), bad: true }], fixed: [{ w: String(answer), fix: true }], others: 0, all: ["falso_amigo"], target: answer };
+      return d0;
+    }
+    var c2 = {};
+    Object.keys(ctx).forEach(function (k) { c2[k] = ctx[k]; });
+    c2.choice = true;
+    var d = diagnose(chosen, [answer], c2);
     return d.verdict === "giusto" ? null : d;
   }
 
