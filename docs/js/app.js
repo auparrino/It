@@ -2203,7 +2203,7 @@
     var cd = it.choiceDiag || { before: "", after: "" };
     var d = Diagnosi.explainChoice(cd.before + given + cd.after, cd.before + it.answer + cd.after,
                                    it.choiceDiag ? {} : { stem: it.stem, nominal: it.type === "plural" || /plural/i.test(it.prompt || "") });
-    var useful = choiceInLanguage(it, given) && d && d.cat && !GENERIC[d.cat];
+    var useful = choiceInLanguage(it, given) && !asksMeaning(it) && !spanishText(it.answer) && d && d.cat && !GENERIC[d.cat];
     // Another sentence or a word unlike the answer: no rule to invent.
     if (useful && DV && DV.far(given, [it.answer], d)) useful = false;
     if (useful && DV) DV.tidy(d);
