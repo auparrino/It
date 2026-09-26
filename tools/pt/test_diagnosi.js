@@ -138,6 +138,137 @@ ok(Array.isArray(D.PORTUNOL) && D.PORTUNOL.length >= 10 && D.PORTUNOL.every(func
 ok(D.explainChoice("à", "a", { stem: "Vou ___ pé." }) && D.explainChoice("à", "a", { stem: "Vou ___ pé." }).cat === "crase", "explainChoice: la opción equivocada con su categoría");
 ok(D.explainChoice("a", "a", {}) === null, "explainChoice: la correcta no tiene error");
 
+/* ------------------------- familias de devolución mala (tools/pt/diag_review.js)
+   Cada caso: [dada, esperadas, ctx, qué tiene que pasar].  choice: la opción
+   de opción múltiple (explainChoice).  El harness diag_review.js recorre las
+   52 semanas, el banco, las frases y las opciones con los errores típicos del
+   hispanohablante; estos son sus representantes. */
+var FAMILIES = [
+  // un verbo conjugado donde va el infinitivo no es futuro do subjuntivo
+  ["Vou viajo amanhã.", ["Vou viajar amanhã."], {}, { cat: "persona", explain: /infinitivo/, notExplain: /subjuntivo/ }],
+  ["Gosto de danço samba.", ["Gosto de dançar samba."], {}, { cat: "persona", explain: /preposición/ }],
+  ["Quando você vai volto?", ["Quando você vai voltar?"], {}, { cat: "persona" }],
+  ["Quando eu chego, te ligo", ["Quando eu chegar, te ligo."], {}, { cat: "futuro_subj" }],
+  // infinitivo pessoal y a gente
+  ["É melhor vocês chegar cedo.", ["É melhor vocês chegarem cedo."], {}, { cat: "inf_pessoal" }],
+  ["Trouxe cadeiras para a gente irmos para a praia.", ["Trouxe cadeiras para a gente ir para a praia."], {}, { cat: "inf_pessoal", explain: /a gente/ }],
+  ["Para nós irem juntos.", ["Para nós irmos juntos."], {}, { cat: "inf_pessoal", explain: /\*irem\* es la forma de/ }],
+  // el futuro do subjuntivo bien formado en la explicación
+  ["Quando eu saio, te ligo.", ["Quando eu sair, te ligo."], {}, { cat: "futuro_subj", explain: /saíram → sair\b/ }],
+  // un tipeo en un irregular es un tipeo
+  ["Ontem ele estve aqui.", ["Ontem ele esteve aqui."], {}, { cat: "tipeo" }],
+  ["Eles mantienem a casa.", ["Eles mantêm a casa."], {}, { explain: /diptongo/ }],
+  // las tildes con su regla, y la ñ no es una tilde
+  ["Falta agua.", ["Falta água."], {}, { cat: "tilde", explain: /diptongo/ }],
+  ["Todo día vou à praia.", ["Todo dia vou à praia."], {}, { cat: "tilde", hint: /Sobra una tilde/, explain: /español/ }],
+  ["Tenho trinta años.", ["Tenho trinta anos."], {}, { cat: "espanol" }],
+  ["Ela está grávida de gemeos.", ["Ela está grávida de gêmeos."], {}, { cat: "tilde", explain: /esdrújulas/ }],
+  ["Vou compra-lo amanhã.", ["Vou comprá-lo amanhã."], {}, { cat: "tilde", explain: /-lo/ }],
+  ["vendé-la", ["vendê-la"], {}, { cat: "tilde", explain: /cerrada/ }],
+  ["mêses", ["meses"], {}, { cat: "tilde", explain: /llanas/ }],
+  // una preposición con artículo donde va el artículo solo
+  ["Saramago ganhou ao Nobel em 1998.", ["Saramago ganhou o Nobel em 1998."], {}, { cat: "preposicion", notCat: "tipeo" }],
+  ["A Bia namora ao Rafa.", ["A Bia namora o Rafa."], {}, { cat: "a_personal" }],
+  ["Eu conheço a Rio.", ["Eu conheço o Rio."], {}, { notCat: "a_personal" }],
+  // una sola palabra en español no es «mezcla»
+  ["Durmo muy.", ["Durmo muito."], {}, { cat: "muito" }],
+  // la misma palabra con otra terminación no es un falso amigo
+  ["O museu fechas às cinco.", ["O museu fecha às cinco."], {}, { cat: "persona" }],
+  ["Comprei dois jornals.", ["Comprei dois jornais."], {}, { cat: "plural" }],
+  ["Os exercícios são fácils.", ["Os exercícios são fáceis."], {}, { cat: "plural" }],
+  // la consigna copiada
+  ["Dos cervezas, por favor.", ["Duas cervejas, por favor."], { stem: "Dos cervezas, por favor." }, { cat: "espanol", explain: /Copiaste/ }],
+  ["(Brasil) ¿Qué estás haciendo?", ["O que você está fazendo?"], { stem: "(Brasil) ¿Qué estás haciendo?" }, { cat: "espanol", explain: /Copiaste/ }],
+  ["Me pidió que la esperara.", ["Ela me pediu que eu a esperasse."], { stem: "Me pidió que la esperara." }, { cat: "espanol" }],
+  // la variante que difiere solo en la tilde es la que se quiso escribir
+  ["Vou a praia", ["Vou para a praia.", "Vou à praia."], {}, { cat: "crase" }],
+  // ser, estar, ficar
+  ["Você está argentino?", ["Você é argentino?"], {}, { cat: "ser_estar", label: /ser, estar/ }],
+  ["A carta esteve escrita por ela.", ["A carta foi escrita por ela."], {}, { cat: "ser_estar", explain: /pasiva/ }],
+  ["O Cristo está no Corcovado.", ["O Cristo fica no Corcovado."], {}, { cat: "ser_estar", explain: /ficar/ }],
+  // una orden no es un deseo
+  ["Fala mais devagar, por favor.", ["Fale mais devagar, por favor."], {}, { cat: "subjuntivo", explain: /orden/ }],
+  ["Se você visitar Salvador, vou ao Pelourinho.", ["Se você visitar Salvador, vá ao Pelourinho."], {}, { explain: /orden/ }],
+  ["Não acho que é verdade.", ["Não acho que seja verdade."], {}, { cat: "subjuntivo", explain: /não acho que/ }],
+  ["Ou sou, ninguém veio.", ["Ou seja, ninguém veio."], {}, { explain: /fórmula fija/ }],
+  ["Fechar a porta!", ["Feche a porta!"], {}, { cat: "subjuntivo", explain: /orden/ }],
+  // el lo del español es un pronombre, no un artículo
+  ["Eu lo vi ontem.", ["Eu o vi ontem."], {}, { cat: "pronome", notHint: /artículo/ }],
+  ["se lo", ["para ela"], { stem: "Comprei um presente e dei ___." }, { choice: true, cat: "pronome", explain: /para ela/ }],
+  // la mesóclise bien escrita
+  ["Lhe direi a verdade.", ["Dir-lhe-ei a verdade."], {}, { cat: "colocacao", explain: /dir-lhe-ei/, notExplain: /direi-lhe/ }],
+  ["Eles mudarão se em março.", ["Eles se mudarão em março."], {}, { cat: "colocacao", explain: /mesóclise/ }],
+  // el pronombre repetido
+  ["Ela se chama-se Beatriz.", ["Ela se chama Beatriz."], {}, { cat: "pronome", explain: /una sola vez/ }],
+  // a gente + 1.ª plural
+  ["A gente vamos", ["Nós vamos"], { stem: "(culto) ___ ao show." }, { choice: true, cat: "persona", explain: /a gente/i }],
+  // el pronombre después de una coma no está atraído
+  ["Já que você está aqui, ajuda-me", ["Já que você está aqui, me ajuda"], {}, { verdict: "giusto" }],
+  // las preguntas de registro tienen su explicación
+  ["Dá-me um café?", ["Me dá um café?"], { stem: "«¿Me das un café?»" }, { choice: true, cat: "colocacao", explain: /habla de Brasil/ }],
+  ["Te direi", ["Dir-te-ei"], { stem: "(formal) ___ tudo amanhã." }, { choice: true, cat: "colocacao", explain: /mesóclise/ }],
+  // las opciones que son significados en español no se diagnostican como portugués
+  ["aburrido", ["raro"], { stem: "O filme é meio esquisito. «esquisito» =" }, { choice: true, notCat: "espanol" }],
+  // el voseo y las terminaciones del español
+  ["Você querés um café?", ["Você quer um café?"], {}, { cat: "espanol", explain: /voseo/ }],
+  ["Abrí a janela, por favor.", ["Abra a janela, por favor."], {}, { cat: "espanol", explain: /voseo/ }],
+  ["Ontem eu chegué tarde.", ["Ontem eu cheguei tarde."], {}, { cat: "espanol", explain: /-ei/ }],
+  ["Eles hicieram tudo.", ["Eles fizeram tudo."], {}, { cat: "espanol" }],
+  ["Poniendo", ["Pondo"], { stem: "___ a mesa, ela chamou todos." }, { choice: true, notExplain: /nombres propios/ }],
+  // errores que una variante mal entendida aceptaba
+  ["A menino brinca na calçada.", ["O menino brinca na calçada.", "A criança brinca na calçada."], {}, { cat: "genero" }],
+  ["Eu já tinha lida o livro.", ["Eu já tinha lido o livro."], {}, { cat: "participio" }],
+  ["tem chovida", ["tem chovido"], { stem: "Ultimamente ___ muito." }, { cat: "participio" }],
+  ["Paguei à visto.", ["Paguei à vista."], {}, { notCat: "subjuntivo", verdict: "sbagliato" }],
+  ["na Copacabana", ["em Copacabana"], { stem: "Moro ___." }, { verdict: "sbagliato" }],
+  ["para", ["para o"], { stem: "Vou pro Centro. → Vou ___ Centro." }, { choice: true, verdict: "sbagliato" }],
+  ["hei corrido", ["tenho corrido"], { stem: "Nos últimos meses, eu ___ no Aterro." }, { choice: true, cat: "perfeito_composto" }],
+  ["contou te", ["te contou"], { stem: "Quem ___ isso?" }, { choice: true, cat: "colocacao", explain: /guion/ }],
+  ["Assinado", ["Assinada"], { stem: "___ a Lei Áurea, milhares de libertos ficaram sem terra." }, { choice: true, cat: "concordancia" }],
+  ["mas", ["porém"], { stem: "O projeto era bom. O plano, ___, falhou." }, { choice: true, verdict: "sbagliato" }],
+  ["posta", ["posto"], { stem: "pôr → ___" }, { cat: "participio" }],
+  // las mismas dos palabras en la respuesta no son una contracción que falta
+  ["«Todo no mundo começou com um sim» é a primeira frase de A Hora da Estrela.",
+   ["«Tudo no mundo começou com um sim» é a primeira frase de A Hora da Estrela."], {}, { cat: "lexico" }],
+  // lo que está antes de la flecha es la consigna, no la frase
+  ["daqele", ["daquele"], { stem: "de + aquele → ___" }, { notCat: "contraccion" }],
+  ["floes", ["flores"], { stem: "a flor → as ___", nominal: true }, { cat: "tipeo" }],
+  ["falamos", ["fala"], { stem: "a gente → ___" }, { cat: "persona", explain: /a gente/i }],
+  // demostrativos, dele / dela, regencia con un adverbio en el medio
+  ["dessa", ["desta"], { stem: "(formal) Venho, por meio ___, solicitar informações." }, { choice: true, cat: "pronome", explain: /Este/ }],
+  ["Eu penso muito da minha avó.", ["Eu penso muito na minha avó."], {}, { cat: "regencia" }],
+  ["Argentina é um país enorme.", ["A Argentina é um país enorme."], {}, { cat: "articulo" }],
+  ["Sou a Rosario.", ["Sou de Rosario."], {}, { cat: "preposicion", notHint: /no un artículo/ }],
+  // el participio: concuerda con el sujeto, y después de ser va el participio
+  ["O boleto já está paga.", ["O boleto já está pago."], {}, { cat: "participio", explain: /boleto/ }],
+  ["As cartas foram entregas.", ["As cartas foram entregues."], {}, { cat: "participio" }],
+  // ter existencial, impersonal como haver; la forma con todos sus tiempos
+  ["Tinham muita gente no bloco.", ["Tinha muita gente no bloco."], {}, { cat: "persona", explain: /impersonal/ }],
+  ["Embora houvesse muita gente, conseguir entrar.", ["Embora houvesse muita gente, conseguimos entrar."], {}, { cat: "persona", explain: /presente o pretérito perfeito/ }],
+  // el se pasivo y el se indeterminado
+  ["Observa-se mudanças.", ["Observam-se mudanças."], {}, { cat: "persona", explain: /se\* pasivo/ }],
+  ["assistem-se a filmes", ["assiste-se a filmes"], {}, { cat: "persona", explain: /singular/ }]
+];
+FAMILIES.forEach(function (c) {
+  var x = c[3], d = x.choice ? D.explainChoice(c[0], c[1][0], c[2]) : D.diagnose(c[0], c[1], c[2]);
+  var v = d ? d.verdict : "giusto", what = "familia «" + c[0] + "»: ";
+  if (x.verdict) ok(v === x.verdict, what + "veredicto " + v);
+  if (x.cat) ok(d && d.cat === x.cat, what + "esperado " + x.cat + ", obtenido " + (d && d.cat) + " (" + (d && d.explain) + ")");
+  if (x.notCat) ok(!d || d.cat !== x.notCat, what + "no tiene que ser " + x.notCat);
+  if (x.explain) ok(d && x.explain.test(d.explain), what + "explicación sin " + x.explain + ": " + (d && d.explain));
+  if (x.notExplain) ok(!d || !x.notExplain.test(d.explain), what + "explicación con " + x.notExplain + ": " + (d && d.explain));
+  if (x.hint) ok(d && x.hint.test(d.hint), what + "pista sin " + x.hint + ": " + (d && d.hint));
+  if (x.notHint) ok(!d || !x.notHint.test(d.hint), what + "pista con " + x.notHint + ": " + (d && d.hint));
+  if (x.label) ok(d && x.label.test(d.label), what + "etiqueta " + (d && d.label));
+  if (d && d.verdict !== "giusto") {
+    ok(!/undefined|NaN|\*\s*\*/.test(d.hint + " " + d.explain), what + "texto roto: " + d.hint + " / " + d.explain);
+    d.fixed.filter(function (t) { return t.fix && t.w.length > 2; }).forEach(function (t) {
+      ok(d.hint.toLowerCase().indexOf("*" + t.w + "*") < 0, what + "la pista revela la respuesta: " + d.hint);
+    });
+  }
+});
+ok(D.LABEL.ser_estar && D.SEVERITY.ser_estar, "ser_estar tiene etiqueta y gravedad");
+
 /* ------------------------------ errores inyectados en las frases del banco */
 
 var SPLIT = { no: "em o", na: "em a", nos: "em os", nas: "em as", do: "de o", da: "de a", dos: "de os", das: "de as", ao: "a o", aos: "a os",
@@ -171,7 +302,10 @@ function inject(sentence) {
     }
     // person of the verb
     var forms = D.verbForms(low).filter(function (f) { return f.tense === "presente" && f.p !== 1 && f.p !== 4; });
-    if (forms.length && low.length > 2 && i > 0 && !/^(é|são|está|tem|vai|vão|há)$/.test(low)) {
+    // after an article or a determiner the word is a noun (um livro, do Rio), not a verb
+    var prevW = core(toks[i - 1] || "").toLowerCase();
+    var afterDet = /^(o|a|os|as|um|uma|uns|umas|do|da|dos|das|no|na|nos|nas|ao|à|pelo|pela|meu|minha|seu|sua|nosso|nossa|este|esta|esse|essa|aquele|aquela)$/.test(prevW);
+    if (forms.length && low.length > 2 && i > 0 && !afterDet && !D.util.prepInfo(low) && !/^(é|são|está|tem|vai|vão|há)$/.test(low)) {
       var f = forms[0];
       try {
         var all = Conj.conjugate(f.lemma, "presente").map(function (x) { return x.split(" ").pop(); });

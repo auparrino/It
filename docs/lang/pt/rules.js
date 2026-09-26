@@ -514,6 +514,7 @@
         lexico: { tags: ["lexico", "falsos_amigos"], err: ["falso_amigo", "espanol"], vocab: true },
         tempo: { tags: ["perf_imperf", "imperfeito", "perfeito", "futuro", "condicional"], err: ["tempo", "perfeito_composto"] },
         persona: { tags: ["presente", "irregulares"], err: ["persona"] },
+        ser_estar: { tags: ["ser_estar"] },
         participio: { tags: ["participio", "pasiva"], err: ["participio", "concordancia"] },
         verbo_irregular: { tags: ["irregulares", "perfeito"], err: ["verbo_irregular", "participio"] },
         regularizacion: { tags: ["irregulares", "perfeito"], err: ["verbo_irregular", "participio"] },
