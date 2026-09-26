@@ -3,6 +3,9 @@
  *
  * keep:  categorías del diagnóstico que valen aunque la respuesta no se
  *        parezca a la correcta (todo escrito en español).
+ * transfer: categorías del diagnóstico que son un calco del español: si
+ *        se esquiva esa opción y se elige la correcta, la devolución dice
+ *        «Esquivaste la trampa» con el porqué.
  * terms: [expresión, semana, en criollo]: el nombre de un tiempo o modo y
  *        la semana en que el curso lo enseña (course.json, weeks[].tenses).
  *        Antes de esa semana las devoluciones dicen lo de la derecha.  Los
@@ -11,6 +14,7 @@
 (function (root) {
   "use strict";
   var DATA = {
+    transfer: ["parola_spagnola", "falso_amico", "a_personale", "piacere", "ausiliare", "soggetto"],
     keep: ["parola_spagnola"],
     terms: [
       ["\\bcongiuntivo trapassato\\b", 30, "subjuntivo pluscuamperfecto (como «hubiera hecho»)"],
@@ -29,6 +33,8 @@
       ["\\bpassato prossimo\\b", 11, "pasado compuesto (auxiliar + participio)"],
       ["\\bimperfetto\\b", 15, "pasado de las descripciones (como «hacía»)"],
       ["\\s*\\(indicativo\\)", 24, ""],
+      ["\\bdel indicativo\\b", 24, "de la forma común del verbo"],
+      ["\\bel indicativo\\b", 24, "la forma común del verbo"],
       ["\\bindicativo\\b", 24, "la forma común del verbo"]
     ]
   };

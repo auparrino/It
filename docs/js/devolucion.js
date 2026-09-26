@@ -17,6 +17,21 @@
  *                                      todavía no se enseñaron, en criollo
  *   Devolucion.tidy(d, week)           lo mismo sobre un diagnóstico
  *
+ * Después de una respuesta correcta:
+ *   Devolucion.slips(given, target)    lo que difiere en una respuesta bien
+ *                                      o casi bien (mayúscula, tilde, doble,
+ *                                      una letra), palabra por palabra
+ *   Devolucion.slipText(s)             «*lunedì* lleva tilde (escribiste…)»
+ *   Devolucion.variant(given, item)    la forma aceptada que escribió y las
+ *                                      otras que vale aprender («También se
+ *                                      dice»)
+ *   Devolucion.unsure(o)               correcta pero insegura: pista, segundo
+ *                                      intento, repaso de un error, un
+ *                                      detalle o mucho tiempo
+ *                                      (slowAfter(item) da ese tiempo)
+ *   Devolucion.transfer(cat)           la categoría es un calco del español
+ *                                      (DEVOLUCION_DATA.transfer)
+ *
  * Lo que depende de la lengua (los nombres de los tiempos, la semana en que
  * se enseñan, las categorías que valen aunque la respuesta esté lejos) está
  * en el paquete: docs/lang/<código>/devolucion_data.js (DEVOLUCION_DATA).
@@ -303,10 +318,131 @@
     return d;
   }
 
+  /* ------------------------------------------ las respuestas correctas */
+
+  /* After a right answer the feedback helps mostly when the learner was
+     unsure or guessed: it corrects the low-confidence right answers that
+     would be forgotten (Butler, Karpicke & Roediger 2008); after an easy,
+     confident one more text is noise, so it stays short (Hattie &
+     Timperley 2007: feedback on the task, at the level the learner is at). */
+
+  // The same text for comparing forms: case, curly quotes and punctuation out.
+  function flat(s) {
+    return String(s == null ? "" : s).normalize("NFC").toLowerCase().replace(/[’‘`´]/g, "'")
+      .replace(/\s*\|\s*/g, " ").replace(/[^\p{L}\p{N}' -]/gu, " ").replace(/\s+/g, " ").trim();
+  }
+  function toks(s) {
+    return String(s == null ? "" : s).replace(/\s*\|\s*/g, " ").trim().split(/\s+/).filter(Boolean);
+  }
+  function bare(w) {
+    return String(w).replace(/^[¿¡"«“(]+|[.,;:!?…"»”)]+$/g, "").replace(/[’‘`´]/g, "'");
+  }
+  function undouble(s) { return s.replace(/(\p{L})\1/gu, "$1"); }
+
+  /* What a right answer (or an almost right one) wrote differently from the
+     accepted form, word by word: the capital of a word inside the sentence,
+     a missing or extra accent, a double consonant, the apostrophe, one
+     letter.  Nothing when the words are others (another accepted answer,
+     another order): that is not a slip. */
+  function slips(given, target) {
+    var g = toks(given), t = toks(target), out = [];
+    if (!g.length || g.length !== t.length) return out;
+    for (var i = 0; i < t.length; i++) {
+      var a = bare(g[i]), b = bare(t[i]);
+      if (a === b) continue;
+      var al = a.toLowerCase(), bl = b.toLowerCase(), what;
+      if (al === bl) {
+        // the first word of the sentence goes either way
+        if (i === 0 || /[.!?…]["»”)]?$/.test(t[i - 1])) continue;
+        var c = b.charAt(0);
+        what = c !== c.toLowerCase() ? "mayus" : "minus";
+      } else if (deaccent(al) === deaccent(bl)) {
+        what = deaccent(al) === al ? "falta_tilde" : deaccent(bl) === bl ? "sobra_tilde" : "otra_tilde";
+      } else if (undouble(al) === undouble(bl)) {
+        what = al.length < bl.length ? "falta_doble" : "sobra_doble";
+      } else if (deaccent(al).replace(/['-]/g, "") === deaccent(bl).replace(/['-]/g, "")) {
+        what = "signo";
+      } else if (lev(deaccent(al), deaccent(bl)) <= (bl.length > 5 ? 2 : 1)) {
+        what = "letra";
+      } else return [];
+      out.push({ i: i, g: a, t: b, what: what });
+    }
+    return out;
+  }
+  var SLIP = {
+    mayus: "va con mayúscula", minus: "va con minúscula",
+    falta_tilde: "lleva tilde", sobra_tilde: "va sin tilde", otra_tilde: "lleva otra tilde",
+    falta_doble: "lleva consonante doble", sobra_doble: "va con una sola consonante",
+    signo: "lleva apóstrofo o guion así", letra: "se escribe así"
+  };
+  // «*lunedì* lleva tilde (escribiste *lunedi*)»: the language between asterisks.
+  function slipText(s) {
+    return "*" + s.t + "* " + (SLIP[s.what] || "se escribe así") + " (escribiste *" + s.g + "*)";
+  }
+
+  /* The accepted form the learner wrote, and the others worth learning:
+     «También se dice: …».  Left out: the same words with other spacing or
+     accents (cinque milioni / cinquemilioni), the lists (a, b / a / b), a
+     shorter version of what was written (the same words minus some), and
+     what the note already says.  Null when there is nothing to add. */
+  function variant(given, it) {
+    if (!it || !it.answer || /\|/.test(it.answer) || it.options) return null;
+    var main = String(it.answer), acc = (it.accept || []).map(String).filter(function (x) { return x.trim(); });
+    var g = flat(given);
+    var mine = flat(main) === g ? main : acc.filter(function (a) { return flat(a) === g; })[0];
+    if (!mine) return null;
+    var wroteMain = flat(mine) === flat(main);
+    var squash = function (s) { return deaccent(flat(s)).replace(/[ '-]/g, ""); };
+    var mw = flat(mine).split(" ");
+    var seen = {}, others = [];
+    [main].concat(acc).forEach(function (a) {
+      var k = flat(a);
+      if (seen[k] || k === flat(mine)) return;
+      seen[k] = 1;
+      if (squash(a) === squash(mine)) return;
+      if (/[,\/]/.test(a) && !/[,\/]/.test(main)) return;
+      if (a.length > 70) return;
+      var aw = k.split(" ");
+      if (wroteMain && aw.length < mw.length && aw.every(function (w) { return mw.indexOf(w) >= 0; })) return;
+      // what the note already says (the main form always goes, if it was not written)
+      if (it.note && hasWord(it.note, bare(a)) && (wroteMain || k !== flat(main))) return;
+      others.push(a);
+    });
+    if (!wroteMain) {
+      // the main form first
+      others.sort(function (a, b) { return (flat(b) === flat(main)) - (flat(a) === flat(main)); });
+    }
+    if (!others.length) return null;
+    return { mine: mine, main: main, wroteMain: wroteMain, others: others.slice(0, 2) };
+  }
+
+  /* When a right answer counts as unsure: it came after a hint or a first
+     try, it is the second pass of a missed one, it had a slip, or it took
+     long for what it asked (reading the item and typing the answer). */
+  function slowAfter(it) {
+    it = it || {};
+    var stem = String(it.stem || "").length;
+    if (it.options) {
+      var opts = (it.options || []).join(" ").length;
+      return Math.min(60000, 9000 + 60 * stem + 25 * opts);
+    }
+    var ans = String(it.answer || "").split(/\s*\|\s*/).join(" ").length;
+    return Math.min(90000, 10000 + 50 * stem + 600 * ans);
+  }
+  function unsure(o) {
+    o = o || {};
+    if (o.hinted || o.retry || o.close || o.fixed) return true;
+    return o.ms != null && o.ms > (o.slow != null ? o.slow : slowAfter(o.item));
+  }
+  // A category of the diagnosis that is a transfer from Spanish (the
+  // package's list): after choosing right, «Esquivaste la trampa».
+  function transfer(cat) { return !!cat && (data().transfer || []).indexOf(cat) >= 0; }
+
   var api = {
     far: far, near: near, target: target, promptVerdict: promptVerdict, farHtml: farHtml,
     maskNote: maskNote, retryNote: retryNote, choicePrompt: choicePrompt,
     plain: plain, tense: tense, tidy: tidy, weekFrom: weekFrom, weekNow: weekNow,
+    slips: slips, slipText: slipText, variant: variant, unsure: unsure, slowAfter: slowAfter, transfer: transfer,
     _words: words, _lev: lev,
     _reset: function () { COMPILED = null; }
   };

@@ -1864,6 +1864,7 @@
     else if (kind === "b-freq") items = Banca.vocabSessionFor(state, freqGaps(24), 12);
     else if (kind === "b-forme") items = Banca.formsSession(state, 12);
     else if (kind === "b-tr") items = Banca.translateSession(state, 8);
+    else if (kind === "lista") items = (arg || []).slice();       // the items given (__test.play)
     else if (kind === "b-gap") items = Banca.gapSession(state, 10);
     else if (kind === "b-err") items = Banca.errorSession(state, 8);
     else if (kind === "clinica") items = Banca.clinicaSession(state, 12);
@@ -2332,8 +2333,7 @@
     if (verdict === "giusto") {
       if (round.tried) {
         markFixed(round.firstCat);
-        settle("quasi", given, '<div class="note selfrepair">🎯 ¡Lo corregiste vos! Autocorregirse es lo que más fija.</div>',
-               { label: "¡Eso es!", fixed: true });
+        settle("quasi", given, selfRepairHtml(round.firstDiag), { label: "¡Eso es!", fixed: true });
       } else {
         if (it.frase && it.type === "write") state.written = (state.written || 0) + 1;
         settle("giusto", given);
@@ -2352,12 +2352,14 @@
       round.lastGiven = String(given).trim();
       round.promptAt = Date.now();
       round.firstCat = d.cat;
+      round.firstDiag = d;
       recordError(d, given);
       showPrompt(d, DV ? DV.promptVerdict(given, accept, d) : null);
       return;
     }
     if (!round.tried && d.cat) recordError(d, given);
-    settle(verdict, given, d.cat ? diagHtml(d, true) : "");
+    // right but for a slip: what differed, without the list of the other categories
+    settle(verdict, given, d.cat ? diagHtml(d, true, verdict !== "sbagliato") : "");
   }
 
   function tokHtml(list, cls) {
@@ -2366,17 +2368,129 @@
     }).join(" ");
   }
 
-  function diagHtml(d, withDiff) {
+  // brief: an answer that counts as right (a slip) does not list the other
+  // categories («También: …»): the diff already marks every word.
+  function diagHtml(d, withDiff, brief) {
     var diff = withDiff && d.given && d.given.length <= 24
       ? '<div class="diff"><span class="k">vos</span> ' + tokHtml(d.given, "bad") +
         '<br><span class="k">bien</span> ' + tokHtml(d.fixed, "fix") + "</div>" : "";
     return '<div class="diag"><span class="tag">' + esc(d.label || "") + "</span>" + diff +
       "<p>" + mk(d.explain || "") + "</p>" +
-      (d.all && d.all.length > 1 ? (function () {
+      (!brief && d.all && d.all.length > 1 ? (function () {
         var seen = {}, rest = d.all.slice(1).filter(function (c) { if (seen[c] || c === d.cat) return false; seen[c] = 1; return true; });
         return rest.length ? '<div class="muted">También: ' + rest.map(function (c) { return esc(Diagnosi.LABEL[c] || c); }).join(", ") + "</div>" : "";
       })() : "") +
       "</div>";
+  }
+
+  /* Fixed after the hint (🎯): what was fixed, before and now, and the rule
+     it was about.  Saying what made it right is what turns the repair into
+     a rule the learner can use again (Lyster & Ranta 1997: repair after a
+     prompt; Hattie & Timperley 2007: feedback on the process). */
+  function selfRepairHtml(d) {
+    var head = '<div class="diag selfrepair"><span class="tag">🎯 Lo corregiste vos</span>';
+    if (!d || !d.given || !d.fixed) return head + "<p>Autocorregirse es lo que más fija.</p></div>";
+    var diff = d.given.length <= 24
+      ? '<div class="diff"><span class="k">antes</span> ' + tokHtml(d.given, "bad") +
+        '<br><span class="k">ahora</span> ' + tokHtml(d.fixed, "fix") + "</div>" : "";
+    return head + diff +
+      (d.explain ? "<p>" + (d.label ? "<b>" + esc(d.label) + ":</b> " : "") + mk(d.explain) + "</p>" : "") +
+      '<p class="muted small">Autocorregirse es lo que más fija.</p></div>';
+  }
+
+  /* ------------------------------------------ las respuestas correctas */
+
+  /* After a right answer the sheet says little by default and more when
+     it helps.  Elaborated feedback after a right answer pays off mainly
+     when the learner was unsure or guessed: it keeps the low-confidence
+     right answers from being forgotten (Butler, Karpicke & Roediger 2008),
+     while after an easy, confident one more text is noise (Hattie &
+     Timperley 2007).  So: a slip is said exactly (vos / bien), another
+     accepted answer brings the main one («También se dice»), a trap
+     dodged is named with its why, the other options' why is there folded;
+     the rule of the item is open when it is new, a trap or the answer
+     was unsure (a hint, a second try, a slip, a long time: DV.unsure),
+     and folded in one line when the answer was quick on a known item. */
+  function choiceWhy(it, o) {
+    if (!window.Diagnosi || !DV || !choiceInLanguage(it, o) || asksMeaning(it) || spanishText(it.answer)) return null;
+    var cd = it.choiceDiag || { before: "", after: "" }, d;
+    try {
+      d = Diagnosi.explainChoice(cd.before + o + cd.after, cd.before + it.answer + cd.after,
+                                 it.choiceDiag ? {} : { stem: it.stem, nominal: it.type === "plural" || /plural/i.test(it.prompt || "") });
+    } catch (e) { return null; }
+    if (!d || !d.cat || !d.explain || GENERIC[d.cat] || UNRECORDED[d.cat] || DV.far(o, [it.answer], d)) return null;
+    return DV.tidy(d);
+  }
+  function trapHtml(text, opt) {
+    return '<div class="diag trap"' + (opt ? ' data-o="' + esc(opt) + '"' : "") + '><span class="tag">🪤 Esquivaste la trampa</span><p>' + text + "</p></div>";
+  }
+  function slipHtml(given, target, sl, q) {
+    var txt = mk(sl.map(DV.slipText).join(" · "));
+    if (q === 2) return '<div class="note slip">✏️ Ojo: ' + txt + ".</div>";
+    var at = {};
+    sl.forEach(function (x) { at[x.i] = 1; });
+    var line = function (s, cls) {
+      return String(s).trim().replace(/\s*\|\s*/g, " ").split(/\s+/).map(function (w, i) {
+        return at[i] ? '<b class="' + cls + '">' + esc(w) + "</b>" : esc(w);
+      }).join(" ");
+    };
+    return '<div class="diag slip"><span class="tag">✏️ Un detalle</span>' +
+      '<div class="diff"><span class="k">vos</span> ' + line(given, "bad") + '<br><span class="k">bien</span> ' + line(target, "fix") + "</div>" +
+      "<p>" + txt + ".</p></div>";
+  }
+  // o: { ms, seen, fixed }; extra: what the caller already put in the sheet
+  function rightParts(it, given, q, extra, o) {
+    var p = { unsure: true, top: "", bottom: "", sol: null, trap: false };
+    if (!DV || q < 1 || it.type === "hunt") return p;
+    p.unsure = DV.unsure({ ms: o.ms, item: it, hinted: !!(round.hinted || round.tried), retry: !!it.retry, close: q === 1, fixed: !!o.fixed });
+    var typed = !it.options && it.dir !== "it-es" && !SAY_TYPES[it.type] &&
+      ["tiles", "flash", "fixerr", "hunt", "listen", "coppia"].indexOf(it.type) < 0;
+    var accept = it.accept && it.accept.length ? it.accept : [it.answer];
+    var v = q === 2 && typed && given ? DV.variant(given, it) : null;
+    // the slip: exactly what differed (a capital, an accent, a double…)
+    if (typed && given && !/class="diag/.test(extra || "")) {
+      var tgt = v ? v.mine : DV.target(given, accept) || it.answer;
+      var sl = DV.slips(given, tgt);
+      if (sl.length) p.top += slipHtml(given, tgt, sl, q);
+      else if (q === 1) {
+        p.top += '<div class="diag slip"><span class="tag">✏️ Un detalle</span><div class="diff"><span class="k">vos</span> ' +
+          markWords(given, tgt, "bad") + '<br><span class="k">bien</span> ' + markWords(tgt, given, "fix") + "</div></div>";
+      }
+    }
+    // another accepted answer, or the main one with its alternatives
+    if (v) {
+      if (!v.wroteMain) p.sol = v.mine;
+      p.top += '<div class="note also">🔀 ' + (v.wroteMain ? "También se dice: " : "Lo tuyo vale. También se dice: ") +
+        v.others.map(function (x) { return "<b>" + esc(x) + "</b>"; }).join(" · ") + "</div>";
+    }
+    if (q !== 2) return p;
+    // the trap dodged: the pattern of the examples, the false friend, the calque
+    if (it.type === "garden" && it.trap) {
+      p.trap = true;
+      p.top += trapHtml("Los ejemplos llevaban a <b>" + esc(it.trap) + "</b>, pero es <b>" + esc(it.answer) + "</b>.");
+    } else if (it.lab === "falsi" && it.trap) {
+      p.trap = true;
+      p.top += trapHtml("<i class=\"it\">" + esc(it.stem) + "</i> parece «" + esc(it.trap) + "», pero es «" + esc(it.answer) + "».");
+    } else if (it.options && it.type !== "scopri") {
+      var alts = [];
+      it.options.forEach(function (op) {
+        if (Engine.normalise(op) === Engine.normalise(it.answer)) return;
+        var d = choiceWhy(it, op);
+        if (d) alts.push({ o: op, d: d });
+      });
+      var tr = alts.filter(function (a) { return DV.transfer(a.d.cat); })[0];
+      if (tr) {
+        p.trap = true;
+        p.top += trapHtml("No era <b>" + esc(tr.o) + "</b>: " + mk(tr.d.explain), tr.o);
+      }
+      var rest = alts.filter(function (a) { return a !== tr; });
+      if (rest.length) {
+        p.bottom += '<details class="others"><summary>🔍 ¿Y ' + (tr && rest.length === 1 ? "la otra opción" : "las otras opciones") + "?</summary><ul>" +
+          rest.map(function (a) { return '<li data-o="' + esc(a.o) + '"><b>' + esc(a.o) + "</b>: " + mk(a.d.explain) + "</li>"; }).join("") +
+          "</ul></details>";
+      }
+    }
+    return p;
   }
 
   function showPrompt(d, verdictText) {
@@ -2428,6 +2542,9 @@
     var it = currentItem();
     round.answered = true;
     if (opts.fixed) round.fixed = (round.fixed || 0) + 1;
+    // seen before and how long it took: a right answer is sure or unsure (rightParts)
+    var seenBefore = !!state.cards[it.id];
+    var took = round.shownAt ? Date.now() - round.shownAt : null;
 
     var q = verdict === Engine.VERDICT.RIGHT ? 2
           : verdict === Engine.VERDICT.CLOSE ? 1 : 0;
@@ -2512,26 +2629,37 @@
     if (gained) xpFly(gained);
 
     var label = opts.label || { giusto: pick(UI.giusto), quasi: UI.quasi, sbagliato: pick(UI.sbagliato) }[verdict];
+    var rp = rightParts(it, given, q, extra, { ms: took, seen: seenBefore, fixed: !!opts.fixed });
     var sol = it.type === "listen" && it.frase ? it.frase.it + " — " + it.answer
-            : it.frase ? it.frase.it : it.answer;
+            : it.frase ? it.frase.it : rp.sol || it.answer;
+    // A quick right answer on a known item: the rule folded in one line.
+    var calm = q === 2 && !rp.unsure && !rp.trap && seenBefore;
+    var noteHtml = !it.note || (it.type === "garden" && extra && extra.indexOf("La trampa") >= 0) ? ""
+      : calm ? '<details class="why-ok"><summary>📐 Por qué está bien</summary><div class="note">' + mk(DV ? DV.plain(it.note) : it.note) + "</div></details>"
+      : '<div class="note">' + mk(DV ? DV.plain(it.note) : it.note) + "</div>";
+    // word by word, after a right answer: when it was unsure, or a new sentence
+    var tt = targetText(it);
+    var withDesglose = q < 2 || rp.unsure || (!seenBefore && String(tt || "").trim().split(/\s+/).length >= 3);
     /* The order of the sheet: the verdict, the right form («Era así:»
        points at it), what you wrote beside it and why it was wrong, the
        rule of the item; then what is there to look up, folded when the
        why is already said (word by word, your keyword), so «Siguiente»
        stays in sight on a phone.  Elaborated feedback works when it is
        short and says the why first (Shute 2008). */
-    var explained = !!extra && /class="diag(?! far)/.test(extra);
+    var explained = /class="diag(?! far)/.test((extra || "") + rp.top);
     var fb = '<div class="feedback ' + verdict + '">' +
       '<div class="verdict">' + label +
         (gained ? ' <span class="xpgain">+' + gained + " xp</span>" : "") + "</div>" +
       (it.type === "hunt" ? "" : '<div class="sol">' + (it.frase || it.src === "lettura" || it.dir === "it-es" || it.type === "scopri" ? esc(sol) : glossifyAny(sol)) + "</div>") +
       (it.frase && it.type !== "listen" ? '<div class="note">' + esc(it.frase.es) + "</div>" : "") +
+      rp.top +
       (extra || "") +
-      (it.note && !(it.type === "garden" && extra && extra.indexOf("La trampa") >= 0) ? '<div class="note">' + mk(DV ? DV.plain(it.note) : it.note) + "</div>" : "") +
+      noteHtml +
+      rp.bottom +
       (q === 2 && it.recogNote ? '<div class="note">' + esc(it.recogNote) + "</div>" : "") +
       (it.hint && it.src === "dummies"
         ? '<div class="note">Consigna original: ' + esc(it.hint) + "</div>" : "") +
-      desgloseHtml(targetText(it), (verdict !== "giusto" && !explained) || it.type === "guess") +
+      (withDesglose ? desgloseHtml(tt, (verdict !== "giusto" && !explained) || it.type === "guess") : "") +
       (function () {
         var vw = vocabWordOf(it), kw = vw && (state.keywords || {})[vw];
         return kw ? '<div class="note">🧷 Tu imagen: ' + esc(kw) + "</div>" : q < 2 && vw ? keywordBox(vw, true) : "";
@@ -2545,6 +2673,16 @@
 
     $("#fb").innerHTML = fb;
     if (window.Porque) Porque.after(it, { q: q, given: given, round: round });   // 📖 ¿Por qué? · 🧐 ¿Qué tenía de malo?
+    // «¿Qué tenía de malo X?» asks about an option: its why, said here, would answer it
+    var pq = $("#fb .porque-quiz .pq-h b");
+    if (pq) {
+      var asked = Engine.normalise(pq.textContent.replace(/[«»]/g, ""));
+      $("#fb").querySelectorAll("[data-o]").forEach(function (el) {
+        if (Engine.normalise(el.getAttribute("data-o")) === asked) el.parentNode.removeChild(el);
+      });
+      var oth = $("#fb details.others");
+      if (oth && !oth.querySelector("li")) oth.parentNode.removeChild(oth);
+    }
     wireKeyword();
     $("#fb").querySelectorAll("[data-sg]").forEach(function (b) {
       b.onclick = function (e) { e.stopPropagation(); showGloss(stemGloss[+b.dataset.sg]); };
@@ -2704,6 +2842,22 @@
     return t ? '<div class="diag"><span class="tag">Tu opción</span><p>' + mk(t) + "</p></div>" : "";
   }
 
+  /* «Adiviná» right: it was a guess, so what the other options had wrong
+     is worth a look (Butler, Karpicke & Roediger 2008: feedback rescues
+     the right answers given without confidence), folded under the answer. */
+  function guessOthers(it) {
+    var rows = (it.options || []).filter(function (o) { return o !== it.answer; }).map(function (o) {
+      var d = null, t = "";
+      if (!(it.why && it.why[o]) && window.Diagnosi && Diagnosi.explainChoice) {
+        try { d = Diagnosi.explainChoice(o, it.answer, {}); } catch (e) { d = null; }
+      }
+      if (d && d.cat && d.explain && !UNRECORDED[d.cat] && !GENERIC[d.cat]) t = (DV ? DV.tidy(d) : d).explain;
+      else t = Frasi.explainOption ? Frasi.explainOption(o, it) : "";
+      return t ? '<li><b>' + esc(o) + "</b>: " + mk(t) + "</li>" : "";
+    }).filter(Boolean);
+    return rows.length ? '<details class="others"><summary>🔍 ¿Y las otras opciones?</summary><ul>' + rows.join("") + "</ul></details>" : "";
+  }
+
   // «🧱 Fórmula fija»: a phrase that uses the grammar of a later week.
   function formulaHtml(f) {
     var t = window.Formule && f ? Formule.line(f, state.unlocked) : "";
@@ -2745,6 +2899,7 @@
       (q === 2 ? "" : guessWhy(it, given)) +
       '<div class="sol">' + esc(it.answer) + "</div>" +
       (it.note ? '<div class="note">' + mk(it.note) + "</div>" : "") +
+      (q === 2 ? guessOthers(it) : "") +
       desgloseHtml(targetText(it), true) +
       '<div class="note">🔬 Intentar adivinar antes de aprender ayuda a recordar, ' +
         "aunque te equivoques (efecto de la prueba previa).</div>" +
@@ -2832,6 +2987,8 @@
     round.tried = false;
     round.lastGiven = null;
     round.firstCat = null;
+    round.firstDiag = null;
+    round.hinted = false;
     round.picked = [];
     if (round.i >= round.items.length) {
       finishRound();
@@ -4890,6 +5047,9 @@
   function wireGioco() {
     if (view.screen !== "gioco" || !round) return;
     var it = currentItem();
+    // when this item appeared: a right answer after a long time counts as unsure
+    var shownKey = round.i + ":" + it.id;
+    if (round.shownKey !== shownKey) { round.shownKey = shownKey; round.shownAt = Date.now(); }
     on("#stophere", function () {
       round.items = round.items.slice(0, round.i);
       finishRound();
@@ -5013,7 +5173,7 @@
     if (it.type === "listen") {
       on("#play1", function () { speak(it.stem, true); });
       on("#slow", function () { speak(it.stem, true, 0.6); });
-      on("#peek", function () { $("#peektxt").hidden = false; });
+      on("#peek", function () { $("#peektxt").hidden = false; round.hinted = true; });
       setTimeout(function () { speak(it.stem); }, 250);
     }
     if (SAY_TYPES[it.type]) {
@@ -5062,10 +5222,12 @@
         var ws = Frasi.tiles(it.answer);
         t.textContent = ws.slice(0, Math.max(1, Math.ceil(ws.length / 3))).join(" ") + " …";
         t.hidden = false;
+        round.hinted = true;
         w.focus();
       });
       // Too hard right now: fall back to tiles for this phrase.
       on("#easier", function () {
+        round.hinted = true;
         round.items[round.i] = Frasi.tilesItem(it.frase);
         render();
       });
@@ -5090,12 +5252,17 @@
         if (el) el.classList.add(cls);
       }
     }
+    // the error and its correction, with the category: after missing it, and
+    // after fixing it (what was fixed, said back)
+    function fixHtml() {
+      return '<div class="diag"><span class="tag">' + esc(label) + "</span>" +
+        '<div class="diff"><span class="k">mal</span> ' + esc(it.bad) + ' <span class="k">→</span> ' +
+        (it.good ? "<b class=\"fix\">" + esc(it.good) + "</b>" : "<i>(se borra)</i>") + "</div></div>";
+    }
     function reveal() {
       markBad("missed");
       recordError({ cat: it.cat, target: it.answer }, it.stem);
-      settle("sbagliato", "", '<div class="diag"><span class="tag">' + esc(label) + "</span>" +
-        '<div class="diff"><span class="k">mal</span> ' + esc(it.bad) + ' <span class="k">→</span> ' +
-        (it.good ? "<b class=\"fix\">" + esc(it.good) + "</b>" : "<i>(se borra)</i>") + "</div></div>");
+      settle("sbagliato", "", fixHtml());
     }
     function askFix() {
       $("#fixbox").innerHTML = '<p class="muted">¡Bien visto! Ahora corregila: escribí lo que va en su lugar' +
@@ -5116,7 +5283,7 @@
           Diagnosi.diagnose(val, goods).verdict === Engine.VERDICT.RIGHT;
         if (right) {
           if (tries) markFixed(it.cat);
-          settle(tries ? "quasi" : "giusto", val, '<div class="diag"><span class="tag">' + esc(label) + "</span></div>",
+          settle(tries ? "quasi" : "giusto", val, fixHtml(),
                  tries ? { label: "¡Eso es!" } : {});
           return;
         }
@@ -5133,9 +5300,7 @@
           inp.focus();
           return;
         }
-        settle("sbagliato", val, '<div class="diag"><span class="tag">' + esc(label) + "</span>" +
-          '<div class="diff"><span class="k">mal</span> ' + esc(it.bad) + ' <span class="k">→</span> ' +
-          (it.good ? "<b class=\"fix\">" + esc(it.good) + "</b>" : "<i>(se borra)</i>") + "</div></div>");
+        settle("sbagliato", val, fixHtml());
       }
       on("#fxsend", function () { judge(inp.value); });
       inp.onkeydown = function (e) { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); judge(inp.value); } };
@@ -5317,7 +5482,17 @@
       state: function () { return state; },
       round: function () { return round; },
       // start a round of a given week (the exploration and the smoke test)
-      start: function (kind, arg, week) { if (week) view.week = week; startRound(kind, arg); }
+      start: function (kind, arg, week) { if (week) view.week = week; startRound(kind, arg); },
+      // play these items (ids of the course or of the lab, or items): the
+      // correction of one exercise, answered on purpose
+      play: function (list, week) {
+        if (week) view.week = week;
+        var its = (list || []).map(function (x) {
+          if (typeof x !== "string") return x;
+          return itemMap[x] ? Object.assign({}, itemMap[x]) : window.Lab && Lab.item ? Lab.item(x) : null;
+        }).filter(Boolean);
+        startRound("lista", its);
+      }
     };
   }
 

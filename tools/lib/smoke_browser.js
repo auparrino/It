@@ -146,6 +146,47 @@ const NAMES = { it: { today: "Oggi", me: "Io", other: "pt" }, pt: { today: "Hoje
     }
     if (!sawChoice) note(code + " · (sin opción equivocada que probar en la ronda)");
     if (await page.$("#quit")) { await page.click("#quit"); await page.waitForTimeout(300); }
+
+    // The right answers: brief by default, more when it helps.  A trap
+    // dodged is named; another accepted form shows as the answer and brings
+    // the main one; a quick right answer on a known item folds the rule in
+    // one line and has no «Palabra por palabra»; never «También: …»; and
+    // «Siguiente» stays in sight at 390 px.
+    const RIGHT = { it: [["trampa", "g2-gd-01", null, false], ["variante", "d14-007", "quindi", false], ["conocida", "d11-013", null, true]],
+                    pt: [["trampa", "s1-01-41", null, false], ["variante", "s1-02-28", "há", false], ["conocida", "s1-01-03", null, true]] }[code];
+    for (const [kind, id, typed, seen] of RIGHT) {
+      await page.evaluate(([id, seen]) => {
+        const s = window.__test.state();
+        if (seen) s.cards[id] = { ok: 3, s: 20, d: 4, due: Date.now() + 1e9, last: Date.now() - 20 * 86400000, reps: 3 }; else delete s.cards[id];
+        window.__test.play([id]);
+      }, [id, seen]);
+      await page.waitForTimeout(300);
+      const it = await page.evaluate(() => { const x = window.__test.item(); return x && JSON.parse(JSON.stringify(x)); });
+      if (!it || it.id !== id) { errors.push(code + ": correcta «" + kind + "»: no está el ítem " + id); continue; }
+      if (it.options) {
+        const opts = await page.$$eval("[data-opt]", els => els.map(e => e.textContent.trim()));
+        await page.click("[data-opt] >> nth=" + opts.indexOf(String(it.answer).trim()));
+      } else { await page.fill("#ans", typed || it.answer); await page.click("#send"); }
+      await page.waitForSelector("#fb .feedback.giusto", { timeout: 4000 }).catch(() => {});
+      await page.waitForTimeout(600);   // the sheet slides in
+      const fb = await page.evaluate(() => {
+        const box = document.querySelector("#fb .feedback"), nx = document.querySelector("#next");
+        const r = nx ? nx.getBoundingClientRect() : null;
+        return { cls: box ? box.className : "", text: box ? box.innerText : "", sol: box && box.querySelector(".sol") ? box.querySelector(".sol").textContent.trim() : "",
+                 trap: !!(box && box.querySelector(".diag.trap")), also: !!(box && box.querySelector(".note.also")),
+                 whyOk: !!(box && box.querySelector("details.why-ok")), desglose: !!(box && box.querySelector(".desglose")),
+                 nextIn: !!r && r.top >= 0 && r.bottom <= innerHeight };
+      });
+      if (!/giusto/.test(fb.cls)) errors.push(code + ": correcta «" + kind + "» no salió bien: " + fb.cls);
+      if (/También:/.test(fb.text)) errors.push(code + ": correcta «" + kind + "» con «También: …»");
+      if (!fb.nextIn) errors.push(code + ": correcta «" + kind + "»: «Siguiente» fuera de la pantalla");
+      if (kind === "trampa" && !fb.trap) errors.push(code + ": el garden path acertado no dice «Esquivaste la trampa»");
+      if (kind === "variante" && (!fb.also || fb.sol !== typed)) errors.push(code + ": otra forma aceptada: sin «También se dice» o la respuesta no es la suya (" + fb.sol + ")");
+      if (kind === "conocida" && (!fb.whyOk || fb.desglose)) errors.push(code + ": una conocida rápida: el porqué no está plegado o hay desglose");
+      await snap(page, P("correcta-" + kind));
+      note(code + " · correcta «" + kind + "»: " + fb.text.replace(/\s+/g, " ").slice(0, 120));
+      if (await page.$("#quit")) { await page.click("#quit"); await page.waitForTimeout(300); }
+    }
     await page.click("[data-tab='io']");
     await page.waitForSelector("#retention");
     const elog = await page.$$eval("ul.errlog li", els => els.map(e => e.textContent.replace(/\s+/g, " ").trim()));
