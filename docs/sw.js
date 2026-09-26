@@ -18,7 +18,7 @@
  * las viejas de esta misma app (La Via C1: «laviac1-v…») se borran las
  * versiones; las voces ya descargadas («laviac1-voci») se siguen leyendo.
  */
-var VERSION = "c1-v2.5";
+var VERSION = "c1-v2.6";
 var PREFIX = "c1-";
 var VOCI = "c1-voci";
 var LEGACY = /^laviac1-v\d/;          // the old versions of this same app

@@ -201,7 +201,19 @@
   var LS = root.LettureSettimana || (typeof require === "function" ? require("./letture_settimana.js") : null);
   if (LS) LS.TESTI.slice().sort(function (a, b) { return a.week - b.week; }).forEach(function (e, k) { e.series = "settimana"; e.n = k + 1; EPISODI.push(e); });
 
-  var SERIES = DATA.SERIES || [];
+  // Tramo C1 (tramo_data.js): the long reading of weeks 27-51, the «lunga»
+  // series, with its questions in the target language (js/tramo.js has the
+  // listening and the task of the same week).
+  var TR = root.TRAMO_DATA || null;
+  if (TR) (TR.SETTIMANE || []).forEach(function (s, k) {
+    var e = {};
+    Object.keys(s.lettura).forEach(function (key) { e[key] = s.lettura[key]; });
+    e.id = "l-" + s.week; e.week = s.week; e.level = s.level; e.series = "lunga"; e.n = k + 1;
+    EPISODI.push(e);
+  });
+
+  var SERIES = (DATA.SERIES || []).slice();
+  if (TR && TR.series && (TR.SETTIMANE || []).length) SERIES.splice(Math.min(3, SERIES.length), 0, TR.series);
 
   function ofSeries(id) {
     return EPISODI.filter(function (e) { return e.series === id; });

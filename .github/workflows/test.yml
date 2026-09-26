@@ -21,7 +21,7 @@ jobs:
       - name: Los datos compilados coinciden con las fuentes
         run: |
           npm run build > /dev/null
-          git diff --stat --exit-code docs/lang/*/data/ || (echo "docs/lang/*/data no está al día con tools/: corré npm run build" && exit 1)
+          git diff --stat --exit-code docs/lang/*/data/ docs/lang/*/tramo_data.js || (echo "docs/lang/*/data no está al día con tools/: corré npm run build" && exit 1)
       - name: La versión del service worker coincide con la de la app
         run: |
           a=$(grep -o 'VERSION = "c1-v[0-9.]*"' docs/sw.js | grep -o 'v[0-9.]*')

@@ -125,7 +125,10 @@ ERR.forEach(function (e) {
 
   var clean = [];
   Frasi.ALL.forEach(function (f) { clean.push(f.it); });
-  Letture.EPISODI.forEach(function (e) { e.text.split(/\n+/).forEach(function (l) { clean.push(l); }); });
+  // The long C1 readings (series «lunga») stay out: their prose goes beyond
+  // what the rules are tuned for (si fermò… per far passare le capre, mi resi
+  // conto); test_tramo.js checks them, and the task marks never block.
+  Letture.EPISODI.forEach(function (e) { if (e.series !== "lunga") e.text.split(/\n+/).forEach(function (l) { clean.push(l); }); });
   (Banca.bank().sentences || []).forEach(function (x) { (x.it || []).forEach(function (a) { clean.push(a); }); });
   clean = clean.filter(function (t) { return t && !/→|_{2,}|\/|[¡¿]|\s{3,}/.test(t); });
   var bad = [];

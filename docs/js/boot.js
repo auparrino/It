@@ -38,7 +38,7 @@
     { lang: "frasi_data.js" }, { core: "frasi.js" },
     { lang: "formule_data.js" }, { core: "formule.js" },
     { lang: "lab_data.js" }, { core: "lab.js" },
-    { lang: "letture_settimana.js" }, { lang: "letture_data.js" }, { core: "letture.js" },
+    { lang: "letture_settimana.js" }, { lang: "tramo_data.js" }, { lang: "letture_data.js" }, { core: "letture.js" },
     { core: "lezione.js" },
     { lang: "mapas_data.js" }, { core: "mapas.js" },
     { lang: "diagnosi.js" }, { lang: "scrivi.js" },
@@ -61,6 +61,7 @@
     { core: "referencia.js" },
     { lang: "biblioteca_data.js" }, { core: "biblioteca.js" },
     { shared: "tres_lenguas_data.js" }, { core: "tres_lenguas.js" },
+    { core: "tramo.js" },
     { core: "app.js" }
   ];
 
