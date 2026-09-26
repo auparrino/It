@@ -85,6 +85,7 @@ npm run build      # tools/pt/build_bank.py + tools/pt/build_course.py → docs/
 npm test           # conjugador, juego, frases, diagnóstico, escritura, memoria, sonidos
 npm start          # http://localhost:8000
 NODE_PATH=$(npm root -g) node tools/pt/smoke_browser.js   # recorrida en Chromium
+node tools/pt/diag_review.js  # el diagnóstico a escala: errores del hispanohablante inyectados en las 52 semanas
 ```
 
 Cómo se escribe el contenido: `tools/pt/CONTENIDO.md`. La frecuencia se regenera

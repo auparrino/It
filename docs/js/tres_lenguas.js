@@ -46,6 +46,16 @@
     });
   }
   function deaccent(s) { return String(s).normalize("NFD").replace(/[̀-ͯ]/g, ""); }
+  function editDist(a, b) {
+    var prev = [], cur, i, j;
+    for (j = 0; j <= b.length; j++) prev[j] = j;
+    for (i = 1; i <= a.length; i++) {
+      cur = [i];
+      for (j = 1; j <= b.length; j++) cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+      prev = cur;
+    }
+    return prev[b.length];
+  }
   function degeminate(s) { return String(s).replace(/([bcdfglmnpqrstvz])\1/g, "$1"); }
   function norm(s) { return deaccent(String(s).toLowerCase()); }
   function shuffle(a, rnd) {
@@ -139,6 +149,12 @@
       if (sign && sign.double) {
         // «muitto» is a typo of muito, «fatto» is Italian
         if (t.length < 4 || isHome(degeminate(t)) || exp[degeminate(t)]) return;
+      }
+      // «cidde», «veradde», «quaclhe»: only a sign (no known word of the
+      // other language) on a slip of a word of the answer is a typo
+      if (sign) {
+        var dt = degeminate(norm(t));
+        if (Object.keys(exp).some(function (e) { return e.length >= 4 && editDist(dt, degeminate(norm(e))) <= 2; })) return;
       }
       seen[t] = 1;
       out.push({ w: t, fix: m ? m.fix : null, es: m ? m.es : null, why: sign ? sign.why : null });

@@ -116,6 +116,12 @@ pack.LANGS.forEach(function (code) {
   DATA.DUEL.filter(function (x) { return x[1] === code && !x[2]; }).forEach(function (x) {
     ok(T.intruders(x[0], ["zzz"]).length === 0, tag + "falsa alarma en «" + x[0] + "»");
   });
+  // A doubled letter in a word of the answer is a typo, not the other language.
+  if (code === "pt") [["Moro na cidde grande", "Moro na cidade grande"], ["É veradde", "É verdade"],
+                      ["Ultimmente trabalho muito", "Ultimamente trabalho muito"]].forEach(function (x) {
+    ok(T.intruders(x[0], [x[1]]).length === 0, tag + "tipeo con doble tomado por italiano: " + x[0]);
+  });
+  if (code === "it") ok(T.intruders("Vuoi quaclhe cosa?", ["Vuoi qualche cosa?"]).length === 0, tag + "tipeo con lh tomado por portugués");
   // The course's own sentences (bank) are never taken for the other language.
   var sents = (bank.sentences || []).map(function (s) { return s[0]; }).filter(Boolean);
   var fps = sents.filter(function (s) { return T.intruders(s, ["zzz"]).length; });

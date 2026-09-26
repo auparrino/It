@@ -3,6 +3,9 @@
  *
  * keep:  categorías del diagnóstico que valen aunque la respuesta no se
  *        parezca a la correcta (todo escrito en español).
+ * transfer: categorías del diagnóstico que son un calco del español: si
+ *        se esquiva esa opción y se elige la correcta, la devolución dice
+ *        «Esquivaste la trampa» con el porqué.
  * terms: [expresión, semana, en criollo]: el nombre de un tiempo o modo y
  *        la semana en que el curso lo enseña (course.json, weeks[].tenses;
  *        «indicativo» aparece en la teoría en la semana 23).  Antes de esa
@@ -12,6 +15,7 @@
 (function (root) {
   "use strict";
   var DATA = {
+    transfer: ["espanol", "falso_amigo", "a_personal", "gostar", "muito", "perfeito_composto", "regularizacion"],
     keep: ["espanol"],
     terms: [
       ["\\b(pretérito )?mais-que-perfeito do subjuntivo\\b", 30, "subjuntivo pluscuamperfecto (como «hubiera hecho»)"],
@@ -33,6 +37,8 @@
       ["\\bfuturo do presente\\b", 17, "futuro (como «haré»)"],
       ["\\bpresente do indicativo\\b", 23, "presente"],
       ["\\s*\\(?do indicativo\\)?", 23, ""],
+      ["\\bdel indicativo\\b", 23, "de la forma común del verbo"],
+      ["\\bel indicativo\\b", 23, "la forma común del verbo"],
       ["\\bindicativo\\b", 23, "la forma común del verbo"]
     ]
   };

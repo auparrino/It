@@ -38,6 +38,7 @@
     falso_amigo: "Es un falso amigo: en portugués esa palabra quiere decir otra cosa.",
     tempo: "El verbo está en otro tiempo del que pide la frase.",
     persona: "El verbo está en otra persona: no concuerda con el sujeto.",
+    ser_estar: "Usa *ser* donde va *estar* (o *ficar*), o al revés: lo que algo es, cómo o dónde está.",
     participio: "El participio no es el que corresponde.",
     verbo_irregular: "Es un verbo irregular y esa forma no existe.",
     regularizacion: "Conjuga como regular un verbo que es irregular.",
@@ -47,7 +48,7 @@
 
   var FORMA = ["ortografia", "tilde", "nasal", "espanol"];
   var NOME = ["articulo", "contraccion", "genero", "concordancia", "plural"];
-  var VERBO = ["persona", "tempo", "verbo_irregular", "regularizacion", "participio", "subjuntivo", "perfeito_composto"];
+  var VERBO = ["persona", "tempo", "verbo_irregular", "regularizacion", "participio", "subjuntivo", "perfeito_composto", "ser_estar"];
   var SUBJ = ["subjuntivo", "futuro_subj", "inf_pessoal", "tempo"];
   var PRON = ["pronome", "colocacao", "a_personal"];
   var PREP = ["preposicion", "regencia", "contraccion", "crase", "gostar", "a_personal"];

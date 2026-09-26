@@ -596,3 +596,31 @@ mark.esc-clue.ref { background: none; text-decoration: underline dotted; text-un
 .bx-box .bx-es { font-size: 1.1rem; font-weight: 700; margin: 4px 0; }
 .bx-box .typed input { flex: 1 1 160px; min-width: 0; }
 .bx-self { margin-top: 12px; }
+
+/* la corrección: lo elegido al lado de lo correcto, lo que se consulta plegado */
+.feedback .diff.chosen { margin: 2px 0 6px; }
+.feedback details.keyword summary { cursor: pointer; list-style: none; padding: 4px 0; }
+.feedback details.keyword summary::-webkit-details-marker { display: none; }
+.feedback details.keyword[open] summary { margin-bottom: 4px; }
+.feedback .diag.far p { font-size: .9rem; opacity: .85; }
+/* «Tus errores»: lo que escribiste, lo que iba y el porqué */
+ul.errlog { list-style: none; padding: 0; margin: 6px 0 0; }
+ul.errlog li.diag { margin: 0; padding: 10px 0; border-bottom: 1px solid color-mix(in srgb, currentColor 12%, transparent); }
+ul.errlog li.diag:last-child { border-bottom: none; }
+ul.errlog .diff { overflow-wrap: anywhere; }
+ul.errlog details summary { cursor: pointer; list-style: none; margin-top: 4px; }
+ul.errlog details summary::-webkit-details-marker { display: none; }
+ul.errlog details summary .tag { margin-bottom: 0; }
+ul.errlog details p { margin: 6px 0 0; font-size: .9rem; }
+/* la respuesta correcta: la trampa esquivada, el detalle, las otras formas;
+   el porqué y las otras opciones, plegados en una línea cuando sobran */
+.feedback details.why-ok, .feedback details.others { margin: 6px 0 2px; font-size: .9rem; }
+.feedback details.why-ok summary, .feedback details.others summary { cursor: pointer; list-style: none; padding: 4px 0; font-weight: 700; opacity: .85; }
+.feedback details.why-ok summary::-webkit-details-marker, .feedback details.others summary::-webkit-details-marker { display: none; }
+.feedback details.why-ok summary::after, .feedback details.others summary::after { content: " ▸"; opacity: .6; }
+.feedback details.why-ok[open] summary::after, .feedback details.others[open] summary::after { content: " ▾"; }
+.feedback details.why-ok .note { margin-top: 2px; }
+.feedback details.others ul { margin: 4px 0 0; padding-left: 18px; }
+.feedback details.others li { margin: 3px 0; line-height: 1.35; }
+.feedback .diag.trap p, .feedback .diag.selfrepair p { margin: 4px 0 0; }
+.feedback .diff { overflow-wrap: anywhere; }

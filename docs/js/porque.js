@@ -472,6 +472,8 @@
     });
   }
   function mk(s) { return H.mk ? H.mk(s) : esc(strip(s)); }
+  // the names of tenses and moods not taught yet, in plain Spanish (devolucion.js)
+  function plain(s) { return root.Devolucion ? root.Devolucion.plain(s) : s; }
   function $(s, el) { return (el || document).querySelector(s); }
 
   function ctxNow() {
@@ -514,7 +516,7 @@
     div.className = "porque-quiz";
     div.innerHTML = '<div class="pq-h">🧐 ¿Qué tenía de malo <b>«' + esc(qz.opt) + '»</b>?</div>' +
       '<div class="pq-opts">' + qz.choices.map(function (c, k) {
-        return '<button class="pq-opt" type="button" data-pq="' + k + '">' + mk(c.text) + "</button>";
+        return '<button class="pq-opt" type="button" data-pq="' + k + '">' + mk(plain(c.text)) + "</button>";
       }).join("") + '</div><div class="pq-out"></div>';
     var row = $(".row", box);
     box.insertBefore(div, row || null);
@@ -537,7 +539,7 @@
         if (H.xpFly) H.xpFly(xp);
         $(".pq-out", div).innerHTML = '<p class="pq-verdict">' + (ok ? "¡Exacto! Explicártelo es lo que fija la regla." : "No era eso. Fijate:") +
           ' <span class="xpgain">+' + xp + " xp</span></p>" +
-          '<div class="diag"><span class="tag">' + esc(qz.label) + "</span><p>" + mk(qz.explain) + "</p></div>";
+          '<div class="diag"><span class="tag">' + esc(plain(qz.label)) + "</span><p>" + mk(plain(qz.explain)) + "</p></div>";
       };
     });
   }
