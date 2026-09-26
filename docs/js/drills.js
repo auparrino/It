@@ -713,7 +713,11 @@
       var rest = [];
       course.weeks.forEach(function (w) {
         if (w.week < sw[0] || w.week > week.week) return;
-        (w.items || []).forEach(function (id) { if (map[id] && !have[id] && map[id].type !== "listen") { have[id] = 1; rest.push(map[id]); } });
+        (w.items || []).forEach(function (id) {
+          // this week: only the parts of the lesson already read (opts.only)
+          if (w.week === week.week && opts.only && !opts.only[id]) return;
+          if (map[id] && !have[id] && map[id].type !== "listen") { have[id] = 1; rest.push(map[id]); }
+        });
       });
       pickFresh(rest, size - out.length, state).forEach(function (it) { out.push(it); });
     }

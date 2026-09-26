@@ -1660,6 +1660,7 @@
     var domDone = Drills.dominated(st, w, state);
     m({ kind: "play2", done: domDone, ico: "🏆", title: "Dominala",
         sub: domDone ? "Dominada" + (st.domPct ? " · " + st.domPct + " %" : "")
+          : w.lesson && !lessonRead(w.week) ? "Se abre cuando termines la lección: pregunta toda la semana"
           : "Una sola sesión de " + Drills.DOMINA_SIZE + " preguntas de toda la semana, sin vidas: con 85 % la ganás" +
             (st.domBest ? " · tu mejor intento: " + st.domBest + " %" : "") });
     return out;
@@ -1806,8 +1807,12 @@
       items = Drills.buildRound(course, w, { map: itemMap, state: state, silent: state.silent, size: 6, only: partItems(w) });
     }
     else if (kind === "boss") items = Drills.buildBoss(course, w, state, { map: itemMap });
-    else if (kind === "debil") items = Drills.buildWeak(course, w, state, { map: itemMap, size: 15 });
-    else if (kind === "domina") items = Drills.buildDomina(course, w, state, { map: itemMap, silent: state.silent });
+    else if (kind === "debil") items = Drills.buildWeak(course, w, state, { map: itemMap, size: 15, only: partItems(w) });
+    else if (kind === "domina") {
+      // the whole week, so only once the whole lesson has been read
+      if (w.lesson && !lessonRead(w.week)) { toast("«Dominala» pregunta toda la semana: se abre cuando termines la lección.", 3500); return; }
+      items = Drills.buildDomina(course, w, state, { map: itemMap, silent: state.silent });
+    }
     else if (kind === "review") items = Drills.buildReview(course, state, 20, drillOpts());
     else if (kind === "scene") {
       if (Drills.sceneWeek(arg) > (state.unlocked || 1)) { toast("Se abre en la semana " + Drills.sceneWeek(arg) + "."); return; }
