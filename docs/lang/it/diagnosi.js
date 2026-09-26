@@ -98,7 +98,7 @@
     for (i = 1; i <= n; i++) {
       for (j = 1; j <= m; j++) {
         var same = g[i - 1] === e[j - 1];
-        var sub = same ? 0 : 1.4 - 0.6 * similarity(g[i - 1], e[j - 1]);
+        var sub = same ? 0 : subCost(g[i - 1], e[j - 1]);
         D[i][j] = Math.min(D[i - 1][j] + 1, D[i][j - 1] + 1, D[i - 1][j - 1] + sub);
       }
     }
@@ -107,7 +107,7 @@
     while (i > 0 || j > 0) {
       if (i > 0 && j > 0) {
         var same2 = g[i - 1] === e[j - 1];
-        var sub2 = same2 ? 0 : 1.4 - 0.6 * similarity(g[i - 1], e[j - 1]);
+        var sub2 = same2 ? 0 : subCost(g[i - 1], e[j - 1]);
         if (Math.abs(D[i][j] - (D[i - 1][j - 1] + sub2)) < 1e-9) {
           ops.unshift({ op: same2 ? "eq" : "sub", g: g[i - 1], e: e[j - 1], gi: i - 1, ei: j - 1 });
           i--; j--; continue;
@@ -123,6 +123,26 @@
     return ops;
   }
 
+  // Substituting a word for another costs less when they look alike, and
+  // two forms of one verb (ha / abbiamo) pair up before a deletion does.
+  // The same slot filled with another word of its closed class: an article
+  // for an article (la rapporto → il rapporto), an auxiliary for an
+  // auxiliary (mi ho → mi sono), a pronoun for a pronoun (mi ne → me ne).
+  function sameSlot(a, b) {
+    var aux = function (w) { return AVERE.indexOf(w) >= 0 || ESSERE.indexOf(w) >= 0; };
+    return !!((ARTICLES[a] && ARTICLES[b]) || (aux(a) && aux(b)) ||
+              (CLITICS.indexOf(a) >= 0 && CLITICS.indexOf(b) >= 0) || (prepInfo(a) && prepInfo(b)));
+  }
+  function subCost(a, b) {
+    var c = 1.4 - 0.6 * similarity(a, b);
+    if (c > 0.7) {
+      if (!VIDX) buildVerbIndex();
+      var fa = VIDX[a] || [], fb = VIDX[b] || [];
+      if (sameSlot(a, b) || fa.some(function (x) { return fb.some(function (y) { return x.lemma === y.lemma; }); })) c = 0.7;
+    }
+    return c;
+  }
+
   function lcsLen(a, b) {
     var prev = [], cur, i, j;
     for (j = 0; j <= b.length; j++) prev[j] = 0;
@@ -136,7 +156,11 @@
     return prev[b.length];
   }
 
-  function it(w) { return "*" + w + "*"; }
+  // The language in italics.  A whole sentence loses its final full stop
+  // (the explanation puts its own) and the space a gap left before «.».
+  function it(w) {
+    return "*" + String(w).replace(/\s+([.,;:!?])/g, "$1").replace(/\.\s*$/, "").trim() + "*";
+  }
 
   /* ----------------------------------------------------- inventari */
 
@@ -205,10 +229,11 @@
 
   var VIDX = null;   // forma → [{lemma, tense, p}]
   var PIDX = null;   // participio → lemma
+  var PALL = null;   // participio → every lemma it belongs to
   var LIDX = null;   // infinito → true
 
   function buildVerbIndex() {
-    VIDX = dict(); PIDX = dict(); LIDX = dict();
+    VIDX = dict(); PIDX = dict(); LIDX = dict(); PALL = dict();
     if (!Conj) return;
     Conj.list().forEach(function (v) {
       LIDX[v] = true;
@@ -223,7 +248,7 @@
       try {
         var pp = Conj.participle(v);
         [pp, pp.replace(/o$/, "a"), pp.replace(/o$/, "i"), pp.replace(/o$/, "e")]
-          .forEach(function (x) { PIDX[x] = v; });
+          .forEach(function (x) { PIDX[x] = v; (PALL[x] = PALL[x] || []).push(v); });
       } catch (e) { /* */ }
     });
   }
@@ -231,6 +256,11 @@
   function verbForms(w) {
     if (!VIDX) buildVerbIndex();
     return VIDX[w] || [];
+  }
+
+  function participleLemmas(w) {
+    if (!PALL) buildVerbIndex();
+    return PALL[w] || [];
   }
 
   function participleOf(w) {
@@ -317,6 +347,10 @@
   function expandGap(stem, given, targets) {
     if (!stem || !/_{3,}/.test(stem)) return null;
     var clean = String(stem).replace(/\([^)]*\)/g, " ").replace(/\s+/g, " ").trim();
+    // «Non lo toccare! → ___!»: what comes before the arrow is the model to
+    // transform, not the sentence the answer goes into.
+    var arrow = clean.lastIndexOf("→", clean.search(/_{3,}/));
+    if (arrow >= 0) clean = clean.slice(arrow + 1).trim();
     var pieces = clean.split(/_{3,}/);
     var nGaps = pieces.length - 1;
     for (var i = 0; i < nGaps; i++) {
@@ -327,7 +361,7 @@
       if (!parts || parts.length !== nGaps) return null;
       var out = pieces[0];
       for (var k = 0; k < nGaps; k++) out += parts[k] + pieces[k + 1];
-      return out.replace(/\s+/g, " ").trim();
+      return out.replace(/\s+/g, " ").replace(/\s+([.,;:!?])/g, "$1").trim();
     };
     var targetParts = targets.map(function (t) { return String(t).split(/\s*\|\s*/); });
     var gParts;
@@ -371,12 +405,88 @@
     return "Plural: " + it(s) + " → " + it(e) + ": " + rule + ".";
   }
 
+  /* The Spanish spelling of an Italian word (ñ, ll, qu, j…): the rule that
+     turns what was written into the Italian word, or null.  Only an exact
+     conversion counts (or one more slip at most): «pecacto» is a typo in
+     *peccato*, not «ct → tt». */
+  var SPELL_EXTRA = [
+    ["lli", "gli", "El sonido de la ll tradicional (no la rioplatense) se escribe gli: famiglia, figlio."],
+    ["aqu", "acqu", "*Acqua*, sus derivados y algunas palabras más se escriben con cq: acqua, acquario, acquisto."],
+    ["ge", "ghe", "Para el sonido /ge/ se escribe *ghe* (spaghetti, laghetto); *ge* suena /dʒe/."],
+    ["gi", "ghi", "Para el sonido /gi/ se escribe *ghi* (laghi, ghiaccio); *gi* suena /dʒi/."],
+    ["cie", "zie", "El sonido /ts/ se escribe con z: grazie, zio, piazza."],
+    ["ci", "zi", "El sonido /ts/ se escribe con z: stazione, grazie."]];
+  function spellingMatch(g, e) {
+    var gs = deaccent(g), es = deaccent(e);
+    // A plural written wrong (arancie → arance) is the plural rule, not spelling.
+    var npE = DATA.nounsByPlural[e];
+    if (npE && npE.s !== e) return null;
+    var spellings = DATA.spelling.concat(SPELL_EXTRA);
+    var graw = g.replace(/ñ/g, "\u0000");
+    for (var k = 0; k < spellings.length; k++) {
+      var sp = spellings[k];
+      var src = sp[0] === "ñ" ? graw.replace(/\u0000/g, "ñ") : gs;
+      var pat = sp[0] === "ñ" ? "ñ" : deaccent(sp[0]);
+      if (src.indexOf(pat) < 0) continue;
+      var conv = deaccent(src.split(pat).join(deaccent(sp[1])));
+      if (conv === es || (degeminate(conv) === degeminate(es) && editDistance(conv, es) <= 1)) return sp;
+    }
+    return null;
+  }
+
+  /* What was written is the Spanish word for the one expected: the
+     dictionary maps it there, the expected word's own gloss has it
+     (casamiento → matrimonio: «casamiento / matrimonio»), or it is a Spanish
+     function word (que, para).  Never an Italian word. */
+  function spanishFor(g, e) {
+    // (a grave accent is Italian typing: «cafè» is caffè without its double)
+    if (!g || g === e || isItalian(g) || isItalian(deaccent(g)) || /[àèìòù]/.test(g)) return null;
+    var gs = deaccent(g);
+    var hit = function (list) {
+      return String(list).split(/\s*\/\s*/).some(function (w) { return w === e || w.split(" ").indexOf(e) >= 0; });
+    };
+    var tr = DATA.esIt[gs] || DATA.esIt[g];
+    if (tr && hit(tr[0])) return { note: tr[1] || "" };
+    if (ES_FUNC[gs] && hit(ES_FUNC[gs])) return { note: "" };
+    var n = DATA.nouns[e] || DATA.nounsByPlural[e];
+    var gl = DATA.lex[e] || (n ? n.es : "");
+    if (gl && String(gl).toLowerCase().split(/\s*[\/,;()]\s*/).some(function (x) { return x && deaccent(x.trim()) === gs; })) return { note: "" };
+    return null;
+  }
+
+  // Short words that only the accent tells apart.
+  var MONO = dict({
+    "dà": "*dà* con tilde es el verbo (da, de *dare*: mi dà fastidio); *da* sin tilde es la preposición (desde, de: vengo da Roma).",
+    "là": "*là* con tilde es «allá»; *la* sin tilde es el artículo o el pronombre (la vedo).",
+    "lì": "*lì* con tilde es «ahí»; *li* sin tilde es el pronombre «los» (li vedo).",
+    "sì": "*sì* con tilde es «sí», la afirmación; *si* sin tilde es el pronombre (si chiama = se llama). Como en español «sí / si», pero el «si» condicional italiano es *se*.",
+    "né": "*né* con tilde es «ni» (né… né); *ne* sin tilde es el pronombre «de eso» (ne voglio due).",
+    "sé": "*sé* con tilde es «sí mismo» (pensa a sé); *se* sin tilde es el «si» condicional (se vuoi) o el pronombre ante lo, la, ne (se lo dice).",
+    "tè": "*tè* con tilde es el té, la bebida; *te* sin tilde es el pronombre (te lo dico)."
+  });
+
   /* ------------------------------------------------ diagnosi di coppia */
 
   // Each rule returns null or {cat, slip, hint, explain}.  Order matters:
   // grammar that a form reveals beats "that looks Spanish" or "a typo".
   function pairRules(g, e, ctx) {
     var r, gs = deaccent(g), es = deaccent(e);
+
+    // 0. The Spanish word itself (médico, casamiento, que, profesor): what
+    //    happened is Spanish, and the spelling detail comes after.
+    var spW = spanishFor(g, e);
+    if (spW) {
+      var spS = spellingMatch(g, e);
+      var gd0 = deaccent(g), ed0 = deaccent(e);
+      var detail = spS ? " " + spS[2]
+        : degeminate(gd0) === degeminate(ed0) && gd0 !== ed0
+          ? (ed0.length > gd0.length ? " Ojo con la doble consonante, que en italiano se pronuncia más larga." : " Ojo: en italiano va con una sola consonante.")
+        : gd0 === ed0 && /[áíóú]/.test(g) ? " En italiano la tilde solo se escribe en la vocal final (città, perché), nunca en el medio de la palabra."
+        : "";
+      return { cat: "parola_spagnola", slip: false,
+        hint: it(g) + " es la palabra en español. ¿Cómo es en italiano?",
+        explain: it(g) + " es español; en italiano: " + it(e) + "." + detail + (spW.note ? " " + spW.note : "") };
+    }
 
     // 1. Accento (anche e' per è: la tastiera senza tilde)
     if (/[aeiou]'$/.test(g) && /[àèéìòù]$/.test(e) && deaccent(g.slice(0, -1)) === es) return { cat: "accento", slip: true,
@@ -389,15 +499,28 @@
       if (e === "e" && g === "è") return { cat: "accento", slip: false,
         hint: "Mirá la palabra marcada: ¿es el verbo o la conjunción?",
         explain: "Acá va *e* sin tilde: es la conjunción «y». *È* es el verbo." };
+      // Two short words that only the accent tells apart (dà / da, sì / si).
+      var mono = MONO[e] || MONO[g];
+      if (mono) return { cat: "accento", slip: false,
+        hint: "Con tilde y sin tilde son dos palabras distintas: ¿cuál va acá?",
+        explain: "Acá va " + it(e) + ". " + mono };
       if (/é$/.test(e) && /è$/.test(g)) return { cat: "accento", slip: true,
         hint: "Revisá hacia dónde va la tilde.",
         explain: "Tilde aguda: " + it(e) + ". *Perché, poiché, affinché, né, sé* llevan é cerrada." };
       if (/[àèéìòù]/.test(e) && !/[àèéìòù]/.test(g)) return { cat: "accento", slip: true,
         hint: "Te falta una tilde.",
         explain: "Falta la tilde: " + it(e) + ". En italiano la tilde marca la vocal final tónica (città, perché, parlerò, più)." };
+      if (!/[àèéìòù]/.test(e)) return { cat: "accento", slip: true,
+        hint: "Revisá las tildes: ¿esa palabra lleva?",
+        explain: it(e) + " va sin tilde. En italiano la tilde solo se escribe sobre la vocal final de las palabras agudas (città, perché, più), nunca en el medio de la palabra como en español (médico → medico)." };
       return { cat: "accento", slip: true, hint: "Revisá las tildes.",
         explain: "La tilde va así: " + it(e) + "." };
     }
+
+    // 1b. «no» where Italian says «non» (no so, no parlo)
+    if (g === "no" && e === "non") return { cat: "parola_spagnola", slip: false,
+      hint: "La negación delante del verbo, ¿cómo es en italiano?",
+      explain: "Delante del verbo la negación es *non*: " + it("non " + (ctx.e[ctx.ei + 1] || "")) + ". *No* va solo, como respuesta (No, grazie). En español «no» sirve para las dos cosas." };
 
     // 2. H di avere (o → ho, anno → hanno)
     if (AVERE.indexOf(e) >= 0 && /^h/.test(e) && g === e.slice(1)) return { cat: "ortografia", slip: false,
@@ -419,44 +542,26 @@
 
     // 4. Doppie
     if (degeminate(gs) === degeminate(es)) {
-      var more = e.length > g.length;
+      var more = e.length > g.length, moved = e.length === g.length;
       return { cat: "doppie", slip: false,
-        hint: more ? "A la palabra marcada le falta una consonante doble."
+        hint: moved ? "La consonante doble de la palabra marcada no está donde va."
+            : more ? "A la palabra marcada le falta una consonante doble."
                    : "La palabra marcada tiene una doble de más.",
-        explain: (more ? "Consonante doble: " : "Una sola consonante: ") + it(e) +
+        explain: (moved ? "La doble va en otro lugar: " : more ? "Consonante doble: " : "Una sola consonante: ") + it(e) +
           ". En italiano la doble se pronuncia más larga y cambia el significado (nono = noveno, nonno = abuelo)." };
     }
 
     // 5. Grafia spagnola (ñ, ll, que, j…)
-    var graw = g.replace(/ñ/g, "\u0000");
-    var spellings = DATA.spelling.concat([
-      ["lli", "gli", "El sonido de la ll tradicional (no la rioplatense) se escribe gli: famiglia, figlio."],
-      ["aqu", "acqu", "*Acqua*, sus derivados y algunas palabras más se escriben con cq: acqua, acquario, acquisto."],
-      ["ge", "ghe", "Para el sonido /ge/ se escribe *ghe* (spaghetti, laghetto); *ge* suena /dʒe/."],
-      ["gi", "ghi", "Para el sonido /gi/ se escribe *ghi* (laghi, ghiaccio); *gi* suena /dʒi/."],
-      ["cie", "zie", "El sonido /ts/ se escribe con z: grazie, zio, piazza."],
-      ["ci", "zi", "El sonido /ts/ se escribe con z: stazione, grazie."]]);
-    // A plural written wrong (arancie → arance) is the plural rule, not spelling.
-    var npE = DATA.nounsByPlural[e];
-    if (npE && npE.s !== e) spellings = [];
-    for (var k = 0; k < spellings.length; k++) {
-      var sp = spellings[k];
-      var src = sp[0] === "ñ" ? graw.replace(/\u0000/g, "ñ") : gs;
-      var pat = sp[0] === "ñ" ? "ñ" : deaccent(sp[0]);
-      if (src.indexOf(pat) >= 0) {
-        var conv = deaccent(src.split(pat).join(deaccent(sp[1])));
-        if (conv === es || degeminate(conv) === degeminate(es)) {
-          return { cat: "ortografia", slip: false,
-            hint: "La palabra marcada está escrita «a la española».",
-            explain: it(e) + ": " + sp[2] };
-        }
-      }
-    }
+    var spl = spellingMatch(g, e);
+    if (spl) return { cat: "ortografia", slip: false,
+      hint: "La palabra marcada está escrita «a la española».",
+      explain: it(e) + ": " + spl[2] };
 
     // 6a. Un pronombre donde va un artículo (li arance → le arance)
     var HOURS = /^(una|due|tre|quattro|cinque|sei|sette|otto|nove|dieci|undici|dodici)$/;
     // 6b. Un artículo por otro delante de la hora (la sei → le sei)
-    if (ARTICLES[g] && ARTICLES[e] && HOURS.test(ctx.e[ctx.ei + 1] || "")) return { cat: "articolo", slip: false,
+    if (ARTICLES[g] && ARTICLES[e] && HOURS.test(ctx.e[ctx.ei + 1] || "") &&
+        (e === "le" || (e === "l'" && ctx.e[ctx.ei + 1] === "una"))) return { cat: "articolo", slip: false,
       hint: "Con las horas el artículo va en plural, salvo la una.",
       explain: "Las horas llevan *le*: *le sei*, *le tre e mezza*, *alle otto*. Solo *l'una* va en singular." };
     if (ARTICLES[e] && !ARTICLES[g] && CLITICS.indexOf(g) >= 0) {
@@ -491,13 +596,16 @@
     if (pg && pe) return prepRule(g, e, pg, pe, ctx);
 
     // 10. Comparativi
-    if ((g === "che" && e === "di") || (g === "di" && e === "che") || (g === "come" && e === "quanto")) {
+    var cmpBefore = ctx.e.slice(0, ctx.ei).some(function (w) { return /^(più|meno)$/.test(w); });
+    if ((g === "che" && e === "di") || (g === "di" && e === "che") || (g === "come" && e === "quanto") ||
+        (g === "come" && (e === "di" || e === "che") && cmpBefore)) {
       return { cat: "comparativo", slip: false,
         hint: "Es una comparación: ¿*di* o *che*?",
-        explain: e === "di"
+        explain: (g === "come" && e !== "quanto" ? "«Más … que» no se dice con *come*: en italiano va *di* o *che*. " : "") +
+          (e === "di"
           ? "Más/menos … que + sustantivo o pronombre → *di*: più alto di Marco, meno caro di prima."
-          : e === "che" ? "Si se comparan dos adjetivos, verbos, infinitivos o complementos con preposición → *che*: più bello che utile, meglio tardi che mai."
-          : "Tan … como → *(così) … come* o *(tanto) … quanto*." };
+          : e === "che" ? "Si se comparan dos adjetivos, dos verbos, dos cantidades (più mucche che abitanti) o dos complementos con preposición → *che*: più bello che utile, meglio tardi che mai."
+          : "Tan … como → *(così) … come* o *(tanto) … quanto*.") };
     }
 
     // 11. Ausiliare
@@ -506,12 +614,14 @@
       var next = ctx.e[ctx.ei + 1];
       var lemma = next && participleOf(next);
       if (lemma || ctx.e.some(function (w) { return participleOf(w); })) {
-        return auxRule(g, e, lemma || findParticipleLemma(ctx.e));
+        return auxRule(g, e, lemma || findParticipleLemma(ctx.e), ctx);
       }
     }
 
     // 12. bello / quello: cambiano come l'articolo
-    if (BELLO[g] && BELLO[e] && BELLO[g] === BELLO[e]) return { cat: "accordo", slip: false,
+    if (BELLO[g] && BELLO[e] && BELLO[g] === BELLO[e] && (BELLO_TRUNC[g] || BELLO_TRUNC[e] ||
+        ((/^(quello|bello)$/.test(e) || /^(quello|bello)$/.test(g)) && /^(s[^aeiou]|z|gn|ps)/.test(ctx.e[ctx.ei + 1] || "") &&
+         (DATA.nouns[ctx.e[ctx.ei + 1]] || DATA.nounsByPlural[ctx.e[ctx.ei + 1]])))) return { cat: "accordo", slip: false,
       hint: "*" + BELLO[e] + "* delante del sustantivo cambia como el artículo.",
       explain: "*" + BELLO[e] + "* antes del sustantivo toma la forma del artículo: " +
         (BELLO[e] === "quello" ? "quel ragazzo (il), quello studente (lo), quell'amico (l'), quei libri (i), quegli amici (gli)."
@@ -529,6 +639,18 @@
     // 12c. L'infinito al posto della forma coniugata (avere → abbiamo,
     // ritornare → ritornate): tipico di chi comincia, non è un refuso né
     // un falso amico.  L'infinito può venire dalla consegna «(ritornare)».
+    // The gerund where the infinitive was written (Essere malato → Essendo).
+    if (/(are|ere|ire|rre)$/.test(g) && /(ando|endo)$/.test(e) && isInfinitive(g) &&
+        verbForms(e).length === 0 && g.slice(0, 2) === e.slice(0, 2)) return { cat: "tempo_verbale", slip: false,
+      hint: "Acá no va el infinitivo: ¿qué forma dice «siendo, haciendo»?",
+      explain: "Acá va el gerundio, " + it(e) + ": dice la causa o el modo, como en español «" +
+        (g === "essere" ? "estando enfermo, no vino" : "haciendo, siendo") + "». El infinitivo (" + it(g) + ") no se usa así." };
+    // alzarsi → mi alzo: the reflexive infinitive, unconjugated.
+    var rflx = /^(.+[aei]r)(si|mi|ti|ci|vi)$/.exec(g);
+    if (rflx && !/(si|mi|ti|ci|vi)$/.test(e) && verbForms(e).some(function (x) {
+          return x.lemma === rflx[1] + "si" || x.lemma === rflx[1] + "e"; })) return { cat: "persona_verbale", slip: false,
+      hint: "Escribiste el infinitivo: hay que conjugarlo para la persona de la frase.",
+      explain: it(g) + " es el infinitivo; conjugado queda " + it(e) + ", con el pronombre delante y separado (mi alzo, ti alzi, si alza), como en español «me levanto»." };
     var stemInf = /\(([a-zà-ù]+)\)/i.exec(ctx.stem || "");
     var infG = g !== e && !isInfinitive(e) && /(are|ere|ire|rre)$/.test(g) &&
       (isInfinitive(g) || (stemInf && stemInf[1].toLowerCase() === g));
@@ -547,7 +669,14 @@
       explain: lc + " Acá: " + it(e) + "." };
 
     // 13. Falsi amici
-    var fa = DATA.falsi[g];
+    var fa = DATA.falsi[g], extraNote = "";
+    var sameV = sameVerb(g, e);
+    // fui / sono, siete / sei, era / ero: the same verb in another person or
+    // tense is conjugation, not a false friend; the note still helps.  And a
+    // word one letter away (prima / primo, pasto / pasta, parare / parlare)
+    // is only a false friend when the expected word is what the Spanish means.
+    var faHit = fa && String(fa[1] || "").split(/\s*[\/,]\s*/).some(function (w) { return w === e || w.split(" ").indexOf(e) >= 0; });
+    if (fa && (sameV || (!faHit && editDistance(gs, es) <= 1))) { extraNote = fa[2] || ""; fa = null; }
     if (fa && g !== e) return { cat: "falso_amico", slip: false,
       hint: it(g) + " existe en italiano, pero no significa lo que creés.",
       explain: it(g) + " en italiano significa «" + fa[0] + "». Acá va " + it(e) + "." +
@@ -563,13 +692,17 @@
         return w === e || w.split(" ").indexOf(e) >= 0;
       });
     })[0];
+    if (tr && sameV) { extraNote = extraNote || tr[1] || ""; tr = null; }
     if (tr && g !== e) return { cat: "parola_spagnola", slip: false,
       hint: it(g) + " suena a español. ¿Cómo se dice en italiano?",
       explain: it(g) + " viene del español; en italiano va " + it(e) + "." + (tr[1] ? " " + tr[1] : "") };
 
     // 14b. Un ejercicio de plural: la vocal final es el plural, no una
     //      persona del verbo ni un congiuntivo (paio → paia).
-    if (ctx.nominal) {
+    var pre = 0;
+    while (pre < g.length && pre < e.length && g[pre] === e[pre]) pre++;
+    var earlySlip = pre < Math.min(g.length, e.length) - 2 && editDistance(gs, es) <= 2;
+    if (ctx.nominal && !earlySlip && !looksSpanish(g)) {
       var sg = singularFromStem(ctx.stem) || (DATA.nounsByPlural[e] || {}).s;
       if (sg || /[aeio]$/.test(e)) return { cat: "plurale", slip: false,
         hint: "Revisá el plural de la palabra marcada.",
@@ -584,16 +717,28 @@
       explain: it(g) + " es español; en italiano: " + it(spf) +
         (spf.split(" / ").indexOf(e) < 0 ? " (acá: " + it(e) + ")" : "") + "." };
 
+    // 14d. A verb form where the noun goes (il pranzavo, del mio lavoriamo).
+    var nSl = DATA.nouns[e] || DATA.nounsByPlural[e];
+    var vSl = verbForms(g)[0];
+    if (nSl && vSl && !DATA.adj[e] && !participleOf(e) && !DATA.nouns[g] && !DATA.nounsByPlural[g] && nounSlot(ctx)) return { cat: "lessico", slip: false,
+      hint: "La palabra marcada es un verbo; acá va un sustantivo.",
+      explain: it(g) + " es una forma del verbo *" + vSl.lemma + "*" + (DATA.lex[vSl.lemma] ? " («" + String(DATA.lex[vSl.lemma]).split(/[\/,;]/)[0].trim() + "»)" : "") +
+        "; acá va el sustantivo " + it(e) + " («" + nSl.es + "»): " + it(articleFor(e, nSl) + e) + "." };
+
     // 15. Verbi (persona, tempo, irregolari, piacere, verbo sbagliato)
     r = verbRule(g, e, ctx);
-    if (r) return r;
+    if (r) {
+      if (extraNote && r.explain.indexOf(extraNote) < 0) r.explain += " " + extraNote;
+      return r;
+    }
 
     // 16. Plurale (parole straniere invariabili, plurali irregolari)
     if (g === e + "s" && /[^aeiouàèéìòù]$/.test(e)) return { cat: "plurale", slip: false,
       hint: "Las palabras extranjeras no cambian en plural.",
       explain: "Las palabras que terminan en consonante (casi siempre extranjeras) son invariables: i " + it(e) + ", i bar, i computer." };
     var inv = DATA.nouns[e];
-    if (inv && inv.pl === inv.s && g !== e && g.slice(0, 3) === e.slice(0, 3) && !verbForms(g).length) {
+    if (inv && inv.pl === inv.s && g !== e && !verbForms(g).length &&
+        (g === e + "s" || (g.slice(0, -1) === e.slice(0, -1) && /[ie]$/.test(g)) || g === e + "i" || g === e.slice(0, -1) + "i")) {
       return { cat: "plurale", slip: false,
         hint: "Esa palabra no cambia en plural.",
         explain: it(e) + " es invariable: igual en singular y en plural (le foto, i cinema, le città, i bar)." +
@@ -618,6 +763,8 @@
     var endingOnly = g.slice(0, -1) === e.slice(0, -1) && /[oaie]$/.test(g) && /[oaie]$/.test(e);
     if (dist === 1 && es.length >= 4 && !endingOnly && !DATA.lex[g] && !verbForms(g).length &&
         !participleOf(g)) {
+      if (ctx.choice) return { cat: "ortografia", slip: false,
+        hint: "Mirá bien cómo se escribe la palabra.", explain: "Se escribe " + it(e) + "." };
       return { cat: "refuso", slip: true,
         hint: "Hay un error de tipeo en la palabra marcada.",
         explain: "Error de tipeo: " + it(e) + "." };
@@ -633,7 +780,7 @@
 
     // 18a. Un nombre propio, un título o un lugar dicho en castellano
     //      (Isabel → Elisabetta, Londres → Londra).
-    if (ctx.names && ctx.names.indexOf(e) >= 0 && !isItalian(g) && g !== e) return { cat: "lessico", slip: false,
+    if (ctx.names && ctx.names.indexOf(e) >= 0 && !isItalian(g) && !isItalian(e) && g !== e) return { cat: "lessico", slip: false,
       hint: "Ese nombre también se dice distinto en italiano.",
       explain: "En italiano: " + it(e.charAt(0).toUpperCase() + e.slice(1)) + ". Muchos nombres propios, títulos y lugares se traducen (Isabel → Elisabetta, Juan → Giovanni, Londres → Londra)." };
 
@@ -645,7 +792,9 @@
 
     // 18c. Due parole diverse (nonna / nonno, casa / cassa): è lessico, non
     // concordanza, anche se cambia solo una lettera.
-    if (DATA.nouns && DATA.nouns[g] && DATA.nouns[e] && g !== e && DATA.lex[g] && DATA.lex[e]) {
+    if (DATA.nouns && DATA.nouns[g] && DATA.nouns[e] && g !== e && DATA.lex[g] && DATA.lex[e] &&
+        !(participleOf(g) && participleOf(g) === participleOf(e) && ppContext(ctx)) &&
+        !(DATA.adj[g] && DATA.adj[g] === DATA.adj[e] && !ARTICLES[ctx.e[ctx.ei - 1]])) {
       return { cat: "lessico", slip: false,
         hint: it(g) + " es otra palabra. ¿Qué significa?",
         explain: it(g) + " significa «" + DATA.lex[g] + "»; " + it(e) + ", «" + DATA.lex[e] + "»." };
@@ -655,21 +804,45 @@
     if (endingOnly) {
       var pl = /[ie]$/.test(e) && /[oa]$/.test(g) ? "plural" :
                /[oa]$/.test(e) && /[ie]$/.test(g) ? "singular" : null;
-      if (participleOf(e)) {
-        var before = ctx.e.slice(Math.max(0, ctx.ei - 3), ctx.ei);
-        if (ESSERE.indexOf(ctx.e[ctx.ei - 1]) >= 0) {
+      var itG = isItalian(g);
+      var prev1 = ctx.e[ctx.ei - 1] || "", prev2 = ctx.e[ctx.ei - 2] || "", next1 = ctx.e[ctx.ei + 1] || "";
+      // An articulated preposition with the wrong vowel (aglo → agli).
+      var peE = prepInfo(e);
+      if (peE && peE.art && !prepInfo(g) && !itG) return { cat: "preposizione_articolata", slip: false,
+        hint: "Revisá la preposición con artículo.",
+        explain: it(e) + " = *" + peE.base + " + " + peE.art + "*: el artículo de adentro concuerda con " +
+          (next1 && /^[a-zà-ù]/.test(next1) ? it(next1) : "el sustantivo") + ", como cualquier artículo." };
+      // Participles.  Before the passato prossimo (week 11) «è chiuso» is an
+      // adjective, and the agreement below says so without the jargon.
+      if (participleOf(e) && !(ctx.week != null && ctx.week < 11)) {
+        var essAux = ESSERE.indexOf(prev1) >= 0 || /^(essere|esser|essendo|stato|stata|stati|state)$/.test(prev1);
+        var venAux = verbForms(prev1).some(function (x) { return x.lemma === "venire"; });
+        var avAux = AVERE.indexOf(prev1) >= 0 || /^(avere|aver|avendo)$/.test(prev1);
+        var cliBefore = avAux && ["lo", "la", "li", "le", "l'", "ne"].indexOf(prev2) >= 0;
+        // «averlo visto», «avendola vista»: the pronoun glued to the auxiliary
+        var glued = /^(aver|avendo)(lo|la|li|le|ne)$/.exec(prev1);
+        if (glued) return { cat: "participio_accordo", slip: false,
+          hint: "Mirá el pronombre pegado al auxiliar: el participio concuerda con él.",
+          explain: "El pronombre *" + glued[2] + "* va antes del participio (pegado a *" + glued[1] + "*), así que el participio concuerda con él: " +
+            it(prev1 + " " + e) + " (averla vista, averli visti)." };
+        if (essAux || venAux) {
           return { cat: "participio_accordo", slip: false,
-            hint: "Con *essere*, el participio concuerda con el sujeto. Revisá la terminación.",
-            explain: "Con *essere* el participio concuerda en género y número con el sujeto: " +
-              it(e) + " (Maria è andat*a*, i ragazzi sono andat*i*)." };
+            hint: "Con *" + (venAux ? "venire" : "essere") + "*, el participio concuerda con el sujeto. Revisá la terminación.",
+            explain: "Con *" + (venAux ? "venire" : "essere") + "* el participio concuerda en género y número con el sujeto, como un adjetivo: " +
+              it(e) + " (Maria è andat*a*, i ragazzi sono andat*i*). En español «ha ido» no cambia; en italiano sí." };
         }
-        if (before.some(function (w) { return ["lo", "la", "li", "le", "l'", "ne"].indexOf(w) >= 0; })) {
+        if (cliBefore) {
           return { cat: "participio_accordo", slip: false,
             hint: "Mirá el pronombre que está antes del verbo: el participio concuerda con él.",
-            explain: "Con *lo, la, li, le* (y *ne*) antes del auxiliar *avere*, el participio concuerda con el pronombre: le ho viste, l'ho scritta, ne ho mangiati due. Acá: " + it(e) + "." };
+            explain: "Con *lo, la, li, le* (y *ne*) antes del auxiliar *avere*, el participio concuerda con el pronombre: le ho viste, l'ho scritta, ne ho mangiati due. Acá: " + it(prev2 + (prev2.slice(-1) === "'" ? "" : " ") + prev1 + " " + e) + "." };
+        }
+        if (avAux && /o$/.test(e)) {
+          return { cat: "participio_accordo", slip: false,
+            hint: "Con *avere*, ¿el participio cambia la terminación?",
+            explain: "Con *avere* el participio queda en -o: no concuerda con el sujeto ni con el objeto que viene después: " +
+              it(prev1 + " " + e) + " (ho fatto una passeggiata, abbiamo visto le foto), como en español «he hecho». Solo cambia si antes va *lo, la, li, le* (l'ho vista)." };
         }
       }
-      var itG = isItalian(g);
       // An article with a wrong vowel (gle → gli, e → i): the article of the
       // noun, not "agreement".  The hint names the noun only if the learner
       // wrote the same one.
@@ -684,6 +857,37 @@
             (anOk ? "El artículo de " + it(an) + " es " + it(e) + ": " + it(e + (e.slice(-1) === "'" ? "" : " ") + an) + "."
                   : "Acá va " + it(e) + ".") };
       }
+      // A noun where the noun goes: «il conta», «il temo», «ho voglio» (a
+      // verb form) or «il giardina», «la riuniona» (no word at all).
+      var nE0 = DATA.nouns[e] || DATA.nounsByPlural[e];
+      if (nE0 && !DATA.adj[e] && !participleOf(e) && (nounSlot(ctx) || !itG)) {
+        var artE = articleFor(e, nE0);
+        var vG = verbForms(g)[0];
+        if (itG && vG && !DATA.nouns[g] && !DATA.nounsByPlural[g]) return { cat: "lessico", slip: false,
+          hint: "La palabra marcada es un verbo; acá va un sustantivo.",
+          explain: it(g) + " es una forma del verbo *" + vG.lemma + "*" + (DATA.lex[vG.lemma] ? " («" + String(DATA.lex[vG.lemma]).split(/[\/,;]/)[0].trim() + "»)" : "") +
+            "; acá va el sustantivo " + it(e) + " («" + nE0.es + "»): " + it(artE + e) + "." };
+        if (!itG) {
+          var isPl = DATA.nounsByPlural[e] && nE0.pl === e && nE0.s !== e;
+          if (isPl) return { cat: "plurale", slip: false,
+            hint: "Revisá el plural de la palabra marcada.",
+            explain: it(g) + " no existe. " + pluralExplain(nE0.s, e) };
+          if (/[ie]$/.test(g) && /[oa]$/.test(e)) return { cat: "plurale", slip: false,
+            hint: "¿Singular o plural?",
+            explain: "Acá va el singular: " + it(artE + e) + " («" + nE0.es + "»). El plural sería " + it(nE0.pl) + "." };
+          var gen0 = nE0.g === "m" ? "masculino" : "femenino";
+          var gNote = nE0.note && /masculin|femenin|género/i.test(nE0.note) ? " " + nE0.note : "";
+          if (/ione$/.test(e)) return { cat: "genere", slip: false,
+            hint: "Revisá la terminación: ¿cómo terminan en italiano las palabras como esta?",
+            explain: "Los sustantivos en -ione son femeninos y terminan en -e: " + it(artE + e) + ", la stazione, la lezione (en español, «-ión»)." };
+          if (/e$/.test(e)) return { cat: "genere", slip: false,
+            hint: "Revisá la terminación de la palabra marcada.",
+            explain: it(e) + " termina en -e (" + it(artE + e) + ", «" + nE0.es + "»): los sustantivos en -e no cambian la vocal según el género (la gente, il fiume, la notte)." + gNote };
+          return { cat: "genere", slip: false,
+            hint: "Revisá la terminación de la palabra marcada: ¿es masculino o femenino?",
+            explain: it(e) + " es " + gen0 + ": " + it(artE + e) + " («" + nE0.es + "»). La -o o la -a final de un sustantivo es parte de la palabra: no cambia con lo que se diga." + gNote };
+        }
+      }
       // A verb form with a wrong ending (mangie → mangia): the conjugation.
       var vfe = verbForms(e);
       if (!itG && vfe.length && !participleOf(e)) {
@@ -692,21 +896,19 @@
           hint: "Revisá la terminación del verbo.",
           explain: it(g) + " no existe; la forma es " + it(e) + " (" + it(vf.lemma) + ", " + PERS_ES[vf.p] + ", " + TENSE_ES[vf.tense] + ")." };
       }
-      // The plural where the singular goes (reazioni → reazione) and a noun
-      // that exists in no form (genti → gente): number or spelling, not agreement.
-      var npG = DATA.nounsByPlural[g], nE = DATA.nouns[e] || DATA.nounsByPlural[e];
+      // The plural where the singular goes (reazioni → reazione).
+      var npG = DATA.nounsByPlural[g];
       if (npG && npG.s === e) return { cat: "plurale", slip: false,
         hint: "Acá va el singular.",
         explain: it(g) + " es el plural; acá va el singular " + it(e) + "." };
-      if (!itG && nE) return { cat: "ortografia", slip: false,
-        hint: "La palabra marcada no existe así.",
-        explain: it(g) + " no existe; la palabra es " + it(e) + " («" + nE.es + "», " + (nE.g === "m" ? "masculino" : "femenino") +
-          (DATA.nounsByPlural[e] && nE.s !== e ? " plural" : "") + ")." };
-      var head = nounNear(ctx);
+      // Languages are masculine (parlo italiano, lo spagnolo).
+      if (/^(italiano|spagnolo|inglese|francese|tedesco|portoghese|russo|cinese|giapponese|arabo)$/.test(e) &&
+          /[ae]$/.test(g) && !ARTICLES[prev1] && !DATA.nouns[prev1] && !DATA.nounsByPlural[prev1]) return { cat: "accordo", slip: false,
+        hint: "¿La palabra marcada es un idioma o describe a alguien?",
+        explain: "Los idiomas son masculinos: " + it(e) + " (parlo italiano, studio lo spagnolo), como en español «el español»." };
+      var ag = agreeHead(ctx);
+      var head = ag ? ag.head : null, desc = ag ? ag.desc : "";
       var gn = head && (DATA.nouns[head] || DATA.nounsByPlural[head]);
-      var desc = gn ? (gn.g === "m" ? "masculino" : "femenino") +
-        (DATA.nounsByPlural[head] && gn.pl === head && gn.s !== head ? " plural" : " singular") : "";
-      if (!head) { var ag2 = agreeGuess(ctx); if (ag2) { head = ag2.head; desc = ag2.desc; } }
       // A word that exists in no form (casu, stanchu) is spelling, not agreement.
       if (!itG && !head && !/[oaie]$/.test(g)) return { cat: "ortografia", slip: false,
         hint: "La palabra marcada no existe así.",
@@ -715,10 +917,17 @@
         hint: head ? "Revisá la concordancia de la palabra marcada: ¿con qué palabra concuerda?"
                    : "Revisá la terminación de la palabra marcada: la vocal final marca género y número.",
         explain: (head ? "Concordancia: " + it(e) + ", porque concuerda con " + it(head) + (desc ? " (" + desc + ")" : "") +
-                         ". Artículos, posesivos, adjetivos y participios toman el género y el número del sustantivo."
+                         ". Artículos, posesivos, adjetivos" + (ctx.week != null && ctx.week < 11 ? "" : " y participios") + " toman el género y el número del sustantivo."
                        : "La forma es " + it(e) + (pl ? ", en " + pl : "") + ": la vocal final marca el género y el número (-o / -a en singular, -i / -e en plural).") +
-          (gn && gn.note ? " " + gn.note : "") };
+          (gn && gn.note && /masculin|femenin|género/i.test(gn.note) ? " " + gn.note : "") };
     }
+
+    // 19b. The participle of another verb (hanno avuto → hanno preso).
+    var plG = participleOf(g), plE = participleOf(e);
+    if (plG && plE && plG !== plE) return { cat: "lessico", slip: false,
+      hint: "Ese verbo no es el que va.",
+      explain: it(g) + " es el participio de *" + plG + "*" + (DATA.lex[plG] ? " («" + DATA.lex[plG] + "»)" : "") +
+        "; acá va " + it(e) + ", de *" + plE + "*" + (DATA.lex[plE] ? " («" + DATA.lex[plE] + "»)" : "") + "." };
 
     // 20. Lessico: parola italiana vera ma sbagliata
     var lx = DATA.lex[g];
@@ -729,10 +938,16 @@
         (DATA.lex[e] ? " («" + DATA.lex[e] + "»)" : "") + "." };
 
     // 21. Refuso più largo
-    if (dist <= (es.length > 7 ? 2 : 1)) return { cat: "refuso", slip: true,
+    if (dist <= (es.length > 7 ? 2 : 1)) return ctx.choice ? { cat: "ortografia", slip: false,
+      hint: "Mirá bien cómo se escribe la palabra.", explain: "Se escribe " + it(e) + "." } : { cat: "refuso", slip: true,
       hint: "Hay un error de tipeo en la palabra marcada.",
       explain: "Error de tipeo: " + it(e) + "." };
 
+    // An option of a multiple choice is a word someone wrote on purpose:
+    // no «that word does not exist», just which one goes.
+    if (ctx.choice) return { cat: "lessico", slip: false,
+      hint: "La palabra marcada no es la que va.",
+      explain: "Acá va " + it(e) + (DATA.lex[e] ? " («" + DATA.lex[e] + "»)" : "") + ", no " + it(g) + (DATA.lex[g] ? " («" + DATA.lex[g] + "»)" : "") + "." };
     if (!isItalian(g)) return { cat: "lessico", slip: false,
       hint: "La palabra marcada no existe en italiano. ¿Cómo se dice?",
       explain: it(g) + " no es una palabra italiana. Acá va " + it(e) + (DATA.lex[e] ? " («" + DATA.lex[e] + "»)" : "") + "." };
@@ -741,7 +956,24 @@
       explain: "Acá va " + it(e) + (DATA.lex[e] ? " («" + DATA.lex[e] + "»)" : "") + "." };
   }
 
+  // Two forms of the same verb (fui / sono, siete / sei, fatto / fatta).
+  function sameVerb(g, e) {
+    var fe = verbForms(e);
+    if (verbForms(g).some(function (a) { return fe.some(function (b) { return a.lemma === b.lemma; }); })) return true;
+    return !!(participleOf(g) && participleOf(g) === participleOf(e));
+  }
+  // The word is where a participle goes: after an auxiliary (ho fatto, è
+  // stata, essere venuto), or after a clitic and an auxiliary.
+  function ppContext(ctx) {
+    var p1 = ctx.e[ctx.ei - 1] || "", p2 = ctx.e[ctx.ei - 2] || "";
+    var aux = function (w) { return AVERE.indexOf(w) >= 0 || ESSERE.indexOf(w) >= 0 || /^(avere|aver|essere|esser|avendo|essendo|stato|stata|stati|state)$/.test(w) ||
+      /^(aver|avendo|esser|essendo)(lo|la|li|le|ne|mi|ti|ci|vi|si|gli)$/.test(w); };
+    return aux(p1) || (aux(p2) && /^(già|mai|ancora|appena|sempre|più|anche|proprio|davvero|finalmente|bene|molto|tanto)$/.test(p1));
+  }
+
   var BELLO = dict();
+  // The forms that only exist in front of a noun (bel ragazzo, quegli amici).
+  var BELLO_TRUNC = dict({ bel: 1, "bell'": 1, bei: 1, begli: 1, quel: 1, "quell'": 1, quei: 1, quegli: 1 });
   ["bel", "bello", "bell'", "bella", "bei", "begli", "belle"].forEach(function (w) { BELLO[w] = "bello"; });
   ["quel", "quello", "quell'", "quella", "quei", "quegli", "quelle"].forEach(function (w) { BELLO[w] = "quello"; });
 
@@ -750,18 +982,49 @@
   var COMBINED = ["me", "te", "ce", "ve", "se", "glielo", "gliela", "glieli", "gliele", "gliene"];
   var PREPS_ALL = ["a", "di", "da", "in", "con", "su", "per", "tra", "fra", "senza", "dopo", "prima", "secondo", "come", "tranne", "verso", "sopra", "sotto", "dietro"];
 
+  var IND_VERBS = /^(telefonare|rispondere|chiedere|domandare|dire|scrivere|parlare|dare|regalare|mandare|spiegare|insegnare|raccontare|offrire|prestare|mostrare|portare|consigliare)$/;
+  // What each pronoun means, in the learner's Spanish.
+  var CLI_MEAN = dict({
+    lo: "«lo» (objeto directo masculino)", la: "«la» (objeto directo femenino)", li: "«los» (objeto directo masculino plural)",
+    le: "«las» (objeto directo femenino plural) o «le» (a ella)", gli: "«le» (a él) o «les» (a ellos)",
+    ne: "«de eso, de ellos» o una cantidad (ne voglio due)", ci: "«nos», o «ahí, en eso» (ci vado)", vi: "«los, les» (a ustedes)",
+    mi: "«me»", ti: "«te»", si: "«se»", me: "«mí» (después de preposición) o «me» delante de lo, la, ne",
+    te: "«vos, ti» (después de preposición) o «te» delante de lo, la, ne", lui: "«él»", lei: "«ella» (o «usted»)",
+    noi: "«nosotros»", voi: "«ustedes»", loro: "«ellos, ellas»", "sé": "«sí mismo»", io: "«yo»", tu: "«vos»"
+  });
+
+  // Can this article go in front of this noun (gender, number, first sound)?
+  function artCanGo(art, noun) {
+    var a = ARTICLES[art], n = DATA.nouns[noun] || DATA.nounsByPlural[noun];
+    if (!a || !n) return true;
+    var inv = n.s === n.pl, pl = !inv && n.pl === noun;
+    if (a[0] !== "?" && n.g && a[0] !== n.g) return false;
+    if (!inv && (a[1] === "p") !== pl) return false;
+    if (/^[aeiouàèéìòù]/.test(noun) && /^(lo|la|il)$/.test(art)) return false;
+    return true;
+  }
+
   function pronounRule(g, e, ctx) {
     var prev = ctx.e[ctx.ei - 1] || "", next = ctx.e[ctx.ei + 1] || "";
     var isP = function (w) { return TONIC.indexOf(w) >= 0 || ATONE.indexOf(w) >= 0 || COMBINED.indexOf(w) >= 0; };
     if (!isP(g) || !isP(e)) return null;
     // Articles vs pronouns: only a pronoun if a verb follows or no noun does
     if (ARTICLES[g] && ARTICLES[e]) {
-      if (DATA.nouns[next] || DATA.nounsByPlural[next]) return null;
+      // «lo aiuti», «la aspetto», «le invito»: a word that is a noun and a
+      // verb, and the expected form cannot be its article → a pronoun.
+      if ((DATA.nouns[next] || DATA.nounsByPlural[next]) &&
+          !(verbForms(next).length && !artCanGo(e, next))) return null;
       if (/^[a-zà-ù']/.test(next) && !verbForms(next).length &&
           !AVERE.concat(ESSERE).some(function (x) { return x === next; })) return null;
       if (!/^[a-zà-ù']/.test(next) && /art[íi]culo|articolo/i.test(ctx.prompt || "") &&
           !/pronombre|pronome/i.test(ctx.prompt || "")) return null;
     }
+    // «Me piace», «te chiamo»: the Spanish form of the pronoun.
+    var LONG = { me: "mi", te: "ti", se: "si", ce: "ci", ve: "vi" };
+    if (LONG[g] === e && ["lo", "la", "li", "le", "ne", "l'"].indexOf(next) < 0 && PREPS_ALL.indexOf(prev) < 0) return { cat: "pronome", slip: false,
+      hint: "Esa forma del pronombre va solo delante de *lo, la, li, le, ne*. ¿Cuál va sola junto al verbo?",
+      explain: "Junto al verbo va " + it(e) + " (" + it(e + " " + next) + "), aunque en español se diga «" + g + "». *" + g +
+        "* solo aparece delante de *lo, la, li, le, ne* (" + g + " lo dice)" + (g === "me" || g === "te" ? " o después de una preposición (per " + g + ")" : "") + "." };
     if (/^glie/.test(e)) return { cat: "pronome", slip: false,
       hint: "Son dos pronombres juntos: ¿cómo se combinan *gli/le* con *lo, la, ne*?",
       explain: "*gli* o *le* + *lo/la/li/le/ne* se funden en una palabra: " + it(e) +
@@ -771,23 +1034,36 @@
       hint: "Delante de *lo, la, li, le, ne* el primer pronombre cambia de vocal.",
       explain: "*mi, ti, ci, vi, si* se vuelven *me, te, ce, ve, se* delante de *lo, la, li, le, ne*: " +
         it(e + " " + next) + " (te lo spiego, me ne vado)." };
-    if (TONIC.indexOf(e) >= 0 && PREPS_ALL.indexOf(prev) >= 0) return { cat: "pronome", slip: false,
+    if (e === "sé" && TONIC.indexOf(g) >= 0) return { cat: "pronome", slip: false,
+      hint: "¿El pronombre vuelve al sujeto de la frase o es otra persona?",
+      explain: "*sé* es «sí mismo, sí misma»: vuelve al sujeto de la frase (pensa solo a sé = piensa solo en sí misma). " +
+        it(g) + " sería otra persona." };
+    if (TONIC.indexOf(e) >= 0 && PREPS_ALL.indexOf(prev) >= 0 && TONIC.indexOf(g) < 0) return { cat: "pronome", slip: false,
       hint: "Después de una preposición va otra forma del pronombre.",
-      explain: "Después de preposición van los pronombres tónicos: " + it(prev + " " + e) +
-        " (per te, con me, senza di lui). *Mi, ti* (átonos) solo van junto al verbo." };
+      explain: "Después de una preposición va la forma larga del pronombre: " + it(prev + " " + e) +
+        " (per me, con te, senza di lui), como en español «para mí, con vos». *Mi, ti* van solo junto al verbo (mi vede = me ve)." };
     if ((g === "le" && e === "gli") || (g === "gli" && e === "le")) return { cat: "pronome", slip: false,
       hint: "¿El pronombre se refiere a un hombre o a una mujer?",
       explain: "Objeto indirecto: *gli* = a él (y, en el uso corriente, también a ellos); *le* = a ella. Acá: " + it(e) + "." };
     if (ATONE.indexOf(e) >= 0 && ATONE.indexOf(g) >= 0) {
-      var dir = ["lo", "la", "li", "le"], ind = ["gli", "le"];
+      // With piacere & co. the person is an indirect object (gli piace).
+      var vNext = verbForms(next).concat(verbForms(ctx.e[ctx.ei + 2] || "")).map(function (x) { return x.lemma; })
+        .concat([participleOf(next), participleOf(ctx.e[ctx.ei + 2] || "")]);
+      var likes = vNext.some(function (l) { return /^(piacere|mancare|servire|bastare|interessare|dispiacere|sembrare)$/.test(l || ""); });
+      var indE = /^(gli|mi|ti|ci|vi)$/.test(e) || (e === "le" && likes);
       return { cat: "pronome", slip: false,
-        hint: "Revisá el pronombre: ¿directo o indirecto, masculino o femenino, singular o plural?",
-        explain: "Acá va " + it(e) + ". Directos: lo, la, li, le (lo vedo). Indirectos: gli (a él), le (a ella). " +
-          "Verbos como *telefonare, rispondere, chiedere, dire* llevan indirecto: gli telefono." };
+        hint: likes ? "Con este verbo, ¿la persona es objeto directo o indirecto?"
+                    : "Revisá el pronombre: ¿directo o indirecto, masculino o femenino, singular o plural?",
+        explain: it(g) + " es " + CLI_MEAN[g] + "; acá va " + it(e) + ", " + CLI_MEAN[e] + "." +
+          (likes && indE ? " Con *piacere, mancare, servire* la persona va en indirecto, como en español «le gusta»: gli piace, le mancano."
+           : /^(lo|la|li|le)$/.test(g) && /^(gli|le)$/.test(e) && !likes && vNext.some(function (l) { return IND_VERBS.test(l || ""); })
+             ? " Verbos como *telefonare, rispondere, chiedere, dire* llevan indirecto: gli telefono (le telefoneo)."
+           : /^(gli)$/.test(g) && /^(lo|la|li|le)$/.test(e) ? " Acá la persona o cosa es objeto directo, sin «a»: lo aspetto, la conosco (en español a veces se dice «le»)."
+           : "") };
     }
     return { cat: "pronome", slip: false,
-      hint: "Revisá el pronombre marcado.",
-      explain: "Acá va " + it(e) + "." };
+      hint: "Revisá el pronombre marcado: ¿de qué persona es?",
+      explain: (CLI_MEAN[g] ? it(g) + " es " + CLI_MEAN[g] + "; a" : "A") + "cá va " + it(e) + (CLI_MEAN[e] ? ", " + CLI_MEAN[e] : "") + "." };
   }
 
   /* Two Italian words a Spanish speaker mixes up (not false friends: both
@@ -875,6 +1151,20 @@
     ["venire", "andare", "*Andare* = ir a otro lugar; *venire* = venir hacia el que habla o acompañar (vieni con noi?)."]
   ];
 
+  // The week each tense is taught (course.json, weeks[].tenses).
+  var TENSE_WEEK = { imperfetto: 15, futuro: 19, condizionale: 20, congiuntivo: 24, congImperfetto: 30, passatoRemoto: 37 };
+
+  // A slot where only a noun can go: after an article, a preposition, a
+  // possessive or a determiner, or after a form of avere (ho voglia).
+  var DETERMINERS = /^(qualche|ogni|questo|questa|questi|queste|quel|quella|quello|quei|quelle|quegli|molto|molta|molti|molte|poco|poca|pochi|poche|tanto|tanta|tanti|tante|nessun|nessuna|alcuni|alcune|certi|certe|altro|altra|altri|altre|tutto|tutta|ultimo|ultima)$/;
+  function nounSlot(ctx) {
+    var prev = ctx.e[ctx.ei - 1] || "", w = ctx.e[ctx.ei] || "";
+    // «lo aspetto»: an article that cannot go with the word is a pronoun.
+    if (ARTICLES[prev] && CLITICS.indexOf(prev) >= 0 && !artCanGo(prev, w)) return false;
+    return !!(ARTICLES[prev] || prepInfo(prev) || POSSESSIVE.indexOf(prev) >= 0 || DETERMINERS.test(prev) ||
+              (AVERE.indexOf(prev) >= 0 && ctx.ei > 0));
+  }
+
   var SUBJ = { io: 0, tu: 1, lui: 2, lei: 2, "lui/lei": 2, noi: 3, voi: 4, loro: 5 };
   function subjectPerson(ctx) {
     var stem = String(ctx && ctx.stem || "").replace(/\(.*?\)/g, " ").toLowerCase();
@@ -890,16 +1180,24 @@
     var fe = verbForms(e), fg = verbForms(g);
     var prevE = ctx.e[ctx.ei - 1] || "", nextE = ctx.e[ctx.ei + 1] || "";
     var before = ctx.e.slice(0, ctx.ei).join(" ");
+    // A noun where a noun goes (il conto, del suo lavoro, qualche parte, ho
+    // voglia): «conta», «parta», «voglio» are not a person or a mood.
+    if (nounSlot(ctx) && (DATA.nouns[e] || DATA.nounsByPlural[e]) && !participleOf(e)) return null;
     // stanco/stanca are also «io stanco» (stancare): read them as the
-    // adjective unless a subject pronoun or a clitic points to the verb.
+    // adjective where an adjective goes (after essere, an article, a noun,
+    // molto…); «Vive in Italia» at the start is the verb.
     if (DATA.adj[e] && DATA.adj[e] === DATA.adj[g] &&
-        !/^(io|tu|noi|voi|loro|mi|ti|ci|vi|si|lo|la|li|le|gli|ne)$/.test(prevE)) return null;
+        (ESSERE.indexOf(prevE) >= 0 || ARTICLES[prevE] || DATA.nouns[prevE] || DATA.nounsByPlural[prevE] ||
+         /^(molto|così|tanto|troppo|più|meno|sempre|già|proprio|davvero|stare|sto|stai|sta|stiamo|state|stanno|sembra|sembrano|diventa|diventano|resta|rimane|e|ma|o)$/.test(prevE))) return null;
     // arrivati/arrivate after essere: agreement, not «voi arrivate».
     if (participleOf(e) && participleOf(e) === participleOf(g) && ESSERE.indexOf(prevE) >= 0 &&
         e.slice(0, -1) === g.slice(0, -1)) return null;
     // c'è / ci sono, ci vuole / ci vogliono
     if ((prevE === "ci" || prevE === "c'") && /^(è|sono|era|erano|sarà|saranno|vuole|vogliono|voleva|volevano)$/.test(e) &&
-        !participleOf(nextE)) {
+        !participleOf(nextE) &&
+        // the same verb and tense in another number: c'è / ci sono (a tense
+        // or a typo is not this rule)
+        fg.some(function (b) { return fe.some(function (a) { return a.lemma === b.lemma && a.tense === b.tense && a.p !== b.p; }); })) {
       return { cat: "ci_ne", slip: false,
         hint: "Mirá lo que viene después: ¿singular o plural?",
         explain: /vuol|vogl|vol/.test(e)
@@ -916,11 +1214,14 @@
     // wrong person is a wrong person, not «acá va congiuntivo».
     var CONG = /congiuntivo|congImperfetto/;
     var congOk = trig || /congiuntiv|subjuntiv/i.test(String(ctx.prompt || "")) ||
-      (/\b(che|se)\b/.test(before) && (ctx.week == null || ctx.week >= 24));
+      (/(^|\s)che$|(^|\s)che\s/.test(before) && (ctx.week == null || ctx.week >= 24));
+    // «se» (the conditional, not «se ne», «se lo») asks for the congiuntivo
+    // imperfetto only: «Se arrivi prima» is presente.
+    var seCond = /(^|\s)se(\s(?!ne\b|lo\b|la\b|li\b|le\b)|$)/.test(before) && (ctx.week == null || ctx.week >= 30);
     if (!congOk) {
-      var feInd = fe.filter(function (x) { return !CONG.test(x.tense); });
+      var feInd = fe.filter(function (x) { return !CONG.test(x.tense) || (seCond && x.tense === "congImperfetto"); });
       if (feInd.length) fe = feInd;
-      var fgInd = fg.filter(function (x) { return !CONG.test(x.tense); });
+      var fgInd = fg.filter(function (x) { return !CONG.test(x.tense) || (seCond && x.tense === "congImperfetto"); });
       if (fgInd.length) fg = fgInd;
     }
     if (trig) fe = fe.slice().sort(function (a, b) {
@@ -947,7 +1248,10 @@
           : "Acá va un tiempo compuesto: " + it(e + " " + nextE) + "." };
     }
     if (lemE && /^(piacere|mancare|servire|bastare|interessare|dispiacere)$/.test(participleOf(nextE) || "") &&
-        (ESSERE.indexOf(e) >= 0 || AVERE.indexOf(e) >= 0)) {
+        (ESSERE.indexOf(e) >= 0 || AVERE.indexOf(e) >= 0) && /^(è|sono|era|erano|sarà|saranno|sarebbe|sarebbero|sia|siano|fosse|fossero)$/.test(e) &&
+        // «siamo piaciute» for «sono piaciute»: the person; «ero piaciuti»:
+        // the tense, which the tense rule explains.
+        fg.some(function (b) { return fe.some(function (a) { return a.lemma === b.lemma && a.tense === b.tense && a.p !== b.p; }); })) {
       lemE = participleOf(nextE);
       return { cat: "piacere", slip: false,
         hint: "Con *" + lemE + "* el verbo concuerda con lo que gustó, no con la persona.",
@@ -955,8 +1259,10 @@
     }
 
     // piacere & co.: the thing liked is the subject
-    if (lemE && /^(piacere|mancare|servire|bastare|interessare|dispiacere)$/.test(lemE) &&
-        (lemG === lemE || /^(piaccio|piaci|piacciono|piace|manca|mancano|serve|servono|basta|bastano)$/.test(g))) {
+    if (lemE && /^(piacere|mancare|servire|bastare|interessare|dispiacere)$/.test(lemE) && prevE !== "si" &&
+        fe.some(function (a) { return a.lemma === lemE && (a.p === 2 || a.p === 5); }) &&
+        ((lemG === lemE && fg.some(function (b) { return fe.some(function (a) { return a.lemma === b.lemma && a.tense === b.tense && a.p !== b.p; }); })) ||
+         (lemG !== lemE && /^(piaccio|piaci|piacciono|piace|manca|mancano|serve|servono|basta|bastano)$/.test(g)))) {
       return { cat: "piacere", slip: false,
         hint: "Con *" + lemE + "* el sujeto es la cosa que gusta (o falta), no la persona.",
         explain: "*" + lemE + "* funciona como «gustar»: concuerda con lo que gusta. Mi piace il libro / mi piacciono i libri; " +
@@ -966,7 +1272,7 @@
     if (!fe.length) {
       // Participles
       var lem = participleOf(e);
-      if (!lem && /(ato|uto|ito)$/.test(g) && /(tto|sto|rto|lto|nto|so|to)$/.test(e) &&
+      if (!lem && /(ato|uto|ito)$/.test(g) && /(tto|sto|rto|lto|nto|so|to)$/.test(e) && !/(ato|uto|ito)$/.test(e) &&
           deaccent(g).slice(0, 3) === deaccent(e).slice(0, 3) && !participleOf(g)) {
         return { cat: "irregolare", slip: false,
           hint: "Ese participio es irregular.",
@@ -974,20 +1280,37 @@
       }
       if (lem && Conj) {
         var reg = Conj.regular(lem, "participio"), real = Conj.participle(lem);
-        var looksRegular = /(ato|uto|ito)$/.test(g) && deaccent(g).slice(0, 2) === deaccent(lem).slice(0, 2);
-        if (reg !== real && (looksRegular || degeminate(g.slice(0, -1)) === degeminate(reg.slice(0, -1)))) {
+        // the regular participle, with any of -ato/-uto/-ito (chiudito,
+        // prenduto, mettuto); a slip inside the stem (veuto) is a typo
+        var looksRegular = /(at|ut|it)[oaie]$/.test(g) && deaccent(g).slice(0, 2) === deaccent(lem).slice(0, 2) &&
+          editDistance(g, real.slice(0, -1) + g.slice(-1)) >= 2;
+        if (reg !== real && g.slice(0, -1) !== real.slice(0, -1) &&
+            (looksRegular || degeminate(g.slice(0, -1)) === degeminate(reg.slice(0, -1)))) {
+          var realG = real.slice(0, -1) + g.slice(-1);
           return { cat: "irregolare", slip: false,
             hint: "El participio de " + it(lem) + " es irregular.",
-            explain: "Participio irregular: " + it(lem) + " → " + it(real) + ", no *" + g + "*." };
+            explain: "Participio irregular: " + it(lem) + " → " + it(real) + (realG !== real ? " (acá, " + it(realG) + ")" : "") + ", no *" + g + "*." };
         }
       }
       return null;
     }
-    // Same lemma
-    for (var i = 0; i < fe.length; i++) {
-      for (var j = 0; j < fg.length; j++) {
-        var a = fe[i], b = fg[j];
-        if (a.lemma !== b.lemma) continue;
+    // Same lemma.  An ambiguous form (arrivi: presente tu, congiuntivo io)
+    // is read first as the same tense in another person, then as another
+    // tense in the same person.
+    var pairs = [];
+    fe.forEach(function (a0) { fg.forEach(function (b0) { if (a0.lemma === b0.lemma) pairs.push([a0, b0]); }); });
+    var samePT = pairs.filter(function (x) { return x[0].tense === x[1].tense && x[0].p !== x[1].p; });
+    var sameP = pairs.filter(function (x) { return x[0].p === x[1].p && x[0].tense !== x[1].tense; });
+    // A tense the learner has not met yet is not what they meant: «parta»
+    // for «parto» in week 6 is the ending, not the congiuntivo.
+    var knownT = function (t) { return !(ctx.week != null && ctx.week < (TENSE_WEEK[t] || 0)); };
+    var ordered = samePT.filter(function (x) { return knownT(x[1].tense); })
+      .concat(sameP.filter(function (x) { return knownT(x[1].tense); }), samePT, sameP);
+    // After «è possibile che», «spero che»: the congiuntivo reading first.
+    if (trig) ordered = sameP.filter(function (x) { return CONG.test(x[0].tense); }).concat(ordered);
+    for (var i = 0; i < ordered.length; i++) {
+      {
+        var a = ordered[i][0], b = ordered[i][1];
         if (a.tense === b.tense && a.p !== b.p) {
           // The hour: «sono le tre», «è l'una» (plural for every hour but one)
           var nx = ctx.e[ctx.ei + 1] || "", nx2 = ctx.e[ctx.ei + 2] || "";
@@ -1020,6 +1343,11 @@
       }
     }
     if (Conj) {
+      // -care/-gare without h
+      var eh = e.replace(/([cg])h([ie])/, "$1$2");
+      if (eh !== e && eh === g) return { cat: "ortografia", slip: false,
+        hint: "Mirá cómo suena la c/g de la palabra marcada.",
+        explain: "Para conservar el sonido duro, los verbos en *-care/-gare* agregan *h* antes de i/e: " + it(e) + " (cerchi, paghiamo)." };
       // Over-regularisation of an irregular verb
       for (var k = 0; k < fe.length; k++) {
         var f = fe[k];
@@ -1038,10 +1366,18 @@
         } catch (err) { /* */ }
       }
       // Regularised future/conditional stem not in the table (anderei, poterò)
-      if (!fg.length && (/rei$|resti$|rebbe$|remmo$|reste$|rebbero$|rò$|rai$|rà$|remo$|rete$|ranno$/).test(g) &&
-          (fe[0].tense === "futuro" || fe[0].tense === "condizionale")) {
-        return { cat: "irregolare", slip: false,
-          hint: "Revisá la raíz del verbo en " + (fe[0].tense === "futuro" ? "futuro" : "condicional") + ".",
+      var endM = /(rei|resti|rebbe|remmo|reste|rebbero|rò|rai|rà|remo|rete|ranno)$/.exec(g);
+      if (!fg.length && endM && (fe[0].tense === "futuro" || fe[0].tense === "condizionale")) {
+        var lemF = fe[0].lemma.replace(/si$/, "e"), baseF = lemF.slice(0, -3), gStem = g.slice(0, -endM[1].length);
+        var tname = fe[0].tense === "futuro" ? "futuro" : "condicional";
+        // tornaranno for torneranno: the -are verbs change the a into e.
+        if (/are$/.test(lemF) && gStem === baseF + "a" && e.indexOf(baseF + "er") === 0) return { cat: "irregolare", slip: false,
+          hint: "Revisá la vocal antes de la r en " + tname + ".",
+          explain: "Los verbos en -are cambian la *a* por *e* en futuro y condicional: " + it(lemF) + " → " + it(e) +
+            " (parlerò, mangerei), no *" + g + "*. En español la a se queda (tornarán); en italiano, no." };
+        // anderò, poterò: the full stem where Italian contracts it.
+        if (gStem === baseF + "e" || gStem === baseF + "i" || gStem === baseF + "a") return { cat: "irregolare", slip: false,
+          hint: "Revisá la raíz del verbo en " + tname + ".",
           explain: it(fe[0].lemma) + " contrae la raíz en futuro y condicional: " + it(e) +
             ". Igual: andare → andr-, avere → avr-, potere → potr-, volere → vorr-, venire → verr-, essere → sar-." };
       }
@@ -1049,18 +1385,14 @@
       for (var q = 0; q < fe.length; q++) {
         var inf = Conj.info(fe[q].lemma);
         if (inf.isc && /isc/.test(e) && !/isc/.test(g) &&
-            deaccent(g).slice(0, 3) === deaccent(e).slice(0, 3)) {
+            deaccent(g).slice(0, 3) === deaccent(e).slice(0, 3) &&
+            (editDistance(g, e) >= 2 || g === e.replace(/isc/, ""))) {
           return { cat: "irregolare", slip: false,
             hint: "Ese verbo pertenece a un grupo especial de -ire.",
             explain: it(fe[q].lemma) + " es de los verbos en *-isc-*: " + it(e) +
               " (finisco, capisci, preferiscono; pero finiamo, finite)." };
         }
       }
-      // -care/-gare without h
-      var eh = e.replace(/([cg])h([ie])/, "$1$2");
-      if (eh !== e && eh === g) return { cat: "ortografia", slip: false,
-        hint: "Mirá cómo suena la c/g de la palabra marcada.",
-        explain: "Para conservar el sonido duro, los verbos en *-care/-gare* agregan *h* antes de i/e: " + it(e) + " (cerchi, paghiamo)." };
     }
     // Different verbs: the classic Spanish-speaker confusions
     if (lemG && lemE && lemG !== lemE) {
@@ -1076,17 +1408,28 @@
           "; acá va " + it(e) + ", de *" + lemE + "*" + (DATA.lex[lemE] ? " («" + DATA.lex[lemE] + "»)" : "") + "." };
     }
     if (fg.length && fe.length) {
+      var fa0 = fe[0], fb0 = fg.filter(function (x) { return x.lemma === fa0.lemma; })[0] || fg[0];
+      var fut = fa0.tense === "futuro" && /(^|\s)(quando|appena|finché)$/.test(before);
+      var past = fa0.tense === "imperfetto" && /congImperfetto/.test((verbForms(ctx.e.slice(ctx.ei + 1).filter(function (w) {
+        return verbForms(w).some(function (x) { return x.tense === "congImperfetto"; }); })[0] || "")[0] || {}).tense || "");
       return { cat: "tempo_verbale", slip: false,
-        hint: "Revisá el verbo marcado: forma y tiempo.",
-        explain: "Acá va " + it(e) + " (" + TENSE_ES[fe[0].tense] + " de " + it(fe[0].lemma) + ")." };
+        hint: fut ? "Es algo que va a pasar: ¿qué tiempo pide el italiano después de *" + before.split(" ").pop() + "*?"
+                  : "Revisá el verbo marcado: ¿qué tiempo pide la frase y quién es el sujeto?",
+        explain: it(g) + " es " + TENSE_ES[fb0.tense] + " (" + PERS_ES[fb0.p] + "); acá va " + it(e) + ", " +
+          TENSE_ES[fa0.tense] + " (" + PERS_ES[fa0.p] + ")." +
+          (fut ? " Después de *quando, appena*, para lo que va a pasar, el italiano usa el futuro; en español va subjuntivo («cuando llegue»)."
+           : past ? " Con el congiuntivo imperfetto después, el verbo principal va en pasado (pensavo che fosse)." : "") };
     }
     return null;
   }
 
   function isItalian(w) {
+    if (!LIDX) buildVerbIndex();
     return !!(DATA.lex[w] || ARTICLES[w] || prepInfo(w) || verbForms(w).length ||
               participleOf(w) || CLITICS.indexOf(w) >= 0 || SUBJECTS.indexOf(w) >= 0 ||
-              AVERE.indexOf(w) >= 0 || ESSERE.indexOf(w) >= 0);
+              AVERE.indexOf(w) >= 0 || ESSERE.indexOf(w) >= 0 ||
+              // the truncated infinitive: aver fatto, esser nato, far vedere
+              (/[aei]r$/.test(w) && (LIDX[w + "e"] || LIDX[w.replace(/r$/, "rre")])));
   }
 
   function regularPlural(s, g) {
@@ -1111,6 +1454,45 @@
       if (w && (DATA.nouns[w] || DATA.nounsByPlural[w])) return w;
     }
     return null;
+  }
+
+  // The definite article of a noun, with its space (il , l', gli …).
+  function articleFor(noun, n) {
+    var pl = n && n.pl === noun && n.s !== noun, snd = soundRule(noun);
+    var art = pl ? (n.g === "f" ? "le" : snd === "c" ? "i" : "gli")
+                 : n && n.g === "f" ? (snd === "v" ? "l'" : "la") : snd === "v" ? "l'" : snd === "sz" ? "lo" : "il";
+    return art === "l'" ? art : art + " ";
+  }
+
+  /* What an adjective or participle agrees with, and how: the article right
+     before it (gli argentini), the noun next to it (casa bella, bella casa),
+     one word further only if no verb is in between.  The number of an
+     invariable noun (le università) comes from its article. */
+  function agreeHead(ctx) {
+    var e = ctx.e, i = ctx.ei;
+    var nounI = function (w) { return w && (DATA.nouns[w] || DATA.nounsByPlural[w]); };
+    var verbish = function (w) { return !!w && (verbForms(w).length > 0 || AVERE.indexOf(w) >= 0 || ESSERE.indexOf(w) >= 0); };
+    var descOf = function (w, k) {
+      var n = nounI(w);
+      if (!n) return "";
+      var num = n.s === n.pl ? null : (DATA.nounsByPlural[w] && n.pl === w ? "plural" : "singular");
+      if (!num) {
+        var art = e[k - 1] && (ARTICLES[e[k - 1]] || (prepInfo(e[k - 1]) && ARTICLES[prepInfo(e[k - 1]).art]));
+        num = art ? (art[1] === "p" ? "plural" : "singular") : "";
+      }
+      return ((n.g === "m" ? "masculino" : "femenino") + (num ? " " + num : "")).trim();
+    };
+    var prevArt = e[i - 1] && ARTICLES[e[i - 1]];
+    if (prevArt && !nounI(e[i + 1])) return agreeGuess(ctx) ||
+      { head: e[i - 1], desc: ((prevArt[0] === "m" ? "masculino" : prevArt[0] === "f" ? "femenino" : "") + (prevArt[1] === "p" ? " plural" : " singular")).trim() };
+    if (nounI(e[i + 1])) return { head: e[i + 1], desc: descOf(e[i + 1], i + 1) };
+    if (nounI(e[i - 1])) return { head: e[i - 1], desc: descOf(e[i - 1], i - 1) };
+    // the subject before essere: «il museo è chiuso (il lunedì)»
+    if (ESSERE.indexOf(e[i - 1]) >= 0 && nounI(e[i - 2])) return { head: e[i - 2], desc: descOf(e[i - 2], i - 2) };
+    // one word further, if no verb and no new article is in between
+    if (nounI(e[i + 2]) && !verbish(e[i + 1]) && !ARTICLES[e[i + 1]] && !prepInfo(e[i + 1])) return { head: e[i + 2], desc: descOf(e[i + 2], i + 2) };
+    if (nounI(e[i - 2]) && !verbish(e[i - 1])) return { head: e[i - 2], desc: descOf(e[i - 2], i - 2) };
+    return agreeGuess(ctx);
   }
 
   function nounAfter(ctx) {
@@ -1160,6 +1542,23 @@
   }
 
   function articleRuleInner(g, e, ctx, noun, ag, ae) {
+    // «la cui opera»: the article agrees with what follows «cui».
+    if (noun === "cui") {
+      var owned = ctx.e[ctx.ei + 2] || "";
+      return { cat: "articolo", slip: false,
+        hint: "Con *cui*, ¿con qué palabra concuerda el artículo?",
+        explain: "En *il cui, la cui* el artículo concuerda con lo que viene después (lo poseído), no con el poseedor: " +
+          it(e + " cui" + (owned ? " " + owned : "")) + ". Como en español «cuya obra»." };
+    }
+    // «il mio capo», «le nostre figlie»: the noun is after the possessive.
+    if ((POSSESSIVE.indexOf(noun) >= 0 || DATA.adj[noun]) && (DATA.nouns[ctx.e[ctx.ei + 2]] || DATA.nounsByPlural[ctx.e[ctx.ei + 2]])) {
+      var real = ctx.e[ctx.ei + 2];
+      var r0 = articleRuleInner(g, e, { e: [e, real], ei: 0, names: ctx.names }, real, ag, ae);
+      var three = it(e + (e.slice(-1) === "'" ? "" : " ") + noun + " " + real);
+      r0.explain = r0.explain.split(it(e + (e.slice(-1) === "'" ? "" : " ") + real)).join(three);
+      if (POSSESSIVE.indexOf(noun) >= 0) r0.explain += " El posesivo va con artículo, como en «la mia casa» (en español, «mi casa»).";
+      return r0;
+    }
     if (!noun || !/^[a-zà-ù']/.test(noun)) {
       var gg = ag[0] !== "?" && ae[0] !== "?" && ag[0] !== ae[0];
       return { cat: gg ? "genere" : "articolo", slip: false,
@@ -1179,9 +1578,9 @@
     var withNoun = it(e + (e.slice(-1) === "'" ? "" : " ") + noun);
     if (ag[1] !== ae[1]) return { cat: "accordo", slip: false,
       hint: "Revisá el número: ¿singular o plural?",
-      explain: it(noun) + " está en " + (ae[1] === "p" ? "plural" : "singular") + ": " + withNoun + "." +
+      explain: it(noun) + " está en " + (ae[1] === "p" ? "plural" : "singular") + ": " + withNoun +
         (ae[1] === "p" && DATA.nounsByPlural[noun] && DATA.nounsByPlural[noun].s !== noun ? " (singular: " + it(DATA.nounsByPlural[noun].s) + ")"
-         : ae[1] === "p" && DATA.nounsByPlural[noun] ? " (" + it(noun) + " no cambia en plural: solo el artículo lo marca)" : "") };
+         : ae[1] === "p" && DATA.nounsByPlural[noun] ? " (" + it(noun) + " no cambia en plural: solo el artículo lo marca)" : "") + "." };
     if (ag[2] !== ae[2]) return { cat: "articolo", slip: false,
       hint: "¿Artículo determinado o indeterminado?",
       explain: "Acá va " + (ae[2] === "det" ? "el artículo determinado" : "el indeterminado") + ": " + withNoun + "." };
@@ -1196,7 +1595,10 @@
         it(e + (e.slice(-1) === "'" ? "" : " ") + noun) + "." };
     return { cat: "articolo", slip: false,
       hint: "Revisá el artículo antes de " + it(noun) + ".",
-      explain: "Delante de consonante normal va *il / i / un* (masculino): " + it(e + " " + noun) + "." };
+      explain: g === "l'" ? "*l'* solo va delante de vocal; " + it(noun) + " empieza con consonante: " + withNoun + "."
+        : /^(lo|gli|uno)$/.test(g) ? it(g) + " va solo delante de s + consonante, z, gn o ps" + (g === "gli" ? " (y de vocal: gli amici)" : "") +
+            "; " + it(noun) + " empieza con una consonante común: " + withNoun + "."
+        : "Delante de consonante va *il / i / un* en masculino y *la / le / una* en femenino: " + withNoun + "." };
   }
 
   var PLACE_IN = ["italia", "argentina", "spagna", "francia", "germania", "sicilia", "toscana",
@@ -1204,6 +1606,13 @@
                   "treno", "aereo", "biblioteca", "piscina", "palestra", "cucina", "bagno",
                   "giardino", "piazza", "farmacia", "vacanza", "europa", "america", "chiesa"];
 
+  // The infinitive under a clitic (averci → avere, farlo → fare).
+  function infBase(w) {
+    w = String(w || "");
+    var m = /^(.+[aei]r)(mi|ti|si|ci|vi|lo|la|li|le|ne|gli|glielo|gliela|glieli|gliele|gliene)$/.exec(w);
+    return m ? m[1] + "e" : w;
+  }
+  var A_PLACES = /^(cinema|teatro|mare|bar|ristorante|casa|scuola|letto|lezione|concerto|museo|stadio|mercato|supermercato|parco|lavoro|pranzo|cena)$/;
   function prepRule(g, e, pg, pe, ctx) {
     var next = nounAfter(ctx), prev = ctx.e[ctx.ei - 1] || "";
     if (pg.base === pe.base) {
@@ -1221,17 +1630,32 @@
                         : "Acá va " + it(e) + " sin artículo." };
     }
     var why;
-    if (pe.base === "da" && (/^(\d+|un|una|due|tre|quattro|cinque|sei|dieci|molto|tanto|poco|anni|mesi|giorni|ore|settimane|tempo|sempre|quando)$/.test(next) || /anni|mesi|tempo/.test(ctx.e.slice(ctx.ei).join(" ")))) {
+    var nextInf = next && isInfinitive(infBase(next));
+    if (nextInf && pe.base === "a") {
+      why = "Delante de un infinitivo, verbos como *cominciare, imparare, riuscire, aiutare, invitare, andare* piden *a*: " + it((prev ? prev + " " : "") + "a " + next) + " (comincio a studiare, ti invito a venire).";
+    } else if (nextInf && pe.base === "di") {
+      why = "Delante de un infinitivo, muchos verbos y expresiones piden *di*: " + it((prev ? prev + " " : "") + "di " + next) + " (cerco di capire, ho deciso di partire, grazie di essere venuto). En español a veces no va nada («decidí partir»).";
+    } else if (nextInf && pe.base === "da") {
+      why = "*da* + infinitivo dice qué hay que hacer o para qué sirve algo: " + it((prev ? prev + " " : "") + "da " + next) + " (qualcosa da mangiare, niente da fare).";
+    } else if (nextInf && pe.base === "per") {
+      why = "*per* + infinitivo es «para»: " + it("per " + next) + " (studio per imparare).";
+    } else if (pe.base === "a" && A_PLACES.test(next)) {
+      why = "Con *cinema, teatro, mare, bar, ristorante, casa, scuola, letto* va *a* (vado al cinema, a casa); con *ufficio, banca, farmacia, montagna* y los países, *in*. No sigue al español: hay que aprenderlos de a uno. Acá: " + it(e + " " + next) + ".";
+    } else if (pe.base === "da" && pg.base === "di" && verbForms(prev).concat(verbForms(ctx.e[ctx.ei - 2] || "")).map(function (x) { return x.lemma; })
+               .concat([infBase(prev), infBase(ctx.e[ctx.ei - 2] || "")]).some(function (l) { return /^(scendere|uscire|partire|venire|tornare|arrivare|alzarsi|allontanarsi|cadere|fuggire|scappare|togliere)$/.test(l); })) {
+      why = "El punto de partida de un movimiento va con *da*: " + it(e + " " + next) + " (scendo dal letto, esco dall'ufficio, vengo da Roma). *di* es de quién o de qué es algo.";
+    } else if (pe.base === "da" && (/^(\d+|un|una|due|tre|quattro|cinque|sei|dieci|molto|tanto|poco|anni|mesi|giorni|ore|settimane|tempo|sempre|quando)$/.test(next) || /anni|mesi|tempo/.test(ctx.e.slice(ctx.ei).join(" ")))) {
       why = "Duración de algo que todavía sigue: *da* + tiempo (studio italiano da due anni = hace dos años que estudio).";
     } else if (pe.base === "da" && (FAMILY.indexOf(next) >= 0 || /^(medico|dentista|parrucchiere|avvocato|meccanico|nonna|nonno|amico|amica|me|te|lui|lei|noi|voi|loro|marco|giulia|maria|martín)$/.test(next) || (pe.art && /^(medico|dentista|parrucchiere)$/.test(next)))) {
       why = "Para ir o estar «en lo de» alguien se usa *da*: vado dal medico, sono da Giulia.";
     } else if (pe.base === "da" && /^(parte|lontano|qui|lì)$/.test(prev + next)) {
       why = "Origen o punto de partida: *da* (parto da Roma, lontano da qui).";
-    } else if (pe.base === "a" && pg.base === "in" && /^[a-zàèìòù]+$/.test(next) && PLACE_IN.indexOf(next) < 0 && !pe.art) {
-      why = "Con ciudades va *a*: a Roma, a Buenos Aires. Con países y regiones, *in*: in Italia.";
+    } else if (pe.base === "a" && pg.base === "in" && /^[a-zàèìòù]+$/.test(next) && PLACE_IN.indexOf(next) < 0 && !pe.art &&
+               ((ctx.names || []).indexOf(next) >= 0 || !isItalian(next))) {
+      why = "Con ciudades va *a*: a Roma, a Buenos Aires. Con países y regiones, *in*: in Italia. En español «en» sirve para las dos; en italiano, no.";
     } else if (pe.base === "in" && (PLACE_IN.indexOf(next) >= 0 || !pe.art)) {
       why = "Con países, regiones y muchos lugares cerrados o medios de transporte va *in*: in Italia, in ufficio, in macchina, in treno.";
-    } else if (pe.base === "di" && pg.base === "da") {
+    } else if (pe.base === "di" && pg.base === "da" && ESSERE.indexOf(prev) >= 0) {
       why = "Origen de una persona: *di* (sono di Buenos Aires); *da* indica procedencia en un movimiento (vengo da Roma).";
     } else if ((pe.base === "tra" || pe.base === "fra") && /^(un|una|due|tre|poco|qualche|\d+)$/.test(next)) {
       why = "«Dentro de» + tiempo es *tra / fra*: fra due ore, tra un mese.";
@@ -1251,56 +1675,152 @@
       explain: why };
   }
 
-  function auxRule(g, e, lemma) {
+  // Why a verb takes essere: its family, in the learner's words.
+  var ESSERE_WHY = [
+    [/^(andare|venire|partire|arrivare|uscire|entrare|tornare|ritornare|salire|scendere|cadere|fuggire|scappare|giungere)$/, "es un verbo de movimiento hacia o desde un lugar"],
+    [/^(restare|rimanere|stare|essere)$/, "es de los que dicen dónde o cómo se queda uno (stare, restare, rimanere, essere)"],
+    [/^(nascere|morire|diventare|crescere|guarire|dimagrire|ingrassare|invecchiare|cambiare|succedere|accadere|capitare)$/, "dice un cambio de estado (nascere, morire, diventare)"],
+    [/^(piacere|mancare|sembrare|parere|costare|servire|bastare|dispiacere|interessare)$/, "funciona como *piacere*: lo que gusta, falta o cuesta es el sujeto"]
+  ];
+  function auxRule(g, e, lemma, ctx) {
+    ctx = ctx || { e: [], ei: 0 };
     var needsEssere = ESSERE.indexOf(e) >= 0;
-    var refl = lemma && /rsi$/.test(lemma);
-    var why = needsEssere
-      ? (refl ? "Los verbos reflexivos forman el pasado con *essere*: mi sono alzato."
-              : (lemma ? it(lemma) + " forma los tiempos compuestos con *essere*. " : "") +
-                "Van con *essere* los verbos de movimiento hacia un lugar o de cambio de estado (andare, venire, partire, arrivare, uscire, tornare, diventare, nascere, morire), *essere, stare, rimanere, piacere* y los reflexivos. Y el participio concuerda: sono andato/a.")
-      : (lemma ? it(lemma) + " forma los tiempos compuestos con *avere*. " : "") +
-        "La mayoría de los verbos, y todos los que tienen objeto directo, usan *avere*: ho mangiato, ho visto, ho camminato.";
+    var prev = ctx.e[ctx.ei - 1] || "", next = ctx.e[ctx.ei + 1] || "", next2 = ctx.e[ctx.ei + 2] || "";
+    var early = ctx.week != null && ctx.week < 11;
+    var info = null;
+    try { info = lemma && Conj ? Conj.info(lemma) : null; } catch (err) { info = null; }
+    // mi sono alzato, si è rotto: the pronoun makes it reflexive.
+    var fam = lemma && ESSERE_WHY.filter(function (x) { return x[0].test(lemma); })[0];
+    var likes = fam && fam === ESSERE_WHY[3];
+    // (mi è costato: the «mi» of piacere & co. is «a mí», not reflexive)
+    var refl = !likes && (/^(mi|ti|si|ci|vi|me|te|se|ce|ve)$/.test(prev) ||
+      (/^(mi|ti|si|ci|vi)$/.test(ctx.e[ctx.ei - 2] || "") && /^(ne|lo|la|li|le)$/.test(prev)));
+    // «è innamorata», «sono preoccupato»: a reflexive verb's participle with
+    // no pronoun is a state, like an adjective.
+    var state = !refl && !likes && lemma && /rsi$/.test(lemma);
+    var modal = lemma && /^(dovere|potere|volere)$/.test(lemma);
+    var infNext = next2 && /(are|ere|ire|rre|rsi)$/.test(next2) ? next2 : "";
+    var why;
+    if (needsEssere) {
+      if (refl) why = "Con el pronombre reflexivo (" + it(prev) + ") el pasado va siempre con *essere*: " + it(prev + " " + e + " " + next) +
+        " (mi sono alzato, ci siamo divertiti). En español no hay auxiliar que elegir («se levantó»); en italiano, siempre *essere*.";
+      else if (modal && infNext) why = "*" + lemma + "* toma el auxiliar del verbo que sigue: " + it(infNext) + " va con *essere*, así que " + it(e + " " + next + " " + infNext) + ". Con *avere* también se oye.";
+      else if (state) why = it(e + " " + next) + " describe un estado, como un adjetivo (como el español «está enamorada», «estoy preocupado»): va con *essere*.";
+      else if (info && info.aux === "both") why = it(lemma) + " va con *essere* cuando dice lo que le pasa al sujeto (il film è finito, sono corso a casa) y con *avere* cuando tiene objeto o dice la actividad (ho finito il lavoro, ho corso un'ora). Acá: " + it(e + " " + next) + ".";
+      else if (fam) why = it(lemma) + " va con *essere*: " + fam[1] + ". En español todo va con «haber»; en italiano estos verbos van con *essere*, y el participio concuerda con el sujeto: " + it(e + " " + next) + ".";
+      else if (info && info.aux === "avere") why = it(e + " " + next) + " describe un estado, como un adjetivo (" + it(next) + " = «" +
+        (DATA.lex[next] || "hecho") + "»): va con *essere*, como el español «está roto». Con *avere* sería lo que alguien hizo (ha rotto il vaso = rompió el florero).";
+      else why = (lemma ? it(lemma) + " va con *essere*. " : "") +
+        "En español todo va con «haber»; en italiano van con *essere* el movimiento (andare, venire, partire), el quedarse (stare, rimanere), los cambios de estado (nascere, diventare), *piacere* y los reflexivos. Y el participio concuerda: sono andato/a.";
+    } else {
+      if (modal && infNext) why = "*" + lemma + "* toma el auxiliar del verbo que sigue: " + it(infNext) + " va con *avere*, así que " + it(e + " " + next + " " + infNext) + ".";
+      else if (info && info.aux === "both") why = it(lemma) + " va con *avere* cuando tiene objeto o dice la actividad (ho finito il lavoro, ho corso un'ora) y con *essere* cuando dice lo que le pasa al sujeto (il film è finito, sono corso a casa). Acá: " + it(e + " " + next) + ".";
+      else why = (lemma ? it(lemma) + " va con *avere*. " : "") +
+        "La mayoría de los verbos usan *avere*, como el «haber» español: ho mangiato (comí), ho visto, ho camminato. *Essere* queda para el movimiento y los cambios de estado (sono andato, è nato).";
+    }
+    if (early) why = why.replace(/forma los tiempos compuestos/g, "arma el pasado");
     return { cat: "ausiliare", slip: false,
-      hint: "Revisá el auxiliar" + (lemma ? " de " + it(lemma) : "") + ": ¿*essere* o *avere*?",
+      hint: early ? "Para este pasado, ¿va con *essere* o con *avere*?"
+                  : "Revisá el auxiliar" + (lemma ? " de " + it(refl && lemma && !/rsi$/.test(lemma) ? lemma.replace(/e$/, "si") : lemma) : "") + ": ¿*essere* o *avere*?",
       explain: why };
   }
 
+  // The tenses not taught yet, in plain Spanish with an example.
+  var PLAIN_ES = { futuro: "el futuro (como «haré»)", condizionale: "el condicional (como «haría»)",
+    congiuntivo: "el subjuntivo (como «que haga»)", congImperfetto: "el subjuntivo pasado (como «hiciera»)",
+    passatoRemoto: "el pasado de los relatos (como «hizo»)", imperfetto: "el pasado de las descripciones (como «hacía»)", presente: "el presente" };
+  var COMPOUND_ES = { futuro: "el futuro compuesto (como «habré hecho»)", condizionale: "el condicional compuesto (como «habría hecho»)",
+    congiuntivo: "el subjuntivo compuesto (como «haya hecho»)", congImperfetto: "el subjuntivo pluscuamperfecto (como «hubiera hecho»)",
+    passatoRemoto: "el pasado anterior (como «hube hecho»)", imperfetto: "el pluscuamperfecto (como «había hecho»)", presente: "el pasado compuesto" };
   function tenseRule(g, e, a, b, ctx) {
     var before = ctx.e.slice(0, ctx.ei).join(" ");
     var trigger = OPINION.filter(function (w) { return (" " + before + " ").indexOf(" " + w + " ") >= 0; })[0];
+    // «prima che», «senza che»: the trigger is the whole conjunction.
+    if (trigger && new RegExp("(^|\\s)" + trigger + " che(\\s|$)").test(before)) trigger += " che";
+    // (the expected form decides: «se lo vedessi» is «if»)
+    var seCond = /(^|\s)se(\s|$)/.test(before) && !/(^|\s)come se(\s|$)/.test(before);
+    // An auxiliary before a participle names the compound tense (avevo
+    // potuto = trapassato prossimo), not the auxiliary's own.
+    var ppAfter = participleOf(ctx.e[ctx.ei + 1] || "") && (AVERE.indexOf(e) >= 0 || ESSERE.indexOf(e) >= 0);
+    var COMPOUND = { presente: "passato prossimo", imperfetto: "trapassato prossimo", futuro: "futuro anteriore",
+                     condizionale: "condizionale passato", congiuntivo: "congiuntivo passato",
+                     congImperfetto: "congiuntivo trapassato", passatoRemoto: "trapassato remoto" };
+    var name = function (t) { return ppAfter ? COMPOUND[t] || t : TENSE_ES[t] || t; };
+    // A form the learner has not been taught yet: they got the ending of
+    // the tense they know wrong (parta for parto, week 6).
+    if (ctx.week != null && ctx.week < (TENSE_WEEK[b.tense] || 0) && (TENSE_WEEK[a.tense] || 0) <= ctx.week) {
+      var ppW0 = ppAfter ? " " + ctx.e[ctx.ei + 1] : "";
+      var lem0 = ppAfter ? participleOf(ctx.e[ctx.ei + 1]) : a.lemma;
+      return { cat: "persona_verbale", slip: false,
+        hint: "Revisá la terminación del verbo.",
+        explain: "Con *" + PERS_ES[a.p] + "* el " + name(a.tense) + " de " + it(lem0) + " es " + it(e + ppW0) + ". " +
+          it(g + ppW0) + " es otra forma del verbo, que se ve más adelante: " + (ppAfter ? COMPOUND_ES : PLAIN_ES)[b.tense] + "." };
+    }
+    if (a.tense === "congImperfetto" && b.tense === "congiuntivo" && !seCond && !/(^|\s)come se(\s|$)/.test(before)) return { cat: "congiuntivo", slip: false,
+      hint: "Mirá el tiempo del verbo principal: ¿presente o pasado?",
+      explain: "El verbo principal está en pasado, así que el congiuntivo va en imperfetto: " + it(e) +
+        ", no " + it(g) + ". Igual que en español: «quería que me lo dijeras», no «que me lo digas»." };
+    if (a.tense === "congiuntivo" && b.tense === "congImperfetto" && !seCond) return { cat: "congiuntivo", slip: false,
+      hint: "Mirá el tiempo del verbo principal: ¿presente o pasado?",
+      explain: "El verbo principal está en presente, así que el congiuntivo va en presente: " + it(e) +
+        ", no " + it(g) + ". Igual que en español: «quiero que venga», no «que viniera»." };
     if (a.tense === "congiuntivo" || a.tense === "congImperfetto") {
-      if (/\bse\b/.test(before) && a.tense === "congImperfetto") {
+      if (/(^|\s)come se(\s|$)/.test(before)) return { cat: "congiuntivo", slip: false,
+        hint: "Mirá lo que viene antes: *come se*. ¿Qué modo pide?",
+        explain: "*Come se* (como si) va siempre con congiuntivo imperfetto o trapassato: " + it(e) +
+          ". Como en español: «como si nada fuera», con subjuntivo." };
+      if (seCond && a.tense === "congImperfetto") {
         return { cat: "periodo_ipotetico", slip: false,
           hint: "Es una condición con *se* sobre algo irreal: ¿qué modo va?",
-          explain: "Condición irreal: *se* + congiuntivo imperfetto (" + it(e) + "), y en la otra parte el condizionale: se avessi tempo, verrei." };
+          explain: "Condición irreal: después de *se* va el congiuntivo imperfetto, " + it(e) + ", y en la otra parte el condizionale: se avessi tempo, verrei. Como en español: «si tuviera tiempo, vendría»." };
       }
       return { cat: "congiuntivo", slip: false,
         hint: (trigger ? "Mirá lo que viene antes: " + it(trigger) + ". " : "") + "¿Qué modo pide?",
         explain: (trigger ? "Después de " + it(trigger) + " va congiuntivo" : "Acá va congiuntivo") +
-          ": " + it(e) + ", no " + it(g) + ". Opinión, deseo, duda o emoción → congiuntivo; certeza → indicativo." };
+          ": " + it(e) + ", no " + it(g) + ". Opinión, deseo, duda o emoción → congiuntivo; certeza → indicativo." +
+          (trigger ? " En español también va subjuntivo ahí." : "") };
     }
     if (a.tense === "condizionale" && b.tense === "futuro") return { cat: "condizionale", slip: false,
       hint: "¿Futuro o condicional?",
-      explain: "Condicional (-rei, -resti, -rebbe): " + it(e) + ". El futuro sería " + it(g) + "." };
-    if (a.tense === "condizionale" && b.tense === "congImperfetto") return { cat: "periodo_ipotetico", slip: false,
+      explain: "Condicional (-rei, -resti, -rebbe): " + it(e) + ", como en español «-ría». El futuro sería " + it(g) + "." };
+    if (a.tense === "condizionale" && b.tense === "congImperfetto") return seCond ? { cat: "periodo_ipotetico", slip: false,
       hint: "Esta es la consecuencia, no la condición.",
-      explain: "En la consecuencia va el condizionale (" + it(e) + "); el congiuntivo imperfetto va después de *se*." };
+      explain: "En la consecuencia va el condizionale (" + it(e) + "); el congiuntivo imperfetto va después de *se*: se potessi, verrei." }
+      : { cat: "condizionale", slip: false,
+      hint: "Para pedir o aconsejar con cortesía, ¿qué forma va?",
+      explain: "Para pedir, aconsejar o desear con cortesía va el condicional: " + it(e) + " (como «podrías, deberías»). " +
+        it(g) + " es congiuntivo imperfetto («pudieras»): solo va después de *se* o de un verbo que lo pida." };
+    if (a.tense === "futuro" && (b.tense === "presente" || b.tense === "congiuntivo") &&
+        /(^|\s)(quando|appena|finché|dopo che)$/.test(before)) return { cat: "tempo_verbale", slip: false,
+      hint: "Es algo que va a pasar: ¿qué tiempo pide el italiano después de *" + before.split(" ").pop() + "*?",
+      explain: "Después de *quando, appena*, para lo que va a pasar, el italiano usa el futuro: " + it(e) +
+        " (ti chiamo quando arriverò). En español va subjuntivo («cuando llegue»); en italiano, no." };
     if (a.tense === "imperfetto" && b.tense === "passatoRemoto") return { cat: "tempo_verbale", slip: false,
       hint: "¿Acción puntual o descripción/hábito del pasado?",
-      explain: "Para describir o contar lo habitual en el pasado va imperfetto: " + it(e) + "." };
+      explain: "Para describir o contar lo habitual en el pasado va imperfetto: " + it(e) + ", como el español «-aba / -ía»." };
+    if (a.tense === "presente" && b.tense === "congiuntivo" && !trigger && !/(^|\s)(che|perché)(\s|$)/.test(before)) return { cat: "persona_verbale", slip: false,
+      hint: "Revisá la terminación del verbo.",
+      explain: "Con *" + PERS_ES[a.p] + "* el presente de " + it(a.lemma) + " es " + it(e) + ". " + it(g) +
+        " es congiuntivo, y acá nada lo pide (ni *che*, ni *penso che*, *spero che*…)." };
     if (a.tense === "presente" && b.tense === "congiuntivo") return { cat: "congiuntivo", slip: false,
       hint: "¿Hace falta el congiuntivo acá?",
-      explain: "Acá el hablante afirma un hecho: va indicativo, " + it(e) + ". El congiuntivo va con opinión, deseo o duda." };
+      explain: /(^|\s)perché(\s\S+)?$/.test(before)
+        ? "*Perché* + indicativo es «porque» (da una causa): " + it(e) + ". Con congiuntivo sería «para que»."
+        : "Acá el hablante afirma un hecho: va indicativo, " + it(e) + ". El congiuntivo va con opinión, deseo o duda." };
+    var ppW = ppAfter ? " " + ctx.e[ctx.ei + 1] : "";
     return { cat: "tempo_verbale", slip: false,
       hint: "El verbo es el correcto, pero no el tiempo. Mirá las pistas temporales de la frase.",
-      explain: it(g) + " es " + TENSE_ES[b.tense] + "; acá va " + TENSE_ES[a.tense] + ": " + it(e) + "." };
+      explain: it(g + ppW) + " es " + name(b.tense) + "; acá va " + name(a.tense) + ": " + it(e + ppW) + "." };
   }
 
   /* ----------------------------------------------- parole mancanti / in più */
 
   function missRule(w, ctx) {
     var next = ctx.e[ctx.ei + 1] || "", prev = ctx.e[ctx.ei - 1] || "";
-    if (ARTICLES[w]) {
+    // «(non) lo so»: before a verb, lo / la / le / gli are pronouns.
+    var beforeVerb = (verbForms(next).length || AVERE.indexOf(next) >= 0 || ESSERE.indexOf(next) >= 0) &&
+      !DATA.nouns[next] && !DATA.nounsByPlural[next];
+    if (ARTICLES[w] && !(CLITICS.indexOf(w) >= 0 && beforeVerb)) {
       if (POSSESSIVE.indexOf(next) >= 0) return { cat: "articolo_possessivo", slip: false,
         hint: "Falta una palabra antes del posesivo.",
         explain: "Con posesivos el italiano usa artículo: " + it(w + " " + next + " " + (ctx.e[ctx.ei + 2] || "")) +
@@ -1322,9 +1842,18 @@
     if (w === "ci" && /^(sono|è|vuole|vogliono|vado|vai|va|andiamo|penso|pensi|metto)/.test(next)) return { cat: "ci_ne", slip: false,
       hint: "Falta *ci*.",
       explain: "Falta *ci*: *c'è / ci sono* = hay; *ci vuole* = hace falta; *ci vado* = voy (ahí)." };
+    if (w === "ci" && next === "si") return { cat: "pronome", slip: false,
+      hint: "Con un verbo reflexivo, ¿cómo se dice el «se» impersonal?",
+      explain: "Con un verbo reflexivo, el «se» impersonal (uno se…) se dice *ci si*: in campagna ci si alza presto (en el campo uno se levanta temprano). *Si si* no existe." };
+    var REFL_ES = { mi: "me levanté", ti: "te levantaste", si: "se levantó", ci: "nos levantamos", vi: "se levantaron" };
+    var nextAux = ESSERE.indexOf(next) >= 0 && participleOf(ctx.e[ctx.ei + 2] || "");
+    if (REFL_ES[w] && (nextAux || verbForms(next).some(function (x) { return /rsi$/.test(x.lemma); }))) return { cat: "pronome", slip: false,
+      hint: "Falta un pronombre: el verbo es reflexivo.",
+      explain: "Falta " + it(w) + ": el verbo es reflexivo y lleva el pronombre, como en español «" + REFL_ES[w] + "»: " +
+        it(w + " " + next + (nextAux ? " " + ctx.e[ctx.ei + 2] : "")) + "." };
     if (CLITICS.indexOf(w) >= 0) return { cat: "pronome", slip: false,
       hint: "Falta un pronombre.",
-      explain: "Falta el pronombre " + it(w) + (verbForms(next).length ? ", que va antes del verbo " + it(next) : "") + "." };
+      explain: "Falta el pronombre " + it(w) + (CLI_MEAN[w] ? ", " + CLI_MEAN[w] : "") + (verbForms(next).length ? ", que va antes del verbo " + it(next) : "") + "." };
     if (AVERE.indexOf(w) >= 0 || ESSERE.indexOf(w) >= 0) return { cat: "ausiliare", slip: false,
       hint: "Falta el auxiliar.",
       explain: "Los tiempos compuestos llevan auxiliar + participio: " + it(w + " " + next) + "." };
@@ -1429,6 +1958,31 @@
     return /^(s[^aeiou]|z|gn|ps|x|y)/.test(noun) ? art === "lo" : art === "il";
   }
   var MODAL_PP = ["potuto", "voluto", "dovuto", "potuta", "voluta", "dovuta", "potuti", "voluti", "dovuti", "potute", "volute", "dovute"];
+  function auxOf(w) {
+    return verbForms(w).filter(function (x) { return x.lemma === "avere" || x.lemma === "essere"; })[0] || null;
+  }
+  // With avere the participle stays in -o; with essere it takes the number
+  // of the auxiliary (sono potuto/a, siamo potuti/e).
+  function modalPpOk(aux, pp) {
+    var a = auxOf(aux);
+    if (!a) return false;
+    if (a.lemma === "avere") return /o$/.test(pp);
+    return a.p >= 3 ? /[ie]$/.test(pp) : /[oa]$/.test(pp);
+  }
+  function modalAuxOk(g, e, i) {
+    var ag = auxOf(g[i]), ae = auxOf(e[i]);
+    if (!ag || !ae || ag.lemma === ae.lemma || ag.tense !== ae.tense || ag.p !== ae.p) return false;
+    if (MODAL_PP.indexOf(e[i + 1]) < 0 || !g[i + 1] || g[i + 1].slice(0, -1) !== e[i + 1].slice(0, -1)) return false;
+    if (!modalPpOk(g[i], g[i + 1])) return false;
+    // essere only when the infinitive goes with essere (sono dovuto partire,
+    // not *sono dovuto lavorare)
+    var inf = String(e[i + 2] || "").replace(/(mi|ti|si|ci|vi|lo|la|li|le|ne|gli)$/, "e").replace(/ee$/, "e");
+    var info = null;
+    try { info = Conj && Conj.info(inf); } catch (err) { info = null; }
+    if (ag.lemma === "essere" && !(info && (info.aux === "essere" || info.aux === "both" || info.refl) || /rsi$/.test(e[i + 2] || "") || inf === "essere")) return false;
+    return true;
+  }
+
   function synonymFree(g, e) {
     if (g.length !== e.length) return false;
     var diff = 0;
@@ -1436,12 +1990,14 @@
       if (g[i] === e[i]) continue;
       if (nounSyn(g[i], e[i]) && (!ARTICLES[g[i - 1]] || artFits(g[i - 1], g[i]))) { diff++; continue; }
       // la macchina / l'auto: the article follows the synonym
-      if (ARTICLES[g[i]] && ARTICLES[e[i]] && g[i + 1] && e[i + 1] && nounSyn(g[i + 1], e[i + 1]) && artFits(g[i], g[i + 1])) { diff++; continue; }
-      // non ho potuto venire = non sono potuto venire: modals take either auxiliary
-      if ((AVERE.indexOf(g[i]) >= 0 || ESSERE.indexOf(g[i]) >= 0) && (AVERE.indexOf(e[i]) >= 0 || ESSERE.indexOf(e[i]) >= 0) &&
-          MODAL_PP.indexOf(e[i + 1]) >= 0 && g[i + 1] && g[i + 1].slice(0, -1) === e[i + 1].slice(0, -1)) { diff++; continue; }
+      if (ARTICLES[g[i]] && ARTICLES[e[i]] && g[i + 1] && e[i + 1] && g[i + 1] !== e[i + 1] &&
+          nounSyn(g[i + 1], e[i + 1]) && artFits(g[i], g[i + 1])) { diff++; continue; }
+      // non ho potuto venire = non sono potuto venire: a modal takes either
+      // auxiliary when the infinitive after it goes with essere; the same
+      // tense and person, and the participle agreeing with its auxiliary.
+      if (modalAuxOk(g, e, i)) { diff++; continue; }
       if (MODAL_PP.indexOf(g[i]) >= 0 && MODAL_PP.indexOf(e[i]) >= 0 && g[i].slice(0, -1) === e[i].slice(0, -1) &&
-          (AVERE.indexOf(g[i - 1]) >= 0 || ESSERE.indexOf(g[i - 1]) >= 0)) { diff++; continue; }
+          (AVERE.indexOf(g[i - 1]) >= 0 || ESSERE.indexOf(g[i - 1]) >= 0) && modalPpOk(g[i - 1], g[i])) { diff++; continue; }
       var fg = verbForms(g[i]), fe = verbForms(e[i]);
       var pg = participleOf(g[i]), pe = participleOf(e[i]);
       var ok = fe.some(function (a) {
@@ -1464,8 +2020,24 @@
     "perché", "dopo", "prima", "stamattina", "stasera", "stanotte", "finalmente", "purtroppo", "davvero", "molto", "troppo",
     "tanto", "tutto", "ci", "mi", "ti", "si", "vi", "ne", "ecco"];
   var GENDER_FIXERS = ["lui", "lei", "la", "lo", "li", "le", "l'", "gli", "esso", "essa", "essi", "esse"];
-  function genderFree(g, e, target) {
+  var COPULA = /^(sono|sei|è|siamo|siete|ero|eri|era|eravamo|eravate|erano|sarò|sarai|sarà|saremo|sarete|saranno|sarei|saresti|sarebbe|saremmo|sareste|sarebbero|sia|siano|fossi|fosse|essere|esser|stato|stata|stati|state|sto|stai|sta|stiamo|stanno|stavo|stavi|stava|sembro|sembri|sembra|sembrano|divento|diventi|diventa|diventato|diventata|rimasto|rimasta|resto|resti|resta|rimango|rimani|rimane|sento|senti|sente)$/;
+  var PRED_ADV = /^(molto|così|tanto|troppo|più|meno|sempre|già|proprio|davvero|mai|ancora|poi|anche|non|bene|un po'|abbastanza|piuttosto|finalmente)$/;
+  // The gender a word shows by its ending (-o/-i masculine, -a/-e feminine),
+  // for adjectives and participles only.
+  function gendered(w) {
+    if (!w || !(DATA.adj[w] || participleOf(w)) || DATA.adj[w] === w.replace(/[oaie]$/, "e")) return null;
+    var v = w.slice(-1);
+    return v === "o" ? "ms" : v === "i" ? "mp" : v === "a" ? "fs" : v === "e" ? "fp" : null;
+  }
+  function genderFree(g, e, target, ctx) {
     if (g.length !== e.length) return false;
+    // The prompt names who it is: «(Él) se habría quedado».
+    var stem = String(ctx && ctx.stem || "");
+    if (/(^|[^a-záéíóúñ])(él|ellos|ella|ellas)([^a-záéíóúñ]|$)/i.test(stem)) return false;
+    // Italian words of the sentence around a gap that already show a gender
+    // («Sono contento di ___»), or the learner's own words that keep the
+    // expected one («Ero stanca che mi sono addormentato»).
+    var around = /_{3,}/.test(stem) ? tokens(stem.replace(/\([^)]*\)/g, " ")) : [];
     var named = names(String(target).replace(/^\s*\S+/, ""));
     var first = e[0];
     if (/^\s*[A-ZÀ-Ý]/.test(String(target)) && !DATA.lex[first] && !verbForms(first).length &&
@@ -1478,10 +2050,26 @@
       if (a.length < 3 || a.slice(0, -1) !== b.slice(0, -1)) return false;
       var pair = a.slice(-1) + b.slice(-1);
       if (["oa", "ao", "ie", "ei"].indexOf(pair) < 0) return false;
+      // felice / felici, probabile / probabili: -e adjectives change number, not gender
+      if (/^(ie|ei)$/.test(pair) && /e$/.test(DATA.adj[b] || "")) return false;
       if (!DATA.adj[b] && !participleOf(b)) return false;
       if (isNoun(e[i + 1]) || ARTICLES[e[i + 1]] || ARTICLES[e[i - 1]]) return false;
       if (isNoun(e[i + 2]) && !/^(di|a|da|in|con|su|per|tra|fra)$/.test(e[i + 1])) return false;
       for (var k = 0; k < i; k++) if (isNoun(e[k]) || GENDER_FIXERS.indexOf(e[k]) >= 0) return false;
+      // Only a predicate (sono stanca, è arrivata, sei pronta?): after avere
+      // a participle does not agree, and after another verb the word is not
+      // about the speaker (parli italiano).
+      var cop = COPULA.test(e[i - 1] || "") ? e[i - 1] : PRED_ADV.test(e[i - 1] || "") && COPULA.test(e[i - 2] || "") ? e[i - 2] : null;
+      if (!cop) return false;
+      // a named subject anywhere (Sono andati, Marco e Lorenzo?)
+      if (named.some(function (n) { return e.indexOf(n) >= 0; })) return false;
+      // about someone else («È sposato» for «Estará casado»): the Spanish prompt fixes the gender
+      var third = verbForms(cop).concat(verbForms(e[i - 2] || "")).some(function (x) { return x.p === 2 || x.p === 5; }) || /^(è|era|sarà|sarebbe|sia|fosse|stato|stata)$/.test(cop);
+      if (third && stem && !/_{3,}/.test(stem) && tokens(stem).some(spanishish)) return false;
+      var gb = gendered(b);
+      var clash = function (w) { var x = gendered(w); return x && gb && x[1] === gb[1] && x[0] === gb[0]; };
+      for (var m = 0; m < e.length; m++) if (m !== i && g[m] === e[m] && clash(e[m])) return false;
+      if (around.some(clash)) return false;
       diff++;
     }
     return diff > 0;
@@ -1499,6 +2087,83 @@
             explain: "*" + p + " + " + gtoks[i + 1] + "* se contrae: " + it(c) +
               ". En italiano la contracción es obligatoria con todas estas preposiciones (al, del, dal, nel, sul)." } };
       }
+    }
+    return null;
+  }
+
+  // Where the pronoun is glued, with what the learner has been taught.
+  function gluedForms(week, de) {
+    var a = de ? "del " : "el ";
+    var f = [a + "infinitivo"];
+    if (week == null || week >= 12) f.push(a + "imperativo (tu, noi, voi)");
+    if (week == null || week >= 44) f.push(a + "gerundio");
+    return f.join(", ") + (de ? " y de *ecco*" : " y *ecco*");
+  }
+  function gluedExamples(week) {
+    return ["vederti", "eccolo"].concat(week == null || week >= 12 ? ["alzati", "dimmi"] : [], week == null || week >= 44 ? ["facendolo"] : []).join(", ");
+  }
+
+  function clitMoved(g, e) {
+    if (g.length !== e.length) return null;
+    for (var i = 0; i < g.length; i++) {
+      if (CLITICS.indexOf(g[i]) < 0 || g[i] === e[i]) continue;
+      for (var j = 0; j < e.length; j++) {
+        if (j === i || !(e[j] === g[i] || (e[j] === "l'" && /^(lo|la)$/.test(g[i])))) continue;
+        var g2 = g.slice(0, i).concat(g.slice(i + 1)), e2 = e.slice(0, j).concat(e.slice(j + 1));
+        var nx = e[j + 1] || "";
+        if (g2.join(" ") === e2.join(" ") && (verbForms(nx).length || AVERE.indexOf(nx) >= 0 || ESSERE.indexOf(nx) >= 0 || CLITICS.indexOf(nx) >= 0)) {
+          return { gi: i, ej: j, shown: e.slice(j, j + 3).join(" ").replace(/' /g, "'") };
+        }
+      }
+    }
+    return null;
+  }
+
+  /* Two pronouns written apart that Italian glues (gli lo → glielo, le la →
+     gliela, se lo → glielo, lo gli → glielo). */
+  function splitCombined(g, e) {
+    for (var i = 0; i < g.length - 1; i++) {
+      var a = g[i], b = g[i + 1], x = null;
+      if (/^(gli|le|se)$/.test(a) && /^(lo|la|li|le|ne|l')$/.test(b)) x = b;
+      else if (/^(lo|la|li|le|ne)$/.test(a) && b === "gli") x = a;
+      if (!x) continue;
+      var forms = x === "l'" ? ["gliel'"] : /^(lo|la)$/.test(x) ? ["glie" + x, "gliel'"] : ["glie" + x];
+      for (var f = 0; f < forms.length; f++) {
+        if (e.indexOf(forms[f]) >= 0 && g.indexOf(forms[f]) < 0) return { i: i, form: forms[f], se: a === "se" };
+      }
+    }
+    return null;
+  }
+
+  /* Why the order is not the Italian one, for the usual swaps. */
+  function orderWhy(g, e) {
+    for (var k = 0; k < e.length - 1; k++) {
+      if (g[k] === e[k]) continue;
+      var a = e[k], b = e[k + 1];
+      if (ARTICLES[a] && POSSESSIVE.indexOf(b) >= 0) return {
+        hint: "Mirá dónde va el artículo con el posesivo.",
+        explain: "El artículo va antes del posesivo: " + it(e.slice(k, k + 3).join(" ")) + ", aunque en español el posesivo vaya sin artículo («mi casa» = la mia casa)." };
+      if ((AVERE.indexOf(a) >= 0 || ESSERE.indexOf(a) >= 0) && participleOf(b)) return {
+        hint: "Mirá el orden del auxiliar y el participio.",
+        explain: "El auxiliar va antes del participio, como en español: " + it(a + " " + b) + "." };
+      if (/^(già|mai|ancora|appena|sempre|più|anche|proprio|davvero|mica|finalmente)$/.test(a) && participleOf(b) &&
+          (AVERE.indexOf(e[k - 1]) >= 0 || ESSERE.indexOf(e[k - 1]) >= 0)) return {
+        hint: "Mirá dónde va el adverbio en el tiempo compuesto (auxiliar + participio).",
+        explain: it(a) + " va entre el auxiliar y el participio: " + it(e[k - 1] + " " + a + " " + b) + " (ho già mangiato = ya comí; non sono mai stato = nunca fui)." };
+      if (participleOf(a) && /^(già|mai|ancora|appena|sempre|più)$/.test(g[k])) return {
+        hint: "Mirá dónde va el adverbio en el tiempo compuesto (auxiliar + participio).",
+        explain: it(g[k]) + " va entre el auxiliar y el participio: " + it(e[k - 1] + " " + g[k] + " " + a) + "." };
+      if ((DATA.nouns[a] || DATA.nounsByPlural[a]) && ESSERE.indexOf(b) >= 0) return {
+        hint: "Mirá dónde va el verbo.",
+        explain: "El sujeto va entero antes del verbo: " + it(e.slice(Math.max(0, k - 2), k + 3).join(" ")) + ", como en español." };
+      if (/^(molto|sempre|già|mai|ancora|spesso|anche|proprio|davvero|troppo|poco|bene|male)$/.test(b) && g[k] === b &&
+          (verbForms(a).length || AVERE.indexOf(a) >= 0 || ESSERE.indexOf(a) >= 0)) return {
+        hint: "Mirá dónde va el adverbio.",
+        explain: it(b) + " va después del verbo: " + it(a + " " + b) + ", como en español «es muy», «voy siempre»." };
+      if (g[k] === b && g[k + 1] === a) return {
+        hint: "Hay dos palabras que van al revés.",
+        explain: "Estas dos palabras van al revés: " + it(a + " " + b) + ", no " + it(b + " " + a) + "." };
+      break;
     }
     return null;
   }
@@ -1529,40 +2194,62 @@
     return null;
   }
 
+  var PAST_MARK = /^(ieri|scorso|scorsa|fa|stamattina|stamani|stanotte|appena|già|mai|finalmente|poco)$/;
+  var SAID = /(^|\s)(disse|ha detto|aveva detto|diceva|ha scritto|scrisse|pensava|credeva|sapeva|ha promesso|promise|ha risposto|rispose) che(\s|$)/;
+  function count(arr, w) { return arr.filter(function (x) { return x === w; }).length; }
   function compoundSwap(g, e) {
     for (var i = 0; i < g.length; i++) {
       if (e.indexOf(g[i]) >= 0) continue;
       var fg = verbForms(g[i]);
       if (!fg.length || participleOf(g[i])) continue;   // partite/partiti: agreement
-      for (var j = 1; j < e.length; j++) {
-        var lem = participleOf(e[j]);
+      var js = [];
+      for (var j0 = 1; j0 < e.length; j0++) js.push(j0);
+      js.sort(function (x, y) { return Math.abs(x - i) - Math.abs(y - i); });
+      for (var jj = 0; jj < js.length; jj++) {
+        var j = js[jj];
+        var lems = participleLemmas(e[j]);
         var aux = e[j - 1];
-        if (!lem || g.indexOf(e[j]) >= 0 || (AVERE.indexOf(aux) < 0 && ESSERE.indexOf(aux) < 0)) continue;
-        var f = fg.filter(function (x) { return x.lemma === lem; })[0];
+        if (!lems.length || count(g, e[j]) >= count(e, e[j]) || (AVERE.indexOf(aux) < 0 && ESSERE.indexOf(aux) < 0)) continue;
+        var f = fg.filter(function (x) { return lems.indexOf(x.lemma) >= 0; })[0];
         if (!f) continue;
+        var both = it(aux + " " + e[j]);
+        var mark = e.filter(function (w) { return PAST_MARK.test(w); })[0];
+        var said = SAID.test(e.slice(0, j).join(" "));
         return { gi: i, ei: [j - 1, j],
-          hint: "Acá va un tiempo compuesto (auxiliar + participio).",
+          hint: f.tense === "imperfetto" ? "¿Es un hecho que pasó y terminó, o una descripción?"
+              : said && f.tense === "condizionale" ? "Es el futuro de alguien, contado en pasado: ¿qué forma va?"
+              : "Acá va un tiempo compuesto (auxiliar + participio).",
           explain: f.tense === "passatoRemoto"
-            ? "Para algo de hoy o de un pasado que sentís cercano, el italiano usa el passato prossimo: " + it(aux + " " + e[j]) + ". El passato remoto (" + it(g[i]) + ") queda para lo lejano o narrado."
+            ? "Para algo de hoy o de un pasado que sentís cercano, el italiano usa el passato prossimo: " + both + ". El passato remoto (" + it(g[i]) + ") queda para lo lejano o narrado."
+            : f.tense === "condizionale" && said
+            ? "En el discurso indirecto, lo que era futuro se dice con el condizionale passato: " + both + " (disse che sarebbe venuto), donde el español dice «dijo que vendría»."
             : f.tense === "condizionale"
-            ? "Para lo que habría pasado va el condicional compuesto: " + it(aux + " " + e[j]) + "."
-            : "Acá va " + it(aux + " " + e[j]) + " (auxiliar + participio), no " + it(g[i]) + "." };
+            ? "Para lo que habría pasado va el condicional compuesto: " + both + " (como «habría»)."
+            : f.tense === "imperfetto"
+            ? "Para un hecho puntual y terminado va el passato prossimo: " + both + ", como el pretérito del español («comí», «fuimos»). En cambio " + it(g[i]) + ", el imperfetto, describe o cuenta lo habitual, como «comía»."
+            : f.tense === "presente" && mark
+            ? "Es algo que ya pasó (" + it(mark) + "): va el passato prossimo, " + both + ", como el español «comí, fui». " + it(g[i]) + " es presente."
+            : "Acá va " + both + " (auxiliar + participio), no " + it(g[i]) + "." };
       }
     }
     // The other way round: a compound tense where a simple one goes (studio qui da due anni)
     for (var a = 0; a < g.length - 1; a++) {
       if ((AVERE.indexOf(g[a]) >= 0 || ESSERE.indexOf(g[a]) >= 0) && participleOf(g[a + 1]) &&
-          e.indexOf(g[a + 1]) < 0) {
-        var lemG = participleOf(g[a + 1]);
+          count(e, g[a + 1]) < count(g, g[a + 1])) {
+        var lemsG = participleLemmas(g[a + 1]);
         for (var b = 0; b < e.length; b++) {
-          var fe = verbForms(e[b]).filter(function (x) { return x.lemma === lemG; });
-          if (fe.length && g.indexOf(e[b]) < 0 && participleOf(e[b]) !== lemG) {
-            var daTime = /\bda\b/.test(e.join(" "));
+          var fe = verbForms(e[b]).filter(function (x) { return lemsG.indexOf(x.lemma) >= 0; });
+          if (fe.length && count(g, e[b]) < count(e, e[b]) && lemsG.indexOf(participleOf(e[b])) < 0) {
+            var daTime = /(^|\s)da(\s|$)/.test(e.join(" "));
+            var impf = fe.some(function (x) { return x.tense === "imperfetto"; });
             return { gi: a + 1, ei: [b],
-              hint: daTime ? "Mirá el *da* + tiempo: ¿la acción terminó o sigue?" : "Acá no hace falta un tiempo compuesto.",
+              hint: daTime ? "Mirá el *da* + tiempo: ¿la acción terminó o sigue?"
+                  : impf ? "¿Es un hecho terminado o una descripción de cómo era algo?" : "Acá no hace falta un tiempo compuesto.",
               explain: daTime
                 ? "Con *da* + tiempo, para algo que empezó y sigue, el italiano usa el presente: " + it(e[b]) + " (studio qui da due anni = hace dos años que estudio acá)."
-                : "Acá va " + it(e[b]) + ", no el tiempo compuesto." };
+                : impf
+                ? "Para describir cómo era o estaba algo en el pasado va el imperfetto: " + it(e[b]) + ", como el español «era, estaba, tenía». El passato prossimo (" + it(g[a] + " " + g[a + 1]) + ") cuenta un hecho terminado."
+                : "Acá va " + it(e[b]) + " (" + TENSE_ES[fe[0].tense] + "), no el tiempo compuesto." };
           }
         }
       }
@@ -1570,31 +2257,61 @@
     return null;
   }
 
+  // The cost of turning one token list into the other (align's metric).
+  function alignCost(g, e) {
+    var n = g.length, m = e.length, prev = [], cur, i, j;
+    for (j = 0; j <= m; j++) prev[j] = j;
+    for (i = 1; i <= n; i++) {
+      cur = [i];
+      for (j = 1; j <= m; j++) {
+        var sub = g[i - 1] === e[j - 1] ? 0 : subCost(g[i - 1], e[j - 1]);
+        cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + sub);
+      }
+      prev = cur;
+    }
+    return prev[m];
+  }
+
+  // The accepted answer nearest to what was written: the fewest and
+  // smallest edits («Andiamo di Marco» → «da Marco», not «a casa di Marco»),
+  // then the most words in common.
   function pickTarget(given, expected) {
-    var g = tokens(given), best = null, bestScore = -1;
+    var g = tokens(given), best = null, bestScore = -Infinity;
     expected.forEach(function (x) {
-      var s = lcsLen(g, tokens(x)) - Math.abs(tokens(x).length - g.length) * 0.1;
+      var t = tokens(x);
+      // the same words in another order is one error (the order), not two
+      var cost = g.join(" ") === t.join(" ") ? 0 : g.slice().sort().join(" ") === t.slice().sort().join(" ") ? 0.9 : alignCost(g, t);
+      var s = -cost + lcsLen(g, t) * 0.01;
       if (s > bestScore) { bestScore = s; best = x; }
     });
     return best;
   }
 
+  var FILLER_CORE = /^(boh|bho|mah|ehm|uhm|mmm|nose|idk|qsy|nidea)$/;
+  var FILLER = /^(boh|bho|mah|ehm|uhm|mmm|nose|idk|qsy|nidea|no|non|lo|so|sé|se|sò|ni|idea|nada|niente|\?+)$/;
   function diagnose(given, expected, ctx) {
     ctx = ctx || {};
     var list = (Array.isArray(expected) ? expected : [expected]).filter(Boolean);
+    var list0 = list.slice(), rawGiven = given;
     var rawG = tokens(given);
     var target0 = pickTarget(given, list) || list[0];   // what the exercise asked for, without the sentence around the gap
     var exp = expandGap(ctx.stem, given, list);
     if (exp) { given = exp.given; list = exp.targets; }
+    var isolated = !exp && (String(ctx.stem || "").match(/_{3,}/g) || []).length >= 2;
     var target = pickTarget(given, list);
     var g = tokens(given), e = tokens(target);
     var res = { cat: null, slip: false, hint: "", explain: "", target: target,
                 given: g.map(function (w) { return { w: w }; }),
                 fixed: e.map(function (w) { return { w: w }; }), others: 0, all: [] };
 
+    // «boh», «mah», «no sé»: the learner says they do not know.
+    var fillers = rawG.filter(function (t) { return FILLER.test(t); });
+    if (rawG.length && fillers.length === rawG.length && rawG.some(function (t) { return FILLER_CORE.test(t); }) &&
+        !tokens(target0).some(function (t) { return FILLER_CORE.test(t); })) g = [];
     if (!g.length) {
       res.verdict = "sbagliato"; res.cat = "vuoto";
-      res.hint = "Escribí algo, aunque no estés seguro: equivocarse y corregirse enseña.";
+      res.hint = rawG.length ? "Si no lo sabés, probá igual o pedí las fichas 🧩: equivocarse y corregirse enseña."
+                             : "Escribí algo, aunque no estés seguro: equivocarse y corregirse enseña.";
       res.explain = "La respuesta era " + it(target0) + ".";
       return res;
     }
@@ -1602,38 +2319,57 @@
     // The whole answer in Spanish («las verduras», «son las tres»): one
     // finding, not five, and the translation of what was written.
     var wordsG = rawG.filter(function (t) { return /[a-zà-ÿ]/i.test(t); });   // digits don't count
-    var esToks = wordsG.filter(spanishish);
-    var stemToks = ctx.stem && !/_{3,}/.test(ctx.stem) ? tokens(String(ctx.stem).replace(/\([^)]*\)/g, " ")) : [];
-    var copied = stemToks.length && esToks.length && rawG.join(" ") === stemToks.join(" ");
+    // A word the answer itself has (Buenos Aires, a name, a loan) is not
+    // Spanish in the learner's mouth.
+    var inTarget = dict();
+    list0.forEach(function (x) { tokens(x).forEach(function (t) { inTarget[t] = 1; }); });
+    var esToks = wordsG.filter(function (t) { return spanishish(t) && !inTarget[t]; });
+    // Nothing of the answer in what was written: show the main answer, not
+    // the variant that happens to share its length.
+    var shown = rawG.some(function (t) { return inTarget[t]; }) ? target0 : list0[0];
+    var stemRaw = ctx.stem && !/_{3,}/.test(ctx.stem) ? String(ctx.stem) : "";
+    var stemToks = stemRaw ? tokens(stemRaw.replace(/\([^)]*\)/g, " ")) : [];
+    var stemAll = stemRaw ? tokens(stemRaw) : [];
+    var gNoPar = tokens(String(rawGiven).replace(/\([^)]*\)/g, " ")).join(" ");
+    // The prompt is Spanish when some of its words are, or when most of them
+    // are no Italian word at all («Haceme un favor»).
+    var stemLong = stemToks.filter(function (t) { return t.length >= 3; });
+    var stemSpanish = stemToks.some(spanishish) ||
+      (stemLong.length && stemLong.filter(function (t) { return !isItalian(t); }).length * 2 > stemLong.length);
+    var copied = stemToks.length && stemSpanish && gNoPar !== tokens(shown).join(" ") &&
+      (rawG.join(" ") === stemToks.join(" ") || rawG.join(" ") === stemAll.join(" ") || gNoPar === stemToks.join(" "));
     if (copied) {
       res.cat = "parola_spagnola"; res.label = LABEL.parola_spagnola;
       res.hint = "Eso es la consigna, en español. Escribila en italiano; si todavía no lo sabés, pedí las fichas 🧩.";
-      res.explain = "Copiaste la consigna en español. En italiano: " + it(target0) + ".";
+      res.explain = "Copiaste la consigna en español. En italiano: " + it(shown) + ".";
       res.given.forEach(function (w) { w.bad = true; });
       res.fixed.forEach(function (w) { w.fix = true; });
       res.verdict = "sbagliato"; res.all = ["parola_spagnola"];
       return res;
     }
-    if (wordsG.length >= 2 && (esToks.length * 2 >= wordsG.length || (esToks.length >= 3 && esToks.length * 3 >= wordsG.length))) {
+    var allEs = wordsG.length && esToks.length === wordsG.length;
+    // One Spanish word among Italian ones is a word-level error (the pair
+    // rules say why: «para» → per); two or more, or everything, is Spanish.
+    if (wordsG.length >= 2 && (allEs || esToks.length >= 2) &&
+        (esToks.length * 2 >= wordsG.length || (esToks.length >= 3 && esToks.length * 3 >= wordsG.length))) {
       var pairsEs = esToks.filter(spanishWord).slice(0, 3).map(function (t) { return it(t) + " = " + it(String(spanishWord(t)).split(" / ")[0]); });
-      var allEs = esToks.length === wordsG.length;
       // The Italian words the learner did write, glossed, so «dove que» gets
       // «dove = dónde» and not only «que = che».
-      var itGloss = allEs ? [] : wordsG.filter(function (t) { return !spanishish(t) && DATA.lex[t]; })
+      var itGloss = allEs ? [] : wordsG.filter(function (t) { return esToks.indexOf(t) < 0 && DATA.lex[t]; })
         .slice(0, 2).map(function (t) { return it(t) + " = " + DATA.lex[t]; });
       res.cat = "parola_spagnola"; res.label = LABEL.parola_spagnola;
       res.hint = allEs ? "Eso está en español. Escribilo en italiano; si todavía no lo sabés, pedí las fichas 🧩."
                        : "Hay español mezclado: " + esToks.slice(0, 3).map(it).join(", ") + ". Escribilo todo en italiano.";
       res.explain = (allEs ? "Está en español. " : "Mezcla español e italiano" + (itGloss.length ? " (" + itGloss.join(", ") + ")" : "") + ". ") +
-        "En italiano: " + it(target0) + "." + (pairsEs.length ? " (" + pairsEs.join(", ") + ")" : "");
-      res.given.forEach(function (w) { if (spanishish(w.w)) w.bad = true; });
-      res.fixed.forEach(function (w) { if (!rawG.some(function (t) { return t === w.w; })) w.fix = true; });
+        "En italiano: " + it(shown) + "." + (pairsEs.length ? " (" + pairsEs.join(", ") + ")" : "");
+      res.given.forEach(function (w) { if (esToks.indexOf(w.w) >= 0) w.bad = true; });
+      res.fixed.forEach(function (w) { if (g.indexOf(w.w) < 0) w.fix = true; });
       res.verdict = "sbagliato"; res.all = ["parola_spagnola"];
       return res;
     }
     // «Sono stanca» for «Sono stanco»: with nobody named, the gender is the
     // learner's own (or the listener's), and both are right.
-    if (genderFree(g, e, target)) { res.verdict = "giusto"; return res; }
+    if (genderFree(g, e, target, ctx)) { res.verdict = "giusto"; return res; }
     // Termino for finisco, resto for rimango: same meaning, same person and tense.
     if (synonymFree(g, e)) { res.verdict = "giusto"; return res; }
     // (tanto) buono quanto, (così) alto come: the first term of an equality is optional.
@@ -1665,8 +2401,8 @@
     if (encl) {
       res.cat = "posizione_pronome"; res.label = LABEL.posizione_pronome;
       res.hint = "El pronombre está bien, pero no en su lugar: con esta forma del verbo va pegado al final.";
-      res.explain = "Con infinitivo, gerundio, imperativo (tu, noi, voi) y *ecco*, el pronombre se pega al final: " +
-        it(encl) + " (vederti, eccolo, alzati, dimmi, facendolo).";
+      res.explain = "Con " + gluedForms(ctx.week) + ", el pronombre se pega al final: " +
+        it(encl) + " (" + gluedExamples(ctx.week) + "), como en español «verte», «decime».";
       res.verdict = "sbagliato"; res.all = ["posizione_pronome"];
       g.forEach(function (w, i) { if (CLITICS.indexOf(w) >= 0 && res.given[i]) res.given[i].bad = true; });
       e.forEach(function (w, i) { if (w === encl && res.fixed[i]) res.fixed[i].fix = true; });
@@ -1685,21 +2421,61 @@
       return res;
     }
 
+    // A pronoun in another place, everything else the same (ho lo visto →
+    // l'ho visto, voglio lo fare → lo voglio fare).
+    var cm = clitMoved(g, e);
+    if (cm) {
+      res.cat = "posizione_pronome"; res.label = LABEL.posizione_pronome;
+      res.hint = "Las palabras están bien; revisá dónde va el pronombre.";
+      res.explain = "El pronombre va antes del verbo conjugado, también en los tiempos compuestos: " + it(cm.shown) +
+        " (como en español «lo he visto»), o pegado al final " + gluedForms(ctx.week, true) + ".";
+      res.verdict = "sbagliato"; res.all = ["posizione_pronome"];
+      if (res.given[cm.gi]) res.given[cm.gi].bad = true;
+      if (res.fixed[cm.ej]) res.fixed[cm.ej].fix = true;
+      return res;
+    }
+
+    // «gli lo», «le lo», «se lo»: two pronouns that Italian writes as one.
+    var cmb = splitCombined(g, e);
+    if (cmb) {
+      res.cat = "pronome"; res.label = LABEL.pronome;
+      res.hint = "Son dos pronombres juntos: ¿cómo se escriben en italiano *gli* o *le* con *lo, la, ne*?";
+      res.explain = "*gli* (o *le*) + *lo, la, li, le, ne* se escriben en una sola palabra, con una *e* en el medio: " + it(cmb.form) +
+        " (glielo dico = se lo digo)." + (cmb.se ? " El «se» de «se lo di» no se traduce *se*: en italiano es *glie-*." : "");
+      res.verdict = "sbagliato"; res.all = ["pronome"];
+      [cmb.i, cmb.i + 1].forEach(function (k) { if (res.given[k]) res.given[k].bad = true; });
+      e.forEach(function (w, k) { if (w === cmb.form && res.fixed[k]) res.fixed[k].fix = true; });
+      return res;
+    }
+
     // Same words, other order
     if (g.length === e.length && g.slice().sort().join(" ") === e.slice().sort().join(" ") && g.join(" ") !== e.join(" ")) {
-      var clit = g.filter(function (w, i) { return w !== e[i] && CLITICS.indexOf(w) >= 0; })[0];
+      // A pronoun out of place only if it is one there (not the article of
+      // «la mia casa»): a verb right after it in the answer.
+      var clit = g.filter(function (w, i) {
+        if (w === e[i] || CLITICS.indexOf(w) < 0) return false;
+        var at = e.indexOf(w), nx = e[at + 1] || "";
+        return !!(verbForms(nx).length || AVERE.indexOf(nx) >= 0 || ESSERE.indexOf(nx) >= 0 || CLITICS.indexOf(nx) >= 0);
+      })[0];
+      var ord = clit ? null : orderWhy(g, e);
       found.push({ d: clit
         ? { cat: "posizione_pronome", slip: false,
             hint: "Las palabras están bien; revisá dónde va el pronombre.",
-            explain: "El pronombre átono va antes del verbo conjugado (" + it(clit) + " + verbo), o pegado al infinitivo, al gerundio y al imperativo con tu: vederlo, dimmi." }
+            explain: "El pronombre va antes del verbo conjugado (" + it(clit) + " + verbo, como en español «lo veo»), o pegado al final " + gluedForms(ctx.week, true) + ": " + gluedExamples(ctx.week) + "." }
         : { cat: "ordine", slip: false,
-            hint: "Están todas las palabras, pero no en el orden italiano.",
-            explain: "El orden es: " + it(target) + "." },
+            hint: ord ? ord.hint : "Están todas las palabras, pero no en el orden italiano.",
+            explain: ord ? ord.explain : "En italiano el orden es: " + it(target) + "." },
         gi: -1, ei: -1 });
+      // mark what moved
+      g.forEach(function (w, k) { if (w !== e[k] && res.given[k]) res.given[k].bad = true; });
+      e.forEach(function (w, k) { if (w !== g[k] && res.fixed[k]) res.fixed[k].fix = true; });
     } else {
       var ops = align(g, e);
       ops.forEach(function (o) {
-        var c = { e: e, ei: o.ei, g: g, gi: o.gi, names: nm, stem: ctx.stem, prompt: ctx.prompt, nominal: ctx.nominal, week: ctx.week };
+        var c = { e: e, ei: o.ei, g: g, gi: o.gi, names: nm, stem: ctx.stem, prompt: ctx.prompt, nominal: ctx.nominal, week: ctx.week, choice: ctx.choice };
+        // Several gaps that could not be put back in their sentence: each
+        // word stands alone, the next gap is not «the word after».
+        if (isolated) c = { e: [o.e], ei: 0, g: [o.g], gi: 0, names: nm, stem: "", prompt: ctx.prompt, nominal: ctx.nominal, week: ctx.week, choice: ctx.choice };
         if (o.op === "sub") {
           var d = pairRules(o.g, o.e, c);
           found.push({ d: d, gi: o.gi, ei: o.ei });
@@ -1739,9 +2515,27 @@
 
   /* A wrong option in a multiple-choice question: explain why *that* option
      is wrong (response-specific feedback). */
+  // «(nada)», «—»: the option that means «no word here».
+  var EMPTY_OPT = /^\s*[(\[]?\s*(nada|niente|nessuno|ninguno|ninguna|—|–|-|ø|∅)\s*[)\]]?\s*$/i;
+  // Words that are no Italian: a metalinguistic option («futuro de fare»,
+  // «Dejo que Marco hable») is a Spanish answer, not Italian to correct.
+  function notItalianText(t) {
+    var w = tokens(t).filter(function (x) { return x.length >= 3 && /[a-zà-ÿ]/.test(x); });
+    if (tokens(t).some(function (x) { return ES_FUNC[deaccent(x)] && !isItalian(x); })) return true;
+    if (!w.length) return false;
+    return w.filter(function (x) { return spanishish(x); }).length * 2 > w.length;
+  }
   function explainChoice(chosen, answer, ctx) {
-    var d = diagnose(chosen, [answer], ctx);
-    return d.verdict === "giusto" ? null : d;
+    ctx = ctx || {};
+    var c2 = {};
+    Object.keys(ctx).forEach(function (k) { c2[k] = ctx[k]; });
+    c2.choice = true;
+    if (EMPTY_OPT.test(chosen)) {
+      if (!/_{3,}/.test(ctx.stem || "")) return null;
+      chosen = "";
+    } else if (notItalianText(answer)) return null;
+    var d = diagnose(chosen, [answer], c2);
+    return d.verdict === "giusto" || d.cat === "vuoto" ? null : d;
   }
 
   /* ---------------------------------------------------------- dati */
