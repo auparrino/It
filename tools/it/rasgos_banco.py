@@ -171,6 +171,13 @@ def rasgos(text, produce):
         # non + infinitivo al principio: el imperativo negativo de tu
         if i == 0 and t == "non" and nxt and (_is_infinitive(nxt) or re.match(r"^\w+r(ti|si|ci|vi)$", nxt)):
             need("imperativo negativo")
+    # «ci siamo divertiti», «ci siamo dovuti fermare»: con noi el reflexivo en
+    # pasado empieza con ci, que sillabo.py no mira (confunde con «ci siamo
+    # stati», el ci de lugar).  Si el participio va solo con avere, el essere
+    # viene del pronombre: es un reflexivo o recíproco en pasado (semana 16).
+    m = re.search(r"\bci (?:siamo|eravamo|saremo|saremmo)\s+(?:già |mai |appena )?(\w+)", low_f)
+    if m and "essere" not in _lex()["participles"].get(m.group(1), ["essere"]):
+        feats["riflessivi passato"] = sillabo.FEATURE_WEEK["riflessivi passato"]
     return feats
 
 

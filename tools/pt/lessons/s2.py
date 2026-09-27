@@ -107,7 +107,9 @@ LESSONS = {
                      ["sonhar com", "soñar con", "Sonhei com o Rio."],
                      ["casar com", "casarse con", "Ele casou com a Bia."],
                      ["depender de", "depender de", "Depende do tempo."],
-                     ["namorar (sin prep.)", "ser novio de", "Ela namora o Rafa."]]},
+                     ["namorar (sin prep.)", "ser novio de", "Ela namora o Rafa."],
+                     ["interessar-se por", "interesarse por", "Me interesso por música."],
+                     ["apaixonar-se por", "enamorarse de", "Ela se apaixonou por ele."]]},
   "ex": [["*Penso muito na* minha família.", "Pienso mucho en mi familia."],
          ["Tudo *depende do* tempo.", "Todo depende del clima."],
          ["*Sonhei com* você.", "Soñé con vos."],
@@ -181,6 +183,11 @@ LESSONS = {
          ["Eu *ia* à praia todo sábado.", "Iba a la playa todos los sábados."]],
   "warn": "El español empuja a «tenía, venía, ponía»: en portugués es "
           "*tinha, vinha, punha*, con nh. *ir* es regular: *ia, íamos, iam*.",
+  "more": ["«Había» (= existía) es *tinha* al hablar y *havia* al "
+           "escribir, siempre en singular: *tinha muita gente*, *havia "
+           "muitas pessoas*. Lo mismo en los otros tiempos: «hubo» = *teve* "
+           "/ *houve*; «habrá» = *vai ter* / *haverá*. Nunca «haviam» ni "
+           "«houveram» con este sentido."],
   "q": [{"prompt": "«Tenía un perro.»", "stem": "Eu ___ um cachorro.",
          "answer": "tinha", "options": ["tinha", "tenia", "tive"]},
         {"prompt": "«Éramos vecinos.»", "stem": "Nós ___ vizinhos.",
@@ -597,7 +604,8 @@ LESSONS = {
             "rows": [["grande", "maior", "más grande, mayor"],
                      ["pequeno", "menor", "más chico, menor"],
                      ["bom", "melhor", "mejor"],
-                     ["ruim / mau", "pior", "peor"]]},
+                     ["ruim / mau", "pior", "peor"],
+                     ["velho / novo (edad)", "mais velho / mais novo", "mayor / menor (de edad)"]]},
   "ex": [["O Maracanã é *maior* que o Engenhão.", "El Maracanã es más grande que el Engenhão."],
          ["Esse açaí é *melhor* que o de ontem.", "Este açaí es mejor que el de ayer."],
          ["O trânsito hoje está *pior*.", "Hoy el tránsito está peor."],
@@ -815,7 +823,8 @@ LESSONS = {
   "ex": [["Hoje eu *acordei* cedo.", "Hoy me he despertado temprano."],
          ["Você *já foi* a Salvador?", "¿Ya has ido a Salvador?"],
          ["*Nunca comi* acarajé.", "Nunca he comido acarajé."],
-         ["*Ainda não almocei*.", "Todavía no he almorzado."]],
+         ["*Ainda não almocei*.", "Todavía no he almorzado."],
+         ["*Acabei de* chegar.", "Acabo de llegar (recién llegué)."]],
   "warn": "«¿Has estado en Brasil?» es *Você já esteve no Brasil?*; decir "
           "«tem estado» cambia el sentido: ¿venís estando?",
   "q": [{"prompt": "«Hoy he comido demasiado.»", "stem": "Hoje eu ___ demais.",
@@ -879,7 +888,7 @@ LESSONS = {
                      ["eleger", "elegido", "eleito"],
                      ["imprimir", "imprimido", "impresso"],
                      ["prender", "prendido", "preso"],
-                     ["morrer", "morrido", "morto"],
+                     ["morrer / matar", "morrido / matado", "morto"],
                      ["acender", "acendido", "aceso"]]},
   "ex": [["O boleto está *pago*.", "La factura está paga."],
          ["A encomenda foi *entregue*.", "El paquete fue entregado."],
@@ -1092,7 +1101,8 @@ LESSONS = {
   "ex": [["*Caso* você *precise*, me liga.", "Si necesitás algo, llamame."],
          ["*Caso* *chova*, o show será no Circo Voador.", "Si llueve, el show será en el Circo Voador."],
          ["Pode ir, *desde que* *volte* cedo.", "Podés ir, siempre que vuelvas temprano."],
-         ["*Contanto que* você *pague*, tudo bem.", "Con tal de que pagues, todo bien."]],
+         ["*Contanto que* você *pague*, tudo bem.", "Con tal de que pagues, todo bien."],
+         ["Vamos à praia, *a menos que* *chova*.", "Vamos a la playa, a menos que llueva."]],
   "warn": "*desde que* + subjuntivo es condición; + indicativo, tiempo: "
           "*desde que cheguei, chove* = desde que llegué, llueve.",
   "more": ["Con *se* («si») el portugués usa otro tiempo que el español no "

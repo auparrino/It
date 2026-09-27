@@ -86,7 +86,7 @@
       B("As flores são ___ a sua mãe.", "para", "por", "flores", "El destinatario: para."),
       B("Ele trabalha ___ uma empresa alemã.", "para", "por", "trabalha", "Para quién trabajás: para."),
       B("Esse remédio é ___ dor de cabeça.", "para", "por", "remédio", "Para qué sirve algo: para."),
-      B("Falta pouco ___ o Carnaval chegar.", "para", "por", "Falta pouco", "*Falta pouco para* = falta poco para.")
+      B("Falta pouco ___ o Carnaval do Rio de Janeiro.", "para", "por", "Falta pouco", "*Falta pouco para* = falta poco para.")
     ] },
 
     { id: "passado", week: 15, title: "perfeito o imperfeito", sub: "el hecho o el fondo", items: [

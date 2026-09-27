@@ -186,7 +186,11 @@ LESSONS = {
          ["a viage*m* → as viage*ns*", "el viaje → los viajes"],
          ["o bo*m* → os bo*ns*", "el bueno → los buenos"]],
   "warn": "Nunca «homems»: la *m* se vuelve *n* antes de la *s*. Es "
-          "ortografía, el sonido nasal no cambia."},
+          "ortografía, el sonido nasal no cambia.",
+  "more": ["Al contar, *um* y *dois* tienen femenino: *um quarto, uma "
+           "sala*; *dois irmãos, duas irmãs*; *dois quartos, duas "
+           "cadeiras*. Del tres en adelante no cambian: *três janelas*, "
+           "*quatro livros*. Los números completos llegan en la semana 7."]},
 
  {"h": "Los plurales de -ão",
   "q": [{"prompt": "Plural de «o limão»:", "answer": "os limões", "options": ["os limões", "os limãos", "os limones"]},
@@ -294,11 +298,16 @@ LESSONS = {
          ["*os* cariocas", "los cariocas"],
          ["*as* ruas da Lapa", "las calles de Lapa"]],
   "warn": "*a* es «la», no la preposición: *a casa* = la casa. «La» no "
-          "existe en portugués.",
+          "existe en portugués, y «lo» tampoco: *o importante* = lo importante.",
   "more": ["Por eso *Conheço a Bia* no lleva «a» personal: esa *a* es el "
            "artículo de *Bia*. Con un masculino se ve claro: *conheço o "
            "João*, nunca «conheço ao João». El portugués no marca el "
-           "objeto directo de persona con preposición."]},
+           "objeto directo de persona con preposición.",
+           "Casi todos los países llevan artículo: *o Brasil*, *a "
+           "Argentina*, *os Estados Unidos* (*do Brasil*, *na Argentina*). "
+           "Sin artículo: *Portugal*, *Angola*, *Cuba*. También algunos "
+           "estados (*a Bahia*, *o Ceará*) y ciudades (*o Rio*, *o "
+           "Porto*); la mayoría de las ciudades, no: *São Paulo*, *Lisboa*."]},
 
  {"h": "El indefinido: um, uma, uns, umas",
   "r": "*um* = un, *uma* = una, *uns / umas* = unos, unas. El femenino "
@@ -550,7 +559,11 @@ LESSONS = {
          ["Nós *bebemos* mate na praia.", "Tomamos mate en la playa."],
          ["Eles *abrem* a loja cedo.", "Abren el negocio temprano."]],
   "warn": "Tercera plural en *-am / -em*, nunca «-an / -en»: *eles falam*, "
-          "*eles comem*. La *m* final nasaliza la vocal."},
+          "*eles comem*. La *m* final nasaliza la vocal.",
+  "more": ["Un regular que vas a oír a cada rato: *gostar de* = gustar, "
+           "pero dado vuelta. El que siente el gusto es el sujeto y lo que "
+           "gusta va con *de*: *eu gosto de samba* (me gusta el samba), "
+           "*ela gosta do Rio* (de + o). Lo ves a fondo en la semana 14."]},
 
  {"h": "Você y vocês: tercera persona",
   "r": "*você* conjuga como *ele*; *vocês*, como *eles*. En la práctica, "
@@ -625,7 +638,12 @@ LESSONS = {
           "también vale).",
   "more": ["En Brasil se *almoça* entre las 12 y las 14 y se *janta* entre "
            "las 19 y las 21: más temprano que en Argentina. El *café da "
-           "manhã* es el desayuno; *lanche* es la merienda o un tentempié."]},
+           "manhã* es el desayuno; *lanche* es la merienda o un tentempié.",
+           "Para lo que se repite un día fijo: *aos domingos* (a + os), "
+           "*às sextas* (a + as) = los domingos, los viernes. Para decir "
+           "cuánto hace: *moro aqui há um ano* o *faz um ano* (hace un "
+           "año); nunca «desde um ano»: *desde* va con una fecha, "
+           "*desde 2020*."]},
 ]},
 
 6: {
@@ -825,7 +843,10 @@ LESSONS = {
            "maio, junho, julho, agosto, setembro, outubro, novembro, "
            "dezembro*. El día 1 se dice *primeiro* (*1º de maio*); los "
            "demás, cardinales: *dois de maio*. En la charla se abrevia: "
-           "*na segunda, na terça, na sexta*."]},
+           "*na segunda, na terça, na sexta*.",
+           "Cumplir años se dice *fazer anos*: *a Bia faz trinta anos na "
+           "quarta* (Bia cumple treinta el miércoles). El cumpleaños es *o "
+           "aniversário*; para saludar, *parabéns!* o *feliz aniversário!*"]},
 
  {"h": "¿Qué hora es?",
   "q": [{"prompt": "«A las tres.»", "answer": "Às três.", "options": ["Às três.", "As três.", "A las três."]}],
@@ -837,7 +858,11 @@ LESSONS = {
          ["*Quinze para as* oito.", "Las ocho menos cuarto."],
          ["O museu abre *ao* meio-dia.", "El museo abre al mediodía."]],
   "warn": "*meio-dia e meia* (12:30): *meia* porque es «media hora». Y "
-          "*às* lleva acento grave: *a + as = às*."},
+          "*às* lleva acento grave: *a + as = às*.",
+  "more": ["Para aclarar la parte del día, *da manhã*, *da tarde*, *da "
+           "noite* (de + a): *às sete da manhã*, *às duas da tarde*, *às "
+           "onze da noite*. Y «menos» se dice con *para*: *dez para as dez* "
+           "(las diez menos diez), *quinze para as oito*."]},
 
  {"h": "Precios y teléfonos",
   "r": "*Quanto custa?* / *Quanto é?* La moneda: *real*, plural *reais*; "
@@ -1189,7 +1214,11 @@ LESSONS = {
   "warn": "*parentes* = parientes, no «padres». Y *pais* (padres) no es "
           "*países* (países). *namorado* = novio, *noivo* = prometido.",
   "tip": "Los brasileños usan mucho *mãe* y *pai* en la charla, y *vó* / "
-         "*vô* para los abuelos."},
+         "*vô* para los abuelos.",
+  "more": ["Mayor y menor, dicho de hermanos o de edad: *mais velho* y "
+           "*mais novo*: *meu irmão mais velho* (mi hermano mayor), *a irmã "
+           "mais nova* (la hermana menor). El más chico de todos es *o "
+           "caçula* o *a caçula*."]},
 ]},
 
 11: {
@@ -1308,7 +1337,7 @@ LESSONS = {
          "Respuesta: *já* (sí) / *ainda não* (todavía no)."},
 
  {"h": "Contar un viaje",
-  "r": "Para ordenar el relato: *primeiro*, *depois*, *então*, *aí* "
+  "r": "Para ordenar el relato: *primeiro*, *depois*, *então* (entonces), *aí* "
        "(habla), *no fim*. Para ubicarlo: *ontem*, *semana passada*, *no "
        "sábado*.",
   "ex": [["*Ontem* a gente foi a Niterói.", "Ayer fuimos a Niterói."],

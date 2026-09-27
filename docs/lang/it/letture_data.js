@@ -204,7 +204,7 @@
         "«Allora non traslocare! Potresti fare il pendolare, come fanno in tanti.»\n\n" +
         "Martín ci pensa tutta la notte. Alle tre scrive un messaggio a sua madre: " +
         "«Mamma, secondo te sarei capace di ricominciare da capo, un'altra volta?»",
-      gloss: { posto: "puesto (de trabajo); al posto mio = en mi lugar", ottimo: "excelente", lasciare: "dejar",
+      gloss: { pensa: "(ci pensa) lo piensa, le da vueltas: ci = en eso", posto: "puesto (de trabajo); al posto mio = en mi lugar", ottimo: "excelente", lasciare: "dejar",
                mancherebbe: "extrañaría (me faltaría)",
                traslocare: "mudarse", pendolare: "persona que viaja todos los días al trabajo",
                capo: "(da capo) desde cero", capace: "capaz" },
@@ -731,7 +731,7 @@
         "«Certo. Ma la crema gliela prepari tu, che io sono stanca.»\n\n" +
         "La settimana dopo Martín porta la torta in ufficio. La professoressa la assaggia e " +
         "sorride: «Glielo dico subito: la prossima gliela chiedo per il mio compleanno.»",
-      gloss: { fastidioso: "molesto (no «aburrido»)", prestato: "prestado", restituirglielo: "(restituire) devolvérselo",
+      gloss: { più: "más (più che a me = más que a mí)", fastidioso: "molesto (no «aburrido»)", prestato: "prestado", restituirglielo: "(restituire) devolvérselo",
                portineria: "portería, conserjería", oppure: "o bien", pesante: "pesado",
                ringraziarla: "agradecerle", appuntamento: "cita", serve: "(servire a) le sirve, le hace falta",
                decina: "unos diez", direi: "diría", ricetta: "receta", assaggia: "prueba",

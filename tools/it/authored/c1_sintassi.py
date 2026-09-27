@@ -221,7 +221,9 @@ ITEMS = [
               "grande→maggiore/massimo; piccolo→minore/minimo."),
     dict(id="c1-comp-04", type="choice", topic="comparativi",
          prompt="Elegí la forma correcta.",
-         stem="Ha più soldi ___ non sembri.",
+         stem="Ha più soldi ___ pensavo.",
          options=["di quanto", "che", "di quello"], answer="di quanto",
-         note="Comparación con verbo conjugado: «di quanto (non) + congiuntivo»."),
+         note="Ante un verbo conjugado, «de lo que» es *di quanto* (o *di quel "
+              "che*): *ha più soldi di quanto pensavo*, «tiene más plata de lo "
+              "que yo pensaba»."),
 ]

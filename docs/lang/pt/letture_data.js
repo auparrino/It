@@ -76,7 +76,7 @@
         "barraca da esquina. O Martín está feliz:\n" +
         "— No domingo que vem, eu volto. E o pastel é por minha conta!\n" +
         "— Combinado. Mas antes, no sábado, tem passeio: o Pão de Açúcar!",
-      gloss: { manhã: "mañana (de manhã = a la mañana)", feira: "feria (mercado callejero)", fica: "queda",
+      gloss: { mesmo: "(é assim mesmo) así es nomás", manhã: "mañana (de manhã = a la mañana)", feira: "feria (mercado callejero)", fica: "queda",
                rua: "calle", perto: "cerca", peixe: "pescado", pastel: "pastel (empanada frita)",
                barraca: "puesto", seu: "don (seu Zé = don Zé; viene de senhor)", olha: "mira",
                abacaxi: "ananá", maracujá: "maracuyá", caju: "cajú (la fruta)", conhece: "conoce",
@@ -178,7 +178,7 @@
         "atravessando a baía, com o Pão de Açúcar de um lado e o Cristo do outro.\n\n" +
         "Na segunda de manhã, o Martín sai de casa às sete, de terno e gravata. No cais da " +
         "Praça XV, ele respira fundo e pensa: “Será um bom dia.”",
-      gloss: { entrevista: "entrevista (de trabajo)", fica: "queda", painéis: "paneles", medo: "miedo",
+      gloss: { nenhuma: "ninguna (não tem vergonha nenhuma = no tiene nada de vergonzoso)", entrevista: "entrevista (de trabajo)", fica: "queda", painéis: "paneles", medo: "miedo",
                "há": "(há anos) hace años", devagar: "despacio", vergonha: "vergüenza", nisso: "en eso",
                certo: "(dar certo) salir bien", "chá": "té", camomila: "manzanilla",
                barca: "ferry", atravessando: "cruzando", terno: "traje", gravata: "corbata",
@@ -214,7 +214,7 @@
         "Que formal!, pensa o Martín. No Rio, todo mundo diz “eu vi você” ou até “eu vi ele”. " +
         "Mas ele sorri e responde:\n" +
         "— Viu, sim. Foi um prazer conhecê-la.",
-      gloss: { liga: "llama", hora: "(na hora) enseguida", ainda: "todavía", monte: "(um monte de) un montón de",
+      gloss: { novo: "(de novo) otra vez", liga: "llama", hora: "(na hora) enseguida", ainda: "todavía", monte: "(um monte de) un montón de",
                ele: "él (mandei ele, vi ele: coloquial por «o mandei», «o vi»)",
                entreguei: "entregué", rh: "Recursos Humanos", moça: "chica",
                "contatá-lo": "contactarlo (formal)", comemora: "festeja", jeito: "(do mesmo jeito) igual, de todos modos", hoje: "hoy", fome: "hambre",
@@ -242,7 +242,7 @@
         "pensaria duas vezes.\n\n" +
         "O Martín pensa nisso a noite toda. Às três da manhã, escreve uma mensagem para a mãe, " +
         "em Buenos Aires: “Mãe, você acha que eu seria capaz de começar do zero mais uma vez?”",
-      gloss: { oferece: "ofrece", cargo: "puesto", ótimo: "excelente", "só": "(só que) solo que",
+      gloss: { felicíssimo: "felicísimo, contentísimo", até: "hasta, incluso", oferece: "ofrece", cargo: "puesto", ótimo: "excelente", "só": "(só que) solo que",
                longe: "lejos", talvez: "quizás", mudar: "(se mudar) mudarse", hora: "(na hora) enseguida",
                lado: "(aqui do lado) acá al lado", barca: "ferry", falta: "(sentir falta de) extrañar",
                boteco: "bar de barrio", ladeiras: "calles en pendiente", meia: "media", nem: "ni",
@@ -270,7 +270,7 @@
         "jantar.”\n\n" +
         "O Martín lê a mensagem duas vezes. Depois abre o computador e escreve para a empresa " +
         "uma palavra só: “Aceito.”",
-      gloss: { seguinte: "siguiente", dormindo: "durmiendo", mesmo: "(mesmo que) aunque; (mesmo do outro lado) incluso",
+      gloss: { qualquer: "(qualquer que seja) sea cual sea", seguinte: "siguiente", dormindo: "durmiendo", mesmo: "(mesmo que) aunque; (mesmo do outro lado) incluso",
                perceba: "te des cuenta", apaixone: "apasione", ficam: "quedan, se quedan", medo: "miedo",
                errar: "equivocarse", escolha: "elección", orgulho: "orgullo", logo: "pronto",
                saudade: "(estar com saudade) extrañar", beijo: "beso", tomara: "ojalá",
@@ -369,7 +369,7 @@
         "frente ao bar onde eles se encontravam. A canção ganhou o mundo com o disco Getz/Gilberto, " +
         "que recebeu o Grammy de álbum do ano em 1965. Hoje, a rua do bar se chama Vinicius de " +
         "Moraes, e o bar se chama Garota de Ipanema.",
-      gloss: { jovens: "jóvenes", jeito: "manera, estilo", baixo: "bajo (de volumen)", lento: "lento",
+      gloss: { chamaram: "(chamar algo de…) le pusieron el nombre de…", jovens: "jóvenes", jeito: "manera, estilo", baixo: "bajo (de volumen)", lento: "lento",
                sussurrado: "susurrado", gíria: "jerga", gravou: "grabó", violonista: "guitarrista",
                baiano: "de Bahía", faixas: "temas", batida: "rasguido", lançou: "lanzó",
                gravação: "grabación", nascimento: "nacimiento", compunha: "componía",
@@ -401,11 +401,11 @@
         "Hoje as escolas desfilam no Sambódromo, projetado por Oscar Niemeyer e inaugurado em " +
         "1984. Cada uma prepara o desfile durante o ano inteiro, e os ensaios na quadra começam " +
         "meses antes do Carnaval.",
-      gloss: { vindos: "venidos", porto: "puerto", baianas: "mujeres de Bahía", duravam: "duraban",
+      gloss: { chamam: "(chamar algo de…) llaman… a algo", vindos: "venidos", porto: "puerto", baianas: "mujeres de Bahía", duravam: "duraban",
                registrado: "registrado", gravado: "grabado", roda: "(roda de samba) ronda de músicos",
                porém: "sin embargo", perseguia: "perseguía", sambistas: "músicos de samba",
                fundaram: "fundaron", ficava: "quedaba", logo: "pronto", "começam": "empiezan",
-               morar: "vivir", chamou: "llamó", surgiram: "surgieron", desfilam: "desfilan",
+               morar: "vivir", chamou: "llamó (chamar algo de… = llamar… a algo)", surgiram: "surgieron", desfilam: "desfilan",
                projetado: "proyectado", inaugurado: "inaugurado", ensaios: "ensayos",
                quadra: "galpón (de la escuela de samba)" },
       questions: [
@@ -462,7 +462,7 @@
         "brasileiros discutem: Capitu traiu ou não traiu?\n\n" +
         "Machado foi o primeiro presidente da Academia Brasileira de Letras, fundada em 1897. " +
         "Morreu em 1908, na sua casa do Cosme Velho.",
-      gloss: { neto: "nieto", escravizados: "esclavizados", libertos: "liberados, libertos", gago: "tartamudo",
+      gloss: { passou: "(passou a + infinitivo) empezó a", poucos: "(aos poucos) de a poco", neto: "nieto", escravizados: "esclavizados", libertos: "liberados, libertos", gago: "tartamudo",
                frequentou: "frecuentó", sozinho: "solo", tipógrafo: "tipógrafo",
                revisor: "corrector (de textos)", virou: "se convirtió en", romance: "novela",
                defunto: "difunto", verme: "gusano", roeu: "royó", saudosa: "nostálgica",
@@ -1261,7 +1261,7 @@
         "aplaude o pôr do sol nas pedras do Arpoador. O Martín não entende:\n" +
         "— Vocês aplaudem o sol?\n" +
         "— Aqui a gente aplaude — responde a Bia. — É a melhor parte do domingo.",
-      gloss: { cedo: "temprano", padaria: "panadería", esquina: "esquina", térreo: "planta baja",
+      gloss: { gosto: "(gosto do Rio) me gusta Río", neste: "en este (em + este)", dela: "de ella (de + ela)", cedo: "temprano", padaria: "panadería", esquina: "esquina", térreo: "planta baja",
                prédio: "edificio", pega: "toma", ônibus: "colectivo", desce: "baja", areia: "arena",
                quiosque: "quiosco", calçadão: "rambla, paseo costero", "água": "(água de coco) agua de coco",
                mora: "vive", "há": "(há dez anos) hace diez años", falta: "(sentir falta de) extrañar",
@@ -1293,7 +1293,7 @@
         "procura no dicionário, ou ele faz mímica. A gente ri muito.\n\n" +
         "À noite, a gente janta na varanda e olha as luzes da cidade lá embaixo. A gente não tem " +
         "muito dinheiro, e a casa é pequena. Mas a gente é feliz assim.",
-      gloss: { divide: "comparte", geladeira: "heladera", banheiro: "baño", conta: "cuenta, factura",
+      gloss: { causa: "(por causa de) por, a causa de", divide: "comparte", geladeira: "heladera", banheiro: "baño", conta: "cuenta, factura",
                fatia: "porción, tajada", "lava-louças": "lavavajillas", acorda: "se despierta",
                cedo: "temprano", bonde: "tranvía", barulho: "ruido", nem: "ni", ouve: "oye",
                odeia: "odia", faxina: "limpieza general", limpo: "limpio", procura: "busca",
@@ -1326,7 +1326,7 @@
         "— Estou sentado no calçadão, olhando as pessoas. E você?\n" +
         "— Estou chegando! Estou saindo do metrô agora.\n\n" +
         "O Martín sorri. No Rio, até quem está parado está fazendo alguma coisa.",
-      gloss: { fechada: "cerrada", sentado: "sentado", banco: "banco (para sentarse)", calçadão: "rambla, paseo costero",
+      gloss: { delas: "de ellas (atrás delas = detrás de ellas)", até: "hasta, incluso", fechada: "cerrada", sentado: "sentado", banco: "banco (para sentarse)", calçadão: "rambla, paseo costero",
                olhando: "mirando", movimento: "movimiento", correndo: "corriendo", sunga: "malla (de hombre)",
                meninas: "chicas", andando: "(andar de bicicleta) andar en bicicleta", cachorro: "perro",
                atrás: "atrás", areia: "arena", jogando: "jugando", "futevôlei": "fútbol-vóley",
@@ -1467,7 +1467,7 @@
         "até hoje. E em espanhol, “he estudiado” quase sempre se traduz por “estudei”.\n\n" +
         "No domingo, finalmente, o sol aparece. O Martín abre a janela e diz:\n" +
         "— Tem chovido tanto que eu tenho sonhado com este dia.",
-      gloss: { chove: "llueve", atrasado: "tarde", bonde: "tranvía", ladeiras: "calles en pendiente",
+      gloss: { causa: "(por causa de) por, a causa de", chove: "llueve", atrasado: "tarde", bonde: "tranvía", ladeiras: "calles en pendiente",
                colo: "regazo", vizinhos: "vecinos", reclamado: "quejado", térreo: "planta baja",
                baldes: "baldes", goteiras: "goteras", boteco: "bar de barrio",
                caldo: "(caldo verde) sopa de papa y col, de origen portugués", chope: "chopp",

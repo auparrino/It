@@ -131,6 +131,7 @@
     "grammar": "futuro do subjuntivo",
     "text": "Quando a Renata Siqueira fala da mudança, ela ainda ri do caminhão. Foram onze horas de estrada entre São Paulo e uma cidadezinha no sul de Minas Gerais, com dois filhos, um cachorro e uma geladeira que não passava pela porta da casa nova. “Se alguém me perguntar se valeu a pena, eu vou dizer que sim. Mas vou dizer também que não foi o paraíso que eu tinha imaginado”, conta a designer, de 41 anos.\n\nA história dela não é rara. Nos últimos anos, com o trabalho remoto, muitas famílias das grandes capitais começaram a fazer as contas: aluguel mais barato, menos trânsito, mais tempo com as crianças. Quem acompanha esse tipo de mudança, porém, faz um alerta. “Quem sair da cidade grande só para fugir dos problemas vai encontrar outros”, resume o psicólogo Álvaro Tenório, que atende famílias em transição. Segundo ele, a primeira pergunta não é para onde ir, mas o que a pessoa espera encontrar lá.\n\nOs obstáculos costumam aparecer depois da lua de mel. A internet cai quando chove, o hospital mais próximo fica a quarenta minutos e a escola nem sempre oferece o que os pais queriam. Além disso, a vida social exige paciência: nas cidades pequenas, todo mundo se conhece, e o recém-chegado demora a ser convidado. “Se você quiser fazer amigos, vai ter que participar da festa da igreja, do mutirão da praça, da reunião da escola. Ninguém vai bater na sua porta”, diz Renata.\n\nPara quem estiver pensando em dar esse passo, Tenório sugere um período de teste. “Alugue uma casa por alguns meses antes de vender tudo. Se as crianças se adaptarem e o trabalho continuar funcionando, aí sim vale a pena pensar em algo definitivo.” Ele também recomenda conversar com os moradores antigos, e não só com outros paulistanos que fizeram o mesmo caminho. “Eles vão dizer como é o inverno, onde fica o médico bom, quem conserta o telhado. Isso não aparece em nenhum anúncio de imobiliária.”\n\nRenata, por enquanto, não pensa em voltar. “Enquanto eu puder trabalhar daqui e os meninos estiverem felizes, a gente fica. Quando eles forem para a faculdade, talvez a gente repense. Mas isso é assunto para daqui a dez anos.” Na cozinha, ao lado da janela, a geladeira que não cabia na porta finalmente encontrou o seu lugar.",
     "gloss": {
+     "daqui": "(daqui a dez anos) dentro de diez años",
      "caminhão": "camión",
      "estrada": "ruta",
      "cidadezinha": "pueblito",
@@ -296,6 +297,8 @@
      ]
     ],
     "gloss": {
+     "tipo": "(muletilla) como, más o menos",
+     "sofrerem": "(medo de as crianças sofrerem) miedo de que los chicos sufran: infinitivo pessoal (semana 29)",
      "passagem": "pasaje",
      "vaga": "puesto de trabajo vacante",
      "enfermeira": "enfermera",
@@ -438,6 +441,7 @@
     "grammar": "imperfeito do subjuntivo e condicionais",
     "text": "Outro dia, na fila do supermercado, uma senhora me perguntou qual iogurte eu levaria se fosse ela. Havia, contei depois, vinte e três tipos na prateleira: integral, desnatado, grego, com mel, sem lactose, com pedaços de fruta. Respondi qualquer coisa e fiquei pensando que, se meu avô entrasse naquele corredor, sairia de mãos vazias. Não por falta de dinheiro, mas por excesso de alternativas.\n\nA gente cresceu ouvindo que liberdade é poder escolher. E é, claro. Ninguém em sã consciência gostaria de voltar a um tempo em que a profissão, o casamento e a cidade de uma pessoa fossem decididos pela família. Mas desconfio que confundimos liberdade com quantidade. Se tivéssemos menos opções, talvez escolhêssemos com mais calma e, principalmente, ficássemos mais satisfeitos com o que escolhemos.\n\nPenso nos meus alunos do cursinho. Aos dezessete anos, eles precisam decidir o que vão fazer da vida, como se a decisão fosse irreversível. Muitos me dizem que prefeririam que alguém escolhesse por eles. Um deles, o Caio, me confessou: “Se eu soubesse que dá para mudar depois, eu não estaria tão nervoso”. Seria cômico, se não fosse triste: passamos a adolescência inteira dizendo aos jovens que o mundo está aberto e esquecemos de avisar que as portas também se abrem mais tarde.\n\nNão estou propondo que as prateleiras voltem a ter um único iogurte, nem que os vestibulandos sorteiem o curso. Proponho algo mais modesto: que parássemos de tratar cada escolha como se fosse a última. Se encarássemos as decisões como experimentos, e não como sentenças, o medo de errar diminuiria bastante. Quem dera as escolas ensinassem isso com a mesma seriedade com que ensinam logaritmos.\n\nVoltando à senhora do supermercado: ela acabou levando o primeiro iogurte que viu, o mais simples de todos, e pareceu aliviada. Eu, que tinha passado cinco minutos comparando rótulos, saí com dois, e em casa descobri que não gostava de nenhum. Se fosse para dar um conselho, eu diria: escolha, prove e, se não gostar, escolha outra vez. A vida raramente é tão definitiva quanto parece na fila do caixa.",
     "gloss": {
+     "dera": "(quem dera) ojalá",
      "fila": "fila, cola",
      "prateleira": "estante, góndola",
      "desnatado": "descremado",
@@ -611,6 +615,9 @@
      ]
     ],
     "gloss": {
+     "pois": "(pois é) y sí, así es",
+     "graça": "(de graça) gratis",
+     "pé": "(de cabelo em pé) con los pelos de punta",
      "encruzilhada": "encrucijada",
      "caprichado": "bien hecho, cuidado",
      "segura": "frena, detiene",
@@ -929,6 +936,7 @@
      ]
     ],
     "gloss": {
+     "documentado": "(vai ter documentado) vas a haber documentado: futuro compuesto (semana 30)",
      "carteira": "libreta de trabajo (“de carteira assinada”: en blanco)",
      "combinei": "acordé, arreglé",
      "movimento": "movimiento de clientes",
@@ -1074,6 +1082,7 @@
     "grammar": "tempos compostos e hipótese no passado",
     "text": "Minha avó Zefinha morreu no ano passado, aos noventa e dois anos, e deixou uma caixa de sapatos cheia de cartas. Eu tinha passado a infância inteira na casa dela, na Zona Leste de São Paulo, e nunca tinha reparado naquela caixa, escondida no alto do guarda-roupa. Se alguém tivesse me perguntado, eu teria jurado que conhecia todas as histórias dela. Estava enganada.\n\nAs cartas eram de um rapaz chamado Severino, escritas entre 1958 e 1961, de uma cidadezinha do sertão da Paraíba. Pelas datas, entendi que ela já tinha vindo para São Paulo quando as recebeu. Ele falava da seca, da mãe doente, de um roçado que não tinha dado nada naquele ano. E, em quase todas, perguntava a mesma coisa: quando ela ia voltar.\n\nMinha avó nunca voltou. Casou com meu avô, um pedreiro pernambucano que ela tinha conhecido na fila de um posto de saúde, criou cinco filhos e só pisou de novo na Paraíba quarenta anos depois, para o enterro de uma irmã. Nunca mencionou nenhum Severino. Minha mãe, quando mostrei as cartas, ficou um tempo em silêncio e depois disse: “Se ela tivesse ficado lá, eu não teria nascido. Nem você.”\n\nÉ uma frase óbvia, mas me acompanhou por semanas. Fiquei imaginando a outra vida possível: a moça que teria se casado com Severino, que teria plantado feijão em vez de costurar para fora, que talvez tivesse sido mais feliz, ou menos. Não há como saber. O que sei é que, se eu não tivesse encontrado aquela caixa, teria continuado a ver minha avó como uma personagem simples, sem segredos, a senhora que fazia cuscuz aos domingos.\n\nA memória de uma família, percebo agora, é feita tanto do que se conta quanto do que se cala. Minha avó tinha guardado aquelas cartas durante mais de sessenta anos. Não as tinha queimado nem jogado fora. Terá sido saudade? Arrependimento? Ou apenas o costume de quem aprendeu a não desperdiçar nada, nem papel?\n\nTentei procurar o Severino. Um primo que ainda mora no sertão descobriu que ele tinha morrido nos anos noventa, depois de ter trabalhado a vida inteira na mesma terra. Tinha tido filhos, netos. Talvez algum deles guarde, numa gaveta, as cartas que minha avó escreveu de volta. Gosto de pensar que sim. Gosto de pensar que, em algum lugar, a outra metade da conversa também sobreviveu.",
     "gloss": {
+     "volta": "(escreveu de volta) le contestó (la carta)",
      "reparado": "notado, prestado atención",
      "guarda-roupa": "ropero",
      "jurado": "jurado",
@@ -1239,6 +1248,7 @@
      ]
     ],
     "gloss": {
+     "parar": "(foi parar na ferrovia) terminó trabajando en el ferrocarril",
      "ferrovia": "ferrocarril",
      "malas": "valijas",
      "pastel": "empanada frita",
@@ -1384,6 +1394,8 @@
     "grammar": "discurso indireto e correlação de tempos",
     "text": "Na manhã em que visitamos a redação do Correio do Vale, Marlene Andrade estava revisando, de caneta vermelha, a página de obituários. A jornalista, de 67 anos, contou que fazia aquilo toda quinta-feira havia mais de três décadas e que ainda não tinha se acostumado a encontrar nomes conhecidos na lista. “Numa cidade de vinte mil habitantes, a gente conhece todo mundo que morre”, disse, sem tirar os olhos do papel.\n\nO semanário, fundado pelo pai dela em 1974, é hoje o único veículo de imprensa de uma região de seis municípios no sul da Bahia. Marlene explicou que a tiragem, que já tinha chegado a oito mil exemplares, caíra para pouco mais de mil, e que a publicidade das lojas locais mal pagava o papel. Perguntei se ela tinha pensado em fechar. Ela respondeu que pensava nisso todos os dias, mas que ainda não tinha coragem.\n\nPesquisadores que estudam o jornalismo local chamam de “desertos de notícias” os municípios que não têm nenhum veículo dedicado à cobertura da vida da cidade. Segundo o professor de comunicação Henrique Sales, que acompanha o fenômeno há alguns anos, quando um jornal como o de Marlene desaparece, a população perde muito mais do que uma fonte de informação. Ele afirmou que, sem imprensa local, ninguém fiscaliza as contas da prefeitura nem as decisões da câmara de vereadores, e acrescentou que os boatos passam a circular sem nenhum contraponto nos grupos de mensagens.\n\nMarlene conhece bem esse risco. Ela lembrou que, dois anos antes, um áudio anônimo tinha espalhado que a água da cidade estava contaminada, e que as pessoas esvaziaram os supermercados em poucas horas. Foi o Correio do Vale, segundo ela, que ligou para o laboratório, publicou o resultado da análise e acalmou a população. “Se não fosse a gente, o prefeito ia desmentir no rádio e metade da cidade ia dizer que ele estava mentindo”, comentou.\n\nO filho de Marlene, Tiago, de 34 anos, quer transformar o jornal num site com assinatura digital. Ele me disse que já tinha feito as contas e que, se conseguisse quinhentos assinantes, o projeto se pagaria. A mãe desconfia. Afirmou que respeitava a ideia, mas que não sabia se os leitores mais velhos, que são a maioria, acompanhariam a mudança.\n\nAntes de irmos embora, Marlene nos mostrou a coleção completa do jornal, encadernada ano a ano, numa estante que ocupa uma parede inteira. Perguntamos o que aconteceria com aquilo tudo se o jornal fechasse. Ela ficou em silêncio e depois disse que preferia não pensar nisso naquele dia, porque ainda tinha uma edição para fechar.",
     "gloss": {
+     "fosse": "(se não fosse a gente) si no fuera por nosotros",
+     "mal": "(mal pagava) apenas alcanzaba para pagar",
      "redação": "redacción (del diario)",
      "caneta": "birome, lapicera",
      "obituários": "necrológicas",
@@ -1556,6 +1568,8 @@
      ]
     ],
     "gloss": {
+     "deixar": "(pode deixar) dejalo en mis manos, quedate tranquilo/a",
+     "aí": "(aí é que está) ahí está el problema",
      "empresário": "empresario",
      "cedo": "temprano",
      "gravado": "grabado",
@@ -1703,6 +1717,7 @@
     "grammar": "voz passiva sintética e sujeito indeterminado",
     "text": "Há quem conheça uma cidade pelos monumentos. Eu prefiro as placas escritas à mão. Nas minhas caminhadas pelo centro do Recife, aprendi que se descobre mais sobre um bairro lendo os avisos colados nas portas do que folheando qualquer guia turístico.\n\nComecemos pelos clássicos: “Aluga-se”, “Vende-se”, “Passa-se o ponto”. Quando muitos deles aparecem numa mesma rua, sabe-se que alguma coisa vai mal: o comércio antigo está indo embora, os aluguéis subiram, a clientela mudou de endereço. Na Rua da Imperatriz, contei outro dia onze “Aluga-se” em dois quarteirões. Onze. Não se precisa de um economista para interpretar esse dado.\n\nDepois vêm os pedidos. “Precisa-se de costureira com experiência.” “Precisa-se de ajudante de cozinha, tratar aqui.” Essas placas, curiosamente, me dão esperança. Se ainda se procura gente para trabalhar, é porque alguém acredita que o negócio tem futuro. Numa padaria da Boa Vista, a mesma placa de “Precisa-se de padeiro” está pendurada há meses. Já não sei se falta padeiro ou se sobra otimismo.\n\nHá também as regras, que dizem muito sobre o que incomoda as pessoas. “Não se aceitam cheques.” “Proibido estacionar, sujeito a guincho.” “Não se vende fiado.” Esta última, pintada na parede de uma mercearia, vem com um complemento irônico: “Fiado, só amanhã”. É uma piada velha, mas ainda se ri dela, e o dono, seu Everaldo, jura que funciona melhor do que qualquer cartaz sério. Em frente a um prédio residencial, uma folha plastificada avisa: “Não se admite barulho depois das 22h. Contamos com a colaboração de todos.” Imagino a reunião de condomínio que produziu aquela frase educada, e as brigas que ela esconde.\n\nE há, finalmente, as placas que ninguém sabe quem escreveu. “Conserta-se panela de pressão.” “Fazem-se unhas a domicílio.” “Compra-se ouro, prata e relógios antigos.” Não há nome, às vezes nem telefone, só uma seta apontando para uma escada estreita. Diz-se que, nesses sobrados, funciona uma economia inteira que não aparece nas estatísticas oficiais.\n\nOs urbanistas falam em poluição visual, e têm razão em parte: ninguém quer uma cidade coberta de papel velho. Discute-se agora, na Câmara Municipal, um projeto que proibiria cartazes improvisados nas fachadas do centro histórico. Entendo a intenção. Mas confesso um receio: se todas as placas forem retiradas, perde-se também uma forma de ler a cidade, escrita por quem vive nela, com erros de ortografia e tudo.\n\nHoje, voltando para casa, vi um papel novo numa porta azul: “Procura-se gato cinza, atende por Biscoito. Gratifica-se.” Fiquei olhando embaixo dos carros até escurecer. Não o encontrei, mas amanhã volto a procurar. Uma cidade também é isso: gente que se preocupa com o gato de desconhecidos.",
     "gloss": {
+     "tratar": "(tratar aqui) consultar acá",
      "placas": "carteles",
      "colados": "pegados",
      "folheando": "hojeando",
@@ -1879,6 +1894,7 @@
      ]
     ],
     "gloss": {
+     "pois": "(pois é) y sí, así es",
      "motor": "motor",
      "patins": "patines",
      "coleira": "correa, collar",
@@ -2029,6 +2045,12 @@
     "grammar": "colocação pronominal na escrita",
     "text": "Numa tarde de março de 1911, entrou no cartório de Vila Rica do Norte um velho de chapéu gasto, que trazia debaixo do braço uma caixa de madeira. O tabelião, Dr. Anselmo Valadares, recebeu-o com a cortesia um tanto cansada de quem já ouvira todas as histórias da cidade e não esperava ouvir nenhuma nova.\n\n— Venho fazer o meu testamento — disse o velho, sentando-se antes que lhe oferecessem a cadeira.\n\n— Pois não. Diga-me o seu nome e os bens que possui.\n\nO velho chamava-se Joaquim Pereira e fora, durante quarenta anos, o único relojoeiro da vila. Não tinha mulher nem filhos, e os seus bens resumiam-se a uma casa de dois cômodos e àquela caixa, que abriu com vagar sobre a mesa. Dentro havia um relógio de parede desmontado, peça por peça, cada uma embrulhada em papel de seda.\n\n— Deixo a casa à Santa Casa de Misericórdia — explicou. — O relógio, deixá-lo-ei a quem conseguir montá-lo.\n\nO tabelião ergueu os olhos. Em vinte anos de ofício, nunca se deparara com cláusula semelhante. Tentou dissuadi-lo: os juízes costumavam desconfiar de herdeiros incertos, e um testamento assim abrir-se-ia a toda sorte de disputas. O velho, porém, não se deixou convencer.\n\n— O senhor escreva. Os juízes que se entendam depois.\n\nAnselmo escreveu. Enquanto a pena corria sobre o papel, perguntou-lhe, por pura curiosidade, por que razão desmontara o relógio. Joaquim demorou a responder.\n\n— Porque me ensinaram que um relógio só é nosso quando sabemos refazê-lo. Quem o montar há de entender o que eu entendi.\n\nMeses depois, o relojoeiro morreu, e a notícia do estranho legado espalhou-se pela vila. Apareceram candidatos de toda parte: ferreiros, estudantes, um padre com fama de engenhoso, até um engenheiro vindo da capital. Todos se debruçaram sobre as peças, e todos desistiram. Faltava sempre alguma coisa, ou sobrava.\n\nO engenheiro, dizem, passou três semanas trancado numa sala da prefeitura, cercado de desenhos e cálculos, e saiu de lá convencido de que o velho lhe pregara uma peça. Escreveu ao tabelião uma carta indignada, exigindo que se anulasse o testamento. Anselmo respondeu-lhe em duas linhas: a cláusula era clara, e o prazo ainda não se esgotara.\n\nFoi uma menina de onze anos, filha da lavadeira que servia ao cartório, quem pediu para tentar. Os adultos riram-se dela, mas o tabelião, por um impulso que nunca soube explicar, entregou-lhe a caixa. A menina levou-a para casa e só a devolveu na primavera seguinte, com o relógio funcionando.\n\n— Como conseguiu? — perguntou-lhe Anselmo, incrédulo.\n\n— Seu Joaquim me ensinou, quando eu era pequena. Eu ficava na janela da oficina, e ele me explicava cada peça. Ele me disse que um dia eu ia entender para quê.\n\nO tabelião registrou a entrega com a solenidade de um ato público. Contam na vila que, ao fechar o livro, murmurou para si mesmo: “Far-se-á justiça, afinal, ainda que por caminhos tortos.” E contam também que, até o fim da vida, nunca mais se atrasou para compromisso algum.",
     "gloss": {
+     "pois": "(pois não) cómo no, ¿en qué lo ayudo?",
+     "há": "(há de entender) va a entender: haver de + infinitivo, futuro enfático",
+     "esgotara": "(não se esgotara) no se había vencido",
+     "pregara": "(lhe pregara uma peça) le había jugado una mala pasada",
+     "desmontara": "había desarmado",
+     "fora": "había sido (pluscuamperfecto simple, semana 41; no es «fuera»)",
      "cartório": "escribanía",
      "gasto": "gastado",
      "tabelião": "escribano",
@@ -2202,6 +2224,7 @@
      ]
     ],
     "gloss": {
+     "já": "ya; al comienzo de la frase marca contraste: «en cambio»",
      "rende": "da para mucho (hablar)",
      "empresta": "prestá",
      "brincadeira": "broma",
@@ -2505,6 +2528,7 @@
      ]
     ],
     "gloss": {
+     "hora": "(já passou da hora) ya era hora",
      "canudo": "sorbete, pajita",
      "talher": "cubierto",
      "mangue": "manglar",
@@ -2845,6 +2869,8 @@
      ]
     ],
     "gloss": {
+     "imagina": "(respuesta a un gracias) ¡de nada!, ¡por favor!",
+     "mal": "(eu mal vejo ele) casi no lo veo",
      "demissão": "despido",
      "demitir": "despedir",
      "porém": "pero, reparo",
@@ -3510,6 +3536,9 @@
      ]
     ],
     "gloss": {
+     "agradeço": "(eu que agradeço / eu é que agradeço) gracias a vos",
+     "tô": "estoy (coloquial)",
+     "valeu": "gracias (coloquial)",
      "desmonta": "desarma",
      "consertar": "arreglar, reparar",
      "colada": "pegada",
@@ -3848,6 +3877,9 @@
      ]
     ],
     "gloss": {
+     "ó": "mirá (muletilla)",
+     "bem": "(ainda bem) menos mal",
+     "mentira": "(¡mentira!) ¡no te puedo creer!",
      "cê": "vos (forma oral de você)",
      "morto": "muerto (de cansancio)",
      "maratonando": "viendo de corrido",
@@ -3996,6 +4028,7 @@
     "grammar": "registro formal e nominalização",
     "text": "Apresentação. O presente relatório reúne os resultados da pesquisa conduzida pelo Núcleo de Estudos sobre Permanência Estudantil (NEPE) ao longo de dois anos letivos, com o objetivo de identificar os fatores associados à evasão de estudantes no primeiro ano de graduação em uma universidade federal da região Centro-Oeste. A investigação combinou a análise de registros acadêmicos de cerca de 4.800 ingressantes com a realização de entrevistas em profundidade com 62 estudantes, dos quais 27 haviam trancado ou abandonado o curso.\n\nMetodologia. A escolha de uma abordagem mista justifica-se pela insuficiência dos dados quantitativos para a compreensão das motivações individuais. Se, por um lado, os registros permitem a identificação de padrões — como a concentração dos abandonos no segundo semestre —, por outro, somente a escuta dos próprios estudantes possibilita a interpretação desses padrões. As entrevistas foram realizadas mediante consentimento livre e esclarecido, com garantia de anonimato, e submetidas a análise de conteúdo por dois pesquisadores de forma independente.\n\nPrincipais resultados. Constatou-se, em primeiro lugar, que a evasão no primeiro ano não decorre de um único fator, mas da sobreposição de dificuldades de natureza econômica, pedagógica e afetiva. A necessidade de conciliação entre trabalho e estudo foi mencionada por mais da metade dos entrevistados que deixaram o curso. Em segundo lugar, verificou-se uma forte relação entre a reprovação em disciplinas introdutórias de cálculo e de leitura acadêmica e a decisão de abandono. Em terceiro lugar, a ausência de vínculos com colegas e professores apareceu como elemento decisivo: estudantes que relataram sentimento de isolamento nas primeiras semanas apresentaram probabilidade significativamente maior de desistência. Em quarto lugar, observou-se que a distância entre a residência e o campus, associada à precariedade do transporte coletivo noturno, agravou a situação dos estudantes de cursos noturnos, que frequentemente mencionaram o cansaço como justificativa para a ausência às aulas.\n\nDiscussão. Os resultados sugerem que a permanência estudantil não depende apenas da concessão de auxílios financeiros, cuja importância, contudo, não se questiona. A adaptação à cultura universitária — marcada pela exigência de autonomia, pela leitura de textos complexos e pela produção de gêneros acadêmicos pouco familiares — constitui um obstáculo frequentemente subestimado pelas instituições. Observa-se, ainda, que a oferta de apoio pedagógico existente é pouco conhecida: apenas uma minoria dos entrevistados declarou ter recorrido à monitoria ou ao serviço de orientação. Tal constatação indica que o problema reside menos na inexistência de serviços do que na sua divulgação. Tampouco se pode desconsiderar a dimensão afetiva: a construção de redes de amizade e a percepção de pertencimento ao ambiente acadêmico mostraram-se tão relevantes quanto o desempenho nas primeiras avaliações.\n\nRecomendações. Diante do exposto, recomenda-se: (a) a ampliação dos programas de auxílio estudantil, com prioridade para ingressantes em situação de vulnerabilidade socioeconômica; (b) a implementação de um programa de acolhimento nas primeiras semanas de aula, com a participação de estudantes veteranos como mentores; (c) a reformulação das disciplinas introdutórias, com a inclusão de atividades de nivelamento; (d) o fortalecimento da divulgação dos serviços de apoio pedagógico e psicológico; e (e) a criação de um sistema de acompanhamento que permita a identificação precoce de estudantes em risco, a partir de indicadores como a frequência às aulas e o desempenho nas primeiras avaliações.\n\nLimitações. Cabe ressaltar, por fim, que o estudo apresenta limitações. A restrição da amostra a uma única instituição impede a generalização dos resultados para o conjunto do sistema federal de ensino. Além disso, a dificuldade de contato com ex-estudantes pode ter produzido um viés, uma vez que aqueles que aceitaram participar talvez mantivessem uma relação menos conflituosa com a universidade. Sugere-se, portanto, a replicação da pesquisa em outras instituições, bem como a realização de um acompanhamento longitudinal dos estudantes que retornaram aos estudos após o trancamento da matrícula.",
     "gloss": {
+     "bem": "(bem como) así como, y también",
      "letivos": "lectivos",
      "evasão": "deserción",
      "ingressantes": "ingresantes",
@@ -4189,6 +4222,7 @@
      ]
     ],
     "gloss": {
+     "deixar": "(pode deixar) dejalo en mis manos, quedate tranquilo/a",
      "trecho": "fragmento",
      "relendo": "releyendo",
      "embalo": "envión, de un tirón",
@@ -4520,6 +4554,9 @@
      ]
     ],
     "gloss": {
+     "ar": "(tá no ar) estamos al aire",
+     "quanto": "(em tudo quanto é romance) en cualquier novela, en todas",
+     "agradeço": "(eu que agradeço / eu é que agradeço) gracias a vos",
      "estante": "biblioteca (mueble)",
      "restrita": "restringida",
      "camadas": "capas",
@@ -4659,6 +4696,7 @@
     "grammar": "orações reduzidas de gerúndio, particípio e infinitivo",
     "text": "A notícia saiu numa quinta-feira, espremida entre um acidente na marginal e a previsão de chuva: “Feira livre da Rua das Acácias será transferida para avenida vizinha”. Lida assim, parecia apenas mais uma decisão administrativa, dessas que ninguém comenta. Terminada a leitura, fechei o jornal e fui fazer café. Mas a frase ficou comigo o dia inteiro, zumbindo como mosca em janela fechada.\n\nMoro nesta rua há dezoito anos. Chegando aqui, recém-casado, descobri que as quartas-feiras tinham um som próprio: o estalo dos ferros das barracas sendo montadas às cinco da manhã, o grito do homem do pastel anunciando a primeira fornada, a discussão diária entre a dona da banca de flores e o feirante das bananas sobre quem invadira o espaço de quem. Acordando com aquele barulho, eu reclamava nos primeiros meses. Depois passei a esperar por ele, e hoje, confesso, durmo mal nas terças, ansioso por ouvi-lo.\n\nSegundo a nota oficial, a mudança atende a pedidos de moradores. Pedidos de quem, não se sabe. Perguntando aqui e ali, não encontrei ninguém que tivesse assinado abaixo-assinado algum. Encontrei, isso sim, o seu Tadashi, que vende verduras na mesma esquina desde antes de eu nascer e que, sabendo da transferência pelo sobrinho, passou a noite fazendo contas. “Na avenida, o freguês passa de carro”, disse ele, arrumando os maços de coentro com a delicadeza de quem penteia uma criança. “Aqui ele passa a pé. Quem passa a pé para, olha, conversa. Quem passa de carro só buzina.”\n\nNa padaria, ao comentar o assunto, ouvi opiniões divididas. O síndico do prédio da esquina, dizendo-se cansado de lavar a calçada toda quarta-feira, achou a mudança excelente. Uma professora aposentada, interrompendo o síndico sem cerimônia, lembrou que foi na feira que ela conheceu o marido, quarenta anos atrás, disputando o último cacho de uva. O padeiro, prudente, preferiu não tomar partido: vende pão para os dois lados. Saí de lá convencido de que ninguém tinha pedido nada a ninguém.\n\nHá quem diga que a feira suja a rua, atrapalha o trânsito, atrai pombos. Tudo verdade. Vista de cima, por uma janela de apartamento, ela deve parecer uma desordem de lonas coloridas e caixotes empilhados. Vista de perto, porém, é outra coisa. É o lugar onde a aposentada do 302 conversa com alguém pela primeira vez na semana; onde o menino aprende, ajudando o pai, a fazer troco de cabeça; onde a moça recém-chegada da Bahia encontra o tempero que não achava em nenhum mercado. Desmontada a última barraca, fica a rua suja, é verdade. Mas fica também uma cidade um pouco menos solitária.\n\nAo ler de novo a notícia, à noite, reparei num detalhe que me escapara: a transferência seria “provisória”, enquanto durassem as obras de recapeamento da avenida — ou seja, a feira iria justamente para a rua em obras. Tentei entender a lógica e desisti. Os jornais, sendo feitos às pressas, às vezes publicam o comunicado sem perguntar nada a ninguém. Não os culpo. Culpo um pouco a mim mesmo, que li a notícia sem estranhar, como quem lê a previsão do tempo.\n\nNa quarta-feira seguinte, levantei cedo e desci. As barracas ainda estavam lá, montadas como sempre. Seu Tadashi me contou, piscando o olho, que os feirantes tinham se reunido com um vereador e que a mudança fora adiada “para estudos”. Adiada, não cancelada. Aprendi, com os anos, que nesta cidade as coisas adiadas tanto podem voltar amanhã quanto nunca mais. Por via das dúvidas, a dona das flores já afixou na barraca um cartaz escrito à mão: “Daqui não saio”.\n\nComprei coentro de que não precisava, um pastel que não devia comer e flores para ninguém em particular. Voltando para casa, carregando as sacolas, pensei que a crônica talvez sirva para isto: para ler de novo, com vagar, as notícias que passam depressa demais. Por trás de cada nota de três linhas há uma rua, uma quarta-feira, um homem arrumando verduras como quem arruma a vida. Publicada a notícia, a cidade segue. Cabe a alguém lembrar que ela não segue igual.",
     "gloss": {
+     "cabe": "(cabe a alguém) le toca a alguien",
      "espremida": "apretujada",
      "marginal": "autopista urbana",
      "zumbindo": "zumbando",
@@ -5200,6 +5238,9 @@
      ]
     ],
     "gloss": {
+     "parar": "(vai parar na caixa de spam) termina en la carpeta de spam",
+     "imagina": "(respuesta a un gracias) ¡de nada!, ¡por favor!",
+     "pois": "(pois não) dígame, ¿en qué la ayudo?",
      "defendi": "defendí (la tesis)",
      "entrada": "(dar entrada) iniciar el trámite",
      "catalográfica": "(ficha catalográfica) ficha bibliográfica",
@@ -5344,6 +5385,7 @@
     "grammar": "formação de palavras",
     "text": "Numa padaria de qualquer cidade brasileira, a frase “me vê um cafezinho rapidinho?” não espanta ninguém. O cliente não quer necessariamente um café pequeno, nem está pedindo que o atendente saia correndo: está sendo gentil. O diminutivo, nesse caso, suaviza o pedido, aproxima as pessoas e revela algo que os linguistas repetem há décadas — no português do Brasil, as terminações das palavras dizem quase tanto quanto as próprias palavras.\n\nOs sufixos -inho e -zinho talvez sejam o exemplo mais famoso. Eles podem indicar tamanho (uma casinha no alto do morro), carinho (“vem cá, meu filhinho”), ironia (“que trabalhinho, hein?”) ou intensidade (“acordei cedinho”, “o pão está quentinho”). Há até diminutivos que perderam o sentido original e viraram palavras independentes: ninguém pensa em tamanho quando fala em “calcinha” ou na “folhinha” pendurada na parede da cozinha. Para a professora Helena Barros, que pesquisa morfologia numa universidade pública do Recife, o estrangeiro costuma errar menos na forma do que no tom. “O aluno aprende a dizer ‘obrigadinho’, mas não percebe que, dependendo da entonação, a palavra soa irônica”, observa.\n\nOs aumentativos seguem uma lógica parecida, só que ao contrário. Um casarão é uma casa grande, mas um golaço não é um gol comprido: é um gol bonito, digno de replay. Um filmão é um filme excelente, e um “jantarzão” é aquele jantar caprichado de domingo. Ao mesmo tempo, há aumentativos que carregam desprezo ou deboche: um narigão, um livrão chato, um “espertalhão”. Em outros casos, o sufixo -ão criou palavras novas, sem nenhuma ideia de tamanho: cartão, portão e salão têm parentesco com carta, porta e sala, mas hoje ninguém pensa neles como uma carta, uma porta ou uma sala gigantes.\n\nSe os sufixos dão cor, os prefixos costumam dar direção. O prefixo des- inverte (desfazer, desligar, descongelar), re- repete (reler, refazer, reescrever), pré- e pós- situam no tempo (pré-estreia, pós-graduação), e super-, hiper- e mega- exageram. Numa só manhã de trabalho, qualquer brasileiro pode ouvir que a reunião foi superprodutiva, que o trânsito estava hipercomplicado e que a promoção do supermercado é uma megaliquidação imperdível. Os gramáticos mais conservadores torcem o nariz para esses exageros, mas a língua não parece muito preocupada com a opinião deles.\n\nÉ justamente essa liberdade que permite ao idioma criar palavras sem pedir licença. Os sufixos -ção e -mento transformam verbos em substantivos: desmatar deu desmatamento, e lacrar, no sentido que o verbo ganhou nas redes sociais, deu lacração. O sufixo -eiro, que já nomeava ofícios antigos como padeiro e sapateiro, hoje produz concurseiro, quem passa anos estudando para concursos públicos. O -ista cria militâncias inteiras, como a do cicloativista. E a terminação -ar transforma quase qualquer palavra em verbo: printar uma conversa, zapear pelos canais, maratonar uma série. Um dos exemplos mais saborosos é sextou, forma verbal inventada a partir de “sexta-feira” para celebrar o fim da semana de trabalho. Ninguém conjuga “eu sexto, você sexta”, mas todo mundo entende o recado.\n\nAlém dos afixos, o português recorre a outros mecanismos. A composição junta duas palavras numa só: guarda-chuva, beija-flor, arranha-céu. O encurtamento, muito comum entre os jovens, corta a palavra pela metade: refrigerante vira refri, aniversário vira niver, faculdade vira facul. E há os cruzamentos, que fundem duas palavras numa terceira. O mais conhecido entre argentinos e uruguaios talvez seja portunhol, mistura de português e espanhol que muita gente fala sem admitir, especialmente nas cidades de fronteira.\n\nPara Barros, essa criatividade morfológica não é um detalhe técnico, mas uma janela para a cultura. “O diminutivo brasileiro tem muito a ver com a forma como a gente negocia a cortesia”, explica. “Pedir ‘um minutinho’ é pedir tempo sem parecer exigente. Dizer que a conta ficou ‘salgadinha’ é reclamar sem brigar.” Nesse sentido, o famoso jeitinho — ele mesmo um diminutivo — resumiria uma maneira de contornar obstáculos com flexibilidade, para o bem e para o mal.\n\nPara quem aprende português como língua estrangeira, a lição é dupla. Por um lado, conhecer os afixos mais produtivos permite adivinhar o sentido de milhares de palavras: quem sabe o que é fazer e o que significa re- entende refazer sem abrir o dicionário. Por outro, é preciso ouvir muito para captar as nuances de tom. Afinal, entre um cafezinho gentil e um trabalhinho irônico, a diferença não está no dicionário, mas no jeito de dizer.",
     "gloss": {
+     "vê": "(me vê um cafezinho?) ¿me das un cafecito?, al pedir",
      "espanta": "asombra, sorprende",
      "atendente": "el que atiende, el empleado",
      "suaviza": "suaviza, ablanda",
@@ -5545,6 +5587,8 @@
      ]
     ],
     "gloss": {
+     "vai": "(e por aí vai) y así, etcétera",
+     "agradeço": "(eu que agradeço / eu é que agradeço) gracias a vos",
      "mexer": "meterse con, tocar",
      "encurtar": "acortar",
      "acrescentar": "agregar",
@@ -5895,6 +5939,8 @@
      ]
     ],
     "gloss": {
+     "agradeço": "(eu que agradeço / eu é que agradeço) gracias a vos",
+     "deixar": "(pode deixar) dejalo en mis manos, quedate tranquilo/a",
      "armadilhas": "trampas",
      "vergonha": "vergüenza",
      "peça": "obra de teatro",
@@ -6248,6 +6294,8 @@
      ]
     ],
     "gloss": {
+     "ser": "(a não ser quando) salvo cuando",
+     "agradeço": "(eu que agradeço / eu é que agradeço) gracias a vos",
      "convidada": "invitada",
      "mestrado": "maestría",
      "quimbundo": "kimbundu, lengua bantú de Angola",
@@ -6391,6 +6439,9 @@
     "grammar": "argumentação e modalização",
     "text": "Poucas propostas têm dividido tanto a nossa cidade quanto a da tarifa zero no transporte coletivo. Nas últimas semanas, a Câmara Municipal voltou a discutir o tema, e o debate, como era de se esperar, rapidamente descambou para a caricatura. De um lado, estão os que veem na gratuidade dos ônibus a solução para todos os males urbanos; do outro, os que a tratam como um delírio populista, supostamente condenado a quebrar os cofres públicos. Convém, talvez, respirar fundo e examinar o assunto com menos paixão e mais argumentos.\n\nComecemos pelo que parece inegável. O modelo atual, em que a maior parte do custo do sistema é paga pelo passageiro na catraca, dá sinais evidentes de esgotamento. A cada reajuste, parte dos usuários desiste do ônibus e migra para a moto, para o carro ou, pior, simplesmente deixa de circular. Com menos passageiros, a receita cai, as empresas pressionam por novos aumentos, e o ciclo se repete. Não é preciso ser economista para perceber que se trata de um círculo vicioso. Quem mais perde, evidentemente, são os moradores das periferias, que gastam uma fatia desproporcional da renda com transporte e que, muitas vezes, deixam de procurar emprego ou de ir ao médico porque não podem pagar a passagem.\n\nOs defensores da tarifa zero argumentam que o transporte deveria ser tratado como um direito, assim como a saúde e a educação, e não como uma mercadoria. É um argumento forte. Afinal, ninguém exige que o aluno pague por aula assistida na escola pública. Além disso, as experiências de cidades brasileiras de pequeno e médio porte que adotaram a gratuidade sugerem que o número de passageiros tende a crescer rapidamente, que o comércio local provavelmente se beneficia e que o trânsito pode, em alguma medida, ficar menos congestionado.\n\nHá ainda um argumento ambiental que costuma ficar em segundo plano, mas que dificilmente pode ser descartado. Cada pessoa que troca o carro pelo ônibus significa menos emissões, menos ruído e menos disputa por espaço nas ruas. Numa cidade que sofre com ilhas de calor e com o ar poluído nos meses secos, esse benefício não é pequeno. É verdade que ele é difícil de medir em reais e centavos, e talvez por isso raramente apareça nas planilhas dos técnicos da prefeitura. Mas o fato de um benefício não caber numa planilha não significa, evidentemente, que ele não exista.\n\nSeria ingênuo, no entanto, ignorar as objeções. A primeira, e certamente a mais séria, é a do financiamento. Ônibus não andam de graça: alguém terá de pagar o combustível, os salários dos motoristas e a renovação da frota. Se a conta for simplesmente transferida para o orçamento municipal, é possível que outras áreas, como a saúde e a educação, acabem sacrificadas. A segunda objeção é a da qualidade. Um sistema gratuito, porém lotado e sucateado, dificilmente convenceria alguém a deixar o carro na garagem. Gratuidade sem investimento poderia, paradoxalmente, afastar justamente os passageiros que se pretendia atrair.\n\nHá ainda um argumento que, a meu ver, é bem mais frágil: o de que aquilo que é gratuito não é valorizado. Esse raciocínio, repetido à exaustão, parece partir de uma desconfiança em relação aos mais pobres que não resiste aos fatos. Ninguém sugere cobrar ingresso nas praças públicas para que elas sejam mais bem cuidadas, nem vender entrada para as bibliotecas municipais para que os livros sejam mais respeitados.\n\nOnde fico, então? Parece-me que a pergunta está mal formulada. Em vez de discutir se a tarifa zero é boa ou má, deveríamos discutir como financiá-la de forma justa e gradual. Algumas alternativas merecem, no mínimo, ser estudadas: uma contribuição maior das empresas, que hoje já custeiam boa parte do vale-transporte dos seus funcionários; uma taxa sobre estacionamentos privados em áreas centrais; ou a implantação da gratuidade por etapas, começando pelos domingos, pelos estudantes e pelas linhas que atendem os bairros mais pobres. Nenhuma dessas medidas é, sozinha, suficiente, mas, combinadas, poderiam tornar o projeto viável sem pôr em risco outros serviços essenciais.\n\nTampouco se devem esperar milagres. A tarifa zero, por si só, não resolverá o problema da mobilidade numa cidade do nosso tamanho. Sem corredores exclusivos, integração com o metrô e planejamento urbano, os ônibus continuarão presos no mesmo engarrafamento de sempre, só que sem cobrar passagem. Talvez o maior mérito da proposta seja justamente obrigar a cidade a discutir, com seriedade, o que quer para o seu transporte nas próximas décadas.\n\nO pior cenário, sem dúvida, seria a Câmara engavetar o assunto mais uma vez, à espera de uma solução perfeita que provavelmente nunca virá. Entre o populismo irresponsável e o imobilismo confortável, existe um amplo espaço para a política séria. Resta saber se os nossos vereadores estão dispostos a ocupá-lo.\n\nMarcelo Antunes é jornalista e escreve às quintas-feiras.",
     "gloss": {
+     "bem": "(mais bem cuidadas) mejor cuidadas: ante participio se dice mais bem",
+     "resta": "(resta saber) queda por ver",
+     "fico": "(onde fico, então?) ¿y yo qué postura tomo?",
      "descambou": "derivó (para peor)",
      "gratuidade": "gratuidad",
      "cofres": "arcas",
@@ -6587,6 +6638,7 @@
      ]
     ],
     "gloss": {
+     "duas": "(das duas uma) una de dos",
      "móveis": "muebles",
      "operador": "operario (de una máquina)",
      "entregas": "entregas",
@@ -6740,6 +6792,7 @@
     "grammar": "resumo e reformulação: verbos de dizer",
     "text": "Os adolescentes que estudam no turno da manhã dormem, em média, uma hora e meia a menos do que precisariam, e a conta aparece nas notas, no humor e até na saúde. É o que indica um estudo conduzido por pesquisadores de uma universidade pública de Minas Gerais com cerca de 1.200 alunos do ensino médio de catorze escolas estaduais e particulares. Os resultados, divulgados na semana passada, reacenderam uma discussão antiga entre educadores, médicos e famílias: não estaria a escola começando cedo demais?\n\nDurante dois meses, os estudantes usaram pulseiras que registram os períodos de sono e responderam a questionários sobre rotina, uso de celular e desempenho escolar. Nos dias de aula, eles dormiram, em média, seis horas e quarenta minutos por noite — bem menos do que as oito a dez horas que as sociedades médicas costumam recomendar para essa faixa etária. Nos fins de semana, o quadro se invertia: muitos passavam das onze horas de sono, numa tentativa de “pagar a dívida” acumulada ao longo da semana, o que, segundo os pesquisadores, só bagunça ainda mais o relógio do corpo.\n\nAs consequências não se limitam ao boletim. Os questionários mostraram que os alunos que dormiam menos de sete horas relatavam com mais frequência irritação, dificuldade de concentração e sintomas de ansiedade. Muitos também admitiam cochilar durante as aulas ou compensar o cansaço com café e bebidas energéticas. “A gente chega na escola e fica igual a um zumbi até o intervalo”, resume Júlia, de dezesseis anos, aluna de uma escola estadual de Contagem que participou do estudo. “Só começo a entender alguma coisa lá pelas dez horas.” Para os pesquisadores, depoimentos como o dela ajudam a entender por que as primeiras aulas do dia costumam render tão pouco, e por que tantos professores se queixam de turmas apáticas logo cedo.\n\nA coordenadora da pesquisa, a neurocientista Beatriz Lacerda, ressalta que o problema não se resume a preguiça ou excesso de telas. “Na adolescência, o relógio biológico sofre um atraso natural. O corpo passa a produzir melatonina mais tarde, e o jovem só sente sono perto da meia-noite, às vezes depois”, esclarece. “Exigir que ele esteja alerta às sete da manhã é, do ponto de vista biológico, como exigir que um adulto faça uma prova às quatro da madrugada.”\n\nO estudo também comparou turmas que começavam as aulas às sete horas com outras que entravam às oito ou mais tarde. Segundo os pesquisadores, os alunos que começavam mais tarde dormiam, em média, quarenta minutos a mais e relatavam menos sonolência durante as aulas. Lacerda admite, porém, que os dados não permitem afirmar que o horário, sozinho, explique as diferenças de desempenho. “Há muitos fatores envolvidos: renda familiar, tempo de deslocamento, trabalho fora da escola. Seria irresponsável da nossa parte prometer que atrasar o sinal resolve tudo”, pondera.\n\nA proposta de adiar o início das aulas está longe de ser consenso. O diretor de uma escola estadual da capital mineira que participou do estudo reconhece a importância dos resultados, mas adverte para os efeitos práticos da mudança. “Muitos dos nossos alunos trabalham à tarde ou cuidam dos irmãos menores. Se a aula terminar mais tarde, eles simplesmente não vão conseguir vir”, alega. Representantes de associações de pais lembram, por sua vez, que o horário escolar está amarrado ao horário de trabalho das famílias e ao transporte público, o que torna qualquer alteração bem mais complexa do que parece à primeira vista.\n\nHá também quem sustente que o foco deveria estar em outro lugar: no uso de celulares à noite. Um pediatra ouvido pela reportagem, que não participou da pesquisa, critica o que chama de “culpar o relógio” e defende campanhas de educação sobre o sono voltadas às famílias. Lacerda rebate o argumento sem negar o problema. “As telas agravam o atraso, sem dúvida. Mas o atraso existe mesmo em adolescentes que não usam celular. Não se trata de escolher entre uma coisa e outra”, afirma.\n\nA discussão não é exclusiva do Brasil. Em vários países, escolas e distritos já experimentaram atrasar o início das aulas, com resultados geralmente descritos como positivos, embora nem sempre fáceis de reproduzir em outros contextos. Os autores do estudo mineiro fazem questão de destacar esse ponto: em vez de uma regra nacional, sugerem experiências-piloto em redes de ensino interessadas, acompanhadas de perto por pesquisadores e avaliadas ao longo de pelo menos um ano letivo. A equipe já conversa com duas secretarias municipais de educação sobre um primeiro teste, mas prefere não antecipar nomes enquanto não houver um acordo assinado.\n\nEnquanto isso, a equipe recomenda medidas mais simples, que dependem menos de decisões políticas: evitar provas nos primeiros horários, reservar as primeiras aulas para atividades menos exigentes e conversar com os alunos e com os pais sobre a importância do sono. “Não precisamos esperar uma revolução para começar a mudar”, conclui Lacerda. “Só precisamos parar de tratar o adolescente com sono como um adolescente preguiçoso.”",
     "gloss": {
+     "questão": "(fazem questão de) se empeñan en",
      "turno": "turno (mañana, tarde)",
      "reacenderam": "reavivaron",
      "pulseiras": "pulseras",
@@ -6947,6 +7000,7 @@
      ]
     ],
     "gloss": {
+     "letras": "(com todas as letras) clarito, sin vueltas",
      "ouvidora": "defensora del lector",
      "matéria": "nota, artículo periodístico",
      "derruba": "tira abajo, hunde",
@@ -8036,6 +8090,7 @@
      ]
     ],
     "gloss": {
+     "agradeço": "(eu que agradeço / eu é que agradeço) gracias a vos",
      "salvador": "salvador",
      "demolir": "demoler",
      "concreto": "hormigón",
