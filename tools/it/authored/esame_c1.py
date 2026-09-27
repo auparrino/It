@@ -11,7 +11,14 @@ Quattro prove, distinte dal campo `prova`:
 
 Tutti gli item hanno w=52, level="C1", topic="esame".  I cloze portano un
 campo `text` con l'etichetta del testo, così l'app può raggrupparli.
-La parte di ascolto, lettura e scrittura è in docs/js/esame_data.js.
+La parte di ascolto, lettura, ricostruzione e scrittura è in
+docs/lang/it/esame_data.js.
+
+Tre versioni dell'esame (A, B, C): ogni item porta `ver`.  A: Testo 1 +
+trasformazioni 1-10, formazione 1-11, registro 1-7; B: Testo 2 + tr 11-19,
+fp 12-22, rg 8-14; C: Testo 3 + tr 20-28, fp 23-32, rg 15-20.  Nessun item
+entra nell'allenamento della settimana 52 (build_course.py li tiene fuori):
+si vedono solo nell'esame.
 """
 
 W = 52
@@ -20,6 +27,7 @@ T = "esame"
 
 T1 = "Testo 1: Il lavoro da remoto"
 T2 = "Testo 2: Il ritorno al paese"
+T3 = "Testo 3: Una città in bicicletta"
 
 P_CLOZE = "Completá con una sola palabra o con la forma pedida del verbo entre paréntesis."
 P_FORM = "Formá la palabra pedida a partir de la que está en la base."
@@ -27,8 +35,14 @@ P_TRAS = "Reescribí la frase manteniendo el sentido: escribí solo lo que falta
 P_REG = "Elegí el equivalente en el registro pedido."
 
 
+def _ver(n, a, b):
+    """Version of item n: 1..a → A, a+1..b → B, the rest → C."""
+    return "A" if n <= a else "B" if n <= b else "C"
+
+
 def cz(n, text, stem, answer, note, alt=None):
     d = dict(id="ex-cl-%02d" % n, type="cloze", topic=T, level=LV, w=W, prova="strutture",
+             ver={T1: "A", T2: "B", T3: "C"}[text],
              text=text, prompt=P_CLOZE, stem=stem, answer=answer, note=note)
     if alt:
         d["alt"] = alt
@@ -36,7 +50,7 @@ def cz(n, text, stem, answer, note, alt=None):
 
 
 def fp(n, stem, answer, note, alt=None):
-    d = dict(id="ex-fp-%02d" % n, type="cloze", topic=T, level=LV, w=W, prova="lessico",
+    d = dict(id="ex-fp-%02d" % n, type="cloze", topic=T, level=LV, w=W, prova="lessico", ver=_ver(n, 11, 22),
              prompt=P_FORM, stem=stem, answer=answer, note=note)
     if alt:
         d["alt"] = alt
@@ -44,7 +58,7 @@ def fp(n, stem, answer, note, alt=None):
 
 
 def tr(n, stem, answer, note, alt=None):
-    d = dict(id="ex-tr-%02d" % n, type="typed", topic=T, level=LV, w=W, prova="strutture",
+    d = dict(id="ex-tr-%02d" % n, type="typed", topic=T, level=LV, w=W, prova="strutture", ver=_ver(n, 10, 19),
              prompt=P_TRAS, stem=stem, answer=answer, note=note)
     if alt:
         d["alt"] = alt
@@ -52,7 +66,7 @@ def tr(n, stem, answer, note, alt=None):
 
 
 def rg(n, stem, options, answer, note):
-    return dict(id="ex-rg-%02d" % n, type="choice", topic=T, level=LV, w=W, prova="lessico",
+    return dict(id="ex-rg-%02d" % n, type="choice", topic=T, level=LV, w=W, prova="lessico", ver=_ver(n, 7, 14),
                 prompt=P_REG, stem=stem, options=options, answer=answer, note=note)
 
 
@@ -185,6 +199,51 @@ ITEMS = [
        "sarebbe restata", "Futuro en el pasado → condizionale passato; el participio concuerda con Elena (restata)."),
     cz(53, T2, "Aveva preso la decisione ___ sola, come avrebbe fatto la nonna.",
        "da", "«Por su cuenta, sin ayuda» se dice *da solo/da sola*: la preposición es *da*, no *per* ni *a*."),
+
+    # ------------------------------------------------------------------
+    # Cloze, Testo 3: Una città in bicicletta (versione C)
+    # ------------------------------------------------------------------
+    cz(54, T3, "Da qualche anno Bologna cerca di diventare una città ___ misura di ciclista.",
+       "a", "Expresión fija: «a misura di» = pensado para, a la medida de (a misura d'uomo, di bambino)."),
+    cz(55, T3, "Il Comune ha deciso ___ ridurre il limite di velocità a trenta all'ora in gran parte delle strade.",
+       "di", "«Decidere di» + infinito. En castellano «decidió reducir» va sin preposición."),
+    cz(56, T3, "All'inizio molti automobilisti temevano che il traffico ___ (peggiorare).",
+       "peggiorasse", "«Temere che» + congiuntivo; la principal en pasado pide el imperfetto (peggiorasse)."),
+    cz(57, T3, "I dati del primo anno, ___, raccontano un'altra storia.",
+       "tuttavia", "Conector adversativo entre comas: tuttavia / però / invece / comunque.", alt=["però", "invece", "comunque"]),
+    cz(58, T3, "Gli incidenti gravi sono diminuiti di un terzo, e non si è registrato ___ aumento dei tempi di percorrenza.",
+       "alcun", "«Non… alcun» (o «nessun») + sustantivo masculino singular: non si è registrato alcun aumento.", alt=["nessun"]),
+    cz(59, T3, "Le piste ciclabili, ___ lunghezza è raddoppiata in cinque anni, sono usate anche d'inverno.",
+       "la cui", "«Cui» posesivo: artículo + cui + sustantivo; el artículo concuerda con «lunghezza»."),
+    cz(60, T3, "Chi va al lavoro in bicicletta dice di sentirsi meno stressato ___ quando usava la macchina.",
+       "di", "Comparación con una oración temporal: «meno… di quando». También se oye «che quando».", alt=["che"]),
+    cz(61, T3, "Se le strade fossero più sicure, molti genitori ___ (lasciare) andare i figli a scuola da soli.",
+       "lascerebbero", "Período hipotético de la posibilidad: se + congiuntivo imperfetto → condizionale presente (lascerebbero)."),
+    cz(62, T3, "Non mancano le critiche: i commercianti lamentano ___ i clienti faticano a parcheggiare.",
+       "che", "«Lamentare che» + indicativo (hecho) o congiuntivo: el nexo es «che», sin preposición."),
+    cz(63, T3, "Alcuni negozi del centro, ___ (sostenere) i proprietari, hanno perso il dieci per cento degli incassi.",
+       "sostengono", "Inciso con verbo de decir y sujeto pospuesto: «sostengono i proprietari» (según dicen los dueños)."),
+    cz(64, T3, "Il Comune ha risposto ___ (costruire) nuovi parcheggi di scambio alle porte della città.",
+       "costruendo", "Gerundio modal: dice cómo respondió. Sin preposición: «rispondere costruendo»."),
+    cz(65, T3, "Da questi parcheggi partono navette elettriche ___ dieci minuti.",
+       "ogni", "Frecuencia: «ogni dieci minuti» (cada diez minutos), con el sustantivo en plural después de un número."),
+    cz(66, T3, "Resta il problema delle periferie, ___ le piste ciclabili sono ancora poche e mal collegate.",
+       "dove", "Relativo de lugar: «dove» / «in cui» / «nelle quali».", alt=["in cui", "nelle quali"]),
+    cz(67, T3, "È lì che si decide ___ il progetto avrà successo.",
+       "se", "Interrogativa indirecta total: «se» (= si). Con el futuro, indicativo."),
+    cz(68, T3, "Gli urbanisti raccomandano che i nuovi lavori ___ (concentrarsi) sui quartieri esterni.",
+       "si concentrino", "«Raccomandare che» + congiuntivo presente (principal en presente): si concentrino."),
+    cz(69, T3, "Una bicicletta costa molto ___ di un'automobile.",
+       "meno", "Comparativo de inferioridad: «meno… di» + sustantivo."),
+    cz(70, T3, "___ (considerare) tutti i costi, la bicicletta resta il mezzo più economico.",
+       "Considerati", "Participio absoluto: concuerda con «i costi» (considerati) y equivale a «se si considerano».",
+       alt=["Considerando"]),
+    cz(71, T3, "Molti cittadini non si fidano ancora: ___ serve, dicono, è una rete continua.",
+       "ciò che", "«Lo que» = «ciò che» / «quello che»; nunca «lo che».", alt=["quello che", "quel che"]),
+    cz(72, T3, "Se il Comune ___ (ascoltare) prima i quartieri, le polemiche sarebbero state minori.",
+       "avesse ascoltato", "Irrealidad en el pasado: se + congiuntivo trapassato → condizionale passato."),
+    cz(73, T3, "In ogni caso, indietro non ___ torna: la città è cambiata.",
+       "si", "«Si» impersonal: «non si torna indietro» (no hay vuelta atrás)."),
 
     # ------------------------------------------------------------------
     # Formazione di parole (lessico)
