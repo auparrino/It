@@ -173,6 +173,8 @@ fx(W, 1, "ortografia", "Bom dia, señor!", "señor", "senhor",
 gd(W, 1, [["España", "Espanha"], ["señor", "senhor"], ["montaña", "montanha"]], "año → ___", "ano", "anho",
    "La ñ suele pasar a nh, pero año es ano, con n simple (igual que dano, pano). "
    "No todas las ñ del español tienen nh en portugués.")
+# Como mitad → metade: la excepción va en la semana 3, con Ponte (conserva su id, s1-01-41).
+ITEMS[-1].update(w=3, part=2)
 gd(W, 1, [["ciudad", "cidade"], ["verdad", "verdade"], ["universidad", "universidade"]], "mitad → ___", "metade", "mitade",
    "-dad → -dade, pero la raíz también cambia: mitad es metade, con e. Mirá la palabra entera, no solo el final.")
 # La regla -dad → -dade la presenta Ponte en la semana 3: esta excepción va
@@ -573,8 +575,8 @@ ch(W, 2, "Sou ___.", ["engenheira", "uma engenheira", "a engenheira"], "engenhei
    "La profesión con ser va sin artículo: sou engenheira.", prompt="«Soy ingeniera.»")
 ch(W, 2, "Trabalho num ___.", ["escritório", "oficina", "ofício"], "escritório",
    "Falso amigo: *escritório* es la «oficina» de trabajo; *oficina* es el «taller mecánico». Trabajás *num escritório*.", prompt="«Trabajo en una oficina.»")
-ch(W, 2, "Eu ___ cedo.", ["acordo", "me acordo", "acorda"], "acordo",
-   "Acordar = despertarse, sin pronombre: eu acordo cedo.", prompt="«Me despierto temprano.»")
+ch(W, 2, "Eu ___ cedo.", ["acordo", "despierto", "acorda"], "acordo",
+   "Acordar = despertarse, sin pronombre: eu acordo cedo. *Despierto* es español.", prompt="«Me despierto temprano.»")
 ch(W, 2, "Eu ___ ao meio-dia.", ["almoço", "almorzo", "almoça"], "almoço",
    "almoçar → eu almoço, con ç.", prompt="«Almuerzo al mediodía.»")
 ch(W, 2, "___ noite a gente janta em casa.", ["À", "A", "Na"], "À",

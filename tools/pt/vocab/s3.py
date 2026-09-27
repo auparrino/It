@@ -85,7 +85,7 @@ VOCAB = {
     ["o fofoqueiro", "el chismoso", "Ele é tão fofoqueiro que contou para o prédio inteiro.", "Femenino *fofoqueira*; sustantivo y adjetivo: *ele é fofoqueiro*."],
     ["o fuxico", "el chisme (coloquial)", "Parem com o fuxico: ela disse que não tinha nada a ver com isso.", "Coloquial, más del Nordeste y de Minas. Verbo: *fuxicar* = chusmear. La *x* suena «sh»."],
     ["a matéria", "la nota periodística", "Li uma matéria sobre a história da Lapa.", "En periodismo, la nota: *uma matéria sobre…*. En la escuela, la asignatura: *qual é sua matéria favorita?*"],
-    ["espalhar", "desparramar, difundir", "Alguém espalhou que o prédio ia ser vendido.", "*Espalhar a notícia* = difundirla; *espalhar-se* = desparramarse. *Lh* suena parecido a «li»."],
+    ["espalhar", "desparramar, difundir", "Alguém espalhou que o prédio ia ser vendido.", "*Espalhar a notícia* = difundirla; *espalhar-se* = desparramarse. *Lh* es una sola consonante, como la «ll» de «calle» dicha a la antigua (nunca «li»)."],
     ["o babado", "el chisme jugoso (coloquial)", "Menina, tenho um babado pra te contar!", "Coloquial: *tenho um babado pra te contar*. Literal: el volado de una prenda."],
     ["o furo", "la primicia; también «el agujero»", "O jornal deu o furo antes de todo mundo.", "*Dar um furo* = sacar la primicia. En el habla, *furar* = faltar a una cita: *ele furou*."],
     ["a pauta", "el temario, la agenda de temas", "O repórter perguntou se o assunto estava na pauta.", "*Estar na pauta* = estar en agenda. También el pentagrama de música."],
