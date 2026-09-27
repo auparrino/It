@@ -338,7 +338,8 @@ def item_texts(item):
     read = ""
     if typ == "garden":
         read = " ".join(w for pair in (item.get("lead") or []) for w in pair)
-    if item.get("type") != "translate":           # translate: the stem is Spanish
+    # translate: the stem is Spanish; «stemEs»: a situation in Spanish
+    if item.get("type") != "translate" and not item.get("stemEs"):
         stem = re.sub(r"\([^)]*\)", " ", item.get("stem") or "")
         for a in answers:
             stem = stem.replace("___", a, 1)

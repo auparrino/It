@@ -944,6 +944,9 @@ LESSONS = {
   "match": r"^(?!.*(sujeto al final|\bquale\b|qual è|\bquali\b)).*\S"},
  {"h": "che o quale, y el sujeto al final", "blocks": [3, 4],
   "match": r"sujeto|quale|qual"},
+ {"h": "Pedir con cortesía", "blocks": [5],
+  "ids": ["pr-08-%02d" % n for n in range(1, 13)],
+  "match": r"^(?!)"},
 ],
 "blocks": [
  {"h": "Sí o no: solo entonación",
@@ -1017,6 +1020,25 @@ LESSONS = {
   "ex": [["Dove abita *Marco*?", "¿Dónde vive Marco?"],
          ["Che cosa dice *il professore*?", "¿Qué dice el profesor?"],
          ["Quanto costano *queste scarpe*?", "¿Cuánto cuestan estos zapatos?"]]},
+
+ {"h": "Pedir con cortesía: mi scusi, per caso, un attimo",
+  "r": "**Abrí** con *mi scusi* (usted) o *scusa* (vos) y **suavizá** con *per "
+       "favore*, *per caso* o una pregunta: *può…?*",
+  "ex": [["*Mi scusi*, *sa* dov'è la stazione?", "Disculpe, ¿sabe dónde está la estación?"],
+         ["*Scusa*, *per caso* hai una penna?", "Perdón, ¿no tendrás una lapicera?"],
+         ["*Può* ripetere, *per favore*?", "¿Puede repetir, por favor?"],
+         ["*Un attimo*, *per favore*.", "Un momento, por favor."]],
+  "warn": "*Voglio un caffè* es gramatical, pero en el bar suena a orden. Alcanza "
+          "con *un caffè, per favore*: es lo que dice todo el mundo.",
+  "tip": "*Per caso* es el «¿no tendrás…?» del castellano: convierte la pregunta "
+         "en un pedido que el otro puede rechazar sin quedar mal.",
+  "more": ["Tres fórmulas que vas a oír desde el primer día y que se aprenden "
+           "enteras: *senta!* (¡oiga!, para llamar la atención), *volevo chiedere* "
+           "(quería preguntar) y *vorrei* (quisiera). Su gramática llega en las "
+           "semanas 12, 15 y 20.",
+           "Pasarse también es un error: tres disculpas seguidas y dos *per favore* "
+           "suenan a súplica o a burla. Una fórmula al principio alcanza."],
+  "qq": [{"prompt": "En la calle, a una señora que no conocés", "answer": "Mi scusi, sa dov'è la stazione?", "options": ["Mi scusi, sa dov'è la stazione?", "Dov'è la stazione?", "Scusa, dov'è la stazione?"]}]},
 ]},
 
 9: {

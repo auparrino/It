@@ -68,6 +68,24 @@ LESSONS = {
   "more": ["Si el que falta sos vos, el verbo va en primera: *gli manco* "
            "(ellos me extrañan: yo les falto), *ci mancate* (los extrañamos a "
            "ustedes). Primero preguntate quién falta: ese es el sujeto."]},
+
+ {"h": "Invitar, aceptar y decir que no",
+  "r": "Se invita con una **pregunta** (*ti va di…?*, *vuoi…?*) y se rechaza con "
+       "**disculpa y motivo**: *mi dispiace, ma…*.",
+  "ex": [["*Ti va di* venire al cinema stasera?", "¿Tenés ganas de venir al cine esta noche?"],
+         ["Sì, *volentieri*!", "¡Sí, con gusto!"],
+         ["*Mi dispiace, ma* stasera lavoro. *Magari un'altra volta*!", "Lo siento, pero esta noche trabajo. ¡Otra vez será!"],
+         ["*Purtroppo* non posso: ho un esame.", "Lamentablemente no puedo: tengo un examen."]],
+  "warn": "Un *no* solo, sin motivo, suena a desplante. El motivo puede ser vago "
+          "(*ho già un impegno*, ya tengo un compromiso): lo que cuenta es darlo.",
+  "tip": "*Magari un'altra volta* rechaza sin cerrar la puerta. Si no querés que "
+         "te vuelvan a invitar, no lo digas.",
+  "more": ["*Ti va di* + infinitivo es «¿tenés ganas de…?», con *andare* y el "
+           "pronombre como *piacere*: *ti va*, *le va*. Otra invitación muy común, "
+           "*che ne dici di…?* (¿qué te parece si…?), lleva el *ne* de la semana 21.",
+           "Para aceptar con entusiasmo: *certo!*, *perché no?*, *ci sto!* (¡me "
+           "prendo!). Para dudar: *non so, ti faccio sapere* (no sé, te aviso)."],
+  "qq": [{"prompt": "Un amigo te invita a cenar y no podés", "answer": "Mi dispiace, ma stasera non posso.", "options": ["Mi dispiace, ma stasera non posso.", "No.", "Non mi va di venire da te."]}]},
 ]},
 
 15: {
@@ -544,6 +562,24 @@ LESSONS = {
           "Es como decir «si tendría» en castellano.",
   "tip": "La estructura completa llega en la semana 33: por ahora, "
          "reconocela."},
+
+ {"h": "Pedir en escala: de puoi a le dispiacerebbe",
+  "r": "Cuanto más **grande** el favor o más **lejana** la persona, más suave el "
+       "pedido: *puoi* → *potresti* → *le dispiacerebbe*.",
+  "table": {"head": ["Pedido", "Cuándo"],
+            "rows": [["Mi passi il sale?", "en la mesa, en confianza"],
+                     ["Vorrei un biglietto per Roma.", "en un negocio o una ventanilla"],
+                     ["Potrebbe chiudere la finestra?", "a un desconocido"],
+                     ["Le dispiacerebbe spostare la macchina?", "un favor grande a un desconocido"],
+                     ["Sarebbe possibile cambiare la data?", "en una oficina, en un mail"],
+                     ["Non è che mi presteresti la bici?", "en confianza, un favor que da vergüenza"]]},
+  "ex": [["*Potrebbe* aprire la finestra?", "¿Podría abrir la ventana?"],
+         ["*Le dispiacerebbe* parlare più piano?", "¿Le molestaría hablar más despacio?"],
+         ["*Sarebbe possibile* avere una camera più tranquilla?", "¿Sería posible tener una habitación más tranquila?"]],
+  "warn": "*Le dispiacerebbe* para pedir la sal en la mesa suena a burla. La "
+          "cortesía va en escala: se usa la que pide la situación.",
+  "tip": "*Non è che…?* + condizionale es el pedido tímido entre amigos: *non è "
+         "che mi daresti una mano?* (¿no me darías una mano?)."},
 ]},
 
 21: {
@@ -964,6 +1000,20 @@ LESSONS = {
   "qq": [{"prompt": "Elegí la que va", "stem": "Ti chiamo prima che tu ___.", "answer": "parta", "options": ["parta", "parti", "partire"]},
          {"prompt": "Elegí la que va", "stem": "Anche se ___, esco.", "answer": "piove", "options": ["piove", "piova", "piovere"]},
          {"prompt": "Elegí la que va", "stem": "Cerco qualcuno che ___ il tedesco.", "answer": "sappia", "options": ["sappia", "sa", "sapere"]}]},
+
+ {"h": "Opinar y matizar sin imponer",
+  "r": "La opinión se **presenta como tuya**: *secondo me* (+ indicativo), *mi "
+       "sembra che* (+ congiuntivo). *Forse* y *non so se* matizan.",
+  "ex": [["*Secondo me* è troppo caro.", "Para mí es demasiado caro."],
+         ["*Mi sembra che* sia una buona idea.", "Me parece que es una buena idea."],
+         ["*Mi sa che* ha ragione lei.", "Me da que tiene razón ella."],
+         ["*Non so se* sia la soluzione giusta.", "No sé si es la solución correcta."]],
+  "warn": "*Hai torto* o *è così e basta* cierran la charla. Para disentir, primero "
+          "concedé algo: *capisco, però…*, *può darsi, ma secondo me…*.",
+  "tip": "*Mi sa che* (me da que) es coloquial y va con indicativo; *direi che* "
+         "(diría que) sirve en cualquier registro.",
+  "more": ["Pasarse de matices también confunde: *forse, non so, magari, può "
+           "darsi…* todo junto parece que no tenés opinión. Uno o dos alcanzan."]},
 ]},
 
 26: {
@@ -977,6 +1027,8 @@ LESSONS = {
   "match": r"^(?!.*piac).*(pronombre|combinad|«ne»|\bne\b|\bci\b|congiuntivo|subjuntivo|posesiv|indefinid)"},
  {"h": "Repaso: trampas de los verbos y de la frase", "blocks": [6, 7],
   "match": r"\S"},
+ {"h": "Las tres Italias", "blocks": [8],
+  "match": r"^(?!)"},
 ],
 "blocks": [
  {"h": "El mapa de los tiempos",
@@ -1081,6 +1133,21 @@ LESSONS = {
          ["Ho *qualche* amico a Roma.", "Tengo algunos amigos en Roma."]],
   "tip": "7. *mio padre*, sin artículo; pero *il loro padre* y *i miei "
          "fratelli*, con artículo."},
+
+ {"h": "Las tres Italias: cómo suena cada región",
+  "r": "Italia tiene **tres grandes zonas** de habla: norte, centro y sur. El "
+       "italiano es el mismo; cambian el acento y algunos usos.",
+  "table": {"head": ["Zona", "Qué se oye", "Ejemplo"],
+            "rows": [["Norte (Milano, Torino, Venezia)", "e y o cerradas; s sonora; passato prossimo siempre", "Ieri sono andato: nunca «andai»"],
+                     ["Centro (Firenze, Roma)", "la c aspirada en Toscana; si por noi", "la hasa; noi si va"],
+                     ["Sur (Napoli, Bari, Palermo)", "stare por essere; tenere por avere; passato remoto hablado", "sto stanco; tengo fame; ieri andai"]]},
+  "ex": [["*Ho* fame.", "Tengo hambre. En el sur se oye «tengo fame»."],
+         ["*Sono* stanco.", "Estoy cansado. En el sur se oye «sto stanco»."],
+         ["Ieri *sono andato* al mare.", "Ayer fui al mar. En el sur también se oye «ieri andai»."]],
+  "warn": "*Tengo fame* te va a sonar natural, pero en estándar es *ho fame*. "
+          "Reconocelo al oírlo; no lo copies.",
+  "tip": "El *dialetto* es otra lengua (el napolitano, el véneto); el *italiano "
+         "regionale* es el italiano con acento y giros de la zona."},
 ]},
 
 }

@@ -450,6 +450,21 @@ LESSONS = {
   "ex": [["Il ladro *sarebbe fuggito* in auto.", "El ladrón habría huido en auto."],
          ["Secondo il giornale, *avrebbero* già *firmato*.", "Según el diario, ya habrían firmado."],
          ["Il ministro *si sarebbe dimesso* ieri sera.", "El ministro habría renunciado anoche."]]},
+
+ {"h": "Quejarse y reclamar sin perder la razón",
+  "r": "Un reclamo tiene **tres pasos**: el hecho, lo que esperabas y lo que "
+       "pedís. Firme, sin gritos ni disculpas de más.",
+  "ex": [["*Mi scusi, ma* la lavatrice che ho comprato non funziona.", "Disculpe, pero el lavarropas que compré no funciona."],
+         ["*Mi aspettavo che* arrivasse entro venerdì.", "Esperaba que llegara antes del viernes."],
+         ["*Vorrei segnalare* un problema con la fattura.", "Quisiera señalar un problema con la factura."],
+         ["*Non è possibile che* nessuno mi abbia avvisato.", "No puede ser que nadie me haya avisado."]],
+  "warn": "*È una vergogna!* o *esigo* (exijo) suben el conflicto y te dejan sin "
+          "margen. Guardalos para cuando lo amable ya no funcionó.",
+  "tip": "*Mi scusi, ma…* abre el reclamo: la disculpa es de forma, el *ma* "
+         "anuncia la queja.",
+  "more": ["En un mail: *Le scrivo per segnalare…*, *Mi aspetterei una risposta "
+           "entro…*, *Resto in attesa di un Suo riscontro* (quedo a la espera de "
+           "su respuesta). Lo oral y lo escrito piden la misma estructura."]},
 ]},
 
 32: {
@@ -799,6 +814,20 @@ LESSONS = {
          ["Allora, *si mangia*?", "Bueno, ¿comemos?"]],
   "tip": "Es informal pero muy extendido: tenés que entenderlo; usarlo no "
          "hace falta."},
+
+ {"h": "Acuerdo a medias, interrumpir, tomar la palabra",
+  "r": "Para disentir **concedé primero**: *sì, ma…*, *hai ragione, però…*. Para "
+       "interrumpir, **pedí permiso**: *scusa se ti interrompo*.",
+  "ex": [["*Hai ragione, però* non si può fare tutto subito.", "Tenés razón, pero no se puede hacer todo ya."],
+         ["*Da un lato* è comodo, *dall'altro* costa molto.", "Por un lado es cómodo, por el otro cuesta mucho."],
+         ["*Scusa se ti interrompo*: posso dire una cosa?", "Perdón que te interrumpa: ¿puedo decir algo?"],
+         ["*Fammi finire*, per favore.", "Dejame terminar, por favor."]],
+  "warn": "En italiano se superponen las voces más que en otras lenguas, pero "
+          "cortar sin fórmula (*no, no, sbagli!*) sigue siendo agresivo.",
+  "tip": "*Fammi finire* defiende tu turno sin pelear; *prego, continua* "
+         "(seguí, por favor) lo devuelve.",
+  "more": ["Para volver al tema: *come dicevo* (como decía). Para cambiar de tema "
+           "sin brusquedad: *a proposito* (a propósito), *cambiando discorso*."]},
 ]},
 
 37: {
