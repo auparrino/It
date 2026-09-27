@@ -302,7 +302,9 @@ const NAMES = { it: { today: "Oggi", me: "Io", other: "pt" }, pt: { today: "Hoje
     const key = { it: "laviac1.save.v1", pt: "rumoc1.save.v1" }[code];
     const saved = () => page.evaluate((k) => { const s = JSON.parse(localStorage.getItem(k) || "{}"); return [s.xp, s.unlocked]; }, key);
     await page.click("[data-tab='io']");
-    const before = await saved();
+    // what the app has in memory (the test changed it without saving): the
+    // switch saves it before leaving, and it has to be there on the way back
+    const before = await page.evaluate(() => { const s = window.__test.state(); return [s.xp, s.unlocked]; });
     await page.waitForSelector("#switchlang");
     await page.click("#switchlang");
     await page.waitForSelector("#pausa", { timeout: 20000 });

@@ -77,7 +77,17 @@
   }
 
   var saveWarned = false;
+  /* Saving writes the whole state (hundreds of KB after a few months): a
+     burst of changes (every answer, every key in the exam) is saved once,
+     a quarter of a second later, and right away when the app is hidden or
+     closed. */
+  var persistTimer = null;
   function persist() {
+    if (persistTimer) return;
+    persistTimer = setTimeout(flushPersist, 250);
+  }
+  function flushPersist() {
+    if (persistTimer) { clearTimeout(persistTimer); persistTimer = null; }
     if (!Engine.save(state) && !saveWarned) {
       saveWarned = true;
       toast("⚠️ No puedo guardar tu progreso: el teléfono no tiene espacio o bloquea el almacenamiento. " +
@@ -597,12 +607,22 @@
     if (away >= 3 && state.totals.attempts > 0) {
       html += '<div class="card weekcard first ritorno"><span class="muted">👋 Volviste después de ' + away + " días</span>" +
         "<b>Lo que aprendiste no se borró: re-aprender lleva una fracción del tiempo.</b>" +
+        (state.streakBroken && state.streakBroken.n > 1 ? '<span class="muted small">La racha de ' + state.streakBroken.n + " días se cortó; tu mejor racha queda en " + (state.bestStreak || state.streakBroken.n) + ". Hoy empieza otra.</span>" : "") +
         '<span class="muted">' + (fresh === "semana" ? "Y es lunes: buen día para retomar. " : fresh === "mes" ? "Y empieza el mes: buen momento para volver. " : "") +
           "Cinco minutos con lo que más se enfrió y seguimos" + (ideal ? " hacia lo tuyo: «" + esc(ideal) + "»" : "") + ".</span>" +
         '<span class="row" style="margin-top:10px"><button class="btn" id="ritorno">▶︎ 5 minutos para retomar</button></span>' +
         (state.pauseAsk !== Engine.dayKey() ? '<span class="muted small">¿Qué pasó? <button class="tab" data-why="tiempo">sin tiempo</button> ' +
           '<button class="tab" data-why="dificil">se puso difícil</button> <button class="tab" data-why="aburrido">me aburrí</button> ' +
           '<button class="tab" data-why="olvide">me olvidé</button></span>' : "") + "</div>";
+    }
+    // A copy now and then: the save lives only on this phone (and Safari
+    // clears it after seven days without use if the app is not installed).
+    var sinceCopy = state.exportedAt ? Math.floor((Date.now() - state.exportedAt) / 86400000) : null;
+    if (state.totals.attempts >= 60 && (sinceCopy == null || sinceCopy >= 14) && state.backupSkip !== Engine.weekKey()) {
+      html += '<div class="card weekcard backup"><span class="muted">💾 ' + (sinceCopy == null ? "Todavía no guardaste una copia de tu progreso" : "Hace " + sinceCopy + " días que no guardás una copia") + "</span>" +
+        "<b>Tu progreso vive solo en este teléfono.</b>" +
+        '<span class="muted small">Una copia en Drive, en el mail o en un chat te lo guarda si cambiás de teléfono o se borran los datos.</span>' +
+        '<span class="row" style="margin-top:10px"><button class="btn" id="bkgo">Guardar una copia</button><button class="tab" id="bkskip">Ahora no</button></span></div>';
     }
     if (!state.ideal && state.totals.attempts >= 10) {
       html += '<div class="card weekcard"><span class="muted">🎯 ¿Para qué querés ' + UI.langEs + "?</span>" +
@@ -681,6 +701,8 @@
 
   function wireHabit() {
     on("#ritorno", function () { state.pauseAsk = Engine.dayKey(); persist(); startRound("ritorno"); });
+    on("#bkgo", function () { exportSave(); render(); });
+    on("#bkskip", function () { state.backupSkip = Engine.weekKey(); persist(); render(); });
     document.querySelectorAll("[data-why]").forEach(function (b) {
       b.onclick = function () {
         if (!state.pauses) state.pauses = [];
@@ -1597,11 +1619,15 @@
       Letture.ofSeries(sr.id).forEach(function (ep) {
         if (readingWeek(ep) !== w.week) return;
         var d = (state.letture || {})[ep.id];
-        m({ kind: "ep", arg: ep.id, done: !!d, ico: ep.emoji,
+        // Martín, «La settimana» and the long reading are part of the week;
+        // culture and the input floods are optional for real (they said so
+        // and still held the next week closed)
+        var optional = ep.series !== "martin" && ep.series !== "settimana" && ep.series !== "lunga";
+        m({ kind: "ep", arg: ep.id, done: !!d, ico: ep.emoji, opt: optional,
             title: (ep.series === "settimana" ? "Lectura y comprensión: " : ep.series === "lunga" ? "Lectura larga: " : ep.series === "martin" ? "Lectura: " : "Cultura: ") + ep.title,
             sub: d ? "Leída · " + d.pct + "%" : esc(ep.level) + " · " + (ep.series === "lunga" ? esc(ep.genre) + " · " + Letture.allTokens(ep).length + " palabras, preguntas en " + UI.langEs
                    : esc(ep.area || ep.grammar || "")) +
-                 (ep.series === "martin" || ep.series === "settimana" || ep.series === "lunga" ? "" : " · opcional") });
+                 (optional ? " · opcional" : "") });
       });
     });
     if (window.Tramo) Tramo.missions(w, state).forEach(m);   // tramo C1 (tramo.js): escucha larga y tarea
@@ -2589,15 +2615,23 @@
     // weeks), so the review queue holds errors, phrases and words, not
     // every exercise ever seen.
     if (it.src !== "coniugatore" && it.src !== "lettura" && !it.nocard) {
-      var light = !it.frase && it.src !== "vocab" && it.src !== "lab" && it.src !== "banca" && !it.retry &&
+      // Only a written answer earns the light card: right in a multiple
+      // choice is recognition, and it comes back in days to be written.
+      var produced = !it.recog && it.type !== "choice" && !it.options;
+      var light = produced && !it.frase && it.src !== "vocab" && it.src !== "lab" && it.src !== "banca" && !it.retry &&
                   (round.kind === "round" || round.kind === "sfida" || round.kind === "giorno" || round.kind === "boss" || round.kind === "domina");
+      // How long it took: right and quick (under half of what counts as slow
+      // for this kind of item) is Easy; right and slow is Hard.
+      var slowT = window.Devolucion && Devolucion.slowAfter ? Devolucion.slowAfter(it) : null;
+      var fast = q === 2 && produced && !round.tried && took != null && slowT && took < slowT / 2;
+      var slow = q === 2 && took != null && slowT && took > slowT * 1.5;
       // The diagnosis says what kind of mistake it was (a slip, a word, a rule).
       var dg = round.lastDiag; round.lastDiag = null;
       var ekind = q === 1 && (!dg || dg.slip) ? "slip"
         : q === 0 && dg && LEXICAL[dg.cat] ? "vocab" : q === 0 ? "rule" : null;
       state.cards[it.id] = Engine.schedule(state.cards[it.id], q, {
         light: light, kind: ekind, id: it.id, state: state, retry: !!it.retry, hint: !!round.tried || !!opts.fixed,
-        notte: state.notte !== false });
+        fast: !!fast, slow: !!slow, ms: took, notte: state.notte !== false });
       Engine.maybeFit(state);
     }
     // Productive practice of the week's own rule, day by day (a rule is a
@@ -2778,6 +2812,12 @@
     $("#fb").scrollIntoView({ behavior: "smooth", block: "nearest" });
     // The keyboard goes on: Enter (or the screen reader) lands on «Siguiente».
     try { $("#next").focus({ preventScroll: true }); } catch (e) { /* */ }
+    // The answer is already counted (xp, card, lives): if the app closes now,
+    // «Retomar» has to start from the next question, not ask this one again.
+    var i0 = round.i;
+    round.i = i0 + 1;
+    savePending();
+    round.i = i0;
   }
 
   /* The second time comes in another shape: two options with the rule in
@@ -3645,9 +3685,15 @@
     return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate());
   }
 
+  /* The copy goes in an envelope that says which app, which language and
+     which version made it: a copy of Italian is not restored over
+     Portuguese by mistake. */
   function exportSave() {
     var name = UI.exportFile + stamp() + ".json";
-    var blob = new Blob([JSON.stringify(state)], { type: "application/json" });
+    state.exportedAt = Date.now();
+    persist();
+    var env = { app: "c1", lang: LG.code, brand: LG.brand, v: APP_VERSION, at: new Date().toISOString(), save: state };
+    var blob = new Blob([JSON.stringify(env)], { type: "application/json" });
     // On phones, the share sheet lets you drop the file in Drive, mail or chat.
     try {
       var file = new File([blob], name, { type: "application/json" });
@@ -3673,11 +3719,17 @@
     var reader = new FileReader();
     reader.onload = function () {
       try {
-        var s = JSON.parse(reader.result);
-        if (typeof s.xp !== "number" || !s.cards) throw new Error("formato");
+        var j = JSON.parse(reader.result), s = j && j.app === "c1" && j.save ? j.save : j;
+        if (!s || typeof s.xp !== "number" || !s.cards) throw new Error("formato");
+        if (j.app === "c1" && j.lang && j.lang !== LG.code) {
+          var other = (window.Boot && Boot.LANGS && Boot.LANGS[j.lang]) || {};
+          toast("Esta copia es de " + (j.brand || other.brand || j.lang) + ". Cambiá de idioma en " + UI.me + " y restaurala ahí.");
+          return;
+        }
         if (!confirm("Esto reemplaza tu progreso actual por la copia (" + s.xp +
-                     " xp). ¿Seguir?")) return;
-        state = Engine.sanitize(Engine.migrateSyllabus(s));
+                     " xp" + (j.at ? ", del " + new Date(j.at).toLocaleDateString("es-AR") : "") + "). ¿Seguir?")) return;
+        state = Engine.fromRaw(s);
+        clearPending();
         persist();
         renderHeader();
         render();
@@ -4436,7 +4488,7 @@
         var reply = sentenceCase(String(data.risposta || "").trim() || UI.ok), row = ["ia", reply];
         parla.history.push(row);
         if (data.recast && Engine.normalise(data.recast) !== Engine.normalise(text)) parla.recasts.push([text, String(data.recast), String(data.nota_es || "")]);
-        (data.obiettivi_raggiunti || []).forEach(function (n) { n = +n; if (n >= 1 && n <= 3 && parla.obj.indexOf(n) < 0) parla.obj.push(n); });
+        (Array.isArray(data.obiettivi_raggiunti) ? data.obiettivi_raggiunti : []).forEach(function (n) { n = +n; if (n >= 1 && n <= 3 && parla.obj.indexOf(n) < 0) parla.obj.push(n); });
         if (view.screen !== "parla") return;
         render();
         speak(reply);
@@ -4839,10 +4891,26 @@
       texts.forEach(function (x) {
         var task = x[0], text = x[1], title = kindName(task.kind);
         var local = function () {
+          // Without a key: the same review as the C1 task, which does not
+          // fall for padding or repetition (a text of «ciao» 200 times got
+          // 20/20 here).  Length and lexical variety are required: without
+          // them the grade stays under the pass mark.  It is a guide, not a
+          // grade: the page says so.
           var chk = Scrivi.check(text, 52), hard = chk.findings.filter(function (f) { return !f.soft; }).length;
-          var words = text.split(/\s+/).filter(Boolean).length, wordsOk = Math.min(1, words / task.words);
-          var score = Math.round((wordsOk * 8 + Math.max(0, 12 - hard * 1.5)) * 10) / 10;
-          parts.push({ title: title, local: words + " palabras · " + hard + " errores marcados por el corrector propio → " + score + " / 20", errors: [] });
+          var words = text.split(/\s+/).filter(Boolean).length, score, detail = "";
+          if (window.Tramo && Tramo.evaluate) {
+            var genres = (window.TRAMO_DATA && TRAMO_DATA.GENRES) || {}, keys = Object.keys(genres);
+            var genre = keys.filter(function (k) { return task.kind === "formale" ? /formal/.test(k) : /saggio|opiniao|articolo|artigo/.test(k); })[0] || keys[0];
+            var ev = Tramo.evaluate({ genre: genre, min: Math.round(task.words * 0.8), max: Math.round(task.words * 1.6), punti: task.punti || [] }, text, 52);
+            var need = ev.crit.filter(function (c) { return c.need; }), needOk = need.every(function (c) { return c.ok; });
+            var frac = ev.score / Math.max(1, ev.of), errPart = Math.max(0, 1 - hard / Math.max(4, words / 25));
+            score = Math.round((frac * 12 + errPart * 8) * 10) / 10;
+            if (!needOk) score = Math.min(score, 9);
+            detail = " · " + ev.crit.filter(function (c) { return !c.ok; }).map(function (c) { return c.label; }).slice(0, 3).join(" · ");
+          } else {
+            score = Math.round((Math.min(1, words / task.words) * 8 + Math.max(0, 12 - hard * 1.5)) * 10) / 10;
+          }
+          parts.push({ title: title, local: words + " palabras · " + hard + " errores marcados → nota orientativa " + score + " / 20" + detail, errors: [] });
           sum += score; max += 20;
           if (--pending === 0) finish();
         };
@@ -5463,7 +5531,7 @@
       toast("Abrí el archivo para agregarlo a tu calendario.", 3000);
     });
     on("#export", exportSave);
-    on("#switchlang", function () { if (window.Boot) Boot.switchTo(UI.switchCode); });
+    on("#switchlang", function () { flushPersist(); if (window.Boot) Boot.switchTo(UI.switchCode); });
     on("#import", function () { $("#importfile").click(); });
     var file = $("#importfile");
     if (file) file.onchange = function () { if (file.files[0]) importSave(file.files[0]); };
@@ -5509,17 +5577,16 @@
       navigator.serviceWorker.ready.then(function (reg) {
         if (reg.active) reg.active.postMessage({ keep: LG.code });
       }).catch(function () { /* */ });
-      // A new version took over: reload once so the screen runs it too
-      // (outside a round, so no answer is lost).
-      var hadController = !!navigator.serviceWorker.controller, reloading = false;
+      // A new version took over.  On a screen with nothing only in memory
+      // (Oggi, the path, a list), reload at once and come back to the same
+      // place; anywhere else (a round, a role-play, a draft, the exam, a
+      // book), a notice to update when the learner wants.
+      var hadController = !!navigator.serviceWorker.controller;
       navigator.serviceWorker.addEventListener("controllerchange", function () {
         if (!hadController || reloading) return;
-        var go = function () {
-          if (["gioco", "lampo", "lezione", "lettura", "tramo-asc", "tramo-scr"].indexOf(view.screen) >= 0) { setTimeout(go, 5000); return; }
-          reloading = true;
-          location.reload();
-        };
-        go();
+        updateReady = true;
+        if (safeToReload()) reloadHere();
+        else showUpdateBar();
       });
     });
   }
@@ -5528,14 +5595,54 @@
     navigator.storage.persist().catch(function () { /* */ });
   }
 
-  // Coming back to the app after a while: refresh the header (new day, streak).
+  var updateReady = false;
+  var SAFE_SCREENS = { oggi: 1, percorso: 1, briefing: 1, io: 1, allena: 1, leggi: 1 };
+  function safeToReload() {
+    var el = document.activeElement;
+    return !!SAFE_SCREENS[view.screen] && !(el && /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName));
+  }
+  // Reload and come back to the same screen and scroll (sessionStorage).
+  function reloadHere() {
+    reloading = true;
+    flushPersist();
+    try { sessionStorage.setItem(LG.storage + ".view", JSON.stringify({ tab: view.tab, screen: view.screen, week: view.week, y: window.scrollY, at: Date.now() })); } catch (e) { /* */ }
+    location.reload();
+  }
+  var reloading = false;
+  function showUpdateBar() {
+    if (document.getElementById("updbar")) return;
+    var b = document.createElement("div");
+    b.id = "updbar";
+    b.className = "updbar";
+    b.setAttribute("role", "status");
+    b.innerHTML = '<span>Hay una versión nueva.</span><button class="btn" id="updgo">Actualizar</button>';
+    document.body.appendChild(b);
+    document.getElementById("updgo").onclick = reloadHere;
+  }
+  function restoreView() {
+    try {
+      var v = JSON.parse(sessionStorage.getItem(LG.storage + ".view") || "null");
+      sessionStorage.removeItem(LG.storage + ".view");
+      if (!v || Date.now() - v.at > 60000 || !SAFE_SCREENS[v.screen]) return false;
+      view.tab = v.tab; view.screen = v.screen; view.week = v.week || view.week;
+      render();
+      setTimeout(function () { window.scrollTo(0, v.y || 0); }, 0);
+      return true;
+    } catch (e) { return false; }
+  }
+
+  // Coming back to the app after a while: refresh the header (new day, the
+  // streak as it really is).
   document.addEventListener("visibilitychange", function () {
     if (!document.hidden && course) {
+      if (Engine.checkStreak(state).status === "lost") persist();
       renderHeader();
       if (view.screen === "oggi") render();
+      if (updateReady && safeToReload()) reloadHere();
     }
-    if (document.hidden && course) updateBadge();
+    if (document.hidden && course) { flushPersist(); updateBadge(); }
   });
+  window.addEventListener("pagehide", function () { flushPersist(); });
   // The app icon shows how many cards are due (Badging API; a passive
   // reminder that needs no server and no permission on Android).
   function updateBadge() {
@@ -5613,6 +5720,23 @@
                playing: function () { return !!karaoke; } }
   });
 
+  /* Something in the save breaks the screen: never a dead end.  The
+     learner can download the save as it is (to send it or restore it
+     later), try again, or open Oggi with the save untouched. */
+  function rescue(err) {
+    var raw = "";
+    try { raw = localStorage.getItem(LG.storage + ".save.v1") || ""; } catch (e) { /* */ }
+    app().innerHTML = '<div class="card"><h2>Algo de tu progreso no se pudo mostrar</h2>' +
+      "<p>Tu progreso sigue guardado en el teléfono. Bajá una copia antes de hacer cualquier otra cosa: sirve para restaurarla o para mandarla si hay que revisarla.</p>" +
+      '<div class="row"><button class="btn" id="rsdl">💾 Descargar mis datos</button><button class="btn ghost" id="rsagain">Reintentar</button></div>' +
+      '<p class="muted small">' + esc(String(err && err.message || err)) + "</p></div>";
+    on("#rsdl", function () {
+      download(new Blob([JSON.stringify({ app: "c1", lang: LG.code, brand: LG.brand, v: APP_VERSION, at: new Date().toISOString(), raw: raw })], { type: "application/json" }),
+               UI.exportFile + stamp() + "-rescate.json");
+    });
+    on("#rsagain", function () { location.reload(); });
+  }
+
   // The glossary is optional too: without it words are just not tappable.
   fetch(DATA("glossario.json"))
     .then(function (r) { return r.ok ? r.json() : null; })
@@ -5639,17 +5763,21 @@
     .then(function (data) { return bankP.then(function () { return data; }); })
     .then(function (data) {
       course = data;
-      if (window.Mapas) Mapas.install(course);
-      itemMap = Drills.itemsById(course);
-      registerStories();
-      view.week = Math.min(state.unlocked, 52);
-      if (location.hash === "#pausa") { renderHeader(); startRound("pausa"); return; }
-      if (location.hash === "#micro") { renderHeader(); startRound("micro"); return; }
-      updateBadge();
-      renderHeader();
-      render();
-    })
+      try {
+        if (window.Mapas) Mapas.install(course);
+        itemMap = Drills.itemsById(course);
+        registerStories();
+        view.week = Math.min(state.unlocked, 52);
+        if (Engine.checkStreak(state).status === "lost") persist();
+        if (location.hash === "#pausa") { renderHeader(); startRound("pausa"); return; }
+        if (location.hash === "#micro") { renderHeader(); startRound("micro"); return; }
+        updateBadge();
+        renderHeader();
+        if (!restoreView()) render();
+      } catch (err) { rescue(err); }
+    }, function (e) { throw e; })
     .catch(function (e) {
+      if (course) return rescue(e);
       app().innerHTML = '<div class="card"><h2>No se pudo cargar el curso</h2>' +
         "<p>La primera vez la app necesita internet para descargarse; después funciona sin conexión. " +
         "Revisá la conexión y probá de nuevo.</p>" +

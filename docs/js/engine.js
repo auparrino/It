@@ -198,7 +198,9 @@
     if (q === 0) return 1;
     if (q === 1) return o.kind === "slip" ? 3 : 2;
     if (o.retry || o.hint || o.conf === "adivino") return 2;
-    if (o.light || (o.conf === "seguro" && o.fast)) return 4;
+    // right but slow: known, not yet automatic (DeKeyser & Suzuki 2025)
+    if (o.slow) return 2;
+    if (o.light || o.fast || (o.conf === "seguro" && o.fast)) return 4;
     return 3;
   }
 
@@ -270,7 +272,11 @@
     var ivl = intervalFor(card.s * speed, retention);
     if (r === 1) ivl = 1;                        // an error comes back tomorrow
     card.interval = ivl;
-    card.due = now + ivl * DAY;
+    // Due by day, not by the hour: from 4 am of the due day, so an error at
+    // 9 pm is in tomorrow morning's review and not after 9 pm tomorrow.
+    var dd = new Date(now + ivl * DAY);
+    dd.setHours(4, 0, 0, 0);
+    card.due = Math.max(dd.getTime(), now + 3600000);
     delete card.night; delete card.hyper;
     var hour = new Date(now).getHours();
     var hyper = r === 1 && opts.conf === "seguro";
@@ -280,12 +286,12 @@
       card.due = nextMorning(now); card.night = dayKey(new Date(card.due));
     } else if (hyper) {
       // Hypercorrection: the confident error is retested the next morning.
-      card.due = Math.min(card.due, nextMorning(now)); card.hyper = 1;
+      card.due = nextMorning(now); card.hyper = 1;
     }
     delete card.light; delete card.ease;
     card.last = now;
     card.seen = (card.seen || 0) + 1;
-    if (st && opts.id) logReview(st, opts.id, now, r, elapsed, sBefore, kind);
+    if (st && opts.id) logReview(st, opts.id, now, r, elapsed, sBefore, kind, opts.ms);
     return card;
   }
 
@@ -304,9 +310,13 @@
      learner forgets vocabulary and grammar (a «speed» that scales the
      default stabilities), and shows the calibration. */
   var LOG_MAX = 2500;
-  function logReview(state, id, now, r, elapsed, sBefore, kind) {
+  function logReview(state, id, now, r, elapsed, sBefore, kind, ms) {
     if (!state.log) state.log = [];
-    state.log.push([String(id), Math.round(now / 60000), r, Math.round(elapsed * 10) / 10, Math.round(sBefore * 10) / 10, kind]);
+    var row = [String(id), Math.round(now / 60000), r, Math.round(elapsed * 10) / 10, Math.round(sBefore * 10) / 10, kind];
+    if (ms != null && ms > 0 && ms < 600000) row.push(Math.round(ms / 100) / 10);   // seconds to answer
+    state.log.push(row);
+    // a counter that never goes back, so the refit keeps happening when the log is full
+    state.logTotal = (state.logTotal || state.log.length - 1) + 1;
     if (state.log.length > LOG_MAX) state.log = state.log.slice(-LOG_MAX);
   }
 
@@ -340,7 +350,8 @@
   }
   // Refit every 200 reviews.
   function maybeFit(state) {
-    var n = (state.log || []).length;
+    var n = state.logTotal || (state.log || []).length;
+    if ((state.log || []).length < 100) return null;
     if (n < 100 || (state.speed && state.speed.n && n - state.speed.n < 200)) return null;
     var f = fitSpeed(state);
     f.n = n;
@@ -679,21 +690,31 @@
     return SAVE.syllabus ? SAVE.syllabus(s) : s;
   }
 
+  /* A save as it comes (from the phone or from a backup file) through every
+     upgrade: the syllabus renumbering, the language's own (a goal scale…),
+     the sanitizer and the cards to FSRS.  Loading and restoring a copy go
+     the same way. */
+  function fromRaw(obj) {
+    var s = migrateSyllabus(obj);
+    if (SAVE.load) s = SAVE.load(s);
+    s = sanitize(s);
+    // The SM-2 cards get a stability and a difficulty (nothing is lost).
+    if (s.srsV !== 2) {
+      Object.keys(s.cards).forEach(function (id) { upgradeCard(s.cards[id]); });
+      s.srsV = 2;
+    }
+    return s;
+  }
+  // A save that could not be read was kept aside: the learner can download it.
+  function damaged() {
+    try { return root.localStorage.getItem(KEY + ".damaged"); } catch (e) { return null; }
+  }
   function load() {
     var raw = null;
     try {
       raw = root.localStorage && root.localStorage.getItem(KEY);
       if (!raw) return blankSave();
-      var s = migrateSyllabus(JSON.parse(raw));
-      // The language's other upgrades of old saves (a goal scale…).
-      if (SAVE.load) s = SAVE.load(s);
-      s = sanitize(s);
-      // The SM-2 cards get a stability and a difficulty (nothing is lost).
-      if (s.srsV !== 2) {
-        Object.keys(s.cards).forEach(function (id) { upgradeCard(s.cards[id]); });
-        s.srsV = 2;
-      }
-      return s;
+      return fromRaw(JSON.parse(raw));
     } catch (e) {
       // Unreadable: keep a copy aside before a new save overwrites it.
       try { if (raw) root.localStorage.setItem(KEY + ".damaged", raw); } catch (e2) { /* */ }
@@ -728,6 +749,23 @@
 
   /* The streak counts consecutive calendar days, not sessions.  A shield
      covers each missed day, so one bad day at work doesn't wipe a month. */
+  /* The streak as it really is when the app opens, not when the first
+     answer comes: missed days the shields cover keep it (they are spent on
+     the first answer, touchStreak); more than that and it ends now, so the
+     header does not say 140 while the card says «you are back after 9
+     days».  The shields are not wasted on a streak they cannot save. */
+  function checkStreak(state, now) {
+    now = now || new Date();
+    if (!state.lastPlayed || !state.streak) return { status: "ok" };
+    var gap = daysBetween(state.lastPlayed, dayKey(now)), missed = gap - 1;
+    if (gap <= 1) return { status: "ok" };
+    if (missed <= (state.shields || 0)) return { status: "saved", missed: missed };
+    var prev = state.streak;
+    state.bestStreak = Math.max(state.bestStreak || 0, prev);
+    state.streakBroken = { n: prev, at: dayKey(now), missed: missed };
+    state.streak = 0;
+    return { status: "lost", missed: missed, prev: prev };
+  }
   function touchStreak(state, now) {
     var t = dayKey(now);
     if (state.lastPlayed === t) return state.streak;
@@ -743,6 +781,7 @@
     } else state.streak = 1;
     // Every 7 days of streak earns a shield (max 3 in the pocket).
     if (state.streak % 7 === 0) state.shields = Math.min(3, (state.shields || 0) + 1);
+    if (state.streak > (state.bestStreak || 0)) state.bestStreak = state.streak;
     state.lastPlayed = t;
     return state.streak;
   }
@@ -957,7 +996,7 @@
     sanitize: sanitize,
     migrateSyllabus: migrateSyllabus,
     save: save,
-    touchStreak: touchStreak,
+    touchStreak: touchStreak, checkStreak: checkStreak, fromRaw: fromRaw, damaged: damaged,
     dayKey: dayKey,
     daysBetween: daysBetween,
     addXp: addXp,

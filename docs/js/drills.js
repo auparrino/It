@@ -457,6 +457,13 @@
   function itemsById(course) {
     var map = {};
     course.items.forEach(function (it) { map[it.id] = it; });
+    // The week whose lesson lists the item (it.wk is the first week whose
+    // grammar covers it, which can be much earlier): the statistics of the
+    // week (weekStats) are kept by this one, so the boss and the review
+    // look them up by it.
+    (course.weeks || []).forEach(function (w) {
+      (w.items || []).forEach(function (id) { var it = map[id]; if (it && it.week == null) it.week = w.week; });
+    });
     indexVocab(course);
     return map;
   }
@@ -740,7 +747,7 @@
       (w.items || []).concat(w.extra || []).forEach(function (id) {
         var it = map[id];
         if (!it) return;
-        var wk = it.wk || w.week;
+        var wk = it.week || w.week;
         (wk >= lo ? pools.own : wk >= prevLo ? pools.prev : pools.old).push(it);
       });
     });
@@ -754,7 +761,7 @@
     };
     var byWeek = function (pool, n) {
       var groups = {};
-      pool.forEach(function (it) { (groups[it.wk || 0] = groups[it.wk || 0] || []).push(it); });
+      pool.forEach(function (it) { var k = it.week || it.wk || 0; (groups[k] = groups[k] || []).push(it); });
       var keys = shuffle(Object.keys(groups)), picked = [], turns = [];
       keys.forEach(function (key) {
         groups[key] = shuffle(groups[key]).sort(function (a, b) { return weakness(state, a.id) - weakness(state, b.id); });
@@ -843,7 +850,7 @@
       if (!knownId(map, id) || !card.due || card.due > now) return;
       var isMaint = card.state === "maint" || (card.s == null && Engine && Engine.retired && Engine.retired(card));
       var pri = (card.night && card.night === today) || card.hyper ? -1
-              : card.reps === 0 ? 0 : (map[id] && map[id].wk === week) ? 1 : isMaint ? 3 : 2;
+              : card.reps === 0 ? 0 : (map[id] && (map[id].week || map[id].wk) === week) ? 1 : isMaint ? 3 : 2;
       due.push({ id: id, due: card.due, pri: pri, maint: isMaint });
     });
     due.sort(function (a, b) { return a.pri - b.pri || a.due - b.due; });

@@ -125,20 +125,31 @@
     doc.head.appendChild(css);
   }
 
+  /* All the scripts at once with async = false: the browser downloads them
+     in parallel and runs them in order (one after the other took 17 s on a
+     slow phone line).  The course and the bank start downloading now too,
+     not when app.js asks for them. */
   function load(code) {
     dress(code);
-    var i = 0;
-    (function next() {
-      if (i >= ORDER.length) return;
+    ["course.json", "bank.json"].forEach(function (f) {
+      var l = document.createElement("link");
+      l.rel = "preload"; l.as = "fetch"; l.crossOrigin = "anonymous";
+      l.href = "lang/" + code + "/data/" + f;
+      document.head.appendChild(l);
+    });
+    var failed = false;
+    ORDER.forEach(function (entry) {
       var s = document.createElement("script");
-      s.src = src(ORDER[i++], code);
-      s.onload = next;
+      s.src = src(entry, code);
+      s.async = false;
       s.onerror = function () {
+        if (failed) return;
+        failed = true;
         var app = document.getElementById("app");
         if (app) app.innerHTML = '<div class="card"><p>No se pudo cargar ' + s.src + ". Revisá la conexión y volvé a abrir.</p></div>";
       };
       document.body.appendChild(s);
-    })();
+    });
   }
 
   /* El selector: una tarjeta por idioma, cada una con su mundo (el cielo
