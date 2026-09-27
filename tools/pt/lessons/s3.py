@@ -640,9 +640,9 @@ LESSONS = {
   "r": "Formal: *diz-se que*, *vende-se*. Neutro: *dizem que*, *vendem*. "
        "Habla: *falam que*, *o pessoal fala*, *você compra*.",
   "table": {"head": ["Significa", "Formal", "Neutro", "Habla"],
-            "rows": [["Dicen que va a llover.", "Diz-se que vai chover.", "Dizem que vai chover.", "Tão falando que vai chover."],
+            "rows": [["Dicen que va a llover.", "Diz-se que vai chover.", "Dizem que vai chover.", "O pessoal tá falando que vai chover."],
                      ["Se aceptan tarjetas.", "Aceitam-se cartões.", "Aceitam cartão.", "Pode pagar no cartão."],
-                     ["Se necesita mozo.", "Precisa-se de garçom.", "Estão precisando de garçom.", "Tão precisando de garçom."]]},
+                     ["Se necesita mozo.", "Precisa-se de garçom.", "Estão precisando de garçom.", "Tá precisando de garçom lá."]]},
   "ex": [["*Diz-se que* o bairro vai mudar.", "Se dice que el barrio va a cambiar (formal)."],
          ["*Dizem que* o bairro vai mudar.", "Dicen que el barrio va a cambiar."],
          ["*O pessoal tá falando que* o bairro vai mudar.", "La gente anda diciendo que el barrio va a cambiar."]],

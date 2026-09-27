@@ -594,8 +594,8 @@ ch(W, 0, "___ Senhora Diretora,",
    ["Prezada", "Prezado", "Querida"], "Prezada",
    "Apertura formal: Prezado(a), concordado con el destinatario. Querida es solo para gente cercana.")
 ch(W, 0, "Cierre de un mail al consulado: «___, Lucas Fernández».",
-   ["Atenciosamente", "Atentamente", "Saudos cordiais"], "Atenciosamente",
-   "El cierre formal estándar en Brasil es Atenciosamente. «Atentamente» no se usa así y «saudos» no existe.")
+   ["Atenciosamente", "Um grande beijo", "Saudos cordiais"], "Atenciosamente",
+   "El cierre formal estándar en Brasil es Atenciosamente. «Um grande beijo» es para gente cercana y «saudos» no existe. «Atentamente» también existe, pero es mucho menos frecuente y suena a traducción.")
 ch(W, 0, "Mail a un grupo de profesores: «___ professores,»",
    ["Prezados", "Prezado", "Prezada"], "Prezados",
    "A un grupo, en plural: Prezados professores, Prezados(as).")
