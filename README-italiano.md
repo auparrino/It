@@ -998,3 +998,21 @@ largo del CILS y el CELI:
   `tools/lib/test_tramo.js` controla que las falsas alarmas no vuelvan a
   subir y `test_scrivi.js`, que los errores reales se sigan detectando.
 
+## Las capas: Input, Práctica, Referencia
+
+Cada pestaña es una capa. **Leggi** es el input: arriba lo de esta semana (la
+lectura y la escucha pendientes, el capítulo recomendado de la Biblioteca y
+los minutos leídos y escuchados en 7 días), después Historias, La semana,
+Lecturas largas, Escuchas y Biblioteca, plegadas por estación con la actual
+abierta, y la velocidad de lectura: cada lectura se cronometra sola y cuenta
+si después entendiste el 70 % o más, con la curva del año y los textos para
+releer contra el reloj. **Allena** es la práctica, con el mismo patrón.
+**Consultar** es la referencia: un diccionario del curso (glosa, semana,
+nivel y frecuencia, la forma verbal, combinaciones y usos reales ya leídos),
+Mi gramática (también lo que todavía no llegó, con aviso), Palabra por
+palabra, los mapas de preposiciones, las fórmulas fijas y los contrastes de
+Tres lenguas. En el percorso aparecen, opcionales, «Leé un capítulo» de la
+Biblioteca y «Tres vueltas». Qué hace cada módulo (Escritura guiada,
+Variaciones, C-test, Ordená, Tres vueltas, Reformulación, Mapas, Ubicación,
+Mi gramática, Desglose, Tres lenguas, Frecuencia): `ARQUITECTURA.md`, «Las
+capas y los módulos».

@@ -285,7 +285,7 @@
   function ensure(state) {
     var b = state.biblio;
     if (!b || typeof b !== "object") b = state.biblio = {};
-    ["pos", "done", "days", "seen", "self", "words"].forEach(function (k) { if (!b[k] || typeof b[k] !== "object") b[k] = {}; });
+    ["pos", "done", "days", "seen", "self", "words", "wk"].forEach(function (k) { if (!b[k] || typeof b[k] !== "object") b[k] = {}; });
     if (!b.total || typeof b.total !== "object") b.total = { w: 0, s: 0, pg: 0 };
     if (typeof b.adj !== "number") b.adj = 0;
     if (typeof b.under !== "boolean") b.under = true;
@@ -352,8 +352,10 @@
     return b.adj;
   }
   function markRead(state, book, ch) {
-    var b = ensure(state);
+    var b = ensure(state), first = !(b.done[book] && b.done[book][ch]);
     (b.done[book] || (b.done[book] = {}))[ch] = 1;
+    // the week of the course it was read in (the percorso's «Leé un capítulo»)
+    if (first) { var w = Math.max(1, Math.min(WEEKS, state.unlocked || 1)); b.wk[w] = (b.wk[w] || 0) + 1; }
   }
   function isRead(state, book, ch) { var b = ensure(state); return !!(b.done[book] && b.done[book][ch]); }
   function readCount(state, book) { var b = ensure(state); return Object.keys(b.done[book] || {}).length; }
@@ -393,6 +395,44 @@
     if (r) r.ok = r.cov >= TARGET;
     return r;
   }
+
+  /* ------------------------------------------------- en el percorso */
+
+  /* The week a book opens: the first week one of its texts reaches 95 %
+     (its own «week» in the index if earlier; 94 % for a book that never
+     gets to 95; the last week if not even that). */
+  function openWeek(bk) {
+    if (!bk) return 99;
+    var best = +bk.week || 99, near = 99;
+    (bk.chapters || []).forEach(function (ch) { best = Math.min(best, weekFor(ch.cov, TARGET)); near = Math.min(near, weekFor(ch.cov, TARGET - 1)); });
+    return best < 99 ? best : near < 99 ? near : WEEKS;
+  }
+  function firstOpenWeek(index) {
+    var w = 99;
+    ((index && index.books) || []).forEach(function (bk) { w = Math.min(w, openWeek(bk)); });
+    return w;
+  }
+  /* «Leé un capítulo» (optional) from the week the first book opens: the
+     chapter recommend() picks among the books already open; done with a
+     chapter finished while in that week of the course. */
+  function mission(index, w, state) {
+    if (!index || !w || w.boss) return null;
+    var week = w.week || w, first = firstOpenWeek(index);
+    if (week < first) return null;
+    var b = ensure(state), upTo = Math.max(week, state.unlocked || 1);
+    var open = { books: index.books.filter(function (bk) { return openWeek(bk) <= upTo; }) };
+    var rec = recommend(open.books.length ? open : index, state), n = b.wk[week] || 0;
+    var min = mins(statsDays(state, 7).s);
+    var sub = n ? "Hecho · " + n + (n === 1 ? " capítulo" : " capítulos") + " esta semana"
+      : "Opcional · " + (rec ? rec.book.chapters[rec.ch].t + " · entendés ~" + Math.round(rec.cov) + " %" : "un capítulo de un libro de verdad");
+    return { kind: "lib", arg: rec ? rec.book.id + "|" + rec.ch : "", done: n > 0, ico: "📚", opt: true,
+             title: "Leé un capítulo" + (rec ? ": «" + rec.book.title + "»" : ""),
+             sub: sub + (min ? " · " + min + " min de lectura en 7 días" : "") };
+  }
+  // Minutes read in the library in the last n days (input).
+  function minutes(state, n) { return mins(statsDays(state, n || 7).s); }
+  function loaded() { return !!DATA.index; }
+  function index() { return DATA.index; }
 
   /* ------------------------------------------------------ las tarjetas */
 
@@ -802,6 +842,17 @@
     if (H) { H.render(); if (root.scrollTo) root.scrollTo(0, 0); }
   }
 
+  // Straight to a chapter (the percorso's «Leé un capítulo»); without one, the book.
+  function openChapter(view, id, ch) {
+    view.bxBook = id; view.bxAsk = false;
+    if (ch == null || isNaN(ch)) { go(view, id ? "libro" : "biblioteca"); return; }
+    view.bxCh = +ch;
+    var p = ensure(st()).pos[id];
+    view.bxPg = p && p.c === view.bxCh ? p.p : 0;
+    reading = null;
+    go(view, "lector");
+  }
+
   function wire(screen, view) {
     var doc = root.document;
     if (!doc) return;
@@ -878,9 +929,10 @@
     wordCount: wordCount, chapterWords: chapterWords, sentences: sentences, pages: pages, isHeading: isHeading, strip: strip,
     ensure: ensure, readingWeek: readingWeek, minSeconds: minSeconds, notePage: notePage, statsDays: statsDays,
     selfAssess: selfAssess, markRead: markRead, isRead: isRead, nextChapter: nextChapter, recommend: recommend,
+    openWeek: openWeek, firstOpenWeek: firstOpenWeek, mission: mission, minutes: minutes, loaded: loaded, index: index,
     cardIdFor: cardIdFor, pin: pin, reviewItem: reviewItem,
     setData: setData, loadIndex: loadIndex, loadBook: loadBook, loadModel: loadModel, lookup: lookup,
-    init: init, owns: owns, render: render, wire: wire, leggiCard: leggiCard, ioCard: ioCard
+    init: init, owns: owns, render: render, wire: wire, leggiCard: leggiCard, ioCard: ioCard, openChapter: openChapter
   };
   if (typeof module === "object" && module.exports) module.exports = api;
   else root.Biblioteca = api;

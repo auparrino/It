@@ -62,6 +62,7 @@
     { lang: "biblioteca_data.js" }, { core: "biblioteca.js" },
     { shared: "tres_lenguas_data.js" }, { core: "tres_lenguas.js" },
     { core: "tramo.js" },
+    { core: "capas.js" },
     { core: "app.js" }
   ];
 

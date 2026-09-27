@@ -757,16 +757,49 @@
       '<span class="muted">' + (locked ? "Se abre en la semana " + week + ", con la gramática que usa." : desc) + "</span></button>";
   }
 
+  /* Allena / Treino, la capa de práctica (js/capas.js): lo de esta semana
+     arriba —las escenas, el oído, el duelo que se abre, la escritura
+     guiada—, la entrada a «Consultar» y el resto plegado por secciones. */
   function renderFrasi() {
+    var week = Math.min(state.unlocked || 1, 52), C = window.Capas;
+    var fold = C ? C.fold : function (k, t, m, body) { return "<h2>" + t + "</h2>" + body; };
+    var noH2 = function (h) { return String(h || "").replace(/^\s*<h2>[\s\S]*?<\/h2>/, ""); };
     var html = "<h1>" + UI.train + "</h1>" +
-      '<p class="lead">Bloques listos para hablar ya, sin armar gramática en la cabeza. ' +
-      "Cada escena te presenta frases nuevas, te las hace armar con fichas y después " +
-      "<b>escribirlas de memoria</b>. Cuanto más rápido te salen escritas, más rápido " +
-      "te salen habladas.</p>";
+      '<p class="lead">Forma y fluidez: bloques listos para hablar, el oído, los errores que más te cuestan. ' +
+      "Arriba, lo de esta semana; lo demás, en las secciones.</p>";
+
+    // lo de esta semana
+    var wk = [];
+    if (window.Drills && window.Frasi) Drills.scenesOfWeek(week).forEach(function (sc) {
+      var p = Frasi.progress(sc.id, state.cards);
+      wk.push('<button class="ep' + (p.seen >= p.total ? " done" : "") + '" data-scene="' + sc.id + '"><span class="e">' + sc.emoji + "</span>" +
+        "<span><b>" + esc(sc.name) + '</b><span class="muted">Frases · ' + p.seen + " / " + p.total + " vistas</span></span></button>");
+    });
+    if (window.Suoni && Suoni.data() && week <= 40) {
+      var sp = Suoni.progress(week, state.cards), sdone = !!(state.suoniDone || {})[week];
+      wk.push('<button class="ep' + (sdone ? " done" : "") + '" data-lab="suoni"><span class="e">🎧</span><span><b>' + UI.suoni + "</b>" +
+        '<span class="muted">El oído de la semana · ' + sp.seen + " / " + sp.total + " pares</span></span></button>");
+    }
+    if (window.Duelli) Duelli.DUELLI.filter(function (d) { return d.week === week; }).forEach(function (d) {
+      var best = (state.duelli || {})[d.id];
+      wk.push('<button class="ep' + (best && best.pct >= 80 ? " done" : "") + '" data-duel="' + d.id + '"><span class="e">⚔️</span><span><b>Duelo: ' + esc(d.title) + "</b>" +
+        '<span class="muted">' + (best ? "Tu mejor: " + best.pct + " %" : esc(d.sub)) + "</span></span></button>");
+    });
+    if (Banca.loaded()) {
+      var weak = Banca.weakest(state, 2);
+      if (weak.length) wk.push('<button class="ep" data-bank="clinica"><span class="e">🩺</span><span><b>Clínica de tus errores</b>' +
+        '<span class="muted">' + weak.map(function (w) { return esc(Diagnosi.LABEL[w.cat] || w.cat); }).join(", ") + "</span></span></button>");
+    }
+    if (window.Variaciones && Variaciones.eligible(state, week).length)
+      wk.push('<button class="ep" data-esc="var"><span class="e">🔁</span><span><b>Variaciones de frase</b>' +
+        '<span class="muted">' + Variaciones.eligible(state, week).length + " frases que ya sabés, cambiando una pieza</span></span></button>");
+    html += '<div class="card capa-week"><h2>Esta semana <small class="muted">· semana ' + week + "</small></h2>" +
+      (wk.length ? '<div class="eps">' + wk.join("") + "</div>" : '<p class="muted">Esta semana no trae práctica nueva: repasá lo que quieras abajo.</p>') + "</div>";
+    if (C) html += C.entryHtml();
 
     var pp = Lab.progress("ponte:", state.cards), pf = Lab.progress("falso:", state.cards),
         pc = Lab.progress("capire:", state.cards);
-    html += "<h2>Laboratorio</h2>" +
+    html += fold("al:lab", "🧪 Laboratorio", pp.seen + pf.seen + pc.seen + " vistas",
       '<div class="labs">' +
         '<button class="lab" data-lab="ponte"><span class="e">🌉</span><b>Ponte</b>' +
           '<span class="muted">' + UI.ponte + "</span>" +
@@ -782,34 +815,33 @@
           '<span class="meta">' + Suoni.progress(state.unlocked, state.cards).seen + "/" + Suoni.progress(state.unlocked, state.cards).total + " pares</span></button>" : "") +
       "</div>" +
       '<p class="muted science">🔬 Ponte usa la transferencia desde tu lengua (Ringbom); ' +
-      UI.capire + " es input estructurado: primero interpretar la forma, después producirla (VanPatten).</p>";
-    if (window.Escritos) html += Escritos.treinoHtml(state);
+      UI.capire + " es input estructurado: primero interpretar la forma, después producirla (VanPatten).</p>");
+    if (window.Escritos) html += fold("al:esc", "✍️ Escritura guiada", "variaciones · C-test · ordená", noH2(Escritos.treinoHtml(state)));
 
-    if (window.Referencia) html += Referencia.entry();
     if (window.Duelli) {
-      var wkD = Math.min(state.unlocked || 1, 52);
-      html += "<h2>⚔️ Duelos</h2>" +
+      var list = Duelli.DUELLI.slice().sort(function (a, b) { return a.week - b.week; });
+      var openD = list.filter(function (d) { return d.week <= week; }).length;
+      html += fold("al:duel", "⚔️ Duelos", openD + " / " + list.length + " abiertos",
         '<p class="muted">Dos formas que se confunden, mezcladas: elegís una y después tocás la pista que te lo dijo.</p>' +
-        '<div class="labs">' + Duelli.DUELLI.slice().sort(function (a, b) { return a.week - b.week; }).map(function (d) {
+        '<div class="labs">' + list.map(function (d) {
           var best = (state.duelli || {})[d.id];
-          return '<button class="lab" data-duel="' + d.id + '"' + (d.week > wkD ? " disabled" : "") + '><span class="e">⚔️</span><b>' + esc(d.title) + "</b>" +
-            '<span class="muted">' + esc(d.week > wkD ? "Se abre en la semana " + d.week + "." : d.sub) + "</span>" +
+          return '<button class="lab" data-duel="' + d.id + '"' + (d.week > week ? " disabled" : "") + '><span class="e">⚔️</span><b>' + esc(d.title) + "</b>" +
+            '<span class="muted">' + esc(d.week > week ? "Se abre en la semana " + d.week + "." : d.sub) + "</span>" +
             (best ? '<span class="meta">mejor: ' + best.pct + " %</span>" : "") + "</button>";
         }).join("") + "</div>" +
-        '<p class="muted science">🔬 Intercalar formas que se parecen (Brunmair y Richter 2019) y explicar por qué (Bisra et al. 2018).</p>';
+        '<p class="muted science">🔬 Intercalar formas que se parecen (Brunmair y Richter 2019) y explicar por qué (Bisra et al. 2018).</p>');
     }
-    if (window.TresLenguas) html += TresLenguas.card(state);   // italiano ↔ portugués ↔ español (js/tres_lenguas.js)
 
     if (Banca.loaded()) {
-      var st = Banca.stats(), weak = Banca.weakest(state, 2);
-      html += "<h2>Banco</h2>" +
-        '<p class="muted">' + st.nouns + " sustantivos, " + st.verbs + " verbos, " + st.adjectives +
-        " adjetivos, " + st.sentences + " oraciones y " + st.errors + " errores típicos. " +
+      var bst = Banca.stats(), weak2 = Banca.weakest(state, 2);
+      html += fold("al:bank", "🏦 Banco", bst.nouns + bst.verbs + bst.adjectives + " palabras · " + bst.sentences + " oraciones",
+        '<p class="muted">' + bst.nouns + " sustantivos, " + bst.verbs + " verbos, " + bst.adjectives +
+        " adjetivos, " + bst.sentences + " oraciones y " + bst.errors + " errores típicos. " +
         "Cuando te equivocás, la app te dice qué tipo de error es y te deja corregirlo.</p>" +
         '<div class="labs">' +
-          (weak.length ? '<button class="lab clin" data-bank="clinica"><span class="e">🩺</span><b>Clínica de tus errores</b>' +
+          (weak2.length ? '<button class="lab clin" data-bank="clinica"><span class="e">🩺</span><b>Clínica de tus errores</b>' +
             '<span class="muted">Práctica armada con lo que más te cuesta: ' +
-            weak.map(function (w) { return esc(Diagnosi.LABEL[w.cat] || w.cat); }).join(", ") + ".</span></button>" : "") +
+            weak2.map(function (w) { return esc(Diagnosi.LABEL[w.cat] || w.cat); }).join(", ") + ".</span></button>" : "") +
           '<button class="lab" data-bank="b-voc"><span class="e">📚</span><b>' + UI.words + "</b>" +
             '<span class="muted">Vocabulario de tu nivel: primero reconocer, después escribir con el artículo.</span></button>' +
           bankBtn("b-tr", "✍️", UI.tr, "Oraciones del español al " + UI.langEs + ", con corrección que te explica el error.", Banca.TR_WEEK) +
@@ -820,16 +852,15 @@
               ? "Se abre en la semana " + Banca.ERR_WEEK + ": primero tenés que poder leer la oración."
               : "Encontrá y corregí el error típico de un hispanohablante.") + "</span></button>" +
           bankBtn("b-forme", "🧩", UI.forme, UI.formeSub, Banca.FORME_WEEK) +
-        "</div>";
+        "</div>");
     }
-    html += "<h2>" + UI.scenes + "</h2>";
-    html += '<div class="scenes">';
-    Frasi.SCENES.forEach(function (s) {
+
+    // Las escenas, por estación (cada una se abre con su semana).
+    var items = Frasi.SCENES.map(function (s) {
       var p = Frasi.progress(s.id, state.cards);
       var pct = Math.round(p.seen / p.total * 100);
-      // A scene opens with its week: its phrases use the grammar seen by then.
       var sw = Drills.sceneWeek(s.id), shut = sw > (state.unlocked || 1);
-      html += '<button class="scene' + (p.seen === p.total ? " done" : "") + (shut ? " locked" : "") +
+      return { week: sw, done: p.seen >= p.total, html: '<button class="scene' + (p.seen === p.total ? " done" : "") + (shut ? " locked" : "") +
         '" data-scene="' + s.id + '"' + (shut ? " disabled" : "") + ">" +
         '<span class="e">' + (shut ? "🔒" : s.emoji) + "</span>" +
         "<b>" + esc(s.name) + "</b>" +
@@ -837,52 +868,159 @@
         '<span class="meta">' + (shut ? "Se abre en la semana " + sw :
           p.seen + "/" + p.total + " vistas · " + p.strong + " firmes") + "</span>" +
         '<span class="prog"><i style="width:' + pct + '%"></i></span>' +
-        "</button>";
+        "</button>" };
     });
-    return html + "</div>";
+    var seenSc = items.filter(function (x) { return x.week <= week; }).length;
+    html += fold("al:scenes", "💬 " + esc(UI.scenes), seenSc + " / " + items.length + " abiertas",
+      C ? C.seasons("al:sc", items, week, (course.seasons || []).map(function (s) { return s.name; })).replace(/class="eps"/g, 'class="scenes"')
+        : '<div class="scenes">' + items.map(function (x) { return x.html; }).join("") + "</div>");
+
+    if (window.TresLenguas) html += fold("al:tres", "🔀 Tres lenguas", "contrastes · duelo", noH2(TresLenguas.card(state)));
+    return html;
   }
 
   /* ----------------------------------------------------------------- ler */
 
+  function epButton(ep, done) {
+    var d = done[ep.id], open = Letture.isOpen(ep, done, state.unlocked);
+    var wait = !open && ep.week > state.unlocked;
+    return '<button class="ep' + (d ? " done" : "") + '" data-ep="' + ep.id + '"' +
+      (open ? "" : " disabled") + ">" +
+      '<span class="e">' + (open ? ep.emoji : "🔒") + "</span>" +
+      "<span><b>" + esc(ep.title) + "</b>" +
+      '<span class="muted">' + (ep.area ? esc(ep.area) + " · " : ep.series === "settimana" || ep.series === "lunga" ? "semana " + ep.week + " · " : "episodio " + ep.n + " · ") +
+        esc(ep.level) + " · " + (wait ? "se abre en la semana " + ep.week : esc(ep.grammar)) +
+        "</span></span>" +
+      (d ? '<span class="score">' + d.pct + "%</span>" : "") +
+      "</button>";
+  }
+
+  /* Leggi / Ler, la capa de input (js/capas.js): arriba lo de esta semana
+     (la lectura y la escucha pendientes, el capítulo recomendado, los
+     minutos de input); después, plegadas: Historias, La settimana, Largas,
+     Escuchas, Biblioteca y la velocidad de lectura, cada lista por estación
+     con la actual abierta. */
   function renderLeggi() {
-    var done = state.letture || {};
+    var done = state.letture || {}, week = Math.min(state.unlocked || 1, 52), C = window.Capas;
+    var fold = C ? C.fold : function (k, t, m, body) { return "<h2>" + t + "</h2>" + body; };
+    var sNames = (course.seasons || []).map(function (s) { return s.name; });
+    var bySeason = function (key, list) {
+      var items = list.map(function (ep) { return { week: readingWeek(ep), done: !!done[ep.id], html: epButton(ep, done) }; });
+      return C ? C.seasons(key, items, week, sNames) : '<div class="eps">' + items.map(function (x) { return x.html; }).join("") + "</div>";
+    };
+    var count = function (list) { return list.filter(function (ep) { return done[ep.id]; }).length + " / " + list.length; };
     var html = "<h1>" + UI.read + "</h1>" +
-      '<p class="lead">Leer mucho, entendiendo casi todo, es de lo que más hace crecer una lengua. ' +
+      '<p class="lead">Leer y escuchar mucho, entendiendo casi todo, es de lo que más hace crecer una lengua. ' +
       "Tocá las palabras subrayadas para ver qué significan.</p>";
-    if (window.Biblioteca) html += Biblioteca.leggiCard();   // libros de dominio público (js/biblioteca.js)
-    Letture.SERIES.forEach(function (sr) {
-      html += "<h2>" + sr.emoji + " " + esc(sr.name) + "</h2>" +
-        '<p class="muted">' + esc(sr.blurb) + '</p><div class="eps">';
-      Letture.ofSeries(sr.id).forEach(function (ep) {
-        var d = done[ep.id], open = Letture.isOpen(ep, done, state.unlocked);
-        var wait = !open && ep.week > state.unlocked;
-        html += '<button class="ep' + (d ? " done" : "") + '" data-ep="' + ep.id + '"' +
-          (open ? "" : " disabled") + ">" +
-          '<span class="e">' + (open ? ep.emoji : "🔒") + "</span>" +
-          "<span><b>" + esc(ep.title) + "</b>" +
-          '<span class="muted">' + (ep.area ? esc(ep.area) + " · " : ep.series === "settimana" || ep.series === "lunga" ? "semana " + ep.week + " · " : "episodio " + ep.n + " · ") +
-            esc(ep.level) + " · " + (wait ? "se abre en la semana " + ep.week : esc(ep.grammar)) +
-            "</span></span>" +
-          (d ? '<span class="score">' + d.pct + "%</span>" : "") +
-          "</button>";
-      });
-      html += "</div>";
+
+    // lo de esta semana: lecturas de la semana, la escucha larga, el capítulo recomendado
+    var mine = Letture.EPISODI.filter(function (ep) { return readingWeek(ep) === week; })
+      .map(function (ep) {
+        // the story goes in order: the episode of the week waits for the one before
+        if (ep.series !== "martin" || Letture.isOpen(ep, done, state.unlocked)) return ep;
+        return Letture.next(done, "martin") || ep;
+      })
+      .filter(function (ep, k, a) { return a.indexOf(ep) === k; })
+      .sort(function (a, b) { return (a.series === "cultura" || a.series === "flood" ? 1 : 0) - (b.series === "cultura" || b.series === "flood" ? 1 : 0); });
+    var wk = mine.map(function (ep) { return epButton(ep, done); });
+    var trs = window.Tramo && Tramo.week ? Tramo.week(week) : null;
+    if (trs && trs.ascolto) {
+      var ad = ((state.tramo || {}).asc || {})[week];
+      wk.push('<button class="ep' + (ad ? " done" : "") + '" data-trasc="' + week + '"><span class="e">🎧</span><span><b lang="' + LG.tts + '">' + esc(trs.ascolto.title) + "</b>" +
+        '<span class="muted">Escucha larga · <span lang="' + LG.tts + '">' + esc(trs.ascolto.genre) + "</span></span></span>" +
+        (ad ? '<span class="score">' + ad.pct + "%</span>" : "") + "</button>");
+    }
+    var B = window.Biblioteca, rec = null;
+    if (B && B.loaded && B.loaded() && B.firstOpenWeek(B.index()) <= week) {
+      var lm = B.mission(B.index(), { week: week }, state);
+      rec = lm && lm.arg ? lm.arg.split("|") : null;
+      if (rec) wk.push('<button class="ep' + (lm.done ? " done" : "") + '" data-bxread="' + esc(rec[0]) + '" data-bxch="' + esc(rec[1]) + '"><span class="e">📚</span><span><b>' +
+        esc(lm.title) + '</b><span class="muted">' + esc(lm.sub.replace(/^Opcional · /, "")) + "</span></span></button>");
+    } else if (B && B.loadIndex && B.loaded && !B.loaded() && typeof fetch === "function") {
+      B.loadIndex().then(function () { if (view.screen === "leggi") render(); }).catch(function () { /* sin red */ });
+    }
+    var inp = C ? C.inputWeek(state) : { read: 0, listen: listeningWeek(), total: listeningWeek() };
+    var curve = Letture.speedCurve ? Letture.speedCurve(state) : [];
+    var lastSpeed = curve.length ? curve[curve.length - 1].wpm : 0;
+    html += '<div class="card capa-week"><h2>Esta semana <small class="muted">· semana ' + week + "</small></h2>" +
+      (wk.length ? '<div class="eps">' + wk.join("") + "</div>" : '<p class="muted">Esta semana no trae lectura nueva: elegí una de abajo.</p>') +
+      '<p class="small muted capa-input">⏱️ Input en 7 días: <b>' + inp.read + " min</b> leyendo · <b>" + inp.listen + " min</b> escuchando" +
+        (lastSpeed ? " · leés a ~" + lastSpeed + " palabras por minuto" : "") + "</p></div>";
+    if (C) html += C.entryHtml(true);
+
+    // Historias: Martín, los cuentos con tus palabras, la cultura y las inundaciones
+    var ser = {};
+    Letture.SERIES.forEach(function (sr) { ser[sr.id] = sr; });
+    var hist = "";
+    ["martin", "cultura", "flood"].forEach(function (id) {
+      var sr = ser[id], list = Letture.ofSeries(id);
+      if (!sr || !list.length) return;
+      var mineHere = list.some(function (ep) { return readingWeek(ep) <= week && !done[ep.id] && Letture.isOpen(ep, done, state.unlocked); });
+      hist += fold("lg:" + id, sr.emoji + " " + esc(sr.name) + (id !== "martin" ? ' <small class="muted">· opcional</small>' : ""), count(list),
+        '<p class="muted">' + esc(sr.blurb) + '</p><div class="eps">' + list.map(function (ep) { return epButton(ep, done); }).join("") + "</div>",
+        id === "martin" && mineHere, "capa-sub");
     });
-    if (window.Tramo) html += Tramo.leggiHtml(state);   // las escuchas largas del tramo C1
     if ((state.storie || []).length) {
-      html += "<h2>✨ " + UI.stories + "</h2><p class=\"muted\">Cuentos generados con las palabras de tu repaso.</p><div class=\"eps\">" +
+      hist += fold("lg:storie", "✨ " + UI.stories, state.storie.length + "",
+        '<p class="muted">Cuentos generados con las palabras de tu repaso.</p><div class="eps">' +
         state.storie.map(function (x) {
           var d = done[x.id];
           return '<button class="ep' + (d ? " done" : "") + '" data-ep="' + esc(x.id) + '"><span class="e">✨</span><span><b>' + esc(x.title) +
             "</b><span class=\"muted\">semana " + x.week + " · " + esc(x.targets.join(", ")) + "</span></span>" + (d ? '<span class="score">' + d.pct + "%</span>" : "") + "</button>";
-        }).join("") + "</div>";
+        }).join("") + "</div>", false, "capa-sub");
+    }
+    var histN = ["martin", "cultura", "flood"].reduce(function (n, id) { return n + Letture.ofSeries(id).length; }, 0);
+    if (hist) html += fold("lg:hist", "📖 Historias", histN + " textos", hist);
+
+    var sett = ser.settimana ? Letture.ofSeries("settimana") : [];
+    if (sett.length) html += fold("lg:sett", ser.settimana.emoji + " " + esc(ser.settimana.name), count(sett),
+      '<p class="muted">' + esc(ser.settimana.blurb) + "</p>" + bySeason("lg:sett", sett));
+    var lunghe = Letture.ofSeries("lunga");
+    if (lunghe.length && ser.lunga) html += fold("lg:lunga", ser.lunga.emoji + " " + esc(ser.lunga.name), week < 27 ? "🔒 desde la semana 27" : count(lunghe),
+      '<p class="muted">' + esc(ser.lunga.blurb) + "</p>" + bySeason("lg:lunga", lunghe));
+
+    // Escuchas: las largas del tramo y la re-escucha de lo ya leído
+    var asc = "", TD = window.TRAMO_DATA;
+    if (TD && (TD.SETTIMANE || []).length) {
+      var tasc = (state.tramo || {}).asc || {};
+      var aItems = TD.SETTIMANE.map(function (s) {
+        var open = s.week <= week, d = tasc[s.week];
+        return { week: s.week, done: !!d, html: '<button class="ep' + (d ? " done" : "") + '" data-trasc="' + s.week + '"' + (open ? "" : " disabled") + ">" +
+          '<span class="e">' + (open ? "🎧" : "🔒") + '</span><span><b lang="' + LG.tts + '">' + esc(s.ascolto.title) + "</b>" +
+          '<span class="muted">semana ' + s.week + " · " + esc(s.level) + " · " + (open ? '<span lang="' + LG.tts + '">' + esc(s.ascolto.genre) + "</span>" : "se abre en la semana " + s.week) + "</span></span>" +
+          (d ? '<span class="score">' + d.pct + "%</span>" : "") + "</button>" };
+      });
+      asc += '<p class="muted">De la semana 27 en adelante, una escucha larga a dos voces por semana, con preguntas en ' + UI.langEs + ".</p>" +
+        (C ? C.seasons("lg:asc", aItems, week, sNames) : "");
     }
     var doneN = Object.keys(done).filter(function (id) { return Letture.byId(id); }).length;
     if (doneN) {
-      html += '<div class="card"><b>🎧 ' + UI.easyListen + '</b><p class="muted">Re-escuchá las ' + doneN + " lecturas que ya hiciste, solo audio, una tras otra: " +
+      asc += '<div class="card"><b>🎧 ' + UI.easyListen + '</b><p class="muted">Re-escuchá las ' + doneN + " lecturas que ya hiciste, solo audio, una tras otra: " +
         "material conocido a velocidad normal es lo que hace crecer la fluidez del oído (Chang & Millett 2014). Esta semana: " + listeningWeek() + " min.</p>" +
         '<button class="btn" id="playlib">▶ Escuchar todas</button></div>';
     }
+    if (asc) html += fold("lg:asc", "🎧 " + esc((TD && TD.names && TD.names.ascolto) || "Escuchas"), inp.listen + " min en 7 días", asc);
+
+    if (B) html += fold("lg:bib", "📚 " + esc(((window.BIBLIO_DATA || {}).ui || {}).name || "Biblioteca"), B.minutes ? B.minutes(state, 7) + " min en 7 días" : "",
+      B.leggiCard().replace(/^<div class="card bx-entry"><h2>[\s\S]*?<\/h2>/, '<div class="bx-entry">'));
+
+    // La velocidad: la curva del año y los textos para releer contra el reloj
+    var sp = Letture.speedStore ? Letture.speedStore(state) : null;
+    var bestIds = sp ? Object.keys(sp.best).filter(function (id) { return Letture.byId(id); }) : [];
+    var lastAt = {};
+    if (sp) sp.runs.forEach(function (r) { lastAt[r.id] = Math.max(lastAt[r.id] || 0, r.at); });
+    bestIds.sort(function (a, b) { return (lastAt[b] || 0) - (lastAt[a] || 0); });
+    html += fold("lg:speed", "⏱️ Tu velocidad de lectura", lastSpeed ? "~" + lastSpeed + " palabras por minuto" : "todavía sin medir",
+      '<p class="muted">Cada lectura se cronometra sola: desde que abrís el texto hasta «Terminé». Cuenta si después contestás bien el 70 % o más ' +
+        "(leer rápido sin entender no es leer).</p>" +
+      (curve.length ? (C ? C.curveSvg(curve) : "") + '<p class="muted small">Palabras por minuto en la primera lectura de cada semana del curso.</p>'
+        : '<p class="muted small">Todavía no hay lecturas medidas.</p>') +
+      (bestIds.length ? "<h3>Releé para bajar el tiempo</h3><div class=\"eps\">" + bestIds.slice(0, 5).map(function (id) {
+        var ep = Letture.byId(id);
+        return '<button class="ep" data-ep="' + id + '"><span class="e">⏱️</span><span><b>' + esc(ep.title) + '</b><span class="muted">tu mejor: ' + sp.best[id] + " palabras por minuto</span></span></button>";
+      }).join("") + "</div>" : "") +
+      '<p class="muted science">🔬 Relectura cronometrada con comprensión controlada (Chang y Millett 2013; Nation 2009): la fluidez lectora crece releyendo lo conocido más rápido.</p>');
+
     html += '<p class="muted science">🔬 Input comprensible (Krashen) con glosario para cubrir ' +
       "el ~98% del vocabulario (Hu y Nation); después, la caza de formas te hace notar la " +
       "gramática dentro de un texto que ya entendiste (Schmidt).</p>";
@@ -924,9 +1062,38 @@
       }).join("") + "</div>";
   }
 
+  /* Relectura cronometrada (Letture.speedNote / speedCommit): el reloj corre
+     desde que se abre el texto hasta «Terminé», sin el tiempo con la
+     pantalla oculta; si se usó el karaoke, esa vuelta fue de escucha y no
+     se mide. */
+  var readClock = null;   // { id, t0, hid, hidAt, kar }
+  document.addEventListener("visibilitychange", function () {
+    if (!readClock) return;
+    if (document.hidden) readClock.hidAt = Date.now();
+    else if (readClock.hidAt) { readClock.hid += Date.now() - readClock.hidAt; readClock.hidAt = 0; }
+  });
+  function readElapsed() { return readClock ? Date.now() - readClock.t0 - readClock.hid - (readClock.hidAt ? Date.now() - readClock.hidAt : 0) : 0; }
+  // The questions are over: the time counts if this attempt got 70 % or more.
+  function noteReadingSpeed() {
+    if (view.screen !== "risultato" || !round || round.kind !== "lettura" || !view.result || !Letture.speedCommit) return;
+    var r = Letture.speedCommit(state, round.arg, view.result.pct);
+    if (r.why === "none") return;
+    persist();
+    var msg = r.counted ? "⏱️ Leíste a <b>" + r.wpm + " palabras por minuto</b>" +
+        (r.re && r.prev ? (r.wpm > r.prev ? ": ¡más rápido que tu mejor (" + r.prev + ")!" : " (tu mejor: " + r.prev + ").") : ".") +
+        " Releelo cuando quieras para bajar el tiempo."
+      : r.why === "comp" ? "⏱️ Esta vez el tiempo no cuenta: la comprensión quedó debajo del " + Letture.SPEED_MIN_PCT + " %."
+      : r.why === "fast" ? "⏱️ Muy rápido para ser lectura: el tiempo no cuenta."
+      : r.why === "audio" ? "⏱️ Con el audio puesto fue escucha: el tiempo de lectura no se mide." : "";
+    var host = app().querySelector(".card");
+    if (msg && host) { var pEl = document.createElement("p"); pEl.className = "note speed-note"; pEl.innerHTML = msg; host.appendChild(pEl); }
+  }
+
   function renderLettura(ep) {
     stopKaraoke();
     var rate = view.karRate || 1, enh = !!view.enh && !!ep.flood;
+    if (!readClock || readClock.id !== ep.id) readClock = { id: ep.id, t0: Date.now(), hid: 0, hidAt: 0, kar: false };
+    var best = Letture.speedStore ? Letture.speedStore(state).best[ep.id] : 0;
     return '<button class="btn ghost" id="lback">' + (view.epFrom === "briefing" ? "← a la semana" : "← a " + UI.read) + "</button>" +
       "<h1>" + ep.emoji + " " + esc(ep.title) + "</h1>" +
       '<p class="lead">' + (ep.area ? esc(ep.area) + " · " : ep.series === "flood" ? UI.series.flood + " · " + esc(ep.grammar) + " · " :
@@ -949,7 +1116,9 @@
         '<p class="muted small">Primera pasada con el texto a 0,8×, segunda a 1× solo con las palabras clave, tercera solo audio: la escucha ' +
         "cuenta como input y suma xp. Esta semana llevás " + listeningWeek() + " min de escucha.</p></div>" +
       (ep.flood && !enh ? '<button class="btn wide ghost" id="enh">🌊 Segunda lectura con la estructura resaltada</button>' : "") +
-      '<button class="btn wide" id="lquiz">Lo leí → preguntas y caza de formas</button>';
+      '<p class="muted small speed-line">⏱️ El reloj corre desde que abriste el texto: cuando termines, tocá «Terminé». ' +
+        (best ? "Tu mejor en este texto: <b>" + best + " palabras por minuto</b>." : "Cuenta si después entendiste el " + Letture.SPEED_MIN_PCT + " % o más.") + "</p>" +
+      '<button class="btn wide" id="lquiz">Terminé → preguntas y caza de formas</button>';
   }
 
   /* Toque en la palabra: cualquier palabra de la lengua en un ejercicio muestra
@@ -1221,6 +1390,7 @@
       html += '<details class="more"><summary>¿Por qué? Más detalle</summary>' +
         b.more.map(function (par) { return "<p>" + mk(par) + "</p>"; }).join("") + "</details>";
     }
+    if (window.Referencia) html += Referencia.blockLink(b);   // usos reales y estado (referencia.js)
     return html + "</section>";
   }
 
@@ -1408,6 +1578,7 @@
         '<p class="lead">Semana ' + w.week + " · " + esc(ssd[les.sess] ? ssd[les.sess].h : w.title) + "</p>" +
         '<div class="scorebig"><b>' + les.right + "/" + les.asked + '</b><span>+' + les.xp + " xp</span></div>" +
         (les.extras || []).map(function (x) { return '<p class="note selfrepair">' + esc(x) + "</p>"; }).join("") +
+        (window.Referencia ? Referencia.lessonNote(w.week, ssd[les.sess] ? ssd[les.sess].blocks : null) : "") +
         '<p class="muted">' + (pct === 100 ? "Perfecta: ni un error en los chequeos." :
           pct >= 70 ? "Bien. Lo que fallaste vuelve en el entrenamiento." : "Repasala cuando quieras: se puede jugar de nuevo.") + "</p>" +
         '<div class="row centerrow" style="margin-top:14px">' +
@@ -1657,6 +1828,7 @@
           sub: best ? "Tu mejor: " + best.pct + " % · con 80 % queda hecho" : "Opcional · " + d.sub + ": las dos formas mezcladas y «¿qué te lo dijo?»" });
     });
     if (window.Escritos) Escritos.missions(w, state).forEach(m);   // escritura guiada (escritos.js), opcionales
+    if (window.Capas) Capas.missions(w, state).forEach(m);   // Biblioteca y Tres vueltas (capas.js), opcionales
     var domDone = Drills.dominated(st, w, state);
     m({ kind: "play2", done: domDone, ico: "🏆", title: "Dominala",
         sub: domDone ? "Dominada" + (st.domPct ? " · " + st.domPct + " %" : "")
@@ -1706,6 +1878,7 @@
     else if (kind === "storia") { view.screen = "storia"; render(); window.scrollTo(0, 0); }
     else if (window.Escritos && Escritos.handles(kind)) Escritos.go(kind, arg);
     else if (window.Tramo && Tramo.handles(kind)) Tramo.go(kind, arg);
+    else if (window.Capas && Capas.handles(kind)) Capas.go(kind, arg);
   }
 
   function missions(w, st, nChal) {
@@ -3769,6 +3942,7 @@
     else if (s === "escritos" && window.Escritos) html = Escritos.render();
     else if (window.Biblioteca && Biblioteca.owns(s)) html = Biblioteca.render(s, view);
     else if (window.Tramo && Tramo.owns(s)) html = Tramo.render(s);
+    else if (window.Capas && Capas.owns(s)) html = Capas.render(s);   // «Consultar» (js/capas.js)
 
     var gb = $("#glossbox");
     if (gb) gb.classList.remove("on");
@@ -3868,6 +4042,7 @@
     on("#ubicgo", startUbicacion);
     on("#ubicno", function () { state.ubicacion = { at: Date.now(), no: true }; persist(); render(); });
     if (window.TresLenguas) TresLenguas.wire(app(), {
+      state: function () { return state; }, persist: persist,
       show: function () { view.tab = "frasi"; view.screen = "tres"; render(); window.scrollTo(0, 0); },
       back: function () { go("frasi"); }, gain: function (n) { gain(n); persist(); renderHeader(); }, toast: toast });
 
@@ -3948,6 +4123,7 @@
     if (window.Escritos) Escritos.wire(view.screen);
     if (window.Biblioteca) Biblioteca.wire(view.screen, view);
     if (window.Tramo) Tramo.wire(view.screen);
+    if (window.Capas) Capas.wire(view.screen);
     on("#lesback", function () { view.screen = "briefing"; render(); });
     on("#lesplay", function () {
       var lw = course.weeks[view.week - 1];
@@ -3992,10 +4168,20 @@
       };
     });
     on("#lback", function () {
+      readClock = null;
       if (view.epFrom === "briefing") { view.epFrom = null; view.tab = "percorso"; view.screen = "briefing"; render(); window.scrollTo(0, 0); }
       else go("leggi");
     });
-    on("#lquiz", function () { startRound("lettura", view.ep); });
+    on("#lquiz", function () {
+      var ep = Letture.byId(view.ep);
+      if (ep && readClock && readClock.id === ep.id && Letture.speedNote) {
+        Letture.speedNote(state, ep, readElapsed(), { kar: readClock.kar, week: Math.min(state.unlocked || 1, 52) });
+        persist();
+      }
+      readClock = null;
+      startRound("lettura", view.ep);
+    });
+    noteReadingSpeed();
     on("#playlib", function () {
       var ids = Object.keys(state.letture || {}).filter(function (id) { return Letture.byId(id); });
       if (!ids.length) return toast("Todavía no terminaste ninguna lectura.");
@@ -4278,7 +4464,7 @@
     })();
   }
   function wireLettura() {
-    if (view.screen !== "lettura") return;
+    if (view.screen !== "lettura") { readClock = null; return; }   // salir del texto para el reloj
     var ep = Letture.byId(view.ep);
     if (!ep) return;
     var rate = view.karRate || 1;
@@ -4287,6 +4473,7 @@
       if (karaoke) { stopKaraoke(); document.body.classList.remove("kar-partial", "kar-audio"); if (b) b.textContent = "🎧 " + UI.karaoke; return; }
       var mode = (document.querySelector("[data-karmode].on") || {}).dataset ? document.querySelector("[data-karmode].on").dataset.karmode : "full";
       if (b) b.textContent = "⏹ Parar";
+      if (readClock && readClock.id === ep.id) readClock.kar = true;   // con audio fue escucha: no se cronometra
       startKaraoke(ep, rate, mode);
     });
     document.querySelectorAll("[data-rate]").forEach(function (b) {
@@ -5538,8 +5725,23 @@
     state: function () { return state; }, persist: persist,
     course: function () { return course; }, glossary: function () { return glossario; },
     fx: function (ok) { if (ok) fx.right(); else fx.wrong(); gain(ok ? 3 : 1); },
-    open: function () { view.screen = "gramatica"; render(); window.scrollTo(0, 0); },
-    back: function () { go(view.tab || "io"); }
+    open: function () { if (view.screen !== "gramatica") view.gramFrom = view.screen; view.screen = "gramatica"; render(); window.scrollTo(0, 0); },
+    back: function () {
+      if (view.gramFrom === "consultar") { view.gramFrom = null; view.screen = "consultar"; render(); window.scrollTo(0, 0); }
+      else go(view.tab || "io");
+    }
+  });
+  // Las capas (capas.js): «Consultar» y las misiones de la Biblioteca y de Tres vueltas.
+  if (window.Capas) Capas.attach({
+    state: function () { return state; }, persist: persist, speak: speak, glossary: function () { return glossario; },
+    show: function (sc) { view.screen = sc; render(); window.scrollTo(0, 0); },
+    back: function () { go(view.tab || "frasi"); },
+    refresh: function () { if (course && ["briefing", "percorso", "leggi"].indexOf(view.screen) >= 0) render(); },
+    openBook: function (id, ch) { if (window.Biblioteca) Biblioteca.openChapter(view, id, ch); },
+    tre: function (week) {
+      if (!window.EscrituraPlus) return;
+      view.week = week; EscrituraPlus.start("tre", week); view.screen = "eplus"; render(); window.scrollTo(0, 0);
+    }
   });
   // Escritura guiada (escritos.js): lo que necesita de la app.
   if (window.Escritos) Escritos.attach({
