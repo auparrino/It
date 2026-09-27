@@ -134,6 +134,8 @@
      gives colors (LANG.confetti.colors, CSS tokens), paper bits in the
      colors of the palette with an emoji now and then. */
   function confetti() {
+    // «Reduce motion» on the phone: no confetti falling
+    if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     var cf = LG.confetti || { bits: ["🎉", "✨", "⭐"], n: 16, ms: 1900 };
     var bits = cf.bits, col = null;
     if (cf.colors) {
@@ -394,9 +396,9 @@
             '<b>' + (pct >= 100 ? "✓" : todayXp) + '</b></div>' +
           (state.streak >= 7 ? '<div class="stat boost" title="racha de 7: xp ×1,2"><b>×1,2</b><span>xp</span></div>' : "") +
           (state.boost > 0 ? '<div class="stat boost" title="doble xp en la próxima ronda"><b>🎟️' + state.boost + '</b><span>doble</span></div>' : "") +
-          '<button class="mode" id="mode" title="modo oficina">' +
+          '<button class="mode" id="mode" title="modo oficina" aria-label="Modo oficina: sin sonidos" aria-pressed="' + (state.silent ? "true" : "false") + '">' +
             (state.silent ? "🤫" : "🔊") + '</button>' +
-          '<button class="mode" id="theme" title="tema claro u oscuro">' +
+          '<button class="mode" id="theme" title="tema claro u oscuro" aria-label="Tema oscuro" aria-pressed="' + (themeNow() === "dark" ? "true" : "false") + '">' +
             (themeNow() === "dark" ? "🌙" : "☀️") + '</button>' +
         '</div>' +
       '</div>' +
@@ -439,6 +441,11 @@
     view.tab = view.screen = tab;
     render();
     window.scrollTo(0, 0);
+    // The path opens at the week you are in, not at week 1 (52 nodes).
+    if (tab === "percorso") {
+      var cur = document.querySelector(".node.current") || document.querySelector(".node:not(.locked):last-of-type");
+      if (cur) try { cur.scrollIntoView({ block: "center" }); } catch (e) { /* */ }
+    }
   }
 
   /* ------------------------------------------------------------------ hoje */
@@ -925,7 +932,7 @@
     if (mode !== "hunt" && Letture.mcTargets) Letture.mcTargets(ep).forEach(function (i) { mc[i] = 1; });
     var toks0 = Letture.allTokens(ep);
     Object.keys(mc).forEach(function (i) { if (mcDone[Letture.core(toks0[i])]) delete mc[i]; });
-    return '<div class="text' + (mode === "hunt" ? " hunt" : "") + (enh ? " enh" : "") + '">' +
+    return '<div class="text' + (mode === "hunt" ? " hunt" : "") + (enh ? " enh" : "") + '" lang="' + LG.tts + '">' +
       Letture.paragraphs(ep).map(function (par) {
         return "<p>" + Letture.tokens(par).map(function (t) {
           var i = k++;
@@ -935,11 +942,11 @@
           var g = Letture.glossFor(ep, t);
           if (g && mc[i]) {
             glossIndex[i] = Letture.bare(t) + " — " + g;
-            return '<span class="w mcg' + (isForm(t) ? " form" : "") + '" data-k="' + i + '" data-mc="' + i + '">' + esc(t) + "</span>";
+            return '<span class="w mcg' + (isForm(t) ? " form" : "") + '" data-k="' + i + '" data-mc="' + i + '" role="button" tabindex="0">' + esc(t) + "</span>";
           }
           if (g) {
             glossIndex[i] = Letture.bare(t) + " — " + g;
-            return '<span class="w gl' + (isForm(t) ? " form" : "") + '" data-k="' + i + '" data-gl="' + i + '">' + esc(t) + "</span>";
+            return '<span class="w gl' + (isForm(t) ? " form" : "") + '" data-k="' + i + '" data-gl="' + i + '" role="button" tabindex="0">' + esc(t) + "</span>";
           }
           return '<span class="w' + (isForm(t) ? " form" : "") + '" data-k="' + i + '">' + esc(t) + "</span>";
         }).join(" ") + "</p>";
@@ -1099,7 +1106,8 @@
         html += '<div class="node' + (w.boss ? " boss" : "") + (open ? "" : " locked") +
             (current ? " current" : "") + (stars === 3 ? " full" : "") + '" style="--x:' + x + '%">' +
           (current ? '<span class="bubble">' + (weekStat(w.week).attempts || lessonRead(w.week) ? "SEGUÍ" : "EMPEZÁ") + "</span>" : "") +
-          '<button class="dot" data-week="' + w.week + '"' + (open ? "" : " disabled") + ">" +
+          '<button class="dot" data-week="' + w.week + '"' + (open ? "" : " disabled") +
+            ' aria-label="' + esc((w.boss ? UI.Boss + " · " : "") + UI.week + " " + w.week + ": " + w.title + " · " + stars + " de 3 estrellas" + (open ? "" : " · cerrada") + (current ? " · la actual" : "")) + '">' +
             (w.boss ? "⚔️" : open ? w.week : "🔒") + "</button>" +
           '<span class="nt">' + esc(w.title) + "</span>" + starsHtml(stars) +
           (open && !w.boss ? (function () { var pl = weekPlan(w); return '<span class="nm">' +
@@ -2171,7 +2179,7 @@
       '<div class="card">' +
         prompt.replace("</div>", sayBtn + "</div>") +
         lead +
-        (stem ? '<div class="stem">' + stem + "</div>" : "") +
+        (stem ? '<div class="stem"' + (it.type === "translate" || it.src === "vocab" ? "" : ' lang="' + LG.tts + '"') + ">" + stem + "</div>" : "") +
         body +
         // read aloud when it changes: the verdict and the correction
         '<div id="fb" aria-live="polite"></div>' +
@@ -2949,7 +2957,7 @@
       '<div class="verdict">' + (q === 2 ? "¡Buen olfato!" : "Era esta. Mirá qué tenía tu opción:") +
         ' <span class="xpgain">+' + gained + " xp</span></div>" +
       (q === 2 ? "" : guessWhy(it, given)) +
-      '<div class="sol">' + esc(it.answer) + "</div>" +
+      '<div class="sol" lang="' + LG.tts + '">' + esc(it.answer) + "</div>" +
       (it.note ? '<div class="note">' + mk(it.note) + "</div>" : "") +
       (q === 2 ? guessOthers(it) : "") +
       desgloseHtml(targetText(it), true) +
@@ -3488,7 +3496,7 @@
         "Si borrás los datos del navegador se pierde: guardá una copia de vez en cuando.</p>" +
         '<div class="row"><button class="btn" id="export">💾 Guardar copia</button>' +
         '<button class="btn ghost" id="import">📂 Restaurar copia</button>' +
-        '<input type="file" id="importfile" accept="application/json,.json" hidden></div>' +
+        '<input type="file" id="importfile" aria-label="Archivo de la copia" accept="application/json,.json" hidden></div>' +
         '<p class="muted" id="persistmsg" style="margin-top:10px"></p>' +
       "</div>" +
 
@@ -3536,7 +3544,7 @@
     return '<div class="card" id="plancard"><h2>🎯 Tu meta</h2>' +
       '<span class="chips">' + WHY.map(function (w) { return '<button class="tab' + (id.why === w[0] ? " on" : "") + '" data-why3="' + w[0] + '">' + w[1] + "</button>"; }).join("") + "</span>" +
       '<label class="set"><span>Con tus palabras<small>' + UI.metaEx + "</small></span></label>" +
-      '<div class="typed"><input id="idealtext" maxlength="120" value="' + esc(id.text || "") + '" placeholder="En seis meses…"><button class="tab" id="idealsave">Guardar</button></div>' +
+      '<div class="typed"><input id="idealtext" aria-label="Para qué querés aprender, con tus palabras" maxlength="120" value="' + esc(id.text || "") + '" placeholder="En seis meses…"><button class="tab" id="idealsave">Guardar</button></div>' +
       (why || id.text ? '<p class="muted small">Tu meta: ' + (why ? esc(why[1]) : "") + (id.text ? " · «" + esc(id.text) + "»" : "") + "</p>" : "") +
       '<h3>🏅 Récords personales</h3><table class="res">' +
         "<tr><td>Mejor sesión</td><td>" + (rec.sessione || 0) + " %</td></tr>" +
@@ -3781,7 +3789,7 @@
     var inGame = ["gioco", "lampo", "lezione"].indexOf(view.screen) >= 0;
     nav.hidden = inGame;
     nav.innerHTML = TABS.map(function (t) {
-      return '<button class="' + (view.tab === t[0] ? "on" : "") + '" data-tab="' + t[0] + '">' +
+      return '<button class="' + (view.tab === t[0] ? "on" : "") + '" data-tab="' + t[0] + '"' + (view.tab === t[0] ? ' aria-current="page"' : "") + ">" +
         '<span>' + t[1] + "</span>" + t[2] + "</button>";
     }).join("");
     nav.querySelectorAll("[data-tab]").forEach(function (b) {
@@ -5554,6 +5562,14 @@
       toast("Progreso borrado.");
     });
   }
+
+  // Words and chips that act like buttons (span role="button"): Enter and
+  // the space bar work on them as on a button.
+  document.addEventListener("keydown", function (e) {
+    var t = e.target;
+    if (!t || t.tagName === "BUTTON" || t.getAttribute("role") !== "button") return;
+    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); t.click(); }
+  });
 
   /* ------------------------------------------------------------------ arranque */
 

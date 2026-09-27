@@ -638,3 +638,19 @@ ul.errlog details p { margin: 6px 0 0; font-size: .9rem; }
   display: flex; gap: 12px; align-items: center; justify-content: space-between; padding: 10px 14px; border-radius: 14px;
   background: var(--card, #fff); color: var(--ink, #222); box-shadow: 0 6px 24px rgba(0,0,0,.18); }
 .updbar .btn { min-height: 44px; }
+
+/* --- accesibilidad --- */
+/* el foco del teclado siempre a la vista */
+:focus-visible { outline: 3px solid currentColor; outline-offset: 2px; }
+.btn:focus-visible, .opt:focus-visible, .mission:focus-visible { outline-color: var(--focus-ring, #1a5fb4); }
+/* zonas táctiles de 44 px aunque el botón se vea más chico */
+.mode, #quit, #lesquit { position: relative; }
+.mode::after, #quit::after, #lesquit::after { content: ""; position: absolute; inset: -6px; }
+.accents button { min-width: 44px; min-height: 44px; }
+.w[role="button"] { cursor: pointer; }
+select { max-width: 100%; }
+input[type="checkbox"], input[type="radio"] { min-width: 22px; min-height: 22px; }
+@media (prefers-reduced-motion: reduce) {
+  .shake { animation: none; }
+  .ep-timer.low { animation: none; }
+}

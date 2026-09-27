@@ -168,7 +168,7 @@ header.top::before {
 .targa.big .t-sup { font-size: .68rem; letter-spacing: .26em; }
 .targa.big .t-via { font-size: 1.6rem; line-height: 1.15; margin-top: 3px; }
 @media (max-width: 520px) { .targa.big .t-via { font-size: 1.36rem; } }
-.stat span { font-size: .56rem; color: var(--grigio); text-transform: uppercase; letter-spacing: .1em; font-weight: 700; }
+.stat span { font-size: .6875rem; color: var(--grigio); text-transform: uppercase; letter-spacing: .1em; font-weight: 700; }
 .stat.hot b { color: var(--terracotta); }
 .ring { --p: 0; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; flex: none;
   background: conic-gradient(var(--oro) 0, var(--terracotta-chiara) calc(var(--p) * 1%), var(--grigio-chiaro) 0); }
@@ -421,7 +421,7 @@ html[data-theme="dark"] .opt.right { color: var(--verde-chiaro); } html[data-the
   flex: 1; min-width: 0; padding: 14px 16px; border-radius: 12px; background: var(--carta);
   border: 1.5px solid var(--grigio-chiaro); color: inherit; font: inherit; font-size: 1.08rem; font-weight: 700; }
 .typed textarea { flex: 1 1 100%; resize: none; overflow: hidden; line-height: 1.4; min-height: 54px; }
-.typed input:focus, .typed textarea:focus { outline: none; border-color: var(--terracotta);
+.typed input:focus, .typed textarea:focus { border-color: var(--terracotta);
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--terracotta) 15%, transparent); }
 .accents button { border: 1.5px solid var(--grigio-chiaro); background: var(--carta); color: inherit;
   border-radius: 10px; padding: 7px 12px; font-weight: 700; }
@@ -549,7 +549,7 @@ ul.reqs li.ok { color: var(--verde); font-weight: 700; }
 textarea.scrivi { width: 100%; box-sizing: border-box; min-height: 160px; resize: none; overflow: hidden;
   font: inherit; font-size: 1.05rem; line-height: 1.5; padding: 14px; border-radius: 12px;
   border: 1.5px solid var(--grigio-chiaro); background: var(--carta); color: var(--inchiostro); }
-textarea.scrivi:focus { outline: none; border-color: var(--terracotta); }
+textarea.scrivi:focus { border-color: var(--terracotta); }
 .scrivi-marked mark.bad { background: color-mix(in srgb, var(--terracotta) 22%, transparent); text-decoration: underline wavy var(--terracotta); }
 .scrivi-marked mark.soft { background: color-mix(in srgb, var(--oro) 20%, transparent); }
 ol.findings li { padding: 6px 0; border-top: 1px solid var(--grigio-chiaro); }
@@ -576,7 +576,7 @@ details.aibox input, .card input#aikey, .card input#gemkey { display: block; wid
   header.top .bar { padding: 8px 12px; gap: 6px; }
   .stats { gap: 7px; }
   .stat { min-width: 32px; }
-  .stat span { font-size: .5rem; letter-spacing: .06em; }
+  .stat span { font-size: .6875rem; letter-spacing: .02em; }
   .mode { width: 34px; height: 34px; font-size: .95rem; }
   .ring { width: 36px; height: 36px; } .ring b { width: 28px; height: 28px; font-size: .68rem; }
   .targa { padding: 4px 9px 3px; } .targa .t-via { font-size: 1rem; } .targa .t-sup { font-size: .52rem; }

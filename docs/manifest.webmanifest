@@ -3,6 +3,7 @@
   "short_name": "C1",
   "description": "Italiano o portugués de Brasil hasta C1 en un año, para hispanohablantes: frases, escucha, pausas de 3 minutos y gramática. Funciona sin internet.",
   "lang": "es",
+  "id": "./",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
