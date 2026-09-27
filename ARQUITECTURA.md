@@ -83,3 +83,25 @@ y una tarea integrada.
   Leggi / Ler. Guarda en `state.tramo`.
 - **Test**: `tools/lib/test_tramo.js`.
 
+**Un aprendizaje que se adapta** (`js/reglas.js`, cargado después de
+`referencia.js`).
+- **La regla como ficha**: cada ejercicio del curso está enlazado al bloque
+  de teoría que lo explica (`Porque.blockFor`); contestarlo abre o alimenta
+  la ficha `r:<semana>:<bloque>` (una vez por día). Al vencer, el repaso pide
+  una oración nueva de esa regla: del banco, con toda su gramática ya
+  enseñada (`Banca.sentenceOk`), o del curso, del mismo bloque. Cuatro por
+  día como mucho (`Drills` `RULES_A_DAY`), las falladas siempre.
+- **Qué ficha deja cada respuesta** (`Reglas.afterAnswer`, lo usan `settle` y
+  la simulación): en las rondas, un reconocimiento acertado y una forma
+  escrita bien no crean ficha suelta (quedan en `state.recog`: la próxima vez,
+  escritos); una forma fallada vuelve por la ficha de su regla; una oración
+  (acertada o fallada) y un reconocimiento fallado, como ficha propia.
+- **Transferencia**: `Engine.enqueue(state, id, ítem, opts)` crea una ficha
+  para mañana desde cualquier módulo (`state.own`); la usan la lección, la
+  lectura, el dictogloss, el C-test y la ubicación. La Clínica abre con «tus
+  errores de esta semana» y mezcla esos ítems con los genéricos.
+- **Jefe por destreza** (`Drills.buildBoss`): lectura, escucha, producción y
+  estructuras (`it.skill`), cada una con su 55 %; otras preguntas si se
+  repite el mismo día. xp por costo cognitivo (`Engine.xpFor(v, racha, ítem,
+  {old})`) y metas recalibradas (`Engine.goalValue`).
+- **Test**: `tools/lib/test_reglas.js`.

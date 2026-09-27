@@ -995,12 +995,12 @@
     var rules = 0;
     return due.filter(function (d) {
       // the rules (a new sentence each) are a few a day too: they wait, they never pile up
-      if (d.id.indexOf("r:") === 0 && ++rules > RULES_A_DAY) return false;
+      if (d.id.indexOf("r:") === 0 && d.pri > 0 && ++rules > RULES_A_DAY) return false;
       if (!d.maint) return true;
       return ++maint <= MAINT_A_DAY;
     });
   }
-  var RULES_A_DAY = 6;
+  var RULES_A_DAY = 4;
 
   function buildReview(course, state, size, opts) {
     var map = (opts && opts.map) || itemsById(course);

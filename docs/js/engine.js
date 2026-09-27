@@ -497,8 +497,16 @@
 
   /* Fin de semana liviano (la guía): la meta baja a la mitad el sábado y el
      domingo, para no cortar la racha ni pedir las tres horas. */
+  /* The daily goals were set when every right answer paid 10 xp plus the
+     combo.  With the xp by cognitive cost the same minutes earn about 70 %
+     of that (measured with tools/<code>/sim_carriera.js: 2.434 → 1.725 xp
+     per hour in italiano, 2.561 → 1.641 in portugués), so the goal the
+     learner chose (100 / 200 / 350 / 500, the level of effort) is worth
+     that much xp now: the time a day does not change. */
+  var GOAL_SCALE = 0.7;
+  function goalValue(g) { return Math.round((+g || 200) * GOAL_SCALE / 10) * 10; }
   function goalFor(state, now) {
-    var d = now || new Date(), goal = state.goal || 200;
+    var d = now || new Date(), goal = goalValue(state.goal || 200);
     var wd = d.getDay();
     return wd === 0 || wd === 6 ? Math.max(50, Math.round(goal / 2 / 50) * 50) : goal;
   }
@@ -1009,7 +1017,7 @@
       test: function (s) { return (s.dailyWon || 0) >= 10; } },
     { id: "costante",
       test: function (s) {
-        var g = s.goal || 200;
+        var g = goalValue(s.goal || 200);
         return Object.keys(s.days || {}).filter(function (k) {
           return s.days[k] >= g;
         }).length >= 5;
@@ -1070,6 +1078,8 @@
     RETENTIONS: RETENTIONS,
     MAINT_S: MAINT_S,
     goalFor: goalFor,
+    goalValue: goalValue,
+    GOAL_SCALE: GOAL_SCALE,
     STRANDS: STRANDS,
     addStrand: addStrand,
     strandsLast: strandsLast,

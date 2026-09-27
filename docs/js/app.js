@@ -457,7 +457,7 @@
     var chestOpen = state.chest === Engine.dayKey();
     var due = Drills.dueCount(course, state, itemMap);
     var dueToday = Math.min(due, 20);
-    var weekend = Engine.goalFor(state) < (state.goal || 200);
+    var weekend = Engine.goalFor(state) < (Engine.goalValue ? Engine.goalValue(state.goal) : state.goal || 200);
     var strands = Engine.strandsLast(state, 7);
     var dailyDone = state.dailyDone === Engine.dayKey();
     var w = course.weeks[Math.min(state.unlocked, 52) - 1];
@@ -3622,8 +3622,9 @@
 
       '<div class="card"><h2>Ajustes</h2>' +
         '<label class="set"><span>Meta diaria</span><select id="goal">' +
-          [[100, "Relajada · 100 xp (2 o 3 pausas; 50 el finde)"], [200, "Normal · 200 xp (4 o 5 pausas; 100 el finde)"],
-           [350, "Seria · 350 xp"], [500, "Intensa · 500 xp"]].map(function (g) {
+          // (the level of effort is kept as 100/200/350/500; the xp it asks, Engine.goalValue)
+          [[100, "Relajada · " + Engine.goalValue(100) + " xp (2 o 3 pausas)"], [200, "Normal · " + Engine.goalValue(200) + " xp (4 o 5 pausas)"],
+           [350, "Seria · " + Engine.goalValue(350) + " xp"], [500, "Intensa · " + Engine.goalValue(500) + " xp"]].map(function (g) {
             return '<option value="' + g[0] + '"' + (state.goal === g[0] ? " selected" : "") +
               ">" + g[1] + "</option>";
           }).join("") + "</select></label>" +
@@ -5679,7 +5680,7 @@
       state.goal = +goal.value;
       persist();
       renderHeader();
-      toast("Meta: " + state.goal + " xp por día");
+      toast("Meta: " + Engine.goalValue(state.goal) + " xp por día");
     };
     var themeSel = $("#theme-set");
     if (themeSel) themeSel.onchange = function () {

@@ -227,9 +227,14 @@
       // F4: in the rounds, an exercise of the course right at first makes a
       // card only when it was real production (a sentence written, not a
       // form in a gap: the rule card keeps the form coming back, in new
-      // sentences); a miss always does.  The new sentence of a rule makes
-      // none (its rule card brings another one, right or wrong).
-      var skip = !had && ((q === 2 && isCourse && ROUNDISH[o.kind] && !(produced && production(it))) || it.ruleReview);
+      // sentences).  What fails enters: a sentence or a recognition as its
+      // own card; a form written wrong, as the card of its rule, which is
+      // due tomorrow with another sentence (the rule is the unit).  The
+      // new sentence of a rule makes none (its rule card brings another
+      // one, right or wrong).
+      var form = isCourse && ROUNDISH[o.kind] && !production(it);
+      var skip = !had && ((q === 2 && isCourse && ROUNDISH[o.kind] && !(produced && production(it))) ||
+                          (q < 2 && form && produced && !it.retry && !!ruleOf(it)) || it.ruleReview);
       if (skip && q === 2) {
         if (!state.recog) state.recog = {};
         state.recog[it.id] = Math.round(now / 60000);

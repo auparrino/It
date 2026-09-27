@@ -46,6 +46,8 @@ pack.LANGS.forEach(function (code) {
   ok(E.xpFor("sbagliato", 3, cloze) === 0, tag + "un error no paga");
   ok(E.xpText(40, 2, true) === 20 + 2 * E.XP.textStruct + E.XP.textClean, tag + "texto libre: por palabra, estructura y limpio");
   ok(E.xpText(1000, 0, false) === E.XP.textMax, tag + "texto libre: con tope");
+  var sg = E.blankSave(); sg.goal = 200;
+  ok(E.goalValue(200) === 140 && E.goalFor(sg, new Date(2026, 8, 23)) === 140, tag + "la meta diaria se recalibró a la xp por costo (200 → 140)");
 
   /* ---------------------------------------------------- Engine.enqueue */
   var st = fresh(10), now = Date.now();
@@ -90,7 +92,10 @@ pack.LANGS.forEach(function (code) {
   var other = withRule.filter(function (x) { return R.ruleOf(x) === rule0 && x.id !== it0.id; })[0] || it0;
   R.afterAnswer(st, other, 0, { kind: "round", now: t0 + 120000 });
   ok(st.cards[rule0].reps === 0, tag + "un error del día sí la mueve");
-  ok(!!st.cards[other.id], tag + "lo fallado entra al repaso");
+  var formOther = ({ cloze: 1, conjugate: 1, plural: 1, typed: 1 })[other.type] && String(other.answer).split(" ").length < 3;
+  ok(formOther ? !st.cards[other.id] : !!st.cards[other.id], tag + "lo fallado entra al repaso (una forma, por la ficha de su regla)");
+  var recWrong = D.recognitionOf(withRule[withRule.length - 1], items, W);
+  if (recWrong) { R.afterAnswer(st, recWrong, 0, { kind: "round", now: t0 }); ok(!!st.cards[recWrong.id], tag + "un reconocimiento fallado entra como ficha"); }
   // a form written right at first in a round: no card (the rule has it); a sentence: yes
   var form = items.filter(function (x) { return x.type === "cloze" && String(x.answer).split(" ").length === 1 && !st.cards[x.id]; })[0];
   if (form) { R.afterAnswer(st, form, 2, { kind: "round", now: t0 }); ok(!st.cards[form.id], tag + "una forma escrita bien no crea ficha suelta"); }
