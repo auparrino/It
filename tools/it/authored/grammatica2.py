@@ -770,7 +770,7 @@ ITEMS += [
                   "No cambian: se repite la frase tal cual."],
          answer="Presente → imperfetto, passato prossimo → trapassato, futuro → condizionale passato.",
          note="Regla: como en castellano, el presente pasa a imperfetto y el passato prossimo a trapassato. La diferencia: el futuro pasa al condizionale PASSATO "
-              "(ha detto che sarebbe venuto = dijo que vendría), no al condicional simple. También cambian domani → il giorno dopo, qui → lì."),
+              "(ha detto che sarebbe venuto = dijo que vendría), no al condizionale presente. También cambian domani → il giorno dopo, qui → lì."),
     dict(id="g2-sc-22-a", type="choice", topic="scopri-app", level="B2", w=38, set="g2-sc-22",
          prompt="Aplicá la regla.", stem="«Ho fame.» → Ha detto che ___ fame.", options=["aveva", "ha", "avrebbe"], answer="aveva",
          note="Presente → imperfetto: aveva."),
@@ -1038,7 +1038,7 @@ ITEMS += [
     dict(id="g2-out-cor-10", type="translate", topic="output", level="B1", w=21, capire="cortesia",
          prompt="Traducí al italiano de manera cortés.", stem="Quisiera un vaso de agua.", answer="Vorrei un bicchiere d'acqua",
          alt=["Vorrei un bicchiere di acqua"],
-         note="Para pedir con cortesía se usa el condicional *vorrei*; «vaso» es *bicchiere* (*vaso* en italiano es «florero»)."),
+         note="Para pedir con cortesía se usa el condizionale *vorrei*; «vaso» es *bicchiere* (*vaso* en italiano es «florero»)."),
     dict(id="g2-out-cor-11", type="translate", topic="output", level="B1", w=21, capire="cortesia",
          prompt="Traducí al italiano de manera cortés (a un desconocido).", stem="¿Podría decirme dónde está la estación?",
          answer="Potrebbe dirmi dov'è la stazione?", alt=["Mi potrebbe dire dov'è la stazione?", "Potrebbe dirmi dove è la stazione?"],

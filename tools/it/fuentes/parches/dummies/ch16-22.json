@@ -463,7 +463,7 @@
    "note": "*partire* con *essere*; femenino plural → *partite*."
   },
   "d16-051": {
-   "consigna": "Conjugá el verbo en imperfetto (pretérito imperfecto) según el sujeto.",
+   "consigna": "Conjugá el verbo en imperfetto según el sujeto.",
    "type": "conjugate",
    "stem": "Tu ___ (mangiare)",
    "answer": "mangiavi",
@@ -472,7 +472,7 @@
    "note": "Imperfetto = raíz + *-avo, -avi, -ava...*: *mangiavi*, como «comías» con la marca -v-."
   },
   "d16-052": {
-   "consigna": "Conjugá el verbo en imperfetto (pretérito imperfecto) según el sujeto.",
+   "consigna": "Conjugá el verbo en imperfetto según el sujeto.",
    "type": "conjugate",
    "stem": "Lui ___ (parlare)",
    "answer": "parlava",
@@ -481,7 +481,7 @@
    "note": "Imperfetto de -are: *-ava*, como «hablaba»."
   },
   "d16-053": {
-   "consigna": "Conjugá el verbo en imperfetto (pretérito imperfecto) según el sujeto.",
+   "consigna": "Conjugá el verbo en imperfetto según el sujeto.",
    "type": "conjugate",
    "stem": "Loro ___ (scrivere)",
    "answer": "scrivevano",
@@ -490,7 +490,7 @@
    "note": "Imperfetto de -ere: *-evano*, con v donde el castellano pone «-ían»."
   },
   "d16-054": {
-   "consigna": "Conjugá el verbo en imperfetto (pretérito imperfecto) según el sujeto.",
+   "consigna": "Conjugá el verbo en imperfetto según el sujeto.",
    "type": "conjugate",
    "stem": "I bimbi ___ (dormire)",
    "answer": "dormivano",
@@ -499,7 +499,7 @@
    "note": "Imperfetto de -ire: *-ivano*: *dormivano*."
   },
   "d16-055": {
-   "consigna": "Conjugá el verbo en imperfetto (pretérito imperfecto) según el sujeto.",
+   "consigna": "Conjugá el verbo en imperfetto según el sujeto.",
    "type": "conjugate",
    "stem": "Tu e Laura ___ (ripetere)",
    "answer": "ripetevate",
@@ -508,7 +508,7 @@
    "note": "*tu e Laura* = *voi*; imperfetto de -ere en *voi*: *-evate* (*ripetevate*), donde el castellano dice «repetían»."
   },
   "d16-056": {
-   "consigna": "Conjugá el verbo en imperfetto (pretérito imperfecto) según el sujeto.",
+   "consigna": "Conjugá el verbo en imperfetto según el sujeto.",
    "type": "conjugate",
    "stem": "Io ___ (andare)",
    "answer": "andavo",
@@ -517,7 +517,7 @@
    "note": "*andare* es regular en imperfetto: *andavo*."
   },
   "d16-057": {
-   "consigna": "Conjugá el verbo en imperfetto (pretérito imperfecto) según el sujeto.",
+   "consigna": "Conjugá el verbo en imperfetto según el sujeto.",
    "type": "conjugate",
    "stem": "Noi ___ (preferire)",
    "answer": "preferivamo",
@@ -526,7 +526,7 @@
    "note": "-ire en imperfetto: *-ivamo*; el *-isc-* desaparece: *preferivamo*."
   },
   "d16-058": {
-   "consigna": "Conjugá el verbo en imperfetto (pretérito imperfecto) según el sujeto.",
+   "consigna": "Conjugá el verbo en imperfetto según el sujeto.",
    "type": "conjugate",
    "stem": "Gli amici ___ (venire)",
    "answer": "venivano",
@@ -535,7 +535,7 @@
    "note": "*venire* es regular en imperfetto: *venivano*."
   },
   "d16-059": {
-   "consigna": "Conjugá el verbo en imperfetto (pretérito imperfecto) según el sujeto.",
+   "consigna": "Conjugá el verbo en imperfetto según el sujeto.",
    "type": "conjugate",
    "stem": "Voi ___ (giocare)",
    "answer": "giocavate",
@@ -544,7 +544,7 @@
    "note": "Imperfetto de -are en *voi*: *-avate* (*giocavate*); la -v- corresponde a nuestra «-b-» de «jugaban»."
   },
   "d16-060": {
-   "consigna": "Conjugá el verbo en imperfetto (pretérito imperfecto) según el sujeto.",
+   "consigna": "Conjugá el verbo en imperfetto según el sujeto.",
    "type": "conjugate",
    "stem": "La donna ___ (finire)",
    "answer": "finiva",
@@ -1254,52 +1254,52 @@
    "note": "*se* + futuro para el hecho futuro; «visitar a alguien» es *venire/andare a trovare*, no *visitare* (que es para médicos o museos)."
   },
   "d18-036": {
-   "consigna": "Completá con el condicional simple (condizionale presente) del verbo entre paréntesis.",
+   "consigna": "Completá con el condizionale presente del verbo entre paréntesis.",
    "type": "cloze",
    "stem": "Io gliene ___ (parlare) domani.",
    "answer": "parlerei",
    "alt": [],
    "drop": false,
-   "note": "El condicional de -are cambia la a por e y termina en *-ei*: *parlerei*, «hablaría»."
+   "note": "El condizionale de -are cambia la a por e y termina en *-ei*: *parlerei*, «hablaría»."
   },
   "d18-037": {
-   "consigna": "Completá con el condicional simple (condizionale presente) del verbo entre paréntesis.",
+   "consigna": "Completá con el condizionale presente del verbo entre paréntesis.",
    "type": "cloze",
    "stem": "Tu ___ (mangiare) quello?",
    "answer": "mangeresti",
    "alt": [],
    "drop": false,
-   "note": "El condicional de *mangiare* pierde la i: *mangeresti*."
+   "note": "El condizionale de *mangiare* pierde la i: *mangeresti*."
   },
   "d18-038": {
-   "consigna": "Completá con el condicional simple (condizionale presente) del verbo entre paréntesis.",
+   "consigna": "Completá con el condizionale presente del verbo entre paréntesis.",
    "type": "cloze",
    "stem": "La signora ___ (imparare) l’italiano ma non vuole studiare.",
    "answer": "imparerebbe",
    "alt": [],
    "drop": false,
-   "note": "El condicional de -are cambia la a por e: *imparerebbe*."
+   "note": "El condizionale de -are cambia la a por e: *imparerebbe*."
   },
   "d18-039": {
-   "consigna": "Completá con el condicional simple (condizionale presente) del verbo entre paréntesis.",
+   "consigna": "Completá con el condizionale presente del verbo entre paréntesis.",
    "type": "cloze",
    "stem": "Noi ___ (leggere) il libro per il corso.",
    "answer": "leggeremmo",
    "alt": [],
    "drop": false,
-   "note": "*noi* del condicional tiene doble m: *leggeremmo* (con una sola m sería futuro)."
+   "note": "*noi* del condizionale tiene doble m: *leggeremmo* (con una sola m sería futuro)."
   },
   "d18-040": {
-   "consigna": "Completá con el condicional simple (condizionale presente) del verbo entre paréntesis.",
+   "consigna": "Completá con el condizionale presente del verbo entre paréntesis.",
    "type": "cloze",
    "stem": "Voi ___ (dormire) tardi.",
    "answer": "dormireste",
    "alt": [],
    "drop": false,
-   "note": "Condicional de -ire: *dormireste*, sobre el infinitivo."
+   "note": "Condizionale de -ire: *dormireste*, sobre el infinitivo."
   },
   "d18-041": {
-   "consigna": "Completá con el condicional simple (condizionale presente) del verbo entre paréntesis.",
+   "consigna": "Completá con el condizionale presente del verbo entre paréntesis.",
    "type": "cloze",
    "stem": "Paolo ___ (pagare) il conto.",
    "answer": "pagherebbe",
@@ -1308,7 +1308,7 @@
    "note": "*pagare* agrega h ante e para conservar la g dura: *pagherebbe*."
   },
   "d18-042": {
-   "consigna": "Completá con el condicional simple (condizionale presente) del verbo entre paréntesis.",
+   "consigna": "Completá con el condizionale presente del verbo entre paréntesis.",
    "type": "cloze",
    "stem": "Loro ___ (cercare) biglietti per il viaggio.",
    "answer": "cercherebbero",
@@ -1317,7 +1317,7 @@
    "note": "*cercare* agrega h ante e: *cercherebbero*."
   },
   "d18-043": {
-   "consigna": "Completá con el condicional simple (condizionale presente) del verbo entre paréntesis.",
+   "consigna": "Completá con el condizionale presente del verbo entre paréntesis.",
    "type": "cloze",
    "stem": "Tu ed io ___ (viaggiare) bene insieme.",
    "answer": "viaggeremmo",
@@ -1326,61 +1326,61 @@
    "note": "*viaggiare* pierde la i y *noi* lleva doble m: *viaggeremmo* (con una m sería futuro)."
   },
   "d18-044": {
-   "consigna": "Completá con el condicional simple (condizionale presente) del verbo entre paréntesis.",
+   "consigna": "Completá con el condizionale presente del verbo entre paréntesis.",
    "type": "cloze",
    "stem": "Io non gli ___ (scrivere).",
    "answer": "scriverei",
    "alt": [],
    "drop": false,
-   "note": "Condicional de -ere: *scriverei*, sobre el infinitivo sin la e final."
+   "note": "Condizionale de -ere: *scriverei*, sobre el infinitivo sin la e final."
   },
   "d18-045": {
-   "consigna": "Completá con el condicional simple (condizionale presente) del verbo entre paréntesis.",
+   "consigna": "Completá con el condizionale presente del verbo entre paréntesis.",
    "type": "cloze",
    "stem": "Le ragazze ___ (comprare) delle belle scarpe per il ballo, ma non hanno soldi.",
    "answer": "comprerebbero",
    "alt": [],
    "drop": false,
-   "note": "El condicional de -are cambia la a por e: *comprerebbero*."
+   "note": "El condizionale de -are cambia la a por e: *comprerebbero*."
   },
   "d18-046": {
-   "consigna": "Completá con el condicional simple (condizionale presente) del verbo entre paréntesis.",
+   "consigna": "Completá con el condizionale presente del verbo entre paréntesis.",
    "type": "cloze",
    "stem": "Mi ___ (tu, fare) un favore?",
    "answer": "faresti",
    "alt": [],
    "drop": false,
-   "note": "*faresti*: el condicional suaviza el pedido, como «¿me harías...?»."
+   "note": "*faresti*: el condizionale suaviza el pedido, como «¿me harías...?»."
   },
   "d18-047": {
-   "consigna": "Completá con el condicional simple (condizionale presente) del verbo entre paréntesis.",
+   "consigna": "Completá con el condizionale presente del verbo entre paréntesis.",
    "type": "cloze",
    "stem": "La mamma ___ (sapere).",
    "answer": "saprebbe",
    "alt": [],
    "drop": false,
-   "note": "*sapere* hace el condicional contracto: *saprebbe*."
+   "note": "*sapere* hace el condizionale contracto: *saprebbe*."
   },
   "d18-048": {
-   "consigna": "Completá con el condicional simple (condizionale presente) del verbo entre paréntesis.",
+   "consigna": "Completá con el condizionale presente del verbo entre paréntesis.",
    "type": "cloze",
    "stem": "Io non lo ___ (fare).",
    "answer": "farei",
    "alt": [],
    "drop": false,
-   "note": "*fare* hace el condicional sobre *far-*: *farei*."
+   "note": "*fare* hace el condizionale sobre *far-*: *farei*."
   },
   "d18-049": {
-   "consigna": "Completá con el condicional simple (condizionale presente) del verbo entre paréntesis.",
+   "consigna": "Completá con el condizionale presente del verbo entre paréntesis.",
    "type": "cloze",
    "stem": "Voi ci ___ (essere)?",
    "answer": "sareste",
    "alt": [],
    "drop": false,
-   "note": "*essere* hace el condicional sobre *sar-*: *sareste*."
+   "note": "*essere* hace el condizionale sobre *sar-*: *sareste*."
   },
   "d18-050": {
-   "consigna": "Completá con el condicional simple (condizionale presente) del verbo entre paréntesis.",
+   "consigna": "Completá con el condizionale presente del verbo entre paréntesis.",
    "type": "cloze",
    "stem": "Loro ___ (vivere) con gli amici.",
    "answer": "vivrebbero",
@@ -1389,25 +1389,25 @@
    "note": "*vivere* pierde la e: *vivrebbero*."
   },
   "d18-051": {
-   "consigna": "Completá con el condicional simple (condizionale presente) del verbo entre paréntesis.",
+   "consigna": "Completá con el condizionale presente del verbo entre paréntesis.",
    "type": "cloze",
    "stem": "Domani Marco ___ (avere) un po’ di tempo libero.",
    "answer": "avrebbe",
    "alt": [],
    "drop": false,
-   "note": "*avere* hace el condicional contracto *avr-*: *avrebbe*."
+   "note": "*avere* hace el condizionale contracto *avr-*: *avrebbe*."
   },
   "d18-052": {
-   "consigna": "Completá con el condicional simple (condizionale presente) del verbo entre paréntesis.",
+   "consigna": "Completá con el condizionale presente del verbo entre paréntesis.",
    "type": "cloze",
    "stem": "Noi ___ (studiare) stasera.",
    "answer": "studieremmo",
    "alt": [],
    "drop": false,
-   "note": "*noi* del condicional lleva doble m: *studieremmo* (*studieremo* es futuro)."
+   "note": "*noi* del condizionale lleva doble m: *studieremmo* (*studieremo* es futuro)."
   },
   "d18-053": {
-   "consigna": "Completá con el condicional simple (condizionale presente) del verbo entre paréntesis.",
+   "consigna": "Completá con el condizionale presente del verbo entre paréntesis.",
    "type": "cloze",
    "stem": "Voi ___ (vedere) il nuovo film?",
    "answer": "vedreste",
@@ -1416,52 +1416,52 @@
    "note": "*vedere* pierde la e: *vedreste*."
   },
   "d18-054": {
-   "consigna": "Completá con el condicional simple (condizionale presente) del verbo entre paréntesis.",
+   "consigna": "Completá con el condizionale presente del verbo entre paréntesis.",
    "type": "cloze",
    "stem": "I bambini ___ (leggere) molto durante l’estate.",
    "answer": "leggerebbero",
    "alt": [],
    "drop": false,
-   "note": "Condicional de -ere: *leggerebbero*."
+   "note": "Condizionale de -ere: *leggerebbero*."
   },
   "d18-055": {
-   "consigna": "Completá con el condicional simple (condizionale presente) del verbo entre paréntesis.",
+   "consigna": "Completá con el condizionale presente del verbo entre paréntesis.",
    "type": "cloze",
    "stem": "Chiara e Laura ci ___ (visitare)?",
    "answer": "visiterebbero",
    "alt": [],
    "drop": false,
-   "note": "El condicional de -are cambia la a por e: *visiterebbero*."
+   "note": "El condizionale de -are cambia la a por e: *visiterebbero*."
   },
   "d18-056": {
-   "consigna": "Completá con el condicional compuesto (condizionale passato). El auxiliar ya está indicado.",
+   "consigna": "Completá con el condizionale passato. El auxiliar ya está indicado.",
    "type": "cloze",
    "stem": "Lorenzo ___ (avere + mangiare) tutti i biscotti.",
    "answer": "avrebbe mangiato",
    "alt": [],
    "drop": false,
-   "note": "Condicional compuesto = condicional de *avere/essere* + participio: *avrebbe mangiato* («habría comido»)."
+   "note": "Condizionale passato = condizionale de *avere/essere* + participio: *avrebbe mangiato* («habría comido»)."
   },
   "d18-057": {
-   "consigna": "Completá con el condicional compuesto (condizionale passato). El auxiliar ya está indicado.",
+   "consigna": "Completá con el condizionale passato. El auxiliar ya está indicado.",
    "type": "cloze",
    "stem": "Voi ___ (avere + vedere) i ragazzi a Firenze.",
    "answer": "avreste visto",
    "alt": [],
    "drop": false,
-   "note": "Condicional compuesto = condicional de *avere* + participio: *avreste visto*."
+   "note": "Condizionale passato = condizionale de *avere* + participio: *avreste visto*."
   },
   "d18-058": {
-   "consigna": "Completá con el condicional compuesto (condizionale passato). El auxiliar ya está indicado.",
+   "consigna": "Completá con el condizionale passato. El auxiliar ya está indicado.",
    "type": "cloze",
    "stem": "Io ___ (avere + leggere) il nuovo libro.",
    "answer": "avrei letto",
    "alt": [],
    "drop": false,
-   "note": "Condicional compuesto: *avrei* + participio irregular *letto*."
+   "note": "Condizionale passato: *avrei* + participio irregular *letto*."
   },
   "d18-059": {
-   "consigna": "Completá con el condicional compuesto (condizionale passato). El auxiliar ya está indicado.",
+   "consigna": "Completá con el condizionale passato. El auxiliar ya está indicado.",
    "type": "cloze",
    "stem": "Lei ___ (essere + venire) alla festa.",
    "answer": "sarebbe venuta",
@@ -1470,7 +1470,7 @@
    "note": "Con *essere*, concordancia: *sarebbe venuta*."
   },
   "d18-060": {
-   "consigna": "Completá con el condicional compuesto (condizionale passato). El auxiliar ya está indicado.",
+   "consigna": "Completá con el condizionale passato. El auxiliar ya está indicado.",
    "type": "cloze",
    "stem": "Tu ___ (essere + informarsi)?",
    "answer": "ti saresti informato",
@@ -1654,7 +1654,7 @@
    "answer": "spiegassi",
    "alt": [],
    "drop": false,
-   "note": "*se* + congiuntivo imperfetto (*spiegassi*) con condicional en la otra parte, igual que «si explicaras»."
+   "note": "*se* + congiuntivo imperfetto (*spiegassi*) con condizionale en la otra parte, igual que «si explicaras»."
   },
   "d19-019": {
    "consigna": "Completá la parte con «se» con el congiuntivo imperfetto. Mirá la otra parte de la frase para deducir el sujeto.",
@@ -1675,16 +1675,16 @@
    "note": "Congiuntivo imperfetto de *mentire*: *mentisse*, «si mintiera»."
   },
   "d19-021": {
-   "consigna": "Completá la parte con «se» con el congiuntivo trapassato (pluscuamperfecto del subjuntivo). El auxiliar está indicado.",
+   "consigna": "Completá la parte con «se» con el congiuntivo trapassato. El auxiliar está indicado.",
    "type": "cloze",
    "stem": "Se ___ (avere/dormire), non avrebbero avuto sonno.",
    "answer": "avessero dormito",
    "alt": [],
    "drop": false,
-   "note": "Hipótesis irreal del pasado: *se* + congiuntivo trapassato (*avessero dormito*) y condicional compuesto en la otra parte, como «si hubieran dormido»."
+   "note": "Hipótesis irreal del pasado: *se* + congiuntivo trapassato (*avessero dormito*) y condizionale passato en la otra parte, como «si hubieran dormido»."
   },
   "d19-022": {
-   "consigna": "Completá la parte con «se» con el congiuntivo trapassato (pluscuamperfecto del subjuntivo). El auxiliar está indicado.",
+   "consigna": "Completá la parte con «se» con el congiuntivo trapassato. El auxiliar está indicado.",
    "type": "cloze",
    "stem": "Se ___ (avere/leggere) il libro, capiresti.",
    "answer": "avessi letto",
@@ -1693,7 +1693,7 @@
    "note": "*avessi letto*; acá la consecuencia es presente (*capiresti*): se mezclan los tiempos igual que en castellano."
   },
   "d19-023": {
-   "consigna": "Completá la parte con «se» con el congiuntivo trapassato (pluscuamperfecto del subjuntivo). El auxiliar está indicado.",
+   "consigna": "Completá la parte con «se» con el congiuntivo trapassato. El auxiliar está indicado.",
    "type": "cloze",
    "stem": "Se ___ (essere/partire) in orario, il treno sarebbe arrivato in orario.",
    "answer": "fosse partito",
@@ -1702,7 +1702,7 @@
    "note": "Con *essere*: *fosse partito*, concordado con *il treno*."
   },
   "d19-024": {
-   "consigna": "Completá la parte con «se» con el congiuntivo trapassato (pluscuamperfecto del subjuntivo). El auxiliar está indicado.",
+   "consigna": "Completá la parte con «se» con el congiuntivo trapassato. El auxiliar está indicado.",
    "type": "cloze",
    "stem": "Se tu non ___ (avere/prendere) il tè, avresti potuto dormire.",
    "answer": "avessi preso",
@@ -1711,7 +1711,7 @@
    "note": "Irreal del pasado: *se* + congiuntivo trapassato (*avessi preso*), como «si no hubieras tomado»."
   },
   "d19-025": {
-   "consigna": "Completá la parte con «se» con el congiuntivo trapassato (pluscuamperfecto del subjuntivo). El auxiliar está indicado.",
+   "consigna": "Completá la parte con «se» con el congiuntivo trapassato. El auxiliar está indicado.",
    "type": "cloze",
    "stem": "Se voi me lo ___ (avere/chiedere), vi avrei detto di sì.",
    "answer": "aveste chiesto",
@@ -1720,16 +1720,16 @@
    "note": "Irreal del pasado: *se* + congiuntivo trapassato: *aveste chiesto*, «si me lo hubieran pedido»."
   },
   "d19-026": {
-   "consigna": "Completá la parte con «se» con el congiuntivo trapassato (pluscuamperfecto del subjuntivo). El auxiliar está indicado.",
+   "consigna": "Completá la parte con «se» con el congiuntivo trapassato. El auxiliar está indicado.",
    "type": "cloze",
    "stem": "Se ___ (avere/ricevere) la tua lettera, ti avremmo risposto.",
    "answer": "avessimo ricevuto",
    "alt": [],
    "drop": false,
-   "note": "Irreal del pasado: *avessimo ricevuto*; el condicional compuesto (*avremmo risposto*) va en la otra parte."
+   "note": "Irreal del pasado: *avessimo ricevuto*; el condizionale passato (*avremmo risposto*) va en la otra parte."
   },
   "d19-027": {
-   "consigna": "Completá la parte con «se» con el congiuntivo trapassato (pluscuamperfecto del subjuntivo). El auxiliar está indicado.",
+   "consigna": "Completá la parte con «se» con el congiuntivo trapassato. El auxiliar está indicado.",
    "type": "cloze",
    "stem": "Se ___ (essere/stare) lì, ti avrei visto.",
    "answer": "fossi stato",
@@ -1740,7 +1740,7 @@
    "note": "*fossi stato*: *stare* hace el participio *stato*, igual que *essere*."
   },
   "d19-028": {
-   "consigna": "Completá la parte con «se» con el congiuntivo trapassato (pluscuamperfecto del subjuntivo). El auxiliar está indicado.",
+   "consigna": "Completá la parte con «se» con el congiuntivo trapassato. El auxiliar está indicado.",
    "type": "cloze",
    "stem": "Se Fausta ___ (essere/alzarsi) presto, avrebbe visto l’aurora.",
    "answer": "si fosse alzata",
@@ -1749,7 +1749,7 @@
    "note": "Reflexivo → auxiliar *essere* y participio concordado: *si fosse alzata*."
   },
   "d19-029": {
-   "consigna": "Completá la parte con «se» con el congiuntivo trapassato (pluscuamperfecto del subjuntivo). El auxiliar está indicado.",
+   "consigna": "Completá la parte con «se» con el congiuntivo trapassato. El auxiliar está indicado.",
    "type": "cloze",
    "stem": "Se ___ (avere/chiudere) la finestra, non avresti avuto tanto freddo.",
    "answer": "avessi chiuso",
@@ -1758,7 +1758,7 @@
    "note": "Irreal del pasado: *se* + congiuntivo trapassato: *avessi chiuso*."
   },
   "d19-030": {
-   "consigna": "Completá la parte con «se» con el congiuntivo trapassato (pluscuamperfecto del subjuntivo). El auxiliar está indicado.",
+   "consigna": "Completá la parte con «se» con el congiuntivo trapassato. El auxiliar está indicado.",
    "type": "cloze",
    "stem": "Se Antonietta ___ (avere/correre), non avrebbe perso il treno.",
    "answer": "avesse corso",
@@ -2284,16 +2284,16 @@
    "note": "Credevo che + congiuntivo imperfetto (fosse), aunque en castellano digamos «era»."
   },
   "d21-001": {
-   "consigna": "Completá con el condicional compuesto (condizionale passato) del verbo entre paréntesis, con avere o essere según el verbo.",
+   "consigna": "Completá con el condizionale passato del verbo entre paréntesis, con avere o essere según el verbo.",
    "type": "cloze",
    "stem": "Tu ___ (leggere) il libro.",
    "answer": "avresti letto",
    "alt": [],
    "drop": false,
-   "note": "Condicional compuesto con *avere*: *avresti letto*."
+   "note": "Condizionale passato con *avere*: *avresti letto*."
   },
   "d21-002": {
-   "consigna": "Completá con el condicional compuesto (condizionale passato) del verbo entre paréntesis, con avere o essere según el verbo.",
+   "consigna": "Completá con el condizionale passato del verbo entre paréntesis, con avere o essere según el verbo.",
    "type": "cloze",
    "stem": "Marco e Laura ___ (scrivere).",
    "answer": "avrebbero scritto",
@@ -2302,34 +2302,34 @@
    "note": "*scrivere → scritto*: *avrebbero scritto*."
   },
   "d21-003": {
-   "consigna": "Completá con el condicional compuesto (condizionale passato) del verbo entre paréntesis, con avere o essere según el verbo.",
+   "consigna": "Completá con el condizionale passato del verbo entre paréntesis, con avere o essere según el verbo.",
    "type": "cloze",
    "stem": "Noi ___ (imparare) l’italiano.",
    "answer": "avremmo imparato",
    "alt": [],
    "drop": false,
-   "note": "Condicional compuesto con *avere*: *avremmo imparato*; *noi* lleva doble m."
+   "note": "Condizionale passato con *avere*: *avremmo imparato*; *noi* lleva doble m."
   },
   "d21-004": {
-   "consigna": "Completá con el condicional compuesto (condizionale passato) del verbo entre paréntesis, con avere o essere según el verbo.",
+   "consigna": "Completá con el condizionale passato del verbo entre paréntesis, con avere o essere según el verbo.",
    "type": "cloze",
    "stem": "Voi ___ (usare) la macchina.",
    "answer": "avreste usato",
    "alt": [],
    "drop": false,
-   "note": "Condicional compuesto con *avere*: *avreste usato*, «habrían usado»."
+   "note": "Condizionale passato con *avere*: *avreste usato*, «habrían usado»."
   },
   "d21-005": {
-   "consigna": "Completá con el condicional compuesto (condizionale passato) del verbo entre paréntesis, con avere o essere según el verbo.",
+   "consigna": "Completá con el condizionale passato del verbo entre paréntesis, con avere o essere según el verbo.",
    "type": "cloze",
    "stem": "Loro ___ (comprare) la macchina.",
    "answer": "avrebbero comprato",
    "alt": [],
    "drop": false,
-   "note": "Condicional compuesto con *avere*: *avrebbero comprato*."
+   "note": "Condizionale passato con *avere*: *avrebbero comprato*."
   },
   "d21-006": {
-   "consigna": "Completá con el condicional compuesto (condizionale passato) del verbo entre paréntesis, con avere o essere según el verbo.",
+   "consigna": "Completá con el condizionale passato del verbo entre paréntesis, con avere o essere según el verbo.",
    "type": "cloze",
    "stem": "Io ___ (arrivare).",
    "answer": "sarei arrivato",
@@ -2340,7 +2340,7 @@
    "note": "Verbo de movimiento → *essere*: *sarei arrivato*."
   },
   "d21-007": {
-   "consigna": "Completá con el condicional compuesto (condizionale passato) del verbo entre paréntesis, con avere o essere según el verbo.",
+   "consigna": "Completá con el condizionale passato del verbo entre paréntesis, con avere o essere según el verbo.",
    "type": "cloze",
    "stem": "Lui ___ (partire).",
    "answer": "sarebbe partito",
@@ -2349,7 +2349,7 @@
    "note": "*partire* con *essere*: *sarebbe partito*."
   },
   "d21-008": {
-   "consigna": "Completá con el condicional compuesto (condizionale passato) del verbo entre paréntesis, con avere o essere según el verbo.",
+   "consigna": "Completá con el condizionale passato del verbo entre paréntesis, con avere o essere según el verbo.",
    "type": "cloze",
    "stem": "Tu e Chiara ___ (stare).",
    "answer": "sareste stati",
@@ -2360,7 +2360,7 @@
    "note": "*stare* forma los tiempos compuestos con *essere* y el participio concuerda: *sareste stati*."
   },
   "d21-009": {
-   "consigna": "Completá con el condicional compuesto (condizionale passato) del verbo entre paréntesis, con avere o essere según el verbo.",
+   "consigna": "Completá con el condizionale passato del verbo entre paréntesis, con avere o essere según el verbo.",
    "type": "cloze",
    "stem": "I signori ___ (venire).",
    "answer": "sarebbero venuti",
@@ -2369,7 +2369,7 @@
    "note": "*venire* con *essere*: *sarebbero venuti*."
   },
   "d21-010": {
-   "consigna": "Completá con el condicional compuesto (condizionale passato) del verbo entre paréntesis, con avere o essere según el verbo.",
+   "consigna": "Completá con el condizionale passato del verbo entre paréntesis, con avere o essere según el verbo.",
    "type": "cloze",
    "stem": "Noi ___ (andare).",
    "answer": "saremmo andati",
@@ -2399,7 +2399,7 @@
     "Io potrei mangiare"
    ],
    "drop": false,
-   "note": "«Podría» es el condicional de *potere*, contracto: *potrei* (sin la e del infinitivo)."
+   "note": "«Podría» es el condizionale de *potere*, contracto: *potrei* (sin la e del infinitivo)."
   },
   "d21-013": {
    "consigna": "Traducí al italiano. Ojo: puedo / podría = posso / potrei; tengo que / debería = devo / dovrei.",
@@ -2421,7 +2421,7 @@
     "Lui dovrebbe dormire"
    ],
    "drop": false,
-   "note": "«Debería» es el condicional de *dovere*, contracto: *dovrebbe*."
+   "note": "«Debería» es el condizionale de *dovere*, contracto: *dovrebbe*."
   },
   "d21-015": {
    "consigna": "Traducí al italiano. Ojo: puedo / podría = posso / potrei; tengo que / debería = devo / dovrei.",
@@ -2443,7 +2443,7 @@
     "Noi potremmo andare"
    ],
    "drop": false,
-   "note": "Condicional de *potere* con *noi*: *potremmo*, con doble m (*potremo* sería futuro)."
+   "note": "Condizionale de *potere* con *noi*: *potremmo*, con doble m (*potremo* sería futuro)."
   },
   "d21-017": {
    "consigna": "Traducí al italiano. Ojo: puedo / podría = posso / potrei; tengo que / debería = devo / dovrei.",
@@ -2465,7 +2465,7 @@
     "Loro potrebbero cantare"
    ],
    "drop": false,
-   "note": "Condicional de *potere* con *loro*: *potrebbero*."
+   "note": "Condizionale de *potere* con *loro*: *potrebbero*."
   },
   "d21-019": {
    "consigna": "Traducí al italiano. Ojo: puedo / podría = posso / potrei; tengo que / debería = devo / dovrei.",
@@ -2487,7 +2487,7 @@
     "Voi dovreste ballare"
    ],
    "drop": false,
-   "note": "«Deberían» = condicional de *dovere* con *voi*: *dovreste*."
+   "note": "«Deberían» = condizionale de *dovere* con *voi*: *dovreste*."
   },
   "d21-021": {
    "consigna": "Traducí al italiano con el condizionale passato (avrei…, sarei…, avrei dovuto…, avrei potuto…).",
@@ -2526,7 +2526,7 @@
     "Noi avremmo letto"
    ],
    "drop": false,
-   "note": "Condicional compuesto: *avremmo* + participio irregular *letto*."
+   "note": "Condizionale passato: *avremmo* + participio irregular *letto*."
   },
   "d21-024": {
    "consigna": "Traducí al italiano con el condizionale passato (avrei…, sarei…, avrei dovuto…, avrei potuto…).",
@@ -2554,7 +2554,7 @@
     "Lui avrebbe dovuto rimanere"
    ],
    "drop": false,
-   "note": "«Debería haber» + infinitivo = condicional compuesto de *dovere* + infinitivo simple: *sarebbe dovuto restare*; con un verbo de *essere* el modal toma *essere*."
+   "note": "«Debería haber» + infinitivo = condizionale passato de *dovere* + infinitivo simple: *sarebbe dovuto restare*; con un verbo de *essere* el modal toma *essere*."
   },
   "d21-026": {
    "consigna": "Traducí al italiano con el condizionale passato (avrei…, sarei…, avrei dovuto…, avrei potuto…).",

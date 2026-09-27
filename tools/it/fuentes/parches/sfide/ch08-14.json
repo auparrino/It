@@ -2657,7 +2657,7 @@
      "Non è niente: chiunque l'avrebbe fatto.",
      "Non è niente, chiunque l'avrebbe fatto."
     ],
-    "note": "*chiunque* = «cualquiera» (persona); acá es sujeto y va al final, con el condicional compuesto."
+    "note": "*chiunque* = «cualquiera» (persona); acá es sujeto y va al final, con el condizionale passato."
    },
    {
     "label": "b",
@@ -3238,7 +3238,7 @@
      "Vieni a trovarmi quando ne hai voglia.",
      "Ogni volta che vuoi, vieni a trovarmi."
     ],
-    "note": "«Venir a ver, visitar» a alguien = *venire a trovare*; tras *quando* con valor futuro va el presente o futuro, no el subjuntivo."
+    "note": "«Venir a ver, visitar» a alguien = *venire a trovare*; tras *quando* con valor futuro va el presente o futuro, no el congiuntivo."
    },
    {
     "label": "c",
@@ -3344,7 +3344,7 @@
   ]
  },
  "r13-03": {
-  "consigna": "Completá con el relativo. En dos oraciones sirven tanto che como il/la quale (recordá que il quale no se usa como objeto directo).",
+  "consigna": "Completá con el relativo: che o il/la quale (il quale no se usa como objeto directo). Si sirven los dos, vale cualquiera.",
   "interactive": true,
   "items": [
    {
@@ -3386,7 +3386,7 @@
   ]
  },
  "r13-04": {
-  "consigna": "Traducí al italiano (tu). Ojo: en cuatro oraciones 'lo que' es relativo (quello che / ciò che); en las demás, 'qué' es exclamativo o interrogativo.",
+  "consigna": "Traducí al italiano (tu). Ojo: «lo que» relativo es quello che o ciò che; «qué» exclamativo o interrogativo es che o che cosa.",
   "interactive": true,
   "items": [
    {
@@ -3880,7 +3880,7 @@
   ]
  },
  "r14-02": {
-  "consigna": "Traducí al italiano con non … affatto, non … assolutamente o non … per niente (usá cada una al menos una vez).",
+  "consigna": "Traducí al italiano con non … affatto, non … assolutamente o non … per niente.",
   "interactive": true,
   "items": [
    {

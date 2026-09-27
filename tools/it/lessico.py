@@ -338,7 +338,8 @@ def item_texts(item):
     read = ""
     if typ == "garden":
         read = " ".join(w for pair in (item.get("lead") or []) for w in pair)
-    if item.get("type") != "translate":           # translate: the stem is Spanish
+    # translate: the stem is Spanish; «stemEs»: a situation in Spanish
+    if item.get("type") != "translate" and not item.get("stemEs"):
         stem = re.sub(r"\([^)]*\)", " ", item.get("stem") or "")
         for a in answers:
             stem = stem.replace("___", a, 1)
@@ -385,18 +386,165 @@ def item_vocab(item, lesson_seen):
     return {"lessico": min(need, 52)} if need > 1 else {}
 
 
+_SENSES = None
+
+
+def senses_index():
+    """forma → todas sus lecturas [(lema, semana, glosa, es_verbo)], no solo
+    la primera: *entro* es «dentro de» y también «(yo) entro»; *sale* es «sal»
+    y también «sube»; *letto* es «cama» y también «leído».  Salen del banco
+    (sustantivos, adjetivos, palabras, formas del conjugador), del glosario
+    (bank/glossario.py, bank/glossario.py SENSI) y de las palabras de la semana."""
+    global _SENSES
+    if _SENSES is not None:
+        return _SENSES
+    import sillabo
+    with open(os.path.join(ROOT, "docs", "lang", "it", "data", "bank.json"), encoding="utf-8") as fh:
+        bank = json.load(fh)
+    out = {}
+
+    def put(form, lemma, level, gloss, verb):
+        form = form.lower()
+        if not gloss:
+            return
+        wk = LEVEL_WEEK.get(level, 19) if not isinstance(level, int) else level
+        lst = out.setdefault(form, [])
+        for i, (l2, w2, g2, v2) in enumerate(lst):
+            if l2 == lemma:
+                if wk < w2:
+                    lst[i] = (lemma, wk, g2, v2)
+                return
+        lst.append((lemma, wk, gloss, verb))
+
+    for n in bank["nouns"]:
+        put(n[0], n[0], n[5], n[3], False); put(n[2], n[0], n[5], n[3], False)
+    for a in bank["adjectives"]:
+        for f in a[:4]:
+            put(f, a[0], a[5], a[4], False)
+    for w in bank["words"]:
+        put(w[0], w[0], w[3], w[1], False)
+    verbs = {v[0]: v for v in bank["verbs"]}
+    for form, infs in sillabo.lexicon()["lemmas"].items():
+        for inf in infs:
+            v = verbs.get(inf)
+            if v:
+                put(form, inf, v[5], v[1], True)
+    for form, (gloss, level) in glossary().items():
+        if level not in ("N", "ES"):
+            put(form, form, level, gloss, False)
+    # the words of the week: the meaning the course teaches for that form
+    try:
+        sys_path = os.path.join(ROOT, "tools", "it")
+        import sys as _sys
+        if sys_path not in _sys.path:
+            _sys.path.insert(0, sys_path)
+        from bank.parole_settimana import PAROLE
+        for wk, lst in PAROLE.items():
+            for e in lst:
+                if " " not in e[0] and not re.search(r"(are|ere|ire|rre|rsi)$", e[0]):
+                    put(e[0], e[0], wk, e[1], False)
+    except Exception:
+        pass
+    _SENSES = out
+    return out
+
+
+def _gloss_words(g):
+    return {w for w in re.split(r"[^a-zñáéíóúü]+", _plain(g.lower())) if len(w) > 2}
+
+
+def _base(lemma):
+    return re.sub(r"(?:ar|er|ir)si$", lambda m: m.group(0)[:2] + "e", lemma)
+
+
+def _same_family(l1, g1, l2, g2):
+    """*cena* y *cenare*, *chiamare* y *chiamarsi*, *studio* y *studiare*:
+    la misma idea, no un segundo significado."""
+    b1, b2 = _base(l1), _base(l2)
+    if b1 == b2:
+        return True
+    if b1[:4] != b2[:4]:
+        return False
+    # la misma raíz en italiano y en castellano: juego / jugar, almuerzo / almorzar
+    w1 = {w[:2] for w in _gloss_words(g1)}
+    w2 = {w[:2] for w in _gloss_words(g2)}
+    return bool(w1 & w2)
+
+
+# Verbs whose form coincides with a common word only in rare or literary
+# uses (*paio* de parere, *posto* de porre, *punto* de pungere): no second
+# reading for them.
+_RARE_VERB_READING = {"parere", "porre", "pungere", "piangere", "trarre", "commettere", "collegare",
+                      "esitare", "bagnare", "liberare", "colorare", "negoziare", "specificare",
+                      "governare", "meritare", "causare", "contattare", "pubblicare", "criticare"}
+
+
+def other_senses(tok, lemma, gloss):
+    """The other readings of a form, with a meaning that is not the same idea
+    as the one shown (*entro*: «dentro de» and «entrar»; *sale*: «sal» and
+    «sube»; not *cena* and *cenare*)."""
+    seen = _gloss_words(gloss)
+    out = []
+    for l2, w2, g2, v2 in senses_index().get(tok, []):
+        if l2 == lemma or not g2 or (v2 and l2 in _RARE_VERB_READING):
+            continue
+        gw = _gloss_words(g2)
+        if not gw or gw & seen or _same_family(lemma, gloss, l2, g2):
+            continue
+        if any(_same_family(o[0], o[2], l2, g2) for o in out):
+            continue
+        out.append((l2, w2, g2, v2))
+        seen |= gw
+    return out
+
+
+def _curated():
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(
+        "glossario_sensi", os.path.join(ROOT, "tools", "it", "bank", "glossario.py"))
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return getattr(mod, "SENSI", {})
+
+
+def _fmt(extra):
+    out = []
+    for l2, w2, g2, v2 in extra:
+        # only Spanish in the gloss: app.js reads the glosses to tell a
+        # Spanish sentence from an Italian one
+        out.append(("también, del verbo: %s" % g2) if v2 else ("también: %s" % g2))
+    return " · ".join(out)
+
+
 def gloss_table(texts):
     """form → [lemma, Spanish, week] for every Italian word of the texts, for
-    the tap-to-see-the-meaning glossary of the app."""
+    the tap-to-see-the-meaning glossary of the app.  A form with several
+    readings shows them all, in one line: *entro* «dentro de, antes de (un
+    plazo) · también, del verbo: entrar (yo entro)»; *sale* «sal · también,
+    del verbo: subir (sube)».
+    The curated ones (bank/glossario.py SENSI) put the usual reading first."""
+    sensi = _curated()
     out = {}
     for text in texts:
         for tok in words_of(text):
             if tok in out:
                 continue
             lm = lemma_of(tok)
+            if tok in sensi:
+                first = sensi[tok][0]
+                rest = [tuple(x) for x in sensi[tok][1:]]
+                wk = first[2] if isinstance(first[2], int) else LEVEL_WEEK.get(first[2], 19)
+                cognate = is_cognate(first[0], first[1]) or is_cognate(tok, first[1])
+                extra = [(l2, 0, g2, v2) for l2, g2, lv, v2 in rest]
+                out[tok] = [first[0], first[1] + (" · " + _fmt(extra) if extra else ""), 1 if cognate else wk]
+                continue
             if lm and lm[2] and lm[1] > 0:
                 cognate = is_cognate(lm[0], lm[2]) or is_cognate(tok, lm[2])
-                out[tok] = [lm[0], lm[2], 1 if cognate else lm[1]]
+                entry = [lm[0], lm[2], 1 if cognate else lm[1]]
+                alts = other_senses(tok, lm[0], lm[2])[:2]
+                if alts:
+                    entry[1] = entry[1] + " · " + _fmt(alts)
+                out[tok] = entry
     return out
 
 

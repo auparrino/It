@@ -553,10 +553,13 @@ Aparte están el **gimnasio de verbos** (conjugación generada al vuelo) y las
 cada uno una ronda corregida (elegir, completar varios blancos, traducir del
 español) con la regla explicada al responder; 80% o más gana su estrella.
 
-Cada semana trae además **📚 Palabras de la semana** (9 a 15 palabras nuevas,
-no transparentes, sacadas de sus propios ejercicios, con audio y una frase de
-ejemplo): primero elegís qué significan, después las escribís; quedan en el
-ripasso con repetición espaciada. En *Oggi* ves cuántas palabras practicaste
+Cada semana trae además **📚 Palabras de la semana** (12 en las semanas 1-4,
+19 o 20 desde la 5; ninguna en las de jefe), elegidas a mano por el campo de la
+semana y rescatadas de sus lecturas, con audio, una frase de ejemplo que usa
+solo la gramática ya vista y una nota de uso (régimen, auxiliar, colocación,
+falso amigo): primero elegís qué significan, después las escribís; quedan en el
+ripasso con repetición espaciada. Están en `tools/it/bank/parole_settimana.py`
+(1-4), `parole_ponte.py` (5-25) y `parole_c1.py` (27-51). En *Oggi* ves cuántas palabras practicaste
 contra la meta del trimestre (2.000 en el primero).
 
 **Reconocer antes de producir**: la primera vez que aparece un ejercicio de
@@ -647,8 +650,8 @@ Una semana cargada no se estudia de una sentada. Las semanas 1, 2, 3, 5, 6,
 50 y 51 tienen la lección dividida en **partes** (dos a seis), cada una con sus propios bloques de teoría y sus propios ejercicios.
 La semana 3, los artículos, tiene seis: *Género y el, la*, *lo, gli y el
 plural*, *Indeterminados*, *Dónde va el artículo (y dónde no)*,
-*Preposiciones articuladas* y *Partitivo y cantidades*, con dos o tres
-bloques por parte y dos o tres chequeos después de cada bloque. En el
+*Preposiciones articuladas* y *Partitivo y cantidades*, con uno a tres
+bloques por parte (14 en total: el apóstrofo del indeterminado, la tabla sin mirar y el negativo del partitivo se juntaron con el bloque vecino, como trampa o como «Más detalle») y dos o tres chequeos después de cada bloque. En el
 percorso cada parte es una misión («Lección 3/6: Indeterminados»), y «A
 entrenar esta parte» arma una ronda **solo** con los ejercicios de esa
 parte: sin gimnasio de verbos, sin repaso de otras semanas y sin palabras

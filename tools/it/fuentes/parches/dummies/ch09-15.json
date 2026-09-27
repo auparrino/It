@@ -257,7 +257,7 @@
    "answer": "Non scriviamo.",
    "alt": [],
    "drop": false,
-   "note": "Negativo de *noi*: *non* + presente, *non scriviamo* (sin subjuntivo)."
+   "note": "Negativo de *noi*: *non* + presente, *non scriviamo* (sin congiuntivo)."
   },
   "d09-029": {
    "consigna": "Traducí al italiano con el imperativo. Entre paréntesis está la persona (tu, noi, voi).",
@@ -408,7 +408,7 @@
    "note": "*la bistecca* es el sujeto (singular) → *piace*; *a Mario* es el indirecto, como «a Mario le gusta»."
   },
   "d10-021": {
-   "consigna": "Completá con el verbo piacere en el tiempo indicado entre paréntesis (futuro, condicional o trapassato prossimo).",
+   "consigna": "Completá con el verbo piacere en el tiempo indicado entre paréntesis (futuro, condizionale o trapassato prossimo).",
    "type": "conjugate",
    "stem": "Gli ___ (futuro) le macchine.",
    "answer": "piaceranno",
@@ -417,16 +417,16 @@
    "note": "*piacere* concuerda con lo que gusta: *le macchine* → *piaceranno* (futuro, tercera plural)."
   },
   "d10-022": {
-   "consigna": "Completá con el verbo piacere en el tiempo indicado entre paréntesis (futuro, condicional o trapassato prossimo).",
+   "consigna": "Completá con el verbo piacere en el tiempo indicado entre paréntesis (futuro, condizionale o trapassato prossimo).",
    "type": "conjugate",
    "stem": "Mi ___ (condicional) andare.",
    "answer": "piacerebbe",
    "alt": [],
    "drop": false,
-   "note": "Condicional de *piacere* con infinitivo: singular, *mi piacerebbe andare* («me gustaría ir»)."
+   "note": "Condizionale de *piacere* con infinitivo: singular, *mi piacerebbe andare* («me gustaría ir»)."
   },
   "d10-023": {
-   "consigna": "Completá con el verbo piacere en el tiempo indicado entre paréntesis (futuro, condicional o trapassato prossimo).",
+   "consigna": "Completá con el verbo piacere en el tiempo indicado entre paréntesis (futuro, condizionale o trapassato prossimo).",
    "type": "conjugate",
    "stem": "A lei ___ (trapassato prossimo) la casa.",
    "answer": "era piaciuta",
@@ -435,7 +435,7 @@
    "note": "Trapassato con *essere* concordado con lo que gusta: *la casa* → *era piaciuta*."
   },
   "d10-024": {
-   "consigna": "Completá con el verbo piacere en el tiempo indicado entre paréntesis (futuro, condicional o trapassato prossimo).",
+   "consigna": "Completá con el verbo piacere en el tiempo indicado entre paréntesis (futuro, condizionale o trapassato prossimo).",
    "type": "conjugate",
    "stem": "Vi ___ (condicional) venire?",
    "answer": "piacerebbe",
@@ -444,7 +444,7 @@
    "note": "Con infinitivo va en singular: *vi piacerebbe venire?*"
   },
   "d10-025": {
-   "consigna": "Completá con el verbo piacere en el tiempo indicado entre paréntesis (futuro, condicional o trapassato prossimo).",
+   "consigna": "Completá con el verbo piacere en el tiempo indicado entre paréntesis (futuro, condizionale o trapassato prossimo).",
    "type": "conjugate",
    "stem": "Ti ___ (futuro) le isole.",
    "answer": "piaceranno",
@@ -453,16 +453,16 @@
    "note": "*piacere* concuerda con lo que gusta: *le isole* (plural) → futuro *piaceranno*."
   },
   "d10-026": {
-   "consigna": "Completá con el verbo piacere en el tiempo indicado entre paréntesis (futuro, condicional o trapassato prossimo).",
+   "consigna": "Completá con el verbo piacere en el tiempo indicado entre paréntesis (futuro, condizionale o trapassato prossimo).",
    "type": "conjugate",
    "stem": "Vi ___ (condicional) le montagne qui.",
    "answer": "piacerebbero",
    "alt": [],
    "drop": false,
-   "note": "*le montagne* es plural → condicional plural *piacerebbero*."
+   "note": "*le montagne* es plural → condizionale plural *piacerebbero*."
   },
   "d10-027": {
-   "consigna": "Completá con el verbo piacere en el tiempo indicado entre paréntesis (futuro, condicional o trapassato prossimo).",
+   "consigna": "Completá con el verbo piacere en el tiempo indicado entre paréntesis (futuro, condizionale o trapassato prossimo).",
    "type": "conjugate",
    "stem": "Non mi ___ (trapassato prossimo) i biscotti.",
    "answer": "erano piaciuti",
@@ -471,7 +471,7 @@
    "note": "Trapassato con *essere* y participio concordado con *i biscotti*: *erano piaciuti*."
   },
   "d10-028": {
-   "consigna": "Completá con el verbo piacere en el tiempo indicado entre paréntesis (futuro, condicional o trapassato prossimo).",
+   "consigna": "Completá con el verbo piacere en el tiempo indicado entre paréntesis (futuro, condizionale o trapassato prossimo).",
    "type": "conjugate",
    "stem": "Ci ___ (condicional) fare una telefonata.",
    "answer": "piacerebbe",
@@ -480,7 +480,7 @@
    "note": "Con infinitivo, singular: *ci piacerebbe*."
   },
   "d10-029": {
-   "consigna": "Completá con el verbo piacere en el tiempo indicado entre paréntesis (futuro, condicional o trapassato prossimo).",
+   "consigna": "Completá con el verbo piacere en el tiempo indicado entre paréntesis (futuro, condizionale o trapassato prossimo).",
    "type": "conjugate",
    "stem": "Gli ___ (futuro) i nuovi pantaloni.",
    "answer": "piaceranno",
@@ -489,7 +489,7 @@
    "note": "Concordancia con *i pantaloni*, que en italiano es plural como en castellano → *piaceranno*."
   },
   "d10-030": {
-   "consigna": "Completá con el verbo piacere en el tiempo indicado entre paréntesis (futuro, condicional o trapassato prossimo).",
+   "consigna": "Completá con el verbo piacere en el tiempo indicado entre paréntesis (futuro, condizionale o trapassato prossimo).",
    "type": "conjugate",
    "stem": "Ma non le ___ (futuro) la casa.",
    "answer": "piacerà",
@@ -2503,7 +2503,7 @@
     "non appena"
    ],
    "drop": false,
-   "note": "*appena* («apenas, en cuanto») con valor futuro lleva futuro, no subjuntivo: *appena arriverò*."
+   "note": "*appena* («apenas, en cuanto») con valor futuro lleva futuro, no congiuntivo: *appena arriverò*."
   },
   "d15-015": {
    "consigna": "Traducí el adverbio al italiano.",

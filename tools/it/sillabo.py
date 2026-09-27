@@ -321,7 +321,9 @@ def item_features(item):
         answers = []
     elif typ == "garden":
         context = " ".join(w for pair in (item.get("lead") or []) for w in pair)
-    if typ not in ("translate", "scopri", "fixerr"):   # en translate el enunciado es castellano
+    # en translate el enunciado es castellano; «stemEs»: una situación en
+    # castellano y las opciones en italiano (pragmática, authored/pragmatica.py)
+    if typ not in ("translate", "scopri", "fixerr") and not item.get("stemEs"):
         stem = _strip_glosses(item.get("stem"))
         for a in answers:
             stem = stem.replace("___", a, 1)     # diventat___ → diventata
