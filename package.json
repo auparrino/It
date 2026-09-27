@@ -3,6 +3,9 @@
   "version": "2.8.0",
   "private": true,
   "description": "Una app, dos idiomas: italiano (La Via C1) y portugués de Brasil (Rumo C1) hasta C1 en un año, para hispanohablantes. Sitio estático sin dependencias.",
+  "engines": {
+    "node": "22.x"
+  },
   "scripts": {
     "test": "npm run test:it && npm run test:pt && npm run test:lib && npm run test:content",
     "test:it": "node tools/it/test_conjugator.js && node tools/it/test_game.js && node tools/it/test_frasi.js && node tools/it/test_diagnosi.js && node tools/it/test_scrivi.js && node tools/it/test_memoria.js && node tools/it/test_suoni.js",

@@ -1,5 +1,5 @@
 /* Prueba de humo en el navegador de la app entera, con sus dos idiomas
-   (opcional, no corre en npm test).  Para cada idioma (italiano, portugués):
+   (no corre en npm test; sí en el CI, job «smoke»).  Para cada idioma (italiano, portugués):
    el selector inicial, Oggi/Hoje, una pausa, Suoni/Sons, una lectura con
    karaoke, el camino y la semana 1, una lección, el dictogloss, Io/Eu, el
    examen C1, «Parola o no? / Palavra ou não?», el cambio de idioma desde el
@@ -8,7 +8,10 @@
    elegido.  Falla si hay errores de JavaScript en la consola o si la app
    pide un archivo que no existe (las rutas viejas docs/data/…, audio/cv/…).
 
-   Requiere Playwright:  NODE_PATH=$(npm root -g) node tools/pt/smoke_browser.js
+   Requiere Playwright:  npm run smoke  (NODE_PATH=$(npm root -g) node tools/lib/smoke_browser.js)
+   Chromium: el que Playwright instaló para su versión (npx playwright
+   install chromium, o PLAYWRIGHT_BROWSERS_PATH); si no está, el más nuevo
+   de /opt/pw-browsers.
    Variables opcionales:
      SHOTS=ruta  guarda capturas a 390 px de ancho, en claro y en oscuro
      LANGS=it,pt los idiomas a probar (por defecto los dos)
@@ -22,8 +25,8 @@ function chromiumPath() {
   const base = "/opt/pw-browsers";
   try {
     const dir = fs.readdirSync(base).filter(d => /^chromium-\d+$/.test(d)).sort().pop();
-    const exe = dir && path.join(base, dir, "chrome-linux", "chrome");
-    return exe && fs.existsSync(exe) ? exe : undefined;
+    const exe = dir && ["chrome-linux", "chrome-linux64"].map(d => path.join(base, dir, d, "chrome")).filter(f => fs.existsSync(f))[0];
+    return exe || undefined;
   } catch (e) { return undefined; }
 }
 
@@ -39,7 +42,13 @@ const NAMES = { it: { today: "Oggi", me: "Io", other: "pt" }, pt: { today: "Hoje
   if (shots) fs.mkdirSync(shots, { recursive: true });
   const srv = spawn("python3", ["-m", "http.server", String(port)], { cwd: docs, stdio: "ignore" });
   await new Promise(r => setTimeout(r, 1200));
-  const browser = await chromium.launch({ executablePath: chromiumPath() }).catch(() => chromium.launch());
+  // Playwright's own Chromium (the CI installs it); otherwise the one in
+  // /opt/pw-browsers, whatever Playwright version is around.
+  const browser = await chromium.launch().catch((e) => {
+    const exe = chromiumPath();
+    if (!exe) throw e;
+    return chromium.launch({ executablePath: exe });
+  });
   const errors = global.errors = [];
   const seen = global.seen = [];
   const note = (s) => { seen.push(s); };
