@@ -82,14 +82,14 @@ que la de La Via C1; está explicada en su README.
 ## Desarrollo
 
 ```sh
-npm run build      # tools/pt/build_bank.py + tools/pt/build_course.py → docs/lang/pt/data/
-npm test           # conjugador, juego, frases, diagnóstico, escritura, memoria, sonidos
+npm run build      # tools/pt/build_bank.py + tools/pt/build_course.py → docs/lang/pt/data/ (y el italiano, el tramo, la Biblioteca)
+npm test           # los dos idiomas, lo común y los chequeos de contenido (npm run test:pt: solo el portugués)
 npm start          # http://localhost:8000
-NODE_PATH=$(npm root -g) node tools/pt/smoke_browser.js   # recorrida en Chromium
+npm run smoke      # recorrida en Chromium (tools/lib/smoke_browser.js, necesita Playwright)
 node tools/pt/diag_review.js  # el diagnóstico a escala: errores del hispanohablante inyectados en las 52 semanas
 ```
 
-Cómo se escribe el contenido: `tools/pt/CONTENIDO.md`. La frecuencia se regenera
+Cómo se escribe el contenido: `CONTENIDO.md` (lo común) y `tools/pt/CONTENIDO.md` (lo del portugués). La frecuencia se regenera
 con `python3 tools/pt/build_frequenza.py` (necesita red y, para lematizar bien,
 `pip install spylls`).
 

@@ -240,7 +240,7 @@ la voz del teléfono.
 oraciones de Common Voice (Mozilla, CC0) leídas por voluntarios distintos,
 revisadas a mano, con su semana. Suenan en el dictado y en «¿Qué forma
 escuchaste?»; el service worker las guarda la primera vez que suenan. Cómo
-se eligieron y cómo sumar más: `VOCES.md`.
+se eligieron y cómo sumar más: `tools/it/VOCES.md`.
 
 ### 📝 Dictogloss
 
@@ -816,38 +816,41 @@ estudiante comete de verdad.
 
 ## Estructura del repo
 
+El núcleo es común a los dos idiomas; lo del italiano está en su paquete y en
+sus herramientas. El mapa completo está en [ARQUITECTURA.md](ARQUITECTURA.md),
+y dónde va cada cosa que se escribe (ítems, lecciones, lecturas, frases,
+tramo C1) y qué test la controla, en [CONTENIDO.md](CONTENIDO.md).
+
 ```
-docs/                 el juego (sitio estático, listo para GitHub Pages)
-  index.html
-  css/app.css
-  manifest.webmanifest, sw.js, icons/   app instalable y sin conexión
-  js/conjugator.js    motor de conjugación italiano
-  js/engine.js        corrección, SRS, XP, meta diaria, racha y escudos, cofre, guardado
-  js/frasi.js         banco de frases de conversación y sus ejercicios
-  js/lab.js           laboratorio: cognados (Ponte), falsos amigos, input estructurado (Capire)
-  js/letture.js       lecturas graduadas: Martín a Bologna y Cultura
-  js/diagnosi.js      diagnóstico de errores: categoría, pista y explicación
-  js/banca.js         ejercicios generados desde el banco, y la Clínica
-  data/bank.json      banco compilado (palabras, oraciones, errores, interferencias)
-  js/drills.js        generación de rondas, bosses, repaso, pausa y lampo
-  js/app.js           interfaz
-  data/course.json    curso completo compilado
-tools/
-  extract_dummies.py     EPUB -> banco auto-corregible
-  extract_routledge.py   EPUB -> temario + desafíos
-  build_course.py        arma docs/lang/it/data/course.json
-  sillabo.py             desde qué semana se puede pedir cada ejercicio
-  lessico.py             desde qué semana se conoce cada palabra; glosario
-  check_lessons.py       formato y sillabo de la teoría
-  forms_lexicon.js       léxico de formas verbales para el sillabo
-  authored/              banco de ítems propios (Python legible)
-  lessons/               teoría de las 52 semanas (s1..s4, una por estación)
-  test_conjugator.js     1.442 comprobaciones de formas verbales
-  test_game.js           ~21.500 comprobaciones de datos y lógica
-  test_frasi.js          ~24.000 comprobaciones de frases, laboratorio, lecturas, pausa, racha y cofre
-  test_diagnosi.js       mete ~1.600 errores típicos en las oraciones del banco y verifica el diagnóstico
-  build_bank.py          valida y compila el banco
+docs/                    el juego (sitio estático, listo para GitHub Pages)
+  index.html, sw.js, manifest.webmanifest, css/, icons/, fonts/
+  js/                    el núcleo: boot, engine, drills, lezione, banca, frasi,
+                         lab, letture, suoni, voci, biblioteca, tramo, app…
+  lang/it/               el paquete del italiano
+    lang.js, rules.js    textos de la interfaz y reglas del idioma
+    conjugator.js        motor de conjugación
+    diagnosi.js          diagnóstico de errores: categoría, pista y explicación
+    scrivi.js            la escritura libre y su corrector
+    *_data.js            frases, laboratorio, lecturas, sonidos, dictogloss,
+                         examen, tramo C1…
+    data/                course.json, bank.json, glossario.json, frequenza.json
+                         (los compila tools/it)
+    biblioteca/          los libros de dominio público (tools/lib/build_biblioteca.js)
+    audio/               voces reales (tools/it/VOCES.md)
+tools/it/
+  build_bank.py          valida y compila el banco (bank/ → data/bank.json)
+  build_course.py        arma data/course.json con authored/, lessons/ y fuentes/
   bank/                  el banco en Python legible
+  authored/              ítems propios por tema
+  lessons/               la teoría de las 52 semanas (s1..s4, una por estación)
+  tramo/                 lecturas, escuchas y tareas largas de las semanas 27-51
+  fuentes/               extractos de los dos manuales y sus parches (no se publican)
+  sillabo.py, lessico.py desde qué semana se puede pedir cada ejercicio y cada palabra
+  check_lessons.py, check_letture.py   formato y sillabo de la teoría y las lecturas
+  test_*.js              los tests del italiano (npm run test:it)
+  audit/                 la auditoría de contenido por pasadas (su README)
+tools/lib/               lo común: pack.js, sim_carriera.js, build_tramo.js,
+                         build_biblioteca.js, smoke_browser.js y los test_*.js
 ```
 
 ## Cómo se acomoda a los cursos oficiales
@@ -890,17 +893,21 @@ romper su orden gramatical:
 Los `.epub` no están en el repo. Con tus propias copias:
 
 ```sh
-python3 tools/it/extract_dummies.py   ruta/al/dummies.epub   docs/lang/it/data/bank_dummies.json
-python3 tools/it/extract_routledge.py ruta/al/soluzioni.epub docs/lang/it/data/bank_routledge.json
+python3 tools/it/extract_dummies.py   ruta/al/dummies.epub   tools/it/fuentes/bank_dummies.json
+python3 tools/it/extract_routledge.py ruta/al/soluzioni.epub tools/it/fuentes/bank_routledge.json
 python3 tools/it/build_course.py
 ```
+
+Los extractos quedan en `tools/it/fuentes/`, fuera de `docs/`: los usa el build
+pero no se publican.
 
 ## Tests
 
 ```sh
+npm test            # todo: italiano, portugués, lo común y los chequeos de contenido
 npm run test:it     # los siete juegos de tests del italiano
-npm run build       # recompila el banco y el curso
-npm run sim         # la carrera simulada de un año
+npm run build       # recompila el banco, el curso, el tramo y la Biblioteca
+npm run sim         # la carrera simulada de un año (falla si una semana no se domina)
 ```
 
 | Test | Qué comprueba |
@@ -913,9 +920,9 @@ npm run sim         # la carrera simulada de un año
 | `tools/it/test_memoria.js` | FSRS, mantenimiento, noche y mañana, hipercorrección, registro, velocidad, calibración, hábito |
 | `tools/it/test_suoni.js` | datos de escucha, sesiones de Suoni, dictogloss, capa de frecuencia, examen, inundaciones |
 
-GitHub Actions (`.github/workflows/test.yml`) corre todo en cada push y
-comprueba que `docs/lang/it/data` esté al día con `tools/it/` y que la versión del
-service worker coincida con la de la app.
+GitHub Actions (`.github/workflows/test.yml`) corre todo en cada push: los
+tests, el lint, la simulación, la prueba de humo en Chromium y que `docs/`
+entero esté al día con `tools/` (detalle en [CONTENIDO.md](CONTENIDO.md)).
 
 ## Dos advertencias honestas
 

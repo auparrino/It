@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 """Valida y compila el banco de palabras, oraciones y errores (portugués de Brasil).
 
-Lee      tools/bank/*.py   (parole_nomi, parole_verbi_agg, frasi_banca,
+Lee      tools/pt/bank/*.py  (parole_nomi, parole_verbi_agg, frasi_banca,
                             errori_banca, trasferimento)
-Escribe  docs/data/bank.json
+Escribe  docs/lang/pt/data/bank.json
 
 Cada entrada se controla; las que fallan se descartan y se informan, para que
 un error de tipeo del banco nunca llegue al alumno como respuesta «correcta».

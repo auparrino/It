@@ -2,14 +2,14 @@
 # -*- coding: utf-8 -*-
 """Valida e compila la banca di parole, frasi ed errori.
 
-Reads   tools/bank/*.py   (parole_nomi, parole_verbi_agg, frasi_banca,
+Reads   tools/it/bank/*.py  (parole_nomi, parole_verbi_agg, frasi_banca,
                            errori_banca, trasferimento)
-Writes  docs/data/bank.json
+Writes  docs/lang/it/data/bank.json
 
 Every entry is checked; the ones that fail are dropped and reported, so a
 typo in the bank never reaches the learner as a "correct" answer.
 
-Run:  python3 tools/build_bank.py
+Run:  python3 tools/it/build_bank.py
 """
 import importlib
 import json

@@ -1,18 +1,18 @@
 # -*- coding: utf-8 -*-
-"""Compila el curso: docs/data/course.json y docs/data/glossario.json.
+"""Compila el curso: docs/lang/pt/data/course.json y glossario.json.
 
 Fuentes:
-  tools/curriculo.py   el temario (semanas, estaciones, tiempos)
-  tools/lessons/*.py   la teoría de cada semana, en partes
-  tools/vocab/*.py     las palabras de la semana
-  tools/authored/*.py  los ejercicios propios, cada uno con su semana («w»)
+  tools/pt/curriculo.py   el temario (semanas, estaciones, tiempos)
+  tools/pt/lessons/*.py   la teoría de cada semana, en partes
+  tools/pt/vocab/*.py     las palabras de la semana
+  tools/pt/authored/*.py  los ejercicios propios, cada uno con su semana («w»)
 
 A diferencia del curso de italiano, que tomaba los ejercicios de dos libros
 y tenía que adivinar su semana, acá cada ejercicio se escribe para una
-semana y una parte de su lección.  tools/sillabo.py igual controla que la
+semana y una parte de su lección.  tools/pt/sillabo.py igual controla que la
 respuesta no use un tiempo verbal que todavía no se enseñó (lo avisa).
 
-    python3 tools/build_course.py
+    python3 tools/pt/build_course.py
 """
 import importlib.util
 import json
