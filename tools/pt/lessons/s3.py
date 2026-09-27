@@ -1013,10 +1013,10 @@ LESSONS = {
                      ["à vista", "al contado", "Paguei à vista."],
                      ["à (moda de)", "a la manera de", "filé à parmegiana"]]},
   "ex": [["Fique *à vontade*!", "¡Ponete cómodo!"],
-         ["Saímos *às pressas*.", "Salimos a las apuradas."],
+         ["O boteco só abre *à noite*.", "El bar solo abre a la noche."],
+         ["*Às vezes* a gente janta *à beira-mar*.", "A veces cenamos frente al mar."],
          ["Um filé *à* parmegiana, por favor.", "Una milanesa a la parmesana, por favor."],
-         ["Paguei *à vista*.", "Pagué al contado."],
-         ["Moramos *à beira-mar*.", "Vivimos frente al mar."]],
+         ["Paguei *à vista* e saí *às pressas*.", "Pagué al contado y salí a las apuradas."]],
   "more": ["Ante posesivo femenino, la crase es optativa porque el artículo "
            "también lo es: *vou à minha casa* o *vou a minha casa*. Y "
            "*casa* sin determinar (la propia) no lleva: *voltei a casa*; "
@@ -1038,7 +1038,7 @@ LESSONS = {
         {"prompt": "Perfeito: A equipe ___ ótimos resultados.", "answer": "obteve", "options": ["obteve", "obteu", "obtinha"]}],
   "r": "Se conjugan como *ter* en todos los tiempos: *mantenho, mantém, "
        "mantêm; mantive, manteve; mantenha; mantiver*.",
-  "table": {"head": ["", "ter", "manter", "obter"],
+  "table": {"head": ["", "ter (tener)", "manter (mantener)", "obter (obtener)"],
             "rows": [["eu (pres.)", "tenho", "mantenho", "obtenho"],
                      ["ele (pres.)", "tem", "mantém", "obtém"],
                      ["eles (pres.)", "têm", "mantêm", "obtêm"],
@@ -1064,7 +1064,7 @@ LESSONS = {
   "r": "Como *pôr*: *proponho, propõe, propõem; propus, propôs, "
        "propuseram; proponha; propuser*. El infinitivo va **sin** tilde: "
        "*propor*.",
-  "table": {"head": ["", "pôr", "propor", "supor"],
+  "table": {"head": ["", "pôr (poner)", "propor (proponer)", "supor (suponer)"],
             "rows": [["eu (pres.)", "ponho", "proponho", "suponho"],
                      ["ele (pres.)", "põe", "propõe", "supõe"],
                      ["ele (perf.)", "pôs", "propôs", "supôs"],
@@ -1088,7 +1088,7 @@ LESSONS = {
   "q": [{"prompt": "Eu ___ no calçadão todo domingo.", "answer": "passeio", "options": ["passeio", "passeo", "paseio"]}],
   "r": "En las formas acentuadas en la raíz, *-e-* → *-ei-*: *passeio, "
        "passeia, passeiam*. *nós passeamos* queda igual.",
-  "table": {"head": ["", "passear", "frear"],
+  "table": {"head": ["", "passear (pasear)", "frear (frenar)"],
             "rows": [["eu", "passeio", "freio"],
                      ["ele", "passeia", "freia"],
                      ["nós", "passeamos", "freamos"],
@@ -1098,7 +1098,7 @@ LESSONS = {
          ["*Bloqueie* o cartão pelo app.", "Bloqueá la tarjeta desde la app."]]},
 
  {"h": "-iar: copio, pero odeio",
-  "r": "Casi todos en *-iar* son regulares: *copio, anuncio, estudio*. "
+  "r": "Casi todos en *-iar* son regulares: *copio, anuncio, elogio*. "
        "Cinco van como *-ear*: **M**ediar, **A**nsiar, **R**emediar, "
        "**I**ncendiar, **O**diar → *odeio, medeio*.",
   "ex": [["Eu *odeio* acordar cedo.", "Odio levantarme temprano."],
@@ -1112,13 +1112,15 @@ LESSONS = {
   "r": "Irregulares en *eu* (y en el subjuntivo): *caibo, valho, perco, "
        "meço* → *caiba, valha, perca, meça*. *caber*: perfeito *coube*.",
   "table": {"head": ["Verbo", "eu (pres.)", "ele (pres.)", "que eu"],
-            "rows": [["caber", "caibo", "cabe", "caiba"],
-                     ["valer", "valho", "vale", "valha"],
-                     ["perder", "perco", "perde", "perca"],
-                     ["medir", "meço", "mede", "meça"]]},
+            "rows": [["caber (caber, entrar)", "caibo", "cabe", "caiba"],
+                     ["valer (valer)", "valho", "vale", "valha"],
+                     ["perder (perder)", "perco", "perde", "perca"],
+                     ["medir (medir)", "meço", "mede", "meça"]]},
   "ex": [["Não *coube* tudo na mala.", "No entró todo en la valija."],
+         ["Sem café, eu não *valho* nada.", "Sin café, no valgo nada."],
          ["Sempre *perco* o metrô.", "Siempre pierdo el subte."],
-         ["Espero que você não *perca* o voo.", "Espero que no pierdas el vuelo."]]},
+         ["Espero que você não *perca* o voo.", "Espero que no pierdas el vuelo."],
+         ["— Quanto você *mede*? — *Meço* 1,80.", "—¿Cuánto medís? —Mido 1,80."]]},
 ]},
 
 38: {
@@ -1162,6 +1164,7 @@ LESSONS = {
   "ex": [["— Tá caro, né? — *Pois é*.", "—Está caro, ¿no? —Y sí."],
          ["*Sei lá*, acho que ele vem.", "Qué sé yo, creo que viene."],
          ["*Nossa*, que vista!", "¡Guau, qué vista!"],
+         ["*Caraca*, que fila!", "¡Uh, qué fila!"],
          ["— Obrigado! — *Que isso*!", "—¡Gracias! —¡Por favor, de nada!"]],
   "more": ["*nossa* viene de *Nossa Senhora* y ya no tiene nada de "
            "religioso. *caraca*, *maneiro* (copado), *irado* (buenísimo), "
@@ -1193,12 +1196,12 @@ LESSONS = {
   "q": [{"prompt": "Habla de Brasil: «¿Lo viste a João?» →", "answer": "Você viu o João?", "options": ["Você viu o João?", "Você viu ao João?", "Você o viu a João?"]}],
   "r": "Hablando: *vi ele* (lo vi), *me dá* (dame), *te* con *você* "
        "(*você sabe que te amo*), *a gente* por *nós*.",
-  "table": {"head": ["Habla", "Norma escrita"],
-            "rows": [["Vi ele na praia.", "Vi-o na praia."],
-                     ["Me dá um minuto.", "Dê-me um minuto."],
-                     ["Você sabe que eu te amo.", "Você sabe que eu o amo."],
-                     ["A gente vai.", "Nós vamos."],
-                     ["Tô te esperando.", "Estou esperando você."]]},
+  "table": {"head": ["Habla", "Norma escrita", "Español"],
+            "rows": [["Vi ele na praia.", "Vi-o na praia.", "Lo vi en la playa."],
+                     ["Me dá um minuto.", "Dê-me um minuto.", "Dame un minuto."],
+                     ["Você sabe que eu te amo.", "Você sabe que eu o amo.", "Sabés que te amo."],
+                     ["A gente vai.", "Nós vamos.", "Vamos."],
+                     ["Tô te esperando.", "Estou esperando você.", "Te estoy esperando."]]},
   "ex": [["Liga pra mim quando *cê* chegar.", "Llamame cuando llegues."]]},
 
  {"h": "Cuándo usarlo",
@@ -1236,10 +1239,10 @@ LESSONS = {
   "r": "Real: *se* + futuro do subj. Posible: *se* + imperfeito do subj. "
        "Imposible: *se* + *tivesse* + participio. Nunca condicional tras "
        "*se*.",
-  "table": {"head": ["Tipo", "Condición", "Resultado"],
-            "rows": [["real", "Se eu tiver tempo,", "vou / irei."],
-                     ["posible", "Se eu tivesse tempo,", "iria (habla: ia)."],
-                     ["imposible", "Se eu tivesse tido tempo,", "teria ido (habla: tinha ido)."]]},
+  "table": {"head": ["Tipo", "Condición", "Resultado", "Español"],
+            "rows": [["real (futuro)", "Se eu tiver tempo,", "vou / irei.", "Si tengo tiempo, voy."],
+                     ["posible (presente)", "Se eu tivesse tempo,", "iria (habla: ia).", "Si tuviera tiempo, iría."],
+                     ["imposible (pasado)", "Se eu tivesse tido tempo,", "teria ido (habla: tinha ido).", "Si hubiera tenido tiempo, habría ido."]]},
   "ex": [["Se *chover*, a gente fica.", "Si llueve, nos quedamos."],
          ["Se *chovesse*, a gente ficaria.", "Si lloviera, nos quedaríamos."],
          ["Se *tivesse chovido*, a gente *teria ficado*.", "Si hubiera llovido, nos habríamos quedado."]]},

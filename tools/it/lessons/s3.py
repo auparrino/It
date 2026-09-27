@@ -660,7 +660,19 @@ LESSONS = {
        "*tutto ciò che*. *il che* retoma **una frase entera**.",
   "ex": [["Non capisco *quello che* dici.", "No entiendo lo que decís."],
          ["Fai *tutto ciò che* vuoi.", "Hacé todo lo que quieras."],
-         ["È arrivato tardi, *il che* mi ha infastidito.", "Llegó tarde, lo que me molestó."]]},
+         ["È arrivato tardi, *il che* mi ha infastidito.", "Llegó tarde, lo que me molestó."],
+         ["Prendi *quelli che* vuoi.", "Llevate los que quieras."],
+         ["Dimmi *chi* ha telefonato.", "Decime quién llamó."]],
+  "table": {"head": ["Forma", "Significa", "Ejemplo"],
+            "rows": [["quello che", "lo que; el que", "Non capisco quello che dici."],
+                     ["quella che", "la que", "Quella che studia medicina."],
+                     ["quelli che", "los que", "Prendi quelli che vuoi."],
+                     ["quelle che", "las que", "Compra quelle che vuoi."],
+                     ["tutto ciò che", "todo lo que", "Fai tutto ciò che vuoi."],
+                     ["il che", "lo que, lo cual (una frase entera)", "È tardi, il che mi preoccupa."]]},
+  "tip": "«El que, la que» que elige entre varios es *quello / quella che*: "
+         "*Quale piatto? — Quello che preferisci*. Si no hay antecedente, "
+         "*chi*: *chi arriva tardi non entra*."},
 ]},
 
 35: {
@@ -676,7 +688,10 @@ LESSONS = {
          ["La casa *sarà venduta*.", "La casa va a ser vendida."]],
   "tip": "*è letto*, *era letto*, *è stato letto*, *sarà letto*, *sarebbe "
          "stato letto*, *che sia letto*: siempre *essere* conjugado + "
-         "participio."},
+         "participio.",
+  "more": ["Con un modal, *essere* va en infinitivo: *la macchina deve "
+           "essere riparata* (el auto tiene que ser arreglado), *ha voluto "
+           "essere pagato subito* (quiso que le pagaran enseguida)."]},
 
  {"h": "venire: la pasiva de acción",
   "r": "*venire* reemplaza a *essere* **solo en tiempos simples** y subraya "
@@ -689,7 +704,11 @@ LESSONS = {
           "chiusa».",
   "more": ["Es típica de la prensa, los reglamentos y la administración: "
            "*le domande vengono esaminate entro trenta giorni* (las "
-           "solicitudes se examinan dentro de los treinta días)."]},
+           "solicitudes se examinan dentro de los treinta días).",
+           "*rimanere* + participio es la pasiva del **resultado**, de cómo "
+           "quedó algo: *la città è rimasta distrutta* (la ciudad quedó "
+           "destruida), *siamo rimasti stupiti* (nos quedamos asombrados). "
+           "Esta sí va en tiempos compuestos."]},
 
  {"h": "andare: la pasiva de obligación",
   "r": "*andare* + participio = **debe ser** hecho. Muy usado en "
@@ -726,7 +745,11 @@ LESSONS = {
          ["In questo ristorante *si mangiano* ottimi piatti.", "En este restaurante se comen platos excelentes."]],
   "warn": "«Si vende libri» está mal: *si vendono libri*, *si affittano "
           "camere*, *si cercano collaboratori*. Los carteles reales se "
-          "equivocan seguido; el examen no perdona."},
+          "equivocan seguido; el examen no perdona.",
+  "more": ["En los tiempos compuestos va *essere*, y el participio también "
+           "concuerda con el objeto: *si sono venduti molti libri* (se "
+           "vendieron muchos libros), *si è bevuta troppa birra* (se tomó "
+           "demasiada cerveza)."]},
 
  {"h": "Si impersonale: siempre singular",
   "r": "Sin objeto, o con verbo intransitivo, *si* = «uno, la gente», y el "
@@ -748,12 +771,17 @@ LESSONS = {
            "mangiato bene*. Con verbos que ya van con *essere*, el participio "
            "también pasa a plural: *si è arrivati tardi*."]},
 
- {"h": "Con verbos reflexivos: ci si",
+ {"h": "ci si, lo si, se ne",
   "r": "No se pueden juntar dos *si*: con un verbo reflexivo, el impersonal "
        "es **ci si**: *ci si diverte*.",
   "ex": [["D'estate *ci si sveglia* presto.", "En verano uno se despierta temprano."],
          ["Con lui non *ci si annoia* mai.", "Con él uno no se aburre nunca."],
-         ["A tutto *ci si abitua*.", "Uno se acostumbra a todo."]]},
+         ["A tutto *ci si abitua*.", "Uno se acostumbra a todo."],
+         ["Il caffè? *Lo si* beve al banco.", "¿El café? Se toma en la barra."],
+         ["Di questo *se ne* parla ogni giorno.", "De esto se habla todos los días."]],
+  "more": ["Con otros pronombres, el orden es fijo: *lo si*, *la si*, *li si* "
+           "(el directo va antes: *lo si beve*), pero *si* + *ne* se vuelve "
+           "*se ne*: *se ne parla*, nunca «si ne parla»."]},
 
  {"h": "El si toscano por noi",
   "q": [{"prompt": "En el habla toscana, «andiamo al cinema» es…", "answer": "si va al cinema", "options": ["si va al cinema", "si andiamo al cinema", "si vanno al cinema"]}, {"prompt": "«Allora, si mangia?» quiere decir…", "answer": "Bueno, ¿comemos?", "options": ["Bueno, ¿comemos?", "Bueno, ¿comés?", "Bueno, ¿come él?"]}],
@@ -794,15 +822,22 @@ LESSONS = {
          ["Lo *vidi* e gli *dissi* tutto.", "Lo vi y le dije todo."],
          ["Che cosa *facesti* quel giorno?", "¿Qué hiciste ese día?"]],
   "table": {"head": ["Verbo", "io", "tu", "lui", "noi", "voi", "loro"],
-            "rows": [["prendere", "presi", "prendesti", "prese", "prendemmo", "prendeste", "presero"],
-                     ["scrivere", "scrissi", "scrivesti", "scrisse", "scrivemmo", "scriveste", "scrissero"],
-                     ["vedere", "vidi", "vedesti", "vide", "vedemmo", "vedeste", "videro"],
-                     ["dire", "dissi", "dicesti", "disse", "dicemmo", "diceste", "dissero"],
-                     ["fare", "feci", "facesti", "fece", "facemmo", "faceste", "fecero"],
-                     ["venire", "venni", "venisti", "venne", "venimmo", "veniste", "vennero"],
-                     ["avere", "ebbi", "avesti", "ebbe", "avemmo", "aveste", "ebbero"]]},
+            "rows": [["prendere (tomar)", "presi", "prendesti", "prese", "prendemmo", "prendeste", "presero"],
+                     ["scrivere (escribir)", "scrissi", "scrivesti", "scrisse", "scrivemmo", "scriveste", "scrissero"],
+                     ["vedere (ver)", "vidi", "vedesti", "vide", "vedemmo", "vedeste", "videro"],
+                     ["dire (decir)", "dissi", "dicesti", "disse", "dicemmo", "diceste", "dissero"],
+                     ["fare (hacer)", "feci", "facesti", "fece", "facemmo", "faceste", "fecero"],
+                     ["venire (venir)", "venni", "venisti", "venne", "venimmo", "veniste", "vennero"],
+                     ["avere (tener, haber)", "ebbi", "avesti", "ebbe", "avemmo", "aveste", "ebbero"],
+                     ["sapere (saber)", "seppi", "sapesti", "seppe", "sapemmo", "sapeste", "seppero"],
+                     ["nascere (nacer)", "nacqui", "nascesti", "nacque", "nascemmo", "nasceste", "nacquero"]]},
   "tip": "*essere* es el único irregular entero: *fui, fosti, fu, fummo, "
-         "foste, furono*. Y *dare*: *diedi / detti*; *stare*: *stetti*."},
+         "foste, furono*. Y *dare*: *diedi / detti*; *stare*: *stetti*.",
+  "more": ["Con el mismo patrón: *mettere → misi*, *leggere → lessi*, "
+           "*chiudere → chiusi*, *rispondere → risposi*, *piangere → "
+           "piansi*, *dipingere → dipinsi*, *conoscere → conobbi*, *volere → "
+           "volli*, *rimanere → rimasi*, *bere → bevvi*. *morire* es regular: "
+           "*morì*."]},
 
  {"h": "Cuándo se usa",
   "r": "Para hechos **cerrados y sin lazo con el presente**: historia y "
@@ -817,7 +852,10 @@ LESSONS = {
   "more": ["Ninguna de las dos costumbres regionales es incorrecta al "
            "hablar. Pero en un texto escrito, un hecho histórico va en "
            "passato remoto y lo que todavía pesa en el presente, en passato "
-           "prossimo."]},
+           "prossimo.",
+           "Los siglos se nombran por los cientos: *il Cinquecento* = los "
+           "1500, el siglo XVI; *il Settecento* = el XVIII; *il Novecento* = "
+           "el XX. *Leonardo dipinse la Gioconda nel Cinquecento.*"]},
 
  {"h": "Trapassato remoto",
   "r": "*ebbi* o *fui* + participio, tras *quando, dopo che, appena*, con la "
@@ -841,17 +879,22 @@ LESSONS = {
          ["«Ho finito» → Disse che *aveva finito*.", "Dijo que había terminado."],
          ["«Verrò» → Disse che *sarebbe venuto*.", "Dijo que vendría."],
          ["«Vieni!» → Mi disse *di venire*.", "Me dijo que fuera."]],
-  "table": {"head": ["Discurso directo", "Discurso indirecto"],
-            "rows": [["presente", "imperfetto"],
-                     ["passato prossimo / remoto", "trapassato prossimo"],
-                     ["imperfetto", "imperfetto (no cambia)"],
-                     ["futuro", "condizionale passato"],
-                     ["condizionale presente", "condizionale passato"],
-                     ["imperativo", "di + infinito"],
-                     ["congiuntivo presente", "congiuntivo imperfetto"]]},
+  "table": {"head": ["Discurso directo", "Discurso indirecto", "Ejemplo"],
+            "rows": [["presente", "imperfetto", "«Sono stanco» → disse che era stanco"],
+                     ["passato prossimo / remoto", "trapassato prossimo", "«Ho finito» → disse che aveva finito"],
+                     ["imperfetto", "imperfetto (no cambia)", "«Ero malato» → disse che era malato"],
+                     ["futuro", "condizionale passato", "«Verrò» → disse che sarebbe venuto"],
+                     ["condizionale presente", "condizionale passato", "«Verrei» → disse che sarebbe venuto"],
+                     ["imperativo", "di + infinito", "«Vieni!» → mi disse di venire"],
+                     ["congiuntivo presente", "congiuntivo imperfetto", "«Credo che sia vero» → disse che credeva che fosse vero"],
+                     ["futuro tras se / quando", "congiuntivo trapassato", "«Quando avrò finito...» → quando avesse finito"]]},
   "more": ["El imperativo también puede pasar a *che* + congiuntivo "
            "imperfetto: *mi disse che venissi*. Es más formal que *di "
-           "venire*."]},
+           "venire*. Los pronombres se pegan al infinitivo: «Aspettami!» → "
+           "*mi disse di aspettarlo*.",
+           "Un futuro que dependía de *se*, *quando* o *chiunque* pasa a "
+           "congiuntivo trapassato: «Se cambierai lavoro, non ti parlerò» → "
+           "*disse che se avessi cambiato lavoro non mi avrebbe parlato*."]},
 
  {"h": "Personas, lugares y tiempos",
   "r": "También se desplazan **personas, demostrativos, lugar y tiempo**: el "
@@ -859,16 +902,16 @@ LESSONS = {
   "ex": [["«Vengo qui domani» → Disse che sarebbe andato *lì* *il giorno dopo*.", "Dijo que iría allá al día siguiente."],
          ["«Questo libro è mio» → Disse che *quel* libro era *suo*.", "Dijo que ese libro era suyo."],
          ["«Ieri ero malato» → Disse che *il giorno prima* era malato.", "Dijo que el día anterior estaba enfermo."]],
-  "table": {"head": ["Directo", "Indirecto"],
-            "rows": [["io, tu", "lui, lei (según el caso)"],
-                     ["questo", "quello"],
-                     ["qui, qua", "lì, là"],
-                     ["ora, adesso", "allora, in quel momento"],
-                     ["oggi", "quel giorno"],
-                     ["ieri", "il giorno prima"],
-                     ["domani", "il giorno dopo"],
-                     ["fa (due giorni fa)", "prima (due giorni prima)"],
-                     ["venire", "andare"]]}},
+  "table": {"head": ["Directo", "Indirecto", "Castellano"],
+            "rows": [["io, tu", "lui, lei (según el caso)", "yo, vos → él, ella"],
+                     ["questo", "quello", "este → ese, aquel"],
+                     ["qui, qua", "lì, là", "acá → ahí, allá"],
+                     ["ora, adesso", "allora, in quel momento", "ahora → entonces, en ese momento"],
+                     ["oggi", "quel giorno", "hoy → ese día"],
+                     ["ieri", "il giorno prima", "ayer → el día anterior"],
+                     ["domani", "il giorno dopo", "mañana → al día siguiente"],
+                     ["fa (due giorni fa)", "prima (due giorni prima)", "hace dos días → dos días antes"],
+                     ["venire", "andare", "venir → ir"]]}},
 
  {"h": "Preguntas indirectas",
   "q": [{"prompt": "¿Cuál está bien? «Me preguntó si iba.»", "answer": "Mi chiese se venissi.", "options": ["Mi chiese se venissi.", "Mi chiese se vengo.", "Mi chiese che venissi."]}, {"prompt": "Completá: «No sé si es cierto.»", "stem": "Non so ___ sia vero.", "answer": "se", "options": ["se", "si", "che"]}],
@@ -879,7 +922,10 @@ LESSONS = {
          ["Non so *se sia* vero.", "No sé si es cierto."]],
   "warn": "Este *se* no es el hipotético: es «si» de pregunta y admite "
           "condicional. *Mi chiedo se sarebbe d'accordo* es perfectamente "
-          "correcto."},
+          "correcto.",
+  "tip": "En el habla también se oye el indicativo: *mi chiese dove "
+         "andavo*. Vale; el congiuntivo (*dove andassi*) es el registro "
+         "cuidado."},
 
  {"h": "Los verbos para reportar",
   "r": "**No repitas *dire***: el C1 se nota en la variedad del verbo que "
@@ -888,13 +934,13 @@ LESSONS = {
          ["Mi *ha suggerito* di riposare.", "Me sugirió que descansara."],
          ["Ha *promesso* che sarebbe tornato presto.", "Prometió que volvería pronto."],
          ["*Ha ribadito* che non era d'accordo.", "Reiteró que no estaba de acuerdo."]],
-  "table": {"head": ["Para", "Verbos"],
-            "rows": [["afirmar", "affermare, sostenere, dichiarare"],
-                     ["agregar o insistir", "aggiungere, precisare, ribadire"],
-                     ["reconocer o negar", "ammettere, negare"],
-                     ["proponer", "suggerire, proporre"],
-                     ["comprometer o amenazar", "promettere, minacciare"],
-                     ["quejarse o señalar", "lamentarsi, far notare"]]},
+  "table": {"head": ["Para", "Verbos", "Ejemplo"],
+            "rows": [["afirmar", "affermare (afirmar), sostenere (sostener), dichiarare (declarar)", "Ha dichiarato che è innocente."],
+                     ["agregar o insistir", "aggiungere (agregar), precisare (aclarar), ribadire (reiterar)", "Ha aggiunto che era tardi."],
+                     ["reconocer o negar", "ammettere (admitir), negare (negar)", "Ha negato di averlo visto."],
+                     ["proponer", "suggerire (sugerir), proporre (proponer)", "Ha proposto di partire."],
+                     ["comprometer o amenazar", "promettere (prometer), minacciare (amenazar)", "Ha minacciato di andarsene."],
+                     ["quejarse o señalar", "lamentarsi (quejarse), far notare (hacer notar)", "Si è lamentato del rumore."]]},
   "warn": "Varios piden congiuntivo: *nega che sia vero*, *ammette che sia "
           "difficile*."},
 ]},

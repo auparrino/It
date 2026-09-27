@@ -75,7 +75,7 @@ LESSONS = {
                      ["vai ter", "haverá", "habrá"],
                      ["pode ter", "pode haver", "puede haber"]]},
   "ex": [["*Há* muitas reclamações sobre o VLT.", "Hay muchas quejas sobre el VLT."],
-         ["*Houve* dois acidentes na Avenida Brasil.", "Hubo dos accidentes en la Avenida Brasil."],
+         ["*Haverá* shows na orla no Réveillon.", "Habrá shows en la costanera en Año Nuevo."],
          ["*Havia* poucas pessoas no calçadão.", "Había poca gente en la rambla."],
          ["*Pode haver* atrasos no metrô.", "Puede haber demoras en el metro."],
          ["*Houve* resistência à escravidão em todo o Brasil colonial.", "Hubo resistencia a la esclavitud en todo el Brasil colonial."]],
@@ -88,17 +88,18 @@ LESSONS = {
   "r": "El informe cambia *fazer* por verbos precisos: *realizar* un "
        "evento, *efetuar* un pago, *proceder a* un trámite, *constatar* un "
        "hecho.",
-  "table": {"head": ["Habla", "Informe"],
-            "rows": [["fazer uma reunião", "realizar uma reunião"],
-                     ["pagar", "efetuar o pagamento"],
-                     ["começar a analisar", "proceder à análise"],
-                     ["ver, perceber", "constatar, verificar"],
-                     ["dar", "conceder, fornecer"],
-                     ["mostrar", "demonstrar, evidenciar"]]},
+  "table": {"head": ["Habla", "Informe", "Español"],
+            "rows": [["fazer uma reunião", "realizar uma reunião", "realizar una reunión"],
+                     ["pagar", "efetuar o pagamento", "efectuar el pago"],
+                     ["começar a analisar", "proceder à análise", "proceder al análisis"],
+                     ["ver, perceber", "constatar, verificar", "comprobar, verificar"],
+                     ["dar", "conceder, fornecer", "otorgar, proporcionar"],
+                     ["mostrar", "demonstrar, evidenciar", "demostrar, poner en evidencia"]]},
   "ex": [["A reunião *foi realizada* no Centro.", "La reunión se realizó en el Centro."],
          ["O pagamento *deve ser efetuado* até o dia 10.", "El pago debe efectuarse hasta el día 10."],
          ["A comissão *procedeu à* análise dos contratos.", "La comisión procedió al análisis de los contratos."],
-         ["*Constatou-se* que a água estava poluída.", "Se comprobó que el agua estaba contaminada."]],
+         ["*Constatou-se* que a água estava poluída.", "Se comprobó que el agua estaba contaminada."],
+         ["A prefeitura *forneceu* os dados, que *evidenciam* o atraso.", "La intendencia proporcionó los datos, que ponen en evidencia el atraso."]],
   "warn": "*proceder a* rige *a*: ante femenino, crase (*procedeu à "
           "análise*); ante masculino, *ao* (*procedeu ao pagamento*)."},
 
@@ -158,7 +159,10 @@ LESSONS = {
          ["Nós já *fizéramos* tudo.", "Nosotros ya habíamos hecho todo."]],
   "warn": "La 1.ª plural lleva tilde: *faláramos*, *comêramos*, "
           "*fizéramos*, *fôramos*. Y la 3.ª plural es idéntica al perfeito: "
-          "*falaram* es «hablaron» o «habían hablado»."},
+          "*falaram* es «hablaron» o «habían hablado».",
+  "tip": "Se usa para lo anterior a otro pasado (= *tinha feito*), casi solo "
+         "en literatura y prensa. Hablando, *tinha feito*: lo ves en esta "
+         "semana."},
 
  {"h": "La trampa: -ra no es subjuntivo",
   "q": [{"prompt": "¿Qué significa «ele fizera»?", "answer": "él había hecho", "options": ["él había hecho", "él hiciera", "él haría"]},
@@ -243,7 +247,7 @@ LESSONS = {
        "*chegando em casa, liguei* = cuando llegué a casa, llamé.",
   "ex": [["*Chegando* ao Leblon, pegue a primeira à direita.", "Al llegar a Leblon, tomá la primera a la derecha."],
          ["*Estando* cansada, ela foi embora cedo.", "Como estaba cansada, se fue temprano."],
-         ["*Lendo* Os Sertões, a gente entende Canudos.", "Leyendo Os Sertões, uno entiende Canudos."],
+         ["*Lendo* Os Sertões, a gente entende Canudos.", "Si uno lee Os Sertões, entiende Canudos."],
          ["*Terminando* o trabalho, vou à praia.", "Cuando termine el trabajo, voy a la playa."]],
   "warn": "Formas: *pondo* (pôr), *indo* (ir), *vindo* (vir), *lendo* "
           "(ler): nunca «poniendo», «yendo», «leyendo».",
@@ -254,11 +258,12 @@ LESSONS = {
  {"h": "ao + infinitivo = al + infinitivo",
   "q": [{"prompt": "«Al salir del Maracanã, llovía.»", "stem": "___ do Maracanã, chovia.", "answer": "Ao sair", "options": ["Ao sair", "Al sair", "No sair"]}],
   "r": "*ao* + infinitivo marca el momento, como «al llegar». También "
-       "*antes de*, *depois de*, *após* + infinitivo.",
+       "*antes de*, *depois de* y *após* (tras, después de) + infinitivo.",
   "ex": [["*Ao chegar* ao Galeão, troque dinheiro.", "Al llegar al Galeão, cambiá plata."],
          ["*Ao ver* o Cristo, ficou emocionado.", "Al ver el Cristo, se emocionó."],
          ["*Depois de almoçar*, fomos ao Pão de Açúcar.", "Después de almorzar, fuimos al Pan de Azúcar."],
-         ["*Antes de sair*, feche a janela.", "Antes de salir, cerrá la ventana."]],
+         ["*Antes de sair*, feche a janela.", "Antes de salir, cerrá la ventana."],
+         ["*Após votar*, o eleitor recebe o comprovante.", "Después de votar, el votante recibe el comprobante."]],
   "warn": "«al» → *ao*: *ao sair*, *ao entrar*. Es la misma contracción *a "
           "+ o* de *vou ao Rio*."},
 
@@ -437,15 +442,16 @@ LESSONS = {
   "r": "De un adjetivo salen sustantivos abstractos: *feliz → felicidade*, "
        "*belo → beleza*, *velho → velhice*, *louco → loucura*.",
   "table": {"head": ["Sufijo", "Ejemplos", "Español"],
-            "rows": [["-dade", "felicidade, bondade, maldade", "-dad"],
-                     ["-eza", "beleza, tristeza, certeza", "-eza"],
-                     ["-ice", "velhice, chatice, meiguice", "-ez, -ería"],
-                     ["-ura", "loucura, altura, gostosura", "-ura"],
-                     ["-ez", "timidez, rapidez", "-ez"],
-                     ["-ismo", "sebastianismo, modernismo, coronelismo", "-ismo"]]},
+            "rows": [["-dade", "felicidade, bondade, maldade", "-dad: felicidad, bondad, maldad"],
+                     ["-eza", "beleza, tristeza, certeza", "-eza: belleza, tristeza, certeza"],
+                     ["-ice", "velhice, chatice, meiguice", "-ez, -ería: vejez, pesadez, dulzura"],
+                     ["-ura", "loucura, altura, gostosura", "-ura: locura, altura, delicia"],
+                     ["-ez", "timidez, rapidez", "-ez: timidez, rapidez"],
+                     ["-ismo", "sebastianismo, modernismo, coronelismo", "-ismo: movimiento, doctrina, sistema"]]},
   "ex": [["Que *chatice* esse trânsito!", "¡Qué pesadez este tránsito!"],
          ["A *beleza* do Arpoador ao pôr do sol.", "La belleza del Arpoador al atardecer."],
          ["Na *velhice*, ele voltou para o Rio.", "En la vejez, volvió a Río."],
+         ["A *timidez* dele passou com o tempo.", "Su timidez se le pasó con el tiempo."],
          ["Para Sérgio Buarque, a *cordialidade* vem do coração, não da boa educação.", "Para Sérgio Buarque, la cordialidad viene del corazón, no de los buenos modales."]],
   "warn": "«-dad» → *-dade*: *felicidade*, *cidade*, *verdade*. Y *-ice* es "
           "muy brasileño para lo molesto o lo tonto: *chatice*, *burrice*, "
@@ -462,7 +468,8 @@ LESSONS = {
                      ["-ência / -ância", "paciência, importância, ausência", "femenino"]]},
   "ex": [["A *votação* terminou tarde.", "La votación terminó tarde."],
          ["O *casamento* foi na igreja da Candelária.", "El casamiento fue en la iglesia de la Candelária."],
-         ["A *aprendizagem* de línguas leva tempo.", "El aprendizaje de idiomas lleva tiempo."]],
+         ["A *aprendizagem* de línguas leva tempo.", "El aprendizaje de idiomas lleva tiempo."],
+         ["Tenha *paciência*: o ônibus já vem.", "Tené paciencia: el colectivo ya viene."]],
   "warn": "*-aje* → *-agem*, y pasa a **femenino**: *a aprendizagem*, *a "
           "viagem*, *a mensagem*, *a lavagem*."},
 
@@ -512,14 +519,15 @@ LESSONS = {
   "ex": [["*Desliga* a luz, por favor.", "Apagá la luz, por favor."],
          ["Estou fazendo *pós-graduação* na UFRJ.", "Estoy haciendo un posgrado en la UFRJ."],
          ["O *pré-carnaval* no Centro é lotado.", "La previa del carnaval en el Centro es un gentío."],
-         ["Meu *ex-namorado* mora em Niterói.", "Mi ex novio vive en Niterói."]],
+         ["Meu *ex-namorado* mora em Niterói.", "Mi ex novio vive en Niterói."],
+         ["Vou *reler* esse livro: é *superlegal*.", "Voy a releer ese libro: es buenísimo."]],
   "warn": "«posgrado» → *pós-graduação*, con tilde y guion. Los átonos *pre-* "
           "y *pos-* se pegan: *prever*, *pospor*."},
 
  {"h": "Diminutivo -inho / -zinho",
   "r": "*-inho* con palabras en *-o / -a* átonas (*casa → casinha*); "
-       "*-zinho* tras vocal tónica, nasal o diptongo (*café → cafezinho*, "
-       "*pão → pãozinho*).",
+       "*-zinho* tras vocal tónica, nasal, diptongo o consonante (*café → "
+       "cafezinho*, *pão → pãozinho*, *flor → florzinha*).",
   "table": {"head": ["Base", "Diminutivo", "Plural"],
             "rows": [["casa", "casinha", "casinhas"],
                      ["livro", "livrinho", "livrinhos"],
@@ -855,12 +863,12 @@ LESSONS = {
 
  {"h": "Conceder: ainda que, mesmo que, por mais que",
   "q": [{"prompt": "«Aunque el tránsito está horrible, voy en auto.»", "stem": "Embora o trânsito ___ horrível, vou de carro.", "answer": "esteja", "options": ["esteja", "está", "estava"]}],
-  "r": "*embora*, *ainda que*, *mesmo que* y *por mais que* van **siempre "
-       "con subjuntivo**, aunque el hecho sea real.",
+  "r": "*embora*, *ainda que*, *mesmo que* (aunque) y *por mais que* (por "
+       "más que) van **siempre con subjuntivo**, aunque el hecho sea real.",
   "ex": [["*Embora* a praia *esteja* suja, está cheia.", "Aunque la playa está sucia, está llena."],
          ["*Mesmo que chova*, o bloco sai.", "Aunque llueva, la comparsa sale."],
          ["*Por mais que* eu *estude*, sempre erro a crase.", "Por más que estudie, siempre le erro a la crase."],
-         ["*Embora* Freyre *tenha* valorizado a mestiçagem, suavizou a violência da escravidão.", "Aunque Freyre valoró el mestizaje, suavizó la violencia de la esclavitud."]],
+         ["*Ainda que* Freyre *tenha* valorizado a mestiçagem, suavizou a violência da escravidão.", "Aunque Freyre valoró el mestizaje, suavizó la violencia de la esclavitud."]],
   "warn": "En español decís «aunque **está** sucia» si es un hecho. En "
           "portugués, no: *embora esteja*. Si querés indicativo, usá *mas*: "
           "*está suja, mas está cheia*."},
@@ -879,16 +887,17 @@ LESSONS = {
   "q": [{"prompt": "Elegí el conector para sumar un argumento.", "stem": "O projeto é caro. ___, não resolve o problema.", "answer": "Além disso", "options": ["Além disso", "Demais", "Aliás de"]}],
   "r": "Los marcadores guían al lector: *em primeiro lugar*, *além disso*, "
        "*por outro lado*, *ademais*, *não só... como também*.",
-  "table": {"head": ["Función", "Marcadores"],
-            "rows": [["abrir", "em primeiro lugar, antes de tudo"],
-                     ["sumar", "além disso, ademais, também, inclusive"],
-                     ["contrastar", "por outro lado, em contrapartida, no entanto"],
-                     ["ejemplificar", "por exemplo, é o caso de"],
-                     ["reforzar", "não só... como também, sobretudo"]]},
+  "table": {"head": ["Función", "Marcadores", "Español"],
+            "rows": [["abrir", "em primeiro lugar, antes de tudo", "en primer lugar, ante todo"],
+                     ["sumar", "além disso, ademais, também, inclusive", "además, también, incluso"],
+                     ["contrastar", "por outro lado, em contrapartida, no entanto", "por otro lado, en cambio, sin embargo"],
+                     ["ejemplificar", "por exemplo, é o caso de", "por ejemplo, es el caso de"],
+                     ["reforzar", "não só... como também, sobretudo", "no solo... sino también, sobre todo"]]},
   "ex": [["*Em primeiro lugar*, a obra atrasou.", "En primer lugar, la obra se atrasó."],
          ["*Além disso*, o orçamento dobrou.", "Además, el presupuesto se duplicó."],
          ["*Não só* os moradores *como também* os turistas reclamam.", "No solo los vecinos sino también los turistas se quejan."],
-         ["*Em contrapartida*, a orla ficou mais segura.", "En cambio, la costanera quedó más segura."]],
+         ["*Em contrapartida*, a orla ficou mais segura.", "En cambio, la costanera quedó más segura."],
+         ["*É o caso da* Baía de Guanabara, que ainda recebe esgoto.", "Es el caso de la Bahía de Guanabara, que todavía recibe cloacas."]],
   "warn": "«además» → *além disso* (o *ademais*, formal). *demais* es "
           "«demasiado»: *é caro demais*."},
 
@@ -951,7 +960,8 @@ LESSONS = {
   "ex": [["*Segundo* o IBGE, o Rio tem mais de seis milhões de habitantes.", "Según el IBGE, Río tiene más de seis millones de habitantes."],
          ["*De acordo com* a matéria, o metrô vai ampliar o horário.", "De acuerdo con la nota, el metro va a extender el horario."],
          ["*Conforme* o relatório, a água está própria para banho.", "Según el informe, el agua está apta para bañarse."],
-         ["*Segundo ele*, a obra termina em maio.", "Según él, la obra termina en mayo."]],
+         ["*Segundo ele*, a obra termina em maio.", "Según él, la obra termina en mayo."],
+         ["*Para* a autora, a cidade virou as costas para o mar.", "Para la autora, la ciudad le dio la espalda al mar."]],
   "warn": "«según» → *segundo*. Con pronombre: *segundo ele*, *segundo "
           "ela* (no «segundo dele»).",
   "tip": "*conforme* también es «a medida que»: *conforme o tempo passa* = "
@@ -964,7 +974,8 @@ LESSONS = {
   "ex": [["A taxa caiu 2%, *ou seja*, quase nada.", "La tasa cayó un 2%, o sea, casi nada."],
          ["O Arpoador, *isto é*, a pedra entre Ipanema e Copacabana...", "El Arpoador, es decir, la piedra entre Ipanema y Copacabana..."],
          ["*Em outras palavras*, o projeto parou.", "En otras palabras, el proyecto se frenó."],
-         ["Chego às oito, *ou melhor*, às nove.", "Llego a las ocho, mejor dicho, a las nueve."]],
+         ["Chego às oito, *ou melhor*, às nove.", "Llego a las ocho, mejor dicho, a las nueve."],
+         ["O museu fecha às segundas; *quer dizer*, amanhã está fechado.", "El museo cierra los lunes; o sea, mañana está cerrado."]],
   "warn": "«o sea» → *ou seja*: con *ou* y el subjuntivo *seja*. «O seja» "
           "es un castellanismo."},
 

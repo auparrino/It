@@ -44,7 +44,12 @@ LESSONS = {
          ["*Glielo* faccio leggere.", "Se lo hago leer."]],
   "warn": "Sin objeto no hay *a*: *faccio lavorare Marco*, no «faccio "
           "lavorare a Marco». La *a* aparece solo si el infinitivo ya lleva "
-          "objeto."},
+          "objeto.",
+  "more": ["Quien ejecuta también puede ir con *da* (por): es lo normal con "
+           "*farsi* y con un profesional que presta un servicio: *mi faccio "
+           "tagliare i capelli da Dina*, *farò riparare la veranda "
+           "dall'architetto*. Con *a*, es alguien a quien le pedís el favor: "
+           "*faccio scegliere il vino a Marco*."]},
 
  {"h": "Los pronombres van delante de fare",
   "r": "Los pronombres van **delante de *fare***, no del infinitivo: *lo "
@@ -72,16 +77,19 @@ LESSONS = {
          ["Ti *faccio sapere* domani.", "Te aviso mañana."],
          ["Non *si fa* più *vivo*.", "Ya no da señales de vida."],
          ["*Fa finta di* niente.", "Se hace el distraído."]],
-  "table": {"head": ["Expresión", "Sentido"],
-            "rows": [["far vedere", "mostrar"],
-                     ["far sapere", "avisar"],
-                     ["far notare", "señalar, hacer notar"],
-                     ["far presente", "advertir, poner en conocimiento"],
-                     ["farsi capire", "hacerse entender"],
-                     ["farsi vivo", "dar señales de vida"],
-                     ["far finta di", "hacer de cuenta que"],
-                     ["dare da fare", "dar trabajo"],
-                     ["farcela", "lograrlo"]]},
+  "table": {"head": ["Expresión", "Sentido", "Ejemplo"],
+            "rows": [["far vedere", "mostrar", "Fammi vedere la foto."],
+                     ["far sapere", "avisar", "Ti faccio sapere domani."],
+                     ["far notare", "señalar, hacer notar", "Gli ho fatto notare l'errore."],
+                     ["far presente", "advertir, poner en conocimiento", "Le ho fatto presente il problema."],
+                     ["farsi capire", "hacerse entender", "Non riesco a farmi capire."],
+                     ["farsi vivo", "dar señales de vida", "Non si fa più vivo."],
+                     ["far finta di", "hacer de cuenta que", "Fa finta di dormire."],
+                     ["far cadere", "tirar sin querer (se me cayó)", "Ho fatto cadere il vaso."],
+                     ["far entrare", "hacer pasar", "Fallo entrare."],
+                     ["far conoscere", "presentar a alguien", "Te lo faccio conoscere."],
+                     ["dare da fare", "dar trabajo", "Questo lavoro mi dà da fare."],
+                     ["farcela", "lograrlo", "Ce l'ho fatta!"]]},
   "tip": "Para «mostrar» un italiano dice *far vedere*: *fammi vedere*. "
          "*Mostrami* existe, pero suena raro en el habla cotidiana."},
 ]},
@@ -139,6 +147,25 @@ LESSONS = {
                      ["sentirsela", "Non me la sento.", "No me animo."]]},
   "tip": "*Ci sentiamo!* = «hablamos» (despedida telefónica). *Senti...* "
          "abre un tema, como el «mirá» rioplatense."},
+
+ {"h": "stare a guardare, eccolo che arriva",
+  "r": "Quedarse haciendo algo es *stare* + ***a*** + infinitivo, no "
+       "gerundio. Y «ahí viene» es *eccolo che* + presente.",
+  "ex": [["Stava alla finestra *a guardare* la gente.", "Estaba en la ventana mirando a la gente."],
+         ["Non stare lì *a guardarmi*: aiutami!", "No te quedes ahí mirándome: ¡ayudame!"],
+         ["Ha passato la giornata *a leggere*.", "Se pasó el día leyendo."],
+         ["*Eccola che* arriva.", "Ahí viene."],
+         ["*Eccoli che* parlano con Nina.", "Ahí están, hablando con Nina."]],
+  "table": {"head": ["Construcción", "Significa", "Ejemplo"],
+            "rows": [["stare (lì) a + infinitivo", "quedarse haciendo algo", "Sto qui a guardare il mare."],
+                     ["passare il tempo a + infinitivo", "pasarse el tiempo haciendo algo", "Passa la sera a studiare."],
+                     ["essere seduto a + infinitivo", "estar sentado haciendo algo", "Erano seduti a giocare a carte."],
+                     ["eccolo / eccola che + presente", "ahí está, haciendo algo", "Eccolo che arriva."]]},
+  "warn": "El castellano pone gerundio («se pasó el día leyendo»); el "
+          "italiano, *a* + infinitivo: *ha passato la giornata a leggere*, "
+          "no «leggendo».",
+  "qq": [{"prompt": "Traducí: «Se pasa el día mirando la tele.»", "answer": "Passa la giornata a guardare la tv.", "options": ["Passa la giornata a guardare la tv.", "Passa la giornata guardare la tv.", "Passa la giornata di guardare la tv."]},
+         {"prompt": "¿Qué significa «Eccola che arriva»?", "answer": "Ahí viene.", "options": ["Ahí viene.", "Ya llegó.", "Va a llegar."]}]},
 ]},
 
 42: {
@@ -158,12 +185,14 @@ LESSONS = {
          ["Non *riesco a* capire.", "No logro entender."],
          ["Mi sono *messo a* ridere.", "Me puse a reír."],
          ["Mi ha *convinto a* restare.", "Me convenció de quedarme."]],
-  "table": {"head": ["Idea", "Verbos"],
-            "rows": [["empezar / seguir", "cominciare a, iniziare a, continuare a, mettersi a"],
-                     ["lograr / intentar", "riuscire a, provare a"],
-                     ["aprender / enseñar / ayudar", "imparare a, insegnare a, aiutare a"],
-                     ["empujar a otro", "invitare a, convincere a, costringere a"],
-                     ["actitud", "abituarsi a, rinunciare a, decidersi a, sbrigarsi a"]]},
+  "table": {"head": ["Idea", "Verbos", "Ejemplo"],
+            "rows": [["empezar / seguir", "cominciare a (empezar a), continuare a (seguir + -ndo), mettersi a (ponerse a)", "Continuo a studiare."],
+                     ["lograr / intentar", "riuscire a (lograr), provare a (probar, intentar)", "Provo a dormire."],
+                     ["aprender / enseñar / ayudar", "imparare a, insegnare a, aiutare a", "Mi aiuti a cucinare?"],
+                     ["empujar a otro", "invitare a (invitar), convincere a (convencer de), costringere a (obligar)", "L'ho invitato a cena."],
+                     ["actitud", "abituarsi a (acostumbrarse), rinunciare a (renunciar), decidersi a (decidirse), sbrigarsi a (apurarse)", "Sbrigati a finire!"],
+                     ["ir o venir para", "andare a, venire a, restare a (quedarse a)", "Vengo a trovarti."],
+                     ["hacer mejor", "fare meglio a (mejor + verbo)", "Faresti meglio a partire."]]},
   "warn": "«Me convenció **de**» y «me obligó **a**»: en italiano los dos "
           "con *a*: *mi ha convinto a restare*."},
 
@@ -174,16 +203,25 @@ LESSONS = {
          ["*Cerca di* capire.", "Tratá de entender."],
          ["Ho *deciso di* partire.", "Decidí irme."],
          ["Ho *voglia di* uscire.", "Tengo ganas de salir."]],
-  "table": {"head": ["Idea", "Verbos"],
-            "rows": [["terminar / dejar", "finire di, smettere di"],
-                     ["intentar / decidir", "cercare di, decidere di"],
-                     ["pensar / creer / esperar", "pensare di, credere di, sperare di"],
-                     ["memoria", "dimenticare di, ricordarsi di"],
-                     ["compromiso", "promettere di, accettare di, rifiutare di"],
-                     ["expresiones", "avere bisogno di, avere voglia di, avere paura di, essere contento di"]]},
+  "table": {"head": ["Idea", "Verbos", "Ejemplo"],
+            "rows": [["terminar / dejar", "finire di (terminar de), smettere di (dejar de)", "Ho smesso di fumare."],
+                     ["intentar / decidir", "cercare di (tratar de), tentare di (intentar), decidere di (decidir)", "Cerca di dormire."],
+                     ["pensar / creer / esperar", "pensare di (pensar + verbo), credere di, sperare di", "Spero di vederti."],
+                     ["memoria", "dimenticare di (olvidarse de), ricordarsi di (acordarse de)", "Ricordati di chiamare."],
+                     ["compromiso", "promettere di (prometer), accettare di (aceptar), rifiutare di (negarse a)", "Ha accettato di venire."],
+                     ["pedir o decir a otro", "chiedere di (pedir), dire di (decir que), ordinare di, pregare di (rogar), proibire di (prohibir)", "Gli ho detto di venire."],
+                     ["sentimientos", "vergognarsi di (darle vergüenza), stufarsi di (hartarse), sforzarsi di (esforzarse)", "Mi sono stufato di aspettare."],
+                     ["expresiones", "avere bisogno di, avere voglia di, avere paura di, essere contento di", "Ho paura di sbagliare."]]},
   "warn": "Donde el castellano no pone nada, el italiano pone *di*: «decidí "
           "irme» → *ho deciso di partire*; «espero verte» → *spero di "
-          "vederti*."},
+          "vederti*.",
+  "more": ["«Pedirle a alguien que haga» no lleva *che*: persona con *a* "
+           "(indirecto) + *di* + infinitivo: *le ho chiesto di rimanere*, "
+           "*gli ho detto di venire*. Con *convincere*, *costringere*, "
+           "*invitare* la persona es directa y va *a*: *la costringo a "
+           "rimanere*.",
+           "Ojo con *decidere di* (decidir) y *decidersi a* (decidirse): *ho "
+           "deciso di partire*, *mi sono decisa a lasciarlo*."]},
 
  {"h": "Verbos sin preposición",
   "r": "**Sin preposición**: los modales (*volere, potere, dovere, sapere*), "
@@ -194,7 +232,8 @@ LESSONS = {
          ["*Conviene partire* presto.", "Conviene salir temprano."],
          ["*Mi piace leggere*.", "Me gusta leer."]],
   "tip": "Tampoco llevan preposición *fare*, *lasciare*, los de percepción "
-         "(*vedo uscire*) ni *piacere*."},
+         "(*vedo uscire*), *piacere*, *odiare* ni *è necessario, è "
+         "importante, sembra* + infinitivo."},
 
  {"h": "Los que cambian respecto del castellano",
   "r": "Estos verbos rigen **distinto** que en castellano: con otra "
@@ -214,7 +253,13 @@ LESSONS = {
                      ["cercare qualcosa / aspettare qualcuno", "buscar algo / esperar a alguien"],
                      ["chiedere a qualcuno di fare", "pedirle a alguien que haga"],
                      ["dipendere da, fidarsi di, accorgersi di", "depender de, fiarse de, darse cuenta de"],
-                     ["occuparsi di, servire a, credere in", "ocuparse de, servir para, creer en"]]},
+                     ["occuparsi di, servire a, credere in", "ocuparse de, servir para, creer en"],
+                     ["credere a qualcuno", "creerle a alguien (gli credo)"],
+                     ["pagare qualcosa a qualcuno", "pagarle algo a alguien"],
+                     ["partecipare a", "participar en"],
+                     ["contare su", "contar con"],
+                     ["scusarsi con qualcuno", "pedirle disculpas a alguien"],
+                     ["ringraziare qualcuno per / di", "agradecerle algo a alguien"]]},
   "warn": "*Sposare* y *aspettare* van sin *a*: *ho sposato Laura*, *aspetto "
           "Marco*. Y *telefonare* pide indirecto: *le telefono*, nunca «la "
           "telefono»."},
@@ -252,7 +297,10 @@ LESSONS = {
          ["Mi dispiace di *essere arrivato* tardi.", "Lamento haber llegado tarde."]],
   "warn": "*Dopo* + infinitivo simple es un error: siempre *dopo aver...* o "
           "*dopo essere...*. En cambio *prima di* pide infinitivo simple: "
-          "*prima di uscire*."},
+          "*prima di uscire*.",
+  "tip": "Los pronombres se pegan al auxiliar: *dopo avergli parlato* "
+         "(después de hablarle), *grazie di averci aiutato*, *sono contento "
+         "di essermi divertito*."},
 
  {"h": "El infinitivo como orden impersonal",
   "r": "Instrucciones, recetas, carteles y prospectos dan la orden **en "
@@ -270,9 +318,13 @@ LESSONS = {
   "ex": [["Penso *di partire* domani.", "Pienso salir mañana."],
          ["Sono uscito *senza salutare*.", "Salí sin saludar."],
          ["È troppo tardi *per telefonare*.", "Es muy tarde para llamar."],
-         ["*Invece di* lamentarti, aiutami.", "En vez de quejarte, ayudame."]],
+         ["*Invece di* lamentarti, aiutami.", "En vez de quejarte, ayudame."],
+         ["Non so *come ringraziarti*.", "No sé cómo agradecerte."]],
   "warn": "«Pienso que parto mañana» no se calca: *penso di partire domani*. "
           "*Penso che* va cuando cambia el sujeto.",
+  "more": ["Igual que en castellano, después de un interrogativo va el "
+           "infinitivo solo: *non so cosa fare* (no sé qué hacer), *mi ha "
+           "detto dove andare* (me dijo adónde ir)."],
   "tip": "Cuatro conectores + infinitivo: *per* (finalidad), *senza* "
          "(ausencia), *invece di* (sustitución), *oltre a* (adición)."},
 ]},
@@ -295,7 +347,15 @@ LESSONS = {
          ["*Essendo* stanco, sono rimasto a casa.", "Como estaba cansado, me quedé en casa."],
          ["Ho capito il problema *facendo* un disegno.", "Entendí el problema haciendo un dibujo."],
          ["*Pur sapendolo*, non ha detto niente.", "Aun sabiéndolo, no dijo nada."]],
-  "tip": "*pur* + gerundio = «aunque»: *pur sapendolo* = aunque lo sabía."},
+  "tip": "*pur* + gerundio = «aunque»: *pur sapendolo* = aunque lo sabía.",
+  "table": {"head": ["Valor", "Castellano", "Ejemplo"],
+            "rows": [["modo (cómo)", "gerundio, «-ndo»", "Sbagliando s'impara."],
+                     ["causa (por qué)", "como, ya que", "Essendo stanco, resto a casa."],
+                     ["tiempo (cuándo)", "al, mientras", "Tornando a casa, ho visto Luca."],
+                     ["concesión (con pur)", "aunque", "Pur sapendolo, non ha detto niente."]]},
+  "more": ["Los pronombres se pegan al final: *sapendolo*, *guardandoti*, "
+           "*alzandosi*. Y para «seguir haciendo» no va gerundio sino "
+           "*continuare a*: *continuo a studiare* (sigo estudiando)."]},
 
  {"h": "El gerundio exige el mismo sujeto",
   "r": "El sujeto del gerundio tiene que ser **el mismo** que el de la frase "
@@ -374,7 +434,9 @@ LESSONS = {
                      ["metterci", "tardar", "Ci metto un'ora."],
                      ["volerci", "hacer falta", "Ci vuole pazienza."],
                      ["entrarci", "tener que ver", "Non c'entra niente."],
-                     ["starci", "estar de acuerdo, caber", "Ci sto!"]]},
+                     ["starci", "estar de acuerdo, caber", "Ci sto!"],
+                     ["infischiarsene", "no importarle nada", "Me ne infischio."],
+                     ["prendersela comoda", "tomárselo con calma", "Se la prende comoda."]]},
   "tip": "No los deduzcas: aprendelos como palabras nuevas, con su frase de "
          "ejemplo."},
 
@@ -386,7 +448,13 @@ LESSONS = {
          ["*Ce l'ho fatta*!", "¡Lo logré!"],
          ["*Se l'è presa*.", "Se ofendió."],
          ["Non *me la sono sentita*.", "No me animé."],
-         ["*Ci ho messo* un'ora.", "Tardé una hora."]]},
+         ["*Ci ho messo* un'ora.", "Tardé una hora."]],
+  "warn": "*volerci* concuerda con lo que hace falta: *ci vuole un'ora*, *ci "
+          "vogliono due ore*. *metterci* se conjuga con quien tarda: *ci "
+          "metto*, *ci metti*, *ci mettete*.",
+  "tip": "En imperativo las partículas se pegan: *vattene!* (¡andate!), "
+         "*andatevene!*, *smettila!*. Con negación, delante o pegadas: *non "
+         "te la prendere* o *non prendertela*."},
 
  {"h": "El participio en -a",
   "r": "Con las formas en *la*, el participio **termina en -a**: concuerda "
