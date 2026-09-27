@@ -650,8 +650,8 @@ Una semana cargada no se estudia de una sentada. Las semanas 1, 2, 3, 5, 6,
 50 y 51 tienen la lección dividida en **partes** (dos a seis), cada una con sus propios bloques de teoría y sus propios ejercicios.
 La semana 3, los artículos, tiene seis: *Género y el, la*, *lo, gli y el
 plural*, *Indeterminados*, *Dónde va el artículo (y dónde no)*,
-*Preposiciones articuladas* y *Partitivo y cantidades*, con dos o tres
-bloques por parte y dos o tres chequeos después de cada bloque. En el
+*Preposiciones articuladas* y *Partitivo y cantidades*, con uno a tres
+bloques por parte (14 en total: el apóstrofo del indeterminado, la tabla sin mirar y el negativo del partitivo se juntaron con el bloque vecino, como trampa o como «Más detalle») y dos o tres chequeos después de cada bloque. En el
 percorso cada parte es una misión («Lección 3/6: Indeterminados»), y «A
 entrenar esta parte» arma una ronda **solo** con los ejercicios de esa
 parte: sin gimnasio de verbos, sin repaso de otras semanas y sin palabras

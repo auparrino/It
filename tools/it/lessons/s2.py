@@ -983,8 +983,7 @@ LESSONS = {
 
  {"h": "Después de algunas conjunciones",
   "r": "*prima che* (antes de que), *senza che* (sin que), *sebbene* "
-       "(aunque), *purché* (con tal de que), *a meno che* (a menos que): "
-       "**siempre congiuntivo**.",
+       "(aunque), *purché* (con tal de que): **siempre congiuntivo**.",
   "ex": [["Ti telefono *prima che* tu *esca*.", "Te llamo antes de que salgas."],
          ["Lo faccio *senza che* nessuno lo *sappia*.", "Lo hago sin que nadie lo sepa."],
          ["È simpatico, *sebbene parli* poco.", "Es simpático, aunque hable poco."],
