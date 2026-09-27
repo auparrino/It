@@ -13,6 +13,9 @@ var Banca = ctx.Banca;
 var bankPath = pack.dataPath("it", "bank.json");
 var bank = fs.existsSync(bankPath) ? JSON.parse(fs.readFileSync(bankPath, "utf8")) : null;
 if (bank) Banca.load(bank);
+// The frequency lexicon, as in the app: a word it knows is never «no Italian word».
+var freqPath = pack.dataPath("it", "frequenza.json");
+if (ctx.Freq && fs.existsSync(freqPath)) ctx.Freq.load(JSON.parse(fs.readFileSync(freqPath, "utf8")));
 
 var fails = 0, checks = 0;
 function ok(cond, what) {
@@ -77,7 +80,10 @@ CASES.forEach(function (c) {
   ok(D.diagnose(c[0], [c[1]]).verdict === "giusto", "risposta giusta rifiutata: " + c[0]);
 });
 ok(D.diagnose("parlero", ["parlerò"]).verdict === "quasi", "l'accento mancante è una svista");
-ok(D.diagnose("Io mangio", ["Mangio"]).verdict === "quasi", "il soggetto in più è una svista");
+// The explicit subject is Italian: right, with a note (it used to be a slip).
+var dIo = D.diagnose("Io mangio", ["Mangio"]);
+ok(dIo.verdict === "giusto" && dIo.level === "aceptable" && /io/.test(dIo.note) && dIo.natural === "Mangio", "il soggetto esplicito è accettabile, con nota");
+ok(D.diagnose("Tu mangio", ["Mangio"]).verdict !== "giusto", "un soggetto di un'altra persona non è accettabile");
 ok(D.diagnose("", ["Mangio"]).verdict === "sbagliato", "risposta vuota");
 ok(D.diagnose("ho mangiato", ["Ho mangiato una pizza.", "ho mangiato"]).verdict === "giusto",
    "si confronta con la variante più vicina");
@@ -251,7 +257,7 @@ var FAMILIES = [
   // copiar la consigna; los nombres propios no son español
   ["(Ella) tenía hambre.", ["Aveva fame"], { stem: "(Ella) tenía hambre." }, "parola_spagnola", /Copiaste/, null],
   ["Haceme un favor.", ["Fammi un favore."], { stem: "Haceme un favor." }, "parola_spagnola", /Copiaste/, /nombres propios/],
-  ["Tu prepari da mangiare.", ["Prepari da mangiare, tu?"], { stem: "Tu prepari da mangiare." }, "ordine", null, /Copiaste|español/],
+  ["Tu prepari da mangiare.", ["Prepari da mangiare, tu?"], { stem: "Tu prepari da mangiare." }, "ordine", /al final/, /Copiaste|Está en español|Mezcla español|es español/],
   ["Mi mancare Buenos Aires.", ["Mi manca Buenos Aires."], {}, "persona_verbale", /infinitivo/, /español/],
   ["Debe costar muchísimo.", ["Costerà moltissimo.", "Costerà molto molto."], { stem: "Debe costar muchísimo." }, "parola_spagnola", /moltissimo/, /molto molto/],
   ["Mammo, dove sei?", ["Mamma, dove sei?"], {}, null, null, /nombres propios/],
@@ -360,7 +366,29 @@ var FAMILIES = [
   // la variante más cercana: el artículo o el auxiliar cambiado, no otra palabra
   ["Mi ho dimenticato le chiavi.", ["Mi sono dimenticato le chiavi.", "Ho dimenticato le chiavi."], {}, "ausiliare", /reflexivo/, /Sobra/],
   ["Ho scritto la rapporto ieri.", ["Ho scritto il rapporto ieri.", "Ho scritto la relazione ieri."], {}, "genere", /rapporto/, /relazione/],
-  ["Sì, mi ne ricordo.", ["Sì, me ne ricordo."], {}, "pronome", /me ne/, /Sobra/]
+  ["Sì, mi ne ricordo.", ["Sì, me ne ricordo."], {}, "pronome", /me ne/, /Sobra/],
+  // reglas falsas de la auditoría 2026-09-v3 (C4) y de la general (D1)
+  ["Non è rosso però blu.", ["Non è rosso ma blu."], {}, "lessico", /sino/, /viene del español/],
+  ["A me piaccio la pizza.", ["Mi piace la pizza."], {}, "piacere", null, /objeto directo/],
+  ["Ha detto di essere stanco.", ["Ha detto che era stanca."], {}, "accordo", null, /conjugado|infinitivo; conjugado/],
+  ["Ha detto che arrivavo.", ["Ha detto che sarebbe arrivata."], {}, null, null, /passato prossimo/],
+  ["Lo ho letto ieri.", ["L'ho letto ieri."], {}, "pronome", /apostrofa/, /\*gli\* en plural/],
+  ["La nonno è simpatica.", ["La nonna è simpatica."], {}, "accordo", /abuela/, null],
+  ["Se non stude, non passi l'esame.", ["Se non studi, non passi l'esame."], {}, "persona_verbale", null, /Plural/],
+  ["Non lo me dimenticherò mai.", ["Non me lo dimenticherò mai."], {}, "pronome", /me lo/, /pegado/],
+  ["La casa è bianchi.", ["La casa è bianca."], {}, "accordo", /casa/, /significa/],
+  ["Ho acquistato una macchina.", ["Ho preso una macchina."], {}, null, null, /no es una palabra italiana/],
+  ["Che cosa tu hai detto?", ["Che cosa hai detto?"], {}, "ordine", /interrogativa/, null],
+  ["Tu ho trentadue anni.", ["Ho trentadue anni."], {}, "persona_verbale", /\*tu\* no va con/, null],
+  // el porqué en las plantillas de más volumen (C3): la pista de la frase,
+  // la regla, el contraste con el español
+  ["Vedremo Piero e Gina che ci aspettavano.", ["Vedevamo Piero e Gina che ci aspettavano."], {}, "tempo_verbale", /aspettavano.*español/, null],
+  ["Domani parlavo con lui.", ["Domani parlerò con lui."], {}, "tempo_verbale", /pista es \*domani\*/, null],
+  ["Voglio di andare al cinema.", ["Voglio andare al cinema."], {}, "preposizione", /directo/, /^Sobra \*di\*\.$/],
+  ["Vado a la casa.", ["Vado a casa."], {}, "articolo", /hogar/, null],
+  ["Ho comprato tre libri.", ["Ho comprato qualche libro."], {}, null, null, null],
+  ["Ho letto qualche libri.", ["Ho letto qualche libro."], {}, "plurale", /qualche.*singular.*español/, null],
+  ["Il ragazzo alti è mio fratello.", ["Il ragazzo alto è mio fratello."], {}, "accordo", /español/, null]
 ];
 FAMILIES.forEach(function (c) {
   var d = diagT(c[0], c[1], c[2]);
@@ -372,6 +400,23 @@ FAMILIES.forEach(function (c) {
   if (c[5]) ok(!c[5].test(txt), "famiglia: " + tag + " la spiegazione dice " + c[5] + ": " + txt);
   ok(!/undefined|NaN|\*\*|\.\*\.|\s\.\*/.test(txt), "famiglia: testo rotto " + tag + ": " + txt);
 });
+
+// Another valid way of saying it: right, with its level, its note and the
+// model's version (P2).
+[["Io ho trentadue anni.", ["Ho trentadue anni."], "aceptable", /io/],
+ ["Ha detto che arrivava.", ["Ha detto che sarebbe arrivata."], "poco_natural", /sarebbe arrivata/],
+ ["Non lavoro oggi.", ["Oggi non lavoro."], "aceptable", /oggi/],
+ ["Ho 32 anni.", ["Ho trentadue anni."], "aceptable", /cifras/],
+ ["A loro piacciono i film.", ["Gli piacciono i film."], "aceptable", /a loro/],
+ ["Sono stanca.", ["Sono stanco."], "correcto", /femenino/],
+ ["Ho trentadue anni.", ["Ho trentadue anni."], "correcto", null]
+].forEach(function (c) {
+  var d = D.diagnose(c[0], c[1], {});
+  ok(d.verdict === "giusto" && d.level === c[2], "livello: «" + c[0] + "» → " + d.verdict + " " + d.level + " (atteso " + c[2] + ")");
+  if (c[3]) ok(c[3].test(d.note || ""), "livello: «" + c[0] + "» nota senza " + c[3] + ": " + d.note);
+  if (c[2] === "aceptable" || c[2] === "poco_natural") ok(d.natural === c[1][0], "livello: «" + c[0] + "» senza la versione naturale");
+});
+ok(D.diagnose("Ieri ho andato", ["Ieri sono andato"]).level === "incorrecto" && D.diagnose("parlero", ["parlerò"]).level === "desliz", "livello: incorrecto e desliz");
 
 // Correct alternatives stay correct; wrong ones are not waved through.
 [["sono stanca", ["Sono stanco."], {}, "giusto"],
