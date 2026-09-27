@@ -636,7 +636,7 @@
    "depois antes sempre nunca jamais talvez então logo tarde cedo aliás inclusive todo toda todos todas tudo nada ninguém alguém " +
    "algum alguma alguns algumas nenhum nenhuma outro outra outros outras cada mesmo mesma próprio própria tão tanto tanta tantos " +
    "tantas ano anos dia dias mês meses semana semanas hora horas vez vezes coisa coisas gente casa rua cidade praia mar sol " +
-   "obrigado obrigada oi olá tchau tá tô né cadê pois assim embora enquanto caso senão aonde daqui dali aí " +
+   "obrigado obrigada oi olá tchau tá tô tás tava tavam cê cês né cadê bora vamo valeu grana bacana busão galera beleza pois assim embora enquanto caso senão aonde daqui dali aí " +
    "segunda terça quarta quinta sexta sábado domingo feira janeiro fevereiro março abril maio junho julho agosto setembro " +
    "outubro novembro dezembro zero dois duas três quatro cinco seis sete oito nove dez onze doze treze quatorze catorze quinze " +
    "dezesseis dezessete dezoito dezenove vinte trinta quarenta cinquenta sessenta setenta oitenta noventa cem cento mil milhão " +
@@ -650,6 +650,27 @@
     return !!(PT_COMMON[w] || DATA.lex[w] || ARTICLES[w] || prepInfo(w) || verbForms(w).length ||
               participleOf(w) || (GIDX || buildVerbIndex() || GIDX)[w] || CLITICS.indexOf(w) >= 0 || SUBJECTS.indexOf(w) >= 0 ||
               TER.indexOf(w) >= 0 || HAVER.indexOf(w) >= 0 || SER.indexOf(w) >= 0 || POSSESSIVE.indexOf(w) >= 0);
+  }
+
+  /* Antes de decir «no es una palabra portuguesa» o «no existe»: el léxico
+     del curso y del banco (isPortuguese), el glosario y las palabras que la
+     app agregue con addWords(), las formas del habla (REGISTRO) y, si está
+     cargada, la frecuencia de los subtítulos (window.Freq, sin las palabras
+     del español que se cuelan en ellos). */
+  var EXTRA_LEX = dict();
+  function addWords(list) {
+    (list || []).forEach(function (w) {
+      String(w || "").toLowerCase().split(/[\s,;/()]+/).forEach(function (x) { if (/^[a-zà-ÿ-]{2,}$/.test(x)) EXTRA_LEX[x] = 1; });
+    });
+  }
+  function knownWord(w) {
+    if (!w) return false;
+    if (isPortuguese(w) || EXTRA_LEX[w] || REGISTRO.forms[w]) return true;
+    var F = root.Freq;
+    if (F && F.loaded && F.loaded() && !spanishWord(w) && !looksSpanish(w)) {
+      try { var inf = F.info(w); if (inf && Math.max(inf[0], inf[1]) >= 3.3) return true; } catch (e) { /* */ }
+    }
+    return false;
   }
 
   /* Un ejercicio de hueco («___ praia», «Eu ___ (ir) ao cinema»): la
@@ -1214,9 +1235,12 @@
       hint: "Hay un error de tipeo en la palabra marcada.",
       explain: "Error de tipeo: " + it(e) + "." };
 
+    if (knownWord(g) && !isPortuguese(g)) return { cat: "lexico", slip: false,
+      hint: it(g) + " existe, pero acá va otra palabra.",
+      explain: it(g) + " es portugués, pero no es la palabra de esta frase: acá va " + it(e) + (DATA.lex[e] ? " («" + DATA.lex[e] + "»)" : "") + "." };
     if (!isPortuguese(g)) return { cat: "lexico", slip: false,
-      hint: "La palabra marcada no existe en portugués. ¿Cómo se dice?",
-      explain: it(g) + " no es una palabra portuguesa. Acá va " + it(e) + (DATA.lex[e] ? " («" + DATA.lex[e] + "»)" : "") + "." };
+      hint: "La palabra marcada no es del portugués que ve el curso. ¿Cómo se dice?",
+      explain: it(g) + " no está en el diccionario del curso. Acá va " + it(e) + (DATA.lex[e] ? " («" + DATA.lex[e] + "»)" : "") + "." };
     return { cat: "lexico", slip: false,
       hint: "La palabra marcada no es la que va.",
       explain: "Acá va " + it(e) + (DATA.lex[e] ? " («" + DATA.lex[e] + "»)" : "") + "." };
@@ -1337,6 +1361,10 @@
     if (/^(me|te|se|nos|lhe)$/.test(g) && /^(me|te|se|nos|lhe)$/.test(e)) return { cat: "pronome", slip: false,
       hint: "Revisá el pronombre marcado: ¿de qué persona es?",
       explain: "Acá va " + it(e) + ": concuerda con el sujeto (eu *me* levanto, ele *se* levanta, nós *nos* levantamos) o con la persona a la que se refiere." };
+    if (/^(cê|cês)$/.test(g) && /^(você|vocês)$/.test(e)) return { cat: "pronome", slip: false,
+      hint: "*" + g + "* es del habla, pero no va en cualquier lugar. ¿Qué viene antes?",
+      explain: "*" + g + "* (la forma corta de *" + e + "*) solo va como sujeto, delante del verbo: *" + g + " vem?* Después de una preposición va entero: " +
+        it((PREP_BASE[prev] || /^(pra|pro)$/.test(prev) ? prev + " " : "") + e) + " (pra você, com você)." };
     if (/^(ti|te)$/.test(g) && e === "você") return { cat: "pronome", slip: false,
       hint: "¿Tratás de tu o de você?", explain: "Con *você*, el pronombre después de preposición es *você*: para você, com você." };
     return null;
@@ -1689,12 +1717,12 @@
           editDistance(deaccent(g.replace(/ie/, "e").replace(/([^qg])ue/, "$1o")), deaccent(e)) < editDistance(deaccent(g), deaccent(e));
         if (regE && regE !== e) return { cat: "verbo_irregular", slip: false,
           hint: dipt ? "Ese diptongo es del español: ¿cómo es ese verbo en portugués?" : "Revisá la forma de ese verbo irregular.",
-          explain: it(g) + " no existe; " + it(f0.lemma) + " es irregular en " + TENSE_ES[f0.tense] + ": " + it(e) + " (" + PERS_ES[f0.p] + ")." +
+          explain: it(g) + (knownWord(g) ? " no es la forma que va" : " no existe") + "; " + it(f0.lemma) + " es irregular en " + TENSE_ES[f0.tense] + ": " + it(e) + " (" + PERS_ES[f0.p] + ")." +
             (dipt ? " El diptongo *ie* / *ue* del español no va en portugués (quero, tenho, pode, mantêm)." : "") };
         if (!isPortuguese(g) && editDistance(deaccent(g), deaccent(e)) === 1 && e.length >= 4) return null;
         return { cat: "persona", slip: false,
           hint: "Revisá la terminación del verbo.",
-          explain: it(g) + " no existe; la forma es " + it(e) + " (" + it(f0.lemma) + ", " + PERS_ES[f0.p] + ", " + TENSE_ES[f0.tense] + ")." };
+          explain: it(g) + (knownWord(g) ? " no es la forma que va" : " no existe") + "; la forma es " + it(e) + " (" + it(f0.lemma) + ", " + PERS_ES[f0.p] + ", " + TENSE_ES[f0.tense] + ")." };
       }
     }
     // Different verbs: the classic confusions
@@ -1978,7 +2006,7 @@
     var vfe = verbForms(e);
     if (!isPortuguese(g) && vfe.length && !pe) return { cat: "persona", slip: false,
       hint: "Revisá la terminación del verbo.",
-      explain: it(g) + " no existe; la forma es " + it(e) + " (" + it(vfe[0].lemma) + ", " + PERS_ES[vfe[0].p] + ", " + TENSE_ES[vfe[0].tense] + ")." };
+      explain: it(g) + (knownWord(g) ? " no es la forma que va" : " no existe") + "; la forma es " + it(e) + " (" + it(vfe[0].lemma) + ", " + PERS_ES[vfe[0].p] + ", " + TENSE_ES[vfe[0].tense] + ")." };
     var head = nounNear(ctx);
     var gen = head ? nounGender(head) : null;
     var pl = /s$/.test(e) ? "plural" : "singular";
@@ -2114,7 +2142,7 @@
     gostar: 8, a_personal: 8, contraccion: 8, regencia: 8, preposicion: 8, persona: 8, tempo: 8,
     regularizacion: 8, verbo_irregular: 8, crase: 7, participio: 7, genero: 7, concordancia: 7,
     articulo: 7, plural: 7, pronome: 7, muito: 7, ser_estar: 8, colocacao: 6, espanol: 6, falso_amigo: 6, orden: 6,
-    lexico: 5, nasal: 5, faltante: 5, sobrante: 4, ortografia: 4, tilde: 2, tipeo: 1
+    lexico: 5, nasal: 5, faltante: 5, sobrante: 4, ortografia: 4, registro: 3, tilde: 2, tipeo: 1
   };
 
   var LABEL = {
@@ -2130,7 +2158,7 @@
     falso_amigo: "Falsos amigos", tempo: "Tiempo verbal", persona: "Persona del verbo", participio: "Participios",
     verbo_irregular: "Verbos irregulares", regularizacion: "Irregulares regularizados", nasal: "Nasales (ã, õ, -m)",
     faltante: "Palabras que faltan", sobrante: "Palabras de más", tipeo: "Tipeo", orden: "Orden de las palabras",
-    lexico: "Vocabulario", ser_estar: "ser, estar y ficar"
+    lexico: "Vocabulario", ser_estar: "ser, estar y ficar", registro: "Registro (habla y escrito formal)"
   };
 
   // Capitalized words: names.  At the start of a sentence only when the word
@@ -2159,7 +2187,8 @@
               ["cachorro", "cão"], ["cachorros", "cães"], ["geladeira", "refrigerador"], ["menino", "garoto"], ["menina", "garota"],
               ["meninos", "garotos"], ["meninas", "garotas"], ["criança", "menino"], ["professor", "docente"], ["ônibus", "busão"],
               ["agora", "já"], ["aqui", "cá"], ["lá", "ali"], ["muito", "bastante"], ["porque", "pois"], ["então", "aí"],
-              ["mãe", "mamãe"], ["pai", "papai"], ["em", "no"], ["num", "em"], ["numa", "em"]];
+              ["mãe", "mamãe"], ["pai", "papai"], ["em", "no"], ["num", "em"], ["numa", "em"],
+              ["legal", "bacana", "massa"], ["legais", "bacanas"], ["moço", "rapaz"], ["moça", "garota"], ["televisão", "tevê", "tv"]];
   function nounSyn(a, b) {
     return NSYN.some(function (f) { return f.indexOf(a) >= 0 && f.indexOf(b) >= 0; }) && !(/^(em|no|num|numa)$/.test(a));
   }
@@ -2196,6 +2225,30 @@
       diff++;
     }
     return diff > 0;
+  }
+
+  /* El adverbio de tiempo al principio o al final (Hoje eu acordei cedo =
+     Eu acordei cedo hoje): el portugués, como el español, lo deja mover. */
+  var ADV_T1 = /^(hoje|ontem|amanhã|agora|anteontem|depois|cedo|antes|logo|sempre|finalmente|ultimamente|atualmente)$/;
+  var ADV_T2 = /^(de manhã|à noite|à tarde|de noite|de tarde|todo dia|todos os dias|no sábado|no domingo|amanhã cedo|ontem à noite|hoje à noite|esta semana|este ano|no verão|no inverno|às vezes|de novo|toda semana|no fim de semana|nesse dia|naquele dia|em seguida|por favor)$/;
+  function advChunks(t) {
+    var out = [];
+    if (t.length > 2 && ADV_T2.test(t.slice(0, 2).join(" "))) out.push([0, 2]);
+    if (t.length > 1 && ADV_T1.test(t[0])) out.push([0, 1]);
+    if (t.length > 2 && ADV_T2.test(t.slice(-2).join(" "))) out.push([t.length - 2, 2]);
+    if (t.length > 1 && ADV_T1.test(t[t.length - 1])) out.push([t.length - 1, 1]);
+    return out;
+  }
+  function advFree(g, e, nm) {
+    if (g.length !== e.length || g.join(" ") === e.join(" ")) return false;
+    var cg = advChunks(g), ce = advChunks(e);
+    for (var i = 0; i < cg.length; i++) for (var j = 0; j < ce.length; j++) {
+      var a = g.slice(cg[i][0], cg[i][0] + cg[i][1]).join(" "), b = e.slice(ce[j][0], ce[j][0] + ce[j][1]).join(" ");
+      if (a !== b || cg[i][0] === ce[j][0]) continue;
+      var rg = g.slice(0, cg[i][0]).concat(g.slice(cg[i][0] + cg[i][1])), re = e.slice(0, ce[j][0]).concat(e.slice(ce[j][0] + ce[j][1]));
+      if (rg.join(" ") === re.join(" ") || canon(rg, nm) === canon(re, nm)) return true;
+    }
+    return false;
   }
 
   /* «Estou cansada» por «Estou cansado»: sin nadie nombrado, el género es
@@ -2318,7 +2371,7 @@
     res = [];
     for (i = 0; i < out.length; i++) {
       t = out[i].w;
-      if (SUBJ_P[t] && t !== "você" && t !== "vocês") {
+      if (SUBJ_P[t] && !/^(ele|ela|eles|elas|você|vocês)$/.test(t)) {
         var k2 = i + 1;
         while (out[k2] && /^(não|já|também|sempre|nunca|me|te|se|nos|lhe|lhes|o|a|os|as|só|ainda)$/.test(out[k2].w)) k2++;
         var vv = out[k2] ? verbForms(out[k2].w) : [];
@@ -2511,6 +2564,277 @@
   }
   function capN(w, ctx) { return ctx && ctx.names && ctx.names.indexOf(w) >= 0 ? w.charAt(0).toUpperCase() + w.slice(1) : w; }
 
+  /* ------------------------------------------------------------ registro
+     Lo que el portugués de Brasil dice en el habla y el curso enseña como
+     tal (pra, tô, tá desde la semana 9; vi ele y amo você en la 16; tem por
+     há en la 20; tava, cê, né, cadê en la 38).  Una sola tabla para los tres
+     correctores: las respuestas cerradas (acá), Scrivi (scrivi.js, lint) y
+     el pedido a la IA (scrivi.js, PB_NORM = REGISTRO.prompt).
+       · sin registro formal pedido, la forma del habla vale, con una nota:
+         verdict "giusto", level "ok_note", note «es del habla; en un texto
+         formal: *para*» (no quita xp ni cuenta como error ni desliz);
+       · en un ítem o una tarea formal («(formal)», «(culto)», «texto
+         formal», ctx.registro === "formal"), «Casi»: verdict "quasi", level
+         "close", cat "registro", con la explicación.
+     forms: forma del habla → formas escritas que puede abreviar (la primera
+     es la de la nota).  lex: palabras del habla con su equivalente neutro. */
+  var REGISTRO = {
+    forms: dict({
+      pra: ["para", "para a"], pro: ["para o"], pros: ["para os"], pras: ["para as"],
+      "tô": ["estou"], "tá": ["está"], "tás": ["estás"], tava: ["estava"], tavam: ["estavam"], tamo: ["estamos"], tamos: ["estamos"],
+      "cê": ["você"], "cês": ["vocês"], "cadê": ["onde está"], vamo: ["vamos"], bora: ["vamos"],
+      grana: ["dinheiro"], valeu: ["obrigado", "obrigada"], "busão": ["ônibus"]
+    }),
+    // Construcciones del habla: [lo que se dice, lo escrito, cuándo] (para la
+    // nota y para el pedido a la IA).
+    rows: [
+      ["pra, pro, pras", "para, para o, para as", "pra casa, pro Rio, pra praia"],
+      ["tô, tá, tava, tamo", "estou, está, estava, estamos", "tô cansado, tá tudo bem"],
+      ["cê, cês", "você, vocês", "cê vem?"],
+      ["né?, cadê?", "não é?, onde está?", "cadê você?"],
+      ["amo você, vi ele", "te amo / o amo, o vi", "el pronombre de objeto después del verbo"],
+      ["tem gente", "há gente", "tem por «hay»"],
+      ["chegar no, ir na", "chegar ao, ir à", "em con verbos de movimiento"],
+      ["me dá, me chamo (al empezar)", "dá-me, chamo-me", "pronombre átono al comienzo"],
+      ["a gente vai", "nós vamos", "(a gente es correcto también en lo escrito corriente)"]
+    ]
+  };
+  REGISTRO.prompt = "La referencia es el portugués de Brasil, norma urbana culta: la próclise del habla brasileña (me chamo, te amo), " +
+    "«você» con verbo en tercera, «a gente» con verbo en singular, el artículo opcional ante posesivo, *em um* o *num*, son correctos. " +
+    "Lo del habla que el curso enseña (" + REGISTRO.rows.slice(0, 8).map(function (r) { return r[0] + " → " + r[1]; }).join("; ") +
+    ") no es error ni «estilo» en un texto informal; en uno formal marcalo como \"estilo\" con la forma escrita. " +
+    "No corrijas hacia el portugués europeo. Ortografía del Acuerdo de 1990 (ideia, voo, linguiça).";
+  REGISTRO.note = function (said, std) {
+    return "*" + said + "* es del habla" + (std ? "; en un texto formal: *" + std + "*" : "") + ".";
+  };
+  // «Casi» o «vale con nota», según el registro pedido.
+  REGISTRO.level = function (formal) { return formal ? "close" : "ok_note"; };
+
+  /* El registro que pide el ítem: ctx.registro ("formal", "coloquial"),
+     la etiqueta «formal» del banco o lo que dice la consigna.  En «(coloquial)
+     X → (culto) ___» manda lo que viene después de la flecha. */
+  function registerOf(ctx) {
+    ctx = ctx || {};
+    if (ctx.registro) return /^(formal|culto)$/i.test(ctx.registro) ? "formal" : /^(coloquial|informal|habla)$/i.test(ctx.registro) ? "coloquial" : null;
+    if (ctx.formal) return "formal";
+    if (ctx.tags && [].concat(ctx.tags).indexOf("formal") >= 0) return "formal";
+    var s = String(ctx.prompt || "") + " ¶ " + String(ctx.stem || "");
+    var arrow = s.lastIndexOf("→");
+    var tail = arrow >= 0 ? s.slice(arrow) : s;
+    if (/\((formal|culto|culta|culto escrito|escrito|e-mail formal|carta formal)\b[^)]*\)|registro (formal|culto)|forma escrita|escrit[oa] formal|norma culta|texto formal|carta formal|lo escrito formal/i.test(tail)) return "formal";
+    if (/\((coloquial|informal|habla)\b[^)]*\)|registro (coloquial|informal)|como se habla/i.test(tail)) return "coloquial";
+    return null;
+  }
+
+  // «32» → trinta e dois (y la forma femenina: duas, duzentas).
+  var UNI = ["zero", "um", "dois", "três", "quatro", "cinco", "seis", "sete", "oito", "nove", "dez", "onze", "doze", "treze", "catorze",
+             "quinze", "dezesseis", "dezessete", "dezoito", "dezenove"];
+  var DEC = ["", "", "vinte", "trinta", "quarenta", "cinquenta", "sessenta", "setenta", "oitenta", "noventa"];
+  var CEN = ["", "cento", "duzentos", "trezentos", "quatrocentos", "quinhentos", "seiscentos", "setecentos", "oitocentos", "novecentos"];
+  function numWords(n) {
+    if (n < 20) return UNI[n];
+    if (n < 100) return DEC[Math.floor(n / 10)] + (n % 10 ? " e " + UNI[n % 10] : "");
+    if (n === 100) return "cem";
+    if (n < 1000) return CEN[Math.floor(n / 100)] + (n % 100 ? " e " + numWords(n % 100) : "");
+    if (n < 1000000) {
+      var th = Math.floor(n / 1000), r = n % 1000;
+      return (th === 1 ? "mil" : numWords(th) + " mil") + (r ? (r < 100 || r % 100 === 0 ? " e " : " ") + numWords(r) : "");
+    }
+    return null;
+  }
+  function numFem(s) { return s.replace(/\bum\b/g, "uma").replace(/\bdois\b/g, "duas").replace(/entos\b/g, "entas"); }
+
+  /* Las variantes de lo escrito que dicen lo mismo en otro registro o de
+     otra forma: [{text, subs: [{said, std, reg}], accept}].  accept: solo
+     sirve para aceptar (si con el cambio queda igual a una respuesta);
+     sin accept, el cambio es seguro (pra → para) y también sirve para
+     diagnosticar el resto. */
+  var PHRASE_EQ = [[/\bquem sabe\b/gi, "talvez"], [/\bneste momento\b/gi, "agora"], [/\bem seguida\b/gi, "depois"]];
+  var MOTION_V = /^(ir|chegar|voltar|levar|vir|subir|descer|regressar|mudar)$/;
+  var NO_OBJ_V = /^(ser|estar|ficar|parecer|continuar|permanecer|virar|tornar)$/;
+  function regCandidates(given) {
+    var src = String(given), words = [], re = /[A-Za-zÀ-ÿ]+(?:-[A-Za-zÀ-ÿ]+)*|\d+/g, m;
+    while ((m = re.exec(src))) words.push({ w: m[0], at: m.index });
+    var low = function (x) { return x.toLowerCase(); };
+    var capLike = function (like, x) { return /^[A-ZÀ-Ý]/.test(like) ? x.charAt(0).toUpperCase() + x.slice(1) : x; };
+    var build = function (repl) {   // repl: {index: string}
+      var out = "", last = 0;
+      words.forEach(function (x, k) {
+        if (repl[k] == null) return;
+        out += src.slice(last, x.at) + repl[k];
+        last = x.at + x.w.length;
+      });
+      return (out + src.slice(last)).replace(/\s+/g, " ").replace(/\s+([,.;:!?])/g, "$1").trim();
+    };
+    var cands = [];
+    // 1. the forms of the table: every combination (at most 3 places)
+    var spots = [];
+    words.forEach(function (x, k) {
+      var f = REGISTRO.forms[low(x.w)];
+      // cê, cês: solo como sujeto, delante del verbo (cê vem?); después de preposición, você (pra você)
+      // «pra o» sin contraer no es el habla: es *pro* (o *para o*)
+      if (f && low(x.w) === "pra" && words[k + 1] && /^(o|os)$/.test(low(words[k + 1].w))) f = null;
+      if (f && /^(cê|cês)$/.test(low(x.w))) {
+        var nx0 = words[k + 1] ? low(words[k + 1].w) : "";
+        if (!(finite(nx0) || CLITIC_ONLY[nx0] || /^(não|já|também|sempre|nunca|só)$/.test(nx0))) f = null;
+      }
+      if (f) spots.push({ k: k, opts: f });
+    });
+    spots = spots.slice(0, 3);
+    var combos = [{ repl: {}, subs: [] }];
+    spots.forEach(function (sp) {
+      var next = [];
+      combos.forEach(function (c) {
+        sp.opts.forEach(function (o) {
+          var r = {}; Object.keys(c.repl).forEach(function (q) { r[q] = c.repl[q]; });
+          r[sp.k] = capLike(words[sp.k].w, o);
+          next.push({ repl: r, subs: c.subs.concat([{ said: low(words[sp.k].w), std: o, reg: true }]) });
+        });
+      });
+      combos = next;
+    });
+    if (spots.length) combos.forEach(function (c) { cands.push({ text: build(c.repl), subs: c.subs, repl: c.repl }); });
+    var base = cands.length ? cands.slice() : [{ text: src, subs: [], repl: {} }];
+    // ¿…, né? al final: la muletilla del habla («¿no?»)
+    base.slice().forEach(function (c) {
+      var nt = c.text.replace(/[\s,]+né\s*([?!.]*)\s*$/i, "$1");
+      if (nt !== c.text) base.push({ text: nt, subs: c.subs.concat([{ said: "né", std: "", reg: true, tag: true }]), accept: true });
+    });
+    // 2. constructions: only to accept
+    var extra = [];
+    base.forEach(function (c) {
+      var t = c.text, tw = [], r2 = /[A-Za-zÀ-ÿ]+(?:-[A-Za-zÀ-ÿ]+)*|\d+/g, m2;
+      while ((m2 = r2.exec(t))) tw.push({ w: m2[0], at: m2.index });
+      var put = function (from, len, to, sub) {
+        var a = tw[from].at, b = tw[from + len - 1].at + tw[from + len - 1].w.length;
+        extra.push({ text: (t.slice(0, a) + to + t.slice(b)).replace(/\s+/g, " ").trim(), subs: c.subs.concat(sub ? [sub] : []), accept: true });
+      };
+      extra.push({ text: t, subs: c.subs, accept: true, noop: true });
+      for (var i = 0; i < tw.length; i++) {
+        var w = low(tw[i].w), nx = tw[i + 1] ? low(tw[i + 1].w) : "", nx2 = tw[i + 2] ? low(tw[i + 2].w) : "";
+        var lem = verbLemmas(w);
+        var fin = finite(w) && !NO_OBJ_V.test(lem[0] || "") && !SUBJ_P[w];
+        // amo você → te amo / o amo; vi ele → o vi; ligo pra você → te ligo / lhe ligo
+        if (fin && /^(você|vocês|ele|ela|eles|elas)$/.test(nx) && !(tw[i + 2] && finite(nx2))) {
+          var cl = { "você": ["te", "o", "a"], "vocês": ["os", "as", "vos"], ele: ["o"], ela: ["a"], eles: ["os"], elas: ["as"] }[nx];
+          cl.forEach(function (c0) { put(i, 2, c0 + " " + tw[i].w, { said: w + " " + nx, std: c0 + " " + w, reg: true }); });
+        }
+        if (fin && /^(para|pra)$/.test(nx) && /^(você|ele|ela|mim)$/.test(nx2)) {
+          var cl2 = { "você": ["te", "lhe"], ele: ["lhe"], ela: ["lhe"], mim: ["me"] }[nx2];
+          cl2.forEach(function (c0) { put(i, 3, c0 + " " + tw[i].w, { said: w + " " + nx + " " + nx2, std: c0 + " " + w, reg: nx === "pra" || c0 !== "me" }); });
+        }
+        // tem gente → há gente; tinha → havia; teve → houve
+        var ex = { tem: "há", tinha: "havia", teve: "houve", "terá": "haverá" }[w];
+        if (ex && !(i > 0 && (SUBJ_P[low(tw[i - 1].w)] || DATA.nouns[low(tw[i - 1].w)]))) put(i, 1, capLike(tw[i].w, ex), { said: w, std: ex, reg: true });
+        // chegou no Rio → chegou ao Rio; vou na praia → vou à praia
+        var mv = { no: "ao", na: "à", nos: "aos", nas: "às" }[nx];
+        if (mv && lem.some(function (l) { return MOTION_V.test(l); })) put(i + 1, 1, mv, { said: w + " " + nx, std: w + " " + mv, reg: true });
+        // fui para a praia = fui à praia: destino con *para* o con *a*
+        if (/^(para)$/.test(nx) && lem.some(function (l) { return MOTION_V.test(l); })) {
+          var art = tw[i + 2] ? low(tw[i + 2].w) : "", ca = { o: "ao", a: "à", os: "aos", as: "às" }[art];
+          if (ca) put(i + 1, 2, ca, { said: "para " + art, std: ca, silent: true });
+          else put(i + 1, 1, "a", { said: "para", std: "a", silent: true });
+        }
+        // 32 → trinta e dois / trinta e duas
+        if (/^\d{1,6}$/.test(w)) {
+          var nw = numWords(+w);
+          if (nw) {
+            put(i, 1, nw, { said: w, std: nw, silent: true });
+            if (numFem(nw) !== nw) put(i, 1, numFem(nw), { said: w, std: numFem(nw), silent: true });
+          }
+        }
+      }
+      PHRASE_EQ.forEach(function (pe) {
+        var x = t.replace(pe[0], function (m0) { return capLike(m0, pe[1]); });
+        if (x !== t) extra.push({ text: x, subs: c.subs.concat([{ said: pe[0].source, std: pe[1], silent: true }]), accept: true });
+      });
+    });
+    return cands.concat(extra).slice(0, 40);
+  }
+
+  // The note shown with an answer accepted in another register.
+  function regNotes(subs) {
+    var seen = {};
+    return subs.filter(function (s) { if (!s.reg || seen[s.said]) return false; seen[s.said] = 1; return true; }).map(function (s) {
+      if (s.tag) return "*¿…, né?* es la muletilla del habla («¿no?»); en lo escrito no va.";
+      if (/^(grana|valeu|busão)$/.test(s.said)) return "*" + s.said + "* es del habla; en un texto formal: *" + s.std + "*.";
+      return REGISTRO.note(s.said, s.std);
+    }).join(" ");
+  }
+
+  /* An answer that differs only by the register: accepted with a note, or
+     «Casi» when the item asks for formal register.  When the answer has
+     other mistakes too, they are diagnosed on the written form (pra → para),
+     so the register form is not taken for the error. */
+  function registerPass(given, list, ctx, res) {
+    var cands = regCandidates(given);
+    // the answers may use the spoken forms too (Te ligo depois, tá?): compare with their written form as well
+    var more = [];
+    list.forEach(function (x) {
+      regCandidates(x).forEach(function (c) {
+        if (c.accept || more.indexOf(c.text) >= 0 || list.indexOf(c.text) >= 0) return;
+        if (c.subs.some(function (q) { return /^(grana|valeu|busão|bora|vamo)$/.test(q.said); })) return;   // palabras, no formas
+        more.push(c.text);
+      });
+    });
+    if (more.length) {
+      list = list.concat(more);
+      cands = [{ text: String(given), subs: [], accept: true, same: true }].concat(cands);
+    }
+    if (!cands.length) return null;
+    var c2 = {};
+    Object.keys(ctx).forEach(function (k) { c2[k] = ctx[k]; });
+    c2._reg = true;
+    // a multiple choice between registers asks for one of them: the other is «Casi»
+    var formal = registerOf(ctx) === "formal" || !!ctx.choice;
+    var best = null;
+    for (var i = 0; i < cands.length; i++) {
+      var r = diagnose0(cands[i].text, list, c2);
+      if (r.verdict === "giusto") {
+        var subs = cands[i].subs, notes = regNotes(subs);
+        if (cands[i].same && registerOf(ctx) === "coloquial") {
+          // se pedía el habla y escribió la forma escrita
+          return { verdict: "quasi", cat: "registro", label: LABEL.registro, slip: true, target: res.target,
+            hint: "Está bien escrito, pero se pide cómo se dice en el habla.",
+            explain: "Lo escrito está bien, pero la consigna pide el registro del habla: " + sentEnd(res.target || list[0]) + " " +
+              "En el habla de Brasil: *pra* (para), *tô, tá* (estou, está), *a gente* (nós).",
+            given: res.given, fixed: res.fixed, others: 0, all: ["registro"], level: "close" };
+        }
+        if (!notes) { r.level = "ok"; r.equiv = true; r.given = tokens(given).map(function (w) { return { w: w }; }); return r; }     // cifras, sinónimos: vale sin más
+        r.given = tokens(given).map(function (w) { return { w: w }; });
+        if (!formal) { r.level = "ok_note"; r.note = notes; r.reg = subs.filter(function (s) { return s.reg; }); return r; }
+        var q = { verdict: "quasi", cat: "registro", label: LABEL.registro, slip: true, target: r.target || res.target,
+          hint: "En el habla está bien; ¿y en un texto formal?",
+          explain: notes + " Acá se pide el registro formal.",
+          given: res.given, fixed: res.fixed, others: 0, all: ["registro"], level: "close", note: notes };
+        var said = {};
+        subs.forEach(function (s) { if (s.reg) String(s.said).split(" ").forEach(function (x) { said[x] = 1; }); });
+        q.given = tokens(given).map(function (w) { return { w: w, bad: !!said[w] }; });
+        q.fixed = tokens(q.target || "").map(function (w) { return { w: w }; });
+        return q;
+      }
+      if (!cands[i].accept && (!best || r.all.length < best.r.all.length)) best = { c: cands[i], r: r };
+    }
+    // Other mistakes: judged on the written form, the words shown as written.
+    if (best && best.r.verdict !== "giusto" && best.r.all.length <= (res.all || []).length) {
+      var r2 = best.r, orig = tokens(given), norm = tokens(best.c.text);
+      if (orig.length === norm.length && r2.given && r2.given.length === norm.length) {
+        r2.given = r2.given.map(function (t, k) { return { w: orig[k], bad: t.bad }; });
+      } else if (r2.given) {
+        // the words as written: estou → tô again (1:1 changes only)
+        best.c.subs.forEach(function (q) {
+          if (!q.reg || /\s/.test(q.std) || /\s/.test(q.said)) return;
+          for (var k = 0; k < r2.given.length; k++) if (r2.given[k].w === q.std.toLowerCase()) { r2.given[k].w = q.said; break; }
+        });
+      }
+      var n2 = regNotes(best.c.subs);
+      if (n2 && formal) { r2.all = r2.all.concat(["registro"]); r2.explain = r2.explain + " Además: " + n2; }
+      else if (n2) r2.note = n2;
+      return r2;
+    }
+    return null;
+  }
+
   function pickTarget(given, expected) {
     var g = tokens(given), best = null, bestScore = -1;
     // The variant that differs only in accents is the one the learner meant
@@ -2525,6 +2849,28 @@
   }
 
   function diagnose(given, expected, ctx) {
+    // Sin el contexto del ítem (la corrección de «encontrá el error», que
+    // pide la norma escrita) rige el registro formal; con él, el del ítem.
+    if (ctx == null) ctx = { registro: "formal" };
+    var res = diagnose0(given, expected, ctx);
+    if (!ctx._reg && res.verdict !== "giusto" && res.cat !== "vuoto") {
+      var list = (Array.isArray(expected) ? expected : [expected]).filter(function (x) { return x != null && String(x).trim(); }).map(String);
+      var r = null;
+      try { r = registerPass(String(given == null ? "" : given).slice(0, 2000), list, ctx, res); } catch (e) { r = null; }
+      if (r) res = r;
+    }
+    return withLevel(res);
+  }
+  // level: "ok" (bien), "ok_note" (bien, con una nota: otra forma válida,
+  // el registro del habla), "close" (casi), "wrong" (mal).
+  function withLevel(res) {
+    if (!res.level || (res.verdict === "giusto") !== /^ok/.test(res.level)) {
+      res.level = res.verdict === "giusto" ? (res.note ? "ok_note" : "ok") : res.verdict === "quasi" ? "close" : "wrong";
+    }
+    return res;
+  }
+
+  function diagnose0(given, expected, ctx) {
     ctx = ctx || {};
     var list = (Array.isArray(expected) ? expected : [expected]).filter(function (x) { return x != null && String(x).trim(); }).map(String);
     if (!list.length) list = [""];
@@ -2540,6 +2886,7 @@
     if (withC.length) target0 = pickTarget(given, withC) || target0;
     var target = (withC.length ? pickTarget(given, withC) : null) || pickTarget(given, list) || list[0];
     var g = tokens(given), e = tokens(target), pz = pauses(given), epz = pauses(target);
+    QUESTION = /\?\s*$/.test(String(given)) || /\?\s*$/.test(String(target));
     var res = { cat: null, slip: false, hint: "", explain: "", target: target,
                 given: g.map(function (w) { return { w: w }; }),
                 fixed: e.map(function (w) { return { w: w }; }), others: 0, all: [] };
@@ -2638,6 +2985,14 @@
       }
       var gS = stripSubj(g), eS = stripSubj(e2);
       if (genderFree(gS, eS, list[li]) || synonymFree(gS, eS, /,\s*mas\s*[,.]/i.test(given))) { res.verdict = "giusto"; return res; }
+      if (advFree(g, e2, names(list[li]).concat(ctx.names || [])) || advFree(gS, eS, names(list[li]).concat(ctx.names || []))) { res.verdict = "giusto"; return res; }
+    }
+    if (formalHit && !ctx.choice && registerOf(ctx) !== "formal") {
+      // Sin registro formal pedido, empezar con el pronombre es el habla de Brasil: vale.
+      res.verdict = "giusto"; res.level = "ok_note";
+      res.note = "Empezar con *" + formalHit.c + " " + formalHit.v + "* es lo normal en el habla de Brasil; en un texto formal: *" +
+        formalHit.form.charAt(0).toUpperCase() + formalHit.form.slice(1) + "*.";
+      return res;
     }
     if (formalHit) {
       res.cat = "colocacao"; res.label = LABEL.colocacao; res.verdict = "quasi"; res.slip = true; res.all = ["colocacao"];
@@ -2794,9 +3149,11 @@
 
   // A word missing only because Brazilian Portuguese lets it go (the subject
   // pronoun, the article before a possessive): no finding.
+  // In a question the subject você may go unsaid (Quer um café? = Você quer um café?).
+  var QUESTION = false;
   function canonMissOk(w, g, e, o, nm) {
     var next = e[o.ei + 1] || "";
-    if (SUBJ_P[w] && w !== "você" && w !== "vocês") {
+    if (SUBJ_P[w] && (!/^(você|vocês)$/.test(w) || QUESTION)) {
       var k = o.ei + 1;
       while (e[k] && /^(não|já|também|sempre|nunca|me|te|se|nos|lhe|lhes|o|a|os|as|só)$/.test(e[k])) k++;
       if (verbForms(e[k] || "").some(function (v) { return SUBJ_P[w].indexOf(v.p) >= 0; })) return true;
@@ -2806,7 +3163,7 @@
   }
   function canonExtraOk(w, g, e, o, nm) {
     var next = g[o.gi + 1] || "";
-    if (SUBJ_P[w] && w !== "você" && w !== "vocês") {
+    if (SUBJ_P[w] && (!/^(você|vocês)$/.test(w) || QUESTION)) {
       var k = o.gi + 1;
       while (g[k] && /^(não|já|também|sempre|nunca|me|te|se|nos|lhe|lhes|o|a|os|as|só)$/.test(g[k])) k++;
       if (verbForms(g[k] || "").some(function (v) { return SUBJ_P[w].indexOf(v.p) >= 0; })) return true;
@@ -2935,6 +3292,10 @@
     align: align,
     diagnose: diagnose,
     explainChoice: explainChoice,
+    REGISTRO: REGISTRO,
+    registerOf: registerOf,
+    addWords: addWords,
+    knownWord: knownWord,
     init: init,
     LABEL: LABEL,
     SEVERITY: SEVERITY,

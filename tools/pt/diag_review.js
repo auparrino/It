@@ -222,8 +222,9 @@ course.items.forEach(function (it) {
   }
   if (it.type === "fixerr" && it.good) {
     var goods = [it.good].concat(it.goodAlt || []);
-    add("curso-fixerr", it.id, week, it.bad, goods, {}, "fixerr_" + (it.cat || "?"));
-    add("curso-fixerr", it.id, week, it.stem, it.accept || [it.answer], {}, "fixerr_" + (it.cat || "?"));
+    // «encontrá el error» pide la norma escrita: el habla es error ahí (registro formal)
+    add("curso-fixerr", it.id, week, it.bad, goods, { registro: "formal" }, "fixerr_" + (it.cat || "?"));
+    add("curso-fixerr", it.id, week, it.stem, it.accept || [it.answer], { registro: "formal" }, "fixerr_" + (it.cat || "?"));
   }
   if (it.type === "choice" && it.options) {
     it.options.forEach(function (o) {
@@ -238,7 +239,7 @@ bank.sentences.forEach(function (s, i) {
   add("banco", "s" + i, week, s.es, v, { stem: s.es, week: week }, "stem_copy");
 });
 bank.errors.forEach(function (e, i) {
-  add("banco-err", "e" + i, e.w || 52, e.wrong, [e.right], { week: e.w || 52 }, "bankerr_" + e.cat);
+  add("banco-err", "e" + i, e.w || 52, e.wrong, [e.right], { week: e.w || 52, registro: "formal" }, "bankerr_" + e.cat);
 });
 var Fr = ctx.Frasi;
 Fr.ALL.forEach(function (f) {
