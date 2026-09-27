@@ -200,7 +200,16 @@ def glossary():
             "glossario", os.path.join(ROOT, "tools", "it", "bank", "glossario.py"))
         mod = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(mod)
-        _GLOSS = mod.GLOSS
+        _GLOSS = dict(mod.GLOSS)
+        # the words of the C1 exercises (transformations, register, word
+        # formation, collocations): tools/it/bank/glossario_c1.py
+        extra = os.path.join(ROOT, "tools", "it", "bank", "glossario_c1.py")
+        if os.path.exists(extra):
+            spec = importlib.util.spec_from_file_location("glossario_c1", extra)
+            mod = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(mod)
+            for k, v in mod.GLOSS.items():
+                _GLOSS.setdefault(k, v)
     return _GLOSS
 
 
