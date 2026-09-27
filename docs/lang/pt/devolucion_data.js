@@ -11,6 +11,10 @@
  *        «indicativo» aparece en la teoría en la semana 23).  Antes de esa
  *        semana las devoluciones dicen lo de la derecha.  Los más largos
  *        primero.
+ *        Al final, el metalenguaje de la escuela que el curso nunca presenta
+ *        (hiato, llanas, esdrújulas, átono, objeto directo…): semana 99, así
+ *        que siempre se glosa; no se toca si ya viene glosado (entre
+ *        paréntesis o seguido de uno).
  */
 (function (root) {
   "use strict";
@@ -39,7 +43,15 @@
       ["\\s*\\(?do indicativo\\)?", 23, ""],
       ["\\bdel indicativo\\b", 23, "de la forma común del verbo"],
       ["\\bel indicativo\\b", 23, "la forma común del verbo"],
-      ["\\bindicativo\\b", 23, "la forma común del verbo"]
+      ["\\bindicativo\\b", 23, "la forma común del verbo"],
+      ["(?<![(\\p{L}])esdrújulas?(?![\\p{L})]| \\()", 99, "esdrújulas (con el acento en la antepenúltima sílaba)"],
+      ["(?<![(\\p{L}])llanas?(?![\\p{L})]| \\()", 99, "llanas (con el acento en la anteúltima sílaba)"],
+      ["(?<![(\\p{L}])agudas?(?![\\p{L})]| \\()", 99, "agudas (con el acento en la última sílaba)"],
+      ["(?<![(\\p{L}])(en )?hiato(?![\\p{L})]| \\()", 99, "separada de la vocal de al lado (hiato)"],
+      ["(?<![(\\p{L}])diptongos?(?![\\p{L})]| \\()", 99, "dos vocales en una sílaba (diptongo)"],
+      ["(?<![(\\p{L}])pronombre átono(?![\\p{L})]| \\()", 99, "pronombre átono (me, te, se, lhe, o, a)"],
+      ["(?<![(\\p{L}])objeto directo(?![\\p{L})]| \\()", 99, "objeto directo (lo que recibe la acción, sin preposición)"],
+      ["(?<![(\\p{L}])objeto indirecto(?![\\p{L})]| \\()", 99, "objeto indirecto (a quién, con «a» en español)"]
     ]
   };
   if (typeof module === "object" && module.exports) module.exports = DATA;

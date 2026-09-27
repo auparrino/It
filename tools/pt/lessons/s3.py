@@ -638,7 +638,7 @@ LESSONS = {
   "ex": [["*Entregou-lhe* o prêmio.", "Le entregó el premio."],
          ["*Chamo-me* Martín.", "Me llamo Martín (formal)."],
          ["Os leitores *enviaram-nos* cartas.", "Los lectores nos enviaron cartas."],
-         ["Fica quieto e *escuta-me*.", "Quedate quieto y escuchame."]],
+         ["Fique quieto e *escute-me*.", "Quedate quieto y escuchame (formal: con *você*, el imperativo toma el subjuntivo)."]],
   "warn": "En el habla de Brasil, *me chama*, *me dá* abren la oración "
           "sin problema. En un texto formal, no: *Chame-me*, *Dê-me*, "
           "*Chamo-me*."},

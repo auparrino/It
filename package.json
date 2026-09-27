@@ -9,7 +9,7 @@
   "scripts": {
     "test": "npm run test:it && npm run test:pt && npm run test:lib && npm run test:content",
     "test:it": "node tools/it/test_conjugator.js && node tools/it/test_game.js && node tools/it/test_frasi.js && node tools/it/test_diagnosi.js && node tools/it/test_scrivi.js && node tools/it/test_memoria.js && node tools/it/test_suoni.js",
-    "test:pt": "node tools/pt/test_conjugator.js && node tools/pt/test_game.js && node tools/pt/test_frasi.js && node tools/pt/test_diagnosi.js && node tools/pt/test_scrivi.js && node tools/pt/test_memoria.js && node tools/pt/test_suoni.js",
+    "test:pt": "node tools/pt/test_conjugator.js && node tools/pt/test_game.js && node tools/pt/test_frasi.js && node tools/pt/test_diagnosi.js && node tools/pt/test_variantes.js && node tools/pt/test_registro.js && node tools/pt/test_scrivi.js && node tools/pt/test_memoria.js && node tools/pt/test_suoni.js",
     "build": "python3 tools/it/build_bank.py && python3 tools/it/build_course.py && python3 tools/pt/build_bank.py && python3 tools/pt/build_course.py && python3 tools/lib/formule.py && node tools/lib/build_tramo.js && npm run build:biblioteca",
     "sim": "node tools/lib/sim_carriera.js it && node tools/lib/sim_carriera.js pt",
     "smoke": "NODE_PATH=$(npm root -g) node tools/lib/smoke_browser.js",

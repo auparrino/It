@@ -1176,15 +1176,18 @@ tr(W, 2, "Pessoa escribió que su patria era la lengua portuguesa.",
     "Fernando Pessoa escreveu que a pátria dele era a língua portuguesa"],
    "pátria, con tilde; língua, también.")
 
-fx(W, 0, "(PT) Estou a fazendo o jantar.", "a fazendo", "a fazer", "tempo",
+fx(W, 0, "Estou a fazendo o jantar.", "a fazendo", "a fazer", "tempo",
    "En Portugal: estar a + infinitivo (a fazer). En Brasil: estar + gerundio (fazendo). Nunca mezclados.")
+# La etiqueta del registro va en la consigna, no dentro de lo que se escribe.
+ITEMS[-1].update(prompt="Portugués de Portugal. " + FX)
 fx(W, 2, "Tive uma idéia ótima para a viagem.", "idéia", "ideia", "ortografia",
    "Desde 1990, ideia sin tilde: los diptongos abiertos éi, ói de las llanas la perdieron.")
 fx(W, 2, "O meu vôo para Lisboa sai às dez.", "vôo", "voo", "ortografia",
    "Desde 1990, voo sin circunflejo.")
-fx(W, 1, "(Texto formal) Tu vai receber a resposta amanhã.", "Tu vai", "Você vai", "persona",
+fx(W, 1, "Tu vai receber a resposta amanhã.", "Tu vai", "Você vai", "persona",
    "«Tu vai» es habla (carioca, gaúcha). En lo escrito: você vai o tu vais.",
    goodAlt=["Tu vais"])
+ITEMS[-1].update(prompt="Texto formal. " + FX)
 
 gd(W, 0, [["me diz", "diz-me"], ["me ajuda", "ajuda-me"], ["te conto", "conto-te"]],
    "não me diz → (PT) ___", "não me diz", "não diz-me",

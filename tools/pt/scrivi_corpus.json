@@ -2901,5 +2901,722 @@
     "cat": "crase"
    }
   ]
+ },
+ {
+  "week": 16,
+  "tanda": "2026-09",
+  "text": "Ontem fui a o médico porque estava com dor de cabeça. O médico foi muy simpático e me deu um remédio. Agora estoy melhor, mas ainda tenho um pouco de febre.",
+  "corrected": "Ontem fui ao médico porque estava com dor de cabeça. O médico foi muito simpático e me deu um remédio. Agora estou melhor, mas ainda tenho um pouco de febre.",
+  "errors": [
+   {
+    "wrong": "a o",
+    "right": "ao",
+    "cat": "contraccion"
+   },
+   {
+    "wrong": "muy",
+    "right": "muito",
+    "cat": "muito"
+   },
+   {
+    "wrong": "estoy",
+    "right": "estou",
+    "cat": "espanol"
+   }
+  ]
+ },
+ {
+  "week": 16,
+  "tanda": "2026-09",
+  "text": "No sábado fui ao supermercado com a minha irmã. Ela gosta muito as frutas tropicais e comprou manga, caju e maracujá. Eu comprei um queso e duas garrafas de vinho. A fila estava enorme!",
+  "corrected": "No sábado fui ao supermercado com a minha irmã. Ela gosta muito das frutas tropicais e comprou manga, caju e maracujá. Eu comprei um queijo e duas garrafas de vinho. A fila estava enorme!",
+  "errors": [
+   {
+    "wrong": "gosta muito as",
+    "right": "gosta muito das",
+    "cat": "gostar"
+   },
+   {
+    "wrong": "queso",
+    "right": "queijo",
+    "cat": "espanol"
+   }
+  ]
+ },
+ {
+  "week": 18,
+  "tanda": "2026-09",
+  "text": "Cuando eu era criança, jugava futebol todos os dias na rua. Meu time preferido era o Boca, mas agora torço pelo Flamengo. Ontem vi o jogo no bar com uns amigos e o Flamengo ganhou por dois a zero.",
+  "corrected": "Quando eu era criança, jogava futebol todos os dias na rua. Meu time preferido era o Boca, mas agora torço pelo Flamengo. Ontem vi o jogo no bar com uns amigos e o Flamengo ganhou por dois a zero.",
+  "errors": [
+   {
+    "wrong": "Cuando",
+    "right": "Quando",
+    "cat": "espanol"
+   },
+   {
+    "wrong": "jugava",
+    "right": "jogava",
+    "cat": "espanol"
+   }
+  ]
+ },
+ {
+  "week": 10,
+  "tanda": "2026-09",
+  "text": "Minha nova casa fica em Botafogo. O apartamento tem dois quartos, uma cozinha pequeña e uma varanda com vista para o morro. O viagem até o trabalho é curta e o bairro é muito tranquilo.",
+  "corrected": "Minha nova casa fica em Botafogo. O apartamento tem dois quartos, uma cozinha pequena e uma varanda com vista para o morro. A viagem até o trabalho é curta e o bairro é muito tranquilo.",
+  "errors": [
+   {
+    "wrong": "pequeña",
+    "right": "pequena",
+    "cat": "espanol"
+   },
+   {
+    "wrong": "O viagem",
+    "right": "A viagem",
+    "cat": "genero"
+   }
+  ]
+ },
+ {
+  "week": 21,
+  "tanda": "2026-09",
+  "text": "Este mês tenho trabalhado muito. Ontem he terminado um projeto grande e o meu chefe ficou contente. Hoje tenho saído cedo do escritório para descansar.",
+  "corrected": "Este mês tenho trabalhado muito. Ontem terminei um projeto grande e o meu chefe ficou contente. Hoje saí cedo do escritório para descansar.",
+  "errors": [
+   {
+    "wrong": "he terminado",
+    "right": "terminei",
+    "cat": "perfeito_composto"
+   },
+   {
+    "wrong": "tenho saído",
+    "right": "saí",
+    "cat": "perfeito_composto"
+   }
+  ]
+ },
+ {
+  "week": 27,
+  "tanda": "2026-09",
+  "text": "Quando eu ter férias, vou viajar para o Nordeste. Se eu consigo passagens baratas, vou para Salvador e depois para Recife. Assim que chegar, vou te mandar fotos.",
+  "corrected": "Quando eu tiver férias, vou viajar para o Nordeste. Se eu conseguir passagens baratas, vou para Salvador e depois para Recife. Assim que chegar, vou te mandar fotos.",
+  "errors": [
+   {
+    "wrong": "ter",
+    "right": "tiver",
+    "cat": "futuro_subj"
+   },
+   {
+    "wrong": "consigo",
+    "right": "conseguir",
+    "cat": "futuro_subj"
+   }
+  ]
+ },
+ {
+  "week": 29,
+  "tanda": "2026-09",
+  "text": "A professora pediu para nós ler o livro até sexta. É importante os alunos participar das aulas. Depois de terminar a leitura, podemos discutir o final.",
+  "corrected": "A professora pediu para nós lermos o livro até sexta. É importante os alunos participarem das aulas. Depois de terminar a leitura, podemos discutir o final.",
+  "errors": [
+   {
+    "wrong": "ler",
+    "right": "lermos",
+    "cat": "inf_pessoal"
+   },
+   {
+    "wrong": "participar",
+    "right": "participarem",
+    "cat": "inf_pessoal"
+   }
+  ]
+ },
+ {
+  "week": 23,
+  "tanda": "2026-09",
+  "text": "Espero que você pode vir à minha festa de aniversário no sábado. Quero que todos os meus amigos estão lá. É importante que alguém traz o violão!",
+  "corrected": "Espero que você possa vir à minha festa de aniversário no sábado. Quero que todos os meus amigos estejam lá. É importante que alguém traga o violão!",
+  "errors": [
+   {
+    "wrong": "pode",
+    "right": "possa",
+    "cat": "subjuntivo"
+   },
+   {
+    "wrong": "estão",
+    "right": "estejam",
+    "cat": "subjuntivo"
+   },
+   {
+    "wrong": "traz",
+    "right": "traga",
+    "cat": "subjuntivo"
+   }
+  ]
+ },
+ {
+  "week": 36,
+  "tanda": "2026-09",
+  "text": "Todos os dias acordo as sete e vou a academia antes do trabalho. A tarde trabalho em casa e a noite vou à aula de dança.",
+  "corrected": "Todos os dias acordo às sete e vou à academia antes do trabalho. À tarde trabalho em casa e à noite vou à aula de dança.",
+  "errors": [
+   {
+    "wrong": "as sete",
+    "right": "às sete",
+    "cat": "crase"
+   },
+   {
+    "wrong": "a academia",
+    "right": "à academia",
+    "cat": "crase"
+   },
+   {
+    "wrong": "A tarde",
+    "right": "À tarde",
+    "cat": "crase"
+   },
+   {
+    "wrong": "a noite",
+    "right": "à noite",
+    "cat": "crase"
+   }
+  ]
+ },
+ {
+  "week": 35,
+  "tanda": "2026-09",
+  "text": "Ontem sonhei de você. Gosto muito conversar com você e penso muito na nossa viagem ao Nordeste.",
+  "corrected": "Ontem sonhei com você. Gosto muito de conversar com você e penso muito na nossa viagem ao Nordeste.",
+  "errors": [
+   {
+    "wrong": "sonhei de",
+    "right": "sonhei com",
+    "cat": "regencia"
+   },
+   {
+    "wrong": "Gosto muito conversar",
+    "right": "Gosto muito de conversar",
+    "cat": "gostar"
+   }
+  ]
+ },
+ {
+  "week": 45,
+  "tanda": "2026-09",
+  "text": "No restaurante pedi um vaso de suco e uma salada. A comida estava exquisita e o garçom foi muito simpático. No final deixei uma propina de dez reais.",
+  "corrected": "No restaurante pedi um copo de suco e uma salada. A comida estava deliciosa e o garçom foi muito simpático. No final deixei uma gorjeta de dez reais.",
+  "errors": [
+   {
+    "wrong": "vaso",
+    "right": "copo",
+    "cat": "falso_amigo"
+   },
+   {
+    "wrong": "exquisita",
+    "right": "deliciosa",
+    "cat": "espanol"
+   },
+   {
+    "wrong": "propina",
+    "right": "gorjeta",
+    "cat": "falso_amigo"
+   }
+  ]
+ },
+ {
+  "week": 19,
+  "tanda": "2026-09",
+  "text": "O Rio é mais grande que Buenos Aires? Não, mas é mais bonito. Hoje o tempo é muito quente e a praia é cheia de gente.",
+  "corrected": "O Rio é maior que Buenos Aires? Não, mas é mais bonito. Hoje o tempo está muito quente e a praia está cheia de gente.",
+  "errors": [
+   {
+    "wrong": "mais grande",
+    "right": "maior",
+    "cat": "regularizacion"
+   },
+   {
+    "wrong": "é muito quente",
+    "right": "está muito quente",
+    "cat": "ser_estar"
+   },
+   {
+    "wrong": "é cheia",
+    "right": "está cheia",
+    "cat": "ser_estar"
+   }
+  ]
+ },
+ {
+  "week": 16,
+  "tanda": "2026-09",
+  "text": "Conheci a Júlia na faculdade. Eu la convidei para jantar e ela aceitou. Depois do jantar, ela me deu um livro de Clarice Lispector. Isso foi muito especial para mí.",
+  "corrected": "Conheci a Júlia na faculdade. Eu a convidei para jantar e ela aceitou. Depois do jantar, ela me deu um livro de Clarice Lispector. Isso foi muito especial para mim.",
+  "errors": [
+   {
+    "wrong": "la convidei",
+    "right": "a convidei",
+    "cat": "pronome"
+   },
+   {
+    "wrong": "mí",
+    "right": "mim",
+    "cat": "pronome"
+   }
+  ]
+ },
+ {
+  "week": 11,
+  "tanda": "2026-09",
+  "text": "No domingo visitei a minha avó no hospital. Também vi ao médico dela, que me explicou tudo. Depois chamei a meu irmão para contar as notícias.",
+  "corrected": "No domingo visitei a minha avó no hospital. Também vi o médico dela, que me explicou tudo. Depois chamei meu irmão para contar as notícias.",
+  "errors": [
+   {
+    "wrong": "vi ao médico",
+    "right": "vi o médico",
+    "cat": "a_personal"
+   },
+   {
+    "wrong": "chamei a meu irmão",
+    "right": "chamei meu irmão",
+    "cat": "a_personal"
+   }
+  ]
+ },
+ {
+  "week": 28,
+  "tanda": "2026-09",
+  "text": "Se eu tivesse mais tempo, eu estudarei piano. E se eu morava perto da praia, iria todos os dias.",
+  "corrected": "Se eu tivesse mais tempo, eu estudaria piano. E se eu morasse perto da praia, iria todos os dias.",
+  "errors": [
+   {
+    "wrong": "estudarei",
+    "right": "estudaria",
+    "cat": "tempo"
+   },
+   {
+    "wrong": "morava",
+    "right": "morasse",
+    "cat": "subjuntivo"
+   }
+  ]
+ },
+ {
+  "week": 9,
+  "tanda": "2026-09",
+  "text": "Nao sei se voce conhece o Cristo Redentor. E muito bonito e tem uma vista incrivel da cidade.",
+  "corrected": "Não sei se você conhece o Cristo Redentor. É muito bonito e tem uma vista incrível da cidade.",
+  "errors": [
+   {
+    "wrong": "Nao",
+    "right": "Não",
+    "cat": "nasal"
+   },
+   {
+    "wrong": "voce",
+    "right": "você",
+    "cat": "tilde"
+   },
+   {
+    "wrong": "E muito",
+    "right": "É muito",
+    "cat": "tilde"
+   },
+   {
+    "wrong": "incrivel",
+    "right": "incrível",
+    "cat": "tilde"
+   }
+  ]
+ },
+ {
+  "week": 5,
+  "tanda": "2026-09",
+  "text": "Meus pais mora em Córdoba e eu moro no Rio. Você fala português muito bem! A gente vamos à praia no sábado?",
+  "corrected": "Meus pais moram em Córdoba e eu moro no Rio. Você fala português muito bem! A gente vai à praia no sábado?",
+  "errors": [
+   {
+    "wrong": "mora",
+    "right": "moram",
+    "cat": "persona"
+   },
+   {
+    "wrong": "vamos",
+    "right": "vai",
+    "cat": "persona"
+   }
+  ]
+ },
+ {
+  "week": 22,
+  "tanda": "2026-09",
+  "text": "O contrato já foi assinado e a conta foi pagada ontem. O relatório foi escrevido pela equipe e entregue na segunda.",
+  "corrected": "O contrato já foi assinado e a conta foi paga ontem. O relatório foi escrito pela equipe e entregue na segunda.",
+  "errors": [
+   {
+    "wrong": "pagada",
+    "right": "paga",
+    "cat": "participio"
+   },
+   {
+    "wrong": "escrevido",
+    "right": "escrito",
+    "cat": "participio"
+   }
+  ]
+ },
+ {
+  "week": 33,
+  "tanda": "2026-09",
+  "text": "Machado de Assis tornou-se famoso muito jovem. Me parece que ninguém descreveu o Rio como ele. Os seus romances não deixam-nos indiferentes.",
+  "corrected": "Machado de Assis tornou-se famoso muito jovem. Parece-me que ninguém descreveu o Rio como ele. Os seus romances não nos deixam indiferentes.",
+  "errors": [
+   {
+    "wrong": "Me parece",
+    "right": "Parece-me",
+    "cat": "colocacao"
+   },
+   {
+    "wrong": "não deixam-nos",
+    "right": "não nos deixam",
+    "cat": "colocacao"
+   }
+  ]
+ },
+ {
+  "week": 40,
+  "tanda": "2026-09",
+  "text": "O relatório mostra que tem muitos problemas na saúde pública. Tem pouco investimento e os hospitais estão cheios. É preciso investir mais pra melhorar o atendimento.",
+  "corrected": "O relatório mostra que há muitos problemas na saúde pública. Há pouco investimento e os hospitais estão cheios. É preciso investir mais para melhorar o atendimento.",
+  "errors": [
+   {
+    "wrong": "tem",
+    "right": "há",
+    "cat": "registro"
+   },
+   {
+    "wrong": "Tem",
+    "right": "Há",
+    "cat": "registro"
+   },
+   {
+    "wrong": "pra",
+    "right": "para",
+    "cat": "registro"
+   }
+  ]
+ },
+ {
+  "week": 43,
+  "tanda": "2026-09",
+  "text": "Prezado professor, escrevo pra pedir uma prorrogação do prazo do trabalho. Tô com um problema de saúde e não consegui terminar. Atentamente, Lucía",
+  "corrected": "Prezado professor, escrevo para pedir uma prorrogação do prazo do trabalho. Estou com um problema de saúde e não consegui terminar. Atenciosamente, Lucía",
+  "errors": [
+   {
+    "wrong": "pra",
+    "right": "para",
+    "cat": "registro"
+   },
+   {
+    "wrong": "Tô",
+    "right": "Estou",
+    "cat": "registro"
+   },
+   {
+    "wrong": "Atentamente",
+    "right": "Atenciosamente",
+    "cat": "espanol"
+   }
+  ]
+ },
+ {
+  "week": 12,
+  "tanda": "2026-09",
+  "text": "Por favor, hablá mais devagar. Você podés me ligar amanhã de manhã.",
+  "corrected": "Por favor, fale mais devagar. Você pode me ligar amanhã de manhã.",
+  "errors": [
+   {
+    "wrong": "hablá",
+    "right": "fale",
+    "cat": "espanol"
+   },
+   {
+    "wrong": "podés",
+    "right": "pode",
+    "cat": "espanol"
+   }
+  ]
+ },
+ {
+  "week": 24,
+  "tanda": "2026-09",
+  "text": "Comecei a estudar portugues em março. No começo foi dificil, mas agora entendo quase tudo. Minha cabeca ainda mistura as duas línguas.",
+  "corrected": "Comecei a estudar português em março. No começo foi difícil, mas agora entendo quase tudo. Minha cabeça ainda mistura as duas línguas.",
+  "errors": [
+   {
+    "wrong": "portugues",
+    "right": "português",
+    "cat": "tilde"
+   },
+   {
+    "wrong": "dificil",
+    "right": "difícil",
+    "cat": "tilde"
+   },
+   {
+    "wrong": "cabeca",
+    "right": "cabeça",
+    "cat": "ortografia"
+   }
+  ]
+ },
+ {
+  "week": 38,
+  "tanda": "2026-09",
+  "text": "E aí, tudo bem? Tô no centro e vou pra Lapa depois. Cê quer vir? A gente se encontra en frente dos Arcos às dez.",
+  "corrected": "E aí, tudo bem? Tô no centro e vou pra Lapa depois. Cê quer vir? A gente se encontra em frente aos Arcos às dez.",
+  "errors": [
+   {
+    "wrong": "en frente dos",
+    "right": "em frente aos",
+    "cat": "espanol"
+   }
+  ]
+ },
+ {
+  "week": 20,
+  "tanda": "2026-09",
+  "text": "Não tem ninguém em casa. Nunca não saio à noite durante a semana. Algún dia vou morar em Portugal.",
+  "corrected": "Não tem ninguém em casa. Nunca saio à noite durante a semana. Algum dia vou morar em Portugal.",
+  "errors": [
+   {
+    "wrong": "não",
+    "right": "",
+    "cat": "sobrante"
+   },
+   {
+    "wrong": "Algún",
+    "right": "Algum",
+    "cat": "espanol"
+   }
+  ]
+ },
+ {
+  "week": 26,
+  "tanda": "2026-09",
+  "text": "A cidade onde nasci é pequena. Os homems que trabalham na padaria fazem os melhores pãos do bairro.",
+  "corrected": "A cidade onde nasci é pequena. Os homens que trabalham na padaria fazem os melhores pães do bairro.",
+  "errors": [
+   {
+    "wrong": "homems",
+    "right": "homens",
+    "cat": "plural"
+   },
+   {
+    "wrong": "pãos",
+    "right": "pães",
+    "cat": "plural"
+   }
+  ]
+ },
+ {
+  "week": 13,
+  "tanda": "2026-09b",
+  "text": "Minha irmã tem um cachorro muy grande que se chama Toto. Todas as manhãs ela passeia com ele no parque. O cachorro gosta muito de correr atras das pombas.",
+  "corrected": "Minha irmã tem um cachorro muito grande que se chama Toto. Todas as manhãs ela passeia com ele no parque. O cachorro gosta muito de correr atrás das pombas.",
+  "errors": [
+   {
+    "wrong": "muy",
+    "right": "muito",
+    "cat": "muito"
+   },
+   {
+    "wrong": "atras",
+    "right": "atrás",
+    "cat": "tilde"
+   }
+  ]
+ },
+ {
+  "week": 17,
+  "tanda": "2026-09b",
+  "text": "No próximo año eu vou estudar medicina na universidad. Meus pais vão ficar felizes e a minha avó vai fazer uma festa.",
+  "corrected": "No próximo ano eu vou estudar medicina na universidade. Meus pais vão ficar felizes e a minha avó vai fazer uma festa.",
+  "errors": [
+   {
+    "wrong": "año",
+    "right": "ano",
+    "cat": "espanol"
+   },
+   {
+    "wrong": "universidad",
+    "right": "universidade",
+    "cat": "espanol"
+   }
+  ]
+ },
+ {
+  "week": 25,
+  "tanda": "2026-09b",
+  "text": "Os problemas que o governo tem que resolver são muitas: a saúde, a educação e o trânsito.",
+  "corrected": "Os problemas que o governo tem que resolver são muitos: a saúde, a educação e o trânsito.",
+  "errors": [
+   {
+    "wrong": "muitas",
+    "right": "muitos",
+    "cat": "concordancia"
+   }
+  ]
+ },
+ {
+  "week": 30,
+  "tanda": "2026-09b",
+  "text": "Se eu tinha estudado mais, teria passado na prova. Agora preciso fazer tudo de novo.",
+  "corrected": "Se eu tivesse estudado mais, teria passado na prova. Agora preciso fazer tudo de novo.",
+  "errors": [
+   {
+    "wrong": "tinha estudado",
+    "right": "tivesse estudado",
+    "cat": "subjuntivo"
+   }
+  ]
+ },
+ {
+  "week": 14,
+  "tanda": "2026-09b",
+  "text": "Me gusta muito a música brasileira, sobretudo o samba e a bossa nova. Meu cantor favorito é Caetano Veloso.",
+  "corrected": "Eu gosto muito da música brasileira, sobretudo do samba e da bossa nova. Meu cantor favorito é Caetano Veloso.",
+  "errors": [
+   {
+    "wrong": "Me gusta",
+    "right": "Eu gosto de",
+    "cat": "gostar"
+   }
+  ]
+ },
+ {
+  "week": 8,
+  "tanda": "2026-09b",
+  "text": "Amanhã vou a visitar o Museu do Amanhã com meus colegas de trabalho.",
+  "corrected": "Amanhã vou visitar o Museu do Amanhã com meus colegas de trabalho.",
+  "errors": [
+   {
+    "wrong": "a visitar",
+    "right": "visitar",
+    "cat": "espanol"
+   }
+  ]
+ },
+ {
+  "week": 32,
+  "tanda": "2026-09b",
+  "text": "Se vende apartamento no Leblon. Aceitam-se cartões.",
+  "corrected": "Vende-se apartamento no Leblon. Aceitam-se cartões.",
+  "errors": [
+   {
+    "wrong": "Se vende",
+    "right": "Vende-se",
+    "cat": "colocacao"
+   }
+  ]
+ },
+ {
+  "week": 3,
+  "tanda": "2026-09b",
+  "text": "Moro em a Rua das Laranjeiras, perto de o metrô. De manhã tomo café em a padaria.",
+  "corrected": "Moro na Rua das Laranjeiras, perto do metrô. De manhã tomo café na padaria.",
+  "errors": [
+   {
+    "wrong": "em a",
+    "right": "na",
+    "cat": "contraccion"
+   },
+   {
+    "wrong": "de o",
+    "right": "do",
+    "cat": "contraccion"
+   },
+   {
+    "wrong": "em a",
+    "right": "na",
+    "cat": "contraccion"
+   }
+  ]
+ },
+ {
+  "week": 44,
+  "tanda": "2026-09b",
+  "text": "Todo domingo tomo um cafecito na padaria e como um pãozinho com manteca.",
+  "corrected": "Todo domingo tomo um cafezinho na padaria e como um pãozinho com manteiga.",
+  "errors": [
+   {
+    "wrong": "cafecito",
+    "right": "cafezinho",
+    "cat": "espanol"
+   },
+   {
+    "wrong": "manteca",
+    "right": "manteiga",
+    "cat": "espanol"
+   }
+  ]
+ },
+ {
+  "week": 37,
+  "tanda": "2026-09b",
+  "text": "Os cientistas mantem os dados em segredo e propoem novas regras.",
+  "corrected": "Os cientistas mantêm os dados em segredo e propõem novas regras.",
+  "errors": [
+   {
+    "wrong": "mantem",
+    "right": "mantêm",
+    "cat": "tilde"
+   },
+   {
+    "wrong": "propoem",
+    "right": "propõem",
+    "cat": "nasal"
+   }
+  ]
+ },
+ {
+  "week": 47,
+  "tanda": "2026-09b",
+  "text": "Embora o jeitinho parece simpático, ele pode abrir caminho para a corrupção.",
+  "corrected": "Embora o jeitinho pareça simpático, ele pode abrir caminho para a corrupção.",
+  "errors": [
+   {
+    "wrong": "parece",
+    "right": "pareça",
+    "cat": "subjuntivo"
+   }
+  ]
+ },
+ {
+  "week": 15,
+  "tanda": "2026-09b",
+  "text": "Quando eu era pequeno, eu brincaba na rua com os meus primos.",
+  "corrected": "Quando eu era pequeno, eu brincava na rua com os meus primos.",
+  "errors": [
+   {
+    "wrong": "brincaba",
+    "right": "brincava",
+    "cat": "espanol"
+   }
+  ]
+ },
+ {
+  "week": 34,
+  "tanda": "2026-09b",
+  "text": "Fiquei muito embarazada quando esqueci o nome da professora.",
+  "corrected": "Fiquei muito envergonhada quando esqueci o nome da professora.",
+  "errors": [
+   {
+    "wrong": "embarazada",
+    "right": "envergonhada",
+    "cat": "espanol"
+   }
+  ]
  }
 ]

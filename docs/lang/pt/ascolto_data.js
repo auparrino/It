@@ -30,7 +30,7 @@
   var NH = "nh es la ñ: sonho = «soño».";
   var SZ = "Entre vocales, una s sola suena z (zumbido, como una abeja); ss, ç y c suenan s. El español no tiene esa z sonora.";
   var CHJ = "ch y x suenan «sh» (sin la t de la ch española); j y g ante e, i suenan como la «y» de «yo» en un rioplatense que la hace zumbar: sonora, no la «sh» sorda que muchos porteños hacen en «calle».";
-  var TIDI = "En casi todo Brasil ti y di suenan «chi» y «yi» (con un toque de d); también la te y la de finales: leite = «leichi», tarde = «tarlle».";
+  var TIDI = "En casi todo Brasil ti y di suenan «chi» y «yi» (con un toque de d); también la te y la de finales: leite = «leichi», tarde = «tárdji».";
   var RR = "r entre vocales es un toque suave, como en español (caro); rr y r inicial suenan como una j suave, aspirada: carro = «caju», Rio = «Jío».";
   var VB = "La v portuguesa es labiodental (los dientes de arriba tocan el labio de abajo) y la b, bilabial. El español las confunde; el portugués no.";
   var ATO = "Al final de la palabra, la e átona suena casi «i» y la o átona casi «u»: lo que las distingue es dónde cae el acento. come = «cómi», comi = «comí».";

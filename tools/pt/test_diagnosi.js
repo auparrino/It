@@ -192,7 +192,7 @@ var FAMILIES = [
   ["Eu lo vi ontem.", ["Eu o vi ontem."], {}, { cat: "pronome", notHint: /artículo/ }],
   ["se lo", ["para ela"], { stem: "Comprei um presente e dei ___." }, { choice: true, cat: "pronome", explain: /para ela/ }],
   // la mesóclise bien escrita
-  ["Lhe direi a verdade.", ["Dir-lhe-ei a verdade."], {}, { cat: "colocacao", explain: /dir-lhe-ei/, notExplain: /direi-lhe/ }],
+  ["Lhe direi a verdade.", ["Dir-lhe-ei a verdade."], { registro: "formal" }, { cat: "colocacao", explain: /dir-lhe-ei/, notExplain: /direi-lhe/ }],
   ["Eles mudarão se em março.", ["Eles se mudarão em março."], {}, { cat: "colocacao", explain: /mesóclise/ }],
   // el pronombre repetido
   ["Ela se chama-se Beatriz.", ["Ela se chama Beatriz."], {}, { cat: "pronome", explain: /una sola vez/ }],
