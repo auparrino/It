@@ -20,19 +20,19 @@
  * fichas, con las palabras y la cobertura por semana —52 valores en
  * por mil— de cada unidad y del libro).
  *
- * Los .txt se guardan en BIBLIO_SRC (por defecto <tmp>/biblioteca_src) y no
+ * Los .txt se guardan en BIBLIO_SRC (por defecto tools/.cache/biblioteca) y no
  * se versionan; para el portugués también la lista de palabras del
  * portugués moderno (pythonprobr/palavras, del corrector VERO de
  * LibreOffice) que la ortografía usa como léxico de formas actuales.
  */
 "use strict";
-var fs = require("fs"), path = require("path"), os = require("os"), cp = require("child_process");
+var fs = require("fs"), path = require("path"), cp = require("child_process");
 var pack = require("./pack.js");
 var FUENTES = require("./biblioteca_fuentes.js");
 
 var RAW = "https://raw." + "githubusercontent.com/";
 var ORG = "GITenberg";
-var SRC = process.env.BIBLIO_SRC || path.join(os.tmpdir(), "biblioteca_src");
+var SRC = process.env.BIBLIO_SRC || path.join(__dirname, "..", ".cache", "biblioteca");
 var WORDLIST = { repo: "pythonprobr/palavras", file: "palavras.txt" };
 // Spanish words (OpenSubtitles, hermitdave/FrequencyWords, CC BY-SA 4.0):
 // to recognise the transparent cognates.
