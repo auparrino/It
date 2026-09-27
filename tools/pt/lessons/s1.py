@@ -359,6 +359,12 @@ LESSONS = {
   "q": [{"prompt": "«Juan está en casa.» (como se dice en Río)", "answer": "O João está em casa.", "options": ["O João está em casa.", "João está na casa.", "El João está em casa."]}],
   "r": "En Río y buena parte de Brasil los nombres de persona llevan "
        "artículo: *o João*, *a Bia*. También el posesivo: *a minha casa*.",
+  "table": {"head": ["", "m. sg.", "f. sg.", "m. pl.", "f. pl."],
+            "rows": [["mi", "(o) meu", "(a) minha", "(os) meus", "(as) minhas"],
+                     ["tu / su (de você)", "(o) seu", "(a) sua", "(os) seus", "(as) suas"],
+                     ["nuestro", "(o) nosso", "(a) nossa", "(os) nossos", "(as) nossas"],
+                     ["de él (va detrás)", "o carro dele", "a casa dele", "os livros dele", "as chaves dele"],
+                     ["de ella (va detrás)", "o carro dela", "a casa dela", "os livros dela", "as chaves dela"]]},
   "ex": [["*O* Rafa está em casa.", "Rafa está en casa."],
          ["*A* Bia é de Niterói.", "Bia es de Niterói."],
          ["Esta é *a minha* amiga.", "Esta es mi amiga."],

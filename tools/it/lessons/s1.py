@@ -386,11 +386,19 @@ LESSONS = {
 
  # ---------------------------------------------------------------- parte 4
  {"h": "Posesivos: con artículo",
-  "r": "El posesivo lleva artículo: *il mio libro*, *la mia casa*. "
-       "Excepción: parientes en singular sin adjetivo: *mio padre*.",
-  "ex": [["*la mia* casa", "mi casa"],
-         ["*il tuo* libro", "tu libro"],
-         ["*i miei* amici", "mis amigos"],
+  "r": "Lleva artículo y concuerda con lo poseído, no con el dueño: *la sua "
+       "casa*, *i suoi amici*. *loro* no cambia. Sin artículo: parientes en "
+       "singular, *mio padre*.",
+  "table": {"head": ["", "m. sg.", "f. sg.", "m. pl.", "f. pl."],
+            "rows": [["mi", "il mio", "la mia", "i miei", "le mie"],
+                     ["tu (de vos)", "il tuo", "la tua", "i tuoi", "le tue"],
+                     ["su (de él, de ella, de usted)", "il suo", "la sua", "i suoi", "le sue"],
+                     ["nuestro", "il nostro", "la nostra", "i nostri", "le nostre"],
+                     ["su (de ustedes)", "il vostro", "la vostra", "i vostri", "le vostre"],
+                     ["su (de ellos, de ellas)", "il loro", "la loro", "i loro", "le loro"]]},
+  "ex": [["*la sua* macchina", "su auto (de él o de ella: manda *macchina*)"],
+         ["*i suoi* libri", "sus libros"],
+         ["*le nostre* amiche", "nuestras amigas"],
          ["*mio* padre", "mi padre"],
          ["*i miei* fratelli", "mis hermanos"]],
   "warn": "Con parientes el artículo vuelve en plural (*i miei fratelli*), "
@@ -400,7 +408,10 @@ LESSONS = {
          "moglie*, llega con su mujer.",
   "qq": [{"prompt": "Traducí: «mi libro»", "answer": "il mio libro", "options": ["il mio libro", "mio libro", "la mia libro"]},
          {"prompt": "Traducí: «mi madre»", "answer": "mia madre", "options": ["mia madre", "la mia madre", "mia la madre"]},
-         {"prompt": "Traducí: «mis hermanos»", "answer": "i miei fratelli", "options": ["i miei fratelli", "miei fratelli", "il mio fratelli"]}]},
+         {"prompt": "Traducí: «mis hermanos»", "answer": "i miei fratelli", "options": ["i miei fratelli", "miei fratelli", "il mio fratelli"]},
+         {"prompt": "Traducí: «sus libros» (de ella)", "answer": "i suoi libri", "options": ["i suoi libri", "le sue libri", "i sui libri"]},
+         {"prompt": "Traducí: «nuestra casa»", "answer": "la nostra casa", "options": ["la nostra casa", "il nostro casa", "nostra casa"]},
+         {"prompt": "Traducí: «tus amigas»", "answer": "le tue amiche", "options": ["le tue amiche", "le tuoi amiche", "i tuoi amiche"]}]},
 
  {"h": "Países sí, ciudades no",
   "r": "Países, regiones y continentes llevan artículo: *l'Italia*, *la "
@@ -567,6 +578,23 @@ LESSONS = {
           "vale la forma del artículo, *quel libro*, *quegli amici*.",
   "tip": "*Che bel film!* (delante) frente a *Questo film è bello* (detrás, "
          "forma plena)."},
+
+ {"h": "questo: este, esta, estos, estas",
+  "r": "*questo* es «este» y concuerda como un adjetivo en *-o*: *questo*, "
+       "*questa*, *questi*, *queste*. Delante de vocal se apostrofa: "
+       "*quest'anno*. «Ese / aquel» es *quello*.",
+  "table": {"head": ["", "singular", "plural"],
+            "rows": [["masculino", "questo libro", "questi libri"],
+                     ["femenino", "questa casa", "queste case"],
+                     ["delante de vocal", "quest'anno, quest'amica", "questi anni, queste amiche"]]},
+  "ex": [["*Questa* casa è bella.", "Esta casa es linda."],
+         ["*Questi* ragazzi sono di Roma.", "Estos chicos son de Roma."],
+         ["*Queste* scarpe sono nuove.", "Estos zapatos son nuevos."],
+         ["*quest'*anno", "este año"]],
+  "warn": "No existe «esto» aparte: *questo* sirve para las dos cosas (*Questo "
+          "è il mio libro*). Y el plural masculino es *questi*, nunca «questos».",
+  "qq": [{"prompt": "Traducí: «estas casas»", "answer": "queste case", "options": ["queste case", "questi case", "questas case"]},
+         {"prompt": "Traducí: «estos libros»", "answer": "questi libri", "options": ["questi libri", "questos libri", "queste libri"]}]},
 
  {"h": "buono, grande, santo se acortan",
   "r": "*buono* delante copia a *un / uno / una / un'*. *grande* → *gran*, "
