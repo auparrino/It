@@ -939,7 +939,7 @@
       /* 7. «a» personal */
       if (/^(a|ao|aos)$/.test(w) && pi >= 0 && (lemmas(p).some(function (l) { return DO_VERB.test(l); }) || DO_VERB.test(PP(p) || "")) && ni >= 0) {
         var isP = (w !== "a" && (tk[ni].cap || PERSON_N.test(n) || POSS.test(n))) || (w === "a" && /^(um|uma)$/.test(n) && !lemmas(p).some(function (l) { return /^(ajudar|levar)$/.test(l); })) || (w === "a" && (/^(meu|meus|teu|seu|seus|nosso|nossos|minhas|suas|nossas|ele|eles|ela|elas|você|vocês|todos|ninguém|alguém|o|os)$/.test(n)));
-        if (isP && !/^(casa|pé)$/.test(n) && !isInf(n)) push(i, 1, "a_personal", "Sin «a»: el objeto directo de persona va directo (" + it(p + (w === "ao" ? " o" : w === "aos" ? " os" : "") + " " + tk[ni].o + (POSS.test(n) && W(wi(ni, 1)) ? " " + W(wi(ni, 1)) : "")) + ").");
+        if (isP && !/^(casa|pé)$/.test(n) && !isInf(n)) push(i, 1, "a_personal", "Sin «a»: la persona que recibe la acción (el objeto directo) va sin preposición (" + it(p + (w === "ao" ? " o" : w === "aos" ? " os" : "") + " " + tk[ni].o + (POSS.test(n) && W(wi(ni, 1)) ? " " + W(wi(ni, 1)) : "")) + ").");
       }
 
       /* 8. perfeito composto con un pasado cerrado; «he comido» */
@@ -1213,7 +1213,7 @@
 
       /* 28. colocação en la escritura formal */
       if (week === 33 && t.start && CLIT.test(w) && ni === i + 1 && (finite(n) || /(ou|ei|aram|eram|iram|ava|avam|ia|iam|am|em)$/.test(n)) && !/[,]/.test(tk.slice(i, i + 12).map(function (x) { return x.p || ""; }).join("")))
-        push(i, 2, "colocacao", "En la escritura formal no se empieza con pronombre átono: " + it(tk[ni].o.charAt(0).toUpperCase() + n.slice(1) + "-" + w) + ".");
+        push(i, 2, "colocacao", "En la escritura formal no se empieza con un pronombre átono (me, te, se, lhe): " + it(tk[ni].o.charAt(0).toUpperCase() + n.slice(1) + "-" + w) + ".");
       if (week >= 32 && t.start && w === "se" && ni === i + 1 && V(n).some(function (v) { return v.tense === "presente" && (v.p === 2 || v.p === 5); })) {
         var sent7 = [];
         for (var q7 = i; q7 < tk.length && !(tk[q7].p && /[.!?]/.test(tk[q7].p)); q7++) sent7.push(tk[q7]);

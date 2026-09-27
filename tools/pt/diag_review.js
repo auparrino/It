@@ -280,6 +280,13 @@ var META = [
 var ITAL = /\b(congiuntivo|passato|prossimo|articolo|preposizione|articolata|italiano|italiana|doppia|doppie|essere|avere|della|degli|nello|sono|perché|però|anche|questo|quello|lezione|parola|parole|sbagliat|giusto|quasi|tu hai|lui|lei|voi|loro|il\s|gli\s|è\s)\b/i;
 var TUTEO = /(?<!\b(se|lo|la|le|que|no) )\b(tienes|puedes|sabes|debes|quieres|escribes|eres|estás seguro|mira|fíjate|revisa|escribe|piensa|recuerda|pon)(?![\p{L}])/iu;
 
+/* Las plantillas vacías (C3): dicen qué va, no por qué.  Y la mención del
+   español o de su glosa (C5), en las categorías que el español no tiene o
+   tiene de otro modo. */
+var EMPTY = /^(Acá va \*[^*]+\*( \(«[^»]*»\))?\.|Acá va la preposición \*[^*]+\*( \([^)]*\))?\.|Sobra \*[^*]+\*\.|El orden es: .*|Falta \*[^*]+\*( \(= [^)]*\))?( (antes|después) de \*[^*]+\*)?\.|Acá no va artículo: sobra \*[^*]+\*\.|\*[^*]+\* es el plural; acá va el singular \*[^*]+\*\.|\*[^*]+\* = \*[^*]+\*\.|Acá va \*[^*]+\* sin artículo\.|La tilde va así: \*[^*]+\*\.)$/;
+var CONTRAST_CATS = /^(crase|colocacao|futuro_subj|inf_pessoal|contraccion|orden|ortografia)$/;
+var ES_MENTION = /español|castellano|«[^»]+»|como en |a diferencia/i;
+
 function view(c) {
   var d;
   try {
@@ -335,6 +342,10 @@ function flags(c, v) {
   }
   // explanation without the rule: only «Acá va *x*.»
   if (/^Acá va \*[^*]+\*\.?$/.test(String(d.explain).trim()) && !G.generic[d.cat]) out.push("sin_regla");
+  // C3/C11: la explicación vacía (dice qué, no por qué), en todas las categorías menos el tipeo
+  if (d.cat !== "tipeo" && EMPTY.test(String(d.explain || "").trim())) out.push("vacia");
+  // C5: sin contraste con el español donde el español no lo tiene o lo tiene de otro modo
+  if (CONTRAST_CATS.test(d.cat || "") && !ES_MENTION.test(String(d.explain || ""))) out.push("sin_contraste");
   if (/^Error de tipeo/.test(d.explain) && c.kind !== "typo" && GRAMMAR_KIND.test(c.kind)) out.push("tipeo_por_gramatica");
   return out.filter(function (x, i, a) { return a.indexOf(x) === i; });
 }
@@ -429,10 +440,21 @@ function line(r) {
 }
 
 var BAD = ["crash", "roto", "sin_texto", "italiano", "tuteo", "palabra_doble", "pista_revela", "meta_temprano", "rechaza_variante",
-           "cat_distinta", "tipeo_por_gramatica", "gramatica_por_tipeo", "diff_otro", "diff_vacio", "sin_regla", "no_visto", "lejos"];
+           "cat_distinta", "tipeo_por_gramatica", "gramatica_por_tipeo", "diff_otro", "diff_vacio", "sin_regla", "no_visto", "lejos",
+           "vacia", "sin_contraste", "meta_sin_glosa"];
 console.log("casos: " + RES.length + " (" + Math.round((Date.now() - t0) / 1000) + " s)   fuentes: " +
   Object.entries(RES.reduce(function (a, r) { a[r.c.src] = (a[r.c.src] || 0) + 1; return a; }, {})).map(function (e) { return e[0] + " " + e[1]; }).join(", "));
 BAD.forEach(function (k) { if (fam[k]) console.log("  " + (k + "                    ").slice(0, 22) + fam[k].length); });
+(function () {
+  // Métricas de utilidad (C3, C5, C11): sobre las devoluciones con error que llegan al alumno.
+  var shown = RES.filter(function (r) { return r.v.d && r.v.verdict !== "giusto" && !r.v.far && r.v.cat !== "tipeo"; });
+  var vac = shown.filter(function (r) { return r.f.indexOf("vacia") >= 0; }).length;
+  var cc = shown.filter(function (r) { return CONTRAST_CATS.test(r.v.cat || ""); });
+  var sc = cc.filter(function (r) { return r.f.indexOf("sin_contraste") >= 0; }).length;
+  console.log("utilidad: explicaciones vacías " + vac + "/" + shown.length + " (" + (100 * vac / shown.length).toFixed(1) + " %) · " +
+    "con contraste con el español en crase, colocación, futuro do subjuntivo, infinitivo pessoal, contracción, orden y ortografía " +
+    (cc.length - sc) + "/" + cc.length + " (" + (100 * (cc.length - sc) / (cc.length || 1)).toFixed(1) + " %)");
+})();
 console.log("familias ya encontradas (tendrían que quedar en 0 o cerca):");
 Object.keys(FAMS).forEach(function (k) { console.log("  " + (k + "                                ").slice(0, 32) + (fam[k] ? fam[k].length : 0)); });
 
