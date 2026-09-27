@@ -21,6 +21,15 @@
  *   node tools/it/diag_review.js --matrix   tipo de error → categoría
  *   node tools/it/diag_review.js --sample T muestras del tipo de error T
  *   node tools/it/diag_review.js --json F   vuelca todos los casos a F
+ *
+ * Además de las familias de devoluciones malas mide la utilidad (C3, C11
+ * de la auditoría 2026-09-v3): el porcentaje de explicaciones «vacías» (dicen
+ * qué pero no por qué: «Acá va X», «Sobra X», «El orden es: X»…), el de
+ * explicaciones con contraste con el español por categoría, las reglas
+ * falsas probables («no es una palabra italiana» de una palabra que está en
+ * el léxico de frecuencias) y las variantes válidas generadas por
+ * test_variantes.js que se rechazan.  Las aceptaciones correctas (otra forma
+ * válida, el género de quien habla) van aparte y no cuentan como «no visto».
  */
 "use strict";
 var pack = require("../lib/pack.js");
@@ -28,6 +37,8 @@ var ctx = pack("it");
 var D = ctx.Diagnosi, DV = ctx.Devolucion, Conj = ctx.Conj, Banca = ctx.Banca;
 var bank = pack.data("it", "bank.json");
 Banca.load(bank);
+// the frequency lexicon (as in the app, where it loads with the course)
+if (ctx.Freq) ctx.Freq.load(pack.data("it", "frequenza.json"));
 var course = pack.data("it", "course.json");
 var U = D.util;
 
@@ -237,6 +248,15 @@ ctx.FRASI_DATA.SCENES.forEach(function (sc) {
   });
 });
 
+/* The valid variants and the wrong controls of test_variantes.js, judged
+   like the other cases (families valida_rechazada / control_aceptado). */
+var VAR = require("./test_variantes.js");
+VAR.SRC.forEach(function (src) {
+  var dctx = { stem: src.stem, prompt: src.prompt, week: src.week };
+  VAR.valid(src).forEach(function (v) { add("variantes", src.id, src.week, src.answer, src.accept || [src.answer], dctx, { type: "generada:" + v.fam, given: v.given, word: null }); });
+  VAR.control(src).forEach(function (v) { add("variantes", src.id, src.week, src.answer, src.accept || [src.answer], dctx, { type: "control:" + v.fam, given: v.given, word: null }); });
+});
+
 /* ---------------------------------------------------------- juzgar */
 
 var EXPECT = {
@@ -260,6 +280,25 @@ var GRAMMAR_TYPES = { vocale_finale: 1, numero: 1, articolo: 1, preposizione: 1,
   accordo_participio: 1, infinito: 1, clitico: 1, pp_per_imperfetto: 1, imperfetto_per_pp: 1 };
 var VAGUE = /^(Revisá el pronombre marcado\.|La palabra marcada no es la que va\.|Revisá el artículo\.|Revisá el género\.|Sobra una palabra\.|Revisá el verbo marcado: forma y tiempo\.|Revisalo\.?)$/;
 var NO_WHY = /^(Acá va \*[^*]+\*(, no \*[^*]+\*)?\.|Sobra \*[^*]+\*\.|Falta \*[^*]+\*( después de \*[^*]+\*)?\.|Error de tipeo: \*[^*]+\*\.|Se escribe \*[^*]+\*\.|El orden es: \*[^*]+\*\.)$/;
+// Explanations that say what and not why (only the form): the templates the
+// audit counted as empty.  A slip (typo, accent) may be short: it is left out.
+var EMPTY = [
+  /^Acá va \*[^*]+\*( \(«[^»]*»\))?(, no \*[^*]+\*( \(«[^»]*»\))?)?\.$/, /^Sobra \*[^*]+\*\.$/, /^Falta \*[^*]+\*( después de \*[^*]+\*)?\.$/,
+  /^Se escribe \*[^*]+\*\.$/, /^(En italiano el orden es|El orden es): \*[^*]+\*\.$/, /^Estas dos palabras van al revés: \*[^*]+\*, no \*[^*]+\*\.$/,
+  /^\*[^*]+\* es el plural; acá va el singular \*[^*]+\*\.$/, /^Plural: \*[^*]+\* → \*[^*]+\*\.$/,
+  /^\*[^*]+\* es [a-zà-ú ]+; acá va [a-zà-ú ]+: \*[^*]+\*\.$/, /^\*[^*]+\* es [a-zà-ú ]+ \([^)]*\); acá va \*[^*]+\*, [a-zà-ú ]+ \([^)]*\)\.$/,
+  /^El italiano usa acá \*[^*]+\*, no \*[^*]+\*\. Las preposiciones no se traducen una a una/, /^Acá no va artículo: sobra \*[^*]+\*\.$/,
+  /^La forma es \*[^*]+\*(, en (plural|singular))?: la vocal final marca el género y el número \(-o \/ -a en singular, -i \/ -e en plural\)\.$/, /^Acá va el (artículo determinado|indeterminado): \*[^*]+\*\.$/,
+  /^Acá va \*[^*]+\* \((masculino|femenino)\), no \*[^*]+\*\.$/, /^Acá va la preposición \*[^*]+\*( \(con el artículo incorporado\))?\.$/,
+  /^Acá va un tiempo compuesto: \*[^*]+\*\.$/, /^Acá va \*[^*]+\* \(auxiliar \+ participio\), no \*[^*]+\*\.$/,
+  /^Los tiempos compuestos llevan auxiliar \+ participio: \*[^*]+\*\.$/, /^Falta \*non\* delante del verbo\.$/,
+  /^\*[^*]+\* no es una palabra italiana\. Acá va \*[^*]+\*( \(«[^»]*»\))?\.$/,
+  /^\*[^*]+\* es otra palabra( \(«[^»]*»\))?\. Acá va \*[^*]+\*\.$/, /^Acá va \*[^*]+\* sin artículo\.$/
+];
+function empty(x) { return EMPTY.some(function (re) { return re.test(String(x || "").trim()); }); }
+var ES_CONTRAST = /español|castellano|«/;
+// «X no es una palabra italiana», «X no existe», «X no es italiano»: the word cited
+var NOT_A_WORD = /^\*([^*]+)\* (no es una palabra italiana|no existe|no es italiano)/;
 // Metalanguage and the week that teaches it (after Devolucion.tidy).
 var META = [
   [/\bparticipio\b/i, 11], [/\bauxiliar\b/i, 11], [/\bgerundio\b/i, 44], [/\bimperativo\b/i, 12],
@@ -295,9 +334,15 @@ CASES.forEach(function (c) {
             fix: (d.fixed || []).filter(function (t) { return t.fix; }).map(function (t) { return t.w; }), all: d.all };
   results.push(r);
   var t = c.m.type;
+  r.level = d.level; r.note = d.note;
   if (t === "variante") { if (d.verdict !== "giusto") flag("variante_rechazada", r); return; }
+  if (/^generada:/.test(t)) { if (d.verdict !== "giusto") flag("valida_rechazada:" + t.slice(9), r); return; }
+  if (/^control:/.test(t)) { if (d.verdict === "giusto") flag("control_aceptado:" + t.slice(8), r); return; }
   if (d.verdict === "giusto") {
-    if (t !== "opcion" && t !== "orden" && !/^error_banco/.test(t)) flag("no_visto:" + t, r);
+    // another valid way of saying it, or the speaker's own gender: right, not unseen
+    if (d.level === "aceptable" || d.level === "poco_natural") flag("aceptada:" + d.level + ":" + t, r);
+    else if (d.note) flag("aceptada_genero:" + t, r);
+    else if (t !== "opcion" && t !== "orden" && !/^error_banco/.test(t)) flag("no_visto:" + t, r);
     return;
   }
   if (far && d.cat !== "parola_spagnola") return;    // the app shows the model, not the diagnosis
@@ -317,10 +362,16 @@ CASES.forEach(function (c) {
   if (leak.length && d.cat !== "comparativo" && d.cat !== "parola_spagnola") flag("pista_revela", r, { leak: leak });
   if (VAGUE.test(d.hint || "") && (GRAMMAR_TYPES[t] || t === "clitico_manca")) flag("pista_vaga", r);
   if (NO_WHY.test(d.explain || "") && GRAMMAR_TYPES[t]) flag("sin_porque", r);
+  // every category, not only the grammar mutations: an empty explanation
+  if (!d.slip && empty(d.explain)) flag("vacia:" + d.cat, r);
+  var nw = NOT_A_WORD.exec(d.explain || "");
+  if (nw && ctx.Freq && ctx.Freq.info(nw[1].toLowerCase())) flag("regla_falsa_probable:no_es_palabra", r, { word: nw[1] });
   // metalanguage before its week
   META.forEach(function (mm) {
     var plainTxt = ((d.hint || "") + " " + (d.explain || "") + " " + (d.label || "")).replace(/\*[^*]*\*/g, " ");
-    if (c.week < mm[1] && mm[0].test(plainTxt)) flag("meta_temprana:" + mm[0].source.replace(/\\b|\\/g, ""), r);
+    // (a term with its gloss, «auxiliar (el verbo que arma el pasado…)», is presented)
+    var glossed = new RegExp(mm[0].source + "s? \\(", "i").test(plainTxt);
+    if (c.week < mm[1] && mm[0].test(plainTxt) && !glossed) flag("meta_temprana:" + mm[0].source.replace(/\\b|\\/g, ""), r);
   });
   // category
   var exp = EXPECT[t];
@@ -368,6 +419,21 @@ if (arg("--matrix")) {
   console.log("casos: " + CASES.length + " (" + results.filter(function (r) { return r.verdict !== "giusto"; }).length + " vistos como error)");
   var groups = {};
   fams.forEach(function (f) { var g = f.replace(/:.*/, ""); groups[g] = (groups[g] || 0) + FAM[f].n; });
+  // usefulness: empty explanations and contrast with Spanish (C3, C5, C11)
+  var shown = results.filter(function (r) { return r.verdict !== "giusto" && !(r.far && r.cat !== "parola_spagnola") && r.explain &&
+    !/^(generada|control|variante)/.test(r.type); });
+  var noSlip = shown.filter(function (r) { return ["refuso", "accento", "soggetto", "vuoto"].indexOf(r.cat) < 0; });
+  var nEmpty = noSlip.filter(function (r) { return empty(r.explain); }).length;
+  console.log("explicaciones vacías (dicen qué, no por qué; sin contar deslices): " + nEmpty + "/" + noSlip.length +
+    " (" + (nEmpty / noSlip.length * 100).toFixed(1) + " %)");
+  var byCat = {};
+  noSlip.forEach(function (r) { var b = byCat[r.cat] = byCat[r.cat] || [0, 0, 0]; b[1]++; if (ES_CONTRAST.test(r.explain)) b[0]++; if (empty(r.explain)) b[2]++; });
+  console.log("por categoría (con contraste con el español · vacías · total):");
+  Object.keys(byCat).sort(function (a, b) { return byCat[b][1] - byCat[a][1]; }).forEach(function (k) {
+    var b = byCat[k];
+    console.log("  " + (k + "                        ").slice(0, 24) + ("    " + Math.round(b[0] / b[1] * 100)).slice(-4) + " %  " +
+      ("    " + Math.round(b[2] / b[1] * 100)).slice(-4) + " %  " + b[1]);
+  });
   console.log("familias: " + fams.length);
   Object.keys(groups).sort(function (a, b) { return groups[b] - groups[a]; }).forEach(function (g) { console.log("  " + ("     " + groups[g]).slice(-6) + "  " + g); });
   if (argv.indexOf("-v") >= 0) fams.forEach(function (f) { console.log("    " + ("     " + FAM[f].n).slice(-6) + "  " + f); });

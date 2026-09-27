@@ -93,17 +93,21 @@
       prove: [["ascolto", "Ascolto", "🎧"], ["lettura", "Lettura", "📖"], ["strutture", "Strutture", "🧩"], ["lessico", "Lessico", "📚"], ["scrittura", "Scrittura", "✍️"]],
       abilities: { ascolto: "Ascolto", lettura: "Lettura", strutture: "Strutture", produzione: "Produzione" },
       rubric: [["adeguatezza", "adeguatezza"], ["coesione", "coesione"], ["correttezza", "correttezza"], ["lessico", "lessico"]],
-      kinds: { argomentativo: "Testo argomentativo", other: "Lettera formale" },
+      kinds: { argomentativo: "Testo argomentativo", formale: "Lettera formale", other: "Lettera formale" },
+      // the genre of the C1 task (tramo_data.js) that reviews each text without a key
+      genres: { argomentativo: "saggio", formale: "lettera_formale" },
+      ricName: "Ricostruzione",
+      optional: [],   // every prova counts, as in the CILS
       provaToast: function (id) { return "Prova di " + id; },
       byAbility: "Por abilità",
-      missionSub: "Cinco pruebas como en el CILS: ascolto, lettura, strutture, lessico, scrittura. Mínimo 55 % en cada una.",
-      lead: "Cinco pruebas, como en el CILS: cada una necesita el <b>55 %</b> y el promedio, el 60 %. Podés hacerlas en el orden que quieras y repetir una.",
+      missionSub: "Cinco pruebas como en el CILS, en tres versiones: ascolto, lettura, strutture, lessico, scrittura. Mínimo 55 % en cada una.",
+      lead: "Cinco pruebas, como en el CILS: cada una necesita el <b>55 %</b> y el promedio, el 60 %. Podés hacerlas en el orden que quieras y repetir una. Hay tres versiones (A, B, C): si no aprobás, el intento siguiente usa otra.",
       sub: {
-        ascolto: "una entrevista larga con dos voces · 8 preguntas y 4 huecos",
-        lettura: "un texto de 600 palabras · títulos por párrafo y vero/falso",
+        ascolto: "un diálogo a dos voces (8 preguntas y 4 huecos) y un monólogo de 4-5 minutos con una tabla de datos",
+        lettura: "un texto de 600 palabras (títulos por párrafo y vero/falso) y la ricostruzione: seis párrafos para ordenar",
         strutture: "20 huecos y transformaciones: preposiciones, congiuntivo, relativos, pasiva…",
         lessico: "12 de formación de palabras y registro",
-        scrittura: "un argumentativo de 200 palabras y una carta formal de 120"
+        scrittura: "un argumentativo de 250 palabras y una carta formal de 180"
       },
       final: "Esame finale", levelC1: "Livello C1", passed: "Esame superato.",
       deliver: "Consegnare", transcript: "La trascrizione",
