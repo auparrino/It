@@ -211,11 +211,32 @@
     learn(Object.keys(src.glossario || {}));
     learn(Object.keys(DATA.lex || {}));
     learn(["base basi basso bassa bassi basse fine alto alta alti alte nativo nativa nativi native peggio meglio podcast budget omone vocione " +
+           "piovve piovvero piovuto " +
            "tutto tutta tutti tutte questo questa questi queste quello quella quelli quelle ogni ognuno qualche qualcuno qualcosa niente nulla " +
            "sempre mai già ancora poi dopo prima adesso ora oggi domani ieri stasera stamattina insieme davvero proprio soltanto solo " +
            "severo severa severi severe gentile gentili felice felici stanco stanca stanchi stanche contento contenta contenti contente"]);
   }
   function known(w) { return !!(LEXI[w] || (U.isItalian && U.isItalian(w))); }
+  /* A word of the frequency lexicon (data/frequenza.json, loaded by the app
+     as Freq): slogan, calo, marchi, corsie exist even if the course does not
+     teach them.  But the web corpora it comes from also count the usual
+     slips (citta, perchè, gia, sopratutto, computers), so a word that is a
+     known word without its accent, with another accent, with one consonant
+     less or more, or with an English -s, is not «known» here. */
+  var DEGEM = null;
+  function freqKnown(w) {
+    var F = root.Freq, info = null;
+    try { info = F && F.loaded && F.loaded() ? F.info(w) : null; } catch (e) { info = null; }
+    if (!info || Math.max(info[0] || 0, info[1] || 0) < 3) return false;
+    if ((typeof ES_EXTRA !== "undefined" && ES_EXTRA[w]) || (typeof ES_STRONG !== "undefined" && ES_STRONG[w]) || (U.spanishWord && U.spanishWord(w))) return false;
+    var acc = { a: "à", e: "èé", i: "ì", o: "ò", u: "ù", "à": "a", "è": "eé", "é": "eè", "ì": "i", "ò": "o", "ù": "u" }[w.slice(-1)] || "";
+    for (var k = 0; k < acc.length; k++) if (known(w.slice(0, -1) + acc[k])) return false;
+    if (/[^aeiou]s$/.test(w) && known(w.slice(0, -1))) return false;
+    if (!DEGEM) { DEGEM = Object.create(null); Object.keys(LEXI).forEach(function (x) { DEGEM[U.degeminate(x)] = x; }); }
+    var twin = DEGEM[U.degeminate(w)];
+    return !(twin && twin !== w);
+  }
+  function exists(w) { return known(w) || freqKnown(w); }
   // An adverb in -mente whose adjective the course knows (velocemente, facilmente).
   function menteOK(w) {
     if (!/mente$/.test(w)) return false;
@@ -568,7 +589,7 @@
       var already = out.some(function (f) { return i >= f.i && i < f.i + f.n; });
       var truncated = /^(aver|esser|far|dir|star|andar|poter|voler|dover|saper|fin|per|cuor|buon|bel|gran|san|qual|tal|signor|dottor|professor|mar|ben|son|vien)$/.test(w);
       // 1. Español metido
-      if (!already && !proper && !truncated && !LEXI[w] && U.spanishWord && (U.spanishWord(w) || ES_EXTRA[w] || (U.looksSpanish(w) && !t.cap))) {
+      if (!already && !proper && !truncated && !LEXI[w] && U.spanishWord && (U.spanishWord(w) || ES_EXTRA[w] || (U.looksSpanish(w) && !t.cap && !freqKnown(w)))) {
         var tr = ES_EXTRA[w] || U.spanishWord(w);
         // a Spanish plural: translate the singular and make it plural (gatos → gatti)
         if (!tr && /s$/.test(w)) {
@@ -585,11 +606,12 @@
         return;
       }
       // 2. Palabra que no existe: tipeo, doble, tilde
-      if (!already && !proper && !truncated && /^[a-zà-ÿ]+'?$/.test(w) && w.length > 2 && !known(w) && !partStrict(w) && !infStrict(w) &&
+      if (!already && !proper && !truncated && /^[a-zà-ÿ]+'?$/.test(w) && w.length > 2 && !exists(w) && !partStrict(w) && !infStrict(w) &&
           !suffixed(w) && !/(ando|endo)$/.test(w) && !menteOK(w)) {
         var grave = w.replace(/ó$/, "ò").replace(/á$/, "à").replace(/í$/, "ì").replace(/ú$/, "ù");
         if (grave !== w && (known(grave) || V(grave).length)) { push(i, 1, "accento", "La tilde final va hacia el otro lado: " + it(grave) + "."); return; }
         if (!lexKeys) lexKeys = Object.keys(LEXI).concat(Object.keys(DATA.lex));
+        DEGEM = null;
         var best = null, bd = 9, lim = w.length > 6 ? 2 : 1;
         for (var k = 0; k < lexKeys.length; k++) {
           var c = lexKeys[k];
@@ -638,6 +660,7 @@
       }
       // 3. Artículo y sustantivo
       if (U.ARTICLES[w] && n && isNoun(n) && !V(n).length && !DATA.adj[n] && !(ni >= 0 && tk[ni].cap) && !AMBI_GENDER.test(n) && !NUMS.test(n) && !COMMON_G.test(n) &&
+          !(/^(uno|una)$/.test(w) && isPart(n) && /^(su|di|da|in|con|per|a|tra|fra)$/.test(ni >= 0 ? (tk[wi(ni, 1)] || {}).w || "" : "")) &&
           !(w === "lo" && U.soundRule(n) === "c" && (DATA.nouns[n] || {}).g === "f") &&
           !(/^(lo|la|l'|li|le|gli)$/.test(w) && (/^(me|te|se|ce|ve|non|mi|ti|ci|vi)$/.test(p) || (/([ae]|ano|ono|ava|eva)$/.test(n) && pi >= 0 && pi === i - 1 && (tk[pi].cap || (isNoun(p) && !V(p).length) || /^(lui|lei|chi|che|io|tu|noi|voi|loro)$/.test(p)))))) {
         var ea = expectedArticle(w, n);
@@ -679,7 +702,8 @@
         if (eaP) push(i, 2, "articolo_possessivo", "Con el posesivo va el artículo: " + it(eaP + (eaP.slice(-1) === "'" ? "" : " ") + w + " " + n) + ".");
       }
       // 8. «a il» → «al»
-      if (/^(a|di|da|in|su)$/.test(w) && /^(il|lo|la|i|gli|le|l')$/.test(n) && ni === i + 1 && !tk[ni].cap) {
+      if (/^(a|di|da|in|su)$/.test(w) && /^(il|lo|la|i|gli|le|l')$/.test(n) && ni === i + 1 && !tk[ni].cap &&
+          !(w === "su" && (V(p).length || /(ando|endo)$/.test(p) || isInf(p)))) {
         var cf = U.contract(w, n);
         var n8 = tk[ni + 1] && tk[ni + 1].w;
         if (cf && w === "a" && n8 && IN_PLACES.test(n8)) push(i, 3, "preposizione", "Con " + it(n8) + " va " + it("in " + n8) + ".");
@@ -721,7 +745,7 @@
         push(pi, 2, "ci_ne", "Con plural va *ci sono*: " + it("ci sono " + n) + ".");
       }
       // 13. «lui e alto» → «è»
-      if (w === "e" && (/^(lui|lei)$/.test(p) || (pi >= 0 && tk[pi].cap && !tk[pi].start)) && ni >= 0 && (DATA.adj[n] || isPart(n)) && !(tk[ni].cap)) {
+      if (w === "e" && (/^(lui|lei)$/.test(p) || (pi >= 0 && tk[pi].cap && !tk[pi].start && !PREPS.test((tk[wi(pi, -1)] || {}).w || ""))) && ni >= 0 && (DATA.adj[n] || isPart(n)) && !(tk[ni].cap)) {
         push(i, 1, "accento", "El verbo lleva tilde: " + it("è") + " (*e* sin tilde es «y»).");
       }
       // 15. Persona: hablás de vos y el verbo no tiene sujeto propio
@@ -806,7 +830,82 @@
     });
     lint2(tk, week, out, isIo);
     out = citedOut(String(text || "").replace(/[’‘`´]/g, "'"), tk, out, /^(parola|parole|termine|termini|verbo|verbi|espressione|aggettivo|sostantivo|forma|voce)$/);
+    out.forEach(function (f) { enrich(f, tk); });
     return out.sort(function (a, b) { return a.i - b.i; });
+  }
+
+  /* ---------------------------------------------- lo que se guarda de cada marca
+
+     Cada hallazgo trae, además de i, n, cat, msg y soft:
+       bad   lo escrito (las palabras marcadas, tal como están en el texto)
+       good  la corrección mínima de esas palabras, si el corrector la sabe
+             (si no, null)
+       why   el porqué de la categoría, en una o dos líneas, con el contraste
+             con el español cuando sirve
+     msg es el mensaje entero que se muestra: el aviso corto y, si era muy
+     corto, el porqué a continuación. */
+  var WHY = {
+    parola_spagnola: "Es una palabra del español que se coló: en italiano se dice de otra manera.",
+    doppie: "En italiano la consonante doble se pronuncia más larga y cambia el significado (nono = noveno, nonno = abuelo).",
+    accento: "En italiano la tilde va solo en la vocal final cuando el acento cae ahí (città, perché, è), y distingue palabras (è = es, e = y).",
+    ortografia: "Algunos sonidos se escriben distinto que en español: ch, gh, gli, gn, z, y la h de ho, hai, ha, hanno.",
+    articolo: "El artículo depende del género, del número y del sonido con que empieza la palabra siguiente: il / lo / l', la / l', i / gli, le.",
+    genere: "El género de muchos sustantivos no coincide con el español, y el artículo y los adjetivos lo siguen.",
+    accordo: "Artículos, adjetivos y participios toman el género y el número del sustantivo, como en español, pero el plural cambia la vocal en vez de sumar -s.",
+    plurale: "El plural italiano cambia la vocal final (libro → libri, casa → case) y no lleva -s; las palabras extranjeras no cambian.",
+    ausiliare: "El movimiento, los cambios de estado, piacere y los reflexivos arman el pasado con essere y el participio concuerda; los demás verbos, con avere. En español todo va con «haber».",
+    a_personale: "En italiano la persona que recibe la acción va sin «a»: conosco Giulia (conozco a Giulia).",
+    articolo_possessivo: "El posesivo va con artículo (la mia casa), salvo con un familiar en singular (mia madre).",
+    possessivo: "Los posesivos cambian con lo poseído: mio, mia, miei, mie (no «mi» como en español).",
+    preposizione_articolata: "a, di, da, in, su se funden con el artículo: al, del, dal, nel, sul (como «al» y «del», pero con todas).",
+    preposizione: "Las preposiciones no se traducen una a una desde el español: se aprenden con su verbo o su expresión (vado a Roma, in Italia, dal medico).",
+    periodo_ipotetico: "En la condición irreal, después de se va el congiuntivo imperfetto (se avessi) y en la otra parte el condicional (verrei), como «si tuviera, vendría».",
+    congiuntivo: "Después de lo que expresa opinión, deseo o duda (penso che, spero che, benché) va el congiuntivo, como el subjuntivo del español.",
+    ci_ne: "c'è va con singular y ci sono con plural (el «hay» del español no cambia; el italiano sí); ci vuole / ci vogliono igual.",
+    persona_verbale: "La terminación del verbo dice quién hace la acción: tiene que coincidir con el sujeto de la frase.",
+    lessico: "Es una palabra italiana, pero acá no dice lo que querés decir.",
+    falso_amico: "Se parece a una palabra del español pero en italiano significa otra cosa.",
+    tempo_modo: "El tiempo del verbo tiene que ir con el momento que cuenta la frase y con el otro verbo.",
+    pronome: "El pronombre cambia según sea directo (lo, la) o indirecto (gli, le), y dos juntos se combinan: me lo, glielo.",
+    participio: "Con essere el participio concuerda con el sujeto; con avere, solo si antes va lo, la, li, le. Y muchos participios son irregulares (fatto, preso, scritto).",
+    ordine: "El orden sigue casi siempre el del español; ojo con los adverbios como già y mai, que van entre el auxiliar y el participio.",
+    refuso: "Parece un error de tipeo."
+  };
+  var META_WORDS = /^(essere|avere|stare|io|tu|lui|lei|noi|voi|loro|se|che|-s|-ito|-etto|-ino|ci sono|c'è|non … mai|dovere|farcela|cui)$/;
+  function goodOf(f, tk) {
+    var msg = String(f.msg || ""), bad = String(f.bad || "").toLowerCase();
+    var segs = [], re = /\*([^*]+)\*/g, m;
+    while ((m = re.exec(msg))) segs.push({ t: m[1], at: m.index });
+    var colon = msg.lastIndexOf(":");
+    var cands = segs.filter(function (x) {
+      var before = msg.slice(Math.max(0, x.at - 5), x.at);
+      return !/…|\//.test(x.t) && x.t.toLowerCase() !== bad && !/(^|[\s(])(no|sin) $/.test(before) && !META_WORDS.test(x.t.toLowerCase());
+    });
+    var after = cands.filter(function (x) { return x.at > colon; });
+    var c = (after.length ? after : cands).slice(-1)[0];
+    if (!c) return null;
+    // only the words that replace the marked ones: drop the ones around them
+    var g = c.t.replace(/\s*\?$/, "").split(/\s+/);
+    var before1 = [], after1 = [];
+    for (var k = f.i - 1; k >= 0 && before1.length < 3; k--) if (tk[k] && tk[k].w) before1.unshift(tk[k].w);
+    for (var k2 = f.i + f.n; k2 < tk.length && after1.length < 3; k2++) if (tk[k2] && tk[k2].w) after1.push(tk[k2].w);
+    while (g.length > 1 && before1.length && g[0].toLowerCase() === before1[before1.length - 1]) { g.shift(); before1.pop(); }
+    while (g.length > 1 && after1.length && g[g.length - 1].toLowerCase() === after1[0]) { g.pop(); after1.shift(); }
+    var out = g.join(" ");
+    return out.toLowerCase() === bad ? null : out;
+  }
+  function enrich(f, tk) {
+    var words = [];
+    for (var k = f.i; k < f.i + (f.n || 1); k++) if (tk[k] && tk[k].w) words.push(tk[k].o);
+    f.bad = words.join(" ").replace(/' /g, "'");
+    // the «a» of the person goes away (conosco a Giulia → conosco Giulia; ai → i)
+    if (f.good === undefined && f.cat === "a_personale") {
+      var ap = U.prepInfo && U.prepInfo(String(f.bad).toLowerCase());
+      f.good = ap && ap.art ? ap.art : /^(a|ad)$/i.test(f.bad) ? "" : undefined;
+    }
+    if (f.good === undefined) f.good = goodOf(f, tk);
+    if (!f.why) f.why = WHY[f.cat] || null;
+    if (f.why && String(f.msg).length < 60 && String(f.msg).indexOf(f.why) < 0) f.msg = f.msg + " " + f.why;
   }
 
   /* ------------------------------------------------ más familias de errores
@@ -1116,8 +1215,11 @@
         push(i, 1, "articolo", "Los países y regiones llevan artículo: " + it(dA + tk[i + 1].o) + ".");
       }
       if (/^(a|al|alla|all')$/.test(w) && IN_PLACES.test(n) && !/^(di|del|della|dello|dei|delle|degli|che|dove)$/.test(n2) && !DATA.adj[n2] && !tk[i + 1].cap &&
+          !(w !== "a" && (n === "ufficio" || isNoun(n2))) &&
           !/^(vicino|vicina|vicini|accanto|davanti|intorno|fronte|fianco|fino|dietro|insieme|rispetto|grazie|oltre|uguale|simile|attaccato|vicinissimo)$/.test(p)) push(i, 2, "preposizione", "Con " + it(n) + " va " + it("in " + n) + ".");
-      if (/^(a|ad)$/.test(w) && /^(un|una|uno|un')$/.test(n) && PLACES.test(n2)) push(i, 1, "preposizione", "Con un lugar indeterminado va " + it("in " + n + " " + n2) + ".");
+      if (/^(a|ad)$/.test(w) && /^(un|una|uno|un')$/.test(n) && PLACES.test(n2) &&
+          !hasLem(p, /^(assomigliare|somigliare|pensare|credere|rinunciare|partecipare|appartenere|sopravvivere|resistere|paragonare)$/) &&
+          !/^(simile|uguale|vicino|davanti|fronte|grazie|rispetto|oltre|fino|insieme|accanto|intorno|dietro|più|meno)$/.test(p)) push(i, 1, "preposizione", "Con un lugar indeterminado va " + it("in " + n + " " + n2) + ".");
       if (/^(al|alla|allo|all')$/.test(w) && DA_PERSONS.test(n)) push(i, 1, "preposizione", "A la casa o consultorio de alguien: " + it((w === "alla" ? "dalla " : w === "all'" ? "dall'" : w === "allo" ? "dallo " : "dal ") + n) + ".");
       if (w === "a" && POSS[n] && FAMILY.test(n2) && hasLem(p, /^(andare|venire|tornare|passare|restare|rimanere|dormire)$/)) push(i, 1, "preposizione", "A la casa de alguien: " + it("da " + n + " " + n2) + ".");
       if (/^(vicino|accanto|intorno|davanti|lontano|lontana|lontani|lontane|fondo)$/.test(w) && /^(del|della|dello|dell'|dei|degli|delle)$/.test(n) && !U.ARTICLES[p] && !POSS[p]) {
@@ -1193,7 +1295,8 @@
       if (/^(lui|lei|quello|quella|quelli|quelle|tutti|persona|persone|gente)$/.test(w) && n === "chi" && finite(n2)) push(i + 1, 1, "pronome", "Relativo después de " + it(w) + ": " + it("che") + ".");
 
       /* --- acentos --- */
-      if (w === "e" && tk[i - 1] && tk[i - 1].w && /^(chi|dove|come|cosa|quando|quanto|quale|perché|cos'|com'|dov'|qual|non|c')$/.test(p) && !/^(chi|dove|come|cosa|quando|quanto|quale|perché|non)$/.test(n) && (tk[i - 1].start || tk[i - 1].clause || /^(non|c')$/.test(p)))
+      if (w === "e" && tk[i - 1] && tk[i - 1].w && /^(chi|dove|come|cosa|quando|quanto|quale|perché|cos'|com'|dov'|qual|non|c')$/.test(p) && !/^(chi|dove|come|cosa|quando|quanto|quale|perché|non)$/.test(n) && (tk[i - 1].start || tk[i - 1].clause || /^(non|c')$/.test(p)) &&
+          !(tk[i - 2] && tk[i - 2].p === "," && !/^(non|c')$/.test(p)) && !/^(quanti|quante|quanto|quanta)$/.test(W(i + 2)))
         push(i, 1, "accento", "El verbo lleva tilde: " + it(p === "c'" ? "c'è" : p + (/'$/.test(p) ? "" : " ") + "è") + ".");
       if (w === "e" && /^(perché|quando|ma|però|se|dove|mentre)$/.test(p) && !/^(chi|dove|come|cosa|quando|quanto|quale|perché|non|poi|anche)$/.test(n) &&
           (/^(lunedì|martedì|mercoledì|giovedì|venerdì|sabato|domenica|vero|tardi|presto|ora|meglio|facile|difficile)$/.test(n) || ((DATA.adj[n] || partStrict(n)) && !isNoun(n) && !V(n).length)))
@@ -1395,7 +1498,8 @@
         if (sb2 >= 0 && tk[sb2].w && DATA.adj[tk[sb2].w] && !isNoun(tk[sb2].w)) sb2--;   // le verdure fresche sono…
         var sw2 = sb2 >= 0 ? tk[sb2].w : "", det2 = sb2 > 0 ? tk[sb2 - 1].w : "";
         if (sw2 && det2 && (U.ARTICLES[det2] || POSS[det2] || DEM.test(det2)) && (tk[sb2 - 1].start || tk[sb2 - 1].clause || (sb2 > 1 && POSS[det2] && U.ARTICLES[W(sb2 - 2)] && (tk[sb2 - 2].start || tk[sb2 - 2].clause))) &&
-            !tk[sb2].cap && !COMMON_G.test(sw2) && !AMBI_GENDER.test(sw2) && !TIME_N.test(sw2)) {
+            !tk[sb2].cap && !COMMON_G.test(sw2) && !AMBI_GENDER.test(sw2) && !TIME_N.test(sw2) &&
+            !/^(metà|parte|maggioranza|maggior|resto|quarto|terzo|gruppo|numero|serie|coppia|decina|ventina|centinaio|migliaio|dozzina|totalità)$/.test(sw2)) {
           var gS = nounGN(sw2);
           if (gS && !V(sw2).length) {
             var ak2 = i + 1;
@@ -1475,14 +1579,15 @@
       if (w === "te" && /^(il|un|del|al|nel|col)$/.test(p)) push(i, 1, "accento", "La bebida lleva tilde: " + it("tè") + ".");
       if (w === "e" && /^(questo|questa|questi|queste|ciò|quello|quella)$/.test(p) && tk[i - 1] && (tk[i - 1].start || tk[i - 1].clause) && (U.ARTICLES[n] || POSS[n] || (DATA.adj[n] && !isNoun(n))))
         push(i, 1, "accento", "El verbo lleva tilde: " + it(p + " è " + n) + ".");
-      if (/^(me|te|se|ce|ve)$/.test(p2) && p === "l'" && AVE_PRES[w] && /^(pres|cavat)[oa]$/.test(n)) push(i - 1, 2, "ausiliare", "Con " + it(p2 + " l'") + " (prendersela, cavarsela) va " + it("essere") + ": " + it(p2 + " l'" + ({ ho: "sono", hai: "sei", ha: "è", abbiamo: "siamo", avete: "siete", hanno: "sono" })[w] + " " + n) + ".");
+      if (/^(me|te|se|ce|ve)$/.test(p2) && p === "l'" && AVE_PRES[w] && /^(pres|cavat)[oa]$/.test(n)) push(i - 1, 2, "ausiliare", "Con " + it(p2 + " l'") + " (prendersela, cavarsela) va " + it("essere") + ": " + it(p2 + " la " + ({ ho: "sono", hai: "sei", ha: "è", abbiamo: "siamo", avete: "siete", hanno: "sono" })[w] + " " + n.replace(/o$/, "a")) + " (el participio concuerda con *la*: me la sono cavata, se l'è presa).");
       if (w === "par" && p === "un") push(i, 1, "parola_spagnola", "«Un par de» es " + it("un paio di") + ".");
       if (w === "como" && !t.cap && (p === "io" || U.ARTICLES[n] || /^(un|una|la|il|le|i|della|del|dei|molto|poco)$/.test(n))) push(i, 1, "parola_spagnola", it("como") + " es español (comer): " + it("mangio") + ".");
 
       /* --- congiuntivo --- */
       if (week >= 24) {
         var trig = null;
-        var imper = /^(pensa|pensate|immagina|immaginate|considera|guarda|senti)$/.test(p) && tk[i - 1] && (tk[i - 1].start || tk[i - 1].clause);
+        var imper = /^(pensa|pensate|immagina|immaginate|considera|guarda|senti)$/.test(p) && tk[i - 1] && (tk[i - 1].start || tk[i - 1].clause ||
+          (/^(e|ma|poi|allora|quindi)$/.test(p2) && tk.slice(Math.max(0, i - 25), i).some(function (z) { return z.w && /(ate|ete|ite)(vi|ci|lo|la|li|le|ne|gli|mi)$/.test(z.w); })));
         if (w === "che" && PRES_TRIG.test(p) && !imper) trig = /^(sarebbe|era|fu|sembrava|sarebbe stato)$/.test(p2) ? (week >= 30 ? "past" : null) : "pres";
         if (w === "che" && PAST_TRIG.test(p)) trig = week >= 30 ? "past" : null;
         if (w === "che" && CONJ_TRIG2[p] && (p !== "meno" || p2 === "a")) trig = "any";

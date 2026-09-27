@@ -8,6 +8,8 @@ var ctx = pack("it");
 var Banca = ctx.Banca;
 Banca.load(pack.data("it", "bank.json"));
 var S = ctx.Scrivi;
+// The frequency lexicon, as in the app (slogan, calo, marchi exist).
+ctx.Freq.load(pack.data("it", "frequenza.json"));
 var Frasi = ctx.Frasi;
 var Letture = ctx.Letture;
 S.learnCourse({ items: pack.data("it", "course.json").items,
@@ -121,6 +123,40 @@ ERR.forEach(function (e) {
     ok(c[0] / c[1] >= FLOOR[k], "corpus, " + k + ": " + c[0] + "/" + c[1] + " (piso " + Math.round(FLOOR[k] * 100) + "%)");
   });
   ok(!falsos.length, "corpus: marca errores en textos corregidos: " + falsos.slice(0, 5).join(" | "));
+
+  // Lo que se guarda de cada marca (C9): lo escrito, la corrección si se
+  // sabe, el porqué; y mensajes que explican (C7: antes el 62 % tenía menos
+  // de 45 caracteres).
+  var all = [];
+  C.forEach(function (o) { S.lint(o.text, o.week).forEach(function (x) { all.push(x); }); });
+  var sinBad = all.filter(function (x) { return typeof x.bad !== "string" || !x.bad; });
+  var sinWhy = all.filter(function (x) { return !x.why; });
+  var conGood = all.filter(function (x) { return typeof x.good === "string"; });
+  ok(!sinBad.length, "marcas sin «bad»: " + sinBad.length);
+  ok(sinWhy.length <= all.length * 0.02, "marcas sin «why»: " + sinWhy.length + "/" + all.length);
+  ok(conGood.length >= all.length * 0.85, "marcas con «good»: " + conGood.length + "/" + all.length);
+  ok(all.every(function (x) { return x.good == null || x.good.toLowerCase() !== x.bad.toLowerCase(); }), "una corrección igual a lo escrito");
+  var cortos = all.filter(function (x) { return x.msg.length < 45; }).length;
+  ok(cortos <= all.length * 0.1, "mensajes de menos de 45 caracteres: " + cortos + "/" + all.length);
+  if (verbose) console.log("  marcas: " + all.length + ", con good " + conGood.length + ", cortas " + cortos);
+  var cav = S.lint("Alla fine me l'ho cavata da solo.", 40).filter(function (x) { return x.cat === "ausiliare"; })[0];
+  ok(cav && cav.good === "la sono cavata" || (cav && /me la sono cavata/.test(cav.msg)), "me l'ho cavata → me la sono cavata: " + (cav && cav.msg));
+  var ap = S.lint("Ho conosciuto a Giulia in vacanza.", 11).filter(function (x) { return x.cat === "a_personale"; })[0];
+  ok(ap && ap.bad === "a" && ap.good === "", "a personal: bad «a», good vacío: " + JSON.stringify(ap));
+
+  // El texto nativo del tramo (lecturas y escuchas de las semanas 27-51):
+  // ninguna marca (antes 18 en 25.489 palabras: piovve, slogan, calo…).
+  var tdir = path.join(__dirname, "tramo"), tramoBad = [];
+  fs.readdirSync(tdir).filter(function (f) { return /^w\d+\.json$/.test(f); }).forEach(function (f) {
+    var j = JSON.parse(fs.readFileSync(path.join(tdir, f), "utf8")), wk = +f.slice(1, 3);
+    var texts = [];
+    if (j.lettura && j.lettura.text) texts.push(j.lettura.text);
+    if (j.ascolto && j.ascolto.turns) texts.push(j.ascolto.turns.map(function (t) { return t[1]; }).join("\n"));
+    texts.forEach(function (t) {
+      S.lint(t, wk).filter(function (x) { return !x.soft; }).forEach(function (x) { tramoBad.push(f + " «" + x.bad + "»: " + x.msg.slice(0, 80)); });
+    });
+  });
+  ok(!tramoBad.length, "tramo: " + tramoBad.length + " marcas en texto nativo: " + tramoBad.slice(0, 5).join(" | "));
   if (verbose) console.log("  corpus: " + hit + "/" + tot + " · " + Object.keys(byCat).map(function (k) { return k + " " + byCat[k][0] + "/" + byCat[k][1]; }).join(", "));
 
   var clean = [];
