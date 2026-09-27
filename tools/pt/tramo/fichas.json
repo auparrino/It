@@ -319,5 +319,537 @@
    "model": [["Foi em março de 2022, na minha primeira semana no Rio. Eu morava em Botafogo e ainda não conhecia ninguém.", "situación, con imperfeito para el fondo"],
              ["Um dia, a vizinha me disse que eu tinha que «dar um pulo» na casa dela. Fiquei parada: pular por quê? Foi então que ela riu e explicou que era só uma visita rápida.", "los hechos en perfeito y el momento clave"],
              ["Hoje percebo que aquela confusão me ensinou mais do que qualquer aula: a língua mora nas expressões, e errar é parte do caminho.", "reflexión final en presente"]]}
+ ],
+ "carta_aberta": [
+  {
+   "h": "Para que serve",
+   "p": "La carta abierta se dirige a una autoridad (un secretario, un intendente, una empresa) pero se publica para que la lea todo el mundo: en un diario, en las redes, en una cartelera. Quien firma suele ser un grupo (vecinos, usuarios, estudiantes), y el propósito es presionar: reclamar, proponer, pedir que se revise una decisión.",
+   "list": [
+    [
+     "Carta aberta ao secretário municipal de Cultura",
+     "el título dice a quién"
+    ],
+    [
+     "Nós, usuários da Biblioteca…",
+     "quién firma: un colectivo"
+    ],
+    [
+     "reivindicar, propor, pedir a revisão",
+     "los propósitos"
+    ]
+   ]
+  },
+  {
+   "h": "Estrutura",
+   "p": "Cinco movimientos. El título ya es parte del texto.",
+   "list": [
+    [
+     "Carta aberta à Secretaria Municipal de Cultura",
+     "título con el destinatario"
+    ],
+    [
+     "Nós, frequentadores da biblioteca, vimos a público…",
+     "quién firma y por qué"
+    ],
+    [
+     "A partir do próximo mês, …",
+     "los hechos, con datos"
+    ],
+    [
+     "A medida atinge justamente…",
+     "los argumentos"
+    ],
+    [
+     "Por isso, reivindicamos que…",
+     "el pedido concreto"
+    ],
+    [
+     "Assinam esta carta…",
+     "las firmas"
+    ]
+   ]
+  },
+  {
+   "h": "Fórmulas de abertura, corpo e fecho",
+   "p": "El «nosotros» colectivo es la marca del género.",
+   "list": [
+    [
+     "Carta aberta a…",
+     "Carta abierta a…"
+    ],
+    [
+     "Nós, moradores de…, vimos a público…",
+     "Nosotros, vecinos de…, nos dirigimos públicamente…"
+    ],
+    [
+     "Tomamos conhecimento, com preocupação, de que…",
+     "Nos enteramos con preocupación de que…"
+    ],
+    [
+     "Não se trata apenas de…, mas de…",
+     "No se trata solo de…, sino de…"
+    ],
+    [
+     "É inaceitável que…",
+     "Es inaceptable que…"
+    ],
+    [
+     "Diante disso, reivindicamos…",
+     "Por eso, reclamamos…"
+    ],
+    [
+     "Propomos, como alternativa, …",
+     "Proponemos, como alternativa…"
+    ],
+    [
+     "Contamos com a sensibilidade de V. Sa.",
+     "Contamos con su sensibilidad"
+    ],
+    [
+     "Assinam esta carta…",
+     "Firman esta carta…"
+    ]
+   ]
+  },
+  {
+   "h": "Tom: firme sem ser agressivo",
+   "p": "Una carta abierta convence al público, no solo a la autoridad. Los datos pesan más que los adjetivos, y la propuesta vale más que la queja.",
+   "list": [
+    [
+     "reivindicamos, solicitamos, propomos",
+     "verbos de acción, en «nós»"
+    ],
+    [
+     "o senhor secretário, V. Sa.",
+     "el trato con la autoridad"
+    ],
+    [
+     "uma vergonha, um absurdo",
+     "suenan a desahogo: mejor un dato"
+    ],
+    [
+     "trezentas pessoas por semana",
+     "un número convence más que «muita gente»"
+    ]
+   ]
+  },
+  {
+   "h": "Modelo anotado",
+   "p": "Una carta abierta de 80 palabras.",
+   "model": [
+    [
+     "Carta aberta à Secretaria Municipal de Cultura",
+     "título con el destinatario"
+    ],
+    [
+     "Nós, frequentadores da Biblioteca Lima Barreto, vimos a público manifestar nossa preocupação com o possível fechamento do prédio.",
+     "quién firma y para qué"
+    ],
+    [
+     "A biblioteca recebe trezentas pessoas por semana, sobretudo estudantes e idosos.",
+     "un dato"
+    ],
+    [
+     "Por isso, reivindicamos que a reforma seja feita por etapas, sem fechar o espaço.",
+     "el pedido concreto"
+    ],
+    [
+     "Assinam esta carta 412 usuários da biblioteca.",
+     "las firmas"
+    ]
+   ]
+  }
+ ],
+ "post_blog": [
+  {
+   "h": "Para que serve",
+   "p": "El post de blog cuenta, opina o explica algo para lectores que te eligieron: el tono es cercano, en primera persona, pero no es un chat. El Celpe-Bras lo pide seguido («escreva um texto para o blog…»). Tiene título, párrafos cortos y termina invitando a comentar.",
+   "list": [
+    [
+     "Você mantém um blog sobre…",
+     "quién escribe"
+    ],
+    [
+     "os leitores do blog",
+     "el destinatario: un público que te sigue"
+    ],
+    [
+     "contar, opinar, recomendar",
+     "los propósitos"
+    ]
+   ]
+  },
+  {
+   "h": "Estrutura",
+   "p": "Cuatro movimientos.",
+   "list": [
+    [
+     "Um título que desperte curiosidade",
+     "título, a veces con pregunta"
+    ],
+    [
+     "Semana passada, eu… / Você já reparou que…?",
+     "apertura personal o pregunta al lector"
+    ],
+    [
+     "Segundo o podcast… / O artigo mostra que…",
+     "desarrollo con las fuentes"
+    ],
+    [
+     "E você, o que acha? Deixe nos comentários!",
+     "cierre que invita a participar"
+    ]
+   ]
+  },
+  {
+   "h": "Fórmulas de abertura, corpo e fecho",
+   "p": "Las del blog brasileño.",
+   "list": [
+    [
+     "Você já parou para pensar que…?",
+     "¿Alguna vez pensaste que…?"
+    ],
+    [
+     "Hoje eu quero falar de…",
+     "Hoy quiero hablar de…"
+    ],
+    [
+     "Neste post, vou contar…",
+     "En este post te cuento…"
+    ],
+    [
+     "Confesso que…",
+     "Confieso que…"
+    ],
+    [
+     "O que me chamou a atenção foi…",
+     "Lo que me llamó la atención fue…"
+    ],
+    [
+     "Pois é: …",
+     "Y sí: …"
+    ],
+    [
+     "Resumindo: …",
+     "Resumiendo: …"
+    ],
+    [
+     "E você, o que acha?",
+     "¿Y vos qué pensás?"
+    ],
+    [
+     "Deixe sua opinião nos comentários!",
+     "¡Dejá tu opinión en los comentarios!"
+    ],
+    [
+     "Compartilhe com quem…",
+     "Compartilo con quien…"
+    ]
+   ]
+  },
+  {
+   "h": "O tom do blog",
+   "p": "Cercano no es descuidado: *você* y *a gente* sí; abreviaturas de chat (vc, tb) no. Las fuentes se citan igual que en un artículo.",
+   "list": [
+    [
+     "você, a gente, eu",
+     "el trato"
+    ],
+    [
+     "segundo o especialista, como contou o podcast",
+     "atribuir"
+    ],
+    [
+     "vc, tb, kkk",
+     "nunca en un post del examen"
+    ],
+    [
+     "Acho que… / Defendo que…",
+     "la opinión, en primera persona"
+    ]
+   ]
+  },
+  {
+   "h": "Modelo anotado",
+   "p": "Un post de 70 palabras.",
+   "model": [
+    [
+     "Meu celular quebrou. E agora?",
+     "título con pregunta"
+    ],
+    [
+     "Semana passada, a tela do meu celular rachou, e descobri que consertar custa quase o preço de um novo.",
+     "apertura personal"
+    ],
+    [
+     "Segundo o técnico que ouvi no podcast Fio Terra, muitos aparelhos já são feitos para não abrir.",
+     "la fuente"
+    ],
+    [
+     "Defendo o direito ao reparo. E você, o que acha? Deixe nos comentários!",
+     "posición y cierre"
+    ]
+   ]
+  }
+ ],
+ "texto_instrucional": [
+  {
+   "h": "Para que serve",
+   "p": "El texto instructivo (guía, lista de consejos, instrucciones) le dice al lector qué hacer y cómo. Aparece en el Celpe-Bras como «dicas para…», «guia para recém-chegados», «orientações». Es claro, ordenado y habla directo al lector.",
+   "list": [
+    [
+     "Guia para recém-chegados",
+     "el título dice para quién"
+    ],
+    [
+     "os novos funcionários, os estudantes estrangeiros",
+     "el destinatario"
+    ],
+    [
+     "orientar, aconselhar, alertar",
+     "los propósitos"
+    ]
+   ]
+  },
+  {
+   "h": "Estrutura",
+   "p": "Una introducción corta, las indicaciones en orden (numeradas o con un verbo al principio) y un cierre.",
+   "list": [
+    [
+     "Apelidos no trabalho: um guia rápido",
+     "título"
+    ],
+    [
+     "Se você acabou de chegar ao Brasil, …",
+     "para quién y para qué"
+    ],
+    [
+     "1. Não se assuste com… 2. Observe… 3. Evite…",
+     "las indicaciones, con imperativo"
+    ],
+    [
+     "Com o tempo, você vai…",
+     "cierre"
+    ]
+   ]
+  },
+  {
+   "h": "Fórmulas e verbos",
+   "p": "El imperativo de *você* (semana 12) es el verbo del género; también *é bom*, *vale a pena*, *convém* + infinitivo.",
+   "list": [
+    [
+     "Evite… / Prefira…",
+     "Evitá… / Preferí…"
+    ],
+    [
+     "Não se assuste com…",
+     "No te asustes con…"
+    ],
+    [
+     "Observe como…",
+     "Fijate cómo…"
+    ],
+    [
+     "Lembre-se de que…",
+     "Acordate de que…"
+    ],
+    [
+     "Vale a pena… / Convém…",
+     "Vale la pena… / Conviene…"
+    ],
+    [
+     "Antes de…, procure…",
+     "Antes de…, tratá de…"
+    ],
+    [
+     "Em caso de dúvida, …",
+     "Ante la duda, …"
+    ],
+    [
+     "Por exemplo: …",
+     "Por ejemplo: …"
+    ],
+    [
+     "Em primeiro lugar, … Depois, … Por fim, …",
+     "el orden"
+    ]
+   ]
+  },
+  {
+   "h": "Claro e útil",
+   "p": "Cada consejo, con una razón o un ejemplo sacado de la fuente. Una idea por indicación.",
+   "list": [
+    [
+     "Observe como os colegas se tratam: se todos usam apelidos, …",
+     "consejo + razón"
+    ],
+    [
+     "Segundo o professor Tiago, …",
+     "la fuente da autoridad"
+    ],
+    [
+     "faça, não faça, evite",
+     "imperativo de você, en todo el texto"
+    ]
+   ]
+  },
+  {
+   "h": "Modelo anotado",
+   "p": "Un guía de 60 palabras.",
+   "model": [
+    [
+     "Apelidos no trabalho: três dicas",
+     "título"
+    ],
+    [
+     "Se você acabou de chegar a uma empresa brasileira, prepare-se: vão mudar o seu nome.",
+     "para quién"
+    ],
+    [
+     "1. Não se assuste: o diminutivo quase sempre é carinho. 2. Observe como os colegas tratam a chefia. 3. Se algo incomodar, diga com leveza.",
+     "las indicaciones"
+    ],
+    [
+     "Com o tempo, você vai sentir falta do seu apelido.",
+     "cierre"
+    ]
+   ]
+  }
+ ],
+ "proposta": [
+  {
+   "h": "Para que serve",
+   "p": "La propuesta (proposta, projeto) se dirige a una institución —la prefeitura, una escuela, una empresa— para que haga algo. Expone un problema con datos, propone medidas concretas y dice qué se espera lograr. Es un género de la vida ciudadana y del trabajo, y aparece en las provas del Celpe-Bras.",
+   "list": [
+    [
+     "A associação de moradores propõe à Secretaria…",
+     "quién propone a quién"
+    ],
+    [
+     "propor, justificar, solicitar",
+     "los propósitos"
+    ],
+    [
+     "o senhor secretário, V. Sa.",
+     "el trato"
+    ]
+   ]
+  },
+  {
+   "h": "Estrutura",
+   "p": "Cinco partes, a menudo con subtítulos.",
+   "list": [
+    [
+     "Proposta: moradia no centro para quem já vive nele",
+     "título"
+    ],
+    [
+     "À Secretaria Municipal de Urbanismo",
+     "destinatario"
+    ],
+    [
+     "O problema: …",
+     "el problema, con datos de las fuentes"
+    ],
+    [
+     "Propomos: 1. … 2. … 3. …",
+     "las medidas, numeradas"
+    ],
+    [
+     "Resultados esperados: …",
+     "lo que se logra"
+    ],
+    [
+     "Atenciosamente, + quem assina",
+     "cierre formal"
+    ]
+   ]
+  },
+  {
+   "h": "Fórmulas",
+   "p": "Muy nominales, como el informe (semana 40).",
+   "list": [
+    [
+     "Vimos apresentar a V. Sa. a seguinte proposta…",
+     "Nos dirigimos a usted para presentar…"
+    ],
+    [
+     "O objetivo desta proposta é…",
+     "El objetivo de esta propuesta es…"
+    ],
+    [
+     "Constata-se que… / Segundo dados de…",
+     "Se constata que… / Según datos de…"
+    ],
+    [
+     "Propomos, em primeiro lugar, …",
+     "Proponemos, en primer lugar…"
+    ],
+    [
+     "A medida permitiria…",
+     "La medida permitiría…"
+    ],
+    [
+     "Recomendamos ainda…",
+     "Recomendamos además…"
+    ],
+    [
+     "Com isso, espera-se…",
+     "Con eso, se espera…"
+    ],
+    [
+     "Colocamo-nos à disposição para…",
+     "Quedamos a disposición para…"
+    ],
+    [
+     "Atenciosamente,",
+     "Atentamente,"
+    ]
+   ]
+  },
+  {
+   "h": "Precisão",
+   "p": "Una propuesta vale por lo concreta: quién hace qué, cuándo y con qué recursos. Sustantivos precisos y verbos en futuro do pretérito para los efectos (*permitiria*, *reduziria*).",
+   "list": [
+    [
+     "a destinação de 30% das unidades",
+     "precisa"
+    ],
+    [
+     "fazer alguma coisa pelo centro",
+     "vaga: evitala"
+    ],
+    [
+     "reduziria, permitiria, garantiria",
+     "efectos esperados"
+    ]
+   ]
+  },
+  {
+   "h": "Modelo anotado",
+   "p": "Una propuesta de 80 palabras.",
+   "model": [
+    [
+     "Proposta: horário noturno na biblioteca",
+     "título"
+    ],
+    [
+     "À Secretaria Municipal de Cultura. Vimos apresentar a seguinte proposta.",
+     "destinatario y propósito"
+    ],
+    [
+     "Constata-se que metade dos usuários frequenta a biblioteca depois das 18h.",
+     "el problema, con un dato"
+    ],
+    [
+     "Propomos: 1. abrir até as 21h três vezes por semana; 2. contratar estagiários por meio de convênios.",
+     "las medidas"
+    ],
+    [
+     "Com isso, espera-se manter o atendimento sem aumentar os gastos. Atenciosamente, Associação de Moradores",
+     "resultados y cierre"
+    ]
+   ]
+  }
  ]
 }

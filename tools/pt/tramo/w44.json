@@ -297,60 +297,15 @@
     ]
   },
   "compito": {
-    "genre": "email_informal",
-    "title": "Luzinha ou Lucião?",
+    "genre": "texto_instrucional",
+    "title": "Apelidos no trabalho: um guia",
     "fonte": "ascolto",
-    "t": "Você é argentino(a) e mora em São Paulo há três anos. Sua prima Lucía acaba de começar a trabalhar numa empresa em Curitiba e lhe escreveu contando que os colegas a chamam de “Lu”, “Luzinha” e até de “Lucião”, e que ela não sabe se deve se sentir ofendida. Após ouvir o episódio do podcast Língua Solta, escreva um e-mail para a sua prima explicando, com base no que diz o professor Tiago, como os brasileiros formam e usam os apelidos, o que significam o diminutivo e o aumentativo nesses casos e em que situações convém ter cuidado. Dê a ela um conselho. Não se esqueça de usar exemplos do episódio. Registro informal. Seu texto deve ter entre 210 e 270 palavras.",
-    "es": "Mail informal a tu prima: explicá con ejemplos del podcast cómo se forman los apodos, qué valor tienen el diminutivo y el aumentativo, y aconsejala. Cuidá el tono cercano (saludo y despedida informales).",
+    "t": "Você é argentino(a), mora em São Paulo há três anos e colabora com o programa de boas-vindas de uma empresa que contrata muitos estrangeiros. Muitos recém-chegados se assustam quando os colegas começam a mudar o nome deles. Após ouvir o episódio do podcast Língua Solta, escreva um guia com dicas para o boletim interno da empresa, explicando, com base no que diz o professor Tiago, como os brasileiros formam e usam os apelidos, o que significam o diminutivo e o aumentativo nesses casos e em que situações convém ter cuidado. Use exemplos do episódio.",
+    "es": "Guía de consejos (texto instructivo) para el boletín interno: cómo se forman los apodos, qué valor tienen el diminutivo y el aumentativo y cuándo tener cuidado, con ejemplos del podcast. Imperativo de você en cada consejo.",
     "min": 210,
     "max": 270,
-    "punti": [
-      [
-        "Explicar cómo se forman los apodos (acortar, duplicar sílabas, sufijos)",
-        [
-          "encurt",
-          "duplic",
-          "sílaba",
-          "sufixo"
-        ]
-      ],
-      [
-        "Interpretar el diminutivo y el aumentativo con ejemplos del podcast",
-        [
-          "paulão",
-          "carinho",
-          "aumentativo",
-          "diminutivo"
-        ]
-      ],
-      [
-        "Tranquilizarla: el apodo suele indicar aceptación, con límites (jefes, clientes)",
-        [
-          "aceit",
-          "respeito",
-          "cliente",
-          "chefe"
-        ]
-      ],
-      [
-        "Un consejo concreto",
-        [
-          "conselho",
-          "se eu fosse você",
-          "minha dica",
-          "sugiro"
-        ]
-      ]
-    ],
-    "model": "Oi, Lu! (Ou Luzinha? Ou Lucião?)\n\nAdorei receber notícias suas! Ri sozinho com a sua mensagem, mas entendo o susto. Por coincidência, ontem ouvi um episódio do podcast Língua Solta que falava exatamente disso, então vou te contar o que aprendi.\n\nO professor entrevistado, o Tiago, explicou que o brasileiro tem mania de mexer nos nomes. Basicamente, a gente encurta (Gabriela vira Gabi, Rafael vira Rafa), duplica uma sílaba, como em Dudu ou Juju, e acrescenta sufixos. O diminutivo, tipo Luzinha, quase sempre é carinho. E o aumentativo nem sempre fala de tamanho: ele contou de um colega baixinho que todo mundo chama de Paulão, por pura ironia carinhosa. Ou seja, o seu “Lucião” provavelmente quer dizer que você já é querida no escritório, e não que alguém te acha grandona.\n\nSegundo ele, receber um apelido no trabalho costuma ser sinal de que você foi aceita no grupo, e não falta de respeito. Só com chefes e com clientes que a gente acabou de conhecer é melhor esperar e ver como a pessoa se apresenta.\n\nMeu conselho? Relaxa e experimenta um pouquinho. Se algum apelido realmente te incomodar, fala com leveza, algo como “prefiro que me chamem de Lucía mesmo”. Ninguém vai se ofender. Aliás, o Tiago contou que muitos estrangeiros sentem falta dos apelidos quando voltam para casa, então aproveita!\n\nMe conta como está a vida em Curitiba. Já sobreviveu ao frio de lá?\n\nUm beijo enorme,\nMartín",
-    "gloss": {
-      "tem mania de mexer nos nomes": "tiene la manía de jugar con los nombres",
-      "encurta": "acorta",
-      "apelido": "sobrenombre (falso amigo: se ve en la semana 45)",
-      "te acha grandona": "te ve grandota (achar = creer, opinar)",
-      "Relaxa": "relajate, tranqui",
-      "com leveza": "con liviandad, sin drama",
-      "sentem falta dos apelidos": "extrañan los apodos (sentir falta de = extrañar)"
-    }
+    "punti": [["Explicar cómo se forman los apodos (acortar, duplicar sílabas, sufijos)", ["encurt", "duplic", "sílaba", "sufixo"]], ["Interpretar el diminutivo y el aumentativo con ejemplos del podcast", ["paulão", "carinho", "aumentativo", "diminutivo"]], ["Cuándo tener cuidado (jefes, clientes)", ["cliente", "chefe"]], ["Consejos con imperativo", ["observe", "desconfie", "prefira", "diga", "conheça"]]],
+    "model": "Apelidos no trabalho: um guia para recém-chegados\n\nSe você acabou de chegar a uma empresa brasileira, prepare-se: em poucas semanas, é bem provável que o seu nome mude. Não se preocupe. Segundo o professor Tiago, entrevistado no podcast Língua Solta, o brasileiro tem mania de mexer nos nomes, e isso quase nunca é falta de respeito. Reunimos aqui algumas dicas para você entender o que está acontecendo.\n\n1. Conheça as regras do jogo. Basicamente, os brasileiros encurtam o nome (Gabriela vira Gabi, Rafael vira Rafa), duplicam uma sílaba, como em Dudu ou Juju, e acrescentam sufixos.\n\n2. Não leve o diminutivo ao pé da letra. Uma Luzinha não é uma pessoa pequena: o diminutivo, na maioria das vezes, expressa carinho.\n\n3. Desconfie do tamanho do aumentativo. O professor contou o caso de um colega baixinho que todo mundo chama de Paulão, por pura ironia carinhosa. Ou seja, um aumentativo também pode ser sinal de afeto.\n\n4. Observe o contexto. Receber um apelido costuma ser sinal de que você foi aceito no grupo. Com chefes e com clientes que você acabou de conhecer, porém, prefira esperar e ver como a pessoa se apresenta.\n\n5. Se algo incomodar, diga com leveza. Algo como «prefiro que me chamem de Lucía mesmo» resolve, e ninguém vai se ofender.\n\nPor fim, aproveite: segundo o Tiago, muitos estrangeiros sentem falta dos apelidos quando voltam para casa.",
+    "gloss": {"tem mania de mexer nos nomes": "tiene la manía de jugar con los nombres", "encurta": "acorta", "apelido": "sobrenombre (falso amigo: se ve en la semana 45)", "com leveza": "con liviandad, sin drama", "sentem falta dos apelidos": "extrañan los apodos (sentir falta de = extrañar)"}
   }
 }

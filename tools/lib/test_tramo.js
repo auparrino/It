@@ -25,7 +25,8 @@ const TARGET = {
 };
 const GENRES = {
   it: ["lettera_formale", "email_informale", "lettera_lettore", "articolo", "recensione", "saggio", "sintesi", "relazione"],
-  pt: ["carta_formal", "email_informal", "carta_leitor", "artigo", "resenha", "texto_opiniao", "resumo", "relato"]
+  pt: ["carta_formal", "email_informal", "carta_leitor", "artigo", "resenha", "texto_opiniao", "resumo", "relato",
+       "carta_aberta", "post_blog", "texto_instrucional", "proposta"]
 };
 // Palabras que cualquier texto trae: un punto de la consigna que se cumple
 // con ellas no mide nada (auditoría v3: «quando», «semana», «hoje»).

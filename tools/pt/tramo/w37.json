@@ -106,23 +106,15 @@
     ]
   },
   "compito": {
-    "genre": "artigo",
+    "genre": "post_blog",
     "title": "Tecnologia a serviço de quem?",
     "fonte": "entrambi",
-    "t": "Você colabora com uma revista de divulgação científica para jovens, que prepara uma edição especial com o tema “Tecnologia a serviço de quem?”. Após ler o artigo sobre os sensores contra deslizamentos no Recife e ouvir o episódio do podcast Fio Terra sobre o conserto de celulares, escreva um artigo de opinião para a revista. No seu texto, compare as duas experiências, usando informações do artigo e do podcast, e defenda uma posição sobre o papel da tecnologia e do poder público. Não se esqueça de dar um título ao artigo. Use registro formal, mas acessível ao público jovem. Seu texto deve ter entre 177 e 237 palavras.",
-    "es": "Artículo con título que compare los dos casos de la semana (sensores en Recife y derecho a reparar) y tome posición. Aprovechá verbos como propor, manter, obter, intervir, prever.",
+    "t": "Você mantém um blog sobre ciência e cotidiano, lido principalmente por jovens. Depois de ler o artigo sobre os sensores contra deslizamentos no Recife e de ouvir o episódio do podcast Fio Terra sobre o conserto de celulares, escreva um post para o blog comparando as duas experiências, usando informações do artigo e do podcast, e posicionando-se sobre o papel da tecnologia e do poder público. Convide os seus leitores a participar da discussão.",
+    "es": "Post de blog con título: tono cercano pero cuidado, las dos fuentes de la semana (sensores en Recife y derecho a reparar), tu posición y un cierre que invite a comentar.",
     "min": 177,
     "max": 237,
-    "punti": [["Usar el caso de los sensores de Recife", ["sensor", "recife", "encosta", "morro"]], ["Usar el caso del podcast sobre reparación", ["conserto", "reparo", "peça", "celular"]], ["Comparar las dos experiencias", ["duas experiências", "dois casos", "duas situações", "caso oposto", "ao contrário"]], ["El papel del poder público", ["poder público", "governo", "prefeitura", "direito ao reparo", "financiando", "lei"]]],
-    "model": "Tecnologia a serviço de quem?\n\nCostumamos associar inovação a aparelhos cada vez mais caros e sofisticados. Mas duas experiências recentes mostram que a pergunta decisiva não é o que a tecnologia consegue fazer, e sim a quem ela serve.\n\nNo Recife, uma equipe de geólogos instalou sensores de baixo custo nas encostas dos morros. Cruzando dados de umidade do solo com a previsão do tempo, os pesquisadores obtiveram alertas com cerca de quarenta minutos de antecedência. O detalhe mais importante, porém, não é técnico: o projeto só funcionou porque manteve diálogo constante com os moradores, que indicaram onde a terra costumava ceder.\n\nO caso oposto aparece no mercado de celulares. Como relatou um técnico de Campinas no podcast Fio Terra, muitos fabricantes projetam aparelhos que não podem ser abertos e bloqueiam peças originais trocadas fora da rede autorizada. Nesse modelo, a inovação serve para prender o consumidor, e não para resolver seus problemas.\n\nComparar as duas situações ajuda a entender que a tecnologia não é neutra. Quando nasce da escuta da comunidade, protege vidas; quando é desenhada para impedir o conserto, gera lixo e dependência. Por isso, defendo que o poder público intervenha nos dois casos: financiando projetos como o do Recife e garantindo o direito ao reparo. Só assim a tecnologia estará, de fato, a serviço de todos.",
-    "gloss": {
-      "encostas dos morros": "las laderas de los cerros",
-      "Cruzando dados": "cruzando datos (oración reducida de gerundio: se ve en la semana 42)",
-      "costumava ceder": "solía hundirse, desmoronarse",
-      "peças originais": "repuestos originales",
-      "rede autorizada": "la red de services oficiales",
-      "conserto": "arreglo, reparación",
-      "lixo": "basura"
-    }
+    "punti": [["Usar el caso de los sensores de Recife", ["sensor", "recife", "encosta", "morro"]], ["Usar el caso del podcast sobre reparación", ["conserto", "reparo", "peça", "celular"]], ["Comparar las dos experiencias", ["duas experiências", "dois casos", "caso oposto", "comparando"]], ["El papel del poder público", ["poder público", "governo", "direito ao reparo", "financiando"]], ["Invitar a los lectores a participar", ["comentários", "o que acha", "deixe"]]],
+    "model": "Tecnologia a serviço de quem?\n\nVocê já parou para pensar em quem ganha com cada aparelho novo que sai por aí? Esta semana, duas histórias me fizeram voltar a essa pergunta, e hoje eu quero dividir com vocês o que aprendi.\n\nA primeira vem do Recife. Uma equipe de geólogos instalou sensores de baixo custo nas encostas dos morros. Cruzando dados de umidade do solo com a previsão do tempo, os pesquisadores obtiveram alertas com cerca de quarenta minutos de antecedência. O detalhe mais bonito, porém, não é técnico: o projeto só funcionou porque manteve diálogo com os moradores, que indicaram onde a terra costumava ceder.\n\nA segunda é o caso oposto. Como contou um técnico de Campinas no podcast Fio Terra, muitos fabricantes projetam celulares que não podem ser abertos e bloqueiam peças trocadas fora da rede autorizada. Nesse modelo, a inovação serve para prender o consumidor, e não para resolver os seus problemas.\n\nComparando as duas experiências, fica claro que a tecnologia não é neutra. Por isso, defendo que o poder público intervenha nos dois casos: financiando projetos como o do Recife e garantindo, por lei, o direito ao reparo.\n\nE você, o que acha? Já tentou consertar um celular e desistiu? Deixe sua opinião nos comentários!",
+    "gloss": {"encostas dos morros": "las laderas de los cerros", "Cruzando dados": "cruzando datos (oración reducida de gerundio: se ve en la semana 42)", "costumava ceder": "solía hundirse, desmoronarse", "rede autorizada": "la red de services oficiales"}
   }
 }

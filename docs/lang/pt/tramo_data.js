@@ -1275,6 +1275,596 @@
      ]
     }
    ]
+  },
+  "carta_aberta": {
+   "name": "Carta aberta",
+   "paragraphs": 4,
+   "title": true,
+   "open": [
+    "\\b(carta aberta|nós, |prezad[oa]s?|senhor[a]? secretári[oa]|excelentíssim[oa])"
+   ],
+   "close": [
+    "\\b(assinam|atenciosamente|cordialmente|contamos com|esperamos|confiamos)"
+   ],
+   "openHint": "Carta aberta a…, Nós, usuários…",
+   "closeHint": "Assinam esta carta…, Atenciosamente",
+   "hint": "Título com o destinatário; quem assina e por quê; os fatos; os argumentos; a reivindicação concreta; fecho com as assinaturas. É dirigida a uma autoridade, mas escrita para o público.",
+   "registro": "formal",
+   "trat": "senhor",
+   "propositoHint": "reivindicamos, solicitamos, propomos",
+   "proposito": [
+    "\\b(reivindic\\w*|solicitamos|pedimos|exigimos|propomos|defendemos|manifestar|vimos a público)"
+   ],
+   "ficha": [
+    {
+     "h": "Para que serve",
+     "p": "La carta abierta se dirige a una autoridad (un secretario, un intendente, una empresa) pero se publica para que la lea todo el mundo: en un diario, en las redes, en una cartelera. Quien firma suele ser un grupo (vecinos, usuarios, estudiantes), y el propósito es presionar: reclamar, proponer, pedir que se revise una decisión.",
+     "list": [
+      [
+       "Carta aberta ao secretário municipal de Cultura",
+       "el título dice a quién"
+      ],
+      [
+       "Nós, usuários da Biblioteca…",
+       "quién firma: un colectivo"
+      ],
+      [
+       "reivindicar, propor, pedir a revisão",
+       "los propósitos"
+      ]
+     ]
+    },
+    {
+     "h": "Estrutura",
+     "p": "Cinco movimientos. El título ya es parte del texto.",
+     "list": [
+      [
+       "Carta aberta à Secretaria Municipal de Cultura",
+       "título con el destinatario"
+      ],
+      [
+       "Nós, frequentadores da biblioteca, vimos a público…",
+       "quién firma y por qué"
+      ],
+      [
+       "A partir do próximo mês, …",
+       "los hechos, con datos"
+      ],
+      [
+       "A medida atinge justamente…",
+       "los argumentos"
+      ],
+      [
+       "Por isso, reivindicamos que…",
+       "el pedido concreto"
+      ],
+      [
+       "Assinam esta carta…",
+       "las firmas"
+      ]
+     ]
+    },
+    {
+     "h": "Fórmulas de abertura, corpo e fecho",
+     "p": "El «nosotros» colectivo es la marca del género.",
+     "list": [
+      [
+       "Carta aberta a…",
+       "Carta abierta a…"
+      ],
+      [
+       "Nós, moradores de…, vimos a público…",
+       "Nosotros, vecinos de…, nos dirigimos públicamente…"
+      ],
+      [
+       "Tomamos conhecimento, com preocupação, de que…",
+       "Nos enteramos con preocupación de que…"
+      ],
+      [
+       "Não se trata apenas de…, mas de…",
+       "No se trata solo de…, sino de…"
+      ],
+      [
+       "É inaceitável que…",
+       "Es inaceptable que…"
+      ],
+      [
+       "Diante disso, reivindicamos…",
+       "Por eso, reclamamos…"
+      ],
+      [
+       "Propomos, como alternativa, …",
+       "Proponemos, como alternativa…"
+      ],
+      [
+       "Contamos com a sensibilidade de V. Sa.",
+       "Contamos con su sensibilidad"
+      ],
+      [
+       "Assinam esta carta…",
+       "Firman esta carta…"
+      ]
+     ]
+    },
+    {
+     "h": "Tom: firme sem ser agressivo",
+     "p": "Una carta abierta convence al público, no solo a la autoridad. Los datos pesan más que los adjetivos, y la propuesta vale más que la queja.",
+     "list": [
+      [
+       "reivindicamos, solicitamos, propomos",
+       "verbos de acción, en «nós»"
+      ],
+      [
+       "o senhor secretário, V. Sa.",
+       "el trato con la autoridad"
+      ],
+      [
+       "uma vergonha, um absurdo",
+       "suenan a desahogo: mejor un dato"
+      ],
+      [
+       "trezentas pessoas por semana",
+       "un número convence más que «muita gente»"
+      ]
+     ]
+    },
+    {
+     "h": "Modelo anotado",
+     "p": "Una carta abierta de 80 palabras.",
+     "model": [
+      [
+       "Carta aberta à Secretaria Municipal de Cultura",
+       "título con el destinatario"
+      ],
+      [
+       "Nós, frequentadores da Biblioteca Lima Barreto, vimos a público manifestar nossa preocupação com o possível fechamento do prédio.",
+       "quién firma y para qué"
+      ],
+      [
+       "A biblioteca recebe trezentas pessoas por semana, sobretudo estudantes e idosos.",
+       "un dato"
+      ],
+      [
+       "Por isso, reivindicamos que a reforma seja feita por etapas, sem fechar o espaço.",
+       "el pedido concreto"
+      ],
+      [
+       "Assinam esta carta 412 usuários da biblioteca.",
+       "las firmas"
+      ]
+     ]
+    }
+   ]
+  },
+  "post_blog": {
+   "name": "Post de blog",
+   "paragraphs": 4,
+   "title": true,
+   "hint": "Título que chame a atenção; abertura pessoal; desenvolvimento com as fontes e a sua posição; fecho que convida o leitor a comentar. Tom próximo, mas cuidado.",
+   "propositoHint": "neste post, deixe nos comentários, defendo",
+   "proposito": [
+    "\\b(neste post|hoje (eu )?(quero|vou)|deixe (seu|sua|nos)|coment[ea]|me cont[ae]|compartilh\\w*|defendo|acredito)"
+   ],
+   "ficha": [
+    {
+     "h": "Para que serve",
+     "p": "El post de blog cuenta, opina o explica algo para lectores que te eligieron: el tono es cercano, en primera persona, pero no es un chat. El Celpe-Bras lo pide seguido («escreva um texto para o blog…»). Tiene título, párrafos cortos y termina invitando a comentar.",
+     "list": [
+      [
+       "Você mantém um blog sobre…",
+       "quién escribe"
+      ],
+      [
+       "os leitores do blog",
+       "el destinatario: un público que te sigue"
+      ],
+      [
+       "contar, opinar, recomendar",
+       "los propósitos"
+      ]
+     ]
+    },
+    {
+     "h": "Estrutura",
+     "p": "Cuatro movimientos.",
+     "list": [
+      [
+       "Um título que desperte curiosidade",
+       "título, a veces con pregunta"
+      ],
+      [
+       "Semana passada, eu… / Você já reparou que…?",
+       "apertura personal o pregunta al lector"
+      ],
+      [
+       "Segundo o podcast… / O artigo mostra que…",
+       "desarrollo con las fuentes"
+      ],
+      [
+       "E você, o que acha? Deixe nos comentários!",
+       "cierre que invita a participar"
+      ]
+     ]
+    },
+    {
+     "h": "Fórmulas de abertura, corpo e fecho",
+     "p": "Las del blog brasileño.",
+     "list": [
+      [
+       "Você já parou para pensar que…?",
+       "¿Alguna vez pensaste que…?"
+      ],
+      [
+       "Hoje eu quero falar de…",
+       "Hoy quiero hablar de…"
+      ],
+      [
+       "Neste post, vou contar…",
+       "En este post te cuento…"
+      ],
+      [
+       "Confesso que…",
+       "Confieso que…"
+      ],
+      [
+       "O que me chamou a atenção foi…",
+       "Lo que me llamó la atención fue…"
+      ],
+      [
+       "Pois é: …",
+       "Y sí: …"
+      ],
+      [
+       "Resumindo: …",
+       "Resumiendo: …"
+      ],
+      [
+       "E você, o que acha?",
+       "¿Y vos qué pensás?"
+      ],
+      [
+       "Deixe sua opinião nos comentários!",
+       "¡Dejá tu opinión en los comentarios!"
+      ],
+      [
+       "Compartilhe com quem…",
+       "Compartilo con quien…"
+      ]
+     ]
+    },
+    {
+     "h": "O tom do blog",
+     "p": "Cercano no es descuidado: *você* y *a gente* sí; abreviaturas de chat (vc, tb) no. Las fuentes se citan igual que en un artículo.",
+     "list": [
+      [
+       "você, a gente, eu",
+       "el trato"
+      ],
+      [
+       "segundo o especialista, como contou o podcast",
+       "atribuir"
+      ],
+      [
+       "vc, tb, kkk",
+       "nunca en un post del examen"
+      ],
+      [
+       "Acho que… / Defendo que…",
+       "la opinión, en primera persona"
+      ]
+     ]
+    },
+    {
+     "h": "Modelo anotado",
+     "p": "Un post de 70 palabras.",
+     "model": [
+      [
+       "Meu celular quebrou. E agora?",
+       "título con pregunta"
+      ],
+      [
+       "Semana passada, a tela do meu celular rachou, e descobri que consertar custa quase o preço de um novo.",
+       "apertura personal"
+      ],
+      [
+       "Segundo o técnico que ouvi no podcast Fio Terra, muitos aparelhos já são feitos para não abrir.",
+       "la fuente"
+      ],
+      [
+       "Defendo o direito ao reparo. E você, o que acha? Deixe nos comentários!",
+       "posición y cierre"
+      ]
+     ]
+    }
+   ]
+  },
+  "texto_instrucional": {
+   "name": "Texto instrucional (guia, dicas)",
+   "paragraphs": 3,
+   "title": true,
+   "hint": "Título; para quem é e para que serve; as dicas em ordem, cada uma com um verbo no imperativo e uma explicação ou exemplo; fecho animador.",
+   "fonteMin": 5,
+   "propositoHint": "dica, evite, prefira, lembre-se",
+   "proposito": [
+    "\\b(dicas?|evite|prefira|procure|lembre-se|não se preocupe|preste atenção|observe|use|experimente)\\b"
+   ],
+   "ficha": [
+    {
+     "h": "Para que serve",
+     "p": "El texto instructivo (guía, lista de consejos, instrucciones) le dice al lector qué hacer y cómo. Aparece en el Celpe-Bras como «dicas para…», «guia para recém-chegados», «orientações». Es claro, ordenado y habla directo al lector.",
+     "list": [
+      [
+       "Guia para recém-chegados",
+       "el título dice para quién"
+      ],
+      [
+       "os novos funcionários, os estudantes estrangeiros",
+       "el destinatario"
+      ],
+      [
+       "orientar, aconselhar, alertar",
+       "los propósitos"
+      ]
+     ]
+    },
+    {
+     "h": "Estrutura",
+     "p": "Una introducción corta, las indicaciones en orden (numeradas o con un verbo al principio) y un cierre.",
+     "list": [
+      [
+       "Apelidos no trabalho: um guia rápido",
+       "título"
+      ],
+      [
+       "Se você acabou de chegar ao Brasil, …",
+       "para quién y para qué"
+      ],
+      [
+       "1. Não se assuste com… 2. Observe… 3. Evite…",
+       "las indicaciones, con imperativo"
+      ],
+      [
+       "Com o tempo, você vai…",
+       "cierre"
+      ]
+     ]
+    },
+    {
+     "h": "Fórmulas e verbos",
+     "p": "El imperativo de *você* (semana 12) es el verbo del género; también *é bom*, *vale a pena*, *convém* + infinitivo.",
+     "list": [
+      [
+       "Evite… / Prefira…",
+       "Evitá… / Preferí…"
+      ],
+      [
+       "Não se assuste com…",
+       "No te asustes con…"
+      ],
+      [
+       "Observe como…",
+       "Fijate cómo…"
+      ],
+      [
+       "Lembre-se de que…",
+       "Acordate de que…"
+      ],
+      [
+       "Vale a pena… / Convém…",
+       "Vale la pena… / Conviene…"
+      ],
+      [
+       "Antes de…, procure…",
+       "Antes de…, tratá de…"
+      ],
+      [
+       "Em caso de dúvida, …",
+       "Ante la duda, …"
+      ],
+      [
+       "Por exemplo: …",
+       "Por ejemplo: …"
+      ],
+      [
+       "Em primeiro lugar, … Depois, … Por fim, …",
+       "el orden"
+      ]
+     ]
+    },
+    {
+     "h": "Claro e útil",
+     "p": "Cada consejo, con una razón o un ejemplo sacado de la fuente. Una idea por indicación.",
+     "list": [
+      [
+       "Observe como os colegas se tratam: se todos usam apelidos, …",
+       "consejo + razón"
+      ],
+      [
+       "Segundo o professor Tiago, …",
+       "la fuente da autoridad"
+      ],
+      [
+       "faça, não faça, evite",
+       "imperativo de você, en todo el texto"
+      ]
+     ]
+    },
+    {
+     "h": "Modelo anotado",
+     "p": "Un guía de 60 palabras.",
+     "model": [
+      [
+       "Apelidos no trabalho: três dicas",
+       "título"
+      ],
+      [
+       "Se você acabou de chegar a uma empresa brasileira, prepare-se: vão mudar o seu nome.",
+       "para quién"
+      ],
+      [
+       "1. Não se assuste: o diminutivo quase sempre é carinho. 2. Observe como os colegas tratam a chefia. 3. Se algo incomodar, diga com leveza.",
+       "las indicaciones"
+      ],
+      [
+       "Com o tempo, você vai sentir falta do seu apelido.",
+       "cierre"
+      ]
+     ]
+    }
+   ]
+  },
+  "proposta": {
+   "name": "Proposta",
+   "paragraphs": 4,
+   "title": true,
+   "close": [
+    "\\b(atenciosamente|colocamo-nos|contamos com|ficamos à disposição|resultados esperados)"
+   ],
+   "closeHint": "Resultados esperados…, Atenciosamente",
+   "hint": "Título; a quem se dirige e quem propõe; o problema, com dados; as propostas, numeradas; os resultados esperados e o fecho formal.",
+   "registro": "formal",
+   "trat": "senhor",
+   "fonteMin": 8,
+   "propositoHint": "propomos, recomendamos, solicitamos",
+   "proposito": [
+    "\\b(propomos|propõe-se|a proposta|recomendamos|solicitamos|sugerimos)"
+   ],
+   "ficha": [
+    {
+     "h": "Para que serve",
+     "p": "La propuesta (proposta, projeto) se dirige a una institución —la prefeitura, una escuela, una empresa— para que haga algo. Expone un problema con datos, propone medidas concretas y dice qué se espera lograr. Es un género de la vida ciudadana y del trabajo, y aparece en las provas del Celpe-Bras.",
+     "list": [
+      [
+       "A associação de moradores propõe à Secretaria…",
+       "quién propone a quién"
+      ],
+      [
+       "propor, justificar, solicitar",
+       "los propósitos"
+      ],
+      [
+       "o senhor secretário, V. Sa.",
+       "el trato"
+      ]
+     ]
+    },
+    {
+     "h": "Estrutura",
+     "p": "Cinco partes, a menudo con subtítulos.",
+     "list": [
+      [
+       "Proposta: moradia no centro para quem já vive nele",
+       "título"
+      ],
+      [
+       "À Secretaria Municipal de Urbanismo",
+       "destinatario"
+      ],
+      [
+       "O problema: …",
+       "el problema, con datos de las fuentes"
+      ],
+      [
+       "Propomos: 1. … 2. … 3. …",
+       "las medidas, numeradas"
+      ],
+      [
+       "Resultados esperados: …",
+       "lo que se logra"
+      ],
+      [
+       "Atenciosamente, + quem assina",
+       "cierre formal"
+      ]
+     ]
+    },
+    {
+     "h": "Fórmulas",
+     "p": "Muy nominales, como el informe (semana 40).",
+     "list": [
+      [
+       "Vimos apresentar a V. Sa. a seguinte proposta…",
+       "Nos dirigimos a usted para presentar…"
+      ],
+      [
+       "O objetivo desta proposta é…",
+       "El objetivo de esta propuesta es…"
+      ],
+      [
+       "Constata-se que… / Segundo dados de…",
+       "Se constata que… / Según datos de…"
+      ],
+      [
+       "Propomos, em primeiro lugar, …",
+       "Proponemos, en primer lugar…"
+      ],
+      [
+       "A medida permitiria…",
+       "La medida permitiría…"
+      ],
+      [
+       "Recomendamos ainda…",
+       "Recomendamos además…"
+      ],
+      [
+       "Com isso, espera-se…",
+       "Con eso, se espera…"
+      ],
+      [
+       "Colocamo-nos à disposição para…",
+       "Quedamos a disposición para…"
+      ],
+      [
+       "Atenciosamente,",
+       "Atentamente,"
+      ]
+     ]
+    },
+    {
+     "h": "Precisão",
+     "p": "Una propuesta vale por lo concreta: quién hace qué, cuándo y con qué recursos. Sustantivos precisos y verbos en futuro do pretérito para los efectos (*permitiria*, *reduziria*).",
+     "list": [
+      [
+       "a destinação de 30% das unidades",
+       "precisa"
+      ],
+      [
+       "fazer alguma coisa pelo centro",
+       "vaga: evitala"
+      ],
+      [
+       "reduziria, permitiria, garantiria",
+       "efectos esperados"
+      ]
+     ]
+    },
+    {
+     "h": "Modelo anotado",
+     "p": "Una propuesta de 80 palabras.",
+     "model": [
+      [
+       "Proposta: horário noturno na biblioteca",
+       "título"
+      ],
+      [
+       "À Secretaria Municipal de Cultura. Vimos apresentar a seguinte proposta.",
+       "destinatario y propósito"
+      ],
+      [
+       "Constata-se que metade dos usuários frequenta a biblioteca depois das 18h.",
+       "el problema, con un dato"
+      ],
+      [
+       "Propomos: 1. abrir até as 21h três vezes por semana; 2. contratar estagiários por meio de convênios.",
+       "las medidas"
+      ],
+      [
+       "Com isso, espera-se manter o atendimento sem aumentar os gastos. Atenciosamente, Associação de Moradores",
+       "resultados y cierre"
+      ]
+     ]
+    }
+   ]
   }
  },
  "CONNETTIVI": [
@@ -4538,11 +5128,11 @@
     ]
    },
    "compito": {
-    "genre": "carta_formal",
-    "title": "Carta à Secretaria de Cultura",
+    "genre": "carta_aberta",
+    "title": "Carta aberta pela biblioteca à noite",
     "fonte": "ascolto",
-    "t": "Você frequenta a Biblioteca Pública Municipal à noite, depois do trabalho. Após ouvir o boletim de serviço da rádio, escreva uma carta formal à Secretaria Municipal de Cultura, dentro do prazo da consulta pública, manifestando-se sobre a redução do horário da biblioteca. Na carta, retome as informações do boletim (horário atual, novo horário e justificativa apresentada), explique como a mudança afeta você e outros usuários e proponha pelo menos uma alternativa. Não se esqueça de incluir local e data, destinatário, assunto, saudação e fecho adequados. Use registro formal e cuide do uso da crase nas indicações de horário. Seu texto deve ter entre 171 e 231 palavras.",
-    "es": "Carta formal de reclamo con propuesta: datos del audio (horarios y motivo), cómo te afecta y una alternativa. Ojo con la crase: “das 10h às 17h”, pero “de terça a sábado”.",
+    "t": "Você frequenta a Biblioteca Pública Municipal à noite, depois do trabalho, e faz parte de um grupo de usuários que se organizou depois do boletim de serviço da rádio. Em nome do grupo, escreva uma carta aberta à Secretaria Municipal de Cultura, que será publicada no jornal da cidade durante a consulta pública, manifestando-se sobre a redução do horário da biblioteca. Retome as informações do boletim (horário atual, novo horário e justificativa), mostre quem é afetado e apresente pelo menos uma alternativa. Cuide do uso da crase nas indicações de horário.",
+    "es": "Carta abierta (un colectivo, a una autoridad, para el público): datos del audio (horarios y motivo), a quiénes afecta y una alternativa. Ojo con la crase: «das 10h às 17h», pero «de terça a sábado».",
     "min": 171,
     "max": 231,
     "punti": [
@@ -4550,8 +5140,7 @@
       "Retomar los horarios anunciados",
       [
        "17h",
-       "17 h",
-       "às 17",
+       "21h",
        "horário"
       ]
      ],
@@ -4564,38 +5153,36 @@
       ]
      ],
      [
-      "Explicar cómo afecta a los usuarios",
+      "Mostrar quién es afectado",
       [
        "noite",
        "trabalh",
+       "concursos",
        "estud"
       ]
      ],
      [
-      "La consulta pública y su plazo",
+      "La consulta pública",
       [
        "consulta pública",
-       "consulta",
        "prazo"
       ]
      ],
      [
       "Proponer una alternativa",
       [
-       "propon",
-       "sugir",
-       "alternativ"
+       "propomos",
+       "alternativa",
+       "parcerias"
       ]
      ]
     ],
-    "model": "Belo Horizonte, 12 de setembro de 2026.\n\nÀ Secretaria Municipal de Cultura\nAssunto: redução do horário da Biblioteca Pública Municipal\n\nPrezados senhores,\n\nDirijo-me a esta Secretaria para manifestar, dentro do prazo da consulta pública, minha preocupação com a mudança anunciada pela Biblioteca Pública Municipal. Segundo informações divulgadas pela rádio, a partir do próximo mês a biblioteca funcionará apenas de terça a sábado, das 10h às 17h, e não mais de segunda a sábado, das 8h às 21h.\n\nCompreendo que a decisão se deve à falta de funcionários e à necessidade de reduzir gastos com energia. No entanto, a medida atinge justamente quem mais depende do espaço. Trabalho das 8h às 18h e só consigo estudar à noite; como eu, dezenas de estudantes que se preparam para concursos perderão o único ambiente silencioso a que têm acesso.\n\nDiante disso, proponho uma alternativa: manter a abertura noturna ao menos três vezes por semana, fechando a biblioteca pela manhã, quando o movimento é menor. Outra possibilidade seria firmar parcerias com universidades para a contratação de estagiários.\n\nCerto de que a Secretaria levará em conta a opinião dos usuários, coloco-me à disposição para colaborar.\n\nAtenciosamente,\n\nRafael Nunes Teixeira",
+    "model": "Carta aberta à Secretaria Municipal de Cultura\n\nNós, usuários da Biblioteca Pública Municipal que estudam depois do trabalho, vimos a público manifestar, dentro do prazo da consulta pública, nossa preocupação com a mudança anunciada. Segundo o boletim divulgado pela rádio, a partir do próximo mês a biblioteca funcionará apenas de terça a sábado, das 10h às 17h, e não mais de segunda a sábado, das 8h às 21h.\n\nCompreendemos que a decisão se deve à falta de funcionários e à necessidade de reduzir gastos com energia. No entanto, a medida atinge justamente quem mais depende do espaço. A maioria de nós trabalha das 8h às 18h e só consegue estudar à noite; além disso, dezenas de estudantes que se preparam para concursos perderão o único ambiente silencioso a que têm acesso.\n\nDiante disso, propomos uma alternativa: manter a abertura noturna ao menos três vezes por semana, fechando a biblioteca pela manhã, quando o movimento é menor. Outra possibilidade seria firmar parcerias com universidades para a contratação de estagiários.\n\nContamos com a sensibilidade desta Secretaria e reivindicamos que a opinião dos usuários seja levada em conta antes da decisão final.\n\nAssinam esta carta 146 usuários da Biblioteca Pública Municipal.",
     "gloss": {
      "atinge justamente": "afecta justamente",
      "concursos": "concursos públicos: exámenes para entrar a un empleo del Estado",
      "firmar parcerias": "establecer convenios (firmar = establecer, cerrar)",
-     "estagiários": "pasantes",
-     "Certo de que": "seguro de que",
-     "coloco-me à disposição": "quedo a disposición (fórmula de cierre: se ve en la semana 43)"
+     "estagiários": "pasantes"
     }
    }
   },
@@ -4894,11 +5481,11 @@
     ]
    },
    "compito": {
-    "genre": "artigo",
+    "genre": "post_blog",
     "title": "Tecnologia a serviço de quem?",
     "fonte": "entrambi",
-    "t": "Você colabora com uma revista de divulgação científica para jovens, que prepara uma edição especial com o tema “Tecnologia a serviço de quem?”. Após ler o artigo sobre os sensores contra deslizamentos no Recife e ouvir o episódio do podcast Fio Terra sobre o conserto de celulares, escreva um artigo de opinião para a revista. No seu texto, compare as duas experiências, usando informações do artigo e do podcast, e defenda uma posição sobre o papel da tecnologia e do poder público. Não se esqueça de dar um título ao artigo. Use registro formal, mas acessível ao público jovem. Seu texto deve ter entre 177 e 237 palavras.",
-    "es": "Artículo con título que compare los dos casos de la semana (sensores en Recife y derecho a reparar) y tome posición. Aprovechá verbos como propor, manter, obter, intervir, prever.",
+    "t": "Você mantém um blog sobre ciência e cotidiano, lido principalmente por jovens. Depois de ler o artigo sobre os sensores contra deslizamentos no Recife e de ouvir o episódio do podcast Fio Terra sobre o conserto de celulares, escreva um post para o blog comparando as duas experiências, usando informações do artigo e do podcast, e posicionando-se sobre o papel da tecnologia e do poder público. Convide os seus leitores a participar da discussão.",
+    "es": "Post de blog con título: tono cercano pero cuidado, las dos fuentes de la semana (sensores en Recife y derecho a reparar), tu posición y un cierre que invite a comentar.",
     "min": 177,
     "max": 237,
     "punti": [
@@ -4925,9 +5512,8 @@
       [
        "duas experiências",
        "dois casos",
-       "duas situações",
        "caso oposto",
-       "ao contrário"
+       "comparando"
       ]
      ],
      [
@@ -4935,22 +5521,25 @@
       [
        "poder público",
        "governo",
-       "prefeitura",
        "direito ao reparo",
-       "financiando",
-       "lei"
+       "financiando"
+      ]
+     ],
+     [
+      "Invitar a los lectores a participar",
+      [
+       "comentários",
+       "o que acha",
+       "deixe"
       ]
      ]
     ],
-    "model": "Tecnologia a serviço de quem?\n\nCostumamos associar inovação a aparelhos cada vez mais caros e sofisticados. Mas duas experiências recentes mostram que a pergunta decisiva não é o que a tecnologia consegue fazer, e sim a quem ela serve.\n\nNo Recife, uma equipe de geólogos instalou sensores de baixo custo nas encostas dos morros. Cruzando dados de umidade do solo com a previsão do tempo, os pesquisadores obtiveram alertas com cerca de quarenta minutos de antecedência. O detalhe mais importante, porém, não é técnico: o projeto só funcionou porque manteve diálogo constante com os moradores, que indicaram onde a terra costumava ceder.\n\nO caso oposto aparece no mercado de celulares. Como relatou um técnico de Campinas no podcast Fio Terra, muitos fabricantes projetam aparelhos que não podem ser abertos e bloqueiam peças originais trocadas fora da rede autorizada. Nesse modelo, a inovação serve para prender o consumidor, e não para resolver seus problemas.\n\nComparar as duas situações ajuda a entender que a tecnologia não é neutra. Quando nasce da escuta da comunidade, protege vidas; quando é desenhada para impedir o conserto, gera lixo e dependência. Por isso, defendo que o poder público intervenha nos dois casos: financiando projetos como o do Recife e garantindo o direito ao reparo. Só assim a tecnologia estará, de fato, a serviço de todos.",
+    "model": "Tecnologia a serviço de quem?\n\nVocê já parou para pensar em quem ganha com cada aparelho novo que sai por aí? Esta semana, duas histórias me fizeram voltar a essa pergunta, e hoje eu quero dividir com vocês o que aprendi.\n\nA primeira vem do Recife. Uma equipe de geólogos instalou sensores de baixo custo nas encostas dos morros. Cruzando dados de umidade do solo com a previsão do tempo, os pesquisadores obtiveram alertas com cerca de quarenta minutos de antecedência. O detalhe mais bonito, porém, não é técnico: o projeto só funcionou porque manteve diálogo com os moradores, que indicaram onde a terra costumava ceder.\n\nA segunda é o caso oposto. Como contou um técnico de Campinas no podcast Fio Terra, muitos fabricantes projetam celulares que não podem ser abertos e bloqueiam peças trocadas fora da rede autorizada. Nesse modelo, a inovação serve para prender o consumidor, e não para resolver os seus problemas.\n\nComparando as duas experiências, fica claro que a tecnologia não é neutra. Por isso, defendo que o poder público intervenha nos dois casos: financiando projetos como o do Recife e garantindo, por lei, o direito ao reparo.\n\nE você, o que acha? Já tentou consertar um celular e desistiu? Deixe sua opinião nos comentários!",
     "gloss": {
      "encostas dos morros": "las laderas de los cerros",
      "Cruzando dados": "cruzando datos (oración reducida de gerundio: se ve en la semana 42)",
      "costumava ceder": "solía hundirse, desmoronarse",
-     "peças originais": "repuestos originales",
-     "rede autorizada": "la red de services oficiales",
-     "conserto": "arreglo, reparación",
-     "lixo": "basura"
+     "rede autorizada": "la red de services oficiales"
     }
    }
   },
@@ -7004,11 +7593,11 @@
     ]
    },
    "compito": {
-    "genre": "email_informal",
-    "title": "Luzinha ou Lucião?",
+    "genre": "texto_instrucional",
+    "title": "Apelidos no trabalho: um guia",
     "fonte": "ascolto",
-    "t": "Você é argentino(a) e mora em São Paulo há três anos. Sua prima Lucía acaba de começar a trabalhar numa empresa em Curitiba e lhe escreveu contando que os colegas a chamam de “Lu”, “Luzinha” e até de “Lucião”, e que ela não sabe se deve se sentir ofendida. Após ouvir o episódio do podcast Língua Solta, escreva um e-mail para a sua prima explicando, com base no que diz o professor Tiago, como os brasileiros formam e usam os apelidos, o que significam o diminutivo e o aumentativo nesses casos e em que situações convém ter cuidado. Dê a ela um conselho. Não se esqueça de usar exemplos do episódio. Registro informal. Seu texto deve ter entre 210 e 270 palavras.",
-    "es": "Mail informal a tu prima: explicá con ejemplos del podcast cómo se forman los apodos, qué valor tienen el diminutivo y el aumentativo, y aconsejala. Cuidá el tono cercano (saludo y despedida informales).",
+    "t": "Você é argentino(a), mora em São Paulo há três anos e colabora com o programa de boas-vindas de uma empresa que contrata muitos estrangeiros. Muitos recém-chegados se assustam quando os colegas começam a mudar o nome deles. Após ouvir o episódio do podcast Língua Solta, escreva um guia com dicas para o boletim interno da empresa, explicando, com base no que diz o professor Tiago, como os brasileiros formam e usam os apelidos, o que significam o diminutivo e o aumentativo nesses casos e em que situações convém ter cuidado. Use exemplos do episódio.",
+    "es": "Guía de consejos (texto instructivo) para el boletín interno: cómo se forman los apodos, qué valor tienen el diminutivo y el aumentativo y cuándo tener cuidado, con ejemplos del podcast. Imperativo de você en cada consejo.",
     "min": 210,
     "max": 270,
     "punti": [
@@ -7031,31 +7620,28 @@
       ]
      ],
      [
-      "Tranquilizarla: el apodo suele indicar aceptación, con límites (jefes, clientes)",
+      "Cuándo tener cuidado (jefes, clientes)",
       [
-       "aceit",
-       "respeito",
        "cliente",
        "chefe"
       ]
      ],
      [
-      "Un consejo concreto",
+      "Consejos con imperativo",
       [
-       "conselho",
-       "se eu fosse você",
-       "minha dica",
-       "sugiro"
+       "observe",
+       "desconfie",
+       "prefira",
+       "diga",
+       "conheça"
       ]
      ]
     ],
-    "model": "Oi, Lu! (Ou Luzinha? Ou Lucião?)\n\nAdorei receber notícias suas! Ri sozinho com a sua mensagem, mas entendo o susto. Por coincidência, ontem ouvi um episódio do podcast Língua Solta que falava exatamente disso, então vou te contar o que aprendi.\n\nO professor entrevistado, o Tiago, explicou que o brasileiro tem mania de mexer nos nomes. Basicamente, a gente encurta (Gabriela vira Gabi, Rafael vira Rafa), duplica uma sílaba, como em Dudu ou Juju, e acrescenta sufixos. O diminutivo, tipo Luzinha, quase sempre é carinho. E o aumentativo nem sempre fala de tamanho: ele contou de um colega baixinho que todo mundo chama de Paulão, por pura ironia carinhosa. Ou seja, o seu “Lucião” provavelmente quer dizer que você já é querida no escritório, e não que alguém te acha grandona.\n\nSegundo ele, receber um apelido no trabalho costuma ser sinal de que você foi aceita no grupo, e não falta de respeito. Só com chefes e com clientes que a gente acabou de conhecer é melhor esperar e ver como a pessoa se apresenta.\n\nMeu conselho? Relaxa e experimenta um pouquinho. Se algum apelido realmente te incomodar, fala com leveza, algo como “prefiro que me chamem de Lucía mesmo”. Ninguém vai se ofender. Aliás, o Tiago contou que muitos estrangeiros sentem falta dos apelidos quando voltam para casa, então aproveita!\n\nMe conta como está a vida em Curitiba. Já sobreviveu ao frio de lá?\n\nUm beijo enorme,\nMartín",
+    "model": "Apelidos no trabalho: um guia para recém-chegados\n\nSe você acabou de chegar a uma empresa brasileira, prepare-se: em poucas semanas, é bem provável que o seu nome mude. Não se preocupe. Segundo o professor Tiago, entrevistado no podcast Língua Solta, o brasileiro tem mania de mexer nos nomes, e isso quase nunca é falta de respeito. Reunimos aqui algumas dicas para você entender o que está acontecendo.\n\n1. Conheça as regras do jogo. Basicamente, os brasileiros encurtam o nome (Gabriela vira Gabi, Rafael vira Rafa), duplicam uma sílaba, como em Dudu ou Juju, e acrescentam sufixos.\n\n2. Não leve o diminutivo ao pé da letra. Uma Luzinha não é uma pessoa pequena: o diminutivo, na maioria das vezes, expressa carinho.\n\n3. Desconfie do tamanho do aumentativo. O professor contou o caso de um colega baixinho que todo mundo chama de Paulão, por pura ironia carinhosa. Ou seja, um aumentativo também pode ser sinal de afeto.\n\n4. Observe o contexto. Receber um apelido costuma ser sinal de que você foi aceito no grupo. Com chefes e com clientes que você acabou de conhecer, porém, prefira esperar e ver como a pessoa se apresenta.\n\n5. Se algo incomodar, diga com leveza. Algo como «prefiro que me chamem de Lucía mesmo» resolve, e ninguém vai se ofender.\n\nPor fim, aproveite: segundo o Tiago, muitos estrangeiros sentem falta dos apelidos quando voltam para casa.",
     "gloss": {
      "tem mania de mexer nos nomes": "tiene la manía de jugar con los nombres",
      "encurta": "acorta",
      "apelido": "sobrenombre (falso amigo: se ve en la semana 45)",
-     "te acha grandona": "te ve grandota (achar = creer, opinar)",
-     "Relaxa": "relajate, tranqui",
      "com leveza": "con liviandad, sin drama",
      "sentem falta dos apelidos": "extrañan los apodos (sentir falta de = extrañar)"
     }
@@ -9553,11 +10139,11 @@
     ]
    },
    "compito": {
-    "genre": "artigo",
-    "title": "Um centro para quem?",
+    "genre": "proposta",
+    "title": "Proposta: um centro para quem já vive nele",
     "fonte": "entrambi",
-    "t": "Você mora no centro de uma capital brasileira e colabora com o jornal da associação de moradores do bairro. Após ler a reportagem “O centro vai voltar a ter moradores?” e ouvir a palestra do urbanista Henrique Tavares, escreva um artigo para o jornal do bairro discutindo se a reforma de prédios vazios (o retrofit) pode trazer vida nova ao centro sem expulsar quem já vive lá. No seu artigo, apresente o problema, use informações e argumentos dos dois textos (citando pelo menos uma pessoa de cada um), discuta os riscos e apresente propostas concretas. Não se esqueça de dar um título ao artigo.",
-    "es": "Artículo de opinión-informativo para el diario del barrio que integre la lectura y la charla: problema, argumentos con fuentes de ambos, riesgos (expulsión) y propuestas. Título y registro formal; es la tarea tipo examen.",
+    "t": "Você mora no centro de uma capital brasileira e faz parte da associação de moradores do bairro. A Secretaria Municipal de Urbanismo abriu uma chamada para receber propostas da sociedade civil sobre a reforma de prédios vazios (o retrofit). Após ler a reportagem «O centro vai voltar a ter moradores?» e ouvir a palestra do urbanista Henrique Tavares, escreva, em nome da associação, uma proposta à Secretaria para que o retrofit traga vida nova ao centro sem expulsar quem já vive lá. Apresente o problema, use informações e argumentos dos dois textos (citando pelo menos uma pessoa de cada um), exponha as medidas propostas e os resultados esperados.",
+    "es": "Propuesta a una institución, en nombre de la asociación: el problema con datos, las fuentes de la lectura y de la charla, medidas numeradas y resultados esperados. Registro formal y trato de V. Sa. / o senhor.",
     "min": 250,
     "max": 310,
     "punti": [
@@ -9566,7 +10152,8 @@
       [
        "vazio",
        "esvazi",
-       "abandon"
+       "apagadas",
+       "fechadas"
       ]
      ],
      [
@@ -9587,35 +10174,31 @@
       ]
      ],
      [
-      "Discutir el riesgo de expulsión de los habitantes actuales",
+      "Discutir el riesgo de expulsión",
       [
        "substituição",
        "expuls",
-       "gentrifica",
        "exclusivo"
       ]
      ],
      [
-      "Proponer medidas concretas",
+      "Medidas numeradas y resultados esperados",
       [
        "habitação social",
        "aluguel social",
-       "fachada",
-       "proponho",
-       "defendo"
+       "espera-se",
+       "propomos"
       ]
      ]
     ],
-    "model": "Um centro para quem?\n\nQuem passa pela nossa região depois das sete da noite conhece a cena: lojas fechadas, faixas de “aluga-se” desbotadas e prédios inteiros com as janelas apagadas. Não por acaso, a transformação desses edifícios em moradia, o chamado retrofit, virou tema de reportagens, palestras e conversas de calçada. A pergunta que precisamos fazer, porém, não é apenas se o centro vai voltar a ter moradores, mas quem serão esses moradores.\n\nOs argumentos a favor são fortes. Como lembra a arquiteta Camila Rocha, ouvida numa reportagem recente, se os prédios voltarem a ser habitados, a rua volta a ter gente e a sensação de insegurança diminui. Além disso, como explicou o urbanista Henrique Tavares numa palestra aqui no bairro, reformar costuma ser mais sustentável do que demolir, porque aproveita uma estrutura que já existe e preserva a memória da cidade.\n\nO risco, contudo, é real. Se os incentivos públicos servirem apenas para que grandes incorporadoras vendam apartamentos pequenos e caros, teremos trocado um centro vazio por um centro exclusivo. Dona Cida, moradora de um prédio ocupado, resumiu bem o problema: sem cuidado, não haverá revitalização, e sim substituição.\n\nPor isso, defendo três medidas. Primeiro, que uma parte das unidades reformadas seja obrigatoriamente destinada à habitação social, inclusive por meio de programas de aluguel social. Segundo, que os moradores atuais, das ocupações e dos cortiços, sejam ouvidos antes de qualquer projeto, e não depois. Terceiro, que o térreo dos prédios continue sendo comércio, com fachadas ativas, para os comerciantes da nossa rua fazerem parte da solução.\n\nO centro nunca esteve realmente vazio. Cabe a nós garantir que a sua nova vida inclua quem nunca o abandonou.",
+    "model": "Proposta: um centro para quem já vive nele\n\nÀ Secretaria Municipal de Urbanismo\n\nA Associação de Moradores do Centro vem apresentar a esta Secretaria a seguinte proposta, em resposta à chamada pública sobre a reforma de prédios vazios. Quem passa pela nossa região depois das sete da noite conhece a cena: lojas fechadas, faixas de «aluga-se» desbotadas e prédios inteiros com as janelas apagadas. O chamado retrofit pode mudar esse quadro, mas é preciso definir para quem.\n\nOs argumentos a favor são fortes. Como lembra a arquiteta Camila Rocha, ouvida numa reportagem recente, se os prédios voltarem a ser habitados, a rua volta a ter gente e a sensação de insegurança diminui. Além disso, como explicou o urbanista Henrique Tavares em palestra no bairro, reformar costuma ser mais sustentável do que demolir. O risco, contudo, é real: se os incentivos servirem apenas às grandes incorporadoras, teremos trocado um centro vazio por um centro exclusivo. Dona Cida, moradora de um prédio ocupado, resumiu bem: sem cuidado, não haverá revitalização, e sim substituição.\n\nPropomos, portanto, três medidas. Primeiro, que uma parte das unidades reformadas seja obrigatoriamente destinada à habitação social, inclusive por meio de programas de aluguel social. Segundo, que os moradores das ocupações e dos cortiços sejam ouvidos antes de qualquer projeto. Terceiro, que o térreo dos prédios continue sendo comércio, com fachadas ativas.\n\nCom isso, espera-se um centro ocupado dia e noite, com comércio vivo e sem expulsão de quem nunca o abandonou. Colocamo-nos à disposição para detalhar a proposta.\n\nAtenciosamente,\nAssociação de Moradores do Centro",
     "gloss": {
      "faixas": "carteles de tela, pasacalles",
      "desbotadas": "descoloridas",
-     "conversas de calçada": "charlas de vereda",
      "incorporadoras": "empresas desarrolladoras inmobiliarias",
      "prédio ocupado": "edificio tomado por familias sin vivienda",
      "cortiços": "conventillos",
-     "térreo": "planta baja",
-     "Cabe a nós": "nos toca a nosotros"
+     "térreo": "planta baja"
     }
    }
   }

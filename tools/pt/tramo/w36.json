@@ -100,22 +100,15 @@
     ]
   },
   "compito": {
-    "genre": "carta_formal",
-    "title": "Carta à Secretaria de Cultura",
+    "genre": "carta_aberta",
+    "title": "Carta aberta pela biblioteca à noite",
     "fonte": "ascolto",
-    "t": "Você frequenta a Biblioteca Pública Municipal à noite, depois do trabalho. Após ouvir o boletim de serviço da rádio, escreva uma carta formal à Secretaria Municipal de Cultura, dentro do prazo da consulta pública, manifestando-se sobre a redução do horário da biblioteca. Na carta, retome as informações do boletim (horário atual, novo horário e justificativa apresentada), explique como a mudança afeta você e outros usuários e proponha pelo menos uma alternativa. Não se esqueça de incluir local e data, destinatário, assunto, saudação e fecho adequados. Use registro formal e cuide do uso da crase nas indicações de horário. Seu texto deve ter entre 171 e 231 palavras.",
-    "es": "Carta formal de reclamo con propuesta: datos del audio (horarios y motivo), cómo te afecta y una alternativa. Ojo con la crase: “das 10h às 17h”, pero “de terça a sábado”.",
+    "t": "Você frequenta a Biblioteca Pública Municipal à noite, depois do trabalho, e faz parte de um grupo de usuários que se organizou depois do boletim de serviço da rádio. Em nome do grupo, escreva uma carta aberta à Secretaria Municipal de Cultura, que será publicada no jornal da cidade durante a consulta pública, manifestando-se sobre a redução do horário da biblioteca. Retome as informações do boletim (horário atual, novo horário e justificativa), mostre quem é afetado e apresente pelo menos uma alternativa. Cuide do uso da crase nas indicações de horário.",
+    "es": "Carta abierta (un colectivo, a una autoridad, para el público): datos del audio (horarios y motivo), a quiénes afecta y una alternativa. Ojo con la crase: «das 10h às 17h», pero «de terça a sábado».",
     "min": 171,
     "max": 231,
-    "punti": [["Retomar los horarios anunciados", ["17h", "17 h", "às 17", "horário"]], ["Mencionar la justificación dada", ["funcionários", "gastos", "energia"]], ["Explicar cómo afecta a los usuarios", ["noite", "trabalh", "estud"]], ["La consulta pública y su plazo", ["consulta pública", "consulta", "prazo"]], ["Proponer una alternativa", ["propon", "sugir", "alternativ"]]],
-    "model": "Belo Horizonte, 12 de setembro de 2026.\n\nÀ Secretaria Municipal de Cultura\nAssunto: redução do horário da Biblioteca Pública Municipal\n\nPrezados senhores,\n\nDirijo-me a esta Secretaria para manifestar, dentro do prazo da consulta pública, minha preocupação com a mudança anunciada pela Biblioteca Pública Municipal. Segundo informações divulgadas pela rádio, a partir do próximo mês a biblioteca funcionará apenas de terça a sábado, das 10h às 17h, e não mais de segunda a sábado, das 8h às 21h.\n\nCompreendo que a decisão se deve à falta de funcionários e à necessidade de reduzir gastos com energia. No entanto, a medida atinge justamente quem mais depende do espaço. Trabalho das 8h às 18h e só consigo estudar à noite; como eu, dezenas de estudantes que se preparam para concursos perderão o único ambiente silencioso a que têm acesso.\n\nDiante disso, proponho uma alternativa: manter a abertura noturna ao menos três vezes por semana, fechando a biblioteca pela manhã, quando o movimento é menor. Outra possibilidade seria firmar parcerias com universidades para a contratação de estagiários.\n\nCerto de que a Secretaria levará em conta a opinião dos usuários, coloco-me à disposição para colaborar.\n\nAtenciosamente,\n\nRafael Nunes Teixeira",
-    "gloss": {
-      "atinge justamente": "afecta justamente",
-      "concursos": "concursos públicos: exámenes para entrar a un empleo del Estado",
-      "firmar parcerias": "establecer convenios (firmar = establecer, cerrar)",
-      "estagiários": "pasantes",
-      "Certo de que": "seguro de que",
-      "coloco-me à disposição": "quedo a disposición (fórmula de cierre: se ve en la semana 43)"
-    }
+    "punti": [["Retomar los horarios anunciados", ["17h", "21h", "horário"]], ["Mencionar la justificación dada", ["funcionários", "gastos", "energia"]], ["Mostrar quién es afectado", ["noite", "trabalh", "concursos", "estud"]], ["La consulta pública", ["consulta pública", "prazo"]], ["Proponer una alternativa", ["propomos", "alternativa", "parcerias"]]],
+    "model": "Carta aberta à Secretaria Municipal de Cultura\n\nNós, usuários da Biblioteca Pública Municipal que estudam depois do trabalho, vimos a público manifestar, dentro do prazo da consulta pública, nossa preocupação com a mudança anunciada. Segundo o boletim divulgado pela rádio, a partir do próximo mês a biblioteca funcionará apenas de terça a sábado, das 10h às 17h, e não mais de segunda a sábado, das 8h às 21h.\n\nCompreendemos que a decisão se deve à falta de funcionários e à necessidade de reduzir gastos com energia. No entanto, a medida atinge justamente quem mais depende do espaço. A maioria de nós trabalha das 8h às 18h e só consegue estudar à noite; além disso, dezenas de estudantes que se preparam para concursos perderão o único ambiente silencioso a que têm acesso.\n\nDiante disso, propomos uma alternativa: manter a abertura noturna ao menos três vezes por semana, fechando a biblioteca pela manhã, quando o movimento é menor. Outra possibilidade seria firmar parcerias com universidades para a contratação de estagiários.\n\nContamos com a sensibilidade desta Secretaria e reivindicamos que a opinião dos usuários seja levada em conta antes da decisão final.\n\nAssinam esta carta 146 usuários da Biblioteca Pública Municipal.",
+    "gloss": {"atinge justamente": "afecta justamente", "concursos": "concursos públicos: exámenes para entrar a un empleo del Estado", "firmar parcerias": "establecer convenios (firmar = establecer, cerrar)", "estagiários": "pasantes"}
   }
 }
