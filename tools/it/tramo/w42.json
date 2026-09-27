@@ -330,6 +330,15 @@
         ]
       ]
     ],
-    "model": "Gentile Redazione,\n\nho letto con grande interesse il saggio «Si prega di voler cortesemente provvedere» e vorrei aggiungere la mia esperienza di straniera che vive in Italia da due anni.\n\nQualche mese fa ho ricevuto una lettera dell'ufficio tributi del mio Comune. L'ho letta tre volte e non riuscivo a capire se si trattasse di una multa, di un rimborso o di un semplice avviso. Alla fine mi sono rivolta a un'amica italiana, che però ha avuto le mie stesse difficoltà. Solo allo sportello ho scoperto che dovevo pagare trenta euro di tassa sui rifiuti: sarebbero bastate due righe.\n\nSono d'accordo con l'autore quando scrive che il burocratese colpisce soprattutto i più deboli. Chi sta imparando una lingua ha già abbastanza ostacoli e non ha bisogno di essere messo alla prova anche da un modulo. Non credo, tuttavia, che la colpa sia solo dei funzionari: spesso sono costretti a rifarsi a modelli che nessuno ha il coraggio di cambiare.\n\nPer questo propongo alcune regole semplici: dire subito che cosa deve fare il cittadino ed entro quando; usare frasi brevi e parole comuni; rivolgersi al lettore con il Lei; spiegare che cosa fare in caso di errore; lasciare i riferimenti alle norme in una nota finale, per chi vuole controllarli. Scrivere chiaro non significa rinunciare alla precisione, ma rispettare chi legge.\n\nCordiali saluti,\nAna Ferreyra, Bologna"
+    "model": "Gentile Redazione,\n\nho letto con grande interesse il saggio «Si prega di voler cortesemente provvedere» e vorrei aggiungere la mia esperienza di straniera che vive in Italia da due anni.\n\nQualche mese fa ho ricevuto una lettera dell'ufficio tributi del mio Comune. L'ho letta tre volte e non riuscivo a capire se si trattasse di una multa, di un rimborso o di un semplice avviso. Alla fine mi sono rivolta a un'amica italiana, che però ha avuto le mie stesse difficoltà. Solo allo sportello ho scoperto che dovevo pagare trenta euro di tassa sui rifiuti: sarebbero bastate due righe.\n\nSono d'accordo con l'autore quando scrive che il burocratese colpisce soprattutto i più deboli. Chi sta imparando una lingua ha già abbastanza ostacoli e non ha bisogno di essere messo alla prova anche da un modulo. Non credo, tuttavia, che la colpa sia solo dei funzionari: spesso sono costretti a rifarsi a modelli che nessuno ha il coraggio di cambiare.\n\nPer questo propongo alcune regole semplici: dire subito che cosa deve fare il cittadino ed entro quando; usare frasi brevi e parole comuni; rivolgersi al lettore con il Lei; spiegare che cosa fare in caso di errore; lasciare i riferimenti alle norme in una nota finale, per chi vuole controllarli. Scrivere chiaro non significa rinunciare alla precisione, ma rispettare chi legge.\n\nCordiali saluti,\nAna Ferreyra, Bologna",
+    "gloss": {
+      "ufficio tributi": "oficina de impuestos (municipales)",
+      "sportello": "ventanilla",
+      "rifiuti": "residuos (tassa sui rifiuti = tasa de recolección de basura)",
+      "burocratese": "la jerga burocrática",
+      "messo alla prova": "puesto a prueba",
+      "rifarsi a": "basarse en, remitirse a",
+      "entro quando": "hasta cuándo, en qué plazo"
+    }
   }
 }

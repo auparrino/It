@@ -114,6 +114,14 @@
       ["Posiciones de Marlene y Tiago", ["tiago", "filho", "digital", "site"]],
       ["Discurso indirecto", ["afirmou que", "disse que", "explicou que", "segundo", "contou que"]]
     ],
-    "model": "A reportagem “O último jornal de papel do vale” conta a história do Correio do Vale, semanário fundado em 1974 e hoje o único veículo de imprensa de seis municípios do sul da Bahia. A jornalista Marlene Andrade, filha do fundador, explicou que a tiragem tinha caído de oito mil para pouco mais de mil exemplares e que a publicidade mal cobria os custos. Ela admitiu que pensava em fechar o jornal todos os dias.\n\nO texto relaciona o caso aos chamados desertos de notícias, municípios sem cobertura jornalística local. Segundo o professor Henrique Sales, nessas cidades ninguém fiscaliza a prefeitura e os boatos circulam sem contraponto. Marlene lembrou que, dois anos antes, um áudio falso sobre água contaminada tinha provocado pânico, e que foi o jornal que publicou a análise do laboratório e acalmou a população.\n\nQuanto ao futuro, o filho de Marlene, Tiago, afirmou que pretendia transformar o jornal em um site com assinatura digital e que quinhentos assinantes bastariam. A mãe disse que respeitava a ideia, mas duvidava que os leitores mais velhos acompanhassem a mudança."
+    "model": "A reportagem “O último jornal de papel do vale” conta a história do Correio do Vale, semanário fundado em 1974 e hoje o único veículo de imprensa de seis municípios do sul da Bahia. A jornalista Marlene Andrade, filha do fundador, explicou que a tiragem tinha caído de oito mil para pouco mais de mil exemplares e que a publicidade mal cobria os custos. Ela admitiu que pensava em fechar o jornal todos os dias.\n\nO texto relaciona o caso aos chamados desertos de notícias, municípios sem cobertura jornalística local. Segundo o professor Henrique Sales, nessas cidades ninguém fiscaliza a prefeitura e os boatos circulam sem contraponto. Marlene lembrou que, dois anos antes, um áudio falso sobre água contaminada tinha provocado pânico, e que foi o jornal que publicou a análise do laboratório e acalmou a população.\n\nQuanto ao futuro, o filho de Marlene, Tiago, afirmou que pretendia transformar o jornal em um site com assinatura digital e que quinhentos assinantes bastariam. A mãe disse que respeitava a ideia, mas duvidava que os leitores mais velhos acompanhassem a mudança.",
+    "gloss": {
+      "tiragem": "tirada, la cantidad de ejemplares impresos",
+      "mal cobria os custos": "apenas cubría los costos (mal = apenas, casi no)",
+      "fiscaliza a prefeitura": "controla a la municipalidad",
+      "boatos": "rumores",
+      "assinatura digital": "suscripción digital (assinatura = suscripción, también firma)",
+      "assinantes": "suscriptores"
+    }
   }
 }

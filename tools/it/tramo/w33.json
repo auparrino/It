@@ -116,6 +116,16 @@
       ["preguntar por el trabajo a distancia", ["distanza", "remoto", "smart"]],
       ["fórmula de cierre formal", ["distinti saluti", "cordiali saluti", "in attesa"]]
     ],
-    "model": "Spettabile Ufficio del Personale,\n\nvi ringrazio per la proposta di lavoro come responsabile acquisti che mi avete inviato la settimana scorsa. Sono molto interessata alla posizione e all'idea di contribuire alla crescita della vostra azienda.\n\nPrima di prendere una decisione definitiva, tuttavia, vorrei chiarire alcuni aspetti, dal momento che accettare significherebbe trasferirmi da Bari a Milano.\n\nIn primo luogo, il contratto proposto ha una durata di due anni. Vi sarei grata se poteste indicarmi quali sono, in concreto, le possibilità di stabilizzazione alla scadenza e secondo quali criteri verrebbero valutate.\n\nIn secondo luogo, vorrei sapere se l'azienda prevede un contributo per le spese di trasferimento o un aiuto nella ricerca di un alloggio. Se così fosse, la mia decisione sarebbe senz'altro più semplice.\n\nInfine, vi chiedo se sia possibile svolgere una parte dell'attività a distanza, per esempio uno o due giorni alla settimana.\n\nSe le condizioni lo permetteranno, sarò felice di iniziare già dal mese prossimo. Resto in attesa di un vostro gentile riscontro.\n\nDistinti saluti,\nGiorgia Lamanna"
+    "model": "Spettabile Ufficio del Personale,\n\nvi ringrazio per la proposta di lavoro come responsabile acquisti che mi avete inviato la settimana scorsa. Sono molto interessata alla posizione e all'idea di contribuire alla crescita della vostra azienda.\n\nPrima di prendere una decisione definitiva, tuttavia, vorrei chiarire alcuni aspetti, dal momento che accettare significherebbe trasferirmi da Bari a Milano.\n\nIn primo luogo, il contratto proposto ha una durata di due anni. Vi sarei grata se poteste indicarmi quali sono, in concreto, le possibilità di stabilizzazione alla scadenza e secondo quali criteri verrebbero valutate.\n\nIn secondo luogo, vorrei sapere se l'azienda prevede un contributo per le spese di trasferimento o un aiuto nella ricerca di un alloggio. Se così fosse, la mia decisione sarebbe senz'altro più semplice.\n\nInfine, vi chiedo se sia possibile svolgere una parte dell'attività a distanza, per esempio uno o due giorni alla settimana.\n\nSe le condizioni lo permetteranno, sarò felice di iniziare già dal mese prossimo. Resto in attesa di un vostro gentile riscontro.\n\nDistinti saluti,\nGiorgia Lamanna",
+    "gloss": {
+      "Spettabile": "fórmula de saludo a una empresa u oficina: «De mi consideración»",
+      "dal momento che": "dado que, ya que (se ve en la semana 49)",
+      "stabilizzazione": "pase a planta permanente, contrato por tiempo indeterminado",
+      "alla scadenza": "al vencimiento (del contrato)",
+      "Vi sarei grata se poteste": "les agradecería que pudieran (se + congiuntivo imperfetto)",
+      "alloggio": "vivienda, alojamiento",
+      "senz'altro": "sin duda",
+      "riscontro": "respuesta"
+    }
   }
 }

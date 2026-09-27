@@ -119,6 +119,16 @@
       ["al menos dos propuestas", ["propon", "propost", "settiman", "per iscritto"]],
       ["registro formal y cierre", ["gentile direttore", "egregio", "cordiali saluti", "distinti saluti", "oggetto"]]
     ],
-    "model": "Oggetto: mancato rinnovo del contratto con il cliente di Verona\n\nGentile Direttore,\n\ncome richiesto, le invio una breve analisi di quanto accaduto con il cliente di Verona, che ha deciso di non rinnovare il contratto.\n\n1. I fatti. Il software è stato consegnato con due mesi di ritardo e con circa metà delle funzioni previste. A settembre eravamo convinti che il cliente avrebbe firmato il rinnovo; questa previsione si è rivelata troppo ottimistica.\n\n2. Le cause. In primo luogo, la stima dei tempi era sbagliata. In secondo luogo, la comunicazione tra i team non ha funzionato: già a luglio era stato segnalato un possibile ritardo, ma nessuno ha approfondito. Con il senno di poi, avremmo dovuto rimandare la consegna e avvisare il cliente per tempo. Infine, abbiamo promesso più di quanto potessimo realizzare.\n\n3. Proposte. Proponiamo riunioni di controllo settimanali nelle fasi finali dei progetti e la registrazione per iscritto di ogni segnalazione di rischio.\n\nRestiamo a disposizione per discuterne.\n\nCordiali saluti,\nSonia Ferri"
+    "model": "Oggetto: mancato rinnovo del contratto con il cliente di Verona\n\nGentile Direttore,\n\ncome richiesto, le invio una breve analisi di quanto accaduto con il cliente di Verona, che ha deciso di non rinnovare il contratto.\n\n1. I fatti. Il software è stato consegnato con due mesi di ritardo e con circa metà delle funzioni previste. A settembre eravamo convinti che il cliente avrebbe firmato il rinnovo; questa previsione si è rivelata troppo ottimistica.\n\n2. Le cause. In primo luogo, la stima dei tempi era sbagliata. In secondo luogo, la comunicazione tra i team non ha funzionato: già a luglio era stato segnalato un possibile ritardo, ma nessuno ha approfondito. Con il senno di poi, avremmo dovuto rimandare la consegna e avvisare il cliente per tempo. Infine, abbiamo promesso più di quanto potessimo realizzare.\n\n3. Proposte. Proponiamo riunioni di controllo settimanali nelle fasi finali dei progetti e la registrazione per iscritto di ogni segnalazione di rischio.\n\nRestiamo a disposizione per discuterne.\n\nCordiali saluti,\nSonia Ferri",
+    "gloss": {
+      "mancato rinnovo": "falta de renovación, no renovación",
+      "si è rivelata": "resultó ser",
+      "era stato segnalato": "se había advertido, había sido señalado (voz pasiva: se ve en la semana 35)",
+      "nessuno ha approfondito": "nadie lo investigó a fondo",
+      "Con il senno di poi": "visto ahora, con lo que sabemos después",
+      "avremmo dovuto rimandare": "tendríamos que haber postergado",
+      "per iscritto": "por escrito",
+      "Restiamo a disposizione": "quedamos a disposición"
+    }
   }
 }

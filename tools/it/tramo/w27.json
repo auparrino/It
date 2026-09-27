@@ -117,6 +117,12 @@
       ["opinar sobre la conclusión del autor", ["d'accordo", "conclusione", "secondo me", "credo"]],
       ["saludo formal y despedida", ["gentile", "cara redazione", "spettabile", "cordiali saluti", "distinti saluti"]]
     ],
-    "model": "Gentile Redazione,\n\nho letto con grande piacere il reportage sullo struscio di Casalbianco e, sinceramente, mi sono commosso. Sono argentino, vivo a Bologna da due anni, e leggendo l'articolo ho pensato immediatamente alla mia città, Rosario.\n\nDa noi non si chiama struscio, ma il rito è molto simile: la domenica pomeriggio le famiglie camminano lentamente lungo il fiume, bevono il mate, si fermano a salutare i vicini. Nessuno ha fretta e nessuno va veramente da qualche parte.\n\nSono completamente d'accordo con la conclusione dell'autore: in un mondo che cambia così rapidamente, abbiamo bisogno di luoghi dove riconoscerci. Aggiungerei solo una cosa: non credo che i telefoni siano il vero pericolo. Il pericolo è la fretta, che ci impedisce di perdere tempo insieme.\n\nGrazie per questo bel pezzo, che mi ha fatto sentire un po' meno lontano da casa.\n\nCordiali saluti,\nMartín Paredes, Bologna"
+    "model": "Gentile Redazione,\n\nho letto con grande piacere il reportage sullo struscio di Casalbianco e, sinceramente, mi sono commosso. Sono argentino, vivo a Bologna da due anni, e leggendo l'articolo ho pensato immediatamente alla mia città, Rosario.\n\nDa noi non si chiama struscio, ma il rito è molto simile: la domenica pomeriggio le famiglie camminano lentamente lungo il fiume, bevono il mate, si fermano a salutare i vicini. Nessuno ha fretta e nessuno va veramente da qualche parte.\n\nSono completamente d'accordo con la conclusione dell'autore: in un mondo che cambia così rapidamente, abbiamo bisogno di luoghi dove riconoscerci. Aggiungerei solo una cosa: non credo che i telefoni siano il vero pericolo. Il pericolo è la fretta, che ci impedisce di perdere tempo insieme.\n\nGrazie per questo bel pezzo, che mi ha fatto sentire un po' meno lontano da casa.\n\nCordiali saluti,\nMartín Paredes, Bologna",
+    "gloss": {
+      "Da noi": "en mi país, entre nosotros (da + pronombre = en lo de, en casa de)",
+      "riconoscerci": "reconocernos",
+      "bel pezzo": "lindo artículo, linda nota (pezzo = texto periodístico)",
+      "mi ha fatto sentire": "me hizo sentir (fare + infinitivo, el causativo: se ve en la semana 40)"
+    }
   }
 }

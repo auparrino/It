@@ -301,6 +301,13 @@
         ]
       ]
     ],
-    "model": "O relógio que parou em Buenos Aires\n\nA crônica “As cartas da caixa de sapatos” me fez pensar que a memória de uma família também é feita de silêncios. Às vezes, um único objeto guarda uma história que ninguém teve coragem de contar.\n\nNa minha casa, esse objeto é um relógio de bolso que pertenceu ao meu bisavô, um espanhol que chegou a Buenos Aires em 1923. O relógio está parado às quatro e dez, e meu pai sempre disse que ninguém sabia por quê. Só no ano passado, conversando com uma tia, descobri que meu bisavô tinha comprado uma passagem para o Rio de Janeiro, onde um irmão o esperava. Na véspera da viagem, conheceu minha bisavó num baile e desistiu.\n\nSe ele tivesse embarcado, eu teria nascido brasileiro, e talvez estivesse escrevendo este relato na minha língua materna. Não sei se teríamos sido mais felizes. Sei que o relógio parado, hoje, me parece menos um defeito e mais uma lembrança daquela noite em que tudo poderia ter sido diferente."
+    "model": "O relógio que parou em Buenos Aires\n\nA crônica “As cartas da caixa de sapatos” me fez pensar que a memória de uma família também é feita de silêncios. Às vezes, um único objeto guarda uma história que ninguém teve coragem de contar.\n\nNa minha casa, esse objeto é um relógio de bolso que pertenceu ao meu bisavô, um espanhol que chegou a Buenos Aires em 1923. O relógio está parado às quatro e dez, e meu pai sempre disse que ninguém sabia por quê. Só no ano passado, conversando com uma tia, descobri que meu bisavô tinha comprado uma passagem para o Rio de Janeiro, onde um irmão o esperava. Na véspera da viagem, conheceu minha bisavó num baile e desistiu.\n\nSe ele tivesse embarcado, eu teria nascido brasileiro, e talvez estivesse escrevendo este relato na minha língua materna. Não sei se teríamos sido mais felizes. Sei que o relógio parado, hoje, me parece menos um defeito e mais uma lembrança daquela noite em que tudo poderia ter sido diferente.",
+    "gloss": {
+      "relógio de bolso": "reloj de bolsillo",
+      "passagem": "pasaje",
+      "Na véspera da viagem": "la víspera del viaje, el día antes",
+      "desistiu": "se echó atrás, renunció",
+      "lembrança": "recuerdo"
+    }
   }
 }

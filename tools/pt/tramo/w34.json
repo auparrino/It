@@ -313,6 +313,15 @@
         ]
       ]
     ],
-    "model": "Pequenas mudanças, cidade mais resistente\n\nAs enchentes de todo verão e o plástico acumulado nas praias parecem problemas distintos. No entanto, ambos revelam a mesma falha: cidades que foram planejadas sem levar em conta o meio ambiente.\n\nNo caso das chuvas, o artigo da engenheira Mariana Coutinho mostra que cobrimos chão demais. A proposta da cidade-esponja, com parques inundáveis, calçadas permeáveis e jardins de chuva, permitiria que o solo voltasse a absorver parte da água. Aliás, muitos desses espaços já pertencem à prefeitura, como pátios de escolas e canteiros centrais.\n\nJá no debate sobre os descartáveis, ficou claro que proibir o plástico em bares e restaurantes pode ter um efeito educativo importante. Os críticos, contudo, argumentam que essas medidas custam caro e prejudicam o pequeno comerciante. A objeção é legítima, porém não justifica a inércia. Como sugeriram os próprios participantes do debate, é possível combinar a proibição com prazos de adaptação e linhas de crédito.\n\nPortanto, a questão não é escolher entre economia e meio ambiente, mas planejar a transição com responsabilidade. Se nada for feito, continuaremos pagando a conta, só que em forma de enchentes e praias sujas."
+    "model": "Pequenas mudanças, cidade mais resistente\n\nAs enchentes de todo verão e o plástico acumulado nas praias parecem problemas distintos. No entanto, ambos revelam a mesma falha: cidades que foram planejadas sem levar em conta o meio ambiente.\n\nNo caso das chuvas, o artigo da engenheira Mariana Coutinho mostra que cobrimos chão demais. A proposta da cidade-esponja, com parques inundáveis, calçadas permeáveis e jardins de chuva, permitiria que o solo voltasse a absorver parte da água. Aliás, muitos desses espaços já pertencem à prefeitura, como pátios de escolas e canteiros centrais.\n\nJá no debate sobre os descartáveis, ficou claro que proibir o plástico em bares e restaurantes pode ter um efeito educativo importante. Os críticos, contudo, argumentam que essas medidas custam caro e prejudicam o pequeno comerciante. A objeção é legítima, porém não justifica a inércia. Como sugeriram os próprios participantes do debate, é possível combinar a proibição com prazos de adaptação e linhas de crédito.\n\nPortanto, a questão não é escolher entre economia e meio ambiente, mas planejar a transição com responsabilidade. Se nada for feito, continuaremos pagando a conta, só que em forma de enchentes e praias sujas.",
+    "gloss": {
+      "enchentes": "inundaciones",
+      "levar em conta": "tener en cuenta (se ve en la semana 50)",
+      "calçadas": "veredas (falso amigo: no son calzadas)",
+      "canteiros centrais": "los canteros centrales de las avenidas",
+      "Já no debate": "en cambio, en el debate (já marca contraste con lo anterior)",
+      "prazos de adaptação": "plazos para adaptarse",
+      "continuaremos pagando a conta": "vamos a seguir pagando las consecuencias"
+    }
   }
 }

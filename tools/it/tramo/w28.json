@@ -115,6 +115,15 @@
       ["los ejemplos positivos", ["remoto", "positiv", "albergo", "esempi"]],
       ["la conclusión", ["conclusione", "infine", "insomma", "aree interne"]]
     ],
-    "model": "L'articolo analizza il fenomeno delle case vendute a un euro nei piccoli borghi italiani e si chiede se queste iniziative abbiano davvero salvato i paesi dallo spopolamento.\n\nInnanzitutto, l'autore chiarisce che il prezzo simbolico è ingannevole: chi compra deve ristrutturare entro pochi anni, spesso con spese molto alte, e infatti diversi acquirenti hanno rinunciato. Tuttavia, riconosce che in alcuni borghi l'iniziativa ha prodotto risultati positivi, anche grazie alla diffusione del lavoro da remoto, che permette di vivere lontano dalle città.\n\nSecondo l'autore, però, il nodo centrale non sono le case ma i servizi: senza scuole, medici e trasporti nessuna famiglia si trasferisce. Inoltre, se i paesi si riempiono solo di seconde case, rischiano di diventare scenografie vuote.\n\nIn conclusione, l'articolo riconosce alle case a un euro il merito di aver attirato l'attenzione sulle aree interne, ma sostiene che ora servano politiche pazienti e concrete."
+    "model": "L'articolo analizza il fenomeno delle case vendute a un euro nei piccoli borghi italiani e si chiede se queste iniziative abbiano davvero salvato i paesi dallo spopolamento.\n\nInnanzitutto, l'autore chiarisce che il prezzo simbolico è ingannevole: chi compra deve ristrutturare entro pochi anni, spesso con spese molto alte, e infatti diversi acquirenti hanno rinunciato. Tuttavia, riconosce che in alcuni borghi l'iniziativa ha prodotto risultati positivi, anche grazie alla diffusione del lavoro da remoto, che permette di vivere lontano dalle città.\n\nSecondo l'autore, però, il nodo centrale non sono le case ma i servizi: senza scuole, medici e trasporti nessuna famiglia si trasferisce. Inoltre, se i paesi si riempiono solo di seconde case, rischiano di diventare scenografie vuote.\n\nIn conclusione, l'articolo riconosce alle case a un euro il merito di aver attirato l'attenzione sulle aree interne, ma sostiene che ora servano politiche pazienti e concrete.",
+    "gloss": {
+      "borghi": "pueblos antiguos, pueblitos históricos",
+      "abbiano davvero salvato": "hayan salvado realmente (congiuntivo passato: se ve en la semana 29)",
+      "ingannevole": "engañoso",
+      "acquirenti": "compradores",
+      "il nodo centrale": "el punto clave, el meollo",
+      "scenografie vuote": "decorados vacíos, escenografías",
+      "aree interne": "las zonas del interior, lejos de la costa y de las ciudades"
+    }
   }
 }
