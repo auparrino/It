@@ -39,6 +39,7 @@
   var LEMMA = null;           // lemma → [forms from the glossary]
   var BLOCKS = null;          // every block of every lesson, with its forms
   var ITEMS_BY_WEEK = null;
+  var COLL = null;            // the combinations the notes of the course teach (collIndex)
 
   var L = "a-zà-öø-ÿ";
   var TOKEN_RE = new RegExp("[" + L + "]+(?:-[" + L + "]+)*'?", "gi");
@@ -59,7 +60,7 @@
     d = d || {};
     // only what depends on what changed is rebuilt (the glossary arrives
     // after the course: the corpus stays)
-    if (d.course !== undefined && d.course !== D.course) { D.course = d.course; CORPUS = INDEX = BLOCKS = ITEMS_BY_WEEK = null; }
+    if (d.course !== undefined && d.course !== D.course) { D.course = d.course; CORPUS = INDEX = BLOCKS = ITEMS_BY_WEEK = null; COLL = null; }
     if (d.bank !== undefined && d.bank !== D.bank) { D.bank = d.bank; CORPUS = INDEX = BLOCKS = null; }
     if (d.gloss !== undefined && d.gloss !== D.gloss) { D.gloss = d.gloss; LEMMA = null; }
   }
@@ -506,6 +507,126 @@
     return r && r.right !== r.wrong ? r : null;
   }
 
+  /* The id of a lesson block given the block itself (the lesson and the
+     «¿Por qué?» sheet draw the object, not its place). */
+  function blockIdOf(b) {
+    var ws = (D.course && D.course.weeks) || [];
+    for (var k = 0; k < ws.length; k++) {
+      var bs = (ws[k].lesson && ws[k].lesson.blocks) || [];
+      for (var i = 0; i < bs.length; i++) if (bs[i] === b) return blockId(ws[k].week, i);
+    }
+    return null;
+  }
+
+  /* ------------------------------------------------------- el diccionario */
+
+  /* «Consultar»: una palabra con todo lo que el curso sabe de ella —la glosa
+     (glossario.json), la semana en que se enseña, el nivel y la frecuencia
+     (Freq), la forma verbal (Desglose), la ficha del banco (género, plural,
+     auxiliar, nota), las combinaciones que las notas del curso enseñan
+     («Tener hambre → avere fame») y 3-5 usos reales ya leídos. */
+  // COLL: [{ l: left, r: right, rl: [words of the right], w, topic }]
+  function arts() { return articles(); }
+  function collIndex() {
+    if (COLL) return COLL;
+    COLL = [];
+    var seen = {}, A = arts();
+    ((D.course && D.course.items) || []).forEach(function (it) {
+      if (!it || !it.note || String(it.note).indexOf("→") < 0) return;
+      String(it.note).split(/(?:[.;])\s+/).forEach(function (s) {
+        var m = /^(.{2,60}?)\s*→\s*(.+)$/.exec(s.trim());
+        if (!m) return;
+        var left = strip(m[1]).replace(/^.*?:\s*/, "").trim(), right = strip(m[2]).split(/[:(;]|, (?=[a-zà-ÿ]+ )/)[0].replace(/[.«»"]+$/g, "").trim();
+        var ws = (right.toLowerCase().match(TOKEN_RE) || []);
+        // a combination: at least two words of the language that are not articles
+        if (ws.filter(function (w) { return !A[w.replace(/'$/, "")]; }).length < 2 || ws.length > 6 || !left) return;
+        // and on the left, what one says in Spanish: two words or more (not «ir → fomos»)
+        if (left.replace(/\([^)]*\)/g, " ").split(/\s+/).filter(function (w) { return /[a-záéíóúñ]/i.test(w); }).length < 2) return;
+        var key = plain(left + "→" + right);
+        if (seen[key]) return;
+        seen[key] = 1;
+        COLL.push({ l: left, r: right, rl: ws, w: +(it.w || it.wk) || 1, topic: it.topic || "" });
+      });
+    });
+    return COLL;
+  }
+  function collocations(forms, max) {
+    var set = {};
+    forms.forEach(function (f) { if (!/ /.test(f)) set[f] = 1; });
+    var out = collIndex().filter(function (c) { return c.rl.some(function (w) { return set[w]; }); });
+    // the bank's verbs with their preposition (a «regencia» table, when the package has one)
+    var B = bank(), reg = B && B.regencia;
+    if (reg && typeof reg === "object" && !Array.isArray(reg)) forms.forEach(function (f) {
+      if (reg[f] && !out.some(function (c) { return c.r === f + " " + reg[f]; })) out.push({ l: "", r: f + " " + reg[f], rl: [f, reg[f]], w: 1, topic: "régimen" });
+    });
+    return out.sort(function (a, b) { return a.w - b.w; }).slice(0, max || 6);
+  }
+  // The bank's card for a lemma: gender and plural, auxiliary, the note.
+  function bankEntry(lemma) {
+    var B = bank();
+    if (!B || !lemma) return null;
+    var l = lower(lemma), i, x;
+    for (i = 0; B.nouns && i < B.nouns.length; i++) {
+      x = B.nouns[i];
+      if (lower(x[0]) === l || lower(x[2]) === l) return { kind: "noun", lemma: x[0], g: x[1], pl: x[2], es: x[3], level: x[5], note: x[6] || "" };
+    }
+    for (i = 0; B.verbs && i < B.verbs.length; i++) {
+      x = B.verbs[i];
+      if (lower(x[0]) === l) return { kind: "verb", lemma: x[0], es: x[1], aux: x[2], level: x[5], note: x[6] || "" };
+    }
+    for (i = 0; B.adjectives && i < B.adjectives.length; i++) {
+      x = B.adjectives[i];
+      if ([x[0], x[1], x[2], x[3]].some(function (f) { return lower(f) === l; }))
+        return { kind: "adj", lemma: x[0], forms: [x[0], x[1], x[2], x[3]], es: x[4], level: x[5], note: x[6] || "" };
+    }
+    return null;
+  }
+
+  function lookup(term, opts) {
+    opts = opts || {};
+    var week = opts.week || 52, f = formsOf(term), g = D.gloss || {};
+    var e = g[lower(term)] || g[f.term] || g[f.lemma] || null;
+    var F = root.Freq, De = root.Desglose, info = null;
+    if (F && F.loaded && F.loaded()) { try { info = F.info(f.term) || F.info(f.lemma); } catch (x) { info = null; } }
+    var lines = [];
+    if (De && De.lines) { try { lines = De.lines(f.term, { gloss: g, week: week, max: 3 }) || []; } catch (x) { lines = []; } }
+    var r = pickHits(f.forms, { week: week, max: opts.max || 5, exact: [f.term] });
+    var bk = bankEntry(f.lemma) || bankEntry(f.term);
+    return { term: f.term, lemma: f.lemma, es: f.es || (bk && bk.es) || "", taught: e ? +e[2] || 0 : 0,
+             level: info ? info[2] || "" : (bk && bk.level) || "", zipf: info ? Math.max(info[0], info[1]) : 0,
+             lines: lines, colloc: collocations(f.forms), bank: bk, hits: r.hits, total: r.total, later: r.later,
+             forms: f.forms, known: !!(e || info || bk || r.total) };
+  }
+
+  /* Suggestions for the search box: words of the glossary that start with
+     the query (the lemma first), and, if the query is Spanish, the words
+     whose meaning has it. → [{ w, lemma, es, week }] */
+  function suggest(q, n) {
+    n = n || 8;
+    var g = D.gloss || {}, p = plain(q).trim();
+    if (!p || p.length < 2) return [];
+    var out = [], seen = {};
+    var add = function (k) {
+      var e = g[k], lemma = e ? lower(e[0]) : k;
+      if (seen[lemma]) return;
+      seen[lemma] = 1;
+      out.push({ w: k, lemma: lemma, es: e ? e[1] : "", week: e ? +e[2] || 0 : 0 });
+    };
+    var keys = Object.keys(g);
+    var starts = keys.filter(function (k) { return plain(bareTerm(k)).indexOf(p) === 0; });
+    starts.sort(function (a, b) {
+      var la = lower(g[a][0]) === lower(a) ? 0 : 1, lb = lower(g[b][0]) === lower(b) ? 0 : 1;
+      return la - lb || a.length - b.length;
+    }).forEach(function (k) { if (out.length < n) add(k); });
+    if (out.length < n) {
+      var re = new RegExp("(^|[^a-zñ])" + p.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "([^a-zñ]|$)");
+      keys.filter(function (k) { return re.test(plain(g[k][1])); })
+        .sort(function (a, b) { return a.length - b.length; })
+        .forEach(function (k) { if (out.length < n) add(k); });
+    }
+    return out;
+  }
+
   /* ------------------------------------------------------------- guardado */
 
   // state.ref = { b: { blockId: [right, answered] }, w: { lemma: [right, answered] } }
@@ -522,7 +643,7 @@
 
   var H = null;               // hooks from app.js
   var sheetQ = null;          // what the sheet shows
-  var gramState = { q: "", filter: "" };
+  var gramState = { q: "", filter: "", focus: null };
 
   function esc(s) {
     return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
@@ -583,7 +704,16 @@
         (q.lemma && q.lemma !== q.term ? ' <small class="muted">de <i class="it">' + esc(q.lemma) + "</i></small>" : "") + "</h2>" +
         (q.es ? '<p class="ref-gloss">' + esc(q.es) + "</p>" : "");
     }
-    var body;
+    var body, foot = "";
+    if (q.kind === "block") {
+      // where it stands, and the way to the whole index (not in the middle of a round)
+      var b = blockById(q.id), x = b ? blockStats(b, st()) : null, S = x ? STATUS[x.status] : null;
+      var ingame = typeof document !== "undefined" && document.body && document.body.classList.contains("ingame");
+      if (b && b.week > curWeek()) head += '<p class="muted small">🔒 Esto llega en la semana ' + b.week + ": te lo adelanto para consultar.</p>";
+      else if (S) head += '<p class="small"><span class="ref-st ' + x.status + '">' + S[0] + " " + S[1] + "</span>" +
+        (x.ok + x.ko ? ' <span class="ref-score">✔ ' + x.ok + " · ✘ " + x.ko + "</span>" : "") + "</p>";
+      if (b && !ingame && H && H.open) foot = '<div class="row"><button class="btn ghost" data-ref-gram="' + b.id + '">🧩 Abrir en Mi gramática →</button></div>';
+    }
     if (q.hits.length) {
       var one = q.hits.length === 1 && q.total <= 1;
       body = '<p class="muted small">' + q.hits.length + (q.total > q.hits.length ? " de " + q.total : "") +
@@ -593,7 +723,7 @@
       body = '<p class="muted">Todavía no aparece en lo que ya podés leer.' +
         (q.later ? " La vas a ver en la semana " + q.later + "." : "") + "</p>";
     }
-    return '<div class="ref-top"><button class="tab" id="refclose" aria-label="cerrar">✕ cerrar</button></div>' + head + body;
+    return '<div class="ref-top"><button class="tab" id="refclose" aria-label="cerrar">✕ cerrar</button></div>' + head + body + foot;
   }
 
   function openWord(term) {
@@ -695,15 +825,16 @@
 
   var STATUS = { vista: ["👁️", "vista"], practicada: ["✍️", "practicada"], dominada: ["⭐", "dominada"] };
 
-  // The entry (Eu/Io and Treino): a card with the counts.
+  // The entry (Consultar, Io): a card with the counts.
   function entry() {
     refresh();
     if (!D.course) return "";
     var week = curWeek(), list = grammar(week), s = st(), n = { vista: 0, practicada: 0, dominada: 0 };
     list.forEach(function (b) { n[blockStats(b, s).status]++; });
+    var ahead = blocks().length - list.length;
     return '<div class="card ref-entry"><h2>🧩 Mi gramática</h2>' +
       '<p class="muted">Las ' + list.length + " construcciones que viste hasta la semana " + week +
-      ", con ejemplos de tus lecturas y cómo te va con cada una.</p>" +
+      ", con ejemplos de tus lecturas y cómo te va con cada una" + (ahead ? "; y las " + ahead + " que vienen, para consultar antes de tiempo" : "") + ".</p>" +
       '<p class="ref-counts">' + ["vista", "practicada", "dominada"].map(function (k) {
         return '<span class="ref-st ' + k + '">' + STATUS[k][0] + " " + n[k] + " " + STATUS[k][1] + (n[k] === 1 ? "" : "s") + "</span>";
       }).join(" ") + "</p>" +
@@ -721,38 +852,63 @@
       (t.rows.length > rows.length ? '<p class="muted small">… y ' + (t.rows.length - rows.length) + " filas más en la lección.</p>" : "");
   }
 
-  function itemHtml(b, s) {
-    var x = blockStats(b, s), S = STATUS[x.status];
-    return '<details class="ref-item" data-refblock="' + b.id + '"><summary>' +
+  function itemHtml(b, s, open) {
+    var ahead = b.week > curWeek();
+    var x = ahead ? null : blockStats(b, s), S = x ? STATUS[x.status] : null;
+    return '<details class="ref-item' + (ahead ? " ahead" : "") + '" data-refblock="' + b.id + '"' + (open ? " open" : "") + "><summary>" +
       '<span class="ref-h">' + mk(b.h || strip(b.r).slice(0, 60)) + "</span>" +
-      '<span class="ref-meta"><span class="ref-st ' + x.status + '" title="' + S[1] + '">' + S[0] + " " + S[1] + "</span>" +
-      (x.ok + x.ko ? ' <span class="ref-score">✔ ' + x.ok + " · ✘ " + x.ko + "</span>" : "") + "</span></summary>" +
-      '<div class="ref-body"></div></details>';
+      '<span class="ref-meta">' + (ahead ? '<span class="ref-st ahead">🔒 semana ' + b.week + "</span>" :
+        '<span class="ref-st ' + x.status + '" title="' + S[1] + '">' + S[0] + " " + S[1] + "</span>" +
+        (x.ok + x.ko ? ' <span class="ref-score">✔ ' + x.ok + " · ✘ " + x.ko + "</span>" : "")) + "</span></summary>" +
+      '<div class="ref-body">' + (open ? bodyHtml(b) : "") + "</div></details>";
   }
 
   function bodyHtml(b) {
-    var week = curWeek(), q = blockConcordance(b, { week: week, max: 3 });
+    var week = curWeek();
+    if (b.week > week) {
+      // «Nada antes de su teoría» vale para practicar, no para consultar: se lee con aviso.
+      return '<p class="note">🔒 Esto llega en la semana ' + b.week + " (" + esc(b.weekTitle) + "). Te lo adelanto para consultar; " +
+        "los ejercicios y los usos de tus lecturas aparecen cuando llegues.</p>" +
+        (b.r ? '<p class="rule">' + mk(b.r) + "</p>" : "") + tableHtml(b.table) +
+        ((b.ex || []).length ? '<ul class="exs ref-exs">' + b.ex.slice(0, 3).map(function (p) {
+          return '<li><span class="it">' + mk(p[0]) + '</span> <span class="es">' + esc(p[1]) + "</span></li>";
+        }).join("") + "</ul>" : "");
+    }
+    var q = blockConcordance(b, { week: week, max: 3 });
     return (b.r ? '<p class="rule">' + mk(b.r) + "</p>" : "") + tableHtml(b.table) +
       (q.hits.length ? '<h3>En lo que leíste</h3>' + hitsHtml(q.hits)
         : '<p class="muted small">Todavía no aparece en tus lecturas.</p>') +
       '<div class="row"><button class="btn ghost" data-refblk="' + b.id + '">Ver usos y practicar →</button></div>';
   }
 
-  function listHtml() {
-    var week = curWeek(), s = st();
-    var list = search(grammar(week), gramState.q);
-    if (gramState.filter) list = list.filter(function (b) { return blockStats(b, s).status === gramState.filter; });
-    if (!list.length) return '<p class="muted">Nada con eso. Probá con otra palabra (una forma, un tiempo, «artículo»…).</p>';
+  function groupHtml(list, s, desc) {
     var out = "", last = 0;
-    list.slice().sort(function (a, b) { return b.week - a.week || a.i - b.i; }).forEach(function (b) {
+    list.slice().sort(function (a, b) { return (desc ? b.week - a.week : a.week - b.week) || a.i - b.i; }).forEach(function (b) {
       if (b.week !== last) {
         if (last) out += "</div>";
         out += '<h3 class="ref-wk">Semana ' + b.week + " · " + esc(b.weekTitle) + '</h3><div class="ref-group">';
         last = b.week;
       }
-      out += itemHtml(b, s);
+      out += itemHtml(b, s, gramState.focus === b.id);
     });
-    return out + "</div>";
+    return out ? out + "</div>" : "";
+  }
+
+  /* Everything, not only what was seen: the weeks to come are there to be
+     looked up (with the notice «esto llega en la semana N»), folded after
+     what was seen; a search opens them. */
+  function listHtml() {
+    var week = curWeek(), s = st();
+    var all = search(blocks(), gramState.q);
+    var seen = all.filter(function (b) { return b.week <= week; });
+    var ahead = all.filter(function (b) { return b.week > week; });
+    if (gramState.filter) { seen = seen.filter(function (b) { return blockStats(b, s).status === gramState.filter; }); ahead = []; }
+    if (!seen.length && !ahead.length) return '<p class="muted">Nada con eso. Probá con otra palabra (una forma, un tiempo, «artículo»…).</p>';
+    var focusAhead = ahead.some(function (b) { return b.id === gramState.focus; });
+    return groupHtml(seen, s, true) +
+      (ahead.length ? '<details class="ref-ahead"' + (gramState.q || focusAhead || !seen.length ? " open" : "") + '><summary>🔒 Lo que viene: ' + ahead.length +
+        (ahead.length === 1 ? " construcción" : " construcciones") + " de las semanas " + ahead[0].week + "–" + ahead[ahead.length - 1].week + "</summary>" +
+        '<p class="muted small">Para consultar antes de tiempo. Se practica cuando llega su semana.</p>' + groupHtml(ahead, s, false) + "</details>" : "");
   }
 
   function page() {
@@ -761,13 +917,43 @@
     return '<button class="btn ghost" id="refback">← Volver</button>' +
       "<h1>🧩 Mi gramática</h1>" +
       '<p class="lead">Todo lo que viste hasta la semana ' + week + ": la regla corta, la tabla y cómo aparece en " +
-      "lo que ya leíste. Tocá una construcción para abrirla.</p>" +
+      "lo que ya leíste. Lo que viene también está, con aviso. Tocá una construcción para abrirla.</p>" +
       '<input type="search" id="refq" class="ref-q" placeholder="Buscar: una forma, un tiempo, «artículo»…" value="' + esc(gramState.q) + '" autocomplete="off">' +
       '<div class="chips ref-filters">' + [["", "Todas"], ["vista", "👁️ Vistas"], ["practicada", "✍️ Practicadas"], ["dominada", "⭐ Dominadas"]].map(function (f) {
         return '<button class="tab' + (gramState.filter === f[0] ? " on" : "") + '" data-reff="' + f[0] + '">' + f[1] + "</button>";
       }).join("") + "</div>" +
       '<div id="reflist">' + listHtml() + "</div>" +
       '<p class="muted science">🔬 Ver muchos usos reales de una forma y decidir cuál está bien enseña su gramática (aprendizaje basado en datos: Boulton y Cobb 2017).</p>';
+  }
+
+  /* The block in the lesson and in the «¿Por qué?» sheet: a way to its
+     real uses and its state (the sheet), without leaving the round. */
+  function blockLink(b) {
+    refresh();
+    if (!D.course || !b) return "";
+    var id = blockIdOf(b);
+    if (!id) return "";
+    return '<p class="ref-blink"><button class="tab" data-refblk="' + id + '">🧩 Usos reales y cómo te va · Mi gramática</button></p>';
+  }
+  /* At the end of a lesson: what it leaves in «Mi gramática». */
+  function lessonNote(week, idx) {
+    refresh();
+    var bs = grammar(52).filter(function (b) { return b.week === week && (!idx || idx.indexOf(b.i) >= 0); });
+    if (!bs.length) return "";
+    var names = bs.slice(0, 4).map(function (b) { return mk(b.h || strip(b.r).slice(0, 40)); });
+    return '<p class="note ref-lesnote">🧩 Queda en tu gramática: ' + names.join(" · ") + (bs.length > 4 ? " y " + (bs.length - 4) + " más" : "") +
+      '. <button class="tab" data-ref-gram="' + bs[0].id + '">Ver →</button></p>';
+  }
+  // Open «Mi gramática» at a block (or at the top).
+  function openGram(id) {
+    gramState.focus = id && id !== "1" ? id : null;
+    if (gramState.focus) { gramState.q = ""; gramState.filter = ""; }
+    closeSheet();
+    if (H && H.open) H.open();
+    if (gramState.focus && typeof document !== "undefined") setTimeout(function () {
+      var el = document.querySelector('[data-refblock="' + gramState.focus + '"]');
+      if (el && el.scrollIntoView) el.scrollIntoView({ block: "start" });
+    }, 60);
   }
 
   function relist() {
@@ -790,7 +976,7 @@
       openBlock(el.getAttribute("data-refblk"));
     } else if ((el = t.closest("[data-ref-gram]"))) {
       e.preventDefault(); e.stopPropagation();
-      if (H && H.open) H.open();
+      openGram(el.getAttribute("data-ref-gram"));
     } else if (t.closest("#refclose")) {
       e.preventDefault(); closeSheet();
     } else if ((el = t.closest("[data-refans]"))) {
@@ -820,7 +1006,7 @@
     attach.done = true;
     document.addEventListener("click", onClick, true);
     document.addEventListener("input", function (e) {
-      if (e.target && e.target.id === "refq") { gramState.q = e.target.value; relist(); }
+      if (e.target && e.target.id === "refq") { gramState.q = e.target.value; gramState.focus = null; relist(); }
     });
     document.addEventListener("toggle", function (e) {
       var d = e.target;
@@ -835,9 +1021,12 @@
     setData: setData, corpus: corpus, tokenize: tokenize, formsOf: formsOf, concordance: concordance,
     blocks: blocks, grammar: grammar, blockById: blockById, blockForms: blockForms, blockConcordance: blockConcordance,
     search: search, blockStats: blockStats, exercise: exercise, record: record, diff: diff,
+    blockIdOf: blockIdOf, lookup: lookup, suggest: suggest, collocations: collocations, bankEntry: bankEntry,
     // pantalla
     attach: attach, onGloss: onGloss, button: button, entry: entry, page: page,
-    openWord: openWord, openBlock: openBlock, close: closeSheet, has: has
+    openWord: openWord, openBlock: openBlock, close: closeSheet, has: has,
+    blockLink: blockLink, lessonNote: lessonNote, openGram: openGram, hitsHtml: hitsHtml,
+    ready: function () { refresh(); return !!D.course; }
   };
   if (typeof module === "object" && module.exports) module.exports = api;
   else root.Referencia = api;

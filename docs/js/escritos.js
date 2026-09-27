@@ -5,8 +5,12 @@
  *   🔁 Variaciones de frase (variaciones.js): una ronda del motor de
  *      siempre, con corrección de Diagnosi.
  *   🧩 C-test y cloze racional (ctest.js) sobre textos YA LEÍDOS (lecturas
- *      y dictogloss hechos): pantalla propia, corrección por hueco, una
- *      segunda vuelta para lo que quedó mal.
+ *      y dictogloss hechos; desde la semana 27, también la lectura larga del
+ *      tramo y la transcripción de la escucha larga ya hecha): pantalla
+ *      propia, corrección por hueco, una segunda vuelta para lo que quedó
+ *      mal.  Un texto largo se trabaja por pasajes (passage), y el largo del
+ *      pasaje, la cantidad de huecos y de piezas crecen con la semana
+ *      (CTest.level, Ordenar.level).
  *   🔀 «Ordená el texto» (ordenar.js): párrafos u oraciones de un texto ya
  *      visto, con los conectores marcados como pista.
  *   ☕ En la pausa, con poco peso: la mitad de las veces, un solo ítem de
@@ -43,19 +47,63 @@
 
   /* ------------------------------------------------------------ fuentes */
 
+  var ALL = null;
   function allSources() {
+    if (ALL) return ALL;
     var out = [];
     if (root.Letture) root.Letture.EPISODI.forEach(function (ep) {
-      if (ep.text) out.push({ id: "ep:" + ep.id, ep: ep.id, title: ep.title, text: ep.text, week: ep.week || 1, emoji: ep.emoji || "📖", kind: "lectura" });
+      if (ep.text) out.push({ id: "ep:" + ep.id, ep: ep.id, title: ep.title, text: ep.text, week: ep.week || 1, emoji: ep.emoji || "📖",
+                              kind: ep.series === "lunga" ? "larga" : "lectura" });
     });
     var Dg = root.Suoni && root.Suoni.dictogloss && root.Suoni.dictogloss();
     if (Dg) Dg.TESTI.forEach(function (t) {
       out.push({ id: "dg:" + t.week, dg: t.week, title: t.title, text: t.text, week: t.week, emoji: "📝", kind: "dictogloss" });
     });
+    // The long listenings of the tramo, transcribed: one turn per paragraph.
+    var TR = root.TRAMO_DATA;
+    ((TR && TR.SETTIMANE) || []).forEach(function (w) {
+      var a = w.ascolto;
+      if (!a || !a.turns || !a.turns.length) return;
+      out.push({ id: "as:" + w.week, as: w.week, title: a.title, week: w.week, emoji: "🎧", kind: "escucha",
+                 text: a.turns.map(function (t) { return "— " + String(t[1]).trim(); }).join("\n") });
+    });
+    if (out.length) ALL = out;
     return out;
   }
   function seen(state, src) {
-    return src.ep ? !!(state.letture || {})[src.ep] : !!(state.dictogloss || {})[src.dg];
+    if (src.ep) return !!(state.letture || {})[src.ep];
+    if (src.as) return !!(((state.tramo || {}).asc || {})[src.as]);
+    return !!(state.dictogloss || {})[src.dg];
+  }
+  var KIND = { lectura: "Lectura", larga: "Lectura larga", dictogloss: "Dictogloss", escucha: "Escucha transcripta" };
+
+  /* ----------------------------------------------------------- pasajes */
+
+  function wordsIn(t) { return String(t).split(/\s+/).filter(function (x) { return /[A-Za-zÀ-ÿ]/.test(x); }).length; }
+  // How long a passage is: it grows with the course.
+  function passageWords(week) { week = +week || 1; return week < 14 ? 120 : week < 27 ? 180 : week < 40 ? 240 : 320; }
+  /* The passages of a text: runs of whole paragraphs of about n words (a
+     long paragraph is one passage).  A short text is one passage. */
+  function passages(text, n) {
+    var pars = String(text).split(/\n+/).map(function (p) { return p.trim(); }).filter(Boolean);
+    if (wordsIn(text) <= n * 1.4) return [pars.join("\n")];
+    var out = [], cur = [], w = 0;
+    pars.forEach(function (p) {
+      var pw = wordsIn(p);
+      if (cur.length && w + pw > n * 1.2) { out.push(cur.join("\n")); cur = []; w = 0; }
+      cur.push(p); w += pw;
+      if (w >= n) { out.push(cur.join("\n")); cur = []; w = 0; }
+    });
+    if (cur.length) {
+      // a short tail joins the previous passage
+      if (out.length && w < n / 2) out[out.length - 1] += "\n" + cur.join("\n"); else out.push(cur.join("\n"));
+    }
+    return out;
+  }
+  // The passage number k (cycling) of a source for a week, with its place.
+  function passage(src, week, k) {
+    var ps = passages(src.text, passageWords(week)), i = ((k || 0) % ps.length + ps.length) % ps.length;
+    return { text: ps[i], i: i, of: ps.length };
   }
   /* Only what was already read (or rebuilt in a dictogloss): the text is
      known, so the gaps test the language, not the plot. */
@@ -68,13 +116,15 @@
   }
   // The text of the week for a mission: the week's own reading or
   // dictogloss if done, else the latest one read before.
-  function weekSource(state, week, test) {
+  function weekSource(state, week, test, prefer) {
     var list = sources(state, week).filter(function (s) { return !test || test(s); });
     var own = list.filter(function (s) { return s.week === week; });
+    var rank = function (s) { var i = (prefer || []).indexOf(s.kind); return i < 0 ? 9 : i; };
+    own.sort(function (a, b) { return rank(a) - rank(b); });
     return own[0] || list[0] || null;
   }
-  function orderable(s) { return !!(root.Ordenar && root.Ordenar.build(s.text)); }
-  function clozeable(s) { return !!(root.CTest && root.CTest.build(s.text, "cloze").gaps.length >= 4); }
+  function orderable(s) { return !!(root.Ordenar && root.Ordenar.build(passage(s, s.week).text)); }
+  function clozeable(s) { return !!(root.CTest && root.CTest.build(passage(s, s.week).text, "cloze").gaps.length >= 4); }
   function modeFor(week) { return week >= CTEST_WEEK ? "ctest" : "cloze"; }
   var MODE = { ctest: "C-test", cloze: "Cloze" };
 
@@ -90,17 +140,19 @@
                                                  : "Opcional · primero practicá las frases de la semana: después las reescribís cambiando una pieza" });
     }
     if (w.week >= 2 && root.CTest) {
-      var md = modeFor(w.week), s = weekSource(state, w.week, md === "cloze" ? clozeable : null);
+      var md = modeFor(w.week), s = weekSource(state, w.week, md === "cloze" ? clozeable : null, ["larga", "lectura", "escucha", "dictogloss"]);
       if (s) out.push({ kind: "esc-huecos", arg: s.id + "|" + w.week + "|" + md, done: wk.huecos != null, ico: "🧩", opt: true,
         title: MODE[md] + ": «" + s.title + "»",
         sub: (wk.huecos != null ? "Hecho · " + wk.huecos + " %" : "Opcional") + " · " +
-          (md === "ctest" ? "el texto que ya leíste, con la mitad de las palabras borrada" : "el texto que ya leíste, sin sus conectores ni preposiciones") });
+          (s.kind === "larga" ? "un pasaje de la lectura larga, " : s.kind === "escucha" ? "la escucha que ya hiciste, transcripta, " : "el texto que ya leíste, ") +
+          (md === "ctest" ? "con la mitad de las palabras borrada" : "sin sus conectores ni preposiciones") });
     }
     if (w.week >= 3 && root.Ordenar) {
-      var so = weekSource(state, w.week, orderable);
+      var so = weekSource(state, w.week, orderable, ["escucha", "larga", "lectura", "dictogloss"]);
       if (so) out.push({ kind: "esc-ordenar", arg: so.id + "|" + w.week, done: wk.ordenar != null, ico: "🔀", opt: true,
         title: "Ordená el texto: «" + so.title + "»",
-        sub: (wk.ordenar != null ? "Hecho · " + wk.ordenar + " %" : "Opcional") + " · las partes desordenadas; los conectores son la pista" });
+        sub: (wk.ordenar != null ? "Hecho · " + wk.ordenar + " %" : "Opcional") + " · " +
+          (so.kind === "escucha" ? "los turnos de la escucha, desordenados" : "las partes desordenadas") + "; los conectores son la pista" });
     }
     return out;
   }
@@ -217,15 +269,20 @@
   function open(kind, srcId, opts) {
     opts = opts || {};
     var src = srcId ? byId(srcId) : null;
-    cur = { kind: kind, src: src, week: opts.week || null, from: opts.from || "frasi", mode: opts.mode || null, pickFor: opts.pickFor || null };
+    cur = { kind: kind, src: src, week: opts.week || null, from: opts.from || "frasi", mode: opts.mode || null, pickFor: opts.pickFor || null,
+            part: opts.part || 0 };
+    // the week sets the difficulty: the mission's, else the learner's
+    var lv = cur.week || Math.min((H && H.state().unlocked) || 1, 52);
+    if (src) { cur.pas = passage(src, lv, cur.part); cur.text = cur.pas.text; }
     if (kind === "ctest") {
       cur.mode = cur.mode || "ctest";
-      cur.built = root.CTest.build(src.text, cur.mode);
+      cur.built = root.CTest.build(cur.text, cur.mode, root.CTest.level ? root.CTest.level(lv)[cur.mode] : null);
       cur.vals = cur.built.gaps.map(function () { return ""; });
       cur.pass = 0;            // 0 writing, 1 second pass on the wrong ones, 2 done
       cur.first = null;
     } else if (kind === "ordenar") {
-      cur.built = root.Ordenar.build(src.text);
+      cur.built = root.Ordenar.build(cur.text, Object.assign({ unit: src.kind === "escucha" ? "intervenciones" : null },
+        root.Ordenar.level ? root.Ordenar.level(lv) : {}));
       if (!cur.built) { H.toast("Este texto es muy corto para ordenarlo."); return; }
       cur.pool = cur.built.shuffled.slice();
       cur.order = [];
@@ -260,12 +317,12 @@
         if (!orderable(s)) return;
         var od = e.ordenar[s.id];
         html += '<button class="mission" data-escopen="ordenar|' + esc(s.id) + '"><span class="mi">' + s.emoji + "</span><span><b>" + esc(s.title) + "</b>" +
-          "<small>" + (s.kind === "dictogloss" ? "Dictogloss" : "Lectura") + " · semana " + s.week + (od ? " · tu mejor: " + od.pct + " %" : "") + "</small></span>" +
+          "<small>" + KIND[s.kind] + " · semana " + s.week + (od ? " · tu mejor: " + od.pct + " %" : "") + "</small></span>" +
           '<span class="go">›</span></button>';
       } else {
         var c1 = e.huecos[s.id + ":ctest"], c2 = e.huecos[s.id + ":cloze"];
         html += '<div class="mission esc-pick"><span class="mi">' + s.emoji + "</span><span><b>" + esc(s.title) + "</b>" +
-          "<small>" + (s.kind === "dictogloss" ? "Dictogloss" : "Lectura") + " · semana " + s.week + "</small>" +
+          "<small>" + KIND[s.kind] + " · semana " + s.week + "</small>" +
           '<span class="row">' +
             '<button class="tab" data-escopen="ctest|' + esc(s.id) + '|ctest">C-test' + (c1 ? " · " + c1.pct + " %" : "") + "</button>" +
             (clozeable(s) ? '<button class="tab" data-escopen="ctest|' + esc(s.id) + '|cloze">Cloze' + (c2 ? " · " + c2.pct + " %" : "") + "</button>" : "") +
@@ -274,6 +331,8 @@
     });
     return html + "</div>";
   }
+
+  function pasLabel() { return cur.pas && cur.pas.of > 1 ? " · pasaje " + (cur.pas.i + 1) + " de " + cur.pas.of : ""; }
 
   function gapHtml(g, k) {
     var st = cur.status ? cur.status[k] : null;
@@ -290,7 +349,7 @@
 
   function renderCtest() {
     var b = cur.built, s = cur.src, isC = cur.mode === "ctest";
-    var html = head(MODE[cur.mode] + (cur.week ? " · semana " + cur.week : ""), s.title);
+    var html = head(MODE[cur.mode] + (cur.week ? " · semana " + cur.week : "") + pasLabel(), s.title);
     if (cur.pass === 0) html += '<p class="lead">' + (isC
       ? "Es el texto que ya leíste. Desde la segunda oración, a <b>cada segunda palabra le falta la segunda mitad</b>: escribí solo lo que falta (<i>ca</i>__ → <i>sa</i>). Fijate en la terminación: género, número, persona."
       : "Es el texto que ya leíste, sin sus <b>conectores</b> (con.) ni sus <b>preposiciones</b> (prep.): escribí la palabra entera. Muchas preposiciones van con el artículo pegado.") + "</p>";
@@ -319,7 +378,7 @@
         : "los <b>conectores</b>: preguntate qué relación hay entre las dos partes (suma, contraste, causa, consecuencia, tiempo).") + "</p>";
     } else if (r.n - r.right > 0) html += '<p class="note">Lo que quedó sin completar está debajo de cada hueco. En el C-test cuenta la palabra exacta: la terminación dice género, número, persona y tiempo.</p>';
     return html + '<div class="row" style="margin-top:14px"><button class="btn" id="escdone">← ' + (cur.from === "briefing" ? "Seguir con la semana" : "Volver") + "</button>" +
-      '<button class="btn ghost" id="escagain">Otra vez</button></div>';
+      '<button class="btn ghost" id="escagain">' + (cur.pas && cur.pas.of > 1 ? "Otro pasaje" : "Otra vez") + "</button></div>";
   }
 
   function clueHtml(unit) {
@@ -333,7 +392,7 @@
 
   function renderOrdenar() {
     var b = cur.built, s = cur.src, units = b.units, done = cur.pass === 2;
-    var html = head("Ordená el texto" + (cur.week ? " · semana " + cur.week : ""), s.title);
+    var html = head("Ordená el texto" + (cur.week ? " · semana " + cur.week : "") + pasLabel(), s.title);
     if (cur.pass === 0) html += '<p class="lead">Las ' + b.unit + " de este texto están desordenadas. La primera ya está en su lugar. " +
       "Tocá las demás en el orden en que van. Las palabras marcadas son la pista: <mark class=\"esc-clue\">conectores y tiempo</mark> " +
       "(después, pero, a la noche…) y <mark class=\"esc-clue ref\">lo que remite a algo ya dicho</mark> (él, ella, eso).</p>";
@@ -363,7 +422,7 @@
       html += '<div class="scorebig"><b>' + g.pairs + " / " + g.of + "</b><span>uniones bien a la primera</span>" + (cur.xp ? "<span>+" + cur.xp + " xp</span>" : "") + "</div>" +
         (cur.grade.ok ? "" : '<h3>El orden del texto</h3><ol class="esc-model">' + units.map(function (u) { return "<li>" + clueHtml(u) + "</li>"; }).join("") + "</ol>") +
         '<div class="row" style="margin-top:14px"><button class="btn" id="escdone">← ' + (cur.from === "briefing" ? "Seguir con la semana" : "Volver") + "</button>" +
-        '<button class="btn ghost" id="escagain">Otra vez</button></div>';
+        '<button class="btn ghost" id="escagain">' + (cur.pas && cur.pas.of > 1 ? "Otro pasaje" : "Otra vez") + "</button></div>";
     }
     return html + "</div>";
   }
@@ -454,7 +513,7 @@
     if (screen !== "escritos" || !cur) return;
     on("#escback", back);
     on("#escdone", back);
-    on("#escagain", function () { open(cur.kind, cur.src.id, { week: cur.week, from: cur.from, mode: cur.mode, pickFor: cur.pickFor }); });
+    on("#escagain", function () { open(cur.kind, cur.src.id, { week: cur.week, from: cur.from, mode: cur.mode, pickFor: cur.pickFor, part: (cur.part || 0) + 1 }); });
     document.querySelectorAll("[data-escopen]").forEach(function (b) {
       b.onclick = function () {
         var a = b.dataset.escopen.split("|");
@@ -523,7 +582,8 @@
 
   var api = { attach: attach, missions: missions, handles: handles, go: go, open: open, render: render, wire: wire,
               variaciones: variaciones, roundDone: roundDone, pausaItem: pausaItem, treinoHtml: treinoHtml,
-              sources: sources, clozeItem: clozeItem, tilesItem: tilesItem, current: function () { return cur; } };
+              sources: sources, allSources: allSources, passages: passages, passage: passage, passageWords: passageWords,
+              clozeItem: clozeItem, tilesItem: tilesItem, current: function () { return cur; } };
   if (typeof module === "object" && module.exports) module.exports = api;
   root.Escritos = api;
 })(typeof window !== "undefined" ? window : globalThis);

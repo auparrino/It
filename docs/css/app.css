@@ -778,3 +778,58 @@ details.fold[open] > summary { margin-bottom: 10px; }
   .seg button { min-width: 44px; }
 }
 .prog-boss td:last-child { font-family: inherit; white-space: nowrap; font-weight: 700; }
+
+/* ---------------------------------------------- las capas (docs/js/capas.js):
+   Leggi y Allena con lo de esta semana arriba y el resto plegado; «Consultar» */
+.capa-week h2 { margin: 0 0 4px; }
+.capa-week .eps { margin: 8px 0 4px; }
+.capa-input { margin: 8px 0 0; }
+details.capa { margin: 10px 0; border-radius: 14px; border: 1px solid color-mix(in srgb, currentColor 14%, transparent);
+  background: color-mix(in srgb, currentColor 3%, transparent); }
+details.capa > summary { cursor: pointer; list-style: none; display: flex; align-items: baseline; gap: 6px 10px; flex-wrap: wrap;
+  padding: 13px 14px; min-height: 48px; box-sizing: border-box; }
+details.capa > summary::-webkit-details-marker { display: none; }
+details.capa > summary::after { content: "▸"; margin-left: auto; opacity: .55; order: 3; }
+details.capa[open] > summary::after { content: "▾"; }
+.capa-t { font-weight: 800; font-size: 1.08rem; flex: 1 1 auto; min-width: 0; }
+.capa-m { font-size: .8rem; opacity: .7; white-space: nowrap; order: 2; }
+.capa-b { padding: 0 12px 12px; }
+.capa-b > p.muted:first-child { margin-top: 0; }
+details.capa.capa-sub { margin: 8px 0; background: transparent; }
+details.capa.capa-sub > summary { padding: 10px 12px; min-height: 44px; }
+details.capa.capa-sub .capa-t { font-size: .98rem; }
+.cq-entry { width: 100%; margin: 4px 0 2px; }
+button.cq-card { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; font: inherit; color: inherit; cursor: pointer; }
+button.cq-card .e { font-size: 1.5rem; }
+button.cq-card b { display: block; font-size: 1.05rem; }
+button.cq-card .muted { display: block; font-size: .8rem; line-height: 1.35; }
+button.cq-card .go { margin-left: auto; font-size: 1.4rem; opacity: .5; }
+.cq-search .ref-q { margin-bottom: 4px; }
+.cq-sug { display: grid; gap: 6px; margin: 8px 0; }
+.cq-sug .ep { padding-top: 8px; padding-bottom: 8px; }
+h3.cq-h3 { margin: 12px 0 4px; font-size: .95rem; opacity: .8; }
+.cq-word { margin: 10px 0 4px; }
+.cq-head { display: flex; align-items: center; gap: 8px; }
+.cq-head h2 { margin: 0; flex: 1; }
+.cq-es { font-size: 1.05rem; margin: 4px 0 6px; }
+.cq-chips .chip { display: inline-block; font-size: .76rem; font-weight: 700; padding: 2px 8px; border-radius: 999px;
+  background: color-mix(in srgb, currentColor 9%, transparent); }
+.cq-word h3 { margin: 14px 0 4px; font-size: 1rem; }
+ul.cq-lines, ul.cq-coll { margin: 4px 0; padding-left: 20px; }
+ul.cq-lines li, ul.cq-coll li { margin: 4px 0; line-height: 1.4; }
+.cq-tools { margin-top: 12px; }
+.ref-blink { margin: 10px 0 0; }
+.ref-blink .tab { font-size: .85rem; }
+.ref-lesnote { text-align: left; }
+.ref-st.ahead { background: color-mix(in srgb, currentColor 6%, transparent); opacity: .8; }
+details.ref-item.ahead { opacity: .85; }
+details.ref-ahead { margin: 18px 0 6px; }
+details.ref-ahead > summary { cursor: pointer; font-weight: 700; padding: 8px 0; }
+.refsheet { z-index: 68; }
+.speed-line { margin: 10px 2px 8px; }
+.speed-note { margin-top: 10px; }
+svg.speed-curve { width: 100%; max-width: 420px; height: auto; display: block; margin: 6px 0 2px; }
+svg.speed-curve path { fill: none; stroke: currentColor; stroke-width: 2; opacity: .75; }
+svg.speed-curve circle { fill: currentColor; }
+svg.speed-curve line.ax { stroke: currentColor; opacity: .25; }
+svg.speed-curve text { font-size: 9px; fill: currentColor; opacity: .6; }

@@ -237,7 +237,87 @@
     return null;
   }
 
+  /* ------------------------------------------------ relectura cronometrada */
+
+  /* Palabras por minuto desde que se abre el texto hasta «Terminé», contadas
+     solo si la comprensión de esa vuelta queda en 70 % o más (leer rápido
+     sin entender no es leer: Nation 2009, fluidez lectora; Chang y Millett
+     2013, relectura cronometrada).  La curva del año son las primeras
+     lecturas por semana del curso; releer un texto conocido para bajar el
+     tiempo es el ejercicio de fluidez.
+
+       state.lectura = { pend: {id: {ms, words, at, kar}},
+                         runs: [{id, w, wpm, pct, at, re}], best: {id: wpm} } */
+  var SPEED_MIN_PCT = 70;          // comprensión mínima para que la vuelta cuente
+  var SPEED_MAX = 600;             // más rápido que esto es mirar, no leer
+  var SPEED_MIN = 15;              // más lento que esto: el texto quedó abierto
+  var SPEED_KEEP = 400;            // vueltas guardadas
+
+  function speedStore(state) {
+    var s = state.lectura;
+    if (!s || typeof s !== "object" || Array.isArray(s)) s = state.lectura = {};
+    if (!s.pend || typeof s.pend !== "object") s.pend = {};
+    if (!Array.isArray(s.runs)) s.runs = [];
+    if (!s.best || typeof s.best !== "object") s.best = {};
+    return s;
+  }
+  function wordsOf(ep) {
+    return allTokens(ep).filter(function (t) { return /[a-zà-öø-ÿ]/i.test(t); }).length;
+  }
+  // «Terminé»: the time of this reading waits for the questions.
+  function speedNote(state, ep, ms, opts) {
+    if (!ep || !(ms > 0)) return null;
+    opts = opts || {};
+    var s = speedStore(state);
+    s.pend[ep.id] = { ms: Math.round(ms), words: wordsOf(ep), at: opts.now || Date.now(), kar: !!opts.kar,
+                      w: +opts.week || ep.week || 1 };
+    return s.pend[ep.id];
+  }
+  /* The questions are over (pct of this attempt): the reading counts or not.
+     → { counted, wpm, best, prev, why } */
+  function speedCommit(state, id, pct, now) {
+    var s = speedStore(state), p = s.pend[id];
+    if (!p) return { counted: false, why: "none" };
+    delete s.pend[id];
+    if (p.kar) return { counted: false, why: "audio" };
+    var wpm = Math.round(p.words / (p.ms / 60000));
+    if (pct < SPEED_MIN_PCT) return { counted: false, why: "comp", wpm: wpm };
+    if (wpm > SPEED_MAX) return { counted: false, why: "fast", wpm: wpm };
+    if (wpm < SPEED_MIN) return { counted: false, why: "slow", wpm: wpm };
+    var prev = s.best[id] || 0, re = s.runs.some(function (r) { return r.id === id; });
+    s.runs.push({ id: id, w: p.w, wpm: wpm, pct: pct, at: now || Date.now(), re: re, ms: p.ms });
+    if (s.runs.length > SPEED_KEEP) s.runs = s.runs.slice(-SPEED_KEEP);
+    if (wpm > prev) s.best[id] = wpm;
+    return { counted: true, wpm: wpm, prev: prev, best: Math.max(prev, wpm), re: re };
+  }
+  /* The curve of the year: the median of the first readings of each week of
+     the course → [{w, wpm, n}], and the rereadings apart. */
+  function speedCurve(state) {
+    var s = speedStore(state), by = {};
+    s.runs.forEach(function (r) {
+      if (r.re) return;
+      (by[r.w] = by[r.w] || []).push(r.wpm);
+    });
+    return Object.keys(by).map(Number).sort(function (a, b) { return a - b; }).map(function (w) {
+      var l = by[w].slice().sort(function (a, b) { return a - b; });
+      return { w: w, wpm: l[Math.floor(l.length / 2)], n: l.length };
+    });
+  }
+  // Minutes of timed reading in the last `days` days.
+  function speedMinutes(state, days, now) {
+    var s = speedStore(state), since = (now || Date.now()) - (days || 7) * 864e5, ms = 0;
+    s.runs.forEach(function (r) { if (r.at >= since) ms += r.ms || 0; });
+    return Math.round(ms / 60000);
+  }
+
   var api = {
+    SPEED_MIN_PCT: SPEED_MIN_PCT,
+    speedNote: speedNote,
+    speedCommit: speedCommit,
+    speedCurve: speedCurve,
+    speedMinutes: speedMinutes,
+    speedStore: speedStore,
+    wordsOf: wordsOf,
     EPISODI: EPISODI,
     SERIES: SERIES,
     ofSeries: ofSeries,

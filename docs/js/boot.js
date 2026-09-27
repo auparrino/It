@@ -63,6 +63,7 @@
     { shared: "tres_lenguas_data.js" }, { core: "tres_lenguas.js" },
     { core: "tramo.js" },
     { core: "plan.js" }, { core: "progreso.js" }, { core: "inicio.js" },
+    { core: "capas.js" },
     { core: "app.js" }
   ];
 

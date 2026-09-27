@@ -878,6 +878,7 @@
     if (Duelli && id.indexOf("duel:") === 0) return Duelli.reviewItem(id);
     if (root.EscrituraPlus && id.indexOf("ep:") === 0) return root.EscrituraPlus.reviewItem(id, opts && opts.state);   // reformulación
     if (root.Biblioteca && id.indexOf("lib:") === 0) return root.Biblioteca.reviewItem(id, opts && opts.state);   // 📌 de la Biblioteca
+    if (root.TresLenguas && id.indexOf("tres:") === 0) return root.TresLenguas.reviewItem(id);   // lo fallado en Tres lenguas
     return null;
   }
 
@@ -886,6 +887,7 @@
               (Banca && Banca.loaded() && id.indexOf("b:") === 0 && Banca.item(id)) ||
               (root.EscrituraPlus && id.indexOf("ep:") === 0) ||
               (root.Biblioteca && id.indexOf("lib:") === 0) ||
+              (root.TresLenguas && id.indexOf("tres:") === 0 && !!root.TresLenguas.reviewItem(id)) ||
               (Duelli && id.indexOf("duel:") === 0 && !!Duelli.reviewItem(id)));
   }
 

@@ -18,7 +18,14 @@
  * Solo la mecánica, sin DOM: build() arma los tramos y los huecos,
  * grade() corrige cada hueco.  La pantalla está en escritos.js.
  *
+ * La dificultad según la semana (level(week)): cuántos huecos, desde qué
+ * largo se corta una palabra (al principio, tres letras o más: cortar *un*
+ * o *lo* en un teléfono son toques que no enseñan), cada cuántas palabras
+ * va un hueco del cloze y si entran las conjunciones de una letra (*e*,
+ * *a*), que casi no informan.
+ *
  * API (window.CTest y module.exports):
+ *   level(week)              {ctest: {max, minLen}, cloze: {max, every, minLen}}
  *   build(text, mode, opts)  {mode, parts: [{t} | {gap}], gaps: [{k, shown,
  *                            answer, full, cat, alt}], sentences}
  *   grade(gap, given)        "giusto" | "quasi" | "sbagliato"
@@ -65,9 +72,9 @@
   // A word the C-test may damage: only letters (no apostrophe, hyphen or
   // digit), two letters or more, not a name (capitalised in mid-sentence,
   // or at the start of a sentence when the text never has it in lower case).
-  function damageable(t, toks, k, lower) {
+  function damageable(t, toks, k, lower, minLen) {
     var w = t.word;
-    if (!w || w.length < 2 || /['’\-]/.test(w)) return false;
+    if (!w || w.length < (minLen || 2) || /['’\-]/.test(w)) return false;
     if (/^[A-ZÀ-ÖØ-Þ]/.test(w)) {
       var first = k === 0 || toks[k - 1].sent !== t.sent;
       if (!first || !lower[w.toLowerCase()]) return false;
@@ -87,7 +94,7 @@
     toks.forEach(function (t, k) {
       if (gaps.length >= max) { if (stop < 0) stop = t.sent + 1; return; }
       if (t.sent < 1 || t.sent >= lastSent) return;
-      if (!damageable(t, toks, k, lower)) return;
+      if (!damageable(t, toks, k, lower, opts.minLen)) return;
       count++;
       if (count % 2 === 0) {
         var keep = Math.floor(t.word.length / 2);
@@ -109,7 +116,7 @@
       since++;
       if (gaps.length >= max || t.sent < 1 || !t.word) return;
       var w = t.word.toLowerCase(), cat = conn[w] ? "conector" : prep[w] ? "preposición" : null;
-      if (!cat || since < gapEvery) return;
+      if (!cat || since < gapEvery || w.length < (opts.minLen || 1)) return;
       // variety: the same word at most three times
       if ((seen[w] = (seen[w] || 0) + 1) > 3) return;
       since = 0;
@@ -136,6 +143,17 @@
     }
     flush();
     return { mode: mode, parts: parts, gaps: gaps };
+  }
+
+  /* The difficulty of the week: fewer gaps and longer words at the start,
+     the full Klein-Braley test from the third season. */
+  function level(week) {
+    week = +week || 1;
+    return {
+      ctest: { max: week < 14 ? 15 : week < 27 ? 20 : week < 40 ? 25 : 30, minLen: week < 27 ? 3 : 2 },
+      cloze: { max: week < 14 ? 8 : week < 27 ? 12 : week < 40 ? 15 : 20, every: week < 27 ? 5 : week < 40 ? 4 : 3,
+               minLen: week < 40 ? 2 : 1 }
+    };
   }
 
   function build(text, mode, opts) {
@@ -165,7 +183,7 @@
     return { right: right, close: close, n: n, per: per, pct: n ? Math.round((right + close * 0.5) / n * 100) : 0 };
   }
 
-  var api = { build: build, grade: grade, score: score, sentences: sentences, tokenize: tokenize, norm: norm };
+  var api = { build: build, level: level, grade: grade, score: score, sentences: sentences, tokenize: tokenize, norm: norm };
   if (typeof module === "object" && module.exports) module.exports = api;
   root.CTest = api;
 })(typeof window !== "undefined" ? window : globalThis);

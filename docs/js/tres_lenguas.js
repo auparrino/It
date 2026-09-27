@@ -9,7 +9,8 @@
  *  2. El duelo «¿de qué lengua es?»: una frase o una palabra; decir de qué
  *     lengua es, encontrar la palabra que se coló de la otra y corregirla.
  *     Se abre si hay progreso guardado en los dos idiomas o si el alumno lo
- *     activa a mano.
+ *     activa a mano (los contrastes están siempre abiertos).  Lo que se
+ *     falla vuelve en el repaso como ficha «tres:<n>» (reviewItem).
  *  3. En el diagnóstico, una palabra de la otra lengua es un error propio
  *     (categoría «otra_lengua»): «¡Eso es …!», con la forma correcta.
  *
@@ -20,7 +21,11 @@
  * API (window.TresLenguas, module.exports):
  *   intruders(given, expected)   las palabras de la otra lengua en una respuesta
  *   amend(d, given, expected)    agrega el hallazgo a un diagnóstico
- *   available(state) / enable(on)
+ *   available(state) / enable(on, state)   el duelo (los contrastes, siempre)
+ *   store(state)                 state.tres: activación, mejor duelo, rondas
+ *                                (en el guardado del idioma y en la copia;
+ *                                antes en localStorage «c1.tres.v1»: se copia)
+ *   reviewItem(id) / toReview(state, ks)   las fichas del repaso
  *   contrasts(topic) / duelSession(rnd, n)
  *   card(state), render(state), wire(el, opts)   la interfaz (app.js)
  */
@@ -254,18 +259,35 @@
 
   /* ------------------------------------------------ abierto o no, guardado */
 
+  /* Lo que se guarda va en el estado del idioma (state.tres: con su prefijo
+     y dentro de la copia de seguridad).  Antes vivía suelto en
+     localStorage[KEY], compartido: se copia una vez a cada idioma. */
   function ls() { try { return root.localStorage || null; } catch (e) { return null; } }
   function readJSON(k) {
     var s = ls();
     if (!s) return null;
     try { var v = s.getItem(k); return v ? JSON.parse(v) : null; } catch (e) { return null; }
   }
-  function store() { return readJSON(KEY) || {}; }
-  function save(o) {
-    var s = ls();
-    if (!s) return;
-    try { s.setItem(KEY, JSON.stringify(o)); } catch (e) { /* sin almacenamiento */ }
+  var ST = null;               // () → the state of the language (app.js, wire)
+  function curState() { try { return ST ? ST() : null; } catch (e) { return null; } }
+  function store(state) {
+    state = state || curState();
+    if (!state) return readJSON(KEY) || {};          // node, without a state: the old place
+    var t = state.tres;
+    if (!t || typeof t !== "object" || Array.isArray(t)) t = state.tres = {};
+    if (!t.mig) {
+      var old = readJSON(KEY);
+      if (old) {
+        if (old.on && t.on == null) t.on = true;
+        if (old.best && old.best.duel && !(t.best && t.best.duel >= old.best.duel)) t.best = { duel: old.best.duel };
+        if (old.rounds && !t.rounds) t.rounds = old.rounds;
+      }
+      t.mig = 1;
+    }
+    if (!t.best || typeof t.best !== "object") t.best = {};
+    return t;
   }
+  function save() { if (hooks.persist) { try { hooks.persist(); } catch (e) { /* */ } } }
   function saveHasProgress(sv) {
     return !!(sv && ((+sv.xp || 0) > 0 || Object.keys(sv.cards || {}).length > 0));
   }
@@ -278,19 +300,67 @@
     });
     return out;
   }
-  function manual() { return !!store().on; }
+  function manual(state) { return !!store(state).on; }
+  // The duel asks for the two languages (or a manual switch); the contrasts are always open.
   function available(state) {
-    if (manual()) return true;
+    if (manual(state)) return true;
     var p = progress(state);
     return CODES.every(function (c) { return p[c]; });
   }
-  function enable(on) { var o = store(); o.on = !!on; save(o); }
+  function enable(on, state) { var o = store(state); o.on = !!on; save(); }
+
+  /* ------------------------------------------------- al repaso: la ficha */
+
+  /* A duel item answered wrong comes back in the review (card «tres:<n>»):
+     the word that slipped in, asked in the language being studied (the pair
+     it ↔ pt ↔ es when there is one); a sentence taken for the other
+     language, as «¿en qué lengua está?». */
+  function cardId(k) { return "tres:" + k; }
+  function reviewItem(id) {
+    var m = /^tres:(\d+)$/.exec(id || ""), x = m && DATA.DUEL[+m[1]];
+    if (!x) return null;
+    var it = duelItem(x);
+    if (it.bad) {
+      var p = pairOf(it.bad) || pairOf(it.fix), c = contrastFor(it.bad);
+      var note = (c ? c.title + ": " + c[HOME] + " / " + c[OTHER] + " / " + c.es + ". " + (c.note || "") : "");
+      if (p && p[PIDX[HOME]] && p[PIDX.es]) {
+        var opts = [p[PIDX[HOME]], p[PIDX[OTHER]], p[PIDX.es]].filter(function (o, k, a) { return o && a.indexOf(o) === k; });
+        if (opts.length >= 2) return { id: id, src: "tres", type: "choice", topic: "tres lenguas",
+          prompt: "¿Cómo se dice «" + p[PIDX.es] + "» en " + name(HOME) + "?", stem: "«" + p[PIDX.es] + "»",
+          options: shuffle(opts), answer: p[PIDX[HOME]], accept: [p[PIDX[HOME]]],
+          note: "En " + name(OTHER) + " es *" + p[PIDX[OTHER]] + "*: ahí se cruzan." + (note ? " " + note : "") };
+      }
+      var o2 = [it.fix, it.bad, it.es].filter(function (o, k, a) { return o && a.indexOf(o) === k; });
+      return { id: id, src: "tres", type: "choice", topic: "tres lenguas",
+        prompt: "Se coló una palabra del " + name(it.l === HOME ? OTHER : HOME) + ": ¿cómo va en " + name(it.l) + "?",
+        stem: it.t.replace(it.bad, "___"), options: shuffle(o2), answer: it.fix, accept: [it.fix],
+        note: "*" + it.t.replace(it.bad, it.fix) + "*" + (note ? " — " + note : "") };
+    }
+    return { id: id, src: "tres", type: "choice", topic: "tres lenguas", prompt: "¿En qué lengua está?", stem: it.t,
+      options: CODES.map(Name), answer: Name(it.l), accept: [Name(it.l)],
+      note: "Es " + name(it.l) + "." + (function () {
+        var q = it.single ? pairOf(it.t) : null;
+        return q ? " " + ORDER3().map(function (c) { return Name(c) + ": *" + q[PIDX[c]] + "*"; }).join(" · ") + "." : "";
+      })() };
+  }
+  // The wrong ones of a duel, into the review (Engine.schedule, «olvidada»).
+  function toReview(state, ks) {
+    var E = root.Engine, n = 0;
+    if (!state || !state.cards) return 0;
+    (ks || []).forEach(function (k) {
+      var id = cardId(k);
+      if (!DATA.DUEL[k]) return;
+      state.cards[id] = E && E.schedule ? E.schedule(state.cards[id], 0, { id: id, state: state }) : (state.cards[id] || { reps: 0, due: Date.now() });
+      n++;
+    });
+    return n;
+  }
 
   /* ------------------------------------------------------------- el duelo */
 
-  function duelItem(x) {
+  function duelItem(x, k) {
     var words = x[0].split(/\s+/);
-    return { t: x[0], l: x[1], bad: x[2] || null, fix: x[3] || null, es: x[4] || null, single: words.length === 1 };
+    return { k: k, t: x[0], l: x[1], bad: x[2] || null, fix: x[3] || null, es: x[4] || null, single: words.length === 1 };
   }
   // A round: n items, a third with a word of the other language, the rest
   // half in each language; words and sentences mixed.
@@ -330,25 +400,24 @@
 
   function show() { if (hooks.show) hooks.show(); }
 
+  function duelLabHtml(state) {
+    var best = (store(state).best || {}).duel;
+    if (available(state)) return '<button class="lab" data-tres="duel"><span class="e">🎯</span><b>¿' + Name(HOME) + " o " + name(OTHER) + "?</b>" +
+      '<span class="muted">El duelo: decí de qué lengua es y cazá la palabra que se coló.</span>' +
+      (best ? '<span class="meta">mejor: ' + best + " %</span>" : "") + "</button>";
+    var p = progress(state), missing = CODES.filter(function (c) { return !p[c]; }).map(name);
+    return '<button class="lab" data-tres="on"><span class="e">🔒</span><b>¿' + Name(HOME) + " o " + name(OTHER) + "?</b>" +
+      '<span class="muted">El duelo se abre cuando tengas progreso en los dos idiomas (te falta ' + esc(missing.join(" y ")) +
+      "). Si ya estudiás los dos por tu cuenta, tocá para activarlo.</span></button>";
+  }
+
+  // The card (Treino / Allena, Consultar): the contrasts always open; the duel, with the two languages.
   function card(state) {
-    var open = available(state), p = progress(state);
-    var html = "<h2>🔀 Tres lenguas</h2>" +
+    return "<h2>🔀 Tres lenguas</h2>" +
       '<p class="muted">' + Name(HOME) + ", " + name(OTHER) + " y español: dónde se parecen, dónde se pisan y cómo no mezclarlos.</p>" +
-      '<div class="labs tl-labs">';
-    if (open) {
-      var best = (store().best || {}).duel;
-      html += '<button class="lab" data-tres="menu"><span class="e">🔀</span><b>Contrastes</b>' +
-          '<span class="muted">' + allContrasts().length + " puntos donde las tres lenguas se cruzan: gramática, falsos amigos, ortografía.</span></button>" +
-        '<button class="lab" data-tres="duel"><span class="e">🎯</span><b>¿' + Name(HOME) + " o " + name(OTHER) + "?</b>" +
-          '<span class="muted">Decí de qué lengua es y cazá la palabra que se coló.</span>' +
-          (best ? '<span class="meta">mejor: ' + best + " %</span>" : "") + "</button>";
-    } else {
-      var missing = CODES.filter(function (c) { return !p[c]; }).map(name);
-      html += '<button class="lab" data-tres="on"><span class="e">🔒</span><b>Tres lenguas</b>' +
-        '<span class="muted">Se abre cuando tengas progreso en los dos idiomas (te falta ' + esc(missing.join(" y ")) +
-        "). Si ya estudiás los dos por tu cuenta, tocá para activarlo.</span></button>";
-    }
-    return html + "</div>";
+      '<div class="labs tl-labs"><button class="lab" data-tres="menu"><span class="e">🔀</span><b>Contrastes</b>' +
+        '<span class="muted">' + allContrasts().length + " puntos donde las tres lenguas se cruzan: gramática, falsos amigos, ortografía.</span></button>" +
+        duelLabHtml(state) + "</div>";
   }
 
   function langChip(c, txt) {
@@ -366,11 +435,10 @@
         return '<button class="lab" data-tres="topic" data-t="' + esc(t.id) + '"><span class="e">' + t.emoji + "</span><b>" + esc(t.title) + "</b>" +
           '<span class="muted">' + esc(t.sub) + '</span><span class="meta">' + (DATA.CONTRASTS[t.id] || []).length + " contrastes</span></button>";
       }).join("") +
-      '<button class="lab" data-tres="duel"><span class="e">🎯</span><b>¿' + Name(HOME) + " o " + name(OTHER) + "?</b>" +
-        '<span class="muted">El duelo: de qué lengua es y qué palabra se coló.</span></button></div>' +
+      duelLabHtml() + "</div>" +
       '<p class="muted science">🔬 En una tercera lengua la interferencia viene sobre todo de la segunda, la más parecida (Ringbom 2007; Hammarberg 2001): ' +
       "ver los contrastes juntos y practicar la discriminación ayuda a separarlas.</p>";
-    if (manual()) html += '<p class="muted"><button class="tab" data-tres="off">Desactivar Tres lenguas</button></p>';
+    if (manual()) html += '<p class="muted"><button class="tab" data-tres="off">Cerrar el duelo (lo había abierto a mano)</button></p>';
     return html;
   }
 
@@ -392,7 +460,7 @@
   }
 
   function duelStart() {
-    ui.duel = { items: duelSession(), i: 0, step: "lang", pts: 0, max: 0, log: [] };
+    ui.duel = { items: duelSession(), i: 0, step: "lang", pts: 0, max: 0, log: [], fails: [] };
     ui.screen = "duel";
   }
   function cur() { return ui.duel && ui.duel.items[ui.duel.i]; }
@@ -434,6 +502,7 @@
     return '<button class="tab" data-tres="menu">← Tres lenguas</button>' +
       '<div class="card tl-duel center"><h1>' + (pct >= 80 ? "🏆" : pct >= 50 ? "👏" : "💪") + " " + pct + " %</h1>" +
       "<p>" + d.pts + " de " + d.max + " puntos. " + (pct >= 80 ? "Las tenés bien separadas." : "Mirá los contrastes y probá otra vez.") + "</p>" +
+      (d.review ? '<p class="muted small">📌 ' + (d.review === 1 ? "La que fallaste vuelve" : "Las " + d.review + " que fallaste vuelven") + " en tu repaso.</p>" : "") +
       (d.log.length ? '<div class="tl-ex left">' + d.log.map(function (l) { return "<div>" + l + "</div>"; }).join("") + "</div>" : "") +
       '<div class="row centerrow"><button class="btn" data-tres="duel">Otra ronda</button>' +
       '<button class="tab" data-tres="menu">Contrastes</button></div></div>';
@@ -462,24 +531,24 @@
       d.max++; if (ok) d.pts++;
       var txt = "Es " + esc(name(x.l)) + "." + (x.bad && !ok ? " Te confundió <b>" + esc(x.bad) + "</b>, que se coló del " + esc(name(l)) + "." : "") + equivalents(x);
       d.fb = (d.fb || "") + fb(ok, txt);
-      if (!ok) d.log.push(flag(x.l) + " " + esc(x.t));
+      if (!ok) { d.log.push(flag(x.l) + " " + esc(x.t)); d.fails.push(x.k); }
       d.step = x.single ? "done" : "check";
     } else if (kind === "clean" && x) {
       d.max++;
       if (!x.bad) { d.pts++; d.fb = (d.fb || "") + fb(true, "Todo en " + esc(name(x.l)) + "."); d.step = "done"; }
-      else { d.fb = (d.fb || "") + fb(false, "Se coló <b>" + esc(x.bad) + "</b>, que es " + esc(name(x.l === HOME ? OTHER : HOME)) + "."); d.step = "fix"; d.log.push(esc(x.t)); }
+      else { d.fb = (d.fb || "") + fb(false, "Se coló <b>" + esc(x.bad) + "</b>, que es " + esc(name(x.l === HOME ? OTHER : HOME)) + "."); d.step = "fix"; d.log.push(esc(x.t)); d.fails.push(x.k); }
     } else if (kind === "tok" && x) {
       var w = clean(btn.textContent);
       d.max++;
       if (x.bad && w === x.bad.toLowerCase()) { d.pts++; d.fb = (d.fb || "") + fb(true, "¡Eso! <b>" + esc(x.bad) + "</b> es " + esc(name(x.l === HOME ? OTHER : HOME)) + "."); d.step = "fix"; }
-      else if (x.bad) { d.fb = (d.fb || "") + fb(false, "<b>" + esc(w) + "</b> está bien; la que se coló es <b>" + esc(x.bad) + "</b>."); d.step = "fix"; d.log.push(esc(x.t)); }
-      else { d.fb = (d.fb || "") + fb(false, "<b>" + esc(w) + "</b> es " + esc(name(x.l)) + ": estaba todo bien."); d.step = "done"; d.log.push(esc(x.t)); }
+      else if (x.bad) { d.fb = (d.fb || "") + fb(false, "<b>" + esc(w) + "</b> está bien; la que se coló es <b>" + esc(x.bad) + "</b>."); d.step = "fix"; d.log.push(esc(x.t)); d.fails.push(x.k); }
+      else { d.fb = (d.fb || "") + fb(false, "<b>" + esc(w) + "</b> es " + esc(name(x.l)) + ": estaba todo bien."); d.step = "done"; d.log.push(esc(x.t)); d.fails.push(x.k); }
     } else if (kind === "fix" && x) {
       var o = (d.opts || [])[+btn.getAttribute("data-k")];
       d.max++;
       var right = x.t.replace(x.bad, x.fix);
       if (o === x.fix) { d.pts++; d.fb = (d.fb || "") + fb(true, "<b>" + esc(right) + "</b>"); }
-      else d.fb = (d.fb || "") + fb(false, "Era <b>" + esc(x.fix) + "</b>: " + esc(right) + (o === x.es ? " (" + esc(o) + " es español)" : ""));
+      else { d.fb = (d.fb || "") + fb(false, "Era <b>" + esc(x.fix) + "</b>: " + esc(right) + (o === x.es ? " (" + esc(o) + " es español)" : "")); d.fails.push(x.k); }
       d.step = "done";
     } else if (kind === "next") {
       d.i++; d.step = "lang"; d.fb = "";
@@ -494,7 +563,9 @@
     o.best = o.best || {};
     if (!o.best.duel || pct > o.best.duel) o.best.duel = pct;
     o.rounds = (o.rounds || 0) + 1;
-    save(o);
+    var ks = (d.fails || []).filter(function (k, i, a) { return a.indexOf(k) === i; });
+    d.review = toReview(curState(), ks);
+    save();
     if (hooks.gain) { try { hooks.gain(Math.max(1, Math.round(d.pts / 2))); } catch (e) { /* */ } }
   }
 
@@ -502,12 +573,13 @@
      training tab, gain(n) adds xp, toast(msg). */
   function wire(el, opts) {
     hooks = opts || hooks;
+    if (hooks.state) ST = hooks.state;
     if (!el || !el.querySelectorAll) return;
     Array.prototype.forEach.call(el.querySelectorAll("[data-tres]"), function (b) {
       b.onclick = function () {
         var k = b.getAttribute("data-tres");
-        if (k === "on") { enable(true); ui.screen = "menu"; if (hooks.toast) hooks.toast("🔀 Tres lenguas activado."); show(); }
-        else if (k === "off") { enable(false); if (hooks.back) hooks.back(); }
+        if (k === "on") { enable(true); ui.screen = "menu"; if (hooks.toast) hooks.toast("🎯 Duelo de las dos lenguas abierto."); show(); }
+        else if (k === "off") { enable(false); show(); }
         else if (k === "menu") { ui.screen = "menu"; show(); }
         else if (k === "back") { if (hooks.back) hooks.back(); }
         else if (k === "topic") { ui.screen = "topic"; ui.topic = b.getAttribute("data-t"); show(); }
@@ -520,6 +592,8 @@
   install();
 
   var api = { CAT: CAT, HOME: HOME, OTHER: OTHER, KEY: KEY, DATA: DATA, intruders: intruders, amend: amend,
+              store: store, reviewItem: reviewItem, toReview: toReview, cardId: cardId,
+              use: function (getState) { ST = getState || null; },
               contrasts: contrasts, allContrasts: allContrasts, progress: progress, available: available,
               enable: enable, duelSession: duelSession, card: card, render: render, wire: wire,
               _ui: ui, _act: act };

@@ -5,7 +5,10 @@
    «Empezar»), una pausa, Suoni/Sons, una lectura con
    karaoke, el camino y la semana 1, una lección, el dictogloss, Io/Eu, el
    examen C1, «Tu progreso», el modo mantenimiento después del examen,
-   «Parola o no? / Palavra ou não?», el cambio de idioma desde el
+   «Parola o no? / Palavra ou não?», los módulos de las capas
+   (smoke_modulos.js: Leggi y Allena plegadas, lectura cronometrada,
+   Consultar, Biblioteca, escritura guiada, duelos, Tres lenguas, Tres
+   vueltas), el cambio de idioma desde el
    perfil y la vuelta; después, que quien ya estudiaba italiano entra directo
    sin selector, y que el service worker guarda el núcleo y el paquete
    elegido.  Falla si hay errores de JavaScript en la consola o si la app
@@ -231,7 +234,7 @@ const NAMES = { it: { today: "Oggi", me: "Io", other: "pt" }, pt: { today: "Hoje
 
     // Allena / Treino → Suoni / Sons
     await page.click("[data-tab='frasi']");
-    await page.waitForSelector(".labs");
+    await page.waitForSelector(".capa-week");
     await snap(page, P("entrenar-claro"), true);
     if (await page.$("[data-lab='suoni']")) {
       await page.click("[data-lab='suoni']");
@@ -370,6 +373,11 @@ const NAMES = { it: { today: "Oggi", me: "Io", other: "pt" }, pt: { today: "Hoje
     await page.click("[data-tab='oggi']");
     if (await page.$("#masoggi") && !(await page.$eval("#masoggi", d => d.open))) await page.click("#masoggi > summary");
     if (await page.$("#lampoparole")) { await page.click("#lampoparole"); await page.waitForSelector("[data-lopt]"); note(code + " · ¿palabra o no?: " + (await page.textContent(".stem")).trim()); await page.click("#lquit"); }
+
+    // the modules nobody opened with app.js: Leggi and Allena folded, the timed
+    // reading, «Consultar», the Biblioteca, guided writing, a duel, Tres lenguas,
+    // Tres vueltas (tools/lib/smoke_modulos.js)
+    await require("./smoke_modulos.js")(page, { code, errors, note, snap });
 
     // the service worker keeps the core and this package
     const sw = await page.evaluate(async (c) => {
