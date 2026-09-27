@@ -1,6 +1,6 @@
 """Legge parole (una per riga) da stdin e stampa quelle che nessun dizionario
 Hunspell (it, es, en di LibreOffice) riconosce.  Usato da lint.js.
-Requisiti: pip install spylls ; cd tools/audit && npm install"""
+Requisiti: pip install spylls ; cd tools/it/audit && npm install"""
 import os
 import sys
 from spylls.hunspell import Dictionary

@@ -1,6 +1,6 @@
 # Verificador y corrector de una pasada
 
-Recibís hallazgos de revisores (`tools/audit/out/pass{N}/find_*.json`) para un
+Recibís hallazgos de revisores (`tools/it/audit/out/pass{N}/find_*.json`) para un
 grupo de archivos fuente. Los revisores se equivocan: tu trabajo es
 **verificar cada hallazgo de forma independiente** antes de tocar nada.
 
@@ -19,7 +19,7 @@ Para cada hallazgo con `severity: "error"` que caiga en tus archivos:
 
 Las `duda` leelas: si alguna es un error real con certeza, tratala como error.
 
-Escribí `tools/audit/out/pass{N}/decisions_{grupo}.json`:
+Escribí `tools/it/audit/out/pass{N}/decisions_{grupo}.json`:
 
     [{"id": "...", "src": "...", "decision": "confirmado" | "rechazado" | "modificado",
       "antes": "...", "despues": "...", "motivo": "..."}]

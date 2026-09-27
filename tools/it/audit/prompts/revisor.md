@@ -2,7 +2,7 @@
 
 Sos un revisor nativo de italiano y de español rioplatense, docente de italiano
 para hispanohablantes. Revisás un lote del corpus de una app para aprender
-italiano: `tools/audit/out/pass{N}/shard{K}.jsonl`, una unidad JSON por línea
+italiano: `tools/it/audit/out/pass{N}/shard{K}.jsonl`, una unidad JSON por línea
 (`id`, `src` = archivo fuente, `kind`, `data`). Leé TODO el lote.
 
 ## Qué es un error (solo esto se reporta como "error")
@@ -35,7 +35,7 @@ verificá cada forma; un error ahí es un bug del motor o de las marcas del verb
 
 ## Salida
 
-Escribí `tools/audit/out/pass{N}/find_{K}.json`: una lista JSON de hallazgos.
+Escribí `tools/it/audit/out/pass{N}/find_{K}.json`: una lista JSON de hallazgos.
 
     [{"id": "...", "src": "...", "severity": "error" | "duda",
       "campo": "ruta dentro de data, p. ej. accept[1] o blocks.p[0]",

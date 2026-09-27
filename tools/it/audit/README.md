@@ -30,8 +30,8 @@ verificable, no «hasta que no encuentre más».
 
 **Capa 2: revisión nativa por pasadas** (`shard.js` + agentes):
 
-1. `node tools/audit/corpus.js` extrae todo a unidades numeradas (≈3.400).
-2. `node tools/audit/shard.js <n> 12` las reparte en lotes; cada pasada mueve
+1. `node tools/it/audit/corpus.js` extrae todo a unidades numeradas (≈3.400).
+2. `node tools/it/audit/shard.js <n> 12` las reparte en lotes; cada pasada mueve
    los cortes, así cada unidad cae con otros vecinos y bajo otra mirada.
 3. Un revisor por lote reporta hallazgos (`out/passN/find_K.json`).
 4. Un verificador independiente, que no es el revisor, confirma o rechaza cada
@@ -44,5 +44,5 @@ errores confirmados** y la capa 1 en 0.
 ## Requisitos
 
     pip install spylls
-    cd tools/audit && npm install
-    node tools/audit/corpus.js && node tools/audit/lint.js
+    cd tools/it/audit && npm install
+    node tools/it/audit/corpus.js && node tools/it/audit/lint.js

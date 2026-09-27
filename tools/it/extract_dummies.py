@@ -6,7 +6,7 @@ item number, and the per-chapter answer key as <p class="Answers-NL"> lines
 numbered with the same sequence.  Pairing the two by number gives us items we
 can grade automatically.
 
-Usage:  python3 tools/extract_dummies.py <epub> <out.json>
+Usage:  python3 tools/it/extract_dummies.py <epub> tools/it/fuentes/bank_dummies.json
 """
 import html
 import json

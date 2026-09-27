@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Common Voice: elegir oraciones para escuchar gramática (VOCES.md, caso 2).
+"""Common Voice: elegir oraciones para escuchar gramática (tools/it/VOCES.md, caso 2).
 
 Lee el índice de oraciones validadas de Common Voice Italian
 (`validated.tsv`, sin bajar el audio) y elige unas pocas por semana:

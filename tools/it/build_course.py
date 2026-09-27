@@ -2,11 +2,12 @@
 # -*- coding: utf-8 -*-
 """Assemble the playable course from the extracted banks + the authored items.
 
-Reads   docs/data/bank_dummies.json, docs/data/bank_routledge.json
-        tools/authored/*.py
-Writes  docs/data/course.json   (52 weekly missions + the graded item bank)
+Reads   tools/it/fuentes/bank_dummies.json, tools/it/fuentes/bank_routledge.json
+        (extractos de libros comerciales: no se publican, por eso no van en docs/)
+        tools/it/authored/*.py
+Writes  docs/lang/it/data/course.json   (52 weekly missions + the graded item bank)
 
-Run:  python3 tools/build_course.py
+Run:  python3 tools/it/build_course.py
 """
 import importlib.util
 import json
@@ -18,6 +19,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 DATA = os.path.join(ROOT, "docs", "lang", "it", "data")
+FUENTES = os.path.join(ROOT, "tools", "it", "fuentes")
 
 # --------------------------------------------------------------------------
 # El programa del año.  d = capítulos de "Italian Grammar For Dummies"
@@ -965,9 +967,9 @@ def place_by_syllabus(weeks: list, by_id: dict, challenges: list) -> None:
 
 
 def main() -> None:
-    with open(os.path.join(DATA, "bank_dummies.json"), encoding="utf-8") as fh:
+    with open(os.path.join(FUENTES, "bank_dummies.json"), encoding="utf-8") as fh:
         dummies = json.load(fh)
-    with open(os.path.join(DATA, "bank_routledge.json"), encoding="utf-8") as fh:
+    with open(os.path.join(FUENTES, "bank_routledge.json"), encoding="utf-8") as fh:
         routledge = json.load(fh)
     # The book restarts exercise numbers in every subsection, so the same id
     # can name several exercises: make each one unique (r07-02, r07-02b…),
@@ -989,11 +991,11 @@ def main() -> None:
                 x["id"] = x["id"] + "abcdefghijklmnopqrstuvwxyz"[n]
 
     # --- graded items from the Dummies bank -----------------------------
-    # tools/audit/patches/dummies/*.json rewrites each exercise for a Spanish
+    # tools/it/fuentes/parches/dummies/*.json rewrites each exercise for a Spanish
     # speaker: specific instruction, blank where the answer goes, no English.
     patches = {}
-    pdir = os.path.join(ROOT, "tools", "it", "audit", "patches", "dummies")
-    for fn in sorted(os.listdir(pdir)) if os.path.isdir(pdir) else []:
+    pdir = os.path.join(FUENTES, "parches", "dummies")
+    for fn in sorted(os.listdir(pdir)):
         if fn.endswith(".json"):
             with open(os.path.join(pdir, fn), encoding="utf-8") as fh:
                 patches.update(json.load(fh)["items"])
@@ -1129,12 +1131,12 @@ def main() -> None:
         for m in missing:
             print("  -", m)
 
-    # Routledge challenges.  tools/audit/patches/sfide/*.json holds the answer
+    # Routledge challenges.  tools/it/fuentes/parches/sfide/*.json holds the answer
     # key: with it a challenge becomes a graded round (items "s:<id>:<label>"),
     # without it it stays self-scored.
     keys = {}
-    sdir = os.path.join(ROOT, "tools", "it", "audit", "patches", "sfide")
-    for fn in sorted(os.listdir(sdir)) if os.path.isdir(sdir) else []:
+    sdir = os.path.join(FUENTES, "parches", "sfide")
+    for fn in sorted(os.listdir(sdir)):
         if fn.endswith(".json"):
             with open(os.path.join(sdir, fn), encoding="utf-8") as fh:
                 keys.update(json.load(fh))

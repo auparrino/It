@@ -46,7 +46,7 @@ sesión que corre en tu PC sí descarga con tu conexión:
    Desde la terminal también sirve: `claude remote-control` dentro de la
    carpeta, y la sesión aparece en la app de Claude Code, así la seguís
    desde el celular.
-3. Pedile: «seguí VOCES.md, caso 2 (Common Voice)». Para Common Voice
+3. Pedile: «seguí tools/it/VOCES.md, caso 2 (Common Voice)». Para Common Voice
    igual vas a necesitar la cuenta de Mozilla Data Collective (paso 1 del
    caso 2), porque Mozilla exige aceptar sus términos para descargarlo.
 
