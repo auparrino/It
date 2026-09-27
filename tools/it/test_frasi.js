@@ -10,11 +10,7 @@ var Lab = ctx.Lab;
 var Letture = ctx.Letture;
 var course = pack.data("it", "course.json");
 
-var fails = 0, checks = 0;
-function ok(cond, what) {
-  checks++;
-  if (!cond) { fails++; console.log("FAIL " + what); }
-}
+var T = require("../lib/testkit.js")("it"), ok = T.ok;
 function uniq(a) {
   var m = {};
   a.forEach(function (x) { m[x] = true; });
@@ -329,5 +325,4 @@ ok(sb.streak === 11, "e il giorno dopo la serie continua");
   ok(uniq.length === 7 && ks[6] === Engine.dayKey(d), "7 giorni distinti fino a oggi: " + ks.join(" "));
 });
 
-console.log("\ncontrolli: " + checks + "   errori: " + fails);
-process.exit(fails ? 1 : 0);
+T.done();

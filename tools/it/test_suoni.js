@@ -15,8 +15,7 @@ var S = ctx.Suoni;
 var F = ctx.Freq;
 var Es = ctx.EsameData;
 var L = ctx.Letture;
-var fails = 0, checks = 0;
-function ok(cond, what) { checks++; if (!cond) { fails++; console.log("FAIL " + what); } }
+var T = require("../lib/testkit.js")("it"), ok = T.ok;
 
 /* ---------------------------------------------------------- ascolto */
 var ids = {};
@@ -140,5 +139,4 @@ var fl = L.ofSeries("flood");
 ok(fl.length === 12, "12 inondazioni");
 fl.forEach(function (e) { ok(L.huntTargets(e).length >= 8 && e.flood && e.flood.forms.length, "inondazione con almeno 8 forme: " + e.id); });
 
-console.log("controlli: " + checks + "   errori: " + fails);
-process.exit(fails ? 1 : 0);
+T.done("");

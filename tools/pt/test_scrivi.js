@@ -11,8 +11,7 @@ var ctx = pack("pt");
 var Diagnosi = ctx.Diagnosi;
 
 var verbose = process.argv.indexOf("-v") >= 0;
-var fails = 0, checks = 0;
-function ok(c, what) { checks++; if (!c) { fails++; console.log("FAIL " + what); } }
+var T = require("../lib/testkit.js")("pt"), ok = T.ok;
 
 // The course data, when it is already Portuguese (the port goes module by
 // module): the bank feeds the diagnosis, and everything feeds the lexicon.
@@ -257,8 +256,7 @@ var GEM = [];
 function gem(name, plan, check, keys, mode) { GEM.push([name, plan, check, keys, mode]); }
 function runGem() {
   if (!GEM.length) {
-    console.log("\ncontroles: " + checks + "   errores: " + fails);
-    process.exit(fails ? 1 : 0);
+    T.done();
   }
   var g = GEM.shift(), calls = [], mem = {};
   ctx.localStorage = { getItem: function (k) { return mem[k] || null; }, setItem: function (k, v) { mem[k] = v; } };

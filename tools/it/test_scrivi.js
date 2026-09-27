@@ -14,8 +14,7 @@ S.learnCourse({ items: pack.data("it", "course.json").items,
   bank: Banca.bank(), phrases: Frasi.ALL, readings: Letture.EPISODI,
   glossario: pack.data("it", "glossario.json") });
 
-var fails = 0, checks = 0, verbose = process.argv.indexOf("-v") >= 0;
-function ok(c, what) { checks++; if (!c) { fails++; console.log("FAIL " + what); } }
+var T = require("../lib/testkit.js")("it"), ok = T.ok, verbose = process.argv.indexOf("-v") >= 0;
 
 S.weeks().forEach(function (w) {
   var t = S.TASKS[w], r = S.check(t.model, w);
@@ -146,7 +145,7 @@ ERR.forEach(function (e) {
 var GEM = [];
 function gem(name, plan, check, keys, mode) { GEM.push([name, plan, check, keys, mode]); }
 function runGem() {
-  if (!GEM.length) return console.log("\ncontrolli: " + checks + "   errori: " + fails);
+  if (!GEM.length) return T.done();
   var g = GEM.shift(), calls = [], mem = {};
   ctx.localStorage = { getItem: function (k) { return mem[k] || null; }, setItem: function (k, v) { mem[k] = v; } };
   ctx.fetch = function (url, opt) {

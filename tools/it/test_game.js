@@ -12,11 +12,7 @@ var Drills = ctx.Drills;
 
 var course = pack.data("it", "course.json");
 
-var fails = 0, checks = 0;
-function ok(cond, what) {
-  checks++;
-  if (!cond) { fails++; console.log("FAIL " + what); }
-}
+var T = require("../lib/testkit.js")("it"), ok = T.ok;
 
 /* ------------------------------------------------ integrità dei dati */
 
@@ -387,5 +383,4 @@ ok(Drills.dueCount(course, state) >= 30, "le schede scadute rientrano in coda");
   ok(L.glue("l'") === "next" && L.glue("un po'") === null, "hueco elidido: l'amica se pega, un po' no");
 })();
 
-console.log("\ncontrolli: " + checks + "   errori: " + fails);
-process.exit(fails ? 1 : 0);
+T.done();

@@ -16,11 +16,7 @@ var Lez = ctx.Lezione;
 
 var course = pack.data("pt", "course.json");
 
-var fails = 0, checks = 0;
-function ok(cond, what) {
-  checks++;
-  if (!cond) { fails++; console.log("FAIL " + what); }
-}
+var T = require("../lib/testkit.js")("pt"), ok = T.ok;
 
 /* ------------------------------------------------ integridad de los datos */
 
@@ -435,5 +431,4 @@ ok(Drills.dueCount(course, state) >= 30, "las fichas vencidas vuelven a la cola"
   ok(L.rules.persons.skip.indexOf(4) >= 0, "vós no se marca en las lecciones (LANG.rules.persons.skip)");
 })();
 
-console.log("\ncontroles: " + checks + "   errores: " + fails);
-process.exit(fails ? 1 : 0);
+T.done();

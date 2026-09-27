@@ -133,6 +133,8 @@ npm run smoke        # la app entera en Chromium (necesita Playwright)
   encabezado qué controla); `tools/lib/test_rutas.js` controla que las rutas
   citadas en los `.md` existan y `tools/lib/test_version.js` que
   `package.json`, `docs/js/app.js` y `docs/sw.js` digan la misma versión.
+- Un test nuevo usa `tools/lib/testkit.js` (`ok`, `eq`, `done`: cuenta, avisa
+  cada falla y termina con código de error), como los `test_*.js` de cada idioma.
 - **CI** (`.github/workflows/test.yml`), en cada push: `npm test`, `npm run
   lint`, `npm run sim`, que `npm run build` no cambie nada de `docs/` (ni deje
   archivos nuevos) y la prueba de humo en Chromium. Si cambiaste una fuente y

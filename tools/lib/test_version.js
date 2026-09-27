@@ -8,8 +8,7 @@
 "use strict";
 var fs = require("fs"), path = require("path");
 var ROOT = path.join(__dirname, "..", "..");
-var bad = 0, checks = 0;
-function ok(c, m) { checks++; if (!c) { bad++; console.log("FAIL " + m); } }
+var T = require("./testkit.js")("lib"), ok = T.ok;
 
 var pkg = JSON.parse(fs.readFileSync(path.join(ROOT, "package.json"), "utf8")).version;
 var app = (fs.readFileSync(path.join(ROOT, "docs/js/app.js"), "utf8").match(/APP_VERSION = "v(\d+(?:\.\d+)*)"/) || [])[1];
@@ -23,5 +22,4 @@ var short = String(pkg).replace(/\.0$/, "");
 ok(app === short || app === pkg, "package.json " + pkg + " ≠ app.js v" + app);
 ok(sw === app, "sw.js c1-v" + sw + " ≠ app.js v" + app);
 
-console.log("versión: " + pkg + " (app v" + app + ", sw c1-v" + sw + ")   controles: " + checks + "   errores: " + bad);
-process.exit(bad ? 1 : 0);
+T.done("versión: " + pkg + " (app v" + app + ", sw c1-v" + sw + ")   ");

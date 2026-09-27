@@ -19,11 +19,7 @@ if (bank && !/\b(você|não|está|também)\b/.test((bank.sentences || []).slice(
 if (bank && Banca) Banca.load(bank); else if (bank) D.init(bank);
 function variants(s) { return s.pt || s.it; }
 
-var fails = 0, checks = 0;
-function ok(cond, what) {
-  checks++;
-  if (!cond) { fails++; console.log("FAIL " + what); }
-}
+var T = require("../lib/testkit.js")("pt"), ok = T.ok;
 
 /* ------------------------------------------------ casos escritos a mano */
 
@@ -493,5 +489,4 @@ if (bank) {
   }
 }
 
-console.log("\ncontroles: " + checks + "   errores: " + fails);
-process.exit(fails ? 1 : 0);
+T.done();

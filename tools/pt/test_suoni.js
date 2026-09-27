@@ -14,8 +14,7 @@ var Dg = ctx.DictoglossData;
 var S = ctx.Suoni;
 var V = ctx.Voci;
 var CV = ctx.VociCV;
-var fails = 0, checks = 0;
-function ok(cond, what) { checks++; if (!cond) { fails++; console.log("FAIL " + what); } }
+var T = require("../lib/testkit.js")("pt"), ok = T.ok;
 function optional(name, fn) {
   try { fn(); } catch (e) { console.log("aviso: " + name + " sin probar (" + e.message + ")"); }
 }
@@ -173,5 +172,4 @@ optional("frequenza", function () {
   for (var q = 0; q < 30; q++) { var ps = F.pseudo("janela"); ok(ps && ps !== "janela" && !F.info(ps), "pseudopalabra: " + ps); }
 });
 
-console.log("controles: " + checks + "   errores: " + fails);
-process.exit(fails ? 1 : 0);
+T.done("");

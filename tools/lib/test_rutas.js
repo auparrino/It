@@ -13,8 +13,7 @@
 "use strict";
 var fs = require("fs"), path = require("path");
 var ROOT = path.join(__dirname, "..", "..");
-var bad = 0, checks = 0;
-function ok(c, m) { checks++; if (!c) { bad++; console.log("FAIL " + m); } }
+var T = require("./testkit.js")("lib"), ok = T.ok;
 
 var SKIP_DIRS = { ".git": 1, node_modules: 1, ".claude": 1, auditorias: 1, out: 1, ".cache": 1, __pycache__: 1 };
 function mdFiles(dir) {
@@ -80,5 +79,4 @@ mdFiles(ROOT).forEach(function (f) {
 });
 ok(cited > 50, "se revisaron rutas citadas: " + cited);
 
-console.log("rutas citadas en los .md: " + cited + "   controles: " + checks + "   errores: " + bad);
-process.exit(bad ? 1 : 0);
+T.done("rutas citadas en los .md: " + cited + "   ");
