@@ -691,7 +691,10 @@ LESSONS = {
          "participio.",
   "more": ["Con un modal, *essere* va en infinitivo: *la macchina deve "
            "essere riparata* (el auto tiene que ser arreglado), *ha voluto "
-           "essere pagato subito* (quiso que le pagaran enseguida)."]},
+           "essere pagato subito* (quiso que le pagaran enseguida).",
+           "En las pasivas de historia aparecen los siglos, que se nombran "
+           "por los cientos: *la chiesa è stata costruita nel Settecento* "
+           "(en los 1700, el siglo XVIII); *il Novecento* es el siglo XX."]},
 
  {"h": "venire: la pasiva de acción",
   "r": "*venire* reemplaza a *essere* **solo en tiempos simples** y subraya "

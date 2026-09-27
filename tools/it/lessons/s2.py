@@ -18,9 +18,9 @@ LESSONS = {
   "warn": "Con un nombre o un sustantivo, la persona lleva **a**: *a Marco "
           "piace*, *ai bambini piacciono*. Sin *a* cambia todo: *Marco "
           "piace* = Marco le gusta a la gente.",
-  "tip": "Los pronombres son los indirectos de la semana 10: *mi, ti, gli* (a "
-         "él y a ellos), *le* (a ella), *Le* (a usted), *ci, vi*: *gli "
-         "piace* = le / les gusta."},
+  "tip": "Son los indirectos de la semana 10: *mi, ti, gli* (a él y a "
+         "ellos), *le* (a ella), *Le* (a usted), *ci, vi*. *Gli piace* = le "
+         "o les gusta."},
 
  {"h": "Negar y enfatizar",
   "r": "*non* va antes del pronombre: *non mi piace*. Para contrastar, "
@@ -905,12 +905,12 @@ LESSONS = {
        "constatado** —opinión, duda, deseo, emoción— y los sujetos son "
        "**distintos**.",
   "table": {"head": ["Categoría", "Verbos", "Ejemplo"],
-            "rows": [["opinión", "credere, pensare, ritenere, immaginare", "Credo che sia tardi."],
-                     ["duda", "dubitare, non sapere se", "Dubito che venga."],
-                     ["deseo/voluntad", "volere, desiderare, preferire, sperare", "Voglio che tu venga."],
-                     ["emoción", "essere contento, temere, avere paura", "Sono contento che tu stia bene."],
-                     ["espera", "aspettare che", "Aspetto che finisca."],
-                     ["impersonales", "è necessario, è possibile, bisogna, sembra", "È possibile che piova."]]},
+            "rows": [["opinión", "credere (creer), pensare, ritenere (considerar), immaginare, mi sembra (me parece), ho l'impressione", "Credo che sia tardi. (Creo que es tarde.)"],
+                     ["duda", "dubitare (dudar), non sapere se, non è detto (no es seguro)", "Dubito che venga. (Dudo que venga.)"],
+                     ["deseo/voluntad", "volere, desiderare, preferire, sperare (esperar), lasciare, permettere", "Voglio che tu venga. (Quiero que vengas.)"],
+                     ["emoción", "essere contento, temere (temer), avere paura, mi dispiace, mi fa piacere, che peccato", "Sono contento che tu stia bene. (Me alegra que estés bien.)"],
+                     ["espera", "aspettare che (esperar a que)", "Aspetto che finisca. (Espero a que termine.)"],
+                     ["impersonales", "è necessario, è possibile, è difficile (es poco probable), bisogna (hace falta), può darsi (puede ser)", "È possibile che piova. (Puede que llueva.)"]]},
   "ex": [["Spero che tu *stia* bene.", "Espero que estés bien."],
          ["Voglio che tu *venga*.", "Quiero que vengas."],
          ["Ho paura che *sia* tardi.", "Tengo miedo de que sea tarde."],
@@ -951,6 +951,26 @@ LESSONS = {
   "warn": "*volere*, *potere*, *dovere*, *preferire*, *desiderare* van con "
           "infinitivo **sin** *di*: *voglio partire*. *sperare*, *credere*, "
           "*pensare* piden *di*: *spero di partire*."},
+
+ {"h": "Después de algunas conjunciones",
+  "r": "*prima che* (antes de que), *senza che* (sin que), *sebbene* "
+       "(aunque), *purché* (con tal de que), *a meno che* (a menos que): "
+       "**siempre congiuntivo**.",
+  "ex": [["Ti telefono *prima che* tu *esca*.", "Te llamo antes de que salgas."],
+         ["Lo faccio *senza che* nessuno lo *sappia*.", "Lo hago sin que nadie lo sepa."],
+         ["È simpatico, *sebbene parli* poco.", "Es simpático, aunque hable poco."],
+         ["Ti presto la macchina *purché* tu la *guidi* piano.", "Te presto el auto con tal de que lo manejes despacio."],
+         ["Vengo, *a meno che* non *piova*.", "Voy, a menos que llueva."]],
+  "warn": "*anche se* (aunque) va con **indicativo**: *anche se piove, esco*. "
+          "Tras *a meno che*, el *non* no niega: *a meno che non piova*.",
+  "more": ["Lo mismo con un relativo que describe algo buscado, que no se sabe "
+           "si existe: *cerco una segretaria che sappia il cinese*, *non "
+           "conosco nessuno che parli russo*. Si existe, indicativo: "
+           "*conosco qualcuno che sa il cinese*. Y tras un superlativo: *è il "
+           "posto più bello che ci sia* (el lugar más lindo que hay)."],
+  "qq": [{"prompt": "Elegí la que va", "stem": "Ti chiamo prima che tu ___.", "answer": "parta", "options": ["parta", "parti", "partire"]},
+         {"prompt": "Elegí la que va", "stem": "Anche se ___, esco.", "answer": "piove", "options": ["piove", "piova", "piovere"]},
+         {"prompt": "Elegí la que va", "stem": "Cerco qualcuno che ___ il tedesco.", "answer": "sappia", "options": ["sappia", "sa", "sapere"]}]},
 ]},
 
 26: {
@@ -969,14 +989,14 @@ LESSONS = {
  {"h": "El mapa de los tiempos",
   "r": "Dos mecanismos: terminación sobre la raíz (presente, imperfetto, "
        "futuro, condizionale) o auxiliar + participio (tiempos compuestos).",
-  "table": {"head": ["Tiempo", "Se forma", "Sirve para"],
-            "rows": [["presente", "raíz + terminación", "ahora, habitual, futuro cercano"],
-                     ["passato prossimo", "avere/essere + participio", "hecho pasado y terminado"],
-                     ["imperfetto", "raíz + -avo/-evo/-ivo", "fondo, costumbre, descripción"],
-                     ["trapassato prossimo", "avevo/ero + participio", "pasado anterior a otro pasado"],
-                     ["futuro semplice", "raíz de futuro + -ò, -ai, -à", "porvenir y suposición"],
-                     ["futuro anteriore", "avrò/sarò + participio", "terminado antes de un futuro"],
-                     ["condizionale", "raíz de futuro + -ei, -esti, -ebbe", "cortesía, deseo, noticia no confirmada"]]},
+  "table": {"head": ["Tiempo", "Se forma", "Sirve para", "Ejemplo"],
+            "rows": [["presente", "raíz + terminación", "ahora, habitual, futuro cercano", "lavoro (trabajo)"],
+                     ["passato prossimo", "avere/essere + participio", "hecho pasado y terminado", "ho lavorato (trabajé)"],
+                     ["imperfetto", "raíz + -avo/-evo/-ivo", "fondo, costumbre, descripción", "lavoravo (trabajaba)"],
+                     ["trapassato prossimo", "avevo/ero + participio", "pasado anterior a otro pasado", "avevo lavorato (había trabajado)"],
+                     ["futuro semplice", "raíz de futuro + -ò, -ai, -à", "porvenir y suposición", "lavorerò (voy a trabajar)"],
+                     ["futuro anteriore", "avrò/sarò + participio", "terminado antes de un futuro", "avrò lavorato (habré trabajado)"],
+                     ["condizionale", "raíz de futuro + -ei, -esti, -ebbe", "cortesía, deseo, noticia no confirmada", "lavorerei (trabajaría)"]]},
   "ex": [["Ieri *ho lavorato* tanto.", "Ayer trabajé mucho."],
          ["Da ragazzo *lavoravo* in un bar.", "De joven trabajaba en un bar."],
          ["Domani *lavorerò* da casa.", "Mañana voy a trabajar desde casa."],
