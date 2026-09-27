@@ -395,14 +395,38 @@ aciertos.
 
 La semana 52 ya no es una ronda más: cinco pruebas como en el CILS TRE-C1,
 el CELI 4 y el PLIDA C1 (sin la parte oral), cada una con mínimo del 55 % y
-promedio del 60 %: **Ascolto** (una entrevista larga leída a dos voces, ocho
-preguntas y cuatro huecos), **Lettura** (un texto de 600 palabras con título
-por párrafo y vero/falso), **Strutture** (20 huecos racionales y
-transformaciones: *Sebbene fosse tardi → Pur essendo tardi*), **Lessico**
-(formación de palabras y registro) y **Scrittura** (argumentativo de 200
-palabras y carta formal de 120, calificados con la rúbrica de la
-certificación por la IA, o por el corrector propio sin clave). Datos en
-`docs/lang/it/esame_data.js` y `tools/it/authored/esame_c1.py`.
+promedio del 60 %, todo en italiano:
+
+- **Ascolto**, en dos partes. Un diálogo leído a dos voces con ocho
+  preguntas y cuatro huecos, y un monólogo de 4-5 minutos (una conferencia,
+  una presentación, un notiziario) con una tabla de 9 a 12 datos para
+  completar mientras se escucha. Cada grabación, dos veces. La tabla acepta
+  «quindici» por «15» y «alle 18» por «18:00» (`Tramo.cellOk`).
+- **Lettura**, en dos partes. Un texto de 600 palabras con título por
+  párrafo y vero/falso, y la *ricostruzione del testo*: seis párrafos con el
+  primero fijo y los otros cinco para ordenar (un punto por párrafo en su
+  lugar).
+- **Strutture**: 20 huecos racionales y transformaciones (*Sebbene fosse
+  tardi → Pur essendo tardi*).
+- **Lessico**: formación de palabras y registro.
+- **Scrittura**: un argumentativo de 250 palabras (230-280) y una carta
+  formal de 180 (160-200). Con clave, los califica la IA con la rúbrica de
+  la certificación. Sin clave, la revisión de la tarea C1 (`Tramo.evaluate`:
+  extensión, variedad léxica, estructura del género, conectores, errores),
+  que no aprueba un texto relleno.
+
+**Tres versiones** (A, B, C), cada una un examen entero con otro diálogo,
+otro monólogo, otra lectura, otro texto para ordenar, otras consignas y sus
+propios ítems de strutture y lessico. La primera vez toca la A; si no
+aprobás, el intento siguiente usa la versión que todavía no hiciste. La
+pantalla dice qué versión estás haciendo y cómo te fue en las otras.
+Después de aprobar, el plan de mantenimiento propone un simulacro cada tres
+meses con la versión siguiente. Se guarda en `state.esame`: la versión en
+curso y, por versión, las pruebas del intento y la mejor nota.
+
+Datos en `docs/lang/it/esame_data.js` (`EsameData.versioni`,
+`EsameData.versione(id)`) y `tools/it/authored/esame_c1.py` (los ítems,
+con `ver`).
 
 ### 🏦 El banco
 

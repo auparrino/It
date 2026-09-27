@@ -4,7 +4,8 @@
    una sola tarjeta y después con el plan del día (5 / 15 / 30 minutos,
    «Empezar»), una pausa, Suoni/Sons, una lectura con
    karaoke, el camino y la semana 1, una lección, el dictogloss, Io/Eu, el
-   examen C1, «Tu progreso», el modo mantenimiento después del examen,
+   examen C1 (smokeEsame: cada prueba de la primera versión, el resultado,
+   el intento siguiente y un simulacro), «Tu progreso», el modo mantenimiento después del examen,
    «Parola o no? / Palavra ou não?», los módulos de las capas
    (smoke_modulos.js: Leggi y Allena plegadas, lectura cronometrada,
    Consultar, Biblioteca, escritura guiada, duelos, Tres lenguas, Tres
@@ -39,6 +40,129 @@ function chromiumPath() {
 // What each language calls things (the first tab, the profile), to check that
 // the right package is on screen.
 const NAMES = { it: { today: "Oggi", me: "Io", other: "pt" }, pt: { today: "Hoje", me: "Eu", other: "it" } };
+
+/* The C1 exam, from its screen: the first version, every prova answered
+   with the data (escucha con el monólogo y su tabla, lectura con la
+   ricostruzione, las tarefas con su insumo), the result of the version, a
+   new attempt with the next one and a mock exam with a given one. */
+async function smokeEsame(page, code, P, snap, note, errors) {
+  const V = await page.evaluate(() => { const E = window.EsameData; return (E.versioni || E.versoes).map(v => v.id); });
+  const label = (id) => "versión " + id.replace(/^v/, "");
+  const onScreen = async () => (await page.textContent("#app")).replace(/\s+/g, " ");
+  if (V.length < 3) errors.push(code + ": el examen tiene " + V.length + " versiones");
+  if (!(await onScreen()).includes("Estás haciendo la " + label(V[0]))) errors.push(code + ": el examen no empieza por la " + label(V[0]));
+  // what the version asks, from the data (the same shape as the app's)
+  const data = (vid) => page.evaluate((vid) => {
+    const E = window.EsameData, find = (l, id) => (l || []).find(x => x.id === id);
+    if (E.versione && E.versioni) return JSON.parse(JSON.stringify(E.versione(vid)));
+    const v = find(E.versoes, vid);
+    return JSON.parse(JSON.stringify({ id: vid, ascolto: find(E.ascolto, v.ascolto), lettura: find(E.lettura, v.lettura), scrittura: v.scrittura }));
+  }, vid);
+  const v = await data(V[0]);
+  const score = async () => { await page.waitForSelector(".scorebig", { timeout: 60000 }); return parseInt(await page.textContent(".scorebig b"), 10); };
+
+  // Ascolto: the dialogue (and the monologue with its table), all right
+  await page.click("[data-prova='ascolto']");
+  await page.waitForSelector("#econsegna2");
+  const cells = await page.$$eval("[data-cell]", els => els.length);
+  if (v.monologo && cells !== v.monologo.tabella.length) errors.push(code + ": la tabla del monólogo tiene " + cells + " filas");
+  if (!v.monologo && cells) errors.push(code + ": una tabla sin monólogo");
+  if (await page.$("[data-eplay='d']")) {
+    await page.click("[data-eplay='d']");
+    const st = await page.textContent("[data-estate='d']");
+    if (!/Escucha 1 de 2/.test(st)) errors.push(code + ": la escucha del examen no arrancó: " + st);
+  }
+  await page.evaluate((v) => {
+    const a = v.ascolto;
+    a.questions.forEach((q, i) => { const r = [...document.querySelectorAll('input[name="q' + i + '"]')].find(x => x.value === q[2]); if (r) r.checked = true; });
+    a.completa.forEach((c, i) => { const inp = document.querySelector('[data-gap="' + i + '"]'); if (inp) inp.value = c[1]; });
+    // the table with the other accepted forms («quindici», «2.100»): Tramo.cellOk
+    if (v.monologo) v.monologo.tabella.forEach((c, i) => { const inp = document.querySelector('[data-cell="' + i + '"]'); if (inp) inp.value = (c[2] && c[2][0]) || c[1]; });
+  }, v);
+  if (v.monologo) { await page.$eval("[data-eplay='m']", el => el.scrollIntoView()); await snap(page, P("examen-monologo")); }
+  await page.click("#econsegna2");
+  const asc = await score();
+  if (asc !== 100) errors.push(code + ": la escucha del examen, toda bien, da " + asc + " %");
+  note(code + " · examen " + V[0] + ": escucha " + asc + " %" + (v.monologo ? " (con el monólogo, " + cells + " datos)" : ""));
+  await page.click("#eback3");
+
+  // Lettura: titles, true/false and, in Italian, the ricostruzione in order
+  await page.click("[data-prova='lettura']");
+  await page.waitForSelector("#econsegna3");
+  await page.evaluate((l) => {
+    l.match.forEach((want, i) => { const s = document.querySelector('[data-par="' + i + '"]'); if (s) s.value = String(want); });
+    l.vf.forEach((x, i) => { const r = document.querySelector('input[name="vf' + i + '"][value="' + (x[1] ? "v" : "f") + '"]'); if (r) r.checked = true; });
+  }, v.lettura);
+  if (v.ricostruzione) {
+    if (!(await page.$("#eric"))) errors.push(code + ": falta la ricostruzione");
+    // one out of place, taken back, then the right order
+    await page.click("[data-ericput='2']"); await page.click("[data-ericback='0']");
+    for (let k = 1; k < v.ricostruzione.paragraphs.length; k++) await page.click("[data-ericput='" + k + "']");
+    await page.$eval("#eric", el => el.scrollIntoView());
+    await snap(page, P("examen-ricostruzione"));
+  } else if (await page.$("#eric")) errors.push(code + ": una ricostruzione sin datos");
+  await page.click("#econsegna3");
+  const let_ = await score();
+  if (let_ !== 100) errors.push(code + ": la lectura del examen, toda bien, da " + let_ + " %");
+  note(code + " · examen " + V[0] + ": lectura " + let_ + " %" + (v.ricostruzione ? " (con la ricostruzione)" : ""));
+  await page.click("#eback3");
+
+  // Strutture: the items of the version (Italian: item.ver)
+  await page.click("[data-prova='strutture']");
+  await page.waitForTimeout(500);
+  const it3 = await page.evaluate(() => { const r = window.__test.round(); return r && r.items.map(x => x.ver || ""); });
+  if (code === "it" && (!it3 || !it3.length || it3.some(x => x !== V[0]))) errors.push(code + ": las strutture no son de la versión " + V[0] + ": " + it3);
+  note(code + " · examen: estructuras, " + (it3 ? it3.length : 0) + " ítems");
+  if (await page.$("#quit")) { await page.click("#quit"); await page.waitForTimeout(300); }
+
+  // Scrittura: the texts (the tarefas with their insumo) and the review without a key
+  await page.click("[data-prova='scrittura']");
+  await page.waitForSelector("#econsegna4");
+  const boxes = await page.$$eval(".edraft", els => els.map(e => e.dataset.id));
+  if (boxes.length !== v.scrittura.length) errors.push(code + ": la escritura muestra " + boxes.length + " textos de " + v.scrittura.length);
+  const ins = v.scrittura.filter(t => t.insumo);
+  if (ins.length) {
+    const audios = await page.$$eval("[data-eplay^='t']", els => els.length), reads = await page.$$eval(".call", els => els.length);
+    if (audios !== ins.filter(t => t.insumo.tipo === "audio").length || reads !== ins.length) errors.push(code + ": insumos de las tarefas: " + audios + " audios, " + reads + " bloques");
+    if (await page.$("[data-eplay='t2']")) { await page.click("[data-eplay='t2']"); await page.waitForTimeout(200); }
+  }
+  await snap(page, P("examen-escritura"));
+  const src = v.lettura.paragraphs.join(" ").split(/\s+/);
+  for (let i = 0; i < boxes.length; i++) {
+    const t = v.scrittura[i], n = Math.round(t.words * 0.9);
+    await page.fill("textarea[data-id='" + boxes[i] + "']", src.slice(i * 20, i * 20 + n).join(" "));
+  }
+  await page.click("#econsegna4");
+  const scr = await score();
+  const parts = await page.$$eval("#app h3", els => els.map(e => e.textContent.trim()));
+  if (!(scr > 0 && scr <= 100) || parts.length < boxes.length) errors.push(code + ": la escritura del examen: " + scr + " % · " + parts.join(" | "));
+  await snap(page, P("examen-escritura-nota"), true);
+  note(code + " · examen " + V[0] + ": escritura sin clave " + scr + " % (" + parts.slice(0, boxes.length).join(" | ") + ")");
+  await page.click("#eback3");
+
+  // The result of the version, a new attempt with the next one, a mock exam
+  await page.evaluate(() => {
+    const E = window.__test.state().esame, r = E.v[E.ver];
+    ["ascolto", "lettura", "strutture", "lessico", "scrittura"].forEach(p => { if (!r.p[p]) r.p[p] = { ok: 7, n: 10, pct: 70, at: Date.now() }; });
+  });
+  await page.click("[data-prova='ascolto']"); await page.waitForSelector("#eback2"); await page.click("#eback2");
+  await page.waitForSelector("#enext");
+  const nx = await page.getAttribute("#enext", "data-ver");
+  if (nx !== V[1]) errors.push(code + ": el intento siguiente no es la " + label(V[1]) + " sino " + nx);
+  if (!(await onScreen()).includes("Las versiones")) errors.push(code + ": el resultado no muestra las otras versiones");
+  await snap(page, P("examen-resultado"), true);
+  await page.click("#enext");
+  await page.waitForTimeout(300);
+  if (!(await onScreen()).includes("Estás haciendo la " + label(V[1]))) errors.push(code + ": «Nuevo intento» no pasó a la " + label(V[1]));
+  await page.evaluate((id) => window.__test.esame(id), V[2]);
+  await page.waitForTimeout(300);
+  const sim = await onScreen();
+  if (!sim.includes("Estás haciendo la " + label(V[2]))) errors.push(code + ": el simulacro con la " + label(V[2]) + " no abrió");
+  const st = await page.evaluate(() => { const E = window.__test.state().esame; return { ver: E.ver, best: Object.keys(E.v).filter(k => E.v[k].best), last: !!E.last }; });
+  if (st.best.join() !== V[0] || !st.last) errors.push(code + ": state.esame no guardó la versión hecha: " + JSON.stringify(st));
+  note(code + " · examen: resultado de la " + label(V[0]) + ", nuevo intento con la " + label(V[1]) + ", simulacro con la " + label(V[2]));
+  await page.evaluate(() => { delete window.__test.state().esame; });
+}
 
 (async () => {
   const port = +(process.env.PORT || 8765);
@@ -301,15 +425,7 @@ const NAMES = { it: { today: "Oggi", me: "Io", other: "pt" }, pt: { today: "Hoje
     for (let k = 0; k < 4 && !(await page.$("[data-prova='ascolto']")); k++) { await page.click("[data-m='play']"); await page.waitForTimeout(600); }
     if (await page.$("[data-prova='lettura']")) {
       await snap(page, P("examen-claro"));
-      await page.click("[data-prova='lettura']");
-      await page.waitForSelector("#econsegna3");
-      note(code + " · examen: lectura ok");
-      await page.click("#eback2");
-      await page.click("[data-prova='strutture']");
-      await page.waitForTimeout(500);
-      const it3 = await page.evaluate(() => window.__test.item());
-      note(code + " · examen: estructuras " + (it3 && it3.id));
-      if (await page.$("#quit")) { await page.click("#quit"); await page.waitForTimeout(300); }
+      await smokeEsame(page, code, P, snap, note, errors);
     } else errors.push(code + ": el examen C1 no abrió");
 
     // «Hoy»: the plan of the day once the first lesson was read
