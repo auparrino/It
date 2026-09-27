@@ -25,6 +25,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 DATA = os.path.join(ROOT, "docs", "lang", "pt", "data")
 sys.path.insert(0, os.path.join(ROOT, "tools", "pt"))
 
+import consignas  # noqa: E402
 from curriculo import SEASONS, SAI_FARE, WEEKS, TENSE_WEEK, REVIEW_WEEKS, season_of, known_tenses  # noqa: E402
 
 # La lección se lee en el teléfono: regla corta, después la tabla o los
@@ -77,6 +78,11 @@ def load_authored():
             item.setdefault("level", "B2")
             item.setdefault("topic", fn[:-3])
             item.setdefault("prompt", "Completá.")
+            # la consigna en portugués según la semana (tools/pt/consignas.py)
+            pt = consignas.consigna(item["prompt"], item["w"])
+            if pt != item["prompt"]:
+                item["prompt_es"] = item["prompt"]
+                item["prompt"] = pt
             item["accept"] = [item["answer"]] + [a for a in item.get("alt", []) if a and a != item["answer"]]
             out.append(item)
     return out
@@ -155,6 +161,8 @@ def main():
     problems = []
     for it in authored:
         problems += check_item(it)
+        if consignas.falta(it["prompt"], it["w"]):
+            problems.append("%s (semana %s): consigna sin portugués en tools/pt/consignas.py: %s" % (it["id"], it["w"], it["prompt"]))
 
     # Nada antes de su teoría: la respuesta no puede usar un tiempo que su
     # semana todavía no enseñó.  Solo avisa: el conjugador reconoce formas,
@@ -185,7 +193,9 @@ def main():
     weeks = []
     for spec in WEEKS:
         w = spec["w"]
-        own = [i["id"] for i in by_week.get(w, [])]
+        # los ítems del examen final (prova) no se entrenan en la semana 52:
+        # se ven por primera vez en el examen (app.js los toma de course.items)
+        own = [i["id"] for i in by_week.get(w, []) if not i.get("prova")]
         pool = list(own)
         if spec.get("boss") or w == 51:
             # un jefe (y el repaso final) usa todo lo de su estación: una
