@@ -332,6 +332,35 @@ function main() {
     if (acc && c[3] === "ok" && j.d.level && j.d.level !== "correcto") ok(j.d.note && j.d.natural, "puntual: «" + c[0] + "» aceptada sin nota");
   });
 
+  /* Coherencia entre correctores (P7): la misma forma recibe el mismo nivel
+     en las respuestas cerradas y en Scrivi.  Lo correcto o aceptable en una
+     respuesta cerrada no se marca como error en un texto libre, y lo
+     incorrecto se marca en los dos. [texto, respuesta modelo, semana, nivel] */
+  var S = ctx.Scrivi;
+  S.learnCourse({ items: course.items, bank: bank, phrases: ctx.Frasi.ALL, readings: ctx.Letture.EPISODI,
+                  glossario: pack.data("it", "glossario.json") });
+  [["Però non lo so.", "Ma non lo so.", 20, "ok"],
+   ["Io ho trentadue anni.", "Ho trentadue anni.", 7, "ok"],
+   ["Vieni qua, per favore.", "Vieni qui, per favore.", 12, "ok"],
+   ["Anche io vengo alla festa.", "Anch'io vengo alla festa.", 12, "ok"],
+   ["Non lavoro oggi.", "Oggi non lavoro.", 10, "ok"],
+   ["Ho 32 anni.", "Ho trentadue anni.", 7, "ok"],
+   ["A me piace la pizza.", "Mi piace la pizza.", 14, "ok"],
+   ["Sono stanca.", "Sono stanco.", 5, "ok"],
+   ["Ieri ho andato al cinema.", "Ieri sono andato al cinema.", 11, "no"],
+   ["Ho conosciuto a Giulia in vacanza.", "Ho conosciuto Giulia in vacanza.", 11, "no"],
+   ["Penso che è troppo tardi.", "Penso che sia troppo tardi.", 30, "no"],
+   ["C'è due gatti in giardino.", "Ci sono due gatti in giardino.", 9, "no"],
+   ["Mai vado in piscina.", "Non vado mai in piscina.", 18, "no"],
+   ["Il mio padre lavora in banca.", "Mio padre lavora in banca.", 17, "no"]
+  ].forEach(function (c) {
+    var j = judge(c[0], { answer: c[1], accept: [c[1]], week: c[2] });
+    var hard = S.lint(c[0], c[2]).filter(function (x) { return !x.soft; });
+    var closedOk = j.verdict === "giusto", scriviOk = !hard.length;
+    ok(closedOk === scriviOk && closedOk === (c[3] === "ok"), "coherencia: «" + c[0] + "» cerrada " + (j.d.level || j.verdict) +
+       ", Scrivi " + (hard.length ? "marca " + hard.map(function (x) { return x.cat; }).join(",") : "no marca") + " (esperado " + c[3] + ")");
+  });
+
   /* ------------------------------------------------------------ informe */
 
   var totV = 0, rejV = 0, totC = 0, accC = 0;

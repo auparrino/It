@@ -116,8 +116,11 @@ ERR.forEach(function (e) {
       falsos.push("semana " + o.week + " «" + tc.slice(x.i, x.i + x.n).map(function (z) { return z.o; }).join(" ") + "»: " + x.msg);
     });
   });
-  ok(hit / tot >= 0.61, "corpus: el corrector propio marca " + hit + "/" + tot + " errores (piso 61%)");
-  var FLOOR = { spagnolo: 0.85, preposizione: 0.75, articolo: 0.9, ausiliare: 0.9, accento: 0.9, concordanza: 0.55, a_personale: 0.75, ortografia: 0.6, doppie: 0.8 };
+  ok(hit / tot >= 0.67, "corpus: el corrector propio marca " + hit + "/" + tot + " errores (piso 67%; 61% antes de las familias B1-C1)");
+  // (ci_ne 0/14, orden 1/9, pronombres 9/50, participio 11/37, tiempo y modo
+  // 29/78 y persona 16/43 antes de las reglas de lintB2)
+  var FLOOR = { spagnolo: 0.85, preposizione: 0.75, articolo: 0.9, ausiliare: 0.9, accento: 0.9, concordanza: 0.55, a_personale: 0.75, ortografia: 0.6, doppie: 0.8,
+                ci_ne: 0.65, ordine: 0.5, pronome: 0.4, participio: 0.55, tempo_modo: 0.45, persona: 0.45 };
   Object.keys(FLOOR).forEach(function (k) {
     var c = byCat[k] || [0, 1];
     ok(c[0] / c[1] >= FLOOR[k], "corpus, " + k + ": " + c[0] + "/" + c[1] + " (piso " + Math.round(FLOOR[k] * 100) + "%)");

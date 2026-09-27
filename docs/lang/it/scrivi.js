@@ -1137,7 +1137,12 @@
     var it = function (s) { return "*" + s + "*"; };
     var W = function (k) { return tk[k] && tk[k].w || ""; };
     var taken = function (a, n) { return out.some(function (f) { return a < f.i + f.n && f.i < a + (n || 1); }); };
-    var push = function (i, n, cat, msg, soft) { if (!taken(i, n)) out.push({ i: i, n: n || 1, cat: cat, msg: msg, soft: !!soft }); };
+    var push = function (i, n, cat, msg, soft) {
+      if (taken(i, n)) return null;
+      var f = { i: i, n: n || 1, cat: cat, msg: msg, soft: !!soft };
+      out.push(f);
+      return f;
+    };
     var lem = function (w) { return V(w).map(function (v) { return v.lemma; }); };
     var hasLem = function (w, re) { return lem(w).some(function (l) { return re.test(l); }) || (PP(w) && re.test(PP(w))); };
     var nextW = function (k, skip) { for (var x = k + 1; x < tk.length && tk[x].w; x++) if (!(skip && skip.test(tk[x].w))) return x; return -1; };
@@ -1618,6 +1623,350 @@
           }
         }
       }
+
+      lintB2(tk, i, push, it, W, finite, nextW);
+    }
+  }
+
+  /* ------------------------------------------ familias de B1-C1 (C7)
+     Las que el corpus mostraba casi sin marcar: ci / ne, el orden de los
+     adverbios, los pronombres de un tema ya nombrado, el participio y el
+     tiempo del discurso indirecto.  Cada regla pide un contexto que la
+     hace segura: cero marcas en los textos corregidos, los modelos, las
+     frases del curso y el texto nativo del tramo (test_scrivi.js). */
+  var PERCEIVE = /^(vedere|sentire|guardare|ascoltare|osservare|notare)$/;
+  var DO_STRICT = /^(chiamare|vedere|conoscere|aspettare|invitare|ringraziare|salutare|stimare|aiutare|incontrare|accompagnare|guardare|ascoltare|svegliare|amare|odiare|trovare|capire|ammirare)$/;
+  var IND_ONLY = /^(telefonare|rispondere)$/;
+  var IND_TOPIC = /^(telefonare|rispondere|scrivere|mandare|dire|raccontare|piacere|mancare|regalare|spiegare|chiedere|dare|portare)$/;
+  var QUANT_UNIT = /^(chili|chilo|etti|etto|litri|litro|grammi|dozzina|decina|fette|fetta|bottiglie|bottiglia|pezzi|pezzo|scatole|scatola|kg)$/;
+  var TIME_SPAN = /^(ore|ora|minuti|minuto|giorni|giorno|settimane|settimana|mesi|mese|anni|anno|secoli|tempo|un'ora|mezz'ora)$/;
+  var PAST_SAY = /^(detto|promesso|scritto|giurato|assicurato|risposto|spiegato|annunciato|disse|promise|scrisse|rispose|sapevo|sapeva|sapevamo|pensavo|pensava|credevo|credeva|immaginavo|immaginava)$/;
+  var STATIVE = /^(essere|avere|stare|sapere|volere|potere|dovere|piovere|sembrare|pensare|credere|conoscere|piacere|abitare|vivere|chiamarsi|sentirsi|trovarsi)$/;
+  function lintB2(tk, i, push, it, W, finite, nextW) {
+    var t = tk[i], w = t.w, n = W(i + 1), n2 = W(i + 2), p = W(i - 1), p2 = W(i - 2);
+    var lemOf = function (x) { return V(x).map(function (v) { return v.lemma; }).concat(PP(x) ? [PP(x)] : []); };
+    var sentEnd = function (k) { for (var x = k; x < tk.length; x++) if (tk[x].p && /[.!?]/.test(tk[x].p)) return tk[x].p; return "."; };
+    var ESS_OR_AV = function (x) { return !!(AVE_PRES[x] || ESS_ALL[x] || (U.AVERE || []).indexOf(x) >= 0); };
+
+    /* --- ci / ne --- */
+    // «Compro due chili.», «ho cinque!»: a quantity with nothing after it asks for ne
+    if (finite(w) && !isNoun(w) && !/^(ne|n'|ce|me|te|se|ve|ci|c')$/.test(p) && !ESS_ALL[w] &&
+        (t.start || t.clause || (/^(lo|la|li|le)$/.test(p) && tk[i - 1] && (tk[i - 1].start || tk[i - 1].clause))) &&
+        !tk.slice(Math.max(0, i - 3), i).some(function (z) { return z.w === "ne" || z.w === "n'"; }) &&
+        lemOf(w).some(function (l) { return /^(avere|comprare|prendere|volere|mangiare|bere|leggere|vendere|usare|portare)$/.test(l); })) {
+      var q = i + 1, qty = null;
+      if (/^(un|una|mezzo|mezza)$/.test(W(q)) && QUANT_UNIT.test(W(q + 1))) qty = [q, q + 1];
+      else if (NUMW.test(W(q)) && QUANT_UNIT.test(W(q + 1))) qty = [q, q + 1];
+      else if (NUMW.test(W(q)) && W(q) !== "sei" && tk[q + 1] && tk[q + 1].p) qty = [q];
+      var endQ = qty ? qty[qty.length - 1] + 1 : -1;
+      if (qty && tk[endQ] && (tk[endQ].p || /^(per|al|alla|ogni|oggi|domani|stasera|anche)$/.test(W(endQ))) && W(endQ) !== "di") {
+        var v0 = /^(lo|la|li|le)$/.test(p) ? i - 1 : i;
+        var _f = push(v0, i - v0 + 1, "ci_ne", "Con una cantidad de algo ya nombrado va *ne*: " + it("ne " + t.o + " " + qty.map(function (k) { return tk[k].o; }).join(" ")) + " (de eso, de ellos)."); if (_f) _f.good = "ne " + t.o;
+        return;
+      }
+    }
+    // «ho messo settimane a trovare» → ci ho messo
+    if (w === "messo" && ESS_OR_AV(p) && W(i - 2) !== "ci" && W(i - 2) !== "c'" &&
+        (TIME_SPAN.test(n) || ((NUMW.test(n) || /^(un|una|qualche|molto|poco|tanto|troppo|due)$/.test(n)) && TIME_SPAN.test(n2)))) {
+      var _f = push(i - 1, 2, "ci_ne", "«Tardar» un tiempo es *metterci*: " + it("ci " + p + " messo") + " (ci ho messo un'ora = tardé una hora)."); if (_f) _f.good = "ci " + p + " messo";
+      return;
+    }
+    // «mi sono andato» → me ne sono andato; «andarmi» → andarmene
+    if (/^(mi|ti|si)$/.test(w) && ESS_ALL[n] && /^andat[oaie]$/.test(n2)) {
+      var _f = push(i, 3, "ci_ne", "«Irse» es *andarsene*: " + it(w.charAt(0) + "e ne " + n + " " + n2) + " (me ne vado = me voy)."); if (_f) _f.good = w.charAt(0) + "e ne " + n + " " + n2;
+      return;
+    }
+    var am = /^andar(mi|ti|si|ci|vi)$/.exec(w);
+    if (am && !/^(ne|n')$/.test(n)) {
+      var _f = push(i, 1, "ci_ne", "«Irse» es *andarsene*: " + it("andar" + am[1].charAt(0) + "ene") + "."); if (_f) _f.good = "andar" + am[1].charAt(0) + "ene";
+      return;
+    }
+    // «ne vado» → ci vado (ne is not «ahí»)
+    if (w === "ne" && !/^(me|te|se|ce|ve)$/.test(p) && finite(n) && lemOf(n).some(function (l) { return /^(andare|venire|tornare)$/.test(l); }) &&
+        !/^(andat|venut|tornat|pazz|matt)/.test(n2)) {
+      var _f = push(i, 1, "ci_ne", "Para el lugar («ahí») va *ci*: " + it("ci " + n) + "; *ne* es «de eso»."); if (_f) _f.good = "ci";
+      return;
+    }
+    // «l'abbiamo fatta ad arrivare» → ce l'abbiamo fatta
+    if (w === "l'" && AVE_PRES[n] && n2 === "fatta" && /^(a|ad)$/.test(W(i + 3)) && p !== "ce") {
+      var _f = push(i, 3, "ci_ne", "«Lograrlo» es *farcela*: " + it("ce l'" + n + " fatta") + "."); if (_f) _f.good = "ce l'" + n + " fatta";
+      return;
+    }
+
+    /* --- orden --- */
+    // «Mai vado» → non vado mai; «già ha finito» → ha già finito
+    if ((w === "mai" || w === "già") && (t.start || t.clause || (p && (isNoun(p) || tk[i - 1].cap || /^(io|tu|lui|lei|noi|voi|loro)$/.test(p)))) && p !== "non") {
+      var vk = i + 1;
+      if (CLITIC.test(W(vk))) vk++;
+      var vw = W(vk);
+      var pk = ESS_OR_AV(vw) ? nextPart(tk, vk) : -1;
+      if (w === "mai" && finite(vw) && !isNoun(vw) && !V(vw).some(function (v) { return /condizionale|cong/.test(v.tense); }) && W(i + 1) !== "più") {
+        var _f = push(i, vk - i + 1, "ordine", "La negación con *mai* es *non* … *mai*: " + it("non " + (vk > i + 1 ? W(i + 1) + " " : "") + vw + (pk > 0 ? " mai " + W(pk) : " mai")) + " (no voy nunca = non vado mai)."); if (_f) _f.good = "non " + (vk > i + 1 ? W(i + 1) + " " : "") + vw + (pk > 0 ? "" : " mai");
+        return;
+      }
+      if (w === "già" && pk > 0 && vk === i + 1) {
+        var _f = push(i, 2, "ordine", "*già* va entre el auxiliar y el participio: " + it(vw + " già " + W(pk)) + " (ya terminó = ha già finito)."); if (_f) _f.good = vw + " già";
+        return;
+      }
+    }
+    // «la più difficile cosa» → la cosa più difficile
+    if (U.ARTICLES[w] && /^(più|meno)$/.test(n) && DATA.adj[n2] && !isNoun(n2) && isNoun(W(i + 3)) && !V(W(i + 3)).length) {
+      var _f = push(i + 1, 3, "ordine", "En el superlativo el adjetivo va después del sustantivo: " + it(w + " " + W(i + 3) + " " + n + " " + n2) + " (la cosa más difícil)."); if (_f) _f.good = W(i + 3) + " " + n + " " + n2;
+      return;
+    }
+
+    /* --- pronombres --- */
+    // «A mi piacciono» → a me
+    if (w === "a" && /^(mi|ti)$/.test(n) && finite(n2)) {
+      var _f = push(i + 1, 1, "pronome", "Después de *a* va la forma larga: " + it("a " + (n === "mi" ? "me" : "te") + " " + n2) + " (o sin *a*: " + it(n + " " + n2) + ")."); if (_f) _f.good = n === "mi" ? "me" : "te";
+      return;
+    }
+    // «Ascoltando lo e…» → ascoltandolo; «guardando a lui» → guardandolo
+    var gerund = /(ando|endo)$/.test(w) && !isNoun(w) && [w.replace(/ando$/, "are"), w.replace(/endo$/, "ere"), w.replace(/endo$/, "ire")].some(function (x) { return x !== w && Conj && Conj.VERBS && Conj.VERBS[x]; });
+    if (gerund && /^(lo|la|li|le|ne|mi|ti|ci|vi|gli)$/.test(n) && ((tk[i + 2] && tk[i + 2].p) || /^(e|ma|o|poi|per|con|ogni|sempre|bene|meglio)$/.test(n2))) {
+      var _f = push(i, 2, "posizione_pronome", "Con el gerundio el pronombre va pegado al final: " + it(w + n) + " (escuchándolo)."); if (_f) _f.good = w + n;
+      return;
+    }
+    if (/(ando|endo|are|ere|ire)$/.test(w) && n === "a" && /^(lui|lei|loro)$/.test(n2) && lemOf(w).concat([/(are|ere|ire)$/.test(w) ? w : ""]).some(function (l) { return DO_STRICT.test(l); })) {
+      var cl = n2 === "lui" ? "lo" : n2 === "lei" ? "la" : "li";
+      var _f = push(i, 3, "pronome", "Sin «a»: la persona es objeto directo y el pronombre se pega: " + it((/(are|ere|ire)$/.test(w) ? w.slice(0, -1) : w) + cl) + "."); if (_f) _f.good = (/(are|ere|ire)$/.test(w) ? w.slice(0, -1) : w) + cl;
+      return;
+    }
+    // «la telefono» → le telefono; «gli chiamo» → li / lo chiamo
+    if (/^(lo|la)$/.test(w) && finite(n) && !isNoun(n) && lemOf(n).some(function (l) { return IND_ONLY.test(l); }) && !U.ARTICLES[p]) {
+      var _f = push(i, 1, "pronome", "Con *" + lemOf(n)[0] + "* la persona va en indirecto: " + it((w === "la" ? "le " : "gli ") + n) + " (" + (w === "la" ? "a ella" : "a él") + ")."); if (_f) _f.good = w === "la" ? "le" : "gli";
+      return;
+    }
+    if (w === "la" && AVE_PRES[n] && /^rispost[oa]$/.test(n2)) {
+      var _f = push(i, 1, "pronome", "Con *rispondere* la persona va en indirecto: " + it("le ho risposto") + " (le respondí)."); if (_f) _f.good = "le";
+      return;
+    }
+    if (w === "gli" && !U.ARTICLES[p] && !U.prepInfo(p) && (finite(n) && lemOf(n).some(function (l) { return DO_STRICT.test(l); }) ||
+        (AVE_PRES[n] && PP(n2) && DO_STRICT.test(PP(n2)))) && !isNoun(n)) {
+      push(i, 1, "pronome", "*gli* es «le» (a él); con *" + (PP(n2) && AVE_PRES[n] ? PP(n2) : lemOf(n)[0]) + "* la persona es objeto directo: *lo* (a él), *la* (a ella), *li* (a ellos): " + it("li " + n) + " o " + it("lo " + n) + ".");
+      return;
+    }
+    // «se lo compriamo», «se l'ho comprato» → glielo (the Spanish «se lo»)
+    // (not the «se» of a condition: «Se l'avessi saputo, …», «Se lo fai, …»)
+    var restNoComma = true;
+    for (var rc = i + 1; rc < tk.length && !(tk[rc].p && /[.!?:]/.test(tk[rc].p)); rc++) if (tk[rc].p === ",") { restNoComma = false; break; }
+    if (w === "se" && /^(lo|la|li|le|l')$/.test(n) && restNoComma && (!t.start || (tk[i - 1] && tk[i - 1].p === "?")) &&
+        (t.start || t.clause || /^(io|e|poi|già)$/.test(p) || isNoun(p))) {
+      var sv = n2, fsv = V(sv).filter(function (v) { return v.p !== 2 && v.p !== 5 && v.tense === "presente"; });
+      if (fsv.length && V(sv).every(function (v) { return v.p !== 2 && v.p !== 5; }) && !/rsi$/.test(fsv[0].lemma)) {
+        var gl = n === "l'" ? "gliel'" : "glie" + n;
+        var _f = push(i, 2, "pronome", "El «se lo» del español (a él, a ella) en italiano es *glie-*: " + it(gl + (n === "l'" ? "" : " ") + sv) + "."); if (_f) _f.good = gl;
+        return;
+      }
+    }
+    // «Anna? Lo chiamo»: the pronoun of a topic already named agrees with it
+    if (/^(lo|la|li|le|gli)$/.test(w) && (t.start || (p && /^(sì|no)$/.test(p) && tk[i - 1] && tk[i - 1].start)) && finite(n) && !isNoun(n)) {
+      var q0 = i - 1;
+      while (q0 >= 0 && !(tk[q0].p && tk[q0].p === "?")) { if (tk[q0].p && /[.!]/.test(tk[q0].p)) { q0 = -1; break; } q0--; }
+      if (q0 > 0) {
+        var st = q0 - 1;
+        while (st > 0 && !(tk[st - 1].p && /[.!?:]/.test(tk[st - 1].p))) st--;
+        var head = null, hk = st;
+        while (hk < q0 && tk[hk].w && (U.ARTICLES[tk[hk].w] || POSS[tk[hk].w] || tk[hk].w === "loro")) hk++;
+        if (hk < q0 && tk[hk].w) {
+          var hw = tk[hk].w, gnH = isNoun(hw) ? nounGN(hw) : null;
+          if (!gnH && tk[hk].cap && hk === st && (tk[hk + 1] || {}).p === "?") gnH = /a$/.test(hw) ? { g: "f", n: "s" } : /o$/.test(hw) ? { g: "m", n: "s" } : null;
+          if (gnH && !gnH.n && U.ARTICLES[W(st)]) gnH.n = U.ARTICLES[W(st)][1];
+          if (gnH && gnH.n && !COMMON_G.test(hw) && !AMBI_GENDER.test(hw)) {
+            var ind = lemOf(n).some(function (l) { return IND_TOPIC.test(l); }) && !lemOf(n).some(function (l) { return DO_STRICT.test(l); });
+            var want = ind ? (gnH.g === "f" && gnH.n === "s" ? "le" : "gli") : { ms: "lo", fs: "la", mp: "li", fp: "le" }[gnH.g + gnH.n];
+            if (want && want !== w && !(ind && w === "gli" && gnH.n === "p")) {
+              var _f = push(i, 1, "pronome", "El pronombre retoma " + it(tk[hk].o) + " (" + (gnH.g === "f" ? "femenino" : "masculino") + " " + (gnH.n === "p" ? "plural" : "singular") + ")" +
+                (ind ? " y *" + lemOf(n)[0] + "* lleva indirecto" : "") + ": " + it(want + " " + n) + "."); if (_f) _f.good = want;
+              return;
+            }
+          }
+        }
+      }
+    }
+
+    /* --- participio --- */
+    // «ho leggiuto», «abbiamo vinciuto», «ho scopruto»: the irregular participle
+    var mR = /^(.+?)i?(ut|it)([oaie])$/.exec(w);
+    if (mR && ESS_OR_AV(p) && !known(w) && !exists(w)) {
+      var base = w.replace(/(ut|it)[oaie]$/, "");
+      var cands = [base + "ere", base + "ire", base.replace(/i$/, "") + "ere", base.replace(/i$/, "") + "ire", base.replace(/i$/, "") + "iere", base + "ere".replace(/^/, "")];
+      for (var c = 0; c < cands.length; c++) {
+        var lm = cands[c];
+        if (Conj && Conj.VERBS && Conj.VERBS[lm]) {
+          var real = Conj.participle(lm).replace(/o$/, mR[3]);
+          if (real !== w) {
+            var _f = push(i, 1, "participio", "El participio de " + it(lm) + " es irregular: " + it(real) + "."); if (_f) _f.good = real;
+            return;
+          }
+        }
+      }
+    }
+    // «le ho visto», «me le ha dato»: with lo, la, li, le before avere the participle agrees
+    if (AVE_PRES[w] && /^(le|li)$/.test(p) && (/^(me|te|ce|ve|glie|se)$/.test(p2) || !U.ARTICLES[p2] && !isNoun(p2))) {
+      var ppk = nextPart(tk, i);
+      var direct = /^(me|te|ce|ve|glie|se)$/.test(p2) || (ppk > 0 && PP(tk[ppk].w) && DO_STRICT.test(PP(tk[ppk].w))) ||
+        (ppk > 0 && /^(cantat|comprat|mangiat|lett|scritt|vist|trovat|pres|mess|fatt)o$/.test(tk[ppk].w) && /^(me|te|ce|ve|glie|se)$/.test(p2));
+      if (ppk > 0 && direct && /[oa]$/.test(tk[ppk].w) && !(p === "li" && /i$/.test(tk[ppk].w))) {
+        var fixPP = tk[ppk].w.replace(/[oa]$/, p === "li" ? "i" : "e");
+        var _f = push(ppk, 1, "participio", "Con *" + p + "* antes de *avere*, el participio concuerda con él: " + it(fixPP) + " (le ho viste = las vi)."); if (_f) _f.good = fixPP;
+        return;
+      }
+    }
+    // «ce la siamo cavati» → cavata (the la of farcela, cavarsela)
+    if (/^(me|te|se|ce|ve)$/.test(p2) && p === "la" && ESS_ALL[w]) {
+      var ck = nextPart(tk, i);
+      if (ck > 0 && /[oie]$/.test(tk[ck].w) && /^(cavat|pres|sentit|fatt)[oie]$/.test(tk[ck].w)) {
+        var fixC = tk[ck].w.replace(/[oie]$/, "a");
+        var _f = push(ck, 1, "participio", "Con *" + p2 + " la* el participio va en femenino: " + it(fixC) + " (concuerda con *la*)."); if (_f) _f.good = fixC;
+        return;
+      }
+    }
+    // «è stato cominciata»: stato and the participle agree with each other
+    if (/^(stato|stata|stati|state)$/.test(w) && ESS_ALL[p] && PP(n) && /[oaie]$/.test(n) && w.slice(-1) !== n.slice(-1) && !/^(stato|stata|stati|state)$/.test(n)) {
+      push(i, 2, "participio", "*" + w + "* y *" + n + "* concuerdan entre sí y con el sujeto: " + it(w.slice(0, -1) + n.slice(-1) + " " + n) + " o " + it(w + " " + n.slice(0, -1) + w.slice(-1)) + ".");
+      return;
+    }
+    // «Preso la patente, …», «Finito le lezioni, …»: the absolute participle agrees with its noun
+    if ((t.start || t.clause) && PP(w) && /[oaie]$/.test(w) && U.ARTICLES[n] && U.ARTICLES[n][2] === "det" && isNoun(n2)) {
+      var gA = nounGN(n2);
+      if (gA && gA.n && !COMMON_G.test(n2)) {
+        var fixA = w.slice(0, -1) + { ms: "o", fs: "a", mp: "i", fp: "e" }[gA.g + gA.n];
+        if (fixA !== w && tk[i + 3] && (tk[i + 3].p === "," || W(i + 3) === "e")) {
+          var _f = push(i, 1, "participio", "El participio del comienzo concuerda con lo que sigue: " + it(fixA + " " + n + " " + n2) + " (una vez sacada la licencia)."); if (_f) _f.good = fixA;
+          return;
+        }
+      }
+    }
+
+    /* --- tiempo y modo --- */
+    // «ha detto che verrà / mi aiuterebbe» → sarebbe venuto, mi avrebbe aiutato
+    var sayAfter = tk.slice(i + 1, i + 8).map(function (z) { return z.w || z.p; }).join(" ");
+    if (w === "che" && PAST_SAY.test(p) && (/^(aveva|avevo|avevano|avevamo|avevi)$/.test(p2) || /^(aveva|avevo|avevano|avevamo|avevi)$/.test(W(i - 3)) ||
+        /^(disse|promise|scrisse|rispose|sapevo|sapeva|sapevamo|pensavo|pensava|credevo|credeva|immaginavo|immaginava)$/.test(p) ||
+        /\b(giorno dopo|l'indomani|settimana dopo|mese dopo|anno dopo)\b/.test(sayAfter))) {
+      for (var x = i + 1; x < tk.length && x <= i + 5 && tk[x].w; x++) {
+        var xw = tk[x].w;
+        if (/^(io|tu|lui|lei|noi|voi|loro|non|mi|ti|ci|vi|si|lo|la|li|le|gli|ne|l')$/.test(xw) || U.ARTICLES[xw] || POSS[xw] || isNoun(xw) || tk[x].cap || /^(il giorno|anche|sempre|davvero|poi)$/.test(xw)) continue;
+        var fv = V(xw).filter(function (v) { return v.tense === "futuro"; });
+        if (fv.length && !isNoun(xw) && V(xw).every(function (v) { return v.tense === "futuro"; }) && !ESS_OR_AV(xw)) {
+          var fl = fv[0].lemma.replace(/rsi$/, "re"), auxC = conjSafe(auxOf(fl) === "essere" ? "essere" : "avere", "condizionale"), ppC = null;
+          try { ppC = Conj.participle(fl); } catch (e) { ppC = null; }
+          if (auxC && ppC && !/^(dovere|potere|volere)$/.test(fl)) {
+            var goodC = auxC[fv[0].p] + " " + ppC;
+            var _f = push(x, 1, "tempo_modo", "Lo que era futuro, contado desde el pasado, va en condizionale passato: " + it(goodC) + " (dijo que vendría = ha detto che sarebbe venuto)."); if (_f) _f.good = goodC;
+          }
+        }
+        break;
+      }
+    }
+    // «dovrei aver studiato» → avrei dovuto studiare
+    if (/^(dovrei|dovresti|dovrebbe|dovremmo|dovreste|dovrebbero|potrei|potresti|potrebbe)$/.test(w) && /^(aver|avere|esser|essere)$/.test(n) && PP(n2)) {
+      var mod = V(w)[0], avC = conjSafe("avere", "condizionale"), ppM = mod && (mod.lemma === "dovere" ? "dovuto" : "potuto");
+      var infR = PP(n2);
+      if (avC && mod && infR) {
+        var _f = push(i, 3, "tempo_modo", "«Debería haber…» es *avrei dovuto* + infinitivo: " + it(avC[mod.p] + " " + ppM + " " + infR) + "."); if (_f) _f.good = avC[mod.p] + " " + ppM + " " + infR;
+        return;
+      }
+    }
+    // «Se non cominciavo…, non avrei…» → se non avessi cominciato
+    if (w === "se" && !/^(lo|la|li|le|ne|l')$/.test(n)) {
+      var sk2 = nextW(i, /^(non|mi|ti|ci|vi|si|io|tu|lui|lei|noi|voi|loro)$/), sw2 = W(sk2), svi = V(sw2).filter(function (v) { return v.tense === "imperfetto"; });
+      if (sk2 > 0 && svi.length && !V(sw2).some(function (v) { return /cong/.test(v.tense); })) {
+        var hasCond = false, compound = false;
+        for (var y = sk2 + 1; y < tk.length && y < sk2 + 16 && !(tk[y].p && /[.!?]/.test(tk[y].p)); y++) {
+          var yv = V(W(y));
+          if (yv.some(function (v) { return v.tense === "condizionale"; })) { hasCond = true; compound = ESS_OR_AV(W(y)) && !!PP(W(y + 1)); break; }
+        }
+        if (hasCond && !/^(stavo|stava|stavamo|stavano)$/.test(sw2)) {
+          var sl = svi[0].lemma.replace(/rsi$/, "re"), gsc = null;
+          if (compound) {
+            var aux2 = conjSafe(auxOf(sl) === "essere" ? "essere" : "avere", "congImperfetto"), pp2 = null;
+            try { pp2 = Conj.participle(sl); } catch (e) { pp2 = null; }
+            gsc = aux2 && pp2 ? aux2[svi[0].p] + " " + pp2 : null;
+          } else {
+            var ci2 = conjSafe(sl, "congImperfetto");
+            gsc = ci2 ? ci2[svi[0].p] : null;
+          }
+          if (gsc && !ESS_OR_AV(sw2) || (gsc && ESS_OR_AV(sw2) && !PP(W(sk2 + 1)))) {
+            var _f = push(sk2, 1, "tempo_modo", "Con el condicional en la otra parte, la condición irreal va en congiuntivo: " + it("se " + gsc) + " (si hubiera empezado = se avessi cominciato)."); if (_f) _f.good = gsc;
+          }
+        }
+      }
+    }
+    // «ho sentito un cane abbaiando» → abbaiare
+    if (/(ando|endo)$/.test(w) && !isNoun(w) && (U.ARTICLES[W(i - 2)] || POSS[W(i - 2)]) && isNoun(p)) {
+      var pv = W(i - 3), pvl = lemOf(pv).concat(PP(pv) ? [PP(pv)] : []);
+      if (pvl.some(function (l) { return PERCEIVE.test(l); })) {
+        var infG = w.replace(/ando$/, "are"), infE = w.replace(/endo$/, "ere"), infI = w.replace(/endo$/, "ire");
+        var inf = /ando$/.test(w) ? infG : (Conj && Conj.VERBS && Conj.VERBS[infI] && !Conj.VERBS[infE]) ? infI : infE;
+        var _f = push(i, 1, "tempo_modo", "Después de *vedere, sentire, guardare* va el infinitivo: " + it(p + " " + inf) + " (oí un perro ladrar = ho sentito un cane abbaiare)."); if (_f) _f.good = inf;
+        return;
+      }
+    }
+    // «Un giorno cadevo» → sono caduto: a single event
+    if (/^(giorno|improvviso)$/.test(w) && ((p === "un" && tk[i - 1].start) || (p === "all'" && (tk[i - 1].start || tk[i - 1].clause)))) {
+      var ek = i + 1;
+      while (tk[ek] && (!tk[ek].w || /^(mi|ti|si|ci|vi|non|,)$/.test(tk[ek].w) || U.prepInfo(tk[ek].w) || U.ARTICLES[tk[ek].w] || isNoun(tk[ek].w) || tk[ek].p === ",") && ek < i + 6) ek++;
+      var ew = W(ek), eim = V(ew).filter(function (v) { return v.tense === "imperfetto"; });
+      if (eim.length && V(ew).every(function (v) { return v.tense === "imperfetto"; }) && !STATIVE.test(eim[0].lemma)) {
+        var el = eim[0].lemma, refl = /^(mi|ti|si|ci|vi)$/.test(W(ek - 1)) || /rsi$/.test(el);
+        el = el.replace(/rsi$/, "re");
+        var auxE = conjSafe(refl || auxOf(el) === "essere" ? "essere" : "avere", "presente"), ppE = null;
+        try { ppE = Conj.participle(el); } catch (e) { ppE = null; }
+        if (auxE && ppE) {
+          var _f = push(ek, 1, "tempo_modo", "Un hecho puntual («un día me caí») va en passato prossimo: " + it(auxE[eim[0].p] + " " + ppE) + "; el imperfetto describe o cuenta lo habitual."); if (_f) _f.good = auxE[eim[0].p] + " " + ppE;
+        }
+      }
+    }
+    // «va a venire» → verrà (the Spanish «ir a» + infinitive)
+    if (/^(vado|vai|va|andiamo|andate|vanno)$/.test(w) && n === "a" && /^(venire|essere|stare|piovere|succedere|avere|potere|dovere|nevicare)$/.test(n2)) {
+      var fF = conjSafe(n2, "futuro"), vp = V(w)[0];
+      if (fF && vp) {
+        var _f = push(i, 3, "tempo_modo", "El «ir a» + infinitivo del español se dice con el futuro (o el presente): " + it(fF[vp.p]) + "."); if (_f) _f.good = fF[vp.p];
+        return;
+      }
+    }
+    // «non lavori troppo!» → non lavorare: the negative imperative for tu
+    if (w === "non" && tk[i + 1] && tk[i + 1].w) {
+      var rk = i + 1, rcl = /^(ti)$/.test(n) ? n : "";
+      if (rcl) rk++;
+      var rw = W(rk), rv = V(rw);
+      var imperCtx = sentEnd(rk) === "!" || tk.slice(Math.max(0, i - 12), i + 12).some(function (z, k2) { return z.w === "non" && isInf(W(Math.max(0, i - 12) + k2 + 1)); });
+      if (rv.length && rv.every(function (v) { return v.p === 1 && v.tense === "presente"; }) && imperCtx && !ESS_OR_AV(rw) && !/^(tu|perché|se|che|quando)$/.test(p) &&
+          !tk.slice(Math.max(0, i - 4), i).some(function (z) { return z.w === "tu" || z.w === "se" || z.w === "che"; })) {
+        var rl = rv[0].lemma, infN = rcl ? rl.replace(/si$/, "").replace(/e$/, "") + "ti" : rl.replace(/si$/, "e");
+        if (rcl && !/rsi$/.test(rl)) infN = rl.replace(/e$/, "") + "ti";
+        var _f = push(rcl ? i + 1 : rk, rcl ? 2 : 1, "tempo_modo", "Para decirle a alguien (tu) que no haga algo va *non* + infinitivo: " + it("non " + infN) + " (no trabajes = non lavorare)."); if (_f) _f.good = infN;
+        return;
+      }
+    }
+
+    /* --- persona --- */
+    // «io e i miei colleghi mangiano» → mangiamo
+    if (w === "io" && n === "e" && (t.start || t.clause)) {
+      var zk = i + 2;
+      while (zk < i + 7 && tk[zk] && tk[zk].w && (U.ARTICLES[tk[zk].w] || POSS[tk[zk].w] || isNoun(tk[zk].w) || DATA.adj[tk[zk].w] || tk[zk].cap || tk[zk].w === "loro") && !finite(tk[zk].w)) zk++;
+      while (tk[zk] && /^(non|mi|ti|ci|vi|si|lo|la|li|le|ne|sempre|spesso|già|anche)$/.test(tk[zk].w || "")) zk++;
+      var zw = W(zk), zv = V(zw);
+      if (zk > i + 2 && zv.length && zv.every(function (v) { return v.p === 5 || v.p === 2; }) && !isNoun(zw)) {
+        var zf = conjSafe(zv[0].lemma, zv[0].tense);
+        if (zf && zf[3] && zf[3] !== zw) {
+          var _f = push(zk, 1, "persona_verbale", "*io e…* es «nosotros»: el verbo va con *noi*: " + it(zf[3]) + "."); if (_f) _f.good = zf[3];
+          return;
+        }
+      }
+    }
+    // «È stato io» → sono stato io
+    if (/^(è)$/.test(w) && /^(stato|stata)$/.test(n) && /^(io|tu|noi|voi)$/.test(n2)) {
+      var ec = { io: "sono", tu: "sei", noi: "siamo", voi: "siete" }[n2];
+      var _f = push(i, 1, "persona_verbale", "El verbo concuerda con " + it(n2) + ": " + it(ec + " " + (/^(noi|voi)$/.test(n2) ? n.replace(/[oa]$/, "i") : n) + " " + n2) + " (fui yo = sono stato io)."); if (_f) _f.good = ec;
+      return;
+    }
+    // «la gente sono» → è
+    if (w === "sono" && p === "gente" && p2 === "la") {
+      var _f = push(i, 1, "persona_verbale", it("La gente") + " es singular: " + it("è") + "."); if (_f) _f.good = "è";
+      return;
     }
   }
 
