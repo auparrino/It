@@ -131,5 +131,37 @@
       "fichi": "higos",
       "ci ritroveranno": "van a encontrar ahí (ci = en el cuento)"
     }
+  },
+  "breve": {
+    "title": "Museo dell'Emigrazione, sala tre",
+    "genre": "audioguida",
+    "es": "La audioguía de un museo de la emigración italiana presenta la sala de las valijas y las cartas.",
+    "speaker": "Audioguida",
+    "voice": 0,
+    "text": [
+      "Benvenuti nella sala tre del Museo dell'Emigrazione italiana. Le valigie che vedete nella vetrina centrale sono state donate dalle famiglie degli emigranti. La più piccola, di cartone, apparteneva a una ragazza di sedici anni che nel 1951 è partita da Genova per Buenos Aires.",
+      "Molti emigranti credevano che sarebbero tornati dopo pochi anni, e per questo portavano con sé pochissimo: qualche vestito, una fotografia, a volte un pugno di terra del paese. Pochi immaginavano che il viaggio sarebbe durato più di tre settimane e che non avrebbero più rivisto i genitori.",
+      "Sulla parete a destra trovate le lettere che gli emigranti scrivevano a casa. Spesso le scriveva qualcun altro, perché molti non sapevano scrivere: in quel caso pagavano un compaesano o chiedevano aiuto al parroco.",
+      "Premete il numero quattro per ascoltare alcune di queste lettere lette da attori. Se volete continuare la visita, la sala quattro, dedicata al ritorno, si trova al piano superiore."
+    ],
+    "tabella": [
+      ["Anno in cui è partita la ragazza", "1951", ["millenovecentocinquantuno"]],
+      ["Porto di partenza", "Genova", []],
+      ["Durata del viaggio", "più di tre settimane", ["tre settimane", "oltre tre settimane", "piu di 3 settimane", "3 settimane"]],
+      ["Numero da premere per ascoltare le lettere", "4", ["quattro"]]
+    ],
+    "info": [
+      ["Il museo ha comprato le valigie.", false],
+      ["La valigia più piccola era di cartone.", true],
+      ["Molti pensavano di tornare dopo pochi anni.", true],
+      ["Gli emigranti portavano con sé molti mobili.", false],
+      ["Alcuni pagavano qualcuno per scrivere le lettere.", true],
+      ["La sala quattro è al piano terra.", false]
+    ],
+    "gloss": {
+      "donate": "donadas",
+      "pugno": "puñado",
+      "compaesano": "paisano, del mismo pueblo"
+    }
   }
 }

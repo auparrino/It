@@ -344,5 +344,39 @@
       "Quanto ai": "en cuanto a los",
       "coppa": "vasito, copa (de helado)"
     }
+  },
+  "breve": {
+    "title": "Piccolissimi, la nuova linea",
+    "genre": "pubblicità radiofonica",
+    "es": "La publicidad radial de una heladería que lanza helados en tamaño mini.",
+    "speaker": "Voce della pubblicità",
+    "voice": 1,
+    "text": [
+      "Una pausetta? Un momentino tutto per te? Da Gelateria Bianchi arriva «Piccolissimi»: la nuova linea di gelati in coppetta mini, quattro gusti in una sola vaschetta, per chi vuole assaggiare tutto senza esagerare.",
+      "Pistacchio di Bronte, nocciola del Piemonte, fragolina di bosco e il nostro famoso cioccolatone fondente, fatto con cacao al settanta per cento. Solo ingredienti naturali, senza coloranti.",
+      "E per i più golosi c'è il «Gelatone della domenica»: una coppa da mezzo chilo con panna e biscottini, da dividere in famiglia, a dodici euro.",
+      "Solo per il mese di giugno, presentando questo annuncio alla cassa, la seconda coppetta costa la metà. Gelateria Bianchi, in piazza Garibaldi, aperta tutti i giorni fino a mezzanotte. Piccoli gelati, grandi sorrisi."
+    ],
+    "tabella": [
+      ["Nome della nuova linea", "Piccolissimi", []],
+      ["Percentuale di cacao del cioccolato", "70", ["settanta", "70%", "settanta per cento"]],
+      ["Peso della coppa della domenica", "mezzo chilo", ["500 grammi", "mezzo kg", "0,5 kg", "500 g"]],
+      ["Prezzo della coppa della domenica (euro)", "12", ["dodici"]],
+      ["Ora di chiusura della gelateria", "mezzanotte", ["a mezzanotte", "24", "le 24", "fino a mezzanotte"]]
+    ],
+    "info": [
+      ["Nella coppetta mini ci sono quattro gusti.", true],
+      ["I gelati contengono coloranti.", false],
+      ["La coppa grande è pensata per una famiglia.", true],
+      ["L'offerta vale per tutta l'estate.", false],
+      ["Con l'annuncio la seconda coppetta costa la metà.", true],
+      ["La gelateria è chiusa la domenica.", false]
+    ],
+    "gloss": {
+      "vaschetta": "potecito",
+      "assaggiare": "probar",
+      "golosi": "golosos",
+      "cassa": "caja"
+    }
   }
 }

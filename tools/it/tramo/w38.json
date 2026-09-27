@@ -342,5 +342,38 @@
       "diffidenza": "desconfianza",
       "ricette": "recetas, fórmulas"
     }
+  },
+  "breve": {
+    "title": "Un bando per vivere a Roccavecchia",
+    "genre": "notizia radiofonica",
+    "es": "Una radio regional cuenta, en discurso indirecto, lo que dijo la intendenta de un pueblo sobre un nuevo llamado para vecinos.",
+    "speaker": "Giornalista",
+    "voice": 0,
+    "text": [
+      "Radio Molise, notizie dal territorio. Il Comune di Roccavecchia ha pubblicato un nuovo bando per chi vuole trasferirsi in paese. La sindaca, Marta Colasanti, ha spiegato ai nostri microfoni che quest'anno le case disponibili sono quindici e che l'affitto sarà di cento euro al mese per i primi tre anni.",
+      "Ha precisato che chi partecipa dovrà impegnarsi a ristrutturare l'abitazione e a prendere la residenza entro sei mesi. Ha aggiunto che avranno la precedenza le famiglie con figli in età scolare, perché la priorità è tenere aperta la scuola.",
+      "Alla domanda se fosse preoccupata per l'arrivo di tanti forestieri, la sindaca ha risposto che il paese era pronto e che, anzi, ne aveva bisogno. Ha detto anche che dal mese successivo sarebbe arrivato un medico due volte alla settimana.",
+      "Le domande vanno presentate entro il 30 aprile, online o all'ufficio anagrafe. Il bando completo è sul sito del Comune."
+    ],
+    "tabella": [
+      ["Case disponibili", "15", ["quindici"]],
+      ["Affitto al mese (euro)", "100", ["cento"]],
+      ["Tempo per prendere la residenza", "6 mesi", ["sei mesi", "6", "sei", "entro sei mesi"]],
+      ["Scadenza delle domande", "30 aprile", ["il 30 aprile", "trenta aprile", "entro il 30 aprile"]]
+    ],
+    "info": [
+      ["L'affitto basso vale per sempre.", false],
+      ["Chi arriva deve ristrutturare la casa.", true],
+      ["Le famiglie con figli hanno la precedenza.", true],
+      ["La sindaca ha detto che il paese non era pronto.", false],
+      ["Arriverà un medico due volte alla settimana.", true],
+      ["Le domande si presentano solo in municipio.", false]
+    ],
+    "gloss": {
+      "bando": "llamado, convocatoria",
+      "precedenza": "prioridad",
+      "forestieri": "forasteros",
+      "anagrafe": "registro civil"
+    }
   }
 }

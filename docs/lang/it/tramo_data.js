@@ -10,7 +10,8 @@
   "blurb": "De la semana 27 en adelante, un texto largo por semana (de 350 a 900 palabras) de un género real, con preguntas en italiano como en el CILS y el CELI."
  },
  "names": {
-  "ascolto": "Ascolti lunghi"
+  "ascolto": "Ascolti lunghi",
+  "breve": "Ascolti brevi"
  },
  "GENRES": {
   "lettera_formale": {
@@ -460,6 +461,90 @@
      "bel pezzo": "lindo artículo, linda nota (pezzo = texto periodístico)",
      "mi ha fatto sentire": "me hizo sentir (fare + infinitivo, el causativo: se ve en la semana 40)"
     }
+   },
+   "breve": {
+    "title": "Radio Salento, il notiziario della sera",
+    "genre": "notiziario radiofonico",
+    "es": "El boletín de noticias de una radio local del Salento: tránsito, cultura, trenes y el tiempo.",
+    "speaker": "Speaker",
+    "voice": 0,
+    "text": [
+     "Radio Salento, sono le diciannove. Ecco le notizie della sera, in breve.",
+     "Casalbianco. Da domani e fino al 31 agosto il corso Vittorio Emanuele sarà chiuso al traffico dalle 18 a mezzanotte. Il sindaco spiega che il Comune ha deciso così soprattutto per la sicurezza di chi passeggia la sera. I negozi del corso potranno restare aperti fino alle 23.",
+     "Lecce. Riapre finalmente il teatro Apollo, chiuso da due anni per lavori. Il primo spettacolo è in programma sabato alle 21; i biglietti costano dodici euro, sei per gli studenti.",
+     "Trasporti. Da lunedì il treno delle sette e dieci per Bari partirà regolarmente alle sette e cinque, cioè cinque minuti prima. Le Ferrovie invitano i viaggiatori a controllare attentamente gli orari sul sito.",
+     "Il tempo. Domani cielo sereno su tutta la provincia, con temperature fino a trentaquattro gradi. Il vento, debole, girerà lentamente verso sud nel pomeriggio.",
+     "Il prossimo notiziario è alle ventuno. Buona serata."
+    ],
+    "tabella": [
+     [
+      "Il corso è chiuso al traffico dalle ore…",
+      "18",
+      [
+       "diciotto",
+       "18:00",
+       "18.00"
+      ]
+     ],
+     [
+      "Prezzo del biglietto per gli studenti (euro)",
+      "6",
+      [
+       "sei",
+       "6 euro",
+       "sei euro"
+      ]
+     ],
+     [
+      "Nuovo orario del treno per Bari",
+      "7.05",
+      [
+       "7:05",
+       "7,05",
+       "sette e cinque",
+       "7 e 5",
+       "7 e cinque"
+      ]
+     ],
+     [
+      "Temperatura massima di domani (gradi)",
+      "34",
+      [
+       "trentaquattro"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "Il corso resterà chiuso al traffico anche di giorno.",
+      false
+     ],
+     [
+      "I negozi del corso potranno restare aperti più a lungo.",
+      true
+     ],
+     [
+      "Il teatro Apollo era chiuso per lavori.",
+      true
+     ],
+     [
+      "Lo spettacolo di sabato è gratuito per gli studenti.",
+      false
+     ],
+     [
+      "Il treno per Bari partirà cinque minuti prima.",
+      true
+     ],
+     [
+      "Domani è prevista pioggia nel pomeriggio.",
+      false
+     ]
+    ],
+    "gloss": {
+     "corso": "calle principal",
+     "spettacolo": "función, espectáculo",
+     "debole": "débil, suave"
+    }
    }
   },
   {
@@ -791,6 +876,81 @@
      "scenografie vuote": "decorados vacíos, escenografías",
      "aree interne": "las zonas del interior, lejos de la costa y de las ciudades"
     }
+   },
+   "breve": {
+    "title": "Porte aperte a Rocca San Felice",
+    "genre": "annuncio radiofonico",
+    "es": "Un aviso de radio invita a un pueblo del interior que abre sus casas en venta durante un día.",
+    "speaker": "Voce dell'annuncio",
+    "voice": 1,
+    "text": [
+     "Siete stanchi del traffico? Sognate una casa con vista sulle colline? Allora non perdete «Porte aperte a Rocca San Felice», domenica 12 maggio.",
+     "Per un giorno intero, dalle dieci alle diciotto, il paese apre al pubblico venti case in vendita nel centro storico. Inoltre, i tecnici del Comune spiegheranno gratuitamente quanto costa ristrutturarle e quali contributi si possono chiedere.",
+     "Non solo case, però: a mezzogiorno pranzo in piazza con i prodotti del territorio, a quindici euro; nel pomeriggio, visita guidata al castello e laboratorio del pane per i bambini.",
+     "Come arrivare? Dalla stazione di Avellino parte una navetta gratuita ogni ora, a partire dalle nove. Tuttavia i posti sono limitati: è necessario prenotare sul sito del Comune entro venerdì.",
+     "Rocca San Felice: trecento abitanti, e c'è posto anche per voi."
+    ],
+    "tabella": [
+     [
+      "Case aperte al pubblico (numero)",
+      "20",
+      [
+       "venti"
+      ]
+     ],
+     [
+      "Prezzo del pranzo in piazza (euro)",
+      "15",
+      [
+       "quindici"
+      ]
+     ],
+     [
+      "Stazione da cui parte la navetta",
+      "Avellino",
+      [
+       "stazione di Avellino"
+      ]
+     ],
+     [
+      "Ultimo giorno per prenotare",
+      "venerdì",
+      [
+       "entro venerdì"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "Le case si possono visitare per un giorno intero.",
+      true
+     ],
+     [
+      "I tecnici del Comune si fanno pagare le spiegazioni.",
+      false
+     ],
+     [
+      "Nel pomeriggio c'è un'attività per i bambini.",
+      true
+     ],
+     [
+      "La navetta dalla stazione costa due euro.",
+      false
+     ],
+     [
+      "Il castello si visita con una guida.",
+      true
+     ],
+     [
+      "Il paese ha tremila abitanti.",
+      false
+     ]
+    ],
+    "gloss": {
+     "ristrutturarle": "refaccionarlas",
+     "contributi": "subsidios, ayudas",
+     "navetta": "combi, lanzadera"
+    }
    }
   },
   {
@@ -1098,6 +1258,81 @@
      "sono ricaduti su": "recayeron sobre",
      "navette": "combis, servicios de traslado",
      "sgravi fiscali": "rebajas de impuestos"
+    }
+   },
+   "breve": {
+    "title": "Le previsioni del tempo per domani",
+    "genre": "previsioni del tempo",
+    "es": "El pronóstico del tiempo de un canal nacional para el viernes y el fin de semana.",
+    "speaker": "Meteorologa",
+    "voice": 1,
+    "text": [
+     "Buonasera, ecco le previsioni del tempo per domani, venerdì. Sembra che la perturbazione atlantica sia arrivata con qualche ora di anticipo: al Nord, fin dal mattino, cielo coperto e piogge diffuse, soprattutto in Liguria e in Piemonte, dove non si escludono temporali anche forti.",
+     "Al Centro la giornata comincerà con qualche nuvola, ma le piogge arriveranno solo in serata sulla Toscana e sull'Umbria. Sulle coste tirreniche vento forte di libeccio, con raffiche fino a sessanta chilometri orari: mare molto mosso.",
+     "Al Sud e sulle isole, invece, tempo ancora soleggiato e caldo, con massime fino a trentadue gradi in Sicilia. Temperature in calo al Nord, di cinque o sei gradi rispetto a oggi.",
+     "Per il fine settimana il tempo migliora da sabato pomeriggio, a partire dal Nord-ovest; domenica sole quasi ovunque. Vi consigliamo di controllare gli avvisi della protezione civile prima di mettervi in viaggio. Buona serata."
+    ],
+    "tabella": [
+     [
+      "Nome del vento sulle coste tirreniche",
+      "libeccio",
+      []
+     ],
+     [
+      "Velocità delle raffiche (km/h)",
+      "60",
+      [
+       "sessanta"
+      ]
+     ],
+     [
+      "Temperatura massima in Sicilia (gradi)",
+      "32",
+      [
+       "trentadue"
+      ]
+     ],
+     [
+      "Giorno in cui il tempo comincia a migliorare",
+      "sabato",
+      [
+       "sabato pomeriggio",
+       "da sabato",
+       "da sabato pomeriggio"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "La perturbazione è arrivata prima del previsto.",
+      true
+     ],
+     [
+      "Al Centro piove già dal mattino.",
+      false
+     ],
+     [
+      "Il mare sulle coste tirreniche sarà molto mosso.",
+      true
+     ],
+     [
+      "Al Sud le temperature scendono di cinque o sei gradi.",
+      false
+     ],
+     [
+      "Domenica ci sarà il sole quasi ovunque.",
+      true
+     ],
+     [
+      "La protezione civile ha chiuso le autostrade.",
+      false
+     ]
+    ],
+    "gloss": {
+     "perturbazione": "frente de mal tiempo",
+     "raffiche": "ráfagas",
+     "mosso": "picado (el mar)",
+     "soleggiato": "soleado"
     }
    }
   },
@@ -1436,6 +1671,85 @@
      "era stato girato": "había sido filmado (voz pasiva: se ve en la semana 35)",
      "insegne": "carteles de los negocios"
     }
+   },
+   "breve": {
+    "title": "Giornale radio delle tredici",
+    "genre": "notiziario radiofonico",
+    "es": "El noticiero del mediodía de una radio de la ciudad: un desmentido, una serie en el cine y el fútbol.",
+    "speaker": "Speaker",
+    "voice": 0,
+    "text": [
+     "Giornale radio delle tredici. In apertura, una smentita. Da ieri circola sui social un messaggio secondo cui lunedì tutte le scuole della città resterebbero chiuse per un'allerta meteo. Non è vero: il sindaco ha precisato che nessuna ordinanza è stata firmata e che le lezioni si svolgeranno regolarmente.",
+     "Il messaggio, spiega la polizia postale, sembrava ufficiale perché riportava il logo del Comune, ma conteneva diversi errori. Chi lo ha ricevuto è invitato a non condividerlo e a consultare soltanto il sito del Comune.",
+     "Cultura. Stasera alle 21, al cinema Odeon, la regista Chiara Ventura presenta la serie «Condiviso». Dopo la proiezione del primo episodio, incontro con il pubblico. Ingresso libero fino a esaurimento dei posti.",
+     "Sport. Pareggio, uno a uno, nel derby di ieri sera; la squadra di casa ha giocato gli ultimi venti minuti con un uomo in meno. Prossimo aggiornamento alle quindici."
+    ],
+    "tabella": [
+     [
+      "Giorno in cui, secondo il messaggio falso, le scuole restavano chiuse",
+      "lunedì",
+      []
+     ],
+     [
+      "Nome del cinema",
+      "Odeon",
+      [
+       "cinema Odeon"
+      ]
+     ],
+     [
+      "Ora della presentazione della serie",
+      "21",
+      [
+       "ventuno",
+       "alle 21",
+       "21:00",
+       "21.00"
+      ]
+     ],
+     [
+      "Risultato del derby",
+      "1-1",
+      [
+       "uno a uno",
+       "1 a 1",
+       "1 1",
+       "1:1"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "Il sindaco ha firmato un'ordinanza per chiudere le scuole.",
+      false
+     ],
+     [
+      "Il messaggio falso aveva il logo del Comune.",
+      true
+     ],
+     [
+      "La polizia postale chiede di non condividere il messaggio.",
+      true
+     ],
+     [
+      "Per vedere la serie al cinema bisogna pagare il biglietto.",
+      false
+     ],
+     [
+      "Dopo la proiezione la regista incontra il pubblico.",
+      true
+     ],
+     [
+      "La squadra di casa ha vinto il derby.",
+      false
+     ]
+    ],
+    "gloss": {
+     "smentita": "desmentida",
+     "allerta": "alerta",
+     "proiezione": "proyección",
+     "pareggio": "empate"
+    }
    }
   },
   {
@@ -1772,6 +2086,95 @@
      "per iscritto": "por escrito",
      "Restiamo a disposizione": "quedamos a disposición"
     }
+   },
+   "breve": {
+    "title": "Un messaggio per il magazzino",
+    "genre": "messaggio in segreteria",
+    "es": "Una empresa de software deja un mensaje en el contestador de un cliente para postergar una instalación.",
+    "speaker": "Sonia Ricci",
+    "voice": 1,
+    "text": [
+     "Buongiorno, sono Sonia Ricci, della Ricci & Neri Software. Chiamo per il programma di gestione del vostro magazzino. Avremmo dovuto consegnarvi la nuova versione venerdì, ma purtroppo abbiamo trovato un problema nel collegamento con la contabilità, e non vorremmo installare un programma che poi non funziona.",
+     "Le propongo quindi di spostare l'installazione a martedì prossimo, il 14, alle nove del mattino. Il nostro tecnico, Paolo Gatti, avrebbe bisogno di circa tre ore e di un accesso al server; durante l'installazione il magazzino dovrebbe restare chiuso.",
+     "Mi rendo conto che è un disagio: per questo non vi faremo pagare la prima assistenza annuale, che sarebbe costata quattrocento euro.",
+     "Se martedì non vi va bene, mi può richiamare entro domani sera, oppure scrivermi una mail. Mi scuso ancora per il ritardo. Arrivederci."
+    ],
+    "tabella": [
+     [
+      "Giorno proposto per l'installazione",
+      "martedì",
+      [
+       "martedì 14",
+       "martedì prossimo",
+       "14",
+       "il 14"
+      ]
+     ],
+     [
+      "Ora dell'installazione",
+      "9",
+      [
+       "nove",
+       "alle nove",
+       "9:00",
+       "9.00"
+      ]
+     ],
+     [
+      "Nome del tecnico",
+      "Paolo Gatti",
+      [
+       "Gatti",
+       "Paolo"
+      ]
+     ],
+     [
+      "Ore di lavoro necessarie",
+      "3",
+      [
+       "tre",
+       "tre ore"
+      ]
+     ],
+     [
+      "Costo che il cliente non pagherà (euro)",
+      "400",
+      [
+       "quattrocento"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "La consegna era prevista per venerdì.",
+      true
+     ],
+     [
+      "Il problema riguarda il collegamento con la contabilità.",
+      true
+     ],
+     [
+      "Durante l'installazione il magazzino può lavorare normalmente.",
+      false
+     ],
+     [
+      "La prima assistenza annuale sarà gratuita.",
+      true
+     ],
+     [
+      "Bisogna richiamare entro martedì.",
+      false
+     ],
+     [
+      "Sonia chiede di pagare una penale.",
+      false
+     ]
+    ],
+    "gloss": {
+     "magazzino": "depósito",
+     "contabilità": "contabilidad",
+     "disagio": "molestia, inconveniente"
+    }
    }
   },
   {
@@ -2098,6 +2501,81 @@
      "custode": "guardiana",
      "fichi": "higos",
      "ci ritroveranno": "van a encontrar ahí (ci = en el cuento)"
+    }
+   },
+   "breve": {
+    "title": "Museo dell'Emigrazione, sala tre",
+    "genre": "audioguida",
+    "es": "La audioguía de un museo de la emigración italiana presenta la sala de las valijas y las cartas.",
+    "speaker": "Audioguida",
+    "voice": 0,
+    "text": [
+     "Benvenuti nella sala tre del Museo dell'Emigrazione italiana. Le valigie che vedete nella vetrina centrale sono state donate dalle famiglie degli emigranti. La più piccola, di cartone, apparteneva a una ragazza di sedici anni che nel 1951 è partita da Genova per Buenos Aires.",
+     "Molti emigranti credevano che sarebbero tornati dopo pochi anni, e per questo portavano con sé pochissimo: qualche vestito, una fotografia, a volte un pugno di terra del paese. Pochi immaginavano che il viaggio sarebbe durato più di tre settimane e che non avrebbero più rivisto i genitori.",
+     "Sulla parete a destra trovate le lettere che gli emigranti scrivevano a casa. Spesso le scriveva qualcun altro, perché molti non sapevano scrivere: in quel caso pagavano un compaesano o chiedevano aiuto al parroco.",
+     "Premete il numero quattro per ascoltare alcune di queste lettere lette da attori. Se volete continuare la visita, la sala quattro, dedicata al ritorno, si trova al piano superiore."
+    ],
+    "tabella": [
+     [
+      "Anno in cui è partita la ragazza",
+      "1951",
+      [
+       "millenovecentocinquantuno"
+      ]
+     ],
+     [
+      "Porto di partenza",
+      "Genova",
+      []
+     ],
+     [
+      "Durata del viaggio",
+      "più di tre settimane",
+      [
+       "tre settimane",
+       "oltre tre settimane",
+       "piu di 3 settimane",
+       "3 settimane"
+      ]
+     ],
+     [
+      "Numero da premere per ascoltare le lettere",
+      "4",
+      [
+       "quattro"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "Il museo ha comprato le valigie.",
+      false
+     ],
+     [
+      "La valigia più piccola era di cartone.",
+      true
+     ],
+     [
+      "Molti pensavano di tornare dopo pochi anni.",
+      true
+     ],
+     [
+      "Gli emigranti portavano con sé molti mobili.",
+      false
+     ],
+     [
+      "Alcuni pagavano qualcuno per scrivere le lettere.",
+      true
+     ],
+     [
+      "La sala quattro è al piano terra.",
+      false
+     ]
+    ],
+    "gloss": {
+     "donate": "donadas",
+     "pugno": "puñado",
+     "compaesano": "paisano, del mismo pueblo"
     }
    }
   },
@@ -2460,6 +2938,87 @@
      "senz'altro": "sin duda",
      "riscontro": "respuesta"
     }
+   },
+   "breve": {
+    "title": "Annunci al binario",
+    "genre": "annuncio in stazione",
+    "es": "Los avisos por altoparlante en una estación: un tren demorado, un cambio de andén y una prohibición.",
+    "speaker": "Voce della stazione",
+    "voice": 1,
+    "text": [
+     "Attenzione! Il treno Frecciarossa 9542 per Milano Centrale, previsto in partenza alle 14 e 20 dal binario 7, partirà con un ritardo stimato di 35 minuti per un guasto a un treno che lo precede. Ci scusiamo per il disagio.",
+     "I viaggiatori del Frecciarossa 9542 che hanno una coincidenza a Bologna possono rivolgersi al personale di bordo. Se il ritardo dovesse superare i sessanta minuti, i viaggiatori avrebbero diritto a un rimborso del venticinque per cento del prezzo del biglietto.",
+     "Attenzione! Il treno regionale 3310 per Lecce, in partenza alle 14 e 35, oggi partirà dal binario 2 anziché dal binario 4. Si prega di non attraversare i binari e di utilizzare il sottopassaggio.",
+     "Si ricorda che è vietato fumare in tutta la stazione, anche sulle banchine. Grazie."
+    ],
+    "tabella": [
+     [
+      "Binario del Frecciarossa per Milano",
+      "7",
+      [
+       "sette",
+       "binario 7"
+      ]
+     ],
+     [
+      "Ritardo stimato (minuti)",
+      "35",
+      [
+       "trentacinque"
+      ]
+     ],
+     [
+      "Rimborso se il ritardo supera un'ora (%)",
+      "25",
+      [
+       "venticinque",
+       "25%",
+       "25 per cento",
+       "venticinque per cento"
+      ]
+     ],
+     [
+      "Binario di oggi del treno per Lecce",
+      "2",
+      [
+       "due",
+       "binario 2"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "Il Frecciarossa è in ritardo per un guasto a un altro treno.",
+      true
+     ],
+     [
+      "Chi ha una coincidenza a Bologna può parlare con il personale di bordo.",
+      true
+     ],
+     [
+      "Con più di un'ora di ritardo si ha diritto a un rimborso.",
+      true
+     ],
+     [
+      "Il treno per Lecce è stato cancellato.",
+      false
+     ],
+     [
+      "Per cambiare binario si possono attraversare i binari.",
+      false
+     ],
+     [
+      "Si può fumare solo sulle banchine.",
+      false
+     ]
+    ],
+    "gloss": {
+     "binario": "andén, vía",
+     "guasto": "avería, desperfecto",
+     "coincidenza": "combinación, conexión",
+     "sottopassaggio": "paso bajo nivel",
+     "banchine": "andenes"
+    }
    }
   },
   {
@@ -2804,6 +3363,92 @@
      "Ogni tanto": "de vez en cuando",
      "rimandavo": "lo postergaba, lo iba dejando",
      "Che ne dici?": "¿qué te parece?"
+    }
+   },
+   "breve": {
+    "title": "Ciao Chiara, sono Valentina",
+    "genre": "messaggio in segreteria",
+    "es": "Una amiga le deja un mensaje de voz a otra para organizar una cena con las compañeras de departamento de la facultad.",
+    "speaker": "Valentina",
+    "voice": 1,
+    "text": [
+     "Ciao Chiara, sono Valentina. Ti ho chiamata due volte ma hai il telefono spento, quindi ti lascio un messaggio. Ti ricordi di Marta, quella con cui dividevamo l'appartamento a Bologna? Mi ha scritto ieri: torna in Italia per due settimane e vorrebbe rivederci tutte.",
+     "Ho pensato a una cena sabato 21, nel ristorante di cui ti parlavo, quello in via Saragozza dove fanno dei tortellini buonissimi. Ho già sentito Giulia, che viene sicuramente, e Silvia, la quale però deve ancora chiedere al marito se può tenere i bambini.",
+     "Ho prenotato per le otto e mezza, per cinque persone. Se non puoi, dimmelo entro giovedì, così cambio la prenotazione, che è gratuita fino a due giorni prima.",
+     "Dai, non facciamo passare altri dieci anni! Chiamami quando senti questo messaggio. Un bacio."
+    ],
+    "tabella": [
+     [
+      "Città in cui vivevano insieme",
+      "Bologna",
+      []
+     ],
+     [
+      "Giorno della cena",
+      "sabato 21",
+      [
+       "21",
+       "sabato",
+       "il 21",
+       "sabato ventuno"
+      ]
+     ],
+     [
+      "Ora della prenotazione",
+      "20.30",
+      [
+       "20:30",
+       "otto e mezza",
+       "8 e mezza",
+       "8.30",
+       "le otto e mezza"
+      ]
+     ],
+     [
+      "Numero di persone",
+      "5",
+      [
+       "cinque"
+      ]
+     ],
+     [
+      "Ultimo giorno per rispondere",
+      "giovedì",
+      [
+       "entro giovedì"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "Chiara aveva il telefono spento.",
+      true
+     ],
+     [
+      "Marta torna a vivere in Italia.",
+      false
+     ],
+     [
+      "Silvia deve organizzarsi per i bambini.",
+      true
+     ],
+     [
+      "Giulia non può venire.",
+      false
+     ],
+     [
+      "Cambiare la prenotazione costa dieci euro.",
+      false
+     ],
+     [
+      "Valentina vuole rivedere presto le amiche.",
+      true
+     ]
+    ],
+    "gloss": {
+     "spento": "apagado",
+     "dividevamo": "compartíamos",
+     "prenotazione": "reserva"
     }
    }
   },
@@ -3153,6 +3798,89 @@
      "di fatto": "en la práctica",
      "risanato": "saneado",
      "tavolo permanente": "mesa de trabajo permanente"
+    }
+   },
+   "breve": {
+    "title": "Riapre la spiaggia del lago",
+    "genre": "avviso pubblico",
+    "es": "Un comunicado de la municipalidad anuncia que la playa del lago vuelve a abrir y explica las reglas.",
+    "speaker": "Voce del Comune",
+    "voice": 0,
+    "text": [
+     "Comunicato del Comune di Vallombra. Si informano i cittadini che, a partire da sabato 3 giugno, la spiaggia del lago è di nuovo aperta alla balneazione. Le analisi dell'acqua, eseguite dall'Agenzia per l'ambiente nelle ultime quattro settimane, hanno dato risultati positivi.",
+     "La spiaggia sarà sorvegliata da un bagnino tutti i giorni dalle dieci alle diciannove. Il parcheggio del molo, invece, viene riservato ai residenti e alle persone con disabilità: tutti gli altri sono invitati a lasciare l'auto nel parcheggio della stazione, da cui parte una navetta gratuita ogni venti minuti.",
+     "È vietato portare cani sulla spiaggia e accendere fuochi sulle rive. I rifiuti vanno portati via o gettati negli appositi contenitori della raccolta differenziata. Chi non rispetta le regole può essere multato fino a duecento euro.",
+     "Per informazioni, rivolgersi all'Ufficio ambiente del Comune."
+    ],
+    "tabella": [
+     [
+      "Giorno di riapertura della spiaggia",
+      "3 giugno",
+      [
+       "sabato 3 giugno",
+       "il 3 giugno",
+       "tre giugno",
+       "sabato"
+      ]
+     ],
+     [
+      "Ora in cui finisce la sorveglianza del bagnino",
+      "19",
+      [
+       "diciannove",
+       "alle 19",
+       "19:00",
+       "19.00"
+      ]
+     ],
+     [
+      "Ogni quanti minuti passa la navetta",
+      "20",
+      [
+       "venti",
+       "ogni 20 minuti",
+       "ogni venti minuti"
+      ]
+     ],
+     [
+      "Multa massima (euro)",
+      "200",
+      [
+       "duecento"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "Le analisi dell'acqua sono durate quattro settimane.",
+      true
+     ],
+     [
+      "Il parcheggio del molo è aperto a tutti.",
+      false
+     ],
+     [
+      "La navetta dalla stazione è gratuita.",
+      true
+     ],
+     [
+      "I cani possono stare sulla spiaggia al guinzaglio.",
+      false
+     ],
+     [
+      "È vietato accendere fuochi sulle rive.",
+      true
+     ],
+     [
+      "Il bagnino c'è solo nel fine settimana.",
+      false
+     ]
+    ],
+    "gloss": {
+     "balneazione": "baño (en el mar, en el lago)",
+     "bagnino": "guardavidas",
+     "molo": "muelle",
+     "rive": "orillas"
     }
    }
   },
@@ -3512,6 +4240,86 @@
      "si affittano a notte": "se alquilan por noche",
      "botteghe storiche": "negocios tradicionales, de toda la vida",
      "affitti agevolati": "alquileres con precio subsidiado"
+    }
+   },
+   "breve": {
+    "title": "Assemblea di condominio",
+    "genre": "messaggio vocale dell'amministratore",
+    "es": "El administrador del edificio manda un audio al grupo de vecinos para convocar a una asamblea.",
+    "speaker": "Roberto Salvi, amministratore",
+    "voice": 0,
+    "text": [
+     "Buongiorno a tutti, sono Roberto Salvi, l'amministratore del condominio di via dei Serragli 12. Vi lascio questo messaggio sul gruppo per ricordarvi l'assemblea straordinaria di giovedì 9 novembre, alle 21, nella sala della parrocchia di San Frediano.",
+     "Si discuterà di tre punti. Primo: le regole per gli appartamenti affittati ai turisti. Si è notato che le chiavi vengono lasciate in una cassetta sul portone e che le scale si sporcano più del solito: si propone di vietare le cassette e di fare le pulizie due volte alla settimana.",
+     "Secondo: la sostituzione del citofono, che non funziona da mesi. Si sono chiesti tre preventivi; il più economico è di tremilacinquecento euro, da dividere tra tutti i condomini.",
+     "Terzo: varie ed eventuali. Chi non può partecipare può delegare un altro condomino, ma si ricorda che ognuno può avere al massimo due deleghe. Grazie, e a giovedì."
+    ],
+    "tabella": [
+     [
+      "Giorno dell'assemblea",
+      "giovedì 9 novembre",
+      [
+       "giovedì",
+       "9 novembre",
+       "il 9 novembre",
+       "giovedì nove novembre"
+      ]
+     ],
+     [
+      "Pulizie proposte alla settimana",
+      "2",
+      [
+       "due",
+       "due volte"
+      ]
+     ],
+     [
+      "Costo del preventivo più economico (euro)",
+      "3500",
+      [
+       "3.500",
+       "tremilacinquecento"
+      ]
+     ],
+     [
+      "Deleghe al massimo per persona",
+      "2",
+      [
+       "due"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "È un'assemblea ordinaria.",
+      false
+     ],
+     [
+      "Le chiavi dei turisti vengono lasciate in una cassetta sul portone.",
+      true
+     ],
+     [
+      "Si propone di vietare le cassette per le chiavi.",
+      true
+     ],
+     [
+      "Il citofono è stato riparato il mese scorso.",
+      false
+     ],
+     [
+      "Il costo del citofono sarà diviso tra tutti.",
+      true
+     ],
+     [
+      "Chi non viene all'assemblea non può votare in nessun modo.",
+      false
+     ]
+    ],
+    "gloss": {
+     "citofono": "portero eléctrico",
+     "preventivi": "presupuestos",
+     "deleghe": "poderes, delegaciones",
+     "varie ed eventuali": "otros asuntos"
     }
    }
   },
@@ -3886,6 +4694,89 @@
      "tramandata": "transmitida de generación en generación",
      "restano un po' sullo sfondo": "quedan medio en segundo plano"
     }
+   },
+   "breve": {
+    "title": "Il 2 giugno 1946",
+    "genre": "audioguida di una mostra",
+    "es": "La audioguía de una muestra sobre el referéndum que convirtió a Italia en república.",
+    "speaker": "Audioguida",
+    "voice": 1,
+    "text": [
+     "Siete davanti a una delle schede elettorali del referendum del 2 giugno 1946. Quel giorno gli italiani scelsero tra monarchia e repubblica, e per la prima volta in un voto nazionale votarono anche le donne.",
+     "Il simbolo della repubblica era una testa di donna con una corona di torri; quello della monarchia, lo stemma dei Savoia. L'affluenza fu altissima: votò quasi il novanta per cento degli aventi diritto.",
+     "I risultati arrivarono lentamente, perché le schede furono contate a mano. La repubblica vinse con circa il cinquantaquattro per cento dei voti, ma il Paese si divise: il Nord votò in maggioranza per la repubblica, il Sud per la monarchia.",
+     "Il re Umberto secondo lasciò l'Italia il 13 giugno e partì per il Portogallo. Nella vetrina successiva trovate i giornali di quei giorni: il più famoso titolava in prima pagina «È nata la Repubblica italiana»."
+    ],
+    "tabella": [
+     [
+      "Percentuale di chi andò a votare",
+      "90",
+      [
+       "novanta",
+       "90%",
+       "quasi il 90",
+       "quasi il novanta per cento",
+       "novanta per cento"
+      ]
+     ],
+     [
+      "Percentuale della repubblica",
+      "54",
+      [
+       "cinquantaquattro",
+       "54%",
+       "circa il 54",
+       "cinquantaquattro per cento"
+      ]
+     ],
+     [
+      "Paese in cui andò il re",
+      "Portogallo",
+      [
+       "in Portogallo"
+      ]
+     ],
+     [
+      "Data in cui il re lasciò l'Italia",
+      "13 giugno",
+      [
+       "il 13 giugno",
+       "tredici giugno"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "Nel 1946 le donne votarono per la prima volta in un voto nazionale.",
+      true
+     ],
+     [
+      "Il simbolo della repubblica era lo stemma dei Savoia.",
+      false
+     ],
+     [
+      "Le schede furono contate a mano.",
+      true
+     ],
+     [
+      "Il Sud votò in maggioranza per la repubblica.",
+      false
+     ],
+     [
+      "Il re lasciò l'Italia dopo il referendum.",
+      true
+     ],
+     [
+      "I risultati arrivarono la sera stessa del voto.",
+      false
+     ]
+    ],
+    "gloss": {
+     "schede": "boletas",
+     "stemma": "escudo",
+     "affluenza": "participación (electoral)",
+     "aventi diritto": "quienes tenían derecho (a votar)"
+    }
    }
   },
   {
@@ -4250,6 +5141,86 @@
      "diffidenza": "desconfianza",
      "ricette": "recetas, fórmulas"
     }
+   },
+   "breve": {
+    "title": "Un bando per vivere a Roccavecchia",
+    "genre": "notizia radiofonica",
+    "es": "Una radio regional cuenta, en discurso indirecto, lo que dijo la intendenta de un pueblo sobre un nuevo llamado para vecinos.",
+    "speaker": "Giornalista",
+    "voice": 0,
+    "text": [
+     "Radio Molise, notizie dal territorio. Il Comune di Roccavecchia ha pubblicato un nuovo bando per chi vuole trasferirsi in paese. La sindaca, Marta Colasanti, ha spiegato ai nostri microfoni che quest'anno le case disponibili sono quindici e che l'affitto sarà di cento euro al mese per i primi tre anni.",
+     "Ha precisato che chi partecipa dovrà impegnarsi a ristrutturare l'abitazione e a prendere la residenza entro sei mesi. Ha aggiunto che avranno la precedenza le famiglie con figli in età scolare, perché la priorità è tenere aperta la scuola.",
+     "Alla domanda se fosse preoccupata per l'arrivo di tanti forestieri, la sindaca ha risposto che il paese era pronto e che, anzi, ne aveva bisogno. Ha detto anche che dal mese successivo sarebbe arrivato un medico due volte alla settimana.",
+     "Le domande vanno presentate entro il 30 aprile, online o all'ufficio anagrafe. Il bando completo è sul sito del Comune."
+    ],
+    "tabella": [
+     [
+      "Case disponibili",
+      "15",
+      [
+       "quindici"
+      ]
+     ],
+     [
+      "Affitto al mese (euro)",
+      "100",
+      [
+       "cento"
+      ]
+     ],
+     [
+      "Tempo per prendere la residenza",
+      "6 mesi",
+      [
+       "sei mesi",
+       "6",
+       "sei",
+       "entro sei mesi"
+      ]
+     ],
+     [
+      "Scadenza delle domande",
+      "30 aprile",
+      [
+       "il 30 aprile",
+       "trenta aprile",
+       "entro il 30 aprile"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "L'affitto basso vale per sempre.",
+      false
+     ],
+     [
+      "Chi arriva deve ristrutturare la casa.",
+      true
+     ],
+     [
+      "Le famiglie con figli hanno la precedenza.",
+      true
+     ],
+     [
+      "La sindaca ha detto che il paese non era pronto.",
+      false
+     ],
+     [
+      "Arriverà un medico due volte alla settimana.",
+      true
+     ],
+     [
+      "Le domande si presentano solo in municipio.",
+      false
+     ]
+    ],
+    "gloss": {
+     "bando": "llamado, convocatoria",
+     "precedenza": "prioridad",
+     "forestieri": "forasteros",
+     "anagrafe": "registro civil"
+    }
    }
   },
   {
@@ -4606,6 +5577,94 @@
      "a mio carico": "a mi cargo",
      "In mancanza di": "a falta de",
      "tutelare": "proteger, defender"
+    }
+   },
+   "breve": {
+    "title": "Il centro assistenza richiama",
+    "genre": "messaggio in segreteria",
+    "es": "El service técnico deja un mensaje sobre el lavarropas en garantía: qué se rompió, qué se paga y cuándo llega el repuesto.",
+    "speaker": "Operatrice del centro assistenza",
+    "voice": 1,
+    "text": [
+     "Buongiorno signor Ferri, la chiamiamo dal centro assistenza Tecnoservice per la sua richiesta di riparazione numero 4127. Il tecnico che ha visto la lavatrice ci ha fatto sapere che il guasto riguarda la scheda elettronica e che il pezzo va ordinato direttamente alla casa madre.",
+     "Poiché l'apparecchio è ancora in garanzia, la riparazione e il pezzo sono gratuiti: le faremo pagare soltanto il diritto di chiamata, trentacinque euro, come previsto dalle condizioni della garanzia.",
+     "Il pezzo dovrebbe arrivare entro dieci giorni lavorativi. Appena arriva, la faremo richiamare dal tecnico per fissare l'appuntamento. Se preferisce, può anche farsi sostituire l'apparecchio: in questo caso, però, dovrebbe portarci lo scontrino originale.",
+     "Per qualsiasi domanda ci chiami dal lunedì al venerdì, dalle nove alle diciassette, citando il numero della pratica. Buona giornata."
+    ],
+    "tabella": [
+     [
+      "Numero della pratica",
+      "4127",
+      [
+       "4 1 2 7"
+      ]
+     ],
+     [
+      "Parte guasta",
+      "scheda elettronica",
+      [
+       "la scheda elettronica",
+       "scheda"
+      ]
+     ],
+     [
+      "Costo da pagare (euro)",
+      "35",
+      [
+       "trentacinque"
+      ]
+     ],
+     [
+      "Tempo per l'arrivo del pezzo",
+      "10 giorni",
+      [
+       "dieci giorni",
+       "10 giorni lavorativi",
+       "dieci giorni lavorativi",
+       "entro dieci giorni"
+      ]
+     ],
+     [
+      "Documento necessario per la sostituzione",
+      "scontrino",
+      [
+       "lo scontrino",
+       "scontrino originale",
+       "lo scontrino originale"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "La lavatrice non è più in garanzia.",
+      false
+     ],
+     [
+      "Il pezzo si ordina alla casa madre.",
+      true
+     ],
+     [
+      "Il tecnico chiamerà per fissare l'appuntamento.",
+      true
+     ],
+     [
+      "La riparazione costa trentacinque euro più il pezzo.",
+      false
+     ],
+     [
+      "Si può chiedere di sostituire la lavatrice.",
+      true
+     ],
+     [
+      "Il centro assistenza risponde anche il sabato.",
+      false
+     ]
+    ],
+    "gloss": {
+     "scheda elettronica": "placa electrónica",
+     "diritto di chiamata": "costo de la visita (del técnico)",
+     "scontrino": "ticket de compra",
+     "pratica": "trámite, expediente"
     }
    }
   },
@@ -4968,6 +6027,87 @@
      "ha sfondato la porta": "tiró abajo la puerta",
      "l'hanno già dimesso": "ya le dieron el alta",
      "a voce": "en persona, de palabra"
+    }
+   },
+   "breve": {
+    "title": "Giornale radio regionale delle otto",
+    "genre": "notiziario radiofonico",
+    "es": "El noticiero regional de la mañana: un incendio, un choque en la autopista, una biblioteca que reabre y el tiempo.",
+    "speaker": "Speaker",
+    "voice": 0,
+    "text": [
+     "Giornale radio regionale, edizione delle otto. Nella notte un incendio ha distrutto un capannone agricolo alle porte di Mantova. Alcuni residenti hanno raccontato di aver sentito un forte scoppio verso le tre e di aver visto le fiamme alzarsi sopra i tetti. Non ci sono feriti; i vigili del fuoco hanno lavorato fino all'alba.",
+     "Traffico: code sulla tangenziale est per un incidente tra due auto all'altezza dell'uscita 6. Un testimone ha detto di aver visto una delle vetture sbandare sull'asfalto bagnato. La polizia stradale consiglia percorsi alternativi.",
+     "Ha riaperto questa mattina la biblioteca comunale di via Roma, chiusa da febbraio per lavori. Il nuovo orario è dalle nove alle diciannove, anche il sabato.",
+     "Infine, il tempo: nebbia in pianura fino a metà mattina, poi sole. Minime intorno allo zero."
+    ],
+    "tabella": [
+     [
+      "Ora dello scoppio",
+      "3",
+      [
+       "tre",
+       "le tre",
+       "verso le tre",
+       "alle tre"
+      ]
+     ],
+     [
+      "Uscita della tangenziale dell'incidente",
+      "6",
+      [
+       "sei",
+       "uscita 6"
+      ]
+     ],
+     [
+      "Mese in cui ha chiuso la biblioteca",
+      "febbraio",
+      []
+     ],
+     [
+      "Ora di chiusura della biblioteca",
+      "19",
+      [
+       "diciannove",
+       "alle 19",
+       "le 19",
+       "19:00"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "Nell'incendio sono rimaste ferite due persone.",
+      false
+     ],
+     [
+      "Alcuni residenti hanno visto le fiamme sopra i tetti.",
+      true
+     ],
+     [
+      "L'incidente sulla tangenziale ha coinvolto un camion.",
+      false
+     ],
+     [
+      "Un testimone ha visto un'auto sbandare.",
+      true
+     ],
+     [
+      "La biblioteca è aperta anche il sabato.",
+      true
+     ],
+     [
+      "La nebbia durerà tutto il giorno.",
+      false
+     ]
+    ],
+    "gloss": {
+     "capannone": "galpón",
+     "scoppio": "estallido",
+     "code": "embotellamientos, colas",
+     "sbandare": "derrapar, perder el control",
+     "nebbia": "niebla"
     }
    }
   },
@@ -5333,6 +6473,84 @@
      "rifarsi a": "basarse en, remitirse a",
      "entro quando": "hasta cuándo, en qué plazo"
     }
+   },
+   "breve": {
+    "title": "Ufficio tributi, resti in linea",
+    "genre": "messaggio automatico di un centralino",
+    "es": "El mensaje grabado de la oficina de impuestos municipales: opciones, vencimientos y horarios.",
+    "speaker": "Voce registrata",
+    "voice": 1,
+    "text": [
+     "Benvenuto nel servizio clienti dell'Ufficio tributi del Comune. La informiamo che la telefonata potrebbe essere registrata. Per richiedere informazioni sulla tassa sui rifiuti, prema uno. Per segnalare un errore in un avviso di pagamento, prema due. Per fissare un appuntamento allo sportello, prema tre. Per tutte le altre richieste, resti in linea.",
+     "Si ricorda che il termine per il pagamento della prima rata è fissato al 16 giugno. Chi non riceve l'avviso entro il 31 maggio è invitato a rivolgersi allo sportello, oppure a scaricarlo dal sito del Comune, nella sezione «Tributi».",
+     "Gli uffici sono aperti al pubblico dal lunedì al venerdì dalle nove alle dodici e trenta, e il martedì anche dalle quindici alle diciassette.",
+     "In questo momento tutti gli operatori sono occupati. La preghiamo di attendere: il tempo di attesa stimato è di circa otto minuti."
+    ],
+    "tabella": [
+     [
+      "Tasto per segnalare un errore",
+      "2",
+      [
+       "due"
+      ]
+     ],
+     [
+      "Scadenza della prima rata",
+      "16 giugno",
+      [
+       "il 16 giugno",
+       "sedici giugno"
+      ]
+     ],
+     [
+      "Giorno con apertura anche di pomeriggio",
+      "martedì",
+      [
+       "il martedì"
+      ]
+     ],
+     [
+      "Attesa stimata (minuti)",
+      "8",
+      [
+       "otto",
+       "circa otto",
+       "otto minuti"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "La telefonata potrebbe essere registrata.",
+      true
+     ],
+     [
+      "Con il tasto tre si prende un appuntamento allo sportello.",
+      true
+     ],
+     [
+      "L'avviso di pagamento si può scaricare dal sito.",
+      true
+     ],
+     [
+      "Gli uffici sono aperti anche il sabato mattina.",
+      false
+     ],
+     [
+      "Il termine per la prima rata è il 31 maggio.",
+      false
+     ],
+     [
+      "In questo momento c'è un operatore libero.",
+      false
+     ]
+    ],
+    "gloss": {
+     "tributi": "impuestos, tasas",
+     "rata": "cuota",
+     "sportello": "ventanilla",
+     "resti in linea": "no corte"
+    }
    }
   },
   {
@@ -5687,6 +6905,95 @@
      "topo": "ratón",
      "centraline": "estaciones de medición",
      "purché": "siempre que, con tal de que (+ congiuntivo)"
+    }
+   },
+   "breve": {
+    "title": "Istruzioni: il sensore sul balcone",
+    "genre": "istruzioni",
+    "es": "Las instrucciones grabadas para instalar el sensor de un proyecto de ciencia ciudadana que mide el aire.",
+    "speaker": "Voce delle istruzioni",
+    "voice": 0,
+    "text": [
+     "Istruzioni per installare il sensore dell'aria del progetto «Respira». Prima di tutto, scegliere un balcone o una finestra ad almeno un metro e mezzo da terra, lontano da camini, condizionatori e griglie della cucina.",
+     "Fissare il sensore con le due fascette incluse nella confezione, con i fori rivolti verso il basso, per evitare che entri la pioggia. Non coprirlo e non metterlo al sole diretto: il calore falsa le misure.",
+     "Collegare il cavo a una presa elettrica interna e aspettare che la luce verde lampeggi. A questo punto, aprire l'applicazione, inserire il codice di sei cifre scritto sotto il sensore e indicare l'indirizzo.",
+     "I dati vengono inviati ogni dieci minuti. Se la luce diventa rossa, staccare il cavo, aspettare trenta secondi e ricollegarlo. Per qualsiasi problema, scrivere all'indirizzo di assistenza del progetto."
+    ],
+    "tabella": [
+     [
+      "Altezza minima da terra",
+      "un metro e mezzo",
+      [
+       "1,5 metri",
+       "1,5",
+       "1.5",
+       "1,5 m",
+       "un metro e mezzo da terra"
+      ]
+     ],
+     [
+      "Fascette nella confezione (numero)",
+      "2",
+      [
+       "due"
+      ]
+     ],
+     [
+      "Cifre del codice",
+      "6",
+      [
+       "sei"
+      ]
+     ],
+     [
+      "Ogni quanti minuti partono i dati",
+      "10",
+      [
+       "dieci",
+       "ogni 10 minuti",
+       "ogni dieci minuti"
+      ]
+     ],
+     [
+      "Secondi di attesa se la luce è rossa",
+      "30",
+      [
+       "trenta"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "Il sensore va messo vicino alla griglia della cucina.",
+      false
+     ],
+     [
+      "I fori del sensore devono essere rivolti verso il basso.",
+      true
+     ],
+     [
+      "È meglio mettere il sensore al sole diretto.",
+      false
+     ],
+     [
+      "Il codice è scritto sotto il sensore.",
+      true
+     ],
+     [
+      "Prima di aprire l'applicazione bisogna aspettare la luce verde.",
+      true
+     ],
+     [
+      "Se la luce è rossa bisogna chiamare un tecnico.",
+      false
+     ]
+    ],
+    "gloss": {
+     "fascette": "precintos",
+     "fori": "agujeros",
+     "presa": "enchufe",
+     "lampeggi": "titile",
+     "staccare": "desenchufar"
     }
    }
   },
@@ -6067,6 +7374,91 @@
      "falde": "napas (de agua)",
      "tagliare i fondi": "recortar el financiamiento"
     }
+   },
+   "breve": {
+    "title": "Prima di entrare in galleria",
+    "genre": "istruzioni di sicurezza",
+    "es": "Las instrucciones de seguridad antes de la visita a los laboratorios subterráneos del Gran Sasso.",
+    "speaker": "Guida",
+    "voice": 1,
+    "text": [
+     "Benvenuti ai Laboratori del Gran Sasso. Prima di entrare in galleria, ascoltate con attenzione queste istruzioni di sicurezza. Durante la visita indosserete il casco, che vi verrà consegnato all'ingresso, e porterete con voi un piccolo apparecchio di emergenza, tenendolo sempre agganciato alla cintura.",
+     "Camminando in galleria, restate dietro alla guida e non superate mai la linea gialla. Le sale sperimentali si visitano in gruppi di dieci persone al massimo; aspettando il vostro turno, potrete guardare il video nella sala d'accoglienza.",
+     "In caso di allarme, sentendo la sirena, lasciate ogni cosa e seguite le luci verdi fino al rifugio più vicino. Non usate i telefoni: sotto la montagna non c'è campo, e le comunicazioni passano solo attraverso la rete interna.",
+     "La visita dura circa due ore. È vietato fotografare le sale sperimentali senza il permesso della guida. Grazie, e buona visita."
+    ],
+    "tabella": [
+     [
+      "Oggetto da tenere agganciato alla cintura",
+      "apparecchio di emergenza",
+      [
+       "l'apparecchio di emergenza",
+       "apparecchio"
+      ]
+     ],
+     [
+      "Colore della linea da non superare",
+      "gialla",
+      [
+       "giallo"
+      ]
+     ],
+     [
+      "Persone al massimo per gruppo",
+      "10",
+      [
+       "dieci"
+      ]
+     ],
+     [
+      "Colore delle luci da seguire in caso di allarme",
+      "verdi",
+      [
+       "verde"
+      ]
+     ],
+     [
+      "Durata della visita",
+      "2 ore",
+      [
+       "due ore",
+       "circa due ore",
+       "2"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "Il casco si riceve all'ingresso.",
+      true
+     ],
+     [
+      "Si può camminare davanti alla guida.",
+      false
+     ],
+     [
+      "Mentre si aspetta il turno si può guardare un video.",
+      true
+     ],
+     [
+      "In caso di allarme bisogna telefonare subito ai soccorsi.",
+      false
+     ],
+     [
+      "Sotto la montagna i cellulari non hanno campo.",
+      true
+     ],
+     [
+      "Nelle sale sperimentali si possono fare foto liberamente.",
+      false
+     ]
+    ],
+    "gloss": {
+     "galleria": "túnel",
+     "agganciato": "enganchado",
+     "rifugio": "refugio",
+     "campo": "señal (del celular)"
+    }
    }
   },
   {
@@ -6424,6 +7816,77 @@
      "prende i modi di dire alla lettera": "toma las frases hechas al pie de la letra",
      "battute": "chistes, remates",
      "geni": "genios"
+    }
+   },
+   "breve": {
+    "title": "«Me la cavo», stasera a teatro",
+    "genre": "pubblicità radiofonica",
+    "es": "La publicidad radial de un espectáculo de humor sobre la vida en la oficina.",
+    "speaker": "Voce della pubblicità",
+    "voice": 1,
+    "text": [
+     "Non ce la fate più? Il lavoro vi stressa e ve la prendete per ogni cosa? Allora concedetevi una serata di risate: arriva «Me la cavo», il nuovo spettacolo di Lucia Pace, la comica che ha conquistato il web con i suoi video sulla vita in ufficio.",
+     "Novanta minuti di monologhi sui piccoli drammi quotidiani: il capo che ce l'ha con tutti, il collega che se ne va sbattendo la porta e poi torna a prendersi il caffè, la riunione che doveva durare dieci minuti.",
+     "Appuntamento al Teatro Verdi di Padova venerdì 18 e sabato 19 marzo, alle ventuno. Biglietti da venticinque euro, ridotti a diciotto per studenti e over sessantacinque. Affrettatevi: la prima serata è quasi esaurita.",
+     "«Me la cavo», di e con Lucia Pace. Se non venite, ve ne pentirete!"
+    ],
+    "tabella": [
+     [
+      "Titolo dello spettacolo",
+      "Me la cavo",
+      []
+     ],
+     [
+      "Durata (minuti)",
+      "90",
+      [
+       "novanta"
+      ]
+     ],
+     [
+      "Città del teatro",
+      "Padova",
+      []
+     ],
+     [
+      "Prezzo ridotto (euro)",
+      "18",
+      [
+       "diciotto"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "Lucia Pace è diventata famosa grazie ai suoi video.",
+      true
+     ],
+     [
+      "Lo spettacolo parla della vita in famiglia.",
+      false
+     ],
+     [
+      "Lo spettacolo va in scena due sere.",
+      true
+     ],
+     [
+      "Il biglietto intero costa diciotto euro.",
+      false
+     ],
+     [
+      "La seconda serata è quasi esaurita.",
+      false
+     ],
+     [
+      "Gli studenti pagano meno.",
+      true
+     ]
+    ],
+    "gloss": {
+     "risate": "risas",
+     "sbattendo": "golpeando (dando un portazo)",
+     "affrettatevi": "apúrense",
+     "esaurita": "agotada"
     }
    }
   },
@@ -6802,6 +8265,94 @@
      "marchi registrati": "marcas registradas",
      "Quanto ai": "en cuanto a los",
      "coppa": "vasito, copa (de helado)"
+    }
+   },
+   "breve": {
+    "title": "Piccolissimi, la nuova linea",
+    "genre": "pubblicità radiofonica",
+    "es": "La publicidad radial de una heladería que lanza helados en tamaño mini.",
+    "speaker": "Voce della pubblicità",
+    "voice": 1,
+    "text": [
+     "Una pausetta? Un momentino tutto per te? Da Gelateria Bianchi arriva «Piccolissimi»: la nuova linea di gelati in coppetta mini, quattro gusti in una sola vaschetta, per chi vuole assaggiare tutto senza esagerare.",
+     "Pistacchio di Bronte, nocciola del Piemonte, fragolina di bosco e il nostro famoso cioccolatone fondente, fatto con cacao al settanta per cento. Solo ingredienti naturali, senza coloranti.",
+     "E per i più golosi c'è il «Gelatone della domenica»: una coppa da mezzo chilo con panna e biscottini, da dividere in famiglia, a dodici euro.",
+     "Solo per il mese di giugno, presentando questo annuncio alla cassa, la seconda coppetta costa la metà. Gelateria Bianchi, in piazza Garibaldi, aperta tutti i giorni fino a mezzanotte. Piccoli gelati, grandi sorrisi."
+    ],
+    "tabella": [
+     [
+      "Nome della nuova linea",
+      "Piccolissimi",
+      []
+     ],
+     [
+      "Percentuale di cacao del cioccolato",
+      "70",
+      [
+       "settanta",
+       "70%",
+       "settanta per cento"
+      ]
+     ],
+     [
+      "Peso della coppa della domenica",
+      "mezzo chilo",
+      [
+       "500 grammi",
+       "mezzo kg",
+       "0,5 kg",
+       "500 g"
+      ]
+     ],
+     [
+      "Prezzo della coppa della domenica (euro)",
+      "12",
+      [
+       "dodici"
+      ]
+     ],
+     [
+      "Ora di chiusura della gelateria",
+      "mezzanotte",
+      [
+       "a mezzanotte",
+       "24",
+       "le 24",
+       "fino a mezzanotte"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "Nella coppetta mini ci sono quattro gusti.",
+      true
+     ],
+     [
+      "I gelati contengono coloranti.",
+      false
+     ],
+     [
+      "La coppa grande è pensata per una famiglia.",
+      true
+     ],
+     [
+      "L'offerta vale per tutta l'estate.",
+      false
+     ],
+     [
+      "Con l'annuncio la seconda coppetta costa la metà.",
+      true
+     ],
+     [
+      "La gelateria è chiusa la domenica.",
+      false
+     ]
+    ],
+    "gloss": {
+     "vaschetta": "potecito",
+     "assaggiare": "probar",
+     "golosi": "golosos",
+     "cassa": "caja"
     }
    }
   },
@@ -7187,6 +8738,95 @@
      "sfratto": "desalojo",
      "mensilità": "meses de alquiler, mensualidades"
     }
+   },
+   "breve": {
+    "title": "Notiziario economico delle sette",
+    "genre": "notiziario radiofonico",
+    "es": "El boletín económico de la mañana: inflación, hipotecas, una residencia estudiantil y la Bolsa.",
+    "speaker": "Giornalista economica",
+    "voice": 1,
+    "text": [
+     "Notiziario economico delle sette. Secondo i dati diffusi ieri dall'Istat, a settembre l'inflazione è scesa all'uno virgola otto per cento, contro il due virgola tre del mese precedente. Calano soprattutto i prezzi dell'energia, mentre gli alimentari restano cari: più tre per cento in un anno.",
+     "Mutui: il tasso medio per l'acquisto della prima casa è sceso sotto il tre per cento per la prima volta da due anni. Secondo le associazioni dei consumatori, su un mutuo di centocinquantamila euro in venticinque anni si risparmiano circa quaranta euro al mese.",
+     "A Monteverde il nuovo studentato nell'ex caserma di via Garibaldi offrirà duecentocinquanta posti letto; i lavori, finanziati con sei milioni di euro, dovrebbero partire a gennaio.",
+     "In Borsa, apertura in lieve rialzo: Milano guadagna lo zero virgola quattro per cento."
+    ],
+    "tabella": [
+     [
+      "Inflazione di settembre (%)",
+      "1,8",
+      [
+       "1.8",
+       "uno virgola otto",
+       "1,8%"
+      ]
+     ],
+     [
+      "Aumento degli alimentari in un anno (%)",
+      "3",
+      [
+       "tre",
+       "+3",
+       "3%",
+       "piu tre"
+      ]
+     ],
+     [
+      "Risparmio al mese sul mutuo (euro)",
+      "40",
+      [
+       "quaranta",
+       "circa 40",
+       "circa quaranta"
+      ]
+     ],
+     [
+      "Posti letto dello studentato",
+      "250",
+      [
+       "duecentocinquanta"
+      ]
+     ],
+     [
+      "Mese di inizio dei lavori",
+      "gennaio",
+      [
+       "a gennaio"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "L'inflazione è salita rispetto al mese precedente.",
+      false
+     ],
+     [
+      "I prezzi dell'energia sono in calo.",
+      true
+     ],
+     [
+      "Il tasso dei mutui è sotto il tre per cento.",
+      true
+     ],
+     [
+      "Lo studentato costerà dodici milioni.",
+      false
+     ],
+     [
+      "La Borsa di Milano apre in calo.",
+      false
+     ],
+     [
+      "I prezzi degli alimentari restano alti.",
+      true
+     ]
+    ],
+    "gloss": {
+     "mutui": "créditos hipotecarios",
+     "tasso": "tasa",
+     "studentato": "residencia estudiantil",
+     "rialzo": "suba"
+    }
    }
   },
   {
@@ -7565,6 +9205,88 @@
      "colloqui di lavoro": "entrevistas de trabajo",
      "fanno sorridere": "causan gracia"
     }
+   },
+   "breve": {
+    "title": "Il napoletano, parlalo con noi",
+    "genre": "annuncio radiofonico",
+    "es": "Un aviso de radio presenta un curso gratuito de napolitano para chicos en la biblioteca del barrio.",
+    "speaker": "Voce dell'annuncio",
+    "voice": 0,
+    "text": [
+     "Il napoletano lo capisci ma non lo parli? Le canzoni di tua nonna le sai a memoria, ma non sai che cosa vogliono dire? Allora il corso «Parla comme magne» fa per te.",
+     "È la biblioteca di quartiere che lo organizza, insieme all'associazione Voci del Sud: otto incontri, il giovedì dalle diciotto alle diciannove e trenta, a partire dal 5 ottobre. A tenerlo sarà Gennaro Esposito, attore e autore di teatro.",
+     "Non è una lezione di grammatica: si leggono poesie, si ascoltano canzoni, si guardano scene di film e, soprattutto, si parla. Il corso è gratuito ed è rivolto ai ragazzi dai quattordici ai venticinque anni; i posti, però, sono solo venti.",
+     "Le iscrizioni si fanno in biblioteca o sul sito, entro il 30 settembre. E ricordate: il dialetto non si studia, si vive!"
+    ],
+    "tabella": [
+     [
+      "Giorno della settimana degli incontri",
+      "giovedì",
+      [
+       "il giovedì"
+      ]
+     ],
+     [
+      "Numero di incontri",
+      "8",
+      [
+       "otto"
+      ]
+     ],
+     [
+      "Nome dell'insegnante",
+      "Gennaro Esposito",
+      [
+       "Gennaro",
+       "Esposito"
+      ]
+     ],
+     [
+      "Età massima dei partecipanti",
+      "25",
+      [
+       "venticinque",
+       "25 anni"
+      ]
+     ],
+     [
+      "Posti disponibili",
+      "20",
+      [
+       "venti"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "Il corso lo organizza la biblioteca con un'associazione.",
+      true
+     ],
+     [
+      "Nel corso si studia soprattutto la grammatica.",
+      false
+     ],
+     [
+      "Il corso costa cinquanta euro.",
+      false
+     ],
+     [
+      "Nel corso si ascoltano canzoni.",
+      true
+     ],
+     [
+      "Il corso è aperto agli adulti di tutte le età.",
+      false
+     ],
+     [
+      "Ci si può iscrivere anche sul sito.",
+      true
+     ]
+    ],
+    "gloss": {
+     "parla comme magne": "«hablá como comés»: hablá simple, sin vueltas (en napolitano)",
+     "iscrizioni": "inscripciones"
+    }
    }
   },
   {
@@ -7926,6 +9648,88 @@
      "Ciononostante": "no obstante, a pesar de eso",
      "bensì": "sino (después de una negación)",
      "presupposto": "condición previa, base"
+    }
+   },
+   "breve": {
+    "title": "Elezioni comunali: le informazioni per votare",
+    "genre": "avviso pubblico",
+    "es": "Un comunicado oficial de la municipalidad explica cuándo y cómo votar en las elecciones locales.",
+    "speaker": "Voce del Comune",
+    "voice": 0,
+    "text": [
+     "Comunicazione del Comune di Bologna. Si informano i cittadini che domenica 14 e lunedì 15 giugno si terranno le elezioni per il rinnovo del consiglio comunale. I seggi saranno aperti domenica dalle sette alle ventitré e lunedì dalle sette alle quindici.",
+     "Per votare è necessario presentarsi con un documento di identità valido e con la tessera elettorale. Qualora la tessera fosse stata smarrita o fosse esaurita, l'ufficio elettorale resterà aperto in via straordinaria, anche sabato e domenica, per il rilascio di un duplicato.",
+     "Gli elettori con disabilità possono richiedere il trasporto gratuito al seggio, prenotandolo entro giovedì al numero verde del Comune. Si ricorda inoltre che è vietato fotografare la scheda all'interno della cabina.",
+     "Per ulteriori informazioni si rimanda al sito istituzionale del Comune."
+    ],
+    "tabella": [
+     [
+      "Ora di chiusura dei seggi la domenica",
+      "23",
+      [
+       "ventitré",
+       "le 23",
+       "alle 23",
+       "23:00"
+      ]
+     ],
+     [
+      "Documento necessario oltre a quello di identità",
+      "tessera elettorale",
+      [
+       "la tessera elettorale",
+       "tessera"
+      ]
+     ],
+     [
+      "Ultimo giorno per prenotare il trasporto",
+      "giovedì",
+      [
+       "entro giovedì"
+      ]
+     ],
+     [
+      "Cosa è vietato fare in cabina",
+      "fotografare la scheda",
+      [
+       "fotografare",
+       "fare foto alla scheda",
+       "fotografie",
+       "fare fotografie"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "Si vota in due giorni.",
+      true
+     ],
+     [
+      "Lunedì i seggi restano aperti fino alle ventitré.",
+      false
+     ],
+     [
+      "Chi ha perso la tessera può chiederne un duplicato.",
+      true
+     ],
+     [
+      "L'ufficio elettorale è chiuso nel fine settimana.",
+      false
+     ],
+     [
+      "Il trasporto al seggio per le persone con disabilità è gratuito.",
+      true
+     ],
+     [
+      "Si può fotografare la scheda se non la si mostra a nessuno.",
+      false
+     ]
+    ],
+    "gloss": {
+     "seggi": "mesas de votación",
+     "tessera elettorale": "credencial electoral",
+     "smarrita": "extraviada",
+     "numero verde": "línea gratuita"
     }
    }
   },
@@ -8295,6 +10099,80 @@
      "avrei gradito": "me hubiera gustado",
      "riprenderlo in mano": "volver a agarrarlo"
     }
+   },
+   "breve": {
+    "title": "Tradurre il Novecento, il festival",
+    "genre": "annuncio radiofonico",
+    "es": "Un aviso de radio presenta un festival de traducción literaria en Turín.",
+    "speaker": "Voce dell'annuncio",
+    "voice": 1,
+    "text": [
+     "Ci sono parole che sembrano uguali e non lo sono mai. Per chi ama le lingue torna a Torino «Tradurre il Novecento», il festival dedicato ai traduttori e alle traduttrici, dal 24 al 26 novembre, alla Biblioteca civica centrale.",
+     "Tre giorni di incontri, letture e laboratori: si parlerà di Natalia Ginzburg, Primo Levi, Italo Calvino ed Elsa Morante con chi li ha tradotti in spagnolo, in inglese e in tedesco. Sabato mattina, laboratorio per studenti: «Falsi amici, veri nemici», dieci euro a persona, iscrizione obbligatoria.",
+     "Domenica alle diciotto, incontro di chiusura con la scrittrice Eleonora Masi, che presenterà il suo nuovo romanzo, già tradotto in dodici lingue prima ancora di uscire in Italia.",
+     "Tutti gli incontri sono gratuiti, tranne i laboratori. Programma completo sul sito del festival."
+    ],
+    "tabella": [
+     [
+      "Città del festival",
+      "Torino",
+      []
+     ],
+     [
+      "Primo giorno del festival",
+      "24 novembre",
+      [
+       "il 24 novembre",
+       "24",
+       "ventiquattro novembre"
+      ]
+     ],
+     [
+      "Costo del laboratorio (euro)",
+      "10",
+      [
+       "dieci"
+      ]
+     ],
+     [
+      "Lingue in cui è già tradotto il romanzo (numero)",
+      "12",
+      [
+       "dodici"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "Il festival si svolge in una biblioteca.",
+      true
+     ],
+     [
+      "Si parla solo di traduzioni in spagnolo.",
+      false
+     ],
+     [
+      "Il laboratorio di sabato è per studenti.",
+      true
+     ],
+     [
+      "Il romanzo di Eleonora Masi è già uscito in Italia.",
+      false
+     ],
+     [
+      "Anche i laboratori sono gratuiti.",
+      false
+     ],
+     [
+      "L'incontro di chiusura è domenica.",
+      true
+     ]
+    ],
+    "gloss": {
+     "laboratori": "talleres",
+     "iscrizione": "inscripción",
+     "tranne": "excepto"
+    }
    }
   },
   {
@@ -8632,6 +10510,90 @@
      "trattenere": "retener",
      "lamentano": "se quejan de",
      "Resto a Sua disposizione": "quedo a su disposición"
+    }
+   },
+   "breve": {
+    "title": "Le novità sulla settimana corta",
+    "genre": "messaggio vocale della direzione",
+    "es": "La directora de personal manda un audio a los empleados para resumir lo acordado con el gremio sobre la semana de cuatro días.",
+    "speaker": "Elena Guidi, direttrice del personale",
+    "voice": 1,
+    "text": [
+     "Buongiorno a tutte e a tutti, sono Elena Guidi, della direzione del personale. Vi lascio questo breve messaggio per riassumere le novità decise ieri con i sindacati sulla settimana corta.",
+     "Prima di tutto, la sperimentazione continuerà per altri due anni, alle stesse condizioni. Chi preferisse tornare all'orario su cinque giorni potrà chiederlo entro il 31 gennaio, compilando il modulo che trovate in bacheca.",
+     "Seconda novità: in manutenzione cambia il sistema di reperibilità. Invece di un solo tecnico a settimana ce ne saranno due, a turno, e la reperibilità verrà pagata di più: quaranta euro al giorno invece di trenta.",
+     "Infine, le riunioni del lunedì mattina, che sarebbero dovute tornare, restano abolite. Se avete domande, sarò in mensa giovedì dalle dodici alle quattordici. Grazie a tutti per il lavoro di quest'anno."
+    ],
+    "tabella": [
+     [
+      "Durata della nuova sperimentazione",
+      "2 anni",
+      [
+       "due anni",
+       "altri due anni",
+       "2"
+      ]
+     ],
+     [
+      "Scadenza per tornare ai cinque giorni",
+      "31 gennaio",
+      [
+       "il 31 gennaio",
+       "trentuno gennaio"
+      ]
+     ],
+     [
+      "Nuova paga di reperibilità (euro al giorno)",
+      "40",
+      [
+       "quaranta"
+      ]
+     ],
+     [
+      "Dove si trova il modulo",
+      "bacheca",
+      [
+       "in bacheca",
+       "la bacheca"
+      ]
+     ],
+     [
+      "Giorno in cui Elena Guidi è in mensa",
+      "giovedì",
+      []
+     ]
+    ],
+    "info": [
+     [
+      "La settimana corta continua per altri due anni.",
+      true
+     ],
+     [
+      "Tutti i dipendenti devono tornare ai cinque giorni.",
+      false
+     ],
+     [
+      "In manutenzione ci saranno due tecnici reperibili a turno.",
+      true
+     ],
+     [
+      "La reperibilità sarà pagata trenta euro al giorno.",
+      false
+     ],
+     [
+      "Le riunioni del lunedì tornano da febbraio.",
+      false
+     ],
+     [
+      "Elena Guidi risponderà alle domande in mensa.",
+      true
+     ]
+    ],
+    "gloss": {
+     "sperimentazione": "prueba, experiencia piloto",
+     "bacheca": "cartelera",
+     "reperibilità": "guardia pasiva",
+     "mensa": "comedor"
     }
    }
   }

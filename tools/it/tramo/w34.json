@@ -341,5 +341,38 @@
     "rimandavo": "lo postergaba, lo iba dejando",
     "Che ne dici?": "¿qué te parece?"
   }
- }
+ },
+  "breve": {
+    "title": "Ciao Chiara, sono Valentina",
+    "genre": "messaggio in segreteria",
+    "es": "Una amiga le deja un mensaje de voz a otra para organizar una cena con las compañeras de departamento de la facultad.",
+    "speaker": "Valentina",
+    "voice": 1,
+    "text": [
+      "Ciao Chiara, sono Valentina. Ti ho chiamata due volte ma hai il telefono spento, quindi ti lascio un messaggio. Ti ricordi di Marta, quella con cui dividevamo l'appartamento a Bologna? Mi ha scritto ieri: torna in Italia per due settimane e vorrebbe rivederci tutte.",
+      "Ho pensato a una cena sabato 21, nel ristorante di cui ti parlavo, quello in via Saragozza dove fanno dei tortellini buonissimi. Ho già sentito Giulia, che viene sicuramente, e Silvia, la quale però deve ancora chiedere al marito se può tenere i bambini.",
+      "Ho prenotato per le otto e mezza, per cinque persone. Se non puoi, dimmelo entro giovedì, così cambio la prenotazione, che è gratuita fino a due giorni prima.",
+      "Dai, non facciamo passare altri dieci anni! Chiamami quando senti questo messaggio. Un bacio."
+    ],
+    "tabella": [
+      ["Città in cui vivevano insieme", "Bologna", []],
+      ["Giorno della cena", "sabato 21", ["21", "sabato", "il 21", "sabato ventuno"]],
+      ["Ora della prenotazione", "20.30", ["20:30", "otto e mezza", "8 e mezza", "8.30", "le otto e mezza"]],
+      ["Numero di persone", "5", ["cinque"]],
+      ["Ultimo giorno per rispondere", "giovedì", ["entro giovedì"]]
+    ],
+    "info": [
+      ["Chiara aveva il telefono spento.", true],
+      ["Marta torna a vivere in Italia.", false],
+      ["Silvia deve organizzarsi per i bambini.", true],
+      ["Giulia non può venire.", false],
+      ["Cambiare la prenotazione costa dieci euro.", false],
+      ["Valentina vuole rivedere presto le amiche.", true]
+    ],
+    "gloss": {
+      "spento": "apagado",
+      "dividevamo": "compartíamos",
+      "prenotazione": "reserva"
+    }
+  }
 }

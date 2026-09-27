@@ -374,5 +374,37 @@
       "colloqui di lavoro": "entrevistas de trabajo",
       "fanno sorridere": "causan gracia"
     }
+  },
+  "breve": {
+    "title": "Il napoletano, parlalo con noi",
+    "genre": "annuncio radiofonico",
+    "es": "Un aviso de radio presenta un curso gratuito de napolitano para chicos en la biblioteca del barrio.",
+    "speaker": "Voce dell'annuncio",
+    "voice": 0,
+    "text": [
+      "Il napoletano lo capisci ma non lo parli? Le canzoni di tua nonna le sai a memoria, ma non sai che cosa vogliono dire? Allora il corso «Parla comme magne» fa per te.",
+      "È la biblioteca di quartiere che lo organizza, insieme all'associazione Voci del Sud: otto incontri, il giovedì dalle diciotto alle diciannove e trenta, a partire dal 5 ottobre. A tenerlo sarà Gennaro Esposito, attore e autore di teatro.",
+      "Non è una lezione di grammatica: si leggono poesie, si ascoltano canzoni, si guardano scene di film e, soprattutto, si parla. Il corso è gratuito ed è rivolto ai ragazzi dai quattordici ai venticinque anni; i posti, però, sono solo venti.",
+      "Le iscrizioni si fanno in biblioteca o sul sito, entro il 30 settembre. E ricordate: il dialetto non si studia, si vive!"
+    ],
+    "tabella": [
+      ["Giorno della settimana degli incontri", "giovedì", ["il giovedì"]],
+      ["Numero di incontri", "8", ["otto"]],
+      ["Nome dell'insegnante", "Gennaro Esposito", ["Gennaro", "Esposito"]],
+      ["Età massima dei partecipanti", "25", ["venticinque", "25 anni"]],
+      ["Posti disponibili", "20", ["venti"]]
+    ],
+    "info": [
+      ["Il corso lo organizza la biblioteca con un'associazione.", true],
+      ["Nel corso si studia soprattutto la grammatica.", false],
+      ["Il corso costa cinquanta euro.", false],
+      ["Nel corso si ascoltano canzoni.", true],
+      ["Il corso è aperto agli adulti di tutte le età.", false],
+      ["Ci si può iscrivere anche sul sito.", true]
+    ],
+    "gloss": {
+      "parla comme magne": "«hablá como comés»: hablá simple, sin vueltas (en napolitano)",
+      "iscrizioni": "inscripciones"
+    }
   }
 }

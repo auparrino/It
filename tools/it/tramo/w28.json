@@ -125,5 +125,38 @@
       "scenografie vuote": "decorados vacíos, escenografías",
       "aree interne": "las zonas del interior, lejos de la costa y de las ciudades"
     }
+  },
+  "breve": {
+    "title": "Porte aperte a Rocca San Felice",
+    "genre": "annuncio radiofonico",
+    "es": "Un aviso de radio invita a un pueblo del interior que abre sus casas en venta durante un día.",
+    "speaker": "Voce dell'annuncio",
+    "voice": 1,
+    "text": [
+      "Siete stanchi del traffico? Sognate una casa con vista sulle colline? Allora non perdete «Porte aperte a Rocca San Felice», domenica 12 maggio.",
+      "Per un giorno intero, dalle dieci alle diciotto, il paese apre al pubblico venti case in vendita nel centro storico. Inoltre, i tecnici del Comune spiegheranno gratuitamente quanto costa ristrutturarle e quali contributi si possono chiedere.",
+      "Non solo case, però: a mezzogiorno pranzo in piazza con i prodotti del territorio, a quindici euro; nel pomeriggio, visita guidata al castello e laboratorio del pane per i bambini.",
+      "Come arrivare? Dalla stazione di Avellino parte una navetta gratuita ogni ora, a partire dalle nove. Tuttavia i posti sono limitati: è necessario prenotare sul sito del Comune entro venerdì.",
+      "Rocca San Felice: trecento abitanti, e c'è posto anche per voi."
+    ],
+    "tabella": [
+      ["Case aperte al pubblico (numero)", "20", ["venti"]],
+      ["Prezzo del pranzo in piazza (euro)", "15", ["quindici"]],
+      ["Stazione da cui parte la navetta", "Avellino", ["stazione di Avellino"]],
+      ["Ultimo giorno per prenotare", "venerdì", ["entro venerdì"]]
+    ],
+    "info": [
+      ["Le case si possono visitare per un giorno intero.", true],
+      ["I tecnici del Comune si fanno pagare le spiegazioni.", false],
+      ["Nel pomeriggio c'è un'attività per i bambini.", true],
+      ["La navetta dalla stazione costa due euro.", false],
+      ["Il castello si visita con una guida.", true],
+      ["Il paese ha tremila abitanti.", false]
+    ],
+    "gloss": {
+      "ristrutturarle": "refaccionarlas",
+      "contributi": "subsidios, ayudas",
+      "navetta": "combi, lanzadera"
+    }
   }
 }

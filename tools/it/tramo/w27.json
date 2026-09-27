@@ -124,5 +124,39 @@
       "bel pezzo": "lindo artículo, linda nota (pezzo = texto periodístico)",
       "mi ha fatto sentire": "me hizo sentir (fare + infinitivo, el causativo: se ve en la semana 40)"
     }
+  },
+  "breve": {
+    "title": "Radio Salento, il notiziario della sera",
+    "genre": "notiziario radiofonico",
+    "es": "El boletín de noticias de una radio local del Salento: tránsito, cultura, trenes y el tiempo.",
+    "speaker": "Speaker",
+    "voice": 0,
+    "text": [
+      "Radio Salento, sono le diciannove. Ecco le notizie della sera, in breve.",
+      "Casalbianco. Da domani e fino al 31 agosto il corso Vittorio Emanuele sarà chiuso al traffico dalle 18 a mezzanotte. Il sindaco spiega che il Comune ha deciso così soprattutto per la sicurezza di chi passeggia la sera. I negozi del corso potranno restare aperti fino alle 23.",
+      "Lecce. Riapre finalmente il teatro Apollo, chiuso da due anni per lavori. Il primo spettacolo è in programma sabato alle 21; i biglietti costano dodici euro, sei per gli studenti.",
+      "Trasporti. Da lunedì il treno delle sette e dieci per Bari partirà regolarmente alle sette e cinque, cioè cinque minuti prima. Le Ferrovie invitano i viaggiatori a controllare attentamente gli orari sul sito.",
+      "Il tempo. Domani cielo sereno su tutta la provincia, con temperature fino a trentaquattro gradi. Il vento, debole, girerà lentamente verso sud nel pomeriggio.",
+      "Il prossimo notiziario è alle ventuno. Buona serata."
+    ],
+    "tabella": [
+      ["Il corso è chiuso al traffico dalle ore…", "18", ["diciotto", "18:00", "18.00"]],
+      ["Prezzo del biglietto per gli studenti (euro)", "6", ["sei", "6 euro", "sei euro"]],
+      ["Nuovo orario del treno per Bari", "7.05", ["7:05", "7,05", "sette e cinque", "7 e 5", "7 e cinque"]],
+      ["Temperatura massima di domani (gradi)", "34", ["trentaquattro"]]
+    ],
+    "info": [
+      ["Il corso resterà chiuso al traffico anche di giorno.", false],
+      ["I negozi del corso potranno restare aperti più a lungo.", true],
+      ["Il teatro Apollo era chiuso per lavori.", true],
+      ["Lo spettacolo di sabato è gratuito per gli studenti.", false],
+      ["Il treno per Bari partirà cinque minuti prima.", true],
+      ["Domani è prevista pioggia nel pomeriggio.", false]
+    ],
+    "gloss": {
+      "corso": "calle principal",
+      "spettacolo": "función, espectáculo",
+      "debole": "débil, suave"
+    }
   }
 }

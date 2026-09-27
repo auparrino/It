@@ -343,5 +343,39 @@
       "l'hanno già dimesso": "ya le dieron el alta",
       "a voce": "en persona, de palabra"
     }
+  },
+  "breve": {
+    "title": "Giornale radio regionale delle otto",
+    "genre": "notiziario radiofonico",
+    "es": "El noticiero regional de la mañana: un incendio, un choque en la autopista, una biblioteca que reabre y el tiempo.",
+    "speaker": "Speaker",
+    "voice": 0,
+    "text": [
+      "Giornale radio regionale, edizione delle otto. Nella notte un incendio ha distrutto un capannone agricolo alle porte di Mantova. Alcuni residenti hanno raccontato di aver sentito un forte scoppio verso le tre e di aver visto le fiamme alzarsi sopra i tetti. Non ci sono feriti; i vigili del fuoco hanno lavorato fino all'alba.",
+      "Traffico: code sulla tangenziale est per un incidente tra due auto all'altezza dell'uscita 6. Un testimone ha detto di aver visto una delle vetture sbandare sull'asfalto bagnato. La polizia stradale consiglia percorsi alternativi.",
+      "Ha riaperto questa mattina la biblioteca comunale di via Roma, chiusa da febbraio per lavori. Il nuovo orario è dalle nove alle diciannove, anche il sabato.",
+      "Infine, il tempo: nebbia in pianura fino a metà mattina, poi sole. Minime intorno allo zero."
+    ],
+    "tabella": [
+      ["Ora dello scoppio", "3", ["tre", "le tre", "verso le tre", "alle tre"]],
+      ["Uscita della tangenziale dell'incidente", "6", ["sei", "uscita 6"]],
+      ["Mese in cui ha chiuso la biblioteca", "febbraio", []],
+      ["Ora di chiusura della biblioteca", "19", ["diciannove", "alle 19", "le 19", "19:00"]]
+    ],
+    "info": [
+      ["Nell'incendio sono rimaste ferite due persone.", false],
+      ["Alcuni residenti hanno visto le fiamme sopra i tetti.", true],
+      ["L'incidente sulla tangenziale ha coinvolto un camion.", false],
+      ["Un testimone ha visto un'auto sbandare.", true],
+      ["La biblioteca è aperta anche il sabato.", true],
+      ["La nebbia durerà tutto il giorno.", false]
+    ],
+    "gloss": {
+      "capannone": "galpón",
+      "scoppio": "estallido",
+      "code": "embotellamientos, colas",
+      "sbandare": "derrapar, perder el control",
+      "nebbia": "niebla"
+    }
   }
 }
