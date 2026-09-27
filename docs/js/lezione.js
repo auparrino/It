@@ -38,7 +38,8 @@
   var ACCENT_BLOCK = R.accentBlock || /tilde|acento|acentu|circunflej|diacr|cedilla/i;
   // Table columns that hold a comment on the row, not the form it teaches.
   var COMMENT_COL = R.commentCols || /^(ejemplos?|notas?|ojo( con)?|qué pasa|pista del español|dónde|no es|no significa|calco a evitar|diferencia)$/i;
-  var EXAMPLE_COL = /^ejemplos?$/i, SPANISH_COL = R.spanishCols || /^(castellano|español)$/i;
+  var EXAMPLE_COL = /^ejemplos?(\s.*)?$/i,   // «Ejemplo», «Ejemplo en plural»…
+      SPANISH_COL = R.spanishCols || /^(castellano|español)$/i;
 
   function usable(s) { return s && s.length <= 60 && s.indexOf(" / ") < 0 && !/^[-—–…]*$/.test(s); }
   // An example is a real pair only if the right side translates the left one:
