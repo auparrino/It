@@ -62,6 +62,42 @@ pack.LANGS.forEach(function (code) {
   rate(sc, "«Descubrí la regla»");
 });
 
+/* ------------------------------ 1b. el examen final del portugués (v3, P8) */
+
+(function () {
+  var E = require("../../docs/lang/pt/esame_data.js"), ex = [];
+  E.ascolto.forEach(function (a) {
+    a.questions.forEach(function (q) {
+      ok(q[1].indexOf(q[2]) >= 0, "examen " + a.id + ": la respuesta no está entre las opciones");
+      ok(!/^¿|[¿¡ñ]/.test(q[0]), "examen " + a.id + ": la pregunta va en portugués: " + q[0]);
+      ex.push({ o: q[1], a: q[2] });
+    });
+  });
+  console.log("pt, examen:");
+  rate(ex, "escucha del examen");
+  ok(E.ascolto.length >= 3 && E.lettura.length >= 3, "examen: tres versiones de escucha y de lectura");
+  ok(Array.isArray(E.versoes) && E.versoes.length === 3, "examen: tres versiones de la producción escrita");
+  var ids = {};
+  E.ascolto.concat(E.lettura).forEach(function (x) { ids[x.id] = 1; });
+  (E.versoes || []).forEach(function (v) {
+    ok(ids[v.ascolto] && ids[v.lettura], "examen " + v.id + ": la escucha y la lectura existen");
+    ok(v.scrittura.length === 4, "examen " + v.id + ": cuatro tarefas integradas");
+    v.scrittura.forEach(function (t) {
+      ok(t.id && t.kind && t.words > 0 && t.rubric && t.rubric.length === 4, "examen " + t.id + ": forma de la tarefa");
+      ok(!/[¿¡ñ]|\b(escribí|elegí|tené|usá)\b/i.test(t.t), "examen " + t.id + ": el enunciado va en portugués");
+      ok(!/\d+\s*(a|e|-)\s*\d+\s*palavras|registro formal/i.test(t.t), "examen " + t.id + ": sin extensión ni registro explícitos");
+      var i = t.insumo || {};
+      ok(i.tipo === "audio" || i.tipo === "texto", "examen " + t.id + ": insumo audio o texto");
+      ok(i.ref ? ids[i.ref] : (i.texto || (i.turns || []).length), "examen " + t.id + ": el insumo existe");
+    });
+  });
+  ok(E.scrittura === E.versoes[0].scrittura, "examen: scrittura es la versión 1");
+  // lo que se evalúa en el examen no se entrena en la semana 52
+  var c = pack.data("pt", "course.json"), w52 = c.weeks[51], byId = {};
+  c.items.forEach(function (it) { byId[it.id] = it; });
+  ok(w52.items.every(function (id) { return !byId[id].prova; }), "examen: la semana 52 no entrena los ítems del examen");
+})();
+
 /* ------------------------------------------------------- 2. portugués */
 
 var ctx = pack("pt", { upTo: "duelli.js", includeStop: true });
