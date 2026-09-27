@@ -871,7 +871,7 @@
   ]
  },
  "r15-15": {
-  "consigna": "Completá las oraciones con el equivalente italiano de lo que está entre paréntesis.",
+  "consigna": "Completá la oración con el equivalente italiano de lo que está entre paréntesis.",
   "interactive": true,
   "items": [
    {
@@ -1503,7 +1503,7 @@
   ]
  },
  "r15-04b": {
-  "consigna": "Completá las oraciones con las preposiciones correctas.",
+  "consigna": "Completá la oración con las preposiciones correctas.",
   "interactive": true,
   "items": [
    {
@@ -2015,7 +2015,7 @@
      "E se",
      "Ammettiamo che"
     ],
-    "note": "Mettiamo che / supponiamo che + subjuntivo."
+    "note": "Mettiamo che / supponiamo che + congiuntivo."
    },
    {
     "label": "e",
@@ -2031,7 +2031,7 @@
      "Casomai",
      "Semmai"
     ],
-    "note": "Se o qualora + subjuntivo para una hipótesis."
+    "note": "Se o qualora + congiuntivo para una hipótesis."
    }
   ]
  },
@@ -2059,7 +2059,7 @@
     "alt": [
      "salvo che"
     ],
-    "note": "A meno che (non) + subjuntivo = a menos que; el non no es negación."
+    "note": "A meno che (non) + congiuntivo = a menos que; el non no es negación."
    },
    {
     "label": "c",
@@ -2892,7 +2892,7 @@
   ]
  },
  "r18-01b": {
-  "consigna": "Traducí al italiano usando al menos una vez cada verbo: alzarsi, bere, dire, essere, fare, fare colazione, riuscire a, sentire, uscire.",
+  "consigna": "Traducí al italiano. Pista, verbos que sirven: alzarsi, bere, dire, essere, fare, fare colazione, riuscire a, sentire, uscire.",
   "interactive": true,
   "items": [
    {
@@ -4240,7 +4240,7 @@
      "rimaneva qui fino a domani per vederci tutti",
      "sarebbe rimasta qui fino a domani per vederci tutti"
     ],
-    "note": "Presente → imperfetto (o condicional compuesto); qui → lì, domani → il giorno dopo; vi → ci."
+    "note": "Presente → imperfetto (o condizionale passato); qui → lì, domani → il giorno dopo; vi → ci."
    },
    {
     "label": "b",
@@ -4283,7 +4283,7 @@
      "avrebbe dovuto chiamare sua madre l'indomani mattina perché stava male",
      "avrebbe dovuto chiamare sua madre la mattina dopo, perché stava male"
     ],
-    "note": "Condicional simple → condicional compuesto; mia → sua; sta → stava."
+    "note": "Condizionale presente → condizionale passato; mia → sua; sta → stava."
    },
    {
     "label": "e",
@@ -4342,7 +4342,7 @@
   ]
  },
  "r20-09": {
-  "consigna": "Solo dos de estas oraciones admiten el otro auxiliar. Elegí la otra versión correcta o indicá que no la hay.",
+  "consigna": "¿Esta oración admite el otro auxiliar? Elegí la otra versión correcta o indicá que no la hay.",
   "interactive": true,
   "items": [
    {
@@ -4396,7 +4396,7 @@
   ]
  },
  "r20-10": {
-  "consigna": "Reescribí las oraciones sin cambiar el significado (mové el pronombre y cambiá el auxiliar).",
+  "consigna": "Reescribí la oración sin cambiar el significado (mové el pronombre y cambiá el auxiliar).",
   "interactive": true,
   "items": [
    {
@@ -4648,7 +4648,7 @@
     "alt": [
      "potevano"
     ],
-    "note": "«Podrían haber» = condicional compuesto de *potere* + infinitivo simple: *avrebbero potuto dire*."
+    "note": "«Podrían haber» = condizionale passato de *potere* + infinitivo simple: *avrebbero potuto dire*."
    },
    {
     "label": "b",
@@ -4658,7 +4658,7 @@
     "alt": [
      "doveva"
     ],
-    "note": "«Debería haber dicho» se arma con el condicional compuesto del modal + infinitivo simple: *avrebbe dovuto dire*, no «dovuto aver detto»."
+    "note": "«Debería haber dicho» se arma con el condizionale passato del modal + infinitivo simple: *avrebbe dovuto dire*, no «dovuto aver detto»."
    },
    {
     "label": "c",
@@ -5039,7 +5039,7 @@
   ]
  },
  "r20-01f": {
-  "consigna": "Completá con la forma correcta del verbo. El trapassato remoto se usa una sola vez.",
+  "consigna": "Completá con la forma correcta del verbo: passato prossimo, passato remoto o trapassato remoto.",
   "interactive": true,
   "items": [
    {
@@ -5094,7 +5094,7 @@
      "Stasera, quando avrò finito i compiti, vado al cinema.",
      "Stasera quando avrò finito i compiti vado al cinema."
     ],
-    "note": "Condicional compuesto → futuro; trapassato → futuro anteriore; la sera → stasera."
+    "note": "Condizionale passato → futuro; trapassato → futuro anteriore; la sera → stasera."
    },
    {
     "label": "b",
@@ -5108,7 +5108,7 @@
      "Domani, se ho tempo, passo da Mara.",
      "Domani se ho tempo passo da Mara."
     ],
-    "note": "Il giorno dopo → domani; imperfetto → presente; condicional compuesto → futuro."
+    "note": "Il giorno dopo → domani; imperfetto → presente; condizionale passato → futuro."
    },
    {
     "label": "c",
@@ -5137,7 +5137,7 @@
      "Ogni volta che lo vedrò fumare, lo sgriderò.",
      "Ogni volta che ti vedo fumare ti sgrido."
     ],
-    "note": "Congiuntivo trapassato → futuro; condicional compuesto → futuro."
+    "note": "Congiuntivo trapassato → futuro; condizionale passato → futuro."
    },
    {
     "label": "e",
@@ -5165,7 +5165,7 @@
      "Se riesco a convincere mia moglie, mi piacerebbe tornare l'anno che viene.",
      "Se riesco a convincere mia moglie mi piacerebbe tornare l'anno che viene."
     ],
-    "note": "Condicional compuesto → condicional simple; l'anno dopo → l'anno prossimo."
+    "note": "Condizionale passato → condizionale presente; l'anno dopo → l'anno prossimo."
    }
   ]
  },
@@ -5184,7 +5184,7 @@
      "se ero stanca dovevo riposarmi altrimenti non avrei potuto uscire quella sera",
      "se ero stanco, dovevo riposarmi, altrimenti non avrei potuto uscire quella sera"
     ],
-    "note": "Presente → imperfetto; futuro → condicional compuesto; stasera → quella sera."
+    "note": "Presente → imperfetto; futuro → condizionale passato; stasera → quella sera."
    },
    {
     "label": "b",
@@ -5231,7 +5231,7 @@
      "appena aveva capito che non avrebbe trovato un lavoro in Italia, era partito per l'Inghilterra",
      "appena aveva capito che non avrebbe trovato un lavoro in Italia era partito per l'Inghilterra"
     ],
-    "note": "Passato prossimo → trapassato; el condicional compuesto queda igual."
+    "note": "Passato prossimo → trapassato; el condizionale passato queda igual."
    }
   ]
  }

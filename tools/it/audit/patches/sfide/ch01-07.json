@@ -1,6 +1,6 @@
 {
  "r01-01": {
-  "consigna": "Elegí la forma verbal correcta para completar cada oración.",
+  "consigna": "Elegí la forma verbal correcta para completar la oración.",
   "interactive": true,
   "items": [
    {
@@ -84,7 +84,7 @@
   ]
  },
  "r01-07": {
-  "consigna": "Elegí la palabra con el género correcto para completar cada oración.",
+  "consigna": "Elegí la palabra con el género correcto para completar la oración.",
   "interactive": true,
   "items": [
    {
@@ -416,7 +416,7 @@
   ]
  },
  "r02-09": {
-  "consigna": "Completá usando cada palabra una sola vez: il, le, la, in, da, dall', dell', dell', della, della. (Cipro y Bratislava no llevan artículo.)",
+  "consigna": "Completá con el artículo o la preposición que corresponde. Pista: il, le, la, in, da, dall', dell', della. Cipro y Bratislava van sin artículo.",
   "interactive": true,
   "items": [
    {
@@ -697,7 +697,7 @@
   ]
  },
  "r02-01c": {
-  "consigna": "Expresá cada oración de otra manera, sin el partitivo, usando la pista entre paréntesis.",
+  "consigna": "Expresá la oración de otra manera, sin el partitivo, usando la pista entre paréntesis.",
   "interactive": true,
   "items": [
    {
@@ -763,7 +763,7 @@
   ]
  },
  "r02-02c": {
-  "consigna": "Reformulá cada oración con un significado parecido, usando «alcuni/alcune» o «qualche» según la forma del sustantivo.",
+  "consigna": "Reformulá la oración con un significado parecido, usando «alcuni/alcune» o «qualche» según la forma del sustantivo.",
   "interactive": true,
   "items": [
    {
@@ -2341,7 +2341,7 @@
   ]
  },
  "r07-01e": {
-  "consigna": "Reescribí las oraciones empezando con la frase dada, cambiando el verbo y ubicando bien los pronombres.",
+  "consigna": "Reescribí la oración empezando con la frase dada, cambiando el verbo y ubicando bien los pronombres.",
   "interactive": true,
   "items": [
    {
@@ -2493,7 +2493,7 @@
   ]
  },
  "r07-04e": {
-  "consigna": "Da lo mismo: reescribí cada oración cambiando la posición del pronombre.",
+  "consigna": "Da lo mismo: reescribí la oración cambiando la posición del pronombre.",
   "interactive": true,
   "items": [
    {
@@ -2815,7 +2815,7 @@
   ]
  },
  "r07-01g": {
-  "consigna": "Reescribí las oraciones reemplazando el objeto directo por un pronombre (combinado con el indirecto).",
+  "consigna": "Reescribí la oración reemplazando el objeto directo por un pronombre (combinado con el indirecto).",
   "interactive": true,
   "items": [
    {
@@ -3242,7 +3242,7 @@
   ]
  },
  "r07-02i": {
-  "consigna": "¿Cómo me veo? Reescribí las oraciones cambiando el posesivo por un pronombre indirecto combinado con «si».",
+  "consigna": "¿Cómo me veo? Reescribí la oración cambiando el posesivo por un pronombre indirecto combinado con «si».",
   "interactive": true,
   "items": [
    {
@@ -3318,7 +3318,7 @@
   ]
  },
  "r07-04h": {
-  "consigna": "Reescribí las oraciones reemplazando «uno» por la construcción impersonal adecuada.",
+  "consigna": "Reescribí la oración reemplazando «uno» por la construcción impersonal adecuada.",
   "interactive": true,
   "items": [
    {

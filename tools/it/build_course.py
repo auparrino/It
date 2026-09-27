@@ -333,7 +333,7 @@ WEEKS = [
     dict(w=26, title="BOSS — Livello B1", level="B1", d=[16, 17, 18], r=[20, 21], boss=True,
          focus="Examen de la segunda estación: pasados, futuros, pronombres y congiuntivo presente.",
          keys=["Passato prossimo e imperfetto elegidos sin dudar.",
-               "Futuro y condicional con raíces irregulares.",
+               "Futuro y condizionale con raíces irregulares.",
                "Pronombres combinados, ne y ci.",
                "Congiuntivo presente después de opinión, deseo y duda.",
                "Comparativos y negaciones en frases largas."],

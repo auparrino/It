@@ -376,14 +376,14 @@ LESSONS = {
   "tip": "Con *essendo*, el participio concuerda con el sujeto: *essendo "
          "arrivata tardi, Maria...*"},
 
- {"h": "stare + gerundio: el progresivo",
-  "r": "*stare* + gerundio = acción **en desarrollo ahora**. No sirve para "
-       "el futuro cercano ni para lo habitual.",
-  "ex": [["*Sto mangiando*.", "Estoy comiendo."],
-         ["*Stavo dormendo* quando hai chiamato.", "Estaba durmiendo cuando llamaste."],
-         ["Che cosa *stai facendo*?", "¿Qué estás haciendo?"]],
+ {"h": "stare + gerundio: ya lo viste en la semana 6",
+  "r": "Repaso de la semana 6: *stare* + gerundio = acción **en desarrollo**. "
+       "Con *stavo* va al pasado: la acción interrumpida.",
+  "ex": [["*Stavo dormendo* quando hai chiamato.", "Estaba durmiendo cuando llamaste."],
+         ["*Stavamo uscendo* quando è arrivato Luca.", "Estábamos saliendo cuando llegó Luca."]],
   "warn": "Se usa mucho menos que el «estar + -ndo» castellano. «Estoy "
-          "estudiando italiano este año» es *studio italiano quest'anno*."},
+          "estudiando italiano este año» es *studio italiano quest'anno*.",
+  "qq": [{"prompt": "Completá (dormire)", "stem": "Quando mi hai chiamato, ___.", "answer": "stavo dormendo", "options": ["stavo dormendo", "sto dormendo", "stavo dormito"]}]},
 
  {"h": "El participio pasado absoluto",
   "r": "Un participio solo, al principio, = «después de» o «como». "
@@ -728,21 +728,15 @@ LESSONS = {
   "warn": "No repitas *ma... ma... ma*: alterná *tuttavia*, *per contro*, "
           "*d'altro canto*. La variedad es lo que se nota."},
 
- {"h": "Conectores que piden congiuntivo",
-  "r": "*benché, sebbene, nonostante, qualora, affinché, a condizione che, "
-       "prima che, senza che, a meno che non* → **congiuntivo**.",
-  "ex": [["*Benché sia* tardi, continuiamo.", "Aunque es tarde, seguimos."],
-         ["*Qualora ci fossero* problemi, avvisateci.", "En caso de que hubiera problemas, avísennos."],
-         ["Te lo ripeto *affinché* tu lo *capisca*.", "Te lo repito para que lo entiendas."],
-         ["Partiamo *prima che* *faccia* buio.", "Salgamos antes de que oscurezca."]],
-  "table": {"head": ["Conector", "Significa", "Ejemplo"],
-            "rows": [["benché, sebbene, nonostante", "aunque", "Benché sia tardi, resto."],
-                     ["qualora, nel caso in cui", "en caso de que", "Qualora piovesse, restiamo."],
-                     ["affinché", "para que", "Lo dico affinché tu sappia."],
-                     ["a condizione che, purché", "con la condición de que", "Vengo a condizione che tu venga."],
-                     ["prima che", "antes de que", "Esco prima che piova."],
+ {"h": "Conectores con congiuntivo: ya los viste en la semana 28",
+  "r": "Los de la semana 28 (*benché, affinché, purché, prima che*) más los "
+       "del registro formal: *qualora, senza che, a condizione che*.",
+  "ex": [["*Qualora ci fossero* problemi, avvisateci.", "En caso de que hubiera problemas, avísennos."],
+         ["È uscito *senza che* nessuno lo *vedesse*.", "Salió sin que nadie lo viera."]],
+  "table": {"head": ["Conector nuevo", "Significa", "Ejemplo"],
+            "rows": [["qualora, nel caso in cui", "en caso de que", "Qualora piovesse, restiamo."],
+                     ["a condizione che", "con la condición de que", "Vengo a condizione che tu venga."],
                      ["senza che", "sin que", "È uscito senza che lo vedessi."],
-                     ["a meno che non", "a menos que", "Vengo, a meno che non piova."],
                      ["mettiamo che, supponiamo che", "supongamos que", "Mettiamo che tu vinca."]]},
   "warn": "El conector elegante con indicativo detrás anula el efecto: "
           "«benché è tardi» es un error."},
@@ -1052,8 +1046,8 @@ LESSONS = {
             "rows": [["el auxiliar → la concordancia", "con essere, el participio sigue al sujeto"],
                      ["la subjetividad → el modo", "opinión, deseo, duda y emoción piden congiuntivo"],
                      ["la principal → la subordinada", "el tiempo de la principal decide el de la subordinada"],
-                     ["se hipotético", "indicativo (real) o congiuntivo (posible, irreal), nunca condicional"],
-                     ["futuro desde el pasado", "condicional COMPUESTO: disse che sarebbe venuto"]]}},
+                     ["se hipotético", "indicativo (real) o congiuntivo (posible, irreal), nunca condizionale"],
+                     ["futuro desde el pasado", "condizionale PASSATO: disse che sarebbe venuto"]]}},
 
  {"h": "Lo que separa un B2 de un C1",
   "r": "No es saber más reglas: es **usar los recursos que el B2 evita**.",
@@ -1076,7 +1070,7 @@ LESSONS = {
   "ex": [["Credo che *sia* giusto.", "Creo que es justo."],
          ["Ha detto che *sarebbe partito*.", "Dijo que se iría."]],
   "tip": "¿Dudás entre indicativo y congiuntivo tras un verbo de opinión? "
-         "Congiuntivo. ¿Entre condicional simple y compuesto mirando al "
+         "Congiuntivo. ¿Entre condizionale presente y passato mirando al "
          "futuro desde el pasado? Compuesto."},
 
  {"h": "Después del examen",

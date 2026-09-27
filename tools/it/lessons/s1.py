@@ -37,7 +37,7 @@ LESSONS = {
                      ["ge, gi", "dy, como la j de «jeans»", "gelato (helado), giro (vuelta)"],
                      ["ghe, ghi", "gue, gui", "spaghetti, ghiaccio (hielo)"],
                      ["gn", "ñ", "signore (señor), bagno (baño)"],
-                     ["gli", "«ll» tradicional (no la porteña): casi «li» rápida", "figlio (hijo), aglio (ajo)"],
+                     ["gli", "la «ll» tradicional (no la porteña): lengua en el paladar, no «li»", "figlio (hijo), aglio (ajo)"],
                      ["sce, sci", "sh inglesa", "pesce (pescado), sciare (esquiar)"],
                      ["z", "ts o dz", "grazie (gracias), zero (cero)"]]},
   "ex": [["*ce*na / *che*", "cena / que: «chena», «ke»"],
@@ -256,7 +256,7 @@ LESSONS = {
   "ids": ["s:r02-02:a", "b2-prep-07"] + ["ar-u-%02d" % n for n in range(1, 15)],
   "match": r"posesiv|artículo donde"},
  {"h": "Preposiciones articuladas", "blocks": [11, 12, 13],
-  "match": r"preposición articulada|«in» y «di»|«di» con el|cada palabra una sola vez|«di» o «di» \+|donde corresponda"},
+  "match": r"preposición articulada|«in» y «di»|«di» con el|artículo o la preposición|«di» o «di» \+|donde corresponda"},
  {"h": "Partitivo y cantidades", "blocks": [14, 15, 16],
   "match": r"partitivo|reformul|alcun|qualche|nessun"},
 ],
@@ -1405,7 +1405,7 @@ LESSONS = {
   "tip": "Con pronombre, dos lugares posibles: pegado al infinitivo o "
          "delante. *Non toccarlo!* = *Non lo toccare!* (¡no lo toques!)."},
 
- {"h": "Adelanto: el formal es un subjuntivo",
+ {"h": "Adelanto: el formal es un congiuntivo",
   "r": "*Lei* usa el congiuntivo (semana 24). Al revés que el informal: "
        "*-are* → **-i** (*parli!*); *-ere / -ire* → **-a** (*prenda!*). "
        "Irregulares, desde el *io*: *vengo → venga*.",

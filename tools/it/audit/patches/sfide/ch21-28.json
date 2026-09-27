@@ -1,6 +1,6 @@
 {
  "r21-01": {
-  "consigna": "Elegí la forma correcta del condicional.",
+  "consigna": "Elegí la forma correcta del condizionale.",
   "interactive": true,
   "items": [
    {
@@ -13,7 +13,7 @@
     ],
     "answer": "laveresti",
     "alt": [],
-    "note": "En los verbos en -are la -a- de la raíz pasa a -e- en el condicional: laver-esti."
+    "note": "En los verbos en -are la -a- de la raíz pasa a -e- en el condizionale: laver-esti."
    },
    {
     "label": "b",
@@ -37,12 +37,12 @@
     ],
     "answer": "prenderemmo",
     "alt": [],
-    "note": "El condicional de noi termina en -emmo (doble m); -emo es futuro: «lo compraríamos, pero es muy caro»."
+    "note": "El condizionale de noi termina en -emmo (doble m); -emo es futuro: «lo compraríamos, pero es muy caro»."
    }
   ]
  },
  "r21-02": {
-  "consigna": "Completá con la forma correcta del condicional del verbo entre paréntesis.",
+  "consigna": "Completá con la forma correcta del condizionale del verbo entre paréntesis.",
   "interactive": true,
   "items": [
    {
@@ -51,7 +51,7 @@
     "stem": "___ volentieri ma ho un appuntamento. (venire – io)",
     "answer": "verrei",
     "alt": [],
-    "note": "Venire tiene condicional irregular con doble r: verrei."
+    "note": "Venire tiene condizionale irregular con doble r: verrei."
    },
    {
     "label": "b",
@@ -83,7 +83,7 @@
     "stem": "Mi ___ un favore? (fare – tu)",
     "answer": "faresti",
     "alt": [],
-    "note": "Fare conserva la -a- de la raíz: far- + -esti; el condicional suaviza el pedido."
+    "note": "Fare conserva la -a- de la raíz: far- + -esti; el condizionale suaviza el pedido."
    },
    {
     "label": "f",
@@ -96,7 +96,7 @@
   ]
  },
  "r21-03": {
-  "consigna": "Pedí las cosas con cortesía: reescribí la orden o la afirmación usando el condicional.",
+  "consigna": "Pedí las cosas con cortesía: reescribí la orden o la afirmación usando el condizionale.",
   "interactive": true,
   "items": [
    {
@@ -108,7 +108,7 @@
      "potresti darmi un bicchiere di vino?",
      "mi potresti dare un bicchiere di vino?"
     ],
-    "note": "El condicional (mi daresti…?) transforma la orden en un pedido amable."
+    "note": "El condizionale (mi daresti…?) transforma la orden en un pedido amable."
    },
    {
     "label": "b",
@@ -119,7 +119,7 @@
      "potreste farmi un favore?",
      "mi potreste fare un favore?"
     ],
-    "note": "Con voi el condicional termina en -este: fareste."
+    "note": "Con voi el condizionale termina en -este: fareste."
    },
    {
     "label": "c",
@@ -140,12 +140,12 @@
      "potrebbe prepararmelo per stasera?",
      "me lo potrebbe preparare per stasera?"
     ],
-    "note": "Con Lei se usa la 3.ª persona del condicional: preparerebbe (o potrebbe prepararmelo)."
+    "note": "Con Lei se usa la 3.ª persona del condizionale: preparerebbe (o potrebbe prepararmelo)."
    }
   ]
  },
  "r21-04": {
-  "consigna": "¿Qué harías si pudieras? Completá con el condicional (io) del verbo indicado.",
+  "consigna": "¿Qué harías si pudieras? Completá con el condizionale (io) del verbo indicado.",
   "interactive": true,
   "items": [
    {
@@ -154,7 +154,7 @@
     "stem": "Ti ___, ma devo andare a prendere mia figlia. (dare un passaggio)",
     "answer": "darei un passaggio",
     "alt": [],
-    "note": "Dare conserva la -a- de la raíz en el condicional: darei."
+    "note": "Dare conserva la -a- de la raíz en el condizionale: darei."
    },
    {
     "label": "b",
@@ -162,7 +162,7 @@
     "stem": "___ l'articolo ma non ho tempo. (tradurre)",
     "answer": "tradurrei",
     "alt": [],
-    "note": "Los verbos en -durre forman el condicional sobre tradurr-: tradurrei."
+    "note": "Los verbos en -durre forman el condizionale sobre tradurr-: tradurrei."
    },
    {
     "label": "c",
@@ -170,12 +170,12 @@
     "stem": "Il vino lo ___ volentieri, ma prendo antibiotici. (bere)",
     "answer": "berrei",
     "alt": [],
-    "note": "Bere tiene condicional con doble r: berrei."
+    "note": "Bere tiene condizionale con doble r: berrei."
    }
   ]
  },
  "r21-08": {
-  "consigna": "Traducí al italiano, prestando atención a dovere, potere, sapere y volere en condicional.",
+  "consigna": "Traducí al italiano, prestando atención a dovere, potere, sapere y volere en condizionale.",
   "interactive": true,
   "items": [
    {
@@ -186,7 +186,7 @@
     "alt": [
      "Dovresti andare dal dottore."
     ],
-    "note": "Dovere en condicional expresa un consejo: dovresti = deberías."
+    "note": "Dovere en condizionale expresa un consejo: dovresti = deberías."
    },
    {
     "label": "b",
@@ -228,7 +228,7 @@
     "stem": "Dijiste que podías venir a las dos.",
     "answer": "Hai detto che potevi venire alle due.",
     "alt": [],
-    "note": "Acá no hay condicional: potevi (imperfecto) reporta una capacidad en el pasado."
+    "note": "Acá no hay condizionale: potevi (imperfetto) reporta una capacidad en el pasado."
    },
    {
     "label": "f",
@@ -248,7 +248,7 @@
     "alt": [
      "Sapresti dirmi se sono tornati?"
     ],
-    "note": "El condicional de *sapere* suaviza la pregunta: *mi sapresti dire...?*, «¿me sabrías decir...?»."
+    "note": "El condizionale de *sapere* suaviza la pregunta: *mi sapresti dire...?*, «¿me sabrías decir...?»."
    },
    {
     "label": "h",
@@ -260,7 +260,7 @@
      "Non sapeva dirmi nulla.",
      "Non mi sapeva dire nulla."
     ],
-    "note": "Imperfecto de sapere + infinitivo: no era capaz de decirme nada."
+    "note": "Imperfetto de sapere + infinitivo: no era capaz de decirme nada."
    },
    {
     "label": "i",
@@ -270,7 +270,7 @@
     "alt": [
      "Giulia vorrebbe restare a Pisa."
     ],
-    "note": "*volere* en condicional expresa deseo con cortesía: *vorrebbe rimanere*."
+    "note": "*volere* en condizionale expresa deseo con cortesía: *vorrebbe rimanere*."
    },
    {
     "label": "j",
@@ -287,7 +287,7 @@
   ]
  },
  "r21-01b": {
-  "consigna": "Completá el condicional compuesto con el auxiliar correcto (essere o avere).",
+  "consigna": "Completá el condizionale passato con el auxiliar correcto (essere o avere).",
   "interactive": true,
   "items": [
    {
@@ -341,7 +341,7 @@
   ]
  },
  "r21-02b": {
-  "consigna": "¿Qué habrías hecho vos? Respondé en italiano con el condicional compuesto.",
+  "consigna": "¿Qué habrías hecho vos? Respondé en italiano con el condizionale passato.",
   "interactive": true,
   "items": [
    {
@@ -377,7 +377,7 @@
   ]
  },
  "r21-03b": {
-  "consigna": "Me gustaría… me habría gustado. Respondé en italiano con el condicional (simple y compuesto) del mismo verbo de la pregunta: piacere o volere.",
+  "consigna": "Me gustaría… me habría gustado. Respondé en italiano con el condizionale (presente y passato) del mismo verbo de la pregunta: piacere o volere.",
   "interactive": true,
   "items": [
    {
@@ -400,7 +400,7 @@
      "avrei voluto parlargli. Gli vorrei parlare presto",
      "gli avrei voluto parlare. Vorrei parlargli presto"
     ],
-    "note": "Volere en condicional compuesto: avrei voluto; en simple: vorrei."
+    "note": "Volere en condizionale passato: avrei voluto; en simple: vorrei."
    },
    {
     "label": "c",
@@ -440,7 +440,7 @@
     "stem": "No tendrías que haber pagado en efectivo. (tu – in contanti)",
     "answer": "Non avresti dovuto pagare in contanti.",
     "alt": [],
-    "note": "Condicional compuesto de dovere + infinitivo simple: avresti dovuto pagare."
+    "note": "Condizionale passato de dovere + infinitivo simple: avresti dovuto pagare."
    },
    {
     "label": "c",
@@ -460,7 +460,7 @@
     "stem": "Ellos no tendrían que haber tomado ese vino.",
     "answer": "Non avrebbero dovuto bere quel vino.",
     "alt": [],
-    "note": "Condicional compuesto de dovere (avrebbero dovuto) + infinitivo."
+    "note": "Condizionale passato de dovere (avrebbero dovuto) + infinitivo."
    }
   ]
  },
@@ -476,7 +476,7 @@
     "alt": [
      "l'aereo dovrebbe partire tra un'ora | l'autostrada potrebbe essere bloccata dalla neve"
     ],
-    "note": "Para una previsión actual se usa el condicional simple: dovrebbe, potrebbe."
+    "note": "Para una previsión actual se usa el condizionale presente: dovrebbe, potrebbe."
    },
    {
     "label": "b",
@@ -488,12 +488,12 @@
      "l'aereo sarebbe dovuto partire un'ora prima | l'autostrada sarebbe potuta essere bloccata dalla neve",
      "l'aereo avrebbe dovuto partire un'ora prima | l'autostrada sarebbe potuta essere bloccata dalla neve"
     ],
-    "note": "En el pasado se usa el condicional compuesto de dovere/potere (con essere o avere); con el infinitivo essere se prefiere avere: avrebbe potuto essere."
+    "note": "En el pasado se usa el condizionale passato de dovere/potere (con essere o avere); con el infinitivo essere se prefiere avere: avrebbe potuto essere."
    }
   ]
  },
  "r21-02c": {
-  "consigna": "Traducí al italiano. Hay dos maneras de expresar el futuro en el pasado: condicional compuesto o imperfecto.",
+  "consigna": "Traducí al italiano. Hay dos maneras de expresar el futuro en el pasado: condizionale passato o imperfetto.",
   "interactive": true,
   "items": [
    {
@@ -508,7 +508,7 @@
      "Ero convinto che avrebbe chiamato.",
      "Ero convinta che avrebbe chiamato."
     ],
-    "note": "El futuro visto desde el pasado se expresa con el condicional compuesto (avrebbe telefonato) o, en lo coloquial, con el imperfecto."
+    "note": "El futuro visto desde el pasado se expresa con el condizionale passato (avrebbe telefonato) o, en lo coloquial, con el imperfetto."
    },
    {
     "label": "b",
@@ -536,12 +536,12 @@
      "Mi ha detto che sarebbe arrivata alle quattro.",
      "Mi disse che sarebbe arrivata alle quattro."
     ],
-    "note": "Después de un verbo de decir en pasado, el futuro se expresa con condicional compuesto, no simple."
+    "note": "Después de un verbo de decir en pasado, el futuro se expresa con condizionale passato, no presente."
    }
   ]
  },
  "r21-03c": {
-  "consigna": "¿Hecho posible o imposible? Decidí si lo que expresa el condicional compuesto pudo cumplirse. Una de las oraciones es ambigua.",
+  "consigna": "¿Hecho posible, imposible o ambiguo? Decidí si lo que expresa el condizionale passato pudo cumplirse.",
   "interactive": true,
   "items": [
    {
@@ -599,7 +599,7 @@
   ]
  },
  "r21-04c": {
-  "consigna": "Traducí al italiano usando el condicional periodístico (información no confirmada).",
+  "consigna": "Traducí al italiano usando el condizionale periodístico (información no confirmada).",
   "interactive": true,
   "items": [
    {
@@ -612,7 +612,7 @@
      "A quanto pare, il ministro non sarebbe disposto a dare le dimissioni.",
      "A quanto pare, il ministro non sarebbe disposto a dimettersi."
     ],
-    "note": "El condicional simple presenta un dato presente no confirmado."
+    "note": "El condizionale presente presenta un dato presente no confirmado."
    },
    {
     "label": "b",
@@ -623,7 +623,7 @@
      "Secondo le fonti, l'aereo sarebbe caduto dieci minuti dopo il decollo.",
      "Secondo le fonti l'aereo sarebbe caduto dieci minuti dopo il decollo."
     ],
-    "note": "El condicional compuesto presenta un hecho pasado no confirmado."
+    "note": "El condizionale passato presenta un hecho pasado no confirmado."
    },
    {
     "label": "c",
@@ -634,7 +634,7 @@
      "A quanto pare, il rapinatore avrebbe sparato due volte.",
      "A quanto sembra, il rapinatore avrebbe sparato due volte."
     ],
-    "note": "Condicional compuesto de rumor o fuente no verificada: avrebbe sparato."
+    "note": "Condizionale passato de rumor o fuente no verificada: avrebbe sparato."
    }
   ]
  },
@@ -648,7 +648,7 @@
     "stem": "parlare più piano → tu: ___ più piano · Lei: ___ più piano · voi: ___ più piano",
     "answer": "parla | parli | parlate",
     "alt": [],
-    "note": "Verbos en -are: tu -a, Lei -i (subjuntivo), voi -ate."
+    "note": "Verbos en -are: tu -a, Lei -i (congiuntivo), voi -ate."
    },
    {
     "label": "b",
@@ -686,7 +686,7 @@
     "stem": "scegliere una canzone → tu: ___ una canzone · Lei: ___ una canzone",
     "answer": "scegli | scelga",
     "alt": [],
-    "note": "Scegliere: tu scegli; Lei toma el subjuntivo irregular scelga."
+    "note": "Scegliere: tu scegli; Lei toma el congiuntivo irregular scelga."
    },
    {
     "label": "b",
@@ -816,7 +816,7 @@
   ]
  },
  "r22-08": {
-  "consigna": "¿Cuáles de estas oraciones son sugerencias («hagamos…»)?",
+  "consigna": "¿Esta oración es una sugerencia («hagamos…»)?",
   "interactive": true,
   "items": [
    {
@@ -915,7 +915,7 @@
     "stem": "Páseme la sal.",
     "answer": "Mi passi il sale.",
     "alt": [],
-    "note": "Imperativo de Lei = subjuntivo, con el pronombre delante: mi passi."
+    "note": "Imperativo de Lei = congiuntivo, con el pronombre delante: mi passi."
    },
    {
     "label": "c",
@@ -1186,7 +1186,7 @@
     "stem": "Paolo cree que está enfermo.",
     "answer": "Paolo crede di essere malato.",
     "alt": [],
-    "note": "Con el mismo sujeto, credere di + infinitivo en lugar de che + subjuntivo."
+    "note": "Con el mismo sujeto, credere di + infinitivo en lugar de che + congiuntivo."
    },
    {
     "label": "b",
@@ -1652,7 +1652,7 @@
   ]
  },
  "r24-01": {
-  "consigna": "Completá con el presente del subjuntivo del verbo entre paréntesis.",
+  "consigna": "Completá con el congiuntivo presente del verbo entre paréntesis.",
   "interactive": true,
   "items": [
    {
@@ -1661,7 +1661,7 @@
     "stem": "Vuoi che io gli ___ il pacco? (mandare)",
     "answer": "mandi",
     "alt": [],
-    "note": "Volere che + subjuntivo; -are → -i."
+    "note": "Volere che + congiuntivo; -are → -i."
    },
    {
     "label": "b",
@@ -1669,7 +1669,7 @@
     "stem": "Voglio che tu gli ___ qualcosa. (scrivere)",
     "answer": "scriva",
     "alt": [],
-    "note": "Verbos en -ere: subjuntivo en -a."
+    "note": "Verbos en -ere: congiuntivo en -a."
    },
    {
     "label": "c",
@@ -1677,7 +1677,7 @@
     "stem": "Voglio che loro ___ subito! (dormire)",
     "answer": "dormano",
     "alt": [],
-    "note": "Loro: -ano en el subjuntivo de -ere/-ire."
+    "note": "Loro: -ano en el congiuntivo de -ere/-ire."
    },
    {
     "label": "d",
@@ -1685,7 +1685,7 @@
     "stem": "Vuoi che lo ___ io? (finire)",
     "answer": "finisca",
     "alt": [],
-    "note": "Finire conserva -isc- en el subjuntivo: finisca."
+    "note": "Finire conserva -isc- en el congiuntivo: finisca."
    },
    {
     "label": "e",
@@ -1706,7 +1706,7 @@
   ]
  },
  "r24-02": {
-  "consigna": "Preguntá qué prefieren los demás, con el subjuntivo del verbo indicado.",
+  "consigna": "Preguntá qué prefieren los demás, con el congiuntivo del verbo indicado.",
   "interactive": true,
   "items": [
    {
@@ -1715,7 +1715,7 @@
     "stem": "Preferisci che lo ___ io? (fare)",
     "answer": "faccia",
     "alt": [],
-    "note": "Subjuntivo irregular de fare: faccia."
+    "note": "Congiuntivo irregular de fare: faccia."
    },
    {
     "label": "b",
@@ -1723,7 +1723,7 @@
     "stem": "Preferisce che ci ___ io? (andare)",
     "answer": "vada",
     "alt": [],
-    "note": "Subjuntivo irregular de andare: vada."
+    "note": "Congiuntivo irregular de andare: vada."
    },
    {
     "label": "c",
@@ -1731,7 +1731,7 @@
     "stem": "Preferisci che glielo ___ io? (dare)",
     "answer": "dia",
     "alt": [],
-    "note": "Subjuntivo irregular de dare: dia."
+    "note": "Congiuntivo irregular de dare: dia."
    },
    {
     "label": "d",
@@ -1739,12 +1739,12 @@
     "stem": "Preferite che glielo ___ io? (dire)",
     "answer": "dica",
     "alt": [],
-    "note": "Subjuntivo irregular de dire: dica."
+    "note": "Congiuntivo irregular de dire: dica."
    }
   ]
  },
  "r24-03": {
-  "consigna": "Formá el presente del subjuntivo singular (io/tu/lui) de estos verbos de presente irregular.",
+  "consigna": "Formá el congiuntivo presente singular (io/tu/lui) de estos verbos de presente irregular.",
   "interactive": true,
   "items": [
    {
@@ -1812,7 +1812,7 @@
      "È essenziale che lo paghi presto.",
      "È fondamentale che lo paghi presto."
     ],
-    "note": "Las expresiones de necesidad (è essenziale che) llevan subjuntivo."
+    "note": "Las expresiones de necesidad (è essenziale che) llevan congiuntivo."
    },
    {
     "label": "b",
@@ -1824,7 +1824,7 @@
      "È importante che lo mandino domani.",
      "È importante che loro lo mandino domani."
     ],
-    "note": "È importante che + subjuntivo: spediscano (con -isc-)."
+    "note": "È importante che + congiuntivo: spediscano (con -isc-)."
    },
    {
     "label": "c",
@@ -1836,12 +1836,12 @@
      "Ma bisogna che io lo sappia oggi.",
      "Ma è necessario che lo sappia oggi."
     ],
-    "note": "È necessario che + subjuntivo irregular de sapere: sappia."
+    "note": "È necessario che + congiuntivo irregular de sapere: sappia."
    }
   ]
  },
  "r24-05": {
-  "consigna": "Hablá de posibilidades: completá con el subjuntivo del verbo indicado.",
+  "consigna": "Hablá de posibilidades: completá con el congiuntivo del verbo indicado.",
   "interactive": true,
   "items": [
    {
@@ -1858,7 +1858,7 @@
     "stem": "È possibile che il treno ___ in ritardo. (essere) (Es posible que el tren llegue tarde.)",
     "answer": "sia",
     "alt": [],
-    "note": "È possibile che + subjuntivo."
+    "note": "È possibile che + congiuntivo."
    },
    {
     "label": "c",
@@ -1871,7 +1871,7 @@
   ]
  },
  "r24-06": {
-  "consigna": "Decí lo que sentís empezando con la expresión dada: completá con el subjuntivo.",
+  "consigna": "Decí lo que sentís empezando con la expresión dada: completá con el congiuntivo.",
   "interactive": true,
   "items": [
    {
@@ -1880,7 +1880,7 @@
     "stem": "Tu stai meglio. → Mi fa piacere che tu ___ meglio.",
     "answer": "stia",
     "alt": [],
-    "note": "Las emociones (mi fa piacere che) rigen subjuntivo: stia."
+    "note": "Las emociones (mi fa piacere che) rigen congiuntivo: stia."
    },
    {
     "label": "b",
@@ -1888,7 +1888,7 @@
     "stem": "Lei non ha più tempo. → Mi dispiace che lei non ___ più tempo.",
     "answer": "abbia",
     "alt": [],
-    "note": "Mi dispiace che + subjuntivo: abbia."
+    "note": "Mi dispiace che + congiuntivo: abbia."
    },
    {
     "label": "c",
@@ -1896,7 +1896,7 @@
     "stem": "Loro vogliono lamentarsi di nuovo. → Temo che loro ___ lamentarsi di nuovo.",
     "answer": "vogliano",
     "alt": [],
-    "note": "Temere che + subjuntivo: vogliano."
+    "note": "Temere che + congiuntivo: vogliano."
    },
    {
     "label": "d",
@@ -1904,7 +1904,7 @@
     "stem": "Loro non possono venire. → Che peccato che loro non ___ venire.",
     "answer": "possano",
     "alt": [],
-    "note": "Che peccato che + subjuntivo: possano."
+    "note": "Che peccato che + congiuntivo: possano."
    },
    {
     "label": "e",
@@ -1912,7 +1912,7 @@
     "stem": "Lucio è malato. → Ho paura che Lucio ___ malato.",
     "answer": "sia",
     "alt": [],
-    "note": "Avere paura che + subjuntivo: sia."
+    "note": "Avere paura che + congiuntivo: sia."
    },
    {
     "label": "f",
@@ -1920,12 +1920,12 @@
     "stem": "Lo fanno loro. → Non è giusto che lo ___ loro.",
     "answer": "facciano",
     "alt": [],
-    "note": "Non è giusto che + subjuntivo: facciano."
+    "note": "Non è giusto che + congiuntivo: facciano."
    }
   ]
  },
  "r24-07": {
-  "consigna": "Expresá opiniones e impresiones con el subjuntivo del verbo indicado.",
+  "consigna": "Expresá opiniones e impresiones con el congiuntivo del verbo indicado.",
   "interactive": true,
   "items": [
    {
@@ -1934,7 +1934,7 @@
     "stem": "Ho l'impressione che Carlo ___ troppo. (bere)",
     "answer": "beva",
     "alt": [],
-    "note": "Ho l'impressione che + subjuntivo; bere → beva."
+    "note": "Ho l'impressione che + congiuntivo; bere → beva."
    },
    {
     "label": "b",
@@ -1942,7 +1942,7 @@
     "stem": "Mi sembra che Luca ___ tanto. (mangiare)",
     "answer": "mangi",
     "alt": [],
-    "note": "Mi sembra che + subjuntivo; mangiare → mangi."
+    "note": "Mi sembra che + congiuntivo; mangiare → mangi."
    },
    {
     "label": "c",
@@ -1950,7 +1950,7 @@
     "stem": "Non credo che loro ___ stasera. (rimanere)",
     "answer": "rimangano",
     "alt": [],
-    "note": "Non credo che + subjuntivo; rimanere → rimangano."
+    "note": "Non credo che + congiuntivo; rimanere → rimangano."
    },
    {
     "label": "d",
@@ -1958,12 +1958,12 @@
     "stem": "Non dico che ___ la moglie. (tradire)",
     "answer": "tradisca",
     "alt": [],
-    "note": "Non dico che + subjuntivo; tradire lleva -isc-."
+    "note": "Non dico che + congiuntivo; tradire lleva -isc-."
    }
   ]
  },
  "r24-08": {
-  "consigna": "Hacé pedidos con el subjuntivo del verbo indicado.",
+  "consigna": "Hacé pedidos con el congiuntivo del verbo indicado.",
   "interactive": true,
   "items": [
    {
@@ -1972,7 +1972,7 @@
     "stem": "Giovanni, lascia che lo ___ tuo fratello. (fare) (Giovanni, dejá que lo haga tu hermano.)",
     "answer": "faccia",
     "alt": [],
-    "note": "Lasciare che + subjuntivo."
+    "note": "Lasciare che + congiuntivo."
    },
    {
     "label": "b",
@@ -1980,7 +1980,7 @@
     "stem": "Lavinia, permetti che io ___ il mio discorso? (finire) (Lavinia, ¿me dejás terminar lo que estoy diciendo?)",
     "answer": "finisca",
     "alt": [],
-    "note": "Permettere che + subjuntivo."
+    "note": "Permettere che + congiuntivo."
    },
    {
     "label": "c",
@@ -1988,12 +1988,12 @@
     "stem": "Voglio che Simone mi ___ una mano. (dare) (Quiero que Simone me dé una mano.)",
     "answer": "dia",
     "alt": [],
-    "note": "Volere che + subjuntivo; dare → dia."
+    "note": "Volere che + congiuntivo; dare → dia."
    }
   ]
  },
  "r24-01b": {
-  "consigna": "Completá en italiano con el pretérito perfecto del subjuntivo.",
+  "consigna": "Completá en italiano con el congiuntivo passato.",
   "interactive": true,
   "items": [
    {
@@ -2038,7 +2038,7 @@
   ]
  },
  "r24-02b": {
-  "consigna": "Traducí al italiano con el pretérito perfecto del subjuntivo.",
+  "consigna": "Traducí al italiano con el congiuntivo passato.",
   "interactive": true,
   "items": [
    {
@@ -2063,7 +2063,7 @@
      "Può darsi che se ne sia già andata.",
      "Può essere che sia già partita."
     ],
-    "note": "Può darsi che + subjuntivo (con forse iría indicativo)."
+    "note": "Può darsi che + congiuntivo (con forse iría indicativo)."
    },
    {
     "label": "c",
@@ -2083,12 +2083,12 @@
     "alt": [
      "Pensi che abbia avuto un incidente?"
     ],
-    "note": "Credere che + subjuntivo."
+    "note": "Credere che + congiuntivo."
    }
   ]
  },
  "r24-03b": {
-  "consigna": "Completá con el imperfecto del subjuntivo del verbo indicado.",
+  "consigna": "Completá con el congiuntivo imperfetto del verbo indicado.",
   "interactive": true,
   "items": [
    {
@@ -2097,7 +2097,7 @@
     "stem": "Voleva che ___ il giorno dopo. (io – tornare)",
     "answer": "tornassi",
     "alt": [],
-    "note": "Imperfecto del subjuntivo io: -assi."
+    "note": "Congiuntivo imperfetto io: -assi."
    },
    {
     "label": "b",
@@ -2121,7 +2121,7 @@
     "stem": "Mi piacerebbe che ___ anche loro. (venire)",
     "answer": "venissero",
     "alt": [],
-    "note": "Condicional + che → imperfecto del subjuntivo."
+    "note": "Condizionale + che → congiuntivo imperfetto."
    },
    {
     "label": "e",
@@ -2142,7 +2142,7 @@
   ]
  },
  "r24-04b": {
-  "consigna": "Completá con el imperfecto del subjuntivo (formas irregulares).",
+  "consigna": "Completá con el congiuntivo imperfetto (formas irregulares).",
   "interactive": true,
   "items": [
    {
@@ -2196,7 +2196,7 @@
   ]
  },
  "r24-05b": {
-  "consigna": "Completá en italiano con el pluscuamperfecto del subjuntivo.",
+  "consigna": "Completá en italiano con el congiuntivo trapassato.",
   "interactive": true,
   "items": [
    {
@@ -2215,7 +2215,7 @@
     "stem": "Era contento che ___. (…hubiéramos estudiado)",
     "answer": "avessimo studiato",
     "alt": [],
-    "note": "Avere en imperfecto del subjuntivo + participio."
+    "note": "Avere en congiuntivo imperfetto + participio."
    },
    {
     "label": "c",
@@ -2226,7 +2226,7 @@
      "tu avessi capito",
      "avevi capito"
     ],
-    "note": "Pregunta indirecta en el pasado: trapassato del subjuntivo."
+    "note": "Pregunta indirecta en el pasado: congiuntivo trapassato."
    },
    {
     "label": "d",
@@ -2239,7 +2239,7 @@
   ]
  },
  "r24-06b": {
-  "consigna": "Completá con el subjuntivo adecuado; en todos los casos menos uno va el pluscuamperfecto.",
+  "consigna": "Completá con el congiuntivo adecuado; en todos los casos menos uno va el trapassato prossimo.",
   "interactive": true,
   "items": [
    {
@@ -2260,7 +2260,7 @@
     "alt": [
      "foste partite"
     ],
-    "note": "Se + trapassato del subjuntivo en la hipótesis irreal del pasado."
+    "note": "Se + congiuntivo trapassato en la hipótesis irreal del pasado."
    },
    {
     "label": "c",
@@ -2276,7 +2276,7 @@
     "stem": "Immaginavo che Anna ___ strada e che ___ di chiamarmi. (sbagliare; stare cercando)",
     "answer": "avesse sbagliato | stesse cercando",
     "alt": [],
-    "note": "La segunda acción es simultánea: imperfecto del subjuntivo de stare + gerundio."
+    "note": "La segunda acción es simultánea: congiuntivo imperfetto de stare + gerundio."
    }
   ]
  },
@@ -2292,7 +2292,7 @@
     "alt": [
      "Se veniste a casa mia"
     ],
-    "note": "Hipótesis posible: se + imperfecto del subjuntivo, condicional simple."
+    "note": "Hipótesis posible: se + congiuntivo imperfetto, condizionale presente."
    },
    {
     "label": "b",
@@ -2304,7 +2304,7 @@
      "Se foste arrivati prima",
      "Se foste arrivate prima"
     ],
-    "note": "Hipótesis irreal del pasado: se + trapassato del subjuntivo."
+    "note": "Hipótesis irreal del pasado: se + congiuntivo trapassato."
    },
    {
     "label": "c",
@@ -2316,7 +2316,7 @@
      "Se perdesse il lavoro",
      "Se perdesse il posto"
     ],
-    "note": "Se + imperfecto del subjuntivo + condicional simple."
+    "note": "Se + congiuntivo imperfetto + condizionale presente."
    },
    {
     "label": "d",
@@ -2334,7 +2334,7 @@
     "stem": "___, avrei già pagato i debiti. (Si ganara más…)",
     "answer": "Se guadagnassi di più",
     "alt": [],
-    "note": "Hipótesis mixta: condición presente (imperfecto del subjuntivo), consecuencia pasada."
+    "note": "Hipótesis mixta: condición presente (congiuntivo imperfetto), consecuencia pasada."
    },
    {
     "label": "f",
@@ -2349,7 +2349,7 @@
   ]
  },
  "r24-01c": {
-  "consigna": "Reescribí la oración con la conjunción indicada: completá con el verbo en subjuntivo.",
+  "consigna": "Reescribí la oración con la conjunción indicada: completá con el verbo en congiuntivo.",
   "interactive": true,
   "items": [
    {
@@ -2358,7 +2358,7 @@
     "stem": "È stanco, ma non ha fatto niente oggi. → Sebbene non ___ niente oggi, è stanco.",
     "answer": "abbia fatto",
     "alt": [],
-    "note": "Sebbene (aunque) rige subjuntivo."
+    "note": "Sebbene (aunque) rige congiuntivo."
    },
    {
     "label": "b",
@@ -2366,7 +2366,7 @@
     "stem": "Andremo in piscina se non fa freddo. → Andremo in piscina a condizione che non ___ freddo.",
     "answer": "faccia",
     "alt": [],
-    "note": "A condizione che rige subjuntivo."
+    "note": "A condizione che rige congiuntivo."
    },
    {
     "label": "c",
@@ -2374,7 +2374,7 @@
     "stem": "Possiamo stare a casa se tu non vuoi uscire. → Possiamo stare a casa a meno che tu non ___ uscire.",
     "answer": "voglia",
     "alt": [],
-    "note": "A meno che (non) rige subjuntivo; el non es expletivo."
+    "note": "A meno che (non) rige congiuntivo; el non es expletivo."
    },
    {
     "label": "d",
@@ -2382,7 +2382,7 @@
     "stem": "Lo farò ma nessuno lo saprà. → Lo farò senza che nessuno lo ___.",
     "answer": "sappia",
     "alt": [],
-    "note": "Senza che rige subjuntivo."
+    "note": "Senza che rige congiuntivo."
    },
    {
     "label": "e",
@@ -2390,7 +2390,7 @@
     "stem": "Ti lascio la chiave se ne hai bisogno. → Ti lascio la chiave nel caso che tu ne ___ bisogno.",
     "answer": "abbia",
     "alt": [],
-    "note": "Nel caso che rige subjuntivo."
+    "note": "Nel caso che rige congiuntivo."
    },
    {
     "label": "f",
@@ -2398,7 +2398,7 @@
     "stem": "Anche se è antipatico hai fatto male a parlargli in quel modo. → Nonostante ___ antipatico, hai fatto male a parlargli in quel modo.",
     "answer": "sia",
     "alt": [],
-    "note": "Nonostante rige subjuntivo."
+    "note": "Nonostante rige congiuntivo."
    },
    {
     "label": "g",
@@ -2406,7 +2406,7 @@
     "stem": "Se piove ti lascio l'ombrello. → Caso mai ___, ti lascio l'ombrello.",
     "answer": "piova",
     "alt": [],
-    "note": "Caso mai (por si acaso) rige subjuntivo."
+    "note": "Caso mai (por si acaso) rige congiuntivo."
    },
    {
     "label": "h",
@@ -2414,7 +2414,7 @@
     "stem": "Se tuo marito chiede il divorzio, tu cosa farai? → Mettiamo il caso che tuo marito ___ il divorzio: tu cosa farai?",
     "answer": "chieda",
     "alt": [],
-    "note": "Mettiamo il caso che (supongamos que) rige subjuntivo."
+    "note": "Mettiamo il caso che (supongamos que) rige congiuntivo."
    },
    {
     "label": "i",
@@ -2422,7 +2422,7 @@
     "stem": "Se la Commissione è d'accordo, si potrà discutere la crisi. → Ammesso che la Commissione ___ d'accordo, si potrà discutere la crisi.",
     "answer": "sia",
     "alt": [],
-    "note": "Ammesso che (suponiendo que) rige subjuntivo."
+    "note": "Ammesso che (suponiendo que) rige congiuntivo."
    }
   ]
  },
@@ -2438,7 +2438,7 @@
     "alt": [
      "Il fatto che il figlio non studiasse"
     ],
-    "note": "Il fatto che como sujeto rige subjuntivo."
+    "note": "Il fatto che como sujeto rige congiuntivo."
    },
    {
     "label": "b",
@@ -2458,7 +2458,7 @@
      "Per quello che ne so",
      "Che io sappia"
     ],
-    "note": "Per quanto ne so (por lo que sé) va con indicativo; che io sappia llevaría subjuntivo."
+    "note": "Per quanto ne so (por lo que sé) va con indicativo; che io sappia llevaría congiuntivo."
    },
    {
     "label": "d",
@@ -2478,12 +2478,12 @@
     "alt": [
      "Che non fossero disposte ad aiutare"
     ],
-    "note": "Una oración con che antepuesta como sujeto lleva subjuntivo."
+    "note": "Una oración con che antepuesta como sujeto lleva congiuntivo."
    }
   ]
  },
  "r24-03c": {
-  "consigna": "Traducí al italiano (superlativos y «el único que» llevan subjuntivo).",
+  "consigna": "Traducí al italiano (superlativos y «el único que» llevan congiuntivo).",
   "interactive": true,
   "items": [
    {
@@ -2494,7 +2494,7 @@
     "alt": [
      "È il luogo più bello che ci sia."
     ],
-    "note": "Después de un superlativo la relativa va en subjuntivo."
+    "note": "Después de un superlativo la relativa va en congiuntivo."
    },
    {
     "label": "b",
@@ -2518,12 +2518,12 @@
      "Era l'unico professore che mi avesse mai aiutato.",
      "Era l'unico professore che mi avesse mai aiutata."
     ],
-    "note": "L'unico che + subjuntivo; en el pasado, trapassato."
+    "note": "L'unico che + congiuntivo; en el pasado, trapassato."
    }
   ]
  },
  "r24-04c": {
-  "consigna": "Elegí el verbo adecuado (indicativo o subjuntivo).",
+  "consigna": "Elegí el verbo adecuado (indicativo o congiuntivo).",
   "interactive": true,
   "items": [
    {
@@ -2536,7 +2536,7 @@
     ],
     "answer": "sappia",
     "alt": [],
-    "note": "Antecedente negativo o inexistente: subjuntivo."
+    "note": "Antecedente negativo o inexistente: congiuntivo."
    },
    {
     "label": "b",
@@ -2572,7 +2572,7 @@
     ],
     "answer": "stia",
     "alt": [],
-    "note": "Se busca algo con una característica, todavía no identificado: subjuntivo."
+    "note": "Se busca algo con una característica, todavía no identificado: congiuntivo."
    },
    {
     "label": "e",
@@ -2582,12 +2582,12 @@
     "alt": [
      "si è"
     ],
-    "note": "En la interrogativa indirecta se prefiere el subjuntivo en registro cuidado; el indicativo también es correcto. *Rendersi conto* = darse cuenta; *darsi da fare* = moverse, ponerse las pilas."
+    "note": "En la interrogativa indirecta se prefiere el congiuntivo en registro cuidado; el indicativo también es correcto. *Rendersi conto* = darse cuenta; *darsi da fare* = moverse, ponerse las pilas."
    }
   ]
  },
  "r24-01d": {
-  "consigna": "¿Qué relación temporal hay entre el subjuntivo y el verbo principal? Elegí: futuro, simultáneo o pasado.",
+  "consigna": "¿Qué relación temporal hay entre el congiuntivo y el verbo principal? Elegí: futuro, simultáneo o pasado.",
   "interactive": true,
   "items": [
    {
@@ -2614,7 +2614,7 @@
     ],
     "answer": "futuro",
     "alt": [],
-    "note": "Imperfecto del subjuntivo para algo posterior al esperar."
+    "note": "Congiuntivo imperfetto para algo posterior al esperar."
    },
    {
     "label": "c",
@@ -2627,7 +2627,7 @@
     ],
     "answer": "simultáneo",
     "alt": [],
-    "note": "Presente del subjuntivo: acción simultánea."
+    "note": "Congiuntivo presente: acción simultánea."
    },
    {
     "label": "d",
@@ -2640,7 +2640,7 @@
     ],
     "answer": "simultáneo",
     "alt": [],
-    "note": "Imperfecto del subjuntivo simultáneo al pasado."
+    "note": "Congiuntivo imperfetto simultáneo al pasado."
    },
    {
     "label": "e",
@@ -2666,7 +2666,7 @@
     ],
     "answer": "pasado",
     "alt": [],
-    "note": "Trapassato del subjuntivo: anterior al pasado."
+    "note": "Congiuntivo trapassato: anterior al pasado."
    },
    {
     "label": "g",
@@ -2679,7 +2679,7 @@
     ],
     "answer": "futuro",
     "alt": [],
-    "note": "Imperfecto del subjuntivo tras condicional: acción hipotética posterior (domani)."
+    "note": "Congiuntivo imperfetto tras condizionale: acción hipotética posterior (domani)."
    },
    {
     "label": "h",
@@ -2692,12 +2692,12 @@
     ],
     "answer": "pasado",
     "alt": [],
-    "note": "Trapassato del subjuntivo: acción anterior."
+    "note": "Congiuntivo trapassato: acción anterior."
    }
   ]
  },
  "r24-02d": {
-  "consigna": "¿En qué oraciones el subjuntivo NO se refiere a un momento posterior al verbo principal?",
+  "consigna": "¿El congiuntivo de esta oración se refiere a un momento posterior al verbo principal?",
   "interactive": true,
   "items": [
    {
@@ -2758,7 +2758,7 @@
     ],
     "answer": "no se refiere al futuro",
     "alt": [],
-    "note": "Imperfecto del subjuntivo referido al pasado (ieri)."
+    "note": "Congiuntivo imperfetto referido al pasado (ieri)."
    },
    {
     "label": "f",
@@ -2786,7 +2786,7 @@
     "alt": [
      "cambiassi | avrebbe parlato"
     ],
-    "note": "En el discurso indirecto el futuro pasa a condicional compuesto y la condición a subjuntivo."
+    "note": "En el discurso indirecto el futuro pasa a condizionale passato y la condición a congiuntivo."
    },
    {
     "label": "b",
@@ -2796,7 +2796,7 @@
     "alt": [
      "avrebbero dato | risolvesse"
     ],
-    "note": "Futuro → condicional compuesto; chiunque + subjuntivo."
+    "note": "Futuro → condizionale passato; chiunque + congiuntivo."
    },
    {
     "label": "c",
@@ -2807,7 +2807,7 @@
      "avrebbero comprato | sarebbe sposato",
      "avrebbero comprato | sposasse"
     ],
-    "note": "Futuro → condicional compuesto; quando + trapassato del subjuntivo."
+    "note": "Futuro → condizionale passato; quando + congiuntivo trapassato."
    }
   ]
  },
@@ -2821,7 +2821,7 @@
     "stem": "«Dubito che il governo si dimetta domani.» → Fabio dubitava che il governo ___ il giorno dopo.",
     "answer": "si dimettesse",
     "alt": [],
-    "note": "Principal en pasado: el presente del subjuntivo pasa a imperfecto."
+    "note": "Principal en pasado: el congiuntivo presente pasa a imperfetto."
    },
    {
     "label": "b",
@@ -2831,7 +2831,7 @@
     "alt": [
      "poteva | procedesse"
     ],
-    "note": "Presente → imperfecto; el subjuntivo presente pasa a imperfecto (stesse)."
+    "note": "Presente → imperfetto; el congiuntivo presente pasa a imperfetto (stesse)."
    },
    {
     "label": "c",
@@ -2842,7 +2842,7 @@
      "sia | abbia",
      "fosse | abbia"
     ],
-    "note": "Ritenere che + subjuntivo; con principal pasada, imperfecto del subjuntivo."
+    "note": "Ritenere che + congiuntivo; con principal pasada, congiuntivo imperfetto."
    },
    {
     "label": "d",
@@ -2853,7 +2853,7 @@
      "avesse | poteva",
      "avesse | potesse"
     ],
-    "note": "Congiuntivo passato → trapassato; futuro → condicional compuesto."
+    "note": "Congiuntivo passato → trapassato; futuro → condizionale passato."
    },
    {
     "label": "e",
@@ -2865,12 +2865,12 @@
      "avrebbero risolto | avrebbero potuto",
      "avrebbero risolto | sarebbero potuti"
     ],
-    "note": "Futuro anterior → trapassato del subjuntivo; futuro → condicional compuesto."
+    "note": "Futuro anterior → congiuntivo trapassato; futuro → condizionale passato."
    }
   ]
  },
  "r24-06c": {
-  "consigna": "Suavizá órdenes y pedidos con la expresión dada: completá con el subjuntivo.",
+  "consigna": "Suavizá órdenes y pedidos con la expresión dada: completá con el congiuntivo.",
   "interactive": true,
   "items": [
    {
@@ -2879,7 +2879,7 @@
     "stem": "Vieni con noi. → Mi piacerebbe che tu ___ con noi.",
     "answer": "venissi",
     "alt": [],
-    "note": "Condicional + che → imperfecto del subjuntivo."
+    "note": "Condizionale + che → congiuntivo imperfetto."
    },
    {
     "label": "b",
@@ -2887,7 +2887,7 @@
     "stem": "Lo dica a loro, non a me. → Sarebbe meglio che Lei lo ___ a loro, non a me.",
     "answer": "dicesse",
     "alt": [],
-    "note": "Sarebbe meglio che + imperfecto del subjuntivo; dire → dicesse."
+    "note": "Sarebbe meglio che + congiuntivo imperfetto; dire → dicesse."
    },
    {
     "label": "c",
@@ -2895,7 +2895,7 @@
     "stem": "Fallo subito. → Mi farebbe piacere se tu lo ___ subito.",
     "answer": "facessi",
     "alt": [],
-    "note": "Se + imperfecto del subjuntivo; fare → facessi."
+    "note": "Se + congiuntivo imperfetto; fare → facessi."
    },
    {
     "label": "d",
@@ -2903,12 +2903,12 @@
     "stem": "Me lo spiegate? → Vorrei che voi me lo ___.",
     "answer": "spiegaste",
     "alt": [],
-    "note": "Vorrei che + imperfecto del subjuntivo."
+    "note": "Vorrei che + congiuntivo imperfetto."
    }
   ]
  },
  "r25-01": {
-  "consigna": "Traducí al italiano: la mitad de las oraciones no son reflexivas.",
+  "consigna": "Traducí al italiano. Ojo: no todas las oraciones del ejercicio son reflexivas.",
   "interactive": true,
   "items": [
    {
@@ -3217,7 +3217,7 @@
   ]
  },
  "r26-01": {
-  "consigna": "Pasá las oraciones a la voz pasiva con el auxiliar essere.",
+  "consigna": "Pasá la oración a la voz pasiva con el auxiliar essere.",
   "interactive": true,
   "items": [
    {
@@ -3245,7 +3245,7 @@
      "Gli esami a giugno erano sempre corretti dagli insegnanti.",
      "A giugno gli esami erano corretti sempre dagli insegnanti."
     ],
-    "note": "Imperfecto → erano + participio."
+    "note": "Imperfetto → erano + participio."
    },
    {
     "label": "d",
@@ -3255,7 +3255,7 @@
     "alt": [
      "Credete che un aumento dell'IVA sarebbe accettato dal pubblico?"
     ],
-    "note": "Condicional → sarebbe + participio."
+    "note": "Condizionale → sarebbe + participio."
    },
    {
     "label": "e",
@@ -3263,7 +3263,7 @@
     "stem": "Non è giusto che il governo critichi gli insegnanti.",
     "answer": "Non è giusto che gli insegnanti siano criticati dal governo.",
     "alt": [],
-    "note": "Subjuntivo presente → siano + participio."
+    "note": "Congiuntivo presente → siano + participio."
    },
    {
     "label": "f",
@@ -3300,7 +3300,7 @@
     "alt": [
      "Avrebbero dovuto essere aiutate di più."
     ],
-    "note": "Condicional compuesto de dovere + infinitivo pasivo."
+    "note": "Condizionale passato de dovere + infinitivo pasivo."
    },
    {
     "label": "c",
@@ -3311,7 +3311,7 @@
      "Secondo i pompieri la casa non poteva essere salvata.",
      "Secondo i pompieri, la casa non poteva essere salvata."
     ],
-    "note": "Imperfecto de potere + infinitivo pasivo."
+    "note": "Imperfetto de potere + infinitivo pasivo."
    }
   ]
  },
@@ -3373,7 +3373,7 @@
     "stem": "La cucina ___ rinnovata. (debería ser)",
     "answer": "andrebbe",
     "alt": [],
-    "note": "Condicional de *andare* + participio = «debería ser»: *andrebbe rinnovata*."
+    "note": "Condizionale de *andare* + participio = «debería ser»: *andrebbe rinnovata*."
    },
    {
     "label": "c",
@@ -4345,12 +4345,12 @@
      "Ha sentito gridare aiuto i vicini?",
      "Ha sentito i vicini che chiedevano aiuto?"
     ],
-    "note": "Acción en curso: sentire + persona + che + imperfecto."
+    "note": "Acción en curso: sentire + persona + che + imperfetto."
    }
   ]
  },
  "r27-05b": {
-  "consigna": "Traducí al italiano. Fijate en la diferencia entre acción completa (infinitivo) y acción en curso (che + imperfecto).",
+  "consigna": "Traducí al italiano. Fijate en la diferencia entre acción completa (infinitivo) y acción en curso (che + imperfetto).",
   "interactive": true,
   "items": [
    {
@@ -4371,7 +4371,7 @@
     "stem": "¿Ayer escuchaste a la abuela que cantaba en la cocina?",
     "answer": "Ieri hai sentito la nonna che cantava in cucina?",
     "alt": [],
-    "note": "Che + imperfecto: se percibe la acción en curso."
+    "note": "Che + imperfetto: se percibe la acción en curso."
    },
    {
     "label": "c",
@@ -4381,7 +4381,7 @@
     "alt": [
      "Ieri sera avete sentito i tifosi che tifavano per l'Inter?"
     ],
-    "note": "Che + imperfecto para la acción en curso."
+    "note": "Che + imperfetto para la acción en curso."
    },
    {
     "label": "d",
@@ -4474,7 +4474,7 @@
     "alt": [
      "Ho appena visto Mario aspettare fuori."
     ],
-    "note": "Pasado: che + imperfecto."
+    "note": "Pasado: che + imperfetto."
    },
    {
     "label": "d",
@@ -4484,7 +4484,7 @@
     "alt": [
      "Abbiamo visto Daniele aspettare l'autobus in piazza."
     ],
-    "note": "Che + imperfecto para la acción en curso."
+    "note": "Che + imperfetto para la acción en curso."
    },
    {
     "label": "e",
@@ -4494,7 +4494,7 @@
     "alt": [
      "Avevo visto Marta e Lucia che aspettavano il treno in stazione."
     ],
-    "note": "Pluscuamperfecto + che + imperfecto."
+    "note": "Trapassato prossimo + che + imperfetto."
    },
    {
     "label": "f",
@@ -4504,12 +4504,12 @@
     "alt": [
      "Vedevamo Piero e Gina che ci aspettavano nel bar."
     ],
-    "note": "Imperfecto + che + imperfecto."
+    "note": "Imperfetto + che + imperfetto."
    }
   ]
  },
  "r27-04d": {
-  "consigna": "Elegí la forma más natural o completá con stare a + infinitivo o stare + gerundio. En las dos oraciones para escribir valen las dos formas.",
+  "consigna": "Elegí la forma más natural o completá con stare a + infinitivo o stare + gerundio (si hay que escribir, valen las dos).",
   "interactive": true,
   "items": [
    {
@@ -4735,7 +4735,7 @@
   ]
  },
  "r28-02": {
-  "consigna": "Traducí al italiano usando un verbo distinto en cada oración.",
+  "consigna": "Traducí al italiano: fijate qué verbo y qué preposición pide cada construcción.",
   "interactive": true,
   "items": [
    {

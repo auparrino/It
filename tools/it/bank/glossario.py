@@ -169,3 +169,48 @@ GLOSS = {
     "scoppiò": ("estalló", "C1"), "nascose": ("escondió", "C1"),
     "reazione": ("reacción", "A2"), "seicentododicimilaquattrocentoventitré": ("612.423", "A2"),
 }
+
+# Formas con dos lecturas que el banco resolvía por la equivocada (el verbo
+# antes que el sustantivo, o una sola de las dos): *entro* salía «entrar»,
+# *battuta* «golpear», *fumo* «fumar», *presa* «agarrar».  El toque en la
+# palabra muestra las dos, la más común primero.  Cada lectura: (lema,
+# castellano, nivel, es_verbo).  Las demás formas con dos lecturas las junta
+# solo tools/it/lessico.py gloss_table.
+SENSI = {
+    "entro": [("entro", "dentro de, antes de (un plazo)", "B2", False),
+              ("entrare", "entrar (yo entro)", "A1", True)],
+    "battuta": [("battuta", "chiste, comentario gracioso; réplica", "B2", False),
+                ("battere", "golpear, vencer (golpeada, vencida)", "B1", True)],
+    "fumo": [("fumo", "humo", "A2", False),
+             ("fumare", "fumar (yo fumo)", "A1", True)],
+    "presa": [("prendere", "tomar, agarrar (tomada)", "A1", True),
+              ("presa", "enchufe; toma; agarre", "B1", False)],
+    "prese": [("prendere", "tomar, agarrar (tomó; tomadas)", "A1", True),
+              ("presa", "enchufes; tomas", "B1", False)],
+    "studio": [("studio", "estudio; consultorio (del médico, del abogado)", "A1", False),
+               ("studiare", "estudiar (yo estudio)", "A1", True)],
+    "sveglia": [("sveglia", "despertador; ¡despertate!", "A2", False),
+                ("svegliare", "despertar (despierta)", "A2", True)],
+    "sale": [("sale", "sal", "A1", False),
+             ("salire", "subir (sube)", "A1", True)],
+    "porta": [("porta", "puerta; arco (fútbol)", "A1", False),
+              ("portare", "llevar, traer (lleva)", "A1", True)],
+    "portata": [("portata", "plato (de una comida); alcance", "B1", False),
+                ("portare", "llevar, traer (llevada)", "A1", True)],
+    "caldo": [("caldo", "caliente; calor", "A1", False)],
+    "certo": [("certo", "¡claro!; cierto, seguro", "A1", False)],
+    "forza": [("forza", "fuerza; ¡vamos!, ¡dale!", "A2", False)],
+    "capo": [("capo", "jefe; cabeza", "A2", False)],
+    "letto": [("letto", "cama", "A1", False),
+              ("leggere", "leer (leído)", "A1", True)],
+    "legge": [("legge", "ley", "B1", False),
+              ("leggere", "leer (lee)", "A1", True)],
+    "piano": [("piano", "piso (de un edificio); plan; piano; despacio", "A1", False)],
+    "pesca": [("pesca", "durazno; pesca", "A1", False),
+              ("pescare", "pescar", "A2", True)],
+    "commessa": [("commessa", "vendedora (de un negocio)", "A2", False),
+                 ("commettere", "cometer (cometida)", "B1", True)],
+    "telefonino": [("telefonino", "celular", "A1", False)],
+    "stato": [("essere", "ser, estar (sido, estado)", "A1", True),
+              ("stato", "estado (el Estado; estado de ánimo)", "A1", False)],
+}

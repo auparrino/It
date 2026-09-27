@@ -312,7 +312,7 @@ LESSONS = {
 
 30: {
 "intro": "Congiuntivo imperfetto y trapassato: los necesitás después de un "
-         "verbo en pasado o en condicional, y para desear lo imposible. Son "
+         "verbo en pasado o en condizionale, y para desear lo imposible. Son "
          "sorprendentemente regulares.",
 "parts": [
  {"h": "Congiuntivo imperfetto: forma e irregulares", "blocks": [0, 1],
@@ -367,10 +367,10 @@ LESSONS = {
          "*ero → fossi*.",
   "more": ["También es la forma obligatoria en el *se* de la hipótesis "
            "imposible del pasado (*se l'avessi saputo...*). La frase "
-           "completa, con su condicional, la armás en la semana 33."]},
+           "completa, con su condizionale, la armás en la semana 33."]},
 
  {"h": "Cuándo aparecen",
-  "r": "Principal **en pasado o en condicional**: **imperfetto** si es "
+  "r": "Principal **en pasado o en condizionale**: **imperfetto** si es "
        "simultáneo, **trapassato** si es anterior.",
   "ex": [["Credevo che *venisse*.", "Creía que venía."],
          ["Credevo che *fosse venuto*.", "Creía que había venido."],
@@ -380,11 +380,11 @@ LESSONS = {
                      ["presente", "congiuntivo passato", "Credo che sia venuto."],
                      ["pasado", "congiuntivo imperfetto", "Credevo che venisse."],
                      ["pasado", "congiuntivo trapassato", "Credevo che fosse venuto."],
-                     ["condicional", "congiuntivo imperfetto", "Vorrei che venisse."]]},
-  "tip": "*Vorrei che tu venissi* = «querría que vinieras»: condicional "
+                     ["condizionale", "congiuntivo imperfetto", "Vorrei che venisse."]]},
+  "tip": "*Vorrei che tu venissi* = «querría que vinieras»: condizionale "
          "arriba, imperfetto abajo, igual que en castellano. Este caso te "
          "sale gratis.",
-  "more": ["Lo posterior también va en imperfetto después de un condicional "
+  "more": ["Lo posterior también va en imperfetto después de un condizionale "
            "o de un verbo de voluntad: *volevo che venisse* (quería que "
            "viniera). Con verbos de opinión, en cambio, lo posterior va en "
            "condizionale passato: lo ves en la semana 32."]},
@@ -436,7 +436,7 @@ LESSONS = {
 
  {"h": "Uso 2: el futuro en el pasado",
   "r": "«Dijo que vendría» = *ha detto che sarebbe venuto*. Futuro visto "
-       "desde el pasado: condicional **compuesto**, nunca simple.",
+       "desde el pasado: condizionale **passato**, nunca presente.",
   "ex": [["Mi ha promesso che *sarebbe tornato*.", "Me prometió que volvería."],
          ["Non sapevo che *avrebbe portato* gli amici.", "No sabía que iba a traer a los amigos."],
          ["Era sicuro che *avremmo vinto*.", "Estaba seguro de que íbamos a ganar."],
@@ -468,8 +468,8 @@ LESSONS = {
   "table": {"head": ["Principal", "Anterior", "Simultáneo", "Posterior"],
             "rows": [["presente / futuro", "congiuntivo passato", "congiuntivo presente", "congiuntivo presente"],
                      ["pasado", "congiuntivo trapassato", "congiuntivo imperfetto", "condizionale passato"],
-                     ["condicional (vorrei, sarebbe meglio)", "congiuntivo trapassato", "congiuntivo imperfetto", "congiuntivo imperfetto"]]},
-  "more": ["Con el principal en condicional, lo simultáneo y lo posterior "
+                     ["condizionale (vorrei, sarebbe meglio)", "congiuntivo trapassato", "congiuntivo imperfetto", "congiuntivo imperfetto"]]},
+  "more": ["Con el principal en condizionale, lo simultáneo y lo posterior "
            "van en imperfetto: *vorrei che tu venissi domani* (me gustaría "
            "que vinieras mañana), *sarebbe meglio che lo dicesse lui* (sería "
            "mejor que lo dijera él). Lo anterior, en trapassato: *non si "
@@ -477,7 +477,7 @@ LESSONS = {
 
  {"h": "Lo posterior en el pasado",
   "r": "«Creía que vendría» = *credevo che sarebbe venuto*: el futuro visto "
-       "desde el pasado va en condicional **compuesto**.",
+       "desde el pasado va en condizionale **passato**.",
   "ex": [["Ha detto che *sarebbe arrivato* alle otto.", "Dijo que llegaría a las ocho."],
          ["Sapevo che *avresti capito*.", "Sabía que ibas a entender."],
          ["Pensavo che *sarebbe stato* più facile.", "Pensaba que iba a ser más fácil."]],
@@ -526,7 +526,7 @@ LESSONS = {
 "blocks": [
  {"h": "Los tres tipos",
   "r": "**I** real: indicativo. **II** posible o irreal: congiuntivo "
-       "imperfetto + condicional. **III** imposible: congiuntivo trapassato "
+       "imperfetto + condizionale. **III** imposible: congiuntivo trapassato "
        "+ condizionale passato.",
   "ex": [["Se *ho* tempo, ti *chiamo*.", "Si tengo tiempo, te llamo."],
          ["Se *avessi* tempo, ti *chiamerei*.", "Si tuviera tiempo, te llamaría."],
@@ -539,9 +539,9 @@ LESSONS = {
            "algo improbable o contrario a los hechos de hoy. El III, de algo "
            "que ya no puede pasar porque el momento pasó."]},
 
- {"h": "Nunca condicional después de se",
-  "r": "Detrás de *se* **nunca** va condicional: congiuntivo con el *se*, "
-       "condicional en la otra parte.",
+ {"h": "Nunca condizionale después de se",
+  "r": "Detrás de *se* **nunca** va condizionale: congiuntivo con el *se*, "
+       "condizionale en la otra parte.",
   "ex": [["Se *fossi* ricco, *comprerei* una casa al mare.", "Si fuera rico, me compraría una casa en la playa."],
          ["Se *potessi*, *verrei* subito.", "Si pudiera, iría enseguida."],
          ["Se *fosse venuto*, l'*avremmo visto*.", "Si hubiera venido, lo habríamos visto."]],
@@ -877,7 +877,7 @@ LESSONS = {
 
 38: {
 "intro": "Vas a pasar cualquier frase al discurso indirecto, integrando "
-         "concordancia de tiempos, condicional compuesto, congiuntivo y "
+         "concordancia de tiempos, condizionale passato, congiuntivo y "
          "pronombres.",
 "blocks": [
  {"h": "Los desplazamientos de tiempo",
@@ -928,7 +928,7 @@ LESSONS = {
          ["«Vieni?» → Mi chiese *se venissi*.", "Me preguntó si iba."],
          ["Non so *se sia* vero.", "No sé si es cierto."]],
   "warn": "Este *se* no es el hipotético: es «si» de pregunta y admite "
-          "condicional. *Mi chiedo se sarebbe d'accordo* es perfectamente "
+          "condizionale. *Mi chiedo se sarebbe d'accordo* es perfectamente "
           "correcto.",
   "tip": "En el habla también se oye el indicativo: *mi chiese dove "
          "andavo*. Vale; el congiuntivo (*dove andassi*) es el registro "
@@ -974,11 +974,11 @@ LESSONS = {
   "table": {"head": ["Tiempo", "Forma", "Cuándo"],
             "rows": [["presente", "che io parli / prenda", "principal presente; a la vez o después"],
                      ["passato", "che io abbia parlato / sia andato", "principal presente; antes"],
-                     ["imperfetto", "che io parlassi / prendessi", "principal pasado o condicional; a la vez"],
+                     ["imperfetto", "che io parlassi / prendessi", "principal pasado o condizionale; a la vez"],
                      ["trapassato", "che io avessi parlato / fossi andato", "principal pasado; antes"]]}},
 
  {"h": "El período hipotético",
-  "r": "Tres tipos: real, posible, imposible. **Nunca** condicional después "
+  "r": "Tres tipos: real, posible, imposible. **Nunca** condizionale después "
        "de *se*.",
   "ex": [["Se *ho* tempo, ti *chiamo*.", "Si tengo tiempo, te llamo."],
          ["Se *avessi* tempo, ti *chiamerei*.", "Si tuviera tiempo, te llamaría."],

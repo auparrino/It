@@ -248,31 +248,24 @@ LESSONS = {
            "*quello lì* (este de acá, ese de allá). «Eso» abstracto: *questo* "
            "o *ciò* (más formal); *quello che* = lo que."]},
 
- {"h": "Posesivos: siempre con artículo",
-  "r": "El posesivo lleva **artículo** y concuerda con lo poseído, no con el "
-       "dueño: *la sua macchina*. *loro* no cambia.",
-  "table": {"head": ["", "m.sg", "f.sg", "m.pl", "f.pl"],
-            "rows": [["mio (mi, el mío)", "il mio", "la mia", "i miei", "le mie"],
-                     ["tuo (tu, el tuyo)", "il tuo", "la tua", "i tuoi", "le tue"],
-                     ["suo (su, el suyo: de él, de ella, de usted)", "il suo", "la sua", "i suoi", "le sue"],
-                     ["nostro (nuestro)", "il nostro", "la nostra", "i nostri", "le nostre"],
-                     ["vostro (su, de ustedes)", "il vostro", "la vostra", "i vostri", "le vostre"],
-                     ["loro (su, de ellos)", "il loro", "la loro", "i loro", "le loro"]]},
-  "ex": [["Anna e *il suo* cane.", "Ana y su perro."],
-         ["Marco e *la sua* macchina.", "Marco y su auto."],
-         ["È *la loro* casa.", "Es la casa de ellos."],
-         ["Dove sono *le mie* chiavi?", "¿Dónde están mis llaves?"]],
+ {"h": "Posesivos: ya los viste en la semana 3",
+  "r": "Repaso de la semana 3: el posesivo lleva **artículo** y concuerda con "
+       "lo poseído, no con el dueño. *loro* no cambia.",
+  "ex": [["Marco e *la sua* macchina.", "Marco y su auto (manda *macchina*)."],
+         ["È *la loro* casa.", "Es la casa de ellos."]],
   "warn": "*suo* no mira al dueño: *la sua macchina* es el auto de él o de "
           "ella. Manda *macchina*, que es femenino.",
-  "more": ["La misma forma sirve sola, sin sustantivo: *la tua macchina e la "
-           "mia* (la tuya y la mía). Después de *essere* el artículo suele "
-           "caer: *è mio* (es mío). Con número, indefinido o demostrativo, "
-           "sin artículo: *tre suoi amici* (tres amigos suyos), *quei tuoi "
-           "amici*. Para usted, con mayúscula: *il Suo cappotto*. «Propio» es "
-           "*proprio*: *la propria opinione*.",
+  "more": ["Lo nuevo: la misma forma sirve sola, sin sustantivo: *la tua "
+           "macchina e la mia* (la tuya y la mía). Después de *essere* el "
+           "artículo suele caer: *è mio* (es mío). Con número, indefinido o "
+           "demostrativo, sin artículo: *tre suoi amici* (tres amigos suyos), "
+           "*quei tuoi amici*. Para usted, con mayúscula: *il Suo cappotto*. "
+           "«Propio» es *proprio*: *la propria opinione*.",
            "Con partes del cuerpo y ropa no va el posesivo sino el artículo: "
            "*mi fa male il piede* (me duele el pie), *prendi l'ombrello* "
-           "(llevá tu paraguas)."]},
+           "(llevá tu paraguas)."],
+  "qq": [{"prompt": "Traducí: «sus llaves» (de Anna)", "answer": "le sue chiavi", "options": ["le sue chiavi", "le loro chiavi", "i suoi chiavi"]},
+         {"prompt": "Traducí: «es mío» (el libro)", "answer": "è mio", "options": ["è mio", "è il me", "è di me"]}]},
 
  {"h": "Familia: sin artículo",
   "q": [{"prompt": "¿Cuál está bien? «Mi padre es médico.»", "answer": "Mio padre è medico.", "options": ["Mio padre è medico.", "Il mio padre è medico.", "Lo mio padre è medico."]}, {"prompt": "¿Cuál está bien? «El padre de ellos es alto.»", "answer": "Il loro padre è alto.", "options": ["Il loro padre è alto.", "Loro padre è alto.", "Suo padre è alto."]}],
@@ -315,15 +308,15 @@ LESSONS = {
            "da nessuna parte*. Solos, sin sustantivo, *alcuni* y *molti* "
            "son pronombres: *alcuni non lavorano*, *molti pensano di sì*."]},
 
- {"h": "molto: adjetivo o adverbio",
-  "r": "Con sustantivo **concuerda**: *molti libri*. Con adjetivo, adverbio "
-       "o verbo **no cambia**: *molto stanchi*. Igual *poco, tanto, troppo*.",
-  "ex": [["Ho *molti* amici.", "Tengo muchos amigos."],
-         ["C'è *poca* gente.", "Hay poca gente."],
-         ["Sono *molto* contenta.", "Estoy muy contenta."],
+ {"h": "molto, poco, tanto, troppo: ya lo viste en la semana 4",
+  "r": "Como *molto* (semana 4): con sustantivo **concuerda**; con adjetivo, "
+       "adverbio o verbo **no cambia**. Igual *poco, tanto, troppo*.",
+  "ex": [["C'è *poca* gente.", "Hay poca gente."],
          ["Lavorano *troppo*.", "Trabajan demasiado."]],
   "warn": "*Sono molto stanchi*, nunca «molti stanchi»: delante de un "
-          "adjetivo es adverbio y no cambia, como «muy»."},
+          "adjetivo es adverbio y no cambia, como «muy».",
+  "qq": [{"prompt": "Completá", "stem": "In città ci sono ___ turisti.", "answer": "troppi", "options": ["troppi", "troppo", "troppe"]},
+         {"prompt": "Completá", "stem": "Le lezioni sono ___ lunghe.", "answer": "troppo", "options": ["troppo", "troppe", "troppi"]}]},
 ]},
 
 18: {
@@ -447,7 +440,7 @@ LESSONS = {
 
  {"h": "Raíces irregulares",
   "r": "Pocos verbos cambian la raíz; las terminaciones son las de siempre. "
-       "Esa misma raíz vuelve en el condicional.",
+       "Esa misma raíz vuelve en el condizionale.",
   "table": {"head": ["Verbo", "Raíz", "Verbo", "Raíz"],
             "rows": [["essere", "sar-", "avere", "avr-"],
                      ["andare", "andr-", "dovere", "dovr-"],
@@ -498,7 +491,7 @@ LESSONS = {
 ]},
 
 20: {
-"intro": "El condicional usa la raíz del futuro: si dominás la semana "
+"intro": "El condizionale usa la raíz del futuro: si dominás la semana "
          "pasada, lo tenés casi hecho. Sirve para pedir con cortesía, "
          "aconsejar y dar noticias no confirmadas.",
 "blocks": [
@@ -534,7 +527,7 @@ LESSONS = {
            "domanda* (tendría una pregunta)."]},
 
  {"h": "La noticia no confirmada",
-  "r": "Diarios y noticieros usan el condicional para datos **no "
+  "r": "Diarios y noticieros usan el condizionale para datos **no "
        "verificados**: leelo como «parece que».",
   "ex": [["Secondo fonti vicine al governo, il ministro si *dimetterebbe*.", "Según fuentes cercanas al gobierno, el ministro renunciaría."],
          ["Ci *sarebbero* venti feriti.", "Habría veinte heridos."],
@@ -542,8 +535,8 @@ LESSONS = {
   "tip": "Aparece en toda comprensión lectora: es un dato que el periodista "
          "no garantiza."},
 
- {"h": "Adelanto: nunca condicional tras se",
-  "r": "Detrás de *se* hipotético **nunca** va condicional: *Se avessi "
+ {"h": "Adelanto: nunca condizionale tras se",
+  "r": "Detrás de *se* hipotético **nunca** va condizionale: *Se avessi "
        "tempo, verrei*, jamás «se avrei tempo».",
   "ex": [["Se *avessi* tempo, *verrei*.", "Si tuviera tiempo, vendría."],
          ["Se *potessi*, ti *aiuterei*.", "Si pudiera, te ayudaría."]],
@@ -1031,8 +1024,8 @@ LESSONS = {
            "los pronominales (*mi sono accorto*) y los impersonales (*è "
            "successo*)."]},
 
- {"h": "Raíces de futuro y condicional",
-  "r": "La raíz irregular del futuro es la misma del condicional: *sarò / "
+ {"h": "Raíces de futuro y condizionale",
+  "r": "La raíz irregular del futuro es la misma del condizionale: *sarò / "
        "sarei*, *vorrò / vorrei*.",
   "table": {"head": ["Verbo", "Raíz", "Verbo", "Raíz"],
             "rows": [["essere", "sar-", "avere", "avr-"],
@@ -1076,7 +1069,7 @@ LESSONS = {
          ["Domani *parleremo* con lui.", "Mañana vamos a hablar con él."],
          ["*Parleremmo* volentieri con lui.", "Hablaríamos con gusto con él."],
          ["Quando *arriverai*, ti chiamerò.", "Cuando llegues, te llamo."]],
-  "tip": "Y detrás de *se* hipotético, nunca condicional: «se avrei» no "
+  "tip": "Y detrás de *se* hipotético, nunca condizionale: «se avrei» no "
          "existe."},
 
  {"h": "Repaso: trampas de la frase",
