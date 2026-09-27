@@ -509,7 +509,7 @@ LESSONS = {
   "table": {"head": ["Sufijo", "Valor", "Ejemplos"],
             "rows": [["-ino / -ina", "pequeño, afectuoso", "gattino (gatito), sorellina (hermanita)"],
                      ["-etto / -etta", "pequeño, simpático", "casetta (casita), poveretto (pobrecito)"],
-                     ["-ello / -ella", "pequeño, a veces despectivo", "alberello (arbolito), cattivello (medio malito)"],
+                     ["-ello / -ella", "pequeño, a veces despectivo", "alberello (arbolito), cattivello (pícaro)"],
                      ["-one / -ona", "grande, aumentativo", "librone (librazo), pigrone (vagoneta)"],
                      ["-accio / -accia", "feo, malo, despectivo", "tempaccio (tiempo horrible), parolaccia (mala palabra)"],
                      ["-uccio / -uccia", "cariñoso, un poco menor", "caruccio (lindito), Mariuccia (Mariíta)"],
@@ -577,6 +577,7 @@ LESSONS = {
                      ["un centinaio / centinaia", "un centenar / centenares", "centinaia di libri"],
                      ["un migliaio / migliaia", "un millar / miles", "migliaia di euro"],
                      ["un paio / paia", "un par / pares", "un paio di scarpe"],
+                     ["una dozzina", "una docena", "una dozzina di uova"],
                      ["circa / all'incirca", "aproximadamente", "circa dieci"],
                      ["più o meno", "más o menos", "più o meno alle tre"]]},
   "warn": "No te olvides el *di*: *una decina di amici*. Y el plural es "
@@ -597,7 +598,9 @@ LESSONS = {
          ["*Il 20%* degli italiani vive qui.", "El 20% de los italianos vive acá."],
          ["Ha preso *l'8%* dei voti.", "Sacó el 8% de los votos."]],
   "warn": "Nunca sin artículo: «30% degli studenti» es de titular de diario. "
-          "En una frase normal, *il 30%*."},
+          "En una frase normal, *il 30%*.",
+  "tip": "Se lee *per cento*, en dos palabras: *il 25%* = *il venticinque "
+         "per cento*."},
 
  {"h": "Pesos, medidas y compra",
   "r": "En el mostrador se pide por *etto* (100 g). El precio por unidad va "
@@ -619,6 +622,26 @@ LESSONS = {
          ["Costa *1.500* euro.", "Cuesta mil quinientos euros."]],
   "warn": "Ojo con *per*: en una cuenta es «por» (×), no «para»: *tre per "
           "tre fa nove*."},
+
+ {"h": "Siglos, décadas y años",
+  "r": "Del XIII al XX, el siglo se nombra por sus cientos: *il Cinquecento* "
+       "= los 1500, el siglo XVI. Los años llevan artículo: *nel 1861*.",
+  "ex": [["Michelangelo dipinse la Sistina *nel Cinquecento*.", "Miguel Ángel pintó la Sixtina en el siglo XVI."],
+         ["*Il Novecento* è *il ventesimo secolo*.", "El Novecientos es el siglo XX."],
+         ["È nato *nel* 1990.", "Nació en 1990."],
+         ["Musica degli *anni Sessanta*.", "Música de los años sesenta."]],
+  "table": {"head": ["Italiano", "Significa", "Ejemplo"],
+            "rows": [["il Trecento", "el siglo XIV (los 1300)", "Dante scrisse nel Trecento."],
+                     ["il Quattrocento", "el siglo XV (los 1400)", "Firenze nel Quattrocento."],
+                     ["il Cinquecento", "el siglo XVI (los 1500)", "Pittori del Cinquecento."],
+                     ["il Settecento", "el siglo XVIII (los 1700)", "Una chiesa del Settecento."],
+                     ["il Novecento", "el siglo XX (los 1900)", "La letteratura del Novecento."],
+                     ["il ventesimo secolo", "el siglo XX (con ordinal)", "Nel ventesimo secolo."],
+                     ["gli anni Sessanta", "los años sesenta", "Negli anni Sessanta."]]},
+  "warn": "*il Novecento* no es el siglo IX sino el XX: cuenta los cientos "
+          "(1900). Para el ordinal, *il ventesimo secolo*.",
+  "qq": [{"prompt": "¿Qué es «il Settecento»?", "answer": "el siglo XVIII", "options": ["el siglo XVIII", "el siglo VII", "el siglo XVII"]},
+         {"prompt": "Completá", "stem": "È nato ___ 1985.", "answer": "nel", "options": ["nel", "in", "il"]}]},
 ]},
 
 48: {
@@ -633,7 +656,10 @@ LESSONS = {
          ["*Di soldi* non *ne* ho.", "Plata no tengo."],
          ["*Questo film l'*ho già visto.", "Esta película ya la vi."]],
   "tip": "El rioplatense hace lo mismo («el pan lo compro yo»): te sale "
-         "gratis. Usala, sin ella el italiano suena a libro de texto."},
+         "gratis. Usala, sin ella el italiano suena a libro de texto.",
+  "warn": "El objeto directo va sin *a*: *Marco lo conosco bene* («a Marco "
+          "lo conozco»). Y el participio concuerda con el pronombre: *le "
+          "chiavi, dove le hai messe?*"},
 
  {"h": "Dislocación a la derecha",
   "r": "El pronombre va primero y el elemento se agrega **al final**, como "
@@ -650,7 +676,10 @@ LESSONS = {
          ["*Sono* io *che* ho sbagliato.", "Soy yo el que se equivocó."],
          ["*È stato* Marco *a* telefonare.", "Fue Marco el que llamó."]],
   "tip": "Variante muy común con sujeto: *è stato Marco a telefonare* "
-         "(*a* + infinitivo). Evita el *che* y suena muy natural."},
+         "(*a* + infinitivo). Evita el *che* y suena muy natural.",
+  "more": ["Pariente cercano: *c'è* + persona + *che*, para contar una "
+           "novedad: *c'è tuo fratello che ti cerca* (te está buscando tu "
+           "hermano), *c'è un signore che vuole parlarti*."]},
 
  {"h": "Sujeto después del verbo",
   "r": "Con intransitivos y verbos de acontecimiento, el sujeto nuevo va "
@@ -685,15 +714,17 @@ LESSONS = {
          ["*Tuttavia*, il problema resta.", "Sin embargo, el problema sigue."],
          ["*Pertanto* la proposta va respinta.", "Por lo tanto, la propuesta debe rechazarse."],
          ["*In definitiva*, la riforma è necessaria.", "En definitiva, la reforma es necesaria."]],
-  "table": {"head": ["Función", "Formas"],
-            "rows": [["añadir", "inoltre, per di più, altresì, non solo... ma anche"],
-                     ["oponer", "tuttavia, ciononostante, per contro, d'altro canto, viceversa"],
-                     ["conceder", "certo... tuttavia, se è vero che... è altrettanto vero che"],
-                     ["causa", "in quanto, poiché, dal momento che, in virtù di, a causa di"],
-                     ["consecuencia", "di conseguenza, pertanto, ne consegue che, sicché"],
-                     ["ejemplificar", "ad esempio, in particolare, segnatamente, basti pensare a"],
-                     ["reformular", "ovvero, vale a dire, in altri termini, per meglio dire"],
-                     ["concluir", "in conclusione, in definitiva, tutto sommato, in ultima analisi"]]},
+  "table": {"head": ["Función", "Formas", "Ejemplo"],
+            "rows": [["añadir", "inoltre (además), per di più (encima), altresì (asimismo), non solo... ma anche", "Inoltre, i costi sono aumentati."],
+                     ["sumar dos", "sia... sia / sia... che (tanto... como), come pure (y también), né... né (ni... ni)", "Parla sia inglese sia francese."],
+                     ["oponer", "tuttavia (sin embargo), ciononostante (pese a eso), per contro / d'altro canto (en cambio, por otro lado)", "Tuttavia, il problema resta."],
+                     ["conceder", "certo... tuttavia (es cierto que... pero), se è vero che... è altrettanto vero che", "Certo, è caro; tuttavia conviene."],
+                     ["excluir", "tranne, salvo (excepto), a parte (aparte de)", "Mangio tutto tranne il pesce."],
+                     ["causa", "in quanto (ya que), poiché, dal momento che (dado que), a causa di (a causa de)", "Non è venuto in quanto era malato."],
+                     ["consecuencia", "di conseguenza (en consecuencia), pertanto (por lo tanto), ne consegue che (se deduce que), sicché (así que)", "Pertanto la proposta va respinta."],
+                     ["ejemplificar", "ad esempio (por ejemplo), in particolare, segnatamente (en especial), basti pensare a (basta pensar en)", "Basti pensare a Roma."],
+                     ["reformular", "ovvero, vale a dire, in altri termini (o sea, es decir, en otras palabras)", "Il 2%, ovvero pochissimo."],
+                     ["concluir", "in conclusione, in definitiva (en definitiva), tutto sommato (a fin de cuentas), in ultima analisi", "In definitiva, è necessaria."]]},
   "warn": "No repitas *ma... ma... ma*: alterná *tuttavia*, *per contro*, "
           "*d'altro canto*. La variedad es lo que se nota."},
 
@@ -704,21 +735,30 @@ LESSONS = {
          ["*Qualora ci fossero* problemi, avvisateci.", "En caso de que hubiera problemas, avísennos."],
          ["Te lo ripeto *affinché* tu lo *capisca*.", "Te lo repito para que lo entiendas."],
          ["Partiamo *prima che* *faccia* buio.", "Salgamos antes de que oscurezca."]],
+  "table": {"head": ["Conector", "Significa", "Ejemplo"],
+            "rows": [["benché, sebbene, nonostante", "aunque", "Benché sia tardi, resto."],
+                     ["qualora, nel caso in cui", "en caso de que", "Qualora piovesse, restiamo."],
+                     ["affinché", "para que", "Lo dico affinché tu sappia."],
+                     ["a condizione che, purché", "con la condición de que", "Vengo a condizione che tu venga."],
+                     ["prima che", "antes de que", "Esco prima che piova."],
+                     ["senza che", "sin que", "È uscito senza che lo vedessi."],
+                     ["a meno che non", "a menos que", "Vengo, a meno che non piova."],
+                     ["mettiamo che, supponiamo che", "supongamos que", "Mettiamo che tu vinca."]]},
   "warn": "El conector elegante con indicativo detrás anula el efecto: "
           "«benché è tardi» es un error."},
 
  {"h": "Las fórmulas impersonales",
   "r": "Distancian al autor y elevan el texto. **Una por párrafo** alcanza.",
-  "table": {"head": ["Fórmula", "Castellano"],
-            "rows": [["va detto che", "hay que decir que"],
-                     ["va rilevato che", "cabe señalar que"],
-                     ["si tratta di", "se trata de"],
-                     ["è opportuno", "es oportuno, conviene"],
-                     ["occorre notare", "cabe notar"],
-                     ["risulta evidente", "resulta evidente"],
-                     ["è lecito supporre", "es lícito suponer"],
-                     ["non si può prescindere da", "no se puede prescindir de"],
-                     ["giova ricordare", "conviene recordar"]]},
+  "table": {"head": ["Fórmula", "Significa", "Ejemplo"],
+            "rows": [["va detto che", "hay que decir que", "Va detto che il tema è complesso."],
+                     ["va rilevato che", "cabe señalar que", "Va rilevato che i dati mancano."],
+                     ["si tratta di", "se trata de", "Si tratta di una scelta difficile."],
+                     ["è opportuno", "es oportuno, conviene", "È opportuno intervenire."],
+                     ["occorre notare", "cabe notar", "Occorre notare un aumento."],
+                     ["risulta evidente", "resulta evidente", "Risulta evidente che serve tempo."],
+                     ["è lecito supporre", "es lícito suponer", "È lecito supporre che cresca."],
+                     ["non si può prescindere da", "no se puede prescindir de", "Non si può prescindere dai costi."],
+                     ["giova ricordare", "conviene recordar", "Giova ricordare che è gratis."]]},
   "ex": [["*Va detto che* il problema è complesso.", "Hay que decir que el problema es complejo."],
          ["*Si tratta di* una questione delicata.", "Se trata de un asunto delicado."],
          ["*Occorre precisare* che non tutti concordano.", "Cabe precisar que no todos coinciden."]],
@@ -727,8 +767,9 @@ LESSONS = {
           "primera persona."},
 
  {"h": "Cohesión: no repetir",
-  "r": "No repitas el sustantivo: usá **pronombres**, sinónimos, "
-       "hiperónimos (*la questione*) o demostrativos (*ciò, tale*).",
+  "r": "No repitas el sustantivo: usá **pronombres**, sinónimos, una "
+       "palabra más general (*la questione*, *il fenomeno*) o demostrativos "
+       "(*ciò, tale*).",
   "ex": [["Il governo ha approvato la riforma; *tale provvedimento* entrerà in vigore a gennaio.", "El gobierno aprobó la reforma; dicha medida entrará en vigor en enero."],
          ["*Ciò* comporta un aumento dei costi.", "Ello implica un aumento de costos."],
          ["L'inquinamento cresce: *il fenomeno* preoccupa gli esperti.", "La contaminación crece: el fenómeno preocupa a los expertos."]],
@@ -773,6 +814,7 @@ LESSONS = {
                      ["aceto", "vinagre", "aceite (= olio)"],
                      ["guardare", "mirar", "guardar (= tenere, conservare)"],
                      ["prima", "antes", "prima (= cugina)"],
+                     ["pronto", "listo; ¿hola? (al teléfono)", "pronto, enseguida (= presto)"],
                      ["largo", "ancho", "largo (= lungo)"],
                      ["esito", "resultado", "éxito (= successo)"],
                      ["imbarazzata", "avergonzada", "embarazada (= incinta)"],
@@ -833,14 +875,14 @@ LESSONS = {
          ["Non è *mica* facile.", "No es nada fácil."],
          ["In ufficio c'è *un casino*.", "En la oficina hay un lío bárbaro."],
          ["La situazione è *notevolmente* peggiorata.", "La situación empeoró notablemente."]],
-  "table": {"head": ["Coloquial", "Neutro", "Formal"],
-            "rows": [["un sacco di", "molto", "notevolmente"],
-                     ["roba", "cose", "elementi, aspetti"],
-                     ["mica", "non... affatto", "in alcun modo"],
-                     ["beccare", "prendere", "cogliere"],
-                     ["fregare", "ingannare", "raggirare"],
-                     ["un casino", "molto disordine", "notevole confusione"],
-                     ["dai!", "su!", "la prego"]]},
+  "table": {"head": ["Coloquial", "Neutro", "Formal", "Significa"],
+            "rows": [["un sacco di", "molto", "notevolmente", "mucho, un montón"],
+                     ["roba", "cose", "elementi, aspetti", "cosas"],
+                     ["mica", "non... affatto", "in alcun modo", "para nada"],
+                     ["beccare", "prendere", "cogliere", "agarrar, pescar"],
+                     ["fregare", "ingannare", "raggirare", "engañar, embromar"],
+                     ["un casino", "molto disordine", "notevole confusione", "un lío"],
+                     ["dai!", "su!", "la prego", "¡dale!, ¡vamos!"]]},
   "tip": "Reconocer que *un casino* es coloquial y *notevole confusione* es "
          "de informe es exactamente lo que evalúa el examen oral."},
 
@@ -852,8 +894,28 @@ LESSONS = {
          ["una giacca *di* lana", "una campera de lana"],
          ["una gonna *a* quadri", "una pollera a cuadros"],
          ["Torno *fra* un'ora.", "Vuelvo dentro de una hora."]],
+  "table": {"head": ["Preposición", "Significa", "Ejemplo"],
+            "rows": [["da (origen, por dónde)", "de, desde; por", "Siamo entrati *dalla* finestra."],
+                     ["da (para qué sirve)", "para, de", "occhiali *da* sole, qualcosa *da* bere"],
+                     ["da (rasgo)", "de, con", "la ragazza *dagli* occhi verdi"],
+                     ["da (etapa de la vida)", "de, cuando era", "*Da* studente viaggiavo."],
+                     ["di (material, contenido)", "de", "un anello *d'*oro, una tazza *di* tè"],
+                     ["a (dibujo, forma)", "a", "una camicia *a* quadri"],
+                     ["su (tema)", "sobre", "un film *sulla* guerra"],
+                     ["su (medio, vehículo)", "en", "*sul* giornale, *sull'*autobus"],
+                     ["su (cantidad aproximada)", "alrededor de", "Costa *sui* cento euro."],
+                     ["fra / tra (tiempo, distancia)", "dentro de; a", "*fra* un'ora, *fra* due chilometri"],
+                     ["fra / tra (lugar, grupo)", "entre", "*fra* Genova e Livorno"],
+                     ["per (lugar sin rumbo)", "por, en", "*per* strada, *per* terra"]]},
   "warn": "*fra* o *tra* + tiempo = dentro de (*torno fra un'ora*). *Vado da "
-          "Marco* = voy a lo de Marco; *vado a Roma*, *vado in centro*."},
+          "Marco* = voy a lo de Marco; *vado a Roma*, *vado in centro*.",
+  "more": ["Delante de un pronombre tónico, *dopo, senza, dietro, dentro, "
+           "verso, sopra, sotto* suman *di*: *senza di te* (sin vos), *dopo "
+           "di me*, *dietro di te*. Con sustantivo, no: *senza musica*, "
+           "*dopo cena*, *dietro la porta*.",
+           "Muchos adjetivos tienen su preposición: *interessato a*, *deciso "
+           "a*, *soddisfatto di*, *pieno di*, *innamorato di*, *sposato "
+           "con*, *gentile con*, *portato per* (tener facilidad para)."]},
 ]},
 
 51: {
@@ -968,12 +1030,15 @@ LESSONS = {
          ["Quando *ebbe finito*, uscì.", "Cuando hubo terminado, salió."],
          ["*Si accomodi*, prego.", "Pase, por favor."],
          ["*Avendo capito* tutto, ha firmato.", "Como había entendido todo, firmó."]],
-  "table": {"head": ["Modo", "Tiempos"],
-            "rows": [["Indicativo", "presente, imperfetto, passato prossimo, trapassato prossimo, passato remoto, trapassato remoto, futuro semplice, futuro anteriore"],
-                     ["Congiuntivo", "presente, passato, imperfetto, trapassato"],
-                     ["Condizionale", "presente, passato"],
-                     ["Imperativo", "tu, noi, voi (informal); Lei (= congiuntivo)"],
-                     ["Formas no finitas", "infinito, gerundio, participio (simples y compuestos)"]]}},
+  "table": {"head": ["Modo", "Tiempos", "Ejemplo (parlare)"],
+            "rows": [["Indicativo", "presente, imperfetto, passato prossimo, trapassato prossimo, passato remoto, trapassato remoto, futuro semplice, futuro anteriore", "parlo, parlavo, ho parlato, avevo parlato, parlai, ebbi parlato, parlerò, avrò parlato"],
+                     ["Congiuntivo", "presente, passato, imperfetto, trapassato", "che parli, che abbia parlato, che parlassi, che avessi parlato"],
+                     ["Condizionale", "presente, passato", "parlerei, avrei parlato"],
+                     ["Imperativo", "tu, noi, voi (informal); Lei (= congiuntivo)", "parla!, parliamo!, parlate!, parli!"],
+                     ["Formas no finitas", "infinito, gerundio, participio (simples y compuestos)", "parlare, aver parlato, parlando, avendo parlato, parlato"]]},
+  "more": ["«No finitas» quiere decir que no se conjugan por persona: *parlare* "
+           "o *parlando* sirven igual para *io*, *tu* o *loro*. Los modos "
+           "finitos, en cambio, cambian con cada persona."]},
 
  {"h": "Las cinco reglas que sostienen todo",
   "q": [{"prompt": "Futuro visto desde el pasado.", "stem": "Disse che ___.", "answer": "sarebbe venuto", "options": ["sarebbe venuto", "verrebbe", "verrà"]}, {"prompt": "Completá el período hipotético.", "stem": "Se ___ tempo, verrei.", "answer": "avessi", "options": ["avessi", "avrei", "ho avuto"]}],

@@ -1350,7 +1350,11 @@ LESSONS = {
           "*mi alzo*. Con infinitivo, pegado: *devo alzarmi*.",
   "more": ["*ci vediamo*, *si conoscono*: con sujeto plural, el mismo "
            "pronombre sirve para lo recíproco, como «nos vemos» en "
-           "castellano."]},
+           "castellano.",
+           "Con partes del cuerpo y ropa va el artículo, no el posesivo, "
+           "como en castellano: *mi lavo i denti*, *ti togli la giacca*. Y "
+           "*si* + tercera persona también es el «se» impersonal: *qui non si "
+           "fuma* (acá no se fuma)."]},
 
  {"h": "Reflexivos que no coinciden",
   "r": "Algunos verbos son reflexivos solo en una de las dos lenguas, o "
@@ -1370,15 +1374,23 @@ LESSONS = {
   "r": "Igual que el presente, salvo *tu* de los verbos en **-are**, que "
        "termina en *-a*: *tu parli* → *Parla!*",
   "table": {"head": ["", "-are (parlare)", "-ere (prendere)", "-ire (dormire)", "-isc (finire)"],
-            "rows": [["tu", "parla!", "prendi!", "dormi!", "finisci!"],
-                     ["noi", "parliamo!", "prendiamo!", "dormiamo!", "finiamo!"],
-                     ["voi", "parlate!", "prendete!", "dormite!", "finite!"]]},
+            "rows": [["tu (vos: ¡hablá!)", "parla!", "prendi!", "dormi!", "finisci!"],
+                     ["noi (¡hablemos!)", "parliamo!", "prendiamo!", "dormiamo!", "finiamo!"],
+                     ["voi (ustedes: ¡hablen!)", "parlate!", "prendete!", "dormite!", "finite!"]]},
   "ex": [["*Parla* piano!", "¡Hablá despacio!"],
          ["*Prendi* il treno!", "¡Tomá el tren!"],
          ["*Chiamami*!", "¡Llamame!"],
-         ["*Alzati*!", "¡Levantate!"]],
+         ["*Alzati*!", "¡Levantate!"],
+         ["*Svegliatevi*!", "¡Despiértense!"]],
   "warn": "El voseo engaña: «hablá» lleva el acento al final, *parla* no: "
-          "*PAR-la*, *MAN-gia*. Y el pronombre va pegado: *chiamami*."},
+          "*PAR-la*, *MAN-gia*. Y el pronombre va pegado: *chiamami*.",
+  "more": ["El pronombre se pega también en *noi* y *voi*: *mettiamolo qui* "
+           "(pongámoslo acá: es una sugerencia; *lo mettiamo qui* es un "
+           "hecho), *finitelo* (termínenlo), *sedetevi* (siéntense).",
+           "Los irregulares del presente dan su *tu*: *vieni!, esci!, tieni!, "
+           "scegli!, rimani!, siediti!* (sentate). *essere* y *avere* tienen "
+           "forma propia: *sii gentile!* (sé amable), *abbi pazienza!* (tené "
+           "paciencia)."]},
 
  {"h": "El negativo de tu",
   "r": "*tu* negativo = **non + infinitivo**. En *noi* y *voi* alcanza con "
@@ -1388,16 +1400,40 @@ LESSONS = {
          ["*Non ti preoccupare*!", "¡No te preocupes!"],
          ["*Non parlate*!", "¡No hablen!"]],
   "warn": "«Non parla!» no es una orden: significa «no habla». Con *tu*, el "
-          "negativo pide infinitivo: *non parlare!*"},
+          "negativo pide infinitivo: *non parlare!*",
+  "tip": "Con pronombre, dos lugares posibles: pegado al infinitivo o "
+         "delante. *Non toccarlo!* = *Non lo toccare!* (¡no lo toques!)."},
 
  {"h": "Adelanto: el formal es un subjuntivo",
-  "r": "Para *Lei* se usa el congiuntivo presente (semana 24). Por ahora, "
-       "**reconocelo**: el pronombre va **delante**, no pegado.",
+  "r": "*Lei* usa el congiuntivo (semana 24). Al revés que el informal: "
+       "*-are* → **-i** (*parli!*); *-ere / -ire* → **-a** (*prenda!*). "
+       "Irregulares, desde el *io*: *vengo → venga*.",
+  "table": {"head": ["Verbo", "io (presente)", "Lei (usted)", "Ejemplo"],
+            "rows": [["parlare (hablar)", "parlo", "parli", "Parli piano! (¡Hable despacio!)"],
+                     ["prendere (tomar)", "prendo", "prenda", "Prenda pure! (¡Tome nomás!)"],
+                     ["sentire (oír)", "sento", "senta", "Senta, scusi! (¡Oiga, disculpe!)"],
+                     ["finire (terminar)", "finisco", "finisca", "Finisca pure! (¡Termine nomás!)"],
+                     ["venire (venir)", "vengo", "venga", "Venga dentro! (¡Entre!)"],
+                     ["fare (hacer)", "faccio", "faccia", "Lo faccia subito! (¡Hágalo ya!)"],
+                     ["andare (ir)", "vado", "vada", "Vada dritto! (¡Siga derecho!)"],
+                     ["dire (decir)", "dico", "dica", "Mi dica! (¡Dígame!)"],
+                     ["scegliere (elegir)", "scelgo", "scelga", "Scelga lei! (¡Elija usted!)"],
+                     ["tenere (tener)", "tengo", "tenga", "Tenga la destra! (¡Vaya por la derecha!)"],
+                     ["dare (dar)", "do", "dia", "Mi dia un po' di pane! (¡Deme un poco de pan!)"],
+                     ["stare (estar)", "sto", "stia", "Stia tranquillo! (¡Quédese tranquilo!)"]]},
   "ex": [["*Scusi*! / *Senta*!", "¡Disculpe! / ¡Oiga!"],
          ["*Venga*! / *Prenda*!", "¡Venga! / ¡Tome!"],
          ["Mi *dica*!", "¡Dígame!"],
          ["Si *accomodi*!", "¡Pase! / ¡Siéntese!"],
-         ["*Faccia* pure!", "¡Adelante, hágalo nomás!"]]},
+         ["*Faccia* pure!", "¡Adelante, hágalo nomás!"]],
+  "warn": "El pronombre va **delante**, nunca pegado: *Mi dica*, *Si "
+          "accomodi*, *Lo faccia*. En negativo, *non* delante: *Non si "
+          "preoccupi!* (¡no se preocupe!).",
+  "tip": "*rimanere → rimanga*, *sedersi → si sieda*, *uscire → esca*: si "
+         "sabés el *io* del presente, tenés el formal.",
+  "qq": [{"prompt": "Imperativo de Lei", "stem": "___ più piano, per favore! (parlare)", "answer": "Parli", "options": ["Parli", "Parla", "Parlate"]},
+         {"prompt": "Imperativo de Lei", "stem": "___ subito! (partire)", "answer": "Parta", "options": ["Parta", "Parti", "Parte"]},
+         {"prompt": "Imperativo de Lei", "stem": "___ dentro, signora! (venire)", "answer": "Venga", "options": ["Venga", "Vieni", "Viene"]}]},
 
  {"h": "Formas cortas: consonante doble",
   "r": "*va', da', fa', sta', di'* + pronombre **duplican** la consonante "
@@ -1483,9 +1519,15 @@ LESSONS = {
   "q": [{"prompt": "¿Cuál está bien? «Vengo con vos.»", "answer": "Vengo con te.", "options": ["Vengo con te.", "Vengo con ti.", "Vengo con tu."]}, {"prompt": "¿Cuál está bien? «Le escribo» (a ella).", "answer": "Le scrivo.", "options": ["Le scrivo.", "Gli scrivo.", "La scrivo."]}],
   "r": "Átonos **delante** del verbo conjugado; tónicos **después** de "
        "preposición.",
-  "table": {"head": ["Directo", "Indirecto", "Reflexivo", "Tónico"],
-            "rows": [["mi, ti, lo, la", "mi, ti, gli, le", "mi, ti, si", "me, te, lui, lei"],
-                     ["ci, vi, li, le", "ci, vi, gli", "ci, vi, si", "noi, voi, loro"]]},
+  "table": {"head": ["Persona", "Directo", "Indirecto", "Reflexivo", "Tónico"],
+            "rows": [["io (yo)", "mi", "mi", "mi", "me"],
+                     ["tu (vos)", "ti", "ti", "ti", "te"],
+                     ["lui (él)", "lo", "gli", "si", "lui"],
+                     ["lei (ella)", "la", "le", "si", "lei"],
+                     ["Lei (usted)", "La", "Le", "si", "Lei"],
+                     ["noi (nosotros)", "ci", "ci", "ci", "noi"],
+                     ["voi (ustedes)", "vi", "vi", "vi", "voi"],
+                     ["loro (ellos, ellas)", "li / le", "gli", "si", "loro"]]},
   "ex": [["*Lo* conosco bene.", "Lo conozco bien."],
          ["*Gli* scrivo domani.", "Le escribo mañana (a él)."],
          ["Vengo *con te*.", "Voy con vos."]]},
