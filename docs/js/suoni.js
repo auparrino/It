@@ -199,16 +199,33 @@
     for (var i = 0; i < Dg.TESTI.length; i++) if (Dg.TESTI[i].week === week) return Dg.TESTI[i];
     return null;
   }
-  /* Un bloque cuenta como recuperado cuando aparece (sin mirar tildes, ç,
-     guiones, apóstrofos ni comas, con un error de tipeo perdonado por palabra
-     larga) o cuando todas sus palabras aparecen en orden dentro de una
-     ventana corta: lo que se recupera, no lo que se copia, es lo que queda
-     (Yu, Boers & Tremblay 2025). */
-  function chunkFound(chunk, given) {
+  /* Un bloque cuenta como recuperado cuando está en lo que escribiste:
+     - «exacto»: aparece tal cual (sin mirar tildes, ç, guiones, apóstrofos
+       ni comas, con un tipeo perdonado en las palabras largas) o con sus
+       palabras en orden dentro de una ventana corta;
+     - «con otra forma»: están todas sus palabras de contenido, en otro
+       orden o con otra terminación (sedia / sedie, piccolo / piccola,
+       domani ci vediamo): cuenta entero, y el resultado muestra el bloque
+       como era, para notar la diferencia;
+     - «casi»: están la mayoría de sus palabras de contenido: medio punto.
+     Lo que se recupera, no lo que se copia, es lo que queda (Yu, Boers &
+     Tremblay 2025); castigar el orden de un bloque que se entendió no ayuda. */
+  function stem(w) { return w.length > 4 ? w.replace(/[aeiou]+$/, "") : w; }
+  function near(a, b) {
+    if (a === b) return true;
+    if (a.length >= 4 && b.length >= 4 && stem(a) === stem(b) && stem(a).length >= 3) return true;
+    var d = Engine && Engine.editDistance ? Engine.editDistance(a, b) : 9;
+    return (Math.min(a.length, b.length) >= 5 && d <= 1) || (Math.min(a.length, b.length) >= 8 && d <= 2);
+  }
+  function isStop(w) {
+    var F = root.Freq;
+    return !!(F && F.STOP && F.STOP.indexOf(w) >= 0) || w.length <= 2;
+  }
+  function chunkMatch(chunk, given) {
     var g = norm(given), c = norm(chunk);
-    if (!c) return false;
-    if (g.indexOf(c) >= 0) return true;
-    var gw = g.split(" "), cw = c.split(" ");
+    if (!c || !g) return null;
+    if (g.indexOf(c) >= 0) return "exact";
+    var gw = g.replace(/'/g, "' ").split(" ").filter(Boolean), cw = c.replace(/'/g, "' ").split(" ").filter(Boolean);
     var close = function (a, b) { return a === b || (a.length >= 6 && Engine && Engine.editDistance(a, b) <= 1); };
     for (var i = 0; i < gw.length; i++) {
       var j = i, ok = true;
@@ -218,21 +235,44 @@
         if (found < 0) { ok = false; break; }
         j = found + 1;
       }
-      if (ok) return true;
+      if (ok) return "exact";
     }
-    return false;
+    // the content words, in any order and form, inside a window of the text
+    var content = cw.filter(function (w) { return !isStop(w.replace(/'$/, "")); });
+    if (!content.length) content = cw;
+    var span = Math.max(8, cw.length * 2 + 3), best = 0;
+    for (var k = 0; k < gw.length; k++) {
+      var win = gw.slice(k, k + span), used = {}, hit = 0;
+      content.forEach(function (w) {
+        for (var q = 0; q < win.length; q++) if (!used[q] && near(win[q], w)) { used[q] = 1; hit++; return; }
+      });
+      if (hit > best) best = hit;
+      if (best === content.length) break;
+    }
+    if (best === content.length) return "variant";
+    if (content.length >= 2 && best >= Math.ceil(content.length * 0.5)) return "partial";
+    return null;
+  }
+  function chunkFound(chunk, given) {
+    var m = chunkMatch(chunk, given);
+    return m === "exact" || m === "variant";
   }
   function dgScore(text, given) {
-    var found = [], missed = [];
-    (text.chunks || []).forEach(function (c) { (chunkFound(c, given) ? found : missed).push(c); });
-    var words = norm(given).split(" ").filter(Boolean).length;
-    return { found: found, missed: missed, n: text.chunks.length, words: words,
-             pct: text.chunks.length ? Math.round(found.length / text.chunks.length * 100) : 0 };
+    var found = [], missed = [], partial = [], variant = [];
+    (text.chunks || []).forEach(function (c) {
+      var m = chunkMatch(c, given);
+      if (m === "exact" || m === "variant") { found.push(c); if (m === "variant") variant.push(c); }
+      else if (m === "partial") partial.push(c);
+      else missed.push(c);
+    });
+    var words = norm(given).split(" ").filter(Boolean).length, n = text.chunks.length;
+    return { found: found, missed: missed, partial: partial, variant: variant, n: n, words: words,
+             pct: n ? Math.round((found.length + partial.length / 2) / n * 100) : 0 };
   }
 
   var api = { session: session, randomItem: randomItem, progress: progress, pairItem: pairItem, formItem: formItem, formPool: formPool, realFragments: realFragments, voiceOf: voiceOf,
               fragments: fragments, dictItem: dictItem, CAT_ES: CAT_ES,
-              dgFor: dgFor, dgScore: dgScore, chunkFound: chunkFound, norm: norm,
+              dgFor: dgFor, dgScore: dgScore, chunkFound: chunkFound, chunkMatch: chunkMatch, norm: norm,
               data: function () { return Data; }, dictogloss: function () { return Dg; } };
   if (typeof module === "object" && module.exports) module.exports = api;
   else root.Suoni = api;

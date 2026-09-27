@@ -4158,10 +4158,13 @@
         '<div id="dgout"></div></div>';
     }
     var r = dg.result;
-    return head + '<div class="card"><div class="scorebig"><b>' + r.found.length + " / " + r.n + '</b><span>bloques recuperados</span><span>+' + dg.xp + " xp</span></div>" +
-      '<h3>El texto</h3><p class="muted small"><mark class="dgok">verde</mark>: lo recuperaste · <mark class="dgmiss">rojo</mark>: faltó</p>' +
-      '<p class="model it">' + dgMarked(t.text, r) + "</p>" + dgGlossHtml(t) +
-      (r.missed.length ? '<h3>Faltaron</h3><p>' + r.missed.map(esc).join(" · ") + "</p>" : "") +
+    var casi = r.partial || [], other = r.variant || [];
+    return head + '<div class="card"><div class="scorebig"><b>' + r.found.length + (casi.length ? " + " + casi.length + " casi" : "") + " / " + r.n + '</b><span>bloques recuperados</span><span>+' + dg.xp + " xp</span></div>" +
+      '<h3>El texto</h3><p class="muted small"><mark class="dgok">verde</mark>: lo recuperaste' + (casi.length ? ' · <mark class="dgcasi">amarillo</mark>: casi' : "") + ' · <mark class="dgmiss">rojo</mark>: faltó</p>' +
+      '<p class="model it" lang="' + LG.tts + '">' + dgMarked(t.text, r) + "</p>" + dgGlossHtml(t) +
+      (other.length ? '<h3>Los dijiste de otra forma</h3><p class="muted small">Cuentan enteros. Así estaban en el texto, para que notes la diferencia:</p><p lang="' + LG.tts + '">' + other.map(function (c) { return "<b>" + esc(c) + "</b>"; }).join(" · ") + "</p>" : "") +
+      (casi.length ? '<h3>Casi</h3><p class="muted small">Tenías parte de estos bloques (medio punto cada uno):</p><p lang="' + LG.tts + '">' + casi.map(esc).join(" · ") + "</p>" : "") +
+      (r.missed.length ? '<h3>Faltaron</h3><p lang="' + LG.tts + '">' + r.missed.map(esc).join(" · ") + "</p>" : "") +
       '<h3>Tu versión</h3><p class="dgnotesview it">' + esc(dg.given || "") + "</p>" +
       (dg.findings && dg.findings.length ? "<h3>Para revisar en tu versión</h3><ol class=\"findings\">" + dg.findings.map(function (f) { return "<li>" + mk(f.msg) + "</li>"; }).join("") + "</ol>" : "") +
       '<div class="row" style="margin-top:14px"><button class="btn" id="dgback2">← Seguir ' + UI.pathEl + "</button>" +
@@ -4173,7 +4176,7 @@
   // The original text with each chunk marked: recovered in green, missed in red.
   function dgMarked(text, r) {
     var marks = [];
-    [[r.found, "dgok"], [r.missed, "dgmiss"]].forEach(function (g) {
+    [[r.found, "dgok"], [r.partial || [], "dgcasi"], [r.missed, "dgmiss"]].forEach(function (g) {
       g[0].forEach(function (c) {
         var at = text.toLowerCase().indexOf(String(c).toLowerCase());
         if (at >= 0 && !marks.some(function (m) { return at < m.end && at + c.length > m.at; })) marks.push({ at: at, end: at + c.length, cls: g[1] });
@@ -4228,7 +4231,7 @@
       var chk = Scrivi.check(given, w.week);
       dg.findings = (chk.findings || []).filter(function (f) { return !f.soft; }).slice(0, 8);
       var first = !(state.dictogloss || {})[w.week];
-      var xp = r.found.length * 8 + (r.found.length >= 5 ? 20 : 0) - Math.min(20, (dg.help || 0) * 5);
+      var xp = r.found.length * 8 + (r.partial || []).length * 4 + (r.found.length >= 5 ? 20 : 0) - Math.min(20, (dg.help || 0) * 5);
       xp = Math.max(5, first ? xp : Math.round(xp / 3));
       if (!state.dictogloss) state.dictogloss = {};
       var prev = state.dictogloss[w.week];
@@ -4420,10 +4423,7 @@
         '<button class="btn wide" id="pstart">🎭 Empezar</button><div id="pout"></div></div>';
     }
     var sc = parla.scen;
-    var objs = '<ul class="reqs">' + sc.obiettivi.map(function (o, i) {
-      var ok = parla.obj.indexOf(i + 1) >= 0;
-      return '<li class="' + (ok ? "ok" : "") + '">' + (ok ? "✓" : "○") + " " + esc(o) + "</li>";
-    }).join("") + "</ul>";
+    var objs = parlaObjs();
     var chat = '<div class="chat" aria-live="polite">' + parla.history.map(function (h) {
       return '<div class="bubble ' + (h[0] === "ia" ? "ia" : "me") + '"' + (h[0] === "ia" ? ' lang="' + LG.tts + '"' : "") + ">" + esc(h[1]) +
         (h[2] ? '<small class="easy">🪜 Más fácil: <span lang="' + LG.tts + '">' + esc(h[2]) + "</span></small>" : "") + "</div>";
@@ -4442,6 +4442,36 @@
       '<div class="typed"><textarea id="ptext" class="grow" rows="1" autocomplete="off" autocapitalize="sentences" autocorrect="off" spellcheck="false" enterkeyhint="send" placeholder="' + UI.parlaIn + '"' + (parla.busy ? " disabled" : "") + "></textarea>" +
       '<button class="btn" id="psend"' + (parla.busy ? " disabled" : "") + ">" + UI.send + "</button></div>" +
       '<div class="row" style="margin-top:8px"><button class="tab" id="pend">Terminar acá</button></div></div>';
+  }
+  // The three goals: reached ones ticked; a pending one can be ticked by
+  // hand when the learner knows it got it and the AI did not see it.
+  function parlaObjs() {
+    var sc = parla.scen, done = !!parla.done;
+    return '<ul class="reqs objs">' + sc.obiettivi.map(function (o, i) {
+      var ok = parla.obj.indexOf(i + 1) >= 0, byHand = (parla.hand || {})[i + 1];
+      var label = (ok ? "✓" : "○") + " " + esc(o) + (byHand ? ' <small class="muted">(marcado por vos)</small>' : "");
+      return '<li class="' + (ok ? "ok" : "") + '">' + (done ? label :
+        '<button class="objbtn" data-obj="' + (i + 1) + '" aria-pressed="' + (ok ? "true" : "false") + '">' + label + "</button>") + "</li>";
+    }).join("") + "</ul>" + (done ? "" : '<p class="muted small">Si cumpliste un objetivo y no se marcó, tocalo.</p>');
+  }
+  function refreshObjs() {
+    var ul = document.querySelector(".objs");
+    if (!ul || !parla) return;
+    var box = document.createElement("div");
+    box.innerHTML = parlaObjs();
+    ul.parentNode.replaceChild(box.firstChild, ul);
+    wireObjs();
+  }
+  function wireObjs() {
+    document.querySelectorAll(".objbtn").forEach(function (b) {
+      b.onclick = function () {
+        var n = +b.dataset.obj, at = parla.obj.indexOf(n);
+        if (!parla.hand) parla.hand = {};
+        if (at < 0) { parla.obj.push(n); parla.hand[n] = 1; }
+        else if (parla.hand[n]) { parla.obj.splice(at, 1); delete parla.hand[n]; }
+        refreshObjs();
+      };
+    });
   }
   function wireParla() {
     if (view.screen !== "parla") return;
@@ -4481,6 +4511,15 @@
         var el = $("#plive");
         if (el) { el.textContent = sentenceCase(f.text); el.removeAttribute("aria-label"); }
       };
+      // Which goals are reached, judged apart and at the same time (the
+      // character, busy answering, forgot to mark them).
+      if (Scrivi.parlaGoals) Scrivi.parlaGoals(parla.scen, parla.history.slice(-16), aiKeys(), function (e3, d3) {
+        if (parla !== p0 || e3 || !d3 || !Array.isArray(d3.cumplidos)) return;
+        d3.cumplidos.forEach(function (n) { n = +n; if (n >= 1 && n <= 3 && parla.obj.indexOf(n) < 0) parla.obj.push(n); });
+        if (view.screen !== "parla" || parla.done) return;
+        refreshObjs();
+        if (!parla.busy && parla.obj.length >= 3) endParla(w);
+      });
       // the conversation before this turn (the turn itself goes apart), and
       // the goals already reached, so the character leads to the others
       Scrivi.parlaTurn(parla.scen, parla.history.slice(-13, -1), text, parla.ctx, aiKeys(), function (err, data, meta) {
@@ -4521,6 +4560,7 @@
     var box = $("#ptext");
     if (box) { box.onkeydown = function (e) { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } }; if (!parla.busy) box.focus(); }
     on("#pend", function () { endParla(w); });
+    wireObjs();
     on("#pagain", function () { parla = null; render(); });
   }
   function endParla(w) {
@@ -5561,6 +5601,26 @@
       renderHeader();
       toast("Progreso borrado.");
     });
+  }
+
+  /* Every box where the learner writes in the language of the game says
+     so (lang="it-IT" / "pt-BR"): the keyboard can come up in that language
+     (Gboard and other keyboards on Android take the field's language as a
+     hint; on an iPhone the page cannot choose the keyboard).  The boxes in
+     Spanish (your goal, the keys, the searches) say lang="es". */
+  var SPANISH_BOXES = { idealtext: 1, refq: 1, aikey: 1, gemkey: 1 };
+  function langBoxes(root0) {
+    (root0 || document).querySelectorAll("textarea, input").forEach(function (el) {
+      if (el.hasAttribute("lang")) return;
+      var type = (el.getAttribute("type") || "text").toLowerCase();
+      if (type !== "text" && type !== "search" && el.tagName !== "TEXTAREA") return;
+      el.setAttribute("lang", SPANISH_BOXES[el.id] || el.dataset.es ? "es" : LG.tts);
+    });
+  }
+  if (window.MutationObserver) {
+    new MutationObserver(function (list) {
+      list.forEach(function (m) { m.addedNodes.forEach(function (n) { if (n.nodeType === 1) langBoxes(n.parentNode || document); }); });
+    }).observe(document.body, { childList: true, subtree: true });
   }
 
   // Words and chips that act like buttons (span role="button"): Enter and

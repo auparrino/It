@@ -654,3 +654,6 @@ input[type="checkbox"], input[type="radio"] { min-width: 22px; min-height: 22px;
   .shake { animation: none; }
   .ep-timer.low { animation: none; }
 }
+.objs li { list-style: none; }
+.objbtn { all: unset; cursor: pointer; display: block; min-height: 32px; padding: 4px 0; }
+.objbtn:focus-visible { outline: 3px solid currentColor; outline-offset: 2px; }

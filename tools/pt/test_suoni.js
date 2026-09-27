@@ -155,7 +155,7 @@ Dg.TESTI.forEach(function (t) {
   ok(!/\b(idéia|vôo|lingüiça|pára|pêlo|heróico|assembléia|européia|jóia)\b/i.test(t.text), "ortografía del Acuerdo de 1990: " + t.week);
 });
 ok(S.dgFor(13) === null && S.dgFor(26) === null && S.dgFor(39) === null && S.dgFor(11), "semanas de jefe sin texto");
-ok(S.chunkFound("a gente se vê amanhã", "a gente se vê logo amanhã") && !S.chunkFound("a gente se vê amanhã", "amanhã a gente se vê"), "orden y ventana");
+ok(S.chunkFound("a gente se vê amanhã", "a gente se vê logo amanhã") && S.chunkMatch("a gente se vê amanhã", "amanhã a gente se vê") === "variant" && !S.chunkFound("a gente se vê amanhã", "olá, tudo bem"), "orden y ventana: en otro orden cuenta, con el bloque original a la vista");
 ok(S.chunkFound("caça", "caca") && S.chunkFound("pau-brasil", "pau brasil") && S.chunkFound("não sei, não", "Não sei não"), "sin tildes, ç, guiones ni comas");
 ok(S.chunkFound("tinha percebido", "tinha percebdo"), "un error de tipeo perdonado en palabras largas");
 

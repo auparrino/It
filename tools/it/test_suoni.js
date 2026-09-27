@@ -101,7 +101,8 @@ Dg.TESTI.forEach(function (t) {
   ok(S.dgScore(t, "ciao").found.length === 0, "niente non recupera niente: " + t.week);
 });
 ok(S.dgFor(13) === null && S.dgFor(11), "settimane di boss senza testo");
-ok(S.chunkFound("ci vediamo domani", "ci vediamo poi domani") && !S.chunkFound("ci vediamo domani", "domani ci vediamo"), "ordine e finestra");
+ok(S.chunkFound("ci vediamo domani", "ci vediamo poi domani") && S.chunkMatch("ci vediamo domani", "domani ci vediamo") === "variant" && !S.chunkFound("ci vediamo domani", "ciao a tutti"), "ordine e finestra: in un altro ordine conta, con il blocco originale a vista");
+ok(S.chunkMatch("quattro sedie", "quattro sedia") === "variant" && S.chunkMatch("molti libri", "tanti libri") === "partial" && !S.chunkMatch("il cane è bianco", "il gatto è nero"), "altra forma, quasi, niente");
 
 /* ---------------------------------------------------------- frequenza */
 F.load(pack.data("it", "frequenza.json"));
