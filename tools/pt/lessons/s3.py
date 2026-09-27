@@ -44,23 +44,25 @@ LESSONS = {
   "r": "Tomá *eles* del perfeito y sacá *-ram*: *fizeram → fizer*, "
        "*tiveram → tiver*, *puderam → puder*. Después, las mismas "
        "terminaciones: *fizermos, fizerem*.",
-  "table": {"head": ["Infinitivo", "Perfeito (eles)", "Futuro do subj."],
-            "rows": [["ser / ir", "foram", "for"],
-                     ["ter", "tiveram", "tiver"],
-                     ["estar", "estiveram", "estiver"],
-                     ["fazer", "fizeram", "fizer"],
-                     ["poder", "puderam", "puder"],
-                     ["querer", "quiseram", "quiser"],
-                     ["saber", "souberam", "souber"],
-                     ["dizer", "disseram", "disser"],
-                     ["trazer", "trouxeram", "trouxer"],
-                     ["dar", "deram", "der"],
-                     ["pôr", "puseram", "puser"]]},
+  "table": {"head": ["Infinitivo", "Perfeito (eles)", "Futuro do subj.", "Ejemplo"],
+            "rows": [["ser (ser) / ir (ir)", "foram", "for", "quando eu for rico (cuando sea rico)"],
+                     ["ter (tener)", "tiveram", "tiver", "quando eu tiver tempo (cuando tenga)"],
+                     ["estar (estar)", "estiveram", "estiver", "enquanto você estiver aqui (mientras estés)"],
+                     ["fazer (hacer)", "fizeram", "fizer", "se fizer sol (si hace sol)"],
+                     ["poder (poder)", "puderam", "puder", "assim que puder (apenas pueda)"],
+                     ["querer (querer)", "quiseram", "quiser", "se Deus quiser (si Dios quiere)"],
+                     ["saber (saber)", "souberam", "souber", "quando souber (cuando sepas)"],
+                     ["dizer (decir)", "disseram", "disser", "o que ele disser (lo que diga)"],
+                     ["trazer (traer)", "trouxeram", "trouxer", "se você trouxer vinho (si traés vino)"],
+                     ["dar (dar)", "deram", "der", "se der tempo (si da el tiempo)"],
+                     ["pôr (poner)", "puseram", "puser", "onde você puser a mala (donde pongas)"],
+                     ["haver (haber)", "houveram", "houver", "se houver vaga (si hay lugar)"]]},
   "ex": [["Quando eu *tiver* tempo, vou ao Pão de Açúcar.", "Cuando tenga tiempo, voy al Pan de Azúcar."],
          ["Se você *fizer* a feijoada, eu levo a caipirinha.", "Si hacés la feijoada, llevo la caipiriña."],
          ["Se Deus *quiser*!", "¡Si Dios quiere! (fórmula fija)"]],
   "tip": "Si sabés el perfeito, ya sabés este tiempo: es el mismo tronco de "
-         "*fizeram*, *souberam*, *quiseram*."},
+         "*fizeram*, *souberam*, *quiseram*. *houver* va siempre en singular, "
+         "como «haya»: *se houver problemas*."},
 
  {"h": "La trampa: ver, vir, ser e ir",
   "q": [{"prompt": "«Cuando veas a Bia, dale un beso.» → Quando você ___ a Bia, dá um beijo nela.", "answer": "vir", "options": ["vir", "ver", "vier"]},
@@ -76,13 +78,16 @@ LESSONS = {
           "*vir* de «venir» da *vier*."},
 
  {"h": "Los momentos futuros",
-  "r": "*quando, assim que, logo que* (apenas), *enquanto* (mientras), "
-       "*depois que, sempre que* piden futuro do subjuntivo si hablás del "
-       "futuro.",
+  "r": "*quando* (cuando), *assim que* y *logo que* (apenas), *enquanto* "
+       "(mientras), *depois que* (después de que), *sempre que* (cada vez "
+       "que): con futuro, futuro do subjuntivo.",
   "ex": [["*Assim que* o bloco *passar*, a gente vai pra Lapa.", "Apenas pase el bloco, vamos a Lapa."],
+         ["*Logo que* eu *souber* o resultado, te conto.", "Apenas sepa el resultado, te cuento."],
          ["*Enquanto* você *estiver* aqui, a casa é sua.", "Mientras estés acá, la casa es tuya."],
          ["*Sempre que* você *quiser*, pode vir.", "Siempre que quieras, podés venir."],
          ["*Depois que* eles *se mudarem*, a gente visita.", "Después de que se muden, los visitamos."]],
+  "warn": "*antes que* y *até que* no entran acá: piden presente do "
+          "subjuntivo (semana 24): *antes que chova*, *até que ele chegue*.",
   "more": ["Si el hecho es habitual o ya pasó, va indicativo como en "
            "español: *quando eu chego em casa, tomo banho* (siempre); "
            "*quando cheguei, ela saiu* (ayer). El futuro do subjuntivo es "
@@ -132,30 +137,44 @@ LESSONS = {
  {"h": "La forma: -sse",
   "r": "Mismo tronco que el futuro do subjuntivo (3.ª plural del perfeito "
        "sin *-ram*) + *-sse*: *falaram → falasse*, *fizeram → fizesse*.",
-  "table": {"head": ["", "falar", "comer", "ser / ir"],
-            "rows": [["eu", "falasse", "comesse", "fosse"],
-                     ["ele / você", "falasse", "comesse", "fosse"],
-                     ["nós", "falássemos", "comêssemos", "fôssemos"],
-                     ["eles / vocês", "falassem", "comessem", "fossem"]]},
+  "table": {"head": ["", "falar", "comer", "partir", "ser / ir"],
+            "rows": [["eu", "falasse", "comesse", "partisse", "fosse"],
+                     ["ele / você", "falasse", "comesse", "partisse", "fosse"],
+                     ["nós", "falássemos", "comêssemos", "partíssemos", "fôssemos"],
+                     ["eles / vocês", "falassem", "comessem", "partissem", "fossem"]]},
   "ex": [["Se eu *falasse* bem, trabalharia no Brasil.", "Si hablara bien, trabajaría en Brasil."],
          ["Se ela *comesse* menos açúcar…", "Si comiera menos azúcar…"],
-         ["Se nós *fôssemos* ricos, moraríamos no Leblon.", "Si fuéramos ricos, viviríamos en Leblon."]]},
+         ["Se o ônibus *partisse* agora, chegaríamos a tempo.", "Si el micro partiera ahora, llegaríamos a tiempo."],
+         ["Se nós *fôssemos* ricos, moraríamos no Leblon.", "Si fuéramos ricos, viviríamos en Leblon."]],
+  "tip": "Va donde el español pone «-ra / -se»: hipótesis (*se eu pudesse*, "
+         "si pudiera), deseo en pasado (*queria que viesse*) y *como se*. Lo "
+         "ves en esta semana."},
 
  {"h": "Los irregulares, gratis",
   "q": [{"prompt": "Completá: Se eu ___ (ter) coragem, largaria tudo.", "answer": "tivesse", "options": ["tivesse", "tenhesse", "tiver"]},
         {"prompt": "Completá: Se você ___ (vir) ao Rio, eu te mostraria a Lapa.", "answer": "viesse", "options": ["viesse", "visse", "vinhesse"]}],
   "r": "Si sabés *fizeram, tiveram, vieram*, ya los tenés: *fizesse, "
        "tivesse, viesse*. Ninguno se arma sobre el infinitivo.",
-  "table": {"head": ["Perfeito (eles)", "Imperf. do subj.", "Perfeito (eles)", "Imperf. do subj."],
-            "rows": [["tiveram", "tivesse", "souberam", "soubesse"],
-                     ["estiveram", "estivesse", "disseram", "dissesse"],
-                     ["puderam", "pudesse", "trouxeram", "trouxesse"],
-                     ["quiseram", "quisesse", "deram", "desse"],
-                     ["vieram", "viesse", "puseram", "pusesse"],
-                     ["viram", "visse", "houveram", "houvesse"]]},
+  "table": {"head": ["Infinitivo", "Perfeito (eles)", "Imperf. do subj.", "Ejemplo"],
+            "rows": [["ter (tener)", "tiveram", "tivesse", "se eu tivesse tempo (si tuviera)"],
+                     ["estar (estar)", "estiveram", "estivesse", "se ela estivesse aqui (si estuviera)"],
+                     ["fazer (hacer)", "fizeram", "fizesse", "se fizesse sol (si hiciera sol)"],
+                     ["poder (poder)", "puderam", "pudesse", "se eu pudesse (si pudiera)"],
+                     ["querer (querer)", "quiseram", "quisesse", "se você quisesse (si quisieras)"],
+                     ["vir (venir)", "vieram", "viesse", "queria que viesse (que viniera)"],
+                     ["ver (ver)", "viram", "visse", "se você visse o mar (si vieras)"],
+                     ["saber (saber)", "souberam", "soubesse", "se eu soubesse (si supiera)"],
+                     ["dizer (decir)", "disseram", "dissesse", "se ele dissesse a verdade (si dijera)"],
+                     ["trazer (traer)", "trouxeram", "trouxesse", "pediu que eu trouxesse (que trajera)"],
+                     ["dar (dar)", "deram", "desse", "se desse (si se pudiera)"],
+                     ["pôr (poner)", "puseram", "pusesse", "se pusesse sal (si pusiera sal)"],
+                     ["haver (haber)", "houveram", "houvesse", "se houvesse vaga (si hubiera lugar)"]]},
   "ex": [["Se eu *soubesse*, te contaria.", "Si supiera, te contaría."],
          ["Se *desse*, eu ia.", "Si se pudiera, iría."],
-         ["Se você *visse* o pôr do sol no Arpoador…", "Si vieras la puesta de sol en el Arpoador…"]]},
+         ["Se você *visse* o pôr do sol no Arpoador…", "Si vieras la puesta de sol en el Arpoador…"]],
+  "tip": "*se desse* (si se pudiera) es fórmula fija, como *se der*. Y "
+         "*houvesse* va en singular, como «hubiera»: *se houvesse mais "
+         "vagas*."},
 
  {"h": "Nós lleva tilde",
   "r": "La 1.ª plural es esdrújula y lleva tilde en la vocal del tronco: "
@@ -244,15 +263,21 @@ LESSONS = {
   "r": "El infinitivo pessoal sale **del infinitivo**: *fazer → fazerem, "
        "ter → termos, ver → verem*. El futuro do subjuntivo sale del "
        "perfeito: *fizerem, tivermos, virem*.",
-  "table": {"head": ["Verbo", "Infinitivo pessoal (eles)", "Futuro do subj. (eles)"],
-            "rows": [["fazer", "fazerem", "fizerem"],
-                     ["ter", "terem", "tiverem"],
-                     ["ver", "verem", "virem"],
-                     ["vir", "virem", "vierem"],
-                     ["pôr", "porem", "puserem"],
-                     ["falar", "falarem", "falarem"]]},
+  "table": {"head": ["Verbo", "Infinitivo pessoal (para eles…)", "Futuro do subj. (quando eles…)"],
+            "rows": [["fazer (hacer)", "fazerem", "fizerem"],
+                     ["ter (tener)", "terem", "tiverem"],
+                     ["ver (ver)", "verem", "virem"],
+                     ["vir (venir)", "virem", "vierem"],
+                     ["pôr (poner)", "porem", "puserem"],
+                     ["falar (hablar)", "falarem", "falarem"]]},
+  "ex": [["É hora de eles *fazerem* as malas.", "Es hora de que hagan las valijas."],
+         ["Quando eles *fizerem* as malas, a gente sai.", "Cuando hagan las valijas, salimos."],
+         ["Abri a janela para vocês *verem* o mar.", "Abrí la ventana para que vean el mar."],
+         ["Se vocês *virem* o Rafa, avisem.", "Si ven a Rafa, avisen."],
+         ["Antes de eles *virem*, arrumamos a casa.", "Antes de que vengan, ordenamos la casa."]],
   "warn": "En los regulares coinciden, y por eso se mezclan. «Para eles "
-          "fizerem» es error: *para eles fazerem*."},
+          "fizerem» es error: *para eles fazerem*. Y *virem* son dos: "
+          "*quando virem* (vean) y *antes de virem* (vengan)."},
 
  {"h": "Con un sujeto propio",
   "r": "Cuando el infinitivo tiene **otro** sujeto, se flexiona: *é bom "
@@ -275,7 +300,11 @@ LESSONS = {
          ["Saíram *sem nós sabermos*.", "Se fueron sin que supiéramos."],
          ["*Antes de vocês saírem*, fechem a janela.", "Antes de que salgan, cierren la ventana."],
          ["*Ao chegarmos* à rodoviária, ligamos.", "Al llegar a la terminal, llamamos."],
-         ["Paulo Freire alfabetizava adultos *para eles lerem* o mundo, não só a palavra.", "Paulo Freire alfabetizaba adultos para que leyeran el mundo, no solo la palabra."]]},
+         ["Paulo Freire alfabetizava adultos *para eles lerem* o mundo, não só a palavra.", "Paulo Freire alfabetizaba adultos para que leyeran el mundo, no solo la palabra."]],
+  "more": ["*ao* es «al»; *até*, «hasta que»; *por*, la causa. Funcionan "
+           "igual: *depois de jantarmos, saímos* (después de cenar); *espera "
+           "até eles chegarem* (hasta que lleguen); *foram multados por "
+           "estacionarem mal* (por estacionar mal)."]},
 
  {"h": "Cuándo no se flexiona",
   "q": [{"prompt": "¿Cuál está bien? «Queremos vivir en Floripa.»", "answer": "Queremos morar em Floripa.", "options": ["Queremos morar em Floripa.", "Queremos morarmos em Floripa.", "Queremos a morar em Floripa."]}, {"prompt": "¿Cuál está bien? «Pueden salir ahora.»", "answer": "Eles podem sair agora.", "options": ["Eles podem sair agora.", "Eles podem saírem agora.", "Eles podem de sair agora."]}, {"prompt": "Elegí la que va", "stem": "Nós vamos ___ para o vestibular.", "answer": "estudar", "options": ["estudar", "estudarmos", "estudamos"]}],
@@ -314,12 +343,14 @@ LESSONS = {
  {"h": "Un auxiliar para todo: ter",
   "r": "Cada tiempo simple de *ter* + participio da un compuesto. El "
        "participio no cambia: *tenha feito, tivesse feito, tiver feito*.",
-  "table": {"head": ["Compuesto", "Ejemplo", "Español"],
-            "rows": [["subj. perfeito", "que eu tenha feito", "que haya hecho"],
-                     ["subj. mais-que-perfeito", "se eu tivesse feito", "si hubiera hecho"],
-                     ["futuro composto do subj.", "quando eu tiver feito", "cuando haya hecho"],
-                     ["futuro do pretérito composto", "eu teria feito", "habría hecho"],
-                     ["futuro composto", "eu terei feito", "habré hecho"]]},
+  "table": {"head": ["Compuesto", "Ejemplo", "Español", "Se usa para"],
+            "rows": [["subj. perfeito", "que eu tenha feito", "que haya hecho", "deseo o duda de hoy sobre algo ya pasado: espero que…"],
+                     ["subj. mais-que-perfeito", "se eu tivesse feito", "si hubiera hecho", "hipótesis sobre el pasado, que ya no se puede cambiar"],
+                     ["futuro composto do subj.", "quando eu tiver feito", "cuando haya hecho", "tras quando / se / assim que: algo futuro ya terminado"],
+                     ["futuro do pretérito composto", "eu teria feito", "habría hecho", "lo que habría pasado: la otra mitad de se tivesse…"],
+                     ["futuro composto", "eu terei feito", "habré hecho", "lo que ya habrá pasado para un momento futuro"],
+                     ["(ya visto) pret. perfeito composto", "eu tenho feito", "vengo haciendo", "repetición hasta hoy (semana 21); «he hecho» es fiz"],
+                     ["(ya visto) mais-que-perfeito composto", "eu tinha feito", "había hecho", "algo anterior a otro pasado (semana 21)"]]},
   "ex": [["Se eu *tivesse visto*, teria avisado.", "Si lo hubiera visto, habría avisado."],
          ["Até dezembro *terei terminado* o curso.", "Para diciembre habré terminado el curso."]],
   "tip": "Los participios irregulares de siempre: *feito, dito, visto, "
@@ -406,13 +437,13 @@ LESSONS = {
   "r": "Presente → imperfeito; perfeito → *tinha* + participio; futuro → "
        "futuro do pretérito; subjuntivo presente → imperfeito do "
        "subjuntivo.",
-  "table": {"head": ["Discurso directo", "Discurso indirecto"],
-            "rows": [["«Trabalho aqui.»", "disse que trabalhava lá"],
-                     ["«Comprei o ingresso.»", "disse que tinha comprado o ingresso"],
-                     ["«Vou viajar.»", "disse que ia viajar"],
-                     ["«Viajarei.»", "disse que viajaria"],
-                     ["«Espero que chova.»", "disse que esperava que chovesse"],
-                     ["«Quando puder, venho.»", "disse que, quando pudesse, viria"]]},
+  "table": {"head": ["Discurso directo", "Discurso indirecto", "Qué tiempo cambia"],
+            "rows": [["«Trabalho aqui.»", "disse que trabalhava lá", "presente → imperfeito"],
+                     ["«Comprei o ingresso.»", "disse que tinha comprado o ingresso", "perfeito → tinha + participio"],
+                     ["«Vou viajar.»", "disse que ia viajar", "vou + inf. → ia + inf."],
+                     ["«Viajarei.»", "disse que viajaria", "futuro → futuro do pretérito"],
+                     ["«Espero que chova.»", "disse que esperava que chovesse", "pres. do subj. → imperf. do subj."],
+                     ["«Quando puder, venho.»", "disse que, quando pudesse, viria", "fut. do subj. → imperf. do subj."]]},
   "ex": [["«*Vi* o jogo.» → Disse que *tinha visto* o jogo.", "Dijo que había visto el partido."],
          ["«*Farei* isso.» → Prometeu que *faria* isso.", "Prometió que haría eso."]],
   "more": ["El futuro do subjuntivo se vuelve imperfeito do subjuntivo: "
@@ -434,14 +465,17 @@ LESSONS = {
   "r": "Cambian las personas (*eu → ele*, *meu → dele*) y las "
        "referencias: *hoje → naquele dia*, *amanhã → no dia seguinte*, "
        "*aqui → lá*.",
-  "table": {"head": ["Directo", "Indirecto"],
-            "rows": [["hoje", "naquele dia"],
-                     ["ontem", "no dia anterior / na véspera"],
-                     ["amanhã", "no dia seguinte"],
-                     ["agora", "naquele momento"],
-                     ["aqui", "lá / ali"],
-                     ["este / isto", "aquele / aquilo"]]},
-  "ex": [["«Chego *amanhã*.» → Disse que chegava *no dia seguinte*.", "Dijo que llegaba al día siguiente."],
+  "table": {"head": ["Directo", "Indirecto", "Significa"],
+            "rows": [["hoje", "naquele dia", "hoy → ese día"],
+                     ["ontem", "no dia anterior / na véspera", "ayer → el día anterior"],
+                     ["amanhã", "no dia seguinte", "mañana → al día siguiente"],
+                     ["agora", "naquele momento", "ahora → en ese momento"],
+                     ["aqui", "lá / ali", "acá → allá"],
+                     ["este / isto", "aquele / aquilo", "este, esto → aquel, aquello"]]},
+  "ex": [["«*Hoje* é feriado.» → Disse que *naquele dia* era feriado.", "Dijo que ese día era feriado."],
+         ["«Fui *ontem*.» → Disse que tinha ido *no dia anterior*.", "Dijo que había ido el día anterior."],
+         ["«Chego *amanhã*.» → Disse que chegava *no dia seguinte*.", "Dijo que llegaba al día siguiente."],
+         ["«Estou *aqui agora*.» → Disse que estava *lá naquele momento*.", "Dijo que estaba allá en ese momento."],
          ["«*Este* é o *meu* bairro.» → Disse que *aquele* era o bairro *dele*.", "Dijo que aquel era su barrio."]]},
 
  {"h": "Preguntas: perguntou se",
@@ -459,6 +493,17 @@ LESSONS = {
   "r": "Variá: *afirmar, contar, comentar, explicar, avisar, garantir, "
        "prometer, responder, pedir, perguntar*. Cada uno ya dice cómo se "
        "dijo.",
+  "table": {"head": ["Verbo", "Significa", "Ejemplo"],
+            "rows": [["afirmar", "afirmar, declarar", "afirmou que não haveria aumento"],
+                     ["contar", "contar (una historia, una noticia)", "contou que tinha se mudado"],
+                     ["comentar", "comentar, mencionar al pasar", "comentou que o síndico tinha saído"],
+                     ["explicar", "explicar", "explicou que o metrô estava fechado"],
+                     ["avisar", "avisar, advertir", "avisou que ia chegar tarde"],
+                     ["garantir", "garantizar, asegurar", "garantiu que chegaria a tempo"],
+                     ["prometer", "prometer", "prometeu que faria isso"],
+                     ["responder", "responder, contestar", "respondeu que não sabia"],
+                     ["pedir", "pedir (un favor, una acción)", "pediu que eu fosse"],
+                     ["perguntar", "preguntar", "perguntou se eu ia"]]},
   "ex": [["O ministro *afirmou* que não haveria aumento.", "El ministro afirmó que no habría aumento."],
          ["A vizinha *comentou* que o síndico tinha saído.", "La vecina comentó que el administrador se había ido."],
          ["Ele *garantiu* que chegaria a tempo.", "Garantizó que llegaría a tiempo."],
@@ -501,7 +546,10 @@ LESSONS = {
          ["*Vive-se* bem no Rio.", "Se vive bien en Río."]],
   "warn": "El español dice «se necesitan mozos», en plural. En portugués, "
           "por el *de*: *precisa-se de garçons*. «Precisam-se de» es "
-          "error."},
+          "error.",
+  "tip": "Lo mismo con verbos sin objeto, que tampoco tienen con qué "
+         "concordar: *vive-se bem no Rio*, *trabalha-se muito aqui*, *come-se "
+         "tarde*."},
 
  {"h": "Dónde va el se",
   "r": "En carteles y textos, detrás con guion: *aluga-se*. Delante si hay "
@@ -514,8 +562,10 @@ LESSONS = {
                      ["Não se aceitam cheques", "No se aceptan cheques"],
                      ["Entrega-se em domicílio", "Envíos a domicilio"],
                      ["Proibido estacionar", "Prohibido estacionar"]]},
-  "ex": [["*Não se aceitam* cartões.", "No se aceptan tarjetas."],
-         ["Aqui *se fala* espanhol.", "Acá se habla español."]]},
+  "ex": [["*Aluga-se* casa com vista.", "Se alquila casa con vista (detrás, con guion)."],
+         ["*Não se aceitam* cartões.", "No se aceptan tarjetas (delante: não)."],
+         ["Aqui *se fala* espanhol.", "Acá se habla español (delante: aqui)."],
+         ["É o bairro *que se vê* do Cristo.", "Es el barrio que se ve desde el Cristo (delante: que)."]]},
 
  {"h": "Dizem que…: la 3.ª plural sin sujeto",
   "q": [{"prompt": "«Me robaron el celular.» → ___ meu celular.", "answer": "Roubaram", "options": ["Roubaram", "Se roubou", "Roubou-se"]}],
@@ -542,10 +592,13 @@ LESSONS = {
  {"h": "Tres maneras de decir lo mismo",
   "r": "Formal: *diz-se que*, *vende-se*. Neutro: *dizem que*, *vendem*. "
        "Habla: *falam que*, *o pessoal fala*, *você compra*.",
-  "table": {"head": ["Formal", "Neutro", "Habla"],
-            "rows": [["Diz-se que vai chover.", "Dizem que vai chover.", "Tão falando que vai chover."],
-                     ["Aceitam-se cartões.", "Aceitam cartão.", "Pode pagar no cartão."],
-                     ["Precisa-se de garçom.", "Estão precisando de garçom.", "Tão precisando de garçom."]]},
+  "table": {"head": ["Significa", "Formal", "Neutro", "Habla"],
+            "rows": [["Dicen que va a llover.", "Diz-se que vai chover.", "Dizem que vai chover.", "Tão falando que vai chover."],
+                     ["Se aceptan tarjetas.", "Aceitam-se cartões.", "Aceitam cartão.", "Pode pagar no cartão."],
+                     ["Se necesita mozo.", "Precisa-se de garçom.", "Estão precisando de garçom.", "Tão precisando de garçom."]]},
+  "ex": [["*Diz-se que* o bairro vai mudar.", "Se dice que el barrio va a cambiar (formal)."],
+         ["*Dizem que* o bairro vai mudar.", "Dicen que el barrio va a cambiar."],
+         ["*O pessoal tá falando que* o bairro vai mudar.", "La gente anda diciendo que el barrio va a cambiar."]],
   "more": ["En los carteles de comercio vas a ver también *vende casas* o "
            "*aluga salas*, sin *se*. Es muy común, pero la norma pide *se*: "
            "*vendem-se casas*. En tus textos, con *se* y concordancia."]},
@@ -566,11 +619,12 @@ LESSONS = {
        "(*disse-me*). *Mesóclise*: en medio del futuro o condicional "
        "(*dir-me-á*).",
   "table": {"head": ["Nombre", "Ejemplo", "Dónde"],
-            "rows": [["próclise", "não me disse", "habla y escritura, con atractor"],
-                     ["ênclise", "disse-me", "escritura formal, por defecto"],
-                     ["mesóclise", "dir-me-á", "solo formal, futuro y condicional"]]},
+            "rows": [["próclise (antes)", "não me disse", "habla; en lo escrito, tras não, que…"],
+                     ["ênclise (después)", "disse-me", "escritura formal, por defecto"],
+                     ["mesóclise (en medio)", "dir-me-á", "solo formal, futuro y condicional"]]},
   "ex": [["Ela *me disse* a verdade.", "Ella me dijo la verdad (habla)."],
-         ["*Disse-me* a verdade.", "Me dijo la verdad (escrito)."]]},
+         ["*Disse-me* a verdade.", "Me dijo la verdad (escrito)."],
+         ["*Dir-me-á* a verdade.", "Me dirá la verdad (muy formal)."]]},
 
  {"h": "Ênclise por defecto",
   "q": [{"prompt": "Texto formal: «Me dijeron que no.» →", "answer": "Disseram-me que não.", "options": ["Disseram-me que não.", "Me disseram que não.", "Disseram-me-lo que não."]}],
@@ -581,17 +635,25 @@ LESSONS = {
          ["Os leitores *enviaram-nos* cartas.", "Los lectores nos enviaron cartas."],
          ["Fica quieto e *escuta-me*.", "Quedate quieto y escuchame."]],
   "warn": "En el habla de Brasil, *me chama*, *me dá* abren la oración "
-          "sin problema. En un texto formal, no: *Dá-me*, *Chamo-me*."},
+          "sin problema. En un texto formal, no: *Chame-me*, *Dê-me*, "
+          "*Chamo-me*."},
 
  {"h": "Los que atraen el pronombre",
   "q": [{"prompt": "Formal: Ele ___ a verdade.", "answer": "nunca me disse", "options": ["nunca me disse", "nunca disse-me", "me nunca disse"]}],
   "r": "Próclise obligatoria tras negación (*não, nunca*), *que*, *quem*, "
        "adverbios (*já, sempre, aqui*), indefinidos (*tudo, alguém*) y "
        "conjunciones (*quando, se, embora*).",
+  "table": {"head": ["Atractor", "Ejemplo", "Español"],
+            "rows": [["negación: não, nunca, ninguém", "Nunca me disseram isso.", "Nunca me dijeron eso."],
+                     ["que (relativo o conjunción)", "Acho que se enganou.", "Creo que se equivocó."],
+                     ["quem y los interrogativos", "Quem te contou?", "¿Quién te contó?"],
+                     ["adverbios: já, sempre, aqui, talvez", "Sempre me ajudou.", "Siempre me ayudó."],
+                     ["indefinidos: tudo, alguém, todos", "Alguém me ligou.", "Alguien me llamó."],
+                     ["conjunciones: quando, se, embora", "Quando o vi, entendi.", "Cuando lo vi, entendí."]]},
   "ex": [["*Não me* disse nada.", "No me dijo nada."],
          ["O livro *que me* deram é ótimo.", "El libro que me dieron es buenísimo."],
          ["*Já lhe* contei a história?", "¿Ya le conté la historia?"],
-         ["*Quem te* contou?", "¿Quién te contó?"],
+         ["*Tudo se* resolveu.", "Todo se resolvió."],
          ["*Quando o* vi, entendi.", "Cuando lo vi, entendí."]],
   "tip": "Regla práctica: si delante hay una palabra «negativa, "
          "relativa o adverbial», el pronombre se le pega a ella."},
@@ -602,16 +664,18 @@ LESSONS = {
   "r": "*o, a, os, as* tras *-r, -s, -z* pierden la consonante y toman "
        "*l*: *comprar + o = comprá-lo*. Tras nasal, *n*: *dão + o = "
        "dão-no*.",
-  "table": {"head": ["Unión", "Resultado"],
-            "rows": [["comprar + o", "comprá-lo"],
-                     ["vender + a", "vendê-la"],
-                     ["partir + os", "parti-los"],
-                     ["fiz + o", "fi-lo"],
-                     ["fazemos + a", "fazemo-la"],
-                     ["dão + o", "dão-no"],
-                     ["fazem + as", "fazem-nas"]]},
-  "ex": [["Preciso *vendê-lo* logo.", "Tengo que venderlo pronto."],
-         ["Os pescadores *trazem-nos* do mar.", "Los pescadores los traen del mar."]],
+  "table": {"head": ["Unión", "Resultado", "Español"],
+            "rows": [["comprar + o", "comprá-lo", "comprarlo"],
+                     ["vender + a", "vendê-la", "venderla"],
+                     ["partir + os", "parti-los", "partirlos"],
+                     ["fiz + o", "fi-lo", "lo hice"],
+                     ["fazemos + a", "fazemo-la", "la hacemos"],
+                     ["dão + o", "dão-no", "lo dan"],
+                     ["fazem + as", "fazem-nas", "las hacen"]]},
+  "ex": [["Preciso *vendê-lo* logo.", "Tengo que venderlo pronto (-r)."],
+         ["*Fazemo-lo* todos os dias.", "Lo hacemos todos los días (-s)."],
+         ["*Fi-lo* sem pensar.", "Lo hice sin pensar (-z)."],
+         ["As sardinhas? Os pescadores *trazem-nas* do mar.", "¿Las sardinas? Los pescadores las traen del mar (nasal)."]],
   "warn": "Tras *-ar* tilde aguda (*comprá-lo*); tras *-er* circunflejo "
           "(*vendê-lo*); tras *-ir*, nada (*parti-lo*)."},
 
@@ -637,18 +701,21 @@ LESSONS = {
   "ex": [["*Tinha-lhe dito* que não viesse.", "Le había dicho que no viniera (formal)."],
          ["Eu *tinha lhe dito* isso.", "Yo le había dicho eso (Brasil)."],
          ["*Vou te ligar* amanhã.", "Te voy a llamar mañana."],
-         ["*Estou te esperando* no calçadão.", "Te estoy esperando en la rambla."]]},
+         ["*Estou te esperando* no calçadão.", "Te estoy esperando en la rambla."]],
+  "warn": "Nunca detrás del participio: «tinha dito-lhe» es error. Detrás "
+          "del infinitivo sí puede ir, en lo formal: *vou contar-te*, *vou "
+          "ligar-lhe*."},
 
  {"h": "Habla y escritura",
   "q": [{"prompt": "En la escritura formal, «Vi ele ontem.» es…", "answer": "Vi-o ontem.", "options": ["Vi-o ontem.", "Vi-lo ontem.", "Vi-lhe ontem."]}, {"prompt": "En la escritura formal, «Me dá um café?» es…", "answer": "Dê-me um café.", "options": ["Dê-me um café.", "Me dê-me um café.", "Dá-me-lo um café."]}],
   "r": "Brasil hablado: próclise siempre (*me dá*, *te amo*) y *ele* como "
-       "objeto (*vi ele*). En la escritura culta: *dá-me*, *vi-o*.",
-  "table": {"head": ["Habla", "Escritura formal"],
-            "rows": [["Me dá um café?", "Dê-me um café."],
-                     ["Vi ele ontem.", "Vi-o ontem."],
-                     ["Te amo.", "Amo-te."],
-                     ["Vou te contar.", "Vou contar-te."],
-                     ["Nunca me disse.", "Nunca me disse."]]},
+       "objeto (*vi ele*). En la escritura culta: *dê-me*, *vi-o*.",
+  "table": {"head": ["Habla", "Escritura formal", "Español"],
+            "rows": [["Me dá um café?", "Dê-me um café.", "¿Me das un café?"],
+                     ["Vi ele ontem.", "Vi-o ontem.", "Lo vi ayer."],
+                     ["Te amo.", "Amo-te.", "Te amo."],
+                     ["Vou te contar.", "Vou contar-te.", "Te voy a contar."],
+                     ["Nunca me disse.", "Nunca me disse.", "Nunca me dijo (nunca atrae)."]]},
   "tip": "Si dudás al escribir: pronombre detrás del verbo, salvo que haya "
          "*não*, *que* o un adverbio delante."},
 ]},
@@ -691,7 +758,14 @@ LESSONS = {
   "r": "*portanto, logo, por isso, então, assim*: introducen la "
        "consecuencia. *pois* también, pero entre comas y después del "
        "verbo.",
-  "ex": [["Desmataram a encosta; *portanto*, houve deslizamento.", "Deforestaron la ladera; por lo tanto, hubo un deslave."],
+  "table": {"head": ["Conector", "Significa", "Ejemplo"],
+            "rows": [["portanto", "por lo tanto (formal)", "Choveu; portanto, adiaram o jogo."],
+                     ["logo", "luego, así que", "Penso, logo existo."],
+                     ["por isso", "por eso", "Estava cansado, por isso dormi."],
+                     ["então", "entonces, así que", "O metrô fechou, então fui de ônibus."],
+                     ["assim", "así, de este modo", "Plantaram árvores; assim, a rua ficou fresca."],
+                     ["pois (entre comas)", "pues, por lo tanto", "É tarde; fica, pois, aqui."]]},
+  "ex": [["Desmataram a encosta; *portanto*, houve deslizamento.", "Deforestaron la ladera; por lo tanto, hubo un derrumbe."],
          ["Penso, *logo* existo.", "Pienso, luego existo."],
          ["Estava chovendo, *por isso* ficamos.", "Estaba lloviendo, por eso nos quedamos."],
          ["A água é pouca; devemos, *pois*, economizar.", "El agua es poca; debemos, pues, ahorrar."]],
@@ -699,13 +773,16 @@ LESSONS = {
           "calcos del español."},
 
  {"h": "Explicativos y causales",
-  "r": "*porque*, *pois* (al principio de la explicación), *já que*, *uma "
-       "vez que*, *visto que* (= dado que).",
+  "r": "*porque* (porque), *pois* (que, porque; al principio), *já que* "
+       "(ya que), *uma vez que* y *visto que* (dado que): introducen la "
+       "causa.",
   "ex": [["Leve guarda-chuva, *pois* vai chover.", "Llevá paraguas, que va a llover."],
          ["*Já que* você está aqui, me ajuda.", "Ya que estás acá, ayudame."],
          ["*Uma vez que* o esgoto não é tratado, a baía sofre.", "Dado que las cloacas no se tratan, la bahía sufre."],
          ["*Visto que* ninguém veio, cancelamos.", "Visto que nadie vino, cancelamos."],
-         ["Lisboa foi reconstruída em quadras retas, *já que* o terremoto de 1755 a destruiu.", "Lisboa se reconstruyó en manzanas rectas, ya que el terremoto de 1755 la destruyó."]],
+         ["Lisboa foi reconstruída em quadras retas *porque* o terremoto de 1755 a destruiu.", "Lisboa se reconstruyó en manzanas rectas porque el terremoto de 1755 la destruyó."]],
+  "warn": "*uma vez que* + indicativo es «dado que», no el «una vez que» "
+          "temporal: para eso, *assim que* o *depois que*.",
   "more": ["*pois* tiene dos caras: al principio explica (*fica, pois está "
            "tarde*); entre comas, después del verbo, concluye (*está "
            "tarde; fica, pois, aqui*). Y *pois é* en el habla es «y sí, "
@@ -718,9 +795,14 @@ LESSONS = {
   "ex": [["O show foi ótimo. *Aliás*, você viu o Caetano?", "El show estuvo genial. Por cierto, ¿viste a Caetano?"],
          ["Todos reciclam, *inclusive* o prédio vizinho.", "Todos reciclan, incluso el edificio de al lado."],
          ["Ela é carioca, *ou seja*, ama praia.", "Es carioca, o sea, ama la playa."],
-         ["É barato e, *além disso*, fica perto.", "Es barato y, además, queda cerca."]],
+         ["É barato e, *além disso*, fica perto.", "Es barato y, además, queda cerca."],
+         ["O VLT, *isto é*, o bonde moderno, liga o Centro à rodoviária.", "El VLT, es decir, el tranvía moderno, une el Centro con la terminal."]],
   "warn": "*incluso* en portugués es «incluido» (*o café está incluso*). "
-          "Para «incluso» decí *inclusive* o *até*."},
+          "Para «incluso» decí *inclusive* o *até*.",
+  "more": ["*aliás* tiene dos usos: agrega un dato al pasar (por cierto, "
+           "como en el ejemplo) o corrige y refuerza lo dicho (es más, mejor "
+           "dicho): *Ele não é paulista; aliás, nunca foi a São Paulo* (es "
+           "más, nunca fue a São Paulo)."]},
 
  {"h": "Concesión: embora, mesmo que, apesar de",
   "r": "*embora* y *mesmo que* + subjuntivo; *apesar de* + sustantivo o "
@@ -730,8 +812,8 @@ LESSONS = {
          ["*Apesar da* crise, o bairro cresceu.", "A pesar de la crisis, el barrio creció."],
          ["*Apesar de* estar cansado, fui ao debate.", "A pesar de estar cansado, fui al debate."]],
   "warn": "*apesar de* + artículo se contrae: *apesar da crise*, *apesar "
-          "do calor*. «Apesar de a crise» solo delante de infinitivo con "
-          "sujeto."},
+          "do calor*. Sin contraer solo si sigue infinitivo con sujeto: "
+          "*apesar de a crise continuar*."},
 ]},
 
 35: {
@@ -785,7 +867,8 @@ LESSONS = {
   "ex": [["*Espero a* Ana na estação.", "Espero a Ana en la estación (a = artículo)."],
          ["*Ajudei o* vizinho com a mudança.", "Ayudé al vecino con la mudanza."],
          ["Vou *visitar meus* avós em Recife.", "Voy a visitar a mis abuelos en Recife."],
-         ["*Convidei* o Lucas pro churrasco.", "Invité a Lucas al asado."]],
+         ["*Convidei* o Lucas pro churrasco.", "Invité a Lucas al asado."],
+         ["*Conheci o* Rafa no bloco.", "Conocí a Rafa en el bloco."]],
   "warn": "Nada de «a» personal: «ajudei ao vizinho» es calco del español. "
           "*ajudar* lleva objeto directo: *ajudei o vizinho*, *ajudei-o*."},
 
@@ -803,14 +886,19 @@ LESSONS = {
   "r": "Con *se*, preposición; sin *se*, directo: *lembrei-me do nome* = "
        "*lembrei o nome*. Igual *esquecer*. Lo que no vale es mezclar.",
   "table": {"head": ["Verbo", "Con persona o cosa", "Ojo"],
-            "rows": [["lembrar(-se)", "lembrar algo / lembrar-se de algo", "habla: lembrar de algo"],
-                     ["esquecer(-se)", "esquecer algo / esquecer-se de algo", "habla: esquecer de algo"],
-                     ["simpatizar", "simpatizar com alguém", "nunca «simpatizar-se»"],
-                     ["implicar", "implicar algo (= acarrear)", "sin «em» en la norma"],
-                     ["pagar / perdoar", "pagar algo a alguém", "a la persona, con a"],
-                     ["morar / residir", "morar em", "nunca «morar a»"]]},
+            "rows": [["lembrar(-se) (acordarse)", "lembrar algo / lembrar-se de algo", "habla: lembrar de algo"],
+                     ["esquecer(-se) (olvidar)", "esquecer algo / esquecer-se de algo", "habla: esquecer de algo"],
+                     ["simpatizar (caer bien)", "simpatizar com alguém", "nunca «simpatizar-se»"],
+                     ["implicar (acarrear)", "implicar algo", "sin «em» en la norma"],
+                     ["pagar / perdoar (pagar / perdonar)", "pagar algo a alguém", "a la persona, con a"],
+                     ["morar / residir (vivir)", "morar em", "nunca «morar a»"]]},
   "ex": [["*Esqueci* a senha. / *Esqueci-me da* senha.", "Me olvidé de la contraseña."],
-         ["*Simpatizei com* ela.", "Me cayó bien."]]},
+         ["*Lembrei* o nome dela. / *Lembrei-me do* nome dela.", "Me acordé de su nombre."],
+         ["*Simpatizei com* ela.", "Me cayó bien."],
+         ["A mudança *implica* custos altos.", "La mudanza implica costos altos."],
+         ["*Paguei* a conta *ao* garçom.", "Le pagué la cuenta al mozo."]],
+  "warn": "«Lembrei-me o nome» o «esqueci-me a senha» mezclan las dos: con "
+          "*-me*, siempre *de*; sin *-me*, directo (o *de* en el habla)."},
 
  {"h": "El relativo lleva la preposición",
   "q": [{"prompt": "«La película que vi (assistir a)…» → O filme ___ assisti…", "answer": "a que", "options": ["a que", "que", "ao que"]}],
@@ -864,7 +952,8 @@ LESSONS = {
   "ex": [["O show começa *às* nove.", "El show empieza a las nueve."],
          ["Abre *das* oito *às* seis.", "Abre de ocho a seis."],
          ["Chegou *à* uma da manhã.", "Llegó a la una de la mañana."],
-         ["Estou aqui *desde as* sete.", "Estoy acá desde las siete."]],
+         ["Estou aqui *desde as* sete.", "Estoy acá desde las siete."],
+         ["O jantar ficou *para as* oito.", "La cena quedó para las ocho."]],
   "tip": "*até as* y *até às* están bien las dos. *ao meio-dia*, sin "
          "crase: *meio-dia* es masculino; *à meia-noite*, con."},
 
@@ -880,7 +969,9 @@ LESSONS = {
          ["Refiro-me *a* esta lei.", "Me refiero a esta ley."],
          ["Falou *a* pessoas importantes.", "Habló a personas importantes."]],
   "warn": "En el plural, la *s* te delata: *às pessoas* (con artículo) o "
-          "*a pessoas* (sin artículo). «à pessoas» es imposible."},
+          "*a pessoas* (sin artículo). «à pessoas» es imposible.",
+  "tip": "Ante *uma*, tampoco: *fui a uma festa* (fui a una fiesta). La "
+         "excepción es la hora: *cheguei à uma* (llegué a la una)."},
 
  {"h": "Barrios y ciudades: vou a, volto da",
   "r": "Si volvés *da*, crase: *vou à Lapa* (volto da Lapa). Si volvés "
@@ -913,6 +1004,14 @@ LESSONS = {
   "r": "Locuciones femeninas llevan crase: *à noite, às vezes, à vontade, "
        "às pressas, à beira-mar, à vista*. Y *à moda de*, también "
        "oculto: *bife à milanesa*.",
+  "table": {"head": ["Locución", "Significa", "Ejemplo"],
+            "rows": [["à noite", "de noche, a la noche", "Saio à noite."],
+                     ["às vezes", "a veces", "Às vezes chove."],
+                     ["à vontade", "cómodo, a gusto", "Fique à vontade!"],
+                     ["às pressas", "a las apuradas", "Saímos às pressas."],
+                     ["à beira-mar", "frente al mar", "Moramos à beira-mar."],
+                     ["à vista", "al contado", "Paguei à vista."],
+                     ["à (moda de)", "a la manera de", "filé à parmegiana"]]},
   "ex": [["Fique *à vontade*!", "¡Ponete cómodo!"],
          ["Saímos *às pressas*.", "Salimos a las apuradas."],
          ["Um filé *à* parmegiana, por favor.", "Una milanesa a la parmesana, por favor."],

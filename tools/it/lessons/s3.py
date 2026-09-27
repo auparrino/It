@@ -5,8 +5,8 @@ LESSONS = {
 
 27: {
 "intro": "Los adverbios italianos se forman casi igual que en castellano. "
-         "Esta semana practicás cómo se forman y, sobre todo, dónde van "
-         "dentro de la frase.",
+         "Esta semana practicás cómo se forman, dónde van dentro de la "
+         "frase y los marcadores que ordenan una charla.",
 "blocks": [
  {"h": "Formación en -mente",
   "q": [{"prompt": "Formá el adverbio.", "stem": "facile → ___", "answer": "facilmente", "options": ["facilmente", "facilemente", "facilamente"]}, {"prompt": "Formá el adverbio.", "stem": "lento → ___", "answer": "lentamente", "options": ["lentamente", "lentomente", "lentemente"]}],
@@ -18,18 +18,41 @@ LESSONS = {
          ["Te lo spiego *semplicemente*.", "Te lo explico de forma simple."]],
   "warn": "Vocal + *-le* o *-re* pierde la *e*: *facile → facilmente*, "
           "*normale → normalmente*, *regolare → regolarmente*. «facilemente» "
-          "es falta segura."},
+          "es falta segura.",
+  "more": ["Dos excepciones que se usan mucho: *leggero → leggermente* "
+           "(apenas, un poco: *è leggermente corto*, es un poco corto) y "
+           "*altro → altrimenti* (si no, de otro modo: *sbrigati, altrimenti "
+           "perdiamo il treno*)."]},
 
  {"h": "Los que no llevan -mente",
   "q": [{"prompt": "¿Cuál está bien? «Lo hace bien.»", "answer": "Lo fa bene.", "options": ["Lo fa bene.", "Lo fa buonamente.", "Lo fa buono."]}, {"prompt": "¿Cuál está bien? «Voy con gusto.»", "answer": "Vengo volentieri.", "options": ["Vengo volentieri.", "Vengo volentieramente.", "Vengo volentiero."]}, {"prompt": "¿Cuál está bien? «Llega siempre tarde.»", "answer": "Arriva sempre tardi.", "options": ["Arriva sempre tardi.", "Arriva sempre tarde.", "Arriva sempre tardamente."]}],
-  "r": "Los más usados son formas propias: *bene, male, presto, tardi, "
-       "spesso, sempre, subito, insieme, volentieri*.",
+  "r": "Los más usados son formas propias, sin *-mente*: *bene, male, "
+       "presto, tardi, spesso, sempre, subito, insieme, volentieri*.",
   "ex": [["Arrivo *subito*.", "Llego enseguida."],
          ["Vengo *volentieri*.", "Voy con gusto."],
          ["Parla *piano*!", "¡Hablá despacio!"],
-         ["Ci vediamo *presto*.", "Nos vemos pronto."]],
-  "more": ["Otros de la misma familia: *meglio*, *peggio*, *mai*, *già*, "
-           "*ancora*, *piano* (despacio, bajito), *forte* (fuerte, rápido)."]},
+         ["Ci vediamo *presto*.", "Nos vemos pronto."],
+         ["Sono *appena* arrivato.", "Recién llego."]],
+  "table": {"head": ["Adverbio", "Significa", "Ejemplo"],
+            "rows": [["bene", "bien", "Canta *bene*."],
+                     ["male", "mal", "Scrive *male*."],
+                     ["meglio", "mejor (de bene)", "Oggi sto *meglio*."],
+                     ["peggio", "peor (de male)", "Sto *peggio* di ieri."],
+                     ["presto", "pronto, temprano", "Mi alzo *presto*."],
+                     ["tardi", "tarde", "Arriva sempre *tardi*."],
+                     ["spesso", "seguido, a menudo", "Vado *spesso* al cinema."],
+                     ["subito", "enseguida", "Torno *subito*."],
+                     ["insieme", "juntos", "Studiamo *insieme*."],
+                     ["volentieri", "con gusto", "Lo faccio *volentieri*."],
+                     ["piano", "despacio, bajito", "Parla *piano*, dorme."],
+                     ["forte", "fuerte, rápido", "Parla più *forte*!"],
+                     ["appena", "recién (con pasado); apenas", "È *appena* uscito."],
+                     ["ormai", "ya (a esta altura)", "*Ormai* è tardi."],
+                     ["purtroppo", "lamentablemente", "*Purtroppo* non posso."],
+                     ["soprattutto", "sobre todo", "Studio *soprattutto* di notte."]]},
+  "more": ["*meglio* y *peggio* son el comparativo de *bene* y *male*: *sto "
+           "meglio*, nunca «più bene». *vicino* (cerca) y *lontano* (lejos) "
+           "no cambian: *abita qui vicino*, *abitano lontano*."]},
 
  {"h": "Adjetivo o adverbio",
   "r": "El adjetivo acompaña al sustantivo (*un buon libro*); el adverbio, "
@@ -59,15 +82,39 @@ LESSONS = {
          ["Me lo ripeti *ancora*?", "¿Me lo repetís otra vez?"],
          ["Sei *mai* stato a Roma?", "¿Estuviste alguna vez en Roma?"],
          ["Non fumo *più*.", "Ya no fumo."]],
-  "table": {"head": ["Italiano", "Castellano", "Ojo con"],
-            "rows": [["ancora", "todavía / otra vez", "non ancora = todavía no"],
-                     ["già", "ya", "en preguntas: ¿ya?"],
-                     ["mai", "nunca / alguna vez", "Vai mai a teatro? = ¿vas alguna vez?"],
-                     ["più", "más / ya no", "non... più = ya no"],
-                     ["qui / qua", "acá", "prácticamente iguales"],
-                     ["lì / là", "allá", "íd."],
-                     ["magari", "ojalá / quizás", "no tiene traducción única"],
-                     ["addirittura", "incluso / nada menos que", "muy frecuente"]]}},
+  "table": {"head": ["Italiano", "Significa", "Ejemplo"],
+            "rows": [["ancora", "todavía; otra vez (non ancora = todavía no)", "Non è *ancora* pronto."],
+                     ["già", "ya; en preguntas, ¿ya?", "Hai *già* mangiato?"],
+                     ["mai", "nunca (con non); alguna vez", "Vai *mai* a teatro?"],
+                     ["più", "más; ya no (con non)", "Non ci vado *più*."],
+                     ["qui, qua", "acá (son iguales)", "Vieni *qui*!"],
+                     ["lì, là", "ahí, allá (son iguales)", "Mettilo *lì*."],
+                     ["magari", "ojalá; quizás", "*Magari* domani piove."],
+                     ["addirittura", "incluso, hasta; nada menos que", "È venuto *addirittura* il sindaco."]]},
+  "qq": [{"prompt": "¿Qué significa «Non fumo più»?", "answer": "Ya no fumo.", "options": ["Ya no fumo.", "No fumo más que eso.", "Todavía no fumo."]},
+         {"prompt": "¿Qué significa «Sei mai stato a Roma?»", "answer": "¿Estuviste alguna vez en Roma?", "options": ["¿Estuviste alguna vez en Roma?", "¿Nunca estuviste en Roma?", "¿Ya estuviste en Roma?"]}]},
+
+ {"h": "Marcadores para conversar",
+  "r": "Palabras cortas que ordenan la charla: retomar (*dunque*), resumir "
+       "(*insomma*), sumar (*tra l'altro*), confirmar (*in effetti*).",
+  "ex": [["*Dunque*, dove eravamo rimasti?", "Bueno, ¿dónde habíamos quedado?"],
+         ["Com'è andata? — *Insomma*, non benissimo.", "¿Cómo te fue? — Más o menos, no muy bien."],
+         ["È caro. — *In effetti*, costa troppo.", "Es caro. — La verdad que sí, sale demasiado."],
+         ["Ti è piaciuto? — *Altro che*!", "¿Te gustó? — ¡Y cómo!"]],
+  "table": {"head": ["Marcador", "Significa", "Ejemplo"],
+            "rows": [["dunque", "bueno, entonces (para retomar)", "*Dunque*, cominciamo."],
+                     ["insomma", "en fin, en resumen; más o menos", "*Insomma*, una giornata orribile."],
+                     ["in effetti", "la verdad que sí, efectivamente", "*In effetti* hai ragione."],
+                     ["tra l'altro", "además, encima", "È lungo e *tra l'altro* noioso."],
+                     ["oltretutto", "encima, para colmo", "*Oltretutto* piove."],
+                     ["altro che", "¡y cómo!, ¡ni hablar!", "Bello? *Altro che*!"],
+                     ["semmai", "en todo caso", "*Semmai* ti chiamo io."],
+                     ["tutt'al più", "a lo sumo, como mucho", "Ci vuole *tutt'al più* un'ora."],
+                     ["per carità", "¡por favor, no!, ¡ni loco!", "Ancora torta? *Per carità*!"]]},
+  "tip": "*insomma* solo, con tono dudoso, es «más o menos, no tanto»: "
+         "*Ti piace? — Insomma...*",
+  "qq": [{"prompt": "¿Qué significa «tutt'al più»?", "answer": "a lo sumo", "options": ["a lo sumo", "sobre todo", "más que nada"]},
+         {"prompt": "Elegí el marcador (en todo caso).", "stem": "Non devo scusarmi io: ___ sei tu.", "answer": "semmai", "options": ["semmai", "insomma", "dunque"]}]},
 ]},
 
 28: {
@@ -91,16 +138,25 @@ LESSONS = {
   "table": {"head": ["Conector", "Sentido", "Ejemplo"],
             "rows": [["e / ed", "y (ed ante e)", "Anna ed Elena"],
                      ["anche", "también", "Viene anche lui."],
-                     ["inoltre", "además", "Inoltre, costa poco."],
+                     ["inoltre / in più", "además", "Inoltre, costa poco."],
+                     ["oltre a", "además de", "Oltre a Roma, ho visto Napoli."],
+                     ["non solo... ma anche", "no solo... sino también", "Parla non solo inglese, ma anche cinese."],
+                     ["o... o", "o... o", "O resti o vai."],
+                     ["né... né", "ni... ni", "Non è né carne né pesce."],
                      ["ma", "pero", "Mi piace, ma costa troppo."],
                      ["però", "sin embargo", "Non posso, però ci provo."],
+                     ["eppure", "y sin embargo", "Sta male, eppure lavora."],
                      ["invece", "en cambio", "Io resto, lui invece parte."],
                      ["anzi", "es más / al contrario", "Non è brutto, anzi!"],
                      ["mentre", "mientras / en cambio", "Mentre tu dormi, io lavoro."],
+                     ["cioè", "o sea, es decir", "Vengo alle sei, cioè fra un'ora."],
                      ["tuttavia", "no obstante (formal)", "Tuttavia, il risultato è buono."]]},
   "warn": "*anzi* corrige hacia arriba lo que acabás de decir: *Non mi "
           "dispiace, anzi mi piace molto.* No tiene calco castellano; usado "
-          "bien, suena nativo."},
+          "bien, suena nativo.",
+  "more": ["Con *né... né* el *non* va delante del verbo: *non ho né tempo "
+           "né soldi* (no tengo ni tiempo ni plata). Al principio de la "
+           "frase, sin *non*: *né Marco né Anna sono venuti*."]},
 
  {"h": "Causa y consecuencia",
   "r": "*perché* = porque. *siccome* (como) va **siempre al principio**. "
@@ -111,10 +167,17 @@ LESSONS = {
                      ["dato che / visto che", "dado que", "coloquial y frecuente"],
                      ["quindi / dunque / perciò", "por lo tanto", "los tres equivalen"],
                      ["allora", "entonces", "también muletilla oral"],
-                     ["così", "así que", "Piove, così resto a casa."]]},
+                     ["così", "así que", "Piove, così resto a casa."],
+                     ["così / tanto... che", "tan... que", "Era così stanco che dormiva in piedi."],
+                     ["altrimenti", "si no", "Corri, altrimenti perdi il treno."]]},
   "ex": [["Resto a casa *perché* sono stanco.", "Me quedo en casa porque estoy cansado."],
          ["*Siccome* piove, restiamo a casa.", "Como llueve, nos quedamos en casa."],
-         ["Non viene, *quindi* cominciamo senza di lui.", "No viene, así que empezamos sin él."]]},
+         ["Non viene, *quindi* cominciamo senza di lui.", "No viene, así que empezamos sin él."],
+         ["*Visto che* sei qui, aiutami.", "Ya que estás acá, ayudame."],
+         ["Ero *così* stanco *che* mi sono addormentato.", "Estaba tan cansado que me dormí."]],
+  "warn": "*siccome* abre la frase: *Siccome piove, resto a casa*. Para "
+          "explicar después, *perché*: *resto a casa perché piove*, nunca "
+          "«resto a casa siccome piove»."},
 
  {"h": "Antes, después, apenas",
   "r": "*prima di* + infinitivo; *dopo* + infinitivo **compuesto**. Y "
@@ -125,7 +188,18 @@ LESSONS = {
          ["*Appena* arrivo, ti chiamo.", "Apenas llegue, te llamo."],
          ["Ti aspetto *finché* non arrivi.", "Te espero hasta que llegues."]],
   "warn": "*dopo* pide infinitivo compuesto: *dopo aver mangiato*, *dopo "
-          "essere arrivati*. «dopo mangiare» está mal."},
+          "essere arrivati*. «dopo mangiare» está mal.",
+  "table": {"head": ["Conector", "Significa", "Ejemplo"],
+            "rows": [["prima di + infinitivo", "antes de", "Prima di uscire, chiudi."],
+                     ["dopo + infinitivo compuesto", "después de", "Dopo aver mangiato, esco."],
+                     ["appena", "apenas, en cuanto", "Appena arrivo, ti chiamo."],
+                     ["finché (non)", "hasta que", "Aspetto finché non arrivi."],
+                     ["mentre", "mientras", "Mentre cucino, ascolto la radio."],
+                     ["poi", "después, luego", "Prima studio, poi esco."],
+                     ["alla fine", "al final", "Alla fine ha accettato."]]},
+  "tip": "En *finché non arrivi* el *non* no niega nada: es como el «hasta "
+         "que no llegues» que se oye en castellano. Con o sin *non*, significa "
+         "lo mismo."},
 
  {"h": "Ordenar un argumento",
   "r": "Para ordenar ideas: *innanzitutto*, *in primo luogo*, *poi*, "
@@ -134,9 +208,16 @@ LESSONS = {
          ["*In primo luogo* è caro; *poi* è lontano.", "En primer lugar, es caro; además, queda lejos."],
          ["*D'altra parte*, costa poco.", "Por otro lado, cuesta poco."],
          ["*Infine*, parliamo dei tempi.", "Por último, hablemos de los plazos."]],
-  "more": ["*innanzitutto* = ante todo; *d'altra parte* = por otro lado; "
-           "*infine* = por último; *in conclusione* = en conclusión. Y "
-           "*intanto* = mientras tanto."]},
+  "table": {"head": ["Conector", "Significa", "Ejemplo"],
+            "rows": [["innanzitutto", "ante todo", "Innanzitutto, grazie."],
+                     ["in primo luogo", "en primer lugar", "In primo luogo è caro."],
+                     ["poi", "después; además", "Poi è lontano."],
+                     ["d'altra parte", "por otro lado", "D'altra parte, costa poco."],
+                     ["intanto", "mientras tanto", "Intanto preparo la cena."],
+                     ["in fondo", "en el fondo", "In fondo ha ragione lui."],
+                     ["tutto sommato", "a fin de cuentas", "Tutto sommato, è andata bene."],
+                     ["infine", "por último", "Infine, parliamo dei tempi."],
+                     ["in conclusione", "en conclusión", "In conclusione, conviene."]]}},
 
  {"h": "Los que piden congiuntivo",
   "r": "*benché, sebbene* (aunque), *affinché* (para que), *purché* (con tal "
@@ -144,13 +225,26 @@ LESSONS = {
   "ex": [["*Benché sia* stanco, esco lo stesso.", "Aunque estoy cansado, salgo igual."],
          ["Te lo dico *perché* tu *capisca*.", "Te lo digo para que entiendas."],
          ["Ti aspetto, *purché* tu *venga* presto.", "Te espero, con tal de que vengas temprano."],
-         ["Torniamo *prima che piova*.", "Volvamos antes de que llueva."]],
-  "more": ["La lista completa: *benché*, *sebbene*, *nonostante*, *malgrado* "
-           "(aunque); *affinché* y *perché* con valor de finalidad (para "
-           "que); *a meno che non* (a menos que), *purché*, *a patto che* "
-           "(con tal de que); *prima che* (antes de que).",
-           "*perché* con indicativo es causal (porque); con congiuntivo, "
-           "final (para que)."]},
+         ["Torniamo *prima che piova*.", "Volvamos antes de que llueva."],
+         ["*Anche se piove*, esco.", "Aunque llueve, salgo igual."]],
+  "table": {"head": ["Conector", "Significa", "Ejemplo"],
+            "rows": [["benché / sebbene", "aunque", "Benché sia tardi, resto."],
+                     ["nonostante / malgrado", "aunque; a pesar de", "Nonostante piova, esco."],
+                     ["affinché / perché", "para que", "Te lo dico perché tu capisca."],
+                     ["purché / a patto che", "con tal de que, siempre que", "Vengo, purché tu venga."],
+                     ["a meno che non", "a menos que", "Vengo, a meno che non piova."],
+                     ["prima che", "antes de que", "Esco prima che piova."],
+                     ["anche se (+ indicativo)", "aunque", "Anche se piove, esco."]]},
+  "warn": "*anche se* (aunque) va con **indicativo**: *anche se piove, "
+          "esco*. *benché* dice lo mismo, pero pide congiuntivo: *benché "
+          "piova*.",
+  "more": ["*perché* con indicativo es causal (porque); con congiuntivo, "
+           "final (para que). En *a meno che non piova* el *non* no niega: "
+           "significa «a menos que llueva».",
+           "*nonostante* también va con un sustantivo: *nonostante la "
+           "pioggia* (a pesar de la lluvia). Y con el mismo sujeto, *a "
+           "condizione di* + infinitivo: *ti accompagno a condizione di "
+           "tornare presto*."]},
 ]},
 
 29: {
@@ -163,7 +257,10 @@ LESSONS = {
        "prossimo y, con *essere*, participio concordado.",
   "ex": [["Credo che *abbia* già *mangiato*.", "Creo que ya comió."],
          ["Penso che Anna *sia partita* ieri.", "Creo que Anna se fue ayer."],
-         ["Spero che *siate arrivati* bene.", "Espero que hayan llegado bien."]],
+         ["Spero che *siate arrivati* bene.", "Espero que hayan llegado bien."],
+         ["Temo che la nonna *si sia persa*.", "Temo que la abuela se haya perdido."]],
+  "tip": "Los reflexivos van con *essere*, como siempre: *che mi sia "
+         "alzato*, *che si sia persa*, *che ci siamo divertiti*.",
   "table": {"head": ["", "con avere", "con essere"],
             "rows": [["io", "abbia parlato", "sia andato/a"],
                      ["tu", "abbia parlato", "sia andato/a"],
@@ -178,7 +275,12 @@ LESSONS = {
   "ex": [["Credo che *sia* già *partito*.", "Creo que ya salió."],
          ["Mi dispiace che tu non *sia venuto*.", "Lamento que no hayas venido."],
          ["Non penso che *abbiano capito*.", "No creo que hayan entendido."],
-         ["È strano che non *abbia chiamato*.", "Es raro que no haya llamado."]]},
+         ["È strano che non *abbia chiamato*.", "Es raro que no haya llamado."],
+         ["*Può darsi che* sia già *partito*.", "Puede ser que ya se haya ido."]],
+  "more": ["Sirven los mismos disparadores de la semana 25, más algunos muy "
+           "frecuentes: *può darsi che* (puede ser que), *è probabile che* "
+           "(es probable que), *dubito che* (dudo que), *sembra che* (parece "
+           "que)."]},
 
  {"h": "Presente o passato",
   "r": "Mismo momento o después → **congiuntivo presente**. Antes → "
@@ -198,9 +300,14 @@ LESSONS = {
        "che*) piden congiuntivo; si la acción es anterior, **passato**.",
   "ex": [["*Benché abbia studiato*, non si sente pronto.", "Aunque estudió, no se siente listo."],
          ["*Sebbene abbia dormito* dieci ore, è ancora stanco.", "Aunque durmió diez horas, sigue cansado."],
-         ["È la cosa più bella che io *abbia* mai *visto*.", "Es lo más lindo que vi en mi vida."]],
+         ["È la cosa più bella che io *abbia* mai *visto*.", "Es lo más lindo que vi en mi vida."],
+         ["*Chiunque sia stato*, ha sbagliato.", "Quienquiera que haya sido, se equivocó."]],
   "warn": "*dopo che* no es concesiva: va con **indicativo**. *Dopo che è "
-          "partito...*, nunca «dopo che sia partito»."},
+          "partito...*, nunca «dopo che sia partito».",
+  "more": ["También piden congiuntivo *l'unico che* (el único que: *è "
+           "l'unico che mi abbia aiutato*) y *chiunque* (quienquiera que, "
+           "cualquiera que): *chiunque abbia aperto la porta, dovrà "
+           "pagare*."]},
 ]},
 
 30: {
@@ -220,13 +327,13 @@ LESSONS = {
   "ex": [["Volevo che tu *parlassi* con lei.", "Quería que hablaras con ella."],
          ["Pensavo che *dormisse*.", "Pensaba que dormía."],
          ["Credevo che *fosse* tardi.", "Creía que era tarde."]],
-  "table": {"head": ["", "parlare", "vendere", "dormire", "essere"],
-            "rows": [["io", "parlassi", "vendessi", "dormissi", "fossi"],
-                     ["tu", "parlassi", "vendessi", "dormissi", "fossi"],
-                     ["lui/lei", "parlasse", "vendesse", "dormisse", "fosse"],
-                     ["noi", "parlassimo", "vendessimo", "dormissimo", "fossimo"],
-                     ["voi", "parlaste", "vendeste", "dormiste", "foste"],
-                     ["loro", "parlassero", "vendessero", "dormissero", "fossero"]]},
+  "table": {"head": ["", "parlare", "vendere", "dormire", "avere", "essere"],
+            "rows": [["io", "parlassi", "vendessi", "dormissi", "avessi", "fossi"],
+                     ["tu", "parlassi", "vendessi", "dormissi", "avessi", "fossi"],
+                     ["lui/lei", "parlasse", "vendesse", "dormisse", "avesse", "fosse"],
+                     ["noi", "parlassimo", "vendessimo", "dormissimo", "avessimo", "fossimo"],
+                     ["voi", "parlaste", "vendeste", "dormiste", "aveste", "foste"],
+                     ["loro", "parlassero", "vendessero", "dormissero", "avessero", "fossero"]]},
   "warn": "*noi* termina en *-ssimo* (*parlassimo*), parecido al "
           "superlativo. Y *io* y *tu* son iguales: poné el pronombre si hay "
           "dudas."},
@@ -239,13 +346,16 @@ LESSONS = {
          ["Pensavo che *stessi* male.", "Pensaba que estabas mal."],
          ["Speravo che mi *dessero* una mano.", "Esperaba que me dieran una mano."]],
   "table": {"head": ["Verbo", "io/tu", "lui/lei", "loro"],
-            "rows": [["fare", "facessi", "facesse", "facessero"],
-                     ["dire", "dicessi", "dicesse", "dicessero"],
-                     ["bere", "bevessi", "bevesse", "bevessero"],
-                     ["porre", "ponessi", "ponesse", "ponessero"],
-                     ["tradurre", "traducessi", "traducesse", "traducessero"],
-                     ["dare", "dessi", "desse", "dessero"],
-                     ["stare", "stessi", "stesse", "stessero"]]}},
+            "rows": [["fare (hacer)", "facessi", "facesse", "facessero"],
+                     ["dire (decir)", "dicessi", "dicesse", "dicessero"],
+                     ["bere (tomar, beber)", "bevessi", "bevesse", "bevessero"],
+                     ["porre (poner)", "ponessi", "ponesse", "ponessero"],
+                     ["tradurre (traducir)", "traducessi", "traducesse", "traducessero"],
+                     ["dare (dar)", "dessi", "desse", "dessero"],
+                     ["stare (estar)", "stessi", "stesse", "stessero"]]},
+  "tip": "*avere*, *potere*, *volere*, *sapere* y *venire* son regulares "
+         "en este tiempo: *avessi*, *potessi*, *volessi*, *sapessi*, "
+         "*venissi*."},
 
  {"h": "Trapassato del congiuntivo",
   "r": "*avessi* o *fossi* + participio: una acción **anterior** a un verbo "
@@ -317,7 +427,12 @@ LESSONS = {
          ["Al posto tuo, *avrei detto* di no.", "En tu lugar, habría dicho que no."],
          ["*Avresti dovuto* avvisarmi.", "Me tendrías que haber avisado."]],
   "tip": "*Avresti dovuto / potuto / voluto* + infinitivo es la fórmula del "
-         "reproche y del arrepentimiento. Muy útil y muy frecuente."},
+         "reproche y del arrepentimiento. Muy útil y muy frecuente.",
+  "more": ["Si el infinitivo es de los que van con *essere* (*restare, "
+           "partire, venire*), el modal puede tomar *essere*: *sarebbe "
+           "dovuto restare* (se tendría que haber quedado), *sarebbe potuta "
+           "partire* (se podría haber ido). *avrebbe dovuto restare* también "
+           "se oye y se acepta."]},
 
  {"h": "Uso 2: el futuro en el pasado",
   "r": "«Dijo que vendría» = *ha detto che sarebbe venuto*. Futuro visto "
@@ -352,7 +467,13 @@ LESSONS = {
          ["Credevo che *sarebbe partito* dopo.", "Creía que se iría después."]],
   "table": {"head": ["Principal", "Anterior", "Simultáneo", "Posterior"],
             "rows": [["presente / futuro", "congiuntivo passato", "congiuntivo presente", "congiuntivo presente"],
-                     ["pasado", "congiuntivo trapassato", "congiuntivo imperfetto", "condizionale passato"]]}},
+                     ["pasado", "congiuntivo trapassato", "congiuntivo imperfetto", "condizionale passato"],
+                     ["condicional (vorrei, sarebbe meglio)", "congiuntivo trapassato", "congiuntivo imperfetto", "congiuntivo imperfetto"]]},
+  "more": ["Con el principal en condicional, lo simultáneo y lo posterior "
+           "van en imperfetto: *vorrei che tu venissi domani* (me gustaría "
+           "que vinieras mañana), *sarebbe meglio che lo dicesse lui* (sería "
+           "mejor que lo dijera él). Lo anterior, en trapassato: *non si "
+           "direbbe che avesse studiato*."]},
 
  {"h": "Lo posterior en el pasado",
   "r": "«Creía que vendría» = *credevo che sarebbe venuto*: el futuro visto "
@@ -386,7 +507,11 @@ LESSONS = {
          ["Pensavo che *piovesse*.", "Pensaba que llovía. (pasado + a la vez)"],
          ["Pensavo che *sarebbe piovuto*.", "Pensaba que iba a llover. (pasado + después)"]],
   "tip": "Con esas dos respuestas la forma sale sola. Hacelo en voz alta al "
-         "principio: es más rápido que recordar la tabla."},
+         "principio: es más rápido que recordar la tabla.",
+  "more": ["Con **el mismo sujeto** no hay *che*: *di* + infinitivo, y si la "
+           "acción es anterior, infinitivo compuesto: *era contento di aver "
+           "cambiato la legge* (estaba contento de haber cambiado la ley), "
+           "*speravo di aver capito* (esperaba haber entendido)."]},
 ]},
 
 33: {
@@ -439,7 +564,12 @@ LESSONS = {
          ["*Qualora fosse* necessario, mi chiami.", "En caso de que fuera necesario, llámeme."],
          ["*Magari piovesse*!", "¡Ojalá lloviera!"]],
   "tip": "Y para desear, *magari* + congiuntivo imperfetto, como viste en la "
-         "semana 30."},
+         "semana 30.",
+  "more": ["En *a meno che non piova* el *non* no niega: es «a menos que "
+           "llueva». *se per caso* = si por casualidad; *se mai* = si alguna "
+           "vez (*se mai lo vedi, salutalo*). Y en la exclamación se puede "
+           "saltear el *se*: *Avessi saputo, sarei venuto!* (¡si hubiera "
+           "sabido, habría venido!)."]},
 
  {"h": "El doble imperfetto coloquial",
   "r": "En el habla se oye *se lo sapevo, non venivo*. Vale en lo oral; por "
@@ -478,7 +608,16 @@ LESSONS = {
   "ex": [["La città *in cui* vivo.", "La ciudad en la que vivo."],
          ["Il motivo *per cui* sono venuto.", "El motivo por el que vine."],
          ["La persona *a cui* ho scritto.", "La persona a la que le escribí."],
-         ["Il libro *di cui* ti parlavo.", "El libro del que te hablaba."]],
+         ["Il libro *di cui* ti parlavo.", "El libro del que te hablaba."],
+         ["Il paese *da cui* viene.", "El pueblo del que viene."]],
+  "table": {"head": ["Forma", "Significa", "Ejemplo"],
+            "rows": [["a cui", "a quien, al que", "la persona *a cui* ho scritto"],
+                     ["di cui", "de quien, del que", "il libro *di cui* parlo"],
+                     ["da cui", "de donde, desde el que", "il paese *da cui* vengo"],
+                     ["in cui", "en el que, donde", "la città *in cui* vivo"],
+                     ["con cui", "con quien, con el que", "la ragazza *con cui* esco"],
+                     ["per cui", "por el que; por eso", "il motivo *per cui* parto"],
+                     ["su cui", "sobre el que", "la sedia *su cui* siedo"]]},
   "tip": "Solo con *a* la preposición se puede omitir: *la persona cui ho "
          "scritto* es correcto y culto. Con las demás, nunca."},
 
@@ -499,7 +638,14 @@ LESSONS = {
          ["Sono le ragioni *per le quali* ho rinunciato.", "Son las razones por las que renuncié."]],
   "tip": "*il figlio della vicina, che mi saluta sempre*: ¿quién saluda? *il "
          "figlio della vicina, il quale mi saluta sempre*: el hijo, sin "
-         "duda."},
+         "duda.",
+  "warn": "*il quale* no sirve de objeto directo: *la borsa che ho "
+          "comprato*, nunca «la borsa la quale ho comprato». Como sujeto o "
+          "con preposición, sí.",
+  "more": ["Con preposición, el artículo se funde como siempre: *al quale*, "
+           "*della quale*, *nei quali*, *sulle quali*. Y es la forma natural "
+           "detrás de preposiciones largas: *senza la quale* (sin la cual), "
+           "*secondo il quale* (según el cual)."]},
 
  {"h": "chi: sin antecedente",
   "q": [{"prompt": "Elegí el relativo", "stem": "___ cerca trova.", "answer": "Chi", "options": ["Chi", "Che", "Cui"]}, {"prompt": "Elegí el verbo", "stem": "Chi ___ finito può uscire.", "answer": "ha", "options": ["ha", "hanno", "hai"]}],

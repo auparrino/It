@@ -35,9 +35,9 @@ LESSONS = {
  {"h": "de + artículo: do, da, dos, das",
   "r": "Lo que gusta va siempre tras *de*, y *de* se funde con el artículo: "
        "*gosto do mar*, *da praia*, *dos blocos*, *das festas*.",
-  "table": {"head": ["de + o", "de + a", "de + os", "de + as"],
+  "table": {"head": ["de + o = do (del)", "de + a = da (de la)", "de + os = dos (de los)", "de + as = das (de las)"],
             "rows": [["do mar", "da praia", "dos shows", "das festas"],
-                     ["dele (de + ele)", "dela (de + ela)", "deles", "delas"]]},
+                     ["dele (de + ele: de él)", "dela (de + ela: de ella)", "deles (de ellos)", "delas (de ellas)"]]},
   "ex": [["Você gosta *do* Maracanã?", "¿Te gusta el Maracanã?"],
          ["Ela não gosta *da* chuva.", "No le gusta la lluvia."],
          ["Gosto muito *das* músicas do Tom Jobim.", "Me gustan mucho las canciones de Tom Jobim."],
@@ -260,12 +260,12 @@ LESSONS = {
  {"h": "Directo e indirecto",
   "r": "Directo: *me, te, o, a, nos, os, as*. Indirecto: *me, te, lhe, nos, "
        "lhes*. Casi como en español, con *o / a* en lugar de «lo / la».",
-  "table": {"head": ["", "directo", "indirecto"],
-            "rows": [["eu", "me", "me"],
-                     ["tu / você (habla)", "te", "te"],
-                     ["ele / ela / você", "o / a", "lhe"],
-                     ["nós", "nos", "nos"],
-                     ["eles / elas / vocês", "os / as", "lhes"]]},
+  "table": {"head": ["", "directo", "indirecto", "Significa", "Ejemplo"],
+            "rows": [["eu", "me", "me", "me", "Ela *me* viu."],
+                     ["tu / você (habla)", "te", "te", "te", "Eu *te* amo."],
+                     ["ele / ela / você", "o / a", "lhe", "lo, la / le", "Eu *o* vi. Eu *lhe* disse."],
+                     ["nós", "nos", "nos", "nos", "Ela *nos* convidou."],
+                     ["eles / elas / vocês", "os / as", "lhes", "los, las / les", "Eu *os* conheço. Isso *lhes* interessa."]]},
   "ex": [["Ela *me* ligou ontem.", "Me llamó ayer."],
          ["Eu *te* amo.", "Te amo."],
          ["Comprei o livro e *o* li na praia.", "Compré el libro y lo leí en la playa."],
@@ -307,6 +307,10 @@ LESSONS = {
           "no en *-i-*: *abri-lo*, nunca «abrí-lo».",
   "tip": "Esto es de libro y de mail formal. En la charla nadie dice "
          "«comprá-lo»: lo resuelve como en el bloque siguiente.",
+  "more": ["Tras una forma que termina en nasal (*-m, -ão, -õe*) el "
+           "pronombre pasa a *-no, -na, -nos, -nas*: *dão-no* (lo dan), "
+           "*põe-na* (la pone), *compraram-nos* (los compraron). También es "
+           "solo de la escritura formal."],
   "q": [{"prompt": "«Quiero venderla.» (escrito)", "stem": "Quero ___.",
          "answer": "vendê-la", "options": ["vendê-la", "vender-la", "vendé-la"]}]},
 
@@ -532,10 +536,10 @@ LESSONS = {
          "gustaría. Muy carioca."},
 
  {"h": "Sugerir e imaginar",
-  "r": "*Você deveria...* (deberías), *Seria melhor...*, *Eu, no seu "
+  "r": "*Você deveria...* (deberías), *Seria bom...*, *Eu, no seu "
        "lugar,...* Para imaginar: *Eu moraria em Paraty*.",
   "ex": [["Você *deveria* conhecer a Lapa.", "Deberías conocer Lapa."],
-         ["*Seria melhor* ir de metrô.", "Sería mejor ir en subte."],
+         ["*Seria bom* ir de metrô.", "Estaría bueno ir en subte."],
          ["No seu lugar, eu *pediria* a moqueca.", "En tu lugar, pediría la moqueca."],
          ["Que tal *ir* ao Pão de Açúcar?", "¿Qué tal si vamos al Pan de Azúcar?"]],
   "warn": "«Deberías» es *deveria*, no «deberias». *devia* (imperfeito) es "
@@ -673,12 +677,12 @@ LESSONS = {
  {"h": "algum / nenhum, alguém / ninguém, algo / nada",
   "r": "Personas: *alguém / ninguém*. Cosas: *algo / nada*. Con "
        "sustantivo: *algum, alguma / nenhum, nenhuma*.",
-  "table": {"head": ["", "afirmativo", "negativo"],
-            "rows": [["persona", "alguém", "ninguém"],
-                     ["cosa", "algo, alguma coisa", "nada"],
-                     ["+ sustantivo", "algum / alguma", "nenhum / nenhuma"],
-                     ["tiempo", "sempre, alguma vez", "nunca"],
-                     ["lugar", "em algum lugar", "em lugar nenhum"]]},
+  "table": {"head": ["", "afirmativo", "negativo", "Ejemplo"],
+            "rows": [["persona", "alguém (alguien)", "ninguém (nadie)", "*Alguém* ligou? — *Ninguém*."],
+                     ["cosa", "algo, alguma coisa (algo)", "nada (nada)", "Quer *algo*? — *Nada*, obrigado."],
+                     ["+ sustantivo", "algum / alguma (algún, alguna)", "nenhum / nenhuma (ningún, ninguna)", "*Algum* problema? — *Nenhum*."],
+                     ["tiempo", "sempre, alguma vez (siempre, alguna vez)", "nunca (nunca)", "*Sempre* vou. / *Nunca* vou."],
+                     ["lugar", "em algum lugar (en algún lado)", "em lugar nenhum (en ningún lado)", "Está *em algum lugar*. / Não está *em lugar nenhum*."]]},
   "ex": [["Tem *alguém* aí?", "¿Hay alguien ahí?"],
          ["*Nenhum* amigo veio.", "No vino ningún amigo."],
          ["Não tenho *nenhuma* ideia.", "No tengo ninguna idea."],
@@ -1201,7 +1205,8 @@ LESSONS = {
        "*pela qual*, *durante o qual*. Concuerda con el antecedente.",
   "ex": [["O projeto *sobre o qual* falei.", "El proyecto sobre el que hablé."],
          ["A rua *pela qual* passamos.", "La calle por la que pasamos."],
-         ["Os amigos, *os quais* moram em Niterói, vieram.", "Vinieron los amigos, los cuales viven en Niterói."]],
+         ["Os amigos, *os quais* moram em Niterói, vieram.", "Vinieron los amigos, los cuales viven en Niterói."],
+         ["As ruas *pelas quais* passamos são antigas.", "Las calles por las que pasamos son antiguas."]],
   "tip": "Suena formal: al hablar, *que* resuelve casi todo. Tras "
          "preposiciones de una sílaba, *que* o *quem* alcanzan."},
 
@@ -1210,7 +1215,8 @@ LESSONS = {
        "detrás: *o autor cujo livro li*, *a cantora cujas músicas ouço*.",
   "ex": [["O escritor *cujo* livro li é carioca.", "El escritor cuyo libro leí es carioca."],
          ["A cantora *cujas* músicas ouço é da Bahia.", "La cantante cuyas canciones escucho es de Bahía."],
-         ["O bairro *cuja* praia é a mais bonita.", "El barrio cuya playa es la más linda."]],
+         ["O bairro *cuja* praia é a mais bonita.", "El barrio cuya playa es la más linda."],
+         ["Os alunos *cujos* pais vieram ficaram felizes.", "Los alumnos cuyos padres vinieron quedaron contentos."]],
   "warn": "Nada de «cujo o»: el artículo sobra. Y concuerda con lo poseído: "
           "*o homem cuja casa*, no «cujo casa».",
   "q": [{"prompt": "«La chica cuyo padre es médico.»", "stem": "A menina ___ pai é médico.",

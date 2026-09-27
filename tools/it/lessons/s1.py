@@ -29,17 +29,17 @@ LESSONS = {
   "r": "*c* y *g*: duras ante *a, o, u*; blandas ante *e, i*. La *h* las "
        "endurece; una *i* muda las ablanda.",
   "table": {"head": ["Se escribe", "Suena", "Ejemplo"],
-            "rows": [["ca, co, cu", "ka, ko, ku", "casa, cosa, cubo"],
-                     ["ce, ci", "che, chi (como en «chico»)", "cena, cinema"],
-                     ["che, chi", "ke, ki", "perché, chiave"],
-                     ["cia, cio, ciu", "cha, cho, chu", "ciao, cioccolata"],
-                     ["ga, go, gu", "ga, go, gu", "gatto, gonna"],
-                     ["ge, gi", "dy, como la j de «jeans»", "gelato, giro"],
-                     ["ghe, ghi", "gue, gui", "spaghetti, ghiaccio"],
-                     ["gn", "ñ", "signore, bagno"],
-                     ["gli", "casi «li» muy rápida", "figlio, aglio"],
-                     ["sce, sci", "sh inglesa", "pesce, sciare"],
-                     ["z", "ts o dz", "grazie, zero"]]},
+            "rows": [["ca, co, cu", "ka, ko, ku", "casa, cosa (cosa), cubo"],
+                     ["ce, ci", "che, chi (como en «chico»)", "cena, cinema (cine)"],
+                     ["che, chi", "ke, ki", "perché (porque), chiave (llave)"],
+                     ["cia, cio, ciu", "cha, cho, chu", "ciao (chau), cioccolata"],
+                     ["ga, go, gu", "ga, go, gu", "gatto (gato), gonna (pollera)"],
+                     ["ge, gi", "dy, como la j de «jeans»", "gelato (helado), giro (vuelta)"],
+                     ["ghe, ghi", "gue, gui", "spaghetti, ghiaccio (hielo)"],
+                     ["gn", "ñ", "signore (señor), bagno (baño)"],
+                     ["gli", "«ll» tradicional (no la porteña): casi «li» rápida", "figlio (hijo), aglio (ajo)"],
+                     ["sce, sci", "sh inglesa", "pesce (pescado), sciare (esquiar)"],
+                     ["z", "ts o dz", "grazie (gracias), zero (cero)"]]},
   "ex": [["*ce*na / *che*", "cena / que: «chena», «ke»"],
          ["*ge*lato / spa*ghe*tti", "helado / spaghetti: «dyelato», «spaguetti»"],
          ["*cia*o, *gio*rno", "chau, día: la i no suena"],
@@ -80,7 +80,7 @@ LESSONS = {
   "r": "*qu* suena «cu». La *s* entre vocales suele ser sonora. La *r* "
        "simple es un toque; la *rr*, vibrante.",
   "ex": [["*qu*esto", "«cuésto», nunca «késto»"],
-         ["ro*s*a", "s sonora, como una z inglesa"],
+         ["ro*s*a", "rosa: s sonora, como una z inglesa"],
          ["ca*r*o / ca*rr*o", "querido (r simple) / carro (rr vibrante)"]]},
 
  {"h": "Siete vocales, no cinco",
@@ -102,25 +102,32 @@ LESSONS = {
   "r": "*essere* = ser (y muchas veces «estar»); *avere* = tener. Son "
        "irregulares: de memoria. El pronombre se suele omitir.",
   "table": {"head": ["", "essere", "avere"],
-            "rows": [["io", "sono", "ho"],
-                     ["tu", "sei", "hai"],
-                     ["lui / lei", "è", "ha"],
-                     ["noi", "siamo", "abbiamo"],
-                     ["voi", "siete", "avete"],
-                     ["loro", "sono", "hanno"]]},
+            "rows": [["io (yo)", "sono", "ho"],
+                     ["tu (vos)", "sei", "hai"],
+                     ["lui / lei (él / ella)", "è", "ha"],
+                     ["noi (nosotros)", "siamo", "abbiamo"],
+                     ["voi (ustedes)", "siete", "avete"],
+                     ["loro (ellos / ellas)", "sono", "hanno"]]},
   "ex": [["*Sono* di Buenos Aires.", "Soy de Buenos Aires."],
          ["Il caffè *è* caldo.", "El café está caliente."],
          ["*Ho* vent'anni.", "Tengo veinte años."],
-         ["*C'è* un bar qui vicino?", "¿Hay un bar cerca de acá?"]],
+         ["*Non ho* fame.", "No tengo hambre."],
+         ["*C'è* un bar qui vicino? *Ci sono* bar qui vicino?", "¿Hay un bar cerca? ¿Hay bares cerca?"]],
   "warn": "*è* (es) lleva tilde; *e* (y), no. Y *ho, hai, ha, hanno* se leen "
-          "«o, ai, a, anno».",
+          "«o, ai, a, anno». Para negar, *non* delante del verbo: *non sono*, "
+          "*non ho*.",
   "tip": "Edad y sensaciones van con *avere*: *ho fame, ho sete, ho sonno, "
-         "ho fretta* (estoy apurado). «Hay» = *c'è* / *ci sono*.",
+         "ho fretta* (estoy apurado). «Hay» = *c'è* + singular, *ci sono* + "
+         "plural.",
   "more": ["Con *avere* también: *ho freddo / ho caldo* (frío / calor), *ho "
-           "paura* (miedo), *ho vergogna* (vergüenza), *ho ragione / ho "
-           "torto* (tengo razón / estoy equivocado). *sono* sirve para «yo "
-           "soy» y para «ellos son»: el contexto decide. El resto de los "
-           "verbos llega en las semanas 5 y 6."]},
+           "paura* (miedo), *ho vergogna* (vergüenza), *ho voglia di* (tengo "
+           "ganas de), *ho bisogno di* (necesito), *ho ragione / ho torto* "
+           "(tengo razón / estoy equivocado). Con *essere*: *sono d'accordo* "
+           "(estoy de acuerdo), *sono in ritardo* (llego tarde).",
+           "*sono* sirve para «yo soy» y para «ellos son»: el contexto decide. "
+           "*voi* es «ustedes» en confianza; el trato de usted llega en la "
+           "semana 5. Dos sujetos se suman: *tu e Paola* = *voi* (*siete*), "
+           "*io e Marco* = *noi* (*siamo*)."]},
 ]},
 
 2: {

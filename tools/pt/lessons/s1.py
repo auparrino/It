@@ -65,7 +65,7 @@ LESSONS = {
                      ["L", "ele", "Y", "ípsilon"],
                      ["M", "eme", "Z", "zê"]]},
   "ex": [["Como se escreve? — *Erre, a, efe, a*.", "¿Cómo se escribe? — R, A, F, A."],
-         ["*Sofía* com *acento agudo* no i", "con tilde en la i"],
+         ["*Sofía*: i com *acento agudo*", "Sofía: i con tilde (acento agudo)"],
          ["*Ç*: cê-cedilha", "la c con cedilla (*cabeça*)"]],
   "tip": "Para deletrear en el teléfono: *é* de «escola», *gê* de "
          "«gente», *jota* de «João». Pedí *Pode soletrar?* (¿Me lo deletreás?)."},
@@ -78,7 +78,7 @@ LESSONS = {
                      ["é (es)", "e (y)", "é / e"],
                      ["pé, café", "você, português", "é / ê"],
                      ["nó, pó", "ovo, bolo", "ó / ô"]]},
-  "ex": [["minha *avó* / meu *avô*", "mi abuela / mi abuelo"],
+  "ex": [["a *avó* / o *avô*", "la abuela / el abuelo"],
          ["Ela *é* de Recife *e* ele *é* de Belém.", "Ella es de Recife y él es de Belém."],
          ["*café*, *pé*", "é abierta, como en «perro»"],
          ["*você*, *três*", "ê cerrada, casi una «e» corta"]],
@@ -141,14 +141,14 @@ LESSONS = {
   "r": "*ser* y *estar* se reparten casi como en español; *ter* = tener. "
        "Una diferencia: dónde **queda** algo fijo va con *ser*: *o "
        "apartamento é em Botafogo*.",
-  "table": {"head": ["", "ser", "estar", "ter"],
-            "rows": [["eu", "sou", "estou", "tenho"],
-                     ["tu", "és", "estás", "tens"],
-                     ["ele / ela / você", "é", "está", "tem"],
-                     ["nós", "somos", "estamos", "temos"],
-                     ["eles / elas / vocês", "são", "estão", "têm"]]},
+  "table": {"head": ["Persona", "ser", "estar", "ter"],
+            "rows": [["eu (yo)", "sou", "estou", "tenho"],
+                     ["tu (vos, tú)", "és", "estás", "tens"],
+                     ["ele / ela / você (él / ella / vos)", "é", "está", "tem"],
+                     ["nós (nosotros)", "somos", "estamos", "temos"],
+                     ["eles / elas / vocês (ellos / ellas / ustedes)", "são", "estão", "têm"]]},
   "ex": [["*Sou* argentina, de Mendoza.", "Soy argentina, de Mendoza."],
-         ["*Tenho* trinta anos. Eles *têm* dois filhos.", "Tengo treinta años. Ellos tienen dos hijos."],
+         ["*Tenho* um irmão. Eles *têm* filhos.", "Tengo un hermano. Ellos tienen hijos."],
          ["*Estou com* fome e *com* sede.", "Tengo hambre y sed."],
          ["O apartamento *é* em Botafogo; eu *estou* em Copacabana.", "El departamento queda en Botafogo; yo estoy en Copacabana."],
          ["*Não* sou carioca: sou argentino.", "No soy carioca: soy argentino (la negación, não, va antes del verbo)."]],
@@ -197,7 +197,7 @@ LESSONS = {
             "rows": [["-ões (la mayoría)", "limão → limões, estação → estações", "-ones: limones, estaciones"],
                      ["-ães", "pão → pães, alemão → alemães, cão → cães", "-anes: panes, alemanes, canes"],
                      ["-ãos", "mão → mãos, irmão → irmãos, cidadão → cidadãos", "-anos: manos, hermanos, ciudadanos"]]},
-  "ex": [["uma estaç*ão* → duas estaç*ões*", "una estación → dos estaciones"],
+  "ex": [["a estaç*ão* → as estaç*ões*", "la estación → las estaciones"],
          ["o p*ão* → os p*ães*", "el pan → los panes"],
          ["a m*ão* → as m*ãos*", "la mano → las manos"],
          ["o irm*ão* → os irm*ãos*", "el hermano → los hermanos"]],
@@ -247,7 +247,7 @@ LESSONS = {
          ["*o* sangue", "la sangre"],
          ["*a* ponte Rio-Niterói", "el puente Río-Niterói"],
          ["*uma* dor forte", "un dolor fuerte"],
-         ["*a* cor do mar", "el color del mar"]],
+         ["*a* cor verde", "el color verde"]],
   "warn": "El adjetivo acompaña al género portugués: *o leite* está "
           "*frio*, *a dor* es *forte*, *a árvore* es *alta*."},
 
@@ -256,21 +256,21 @@ LESSONS = {
        "viagem, a mensagem, a garagem, a paisagem*.",
   "ex": [["*a* viag*em*", "el viaje"],
          ["*a* mensag*em*", "el mensaje"],
-         ["*a* paisag*em* do Pão de Açúcar", "el paisaje del Pan de Azúcar"],
+         ["*uma* paisag*em* linda", "un paisaje lindo"],
          ["*as* viag*ens*", "los viajes: plural en -ns"]],
   "warn": "«O viagem» es el error más oído de los argentinos en Brasil. "
           "Pensá en la *-m*: *-agem* = femenino."},
 
  {"h": "Decir qué hay: tem y há",
-  "q": [{"prompt": "«Hay un boteco en la esquina» (como se dice en Brasil):", "answer": "Tem um boteco na esquina.", "options": ["Tem um boteco na esquina.", "Hay um boteco na esquina.", "Têm um boteco na esquina."]}],
+  "q": [{"prompt": "«Hay un boteco ahí» (como se dice en Brasil):", "answer": "Tem um boteco ali.", "options": ["Tem um boteco ali.", "Hay um boteco ali.", "Têm um boteco ali."]}],
   "r": "«Hay» se dice *tem* (habla, todo Brasil) o *há* (escrito, "
-       "formal). Los dos son invariables: *tem dois*, *há dois*.",
-  "ex": [["*Tem* um boteco na esquina.", "Hay un bar en la esquina."],
+       "formal). Los dos son invariables: *tem hotéis*, *há hotéis*.",
+  "ex": [["*Tem* um boteco ali.", "Hay un bar ahí."],
          ["*Tem* açaí?", "¿Hay asaí?"],
-         ["*Há* dois hotéis no bairro.", "Hay dos hoteles en el barrio (escrito)."],
+         ["*Há* hotéis bons aqui.", "Hay hoteles buenos acá (escrito)."],
          ["Não *tem* problema.", "No hay problema."]],
-  "warn": "Nunca «hay» ni «têm» para decir que hay: *tem dois quartos*, "
-          "no «têm dois quartos». *têm* es «ellos tienen».",
+  "warn": "Nunca «hay» ni «têm» para decir que hay: *tem quartos*, "
+          "no «têm quartos». *têm* es «ellos tienen».",
   "tip": "En la calle, en el bar y en la playa: *tem*. En un cartel o un "
          "mail formal: *há*."},
 ]},
@@ -313,9 +313,15 @@ LESSONS = {
  {"h": "em + artículo: no, na, nos, nas",
   "q": [{"prompt": "«Estoy en la playa.»", "answer": "Estou na praia.", "options": ["Estou na praia.", "Estou em a praia.", "Estou en la praia."]}],
   "r": "*em* (en) se funde con el artículo: *em + o = no*, *em + a = na*. "
-       "Con *um*: *num, numa* (habla).",
-  "table": {"head": ["em +", "o", "a", "os", "as", "um", "uma"],
-            "rows": [["=", "no", "na", "nos", "nas", "num", "numa"]]},
+       "Con *um, uma*: *num, numa*, sobre todo al hablar.",
+  "table": {"head": ["", "Forma", "Significa", "Ejemplo"],
+            "rows": [["em + o", "no", "en el", "Estou *no* hotel."],
+                     ["em + a", "na", "en la", "Ela está *na* praia."],
+                     ["em + os", "nos", "en los", "*nos* bares da Lapa"],
+                     ["em + as", "nas", "en las", "*nas* ruas do Centro"],
+                     ["em + um", "num", "en un", "*num* prédio antigo"],
+                     ["em + uma", "numa", "en una", "*numa* praia linda"],
+                     ["em + uns / umas", "nuns, numas", "en unos, en unas", "*nuns* dias; *numas* fotos"]]},
   "ex": [["Estou *no* Rio.", "Estoy en Río."],
          ["Ela está *na* praia.", "Ella está en la playa."],
          ["*Nos* fins de semana tem feira.", "Los fines de semana hay feria."],
@@ -329,23 +335,34 @@ LESSONS = {
   "q": [{"prompt": "Elegí la que va", "stem": "a praia ___ Leblon", "answer": "do", "options": ["do", "de o", "da"]}, {"prompt": "Elegí la que va", "stem": "a casa ___ Bia", "answer": "da", "options": ["da", "de a", "do"]}, {"prompt": "Elegí la que va", "stem": "Sou ___ Salvador.", "answer": "de", "options": ["de", "do", "da"]}],
   "r": "*de + o = do*, *de + a = da*: *a praia do Leblon*, *a casa da "
        "Bia*. Sin artículo, *de* queda solo: *de Buenos Aires*.",
-  "table": {"head": ["de +", "o", "a", "os", "as"],
-            "rows": [["=", "do", "da", "dos", "das"]]},
+  "table": {"head": ["", "Forma", "Significa", "Ejemplo"],
+            "rows": [["de + o", "do", "del", "o Cristo *do* Corcovado"],
+                     ["de + a", "da", "de la", "a casa *da* Bia"],
+                     ["de + os", "dos", "de los", "a praia *dos* cariocas"],
+                     ["de + as", "das", "de las", "a rua *das* flores"]]},
   "ex": [["o Cristo *do* Corcovado", "el Cristo del Corcovado"],
          ["a praia *da* Urca", "la playa de la Urca"],
          ["o bondinho *do* Pão de Açúcar", "el teleférico del Pan de Azúcar"],
          ["Sou *de* Salvador.", "Soy de Salvador (ciudad sin artículo)."]],
   "warn": "«de la», «del» no existen: *da*, *do*. Y ojo con *da*, que "
-          "parece «da» de *dar*: acá es preposición + artículo."},
+          "parece «da» de *dar*: acá es preposición + artículo.",
+  "tip": "Con *um, uma*, en Brasil se escribe separado: *de um amigo*, *de "
+         "uma amiga*. *dum, duma* se oyen, pero son más de Portugal."},
 
  {"h": "a + artículo y por + artículo",
   "r": "*a + o = ao*, *a + a = à* (con acento grave: la crase). *por + o = "
        "pelo*, *por + a = pela*.",
-  "table": {"head": ["", "o", "a", "os", "as"],
-            "rows": [["a +", "ao", "à", "aos", "às"],
-                     ["por +", "pelo", "pela", "pelos", "pelas"]]},
-  "ex": [["Vamos *ao* Maracanã?", "¿Vamos al Maracaná?"],
-         ["Vou *à* praia.", "Voy a la playa (a + a = à)."],
+  "table": {"head": ["", "Forma", "Significa", "Ejemplo"],
+            "rows": [["a + o", "ao", "al", "uma visita *ao* Cristo"],
+                     ["a + a", "à", "a la", "um passeio *à* praia"],
+                     ["a + os", "aos", "a los", "fotos *aos* amigos"],
+                     ["a + as", "às", "a las", "uma viagem *às* praias do Sul"],
+                     ["por + o", "pelo", "por el", "*pelo* calçadão"],
+                     ["por + a", "pela", "por la", "*pela* manhã"],
+                     ["por + os", "pelos", "por los", "*pelos* bairros"],
+                     ["por + as", "pelas", "por las", "*pelas* ruas da Lapa"]]},
+  "ex": [["uma visita *ao* Maracanã", "una visita al Maracaná"],
+         ["um passeio *à* praia", "un paseo a la playa (a + a = à)"],
          ["um passeio *pelo* calçadão", "un paseo por la rambla"],
          ["*pela* manhã", "por la mañana"]],
   "warn": "Nunca «por o» ni «por a»: *pelo, pela*. Y *à* lleva acento "
@@ -359,16 +376,18 @@ LESSONS = {
   "q": [{"prompt": "«Juan está en casa.» (como se dice en Río)", "answer": "O João está em casa.", "options": ["O João está em casa.", "João está na casa.", "El João está em casa."]}],
   "r": "En Río y buena parte de Brasil los nombres de persona llevan "
        "artículo: *o João*, *a Bia*. También el posesivo: *a minha casa*.",
-  "table": {"head": ["", "m. sg.", "f. sg.", "m. pl.", "f. pl."],
-            "rows": [["mi", "(o) meu", "(a) minha", "(os) meus", "(as) minhas"],
-                     ["tu / su (de você)", "(o) seu", "(a) sua", "(os) seus", "(as) suas"],
-                     ["nuestro", "(o) nosso", "(a) nossa", "(os) nossos", "(as) nossas"],
-                     ["de él (va detrás)", "o carro dele", "a casa dele", "os livros dele", "as chaves dele"],
-                     ["de ella (va detrás)", "o carro dela", "a casa dela", "os livros dela", "as chaves dela"]]},
+  "table": {"head": ["Significa", "m. sg.", "f. sg.", "m. pl.", "f. pl.", "Ejemplo"],
+            "rows": [["mi", "(o) meu", "(a) minha", "(os) meus", "(as) minhas", "*a minha* amiga"],
+                     ["tu (de você); su (de o senhor)", "(o) seu", "(a) sua", "(os) seus", "(as) suas", "*o seu* nome"],
+                     ["nuestro", "(o) nosso", "(a) nossa", "(os) nossos", "(as) nossas", "*a nossa* casa"],
+                     ["de él (va detrás, no cambia)", "o carro dele", "a casa dele", "os livros dele", "as chaves dele", "O carro *dele* está aqui."],
+                     ["de ella (va detrás, no cambia)", "o carro dela", "a casa dela", "os livros dela", "as chaves dela", "A casa *dela* é em Botafogo."]]},
   "ex": [["*O* Rafa está em casa.", "Rafa está en casa."],
          ["*A* Bia é de Niterói.", "Bia es de Niterói."],
-         ["Esta é *a minha* amiga.", "Esta es mi amiga."],
+         ["É *a minha* amiga.", "Es mi amiga."],
          ["Estou *na* casa *da* Ana.", "Estoy en la casa de Ana."]],
+  "warn": "*seu* en Brasil es «tu» (de *você*), casi nunca «su» de él: "
+          "para eso va *dele, dela* detrás: *o carro dele*.",
   "tip": "*em casa* = en casa (la propia), sin artículo: *estou em casa*. "
          "*na casa da Ana* = en lo de Ana.",
   "more": ["El artículo ante nombres propios es opcional y varía por "
@@ -380,17 +399,17 @@ LESSONS = {
  {"h": "¿Dónde está? Estar + em",
   "r": "Para ubicar: *estar* + lugar con contracción. Las locuciones "
        "llevan *de* y se contraen: *perto da praia*, *em frente ao bar*.",
-  "table": {"head": ["Portugués", "Español"],
-            "rows": [["perto de / longe de", "cerca de / lejos de"],
-                     ["ao lado de", "al lado de"],
-                     ["em frente a / de", "enfrente de"],
-                     ["em cima de / embaixo de", "arriba de / abajo de"],
-                     ["atrás de / dentro de", "detrás de / dentro de"]]},
+  "table": {"head": ["Portugués", "Español", "Ejemplo"],
+            "rows": [["perto de / longe de", "cerca de / lejos de", "*perto da* praia, *longe do* Centro"],
+                     ["ao lado de", "al lado de", "*ao lado do* banco"],
+                     ["em frente a / de", "enfrente de", "*em frente ao* metrô"],
+                     ["em cima de / embaixo de", "arriba de / abajo de", "*em cima da* mesa, *embaixo da* cama"],
+                     ["atrás de / dentro de", "detrás de / dentro de", "*atrás do* hotel, *dentro da* bolsa"]]},
   "ex": [["O hotel está *perto da* praia.", "El hotel está cerca de la playa."],
          ["A padaria é *ao lado do* banco.", "La panadería está al lado del banco."],
          ["O bar está *em frente ao* metrô.", "El bar está enfrente del subte."],
          ["A chave está *em cima da* mesa.", "La llave está arriba de la mesa."],
-         ["Onde *fica* o Arpoador?", "¿Dónde queda el Arpoador?"]],
+         ["A escola é *atrás do* hotel.", "La escuela queda detrás del hotel."]],
   "warn": "Para lugares fijos (edificios, barrios) se usa *ser* o *ficar*, "
           "además de *estar*: *a padaria é ao lado*, *onde fica o metrô?*."},
 ]},
@@ -529,7 +548,7 @@ LESSONS = {
   "ex": [["Eu *moro* em Copacabana.", "Vivo en Copacabana."],
          ["Ela *trabalha* num banco.", "Ella trabaja en un banco."],
          ["Nós *bebemos* mate na praia.", "Tomamos mate en la playa."],
-         ["Eles *abrem* a loja às nove.", "Abren el negocio a las nueve."]],
+         ["Eles *abrem* a loja cedo.", "Abren el negocio temprano."]],
   "warn": "Tercera plural en *-am / -em*, nunca «-an / -en»: *eles falam*, "
           "*eles comem*. La *m* final nasaliza la vocal."},
 
@@ -550,7 +569,7 @@ LESSONS = {
   "ex": [["*A gente mora* perto da praia.", "Vivimos cerca de la playa."],
          ["*A gente come* muito açaí.", "Comemos mucho asaí."],
          ["*Nós moramos* em Niterói. (más formal)", "Vivimos en Niterói."],
-         ["*A gente se vê*!", "¡Nos vemos!"]],
+         ["*A gente trabalha* no Centro.", "Trabajamos en el Centro."]],
   "warn": "«A gente vamos» o «a gente falamos» es un error estigmatizado: "
           "*a gente vai*, *a gente fala*.",
   "tip": "*a gente* no es «la gente» (eso es *as pessoas*). *Tem muita "
@@ -694,7 +713,7 @@ LESSONS = {
                      ["ele / você", "sai", "ouve", "pede"],
                      ["nós", "saímos", "ouvimos", "pedimos"],
                      ["eles / vocês", "saem", "ouvem", "pedem"]]},
-  "ex": [["*Saio* de casa às oito.", "Salgo de casa a las ocho."],
+  "ex": [["*Saio* de casa cedo.", "Salgo de casa temprano."],
          ["*Ouço* samba no carro.", "Escucho samba en el auto."],
          ["Ela *pede* um chope.", "Pide un chopp."],
          ["A gente *sai* hoje?", "¿Salimos hoy?"]],
@@ -849,13 +868,13 @@ LESSONS = {
         {"prompt": "«¿Cuál es tu nombre?»", "answer": "Qual é o seu nome?", "options": ["Qual é o seu nome?", "O que é o seu nome?", "Cuál é o seu nome?"]}],
   "r": "Casi como en español, pero **sin tilde** (salvo *quê* al final). "
        "«¿Qué…?» suele ser *o que…?*.",
-  "table": {"head": ["Portugués", "Español"],
-            "rows": [["o que?", "¿qué?"],
-                     ["quem?", "¿quién? ¿quiénes?"],
-                     ["qual? / quais?", "¿cuál? / ¿cuáles?"],
-                     ["quanto? quanta? quantos? quantas?", "¿cuánto/a/os/as?"],
-                     ["como? onde? quando?", "¿cómo? ¿dónde? ¿cuándo?"],
-                     ["aonde? / de onde?", "¿adónde? / ¿de dónde?"]]},
+  "table": {"head": ["Portugués", "Español", "Ejemplo"],
+            "rows": [["o que?", "¿qué?", "*O que* você quer?"],
+                     ["quem?", "¿quién? ¿quiénes?", "*Quem* são eles?"],
+                     ["qual? / quais?", "¿cuál? / ¿cuáles?", "*Quais* são os seus planos?"],
+                     ["quanto? quanta? quantos? quantas?", "¿cuánto/a/os/as?", "*Quanto* custa? *Quantas* pessoas?"],
+                     ["como? onde? quando?", "¿cómo? ¿dónde? ¿cuándo?", "*Como* vai? *Onde* você mora? *Quando* você chega?"],
+                     ["aonde? / de onde?", "¿adónde? / ¿de dónde?", "*Aonde* você vai? *De onde* você é?"]]},
   "ex": [["*O que* você faz?", "¿Qué hacés? / ¿De qué trabajás?"],
          ["*Quem* é ele?", "¿Quién es él?"],
          ["*Qual* é o seu telefone?", "¿Cuál es tu teléfono?"],
@@ -974,7 +993,7 @@ LESSONS = {
          ["*Vou no* mercado. (habla)", "Voy al súper."]],
   "warn": "*ir a* + *a* = *à*: *vou à praia*, *à Lapa*. «Vou a praia» sin "
           "acento es error de escritura.",
-  "tip": "*pra* es la forma hablada de *para*: *pra mim*, *pro Rio* (*para "
+  "tip": "*pra* es la forma hablada de *para*: *pra casa*, *pro Rio* (*para "
          "o*), *pra praia* (*para a*). Escribila solo en chats."},
 
  {"h": "chegar em / chegar a",
@@ -1055,18 +1074,22 @@ LESSONS = {
   "q": [{"prompt": "«mis amigas»", "answer": "minhas amigas", "options": ["minhas amigas", "mias amigas", "meus amigas"]}],
   "r": "Concuerdan con **lo poseído**, no con el dueño: *minha casa*, "
        "*meus pais*. Y son las mismas formas para «mi» y «mío».",
-  "table": {"head": ["", "masc. sing.", "fem. sing.", "masc. pl.", "fem. pl."],
-            "rows": [["eu", "meu", "minha", "meus", "minhas"],
-                     ["tu", "teu", "tua", "teus", "tuas"],
-                     ["você / ele", "seu", "sua", "seus", "suas"],
-                     ["nós", "nosso", "nossa", "nossos", "nossas"],
-                     ["vocês / eles", "seu", "sua", "seus", "suas"]]},
+  "table": {"head": ["Significa", "masc. sing.", "fem. sing.", "masc. pl.", "fem. pl.", "Ejemplo"],
+            "rows": [["mi, mío (eu)", "meu", "minha", "meus", "minhas", "*meu* pai, *minhas* amigas"],
+                     ["tu, tuyo (tu: Sur, Nordeste)", "teu", "tua", "teus", "tuas", "*teu* irmão, *tuas* coisas"],
+                     ["tu, tuyo (você); su, suyo (o senhor)", "seu", "sua", "seus", "suas", "*sua* casa, *seus* amigos"],
+                     ["nuestro (nós, a gente)", "nosso", "nossa", "nossos", "nossas", "*nosso* bairro, *nossas* férias"],
+                     ["de ustedes (vocês)", "o … de vocês", "a … de vocês", "os … de vocês", "as … de vocês", "a casa *de vocês*"]]},
   "ex": [["*minha* mãe e *meu* pai", "mi madre y mi padre"],
          ["*meus* amigos cariocas", "mis amigos cariocas"],
          ["a *nossa* casa em Santa Teresa", "nuestra casa en Santa Teresa"],
          ["Essa mala é *minha*.", "Esa valija es mía."]],
   "warn": "*minha*, no «mía» ni «mi». El femenino de *meu* es irregular: "
-          "*minha, minhas*."},
+          "*minha, minhas*.",
+  "more": ["¿Y «su» de él o de ellos? La norma escrita admite *seu* (*o "
+           "autor e seu livro*), pero al hablar *seu* se entiende «de *você*». "
+           "Para terceros se usa *dele, dela, deles, delas*: lo ves en el "
+           "bloque de *seu, dele, dela*."]},
 
  {"h": "El artículo con posesivo",
   "r": "En Brasil es opcional: *minha casa* o *a minha casa*. Tras "
@@ -1087,7 +1110,8 @@ LESSONS = {
             "rows": [["tu casa (de você)", "a sua casa"],
                      ["la casa de él", "a casa dele"],
                      ["la casa de ella", "a casa dela"],
-                     ["la casa de ellos / de ellas", "a casa deles / delas"]]},
+                     ["la casa de ellos / de ellas", "a casa deles / delas"],
+                     ["la casa de ustedes", "a casa de vocês"]]},
   "ex": [["Qual é o *seu* telefone?", "¿Cuál es tu teléfono?"],
          ["O Rafa e a namorada *dele*.", "Rafa y su novia."],
          ["A mãe *dela* é baiana.", "La madre de ella es bahiana."],
@@ -1100,10 +1124,10 @@ LESSONS = {
  {"h": "este, esse, aquele",
   "r": "*este* (acá), *esse* (ahí), *aquele* (allá). En el habla de Brasil "
        "*esse* se usa también por *este*.",
-  "table": {"head": ["", "masc.", "fem.", "masc. pl.", "fem. pl."],
-            "rows": [["acá", "este", "esta", "estes", "estas"],
-                     ["ahí", "esse", "essa", "esses", "essas"],
-                     ["allá", "aquele", "aquela", "aqueles", "aquelas"]]},
+  "table": {"head": ["Significa", "masc.", "fem.", "masc. pl.", "fem. pl."],
+            "rows": [["este (acá, cerca de mí)", "este", "esta", "estes", "estas"],
+                     ["ese (ahí, cerca de vos)", "esse", "essa", "esses", "essas"],
+                     ["aquel (allá, lejos de los dos)", "aquele", "aquela", "aqueles", "aquelas"]]},
   "ex": [["*Esta* praia é linda.", "Esta playa es linda."],
          ["*Essa* camisa é sua?", "¿Esa camisa es tuya?"],
          ["*Aquele* morro é o Dois Irmãos.", "Aquel cerro es el Dos Hermanos."],
@@ -1120,20 +1144,30 @@ LESSONS = {
          ["*Isto* é um biscoito Globo.", "Esto es un bizcocho Globo."],
          ["*Aquilo* ali é o Cristo?", "¿Aquello de allá es el Cristo?"]],
   "warn": "Con *i*: *isto, isso*, nunca «esto, eso». Y *isso* se usa "
-          "muchísimo para decir «¡eso!, ¡así!»."},
+          "muchísimo para decir «¡eso!, ¡así!».",
+  "tip": "Con sustantivo va *este, esse, aquele*: *esse livro*. Solo, sin "
+         "sustantivo, el neutro: *quero isso*, nunca «isso livro»."},
 
  {"h": "Contracciones: neste, desse, naquele",
   "r": "*em* y *de* se funden con los demostrativos: *neste, nesse, "
-       "naquele*; *deste, desse, daquele*; *nisso, disso*.",
-  "table": {"head": ["", "este", "esse", "aquele", "isso"],
-            "rows": [["em +", "neste", "nesse", "naquele", "nisso"],
-                     ["de +", "deste", "desse", "daquele", "disso"]]},
+       "naquele*; *deste, desse, daquele*; *nisso, disso*. *a* solo con "
+       "*aquele*: *àquele*.",
+  "table": {"head": ["", "Significa", "Formas", "Ejemplo"],
+            "rows": [["em + este / isto", "en este, en esto", "neste, nesta, nestes, nestas, nisto", "*neste* prédio"],
+                     ["em + esse / isso", "en ese, en eso", "nesse, nessa, nesses, nessas, nisso", "*nessa* praia"],
+                     ["em + aquele / aquilo", "en aquel, en aquello", "naquele, naquela, naqueles, naquelas, naquilo", "*naquele* dia"],
+                     ["de + este / isto", "de este, de esto", "deste, desta, destes, destas, disto", "o dono *deste* bar"],
+                     ["de + esse / isso", "de ese, de eso", "desse, dessa, desses, dessas, disso", "nada *disso*"],
+                     ["de + aquele / aquilo", "de aquel, de aquello", "daquele, daquela, daqueles, daquelas, daquilo", "a casa *daquela* senhora"],
+                     ["a + aquele / aquilo", "a aquel, a aquello", "àquele, àquela, àqueles, àquelas, àquilo", "Vou *àquele* bar."]]},
   "ex": [["Moro *neste* prédio.", "Vivo en este edificio."],
-         ["Gosto *desse* bairro.", "Me gusta ese barrio."],
+         ["A praia *desse* bairro é linda.", "La playa de ese barrio es linda."],
          ["*Naquela* rua tem um boteco.", "En aquella calle hay un bar."],
-         ["Não sei nada *disso*.", "No sé nada de eso."]],
-  "warn": "«Em este», «de ese» no existen: *neste*, *desse*. Es la misma "
-          "regla de *no, na, do, da*."},
+         ["Não sei nada *disso*.", "No sé nada de eso."],
+         ["Vamos *àquele* restaurante?", "¿Vamos a aquel restaurante?"]],
+  "warn": "«Em este», «de ese» no existen: *neste*, *desse*. Con *a*, "
+          "*este* y *esse* van separados (*a este*); solo *aquele* se funde: "
+          "*àquele*, con acento grave."},
 
  {"h": "La familia",
   "q": [{"prompt": "«Mis padres viven en Rosario.»", "answer": "Meus pais moram em Rosario.", "options": ["Meus pais moram em Rosario.", "Meus parentes moram em Rosario.", "Meus padres moram em Rosario."]}],
@@ -1256,7 +1290,7 @@ LESSONS = {
   "ex": [["*Vi* o pôr do sol no Arpoador.", "Vi la puesta de sol en el Arpoador."],
          ["Ela *veio* de Recife.", "Vino de Recife."],
          ["*Vim* de ônibus.", "Vine en micro."],
-         ["Ele me *deu* um presente.", "Me dio un regalo."]],
+         ["Ele *deu* um presente para a Bia.", "Le dio un regalo a Bia."]],
   "warn": "*vi* (vi) / *vim* (vine); *viu* (vio) / *veio* (vino). Si "
           "confundís *m*, decís otra cosa."},
 
@@ -1310,12 +1344,18 @@ LESSONS = {
   "ex": [["*Fale* devagar, por favor.", "Hable despacio, por favor."],
          ["*Abra* a janela.", "Abra la ventana."],
          ["*Faça* o favor de esperar.", "Haga el favor de esperar."],
-         ["*Tomem* cuidado!", "¡Tengan cuidado!"]],
+         ["*Tomem* cuidado!", "¡Tengan cuidado!"],
+         ["*Seja* paciente e *vá* devagar.", "Sea paciente y vaya despacio."]],
   "warn": "Seis irregulares que no siguen la regla: *seja* (ser), *esteja* "
           "(estar), *vá* (ir), *dê* (dar), *saiba* (saber), *queira* "
           "(querer).",
   "tip": "Esta forma es la de carteles, recetas, prospectos y trato "
-         "formal: *Aperte o botão*, *Mantenha a porta fechada*."},
+         "formal: *Aperte o botão*, *Mantenha a porta fechada*.",
+  "more": ["Los seis irregulares, en uso: *seja bem-vindo* (sea "
+           "bienvenido), *esteja aqui cedo* (esté acá temprano), *vá pela "
+           "praia* (vaya por la playa), *dê uma olhada* (eche un vistazo), "
+           "*saiba mais* (sepa más, en anuncios), *queira sentar* (tome "
+           "asiento, muy formal)."]},
 
  {"h": "El imperativo hablado: fala!, vem cá!",
   "r": "En la charla de Brasil se usa la forma de *tu*, que es igual a la "
@@ -1436,14 +1476,16 @@ LESSONS = {
  {"h": "Contracciones",
   "r": "Obligatorias con *em, de, a, por* + artículo o demostrativo: "
        "*no, da, ao, à, pelo, neste, dele*.",
-  "table": {"head": ["", "o", "a", "este", "ele"],
-            "rows": [["em", "no", "na", "neste", "nele"],
-                     ["de", "do", "da", "deste", "dele"],
-                     ["a", "ao", "à", "—", "—"],
-                     ["por", "pelo", "pela", "—", "—"]]},
+  "table": {"head": ["", "o", "a", "este", "aquele", "ele"],
+            "rows": [["em (en)", "no", "na", "neste", "naquele", "nele (semana 14)"],
+                     ["de (de)", "do", "da", "deste", "daquele", "dele"],
+                     ["a (a)", "ao", "à", "a este (separado)", "àquele", "a ele (separado)"],
+                     ["por (por)", "pelo", "pela", "por este (separado)", "por aquele (separado)", "por ele (separado)"]]},
   "ex": [["Estou *na* praia *do* Leblon.", "Estoy en la playa de Leblon."],
          ["Vou *ao* Maracanã e depois *à* Lapa.", "Voy al Maracaná y después a Lapa."],
-         ["Passo *pelo* calçadão.", "Paso por la rambla."]]},
+         ["Passo *pelo* calçadão.", "Paso por la rambla."],
+         ["Moro *neste* prédio; o carro *dele* está na rua.", "Vivo en este edificio; el auto de él está en la calle."],
+         ["Vamos *àquele* bar *da* esquina?", "¿Vamos a aquel bar de la esquina?"]]},
 
  {"h": "Adjetivos, números y muito",
   "r": "*muito* = muy (invariable) y mucho (concuerda). *um / uma*, *dois / "
