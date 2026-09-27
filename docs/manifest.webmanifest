@@ -17,6 +17,8 @@
     { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml" }
   ],
   "shortcuts": [
+    { "name": "Hoy: tu plan del día", "short_name": "Hoy", "url": "./#hoy",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
     { "name": "Pausa de 3 minutos", "short_name": "Pausa", "url": "./#pausa",
       "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
     { "name": "Repaso de 2 minutos", "short_name": "2 min", "url": "./#micro",
