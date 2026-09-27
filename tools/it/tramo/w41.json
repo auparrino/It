@@ -124,72 +124,41 @@
   "ascolto": {
     "title": "Cinghiali sotto casa",
     "genre": "trasmissione radiofonica con gli ascoltatori",
-    "es": "En un programa de radio en el que los oyentes cuentan lo que pasa en la ciudad, una mujer relata un encuentro inesperado que tuvo esa mañana en su calle.",
+    "es": "Un programa de radio en el que los oyentes cuentan la noticia del día: una mujer llama para relatar su encuentro con una familia de jabalíes en plena ciudad. Habla como se habla por teléfono: se corta, vuelve atrás, el conductor la acompaña.",
     "speakers": [
       "Marco, conduttore",
       "Silvia, ascoltatrice"
     ],
     "turns": [
-      [
-        "A",
-        "Eccoci di nuovo a Filo diretto, la trasmissione in cui la cronaca la fate voi. Abbiamo in linea Silvia, che stamattina ha assistito a una scena, diciamo, insolita. Buongiorno, Silvia, ci racconta?"
-      ],
-      [
-        "B",
-        "Buongiorno! Sì, guardi, ancora non ci credo. Stamattina verso le sette stavo portando fuori il cane, in via Garibaldi, proprio vicino alla scuola elementare. A un certo punto il cane si è bloccato e ha cominciato a ringhiare. Io non capivo, mi guardavo intorno, e poi li ho visti uscire da dietro i cassonetti."
-      ],
-      [
-        "A",
-        "Li ha visti... chi?"
-      ],
-      [
-        "B",
-        "I cinghiali! Una mamma e quattro piccoli. Li ho visti attraversare la strada con una calma incredibile, come se fossero a casa loro. La mamma avrà pesato, non so, ottanta chili?"
-      ],
-      [
-        "A",
-        "E lei che cosa ha fatto? Immagino che si sia spaventata."
-      ],
-      [
-        "B",
-        "Guardi, mi tremavano le gambe. Sentivo il cane tirare fortissimo il guinzaglio e avevo paura che si liberasse. Allora sono rimasta ferma, immobile, e l'ho tenuto stretto. Mi ricordavo di aver letto da qualche parte che non bisogna correre né avvicinarsi, soprattutto se ci sono i piccoli."
-      ],
-      [
-        "A",
-        "Ha fatto benissimo, è proprio quello che raccomandano gli esperti. E gli altri passanti?"
-      ],
-      [
-        "B",
-        "Eh, qui viene il bello. C'era un signore sul balcone di fronte che urlava e agitava le braccia, e un ragazzo che invece si era messo a filmarli col telefono, a due metri. L'ho sentito dire agli amici che voleva fare il video del secolo. Gli ho detto di allontanarsi, ma non mi ascoltava."
-      ],
-      [
-        "A",
-        "Classico. E poi? Come è finita?"
-      ],
-      [
-        "B",
-        "Dopo qualche minuto abbiamo sentito arrivare una macchina della polizia locale, con la sirena. Forse qualcuno l'aveva chiamata. I cinghiali si sono spaventati e li ho visti scappare verso il parco, quello lungo il torrente. Ma prima hanno rovesciato due cassonetti, e la strada era piena di spazzatura."
-      ],
-      [
-        "A",
-        "Quindi il problema, alla fine, sono proprio i cassonetti."
-      ],
-      [
-        "B",
-        "Ma certo! Io abito qui da vent'anni e una volta non si vedevano mai. Adesso, da un paio d'anni, li sentiamo grufolare quasi ogni notte sotto le finestre. Il cibo lo trovano facilmente, e allora tornano. Io non ce l'ho con gli animali, eh, poveretti. Ce l'ho con chi lascia la spazzatura fuori dai contenitori."
-      ],
-      [
-        "A",
-        "Anche perché c'è una scuola a pochi metri."
-      ],
-      [
-        "B",
-        "Appunto. Fra mezz'ora arrivavano i bambini. Ho visto la maestra aprire il cancello e le ho raccontato tutto: è diventata bianca come un lenzuolo."
-      ],
-      [
-        "A",
-        "Silvia, grazie. Giriamo la sua segnalazione al Comune, e ricordiamo a tutti gli ascoltatori: se vedete dei cinghiali in città, non avvicinatevi, non date loro da mangiare e chiamate la polizia locale."
-      ]
+      ["A", "Eccoci di nuovo a Filo diretto, la trasmissione in cui la cronaca la fate voi. Abbiamo in linea Silvia, che stamattina ha visto una scena, diciamo, insolita. Silvia, buongiorno!"],
+      ["B", "Buongiorno! Sì, guardi, ancora… ancora non ci credo."],
+      ["A", "Ci racconta?"],
+      ["B", "Allora. Stamattina, verso le sette, stavo portando fuori il cane, in via Garibaldi, proprio vicino alla scuola elementare."],
+      ["A", "Sì."],
+      ["B", "A un certo punto il cane si blocca e comincia a ringhiare. Io non capivo, mi guardavo intorno, e poi li ho visti uscire da dietro i cassonetti."],
+      ["A", "Li ha visti… chi?"],
+      ["B", "I cinghiali! Una mamma e quattro piccoli."],
+      ["A", "Addirittura."],
+      ["B", "Giuro. Li ho visti attraversare la strada con una calma… tipo come se fossero a casa loro. La mamma avrà pesato, boh, ottanta chili?"],
+      ["A", "E lei che cosa ha fatto? Immagino che si sia spaventata."],
+      ["B", "Guardi, mi tremavano le gambe. Il cane tirava fortissimo il guinzaglio e io avevo paura che si liberasse. Allora, niente, sono rimasta ferma, immobile, e l'ho tenuto stretto."],
+      ["A", "Brava."],
+      ["B", "Mi ricordavo di aver letto da qualche parte che non bisogna correre né avvicinarsi, soprattutto se ci sono i piccoli."],
+      ["A", "Ha fatto benissimo, è proprio quello che raccomandano gli esperti. E gli altri passanti?"],
+      ["B", "Eh, qui viene il bello. C'era un signore sul balcone di fronte che urlava e agitava le braccia…"],
+      ["A", "Aiuto."],
+      ["B", "…e un ragazzo che invece si era messo a filmarli col telefono. A due metri, eh! L'ho sentito dire agli amici che voleva fare il video del secolo."],
+      ["A", "Classico."],
+      ["B", "Gli ho detto di allontanarsi, ma niente, non mi ascoltava."],
+      ["A", "E poi? Come è finita?"],
+      ["B", "Dopo qualche minuto abbiamo sentito arrivare una macchina della polizia locale, con la sirena. Forse qualcuno l'aveva chiamata. I cinghiali si sono spaventati e li ho visti scappare verso il parco, quello lungo il torrente. Però prima… prima hanno rovesciato due cassonetti, e la strada era piena di spazzatura."],
+      ["A", "Quindi il problema, alla fine, sono proprio i cassonetti."],
+      ["B", "Ma certo! Io abito qui da vent'anni e una volta non si vedevano mai. Adesso, da un paio d'anni, li sentiamo grufolare quasi ogni notte sotto le finestre."],
+      ["A", "Ogni notte?"],
+      ["B", "Quasi. Il cibo lo trovano facilmente, e allora tornano. Io non ce l'ho con gli animali, eh, poveretti. Ce l'ho con chi lascia la spazzatura fuori dai contenitori."],
+      ["A", "Anche perché lì c'è una scuola a pochi metri."],
+      ["B", "Appunto! Fra mezz'ora arrivavano i bambini. Ho visto la maestra aprire il cancello e le ho raccontato tutto. È diventata bianca come un lenzuolo."],
+      ["A", "Ci credo. Silvia, grazie. Giriamo la sua segnalazione al Comune. E ricordiamo a tutti: se vedete dei cinghiali in città, non avvicinatevi, non date loro da mangiare e chiamate la polizia locale."]
     ],
     "gloss": {
       "messo": "(si era messo a filmarli) se había puesto a filmarlos: *mettersi a* + infinitivo",
@@ -206,77 +175,24 @@
       "grufolare": "hozar, hurgar con el hocico",
       "cancello": "portón, reja",
       "lenzuolo": "sábana",
-      "segnalazione": "aviso, denuncia"
+      "segnalazione": "aviso, denuncia",
+      "addirittura": "¡nada menos!, ¿en serio?",
+      "boh": "qué sé yo (muletilla)",
+      "tipo": "(muletilla) como, onda"
     },
     "questions": [
-      [
-        "Che cosa stava facendo Silvia quando ha visto i cinghiali?",
-        [
-          "Accompagnava i figli a scuola",
-          "Buttava la spazzatura nei cassonetti",
-          "Portava fuori il cane",
-          "Era sul balcone di casa"
-        ],
-        "Portava fuori il cane"
-      ],
-      [
-        "Come si è comportata Silvia davanti agli animali?",
-        [
-          "È scappata verso il parco con il cane",
-          "Ha cercato di allontanarli agitando le braccia",
-          "È rimasta ferma tenendo stretto il cane",
-          "Ha chiamato subito la polizia locale"
-        ],
-        "È rimasta ferma tenendo stretto il cane"
-      ],
-      [
-        "Che cosa critica Silvia nel comportamento del ragazzo?",
-        [
-          "Che filmava gli animali troppo da vicino",
-          "Che aveva lasciato la spazzatura per terra",
-          "Che aveva chiamato la polizia senza motivo",
-          "Che rideva della paura degli altri"
-        ],
-        "Che filmava gli animali troppo da vicino"
-      ],
-      [
-        "Secondo Silvia, perché i cinghiali tornano in città?",
-        [
-          "Perché il parco è stato chiuso",
-          "Perché qualcuno dà loro da mangiare",
-          "Perché ci sono sempre più cani",
-          "Perché trovano cibo facilmente"
-        ],
-        "Perché trovano cibo facilmente"
-      ],
-      [
-        "Qual è l'atteggiamento di Silvia verso i cinghiali?",
-        [
-          "Li considera pericolosi e vuole che siano abbattuti",
-          "Non ce l'ha con loro, ma con chi lascia i rifiuti fuori",
-          "Pensa che siano innocui e che il problema non esista",
-          "È affascinata e spera di rivederli presto"
-        ],
-        "Non ce l'ha con loro, ma con chi lascia i rifiuti fuori"
-      ]
+      ["Che cosa stava facendo Silvia quando ha visto i cinghiali?", ["Accompagnava i figli a scuola", "Buttava la spazzatura nei cassonetti", "Portava fuori il cane", "Era sul balcone di casa"], "Portava fuori il cane"],
+      ["Come si è comportata Silvia davanti agli animali?", ["È scappata verso il parco con il cane", "Ha cercato di allontanarli agitando le braccia", "È rimasta ferma tenendo stretto il cane", "Ha chiamato subito la polizia locale"], "È rimasta ferma tenendo stretto il cane"],
+      ["Che cosa critica Silvia nel comportamento del ragazzo?", ["Che filmava gli animali troppo da vicino", "Che aveva lasciato la spazzatura per terra", "Che aveva chiamato la polizia senza motivo", "Che rideva della paura degli altri"], "Che filmava gli animali troppo da vicino"],
+      ["Secondo Silvia, perché i cinghiali tornano in città?", ["Perché il parco è stato chiuso", "Perché qualcuno dà loro da mangiare", "Perché ci sono sempre più cani", "Perché trovano cibo facilmente"], "Perché trovano cibo facilmente"],
+      ["Qual è l'atteggiamento di Silvia verso i cinghiali?", ["Li considera pericolosi e vuole che siano abbattuti", "Non ce l'ha con loro, ma con chi lascia i rifiuti fuori", "Pensa che siano innocui e che il problema non esista", "È affascinata e spera di rivederli presto"], "Non ce l'ha con loro, ma con chi lascia i rifiuti fuori"],
+      ["Che cosa vuol dire Silvia con «qui viene il bello»?", ["Che adesso arriva la parte più curiosa", "Che il quartiere è molto bello", "Che finalmente arrivano i vigili", "Che i cinghiali erano bellissimi"], "Che adesso arriva la parte più curiosa"]
     ],
     "vf": [
-      [
-        "In tutto i cinghiali erano cinque.",
-        "vero"
-      ],
-      [
-        "Il ragazzo ha seguito il consiglio di Silvia e si è allontanato.",
-        "falso"
-      ],
-      [
-        "Il video del ragazzo è stato pubblicato sui social.",
-        "non si dice"
-      ],
-      [
-        "La polizia locale è arrivata dopo qualche minuto.",
-        "vero"
-      ]
+      ["In tutto i cinghiali erano cinque.", "vero"],
+      ["Il ragazzo ha seguito il consiglio di Silvia e si è allontanato.", "falso"],
+      ["Il video del ragazzo è stato pubblicato sui social.", "non si dice"],
+      ["La polizia locale è arrivata dopo qualche minuto.", "vero"]
     ]
   },
   "compito": {
@@ -342,6 +258,40 @@
       "ha sfondato la porta": "tiró abajo la puerta",
       "l'hanno già dimesso": "ya le dieron el alta",
       "a voce": "en persona, de palabra"
+    }
+  },
+  "breve": {
+    "title": "Giornale radio regionale delle otto",
+    "genre": "notiziario radiofonico",
+    "es": "El noticiero regional de la mañana: un incendio, un choque en la autopista, una biblioteca que reabre y el tiempo.",
+    "speaker": "Speaker",
+    "voice": 0,
+    "text": [
+      "Giornale radio regionale, edizione delle otto. Nella notte un incendio ha distrutto un capannone agricolo alle porte di Mantova. Alcuni residenti hanno raccontato di aver sentito un forte scoppio verso le tre e di aver visto le fiamme alzarsi sopra i tetti. Non ci sono feriti; i vigili del fuoco hanno lavorato fino all'alba.",
+      "Traffico: code sulla tangenziale est per un incidente tra due auto all'altezza dell'uscita 6. Un testimone ha detto di aver visto una delle vetture sbandare sull'asfalto bagnato. La polizia stradale consiglia percorsi alternativi.",
+      "Ha riaperto questa mattina la biblioteca comunale di via Roma, chiusa da febbraio per lavori. Il nuovo orario è dalle nove alle diciannove, anche il sabato.",
+      "Infine, il tempo: nebbia in pianura fino a metà mattina, poi sole. Minime intorno allo zero."
+    ],
+    "tabella": [
+      ["Ora dello scoppio", "3", ["tre", "le tre", "verso le tre", "alle tre"]],
+      ["Uscita della tangenziale dell'incidente", "6", ["sei", "uscita 6"]],
+      ["Mese in cui ha chiuso la biblioteca", "febbraio", []],
+      ["Ora di chiusura della biblioteca", "19", ["diciannove", "alle 19", "le 19", "19:00"]]
+    ],
+    "info": [
+      ["Nell'incendio sono rimaste ferite due persone.", false],
+      ["Alcuni residenti hanno visto le fiamme sopra i tetti.", true],
+      ["L'incidente sulla tangenziale ha coinvolto un camion.", false],
+      ["Un testimone ha visto un'auto sbandare.", true],
+      ["La biblioteca è aperta anche il sabato.", true],
+      ["La nebbia durerà tutto il giorno.", false]
+    ],
+    "gloss": {
+      "capannone": "galpón",
+      "scoppio": "estallido",
+      "code": "embotellamientos, colas",
+      "sbandare": "derrapar, perder el control",
+      "nebbia": "niebla"
     }
   }
 }

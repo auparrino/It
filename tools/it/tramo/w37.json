@@ -328,5 +328,38 @@
       "tramandata": "transmitida de generación en generación",
       "restano un po' sullo sfondo": "quedan medio en segundo plano"
     }
+  },
+  "breve": {
+    "title": "Il 2 giugno 1946",
+    "genre": "audioguida di una mostra",
+    "es": "La audioguía de una muestra sobre el referéndum que convirtió a Italia en república.",
+    "speaker": "Audioguida",
+    "voice": 1,
+    "text": [
+      "Siete davanti a una delle schede elettorali del referendum del 2 giugno 1946. Quel giorno gli italiani scelsero tra monarchia e repubblica, e per la prima volta in un voto nazionale votarono anche le donne.",
+      "Il simbolo della repubblica era una testa di donna con una corona di torri; quello della monarchia, lo stemma dei Savoia. L'affluenza fu altissima: votò quasi il novanta per cento degli aventi diritto.",
+      "I risultati arrivarono lentamente, perché le schede furono contate a mano. La repubblica vinse con circa il cinquantaquattro per cento dei voti, ma il Paese si divise: il Nord votò in maggioranza per la repubblica, il Sud per la monarchia.",
+      "Il re Umberto secondo lasciò l'Italia il 13 giugno e partì per il Portogallo. Nella vetrina successiva trovate i giornali di quei giorni: il più famoso titolava in prima pagina «È nata la Repubblica italiana»."
+    ],
+    "tabella": [
+      ["Percentuale di chi andò a votare", "90", ["novanta", "90%", "quasi il 90", "quasi il novanta per cento", "novanta per cento"]],
+      ["Percentuale della repubblica", "54", ["cinquantaquattro", "54%", "circa il 54", "cinquantaquattro per cento"]],
+      ["Paese in cui andò il re", "Portogallo", ["in Portogallo"]],
+      ["Data in cui il re lasciò l'Italia", "13 giugno", ["il 13 giugno", "tredici giugno"]]
+    ],
+    "info": [
+      ["Nel 1946 le donne votarono per la prima volta in un voto nazionale.", true],
+      ["Il simbolo della repubblica era lo stemma dei Savoia.", false],
+      ["Le schede furono contate a mano.", true],
+      ["Il Sud votò in maggioranza per la repubblica.", false],
+      ["Il re lasciò l'Italia dopo il referendum.", true],
+      ["I risultati arrivarono la sera stessa del voto.", false]
+    ],
+    "gloss": {
+      "schede": "boletas",
+      "stemma": "escudo",
+      "affluenza": "participación (electoral)",
+      "aventi diritto": "quienes tenían derecho (a votar)"
+    }
   }
 }

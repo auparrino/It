@@ -124,17 +124,65 @@ for (var q = 0; q < 30; q++) { var ps = F.pseudo("finestra"); ok(ps && ps !== "f
 ok(F.sameBand("casa", 3).length === 3 && F.sameBand("casa", 3).every(function (w) { return F.pos(w) === "n"; }), "distrattori della stessa classe");
 
 /* -------------------------------------------------------------- esame */
-ok(Es.ascolto.length === 2 && Es.lettura.length === 2 && Es.scrittura.length === 2, "esame: due ascolti, due letture, due scritti");
+// Tres versiones completas (esame_data.js): un diálogo y un monólogo de
+// escucha, una lectura, una ricostruzione y dos escritos (250 y 180 palabras)
+// cada una; preguntas en italiano y con la correcta casi nunca la más larga.
+ok(Es.ascolto.length === 3 && Es.lettura.length === 3 && Es.monologhi.length === 3 && Es.ricostruzione.length === 3 &&
+   Es.scritture.length === 6 && Es.versioni.length === 3, "esame: tre versioni complete");
+ok(Es.scrittura.length === 2 && Es.scrittura[0].id === "scr-1", "esame: «scrittura» (la schermata di oggi) è la coppia della versione A");
+function words(s) { return String(s).split(/\s+/).filter(Boolean).length; }
+function low(s) { return String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, ""); }
+var usati = {};
+Es.versioni.forEach(function (v) {
+  var x = Es.versione(v.id);
+  ok(x && x.ascolto && x.monologo && x.lettura && x.ricostruzione && x.scrittura.length === 2 && x.scrittura.every(Boolean), "versione " + v.id + ": tutti i pezzi");
+  ok(x.scrittura[0].words === 250 && x.scrittura[1].words === 180 && x.scrittura.every(function (t) { return t.min < t.words && t.words < t.max && t.rubric.length === 4; }),
+     "versione " + v.id + ": scritti di 250 e 180 parole");
+  [v.ascolto, v.monologo, v.lettura, v.ricostruzione].concat(v.scrittura).forEach(function (id) { ok(!usati[id], "pezzo in due versioni: " + id); usati[id] = 1; });
+});
+var piuLunga = 0, domande = 0;
 Es.ascolto.forEach(function (a) {
   ok(a.turns.length >= 8 && a.questions.length === 8 && a.completa.length === 4, "ascolto completo: " + a.id);
-  a.questions.forEach(function (qq) { ok(qq[1].indexOf(qq[2]) >= 0, "risposta fra le opzioni: " + a.id); });
+  a.questions.forEach(function (qq) {
+    domande++;
+    ok(qq[1].indexOf(qq[2]) >= 0 && new Set(qq[1]).size === 4, "risposta fra 4 opzioni: " + a.id);
+    ok(!/[¿¡]|(qué|según|cuál|por qué)/i.test(qq[0] + qq[1].join(" ")), "domanda in italiano: " + qq[0]);
+    var L = qq[1].map(function (o) { return o.length; }), mx = Math.max.apply(null, L);
+    if (qq[2].length === mx && L.filter(function (n) { return n === mx; }).length === 1) piuLunga++;
+  });
   var all = a.turns.map(function (t) { return t[1]; }).join(" ").toLowerCase();
   a.completa.forEach(function (c) { ok(all.indexOf(String(c[1]).toLowerCase()) >= 0, "parola del completa nell'audio: " + a.id + "/" + c[1]); });
+});
+ok(piuLunga <= Math.ceil(domande * 0.25), "ascolto: la risposta giusta è l'opzione più lunga in " + piuLunga + " domande su " + domande);
+var TR = ctx.Tramo;
+Es.monologhi.forEach(function (m) {
+  var testo = m.text.join(" "), n = words(testo);
+  ok(n >= 520 && n <= 760, "monologo di 4-5 minuti (520-760 parole): " + m.id + " " + n);
+  ok(m.tabella.length >= 9 && m.tabella.length <= 12, "monologo con 9-12 dati: " + m.id);
+  m.tabella.forEach(function (c) {
+    ok([c[1]].concat(c[2]).some(function (f) { return low(testo).indexOf(low(f)) >= 0; }), "dato del monologo nell'audio: " + m.id + "/" + c[1]);
+    if (TR) ok([c[1]].concat(c[2]).every(function (f) { return TR.cellOk(f, c); }), "la tabella accetta le sue forme: " + m.id + "/" + c[1]);
+  });
 });
 Es.lettura.forEach(function (l) {
   ok(l.paragraphs.length === 6 && l.titles.length === 8 && l.match.length === 6 && new Set(l.match).size === 6, "lettura: " + l.id);
   ok(l.vf.length === 8 && l.vf.every(function (v) { return typeof v[1] === "boolean"; }), "vero/falso: " + l.id);
+  ok(words(l.paragraphs.join(" ")) >= 540, "lettura di almeno 540 parole: " + l.id);
 });
+Es.ricostruzione.forEach(function (r) {
+  ok(r.paragraphs.length === 6 && new Set(r.paragraphs).size === 6 && words(r.paragraphs.join(" ")) >= 140, "ricostruzione di 6 paragrafi: " + r.id);
+});
+// Strutture e lessico: ogni versione ha abbastanza item per una prova (20 e
+// 12), e nessun item dell'esame entra nell'allenamento della settimana 52.
+var corso = pack.data("it", "course.json"), esame = corso.items.filter(function (it) { return it.topic === "esame"; });
+["A", "B", "C"].forEach(function (v) {
+  ok(esame.filter(function (it) { return it.ver === v && it.prova === "strutture"; }).length >= 25, "strutture versione " + v);
+  ok(esame.filter(function (it) { return it.ver === v && it.prova === "lessico"; }).length >= 14, "lessico versione " + v);
+});
+ok(esame.length >= 150 && esame.every(function (it) { return /^[ABC]$/.test(it.ver); }), "item dell'esame con la versione");
+var s52 = corso.weeks.filter(function (w) { return w.week === 52; })[0], dentro = {};
+(s52.items || []).concat(s52.extra || []).forEach(function (id) { dentro[id] = 1; });
+ok(esame.every(function (it) { return !dentro[it.id]; }), "nessun item dell'esame nell'allenamento della settimana 52");
 /* ------------------------------------------------------- inondazioni */
 var fl = L.ofSeries("flood");
 ok(fl.length === 12, "12 inondazioni");

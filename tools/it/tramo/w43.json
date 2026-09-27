@@ -332,5 +332,40 @@
       "centraline": "estaciones de medición",
       "purché": "siempre que, con tal de que (+ congiuntivo)"
     }
+  },
+  "breve": {
+    "title": "Istruzioni: il sensore sul balcone",
+    "genre": "istruzioni",
+    "es": "Las instrucciones grabadas para instalar el sensor de un proyecto de ciencia ciudadana que mide el aire.",
+    "speaker": "Voce delle istruzioni",
+    "voice": 0,
+    "text": [
+      "Istruzioni per installare il sensore dell'aria del progetto «Respira». Prima di tutto, scegliere un balcone o una finestra ad almeno un metro e mezzo da terra, lontano da camini, condizionatori e griglie della cucina.",
+      "Fissare il sensore con le due fascette incluse nella confezione, con i fori rivolti verso il basso, per evitare che entri la pioggia. Non coprirlo e non metterlo al sole diretto: il calore falsa le misure.",
+      "Collegare il cavo a una presa elettrica interna e aspettare che la luce verde lampeggi. A questo punto, aprire l'applicazione, inserire il codice di sei cifre scritto sotto il sensore e indicare l'indirizzo.",
+      "I dati vengono inviati ogni dieci minuti. Se la luce diventa rossa, staccare il cavo, aspettare trenta secondi e ricollegarlo. Per qualsiasi problema, scrivere all'indirizzo di assistenza del progetto."
+    ],
+    "tabella": [
+      ["Altezza minima da terra", "un metro e mezzo", ["1,5 metri", "1,5", "1.5", "1,5 m", "un metro e mezzo da terra"]],
+      ["Fascette nella confezione (numero)", "2", ["due"]],
+      ["Cifre del codice", "6", ["sei"]],
+      ["Ogni quanti minuti partono i dati", "10", ["dieci", "ogni 10 minuti", "ogni dieci minuti"]],
+      ["Secondi di attesa se la luce è rossa", "30", ["trenta"]]
+    ],
+    "info": [
+      ["Il sensore va messo vicino alla griglia della cucina.", false],
+      ["I fori del sensore devono essere rivolti verso il basso.", true],
+      ["È meglio mettere il sensore al sole diretto.", false],
+      ["Il codice è scritto sotto il sensore.", true],
+      ["Prima di aprire l'applicazione bisogna aspettare la luce verde.", true],
+      ["Se la luce è rossa bisogna chiamare un tecnico.", false]
+    ],
+    "gloss": {
+      "fascette": "precintos",
+      "fori": "agujeros",
+      "presa": "enchufe",
+      "lampeggi": "titile",
+      "staccare": "desenchufar"
+    }
   }
 }

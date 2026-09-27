@@ -339,5 +339,38 @@
       "bensì": "sino (después de una negación)",
       "presupposto": "condición previa, base"
     }
+  },
+  "breve": {
+    "title": "Elezioni comunali: le informazioni per votare",
+    "genre": "avviso pubblico",
+    "es": "Un comunicado oficial de la municipalidad explica cuándo y cómo votar en las elecciones locales.",
+    "speaker": "Voce del Comune",
+    "voice": 0,
+    "text": [
+      "Comunicazione del Comune di Bologna. Si informano i cittadini che domenica 14 e lunedì 15 giugno si terranno le elezioni per il rinnovo del consiglio comunale. I seggi saranno aperti domenica dalle sette alle ventitré e lunedì dalle sette alle quindici.",
+      "Per votare è necessario presentarsi con un documento di identità valido e con la tessera elettorale. Qualora la tessera fosse stata smarrita o fosse esaurita, l'ufficio elettorale resterà aperto in via straordinaria, anche sabato e domenica, per il rilascio di un duplicato.",
+      "Gli elettori con disabilità possono richiedere il trasporto gratuito al seggio, prenotandolo entro giovedì al numero verde del Comune. Si ricorda inoltre che è vietato fotografare la scheda all'interno della cabina.",
+      "Per ulteriori informazioni si rimanda al sito istituzionale del Comune."
+    ],
+    "tabella": [
+      ["Ora di chiusura dei seggi la domenica", "23", ["ventitré", "le 23", "alle 23", "23:00"]],
+      ["Documento necessario oltre a quello di identità", "tessera elettorale", ["la tessera elettorale", "tessera"]],
+      ["Ultimo giorno per prenotare il trasporto", "giovedì", ["entro giovedì"]],
+      ["Cosa è vietato fare in cabina", "fotografare la scheda", ["fotografare", "fare foto alla scheda", "fotografie", "fare fotografie"]]
+    ],
+    "info": [
+      ["Si vota in due giorni.", true],
+      ["Lunedì i seggi restano aperti fino alle ventitré.", false],
+      ["Chi ha perso la tessera può chiederne un duplicato.", true],
+      ["L'ufficio elettorale è chiuso nel fine settimana.", false],
+      ["Il trasporto al seggio per le persone con disabilità è gratuito.", true],
+      ["Si può fotografare la scheda se non la si mostra a nessuno.", false]
+    ],
+    "gloss": {
+      "seggi": "mesas de votación",
+      "tessera elettorale": "credencial electoral",
+      "smarrita": "extraviada",
+      "numero verde": "línea gratuita"
+    }
   }
 }

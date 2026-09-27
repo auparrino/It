@@ -130,5 +130,38 @@
       "per iscritto": "por escrito",
       "Restiamo a disposizione": "quedamos a disposición"
     }
+  },
+  "breve": {
+    "title": "Un messaggio per il magazzino",
+    "genre": "messaggio in segreteria",
+    "es": "Una empresa de software deja un mensaje en el contestador de un cliente para postergar una instalación.",
+    "speaker": "Sonia Ricci",
+    "voice": 1,
+    "text": [
+      "Buongiorno, sono Sonia Ricci, della Ricci & Neri Software. Chiamo per il programma di gestione del vostro magazzino. Avremmo dovuto consegnarvi la nuova versione venerdì, ma purtroppo abbiamo trovato un problema nel collegamento con la contabilità, e non vorremmo installare un programma che poi non funziona.",
+      "Le propongo quindi di spostare l'installazione a martedì prossimo, il 14, alle nove del mattino. Il nostro tecnico, Paolo Gatti, avrebbe bisogno di circa tre ore e di un accesso al server; durante l'installazione il magazzino dovrebbe restare chiuso.",
+      "Mi rendo conto che è un disagio: per questo non vi faremo pagare la prima assistenza annuale, che sarebbe costata quattrocento euro.",
+      "Se martedì non vi va bene, mi può richiamare entro domani sera, oppure scrivermi una mail. Mi scuso ancora per il ritardo. Arrivederci."
+    ],
+    "tabella": [
+      ["Giorno proposto per l'installazione", "martedì", ["martedì 14", "martedì prossimo", "14", "il 14"]],
+      ["Ora dell'installazione", "9", ["nove", "alle nove", "9:00", "9.00"]],
+      ["Nome del tecnico", "Paolo Gatti", ["Gatti", "Paolo"]],
+      ["Ore di lavoro necessarie", "3", ["tre", "tre ore"]],
+      ["Costo che il cliente non pagherà (euro)", "400", ["quattrocento"]]
+    ],
+    "info": [
+      ["La consegna era prevista per venerdì.", true],
+      ["Il problema riguarda il collegamento con la contabilità.", true],
+      ["Durante l'installazione il magazzino può lavorare normalmente.", false],
+      ["La prima assistenza annuale sarà gratuita.", true],
+      ["Bisogna richiamare entro martedì.", false],
+      ["Sonia chiede di pagare una penale.", false]
+    ],
+    "gloss": {
+      "magazzino": "depósito",
+      "contabilità": "contabilidad",
+      "disagio": "molestia, inconveniente"
+    }
   }
 }

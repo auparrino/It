@@ -130,5 +130,38 @@
       "battute": "chistes, remates",
       "geni": "genios"
     }
+  },
+  "breve": {
+    "title": "«Me la cavo», stasera a teatro",
+    "genre": "pubblicità radiofonica",
+    "es": "La publicidad radial de un espectáculo de humor sobre la vida en la oficina.",
+    "speaker": "Voce della pubblicità",
+    "voice": 1,
+    "text": [
+      "Non ce la fate più? Il lavoro vi stressa e ve la prendete per ogni cosa? Allora concedetevi una serata di risate: arriva «Me la cavo», il nuovo spettacolo di Lucia Pace, la comica che ha conquistato il web con i suoi video sulla vita in ufficio.",
+      "Novanta minuti di monologhi sui piccoli drammi quotidiani: il capo che ce l'ha con tutti, il collega che se ne va sbattendo la porta e poi torna a prendersi il caffè, la riunione che doveva durare dieci minuti.",
+      "Appuntamento al Teatro Verdi di Padova venerdì 18 e sabato 19 marzo, alle ventuno. Biglietti da venticinque euro, ridotti a diciotto per studenti e over sessantacinque. Affrettatevi: la prima serata è quasi esaurita.",
+      "«Me la cavo», di e con Lucia Pace. Se non venite, ve ne pentirete!"
+    ],
+    "tabella": [
+      ["Titolo dello spettacolo", "Me la cavo", []],
+      ["Durata (minuti)", "90", ["novanta"]],
+      ["Città del teatro", "Padova", []],
+      ["Prezzo ridotto (euro)", "18", ["diciotto"]]
+    ],
+    "info": [
+      ["Lucia Pace è diventata famosa grazie ai suoi video.", true],
+      ["Lo spettacolo parla della vita in famiglia.", false],
+      ["Lo spettacolo va in scena due sere.", true],
+      ["Il biglietto intero costa diciotto euro.", false],
+      ["La seconda serata è quasi esaurita.", false],
+      ["Gli studenti pagano meno.", true]
+    ],
+    "gloss": {
+      "risate": "risas",
+      "sbattendo": "golpeando (dando un portazo)",
+      "affrettatevi": "apúrense",
+      "esaurita": "agotada"
+    }
   }
 }

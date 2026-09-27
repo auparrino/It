@@ -127,5 +127,39 @@
       "senz'altro": "sin duda",
       "riscontro": "respuesta"
     }
+  },
+  "breve": {
+    "title": "Annunci al binario",
+    "genre": "annuncio in stazione",
+    "es": "Los avisos por altoparlante en una estación: un tren demorado, un cambio de andén y una prohibición.",
+    "speaker": "Voce della stazione",
+    "voice": 1,
+    "text": [
+      "Attenzione! Il treno Frecciarossa 9542 per Milano Centrale, previsto in partenza alle 14 e 20 dal binario 7, partirà con un ritardo stimato di 35 minuti per un guasto a un treno che lo precede. Ci scusiamo per il disagio.",
+      "I viaggiatori del Frecciarossa 9542 che hanno una coincidenza a Bologna possono rivolgersi al personale di bordo. Se il ritardo dovesse superare i sessanta minuti, i viaggiatori avrebbero diritto a un rimborso del venticinque per cento del prezzo del biglietto.",
+      "Attenzione! Il treno regionale 3310 per Lecce, in partenza alle 14 e 35, oggi partirà dal binario 2 anziché dal binario 4. Si prega di non attraversare i binari e di utilizzare il sottopassaggio.",
+      "Si ricorda che è vietato fumare in tutta la stazione, anche sulle banchine. Grazie."
+    ],
+    "tabella": [
+      ["Binario del Frecciarossa per Milano", "7", ["sette", "binario 7"]],
+      ["Ritardo stimato (minuti)", "35", ["trentacinque"]],
+      ["Rimborso se il ritardo supera un'ora (%)", "25", ["venticinque", "25%", "25 per cento", "venticinque per cento"]],
+      ["Binario di oggi del treno per Lecce", "2", ["due", "binario 2"]]
+    ],
+    "info": [
+      ["Il Frecciarossa è in ritardo per un guasto a un altro treno.", true],
+      ["Chi ha una coincidenza a Bologna può parlare con il personale di bordo.", true],
+      ["Con più di un'ora di ritardo si ha diritto a un rimborso.", true],
+      ["Il treno per Lecce è stato cancellato.", false],
+      ["Per cambiare binario si possono attraversare i binari.", false],
+      ["Si può fumare solo sulle banchine.", false]
+    ],
+    "gloss": {
+      "binario": "andén, vía",
+      "guasto": "avería, desperfecto",
+      "coincidenza": "combinación, conexión",
+      "sottopassaggio": "paso bajo nivel",
+      "banchine": "andenes"
+    }
   }
 }

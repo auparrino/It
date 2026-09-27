@@ -25,6 +25,7 @@ const GENRES = {
 const VF = { it: ["vero", "falso", "non si dice"], pt: ["verdadeiro", "falso", "não se diz"] };
 function words(s) { return String(s).split(/\s+/).filter((x) => /[A-Za-zÀ-ÿ]/.test(x)).length; }
 function bare(t) { return t.toLowerCase().replace(/^[^a-zà-öø-ÿ]+/, "").replace(/[^a-zà-öø-ÿ']+$/, "").replace(/'$/, ""); }
+function low0(s) { return String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, ""); }
 function toks(s) { return String(s).split(/\s+/).map(bare).filter(Boolean); }
 function hasTok(text, w) {
   const all = toks(text);
@@ -66,14 +67,37 @@ function validate(f, d) {
   if (!L.hunt || !L.hunt.label || !(L.hunt.targets || []).length) err(f, "lettura.hunt falta");
   else L.hunt.targets.forEach((t) => { if (t !== t.toLowerCase() || !hasTok(L.text, t)) err(f, "hunt «" + t + "» no está tal cual en el texto"); });
   ["title", "genre", "es"].forEach((k) => { if (!A[k]) err(f, "ascolto." + k + " falta"); });
-  if (!Array.isArray(A.speakers) || A.speakers.length !== 2) err(f, "ascolto.speakers: dos nombres");
+  // Two voices, or three (the third is the first voice with another pitch
+  // and pace: js/tramo.js VOICE.C).
+  if (!Array.isArray(A.speakers) || A.speakers.length < 2 || A.speakers.length > 3) err(f, "ascolto.speakers: dos o tres nombres");
+  const VOICES = ["A", "B", "C"].slice(0, (A.speakers || []).length);
   if (!Array.isArray(A.turns) || A.turns.length < 6) err(f, "ascolto.turns: al menos 6 turnos");
-  else A.turns.forEach((t, i) => { if (!Array.isArray(t) || (t[0] !== "A" && t[0] !== "B") || !t[1]) err(f, "ascolto.turns[" + i + "]: [\"A\"|\"B\", texto]"); });
+  else A.turns.forEach((t, i) => { if (!Array.isArray(t) || VOICES.indexOf(t[0]) < 0 || !t[1]) err(f, "ascolto.turns[" + i + "]: [\"A\"|\"B\"|\"C\", texto]"); });
+  if (VOICES.length === 3 && !A.turns.some((t) => t[0] === "C")) err(f, "ascolto: tres nombres, pero la tercera voz no habla");
   const aw = words((A.turns || []).map((t) => t[1]).join(" ")), at = TARGET.listen(w);
   if (aw < at * 0.9 || aw > at * 1.25) err(f, "ascolto: " + aw + " palabras; para la semana " + w + " van " + Math.round(at * 0.9) + "-" + Math.round(at * 1.25));
   checkQs(f, "ascolto", A.questions, 5, A.vf, 4);
   const at2 = (A.turns || []).map((t) => t[1]).join(" ");
   Object.keys(A.gloss || {}).forEach((k) => { if (!hasTok(at2, k)) err(f, "ascolto.gloss «" + k + "» no está en el audio"); });
+  // The short listening (breve): a monologue of an exam genre, one voice,
+  // a table of data and «does it say so?» statements.  Required in Italian.
+  const Bv = d.breve;
+  if (LANG === "it" && !Bv) err(f, "breve: falta la escucha corta");
+  if (Bv) {
+    ["title", "genre", "es", "speaker"].forEach((k) => { if (!Bv[k]) err(f, "breve." + k + " falta"); });
+    if (!Array.isArray(Bv.text) || Bv.text.length < 3) err(f, "breve.text: al menos 3 párrafos");
+    const bt = (Bv.text || []).join(" "), bw = words(bt), low = low0(bt);
+    if (bw < 110 || bw > 320) err(f, "breve: " + bw + " palabras (110-320)");
+    if (!Array.isArray(Bv.tabella) || Bv.tabella.length < 4 || Bv.tabella.length > 6) err(f, "breve.tabella: de 4 a 6 datos");
+    (Bv.tabella || []).forEach((c, i) => {
+      if (!Array.isArray(c) || typeof c[0] !== "string" || typeof c[1] !== "string" || !Array.isArray(c[2])) return err(f, "breve.tabella[" + i + "]: [dato, respuesta, [otras formas]]");
+      if (![c[1]].concat(c[2]).some((a) => low.indexOf(low0(a)) >= 0)) err(f, "breve.tabella[" + i + "]: ninguna forma de la respuesta está en el audio: " + c[1]);
+    });
+    const info = Bv.info || [];
+    if (info.length !== 6 || info.filter((v) => v[1] === true).length !== 3 || info.some((v) => typeof v[1] !== "boolean"))
+      err(f, "breve.info: seis afirmaciones, tres que el audio dice (true) y tres que no (false)");
+    Object.keys(Bv.gloss || {}).forEach((k) => { if (low.indexOf(low0(k)) < 0) err(f, "breve.gloss «" + k + "» no está en el audio"); });
+  }
   if (GENRES[LANG].indexOf(C.genre) < 0) err(f, "compito.genre: uno de " + GENRES[LANG].join(", "));
   ["title", "t", "es", "fonte", "model"].forEach((k) => { if (!C[k]) err(f, "compito." + k + " falta"); });
   if (["lettura", "ascolto", "entrambi"].indexOf(C.fonte) < 0) err(f, "compito.fonte: lettura | ascolto | entrambi");
@@ -118,7 +142,16 @@ function validate(f, d) {
     ok(ep && ep.series === "lunga" && ep.week === w, "semana " + w + ": falta la lectura larga en Letture");
     ok(L.session(ep).length === s.lettura.questions.length + s.lettura.vf.length + 1, "semana " + w + ": la sesión de lectura no trae todas las preguntas");
     var ms = T.missions(course.weeks[w - 1], {});
-    ok(ms.length === 2 && ms.every(function (m) { return !m.done && !m.opt; }), "semana " + w + ": las misiones de escucha y tarea");
+    ok(ms.length === (s.breve ? 3 : 2) && ms.every(function (m) { return !m.done && !m.opt; }), "semana " + w + ": las misiones de escucha y tarea");
+    if (s.breve) {
+      ok(ms.some(function (m) { return m.kind === "tr-brv" && T.handles(m.kind); }) && T.owns("tramo-brv"), "semana " + w + ": la misión de la escucha corta");
+      // every accepted form of each cell passes, and another cell's answer does not
+      s.breve.tabella.forEach(function (c, i) {
+        [c[1]].concat(c[2]).forEach(function (a) { ok(T.cellOk(a, c) && T.cellOk(" " + a.toUpperCase() + ". ", c), "semana " + w + ": la tabla no acepta «" + a + "»"); });
+        var other = s.breve.tabella[(i + 1) % s.breve.tabella.length];
+        if (other[1] !== c[1] && c[2].indexOf(other[1]) < 0) ok(!T.cellOk(other[1], c), "semana " + w + ": la tabla acepta «" + other[1] + "» para «" + c[0] + "»");
+      });
+    }
     var r = T.evaluate(s.compito, s.compito.model, w, s);
     ok(r.ok, "semana " + w + ": el modelo no pasa la revisión: " + r.crit.filter(function (c) { return !c.ok; }).map(function (c) { return c.label; }).join(" | "));
     var hard = r.check.findings.filter(function (f) { return !f.soft; });
@@ -148,6 +181,10 @@ function validate(f, d) {
   // what the AI answers is taken only in the expected shape
   ok(T.readAI({ punteggi: { a: 4, b: "5", c: 9 }, errori: [["x", "y"], "z"], commento: 3 }).tot === 14, "readAI suma y recorta");
   ok(T.readAI({ punteggi: "bien" }) === null, "readAI descarta lo que no tiene forma");
+  // the cells of a short listening: hours, articles and accents do not count
+  var cell = ["Ora", "18", ["diciotto"]];
+  ok(T.cellOk("alle 18", cell) && T.cellOk("18:00", cell) && T.cellOk("Diciotto", cell) && !T.cellOk("8", cell) && !T.cellOk("", cell), "cellOk: horas");
+  ok(T.cellOk("il Lunedi", ["Giorno", "lunedì", []]) && !T.cellOk("martedì", ["Giorno", "lunedì", []]), "cellOk: tildes y artículos");
 });
 console.log(bad ? "✗ test_tramo: " + bad + " problemas" : "✓ test_tramo: " + checks + " controles");
 process.exit(bad ? 1 : 0);
