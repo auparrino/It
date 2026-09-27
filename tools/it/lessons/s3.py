@@ -401,9 +401,9 @@ LESSONS = {
 ]},
 
 31: {
-"intro": "El condizionale passato ya apareció en la concordancia. Ahora, sus "
-         "tres usos: lo que no pasó, el futuro visto desde el pasado y la "
-         "noticia sin confirmar.",
+"intro": "El condizionale passato es *avrei* o *sarei* + participio. Esta "
+         "semana, sus tres usos: lo que no pasó, el futuro visto desde el "
+         "pasado y la noticia sin confirmar.",
 "blocks": [
  {"h": "La forma",
   "r": "*avrei* o *sarei* + participio, con el auxiliar y la concordancia "
@@ -784,7 +784,11 @@ LESSONS = {
          ["Di questo *se ne* parla ogni giorno.", "De esto se habla todos los días."]],
   "more": ["Con otros pronombres, el orden es fijo: *lo si*, *la si*, *li si* "
            "(el directo va antes: *lo si beve*), pero *si* + *ne* se vuelve "
-           "*se ne*: *se ne parla*, nunca «si ne parla»."]},
+           "*se ne*: *se ne parla*, nunca «si ne parla».",
+           "El «se me, se le» castellano va al revés: el indirecto primero, "
+           "*si* después. *Mi si è rotto il telefono* (se me rompió el "
+           "teléfono), *gli si è staccato un bottone* (se le salió un botón), "
+           "*ti si è bucata la calza*."]},
 
  {"h": "El si toscano por noi",
   "q": [{"prompt": "En el habla toscana, «andiamo al cinema» es…", "answer": "si va al cinema", "options": ["si va al cinema", "si andiamo al cinema", "si vanno al cinema"]}, {"prompt": "«Allora, si mangia?» quiere decir…", "answer": "Bueno, ¿comemos?", "options": ["Bueno, ¿comemos?", "Bueno, ¿comés?", "Bueno, ¿come él?"]}],

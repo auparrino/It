@@ -695,7 +695,7 @@
         "A Sofía pensa na própria vida: \"Se eu não tivesse aceitado aquele trabalho remoto, nunca teria " +
         "vindo ao Rio.\" \"Espero que você não tenha se arrependido\", diz a Bia. \"Quando você tiver " +
         "terminado o curso, vai discutir tudo isso comigo em português.\"",
-      gloss: { cena: "escena", margens: "orillas", riacho: "arroyo", gritado: "gritado", quadro: "cuadro", heroica: "heroica",
+      gloss: { cena: "escena", margens: "orillas", riacho: "arroyo", gritado: "gritado", teria: "habría; «Dom Pedro teria gritado» = dicen que gritó: el condicional marca lo no comprobado (semana 48)", quadro: "cuadro", heroica: "heroica",
                acontecido: "pasado, sucedido", vindo: "venido", dividido: "dividido", filho: "hijo",
                demorado: "tardado", aceitado: "aceptado", arrependido: "arrepentido", comigo: "conmigo" },
       questions: [
@@ -1212,7 +1212,7 @@
         "otimismo filosófico em Cândido.\n\n" +
         "O seu Manuel resume: \"Lisboa deu a volta por cima. Como diz o ditado, depois da tempestade vem " +
         "a bonança.\"",
-      gloss: { rédeas: "riendas", providências: "medidas", "atribui-se": "se atribuye", enterrar: "enterrar",
+      gloss: { rédeas: "riendas", providências: "medidas", volta: "(deu a volta por cima) se recuperó, salió adelante", "atribui-se": "se atribuye", enterrar: "enterrar",
                autoria: "autoría", duvidosa: "dudosa", nobre: "noble", sério: "serio (levar a sério = tomar en serio)",
                retas: "rectas", madeira: "madera", gaiola: "jaula", pombalina: "de Pombal", tremores: "temblores", zombou: "se burló",
                otimismo: "optimismo", ditado: "refrán", bonança: "calma" },

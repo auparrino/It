@@ -302,7 +302,7 @@
         "— Se eu esquecer, mexo a boca e sorrio — responde ele.\n\n" +
         "Na volta, às seis da manhã, sentado no metrô, o Martín faz as contas: daqui a dois " +
         "meses, vai fazer um ano que ele chegou ao Rio.",
-      gloss: { barca: "ferry", falta: "(falta pouco) falta poco",
+      gloss: { barca: "ferry", falta: "(falta pouco) falta poco", daqui: "(daqui a dois meses) dentro de dos meses",
                escola: "(escola de samba) agrupación que desfila en Carnaval", ensaio: "ensayo",
                quadra: "galpón de la escuela de samba", ala: "sector del desfile",
                souber: "supiera (futuro do subjuntivo de saber)", sambar: "bailar samba", começo: "comienzo",
@@ -525,7 +525,7 @@
         "longe para ver essas curvas: do outro lado da baía, em Niterói, o Museu de Arte " +
         "Contemporânea, de 1996, parece um disco voador pousado sobre o mar. Niemeyer morreu em " +
         "2012, aos 104 anos, trabalhando até o fim.",
-      gloss: { prometeu: "prometió", ousada: "audaz", cerrado: "sabana del centro de Brasil",
+      gloss: { prometeu: "prometió", ousada: "audaz", sim: "(e sim) sino: no… e sim… = no… sino…", cerrado: "sabana del centro de Brasil",
                papel: "(tirar do papel) llevar a la práctica", eixos: "ejes", cruzam: "cruzan",
                avião: "avión", pássaro: "pájaro", cúpulas: "cúpulas", virada: "dada vuelta",
                céu: "cielo", operários: "obreros", vindos: "venidos",
@@ -564,7 +564,7 @@
         "com carnes já existiam na Europa, e os historiadores da alimentação não encontraram " +
         "provas dessa origem. Desde 2024, o 20 de novembro, dia da morte de Zumbi dos Palmares, " +
         "é feriado nacional: o Dia da Consciência Negra.",
-      gloss: { escravizados: "esclavizados", desembarcaram: "desembarcaron", tráfico: "trata (de esclavos)",
+      gloss: { escravizados: "esclavizados", desembarcaram: "desembarcaron", já: "ya; al comienzo de la frase («já a ideia…») marca contraste: «en cambio»", tráfico: "trata (de esclavos)",
                cais: "muelle", redescobertas: "redescubiertas", obras: "obras (de construcción)",
                ventre: "vientre", sexagenários: "sexagenarios", assinou: "firmó",
                tornou: "(se tornou) se convirtió en", fugas: "fugas", demorado: "tardado",
@@ -667,7 +667,7 @@
         "Julinho da Adelaide, e conseguiu gravar três músicas antes que a farsa fosse descoberta.\n\n" +
         "A censura acabou de vez com a Constituição de 1988. As canções ficaram, e uma geração " +
         "inteira aprendeu a ler nas entrelinhas.",
-      gloss: { golpe: "golpe de Estado", dura: "dura", fechou: "cerró", suspendeu: "suspendió",
+      gloss: { golpe: "golpe de Estado", dura: "dura", vez: "(de vez) definitivamente", fechou: "cerró", suspendeu: "suspendió",
                endureceu: "endureció", letra: "letra (de canción)", gravada: "grabada", sucesso: "éxito",
                lançou: "sacó (un disco)", apesar: "(apesar de) a pesar de", briga: "pelea",
                casal: "pareja", censores: "censores", perceberam: "se dieron cuenta",

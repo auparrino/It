@@ -1010,8 +1010,8 @@ tr(W, 2, "La policía llegó rápido.", "A polícia chegou rápido.",
 fx(W, 0, "O feijão da minha avó é exquisito!", "exquisito", "delicioso", "falso_amigo",
    "«Exquisito» no existe: delicioso o gostoso. Y esquisito sería «raro».",
    goodAlt=["gostoso", "uma delícia"])
-fx(W, 1, "Trabalho numa oficina de advocacia em Botafogo.", "oficina", "escritório", "falso_amigo",
-   "El estudio de abogados es um escritório de advocacia. Oficina es el taller.")
+fx(W, 1, "Trabalho numa oficina de advocacia em Botafogo.", "numa oficina", "num escritório", "falso_amigo",
+   "El estudio de abogados es um escritório de advocacia, masculino: num escritório. Oficina es el taller.")
 fx(W, 2, "A leite estava quente demais.", "A leite", "O leite", "genero",
    "leite es masculino: o leite.")
 fx(W, 2, "Ontem senti um dor forte nas costas.", "um dor", "uma dor", "genero",

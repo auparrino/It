@@ -455,7 +455,11 @@ LESSONS = {
          ["Para Sérgio Buarque, a *cordialidade* vem do coração, não da boa educação.", "Para Sérgio Buarque, la cordialidad viene del corazón, no de los buenos modales."]],
   "warn": "«-dad» → *-dade*: *felicidade*, *cidade*, *verdade*. Y *-ice* es "
           "muy brasileño para lo molesto o lo tonto: *chatice*, *burrice*, "
-          "*criancice*."},
+          "*criancice*.",
+  "more": ["Al revés, de un sustantivo sale un adjetivo: *-oso* (*saudade → "
+           "saudoso*, *carinho → carinhoso*) y, para autores, *-iano*: "
+           "*machadiano* (de Machado), *camoniano* (de Camões: la nasal "
+           "*-ões* pasa a *-on-*)."]},
 
  {"h": "-ção, -mento, -agem, -ência",
   "q": [{"prompt": "Elegí la forma correcta.", "stem": "___ do carro custa 30 reais.", "answer": "A lavagem", "options": ["A lavagem", "O lavagem", "O lavaje"]}],
@@ -1152,7 +1156,10 @@ LESSONS = {
                      ["sacar una foto", "tirar uma foto", "sacar uma foto"],
                      ["hace falta (es necesario)", "é preciso", "faz falta"],
                      ["me hacés falta", "você me faz falta / sinto sua falta", "—"],
-                     ["dar a luz", "dar à luz", "dar a luz"]]},
+                     ["dar a luz", "dar à luz", "dar a luz"],
+                     ["llevarse bien con alguien", "dar-se bem com alguém", "levar-se bem"],
+                     ["desempeñar un papel", "desempenhar um papel", "jogar um papel"],
+                     ["hacer de cuenta que", "fazer de conta que", "—"]]},
   "ex": [["Ela *fez* 30 anos no sábado.", "Cumplió 30 años el sábado."],
          ["*Tira uma foto* nossa no Pão de Açúcar?", "¿Nos sacás una foto en el Pan de Azúcar?"],
          ["*É preciso* reservar antes.", "Hace falta reservar antes."],
@@ -1170,7 +1177,9 @@ LESSONS = {
                      ["pagar mico", "hacer el ridículo", "coloquial"],
                      ["encher o saco", "hinchar, molestar", "vulgar leve"],
                      ["dar um bolo", "dejar plantado", "coloquial"],
-                     ["quebrar um galho", "dar una mano, zafar", "coloquial"]]},
+                     ["quebrar um galho", "dar una mano, zafar", "coloquial"],
+                     ["(tô) nem aí", "me importa un pepino", "coloquial"],
+                     ["chover canivetes", "llover a cántaros", "coloquial"]]},
   "ex": [["Esqueci o aniversário dela. *Pisei na bola*.", "Me olvidé de su cumpleaños. Metí la pata."],
          ["Não tem ingresso, mas a gente *dá um jeito*.", "No hay entradas, pero nos las arreglamos."],
          ["Hoje vou *ficar de boa* em casa.", "Hoy me quedo tranqui en casa."],

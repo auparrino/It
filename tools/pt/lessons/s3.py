@@ -118,7 +118,9 @@ LESSONS = {
          ["Quando a Constituição de 1988 *fizer* cinquenta anos, *será* 2038.", "Cuando la Constitución de 1988 cumpla cincuenta años, será 2038."]],
   "tip": "*Se der* (si se puede) y *quando der* (cuando se pueda) son "
          "fórmulas del día a día: *se der, eu vou*.",
-  "more": ["Este tiempo aparece en contratos y leyes (*quem infringir…*, "
+  "more": ["En presente, *dá para* (*dá pra*) + infinitivo = se puede: "
+           "*dá pra ir a pé*, *não dá para mudar*.",
+           "Este tiempo aparece en contratos y leyes (*quem infringir…*, "
            "*caso haja…*), y el español jurídico todavía tiene su gemelo: "
            "«el que infringiere». En portugués está vivo en la calle: *se "
            "Deus quiser*, *quando der*, *seja o que for*."]},
@@ -301,6 +303,9 @@ LESSONS = {
          ["*Antes de vocês saírem*, fechem a janela.", "Antes de que salgan, cierren la ventana."],
          ["*Ao chegarmos* à rodoviária, ligamos.", "Al llegar a la terminal, llamamos."],
          ["Paulo Freire alfabetizava adultos *para eles lerem* o mundo, não só a palavra.", "Paulo Freire alfabetizaba adultos para que leyeran el mundo, no solo la palabra."]],
+  "warn": "La preposición no se contrae con el sujeto del infinitivo: "
+          "*antes de eles chegarem*, *na hora de as crianças dormirem*. "
+          "En el habla se oye *antes deles*.",
   "more": ["*ao* es «al»; *até*, «hasta que»; *por*, la causa. Funcionan "
            "igual: *depois de jantarmos, saímos* (después de cenar); *espera "
            "até eles chegarem* (hasta que lleguen); *foram multados por "
@@ -741,7 +746,13 @@ LESSONS = {
          ["A lei existe; *todavia*, ninguém a cumpre.", "La ley existe; sin embargo, nadie la cumple."],
          ["Para Sérgio Buarque, o brasileiro é cordial; *entretanto*, cordial não quer dizer educado.", "Para Sérgio Buarque, el brasileño es «cordial»; sin embargo, cordial no quiere decir cortés."]],
   "warn": "*todavia* ≠ «todavía» (= *ainda*). *entretanto* ≠ «entretanto» "
-          "(mientras tanto): en Brasil significa «sin embargo»."},
+          "(mientras tanto): en Brasil significa «sin embargo».",
+  "more": ["El portugués no tiene «sino»: *não… mas* o *não… e sim*: "
+           "*não era o ângulo reto que o atraía, e sim a curva* (no el "
+           "ángulo recto, sino la curva).",
+           "*já* al comienzo de una frase también opone, como «en cambio»: "
+           "*o texto é bom; já o título exagera* (el texto es bueno; el "
+           "título, en cambio, exagera)."]},
 
  {"h": "Dónde van",
   "r": "*mas* va siempre al principio de su oración. *porém, contudo, no "
@@ -802,7 +813,10 @@ LESSONS = {
   "more": ["*aliás* tiene dos usos: agrega un dato al pasar (por cierto, "
            "como en el ejemplo) o corrige y refuerza lo dicho (es más, mejor "
            "dicho): *Ele não é paulista; aliás, nunca foi a São Paulo* (es "
-           "más, nunca fue a São Paulo)."]},
+           "más, nunca fue a São Paulo).",
+           "*bem como* no es «bien como»: es «así como, y también», para "
+           "sumar en lo escrito: *o relatório analisa os dados, bem como as "
+           "entrevistas*."]},
 
  {"h": "Concesión: embora, mesmo que, apesar de",
   "r": "*embora* y *mesmo que* + subjuntivo; *apesar de* + sustantivo o "
@@ -1115,7 +1129,9 @@ LESSONS = {
             "rows": [["caber (caber, entrar)", "caibo", "cabe", "caiba"],
                      ["valer (valer)", "valho", "vale", "valha"],
                      ["perder (perder)", "perco", "perde", "perca"],
-                     ["medir (medir)", "meço", "mede", "meça"]]},
+                     ["medir (medir)", "meço", "mede", "meça"],
+                     ["construir (construir)", "construo", "constrói (eles constroem)", "construa"],
+                     ["divertir-se (divertirse)", "me divirto", "se diverte (eles se divertem)", "me divirta"]]},
   "ex": [["Não *coube* tudo na mala.", "No entró todo en la valija."],
          ["Sem café, eu não *valho* nada.", "Sin café, no valgo nada."],
          ["Sempre *perco* o metrô.", "Siempre pierdo el subte."],

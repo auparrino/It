@@ -400,7 +400,7 @@
         "domiciliari, vicino a Firenze.",
       gloss: { strumento: "instrumento", olandese: "holandés", migliora: "mejora",
                punta: "apunta", valli: "valles", girano: "giran", massimi: "máximos",
-               costringe: "obliga", abiurare: "abjurar, renegar", mormorato: "murmurado",
+               costringe: "obliga", abiurare: "abjurar, renegar", mormorato: "(avrebbe mormorato) habría murmurado, se dice que murmuró: condicional compuesto para lo no confirmado (semana 31)",
                eppur: "(eppure) y sin embargo", prove: "pruebas",
                domiciliari: "(arresti domiciliari) prisión domiciliaria" },
       questions: [
@@ -426,7 +426,8 @@
         "parlava italiano, gli altri parlavano i loro dialetti.",
       gloss: { volontari: "voluntarios", camicia: "camisa", sbarcano: "desembarcan",
                conquistano: "conquistan", consegna: "entrega", diventerà: "se convertirá en",
-               minoranza: "minoría", dialetti: "dialectos" },
+               minoranza: "minoría", dialetti: "dialectos",
+               parte: "(non ne fa ancora parte) todavía no forma parte (de él)" },
       questions: [
         ["¿Cuántos voluntarios llevaba Garibaldi?", ["unos mil", "unos cien", "diez mil", "trescientos"], "unos mil"],
         ["¿Cuándo pasa Roma a ser capital?", ["en 1871", "en 1861", "en 1860", "en 1946"], "en 1871"],
@@ -549,7 +550,7 @@
         "Una curiosità: Beccaria era il nonno di Alessandro Manzoni.",
       gloss: { delitti: "delitos", pene: "penas", sostiene: "sostiene",
                crudele: "cruel", colpevole: "culpable", "pur": "(pur di) con tal de",
-               smettere: "dejar de", scoraggiare: "desalentar", certezza: "certeza",
+               smettere: "dejar de", scoraggiare: "desalentar (a scoraggiare... non è X, ma Y: lo que desalienta no es X sino Y)", certezza: "certeza",
                nonno: "abuelo" },
       questions: [
         ["¿Por qué la tortura es inútil según Beccaria?", ["un culpable fuerte resiste y un inocente débil confiesa", "porque es cara", "porque la Iglesia la prohíbe en todos los tribunales desde hace siglos", "porque nadie confiesa"], "un culpable fuerte resiste y un inocente débil confiesa"],

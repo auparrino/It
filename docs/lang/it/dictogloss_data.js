@@ -167,7 +167,7 @@
       keywords: ["genitori", "medicina", "dottore", "pianoforte", "calcio", "musica", "figli", "libertà"] },
 
     { week: 31, level: "B2", title: "Rimpianti",
-      es: "Lo que el narrador habría hecho distinto el año pasado, y las promesas que otros no cumplieron.",
+      es: "Lo que el narrador habría hecho distinto el año pasado, y las promesas que otros no cumplieron (*non si è fatto vivo* = no dio señales de vida).",
       text: "L'anno scorso avrei dovuto studiare di più e, onestamente, sarei andato volentieri a vivere all'estero per qualche mese. Avrei preferito un lavoro meno stressante, ma non ho avuto il coraggio di cambiare. Marco aveva detto che mi avrebbe aiutato con il trasloco, e invece non si è fatto vivo. Mia sorella mi aveva promesso che sarebbe venuta a trovarmi a Natale, ma all'ultimo momento ha cambiato idea. Chissà, forse senza tutti quegli imprevisti sarei stato più tranquillo. Pazienza: quest'anno ci riprovo.",
       chunks: ["avrei dovuto studiare", "sarei andato volentieri", "avrei preferito", "mi avrebbe aiutato", "si è fatto vivo", "all'ultimo momento"],
       keywords: ["studiare", "estero", "lavoro", "coraggio", "Marco", "trasloco", "sorella", "Natale"] },
@@ -179,7 +179,7 @@
       keywords: ["treno", "Anna", "messaggio", "telefono", "ritardo", "appuntamento", "domenica", "risata"] },
 
     { week: 33, level: "B2", title: "Se vincessi",
-      es: "Hipótesis de todo tipo: la lotería, más tiempo, el italiano nunca empezado, la lluvia de mañana y una mudanza a Italia.",
+      es: "Hipótesis de todo tipo: la lotería, más tiempo, el italiano nunca empezado, la lluvia de mañana y una mudanza a Italia (*come si deve* = como corresponde).",
       text: "Se vincessi la lotteria, comprerei una casa in Toscana e smetterei di lavorare il giorno dopo. Se avessi più tempo, viaggerei ogni mese e imparerei finalmente a cucinare come si deve. Se non avessi cominciato a studiare italiano, non avrei conosciuto tanti amici nuovi e non sarei mai andato a Bologna. Se domani piove, resto a casa a leggere; se invece esce il sole, vado in bicicletta fino al fiume. E se un giorno mi chiedessero di trasferirmi in Italia, sinceramente, non ci penserei due volte.",
       chunks: ["se vincessi la lotteria", "se avessi più tempo", "come si deve", "non avrei conosciuto", "se domani piove", "ci penserei due volte"],
       keywords: ["lotteria", "Toscana", "tempo", "cucinare", "italiano", "Bologna", "sole", "bicicletta"] },
@@ -215,19 +215,19 @@
       keywords: ["Paola", "lavoro", "contenta", "festa", "sabato", "settimana", "chiamata", "vivo"] },
 
     { week: 40, level: "C1", title: "Fare e lasciar fare",
-      es: "Lo que el narrador hace hacer a otros (el auto, el pelo) y lo que deja hacer a sus hijos en casa.",
+      es: "Lo que el narrador hace hacer a otros (el auto, el pelo) y lo que deja hacer a sus hijos en casa (*arrangiarsi* = arreglárselas).",
       text: "Quando la macchina si rompe, la faccio riparare dal meccanico sotto casa, perché io di motori non ne capisco niente. Ogni mese mi faccio tagliare i capelli da Gino, un barbiere che conosco da anni e che mi fa sempre ridere. A casa, invece, lascio fare molte cose ai miei figli: li lascio cucinare il sabato e faccio apparecchiare la tavola al più piccolo. Mia moglie dice che li faccio lavorare troppo, ma io penso che imparare ad arrangiarsi sia la cosa migliore. In fondo, nessuno mi ha mai fatto fare niente da piccolo, e me ne sono pentito.",
       chunks: ["la faccio riparare", "non ne capisco niente", "mi faccio tagliare", "mi fa sempre ridere", "lascio fare", "me ne sono pentito"],
       keywords: ["macchina", "meccanico", "capelli", "barbiere", "figli", "cucinare", "tavola", "moglie"] },
 
     { week: 41, level: "C1", title: "Dalla finestra",
-      es: "Todo lo que el narrador vio y oyó una mañana desde la ventana de la cocina, y lo que descubrió al mirar.",
+      es: "Todo lo que el narrador vio y oyó una mañana desde la ventana de la cocina, y lo que descubrió al mirar (*a furia di* = a fuerza de).",
       text: "Stamattina, dalla finestra della cucina, ho visto un signore anziano attraversare la strada con una lentezza quasi commovente. Poi ho sentito due vicini litigare per un parcheggio: gridavano così forte che li ho sentiti anche con la finestra chiusa. Più tardi ho visto dei bambini correre verso la scuola, mentre una madre li guardava allontanarsi con le mani sui fianchi. Verso le nove ho sentito suonare le campane e, subito dopo, il camion della spazzatura passare rumorosamente. Ho osservato il quartiere svegliarsi a poco a poco, e mi sono reso conto che, a furia di stare al computer, non lo guardavo da anni.",
       chunks: ["attraversare la strada", "due vicini litigare", "così forte che", "li guardava allontanarsi", "a poco a poco", "mi sono reso conto"],
       keywords: ["finestra", "signore", "vicini", "parcheggio", "bambini", "scuola", "campane", "quartiere"] },
 
     { week: 42, level: "C1", title: "Un'email alla scuola",
-      es: "Un mail formal a una escuela de idiomas: por qué quiere inscribirse, qué le cuesta, qué pide y qué prefiere evitar.",
+      es: "Un mail formal a una escuela de idiomas: por qué quiere inscribirse, qué le cuesta, qué pide y qué prefiere evitar (*contare di* + infinitivo = pensar, tener previsto).",
       text: "Gentile segreteria, vi scrivo perché ho deciso di iscrivermi al vostro corso di italiano avanzato. Da qualche mese cerco di leggere un giornale italiano ogni giorno, ma non riesco ancora a capire tutti gli articoli di politica e mi stanco di consultare il dizionario. Vorrei quindi cominciare a lavorare seriamente sulla lingua, e conto di dedicarci almeno due sere alla settimana. Vi chiedo di indicarmi le date del prossimo livello e il costo dell'iscrizione. Se fosse possibile, preferirei evitare di frequentare il sabato, perché mi occupo dei miei nipoti. Vi ringrazio dell'attenzione e resto in attesa di una vostra risposta.",
       chunks: ["ho deciso di iscrivermi", "cerco di leggere", "non riesco ancora a", "conto di dedicarci", "vi chiedo di indicarmi", "resto in attesa di"],
       keywords: ["segreteria", "corso", "giornale", "politica", "dizionario", "livello", "iscrizione", "nipoti"] },
@@ -263,7 +263,7 @@
       keywords: ["spesa", "chili", "parmigiano", "uova", "pesce", "novanta", "terzo", "doppio"] },
 
     { week: 48, level: "C1", title: "Chi ha fatto cosa",
-      es: "Los preparativos de una cena contados con el orden marcado del italiano: el pan lo compré yo, el vino lo trae Marco, y Anna no aparece.",
+      es: "Los preparativos de una cena contados con el orden marcado del italiano: el pan lo compré yo, el vino lo trae Marco, y Anna no aparece (*intendersene* = saber de algo; *restarci male* = quedar dolido; *un passaggio* = que te lleven en auto).",
       text: "Il pane l'ho comprato io, stamattina, ma il vino lo porta Marco. La torta, quella la fa mia madre, che di dolci se ne intende davvero. A Luca non gliel'ho ancora detto, della cena: mi sa che lo chiamo dopo. È Anna che non capisco: dice che viene e poi non si fa vedere. Lo sapevo già, questo, eppure ci resto male ogni volta. Ah, c'è Paolo che ti aspetta giù in cortile: gli hai promesso un passaggio, ricordi? Di tempo ne abbiamo poco, quindi muoviamoci. È arrivato anche il corriere, con il pacco dei bicchieri. Insomma, di cose da fare ce ne sono ancora tante.",
       chunks: ["l'ho comprato io", "se ne intende", "non si fa vedere", "lo sapevo già", "ci resto male", "ce ne sono ancora"],
       keywords: ["pane", "vino", "torta", "Luca", "Anna", "Paolo", "cortile", "corriere"] },
@@ -276,9 +276,9 @@
 
     { week: 50, level: "C1", title: "Una serie di figuracce",
       es: "Los papelones de una hispanohablante recién llegada a Italia por culpa de los falsos amigos: burro, salire, imbarazzata.",
-      text: "Quando sono arrivata in Italia ho fatto una serie di figuracce con i falsi amici. Al ristorante ho rifiutato il burro, convinta che mi offrissero un asino, e il cameriere ha riso di gusto. Una sera ho detto che dovevo salire perché era tardi, e i miei amici mi hanno risposto che al primo piano non c'era niente. Ho raccontato di essere imbarazzata per un regalo, e una signora mi ha fatto gli auguri per il bambino. Col tempo ho imparato a prendere una decisione, a fare una domanda quando ho un dubbio e, soprattutto, a non dare niente per scontato. Sbagliando si impara.",
+      text: "Quando sono arrivata in Italia ho fatto una serie di figuracce con i falsi amici. Al ristorante ho rifiutato il burro, convinta che mi offrissero un asino, e il cameriere ha riso di gusto. Una sera ho detto che dovevo salire perché era tardi, e i miei amici mi hanno risposto che al primo piano non c'era niente. Volendo dire a una collega che aspettavo un bambino, le ho detto che ero imbarazzata: nessuno mi ha fatto gli auguri, ma tutti mi hanno chiesto di che cosa mi vergognassi. Col tempo ho imparato a prendere una decisione, a fare una domanda quando ho un dubbio e, soprattutto, a non dare niente per scontato. Sbagliando si impara.",
       chunks: ["una serie di figuracce", "ha riso di gusto", "fatto gli auguri", "prendere una decisione", "fare una domanda", "sbagliando si impara"],
-      keywords: ["Italia", "figuracce", "burro", "asino", "cameriere", "salire", "imbarazzata", "regalo"] },
+      keywords: ["Italia", "figuracce", "burro", "asino", "cameriere", "salire", "imbarazzata", "collega"] },
 
     { week: 51, level: "C1", title: "Bilancio di un anno",
       es: "Balance de un año de italiano: el primer libro terminado sin diccionario, los errores que quedan y la constancia que hizo falta.",

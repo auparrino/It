@@ -47,7 +47,7 @@
     ],
     "answer": "sono stati",
     "alt": [],
-    "note": "Con «la maggioranza dei» + plural, si el participio va en plural (torturati), el auxiliar también va en plural."
+    "note": "Con «la maggioranza dei» + plural, si el participio va en plural (torturati), el auxiliar también va en plural. *Sono stati torturati* es la pasiva, «fueron torturados»: *essere* + participio, como en castellano."
    }
   ]
  },
@@ -102,7 +102,7 @@
    {
     "label": "b",
     "type": "choice",
-    "stem": "Gli manca ___ per comprare la ditta.",
+    "stem": "Gli manca ___ per comprare la ditta. (Le falta … para comprar la empresa.)",
     "options": [
      "il capitale",
      "la capitale"
@@ -150,7 +150,7 @@
    {
     "label": "f",
     "type": "choice",
-    "stem": "Devo far riparare ___ della borsa.",
+    "stem": "Devo far riparare ___ della borsa. (Tengo que mandar a arreglar … de la cartera.)",
     "options": [
      "il manico",
      "la manica"
@@ -555,7 +555,7 @@
    {
     "label": "b",
     "type": "cloze",
-    "stem": "Carlo Alberto ___ Savoia abdicò nel 1849. (di/della)",
+    "stem": "Carlo Alberto ___ Savoia abdicò nel 1849. (Carlos Alberto … Saboya abdicó en 1849.) (di/della)",
     "answer": "di",
     "alt": [],
     "note": "Con el nombre de una dinastía se usa «di» sin artículo."
@@ -1342,7 +1342,7 @@
    {
     "label": "c",
     "type": "choice",
-    "stem": "Hai chiesto a Francesca di andarsene? — «a Francesca»",
+    "stem": "Hai chiesto a Francesca di andarsene (irse)? — «a Francesca»",
     "options": [
      "objeto directo",
      "objeto indirecto"
@@ -1354,7 +1354,7 @@
    {
     "label": "d",
     "type": "choice",
-    "stem": "Le hai chiesto di andarsene? — «Le»",
+    "stem": "Le hai chiesto di andarsene (irse)? — «Le»",
     "options": [
      "objeto directo",
      "objeto indirecto"
@@ -1418,7 +1418,7 @@
    {
     "label": "b",
     "type": "cloze",
-    "stem": "Arriveder___, signore, ___ richiamerò più tardi. (usted)",
+    "stem": "Arriveder___, signore, ___ richiamerò più tardi. (usted: «la volveré a llamar más tarde»)",
     "answer": "La | La",
     "alt": [],
     "note": "El objeto directo formal es «La», incluso para un hombre: arrivederLa."

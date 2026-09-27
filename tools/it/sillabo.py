@@ -342,6 +342,85 @@ def item_features(item):
 # one whose lesson teaches it.  The didactic review fills this list.
 MIN_WEEK = {}
 
+# Semanas 1-26 (revisión didáctica, segunda pasada).
+MIN_WEEK.update({
+    # números escritos (semana 7)
+    "rf-1-22": (7, "numeri: novant'anni"),
+    # presente + da «desde hace» (semana 9)
+    "s:r18-03c:a": (9, "presente + da"), "s:r18-03c:b": (9, "presente + da"),
+    "s:r18-03c:c": (9, "presente + da"), "s:r18-03c:f": (9, "presente + da"),
+    "s:r10-02b:c": (9, "da quando + presente"),
+    # pronombres átonos y pegados al infinitivo (semana 10)
+    "s:r18-01b:f": (10, "pronome lo"), "s:r18-03c:g": (10, "pronome lo"),
+    "s:r10-01b:b": (10, "pronome lo"), "s:r10-07:d": (10, "pronome lo"),
+    "s:r15-02c:c": (10, "conoscerti"),
+    # reflexivos, recíprocos e imperativo (semana 12)
+    "s:r18-04:b": (12, "riflessivi: si perdono"), "s:r18-03c:d": (12, "reciproco: ci conosciamo"),
+    "s:r18-03c:e": (12, "reciproco: ci sentiamo"), "s:r10-14:e": (12, "reciproco: vederci"),
+    "s:r07-01e:b": (12, "riflessivi: divertirmi"), "s:r07-01e:c": (12, "reciproco: ci vediamo"),
+    "s:r07-01e:d": (12, "reciproco: vederci"), "s:r07-04e:b": (12, "riflessivi: lavarmi"),
+    "s:r07-04e:e": (12, "imperativo negativo"), "s:r07-04e:f": (12, "imperativo negativo"),
+    "s:r07-03f:a": (12, "imperativo + pronome"), "s:r07-03f:d": (12, "imperativo di Lei"),
+    # piacere y su familia (semana 14)
+    "s:r10-08:c": (14, "piacere"), "l2-c-80": (14, "mancare"), "l2-c-81": (14, "mancare"),
+    "s:r20-04:a": (14, "piacere al passato"), "s:r20-04:b": (14, "piacere al passato"),
+    "s:r20-08:a": (14, "servire al passato"), "s:r20-08:b": (14, "bastare al passato"),
+    "s:r20-08:c": (14, "succedere al passato"), "s:r20-08:d": (14, "piacere al passato"),
+    # reflexivos en pasado con ci (semana 16)
+    "s:r20-10:a": (16, "riflessivi passato: ci siamo dovuti"),
+    "s:r18-03c:h": (16, "riflessivi passato: ci siamo laureati"),
+    # futuro en el contexto (semana 19)
+    "s:r09-02:c": (19, "futuro: costerà"), "s:r14-01:b": (19, "futuro: pioverà"),
+    # ne y ci (semana 21)
+    "s:r10-14:b": (21, "ci: arrivarci, metterci"), "s:r07-01e:e": (21, "ci di luogo"),
+    "s:r07-01e:f": (21, "ci di luogo: andarci"), "s:r07-03f:c": (21, "ne: parlatene"),
+    "s:r22-05:c": (21, "ci di luogo: vacci"), "s:r22-08:d": (21, "ci di luogo: andateci"),
+    "s:r22-08:e": (21, "ci di luogo"), "s:r22-08:f": (21, "ci di luogo: andiamoci"),
+    "d10-047": (21, "ce n'è"), "s:r12-03:d": (21, "ce n'è"), "s:r12-03:e": (21, "ce n'è"),
+    "s:r14-01b:e": (21, "ci di luogo: tornarci"),
+    # pronombres combinados (semana 22)
+    "s:r07-02j:d": (22, "pronomi combinati: ve l'abbiamo"),
+    "s:r07-06c:a": (22, "pronomi combinati: se l'è"), "s:r07-06c:b": (22, "pronomi combinati: se l'è"),
+    "s:r07-06c:c": (22, "pronomi combinati: se le è"), "s:r07-06c:d": (22, "pronomi combinati: se l'è"),
+    # congiuntivo en la relativa (semana 25)
+    "s:r12-02:b": (25, "congiuntivo: nessuno che si chiami"),
+    # trapassato prossimo en el contexto o en la consigna (semana 26)
+    "s:r20-07b:b": (26, "trapassato: non mi aveva detto"), "s:r20-07b:c": (26, "trapassato: non mi aveva avvertito"),
+    "s:r20-07b:d": (26, "trapassato: nessuno mi aveva detto"), "s:r20-01d:f": (26, "trapassato: la consigna"),
+    # infinitivo compuesto: dopo aver finito (semana 28)
+    "s:r20-03b:b": (28, "infinito passato: dopo aver finito"),
+    # condizionale passato (semana 31)
+    "s:r21-01b:e": (31, "condizionale passato: si sarebbe seccato"),
+    "s:r21-03c:d": (31, "condizionale passato: ci avrebbe inviato"),
+    "s:r21-04c:c": (31, "condizionale passato: avrebbe sparato"),
+    # si impersonale con otro pronombre: lo si beve (semana 36)
+    "s:r07-01h:a": (36, "lo si"), "s:r07-01h:b": (36, "la si"), "s:r07-01h:c": (36, "lo si"),
+    # passato remoto y trapassato remoto (semana 37)
+    "s:r20-01e:b": (37, "passato remoto: ricevette"),
+    "s:r20-01f:b": (37, "trapassato remoto: la consigna"), "s:r20-01f:d": (37, "trapassato remoto: la consigna"),
+    # discurso indirecto (semana 38)
+    "s:r18-01d:a": (38, "discorso indiretto"), "s:r18-01d:b": (38, "discorso indiretto"),
+    "s:r18-01d:c": (38, "discorso indiretto"), "s:r18-01d:d": (38, "discorso indiretto"),
+    "s:r20-07:a": (38, "discorso indiretto"), "s:r20-07:c": (38, "discorso indiretto"),
+    "s:r20-07:e": (38, "discorso indiretto"), "s:r20-01g:c": (38, "discorso indiretto"),
+    # participio absoluto (semana 44)
+    "s:r20-03b:a": (44, "participio assoluto: appena uscito"),
+    "s:r20-03b:d": (44, "participio assoluto: uscita mia moglie"),
+})
+
+# Semanas 27-52 (revisión didáctica, segunda pasada).
+MIN_WEEK.update({
+    # estilo indirecto y directo con desplazamientos de persona, lugar y
+    # tiempo (domani → il giorno dopo, da te → da me): semana 38
+    "s:r20-07:b": (38, "discorso indiretto"), "s:r20-07:d": (38, "discorso indiretto"),
+    "s:r20-01g:a": (38, "discorso indiretto"), "s:r20-01g:b": (38, "discorso indiretto"),
+    "s:r20-01g:d": (38, "discorso indiretto"), "s:r20-01g:e": (38, "discorso indiretto"),
+    "s:r20-01g:f": (38, "discorso indiretto"),
+    "s:r20-02d:a": (38, "discorso indiretto"), "s:r20-02d:b": (38, "discorso indiretto"),
+    "s:r20-02d:c": (38, "discorso indiretto"), "s:r20-02d:d": (38, "discorso indiretto"),
+    "s:r20-02d:e": (38, "discorso indiretto"),
+})
+
 
 def min_week(item):
     feats = item_features(item)
