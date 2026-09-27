@@ -86,18 +86,18 @@ function play(items, kind, week, acc) {
     var ekind = right ? null : (TYPED[it.type] && rnd() < 0.33) ? "slip" : "rule";
     if (ekind === "slip") q = 1;
     acc.asked++;
-    if (right) { acc.right++; combo++; } else combo = 0;
+    // the bonus grows with the written answers only («racha de escritos»)
+    var wrote = Engine.written ? Engine.written(it) : true;
+    if (right) { acc.right++; if (wrote) combo++; } else combo = 0;
     if (!it.retry) { acc.firstAsked = (acc.firstAsked || 0) + 1; if (right || q === 1) acc.firstRight = (acc.firstRight || 0) + 1; }
-    var gained = Engine.xpFor(right ? "giusto" : "sbagliato", combo);
+    var gained = Engine.xpFor(right ? "giusto" : q === 1 ? "quasi" : "sbagliato", combo, it,
+                              { old: ctx.Reglas ? ctx.Reglas.isOld(it, state) : false });
     if (it.retry) gained = Math.ceil(gained / 2);
     acc.xp += gained;
     Engine.addXp(state, gained, new FakeDate());
-    if (it.src !== "coniugatore" && it.src !== "lettura") {
-      var light = !it.frase && it.src !== "vocab" && it.src !== "lab" && it.src !== "banca" && !it.retry &&
-                  (kind === "round" || kind === "sfida" || kind === "boss");
-      state.cards[it.id] = Engine.schedule(state.cards[it.id], q, { light: light, kind: ekind, id: it.id, state: state, retry: !!it.retry, now: clock.t });
-      Engine.maybeFit(state);
-    }
+    // what the app does with the answer (docs/js/reglas.js): the card of
+    // the item and the one of its rule
+    ctx.Reglas.afterAnswer(state, it, q, { kind: kind, now: clock.t, ekind: ekind });
     state.totals.attempts++;
     if (right) state.totals.right++; else state.totals.wrong++;
     if (!it.frase && it.src !== "lab" && it.src !== "lettura" && it.src !== "banca" &&
@@ -233,13 +233,17 @@ course.weeks.forEach(function (w) {
     totalSec += Math.round(sr.words / 8 * 60) + 120;
     state.scritti = state.scritti || {}; state.scritti[w.week] = { n: sr.words, errs: sr.hard, at: clock.t };
     state.written = (state.written || 0) + 1;
-    Engine.addXp(state, 40 + Math.min(40, Math.floor(sr.words / 5)) + 20, new FakeDate());
+    Engine.addXp(state, Engine.xpText ? Engine.xpText(sr.words, sr.reqs.filter(function (q) { return q.ok && q.id; }).length, !sr.hard)
+                                      : 40 + Math.min(40, Math.floor(sr.words / 5)) + 20, new FakeDate());
     missions.push({ m: "scrivi", words: sr.words });
   }
 
   // 2. palabras de la semana
   if (w.vocab && w.vocab.length) {
-    var acc = play(Drills.withWordIntros(Drills.vocabSession(course, w, state, 14), state), "vocab", w.week);
+    // until every word has been written once (the mission asks it), three sessions at most
+    var acc = null, vs = 0;
+    do { acc = play(Drills.withWordIntros(Drills.vocabSession(course, w, state, 14), state), "vocab", w.week, acc); vs++; }
+    while (vs < 3 && w.vocab.some(function (v) { return !(state.cards["v:" + v[0]] || {}).prod; }));
     missions.push({ m: "palabras", n: w.vocab.length, asked: acc.asked, sec: acc.sec,
                     noExample: w.vocab.filter(function (v) { return !v[2]; }).length });
   }

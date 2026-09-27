@@ -537,15 +537,94 @@
     return { level: lvl, into: xp - total, need: need };
   }
 
+  /* xp by cognitive cost, not the same for everything: recognising among
+     options pays less than writing, a rule of a month ago written from
+     memory pays more (retrieval effort: Bjork 1994; Rawson & Dunlosky
+     2022), and so does a phrase written from memory.  The streak bonus
+     («racha de escritos») grows only with written answers. */
   var XP = { right: 10, close: 4, bonusCombo: 2, boss: 150, challenge: 6,
-           lesson: 15 };
+             lesson: 15, recog: 6, written: 10, oldRule: 14, phrase: 12,
+             textWord: 0.5, textMax: 80, textStruct: 5, textClean: 20 };
+  var TYPED_KINDS = { cloze: 1, translate: 1, conjugate: 1, plural: 1, numbers: 1, qa: 1, typed: 1,
+                      write: 1, dictation: 1, fixerr: 1, garden: 1 };
 
-  function xpFor(verdict, combo) {
+  // Written (produced) or recognised among options (or tiles, or a card
+  // graded by the learner).
+  function written(it) {
+    if (!it) return true;
+    if (it.recog || it.options || it.type === "choice" || it.type === "flash") return false;
+    return !!TYPED_KINDS[it.type];
+  }
+  function costOf(it, ctx) {
+    if (!it) return XP.right;
+    if (!written(it)) return XP.recog;
+    if (ctx && ctx.old) return XP.oldRule;
+    if (it.frase) return XP.phrase;
+    return XP.written;
+  }
+  // xpFor(verdict, combo) as always; with the item, by its cost (ctx.old: a
+  // rule of a month or more ago).
+  function xpFor(verdict, combo, it, ctx) {
     if (verdict === VERDICT.RIGHT) {
-      return XP.right + Math.min(combo, 10) * XP.bonusCombo;
+      var base = costOf(it, ctx);
+      return base + (it && !written(it) ? 0 : Math.min(combo || 0, 10) * XP.bonusCombo);
     }
     if (verdict === VERDICT.CLOSE) return XP.close;
     return 0;
+  }
+  // Free text: by the word (with a cap), by each structure asked and met,
+  // and a bonus when the review found nothing to fix.
+  function xpText(words, structs, clean) {
+    return Math.min(XP.textMax, Math.round((+words || 0) * XP.textWord)) + (+structs || 0) * XP.textStruct +
+      (clean ? XP.textClean : 0);
+  }
+
+  /* ------------------------------------------- fichas desde cualquier módulo */
+
+  /* enqueue(state, id, item, opts): any module can put something in the
+     review: a check of the lesson missed, a question of a reading, a block
+     of the dictogloss not recovered, a gap of the C-test.  The item is
+     kept in state.own (the review can rebuild it from there); the card is
+     due tomorrow morning (opts.due: another moment; opts.now).  With
+     opts.maint the card starts in maintenance (what the placement test
+     skipped: known, it comes back a few a day, never as a debt); an
+     existing card is never overwritten by a maintenance one. */
+  var OWN_MAX = 200;
+  function enqueue(state, id, item, opts) {
+    opts = opts || {};
+    if (!state || !id) return null;
+    if (!state.cards) state.cards = {};
+    var now = opts.now || Date.now();
+    if (item) {
+      if (!state.own) state.own = {};
+      var copy = {};
+      Object.keys(item).forEach(function (k) { copy[k] = item[k]; });
+      copy.id = id;
+      delete copy.retry; delete copy.recogNote; delete copy.novel; delete copy.skill;
+      state.own[id] = { it: copy, at: now, src: opts.src || item.src || "", week: opts.week || item.week || 0 };
+      var keys = Object.keys(state.own);
+      if (keys.length > OWN_MAX) {
+        keys.sort(function (a, b) { return state.own[a].at - state.own[b].at; })
+          .slice(0, keys.length - OWN_MAX).forEach(function (k) { delete state.own[k]; delete state.cards[k]; });
+      }
+    }
+    var card = state.cards[id];
+    if (opts.maint) {
+      if (card) return card;
+      card = { s: MAINT_S, d: 5, reps: 1, lapses: 0, seen: 0, ok: 1, state: "maint",
+               interval: MAINT_S, due: opts.due || now, last: now, seeded: 1 };
+    } else {
+      var dd = new Date(now + DAY);
+      dd.setHours(4, 0, 0, 0);
+      var due = opts.due || dd.getTime();
+      if (card && card.due && card.due <= due && card.reps === 0) return card;     // already coming back
+      if (!card) card = { s: W[0], d: initD(1), reps: 0, lapses: 1, seen: 0, ok: 0, state: "learn", last: now };
+      else { card.reps = 0; card.state = "learn"; }
+      card.due = due;
+      card.interval = Math.max(0, Math.round((due - now) / DAY));
+    }
+    state.cards[id] = card;
+    return card;
   }
 
   /* --------------------------------------------------------------- guardado */
@@ -593,7 +672,10 @@
       reflect: {},        // cierre semanal: "aaaa-m-d" (lunes) -> { hard, change, when }
       records: {},        // récords personales por métrica
       pauses: [],         // pausas de 3+ días: { from, to, why }
-      keywords: {}        // palabra -> imagen mnemónica escrita por el alumno
+      keywords: {},       // palabra -> imagen mnemónica escrita por el alumno
+      own: {},            // fichas que crearon los módulos (Engine.enqueue): id -> { it, at, src, week }
+      recog: {},          // ejercicios reconocidos bien sin ficha: id -> minuto (la próxima vez, escritos)
+      predictions: []     // «¿cuánto creés que vas a sacar?»: { kind, week, said, got, at }
     };
   }
 
@@ -663,6 +745,8 @@
     Object.keys(s.sessions).forEach(function (k) { s.sessions[k] = num(s.sessions[k], 0, 0); });
     Object.keys(s.keywords).forEach(function (k) { if (typeof s.keywords[k] !== "string") delete s.keywords[k]; });
     s.pauses = s.pauses.filter(isObj).slice(-30);
+    Object.keys(s.own).forEach(function (k) { if (!isObj(s.own[k]) || !isObj(s.own[k].it)) delete s.own[k]; });
+    s.predictions = s.predictions.filter(isObj).slice(-40);
     Object.keys(s.days).forEach(function (k) {
       if (!isFinite(+s.days[k])) delete s.days[k]; else s.days[k] = +s.days[k];
     });
@@ -991,6 +1075,9 @@
     strandsLast: strandsLast,
     levelFor: levelFor,
     xpFor: xpFor,
+    xpText: xpText,
+    written: written,
+    enqueue: enqueue,
     blankSave: blankSave,
     load: load,
     sanitize: sanitize,

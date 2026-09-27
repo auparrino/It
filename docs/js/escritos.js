@@ -413,6 +413,8 @@
   function finishCtest() {
     cur.pass = 2;
     var fixed = cur.final.per.filter(function (v, i) { return v === "giusto" && cur.first.per[i] !== "giusto"; }).length;
+    // the gaps missed at the first try come back tomorrow in the review (reglas.js)
+    if (root.Reglas && cur.first) root.Reglas.fromCtest(H.state(), cur.built, cur.first);
     award(cur.first.right * 2 + cur.first.close + fixed);
     saveResult("ctest", cur.first.pct);
     if (H.fx) H.fx.goal();

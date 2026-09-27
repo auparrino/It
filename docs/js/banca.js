@@ -433,10 +433,26 @@
       .slice(0, n || 3);
   }
 
+  /* The Clínica opens with the learner's own errors of this week and their
+     rule, and mixes the items those errors left (a check of the lesson, a
+     question of a reading, a block of the dictogloss, a gap of the C-test:
+     Engine.enqueue) with the generic ones of the category: the error in
+     its own context is the most informative item there is (Metcalfe 2017). */
   function clinicaSession(state, size) {
-    var weak = weakest(state, 3), out = [];
     size = size || 12;
-    if (!weak.length) return [];
+    var RG = root.Reglas;
+    var own = RG && RG.ownRecent ? RG.ownRecent(state, Math.floor(size / 2)) : [];
+    var out = clinicaGeneric(state, size - own.length);
+    if (!out.length && !own.length) return [];
+    out = shuffle(own.concat(out)).slice(0, size);
+    var intro = RG && RG.clinicIntro ? RG.clinicIntro(state) : null;
+    if (intro) out.unshift(intro);
+    return out;
+  }
+
+  function clinicaGeneric(state, size) {
+    var weak = weakest(state, 3), out = [];
+    if (!weak.length || size <= 0) return [];
     weak.forEach(function (w, k) {
       var c = CURE[w.cat], share = Math.max(2, Math.round(size * (k === 0 ? 0.5 : 0.25)));
       var parts = [];
@@ -476,6 +492,16 @@
     return null;
   }
 
+  /* A sentence of the bank the learner may be asked now (its level, and
+     all its grammar already taught: key «w» to translate or find, «wg» to
+     fill the gap).  «Nada antes de su teoría». */
+  function sentenceOk(i, state, key) {
+    var s = B && B.sentences[i];
+    if (!s) return false;
+    if (key === "wg" && !s.gap) return false;
+    return within(s.lvl, levelOf(state)) && taught(s, state, key);
+  }
+
   // Un ítem para la pausa del café: una oración al nivel del alumno.
   function pausaItem(state) {
     var r = Math.random();
@@ -494,6 +520,8 @@
     load: load,
     loaded: loaded,
     levelOf: levelOf,
+    weekOf: weekOf,
+    sentenceOk: sentenceOk,
     defArt: defArt,
     indefArt: indefArt,
     CONTR: CONTR,
