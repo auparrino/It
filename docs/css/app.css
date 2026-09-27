@@ -279,6 +279,14 @@ body.kar-audio .text { filter: blur(6px); pointer-events: none; }
 /* --- parla --- */
 .chat { display: flex; flex-direction: column; gap: 8px; margin: 12px 0; }
 .bubble { max-width: 88%; padding: 10px 14px; border-radius: 16px; line-height: 1.4; }
+.bubble .easy { display: block; margin-top: 6px; font-size: .88em; opacity: .85; }
+.typing { display: inline-flex; gap: 4px; align-items: center; height: 1.2em; }
+.typing i { width: 6px; height: 6px; border-radius: 50%; background: currentColor; opacity: .35; animation: typing 1s infinite ease-in-out; }
+.typing i:nth-child(2) { animation-delay: .15s; } .typing i:nth-child(3) { animation-delay: .3s; }
+@keyframes typing { 0%, 80%, 100% { opacity: .25; transform: translateY(0); } 40% { opacity: .9; transform: translateY(-3px); } }
+@media (prefers-reduced-motion: reduce) { .typing i { animation: none; opacity: .6; } }
+.aiorder { border: 0; padding: 0; margin: 8px 0; display: grid; gap: 6px; }
+.aiorder label { display: flex; gap: 8px; align-items: center; min-height: 44px; }
 
 /* --- abitudine e mete --- */
 .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0; }

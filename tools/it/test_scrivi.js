@@ -144,11 +144,12 @@ ERR.forEach(function (e) {
 // acepta el modo JSON → el mismo sin él; clave mala → error claro; lee el
 // JSON aunque venga con <think> o ```.
 var GEM = [];
-function gem(name, plan, check, keys, mode) { GEM.push([name, plan, check, keys, mode]); }
+function gem(name, plan, check, keys, mode, first) { GEM.push([name, plan, check, keys, mode, first]); }
 function runGem() {
   if (!GEM.length) return console.log("\ncontrolli: " + checks + "   errori: " + fails);
   var g = GEM.shift(), calls = [], mem = {};
   ctx.localStorage = { getItem: function (k) { return mem[k] || null; }, setItem: function (k, v) { mem[k] = v; } };
+  if (g[5]) mem["laviac1.ia.first"] = g[5];   // qué proveedor va primero (Io)
   ctx.fetch = function (url, opt) {
     if (/\/models$/.test(url) && /googleapis/.test(url)) {
       return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve({ data: [
@@ -193,15 +194,15 @@ gem("todo saturado", function () { return { status: 503, body: {} }; },
 // Gemini de respaldo, con su propia búsqueda de modelos
 var BOTH = { groq: "gsk_x", gemini: "AIza_x" };
 gem("Groq saturado → Gemini", function (n, b) { return /gemini/.test(b.model) ? { status: 200, body: GOOD } : { status: 503, body: {} }; },
-    function (e, d, c) { var gi = c.filter(function (m) { return /gemini/.test(m); }); return !e && d.explicacion === "x" && gi[0] === "gemini-2.5-flash~" && !c.some(function (m) { return /embed|gemma/.test(m); }); }, BOTH);
+    function (e, d, c) { var gi = c.filter(function (m) { return /gemini/.test(m); }); return !e && d.explicacion === "x" && gi[0] === "gemini-2.5-flash~" && !c.some(function (m) { return /embed|gemma/.test(m); }); }, BOTH, undefined, "groq");
 gem("clave de Groq mala → Gemini", function (n, b) { return /gemini/.test(b.model) ? { status: 200, body: GOOD } : { status: 401, body: {} }; },
-    function (e, d, c) { return !e && c.length === 2 && c[1] === "gemini-2.5-flash~"; }, BOTH);
+    function (e, d, c) { return !e && c.length === 2 && c[1] === "gemini-2.5-flash~"; }, BOTH, undefined, "groq");
 gem("solo Gemini", function () { return { status: 200, body: GOOD }; },
     function (e, d, c) { return !e && c.length === 1 && c[0] === "gemini-2.5-flash~"; }, { gemini: "AIza_x" });
 gem("Gemini: modelo retirado (404) → el siguiente", function (n) { return n === 1 ? { status: 404, body: {} } : { status: 200, body: GOOD }; },
     function (e, d, c) { return !e && c[1] === "gemini-2.0-flash~"; }, { gemini: "AIza_x" });
 gem("los dos fallan", function () { return { status: 503, body: {} }; },
-    function (e) { return e && /Groq: /.test(e.message) && /Gemini: /.test(e.message); }, BOTH);
+    function (e) { return e && /Groq: /.test(e.message) && /Gemini: /.test(e.message); }, BOTH, undefined, "groq");
 // Scrivi: corrige y un segundo profesor revisa; si la revisión falla, queda la primera.
 var FIRST = reply(JSON.stringify({ errores: [{ mal: "ho andato", bien: "sono andato", tipo: "ausiliare", explicacion: "a" },
                                              { mal: "andato", bien: "andato", tipo: "ausiliare", explicacion: "dup" }], corregido: "x" }));

@@ -1599,24 +1599,11 @@
   }
 
   /* ------------------------------------------------------------ IA
-     Optional: the learner's own free keys.  Groq first (no card, answers in
-     a second or two), Gemini as fallback when Groq fails or has no key.
-     Both speak the OpenAI-style API.  Which models a key can use changes
-     over time, so the app asks each provider for its list and takes the
-     best one available.  The keys never leave the phone except to them. */
-  var PROVIDERS = [
-    { id: "groq", name: "Groq", url: "https://api.groq.com/openai/v1", maxKey: "max_completion_tokens",
-      prefer: [/kimi-k2/i, /gpt-oss-120b/i, /llama-3\.3-70b/i, /qwen3?-32b|qwen\//i, /llama-4-maverick/i, /llama-4-scout/i, /gpt-oss-20b/i, /llama-3\.1-8b/i],
-      skip: /whisper|tts|guard|playai|orpheus|distil|compound|allam|embed/i,
-      fallback: ["moonshotai/kimi-k2-instruct", "openai/gpt-oss-120b", "llama-3.3-70b-versatile", "qwen/qwen3-32b", "llama-3.1-8b-instant"],
-      reasoning: function (m) { return /gpt-oss/i.test(m) ? "low" : /qwen3/i.test(m) ? "none" : null; } },
-    { id: "gemini", name: "Gemini", url: "https://generativelanguage.googleapis.com/v1beta/openai", maxKey: "max_tokens",
-      prefer: [/^gemini-2\.5-flash$/, /^gemini-flash-latest$/, /^gemini-2\.0-flash$/, /^gemini-2\.5-flash-lite$/, /^gemini-flash-lite-latest$/,
-               /^gemini-2\.0-flash-lite$/, /^gemini-2\.5-pro$/, /^gemini-[\d.]+-flash$/, /^gemini-.*flash/],
-      skip: /embed|imagen|veo|tts|aqa|image|audio|live|native|learnlm|gemma|robotics|computer|thinking/i,
-      fallback: ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-2.5-flash-lite"],
-      reasoning: function (m) { return /pro/i.test(m) ? "low" : /2\.5|latest/i.test(m) ? "none" : null; } }
-  ];
+     Optional: the learner's own free keys.  The client (providers, model
+     ranking, reasoning off, streaming, which provider goes first) lives in
+     the core, js/ia.js, the same for both languages; the prompts are here. */
+  var IA = root.IA;
+  var PROVIDERS = IA ? IA.PROVIDERS : [];
   // The error types of the clinic: the AI files each mistake under one of them.
   var AI_TYPES = {
     ausiliare: "essere/avere en tiempos compuestos", participio_accordo: "concordancia del participio",
@@ -1764,7 +1751,7 @@
   function parlaTurnPrompt(scen, history, userText, ctx, done) {
     var pending = scen.obiettivi.map(function (o, i) { return (done || []).indexOf(i + 1) < 0 ? (i + 1) + ") " + o : null; }).filter(Boolean);
     return "Seguís un role-play en italiano con un alumno hispanohablante de nivel " + ctx.level + ". Tu personaje: " + scen.ruolo_ia +
-      ". Situación: " + scen.situazione_es + ". Objetivos del alumno: " + scen.obiettivi.map(function (o, i) { return (i + 1) + ") " + o; }).join(" ") +
+      ". Situación: " + String(scen.situazione_es || "").replace(/\.\s*$/, "") + ". Objetivos del alumno: " + scen.obiettivi.map(function (o, i) { return (i + 1) + ") " + o; }).join(" ") +
       (pending.length ? ". Todavía le faltan: " + pending.join(" ") : "") + "\n" +
       "Cómo conversar: respondé primero a lo que el alumno acaba de decir o preguntar (si te pregunta algo, contestalo en personaje, con un dato concreto); " +
       "no repitas lo que ya dijiste antes; mantené el hilo de la situación; terminá con UNA pregunta simple que lo acerque a un objetivo pendiente. " +
@@ -1797,12 +1784,34 @@
       "artículos, ortografía y sobre todo las palabras equivocadas que cambian el sentido (cappelli = sombreros / capelli = pelo; troppo = demasiado / " +
       "molto = muy; grande = grande de tamaño o de edad según el contexto). Si la frase está bien, \"ok\": true. No inventes reglas.\n" +
       "Respondé SOLO con JSON: {\"frasi\": [{\"i\": número de la frase, \"ok\": true o false, \"corretta\": \"la frase corregida\", " +
-      "\"nota\": \"una observación breve en castellano rioplatense, o vacío\"}]} con una entrada para cada una de estas frases: " + mine.join(", ");
+      "\"nota\": \"una observación breve en castellano rioplatense, o vacío\", \"tipo\": \"el tipo del error principal, uno de: " + Object.keys(AI_TYPES).join(", ") + "\"}]} con una entrada para cada una de estas frases: " + mine.join(", ");
   }
-  function parlaStart(ctx, keys, done) { llm(parlaScenarioPrompt(ctx), keys, done); }
-  function parlaTurn(scen, history, userText, ctx, keys, done, reached) { llm(parlaTurnPrompt(scen, history, userText, ctx, reached), keys, done); }
-  function parlaRewrite(reply, miss, keys, done) { llm(parlaRewritePrompt(reply, miss), keys, done); }
-  function parlaReview(scen, history, keys, done) { llm(parlaReviewPrompt(scen, history), keys, done); }
+  /* The turn as a chat: the rules, the character and the goals go in the
+     system message (the same every turn, so the provider can reuse it), the
+     conversation as real turns, and the format with the learner's message. */
+  function parlaTurnChat(scen, history, userText, ctx, done) {
+    var full = parlaTurnPrompt(scen, [], "", ctx, done);
+    var cut = full.indexOf("Conversación hasta ahora:"), at = full.indexOf("Respondé SOLO con JSON");
+    var rules = cut > 0 ? full.slice(0, cut).trim() : full, fmt = at > 0 ? full.slice(at) : "";
+    var msgs = [{ role: "user", content: "(Empieza el role-play.)" }];
+    history.forEach(function (h) {
+      var text = String(h[1] || "");
+      if (h[0] === "ia" && /^\(/.test(text)) return;                 // avisos de la app, no del personaje
+      var role = h[0] === "ia" ? "assistant" : "user", last = msgs[msgs.length - 1];
+      if (last.role === role) last.content += "\n" + text; else msgs.push({ role: role, content: text });
+    });
+    var turn = userText + "\n\n[" + fmt + "]";
+    if (msgs[msgs.length - 1].role === "user") msgs[msgs.length - 1].content += "\n" + turn; else msgs.push({ role: "user", content: turn });
+    return { system: rules + "\nCada mensaje del alumno llega como un turno; respondé en personaje con el JSON pedido.", messages: msgs };
+  }
+  function parlaStart(ctx, keys, done) { llm(parlaScenarioPrompt(ctx), keys, done, { max: 900 }); }
+  // opts.stream: the character's line as it is being written (the app shows it live).
+  function parlaTurn(scen, history, userText, ctx, keys, done, reached, opts) {
+    opts = opts || {};
+    llm(parlaTurnChat(scen, history, userText, ctx, reached), keys, done, { stream: opts.stream, max: 600, hedge: opts.hedge || 8000, temperature: 0.5 });
+  }
+  function parlaRewrite(reply, miss, keys, done) { llm(parlaRewritePrompt(reply, miss), keys, done, { max: 300 }); }
+  function parlaReview(scen, history, keys, done) { llm(parlaReviewPrompt(scen, history), keys, done, { think: "low" }); }
 
   /* ------------------------------------------------------- storia
      A short story built on the words due for review plus what the learner
@@ -1847,117 +1856,12 @@
   function esame(task, text, keys, done) { llm(esamePrompt(task, text), keys, done); }
   function storiaRewrite(text, miss, keys, done) { llm(storiaRewritePrompt(text, miss), keys, done); }
 
-  /* One request at a time through the models of each provider, best first:
-     each attempt waits at most 20 s, each provider at most 40 s.  The model
-     that answered last time goes first next time. */
-  function store(P, k) { return "laviac1." + P.id + "." + k; }
-  // Models that answered 402 (payment required) with this key: never asked again.
-  function paid(P) { try { return JSON.parse(localStorage.getItem(store(P, "paid")) || "{}") || {}; } catch (e) { return {}; } }
-  function markPaid(P, model) { var p = paid(P); p[model] = Date.now(); try { localStorage.setItem(store(P, "paid"), JSON.stringify(p)); } catch (e) { /* */ } }
-  function models(P, key, cb) {
-    try {
-      var c = JSON.parse(localStorage.getItem(store(P, "models")) || "null");
-      if (c && c.at > Date.now() - 86400000 && c.ids && c.ids.length) return cb(c.ids);
-    } catch (e) { /* */ }
-    var ctl = typeof AbortController === "function" ? new AbortController() : null;
-    var timer = setTimeout(function () { if (ctl) ctl.abort(); }, 8000);
-    fetch(P.url + "/models", { headers: { Authorization: "Bearer " + key }, signal: ctl ? ctl.signal : undefined })
-      .then(function (r) { return r.ok ? r.json() : null; })
-      .then(function (j) {
-        clearTimeout(timer);
-        var ids = ((j && j.data) || []).filter(function (m) { return m && m.id && m.active !== false; })
-          .map(function (m) { return String(m.id).replace(/^models\//, ""); })
-          .filter(function (id) { return !P.skip.test(id); });
-        var ranked = [];
-        P.prefer.forEach(function (rx) { ids.forEach(function (id) { if (rx.test(id) && ranked.indexOf(id) < 0) ranked.push(id); }); });
-        if (P.id === "groq") ids.forEach(function (id) { if (ranked.indexOf(id) < 0) ranked.push(id); });
-        if (ranked.length) { try { localStorage.setItem(store(P, "models"), JSON.stringify({ at: Date.now(), ids: ranked })); } catch (e) { /* */ } }
-        cb(ranked.length ? ranked : P.fallback.slice());
-      })
-      .catch(function () { clearTimeout(timer); cb(P.fallback.slice()); });
+  // Every request goes through the core client (js/ia.js).
+  function llm(prompt, keys, done, opts) {
+    if (!IA) return done(new Error("sin cliente de IA"));
+    return IA.llm(prompt, keys, done, opts);
   }
-  // The JSON inside a reply (some models think aloud in <think>…</think> or wrap it in ```).
-  function jsonOf(txt) {
-    txt = String(txt || "").replace(/<think>[\s\S]*?<\/think>/g, "").replace(/```(json)?/g, "").trim();
-    var a = txt.indexOf("{"), b = txt.lastIndexOf("}");
-    return JSON.parse(a >= 0 && b > a ? txt.slice(a, b + 1) : txt);
-  }
-  // keys: {groq, gemini}, or just the Groq key as a string.
-  function llm(prompt, keys, done) {
-    if (typeof fetch !== "function") return done(new Error("sin fetch"));
-    if (typeof keys === "string") keys = { groq: keys };
-    keys = keys || {};
-    var todo = PROVIDERS.filter(function (P) { return keys[P.id]; }), errs = [];
-    if (!todo.length) return done(new Error("sin clave"));
-    (function nextProvider() {
-      var P = todo.shift();
-      if (!P) return done(new Error(errs.length > 1 ? errs.join(" · ") : errs[0].replace(/^\w+: /, "")));
-      ask(P, prompt, keys[P.id], function (err, data, model) {
-        if (!err) return done(null, data, { provider: P.name, model: model });
-        errs.push(P.name + ": " + String(err.message || err));
-        nextProvider();
-      });
-    })();
-  }
-  function ask(P, prompt, key, done) {
-    models(P, key, function (list) {
-      // every model of the key, the free-tier-sized ones too, minus those known to be paid
-      var skip = paid(P), order = list.filter(function (m) { return !skip[m]; }), deadline = Date.now() + 40000, lastErr = null, plain = {}, n402 = 0;
-      if (!order.length) order = list.slice();
-      try {
-        // the model that answered last goes first, but only if it is among the
-        // three best: a small model that answered once during an outage would
-        // otherwise stay forever (and write «una ragazzo»)
-        var good = localStorage.getItem(store(P, "model"));
-        if (good && order.indexOf(good) > 0 && order.indexOf(good) < 3) { order.splice(order.indexOf(good), 1); order.unshift(good); }
-      } catch (e) { /* */ }
-      var k = 0, over = false;
-      function finish(err, data, model) { if (over) return; over = true; done(err, data, model); }
-      function next(err) {
-        if (err) lastErr = err;
-        if (k >= order.length || Date.now() > deadline) {
-          var m = n402 && n402 === k ? P.name + " pide un plan pago para todos los modelos de tu cuenta (402)"
-                : lastErr && /abort/i.test(String(lastErr.message || lastErr)) ? "la IA no respondió a tiempo" : String((lastErr && lastErr.message) || lastErr || "sin respuesta");
-          return finish(new Error(m));
-        }
-        attempt(order[k++]);
-      }
-      function attempt(model) {
-        var ctl = typeof AbortController === "function" ? new AbortController() : null;
-        var timer = setTimeout(function () { if (ctl) ctl.abort(); }, Math.min(20000, Math.max(3000, deadline - Date.now())));
-        var body = { model: model, temperature: 0.2,
-                     messages: [{ role: "system", content: "Respondés solo con JSON válido." }, { role: "user", content: prompt }] };
-        body[P.maxKey] = 4096;
-        var re = P.reasoning(model);
-        if (!plain[model]) { body.response_format = { type: "json_object" }; if (re) body.reasoning_effort = re; }
-        fetch(P.url + "/chat/completions", {
-          method: "POST", signal: ctl ? ctl.signal : undefined,
-          headers: { "Content-Type": "application/json", Authorization: "Bearer " + key },
-          body: JSON.stringify(body)
-        }).then(function (r) {
-          if (r.ok) return r.json();
-          return r.text().then(function (b) {
-            clearTimeout(timer);
-            if ((r.status === 400 && /api.?key/i.test(b)) || r.status === 401 || r.status === 403) { finish(new Error("HTTP " + r.status + ", clave")); return null; }
-            // a model that rejects the JSON mode or the reasoning option: again without them
-            if (r.status === 400 && !plain[model] && /response_format|json|reasoning/i.test(b)) { plain[model] = 1; attempt(model); return null; }
-            if (r.status === 402) { n402++; markPaid(P, model); next(new Error("HTTP 402")); return null; }
-            next(new Error(r.status === 429 ? "se terminó el cupo por ahora (429)" : r.status >= 500 ? P.name + " está saturado ahora (" + r.status + ")" : "HTTP " + r.status));
-            return null;
-          });
-        }).then(function (j) {
-          if (!j) return;
-          clearTimeout(timer);
-          var msg = j.choices && j.choices[0] && j.choices[0].message;
-          var data;
-          try { data = jsonOf(msg && msg.content); } catch (e) { return next(new Error("respuesta ilegible")); }
-          try { localStorage.setItem(store(P, "model"), model); } catch (e) { /* */ }
-          finish(null, data, model);
-        }).catch(function (e) { clearTimeout(timer); next(e); });
-      }
-      next();
-    });
-  }
+
   // The AI's errors as findings on the text's tokens (each fragment is found
   // in the text; what the local checker already marked is not repeated).
   function fromAI(text, data, local) {
@@ -1991,7 +1895,7 @@
               learn: learn, learnCourse: learnCourse, ltCheck: ltCheck, fromLT: fromLT,
               aiCheck: aiCheck, fromAI: fromAI, aiPrompt: aiPrompt, explain: explain, explainPrompt: explainPrompt, reviewPrompt: reviewPrompt,
               hints: hints, hintsPrompt: hintsPrompt, parlaStart: parlaStart, parlaTurn: parlaTurn, parlaRewrite: parlaRewrite, parlaReview: parlaReview, parlaReviewPrompt: parlaReviewPrompt, correggi: correggi,
-              parlaScenarioPrompt: parlaScenarioPrompt, parlaTurnPrompt: parlaTurnPrompt, storia: storia, storiaRewrite: storiaRewrite, storiaPrompt: storiaPrompt, esame: esame, esamePrompt: esamePrompt, PROVIDERS: PROVIDERS, AI_TYPES: AI_TYPES };
+              parlaScenarioPrompt: parlaScenarioPrompt, parlaTurnPrompt: parlaTurnPrompt, parlaTurnChat: parlaTurnChat, storia: storia, storiaRewrite: storiaRewrite, storiaPrompt: storiaPrompt, esame: esame, esamePrompt: esamePrompt, PROVIDERS: PROVIDERS, AI_TYPES: AI_TYPES };
   api.llm = llm;   // la reformulación de escritura_plus.js usa las mismas claves y proveedores
   if (typeof module === "object" && module.exports) module.exports = api;
   else root.Scrivi = api;

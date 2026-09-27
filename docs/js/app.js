@@ -4339,6 +4339,8 @@
     var r = Scrivi.check(String(text || ""), week || 52);
     return ((r && r.findings) || []).filter(function (f) { return !f.soft; });
   }
+  // Milliseconds as «1,4».
+  function secs(ms) { return (Math.round((+ms || 0) / 100) / 10).toFixed(1).replace(".", ","); }
   // A capital at the start of every sentence.
   function sentenceCase(text) {
     return String(text || "").replace(/(^|[.!?]\s+|\n\s*)([a-zà-ÿ])/g, function (m, a, b) { return a + b.toUpperCase(); });
@@ -4362,9 +4364,11 @@
       var ok = parla.obj.indexOf(i + 1) >= 0;
       return '<li class="' + (ok ? "ok" : "") + '">' + (ok ? "✓" : "○") + " " + esc(o) + "</li>";
     }).join("") + "</ul>";
-    var chat = '<div class="chat">' + parla.history.map(function (h) {
-      return '<div class="bubble ' + (h[0] === "ia" ? "ia" : "me") + '">' + esc(h[1]) + "</div>";
-    }).join("") + (parla.busy ? '<div class="bubble ia muted">…</div>' : "") + "</div>";
+    var chat = '<div class="chat" aria-live="polite">' + parla.history.map(function (h) {
+      return '<div class="bubble ' + (h[0] === "ia" ? "ia" : "me") + '"' + (h[0] === "ia" ? ' lang="' + LG.tts + '"' : "") + ">" + esc(h[1]) +
+        (h[2] ? '<small class="easy">🪜 Más fácil: <span lang="' + LG.tts + '">' + esc(h[2]) + "</span></small>" : "") + "</div>";
+    }).join("") + (parla.busy ? '<div class="bubble ia" id="plive"' + (parla.live ? "" : ' aria-label="escribiendo"') + ">" + (parla.live ? esc(parla.live) : '<span class="typing"><i></i><i></i><i></i></span>') + "</div>" : "") + "</div>" +
+      (parla.meta ? '<p class="muted small modelline">IA: ' + esc(parla.meta.provider + " · " + parla.meta.model) + " · " + secs(parla.meta.first) + " s hasta la primera palabra</p>" : "");
     if (parla.done) {
       var rec = parla.reviewing ? '<p class="muted">⏳ Revisando tus frases…</p>' : parla.recasts.length ? '<h3>Tus frases, corregidas</h3><table class="res">' + parla.recasts.map(function (r) {
         return "<tr><td>" + esc(r[0]) + "</td><td><b>" + esc(r[1]) + "</b>" + (r[2] ? '<br><small class="muted">' + esc(r[2]) + "</small>" : "") + "</td></tr>";
@@ -4404,34 +4408,54 @@
       parla.history.push(["me", text]);
       parla.turns++;
       parla.busy = true;
+      parla.live = "";
       render();
+      var p0 = parla;
+      // the character's line appears while it is being written; only that
+      // bubble changes, the rest of the screen stays put
+      var stream = function (raw) {
+        if (parla !== p0) return;
+        var f = window.IA && IA.partialField(raw, "risposta");
+        if (!f || !f.text || f.text === parla.live) return;
+        parla.live = f.text;
+        var el = $("#plive");
+        if (el) { el.textContent = sentenceCase(f.text); el.removeAttribute("aria-label"); }
+      };
       // the conversation before this turn (the turn itself goes apart), and
       // the goals already reached, so the character leads to the others
-      Scrivi.parlaTurn(parla.scen, parla.history.slice(-9, -1), text, parla.ctx, aiKeys(), function (err, data) {
-        if (view.screen !== "parla" || !parla) return;
-        var finish = function (reply) {
-          parla.busy = false;
-          parla.history.push(["ia", reply]);
-          if (data.recast && Engine.normalise(data.recast) !== Engine.normalise(text)) parla.recasts.push([text, String(data.recast), String(data.nota_es || "")]);
-          (data.obiettivi_raggiunti || []).forEach(function (n) { n = +n; if (n >= 1 && n <= 3 && parla.obj.indexOf(n) < 0) parla.obj.push(n); });
-          render();
-          speak(reply);
-          if (data.fine || parla.obj.length >= 3 || parla.turns >= 12) endParla(w);
-          else { var bx = $("#ptext"); if (bx) bx.focus(); }
-        };
-        if (err || !data) { parla.busy = false; parla.history.push(["ia", "(La IA no respondió: " + String(err && err.message || "") + ". Probá de nuevo.)"]); render(); return; }
-        var reply = sentenceCase(String(data.risposta || "").trim() || UI.ok);
+      Scrivi.parlaTurn(parla.scen, parla.history.slice(-13, -1), text, parla.ctx, aiKeys(), function (err, data, meta) {
+        if (parla !== p0) return;
+        parla.busy = false;
+        parla.live = "";
+        if (err || !data) {
+          parla.history.push(["ia", "(La IA no respondió: " + String(err && err.message || "") + ". Probá de nuevo.)"]);
+          if (view.screen === "parla") render();
+          return;
+        }
+        if (meta) parla.meta = meta;
+        var reply = sentenceCase(String(data.risposta || "").trim() || UI.ok), row = ["ia", reply];
+        parla.history.push(row);
+        if (data.recast && Engine.normalise(data.recast) !== Engine.normalise(text)) parla.recasts.push([text, String(data.recast), String(data.nota_es || "")]);
+        (data.obiettivi_raggiunti || []).forEach(function (n) { n = +n; if (n >= 1 && n <= 3 && parla.obj.indexOf(n) < 0) parla.obj.push(n); });
+        if (view.screen !== "parla") return;
+        render();
+        speak(reply);
+        if (data.fine || parla.obj.length >= 3 || parla.turns >= 12) return endParla(w);
+        var bx = $("#ptext"); if (bx) bx.focus();
+        // too many unknown words: the same line with simpler synonyms, under
+        // the original (it no longer holds the conversation back)
         var hard = tooHard(reply);
         if (hard) {
-          // too many unknown words: those words, by simpler synonyms; the
-          // rewrite is taken only if its language is not worse
           var miss = hard.miss.filter(function (x, i, a) { return a.indexOf(x) === i; }).slice(0, 8);
           Scrivi.parlaRewrite(reply, miss, aiKeys(), function (e2, d2) {
             var alt = !e2 && d2 && d2.risposta ? sentenceCase(String(d2.risposta)) : "";
-            finish(alt && langErrors(alt, w.week).length <= langErrors(reply, w.week).length ? alt : reply);
+            if (parla !== p0 || !alt || Engine.normalise(alt) === Engine.normalise(reply)) return;
+            if (langErrors(alt, w.week).length > langErrors(reply, w.week).length) return;
+            row[2] = alt;
+            if (view.screen === "parla" && !parla.busy) { render(); var b2 = $("#ptext"); if (b2) b2.focus(); }
           });
-        } else finish(reply);
-      }, parla.obj.slice());
+        }
+      }, parla.obj.slice(), { stream: stream });
     };
     on("#psend", send);
     var box = $("#ptext");
@@ -4473,6 +4497,9 @@
             if (!h || h[0] !== "me" || r.ok === true || !r.corretta) return;
             if (Engine.normalise(r.corretta) === Engine.normalise(h[1])) return;
             rec.push([h[1], String(r.corretta), String(r.nota || "")]);
+            // what went wrong in the role-play goes to the profile like any other error
+            var tipo = String(r.tipo || "").trim().toLowerCase();
+            if (Scrivi.AI_TYPES && Scrivi.AI_TYPES[tipo]) recordError({ cat: tipo, target: String(r.corretta), label: Scrivi.AI_TYPES[tipo], explain: String(r.nota || "") }, h[1]);
           });
           parla.recasts = rec;
         }
@@ -4867,7 +4894,7 @@
       '<label class="muted small ltopt"><input type="checkbox" id="slt"' + (state.ltOff ? "" : " checked") + "> " +
         "Si la IA no está, pedir la corrección de LanguageTool (gratis; el texto se envía a su servidor)</label>" +
       '<p class="muted small ailine">🤖 ' + (aiKey()
-        ? "Corrector con IA activado (" + [aiKeys().groq ? "Groq" : "", aiKeys().gemini ? (aiKeys().groq ? "Gemini de respaldo" : "Gemini") : ""].filter(Boolean).join(" + ") + "). "
+        ? "Corrector con IA activado (" + aiNames() + "). "
         : "Para que una IA marque todo y lo explique, cargá una clave gratuita. ") +
         '<a href="#" id="aigo">Claves en ' + UI.me + " →</a></p>" +
       '<div id="sout"></div>';
@@ -4893,6 +4920,12 @@
   function readKey(k) { try { return localStorage.getItem(k) || ""; } catch (e) { return ""; } }
   function aiKeys() { return { groq: readKey(AI_KEY), gemini: readKey(GEM_KEY) }; }
   function aiKey() { var k = aiKeys(); return k.groq || k.gemini; }
+  // «Gemini, y Groq de respaldo»: in the order the learner chose.
+  function aiNames() {
+    var k = aiKeys(), ids = (window.IA ? IA.order() : ["gemini", "groq"]).filter(function (id) { return k[id]; });
+    var name = { gemini: "Gemini", groq: "Groq" };
+    return ids.length > 1 ? name[ids[0]] + ", y " + name[ids[1]] + " de respaldo" : ids.map(function (id) { return name[id]; }).join("");
+  }
   // Which AI answered: «Groq · moonshotai/kimi-k2-instruct».
   function modelLine(m, m2) {
     var one = function (x) { return x ? esc(x.provider + " · " + x.model) : ""; };
@@ -4901,15 +4934,25 @@
   }
   function aiKeyFields() {
     var k = aiKeys();
-    return '<p class="muted small"><b>Groq</b> (principal): <a href="https://console.groq.com/keys" target="_blank" rel="noopener">console.groq.com/keys</a> → «Create API Key».</p>' +
-      '<input id="aikey" type="password" autocomplete="off" placeholder="Clave de Groq (gsk_…)" value="' + esc(k.groq) + '">' +
-      '<p class="muted small"><b>Gemini</b> (respaldo, si Groq falla): <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a> → «Create API key».</p>' +
+    var first = window.IA ? IA.order()[0] : "gemini", st = window.IA ? IA.stats() : {};
+    var lat = function (id) {
+      var x = st[id];
+      return x && x.lat ? ' <span class="muted">· última vez ' + esc(x.model) + ", " + secs(x.lat.first) + " s</span>" : "";
+    };
+    return '<p class="muted small"><label for="gemkey"><b>Gemini</b></label>: <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a> → «Create API key».' + lat("gemini") + "</p>" +
       '<input id="gemkey" type="password" autocomplete="off" placeholder="Clave de Gemini (AIza…)" value="' + esc(k.gemini) + '">' +
+      '<p class="muted small"><label for="aikey"><b>Groq</b></label>: <a href="https://console.groq.com/keys" target="_blank" rel="noopener">console.groq.com/keys</a> → «Create API Key».' + lat("groq") + "</p>" +
+      '<input id="aikey" type="password" autocomplete="off" placeholder="Clave de Groq (gsk_…)" value="' + esc(k.groq) + '">' +
+      '<fieldset class="aiorder"><legend class="muted small">Con las dos claves, primero preguntar a:</legend>' +
+      '<label><input type="radio" name="aifirst" value="gemini"' + (first === "gemini" ? " checked" : "") + "> Gemini <span class=\"muted small\">(mejor italiano y portugués)</span></label>" +
+      '<label><input type="radio" name="aifirst" value="groq"' + (first === "groq" ? " checked" : "") + "> Groq <span class=\"muted small\">(el más rápido)</span></label></fieldset>" +
       '<div class="row"><button class="tab" id="aisave">Guardar</button></div>' +
-      '<p class="muted small">Quedan solo en este teléfono; el texto se envía a Groq o a Google.</p>';
+      '<p class="muted small">Si uno falla o tarda en empezar a responder, la app le pregunta al otro. Las claves quedan solo en este teléfono; el texto se envía a Google o a Groq.</p>';
   }
   function saveKeys() {
     var g = (($("#aikey") || {}).value || "").trim(), m = (($("#gemkey") || {}).value || "").trim();
+    var pick = document.querySelector('input[name="aifirst"]:checked');
+    if (pick && window.IA) IA.setOrder(pick.value);
     try {
       if (g) localStorage.setItem(AI_KEY, g); else localStorage.removeItem(AI_KEY);
       if (m) localStorage.setItem(GEM_KEY, m); else localStorage.removeItem(GEM_KEY);
