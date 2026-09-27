@@ -433,29 +433,55 @@
     }).join("") + "</ul></details>";
   }
 
+  /* The phone's voices reading a script, part after part: parts are
+     [who, text] ("A", "B", "C": VOICE) or, with opts.mono = 0 | 1, the
+     paragraphs of a monologue read by one voice.  opts: rate, alive (a
+     function: false stops the chain), onend(seconds heard).  Returns
+     {stop}.  The tramo and the exam (app.js) use it. */
+  function playScript(parts, opts) {
+    opts = opts || {};
+    var h = { on: true }, i = 0, rate = opts.rate || 1, t0 = Date.now(), guard = null;
+    var all = words(parts.map(function (p) { return typeof p === "string" ? p : p[1]; }).join(" "));
+    h.stop = function () {
+      if (!h.on) return;
+      h.on = false; clearTimeout(guard);
+      if (root.speechSynthesis) try { root.speechSynthesis.cancel(); } catch (e) { /* */ }
+    };
+    (function next() {
+      if (!h.on || (opts.alive && !opts.alive())) { h.on = false; clearTimeout(guard); return; }
+      if (i >= parts.length) {
+        h.on = false;
+        if (opts.onend) opts.onend(Math.min((Date.now() - t0) / 1000, all / (2.2 * rate)));
+        return;
+      }
+      var p = parts[i++], text = typeof p === "string" ? p : p[1], moved = false;
+      // onend, or onerror, or (a voice that never answers) a generous timer
+      var step = function () { if (moved) return; moved = true; clearTimeout(guard); next(); };
+      guard = setTimeout(step, (words(text) / (1.6 * rate) + 4) * 1000);
+      var v = opts.mono != null ? { pitch: opts.mono ? 1.05 : 0.95, vi: opts.mono ? 1 : 0, rate: 1 } : VOICE[p[0]] || VOICE.A;
+      H.speak(text, true, 0.95 * rate * v.rate, { keep: true, pitch: v.pitch, vi: v.vi, onend: step, onerror: step });
+    })();
+    return h;
+  }
+
+  // The end of a listening of the tramo: one more play, the button back.
+  function played(token, sec) {
+    if (playing !== token) return;
+    playing = 0;
+    cur.plays++;
+    H.listened(sec);
+    var st = document.getElementById("trstate"), bb = document.getElementById("trplay");
+    if (st) st.textContent = playState();
+    if (bb) bb.disabled = false;
+  }
+
   function play() {
     var a = cur.s.ascolto, b = document.getElementById("trplay");
     if (playing) return;
-    var token = playing = Date.now(), i = 0, rate = cur.rate || 1, t0 = Date.now();
+    var token = playing = Date.now();
     if (b) b.disabled = true;
-    (function next() {
-      if (playing !== token) return;
-      if (i >= a.turns.length) {
-        playing = 0;
-        cur.plays++;
-        H.listened(Math.min((Date.now() - t0) / 1000, scriptWords(a) / (2.2 * rate)));
-        var st = document.getElementById("trstate"), bb = document.getElementById("trplay");
-        if (st) st.textContent = playState();
-        if (bb) bb.disabled = false;
-        return;
-      }
-      var t = a.turns[i++], moved = false;
-      // onend, or onerror, or (a voice that never answers) a generous timer
-      var step = function () { if (moved) return; moved = true; clearTimeout(guard); next(); };
-      var guard = setTimeout(step, (words(t[1]) / (1.6 * rate) + 4) * 1000);
-      var v = VOICE[t[0]] || VOICE.A;
-      H.speak(t[1], true, 0.95 * rate * v.rate, { keep: true, pitch: v.pitch, vi: v.vi, onend: step, onerror: step });
-    })();
+    playScript(a.turns, { rate: cur.rate || 1, alive: function () { return playing === token; },
+      onend: function (sec) { played(token, sec); } });
   }
 
   function deliverAsc() {
@@ -533,24 +559,10 @@
   function playBrv() {
     var b = cur.s.breve, btn = document.getElementById("trplay");
     if (playing) return;
-    var token = playing = Date.now(), i = 0, rate = cur.rate || 1, t0 = Date.now(), vi = b.voice === 1 ? 1 : 0;
+    var token = playing = Date.now();
     if (btn) btn.disabled = true;
-    (function next() {
-      if (playing !== token) return;
-      if (i >= b.text.length) {
-        playing = 0;
-        cur.plays++;
-        H.listened(Math.min((Date.now() - t0) / 1000, breveWords(b) / (2.2 * rate)));
-        var st = document.getElementById("trstate"), bb = document.getElementById("trplay");
-        if (st) st.textContent = playState();
-        if (bb) bb.disabled = false;
-        return;
-      }
-      var p = b.text[i++], moved = false;
-      var step = function () { if (moved) return; moved = true; clearTimeout(guard); next(); };
-      var guard = setTimeout(step, (words(p) / (1.6 * rate) + 4) * 1000);
-      H.speak(p, true, 0.95 * rate, { keep: true, pitch: vi ? 1.05 : 0.95, vi: vi, onend: step, onerror: step });
-    })();
+    playScript(b.text, { rate: cur.rate || 1, mono: b.voice === 1 ? 1 : 0, alive: function () { return playing === token; },
+      onend: function (sec) { played(token, sec); } });
   }
 
   function deliverBrv() {
@@ -872,7 +884,7 @@
               leggiHtml: leggiHtml, episodes: episodes, lexTexts: lexTexts, evaluate: evaluate, variety: variety, connectors: connectors,
               fichaHtml: fichaHtml, sourceUse: sourceUse, countList: countList, fichaOf: fichaOf,
               week: week, weeks: weeks, words: words, copied: copied, readAI: readAI, stop: stop, busy: function () { return !!cur; },
-              cellOk: cellOk, breveWords: breveWords, _deliverAsc: deliverAsc };
+              cellOk: cellOk, breveWords: breveWords, playScript: playScript, _deliverAsc: deliverAsc };
   if (typeof module === "object" && module.exports) module.exports = api;
   root.Tramo = api;
 })(typeof window !== "undefined" ? window : globalThis);
