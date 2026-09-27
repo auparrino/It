@@ -273,5 +273,98 @@
       "quis sumir de vergonha": "quise que me tragara la tierra",
       "gringo": "extranjero, cualquiera que sea de afuera"
     }
+  },
+  "breve": {
+    "title": "Mudança Tranquila",
+    "genre": "propaganda de rádio",
+    "es": "Una publicidad de radio de una empresa de mudanzas de Curitiba, hecha de expresiones idiomáticas: pisar na bola, tirar de letra, custar os olhos da cara.",
+    "speaker": "Voz da propaganda",
+    "voice": 1,
+    "text": [
+      "Mudar de casa deixa você com os nervos à flor da pele? Tem medo de que o caminhão pise na bola e chegue atrasado? Relaxa: com a Mudança Tranquila, você tira a mudança de letra.",
+      "A gente embala tudo, desmonta os móveis e monta de novo na casa nova. Fazemos questão de cumprir o horário: se o caminhão atrasar mais de uma hora, você ganha 20% de desconto. E não custa os olhos da cara: o orçamento é grátis e sai em 24 horas.",
+      "Para mudanças de até 15 quilômetros dentro de Curitiba, o preço começa em 890 reais. Pagando à vista, você ainda ganha as caixas de papelão de mão beijada.",
+      "Ligue já para a Mudança Tranquila: a gente dá um jeito, e você só troca a chave."
+    ],
+    "tabella": [
+      [
+        "Desconto se o caminhão atrasar mais de uma hora",
+        "20%",
+        [
+          "20",
+          "20 %",
+          "vinte por cento",
+          "20 por cento"
+        ]
+      ],
+      [
+        "Prazo para receber o orçamento (horas)",
+        "24",
+        [
+          "vinte e quatro",
+          "24 horas",
+          "24h"
+        ]
+      ],
+      [
+        "Distância máxima dentro da cidade (quilômetros)",
+        "15",
+        [
+          "quinze",
+          "15 km",
+          "15 quilômetros"
+        ]
+      ],
+      [
+        "Preço inicial da mudança (reais)",
+        "890",
+        [
+          "oitocentos e noventa",
+          "R$ 890",
+          "890 reais"
+        ]
+      ],
+      [
+        "Cidade da empresa",
+        "Curitiba",
+        [
+          "em Curitiba"
+        ]
+      ]
+    ],
+    "info": [
+      [
+        "A empresa desmonta e monta os móveis.",
+        true
+      ],
+      [
+        "O orçamento custa cinquenta reais.",
+        false
+      ],
+      [
+        "Quem paga à vista ganha as caixas.",
+        true
+      ],
+      [
+        "A empresa faz mudanças para outros países.",
+        false
+      ],
+      [
+        "A empresa promete chegar na hora.",
+        true
+      ],
+      [
+        "A empresa também guarda os móveis num depósito.",
+        false
+      ]
+    ],
+    "gloss": {
+      "pise na bola": "se mande una macana",
+      "de letra": "(tirar de letra) hacer sin esfuerzo",
+      "os olhos da cara": "un ojo de la cara",
+      "de mão beijada": "de regalo",
+      "papelão": "cartón",
+      "à vista": "al contado"
+    }
   }
 }

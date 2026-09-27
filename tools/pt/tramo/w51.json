@@ -297,5 +297,100 @@
     "punti": [["Presentar el problema del centro vacío", ["vazio", "esvazi", "apagadas", "fechadas"]], ["Usar información del reportaje", ["camila", "rocha", "dona cida", "reportagem"]], ["Usar información de la charla", ["tavares", "palestra", "urbanista"]], ["Discutir el riesgo de expulsión", ["substituição", "expuls", "exclusivo"]], ["Medidas numeradas y resultados esperados", ["habitação social", "aluguel social", "espera-se", "propomos"]]],
     "model": "Proposta: um centro para quem já vive nele\n\nÀ Secretaria Municipal de Urbanismo\n\nA Associação de Moradores do Centro vem apresentar a esta Secretaria a seguinte proposta, em resposta à chamada pública sobre a reforma de prédios vazios. Quem passa pela nossa região depois das sete da noite conhece a cena: lojas fechadas, faixas de «aluga-se» desbotadas e prédios inteiros com as janelas apagadas. O chamado retrofit pode mudar esse quadro, mas é preciso definir para quem.\n\nOs argumentos a favor são fortes. Como lembra a arquiteta Camila Rocha, ouvida numa reportagem recente, se os prédios voltarem a ser habitados, a rua volta a ter gente e a sensação de insegurança diminui. Além disso, como explicou o urbanista Henrique Tavares em palestra no bairro, reformar costuma ser mais sustentável do que demolir. O risco, contudo, é real: se os incentivos servirem apenas às grandes incorporadoras, teremos trocado um centro vazio por um centro exclusivo. Dona Cida, moradora de um prédio ocupado, resumiu bem: sem cuidado, não haverá revitalização, e sim substituição.\n\nPropomos, portanto, três medidas. Primeiro, que uma parte das unidades reformadas seja obrigatoriamente destinada à habitação social, inclusive por meio de programas de aluguel social. Segundo, que os moradores das ocupações e dos cortiços sejam ouvidos antes de qualquer projeto. Terceiro, que o térreo dos prédios continue sendo comércio, com fachadas ativas.\n\nCom isso, espera-se um centro ocupado dia e noite, com comércio vivo e sem expulsão de quem nunca o abandonou. Colocamo-nos à disposição para detalhar a proposta.\n\nAtenciosamente,\nAssociação de Moradores do Centro",
     "gloss": {"faixas": "carteles de tela, pasacalles", "desbotadas": "descoloridas", "incorporadoras": "empresas desarrolladoras inmobiliarias", "prédio ocupado": "edificio tomado por familias sin vivienda", "cortiços": "conventillos", "térreo": "planta baja"}
+  },
+  "breve": {
+    "title": "Rádio Câmara: o programa Centro Vivo",
+    "genre": "notícia de rádio",
+    "es": "Una noticia de la radio del concejo municipal de Porto Alegre: se aprueba un programa para volver a poblar el centro; cifras, condiciones y la crítica de la oposición.",
+    "speaker": "Repórter",
+    "voice": 0,
+    "text": [
+      "Rádio Câmara, boletim das seis da tarde. A Câmara Municipal de Porto Alegre aprovou ontem, por 24 votos a 11, o programa Centro Vivo, que pretende trazer de volta moradores para o Centro Histórico.",
+      "Pelo projeto, prédios de escritórios vazios há mais de cinco anos poderão ser transformados em apartamentos. Os proprietários que aderirem ao programa terão desconto de até 60% no IPTU durante dez anos. Em contrapartida, 20% dos apartamentos deverão ser alugados a famílias de baixa renda, com aluguel limitado a um terço da renda familiar.",
+      "A oposição votou contra: segundo o vereador Paulo Nunes, sem investimento em segurança e transporte, o programa pode acabar beneficiando só as construtoras. Já a prefeitura estima que, se tudo correr como previsto, cerca de 4 mil pessoas passem a morar no centro até 2030.",
+      "O projeto segue agora para a sanção do prefeito, que tem 15 dias úteis para assinar. Voltamos amanhã, no mesmo horário."
+    ],
+    "tabella": [
+      [
+        "Votos a favor do programa",
+        "24",
+        [
+          "vinte e quatro",
+          "24 votos"
+        ]
+      ],
+      [
+        "Desconto máximo no IPTU",
+        "60%",
+        [
+          "60",
+          "60 %",
+          "sessenta por cento",
+          "60 por cento"
+        ]
+      ],
+      [
+        "Parte dos apartamentos para famílias de baixa renda",
+        "20%",
+        [
+          "20",
+          "20 %",
+          "vinte por cento",
+          "20 por cento"
+        ]
+      ],
+      [
+        "Pessoas que devem morar no centro até 2030",
+        "4 mil",
+        [
+          "4.000",
+          "4000",
+          "quatro mil"
+        ]
+      ],
+      [
+        "Prazo do prefeito para assinar (dias úteis)",
+        "15",
+        [
+          "quinze",
+          "15 dias",
+          "15 dias úteis"
+        ]
+      ]
+    ],
+    "info": [
+      [
+        "O programa quer transformar escritórios vazios em moradias.",
+        true
+      ],
+      [
+        "O projeto foi aprovado por unanimidade.",
+        false
+      ],
+      [
+        "Os proprietários que aderirem pagam menos imposto.",
+        true
+      ],
+      [
+        "Todos os apartamentos serão para famílias de baixa renda.",
+        false
+      ],
+      [
+        "Para a oposição, o programa pode favorecer as construtoras.",
+        true
+      ],
+      [
+        "O prefeito já assinou o projeto.",
+        false
+      ]
+    ],
+    "gloss": {
+      "vereador": "concejal",
+      "iptu": "impuesto inmobiliario (como el ABL)",
+      "contrapartida": "contrapartida",
+      "sanção": "promulgación",
+      "aderirem": "adhieran",
+      "renda": "ingreso"
+    }
   }
 }

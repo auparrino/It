@@ -1,7 +1,8 @@
 {
   "series": { "id": "lunga", "name": "Leituras longas", "emoji": "📰",
     "blurb": "De la semana 27 en adelante, un texto largo por semana (de 350 a 900 palabras) de un género real, con preguntas en portugués como en el Celpe-Bras." },
-  "names": { "ascolto": "Escutas longas" },
+  "names": { "ascolto": "Escutas longas", "breve": "Escutas curtas" },
+  "cellStop": ["o", "os", "as", "às", "à", "ao", "aos", "um", "uma", "do", "da", "dos", "das", "de", "em", "no", "na", "até", "cerca", "horas", "hora", "hs", "reais", "real", "r"],
   "GENRES": {
     "carta_formal": { "name": "Carta formal", "paragraphs": 3,
       "open": ["\\b(prezad[oa]s?|senhor[a]?|sr\\.|sra\\.|ilustr[ií]ssim[oa]|excelent[ií]ssim[oa]|a quem possa interessar|à coordenação|ao senhor|à senhora|à diretoria)\\b"],

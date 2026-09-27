@@ -10,7 +10,8 @@
   "blurb": "De la semana 27 en adelante, un texto largo por semana (de 350 a 900 palabras) de un género real, con preguntas en portugués como en el Celpe-Bras."
  },
  "names": {
-  "ascolto": "Escutas longas"
+  "ascolto": "Escutas longas",
+  "breve": "Escutas curtas"
  },
  "GENRES": {
   "carta_formal": {
@@ -2226,6 +2227,91 @@
      "bater na sua porta": "golpear tu puerta",
      "me chama que eu vou junto": "avisame, que voy con vos (chamar = llamar, avisar; que = porque)"
     }
+   },
+   "breve": {
+    "title": "Jornal da Serra, as notícias da manhã",
+    "genre": "noticiário de rádio",
+    "es": "El boletín de la mañana de una radio de Petrópolis: una calle cerrada por obras, el boleto de ómnibus, un museo abierto de noche y el tiempo.",
+    "speaker": "Locutor",
+    "voice": 0,
+    "text": [
+     "Bom dia! São sete horas e você está ouvindo o Jornal da Serra, na Rádio Serra FM, de Petrópolis. As principais notícias da manhã.",
+     "Trânsito. A partir de segunda-feira, a Rua do Imperador vai ficar fechada para carros das 8 às 18 horas, por causa das obras na rede de esgoto. A prefeitura informa que as obras devem durar três semanas. Quem precisar chegar ao centro de carro deve usar a Rua Treze de Maio.",
+     "Ônibus. A passagem de ônibus entre Petrópolis e o Rio vai ficar mais cara: passa de 28 para 31 reais no dia primeiro. Os estudantes continuam pagando meia.",
+     "Cultura. O Museu Imperial abre à noite nesta sexta, com entrada gratuita até as 22 horas. Se chover, o concerto do jardim vai acontecer no salão principal.",
+     "Tempo. Hoje, céu nublado de manhã e sol à tarde, com mínima de 14 graus e máxima de 24. Quem for subir a serra à noite deve levar um casaco: vai esfriar bastante.",
+     "O próximo boletim é ao meio-dia. Uma ótima quarta-feira para você."
+    ],
+    "tabella": [
+     [
+      "A Rua do Imperador fica fechada para carros até as…",
+      "18",
+      [
+       "18 horas",
+       "18h",
+       "dezoito",
+       "18:00"
+      ]
+     ],
+     [
+      "Duração prevista das obras",
+      "três semanas",
+      [
+       "3 semanas",
+       "tres semanas"
+      ]
+     ],
+     [
+      "Novo preço da passagem Petrópolis–Rio (reais)",
+      "31",
+      [
+       "trinta e um",
+       "31 reais",
+       "R$ 31"
+      ]
+     ],
+     [
+      "Temperatura mínima de hoje (graus)",
+      "14",
+      [
+       "catorze",
+       "quatorze",
+       "14 graus"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "As obras da Rua do Imperador são na rede de esgoto.",
+      true
+     ],
+     [
+      "Os estudantes vão pagar a passagem inteira.",
+      false
+     ],
+     [
+      "Na sexta à noite, a entrada no Museu Imperial é gratuita.",
+      true
+     ],
+     [
+      "O concerto de sexta foi cancelado por causa da chuva.",
+      false
+     ],
+     [
+      "À noite vai fazer frio na serra.",
+      true
+     ],
+     [
+      "O próximo boletim é às dez horas.",
+      false
+     ]
+    ],
+    "gloss": {
+     "esgoto": "cloacas",
+     "passagem": "pasaje, boleto",
+     "meia": "media tarifa",
+     "boletim": "boletín (de noticias)"
+    }
    }
   },
   {
@@ -2549,6 +2635,100 @@
      "No entanto": "sin embargo (conectores: se ven en la semana 34)",
      "e sim de menos medo de errar": "sino de menos miedo a equivocarse (não... e sim = no... sino)",
      "recomeços": "los nuevos comienzos, empezar de nuevo"
+    }
+   },
+   "breve": {
+    "title": "Pousada Mar de Dentro",
+    "genre": "propaganda de rádio",
+    "es": "Una publicidad de radio de una posada en Ilhabela, en la costa de São Paulo: habitaciones, desayuno, promoción de invierno y cómo llegar.",
+    "speaker": "Voz da propaganda",
+    "voice": 1,
+    "text": [
+     "E se você pudesse desligar o celular por três dias? E se, em vez do trânsito, você ouvisse só o barulho do mar? Então você precisa conhecer a Pousada Mar de Dentro, em Ilhabela, no litoral norte de São Paulo.",
+     "São só doze quartos, todos com varanda e vista para o canal. O café da manhã, com frutas da região e pão feito na casa, está incluído na diária, e o jantar é servido até as 22 horas.",
+     "Neste inverno, de maio a agosto, quem reservar quatro noites paga só três. E crianças de até 6 anos não pagam hospedagem. A pousada fica a 15 minutos da balsa, e nós buscamos você no porto sem custo.",
+     "Reservas pelo nosso site ou pelo WhatsApp. Pousada Mar de Dentro: se você tivesse um lugar para não fazer nada, seria aqui."
+    ],
+    "tabella": [
+     [
+      "Número de quartos da pousada",
+      "12",
+      [
+       "doze",
+       "12 quartos",
+       "doze quartos"
+      ]
+     ],
+     [
+      "Horário limite do jantar",
+      "22",
+      [
+       "22 horas",
+       "22h",
+       "dez da noite",
+       "22:00"
+      ]
+     ],
+     [
+      "Promoção de inverno: quem reserva quatro noites paga…",
+      "três",
+      [
+       "3",
+       "tres",
+       "três noites",
+       "3 noites"
+      ]
+     ],
+     [
+      "Idade até a qual as crianças não pagam",
+      "6",
+      [
+       "seis",
+       "6 anos",
+       "seis anos"
+      ]
+     ],
+     [
+      "Distância até a balsa (minutos)",
+      "15",
+      [
+       "quinze",
+       "15 minutos",
+       "quinze minutos"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "Todos os quartos têm varanda.",
+      true
+     ],
+     [
+      "O jantar está incluído na diária.",
+      false
+     ],
+     [
+      "A promoção vale de maio a agosto.",
+      true
+     ],
+     [
+      "A pousada fica no litoral do Rio de Janeiro.",
+      false
+     ],
+     [
+      "A pousada busca os hóspedes no porto sem cobrar.",
+      true
+     ],
+     [
+      "Para reservar, é preciso ligar para um telefone fixo.",
+      false
+     ]
+    ],
+    "gloss": {
+     "balsa": "balsa, ferry",
+     "diária": "tarifa por noche",
+     "hospedagem": "alojamiento",
+     "desligar": "apagar"
     }
    }
   },
@@ -2883,6 +3063,102 @@
      "Agradeço desde já a atenção": "desde ya, gracias por su atención (fórmula de cierre: semana 43)",
      "Atenciosamente": "saludo atentamente (se ve en la semana 43)"
     }
+   },
+   "breve": {
+    "title": "Um recado da Editora Horizonte",
+    "genre": "recado na caixa postal",
+    "es": "Un mensaje en el contestador: la oficina de personal de una editorial cita a una candidata a una pasantía.",
+    "speaker": "Cláudia Mendes, do RH",
+    "voice": 1,
+    "text": [
+     "Oi, Juliana, boa tarde. Aqui é a Cláudia Mendes, do RH da Editora Horizonte. Estou ligando sobre a vaga de estágio em revisão de textos: você foi selecionada para a última etapa, parabéns!",
+     "A entrevista vai ser na quinta-feira, dia 14, às 10 horas, no nosso escritório da Rua da Assembleia, número 98, oitavo andar. Vai ser em grupo, com quatro candidatos. Antes de começarmos, cada um vai fazer um teste curto de revisão, de uns trinta minutos.",
+     "É importante vocês trazerem o comprovante de matrícula da faculdade e um documento com foto. A bolsa é de 1.800 reais, mais vale-transporte, para seis horas por dia.",
+     "Se não puder vir, me avisa até terça, tá? O meu ramal é 2173. Um abraço e até quinta!"
+    ],
+    "tabella": [
+     [
+      "Dia do mês da entrevista",
+      "14",
+      [
+       "dia 14",
+       "catorze",
+       "quatorze"
+      ]
+     ],
+     [
+      "Horário da entrevista",
+      "10",
+      [
+       "10 horas",
+       "10h",
+       "dez",
+       "dez horas",
+       "10:00"
+      ]
+     ],
+     [
+      "Andar do escritório",
+      "8",
+      [
+       "oitavo",
+       "8º",
+       "oitavo andar"
+      ]
+     ],
+     [
+      "Valor da bolsa (reais)",
+      "1.800",
+      [
+       "1800",
+       "mil e oitocentos",
+       "R$ 1.800",
+       "1.800 reais"
+      ]
+     ],
+     [
+      "Ramal da Cláudia",
+      "2173",
+      [
+       "2 1 7 3",
+       "21 73"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "A Juliana passou para a última etapa da seleção.",
+      true
+     ],
+     [
+      "A entrevista vai ser individual.",
+      false
+     ],
+     [
+      "Os candidatos vão fazer um teste de revisão.",
+      true
+     ],
+     [
+      "O estágio é de oito horas por dia.",
+      false
+     ],
+     [
+      "Além da bolsa, a editora paga o transporte.",
+      true
+     ],
+     [
+      "A Juliana precisa levar o currículo impresso.",
+      false
+     ]
+    ],
+    "gloss": {
+     "ramal": "interno (del teléfono)",
+     "bolsa": "pago de la pasantía",
+     "vale-transporte": "subsidio para el transporte",
+     "comprovante": "constancia",
+     "matrícula": "inscripción",
+     "estágio": "pasantía"
+    }
    }
   },
   {
@@ -3201,6 +3477,89 @@
      "Na véspera da viagem": "la víspera del viaje, el día antes",
      "desistiu": "se echó atrás, renunció",
      "lembrança": "recuerdo"
+    }
+   },
+   "breve": {
+    "title": "Paranapiacaba, a vila da neblina",
+    "genre": "audioguia",
+    "es": "La audioguía de la vieja estación de Paranapiacaba, en la sierra de São Paulo: el ferrocarril inglés del café, el reloj de la torre y la niebla.",
+    "speaker": "Audioguia",
+    "voice": 0,
+    "text": [
+     "Bem-vindo à Vila de Paranapiacaba. Você está na antiga estação, a 800 metros de altitude, no alto da Serra do Mar, em São Paulo.",
+     "A ferrovia foi inaugurada em 1867 por uma companhia inglesa, para levar o café do interior até o porto de Santos. Se os engenheiros não tivessem encontrado uma solução para a serra, que é muito íngreme, o café teria continuado descendo em lombo de mula. A solução foram cabos de aço que puxavam os vagões.",
+     "A vila foi construída para os funcionários da ferrovia. O relógio da torre, que você vê à sua frente, foi trazido da Inglaterra e funciona até hoje.",
+     "Muitos visitantes perguntam pela neblina: ela aparece em quase todas as tardes do ano. Se você tivesse chegado de manhã cedo, talvez tivesse visto a vila inteira coberta de branco. Para continuar a visita, siga até a casa do engenheiro-chefe, a 200 metros daqui."
+    ],
+    "tabella": [
+     [
+      "Altitude da estação (metros)",
+      "800",
+      [
+       "oitocentos",
+       "800 metros"
+      ]
+     ],
+     [
+      "Ano da inauguração da ferrovia",
+      "1867",
+      []
+     ],
+     [
+      "Porto de destino do café",
+      "Santos",
+      [
+       "porto de Santos"
+      ]
+     ],
+     [
+      "País de onde veio o relógio da torre",
+      "Inglaterra",
+      [
+       "da Inglaterra"
+      ]
+     ],
+     [
+      "Distância até a casa do engenheiro-chefe (metros)",
+      "200",
+      [
+       "duzentos",
+       "200 metros"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "A ferrovia foi construída para transportar café.",
+      true
+     ],
+     [
+      "A companhia que construiu a ferrovia era francesa.",
+      false
+     ],
+     [
+      "Os vagões subiam a serra puxados por cabos.",
+      true
+     ],
+     [
+      "O relógio da torre está quebrado.",
+      false
+     ],
+     [
+      "A neblina é comum à tarde.",
+      true
+     ],
+     [
+      "A visita termina na estação.",
+      false
+     ]
+    ],
+    "gloss": {
+     "íngreme": "empinada",
+     "lombo de mula": "lomo de mula",
+     "aço": "acero",
+     "neblina": "niebla",
+     "puxavam": "tiraban de"
     }
    }
   },
@@ -3532,6 +3891,92 @@
      "boatos": "rumores",
      "assinatura digital": "suscripción digital (assinatura = suscripción, también firma)",
      "assinantes": "suscriptores"
+    }
+   },
+   "breve": {
+    "title": "A última banca do centro",
+    "genre": "notícia de rádio",
+    "es": "Una noticia de radio de Itajubá: cierra el último puesto de diarios del centro; lo que dijo el dueño y lo que dijo la municipalidad.",
+    "speaker": "Repórter",
+    "voice": 0,
+    "text": [
+     "Rádio Vale Notícias, boa tarde. O principal assunto de hoje em Itajubá é o fechamento da última banca de jornal do centro.",
+     "A banca do seu Aristides, na praça da matriz, funcionou por 42 anos. Ontem, ele contou à nossa reportagem que vendia mais de 300 jornais por dia nos anos 90 e que hoje vende menos de 20. Disse que ia fechar no fim do mês porque o aluguel do ponto tinha subido de novo.",
+     "A prefeitura informou que estudava uma forma de manter a banca aberta como ponto de troca de livros. O secretário de Cultura, Renato Brandão, afirmou que a decisão seria tomada até sexta-feira e pediu que os moradores mandassem sugestões pelo site da prefeitura.",
+     "Seu Aristides agradeceu o apoio dos clientes e disse que, se a banca virar ponto de troca, quer continuar trabalhando lá como voluntário."
+    ],
+    "tabella": [
+     [
+      "Anos de funcionamento da banca",
+      "42",
+      [
+       "quarenta e dois",
+       "42 anos"
+      ]
+     ],
+     [
+      "Jornais vendidos por dia nos anos 90 (mais de…)",
+      "300",
+      [
+       "trezentos"
+      ]
+     ],
+     [
+      "Jornais vendidos por dia hoje (menos de…)",
+      "20",
+      [
+       "vinte"
+      ]
+     ],
+     [
+      "Prazo para a decisão da prefeitura",
+      "sexta-feira",
+      [
+       "sexta",
+       "sexta feira",
+       "até sexta"
+      ]
+     ],
+     [
+      "Nome do secretário de Cultura",
+      "Renato Brandão",
+      [
+       "Renato Brandao",
+       "Brandão"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "O dono da banca vai fechar por causa do aluguel.",
+      true
+     ],
+     [
+      "A prefeitura já decidiu comprar a banca.",
+      false
+     ],
+     [
+      "A prefeitura pediu sugestões aos moradores.",
+      true
+     ],
+     [
+      "Seu Aristides vai se mudar para outra cidade.",
+      false
+     ],
+     [
+      "Seu Aristides quer trabalhar como voluntário.",
+      true
+     ],
+     [
+      "A banca fica na estação de trem.",
+      false
+     ]
+    ],
+    "gloss": {
+     "banca": "puesto de diarios",
+     "ponto": "local (del negocio)",
+     "reportagem": "equipo de periodistas",
+     "prefeitura": "municipalidad"
     }
    }
   },
@@ -3870,6 +4315,99 @@
      "inclusive": "incluso (conector: se ve en la semana 34)",
      "vereadores": "concejales"
     }
+   },
+   "breve": {
+    "title": "Domingo na Avenida",
+    "genre": "aviso público",
+    "es": "Un aviso de la municipalidad de Belo Horizonte: una avenida cerrada a los autos el domingo, bicicletas prestadas y voluntarios.",
+    "speaker": "Voz da prefeitura",
+    "voice": 1,
+    "text": [
+     "Atenção, moradores e visitantes. A Prefeitura de Belo Horizonte informa: neste domingo, a Avenida Afonso Pena fica fechada para carros das 7 às 14 horas, entre a Praça Sete e a Rua da Bahia, para o programa Avenida Viva.",
+     "Na avenida, permite-se o uso de bicicletas, patins e skates. Não se permite estacionar nenhum veículo a partir das 6 horas: os carros estacionados serão rebocados. Os ônibus que passam pela Afonso Pena vão usar a Avenida Augusto de Lima.",
+     "Durante o evento, emprestam-se bicicletas de graça na barraca da Praça Sete: basta apresentar um documento com foto. Procuram-se também voluntários para ajudar na organização; as inscrições se fazem no site da prefeitura até sexta.",
+     "Em caso de chuva forte, o programa será cancelado e a avenida será aberta ao trânsito. Obrigado e bom domingo!"
+    ],
+    "tabella": [
+     [
+      "Horário em que a avenida reabre para os carros",
+      "14",
+      [
+       "14 horas",
+       "14h",
+       "duas da tarde",
+       "14:00"
+      ]
+     ],
+     [
+      "A partir de que horas não se pode estacionar",
+      "6",
+      [
+       "6 horas",
+       "6h",
+       "seis",
+       "seis horas",
+       "6:00"
+      ]
+     ],
+     [
+      "Avenida que os ônibus vão usar",
+      "Augusto de Lima",
+      [
+       "Avenida Augusto de Lima",
+       "Augusto Lima"
+      ]
+     ],
+     [
+      "Onde se pegam as bicicletas emprestadas",
+      "Praça Sete",
+      [
+       "na Praça Sete",
+       "Praça 7",
+       "barraca da Praça Sete"
+      ]
+     ],
+     [
+      "O que é preciso apresentar para pegar a bicicleta",
+      "documento com foto",
+      [
+       "documento",
+       "um documento com foto"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "Os carros estacionados na avenida serão levados pelo guincho.",
+      true
+     ],
+     [
+      "As bicicletas emprestadas custam dez reais.",
+      false
+     ],
+     [
+      "A prefeitura procura voluntários.",
+      true
+     ],
+     [
+      "Se chover, o evento passa para o sábado.",
+      false
+     ],
+     [
+      "Patins e skates são permitidos na avenida.",
+      true
+     ],
+     [
+      "O programa acontece todos os dias da semana.",
+      false
+     ]
+    ],
+    "gloss": {
+     "rebocados": "llevados por la grúa",
+     "barraca": "carpa, puesto",
+     "patins": "patines",
+     "emprestam-se": "se prestan"
+    }
    }
   },
   {
@@ -4197,6 +4735,84 @@
      "cartório": "escribanía",
      "oficina": "taller (falso amigo: se ve en la semana 45)"
     }
+   },
+   "breve": {
+    "title": "Memorial Carlos Drummond de Andrade",
+    "genre": "audioguia de exposição",
+    "es": "La audioguía de una sala del museo de Drummond en Itabira: la máquina de escribir, el poema de la piedra y lo que no se puede fotografiar.",
+    "speaker": "Audioguia",
+    "voice": 0,
+    "text": [
+     "Sala dois. Bem-vindo ao Memorial Carlos Drummond de Andrade, em Itabira, a cidade onde o poeta nasceu em 1902. Os objetos desta sala foram doados pela família e contam-nos a juventude do escritor.",
+     "Na vitrine à esquerda, vê-se a máquina de escrever que Drummond usou por mais de 30 anos. Ele mudou-se para o Rio de Janeiro em 1934 e trabalhou como funcionário público durante quase toda a vida: escrevia os poemas à noite, depois do expediente.",
+     "O poema mais famoso da sala é No meio do caminho, publicado em 1928. Na época, muitos críticos zombaram dele: diziam que repetir «tinha uma pedra no meio do caminho» não era poesia. Hoje, o verso é lido nas escolas de todo o país.",
+     "Pede-se aos visitantes que não fotografem as cartas originais, por causa da luz. A próxima sala, à direita, apresenta-lhe os livros de crônicas."
+    ],
+    "tabella": [
+     [
+      "Ano de nascimento do poeta",
+      "1902",
+      []
+     ],
+     [
+      "Anos em que usou a máquina de escrever (mais de…)",
+      "30",
+      [
+       "trinta",
+       "30 anos"
+      ]
+     ],
+     [
+      "Ano da mudança para o Rio",
+      "1934",
+      []
+     ],
+     [
+      "Ano de publicação de No meio do caminho",
+      "1928",
+      []
+     ],
+     [
+      "Lado onde fica a próxima sala",
+      "direita",
+      [
+       "à direita",
+       "a direita"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "Os objetos da sala foram doados pela família do poeta.",
+      true
+     ],
+     [
+      "Drummond vivia só da poesia.",
+      false
+     ],
+     [
+      "Drummond escrevia depois do trabalho.",
+      true
+     ],
+     [
+      "No meio do caminho foi elogiado por todos os críticos.",
+      false
+     ],
+     [
+      "Não se pode fotografar as cartas originais.",
+      true
+     ],
+     [
+      "A sala seguinte mostra as fotografias do poeta.",
+      false
+     ]
+    ],
+    "gloss": {
+     "doados": "donados",
+     "vitrine": "vitrina",
+     "expediente": "horario de trabajo",
+     "zombaram": "se burlaron"
+    }
    }
   },
   {
@@ -4515,6 +5131,90 @@
      "Já no debate": "en cambio, en el debate (já marca contraste con lo anterior)",
      "prazos de adaptação": "plazos para adaptarse",
      "continuaremos pagando a conta": "vamos a seguir pagando las consecuencias"
+    }
+   },
+   "breve": {
+    "title": "Minuto Verde: o calor do concreto",
+    "genre": "boletim de rádio",
+    "es": "Un micro de radio sobre ambiente: un estudio sobre el calor en los barrios de Recife, los árboles, los techos verdes y lo que cuestan.",
+    "speaker": "Débora Lins",
+    "voice": 1,
+    "text": [
+     "Olá, aqui é a Débora Lins e este é o Minuto Verde, da Rádio Cidade. Hoje o assunto é o calor nas grandes cidades.",
+     "Um estudo da universidade federal mediu a temperatura em dez bairros do Recife. Nos bairros com muito concreto e poucas árvores, a temperatura ao meio-dia foi até 5 graus mais alta do que nos bairros arborizados. Além disso, nesses bairros o asfalto continua quente até de madrugada.",
+     "A solução parece simples: plantar árvores. No entanto, uma árvore leva de oito a dez anos para fazer sombra de verdade. Por isso, os pesquisadores sugerem também medidas mais rápidas, como telhados verdes e calçadas mais claras. Por outro lado, lembram que essas medidas custam caro e, portanto, precisam do apoio da prefeitura.",
+     "E você? Já contou quantas árvores há na sua rua? Mande a sua resposta pelo nosso WhatsApp. Até amanhã, no Minuto Verde."
+    ],
+    "tabella": [
+     [
+      "Número de bairros estudados",
+      "10",
+      [
+       "dez",
+       "dez bairros",
+       "10 bairros"
+      ]
+     ],
+     [
+      "Diferença máxima de temperatura (graus)",
+      "5",
+      [
+       "cinco",
+       "5 graus",
+       "cinco graus"
+      ]
+     ],
+     [
+      "Cidade do estudo",
+      "Recife",
+      [
+       "o Recife",
+       "do Recife"
+      ]
+     ],
+     [
+      "Anos para uma árvore fazer sombra",
+      "8 a 10",
+      [
+       "oito a dez",
+       "de oito a dez",
+       "8-10",
+       "8 a 10 anos"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "Nos bairros com poucas árvores faz mais calor.",
+      true
+     ],
+     [
+      "O asfalto esfria logo depois do pôr do sol.",
+      false
+     ],
+     [
+      "Plantar árvores não resolve o problema rapidamente.",
+      true
+     ],
+     [
+      "Os telhados verdes são uma solução barata.",
+      false
+     ],
+     [
+      "Os pesquisadores pedem o apoio da prefeitura.",
+      true
+     ],
+     [
+      "O estudo foi feito em São Paulo.",
+      false
+     ]
+    ],
+    "gloss": {
+     "concreto": "hormigón",
+     "arborizados": "con árboles",
+     "calçadas": "veredas",
+     "telhados": "techos",
+     "madrugada": "madrugada"
     }
    }
   },
@@ -4853,6 +5553,95 @@
      "firma reconhecida": "firma certificada por escribano",
      "repartições": "oficinas públicas"
     }
+   },
+   "breve": {
+    "title": "Central de atendimento do Detran",
+    "genre": "mensagem automática de central de atendimento",
+    "es": "El mensaje grabado de la central de la oficina de tránsito de Río: horarios, teclas para cada trámite y una novedad sobre la inspección de vehículos.",
+    "speaker": "Voz gravada",
+    "voice": 1,
+    "text": [
+     "Olá! Você ligou para a central de atendimento do Detran do Rio de Janeiro. Esta ligação pode ser gravada. Atendemos de segunda a sexta, das 8 às 17 horas.",
+     "Se você precisa de informações sobre a primeira habilitação, digite 1. Se quer agendar a renovação da carteira de motorista, digite 2. Para consultar multas e pagar o boleto, digite 3. Para falar com um atendente, digite 9.",
+     "Atenção: a partir do dia 10, a vistoria de veículos só será feita com hora marcada. Não se esqueça do documento do carro e do comprovante de pagamento da taxa, que custa 234 reais. Quem chegar mais de 15 minutos atrasado vai precisar marcar outro dia.",
+     "Você também pode resolver quase tudo pelo aplicativo, sem sair de casa. Por favor, aguarde: em breve você será atendido."
+    ],
+    "tabella": [
+     [
+      "Horário em que a central fecha",
+      "17",
+      [
+       "17 horas",
+       "17h",
+       "cinco da tarde",
+       "17:00"
+      ]
+     ],
+     [
+      "Tecla para renovar a carteira de motorista",
+      "2",
+      [
+       "dois"
+      ]
+     ],
+     [
+      "Tecla para falar com um atendente",
+      "9",
+      [
+       "nove"
+      ]
+     ],
+     [
+      "Valor da taxa da vistoria (reais)",
+      "234",
+      [
+       "duzentos e trinta e quatro",
+       "R$ 234",
+       "234 reais"
+      ]
+     ],
+     [
+      "Tolerância de atraso na vistoria (minutos)",
+      "15",
+      [
+       "quinze",
+       "15 minutos"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "A central não atende nos fins de semana.",
+      true
+     ],
+     [
+      "As multas só podem ser pagas no banco.",
+      false
+     ],
+     [
+      "A vistoria vai precisar de agendamento.",
+      true
+     ],
+     [
+      "A vistoria é gratuita para carros novos.",
+      false
+     ],
+     [
+      "Muitos serviços podem ser feitos pelo aplicativo.",
+      true
+     ],
+     [
+      "Quem se atrasar pode fazer a vistoria no mesmo dia.",
+      false
+     ]
+    ],
+    "gloss": {
+     "habilitação": "registro de conducir",
+     "vistoria": "inspección técnica (como la VTV)",
+     "boleto": "boleta de pago",
+     "digite": "marcá (en el teclado)",
+     "multas": "multas"
+    }
    }
   },
   {
@@ -5183,6 +5972,105 @@
      "concursos": "concursos públicos: exámenes para entrar a un empleo del Estado",
      "firmar parcerias": "establecer convenios (firmar = establecer, cerrar)",
      "estagiários": "pasantes"
+    }
+   },
+   "breve": {
+    "title": "Agenda do fim de semana em Salvador",
+    "genre": "agenda cultural de rádio",
+    "es": "La agenda del fin de semana de una radio de Salvador: samba de roda, feria de artesanías, una carrera y dónde ver la puesta del sol.",
+    "speaker": "Locutora",
+    "voice": 1,
+    "text": [
+     "Rádio Salvador FM, agenda do fim de semana. Anote aí!",
+     "Na sexta, às 20 horas, tem show de samba de roda no Pelourinho, no Largo Tereza Batista. A entrada custa 40 reais, e quem chegar antes das 19 horas paga meia.",
+     "No sábado, a feira de artesanato da Praça da Sé funciona das 9 às 18 horas. À tarde, às 16 horas, tem oficina gratuita de capoeira para crianças, à sombra das árvores da praça.",
+     "No domingo, o Farol da Barra recebe a Corrida da Baía, de 10 quilômetros, com largada às 6 horas da manhã. As inscrições vão até sexta, à meia-noite, pelo site da corrida. Atenção: por causa da corrida, a Avenida Oceânica fica fechada aos carros até as 11 horas.",
+     "E à noite, para fechar o domingo, o pôr do sol no Farol da Barra, que é de graça. Bom fim de semana!"
+    ],
+    "tabella": [
+     [
+      "Preço da entrada do show de sexta (reais)",
+      "40",
+      [
+       "quarenta",
+       "40 reais",
+       "R$ 40"
+      ]
+     ],
+     [
+      "Horário em que a feira de sábado fecha",
+      "18",
+      [
+       "18 horas",
+       "18h",
+       "seis da tarde",
+       "18:00"
+      ]
+     ],
+     [
+      "Distância da corrida (quilômetros)",
+      "10",
+      [
+       "dez",
+       "10 km",
+       "10 quilômetros",
+       "dez quilômetros"
+      ]
+     ],
+     [
+      "Horário da largada",
+      "6",
+      [
+       "6 horas",
+       "6h",
+       "seis",
+       "seis da manhã",
+       "6:00"
+      ]
+     ],
+     [
+      "Até que horas a Avenida Oceânica fica fechada",
+      "11",
+      [
+       "11 horas",
+       "11h",
+       "onze",
+       "onze horas",
+       "11:00"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "Quem chega cedo ao show paga meia-entrada.",
+      true
+     ],
+     [
+      "A oficina de capoeira é paga.",
+      false
+     ],
+     [
+      "As inscrições para a corrida são pela internet.",
+      true
+     ],
+     [
+      "A corrida começa à tarde.",
+      false
+     ],
+     [
+      "Ver o pôr do sol no Farol é de graça.",
+      true
+     ],
+     [
+      "A feira de artesanato funciona também no domingo.",
+      false
+     ]
+    ],
+    "gloss": {
+     "anote": "anotá",
+     "meia": "media entrada",
+     "oficina": "taller",
+     "largada": "largada, salida"
     }
    }
   },
@@ -5541,6 +6429,96 @@
      "costumava ceder": "solía hundirse, desmoronarse",
      "rede autorizada": "la red de services oficiales"
     }
+   },
+   "breve": {
+    "title": "Defesa Civil: quando a sirene tocar",
+    "genre": "instruções",
+    "es": "Las instrucciones de Defensa Civil de Petrópolis para los vecinos de las zonas de riesgo: las sirenas, qué llevar, adónde ir y cómo recibir alertas.",
+    "speaker": "Voz da Defesa Civil",
+    "voice": 0,
+    "text": [
+     "Olá, aqui é a Defesa Civil de Petrópolis, com as instruções para os moradores das áreas de risco. Ouça com atenção.",
+     "A Defesa Civil mantém 22 sirenes na cidade. Elas tocam quando os pluviômetros registram mais de 40 milímetros de chuva em uma hora. Os técnicos preveem que o próximo verão vai ser muito chuvoso.",
+     "Quando a sirene tocar, mantenha a calma e saia de casa imediatamente. Não pare para arrumar malas: leve só documentos, remédios e o celular. Siga as placas verdes até o ponto de apoio mais próximo, que normalmente fica numa escola ou numa igreja.",
+     "Se você tiver vizinhos idosos ou pessoas com deficiência, avise-os e, se puder, ajude-os. Não volte para casa antes que a Defesa Civil libere a área. Para receber alertas por mensagem de texto, envie o seu CEP para o número 40199. O serviço é gratuito."
+    ],
+    "tabella": [
+     [
+      "Número de sirenes na cidade",
+      "22",
+      [
+       "vinte e duas",
+       "22 sirenes"
+      ]
+     ],
+     [
+      "Chuva que faz a sirene tocar (milímetros em uma hora, mais de…)",
+      "40",
+      [
+       "quarenta",
+       "40 milímetros",
+       "40 mm"
+      ]
+     ],
+     [
+      "Cor das placas que levam ao ponto de apoio",
+      "verde",
+      [
+       "verdes",
+       "placas verdes"
+      ]
+     ],
+     [
+      "Número para receber os alertas",
+      "40199",
+      [
+       "40 199",
+       "40.199"
+      ]
+     ],
+     [
+      "O que se envia para receber os alertas",
+      "CEP",
+      [
+       "o CEP",
+       "o seu CEP",
+       "código postal"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "A sirene toca por causa da quantidade de chuva.",
+      true
+     ],
+     [
+      "É preciso levar malas com roupas.",
+      false
+     ],
+     [
+      "Os pontos de apoio ficam, em geral, em escolas ou igrejas.",
+      true
+     ],
+     [
+      "O serviço de alertas custa dois reais por mês.",
+      false
+     ],
+     [
+      "Os moradores devem ajudar os vizinhos idosos, se puderem.",
+      true
+     ],
+     [
+      "Depois de meia hora, os moradores podem voltar para casa.",
+      false
+     ]
+    ],
+    "gloss": {
+     "pluviômetros": "pluviómetros",
+     "ponto de apoio": "refugio, punto de encuentro",
+     "idosos": "ancianos",
+     "libere": "habilite",
+     "cep": "código postal"
+    }
    }
   },
   {
@@ -5898,6 +6876,98 @@
      "redação da escola": "la composición del colegio",
      "aprende as duas coisas": "aprendé las dos cosas (imperativo del habla: la forma de tú, que es la del presente)"
     }
+   },
+   "breve": {
+    "title": "Áudio do Rafa: a estreia da série",
+    "genre": "mensagem de voz",
+    "es": "Un audio de WhatsApp, bien coloquial: un amigo invita a ver el estreno de una serie en su casa; la dirección nueva, la pizza y qué llevar.",
+    "speaker": "Rafa",
+    "voice": 0,
+    "text": [
+     "Fala, Bia! Tudo certo? Então, é o seguinte: a estreia da nova temporada é sexta, né, às nove da noite. A gente vai ver lá em casa, tá? Cê topa?",
+     "O endereço cê sabe, né, Rua Bambina, 45, mas agora é no apartamento 302, porque eu mudei de andar. O porteiro já tá avisado, é só falar que vai pro 302.",
+     "Ó, pra comida a gente pensou em pizza. Deu 30 reais pra cada um, pode mandar no Pix, beleza? Se cê quiser trazer alguma coisa, traz um refri, que cerveja já tem. Ah, e cadê aquele meu carregador que eu te emprestei? Traz também, por favor, que eu tô sem.",
+     "E ó, sem spoiler, hein! Quem tiver visto o trailer vazado fica calado. Beijo, até sexta!"
+    ],
+    "tabella": [
+     [
+      "Hora da estreia",
+      "9",
+      [
+       "nove",
+       "21",
+       "21h",
+       "21 horas",
+       "nove da noite",
+       "9 da noite"
+      ]
+     ],
+     [
+      "Número do apartamento",
+      "302",
+      [
+       "trezentos e dois",
+       "apartamento 302"
+      ]
+     ],
+     [
+      "Número do prédio na Rua Bambina",
+      "45",
+      [
+       "quarenta e cinco"
+      ]
+     ],
+     [
+      "Quanto cada um paga pela pizza (reais)",
+      "30",
+      [
+       "trinta",
+       "30 reais",
+       "R$ 30"
+      ]
+     ],
+     [
+      "Bebida que a Bia pode levar",
+      "refri",
+      [
+       "refrigerante",
+       "um refri"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "O Rafa mudou de apartamento no mesmo prédio.",
+      true
+     ],
+     [
+      "A comida vai ser churrasco.",
+      false
+     ],
+     [
+      "O dinheiro da pizza pode ser mandado por Pix.",
+      true
+     ],
+     [
+      "A Bia precisa levar cerveja.",
+      false
+     ],
+     [
+      "O Rafa quer de volta o carregador.",
+      true
+     ],
+     [
+      "O Rafa vai mostrar o trailer para todo mundo.",
+      false
+     ]
+    ],
+    "gloss": {
+     "topa": "¿te prendés?",
+     "refri": "gaseosa",
+     "carregador": "cargador",
+     "vazado": "filtrado",
+     "estreia": "estreno"
+    }
    }
   },
   {
@@ -6249,6 +7319,91 @@
      "veteranos": "estudiantes de años avanzados",
      "viés": "sesgo"
     }
+   },
+   "breve": {
+    "title": "Comunicado da Pró-Reitoria",
+    "genre": "comunicado institucional",
+    "es": "Un comunicado formal de una universidad federal: la convocatoria para una ayuda de vivienda para estudiantes, con fechas, requisitos y condiciones.",
+    "speaker": "Voz da universidade",
+    "voice": 1,
+    "text": [
+     "Comunicado da Pró-Reitoria de Assuntos Estudantis da Universidade Federal Fluminense.",
+     "Informamos a abertura do processo de seleção para a concessão do auxílio-moradia do segundo semestre. O benefício, no valor mensal de 650 reais, destina-se a estudantes de graduação com renda familiar de até um salário mínimo e meio por pessoa.",
+     "O período de inscrição vai de 3 a 21 de julho, exclusivamente pelo sistema acadêmico. Após o encerramento das inscrições, será realizada a análise da documentação, seguida de entrevista com assistentes sociais. A divulgação do resultado está prevista para 15 de agosto.",
+     "Ressalta-se que a apresentação de documentos incompletos implica a eliminação do candidato. A renovação do benefício dependerá da frequência mínima de 75% nas disciplinas. Dúvidas devem ser encaminhadas ao e-mail da Pró-Reitoria."
+    ],
+    "tabella": [
+     [
+      "Valor mensal do auxílio (reais)",
+      "650",
+      [
+       "seiscentos e cinquenta",
+       "R$ 650",
+       "650 reais"
+      ]
+     ],
+     [
+      "Último dia de inscrição (julho)",
+      "21",
+      [
+       "21 de julho",
+       "vinte e um",
+       "dia 21"
+      ]
+     ],
+     [
+      "Data da divulgação do resultado",
+      "15 de agosto",
+      [
+       "15/8",
+       "15/08",
+       "dia 15 de agosto"
+      ]
+     ],
+     [
+      "Frequência mínima para renovar o benefício",
+      "75%",
+      [
+       "75",
+       "75 %",
+       "setenta e cinco por cento",
+       "75 por cento"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "O auxílio é para estudantes de graduação.",
+      true
+     ],
+     [
+      "As inscrições podem ser feitas pessoalmente.",
+      false
+     ],
+     [
+      "Haverá entrevista com assistentes sociais.",
+      true
+     ],
+     [
+      "O resultado sai no fim de julho.",
+      false
+     ],
+     [
+      "Documentos incompletos eliminam o candidato.",
+      true
+     ],
+     [
+      "O auxílio é pago uma vez por semestre.",
+      false
+     ]
+    ],
+    "gloss": {
+     "auxílio-moradia": "ayuda para la vivienda",
+     "renda": "ingreso",
+     "encerramento": "cierre",
+     "ressalta-se": "se destaca",
+     "frequência": "asistencia (a clase)"
+    }
    }
   },
   {
@@ -6583,6 +7738,96 @@
      "oficina de relógios": "taller de relojería (oficina = taller)",
      "camadas de memória": "capas de memoria",
      "desfecho": "desenlace, final"
+    }
+   },
+   "breve": {
+    "title": "História em Cinco Minutos: o voo de Bagatelle",
+    "genre": "podcast de história",
+    "es": "Un podcast breve de historia: el vuelo de Santos Dumont en París en 1906 y lo que ya había hecho antes.",
+    "speaker": "Heitor Salles",
+    "voice": 0,
+    "text": [
+     "Olá, eu sou o Heitor Salles e este é o História em Cinco Minutos. Hoje: o dia em que um brasileiro voou em Paris.",
+     "No dia 23 de outubro de 1906, no campo de Bagatelle, Alberto Santos Dumont subiu no 14-bis diante de uma multidão. Ele já ficara famoso em Paris anos antes: em 1901 contornara a Torre Eiffel num dirigível e ganhara um prêmio de 100 mil francos, que dividira entre os seus mecânicos e os pobres da cidade.",
+     "Naquela tarde, o avião percorreu cerca de 60 metros, a uns três metros do chão. Foi o primeiro voo de um avião que decolou sozinho, sem catapulta, diante de juízes oficiais. Os irmãos Wright, nos Estados Unidos, já tinham voado em 1903, mas longe do público.",
+     "Santos Dumont nunca patenteou os seus inventos: queria que todos pudessem usá-los. Na semana que vem, a história do relógio de pulso que ele pedira a um amigo joalheiro, Louis Cartier."
+    ],
+    "tabella": [
+     [
+      "Data do voo em Bagatelle",
+      "23 de outubro de 1906",
+      [
+       "23 de outubro",
+       "23/10/1906",
+       "23/10"
+      ]
+     ],
+     [
+      "Ano em que contornou a Torre Eiffel",
+      "1901",
+      []
+     ],
+     [
+      "Valor do prêmio (francos)",
+      "100 mil",
+      [
+       "100.000",
+       "100000",
+       "cem mil"
+      ]
+     ],
+     [
+      "Distância percorrida pelo 14-bis (metros)",
+      "60",
+      [
+       "sessenta",
+       "60 metros",
+       "cerca de 60"
+      ]
+     ],
+     [
+      "Altura do voo (metros)",
+      "3",
+      [
+       "três",
+       "tres",
+       "3 metros",
+       "três metros"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "Santos Dumont dividiu o dinheiro do prêmio.",
+      true
+     ],
+     [
+      "O 14-bis voou em Londres.",
+      false
+     ],
+     [
+      "O avião decolou sem catapulta.",
+      true
+     ],
+     [
+      "Santos Dumont ficou rico com as patentes dos seus inventos.",
+      false
+     ],
+     [
+      "O próximo episódio fala de um relógio.",
+      true
+     ],
+     [
+      "Santos Dumont construiu o 14-bis com os irmãos Wright.",
+      false
+     ]
+    ],
+    "gloss": {
+     "contornara": "había rodeado",
+     "dirigível": "dirigible",
+     "decolou": "despegó",
+     "patenteou": "patentó",
+     "joalheiro": "joyero"
     }
    }
   },
@@ -6939,6 +8184,104 @@
      "assumir o ponto": "hacerse cargo del puesto (ponto = local de un comercio)",
      "cartazes de aluguel": "carteles de alquiler"
     }
+   },
+   "breve": {
+    "title": "O Cine Glória reabre",
+    "genre": "anúncio de rádio",
+    "es": "Un anuncio de radio: reabre un viejo cine de Juiz de Fora; la sala, los precios, la función del estreno y los descuentos.",
+    "speaker": "Voz do anúncio",
+    "voice": 1,
+    "text": [
+     "Fechado há dez anos, o Cine Glória, no centro de Juiz de Fora, reabre as portas neste sábado. Totalmente reformado, o cinema de rua mais antigo da cidade volta com uma sala de 280 lugares e uma tela nova.",
+     "Para comemorar, a primeira semana é de clássicos brasileiros, com ingressos a 12 reais. Chegando antes das 18 horas, você ganha a pipoca. Comprando pelo site, você evita filas: os ingressos ficam no celular.",
+     "Na estreia, no sábado às 20 horas, será exibido O Auto da Compadecida, seguido de um debate com o diretor de fotografia do filme. Terminada a sessão, haverá música ao vivo no saguão.",
+     "Estudantes e maiores de 60 anos, apresentando documento, pagam meia. Cine Glória: um cinema de rua, de volta à rua. Avenida Rio Branco, 1.420."
+    ],
+    "tabella": [
+     [
+      "Anos em que o cinema ficou fechado",
+      "10",
+      [
+       "dez",
+       "dez anos",
+       "10 anos"
+      ]
+     ],
+     [
+      "Lugares da sala",
+      "280",
+      [
+       "duzentos e oitenta",
+       "280 lugares"
+      ]
+     ],
+     [
+      "Preço do ingresso na primeira semana (reais)",
+      "12",
+      [
+       "doze",
+       "12 reais",
+       "R$ 12"
+      ]
+     ],
+     [
+      "Até que horas se ganha a pipoca",
+      "18",
+      [
+       "18 horas",
+       "18h",
+       "seis da tarde",
+       "18:00"
+      ]
+     ],
+     [
+      "Filme da estreia",
+      "O Auto da Compadecida",
+      [
+       "Auto da Compadecida"
+      ]
+     ],
+     [
+      "Número na Avenida Rio Branco",
+      "1.420",
+      [
+       "1420",
+       "mil quatrocentos e vinte"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "O cinema passou por uma reforma completa.",
+      true
+     ],
+     [
+      "Os ingressos só podem ser comprados na bilheteria.",
+      false
+     ],
+     [
+      "Depois da estreia, haverá um debate.",
+      true
+     ],
+     [
+      "O diretor do filme vai estar na estreia.",
+      false
+     ],
+     [
+      "Quem tem mais de 60 anos paga meia com documento.",
+      true
+     ],
+     [
+      "A pipoca é grátis em todas as sessões.",
+      false
+     ]
+    ],
+    "gloss": {
+     "tela": "pantalla",
+     "pipoca": "pochoclo",
+     "saguão": "hall",
+     "ingressos": "entradas"
+    }
    }
   },
   {
@@ -7292,6 +8635,99 @@
      "a posse": "la toma de posesión del cargo",
      "a vaga": "el puesto, la vacante"
     }
+   },
+   "breve": {
+    "title": "Recado da Secretaria Acadêmica",
+    "genre": "recado formal na caixa postal",
+    "es": "Un mensaje formal en el contestador: la secretaría de una universidad le avisa a Martín que su diploma está listo y cómo retirarlo.",
+    "speaker": "Sônia Albuquerque, da Secretaria",
+    "voice": 1,
+    "text": [
+     "Bom dia. Esta mensagem é para o senhor Martín Pérez. Aqui fala Sônia Albuquerque, da Secretaria Acadêmica da Universidade Federal de Minas Gerais.",
+     "Estou retornando o e-mail que o senhor nos enviou na segunda-feira sobre o seu diploma de mestrado. Informo que o diploma já foi registrado e está disponível para retirada aqui na secretaria, na sala 214 do prédio da reitoria.",
+     "O senhor pode retirá-lo pessoalmente, de segunda a sexta, das 9 às 16 horas, apresentando o passaporte. Caso prefira enviar outra pessoa, será necessária uma procuração com firma reconhecida em cartório. Se o senhor desejar receber o diploma pelo correio, o envio custa 38 reais e leva cerca de dez dias úteis.",
+     "Para qualquer dúvida, o senhor pode ligar para a secretaria, ramal 12. Tenha um bom dia."
+    ],
+    "tabella": [
+     [
+      "Sala onde se retira o diploma",
+      "214",
+      [
+       "sala 214",
+       "duzentos e catorze",
+       "duzentos e quatorze"
+      ]
+     ],
+     [
+      "Horário em que a secretaria fecha",
+      "16",
+      [
+       "16 horas",
+       "16h",
+       "quatro da tarde",
+       "16:00"
+      ]
+     ],
+     [
+      "Documento que Martín deve apresentar",
+      "passaporte",
+      [
+       "o passaporte"
+      ]
+     ],
+     [
+      "Custo do envio pelo correio (reais)",
+      "38",
+      [
+       "trinta e oito",
+       "38 reais",
+       "R$ 38"
+      ]
+     ],
+     [
+      "Prazo de entrega pelo correio (dias úteis)",
+      "10",
+      [
+       "dez",
+       "dez dias",
+       "10 dias",
+       "dez dias úteis"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "Martín tinha escrito um e-mail para a secretaria.",
+      true
+     ],
+     [
+      "O diploma ainda não foi registrado.",
+      false
+     ],
+     [
+      "Outra pessoa pode retirar o diploma com uma procuração.",
+      true
+     ],
+     [
+      "A secretaria atende também aos sábados.",
+      false
+     ],
+     [
+      "O diploma pode ser enviado pelo correio.",
+      true
+     ],
+     [
+      "O envio pelo correio é gratuito.",
+      false
+     ]
+    ],
+    "gloss": {
+     "retirada": "retiro",
+     "procuração": "poder (notarial)",
+     "firma reconhecida": "firma certificada",
+     "cartório": "escribanía",
+     "úteis": "hábiles"
+    }
    }
   },
   {
@@ -7644,6 +9080,97 @@
      "apelido": "sobrenombre (falso amigo: se ve en la semana 45)",
      "com leveza": "con liviandad, sin drama",
      "sentem falta dos apelidos": "extrañan los apodos (sentir falta de = extrañar)"
+    }
+   },
+   "breve": {
+    "title": "Feira de Trocas do Bairro Floresta",
+    "genre": "propaganda de rádio",
+    "es": "Una publicidad de radio de una feria de trueque en Belo Horizonte, llena de palabras derivadas: reutilização, desperdício, reutilizável, imperdível.",
+    "speaker": "Voz da propaganda",
+    "voice": 0,
+    "text": [
+     "Tem roupa parada no armário? Livro que você já leu? Brinquedo que as crianças esqueceram? Então venha para a Feira de Trocas do Bairro Floresta, a maior feira de reutilização de Belo Horizonte!",
+     "Funciona assim: você traz até dez peças em bom estado e recebe uma ficha para cada uma. Com as fichas, você escolhe o que quiser entre milhares de objetos. Sem dinheiro, sem desperdício e com muita novidade.",
+     "A feira acontece no último domingo do mês, das 10 às 15 horas, na Praça Floresta. Tem oficina de conserto de bicicletas, com um mecânico voluntário, e uma área de reciclagem para o que não tiver mais conserto.",
+     "Importante: não se aceitam eletrônicos nem roupas rasgadas. E não esqueça a sua sacola reutilizável! Feira de Trocas: renovar o armário é possível, e é imperdível."
+    ],
+    "tabella": [
+     [
+      "Número máximo de peças que cada pessoa traz",
+      "10",
+      [
+       "dez",
+       "dez peças",
+       "10 peças"
+      ]
+     ],
+     [
+      "Dia da feira",
+      "último domingo do mês",
+      [
+       "último domingo",
+       "domingo"
+      ]
+     ],
+     [
+      "Horário em que a feira termina",
+      "15",
+      [
+       "15 horas",
+       "15h",
+       "três da tarde",
+       "15:00"
+      ]
+     ],
+     [
+      "Local da feira",
+      "Praça Floresta",
+      [
+       "na Praça Floresta",
+       "Praca Floresta"
+      ]
+     ],
+     [
+      "O que se recebe por cada peça",
+      "ficha",
+      [
+       "uma ficha",
+       "fichas"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "Na feira não se usa dinheiro.",
+      true
+     ],
+     [
+      "A feira acontece todos os sábados.",
+      false
+     ],
+     [
+      "Há um mecânico que conserta bicicletas.",
+      true
+     ],
+     [
+      "Os eletrônicos são aceitos se funcionarem.",
+      false
+     ],
+     [
+      "É bom levar uma sacola de casa.",
+      true
+     ],
+     [
+      "As fichas custam dois reais cada uma.",
+      false
+     ]
+    ],
+    "gloss": {
+     "desperdício": "derroche",
+     "rasgadas": "rotas",
+     "sacola": "bolsa (de compras)",
+     "conserto": "arreglo",
+     "trocas": "trueques, intercambios"
     }
    }
   },
@@ -8003,6 +9530,99 @@
      "só valera pelo pudim": "solo había valido por el budín (pluscuamperfecto simple)",
      "tropeços": "tropiezos",
      "passar uma impressão": "dar una impresión"
+    }
+   },
+   "breve": {
+    "title": "Promoções do Supermercado Bom Preço",
+    "genre": "anúncio de supermercado",
+    "es": "Un anuncio por los parlantes de un supermercado, con falsos amigos por todas partes: presunto, polvo, talheres, borracha.",
+    "speaker": "Voz do supermercado",
+    "voice": 1,
+    "text": [
+     "Atenção, senhores clientes do Supermercado Bom Preço! Só hoje, até as 20 horas, promoções imperdíveis para o seu fim de semana.",
+     "No balcão de frios, o presunto fatiado sai a 39 reais o quilo, e o queijo prato a 42. Na peixaria, o polvo congelado está com 25% de desconto: aproveite para fazer aquele arroz de polvo no domingo.",
+     "No corredor 7, os copos e as taças de vidro estão pela metade do preço, e na compra de um jogo de talheres você ganha um pano de prato. E para a volta às aulas: na compra de um caderno, a borracha é grátis.",
+     "Lembramos que o estacionamento é gratuito por duas horas para quem apresentar o cupom fiscal no caixa. Bom Preço: o seu supermercado de todo dia."
+    ],
+    "tabella": [
+     [
+      "Preço do quilo do presunto (reais)",
+      "39",
+      [
+       "trinta e nove",
+       "39 reais",
+       "R$ 39"
+      ]
+     ],
+     [
+      "Desconto no polvo",
+      "25%",
+      [
+       "25",
+       "25 %",
+       "vinte e cinco por cento",
+       "25 por cento"
+      ]
+     ],
+     [
+      "Corredor dos copos e das taças",
+      "7",
+      [
+       "sete",
+       "corredor 7"
+      ]
+     ],
+     [
+      "Brinde na compra de um caderno",
+      "borracha",
+      [
+       "uma borracha",
+       "a borracha"
+      ]
+     ],
+     [
+      "Horas de estacionamento grátis",
+      "2",
+      [
+       "duas",
+       "duas horas",
+       "2 horas"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "As promoções valem só hoje.",
+      true
+     ],
+     [
+      "O polvo é vendido fresco.",
+      false
+     ],
+     [
+      "Quem compra talheres ganha um pano de prato.",
+      true
+     ],
+     [
+      "O estacionamento é pago para todos.",
+      false
+     ],
+     [
+      "Para ter o estacionamento grátis, é preciso mostrar o cupom fiscal.",
+      true
+     ],
+     [
+      "O queijo está pela metade do preço.",
+      false
+     ]
+    ],
+    "gloss": {
+     "presunto": "jamón (no «presunto»)",
+     "polvo": "pulpo",
+     "talheres": "cubiertos",
+     "borracha": "goma de borrar",
+     "frios": "fiambres",
+     "taças": "copas"
     }
    }
   },
@@ -8366,6 +9986,103 @@
      "rapariga": "chica en Angola y Portugal; en parte de Brasil, insulto (prostituta)",
      "O ponto alto": "lo mejor, el punto fuerte"
     }
+   },
+   "breve": {
+    "title": "Aviso na estação do Cais do Sodré",
+    "genre": "aviso na estação (português de Portugal)",
+    "es": "Un aviso en la estación de trenes de Cais do Sodré, en Lisboa, en portugués de Portugal: comboio, autocarro, telemóvel, casa de banho.",
+    "speaker": "Voz da estação (Lisboa)",
+    "voice": 0,
+    "text": [
+     "Senhores passageiros, bom dia. A CP informa: o comboio das 9 e 15 com destino a Cascais vai partir da linha 3, e não da linha 1, como estava previsto.",
+     "Devido a obras na via entre Oeiras e Carcavelos, a partir das 22 horas e até ao fim do mês, os comboios só circulam até Oeiras. Entre Oeiras e Cascais, há autocarros de substituição, sem custo adicional, à saída da estação.",
+     "Lembramos que os bilhetes podem ser comprados nas máquinas automáticas ou pelo telemóvel, na aplicação da CP. Os passageiros com passe mensal não precisam de comprar bilhete para o autocarro.",
+     "As casas de banho da estação encontram-se encerradas para limpeza até às 10 horas. Pedimos desculpa pelo incómodo. Obrigado e boa viagem."
+    ],
+    "tabella": [
+     [
+      "Hora do comboio para Cascais",
+      "9h15",
+      [
+       "9:15",
+       "9.15",
+       "9 e 15",
+       "nove e quinze"
+      ]
+     ],
+     [
+      "Linha de onde parte o comboio",
+      "3",
+      [
+       "três",
+       "tres",
+       "linha 3"
+      ]
+     ],
+     [
+      "Até onde circulam os comboios à noite",
+      "Oeiras",
+      [
+       "até Oeiras"
+      ]
+     ],
+     [
+      "Horário em que as casas de banho reabrem",
+      "10",
+      [
+       "10 horas",
+       "10h",
+       "dez",
+       "dez horas",
+       "10:00"
+      ]
+     ],
+     [
+      "Quanto custa o autocarro de substituição",
+      "nada",
+      [
+       "sem custo",
+       "grátis",
+       "gratuito",
+       "0",
+       "zero"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "O comboio para Cascais mudou de linha.",
+      true
+     ],
+     [
+      "As obras duram só um fim de semana.",
+      false
+     ],
+     [
+      "Entre Oeiras e Cascais, os passageiros seguem de autocarro.",
+      true
+     ],
+     [
+      "Os bilhetes só se vendem na bilheteira.",
+      false
+     ],
+     [
+      "Quem tem passe mensal não paga o autocarro.",
+      true
+     ],
+     [
+      "As casas de banho estão encerradas o dia todo.",
+      false
+     ]
+    ],
+    "gloss": {
+     "comboio": "tren (en Brasil, trem)",
+     "autocarros": "colectivos (en Brasil, ônibus)",
+     "telemóvel": "celular (en Brasil, celular)",
+     "casas de banho": "baños (en Brasil, banheiros)",
+     "encerradas": "cerradas",
+     "passe": "abono"
+    }
    }
   },
   {
@@ -8709,6 +10426,90 @@
      "vagas gratuitas": "lugares de estacionamiento gratis",
      "engavetar": "cajonear, archivar sin tratar",
      "ponto de ônibus": "la parada del colectivo"
+    }
+   },
+   "breve": {
+    "title": "Boletim da economia",
+    "genre": "noticiário econômico",
+    "es": "El boletín económico de la mañana: el balance de un año de colectivos gratis, la tasa de interés y la semana de cuatro días, con cifras y con cautela.",
+    "speaker": "Jornalista",
+    "voice": 1,
+    "text": [
+     "Boletim da economia, Rádio Capital, sete horas. Os destaques desta terça-feira.",
+     "Tarifa zero. A prefeitura de Vila Serena, no Ceará, divulgou ontem o balanço de um ano de ônibus gratuitos. Segundo a prefeitura, o número de passageiros por dia passou de 20 mil para 62 mil. O comércio do centro registrou alta de 12% nas vendas, mas os economistas ouvidos pela rádio são cautelosos: é possível que parte desse aumento se deva a outros fatores.",
+     "Juros. O Banco Central anuncia amanhã a nova taxa básica de juros. Tudo indica que a taxa deve cair meio ponto, para 9,75% ao ano, embora alguns analistas ainda não descartem uma manutenção.",
+     "Semana de quatro dias. Das 21 empresas brasileiras que testaram o modelo desde janeiro, 19 decidiram mantê-lo. O resultado, no entanto, não deve ser generalizado: a maioria são empresas pequenas, de tecnologia.",
+     "O próximo boletim é às nove. Bom dia."
+    ],
+    "tabella": [
+     [
+      "Passageiros por dia depois da tarifa zero",
+      "62 mil",
+      [
+       "62.000",
+       "62000",
+       "sessenta e dois mil"
+      ]
+     ],
+     [
+      "Aumento das vendas no comércio do centro",
+      "12%",
+      [
+       "12",
+       "12 %",
+       "doze por cento",
+       "12 por cento"
+      ]
+     ],
+     [
+      "Taxa de juros prevista (ao ano)",
+      "9,75%",
+      [
+       "9,75",
+       "9.75",
+       "9,75 %"
+      ]
+     ],
+     [
+      "Empresas que mantiveram a semana de quatro dias",
+      "19",
+      [
+       "dezenove"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "O número de passageiros aumentou depois da tarifa zero.",
+      true
+     ],
+     [
+      "Os economistas afirmam que a tarifa zero é a única causa do aumento das vendas.",
+      false
+     ],
+     [
+      "A decisão sobre os juros sai amanhã.",
+      true
+     ],
+     [
+      "Todos os analistas têm certeza de que os juros vão cair.",
+      false
+     ],
+     [
+      "A maioria das empresas do teste é pequena.",
+      true
+     ],
+     [
+      "O teste da semana de quatro dias foi feito em empresas de vários países.",
+      false
+     ]
+    ],
+    "gloss": {
+     "balanço": "balance",
+     "juros": "intereses",
+     "cautelosos": "cautos",
+     "descartem": "descarten",
+     "manutenção": "mantenimiento (de la tasa)"
     }
    }
   },
@@ -9077,6 +10878,97 @@
      "por sua vez": "a su vez, por su parte",
      "experiências-piloto": "pruebas piloto"
     }
+   },
+   "breve": {
+    "title": "Ciência de Bolso: celular na cama",
+    "genre": "podcast de divulgação científica",
+    "es": "Un podcast que resume un estudio sobre adolescentes, celulares y sueño, con los verbos que presentan lo que dice cada uno: afirmar, alertar, ressaltar, reconhecer, sugerir.",
+    "speaker": "Lívia Prado",
+    "voice": 1,
+    "text": [
+     "Oi, gente! Aqui é a Lívia Prado, e este é o Ciência de Bolso, o podcast que resume uma pesquisa em dois minutos.",
+     "A pesquisa de hoje foi feita pela Universidade de São Paulo com 1.200 adolescentes de 14 a 17 anos. Os autores afirmam que quem usa o celular na cama dorme, em média, 50 minutos a menos por noite. Eles alertam que o problema não é só a luz da tela, mas sobretudo as notificações, que acordam o cérebro.",
+     "A coordenadora do estudo, a médica Helena Costa, ressalta que a escola também tem um papel: nas escolas que começam as aulas às 7 horas, os alunos chegam mais cansados. Ela reconhece, porém, que mudar o horário não é simples, e sugere começar por uma medida barata: deixar o celular fora do quarto.",
+     "E você, dorme com o celular do lado? Conta pra gente nos comentários. Até a próxima!"
+    ],
+    "tabella": [
+     [
+      "Número de adolescentes na pesquisa",
+      "1.200",
+      [
+       "1200",
+       "mil e duzentos"
+      ]
+     ],
+     [
+      "Idade dos participantes",
+      "14 a 17",
+      [
+       "de 14 a 17",
+       "14-17",
+       "14 a 17 anos"
+      ]
+     ],
+     [
+      "Minutos de sono a menos por noite",
+      "50",
+      [
+       "cinquenta",
+       "50 minutos"
+      ]
+     ],
+     [
+      "Nome da coordenadora do estudo",
+      "Helena Costa",
+      [
+       "Helena",
+       "doutora Helena Costa"
+      ]
+     ],
+     [
+      "Horário de início das aulas citado",
+      "7",
+      [
+       "7 horas",
+       "7h",
+       "sete",
+       "sete horas",
+       "7:00"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "Segundo o estudo, as notificações são o maior problema.",
+      true
+     ],
+     [
+      "A pesquisa foi feita com universitários.",
+      false
+     ],
+     [
+      "A coordenadora admite que mudar o horário das aulas é difícil.",
+      true
+     ],
+     [
+      "Os autores recomendam proibir o celular nas escolas.",
+      false
+     ],
+     [
+      "A medida sugerida é deixar o celular fora do quarto.",
+      true
+     ],
+     [
+      "O estudo mostra que a luz da tela não faz mal.",
+      false
+     ]
+    ],
+    "gloss": {
+     "de bolso": "de bolsillo",
+     "notificações": "notificaciones",
+     "ressalta": "destaca",
+     "sobretudo": "sobre todo"
+    }
    }
   },
   {
@@ -9434,6 +11326,99 @@
      "Ressalto que": "destaco que",
      "contemplará": "incluirá, abarcará",
      "está em cópia": "va con copia en este correo"
+    }
+   },
+   "breve": {
+    "title": "Convocação do síndico",
+    "genre": "comunicado formal",
+    "es": "Un comunicado formal del administrador de un edificio: convoca a una asamblea extraordinaria sobre los ascensores, con fecha, presupuesto y reglas para votar.",
+    "speaker": "Ricardo Moura, síndico",
+    "voice": 0,
+    "text": [
+     "Prezados moradores do Condomínio Edifício Atlântico, bom dia. Aqui fala Ricardo Moura, síndico do prédio, com um comunicado da administração.",
+     "Ficam todos convocados para a assembleia geral extraordinária, que será realizada na próxima quinta-feira, às 19 horas e 30 minutos, no salão de festas. Na pauta, a troca dos dois elevadores, cujo orçamento é de 380 mil reais, e a instalação de câmeras na garagem.",
+     "Caso a proposta seja aprovada, a obra será paga em 12 parcelas, a partir de março. Solicita-se aos moradores que não puderem comparecer que enviem uma procuração por escrito a um vizinho de confiança. Lembramos que só poderão votar os condôminos em dia com a taxa condominial.",
+     "Agradeço desde já a presença de todos. Atenciosamente, Ricardo Moura, síndico."
+    ],
+    "tabella": [
+     [
+      "Horário da assembleia",
+      "19h30",
+      [
+       "19:30",
+       "19.30",
+       "19 e 30",
+       "19 horas e 30",
+       "sete e meia",
+       "19 e meia"
+      ]
+     ],
+     [
+      "Local da assembleia",
+      "salão de festas",
+      [
+       "no salão de festas",
+       "salao de festas"
+      ]
+     ],
+     [
+      "Orçamento da troca dos elevadores (reais)",
+      "380 mil",
+      [
+       "380.000",
+       "380000",
+       "trezentos e oitenta mil"
+      ]
+     ],
+     [
+      "Número de parcelas",
+      "12",
+      [
+       "doze",
+       "12 parcelas"
+      ]
+     ],
+     [
+      "Mês em que começa o pagamento",
+      "março",
+      [
+       "em março",
+       "marco"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "A assembleia vai discutir a troca dos elevadores.",
+      true
+     ],
+     [
+      "As câmeras vão ser instaladas na entrada do prédio.",
+      false
+     ],
+     [
+      "Quem não puder ir pode mandar uma procuração.",
+      true
+     ],
+     [
+      "Todos os moradores podem votar.",
+      false
+     ],
+     [
+      "O comunicado é do síndico.",
+      true
+     ],
+     [
+      "A obra vai ser paga de uma só vez.",
+      false
+     ]
+    ],
+    "gloss": {
+     "síndico": "administrador del consorcio",
+     "pauta": "orden del día",
+     "orçamento": "presupuesto",
+     "parcelas": "cuotas",
+     "em dia": "al día"
     }
    }
   },
@@ -9850,6 +11835,99 @@
      "quis sumir de vergonha": "quise que me tragara la tierra",
      "gringo": "extranjero, cualquiera que sea de afuera"
     }
+   },
+   "breve": {
+    "title": "Mudança Tranquila",
+    "genre": "propaganda de rádio",
+    "es": "Una publicidad de radio de una empresa de mudanzas de Curitiba, hecha de expresiones idiomáticas: pisar na bola, tirar de letra, custar os olhos da cara.",
+    "speaker": "Voz da propaganda",
+    "voice": 1,
+    "text": [
+     "Mudar de casa deixa você com os nervos à flor da pele? Tem medo de que o caminhão pise na bola e chegue atrasado? Relaxa: com a Mudança Tranquila, você tira a mudança de letra.",
+     "A gente embala tudo, desmonta os móveis e monta de novo na casa nova. Fazemos questão de cumprir o horário: se o caminhão atrasar mais de uma hora, você ganha 20% de desconto. E não custa os olhos da cara: o orçamento é grátis e sai em 24 horas.",
+     "Para mudanças de até 15 quilômetros dentro de Curitiba, o preço começa em 890 reais. Pagando à vista, você ainda ganha as caixas de papelão de mão beijada.",
+     "Ligue já para a Mudança Tranquila: a gente dá um jeito, e você só troca a chave."
+    ],
+    "tabella": [
+     [
+      "Desconto se o caminhão atrasar mais de uma hora",
+      "20%",
+      [
+       "20",
+       "20 %",
+       "vinte por cento",
+       "20 por cento"
+      ]
+     ],
+     [
+      "Prazo para receber o orçamento (horas)",
+      "24",
+      [
+       "vinte e quatro",
+       "24 horas",
+       "24h"
+      ]
+     ],
+     [
+      "Distância máxima dentro da cidade (quilômetros)",
+      "15",
+      [
+       "quinze",
+       "15 km",
+       "15 quilômetros"
+      ]
+     ],
+     [
+      "Preço inicial da mudança (reais)",
+      "890",
+      [
+       "oitocentos e noventa",
+       "R$ 890",
+       "890 reais"
+      ]
+     ],
+     [
+      "Cidade da empresa",
+      "Curitiba",
+      [
+       "em Curitiba"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "A empresa desmonta e monta os móveis.",
+      true
+     ],
+     [
+      "O orçamento custa cinquenta reais.",
+      false
+     ],
+     [
+      "Quem paga à vista ganha as caixas.",
+      true
+     ],
+     [
+      "A empresa faz mudanças para outros países.",
+      false
+     ],
+     [
+      "A empresa promete chegar na hora.",
+      true
+     ],
+     [
+      "A empresa também guarda os móveis num depósito.",
+      false
+     ]
+    ],
+    "gloss": {
+     "pise na bola": "se mande una macana",
+     "de letra": "(tirar de letra) hacer sin esfuerzo",
+     "os olhos da cara": "un ojo de la cara",
+     "de mão beijada": "de regalo",
+     "papelão": "cartón",
+     "à vista": "al contado"
+    }
    }
   },
   {
@@ -10202,6 +12280,101 @@
      "cortiços": "conventillos",
      "térreo": "planta baja"
     }
+   },
+   "breve": {
+    "title": "Rádio Câmara: o programa Centro Vivo",
+    "genre": "notícia de rádio",
+    "es": "Una noticia de la radio del concejo municipal de Porto Alegre: se aprueba un programa para volver a poblar el centro; cifras, condiciones y la crítica de la oposición.",
+    "speaker": "Repórter",
+    "voice": 0,
+    "text": [
+     "Rádio Câmara, boletim das seis da tarde. A Câmara Municipal de Porto Alegre aprovou ontem, por 24 votos a 11, o programa Centro Vivo, que pretende trazer de volta moradores para o Centro Histórico.",
+     "Pelo projeto, prédios de escritórios vazios há mais de cinco anos poderão ser transformados em apartamentos. Os proprietários que aderirem ao programa terão desconto de até 60% no IPTU durante dez anos. Em contrapartida, 20% dos apartamentos deverão ser alugados a famílias de baixa renda, com aluguel limitado a um terço da renda familiar.",
+     "A oposição votou contra: segundo o vereador Paulo Nunes, sem investimento em segurança e transporte, o programa pode acabar beneficiando só as construtoras. Já a prefeitura estima que, se tudo correr como previsto, cerca de 4 mil pessoas passem a morar no centro até 2030.",
+     "O projeto segue agora para a sanção do prefeito, que tem 15 dias úteis para assinar. Voltamos amanhã, no mesmo horário."
+    ],
+    "tabella": [
+     [
+      "Votos a favor do programa",
+      "24",
+      [
+       "vinte e quatro",
+       "24 votos"
+      ]
+     ],
+     [
+      "Desconto máximo no IPTU",
+      "60%",
+      [
+       "60",
+       "60 %",
+       "sessenta por cento",
+       "60 por cento"
+      ]
+     ],
+     [
+      "Parte dos apartamentos para famílias de baixa renda",
+      "20%",
+      [
+       "20",
+       "20 %",
+       "vinte por cento",
+       "20 por cento"
+      ]
+     ],
+     [
+      "Pessoas que devem morar no centro até 2030",
+      "4 mil",
+      [
+       "4.000",
+       "4000",
+       "quatro mil"
+      ]
+     ],
+     [
+      "Prazo do prefeito para assinar (dias úteis)",
+      "15",
+      [
+       "quinze",
+       "15 dias",
+       "15 dias úteis"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "O programa quer transformar escritórios vazios em moradias.",
+      true
+     ],
+     [
+      "O projeto foi aprovado por unanimidade.",
+      false
+     ],
+     [
+      "Os proprietários que aderirem pagam menos imposto.",
+      true
+     ],
+     [
+      "Todos os apartamentos serão para famílias de baixa renda.",
+      false
+     ],
+     [
+      "Para a oposição, o programa pode favorecer as construtoras.",
+      true
+     ],
+     [
+      "O prefeito já assinou o projeto.",
+      false
+     ]
+    ],
+    "gloss": {
+     "vereador": "concejal",
+     "iptu": "impuesto inmobiliario (como el ABL)",
+     "contrapartida": "contrapartida",
+     "sanção": "promulgación",
+     "aderirem": "adhieran",
+     "renda": "ingreso"
+    }
    }
   }
  ],
@@ -10281,7 +12454,34 @@
    "venho por meio",
    "sem mais para o momento"
   ]
- }
+ },
+ "cellStop": [
+  "o",
+  "os",
+  "as",
+  "às",
+  "à",
+  "ao",
+  "aos",
+  "um",
+  "uma",
+  "do",
+  "da",
+  "dos",
+  "das",
+  "de",
+  "em",
+  "no",
+  "na",
+  "até",
+  "cerca",
+  "horas",
+  "hora",
+  "hs",
+  "reais",
+  "real",
+  "r"
+ ]
 };
   if (typeof module === "object" && module.exports) module.exports = root.TRAMO_DATA;
 })(typeof window !== "undefined" ? window : globalThis);

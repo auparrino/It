@@ -358,5 +358,102 @@
       "rapariga": "chica en Angola y Portugal; en parte de Brasil, insulto (prostituta)",
       "O ponto alto": "lo mejor, el punto fuerte"
     }
+  },
+  "breve": {
+    "title": "Aviso na estação do Cais do Sodré",
+    "genre": "aviso na estação (português de Portugal)",
+    "es": "Un aviso en la estación de trenes de Cais do Sodré, en Lisboa, en portugués de Portugal: comboio, autocarro, telemóvel, casa de banho.",
+    "speaker": "Voz da estação (Lisboa)",
+    "voice": 0,
+    "text": [
+      "Senhores passageiros, bom dia. A CP informa: o comboio das 9 e 15 com destino a Cascais vai partir da linha 3, e não da linha 1, como estava previsto.",
+      "Devido a obras na via entre Oeiras e Carcavelos, a partir das 22 horas e até ao fim do mês, os comboios só circulam até Oeiras. Entre Oeiras e Cascais, há autocarros de substituição, sem custo adicional, à saída da estação.",
+      "Lembramos que os bilhetes podem ser comprados nas máquinas automáticas ou pelo telemóvel, na aplicação da CP. Os passageiros com passe mensal não precisam de comprar bilhete para o autocarro.",
+      "As casas de banho da estação encontram-se encerradas para limpeza até às 10 horas. Pedimos desculpa pelo incómodo. Obrigado e boa viagem."
+    ],
+    "tabella": [
+      [
+        "Hora do comboio para Cascais",
+        "9h15",
+        [
+          "9:15",
+          "9.15",
+          "9 e 15",
+          "nove e quinze"
+        ]
+      ],
+      [
+        "Linha de onde parte o comboio",
+        "3",
+        [
+          "três",
+          "tres",
+          "linha 3"
+        ]
+      ],
+      [
+        "Até onde circulam os comboios à noite",
+        "Oeiras",
+        [
+          "até Oeiras"
+        ]
+      ],
+      [
+        "Horário em que as casas de banho reabrem",
+        "10",
+        [
+          "10 horas",
+          "10h",
+          "dez",
+          "dez horas",
+          "10:00"
+        ]
+      ],
+      [
+        "Quanto custa o autocarro de substituição",
+        "nada",
+        [
+          "sem custo",
+          "grátis",
+          "gratuito",
+          "0",
+          "zero"
+        ]
+      ]
+    ],
+    "info": [
+      [
+        "O comboio para Cascais mudou de linha.",
+        true
+      ],
+      [
+        "As obras duram só um fim de semana.",
+        false
+      ],
+      [
+        "Entre Oeiras e Cascais, os passageiros seguem de autocarro.",
+        true
+      ],
+      [
+        "Os bilhetes só se vendem na bilheteira.",
+        false
+      ],
+      [
+        "Quem tem passe mensal não paga o autocarro.",
+        true
+      ],
+      [
+        "As casas de banho estão encerradas o dia todo.",
+        false
+      ]
+    ],
+    "gloss": {
+      "comboio": "tren (en Brasil, trem)",
+      "autocarros": "colectivos (en Brasil, ônibus)",
+      "telemóvel": "celular (en Brasil, celular)",
+      "casas de banho": "baños (en Brasil, banheiros)",
+      "encerradas": "cerradas",
+      "passe": "abono"
+    }
   }
 }

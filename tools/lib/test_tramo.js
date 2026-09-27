@@ -8,6 +8,8 @@
    anotado); si trae ADEQ, los modelos pasan los criterios de adequação
    (tratamiento, propósito, uso de la fuente, registro) y los textos que
    los violan no; los puntos de la consigna no son palabras genéricas.
+   Desde v3.1 también el portugués trae la escucha corta de cada semana
+   (breve: monólogo, tabla de datos y afirmaciones «diz / não diz»).
    Run: node tools/lib/test_tramo.js */
 "use strict";
 var fs = require("fs"), path = require("path");
@@ -91,9 +93,9 @@ function validate(f, d) {
   const at2 = (A.turns || []).map((t) => t[1]).join(" ");
   Object.keys(A.gloss || {}).forEach((k) => { if (!hasTok(at2, k)) err(f, "ascolto.gloss «" + k + "» no está en el audio"); });
   // The short listening (breve): a monologue of an exam genre, one voice,
-  // a table of data and «does it say so?» statements.  Required in Italian.
+  // a table of data and «does it say so?» statements.  Required in both languages.
   const Bv = d.breve;
-  if (LANG === "it" && !Bv) err(f, "breve: falta la escucha corta");
+  if (!Bv) err(f, "breve: falta la escucha corta");
   if (Bv) {
     ["title", "genre", "es", "speaker"].forEach((k) => { if (!Bv[k]) err(f, "breve." + k + " falta"); });
     if (!Array.isArray(Bv.text) || Bv.text.length < 3) err(f, "breve.text: al menos 3 párrafos");
@@ -244,6 +246,10 @@ function validate(f, d) {
   var cell = ["Ora", "18", ["diciotto"]];
   ok(T.cellOk("alle 18", cell) && T.cellOk("18:00", cell) && T.cellOk("Diciotto", cell) && !T.cellOk("8", cell) && !T.cellOk("", cell), "cellOk: horas");
   ok(T.cellOk("il Lunedi", ["Giorno", "lunedì", []]) && !T.cellOk("martedì", ["Giorno", "lunedì", []]), "cellOk: tildes y artículos");
+  if (code === "pt") {
+    ok(T.cellOk("às 18h", cell) && T.cellOk("18 horas", cell) && T.cellOk("R$ 18", cell) && !T.cellOk("8h", cell), "cellOk (pt): às 18h, 18 horas, R$ 18");
+    ok(T.cellOk("9h15", ["Hora", "9:15", []]) && T.cellOk("às 9h15", ["Hora", "9 e 15", []]) && !T.cellOk("9h", ["Hora", "9:15", []]), "cellOk (pt): 9h15");
+  }
 });
 console.log(bad ? "✗ test_tramo: " + bad + " problemas" : "✓ test_tramo: " + checks + " controles");
 process.exit(bad ? 1 : 0);

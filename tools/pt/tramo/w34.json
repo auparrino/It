@@ -315,5 +315,89 @@
       "prazos de adaptação": "plazos para adaptarse",
       "continuaremos pagando a conta": "vamos a seguir pagando las consecuencias"
     }
+  },
+  "breve": {
+    "title": "Minuto Verde: o calor do concreto",
+    "genre": "boletim de rádio",
+    "es": "Un micro de radio sobre ambiente: un estudio sobre el calor en los barrios de Recife, los árboles, los techos verdes y lo que cuestan.",
+    "speaker": "Débora Lins",
+    "voice": 1,
+    "text": [
+      "Olá, aqui é a Débora Lins e este é o Minuto Verde, da Rádio Cidade. Hoje o assunto é o calor nas grandes cidades.",
+      "Um estudo da universidade federal mediu a temperatura em dez bairros do Recife. Nos bairros com muito concreto e poucas árvores, a temperatura ao meio-dia foi até 5 graus mais alta do que nos bairros arborizados. Além disso, nesses bairros o asfalto continua quente até de madrugada.",
+      "A solução parece simples: plantar árvores. No entanto, uma árvore leva de oito a dez anos para fazer sombra de verdade. Por isso, os pesquisadores sugerem também medidas mais rápidas, como telhados verdes e calçadas mais claras. Por outro lado, lembram que essas medidas custam caro e, portanto, precisam do apoio da prefeitura.",
+      "E você? Já contou quantas árvores há na sua rua? Mande a sua resposta pelo nosso WhatsApp. Até amanhã, no Minuto Verde."
+    ],
+    "tabella": [
+      [
+        "Número de bairros estudados",
+        "10",
+        [
+          "dez",
+          "dez bairros",
+          "10 bairros"
+        ]
+      ],
+      [
+        "Diferença máxima de temperatura (graus)",
+        "5",
+        [
+          "cinco",
+          "5 graus",
+          "cinco graus"
+        ]
+      ],
+      [
+        "Cidade do estudo",
+        "Recife",
+        [
+          "o Recife",
+          "do Recife"
+        ]
+      ],
+      [
+        "Anos para uma árvore fazer sombra",
+        "8 a 10",
+        [
+          "oito a dez",
+          "de oito a dez",
+          "8-10",
+          "8 a 10 anos"
+        ]
+      ]
+    ],
+    "info": [
+      [
+        "Nos bairros com poucas árvores faz mais calor.",
+        true
+      ],
+      [
+        "O asfalto esfria logo depois do pôr do sol.",
+        false
+      ],
+      [
+        "Plantar árvores não resolve o problema rapidamente.",
+        true
+      ],
+      [
+        "Os telhados verdes são uma solução barata.",
+        false
+      ],
+      [
+        "Os pesquisadores pedem o apoio da prefeitura.",
+        true
+      ],
+      [
+        "O estudo foi feito em São Paulo.",
+        false
+      ]
+    ],
+    "gloss": {
+      "concreto": "hormigón",
+      "arborizados": "con árboles",
+      "calçadas": "veredas",
+      "telhados": "techos",
+      "madrugada": "madrugada"
+    }
   }
 }

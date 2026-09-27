@@ -354,5 +354,98 @@
       "contemplará": "incluirá, abarcará",
       "está em cópia": "va con copia en este correo"
     }
+  },
+  "breve": {
+    "title": "Convocação do síndico",
+    "genre": "comunicado formal",
+    "es": "Un comunicado formal del administrador de un edificio: convoca a una asamblea extraordinaria sobre los ascensores, con fecha, presupuesto y reglas para votar.",
+    "speaker": "Ricardo Moura, síndico",
+    "voice": 0,
+    "text": [
+      "Prezados moradores do Condomínio Edifício Atlântico, bom dia. Aqui fala Ricardo Moura, síndico do prédio, com um comunicado da administração.",
+      "Ficam todos convocados para a assembleia geral extraordinária, que será realizada na próxima quinta-feira, às 19 horas e 30 minutos, no salão de festas. Na pauta, a troca dos dois elevadores, cujo orçamento é de 380 mil reais, e a instalação de câmeras na garagem.",
+      "Caso a proposta seja aprovada, a obra será paga em 12 parcelas, a partir de março. Solicita-se aos moradores que não puderem comparecer que enviem uma procuração por escrito a um vizinho de confiança. Lembramos que só poderão votar os condôminos em dia com a taxa condominial.",
+      "Agradeço desde já a presença de todos. Atenciosamente, Ricardo Moura, síndico."
+    ],
+    "tabella": [
+      [
+        "Horário da assembleia",
+        "19h30",
+        [
+          "19:30",
+          "19.30",
+          "19 e 30",
+          "19 horas e 30",
+          "sete e meia",
+          "19 e meia"
+        ]
+      ],
+      [
+        "Local da assembleia",
+        "salão de festas",
+        [
+          "no salão de festas",
+          "salao de festas"
+        ]
+      ],
+      [
+        "Orçamento da troca dos elevadores (reais)",
+        "380 mil",
+        [
+          "380.000",
+          "380000",
+          "trezentos e oitenta mil"
+        ]
+      ],
+      [
+        "Número de parcelas",
+        "12",
+        [
+          "doze",
+          "12 parcelas"
+        ]
+      ],
+      [
+        "Mês em que começa o pagamento",
+        "março",
+        [
+          "em março",
+          "marco"
+        ]
+      ]
+    ],
+    "info": [
+      [
+        "A assembleia vai discutir a troca dos elevadores.",
+        true
+      ],
+      [
+        "As câmeras vão ser instaladas na entrada do prédio.",
+        false
+      ],
+      [
+        "Quem não puder ir pode mandar uma procuração.",
+        true
+      ],
+      [
+        "Todos os moradores podem votar.",
+        false
+      ],
+      [
+        "O comunicado é do síndico.",
+        true
+      ],
+      [
+        "A obra vai ser paga de uma só vez.",
+        false
+      ]
+    ],
+    "gloss": {
+      "síndico": "administrador del consorcio",
+      "pauta": "orden del día",
+      "orçamento": "presupuesto",
+      "parcelas": "cuotas",
+      "em dia": "al día"
+    }
   }
 }
