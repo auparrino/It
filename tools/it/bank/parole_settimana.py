@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Las palabras de las semanas 1 a 4, elegidas a mano.
+"""Las palabras de las semanas 1 a 4, elegidas a mano (las demás, al final).
 
 build_course.py elige las palabras de cada semana entre las más frecuentes
 de sus ejercicios, pero las primeras semanas heredan capítulos enteros de
@@ -175,6 +175,9 @@ PAROLE = {
     ],
 }
 
-# Las semanas 27 a 51: bank/parole_c1.py (tramo C1).
+# Las semanas 5 a 25: bank/parole_ponte.py.  Las 27 a 51: bank/parole_c1.py
+# (tramo C1).  Las semanas de jefe (13, 26, 39, 52) no traen palabras nuevas.
+from bank.parole_ponte import PAROLE_PONTE
 from bank.parole_c1 import PAROLE_C1
+PAROLE.update(PAROLE_PONTE)
 PAROLE.update(PAROLE_C1)

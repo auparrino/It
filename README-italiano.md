@@ -553,10 +553,13 @@ Aparte están el **gimnasio de verbos** (conjugación generada al vuelo) y las
 cada uno una ronda corregida (elegir, completar varios blancos, traducir del
 español) con la regla explicada al responder; 80% o más gana su estrella.
 
-Cada semana trae además **📚 Palabras de la semana** (9 a 15 palabras nuevas,
-no transparentes, sacadas de sus propios ejercicios, con audio y una frase de
-ejemplo): primero elegís qué significan, después las escribís; quedan en el
-ripasso con repetición espaciada. En *Oggi* ves cuántas palabras practicaste
+Cada semana trae además **📚 Palabras de la semana** (12 en las semanas 1-4,
+19 o 20 desde la 5; ninguna en las de jefe), elegidas a mano por el campo de la
+semana y rescatadas de sus lecturas, con audio, una frase de ejemplo que usa
+solo la gramática ya vista y una nota de uso (régimen, auxiliar, colocación,
+falso amigo): primero elegís qué significan, después las escribís; quedan en el
+ripasso con repetición espaciada. Están en `tools/it/bank/parole_settimana.py`
+(1-4), `parole_ponte.py` (5-25) y `parole_c1.py` (27-51). En *Oggi* ves cuántas palabras practicaste
 contra la meta del trimestre (2.000 en el primero).
 
 **Reconocer antes de producir**: la primera vez que aparece un ejercicio de
