@@ -801,7 +801,7 @@
 
   /* The ranks: a title for each stage, from tourist to native speaker
      (LANG.rules.ranks: [level, title], calibrated on a whole career by
-     tools/<code>/sim_carriera.js: the whole course reaches level 40). */
+     tools/lib/sim_carriera.js: the whole course reaches level 40). */
   var RANKS = R.ranks && R.ranks.length ? R.ranks : [[1, "1"]];
   function rankFor(level) {
     var r = RANKS[0][1];

@@ -1495,9 +1495,9 @@ cl(2, "Saímos ___ pressas.", "às",
 cl(2, "Moramos ___ beira-mar.", "à",
    "Locución: à beira-mar (frente al mar).", prompt=_CRC)
 
-trv(0, "Voy a la playa.",
-    "*Ir a* + *a praia* se contrae en *à praia*: la *crase* une preposición y artículo. En el habla, *vou pra praia*.",
-    ["Vou à praia", "Eu vou à praia"])
+trv(0, "Voy a la feria.",
+    "*Ir a* + *a feira* se contrae en *à feira*: la *crase* une preposición y artículo. En el habla, *vou pra feira*.",
+    ["Vou à feira", "Eu vou à feira"])
 trv(0, "El museo abre de diez a cinco.",
     "de ... a con horas: das dez às cinco.",
     "O museu ", ["abre", "funciona", "fica aberto"], " das dez às cinco")
@@ -1872,13 +1872,13 @@ ch(0, "Se a ditadura não ___ censurado a imprensa, muitas histórias teriam sid
    "Hipótesis sobre el pasado: se + tivesse + participio; consecuencia con teria + participio.")
 cl(0, "É bom vocês ___ (fazer) a reserva com antecedência.", "fazerem",
    "Infinitivo pessoal: sale del infinitivo, fazerem (no fizerem).")
-cl(0, "«Não saia!» → Minha mãe pediu que eu não ___ (sair).", "saísse",
-   "Imperativo reportado en pasado → imperfeito do subjuntivo: saísse.")
+cl(0, "«Não gritem!» → O professor pediu que nós não ___ (gritar).", "gritássemos",
+   "Imperativo reportado en pasado → imperfeito do subjuntivo: gritássemos.")
 cl(0, "«Eu quero votar para presidente!» → Nas Diretas Já (1984), o povo dizia que ___ (querer) votar para presidente.", "queria",
    "Presente reportado desde el pasado → imperfeito: queria. «Diretas Já» fue la campaña por elecciones presidenciales directas.")
-trv(0, "Si hubiera sabido, habría ido.",
-    "se + tivesse sabido; consecuencia teria ido (habla: tinha ido).",
-    ["Se eu tivesse sabido", "Se tivesse sabido"], ", ", ["teria ido", "eu teria ido", "tinha ido", "eu tinha ido"])
+trv(0, "Si hubiera estudiado, habría aprobado.",
+    "se + tivesse estudado; consecuencia teria passado (habla: tinha passado). «Aprobar» un examen es *passar*.",
+    ["Se eu tivesse estudado", "Se tivesse estudado"], ", ", ["teria passado", "eu teria passado", "tinha passado", "eu tinha passado"])
 trv(0, "Cuando llegue a Lisboa, te llamo.",
     "*Quando* con valor futuro pide futuro do subjuntivo: *quando eu chegar*. El español usa presente de subjuntivo («cuando llegue»).",
     ["Quando eu chegar", "Quando chegar"], " ", ["a Lisboa", "em Lisboa"], ", ",

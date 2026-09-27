@@ -6,13 +6,29 @@
  * cuánto ripasso se acumula, y verifica la integridad de cada ítem y de
  * los chequeos de cada lección.
  *
- *   node tools/it/sim_carriera.js            resumen por pantalla
- *   node tools/it/sim_carriera.js --json     todo, en JSON
+ *   node tools/lib/sim_carriera.js it              resumen por pantalla
+ *   node tools/lib/sim_carriera.js pt --json       todo, en JSON
+ *   node tools/lib/sim_carriera.js it --seed 7     otra semilla (por defecto 12345)
+ *
+ * Todo el azar (el del jugador y el de los módulos, que usan Math.random)
+ * sale de la misma semilla: la misma corrida da siempre lo mismo.
+ *
+ * Termina con código 1 (y así falla `npm run sim` y el CI) si una semana
+ * queda sin dominar, si un jefe no se pasa, si hay errores (el gimnasio, la
+ * pausa, el repaso), ítems duplicados o chequeos de lección rotos.  Los
+ * avisos de ítems (respuestas largas…) se informan pero no fallan.
  */
 "use strict";
 var fs = require("fs"), path = require("path"), vm = require("vm");
 
-var pack = require("../lib/pack.js");
+var pack = require("./pack.js");
+var args = process.argv.slice(2);
+var CODE = args.filter(function (a, i) { return a[0] !== "-" && args[i - 1] !== "--seed"; })[0];
+if (!CODE || pack.LANGS.indexOf(CODE) < 0) {
+  console.error("uso: node tools/lib/sim_carriera.js <" + pack.LANGS.join("|") + "> [--json] [--seed N]");
+  process.exit(2);
+}
+var SEED = args.indexOf("--seed") >= 0 ? +args[args.indexOf("--seed") + 1] : 12345;
 var clock = { t: Date.UTC(2026, 0, 5, 12) };          // lunes
 var RealDate = Date;
 function FakeDate() {
@@ -23,33 +39,49 @@ FakeDate.now = function () { return clock.t; };
 FakeDate.UTC = RealDate.UTC; FakeDate.parse = RealDate.parse;
 FakeDate.prototype = RealDate.prototype;
 
+// Math.random with a seed, for the modules (shuffles, picks): the same run
+// every time, so that a failure in the CI can be reproduced.  mulberry32,
+// one stream for the modules and another for the player.
+function mulberry(a) {
+  a = a >>> 0;
+  return function () {
+    a = (a + 0x6D2B79F5) >>> 0;
+    var t = a;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+var SeededMath = Object.create(Math);
+SeededMath.random = mulberry(Math.imul(SEED, 2654435761) ^ 0x5bd1e995);
+
 // The whole language (package + core, in the order of boot.js), with the
 // simulated clock.
-var ctx = pack("it", { extra: { Date: FakeDate } });
+var ctx = pack(CODE, { extra: { Date: FakeDate, Math: SeededMath } });
 var Engine = ctx.Engine, Drills = ctx.Drills, Frasi = ctx.Frasi, Lab = ctx.Lab, Letture = ctx.Letture,
     Lezione = ctx.Lezione, Banca = ctx.Banca, Conj = ctx.Conjugator || ctx.Conj;
-var course = pack.data("it", "course.json");
-Banca.load(pack.data("it", "bank.json"));
+var course = pack.data(CODE, "course.json");
+Banca.load(pack.data(CODE, "bank.json"));
 var map = Drills.itemsById(course);
 var Scrivi = ctx.Scrivi;
 Scrivi.learnCourse({ items: course.items, bank: Banca.bank(), phrases: Frasi.ALL, readings: Letture.EPISODI,
-  glossario: pack.data("it", "glossario.json") });
-var glossario = pack.data("it", "glossario.json");
-var isItalian = function (w) { return !!glossario[String(w).toLowerCase()]; };
+  glossario: pack.data(CODE, "glossario.json") });
+var glossario = pack.data(CODE, "glossario.json");
+var isTarget = function (w) { return !!glossario[String(w).toLowerCase()]; };
 
 /* ------------------------------------------------------------ el jugador */
 
-var seed = 12345;
-function rnd() { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return seed / 0x7fffffff; }
+var rnd = mulberry(SEED);
 var P = { choice: 0.9, typed: 0.8, retry: 0.95, lesson: 0.85, boss: 0.9 };
 var SEC = { choice: 8, typed: 20, intro: 6, word: 6, card: 10, guess: 6, hunt: 40, flash: 8, tiles: 14, listen: 12, dictation: 25 };
 var TYPED = { cloze: 1, translate: 1, conjugate: 1, typed: 1, write: 1, dictation: 1, plural: 1, numbers: 1, qa: 1, fixerr: 1 };
 var SKIP = { intro: 1, word: 1, card: 1 };
 var COUNT_KINDS = { round: 1, gym: 1, pausa: 1, boss: 1, vocab: 1 };
+var DOMINA_TRIES = 8;
 
 var state = Engine.blankSave();
 var day = 0;
-var log = { weeks: [], issues: [], itemIssues: [], lessonIssues: [], errors: [] };
+var log = { weeks: [], issues: [], itemIssues: [], lessonIssues: [], errors: [], gymSkipped: [] };
 var served = {};                                 // id -> veces servido (ítems del curso)
 var totalSec = 0;
 
@@ -167,7 +199,7 @@ course.weeks.forEach(function (w) {
   var binary = 0, quizzes = 0, blocks = w.lesson.blocks.length, noCheck = 0;
   for (var s = 0; s < 5; s++) {
     var steps;
-    try { steps = Lezione.steps(w.lesson, rnd, w.week, isItalian); }
+    try { steps = Lezione.steps(w.lesson, rnd, w.week, isTarget); }
     catch (e) { log.lessonIssues.push({ wk: w.week, msg: "Lezione.steps lanza: " + e.message }); break; }
     var qs = steps.filter(function (x) { return x.kind === "quiz"; });
     qs.forEach(function (x) {
@@ -214,7 +246,7 @@ course.weeks.forEach(function (w) {
   // 1. lección
   newDay();
   if (w.lesson) {
-    var steps = Lezione.steps(w.lesson, rnd, w.week, isItalian), right = 0, asked = 0;
+    var steps = Lezione.steps(w.lesson, rnd, w.week, isTarget), right = 0, asked = 0;
     steps.forEach(function (s) {
       totalSec += s.kind === "quiz" ? 8 : 14;
       if (s.kind === "quiz") { asked++; if (rnd() < P.lesson) right++; }
@@ -276,9 +308,17 @@ course.weeks.forEach(function (w) {
       roundAsked += racc.asked; roundSec += racc.sec;
       ws = state.weekStats[w.week] || { attempts: 0, right: 0 };
     } while (ws.right < 20 && rounds < 12);
-    // Dominala: una sola sesión; si no llega al 85 %, otra ronda y otro intento.
+    // Dominala: una sola sesión; si no llega al 85 %, otra ronda y otro
+    // intento, como en la app (que no pone tope).  El jugador simulado no
+    // aprende (acierta el 90 % / 80 % siempre) y queda justo en el umbral:
+    // cada intento pasa con una probabilidad de 0,6-0,75 según cuántos
+    // ejercicios escritos tenga la semana.  Con el tope viejo de 4 intentos,
+    // alguna semana al azar (la 31, la 22, la 41…) quedaba sin dominar en una
+    // de cada cuatro corridas; con 8, que una semana no se domine indica un
+    // problema de la semana, no mala suerte.  Las que piden más de 4 intentos
+    // se listan como aviso.
     var domTries = 0;
-    while (!ws.dominated && domTries < 4) {
+    while (!ws.dominated && domTries < DOMINA_TRIES) {
       domTries++;
       var dItems = Drills.buildDomina(course, w, state, { map: map });
       dItems.forEach(function (it) { if (map[it.id]) poolServed[it.id] = (poolServed[it.id] || 0) + 1; });
@@ -293,9 +333,21 @@ course.weeks.forEach(function (w) {
     missions.push({ m: "entrenamiento", rounds: rounds, asked: roundAsked, sec: roundSec, pool: pool.length,
                     distinctServed: distinct, maxRepeat: maxRep, mastered: Drills.dominated(ws, w, state), domTries: domTries });
     // gimnasio: una sesión, y todas las combinaciones verbo × tiempo
+    // (una forma que el verbo no tiene, como el imperativo de poder, no se
+    // pide: no es un error)
     var gymErr = 0, gymItems = [];
     (w.verbs || []).forEach(function (v) { (w.tenses || []).forEach(function (t) {
-      try { gymItems.push(Drills.conjugationDrill(v, t, w.known, w.persons)); Drills.conjugationTyped(v, t, w.persons); }
+      if (Drills.lacksForm && Drills.lacksForm(v, t)) { log.gymSkipped.push(w.week + " " + v + "/" + t); return; }
+      try {
+        var gd = Drills.conjugationDrill(v, t, w.known, w.persons), gt = Drills.conjugationTyped(v, t, w.persons);
+        gymItems.push(gd);
+        [gd, gt].forEach(function (g) {
+          var bad = !g.answer ? "sin respuesta" : g.options && g.options.indexOf(g.answer) < 0 ? "la respuesta no está entre las opciones"
+                  : g.options && new Set(g.options).size !== g.options.length ? "opciones repetidas"
+                  : g.options && g.options.length < 2 ? "menos de dos opciones" : /undefined|null/.test(g.stem + g.prompt) ? "restos en el texto" : "";
+          if (bad) throw new Error(g.id + ": " + bad);
+        });
+      }
       catch (e) { gymErr++; log.errors.push("gimnasio semana " + w.week + " " + v + "/" + t + ": " + e.message); }
     }); });
     var gacc = play(Drills.firstRecognize(gymItems.slice(0, 15), state, w.week), "gym", w.week);
@@ -374,7 +426,17 @@ var orphan = course.items.filter(function (it) { return !inWeeks[it.id]; });
 var inSfide = {};
 course.challenges.forEach(function (c) { (c.play || []).forEach(function (id) { inSfide[id] = 1; }); });
 
+var notMastered = log.weeks.filter(function (W) {
+  return W && W.missions.some(function (m) { return m.m === "entrenamiento" && !m.mastered; });
+}).map(function (W) { return W.week; });
+var hardWeeks = log.weeks.filter(function (W) {
+  return W && W.missions.some(function (m) { return m.m === "entrenamiento" && m.domTries > 4; });
+}).map(function (W) { return W.week; });
+var bossFailed = course.weeks.filter(function (w) { return w.boss && !(state.weekStats[w.week] || {}).bossPassed; })
+  .map(function (w) { return w.week; });
+
 var summary = {
+  lang: CODE, seed: SEED,
   days: day, hours: Math.round(totalSec / 3600), xp: state.xp, level: Engine.levelFor(state.xp).level,
   rank: Engine.rankFor(Engine.levelFor(state.xp).level), streak: state.streak, shields: state.shields,
   badges: state.badges, badgesTotal: Engine.BADGES.length, unlocked: state.unlocked,
@@ -391,7 +453,8 @@ var summary = {
   orphanItems: orphan.length,
   dueAtEnd: Drills.dueCount(course, state, map),
   dueMax: Math.max.apply(null, dueSeries.map(function (d) { return d.due; })),
-  itemIssues: log.itemIssues.length, duplicates: log.duplicates.length, lessonIssues: log.lessonIssues.length, errors: log.errors.length
+  itemIssues: log.itemIssues.length, duplicates: log.duplicates.length, lessonIssues: log.lessonIssues.length, errors: log.errors.length,
+  notMastered: notMastered, hardWeeks: hardWeeks, bossFailed: bossFailed
 };
 
 if (process.argv.indexOf("--json") >= 0) {
@@ -400,7 +463,7 @@ if (process.argv.indexOf("--json") >= 0) {
                                neverServed: neverServed.slice(0, 200).map(function (i) { return i.id; }) }, null, 1));
 } else {
   console.log("RESUMEN", JSON.stringify(summary, null, 1));
-  console.log("no dominadas:", log.weeks.filter(function (W) { return W && W.missions.some(function (m) { return m.m === "entrenamiento" && !m.mastered; }); }).map(function (W) { return W.week; }));
+  console.log("no dominadas:", notMastered, " más de 4 intentos de «Dominala»:", hardWeeks);
   [[40, 52]].forEach(function (r) {
     var kinds = {};
     log.weeks.filter(function (W) { return W && W.week >= r[0] && W.week <= r[1]; }).forEach(function (W) { W.missions.forEach(function (m) { kinds[m.m] = (kinds[m.m] || 0) + 1; }); });
@@ -416,8 +479,26 @@ if (process.argv.indexOf("--json") >= 0) {
       String(tr.maxRepeat || "-").padStart(8), String(W.dueMax).padStart(8), (sf.groups ? sf.playable + "/" + sf.selfScored : "-").padStart(10),
       W.boss ? " ⚔️" : "", W.title.slice(0, 40));
   });
+  if (log.gymSkipped.length) console.log("\ngimnasio, formas que el verbo no tiene (no se piden): " + log.gymSkipped.join(", "));
   if (log.errors.length) console.log("\nERRORES:\n" + log.errors.slice(0, 40).join("\n"));
   if (log.itemIssues.length) console.log("\nÍTEMS:\n" + log.itemIssues.slice(0, 60).map(function (x) { return x.id + " (sem " + x.wk + ", " + x.type + "): " + x.msg; }).join("\n"));
   if (log.lessonIssues.length) console.log("\nLECCIONES:\n" + log.lessonIssues.slice(0, 40).map(function (x) { return "sem " + x.wk + ": " + x.msg; }).join("\n"));
   if (log.duplicates.length) console.log("\nDUPLICADOS (" + log.duplicates.length + "):\n" + log.duplicates.slice(0, 30).map(function (d) { return d.join(" = "); }).join("\n"));
+}
+
+/* ------------------------------------------------------------ veredicto */
+
+var fails = [];
+if (notMastered.length) fails.push("semanas sin dominar: " + notMastered.join(", "));
+if (bossFailed.length) fails.push("jefes sin pasar: " + bossFailed.join(", "));
+if (log.errors.length) fails.push(log.errors.length + " errores");
+if (log.duplicates.length) fails.push(log.duplicates.length + " ítems duplicados");
+if (log.lessonIssues.length) fails.push(log.lessonIssues.length + " chequeos de lección rotos");
+var out = process.argv.indexOf("--json") >= 0 ? console.error : console.log;
+if (fails.length) {
+  out("\nsim " + CODE + " FALLA (semilla " + SEED + "): " + fails.join("; "));
+  process.exitCode = 1;
+} else {
+  out("\nsim " + CODE + " OK (semilla " + SEED + "): 52 semanas, todas dominadas, sin errores ni duplicados" +
+      (log.itemIssues.length ? " (" + log.itemIssues.length + " avisos de ítems)" : ""));
 }
