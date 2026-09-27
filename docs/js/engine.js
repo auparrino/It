@@ -100,6 +100,18 @@
 
     if (expanded.indexOf(g) >= 0) return VERDICT.RIGHT;
 
+    // Multi-gap items: the gaps may come separated by commas, | or spaces
+    // («dell', dell', del, del», «dell'|dell'|del|del», «dell' dell' del
+    // del»), and a missing comma is not a mistake.
+    var multi = accepted.some(function (a) { return a.indexOf("|") >= 0; });
+    if (multi) {
+      var gs = g.replace(/\s*[|,;]\s*/g, " ").replace(/\s+/g, " ").trim();
+      if (gs !== g) {
+        if (expanded.indexOf(gs) >= 0) return VERDICT.RIGHT;
+        g = gs;
+      }
+    }
+
     // Right word, missing accent (parlero for parlerò, voce for você,
     // cabeca for cabeça): worth partial credit and an explicit correction,
     // never a silent pass.  With grade.hyphen, the hyphen of the enclitic

@@ -252,7 +252,7 @@
   function glossHtml(g) {
     var k = Object.keys(g || {});
     if (!k.length) return "";
-    return '<details class="trgloss"><summary>Palabras del audio</summary><ul>' + k.map(function (w) {
+    return '<details class="trgloss"><summary>Palabras y expresiones</summary><ul>' + k.map(function (w) {
       return "<li><b" + langAttr() + ">" + esc(w) + "</b> — " + esc(g[w]) + "</li>";
     }).join("") + "</ul></details>";
   }
@@ -478,7 +478,8 @@
       var out = document.getElementById("trout");
       if (!out) return;
       out.insertAdjacentHTML("afterbegin", '<div class="card"><h3>Un modelo</h3><p class="model"' + langAttr() + ">" +
-        esc(cur.s.compito.model).replace(/\n\s*\n/g, "<br><br>") + '</p><p class="muted small">Es un texto posible, no el único: mirá cómo abre, cómo organiza los párrafos y cómo usa lo leído o escuchado.</p></div>');
+        esc(cur.s.compito.model).replace(/\n\s*\n/g, "<br><br>") + "</p>" + glossHtml(cur.s.compito.gloss) +
+        '<p class="muted small">Es un texto posible, no el único: mirá cómo abre, cómo organiza los párrafos y cómo usa lo leído o escuchado.</p></div>');
       var b = document.getElementById("trmodel");
       if (b) b.disabled = true;
     });
