@@ -326,6 +326,16 @@
         ]
       ]
     ],
-    "model": "Spettabile Elettrocasa S.r.l.\nServizio clienti\n\nOggetto: reclamo per difetto di conformità – lavatrice AquaPlus 8\n\nCon la presente desidero segnalare un difetto della lavatrice che ho acquistato presso il Vostro punto vendita di Pescara il 12 giugno dello scorso anno, come risulta dallo scontrino che allego in copia.\n\nDa circa un mese l'apparecchio non centrifuga più e, dopo un forte rumore, ha smesso completamente di funzionare. Un tecnico che l'ha esaminata mi ha fatto sapere che si tratterebbe di un guasto della scheda elettronica, quindi di un difetto non causato da un uso scorretto.\n\nQuando mi sono rivolto al Vostro negozio, il personale mi ha proposto di farla riparare dal Vostro centro assistenza al costo di 180 euro, sostenendo che la garanzia del produttore era scaduta. Vorrei ricordarVi, tuttavia, che il venditore è tenuto a rispondere dei difetti di conformità per due anni dalla consegna, in base alla garanzia legale, che si aggiunge a quella commerciale del produttore.\n\nVi chiedo pertanto di far riparare o sostituire la lavatrice senza alcuna spesa a mio carico. In mancanza di una risposta entro trenta giorni dal ricevimento della presente, mi vedrò costretto a rivolgermi a un'associazione di consumatori per tutelare i miei diritti.\n\nVi prego infine di farmi avere una conferma scritta del ricevimento di questa lettera.\n\nDistinti saluti\n\nGiorgio Marchetti\n\nAllegato: copia dello scontrino"
+    "model": "Spettabile Elettrocasa S.r.l.\nServizio clienti\n\nOggetto: reclamo per difetto di conformità – lavatrice AquaPlus 8\n\nCon la presente desidero segnalare un difetto della lavatrice che ho acquistato presso il Vostro punto vendita di Pescara il 12 giugno dello scorso anno, come risulta dallo scontrino che allego in copia.\n\nDa circa un mese l'apparecchio non centrifuga più e, dopo un forte rumore, ha smesso completamente di funzionare. Un tecnico che l'ha esaminata mi ha fatto sapere che si tratterebbe di un guasto della scheda elettronica, quindi di un difetto non causato da un uso scorretto.\n\nQuando mi sono rivolto al Vostro negozio, il personale mi ha proposto di farla riparare dal Vostro centro assistenza al costo di 180 euro, sostenendo che la garanzia del produttore era scaduta. Vorrei ricordarVi, tuttavia, che il venditore è tenuto a rispondere dei difetti di conformità per due anni dalla consegna, in base alla garanzia legale, che si aggiunge a quella commerciale del produttore.\n\nVi chiedo pertanto di far riparare o sostituire la lavatrice senza alcuna spesa a mio carico. In mancanza di una risposta entro trenta giorni dal ricevimento della presente, mi vedrò costretto a rivolgermi a un'associazione di consumatori per tutelare i miei diritti.\n\nVi prego infine di farmi avere una conferma scritta del ricevimento di questa lettera.\n\nDistinti saluti\n\nGiorgio Marchetti\n\nAllegato: copia dello scontrino",
+    "gloss": {
+      "Con la presente": "por la presente (fórmula de carta formal)",
+      "scontrino": "el ticket de compra",
+      "guasto": "falla, avería",
+      "si tratterebbe di": "se trataría de (condicional de lo no confirmado)",
+      "è tenuto a": "está obligado a",
+      "a mio carico": "a mi cargo",
+      "In mancanza di": "a falta de",
+      "tutelare": "proteger, defender"
+    }
   }
 }

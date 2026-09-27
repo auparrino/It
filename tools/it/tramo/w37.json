@@ -319,6 +319,14 @@
         ]
       ]
     ],
-    "model": "Una storia piccola per un giorno grande\n\nQuesto mese il nostro gruppo ha letto «Il primo voto», un racconto breve ambientato il 2 giugno 1946, il giorno del referendum tra monarchia e repubblica. A raccontare è un nipote che ricorda la storia della nonna Teresa, una giovane madre di paese che quel giorno votò per la prima volta a un'elezione nazionale.\n\nLa trama è semplice: Teresa si prepara con cura, va al seggio con la cognata Rosa, aspetta in una lunga fila di donne e vota. Non succede niente di straordinario, eppure ogni gesto pesa. La scena che mi è piaciuta di più è quella della cabina: quando Teresa piega la scheda «come si piega una lettera d'amore», il lettore capisce quanto fosse importante per lei quel momento.\n\nLo stile è sobrio, quasi da cronaca familiare, e il passato remoto dà al racconto il tono di una storia tramandata. Il finale, con il certificato elettorale nascosto in un libro di preghiere, commuove senza essere retorico. L'unico limite, secondo me, è che gli altri personaggi, come il marito, restano un po' sullo sfondo.\n\nConsiglio questo racconto a chi pensa che la storia sia fatta solo di grandi nomi e di grandi battaglie: qui si scopre che è fatta anche di mani che tremano davanti a una matita."
+    "model": "Una storia piccola per un giorno grande\n\nQuesto mese il nostro gruppo ha letto «Il primo voto», un racconto breve ambientato il 2 giugno 1946, il giorno del referendum tra monarchia e repubblica. A raccontare è un nipote che ricorda la storia della nonna Teresa, una giovane madre di paese che quel giorno votò per la prima volta a un'elezione nazionale.\n\nLa trama è semplice: Teresa si prepara con cura, va al seggio con la cognata Rosa, aspetta in una lunga fila di donne e vota. Non succede niente di straordinario, eppure ogni gesto pesa. La scena che mi è piaciuta di più è quella della cabina: quando Teresa piega la scheda «come si piega una lettera d'amore», il lettore capisce quanto fosse importante per lei quel momento.\n\nLo stile è sobrio, quasi da cronaca familiare, e il passato remoto dà al racconto il tono di una storia tramandata. Il finale, con il certificato elettorale nascosto in un libro di preghiere, commuove senza essere retorico. L'unico limite, secondo me, è che gli altri personaggi, come il marito, restano un po' sullo sfondo.\n\nConsiglio questo racconto a chi pensa che la storia sia fatta solo di grandi nomi e di grandi battaglie: qui si scopre che è fatta anche di mani che tremano davanti a una matita.",
+    "gloss": {
+      "cognata": "cuñada",
+      "seggio": "lugar de votación, mesa electoral",
+      "scheda": "boleta (de votación)",
+      "pesa": "tiene peso, importa",
+      "tramandata": "transmitida de generación en generación",
+      "restano un po' sullo sfondo": "quedan medio en segundo plano"
+    }
   }
 }

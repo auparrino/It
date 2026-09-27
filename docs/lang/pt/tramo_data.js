@@ -428,7 +428,13 @@
       ]
      ]
     ],
-    "model": "Oi, Camila, tudo bem?\n\nFiquei pensando na nossa conversa sobre a mudança para a serra e ontem li uma reportagem que tem tudo a ver com você. Conta a história da Renata, uma designer que saiu de São Paulo com os filhos e foi morar numa cidadezinha de Minas. Ela diz que valeu a pena, mas que não foi o paraíso que imaginava.\n\nOs problemas práticos aparecem logo: a internet cai quando chove e o hospital pode ficar longe. E a vida social exige paciência, porque ninguém vai bater na sua porta. Se você quiser fazer amigos, vai ter que ir à festa da igreja e às reuniões da escola.\n\nO psicólogo da reportagem dá um conselho ótimo: alugue uma casa por alguns meses antes de vender o apartamento. Se as crianças se adaptarem e o seu trabalho continuar funcionando, aí vocês decidem com calma.\n\nQuando você for visitar as cidades, me chama que eu vou junto!\n\nUm beijo grande,\nMarina"
+    "model": "Oi, Camila, tudo bem?\n\nFiquei pensando na nossa conversa sobre a mudança para a serra e ontem li uma reportagem que tem tudo a ver com você. Conta a história da Renata, uma designer que saiu de São Paulo com os filhos e foi morar numa cidadezinha de Minas. Ela diz que valeu a pena, mas que não foi o paraíso que imaginava.\n\nOs problemas práticos aparecem logo: a internet cai quando chove e o hospital pode ficar longe. E a vida social exige paciência, porque ninguém vai bater na sua porta. Se você quiser fazer amigos, vai ter que ir à festa da igreja e às reuniões da escola.\n\nO psicólogo da reportagem dá um conselho ótimo: alugue uma casa por alguns meses antes de vender o apartamento. Se as crianças se adaptarem e o seu trabalho continuar funcionando, aí vocês decidem com calma.\n\nQuando você for visitar as cidades, me chama que eu vou junto!\n\nUm beijo grande,\nMarina",
+    "gloss": {
+     "tem tudo a ver com você": "tiene todo que ver con vos, te viene justo",
+     "a internet cai": "se corta internet",
+     "bater na sua porta": "golpear tu puerta",
+     "me chama que eu vou junto": "avisame, que voy con vos (chamar = llamar, avisar; que = porque)"
+    }
    }
   },
   {
@@ -751,7 +757,15 @@
       ]
      ]
     ],
-    "model": "Escolher cansa, mas não escolher cansa mais\n\nNa coluna “E se a gente escolhesse menos?”, o autor defende que o excesso de opções nos deixa ansiosos e insatisfeitos, e que seríamos mais felizes se tivéssemos menos alternativas. Concordo apenas em parte.\n\nÉ verdade que ninguém precisa de vinte e três tipos de iogurte. No consumo, a abundância muitas vezes só gera perda de tempo. No entanto, quando se trata de decisões importantes, reduzir as opções seria um erro. Se os jovens de hoje tivessem as mesmas possibilidades que seus avós, muitos estariam presos a profissões que não escolheram.\n\nO problema dos vestibulandos, a meu ver, não é a quantidade de cursos, mas a falsa ideia de que a primeira escolha é para sempre. Nesse ponto, o colunista acerta em cheio: se as escolas mostrassem que é possível mudar de caminho, a pressão diminuiria muito.\n\nPortanto, não precisamos de menos liberdade, e sim de menos medo de errar. Mais opções, com mais tolerância aos recomeços."
+    "model": "Escolher cansa, mas não escolher cansa mais\n\nNa coluna “E se a gente escolhesse menos?”, o autor defende que o excesso de opções nos deixa ansiosos e insatisfeitos, e que seríamos mais felizes se tivéssemos menos alternativas. Concordo apenas em parte.\n\nÉ verdade que ninguém precisa de vinte e três tipos de iogurte. No consumo, a abundância muitas vezes só gera perda de tempo. No entanto, quando se trata de decisões importantes, reduzir as opções seria um erro. Se os jovens de hoje tivessem as mesmas possibilidades que seus avós, muitos estariam presos a profissões que não escolheram.\n\nO problema dos vestibulandos, a meu ver, não é a quantidade de cursos, mas a falsa ideia de que a primeira escolha é para sempre. Nesse ponto, o colunista acerta em cheio: se as escolas mostrassem que é possível mudar de caminho, a pressão diminuiria muito.\n\nPortanto, não precisamos de menos liberdade, e sim de menos medo de errar. Mais opções, com mais tolerância aos recomeços.",
+    "gloss": {
+     "a meu ver": "a mi entender, en mi opinión (se ve en la semana 47)",
+     "acerta em cheio": "da en el clavo",
+     "vestibulandos": "los que rinden el vestibular, el examen de ingreso a la universidad",
+     "No entanto": "sin embargo (conectores: se ven en la semana 34)",
+     "e sim de menos medo de errar": "sino de menos miedo a equivocarse (não... e sim = no... sino)",
+     "recomeços": "los nuevos comienzos, empezar de nuevo"
+    }
    }
   },
   {
@@ -1069,7 +1083,15 @@
       ]
      ]
     ],
-    "model": "São Paulo, 12 de março de 2026\n\nPrezada Sra. Beatriz Andrade,\n\nMeu nome é Lucas Ferreira e faço estágio no setor de criação desta agência há oito meses. Escrevo para expor algumas questões e, principalmente, para buscarmos juntos uma solução.\n\nEm primeiro lugar, minha jornada tem ultrapassado com frequência as seis horas diárias. Segundo o guia do Coletivo Estágio Justo, esse é o limite para estudantes do ensino superior, e hora extra não faz parte do estágio. Além disso, grande parte do meu dia é dedicada a tarefas como tirar cópias e atender o telefone, que pouco têm a ver com a minha formação. Por fim, até hoje não recebi uma cópia do termo de compromisso.\n\nGostaria de sugerir uma reunião com o meu supervisor para revermos as atividades previstas e para eu receber o documento. Tenho certeza de que, com esses ajustes, o estágio será ainda mais proveitoso para ambas as partes.\n\nAgradeço desde já a atenção.\n\nAtenciosamente,\nLucas Ferreira"
+    "model": "São Paulo, 12 de março de 2026\n\nPrezada Sra. Beatriz Andrade,\n\nMeu nome é Lucas Ferreira e faço estágio no setor de criação desta agência há oito meses. Escrevo para expor algumas questões e, principalmente, para buscarmos juntos uma solução.\n\nEm primeiro lugar, minha jornada tem ultrapassado com frequência as seis horas diárias. Segundo o guia do Coletivo Estágio Justo, esse é o limite para estudantes do ensino superior, e hora extra não faz parte do estágio. Além disso, grande parte do meu dia é dedicada a tarefas como tirar cópias e atender o telefone, que pouco têm a ver com a minha formação. Por fim, até hoje não recebi uma cópia do termo de compromisso.\n\nGostaria de sugerir uma reunião com o meu supervisor para revermos as atividades previstas e para eu receber o documento. Tenho certeza de que, com esses ajustes, o estágio será ainda mais proveitoso para ambas as partes.\n\nAgradeço desde já a atenção.\n\nAtenciosamente,\nLucas Ferreira",
+    "gloss": {
+     "Prezada": "Estimada (fórmula de carta formal: se ve en la semana 43)",
+     "faço estágio": "hago una pasantía",
+     "tirar cópias": "sacar fotocopias",
+     "termo de compromisso": "el convenio de pasantía que firman las partes",
+     "Agradeço desde já a atenção": "desde ya, gracias por su atención (fórmula de cierre: semana 43)",
+     "Atenciosamente": "saludo atentamente (se ve en la semana 43)"
+    }
    }
   },
   {
@@ -1381,7 +1403,14 @@
       ]
      ]
     ],
-    "model": "O relógio que parou em Buenos Aires\n\nA crônica “As cartas da caixa de sapatos” me fez pensar que a memória de uma família também é feita de silêncios. Às vezes, um único objeto guarda uma história que ninguém teve coragem de contar.\n\nNa minha casa, esse objeto é um relógio de bolso que pertenceu ao meu bisavô, um espanhol que chegou a Buenos Aires em 1923. O relógio está parado às quatro e dez, e meu pai sempre disse que ninguém sabia por quê. Só no ano passado, conversando com uma tia, descobri que meu bisavô tinha comprado uma passagem para o Rio de Janeiro, onde um irmão o esperava. Na véspera da viagem, conheceu minha bisavó num baile e desistiu.\n\nSe ele tivesse embarcado, eu teria nascido brasileiro, e talvez estivesse escrevendo este relato na minha língua materna. Não sei se teríamos sido mais felizes. Sei que o relógio parado, hoje, me parece menos um defeito e mais uma lembrança daquela noite em que tudo poderia ter sido diferente."
+    "model": "O relógio que parou em Buenos Aires\n\nA crônica “As cartas da caixa de sapatos” me fez pensar que a memória de uma família também é feita de silêncios. Às vezes, um único objeto guarda uma história que ninguém teve coragem de contar.\n\nNa minha casa, esse objeto é um relógio de bolso que pertenceu ao meu bisavô, um espanhol que chegou a Buenos Aires em 1923. O relógio está parado às quatro e dez, e meu pai sempre disse que ninguém sabia por quê. Só no ano passado, conversando com uma tia, descobri que meu bisavô tinha comprado uma passagem para o Rio de Janeiro, onde um irmão o esperava. Na véspera da viagem, conheceu minha bisavó num baile e desistiu.\n\nSe ele tivesse embarcado, eu teria nascido brasileiro, e talvez estivesse escrevendo este relato na minha língua materna. Não sei se teríamos sido mais felizes. Sei que o relógio parado, hoje, me parece menos um defeito e mais uma lembrança daquela noite em que tudo poderia ter sido diferente.",
+    "gloss": {
+     "relógio de bolso": "reloj de bolsillo",
+     "passagem": "pasaje",
+     "Na véspera da viagem": "la víspera del viaje, el día antes",
+     "desistiu": "se echó atrás, renunció",
+     "lembrança": "recuerdo"
+    }
    }
   },
   {
@@ -1704,7 +1733,15 @@
       ]
      ]
     ],
-    "model": "A reportagem “O último jornal de papel do vale” conta a história do Correio do Vale, semanário fundado em 1974 e hoje o único veículo de imprensa de seis municípios do sul da Bahia. A jornalista Marlene Andrade, filha do fundador, explicou que a tiragem tinha caído de oito mil para pouco mais de mil exemplares e que a publicidade mal cobria os custos. Ela admitiu que pensava em fechar o jornal todos os dias.\n\nO texto relaciona o caso aos chamados desertos de notícias, municípios sem cobertura jornalística local. Segundo o professor Henrique Sales, nessas cidades ninguém fiscaliza a prefeitura e os boatos circulam sem contraponto. Marlene lembrou que, dois anos antes, um áudio falso sobre água contaminada tinha provocado pânico, e que foi o jornal que publicou a análise do laboratório e acalmou a população.\n\nQuanto ao futuro, o filho de Marlene, Tiago, afirmou que pretendia transformar o jornal em um site com assinatura digital e que quinhentos assinantes bastariam. A mãe disse que respeitava a ideia, mas duvidava que os leitores mais velhos acompanhassem a mudança."
+    "model": "A reportagem “O último jornal de papel do vale” conta a história do Correio do Vale, semanário fundado em 1974 e hoje o único veículo de imprensa de seis municípios do sul da Bahia. A jornalista Marlene Andrade, filha do fundador, explicou que a tiragem tinha caído de oito mil para pouco mais de mil exemplares e que a publicidade mal cobria os custos. Ela admitiu que pensava em fechar o jornal todos os dias.\n\nO texto relaciona o caso aos chamados desertos de notícias, municípios sem cobertura jornalística local. Segundo o professor Henrique Sales, nessas cidades ninguém fiscaliza a prefeitura e os boatos circulam sem contraponto. Marlene lembrou que, dois anos antes, um áudio falso sobre água contaminada tinha provocado pânico, e que foi o jornal que publicou a análise do laboratório e acalmou a população.\n\nQuanto ao futuro, o filho de Marlene, Tiago, afirmou que pretendia transformar o jornal em um site com assinatura digital e que quinhentos assinantes bastariam. A mãe disse que respeitava a ideia, mas duvidava que os leitores mais velhos acompanhassem a mudança.",
+    "gloss": {
+     "tiragem": "tirada, la cantidad de ejemplares impresos",
+     "mal cobria os custos": "apenas cubría los costos (mal = apenas, casi no)",
+     "fiscaliza a prefeitura": "controla a la municipalidad",
+     "boatos": "rumores",
+     "assinatura digital": "suscripción digital (assinatura = suscripción, también firma)",
+     "assinantes": "suscriptores"
+    }
    }
   },
   {
@@ -2032,7 +2069,16 @@
       ]
      ]
     ],
-    "model": "Prezado editor,\n\nLi com muito interesse a crônica “A cidade que se lê nas placas”, publicada no último domingo. Concordo com o cronista quando ele afirma que os avisos escritos à mão contam a história do centro: os onze “Aluga-se” da Rua da Imperatriz dizem mais sobre a crise do comércio do que muitos relatórios.\n\nNo entanto, não posso concordar totalmente com a defesa das placas. Moro num sobrado da Boa Vista e vejo todos os dias fachadas históricas cobertas de papel rasgado, fita adesiva e cola. Sem nenhuma regra, perde-se o patrimônio que todos dizemos querer proteger.\n\nPor isso, em vez de uma proibição total, sugiro uma alternativa: que se instalem, em cada quarteirão, murais de madeira onde se possam afixar anúncios, pedidos de emprego e avisos de animais perdidos. Assim, preserva-se a fachada e mantém-se essa forma popular de comunicação. Os murais poderiam, inclusive, ser pintados por artistas do bairro.\n\nEspero que os vereadores ouçam também os moradores antes de votar o projeto.\n\nAtenciosamente,\nCarla Menezes, moradora da Boa Vista, Recife"
+    "model": "Prezado editor,\n\nLi com muito interesse a crônica “A cidade que se lê nas placas”, publicada no último domingo. Concordo com o cronista quando ele afirma que os avisos escritos à mão contam a história do centro: os onze “Aluga-se” da Rua da Imperatriz dizem mais sobre a crise do comércio do que muitos relatórios.\n\nNo entanto, não posso concordar totalmente com a defesa das placas. Moro num sobrado da Boa Vista e vejo todos os dias fachadas históricas cobertas de papel rasgado, fita adesiva e cola. Sem nenhuma regra, perde-se o patrimônio que todos dizemos querer proteger.\n\nPor isso, em vez de uma proibição total, sugiro uma alternativa: que se instalem, em cada quarteirão, murais de madeira onde se possam afixar anúncios, pedidos de emprego e avisos de animais perdidos. Assim, preserva-se a fachada e mantém-se essa forma popular de comunicação. Os murais poderiam, inclusive, ser pintados por artistas do bairro.\n\nEspero que os vereadores ouçam também os moradores antes de votar o projeto.\n\nAtenciosamente,\nCarla Menezes, moradora da Boa Vista, Recife",
+    "gloss": {
+     "No entanto": "sin embargo (conectores: se ven en la semana 34)",
+     "sobrado": "casa de dos plantas",
+     "fita adesiva": "cinta adhesiva",
+     "quarteirão": "manzana, cuadra",
+     "afixar": "pegar, fijar (un cartel)",
+     "inclusive": "incluso (conector: se ve en la semana 34)",
+     "vereadores": "concejales"
+    }
    }
   },
   {
@@ -2351,7 +2397,15 @@
       ]
      ]
     ],
-    "model": "Um relógio que ensina a esperar\n\n“O testamento do relojoeiro” é um conto curto que se passa numa pequena vila, em 1911. Um velho relojoeiro, Joaquim Pereira, procura o tabelião da cidade para fazer um testamento curioso: deixará um relógio desmontado a quem conseguir montá-lo. Após a morte de Joaquim, candidatos de toda parte tentam resolver o enigma, sem sucesso. O desfecho, que não convém revelar aqui, surpreende pela simplicidade e emociona sem apelar para o sentimentalismo.\n\nO que mais me chamou a atenção foi a linguagem. O narrador escreve num registro formal, quase antigo, cheio de ênclises e até de mesóclises, como “recebeu-o” e “abrir-se-ia”. Nem todas as personagens, porém, falam desse modo: a menina diz “me ensinou”, como qualquer brasileiro diria. Esse contraste cria um efeito interessante: sente-se a distância entre o mundo solene do cartório e o saber transmitido de forma afetiva, na janela de uma oficina.\n\nRecomendo a leitura a quem gosta de histórias que parecem pequenas, mas guardam uma reflexão sobre o tempo e sobre aquilo que só se aprende com paciência. Lê-se em dez minutos e fica na memória por muito mais."
+    "model": "Um relógio que ensina a esperar\n\n“O testamento do relojoeiro” é um conto curto que se passa numa pequena vila, em 1911. Um velho relojoeiro, Joaquim Pereira, procura o tabelião da cidade para fazer um testamento curioso: deixará um relógio desmontado a quem conseguir montá-lo. Após a morte de Joaquim, candidatos de toda parte tentam resolver o enigma, sem sucesso. O desfecho, que não convém revelar aqui, surpreende pela simplicidade e emociona sem apelar para o sentimentalismo.\n\nO que mais me chamou a atenção foi a linguagem. O narrador escreve num registro formal, quase antigo, cheio de ênclises e até de mesóclises, como “recebeu-o” e “abrir-se-ia”. Nem todas as personagens, porém, falam desse modo: a menina diz “me ensinou”, como qualquer brasileiro diria. Esse contraste cria um efeito interessante: sente-se a distância entre o mundo solene do cartório e o saber transmitido de forma afetiva, na janela de uma oficina.\n\nRecomendo a leitura a quem gosta de histórias que parecem pequenas, mas guardam uma reflexão sobre o tempo e sobre aquilo que só se aprende com paciência. Lê-se em dez minutos e fica na memória por muito mais.",
+    "gloss": {
+     "tabelião": "escribano",
+     "desfecho": "desenlace, final",
+     "não convém revelar": "no conviene revelar (convir, derivado de vir: se ve en la semana 37)",
+     "porém": "pero, sin embargo (conectores: se ven en la semana 34)",
+     "cartório": "escribanía",
+     "oficina": "taller (falso amigo: se ve en la semana 45)"
+    }
    }
   },
   {
@@ -2669,7 +2723,16 @@
       ]
      ]
     ],
-    "model": "Pequenas mudanças, cidade mais resistente\n\nAs enchentes de todo verão e o plástico acumulado nas praias parecem problemas distintos. No entanto, ambos revelam a mesma falha: cidades que foram planejadas sem levar em conta o meio ambiente.\n\nNo caso das chuvas, o artigo da engenheira Mariana Coutinho mostra que cobrimos chão demais. A proposta da cidade-esponja, com parques inundáveis, calçadas permeáveis e jardins de chuva, permitiria que o solo voltasse a absorver parte da água. Aliás, muitos desses espaços já pertencem à prefeitura, como pátios de escolas e canteiros centrais.\n\nJá no debate sobre os descartáveis, ficou claro que proibir o plástico em bares e restaurantes pode ter um efeito educativo importante. Os críticos, contudo, argumentam que essas medidas custam caro e prejudicam o pequeno comerciante. A objeção é legítima, porém não justifica a inércia. Como sugeriram os próprios participantes do debate, é possível combinar a proibição com prazos de adaptação e linhas de crédito.\n\nPortanto, a questão não é escolher entre economia e meio ambiente, mas planejar a transição com responsabilidade. Se nada for feito, continuaremos pagando a conta, só que em forma de enchentes e praias sujas."
+    "model": "Pequenas mudanças, cidade mais resistente\n\nAs enchentes de todo verão e o plástico acumulado nas praias parecem problemas distintos. No entanto, ambos revelam a mesma falha: cidades que foram planejadas sem levar em conta o meio ambiente.\n\nNo caso das chuvas, o artigo da engenheira Mariana Coutinho mostra que cobrimos chão demais. A proposta da cidade-esponja, com parques inundáveis, calçadas permeáveis e jardins de chuva, permitiria que o solo voltasse a absorver parte da água. Aliás, muitos desses espaços já pertencem à prefeitura, como pátios de escolas e canteiros centrais.\n\nJá no debate sobre os descartáveis, ficou claro que proibir o plástico em bares e restaurantes pode ter um efeito educativo importante. Os críticos, contudo, argumentam que essas medidas custam caro e prejudicam o pequeno comerciante. A objeção é legítima, porém não justifica a inércia. Como sugeriram os próprios participantes do debate, é possível combinar a proibição com prazos de adaptação e linhas de crédito.\n\nPortanto, a questão não é escolher entre economia e meio ambiente, mas planejar a transição com responsabilidade. Se nada for feito, continuaremos pagando a conta, só que em forma de enchentes e praias sujas.",
+    "gloss": {
+     "enchentes": "inundaciones",
+     "levar em conta": "tener en cuenta (se ve en la semana 50)",
+     "calçadas": "veredas (falso amigo: no son calzadas)",
+     "canteiros centrais": "los canteros centrales de las avenidas",
+     "Já no debate": "en cambio, en el debate (já marca contraste con lo anterior)",
+     "prazos de adaptação": "plazos para adaptarse",
+     "continuaremos pagando a conta": "vamos a seguir pagando las consecuencias"
+    }
    }
   },
   {
@@ -3001,7 +3064,13 @@
       ]
      ]
     ],
-    "model": "Prezados editores,\n\nLi com grande interesse o perfil “Despachantes: os tradutores da burocracia”, publicado na última edição, e gostaria de acrescentar o ponto de vista de quem já dependeu desses profissionais.\n\nNo ano passado, precisei regularizar o apartamento que meus pais me deixaram. Assisti a uma verdadeira maratona: três idas ao cartório, duas filas intermináveis e um documento recusado porque faltava uma firma reconhecida. Só consegui concluir o processo quando recorri a uma despachante, que, assim como a senhora Neide, sabia exatamente a que regra obedecer e em que ordem agir.\n\nConcordo com o texto quando afirma que o aplicativo resolve apenas o simples. Também me pareceu justo o argumento de Carlos Menezes: não se deve confundir o profissional sério com o intermediário informal que oferece atalhos na porta das repartições.\n\nNo entanto, discordo do otimismo absoluto de Neide. A digitalização não vai eliminar a profissão, mas vai transformá-la, como mostra o exemplo de Juliana Prado. O despachante do futuro será menos um especialista em filas e mais um orientador que explica ao cidadão aquilo que o Estado insiste em complicar.\n\nAtenciosamente,\n\nMariana Lopes\nCampinas (SP)"
+    "model": "Prezados editores,\n\nLi com grande interesse o perfil “Despachantes: os tradutores da burocracia”, publicado na última edição, e gostaria de acrescentar o ponto de vista de quem já dependeu desses profissionais.\n\nNo ano passado, precisei regularizar o apartamento que meus pais me deixaram. Assisti a uma verdadeira maratona: três idas ao cartório, duas filas intermináveis e um documento recusado porque faltava uma firma reconhecida. Só consegui concluir o processo quando recorri a uma despachante, que, assim como a senhora Neide, sabia exatamente a que regra obedecer e em que ordem agir.\n\nConcordo com o texto quando afirma que o aplicativo resolve apenas o simples. Também me pareceu justo o argumento de Carlos Menezes: não se deve confundir o profissional sério com o intermediário informal que oferece atalhos na porta das repartições.\n\nNo entanto, discordo do otimismo absoluto de Neide. A digitalização não vai eliminar a profissão, mas vai transformá-la, como mostra o exemplo de Juliana Prado. O despachante do futuro será menos um especialista em filas e mais um orientador que explica ao cidadão aquilo que o Estado insiste em complicar.\n\nAtenciosamente,\n\nMariana Lopes\nCampinas (SP)",
+    "gloss": {
+     "Despachantes": "gestores: los que hacen trámites por otros",
+     "idas ao cartório": "idas al registro, a la escribanía",
+     "firma reconhecida": "firma certificada por escribano",
+     "repartições": "oficinas públicas"
+    }
    }
   },
   {
@@ -3326,7 +3395,15 @@
       ]
      ]
     ],
-    "model": "Belo Horizonte, 12 de setembro de 2026.\n\nÀ Secretaria Municipal de Cultura\nAssunto: redução do horário da Biblioteca Pública Municipal\n\nPrezados senhores,\n\nDirijo-me a esta Secretaria para manifestar, dentro do prazo da consulta pública, minha preocupação com a mudança anunciada pela Biblioteca Pública Municipal. Segundo informações divulgadas pela rádio, a partir do próximo mês a biblioteca funcionará apenas de terça a sábado, das 10h às 17h, e não mais de segunda a sábado, das 8h às 21h.\n\nCompreendo que a decisão se deve à falta de funcionários e à necessidade de reduzir gastos com energia. No entanto, a medida atinge justamente quem mais depende do espaço. Trabalho das 8h às 18h e só consigo estudar à noite; como eu, dezenas de estudantes que se preparam para concursos perderão o único ambiente silencioso a que têm acesso.\n\nDiante disso, proponho uma alternativa: manter a abertura noturna ao menos três vezes por semana, fechando a biblioteca pela manhã, quando o movimento é menor. Outra possibilidade seria firmar parcerias com universidades para a contratação de estagiários.\n\nCerto de que a Secretaria levará em conta a opinião dos usuários, coloco-me à disposição para colaborar.\n\nAtenciosamente,\n\nRafael Nunes Teixeira"
+    "model": "Belo Horizonte, 12 de setembro de 2026.\n\nÀ Secretaria Municipal de Cultura\nAssunto: redução do horário da Biblioteca Pública Municipal\n\nPrezados senhores,\n\nDirijo-me a esta Secretaria para manifestar, dentro do prazo da consulta pública, minha preocupação com a mudança anunciada pela Biblioteca Pública Municipal. Segundo informações divulgadas pela rádio, a partir do próximo mês a biblioteca funcionará apenas de terça a sábado, das 10h às 17h, e não mais de segunda a sábado, das 8h às 21h.\n\nCompreendo que a decisão se deve à falta de funcionários e à necessidade de reduzir gastos com energia. No entanto, a medida atinge justamente quem mais depende do espaço. Trabalho das 8h às 18h e só consigo estudar à noite; como eu, dezenas de estudantes que se preparam para concursos perderão o único ambiente silencioso a que têm acesso.\n\nDiante disso, proponho uma alternativa: manter a abertura noturna ao menos três vezes por semana, fechando a biblioteca pela manhã, quando o movimento é menor. Outra possibilidade seria firmar parcerias com universidades para a contratação de estagiários.\n\nCerto de que a Secretaria levará em conta a opinião dos usuários, coloco-me à disposição para colaborar.\n\nAtenciosamente,\n\nRafael Nunes Teixeira",
+    "gloss": {
+     "atinge justamente": "afecta justamente",
+     "concursos": "concursos públicos: exámenes para entrar a un empleo del Estado",
+     "firmar parcerias": "establecer convenios (firmar = establecer, cerrar)",
+     "estagiários": "pasantes",
+     "Certo de que": "seguro de que",
+     "coloco-me à disposição": "quedo a disposición (fórmula de cierre: se ve en la semana 43)"
+    }
    }
   },
   {
@@ -3666,7 +3743,16 @@
       ]
      ]
     ],
-    "model": "Tecnologia a serviço de quem?\n\nCostumamos associar inovação a aparelhos cada vez mais caros e sofisticados. Mas duas experiências recentes mostram que a pergunta decisiva não é o que a tecnologia consegue fazer, e sim a quem ela serve.\n\nNo Recife, uma equipe de geólogos instalou sensores de baixo custo nas encostas dos morros. Cruzando dados de umidade do solo com a previsão do tempo, os pesquisadores obtiveram alertas com cerca de quarenta minutos de antecedência. O detalhe mais importante, porém, não é técnico: o projeto só funcionou porque manteve diálogo constante com os moradores, que indicaram onde a terra costumava ceder.\n\nO caso oposto aparece no mercado de celulares. Como relatou um técnico de Campinas no podcast Fio Terra, muitos fabricantes projetam aparelhos que não podem ser abertos e bloqueiam peças originais trocadas fora da rede autorizada. Nesse modelo, a inovação serve para prender o consumidor, e não para resolver seus problemas.\n\nComparar as duas situações ajuda a entender que a tecnologia não é neutra. Quando nasce da escuta da comunidade, protege vidas; quando é desenhada para impedir o conserto, gera lixo e dependência. Por isso, defendo que o poder público intervenha nos dois casos: financiando projetos como o do Recife e garantindo o direito ao reparo. Só assim a tecnologia estará, de fato, a serviço de todos."
+    "model": "Tecnologia a serviço de quem?\n\nCostumamos associar inovação a aparelhos cada vez mais caros e sofisticados. Mas duas experiências recentes mostram que a pergunta decisiva não é o que a tecnologia consegue fazer, e sim a quem ela serve.\n\nNo Recife, uma equipe de geólogos instalou sensores de baixo custo nas encostas dos morros. Cruzando dados de umidade do solo com a previsão do tempo, os pesquisadores obtiveram alertas com cerca de quarenta minutos de antecedência. O detalhe mais importante, porém, não é técnico: o projeto só funcionou porque manteve diálogo constante com os moradores, que indicaram onde a terra costumava ceder.\n\nO caso oposto aparece no mercado de celulares. Como relatou um técnico de Campinas no podcast Fio Terra, muitos fabricantes projetam aparelhos que não podem ser abertos e bloqueiam peças originais trocadas fora da rede autorizada. Nesse modelo, a inovação serve para prender o consumidor, e não para resolver seus problemas.\n\nComparar as duas situações ajuda a entender que a tecnologia não é neutra. Quando nasce da escuta da comunidade, protege vidas; quando é desenhada para impedir o conserto, gera lixo e dependência. Por isso, defendo que o poder público intervenha nos dois casos: financiando projetos como o do Recife e garantindo o direito ao reparo. Só assim a tecnologia estará, de fato, a serviço de todos.",
+    "gloss": {
+     "encostas dos morros": "las laderas de los cerros",
+     "Cruzando dados": "cruzando datos (oración reducida de gerundio: se ve en la semana 42)",
+     "costumava ceder": "solía hundirse, desmoronarse",
+     "peças originais": "repuestos originales",
+     "rede autorizada": "la red de services oficiales",
+     "conserto": "arreglo, reparación",
+     "lixo": "basura"
+    }
    }
   },
   {
@@ -4015,7 +4101,15 @@
       ]
      ]
     ],
-    "model": "Oi, Tom!\n\nQue bom receber notícias suas! Adorei saber que você tá maratonando séries brasileiras pra treinar o português. E pode ficar tranquilo: você não tá ficando louco. A confusão tem explicação.\n\nO que você aprende na aula, tipo “nós estamos” e “onde está”, é o português escrito, mais formal. Já o que você ouve nas séries é o português falado do Brasil, que tem suas próprias formas. “A gente” no lugar de “nós”, “tá” no lugar de “está”, “cadê” no lugar de “onde está” e o famoso “né” no fim das frases não são erros: todo mundo usa, até professor universitário.\n\nLi uma reportagem esses dias que explicava justamente isso. Antes, as legendas corrigiam a fala dos atores; agora, em várias produções nacionais, elas respeitam o jeito como a gente fala. Alguns professores reclamam, mas a própria reportagem conclui que tudo depende do contexto: ninguém escreve um contrato com “cadê”.\n\nTambém ouvi uma conversa de dois amigos comentando uma série, e um deles resumiu bem: uma coisa é mensagem, outra é redação da escola.\n\nEntão minha dica é: aprende as duas coisas. Usa “a gente” e “pra” quando conversar com os amigos e guarda o “nós” e o “para” pros e-mails de trabalho e pras provas.\n\nUm abraço e boa maratona!\n\nLucas"
+    "model": "Oi, Tom!\n\nQue bom receber notícias suas! Adorei saber que você tá maratonando séries brasileiras pra treinar o português. E pode ficar tranquilo: você não tá ficando louco. A confusão tem explicação.\n\nO que você aprende na aula, tipo “nós estamos” e “onde está”, é o português escrito, mais formal. Já o que você ouve nas séries é o português falado do Brasil, que tem suas próprias formas. “A gente” no lugar de “nós”, “tá” no lugar de “está”, “cadê” no lugar de “onde está” e o famoso “né” no fim das frases não são erros: todo mundo usa, até professor universitário.\n\nLi uma reportagem esses dias que explicava justamente isso. Antes, as legendas corrigiam a fala dos atores; agora, em várias produções nacionais, elas respeitam o jeito como a gente fala. Alguns professores reclamam, mas a própria reportagem conclui que tudo depende do contexto: ninguém escreve um contrato com “cadê”.\n\nTambém ouvi uma conversa de dois amigos comentando uma série, e um deles resumiu bem: uma coisa é mensagem, outra é redação da escola.\n\nEntão minha dica é: aprende as duas coisas. Usa “a gente” e “pra” quando conversar com os amigos e guarda o “nós” e o “para” pros e-mails de trabalho e pras provas.\n\nUm abraço e boa maratona!\n\nLucas",
+    "gloss": {
+     "maratonando séries": "viendo series de un tirón",
+     "pode ficar tranquilo": "quedate tranquilo",
+     "legendas": "subtítulos",
+     "o jeito como a gente fala": "la manera en que hablamos",
+     "redação da escola": "la composición del colegio",
+     "aprende as duas coisas": "aprendé las dos cosas (imperativo del habla: la forma de tú, que es la del presente)"
+    }
    }
   },
   {
@@ -4356,7 +4450,17 @@
       ]
      ]
     ],
-    "model": "Fatores de evasão no primeiro ano de graduação: resumo\n\nO relatório do Núcleo de Estudos sobre Permanência Estudantil (NEPE) tem como objetivo a identificação das causas do abandono de cursos no primeiro ano de graduação em uma universidade federal do Centro-Oeste. Para tanto, os pesquisadores adotaram uma abordagem mista, que associou a análise dos registros acadêmicos de aproximadamente 4.800 ingressantes à realização de 62 entrevistas em profundidade.\n\nOs resultados indicam que a evasão decorre da combinação de fatores econômicos, pedagógicos e afetivos. Destacam-se a dificuldade de conciliação entre trabalho e estudo, a reprovação em disciplinas introdutórias e o isolamento social nas primeiras semanas. O estudo aponta, ainda, o desconhecimento dos serviços de apoio pedagógico já oferecidos pela instituição.\n\nCom base nesses dados, o relatório recomenda a ampliação dos auxílios estudantis, a criação de um programa de acolhimento com mentoria de veteranos, a reformulação das disciplinas iniciais, a maior divulgação dos serviços de apoio e a implantação de um sistema de detecção precoce de estudantes em risco.\n\nPor fim, os autores reconhecem limitações, como a restrição da amostra a uma única universidade e a possibilidade de viés na seleção dos entrevistados, e sugerem a replicação do estudo em outras instituições."
+    "model": "Fatores de evasão no primeiro ano de graduação: resumo\n\nO relatório do Núcleo de Estudos sobre Permanência Estudantil (NEPE) tem como objetivo a identificação das causas do abandono de cursos no primeiro ano de graduação em uma universidade federal do Centro-Oeste. Para tanto, os pesquisadores adotaram uma abordagem mista, que associou a análise dos registros acadêmicos de aproximadamente 4.800 ingressantes à realização de 62 entrevistas em profundidade.\n\nOs resultados indicam que a evasão decorre da combinação de fatores econômicos, pedagógicos e afetivos. Destacam-se a dificuldade de conciliação entre trabalho e estudo, a reprovação em disciplinas introdutórias e o isolamento social nas primeiras semanas. O estudo aponta, ainda, o desconhecimento dos serviços de apoio pedagógico já oferecidos pela instituição.\n\nCom base nesses dados, o relatório recomenda a ampliação dos auxílios estudantis, a criação de um programa de acolhimento com mentoria de veteranos, a reformulação das disciplinas iniciais, a maior divulgação dos serviços de apoio e a implantação de um sistema de detecção precoce de estudantes em risco.\n\nPor fim, os autores reconhecem limitações, como a restrição da amostra a uma única universidade e a possibilidade de viés na seleção dos entrevistados, e sugerem a replicação do estudo em outras instituições.",
+    "gloss": {
+     "evasão": "deserción, abandono de los estudios",
+     "Para tanto": "para eso, con ese fin",
+     "ingressantes": "ingresantes",
+     "decorre": "deriva, resulta (decorrer de)",
+     "reprovação em disciplinas": "desaprobar materias (disciplina = materia)",
+     "acolhimento": "recibimiento y acompañamiento de los ingresantes",
+     "veteranos": "estudiantes de años avanzados",
+     "viés": "sesgo"
+    }
    }
   },
   {
@@ -4683,7 +4787,13 @@
       ]
      ]
     ],
-    "model": "Um relógio parado e quarenta e dois anos de silêncio\n\n“O relógio da estação” é um conto breve que trata de um tema universal: o orgulho que separa pais e filhos. Helena, uma mulher de sessenta e poucos anos, volta à pequena cidade onde nasceu para o enterro do pai, com quem rompera aos dezenove anos. Ao receber a chave da antiga oficina de relógios, ela descobre objetos que a obrigam a rever tudo o que acreditara sobre aquela ruptura.\n\nO grande mérito do texto está na maneira como o passado invade o presente. Quase toda a história da família é contada por meio do mais-que-perfeito simples — “partira”, “dissera”, “escrevera” —, tempo verbal pouco usado na fala, mas que aqui cria camadas de memória e reforça a sensação de que tudo já estava decidido antes de a protagonista chegar. O relógio da praça, parado há décadas, funciona como símbolo dessa vida congelada.\n\nComo em Dom Casmurro, comentado recentemente no podcast Estante Aberta, o leitor percebe que a versão de uma única pessoa nunca é a história completa. Aqui, porém, a revelação não nasce da desconfiança, e sim da ternura.\n\nTalvez o desfecho pareça um pouco previsível para leitores experientes, mas a delicadeza da linguagem compensa. Recomendo a leitura a quem gosta de narrativas curtas, silenciosas e profundamente humanas."
+    "model": "Um relógio parado e quarenta e dois anos de silêncio\n\n“O relógio da estação” é um conto breve que trata de um tema universal: o orgulho que separa pais e filhos. Helena, uma mulher de sessenta e poucos anos, volta à pequena cidade onde nasceu para o enterro do pai, com quem rompera aos dezenove anos. Ao receber a chave da antiga oficina de relógios, ela descobre objetos que a obrigam a rever tudo o que acreditara sobre aquela ruptura.\n\nO grande mérito do texto está na maneira como o passado invade o presente. Quase toda a história da família é contada por meio do mais-que-perfeito simples — “partira”, “dissera”, “escrevera” —, tempo verbal pouco usado na fala, mas que aqui cria camadas de memória e reforça a sensação de que tudo já estava decidido antes de a protagonista chegar. O relógio da praça, parado há décadas, funciona como símbolo dessa vida congelada.\n\nComo em Dom Casmurro, comentado recentemente no podcast Estante Aberta, o leitor percebe que a versão de uma única pessoa nunca é a história completa. Aqui, porém, a revelação não nasce da desconfiança, e sim da ternura.\n\nTalvez o desfecho pareça um pouco previsível para leitores experientes, mas a delicadeza da linguagem compensa. Recomendo a leitura a quem gosta de narrativas curtas, silenciosas e profundamente humanas.",
+    "gloss": {
+     "sessenta e poucos anos": "sesenta y pico",
+     "oficina de relógios": "taller de relojería (oficina = taller)",
+     "camadas de memória": "capas de memoria",
+     "desfecho": "desenlace, final"
+    }
    }
   },
   {
@@ -5022,7 +5132,16 @@
       ]
      ]
     ],
-    "model": "A banca do seu Arlindo\n\nDurante quase vinte anos, a esquina da minha rua teve uma banca de jornal pintada de verde. Era do seu Arlindo, um homem baixinho que conhecia cada morador pelo nome e pelo jornal que lia. Meu pai comprava ali o jornal todos os domingos e, chegando em casa, me entregava primeiro o caderno de quadrinhos, guardando para si as notícias de política.\n\nLembro que, aos dez anos, eu passava na banca voltando da escola só para olhar as revistas penduradas. Seu Arlindo fingia não ver e, terminado o movimento da tarde, às vezes me deixava ler uma inteira sentado num caixote.\n\nA banca fechou há seis anos. Aposentado o dono, ninguém quis assumir o ponto, e hoje há ali apenas um poste com cartazes de aluguel. Não houve notícia no jornal, nem despedida. Simplesmente, numa segunda-feira, as portas não abriram mais.\n\nLendo recentemente a crônica sobre a feira da Rua das Acácias e ouvindo a reportagem sobre a reabertura do Cine Glória, percebi que as duas histórias falam da mesma coisa: certos lugares não servem apenas para vender produtos ou exibir filmes, mas para criar encontros. Quando eles desaparecem, o bairro perde um pedaço da própria voz; quando voltam, é porque alguém se recusou a esquecê-los.\n\nHoje leio as notícias no celular, como quase todo mundo. Mas, ao passar por aquela esquina, ainda procuro, por reflexo, a banca verde e o sorriso do seu Arlindo."
+    "model": "A banca do seu Arlindo\n\nDurante quase vinte anos, a esquina da minha rua teve uma banca de jornal pintada de verde. Era do seu Arlindo, um homem baixinho que conhecia cada morador pelo nome e pelo jornal que lia. Meu pai comprava ali o jornal todos os domingos e, chegando em casa, me entregava primeiro o caderno de quadrinhos, guardando para si as notícias de política.\n\nLembro que, aos dez anos, eu passava na banca voltando da escola só para olhar as revistas penduradas. Seu Arlindo fingia não ver e, terminado o movimento da tarde, às vezes me deixava ler uma inteira sentado num caixote.\n\nA banca fechou há seis anos. Aposentado o dono, ninguém quis assumir o ponto, e hoje há ali apenas um poste com cartazes de aluguel. Não houve notícia no jornal, nem despedida. Simplesmente, numa segunda-feira, as portas não abriram mais.\n\nLendo recentemente a crônica sobre a feira da Rua das Acácias e ouvindo a reportagem sobre a reabertura do Cine Glória, percebi que as duas histórias falam da mesma coisa: certos lugares não servem apenas para vender produtos ou exibir filmes, mas para criar encontros. Quando eles desaparecem, o bairro perde um pedaço da própria voz; quando voltam, é porque alguém se recusou a esquecê-los.\n\nHoje leio as notícias no celular, como quase todo mundo. Mas, ao passar por aquela esquina, ainda procuro, por reflexo, a banca verde e o sorriso do seu Arlindo.",
+    "gloss": {
+     "banca de jornal": "kiosco de diarios y revistas",
+     "seu Arlindo": "don Arlindo (seu = señor, trato popular)",
+     "caderno de quadrinhos": "el suplemento de historietas",
+     "penduradas": "colgadas",
+     "caixote": "cajón de madera",
+     "assumir o ponto": "hacerse cargo del puesto (ponto = local de un comercio)",
+     "cartazes de aluguel": "carteles de alquiler"
+    }
    }
   },
   {
@@ -5372,7 +5491,17 @@
       ]
      ]
     ],
-    "model": "Assunto: Solicitação urgente de declaração de conclusão de mestrado – Processo 2026/0418\n\nPrezado Professor Rezende,\n\nMeu nome é Beatriz Andrade e defendi minha dissertação de mestrado neste Programa em março deste ano. Escrevo para solicitar, em caráter de urgência, a emissão de uma declaração de conclusão de curso.\n\nLogo após a defesa, dei entrada no pedido de diploma (processo nº 2026/0418) e entreguei toda a documentação exigida. Em contato telefônico com a secretaria, fui informada de que o processo está parado na etapa de homologação, pois um dos membros externos da banca ainda não assinou eletronicamente a ata de defesa. Já escrevi ao professor em questão, a quem expliquei a situação, e aguardo sua resposta.\n\nOcorre que fui aprovada em concurso público para professora de um instituto federal, e a posse está marcada para o dia 16 de outubro. Para assumir o cargo, preciso apresentar o diploma ou, no mínimo, uma declaração de conclusão. Segundo a secretaria, esse documento pode ser emitido mediante autorização da coordenação.\n\nDiante do exposto, solicito que o senhor autorize a emissão da declaração, a fim de que eu não perca a vaga. Envio em anexo o comprovante de aprovação no concurso, no qual consta a data da posse.\n\nAgradeço desde já a atenção e coloco-me à disposição para quaisquer esclarecimentos.\n\nAtenciosamente,\n\nBeatriz Andrade\nPrograma de Pós-Graduação em Letras\nTelefone: (31) 98765-4321"
+    "model": "Assunto: Solicitação urgente de declaração de conclusão de mestrado – Processo 2026/0418\n\nPrezado Professor Rezende,\n\nMeu nome é Beatriz Andrade e defendi minha dissertação de mestrado neste Programa em março deste ano. Escrevo para solicitar, em caráter de urgência, a emissão de uma declaração de conclusão de curso.\n\nLogo após a defesa, dei entrada no pedido de diploma (processo nº 2026/0418) e entreguei toda a documentação exigida. Em contato telefônico com a secretaria, fui informada de que o processo está parado na etapa de homologação, pois um dos membros externos da banca ainda não assinou eletronicamente a ata de defesa. Já escrevi ao professor em questão, a quem expliquei a situação, e aguardo sua resposta.\n\nOcorre que fui aprovada em concurso público para professora de um instituto federal, e a posse está marcada para o dia 16 de outubro. Para assumir o cargo, preciso apresentar o diploma ou, no mínimo, uma declaração de conclusão. Segundo a secretaria, esse documento pode ser emitido mediante autorização da coordenação.\n\nDiante do exposto, solicito que o senhor autorize a emissão da declaração, a fim de que eu não perca a vaga. Envio em anexo o comprovante de aprovação no concurso, no qual consta a data da posse.\n\nAgradeço desde já a atenção e coloco-me à disposição para quaisquer esclarecimentos.\n\nAtenciosamente,\n\nBeatriz Andrade\nPrograma de Pós-Graduação em Letras\nTelefone: (31) 98765-4321",
+    "gloss": {
+     "dissertação de mestrado": "tesis de maestría",
+     "dei entrada no pedido": "inicié el trámite",
+     "membros externos da banca": "los miembros externos del tribunal (banca = jurado de tesis o examen)",
+     "ata de defesa": "el acta de la defensa",
+     "Ocorre que": "resulta que, sucede que",
+     "concurso público": "concurso para un cargo del Estado",
+     "a posse": "la toma de posesión del cargo",
+     "a vaga": "el puesto, la vacante"
+    }
    }
   },
   {
@@ -5718,7 +5847,16 @@
       ]
      ]
     ],
-    "model": "Oi, Lu! (Ou Luzinha? Ou Lucião?)\n\nAdorei receber notícias suas! Ri sozinho com a sua mensagem, mas entendo o susto. Por coincidência, ontem ouvi um episódio do podcast Língua Solta que falava exatamente disso, então vou te contar o que aprendi.\n\nO professor entrevistado, o Tiago, explicou que o brasileiro tem mania de mexer nos nomes. Basicamente, a gente encurta (Gabriela vira Gabi, Rafael vira Rafa), duplica uma sílaba, como em Dudu ou Juju, e acrescenta sufixos. O diminutivo, tipo Luzinha, quase sempre é carinho. E o aumentativo nem sempre fala de tamanho: ele contou de um colega baixinho que todo mundo chama de Paulão, por pura ironia carinhosa. Ou seja, o seu “Lucião” provavelmente quer dizer que você já é querida no escritório, e não que alguém te acha grandona.\n\nSegundo ele, receber um apelido no trabalho costuma ser sinal de que você foi aceita no grupo, e não falta de respeito. Só com chefes e com clientes que a gente acabou de conhecer é melhor esperar e ver como a pessoa se apresenta.\n\nMeu conselho? Relaxa e experimenta um pouquinho. Se algum apelido realmente te incomodar, fala com leveza, algo como “prefiro que me chamem de Lucía mesmo”. Ninguém vai se ofender. Aliás, o Tiago contou que muitos estrangeiros sentem falta dos apelidos quando voltam para casa, então aproveita!\n\nMe conta como está a vida em Curitiba. Já sobreviveu ao frio de lá?\n\nUm beijo enorme,\nMartín"
+    "model": "Oi, Lu! (Ou Luzinha? Ou Lucião?)\n\nAdorei receber notícias suas! Ri sozinho com a sua mensagem, mas entendo o susto. Por coincidência, ontem ouvi um episódio do podcast Língua Solta que falava exatamente disso, então vou te contar o que aprendi.\n\nO professor entrevistado, o Tiago, explicou que o brasileiro tem mania de mexer nos nomes. Basicamente, a gente encurta (Gabriela vira Gabi, Rafael vira Rafa), duplica uma sílaba, como em Dudu ou Juju, e acrescenta sufixos. O diminutivo, tipo Luzinha, quase sempre é carinho. E o aumentativo nem sempre fala de tamanho: ele contou de um colega baixinho que todo mundo chama de Paulão, por pura ironia carinhosa. Ou seja, o seu “Lucião” provavelmente quer dizer que você já é querida no escritório, e não que alguém te acha grandona.\n\nSegundo ele, receber um apelido no trabalho costuma ser sinal de que você foi aceita no grupo, e não falta de respeito. Só com chefes e com clientes que a gente acabou de conhecer é melhor esperar e ver como a pessoa se apresenta.\n\nMeu conselho? Relaxa e experimenta um pouquinho. Se algum apelido realmente te incomodar, fala com leveza, algo como “prefiro que me chamem de Lucía mesmo”. Ninguém vai se ofender. Aliás, o Tiago contou que muitos estrangeiros sentem falta dos apelidos quando voltam para casa, então aproveita!\n\nMe conta como está a vida em Curitiba. Já sobreviveu ao frio de lá?\n\nUm beijo enorme,\nMartín",
+    "gloss": {
+     "tem mania de mexer nos nomes": "tiene la manía de jugar con los nombres",
+     "encurta": "acorta",
+     "apelido": "sobrenombre (falso amigo: se ve en la semana 45)",
+     "te acha grandona": "te ve grandota (achar = creer, opinar)",
+     "Relaxa": "relajate, tranqui",
+     "com leveza": "con liviandad, sin drama",
+     "sentem falta dos apelidos": "extrañan los apodos (sentir falta de = extrañar)"
+    }
    }
   },
   {
@@ -6073,7 +6211,13 @@
       ]
      ]
     ],
-    "model": "Senhor editor,\n\nSou argentino, moro em Campinas há dois anos e li com um sorriso cúmplice a crônica “Esquisito é o polvo”, publicada no último domingo. Poucas vezes me senti tão bem retratado.\n\nComo a cronista, também tive o meu almoço desastroso. No meu caso, o problema foi a palavra sobremesa: depois de um almoço de negócios, comentei com o meu chefe, diante dos clientes, que o melhor do encontro tinha sido a sobremesa, pensando na conversa tranquila depois da refeição. O silêncio na mesa foi tão longo quanto o descrito no texto. Só mais tarde me explicaram que, no Brasil, sobremesa é o doce servido no fim, e que os clientes tinham entendido que a reunião só valera pelo pudim.\n\nConcordo plenamente com o amigo professor citado pela cronista. As palavras que não entendemos nos obrigam a perguntar; as que achamos que entendemos nos deixam confiantes demais. Esquisito, borracha, escritório ou apelido parecem transparentes justamente porque existem no espanhol, e é essa falsa segurança que provoca os tropeços. Acrescentaria apenas que o risco não é só linguístico: um mal-entendido desses pode passar uma impressão de grosseria ou de desinteresse, como quase aconteceu comigo diante dos clientes.\n\nPor isso, gostaria de sugerir ao jornal que publique mais textos como este. Além de divertidos, eles ajudam os muitos hispanofalantes que vivem no Brasil a perder o medo de errar e, ao mesmo tempo, a desconfiar do que parece fácil demais.\n\nAtenciosamente,\nGustavo Ferreyra, analista de sistemas, Campinas (SP)"
+    "model": "Senhor editor,\n\nSou argentino, moro em Campinas há dois anos e li com um sorriso cúmplice a crônica “Esquisito é o polvo”, publicada no último domingo. Poucas vezes me senti tão bem retratado.\n\nComo a cronista, também tive o meu almoço desastroso. No meu caso, o problema foi a palavra sobremesa: depois de um almoço de negócios, comentei com o meu chefe, diante dos clientes, que o melhor do encontro tinha sido a sobremesa, pensando na conversa tranquila depois da refeição. O silêncio na mesa foi tão longo quanto o descrito no texto. Só mais tarde me explicaram que, no Brasil, sobremesa é o doce servido no fim, e que os clientes tinham entendido que a reunião só valera pelo pudim.\n\nConcordo plenamente com o amigo professor citado pela cronista. As palavras que não entendemos nos obrigam a perguntar; as que achamos que entendemos nos deixam confiantes demais. Esquisito, borracha, escritório ou apelido parecem transparentes justamente porque existem no espanhol, e é essa falsa segurança que provoca os tropeços. Acrescentaria apenas que o risco não é só linguístico: um mal-entendido desses pode passar uma impressão de grosseria ou de desinteresse, como quase aconteceu comigo diante dos clientes.\n\nPor isso, gostaria de sugerir ao jornal que publique mais textos como este. Além de divertidos, eles ajudam os muitos hispanofalantes que vivem no Brasil a perder o medo de errar e, ao mesmo tempo, a desconfiar do que parece fácil demais.\n\nAtenciosamente,\nGustavo Ferreyra, analista de sistemas, Campinas (SP)",
+    "gloss": {
+     "Esquisito é o polvo": "«Raro es el pulpo» (esquisito = raro; polvo = pulpo)",
+     "só valera pelo pudim": "solo había valido por el budín (pluscuamperfecto simple)",
+     "tropeços": "tropiezos",
+     "passar uma impressão": "dar una impresión"
+    }
    }
   },
   {
@@ -6426,7 +6570,16 @@
       ]
      ]
     ],
-    "model": "Sotaques do Mundo: quando o português vem de Luanda\n\nQuem acha que o português tem dono deveria ouvir o episódio mais recente do programa Sotaques do Mundo, em que o apresentador Rodrigo conversa com Nádia, uma estudante angolana que faz mestrado em Campinas. Numa conversa curta e descontraída, a entrevista desmonta, com humor, vários preconceitos sobre a língua.\n\nO ponto de partida é a pergunta que Nádia mais ouve no Brasil: onde ela aprendeu a falar português tão bem? A resposta surpreende muitos ouvintes: o português é a sua língua materna. A partir daí, ela compara o seu sotaque, de vogais mais claras que as do português europeu, com o brasileiro, apresenta palavras de Luanda, como candongueiro e bué, e conta o mal-entendido que viveu ao chamar uma colega do Recife de rapariga, palavra carinhosa em Angola e ofensiva em parte do Nordeste.\n\nO ponto alto, porém, é a reflexão final. Com tranquilidade, Nádia afirma que o português de Angola não é português errado, e sim uma variedade com as suas próprias regras. A mensagem é especialmente útil para nós, hispanofalantes, que muitas vezes aprendemos a variedade brasileira como se fosse a única.\n\nSe há um ponto fraco, é a pressa: alguns temas, como a relação entre o português e o quimbundo na família de Nádia, mereciam mais tempo. Mesmo assim, recomendo o episódio a todos os alunos a partir do nível intermediário. Além de treinar o ouvido, ele nos lembra que falar bem português não significa necessariamente falar como um paulistano."
+    "model": "Sotaques do Mundo: quando o português vem de Luanda\n\nQuem acha que o português tem dono deveria ouvir o episódio mais recente do programa Sotaques do Mundo, em que o apresentador Rodrigo conversa com Nádia, uma estudante angolana que faz mestrado em Campinas. Numa conversa curta e descontraída, a entrevista desmonta, com humor, vários preconceitos sobre a língua.\n\nO ponto de partida é a pergunta que Nádia mais ouve no Brasil: onde ela aprendeu a falar português tão bem? A resposta surpreende muitos ouvintes: o português é a sua língua materna. A partir daí, ela compara o seu sotaque, de vogais mais claras que as do português europeu, com o brasileiro, apresenta palavras de Luanda, como candongueiro e bué, e conta o mal-entendido que viveu ao chamar uma colega do Recife de rapariga, palavra carinhosa em Angola e ofensiva em parte do Nordeste.\n\nO ponto alto, porém, é a reflexão final. Com tranquilidade, Nádia afirma que o português de Angola não é português errado, e sim uma variedade com as suas próprias regras. A mensagem é especialmente útil para nós, hispanofalantes, que muitas vezes aprendemos a variedade brasileira como se fosse a única.\n\nSe há um ponto fraco, é a pressa: alguns temas, como a relação entre o português e o quimbundo na família de Nádia, mereciam mais tempo. Mesmo assim, recomendo o episódio a todos os alunos a partir do nível intermediário. Além de treinar o ouvido, ele nos lembra que falar bem português não significa necessariamente falar como um paulistano.",
+    "gloss": {
+     "tem dono": "tiene dueño",
+     "descontraída": "distendida, relajada",
+     "desmonta": "desarma",
+     "candongueiro": "la combi, el minibús de Luanda",
+     "bué": "mucho (en Angola y Portugal)",
+     "rapariga": "chica en Angola y Portugal; en parte de Brasil, insulto (prostituta)",
+     "O ponto alto": "lo mejor, el punto fuerte"
+    }
    }
   },
   {
@@ -6779,7 +6932,17 @@
       ]
      ]
     ],
-    "model": "Tarifa zero: o preço de não decidir\n\nNa coluna publicada nesta semana, Marcelo Antunes propõe que o debate sobre a tarifa zero deixe de lado a pergunta “sim ou não” e se concentre no financiamento. Concordo com boa parte do diagnóstico, mas, a meu ver, o texto é prudente demais nas conclusões.\n\nÉ inegável, como afirma o colunista, que o modelo atual está esgotado. Quem mora na periferia, como eu, sabe que cada reajuste empurra vizinhos para a moto ou os prende em casa. Também me parece correto rebater a ideia de que o que é gratuito não é valorizado: ninguém depreda a escola pública por ela ser gratuita.\n\nDiscordo, porém, da ênfase na implantação por etapas começando pelos domingos. A medida talvez seja simpática, mas dificilmente mudaria a vida de quem precisa do ônibus para trabalhar de segunda a sexta. Se o transporte é um direito, como os próprios defensores argumentam, a gratuidade deveria valer primeiro nos dias úteis e nas linhas das periferias, e não como um passeio de fim de semana.\n\nQuanto ao financiamento, as sugestões da coluna são razoáveis, e eu acrescentaria uma: rever os privilégios de quem usa carro, como as vagas gratuitas nas ruas centrais. Provavelmente não bastaria para pagar a conta inteira, mas seria um sinal claro de prioridade.\n\nO colunista tem razão ao dizer que o pior cenário é engavetar a proposta. Eu apenas lembraria que esperar demais por um projeto perfeito também tem um custo, e quem o paga, como sempre, é quem está no ponto de ônibus."
+    "model": "Tarifa zero: o preço de não decidir\n\nNa coluna publicada nesta semana, Marcelo Antunes propõe que o debate sobre a tarifa zero deixe de lado a pergunta “sim ou não” e se concentre no financiamento. Concordo com boa parte do diagnóstico, mas, a meu ver, o texto é prudente demais nas conclusões.\n\nÉ inegável, como afirma o colunista, que o modelo atual está esgotado. Quem mora na periferia, como eu, sabe que cada reajuste empurra vizinhos para a moto ou os prende em casa. Também me parece correto rebater a ideia de que o que é gratuito não é valorizado: ninguém depreda a escola pública por ela ser gratuita.\n\nDiscordo, porém, da ênfase na implantação por etapas começando pelos domingos. A medida talvez seja simpática, mas dificilmente mudaria a vida de quem precisa do ônibus para trabalhar de segunda a sexta. Se o transporte é um direito, como os próprios defensores argumentam, a gratuidade deveria valer primeiro nos dias úteis e nas linhas das periferias, e não como um passeio de fim de semana.\n\nQuanto ao financiamento, as sugestões da coluna são razoáveis, e eu acrescentaria uma: rever os privilégios de quem usa carro, como as vagas gratuitas nas ruas centrais. Provavelmente não bastaria para pagar a conta inteira, mas seria um sinal claro de prioridade.\n\nO colunista tem razão ao dizer que o pior cenário é engavetar a proposta. Eu apenas lembraria que esperar demais por um projeto perfeito também tem um custo, e quem o paga, como sempre, é quem está no ponto de ônibus.",
+    "gloss": {
+     "está esgotado": "está agotado, no da más",
+     "reajuste": "aumento de la tarifa",
+     "rebater": "refutar",
+     "depreda": "destroza, vandaliza",
+     "dias úteis": "días hábiles",
+     "vagas gratuitas": "lugares de estacionamiento gratis",
+     "engavetar": "cajonear, archivar sin tratar",
+     "ponto de ônibus": "la parada del colectivo"
+    }
    }
   },
   {
@@ -7138,7 +7301,15 @@
       ]
      ]
     ],
-    "model": "Aula mais tarde? O que diz a pesquisa sobre o sono dos adolescentes\n\nUma reportagem publicada recentemente apresenta os resultados de um estudo realizado por pesquisadores de uma universidade pública mineira com cerca de 1.200 alunos do ensino médio. De acordo com o levantamento, os estudantes que têm aula de manhã dormem, nos dias letivos, em média seis horas e quarenta minutos, bem abaixo das oito a dez horas recomendadas para essa idade.\n\nA coordenadora da pesquisa, Beatriz Lacerda, explica que isso não se deve apenas à preguiça ou às telas: na adolescência, o relógio biológico atrasa naturalmente, e o jovem só sente sono perto da meia-noite. O estudo também constatou que os alunos que entram às oito horas ou mais tarde dormem cerca de quarenta minutos a mais. A pesquisadora admite, no entanto, que os dados não permitem afirmar que o horário, sozinho, explique as diferenças de desempenho.\n\nA proposta de atrasar o início das aulas não é consenso. O diretor de uma escola estadual que participou do estudo adverte que muitos alunos trabalham ou cuidam de irmãos à tarde, e representantes de pais lembram que o horário escolar depende do trabalho das famílias e do transporte. Um pediatra, por sua vez, defende que o foco seja o uso do celular à noite; Lacerda reconhece que as telas agravam o problema, mas sustenta que o atraso é biológico.\n\nPor fim, os pesquisadores sugerem experiências-piloto, em vez de uma regra nacional, e recomendam medidas simples: evitar provas nos primeiros horários, reservar as primeiras aulas para atividades menos exigentes e conversar com alunos e famílias sobre a importância do sono."
+    "model": "Aula mais tarde? O que diz a pesquisa sobre o sono dos adolescentes\n\nUma reportagem publicada recentemente apresenta os resultados de um estudo realizado por pesquisadores de uma universidade pública mineira com cerca de 1.200 alunos do ensino médio. De acordo com o levantamento, os estudantes que têm aula de manhã dormem, nos dias letivos, em média seis horas e quarenta minutos, bem abaixo das oito a dez horas recomendadas para essa idade.\n\nA coordenadora da pesquisa, Beatriz Lacerda, explica que isso não se deve apenas à preguiça ou às telas: na adolescência, o relógio biológico atrasa naturalmente, e o jovem só sente sono perto da meia-noite. O estudo também constatou que os alunos que entram às oito horas ou mais tarde dormem cerca de quarenta minutos a mais. A pesquisadora admite, no entanto, que os dados não permitem afirmar que o horário, sozinho, explique as diferenças de desempenho.\n\nA proposta de atrasar o início das aulas não é consenso. O diretor de uma escola estadual que participou do estudo adverte que muitos alunos trabalham ou cuidam de irmãos à tarde, e representantes de pais lembram que o horário escolar depende do trabalho das famílias e do transporte. Um pediatra, por sua vez, defende que o foco seja o uso do celular à noite; Lacerda reconhece que as telas agravam o problema, mas sustenta que o atraso é biológico.\n\nPor fim, os pesquisadores sugerem experiências-piloto, em vez de uma regra nacional, e recomendam medidas simples: evitar provas nos primeiros horários, reservar as primeiras aulas para atividades menos exigentes e conversar com alunos e famílias sobre a importância do sono.",
+    "gloss": {
+     "mineira": "de Minas Gerais",
+     "ensino médio": "la secundaria",
+     "levantamento": "relevamiento",
+     "dias letivos": "días de clase",
+     "por sua vez": "a su vez, por su parte",
+     "experiências-piloto": "pruebas piloto"
+    }
    }
   },
   {
@@ -7493,7 +7664,16 @@
       ]
      ]
     ],
-    "model": "Assunto: Proposta comercial – novo prazo de entrega\n\nPrezado Sr. Otávio Mendes,\n\nEm primeiro lugar, gostaria de pedir desculpas pelo atraso na entrega da nossa proposta e, também, pelo tom inadequado da minha mensagem anterior, que não refletiu o cuidado e a seriedade com que a nossa empresa tem conduzido este projeto, nem o respeito que temos pela sua rede e pela sua equipe.\n\nInformo que a proposta se encontra, no momento, na etapa de validação de custos pelo nosso departamento financeiro. Trata-se de um procedimento necessário para garantirmos que todos os valores apresentados sejam precisos e definitivos, evitando revisões posteriores que poderiam causar novos transtornos à sua equipe.\n\nDiante disso, comprometemo-nos a enviar-lhe a versão final da proposta até a próxima sexta-feira, às 18 horas. Esse prazo já foi confirmado junto ao departamento responsável. Ressalto que a proposta contemplará todos os pontos discutidos em nossa última reunião, incluindo o cronograma de implantação.\n\nAlém disso, gostaríamos de sugerir uma videoconferência na segunda-feira seguinte, em horário de sua conveniência, para apresentarmos a proposta em detalhes e esclarecermos eventuais dúvidas da sua equipe. Caso a data não lhe seja favorável, teremos prazer em propor outras opções.\n\nReitero as nossas desculpas pelo inconveniente e agradeço, desde já, a sua compreensão. Permaneço à disposição para qualquer esclarecimento que se faça necessário, por telefone ou por este endereço de e-mail. Informo, ainda, que a nossa gerente de contas, Renata Campos, está em cópia nesta mensagem e acompanhará pessoalmente as próximas etapas do projeto.\n\nAtenciosamente,\n\nLucas Ferraz\nEstagiário de Atendimento ao Cliente\nAgência Horizonte Digital"
+    "model": "Assunto: Proposta comercial – novo prazo de entrega\n\nPrezado Sr. Otávio Mendes,\n\nEm primeiro lugar, gostaria de pedir desculpas pelo atraso na entrega da nossa proposta e, também, pelo tom inadequado da minha mensagem anterior, que não refletiu o cuidado e a seriedade com que a nossa empresa tem conduzido este projeto, nem o respeito que temos pela sua rede e pela sua equipe.\n\nInformo que a proposta se encontra, no momento, na etapa de validação de custos pelo nosso departamento financeiro. Trata-se de um procedimento necessário para garantirmos que todos os valores apresentados sejam precisos e definitivos, evitando revisões posteriores que poderiam causar novos transtornos à sua equipe.\n\nDiante disso, comprometemo-nos a enviar-lhe a versão final da proposta até a próxima sexta-feira, às 18 horas. Esse prazo já foi confirmado junto ao departamento responsável. Ressalto que a proposta contemplará todos os pontos discutidos em nossa última reunião, incluindo o cronograma de implantação.\n\nAlém disso, gostaríamos de sugerir uma videoconferência na segunda-feira seguinte, em horário de sua conveniência, para apresentarmos a proposta em detalhes e esclarecermos eventuais dúvidas da sua equipe. Caso a data não lhe seja favorável, teremos prazer em propor outras opções.\n\nReitero as nossas desculpas pelo inconveniente e agradeço, desde já, a sua compreensão. Permaneço à disposição para qualquer esclarecimento que se faça necessário, por telefone ou por este endereço de e-mail. Informo, ainda, que a nossa gerente de contas, Renata Campos, está em cópia nesta mensagem e acompanhará pessoalmente as próximas etapas do projeto.\n\nAtenciosamente,\n\nLucas Ferraz\nEstagiário de Atendimento ao Cliente\nAgência Horizonte Digital",
+    "gloss": {
+     "sua rede": "su cadena (de negocios)",
+     "transtornos": "molestias, inconvenientes",
+     "comprometemo-nos a enviar-lhe": "nos comprometemos a enviarle",
+     "junto ao departamento responsável": "con el área responsable",
+     "Ressalto que": "destaco que",
+     "contemplará": "incluirá, abarcará",
+     "está em cópia": "va con copia en este correo"
+    }
    }
   },
   {
@@ -7885,7 +8065,16 @@
       ]
      ]
     ],
-    "model": "O dia em que enfiei o pé na jaca… ou quase\n\nQuando cheguei ao Recife para fazer intercâmbio, achava que o meu português já estava pronto. Afinal, como diz Marta Siqueira na entrevista, uma palavra isolada quase sempre tem equivalente. O problema, descobri logo, eram as expressões.\n\nNa minha segunda semana, uma colega da faculdade me convidou para o aniversário da avó dela, um almoço enorme num sítio em Olinda. No fim da tarde, depois de comer de tudo, ouvi o tio dela comentar, rindo: “Hoje eu enfiei o pé na jaca!”. Como havia uma jaqueira no quintal e várias frutas caídas no chão, entendi ao pé da letra. Fiquei preocupado e perguntei, com toda a seriedade, se ele tinha se machucado e se precisava lavar o pé.\n\nA mesa inteira caiu na gargalhada. A minha colega, com pena de mim, explicou que “enfiar o pé na jaca” significa exagerar, sobretudo na comida ou na bebida. Aí a ficha caiu, e eu quis sumir de vergonha. Senti que tinha pisado na bola na frente da família toda.\n\nMas o tio foi muito simpático: disse que, a partir daquele dia, eu seria o “gringo da jaca” e me ensinou mais umas dez expressões antes do cafezinho. Tomei a decisão de anotar todas num caderno, que guardo até hoje.\n\nEsse episódio me mostrou que Marta tem razão ao dizer que expressão idiomática não se aprende em lista, mas no contexto. Hoje, quando alguém usa uma frase que parece absurda, desconfio antes de entender tudo literalmente. E, sempre que como demais num almoço de domingo, lembro daquele dia e sorrio."
+    "model": "O dia em que enfiei o pé na jaca… ou quase\n\nQuando cheguei ao Recife para fazer intercâmbio, achava que o meu português já estava pronto. Afinal, como diz Marta Siqueira na entrevista, uma palavra isolada quase sempre tem equivalente. O problema, descobri logo, eram as expressões.\n\nNa minha segunda semana, uma colega da faculdade me convidou para o aniversário da avó dela, um almoço enorme num sítio em Olinda. No fim da tarde, depois de comer de tudo, ouvi o tio dela comentar, rindo: “Hoje eu enfiei o pé na jaca!”. Como havia uma jaqueira no quintal e várias frutas caídas no chão, entendi ao pé da letra. Fiquei preocupado e perguntei, com toda a seriedade, se ele tinha se machucado e se precisava lavar o pé.\n\nA mesa inteira caiu na gargalhada. A minha colega, com pena de mim, explicou que “enfiar o pé na jaca” significa exagerar, sobretudo na comida ou na bebida. Aí a ficha caiu, e eu quis sumir de vergonha. Senti que tinha pisado na bola na frente da família toda.\n\nMas o tio foi muito simpático: disse que, a partir daquele dia, eu seria o “gringo da jaca” e me ensinou mais umas dez expressões antes do cafezinho. Tomei a decisão de anotar todas num caderno, que guardo até hoje.\n\nEsse episódio me mostrou que Marta tem razão ao dizer que expressão idiomática não se aprende em lista, mas no contexto. Hoje, quando alguém usa uma frase que parece absurda, desconfio antes de entender tudo literalmente. E, sempre que como demais num almoço de domingo, lembro daquele dia e sorrio.",
+    "gloss": {
+     "sítio": "quinta, casa de campo (falso amigo)",
+     "jaqueira": "el árbol de la jaca, una fruta tropical enorme",
+     "ao pé da letra": "al pie de la letra, literalmente",
+     "caiu na gargalhada": "estalló en carcajadas",
+     "com pena de mim": "con lástima de mí",
+     "quis sumir de vergonha": "quise que me tragara la tierra",
+     "gringo": "extranjero, cualquiera que sea de afuera"
+    }
    }
   },
   {
@@ -8230,7 +8419,17 @@
       ]
      ]
     ],
-    "model": "Um centro para quem?\n\nQuem passa pela nossa região depois das sete da noite conhece a cena: lojas fechadas, faixas de “aluga-se” desbotadas e prédios inteiros com as janelas apagadas. Não por acaso, a transformação desses edifícios em moradia, o chamado retrofit, virou tema de reportagens, palestras e conversas de calçada. A pergunta que precisamos fazer, porém, não é apenas se o centro vai voltar a ter moradores, mas quem serão esses moradores.\n\nOs argumentos a favor são fortes. Como lembra a arquiteta Camila Rocha, ouvida numa reportagem recente, se os prédios voltarem a ser habitados, a rua volta a ter gente e a sensação de insegurança diminui. Além disso, como explicou o urbanista Henrique Tavares numa palestra aqui no bairro, reformar costuma ser mais sustentável do que demolir, porque aproveita uma estrutura que já existe e preserva a memória da cidade.\n\nO risco, contudo, é real. Se os incentivos públicos servirem apenas para que grandes incorporadoras vendam apartamentos pequenos e caros, teremos trocado um centro vazio por um centro exclusivo. Dona Cida, moradora de um prédio ocupado, resumiu bem o problema: sem cuidado, não haverá revitalização, e sim substituição.\n\nPor isso, defendo três medidas. Primeiro, que uma parte das unidades reformadas seja obrigatoriamente destinada à habitação social, inclusive por meio de programas de aluguel social. Segundo, que os moradores atuais, das ocupações e dos cortiços, sejam ouvidos antes de qualquer projeto, e não depois. Terceiro, que o térreo dos prédios continue sendo comércio, com fachadas ativas, para os comerciantes da nossa rua fazerem parte da solução.\n\nO centro nunca esteve realmente vazio. Cabe a nós garantir que a sua nova vida inclua quem nunca o abandonou."
+    "model": "Um centro para quem?\n\nQuem passa pela nossa região depois das sete da noite conhece a cena: lojas fechadas, faixas de “aluga-se” desbotadas e prédios inteiros com as janelas apagadas. Não por acaso, a transformação desses edifícios em moradia, o chamado retrofit, virou tema de reportagens, palestras e conversas de calçada. A pergunta que precisamos fazer, porém, não é apenas se o centro vai voltar a ter moradores, mas quem serão esses moradores.\n\nOs argumentos a favor são fortes. Como lembra a arquiteta Camila Rocha, ouvida numa reportagem recente, se os prédios voltarem a ser habitados, a rua volta a ter gente e a sensação de insegurança diminui. Além disso, como explicou o urbanista Henrique Tavares numa palestra aqui no bairro, reformar costuma ser mais sustentável do que demolir, porque aproveita uma estrutura que já existe e preserva a memória da cidade.\n\nO risco, contudo, é real. Se os incentivos públicos servirem apenas para que grandes incorporadoras vendam apartamentos pequenos e caros, teremos trocado um centro vazio por um centro exclusivo. Dona Cida, moradora de um prédio ocupado, resumiu bem o problema: sem cuidado, não haverá revitalização, e sim substituição.\n\nPor isso, defendo três medidas. Primeiro, que uma parte das unidades reformadas seja obrigatoriamente destinada à habitação social, inclusive por meio de programas de aluguel social. Segundo, que os moradores atuais, das ocupações e dos cortiços, sejam ouvidos antes de qualquer projeto, e não depois. Terceiro, que o térreo dos prédios continue sendo comércio, com fachadas ativas, para os comerciantes da nossa rua fazerem parte da solução.\n\nO centro nunca esteve realmente vazio. Cabe a nós garantir que a sua nova vida inclua quem nunca o abandonou.",
+    "gloss": {
+     "faixas": "carteles de tela, pasacalles",
+     "desbotadas": "descoloridas",
+     "conversas de calçada": "charlas de vereda",
+     "incorporadoras": "empresas desarrolladoras inmobiliarias",
+     "prédio ocupado": "edificio tomado por familias sin vivienda",
+     "cortiços": "conventillos",
+     "térreo": "planta baja",
+     "Cabe a nós": "nos toca a nosotros"
+    }
    }
   }
  ]

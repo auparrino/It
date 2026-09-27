@@ -453,7 +453,13 @@
       ]
      ]
     ],
-    "model": "Gentile Redazione,\n\nho letto con grande piacere il reportage sullo struscio di Casalbianco e, sinceramente, mi sono commosso. Sono argentino, vivo a Bologna da due anni, e leggendo l'articolo ho pensato immediatamente alla mia città, Rosario.\n\nDa noi non si chiama struscio, ma il rito è molto simile: la domenica pomeriggio le famiglie camminano lentamente lungo il fiume, bevono il mate, si fermano a salutare i vicini. Nessuno ha fretta e nessuno va veramente da qualche parte.\n\nSono completamente d'accordo con la conclusione dell'autore: in un mondo che cambia così rapidamente, abbiamo bisogno di luoghi dove riconoscerci. Aggiungerei solo una cosa: non credo che i telefoni siano il vero pericolo. Il pericolo è la fretta, che ci impedisce di perdere tempo insieme.\n\nGrazie per questo bel pezzo, che mi ha fatto sentire un po' meno lontano da casa.\n\nCordiali saluti,\nMartín Paredes, Bologna"
+    "model": "Gentile Redazione,\n\nho letto con grande piacere il reportage sullo struscio di Casalbianco e, sinceramente, mi sono commosso. Sono argentino, vivo a Bologna da due anni, e leggendo l'articolo ho pensato immediatamente alla mia città, Rosario.\n\nDa noi non si chiama struscio, ma il rito è molto simile: la domenica pomeriggio le famiglie camminano lentamente lungo il fiume, bevono il mate, si fermano a salutare i vicini. Nessuno ha fretta e nessuno va veramente da qualche parte.\n\nSono completamente d'accordo con la conclusione dell'autore: in un mondo che cambia così rapidamente, abbiamo bisogno di luoghi dove riconoscerci. Aggiungerei solo una cosa: non credo che i telefoni siano il vero pericolo. Il pericolo è la fretta, che ci impedisce di perdere tempo insieme.\n\nGrazie per questo bel pezzo, che mi ha fatto sentire un po' meno lontano da casa.\n\nCordiali saluti,\nMartín Paredes, Bologna",
+    "gloss": {
+     "Da noi": "en mi país, entre nosotros (da + pronombre = en lo de, en casa de)",
+     "riconoscerci": "reconocernos",
+     "bel pezzo": "lindo artículo, linda nota (pezzo = texto periodístico)",
+     "mi ha fatto sentire": "me hizo sentir (fare + infinitivo, el causativo: se ve en la semana 40)"
+    }
    }
   },
   {
@@ -775,7 +781,16 @@
       ]
      ]
     ],
-    "model": "L'articolo analizza il fenomeno delle case vendute a un euro nei piccoli borghi italiani e si chiede se queste iniziative abbiano davvero salvato i paesi dallo spopolamento.\n\nInnanzitutto, l'autore chiarisce che il prezzo simbolico è ingannevole: chi compra deve ristrutturare entro pochi anni, spesso con spese molto alte, e infatti diversi acquirenti hanno rinunciato. Tuttavia, riconosce che in alcuni borghi l'iniziativa ha prodotto risultati positivi, anche grazie alla diffusione del lavoro da remoto, che permette di vivere lontano dalle città.\n\nSecondo l'autore, però, il nodo centrale non sono le case ma i servizi: senza scuole, medici e trasporti nessuna famiglia si trasferisce. Inoltre, se i paesi si riempiono solo di seconde case, rischiano di diventare scenografie vuote.\n\nIn conclusione, l'articolo riconosce alle case a un euro il merito di aver attirato l'attenzione sulle aree interne, ma sostiene che ora servano politiche pazienti e concrete."
+    "model": "L'articolo analizza il fenomeno delle case vendute a un euro nei piccoli borghi italiani e si chiede se queste iniziative abbiano davvero salvato i paesi dallo spopolamento.\n\nInnanzitutto, l'autore chiarisce che il prezzo simbolico è ingannevole: chi compra deve ristrutturare entro pochi anni, spesso con spese molto alte, e infatti diversi acquirenti hanno rinunciato. Tuttavia, riconosce che in alcuni borghi l'iniziativa ha prodotto risultati positivi, anche grazie alla diffusione del lavoro da remoto, che permette di vivere lontano dalle città.\n\nSecondo l'autore, però, il nodo centrale non sono le case ma i servizi: senza scuole, medici e trasporti nessuna famiglia si trasferisce. Inoltre, se i paesi si riempiono solo di seconde case, rischiano di diventare scenografie vuote.\n\nIn conclusione, l'articolo riconosce alle case a un euro il merito di aver attirato l'attenzione sulle aree interne, ma sostiene che ora servano politiche pazienti e concrete.",
+    "gloss": {
+     "borghi": "pueblos antiguos, pueblitos históricos",
+     "abbiano davvero salvato": "hayan salvado realmente (congiuntivo passato: se ve en la semana 29)",
+     "ingannevole": "engañoso",
+     "acquirenti": "compradores",
+     "il nodo centrale": "el punto clave, el meollo",
+     "scenografie vuote": "decorados vacíos, escenografías",
+     "aree interne": "las zonas del interior, lejos de la costa y de las ciudades"
+    }
    }
   },
   {
@@ -1077,7 +1092,13 @@
       ]
      ]
     ],
-    "model": "Chiudere i centri storici alle auto: una scelta giusta?\n\nL'esperienza di Valmarina, raccontata da un editoriale e da un confronto radiofonico, mostra bene i due volti della pedonalizzazione. Da un lato, i vantaggi sono evidenti: l'aria è più pulita, il rumore è diminuito e le piazze sono tornate ai cittadini. Dall'altro, i costi sono ricaduti su chi era più fragile: i commercianti che dipendevano dai clienti in auto e gli anziani che non potevano più raggiungere il medico.\n\nA mio parere, la scelta di chiudere il centro è giusta, ma credo che il Comune abbia commesso un errore di metodo. Sembra che abbia pensato prima al progetto e solo dopo alle persone: le navette e i parcheggi esterni sono arrivati in ritardo, e i negozi non hanno ricevuto alcun aiuto.\n\nPer questo propongo che le città che vogliono seguire questa strada preparino prima i servizi e prevedano sgravi fiscali per i commercianti durante la transizione. Solo così una buona idea può diventare una buona politica."
+    "model": "Chiudere i centri storici alle auto: una scelta giusta?\n\nL'esperienza di Valmarina, raccontata da un editoriale e da un confronto radiofonico, mostra bene i due volti della pedonalizzazione. Da un lato, i vantaggi sono evidenti: l'aria è più pulita, il rumore è diminuito e le piazze sono tornate ai cittadini. Dall'altro, i costi sono ricaduti su chi era più fragile: i commercianti che dipendevano dai clienti in auto e gli anziani che non potevano più raggiungere il medico.\n\nA mio parere, la scelta di chiudere il centro è giusta, ma credo che il Comune abbia commesso un errore di metodo. Sembra che abbia pensato prima al progetto e solo dopo alle persone: le navette e i parcheggi esterni sono arrivati in ritardo, e i negozi non hanno ricevuto alcun aiuto.\n\nPer questo propongo che le città che vogliono seguire questa strada preparino prima i servizi e prevedano sgravi fiscali per i commercianti durante la transizione. Solo così una buona idea può diventare una buona politica.",
+    "gloss": {
+     "Da un lato": "por un lado (…dall'altro = por el otro)",
+     "sono ricaduti su": "recayeron sobre",
+     "navette": "combis, servicios de traslado",
+     "sgravi fiscali": "rebajas de impuestos"
+    }
    }
   },
   {
@@ -1405,7 +1426,16 @@
       ]
      ]
     ],
-    "model": "Prima di condividere, fermati un attimo\n\nChi di noi non ha mai inoltrato una notizia senza leggerla fino in fondo? La docuserie «Condiviso» mostra quanto possa costare questo gesto: una bugia su un sindaco che avrebbe vietato i matrimoni di venerdì ha fatto il giro del Paese, e un uomo innocente ha ricevuto insulti per settimane. Nessuno pensava che valesse la pena controllarla, perché sembrava piccola e divertente.\n\nIl problema non riguarda solo i lettori. Anche le redazioni, spinte dalla fretta, rischiano di pubblicare contenuti falsi. In una conversazione tra giornalisti che ho ascoltato, un video di un incendio sembrava verissimo, ma era stato girato in Grecia tre anni prima.\n\nChe cosa possiamo fare, allora? Ecco due consigli semplici. Primo: prima di condividere, chiediamoci chi ha pubblicato la notizia e se altre fonti affidabili la confermano. Secondo: guardiamo i dettagli, come le insegne, le date, la lingua. Spesso bastano due minuti per scoprire un falso.\n\nSe tutti lo facessimo, la rete sarebbe un posto molto più pulito."
+    "model": "Prima di condividere, fermati un attimo\n\nChi di noi non ha mai inoltrato una notizia senza leggerla fino in fondo? La docuserie «Condiviso» mostra quanto possa costare questo gesto: una bugia su un sindaco che avrebbe vietato i matrimoni di venerdì ha fatto il giro del Paese, e un uomo innocente ha ricevuto insulti per settimane. Nessuno pensava che valesse la pena controllarla, perché sembrava piccola e divertente.\n\nIl problema non riguarda solo i lettori. Anche le redazioni, spinte dalla fretta, rischiano di pubblicare contenuti falsi. In una conversazione tra giornalisti che ho ascoltato, un video di un incendio sembrava verissimo, ma era stato girato in Grecia tre anni prima.\n\nChe cosa possiamo fare, allora? Ecco due consigli semplici. Primo: prima di condividere, chiediamoci chi ha pubblicato la notizia e se altre fonti affidabili la confermano. Secondo: guardiamo i dettagli, come le insegne, le date, la lingua. Spesso bastano due minuti per scoprire un falso.\n\nSe tutti lo facessimo, la rete sarebbe un posto molto più pulito.",
+    "gloss": {
+     "fermati un attimo": "pará un momento",
+     "inoltrato": "reenviado",
+     "fino in fondo": "hasta el final",
+     "avrebbe vietato": "habría prohibido, supuestamente prohibió (condizionale passato para una noticia no confirmada: se ve en la semana 31)",
+     "ha fatto il giro del Paese": "recorrió todo el país, se hizo viral",
+     "era stato girato": "había sido filmado (voz pasiva: se ve en la semana 35)",
+     "insegne": "carteles de los negocios"
+    }
    }
   },
   {
@@ -1731,7 +1761,17 @@
       ]
      ]
     ],
-    "model": "Oggetto: mancato rinnovo del contratto con il cliente di Verona\n\nGentile Direttore,\n\ncome richiesto, le invio una breve analisi di quanto accaduto con il cliente di Verona, che ha deciso di non rinnovare il contratto.\n\n1. I fatti. Il software è stato consegnato con due mesi di ritardo e con circa metà delle funzioni previste. A settembre eravamo convinti che il cliente avrebbe firmato il rinnovo; questa previsione si è rivelata troppo ottimistica.\n\n2. Le cause. In primo luogo, la stima dei tempi era sbagliata. In secondo luogo, la comunicazione tra i team non ha funzionato: già a luglio era stato segnalato un possibile ritardo, ma nessuno ha approfondito. Con il senno di poi, avremmo dovuto rimandare la consegna e avvisare il cliente per tempo. Infine, abbiamo promesso più di quanto potessimo realizzare.\n\n3. Proposte. Proponiamo riunioni di controllo settimanali nelle fasi finali dei progetti e la registrazione per iscritto di ogni segnalazione di rischio.\n\nRestiamo a disposizione per discuterne.\n\nCordiali saluti,\nSonia Ferri"
+    "model": "Oggetto: mancato rinnovo del contratto con il cliente di Verona\n\nGentile Direttore,\n\ncome richiesto, le invio una breve analisi di quanto accaduto con il cliente di Verona, che ha deciso di non rinnovare il contratto.\n\n1. I fatti. Il software è stato consegnato con due mesi di ritardo e con circa metà delle funzioni previste. A settembre eravamo convinti che il cliente avrebbe firmato il rinnovo; questa previsione si è rivelata troppo ottimistica.\n\n2. Le cause. In primo luogo, la stima dei tempi era sbagliata. In secondo luogo, la comunicazione tra i team non ha funzionato: già a luglio era stato segnalato un possibile ritardo, ma nessuno ha approfondito. Con il senno di poi, avremmo dovuto rimandare la consegna e avvisare il cliente per tempo. Infine, abbiamo promesso più di quanto potessimo realizzare.\n\n3. Proposte. Proponiamo riunioni di controllo settimanali nelle fasi finali dei progetti e la registrazione per iscritto di ogni segnalazione di rischio.\n\nRestiamo a disposizione per discuterne.\n\nCordiali saluti,\nSonia Ferri",
+    "gloss": {
+     "mancato rinnovo": "falta de renovación, no renovación",
+     "si è rivelata": "resultó ser",
+     "era stato segnalato": "se había advertido, había sido señalado (voz pasiva: se ve en la semana 35)",
+     "nessuno ha approfondito": "nadie lo investigó a fondo",
+     "Con il senno di poi": "visto ahora, con lo que sabemos después",
+     "avremmo dovuto rimandare": "tendríamos que haber postergado",
+     "per iscritto": "por escrito",
+     "Restiamo a disposizione": "quedamos a disposición"
+    }
    }
   },
   {
@@ -2050,7 +2090,15 @@
       ]
      ]
     ],
-    "model": "«La casa di via Roma»: un viaggio all'indietro\n\nIl racconto narra la storia di un giovane argentino che, dopo aver ottenuto la cittadinanza italiana, decide di visitare Pietrafonda, il paesino italiano che suo nonno aveva lasciato nel 1951. Il ragazzo cerca una casa con la porta verde e un mare che, a quanto pare, dal paese non si vede. Non svelo che cosa trova: dico solo che la risposta è più sorprendente, e più tenera, di quanto il lettore si aspetti.\n\nI personaggi sono pochi ma ben costruiti. Nunziata, l'anziana che accoglie il protagonista, è indimenticabile: ironica, generosa, custode della memoria del paese. Il nonno, anche se è assente, è la presenza più forte del testo.\n\nLo stile è semplice e preciso, senza sentimentalismi. L'autore usa pochi dettagli, come una valigia di cartone o un piatto di fichi promesso, per evocare un mondo intero.\n\nConsiglio questo racconto a chiunque abbia radici lontane, e in particolare ai discendenti degli emigranti in America Latina: molti ci ritroveranno la storia della propria famiglia. Per me è stata una lettura davvero commovente."
+    "model": "«La casa di via Roma»: un viaggio all'indietro\n\nIl racconto narra la storia di un giovane argentino che, dopo aver ottenuto la cittadinanza italiana, decide di visitare Pietrafonda, il paesino italiano che suo nonno aveva lasciato nel 1951. Il ragazzo cerca una casa con la porta verde e un mare che, a quanto pare, dal paese non si vede. Non svelo che cosa trova: dico solo che la risposta è più sorprendente, e più tenera, di quanto il lettore si aspetti.\n\nI personaggi sono pochi ma ben costruiti. Nunziata, l'anziana che accoglie il protagonista, è indimenticabile: ironica, generosa, custode della memoria del paese. Il nonno, anche se è assente, è la presenza più forte del testo.\n\nLo stile è semplice e preciso, senza sentimentalismi. L'autore usa pochi dettagli, come una valigia di cartone o un piatto di fichi promesso, per evocare un mondo intero.\n\nConsiglio questo racconto a chiunque abbia radici lontane, e in particolare ai discendenti degli emigranti in America Latina: molti ci ritroveranno la storia della propria famiglia. Per me è stata una lettura davvero commovente.",
+    "gloss": {
+     "Non svelo": "no revelo, no cuento",
+     "a quanto pare": "por lo visto, según parece",
+     "tenera": "tierna",
+     "custode": "guardiana",
+     "fichi": "higos",
+     "ci ritroveranno": "van a encontrar ahí (ci = en el cuento)"
+    }
    }
   },
   {
@@ -2401,7 +2449,17 @@
       ]
      ]
     ],
-    "model": "Spettabile Ufficio del Personale,\n\nvi ringrazio per la proposta di lavoro come responsabile acquisti che mi avete inviato la settimana scorsa. Sono molto interessata alla posizione e all'idea di contribuire alla crescita della vostra azienda.\n\nPrima di prendere una decisione definitiva, tuttavia, vorrei chiarire alcuni aspetti, dal momento che accettare significherebbe trasferirmi da Bari a Milano.\n\nIn primo luogo, il contratto proposto ha una durata di due anni. Vi sarei grata se poteste indicarmi quali sono, in concreto, le possibilità di stabilizzazione alla scadenza e secondo quali criteri verrebbero valutate.\n\nIn secondo luogo, vorrei sapere se l'azienda prevede un contributo per le spese di trasferimento o un aiuto nella ricerca di un alloggio. Se così fosse, la mia decisione sarebbe senz'altro più semplice.\n\nInfine, vi chiedo se sia possibile svolgere una parte dell'attività a distanza, per esempio uno o due giorni alla settimana.\n\nSe le condizioni lo permetteranno, sarò felice di iniziare già dal mese prossimo. Resto in attesa di un vostro gentile riscontro.\n\nDistinti saluti,\nGiorgia Lamanna"
+    "model": "Spettabile Ufficio del Personale,\n\nvi ringrazio per la proposta di lavoro come responsabile acquisti che mi avete inviato la settimana scorsa. Sono molto interessata alla posizione e all'idea di contribuire alla crescita della vostra azienda.\n\nPrima di prendere una decisione definitiva, tuttavia, vorrei chiarire alcuni aspetti, dal momento che accettare significherebbe trasferirmi da Bari a Milano.\n\nIn primo luogo, il contratto proposto ha una durata di due anni. Vi sarei grata se poteste indicarmi quali sono, in concreto, le possibilità di stabilizzazione alla scadenza e secondo quali criteri verrebbero valutate.\n\nIn secondo luogo, vorrei sapere se l'azienda prevede un contributo per le spese di trasferimento o un aiuto nella ricerca di un alloggio. Se così fosse, la mia decisione sarebbe senz'altro più semplice.\n\nInfine, vi chiedo se sia possibile svolgere una parte dell'attività a distanza, per esempio uno o due giorni alla settimana.\n\nSe le condizioni lo permetteranno, sarò felice di iniziare già dal mese prossimo. Resto in attesa di un vostro gentile riscontro.\n\nDistinti saluti,\nGiorgia Lamanna",
+    "gloss": {
+     "Spettabile": "fórmula de saludo a una empresa u oficina: «De mi consideración»",
+     "dal momento che": "dado que, ya que (se ve en la semana 49)",
+     "stabilizzazione": "pase a planta permanente, contrato por tiempo indeterminado",
+     "alla scadenza": "al vencimiento (del contrato)",
+     "Vi sarei grata se poteste": "les agradecería que pudieran (se + congiuntivo imperfetto)",
+     "alloggio": "vivienda, alojamiento",
+     "senz'altro": "sin duda",
+     "riscontro": "respuesta"
+    }
    }
   },
   {
@@ -2739,7 +2797,14 @@
       ]
      ]
     ],
-    "model": "Ciao Fede,\n\nquanto tempo! Ti scrivo perché ieri sera ho letto un articolo che mi ha fatto pensare subito a te. Parlava delle «amicizie in pausa», cioè di quei rapporti che nessuno ha deciso di chiudere ma che, un po' alla volta, si spengono per mancanza di tempo. E mi sono reso conto che la nostra è proprio una di quelle.\n\nNon c'è stato nessun litigio, lo so. Semplicemente io mi sono trasferito a Torino per lavoro, tu hai avuto la bambina, e i messaggi sono diventati sempre più rari. Ogni tanto pensavo di chiamarti, poi rimandavo, e intanto passavano i mesi.\n\nTi ricordi l'estate in cui abbiamo attraversato la Sicilia con quella Panda a cui non funzionava l'aria condizionata? Ancora oggi è il viaggio di cui parlo di più, e tu sei l'amico con il quale ho riso di più in vita mia.\n\nAllora ti propongo una cosa semplice: una videochiamata la prima domenica di ogni mese, anche solo mezz'ora. E a dicembre, quando torno a Bari, una cena vera, solo noi due.\n\nChe ne dici? Rispondimi quando puoi, senza fretta.\n\nUn abbraccio forte,\nPaolo"
+    "model": "Ciao Fede,\n\nquanto tempo! Ti scrivo perché ieri sera ho letto un articolo che mi ha fatto pensare subito a te. Parlava delle «amicizie in pausa», cioè di quei rapporti che nessuno ha deciso di chiudere ma che, un po' alla volta, si spengono per mancanza di tempo. E mi sono reso conto che la nostra è proprio una di quelle.\n\nNon c'è stato nessun litigio, lo so. Semplicemente io mi sono trasferito a Torino per lavoro, tu hai avuto la bambina, e i messaggi sono diventati sempre più rari. Ogni tanto pensavo di chiamarti, poi rimandavo, e intanto passavano i mesi.\n\nTi ricordi l'estate in cui abbiamo attraversato la Sicilia con quella Panda a cui non funzionava l'aria condizionata? Ancora oggi è il viaggio di cui parlo di più, e tu sei l'amico con il quale ho riso di più in vita mia.\n\nAllora ti propongo una cosa semplice: una videochiamata la prima domenica di ogni mese, anche solo mezz'ora. E a dicembre, quando torno a Bari, una cena vera, solo noi due.\n\nChe ne dici? Rispondimi quando puoi, senza fretta.\n\nUn abbraccio forte,\nPaolo",
+    "gloss": {
+     "quanto tempo!": "¡tanto tiempo!",
+     "si spengono": "se apagan",
+     "Ogni tanto": "de vez en cuando",
+     "rimandavo": "lo postergaba, lo iba dejando",
+     "Che ne dici?": "¿qué te parece?"
+    }
    }
   },
   {
@@ -3078,7 +3143,17 @@
       ]
      ]
     ],
-    "model": "Gentile Assessore,\n\nmi chiamo Lucía Romero e abito da tre anni nel quartiere di San Rocco, attraversato dal torrente Brembiolo. Le scrivo perché le condizioni del torrente sono ormai preoccupanti: le rive vengono usate come discarica, l'acqua è torbida e d'estate l'odore è insopportabile. Il sentiero che lo costeggia, un tempo frequentato da famiglie e sportivi, è stato di fatto abbandonato.\n\nDi recente ho letto un reportage sul lago di Vallombra, in Trentino, che in dieci anni è stato risanato grazie a un consorzio in cui erano rappresentati il Comune, gli agricoltori, i pescatori e le associazioni. Credo che quell'esperienza contenga alcune idee utili anche per noi.\n\nVorrei quindi proporLe due misure. In primo luogo, potrebbe essere creato un tavolo permanente con i residenti, le aziende della zona e i volontari, perché le regole vanno decise insieme a chi dovrà rispettarle. In secondo luogo, i dati sulla qualità dell'acqua dovrebbero essere pubblicati regolarmente, in un linguaggio comprensibile a tutti: solo così la fiducia dei cittadini può essere riconquistata.\n\nSono disponibile, insieme ad altri vicini, a collaborare all'organizzazione di una prima giornata di pulizia delle rive.\n\nIn attesa di un Suo cortese riscontro, Le porgo distinti saluti.\n\nLucía Romero"
+    "model": "Gentile Assessore,\n\nmi chiamo Lucía Romero e abito da tre anni nel quartiere di San Rocco, attraversato dal torrente Brembiolo. Le scrivo perché le condizioni del torrente sono ormai preoccupanti: le rive vengono usate come discarica, l'acqua è torbida e d'estate l'odore è insopportabile. Il sentiero che lo costeggia, un tempo frequentato da famiglie e sportivi, è stato di fatto abbandonato.\n\nDi recente ho letto un reportage sul lago di Vallombra, in Trentino, che in dieci anni è stato risanato grazie a un consorzio in cui erano rappresentati il Comune, gli agricoltori, i pescatori e le associazioni. Credo che quell'esperienza contenga alcune idee utili anche per noi.\n\nVorrei quindi proporLe due misure. In primo luogo, potrebbe essere creato un tavolo permanente con i residenti, le aziende della zona e i volontari, perché le regole vanno decise insieme a chi dovrà rispettarle. In secondo luogo, i dati sulla qualità dell'acqua dovrebbero essere pubblicati regolarmente, in un linguaggio comprensibile a tutti: solo così la fiducia dei cittadini può essere riconquistata.\n\nSono disponibile, insieme ad altri vicini, a collaborare all'organizzazione di una prima giornata di pulizia delle rive.\n\nIn attesa di un Suo cortese riscontro, Le porgo distinti saluti.\n\nLucía Romero",
+    "gloss": {
+     "Assessore": "funcionario municipal a cargo de un área (secretario, concejal)",
+     "torrente": "arroyo",
+     "discarica": "basural",
+     "torbida": "turbia",
+     "costeggia": "bordea, corre al lado de",
+     "di fatto": "en la práctica",
+     "risanato": "saneado",
+     "tavolo permanente": "mesa de trabajo permanente"
+    }
    }
   },
   {
@@ -3429,7 +3504,15 @@
       ]
      ]
     ],
-    "model": "Buenos Aires: si vive ancora a San Telmo?\n\nQualche giorno fa ho letto un editoriale italiano che invitava a guardare i citofoni dei centri storici: dove prima si leggevano cognomi, oggi si trovano codici e cassette per le chiavi. Ho fatto la prova nel mio quartiere, San Telmo, e il risultato mi ha fatto pensare.\n\nSan Telmo è uno dei quartieri più antichi di Buenos Aires. La domenica si riempie di turisti per la fiera dell'antiquariato, e negli ultimi anni molti appartamenti si affittano a notte. Come in Italia, gli affitti per chi ci lavora sono aumentati e alcune botteghe storiche hanno chiuso. Nel mio palazzo, su dodici campanelli, quattro non hanno più un nome.\n\nSecondo me, però, il problema non si risolve soltanto con i divieti. Mi ha convinto di più un podcast in cui si discuteva delle panchine tolte da una piazza: gli spazi si difendono vivendoli, non svuotandoli. Una piazza piena di vicini, di bambini e di anziani seduti al sole si controlla quasi da sola.\n\nPer questo credo che si dovrebbero sostenere i residenti, per esempio con affitti agevolati per chi ci abita tutto l'anno, e che le decisioni sul quartiere si dovrebbero prendere insieme a chi lo vive ogni giorno. Un quartiere non è una cartolina: è una casa."
+    "model": "Buenos Aires: si vive ancora a San Telmo?\n\nQualche giorno fa ho letto un editoriale italiano che invitava a guardare i citofoni dei centri storici: dove prima si leggevano cognomi, oggi si trovano codici e cassette per le chiavi. Ho fatto la prova nel mio quartiere, San Telmo, e il risultato mi ha fatto pensare.\n\nSan Telmo è uno dei quartieri più antichi di Buenos Aires. La domenica si riempie di turisti per la fiera dell'antiquariato, e negli ultimi anni molti appartamenti si affittano a notte. Come in Italia, gli affitti per chi ci lavora sono aumentati e alcune botteghe storiche hanno chiuso. Nel mio palazzo, su dodici campanelli, quattro non hanno più un nome.\n\nSecondo me, però, il problema non si risolve soltanto con i divieti. Mi ha convinto di più un podcast in cui si discuteva delle panchine tolte da una piazza: gli spazi si difendono vivendoli, non svuotandoli. Una piazza piena di vicini, di bambini e di anziani seduti al sole si controlla quasi da sola.\n\nPer questo credo che si dovrebbero sostenere i residenti, per esempio con affitti agevolati per chi ci abita tutto l'anno, e che le decisioni sul quartiere si dovrebbero prendere insieme a chi lo vive ogni giorno. Un quartiere non è una cartolina: è una casa.",
+    "gloss": {
+     "citofoni": "porteros eléctricos",
+     "cassette per le chiavi": "cajitas con candado para dejar las llaves (de los alquileres temporarios)",
+     "Ho fatto la prova": "hice la prueba",
+     "si affittano a notte": "se alquilan por noche",
+     "botteghe storiche": "negocios tradicionales, de toda la vida",
+     "affitti agevolati": "alquileres con precio subsidiado"
+    }
    }
   },
   {
@@ -3794,7 +3877,15 @@
       ]
      ]
     ],
-    "model": "Una storia piccola per un giorno grande\n\nQuesto mese il nostro gruppo ha letto «Il primo voto», un racconto breve ambientato il 2 giugno 1946, il giorno del referendum tra monarchia e repubblica. A raccontare è un nipote che ricorda la storia della nonna Teresa, una giovane madre di paese che quel giorno votò per la prima volta a un'elezione nazionale.\n\nLa trama è semplice: Teresa si prepara con cura, va al seggio con la cognata Rosa, aspetta in una lunga fila di donne e vota. Non succede niente di straordinario, eppure ogni gesto pesa. La scena che mi è piaciuta di più è quella della cabina: quando Teresa piega la scheda «come si piega una lettera d'amore», il lettore capisce quanto fosse importante per lei quel momento.\n\nLo stile è sobrio, quasi da cronaca familiare, e il passato remoto dà al racconto il tono di una storia tramandata. Il finale, con il certificato elettorale nascosto in un libro di preghiere, commuove senza essere retorico. L'unico limite, secondo me, è che gli altri personaggi, come il marito, restano un po' sullo sfondo.\n\nConsiglio questo racconto a chi pensa che la storia sia fatta solo di grandi nomi e di grandi battaglie: qui si scopre che è fatta anche di mani che tremano davanti a una matita."
+    "model": "Una storia piccola per un giorno grande\n\nQuesto mese il nostro gruppo ha letto «Il primo voto», un racconto breve ambientato il 2 giugno 1946, il giorno del referendum tra monarchia e repubblica. A raccontare è un nipote che ricorda la storia della nonna Teresa, una giovane madre di paese che quel giorno votò per la prima volta a un'elezione nazionale.\n\nLa trama è semplice: Teresa si prepara con cura, va al seggio con la cognata Rosa, aspetta in una lunga fila di donne e vota. Non succede niente di straordinario, eppure ogni gesto pesa. La scena che mi è piaciuta di più è quella della cabina: quando Teresa piega la scheda «come si piega una lettera d'amore», il lettore capisce quanto fosse importante per lei quel momento.\n\nLo stile è sobrio, quasi da cronaca familiare, e il passato remoto dà al racconto il tono di una storia tramandata. Il finale, con il certificato elettorale nascosto in un libro di preghiere, commuove senza essere retorico. L'unico limite, secondo me, è che gli altri personaggi, come il marito, restano un po' sullo sfondo.\n\nConsiglio questo racconto a chi pensa che la storia sia fatta solo di grandi nomi e di grandi battaglie: qui si scopre che è fatta anche di mani che tremano davanti a una matita.",
+    "gloss": {
+     "cognata": "cuñada",
+     "seggio": "lugar de votación, mesa electoral",
+     "scheda": "boleta (de votación)",
+     "pesa": "tiene peso, importa",
+     "tramandata": "transmitida de generación en generación",
+     "restano un po' sullo sfondo": "quedan medio en segundo plano"
+    }
    }
   },
   {
@@ -4150,7 +4241,15 @@
       ]
      ]
     ],
-    "model": "Roccavecchia: come si riporta la vita in un paese di montagna\n\nIn una recente intervista Marta Colasanti, sindaca di Roccavecchia, piccolo comune dell'Appennino molisano, ha raccontato come in cinque anni il paese sia passato da circa trecento a quasi quattrocento abitanti.\n\nLa sindaca ha spiegato che tutto era cominciato da un giro per il centro storico, dove aveva contato più di cento case vuote. Si era chiesta perché dovessero restare chiuse mentre in città i giovani non trovavano casa, e da lì erano nati un censimento delle abitazioni e un accordo con i proprietari. Ha precisato che le case non erano state regalate: erano state affittate a prezzi bassi a chi si impegnava a ristrutturarle e a restare almeno tre anni.\n\nColasanti ha ammesso che all'inizio non erano mancate le difficoltà, soprattutto la diffidenza di alcuni anziani, che secondo lei avevano paura di perdere il paese. Ha sostenuto inoltre che non esistevano ricette valide ovunque e che un paese si ripopola soprattutto con i servizi, come il medico, i trasporti e la farmacia, che sarebbe stata la sua prossima battaglia.\n\nInfine ha detto che a un giovane interessato consiglierebbe di visitare il paese in inverno e di restarci almeno una settimana, perché è a gennaio che si capisce se si è davvero pronti a viverci."
+    "model": "Roccavecchia: come si riporta la vita in un paese di montagna\n\nIn una recente intervista Marta Colasanti, sindaca di Roccavecchia, piccolo comune dell'Appennino molisano, ha raccontato come in cinque anni il paese sia passato da circa trecento a quasi quattrocento abitanti.\n\nLa sindaca ha spiegato che tutto era cominciato da un giro per il centro storico, dove aveva contato più di cento case vuote. Si era chiesta perché dovessero restare chiuse mentre in città i giovani non trovavano casa, e da lì erano nati un censimento delle abitazioni e un accordo con i proprietari. Ha precisato che le case non erano state regalate: erano state affittate a prezzi bassi a chi si impegnava a ristrutturarle e a restare almeno tre anni.\n\nColasanti ha ammesso che all'inizio non erano mancate le difficoltà, soprattutto la diffidenza di alcuni anziani, che secondo lei avevano paura di perdere il paese. Ha sostenuto inoltre che non esistevano ricette valide ovunque e che un paese si ripopola soprattutto con i servizi, come il medico, i trasporti e la farmacia, che sarebbe stata la sua prossima battaglia.\n\nInfine ha detto che a un giovane interessato consiglierebbe di visitare il paese in inverno e di restarci almeno una settimana, perché è a gennaio che si capisce se si è davvero pronti a viverci.",
+    "gloss": {
+     "sindaca": "intendenta",
+     "censimento": "censo, relevamiento",
+     "si impegnava a": "se comprometía a",
+     "non erano mancate le difficoltà": "no habían faltado las dificultades",
+     "diffidenza": "desconfianza",
+     "ricette": "recetas, fórmulas"
+    }
    }
   },
   {
@@ -4497,7 +4596,17 @@
       ]
      ]
     ],
-    "model": "Spettabile Elettrocasa S.r.l.\nServizio clienti\n\nOggetto: reclamo per difetto di conformità – lavatrice AquaPlus 8\n\nCon la presente desidero segnalare un difetto della lavatrice che ho acquistato presso il Vostro punto vendita di Pescara il 12 giugno dello scorso anno, come risulta dallo scontrino che allego in copia.\n\nDa circa un mese l'apparecchio non centrifuga più e, dopo un forte rumore, ha smesso completamente di funzionare. Un tecnico che l'ha esaminata mi ha fatto sapere che si tratterebbe di un guasto della scheda elettronica, quindi di un difetto non causato da un uso scorretto.\n\nQuando mi sono rivolto al Vostro negozio, il personale mi ha proposto di farla riparare dal Vostro centro assistenza al costo di 180 euro, sostenendo che la garanzia del produttore era scaduta. Vorrei ricordarVi, tuttavia, che il venditore è tenuto a rispondere dei difetti di conformità per due anni dalla consegna, in base alla garanzia legale, che si aggiunge a quella commerciale del produttore.\n\nVi chiedo pertanto di far riparare o sostituire la lavatrice senza alcuna spesa a mio carico. In mancanza di una risposta entro trenta giorni dal ricevimento della presente, mi vedrò costretto a rivolgermi a un'associazione di consumatori per tutelare i miei diritti.\n\nVi prego infine di farmi avere una conferma scritta del ricevimento di questa lettera.\n\nDistinti saluti\n\nGiorgio Marchetti\n\nAllegato: copia dello scontrino"
+    "model": "Spettabile Elettrocasa S.r.l.\nServizio clienti\n\nOggetto: reclamo per difetto di conformità – lavatrice AquaPlus 8\n\nCon la presente desidero segnalare un difetto della lavatrice che ho acquistato presso il Vostro punto vendita di Pescara il 12 giugno dello scorso anno, come risulta dallo scontrino che allego in copia.\n\nDa circa un mese l'apparecchio non centrifuga più e, dopo un forte rumore, ha smesso completamente di funzionare. Un tecnico che l'ha esaminata mi ha fatto sapere che si tratterebbe di un guasto della scheda elettronica, quindi di un difetto non causato da un uso scorretto.\n\nQuando mi sono rivolto al Vostro negozio, il personale mi ha proposto di farla riparare dal Vostro centro assistenza al costo di 180 euro, sostenendo che la garanzia del produttore era scaduta. Vorrei ricordarVi, tuttavia, che il venditore è tenuto a rispondere dei difetti di conformità per due anni dalla consegna, in base alla garanzia legale, che si aggiunge a quella commerciale del produttore.\n\nVi chiedo pertanto di far riparare o sostituire la lavatrice senza alcuna spesa a mio carico. In mancanza di una risposta entro trenta giorni dal ricevimento della presente, mi vedrò costretto a rivolgermi a un'associazione di consumatori per tutelare i miei diritti.\n\nVi prego infine di farmi avere una conferma scritta del ricevimento di questa lettera.\n\nDistinti saluti\n\nGiorgio Marchetti\n\nAllegato: copia dello scontrino",
+    "gloss": {
+     "Con la presente": "por la presente (fórmula de carta formal)",
+     "scontrino": "el ticket de compra",
+     "guasto": "falla, avería",
+     "si tratterebbe di": "se trataría de (condicional de lo no confirmado)",
+     "è tenuto a": "está obligado a",
+     "a mio carico": "a mi cargo",
+     "In mancanza di": "a falta de",
+     "tutelare": "proteger, defender"
+    }
    }
   },
   {
@@ -4849,7 +4958,17 @@
       ]
      ]
     ],
-    "model": "Ciao Giulia,\n\ncome stai? Ti scrivo perché sabato notte qui in via dei Mille è successo un finimondo, e ho ancora bisogno di raccontarlo a qualcuno.\n\nErano quasi le tre e io dormivo. A un certo punto ho sentito qualcuno suonare tutti i campanelli come un matto e, affacciandomi, ho visto uscire del fumo nero da una finestra del secondo piano del palazzo di fronte, quello del signor Ernesto, hai presente? Il vecchietto con il bastone. Sono scesa in pigiama e in strada c'era già mezzo quartiere.\n\nIl ragazzo che ha dato l'allarme si chiama Samuele e ha diciassette anni. Con un altro inquilino ha sfondato la porta e insieme hanno portato fuori il signor Ernesto, che era rimasto chiuso dentro. Quando li ho visti uscire dal portone, con lui sorretto da tutti e due, mi sono messa a piangere. Poi abbiamo sentito arrivare i pompieri e siamo rimasti lì un'ora a guardarli lavorare. Che paura, davvero.\n\nPer fortuna il signor Ernesto sta bene: l'hanno già dimesso. La cosa più bella, però, è stata un'altra. Come ha detto una vicina al giornale, quella notte ho visto gente che non si era mai salutata offrirsi coperte e acqua. È triste che ci sia voluto un incendio, ma forse qualcosa è cambiato.\n\nE tu? Quando torni a trovarmi? Il resto te lo racconto a voce.\n\nUn abbraccio forte,\nChiara"
+    "model": "Ciao Giulia,\n\ncome stai? Ti scrivo perché sabato notte qui in via dei Mille è successo un finimondo, e ho ancora bisogno di raccontarlo a qualcuno.\n\nErano quasi le tre e io dormivo. A un certo punto ho sentito qualcuno suonare tutti i campanelli come un matto e, affacciandomi, ho visto uscire del fumo nero da una finestra del secondo piano del palazzo di fronte, quello del signor Ernesto, hai presente? Il vecchietto con il bastone. Sono scesa in pigiama e in strada c'era già mezzo quartiere.\n\nIl ragazzo che ha dato l'allarme si chiama Samuele e ha diciassette anni. Con un altro inquilino ha sfondato la porta e insieme hanno portato fuori il signor Ernesto, che era rimasto chiuso dentro. Quando li ho visti uscire dal portone, con lui sorretto da tutti e due, mi sono messa a piangere. Poi abbiamo sentito arrivare i pompieri e siamo rimasti lì un'ora a guardarli lavorare. Che paura, davvero.\n\nPer fortuna il signor Ernesto sta bene: l'hanno già dimesso. La cosa più bella, però, è stata un'altra. Come ha detto una vicina al giornale, quella notte ho visto gente che non si era mai salutata offrirsi coperte e acqua. È triste che ci sia voluto un incendio, ma forse qualcosa è cambiato.\n\nE tu? Quando torni a trovarmi? Il resto te lo racconto a voce.\n\nUn abbraccio forte,\nChiara",
+    "gloss": {
+     "finimondo": "un desastre, un caos total (literalmente «fin del mundo»)",
+     "come un matto": "como un loco",
+     "affacciandomi": "asomándome (a la ventana)",
+     "hai presente?": "¿viste?, ¿lo ubicás?",
+     "vecchietto": "viejito (sufijo -etto: se ve en la semana 46)",
+     "ha sfondato la porta": "tiró abajo la puerta",
+     "l'hanno già dimesso": "ya le dieron el alta",
+     "a voce": "en persona, de palabra"
+    }
    }
   },
   {
@@ -5204,7 +5323,16 @@
       ]
      ]
     ],
-    "model": "Gentile Redazione,\n\nho letto con grande interesse il saggio «Si prega di voler cortesemente provvedere» e vorrei aggiungere la mia esperienza di straniera che vive in Italia da due anni.\n\nQualche mese fa ho ricevuto una lettera dell'ufficio tributi del mio Comune. L'ho letta tre volte e non riuscivo a capire se si trattasse di una multa, di un rimborso o di un semplice avviso. Alla fine mi sono rivolta a un'amica italiana, che però ha avuto le mie stesse difficoltà. Solo allo sportello ho scoperto che dovevo pagare trenta euro di tassa sui rifiuti: sarebbero bastate due righe.\n\nSono d'accordo con l'autore quando scrive che il burocratese colpisce soprattutto i più deboli. Chi sta imparando una lingua ha già abbastanza ostacoli e non ha bisogno di essere messo alla prova anche da un modulo. Non credo, tuttavia, che la colpa sia solo dei funzionari: spesso sono costretti a rifarsi a modelli che nessuno ha il coraggio di cambiare.\n\nPer questo propongo alcune regole semplici: dire subito che cosa deve fare il cittadino ed entro quando; usare frasi brevi e parole comuni; rivolgersi al lettore con il Lei; spiegare che cosa fare in caso di errore; lasciare i riferimenti alle norme in una nota finale, per chi vuole controllarli. Scrivere chiaro non significa rinunciare alla precisione, ma rispettare chi legge.\n\nCordiali saluti,\nAna Ferreyra, Bologna"
+    "model": "Gentile Redazione,\n\nho letto con grande interesse il saggio «Si prega di voler cortesemente provvedere» e vorrei aggiungere la mia esperienza di straniera che vive in Italia da due anni.\n\nQualche mese fa ho ricevuto una lettera dell'ufficio tributi del mio Comune. L'ho letta tre volte e non riuscivo a capire se si trattasse di una multa, di un rimborso o di un semplice avviso. Alla fine mi sono rivolta a un'amica italiana, che però ha avuto le mie stesse difficoltà. Solo allo sportello ho scoperto che dovevo pagare trenta euro di tassa sui rifiuti: sarebbero bastate due righe.\n\nSono d'accordo con l'autore quando scrive che il burocratese colpisce soprattutto i più deboli. Chi sta imparando una lingua ha già abbastanza ostacoli e non ha bisogno di essere messo alla prova anche da un modulo. Non credo, tuttavia, che la colpa sia solo dei funzionari: spesso sono costretti a rifarsi a modelli che nessuno ha il coraggio di cambiare.\n\nPer questo propongo alcune regole semplici: dire subito che cosa deve fare il cittadino ed entro quando; usare frasi brevi e parole comuni; rivolgersi al lettore con il Lei; spiegare che cosa fare in caso di errore; lasciare i riferimenti alle norme in una nota finale, per chi vuole controllarli. Scrivere chiaro non significa rinunciare alla precisione, ma rispettare chi legge.\n\nCordiali saluti,\nAna Ferreyra, Bologna",
+    "gloss": {
+     "ufficio tributi": "oficina de impuestos (municipales)",
+     "sportello": "ventanilla",
+     "rifiuti": "residuos (tassa sui rifiuti = tasa de recolección de basura)",
+     "burocratese": "la jerga burocrática",
+     "messo alla prova": "puesto a prueba",
+     "rifarsi a": "basarse en, remitirse a",
+     "entro quando": "hasta cuándo, en qué plazo"
+    }
    }
   },
   {
@@ -5550,7 +5678,16 @@
       ]
      ]
     ],
-    "model": "Cittadini e scienza: spettatori o protagonisti?\n\nPer molto tempo la scienza è stata considerata un territorio riservato agli esperti, mentre al pubblico spettava soltanto il compito di ricevere, più o meno passivamente, i risultati. Oggi questa divisione non regge più. A mio avviso, partecipare alla scienza è diventato per i cittadini non solo possibile, ma necessario, e in due modi diversi.\n\nIl primo è la lettura critica. Come ricorda un recente articolo divulgativo, un titolo sensazionale su uno studio condotto su pochi volontari o su qualche topo può fare il giro del web in poche ore. Imparare a controllare la fonte, a guardare i numeri e a non confondere la correlazione con la causa è già una forma di partecipazione: significa difendere la scienza dalle sue caricature.\n\nIl secondo modo è più concreto. In una conferenza sulla qualità dell'aria, una ricercatrice ha spiegato come centinaia di sensori economici, installati sui balconi, possano mostrare differenze tra quartieri che le centraline ufficiali non vedono. Raccogliere dati, in questo caso, vuol dire anche avere argomenti per chiedere cambiamenti alla propria amministrazione.\n\nBisogna tuttavia riconoscere i limiti di questa partecipazione. Un sensore economico è meno preciso, e un lettore attento non diventa per questo uno scienziato: senza la calibrazione e il controllo degli esperti, i dati dei cittadini rischierebbero di creare più confusione che conoscenza.\n\nIn conclusione, credo che la scienza abbia bisogno di cittadini attivi, purché la loro partecipazione resti una collaborazione e non una sostituzione."
+    "model": "Cittadini e scienza: spettatori o protagonisti?\n\nPer molto tempo la scienza è stata considerata un territorio riservato agli esperti, mentre al pubblico spettava soltanto il compito di ricevere, più o meno passivamente, i risultati. Oggi questa divisione non regge più. A mio avviso, partecipare alla scienza è diventato per i cittadini non solo possibile, ma necessario, e in due modi diversi.\n\nIl primo è la lettura critica. Come ricorda un recente articolo divulgativo, un titolo sensazionale su uno studio condotto su pochi volontari o su qualche topo può fare il giro del web in poche ore. Imparare a controllare la fonte, a guardare i numeri e a non confondere la correlazione con la causa è già una forma di partecipazione: significa difendere la scienza dalle sue caricature.\n\nIl secondo modo è più concreto. In una conferenza sulla qualità dell'aria, una ricercatrice ha spiegato come centinaia di sensori economici, installati sui balconi, possano mostrare differenze tra quartieri che le centraline ufficiali non vedono. Raccogliere dati, in questo caso, vuol dire anche avere argomenti per chiedere cambiamenti alla propria amministrazione.\n\nBisogna tuttavia riconoscere i limiti di questa partecipazione. Un sensore economico è meno preciso, e un lettore attento non diventa per questo uno scienziato: senza la calibrazione e il controllo degli esperti, i dati dei cittadini rischierebbero di creare più confusione che conoscenza.\n\nIn conclusione, credo che la scienza abbia bisogno di cittadini attivi, purché la loro partecipazione resti una collaborazione e non una sostituzione.",
+    "gloss": {
+     "spettava": "le correspondía, le tocaba",
+     "non regge più": "ya no se sostiene",
+     "A mio avviso": "en mi opinión",
+     "fare il giro del web": "dar la vuelta a internet, hacerse viral",
+     "topo": "ratón",
+     "centraline": "estaciones de medición",
+     "purché": "siempre que, con tal de que (+ congiuntivo)"
+    }
    }
   },
   {
@@ -5920,7 +6057,16 @@
       ]
      ]
     ],
-    "model": "Gentile redazione,\n\nho letto con grande interesse il reportage sui laboratori del Gran Sasso e, nel numero successivo, la lettera del signor Rinaldi, secondo il quale finanziare la ricerca di base sarebbe «un lusso». Pur comprendendo la sua preoccupazione, vorrei esprimere un parere diverso.\n\nInnanzitutto, come ricorda nell'articolo la fisica Chiara Montanari, molte delle tecnologie che oggi usiamo ogni giorno sono nate da ricerche che, al momento, non avevano alcuno scopo pratico. Giudicando la scienza soltanto in base alla sua utilità immediata, avremmo rinunciato a buona parte della medicina moderna. In secondo luogo, il reportage mostra che gli strumenti costruiti per studiare i neutrini producono ricadute concrete: sensori, materiali purissimi, tecniche che finiscono negli ospedali e nelle fabbriche.\n\nDetto questo, il signor Rinaldi solleva un problema reale: i cittadini spesso non sanno che cosa succeda dentro questi laboratori, e ciò alimenta la diffidenza. L'articolo stesso ricorda i timori degli abitanti per l'acqua delle falde. Credo che la risposta non sia tagliare i fondi, ma aprire le porte.\n\nPropongo quindi che i laboratori organizzino, almeno una volta al mese, visite guidate gratuite per le scuole e per gli abitanti dei comuni vicini, e che pubblichino in modo trasparente i risultati dei controlli ambientali. Conosciuto da vicino il lavoro dei ricercatori, sono convinta che molti cambierebbero idea.\n\nDistinti saluti,\nLaura Bianchi, Teramo"
+    "model": "Gentile redazione,\n\nho letto con grande interesse il reportage sui laboratori del Gran Sasso e, nel numero successivo, la lettera del signor Rinaldi, secondo il quale finanziare la ricerca di base sarebbe «un lusso». Pur comprendendo la sua preoccupazione, vorrei esprimere un parere diverso.\n\nInnanzitutto, come ricorda nell'articolo la fisica Chiara Montanari, molte delle tecnologie che oggi usiamo ogni giorno sono nate da ricerche che, al momento, non avevano alcuno scopo pratico. Giudicando la scienza soltanto in base alla sua utilità immediata, avremmo rinunciato a buona parte della medicina moderna. In secondo luogo, il reportage mostra che gli strumenti costruiti per studiare i neutrini producono ricadute concrete: sensori, materiali purissimi, tecniche che finiscono negli ospedali e nelle fabbriche.\n\nDetto questo, il signor Rinaldi solleva un problema reale: i cittadini spesso non sanno che cosa succeda dentro questi laboratori, e ciò alimenta la diffidenza. L'articolo stesso ricorda i timori degli abitanti per l'acqua delle falde. Credo che la risposta non sia tagliare i fondi, ma aprire le porte.\n\nPropongo quindi che i laboratori organizzino, almeno una volta al mese, visite guidate gratuite per le scuole e per gli abitanti dei comuni vicini, e che pubblichino in modo trasparente i risultati dei controlli ambientali. Conosciuto da vicino il lavoro dei ricercatori, sono convinta che molti cambierebbero idea.\n\nDistinti saluti,\nLaura Bianchi, Teramo",
+    "gloss": {
+     "Pur comprendendo": "aun entendiendo, aunque entiendo (pur + gerundio)",
+     "ricerca di base": "investigación básica, sin fin práctico inmediato",
+     "ricadute": "repercusiones, efectos derivados",
+     "Detto questo": "dicho esto",
+     "solleva": "plantea",
+     "falde": "napas (de agua)",
+     "tagliare i fondi": "recortar el financiamiento"
+    }
    }
   },
   {
@@ -6271,7 +6417,14 @@
       ]
      ]
     ],
-    "model": "Cara Sofía,\n\nche bello ricevere la tua email! Tranquilla, sentirsi persi è normalissimo: capita a tutti, anche a chi parla italiano da anni.\n\nProprio questa settimana ho letto una rubrica divertentissima, la lettera di un certo Beppe a un collega argentino, e ti assicuro che sembra scritta per te. Beppe spiega che il problema non è la grammatica, ma certi verbi piccolissimi pieni di pronomi. Prendi «farcela»: quando la vicina di casa sospira «non ce la faccio più», non vuol dire che ha fallito in qualcosa, ma che è stanca di tutto. Poi c'è «cavarsela»: gli italiani non dicono mai di essere bravi, dicono «me la cavo», anche quando sono dei geni. E attenta a «prendersela», cioè offendersi: se qualcuno ti dice «non prendertela», preparati a una critica!\n\nHo anche ascoltato un'intervista alla comica Serena Galli, secondo cui l'ironia italiana dipende quasi tutta dal tono. Se piove da giorni e il vicino ti dice «che bella giornata», ovviamente scherza. Lei, per far ridere gli stranieri, prende i modi di dire alla lettera, e secondo me è un ottimo esercizio anche per chi impara.\n\nIl mio consiglio? Non cercare di tradurre tutto. Guarda le facce, ascolta il tono e, quando non capisci, chiedi senza vergogna: gli italiani adorano spiegare le proprie battute, anche se poi non fanno più ridere nessuno.\n\nVedrai che in un paio di mesi te la caverai benissimo. E se proprio non ce la fai, chiamami!\n\nUn abbraccio forte,\nMartina"
+    "model": "Cara Sofía,\n\nche bello ricevere la tua email! Tranquilla, sentirsi persi è normalissimo: capita a tutti, anche a chi parla italiano da anni.\n\nProprio questa settimana ho letto una rubrica divertentissima, la lettera di un certo Beppe a un collega argentino, e ti assicuro che sembra scritta per te. Beppe spiega che il problema non è la grammatica, ma certi verbi piccolissimi pieni di pronomi. Prendi «farcela»: quando la vicina di casa sospira «non ce la faccio più», non vuol dire che ha fallito in qualcosa, ma che è stanca di tutto. Poi c'è «cavarsela»: gli italiani non dicono mai di essere bravi, dicono «me la cavo», anche quando sono dei geni. E attenta a «prendersela», cioè offendersi: se qualcuno ti dice «non prendertela», preparati a una critica!\n\nHo anche ascoltato un'intervista alla comica Serena Galli, secondo cui l'ironia italiana dipende quasi tutta dal tono. Se piove da giorni e il vicino ti dice «che bella giornata», ovviamente scherza. Lei, per far ridere gli stranieri, prende i modi di dire alla lettera, e secondo me è un ottimo esercizio anche per chi impara.\n\nIl mio consiglio? Non cercare di tradurre tutto. Guarda le facce, ascolta il tono e, quando non capisci, chiedi senza vergogna: gli italiani adorano spiegare le proprie battute, anche se poi non fanno più ridere nessuno.\n\nVedrai che in un paio di mesi te la caverai benissimo. E se proprio non ce la fai, chiamami!\n\nUn abbraccio forte,\nMartina",
+    "gloss": {
+     "rubrica": "columna (de una revista o diario)",
+     "sospira": "suspira",
+     "prende i modi di dire alla lettera": "toma las frases hechas al pie de la letra",
+     "battute": "chistes, remates",
+     "geni": "genios"
+    }
    }
   },
   {
@@ -6640,7 +6793,16 @@
       ]
      ]
     ],
-    "model": "Oggetto: nome della nuova linea di gelati Rossetti\n\nGentile direttrice,\n\ndi seguito riassumo la riunione di ieri tra Giulia, copywriter, e Andrea, responsabile marketing, dedicata alla scelta del nome per la nuova linea di gelati dei signori Rossetti.\n\nGiulia ha presentato quattro proposte. «Nuvoletta», che evoca leggerezza e morbidezza, è stata giudicata graziosa ma troppo infantile per un cliente che vuole attirare anche un pubblico adulto. «Cremino» è stato scartato perché in alcune zone è già il nome di un cioccolatino. Restano quindi due candidati. «Golosone» ha un tono simpatico e ironico, e l'accrescitivo trasmette abbondanza e piacere; secondo Andrea, però, alcuni clienti potrebbero sentirlo come una presa in giro legata al peso. «Freddino», che Giulia interpreta come un «freddo piccolo e piacevole», è originale, ma rischia di sembrare negativo e funziona soprattutto accompagnato da uno slogan, come «Un freddino che scalda il cuore».\n\nPersonalmente raccomando «Freddino»: il diminutivo è affettuoso, non offende nessuno e si presta bene a una campagna costruita sul contrasto tra freddo e calore. Il fatto che richieda una spiegazione mi sembra un rischio accettabile, dato che il nome comparirebbe sempre insieme allo slogan.\n\nQuanto ai prossimi passi, Giulia verificherà che i due nomi non siano già marchi registrati e preparerà una proposta scritta per i nomi dei diversi formati di coppa. Il materiale Le sarà inviato in tempo per la presentazione ai clienti di venerdì.\n\nCordiali saluti,\nPaolo Neri"
+    "model": "Oggetto: nome della nuova linea di gelati Rossetti\n\nGentile direttrice,\n\ndi seguito riassumo la riunione di ieri tra Giulia, copywriter, e Andrea, responsabile marketing, dedicata alla scelta del nome per la nuova linea di gelati dei signori Rossetti.\n\nGiulia ha presentato quattro proposte. «Nuvoletta», che evoca leggerezza e morbidezza, è stata giudicata graziosa ma troppo infantile per un cliente che vuole attirare anche un pubblico adulto. «Cremino» è stato scartato perché in alcune zone è già il nome di un cioccolatino. Restano quindi due candidati. «Golosone» ha un tono simpatico e ironico, e l'accrescitivo trasmette abbondanza e piacere; secondo Andrea, però, alcuni clienti potrebbero sentirlo come una presa in giro legata al peso. «Freddino», che Giulia interpreta come un «freddo piccolo e piacevole», è originale, ma rischia di sembrare negativo e funziona soprattutto accompagnato da uno slogan, come «Un freddino che scalda il cuore».\n\nPersonalmente raccomando «Freddino»: il diminutivo è affettuoso, non offende nessuno e si presta bene a una campagna costruita sul contrasto tra freddo e calore. Il fatto che richieda una spiegazione mi sembra un rischio accettabile, dato che il nome comparirebbe sempre insieme allo slogan.\n\nQuanto ai prossimi passi, Giulia verificherà che i due nomi non siano già marchi registrati e preparerà una proposta scritta per i nomi dei diversi formati di coppa. Il materiale Le sarà inviato in tempo per la presentazione ai clienti di venerdì.\n\nCordiali saluti,\nPaolo Neri",
+    "gloss": {
+     "graziosa": "linda, simpática",
+     "scartato": "descartado",
+     "una presa in giro": "una cargada, una burla",
+     "si presta bene a": "se presta bien para",
+     "marchi registrati": "marcas registradas",
+     "Quanto ai": "en cuanto a los",
+     "coppa": "vasito, copa (de helado)"
+    }
    }
   },
   {
@@ -7014,7 +7176,17 @@
       ]
      ]
     ],
-    "model": "Affitti a Monteverde: i numeri della crisi e le proposte in discussione\n\nSecondo il rapporto dell'Osservatorio sulla casa dell'Università di Monteverde, in cinque anni il canone medio di un monolocale in centro è quasi raddoppiato, passando da circa 410 a 790 euro, mentre i redditi reali sono cresciuti solo del 3 per cento. Se nel 2021 bastava un terzo di uno stipendio medio, oggi ne servono quasi due terzi.\n\nIl rapporto individua tre cause: gli affitti brevi, più che triplicati fino a oltre duemilacento alloggi; la crescita di circa il 15 per cento degli studenti; la presenza di tre-quattromila appartamenti sfitti. Le conseguenze non riguardano solo gli studenti: un quarto dei nuovi assunti dell'ospedale ha rinunciato al posto o chiesto il trasferimento.\n\nIl sindaco ha presentato un piano da 12 milioni in tre anni, con incentivi per il canone concordato, il recupero di centoventi alloggi pubblici e uno studentato da duecentocinquanta posti. L'opposizione lo giudica insufficiente, perché equivale a meno del 2 per cento del bilancio annuale e lo studentato non sarà pronto prima di quattro anni; chiede quindi di limitare gli affitti turistici a novanta notti all'anno. Le associazioni dei proprietari respingono la proposta: gli affitti brevi renderebbero il doppio e comporterebbero meno rischi, dato che uno sfratto richiede in media diciotto mesi.\n\nL'Osservatorio suggerisce una via di mezzo: un limite moderato agli affitti brevi nelle zone più richieste e un fondo pubblico di garanzia fino a dodici mensilità. Se tornasse sul mercato anche solo un decimo degli sfitti, i canoni potrebbero calare del 5-8 per cento in due anni.\n\nIl piano sarà discusso in consiglio il 14 ottobre."
+    "model": "Affitti a Monteverde: i numeri della crisi e le proposte in discussione\n\nSecondo il rapporto dell'Osservatorio sulla casa dell'Università di Monteverde, in cinque anni il canone medio di un monolocale in centro è quasi raddoppiato, passando da circa 410 a 790 euro, mentre i redditi reali sono cresciuti solo del 3 per cento. Se nel 2021 bastava un terzo di uno stipendio medio, oggi ne servono quasi due terzi.\n\nIl rapporto individua tre cause: gli affitti brevi, più che triplicati fino a oltre duemilacento alloggi; la crescita di circa il 15 per cento degli studenti; la presenza di tre-quattromila appartamenti sfitti. Le conseguenze non riguardano solo gli studenti: un quarto dei nuovi assunti dell'ospedale ha rinunciato al posto o chiesto il trasferimento.\n\nIl sindaco ha presentato un piano da 12 milioni in tre anni, con incentivi per il canone concordato, il recupero di centoventi alloggi pubblici e uno studentato da duecentocinquanta posti. L'opposizione lo giudica insufficiente, perché equivale a meno del 2 per cento del bilancio annuale e lo studentato non sarà pronto prima di quattro anni; chiede quindi di limitare gli affitti turistici a novanta notti all'anno. Le associazioni dei proprietari respingono la proposta: gli affitti brevi renderebbero il doppio e comporterebbero meno rischi, dato che uno sfratto richiede in media diciotto mesi.\n\nL'Osservatorio suggerisce una via di mezzo: un limite moderato agli affitti brevi nelle zone più richieste e un fondo pubblico di garanzia fino a dodici mensilità. Se tornasse sul mercato anche solo un decimo degli sfitti, i canoni potrebbero calare del 5-8 per cento in due anni.\n\nIl piano sarà discusso in consiglio il 14 ottobre.",
+    "gloss": {
+     "canone": "el monto del alquiler",
+     "monolocale": "monoambiente",
+     "sfitti": "vacíos, sin alquilar",
+     "nuovi assunti": "empleados recién contratados",
+     "canone concordato": "alquiler a precio acordado por convenio (más bajo, con beneficios fiscales)",
+     "studentato": "residencia estudiantil",
+     "sfratto": "desalojo",
+     "mensilità": "meses de alquiler, mensualidades"
+    }
    }
   },
   {
@@ -7385,7 +7557,14 @@
       ]
      ]
     ],
-    "model": "L'italiano? Lo parliamo tutti, ma ognuno a modo suo\n\nChi arriva in Italia dopo aver studiato sui libri scopre presto una cosa: la lingua dei manuali, per strada, la si sente poco. Quello che si sente è l'italiano regionale, cioè un italiano con la stessa grammatica ovunque, ma con pronuncia, intonazione e parole che cambiano da una città all'altra.\n\nGli esempi sono tantissimi. Il panino, a Roma lo chiamano rosetta, a Milano michetta. Al Sud si dice «sto a casa», al Nord «sono a casa». E a Milano i nomi propri li usano con l'articolo, «la Giulia», cosa che a un napoletano sembra stranissima, come racconta Gennaro in una conversazione con la collega Chiara.\n\nPoi ci sono i dialetti, che non sono italiano «sbagliato», ma lingue sorelle nate dal latino. Per secoli sono stati la lingua di casa della maggior parte degli italiani. Oggi i giovani li parlano meno, ma li usano in modo nuovo: nelle canzoni, nei meme, nelle chat.\n\nC'è però un aspetto che mi ha colpito: l'accento. Secondo l'inchiesta, molti ragazzi del Sud cercano di nasconderlo per paura di essere giudicati, soprattutto nei colloqui di lavoro. Anche a Gennaro hanno consigliato di «neutralizzarlo». Eppure è proprio lui che dimostra il contrario: i clienti li ha conquistati con la sua voce.\n\nPer noi argentini la situazione è familiare. Un cordobés e un porteño si riconoscono subito, e anche da noi certi accenti fanno sorridere. Forse la lezione è proprio questa: una lingua viva non è mai uniforme. E l'accento, invece di nasconderlo, dovremmo imparare a rispettarlo."
+    "model": "L'italiano? Lo parliamo tutti, ma ognuno a modo suo\n\nChi arriva in Italia dopo aver studiato sui libri scopre presto una cosa: la lingua dei manuali, per strada, la si sente poco. Quello che si sente è l'italiano regionale, cioè un italiano con la stessa grammatica ovunque, ma con pronuncia, intonazione e parole che cambiano da una città all'altra.\n\nGli esempi sono tantissimi. Il panino, a Roma lo chiamano rosetta, a Milano michetta. Al Sud si dice «sto a casa», al Nord «sono a casa». E a Milano i nomi propri li usano con l'articolo, «la Giulia», cosa che a un napoletano sembra stranissima, come racconta Gennaro in una conversazione con la collega Chiara.\n\nPoi ci sono i dialetti, che non sono italiano «sbagliato», ma lingue sorelle nate dal latino. Per secoli sono stati la lingua di casa della maggior parte degli italiani. Oggi i giovani li parlano meno, ma li usano in modo nuovo: nelle canzoni, nei meme, nelle chat.\n\nC'è però un aspetto che mi ha colpito: l'accento. Secondo l'inchiesta, molti ragazzi del Sud cercano di nasconderlo per paura di essere giudicati, soprattutto nei colloqui di lavoro. Anche a Gennaro hanno consigliato di «neutralizzarlo». Eppure è proprio lui che dimostra il contrario: i clienti li ha conquistati con la sua voce.\n\nPer noi argentini la situazione è familiare. Un cordobés e un porteño si riconoscono subito, e anche da noi certi accenti fanno sorridere. Forse la lezione è proprio questa: una lingua viva non è mai uniforme. E l'accento, invece di nasconderlo, dovremmo imparare a rispettarlo.",
+    "gloss": {
+     "a modo suo": "a su manera",
+     "la si sente poco": "se la escucha poco (la = la lengua, retomada con si impersonal)",
+     "lingue sorelle": "lenguas hermanas",
+     "colloqui di lavoro": "entrevistas de trabajo",
+     "fanno sorridere": "causan gracia"
+    }
    }
   },
   {
@@ -7737,7 +7916,17 @@
       ]
      ]
     ],
-    "model": "Chi deve decidere il futuro?\n\nLa proposta di estendere il diritto di voto ai sedicenni, discussa nell'editoriale «Votare a sedici anni: una proposta da prendere sul serio», solleva una questione che va ben oltre l'età anagrafica: quanto siamo disposti a fidarci delle nuove generazioni? A mio avviso, la riforma è auspicabile, purché venga introdotta con gradualità.\n\nIl primo argomento a sostegno è di natura demografica. In un paese in cui gli anziani costituiscono una parte crescente dell'elettorato, le decisioni di lungo periodo, come quelle sulle pensioni o sul clima, vengono prese soprattutto da chi ne subirà le conseguenze per meno tempo. Coinvolgere i più giovani contribuirebbe, pertanto, a riequilibrare la rappresentanza. Inoltre, come osserva l'autore, chi a sedici anni può già lavorare dovrebbe potersi esprimere sulle regole che disciplinano il suo lavoro.\n\nNon si possono tuttavia ignorare le obiezioni. La più frequente riguarda la maturità dei sedicenni; eppure nessuno verifica la preparazione politica degli elettori adulti. Più fondato mi sembra il timore del condizionamento familiare o della propaganda online. Ciononostante, questo rischio non riguarda soltanto gli adolescenti, e la risposta più efficace non è l'esclusione, bensì la formazione.\n\nProprio per questo ritengo che il voto ai sedicenni debba essere accompagnato da un'educazione civica rinnovata, capace di insegnare a valutare le fonti e a confrontarsi con opinioni diverse. Cominciare dalle elezioni amministrative permetterebbe, inoltre, di verificarne gli effetti prima di estendere la misura.\n\nIn conclusione, abbassare l'età del voto non risolverebbe da solo la crisi della partecipazione, ma rappresenterebbe un segnale di fiducia. E la fiducia, in democrazia, è il presupposto di ogni responsabilità."
+    "model": "Chi deve decidere il futuro?\n\nLa proposta di estendere il diritto di voto ai sedicenni, discussa nell'editoriale «Votare a sedici anni: una proposta da prendere sul serio», solleva una questione che va ben oltre l'età anagrafica: quanto siamo disposti a fidarci delle nuove generazioni? A mio avviso, la riforma è auspicabile, purché venga introdotta con gradualità.\n\nIl primo argomento a sostegno è di natura demografica. In un paese in cui gli anziani costituiscono una parte crescente dell'elettorato, le decisioni di lungo periodo, come quelle sulle pensioni o sul clima, vengono prese soprattutto da chi ne subirà le conseguenze per meno tempo. Coinvolgere i più giovani contribuirebbe, pertanto, a riequilibrare la rappresentanza. Inoltre, come osserva l'autore, chi a sedici anni può già lavorare dovrebbe potersi esprimere sulle regole che disciplinano il suo lavoro.\n\nNon si possono tuttavia ignorare le obiezioni. La più frequente riguarda la maturità dei sedicenni; eppure nessuno verifica la preparazione politica degli elettori adulti. Più fondato mi sembra il timore del condizionamento familiare o della propaganda online. Ciononostante, questo rischio non riguarda soltanto gli adolescenti, e la risposta più efficace non è l'esclusione, bensì la formazione.\n\nProprio per questo ritengo che il voto ai sedicenni debba essere accompagnato da un'educazione civica rinnovata, capace di insegnare a valutare le fonti e a confrontarsi con opinioni diverse. Cominciare dalle elezioni amministrative permetterebbe, inoltre, di verificarne gli effetti prima di estendere la misura.\n\nIn conclusione, abbassare l'età del voto non risolverebbe da solo la crisi della partecipazione, ma rappresenterebbe un segnale di fiducia. E la fiducia, in democrazia, è il presupposto di ogni responsabilità.",
+    "gloss": {
+     "va ben oltre": "va mucho más allá de",
+     "età anagrafica": "edad según el documento, edad cronológica",
+     "auspicabile": "deseable",
+     "subirà": "va a sufrir, va a padecer",
+     "disciplinano": "regulan",
+     "Ciononostante": "no obstante, a pesar de eso",
+     "bensì": "sino (después de una negación)",
+     "presupposto": "condición previa, base"
+    }
    }
   },
   {
@@ -8096,7 +8285,16 @@
       ]
      ]
     ],
-    "model": "«Scaffale Novecento»: Calvino raccontato a due voci\n\nNell'ultima puntata di «Scaffale Novecento», la conduttrice Livia e il critico Tommaso affrontano Le città invisibili di Italo Calvino, un libro del 1972 spesso citato e, come ammettono gli stessi conduttori, non sempre letto fino in fondo.\n\nLa puntata si apre con una confessione che conquista subito l'ascoltatore: Tommaso racconta di aver abbandonato il libro a diciotto anni perché si aspettava una trama. Da qui prende avvio una spiegazione chiara della struttura dell'opera: Marco Polo descrive all'imperatore Kublai Kan una serie di città impossibili, ciascuna con un nome di donna, e i due personaggi dialogano sul senso di questi racconti. Particolarmente riuscito mi è sembrato il momento in cui Tommaso ricorda che, parlando di tutte le città, Marco Polo parla in fondo sempre di Venezia: un'osservazione che illumina il tema della memoria.\n\nIl pregio maggiore della puntata è l'equilibrio tra i due conduttori. Livia non si limita a fare domande, ma esprime con franchezza una riserva condivisibile: Calvino le sembra a tratti freddo. Tommaso non liquida l'obiezione, anzi la riconosce come fondata, e propone una lettura diversa, attenta alla malinconia che si nasconde sotto la geometria del libro. Ne nasce un confronto vero, lontano dal tono celebrativo di tanti programmi culturali.\n\nQualche limite, tuttavia, c'è: avrei gradito la lettura ad alta voce di almeno un breve passaggio, che avrebbe reso più concreta la discussione per chi il libro non l'ha mai aperto.\n\nNel complesso, si tratta di una puntata intelligente e accessibile. La consiglierei sia a chi vuole avvicinarsi a Calvino per la prima volta, sia a chi, come Tommaso, lo aveva abbandonato e cerca un buon motivo per riprenderlo in mano."
+    "model": "«Scaffale Novecento»: Calvino raccontato a due voci\n\nNell'ultima puntata di «Scaffale Novecento», la conduttrice Livia e il critico Tommaso affrontano Le città invisibili di Italo Calvino, un libro del 1972 spesso citato e, come ammettono gli stessi conduttori, non sempre letto fino in fondo.\n\nLa puntata si apre con una confessione che conquista subito l'ascoltatore: Tommaso racconta di aver abbandonato il libro a diciotto anni perché si aspettava una trama. Da qui prende avvio una spiegazione chiara della struttura dell'opera: Marco Polo descrive all'imperatore Kublai Kan una serie di città impossibili, ciascuna con un nome di donna, e i due personaggi dialogano sul senso di questi racconti. Particolarmente riuscito mi è sembrato il momento in cui Tommaso ricorda che, parlando di tutte le città, Marco Polo parla in fondo sempre di Venezia: un'osservazione che illumina il tema della memoria.\n\nIl pregio maggiore della puntata è l'equilibrio tra i due conduttori. Livia non si limita a fare domande, ma esprime con franchezza una riserva condivisibile: Calvino le sembra a tratti freddo. Tommaso non liquida l'obiezione, anzi la riconosce come fondata, e propone una lettura diversa, attenta alla malinconia che si nasconde sotto la geometria del libro. Ne nasce un confronto vero, lontano dal tono celebrativo di tanti programmi culturali.\n\nQualche limite, tuttavia, c'è: avrei gradito la lettura ad alta voce di almeno un breve passaggio, che avrebbe reso più concreta la discussione per chi il libro non l'ha mai aperto.\n\nNel complesso, si tratta di una puntata intelligente e accessibile. La consiglierei sia a chi vuole avvicinarsi a Calvino per la prima volta, sia a chi, come Tommaso, lo aveva abbandonato e cerca un buon motivo per riprenderlo in mano.",
+    "gloss": {
+     "puntata": "episodio, emisión (de un programa)",
+     "prende avvio": "arranca, empieza",
+     "Particolarmente riuscito": "especialmente logrado",
+     "a tratti": "por momentos",
+     "non liquida l'obiezione": "no descarta la objeción a la ligera",
+     "avrei gradito": "me hubiera gustado",
+     "riprenderlo in mano": "volver a agarrarlo"
+    }
    }
   },
   {
@@ -8424,7 +8622,17 @@
       ]
      ]
     ],
-    "model": "Egregio dottor Martini,\n\nLe scrivo, anche a nome di alcuni colleghi dell'ufficio acquisti, per sottoporLe una proposta che riteniamo possa interessare la nostra azienda: avviare, in via sperimentale, una settimana lavorativa di quattro giorni.\n\nLo spunto ci è venuto da un articolo dedicato alla Ferretti Meccanica di Reggio Emilia, un'azienda di dimensioni simili alla nostra che ha appena concluso un anno di sperimentazione con trentadue ore settimanali a parità di stipendio. I risultati sono stati sorprendenti: la produzione è cresciuta di circa il 4 per cento, le assenze per malattia si sono ridotte di un terzo e nessun tecnico ha lasciato l'azienda. Considerando quanto sia difficile, anche per noi, trattenere il personale qualificato, credo che l'esperienza meriti di essere presa in considerazione.\n\nSono consapevole che l'iniziativa comporti dei rischi. L'articolo stesso segnala che nella manutenzione la gestione delle urgenze si è rivelata complessa e che alcuni dipendenti lamentano giornate più intense e meno occasioni di confronto. Proprio per questo proporrei di procedere con gradualità: si potrebbe cominciare da uno o due uffici, per un periodo di sei mesi, fissando obiettivi misurabili e prevedendo la sospensione qualora i risultati non fossero soddisfacenti.\n\nSarebbe inoltre opportuno che la sperimentazione fosse accompagnata da una revisione delle nostre abitudini, a partire dalla durata delle riunioni, che, come è emerso alla Ferretti, assorbono spesso più tempo di quanto sia necessario.\n\nResto a Sua disposizione per illustrarLe la proposta più nel dettaglio e, se lo ritiene utile, per organizzare un breve incontro con i colleghi interessati.\n\nLa ringrazio per l'attenzione e Le porgo distinti saluti.\n\nGiulia Ferraro\nUfficio acquisti"
+    "model": "Egregio dottor Martini,\n\nLe scrivo, anche a nome di alcuni colleghi dell'ufficio acquisti, per sottoporLe una proposta che riteniamo possa interessare la nostra azienda: avviare, in via sperimentale, una settimana lavorativa di quattro giorni.\n\nLo spunto ci è venuto da un articolo dedicato alla Ferretti Meccanica di Reggio Emilia, un'azienda di dimensioni simili alla nostra che ha appena concluso un anno di sperimentazione con trentadue ore settimanali a parità di stipendio. I risultati sono stati sorprendenti: la produzione è cresciuta di circa il 4 per cento, le assenze per malattia si sono ridotte di un terzo e nessun tecnico ha lasciato l'azienda. Considerando quanto sia difficile, anche per noi, trattenere il personale qualificato, credo che l'esperienza meriti di essere presa in considerazione.\n\nSono consapevole che l'iniziativa comporti dei rischi. L'articolo stesso segnala che nella manutenzione la gestione delle urgenze si è rivelata complessa e che alcuni dipendenti lamentano giornate più intense e meno occasioni di confronto. Proprio per questo proporrei di procedere con gradualità: si potrebbe cominciare da uno o due uffici, per un periodo di sei mesi, fissando obiettivi misurabili e prevedendo la sospensione qualora i risultati non fossero soddisfacenti.\n\nSarebbe inoltre opportuno che la sperimentazione fosse accompagnata da una revisione delle nostre abitudini, a partire dalla durata delle riunioni, che, come è emerso alla Ferretti, assorbono spesso più tempo di quanto sia necessario.\n\nResto a Sua disposizione per illustrarLe la proposta più nel dettaglio e, se lo ritiene utile, per organizzare un breve incontro con i colleghi interessati.\n\nLa ringrazio per l'attenzione e Le porgo distinti saluti.\n\nGiulia Ferraro\nUfficio acquisti",
+    "gloss": {
+     "Egregio": "Estimado (fórmula formal de saludo, a quien tiene un título o cargo)",
+     "sottoporLe": "presentarle, someter a su consideración (Le = usted)",
+     "in via sperimentale": "a modo de prueba",
+     "Lo spunto": "la idea disparadora",
+     "a parità di stipendio": "con el mismo sueldo",
+     "trattenere": "retener",
+     "lamentano": "se quejan de",
+     "Resto a Sua disposizione": "quedo a su disposición"
+    }
    }
   }
  ]

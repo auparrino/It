@@ -515,13 +515,14 @@ LESSONS = {
          ["Ho *degli* amici a Roma.", "Tengo (unos) amigos en Roma."],
          ["Compro *delle* camicie.", "Compro (unas) camisas."],
          ["Mi serve *dello* sciroppo.", "Necesito jarabe."]],
+  "warn": "El número lo pone el sustantivo: singular con lo que no se cuenta (*dell'olio*, *del pane*), plural con lo que se cuenta (*degli amici*). «degli olio» no existe.",
   "tip": "La forma sale del artículo de la palabra: *lo sciroppo* → *dello "
          "sciroppo*; *l'acqua* → *dell'acqua*.",
   "more": ["Si el verbo ya trae *di* (*ho bisogno di*, necesito), no se suma el "
            "partitivo: *ho bisogno di pane*, *ho bisogno di un'aspirina*. "
            "Nunca «di del pane»."],
   "qq": [{"prompt": "Completá", "stem": "Avete ___ pasta fresca?", "answer": "della", "options": ["della", "del", "delle"]},
-         {"prompt": "Completá", "stem": "Compro ___ olio.", "answer": "dell'", "options": ["dell'", "del", "dello"]}]},
+         {"prompt": "Completá", "stem": "Compro ___ olio.", "answer": "dell'", "options": ["dell'", "del", "degli"]}]},
 
  {"h": "Otras maneras: un po' di, qualche, alcuni",
   "r": "*un po' di* + lo que no se cuenta; *qualche* + **singular**; "

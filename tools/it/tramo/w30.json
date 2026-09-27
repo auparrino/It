@@ -122,6 +122,15 @@
       ["el ejemplo del video del audio", ["video", "incendio", "redazion"]],
       ["al menos dos consejos prácticos", ["consigl", "verific", "controll", "fonti"]]
     ],
-    "model": "Prima di condividere, fermati un attimo\n\nChi di noi non ha mai inoltrato una notizia senza leggerla fino in fondo? La docuserie «Condiviso» mostra quanto possa costare questo gesto: una bugia su un sindaco che avrebbe vietato i matrimoni di venerdì ha fatto il giro del Paese, e un uomo innocente ha ricevuto insulti per settimane. Nessuno pensava che valesse la pena controllarla, perché sembrava piccola e divertente.\n\nIl problema non riguarda solo i lettori. Anche le redazioni, spinte dalla fretta, rischiano di pubblicare contenuti falsi. In una conversazione tra giornalisti che ho ascoltato, un video di un incendio sembrava verissimo, ma era stato girato in Grecia tre anni prima.\n\nChe cosa possiamo fare, allora? Ecco due consigli semplici. Primo: prima di condividere, chiediamoci chi ha pubblicato la notizia e se altre fonti affidabili la confermano. Secondo: guardiamo i dettagli, come le insegne, le date, la lingua. Spesso bastano due minuti per scoprire un falso.\n\nSe tutti lo facessimo, la rete sarebbe un posto molto più pulito."
+    "model": "Prima di condividere, fermati un attimo\n\nChi di noi non ha mai inoltrato una notizia senza leggerla fino in fondo? La docuserie «Condiviso» mostra quanto possa costare questo gesto: una bugia su un sindaco che avrebbe vietato i matrimoni di venerdì ha fatto il giro del Paese, e un uomo innocente ha ricevuto insulti per settimane. Nessuno pensava che valesse la pena controllarla, perché sembrava piccola e divertente.\n\nIl problema non riguarda solo i lettori. Anche le redazioni, spinte dalla fretta, rischiano di pubblicare contenuti falsi. In una conversazione tra giornalisti che ho ascoltato, un video di un incendio sembrava verissimo, ma era stato girato in Grecia tre anni prima.\n\nChe cosa possiamo fare, allora? Ecco due consigli semplici. Primo: prima di condividere, chiediamoci chi ha pubblicato la notizia e se altre fonti affidabili la confermano. Secondo: guardiamo i dettagli, come le insegne, le date, la lingua. Spesso bastano due minuti per scoprire un falso.\n\nSe tutti lo facessimo, la rete sarebbe un posto molto più pulito.",
+    "gloss": {
+      "fermati un attimo": "pará un momento",
+      "inoltrato": "reenviado",
+      "fino in fondo": "hasta el final",
+      "avrebbe vietato": "habría prohibido, supuestamente prohibió (condizionale passato para una noticia no confirmada: se ve en la semana 31)",
+      "ha fatto il giro del Paese": "recorrió todo el país, se hizo viral",
+      "era stato girato": "había sido filmado (voz pasiva: se ve en la semana 35)",
+      "insegne": "carteles de los negocios"
+    }
   }
 }

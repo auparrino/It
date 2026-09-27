@@ -122,6 +122,14 @@
       ["comentar el estilo", ["stile", "scrittura", "linguaggio"]],
       ["recomendar el cuento y a quién", ["consigli", "lettori", "raccomand"]]
     ],
-    "model": "«La casa di via Roma»: un viaggio all'indietro\n\nIl racconto narra la storia di un giovane argentino che, dopo aver ottenuto la cittadinanza italiana, decide di visitare Pietrafonda, il paesino italiano che suo nonno aveva lasciato nel 1951. Il ragazzo cerca una casa con la porta verde e un mare che, a quanto pare, dal paese non si vede. Non svelo che cosa trova: dico solo che la risposta è più sorprendente, e più tenera, di quanto il lettore si aspetti.\n\nI personaggi sono pochi ma ben costruiti. Nunziata, l'anziana che accoglie il protagonista, è indimenticabile: ironica, generosa, custode della memoria del paese. Il nonno, anche se è assente, è la presenza più forte del testo.\n\nLo stile è semplice e preciso, senza sentimentalismi. L'autore usa pochi dettagli, come una valigia di cartone o un piatto di fichi promesso, per evocare un mondo intero.\n\nConsiglio questo racconto a chiunque abbia radici lontane, e in particolare ai discendenti degli emigranti in America Latina: molti ci ritroveranno la storia della propria famiglia. Per me è stata una lettura davvero commovente."
+    "model": "«La casa di via Roma»: un viaggio all'indietro\n\nIl racconto narra la storia di un giovane argentino che, dopo aver ottenuto la cittadinanza italiana, decide di visitare Pietrafonda, il paesino italiano che suo nonno aveva lasciato nel 1951. Il ragazzo cerca una casa con la porta verde e un mare che, a quanto pare, dal paese non si vede. Non svelo che cosa trova: dico solo che la risposta è più sorprendente, e più tenera, di quanto il lettore si aspetti.\n\nI personaggi sono pochi ma ben costruiti. Nunziata, l'anziana che accoglie il protagonista, è indimenticabile: ironica, generosa, custode della memoria del paese. Il nonno, anche se è assente, è la presenza più forte del testo.\n\nLo stile è semplice e preciso, senza sentimentalismi. L'autore usa pochi dettagli, come una valigia di cartone o un piatto di fichi promesso, per evocare un mondo intero.\n\nConsiglio questo racconto a chiunque abbia radici lontane, e in particolare ai discendenti degli emigranti in America Latina: molti ci ritroveranno la storia della propria famiglia. Per me è stata una lettura davvero commovente.",
+    "gloss": {
+      "Non svelo": "no revelo, no cuento",
+      "a quanto pare": "por lo visto, según parece",
+      "tenera": "tierna",
+      "custode": "guardiana",
+      "fichi": "higos",
+      "ci ritroveranno": "van a encontrar ahí (ci = en el cuento)"
+    }
   }
 }

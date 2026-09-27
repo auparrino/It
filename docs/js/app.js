@@ -723,7 +723,7 @@
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION = "c1-vN" in sw.js: test_game
      and the CI check it).  One version for the app and both languages. */
-  var APP_VERSION = "v2.7";
+  var APP_VERSION = "v2.8";
   // Settimana XVII: Roman numerals on the street signs (LANG.ui.romanWeeks).
   function romano(n) {
     var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
@@ -2734,7 +2734,8 @@
       if (outE) outE.innerHTML = '<p class="muted small">⏳ Preguntándole a la IA…</p>';
       var fbText = ($("#fb") || {}).innerText || "";
       var x = { prompt: it.prompt, stem: it.stem, options: it.options, given: given, answer: sol,
-                accept: it.accept, feedback: fbText.split(UI.next)[0].replace(/\s+/g, " ").slice(0, 600) };
+                accept: it.accept, feedback: fbText.split(UI.next)[0].replace(/\s+/g, " ").slice(0, 600),
+                note: it.note || "", diff: gapDiff(given, sol) };
       // Graded hints (dynamic assessment): implicit → the rule as a
       // question → the explanation.  The level reached is kept as a
       // signal of how much mediation the learner needed.
@@ -2756,7 +2757,7 @@
           o.innerHTML = '<div class="aiout">' +
             '<p>🤖 <b>Pista 1:</b> ' + esc(String(data.pista1 || "")) + "</p>" +
             (lvl >= 2 ? '<p><b>Pista 2:</b> ' + esc(String(data.pista2 || "")) + "</p>" : "") +
-            (lvl >= 3 ? "<p>" + mk(esc(String(data.explicacion || ""))) + "</p>" +
+            (lvl >= 3 ? "<p>" + mk(String(data.explicacion || "")) + "</p>" +
               (dispute ? '<p class="muted small">La IA cree que ' + (data.tambien_correcta ? "tu respuesta también vale" : "la corrección de la app no es buena") +
                  ". Quedó anotado en " + UI.me + " → «Correcciones para revisar».</p>" : "") + modelLine(meta) : "") +
             (lvl < 3 ? '<div class="row"><button class="tab" id="morehint2">' + (lvl === 1 ? "💡 Más pista" : "📐 La explicación") + "</button></div>" : "") +
@@ -4054,6 +4055,15 @@
      six chunks recovered (Yu, Boers & Tremblay 2025), then the local
      checker marks the rest. */
   var dg = null;
+  // The expressions of a dictogloss that nothing has taught yet (t.gloss:
+  // {expresión: significado}): shown before listening and with the text.
+  function dgGlossHtml(t) {
+    var g = t.gloss || {}, k = Object.keys(g);
+    if (!k.length) return "";
+    return '<details class="trgloss"' + (dg && dg.step === 0 ? " open" : "") + '><summary>Expresiones del audio que conviene saber</summary><ul>' +
+      k.map(function (w) { return '<li><b lang="' + LG.tts + '">' + esc(w) + "</b> — " + esc(g[w]) + "</li>"; }).join("") + "</ul></details>";
+  }
+
   function renderDictogloss(w) {
     var t = Suoni.dgFor(w.week);
     if (!t) return '<button class="btn ghost" id="dgback">← a la semana</button><p>Esta semana no tiene dictogloss.</p>';
@@ -4063,7 +4073,7 @@
       plate("Dictogloss · " + UI.week + " " + weekNum(w.week), esc(t.title));
     if (dg.step === 0) {
       var second = dg.plays >= 1;
-      return head + '<div class="card"><p>' + esc(t.es) + "</p>" +
+      return head + '<div class="card"><p>' + esc(t.es) + "</p>" + dgGlossHtml(t) +
         '<p class="muted">Vas a escuchar el texto <b>dos veces</b>. La primera, solo escuchá. En la segunda, anotá acá abajo ' +
         "las palabras que puedas. Después lo reconstruís en la app, con tus notas a la vista: no hace falta que sea igual, " +
         "sino que diga lo mismo con las expresiones del texto. Se puntúan <b>seis bloques</b>.</p>" +
@@ -4090,7 +4100,7 @@
     var r = dg.result;
     return head + '<div class="card"><div class="scorebig"><b>' + r.found.length + " / " + r.n + '</b><span>bloques recuperados</span><span>+' + dg.xp + " xp</span></div>" +
       '<h3>El texto</h3><p class="muted small"><mark class="dgok">verde</mark>: lo recuperaste · <mark class="dgmiss">rojo</mark>: faltó</p>' +
-      '<p class="model it">' + dgMarked(t.text, r) + "</p>" +
+      '<p class="model it">' + dgMarked(t.text, r) + "</p>" + dgGlossHtml(t) +
       (r.missed.length ? '<h3>Faltaron</h3><p>' + r.missed.map(esc).join(" · ") + "</p>" : "") +
       '<h3>Tu versión</h3><p class="dgnotesview it">' + esc(dg.given || "") + "</p>" +
       (dg.findings && dg.findings.length ? "<h3>Para revisar en tu versión</h3><ol class=\"findings\">" + dg.findings.map(function (f) { return "<li>" + mk(f.msg) + "</li>"; }).join("") + "</ol>" : "") +
@@ -4409,7 +4419,7 @@
           if (data.fine || parla.obj.length >= 3 || parla.turns >= 12) endParla(w);
           else { var bx = $("#ptext"); if (bx) bx.focus(); }
         };
-        if (err || !data) { parla.busy = false; parla.history.push(["ia", "(La IA no respondió: " + esc(String(err && err.message || "")) + ". Probá de nuevo.)"]); render(); return; }
+        if (err || !data) { parla.busy = false; parla.history.push(["ia", "(La IA no respondió: " + String(err && err.message || "") + ". Probá de nuevo.)"]); render(); return; }
         var reply = sentenceCase(String(data.risposta || "").trim() || UI.ok);
         var hard = tooHard(reply);
         if (hard) {
@@ -4861,6 +4871,19 @@
         : "Para que una IA marque todo y lo explique, cargá una clave gratuita. ") +
         '<a href="#" id="aigo">Claves en ' + UI.me + " →</a></p>" +
       '<div id="sout"></div>';
+  }
+
+  /* Where the answer differs, gap by gap, for an item with several gaps
+     («dell' | dell' | del | del»): «hueco 3: pusiste X, va Y».  What the
+     AI gets as fact, so it explains that gap and nothing else. */
+  function gapDiff(given, answer) {
+    var want = String(answer || "").split(/\s*\|\s*/);
+    if (want.length < 2) return "";
+    var got = String(given || "").trim().split(/\s*[|,;]\s*|\s+/).filter(Boolean);
+    if (got.length !== want.length) return "el alumno escribió " + got.length + " respuestas y hay " + want.length + " huecos";
+    var out = [];
+    want.forEach(function (w, k) { if (Engine.normalise ? Engine.normalise(got[k]) !== Engine.normalise(w) : got[k] !== w) out.push("hueco " + (k + 1) + ": puso «" + got[k] + "», va «" + w + "»"); });
+    return out.length ? out.join("; ") : "los huecos coinciden: solo cambian la puntuación o los espacios";
   }
 
   var scriviTimer = null;

@@ -108,6 +108,12 @@
       ["tu postura", ["a mio parere", "secondo me", "credo", "ritengo", "penso"]],
       ["una propuesta concreta", ["propongo", "bisognerebbe", "navett", "sgrav", "parchegg"]]
     ],
-    "model": "Chiudere i centri storici alle auto: una scelta giusta?\n\nL'esperienza di Valmarina, raccontata da un editoriale e da un confronto radiofonico, mostra bene i due volti della pedonalizzazione. Da un lato, i vantaggi sono evidenti: l'aria è più pulita, il rumore è diminuito e le piazze sono tornate ai cittadini. Dall'altro, i costi sono ricaduti su chi era più fragile: i commercianti che dipendevano dai clienti in auto e gli anziani che non potevano più raggiungere il medico.\n\nA mio parere, la scelta di chiudere il centro è giusta, ma credo che il Comune abbia commesso un errore di metodo. Sembra che abbia pensato prima al progetto e solo dopo alle persone: le navette e i parcheggi esterni sono arrivati in ritardo, e i negozi non hanno ricevuto alcun aiuto.\n\nPer questo propongo che le città che vogliono seguire questa strada preparino prima i servizi e prevedano sgravi fiscali per i commercianti durante la transizione. Solo così una buona idea può diventare una buona politica."
+    "model": "Chiudere i centri storici alle auto: una scelta giusta?\n\nL'esperienza di Valmarina, raccontata da un editoriale e da un confronto radiofonico, mostra bene i due volti della pedonalizzazione. Da un lato, i vantaggi sono evidenti: l'aria è più pulita, il rumore è diminuito e le piazze sono tornate ai cittadini. Dall'altro, i costi sono ricaduti su chi era più fragile: i commercianti che dipendevano dai clienti in auto e gli anziani che non potevano più raggiungere il medico.\n\nA mio parere, la scelta di chiudere il centro è giusta, ma credo che il Comune abbia commesso un errore di metodo. Sembra che abbia pensato prima al progetto e solo dopo alle persone: le navette e i parcheggi esterni sono arrivati in ritardo, e i negozi non hanno ricevuto alcun aiuto.\n\nPer questo propongo che le città che vogliono seguire questa strada preparino prima i servizi e prevedano sgravi fiscali per i commercianti durante la transizione. Solo così una buona idea può diventare una buona politica.",
+    "gloss": {
+      "Da un lato": "por un lado (…dall'altro = por el otro)",
+      "sono ricaduti su": "recayeron sobre",
+      "navette": "combis, servicios de traslado",
+      "sgravi fiscali": "rebajas de impuestos"
+    }
   }
 }

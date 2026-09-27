@@ -1444,6 +1444,9 @@
       "\nRespuesta del alumno: " + (x.given || "(vacía)") + "\nRespuesta que la app da por correcta: " + (x.answer || "") +
       (x.accept && x.accept.length > 1 ? "\nOtras respuestas que la app acepta: " + x.accept.join(" | ") : "") +
       (x.feedback ? "\nCorrección que mostró la app: " + x.feedback : "") +
+      (x.diff ? "\nDiferencia exacta (calculada por la app, es un hecho): " + x.diff : "") +
+      (x.note ? "\nNota del ejercicio (revisada, es la regla que aplica): " + x.note : "") +
+      "\nNo inventes errores ni reglas: hablá solo del error que muestra la diferencia, todo en castellano rioplatense, sin comillas dobles ni HTML (las formas, entre *asteriscos*)." +
       "\n\nExplicale al alumno, en 2 a 4 oraciones en castellano rioplatense, qué está mal en su respuesta y cuál es la regla, " +
       "con un ejemplo corto en portugués. Si su respuesta en realidad también es correcta en el portugués de Brasil, o si la corrección de la app está mal o confunde, decilo claro.\n" +
       "No le des la razón por cortesía ni porque insista: «tambien_correcta» solo si su respuesta es portugués brasileño correcto y cumple la consigna; " +
@@ -1456,17 +1459,23 @@
      2024): first an implicit nudge, then the rule as a question, and only
      then the explanation.  One request, revealed step by step. */
   function hintsPrompt(x) {
-    return "Sos profesor de portugués de Brasil para un hispanohablante rioplatense, y tu método es no dar la respuesta de entrada: " +
-      "primero una pista implícita, después la regla como pregunta, y solo al final la explicación.\n" +
+    return "Sos profesor de portugués de Brasil para un hispanohablante rioplatense. Tu método: no dar la respuesta de entrada; " +
+      "primero una pista, después la regla como pregunta, y al final la explicación.\n" +
       "Consigna: " + (x.prompt || "") + "\nEnunciado: " + (x.stem || "") +
       (x.options && x.options.length ? "\nOpciones: " + x.options.join(" | ") : "") +
       "\nRespuesta del alumno: " + (x.given || "(vacía)") + "\nRespuesta correcta según la app: " + (x.answer || "") +
       (x.accept && x.accept.length > 1 ? "\nOtras respuestas aceptadas: " + x.accept.join(" | ") : "") +
-      "\n\nDevolvé tres niveles de mediación, cada uno más explícito que el anterior, SIN revelar la respuesta en los dos primeros:\n" +
-      "pista1: una frase corta en portugués fácil que señale dónde está el problema (ej.: «Tem um erro no verbo. Leia de novo.»).\n" +
-      "pista2: una pregunta en castellano que apunte a la regla (ej.: «Después de *quando* hablando del futuro, ¿qué tiempo va?»).\n" +
-      "explicacion: 2 a 4 oraciones en castellano rioplatense con la regla y un ejemplo en portugués.\n" +
-      "Si la respuesta del alumno también es correcta en el portugués de Brasil, decilo en la explicación; no le des la razón por cortesía.\n" +
+      (x.diff ? "\nDiferencia exacta (calculada por la app, es un hecho): " + x.diff : "") +
+      (x.note ? "\nNota del ejercicio (revisada, es la regla que aplica): " + x.note : "") +
+      "\n\nReglas estrictas:\n" +
+      "- Todo en castellano rioplatense (vos), sin frases en portugués de Brasil salvo los ejemplos entre *asteriscos*.\n" +
+      "- Hablá SOLO del error real: el que muestra la diferencia exacta. No inventes errores ni reglas; si la nota del ejercicio dice la regla, usala tal cual.\n" +
+      "- Si la diferencia es solo de puntuación, espacios o mayúsculas, decí que la respuesta está bien.\n" +
+      "- No uses comillas dobles ni HTML; para las formas en portugués de Brasil usá *asteriscos*.\n" +
+      "pista1: una frase corta que señale DÓNDE está el problema (el hueco o la palabra), sin dar la respuesta.\n" +
+      "pista2: una pregunta que apunte a la regla, sin dar la respuesta.\n" +
+      "explicacion: 2 o 3 oraciones con la regla exacta y la forma correcta, con un ejemplo corto.\n" +
+      "tambien_correcta: true solo si la respuesta del alumno es portugués de Brasil culto o coloquial aceptado y cumple la consigna; no le des la razón por cortesía.\n" +
       "Respondé SOLO con JSON: {\"pista1\": \"...\", \"pista2\": \"...\", \"explicacion\": \"...\", \"tambien_correcta\": true o false, \"app_equivocada\": true o false}";
   }
   function hints(x, keys, done) { llm(hintsPrompt(x), keys, done); }
