@@ -121,7 +121,7 @@
       ]
     ],
     "hunt": {
-      "label": "Tocá los falsos amigos del español (palabras que parecen iguales pero significan otra cosa)",
+      "label": "Toque nos falsos amigos do espanhol (palavras que parecem iguais, mas significam outra coisa)",
       "targets": [
         "esquisito",
         "polvo",
@@ -308,7 +308,7 @@
     "genre": "carta_leitor",
     "title": "O português que a gente acha que entende",
     "fonte": "lettura",
-    "t": "Você é um(a) leitor(a) hispanofalante do Diário Paulistano, jornal em que foi publicada a crônica “Esquisito é o polvo”. Após ler a crônica, escreva uma carta do leitor ao jornal comentando o texto. Na sua carta, relacione a crônica com uma experiência sua (real ou imaginada) com falsos amigos entre o espanhol e o português e posicione-se sobre a ideia, citada pela cronista, de que o maior perigo é “o português que a gente acha que entende”. Não se esqueça de identificar-se no final e de usar um registro formal, próprio de uma carta publicada em jornal. Seu texto deve ter entre 216 e 276 palavras.",
+    "t": "Você é um(a) leitor(a) hispanofalante do Diário Paulistano, jornal em que foi publicada a crônica “Esquisito é o polvo”. Após ler a crônica, escreva uma carta do leitor ao jornal comentando o texto. Na sua carta, relacione a crônica com uma experiência sua (real ou imaginada) com falsos amigos entre o espanhol e o português e posicione-se sobre a ideia, citada pela cronista, de que o maior perigo é “o português que a gente acha que entende”. Não se esqueça de identificar-se no final.",
     "es": "Carta de lector a un diario: comentá la crónica, contá una anécdota propia con un falso amigo (que no sea solo repetir las de la crónica) y tomá posición sobre la frase del profesor. Registro formal, con vocativo, despedida y firma.",
     "min": 216,
     "max": 276,
@@ -316,37 +316,35 @@
       [
         "Referirse a la crónica y a lo que cuenta",
         [
-          "crônica",
+          "esquisito é o polvo",
+          "diário paulistano",
           "cronista",
-          "polvo",
-          "esquisito"
+          "crônica"
         ]
       ],
       [
-        "Contar una experiencia propia con un falso amigo",
+        "Contar una experiencia con un falso amigo (polvo, esquisito, apelido…)",
         [
-          "experiência",
-          "comigo",
-          "no meu caso",
-          "aconteceu"
+          "polvo",
+          "esquisito",
+          "exquisito",
+          "embaraçad",
+          "borracha",
+          "apelido",
+          "oficina",
+          "escritório",
+          "sobremesa",
+          "falso amigo",
+          "falsos amigos"
         ]
       ],
       [
-        "Tomar posición sobre “o português que a gente acha que entende”",
+        "Tomar posición sobre «o português que a gente acha que entende»",
         [
           "concordo",
           "discordo",
           "acha que entende",
           "achamos que entendemos"
-        ]
-      ],
-      [
-        "Formato de carta de lector: vocativo, despedida e identificación",
-        [
-          "senhor editor",
-          "prezad",
-          "atenciosamente",
-          "cordialmente"
         ]
       ]
     ],

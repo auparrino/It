@@ -9,19 +9,46 @@
  * presenta como tal («conta-se»).  Todo en PB; la única cita en portugués
  * europeo (Sophia de Mello Breyner) tiene la misma grafía en ambas normas.
  *
- * ascolto[]:  dos entrevistas largas a dos voces (turns: "A" = primer
- *             hablante, "B" = segundo; la app las lee con dos alturas TTS),
- *             8 preguntas de opción múltiple en castellano (4 opciones) y
- *             4 frases para completar con una palabra del audio.
- * lettura[]:  dos textos de 6 párrafos (~600 palabras); 8 títulos (6 buenos
- *             + 2 distractores) para asignar (match[i] = índice del título
- *             del párrafo i); 8 verdadeiro/falso con la frase que lo prueba.
- * scrittura[]: dos consignas con la grilla del Celpe-Bras.  `kind` conserva
- *             los valores del módulo italiano ("argomentativo", "formale")
- *             porque app.js los usa.  rubric: [clave, descripción]; las
- *             claves (contexto, discursiva, linguistica, lexico) son las
- *             tres adequações del Celpe-Bras, con la lingüística partida en
- *             gramática y léxico para conservar los cuatro puntajes de 0-5. */
+ * Desde v3 todo está en portugués (como en el Celpe-Bras) y cada prueba
+ * tiene tres versiones.  Forma exacta:
+ *
+ * ascolto[]:  3 entrevistas a dos voces, {id: "asc-1".."asc-3", title,
+ *             speakers: [A, B], turns: [["A"|"B", texto]], questions:
+ *             [[pregunta, [4 opciones], respuesta]] × 8 (en portugués, con
+ *             opciones de largo parejo: tools/lib/test_fix_contenido_pt.js),
+ *             completa: [[frase con ___, palabra]] × 4}.  asc-3 tiene rasgos
+ *             de habla espontánea (tu con verbo de você, bah, hum, é…).
+ * lettura[]:  3 textos, {id: "let-1".."let-3", title, paragraphs[6],
+ *             titles[8] (6 buenos + 2 distractores), match[6] (índice del
+ *             título de cada párrafo), vf: [[afirmación, true|false,
+ *             la frase que lo prueba]] × 8}.
+ * versoes[]:  3 versiones de la produção escrita, {id: "v1".."v3",
+ *             ascolto: id de la escucha de esa versión, lettura: id de la
+ *             lectura, scrittura: [tarefa × 4]}.  Cada tarefa:
+ *               {id, kind, genero (el nombre del género, en portugués),
+ *                words (solo para la revisión local y la IA: el enunciado
+ *                no dice extensión ni registro, como la prova),
+ *                insumo: {tipo: "audio" | "texto",
+ *                         ref: id de ascolto[] o lettura[] de la versión,
+ *                         o bien titulo + turns (audio corto, mismo formato
+ *                         que ascolto.turns, con speakers) o titulo + texto},
+ *                t: el enunciado en portugués, rubric: la grilla (abajo)}.
+ *             La tarefa 1 parte de la escucha de la versión, la 2 de la
+ *             lectura, la 3 de un audio corto y la 4 de un texto corto.
+ * scrittura[]: = versoes[0].scrittura, para la pantalla actual de app.js
+ *             (que muestra todas las tarefas de este arreglo).  `kind`: los
+ *             valores de LANG.exam.kinds (lang.js).  rubric: [clave,
+ *             descripción]; las claves (contexto, discursiva, linguistica,
+ *             lexico) son las tres adequações del Celpe-Bras, con la
+ *             lingüística partida en gramática y léxico.
+ *
+ * Para que la pantalla use las versiones, app.js tiene que: elegir una
+ * versión v (al azar o la siguiente a la última hecha, en state.esame),
+ * tomar la escucha y la lectura por id (v.ascolto, v.lettura) en vez de
+ * es.k, mostrar v.scrittura con su insumo antes de cada enunciado (un
+ * insumo con ref reabre la escucha o la lectura de la versión; uno con
+ * turns se lee con speak() como ascolto.turns) y guardar los borradores
+ * por t.id (ya son únicos entre versiones). */
 (function (root) { "use strict";
   var ESAME = {
     ascolto: [
@@ -41,30 +68,30 @@
           ["B", "Eu que agradeço."]
         ],
         questions: [
-          ["¿Qué corrige la historiadora al principio?",
-           ["Que Sérgio Buarque no inventó la expresión: la tomó del escritor Ribeiro Couto", "Que el libro se publicó en 1946 y no en 1936", "Que Sérgio Buarque era antropólogo y no historiador", "Que la expresión viene del portugués medieval"],
-           "Que Sérgio Buarque no inventó la expresión: la tomó del escritor Ribeiro Couto"],
-          ["¿Qué significa «cordial» en el sentido de Sérgio Buarque?",
-           ["Que actúa movido por el corazón, por las emociones", "Amable y bien educado", "Que respeta las normas por convicción", "Hospitalario con los extranjeros"],
-           "Que actúa movido por el corazón, por las emociones"],
-          ["Según Sérgio Buarque, ¿qué le cuesta al brasileño?",
-           ["Separar lo público de lo privado", "Hablar con desconocidos", "Aceptar la jerarquía familiar", "Expresar sus emociones"],
-           "Separar lo público de lo privado"],
-          ["¿Qué ejemplos cotidianos da el libro?",
-           ["El gusto por los diminutivos y llamar a la gente por el nombre de pila", "La impuntualidad y las filas en los bancos", "El uso de «o senhor» entre amigos", "El fútbol y el carnaval"],
-           "El gusto por los diminutivos y llamar a la gente por el nombre de pila"],
-          ["¿Cuándo muestra el jeitinho su lado perverso?",
-           ["Cuando alguien, en vez de pedir, amenaza con «¿Sabe con quién está hablando?»", "Cuando alguien cuenta su historia para conseguir un favor", "Cuando se cumple la regla sin excepciones", "Cuando la gente ayuda a desconocidos"],
-           "Cuando alguien, en vez de pedir, amenaza con «¿Sabe con quién está hablando?»"],
-          ["En «O semeador e o ladrilhador», ¿quién es el «ladrilhador»?",
-           ["El colonizador español, que trazaba las ciudades en cuadrícula", "El colonizador portugués, que se adaptaba al terreno", "El bandeirante que abría caminos en el interior", "El urbanista que proyectó Brasília"],
-           "El colonizador español, que trazaba las ciudades en cuadrícula"],
-          ["¿Qué imagen de Río usa la historiadora para explicar la metáfora?",
-           ["Las calles torcidas que se ven desde Santa Teresa", "La cuadrícula de las calles de Copacabana", "Los túneles entre la Zona Sul y el Centro", "La playa de Ipanema vista desde el Arpoador"],
-           "Las calles torcidas que se ven desde Santa Teresa"],
-          ["¿Por qué se sigue leyendo Raízes do Brasil, según ella?",
-           ["Porque obliga a hacer las preguntas correctas", "Porque acertó en todo", "Porque describe fielmente el Brasil de hoy", "Porque es lectura obligatoria en la escuela"],
-           "Porque obliga a hacer las preguntas correctas"]
+          ["O que a historiadora corrige logo no começo?",
+           ["Que a expressão não é dele: ele a tomou de Ribeiro Couto", "Que Raízes do Brasil foi publicado em 1946, e não em 1936", "Que Sérgio Buarque era antropólogo, e não um historiador", "Que a expressão «homem cordial» vem do português medieval"],
+           "Que a expressão não é dele: ele a tomou de Ribeiro Couto"],
+          ["O que significa «cordial» no sentido de Sérgio Buarque?",
+           ["Que age movido pelo coração", "Que é gentil e bem-educado", "Que respeita sempre as regras", "Que recebe bem os estrangeiros"],
+           "Que age movido pelo coração"],
+          ["Segundo Sérgio Buarque, o que é difícil para o brasileiro?",
+           ["Separar o público do privado", "Conversar com desconhecidos", "Aceitar a hierarquia da família", "Demonstrar as próprias emoções"],
+           "Separar o público do privado"],
+          ["Que exemplos do cotidiano o livro dá?",
+           ["Os diminutivos e o hábito de usar o primeiro nome", "A falta de pontualidade e as filas intermináveis dos bancos", "O uso de «o senhor» entre amigos de infância", "O gosto pelo futebol e pelo carnaval de rua"],
+           "Os diminutivos e o hábito de usar o primeiro nome"],
+          ["Quando aparece o lado perverso do jeitinho?",
+           ["Quando alguém ameaça em vez de pedir", "Quando alguém conta a sua história", "Quando a regra é cumprida sem exceção", "Quando as pessoas ajudam desconhecidos"],
+           "Quando alguém ameaça em vez de pedir"],
+          ["Em «O semeador e o ladrilhador», quem é o ladrilhador?",
+           ["O espanhol, que traçava cidades em quadras", "O português, que se adaptava ao terreno do litoral", "O bandeirante, que abria os caminhos", "O urbanista que projetou Brasília"],
+           "O espanhol, que traçava cidades em quadras"],
+          ["Que imagem do Rio a historiadora usa para explicar a metáfora?",
+           ["As ruas tortas vistas de Santa Teresa", "As quadras retas de Copacabana", "Os túneis entre a Zona Sul e o Centro", "A praia de Ipanema vista do Arpoador"],
+           "As ruas tortas vistas de Santa Teresa"],
+          ["Por que Raízes do Brasil ainda é lido, segundo ela?",
+           ["Porque obriga a fazer as perguntas certas", "Porque acertou em tudo o que previu", "Porque retrata fielmente o Brasil atual", "Porque ainda é leitura obrigatória nas escolas"],
+           "Porque obriga a fazer as perguntas certas"]
         ],
         completa: [
           ["A palavra «cordial» vem do latim cor, cordis, que significa ___.", "coração"],
@@ -90,36 +117,87 @@
           ["A", "Paulo Menezes, obrigada. E você, que está nos ouvindo, aproveite para visitar o Paço Imperial."]
         ],
         questions: [
-          ["¿Cuándo llegó la corte a Río de Janeiro?",
-           ["En marzo de 1808, después de pasar por Salvador", "En noviembre de 1807, directamente desde Lisboa", "En 1815, cuando Brasil se volvió reino", "En enero de 1822"],
-           "En marzo de 1808, después de pasar por Salvador"],
-          ["¿Por qué la corte dejó Lisboa?",
-           ["Porque estaba atrapada entre las exigencias de Napoleón y las de Inglaterra", "Porque estalló una revolución liberal en Oporto", "Porque la reina quería conocer Brasil", "Porque Inglaterra había invadido Portugal"],
-           "Porque estaba atrapada entre las exigencias de Napoleón y las de Inglaterra"],
-          ["¿Cómo juzga el historiador la partida de la corte?",
-           ["Algunos la ven como fuga cobarde y otros como maniobra genial; probablemente fue las dos cosas", "Como una fuga cobarde, sin más", "Como una maniobra genial de Dom João", "Como un error que hizo perder las colonias"],
-           "Algunos la ven como fuga cobarde y otros como maniobra genial; probablemente fue las dos cosas"],
-          ["¿Cuántas personas llegaron con la corte?",
-           ["No se sabe con certeza: las estimaciones van de algunos miles a más de diez mil", "Unas sesenta mil", "Poco más de quinientas", "Cien mil, más que los habitantes de la ciudad"],
-           "No se sabe con certeza: las estimaciones van de algunos miles a más de diez mil"],
-          ["Según se cuenta, ¿cómo leía el pueblo las letras P.R. pintadas en las puertas?",
-           ["«Ponha-se na Rua» (póngase en la calle)", "«Príncipe Real»", "«Porto do Rio»", "«Propriedade Régia»"],
-           "«Ponha-se na Rua» (póngase en la calle)"],
-          ["¿Qué decretó Dom João cuando todavía estaba en Salvador?",
-           ["La apertura de los puertos a las naciones amigas", "La creación del Banco do Brasil", "La elevación de Brasil a reino", "El fin del tráfico de esclavos"],
-           "La apertura de los puertos a las naciones amigas"],
-          ["¿Qué fue el «Dia do Fico»?",
-           ["El día en que Pedro decidió quedarse en Brasil", "El día en que Dom João volvió a Lisboa", "El día de la independencia", "El día en que la corte desembarcó en Río"],
-           "El día en que Pedro decidió quedarse en Brasil"],
-          ["¿Qué consecuencias tuvo que la independencia la hiciera un príncipe portugués?",
-           ["Ayudó a mantener unido el territorio, pero también a conservar la esclavitud", "Dividió el país en varias repúblicas", "Aceleró la abolición de la esclavitud", "Hizo que Brasil volviera a ser colonia"],
-           "Ayudó a mantener unido el territorio, pero también a conservar la esclavitud"]
+          ["Quando a corte chegou ao Rio de Janeiro?",
+           ["Em março de 1808, depois de passar por Salvador", "Em novembro de 1807, direto de Lisboa, sem escalas", "Em 1815, quando o Brasil virou reino", "Em janeiro de 1822, no Dia do Fico"],
+           "Em março de 1808, depois de passar por Salvador"],
+          ["Por que a corte deixou Lisboa?",
+           ["Estava entre as exigências de Napoleão e as da Inglaterra", "Tinha acabado de estourar uma revolução liberal no Porto", "A rainha queria conhecer as terras do Brasil", "A Inglaterra tinha acabado de invadir Portugal"],
+           "Estava entre as exigências de Napoleão e as da Inglaterra"],
+          ["Como o historiador avalia a partida da corte?",
+           ["Provavelmente foi fuga e manobra ao mesmo tempo", "Foi uma fuga covarde, e nada mais do que isso", "Foi uma manobra genial de Dom João, sem dúvida", "Foi um erro que fez Portugal perder as colônias"],
+           "Provavelmente foi fuga e manobra ao mesmo tempo"],
+          ["Quantas pessoas vieram com a corte?",
+           ["Não se sabe: de alguns milhares a mais de dez mil", "Umas sessenta mil, tantas quanto os moradores", "Pouco mais de quinhentas pessoas, entre nobres e criados", "Cem mil, mais do que os habitantes da cidade"],
+           "Não se sabe: de alguns milhares a mais de dez mil"],
+          ["Segundo se conta, como o povo lia as letras P.R.?",
+           ["«Ponha-se na Rua»", "«Príncipe Real»", "«Porto do Rio»", "«Prédio da Realeza»"],
+           "«Ponha-se na Rua»"],
+          ["O que Dom João decretou ainda em Salvador?",
+           ["A abertura dos portos às nações amigas", "A criação do Banco do Brasil no Rio de Janeiro", "A elevação do Brasil a Reino Unido", "O fim do tráfico de escravizados"],
+           "A abertura dos portos às nações amigas"],
+          ["O que foi o Dia do Fico?",
+           ["O dia em que Pedro decidiu ficar", "O dia em que Dom João voltou", "O dia da proclamação da independência", "O dia em que a corte desembarcou"],
+           "O dia em que Pedro decidiu ficar"],
+          ["Que consequência teve uma independência feita por um príncipe português?",
+           ["Manteve o território unido e conservou a escravidão", "Dividiu o território em várias repúblicas independentes", "Acelerou a abolição da escravidão no Brasil", "Fez o Brasil voltar a ser colônia de Portugal"],
+           "Manteve o território unido e conservou a escravidão"]
         ],
         completa: [
           ["Em março de 1808 desembarcou no Rio o príncipe ___ Dom João.", "regente"],
           ["Para alojar os recém-chegados, muitas casas foram ___.", "requisitadas"],
           ["O acervo da Biblioteca Real deu origem à atual Biblioteca ___.", "Nacional"],
           ["Em 1820 estourou no Porto uma revolução ___ que exigia o retorno do rei.", "liberal"]
+        ] },
+
+      { id: "asc-3", title: "Rádio: viver numa fronteira que é uma rua", speakers: ["Apresentadora", "Morador"],
+        turns: [
+          ["A", "Boa tarde, você está ouvindo o Brasil de Ponta a Ponta. Hoje a gente vai até o extremo sul, a Santana do Livramento, no Rio Grande do Sul, que faz fronteira com Rivera, no Uruguai. Tá comigo o Tiago Pereira, professor de geografia e morador da cidade. Tiago, tudo bem?"],
+          ["B", "Bah, tudo ótimo. Obrigado pelo convite. É… é sempre bom falar da minha cidade."],
+          ["A", "Tiago, pra quem nunca foi: como é essa fronteira?"],
+          ["B", "Olha, a fronteira aqui é uma rua. Literalmente. Tu atravessa a rua e já tá no Uruguai. Não tem rio, não tem ponte, não tem… não tem nada. No meio das duas cidades tem a Praça Internacional, que é metade brasileira e metade uruguaia. Tem gente que almoça de um lado e toma o cafezinho do outro."],
+          ["A", "E ninguém pede passaporte?"],
+          ["B", "Não, não, pra circular entre as duas cidades, não. Quem mora aqui pode tirar um documento especial de fronteiriço, que facilita, por exemplo, trabalhar ou estudar do outro lado. Agora, se tu quer seguir viagem pra Montevidéu, aí sim, aí tem que fazer os trâmites normais de entrada."],
+          ["A", "E a língua? Que língua se fala na rua?"],
+          ["B", "Hum, essa é a parte mais bonita, eu acho. Se fala português, se fala espanhol e se fala o que o pessoal chama de portunhol, ou de fronteiriço. Não é uma mistura aleatória, né? Os linguistas estudam isso há décadas. Do lado uruguaio tem família que fala português em casa há gerações, desde antes de a fronteira ser traçada. Então não é que o português chegou agora: ele sempre esteve ali."],
+          ["A", "E na escola, como fica?"],
+          ["B", "Durante muito tempo, do lado uruguaio, a escola tratou esse português como… como um erro, uma coisa a corrigir. Hoje tem escolas bilíngues dos dois lados, e isso mudou bastante a autoestima das crianças. Eu tenho aluno que pensa em português e faz conta em espanhol. E tá tudo certo."],
+          ["A", "E no dia a dia, o que mais chama a atenção de quem chega?"],
+          ["B", "O chimarrão, com certeza. Aqui todo mundo toma, dos dois lados, só que o uruguaio chama de mate. E o comércio: o pessoal atravessa pra comprar nos free shops de Rivera, e os uruguaios vêm comprar do lado brasileiro quando o câmbio ajuda. A cidade vive muito disso, do sobe e desce do câmbio."],
+          ["A", "Pra terminar, Tiago: tem alguma coisa que te incomoda na fronteira?"],
+          ["B", "Tem, sim. A gente fica longe de tudo: das capitais, das universidades, dos hospitais grandes. Muito jovem vai embora pra estudar e não volta. Mas eu costumo dizer que aqui a gente aprende cedo uma coisa que muita gente nunca aprende: que o vizinho que fala diferente não é estrangeiro. É vizinho."],
+          ["A", "Tiago Pereira, muito obrigada. E você, que tá nos ouvindo, até a semana que vem."]
+        ],
+        questions: [
+          ["O que diferencia essa fronteira, segundo o Tiago?",
+           ["As duas cidades são separadas só por uma rua", "As cidades são separadas por um rio e uma ponte", "A fronteira fica no meio de uma área rural", "Há um muro com um posto de controle no centro"],
+           "As duas cidades são separadas só por uma rua"],
+          ["O que é a Praça Internacional?",
+           ["Uma praça metade brasileira e metade uruguaia", "Uma praça onde se faz o controle de passaportes", "A praça principal do lado uruguaio, em Rivera", "Uma feira de produtos dos dois países"],
+           "Uma praça metade brasileira e metade uruguaia"],
+          ["Para que serve o documento de fronteiriço?",
+           ["Para facilitar trabalhar ou estudar do outro lado", "Para viajar até Montevidéu sem outros trâmites", "Para comprar nos free shops de Rivera sem pagar impostos", "Para votar nas eleições das duas cidades"],
+           "Para facilitar trabalhar ou estudar do outro lado"],
+          ["O que o Tiago diz sobre o portunhol da fronteira?",
+           ["Não é uma mistura aleatória: é estudado há décadas", "É uma mistura aleatória, inventada pelos turistas", "Só é falado pelos comerciantes do lado brasileiro", "Está desaparecendo por causa das escolas bilíngues"],
+           "Não é uma mistura aleatória: é estudado há décadas"],
+          ["Segundo ele, há quanto tempo se fala português do lado uruguaio?",
+           ["Há gerações, desde antes da fronteira ser traçada", "Desde que abriram os free shops em Rivera", "Desde que as escolas bilíngues começaram", "Só desde a chegada da televisão brasileira à região"],
+           "Há gerações, desde antes da fronteira ser traçada"],
+          ["O que mudou com as escolas bilíngues?",
+           ["A autoestima das crianças melhorou bastante", "O português deixou de ser falado em casa", "As crianças passaram a fazer contas em inglês", "O espanhol virou a única língua do ensino"],
+           "A autoestima das crianças melhorou bastante"],
+          ["De que depende muito o comércio da cidade?",
+           ["Do sobe e desce do câmbio", "Do turismo de Montevidéu", "Da venda de chimarrão", "Das universidades próximas"],
+           "Do sobe e desce do câmbio"],
+          ["O que incomoda o Tiago na vida na fronteira?",
+           ["A distância das capitais, das universidades e dos hospitais", "A confusão entre as duas línguas nas escolas da cidade", "O trânsito pesado de caminhões nas ruas do centro histórico", "A falta de comércio aberto nos fins de semana"],
+           "A distância das capitais, das universidades e dos hospitais"]
+        ],
+        completa: [
+          ["Tu atravessa a ___ e já tá no Uruguai.", "rua"],
+          ["Quem mora aqui pode tirar um documento especial de ___.", "fronteiriço"],
+          ["Aqui todo mundo toma ___, dos dois lados.", "chimarrão"],
+          ["O vizinho que fala diferente não é ___.", "estrangeiro"]
         ] }
     ],
 
@@ -184,23 +262,113 @@
           ["Marcello Caetano morreu no exílio, no Rio de Janeiro.", true, "«partiu para o exílio no Brasil e morreu no Rio de Janeiro em 1980»"],
           ["Eduardo Lourenço fez uma leitura tão eufórica quanto a de Sophia.", false, "«propôs uma leitura menos eufórica»"],
           ["Portugal entrou na Comunidade Econômica Europeia em 1986.", true, "«Em 1986, Portugal entrou na Comunidade Econômica Europeia»"]
+        ] },
+
+      { id: "let-3", title: "O ouro branco da Amazônia",
+        paragraphs: [
+          "Entre o fim do século XIX e o começo do século XX, a Amazônia viveu uma riqueza tão rápida quanto passageira. A borracha, extraída do látex da seringueira, tornara-se indispensável para a indústria: pneus de bicicleta e, depois, de automóvel, correias de máquinas, isolamento de fios elétricos. Como as seringueiras cresciam espalhadas pela floresta, e não em plantações, era preciso gente para percorrer, todos os dias, as trilhas que ligavam uma árvore à outra. O Brasil dominava o mercado mundial, e o látex ganhou o apelido de «ouro branco».",
+          "Essa gente veio, em grande parte, do Nordeste. A grande seca de 1877, no Ceará, empurrou dezenas de milhares de famílias para o Norte. Os seringueiros chegavam endividados: a viagem, as ferramentas e a comida eram adiantadas pelo seringalista, dono do seringal, e descontadas da produção a preços que ele mesmo fixava. Muitos passavam a vida sem conseguir pagar a dívida, presos a um sistema conhecido como aviamento. Isolados na mata, expostos à malária e a outras doenças, poucos voltavam para casa.",
+          "Nas cidades, o dinheiro corria. Manaus e Belém ganharam bondes elétricos, avenidas largas, palacetes e iluminação pública antes de muitas capitais do Sul. O Teatro Amazonas, inaugurado em Manaus em 1896, com materiais trazidos da Europa, tornou-se o símbolo desse luxo. Conta-se que a elite mandava lavar a roupa em Portugal; a história talvez seja exagerada, mas diz muito sobre a distância entre os palacetes e os seringais.",
+          "A disputa pela borracha também redesenhou o mapa. No Acre, então território boliviano, a maioria dos habitantes era de seringueiros brasileiros, e os conflitos se multiplicaram. Depois de uma revolta armada, o Brasil negociou com a Bolívia o Tratado de Petrópolis, assinado em 1903: o Acre passou a ser brasileiro em troca de uma indenização e do compromisso de construir uma ferrovia, a Madeira-Mamoré, que custou milhares de vidas e ficou pronta quando o ciclo já acabava.",
+          "O fim veio de fora. Em 1876, o inglês Henry Wickham levou sementes de seringueira para Londres; as mudas foram parar nas colônias britânicas da Ásia, onde se formaram plantações organizadas, com árvores enfileiradas e mão de obra barata. Na década de 1910, a borracha asiática já era mais barata e mais abundante que a amazônica, e os preços desabaram. Nem a tentativa de Henry Ford, que no fim dos anos 1920 fundou no Pará uma cidade-empresa, a Fordlândia, conseguiu fazer a seringueira render em plantações na própria Amazônia.",
+          "A história dos seringueiros, porém, não terminou com o ciclo. Nos anos 1970 e 1980, no Acre, eles se organizaram contra o desmatamento feito para abrir pastos. O líder sindical Chico Mendes, de Xapuri, defendia que a floresta em pé valia mais do que derrubada e propunha áreas onde as comunidades pudessem viver da coleta sem destruir a mata. Ele foi assassinado em dezembro de 1988. Pouco depois, o governo criou as primeiras reservas extrativistas, e a ideia de que proteger a floresta é também proteger quem vive dela passou a fazer parte do debate ambiental no mundo inteiro."
+        ],
+        titles: [
+          "A floresta em pé",
+          "Um mercado mundial",
+          "O Acre muda de país",
+          "A migração do Nordeste",
+          "O luxo das capitais",
+          "As sementes que foram para a Ásia",
+          "A descoberta do petróleo",
+          "O fim da escravidão"
+        ],
+        match: [1, 3, 4, 2, 5, 0],
+        vf: [
+          ["As seringueiras eram cultivadas em grandes plantações na Amazônia.", false, "«cresciam espalhadas pela floresta, e não em plantações»"],
+          ["Os seringueiros começavam o trabalho já devendo dinheiro ao seringalista.", true, "«Os seringueiros chegavam endividados»"],
+          ["Manaus teve iluminação pública antes de muitas capitais do Sul.", true, "«iluminação pública antes de muitas capitais do Sul»"],
+          ["O texto garante que a elite mandava lavar a roupa em Portugal.", false, "«a história talvez seja exagerada»"],
+          ["O Acre passou a ser brasileiro por um tratado assinado em 1903.", true, "«o Tratado de Petrópolis, assinado em 1903: o Acre passou a ser brasileiro»"],
+          ["A ferrovia Madeira-Mamoré ficou pronta no auge do ciclo da borracha.", false, "«ficou pronta quando o ciclo já acabava»"],
+          ["A Fordlândia conseguiu tornar lucrativas as plantações de seringueira.", false, "«Nem a tentativa de Henry Ford […] conseguiu fazer a seringueira render»"],
+          ["Chico Mendes defendia que as comunidades vivessem da coleta sem destruir a floresta.", true, "«áreas onde as comunidades pudessem viver da coleta sem destruir a mata»"]
         ] }
     ],
 
-    scrittura: [
-      { id: "scr-1", kind: "argomentativo", words: 200,
-        t: "Un diario carioca abrió un debate en su sección de opinión con esta tesis: «O jeitinho brasileiro é mais uma virtude criativa do que um problema para o país». Como lector o lectora, escribí un artículo de opinión en portugués (180-220 palabras) para esa sección. Tomá posición a favor o en contra, sostenela con al menos dos argumentos y un ejemplo concreto (de Brasil, de Argentina o de tu experiencia), mencioná al menos una idea de Sérgio Buarque de Holanda («homem cordial») o de Roberto DaMatta («Você sabe com quem está falando?»), y cerrá con una conclusión. Tené en cuenta quién escribe, para quién y con qué fin. Registro formal, conectores variados (além disso, no entanto, ainda que, diante do exposto…), párrafos bien organizados y al menos un futuro do subjuntivo o un infinitivo pessoal.",
-        rubric: [["contexto", "Adequação ao contexto: respeta el género (artículo de opinión), el enunciador, el lector y el propósito; toma posición, da dos argumentos, un ejemplo y la referencia pedida"],
-                 ["discursiva", "Adequação discursiva: coherencia y cohesión; progresión de las ideas, párrafos con una idea cada uno, conectores variados"],
-                 ["linguistica", "Adequação linguística (gramática): concordancias, tiempos, subjuntivo, futuro do subjuntivo, crase, regencias, colocação pronominal"],
-                 ["lexico", "Adequação linguística (léxico): riqueza y precisión, registro culto, sin calcos del español ni falsos amigos"]] },
-      { id: "scr-2", kind: "formale", words: 120,
-        t: "Estás escribiendo un trabajo sobre la recepción de Camões en Brasil y querés consultar una edición antigua de Os Lusíadas en la biblioteca del Real Gabinete Português de Leitura, en el Centro de Río. Escribí un e-mail formal en portugués (100-140 palabras) a la dirección de la biblioteca: presentate (quién sos, qué estudiás y dónde), explicá el motivo de la consulta, pedí autorización para dos fechas concretas y preguntá qué documentos tenés que presentar. Usá «o senhor / a senhora», una apertura y un cierre adecuados (Prezado/a…, Atenciosamente) y fórmulas del registro formal (venho por meio deste, gostaria de solicitar, agradeceria se, fico no aguardo).",
-        rubric: [["contexto", "Adequação ao contexto: e-mail formal completo (apertura, presentación, motivo, pedido con fechas, pregunta, cierre) dirigido a la institución"],
-                 ["discursiva", "Adequação discursiva: orden lógico y conectores del registro formal"],
-                 ["linguistica", "Adequação linguística (gramática): tratamiento «o senhor / a senhora» coherente con verbo en 3.ª persona, tiempos, pronombres (lhe, o/a)"],
-                 ["lexico", "Adequação linguística (léxico): fórmulas de la correspondencia formal, sin expresiones coloquiales"]] }
+    /* Produção escrita como na prova do Celpe-Bras: cuatro tarefas
+       integradas, todas en portugués, cada una con su insumo (lo que se lee
+       o se escucha), enunciador, interlocutor, propósito y género, sin
+       extensión ni registro explícitos (words queda solo para la revisión
+       local y la IA).  Tres versiones (versoes); `scrittura` es la versión 1,
+       para la pantalla actual.  Forma exacta en la cabecera del archivo. */
+    versoes: [
+      { id: "v1", ascolto: "asc-1", lettura: "let-1", scrittura: [
+        { id: "v1-t1", kind: "argomentativo", genero: "texto de opinião", words: 200,
+          insumo: { tipo: "audio", ref: "asc-1" },
+          t: "Você ouviu a entrevista do programa Conversa de Botequim com a historiadora Regina Aguiar sobre o «homem cordial» e o jeitinho. O jornal O Carioca abriu um debate na seção de opinião com a tese «O jeitinho brasileiro é mais uma virtude criativa do que um problema para o país». Como leitor(a), escreva um texto para essa seção posicionando-se sobre a tese e usando pelo menos duas ideias da entrevista." },
+        { id: "v1-t2", kind: "roteiro", genero: "roteiro de visita", words: 180,
+          insumo: { tipo: "texto", ref: "let-1" },
+          t: "Você trabalha numa agência de turismo cultural e leu o texto «Do cortiço à favela: o Rio que se reinventou». A agência vai oferecer um passeio a pé pela região portuária para estudantes estrangeiros. Escreva o roteiro que será publicado no site da agência, com três ou quatro paradas e, para cada uma, o que aconteceu ali segundo o texto." },
+        { id: "v1-t3", kind: "reclamacao", genero: "e-mail de reclamação", words: 150,
+          insumo: { tipo: "audio", titulo: "Recado da síndica no grupo do prédio", speakers: ["Síndica", "Morador"], turns: [
+            ["A", "Oi, pessoal, aqui é a Márcia, a síndica. Olha, é sobre a água de novo. A companhia cortou ontem às oito da manhã, sem aviso nenhum, e só voltou às onze da noite."],
+            ["A", "Eu liguei três vezes pro atendimento. Na primeira me disseram que era manutenção programada. Na segunda, que era um vazamento na rua. Na terceira, ninguém atendeu."],
+            ["B", "Márcia, e a conta? Porque a minha veio mais alta este mês, e eu nem tava em casa na semana passada."],
+            ["A", "Pois é, veio mais alta pra muita gente. Eu sugiro que cada um mande a sua reclamação por escrito, com o número do protocolo. Quanto mais gente reclamar, melhor."]
+          ] },
+          t: "Você mora no prédio da síndica Márcia e ouviu o recado dela no grupo de mensagens. Escreva um e-mail para a Ouvidoria da companhia de água relatando o que aconteceu, apontando as informações contraditórias que os moradores receberam e fazendo pedidos concretos." },
+        { id: "v1-t4", kind: "formale", genero: "e-mail formal", words: 130,
+          insumo: { tipo: "texto", titulo: "Aviso do Real Gabinete Português de Leitura", texto: "Obras raras: consulta mediante agendamento. O acervo de obras raras do Real Gabinete Português de Leitura, que inclui edições dos séculos XVI a XVIII, está disponível para pesquisadores. A consulta deve ser solicitada por e-mail à Direção, com pelo menos quinze dias de antecedência, informando o nome completo, a instituição de origem, o tema da pesquisa e as obras de interesse. Os pesquisadores estrangeiros devem apresentar, no dia da consulta, o passaporte e uma carta da sua instituição. Não é permitido fotografar com flash. A sala de consulta funciona de segunda a sexta, das 10h às 16h." },
+          t: "Você está escrevendo um trabalho sobre a recepção de Camões no Brasil e leu o aviso do Real Gabinete Português de Leitura. Escreva à Direção da biblioteca pedindo para consultar uma edição antiga de Os Lusíadas, de acordo com o que o aviso exige." }
+      ] },
+      { id: "v2", ascolto: "asc-2", lettura: "let-2", scrittura: [
+        { id: "v2-t1", kind: "resumo", genero: "resumo", words: 180,
+          insumo: { tipo: "audio", ref: "asc-2" },
+          t: "Você é professor(a) de história num curso de português para estrangeiros e ouviu a conversa com o historiador Paulo Menezes sobre a chegada da corte ao Rio em 1808. Escreva um resumo da conversa para o blog do curso, para os alunos que não puderam ouvi-la, atribuindo as ideias ao historiador." },
+        { id: "v2-t2", kind: "argomentativo", genero: "post de blog", words: 180,
+          insumo: { tipo: "texto", ref: "let-2" },
+          t: "Você mantém um blog sobre viagens e história e leu o texto «Abril em Lisboa: o fim da ditadura e do império». Vai visitar Lisboa em abril. Escreva um post para os seus leitores explicando por que o 25 de Abril é tão importante para os portugueses e sugerindo lugares da cidade ligados a essa história." },
+        { id: "v2-t3", kind: "email", genero: "e-mail a um amigo", words: 150,
+          insumo: { tipo: "audio", titulo: "Trecho do podcast Vida Remota", speakers: ["Apresentador", "Psicóloga"], turns: [
+            ["A", "Então, doutora, trabalhar de casa é bom ou não é?"],
+            ["B", "É bom pra muita gente, mas tem um risco que pouca gente vê: o trabalho não tem mais hora pra acabar. A pessoa responde e-mail no jantar, no fim de semana, na cama…"],
+            ["A", "E o que a senhora recomenda?"],
+            ["B", "Três coisas simples. Ter um lugar só pra trabalhar, mesmo que seja um canto da sala. Combinar um horário e desligar as notificações depois dele. E sair de casa todo dia, nem que seja pra dar uma volta no quarteirão. O corpo precisa saber que o expediente terminou."]
+          ] },
+          t: "O seu amigo Caio começou a trabalhar de casa e mandou uma mensagem dizendo que está exausto e trabalhando até meia-noite. Depois de ouvir o trecho do podcast Vida Remota, escreva um e-mail para ele com conselhos baseados no que a psicóloga diz." },
+        { id: "v2-t4", kind: "carta_aberta", genero: "carta aberta", words: 180,
+          insumo: { tipo: "texto", titulo: "Nota do jornal do bairro", texto: "Prefeitura estuda fechar a Biblioteca Lima Barreto. A Secretaria Municipal de Cultura confirmou ontem que estuda o fechamento da Biblioteca Lima Barreto, no Méier, por causa do custo de manutenção do prédio, que precisa de reformas no telhado e na parte elétrica. Segundo a secretaria, o acervo de cerca de doze mil livros seria transferido para a Biblioteca do Centro. A biblioteca atende, em média, trezentas pessoas por semana, a maior parte estudantes das escolas públicas da região e idosos que frequentam o clube de leitura das quintas-feiras. A decisão final deve sair em trinta dias." },
+          t: "Você mora no Méier e leu a nota do jornal do bairro. Em nome da associação de moradores, escreva uma carta aberta ao secretário municipal de Cultura, que será publicada no jornal e nas redes, argumentando contra o fechamento e propondo alternativas." }
+      ] },
+      { id: "v3", ascolto: "asc-3", lettura: "let-3", scrittura: [
+        { id: "v3-t1", kind: "guia", genero: "texto de apresentação (guia)", words: 180,
+          insumo: { tipo: "audio", ref: "asc-3" },
+          t: "Uma universidade de Santana do Livramento vai receber estudantes de intercâmbio de outros países da América Latina. Depois de ouvir a entrevista com o professor Tiago Pereira no programa Brasil de Ponta a Ponta, escreva o texto de apresentação da cidade que será publicado na página de boas-vindas aos estudantes, com dicas práticas para a vida na fronteira." },
+        { id: "v3-t2", kind: "artigo", genero: "artigo de divulgação", words: 200,
+          insumo: { tipo: "texto", ref: "let-3" },
+          t: "Uma revista de divulgação científica para jovens prepara um número sobre a Amazônia. Você leu o texto «O ouro branco da Amazônia». Escreva um artigo para a revista mostrando como a história da borracha ajuda a entender os debates atuais sobre a floresta e quem vive dela." },
+        { id: "v3-t3", kind: "panfleto", genero: "texto de campanha", words: 140,
+          insumo: { tipo: "audio", titulo: "Recado do posto de saúde no rádio comunitário", speakers: ["Locutor", "Enfermeira"], turns: [
+            ["A", "E agora um recado importante do posto de saúde da Vila Esperança. Tá aqui com a gente a enfermeira Rosângela."],
+            ["B", "Boa tarde. A gente tá em plena campanha de vacinação contra a gripe, e a procura tá muito baixa. Só vinte por cento das pessoas com mais de sessenta anos vieram até agora."],
+            ["A", "E por que a senhora acha que o pessoal não tá vindo?"],
+            ["B", "Tem muita notícia falsa circulando, dizendo que a vacina dá gripe. Não dá. E tem gente que não consegue vir no horário. Por isso, no sábado, dia doze, o posto vai abrir das oito às cinco, e quem não puder sair de casa pode ligar pra gente, que a equipe vai até lá."]
+          ] },
+          t: "Você é voluntário(a) da associação de moradores da Vila Esperança e ouviu o recado do posto de saúde no rádio comunitário. Escreva o texto de um folheto que será distribuído nas casas do bairro para convencer os moradores a se vacinarem." },
+        { id: "v3-t4", kind: "reclamacao", genero: "e-mail de reclamação", words: 150,
+          insumo: { tipo: "texto", titulo: "Resposta da loja Casa & Cia", texto: "Prezado cliente, agradecemos o seu contato. Informamos que, conforme a nossa política de trocas, produtos com defeito podem ser trocados em até sete dias após a entrega, mediante apresentação da nota fiscal. Como a sua solicitação foi registrada doze dias após a entrega, infelizmente não será possível realizar a troca. Sugerimos que o senhor entre em contato diretamente com o fabricante. Atenciosamente, Equipe de Atendimento Casa & Cia." },
+          t: "Você comprou uma geladeira na loja Casa & Cia. Ela chegou com a porta amassada, você reclamou por telefone no dia da entrega, mas o atendimento só registrou o pedido por escrito doze dias depois. Depois de ler a resposta da loja, escreva um novo e-mail ao atendimento contestando a recusa e pedindo uma solução. Lembre que, pelo Código de Defesa do Consumidor, o prazo para reclamar de defeitos em produtos duráveis é de noventa dias." }
+      ] }
     ]
   };
+  // La grilla de las tres adequações, igual para todas las tarefas.
+  var RUBRICA = [["contexto", "Adequação ao contexto: cumple el propósito con el interlocutor y el género pedidos, y usa la información del insumo (el audio o el texto) sin copiarlo"],
+                 ["discursiva", "Adequação discursiva: coherencia, progresión de las ideas, párrafos y conectores propios del género"],
+                 ["linguistica", "Adequação linguística (gramática): tratamiento coherente con el interlocutor, tiempos y modos, regencias, crase, colocação pronominal"],
+                 ["lexico", "Adequação linguística (léxico): precisión, registro adecuado al interlocutor, sin calcos del español ni falsos amigos"]];
+  ESAME.versoes.forEach(function (v) { v.scrittura.forEach(function (t) { t.rubric = RUBRICA; }); });
+  // la pantalla de hoy (app.js) muestra `scrittura`: la versión 1
+  ESAME.scrittura = ESAME.versoes[0].scrittura;
   if (typeof module === "object" && module.exports) module.exports = ESAME; else root.EsameData = ESAME;
 })(typeof window !== "undefined" ? window : globalThis);

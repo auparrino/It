@@ -47,7 +47,7 @@
       ["Neide pretende se aposentar nos próximos meses.", "falso"]
     ],
     "hunt": {
-      "label": "Tocá los verbos cuya regencia exige atención (assistir a, obedecer a, visar a, namorar alguém, confiar em…)",
+      "label": "Toque nos verbos cuja regência exige atenção (assistir a, obedecer a, visar a, namorar alguém, confiar em…)",
       "targets": ["assiste", "obedecer", "depender", "preferia", "aspira", "visa", "implica", "simpatiza", "namora", "confiava", "gostam", "pensa"]
     }
   },
@@ -111,12 +111,7 @@
     "es": "Carta de lector formal: tiene que citar el perfil del diario, usar al menos dos ideas del texto, contar una experiencia propia y opinar. Cuidá la regencia (assistir a, recorrer a, obedecer a, concordar com).",
     "min": 165,
     "max": 225,
-    "punti": [
-      ["Identificar el texto comentado", ["despachantes", "perfil", "reportagem", "matéria"]],
-      ["Retomar al menos dos ideias o testimonios del texto", ["neide", "menezes", "juliana", "rodrigo", "aplicativo"]],
-      ["Contar una experiencia personal con trámites", ["cartório", "fila", "document", "processo"]],
-      ["Opinar sobre el futuro frente a la digitalización", ["digital", "futuro", "tecnologia"]]
-    ],
+    "punti": [["Identificar el texto comentado", ["despachantes", "perfil", "reportagem", "matéria"]], ["Retomar al menos dos ideias o testimonios del texto", ["neide", "menezes", "juliana", "rodrigo", "aplicativo"]], ["Contar una experiencia personal con trámites", ["cartório", "fila", "document", "processo"]], ["Opinar sobre el futuro frente a la digitalización", ["digital", "futuro"]]],
     "model": "Prezados editores,\n\nLi com grande interesse o perfil “Despachantes: os tradutores da burocracia”, publicado na última edição, e gostaria de acrescentar o ponto de vista de quem já dependeu desses profissionais.\n\nNo ano passado, precisei regularizar o apartamento que meus pais me deixaram. Assisti a uma verdadeira maratona: três idas ao cartório, duas filas intermináveis e um documento recusado porque faltava uma firma reconhecida. Só consegui concluir o processo quando recorri a uma despachante, que, assim como a senhora Neide, sabia exatamente a que regra obedecer e em que ordem agir.\n\nConcordo com o texto quando afirma que o aplicativo resolve apenas o simples. Também me pareceu justo o argumento de Carlos Menezes: não se deve confundir o profissional sério com o intermediário informal que oferece atalhos na porta das repartições.\n\nNo entanto, discordo do otimismo absoluto de Neide. A digitalização não vai eliminar a profissão, mas vai transformá-la, como mostra o exemplo de Juliana Prado. O despachante do futuro será menos um especialista em filas e mais um orientador que explica ao cidadão aquilo que o Estado insiste em complicar.\n\nAtenciosamente,\n\nMariana Lopes\nCampinas (SP)",
     "gloss": {
       "Despachantes": "gestores: los que hacen trámites por otros",

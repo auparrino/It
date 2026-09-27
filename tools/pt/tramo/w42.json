@@ -107,7 +107,7 @@
       ]
     ],
     "hunt": {
-      "label": "Tocá los verbos que forman orações reduzidas de gerundio o participio (Terminada a leitura…, Chegando aqui…)",
+      "label": "Toque nos verbos que formam orações reduzidas de gerúndio ou particípio (Terminada a leitura…, Chegando aqui…)",
       "targets": [
         "terminada",
         "chegando",
@@ -305,7 +305,8 @@
           "banca",
           "bairro",
           "esquina",
-          "rua"
+          "padaria",
+          "cinema"
         ]
       ],
       [
@@ -313,24 +314,30 @@
         [
           "fechou",
           "desapare",
-          "mudou"
+          "mudou",
+          "demolid"
         ]
       ],
       [
-        "Relacionar con la crónica o el informe radial",
+        "Relacionar con la feria de la crónica o con el Cine Glória",
         [
           "feira",
-          "cine",
-          "crônica",
-          "reportagem"
+          "cine glória",
+          "glória",
+          "reabert"
         ]
       ],
       [
-        "Cerrar con una reflexión",
+        "Cerrar con una reflexión sobre la memoria del barrio",
         [
-          "hoje",
-          "percebi",
-          "aprendi"
+          "memória",
+          "lembrança",
+          "saudade",
+          "me ensinou",
+          "percebo que",
+          "esquecê",
+          "perde um pedaço",
+          "ainda procuro"
         ]
       ]
     ],

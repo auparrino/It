@@ -44,7 +44,7 @@
       ["No estágio não obrigatório, a empresa deve pagar bolsa e auxílio-transporte.", "verdadeiro"]
     ],
     "hunt": {
-      "label": "Tocá los infinitivos personales (infinitivo con persona)",
+      "label": "Toque nos infinitivos pessoais (o infinitivo com pessoa)",
       "targets": ["perderem", "conhecerem", "assinarem", "guardarem", "ficarem", "poderem", "pedirem", "cumprirem", "serem", "sofrerem", "quererem", "terminarem"]
     }
   },
@@ -103,14 +103,8 @@
     "es": "Una carta formal a Recursos Humanos: describí los tres problemas, apoyate en lo que dice la guía y proponé soluciones. Registro formal (Prezada Sra., Atenciosamente) y, si podés, infinitivo personal (para nós combinarmos…).",
     "min": 131,
     "max": 191,
-    "punti": [
-      ["Apertura formal y presentación", ["prezada", "senhora", "sra."]],
-      ["Jornada que pasa de seis horas", ["seis horas", "jornada", "horário"]],
-      ["Tareas sin relación con el curso", ["tarefas", "atividades", "cópias"]],
-      ["Pedir el termo de compromisso", ["termo", "compromisso"]],
-      ["Cierre formal", ["atenciosamente", "cordialmente", "respeitosamente"]]
-    ],
-    "model": "São Paulo, 12 de março de 2026\n\nPrezada Sra. Beatriz Andrade,\n\nMeu nome é Lucas Ferreira e faço estágio no setor de criação desta agência há oito meses. Escrevo para expor algumas questões e, principalmente, para buscarmos juntos uma solução.\n\nEm primeiro lugar, minha jornada tem ultrapassado com frequência as seis horas diárias. Segundo o guia do Coletivo Estágio Justo, esse é o limite para estudantes do ensino superior, e hora extra não faz parte do estágio. Além disso, grande parte do meu dia é dedicada a tarefas como tirar cópias e atender o telefone, que pouco têm a ver com a minha formação. Por fim, até hoje não recebi uma cópia do termo de compromisso.\n\nGostaria de sugerir uma reunião com o meu supervisor para revermos as atividades previstas e para eu receber o documento. Tenho certeza de que, com esses ajustes, o estágio será ainda mais proveitoso para ambas as partes.\n\nAgradeço desde já a atenção.\n\nAtenciosamente,\nLucas Ferreira",
+    "punti": [["La jornada que pasa de seis horas", ["seis horas", "6 horas", "jornada"]], ["Las tareas sin relación con el curso", ["tarefas", "atividades", "cópias"]], ["Lo que dice el guía sobre los derechos del pasante", ["lei", "11.788", "recesso", "seguro", "supervis", "direito"]], ["El termo de compromisso que nunca recibió", ["termo", "compromisso"]], ["Una solución concreta", ["propon", "sugir", "solução", "soluções", "reorganiz", "gostaria que", "seria possível"]]],
+    "model": "São Paulo, 12 de março de 2026\n\nPrezada Sra. Beatriz Andrade,\n\nMeu nome é Lucas Ferreira e faço estágio no setor de criação desta agência há oito meses. Escrevo para expor algumas questões e, principalmente, para buscarmos juntos uma solução.\n\nEm primeiro lugar, minha jornada tem ultrapassado com frequência as seis horas diárias. Segundo o guia do Coletivo Estágio Justo, esse é o limite para estudantes do ensino superior, e hora extra não faz parte do estágio, que é, pela lei, um ato educativo. Além disso, grande parte do meu dia é dedicada a tarefas como tirar cópias e atender o telefone, que pouco têm a ver com a minha formação. Por fim, até hoje não recebi uma cópia do termo de compromisso.\n\nGostaria de sugerir uma reunião com o meu supervisor e com o professor orientador para revermos as atividades previstas e para eu receber o documento. Tenho certeza de que, com esses ajustes, o estágio será ainda mais proveitoso para ambas as partes.\n\nAgradeço desde já a atenção.\n\nAtenciosamente,\nLucas Ferreira",
     "gloss": {
       "Prezada": "Estimada (fórmula de carta formal: se ve en la semana 43)",
       "faço estágio": "hago una pasantía",

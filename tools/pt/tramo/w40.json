@@ -46,7 +46,7 @@
       ["A pesquisa foi financiada pelo governo estadual.", "não se diz"]
     ],
     "hunt": {
-      "label": "Tocá los sustantivos que nominalizan una acción (evasão, análise, identificação…)",
+      "label": "Toque nos substantivos que nominalizam uma ação (evasão, análise, identificação…)",
       "targets": ["evasão", "análise", "realização", "identificação", "interpretação", "conciliação", "reprovação", "concessão", "ampliação", "implementação", "fortalecimento", "acompanhamento"]
     }
   },
@@ -110,13 +110,7 @@
     "es": "Resumen académico impersonal, sin opinión: objetivo, método, resultados, recomendaciones y límites. Reformulá con sustantivos (a identificação, a ampliação…) sin copiar el original.",
     "min": 188,
     "max": 248,
-    "punti": [
-      ["Objetivo del estudio", ["objetivo", "evasão", "abandono"]],
-      ["Metodología", ["entrevista", "mista", "registros"]],
-      ["Resultados principales", ["resultado", "fatores", "isolamento"]],
-      ["Recomendaciones", ["recomend", "acolhimento", "ampliação"]],
-      ["Limitaciones", ["limitaç", "amostra", "viés"]]
-    ],
+    "punti": [["Objetivo del estudio", ["objetivo", "evasão", "abandono"]], ["Metodología", ["entrevista", "mista", "registros"]], ["Resultados principales", ["resultado", "fatores", "isolamento"]], ["Recomendaciones", ["recomend", "acolhimento", "ampliação"]], ["Limitaciones", ["limitaç", "amostra", "viés"]]],
     "model": "Fatores de evasão no primeiro ano de graduação: resumo\n\nO relatório do Núcleo de Estudos sobre Permanência Estudantil (NEPE) tem como objetivo a identificação das causas do abandono de cursos no primeiro ano de graduação em uma universidade federal do Centro-Oeste. Para tanto, os pesquisadores adotaram uma abordagem mista, que associou a análise dos registros acadêmicos de aproximadamente 4.800 ingressantes à realização de 62 entrevistas em profundidade.\n\nOs resultados indicam que a evasão decorre da combinação de fatores econômicos, pedagógicos e afetivos. Destacam-se a dificuldade de conciliação entre trabalho e estudo, a reprovação em disciplinas introdutórias e o isolamento social nas primeiras semanas. O estudo aponta, ainda, o desconhecimento dos serviços de apoio pedagógico já oferecidos pela instituição.\n\nCom base nesses dados, o relatório recomenda a ampliação dos auxílios estudantis, a criação de um programa de acolhimento com mentoria de veteranos, a reformulação das disciplinas iniciais, a maior divulgação dos serviços de apoio e a implantação de um sistema de detecção precoce de estudantes em risco.\n\nPor fim, os autores reconhecem limitações, como a restrição da amostra a uma única universidade e a possibilidade de viés na seleção dos entrevistados, e sugerem a replicação do estudo em outras instituições.",
     "gloss": {
       "evasão": "deserción, abandono de los estudios",

@@ -59,21 +59,21 @@ reales; las apócrifas se dicen apócrifas.
 
 | Módulo | Contenido |
 |---|---|
-| Lecciones (`tools/pt/lessons/`) | 52 lecciones, 340 bloques de teoría en sesiones cortas, con chequeos |
-| Ejercicios (`tools/pt/authored/`) | 2.464: elegir, completar, traducir, encontrar el error, *garden path*, *descubrí la regla*, combinar oraciones, escucha, examen |
-| Palabras de la semana (`tools/pt/vocab/`) | 648, cada una con significado, ejemplo y **cómo se usa** |
+| Lecciones (`tools/pt/lessons/`) | 52 lecciones, 369 bloques de teoría en sesiones cortas, con chequeos: marcadores del habla desde la 8, actos de habla, un *sotaque* cada cuatro semanas, los géneros desde la 28 |
+| Ejercicios (`tools/pt/authored/`) | 2.563: elegir, completar, traducir, encontrar el error, *garden path*, *descubrí la regla*, combinar oraciones, escucha, colocaciones, pragmática, examen; la consigna, en portugués desde la 14 (las simples) y la 27 (todas) |
+| Palabras de la semana (`tools/pt/vocab/`) | 1.008, cada una con significado, ejemplo y **cómo se usa** |
 | Conjugador (`docs/lang/pt/conjugator.js`) | 419 verbos, 17 tiempos, participios dobles, infinitivo pessoal, imperativo, reflexivos; 8.187 controles |
-| Frases (`docs/js/frasi.js`) | 26 escenas, 455 frases de conversación, todas con su nota de construcción |
+| Frases (`docs/js/frasi.js`) | 32 escenas, 539 frases de conversación, todas con su nota de construcción |
 | Laboratorio (`docs/js/lab.js`) | *Ponte* (16 reglas español → portugués, 196 cognados), 103 falsos amigos, *Entender* (input estructurado) |
 | Duelos (`docs/js/duelli.js`) | ser/estar, por/para, seu/dele, perfeito/imperfeito, simple/composto, indicativo/subjuntivo, futuro do subjuntivo/infinitivo pessoal, a/à |
 | Lecturas | *A semana* (52 textos), *Martín no Rio* (10 episodios), *Cultura* (23), *Enchentes* (12, input flood) |
 | Tramo C1 (`tools/pt/tramo/`, `docs/js/tramo.js`) | Semanas 27-51: *Leituras longas* (350 → 900 palabras, preguntas en portugués), *Escutas longas* a dos voces (250 → 600 palabras) y una tarea integrada al estilo del Celpe-Bras (120 → 250 palabras), con revisión local y rúbrica con IA |
 | Sons (`docs/lang/pt/ascolto_data.js`) | 181 pares mínimos, habla conectada, entonación, acento tónico; 47 dictogloss |
 | Diagnóstico (`docs/lang/pt/diagnosi.js`) | ~33 categorías de error del hispanohablante, pista primero y explicación después |
-| Escreva (`docs/lang/pt/scrivi.js`) | 48 tareas de escritura libre con su corrector |
+| Escreva (`docs/lang/pt/scrivi.js`) | 48 tareas de escritura con destinatario y propósito (en portugués desde la 14), con su corrector |
 | Banco (`tools/pt/bank/`) | 1.836 sustantivos, 674 verbos, 448 adjetivos, 463 palabras, 700 oraciones, 524 errores típicos, 1.095 interferencias del español, 148 falsos amigos |
 | Frecuencia (`docs/lang/pt/data/frequenza.json`) | 16.232 lemas de OpenSubtitles 2018 pt-BR (hermitdave/FrequencyWords, CC BY-SA 4.0); niveles por banda de frecuencia |
-| Exame C1 (`docs/lang/pt/esame_data.js`) | Compreensão oral, Leitura, Estruturas, Léxico, Produção escrita con la rúbrica del Celpe-Bras |
+| Exame C1 (`docs/lang/pt/esame_data.js`) | Compreensão oral, Leitura, Estruturas, Léxico, Produção escrita con cuatro tarefas integradas y la rúbrica del Celpe-Bras; todo en portugués, tres versiones |
 
 La investigación detrás de cada ejercicio (recuperación, espaciado con FSRS,
 pretest, intercalado, input estructurado, feedback correctivo…) es la misma
@@ -113,9 +113,13 @@ semana trae tres misiones obligatorias que entrenan exactamente eso:
 - 🖋️ **Tarefa**: el enunciado sigue el formato del examen («Você é… Após
   ler/ouvir…, escreva um(a)… para…  Não se esqueça de…»). Los géneros son
   carta formal, e-mail, carta do leitor, artigo, resenha, texto de opinião,
-  resumo y relato, de 120 a 250 palabras.
+  resumo, relato, carta aberta, post de blog, texto instrucional y proposta,
+  de 120 a 250 palabras. Antes de la primera tarea de cada género, su
+  ficha (para qué sirve, estructura, fórmulas, modelo anotado).
   - **Revisión local obligatoria**: extensión, variedad léxica, no copiar de
-    la fuente y los puntos del enunciado.
+    la fuente y los puntos del enunciado (hechos de la fuente).
+  - **Adequação**: tratamiento coherente (*você* / *o senhor*), propósito
+    del género, uso de la fuente y registro.
   - **Sugerencias**: vocativo y despedida, título, párrafos, conectores y
     los errores típicos.
   - **Con IA**: además, la grilla de la producción escrita.

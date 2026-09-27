@@ -115,7 +115,7 @@
       ]
     ],
     "hunt": {
-      "label": "Tocá los modalizadores: adverbios, verbos y expresiones que matizan la certeza, la probabilidad o la obligación",
+      "label": "Toque nos modalizadores: advérbios, verbos e expressões que matizam a certeza, a probabilidade ou a obrigação",
       "targets": [
         "supostamente",
         "convém",
@@ -296,7 +296,7 @@
     "genre": "texto_opiniao",
     "title": "Tarifa zero: a sua opinião",
     "fonte": "lettura",
-    "t": "Você mora numa grande cidade brasileira e leu, no site do jornal local, a coluna “Tarifa zero: nem milagre, nem delírio”, de Marcelo Antunes. O jornal abriu um espaço para textos de opinião dos leitores sobre o tema. Escreva um texto de opinião em que você se posicione sobre a tarifa zero, dialogando com a coluna: concorde ou discorde de pelo menos dois argumentos do colunista (por exemplo, o do financiamento, o de que “o que é gratuito não é valorizado” ou a proposta de implantação por etapas) e apresente uma sugestão própria. Não se esqueça de dar um título ao texto, de modalizar as suas afirmações (talvez, provavelmente, a meu ver…) e de usar um registro formal. Seu texto deve ter entre 227 e 287 palavras.",
+    "t": "Você mora numa grande cidade brasileira e leu, no site do jornal local, a coluna “Tarifa zero: nem milagre, nem delírio”, de Marcelo Antunes. O jornal abriu um espaço para textos de opinião dos leitores sobre o tema. Escreva um texto de opinião em que você se posicione sobre a tarifa zero, dialogando com a coluna: concorde ou discorde de pelo menos dois argumentos do colunista (por exemplo, o do financiamento, o de que “o que é gratuito não é valorizado” ou a proposta de implantação por etapas) e apresente uma sugestão própria. Não se esqueça de dar um título ao texto e de modalizar as suas afirmações.",
     "es": "Texto de opinión para la sección de lectores: tomá posición, discutí al menos dos argumentos concretos de la columna y proponé algo tuyo. Usá modalizadores y ponele título.",
     "min": 227,
     "max": 287,
@@ -307,15 +307,6 @@
           "coluna",
           "colunista",
           "antunes"
-        ]
-      ],
-      [
-        "Tomar una posición clara",
-        [
-          "concordo",
-          "discordo",
-          "a meu ver",
-          "na minha opinião"
         ]
       ],
       [
@@ -335,16 +326,6 @@
           "proponho",
           "talvez",
           "provavelmente"
-        ]
-      ],
-      [
-        "Cerrar con una conclusión",
-        [
-          "pior cenário",
-          "portanto",
-          "em suma",
-          "por isso",
-          "conclu"
         ]
       ]
     ],

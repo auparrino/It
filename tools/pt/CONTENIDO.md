@@ -100,6 +100,13 @@ Cada módulo define `ITEMS = [dict(...), ...]`. Campos comunes:
   opcional), `level` (A1…C1), `type`, `prompt` (consigna en español),
   `stem`, `answer`, `alt` (otras respuestas aceptadas), `note` (la regla
   explicada, 1-2 oraciones, que se muestra al responder).
+- **Consigna en portugués** (v3): el `prompt` se escribe en castellano y
+  `tools/pt/consignas.py` lo pasa al portugués en el build: las simples
+  (*Complete. Escolha a forma correta. Traduza para o português.*) desde la
+  semana 14, todas desde la 27. Una consigna nueva de la 27 en adelante
+  tiene que estar en esa tabla (el build lo avisa; `--strict` falla). La
+  `note` queda en castellano. Las preguntas de lectura de la 27 en adelante
+  se escriben directamente en portugués.
 - `choice`: `options` (3 o 4, la respuesta entre ellas). **Distractores
   parecidos**: la misma forma con el error típico del hispanohablante, otras
   personas del mismo verbo, otros miembros de la misma clase; nunca algo
@@ -132,3 +139,24 @@ Mismo formato que las lecciones de italiano: `LESSONS = {semana: {"intro",
 [portugués con la forma marcada entre *asteriscos*, traducción/comentario].
 `q`: chequeos escritos a mano, 3 opciones exactas con la respuesta entre
 ellas. Cada parte es una sesión de ~12 pasos.
+
+## Tramo C1 y examen (v3)
+
+- **Fichas de género** (`tools/pt/tramo/fichas.json`): 4-6 pantallas por
+  género (para qué sirve, estructura, 8-10 fórmulas, verbos, modelo
+  anotado). `tramo.js` las muestra antes de la primera tarea del género.
+  Un género nuevo necesita su entrada en `generi.json` y su ficha.
+- **Adequação** (`generi.json`, `ADEQ` y por género `trat`, `registro`,
+  `proposito`, `fonteMin`): la revisión local mide tratamiento, propósito,
+  uso de la fuente y registro. Los `punti` de cada tarea son hechos de la
+  fuente (nombres, cifras, términos), nunca palabras que cualquier texto
+  trae (*quando, semana, hoje*): `test_tramo.js` lo controla.
+- **Enunciados**: desde la 45, sin extensión ni «registro formal» (como la
+  prova, que no los dice).
+- **Examen** (`docs/lang/pt/esame_data.js`): todo en portugués, tres
+  versiones de escucha, lectura y producción escrita (`versoes`, cuatro
+  tarefas integradas con su insumo); la forma exacta está en la cabecera.
+- **Palabras de la semana**: 18 por semana de la 15 a la 25; en el tramo,
+  15 + 12 del léxico de la lectura y la escucha de la semana
+  (`vocab/s5_tramo.py`). Colocaciones: `authored/colocacoes.py` (dos por
+  semana desde la 14); pragmática: `authored/pragmatica.py`.

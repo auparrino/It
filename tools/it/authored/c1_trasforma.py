@@ -536,7 +536,7 @@ tf(51, 6, "Quando la lezione è finita, gli studenti sono usciti. → ___ la lez
    "Participio absoluto concordado con *la lezione*.", alt=["Terminata"])
 tf(51, 7, "Le vendite sono crollate e l'azienda chiude. → Il ___ delle vendite porta l'azienda alla chiusura.", "crollo",
    "Nominalización: *crollare* → *il crollo*.", prompt=_P49)
-tf(51, 8, "Temo che non abbiano capito. → Temevo che non ___ capito.", "avessero",
+tf(51, 8, "Credo che abbiano già deciso. → Credevo che ___ già deciso.", "avessero",
    "Concordanza: principal en pasado + hecho anterior → congiuntivo trapassato.", prompt=_P32)
 tf(51, 9, "Non ho mai letto quel libro. → Quel libro non ___ mai letto.", "l'ho",
    "Dislocación a la izquierda con pronombre de retoma.", prompt=_P48)

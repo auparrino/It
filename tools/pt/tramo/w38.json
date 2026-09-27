@@ -42,7 +42,7 @@
       ["A maioria dos espectadores prefere legendas no registro formal.", "não se diz"]
     ],
     "hunt": {
-      "label": "Tocá las formas típicas del portugués hablado de Brasil (né, tá, tô, cadê, a gente, pra, pro, tamo)",
+      "label": "Toque nas formas típicas do português falado no Brasil (né, tá, tô, cadê, a gente, pra, pro, tamo)",
       "targets": ["né", "tá", "tô", "cadê", "gente", "pra", "pro", "tamo"]
     }
   },
@@ -59,14 +59,14 @@
       ["A", "Ai, ainda bem, porque ontem mesmo eu quase vi um spoiler no grupo da faculdade. O pessoal não tem noção, tipo, manda print do final sem avisar nada."],
       ["B", "Pois é, rede social virou campo minado. Eu silenciei umas palavras no aplicativo pra não aparecer nada da série na minha timeline."],
       ["A", "Sério? Dá pra fazer isso? Cadê essa opção?"],
-      ["B", "Dá, tá nas configurações, lá em privacidade. Depois eu te mostro. Mas vem cá, o que cê tá achando?"],
-      ["A", "Olha, no começo eu achei meio parado, sabe? Aí lá pelo terceiro episódio a coisa engrenou. E o que eu mais gosto é o jeito que eles falam. Parece a minha família, cara. Minha tia fala igualzinho à dona Cida."],
+      ["B", "Dá, tá nas configurações, lá em… em privacidade. Depois eu te mostro. Mas vem cá, o que cê tá achando?"],
+      ["A", "Olha, no começo eu achei meio… meio parado, sabe? Aí lá pelo terceiro episódio a coisa engrenou. E o que eu mais gosto é o jeito que eles falam. Parece a minha família, cara. Minha tia fala igualzinho à dona Cida."],
       ["B", "Né? Ninguém fala nós vamos, todo mundo fala a gente vai. Eu li até uma matéria dizendo que a legenda agora respeita isso, que antes eles corrigiam tudo."],
-      ["A", "Ah, por isso! Eu sempre vejo com legenda porque o som do meu notebook é horrível, e eu reparei que tava escrito pra, tá, essas coisas. Achei estranho no começo."],
+      ["A", "Ah, por isso! Eu sempre vejo com legenda porque o som do meu notebook é, é horrível, e eu reparei que tava escrito pra, tá, essas coisas. Achei estranho no começo."],
       ["B", "Mas faz sentido, né? Se o ator fala cadê, por que a legenda vai escrever onde está? Fica artificial."],
-      ["A", "É, mas minha mãe, que é professora, reclamou. Falou que a gente já escreve tudo errado no celular e que agora nem a série ajuda. Ela acha que isso confunde os alunos dela."],
+      ["A", "É, mas minha mãe, que é pro… que é professora, reclamou. Falou que a gente já escreve tudo errado no celular e que agora nem a série ajuda. Ela acha que isso confunde os alunos dela."],
       ["B", "Ah, mas aí é outra coisa. Uma coisa é mensagem, outra é redação da escola. Ninguém escreve currículo com tô, né?"],
-      ["A", "Verdade. Bom, mudando de assunto, cê vai na festa da Lari sábado?"],
+      ["A", "Verdade. Bom, hum, mudando de assunto, cê vai na festa da Lari sábado?"],
       ["B", "Vou, mas vou chegar tarde, porque tenho plantão no hospital até as oito. Guarda um pedaço de bolo pra mim."],
       ["A", "Fechado. E se até lá eu não tiver terminado a série, cê fica quieto, tá?"],
       ["B", "Juro. Boca de siri."],
@@ -114,14 +114,8 @@
     "es": "Mail informal a un amigo: explicá que né, tá, cadê, a gente y pra no son errores sino portugués hablado, usá datos de la lectura y del audio y dale un consejo sobre registros.",
     "min": 182,
     "max": 242,
-    "punti": [
-      ["Explicar las formas orales (a gente, tá, cadê, né, pra)", ["a gente", "cadê", "né"]],
-      ["Aclarar que no son errores", ["erro", "errado"]],
-      ["Usar información de la lectura y de la charla", ["legenda", "reportagem", "conversa"]],
-      ["Explicar que depende del contexto o registro", ["contexto", "registro", "situação"]],
-      ["Dar un consejo", ["dica", "conselho", "sugiro"]]
-    ],
-    "model": "Oi, Tom!\n\nQue bom receber notícias suas! Adorei saber que você tá maratonando séries brasileiras pra treinar o português. E pode ficar tranquilo: você não tá ficando louco. A confusão tem explicação.\n\nO que você aprende na aula, tipo “nós estamos” e “onde está”, é o português escrito, mais formal. Já o que você ouve nas séries é o português falado do Brasil, que tem suas próprias formas. “A gente” no lugar de “nós”, “tá” no lugar de “está”, “cadê” no lugar de “onde está” e o famoso “né” no fim das frases não são erros: todo mundo usa, até professor universitário.\n\nLi uma reportagem esses dias que explicava justamente isso. Antes, as legendas corrigiam a fala dos atores; agora, em várias produções nacionais, elas respeitam o jeito como a gente fala. Alguns professores reclamam, mas a própria reportagem conclui que tudo depende do contexto: ninguém escreve um contrato com “cadê”.\n\nTambém ouvi uma conversa de dois amigos comentando uma série, e um deles resumiu bem: uma coisa é mensagem, outra é redação da escola.\n\nEntão minha dica é: aprende as duas coisas. Usa “a gente” e “pra” quando conversar com os amigos e guarda o “nós” e o “para” pros e-mails de trabalho e pras provas.\n\nUm abraço e boa maratona!\n\nLucas",
+    "punti": [["Explicar las formas orales (a gente, tá, cadê, né, pra)", ["a gente", "cadê", "né"]], ["Aclarar que no son errores", ["erro", "errado"]], ["Usar información de la lectura y de la charla", ["legenda", "reportagem", "conversa"]], ["Explicar que depende del contexto o registro", ["contexto", "registro", "situação"]], ["Dar un consejo", ["dica", "conselho", "sugiro"]]],
+    "model": "Oi, Tom!\n\nQue bom receber notícias suas! Adorei saber que você tá maratonando séries brasileiras pra treinar o português. Fica tranquilo: você não tá ficando louco. A confusão tem explicação.\n\nO que você aprende na aula, tipo “nós estamos” e “onde está”, é o português escrito, mais formal. Já o que você ouve nas séries é o português falado do Brasil, que tem suas próprias formas. “A gente” no lugar de “nós”, “tá” no lugar de “está”, “cadê” no lugar de “onde está” e o famoso “né” no fim das frases não são erros: todo mundo usa.\n\nLi uma reportagem esses dias que explicava justamente isso. Antes, as legendas corrigiam a fala dos atores; agora, em várias produções nacionais, elas respeitam o jeito como a gente fala. A Luana Freitas, que coordena as legendas de uma produtora de streaming, contou que o pedido veio do público, principalmente de pessoas surdas. E sabia que “cadê” vem de “que é de”? Alguns professores reclamam, mas a própria reportagem conclui que tudo depende do contexto: ninguém escreve um contrato com “cadê”.\n\nTambém ouvi uma conversa de dois amigos comentando uma série, e um deles resumiu bem: uma coisa é mensagem, outra é redação da escola.\n\nEntão minha dica é: aprende as duas coisas. Usa “a gente” e “pra” quando conversar com os amigos e guarda o “nós” e o “para” pros e-mails de trabalho e pras provas.\n\nUm abraço e boa maratona!\n\nLucas",
     "gloss": {
       "maratonando séries": "viendo series de un tirón",
       "pode ficar tranquilo": "quedate tranquilo",

@@ -45,7 +45,7 @@
       ["A estação ao lado da oficina já não recebia trens.", "verdadeiro"]
     ],
     "hunt": {
-      "label": "Tocá los verbos en pretérito mais-que-perfeito simples (partira, dissera…)",
+      "label": "Toque nos verbos no pretérito mais-que-perfeito simples (partira, dissera…)",
       "targets": ["partira", "esperara", "parara", "dissera", "falara", "respondera", "costurara", "houvera", "detestara", "escrevera", "cumprira", "quisera"]
     }
   },
@@ -110,12 +110,7 @@
     "es": "Reseña con título: resumí la trama sin spoilear todo, analizá la memoria y el uso del mais-que-perfeito y cerrá con una valoración. Podés usar formas como “rompera”, “acreditara”.",
     "min": 193,
     "max": 253,
-    "punti": [
-      ["Presentar la trama (Helena, el padre, el reloj)", ["helena", "pai", "relógio"]],
-      ["Comentar el papel del pasado y la memoria", ["passado", "memória", "lembran"]],
-      ["Observar los tiempos verbales", ["mais-que-perfeito", "tempo verbal", "verbo"]],
-      ["Evaluar y recomendar (o no)", ["recomendo", "vale a pena", "leitura"]]
-    ],
+    "punti": [["Presentar la trama (Helena, el padre, el reloj)", ["helena", "pai", "relógio"]], ["Comentar el papel del pasado y la memoria", ["passado", "memória", "lembran"]], ["Observar los tiempos verbales", ["mais-que-perfeito", "tempo verbal", "tempos verbais", "verbo"]], ["Evaluar y recomendar (o no)", ["recomendo", "vale a pena", "indico", "não recomendo"]]],
     "model": "Um relógio parado e quarenta e dois anos de silêncio\n\n“O relógio da estação” é um conto breve que trata de um tema universal: o orgulho que separa pais e filhos. Helena, uma mulher de sessenta e poucos anos, volta à pequena cidade onde nasceu para o enterro do pai, com quem rompera aos dezenove anos. Ao receber a chave da antiga oficina de relógios, ela descobre objetos que a obrigam a rever tudo o que acreditara sobre aquela ruptura.\n\nO grande mérito do texto está na maneira como o passado invade o presente. Quase toda a história da família é contada por meio do mais-que-perfeito simples — “partira”, “dissera”, “escrevera” —, tempo verbal pouco usado na fala, mas que aqui cria camadas de memória e reforça a sensação de que tudo já estava decidido antes de a protagonista chegar. O relógio da praça, parado há décadas, funciona como símbolo dessa vida congelada.\n\nComo em Dom Casmurro, comentado recentemente no podcast Estante Aberta, o leitor percebe que a versão de uma única pessoa nunca é a história completa. Aqui, porém, a revelação não nasce da desconfiança, e sim da ternura.\n\nTalvez o desfecho pareça um pouco previsível para leitores experientes, mas a delicadeza da linguagem compensa. Recomendo a leitura a quem gosta de narrativas curtas, silenciosas e profundamente humanas.",
     "gloss": {
       "sessenta e poucos anos": "sesenta y pico",

@@ -102,7 +102,9 @@
               ["lessico", "Léxico", "📚"], ["scrittura", "Produção escrita", "✍️"]],
       abilities: { ascolto: "Compreensão oral", lettura: "Leitura", strutture: "Estruturas", produzione: "Produção" },
       rubric: [["contexto", "Adequação ao contexto"], ["discursiva", "Adequação discursiva"], ["linguistica", "Adequação linguística"], ["lexico", "Léxico"]],
-      kinds: { argomentativo: "Texto argumentativo", other: "Carta formal" },
+      kinds: { argomentativo: "Texto de opinião", formale: "E-mail formal", roteiro: "Roteiro de visita", reclamacao: "E-mail de reclamação",
+               resumo: "Resumo", email: "E-mail a um amigo", carta_aberta: "Carta aberta", guia: "Texto de apresentação",
+               artigo: "Artigo de divulgação", panfleto: "Texto de campanha", other: "Carta formal" },
       provaToast: function (id, name) { return "Prova de " + name; },
       byAbility: "Por habilidad",
       missionSub: "Cinco pruebas al estilo del Celpe-Bras (Avançado Superior): compreensão oral, leitura, estruturas, léxico y produção escrita. Mínimo 55 % en cada una.",
@@ -112,7 +114,7 @@
         lettura: "un texto largo · títulos por párrafo y verdadeiro/falso",
         strutture: "20 huecos y transformaciones: preposiciones, subjuntivo, infinitivo pessoal, relativos, pasiva…",
         lessico: "12 de formación de palabras y registro",
-        scrittura: "un argumentativo de 200 palabras y una carta formal de 120"
+        scrittura: "cuatro tarefas integradas, como en el Celpe-Bras: dos a partir de un audio y dos a partir de un texto"
       },
       final: "Exame final", levelC1: "Nível C1", passed: "Exame aprovado.",
       deliver: "Entregar", transcript: "A transcrição",

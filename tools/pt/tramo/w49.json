@@ -109,7 +109,7 @@
       ]
     ],
     "hunt": {
-      "label": "Tocá las formas del registro coloquial (reducciones, abreviaturas y palabras típicas de la charla informal)",
+      "label": "Toque nas formas do registro coloquial (reduções, abreviações e palavras típicas da conversa informal)",
       "targets": [
         "vc",
         "tô",
@@ -308,7 +308,7 @@
     "genre": "carta_formal",
     "title": "Resposta ao cliente",
     "fonte": "ascolto",
-    "t": "Você é Lucas, estagiário de uma agência digital. Após ouvir a conversa com a sua gerente, Renata, escreva o e-mail formal de resposta ao senhor Otávio Mendes, diretor de compras da rede de farmácias cliente, que respondeu à sua mensagem anterior pedindo um “posicionamento formal da empresa”. No seu e-mail, siga as orientações de Renata: peça desculpas pelo atraso e pelo tom da mensagem anterior, explique o motivo do atraso de forma profissional, informe o novo prazo de entrega da proposta e ofereça a videoconferência. Não se esqueça de incluir assunto, vocativo e fecho adequados ao registro formal e de assinar com nome e cargo. Seu texto deve ter entre 239 e 299 palavras.",
+    "t": "Você é Lucas, estagiário de uma agência digital. Após ouvir a conversa com a sua gerente, Renata, escreva o e-mail formal de resposta ao senhor Otávio Mendes, diretor de compras da rede de farmácias cliente, que respondeu à sua mensagem anterior pedindo um “posicionamento formal da empresa”. No seu e-mail, siga as orientações de Renata: peça desculpas pelo atraso e pelo tom da mensagem anterior, explique o motivo do atraso de forma profissional, informe o novo prazo de entrega da proposta e ofereça a videoconferência. Não se esqueça de incluir assunto, vocativo e fecho e de assinar com nome e cargo.",
     "es": "E-mail formal de respuesta al cliente con los datos del audio: disculpas, motivo (validación de costos), nuevo plazo (viernes, 18 h) y videoconferencia el lunes. Cuidá el registro culto: nada de “oi”, “relaxa” ni abreviaturas.",
     "min": 239,
     "max": 299,
@@ -331,7 +331,9 @@
       [
         "Informar el nuevo plazo (viernes, 18 h)",
         [
-          "sexta"
+          "sexta",
+          "18h",
+          "18 h"
         ]
       ],
       [
@@ -339,14 +341,6 @@
         [
           "videoconferência",
           "reunião"
-        ]
-      ],
-      [
-        "Registro formal: vocativo y cierre",
-        [
-          "prezado",
-          "atenciosamente",
-          "cordialmente"
         ]
       ]
     ],

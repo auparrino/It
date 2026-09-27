@@ -113,7 +113,7 @@
       ]
     ],
     "hunt": {
-      "label": "Tocá los verbos en futuro del subjuntivo (se voltarem, quando chegarem…) y en infinitivo personal (para os proprietários tirarem…)",
+      "label": "Toque nos verbos no futuro do subjuntivo (se voltarem, quando chegarem…) e no infinitivo pessoal (para os proprietários tirarem…)",
       "targets": [
         "voltarem",
         "morarem",
@@ -287,69 +287,15 @@
     ]
   },
   "compito": {
-    "genre": "artigo",
-    "title": "Um centro para quem?",
+    "genre": "proposta",
+    "title": "Proposta: um centro para quem já vive nele",
     "fonte": "entrambi",
-    "t": "Você mora no centro de uma capital brasileira e colabora com o jornal da associação de moradores do bairro. Após ler a reportagem “O centro vai voltar a ter moradores?” e ouvir a palestra do urbanista Henrique Tavares, escreva um artigo para o jornal do bairro discutindo se a reforma de prédios vazios (o retrofit) pode trazer vida nova ao centro sem expulsar quem já vive lá. No seu artigo, apresente o problema, use informações e argumentos dos dois textos (citando pelo menos uma pessoa de cada um), discuta os riscos e apresente propostas concretas. Não se esqueça de dar um título ao artigo e de usar um registro formal. Seu texto deve ter entre 250 e 310 palavras.",
-    "es": "Artículo de opinión-informativo para el diario del barrio que integre la lectura y la charla: problema, argumentos con fuentes de ambos, riesgos (expulsión) y propuestas. Título y registro formal; es la tarea tipo examen.",
+    "t": "Você mora no centro de uma capital brasileira e faz parte da associação de moradores do bairro. A Secretaria Municipal de Urbanismo abriu uma chamada para receber propostas da sociedade civil sobre a reforma de prédios vazios (o retrofit). Após ler a reportagem «O centro vai voltar a ter moradores?» e ouvir a palestra do urbanista Henrique Tavares, escreva, em nome da associação, uma proposta à Secretaria para que o retrofit traga vida nova ao centro sem expulsar quem já vive lá. Apresente o problema, use informações e argumentos dos dois textos (citando pelo menos uma pessoa de cada um), exponha as medidas propostas e os resultados esperados.",
+    "es": "Propuesta a una institución, en nombre de la asociación: el problema con datos, las fuentes de la lectura y de la charla, medidas numeradas y resultados esperados. Registro formal y trato de V. Sa. / o senhor.",
     "min": 250,
     "max": 310,
-    "punti": [
-      [
-        "Presentar el problema del centro vacío",
-        [
-          "vazio",
-          "esvazi",
-          "abandon"
-        ]
-      ],
-      [
-        "Usar información del reportaje",
-        [
-          "camila",
-          "rocha",
-          "dona cida",
-          "reportagem"
-        ]
-      ],
-      [
-        "Usar información de la charla",
-        [
-          "tavares",
-          "palestra",
-          "urbanista"
-        ]
-      ],
-      [
-        "Discutir el riesgo de expulsión de los habitantes actuales",
-        [
-          "substituição",
-          "expuls",
-          "gentrifica",
-          "exclusivo"
-        ]
-      ],
-      [
-        "Proponer medidas concretas",
-        [
-          "habitação social",
-          "aluguel social",
-          "fachada",
-          "proponho",
-          "defendo"
-        ]
-      ]
-    ],
-    "model": "Um centro para quem?\n\nQuem passa pela nossa região depois das sete da noite conhece a cena: lojas fechadas, faixas de “aluga-se” desbotadas e prédios inteiros com as janelas apagadas. Não por acaso, a transformação desses edifícios em moradia, o chamado retrofit, virou tema de reportagens, palestras e conversas de calçada. A pergunta que precisamos fazer, porém, não é apenas se o centro vai voltar a ter moradores, mas quem serão esses moradores.\n\nOs argumentos a favor são fortes. Como lembra a arquiteta Camila Rocha, ouvida numa reportagem recente, se os prédios voltarem a ser habitados, a rua volta a ter gente e a sensação de insegurança diminui. Além disso, como explicou o urbanista Henrique Tavares numa palestra aqui no bairro, reformar costuma ser mais sustentável do que demolir, porque aproveita uma estrutura que já existe e preserva a memória da cidade.\n\nO risco, contudo, é real. Se os incentivos públicos servirem apenas para que grandes incorporadoras vendam apartamentos pequenos e caros, teremos trocado um centro vazio por um centro exclusivo. Dona Cida, moradora de um prédio ocupado, resumiu bem o problema: sem cuidado, não haverá revitalização, e sim substituição.\n\nPor isso, defendo três medidas. Primeiro, que uma parte das unidades reformadas seja obrigatoriamente destinada à habitação social, inclusive por meio de programas de aluguel social. Segundo, que os moradores atuais, das ocupações e dos cortiços, sejam ouvidos antes de qualquer projeto, e não depois. Terceiro, que o térreo dos prédios continue sendo comércio, com fachadas ativas, para os comerciantes da nossa rua fazerem parte da solução.\n\nO centro nunca esteve realmente vazio. Cabe a nós garantir que a sua nova vida inclua quem nunca o abandonou.",
-    "gloss": {
-      "faixas": "carteles de tela, pasacalles",
-      "desbotadas": "descoloridas",
-      "conversas de calçada": "charlas de vereda",
-      "incorporadoras": "empresas desarrolladoras inmobiliarias",
-      "prédio ocupado": "edificio tomado por familias sin vivienda",
-      "cortiços": "conventillos",
-      "térreo": "planta baja",
-      "Cabe a nós": "nos toca a nosotros"
-    }
+    "punti": [["Presentar el problema del centro vacío", ["vazio", "esvazi", "apagadas", "fechadas"]], ["Usar información del reportaje", ["camila", "rocha", "dona cida", "reportagem"]], ["Usar información de la charla", ["tavares", "palestra", "urbanista"]], ["Discutir el riesgo de expulsión", ["substituição", "expuls", "exclusivo"]], ["Medidas numeradas y resultados esperados", ["habitação social", "aluguel social", "espera-se", "propomos"]]],
+    "model": "Proposta: um centro para quem já vive nele\n\nÀ Secretaria Municipal de Urbanismo\n\nA Associação de Moradores do Centro vem apresentar a esta Secretaria a seguinte proposta, em resposta à chamada pública sobre a reforma de prédios vazios. Quem passa pela nossa região depois das sete da noite conhece a cena: lojas fechadas, faixas de «aluga-se» desbotadas e prédios inteiros com as janelas apagadas. O chamado retrofit pode mudar esse quadro, mas é preciso definir para quem.\n\nOs argumentos a favor são fortes. Como lembra a arquiteta Camila Rocha, ouvida numa reportagem recente, se os prédios voltarem a ser habitados, a rua volta a ter gente e a sensação de insegurança diminui. Além disso, como explicou o urbanista Henrique Tavares em palestra no bairro, reformar costuma ser mais sustentável do que demolir. O risco, contudo, é real: se os incentivos servirem apenas às grandes incorporadoras, teremos trocado um centro vazio por um centro exclusivo. Dona Cida, moradora de um prédio ocupado, resumiu bem: sem cuidado, não haverá revitalização, e sim substituição.\n\nPropomos, portanto, três medidas. Primeiro, que uma parte das unidades reformadas seja obrigatoriamente destinada à habitação social, inclusive por meio de programas de aluguel social. Segundo, que os moradores das ocupações e dos cortiços sejam ouvidos antes de qualquer projeto. Terceiro, que o térreo dos prédios continue sendo comércio, com fachadas ativas.\n\nCom isso, espera-se um centro ocupado dia e noite, com comércio vivo e sem expulsão de quem nunca o abandonou. Colocamo-nos à disposição para detalhar a proposta.\n\nAtenciosamente,\nAssociação de Moradores do Centro",
+    "gloss": {"faixas": "carteles de tela, pasacalles", "desbotadas": "descoloridas", "incorporadoras": "empresas desarrolladoras inmobiliarias", "prédio ocupado": "edificio tomado por familias sin vivienda", "cortiços": "conventillos", "térreo": "planta baja"}
   }
 }
