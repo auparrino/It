@@ -119,166 +119,73 @@
   }
  },
  "ascolto": {
-  "title": "Lui vive a Lisbona",
-  "genre": "chiacchierata tra amiche",
-  "es": "Dos amigas se ponen al día por teléfono: una acaba de pasar unos días con un chico que vive en otro país, y la otra tiene algo que decirle.",
-  "speakers": [
-   "Chiara",
-   "Valentina"
-  ],
-  "turns": [
-   [
-    "A",
-    "Vale, finalmente! Ti ho scritto tre volte questa settimana, ero quasi preoccupata."
+   "title": "Lui vive a Lisbona",
+   "genre": "chiacchierata tra amiche",
+   "es": "Dos amigas se ponen al día por teléfono: una acaba de pasar unos días con un chico que vive en otro país, y la otra tiene algo que decirle.",
+   "speakers": [
+     "Chiara",
+     "Valentina"
    ],
-   [
-    "B",
-    "Lo so, scusami, hai ragione. È stata una settimana pazzesca. Ti ricordi Matteo, il ragazzo di cui ti avevo parlato a Capodanno?"
+   "turns": [
+     ["A", "Vale! Finalmente. Ti ho scritto tre volte, eh. Ero quasi preoccupata."],
+     ["B", "Lo so, lo so, scusami. Hai ragione. È stata una settimana… boh, pazzesca."],
+     ["A", "Pazzesca in che senso? Bella o brutta?"],
+     ["B", "Tutte e due. Cioè… ti ricordi Matteo? Il ragazzo di cui ti avevo parlato a Capodanno?"],
+     ["A", "Aspetta. Quello che hai conosciuto al matrimonio di tua cugina? Quello che lavora a Lisbona?"],
+     ["B", "Esatto, lui. Niente, è venuto a trovarmi. Cinque giorni."],
+     ["A", "Cinque giorni! E me lo dici così? Allora, com'è andata?"],
+     ["B", "Benissimo. Cioè, quasi troppo bene. È questo il problema."],
+     ["A", "In che senso il problema?"],
+     ["B", "Nel senso che adesso lui è tornato a Lisbona e io sto qui, in un appartamento in cui tutto mi ricorda lui. Sembro una ragazzina, lo so."],
+     ["A", "Ma no, dai, è normale. E avete… cioè, avete parlato di come andare avanti?"],
+     ["B", "Un po'. Lui dice che la distanza non è un problema, tipo che ci sono i voli economici, le videochiamate…"],
+     ["A", "Mh."],
+     ["B", "Io però… vabbè, lo sai. Una relazione a distanza l'ho già vissuta, quella con Luca, e sai com'è finita."],
+     ["A", "Sì, ma scusa… Luca era una persona con la quale non riuscivi a parlare nemmeno nella stessa stanza. Non è che il problema fosse la distanza."],
+     ["B", "Mh. Forse hai ragione. Non ci avevo mai pensato in questi termini."],
+     ["A", "Te lo giuro."],
+     ["B", "È vero, eh. Anche quando cenavamo insieme io parlavo e lui guardava il telefono. Matteo invece mi ascolta, mi fa domande, si ricorda le cose che gli racconto."],
+     ["A", "E poi, scusa se te lo dico…"],
+     ["B", "Dimmi."],
+     ["A", "Tu hai sempre messo i fidanzati al centro di tutto. Quando stavi con Luca sparivi. Per mesi. Io ci ero rimasta male, sai?"],
+     ["B", "Davvero? Ma… non me l'avevi mai detto."],
+     ["A", "Te lo dico adesso. Con affetto, eh. È che questa volta non voglio che tu rinunci alle cose e alle persone a cui tieni. Tipo il corso di teatro, che avevi mollato proprio in quel periodo."],
+     ["B", "Il teatro, sì… Hai ragione. Senti, facciamo così: sabato cena da me, solo noi due, e ti racconto tutto con calma. Senza telefono."],
+     ["A", "Senza telefono? Tu? Boh, questo lo voglio proprio vedere."],
+     ["B", "Promesso! Anzi, se lui chiama, rispondo il giorno dopo."],
+     ["A", "Ecco, questa è l'amica che conosco. Allora a sabato. Il dolce lo porto io."]
    ],
-   [
-    "A",
-    "Quello che hai conosciuto al matrimonio di tua cugina? Quello che lavora a Lisbona?"
+   "gloss": {
+     "pazzesca": "de locos",
+     "capodanno": "Año Nuevo",
+     "cugina": "prima",
+     "videochiamate": "videollamadas",
+     "stanza": "cuarto, habitación",
+     "sparivi": "desaparecías",
+     "rimasta": "(ci ero rimasta male) me había dolido",
+     "rinunci": "renuncies",
+     "tieni": "(a cui tieni) que te importan",
+     "mollato": "largado, abandonado",
+     "promesso": "prometido",
+     "boh": "qué sé yo, ni idea (muletilla)",
+     "vabbè": "bueno, en fin (muletilla)",
+     "tipo": "(muletilla) como, onda",
+     "giuro": "(te lo giuro) te lo juro"
+   },
+   "questions": [
+     ["Perché Chiara era preoccupata?", ["Valentina aveva perso il lavoro", "Valentina non rispondeva ai messaggi", "Valentina si era trasferita a Lisbona", "Valentina aveva litigato con Matteo"], "Valentina non rispondeva ai messaggi"],
+     ["Dove si sono conosciuti Valentina e Matteo?", ["A una festa di Capodanno", "Durante un viaggio a Lisbona", "Al matrimonio di una cugina", "Su un'applicazione di incontri"], "Al matrimonio di una cugina"],
+     ["Che cosa preoccupa Valentina?", ["Che Matteo abbia un'altra ragazza", "Che la distanza rovini la storia", "Che Chiara sia gelosa di Matteo", "Che i genitori non approvino Matteo"], "Che la distanza rovini la storia"],
+     ["Secondo Chiara, perché era finita la storia con Luca?", ["Per la distanza tra le due città", "Per colpa del lavoro di Luca", "Perché i due non comunicavano", "Per le pressioni delle famiglie"], "Perché i due non comunicavano"],
+     ["Che cosa rimprovera Chiara all'amica?", ["Di trascurare gli amici quando è innamorata", "Di cambiare fidanzato troppo spesso", "Di non averle mai presentato Matteo", "Di passare troppo tempo al telefono con lei"], "Di trascurare gli amici quando è innamorata"],
+     ["Che cosa vuol dire Chiara con «questo lo voglio proprio vedere»?", ["Che dubita che l'amica ci riesca davvero", "Che vuole conoscere presto Matteo", "Che ha voglia di vedere un film", "Che vuole vedere il nuovo telefono"], "Che dubita che l'amica ci riesca davvero"]
    ],
-   [
-    "B",
-    "Esatto, lui. Beh, è venuto a trovarmi per cinque giorni."
-   ],
-   [
-    "A",
-    "E me lo dici così? Allora, com'è andata?"
-   ],
-   [
-    "B",
-    "Benissimo, cioè, quasi troppo bene. Il problema è proprio questo. Adesso lui è tornato a Lisbona e io sono qui, in un appartamento in cui tutto mi ricorda lui. Sembro una ragazzina, lo so."
-   ],
-   [
-    "A",
-    "Ma no, è normale. E che cosa avete deciso? Cioè, avete parlato di come andare avanti?"
-   ],
-   [
-    "B",
-    "Un po'. Lui dice che la distanza non è un problema, che ci sono i voli economici, le videochiamate. Io però ho già vissuto una relazione a distanza, quella con Luca, e sai com'è finita."
-   ],
-   [
-    "A",
-    "Sì, ma Luca era una persona con la quale non riuscivi a parlare nemmeno quando eravate nella stessa stanza. Non è che la distanza fosse il vero problema."
-   ],
-   [
-    "B",
-    "Forse hai ragione. Non ci avevo mai pensato in questi termini. Con Luca, in effetti, anche quando cenavamo insieme io parlavo e lui guardava il telefono. Matteo invece mi ascolta, mi fa domande, si ricorda le cose che gli racconto."
-   ],
-   [
-    "A",
-    "E poi, scusa se te lo dico: tu hai sempre messo i fidanzati al centro di tutto. Quando stavi con Luca, sparivi per mesi. Io ci ero rimasta male, sai?"
-   ],
-   [
-    "B",
-    "Davvero? Non me l'avevi mai detto."
-   ],
-   [
-    "A",
-    "Te lo dico adesso, con affetto. Voglio solo che questa volta tu non rinunci alle cose e alle persone a cui tieni. Il corso di teatro, per esempio, che avevi mollato proprio in quel periodo."
-   ],
-   [
-    "B",
-    "Hai ragione. Facciamo così: questo sabato cena da me, solo noi due, e ti racconto tutto con calma. Senza telefono."
-   ],
-   [
-    "A",
-    "Senza telefono? Tu? Questo lo voglio proprio vedere."
-   ],
-   [
-    "B",
-    "Promesso. Anzi, se lui chiama, rispondo il giorno dopo."
-   ],
-   [
-    "A",
-    "Ecco, questa è l'amica che conosco. Allora a sabato, porto io il dolce."
+   "vf": [
+     ["Matteo è rimasto da Valentina cinque giorni.", "vero"],
+     ["Valentina non ha mai avuto relazioni a distanza.", "falso"],
+     ["Matteo ha intenzione di trasferirsi in Italia.", "non si dice"],
+     ["Le due amiche decidono di cenare insieme sabato.", "vero"]
    ]
-  ],
-  "gloss": {
-   "pazzesca": "de locos",
-   "capodanno": "Año Nuevo",
-   "cugina": "prima",
-   "videochiamate": "videollamadas",
-   "stanza": "cuarto, habitación",
-   "sparivi": "desaparecías",
-   "rimasta": "(ci ero rimasta male) me había dolido",
-   "rinunci": "renuncies",
-   "tieni": "(a cui tieni) que te importan",
-   "mollato": "largado, abandonado",
-   "promesso": "prometido"
-  },
-  "questions": [
-   [
-    "Perché Chiara era preoccupata?",
-    [
-     "Valentina aveva perso il lavoro",
-     "Valentina non rispondeva ai messaggi",
-     "Valentina si era trasferita a Lisbona",
-     "Valentina aveva litigato con Matteo"
-    ],
-    "Valentina non rispondeva ai messaggi"
-   ],
-   [
-    "Dove si sono conosciuti Valentina e Matteo?",
-    [
-     "A una festa di Capodanno",
-     "Durante un viaggio a Lisbona",
-     "Al matrimonio di una cugina",
-     "Su un'applicazione di incontri"
-    ],
-    "Al matrimonio di una cugina"
-   ],
-   [
-    "Che cosa preoccupa Valentina?",
-    [
-     "Che Matteo abbia un'altra ragazza",
-     "Che la distanza rovini la storia",
-     "Che Chiara sia gelosa di Matteo",
-     "Che i genitori non approvino Matteo"
-    ],
-    "Che la distanza rovini la storia"
-   ],
-   [
-    "Secondo Chiara, perché era finita la storia con Luca?",
-    [
-     "Per la distanza tra le due città",
-     "Per colpa del lavoro di Luca",
-     "Perché i due non comunicavano",
-     "Per le pressioni delle famiglie"
-    ],
-    "Perché i due non comunicavano"
-   ],
-   [
-    "Che cosa rimprovera Chiara all'amica?",
-    [
-     "Di trascurare gli amici quando è innamorata",
-     "Di cambiare fidanzato troppo spesso",
-     "Di non averle mai presentato Matteo",
-     "Di passare troppo tempo al telefono con lei"
-    ],
-    "Di trascurare gli amici quando è innamorata"
-   ]
-  ],
-  "vf": [
-   [
-    "Matteo è rimasto da Valentina cinque giorni.",
-    "vero"
-   ],
-   [
-    "Valentina non ha mai avuto relazioni a distanza.",
-    "falso"
-   ],
-   [
-    "Matteo ha intenzione di trasferirsi in Italia.",
-    "non si dice"
-   ],
-   [
-    "Le due amiche decidono di cenare insieme sabato.",
-    "vero"
-   ]
-  ]
  },
  "compito": {
   "genre": "email_informale",

@@ -123,116 +123,52 @@
   "ascolto": {
     "title": "Stare o essere? Pausa caffè tra Nord e Sud",
     "genre": "conversazione tra colleghi",
-    "es": "Dos colegas, una de Milán y uno de Nápoles, charlan en la pausa del café sobre las palabras, los acentos y los dialectos de sus ciudades.",
+    "es": "En la pausa del café, una colega de Milán y un colega de Nápoles comparan cómo hablan; a mitad de la charla se suma otro colega, romano. Conversación real: turnos cortos, interrupciones y muletillas.",
     "speakers": [
       "Chiara",
-      "Gennaro"
+      "Gennaro",
+      "Paolo"
     ],
     "turns": [
-      [
-        "A",
-        "Gennaro, scusa, ma il caffè l'hai preso tu stamattina? La moka è vuota."
-      ],
-      [
-        "B",
-        "Sì, sono stato io, perdonami. Te lo rifaccio subito. Però aspetta, tu hai detto «la moka». Noi a Napoli, a casa, diciamo «la macchinetta»."
-      ],
-      [
-        "A",
-        "Anche noi, a volte. Ma sai che cosa mi ha fatto ridere la prima settimana che sei arrivato? Quando mi hai chiesto se potevi «stare» un attimo nel mio ufficio."
-      ],
-      [
-        "B",
-        "E che c'è di strano? Stare, restare…"
-      ],
-      [
-        "A",
-        "Niente, ma io pensavo che volessi trasferirti da me! Noi diciamo «essere»: sono in ufficio, sono a casa. Voi dite «sto a casa»."
-      ],
-      [
-        "B",
-        "Eh, e voi dite «la Giulia», «il Marco», con l'articolo davanti ai nomi. Per me la prima volta è stato uno shock. Mi sembrava che parlaste di oggetti."
-      ],
-      [
-        "A",
-        "Guarda che al Nord lo diciamo tutti, è normalissimo. Anzi, un nome senza articolo a me sembra freddo."
-      ],
-      [
-        "B",
-        "Vedi? È proprio questo il bello. Tu pensi che sia freddo, io penso che sia strano. E parliamo la stessa lingua, teoricamente."
-      ],
-      [
-        "A",
-        "Teoricamente, sì. E poi ci sono le parole. Il primo giorno ti ho chiesto un appendino per il cappotto e tu mi hai guardata come se avessi parlato arabo."
-      ],
-      [
-        "B",
-        "Perché da noi si dice stampella! Solo che la stampella, per me, era anche quella per camminare, e mi sono pure preoccupato. Ho pensato: poverina, si è fatta male a una gamba e non lo vuole dire."
-      ],
-      [
-        "A",
-        "Infatti avevi una faccia… Ecco, questi equivoci sono divertenti."
-      ],
-      [
-        "B",
-        "Divertentissimi, finché non capitano davanti al capo."
-      ],
-      [
-        "A",
-        "E poi, quando ti arrabbi al telefono con tua madre, io non capisco proprio niente."
-      ],
-      [
-        "B",
-        "Quella è un'altra storia, lì passo al napoletano. Con mia madre l'italiano non l'ho mai parlato, mi sembrerebbe di recitare. È come se mi mettessi la cravatta per andare a cena a casa sua."
-      ],
-      [
-        "A",
-        "Che bella questa immagine. A me invece il dialetto non l'hanno mai insegnato. I miei nonni lo parlavano tra di loro, ma con i nipoti no, era considerato roba da vecchi, o da gente poco istruita."
-      ],
-      [
-        "B",
-        "E ti dispiace?"
-      ],
-      [
-        "A",
-        "Un po' sì. Adesso che è tornato di moda, mi sento esclusa. Mio fratello ha trovato un corso di milanese online e se l'è fatto tutto, ma io, onestamente, faccio fatica. Sembra un'altra lingua."
-      ],
-      [
-        "B",
-        "Perché è un'altra lingua! I dialetti non sono italiano storpiato, sono lingue sorelle, nate dal latino come l'italiano. Il napoletano ha una letteratura, un teatro, le canzoni che conosce tutto il mondo…"
-      ],
-      [
-        "A",
-        "Sì, sì, questo lo so. È che mi fa strano studiarlo a scuola come si studia l'inglese, con i verbi e gli esercizi."
-      ],
-      [
-        "B",
-        "Mah, secondo me è meglio di niente. È chi non fa niente che lo lascia morire."
-      ],
-      [
-        "A",
-        "E l'accento? Ti hanno mai detto qualcosa, qui in ufficio?"
-      ],
-      [
-        "B",
-        "Qui no. Però a un colloquio, anni fa, in un'altra azienda, uno mi ha detto: «Simpatico il suo accento, ma con i clienti meglio neutralizzarlo». L'ho presa male, lo confesso."
-      ],
-      [
-        "A",
-        "Ci credo. E tu l'hai neutralizzato?"
-      ],
-      [
-        "B",
-        "Macché. I clienti, alla fine, li ho conquistati proprio così, con la mia voce. Uno mi ha detto che al telefono gli mettevo allegria. È la mia voce che vendeva, non il prodotto."
-      ],
-      [
-        "A",
-        "Vedi che avevi ragione tu? Dai, la moka stavolta la faccio io, che tu il caffè lo carichi troppo."
-      ],
-      [
-        "B",
-        "Troppo? Da noi quello si chiama semplicemente caffè!"
-      ]
+      ["A", "Gennaro, scusa, ma il caffè l'hai finito tu? La moka è vuota."],
+      ["B", "Sì, sono stato io… perdonami, te lo rifaccio subito. Però aspetta: hai detto «la moka»."],
+      ["A", "E come la chiamo?"],
+      ["B", "Noi a Napoli, a casa, diciamo «la macchinetta»."],
+      ["A", "Anche noi, a volte. Ma sai che cosa mi ha fatto ridere la prima settimana che sei arrivato?"],
+      ["B", "No, cosa?"],
+      ["A", "Quando mi hai chiesto se potevi «stare» un attimo nel mio ufficio."],
+      ["B", "E che c'è di strano? Stare, restare…"],
+      ["A", "Niente, ma io pensavo che volessi trasferirti da me! Noi diciamo «essere»: sono in ufficio, sono a casa. Voi dite «sto a casa»."],
+      ["C", "Buongiorno! Di che parlate?"],
+      ["A", "Paolo! Di Nord e Sud. Tu da che parte stai?"],
+      ["C", "Io? Io sono romano, sto in mezzo. Anche noi diciamo «sto a casa», eh."],
+      ["B", "Visto? E voi al Nord dite «la Giulia», «il Marco», con l'articolo davanti ai nomi. Per me la prima volta è stato uno shock. Mi sembrava che parlaste di oggetti."],
+      ["A", "Guarda che al Nord lo diciamo tutti, è normalissimo. Anzi, un nome senza articolo a me sembra freddo."],
+      ["B", "Vedi? È proprio questo il bello. Tu pensi che sia freddo, io penso che sia strano. E parliamo la stessa lingua…"],
+      ["C", "…teoricamente."],
+      ["A", "Teoricamente, sì. E poi ci sono le parole. Il primo giorno ti ho chiesto un appendino per il cappotto e tu mi hai guardata come se avessi parlato arabo."],
+      ["B", "Perché da noi si dice stampella! Solo che la stampella, per me, era anche quella per camminare, e mi sono pure preoccupato. Ho pensato: poverina, si è fatta male a una gamba e non lo vuole dire."],
+      ["C", "No, vabbè, bellissima."],
+      ["A", "Infatti avevi una faccia… Questi equivoci sono divertenti."],
+      ["B", "Divertentissimi, finché non capitano davanti al capo."],
+      ["A", "E poi, quando ti arrabbi al telefono con tua madre, io non capisco proprio niente."],
+      ["B", "Eh, quella è un'altra storia. Lì passo al napoletano. Con mia madre l'italiano non l'ho mai parlato, mi sembrerebbe di recitare. Tipo… come se mi mettessi la cravatta per andare a cena a casa sua."],
+      ["A", "Che bella questa immagine. A me invece il dialetto non l'hanno mai insegnato. I miei nonni lo parlavano tra di loro, ma con i nipoti no. Era considerato roba da vecchi, o da gente poco istruita."],
+      ["C", "Uguale a casa mia."],
+      ["B", "E ti dispiace?"],
+      ["A", "Un po' sì. Adesso che è tornato di moda mi sento esclusa. Mio fratello ha trovato un corso di milanese online e se l'è fatto tutto, ma io… boh, onestamente faccio fatica. Sembra un'altra lingua."],
+      ["B", "Perché è un'altra lingua! I dialetti non sono italiano storpiato, sono lingue sorelle, nate dal latino come l'italiano. Il napoletano ha una letteratura, un teatro, le canzoni che conosce tutto il mondo…"],
+      ["A", "Sì, sì, questo lo so. È che mi fa strano studiarlo a scuola come si studia l'inglese, con i verbi e gli esercizi."],
+      ["B", "Mah, secondo me è meglio di niente. È chi non fa niente che lo lascia morire."],
+      ["C", "Su questo ha ragione lui."],
+      ["A", "E l'accento? Ti hanno mai detto qualcosa, qui in ufficio?"],
+      ["B", "Qui no. Però a un colloquio, anni fa, in un'altra azienda, uno mi ha detto: «Simpatico il suo accento, ma con i clienti meglio neutralizzarlo»."],
+      ["C", "Ma dai!"],
+      ["B", "Giuro. L'ho presa male, lo confesso."],
+      ["A", "Ci credo. E tu l'hai neutralizzato?"],
+      ["B", "Macché. I clienti alla fine li ho conquistati proprio così, con la mia voce. Uno mi ha detto che al telefono gli mettevo allegria. Era la mia voce che vendeva, mica il prodotto."],
+      ["A", "Vedi che avevi ragione tu? Dai, la moka stavolta la faccio io, che tu il caffè lo carichi troppo."],
+      ["B", "Troppo? Da noi quello si chiama semplicemente caffè!"]
     ],
     "gloss": {
       "presa": "(l'ho presa male) me lo tomé mal",
@@ -249,77 +185,25 @@
       "allegria": "alegría",
       "carichi": "cargás",
       "equivoci": "malentendidos",
-      "appendino": "percha (regional)"
+      "appendino": "percha (regional)",
+      "vabbè": "(no, vabbè) ¡no, bueno!, ¡qué bueno! (muletilla)",
+      "boh": "qué sé yo (muletilla)",
+      "mica": "(mica il prodotto) no el producto, para nada",
+      "tipo": "(muletilla) como, onda"
     },
     "questions": [
-      [
-        "Che cosa aveva sorpreso Chiara la prima settimana?",
-        [
-          "Che Gennaro portasse il caffè da Napoli",
-          "Che Gennaro usasse «stare» al posto di «essere»",
-          "Che Gennaro non conoscesse la parola «moka»",
-          "Che Gennaro chiamasse sempre i colleghi per cognome"
-        ],
-        "Che Gennaro usasse «stare» al posto di «essere»"
-      ],
-      [
-        "Che effetto fa a Chiara un nome proprio senza articolo?",
-        [
-          "Le sembra freddo",
-          "Le sembra elegante",
-          "Le sembra scorretto",
-          "Le sembra antiquato"
-        ],
-        "Le sembra freddo"
-      ],
-      [
-        "Perché Gennaro con sua madre parla in dialetto?",
-        [
-          "Perché sua madre non capisce bene l'italiano",
-          "Perché parlarle in italiano gli sembrerebbe artificiale",
-          "Perché al telefono il dialetto è più rapido",
-          "Perché non vuole che i colleghi in ufficio capiscano cosa dice"
-        ],
-        "Perché parlarle in italiano gli sembrerebbe artificiale"
-      ],
-      [
-        "Qual è l'atteggiamento di Chiara verso il dialetto milanese?",
-        [
-          "Totale indifferenza, non le interessa",
-          "Grande entusiasmo, lo parla ogni giorno",
-          "Un certo rimpianto, ma anche difficoltà",
-          "Rifiuto, lo considera roba da vecchi"
-        ],
-        "Un certo rimpianto, ma anche difficoltà"
-      ],
-      [
-        "Come ha reagito Gennaro al consiglio di neutralizzare l'accento?",
-        [
-          "L'ha seguito subito per ottenere il posto",
-          "Ha lasciato l'azienda il giorno dopo",
-          "Ci è rimasto male, ma ha tenuto il suo accento",
-          "Ha chiesto aiuto a un insegnante di dizione"
-        ],
-        "Ci è rimasto male, ma ha tenuto il suo accento"
-      ]
+      ["Che cosa aveva sorpreso Chiara la prima settimana?", ["Che Gennaro portasse il caffè da Napoli", "Che Gennaro usasse «stare» al posto di «essere»", "Che Gennaro non conoscesse la parola «moka»", "Che Gennaro chiamasse sempre i colleghi per cognome"], "Che Gennaro usasse «stare» al posto di «essere»"],
+      ["Che effetto fa a Chiara un nome proprio senza articolo?", ["Le sembra freddo", "Le sembra elegante", "Le sembra scorretto", "Le sembra antiquato"], "Le sembra freddo"],
+      ["Perché Gennaro con sua madre parla in dialetto?", ["Perché sua madre non capisce bene l'italiano", "Perché parlarle in italiano gli sembrerebbe artificiale", "Perché al telefono il dialetto è più rapido", "Perché non vuole che i colleghi in ufficio capiscano cosa dice"], "Perché parlarle in italiano gli sembrerebbe artificiale"],
+      ["Qual è l'atteggiamento di Chiara verso il dialetto milanese?", ["Totale indifferenza, non le interessa", "Grande entusiasmo, lo parla ogni giorno", "Un certo rimpianto, ma anche difficoltà", "Rifiuto, lo considera roba da vecchi"], "Un certo rimpianto, ma anche difficoltà"],
+      ["Come ha reagito Gennaro al consiglio di neutralizzare l'accento?", ["L'ha seguito subito per ottenere il posto", "Ha lasciato l'azienda il giorno dopo", "Ci è rimasto male, ma ha tenuto il suo accento", "Ha chiesto aiuto a un insegnante di dizione"], "Ci è rimasto male, ma ha tenuto il suo accento"],
+      ["Che cosa intende Paolo con «sto in mezzo»?", ["Che Roma è a metà tra le due parlate", "Che non vuole litigare con i colleghi", "Che la sua scrivania è al centro", "Che non ha ancora deciso dove vivere"], "Che Roma è a metà tra le due parlate"]
     ],
     "vf": [
-      [
-        "Gennaro ha finito il caffè della moka.",
-        "vero"
-      ],
-      [
-        "I nonni di Chiara parlavano il dialetto con i nipoti.",
-        "falso"
-      ],
-      [
-        "Il fratello di Chiara ha seguito un corso di milanese online.",
-        "vero"
-      ],
-      [
-        "Gennaro vorrebbe tornare a vivere a Napoli.",
-        "non si dice"
-      ]
+      ["Gennaro ha finito il caffè della moka.", "vero"],
+      ["I nonni di Chiara parlavano il dialetto con i nipoti.", "falso"],
+      ["Il fratello di Chiara ha seguito un corso di milanese online.", "vero"],
+      ["Gennaro vorrebbe tornare a vivere a Napoli.", "non si dice"]
     ]
   },
   "compito": {

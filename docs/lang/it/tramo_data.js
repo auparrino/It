@@ -3152,71 +3152,111 @@
     "turns": [
      [
       "A",
-      "Vale, finalmente! Ti ho scritto tre volte questa settimana, ero quasi preoccupata."
+      "Vale! Finalmente. Ti ho scritto tre volte, eh. Ero quasi preoccupata."
      ],
      [
       "B",
-      "Lo so, scusami, hai ragione. È stata una settimana pazzesca. Ti ricordi Matteo, il ragazzo di cui ti avevo parlato a Capodanno?"
+      "Lo so, lo so, scusami. Hai ragione. È stata una settimana… boh, pazzesca."
      ],
      [
       "A",
-      "Quello che hai conosciuto al matrimonio di tua cugina? Quello che lavora a Lisbona?"
+      "Pazzesca in che senso? Bella o brutta?"
      ],
      [
       "B",
-      "Esatto, lui. Beh, è venuto a trovarmi per cinque giorni."
+      "Tutte e due. Cioè… ti ricordi Matteo? Il ragazzo di cui ti avevo parlato a Capodanno?"
      ],
      [
       "A",
-      "E me lo dici così? Allora, com'è andata?"
+      "Aspetta. Quello che hai conosciuto al matrimonio di tua cugina? Quello che lavora a Lisbona?"
      ],
      [
       "B",
-      "Benissimo, cioè, quasi troppo bene. Il problema è proprio questo. Adesso lui è tornato a Lisbona e io sono qui, in un appartamento in cui tutto mi ricorda lui. Sembro una ragazzina, lo so."
+      "Esatto, lui. Niente, è venuto a trovarmi. Cinque giorni."
      ],
      [
       "A",
-      "Ma no, è normale. E che cosa avete deciso? Cioè, avete parlato di come andare avanti?"
+      "Cinque giorni! E me lo dici così? Allora, com'è andata?"
      ],
      [
       "B",
-      "Un po'. Lui dice che la distanza non è un problema, che ci sono i voli economici, le videochiamate. Io però ho già vissuto una relazione a distanza, quella con Luca, e sai com'è finita."
+      "Benissimo. Cioè, quasi troppo bene. È questo il problema."
      ],
      [
       "A",
-      "Sì, ma Luca era una persona con la quale non riuscivi a parlare nemmeno quando eravate nella stessa stanza. Non è che la distanza fosse il vero problema."
+      "In che senso il problema?"
      ],
      [
       "B",
-      "Forse hai ragione. Non ci avevo mai pensato in questi termini. Con Luca, in effetti, anche quando cenavamo insieme io parlavo e lui guardava il telefono. Matteo invece mi ascolta, mi fa domande, si ricorda le cose che gli racconto."
+      "Nel senso che adesso lui è tornato a Lisbona e io sto qui, in un appartamento in cui tutto mi ricorda lui. Sembro una ragazzina, lo so."
      ],
      [
       "A",
-      "E poi, scusa se te lo dico: tu hai sempre messo i fidanzati al centro di tutto. Quando stavi con Luca, sparivi per mesi. Io ci ero rimasta male, sai?"
+      "Ma no, dai, è normale. E avete… cioè, avete parlato di come andare avanti?"
      ],
      [
       "B",
-      "Davvero? Non me l'avevi mai detto."
+      "Un po'. Lui dice che la distanza non è un problema, tipo che ci sono i voli economici, le videochiamate…"
      ],
      [
       "A",
-      "Te lo dico adesso, con affetto. Voglio solo che questa volta tu non rinunci alle cose e alle persone a cui tieni. Il corso di teatro, per esempio, che avevi mollato proprio in quel periodo."
+      "Mh."
      ],
      [
       "B",
-      "Hai ragione. Facciamo così: questo sabato cena da me, solo noi due, e ti racconto tutto con calma. Senza telefono."
+      "Io però… vabbè, lo sai. Una relazione a distanza l'ho già vissuta, quella con Luca, e sai com'è finita."
      ],
      [
       "A",
-      "Senza telefono? Tu? Questo lo voglio proprio vedere."
+      "Sì, ma scusa… Luca era una persona con la quale non riuscivi a parlare nemmeno nella stessa stanza. Non è che il problema fosse la distanza."
      ],
      [
       "B",
-      "Promesso. Anzi, se lui chiama, rispondo il giorno dopo."
+      "Mh. Forse hai ragione. Non ci avevo mai pensato in questi termini."
      ],
      [
       "A",
-      "Ecco, questa è l'amica che conosco. Allora a sabato, porto io il dolce."
+      "Te lo giuro."
+     ],
+     [
+      "B",
+      "È vero, eh. Anche quando cenavamo insieme io parlavo e lui guardava il telefono. Matteo invece mi ascolta, mi fa domande, si ricorda le cose che gli racconto."
+     ],
+     [
+      "A",
+      "E poi, scusa se te lo dico…"
+     ],
+     [
+      "B",
+      "Dimmi."
+     ],
+     [
+      "A",
+      "Tu hai sempre messo i fidanzati al centro di tutto. Quando stavi con Luca sparivi. Per mesi. Io ci ero rimasta male, sai?"
+     ],
+     [
+      "B",
+      "Davvero? Ma… non me l'avevi mai detto."
+     ],
+     [
+      "A",
+      "Te lo dico adesso. Con affetto, eh. È che questa volta non voglio che tu rinunci alle cose e alle persone a cui tieni. Tipo il corso di teatro, che avevi mollato proprio in quel periodo."
+     ],
+     [
+      "B",
+      "Il teatro, sì… Hai ragione. Senti, facciamo così: sabato cena da me, solo noi due, e ti racconto tutto con calma. Senza telefono."
+     ],
+     [
+      "A",
+      "Senza telefono? Tu? Boh, questo lo voglio proprio vedere."
+     ],
+     [
+      "B",
+      "Promesso! Anzi, se lui chiama, rispondo il giorno dopo."
+     ],
+     [
+      "A",
+      "Ecco, questa è l'amica che conosco. Allora a sabato. Il dolce lo porto io."
      ]
     ],
     "gloss": {
@@ -3230,7 +3270,11 @@
      "rinunci": "renuncies",
      "tieni": "(a cui tieni) que te importan",
      "mollato": "largado, abandonado",
-     "promesso": "prometido"
+     "promesso": "prometido",
+     "boh": "qué sé yo, ni idea (muletilla)",
+     "vabbè": "bueno, en fin (muletilla)",
+     "tipo": "(muletilla) como, onda",
+     "giuro": "(te lo giuro) te lo juro"
     },
     "questions": [
      [
@@ -3282,6 +3326,16 @@
        "Di passare troppo tempo al telefono con lei"
       ],
       "Di trascurare gli amici quando è innamorata"
+     ],
+     [
+      "Che cosa vuol dire Chiara con «questo lo voglio proprio vedere»?",
+      [
+       "Che dubita che l'amica ci riesca davvero",
+       "Che vuole conoscere presto Matteo",
+       "Che ha voglia di vedere un film",
+       "Che vuole vedere il nuovo telefono"
+      ],
+      "Che dubita che l'amica ci riesca davvero"
      ]
     ],
     "vf": [
@@ -4038,19 +4092,36 @@
    "ascolto": {
     "title": "Le panchine che non ci sono più",
     "genre": "podcast di quartiere",
-    "es": "Los dos conductores de un podcast de barrio discuten la decisión del municipio de sacar los bancos de una plaza.",
+    "es": "Dos conductores de un podcast de barrio discuten la decisión de la municipalidad de sacar los bancos de una plaza; en la mitad se suma, por teléfono, la dueña del kiosco de diarios. Hablan como se habla: cortado, con muletillas.",
     "speakers": [
      "Chiara",
-     "Davide"
+     "Davide",
+     "Pina, edicolante"
     ],
     "turns": [
      [
       "A",
-      "Bentornati a Due passi, il podcast che si ascolta a piedi, o almeno così speriamo. Oggi, Davide, si parla di panchine. Anzi, di panchine che non ci sono più."
+      "Bentornati a Due passi, il podcast che si ascolta a piedi. O almeno così speriamo. Oggi, Davide, si parla di panchine."
      ],
      [
       "B",
-      "Eh sì. Per chi non lo sapesse: la settimana scorsa in piazza del Mercato sono state tolte le quattro panchine davanti alla fontana. Il Comune dice che lì si creavano assembramenti, rumore la notte, bottiglie abbandonate."
+      "Anzi, di panchine che non ci sono più."
+     ],
+     [
+      "A",
+      "Ecco. Spiega, per chi non lo sapesse."
+     ],
+     [
+      "B",
+      "Allora, niente: la settimana scorsa in piazza del Mercato sono state tolte le quattro panchine davanti alla fontana."
+     ],
+     [
+      "A",
+      "Tutte e quattro."
+     ],
+     [
+      "B",
+      "Tutte e quattro. Il Comune dice che lì si creavano assembramenti, rumore la notte, bottiglie abbandonate…"
      ],
      [
       "A",
@@ -4058,23 +4129,63 @@
      ],
      [
       "B",
-      "Guarda, io capisco i residenti. Se abiti sopra la piazza e alle due di notte non si riesce a dormire, hai ragione a lamentarti. Però togliere le panchine mi sembra come togliere le sedie da un ristorante perché qualcuno parla forte."
+      "Guarda, io… cioè, io i residenti li capisco. Se abiti sopra la piazza e alle due di notte non si riesce a dormire, hai ragione a lamentarti."
      ],
      [
       "A",
-      "Sì, ma aspetta, faccio l'avvocato del diavolo. Qualcosa bisognava pur fare, no? Si erano già provate altre soluzioni, più vigili, il divieto di vendere alcolici in vetro..."
+      "Però?"
      ],
      [
       "B",
-      "Certo, e non hanno funzionato. Ma il punto è: chi usava quelle panchine di giorno? Io ci passo ogni mattina. Ci si sedevano gli anziani che aspettavano il mercato, le mamme con i passeggini, i ragazzi che escono da scuola. Adesso quelle persone dove vanno?"
+      "Però togliere le panchine mi sembra come togliere le sedie da un ristorante perché qualcuno parla forte."
      ],
      [
       "A",
-      "Ieri ho parlato con la signora Pina, quella dell'edicola. Mi ha detto una cosa che mi ha colpito: da quando non ci si può più sedere, in piazza non si ferma più nessuno. Si passa, si guarda la fontana e si tira dritto."
+      "Sì, ma aspetta, faccio l'avvocato del diavolo. Qualcosa bisognava pur fare, no? Si erano già provate altre soluzioni…"
      ],
      [
       "B",
-      "Ecco, appunto. È quella che gli urbanisti chiamano architettura ostile: si progettano gli spazi in modo che non ci si possa fermare, sdraiare, stare. E il problema non sparisce, si sposta semplicemente nella via accanto."
+      "…più vigili, il divieto di vendere alcolici in vetro, lo so."
+     ],
+     [
+      "A",
+      "Appunto."
+     ],
+     [
+      "B",
+      "E non hanno funzionato, d'accordo. Ma il punto è: chi le usava di giorno, quelle panchine? Io ci passo ogni mattina. Gli anziani che aspettavano il mercato, le mamme con i passeggini, i ragazzi che escono da scuola… Adesso dove vanno?"
+     ],
+     [
+      "A",
+      "Su questo abbiamo una testimone. In collegamento c'è la signora Pina, quella dell'edicola. Pina, ci sente?"
+     ],
+     [
+      "C",
+      "Sì, sì, vi sento! Buongiorno."
+     ],
+     [
+      "A",
+      "Buongiorno. Lei la piazza la vede tutto il giorno. Che cosa è cambiato?"
+     ],
+     [
+      "C",
+      "Eh, guardi… da quando non ci si può più sedere, in piazza non si ferma più nessuno. Si passa, si guarda la fontana e si tira dritto."
+     ],
+     [
+      "B",
+      "Ecco."
+     ],
+     [
+      "C",
+      "Prima uno si sedeva, due chiacchiere, comprava il giornale… Adesso, boh, sembra una stazione."
+     ],
+     [
+      "A",
+      "Grazie, Pina, gentilissima."
+     ],
+     [
+      "B",
+      "Vedi? È quella che gli urbanisti chiamano architettura ostile. Si progettano gli spazi in modo che non ci si possa fermare, sdraiare, stare. E il problema non sparisce: si sposta nella via accanto."
      ],
      [
       "A",
@@ -4082,15 +4193,23 @@
      ],
      [
       "B",
-      "No, non così. Si potrebbero rimettere, ma con regole chiare e con qualcuno che si prende cura della piazza: più illuminazione, un bar che resta aperto fino a tardi, magari eventi organizzati dal quartiere. Una piazza vissuta si controlla da sola, diciamo."
+      "No, no, non così. Si potrebbero rimettere, ma con regole chiare. E con qualcuno che si prende cura della piazza: più illuminazione, un bar aperto fino a tardi, magari eventi del quartiere. Una piazza vissuta si controlla da sola, diciamo."
      ],
      [
       "A",
-      "Questo si dice sempre, però. Io qualche dubbio ce l'ho. Comunque, su una cosa sono d'accordo con te: decisioni del genere non si prendono senza chiedere a chi la piazza la usa davvero."
+      "Mah. Questo si dice sempre, però. Io qualche dubbio ce l'ho."
      ],
      [
       "B",
-      "Esatto. E allora lanciamo l'idea: giovedì sera c'è l'assemblea del comitato di quartiere, alle nove, nella sala della parrocchia. Chi ha un'opinione, venga a dirla."
+      "Vabbè, lo so che non sei convinta."
+     ],
+     [
+      "A",
+      "Su una cosa, però, sono d'accordo con te: decisioni del genere non si prendono senza chiedere a chi la piazza la usa davvero."
+     ],
+     [
+      "B",
+      "Esatto. E allora lanciamo l'idea: giovedì sera, alle nove, c'è l'assemblea del comitato di quartiere, nella sala della parrocchia. Chi ha un'opinione, venga a dirla."
      ],
      [
       "A",
@@ -4112,7 +4231,11 @@
      "sparisce": "desaparece",
      "vissuta": "vivida, con vida",
      "parrocchia": "parroquia",
-     "puntata": "episodio"
+     "puntata": "episodio",
+     "collegamento": "(in collegamento) en línea, conectada",
+     "boh": "qué sé yo (muletilla)",
+     "vabbè": "bueno, en fin (muletilla)",
+     "chiacchiere": "(due chiacchiere) una charla"
     },
     "questions": [
      [
@@ -5809,7 +5932,7 @@
    "ascolto": {
     "title": "Cinghiali sotto casa",
     "genre": "trasmissione radiofonica con gli ascoltatori",
-    "es": "En un programa de radio en el que los oyentes cuentan lo que pasa en la ciudad, una mujer relata un encuentro inesperado que tuvo esa mañana en su calle.",
+    "es": "Un programa de radio en el que los oyentes cuentan la noticia del día: una mujer llama para relatar su encuentro con una familia de jabalíes en plena ciudad. Habla como se habla por teléfono: se corta, vuelve atrás, el conductor la acompaña.",
     "speakers": [
      "Marco, conduttore",
      "Silvia, ascoltatrice"
@@ -5817,19 +5940,43 @@
     "turns": [
      [
       "A",
-      "Eccoci di nuovo a Filo diretto, la trasmissione in cui la cronaca la fate voi. Abbiamo in linea Silvia, che stamattina ha assistito a una scena, diciamo, insolita. Buongiorno, Silvia, ci racconta?"
+      "Eccoci di nuovo a Filo diretto, la trasmissione in cui la cronaca la fate voi. Abbiamo in linea Silvia, che stamattina ha visto una scena, diciamo, insolita. Silvia, buongiorno!"
      ],
      [
       "B",
-      "Buongiorno! Sì, guardi, ancora non ci credo. Stamattina verso le sette stavo portando fuori il cane, in via Garibaldi, proprio vicino alla scuola elementare. A un certo punto il cane si è bloccato e ha cominciato a ringhiare. Io non capivo, mi guardavo intorno, e poi li ho visti uscire da dietro i cassonetti."
+      "Buongiorno! Sì, guardi, ancora… ancora non ci credo."
      ],
      [
       "A",
-      "Li ha visti... chi?"
+      "Ci racconta?"
      ],
      [
       "B",
-      "I cinghiali! Una mamma e quattro piccoli. Li ho visti attraversare la strada con una calma incredibile, come se fossero a casa loro. La mamma avrà pesato, non so, ottanta chili?"
+      "Allora. Stamattina, verso le sette, stavo portando fuori il cane, in via Garibaldi, proprio vicino alla scuola elementare."
+     ],
+     [
+      "A",
+      "Sì."
+     ],
+     [
+      "B",
+      "A un certo punto il cane si blocca e comincia a ringhiare. Io non capivo, mi guardavo intorno, e poi li ho visti uscire da dietro i cassonetti."
+     ],
+     [
+      "A",
+      "Li ha visti… chi?"
+     ],
+     [
+      "B",
+      "I cinghiali! Una mamma e quattro piccoli."
+     ],
+     [
+      "A",
+      "Addirittura."
+     ],
+     [
+      "B",
+      "Giuro. Li ho visti attraversare la strada con una calma… tipo come se fossero a casa loro. La mamma avrà pesato, boh, ottanta chili?"
      ],
      [
       "A",
@@ -5837,7 +5984,15 @@
      ],
      [
       "B",
-      "Guardi, mi tremavano le gambe. Sentivo il cane tirare fortissimo il guinzaglio e avevo paura che si liberasse. Allora sono rimasta ferma, immobile, e l'ho tenuto stretto. Mi ricordavo di aver letto da qualche parte che non bisogna correre né avvicinarsi, soprattutto se ci sono i piccoli."
+      "Guardi, mi tremavano le gambe. Il cane tirava fortissimo il guinzaglio e io avevo paura che si liberasse. Allora, niente, sono rimasta ferma, immobile, e l'ho tenuto stretto."
+     ],
+     [
+      "A",
+      "Brava."
+     ],
+     [
+      "B",
+      "Mi ricordavo di aver letto da qualche parte che non bisogna correre né avvicinarsi, soprattutto se ci sono i piccoli."
      ],
      [
       "A",
@@ -5845,15 +6000,31 @@
      ],
      [
       "B",
-      "Eh, qui viene il bello. C'era un signore sul balcone di fronte che urlava e agitava le braccia, e un ragazzo che invece si era messo a filmarli col telefono, a due metri. L'ho sentito dire agli amici che voleva fare il video del secolo. Gli ho detto di allontanarsi, ma non mi ascoltava."
+      "Eh, qui viene il bello. C'era un signore sul balcone di fronte che urlava e agitava le braccia…"
      ],
      [
       "A",
-      "Classico. E poi? Come è finita?"
+      "Aiuto."
      ],
      [
       "B",
-      "Dopo qualche minuto abbiamo sentito arrivare una macchina della polizia locale, con la sirena. Forse qualcuno l'aveva chiamata. I cinghiali si sono spaventati e li ho visti scappare verso il parco, quello lungo il torrente. Ma prima hanno rovesciato due cassonetti, e la strada era piena di spazzatura."
+      "…e un ragazzo che invece si era messo a filmarli col telefono. A due metri, eh! L'ho sentito dire agli amici che voleva fare il video del secolo."
+     ],
+     [
+      "A",
+      "Classico."
+     ],
+     [
+      "B",
+      "Gli ho detto di allontanarsi, ma niente, non mi ascoltava."
+     ],
+     [
+      "A",
+      "E poi? Come è finita?"
+     ],
+     [
+      "B",
+      "Dopo qualche minuto abbiamo sentito arrivare una macchina della polizia locale, con la sirena. Forse qualcuno l'aveva chiamata. I cinghiali si sono spaventati e li ho visti scappare verso il parco, quello lungo il torrente. Però prima… prima hanno rovesciato due cassonetti, e la strada era piena di spazzatura."
      ],
      [
       "A",
@@ -5861,19 +6032,27 @@
      ],
      [
       "B",
-      "Ma certo! Io abito qui da vent'anni e una volta non si vedevano mai. Adesso, da un paio d'anni, li sentiamo grufolare quasi ogni notte sotto le finestre. Il cibo lo trovano facilmente, e allora tornano. Io non ce l'ho con gli animali, eh, poveretti. Ce l'ho con chi lascia la spazzatura fuori dai contenitori."
+      "Ma certo! Io abito qui da vent'anni e una volta non si vedevano mai. Adesso, da un paio d'anni, li sentiamo grufolare quasi ogni notte sotto le finestre."
      ],
      [
       "A",
-      "Anche perché c'è una scuola a pochi metri."
+      "Ogni notte?"
      ],
      [
       "B",
-      "Appunto. Fra mezz'ora arrivavano i bambini. Ho visto la maestra aprire il cancello e le ho raccontato tutto: è diventata bianca come un lenzuolo."
+      "Quasi. Il cibo lo trovano facilmente, e allora tornano. Io non ce l'ho con gli animali, eh, poveretti. Ce l'ho con chi lascia la spazzatura fuori dai contenitori."
      ],
      [
       "A",
-      "Silvia, grazie. Giriamo la sua segnalazione al Comune, e ricordiamo a tutti gli ascoltatori: se vedete dei cinghiali in città, non avvicinatevi, non date loro da mangiare e chiamate la polizia locale."
+      "Anche perché lì c'è una scuola a pochi metri."
+     ],
+     [
+      "B",
+      "Appunto! Fra mezz'ora arrivavano i bambini. Ho visto la maestra aprire il cancello e le ho raccontato tutto. È diventata bianca come un lenzuolo."
+     ],
+     [
+      "A",
+      "Ci credo. Silvia, grazie. Giriamo la sua segnalazione al Comune. E ricordiamo a tutti: se vedete dei cinghiali in città, non avvicinatevi, non date loro da mangiare e chiamate la polizia locale."
      ]
     ],
     "gloss": {
@@ -5891,7 +6070,10 @@
      "grufolare": "hozar, hurgar con el hocico",
      "cancello": "portón, reja",
      "lenzuolo": "sábana",
-     "segnalazione": "aviso, denuncia"
+     "segnalazione": "aviso, denuncia",
+     "addirittura": "¡nada menos!, ¿en serio?",
+     "boh": "qué sé yo (muletilla)",
+     "tipo": "(muletilla) como, onda"
     },
     "questions": [
      [
@@ -5943,6 +6125,16 @@
        "È affascinata e spera di rivederli presto"
       ],
       "Non ce l'ha con loro, ma con chi lascia i rifiuti fuori"
+     ],
+     [
+      "Che cosa vuol dire Silvia con «qui viene il bello»?",
+      [
+       "Che adesso arriva la parte più curiosa",
+       "Che il quartiere è molto bello",
+       "Che finalmente arrivano i vigili",
+       "Che i cinghiali erano bellissimi"
+      ],
+      "Che adesso arriva la parte più curiosa"
      ]
     ],
     "vf": [
@@ -8954,23 +9146,40 @@
    "ascolto": {
     "title": "Stare o essere? Pausa caffè tra Nord e Sud",
     "genre": "conversazione tra colleghi",
-    "es": "Dos colegas, una de Milán y uno de Nápoles, charlan en la pausa del café sobre las palabras, los acentos y los dialectos de sus ciudades.",
+    "es": "En la pausa del café, una colega de Milán y un colega de Nápoles comparan cómo hablan; a mitad de la charla se suma otro colega, romano. Conversación real: turnos cortos, interrupciones y muletillas.",
     "speakers": [
      "Chiara",
-     "Gennaro"
+     "Gennaro",
+     "Paolo"
     ],
     "turns": [
      [
       "A",
-      "Gennaro, scusa, ma il caffè l'hai preso tu stamattina? La moka è vuota."
+      "Gennaro, scusa, ma il caffè l'hai finito tu? La moka è vuota."
      ],
      [
       "B",
-      "Sì, sono stato io, perdonami. Te lo rifaccio subito. Però aspetta, tu hai detto «la moka». Noi a Napoli, a casa, diciamo «la macchinetta»."
+      "Sì, sono stato io… perdonami, te lo rifaccio subito. Però aspetta: hai detto «la moka»."
      ],
      [
       "A",
-      "Anche noi, a volte. Ma sai che cosa mi ha fatto ridere la prima settimana che sei arrivato? Quando mi hai chiesto se potevi «stare» un attimo nel mio ufficio."
+      "E come la chiamo?"
+     ],
+     [
+      "B",
+      "Noi a Napoli, a casa, diciamo «la macchinetta»."
+     ],
+     [
+      "A",
+      "Anche noi, a volte. Ma sai che cosa mi ha fatto ridere la prima settimana che sei arrivato?"
+     ],
+     [
+      "B",
+      "No, cosa?"
+     ],
+     [
+      "A",
+      "Quando mi hai chiesto se potevi «stare» un attimo nel mio ufficio."
      ],
      [
       "B",
@@ -8981,8 +9190,20 @@
       "Niente, ma io pensavo che volessi trasferirti da me! Noi diciamo «essere»: sono in ufficio, sono a casa. Voi dite «sto a casa»."
      ],
      [
+      "C",
+      "Buongiorno! Di che parlate?"
+     ],
+     [
+      "A",
+      "Paolo! Di Nord e Sud. Tu da che parte stai?"
+     ],
+     [
+      "C",
+      "Io? Io sono romano, sto in mezzo. Anche noi diciamo «sto a casa», eh."
+     ],
+     [
       "B",
-      "Eh, e voi dite «la Giulia», «il Marco», con l'articolo davanti ai nomi. Per me la prima volta è stato uno shock. Mi sembrava che parlaste di oggetti."
+      "Visto? E voi al Nord dite «la Giulia», «il Marco», con l'articolo davanti ai nomi. Per me la prima volta è stato uno shock. Mi sembrava che parlaste di oggetti."
      ],
      [
       "A",
@@ -8990,7 +9211,11 @@
      ],
      [
       "B",
-      "Vedi? È proprio questo il bello. Tu pensi che sia freddo, io penso che sia strano. E parliamo la stessa lingua, teoricamente."
+      "Vedi? È proprio questo il bello. Tu pensi che sia freddo, io penso che sia strano. E parliamo la stessa lingua…"
+     ],
+     [
+      "C",
+      "…teoricamente."
      ],
      [
       "A",
@@ -9001,8 +9226,12 @@
       "Perché da noi si dice stampella! Solo che la stampella, per me, era anche quella per camminare, e mi sono pure preoccupato. Ho pensato: poverina, si è fatta male a una gamba e non lo vuole dire."
      ],
      [
+      "C",
+      "No, vabbè, bellissima."
+     ],
+     [
       "A",
-      "Infatti avevi una faccia… Ecco, questi equivoci sono divertenti."
+      "Infatti avevi una faccia… Questi equivoci sono divertenti."
      ],
      [
       "B",
@@ -9014,11 +9243,15 @@
      ],
      [
       "B",
-      "Quella è un'altra storia, lì passo al napoletano. Con mia madre l'italiano non l'ho mai parlato, mi sembrerebbe di recitare. È come se mi mettessi la cravatta per andare a cena a casa sua."
+      "Eh, quella è un'altra storia. Lì passo al napoletano. Con mia madre l'italiano non l'ho mai parlato, mi sembrerebbe di recitare. Tipo… come se mi mettessi la cravatta per andare a cena a casa sua."
      ],
      [
       "A",
-      "Che bella questa immagine. A me invece il dialetto non l'hanno mai insegnato. I miei nonni lo parlavano tra di loro, ma con i nipoti no, era considerato roba da vecchi, o da gente poco istruita."
+      "Che bella questa immagine. A me invece il dialetto non l'hanno mai insegnato. I miei nonni lo parlavano tra di loro, ma con i nipoti no. Era considerato roba da vecchi, o da gente poco istruita."
+     ],
+     [
+      "C",
+      "Uguale a casa mia."
      ],
      [
       "B",
@@ -9026,7 +9259,7 @@
      ],
      [
       "A",
-      "Un po' sì. Adesso che è tornato di moda, mi sento esclusa. Mio fratello ha trovato un corso di milanese online e se l'è fatto tutto, ma io, onestamente, faccio fatica. Sembra un'altra lingua."
+      "Un po' sì. Adesso che è tornato di moda mi sento esclusa. Mio fratello ha trovato un corso di milanese online e se l'è fatto tutto, ma io… boh, onestamente faccio fatica. Sembra un'altra lingua."
      ],
      [
       "B",
@@ -9041,12 +9274,24 @@
       "Mah, secondo me è meglio di niente. È chi non fa niente che lo lascia morire."
      ],
      [
+      "C",
+      "Su questo ha ragione lui."
+     ],
+     [
       "A",
       "E l'accento? Ti hanno mai detto qualcosa, qui in ufficio?"
      ],
      [
       "B",
-      "Qui no. Però a un colloquio, anni fa, in un'altra azienda, uno mi ha detto: «Simpatico il suo accento, ma con i clienti meglio neutralizzarlo». L'ho presa male, lo confesso."
+      "Qui no. Però a un colloquio, anni fa, in un'altra azienda, uno mi ha detto: «Simpatico il suo accento, ma con i clienti meglio neutralizzarlo»."
+     ],
+     [
+      "C",
+      "Ma dai!"
+     ],
+     [
+      "B",
+      "Giuro. L'ho presa male, lo confesso."
      ],
      [
       "A",
@@ -9054,7 +9299,7 @@
      ],
      [
       "B",
-      "Macché. I clienti, alla fine, li ho conquistati proprio così, con la mia voce. Uno mi ha detto che al telefono gli mettevo allegria. È la mia voce che vendeva, non il prodotto."
+      "Macché. I clienti alla fine li ho conquistati proprio così, con la mia voce. Uno mi ha detto che al telefono gli mettevo allegria. Era la mia voce che vendeva, mica il prodotto."
      ],
      [
       "A",
@@ -9080,7 +9325,11 @@
      "allegria": "alegría",
      "carichi": "cargás",
      "equivoci": "malentendidos",
-     "appendino": "percha (regional)"
+     "appendino": "percha (regional)",
+     "vabbè": "(no, vabbè) ¡no, bueno!, ¡qué bueno! (muletilla)",
+     "boh": "qué sé yo (muletilla)",
+     "mica": "(mica il prodotto) no el producto, para nada",
+     "tipo": "(muletilla) como, onda"
     },
     "questions": [
      [
@@ -9132,6 +9381,16 @@
        "Ha chiesto aiuto a un insegnante di dizione"
       ],
       "Ci è rimasto male, ma ha tenuto il suo accento"
+     ],
+     [
+      "Che cosa intende Paolo con «sto in mezzo»?",
+      [
+       "Che Roma è a metà tra le due parlate",
+       "Che non vuole litigare con i colleghi",
+       "Che la sua scrivania è al centro",
+       "Che non ha ancora deciso dove vivere"
+      ],
+      "Che Roma è a metà tra le due parlate"
      ]
     ],
     "vf": [
