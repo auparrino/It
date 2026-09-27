@@ -105,10 +105,18 @@
       kinds: { argomentativo: "Texto de opinião", formale: "E-mail formal", roteiro: "Roteiro de visita", reclamacao: "E-mail de reclamação",
                resumo: "Resumo", email: "E-mail a um amigo", carta_aberta: "Carta aberta", guia: "Texto de apresentação",
                artigo: "Artigo de divulgação", panfleto: "Texto de campanha", other: "Carta formal" },
+      // the genre of the C1 task (tramo_data.js) that reviews each tarefa without
+      // a key: by the genre's name first, then by the kind
+      genres: { "post de blog": "post_blog", argomentativo: "texto_opiniao", roteiro: "texto_instrucional", reclamacao: "carta_formal",
+                formale: "carta_formal", resumo: "resumo", email: "email_informal", carta_aberta: "carta_aberta", guia: "texto_instrucional",
+                artigo: "artigo", panfleto: "texto_instrucional" },
+      // like the European exams, and unlike the Celpe-Bras: they do not count
+      optional: ["strutture", "lessico"],
+      ricName: "Reconstrução",
       provaToast: function (id, name) { return "Prova de " + name; },
       byAbility: "Por habilidad",
-      missionSub: "Cinco pruebas al estilo del Celpe-Bras (Avançado Superior): compreensão oral, leitura, estruturas, léxico y produção escrita. Mínimo 55 % en cada una.",
-      lead: "Cinco pruebas al estilo del Celpe-Bras (Avançado Superior): cada una necesita el <b>55 %</b> y el promedio, el 60 %. Podés hacerlas en el orden que quieras y repetir una.",
+      missionSub: "Al estilo del Celpe-Bras (Avançado Superior), en tres versiones: compreensão oral, leitura y produção escrita con cuatro tarefas integradas; estruturas y léxico, opcionales. Mínimo 55 % en cada una.",
+      lead: "Tres pruebas al estilo del Celpe-Bras (Avançado Superior): cada una necesita el <b>55 %</b> y el promedio, el 60 %. <b>Estruturas</b> y <b>Léxico</b> son opcionales, como en los exámenes europeos: no cuentan para aprobar. Podés hacerlas en el orden que quieras y repetir una. Hay tres versiones: si no aprobás, el intento siguiente usa otra.",
       sub: {
         ascolto: "una entrevista larga con dos voces · 8 preguntas y 4 huecos",
         lettura: "un texto largo · títulos por párrafo y verdadeiro/falso",

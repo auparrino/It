@@ -73,7 +73,7 @@ reales; las apócrifas se dicen apócrifas.
 | Escreva (`docs/lang/pt/scrivi.js`) | 48 tareas de escritura con destinatario y propósito (en portugués desde la 14), con su corrector |
 | Banco (`tools/pt/bank/`) | 1.836 sustantivos, 674 verbos, 448 adjetivos, 463 palabras, 700 oraciones, 524 errores típicos, 1.095 interferencias del español, 148 falsos amigos |
 | Frecuencia (`docs/lang/pt/data/frequenza.json`) | 16.232 lemas de OpenSubtitles 2018 pt-BR (hermitdave/FrequencyWords, CC BY-SA 4.0); niveles por banda de frecuencia |
-| Exame C1 (`docs/lang/pt/esame_data.js`) | Compreensão oral, Leitura, Estruturas, Léxico, Produção escrita con cuatro tarefas integradas y la rúbrica del Celpe-Bras; todo en portugués, tres versiones |
+| Exame C1 (`docs/lang/pt/esame_data.js`) | Compreensão oral, Leitura y Produção escrita con cuatro tarefas integradas y la rúbrica del Celpe-Bras; Estruturas y Léxico, opcionales; todo en portugués, tres versiones (ver abajo) |
 
 La investigación detrás de cada ejercicio (recuperación, espaciado con FSRS,
 pretest, intercalado, input estructurado, feedback correctivo…) es la misma
@@ -125,6 +125,41 @@ semana trae tres misiones obligatorias que entrenan exactamente eso:
   - **Con IA**: además, la grilla de la producción escrita.
 
 Detalle del funcionamiento en el README del italiano.
+
+## Exame C1: la prova
+
+La semana 52 es un examen al estilo del Celpe-Bras (Avançado Superior),
+sin la parte oral y todo en portugués. Aprobar pide el 55 % en cada prueba
+que cuenta y el 60 % de promedio.
+
+- **Compreensão oral**: una entrevista a dos voces, dos escuchas, ocho
+  preguntas con opciones de largo parejo y cuatro huecos.
+- **Leitura**: un texto largo con título por párrafo y
+  *verdadeiro / falso*.
+- **Produção escrita**: cuatro tarefas integradas, como en la prova. Cada
+  una trae su insumo antes del enunciado:
+  - la 1, la entrevista de la versión (se escucha dos veces, leída a dos
+    voces);
+  - la 2, la lectura de la versión (se despliega);
+  - la 3, un audio corto (un recado, un podcast, la radio del barrio);
+  - la 4, un texto corto (un aviso, una nota, la respuesta de una tienda).
+
+  El enunciado no dice extensión ni registro: se deducen del género, del
+  interlocutor y del propósito. Sin clave, cada tarefa pasa por la revisión
+  de la tarea C1 (`Tramo.evaluate`), con la *adequação* del tramo:
+  tratamiento, propósito del género, uso del insumo y registro. Con clave,
+  la IA la califica con las tres *adequações* (contexto, discursiva,
+  lingüística, léxico) y recibe el insumo para juzgar cómo se usó.
+- **Estruturas** y **Léxico**: opcionales, como en los exámenes europeos. El
+  Celpe-Bras no las tiene, así que no cuentan para aprobar.
+
+**Tres versiones**, cada una con su entrevista, su lectura y sus cuatro
+tarefas. La primera vez toca la 1; si no aprobás, el intento siguiente usa
+la que todavía no hiciste. La pantalla dice qué versión estás haciendo y cómo
+te fue en las otras. Después de aprobar, el plan de mantenimiento propone un
+simulacro cada tres meses con la versión siguiente. Se guarda en
+`state.esame`: la versión en curso y, por versión, las pruebas del intento y
+la mejor nota.
 
 ### Palabras B2-C1 y corrector (v2.7)
 
