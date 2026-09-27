@@ -418,6 +418,21 @@ FAMILIES.forEach(function (c) {
 });
 ok(D.diagnose("Ieri ho andato", ["Ieri sono andato"]).level === "incorrecto" && D.diagnose("parlero", ["parlerò"]).level === "desliz", "livello: incorrecto e desliz");
 
+// The translations into Spanish (dir «it-es», D2 of the 2026-09 audit): the
+// Spanish is never diagnosed as Italian.
+(function () {
+  var items = pack.data("it", "course.json").items, es = Object.keys(items).filter(function (k) { return items[k].dir === "it-es"; });
+  ok(es.length === 10, "traduzioni verso lo spagnolo: " + es.length);
+  es.forEach(function (k) {
+    var it = items[k], acc = it.accept || [it.answer];
+    ok(acc.length >= 5, "traduzione verso lo spagnolo con poche varianti: " + k + " (" + acc.length + ")");
+    var d = D.diagnose("Hice algo que no tiene nada que ver", acc, { dir: "it-es", stem: it.stem });
+    ok(d.verdict === "sbagliato" && !d.cat && /Otras formas/.test(d.explain), "spagnolo diagnosticato come italiano: " + k + " " + d.cat + " " + d.explain);
+    ok(D.diagnose(acc[acc.length - 1].toLowerCase().replace(/[¡!¿?.]/g, ""), acc, { dir: "it-es" }).verdict === "giusto", "variante spagnola rifiutata: " + k);
+  });
+  ok(D.diagnose("Hizo el ridiculo", ["Quedó mal", "Hizo el ridículo"], { dir: "it-es" }).verdict === "giusto", "spagnolo senza tilde: giusto");
+})();
+
 // Correct alternatives stay correct; wrong ones are not waved through.
 [["sono stanca", ["Sono stanco."], {}, "giusto"],
  ["Non sono potuto venire.", ["Non ho potuto venire."], {}, "giusto"],

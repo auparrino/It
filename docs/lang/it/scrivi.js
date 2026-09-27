@@ -198,7 +198,8 @@
     var list = [];
     (src.items || []).forEach(function (it) {
       // Only what the learner has to write: stems and choice options carry Spanish.
-      if (it.type === "translate" || it.type === "cloze" || it.type === "conjugate" || it.type === "plural") {
+      // (not the translations into Spanish, dir «it-es»: their answers are Spanish)
+      if ((it.type === "translate" && it.dir !== "it-es") || it.type === "cloze" || it.type === "conjugate" || it.type === "plural") {
         list.push(String(it.answer || "").replace(/\|/g, " "));
         (it.accept || []).forEach(function (a) { list.push(a); });
       }

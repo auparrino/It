@@ -2954,6 +2954,10 @@
   }
   function diagnose0(given, expected, ctx) {
     ctx = ctx || {};
+    // A translation into Spanish (ctx.dir «it-es», as the item says):
+    // the learner writes Spanish, and Italian rules have nothing to say.
+    var listEs = (Array.isArray(expected) ? expected : [expected]).filter(Boolean);
+    if (listEs.length && ctx.dir === "it-es") return spanishAnswer(given, listEs);
     var list = (Array.isArray(expected) ? expected : [expected]).filter(Boolean);
     var list0 = list.slice(), rawGiven = given;
     var rawG = tokens(given);
@@ -3257,6 +3261,20 @@
     if (!w.length) return false;
     return w.filter(function (x) { return spanishish(x); }).length * 2 > w.length;
   }
+  // Spanish against Spanish: case, accents and punctuation do not count;
+  // otherwise the other ways of saying it, no Italian diagnosis.
+  function spanishAnswer(given, list) {
+    var flat = function (x) { return deaccent(String(x || "").toLowerCase()).replace(/[¿?¡!.,;:«»"()]/g, " ").replace(/\s+/g, " ").trim(); };
+    var g = flat(given);
+    var res = { cat: null, slip: false, hint: "", explain: "", target: list[0], lang: "es",
+                given: tokens(given).map(function (w) { return { w: w }; }), fixed: tokens(list[0]).map(function (w) { return { w: w }; }), others: 0, all: [] };
+    var hit = list.filter(function (x) { return flat(x) === g; })[0];
+    if (hit) { res.verdict = "giusto"; res.level = "correcto"; res.target = hit; return res; }
+    res.verdict = "sbagliato";
+    res.explain = "Otras formas de decirlo: " + list.filter(function (x, i, a) { return a.indexOf(x) === i; }).slice(0, 4).join(" · ") + ".";
+    return res;
+  }
+
   function explainChoice(chosen, answer, ctx) {
     ctx = ctx || {};
     var c2 = {};
