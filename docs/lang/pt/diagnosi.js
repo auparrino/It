@@ -599,11 +599,11 @@
     var x = String(w).toLowerCase();
     if (!/^[a-zà-ÿ]+$/.test(x) || isPortuguese(x)) return false;
     if (/ñ/.test(x) || /ll/.test(x)) return true;
-    if (/(ción|ciones|sión|siones|dad|dades|tad|miento|mientos|aje|ajes)$/.test(x)) return true;
+    if (/(ción|ciones|sión|siones|dad|tad|miento|mientos|aje|ajes)$/.test(x)) return true;   // -dades is Portuguese too (cidades, possibilidades)
     if (/[^aeiouáéíóú]ble[s]?$/.test(x)) return true;
     if (/(ón|én|ués|ía[sn]?)$/.test(x) && !/(ía|ías)$/.test(x)) return true;
-    if (/[^qg]ue/.test(x) && x.length > 3 && !/(ue[mi]|uen|uei|ueu)$/.test(x)) return true;
-    if (/(aba|abas|aban|ábamos)$/.test(x) && x.length > 4) return true;
+    if (/[^qg]ue/.test(x) && x.length > 3 && !/(ue[mi]|uen|uei|ueu)$/.test(x) && !/uen(te|tes|cia|cias|temente)$/.test(x) && !/^(cruel|duelo|duelos|suéter|suéteres)$/.test(x)) return true;
+    if (/(aba|abas|aban|ábamos)$/.test(x) && x.length > 4 && !/[áéíóúâêô]/.test(x.replace(/ábamos$/, ""))) return true;   // not sílaba
     // gerundio en -iendo, pasados y futuros con la tilde del español
     // (entendí, volveré, prometió) y el diptongo ie (tiene, hicieron)
     if (/(iendo|ió)$/.test(x)) return true;
@@ -636,6 +636,7 @@
    "depois antes sempre nunca jamais talvez então logo tarde cedo aliás inclusive todo toda todos todas tudo nada ninguém alguém " +
    "algum alguma alguns algumas nenhum nenhuma outro outra outros outras cada mesmo mesma próprio própria tão tanto tanta tantos " +
    "tantas ano anos dia dias mês meses semana semanas hora horas vez vezes coisa coisas gente casa rua cidade praia mar sol " +
+   "negro negra negros negras sílaba sílabas secretaria secretarias " +
    "obrigado obrigada oi olá tchau tá tô tás tava tavam cê cês né cadê bora vamo valeu grana bacana busão galera beleza pois assim embora enquanto caso senão aonde daqui dali aí " +
    "segunda terça quarta quinta sexta sábado domingo feira janeiro fevereiro março abril maio junho julho agosto setembro " +
    "outubro novembro dezembro zero dois duas três quatro cinco seis sete oito nove dez onze doze treze quatorze catorze quinze " +
@@ -2246,7 +2247,8 @@
       var ok = fe.some(function (a) {
         var fam = synFamily(a.lemma);
         return fam >= 0 && fg.some(function (b) {
-          if (/^(ter|haver)$/.test(a.lemma) && (a.p !== 2 || participleOf(e[i + 1] || ""))) return false;
+          // ter / haver: interchangeable as auxiliaries only; «tem» for «há» is the register (REGISTRO)
+          if (/^(ter|haver)$/.test(a.lemma)) return false;
           return b.lemma !== a.lemma && synFamily(b.lemma) === fam && b.tense === a.tense && b.p === a.p;
         });
       });
