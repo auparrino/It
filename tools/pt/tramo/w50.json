@@ -71,7 +71,7 @@
   "ascolto": {
     "title": "O casamento em que tudo deu errado",
     "genre": "conversa entre amigos",
-    "es": "Dos amigos se encuentran en un café: él, organizador de eventos, le cuenta a ella cómo fue el casamiento que organizó el fin de semana.",
+    "es": "Dos amigos se encuentran en un café: él, organizador de eventos y gaúcho (usa tu y bah), le cuenta a ella cómo fue el casamiento que organizó el fin de semana.",
     "speakers": [
       "Carol",
       "Bruno"
@@ -83,7 +83,7 @@
       ],
       [
         "B",
-        "Nem me fala, Carol. Passei o fim de semana inteiro de cabelo em pé. Lembra do casamento que eu estava organizando lá em Petrópolis?"
+        "Bah, nem me fala, Carol. Passei o fim de semana inteiro de cabelo em pé. Tu lembra do casamento que eu tava organizando lá em Petrópolis?"
       ],
       [
         "A",
@@ -91,7 +91,7 @@
       ],
       [
         "B",
-        "Certo? Olha, se alguma coisa podia dar errado, deu. Pra começar, o bufê pisou na bola feio. Às dez da manhã me ligaram dizendo que o caminhão tinha quebrado na serra e que a comida só chegaria à noite."
+        "Certo? Olha… se alguma coisa podia dar errado, deu. Pra começar, o bufê… o bufê pisou na bola feio. Às dez da manhã me ligaram dizendo que o caminhão tinha quebrado na serra e que a comida só chegaria à noite."
       ],
       [
         "A",
@@ -99,7 +99,7 @@
       ],
       [
         "B",
-        "Às quatro da tarde. Aí, você sabe, não tinha tempo para chorar. Tive que dar um jeito. Liguei para uma amiga que tem um restaurante lá perto e pedi, pelo amor de Deus, que ela quebrasse o meu galho."
+        "Às quatro da tarde. Aí, tu sabe, não tinha tempo pra chorar. Tive que dar um jeito. Liguei para uma amiga que tem um restaurante lá perto e pedi, pelo amor de Deus, que ela quebrasse o meu galho."
       ],
       [
         "A",
@@ -115,11 +115,11 @@
       ],
       [
         "B",
-        "Por enquanto, eu. Adiantei do meu bolso, porque não dava para esperar a boa vontade de ninguém. Depois vou acertar com o bufê. Mas, sinceramente, naquela hora eu nem pensei em dinheiro. Só pensava nos cento e cinquenta convidados chegando e nas mesas vazias."
+        "É… por enquanto, eu. Adiantei do meu bolso, porque não dava para esperar a boa vontade de ninguém. Depois vou acertar com o bufê. Mas, sinceramente, naquela hora eu nem pensei em dinheiro. Só pensava nos cento e cinquenta convidados chegando e nas mesas vazias."
       ],
       [
         "A",
-        "Imagino o desespero. E o bufê não deu nenhuma satisfação?"
+        "Hum, imagino o desespero. E o bufê não deu nenhuma satisfação?"
       ],
       [
         "B",
@@ -127,7 +127,7 @@
       ],
       [
         "A",
-        "Menos mal. E os noivos perceberam?"
+        "Menos mal. E os noivos… os noivos perceberam?"
       ],
       [
         "B",
@@ -139,7 +139,7 @@
       ],
       [
         "B",
-        "Eu segurei a onda. Levei ela para um canto, expliquei tudo com calma, mostrei as mensagens do bufê. Falei: olha, a culpa não é sua nem minha, mas eu vou resolver. E prometi que a empresa do bufê ia devolver todo o dinheiro."
+        "Eu segurei a onda. Levei ela para um canto, expliquei tudo com calma, mostrei as mensagens do bufê. Falei: olha, a culpa não é tua nem minha, mas eu vou resolver. E prometi que a empresa do bufê ia devolver todo o dinheiro."
       ],
       [
         "A",
@@ -155,7 +155,7 @@
       ],
       [
         "B",
-        "Tirar de letra é exagero. Eu suei a camisa, isso sim. Pus a mão na massa, carreguei caixa, ajudei a montar mesa, servi refrigerante. E o mais engraçado é que, no final, os convidados adoraram a comida da minha amiga. Teve tio pedindo o telefone do restaurante."
+        "Bah, tirar de letra é exagero. Eu suei a camisa, isso sim. Pus a mão na massa, carreguei caixa, ajudei a montar mesa, servi refrigerante. E o mais engraçado é que, no final, os convidados adoraram a comida da minha amiga. Teve tio pedindo o telefone do restaurante."
       ],
       [
         "A",
@@ -182,25 +182,7 @@
         "Vou te cobrar essa promessa, hein!"
       ]
     ],
-    "gloss": {
-      "cabelo": "pelo (de cabelo em pé = con los pelos de punta)",
-      "bufê": "catering, servicio de comida",
-      "serra": "sierra (ruta de montaña)",
-      "galho": "rama (quebrar o galho = sacar de un apuro)",
-      "topou": "aceptó, se copó",
-      "cardápio": "menú",
-      "noivos": "novios (los que se casan)",
-      "fera": "fiera (ficar uma fera = ponerse hecha una furia)",
-      "saia": "pollera (saia justa = situación incómoda)",
-      "onda": "ola (segurar a onda = mantener la calma)",
-      "suei": "transpiré (suar a camisa = romperse el lomo)",
-      "molho": "remojo (ficar de molho = quedarse quieto, descansar)",
-      "cobrar": "reclamar (un pago o una promesa)",
-      "adiantei": "adelanté (plata)",
-      "satisfação": "explicación",
-      "vista": "vista (fazer vista grossa = hacerse el distraído)",
-      "multa": "multa"
-    },
+    "gloss": {"cabelo": "pelo (de cabelo em pé = con los pelos de punta)", "bufê": "catering, servicio de comida", "serra": "sierra (ruta de montaña)", "galho": "rama (quebrar o galho = sacar de un apuro)", "topou": "aceptó, se copó", "cardápio": "menú", "noivos": "novios (los que se casan)", "fera": "fiera (ficar uma fera = ponerse hecha una furia)", "saia": "pollera (saia justa = situación incómoda)", "onda": "ola (segurar a onda = mantener la calma)", "suei": "transpiré (suar a camisa = romperse el lomo)", "molho": "remojo (ficar de molho = quedarse quieto, descansar)", "cobrar": "reclamar (un pago o una promesa)", "adiantei": "adelanté (plata)", "satisfação": "explicación", "vista": "vista (fazer vista grossa = hacerse el distraído)", "multa": "multa", "bah": "(gaúcho) ¡uh!, ¡pucha!: sorpresa o fastidio", "tu": "vos: en el Sur, tu con el verbo de você (tu lembra, tu sabe)"},
     "questions": [
       [
         "Qual foi o primeiro problema do casamento?",

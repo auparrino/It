@@ -5699,11 +5699,11 @@
      ],
      [
       "B",
-      "Dá, tá nas configurações, lá em privacidade. Depois eu te mostro. Mas vem cá, o que cê tá achando?"
+      "Dá, tá nas configurações, lá em… em privacidade. Depois eu te mostro. Mas vem cá, o que cê tá achando?"
      ],
      [
       "A",
-      "Olha, no começo eu achei meio parado, sabe? Aí lá pelo terceiro episódio a coisa engrenou. E o que eu mais gosto é o jeito que eles falam. Parece a minha família, cara. Minha tia fala igualzinho à dona Cida."
+      "Olha, no começo eu achei meio… meio parado, sabe? Aí lá pelo terceiro episódio a coisa engrenou. E o que eu mais gosto é o jeito que eles falam. Parece a minha família, cara. Minha tia fala igualzinho à dona Cida."
      ],
      [
       "B",
@@ -5711,7 +5711,7 @@
      ],
      [
       "A",
-      "Ah, por isso! Eu sempre vejo com legenda porque o som do meu notebook é horrível, e eu reparei que tava escrito pra, tá, essas coisas. Achei estranho no começo."
+      "Ah, por isso! Eu sempre vejo com legenda porque o som do meu notebook é, é horrível, e eu reparei que tava escrito pra, tá, essas coisas. Achei estranho no começo."
      ],
      [
       "B",
@@ -5719,7 +5719,7 @@
      ],
      [
       "A",
-      "É, mas minha mãe, que é professora, reclamou. Falou que a gente já escreve tudo errado no celular e que agora nem a série ajuda. Ela acha que isso confunde os alunos dela."
+      "É, mas minha mãe, que é pro… que é professora, reclamou. Falou que a gente já escreve tudo errado no celular e que agora nem a série ajuda. Ela acha que isso confunde os alunos dela."
      ],
      [
       "B",
@@ -5727,7 +5727,7 @@
      ],
      [
       "A",
-      "Verdade. Bom, mudando de assunto, cê vai na festa da Lari sábado?"
+      "Verdade. Bom, hum, mudando de assunto, cê vai na festa da Lari sábado?"
      ],
      [
       "B",
@@ -9570,7 +9570,7 @@
    "ascolto": {
     "title": "O casamento em que tudo deu errado",
     "genre": "conversa entre amigos",
-    "es": "Dos amigos se encuentran en un café: él, organizador de eventos, le cuenta a ella cómo fue el casamiento que organizó el fin de semana.",
+    "es": "Dos amigos se encuentran en un café: él, organizador de eventos y gaúcho (usa tu y bah), le cuenta a ella cómo fue el casamiento que organizó el fin de semana.",
     "speakers": [
      "Carol",
      "Bruno"
@@ -9582,7 +9582,7 @@
      ],
      [
       "B",
-      "Nem me fala, Carol. Passei o fim de semana inteiro de cabelo em pé. Lembra do casamento que eu estava organizando lá em Petrópolis?"
+      "Bah, nem me fala, Carol. Passei o fim de semana inteiro de cabelo em pé. Tu lembra do casamento que eu tava organizando lá em Petrópolis?"
      ],
      [
       "A",
@@ -9590,7 +9590,7 @@
      ],
      [
       "B",
-      "Certo? Olha, se alguma coisa podia dar errado, deu. Pra começar, o bufê pisou na bola feio. Às dez da manhã me ligaram dizendo que o caminhão tinha quebrado na serra e que a comida só chegaria à noite."
+      "Certo? Olha… se alguma coisa podia dar errado, deu. Pra começar, o bufê… o bufê pisou na bola feio. Às dez da manhã me ligaram dizendo que o caminhão tinha quebrado na serra e que a comida só chegaria à noite."
      ],
      [
       "A",
@@ -9598,7 +9598,7 @@
      ],
      [
       "B",
-      "Às quatro da tarde. Aí, você sabe, não tinha tempo para chorar. Tive que dar um jeito. Liguei para uma amiga que tem um restaurante lá perto e pedi, pelo amor de Deus, que ela quebrasse o meu galho."
+      "Às quatro da tarde. Aí, tu sabe, não tinha tempo pra chorar. Tive que dar um jeito. Liguei para uma amiga que tem um restaurante lá perto e pedi, pelo amor de Deus, que ela quebrasse o meu galho."
      ],
      [
       "A",
@@ -9614,11 +9614,11 @@
      ],
      [
       "B",
-      "Por enquanto, eu. Adiantei do meu bolso, porque não dava para esperar a boa vontade de ninguém. Depois vou acertar com o bufê. Mas, sinceramente, naquela hora eu nem pensei em dinheiro. Só pensava nos cento e cinquenta convidados chegando e nas mesas vazias."
+      "É… por enquanto, eu. Adiantei do meu bolso, porque não dava para esperar a boa vontade de ninguém. Depois vou acertar com o bufê. Mas, sinceramente, naquela hora eu nem pensei em dinheiro. Só pensava nos cento e cinquenta convidados chegando e nas mesas vazias."
      ],
      [
       "A",
-      "Imagino o desespero. E o bufê não deu nenhuma satisfação?"
+      "Hum, imagino o desespero. E o bufê não deu nenhuma satisfação?"
      ],
      [
       "B",
@@ -9626,7 +9626,7 @@
      ],
      [
       "A",
-      "Menos mal. E os noivos perceberam?"
+      "Menos mal. E os noivos… os noivos perceberam?"
      ],
      [
       "B",
@@ -9638,7 +9638,7 @@
      ],
      [
       "B",
-      "Eu segurei a onda. Levei ela para um canto, expliquei tudo com calma, mostrei as mensagens do bufê. Falei: olha, a culpa não é sua nem minha, mas eu vou resolver. E prometi que a empresa do bufê ia devolver todo o dinheiro."
+      "Eu segurei a onda. Levei ela para um canto, expliquei tudo com calma, mostrei as mensagens do bufê. Falei: olha, a culpa não é tua nem minha, mas eu vou resolver. E prometi que a empresa do bufê ia devolver todo o dinheiro."
      ],
      [
       "A",
@@ -9654,7 +9654,7 @@
      ],
      [
       "B",
-      "Tirar de letra é exagero. Eu suei a camisa, isso sim. Pus a mão na massa, carreguei caixa, ajudei a montar mesa, servi refrigerante. E o mais engraçado é que, no final, os convidados adoraram a comida da minha amiga. Teve tio pedindo o telefone do restaurante."
+      "Bah, tirar de letra é exagero. Eu suei a camisa, isso sim. Pus a mão na massa, carreguei caixa, ajudei a montar mesa, servi refrigerante. E o mais engraçado é que, no final, os convidados adoraram a comida da minha amiga. Teve tio pedindo o telefone do restaurante."
      ],
      [
       "A",
@@ -9698,7 +9698,9 @@
      "adiantei": "adelanté (plata)",
      "satisfação": "explicación",
      "vista": "vista (fazer vista grossa = hacerse el distraído)",
-     "multa": "multa"
+     "multa": "multa",
+     "bah": "(gaúcho) ¡uh!, ¡pucha!: sorpresa o fastidio",
+     "tu": "vos: en el Sur, tu con el verbo de você (tu lembra, tu sabe)"
     },
     "questions": [
      [
