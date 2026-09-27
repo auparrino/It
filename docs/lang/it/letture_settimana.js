@@ -85,7 +85,7 @@
         "Il pomeriggio viene a casa stanca, ma la sera esce con gli amici. " +
         "\"Vuoi venire al cinema?\" chiede la sua amica Laura. \"Sì, vengo volentieri, " +
         "ma domani devo lavorare presto!\" risponde Sara.",
-      gloss: { infermiera: "enfermera", ospedale: "hospital", ferma: "quieta", controllare: "controlar",
+      gloss: { fa: "(fare l'infermiera) trabaja de enfermera", mai: "nunca (non può mai = nunca puede)", infermiera: "enfermera", ospedale: "hospital", ferma: "quieta", controllare: "controlar",
                pazienti: "pacientes", medici: "médicos", mezzogiorno: "mediodía", veloce: "rápido",
                colleghi: "compañeros de trabajo", stanca: "cansada", volentieri: "con gusto", presto: "temprano" },
       questions: [
@@ -216,7 +216,7 @@
         "Anna porta quel vecchio specchio della nonna.\n\n" +
         "Alla fine della giornata sono tutti stanchi. \"Questo appartamento è perfetto\", dice Elena. " +
         "\"Sì, ma quelle scale... Nessuno vuole più portare niente!\" risponde Marco, e ride.",
-      gloss: { scatole: "cajas", scatola: "caja", dappertutto: "por todas partes", dentro: "adentro",
+      gloss: { nessuno: "nadie", niente: "nada (non... più niente = ya nada)", scatole: "cajas", scatola: "caja", dappertutto: "por todas partes", dentro: "adentro",
                maglione: "pulóver", mobili: "muebles", ognuno: "cada uno", specchio: "espejo", scale: "escaleras",
                ride: "se ríe", appartamento: "departamento" },
       questions: [
@@ -439,7 +439,7 @@
         "Ho anche una gatta, Nina. Nina è piccola e bianca, e ha gli occhi verdi. " +
         "La mia casa è vecchia ma bella, e ha un balcone con i fiori.\n\n" +
         "Oggi è domenica: sono a casa, ho un caffè e un libro. Il libro è nuovo ed è molto bello. Sono contenta!",
-      gloss: { studentessa: "estudiante (mujer)", fratello: "hermano", medico: "médico", pigro: "vago, perezoso",
+      gloss: { ventiquattro: "veinticuatro", "trent'anni": "treinta años (los números, en la semana 7)", po: "(un po') un poco", mia: "mi (la mia casa = mi casa)", studentessa: "estudiante (mujer)", fratello: "hermano", medico: "médico", pigro: "vago, perezoso",
                anche: "también", gatta: "gata", piccola: "chiquita", bianca: "blanca", occhi: "ojos",
                vecchia: "vieja", balcone: "balcón", fiori: "flores", oggi: "hoy", contenta: "contenta" },
       questions: [
@@ -459,7 +459,7 @@
         "e risponde alle email. Finisce di lavorare alle sette.\n\n" +
         "La sera cucina qualcosa di semplice, guarda un film o telefona alla madre. " +
         "Dorme poco, perché legge sempre fino a tardi. \"I libri sono la mia vita\", dice Carla.",
-      gloss: { libreria: "librería", giornale: "diario", clienti: "clientes",
+      gloss: { qualcosa: "algo (qualcosa di semplice = algo simple)", libreria: "librería", giornale: "diario", clienti: "clientes",
                mezzogiorno: "mediodía", panino: "sándwich", collega: "compañera de trabajo", ordina: "ordena",
                risponde: "responde", finisce: "termina", cucina: "cocina", semplice: "simple", tardi: "tarde" },
       questions: [

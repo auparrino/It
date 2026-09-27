@@ -723,7 +723,7 @@
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION = "c1-vN" in sw.js: test_game
      and the CI check it).  One version for the app and both languages. */
-  var APP_VERSION = "v2.6";
+  var APP_VERSION = "v2.7";
   // Settimana XVII: Roman numerals on the street signs (LANG.ui.romanWeeks).
   function romano(n) {
     var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
@@ -1660,6 +1660,7 @@
     var domDone = Drills.dominated(st, w, state);
     m({ kind: "play2", done: domDone, ico: "🏆", title: "Dominala",
         sub: domDone ? "Dominada" + (st.domPct ? " · " + st.domPct + " %" : "")
+          : w.lesson && !lessonRead(w.week) ? "Se abre cuando termines la lección: pregunta toda la semana"
           : "Una sola sesión de " + Drills.DOMINA_SIZE + " preguntas de toda la semana, sin vidas: con 85 % la ganás" +
             (st.domBest ? " · tu mejor intento: " + st.domBest + " %" : "") });
     return out;
@@ -1806,8 +1807,12 @@
       items = Drills.buildRound(course, w, { map: itemMap, state: state, silent: state.silent, size: 6, only: partItems(w) });
     }
     else if (kind === "boss") items = Drills.buildBoss(course, w, state, { map: itemMap });
-    else if (kind === "debil") items = Drills.buildWeak(course, w, state, { map: itemMap, size: 15 });
-    else if (kind === "domina") items = Drills.buildDomina(course, w, state, { map: itemMap, silent: state.silent });
+    else if (kind === "debil") items = Drills.buildWeak(course, w, state, { map: itemMap, size: 15, only: partItems(w) });
+    else if (kind === "domina") {
+      // the whole week, so only once the whole lesson has been read
+      if (w.lesson && !lessonRead(w.week)) { toast("«Dominala» pregunta toda la semana: se abre cuando termines la lección.", 3500); return; }
+      items = Drills.buildDomina(course, w, state, { map: itemMap, silent: state.silent });
+    }
     else if (kind === "review") items = Drills.buildReview(course, state, 20, drillOpts());
     else if (kind === "scene") {
       if (Drills.sceneWeek(arg) > (state.unlocked || 1)) { toast("Se abre en la semana " + Drills.sceneWeek(arg) + "."); return; }
@@ -4823,7 +4828,8 @@
   function scriviLexicon() {
     if (!window.Scrivi) return;
     Scrivi.learnCourse({ items: course.items, bank: Banca.loaded() ? Banca.bank() : null,
-      phrases: window.Frasi ? Frasi.ALL : [], readings: window.Letture ? Letture.EPISODI : [], glossario: glossario || {} });
+      phrases: window.Frasi ? Frasi.ALL : [], readings: window.Letture ? Letture.EPISODI : [], glossario: glossario || {},
+      extra: window.Tramo ? Tramo.lexTexts() : [] });
   }
 
   function reqsHtml(r) {

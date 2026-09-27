@@ -1591,7 +1591,7 @@
    "answer": "ascoltaste",
    "alt": [],
    "drop": false,
-   "note": "Hipótesis irreal: *se* + congiuntivo imperfetto, como «si escucharan». *sapreste* indica *voi*: *ascoltaste*."
+   "note": "Hipótesis irreal: *se* + congiuntivo imperfetto, como «si escucharan». *sapreste* indica *voi*: *ascoltaste*. *Ciò che* = lo que."
   },
   "d19-012": {
    "consigna": "Completá la parte con «se» con el congiuntivo imperfetto. Mirá la otra parte de la frase para deducir el sujeto.",
@@ -1971,7 +1971,7 @@
    "note": "Tras *pensare che* va congiuntivo, aunque en castellano digamos «pienso que lee» con indicativo: *legga*."
   },
   "d20-011": {
-   "consigna": "Completá con el congiuntivo (presente o passato) del verbo entre paréntesis.",
+   "consigna": "Completá con el congiuntivo presente del verbo entre paréntesis.",
    "type": "cloze",
    "stem": "È importante che loro ___ (imparare) la verità.",
    "answer": "imparino",
@@ -1980,7 +1980,7 @@
    "note": "*è importante che* + congiuntivo: *imparino*."
   },
   "d20-012": {
-   "consigna": "Completá con el congiuntivo (presente o passato) del verbo entre paréntesis.",
+   "consigna": "Completá con el congiuntivo presente del verbo entre paréntesis.",
    "type": "cloze",
    "stem": "Credi che lei ___ (essere) disponibile?",
    "answer": "sia",
@@ -1989,7 +1989,7 @@
    "note": "*credere che* en pregunta + congiuntivo: *sia*."
   },
   "d20-013": {
-   "consigna": "Completá con el congiuntivo (presente o passato) del verbo entre paréntesis.",
+   "consigna": "Completá con el congiuntivo presente del verbo entre paréntesis.",
    "type": "cloze",
    "stem": "La professoressa vuole che voi ___ (aprire) i libri.",
    "answer": "apriate",
@@ -1998,7 +1998,7 @@
    "note": "*volere che* + congiuntivo: *apriate*, como «quiere que abran»."
   },
   "d20-014": {
-   "consigna": "Completá con el congiuntivo (presente o passato) del verbo entre paréntesis.",
+   "consigna": "Completá con el congiuntivo presente del verbo entre paréntesis.",
    "type": "cloze",
    "stem": "Spero che tu ___ (pagare) perché io non ho soldi.",
    "answer": "paghi",
@@ -2007,7 +2007,7 @@
    "note": "*sperare che* + congiuntivo: *paghi*, con h para conservar la g dura."
   },
   "d20-015": {
-   "consigna": "Completá con el congiuntivo (presente o passato) del verbo entre paréntesis.",
+   "consigna": "Completá con el congiuntivo presente del verbo entre paréntesis.",
    "type": "cloze",
    "stem": "Che voi ___ (essere) molto lieti!",
    "answer": "siate",
@@ -2016,7 +2016,7 @@
    "note": "Deseo con *che* solo: congiuntivo, *Che siate lieti!*"
   },
   "d20-016": {
-   "consigna": "Completá con el congiuntivo (presente o passato) del verbo entre paréntesis.",
+   "consigna": "Completá con el congiuntivo presente del verbo entre paréntesis.",
    "type": "cloze",
    "stem": "È necessario che i bambini ___ (mangiare) la verdura.",
    "answer": "mangino",
@@ -2034,7 +2034,7 @@
    "note": "Congiuntivo passato: sia arrivata (el participio concuerda con lei)."
   },
   "d20-018": {
-   "consigna": "Completá con el congiuntivo (presente o passato) del verbo entre paréntesis.",
+   "consigna": "Completá con el congiuntivo presente del verbo entre paréntesis.",
    "type": "cloze",
    "stem": "Il medico suggerisce che tu ___ (perdere) qualche chilo.",
    "answer": "perda",
@@ -2043,7 +2043,7 @@
    "note": "*suggerire che* + congiuntivo: *perda* (las tres personas del singular coinciden)."
   },
   "d20-019": {
-   "consigna": "Completá con el congiuntivo (presente o passato) del verbo entre paréntesis.",
+   "consigna": "Completá con el congiuntivo presente del verbo entre paréntesis.",
    "type": "cloze",
    "stem": "Temo che gli studenti non ___ (essere) seri.",
    "answer": "siano",
@@ -2052,7 +2052,7 @@
    "note": "*temere che* + congiuntivo: *siano*, igual que «temo que no sean»."
   },
   "d20-020": {
-   "consigna": "Completá con el congiuntivo (presente o passato) del verbo entre paréntesis.",
+   "consigna": "Completá con el congiuntivo presente del verbo entre paréntesis.",
    "type": "cloze",
    "stem": "Hai cercato le chiavi? È possibile che ___ (essere) nella macchina?",
    "answer": "siano",

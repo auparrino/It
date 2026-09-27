@@ -122,3 +122,18 @@ semana trae tres misiones obligatorias que entrenan exactamente eso:
 
 Detalle del funcionamiento en el README del italiano.
 
+### Palabras B2-C1 y corrector (v2.7)
+
+- **Palabras**: de la semana 27 a la 51, veinte palabras por semana. A las
+  15 de siempre se suman cinco del léxico B2-C1 de la leitura o la escuta
+  longa de esa semana (`tools/pt/vocab/s5_tramo.py`).
+- **Corrector**: en el texto nativo del tramo marcaba 83 falsas alarmas y
+  ahora marca 20.
+  - No marca lo que está citado.
+  - Acepta *a serviço de*, *a fim de*, *o caixa*, *muito presentes* y los
+    sustantivos en *-ista*.
+  - Un «que» separado por coma ya no dispara el subjuntivo.
+  - Solo cuenta como futuro la perífrasis *vai* + infinitivo.
+  - Pasan a sugerencia *se o ator fala…* (una condición real con presente)
+    y el relativo sin preposición del habla (*o jeito que*).
+

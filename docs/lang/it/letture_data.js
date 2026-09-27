@@ -204,7 +204,7 @@
         "«Allora non traslocare! Potresti fare il pendolare, come fanno in tanti.»\n\n" +
         "Martín ci pensa tutta la notte. Alle tre scrive un messaggio a sua madre: " +
         "«Mamma, secondo te sarei capace di ricominciare da capo, un'altra volta?»",
-      gloss: { posto: "puesto (de trabajo); al posto mio = en mi lugar", ottimo: "excelente", lasciare: "dejar",
+      gloss: { pensa: "(ci pensa) lo piensa, le da vueltas: ci = en eso", posto: "puesto (de trabajo); al posto mio = en mi lugar", ottimo: "excelente", lasciare: "dejar",
                mancherebbe: "extrañaría (me faltaría)",
                traslocare: "mudarse", pendolare: "persona que viaja todos los días al trabajo",
                capo: "(da capo) desde cero", capace: "capaz" },
@@ -400,7 +400,7 @@
         "domiciliari, vicino a Firenze.",
       gloss: { strumento: "instrumento", olandese: "holandés", migliora: "mejora",
                punta: "apunta", valli: "valles", girano: "giran", massimi: "máximos",
-               costringe: "obliga", abiurare: "abjurar, renegar", mormorato: "murmurado",
+               costringe: "obliga", abiurare: "abjurar, renegar", mormorato: "(avrebbe mormorato) habría murmurado, se dice que murmuró: condicional compuesto para lo no confirmado (semana 31)",
                eppur: "(eppure) y sin embargo", prove: "pruebas",
                domiciliari: "(arresti domiciliari) prisión domiciliaria" },
       questions: [
@@ -426,7 +426,8 @@
         "parlava italiano, gli altri parlavano i loro dialetti.",
       gloss: { volontari: "voluntarios", camicia: "camisa", sbarcano: "desembarcan",
                conquistano: "conquistan", consegna: "entrega", diventerà: "se convertirá en",
-               minoranza: "minoría", dialetti: "dialectos" },
+               minoranza: "minoría", dialetti: "dialectos",
+               parte: "(non ne fa ancora parte) todavía no forma parte (de él)" },
       questions: [
         ["¿Cuántos voluntarios llevaba Garibaldi?", ["unos mil", "unos cien", "diez mil", "trescientos"], "unos mil"],
         ["¿Cuándo pasa Roma a ser capital?", ["en 1871", "en 1861", "en 1860", "en 1946"], "en 1871"],
@@ -549,7 +550,7 @@
         "Una curiosità: Beccaria era il nonno di Alessandro Manzoni.",
       gloss: { delitti: "delitos", pene: "penas", sostiene: "sostiene",
                crudele: "cruel", colpevole: "culpable", "pur": "(pur di) con tal de",
-               smettere: "dejar de", scoraggiare: "desalentar", certezza: "certeza",
+               smettere: "dejar de", scoraggiare: "desalentar (a scoraggiare... non è X, ma Y: lo que desalienta no es X sino Y)", certezza: "certeza",
                nonno: "abuelo" },
       questions: [
         ["¿Por qué la tortura es inútil según Beccaria?", ["un culpable fuerte resiste y un inocente débil confiesa", "porque es cara", "porque la Iglesia la prohíbe en todos los tribunales desde hace siglos", "porque nadie confiesa"], "un culpable fuerte resiste y un inocente débil confiesa"],
@@ -731,7 +732,7 @@
         "«Certo. Ma la crema gliela prepari tu, che io sono stanca.»\n\n" +
         "La settimana dopo Martín porta la torta in ufficio. La professoressa la assaggia e " +
         "sorride: «Glielo dico subito: la prossima gliela chiedo per il mio compleanno.»",
-      gloss: { fastidioso: "molesto (no «aburrido»)", prestato: "prestado", restituirglielo: "(restituire) devolvérselo",
+      gloss: { più: "más (più che a me = más que a mí)", fastidioso: "molesto (no «aburrido»)", prestato: "prestado", restituirglielo: "(restituire) devolvérselo",
                portineria: "portería, conserjería", oppure: "o bien", pesante: "pesado",
                ringraziarla: "agradecerle", appuntamento: "cita", serve: "(servire a) le sirve, le hace falta",
                decina: "unos diez", direi: "diría", ricetta: "receta", assaggia: "prueba",

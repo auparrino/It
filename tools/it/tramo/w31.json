@@ -8,6 +8,11 @@
     "grammar": "condizionale passato e futuro nel passato",
     "text": "Laura Benedetti, quarantun anni, per dodici anni ha fatto l'avvocata d'affari in uno studio del centro di Milano. Tre anni fa ha lasciato tutto e ha aperto un piccolo caseificio sulle colline dell'Oltrepò pavese, dove produce formaggi di capra. L'abbiamo incontrata tra una mungitura e una consegna.\n\nQuando ha cominciato a lavorare, come immaginava il suo futuro? «In modo molto preciso. Pensavo che sarei diventata socia dello studio prima dei quarant'anni, che avrei comprato casa in città e che, un giorno, avrei rallentato. Tutti mi dicevano che i primi anni sarebbero stati durissimi e che poi le cose sarebbero migliorate. In realtà non miglioravano mai: cambiavano solo i clienti.»\n\nC'è stato un momento preciso in cui ha deciso di andarsene? «Sì, e me lo ricordo benissimo. Era un venerdì sera, ero in ufficio alle undici e ho ricevuto un messaggio di mia sorella: mio nipote aveva appena fatto il suo primo saggio di pianoforte. Io avrei dovuto esserci, gliel'avevo promesso. Quella sera ho capito che avrei continuato a perdere cose così, una dopo l'altra, senza nemmeno accorgermene.»\n\nQualcuno ha cercato di fermarla? «Moltissimi. Il mio capo mi ha detto che avrei rovinato una carriera brillante e che me ne sarei pentita entro sei mesi. Anche i miei genitori, che avevano fatto tanti sacrifici per farmi studiare, all'inizio erano preoccupati. Mia madre, per esempio, avrebbe preferito che mi prendessi un anno sabbatico, senza bruciare i ponti.»\n\nSe ne è pentita? «No, ma non voglio raccontare una favola. Il primo inverno è stato terribile: due capre si sono ammalate, i permessi sanitari sono arrivati con mesi di ritardo e avevo finito quasi tutti i risparmi. Con il senno di poi, avrei fatto le cose in modo diverso: avrei seguito un corso serio prima di partire e avrei cercato dei soci. Cominciare da sola è stato un errore.»\n\nCom'è oggi una sua giornata tipo? «Mi alzo alle cinque e mezza per la mungitura, poi passo la mattina in laboratorio a fare i formaggi. Il pomeriggio faccio le consegne ai ristoranti della zona e, due volte alla settimana, vado al mercato di Voghera. Se qualcuno, dieci anni fa, mi avesse detto che avrei passato le giornate così, gli avrei riso in faccia.»\n\nChe cosa le manca del vecchio lavoro? «Mi mancano i colleghi, le discussioni intelligenti, perfino un po' l'adrenalina. E lo stipendio, ovviamente. Ma non tornerei indietro. Oggi lavoro forse più di prima, però sono io a decidere quando fermarmi.»\n\nChe cosa direbbe a chi sogna di cambiare vita? «Di non fidarsi delle storie che si leggono sui giornali, compresa la mia. Nessuno racconta le notti passate a fare i conti. Però direi anche un'altra cosa: se fossi rimasta, oggi guadagnerei di più, ma non conoscerei la persona che sono diventata. E questa persona, sinceramente, mi piace di più.»",
     "gloss": {
+      "compresa": "incluida",
+      "decidere": "(sono io a decidere) soy yo la que decide: *essere* + persona + *a* + infinitivo destaca quién (semana 48)",
+      "farmi": "(per farmi studiare) para que yo pudiera estudiar: *fare* + infinitivo = hacer que alguien haga (semana 40)",
+      "andarsene": "irse (de un lugar): *andare* + *se ne* (semana 45)",
+      "cui": "(in cui, con cui…) en el que, con el que: *cui* es el relativo después de preposición (semana 34)",
       "socia": "socia (de un estudio)",
       "caseificio": "quesería",
       "capra": "cabra",
@@ -18,7 +23,7 @@
       "saggio": "muestra (de fin de curso)",
       "accorgermene": "darme cuenta",
       "rovinato": "arruinado",
-      "pentita": "arrepentida",
+      "pentita": "arrepentida (*pentirsene*: arrepentirse de algo; *se ne è pentita?* ¿se arrepintió?)",
       "bruciare": "quemar",
       "favola": "cuento de hadas",
       "ammalate": "(se) enfermaron",
@@ -72,6 +77,7 @@
       ["A", "Sì, grazie. Poi la rivediamo insieme giovedì mattina, così venerdì la mandiamo al direttore con calma e senza sorprese."]
     ],
     "gloss": {
+      "cui": "(in cui, con cui…) en el que, con el que: *cui* es el relativo después de preposición (semana 34)",
       "rinnovato": "renovado",
       "consegnato": "entregado",
       "sviluppo": "desarrollo",

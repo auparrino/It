@@ -210,6 +210,7 @@
     (src.bank && src.bank.sentences || []).forEach(function (x) { (x.pt || x.it || []).forEach(function (a) { list.push(a); }); });
     (src.phrases || []).forEach(function (f) { list.push(f.pt || f.it); });
     (src.readings || []).forEach(function (e) { list.push(e.text); });
+    (src.extra || []).forEach(function (t) { list.push(t); });   // the long listenings and the models (tramo.js)
     learn(list);
     learn(Object.keys(src.glossario || {}));
     learn(Object.keys(DATA.lex || {}));
@@ -374,7 +375,7 @@
     if (/o$/.test(w)) return { g: "m", n: "s" };
     return nounGN(w);
   }
-  var COMMON_G = /^(rádio|rádios|grama|capital|personagem|personagens|lente|cura|moral|artista|artistas|colega|colegas|turista|turistas|jornalista|jornalistas|estudante|estudantes|cliente|clientes|gerente|gerentes|presidente|presidentes|atendente|atendentes|dentista|dentistas|motorista|motoristas|pianista|paciente|pacientes|agente|agentes|intérprete|intérpretes|jovem|jovens|chefe|chefes|cantor|artista|atleta|atletas|policial|policiais|representante|representantes|adolescente|adolescentes|parente|parentes|imigrante|imigrantes|habitante|habitantes|docente|docentes|militante|militantes|especialista|especialistas|guia|guias|modelo|modelos|criança|crianças|pessoa|pessoas|vítima|vítimas|cônjuge|cônjuges|fã|fãs|carioca|cariocas|paulista|paulistas|capixaba|indígena|indígenas|estrangeiro)$/;
+  var COMMON_G = /^([a-zà-ú]+istas?|caixa|caixas|rádio|rádios|grama|capital|personagem|personagens|lente|cura|moral|artista|artistas|colega|colegas|turista|turistas|jornalista|jornalistas|estudante|estudantes|cliente|clientes|gerente|gerentes|presidente|presidentes|atendente|atendentes|dentista|dentistas|motorista|motoristas|pianista|paciente|pacientes|agente|agentes|intérprete|intérpretes|jovem|jovens|chefe|chefes|cantor|artista|atleta|atletas|policial|policiais|representante|representantes|adolescente|adolescentes|parente|parentes|imigrante|imigrantes|habitante|habitantes|docente|docentes|militante|militantes|especialista|especialistas|guia|guias|modelo|modelos|criança|crianças|pessoa|pessoas|vítima|vítimas|cônjuge|cônjuges|fã|fãs|carioca|cariocas|paulista|paulistas|capixaba|indígena|indígenas|estrangeiro)$/;
   function isNoun(w) { return !!(w && (DATA.nouns[w] || DATA.nounsByPlural[w] || (U.HETERO && U.HETERO[w]))); }
 
   var NUMS = /^(um|uma|dois|duas|três|quatro|cinco|seis|sete|oito|nove|dez|onze|doze|treze|catorze|quatorze|quinze|dezesseis|dezessete|dezoito|dezenove|vinte|trinta|quarenta|cinquenta|sessenta|setenta|oitenta|noventa|cem|cento|duzentos|duzentas|trezentos|trezentas|quatrocentos|quinhentos|seiscentos|setecentos|oitocentos|novecentos|mil|milhão|milhões|meia|meio-dia|meia-noite)$/;
@@ -706,6 +707,25 @@
   var TIME_DONE = /^(ontem|anteontem|passado|passada|atrás)$/;
   var SUBJ_TRIG = /^(espero|esperamos|espera|esperam|esperava|quero|queremos|quer|querem|queria|queríamos|queriam|tomara|talvez|importante|necessário|necessária|preciso|possível|impossível|provável|improvável|melhor|pena|duvido|duvida|peço|pede|pedem|pediu|pediram|pedi|prefiro|prefere|recomendo|recomenda|recomendam|recomendou|sugiro|sugere|sugeriu|aconselho|aconselha|desejo|deseja|lamento|bom|ótimo|estranho|fundamental|essencial|mandou|manda|exige|exigiu|proíbe|permite|deixa)$/;
 
+  /* Words cited, not used: inside a short quote (up to six words: «pisar la
+     pelota», “hacer una vaca”) or right after a word that names them («la
+     parola *slogan*», «a palavra *propina*»).  The text talks about them, so
+     they are not the learner's mistakes. */
+  function citedOut(src, tk, out, NAMES) {
+    var spans = [], re = /“([^”\n]*)”|«([^»\n]*)»|"([^"\n]*)"/g, m;
+    while ((m = re.exec(src))) {
+      var inner = m[1] != null ? m[1] : m[2] != null ? m[2] : m[3];
+      if (inner.split(/\s+/).filter(Boolean).length <= 6) spans.push([m.index, m.index + m[0].length]);
+    }
+    return out.filter(function (f) {
+      var t = tk[f.i];
+      if (!t || t.at == null) return true;
+      if (spans.some(function (s) { return t.at >= s[0] && t.at < s[1]; })) return false;
+      for (var k = f.i - 1; k >= 0 && k >= f.i - 1; k--) if (tk[k].w && NAMES.test(tk[k].w)) return false;
+      return true;
+    });
+  }
+
   function lint(text, week) {
     week = week || 52;
     var tk = toks(text), out = [];
@@ -874,7 +894,7 @@
       if (artW && ni === i + 1 && !tk[ni].cap && !(/^(o|a|os|as)$/.test(w) && (finite(n) || isInf(n))) && !COMMON_G.test(n)) {
         var gn = nounGN(n);
         // «a pé», «vou a Copacabana»: the preposition, not the article
-        if (gn && w === "a" && gn.g === "m" && (!(t.clause || (U.HETERO && U.HETERO[n])) || /^(pé|cavalo|lápis|gás|vapor|prazo|respeito|partir|seguir|caráter|tempo|dia)$/.test(n))) gn = null;
+        if (gn && w === "a" && gn.g === "m" && (!(t.clause || (U.HETERO && U.HETERO[n])) || /^(pé|cavalo|lápis|gás|vapor|prazo|respeito|partir|seguir|caráter|tempo|dia|fim|serviço|caminho|favor|bordo|nível|ponto|título|cargo|longo|rigor)$/.test(n))) gn = null;
         var A = U.ARTICLES && U.ARTICLES[artW];
         if (gn && A && gn.g !== A[0] && !isAdj(n) && !V(n).length) {
           var want = { m: { o: "o", a: "o", os: "os", as: "os", um: "um", uma: "um", uns: "uns", umas: "uns" }, f: { o: "a", a: "a", os: "as", as: "as", um: "uma", uma: "uma", uns: "umas", umas: "umas" } }[gn.g][artW];
@@ -895,7 +915,8 @@
         var base = w.replace(/(o|a|os|as)$/, "");
         var gnM = /^(todos|todas|tudo|os|as|o|a|mais|menos|bem|mal|pouco|tempo)$/.test(n) || PP(n) || /(ad|id)[oa]s?$/.test(n) ? null : nounGN(n) || (!isAdj(n) && !V(n).length ? guessGN(n) : null);
         if (isAdj(n) && !isNoun(n) && w !== base + "o" && !nounGN(n) && !(/^(muitos|muitas|poucos|poucas)$/.test(w) && (/s$/.test(n))) ) push(i, 1, "muito", "Delante de un adjetivo es invariable: " + it(base + "o " + n) + ".");
-        else if (gnM && gnM.n && base + { ms: "o", fs: "a", mp: "os", fp: "as" }[gnM.g + gnM.n] !== w && !isAdj(n))
+        else if (gnM && gnM.n && base + { ms: "o", fs: "a", mp: "os", fp: "as" }[gnM.g + gnM.n] !== w && !isAdj(n) && !COMMON_G.test(n) &&
+                 !(w === "muito" && (/^(continua|continuam|fica|ficam|está|estão|é|são|parece|parecem|estava|estavam|era|eram|ser|estar|ficar)$/.test(p))))
           push(i, 1, "muito", "Delante de un sustantivo concuerda: " + it(base + { ms: "o", fs: "a", mp: "os", fp: "as" }[gnM.g + gnM.n] + " " + n) + ".");
       }
       if (/^(mais|más)$/.test(w) && /^(grande|grandes|bom|boa|bons|boas|mau|má|ruim)$/.test(n) && ni === i + 1) {
@@ -948,15 +969,16 @@
           var subj9 = subjectAndVerb(st), vk = subj9.k, subjP = subj9.p;
           var vw = W(vk), rd = V(vw);
           var sw2 = sentence(i).join(" ");
-          var futureMain = /(^| )(vou|vai|vamos|vão)( |$)/.test(sw2) || /\b(amanhã|que vem|próximo|próxima)\b/.test(sw2) ||
+          var futureMain = /(^| )(vou|vamos)( |$)/.test(sw2) || /(^| )(vai|vão) [a-zà-ú]+(ar|er|ir|or)( |$)/.test(sw2) || /\b(amanhã|que vem|próximo|próxima)\b/.test(sw2) ||
             sentence(i).some(function (x) { return V(x).some(function (v) { return v.tense === "futuro"; }); });
-          if (vk >= 0 && vw && !tk[vk].cap) {
+          if (vk >= 0 && vw && !tk[vk].cap && !/^(nada|tudo|como|algo|nenhum|ninguém)$/.test(vw)) {
             var pers = subjP != null ? subjP : 2;
             var fs = conjForm(firstLemma(vw), "subjFuturo", pers);
             if (isInf(vw) && fs && fs !== vw && !rd.some(function (v) { return v.tense === "subjFuturo"; }) && week >= 27) push(vk, 1, "futuro_subj", "Con *" + (w === "se" ? "se" : w) + "* y el futuro va el futuro do subjuntivo: " + it(fs) + " (no el infinitivo).");
             else if (rd.length && rd.every(function (v) { return v.tense === "subjPresente"; }) && w !== "caso" && w !== "se" && fs && week >= 27) push(vk, 1, "futuro_subj", "Para el futuro, el portugués usa el futuro do subjuntivo: " + it(fs) + " (el «cuando llegue» del español).");
             else if (w !== "caso" && futureMain && rd.some(function (v) { return v.tense === "presente" && v.p === pers; }) && !rd.some(function (v) { return v.tense === "subjFuturo"; }) && fs && fs !== vw && week >= 27)
-              push(vk, 1, "futuro_subj", "Hablando del futuro, después de " + it(w === "assim" || w === "logo" ? w + " que" : w) + " va el futuro do subjuntivo: " + it(fs) + ".");
+              push(vk, 1, "futuro_subj", "Hablando del futuro, después de " + it(w === "assim" || w === "logo" ? w + " que" : w) + " va el futuro do subjuntivo: " + it(fs) + ".",
+                w === "se" && !/^(eu|você|vocês|nós|a gente|tu)$/.test(W(vk - 1)));   // «se o ator fala…» can state a fact: a hint; «se eu consigo…» is a plan
             else if (w === "se" && rd.some(function (v) { return v.tense === "condicional"; }) && week >= 18 && (t.clause || /^(e|mas|ou|que|porque|mesmo|só|nem|como|pois)$/.test(p))) {
               var si = conjForm(firstLemma(vw), "subjImperfeito", rd.filter(function (v) { return v.tense === "condicional"; })[0].p);
               push(vk, 1, "subjuntivo", "Después de *se* no va condicional: " + it(si || "se eu tivesse…") + " (el condicional va en la otra parte).");
@@ -966,7 +988,7 @@
       }
 
       /* 10. subjuntivo después de espero que, é importante que, embora… */
-      var trig10 = w === "que" && (SUBJ_TRIG.test(p) || (/^(para|antes|sem|até|mesmo|ainda|desde|contanto|fim)$/.test(p) && !(p === "ainda" && pi >= 1 && (finite(p2) || isVerb(p2)))) || (p === "mais" && p2 === "por")) && n !== "ponto";
+      var trig10 = w === "que" && tk[i - 1] && tk[i - 1].w && (SUBJ_TRIG.test(p) || (/^(para|antes|sem|até|mesmo|ainda|desde|contanto|fim)$/.test(p) && !(p === "ainda" && pi >= 1 && (finite(p2) || isVerb(p2)))) || (p === "mais" && p2 === "por")) && n !== "ponto";
       if (w === "que" && p === "e" && !trig10) {
         // «É importante que você descanse e que beba…»: the same trigger
         for (var q10 = i - 2; q10 >= 0 && !(tk[q10].p && /[.!?]/.test(tk[q10].p)); q10--) if (tk[q10].w === "que" && SUBJ_TRIG.test(W(wi(q10, -1)))) { trig10 = true; break; }
@@ -1130,7 +1152,7 @@
         while (rq >= 0 && (SUBJ_PRON[W(rq)] != null || /^(mais|muito|sempre|não|também|te|me|lhe|a|gente)$/.test(W(rq)))) rq = wi(rq, 1);
         var rl = lemmas(W(rq));
         var rp = rl.map(function (l) { return { gostar: "de", precisar: "de", lembrar: "de", depender: "de", falar: "de", pensar: "em", acreditar: "em", confiar: "em", sonhar: "com", casar: "com" }[l]; }).filter(Boolean)[0];
-        if (rq >= 0 && rp && !(rl[0] === "falar" && W(wi(rq, 1)) === "com") && !/^(que|se)$/.test(W(wi(rq, 1)))) push(i, 1, "regencia", "El verbo del relativo pide su preposición delante: " + it((rp === "de" ? "de" : rp === "em" ? "em" : "com") + " que") + " (o bairro de que gosto, a pessoa em quem penso).");
+        if (rq >= 0 && rp && !(rl[0] === "falar" && W(wi(rq, 1)) === "com") && !/^(que|se)$/.test(W(wi(rq, 1)))) push(i, 1, "regencia", "El verbo del relativo pide su preposición delante: " + it((rp === "de" ? "de" : rp === "em" ? "em" : "com") + " que") + " (o bairro de que gosto, a pessoa em quem penso).", true);
       }
       if (w === "de" && n === "que" && lemmas(p).some(function (l) { return /^(achar|pensar|acreditar|dizer|defender|afirmar|sustentar|crer|considerar|ressaltar|garantir|explicar)$/.test(l); }) && !(isNoun(n2) || (guessGN(n2) && !V(n2).length))) push(i, 1, "regencia", "Sin *de*: " + it(p + " que") + ".");
 
@@ -1212,6 +1234,7 @@
       if (w === "que" && n === "se" && lemmas(p).some(function (l) { return /^(perguntar)$/.test(l); })) push(i, 1, "sobrante", "Pregunta indirecta: " + it(p + " se") + ", sin *que*.");
 
     });
+    out = citedOut(String(text || "").normalize("NFC").replace(/[’‘`´]/g, "'"), tk, out, /^(palavra|palavras|termo|termos|verbo|verbos|expressão|expressões|adjetivo|substantivo|forma|vocábulo)$/);
     return out.sort(function (a, b) { return a.i - b.i; });
   }
 

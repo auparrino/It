@@ -87,7 +87,7 @@
         "Pela janela do meu quarto vejo o Cristo Redentor, no alto do Corcovado. " +
         "Aos domingos, a rua é das crianças e dos cachorros. De noite, há música nos bares da rua " +
         "e o seu Manuel conversa com todo mundo pela janela da padaria.",
-      gloss: { perto: "cerca", padaria: "panadería", dono: "dueño", seu: "don (seu Manuel = don Manuel)",
+      gloss: { aos: "a los (aos domingos = los domingos)", perto: "cerca", padaria: "panadería", dono: "dueño", seu: "don (seu Manuel = don Manuel)",
                queijo: "queso", ótimo: "buenísimo", lado: "lado (ao lado = al lado)", boteco: "bar de barrio",
                vizinhos: "vecinos", jornal: "diario", vejo: "veo", crianças: "chicos, niños",
                cachorros: "perros", conversa: "charla", mundo: "mundo (todo mundo = todo el mundo)",
@@ -175,7 +175,7 @@
         "O sábado, vinte de janeiro, é feriado: é o dia de São Sebastião, o padroeiro do Rio. " +
         "Na sexta à noite, as duas vão a um show na Lapa: o ingresso custa cento e vinte reais.\n\n" +
         "Que horas são? Dez para as dez. A Sofía está atrasada!",
-      gloss: { reunião: "reunión", liga: "llama (por teléfono)",
+      gloss: { faz: "(faz trinta e um anos) cumple treinta y un años", reunião: "reunión", liga: "llama (por teléfono)",
                meia: "seis (al decir un número)", bolo: "torta", feriado: "feriado", padroeiro: "santo patrono",
                ingresso: "entrada", atrasada: "atrasada, llegando tarde", "segunda-feira": "lunes",
                terça: "martes (terça-feira)", quarta: "miércoles (quarta-feira)", sexta: "viernes (sexta-feira)" },
@@ -335,7 +335,7 @@
         "carne de porco.\" A Sofía pensa na mãe dela e no churrasco de domingo em Buenos Aires. " +
         "\"Eu sonho com um bom assado\", diz ela. \"Acredito em você\", responde o seu Manuel, " +
         "\"mas aqui você precisa de feijoada!\"",
-      gloss: { couve: "col", farofa: "harina de mandioca tostada", torresmo: "chicharrón",
+      gloss: { portuguesa: "(à portuguesa) a la portuguesa", couve: "col", farofa: "harina de mandioca tostada", torresmo: "chicharrón",
                lembra: "se acuerda", cozido: "puchero", leva: "lleva", porco: "cerdo",
                churrasco: "asado", sonho: "sueño", acredito: "creo", precisa: "necesita", adora: "adora" },
       questions: [
@@ -534,7 +534,7 @@
         "que peça uma cerveja bem gelada.\"\n\n" +
         "A Bia ri: \"Tomara que não chova!\" E o João acrescenta: \"Talvez eu vá também. " +
         "Mas duvido que o samba termine antes das duas!\"",
-      gloss: { escravizados: "esclavizados", nasceu: "nació", conselhos: "consejos", enche: "se llena",
+      gloss: { chamam: "(chamar algo de…) llaman… a algo", escravizados: "esclavizados", nasceu: "nació", conselhos: "consejos", enche: "se llena",
                dinheiro: "plata, dinero", sugiro: "sugiero", gelada: "helada", tomara: "ojalá",
                acrescenta: "agrega", duvido: "dudo", porto: "puerto", talvez: "tal vez" },
       questions: [
@@ -600,7 +600,7 @@
         "\"Eu gostaria de ficar mais um ano\", diz. \"Talvez eu consiga um trabalho aqui.\" " +
         "A Bia espera que ela fique. Hoje à noite, as duas irão " +
         "ao Arpoador. Quem sabe o pôr do sol ajude a decidir.",
-      gloss: { desembarcou: "desembarcó", quase: "casi", ainda: "todavía", vergonha: "vergüenza", piadas: "chistes", falta: "falta (sentir falta = extrañar)",
+      gloss: { até: "hasta, incluso", quem: "(quem sabe) quizás, a lo mejor", desembarcou: "desembarcó", quase: "casi", ainda: "todavía", vergonha: "vergüenza", piadas: "chistes", falta: "falta (sentir falta = extrañar)",
                inverno: "invierno", portenho: "porteño", consiga: "consiga", mudado: "cambiado", ajude: "ayude" },
       questions: [
         ["¿Qué le pasaba cuando llegó?", ["no entendía casi nada y le daba vergüenza hablar", "hablaba perfecto", "no quería salir de casa porque extrañaba Buenos Aires", "estaba enferma"], "no entendía casi nada y le daba vergüenza hablar"],
@@ -695,7 +695,7 @@
         "A Sofía pensa na própria vida: \"Se eu não tivesse aceitado aquele trabalho remoto, nunca teria " +
         "vindo ao Rio.\" \"Espero que você não tenha se arrependido\", diz a Bia. \"Quando você tiver " +
         "terminado o curso, vai discutir tudo isso comigo em português.\"",
-      gloss: { cena: "escena", margens: "orillas", riacho: "arroyo", gritado: "gritado", quadro: "cuadro", heroica: "heroica",
+      gloss: { cena: "escena", margens: "orillas", riacho: "arroyo", gritado: "gritado", teria: "habría; «Dom Pedro teria gritado» = dicen que gritó: el condicional marca lo no comprobado (semana 48)", quadro: "cuadro", heroica: "heroica",
                acontecido: "pasado, sucedido", vindo: "venido", dividido: "dividido", filho: "hijo",
                demorado: "tardado", aceitado: "aceptado", arrependido: "arrepentido", comigo: "conmigo" },
       questions: [
@@ -1212,7 +1212,7 @@
         "otimismo filosófico em Cândido.\n\n" +
         "O seu Manuel resume: \"Lisboa deu a volta por cima. Como diz o ditado, depois da tempestade vem " +
         "a bonança.\"",
-      gloss: { rédeas: "riendas", providências: "medidas", "atribui-se": "se atribuye", enterrar: "enterrar",
+      gloss: { rédeas: "riendas", providências: "medidas", volta: "(deu a volta por cima) se recuperó, salió adelante", "atribui-se": "se atribuye", enterrar: "enterrar",
                autoria: "autoría", duvidosa: "dudosa", nobre: "noble", sério: "serio (levar a sério = tomar en serio)",
                retas: "rectas", madeira: "madera", gaiola: "jaula", pombalina: "de Pombal", tremores: "temblores", zombou: "se burló",
                otimismo: "optimismo", ditado: "refrán", bonança: "calma" },

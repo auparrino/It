@@ -8,7 +8,19 @@
     "grammar": "concordanza dei tempi",
     "text": "Mio nonno Salvatore partì da Pietrafonda nel 1951, con una valigia di cartone e l'indirizzo di un cugino a Buenos Aires. Quando ero bambino, mi raccontava che la sua casa era l'ultima di via Roma, quella con la porta verde, e che dalla finestra della cucina si vedeva il mare. Io non sapevo se fosse vero: in paese, diceva mia madre, il mare non si vede da nessuna parte.\n\nIl nonno morì senza tornare. Qualche anno dopo, quando ottenni la cittadinanza italiana, decisi che sarei andato a vedere quella porta verde. Ai miei amici di Rosario dissi che volevo conoscere le mie radici; in realtà, ora lo so, volevo soprattutto capire perché lui non fosse mai tornato.\n\nArrivai a Pietrafonda un pomeriggio di ottobre, con un autobus che si fermò due volte per far passare le capre. Il paese era più piccolo di come l'avevo immaginato, e più silenzioso. Via Roma c'era, ma di porte verdi nessuna traccia. Chiesi a un uomo seduto davanti al bar se conoscesse la famiglia Mancuso. Mi guardò a lungo, poi mi domandò da dove venissi. Quando dissi «dall'Argentina», sorrise come se avesse già capito tutto.\n\nMi accompagnò da una signora anziana, Nunziata, che abitava in fondo alla strada. Lei mi fece entrare, mi offrì un caffè che non potevo rifiutare e mi raccontò che sua madre e mio nonno erano stati compagni di scuola. Mi disse che la casa dei Mancuso era crollata dopo un terremoto e che il Comune, anni dopo, l'aveva fatta demolire. Io le chiesi se si ricordasse del mare. Rise. «Il mare no», disse, «ma nelle giornate limpide dalla cucina si vedevano le luci della pianura, laggiù in fondo. Tuo nonno diceva sempre che un giorno ci sarebbe andato.»\n\nRimasi in silenzio. Pensai a quante sere lui avesse passato a guardare quelle luci, e a come, dall'altra parte dell'oceano, le avesse trasformate in mare. Forse, pensai, non era tornato perché sapeva che il paese non sarebbe stato come lo ricordava; o forse perché temeva che nessuno lo riconoscesse più.\n\nPrima che me ne andassi, Nunziata aprì un cassetto e tirò fuori una fotografia: una classe di bambini magri, in grembiule nero. «Questo è lui», disse, indicando un ragazzino con le orecchie grandi. Me la regalò. Le promisi che sarei tornato l'estate successiva, e lei mi rispose che mi avrebbe aspettato con i fichi.\n\nSull'autobus del ritorno guardai a lungo la foto. Mi resi conto che, per tutta la vita, avevo pensato che il nonno fosse un emigrante argentino. Solo quel giorno capii che era stato, fino alla fine, un ragazzino di Pietrafonda che guardava le luci e sognava il mare.",
     "gloss": {
-      "partì": "se fue",
+      "tirò": "(tirò fuori) sacó: *tirare fuori* = sacar",
+      "andassi": "(prima che me ne andassi) antes de que me fuera: *andarsene* = irse",
+      "demolire": "(l'aveva fatta demolire) la había hecho demoler (semana 40)",
+      "far": "(per far passare le capre) para dejar pasar a las cabras: *fare* + infinitivo (semana 40)",
+      "rispose": "respondió (passato remoto de *rispondere*)",
+      "promisi": "prometí (passato remoto de *promettere*)",
+      "rimasi": "me quedé (passato remoto de *rimanere*)",
+      "fece": "hizo (passato remoto de *fare*; *mi fece entrare*: me hizo pasar)",
+      "chiesi": "pregunté, pedí (passato remoto de *chiedere*)",
+      "disse": "dijo (passato remoto de *dire*)",
+      "dissi": "dije (passato remoto de *dire*)",
+      "decisi": "decidí (passato remoto de *decidere*)",
+      "partì": "se fue: *passato remoto*, el pretérito de los relatos escritos; terminaciones *-ai/-ò*, *-ei/-é*, *-ii/-ì* (lo ves en la semana 37)",
       "valigia": "valija",
       "cartone": "cartón",
       "morì": "murió",
@@ -68,6 +80,8 @@
       ["A", "Mi sembra una bella conclusione. Grazie ancora, professore, e grazie a tutti voi."]
     ],
     "gloss": {
+      "chiede": "(ci si chiede chi si è) uno se pregunta quién es: *si* impersonal; con un verbo reflexivo, *ci si* (semana 36)",
+      "cui": "(in cui, con cui…) en el que, con el que: *cui* es el relativo después de preposición (semana 34)",
       "intervento": "exposición, ponencia",
       "trattino": "guioncito",
       "cuore": "(stare a cuore) importar mucho",
@@ -108,6 +122,6 @@
       ["comentar el estilo", ["stile", "scrittura", "linguaggio"]],
       ["recomendar el cuento y a quién", ["consigli", "lettori", "raccomand"]]
     ],
-    "model": "«La casa di via Roma»: un viaggio all'indietro\n\nIl racconto narra la storia di un giovane argentino che, dopo aver ottenuto la cittadinanza italiana, decide di visitare Pietrafonda, il paesino italiano da cui suo nonno era partito nel 1951. Il ragazzo cerca una casa con la porta verde e un mare che, a quanto pare, dal paese non si vede. Non svelo che cosa trova: dico solo che la risposta è più sorprendente, e più tenera, di quanto ci si aspetti.\n\nI personaggi sono pochi ma ben costruiti. Nunziata, l'anziana che accoglie il protagonista, è indimenticabile: ironica, generosa, custode della memoria del paese. Il nonno, pur essendo assente, è la presenza più forte del testo.\n\nLo stile è semplice e preciso, senza sentimentalismi. L'autore usa pochi dettagli, come una valigia di cartone o un piatto di fichi promesso, per evocare un mondo intero.\n\nConsiglio questo racconto a chiunque abbia radici lontane, e in particolare ai discendenti degli emigranti in America Latina: molti ci ritroveranno la storia della propria famiglia. Per me è stata una lettura davvero commovente."
+    "model": "«La casa di via Roma»: un viaggio all'indietro\n\nIl racconto narra la storia di un giovane argentino che, dopo aver ottenuto la cittadinanza italiana, decide di visitare Pietrafonda, il paesino italiano che suo nonno aveva lasciato nel 1951. Il ragazzo cerca una casa con la porta verde e un mare che, a quanto pare, dal paese non si vede. Non svelo che cosa trova: dico solo che la risposta è più sorprendente, e più tenera, di quanto il lettore si aspetti.\n\nI personaggi sono pochi ma ben costruiti. Nunziata, l'anziana che accoglie il protagonista, è indimenticabile: ironica, generosa, custode della memoria del paese. Il nonno, anche se è assente, è la presenza più forte del testo.\n\nLo stile è semplice e preciso, senza sentimentalismi. L'autore usa pochi dettagli, come una valigia di cartone o un piatto di fichi promesso, per evocare un mondo intero.\n\nConsiglio questo racconto a chiunque abbia radici lontane, e in particolare ai discendenti degli emigranti in America Latina: molti ci ritroveranno la storia della propria famiglia. Per me è stata una lettura davvero commovente."
   }
 }

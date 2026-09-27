@@ -107,7 +107,7 @@ function validate(f, d) {
   var ctx = pack(code), T = ctx.Tramo, L = ctx.Letture, S = ctx.Scrivi;
   ctx.Banca.load(pack.data(code, "bank.json"));
   S.learnCourse({ items: pack.data(code, "course.json").items, bank: ctx.Banca.bank(), phrases: ctx.Frasi.ALL,
-                  readings: L.EPISODI, glossario: pack.data(code, "glossario.json") });
+                  readings: L.EPISODI, glossario: pack.data(code, "glossario.json"), extra: T.lexTexts() });
   T.attach({ esc: function (s) { return String(s); }, langName: function () { return code; }, state: function () { return {}; } });
   ok(L.SERIES.some(function (s) { return s.id === "lunga"; }), "la serie «lunga» no está en Letture.SERIES");
   var course = pack.data(code, "course.json");
@@ -132,6 +132,19 @@ function validate(f, d) {
     ok(!T.evaluate(s.compito, s.compito.model.split(/\s+/).slice(0, Math.floor(s.compito.min * 0.7)).join(" "), w, s, { noCheck: true }).ok,
        "semana " + w + ": un texto corto pasa la revisión");
   });
+  // The checker on native C1 prose (every reading, listening and model of the
+  // tramo): each mark there is a false alarm.  From 41 (it) and 83 (pt) down
+  // to about 12 and 20 in v2.7; this keeps them from coming back.
+  var FALSE_MAX = { it: 15, pt: 24 }, fa = 0, faList = [];
+  T.weeks().forEach(function (w) {
+    var s = T.week(w), lines = s.lettura.text.split(/\n+/).concat(s.compito.model.split(/\n+/)).map(function (t) { return [w, t]; })
+      .concat(s.ascolto.turns.map(function (t) { return [52, t[1]]; }));   // spoken: no formal-register week
+    lines.forEach(function (x) {
+      S.lint(x[1], x[0]).filter(function (f) { return !f.soft; }).forEach(function (f) { fa++; faList.push(w + ": " + f.msg); });
+    });
+  });
+  ok(fa <= FALSE_MAX[code], "falsas alarmas del corrector en el tramo: " + fa + " (tope " + FALSE_MAX[code] + "): " + faList.slice(0, 5).join(" | "));
+
   // what the AI answers is taken only in the expected shape
   ok(T.readAI({ punteggi: { a: 4, b: "5", c: 9 }, errori: [["x", "y"], "z"], commento: 3 }).tot === 14, "readAI suma y recorta");
   ok(T.readAI({ punteggi: "bien" }) === null, "readAI descarta lo que no tiene forma");

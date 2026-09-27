@@ -8,6 +8,12 @@
     "grammar": "colocação pronominal na escrita",
     "text": "Numa tarde de março de 1911, entrou no cartório de Vila Rica do Norte um velho de chapéu gasto, que trazia debaixo do braço uma caixa de madeira. O tabelião, Dr. Anselmo Valadares, recebeu-o com a cortesia um tanto cansada de quem já ouvira todas as histórias da cidade e não esperava ouvir nenhuma nova.\n\n— Venho fazer o meu testamento — disse o velho, sentando-se antes que lhe oferecessem a cadeira.\n\n— Pois não. Diga-me o seu nome e os bens que possui.\n\nO velho chamava-se Joaquim Pereira e fora, durante quarenta anos, o único relojoeiro da vila. Não tinha mulher nem filhos, e os seus bens resumiam-se a uma casa de dois cômodos e àquela caixa, que abriu com vagar sobre a mesa. Dentro havia um relógio de parede desmontado, peça por peça, cada uma embrulhada em papel de seda.\n\n— Deixo a casa à Santa Casa de Misericórdia — explicou. — O relógio, deixá-lo-ei a quem conseguir montá-lo.\n\nO tabelião ergueu os olhos. Em vinte anos de ofício, nunca se deparara com cláusula semelhante. Tentou dissuadi-lo: os juízes costumavam desconfiar de herdeiros incertos, e um testamento assim abrir-se-ia a toda sorte de disputas. O velho, porém, não se deixou convencer.\n\n— O senhor escreva. Os juízes que se entendam depois.\n\nAnselmo escreveu. Enquanto a pena corria sobre o papel, perguntou-lhe, por pura curiosidade, por que razão desmontara o relógio. Joaquim demorou a responder.\n\n— Porque me ensinaram que um relógio só é nosso quando sabemos refazê-lo. Quem o montar há de entender o que eu entendi.\n\nMeses depois, o relojoeiro morreu, e a notícia do estranho legado espalhou-se pela vila. Apareceram candidatos de toda parte: ferreiros, estudantes, um padre com fama de engenhoso, até um engenheiro vindo da capital. Todos se debruçaram sobre as peças, e todos desistiram. Faltava sempre alguma coisa, ou sobrava.\n\nO engenheiro, dizem, passou três semanas trancado numa sala da prefeitura, cercado de desenhos e cálculos, e saiu de lá convencido de que o velho lhe pregara uma peça. Escreveu ao tabelião uma carta indignada, exigindo que se anulasse o testamento. Anselmo respondeu-lhe em duas linhas: a cláusula era clara, e o prazo ainda não se esgotara.\n\nFoi uma menina de onze anos, filha da lavadeira que servia ao cartório, quem pediu para tentar. Os adultos riram-se dela, mas o tabelião, por um impulso que nunca soube explicar, entregou-lhe a caixa. A menina levou-a para casa e só a devolveu na primavera seguinte, com o relógio funcionando.\n\n— Como conseguiu? — perguntou-lhe Anselmo, incrédulo.\n\n— Seu Joaquim me ensinou, quando eu era pequena. Eu ficava na janela da oficina, e ele me explicava cada peça. Ele me disse que um dia eu ia entender para quê.\n\nO tabelião registrou a entrega com a solenidade de um ato público. Contam na vila que, ao fechar o livro, murmurou para si mesmo: “Far-se-á justiça, afinal, ainda que por caminhos tortos.” E contam também que, até o fim da vida, nunca mais se atrasou para compromisso algum.",
     "gloss": {
+      "pois": "(pois não) cómo no, ¿en qué lo ayudo?",
+      "há": "(há de entender) va a entender: haver de + infinitivo, futuro enfático",
+      "esgotara": "(não se esgotara) no se había vencido",
+      "pregara": "(lhe pregara uma peça) le había jugado una mala pasada",
+      "desmontara": "había desarmado",
+      "fora": "había sido (pluscuamperfecto simple, semana 41; no es «fuera»)",
       "cartório": "escribanía",
       "gasto": "gastado",
       "tabelião": "escribano",
@@ -70,6 +76,7 @@
       ["B", "É entender o gênero. Não existe uma colocação certa em absoluto, existe a colocação adequada àquele texto. Leiam muito, e reparem onde cada autor põe o pronome."]
     ],
     "gloss": {
+      "já": "ya; al comienzo de la frase marca contraste: «en cambio»",
       "rende": "da para mucho (hablar)",
       "empresta": "prestá",
       "brincadeira": "broma",

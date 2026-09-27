@@ -64,7 +64,15 @@
   /* Y la semana del curso decide la gramática: cada oración y cada error
      traen en «w» (traducir, encontrar el error) y «wg» (completar) la
      primera semana en la que todo lo que usan ya se explicó. */
-  function weekOf(state) { return (state && state.unlocked) || 1; }
+  // The grammar already taught: the open week once its lesson is read, the
+  // one before while it is being read (a week's sentences use all of it:
+  // the possessives of week 3 are in its fourth part).  The weeks before
+  // are done (or the placement test vouched for them).
+  function weekOf(state) {
+    var w = (state && state.unlocked) || 1;
+    if (w > 1 && state && state.read && typeof state.read === "object" && !state.read[w]) w--;
+    return w;
+  }
   function taught(x, state, key) { return (x[key || "w"] || 1) <= weekOf(state); }
   function within(lvl, max) { return LEVELS.indexOf(lvl) <= LEVELS.indexOf(max); }
   function nearLevel(lvl, max) {

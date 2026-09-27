@@ -26,7 +26,9 @@ sí entran.
 > palabras), con preguntas en la lengua meta y una revisión que no se engaña
 > con relleno ni con texto copiado. En portugués, la tarea sigue el formato
 > del Celpe-Bras. Ver `README-italiano.md` («Tramo C1») y `js/tramo.js`. El
-> vocabulario B2-C1 (D4) sigue abierto.
+> vocabulario B2-C1 (D4) quedó resuelto en v2.7: 20 palabras por semana de la 27 a
+> la 51 en los dos idiomas. En esa misma versión, las falsas alarmas del corrector
+> sobre texto C1 bajaron de 41 a 12 (it) y de 83 a 20 (pt).
 
 ---
 

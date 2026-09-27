@@ -29,17 +29,17 @@ LESSONS = {
   "r": "*c* y *g*: duras ante *a, o, u*; blandas ante *e, i*. La *h* las "
        "endurece; una *i* muda las ablanda.",
   "table": {"head": ["Se escribe", "Suena", "Ejemplo"],
-            "rows": [["ca, co, cu", "ka, ko, ku", "casa, cosa, cubo"],
-                     ["ce, ci", "che, chi (como en «chico»)", "cena, cinema"],
-                     ["che, chi", "ke, ki", "perché, chiave"],
-                     ["cia, cio, ciu", "cha, cho, chu", "ciao, cioccolata"],
-                     ["ga, go, gu", "ga, go, gu", "gatto, gonna"],
-                     ["ge, gi", "dy, como la j de «jeans»", "gelato, giro"],
-                     ["ghe, ghi", "gue, gui", "spaghetti, ghiaccio"],
-                     ["gn", "ñ", "signore, bagno"],
-                     ["gli", "casi «li» muy rápida", "figlio, aglio"],
-                     ["sce, sci", "sh inglesa", "pesce, sciare"],
-                     ["z", "ts o dz", "grazie, zero"]]},
+            "rows": [["ca, co, cu", "ka, ko, ku", "casa, cosa (cosa), cubo"],
+                     ["ce, ci", "che, chi (como en «chico»)", "cena, cinema (cine)"],
+                     ["che, chi", "ke, ki", "perché (porque), chiave (llave)"],
+                     ["cia, cio, ciu", "cha, cho, chu", "ciao (chau), cioccolata"],
+                     ["ga, go, gu", "ga, go, gu", "gatto (gato), gonna (pollera)"],
+                     ["ge, gi", "dy, como la j de «jeans»", "gelato (helado), giro (vuelta)"],
+                     ["ghe, ghi", "gue, gui", "spaghetti, ghiaccio (hielo)"],
+                     ["gn", "ñ", "signore (señor), bagno (baño)"],
+                     ["gli", "«ll» tradicional (no la porteña): casi «li» rápida", "figlio (hijo), aglio (ajo)"],
+                     ["sce, sci", "sh inglesa", "pesce (pescado), sciare (esquiar)"],
+                     ["z", "ts o dz", "grazie (gracias), zero (cero)"]]},
   "ex": [["*ce*na / *che*", "cena / que: «chena», «ke»"],
          ["*ge*lato / spa*ghe*tti", "helado / spaghetti: «dyelato», «spaguetti»"],
          ["*cia*o, *gio*rno", "chau, día: la i no suena"],
@@ -80,7 +80,7 @@ LESSONS = {
   "r": "*qu* suena «cu». La *s* entre vocales suele ser sonora. La *r* "
        "simple es un toque; la *rr*, vibrante.",
   "ex": [["*qu*esto", "«cuésto», nunca «késto»"],
-         ["ro*s*a", "s sonora, como una z inglesa"],
+         ["ro*s*a", "rosa: s sonora, como una z inglesa"],
          ["ca*r*o / ca*rr*o", "querido (r simple) / carro (rr vibrante)"]]},
 
  {"h": "Siete vocales, no cinco",
@@ -102,25 +102,32 @@ LESSONS = {
   "r": "*essere* = ser (y muchas veces «estar»); *avere* = tener. Son "
        "irregulares: de memoria. El pronombre se suele omitir.",
   "table": {"head": ["", "essere", "avere"],
-            "rows": [["io", "sono", "ho"],
-                     ["tu", "sei", "hai"],
-                     ["lui / lei", "è", "ha"],
-                     ["noi", "siamo", "abbiamo"],
-                     ["voi", "siete", "avete"],
-                     ["loro", "sono", "hanno"]]},
+            "rows": [["io (yo)", "sono", "ho"],
+                     ["tu (vos)", "sei", "hai"],
+                     ["lui / lei (él / ella)", "è", "ha"],
+                     ["noi (nosotros)", "siamo", "abbiamo"],
+                     ["voi (ustedes)", "siete", "avete"],
+                     ["loro (ellos / ellas)", "sono", "hanno"]]},
   "ex": [["*Sono* di Buenos Aires.", "Soy de Buenos Aires."],
          ["Il caffè *è* caldo.", "El café está caliente."],
          ["*Ho* vent'anni.", "Tengo veinte años."],
-         ["*C'è* un bar qui vicino?", "¿Hay un bar cerca de acá?"]],
+         ["*Non ho* fame.", "No tengo hambre."],
+         ["*C'è* un bar qui vicino? *Ci sono* bar qui vicino?", "¿Hay un bar cerca? ¿Hay bares cerca?"]],
   "warn": "*è* (es) lleva tilde; *e* (y), no. Y *ho, hai, ha, hanno* se leen "
-          "«o, ai, a, anno».",
+          "«o, ai, a, anno». Para negar, *non* delante del verbo: *non sono*, "
+          "*non ho*.",
   "tip": "Edad y sensaciones van con *avere*: *ho fame, ho sete, ho sonno, "
-         "ho fretta* (estoy apurado). «Hay» = *c'è* / *ci sono*.",
+         "ho fretta* (estoy apurado). «Hay» = *c'è* + singular, *ci sono* + "
+         "plural.",
   "more": ["Con *avere* también: *ho freddo / ho caldo* (frío / calor), *ho "
-           "paura* (miedo), *ho vergogna* (vergüenza), *ho ragione / ho "
-           "torto* (tengo razón / estoy equivocado). *sono* sirve para «yo "
-           "soy» y para «ellos son»: el contexto decide. El resto de los "
-           "verbos llega en las semanas 5 y 6."]},
+           "paura* (miedo), *ho vergogna* (vergüenza), *ho voglia di* (tengo "
+           "ganas de), *ho bisogno di* (necesito), *ho ragione / ho torto* "
+           "(tengo razón / estoy equivocado). Con *essere*: *sono d'accordo* "
+           "(estoy de acuerdo), *sono in ritardo* (llego tarde).",
+           "*sono* sirve para «yo soy» y para «ellos son»: el contexto decide. "
+           "*voi* es «ustedes» en confianza; el trato de usted llega en la "
+           "semana 5. Dos sujetos se suman: *tu e Paola* = *voi* (*siete*), "
+           "*io e Marco* = *noi* (*siamo*)."]},
 ]},
 
 2: {
@@ -155,13 +162,13 @@ LESSONS = {
   "r": "Para no ablandar *c* y *g*, muchos plurales agregan **h**: *amica → "
        "amiche*. Es ortografía: el sonido no cambia.",
   "table": {"head": ["Terminación", "Plural", "Ejemplos"],
-            "rows": [["-ca, -ga", "-che, -ghe (siempre)", "amica → amiche; riga → righe"],
-                     ["-co, -go (llanas)", "-chi, -ghi", "banco → banchi; lago → laghi"],
-                     ["-co, -go (esdrújulas)", "-ci, -gi (salvo dialoghi, carichi)", "medico → medici; biologo → biologi"],
-                     ["-cia, -gia (vocal antes)", "-cie, -gie", "camicia → camicie; valigia → valigie"],
-                     ["-cia, -gia (consonante antes)", "-ce, -ge", "arancia → arance; spiaggia → spiagge"],
-                     ["-io (i átona)", "-i", "figlio → figli"],
-                     ["-io (i tónica)", "-ii", "zio → zii"]]},
+            "rows": [["-ca, -ga", "-che, -ghe (siempre)", "amica → amiche (amigas); riga → righe (renglones)"],
+                     ["-co, -go (llanas)", "-chi, -ghi", "banco → banchi (bancos); lago → laghi (lagos)"],
+                     ["-co, -go (esdrújulas)", "-ci, -gi (salvo dialoghi, carichi)", "medico → medici (médicos); biologo → biologi (biólogos)"],
+                     ["-cia, -gia (vocal antes)", "-cie, -gie", "camicia → camicie (camisas); valigia → valigie (valijas)"],
+                     ["-cia, -gia (consonante antes)", "-ce, -ge", "arancia → arance (naranjas); spiaggia → spiagge (playas)"],
+                     ["-io (i átona)", "-i", "figlio → figli (hijos)"],
+                     ["-io (i tónica)", "-ii", "zio → zii (tíos)"]]},
   "ex": [["ami*ca* → ami*che*", "amiga → amigas"],
          ["la*go* → la*ghi*", "lago → lagos"],
          ["ban*co* → ban*chi*", "banco → bancos"],
@@ -185,11 +192,11 @@ LESSONS = {
        "**-a** y pasan a femenino: *il braccio → le braccia*.",
   "table": {"head": ["Singular", "Plural", "Nota"],
             "rows": [["l'uomo", "gli uomini", "el hombre"],
-                     ["l'uovo (m.)", "le uova (f.)", "cambia de género"],
-                     ["il braccio", "le braccia", "partes del cuerpo: plural en -a"],
-                     ["il dito", "le dita", "íd."],
-                     ["il ginocchio", "le ginocchia", "íd."],
-                     ["la mano", "le mani", "femenino aunque termine en -o"],
+                     ["l'uovo (m.)", "le uova (f.)", "el huevo: cambia de género"],
+                     ["il braccio", "le braccia", "el brazo: plural en -a"],
+                     ["il dito", "le dita", "el dedo: plural en -a"],
+                     ["il ginocchio", "le ginocchia", "la rodilla: plural en -a"],
+                     ["la mano", "le mani", "la mano: femenino aunque termine en -o"],
                      ["il paio", "le paia", "el par"],
                      ["il dio", "gli dei", "el dios"]]},
   "ex": [["l'uomo → gli *uomini*", "el hombre → los hombres"],
@@ -386,11 +393,19 @@ LESSONS = {
 
  # ---------------------------------------------------------------- parte 4
  {"h": "Posesivos: con artículo",
-  "r": "El posesivo lleva artículo: *il mio libro*, *la mia casa*. "
-       "Excepción: parientes en singular sin adjetivo: *mio padre*.",
-  "ex": [["*la mia* casa", "mi casa"],
-         ["*il tuo* libro", "tu libro"],
-         ["*i miei* amici", "mis amigos"],
+  "r": "Lleva artículo y concuerda con lo poseído, no con el dueño: *la sua "
+       "casa*, *i suoi amici*. *loro* no cambia. Sin artículo: parientes en "
+       "singular, *mio padre*.",
+  "table": {"head": ["", "m. sg.", "f. sg.", "m. pl.", "f. pl."],
+            "rows": [["mi", "il mio", "la mia", "i miei", "le mie"],
+                     ["tu (de vos)", "il tuo", "la tua", "i tuoi", "le tue"],
+                     ["su (de él, de ella, de usted)", "il suo", "la sua", "i suoi", "le sue"],
+                     ["nuestro", "il nostro", "la nostra", "i nostri", "le nostre"],
+                     ["su (de ustedes)", "il vostro", "la vostra", "i vostri", "le vostre"],
+                     ["su (de ellos, de ellas)", "il loro", "la loro", "i loro", "le loro"]]},
+  "ex": [["*la sua* macchina", "su auto (de él o de ella: manda *macchina*)"],
+         ["*i suoi* libri", "sus libros"],
+         ["*le nostre* amiche", "nuestras amigas"],
          ["*mio* padre", "mi padre"],
          ["*i miei* fratelli", "mis hermanos"]],
   "warn": "Con parientes el artículo vuelve en plural (*i miei fratelli*), "
@@ -400,7 +415,10 @@ LESSONS = {
          "moglie*, llega con su mujer.",
   "qq": [{"prompt": "Traducí: «mi libro»", "answer": "il mio libro", "options": ["il mio libro", "mio libro", "la mia libro"]},
          {"prompt": "Traducí: «mi madre»", "answer": "mia madre", "options": ["mia madre", "la mia madre", "mia la madre"]},
-         {"prompt": "Traducí: «mis hermanos»", "answer": "i miei fratelli", "options": ["i miei fratelli", "miei fratelli", "il mio fratelli"]}]},
+         {"prompt": "Traducí: «mis hermanos»", "answer": "i miei fratelli", "options": ["i miei fratelli", "miei fratelli", "il mio fratelli"]},
+         {"prompt": "Traducí: «sus libros» (de ella)", "answer": "i suoi libri", "options": ["i suoi libri", "le sue libri", "i sui libri"]},
+         {"prompt": "Traducí: «nuestra casa»", "answer": "la nostra casa", "options": ["la nostra casa", "il nostro casa", "nostra casa"]},
+         {"prompt": "Traducí: «tus amigas»", "answer": "le tue amiche", "options": ["le tue amiche", "le tuoi amiche", "i tuoi amiche"]}]},
 
  {"h": "Países sí, ciudades no",
   "r": "Países, regiones y continentes llevan artículo: *l'Italia*, *la "
@@ -434,19 +452,26 @@ LESSONS = {
   "r": "*di, a, da, in, su* + artículo **se funden**: *di + il = del*, *in "
        "+ la = nella*.",
   "table": {"head": ["", "il", "lo", "l'", "i", "gli", "la", "le"],
-            "rows": [["di", "del", "dello", "dell'", "dei", "degli", "della", "delle"],
-                     ["a", "al", "allo", "all'", "ai", "agli", "alla", "alle"],
-                     ["da", "dal", "dallo", "dall'", "dai", "dagli", "dalla", "dalle"],
-                     ["in", "nel", "nello", "nell'", "nei", "negli", "nella", "nelle"],
-                     ["su", "sul", "sullo", "sull'", "sui", "sugli", "sulla", "sulle"]]},
-  "ex": [["il libro *del* professore", "el libro del profesor"],
-         ["*nella* borsa", "en la cartera"],
-         ["*agli* amici", "a los amigos"],
-         ["*sul* tavolo", "sobre la mesa"]]},
+            "rows": [["di (de)", "del", "dello", "dell'", "dei", "degli", "della", "delle"],
+                     ["a (a)", "al", "allo", "all'", "ai", "agli", "alla", "alle"],
+                     ["da (desde, de, en lo de)", "dal", "dallo", "dall'", "dai", "dagli", "dalla", "dalle"],
+                     ["in (en)", "nel", "nello", "nell'", "nei", "negli", "nella", "nelle"],
+                     ["su (sobre, en)", "sul", "sullo", "sull'", "sui", "sugli", "sulla", "sulle"]]},
+  "ex": [["il libro *del* professore", "el libro del profesor (di: de)"],
+         ["una lettera *agli* amici", "una carta a los amigos (a: a)"],
+         ["il treno *dalla* stazione", "el tren desde la estación (da: desde)"],
+         ["*nella* borsa", "en la cartera (in: en)"],
+         ["*sul* tavolo", "sobre la mesa (su: sobre)"]]},
 
  {"h": "Armala sin mirar la tabla",
   "r": "Tres pasos: elegí el artículo (*lo studio*); *di* → *de*, *in* → "
        "*ne*; pegalos y doblá la *l*: *nello studio*.",
+  "table": {"head": ["", "Significa", "Ejemplo en singular", "Ejemplo en plural"],
+            "rows": [["di", "de", "la casa *della* nonna", "i giochi *dei* bambini"],
+                     ["a", "a", "un regalo *alla* mamma", "una lettera *agli* zii"],
+                     ["da", "desde, de; en lo de", "il treno *dal* mare; *dal* medico", "*dai* nonni (en lo de los abuelos)"],
+                     ["in", "en", "*nello* zaino", "*negli* Stati Uniti"],
+                     ["su", "sobre, en", "*sulla* sedia", "*sulle* scale"]]},
   "ex": [["*nello* studio", "en el estudio"],
          ["*della* macchina", "del auto"],
          ["*dei* miei figli", "de mis hijos"],
@@ -473,7 +498,10 @@ LESSONS = {
            "Lazio*. Con *di*, en cambio, el artículo vuelve siempre: *il "
            "capoluogo del Piemonte*, *la capitale della Francia*. Los "
            "apellidos de familias nobles van sin artículo: *Carlo Alberto di "
-           "Savoia*."],
+           "Savoia*.",
+           "*di* sola, delante de vocal, puede apostrofarse: *d'*. Es común en "
+           "frases hechas: *l'isola d'Elba*, *un po' d'acqua*, *d'inverno* (en "
+           "invierno), *un anello d'oro* (un anillo de oro)."],
   "qq": [{"prompt": "Completá", "stem": "Lavoro ___ Francia.", "answer": "in", "options": ["in", "nella", "alla"]},
          {"prompt": "Completá", "stem": "La capitale ___ Italia è Roma.", "answer": "dell'", "options": ["dell'", "di", "della"]},
          {"prompt": "Completá", "stem": "La capitale ___ Cuba è L'Avana.", "answer": "di", "options": ["di", "della", "del"]}]},
@@ -489,6 +517,9 @@ LESSONS = {
          ["Mi serve *dello* sciroppo.", "Necesito jarabe."]],
   "tip": "La forma sale del artículo de la palabra: *lo sciroppo* → *dello "
          "sciroppo*; *l'acqua* → *dell'acqua*.",
+  "more": ["Si el verbo ya trae *di* (*ho bisogno di*, necesito), no se suma el "
+           "partitivo: *ho bisogno di pane*, *ho bisogno di un'aspirina*. "
+           "Nunca «di del pane»."],
   "qq": [{"prompt": "Completá", "stem": "Avete ___ pasta fresca?", "answer": "della", "options": ["della", "del", "delle"]},
          {"prompt": "Completá", "stem": "Compro ___ olio.", "answer": "dell'", "options": ["dell'", "del", "dello"]}]},
 
@@ -516,6 +547,9 @@ LESSONS = {
          ["Non c'è *nessuno* studente.", "No hay ningún estudiante."]],
   "tip": "*nessun* copia al indeterminado: *nessun libro*, *nessuno "
          "studente*, *nessuna casa*, *nessun'amica*.",
+  "more": ["Con lo que no se cuenta, para insistir: *neanche un po' di* (ni "
+           "siquiera un poco de): *non abbiamo neanche un po' di burro*. "
+           "*neanche* vuelve con las demás negaciones en la semana 18."],
   "qq": [{"prompt": "Completá", "stem": "Non ho ___ fratelli.", "answer": "(nada)", "options": ["(nada)", "dei", "nessuni"]},
          {"prompt": "Completá", "stem": "Non c'è ___ lenzuolo.", "answer": "nessun", "options": ["nessun", "nessuno", "nessuna"]}]},
 ]},
@@ -535,6 +569,9 @@ LESSONS = {
          ["Le case sono nuov*e*.", "Las casas son nuevas."],
          ["Il treno è grand*e*. La casa è grand*e*.", "El tren es grande. La casa es grande."],
          ["Marco e Anna sono italian*i*.", "Marco y Ana son italianos."]],
+  "warn": "En *-co / -go* valen las reglas de *h* de la semana 2: femenino "
+          "plural siempre *-che, -ghe* (*simpatiche, lunghe*); masculino "
+          "*simpatici* (esdrújula) pero *lunghi, antichi* (llanas).",
   "tip": "Colores que vienen de sustantivos no cambian: *blu, rosa, viola, "
          "beige* (*le borse blu*). *arancione* admite plural *arancioni*."},
 
@@ -552,7 +589,7 @@ LESSONS = {
  {"h": "bello y quello copian al artículo",
   "r": "Delante del sustantivo, *bello* y *quello* cambian como el "
        "artículo: *il* → *bel*, *quel*; *lo* → *bello*, *quello*.",
-  "table": {"head": ["Artículo", "bello", "quello", "Ejemplo"],
+  "table": {"head": ["Artículo", "bello (lindo)", "quello (ese, aquel)", "Ejemplo"],
             "rows": [["il", "bel", "quel", "quel bel libro"],
                      ["lo", "bello", "quello", "quello studente"],
                      ["l'", "bell'", "quell'", "quell'albergo, un bell'albergo"],
@@ -568,6 +605,23 @@ LESSONS = {
   "tip": "*Che bel film!* (delante) frente a *Questo film è bello* (detrás, "
          "forma plena)."},
 
+ {"h": "questo: este, esta, estos, estas",
+  "r": "*questo* es «este» y concuerda como un adjetivo en *-o*: *questo*, "
+       "*questa*, *questi*, *queste*. Delante de vocal se apostrofa: "
+       "*quest'anno*. «Ese / aquel» es *quello*.",
+  "table": {"head": ["", "singular", "plural"],
+            "rows": [["masculino", "questo libro", "questi libri"],
+                     ["femenino", "questa casa", "queste case"],
+                     ["delante de vocal", "quest'anno, quest'amica", "questi anni, queste amiche"]]},
+  "ex": [["*Questa* casa è bella.", "Esta casa es linda."],
+         ["*Questi* ragazzi sono di Roma.", "Estos chicos son de Roma."],
+         ["*Queste* scarpe sono nuove.", "Estos zapatos son nuevos."],
+         ["*quest'*anno", "este año"]],
+  "warn": "No existe «esto» aparte: *questo* sirve para las dos cosas (*Questo "
+          "è il mio libro*). Y el plural masculino es *questi*, nunca «questos».",
+  "qq": [{"prompt": "Traducí: «estas casas»", "answer": "queste case", "options": ["queste case", "questi case", "questas case"]},
+         {"prompt": "Traducí: «estos libros»", "answer": "questi libri", "options": ["questi libri", "questos libri", "queste libri"]}]},
+
  {"h": "buono, grande, santo se acortan",
   "r": "*buono* delante copia a *un / uno / una / un'*. *grande* → *gran*, "
        "*grand'*. *santo* → *san*, *sant'*.",
@@ -578,7 +632,23 @@ LESSONS = {
   "warn": "El castellano apocopa *buen* y *san* solo en masculino. El "
           "italiano también tiene *buon'amica* en femenino.",
   "tip": "Delante de *s* + consonante vuelve la forma plena: *un buono "
-         "studente*, *Santo Stefano*."},
+         "studente*, *Santo Stefano*.",
+  "more": ["El recorte es solo en singular y delante del sustantivo. En "
+           "plural son regulares: *buoni amici*, *grandi città*, *i Santi "
+           "Apostoli*. Detrás del sustantivo o del verbo, siempre la forma "
+           "plena: *è buono*, *un uomo grande*."]},
+
+ {"h": "molto: muy o mucho",
+  "r": "Con sustantivo es «mucho» y **concuerda**: *molti amici*. Con "
+       "adjetivo o verbo es «muy / mucho» y **no cambia**: *molto belle*.",
+  "ex": [["Ho *molti* amici.", "Tengo muchos amigos."],
+         ["Ci sono *molte* persone.", "Hay mucha gente."],
+         ["Le case sono *molto* belle.", "Las casas son muy lindas."],
+         ["Sono *molto* stanca.", "Estoy muy cansada."]],
+  "warn": "Nunca «molti belle» ni «muy buona»: delante de un adjetivo, "
+          "*molto* queda fijo, como «muy».",
+  "qq": [{"prompt": "Completá", "stem": "Le ragazze sono ___ simpatiche.", "answer": "molto", "options": ["molto", "molte", "molti"]},
+         {"prompt": "Completá", "stem": "Ho ___ amiche a Roma.", "answer": "molte", "options": ["molte", "molto", "molti"]}]},
 ]},
 
 5: {
@@ -607,7 +677,15 @@ LESSONS = {
          ["Dorm*iamo* poco.", "Dormimos poco."],
          ["Parl*ano* inglese.", "Hablan inglés."]],
   "warn": "*loro* se acentúa en la raíz: *PAR-lano*, *VEN-dono*, *A-bitano*, "
-          "*te-LE-fonano*. Decir «parLAno» te delata enseguida."},
+          "*te-LE-fonano*. Decir «parLAno» te delata enseguida.",
+  "more": ["Los reflexivos (*alzarsi*, levantarse) se conjugan igual, con *mi, "
+           "ti, si, ci, vi, si* delante, como en castellano: *mi alzo*, *si "
+           "perdono* (se pierden). Los ves a fondo en la semana 12.",
+           "Verbos de todos los días con frases hechas: *prendere un caffè* "
+           "(tomar), *prendere il sole* (tomar sol), *prendere appunti*, "
+           "*prendere in giro* (cargar a alguien); *mettere in ordine* "
+           "(ordenar), *mettere da parte* (ahorrar); *portare fortuna* (traer "
+           "suerte), *portare pazienza* (tener paciencia)."]},
 
  {"h": "Los verbos en -isc-",
   "r": "Muchos verbos en *-ire* meten **-isc-** en todas las personas menos "
@@ -642,7 +720,12 @@ LESSONS = {
          ["*Lei* parla italiano?", "¿Usted habla italiano?"],
          ["Signora, *Lei è* di Roma?", "Señora, ¿usted es de Roma?"]],
   "warn": "Con *Lei* el verbo va en tercera: *Lei è*, nunca «Lei sei». Y "
-          "sirve para hombres y mujeres: *Signor Rossi, Lei è di qui?*"},
+          "sirve para hombres y mujeres: *Signor Rossi, Lei è di qui?*",
+  "tip": "Algo que empezó y sigue: presente + *da*. *Abito qui da due anni* "
+         "(vivo acá desde hace dos años). Lo ves a fondo en la semana 9.",
+  "more": ["Para unir frases: *e* (y; *ed* delante de vocal, sobre todo de "
+           "*e*: *io ed Emilio*), *ma* (pero), *o* (o) y *perché* (porque): "
+           "*Cominciano ma non finiscono*, *Dormono perché sono stanchi*."]},
 ]},
 
 6: {
@@ -669,7 +752,12 @@ LESSONS = {
   "ex": [["*Vado* a casa.", "Voy a casa."],
          ["Come *stai*?", "¿Cómo estás?"],
          ["*Hanno* due figli.", "Tienen dos hijos."],
-         ["*Andiamo* al cinema?", "¿Vamos al cine?"]]},
+         ["*Andiamo* al cinema?", "¿Vamos al cine?"]],
+  "more": ["Frases hechas: *andare d'accordo* (llevarse bien), *andare di "
+           "moda* (estar de moda), *andare a trovare* (visitar a alguien: "
+           "*domenica andiamo a trovare i nonni*); *stare di casa* (vivir: "
+           "*dove stai di casa?*), *stare zitto* (callarse), *stare attento* "
+           "(tener cuidado)."]},
 
  {"h": "Modales, sapere y fare",
   "r": "*potere, volere, dovere* van seguidos de **infinitivo**: *posso "
@@ -685,7 +773,16 @@ LESSONS = {
          ["*Vuoi* un caffè?", "¿Querés un café?"],
          ["*Posso* entrare?", "¿Puedo pasar?"],
          ["Cosa *fai* stasera?", "¿Qué hacés esta noche?"]],
-  "warn": "«Tener que» es *dovere*: *devo andare*, nunca «ho che andare»."},
+  "warn": "«Tener que» es *dovere*: *devo andare*, nunca «ho che andare». Y "
+          "el infinitivo va pegado, sin *di*: *devo partire*, no «devo di "
+          "partire».",
+  "tip": "El «que» que une frases es *che*: *so che hai ragione* (sé que "
+         "tenés razón), *dice che arriva domani*.",
+  "more": ["*fare* arma muchas frases hechas: *fare colazione* (desayunar), "
+           "*fare la doccia* (ducharse), *fare la spesa* (hacer las compras), "
+           "*fare una passeggiata* (dar un paseo), *fare la fila* (hacer "
+           "cola), *fare il pieno* (llenar el tanque), *fare attenzione* "
+           "(prestar atención), *fa freddo / caldo* (hace frío / calor)."]},
 
  {"h": "Seis irregulares más",
   "r": "*venire, uscire, dire, bere, dare, rimanere*. *venire* y *rimanere* "
@@ -702,7 +799,15 @@ LESSONS = {
          ["Cosa *dici*?", "¿Qué decís?"],
          ["*Rimango* a casa.", "Me quedo en casa."]],
   "tip": "Si sabés la forma de *io*, casi siempre deducís la de *loro*: "
-         "*esco → escono*, *dico → dicono*."},
+         "*esco → escono*, *dico → dicono*.",
+  "more": ["Dos familias más: *proporre* (y *porre, comporre*): *propongo, "
+           "proponi, propone, proponiamo, proponete, propongono*; *tradurre* "
+           "(y *produrre, condurre*): raíz *traduc-*, *traduco, traduci… "
+           "traducono*.",
+           "Con *dare*: *dare un esame* (rendir un examen), *dare fastidio* "
+           "(molestar), *dare un passaggio* (alcanzar a alguien en auto), "
+           "*dare retta* (hacer caso), *dare un'occhiata* (echar un vistazo), "
+           "*dare del tu / del Lei* (tutear / tratar de usted)."]},
 
  {"h": "El italiano no diptonga",
   "r": "Donde el castellano rompe la vocal (*puedo, duermo, pienso*), el "
@@ -724,7 +829,10 @@ LESSONS = {
          ["La porta *è* aperta.", "La puerta está abierta."]],
   "warn": "El error típico es «sto stanco». Cansado, contento, en Roma: "
           "*sono*. *stare* queda para *stare bene / male*, quedarse y frases "
-          "hechas como *stare attento*."},
+          "hechas como *stare attento*.",
+  "more": ["Frases hechas con *essere*: *essere al verde* (estar sin un "
+           "peso), *essere in gamba* (ser un capo), *essere in vena* (estar "
+           "de humor), *essere d'accordo* (estar de acuerdo)."]},
 
  {"h": "stare + gerundio",
   "r": "*stare* + gerundio = acción **en curso ahora mismo**. Gerundio: "
@@ -736,7 +844,9 @@ LESSONS = {
           "presente: *lavoro a Milano* (estoy trabajando en Milán), *stasera "
           "esco*.",
   "more": ["Los irregulares salen de la raíz larga: *fare → facendo*, *dire "
-           "→ dicendo*, *bere → bevendo*."]},
+           "→ dicendo*, *bere → bevendo*.",
+           "*stare per* + infinitivo = «estar por», a punto de: *sto per "
+           "uscire* (estoy por salir), *il treno sta per partire*."]},
 ]},
 
 7: {
@@ -769,7 +879,12 @@ LESSONS = {
          ["*duemila* euro", "dos mil euros"]],
   "warn": "*cento* no cambia (*trecento*); *mille* → *mila* pegado "
           "(*duemila*). *milione* y *miliardo* son sustantivos: *due milioni "
-          "di persone*."},
+          "di persone*.",
+  "more": ["Delante de *anni*, las decenas pierden la vocal: *vent'anni, "
+           "trent'anni*. *euro* no cambia: *dieci euro*. El porcentaje lleva "
+           "artículo: *il dieci per cento*. «Por litro, por kilo» es *al "
+           "litro, al chilo*: *venticinque euro al litro*. Los teléfonos se "
+           "dicen de a una o dos cifras: *zero due, trentanove…*"]},
 
  {"h": "Ordinales",
   "r": "Del 1 al 10, forma propia. Desde el 11: cardinal sin vocal final + "
@@ -780,7 +895,10 @@ LESSONS = {
          ["il *ventesimo* anniversario", "el vigésimo aniversario"]],
   "tip": "Del 1 al 10: *primo, secondo, terzo, quarto, quinto, sesto, "
          "settimo, ottavo, nono, decimo*. Los terminados en *tre* conservan "
-         "la *e*: *ventitreesimo*."},
+         "la *e*: *ventitreesimo*.",
+  "more": ["Reyes y papas llevan ordinal, como en castellano: *Elisabetta II* "
+           "se lee *seconda*. También los siglos: *il ventesimo secolo* (el "
+           "siglo XX), *la Seconda Guerra Mondiale*, *il Terzo Mondo*."]},
 
  {"h": "Fechas",
   "r": "*il* + número + mes, **sin «de»**. Cardinal para todos los días "
@@ -791,7 +909,11 @@ LESSONS = {
   "warn": "Nada de «il 5 di maggio»: la fecha va sin *di*. Y el año lleva "
           "artículo: *nel 2003*, *il 2003*.",
   "tip": "Meses y días van en minúscula: *lunedì, gennaio*. 5/8 es el 5 de "
-         "agosto, como en castellano."},
+         "agosto, como en castellano.",
+  "more": ["Los siglos desde el XIII tienen otro nombre, muy usado en arte e "
+           "historia: *il Duecento* (siglo XIII), *il Trecento* (XIV), *il "
+           "Quattrocento* (XV)… *il Novecento* (XX). En una agenda alcanza el "
+           "día: *giovedì quindici*, *il tre*."]},
 
  {"h": "La hora",
   "r": "Se pregunta *Che ore sono?* y se responde en **plural** con *le*: "
@@ -803,6 +925,9 @@ LESSONS = {
          ["Il treno parte *alle* 14:30.", "El tren sale a las 14:30."]],
   "warn": "«A las…» es *alle tre*, pero *all'una*, *a mezzogiorno*, *a "
           "mezzanotte*.",
+  "tip": "La parte del día: *di mattina* (de la mañana), *del pomeriggio* "
+         "(de la tarde), *di sera* (de la noche). «A eso de las seis»: *verso "
+         "le sei*.",
   "more": ["También se pregunta *Che ora è?*: las dos valen. En trenes, "
            "cines y oficinas se usa el reloj de 24 horas mucho más que en el "
            "castellano rioplatense: *alle diciotto* (a las seis de la "
@@ -828,7 +953,13 @@ LESSONS = {
          ["*Hai fame?*", "¿Tenés hambre?"],
          ["*Non sei d'accordo?*", "¿No estás de acuerdo?"]],
   "warn": "El signo «¿» de apertura no existe en italiano: escribí solo el "
-          "*?* final. Y no inviertas nada: *Marco è a casa?*"},
+          "*?* final. Y no inviertas nada: *Marco è a casa?*",
+  "tip": "Para pedir confirmación, al final: *…, vero?* o *…, no?*: *Partono "
+         "lunedì, vero?* (se van el lunes, ¿no?).",
+  "more": ["Para responder, además de *sì* y *no*: *forse* (quizás), *boh!* "
+           "(ni idea), *magari!* (¡ojalá!), *dai!* (¡dale!), *allora* "
+           "(entonces), *mica* (para nada: *non è mica vero*). Vuelven en la "
+           "semana 18."]},
 
  {"h": "Los interrogativos",
   "r": "Van al principio. *quanto* concuerda (*quanti anni*); *perché* sirve "
@@ -846,7 +977,15 @@ LESSONS = {
   "ex": [["*Perché* non vieni? — *Perché* sono stanco.", "¿Por qué no venís? — Porque estoy cansado."],
          ["*Quanti* anni hai?", "¿Cuántos años tenés?"],
          ["*Dove* abiti?", "¿Dónde vivís?"],
-         ["*Come mai* sei qui?", "¿Cómo es que estás acá?"]]},
+         ["*Come mai* sei qui?", "¿Cómo es que estás acá?"]],
+  "more": ["Delante de *è*, *dove* y *come* se apostrofan: *dov'è?*, *com'è?* "
+           "(¿qué tal es?). Para precisar se agrega *è che*: *quand'è che "
+           "parti?* (¿cuándo es que te vas?), *dov'è che lavori?*. *quanto* + "
+           "adjetivo pregunta la medida: *quanto è grande?* (¿qué tan "
+           "grande es?).",
+           "Dentro de otra frase, el interrogativo no cambia: *non so dove "
+           "abita* (no sé dónde vive), *mi sai dire quando torna?*. Para "
+           "«si», *se*: *non so se viene*."]},
 
  {"h": "La preposición va adelante",
   "r": "La preposición **abre** la pregunta, nunca queda al final ni se "
@@ -865,7 +1004,11 @@ LESSONS = {
          ["*Qual è* il problema?", "¿Cuál es el problema?"]],
   "warn": "*Qual è* va **sin apóstrofo**: es un truncamiento, no una "
           "elisión. «Qual'è» es de las faltas más marcadas por los "
-          "correctores."},
+          "correctores.",
+  "more": ["Sin pregunta, *che* es también el relativo «que»: *gli ospiti che "
+           "vengono* (los invitados que vienen), *una penna che funziona*. "
+           "*chi* y *quale* siguen preguntando: *voglio sapere chi viene*, "
+           "*non so quale penna funziona*."]},
 
  {"h": "El sujeto va al final",
   "r": "Si la pregunta tiene sujeto explícito, va **después del verbo**, al "
@@ -892,18 +1035,23 @@ LESSONS = {
   "r": "*di, a, da, in, con, su, per, tra / fra*. Cada una tiene varios "
        "usos: aprendelas **con su ejemplo**.",
   "table": {"head": ["Prep.", "Valores principales", "Ejemplo"],
-            "rows": [["di", "posesión, materia, origen, cantidad", "il libro di Marco; sono di Roma"],
-                     ["a", "destino a ciudad, hora, complemento indirecto", "vado a Roma; alle otto; scrivo a Luca"],
-                     ["da", "origen, casa de alguien, agente, finalidad, duración", "vengo da Milano; vado da Anna"],
-                     ["in", "lugar cerrado, países, medios de transporte", "in Italia; in banca; in treno"],
-                     ["con", "compañía, instrumento", "esco con Anna"],
-                     ["su", "sobre, acerca de", "sul tavolo; un libro su Dante"],
-                     ["per", "finalidad, destino, duración", "parto per Roma; per due ore"],
-                     ["tra / fra", "entre; dentro de (tiempo)", "tra amici; torno tra un'ora"]]},
+            "rows": [["di", "de: posesión, materia, origen, contenido", "il libro di Marco; di lana; sono di Roma; un bicchiere di vino"],
+                     ["a", "a, en: ciudad, hora, a quién", "vado a Roma; alle otto; scrivo a Luca"],
+                     ["da", "desde, de; en lo de; por (agente); para (uso); desde hace", "vengo da Milano; vado da Anna; occhiali da sole"],
+                     ["in", "en: lugares, países, transporte", "in Italia; in banca; in treno"],
+                     ["con", "con: compañía, instrumento", "esco con Anna; scrivo con la penna"],
+                     ["su", "sobre, en; acerca de", "sul tavolo; su Internet; un libro su Dante"],
+                     ["per", "para, por: destino, finalidad, causa, duración", "parto per Roma; per te; per lavoro; per due ore"],
+                     ["tra / fra", "entre; dentro de (tiempo o distancia)", "tra amici; torno tra un'ora; fra due chilometri"]]},
   "ex": [["il libro *di* Marco", "el libro de Marco"],
          ["Vado *a* Roma *in* treno.", "Voy a Roma en tren."],
          ["Esco *con* Anna.", "Salgo con Ana."],
-         ["Torno *tra* un'ora.", "Vuelvo dentro de una hora."]]},
+         ["Torno *tra* un'ora.", "Vuelvo dentro de una hora."]],
+  "more": ["Otras, sin artículo pegado: *senza* (sin), *verso* (hacia; a eso "
+           "de: *verso le sei*), *dopo* (después de: *dopo cena*), *dentro* "
+           "(dentro de), *dietro* (detrás de), *fuori* (fuera de: *fuori "
+           "città*). Con un pronombre, algunas suman *di*: *senza di te*, "
+           "*dietro di me*, *verso di lui*."]},
 
  {"h": "a o in",
   "r": "**a** con ciudades; **in** con países, regiones y continentes. Con "
@@ -916,7 +1064,13 @@ LESSONS = {
           "castellano diga «en».",
   "tip": "Con *in*: *banca, centro, ufficio, montagna, chiesa, piazza, "
          "farmacia*. Con *a*: *al cinema, al mare, al ristorante, a teatro, "
-         "a scuola, a casa, a letto*."},
+         "a scuola, a casa, a letto*.",
+  "more": ["Más con *in*: *in biblioteca, in piscina, in campagna, in "
+           "periferia*, y el transporte: *in treno, in aereo, in macchina* "
+           "(pero *con la macchina*, con artículo). Más con *a*: *allo zoo, "
+           "al supermercato, alla fermata, all'angolo, a destra*. Las islas "
+           "chicas van con *a* (*a Capri*), las grandes con *in* (*in "
+           "Sicilia*). Meses y fiestas: *a dicembre, a Natale*."]},
 
  {"h": "da, la que no tiene equivalente",
   "r": "*da* no tiene traducción única. Estos cinco usos aparecen **todo el "
@@ -932,7 +1086,12 @@ LESSONS = {
          ["Stasera ceno *da* Anna.", "Esta noche ceno en lo de Ana."],
          ["gli occhiali *da* sole", "los anteojos de sol"]],
   "warn": "A lo de una persona se va con *da*, no con *a*: *vado da Marco*, "
-          "*vado dal dentista*. «Vado al medico» suena a extranjero."},
+          "*vado dal dentista*. «Vado al medico» suena a extranjero.",
+  "more": ["*da* + infinitivo = «para» o «que»: *qualcosa da bere* (algo para "
+           "tomar), *compiti da fare* (tarea para hacer). También el paso: "
+           "*non guardare dalla finestra* (por la ventana). Y ojo: *un "
+           "bicchiere di vino* está lleno de vino; *un bicchiere da vino* es "
+           "el vaso para vino."]},
 
  {"h": "Presente + da: lo que sigue pasando",
   "r": "Para algo que empezó antes y **sigue**: **presente + da** + tiempo. "
@@ -956,7 +1115,13 @@ LESSONS = {
   "more": ["Otros de todos los días: *credere a / in* (creer en), *entrare "
            "in* (entrar a), *cominciare a* (empezar a), *sognare di* + "
            "infinitivo (soñar con hacer algo), *innamorarsi di* (enamorarse "
-           "de), *sposarsi con* (casarse con)."]},
+           "de), *sposarsi con* (casarse con), *decidere di* (decidir), "
+           "*riuscire a* (lograr), *contare su* (contar con).",
+           "Los adjetivos también: *pieno di* (lleno de), *contento di*, "
+           "*bravo a / in* (bueno en: *bravo a scuola*, *bravo in "
+           "italiano*), *interessato a*, *deciso a* (decidido a), *gentile "
+           "con* (amable con). Sin preposición: *preferire*, *volere*, "
+           "*dovere* + infinitivo."]},
 ]},
 
 10: {
@@ -974,19 +1139,23 @@ LESSONS = {
   "r": "Los **átonos** van delante del verbo: *ti vedo*. Los **tónicos**, "
        "después de preposición o para enfatizar: *con me*, *per te*.",
   "table": {"head": ["Sujeto", "Directo", "Indirecto", "Tónico (tras prep.)"],
-            "rows": [["io", "mi", "mi", "me"],
-                     ["tu", "ti", "ti", "te"],
-                     ["lui", "lo", "gli", "lui"],
-                     ["lei", "la", "le", "lei"],
-                     ["Lei (formal)", "La", "Le", "Lei"],
-                     ["noi", "ci", "ci", "noi"],
-                     ["voi", "vi", "vi", "voi"],
-                     ["loro", "li / le", "gli (loro)", "loro"]]},
+            "rows": [["io (me, a mí)", "mi", "mi", "me"],
+                     ["tu (te, a vos)", "ti", "ti", "te"],
+                     ["lui (lo, le, a él)", "lo", "gli", "lui"],
+                     ["lei (la, le, a ella)", "la", "le", "lei"],
+                     ["Lei (lo / la, le, a usted)", "La", "Le", "Lei"],
+                     ["noi (nos, a nosotros)", "ci", "ci", "noi"],
+                     ["voi (los / les, a ustedes)", "vi", "vi", "voi"],
+                     ["loro (los / las, les, a ellos)", "li / le", "gli (loro)", "loro"]]},
   "ex": [["*Ti* chiamo stasera.", "Te llamo esta noche."],
          ["Vieni *con me*?", "¿Venís conmigo?"],
          ["*Lo* dico *a te*, non a lui.", "Te lo digo a vos, no a él."]],
   "warn": "Después de preposición, nunca *mi* ni *ti*: *con me*, *per te*. "
-          "«Conmigo» y «contigo» son *con me*, *con te*."},
+          "«Conmigo» y «contigo» son *con me*, *con te*.",
+  "more": ["Tónicos útiles: *da me* (a mi casa: *vieni da me?*), *secondo me* "
+           "(para mí, en mi opinión). «Sí mismo» es *sé*: *parla sempre di "
+           "sé*, *pensa solo a sé*. *stesso* refuerza, como «mismo»: *io "
+           "stesso*, *lei stessa*, *conosci te stesso*."]},
 
  {"h": "Directo o indirecto",
   "q": [{"prompt": "Reemplazá con un pronombre.", "stem": "Telefono a Marco → ___ telefono.", "answer": "Gli", "options": ["Gli", "Lo", "Le"]}, {"prompt": "Reemplazá con un pronombre.", "stem": "Vedo Anna → ___ vedo.", "answer": "La", "options": ["La", "Le", "Gli"]}],
@@ -997,7 +1166,12 @@ LESSONS = {
          ["Telefono a Marco → *Gli* telefono.", "Llamo a Marco → Lo llamo (en it., indirecto)."],
          ["Vedo Anna → *La* vedo.", "Veo a Ana → La veo."],
          ["Scrivo ad Anna → *Le* scrivo.", "Le escribo a Ana."],
-         ["Conosco i tuoi amici → *Li* conosco.", "Conozco a tus amigos → Los conozco."]]},
+         ["Conosco i tuoi amici → *Li* conosco.", "Conozco a tus amigos → Los conozco."]],
+  "more": ["*gli* sirve también para «a ellos / a ellas»: *devi rispondere "
+           "alle ragazze → devi rispondergli*; *loro* detrás del verbo es formal. *lo* "
+           "puede reemplazar una frase entera: *lo so* (lo sé). Y «¿Tenés la "
+           "llave? — Sí, la tengo» se dice *sì, ce l'ho*: con *avere*, *lo / "
+           "la* van con *ce* delante."]},
 
  {"h": "Sin leísmo y sin «a» personal",
   "q": [{"prompt": "¿Cuál está bien? «Lo veo» (a Marco).", "answer": "Lo vedo.", "options": ["Lo vedo.", "Le vedo.", "Gli vedo."]}, {"prompt": "¿Cuál está bien? «Veo a Marco.»", "answer": "Vedo Marco.", "options": ["Vedo Marco.", "Vedo a Marco.", "Vedo di Marco."]}],
@@ -1021,7 +1195,9 @@ LESSONS = {
          ["Non *lo* conosco.", "No lo conozco."]],
   "tip": "El infinitivo pierde la *-e* final: *vedere* + *ti* → *vederti*.",
   "more": ["También se pega al gerundio (*chiamandoti*) y al imperativo "
-           "informal (*chiamami!*), que llega en la semana 12."]},
+           "informal (*chiamami!*), que llega en la semana 12.",
+           "Y a *ecco* (acá está): *eccolo!* (¡acá está!), *eccomi* (acá "
+           "estoy). Con *Lei* también se pega al saludo: *arrivederLa*."]},
 ]},
 
 11: {
@@ -1053,19 +1229,21 @@ LESSONS = {
  {"h": "Cuál auxiliar",
   "r": "*avere* si el verbo puede llevar objeto directo. *essere* con "
        "movimiento, permanencia, cambio de estado y la familia de *piacere*.",
-  "table": {"head": ["Grupo (con essere)", "Verbos"],
-            "rows": [["movimiento", "andare, venire, arrivare, partire, uscire, entrare, tornare, salire, scendere, cadere"],
-                     ["permanencia", "restare, rimanere, stare"],
-                     ["cambio de estado", "nascere, morire, diventare, crescere, guarire, dimagrire"],
-                     ["existencia", "essere, esserci"],
-                     ["gustar y afines", "piacere, mancare, sembrare, costare, servire, bastare, succedere"],
-                     ["todos los reflexivos", "alzarsi, lavarsi, divertirsi..."]]},
+  "table": {"head": ["Grupo (con essere)", "Verbos", "Ejemplo"],
+            "rows": [["movimiento", "andare (ir), venire, arrivare (llegar), partire (irse), uscire (salir), entrare, tornare (volver), salire (subir), scendere (bajar), cadere (caerse)", "Sono arrivato tardi. (Llegué tarde.)"],
+                     ["permanencia", "restare, rimanere (quedarse), stare", "Sono rimasta a casa. (Me quedé en casa.)"],
+                     ["cambio de estado", "nascere (nacer), morire (morir), diventare (volverse), crescere (crecer), guarire (curarse), dimagrire (adelgazar)", "È nata a Roma. (Nació en Roma.)"],
+                     ["existencia", "essere, esserci (haber)", "C'è stato un problema. (Hubo un problema.)"],
+                     ["gustar y afines", "piacere, mancare (faltar), sembrare (parecer), costare, servire (servir, hacer falta), bastare (alcanzar), succedere (pasar)", "È successo ieri. (Pasó ayer.)"],
+                     ["todos los reflexivos", "alzarsi (levantarse), lavarsi, divertirsi...", "mi sono alzato (me levanté): semana 16"]]},
   "ex": [["*Ho letto* il libro.", "Leí el libro."],
          ["*Sono andato* a Roma.", "Fui a Roma."],
          ["Ti *è piaciuto* il film?", "¿Te gustó la película?"]],
   "warn": "No todo movimiento va con *essere*: *camminare, viaggiare, "
           "nuotare* van con *avere*. Y *essere* usa *essere* (*sono stato*); "
-          "*avere* usa *avere* (*ho avuto*)."},
+          "*avere* usa *avere* (*ho avuto*).",
+  "more": ["El clima admite los dos: *è piovuto* o *ha piovuto* (llovió), *è "
+           "nevicato* o *ha nevicato*."]},
 
  {"h": "Con essere, el participio concuerda",
   "r": "Con *essere*, el participio **concuerda con el sujeto** en género y "
@@ -1074,7 +1252,10 @@ LESSONS = {
          ["Siamo arrivat*i* tardi.", "Llegamos tarde."],
          ["Le ragazze sono uscit*e*.", "Las chicas salieron."]],
   "warn": "En castellano el participio no cambia nunca. En italiano, con "
-          "*essere*, sí: si sos mujer, *sono andata*, no «sono andato»."},
+          "*essere*, sí: si sos mujer, *sono andata*, no «sono andato».",
+  "tip": "Con *piacere, servire, bastare, succedere* el sujeto es la cosa: "
+         "concuerda con ella. *Mi è servita la chiave*, *mi sono bastati i "
+         "soldi*."},
 
  {"h": "Verbos con los dos auxiliares",
   "r": "Algunos aceptan los dos, con sentido distinto: **con objeto directo, "
@@ -1097,18 +1278,20 @@ LESSONS = {
   "r": "Muchos verbos frecuentes, sobre todo en *-ere*, tienen participio "
        "irregular. Aprendelos de memoria junto con el infinitivo.",
   "table": {"head": ["Verbo", "Participio", "Verbo", "Participio"],
-            "rows": [["essere", "stato", "fare", "fatto"],
-                     ["prendere", "preso", "dire", "detto"],
-                     ["mettere", "messo", "scrivere", "scritto"],
-                     ["leggere", "letto", "vedere", "visto"],
-                     ["chiedere", "chiesto", "rispondere", "risposto"],
-                     ["aprire", "aperto", "offrire", "offerto"],
-                     ["venire", "venuto", "rimanere", "rimasto"],
-                     ["scegliere", "scelto", "vivere", "vissuto"],
-                     ["bere", "bevuto", "perdere", "perso"],
-                     ["chiudere", "chiuso", "decidere", "deciso"],
-                     ["nascere", "nato", "morire", "morto"],
-                     ["succedere", "successo", "correre", "corso"]]},
+            "rows": [["essere (ser, estar)", "stato", "fare (hacer)", "fatto"],
+                     ["prendere (tomar)", "preso", "dire (decir)", "detto"],
+                     ["mettere (poner)", "messo", "scrivere (escribir)", "scritto"],
+                     ["leggere (leer)", "letto", "vedere (ver)", "visto"],
+                     ["chiedere (pedir, preguntar)", "chiesto", "rispondere (responder)", "risposto"],
+                     ["aprire (abrir)", "aperto", "offrire (ofrecer)", "offerto"],
+                     ["venire (venir)", "venuto", "rimanere (quedarse)", "rimasto"],
+                     ["scegliere (elegir)", "scelto", "vivere (vivir)", "vissuto"],
+                     ["bere (tomar, beber)", "bevuto", "perdere (perder)", "perso"],
+                     ["chiudere (cerrar)", "chiuso", "decidere (decidir)", "deciso"],
+                     ["nascere (nacer)", "nato", "morire (morir)", "morto"],
+                     ["succedere (pasar)", "successo", "correre (correr)", "corso"],
+                     ["rompere (romper)", "rotto", "vincere (ganar)", "vinto"],
+                     ["conoscere (conocer)", "conosciuto", "piacere (gustar)", "piaciuto"]]},
   "ex": [["Cosa hai *fatto* ieri?", "¿Qué hiciste ayer?"],
          ["Ho *visto* un bel film.", "Vi una linda película."],
          ["Ho *preso* il treno.", "Tomé el tren."],
@@ -1135,7 +1318,10 @@ LESSONS = {
          ["Ho comprato i libri → *Li* ho comprat*i*.", "Compré los libros → Los compré."],
          ["Ho letto le lettere → *Le* ho lett*e*.", "Leí las cartas → Las leí."]],
   "warn": "*lo* y *la* se apostrofan ante *ho*: *l'ho visto*, *l'ho vista*. "
-          "*li* y *le*, nunca: *li ho visti*."},
+          "*li* y *le*, nunca: *li ho visti*.",
+  "more": ["Solo el directo hace concordar. *le* indirecto (a ella) y *gli* "
+           "no cambian nada: *le ho parlato* (le hablé), *gli ho scritto*. "
+           "Tampoco el sustantivo detrás: *ho letto le lettere*."]},
 ]},
 
 12: {
@@ -1164,7 +1350,11 @@ LESSONS = {
           "*mi alzo*. Con infinitivo, pegado: *devo alzarmi*.",
   "more": ["*ci vediamo*, *si conoscono*: con sujeto plural, el mismo "
            "pronombre sirve para lo recíproco, como «nos vemos» en "
-           "castellano."]},
+           "castellano.",
+           "Con partes del cuerpo y ropa va el artículo, no el posesivo, "
+           "como en castellano: *mi lavo i denti*, *ti togli la giacca*. Y "
+           "*si* + tercera persona también es el «se» impersonal: *qui non si "
+           "fuma* (acá no se fuma)."]},
 
  {"h": "Reflexivos que no coinciden",
   "r": "Algunos verbos son reflexivos solo en una de las dos lenguas, o "
@@ -1184,15 +1374,23 @@ LESSONS = {
   "r": "Igual que el presente, salvo *tu* de los verbos en **-are**, que "
        "termina en *-a*: *tu parli* → *Parla!*",
   "table": {"head": ["", "-are (parlare)", "-ere (prendere)", "-ire (dormire)", "-isc (finire)"],
-            "rows": [["tu", "parla!", "prendi!", "dormi!", "finisci!"],
-                     ["noi", "parliamo!", "prendiamo!", "dormiamo!", "finiamo!"],
-                     ["voi", "parlate!", "prendete!", "dormite!", "finite!"]]},
+            "rows": [["tu (vos: ¡hablá!)", "parla!", "prendi!", "dormi!", "finisci!"],
+                     ["noi (¡hablemos!)", "parliamo!", "prendiamo!", "dormiamo!", "finiamo!"],
+                     ["voi (ustedes: ¡hablen!)", "parlate!", "prendete!", "dormite!", "finite!"]]},
   "ex": [["*Parla* piano!", "¡Hablá despacio!"],
          ["*Prendi* il treno!", "¡Tomá el tren!"],
          ["*Chiamami*!", "¡Llamame!"],
-         ["*Alzati*!", "¡Levantate!"]],
+         ["*Alzati*!", "¡Levantate!"],
+         ["*Svegliatevi*!", "¡Despiértense!"]],
   "warn": "El voseo engaña: «hablá» lleva el acento al final, *parla* no: "
-          "*PAR-la*, *MAN-gia*. Y el pronombre va pegado: *chiamami*."},
+          "*PAR-la*, *MAN-gia*. Y el pronombre va pegado: *chiamami*.",
+  "more": ["El pronombre se pega también en *noi* y *voi*: *mettiamolo qui* "
+           "(pongámoslo acá: es una sugerencia; *lo mettiamo qui* es un "
+           "hecho), *finitelo* (termínenlo), *sedetevi* (siéntense).",
+           "Los irregulares del presente dan su *tu*: *vieni!, esci!, tieni!, "
+           "scegli!, rimani!, siediti!* (sentate). *essere* y *avere* tienen "
+           "forma propia: *sii gentile!* (sé amable), *abbi pazienza!* (tené "
+           "paciencia)."]},
 
  {"h": "El negativo de tu",
   "r": "*tu* negativo = **non + infinitivo**. En *noi* y *voi* alcanza con "
@@ -1202,16 +1400,40 @@ LESSONS = {
          ["*Non ti preoccupare*!", "¡No te preocupes!"],
          ["*Non parlate*!", "¡No hablen!"]],
   "warn": "«Non parla!» no es una orden: significa «no habla». Con *tu*, el "
-          "negativo pide infinitivo: *non parlare!*"},
+          "negativo pide infinitivo: *non parlare!*",
+  "tip": "Con pronombre, dos lugares posibles: pegado al infinitivo o "
+         "delante. *Non toccarlo!* = *Non lo toccare!* (¡no lo toques!)."},
 
  {"h": "Adelanto: el formal es un subjuntivo",
-  "r": "Para *Lei* se usa el congiuntivo presente (semana 24). Por ahora, "
-       "**reconocelo**: el pronombre va **delante**, no pegado.",
+  "r": "*Lei* usa el congiuntivo (semana 24). Al revés que el informal: "
+       "*-are* → **-i** (*parli!*); *-ere / -ire* → **-a** (*prenda!*). "
+       "Irregulares, desde el *io*: *vengo → venga*.",
+  "table": {"head": ["Verbo", "io (presente)", "Lei (usted)", "Ejemplo"],
+            "rows": [["parlare (hablar)", "parlo", "parli", "Parli piano! (¡Hable despacio!)"],
+                     ["prendere (tomar)", "prendo", "prenda", "Prenda pure! (¡Tome nomás!)"],
+                     ["sentire (oír)", "sento", "senta", "Senta, scusi! (¡Oiga, disculpe!)"],
+                     ["finire (terminar)", "finisco", "finisca", "Finisca pure! (¡Termine nomás!)"],
+                     ["venire (venir)", "vengo", "venga", "Venga dentro! (¡Entre!)"],
+                     ["fare (hacer)", "faccio", "faccia", "Lo faccia subito! (¡Hágalo ya!)"],
+                     ["andare (ir)", "vado", "vada", "Vada dritto! (¡Siga derecho!)"],
+                     ["dire (decir)", "dico", "dica", "Mi dica! (¡Dígame!)"],
+                     ["scegliere (elegir)", "scelgo", "scelga", "Scelga lei! (¡Elija usted!)"],
+                     ["tenere (tener)", "tengo", "tenga", "Tenga la destra! (¡Vaya por la derecha!)"],
+                     ["dare (dar)", "do", "dia", "Mi dia un po' di pane! (¡Deme un poco de pan!)"],
+                     ["stare (estar)", "sto", "stia", "Stia tranquillo! (¡Quédese tranquilo!)"]]},
   "ex": [["*Scusi*! / *Senta*!", "¡Disculpe! / ¡Oiga!"],
          ["*Venga*! / *Prenda*!", "¡Venga! / ¡Tome!"],
          ["Mi *dica*!", "¡Dígame!"],
          ["Si *accomodi*!", "¡Pase! / ¡Siéntese!"],
-         ["*Faccia* pure!", "¡Adelante, hágalo nomás!"]]},
+         ["*Faccia* pure!", "¡Adelante, hágalo nomás!"]],
+  "warn": "El pronombre va **delante**, nunca pegado: *Mi dica*, *Si "
+          "accomodi*, *Lo faccia*. En negativo, *non* delante: *Non si "
+          "preoccupi!* (¡no se preocupe!).",
+  "tip": "*rimanere → rimanga*, *sedersi → si sieda*, *uscire → esca*: si "
+         "sabés el *io* del presente, tenés el formal.",
+  "qq": [{"prompt": "Imperativo de Lei", "stem": "___ più piano, per favore! (parlare)", "answer": "Parli", "options": ["Parli", "Parla", "Parlate"]},
+         {"prompt": "Imperativo de Lei", "stem": "___ subito! (partire)", "answer": "Parta", "options": ["Parta", "Parti", "Parte"]},
+         {"prompt": "Imperativo de Lei", "stem": "___ dentro, signora! (venire)", "answer": "Venga", "options": ["Venga", "Vieni", "Viene"]}]},
 
  {"h": "Formas cortas: consonante doble",
   "r": "*va', da', fa', sta', di'* + pronombre **duplican** la consonante "
@@ -1297,9 +1519,15 @@ LESSONS = {
   "q": [{"prompt": "¿Cuál está bien? «Vengo con vos.»", "answer": "Vengo con te.", "options": ["Vengo con te.", "Vengo con ti.", "Vengo con tu."]}, {"prompt": "¿Cuál está bien? «Le escribo» (a ella).", "answer": "Le scrivo.", "options": ["Le scrivo.", "Gli scrivo.", "La scrivo."]}],
   "r": "Átonos **delante** del verbo conjugado; tónicos **después** de "
        "preposición.",
-  "table": {"head": ["Directo", "Indirecto", "Reflexivo", "Tónico"],
-            "rows": [["mi, ti, lo, la", "mi, ti, gli, le", "mi, ti, si", "me, te, lui, lei"],
-                     ["ci, vi, li, le", "ci, vi, gli", "ci, vi, si", "noi, voi, loro"]]},
+  "table": {"head": ["Persona", "Directo", "Indirecto", "Reflexivo", "Tónico"],
+            "rows": [["io (yo)", "mi", "mi", "mi", "me"],
+                     ["tu (vos)", "ti", "ti", "ti", "te"],
+                     ["lui (él)", "lo", "gli", "si", "lui"],
+                     ["lei (ella)", "la", "le", "si", "lei"],
+                     ["Lei (usted)", "La", "Le", "si", "Lei"],
+                     ["noi (nosotros)", "ci", "ci", "ci", "noi"],
+                     ["voi (ustedes)", "vi", "vi", "vi", "voi"],
+                     ["loro (ellos, ellas)", "li / le", "gli", "si", "loro"]]},
   "ex": [["*Lo* conosco bene.", "Lo conozco bien."],
          ["*Gli* scrivo domani.", "Le escribo mañana (a él)."],
          ["Vengo *con te*.", "Voy con vos."]]},
