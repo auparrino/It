@@ -16,13 +16,24 @@
  * Sin clave de IA, la tarea se revisa con criterios que no se engañan con
  * relleno: extensión, variedad léxica, puntos de la consigna cubiertos,
  * estructura del género, conectores y errores marcados por el corrector de
- * la semana.  Con clave, la IA la califica además con la rúbrica C1.
+ * la semana.  Si el paquete trae ADEQ (tramo_data.js), además mide la
+ * adequação ao contexto del Celpe-Bras, con listas por idioma y por género:
+ * tratamiento coherente con el destinatario (GENRES[g].trat), verbos del
+ * propósito del género (GENRES[g].proposito), uso de la fuente (palabras de
+ * contenido del texto o del audio que no están en la consigna) y registro
+ * medido (marcas del habla contra marcas de la escritura formal, según
+ * GENRES[g].registro o compito.registro).  Un idioma sin ADEQ no cambia.
+ * Con clave, la IA la califica además con la rúbrica C1.
  * Nada oral: todo se lee, se escucha y se escribe.
  *
+ * Antes de la primera tarea de un género se muestra su ficha
+ * (GENRES[g].ficha: 4-6 pantallas con para qué sirve, estructura, fórmulas,
+ * verbos y un modelo anotado); después se abre desde la tarea.
+ *
  * Los datos son del paquete (lang/<código>/tramo_data.js → window.TRAMO_DATA:
- * GENRES, SETTIMANE).  Lo que guarda, en state.tramo: asc {semana: {pct, ok,
- * n, at}}, scr {semana: {ok, n, punti, of, hard, at, ai}}, draft {semana:
- * texto}.
+ * GENRES, SETTIMANE, ADEQ).  Lo que guarda, en state.tramo: asc {semana: {pct,
+ * ok, n, at}}, scr {semana: {ok, n, punti, of, hard, at, ai}}, draft {semana:
+ * texto}, fichas {género: fecha en que se leyó la ficha}.
  */
 (function (root) {
   "use strict";
@@ -52,7 +63,7 @@
     var s = state || (H && H.state());
     if (!s.tramo || typeof s.tramo !== "object" || Array.isArray(s.tramo)) s.tramo = {};
     var t = s.tramo;
-    ["asc", "scr", "draft"].forEach(function (k) { if (!t[k] || typeof t[k] !== "object" || Array.isArray(t[k])) t[k] = {}; });
+    ["asc", "scr", "draft", "fichas"].forEach(function (k) { if (!t[k] || typeof t[k] !== "object" || Array.isArray(t[k])) t[k] = {}; });
     return t;
   }
 
@@ -110,6 +121,109 @@
     return (list || []).map(function (s) { try { return new RegExp(s, "i"); } catch (e) { return null; } }).filter(Boolean);
   }
 
+  /* ---------------------------------------------- adequação ao contexto */
+
+  // Count the matches of a list of words or expressions («a gente», «pra»)
+  // in the text, on word boundaries and without accents; returns
+  // {n, found: [the ones that appear]}.
+  function countList(text, list) {
+    var t = " " + tokens(text).join(" ") + " ", n = 0, found = [];
+    (list || []).forEach(function (w) {
+      var k = " " + tokens(w).join(" ") + " ", i = 0, c = 0;
+      if (k.length < 3) return;
+      while ((i = t.indexOf(k, i)) >= 0) { c++; i += k.length - 1; }
+      if (c) { n += c; found.push(w); }
+    });
+    return { n: n, found: found };
+  }
+
+  // The source of the task: the reading, the listening or both.
+  function sourceText(task, s) {
+    if (!s) return "";
+    var a = s.ascolto ? s.ascolto.turns.map(function (t) { return t[1]; }).join(" ") : "";
+    var l = s.lettura ? s.lettura.text : "";
+    return task.fonte === "ascolto" ? a : task.fonte === "entrambi" ? l + " " + a : l;
+  }
+
+  // Content words of the source that the prompt does not give away: the
+  // text has to use what it read or heard, not repeat the task.  A word is
+  // taken by its first letters (enchente / enchentes, propôs / propor), and
+  // only if it is proper to this source: it appears in the sources of at
+  // most A.dfMax weeks of the tramo (names, figures, the terms of the
+  // topic), so words any text brings (conversa, problema, história) do not
+  // count.
+  var DF = null;
+  function sourceDF(A) {
+    if (DF) return DF;
+    var L = A.stemLen || 6;
+    DF = {};
+    (D().SETTIMANE || []).forEach(function (w) {
+      var seen = {};
+      tokens(sourceText({ fonte: "entrambi" }, w)).forEach(function (t) { seen[t.replace(/s$/, "").slice(0, L)] = 1; });
+      Object.keys(seen).forEach(function (k) { DF[k] = (DF[k] || 0) + 1; });
+    });
+    return DF;
+  }
+  function sourceUse(task, text, s, A) {
+    var stop = {};
+    String(A.stop || "").split(/\s+/).forEach(function (w) { if (w) stop[plain(w)] = 1; });
+    var L = A.stemLen || 6, min = A.wordMin || 5, df = sourceDF(A), dfMax = A.dfMax || 3;
+    var stem = function (w) { return w.replace(/s$/, "").slice(0, L); };
+    var inTask = {};
+    tokens(task.t + " " + (task.title || "")).forEach(function (w) { inTask[stem(w)] = 1; });
+    var src = {};
+    tokens(sourceText(task, s)).forEach(function (w) {
+      if (w.length >= min && !stop[w] && !inTask[stem(w)] && (df[stem(w)] || 0) <= dfMax) src[stem(w)] = src[stem(w)] || w;
+    });
+    var used = {};
+    tokens(text).forEach(function (w) { var k = stem(w); if (w.length >= min && src[k] && !stop[w]) used[k] = src[k]; });
+    // the figures of the source (years, percentages, amounts) count too
+    var nums = {};
+    (sourceText(task, s).match(/\d[\d.,]*/g) || []).forEach(function (x) {
+      x = x.replace(/[.,]+$/, "");
+      if (x.replace(/\D/g, "").length >= 2) nums[x] = 1;
+    });
+    (String(text).match(/\d[\d.,]*/g) || []).forEach(function (x) { x = x.replace(/[.,]+$/, ""); if (nums[x]) used["#" + x] = x; });
+    return Object.keys(used).map(function (k) { return used[k]; });
+  }
+
+  function adequacao(task, g, text, s) {
+    var A = D().ADEQ, crit = [];
+    if (!A) return crit;
+    var v = countList(text, A.voce), sr = countList(text, A.senhor);
+    if (g.trat === "senhor") crit.push({ id: "trat", ok: v.n === 0,
+      label: v.n === 0 ? (sr.n ? "Tratamiento coherente: " + sr.found.slice(0, 3).join(", ") + " de principio a fin" : "Tratamiento: sin você en un texto formal")
+        : sr.n ? "Mezclás " + v.found.slice(0, 3).join(", ") + " con " + sr.found.slice(0, 3).join(", ") + ": al destinatario de una carta formal, siempre o senhor / a senhora"
+        : "Al destinatario de una carta formal no se lo trata de " + v.found.slice(0, 3).join(", ") + ": usá o senhor / a senhora (y lhe, seu, el verbo en 3.ª persona)" });
+    if (g.trat === "voce") crit.push({ id: "trat", ok: sr.n === 0,
+      label: sr.n === 0 ? "Tratamiento de confianza (você, a gente), como corresponde"
+        : "«" + sr.found[0] + "» a un amigo suena distante: en un e-mail informal, você" });
+    var props = rx(g.proposito), pm = null;
+    props.some(function (r) { var m = r.exec(text); if (m) pm = m[0]; return !!m; });
+    if (props.length) crit.push({ id: "prop", ok: !!pm,
+      label: pm ? "Propósito del género a la vista: «" + pm.trim() + "»"
+        : "No se ve el propósito del género" + (g.propositoHint ? " (" + g.propositoHint + ")" : "") + ": decí con todas las letras qué hacés" });
+    if (s && task.fonte) {
+      var used = sourceUse(task, text, s, A), need = task.fonteMin || g.fonteMin || A.fonteMin || 5;
+      var where = task.fonte === "ascolto" ? "del audio" : task.fonte === "entrambi" ? "del texto y del audio" : "del texto";
+      crit.push({ id: "fonte", ok: used.length >= need,
+        label: used.length >= need ? "Usa la fuente: " + used.length + " palabras o datos " + where + " que la consigna no da (" + used.slice(0, 5).join(", ") + (used.length > 5 ? "…" : "") + ")"
+          : "Usás poco la fuente: " + used.length + " palabras o datos " + where + " (al menos " + need + "): retomá nombres, cifras y términos, con tus palabras" });
+    }
+    var reg = task.registro || g.registro;
+    if (reg === "formal" || reg === "informal") {
+      var co = countList(text, A.coloquial), fo = countList(text, A.formal), ff = countList(text, A.formalForte);
+      var cmax = A.coloqMax == null ? 1 : A.coloqMax;
+      if (reg === "formal") crit.push({ id: "reg", ok: co.n <= cmax,
+        label: co.n <= cmax ? "Registro formal: " + (fo.n ? fo.n + " marcas de la escritura (" + fo.found.slice(0, 4).join(", ") + ")" : "sin marcas del habla") + (co.n ? " y " + co.n + " del habla (" + co.found.join(", ") + ")" : "")
+          : co.n + " marcas del habla (" + co.found.slice(0, 5).join(", ") + ") en un texto formal: pasalas a la norma escrita" });
+      else crit.push({ id: "reg", ok: ff.n === 0,
+        label: ff.n === 0 ? "Registro informal, como pide el destinatario" + (co.n ? " (" + co.found.slice(0, 4).join(", ") + ")" : "")
+          : "«" + ff.found[0] + "» es de una carta formal: a un amigo, más cercano" });
+    }
+    return crit;
+  }
+
   // opts.noCheck: skip the week's checker (the slowest part; the tests use it
   // for the texts that must fail anyway).
   function evaluate(task, text, weekN, src, opts) {
@@ -149,6 +263,7 @@
       label: "Párrafos: " + pars.length + " (al menos " + (g.paragraphs || 3) + ", una idea cada uno)" });
     crit.push({ id: "conn", ok: conns.length >= 4,
       label: "Conectores distintos: " + conns.length + (conns.length ? " (" + conns.slice(0, 6).join(", ") + (conns.length > 6 ? "…" : "") + ")" : "") + " · al menos 4" });
+    adequacao(task, g, text, src).forEach(function (c) { crit.push(c); });
     crit.push({ id: "err", ok: chk.hard <= maxHard,
       label: chk.hard ? chk.hard + " cosas marcadas por el corrector: revisalas abajo (a veces se equivoca con palabras citadas o poco comunes)" : "El corrector de la semana no marcó errores" });
     var ok = crit.filter(function (c) { return c.need; }).every(function (c) { return c.ok; });
@@ -179,7 +294,10 @@
     var s = week(weekN);
     if (!s) return;
     stop();
-    cur = { kind: kind, week: weekN, s: s, from: from || "briefing", plays: 0, done: null, check: null, ai: null };
+    cur = { kind: kind, week: weekN, s: s, from: from || "briefing", plays: 0, done: null, check: null, ai: null, ficha: null };
+    // the first task of a genre starts with its ficha
+    var g = (D().GENRES || {})[s.compito.genre] || {};
+    if (kind === "scr" && fichaOf(g) && !store().fichas[s.compito.genre]) cur.ficha = 0;
     H.show(kind === "asc" ? "tramo-asc" : "tramo-scr");
   }
   function back() {
@@ -306,7 +424,47 @@
 
   /* ------------------------------------------------------------ tarea */
 
+  /* ------------------------------------------------ la ficha del género */
+
+  function fichaOf(g) { return g && Array.isArray(g.ficha) && g.ficha.length ? g.ficha : null; }
+
+  // One screen of the genre's ficha: what it is for, structure, formulas,
+  // verbs, an annotated model.
+  function fichaHtml(genre, i) {
+    var g = (D().GENRES || {})[genre] || {}, f = fichaOf(g);
+    if (!f) return "";
+    i = Math.max(0, Math.min(f.length - 1, i || 0));
+    var x = f[i], html = '<div class="card ficha"><p class="muted small">📐 Ficha del género · ' + (i + 1) + " de " + f.length + "</p>" +
+      "<h2" + langAttr() + ">" + esc(x.h) + "</h2>" + (x.p ? "<p>" + esc(x.p) + "</p>" : "");
+    if (x.list && x.list.length) html += '<table class="res">' + x.list.map(function (r) {
+      return "<tr><td" + langAttr() + "><b>" + esc(r[0]) + "</b></td><td>" + esc(r[1] || "") + "</td></tr>";
+    }).join("") + "</table>";
+    if (x.model && x.model.length) html += x.model.map(function (r) {
+      return '<p class="model"' + langAttr() + ">" + esc(r[0]) + '</p><p class="muted small">↑ ' + esc(r[1] || "") + "</p>";
+    }).join("");
+    return html + "</div>";
+  }
+
+  function renderFicha() {
+    var c = cur.s.compito, g = (D().GENRES || {})[c.genre] || {}, f = fichaOf(g), i = cur.ficha, last = i >= f.length - 1;
+    return '<button class="btn ghost" id="trback">← ' + (cur.from === "leggi" ? "a " + esc(H.ui().read) : "a la semana") + "</button>" +
+      "<h1>📐 <span" + langAttr() + ">" + esc(g.name || c.genre) + "</span></h1>" +
+      '<p class="lead">Antes de escribir: para qué sirve el género, quién escribe a quién y con qué fórmulas.</p>' +
+      fichaHtml(c.genre, i) +
+      '<div class="row" style="margin-top:12px">' + (i > 0 ? '<button class="tab" id="trfprev">← Anterior</button>' : "") +
+      '<button class="btn" id="trfnext">' + (last ? "🖋️ A escribir" : "Siguiente →") + "</button>" +
+      (last ? "" : '<button class="tab" id="trfskip">Ir a la tarea</button>') + "</div>";
+  }
+  function fichaDone() {
+    var t = store();
+    if (!t.fichas[cur.s.compito.genre]) { t.fichas[cur.s.compito.genre] = Date.now(); H.persist(); }
+    cur.ficha = null;
+    H.render();
+    root.scrollTo(0, 0);
+  }
+
   function renderScr() {
+    if (cur.ficha != null) return renderFicha();
     if (H.lexicon) H.lexicon();   // the checker knows every word of the course (readings included)
     var s = cur.s, c = s.compito, g = (D().GENRES || {})[c.genre] || {}, t = store(), rec = t.scr[cur.week];
     var draft = t.draft[cur.week] != null ? t.draft[cur.week] : (rec && rec.t) || "";
@@ -317,7 +475,8 @@
       '<div class="card"><p' + langAttr() + ">" + esc(c.t) + "</p>" +
       '<p class="muted small">' + esc(c.es) + "</p>" +
       '<div class="row"><button class="tab" id="trsrc" data-src="' + fonte[0] + '">' + fonte[1] + "</button>" +
-      (c.fonte === "entrambi" ? '<button class="tab" id="trsrc2">🎧 Volver a escuchar</button>' : "") + "</div>" +
+      (c.fonte === "entrambi" ? '<button class="tab" id="trsrc2">🎧 Volver a escuchar</button>' : "") +
+      (fichaOf(g) ? '<button class="tab" id="trficha">📐 Ficha del género</button>' : "") + "</div>" +
       (g.hint ? '<p class="muted small">📐 ' + esc(g.hint) + "</p>" : "") + "</div>" +
       '<textarea id="trtext" class="grow scrivi" rows="12" spellcheck="false" autocapitalize="sentences"' + langAttr() + ">" + esc(draft) + "</textarea>" +
       '<p class="muted small" id="trcount">' + countLine(draft) + "</p>" +
@@ -462,6 +621,18 @@
       });
       return;
     }
+    if (cur.ficha != null) {
+      var f = fichaOf((D().GENRES || {})[cur.s.compito.genre]) || [];
+      on("trfprev", function () { cur.ficha = Math.max(0, cur.ficha - 1); H.render(); root.scrollTo(0, 0); });
+      on("trfnext", function () { if (cur.ficha >= f.length - 1) fichaDone(); else { cur.ficha++; H.render(); root.scrollTo(0, 0); } });
+      on("trfskip", fichaDone);
+      return;
+    }
+    on("trficha", function () {
+      var b = document.getElementById("trtext");
+      if (b) { clearTimeout(saveTimer); saveDraft(b.value); }
+      cur.ficha = 0; H.render(); root.scrollTo(0, 0);
+    });
     var box = document.getElementById("trtext"), cnt = document.getElementById("trcount");
     if (box) {
       box.addEventListener("input", function () {
@@ -524,6 +695,7 @@
 
   var api = { attach: attach, missions: missions, handles: handles, owns: owns, go: go, open: open, render: render, wire: wire,
               leggiHtml: leggiHtml, episodes: episodes, lexTexts: lexTexts, evaluate: evaluate, variety: variety, connectors: connectors,
+              fichaHtml: fichaHtml, sourceUse: sourceUse, countList: countList, fichaOf: fichaOf,
               week: week, weeks: weeks, words: words, copied: copied, readAI: readAI, stop: stop, busy: function () { return !!cur; } };
   if (typeof module === "object" && module.exports) module.exports = api;
   root.Tramo = api;

@@ -45,7 +45,7 @@
       ["Os erros de crase nas placas são mais comuns no Nordeste.", "não se diz"]
     ],
     "hunt": {
-      "label": "Tocá todas las formas con acento grave (à, às, àquele, àquela, àquilo), también las mal puestas de los carteles",
+      "label": "Toque em todas as formas com acento grave (à, às, àquele, àquela, àquilo), inclusive as mal colocadas dos cartazes",
       "targets": ["à", "às", "àquele", "àquela", "àquilo"]
     }
   },
@@ -107,13 +107,7 @@
     "es": "Carta formal de reclamo con propuesta: datos del audio (horarios y motivo), cómo te afecta y una alternativa. Ojo con la crase: “das 10h às 17h”, pero “de terça a sábado”.",
     "min": 171,
     "max": 231,
-    "punti": [
-      ["Retomar los horarios anunciados", ["às 17h", "17h", "horário"]],
-      ["Mencionar la justificación dada", ["funcionários", "gastos", "energia"]],
-      ["Explicar cómo afecta a los usuarios", ["noite", "trabalh", "estud"]],
-      ["Proponer una alternativa", ["propon", "sugir", "alternativ"]],
-      ["Saludo y cierre formales", ["prezad", "atenciosamente", "respeitosamente"]]
-    ],
+    "punti": [["Retomar los horarios anunciados", ["17h", "17 h", "às 17", "horário"]], ["Mencionar la justificación dada", ["funcionários", "gastos", "energia"]], ["Explicar cómo afecta a los usuarios", ["noite", "trabalh", "estud"]], ["La consulta pública y su plazo", ["consulta pública", "consulta", "prazo"]], ["Proponer una alternativa", ["propon", "sugir", "alternativ"]]],
     "model": "Belo Horizonte, 12 de setembro de 2026.\n\nÀ Secretaria Municipal de Cultura\nAssunto: redução do horário da Biblioteca Pública Municipal\n\nPrezados senhores,\n\nDirijo-me a esta Secretaria para manifestar, dentro do prazo da consulta pública, minha preocupação com a mudança anunciada pela Biblioteca Pública Municipal. Segundo informações divulgadas pela rádio, a partir do próximo mês a biblioteca funcionará apenas de terça a sábado, das 10h às 17h, e não mais de segunda a sábado, das 8h às 21h.\n\nCompreendo que a decisão se deve à falta de funcionários e à necessidade de reduzir gastos com energia. No entanto, a medida atinge justamente quem mais depende do espaço. Trabalho das 8h às 18h e só consigo estudar à noite; como eu, dezenas de estudantes que se preparam para concursos perderão o único ambiente silencioso a que têm acesso.\n\nDiante disso, proponho uma alternativa: manter a abertura noturna ao menos três vezes por semana, fechando a biblioteca pela manhã, quando o movimento é menor. Outra possibilidade seria firmar parcerias com universidades para a contratação de estagiários.\n\nCerto de que a Secretaria levará em conta a opinião dos usuários, coloco-me à disposição para colaborar.\n\nAtenciosamente,\n\nRafael Nunes Teixeira",
     "gloss": {
       "atinge justamente": "afecta justamente",

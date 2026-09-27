@@ -10,7 +10,7 @@ LESSONS = {
 "parts": [
  {"h": "De verbo a sustantivo", "blocks": [0, 1, 2]},
  {"h": "haver y los verbos del informe", "blocks": [3, 4]},
- {"h": "Sin repetir y sin «yo»", "blocks": [5, 6]},
+ {"h": "Sin repetir y sin «yo»", "blocks": [5, 6, 7]},
 ],
 "blocks": [
  {"h": "-ção y -mento: el verbo hecho sustantivo",
@@ -133,6 +133,13 @@ LESSONS = {
            "y así aparece en informes y tesis. Dentro de la oración, tras "
            "*que* o una negación, el pronombre sube: *nota-se que não se "
            "fez nada*."]},
+
+ {"h": "Sotaque da semana: Maputo",
+  "q": [{"prompt": "En Maputo, ¿qué es o machimbombo?", "answer": "el colectivo", "options": ["el colectivo", "el mercado", "el tambor"]}],
+  "r": "En Mozambique el portugués convive con el changana y otras lenguas bantúes; la gramática sigue la norma europea: *estou a trabalhar*.",
+  "ex": [["Apanhei o *machimbombo* às sete.", "Tomé el colectivo a las siete. (Brasil: ônibus)"], ["*Estou a trabalhar* na baixa.", "Estoy trabajando en el centro."], ["Vamos comer *matapa*?", "¿Comemos matapa? (hojas de mandioca con maní)"]],
+  "tip": "Mia Couto, el escritor mozambiqueño que vas a leer en la 51, juega con este portugués."},
+
 ]},
 
 41: {
@@ -435,7 +442,7 @@ LESSONS = {
 "parts": [
  {"h": "Sufijos que hacen sustantivos", "blocks": [0, 1]},
  {"h": "Oficios, árboles, golpes y prefijos", "blocks": [2, 3, 4]},
- {"h": "Diminutivos y aumentativos", "blocks": [5, 6]},
+ {"h": "Diminutivos y aumentativos", "blocks": [5, 6, 7]},
 ],
 "blocks": [
  {"h": "-dade, -eza, -ice, -ura",
@@ -568,6 +575,13 @@ LESSONS = {
   "warn": "Algunos *-ão* ya son palabras propias: *portão* (portón), "
           "*cartão* (tarjeta), *calção* (short). No son «puerta grande» ni "
           "«carta grande»."},
+
+ {"h": "Sotaque da semana: Curitiba",
+  "q": [{"prompt": "En Curitiba, ¿qué es um piá?", "answer": "un chico", "options": ["un chico", "un pie", "un pájaro"]}],
+  "r": "En Curitiba la *e* final se pronuncia *e* (*leite quente*, no «leiti quenti») y hay palabras propias: *piá* (chico), *vina* (salchicha).",
+  "ex": [["O *piá* foi pra escola.", "El chico fue a la escuela."], ["Um cachorro-quente com duas *vinas*, por favor.", "Un pancho con dos salchichas, por favor."], ["*Leite quente* dá dor de dente.", "La leche caliente da dolor de muelas (el dicho con que se burlan del acento)."]],
+  "tip": "Con el diminutivo y los sufijos de esta semana: *piazinho*, *vininha*. La voz de la app es la estándar: el acento no se oye, las palabras sí."},
+
 ]},
 
 45: {

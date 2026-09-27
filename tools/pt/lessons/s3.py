@@ -134,6 +134,7 @@ LESSONS = {
  {"h": "La forma en -sse", "blocks": [0, 1, 2]},
  {"h": "Se eu pudesse, viajaria", "blocks": [3, 4]},
  {"h": "Queria que, como se, y la trampa del -ra", "blocks": [5, 6]},
+ {"h": "Opinar por escrito", "blocks": [7, 8]},
 ],
 "blocks": [
  {"h": "La forma: -sse",
@@ -231,6 +232,20 @@ LESSONS = {
   "more": ["*tivera, fizera, fora* existen, pero son el pluscuamperfecto "
            "literario (semana 41): *ele fizera* = había hecho. Por eso el "
            "«si tuviera» del español se dice siempre *se tivesse*."]},
+
+ {"h": "Opinar con matices: acho que, talvez, é possível que",
+  "q": [{"prompt": "Completá.", "stem": "É possível que a gente ___ mais feliz com menos opções.", "answer": "seja", "options": ["seja", "é", "será"]}],
+  "r": "Para opinar sin afirmarlo todo: *acho que* y *acredito que* + indicativo; *talvez*, *é possível que*, *pode ser que* + **subjuntivo**.",
+  "ex": [["*Acredito que* menos opções *ajudam* a escolher.", "Creo que menos opciones ayudan a elegir."], ["*Talvez* os jovens *precisem* de mais tempo.", "Tal vez los jóvenes necesiten más tiempo."], ["*É possível que* o excesso *cause* ansiedade.", "Es posible que el exceso cause ansiedad."], ["*Na minha opinião*, a escola *deveria* ajudar.", "En mi opinión, la escuela debería ayudar."], ["*Não acho que* a solução *seja* proibir.", "No creo que la solución sea prohibir."]],
+  "warn": "*acho que* va con indicativo (*acho que é*); negado, con subjuntivo: *não acho que seja*. Igual que en español.",
+  "tip": "En un texto de opinión no repitas *eu acho*: alterná *a meu ver*, *acredito que*, *defendo que*. Profundización en la semana 47."},
+
+ {"h": "Sotaque da semana: Pará",
+  "q": [{"prompt": "En Belém, ¿con qué se toma el açaí?", "answer": "con pescado frito o farinha", "options": ["con pescado frito o farinha", "con granola y banana", "con leche condensada"]}],
+  "r": "En Belém se usa *tu* con su verbo (*tu vais*, *tu queres*), la *s* final chia como en Río y la exclamación es *égua!*.",
+  "ex": [["*Égua*, que calor!", "¡Uh, qué calor!"], ["*Tu vais* ao Círio?", "¿Vas al Círio? (la procesión de octubre en Belém)"], ["Me vê um *açaí* com peixe frito.", "Dame un açaí con pescado frito."]],
+  "tip": "En Belém el açaí se toma salado, con pescado o farinha, no como postre. La voz de la app es la estándar: el acento no se oye, las palabras sí."},
+
 ]},
 
 29: {
@@ -241,6 +256,7 @@ LESSONS = {
  {"h": "La forma y su trampa", "blocks": [0, 1]},
  {"h": "Sujeto propio y preposiciones", "blocks": [2, 3]},
  {"h": "Cuándo no flexionar; el habla", "blocks": [4, 5]},
+ {"h": "La carta formal: abrir y cerrar", "blocks": [6]},
 ],
 "blocks": [
  {"h": "Infinitivo + persona",
@@ -334,6 +350,14 @@ LESSONS = {
          ["Liguei *para que vocês soubessem*.", "Lo mismo, más formal."]],
   "tip": "*a gente* concuerda en singular: *a gente vai*, *pra a gente ir* "
          "(en el habla, *pra gente ir*). «Pra a gente irmos» es error."},
+
+ {"h": "Abrir y cerrar una carta formal",
+  "q": [{"prompt": "¿Cómo se cierra una carta a la gerente de Recursos Humanos?", "answer": "Atenciosamente,", "options": ["Atenciosamente,", "Beijos,", "Um abraço,"]}],
+  "r": "La carta formal abre con *Prezado(a)* + cargo o nombre y coma, dice enseguida para qué escribís y cierra con *Atenciosamente* + nombre completo.",
+  "ex": [["*Prezada Sra. Beatriz Andrade*,", "Estimada Sra. Beatriz Andrade:"], ["*Escrevo para* solicitar uma cópia do termo de compromisso.", "Le escribo para solicitar una copia del convenio."], ["*Gostaria de* sugerir uma reunião.", "Quisiera sugerir una reunión."], ["*Desde já, agradeço* a atenção.", "Desde ya, le agradezco la atención."], ["*Atenciosamente*, Lucas Ferreira", "Atentamente, Lucas Ferreira"]],
+  "warn": "En una carta formal, nada de *você*: *o senhor*, *a senhora*, con el verbo en 3.ª persona. Mezclar los dos es el error más común.",
+  "tip": "La correspondencia formal completa (V. Sa., fórmulas del cuerpo), en la semana 43."},
+
 ]},
 
 30: {
@@ -343,6 +367,7 @@ LESSONS = {
 "parts": [
  {"h": "Los compuestos y el pasado que no fue", "blocks": [0, 1, 2]},
  {"h": "Tenha feito, tiver feito y el habla", "blocks": [3, 4, 5]},
+ {"h": "Contar un relato", "blocks": [6]},
 ],
 "blocks": [
  {"h": "Un auxiliar para todo: ter",
@@ -416,6 +441,14 @@ LESSONS = {
   "more": ["En el habla también se oye *se eu soubesse* con valor de "
            "pasado («si hubiera sabido»). En un texto o un examen usá la "
            "correlación completa: *se tivesse sabido, teria ido*."]},
+
+ {"h": "Contar un relato: los tres pasados",
+  "q": [{"prompt": "Completá el relato.", "stem": "Eu ___ em Córdoba quando conheci a Bia.", "answer": "morava", "options": ["morava", "morei", "tenho morado"]}],
+  "r": "En un relato, el *perfeito* hace avanzar los hechos, el *imperfeito* pinta el fondo y *tinha* + participio cuenta lo que había pasado antes.",
+  "ex": [["*Foi em* 2019, quando eu *morava* em Córdoba.", "Fue en 2019, cuando vivía en Córdoba."], ["Um dia, a vizinha me *disse* que eu *tinha esquecido* a chave.", "Un día, la vecina me dijo que me había olvidado la llave."], ["*De repente*, a luz *acabou*.", "De pronto, se cortó la luz."], ["*Foi então que* eu *entendi* tudo.", "Fue entonces cuando entendí todo."], ["*Hoje percebo que* aquele dia mudou a minha vida.", "Hoy me doy cuenta de que ese día me cambió la vida."]],
+  "warn": "«He llegado ayer» no se dice en portugués: *cheguei ontem*. *Tenho chegado* es «vengo llegando».",
+  "tip": "Un buen relato cierra con una reflexión en presente: *hoje sei que…*, *essa experiência me ensinou que…*."},
+
 ]},
 
 31: {
@@ -425,6 +458,7 @@ LESSONS = {
  {"h": "Ele disse que…: los tiempos retroceden", "blocks": [0, 1]},
  {"h": "Pedidos, pronombres y adverbios", "blocks": [2, 3]},
  {"h": "Preguntas y verbos de decir", "blocks": [4, 5]},
+ {"h": "Atribuir y resumir", "blocks": [6]},
 ],
 "blocks": [
  {"h": "Ele disse que ia",
@@ -517,6 +551,14 @@ LESSONS = {
            "para preguntas (*perguntou se eu ia*). «Pedir una pregunta» o "
            "«preguntar un favor» son cruces a evitar. Y *contar* también "
            "es «contar una historia»: *contou que tinha se mudado*."]},
+
+ {"h": "Atribuir: segundo, de acordo com; resumir",
+  "q": [{"prompt": "Completá.", "stem": "___ a reportagem, metade dos municípios não tem jornal.", "answer": "Segundo", "options": ["Segundo", "Según", "Seguindo"]}],
+  "r": "Para atribuir lo que dice una fuente: *segundo*, *de acordo com*, *para* + fuente, y un verbo preciso: *defende*, *aponta*, *ressalta*, *conclui*.",
+  "ex": [["*Segundo* a repórter, a cidade ficou sem notícias.", "Según la periodista, la ciudad se quedó sin noticias."], ["*De acordo com* o estudo, metade dos municípios não tem jornal.", "De acuerdo con el estudio, la mitad de los municipios no tiene diario."], ["O texto *trata dos* desertos de notícias.", "El texto trata sobre los desiertos de noticias."], ["A autora *aponta* que as rádios comunitárias ajudam.", "La autora señala que las radios comunitarias ayudan."], ["*Por fim*, o texto *conclui* que falta jornalismo local.", "Por último, el texto concluye que falta periodismo local."]],
+  "warn": "«según» es *segundo* (nunca «según»). Con pronombre: *segundo ele*, *segundo ela*.",
+  "tip": "En un resumo no opinás: nada de *eu acho*. Presente y tercera persona. Más verbos para citar, en la semana 48."},
+
 ]},
 
 32: {
@@ -525,7 +567,7 @@ LESSONS = {
          "cómo lo dice la gente.",
 "parts": [
  {"h": "La pasiva con se", "blocks": [0, 1, 2]},
- {"h": "Sujeto indeterminado y el habla", "blocks": [3, 4, 5]},
+ {"h": "Sujeto indeterminado y el habla", "blocks": [3, 4, 5, 6]},
 ],
 "blocks": [
  {"h": "Vende-se, vendem-se",
@@ -607,6 +649,13 @@ LESSONS = {
   "more": ["En los carteles de comercio vas a ver también *vende casas* o "
            "*aluga salas*, sin *se*. Es muy común, pero la norma pide *se*: "
            "*vendem-se casas*. En tus textos, con *se* y concordancia."]},
+
+ {"h": "Sotaque da semana: Lisboa",
+  "q": [{"prompt": "¿Cómo se dice «estou lendo» en Portugal?", "answer": "estou a ler", "options": ["estou a ler", "estou ler", "estou de ler"]}],
+  "r": "En Portugal las vocales átonas casi desaparecen (*telefone* ≈ «tlfón»), se usa *tu* con su verbo y *estar a* + infinitivo en lugar del gerundio.",
+  "ex": [["*Estou a ler* o jornal.", "Estoy leyendo el diario. (Brasil: estou lendo)"], ["*Tu queres* um café?", "¿Querés un café?"], ["Apanhei o *autocarro* para o centro.", "Tomé el colectivo al centro. (Brasil: peguei o ônibus)"]],
+  "tip": "La lengua es la misma; cambian los sonidos y algunas palabras. El cierre, con Portugal y África, en la semana 46."},
+
 ]},
 
 33: {
@@ -617,6 +666,7 @@ LESSONS = {
  {"h": "Próclise y ênclise", "blocks": [0, 1, 2]},
  {"h": "Formas enclíticas y mesóclise", "blocks": [3, 4]},
  {"h": "Tiempos compuestos y habla", "blocks": [5, 6]},
+ {"h": "La resenha", "blocks": [7]},
 ],
 "blocks": [
  {"h": "Tres posiciones",
@@ -723,6 +773,14 @@ LESSONS = {
                      ["Nunca me disse.", "Nunca me disse.", "Nunca me dijo (nunca atrae)."]]},
   "tip": "Si dudás al escribir: pronombre detrás del verbo, salvo que haya "
          "*não*, *que* o un adverbio delante."},
+
+ {"h": "Reseñar: presentar, evaluar, recomendar",
+  "q": [{"prompt": "¿Cuál es la fórmula correcta para recomendar?", "answer": "Vale a pena ler.", "options": ["Vale a pena ler.", "Vale o pena ler.", "Vale la pena ler."]}],
+  "r": "La *resenha* presenta la obra (quién, cuándo, de qué trata), la evalúa con ejemplos y recomienda, sin contar el final.",
+  "ex": [["*Publicado em* 2024, o conto *narra* a volta de uma filha à casa do pai.", "Publicado en 2024, el cuento narra la vuelta de una hija a la casa del padre."], ["*O ponto alto é* a linguagem.", "Lo mejor es el lenguaje."], ["*Por outro lado*, o final *peca por* explicar demais.", "Por otro lado, el final peca de explicar demasiado."], ["O livro *deixa a desejar* no ritmo.", "El libro deja que desear en el ritmo."], ["*Recomendo para quem* gosta de histórias de família.", "Lo recomiendo a quien le gusten las historias de familia."]],
+  "warn": "«Peca de» → *peca por*. «Vale la pena» → *vale a pena*, con el artículo portugués.",
+  "tip": "Evitá *muito bom*: un adjetivo preciso (*envolvente*, *previsível*, *comovente*) con un ejemplo de la obra."},
+
 ]},
 
 34: {
@@ -733,6 +791,7 @@ LESSONS = {
  {"h": "Oponer: mas, porém, contudo", "blocks": [0, 1]},
  {"h": "Concluir y explicar", "blocks": [2, 3]},
  {"h": "aliás, inclusive, ou seja; concesión", "blocks": [4, 5]},
+ {"h": "Argumentar: ordenar y conceder", "blocks": [6]},
 ],
 "blocks": [
  {"h": "Adversativos",
@@ -828,6 +887,14 @@ LESSONS = {
   "warn": "*apesar de* + artículo se contrae: *apesar da crise*, *apesar "
           "do calor*. Sin contraer solo si sigue infinitivo con sujeto: "
           "*apesar de a crise continuar*."},
+
+ {"h": "Argumentar: ordenar y conceder",
+  "q": [{"prompt": "Elegí el conector para sumar un argumento.", "stem": "As enchentes custam caro. ___, afetam sobretudo os mais pobres.", "answer": "Além disso", "options": ["Além disso", "Demais", "No entanto"]}],
+  "r": "Un texto de opinión ordena (*em primeiro lugar*, *além disso*, *por outro lado*), concede antes de rebatir (*é verdade que… no entanto*) y cierra (*portanto*).",
+  "ex": [["*Em primeiro lugar*, a cidade precisa de mais árvores.", "En primer lugar, la ciudad necesita más árboles."], ["*Além disso*, as calçadas permeáveis absorvem a chuva.", "Además, las veredas permeables absorben la lluvia."], ["*É verdade que* as obras são caras; *no entanto*, as enchentes custam mais.", "Es cierto que las obras son caras; sin embargo, las inundaciones cuestan más."], ["*Há quem diga que* proibir o plástico não resolve.", "Hay quien dice que prohibir el plástico no resuelve nada."], ["*Portanto*, é preciso agir agora.", "Por lo tanto, hay que actuar ya."]],
+  "warn": "«además» es *além disso*; *demais* es «demasiado».",
+  "tip": "Esquema de un artículo: tesis, dos argumentos, una objeción respondida, conclusión. Profundización en la semana 47."},
+
 ]},
 
 35: {
@@ -934,7 +1001,7 @@ LESSONS = {
 "parts": [
  {"h": "Qué es la crase y el truco del masculino", "blocks": [0, 1, 2]},
  {"h": "Cuándo nunca, y los lugares", "blocks": [3, 4]},
- {"h": "àquele y las locuciones", "blocks": [5, 6]},
+ {"h": "àquele y las locuciones", "blocks": [5, 6, 7]},
 ],
 "blocks": [
  {"h": "a + a = à",
@@ -1035,6 +1102,13 @@ LESSONS = {
            "también lo es: *vou à minha casa* o *vou a minha casa*. Y "
            "*casa* sin determinar (la propia) no lleva: *voltei a casa*; "
            "pero *voltei à casa da Ana*."]},
+
+ {"h": "Sotaque da semana: Luanda",
+  "q": [{"prompt": "En Luanda, «Gosto bué desta música» quiere decir…", "answer": "Me gusta mucho esta música.", "options": ["Me gusta mucho esta música.", "Me gusta poco esta música.", "Me gustaba esta música."]}],
+  "r": "En Angola el portugués es lengua de todos los días, con palabras del kimbundu: *bué* (mucho), *kota* (persona mayor), *kamba* (amigo).",
+  "ex": [["Gosto *bué* desta música!", "¡Me encanta esta música!"], ["O *kota* está à espera.", "El señor mayor está esperando."], ["Ele é meu *kamba*.", "Es mi amigo."]],
+  "tip": "La grafía y la gramática siguen la norma europea (*estar à espera*, *desta*). La voz de la app es la estándar: el acento no se oye, las palabras sí."},
+
 ]},
 
 37: {

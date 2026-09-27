@@ -113,7 +113,7 @@
       ]
     ],
     "hunt": {
-      "label": "Tocá los verbos en futuro del subjuntivo (se voltarem, quando chegarem…) y en infinitivo personal (para os proprietários tirarem…)",
+      "label": "Toque nos verbos no futuro do subjuntivo (se voltarem, quando chegarem…) e no infinitivo pessoal (para os proprietários tirarem…)",
       "targets": [
         "voltarem",
         "morarem",
@@ -290,7 +290,7 @@
     "genre": "artigo",
     "title": "Um centro para quem?",
     "fonte": "entrambi",
-    "t": "Você mora no centro de uma capital brasileira e colabora com o jornal da associação de moradores do bairro. Após ler a reportagem “O centro vai voltar a ter moradores?” e ouvir a palestra do urbanista Henrique Tavares, escreva um artigo para o jornal do bairro discutindo se a reforma de prédios vazios (o retrofit) pode trazer vida nova ao centro sem expulsar quem já vive lá. No seu artigo, apresente o problema, use informações e argumentos dos dois textos (citando pelo menos uma pessoa de cada um), discuta os riscos e apresente propostas concretas. Não se esqueça de dar um título ao artigo e de usar um registro formal. Seu texto deve ter entre 250 e 310 palavras.",
+    "t": "Você mora no centro de uma capital brasileira e colabora com o jornal da associação de moradores do bairro. Após ler a reportagem “O centro vai voltar a ter moradores?” e ouvir a palestra do urbanista Henrique Tavares, escreva um artigo para o jornal do bairro discutindo se a reforma de prédios vazios (o retrofit) pode trazer vida nova ao centro sem expulsar quem já vive lá. No seu artigo, apresente o problema, use informações e argumentos dos dois textos (citando pelo menos uma pessoa de cada um), discuta os riscos e apresente propostas concretas. Não se esqueça de dar um título ao artigo.",
     "es": "Artículo de opinión-informativo para el diario del barrio que integre la lectura y la charla: problema, argumentos con fuentes de ambos, riesgos (expulsión) y propuestas. Título y registro formal; es la tarea tipo examen.",
     "min": 250,
     "max": 310,

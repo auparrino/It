@@ -45,7 +45,7 @@
       ["Renata admite que a família pode repensar a decisão no futuro.", "verdadeiro"]
     ],
     "hunt": {
-      "label": "Tocá los verbos en futuro do subjuntivo",
+      "label": "Toque nos verbos no futuro do subjuntivo",
       "targets": ["perguntar", "sair", "quiser", "estiver", "adaptarem", "continuar", "puder", "estiverem", "forem"]
     }
   },
@@ -101,13 +101,7 @@
     "es": "Un mail informal a una amiga: contale lo que leíste (Renata y los consejos del psicólogo) y aconsejala. Usá el futuro do subjuntivo (quando você for, se quiser) y cerrá con un saludo cariñoso.",
     "min": 120,
     "max": 180,
-    "punti": [
-      ["Saludo y motivo del mail (la mudanza de Camila)", ["oi", "querida", "olá"]],
-      ["Contar la experiencia de Renata", ["renata"]],
-      ["Un problema práctico (internet, hospital, escuela)", ["internet", "hospital", "escola", "médico"]],
-      ["El consejo de alquilar primero / hacer una prueba", ["alug", "teste", "experiment"]],
-      ["Cierre afectuoso", ["beijo", "abraço", "saudade"]]
-    ],
+    "punti": [["El motivo: la mudanza de Camila a la sierra", ["serra", "cidadezinha", "cidade pequena", "interior"]], ["La experiencia de Renata", ["renata", "designer"]], ["Un problema práctico (internet, hospital, escuela)", ["internet", "hospital", "escola", "médico"]], ["Un desafío de la vida social (la fiesta de la iglesia, las reuniones)", ["festa da igreja", "reuniões", "reunião", "vida social", "vizinh"]], ["El consejo del psicólogo: alquilar antes de vender", ["alug", "tenório", "psicólogo"]]],
     "model": "Oi, Camila, tudo bem?\n\nFiquei pensando na nossa conversa sobre a mudança para a serra e ontem li uma reportagem que tem tudo a ver com você. Conta a história da Renata, uma designer que saiu de São Paulo com os filhos e foi morar numa cidadezinha de Minas. Ela diz que valeu a pena, mas que não foi o paraíso que imaginava.\n\nOs problemas práticos aparecem logo: a internet cai quando chove e o hospital pode ficar longe. E a vida social exige paciência, porque ninguém vai bater na sua porta. Se você quiser fazer amigos, vai ter que ir à festa da igreja e às reuniões da escola.\n\nO psicólogo da reportagem dá um conselho ótimo: alugue uma casa por alguns meses antes de vender o apartamento. Se as crianças se adaptarem e o seu trabalho continuar funcionando, aí vocês decidem com calma.\n\nQuando você for visitar as cidades, me chama que eu vou junto!\n\nUm beijo grande,\nMarina",
     "gloss": {
       "tem tudo a ver com você": "tiene todo que ver con vos, te viene justo",

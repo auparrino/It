@@ -103,7 +103,7 @@
       ]
     ],
     "hunt": {
-      "label": "Tocá los verbos en imperfeito do subjuntivo",
+      "label": "Toque nos verbos no imperfeito do subjuntivo",
       "targets": [
         "fosse",
         "entrasse",
@@ -282,19 +282,22 @@
       [
         "Presentar la tesis del columnista",
         [
-          "colunista",
-          "coluna",
-          "autor"
+          "excesso de opções",
+          "menos opções",
+          "escolher menos",
+          "excesso de alternativas",
+          "quantidade",
+          "tese"
         ]
       ],
       [
-        "Tomar posición",
+        "Un ejemplo de la columna (el yogur, el abuelo, Caio)",
         [
-          "concordo",
-          "discordo",
-          "na minha opinião",
-          "acredito",
-          "creio"
+          "iogurte",
+          "prateleira",
+          "avô",
+          "caio",
+          "supermercado"
         ]
       ],
       [
@@ -305,16 +308,6 @@
           "profissão",
           "curso",
           "adolesc"
-        ]
-      ],
-      [
-        "Conclusión",
-        [
-          "portanto",
-          "por isso",
-          "enfim",
-          "em suma",
-          "assim"
         ]
       ]
     ],

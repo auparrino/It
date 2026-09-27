@@ -109,7 +109,7 @@
       ]
     ],
     "hunt": {
-      "label": "Tocá las palabras propias del portugués europeo o africano (las que en Brasil se dicen de otra manera)",
+      "label": "Toque nas palavras próprias do português europeu ou africano (as que no Brasil se dizem de outro jeito)",
       "targets": [
         "telemóvel",
         "autocarro",
@@ -306,7 +306,7 @@
     "genre": "resenha",
     "title": "Resenha: Sotaques do Mundo com Nádia",
     "fonte": "ascolto",
-    "t": "Você colabora com o blog de uma escola de português para hispanofalantes em Buenos Aires, que publica resenhas de podcasts e programas de rádio úteis para os alunos. Após ouvir a entrevista do programa Sotaques do Mundo com a estudante angolana Nádia, escreva uma resenha do episódio para os leitores do blog. Na sua resenha, apresente o programa e a entrevistada, resuma os principais temas tratados, avalie o episódio (pontos fortes e fracos) e diga se o recomenda e para quem. Não se esqueça de dar um título à resenha e de usar informações e exemplos da entrevista. Registro semiformal. Seu texto deve ter entre 222 e 282 palavras.",
+    "t": "Você colabora com o blog de uma escola de português para hispanofalantes em Buenos Aires, que publica resenhas de podcasts e programas de rádio úteis para os alunos. Após ouvir a entrevista do programa Sotaques do Mundo com a estudante angolana Nádia, escreva uma resenha do episódio para os leitores do blog. Na sua resenha, apresente o programa e a entrevistada, resuma os principais temas tratados, avalie o episódio (pontos fortes e fracos) e diga se o recomenda e para quem. Não se esqueça de dar um título à resenha e de usar informações e exemplos da entrevista.",
     "es": "Reseña de un episodio de radio para el blog de una escuela: presentá, resumí con ejemplos concretos del audio, evaluá (algo bueno y algo flojo) y recomendá. Ponele título.",
     "min": 222,
     "max": 282,
@@ -316,7 +316,7 @@
         [
           "nádia",
           "angolan",
-          "entrevista",
+          "sotaques do mundo",
           "episódio"
         ]
       ],
@@ -334,9 +334,9 @@
         [
           "ponto alto",
           "ponto fraco",
-          "porém",
           "infelizmente",
-          "destaque"
+          "destaque",
+          "deixa a desejar"
         ]
       ],
       [

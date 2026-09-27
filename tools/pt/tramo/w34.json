@@ -104,7 +104,7 @@
       ]
     ],
     "hunt": {
-      "label": "Tocá los conectores (adversativos, explicativos, conclusivos…)",
+      "label": "Toque nos conectores (adversativos, explicativos, conclusivos…)",
       "targets": [
         "entanto",
         "aliás",
@@ -295,21 +295,13 @@
         ]
       ],
       [
-        "Conectores adversativos",
+        "Qué podría hacer la ciudad",
         [
-          "no entanto",
-          "contudo",
-          "porém",
-          "todavia"
-        ]
-      ],
-      [
-        "Conclusión",
-        [
-          "portanto",
-          "em suma",
-          "por conseguinte",
-          "dessa forma"
+          "prefeitura",
+          "planej",
+          "município",
+          "poder público",
+          "prazos de adaptação"
         ]
       ]
     ],

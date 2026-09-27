@@ -118,7 +118,7 @@
       ]
     ],
     "hunt": {
-      "label": "Tocá las palabras formadas con sufijos o prefijos (diminutivos, aumentativos, des-, re-, super-, -mento…)",
+      "label": "Toque nas palavras formadas com sufixos ou prefixos (diminutivos, aumentativos, des-, re-, super-, -mento…)",
       "targets": [
         "cafezinho",
         "rapidinho",
@@ -333,11 +333,12 @@
         ]
       ],
       [
-        "Dar un consejo y cerrar con tono informal",
+        "Un consejo concreto",
         [
           "conselho",
-          "beijo",
-          "abraço"
+          "se eu fosse você",
+          "minha dica",
+          "sugiro"
         ]
       ]
     ],
