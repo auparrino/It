@@ -336,8 +336,18 @@ def item_features(item):
     return feats
 
 
+# Manual floors: exercises whose grammar the detector does not see (a
+# condizionale passato inside «si sarebbe seccato», a combined pronoun in
+# «ve l'abbiamo portata»).  {id: (week, «what it needs»)}; the week is the
+# one whose lesson teaches it.  The didactic review fills this list.
+MIN_WEEK = {}
+
+
 def min_week(item):
     feats = item_features(item)
+    if item.get("id") in MIN_WEEK:
+        wk, why = MIN_WEEK[item["id"]]
+        feats[why] = max(wk, feats.get(why, 0))
     return (max(feats.values()) if feats else 1), feats
 
 
