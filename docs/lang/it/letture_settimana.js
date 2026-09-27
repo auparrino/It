@@ -265,9 +265,9 @@
                volte: "veces (a volte = a veces)", attentamente: "con atención", piuttosto: "bastante", faticoso: "cansador", manoscritti: "manuscritos",
                sognava: "soñaba", imparo: "aprendo" },
       questions: [
-        ["¿Hace cuánto trabaja Chiara en la editorial?", ["apenas un mes", "un año", "una semana", "tres meses"], "apenas un mes"],
-        ["¿Qué hacía al principio?", ["escuchaba con atención y tomaba apuntes", "hablaba mucho", "llegaba tarde", "discutía con el jefe en todas las reuniones"], "escuchaba con atención y tomaba apuntes"],
-        ["¿Cómo se siente ahora?", ["contenta: hace el trabajo que soñaba", "aburrida: el trabajo no es lo que soñaba", "quiere renunciar", "enojada con el jefe"], "contenta: hace el trabajo que soñaba"]
+        ["Da quanto tempo Chiara lavora nella casa editrice?", ["da appena un mese", "da un anno", "da una settimana", "da tre mesi"], "da appena un mese"],
+        ["Che cosa faceva Chiara all'inizio?", ["ascoltava e prendeva appunti", "parlava molto con tutti i colleghi", "arrivava tardi quasi ogni mattina", "discuteva di ogni cosa con il capo"], "ascoltava e prendeva appunti"],
+        ["Che cosa si capisce dell'atteggiamento di Chiara verso il lavoro?", ["è stanca, ma motivata e contenta", "vuole cambiare lavoro al più presto", "non le interessa imparare cose nuove", "pensa che il lavoro sia troppo facile"], "è stanca, ma motivata e contenta"]
       ],
       vf: [["Chiara lavora in una casa editrice.", "vero"], ["All'inizio Chiara parlava molto.", "falso"], ["Chiara guadagna bene.", "non si dice"]],
       hunt: { label: "Tocá los adverbios en -mente", targets: ["puntualmente", "attentamente", "tranquillamente", "velocemente", "completamente", "finalmente"] } },
@@ -286,9 +286,9 @@
       gloss: { paesi: "pueblos", lasciano: "dejan", ricca: "rica", affitti: "alquileres", rumore: "ruido",
                stancano: "cansan", lenta: "lenta", servizi: "servicios", bisogna: "hay que", scelta: "elección" },
       questions: [
-        ["¿Por qué muchos jóvenes van a la ciudad?", ["hay más universidades y trabajo", "es más barata", "es más tranquila y más barata", "no hay tráfico"], "hay más universidades y trabajo"],
-        ["¿Qué problema tiene el campo?", ["pocos servicios y hace falta el auto", "el ruido", "los alquileres altos y el ruido del tráfico", "el tráfico"], "pocos servicios y hace falta el auto"],
-        ["¿Qué cambió con el trabajo desde casa?", ["algunos jóvenes vuelven a los pueblos", "nadie vuelve", "las ciudades se vaciaron", "subieron mucho los alquileres del campo"], "algunos jóvenes vuelven a los pueblos"]
+        ["Perché molti giovani vanno in città?", ["per l'università e il lavoro", "perché le case costano meno", "perché la vita è più tranquilla", "perché c'è meno traffico"], "per l'università e il lavoro"],
+        ["Qual è il problema principale della campagna?", ["i servizi sono pochi", "gli affitti sono alti", "c'è troppo rumore", "il traffico stanca"], "i servizi sono pochi"],
+        ["Qual è la conclusione dell'autore?", ["ogni scelta ha vantaggi e svantaggi", "la città è sempre la scelta migliore", "in campagna non si può più vivere", "il lavoro da casa ha risolto tutto"], "ogni scelta ha vantaggi e svantaggi"]
       ],
       vf: [["In città gli affitti sono alti.", "vero"], ["In campagna ci sono molti servizi.", "falso"], ["Il lavoro da casa ha aiutato alcuni giovani a tornare nei paesi.", "vero"]],
       hunt: { label: "Tocá los conectores (infatti, inoltre, tuttavia…)", targets: ["infatti", "inoltre", "tuttavia", "quindi", "invece", "però", "insomma", "comunque"] } },
@@ -307,9 +307,9 @@
                prometto: "prometo", sposerò: "me casaré con", entro: "dentro de", pianto: "llorado",
                immaginava: "imaginaba" },
       questions: [
-        ["¿Dónde encontró Laura la carta?", ["en el altillo", "en un libro", "en el correo", "en la cocina"], "en el altillo"],
-        ["¿Qué temía el abuelo?", ["que el padre de ella le prohibiera escribirle", "perder el trabajo", "que la carta se perdiera en el correo y no llegara", "mudarse"], "que el padre de ella le prohibiera escribirle"],
-        ["¿Qué no se imaginaba Laura?", ["que hubiera sido tan difícil", "que se hubieran casado", "que el abuelo escribiera cartas", "que existiera la carta"], "que hubiera sido tan difícil"]
+        ["Dove ha trovato la lettera Laura?", ["in soffitta", "in un libro", "nella posta", "in cucina"], "in soffitta"],
+        ["Che cosa temeva il nonno?", ["che il padre di lei lo proibisse", "di non trovare un lavoro", "che la lettera andasse persa", "che Maria avesse un altro uomo"], "che il padre di lei lo proibisse"],
+        ["Perché Laura piange leggendo la lettera?", ["capisce quanto hanno lottato i nonni", "la lettera racconta una separazione", "la nonna non ha mai risposto al nonno", "il nonno non ha mantenuto la promessa"], "capisce quanto hanno lottato i nonni"]
       ],
       vf: [["Il nonno ha scritto la lettera nel 1962.", "vero"], ["I nonni si sono sposati nel 1962.", "falso"], ["La nonna ha risposto subito alla lettera.", "non si dice"]],
       hunt: { label: "Tocá los congiuntivi (rispondessi, avesse, abbia, aspetti, fosse)", targets: ["rispondessi", "avesse", "abbia", "aspetti", "fosse"] } },
@@ -330,9 +330,9 @@
                girate: "dadas vuelta", stagionato: "estacionado", almeno: "por lo menos", esaminata: "examinada",
                batte: "golpea", martelletto: "martillito", apprezzato: "apreciado", pare: "parece", perfino: "hasta, incluso", citato: "citado" },
       questions: [
-        ["¿Cuándo se ordeña la leche?", ["a la tarde y a la mañana", "solo de noche", "una vez por semana, los lunes", "al mediodía"], "a la tarde y a la mañana"],
-        ["¿Cuánto tiempo se estaciona como mínimo?", ["doce meses", "veinte días", "dos años", "seis meses"], "doce meses"],
-        ["¿Para qué el experto golpea la horma?", ["para oír si está perfecta", "para cortarla", "para limpiarla", "para darla vuelta sin romperla"], "para oír si está perfecta"]
+        ["Quando viene munto il latte?", ["la sera e la mattina", "solo di notte", "una volta alla settimana", "a mezzogiorno"], "la sera e la mattina"],
+        ["Per quanto tempo deve stagionare almeno il formaggio?", ["dodici mesi", "venti giorni", "due anni", "sei mesi"], "dodici mesi"],
+        ["Perché l'autore cita Boccaccio?", ["per dire che il formaggio è antico", "per consigliare di leggere il Decameron", "perché Boccaccio produceva formaggio", "per spiegare come si stagiona la forma"], "per dire che il formaggio è antico"]
       ],
       vf: [["Il parmigiano si stagiona almeno dodici mesi.", "vero"], ["Il latte si lavora in caldaie di plastica.", "falso"], ["Un chilo di parmigiano costa venti euro.", "non si dice"]],
       hunt: { label: "Tocá los participios de la pasiva (prodotto, munto…)", targets: ["prodotto", "munto", "lavorato", "immersa", "sistemate", "girate", "controllate", "stagionato", "esaminata", "citato"] } },
@@ -354,9 +354,9 @@
                sbagliare: "equivocarse", correggersi: "corregirse", fissarsi: "ponerse", obiettivi: "objetivos",
                festeggiare: "festejar", motivazione: "motivación" },
       questions: [
-        ["¿Qué es más útil según el texto?", ["estudiar veinte minutos por día", "estudiar tres horas seguidas el domingo", "no estudiar", "leer sin entender"], "estudiar veinte minutos por día"],
-        ["¿Por qué repasar antes de dormir?", ["el sueño ayuda a recordar", "hay más tiempo", "a la noche se está más despierto", "es más divertido"], "el sueño ayuda a recordar"],
-        ["¿Qué enseña más?", ["corregirse solo", "recibir la respuesta correcta", "no equivocarse nunca", "estudiar de memoria"], "corregirse solo"]
+        ["Che cosa è più utile, secondo il testo?", ["studiare venti minuti al giorno", "studiare tre ore ogni domenica", "non studiare affatto", "leggere molto senza capire tutto"], "studiare venti minuti al giorno"],
+        ["Perché conviene ripassare prima di dormire?", ["il sonno aiuta a ricordare", "la sera si ha più tempo libero", "di sera si è più svegli", "è più divertente"], "il sonno aiuta a ricordare"],
+        ["Che cosa pensa l'autore degli errori?", ["fanno parte dell'apprendimento", "bisogna evitarli a ogni costo", "sono sempre colpa dell'insegnante", "non hanno nessuna importanza"], "fanno parte dell'apprendimento"]
       ],
       vf: [["Studiare un po' ogni giorno è più utile che studiare molto la domenica.", "vero"], ["Secondo il testo, sbagliare non serve a niente.", "falso"], ["Il testo consiglia di usare un'app.", "non si dice"]],
       hunt: { label: "Tocá los infinitivos usados como sustantivo o después de preposición", targets: ["imparare", "studiare", "passare", "aver", "andare", "dormire", "ripassare", "ricordarle", "avere", "sbagliare", "perdere", "fissarsi", "festeggiare"] } },
@@ -377,9 +377,9 @@
                passerotti: "gorriones", sparito: "desaparecido", angolino: "rinconcito", scatolone: "cajón, caja grande",
                addormentato: "dormido", furbacchione: "pícaro, vivo", caffettino: "cafecito" },
       questions: [
-        ["¿Qué animales tiene el señor Bruno?", ["un gatito negro y un perrito blanco", "dos perros", "un pájaro", "un gato blanco"], "un gatito negro y un perrito blanco"],
-        ["¿Dónde encontraron al gatito?", ["dormido en una caja grande", "en el bar", "en el jardín, debajo de un árbol", "en la calle"], "dormido en una caja grande"],
-        ["¿Cómo festejó Bruno?", ["los invitó a un cafecito", "hizo una fiesta", "compró una torta para los vecinos", "no festejó"], "los invitó a un cafecito"]
+        ["Quali animali ha il signor Bruno?", ["un gattino e un cagnolino", "due cagnolini bianchi e neri", "un uccellino e un pesce rosso", "un gatto bianco molto grasso"], "un gattino e un cagnolino"],
+        ["Dove hanno trovato il gattino?", ["in uno scatolone", "al bar", "in giardino", "in strada"], "in uno scatolone"],
+        ["Perché il signor Bruno chiama il gatto «furbacchione»?", ["si era trovato un posto comodo", "aveva mangiato il cibo del cane", "era scappato dalla finestra", "aveva spaventato tutti i passerotti"], "si era trovato un posto comodo"]
       ],
       vf: [["Il signor Bruno ha un gattino e un cagnolino.", "vero"], ["Il gattino si era perso in strada.", "falso"], ["Il signor Bruno vive al primo piano.", "non si dice"]],
       hunt: { label: "Tocá las palabras con sufijo (-ino, -etto, -one…)", targets: ["palazzone", "vecchietto", "gattino", "cagnolino", "cappellino", "giornalino", "giardinetto", "briciolina", "passerotti", "angolino", "scatolone", "furbacchione", "caffettino"] } },
@@ -400,9 +400,9 @@
                passata: "puré de tomate", sugo: "salsa", cuocere: "cocinarse", fuoco: "fuego",
                decina: "unas diez", avanzi: "sobras", pazzi: "locos (ne vanno pazzi = les encanta)", tagliatelle: "tallarines al huevo" },
       questions: [
-        ["¿Cuánto tiempo se cocina la salsa?", ["por lo menos tres horas", "media hora", "un día", "una hora, a fuego fuerte"], "por lo menos tres horas"],
-        ["¿Para cuántas personas alcanza la receta?", ["unas diez", "seis", "dos", "veinte"], "unas diez"],
-        ["¿Qué hacen con lo que sobra?", ["va al freezer y a los tíos", "lo tiran", "lo venden", "lo comen todos al día siguiente"], "va al freezer y a los tíos"]
+        ["Quanto deve cuocere il sugo?", ["almeno tre ore", "mezz'ora", "un giorno intero", "un'ora a fuoco alto"], "almeno tre ore"],
+        ["Per quante persone basta la ricetta?", ["per una decina", "per sei", "per due", "per venti"], "per una decina"],
+        ["Perché gli avanzi finiscono nel freezer?", ["sono in sei e la ricetta è per dieci", "il ragù non piace ai bambini di casa", "la nonna ne cucina ogni sera di più", "agli zii il ragù non piace per niente"], "sono in sei e la ricetta è per dieci"]
       ],
       vf: [["Il ragù cuoce almeno tre ore.", "vero"], ["La famiglia è di dieci persone.", "falso"], ["La nonna usa carne di maiale.", "non si dice"]],
       hunt: { label: "Tocá las medidas y cantidades (mezzo, etto, decina…)", targets: ["mezzo", "chilo", "etto", "mezza", "litro", "decina", "terzo", "metà"] } },
@@ -422,9 +422,9 @@
                insidiose: "traicioneras", negozio: "negocio", sugo: "salsa (para pasta)", largo: "ancho",
                generosità: "generosidad", ormai: "a esta altura", somiglia: "se parece", pericolose: "peligrosas" },
       questions: [
-        ["¿Qué le dieron cuando pidió «salsa»?", ["ketchup", "salsa de tomate", "aceite", "queso"], "ketchup"],
-        ["¿Por qué se rieron los compañeros?", ["dijo «largo» pensando en «generoso»", "llegó tarde", "habló en español", "se equivocó de oficina"], "dijo «largo» pensando en «generoso»"],
-        ["¿Qué hace ahora Valeria?", ["controla en el diccionario las palabras parecidas al español", "habla solo en inglés", "no usa más palabras nuevas en las reuniones con los clientes", "pregunta al jefe"], "controla en el diccionario las palabras parecidas al español"]
+        ["Che cosa le hanno dato quando ha chiesto una «salsa»?", ["il ketchup", "il sugo", "l'olio", "il formaggio"], "il ketchup"],
+        ["Perché i colleghi hanno riso?", ["ha usato «largo» per «generoso»", "è arrivata tardi alla riunione", "ha parlato spagnolo con il capo", "ha sbagliato il nome del capo"], "ha usato «largo» per «generoso»"],
+        ["Che cosa vuol dire Valeria con l'ultima frase?", ["che le somiglianze possono ingannare", "che l'italiano è una lingua facile", "che il dizionario non serve a niente", "che è meglio parlare poco e ascoltare"], "che le somiglianze possono ingannare"]
       ],
       vf: [["Valeria ha chiesto una salsa e le hanno dato il ketchup.", "vero"], ["I colleghi hanno capito subito cosa voleva dire con largo.", "falso"], ["Valeria studia medicina.", "non si dice"]],
       hunt: { label: "Tocá los falsos amigos del texto", targets: ["imbarazzata", "salsa", "largo"] } },
@@ -752,9 +752,9 @@
                dispiace: "da pena (mi dispiace = lo siento)", rimasti: "quedado", aspettarmi: "esperarme",
                febbre: "fiebre", guarito: "curado", almeno: "al menos" },
       questions: [
-        ["¿Qué cree Sara que pasó?", ["que perdió el tren", "que se olvidó", "que estaba enojado", "que se quedó dormido"], "que perdió el tren"],
-        ["¿Qué le pasó a Luca en realidad?", ["tuvo fiebre", "perdió el tren", "se olvidó", "trabajó"], "tuvo fiebre"],
-        ["¿Qué lamenta Luca al final?", ["que el recital terminara sin él", "haber llamado", "estar enfermo de nuevo en verano", "nada"], "que el recital terminara sin él"]
+        ["Che cosa pensa Sara?", ["che Luca abbia perso il treno", "che Luca se ne sia dimenticato", "che Luca sia arrabbiato", "che Luca si sia addormentato"], "che Luca abbia perso il treno"],
+        ["Perché Luca non è andato al concerto?", ["perché aveva la febbre", "perché ha perso il treno", "perché se n'era dimenticato", "perché doveva lavorare"], "perché aveva la febbre"],
+        ["Che cosa si capisce dalla frase di Paolo «È strano che non ci abbia scritto niente»?", ["che di solito Luca avvisa se non viene", "che Luca arriva sempre tardi ai concerti", "che il concerto era stato annullato ieri", "che Luca non ama Vasco Rossi"], "che di solito Luca avvisa se non viene"]
       ],
       vf: [["Luca non è andato al concerto.", "vero"], ["Luca ha perso il treno.", "falso"], ["Il concerto è finito a mezzanotte.", "non si dice"]],
       hunt: { label: "Tocá los auxiliares del congiuntivo passato (abbia, sia, siate)", targets: ["abbia", "sia", "siate"] } },
@@ -772,9 +772,9 @@
                pianoforte: "piano", finta: "de cuenta (fare finta = hacer de cuenta)", scoperto: "descubierto",
                suonato: "tocado", orchestra: "orquesta", sogno: "sueño", rinunciato: "renunciado", riaperto: "vuelto a abrir" },
       questions: [
-        ["¿Qué quería Marta de chica?", ["ir al mar los domingos", "tocar el piano", "tocar en una orquesta", "estudiar"], "ir al mar los domingos"],
-        ["¿Qué descubrió después?", ["que su madre había tocado en una orquesta", "que su padre era músico", "que el mar estaba lejos", "que en realidad nunca le había gustado el piano"], "que su madre había tocado en una orquesta"],
-        ["¿Qué hizo esa noche?", ["volvió a abrir el piano", "fue al mar", "llamó a su padre por teléfono", "lloró"], "volvió a abrir el piano"]
+        ["Che cosa voleva Marta da piccola?", ["andare al mare la domenica", "studiare il pianoforte", "suonare in un'orchestra", "restare a casa con la madre"], "andare al mare la domenica"],
+        ["Che cosa ha scoperto Marta anni dopo?", ["che la madre aveva suonato da giovane", "che il padre era stato un musicista", "che la madre odiava il pianoforte", "che l'orchestra cercava una pianista"], "che la madre aveva suonato da giovane"],
+        ["Perché, secondo te, quella sera Marta riapre il pianoforte?", ["perché ha capito il sogno della madre", "perché aveva un concerto il giorno dopo", "perché voleva tornare al mare", "perché la madre gliel'aveva ordinato"], "perché ha capito il sogno della madre"]
       ],
       vf: [["Da piccola Marta amava il mare.", "vero"], ["Il padre voleva che Marta suonasse il pianoforte.", "falso"], ["La madre suonava il violino.", "non si dice"]],
       hunt: { label: "Tocá los congiuntivi imperfetti y trapassati", targets: ["portasse", "finisse", "durasse", "studiasse", "piacesse", "avesse"] } },
@@ -792,9 +792,9 @@
                cliente: "cliente", dispiace: "lamento", mezzogiorno: "mediodía", preoccupi: "preocupe",
                preferito: "preferido", mattinata: "mañana" },
       questions: [
-        ["¿Por qué perdió el tren?", ["el taxi llegó tarde", "se quedó dormido", "hubo paro", "se olvidó"], "el taxi llegó tarde"],
-        ["¿Qué habría podido hacer?", ["tomar el subte", "ir en auto", "no viajar", "llamar antes"], "tomar el subte"],
-        ["¿Cómo reacciona el cliente?", ["es amable: él también tuvo una mañana terrible", "se enoja", "cancela la cita y dice que no va a volver a llamar", "no contesta"], "es amable: él también tuvo una mañana terrible"]
+        ["Perché Paolo ha perso il treno?", ["il taxi è arrivato tardi", "si è svegliato tardi", "c'era uno sciopero", "ha sbagliato stazione"], "il taxi è arrivato tardi"],
+        ["Che cosa avrebbe potuto fare Paolo?", ["prendere la metro", "andare in macchina", "partire il giorno dopo", "telefonare prima"], "prendere la metro"],
+        ["Perché alla fine Paolo è tranquillo?", ["il cliente non è arrabbiato", "ha preso il treno successivo", "il cliente ha annullato tutto", "è arrivato in orario"], "il cliente non è arrabbiato"]
       ],
       vf: [["Paolo ha perso il treno delle sette.", "vero"], ["Il cliente si è arrabbiato.", "falso"], ["Paolo lavora a Roma.", "non si dice"]],
       hunt: { label: "Tocá los condizionali passati (avrebbe voluto, sarei dovuto…)", targets: ["avrebbe", "sarei", "avrei"] } },
@@ -812,9 +812,9 @@
                giochi: "juegos (parco giochi = plaza de juegos)", quartiere: "barrio", comandassi: "mandara",
                chiuso: "cerrado", strade: "calles", fuori: "afuera" },
       questions: [
-        ["¿Qué construiría Luca?", ["una plaza de juegos en cada barrio", "una escuela nueva con biblioteca en cada barrio", "un estadio", "casas"], "una plaza de juegos en cada barrio"],
-        ["¿Qué cambiaría Marco?", ["la escuela empezaría a las diez", "cerraría las calles", "daría casas", "nada"], "la escuela empezaría a las diez"],
-        ["¿Qué habrían hecho el año pasado?", ["cerrar las calles a los autos", "construir un parque en el centro", "cambiar de maestra", "abrir más escuelas"], "cerrar las calles a los autos"]
+        ["Che cosa costruirebbe Luca?", ["un parco giochi in ogni quartiere", "una scuola nuova in ogni quartiere", "uno stadio vicino alla scuola", "una casa per ogni famiglia"], "un parco giochi in ogni quartiere"],
+        ["Che cosa cambierebbe Marco?", ["l'orario della scuola", "il traffico della città", "il numero delle case", "i giochi del parco"], "l'orario della scuola"],
+        ["Perché, secondo Giulia, chiudere le strade sarebbe stato utile?", ["oggi i bambini potrebbero giocare fuori", "le macchine andrebbero più piano in centro", "la scuola comincerebbe più tardi la mattina", "il sindaco sarebbe più contento"], "oggi i bambini potrebbero giocare fuori"]
       ],
       vf: [["Luca costruirebbe un parco giochi.", "vero"], ["Marco vorrebbe cominciare la scuola alle otto.", "falso"], ["La maestra è stata sindaca.", "non si dice"]],
       hunt: { label: "Tocá los verbos de la «se» (foste, fossi, avessi, comandassi)", targets: ["foste", "fossi", "avessi", "comandassi"] } },
@@ -833,9 +833,9 @@
                anziano: "mayor, viejo", romanzi: "novelas", scaffali: "estantes", usati: "usados",
                sorpresi: "sorprendidos", odore: "olor", carta: "papel" },
       questions: [
-        ["¿Qué se ve desde el puente?", ["el río", "el mar", "la librería", "la plaza"], "el río"],
-        ["¿Quién es Ettore?", ["el dueño de la librería", "un cliente", "un escritor", "el narrador"], "el dueño de la librería"],
-        ["¿Qué le gusta más al narrador?", ["el olor del papel", "los precios", "los libros nuevos", "el café"], "el olor del papel"]
+        ["Che cosa si vede dal ponte?", ["il fiume", "il mare", "la libreria", "la piazza"], "il fiume"],
+        ["Chi è Ettore?", ["il libraio", "un cliente abituale", "uno scrittore anziano", "il nonno del narratore"], "il libraio"],
+        ["Perché il narratore dice che lì si sente a casa?", ["è un posto familiare e tranquillo", "ci lavora da molti anni ormai", "abita proprio sopra la libreria", "ci trova sempre libri molto economici"], "è un posto familiare e tranquillo"]
       ],
       vf: [["Il proprietario si chiama Ettore.", "vero"], ["La libreria vende solo libri nuovi.", "falso"], ["Ettore ha scritto un romanzo.", "non si dice"]],
       hunt: { label: "Tocá los relativos (che, cui, quali)", targets: ["che", "cui", "quali"] } },
@@ -853,9 +853,9 @@
                banco: "barra", piedi: "pie (in piedi = parado)", velocemente: "rápido", calcio: "fútbol",
                mani: "manos", vuote: "vacías", dolce: "postre" },
       questions: [
-        ["¿Cuándo se toma el capuchino?", ["solo a la mañana", "después del almuerzo", "a la noche", "siempre"], "solo a la mañana"],
-        ["¿Qué se hace primero en el bar?", ["pagar en la caja", "pedir en la barra", "sentarse", "tomar el café"], "pagar en la caja"],
-        ["¿Qué se lleva a una casa?", ["un postre o una botella de vino", "flores", "nada", "pan"], "un postre o una botella de vino"]
+        ["Quando si beve il cappuccino?", ["solo la mattina", "dopo pranzo", "la sera", "a ogni ora"], "solo la mattina"],
+        ["Che cosa si fa prima, al bar?", ["si paga alla cassa", "si ordina al banco", "ci si siede al tavolo", "si beve il caffè"], "si paga alla cassa"],
+        ["Che cosa si capisce del pranzo della domenica?", ["è un momento lungo e importante", "è un pasto veloce e leggero", "si mangia sempre al ristorante", "si fa solo per le feste"], "è un momento lungo e importante"]
       ],
       vf: [["In Italia il cappuccino si beve la mattina.", "vero"], ["Al bar si ordina prima di pagare.", "falso"], ["In Italia si cena alle nove.", "non si dice"]],
       hunt: { label: "Tocá el «si»", targets: ["si"] } },
@@ -874,9 +874,9 @@
                coppa: "copa", oro: "oro", corona: "corona", anello: "anillo", profondo: "profundo",
                tuffò: "zambulló", poggiava: "se apoyaba", colonne: "columnas", rotta: "rota", sostenerla: "sostenerla" },
       questions: [
-        ["¿Por qué lo llamaron Colapesce?", ["nadaba como un pez", "vendía pescado", "era pescador", "tenía escamas"], "nadaba como un pez"],
-        ["¿Qué descubrió en el fondo?", ["que Sicilia se apoya en tres columnas, una rota", "un tesoro", "una ciudad hundida con un palacio de oro y de coral", "al rey"], "que Sicilia se apoya en tres columnas, una rota"],
-        ["¿Qué hizo al final?", ["se quedó bajo el mar sosteniendo la columna", "volvió con el anillo del rey y se casó con la princesa", "se casó", "se fue de Messina"], "se quedó bajo el mar sosteniendo la columna"]
+        ["Perché chiamarono il ragazzo Colapesce?", ["nuotava come un pesce", "vendeva pesce al mercato", "era figlio di un pescatore", "aveva paura del mare"], "nuotava come un pesce"],
+        ["Che cosa scoprì Cola in fondo al mare?", ["che una delle colonne era rotta", "un tesoro pieno di monete d'oro", "una città sommersa e deserta", "l'anello e la corona del re"], "che una delle colonne era rotta"],
+        ["Che cosa vuole spiegare la leggenda?", ["perché la Sicilia non affonda", "perché il re era crudele", "perché a Messina si pesca molto", "come è nato il mare"], "perché la Sicilia non affonda"]
       ],
       vf: [["Cola nuotava come un pesce.", "vero"], ["Cola non riuscì a riportare la coppa.", "falso"], ["Il re aveva tre figlie.", "non si dice"]],
       hunt: { label: "Tocá los verbos en passato remoto", targets: ["visse", "chiamarono", "volle", "gettò", "riportò", "ritrovò", "lanciò", "tuffò", "scoprì", "decise", "vide"] } },
@@ -894,9 +894,9 @@
                capo: "jefe", promesso: "prometido", stipendio: "sueldo", sicura: "segura", mantenuto: "guardado",
                segreto: "secreto" },
       questions: [
-        ["¿Qué le pidió Anna?", ["ayuda con la mudanza", "plata", "un trabajo", "un consejo"], "ayuda con la mudanza"],
-        ["¿Qué día puede ayudar el narrador?", ["el domingo", "el sábado", "el viernes", "nunca"], "el domingo"],
-        ["¿Qué tiene que guardar en secreto?", ["el sueldo más alto", "la mudanza", "la cena", "el nuevo trabajo"], "el sueldo más alto"]
+        ["Che cosa ha chiesto Anna al narratore?", ["un aiuto per il trasloco", "un prestito", "un lavoro a Milano", "un consiglio sul capo"], "un aiuto per il trasloco"],
+        ["Quando può aiutarla il narratore?", ["la domenica", "il sabato", "il venerdì", "mai"], "la domenica"],
+        ["Perché Anna chiede di non dire niente dello stipendio?", ["non è ancora sicura di averlo", "vuole farne una sorpresa al marito", "il capo le ha chiesto il segreto", "teme l'invidia dei vecchi colleghi"], "non è ancora sicura di averlo"]
       ],
       vf: [["Anna ha trovato un lavoro a Milano.", "vero"], ["Il narratore è libero il sabato.", "falso"], ["Anna si trasferisce con il fidanzato.", "non si dice"]],
       hunt: { label: "Tocá los condizionali passati del discurso indirecto", targets: ["sarebbe", "avrebbe", "avrei"] } },
@@ -914,9 +914,9 @@
                conobbe: "conoció", sposarono: "casaron", mancasse: "extrañara", ricordi: "recuerdos",
                coraggioso: "valiente", riuscito: "logrado" },
       questions: [
-        ["¿Cuándo se fue el abuelo?", ["en 1951", "en 1915", "en 1981", "en 1961"], "en 1951"],
-        ["¿Dónde conoció a la abuela?", ["en una fábrica", "en el barco", "en Italia", "en una fiesta"], "en una fábrica"],
-        ["¿Qué respondía sobre Italia?", ["estaba en sus recuerdos, pero su casa era Argentina", "quería volver", "no la extrañaba para nada y no quería ni hablar de ella", "odiaba Italia"], "estaba en sus recuerdos, pero su casa era Argentina"]
+        ["Quando partì il nonno?", ["nel 1951", "nel 1915", "nel 1981", "nel 1961"], "nel 1951"],
+        ["Dove conobbe la nonna?", ["in una fabbrica", "sulla nave", "in Italia", "a una festa"], "in una fabbrica"],
+        ["Che cosa pensa il narratore del nonno?", ["che fosse un uomo coraggioso", "che abbia sbagliato a partire", "che fosse infelice in Argentina", "che volesse tornare in Italia"], "che fosse un uomo coraggioso"]
       ],
       vf: [["Il nonno partì per l'Argentina a vent'anni.", "vero"], ["Il nonno parlava bene lo spagnolo.", "falso"], ["Il nonno tornò in Italia da vecchio.", "non si dice"]],
       hunt: { label: "Tocá los verbos en passato remoto", targets: ["partì", "trovò", "conobbe", "sposarono"] } },
@@ -935,9 +935,9 @@
                dipingere: "pintar", pareti: "paredes", pittore: "pintor", impianto: "instalación",
                spegnevano: "apagaban", legna: "leña", barba: "barba", contadino: "campesino", sognare: "soñar" },
       questions: [
-        ["¿Quién pintó las paredes?", ["un amigo pintor", "ellos mismos", "una empresa", "la vecina"], "un amigo pintor"],
-        ["¿Por qué revisaron la instalación eléctrica?", ["las luces se apagaban solas", "era vieja", "la vecina se quejó del ruido", "no había luz"], "las luces se apagaban solas"],
-        ["¿Qué sueña el marido?", ["vivir como un campesino", "volver a la ciudad", "vender la casa", "ser pintor"], "vivir como un campesino"]
+        ["Chi ha dipinto le pareti?", ["un amico pittore", "loro stessi", "un'impresa", "la vicina"], "un amico pittore"],
+        ["Perché hanno fatto controllare l'impianto elettrico?", ["le luci si spegnevano da sole", "l'impianto era troppo vecchio", "la vicina si lamentava del rumore", "mancava la corrente da giorni"], "le luci si spegnevano da sole"],
+        ["Che cosa pensa la narratrice del sogno del marito?", ["che sia solo un sogno innocuo", "che sia un'idea pericolosa", "che sia già realtà", "che debba realizzarlo subito"], "che sia solo un sogno innocuo"]
       ],
       vf: [["La casa è in campagna.", "vero"], ["Hanno rifatto il tetto da soli.", "falso"], ["La signora Rosa vive da sola.", "non si dice"]],
       hunt: { label: "Tocá fare y lasciare seguidos de infinitivo", targets: ["fare", "fatto", "lasciato", "farà", "lascio"] } },
@@ -956,9 +956,9 @@
                ombra: "sombra", cuore: "corazón", battere: "latir", acceso: "prendido", ciotola: "cuenco",
                scappato: "escapado", vento: "viento", foglie: "hojas" },
       questions: [
-        ["¿Qué oía al principio?", ["las chicharras y perros a lo lejos", "música", "el mar y las campanas de la iglesia", "autos"], "las chicharras y perros a lo lejos"],
-        ["¿Quién estaba en el jardín?", ["un gato negro", "un ladrón", "el perro", "el vecino"], "un gato negro"],
-        ["¿Cómo termina la noche?", ["se duerme mientras oye el viento", "no duerme nada", "llama a la policía por los ruidos", "se va a la ciudad"], "se duerme mientras oye el viento"]
+        ["Che cosa sentiva la narratrice all'inizio?", ["le cicale e i cani lontano", "la musica di una festa", "il mare e le campane", "le macchine sulla strada vicina"], "le cicale e i cani lontano"],
+        ["Chi c'era in giardino?", ["un gatto nero", "un ladro", "il cane", "il vicino"], "un gatto nero"],
+        ["Perché la narratrice ride da sola?", ["si era spaventata per niente", "il gatto era buffo", "si ricordava una barzelletta", "il cane dormiva"], "si era spaventata per niente"]
       ],
       vf: [["La prima notte la narratrice non riusciva a dormire.", "vero"], ["In giardino c'era un ladro.", "falso"], ["Il cane dormiva in casa.", "non si dice"]],
       hunt: { label: "Tocá los verbos de percepción (sentivo, vedevo, ho visto…)", targets: ["sentivo", "vedevo", "sentito", "visto"] } },
@@ -976,9 +976,9 @@
                iscriversi: "anotarse", chitarra: "guitarra", riuscito: "logrado", abituato: "acostumbrado",
                stancato: "cansado", insalata: "ensalada", finto: "fingido", orgoglioso: "orgulloso" },
       questions: [
-        ["¿Qué dejó Luca en enero?", ["de fumar", "de correr", "de trabajar", "de cocinar"], "de fumar"],
-        ["¿Por qué no hizo el curso de guitarra?", ["no encontró tiempo", "era caro", "no le gustaba", "se lastimó"], "no encontró tiempo"],
-        ["¿Qué pasa en marzo?", ["finge no oír si sigue corriendo", "sigue corriendo", "vuelve a fumar", "empieza el curso de guitarra"], "finge no oír si sigue corriendo"]
+        ["Che cosa ha smesso di fare Luca a gennaio?", ["di fumare", "di correre", "di lavorare", "di cucinare"], "di fumare"],
+        ["Perché non ha fatto il corso di chitarra?", ["non ha trovato il tempo", "il corso costava troppo", "la chitarra non gli piaceva", "si è fatto male a una mano"], "non ha trovato il tempo"],
+        ["Perché Luca finge di non sentire la domanda della moglie?", ["ha smesso di correre", "non ha capito la domanda", "è diventato sordo", "sta ascoltando la musica"], "ha smesso di correre"]
       ],
       vf: [["Luca ha smesso di fumare.", "vero"], ["Luca si è iscritto a un corso di chitarra.", "falso"], ["Luca ha perso cinque chili.", "non si dice"]],
       hunt: { label: "Tocá las preposiciones que siguen al verbo (di, a)", targets: ["di", "a"] } },
@@ -997,9 +997,9 @@
                fermate: "detenido", nostalgia: "nostalgia", sorridendo: "sonriendo", braccio: "brazo",
                salutarsi: "despedirse", promesse: "prometido", davvero: "de verdad" },
       questions: [
-        ["¿Hace cuánto no se veían?", ["diez años", "un año", "veinte años", "un mes"], "diez años"],
-        ["¿Dónde se detuvieron?", ["en el puente", "en la estación", "en un bar", "en la casa"], "en el puente"],
-        ["¿Qué se prometieron?", ["volver a verse pronto", "escribirse", "viajar juntas", "nada"], "volver a verse pronto"]
+        ["Da quanto tempo le due amiche non si vedevano?", ["da dieci anni", "da un anno", "da vent'anni", "da un mese"], "da dieci anni"],
+        ["Dove si sono fermate a guardare le luci?", ["sul ponte", "alla stazione", "al bar", "a casa"], "sul ponte"],
+        ["Che cosa vuol dire l'ultima frase del testo?", ["che il narratore ci crede davvero", "che probabilmente non si rivedranno più", "che si sono già riviste il giorno dopo", "che faranno un viaggio insieme"], "che il narratore ci crede davvero"]
       ],
       vf: [["Silvia e l'amica non si vedevano da dieci anni.", "vero"], ["Si sono salutate al ponte.", "falso"], ["L'amica abita in un'altra città.", "non si dice"]],
       hunt: { label: "Tocá los gerundios y participios (tornando, finita…)", targets: ["tornando", "parlando", "finita", "ridendo", "arrivate", "pensando", "sorridendo", "vedendoti", "conoscendole"] } },
@@ -1017,9 +1017,9 @@
                gambe: "piernas", anziano: "mayor", superato: "pasado", presa: "ofendido (prendersela)",
                arrivo: "llegada", cavata: "arreglado (cavarsela = arreglárselas)", morto: "muerto" },
       questions: [
-        ["¿Cuánto tardó?", ["cuatro horas y media", "tres horas", "cinco horas", "dos horas"], "cuatro horas y media"],
-        ["¿Qué le molestó?", ["que un señor mayor lo pasara", "el calor", "la lluvia", "que su hija llegara antes que él"], "que un señor mayor lo pasara"],
-        ["¿Qué promete para el año próximo?", ["tardar menos", "no correr", "correr con su hija", "entrenar menos"], "tardar menos"]
+        ["Quanto ci ha messo Paolo?", ["quattro ore e mezza", "tre ore e un quarto", "cinque ore e mezza", "due ore e mezza"], "quattro ore e mezza"],
+        ["Perché Paolo se l'è presa?", ["un signore anziano l'ha superato", "ha cominciato a piovere forte", "faceva troppo caldo per correre", "la figlia è arrivata prima di lui"], "un signore anziano l'ha superato"],
+        ["Che cosa pensa la moglie della promessa di Paolo?", ["è un po' scettica", "è entusiasta", "è arrabbiata", "non l'ha sentita"], "è un po' scettica"]
       ],
       vf: [["Paolo ci ha messo quattro ore e mezza.", "vero"], ["Paolo si è ritirato al trentesimo chilometro.", "falso"], ["La figlia di Paolo ha corso con lui.", "non si dice"]],
       hunt: { label: "Tocá las partículas de los verbos pronominales (ce, ci, se, te)", targets: ["ce", "ci", "se", "te"] } },
@@ -1036,9 +1036,9 @@
       gloss: { tifiamo: "somos hinchas", squadre: "equipos", ferma: "para", scudetto: "campeonato",
                cornetto: "medialuna", altrove: "en otro lado", duri: "duros", pietre: "piedras" },
       questions: [
-        ["¿Hace cuánto conoce a Gino?", ["veinte años", "dos años", "diez años", "desde chico"], "veinte años"],
-        ["¿Qué le debe a Gino?", ["haber conocido a su esposa", "un trabajo", "plata", "un café gratis"], "haber conocido a su esposa"],
-        ["¿Qué nunca le dijo?", ["que sus medialunas son duras", "que es de otro equipo", "que no le gusta el café del bar", "que se muda"], "que sus medialunas son duras"]
+        ["Da quanto tempo il narratore conosce Gino?", ["da vent'anni", "da due anni", "da dieci anni", "da quando era bambino"], "da vent'anni"],
+        ["Che cosa deve il narratore a Gino?", ["gli ha fatto conoscere sua moglie", "gli ha trovato un lavoro in centro", "gli ha prestato dei soldi", "gli offre sempre il caffè"], "gli ha fatto conoscere sua moglie"],
+        ["Perché il narratore non ha mai detto a Gino la verità sui cornetti?", ["per non offenderlo", "perché Gino è di un'altra squadra", "perché non lo sa", "perché non è vero"], "per non offenderlo"]
       ],
       vf: [["Il narratore conosce Gino da vent'anni.", "vero"], ["Il narratore compra i cornetti da Gino.", "falso"], ["Gino tifa per la Juventus.", "vero"]],
       hunt: { label: "Tocá los pronombres que retoman lo dislocado (lo, la, ne, l')", targets: ["lo", "la", "ne", "l'ho"] } },
@@ -1058,9 +1058,9 @@
                servirsi: "valerse", atrio: "hall", qualora: "en caso de que", esigenze: "necesidades", utilizzabile: "utilizable", depositati: "depositados", amministrazione: "administración", disabilità: "discapacidad", confidiamo: "confiamos", collaborazione: "colaboración", distinti: "atentos (distinti saluti = saludos atentos)",
                prega: "ruega", disagio: "molestia", consueta: "habitual" },
       questions: [
-        ["¿Cuánto duran los trabajos?", ["dos semanas", "un mes", "tres días", "no se sabe"], "dos semanas"],
-        ["¿Qué deben usar los vecinos?", ["las escaleras", "el ascensor de servicio", "la puerta de atrás", "nada"], "las escaleras"],
-        ["¿Quién debe contactar a la administración?", ["quien tenga necesidades específicas", "todos", "nadie", "los que viven en el último piso"], "quien tenga necesidades específicas"]
+        ["Quanto dureranno i lavori?", ["due settimane", "un mese", "tre giorni", "non si sa"], "due settimane"],
+        ["Che cosa devono usare i condomini durante i lavori?", ["le scale", "l'ascensore di servizio", "la porta sul retro", "il montacarichi"], "le scale"],
+        ["Qual è lo scopo principale dell'avviso?", ["avvisare dei lavori e chiedere pazienza", "raccogliere soldi per l'ascensore nuovo", "lamentarsi del disordine nell'atrio", "convocare un'assemblea dei condomini"], "avvisare dei lavori e chiedere pazienza"]
       ],
       vf: [["I lavori riguardano l'ascensore.", "vero"], ["I lavori durano un mese.", "falso"], ["I lavori costano mille euro.", "non si dice"]],
       hunt: { label: "Tocá los conectores formales (pertanto, qualora, durante…)", targets: ["pertanto", "qualora", "durante", "tale"] } },
@@ -1078,9 +1078,9 @@
       gloss: { righe: "líneas", faticavi: "te costaba", distinguere: "distinguir", vocabolario: "diccionario",
                quasi: "casi", chiaro: "claro", scherzo: "broma, jugada", volte: "veces", arreso: "rendido", possibilmente: "si es posible" },
       questions: [
-        ["¿Cuánto tiempo pasó?", ["un año", "un mes", "diez años", "una semana"], "un año"],
-        ["¿Qué le cuesta todavía?", ["el congiuntivo", "leer el diario", "entender la radio", "el passato prossimo"], "el congiuntivo"],
-        ["¿Qué habría pasado si se rendía en febrero?", ["no habría llegado hasta acá", "hablaría mejor", "nada", "habría viajado a Italia antes"], "no habría llegado hasta acá"]
+        ["Quanto tempo è passato dall'inizio dello studio?", ["un anno", "un mese", "dieci anni", "una settimana"], "un anno"],
+        ["Che cosa gli crea ancora problemi?", ["il congiuntivo", "leggere il giornale", "capire la radio", "il passato prossimo"], "il congiuntivo"],
+        ["Qual è il tono della lettera?", ["incoraggiante e un po' ironico", "triste e pieno di rimpianti amari", "severo e molto critico con se stesso", "freddo, formale e distaccato"], "incoraggiante e un po' ironico"]
       ],
       vf: [["È passato un anno da quando ha cominciato a studiare.", "vero"], ["Il congiuntivo non è più un problema.", "falso"], ["Ha studiato in Italia.", "non si dice"]],
       hunt: { label: "Tocá los congiuntivi y el condizionale (sia, fossi, saresti)", targets: ["sia", "fossi", "saresti"] } },
@@ -1100,9 +1100,9 @@
                agio: "gusto (a suo agio = cómoda)", produzione: "producción", volte: "veces", argomentare: "argumentar", superato: "aprobado",
                insegnante: "profesora" },
       questions: [
-        ["¿Qué prueba fue la más difícil?", ["la de escucha", "la escrita", "la oral", "la de lectura"], "la de escucha"],
-        ["¿Sobre qué tuvo que argumentar?", ["el trabajo desde casa", "la economía", "la universidad", "el deporte"], "el trabajo desde casa"],
-        ["¿A quién llamó al final?", ["a su profesora", "a su madre", "a un periodista", "a la universidad"], "a su profesora"]
+        ["Quale prova è stata la più difficile per Martina?", ["l'ascolto", "lo scritto", "l'orale", "la lettura"], "l'ascolto"],
+        ["Su che cosa ha dovuto argomentare?", ["sul lavoro da casa", "sull'economia", "sull'università", "sullo sport"], "sul lavoro da casa"],
+        ["Perché Martina legge la mail tre volte?", ["quasi non ci crede", "la mail è scritta male", "non capisce bene l'italiano", "vuole ricordarla a memoria"], "quasi non ci crede"]
       ],
       vf: [["La prova di ascolto è stata la più difficile.", "vero"], ["Martina ha saputo il risultato il giorno stesso.", "falso"], ["Martina ha preso il voto massimo.", "non si dice"]],
       hunt: { label: "Tocá los verbos en passato remoto", targets: ["fu", "sentì", "arrivò", "lesse", "chiamò"] } }
