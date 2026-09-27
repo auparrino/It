@@ -30,6 +30,9 @@
 
   /* ------------------------------------------------------------- índice */
 
+  // p[3], optional: the register (f formal, n neutral, c colloquial, e
+  // written only); DATA.registro says it in words, at the start of the note.
+  var REGISTRO = DATA.registro || {};
   var ALL = [];
   SCENES.forEach(function (s) {
     s.phrases.forEach(function (p, i) {
@@ -41,7 +44,8 @@
         it: p[0],          // nombres heredados del campo: el motor y la interfaz leen `it`
         pt: p[0],
         es: p[1],
-        note: p[2] || ""
+        reg: p[3] || "",
+        note: (REGISTRO[p[3]] ? REGISTRO[p[3]] + " " : "") + (p[2] || "")
       });
     });
   });
