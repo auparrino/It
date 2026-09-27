@@ -14,11 +14,7 @@ var bankPath = pack.dataPath("it", "bank.json");
 var bank = fs.existsSync(bankPath) ? JSON.parse(fs.readFileSync(bankPath, "utf8")) : null;
 if (bank) Banca.load(bank);
 
-var fails = 0, checks = 0;
-function ok(cond, what) {
-  checks++;
-  if (!cond) { fails++; console.log("FAIL " + what); }
-}
+var T = require("../lib/testkit.js")("it"), ok = T.ok;
 
 /* ------------------------------------------------ casi scritti a mano */
 
@@ -480,5 +476,4 @@ if (bank) {
   });
 }
 
-console.log("\ncontrolli: " + checks + "   errori: " + fails);
-process.exit(fails ? 1 : 0);
+T.done();

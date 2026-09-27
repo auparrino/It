@@ -538,11 +538,11 @@ fx(W, 1, "Pagado o boleto, a matrícula foi confirmada.", "Pagado", "Pago", "par
    "En la reducida y con ser/estar va el participio corto: pago o boleto.")
 
 gd(W, 0, [["falar", "falando"], ["comer", "comendo"], ["partir", "partindo"]],
-   "pôr → ___", "pondo", "poniendo",
-   "pôr (antiguo «poer») hace pondo. El español empuja a «poniendo».")
+   "pedir → ___", "pedindo", "pidindo",
+   "pedir hace pedindo: el gerúndio sale del infinitivo, sin el cambio e → i del español «pidiendo».")
 gd(W, 0, [["olhar", "olhando"], ["correr", "correndo"], ["abrir", "abrindo"]],
-   "ir → ___", "indo", "yendo",
-   "ir → indo, perfectamente regular en portugués. «Yendo» es español.")
+   "dormir → ___", "dormindo", "durmindo",
+   "dormir → dormindo, regular. El español cambia la vocal («durmiendo»); el portugués no.")
 gd(W, 1, [["terminar a reunião", "terminada a reunião"], ["fechar o bar", "fechado o bar"],
           ["resolver as questões", "resolvidas as questões"]],
    "fazer as contas → ___", "feitas as contas", "fazidas as contas",
@@ -701,11 +701,11 @@ fx(W, 0, "Saudos cordiais, Martín", "Saudos cordiais", "Atenciosamente", "espan
    goodAlt=["Cordialmente"])
 
 gd(W, 2, [["poder", "poderia"], ["gostar", "gostaria"], ["agradecer", "agradeceria"]],
-   "fazer → ___", "faria", "fazeria",
-   "fazer tiene condicional irregular: faria (como farei). El patrón regular engaña.")
+   "desfazer → ___", "desfaria", "desfazeria",
+   "desfazer se conjuga como fazer: desfaria (como faria). El patrón regular engaña.")
 gd(W, 2, [["solicitar", "solicitaria"], ["enviar", "enviaria"], ["precisar", "precisaria"]],
-   "dizer → ___", "diria", "dizeria",
-   "dizer → diria (como direi): pierde la -ze-.")
+   "refazer → ___", "refaria", "refazeria",
+   "refazer se conjuga como fazer: refaria (como faria), sin la -ze-.")
 gd(W, 2, [["poder", "se pudesse"], ["enviar", "se enviasse"], ["responder", "se respondesse"]],
    "vir → ___", "se viesse", "se vinesse",
    "El imperfeito do subjuntivo sale del perfeito vieram: viesse.")
@@ -998,8 +998,8 @@ tr(W, 1, "Voy a la oficina en metro.", "Vou ao escritório de metrô.",
    ["Eu vou ao escritório de metrô", "Vou para o escritório de metrô",
     "Eu vou para o escritório de metrô", "Vou pro escritório de metrô"],
    "oficina → escritório; los medios de transporte van con de: de metrô.")
-tr(W, 2, "La leche está fría.", "O leite está frio.", [],
-   "leite es masculino: o leite frio.")
+tr(W, 2, "La sal está en la mesa.", "O sal está na mesa.", [],
+   "sal es masculino en portugués: o sal.")
 tr(W, 2, "El puente Río-Niterói es largo.", "A ponte Rio-Niterói é comprida.",
    ["A ponte Rio-Niterói é longa"],
    "«Largo» (longitud) se dice *comprido* o *longo*; *largo* sería «ancho». *Ponte* es femenina: *a ponte é comprida*.")
@@ -1881,9 +1881,9 @@ ch(W, 0, "Trouxe o livro para vocês ___.",
 ch(W, 0, "É melhor nós ___ cedo.",
    ["sairmos", "sair", "saímos"], "sairmos",
    "é melhor + sujeto + infinitivo pessoal: nós sairmos.")
-ch(W, 0, "Ultimamente ___ muito no Rio.",
-   ["tem chovido", "choveu", "ha chovido"], "tem chovido",
-   "Repetición hasta hoy: perfeito composto (tem chovido = viene lloviendo).")
+ch(W, 0, "Ultimamente ___ muito calor em São Paulo.",
+   ["tem feito", "fez", "ha feito"], "tem feito",
+   "Repetición hasta hoy: perfeito composto (tem feito = viene haciendo).")
 ch(W, 1, "Vou ___ feira ___ oito.",
    ["à / às", "a / as", "à / as"], "à / às",
    "à feira (a + a) y às oito (a + as): las horas siempre con crase.")
@@ -1894,9 +1894,9 @@ ch(W, 1, "Ela namora ___ Rafa há dois anos.",
    ["o", "com o", "com"], "o",
    "namorar alguém, sin preposición en la norma. «namorar com» es regional.",
    prompt="Elegí la forma de la norma culta.")
-ch(W, 1, "Assistimos ___ jogo no Maracanã.",
+ch(W, 1, "Ontem assistimos ___ show do Caetano.",
    ["ao", "o", "no"], "ao",
-   "assistir a (= ver un espectáculo): ao jogo. En el habla se oye «assistimos o jogo».",
+   "assistir a (= ver un espectáculo): ao show. En el habla se oye «assistimos o show».",
    prompt="Elegí la forma de la norma culta.")
 ch(W, 2, "Deixei o carro na ___ para consertar o freio.",
    ["oficina", "escritório", "loja"], "oficina",
@@ -1943,10 +1943,10 @@ tr(W, 0, "Si podés, vení al ensayo de la Mangueira.", "Se você puder, venha a
 tr(W, 0, "Es bueno que salgamos temprano.", "É bom sairmos cedo.",
    ["É bom que saiamos cedo", "É bom a gente sair cedo", "É bom nós sairmos cedo"],
    "Infinitivo pessoal (sairmos) o que + subjuntivo (saiamos).")
-tr(W, 0, "Vengo trabajando mucho.", "Tenho trabalhado muito.",
-   ["Eu tenho trabalhado muito", "Ando trabalhando muito", "Venho trabalhando muito",
-    "Eu ando trabalhando muito", "Eu venho trabalhando muito"],
-   "«Venir + gerundio» (algo repetido hasta hoy) se dice *ter* + participio: *tenho trabalhado muito*.")
+tr(W, 0, "Vengo estudiando mucho.", "Tenho estudado muito.",
+   ["Eu tenho estudado muito", "Ando estudando muito", "Venho estudando muito",
+    "Eu ando estudando muito", "Eu venho estudando muito"],
+   "«Venir + gerundio» (algo repetido hasta hoy) se dice *ter* + participio: *tenho estudado muito*.")
 tr(W, 1, "Vamos a la playa a las tres.", "Vamos à praia às três.",
    ["Vamos à praia às três horas", "A gente vai à praia às três", "A gente vai à praia às três horas"],
    "à praia, às três: dos crases.")

@@ -7,8 +7,7 @@ var ctx = pack("pt");
 var Engine = ctx.Engine;
 var Frasi = ctx.Frasi;
 var Drills = ctx.Drills;
-var fails = 0, checks = 0;
-function ok(cond, what) { checks++; if (!cond) { fails++; console.log("FAIL " + what); } }
+var T = require("../lib/testkit.js")("pt"), ok = T.ok;
 function near(a, b, tol) { return Math.abs(a - b) <= tol; }
 var DAY = 86400000;
 // a fixed noon, so the night mode does not kick in by accident
@@ -174,5 +173,4 @@ var dam = Engine.load();
 ok(dam.xp === 0 && store["rumoc1.save.v1.damaged"] === "{roto", "un guardado roto se aparta y se empieza de cero");
 ctx.localStorage = null;
 
-console.log("controles: " + checks + "   errores: " + fails);
-process.exit(fails ? 1 : 0);
+T.done("");

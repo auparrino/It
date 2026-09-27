@@ -13,18 +13,18 @@ hay internet la primera vez o es un par de vocal abierta/cerrada
 teléfono como antes. No hizo falta bajar nada al repositorio.
 
 **Common Voice en Suoni (✓ hecho, v1.49).** Del paquete Common Voice
-Italian 27.0 (bajado en la PC), `tools/voci_cv.py` eligió 446 oraciones por
+Italian 27.0 (bajado en la PC), `tools/it/voci_cv.py` eligió 446 oraciones por
 votos, largo y semana. Muchas eran fichas de Wikipedia (condados, discos,
 fútbol) o tenían la semana mal asignada, así que las revisé a mano: quedaron
-**128** naturales, con la semana corregida, en `docs/js/voci_cv_data.js`, y
-sus audios en `docs/audio/cv/` (5 MB; los otros 318 se sacaron del repo).
+**128** naturales, con la semana corregida, en `docs/lang/it/voci_cv_data.js`, y
+sus audios en `docs/lang/it/audio/cv/` (5 MB; los otros 318 se sacaron del repo).
 - **Dictado de Suoni**: dos de cada tres veces, una oración grabada.
 - **«¿Qué forma escuchaste?»** (26 oraciones): el verbo en blanco y la
   forma que compite (*andassi / andavo*, *esca / esce*), una por sesión desde
   la semana de esa forma.
 - Crédito en *Io* (CC0, no es obligatorio, pero se agradece).
 
-**Para sumar más:** volver a correr `tools/voci_cv.py` sobre el paquete con
+**Para sumar más:** volver a correr `tools/it/voci_cv.py` sobre el paquete con
 `--por-semana 40` (o más), revisar a mano y agregar las buenas a
 `voci_cv_data.js`. Hay pocas oraciones en las semanas 1 a 4: ahí conviene
 buscar a mano oraciones simples en `validated.tsv`.
@@ -46,7 +46,7 @@ sesión que corre en tu PC sí descarga con tu conexión:
    Desde la terminal también sirve: `claude remote-control` dentro de la
    carpeta, y la sesión aparece en la app de Claude Code, así la seguís
    desde el celular.
-3. Pedile: «seguí VOCES.md, caso 2 (Common Voice)». Para Common Voice
+3. Pedile: «seguí tools/it/VOCES.md, caso 2 (Common Voice)». Para Common Voice
    igual vas a necesitar la cuenta de Mozilla Data Collective (paso 1 del
    caso 2), porque Mozilla exige aceptar sus términos para descargarlo.
 
@@ -87,10 +87,10 @@ de sonidos (HVPT) funciona justamente por esa variedad.
 
 **Lo que hago yo:**
 1. Busco en Commons, por la API, los archivos `LL-Q652 (ita)-<hablante>-<palabra>.wav`
-   de cada palabra de `docs/js/ascolto_data.js`.
+   de cada palabra de `docs/lang/it/ascolto_data.js`.
 2. Me quedo con 2 o 3 hablantes por palabra, los convierto a un formato
    liviano (Opus o MP3, unos 10-20 KB por palabra) y recorto el silencio.
-3. Los guardo en `docs/audio/ll/` con un índice `palabra → [archivos]`.
+3. Los guardo en `docs/lang/it/audio/`, en una carpeta nueva `ll/`, con un índice `palabra → [archivos]`.
    Son unos 3-6 MB en total y quedan en la caché para usar sin conexión.
 4. Suoni usa el audio real cuando existe y la voz del teléfono cuando no.
 5. Agrego una página de **créditos** en *Io* con el nombre de cada hablante y
@@ -128,12 +128,12 @@ personas distintas.
    el audio.
 2. Filtro oraciones de 5 a 12 palabras, con al menos dos votos a favor y
    ninguno en contra.
-3. Las paso por `tools/sillabo.py` para asignarles la semana según la
-   gramática que usan, y por `tools/lessico.py` para que el vocabulario sea
+3. Las paso por `tools/it/sillabo.py` para asignarles la semana según la
+   gramática que usan, y por `tools/it/lessico.py` para que el vocabulario sea
    conocido.
 4. Elijo unas 10 por semana, de hablantes distintos, y bajo solo esos
    audios (unas 500 oraciones, 15-20 MB).
-5. Los guardo en `docs/audio/cv/` y los integro en:
+5. Los guardo en `docs/lang/it/audio/cv/` y los integro en:
    - el **dictado de Suoni** (en vez de la voz del teléfono);
    - un ejercicio nuevo, **«¿Qué forma escuchaste?»**: oís la oración y
      elegís entre dos formas que compiten (como los duelos, pero de oído).
@@ -164,7 +164,7 @@ cada una.
 1. Busco oraciones italianas con audio y traducción al castellano.
 2. Me quedo con las de licencia compatible y con las que coinciden con
    frases del curso o de la semana.
-3. Guardo el audio en `docs/audio/tt/`, agrego los créditos y lo integro
+3. Guardo el audio en `docs/lang/it/audio/`, en una carpeta nueva `tt/`, agrego los créditos y lo integro
    donde hoy se lee una frase con la voz del teléfono.
 
 **Tiempo:** una sesión. **Recomendación:** dejarlo último; Lingua Libre y

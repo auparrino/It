@@ -248,7 +248,7 @@
     /* Los rangos: un título por etapa, del turista que baja en el Galeão al
        carioca da gema (el nacido y criado en Río).  Calibrados sobre una
        carrera entera: quien juega todo el curso llega al nivel 40
-       (tools/pt/sim_carriera.js); Carioca da gema es el final del curso. */
+       (tools/lib/sim_carriera.js pt); Carioca da gema es el final del curso. */
     ranks: [
       [1, "Turista"], [3, "Gringo"], [6, "Visitante"],
       [10, "Morador"], [14, "Local"], [18, "Bom de papo"],

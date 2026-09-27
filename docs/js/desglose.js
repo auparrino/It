@@ -607,7 +607,7 @@
         tenses: r.tenses || [], persons: r.persons || [] };
     }
     function baseVerb(base, suf) {
-      var E = D.enclitic, cands = [], r = null;
+      var E = D.enclitic, cands = [];
       // one-syllable imperatives double the consonant: di' + mi = dimmi
       if (E.short) {
         var dbl = base.length >= 3 && base.charAt(base.length - 1) === suf.charAt(0) ? base.slice(0, -1) : null;

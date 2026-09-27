@@ -117,15 +117,67 @@
      Everything is read defensively, so the drills run on every
      conjugator. */
   function infoOf(verb) { try { return Conj.info(verb) || {}; } catch (e) { return {}; } }
+  // A «tense» that conjugate() does not take (it is not in ALL_TENSES): the
+  // imperative, the gerund, the participle, when the curriculum lists them
+  // as the week's tenses (pt: gerúndio, particípio, imperativo).
+  function outsideConjugate(tense) {
+    return !!Conj.ALL_TENSES && Conj.ALL_TENSES.indexOf(tense) < 0;
+  }
+  // The verb has no such form, and the gym does not ask it: no imperative
+  // (poder, caber: imperative() gives null; chover, with one person only).
+  function lacksForm(verb, tense) {
+    if (tense !== "imperativo" || !CR.imperativeForms || !Conj.imperative || !outsideConjugate(tense)) return false;
+    var own = infoOf(verb).persons;
+    try { return !Conj.imperative(verb) || !!(own && own.length === 1); } catch (e) { return false; }
+  }
   function conjForms(verb, tense) {
-    if (tense === "imperativo" && CR.imperativeForms && Conj.imperative && !(Conj.TENSE_LABELS || {}).imperativo) {
+    if (tense === "imperativo" && CR.imperativeForms && Conj.imperative && outsideConjugate(tense)) {
       // imperative(inf): the language's persons, or null (poder, caber)
-      var im = Conj.imperative(verb);
-      if (!im) throw new Error("sin imperativo: " + verb);
-      return CR.imperativeForms(im);
+      if (lacksForm(verb, tense)) throw new Error("sin imperativo: " + verb);
+      return CR.imperativeForms(Conj.imperative(verb));
     }
     try { return Conj.conjugate(verb, tense, { partial: true }); }
     catch (e) { return Conj.conjugate(verb, tense); }
+  }
+  /* The non-finite forms (gerund, participle) when conjugate() does not take
+     them: one form, asked without a person.  { answer, accept, wrong } or
+     null.  wrong: what gets mixed up with it — the form of a learner who
+     treats the verb as regular (fazido, vido), the other non-finite form,
+     the infinitive, the present. */
+  function nonFinite(verb, tense) {
+    if ((tense !== "gerundio" && tense !== "participio") || !outsideConjugate(tense)) return null;
+    var fn = tense === "gerundio" ? Conj.gerund : Conj.participle;
+    if (!fn) return null;
+    var answer = fn(verb);
+    if (!answer) return null;
+    var accept = [answer];
+    if (tense === "participio" && Conj.participles) {
+      var ps = Conj.participles(verb) || {};
+      [ps.irregular, ps.regular].forEach(function (x) { if (x && accept.indexOf(x) < 0) accept.push(x); });
+    }
+    var wrong = [];
+    function add(f) { if (f && accept.indexOf(f) < 0 && wrong.indexOf(f) < 0) wrong.push(f); }
+    try { add(Conj.regular && Conj.regular(verb, tense)); } catch (e) { /* sin forma regular */ }
+    try { add(tense === "gerundio" ? Conj.participle && Conj.participle(verb) : Conj.gerund && Conj.gerund(verb)); } catch (e) { /* */ }
+    add(String(verb).replace(/-.*$/, ""));
+    try { add(Conj.conjugate(verb, "presente")[2]); } catch (e) { /* */ }
+    try { add(Conj.conjugate(verb, (Conj.ALL_TENSES || [])[1])[0]); } catch (e) { /* */ }
+    return { answer: answer, accept: accept, wrong: wrong };
+  }
+  function nonFiniteItem(verb, tense, nf, typed) {
+    var item = {
+      id: (typed ? "conjw:" : "conj:") + verb + ":" + tense + ":0",
+      src: "coniugatore",
+      type: typed ? "cloze" : "choice",
+      topic: "coniugazione",
+      prompt: (typed ? "Escribí" : "Elegí") + " el " + tenseLabel(tense) + " de «" + verb + "»" + esOf(verb),
+      stem: "___ (" + verb + ")",
+      answer: nf.answer,
+      accept: nf.accept,
+      note: verb + " · " + tenseLabel(tense) + ": " + nf.accept.join(" / ")
+    };
+    if (!typed) item.options = shuffle(sample(nf.wrong, 3).concat([nf.answer]));
+    return item;
   }
   var EXTRA_LABELS = CR.extraLabels || {};
   function tenseLabel(t) { return (Conj.TENSE_LABELS || {})[t] || EXTRA_LABELS[t] || t; }
@@ -188,6 +240,8 @@
   }
 
   function conjugationDrill(verb, tense, known, persons) {
+    var nf = nonFinite(verb, tense);
+    if (nf) return nonFiniteItem(verb, tense, nf, false);
     var forms = conjForms(verb, tense);
     var alt = altFor(verb, tense);
     var p = pickPerson(personsFor(verb, forms, persons));
@@ -243,6 +297,8 @@
   }
 
   function conjugationTyped(verb, tense, persons) {
+    var nf = nonFinite(verb, tense);
+    if (nf) return nonFiniteItem(verb, tense, nf, true);
     var forms = conjForms(verb, tense);
     var alt = altFor(verb, tense);
     var p = pickPerson(personsFor(verb, forms, persons));
@@ -378,7 +434,9 @@
     if (it.src === "coniugatore" && Conj) {
       var m = /^conjw?:([^:]+):([^:]+):(\d)$/.exec(it.id);
       if (m) {
-        try { shuffle(conjForms(m[1], m[2]).filter(function (x, i) { return !skipped(i) && x; })).forEach(add); } catch (e) { /* no */ }
+        var nfm = nonFinite(m[1], m[2]);
+        if (nfm) shuffle(nfm.wrong).forEach(add);
+        else try { shuffle(conjForms(m[1], m[2]).filter(function (x, i) { return !skipped(i) && x; })).forEach(add); } catch (e) { /* no */ }
       }
     }
     // 2. the typical errors on the answer itself
@@ -539,9 +597,6 @@
     var v = e.v, id = "v:" + v[0], card = state && state.cards && state.cards[id];
     if (!card) {
       // distractors: meanings of nearby weeks, never the same Spanish word
-      var near = Object.keys(VOC).map(function (k) { return VOC[k]; }).filter(function (x) {
-        return x.v[0] !== v[0] && x.v[1] !== v[1] && Math.abs(x.week - e.week) <= 3;
-      });
       // Same field first (hermano among hija, tío, abuelo), then the same
       // kind of word: a verb among nouns, or «ventana» next to «hermano»,
       // gives itself away.
@@ -1032,6 +1087,7 @@
     itemsById: itemsById,
     conjugationDrill: conjugationDrill,
     conjugationTyped: conjugationTyped,
+    lacksForm: lacksForm,
     buildRound: buildRound,
     recognitionOf: recognitionOf,
     withWordIntros: withWordIntros,
@@ -1040,7 +1096,6 @@
     firstRecognize: firstRecognize,
     vocabSession: vocabSession,
     vocabItem: vocabItem,
-    recognitionOf: recognitionOf,
     pickFresh: pickFresh,
     buildBoss: buildBoss,
     buildWeak: buildWeak,

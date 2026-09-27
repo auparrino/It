@@ -847,7 +847,7 @@
                   pedir: "chiedere", preguntar: "chiedere", alquilar: "affittare", laburar: "lavorare", enojar: "arrabbiare",
                   casar: "sposare", aburrir: "annoiare", manejando: "guidare", disfrutar: "godersi", extrañar: "sentire la mancanza",
                   quedar: "restare", pasear: "passeggiare", charlar: "chiacchierare", arreglar: "aggiustare / riparare", mudar: "traslocare",
-                  bailar: "ballare", duchar: "farsi la doccia", comer: "mangiare", cocinar: "cucinare", cambiar: "cambiare",
+                  bailar: "ballare", duchar: "farsi la doccia", comer: "mangiare", cambiar: "cambiare",
                   viajar: "viaggiare", trabajar: "lavorare", estudiar: "studiare", jugar: "giocare", salir: "uscire" };
   var ES_STRONG = { de: "di / da", el: "il", los: "i / gli", las: "le", y: "e", muy: "molto", que: "che", porque: "perché",
                     cuando: "quando", donde: "dove", pero: "però", como: "come", es: "è", está: "è / sta",
@@ -990,7 +990,6 @@
   var POSS_FORMS = { mi: ["mio", "mia", "miei", "mie"], tu: ["tuo", "tua", "tuoi", "tue"], su: ["suo", "sua", "suoi", "sue"],
                      nostr: ["nostro", "nostra", "nostri", "nostre"], vostr: ["vostro", "vostra", "vostri", "vostre"] };
   function possKey(w) { return /^(mio|mia|miei|mie)$/.test(w) ? "mi" : /^(tuo|tua|tuoi|tue)$/.test(w) ? "tu" : /^(suo|sua|suoi|sue)$/.test(w) ? "su" : /^nostr/.test(w) ? "nostr" : /^vostr/.test(w) ? "vostr" : null; }
-  function gnOfPoss(w) { return /^(mio|tuo|suo|nostro|vostro)$/.test(w) ? "ms" : /^(mia|tua|sua|nostra|vostra)$/.test(w) ? "fs" : /^(miei|tuoi|suoi|nostri|vostri)$/.test(w) ? "mp" : /^(mie|tue|sue|nostre|vostre)$/.test(w) ? "fp" : null; }
   var GN_IX = { ms: 0, fs: 1, mp: 2, fp: 3 };
   // Gender and number of a noun, when the lexicon knows it: {g, n} (n null if invariable).
   function nounGN(w) {
@@ -1305,7 +1304,6 @@
         var causa = isInf(vw2) && (hasLem(W(vp - 1), /^(fare|lasciare)$/) || /^(fatto|fatta|lasciato|lasciata|fare|lasciare)$/.test(W(vp - 1)));
         var isDo = !isNoun(vw2) && !causa && !(isInf(vw2) && w.length > 2) && (V(vw2).some(function (v) { return DO_VERBS.test(v.lemma) || /^(svegliare|sentire)$/.test(v.lemma); }) || (DO_VERBS.test(vw2) || /^(svegliare|sentire)$/.test(vw2))) || DO_PART.test(vw2) || /^sentit[oaie]$/.test(vw2) ||
                    /^(conoscend|vedend|aspettand|chiamand|salutand|incontrand|visitand|ascoltand|guardand|amand|trovand|accompagnand|invitand|ringraziand|aiutand|svegliand)o$/.test(vw2);
-        var tgt = w === "a" || w === "ad" ? n : n;
         var person = (w === "a" || w === "ad") ? (/^(nessuno|qualcuno|tutti|tutte|ognuno)$/.test(n) || (/^(un|una|uno|un'|il|la|lo|i|le|gli|l')$/.test(n) && PERSON_N.test(n2)) || (POSS[n] && (FAMILY.test(n2) || PERSON_N.test(n2))))
                                                 : (PERSON_N.test(n) || FAMILY.test(n) || POSS[n] && (FAMILY.test(n2) || PERSON_N.test(n2)) || /^(miei|tuoi|suoi)$/.test(n));
         if (isDo && person && !isInfCl(n)) push(i, 1, "a_personale", "Sin «a»: el objeto directo de persona va directo" + (w.length > 2 ? " (" + it({ al: "il", alla: "la", allo: "lo", ai: "i", alle: "le", agli: "gli", "all'": "l'" }[w] + " " + n) + ")" : "") + ".");

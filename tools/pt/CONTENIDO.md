@@ -1,9 +1,15 @@
 # Cómo se escribe el contenido de Rumo C1
 
 Rumo C1 es la versión portuguesa de *La Via C1* (el curso-juego de italiano,
-repo hermano `auparrino/It`). Mismo motor, misma didáctica; el contenido es
-nuevo y está pensado para **hispanohablantes rioplatenses que aprenden
-portugués de Brasil** hasta C1 en un año (52 semanas).
+en este mismo repo). Mismo motor, misma didáctica; el contenido es nuevo y
+está pensado para **hispanohablantes rioplatenses que aprenden portugués de
+Brasil** hasta C1 en un año (52 semanas).
+
+Lo común a los dos idiomas (dónde va cada cosa, qué se genera, cómo se
+construye y qué controla cada test) está en `CONTENIDO.md`, en la raíz. Acá
+queda lo propio del portugués: la variedad, la ortografía, los puntos
+críticos del hispanohablante, el temario, el conjugador y el detalle de los
+tipos de ítem.
 
 ## Reglas generales
 
@@ -57,7 +63,7 @@ portugués de Brasil** hasta C1 en un año (52 semanas).
 
 ## El temario manda
 
-`tools/curriculo.py` es la fuente única: `WEEKS` (título, foco, puntos
+`tools/pt/curriculo.py` es la fuente única: `WEEKS` (título, foco, puntos
 clave, verbos del gimnasio, tiempos), `SAI_FARE` (función comunicativa y
 campo léxico) y `TENSE_WEEK` (semana en que se enseña cada tiempo).
 
@@ -71,7 +77,7 @@ Vocabulario: lo que el alumno **escribe** tiene que ser vocabulario ya visto
 o transparente para un hispanohablante; en lo que **lee** se toleran
 palabras nuevas glosadas.
 
-## Claves del conjugador (`docs/js/conjugator.js`, `window.Conj`)
+## Claves del conjugador (`docs/lang/pt/conjugator.js`, `window.Conj`)
 
 Personas (índices 0-5): `["eu", "tu", "ele/ela/você", "nós", "vós",
 "eles/elas/vocês"]`. *vós* existe en las tablas pero nunca se ejercita;
@@ -85,7 +91,7 @@ futuroComposto, condicionalComposto, subjPerfeito, subjMaisQuePerfeito,
 subjFuturoComposto`. Además `imperative(inf)`, `participle(inf)`
 (con participios dobles), `gerund(inf)`.
 
-## Ítems de ejercicio (tools/authored/*.py)
+## Ítems de ejercicio (`tools/pt/authored/*.py`)
 
 Cada módulo define `ITEMS = [dict(...), ...]`. Campos comunes:
 
@@ -117,7 +123,7 @@ Cada módulo define `ITEMS = [dict(...), ...]`. Campos comunes:
 - `listen`: `stem` es lo que se oye (TTS pt-BR), `options`, `answer`,
   `nopeek: true`.
 
-## Estilo de las lecciones (tools/lessons/s1..s4.py)
+## Estilo de las lecciones (`tools/pt/lessons/s*.py`)
 
 Mismo formato que las lecciones de italiano: `LESSONS = {semana: {"intro",
 "parts": [{"h", "blocks": [índices]}], "blocks": [{"h", "r", "table"?,

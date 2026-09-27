@@ -32,11 +32,15 @@ idioma.
 Un **núcleo** común (`docs/js/`) y un **paquete** por idioma
 (`docs/lang/it/`, `docs/lang/pt/`) con su conjugador, su diagnóstico, su
 contenido, su interfaz y su tema. Un arreglo en el núcleo vale para los dos
-idiomas. Detalle en [ARQUITECTURA.md](ARQUITECTURA.md).
+idiomas. Detalle en [ARQUITECTURA.md](ARQUITECTURA.md); para aportar
+contenido, [CONTENIDO.md](CONTENIDO.md); las auditorías, en
+[auditorias/](auditorias/README.md).
 
 ```sh
-npm run build      # compila banco y curso de los dos idiomas (tools/it, tools/pt)
-npm test           # la batería de tests de cada idioma contra el mismo núcleo
-npm run sim        # un año simulado en cada idioma
+npm run build      # compila banco, curso, tramo C1 y Biblioteca de los dos idiomas
+npm test           # los tests de cada idioma, los comunes y los chequeos de contenido
+npm run lint       # eslint sobre docs/
+npm run sim        # un año simulado en cada idioma (falla si algo no se puede jugar)
+npm run smoke      # la app entera en Chromium (necesita Playwright)
 npm start          # http://localhost:8000
 ```

@@ -36,9 +36,15 @@ docs/
                         y las palabras que delatan la otra lengua
 tools/
   lib/pack.js           carga un idioma completo en node, en el orden de boot.js
+  lib/sim_carriera.js   un año simulado de un idioma (npm run sim)
   lib/smoke_browser.js  recorre los dos idiomas en Chromium (selector, cambio
                         de idioma, pantallas, service worker)
-  it/, pt/              las herramientas y los tests de cada idioma
+  lib/test_*.js         los tests de lo común, en los dos idiomas
+  it/, pt/              las herramientas, las fuentes del contenido y los
+                        tests de cada idioma
+  it/fuentes/           extractos de los manuales del italiano (no se publican)
+auditorias/             las auditorías, con su índice
+CONTENIDO.md            dónde va cada contenido y qué test lo controla
 ```
 
 **Qué va dónde.** Si algo depende de la lengua (una palabra, una regla de
@@ -54,7 +60,17 @@ quien ya estudiaba italiano no pierde nada. El idioma elegido queda en
 `c1.lang`.
 
 **Tests.** `npm test` corre la batería de cada idioma (`tools/it/test_*.js`,
-`tools/pt/test_*.js`) contra el mismo núcleo, cargado con `tools/lib/pack.js`.
+`tools/pt/test_*.js`) contra el mismo núcleo, cargado con `tools/lib/pack.js`,
+los tests de lo común (`tools/lib/test_*.js`) y los chequeos de contenido
+(`npm run test:content`). Además: `npm run lint` (`eslint.config.cjs`),
+`npm run sim` (falla si una semana no se domina, si hay errores o ítems
+repetidos) y `npm run smoke`. El CI (`.github/workflows/test.yml`) corre todo
+eso y controla que `npm run build` reproduzca `docs/` exacto; el detalle, en
+[CONTENIDO.md](CONTENIDO.md).
+
+**Versión.** Una sola: `package.json` (X.Y.Z), que tiene que coincidir con
+`APP_VERSION` de `docs/js/app.js` y `VERSION` de `docs/sw.js`
+(`tools/lib/test_version.js`).
 
 **Biblioteca.** Libros enteros de dominio público (Project Gutenberg,
 espejado en GitHub por GITenberg) para la lectura extensiva, en la pestaña
