@@ -70,7 +70,6 @@
   function it(w) { return "*" + w + "*"; }
   // A whole sentence in italics, closed by its own punctuation or a period.
   function sentEnd(x) { x = String(x).trim(); return it(x) + (/[.!?…»]$/.test(x) ? "" : "."); }
-  var LETTER = "a-zà-ÿ";
 
   // Tokens for comparison: lower case, punctuation out; hyphens between
   // letters stay (levanto-me, segunda-feira, vendem-se).
@@ -826,7 +825,7 @@
 
     // 2. Tildes y nasales (la misma palabra con otros signos)
     if (gs === es && g !== e && !/ñ/.test(g)) {
-      var key = [g, e].sort().join("|"), key2 = g + "|" + e, key3 = gs + "|" + e;
+      var key = [g, e].sort().join("|"), key3 = gs + "|" + e;
       if (PRE1990.test(g)) return { cat: "ortografia", slip: true,
         hint: "Revisá la tilde de la palabra marcada: la ortografía cambió.",
         explain: "Desde el Acuerdo Ortográfico de 1990 se escribe " + it(e) + " (ideia, voo, para, leem, linguiça: sin tilde ni diéresis)." };
@@ -1162,7 +1161,6 @@
 
     // 20. Plurales
     var nounP = DATA.nounsByPlural[e];
-    var sgE = nounP && nounP.s !== e ? nounP.s : (/(ões|ães|ãos|ais|éis|óis|uis|ns|is)$/.test(e) ? null : null);
     if (nounP && nounP.pl === e && nounP.s !== e && naivePlurals(nounP.s).indexOf(g) >= 0) return { cat: "plural", slip: false,
       hint: "Revisá el plural de la palabra marcada.",
       explain: pluralExplain(nounP.s, e) + (nounP.note ? " " + nounP.note : "") };
@@ -1271,9 +1269,6 @@
     return null;
   }
 
-  var TONIC = ["mim", "ti", "si", "ele", "ela", "nós", "vós", "eles", "elas", "você", "vocês", "eu", "tu"];
-  var ATONE = ["me", "te", "se", "nos", "vos", "lhe", "lhes", "o", "a", "os", "as"];
-  var PREPS_ALL = ["a", "de", "em", "por", "para", "com", "sem", "até", "entre", "sobre", "contra", "desde", "após", "sob", "perante", "pra"];
   var DO_VERB = /^(ver|conhecer|amar|ajudar|convidar|visitar|esperar|chamar|encontrar|abraçar|beijar|cumprimentar|levar|buscar|procurar|escutar|ouvir|olhar|entender|acompanhar|admirar|respeitar|odiar|adorar|assistir|deixar|acordar|apresentar|receber)$/;
   var IO_VERB = /^(dar|dizer|perguntar|pedir|escrever|telefonar|responder|mandar|enviar|mostrar|contar|explicar|emprestar|oferecer|devolver|ensinar|agradecer|obedecer)$/;
 
@@ -1783,12 +1778,6 @@
       explain: it(g) + " es " + TENSE_ES[b.tense] + "; acá va " + TENSE_ES[a.tense] + ": " + it(e) + "." };
   }
 
-  function regWhy(ctx) {
-    var prev = ctx.e[ctx.ei - 1] || "";
-    var lem = verbLemmas(prev);
-    for (var i = 0; i < lem.length; i++) if (REGENCIA[lem[i]]) return " (" + lem[i] + " " + REGENCIA[lem[i]][0] + ")";
-    return "";
-  }
   // The verb before the word, skipping adverbs (penso muito em você).
   var ADV_SKIP = /^(muito|sempre|também|não|já|mais|bem|nunca|ainda|só|tanto|pouco|logo|hoje|ontem|agora|me|te|se|lhe|nos)$/;
   function verbLemmasBefore(ctx) {

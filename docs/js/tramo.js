@@ -282,7 +282,7 @@
   }
 
   function deliverAsc() {
-    var a = cur.s.ascolto, vf = VF(), ok = 0, detail = [];
+    var a = cur.s.ascolto, ok = 0, detail = [];
     a.questions.forEach(function (q, i) {
       var sel = document.querySelector('input[name="tq' + i + '"]:checked'), right = !!sel && sel.value === q[2];
       if (right) ok++;

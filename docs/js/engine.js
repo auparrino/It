@@ -715,8 +715,6 @@
     return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
   }
 
-  function today() { return dayKey(); }
-
   // Whole calendar days between two day keys (b - a).
   function daysBetween(a, b) {
     function parse(k) {

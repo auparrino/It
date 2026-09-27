@@ -2703,13 +2703,13 @@
     if (qt && q < 2) qt.hidden = false;
 
     // Mark the chosen option so the learner sees what they picked.
-    var opts = document.querySelectorAll(".opt");
-    for (var i = 0; i < opts.length; i++) {
-      opts[i].disabled = true;
-      if (Engine.normalise(opts[i].textContent) === Engine.normalise(it.answer)) {
-        opts[i].classList.add("right");
-      } else if (Engine.normalise(opts[i].textContent) === Engine.normalise(given)) {
-        opts[i].classList.add("wrong");
+    var optEls = document.querySelectorAll(".opt");
+    for (var i = 0; i < optEls.length; i++) {
+      optEls[i].disabled = true;
+      if (Engine.normalise(optEls[i].textContent) === Engine.normalise(it.answer)) {
+        optEls[i].classList.add("right");
+      } else if (Engine.normalise(optEls[i].textContent) === Engine.normalise(given)) {
+        optEls[i].classList.add("wrong");
       }
     }
     var input = $("#ans");

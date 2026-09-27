@@ -75,11 +75,6 @@
   }
   function taught(x, state, key) { return (x[key || "w"] || 1) <= weekOf(state); }
   function within(lvl, max) { return LEVELS.indexOf(lvl) <= LEVELS.indexOf(max); }
-  function nearLevel(lvl, max) {
-    var a = LEVELS.indexOf(lvl), b = LEVELS.indexOf(max);
-    return a <= b && a >= b - 1;
-  }
-
   /* -------------------------------------------------------- artículos */
 
   // The articles of the language (by the gender, and in some languages by

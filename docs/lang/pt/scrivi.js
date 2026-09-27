@@ -348,7 +348,6 @@
     return null;
   }
   function isAdj(w) { return !!adjForms(w); }
-  var GN_IX = { ms: 0, fs: 1, mp: 2, fp: 3 };
 
   /* Género y número de un sustantivo: del banco, de los heterogenéricos o,
      con cuidado, de la terminación. */
@@ -406,7 +405,6 @@
   var COLLOQ = /^(tá|tô|tava|tavam|tamo|tamos|pra|pro|pros|pras|né|cadê|cê|ocê|vamo|tipo|beleza|valeu|mó|ó|aí|bora|galera|cara|parada|tranquilo|firmeza)$/;
   var CONJ_SUBJ = ["para que", "embora", "caso", "antes que", "sem que", "até que", "a fim de que", "desde que", "contanto que", "mesmo que",
                    "ainda que", "a não ser que", "por mais que", "a menos que", "logo que"];
-  var FUT_TRIG = /^(quando|se|assim|logo|enquanto|sempre|depois|conforme|como|onde|quem|caso)$/;
   var IRR_DERIV = /^(manter|conter|obter|deter|reter|entreter|abster|intervir|convir|provir|propor|compor|supor|dispor|impor|repor|expor|opor|prever|rever|caber|valer|perder|medir|passear|odiar|ansiar|mediar|remediar|incendiar|requerer|prover|reaver|construir|destruir)$/;
   var IRR_PRES = /^(ir|vir|ser|estar|ter|fazer|dizer|trazer|poder|querer|saber|ver|dar|pôr|ler|sair|pedir|dormir|ouvir|perder|haver|caber|valer|crer|rir|medir|subir|preferir|sentir|seguir|vestir|servir|repetir)$/;
 
@@ -1080,8 +1078,7 @@
         try { parts = Conj && Conj.participles ? Conj.participles(lemP) : null; } catch (e) { parts = null; }
         if (parts && parts.regular && parts.irregular && parts.regular !== parts.irregular) {
           var regF = parts.regular, irrF = parts.irregular;
-          var suffixP = w.slice(regF.length - 1).replace(/^o/, "") ;
-          var isReg = w.replace(/(a|os|as)$/, "o") === regF, isIrr = w.replace(/(a|os|as)$/, "o") === irrF;
+          var isReg = w.replace(/(a|os|as)$/, "o") === regF;
           if (isReg && /^(é|são|foi|foram|era|eram|será|serão|seja|sejam|fosse|fossem|sido|ser|está|estão|estava|estavam|ficou|ficaram|fica|ficam)$/.test(p))
             push(i, 1, "participio", "Con *ser, estar* y *ficar* va el participio corto: " + it(irrF.replace(/o$/, w.slice(regF.length - 1))) + ".");
         }

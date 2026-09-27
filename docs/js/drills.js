@@ -590,9 +590,6 @@
     var v = e.v, id = "v:" + v[0], card = state && state.cards && state.cards[id];
     if (!card) {
       // distractors: meanings of nearby weeks, never the same Spanish word
-      var near = Object.keys(VOC).map(function (k) { return VOC[k]; }).filter(function (x) {
-        return x.v[0] !== v[0] && x.v[1] !== v[1] && Math.abs(x.week - e.week) <= 3;
-      });
       // Same field first (hermano among hija, tío, abuelo), then the same
       // kind of word: a verb among nouns, or «ventana» next to «hermano»,
       // gives itself away.
@@ -1092,7 +1089,6 @@
     firstRecognize: firstRecognize,
     vocabSession: vocabSession,
     vocabItem: vocabItem,
-    recognitionOf: recognitionOf,
     pickFresh: pickFresh,
     buildBoss: buildBoss,
     buildWeak: buildWeak,

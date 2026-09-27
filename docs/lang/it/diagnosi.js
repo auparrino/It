@@ -1446,16 +1446,6 @@
     return null;
   }
 
-  // The noun an adjective or possessive agrees with: the nearest known noun.
-  function nounNear(ctx) {
-    var cands = [ctx.e[ctx.ei + 1], ctx.e[ctx.ei - 1], ctx.e[ctx.ei + 2], ctx.e[ctx.ei - 2]];
-    for (var i = 0; i < cands.length; i++) {
-      var w = cands[i];
-      if (w && (DATA.nouns[w] || DATA.nounsByPlural[w])) return w;
-    }
-    return null;
-  }
-
   // The definite article of a noun, with its space (il , l', gli …).
   function articleFor(noun, n) {
     var pl = n && n.pl === noun && n.s !== noun, snd = soundRule(noun);
