@@ -449,81 +449,81 @@
     var known = Frasi.ALL.filter(function (x) { return state.cards[x.id]; }).length;
     var hour = new Date().getHours();
     var hello = UI.hello(hour);
+    if (window.Inicio) Inicio.checkPhase();          // aprobado el examen: el modo mantenimiento
+    var maint = state.phase === "mantenimiento";
+    var anyLesson = Object.keys(state.read || {}).length > 0 || Object.keys(state.readSess || {}).length > 0 || state.unlocked > 1;
 
     var plan = weekPlan(w), doneN = plan.filter(function (x) { return x.done; }).length;
     var nm = nextMission(w);
-    // Words: the course brings 9-15 a week; the bank (Parole / Palavras) adds 12 a session.
-    var nWords = Object.keys(state.cards).filter(function (id) {
-      return id.indexOf("v:") === 0 || id.indexOf("b:voc:") === 0;
-    }).length;
-    var wordGoal = state.unlocked <= 13 ? 800 : state.unlocked <= 26 ? 1800 : state.unlocked <= 39 ? 2800 : 3800;
+    var nWords = Object.keys(state.cards).filter(function (id) { return id.indexOf("v:") === 0 || id.indexOf("b:voc:") === 0; }).length;
+    // The top: the greeting and the plan of the day (inicio.js, plan.js).
+    var top = window.Inicio ? Inicio.oggiTop() : { first: false, html: "" };
     var html = '<h1 class="hello">' + hello + '</h1>' +
-      '<p class="lead">' + (weekend
-        ? "Fin de semana: meta a la mitad (" + goal + " xp). Algo liviano alcanza: una lectura, una pausa." +
-          (state.streak > 1 ? " Llevás <b>" + dias(state.streak) + "</b>." : "")
-        : state.streak > 1
-        ? "Llevás <b>" + dias(state.streak) + "</b> seguidos" + (state.streak >= 7 ? " y tu xp vale ×1,2" : "") + ". No cortes la racha."
-        : !lessonRead(1) ? "Empezás de cero. Tu camino es " + UI.pathEl + ": un paso por vez."
-        : "Tu próximo paso está marcado. Si tenés tres minutos, " + UI.pausaUna + ".") + "</p>";
+      '<p class="lead">' + (top.first ? "Empezás hoy. Un paso por vez: lo primero es la lección." :
+        maint ? "Terminaste el curso. Ahora, que no se pierda: poco y seguido."
+        : weekend ? "Fin de semana: meta a la mitad. Algo liviano alcanza." + (state.streak > 1 ? " Llevás <b>" + dias(state.streak) + "</b>." : "")
+        : state.streak > 1 ? "Llevás <b>" + dias(state.streak) + "</b> seguidos" + (state.streak >= 7 ? " y tu xp vale ×1,2" : "") + "."
+        : "Tu plan de hoy está armado. Tocá «Empezar» y te llevo paso a paso.") + "</p>";
 
     var pend = loadPending();
-    if (pend) {
-      html += '<div class="card weekcard first"><span class="muted">⏸️ Dejaste algo a medias</span>' +
+    var pendHtml = pend ? '<div class="card weekcard first"><span class="muted">⏸️ Dejaste algo a medias</span>' +
         "<b>" + esc(pendingTitle(pend)) + "</b>" +
         '<span class="row" style="margin-top:10px"><button class="btn" id="resume">Seguir donde estaba</button>' +
-        '<button class="tab" id="discard">Descartar</button></span></div>';
-    }
+        '<button class="tab" id="discard">Descartar</button></span></div>' : "";
 
-    if (window.Ubicacion) html += Ubicacion.banner(state);
-    html += oggiHabitCards();
+    // Until the first lesson: a single card (and what was left half done).
+    if (top.first) return html + pendHtml + top.html + versionLine();
+    html += top.html + pendHtml;
+    // One habit card a day at most, that can be put off (the return first).
+    html += window.Inicio ? Inicio.habit(oggiHabitCards()) : oggiHabitCards().map(function (c) { return c.html; }).join("");
 
-    // El camino antes que nada: la semana en curso y la próxima misión.
-    html += '<div class="card weekcard first hero">' +
+    // Everything else, folded: «Más para hoy».
+    var more = "";
+    // The week and its next mission (the plan already takes it; here, the whole week).
+    if (!maint) more += '<div class="card weekcard hero">' +
       '<span class="muted">🗺️ ' + UI.path + " · semana " + w.week + " · " + esc(w.level) + " · " + doneN + " / " + plan.length + " misiones</span>" +
       "<b>" + esc(w.title) + "</b>" +
       '<span class="prog"><i style="width:' + Math.round(doneN / Math.max(1, plan.length) * 100) + '%"></i></span>' +
       (nm
         ? '<span class="muted">Siguiente: <b>' + nm.ico + " " + nm.title + "</b></span>" +
-          '<span class="row" style="margin-top:10px"><button class="btn" id="heronext">▶︎ ' + esc(nm.title) + "</button>" +
+          '<span class="row" style="margin-top:10px"><button class="btn ghost" id="heronext">▶︎ ' + esc(nm.title) + "</button>" +
           '<button class="tab" data-week="' + w.week + '">Ver la semana</button></span>'
         : '<span class="muted">Semana completa. ' + (state.unlocked > w.week ? "Seguí con la siguiente." : "Repasá o entrená para abrir la siguiente.") + "</span>" +
-          '<span class="row" style="margin-top:10px"><button class="btn" data-week="' + w.week + '">Ver la semana</button>' +
+          '<span class="row" style="margin-top:10px"><button class="btn ghost" data-week="' + w.week + '">Ver la semana</button>' +
           '<button class="tab" id="topercorso">' + UI.path + "</button></span>") +
       "</div>";
 
-    // Meta del día + cofre
-    html += '<div class="card goal">' +
-      '<div class="goalrow"><div><b>Meta de hoy</b>' +
-        '<span class="muted"> ' + (reached ? "✓ " + todayXp + " xp hoy" : todayXp + " / " + goal + " xp") +
+    // xp: the game's currency (the goal is in minutes, in the plan above)
+    more += '<div class="card goal">' +
+      '<div class="goalrow"><div><b>xp de hoy</b>' +
+        '<span class="muted"> ' + (reached ? "✓ " + todayXp + " xp" : todayXp + " / " + goal + " xp") +
         "</span></div>" +
-        (reached && !chestOpen
-          ? '<button class="btn gold pulse" id="chest">🎁 Abrir cofre</button>'
-          : chestOpen ? '<span class="muted">🎁 cofre abierto · volvé mañana</span>'
-          : '<span class="muted">🎁 al llegar a la meta</span>') +
+        (chestOpen ? '<span class="muted">🎁 cofre abierto · volvé mañana</span>'
+          : reached ? '<span class="muted">🎁 el cofre está arriba</span>' : '<span class="muted">🎁 al llegar a ' + goal + " xp</span>") +
       "</div>" +
       '<div class="goalbar"><i style="width:' +
         Math.min(100, Math.round(todayXp / goal * 100)) + '%"></i></div>' +
       "</div>";
 
-    // Atajos: la pausa (mezcla la semana en curso), el repaso, el lampo.
-    html += '<div class="big">' +
-      '<button class="bigbtn pausa" id="pausa"><span class="e">☕</span>' +
-        UI.pausaBtn + "</button>" +
-      '<button class="bigbtn giorno" id="giorno"' + (dailyDone ? " disabled" : "") + '>' +
+    // Shortcuts, each when it makes sense: the pause once a lesson was
+    // read, the challenge too, the review when something is due, the lampo
+    // with 12 phrases seen.
+    more += '<div class="big">' +
+      (anyLesson ? '<button class="bigbtn pausa" id="pausa"><span class="e">☕</span>' + UI.pausaBtn + "</button>" : "") +
+      (anyLesson && !maint ? '<button class="bigbtn giorno" id="giorno"' + (dailyDone ? " disabled" : "") + '>' +
         '<span class="e">🎯</span><b>' + UI.daily + "</b><small>" +
-        (dailyDone ? "✓ hecha · mañana hay otra" : "6 preguntas · doble xp") + "</small></button>" +
-      '<button class="bigbtn ripasso" id="rev"' + (due ? "" : " disabled") + '>' +
-        '<span class="e">🔁</span><b>' + UI.review + "</b><small>" +
-        (due ? "hoy: " + dueToday + (due > 20 ? " (quedan " + due + ")" : " para repasar") : "nada pendiente") + "</small></button>" +
+        (dailyDone ? "✓ hecha · mañana hay otra" : "6 preguntas · doble xp") + "</small></button>" : "") +
+      (due ? '<button class="bigbtn ripasso" id="rev"><span class="e">🔁</span><b>' + UI.review + "</b><small>" +
+        "hoy: " + dueToday + (due > 20 ? " (quedan " + due + ")" : " para repasar") + "</small></button>" : "") +
       (state.unlocked >= 2 && Banca.loaded() ? '<button class="bigbtn parole" data-bank="b-voc"><span class="e">📚</span><b>' + UI.words + "</b><small>" +
-        nWords.toLocaleString("es-AR") + " / " + wordGoal.toLocaleString("es-AR") + " palabras" +
+        nWords.toLocaleString("es-AR") + " palabras" +
         (window.Freq && Freq.loaded() ? " · " + Freq.coverage(knownWords()).fundamental[0] + " de las 2.000 frecuentes" : "") + "</small></button>" : "") +
       (matureWords().length >= 30 ? '<button class="bigbtn lampo" id="lampoparole"><span class="e">🧠</span>' +
         "<b>" + UI.wordOrNot + "</b><small>reconocer en un segundo · récord: " + ((state.best || {}).lampoParole || 0) + "</small></button>" : "") +
       (known >= 12 ? '<button class="bigbtn lampo" id="lampo"><span class="e">⚡</span>' +
         "<b>" + UI.lampo + " 60″</b><small>récord: " + ((state.best || {}).lampo || 0) + "</small></button>" : "") +
       "</div>" +
-      (known < 12 ? '<p class="muted" style="margin:-6px 0 12px">⚡ ' + UI.lampoEl + " 60″ se abre con 12 frases vistas (llevás " + known + ").</p>" : "");
+      (known < 12 && anyLesson ? '<p class="muted" style="margin:-6px 0 12px">⚡ ' + UI.lampoEl + " 60″ se abre con 12 frases vistas (llevás " + known + ").</p>" : "");
 
     // Las cuatro cuerdas de la semana (Nation): dónde falta, un consejo.
     var tot = strands.input + strands.output + strands.forma + strands.fluidez;
@@ -532,25 +532,26 @@
       var TIP = { input: "leé un episodio o escuchá una escena", output: "escribí frases de memoria o traducí",
                   forma: "una ronda de la semana", fluidez: "un " + UI.lampo + " o repasá una escena" };
       var low = Engine.STRANDS.slice().sort(function (a, b) { return strands[a] - strands[b]; })[0];
-      html += '<div class="card"><b>🎻 Tus cuatro cuerdas · últimos 7 días</b>' +
+      more += '<div class="card"><b>🎻 Tus cuatro cuerdas · últimos 7 días</b>' +
         '<div class="strands">' + Engine.STRANDS.map(function (k) {
           return '<i class="s-' + k + '" style="width:' + Math.round(strands[k] / tot * 100) + '%" title="' + NAMES[k] + '"></i>';
         }).join("") + "</div>" +
         '<p class="muted">' + Engine.STRANDS.map(function (k) { return NAMES[k] + " " + Math.round(strands[k] / tot * 100) + " %"; }).join(" · ") +
         ". Te falta <b>" + NAMES[low].toLowerCase() + "</b>: " + TIP[low] + ".</p></div>";
     }
+    more += planLine();
 
     // La clínica: los errores que se repiten
     var weakO = Banca.loaded() ? Banca.weakest(state, 2) : [];
     if (weakO.length) {
-      html += '<button class="card weekcard clin" data-bank="clinica">' +
+      more += '<button class="card weekcard clin" data-bank="clinica">' +
         '<span class="muted">🩺 Clínica de tus errores</span>' +
         "<b>Practicá " + weakO.map(function (w) { return esc((Diagnosi.LABEL[w.cat] || w.cat).toLowerCase()); }).join(" y ") + "</b>" +
         '<span class="muted">12 ejercicios armados con lo que más te cuesta.</span></button>';
     }
 
     // Frase del giorno / do dia
-    html += '<div class="card fdg"><span class="muted">' + UI.fraseDay + "</span>" +
+    more += '<div class="card fdg"><span class="muted">' + UI.fraseDay + "</span>" +
       '<div class="fit">' + esc(fText) + "</div>" +
       '<div class="fes">' + esc(f.es) + "</div>" +
       (f.note ? '<div class="note">' + mk(f.note) + "</div>" : "") +
@@ -558,13 +559,16 @@
 
     // Calendario de los últimos 28 días
     var days = Engine.lastDays(state, 28);
-    html += '<div class="card"><h3 style="margin-top:0">Tus últimas 4 semanas</h3>' +
+    more += '<div class="card"><h3 style="margin-top:0">Tus últimas 4 semanas</h3>' +
       '<div class="heat">' + days.map(function (d) {
         var lvl = d.xp <= 0 ? 0 : d.xp < goal / 2 ? 1 : d.xp < goal ? 2 : 3;
         return '<i class="h' + lvl + '" title="' + d.key + ": " + d.xp + ' xp"></i>';
       }).join("") + "</div>" +
       '<p class="muted" style="margin:8px 0 0">Cada cuadrado es un día. ' + UI.calendarGreen + " = meta cumplida. " +
       "Cada 7 días de racha ganás un 🛡️ escudo que la salva si un día no podés.</p></div>";
+
+    html += '<details class="mas" id="masoggi"' + (window.Inicio && Inicio.moreOpen() ? " open" : "") + '><summary><span class="mas-t">Más para hoy</span><span class="muted small">' +
+      (maint ? "pausa, repaso, frase del día, calendario" : "la semana, pausa, sfida, repaso, frase del día, calendario") + "</span></summary>" + more + "</details>";
 
     // Instalación
     if (!isStandalone()) {
@@ -586,58 +590,75 @@
   var WHENS = [["manana", "a la mañana"], ["mediodia", "al mediodía"], ["noche", "a la noche"]];
 
   /* The cards of habit and motivation on Oggi / Hoje: the return after a pause
-     (no debt, a five-minute restart: Lally 2010; Mazza 2016), the plan
-     (implementation intention, Gollwitzer & Sheeran 2006, d = 0,65), the
-     ideal self (Dörnyei), the weekly sub-goal (Bandura & Schunk 1981) and
-     the weekly reflective close. */
+     (no debt, a five-minute restart: Lally 2010; Mazza 2016), the weekly
+     reflective close, the backup, the ideal self (Dörnyei) and the weekly
+     sub-goal (Bandura & Schunk 1981).  Candidates in order of priority:
+     Inicio.habit shows one a day at most, and each can be put off. */
   function oggiHabitCards() {
-    var html = "", away = Engine.daysAway(state), fresh = Engine.freshStart();
-    var sg = Engine.subGoals(state), ses = Engine.sessionsToday(state);
+    var out = [], away = Engine.daysAway(state), fresh = Engine.freshStart();
     var ideal = state.ideal && state.ideal.text ? state.ideal.text : "";
+    var maint = state.phase === "mantenimiento";
     if (away >= 3 && state.totals.attempts > 0) {
-      html += '<div class="card weekcard first ritorno"><span class="muted">👋 Volviste después de ' + away + " días</span>" +
+      out.push({ id: "ritorno", html: '<div class="card weekcard first ritorno"><span class="muted">👋 Volviste después de ' + away + " días</span>" +
         "<b>Lo que aprendiste no se borró: re-aprender lleva una fracción del tiempo.</b>" +
         '<span class="muted">' + (fresh === "semana" ? "Y es lunes: buen día para retomar. " : fresh === "mes" ? "Y empieza el mes: buen momento para volver. " : "") +
           "Cinco minutos con lo que más se enfrió y seguimos" + (ideal ? " hacia lo tuyo: «" + esc(ideal) + "»" : "") + ".</span>" +
         '<span class="row" style="margin-top:10px"><button class="btn" id="ritorno">▶︎ 5 minutos para retomar</button></span>' +
         (state.pauseAsk !== Engine.dayKey() ? '<span class="muted small">¿Qué pasó? <button class="tab" data-why="tiempo">sin tiempo</button> ' +
           '<button class="tab" data-why="dificil">se puso difícil</button> <button class="tab" data-why="aburrido">me aburrí</button> ' +
-          '<button class="tab" data-why="olvide">me olvidé</button></span>' : "") + "</div>";
-    }
-    if (!state.ideal && state.totals.attempts >= 10) {
-      html += '<div class="card weekcard"><span class="muted">🎯 ¿Para qué querés ' + UI.langEs + "?</span>" +
-        '<span class="chips">' + WHY.map(function (w) { return '<button class="tab" data-why2="' + w[0] + '">' + w[1] + "</button>"; }).join("") + "</span>" +
-        '<span class="muted small">Tener la meta a la vista sostiene el esfuerzo (Dörnyei: el yo ideal). Después la escribís con tus palabras en ' + UI.me + ".</span></div>";
-    }
-    if (state.unlocked >= 2) {
-      var left = Math.max(0, sg.wordsPerWeek - sg.wordsThisWeek);
-      html += '<div class="card goalweek"><b>🪜 Esta semana</b> <span class="muted">· hacia el ' + esc(sg.level) + " en la semana " + sg.boss + "</span>" +
-        '<div class="goalbar" style="margin:8px 0 4px"><i style="width:' + Math.min(100, Math.round(sg.wordsThisWeek / Math.max(1, sg.wordsPerWeek) * 100)) + '%"></i></div>' +
-        '<p class="muted" style="margin:0">' + sg.wordsThisWeek + " / " + sg.wordsPerWeek + " palabras nuevas" +
-          (left ? " · faltan " + left : " ✓") + " · " + sg.nWords.toLocaleString("es-AR") + " / " + sg.wordGoal.toLocaleString("es-AR") + " para el " + UI.boss +
-          (sg.weeksLeft > 1 ? " en " + sg.weeksLeft + " semanas" : "") + ". La cuota se recalcula sola si te atrasás.</p></div>";
+          '<button class="tab" data-why="olvide">me olvidé</button></span>' : "") + "</div>" });
     }
     // weekly close: on the first visit of a new week, about the week before
     var wk = Engine.weekKey(), prevWk = Engine.weekKey(new Date(Date.now() - 7 * 86400000));
     if (state.totals.attempts >= 50 && !(state.reflect || {})[prevWk] && (state.reflect || {}).skip !== wk && Engine.weekStreak(state) + Engine.daysAway(state) > 0 && new Date().getDay() <= 2) {
       var errs = state.errs || {}, cats = Object.keys(errs).sort(function (a, b) { return errs[b].n - errs[a].n; }).slice(0, 3);
-      html += '<div class="card weekcard reflect"><span class="muted">📓 Cierre de la semana pasada · tres toques</span>' +
+      out.push({ id: "reflect", html: '<div class="card weekcard reflect"><span class="muted">📓 Cierre de la semana pasada · tres toques</span>' +
         '<span class="muted small">¿Qué te costó más?</span><span class="chips">' +
           cats.map(function (c) { return '<button class="tab" data-rf="hard" data-v="' + esc(c) + '">' + esc(Diagnosi.LABEL[c] || c) + "</button>"; }).join("") +
           '<button class="tab" data-rf="hard" data-v="nada">nada en especial</button></span>' +
-        '<span class="muted small">¿Qué cambiás esta semana?</span><span class="chips">' +
+        '<span class="muted small">¿Qué cambiás esta semana? Tu plan del día lo tiene en cuenta.</span><span class="chips">' +
           CHANGES.map(function (c) { return '<button class="tab" data-rf="change" data-v="' + c[0] + '">' + c[1] + "</button>"; }).join("") + "</span>" +
         '<span class="muted small">¿Cuándo estudiás?</span><span class="chips">' +
           WHENS.map(function (c) { return '<button class="tab" data-rf="when" data-v="' + c[0] + '">' + c[1] + "</button>"; }).join("") + "</span>" +
-        '<span class="row"><button class="btn" id="rfsave">Guardar</button><button class="tab" id="rfskip">Ahora no</button></span></div>';
-    } else if ((state.reflect || {})[prevWk] && (state.reflect || {})[prevWk].change) {
-      var rf = state.reflect[prevWk], ch = CHANGES.filter(function (c) { return c[0] === rf.change; })[0];
-      var sw = Engine.strandsLast(state, 7);
-      var done = rf.change === "escucha" ? sw.input : rf.change === "escritura" ? sw.output : rf.change === "frases" ? sw.fluidez : null;
-      html += '<p class="muted small planline">📓 Dijiste: <b>' + esc(ch ? ch[1] : rf.change) + "</b>" +
-        (done != null ? " · llevás " + done + " xp de eso esta semana" : "") + ".</p>";
+        '<span class="row"><button class="btn" id="rfsave">Guardar</button><button class="tab" id="rfskip">Ahora no</button></span></div>' });
     }
-    return html;
+    // the backup: every 14 days once there is something to lose
+    var sinceCopy = state.exportedAt ? Math.floor((Date.now() - state.exportedAt) / 86400000) : null;
+    if (state.totals.attempts >= 150 && (sinceCopy == null || sinceCopy >= 14)) {
+      out.push({ id: "copia", html: '<div class="card weekcard copia"><span class="muted">💾 Tu copia</span>' +
+        "<b>" + (sinceCopy == null ? "Todavía no guardaste una copia de tu progreso." : "Hace " + sinceCopy + " días que no guardás una copia.") + "</b>" +
+        '<span class="muted">Todo vive solo en este teléfono. Un toque y la mandás a tu Drive, tu mail o un chat.</span>' +
+        '<span class="row" style="margin-top:10px"><button class="btn" id="hexport">💾 Guardar ahora</button></span></div>' });
+    }
+    if (!state.ideal && state.totals.attempts >= 10) {
+      out.push({ id: "why", html: '<div class="card weekcard"><span class="muted">🎯 ¿Para qué querés ' + UI.langEs + "?</span>" +
+        '<span class="chips">' + WHY.map(function (w) { return '<button class="tab" data-why2="' + w[0] + '">' + w[1] + "</button>"; }).join("") + "</span>" +
+        '<span class="muted small">Tener la meta a la vista sostiene el esfuerzo (Dörnyei: el yo ideal). Después la escribís con tus palabras en ' + UI.me + ".</span></div>" });
+    }
+    // The words of the week, as the course teaches them (progreso.js: the
+    // words of the week plus one session of the bank, not the gap to the
+    // boss divided by the weeks left).
+    if (state.unlocked >= 2 && !maint && window.Progreso) {
+      var q = Progreso.wordQuota(course, state, new Date(), Banca.loaded());
+      var left = Math.max(0, q.target - q.done);
+      out.push({ id: "semana", html: '<div class="card goalweek"><b>🪜 Esta semana</b> <span class="muted">· hacia el ' + esc(q.level) + " en la semana " + q.boss + "</span>" +
+        '<div class="goalbar" style="margin:8px 0 4px"><i style="width:' + Math.min(100, Math.round(q.done / Math.max(1, q.target) * 100)) + '%"></i></div>' +
+        '<p class="muted" style="margin:0">' + q.done + " / " + q.target + " palabras nuevas" + (left ? " · faltan " + left : " ✓") +
+          " (las " + q.weekWords + " de la semana" + (Banca.loaded() ? " y una sesión de " + UI.words : "") + "). " +
+          "Llevás " + q.nWords.toLocaleString("es-AR") + "; el curso enseña unas " + q.byBoss.toLocaleString("es-AR") + " hasta el " + UI.boss + ".</p></div>" });
+    }
+    return out;
+  }
+  // What the learner said they would change this week, as a line.
+  function planLine() {
+    var prevWk = Engine.weekKey(new Date(Date.now() - 7 * 86400000));
+    var rf = (state.reflect || {})[prevWk];
+    if (!rf || !rf.change) return "";
+    var ch = CHANGES.filter(function (c) { return c[0] === rf.change; })[0];
+    var sw = Engine.strandsLast(state, 7);
+    var done = rf.change === "escucha" ? sw.input : rf.change === "escritura" ? sw.output : rf.change === "frases" ? sw.fluidez : null;
+    return '<p class="muted small planline">📓 Dijiste: <b>' + esc(ch ? ch[1] : rf.change) + "</b>" +
+      (done != null ? " · llevás " + done + " xp de eso esta semana" : "") + ".</p>";
   }
 
   /* A five-minute restart after a pause: the ten cards with the lowest
@@ -668,19 +689,22 @@
     g.fillText("🔥 " + state.streak + " días · " + Engine.weekStreak(state) + " semanas · nivel " + Engine.levelFor(state.xp).level, W / 2, K.lines[0]);
     g.fillText(sg.nWords.toLocaleString("es-AR") + " palabras" + (cov != null ? " · " + cov + " de las 2.000 frecuentes" : ""), W / 2, K.lines[1]);
     g.font = "20px system-ui, sans-serif"; g.fillStyle = K.muted;
-    g.fillText("Esta semana: " + sg.wordsThisWeek + " palabras nuevas · " + Engine.strandsLast(state, 7).output + " xp de output", W / 2, K.lines[2]);
-    c.toBlob(function (blob) {
-      var name = K.file + stamp() + ".png";
-      try {
-        var file = new File([blob], name, { type: "image/png" });
-        if (navigator.canShare && navigator.canShare({ files: [file] })) { navigator.share({ files: [file], title: "Mi semana de " + UI.langEs }).catch(function () { download(blob, name); }); return; }
-      } catch (e) { /* sin share */ }
-      download(blob, name);
-    }, "image/png");
+    var wkMin = window.Progreso ? Math.round(Progreso.thisWeek(state).sec / 60) : 0;
+    g.fillText("Esta semana: " + sg.wordsThisWeek + " palabras nuevas" + (wkMin ? " · " + Progreso.fmtH(wkMin * 60) + " de estudio" : ""), W / 2, K.lines[2]);
+    c.toBlob(function (blob) { shareBlob(blob, K.file + stamp() + ".png", "Mi semana de " + UI.langEs); }, "image/png");
+  }
+  // A PNG to the share sheet (Web Share), or downloaded.
+  function shareBlob(blob, name, title) {
+    try {
+      var file = new File([blob], name, { type: "image/png" });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) { navigator.share({ files: [file], title: title }).catch(function () { download(blob, name); }); return; }
+    } catch (e) { /* sin share */ }
+    download(blob, name);
   }
 
   function wireHabit() {
     on("#ritorno", function () { state.pauseAsk = Engine.dayKey(); persist(); startRound("ritorno"); });
+    on("#hexport", function () { exportSave(); render(); });
     document.querySelectorAll("[data-why]").forEach(function (b) {
       b.onclick = function () {
         if (!state.pauses) state.pauses = [];
@@ -1902,7 +1926,8 @@
       // A round that starts from the week (its briefing, its challenges, its
       // lesson's «A entrenar», a reading opened from it) goes back to the week.
       from: view.screen === "briefing" || view.screen === "sfide" || view.screen === "lezione" ||
-            (view.screen === "lettura" && view.epFrom === "briefing") ? "briefing" : null,
+            (view.screen === "lettura" && view.epFrom === "briefing") ? "briefing" :
+            view.screen === "lettura" && view.epFrom === "hoy" ? "hoy" : null,
       items: items,
       i: 0,
       right: 0,
@@ -3240,6 +3265,7 @@
     }
 
     html += '<div class="row" style="margin-top:16px">' +
+      (round.from === "hoy" && window.Inicio ? Inicio.resultButton() : "") +       // el plan de hoy sigue (inicio.js)
       (round.from === "briefing" ? '<button class="btn" id="backweek">← Seguir ' + UI.pathEl + "</button>" : "") +
       '<button class="btn' + (round.from === "briefing" ? " ghost" : "") + '" id="again">Otra ronda</button>' +
       '<button class="btn ghost" id="toggi">Inicio</button>' +
@@ -3413,39 +3439,48 @@
     }).length;
     var nextRank = null;
     Engine.RANKS.forEach(function (r) { if (!nextRank && r[0] > lv.level) nextRank = r; });
+    var R = window.Progreso ? Progreso.ritmo(state) : { min: 20, days: 5 };
+    var won = Engine.BADGES.filter(function (b) { return state.badges.indexOf(b.id) >= 0; }).length;
 
     return "<h1>" + UI.me + "</h1>" +
       '<div class="card rank"><div class="rk">' + esc(Engine.rankFor(lv.level)) + "</div>" +
         '<div class="muted">nivel ' + lv.level + " · " + state.xp + " xp totales" +
         (nextRank ? " · próximo rango: <b>" + esc(nextRank[1]) + "</b> en el nivel " +
           nextRank[0] : "") + "</div></div>" +
+      (window.Progreso ? Progreso.summaryCard() : "") +
       switchCard() +
 
       '<div class="card"><h2>Ajustes</h2>' +
-        '<label class="set"><span>Meta diaria</span><select id="goal">' +
-          [[100, "Relajada · 100 xp (2 o 3 pausas; 50 el finde)"], [200, "Normal · 200 xp (4 o 5 pausas; 100 el finde)"],
-           [350, "Seria · 350 xp"], [500, "Intensa · 500 xp"]].map(function (g) {
-            return '<option value="' + g[0] + '"' + (state.goal === g[0] ? " selected" : "") +
-              ">" + g[1] + "</option>";
+        '<label class="set"><span>Minutos por día<small>tu meta principal; la xp sigue siendo la moneda del juego</small></span><select id="ritmo-min">' +
+          [10, 15, 20, 30, 45].map(function (m) {
+            return '<option value="' + m + '"' + (R.min === m ? " selected" : "") + ">" + m + " min</option>";
           }).join("") + "</select></label>" +
+        '<label class="set"><span>Días por semana<small>los otros, descanso sin culpa</small></span><select id="ritmo-days">' +
+          [3, 4, 5, 6, 7].map(function (d) {
+            return '<option value="' + d + '"' + (R.days === d ? " selected" : "") + ">" + d + " días</option>";
+          }).join("") + "</select></label>" +
+        '<div class="set metafecha"><span>Meta con fecha<small>«llegar a la semana N para el día D»: te digo el ritmo que pide</small></span>' +
+          '<span class="row"><label class="mini">semana <input type="number" id="meta-week" min="2" max="52" inputmode="numeric" value="' + (R.week || "") + '" placeholder="' + Math.min(52, (state.unlocked || 1) + 12) + '"></label>' +
+          '<input type="date" id="meta-date" aria-label="Fecha de la meta" value="' + esc(R.date ? isoDate(R.date) : "") + '">' +
+          '<button class="tab" id="meta-save">Guardar</button>' + (R.week ? '<button class="tab" id="meta-clear">Borrar</button>' : "") + "</span></div>" +
+        (R.week && window.Progreso ? '<p class="muted small">' + Progreso.targetText(Progreso.target(state)) + "</p>" : "") +
         '<label class="set"><span>Tema<small>el ☀️/🌙 de arriba también lo cambia</small></span><select id="theme-set">' +
           [["", "Como el teléfono"], ["light", "Claro ☀️"], ["dark", "Oscuro 🌙"]].map(function (t) {
             return '<option value="' + t[0] + '"' + ((state.theme || "") === t[0] ? " selected" : "") + ">" + t[1] + "</option>";
           }).join("") + "</select></label>" +
         '<label class="set"><span>Modo oficina 🤫<small>nada suena solo; el 🔊 sigue andando si lo tocás</small></span>' +
           '<input type="checkbox" id="silent"' + (state.silent ? " checked" : "") + "></label>" +
-        '<label class="set"><span>Recordatorio diario<small>se agrega a tu calendario</small></span>' +
+        '<label class="set"><span>Recordatorio diario<small>se agrega a tu calendario y abre tu plan de hoy</small></span>' +
           '<span class="row"><input type="time" id="remtime" value="' +
             esc(state.remind || "13:30") + '"><button class="btn ghost" id="remind">📅 Agregar</button></span></label>' +
       "</div>" +
 
       planCard() +
       memoriaCard() +
-      lessicoCard() +
-      (window.Biblioteca ? Biblioteca.ioCard() : "") +   // input: palabras y minutos de lectura (js/biblioteca.js)
       '<div class="card"><h2>Tu copia</h2>' +
         '<p class="muted">Todo tu progreso vive <b>solo en este teléfono</b>, sin cuentas ni servidores. ' +
-        "Si borrás los datos del navegador se pierde: guardá una copia de vez en cuando.</p>" +
+        "Si borrás los datos del navegador se pierde: guardá una copia de vez en cuando." +
+        (state.exportedAt ? " La última: " + new Date(state.exportedAt).toLocaleDateString("es-AR") + "." : "") + "</p>" +
         '<div class="row"><button class="btn" id="export">💾 Guardar copia</button>' +
         '<button class="btn ghost" id="import">📂 Restaurar copia</button>' +
         '<input type="file" id="importfile" accept="application/json,.json" hidden></div>' +
@@ -3455,24 +3490,20 @@
       (window.Referencia ? Referencia.entry() : "") +
       errorsCard() +
       aiCard() +
-      (window.Voci && Voci.count() ? (function () {
-        var cr = Voci.credits();
-        return '<div class="card"><h2>🎙️ Voces reales</h2><p class="muted small">' + UI.suoni + " usa grabaciones de hablantes reales para " + Voci.count() +
-          " palabras. Voces de Lingua Libre (Wikimedia Commons), licencia CC BY-SA 4.0: " + Object.keys(cr).map(esc).join(", ") + ".</p></div>";
-      })() : "") +
-      (window.VociCV && (VociCV.ALL || []).length ? '<div class="card"><h2>🗣️ Oraciones grabadas</h2><p class="muted small">El dictado de ' + UI.suoni + " y «¿Qué forma escuchaste?» usan " +
-        VociCV.ALL.length + " oraciones leídas por voluntarios de Common Voice (Mozilla), de dominio público (CC0).</p></div>" : "") +
       (window.Ubicacion ? Ubicacion.card(state) : "") +
-      '<div class="card"><h2>Medallas</h2><div class="badges">' +
+
+      // Folded: the medals, the numbers and the credits.
+      '<details class="card fold"><summary><h2>🏅 Medallas <small class="muted">' + won + " / " + Engine.BADGES.length + "</small></h2></summary>" +
+        '<div class="badges">' +
         Engine.BADGES.map(function (b) {
-          var won = state.badges.indexOf(b.id) >= 0;
-          return '<div class="badge' + (won ? " won" : "") + '">' +
-            '<div class="ico">' + (won ? "🏅" : "🔒") + "</div>" +
+          var got = state.badges.indexOf(b.id) >= 0;
+          return '<div class="badge' + (got ? " won" : "") + '">' +
+            '<div class="ico">' + (got ? "🏅" : "🔒") + "</div>" +
             "<b>" + esc(b.name) + "</b><span>" + esc(b.desc) + "</span></div>";
         }).join("") +
-      "</div></div>" +
+      "</div></details>" +
 
-      '<div class="card"><h2>Estadísticas</h2><table class="res">' +
+      '<details class="card fold"><summary><h2>Estadísticas y créditos</h2></summary><table class="res">' +
         "<tr><td>Frases de conversación vistas</td><td>" + phrasesKnown + " / " +
           Frasi.ALL.length + "</td></tr>" +
         "<tr><td>Frases escritas de memoria</td><td>" + (state.written || 0) + "</td></tr>" +
@@ -3483,9 +3514,25 @@
         "<tr><td>Fichas en repaso</td><td>" + Object.keys(state.cards).length + "</td></tr>" +
         "<tr><td>Semana desbloqueada</td><td>" + state.unlocked + "/52</td></tr>" +
       "</table>" +
+      (window.Voci && Voci.count() ? (function () {
+        var cr = Voci.credits();
+        return '<h3>🎙️ Voces reales</h3><p class="muted small">' + UI.suoni + " usa grabaciones de hablantes reales para " + Voci.count() +
+          " palabras. Voces de Lingua Libre (Wikimedia Commons), licencia CC BY-SA 4.0: " + Object.keys(cr).map(esc).join(", ") + ".</p>";
+      })() : "") +
+      (window.VociCV && (VociCV.ALL || []).length ? '<h3>🗣️ Oraciones grabadas</h3><p class="muted small">El dictado de ' + UI.suoni + " y «¿Qué forma escuchaste?» usan " +
+        VociCV.ALL.length + " oraciones leídas por voluntarios de Common Voice (Mozilla), de dominio público (CC0).</p>" : "") +
       '<div class="row" style="margin-top:14px">' +
         '<button class="btn ghost" id="reset">Borrar mi progreso</button>' +
-      "</div></div>" + versionLine();
+      "</div></details>" + versionLine();
+  }
+  // "aaaa-m-d" → "aaaa-mm-dd" (the value of a date input), and back.
+  function isoDate(k) {
+    var p = String(k).split("-");
+    return p.length === 3 ? p[0] + "-" + ("0" + p[1]).slice(-2) + "-" + ("0" + p[2]).slice(-2) : "";
+  }
+  // The cards of the progress screen that live here (progreso.js shows them).
+  function progresoCards() {
+    return lessicoCard() + (window.Biblioteca ? Biblioteca.ioCard() : "");
   }
 
   /* Meta y récords: el «yo ideal» con las palabras del alumno, los récords
@@ -3646,6 +3693,8 @@
   }
 
   function exportSave() {
+    state.exportedAt = Date.now();
+    persist();
     var name = UI.exportFile + stamp() + ".json";
     var blob = new Blob([JSON.stringify(state)], { type: "application/json" });
     // On phones, the share sheet lets you drop the file in Drive, mail or chat.
@@ -3701,7 +3750,9 @@
     var end = new Date(d.getTime() + 5 * 60000);
     var localEnd = end.getFullYear() + two(end.getMonth() + 1) + two(end.getDate()) + "T" +
       two(end.getHours()) + two(end.getMinutes()) + "00";
-    var url = location.href.split("#")[0];
+    // The event opens the plan of the day (#hoy).
+    var url = location.href.split("#")[0].replace(/[?&]test\b/, "") + "#hoy";
+    var r = window.Progreso ? Progreso.ritmo(state) : null;
     return [
       "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//" + LG.brand + "//" + UI.icsId,
       "BEGIN:VEVENT",
@@ -3709,9 +3760,9 @@
       "DTSTAMP:" + new Date().toISOString().replace(/[-:]/g, "").slice(0, 15) + "Z",
       "DTSTART:" + local,
       "DTEND:" + localEnd,
-      "RRULE:FREQ=DAILY",
+      "RRULE:FREQ=" + (!r || r.days >= 7 ? "DAILY" : "WEEKLY;BYDAY=" + { 3: "MO,WE,FR", 4: "MO,TU,TH,FR", 5: "MO,TU,WE,TH,FR", 6: "MO,TU,WE,TH,FR,SA" }[r.days]),
       "SUMMARY:" + UI.icsSummary,
-      "DESCRIPTION:Racha en juego. Abrí " + LG.brand + ": " + url,
+      "DESCRIPTION:Tu plan de hoy" + (r ? " (" + r.min + " minutos)" : "") + ". Abrí " + LG.brand + ": " + url,
       "URL:" + url,
       "BEGIN:VALARM", "TRIGGER:PT0M", "ACTION:DISPLAY",
       "DESCRIPTION:" + UI.icsAlarm, "END:VALARM",
@@ -3726,7 +3777,7 @@
   function renderNav() {
     var nav = $("#nav");
     if (!nav) return;
-    var inGame = ["gioco", "lampo", "lezione"].indexOf(view.screen) >= 0;
+    var inGame = ["gioco", "lampo", "lezione", "inicio"].indexOf(view.screen) >= 0;
     nav.hidden = inGame;
     nav.innerHTML = TABS.map(function (t) {
       return '<button class="' + (view.tab === t[0] ? "on" : "") + '" data-tab="' + t[0] + '">' +
@@ -3769,6 +3820,8 @@
     else if (s === "escritos" && window.Escritos) html = Escritos.render();
     else if (window.Biblioteca && Biblioteca.owns(s)) html = Biblioteca.render(s, view);
     else if (window.Tramo && Tramo.owns(s)) html = Tramo.render(s);
+    else if (window.Inicio && Inicio.owns(s)) html = Inicio.render(s);          // el primer arranque (inicio.js)
+    else if (window.Progreso && Progreso.owns(s)) html = Progreso.render(s);    // tu progreso (progreso.js)
 
     var gb = $("#glossbox");
     if (gb) gb.classList.remove("on");
@@ -3790,12 +3843,13 @@
   }
 
   /* El test de ubicación (ubicacion.js): al empezar un idioma y desde Io / Eu. */
-  function startUbicacion() {
+  function startUbicacion(then) {
     if (!window.Ubicacion) return;
     var from = view.tab || "oggi";
     Ubicacion.start({ course: course, state: state, render: render, done: function (applied) {
       persist();
       renderHeader();
+      if (typeof then === "function") { view.week = Math.min(state.unlocked, 52); then(applied); return; }
       if (applied) { view.week = Math.min(state.unlocked, 52); toast("🔓 Semanas 1 a " + (state.unlocked - 1) + " abiertas. Arrancás en la " + state.unlocked + "."); }
       go(applied ? "percorso" : from);
     } });
@@ -3865,7 +3919,7 @@
 
     on("#back", function () { go("percorso"); });
     on("#toggi", function () { go("oggi"); });
-    on("#ubicgo", startUbicacion);
+    on("#ubicgo", function () { startUbicacion(); });
     on("#ubicno", function () { state.ubicacion = { at: Date.now(), no: true }; persist(); render(); });
     if (window.TresLenguas) TresLenguas.wire(app(), {
       show: function () { view.tab = "frasi"; view.screen = "tres"; render(); window.scrollTo(0, 0); },
@@ -3948,6 +4002,8 @@
     if (window.Escritos) Escritos.wire(view.screen);
     if (window.Biblioteca) Biblioteca.wire(view.screen, view);
     if (window.Tramo) Tramo.wire(view.screen);
+    if (window.Inicio) Inicio.wire(view.screen);
+    if (window.Progreso) Progreso.wire(view.screen);
     on("#lesback", function () { view.screen = "briefing"; render(); });
     on("#lesplay", function () {
       var lw = course.weeks[view.week - 1];
@@ -3963,6 +4019,7 @@
     on("#quit", function () {
       clearPending();
       if (round.from === "briefing") { view.tab = "percorso"; view.screen = "briefing"; render(); window.scrollTo(0, 0); }
+      else if (round.from === "hoy") go("oggi");
       else if (round.kind === "lettura") go("leggi");
       else if (["ponte", "falsi", "capire", "scene", "b-voc", "b-forme", "b-tr", "b-gap", "b-err", "b-freq", "clinica", "suoni", "duello", "variaciones"].indexOf(round.kind) >= 0) go("frasi");
       else if (round.kind === "pausa" || round.kind === "review" || round.kind === "giorno" || round.kind === "ritorno" || round.kind === "micro") go("oggi");
@@ -3993,6 +4050,7 @@
     });
     on("#lback", function () {
       if (view.epFrom === "briefing") { view.epFrom = null; view.tab = "percorso"; view.screen = "briefing"; render(); window.scrollTo(0, 0); }
+      else if (view.epFrom === "hoy") { view.epFrom = null; go("oggi"); }
       else go("leggi");
     });
     on("#lquiz", function () { startRound("lettura", view.ep); });
@@ -5380,13 +5438,27 @@
       else prompt("Copiá:", txt);
     });
     on("#aiclear", function () { state.aiNotes = []; persist(); render(); });
-    var goal = $("#goal");
-    if (goal) goal.onchange = function () {
-      state.goal = +goal.value;
+    // The goal in minutes and days (progreso.js); the xp goal follows.
+    var rmin = $("#ritmo-min"), rdays = $("#ritmo-days");
+    var setR = function () {
+      if (!window.Progreso) return;
+      Progreso.setRitmo(state, { min: +rmin.value, days: +rdays.value });
       persist();
       renderHeader();
-      toast("Meta: " + state.goal + " xp por día");
+      toast("Meta: " + rmin.value + " min por día, " + rdays.value + " días por semana. " + Progreso.etaLine(state).replace(/<[^>]+>/g, ""), 3500);
+      render();
     };
+    if (rmin) rmin.onchange = setR;
+    if (rdays) rdays.onchange = setR;
+    on("#meta-save", function () {
+      var wk = Math.round(+$("#meta-week").value), d = $("#meta-date").value;
+      if (!(wk >= 2 && wk <= 52) || !/^\d{4}-\d{2}-\d{2}$/.test(d)) { toast("Elegí una semana (2 a 52) y una fecha."); return; }
+      var p = d.split("-");
+      Progreso.setRitmo(state, { week: wk, date: +p[0] + "-" + (+p[1]) + "-" + (+p[2]) });
+      persist();
+      render();
+    });
+    on("#meta-clear", function () { Progreso.setRitmo(state, { week: null, date: null }); persist(); render(); });
     var themeSel = $("#theme-set");
     if (themeSel) themeSel.onchange = function () {
       state.theme = themeSel.value;
@@ -5561,6 +5633,67 @@
     openReading: function (id) { view.ep = id; view.epFrom = "briefing"; view.screen = "lettura"; render(); window.scrollTo(0, 0); }
   });
 
+  // «Hoy», el primer arranque y el después del curso (inicio.js, plan.js):
+  // lo que necesitan de la app.
+  function showScreen(sc) { view.screen = sc; render(); window.scrollTo(0, 0); }
+  function roundFromHoy() { if (view.screen === "gioco" && round) { round.from = "hoy"; savePending(); } }
+  if (window.Inicio) Inicio.attach({
+    state: function () { return state; }, persist: persist, render: render, go: go, esc: esc, toast: toast,
+    ui: function () { return UI; }, lg: function () { return LG; }, course: function () { return course; },
+    week: function () { return course.weeks[Math.min(state.unlocked, 52) - 1]; },
+    nextMission: nextMission, missions: weekPlan,
+    missionDone: function (kind, arg, wk) {
+      var w = course.weeks[wk - 1];
+      return !!w && weekPlan(w).some(function (m) { return m.kind === kind && String(m.arg == null ? "" : m.arg) === String(arg == null ? "" : arg) && m.done; });
+    },
+    due: function () { return Drills.dueCount(course, state, itemMap); },
+    words: function (id) { var ep = Letture.byId(id); return ep ? Letture.allTokens(ep).length : 0; },
+    readingsDone: function () { return Object.keys(state.letture || {}).filter(function (id) { return Letture.byId(id); }).length; },
+    canTranslate: function () { return Banca.loaded() && (state.unlocked || 1) >= (Banca.TR_WEEK || 99); },
+    canPausa: function () { return Object.keys(state.read || {}).length > 0 || Object.keys(state.readSess || {}).length > 0 || state.unlocked > 1; },
+    maint: function () {
+      var t = state.tramo || {}, scrAt = 0, asc = [], scr = [];
+      Object.keys(t.scr || {}).forEach(function (k) { scrAt = Math.max(scrAt, (t.scr[k] || {}).at || 0); });
+      if (window.Tramo) course.weeks.forEach(function (w) {
+        Tramo.missions(w, state).forEach(function (m) {
+          (m.kind === "tr-asc" ? asc : scr).push({ week: w.week, title: m.title.replace(/^[^:]*:\s*/, "") });
+        });
+      });
+      return { reads: Letture.ofSeries("lunga").map(function (ep) { return { id: ep.id, title: ep.title, words: Letture.allTokens(ep).length }; }),
+               asc: asc, scr: scr, lastTask: scrAt, lastSim: state.simAt || state.phaseAt || 0 };
+    },
+    startRound: function (kind, arg) { view.week = Math.min(state.unlocked, 52); startRound(kind, arg); roundFromHoy(); },
+    startMission: function (kind, arg, wk) {
+      view.week = wk;
+      if (kind === "ep") { view.ep = arg; view.epFrom = "hoy"; view.tab = "oggi"; showScreen("lettura"); return; }
+      goMission(kind, arg);
+      if (view.screen === "gioco") roundFromHoy(); else view.tab = "percorso";
+      renderNav();
+    },
+    openReading: function (id) { view.ep = id; view.epFrom = "hoy"; showScreen("lettura"); },
+    openTramo: function (kind, arg) { view.tab = "leggi"; Tramo.go(kind, arg, "leggi"); },
+    openBiblio: function () { view.tab = "leggi"; showScreen("biblioteca"); },
+    openExam: function () { view.week = 52; view.tab = "percorso"; showScreen("esame"); },
+    playFacile: function () {
+      var ids = Object.keys(state.letture || {}).filter(function (id) { return Letture.byId(id); });
+      if (ids.length) playLibrary(Drills.shuffle(ids));
+    },
+    show: showScreen, ubicacion: startUbicacion, exam: esameResult,
+    ics: function (t) { download(new Blob([reminderIcs(t)], { type: "text/calendar" }), UI.icsFile); toast("Abrí el archivo para agregarlo a tu calendario.", 3000); },
+    share: shareBlob
+  });
+  // Tu progreso (progreso.js): la pantalla, y el reloj de estudio.
+  if (window.Progreso) Progreso.attach({
+    state: function () { return state; }, persist: persist, esc: esc, course: function () { return course; },
+    show: showScreen, back: function () { go(view.tab || "io"); },
+    screen: function () { return view.screen; }, roundKind: function () { return round ? round.kind : ""; },
+    listening: function () { return !!(window.speechSynthesis && speechSynthesis.speaking) || !!karaoke; },
+    coverage: function () { return window.Freq && Freq.loaded() ? Freq.coverage(knownWords()) : null; },
+    words: function (id) { var ep = Letture.byId(id); return ep ? Letture.allTokens(ep).length : 0; },
+    label: function (c) { return (window.Diagnosi && Diagnosi.LABEL[c]) || c; },
+    cards: progresoCards
+  });
+
   // La Biblioteca (biblioteca.js): libros enteros, con el lector y el input.
   if (window.Biblioteca) Biblioteca.init({
     state: function () { return state; }, view: function () { return view; }, persist: persist, gain: gain,
@@ -5600,11 +5733,15 @@
       itemMap = Drills.itemsById(course);
       registerStories();
       view.week = Math.min(state.unlocked, 52);
+      // A new learner: the three screens after the language picker (inicio.js).
+      if (window.Inicio && Inicio.boot(view)) { renderHeader(); render(); return; }
       if (location.hash === "#pausa") { renderHeader(); startRound("pausa"); return; }
       if (location.hash === "#micro") { renderHeader(); startRound("micro"); return; }
       updateBadge();
       renderHeader();
       render();
+      // «Hoy» from the app icon or the calendar reminder: the plan in sight.
+      if (location.hash === "#hoy") { var hp = document.getElementById("hoyplan"); if (hp && hp.scrollIntoView) hp.scrollIntoView({ block: "start" }); }
     })
     .catch(function (e) {
       app().innerHTML = '<div class="card"><h2>No se pudo cargar el curso</h2>' +

@@ -1,8 +1,11 @@
 /* Prueba de humo en el navegador de la app entera, con sus dos idiomas
    (opcional, no corre en npm test).  Para cada idioma (italiano, portugués):
-   el selector inicial, Oggi/Hoje, una pausa, Suoni/Sons, una lectura con
+   el selector inicial, las tres pantallas del primer arranque, Oggi/Hoje con
+   una sola tarjeta y después con el plan del día (5 / 15 / 30 minutos,
+   «Empezar»), una pausa, Suoni/Sons, una lectura con
    karaoke, el camino y la semana 1, una lección, el dictogloss, Io/Eu, el
-   examen C1, «Parola o no? / Palavra ou não?», el cambio de idioma desde el
+   examen C1, «Tu progreso», el modo mantenimiento después del examen,
+   «Parola o no? / Palavra ou não?», el cambio de idioma desde el
    perfil y la vuelta; después, que quien ya estudiaba italiano entra directo
    sin selector, y que el service worker guarda el núcleo y el paquete
    elegido.  Falla si hay errores de JavaScript en la consola o si la app
@@ -71,15 +74,39 @@ const NAMES = { it: { today: "Oggi", me: "Io", other: "pt" }, pt: { today: "Hoje
     await page.waitForSelector(".pick-lang[data-lang='" + code + "']", { timeout: 10000 });
     await snap(page, "selector-claro");
     await page.click(".pick-lang[data-lang='" + code + "']");
-    await page.waitForSelector("#pausa", { timeout: 20000 });
+    // The first start: three screens, once, without the tab bar.
+    await page.waitForSelector("#obnext", { timeout: 20000 });
+    if (!(await page.$eval("#nav", n => n.hidden))) errors.push(code + ": la barra de pestañas se ve durante el primer arranque");
+    await snap(page, P("inicio-1"), true);
+    await page.click("[data-obwhy] >> nth=0");
+    await page.click("[data-obmin='15']");
+    await page.click("#obnext");
+    await page.waitForSelector("#obtest");
+    await snap(page, P("inicio-2"));
+    // italiano: por el test de ubicación (y «Empiezo de cero» adentro); portugués: de cero
+    if (code === "it") { await page.click("#obtest"); await page.waitForSelector("#ubskip"); await snap(page, P("inicio-test")); await page.click("#ubskip"); }
+    else await page.click("#obzero");
+    await page.waitForSelector("#obgo");
+    await snap(page, P("inicio-3"), true);
+    const onbTabs = await page.$$eval(".onb-tabs li", els => els.length);
+    if (onbTabs !== 5) errors.push(code + ": «Cómo funciona» no nombra las cinco pestañas (" + onbTabs + ")");
+    await page.click("#obgo");
+    // Until the first lesson, a single card.
+    await page.waitForSelector("#hoyfirst", { timeout: 5000 });
+    const firstCards = await page.$$eval("#app .card", els => els.length);
+    if (firstCards !== 1) errors.push(code + ": el primer día Oggi tiene " + firstCards + " tarjetas, no una");
+    const r0 = await page.evaluate(() => { const s = window.__test.state(); return [s.ritmo && s.ritmo.min, s.onboard && !!s.onboard.at, s.ideal && s.ideal.why]; });
+    if (r0[0] !== 15 || !r0[1] || !r0[2]) errors.push(code + ": el primer arranque no guardó la meta: " + JSON.stringify(r0));
+    note(code + " · primer arranque: meta " + r0[0] + " min, para qué «" + r0[2] + "»");
     const h = await page.getAttribute("html", "data-lang");
     if (h !== code) errors.push(code + ": html data-lang = " + h);
     if (!(await tabs(page)).includes(N.today)) errors.push(code + ": las pestañas no son del idioma: " + (await tabs(page)));
     note(code + " · " + N.today + ": " + (await page.textContent("h1")).trim() + " · pestañas: " + (await tabs(page)));
     await snap(page, P("hoy-claro"), true);
 
-    // a pausa: answer the items whatever they are
-    await page.click("#pausa");
+    // a pausa: answer the items whatever they are (the first day it is not
+    // on screen: it appears once a lesson was read)
+    await page.evaluate(() => window.__test.start("pausa"));
     await page.waitForSelector(".card", { timeout: 5000 });
     for (let i = 0; i < 6; i++) {
       const it = await page.evaluate(() => window.__test && window.__test.item());
@@ -273,9 +300,66 @@ const NAMES = { it: { today: "Oggi", me: "Io", other: "pt" }, pt: { today: "Hoje
       if (await page.$("#quit")) { await page.click("#quit"); await page.waitForTimeout(300); }
     } else errors.push(code + ": el examen C1 no abrió");
 
+    // «Hoy»: the plan of the day once the first lesson was read
+    await page.evaluate(() => { const s = window.__test.state(); s.unlocked = 5; s.readSess = { 5: { 0: Date.now() } }; s.read = { 1: Date.now(), 2: Date.now(), 3: Date.now(), 4: Date.now() }; s.phase = null; });
+    await page.click("[data-tab='oggi']");
+    await page.waitForSelector("#hoyplan .hs-go", { timeout: 5000 });
+    const plans = {};
+    for (const m of [5, 15, 30]) {
+      await page.click("[data-hmin='" + m + "']");
+      await page.waitForTimeout(250);
+      const t = await page.textContent(".hoy-head h2"), items = await page.$$eval(".hs-go", els => els.map(e => e.textContent.replace(/\s+/g, " ").trim()));
+      const mins = +(t.match(/(\d+) min/) || [])[1];
+      plans[m] = mins;
+      if (!items.length) errors.push(code + ": plan de " + m + " min sin pasos");
+      if (!(mins <= m * 1.4 + 2)) errors.push(code + ": plan de " + m + " min dura " + mins);
+      note(code + " · hoy " + m + "′: " + t.trim() + " · " + items.join(" | "));
+    }
+    if (!(plans[30] > plans[5])) errors.push(code + ": el plan de 30 min no es más largo que el de 5");
+    await page.click("[data-hmin='15']");
+    await snap(page, P("hoy-plan"));
+    if (await page.$eval("#masoggi", d => d.open)) errors.push(code + ": «Más para hoy» abierto de entrada");
+    await page.click("#masoggi > summary");
+    await page.waitForSelector("#pausa", { state: "visible" });
+    await snap(page, P("hoy-mas"), true);
+    const hoyH = await page.evaluate(() => document.getElementById("masoggi").getBoundingClientRect().top + scrollY);
+    note(code + " · «Más para hoy» empieza a " + Math.round(hoyH) + " px");
+    // «Empezar» opens the first step; from a round, the result offers the next one
+    await page.click("#hoystart");
+    await page.waitForTimeout(500);
+    const started = await page.evaluate(() => [document.querySelector("#nav").hidden, (document.querySelector("#app").textContent || "").replace(/\s+/g, " ").slice(0, 60)]);
+    note(code + " · «Empezar» abre: " + started[1]);
+    if (await page.$("#quit")) { await page.click("#quit"); await page.waitForTimeout(300); }
+    else if (await page.$("#lesquit")) { await page.click("#lesquit"); await page.waitForTimeout(300); }
+    else if (await page.$("#lback")) { await page.click("#lback"); await page.waitForTimeout(300); }
+    await page.evaluate(() => window.__test.start("micro"));
+    await page.evaluate(() => { const r = window.__test.round(); if (r) r.from = "hoy"; });
+    if (await page.$("#quit")) { await page.click("#quit"); await page.waitForSelector("#hoyplan", { timeout: 3000 }).catch(() => errors.push(code + ": salir de una ronda del plan no vuelve a " + N.today)); }
+    // Tu progreso, from Io
+    await page.click("[data-tab='io']");
+    await page.waitForSelector("#toprog");
+    await page.click("#toprog");
+    await page.waitForSelector("#progback");
+    const ph2 = await page.$$eval("#app h2", els => els.map(e => e.textContent.trim()));
+    if (!ph2.some(t => /Nivel estimado/.test(t)) || !ph2.some(t => /Horas/.test(t))) errors.push(code + ": «Tu progreso» sin nivel u horas: " + ph2.join(" | "));
+    await snap(page, P("progreso"), true);
+    note(code + " · progreso: " + ph2.join(" | "));
+    await page.click("#progback");
+    // after the exam: maintenance and the close of the year
+    await page.evaluate(() => { const s = window.__test.state(); s.unlocked = 52; s.weekStats[52] = { attempts: 1, right: 1, bossPassed: true }; });
+    await page.click("[data-tab='oggi']");
+    await page.waitForSelector("#yearshare", { timeout: 5000 });
+    const mh = await page.textContent(".hoy-head h2");
+    if (!/Mantenimiento/.test(mh)) errors.push(code + ": después del examen Oggi no está en mantenimiento: " + mh);
+    if (await page.$(".goalweek")) errors.push(code + ": en mantenimiento sigue la cuota de palabras");
+    await snap(page, P("mantenimiento"), true);
+    note(code + " · después del examen: " + mh.trim() + " · " + (await page.$$eval(".hs-go", els => els.map(e => e.textContent.replace(/\s+/g, " ").trim()))).join(" | "));
+    await page.evaluate(() => { const s = window.__test.state(); s.phase = null; s.weekStats[52] = { attempts: 0, right: 0, bossPassed: false }; s.unlocked = 52; });
+
     // «Parola o no? / Palavra ou não?»
     await page.evaluate(() => { const s = window.__test.state(); for (let i = 0; i < 40; i++) s.cards["v:w" + i] = { ok: 3, s: 5, d: 5, due: Date.now() + 1e9, last: Date.now() }; });
     await page.click("[data-tab='oggi']");
+    if (await page.$("#masoggi") && !(await page.$eval("#masoggi", d => d.open))) await page.click("#masoggi > summary");
     if (await page.$("#lampoparole")) { await page.click("#lampoparole"); await page.waitForSelector("[data-lopt]"); note(code + " · ¿palabra o no?: " + (await page.textContent(".stem")).trim()); await page.click("#lquit"); }
 
     // the service worker keeps the core and this package
@@ -305,15 +389,16 @@ const NAMES = { it: { today: "Oggi", me: "Io", other: "pt" }, pt: { today: "Hoje
     const before = await saved();
     await page.waitForSelector("#switchlang");
     await page.click("#switchlang");
-    await page.waitForSelector("#pausa", { timeout: 20000 });
+    await page.waitForSelector("#obnext, #hoyplan, #hoyfirst", { timeout: 20000 });
     const other = NAMES[N.other];
     if (!(await tabs(page)).includes(other.today)) errors.push(code + " → " + N.other + ": el cambio de idioma no cambió las pestañas: " + (await tabs(page)));
     note(code + " → " + N.other + ": " + (await tabs(page)));
     await snap(page, P("cambiado-claro"));
+    if (await page.$("#obskip")) { await page.click("#obskip"); await page.waitForSelector("#hoyfirst, #hoyplan"); }
     await page.click("[data-tab='io']");
     await page.waitForSelector("#switchlang");
     await page.click("#switchlang");
-    await page.waitForSelector("#pausa", { timeout: 20000 });
+    await page.waitForSelector("#hoyplan, #hoyfirst", { timeout: 20000 });
     const back = await saved();
     if (!(await tabs(page)).includes(N.today) || JSON.stringify(back) !== JSON.stringify(before)) errors.push(code + ": al volver no está el progreso: " + before + " → " + back);
     note(code + " · vuelta con el progreso intacto (xp, semana: " + back + ")");
@@ -323,14 +408,20 @@ const NAMES = { it: { today: "Oggi", me: "Io", other: "pt" }, pt: { today: "Hoje
     if (shots) {
       const dark = await newPage("dark", "localStorage.setItem('c1.lang', '" + code + "')");
       await dark.goto(base + "?test", { waitUntil: "networkidle" });
-      await dark.waitForSelector("#pausa", { timeout: 20000 });
+      await dark.waitForSelector("#obnext", { timeout: 20000 });
+      await snap(dark, P("inicio-oscuro"));
+      await dark.click("#obskip");
+      await dark.waitForSelector("#hoyfirst");
+      await dark.evaluate(() => { const s = window.__test.state(); s.unlocked = 3; s.readSess = { 3: { 0: Date.now() } }; });
+      await dark.click("[data-tab='io']"); await dark.click("[data-tab='oggi']");
+      await dark.waitForSelector("#hoyplan");
       await snap(dark, P("hoy-oscuro"), true);
       await dark.click("[data-tab='percorso']"); await dark.waitForSelector(".path");
       await snap(dark, P("camino-oscuro"));
       await dark.click("[data-week='1']"); await dark.waitForSelector(".missions");
       await snap(dark, P("semana1-oscuro"));
-      await dark.click("[data-tab='oggi']"); await dark.waitForSelector("#pausa");
-      await dark.click("#pausa"); await dark.waitForSelector(".card");
+      await dark.click("[data-tab='oggi']"); await dark.waitForSelector("#hoyplan");
+      await dark.evaluate(() => window.__test.start("pausa")); await dark.waitForSelector(".card");
       await snap(dark, P("ronda-oscuro"));
       await dark.context().close();
     }
@@ -340,7 +431,8 @@ const NAMES = { it: { today: "Oggi", me: "Io", other: "pt" }, pt: { today: "Hoje
   // straight in, without the picker, and keeps the progress.
   const legacy = await newPage("light", "if (!localStorage.getItem('laviac1.save.v1')) localStorage.setItem('laviac1.save.v1', JSON.stringify({ xp: 1234, unlocked: 3, cards: {} }))");
   await legacy.goto(base + "?test", { waitUntil: "networkidle" });
-  await legacy.waitForSelector("#pausa", { timeout: 20000 });
+  // (no three screens: it has progress)
+  await legacy.waitForSelector("#hoyplan", { timeout: 20000 });
   const lx = await legacy.evaluate(() => [document.documentElement.getAttribute("data-lang"), window.__test.state().xp, localStorage.getItem("c1.lang")]);
   if (lx[0] !== "it" || lx[1] !== 1234) errors.push("quien ya estudiaba italiano: " + JSON.stringify(lx));
   note("quien ya estudiaba italiano entra directo: " + JSON.stringify(lx));

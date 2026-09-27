@@ -83,3 +83,17 @@ y una tarea integrada.
   Leggi / Ler. Guarda en `state.tramo`.
 - **Test**: `tools/lib/test_tramo.js`.
 
+
+**Hoy, el primer arranque y el progreso.** Oggi / Hoje arma el día por minutos.
+- **Plan del día**: `js/plan.js` (`Plan.today(course, state, minutos, ctx)`, sin DOM): 5, 15 o
+  30 minutos con lo vencido del repaso (nunca más de la mitad), el paso siguiente de la semana, un
+  bloque de input y uno de producción si la cuerda de output viene baja. Los minutos salen de los
+  segundos por tipo de la simulación, calibrados con los tiempos del registro de repasos. Después
+  del examen de la semana 52 (`state.phase = "mantenimiento"`), repaso a meses, lectura extensiva,
+  escuchas largas, una tarea al azar del tramo y un simulacro cada tres meses.
+- **La pantalla**: `js/inicio.js` (la tarjeta «Hoy» con «Empezar», una tarjeta de hábito por día,
+  las tres pantallas del primer arranque, el cierre del año). Guarda en `state.hoy`, `state.onboard`.
+- **Progreso**: `js/progreso.js` (la meta en minutos `state.ritmo`, el reloj de estudio
+  `state.tiempo`, un punto por semana en `state.history`, la fecha de cada jefe, la pantalla
+  «Tu progreso»).
+- **Test**: `tools/lib/test_plan.js`. El atajo `./#hoy` del manifiesto abre el plan.
