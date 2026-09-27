@@ -114,6 +114,10 @@ h2 .stars i { font-size: 1.2rem; }
 
 .missions { display: grid; gap: 10px; }
 .mission:active { transform: scale(.99); }
+/* a medias: hecha, pero sin el criterio de calidad de la tarjeta */
+.mission.half .mi .halfstar { color: var(--muted, #888); font-weight: 700; }
+.mission.half { border-style: dashed; }
+.predict .options { margin: 12px 0; }
 
 /* ------------------------------------------------------------------- liste */
 
