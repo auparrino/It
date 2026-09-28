@@ -860,3 +860,7 @@ svg.speed-curve text { font-size: 9px; fill: currentColor; opacity: .6; }
 .fu-q li { margin: 8px 0; line-height: 1.45; }
 .fu-q .chip { min-height: 36px; margin-left: 6px; border: 1.5px solid var(--k-line); border-radius: 99px; padding: 4px 12px; background: none; color: inherit; font: inherit; font-size: .875rem; }
 .fu-q .chip.on { border-color: var(--k-acc); background: var(--k-acc); color: #fff; }
+
+/* «Para practicar más» dentro de la semana del percorso (3.3) */
+.wextras h3 { margin: 14px 0 6px; font-size: .95rem; }
+.wextras .labs { margin-bottom: 4px; }

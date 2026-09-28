@@ -771,7 +771,7 @@
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION = "c1-vN" in sw.js: test_game
      and the CI check it).  One version for the app and both languages. */
-  var APP_VERSION = "v3.2";
+  var APP_VERSION = "v3.3";
   // Settimana XVII: Roman numerals on the street signs (LANG.ui.romanWeeks).
   function romano(n) {
     var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
@@ -2030,6 +2030,51 @@
       '<div class="row" style="margin-top:10px"><button class="btn" id="vocab">Practicar las palabras</button></div></div>';
   }
 
+  /* «Para practicar más»: what lived only in Allena and Leggi and no
+     mission brings, inside the week of the percorso (3.3: the percorso
+     organises the app, and what sat in another tab went unseen).  Optional:
+     it does not count to open the week.  The same buttons as in the tabs. */
+  function weekExtrasHtml(w) {
+    if (!w || w.week > (state.unlocked || 1)) return "";
+    var U = state.unlocked || 1, groups = [];
+    var btn = function (attr, emoji, name, desc) {
+      return '<button class="lab" ' + attr + '><span class="e">' + emoji + "</span><b>" + name + '</b><span class="muted">' + desc + "</span></button>";
+    };
+    var errs = [];
+    var weak = Banca.loaded() ? Banca.weakest(state, 2) : [];
+    if (weak.length) errs.push(btn('data-bank="clinica"', "🩺", "Clínica de tus errores",
+      "Práctica con lo que más te cuesta: " + weak.map(function (x) { return esc(((Diagnosi.LABEL || {})[x.cat] || x.cat).toLowerCase()); }).join(", ") + "."));
+    if (Banca.loaded() && U >= Banca.ERR_WEEK) errs.push(btn('data-bank="b-err"', "🔍", esc(UI.err), "Encontrá y corregí el error típico de un hispanohablante."));
+    if (errs.length) groups.push(["Tus errores", errs]);
+    var words = [];
+    if (Banca.loaded() && U >= 2) words.push(btn('data-bank="b-voc"', "📚", UI.words, "Vocabulario de tu nivel: primero reconocer, después escribir."));
+    if (matureWords().length >= 30) words.push(btn('id="lampoparole"', "🧠", UI.wordOrNot, "Reconocer en un segundo · récord: " + ((state.best || {}).lampoParole || 0)));
+    if (Frasi.ALL.filter(function (x) { return state.cards[x.id]; }).length >= 12)
+      words.push(btn('id="lampo"', "⚡", UI.lampo + " 60″", "Frases a toda velocidad · récord: " + ((state.best || {}).lampo || 0)));
+    if (words.length) groups.push(["Palabras y frases", words]);
+    var write = [];
+    if (Banca.loaded()) {
+      if (U >= Banca.TR_WEEK) write.push(btn('data-bank="b-tr"', "✍️", UI.tr, "Del español al " + UI.langEs + ", con corrección que explica el error."));
+      if (U >= Banca.GAP_WEEK) write.push(btn('data-bank="b-gap"', "🔧", UI.gap, "El verbo justo dentro de una oración real."));
+      if (U >= Banca.FORME_WEEK) write.push(btn('data-bank="b-forme"', "🧩", UI.forme, UI.formeSub));
+    }
+    if (write.length) groups.push(["Escribir", write]);
+    var input = [];
+    var doneIds = Object.keys(state.letture || {}).filter(function (id) { return Letture.byId(id); });
+    if (doneIds.length) input.push(btn('id="playlib"', "🎧", UI.easyListen, "Re-escuchá las " + doneIds.length + " lecturas que ya hiciste, solo audio, una tras otra."));
+    var sp = Letture.speedStore ? Letture.speedStore(state) : null, best = sp ? Object.keys(sp.best).filter(function (id) { return Letture.byId(id); }) : [];
+    if (best.length) {
+      var id0 = best[best.length - 1], ep0 = Letture.byId(id0);
+      input.push(btn('data-ep="' + esc(id0) + '"', "⏱️", "Releé contra el reloj", esc(ep0.title) + " · tu mejor: " + sp.best[id0] + " palabras por minuto"));
+    }
+    if (input.length) groups.push(["Leer y escuchar", input]);
+    if (window.TresLenguas) groups.push(["Las tres lenguas", [btn('data-tres="menu"', "🔀", "Tres lenguas", "Las tres lenguas que manejás: dónde se parecen y dónde te traicionan.")]]);
+    if (!groups.length) return "";
+    return '<div class="card wextras"><h2>🧰 Para practicar más</h2>' +
+      '<p class="muted small">Opcional: no hace falta para abrir la semana siguiente. Es lo mismo que está en ' + esc(UI.train) + " y " + esc(UI.read) + ".</p>" +
+      groups.map(function (g) { return "<h3>" + g[0] + '</h3><div class="labs">' + g[1].join("") + "</div>"; }).join("") + "</div>";
+  }
+
   function renderBriefing(w) {
     var st = weekStat(w.week);
     // Reference reading, when the course brings any (build_course.py:
@@ -2051,6 +2096,7 @@
       (w.fare ? '<p class="fare">🎯 Al final de la semana: <b>' + esc(w.fare) + '</b>' +
         (w.tema ? ' <span class="muted">· ' + esc(w.tema) + '</span>' : '') + '</p>' : '') +
       missions(w, st, nChal) +
+      weekExtrasHtml(w) +
       vocabCard(w) +
       '<div class="card"><h2>Lo que se juega esta semana</h2>' +
         '<ul class="keys">' +
