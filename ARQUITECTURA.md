@@ -236,3 +236,23 @@ duelo, Tres lenguas y Tres vueltas.
   repite el mismo día. xp por costo cognitivo (`Engine.xpFor(v, racha, ítem,
   {old})`) y metas recalibradas (`Engine.goalValue`).
 - **Test**: `tools/lib/test_reglas.js`.
+
+**La corrección como aprendizaje** (`js/errores.js`, cargado después de `ia.js`).
+- **Un solo objeto de error** (cat, nivel, registro, mal, bien, pista, regla, contraste, fuente,
+  seguro) para todo lo que corrige: respuestas cerradas, «Trova l'errore», Scrivi (reglas,
+  LanguageTool, IA), dictogloss, la tarea del tramo, Escritura plus y la revisión de Parla.
+  `Errores.record` lo anota en `state.errs` y `state.errLog`; lo que la Clínica no conoce
+  («grammatica» de LanguageTool, la IA sin tipo) queda en el registro fuera del puntaje.
+- **Niveles**: `Errores.level` lee los dos diagnósticos (pt: ok, ok_note, close, wrong; it:
+  correcto, aceptable, poco_natural, desliz, incorrecto). Lo aceptable es «✓ Vale» con la nota,
+  sin quitar xp ni contar como desliz. El registro formal se pide en «Trova l'errore», en los
+  ítems formales y, en la tarea del tramo, según el género (`Tramo.registroOf`).
+- **La IA donde rinde**: Scrivi por unión (lo local seguro, lo de la IA sumado, las dos opiniones
+  si no coinciden), «🤖 Explicame» con pistas antes de la solución y «Explicame más» en la hoja
+  final, el juez de respuestas no previstas (lo que acepta queda en `state.variants`), los
+  pedidos con la semana, la gramática vista, las categorías flojas y las marcas locales, y un
+  caché en localStorage (`Errores.cache*`) que se exporta con «Correcciones para revisar».
+- **«🙋 Mi respuesta es válida»**, sin clave: acepta sin xp, deshace el error y lo anota en
+  `state.aiNotes`.
+- **Tests**: `tools/lib/test_errores.js`; en el navegador, `tools/lib/smoke_correccion.js`
+  (con la IA simulada; lo corre `npm run smoke`).

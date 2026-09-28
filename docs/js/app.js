@@ -2716,7 +2716,7 @@
   function okNoteHtml(d) {
     var txt = window.Errores ? Errores.noteOf(d) : String((d && d.note) || "");
     if (!txt) return "";
-    var tag = d && d.level === "poco_natural" ? "✓ Vale · más natural" : "✓ Vale";
+    var tag = d && d.level === "poco_natural" ? "💬 Más natural" : "💬 Una nota";
     return '<div class="diag oknote"><span class="tag">' + tag + "</span><p>" + mk(DV ? DV.plain(txt) : txt) + "</p></div>";
   }
 
@@ -2826,6 +2826,8 @@
         '<details class="why-ok"><summary>📐 La explicación completa</summary><p>' + mk(d.explain) + "</p></details>" +
         '<button class="linkish" type="button" data-rulecat="' + esc(d.cat) + '">📖 Repasá la regla</button>';
     }
+    // what was right in it (the Italian diagnosis says it in «note» on an error)
+    if (d.note && d.verdict !== "giusto" && String(d.explain || "").indexOf(String(d.note).slice(0, 30)) < 0) body += '<p class="capa">✓ ' + mk(DV ? DV.plain(String(d.note)) : String(d.note)) + "</p>";
     return '<div class="diag"><span class="tag">' + esc(d.label || "") + "</span>" + diff +
       body +
       (!brief && d.all && d.all.length > 1 ? (function () {
@@ -3084,6 +3086,7 @@
     for (var k = round.i + 1; k < round.items.length; k++) {
       if (round.items[k] && round.items[k].retry && round.items[k].id === it.id) { round.items.splice(k, 1); break; }
     }
+    Array.prototype.forEach.call(document.querySelectorAll("#fb .note"), function (n) { if (/Te la vuelvo a preguntar/.test(n.textContent)) n.remove(); });
     if (round.lives !== Infinity && round.lives < round.maxLives) round.lives++;
     var last = round.log[round.log.length - 1];
     if (last && last.id === it.id) last.claimed = true;
@@ -4302,7 +4305,7 @@
 
   function errorsCard() {
     var errs = state.errs || {};
-    var cats = Object.keys(errs).sort(function (a, b) { return errs[b].n - errs[a].n; });
+    var cats = Object.keys(errs).filter(function (c) { return errs[c].n > 0; }).sort(function (a, b) { return errs[b].n - errs[a].n; });
     if (!cats.length) return itanolCard();
     var max = errs[cats[0]].n;
     return '<div class="card"><h2>Tus errores</h2>' +
@@ -5921,7 +5924,7 @@
           : '<p>✨ No encontré errores' + (ltState === "ok" ? ", y LanguageTool tampoco." : " de los que sé buscar.") + "</p>") +
         (r.ai === "ok" && r.aiData ? '<div class="aiout">' +
               (r.aiData.consigna ? '<p class="muted small">📋 ' + esc(r.aiData.consigna) + "</p>" : "") +
-              (r.aiData.comentario ? "<p>🤖 " + esc(DV ? DV.plain(r.aiData.comentario, w.week) : r.aiData.comentario) + "</p>" : "") +
+              (r.aiData.comentario ? "<p>🤖 " + mk(DV ? DV.plain(r.aiData.comentario, w.week) : r.aiData.comentario) + "</p>" : "") +
               (r.aiData.corregido ? '<p class="muted small">Versión corregida:</p><p class="model it">' + esc(r.aiData.corregido) + "</p>" : "") +
               (r.cached ? '<p class="muted small modelline">IA: ' + (r.cached === "texto" ? "este texto ya estaba corregido" : "cada oración ya estaba corregida") + " (guardado en el teléfono, sin volver a preguntar).</p>"
                 : r.aiMeta ? modelLine(r.aiMeta.first, r.aiMeta.review) : "") +

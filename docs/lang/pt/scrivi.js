@@ -1826,6 +1826,16 @@
      both are shown (conflict).  A fragment not found word for word is looked
      for without accents and punctuation, and if it is not there, it is still
      listed (unplaced), never dropped.  foco: false (A1-A2) → minor, folded. */
+  // Where a fragment starts as whole words (*em* is not the end of *Ontem*).
+  function wordAt(hay, needle, from) {
+    var L = /[a-zà-ÿ0-9]/i, at = hay.indexOf(needle, from);
+    while (at >= 0) {
+      var before = at > 0 ? hay.charAt(at - 1) : "", after = hay.charAt(at + needle.length);
+      if ((!before || !L.test(before) || !L.test(needle.charAt(0))) && (!after || !L.test(after) || !L.test(needle.charAt(needle.length - 1)))) return at;
+      at = hay.indexOf(needle, at + 1);
+    }
+    return -1;
+  }
   function fromAI(text, data, local) {
     var src = String(text).normalize("NFC").replace(/[’‘`´]/g, "'"), tk = toks(text), taken = {}, low = src.toLowerCase(), from = 0, out = [];
     var loose = function (x) { return String(x).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase(); };
@@ -1837,11 +1847,11 @@
       var good = String(e.bien == null ? "" : e.bien).normalize("NFC").replace(/[’‘`´]/g, "'").trim();
       var contra = e.contradice === true;
       if (!bad || (!contra && good.toLowerCase() === bad.toLowerCase())) return;
-      var at = low.indexOf(bad.toLowerCase(), from);
-      if (at < 0) at = low.indexOf(bad.toLowerCase());
+      var at = wordAt(low, bad.toLowerCase(), from);
+      if (at < 0) at = wordAt(low, bad.toLowerCase(), 0);
       if (at < 0) {   // the same without accents (same length: the offsets hold)
         var lb = loose(bad);
-        if (lb.length === bad.length) at = looseLow.indexOf(lb);
+        if (lb.length === bad.length) at = wordAt(looseLow, lb, 0);
       }
       var tipo = String(e.tipo || "").trim().toLowerCase(), soft = tipo === "estilo";
       var why = String(e.explicacion || "").trim();
