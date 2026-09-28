@@ -7,7 +7,7 @@
  "speakers": ["Nanda", "Sofía"],
  "turns": [
   ["A", "São oito e meia: aqui é a Rádio Calçadão. Temos uma ouvinte na linha. Alô?"],
-  ["B", "Alô, Nanda? Aqui é a Sofía, a argentina de Botafogo!"],
+  ["B", "Alô, Nanda? É a Sofía, a argentina de Botafogo!"],
   ["A", "Oi, Sofía! Tudo bem?"],
   ["B", "Tudo! Sábado é o aniversário da Bia e eu quero dar um presente: um ingresso para o show de samba na Lapa. Quando é?"],
   ["A", "É no sábado, dia vinte e dois de março, às dez da noite."],
@@ -17,12 +17,11 @@
   ["A", "Pode. A bilheteria abre de segunda a sexta, das duas às seis. Sempre tem fila."],
   ["B", "Eu vou amanhã, quarta-feira, às duas em ponto."],
   ["A", "Em ponto? Você sempre chega atrasada, Sofía!"],
-  ["B", "É verdade! Amanhã eu chego à uma e meia. Prometo!"],
-  ["A", "Combinado! Para vocês, ouvintes: às nove tem notícias e às nove e quinze, a previsão do tempo."]
+  ["B", "É verdade! Amanhã chego à uma e meia. Prometo!"],
+  ["A", "Combinado! E a gente volta às nove com notícias e às nove e quinze com a previsão do tempo."]
  ],
  "gloss": {
   "ouvinte": "oyente",
-  "ouvintes": "oyentes",
   "a inteira": "la entrada completa",
   "a meia": "la media entrada (para estudiantes)",
   "bilheteria": "boletería",

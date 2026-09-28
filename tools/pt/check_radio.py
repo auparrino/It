@@ -57,12 +57,16 @@ def main():
     cl.NOT_VERBS.update(NOT_VERBS)
     # the words of the week (the «Palabras de la semana» mission) count from their week
     course = json.load(open(os.path.join(ROOT, "docs/lang/pt/data/course.json"), encoding="utf-8"))
-    vocab = {}
+    vocab, stems = {}, {}
     for w in course["weeks"]:
         for v in w.get("vocab", []):
             for form in v[0].lower().split("/"):
                 for t in cl.words(form):
                     vocab[t] = min(vocab.get(t, 99), w["week"])
+                # a verb of the week in any form: pechinch-ei, embrulh-ou
+                m = re.match(r"^([a-zà-ú]{3,}?)(ar|er|ir)(-se)?$", form.strip())
+                if m:
+                    stems[m.group(1)] = min(stems.get(m.group(1), 99), w["week"])
     seen_gloss = {}
     for t in cl.testi():
         for g in t.get("gloss", {}):
@@ -103,6 +107,8 @@ def main():
                 continue
             cands = cl.lemma_candidates(t) | lex.verb_of.get(t, set())
             if any(vocab.get(c, 99) <= week for c in cands | {t}):
+                continue
+            if any(t.startswith(st) and len(t) - len(st) <= 6 and sw <= week for st, sw in stems.items()):
                 continue
             if any(seen_gloss.get(c, 99) < week or c in here for c in cands):
                 continue

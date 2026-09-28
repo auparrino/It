@@ -13,7 +13,8 @@
    - el reproductor: antes de entregar no se ve la transcripción, después sí y
      coincide con el guion turno por turno; lo que se entrega queda en
      state.radio y la misión se cumple con 60 % o con el segundo intento;
-   - el plan del día la toma como bloque de input.
+   - el plan del día la toma como bloque de input;
+   - en portugués, rasgos del habla brasileña ya enseñados (a gente, tá, pra).
    La gramática y el vocabulario que no pasan de la semana los controla
    tools/<código>/check_radio.py (npm run test:content).
    Run: node tools/lib/test_radio.js */
@@ -99,6 +100,13 @@ pack.LANGS.forEach(function (code) {
       ok(toks(p[0]).every(function (x) { return tk.has(x); }), W + "palabra en el guion: " + p[0]);
       ok(voc[lemmaKeys(p[1])[0]], W + "«" + p[1] + "» es de las palabras de la semana " + e.week);
     });
+    // Brazilian speech, each feature from the week it is taught (a gente 5, tá / tô / né 8, pra / pro 9)
+    if (code === "pt") {
+      var low = " " + script.toLowerCase().replace(/[^a-zà-ú]+/g, " ") + " ";
+      var feat = [["a gente", 5], ["tá", 8], ["tô", 8], ["né", 8], ["pra", 9], ["pro", 9]].filter(function (f) { return low.indexOf(" " + f[0] + " ") >= 0; });
+      ok(feat.length > 0, W + "rasgos del habla brasileña (a gente, pra, tá…)");
+      feat.forEach(function (f) { ok(f[1] <= e.week, W + "«" + f[0] + "» antes de su semana (" + f[1] + ")"); });
+    }
     Object.keys(e.gloss || {}).forEach(function (g) {
       ok(script.toLowerCase().replace(/’/g, "'").indexOf(g.toLowerCase()) >= 0, W + "glosa que está en el guion: " + g);
     });

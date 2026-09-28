@@ -12,11 +12,11 @@
   ["B", "Não, esses não são meus. Os meus são vermelhos. Esses pretos parecem os do meu irmão."],
   ["A", "E este guarda-chuva amarelo? É da senhora?"],
   ["B", "Também não. Mas é igual ao guarda-chuva da minha neta, a Carol. Acho que é dela."],
-  ["A", "Então eu ligo para a Carol. E esta carteira marrom?"],
+  ["A", "Então eu ligo pra Carol. E esta carteira marrom?"],
   ["B", "Nossa, essa carteira é do meu genro, o marido da minha filha! Ele procura essa carteira há uma semana. É a cara dele: esquece tudo!"],
   ["A", "E os seus óculos, Dona Lúcia? Não estão na caixa..."],
   ["B", "Ai, que cabeça a minha! Olha só: estão aqui, na minha bolsa, dentro do estojo. Que vergonha, minha filha!"],
-  ["A", "Não tem problema! E vocês, ouvintes: se esse guarda-chuva é seu, a rádio fica na rua Voluntários da Pátria."]
+  ["A", "Tá tudo bem! E vocês, ouvintes: se esse guarda-chuva é seu, a rádio fica na rua Voluntários da Pátria."]
  ],
  "gloss": {
   "quadro": "sección (de un programa)",
