@@ -2055,6 +2055,7 @@
 
   /* Las cuatro cuerdas de Nation (la guía): input, output, forma, fluidez. */
   function strandOf(it, kind) {
+    if (it.unamas) return "output";      // «Ahora vos: una más» is writing practice (unamas.js)
     if (kind === "lettura" || kind === "capire" || kind === "suoni" || it.type === "listen" || it.type === "dictation" || SAY_TYPES[it.type]) return "input";
     if (it.type === "write" || it.type === "translate" || it.type === "typed" || it.type === "fixerr" || it.type === "combina" || kind === "b-tr") return "output";
     if (kind === "scene" || it.type === "flash") return "fluidez";
@@ -2268,6 +2269,7 @@
         return multi ? '<span class="gap n">' + (++gi) + "</span>" : '<span class="gap">&nbsp;</span>';
       });
     var prompt = (it.retry ? '<div class="badge-new">🔁 Segunda vez, más fácil</div>' : "") +
+      (it.unamas && window.UnaMas ? UnaMas.badge(it) : "") +
       '<div class="prompt">' + esc(DV ? DV.plain(it.prompt || "") : it.prompt || "") + "</div>" +
       (it.type === "guess" ? formulaHtml(it.frase) : "") +
       // a check of the lesson missed comes back with its rule in sight
@@ -3182,7 +3184,7 @@
     } else if (q === 1) { round.close++; round.combo = 0; fx.close(); }
     else {
       round.wrong++; round.combo = 0; fx.wrong();
-      if (round.lives !== Infinity) round.lives--;
+      if (round.lives !== Infinity && !it.unamas) round.lives--;   // «una más» is optional: no life lost
     }
 
     // a rule of a month ago or more, written: it pays more (reglas.js)
@@ -3229,19 +3231,23 @@
     // Productive practice of the week's own rule, day by day (a rule is a
     // card of its own: three days of writing it right consolidate it).
     if (q === 2 && !it.recog && !it.options && !it.frase && it.src !== "coniugatore" && it.src !== "vocab" &&
-        it.src !== "lab" && it.src !== "lettura" && it.src !== "banca" && !it.ruleReview && !it.old && COUNT_KINDS[round.kind]) {
+        it.src !== "lab" && it.src !== "lettura" && it.src !== "banca" && !it.ruleReview && !it.old && !it.unamas && COUNT_KINDS[round.kind]) {
       Engine.noteProduction(state, view.week);
     }
 
     /* Successive relearning (Rawson & Dunlosky 2011): what you miss comes
        back later in the same session, until you get it (at most twice). */
     var relearn = "";
-    if (q < 2 && round.kind !== "boss" && round.kind !== "esame" && it.src !== "lettura" && !it.retry && !(round.again[it.id])) {
+    if (q < 2 && round.kind !== "boss" && round.kind !== "esame" && it.src !== "lettura" && !it.retry && !it.unamas && !(round.again[it.id])) {
       round.again[it.id] = 1;
       var at = Math.min(round.items.length, round.i + 3);
       round.items.splice(at, 0, retryVersion(it));
       relearn = '<div class="note">🔁 Te la vuelvo a preguntar en un rato, más fácil.</div>';
     }
+    // «Ahora vos: una más» (unamas.js): after a mistake of a rule, one new
+    // item of the same rule with other words, optional, as the next question.
+    var oneMore = window.UnaMas && q < 2 ? UnaMas.offer(it, { q: q, ekind: ekind, dg: dg || round.firstDiag, kind: round.kind,
+      state: state, round: round, map: itemMap, course: course }) : null;
 
     state.totals.attempts++;
     if (q === 2) state.totals.right++;
@@ -3252,7 +3258,7 @@
     // not the words (that is how a week got «mastered» after seeing 7 items),
     // not the rules of other weeks (a new sentence, the old ones of Dominala).
     if (!it.frase && it.src !== "lab" && it.src !== "lettura" && it.src !== "banca" &&
-        it.src !== "coniugatore" && it.src !== "vocab" && !it.ruleReview && !it.old && COUNT_KINDS[round.kind]) {
+        it.src !== "coniugatore" && it.src !== "vocab" && !it.ruleReview && !it.old && !it.unamas && COUNT_KINDS[round.kind]) {
       var ws = state.weekStats[view.week] ||
         (state.weekStats[view.week] = { attempts: 0, right: 0, bossPassed: false });
       ws.attempts++;
@@ -3307,6 +3313,7 @@
       relearn +
       '<div class="row" style="margin-top:10px">' +
         '<button class="btn" id="next">' + UI.next + "</button>" +
+        (oneMore ? UnaMas.button() : "") +
         '<button class="tab" id="say2">🔊 escuchar</button>' +
         (q < 2 && aiKey() && window.Scrivi && it.type !== "hunt" ? '<button class="tab" id="aiexp">🤖 Explicame más</button>' : "") +
         (q < 2 && canClaim(it, claimGiven, extra) ? '<button class="tab" id="claim">🙋 Mi respuesta es válida</button>' : "") +
@@ -3361,6 +3368,7 @@
     // read: the sentence of the question is, when there is one.
     if (spanishText(spoken) || (spoken === it.answer && asksMeaning(it))) spoken = it.stem && !/_{3,}/.test(it.stem) && !spanishText(it.stem) ? it.stem : "";
     $("#next").onclick = nextAfterFeedback();
+    on("#unamas", function () { if (UnaMas.take(round, oneMore)) nextItem(); });
     var fbTextOf = function () {
       var t = ($("#fb") || {}).innerText || "";
       return t.split(UI.next)[0].replace(/\s+/g, " ").slice(0, 600);
