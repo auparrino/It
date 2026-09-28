@@ -8,7 +8,7 @@
  "turns": [
   ["A", "Buongiorno e benvenuti alla rubrica «Stare bene». Oggi il paziente è in studio con me: Dario, come ti senti?"],
   ["B", "Male, Sara. Mi fa male la gola e anche la testa. Stamattina ho quasi perso la voce."],
-  ["A", "Si sente! Ma dimmi: com'è la tua giornata di solito?"],
+  ["A", "Eh, lo sento! Ma dimmi: com'è la tua giornata di solito?"],
   ["B", "Di solito mi sveglio alle sei, mi alzo subito e vengo qui in bicicletta. La sera esco con gli amici e mi addormento tardi, all'una o alle due."],
   ["A", "Ecco il problema! Allora, ascolta i consigli della dottoressa Sara. Prima: stasera non uscire. Resta a casa e vai a letto presto."],
   ["B", "Presto? Alle dieci?"],
@@ -22,7 +22,6 @@
   "rubrica": "sección (de un programa)",
   "paziente": "paciente",
   "mi fa male": "me duele",
-  "si sente": "se nota, se escucha",
   "dimmi": "decime",
   "miele": "miel",
   "trasmissione": "programa, transmisión",

@@ -52,6 +52,7 @@ def main():
     serie = json.load(open(os.path.join(HERE, "radio", "serie.json"), encoding="utf-8"))
     course = json.load(open(os.path.join(ROOT, "docs/lang/it/data/course.json"), encoding="utf-8"))
     seen = lessico.lesson_words(course)
+    stems = {}
     # the words of the week (the «Palabras de la semana» mission) count from their week
     for w in course["weeks"]:
         for v in w.get("vocab", []):
@@ -60,6 +61,10 @@ def main():
                 lm = lessico.lemma_of(form)
                 for k in {form, lm[0] if lm else form}:
                     seen[k] = min(seen.get(k, 99), w["week"])
+                # a verb of the week in any form: capit-ava, ripass-ato
+                m = re.match(r"^([a-zà-ù]{3,}?)(are|ere|ire)(si)?$", form)
+                if m:
+                    stems[m.group(1)] = min(stems.get(m.group(1), 99), w["week"])
     bad = n = 0
     for ep in episodes():
         week = ep["week"]
@@ -82,6 +87,8 @@ def main():
             if t in gloss_toks or t.split("'")[-1] in gloss_toks or t in names:
                 continue
             wk, lemma = lessico.word_week(t, seen)
+            if wk > week and any(t.startswith(st) and len(t) - len(st) <= 6 and sw <= week for st, sw in stems.items()):
+                wk = week
             if wk > week:
                 unknown.append(t)
         cover = 1 - len(unknown) / max(1, len(toks))
