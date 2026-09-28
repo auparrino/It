@@ -87,7 +87,7 @@ jobs:
     name: prueba de humo en Chromium
     if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -102,3 +102,5 @@ jobs:
           npx playwright install --with-deps chromium
       - name: La app entera en Chromium (tools/lib/smoke_browser.js)
         run: node tools/lib/smoke_browser.js
+      - name: Cada misión jugada entera queda hecha (tools/lib/smoke_misiones.js)
+        run: node tools/lib/smoke_misiones.js

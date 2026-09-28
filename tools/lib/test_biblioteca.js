@@ -155,6 +155,13 @@ pack.LANGS.forEach(function (code) {
   ok(B.readingWeek(state) < w0 && B.isRead(state, first.id, 0), code + ": «Poco» baja el nivel y marca el capítulo leído");
   B.selfAssess(state, first.id, 0, 3);
   ok(B.readingWeek(state) > w0, code + ": cambiar a «casi todo» lo sube");
+  // a chapter opened from the mission of an earlier week counts for that week
+  var sw = { cards: {}, unlocked: 20 }, vw = {};
+  B.openChapter(vw, first.id, 3, 18);
+  B.markRead(sw, first.id, 3);
+  B.openChapter(vw, first.id, 4);
+  B.markRead(sw, first.id, 4);
+  ok(sw.biblio.wk[18] === 1 && sw.biblio.wk[20] === 1, code + ": el capítulo cuenta para la semana de la misión que lo abrió: " + JSON.stringify(sw.biblio.wk));
   var s52 = { cards: {}, unlocked: 52 };
   var rec = B.recommend(index, s52);
   ok(rec && rec.book && rec.ch >= 0 && rec.cov > 0, code + ": recomienda un texto");

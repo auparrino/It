@@ -135,9 +135,13 @@
     var out = [], e = store(state), wk = e.wk[w.week] || {};
     if (root.Variaciones && root.Variaciones.FRAMES.some(function (fr) { return root.Variaciones.kindWeek(fr, { k: "per" }) <= w.week; })) {
       var n = root.Variaciones.eligible(state, w.week).length, vd = e.var[w.week];
-      out.push({ kind: "esc-var", arg: String(w.week), done: !!vd, ico: "🔁", opt: true, title: "Variaciones de frase",
+      // only when there is something to vary (a phrase already practised
+      // with a variation open by this week): before, the mission showed and
+      // could not be played (pt, weeks 1-3)
+      var loose = n || root.Variaciones.eligible(state, w.week, true).length;
+      if (loose || vd) out.push({ kind: "esc-var", arg: String(w.week), done: !!vd, ico: "🔁", opt: true, title: "Variaciones de frase",
         sub: vd ? "Hecha · " + vd.pct + " %" : n ? "Opcional · " + n + " frases que ya sabés, reescritas cambiando una pieza por vez"
-                                                 : "Opcional · primero practicá las frases de la semana: después las reescribís cambiando una pieza" });
+                                                 : "Opcional · " + loose + " frases que ya viste, reescritas cambiando una pieza por vez" });
     }
     if (w.week >= 2 && root.CTest) {
       var md = modeFor(w.week), s = weekSource(state, w.week, md === "cloze" ? clozeable : null, ["larga", "lectura", "escucha", "dictogloss"]);
@@ -159,7 +163,16 @@
   function handles(kind) { return !!MISSION_KINDS[kind]; }
   function go(kind, arg) {
     var a = String(arg || "").split("|");
-    if (kind === "esc-var") { H.startRound("variaciones", "w:" + a[0]); return; }
+    if (kind === "esc-var") {
+      // nothing to vary yet: say what opens it, not «no questions»
+      var V = root.Variaciones, st = H.state ? H.state() : null;
+      if (V && st && !V.eligible(st, +a[0]).length && !V.eligible(st, +a[0], true).length) {
+        H.toast("Primero practicá las frases de la semana (las escenas de Frases): después las reescribís acá.", 3500);
+        return;
+      }
+      H.startRound("variaciones", "w:" + a[0]);
+      return;
+    }
     if (kind === "esc-huecos") open("ctest", a[0], { week: +a[1], mode: a[2] || modeFor(+a[1]), from: "briefing" });
     if (kind === "esc-ordenar") open("ordenar", a[0], { week: +a[1], from: "briefing" });
   }
@@ -175,7 +188,10 @@
   function roundDone(round, pct) {
     if (!round || round.kind !== "variaciones") return;
     var m = /^w:(\d+)$/.exec(round.arg || ""), firsts = (round.log || []).filter(function (x) { return !x.retry; }).length;
-    if (!m || firsts < 5) return;
+    // five answers, or all the round had (the first weeks have one or two
+    // sentences to vary: with «five» the mission could never be done)
+    var asked = (round.items || []).filter(function (x) { return !x.retry; }).length;
+    if (!m || !firsts || firsts < Math.min(5, asked)) return;
     var e = store(), prev = e.var[m[1]];
     e.var[m[1]] = { pct: Math.max(pct, prev ? prev.pct : 0), at: Date.now() };
   }
