@@ -29,10 +29,12 @@ function chromiumPath() {
 // How many full plays a mission may need, by its own criterion (and why).
 const PLAYS = {
   vocab: 4,        // up to 7 new words a round: 20 words, three rounds
-  play: 6,         // 20 right answers with the week's own exercises (a round mixes other things)
+  play: 3,         // 20 right answers with the week's own exercises: rounds of mostly them (3.1)
   lez: 1,          // a lesson read to the end
   play2: 1,        // Dominala: one session, 85 %
   scene: 1,        // 60 % of the phrases firm: back three days apart; one play only has to move it
+  // a sheet delivered blank: two tries do not complete it, the third does (Engine.passed, 3.1)
+  "tr-asc": 3, "tr-brv": 3, radio: 3, "esc-huecos": 3, "esc-ordenar": 3,
   default: 2
 };
 // Missions whose «done» needs days to pass: one play must move them, not finish them.
@@ -132,7 +134,14 @@ const NEEDS_DAYS = { scene: 1 };
           await page.evaluate(([k, a, w]) => window.__test.mission(k, a, w), [m.kind, m.arg, W]);
           await page.waitForTimeout(60);
           screen = await page.evaluate(() => window.__test.screen());
-          if (screen === "gioco" || screen === "lezione") await playOut();
+          if (screen === "gioco" || screen === "lezione") {
+            await playOut();
+            // the result says what the round moved (3.1)
+            if (m.kind === "play" && (await page.evaluate(() => window.__test.screen())) === "risultato") {
+              const moved = await page.evaluate(() => { const n = document.querySelector(".planmoved"); return n ? n.textContent : ""; });
+              if (!/\+\d+ en esta ronda|hecha/.test(moved)) errors.push(key + ": el resultado no dice cuánto sumó la ronda («" + moved.slice(0, 80) + "»)");
+            }
+          }
           else if (!(await finishScreen(screen, W))) break;
           plays++;
           await page.waitForTimeout(80);

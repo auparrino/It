@@ -713,8 +713,14 @@
       week.verbs && week.verbs.length ? Math.ceil(size * Math.max(0.15, Math.min(0.6, (week.gymShare || 0.35) + mix.gym))) : 0,
       size
     );
+    // push: the week is not passed yet («Superá la semana», 20 right with
+    // its own exercises): the round is mostly them, so a round moves the
+    // mission by about ten and not by six or seven (3.1).
+    var push = !!opts.push && !focus;
+    if (push) wantConj = Math.min(wantConj, 2);
     var wantBook = size - wantConj;
     var wantExtra = focus ? 0 : Math.min(extra.length, Math.round(wantBook / 4 * mix.extra));
+    if (push) wantExtra = Math.min(wantExtra, 1);
 
     pickFresh(bookItems, wantBook - wantExtra, opts.state).forEach(function (it) { out.push(it); });
     // What the last four weeks left unseen comes along, a couple per round,
@@ -746,7 +752,7 @@
     }
     if (out.length < size && !focus) bankFill(opts.state, size - out.length).forEach(function (it) { out.push(it); });
     // two words of the week, interleaved with the grammar
-    if (week.vocab && week.vocab.length && !focus) {
+    if (week.vocab && week.vocab.length && !focus && !push) {
       var vs = vocabSession(course, week, opts.state || {}, 2);
       out = out.slice(0, size - vs.length).concat(vs);
     }

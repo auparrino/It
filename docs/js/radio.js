@@ -73,11 +73,15 @@
     if (!s.radio || typeof s.radio !== "object" || Array.isArray(s.radio)) s.radio = {};
     return s.radio;
   }
-  function done(rec) { return !!rec && (rec.pct >= PASS || (rec.tries || 0) >= 2); }
+  // 60 %, or a second attempt with 40 %, or a third one (Engine.passed, 3.1)
+  function done(rec) {
+    var E = root.Engine;
+    return E && E.passed ? E.passed(rec, PASS) : !!rec && (rec.pct >= PASS || (rec.tries || 0) >= 2);
+  }
   function record(state, week, r) {
     var s = store(state), prev = s[week] || null;
     var rec = { pct: prev ? Math.max(prev.pct, r.pct) : r.pct, last: r.pct, ok: r.ok, n: r.n,
-                tries: (prev && prev.tries || 0) + 1, at: Date.now() };
+                tries: (prev && prev.tries || 0) + 1, at: Date.now(), v: 31 };
     s[week] = rec;
     return rec;
   }
@@ -86,8 +90,10 @@
     var rec = store(state)[week];
     if (!rec) return "";
     if (rec.pct >= PASS) return "Misión hecha: " + rec.pct + " % de comprensión (hacía falta " + PASS + " %).";
-    if (done(rec)) return "Misión hecha: lo escuchaste dos veces. Leé la transcripción con calma y volvé cuando quieras.";
-    return "Con " + PASS + " % queda hecha la misión. Leé la transcripción, escuchalo otra vez con el texto y volvé a responder: el segundo intento la completa.";
+    if (done(rec)) return "Misión hecha: lo escuchaste " + (rec.tries || 2) + " veces. Leé la transcripción con calma y volvé cuando quieras.";
+    var E = root.Engine;
+    return (E && E.passMissing ? E.passMissing(rec, PASS) : "Con " + PASS + " % queda hecha la misión") +
+      ". Leé la transcripción, escuchalo otra vez con el texto y volvé a responder.";
   }
 
   /* ---------------------------------------------------------- misiones */
@@ -100,7 +106,7 @@
     return [{ kind: "radio", arg: String(w.week), done: ok, half: !!rec && !ok, ico: "📻",
       title: esc(label()) + ": " + esc(e.title),
       sub: ok ? "Hecho · " + rec.pct + " %"
-        : rec ? "Tu mejor: " + rec.pct + " % · con " + PASS + " % (o escuchándolo otra vez) queda hecho"
+        : rec ? "Tu mejor: " + rec.pct + " % · " + (root.Engine && root.Engine.passMissing ? root.Engine.passMissing(rec, PASS) : "con " + PASS + " % queda hecho")
         : "Unas " + words(e) + " palabras a dos voces · dos escuchas con las preguntas a la vista, en " +
           (e.qlang === "es" ? "castellano" : lang) + " · con " + PASS + " % queda hecho" }];
   }

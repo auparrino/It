@@ -143,19 +143,32 @@
         sub: vd ? "Hecha · " + vd.pct + " %" : n ? "Opcional · " + n + " frases que ya sabés, reescritas cambiando una pieza por vez"
                                                  : "Opcional · " + loose + " frases que ya viste, reescritas cambiando una pieza por vez" });
     }
+    // a result: done with its mark (50 % the C-test, 60 % «Ordená»), or a
+    // second try with 40 %, or a third (Engine.passed, 3.1); a result saved
+    // before 3.1 (no count of tries) stays done
+    var E = root.Engine;
+    var res = function (f, pass) {
+      var pct = wk[f];
+      if (pct == null) return { done: false, half: false, sub: "Opcional" };
+      var rec = { pct: pct, tries: wk[f + "N"] || 1, v: wk[f + "N"] ? 31 : null };
+      var ok = !wk[f + "N"] || !E || !E.passed || E.passed(rec, pass);
+      return { done: ok, half: !ok, sub: ok ? "Hecho · " + pct + " %" : "Tu mejor: " + pct + " % · " + E.passMissing(rec, pass) };
+    };
     if (w.week >= 2 && root.CTest) {
       var md = modeFor(w.week), s = weekSource(state, w.week, md === "cloze" ? clozeable : null, ["larga", "lectura", "escucha", "dictogloss"]);
-      if (s) out.push({ kind: "esc-huecos", arg: s.id + "|" + w.week + "|" + md, done: wk.huecos != null, ico: "🧩", opt: true,
+      var rh = res("huecos", 50);
+      if (s) out.push({ kind: "esc-huecos", arg: s.id + "|" + w.week + "|" + md, done: rh.done, half: rh.half, ico: "🧩", opt: true,
         title: MODE[md] + ": «" + s.title + "»",
-        sub: (wk.huecos != null ? "Hecho · " + wk.huecos + " %" : "Opcional") + " · " +
+        sub: rh.sub + " · " +
           (s.kind === "larga" ? "un pasaje de la lectura larga, " : s.kind === "escucha" ? "la escucha que ya hiciste, transcripta, " : "el texto que ya leíste, ") +
           (md === "ctest" ? "con la mitad de las palabras borrada" : "sin sus conectores ni preposiciones") });
     }
     if (w.week >= 3 && root.Ordenar) {
       var so = weekSource(state, w.week, orderable, ["escucha", "larga", "lectura", "dictogloss"]);
-      if (so) out.push({ kind: "esc-ordenar", arg: so.id + "|" + w.week, done: wk.ordenar != null, ico: "🔀", opt: true,
+      var ro = res("ordenar", 60);
+      if (so) out.push({ kind: "esc-ordenar", arg: so.id + "|" + w.week, done: ro.done, half: ro.half, ico: "🔀", opt: true,
         title: "Ordená el texto: «" + so.title + "»",
-        sub: (wk.ordenar != null ? "Hecho · " + wk.ordenar + " %" : "Opcional") + " · " +
+        sub: ro.sub + " · " +
           (so.kind === "escucha" ? "los turnos de la escucha, desordenados" : "las partes desordenadas") + "; los conectores son la pista" });
     }
     return out;
@@ -462,7 +475,11 @@
       var wk = e.wk[cur.week] || (e.wk[cur.week] = {}), f = kind === "ctest" ? "huecos" : "ordenar";
       var firstTime = wk[f] == null;
       wk[f] = Math.max(pct, wk[f] || 0);
-      if (firstTime) H.toast("★ Misión completada", 2200);
+      wk[f + "N"] = (wk[f + "N"] || (firstTime ? 0 : 1)) + 1;
+      var E = root.Engine, need = kind === "ctest" ? 50 : 60;
+      var ok = !E || !E.passed || E.passed({ pct: wk[f], tries: wk[f + "N"], v: 31 }, need);
+      if (ok && !wk[f + "Done"]) { wk[f + "Done"] = 1; H.toast("★ Misión completada", 2200); }
+      else if (!ok) H.toast(E.passMissing({ pct: wk[f], tries: wk[f + "N"], v: 31 }, need), 3000);
     }
   }
   function award(n) {

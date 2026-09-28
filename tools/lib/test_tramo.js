@@ -158,6 +158,14 @@ function validate(f, d) {
     ok(L.session(ep).length === s.lettura.questions.length + s.lettura.vf.length + 1, "semana " + w + ": la sesión de lectura no trae todas las preguntas");
     var ms = T.missions(course.weeks[w - 1], {});
     ok(ms.length === (s.breve ? 3 : 2) && ms.every(function (m) { return !m.done && !m.opt; }), "semana " + w + ": las misiones de escucha y tarea");
+    // 3.1: the long listening with a blank sheet is half done, not done;
+    // the third delivery completes it; a record from before 3.1 stays done
+    var asc = function (rec) { return T.missions(course.weeks[w - 1], { tramo: { asc: (function () { var o = {}; o[w] = rec; return o; })(), scr: {}, brv: {} } })
+      .filter(function (m) { return m.kind === "tr-asc"; })[0]; };
+    var a0 = asc({ pct: 0, tries: 2, v: 31 });
+    ok(a0 && !a0.done && a0.half && /Te falta/.test(a0.sub), "semana " + w + ": la escucha larga entregada en blanco dos veces queda a medias");
+    ok(asc({ pct: 0, tries: 3, v: 31 }).done && asc({ pct: 70, tries: 1, v: 31 }).done && asc({ pct: 0 }).done,
+       "semana " + w + ": la escucha larga se completa con 60 %, al tercer intento, o si es de antes de la 3.1");
     if (s.breve) {
       ok(ms.some(function (m) { return m.kind === "tr-brv" && T.handles(m.kind); }) && T.owns("tramo-brv"), "semana " + w + ": la misión de la escucha corta");
       // every accepted form of each cell passes, and another cell's answer does not

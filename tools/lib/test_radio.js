@@ -159,6 +159,15 @@ pack.LANGS.forEach(function (code) {
   ok(!m1.done && m1.half && !m1.opt, L + "con 40 % la misión queda a medias (y es obligatoria)");
   R.record(st, 6, { pct: 20, ok: 1, n: 5 });
   ok(R.missions(w6, st)[0].done && st.radio[6].pct === 40 && st.radio[6].tries === 2, L + "el segundo intento la completa y guarda el mejor");
+  // 3.1: two blank sheets do not complete it; the third try always does;
+  // a record saved before 3.1 keeps its old rule
+  var sb = { cards: {} };
+  R.record(sb, 6, { pct: 0, ok: 0, n: 5 }); R.record(sb, 6, { pct: 20, ok: 1, n: 5 });
+  var mb = R.missions(w6, sb)[0];
+  ok(!mb.done && mb.half && /Te falta: 60 %/.test(mb.sub), L + "dos entregas con 20 % no la completan y dicen qué falta: " + mb.sub);
+  R.record(sb, 6, { pct: 0, ok: 0, n: 5 });
+  ok(R.missions(w6, sb)[0].done, L + "el tercer intento la completa igual (la semana nunca queda trabada)");
+  ok(R.missions(w6, { cards: {}, radio: { 6: { pct: 0, tries: 2 } } })[0].done, L + "un registro de antes de la 3.1 sigue hecho");
   var st2 = { cards: {} };
   R.record(st2, 7, { pct: 60, ok: 3, n: 5 });
   ok((R.missions(course.weeks[6], st2)[0] || {}).done, L + "con 60 % queda hecha");
