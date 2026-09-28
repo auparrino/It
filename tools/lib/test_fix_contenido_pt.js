@@ -15,6 +15,9 @@
  *     significa?» no contienen la propia palabra; el laboratorio de
  *     contracciones (semana 3) no usa presente regular; las lecturas de la
  *     semanas 1 y 2 (antes de la lección de la 3) glosan las contracciones.
+ *  3. Portugués (auditoría 3.0, P11): tocar una palabra de la semana muestra
+ *     primero la acepción que enseña la semana y, si el banco u otro lema
+ *     tienen otra, las dos (tools/pt/build_course.py, merge_senses).
  *
  *   node tools/lib/test_fix_contenido_pt.js
  */
@@ -184,6 +187,26 @@ course.weeks.forEach(function (w) {
     });
   });
 });
+
+// P11 (auditoría 3.0): tocar una palabra de la semana muestra la acepción que
+// enseña la semana (la otra, si la hay, va después: «· también: …»).
+(function () {
+  var G = pack.data("pt", "glossario.json"), STOP = /^(de|la|el|los|las|un|una|en|al|del|con|por|para|que|se|no|es|lo|le|su|sus|mas|muy|como|algo|alguien|cosa|coloquial|si|sin|tambien|pt)$/;
+  function ws(s) { return (plain(s).match(/[a-zñ]+/g) || []).filter(function (w) { return !STOP.test(w); }); }
+  function same(a, b) { var B = ws(b); return ws(a).some(function (x) { return B.some(function (y) { return x === y || (x.length >= 4 && y.length >= 4 && x.slice(0, 4) === y.slice(0, 4)); }); }); }
+  var n = 0, bad = [];
+  course.weeks.forEach(function (w) {
+    (w.vocab || []).forEach(function (v) {
+      v[0].toLowerCase().split("/").map(function (k) { return k.trim().replace(/^(o|a|os|as|um|uma) /, ""); })
+        .filter(function (k) { return k && !/[ -]/.test(k); }).forEach(function (k) {
+          n++;
+          var g = G[k];
+          if (!g || (g[1].indexOf(v[1]) !== 0 && !(g[0].toLowerCase() === k && same(v[1], g[1])))) bad.push(w.week + " " + k + ": «" + v[1] + "» / " + (g ? g[0] + " «" + g[1] + "»" : "sin glosa"));
+        });
+    });
+  });
+  ok(n > 500 && !bad.length, "palabras de la semana (" + n + ") cuyo toque no muestra la acepción de la semana: " + bad.length + " " + bad.slice(0, 5).join(" | "));
+})();
 
 // B6: la semana 3 advierte que «no» (em + o) no es la negación
 var w3 = JSON.stringify(byWeek[3].lesson);
