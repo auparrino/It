@@ -1,7 +1,7 @@
 /* Una sola versión: la de la app.  package.json, APP_VERSION de
    docs/js/app.js (la que ve el alumno en Oggi / Io) y VERSION de docs/sw.js
    (el nombre de la caché) tienen que decir lo mismo:
-     package.json 2.8.0  ↔  app.js "v2.8"  ↔  sw.js "c1-v2.8"
+     package.json 3.0.0  ↔  app.js "v3.0"  ↔  sw.js "c1-v3.0"
      package.json 3.0.1  ↔  app.js "v3.0.1"  ↔  sw.js "c1-v3.0.1"
    Para subir de versión se cambian los tres a la vez.
    Run: node tools/lib/test_version.js */
