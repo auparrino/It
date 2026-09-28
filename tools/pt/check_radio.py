@@ -9,7 +9,7 @@ Nada antes de su teoría, con el mismo análisis que las lecturas semanales
 (check_letture.py: grammar, Lexicon): en el guion de la semana N (y, desde
 la 14, en las preguntas en portugués) la gramática no pasa de la semana N y
 hay a lo sumo tres palabras desconocidas sin glosa (sin contar nombres
-propios).  Una palabra glosada en una lectura semanal o en un episodio
+propios; las palabras de la semana de course.json cuentan desde su semana).  Una palabra glosada en una lectura semanal o en un episodio
 anterior cuenta como vista.  Las marcas del habla brasileña van con su
 semana: *tá* / *tô* desde la 8 (estar + gerúndio) y *pra* / *pro* desde la 9
 (ir para).  El largo, las voces, las preguntas y las palabras de la semana
@@ -28,7 +28,9 @@ import check_letture as cl  # noqa: E402
 
 MAX_UNKNOWN = 3
 # Lo coloquial que se enseña con su semana (lessons/s1.py).
-HABLA = {"tá": 8, "tô": 8, "tão": 8, "tamo": 8, "pra": 9, "pro": 9, "pros": 9, "pras": 9, "né": 8}
+# Sustantivos que coinciden con una forma verbal (el telefone, a banda).
+NOT_VERBS = {"telefone", "banda"}
+HABLA = {"tá": 8, "tô": 8, "tamo": 8, "pra": 9, "pro": 9, "pros": 9, "pras": 9, "né": 8}
 
 
 def episodes():
@@ -52,6 +54,15 @@ def main():
     only = int(sys.argv[1]) if len(sys.argv) > 1 else 0
     serie = json.load(open(os.path.join(HERE, "radio", "serie.json"), encoding="utf-8"))
     lex = cl.Lexicon()
+    cl.NOT_VERBS.update(NOT_VERBS)
+    # the words of the week (the «Palabras de la semana» mission) count from their week
+    course = json.load(open(os.path.join(ROOT, "docs/lang/pt/data/course.json"), encoding="utf-8"))
+    vocab = {}
+    for w in course["weeks"]:
+        for v in w.get("vocab", []):
+            for form in v[0].lower().split("/"):
+                for t in cl.words(form):
+                    vocab[t] = min(vocab.get(t, 99), w["week"])
     seen_gloss = {}
     for t in cl.testi():
         for g in t.get("gloss", {}):
@@ -91,6 +102,8 @@ def main():
             if lex.week_of(t) <= week or seen_gloss.get(t, 99) < week:
                 continue
             cands = cl.lemma_candidates(t) | lex.verb_of.get(t, set())
+            if any(vocab.get(c, 99) <= week for c in cands | {t}):
+                continue
             if any(seen_gloss.get(c, 99) < week or c in here for c in cands):
                 continue
             unknown.append(t)
