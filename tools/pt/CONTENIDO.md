@@ -156,6 +156,13 @@ ellas. Cada parte es una sesión de ~12 pasos.
 - **Examen** (`docs/lang/pt/esame_data.js`): todo en portugués, tres
   versiones de escucha, lectura y producción escrita (`versoes`, cuatro
   tarefas integradas con su insumo); la forma exacta está en la cabecera.
+  Estruturas y Léxico (`authored/esame_c1.py`), también en tres versiones:
+  cada ítem lleva `ver` ("v1", "v2", "v3", los ids de `versoes`); los
+  huecos van por texto (`TEXT_VER`) y el resto se reparte de a uno por
+  versión en el orden de la lista (`OVERRIDE` separa dos ítems que se
+  delatarían en la misma versión). Un ítem nuevo va al final de su familia
+  y se revisa que las tres versiones sigan parejas;
+  `tools/lib/test_fix_contenido_pt.js` lo controla.
 - **Palabras de la semana**: 18 por semana de la 15 a la 25; en el tramo,
   15 + 12 del léxico de la lectura y la escucha de la semana
   (`vocab/s5_tramo.py`). Colocaciones: `authored/colocacoes.py` (dos por
