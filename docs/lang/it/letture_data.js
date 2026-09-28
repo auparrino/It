@@ -1042,8 +1042,8 @@
       title: "La Rai e i giornali", grammar: "congiuntivo imperfetto",
       text:
         "Per molti anni in Italia c'è stata solo la Rai, la televisione pubblica. Negli anni Cinquanta poche famiglie " +
-        "avevano un televisore, e la sera i vicini andavano al bar perché tutti potessero vedere insieme i quiz del " +
-        "giovedì. Negli anni Sessanta un maestro, Alberto Manzi, ha insegnato a leggere agli adulti con il programma " +
+        "avevano un televisore, e la sera i vicini andavano al bar perché tutti potessero vedere in compagnia i quiz " +
+        "del giovedì. Negli anni Sessanta un maestro, Alberto Manzi, ha insegnato a leggere agli adulti con il programma " +
         "Non è mai troppo tardi: lo Stato voleva che anche chi non era andato a scuola imparasse l'italiano. Ancora " +
         "oggi chi ha un televisore paga il canone Rai, che arriva con la bolletta della luce.\n\n" +
         "Anche i giornali hanno una lunga storia. I quotidiani più letti sono il Corriere della Sera e la Repubblica, " +
@@ -1191,7 +1191,7 @@
         "spesso una piccola quota, il ticket.\n\n" +
         "La legge fu votata quasi da tutti i partiti, e Tina Anselmi, la ministra che la firmò, era stata due anni " +
         "prima la prima donna ministro della storia d'Italia.",
-      gloss: { assistenza: "atención médica", sanitario: "de salud", sanitaria: "de salud", residente: "residente", base: "(medico di base) médico de cabecera", specialistiche: "de especialistas", mutue: "obras sociales (de antes)", casse: "cajas", copertura: "cobertura", stabilì: "estableció",
+      gloss: { assistenza: "atención médica", sanitario: "de salud", sanitaria: "sanitaria (de salud)", residente: "residente", base: "(medico di base) médico de cabecera", specialistiche: "de especialistas", mutue: "obras sociales (de antes)", casse: "cajas", copertura: "cobertura", stabilì: "estableció",
                diritto: "derecho", elenco: "lista", visite: "consultas", quota: "cuota", ticket: "copago", firmò: "firmó" },
       questions: [
         ["Quando nacque il Servizio sanitario nazionale?", ["nel 1978", "nel 1946", "nel 1968", "nel 1990"], "nel 1978"],
@@ -1204,7 +1204,7 @@
       title: "Il sindacato e lo sciopero", grammar: "discorso indiretto",
       text:
         "In Italia lo sciopero è un diritto scritto nella Costituzione, e i sindacati sono ancora forti: i tre più grandi " +
-        "sono la CGIL, la CISL e la UIL.\n\n" +
+        "sono CGIL, CISL e UIL.\n\n" +
         "Venerdì scorso i lavoratori dei trasporti hanno incrociato le braccia per ventiquattro ore. I sindacati hanno " +
         "spiegato che chiedevano contratti migliori e che gli stipendi erano fermi da anni. Il ministro ha risposto che " +
         "il governo avrebbe aperto un tavolo di trattativa la settimana successiva.\n\n" +
@@ -1291,7 +1291,7 @@
         "Scegliere il medico di base è una delle prime cose da fare dopo aver preso la residenza. Il medico si sceglie " +
         "alla ASL o online, da un elenco di medici della zona, e visitarlo non costa niente.\n\n" +
         "Ma attenzione: il medico di base non fa tutto. Per un esame del sangue o per vedere uno specialista bisogna " +
-        "prima farsi scrivere la ricetta, chiamata anche impegnativa. Poi si prenota attraverso il CUP, il centro unico " +
+        "farsi scrivere prima la ricetta, chiamata anche impegnativa. Poi si prenota attraverso il CUP, il centro unico " +
         "di prenotazione, e si paga il ticket. Aspettare mesi per una visita specialistica, purtroppo, non è raro.\n\n" +
         "«All'inizio non capivo perché dovessi passare sempre dal medico prima di prenotare», racconta Lucía, di " +
         "Montevideo. «Adesso lo trovo comodo: sapere che qualcuno conosce tutta la mia storia è rassicurante.»",
@@ -1332,7 +1332,7 @@
         "Al ristorante, in Italia, ci vuole un po' di pazienza: il cameriere non porta il conto finché non lo chiedi tu. " +
         "Portarlo prima sarebbe scortese, come dire «andatevene».\n\n" +
         "Quando arriva il conto, molti stranieri se la prendono per due voci misteriose: il coperto, cioè il pane e il " +
-        "servizio della tavola, da uno a tre euro a persona, e a volte il servizio. Sono legali, se il menù li indica. La " +
+        "servizio della tavola, da uno a tre euro a persona, e a volte il servizio. Se il menù le indica, il ristorante ha il diritto di farle pagare. La " +
         "mancia, invece, non è obbligatoria: chi desidera lascia qualche euro, ma nessuno ci rimane male se non lo fai.\n\n" +
         "E se il gruppo è grande? Gli italiani spesso pagano «alla romana», cioè dividendo il totale in parti uguali. Chi " +
         "ha mangiato solo un'insalata magari non ci sta, ma di solito se ne frega e paga lo stesso.",
