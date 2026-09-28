@@ -377,6 +377,17 @@ course.weeks.forEach(function (w) {
     totalSec += words * 0.6;
   });
 
+  // 5b. la serie Radio (radio.js, semanas 6-25): dos escuchas a ~130 palabras
+  // por minuto y las preguntas; los minutos cuentan como input
+  var rad = ctx.Radio && ctx.Radio.episode(w.week);
+  if (rad && !w.boss) {
+    var rw = ctx.Radio.words(rad), rsec = Math.round(rw / 130 * 60 * 2 + (rad.questions.length + rad.info.length) * 12);
+    ctx.Radio.record(state, w.week, { pct: 80, ok: 4, n: 5 });
+    Engine.addStrand(state, "input", Math.round(rsec / 10), new FakeDate());
+    missions.push({ m: "radio", title: rad.title, words: rw, sec: rsec });
+    totalSec += rsec;
+  }
+
   // 6. laboratorio
   (by.ponte[w.week] || []).forEach(function (r) {
     var pacc = play(Lab.ponteSession(state.cards, r.id), "ponte", w.week);

@@ -394,7 +394,8 @@
       var r = cur.done;
       return head + '<div class="card"><div class="scorebig"><b>' + r.pct + " %</b><span>" + r.ok + " / " + r.n + "</span></div>" +
         '<table class="res">' + r.detail.map(function (d) {
-          return "<tr><td" + langAttr() + ">" + esc(d[0]) + "</td><td>" + (d[1] ? "✓" : "✗ <span" + langAttr() + ">" + esc(d[2]) + "</span>") + "</td></tr>";
+          var dl = a.qlang === "es" ? "" : langAttr();   // the Radio series asks in Spanish up to week 13
+          return "<tr><td" + dl + ">" + esc(d[0]) + "</td><td>" + (d[1] ? "✓" : "✗ <span" + dl + ">" + esc(d[2]) + "</span>") + "</td></tr>";
         }).join("") + "</table></div>" +
         (rad ? '<p class="muted small" id="trverdict">' + esc(R().verdict(H.state(), cur.week)) + "</p>" : "") +
         '<div class="card"><h3>Transcripción</h3>' + transcript(a) +

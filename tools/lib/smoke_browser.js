@@ -494,6 +494,8 @@ async function smokeEsame(page, code, P, snap, note, errors) {
     // reading, «Consultar», the Biblioteca, guided writing, a duel, Tres lenguas,
     // Tres vueltas (tools/lib/smoke_modulos.js)
     await require("./smoke_modulos.js")(page, { code, errors, note, snap });
+    // the Radio series (weeks 6-25): the mission, the player, Leggi (tools/lib/smoke_radio.js)
+    await require("./smoke_radio.js")(page, { code, errors, note, snap });
 
     // the service worker keeps the core and this package
     const sw = await page.evaluate(async (c) => {

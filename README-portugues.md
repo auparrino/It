@@ -68,6 +68,7 @@ reales; las apócrifas se dicen apócrifas.
 | Duelos (`docs/js/duelli.js`) | ser/estar, por/para, seu/dele, perfeito/imperfeito, simple/composto, indicativo/subjuntivo, futuro do subjuntivo/infinitivo pessoal, a/à |
 | Lecturas | *A semana* (52 textos), *Martín no Rio* (10 episodios), *Cultura* (23), *Enchentes* (12, input flood) |
 | Tramo C1 (`tools/pt/tramo/`, `docs/js/tramo.js`) | Semanas 27-51: *Leituras longas* (350 → 900 palabras, preguntas en portugués), *Escutas longas* a dos voces (250 → 600 palabras) y una tarea integrada al estilo del Celpe-Bras (120 → 250 palabras), con revisión local y rúbrica con IA |
+| Rádio Calçadão (`tools/pt/radio/`, `docs/js/radio.js`) | Semanas 6-25 (sin el chefão de la 13): un programa de radio por semana a dos voces (132 → 306 palabras, 4.080 en total), con la gramática y las palabras de la semana y el habla de Brasil ya enseñada; preguntas en castellano hasta la 13 y en portugués desde la 14 |
 | Sons (`docs/lang/pt/ascolto_data.js`) | 181 pares mínimos, habla conectada, entonación, acento tónico; 47 dictogloss |
 | Diagnóstico (`docs/lang/pt/diagnosi.js`) | ~33 categorías de error del hispanohablante, pista primero y explicación después |
 | Escreva (`docs/lang/pt/scrivi.js`) | 48 tareas de escritura con destinatario y propósito (en portugués desde la 14), con su corrector |
@@ -97,6 +98,32 @@ Material de apoyo que se usó: *Noções básicas de gramática portuguesa (PLE)
 (José Carlos Silva), *Gramática portuguesa* (Espasa), *Vamos nessa? Vamos!*
 (Ministerio de Educación de Corrientes), la guía de Philipe Brazuca y el
 Documento-base del Celpe-Bras (INEP).
+
+## 📻 Rádio Calçadão: una escucha por semana de la 6 a la 25
+
+Antes del tramo C1, la escucha con contexto era casi solo el dictogloss.
+Ahora, de la semana 6 a la 25 (sin el chefão de la 13), cada semana trae un
+episodio de **Rádio Calçadão**, la radio comunitaria de Botafogo: Nanda
+(carioca) y Téo (paulista) conducen «Bom dia, Calçadão», y llaman Sofía (la
+argentina de las lecturas), Dona Lúcia y Caio, el repórter en bicicleta.
+Diecinueve programas a dos voces con la gramática y las palabras de su
+semana: el presente irregular en la 6, el perfeito en la 11, el futuro de
+los boletines contra el *vai chover* hablado en la 17, la pasiva en la 22,
+el subjuntivo en la 23 y la 24, los relativos en la 25. El portugués es el
+que se habla y ya se enseñó: *a gente* desde el principio, *tá* / *tô* / *né*
+desde la 8 y *pra* / *pro* desde la 9 (`tools/lib/test_radio.js` controla que
+no aparezcan antes).
+
+- Mismo reproductor que las *Escutas longas*: dos escuchas con las preguntas
+  a la vista, la transcripción al final, las glosas antes de escuchar.
+- Tres preguntas (en castellano hasta la 13, en portugués desde la 14) y dos
+  o tres *Diz ou não diz?*.
+- Misión obligatoria **«📻 Rádio: …»** del percorso, hecha con 60 % o al
+  responder por segunda vez; en el plan del día es un bloque de input y sus
+  minutos cuentan como input. En Ler, la serie entera.
+- `tools/pt/check_radio.py` aplica el análisis de `check_letture.py`: nada de
+  gramática posterior a la semana y como mucho tres palabras desconocidas
+  sin glosa.
 
 ## Tramo C1: la tarea integrada del Celpe-Bras
 
