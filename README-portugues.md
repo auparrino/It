@@ -59,15 +59,15 @@ reales; las apócrifas se dicen apócrifas.
 
 | Módulo | Contenido |
 |---|---|
-| Lecciones (`tools/pt/lessons/`) | 52 lecciones, 369 bloques de teoría en sesiones cortas, con chequeos: marcadores del habla desde la 8, actos de habla, un *sotaque* cada cuatro semanas, los géneros desde la 28 |
-| Ejercicios (`tools/pt/authored/`) | 2.563: elegir, completar, traducir, encontrar el error, *garden path*, *descubrí la regla*, combinar oraciones, escucha, colocaciones, pragmática, examen; la consigna, en portugués desde la 14 (las simples) y la 27 (todas) |
+| Lecciones (`tools/pt/lessons/`) | 52 lecciones, 370 bloques de teoría en sesiones cortas, con chequeos: marcadores del habla desde la 8, actos de habla, un *sotaque* cada cuatro semanas, los géneros desde la 28 |
+| Ejercicios (`tools/pt/authored/`) | 2.573: elegir, completar, traducir, encontrar el error, *garden path*, *descubrí la regla*, combinar oraciones, escucha, colocaciones, pragmática, examen; la consigna, en portugués desde la 14 (las simples) y la 27 (todas) |
 | Palabras de la semana (`tools/pt/vocab/`) | 1.008, cada una con significado, ejemplo y **cómo se usa** |
 | Conjugador (`docs/lang/pt/conjugator.js`) | 419 verbos, 17 tiempos, participios dobles, infinitivo pessoal, imperativo, reflexivos; 8.187 controles |
 | Frases (`docs/js/frasi.js`) | 32 escenas, 539 frases de conversación, todas con su nota de construcción |
 | Laboratorio (`docs/js/lab.js`) | *Ponte* (16 reglas español → portugués, 196 cognados), 103 falsos amigos, *Entender* (input estructurado) |
 | Duelos (`docs/js/duelli.js`) | ser/estar, por/para, seu/dele, perfeito/imperfeito, simple/composto, indicativo/subjuntivo, futuro do subjuntivo/infinitivo pessoal, a/à |
 | Lecturas | *A semana* (52 textos), *Martín no Rio* (10 episodios), *Cultura* (23), *Enchentes* (12, input flood) |
-| Tramo C1 (`tools/pt/tramo/`, `docs/js/tramo.js`) | Semanas 27-51: *Leituras longas* (350 → 900 palabras, preguntas en portugués), *Escutas longas* a dos voces (250 → 600 palabras) y una tarea integrada al estilo del Celpe-Bras (120 → 250 palabras), con revisión local y rúbrica con IA |
+| Tramo C1 (`tools/pt/tramo/`, `docs/js/tramo.js`) | Semanas 27-51: *Leituras longas* (350 → 900 palabras, preguntas en portugués), *Escutas longas* a dos voces (250 → 600 palabras), *Escutas curtas* de una voz (noticiero, aviso, contestador, instrucciones, propaganda: unas 120-170 palabras, con tabla de datos) y una tarea integrada al estilo del Celpe-Bras (120 → 250 palabras), con revisión local y rúbrica con IA |
 | Sons (`docs/lang/pt/ascolto_data.js`) | 181 pares mínimos, habla conectada, entonación, acento tónico; 47 dictogloss |
 | Diagnóstico (`docs/lang/pt/diagnosi.js`) | ~33 categorías de error del hispanohablante, pista primero y explicación después |
 | Escreva (`docs/lang/pt/scrivi.js`) | 48 tareas de escritura con destinatario y propósito (en portugués desde la 14), con su corrector |
@@ -110,6 +110,23 @@ semana trae tres misiones obligatorias que entrenan exactamente eso:
 - 🎧 **Escuta longa**: un programa de radio, un podcast, un debate o una
   llamada, a dos voces, de 250 a 600 palabras. Se escucha dos veces con las
   preguntas a la vista y la transcripción aparece al final.
+- 📻 **Escuta curta** (misión 📻, pantalla `tramo-brv`, como en el italiano):
+  un monólogo de una voz, de 120 a 170 palabras, de los géneros del examen:
+  noticiário de rádio, propaganda, recado na caixa postal, aviso público,
+  audioguia, mensagem automática de uma central, agenda cultural,
+  instruções da Defesa Civil, mensagem de voz, podcast, comunicado formal y
+  un aviso en portugués de Portugal (semana 46). Se completa una tabla de 4
+  a 6 datos (horas, precios, cifras, nombres) y se juzgan seis afirmaciones
+  (*diz / não diz*). Cada monólogo va con el tema y la gramática de su
+  semana: futuro do subjuntivo en el noticiero de la 27 (*quem precisar…*),
+  pasiva con *se* en el aviso de la 32 (*permite-se, emprestam-se*),
+  mais-que-perfeito simple en el podcast de la 41, formación de palabras en
+  la propaganda de la 44, falsos amigos en el supermercado de la 45. La
+  tabla acepta las formas brasileñas de los datos (*às 18h*, *18 horas*,
+  *R$ 31*, *9h15*): las palabras que no cuentan están en `cellStop` de
+  `tools/pt/tramo/generi.json`. Datos: el campo `breve` de
+  `tools/pt/tramo/wNN.json`; `tools/lib/test_tramo.js` la exige en los dos
+  idiomas.
 - 🖋️ **Tarefa**: el enunciado sigue el formato del examen («Você é… Após
   ler/ouvir…, escreva um(a)… para…  Não se esqueça de…»). Los géneros son
   carta formal, e-mail, carta do leitor, artigo, resenha, texto de opinião,
@@ -160,6 +177,32 @@ te fue en las otras. Después de aprobar, el plan de mantenimiento propone un
 simulacro cada tres meses con la versión siguiente. Se guarda en
 `state.esame`: la versión en curso y, por versión, las pruebas del intento y
 la mejor nota.
+
+### Glosas: la de la semana y la del banco (v3.1)
+
+Una palabra de la semana y el toque en la palabra decían a veces cosas
+distintas: *puxa* era «¡uh!» en la semana 20 y «tirar (hacia uno)» al
+tocarla; *saque*, «la extracción de dinero» en la 42 y «entender» (de
+*sacar*) al tocarla; *juntar*, «ahorrar» y «juntar / reunir». Eran 46 casos
+en la auditoría 3.0 (E-portugues P11). Ahora `tools/pt/build_course.py`
+(`merge_senses`) arma el glosario del toque con la acepción de la semana
+primero y, si el banco u otro lema tienen otra, las dos: *puxa* — «¡uh!
+(lástima o sorpresa) · también: puxar, tirar (hacia uno)». Son 63 formas.
+Se corrigieron también tres glosas del glosario (*uai*, *virada*,
+*mangueira*) y *o saque* pone primero el uso cotidiano.
+`tools/lib/test_fix_contenido_pt.js` controla que cada palabra de la semana
+muestre su acepción al tocarla.
+
+### Semana 44: formar palabras, no solo leerlas (v3.1)
+
+La 44 enseñaba a reconocer sufijos y prefijos. Ahora tiene una cuarta parte,
+**Formá la palabra**: un microbloque con *-vel* («que se puede»: *lavável*,
+*preferível*), *-ista* (oficios: *taxista*, *jornalista*), *in- / im-* y
+*des-* (el contrario) y *re-* (de nuevo), y diez ítems «Forme a palavra»
+(`tools/pt/authored/s4.py`, s4-44-47 a s4-44-56) que piden escribir la
+palabra derivada en contexto: *organização*, *atendimento*, *curiosidade*,
+*limpeza*, *confiável*, *taxista*, *dentista*, *desarrumada*,
+*inaceitável*, *reabrir*. Las bases no repiten las del examen.
 
 ### Palabras B2-C1 y corrector (v2.7)
 
