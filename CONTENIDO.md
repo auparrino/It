@@ -46,13 +46,15 @@ italiano.
 | Escritura libre (*Scrivi*) | `TASKS` en `docs/lang/<código>/scrivi.js` | `test_scrivi.js` |
 | Examen final C1 | `docs/lang/<código>/esame_data.js` y `tools/<código>/authored/esame_c1.py` | `test_suoni.js`, `test_game.js` |
 | Tramo C1 (semanas 27-51: lectura, escucha y tarea largas) | `tools/<código>/tramo/wNN.json` y `generi.json` | `tools/lib/test_tramo.js` |
+| Serie Radio / Rádio (semanas 6-25: un programa a dos voces por semana) | `tools/<código>/radio/wNN.json` y `serie.json` | `tools/lib/test_radio.js`, `tools/it/check_radio.py`, `tools/pt/check_radio.py` |
 | Biblioteca (libros de dominio público) | `tools/lib/biblioteca_fuentes.js` | `tools/lib/test_biblioteca.js` |
 | Tres lenguas (it ↔ pt ↔ es) | `docs/lang/tres_lenguas_data.js` | `tools/lib/test_tres_lenguas.js` |
 | Voces reales del italiano | `tools/it/VOCES.md`, `tools/it/voci_cv.py` | `test_suoni.js` |
 
 **Generados, no se editan a mano** (los rehace `npm run build`):
 `docs/lang/<código>/data/course.json`, `bank.json` y `glossario.json`;
-`docs/lang/<código>/tramo_data.js`; `docs/lang/<código>/formule_data.js`
+`docs/lang/<código>/tramo_data.js`; `docs/lang/<código>/radio_data.js`
+(`tools/lib/build_radio.js`); `docs/lang/<código>/formule_data.js`
 (`tools/lib/formule.py`); `docs/lang/<código>/biblioteca/*.json`
 (`tools/lib/build_biblioteca.js`). `frequenza.json` lo arma
 `tools/<código>/build_frequenza.py`, que necesita red y se corre a mano;

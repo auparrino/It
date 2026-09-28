@@ -279,6 +279,33 @@ input y suman xp. Con las lecturas ya hechas, *Ascolto facile* las
 reproduce una tras otra, solo audio, y se controla desde la pantalla de
 bloqueo (Media Session).
 
+### 📻 Radio Portici: una escucha por semana de la 6 a la 25
+
+Hasta el tramo C1 casi no había qué escuchar con contexto. Ahora, de la
+semana 6 a la 25 (sin el jefe de la 13), cada semana trae un episodio de
+**Radio Portici**, la radio del barrio en Bologna: Sara y Dario conducen
+«Buongiorno Portici» y llaman Martín (el de las lecturas: su hora en
+Rosario, la entrevista de trabajo en Módena, la oferta), la signora Franca y
+Leo, el cronista en bicicleta. Son 19 programas a dos voces, de 134 palabras
+en la 6 a 285 en la 25 (4.100 en total), cada uno con la gramática y las
+palabras de su semana (el presente irregular en la 6, el passato prossimo en
+la 11, *ne* y *ci* en la 21, el congiuntivo en la 24 y la 25).
+
+- Se escucha con el reproductor de las escuchas largas: dos voces del
+  teléfono, **dos escuchas con las preguntas a la vista**, 0,9× o 1× y la
+  **transcripción al final**; las glosas, antes de escuchar.
+- Tres preguntas de comprensión (en castellano hasta la 13, en italiano
+  desde la 14) y dos o tres **«¿lo dice o no lo dice?»**.
+- En el percorso es la misión **«📻 Radio: …»**, obligatoria: queda hecha con
+  60 % o al responder por segunda vez (como la lectura, con 70 % o releerla).
+  El plan del día la pone como bloque de input y los minutos escuchados
+  cuentan como input. En Leggi, la serie entera, plegada por estación.
+- `tools/it/check_radio.py` controla, como con las lecturas, que ni el guion
+  ni las preguntas en italiano usen gramática posterior a la semana y que
+  queden como mucho tres palabras desconocidas sin glosa;
+  `tools/lib/test_radio.js`, el largo, las voces, las preguntas, las formas y
+  palabras de la semana y que la transcripción sea el guion.
+
 **Inondazioni**: doce textos de 150 a 230 palabras que repiten ocho veces o
 más una estructura que el español no tiene (*ne*, *ci*, *da* + tiempo,
 *mica*, pronombres combinados, congiuntivo, condizionale passato, relativos,
@@ -904,12 +931,13 @@ tools/it/
   authored/              ítems propios por tema
   lessons/               la teoría de las 52 semanas (s1..s4, una por estación)
   tramo/                 lecturas, escuchas y tareas largas de las semanas 27-51
+  radio/                 Radio Portici: un episodio por semana, de la 6 a la 25
   fuentes/               extractos de los dos manuales y sus parches (no se publican)
   sillabo.py, lessico.py desde qué semana se puede pedir cada ejercicio y cada palabra
-  check_lessons.py, check_letture.py   formato y sillabo de la teoría y las lecturas
+  check_lessons.py, check_letture.py, check_radio.py   formato y sillabo de la teoría, las lecturas y la radio
   test_*.js              los tests del italiano (npm run test:it)
   audit/                 la auditoría de contenido por pasadas (su README)
-tools/lib/               lo común: pack.js, sim_carriera.js, build_tramo.js,
+tools/lib/               lo común: pack.js, sim_carriera.js, build_tramo.js, build_radio.js,
                          build_biblioteca.js, smoke_browser.js y los test_*.js
 ```
 

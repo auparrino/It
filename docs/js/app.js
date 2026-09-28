@@ -972,6 +972,7 @@
         '<span class="muted">Escucha larga · <span lang="' + LG.tts + '">' + esc(trs.ascolto.genre) + "</span></span></span>" +
         (ad ? '<span class="score">' + ad.pct + "%</span>" : "") + "</button>");
     }
+    if (window.Radio) wk = wk.concat(Radio.weekButtons(state, week));   // el episodio de la serie Radio (radio.js)
     var B = window.Biblioteca, rec = null;
     if (B && B.loaded && B.loaded() && B.firstOpenWeek(B.index()) <= week) {
       var lm = B.mission(B.index(), { week: week }, state);
@@ -1021,6 +1022,7 @@
     if (lunghe.length && ser.lunga) html += fold("lg:lunga", ser.lunga.emoji + " " + esc(ser.lunga.name), week < 27 ? "🔒 desde la semana 27" : count(lunghe),
       '<p class="muted">' + esc(ser.lunga.blurb) + "</p>" + bySeason("lg:lunga", lunghe));
 
+    if (window.Radio) html += Radio.leggiFold(state, week, sNames);   // la serie Radio, semanas 6-25 (radio.js)
     // Escuchas: las largas del tramo y la re-escucha de lo ya leído
     var asc = "", TD = window.TRAMO_DATA;
     if (TD && (TD.SETTIMANE || []).length) {
@@ -1842,6 +1844,7 @@
       });
     });
     if (window.Tramo) Tramo.missions(w, state).forEach(m);   // tramo C1 (tramo.js): escucha larga y tarea
+    if (window.Radio) Radio.missions(w, state).forEach(m);   // la serie Radio de las semanas 6-25 (radio.js)
     if (window.Lab) {
       Lab.RULES.forEach(function (r, k) {
         if (ponteWeek(r, k) !== w.week) return;

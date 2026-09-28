@@ -101,6 +101,34 @@ y una tarea integrada.
 - **Test**: `tools/lib/test_tramo.js`.
 
 
+**La serie Radio / Rádio (semanas 6-25).** Un programa de radio a dos voces
+por semana, sin los jefes (13 y 26): 19 episodios por idioma, de ~130
+palabras en la 6 a ~300 en la 25.
+- **Datos**: `tools/<código>/radio/wNN.json` (guion `turns`, `speakers`,
+  `gloss`, tres `questions`, dos o tres `info` [afirmación, true|false], la
+  gramática de la semana `grammatica.forme` y sus palabras `parole`) y
+  `serie.json` (nombre, personajes, desde qué semana las preguntas van en la
+  lengua meta, las etiquetas de «¿lo dice?»). Los junta
+  `tools/lib/build_radio.js` (en `npm run build`) en
+  `lang/<código>/radio_data.js` (`window.RADIO_DATA`, con `qlang` y las
+  etiquetas de cada episodio), que se carga antes de `radio.js` y `tramo.js`.
+- **Código**: `js/radio.js` tiene los datos, la misión obligatoria «📻
+  Radio: …» (`Radio.missions`, una línea en `weekPlan`; hecha con 60 % o en
+  el segundo intento), el guardado (`state.radio`) y la serie en Leggi / Ler
+  (`Radio.weekButtons`, `Radio.leggiFold`: dos líneas en `renderLeggi`). El
+  reproductor es el de la escucha larga: `Tramo.open("rad", semana)` pide el
+  episodio a `Radio.asWeek` y lo muestra en la pantalla `tramo-asc` (dos
+  voces, dos escuchas con las preguntas a la vista, glosas antes, la
+  transcripción después, «¿lo dice?» en lugar de vf); `Tramo.handles("radio")`
+  lo abre desde `goMission` y desde el plan del día. Los minutos van a
+  `noteListening` y la pantalla cuenta como input en el reloj; en
+  `js/plan.js`, `radio` es un bloque de input (`Plan.INPUT`).
+- **Tests**: `tools/lib/test_radio.js` (largos, voces, preguntas, gramática y
+  palabras de la semana, la transcripción igual al guion, la misión, el
+  plan), `tools/<código>/check_radio.py` (gramática y vocabulario de la
+  semana, en `npm run test:content`) y `tools/lib/smoke_radio.js` (el
+  episodio en Chromium, desde el percorso y desde Leggi).
+
 **Hoy, el primer arranque y el progreso.** Oggi / Hoje arma el día por minutos.
 - **Plan del día**: `js/plan.js` (`Plan.today(course, state, minutos, ctx)`, sin DOM): 5, 15 o
   30 minutos con lo vencido del repaso (nunca más de la mitad), el paso siguiente de la semana, un

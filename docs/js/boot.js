@@ -62,7 +62,7 @@
     { core: "reglas.js" },
     { lang: "biblioteca_data.js" }, { core: "biblioteca.js" },
     { shared: "tres_lenguas_data.js" }, { core: "tres_lenguas.js" },
-    { core: "tramo.js" },
+    { lang: "radio_data.js" }, { core: "radio.js" }, { core: "tramo.js" },
     { core: "plan.js" }, { core: "progreso.js" }, { core: "inicio.js" },
     { core: "capas.js" },
     { core: "app.js" }

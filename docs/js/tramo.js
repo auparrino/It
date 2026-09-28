@@ -33,6 +33,12 @@
  * Con clave, la IA la califica además con la rúbrica C1.
  * Nada oral: todo se lee, se escucha y se escribe.
  *
+ * La serie de escucha «Radio» / «Rádio» de las semanas 6-25 (js/radio.js)
+ * usa el mismo reproductor: open("rad", semana) toma el episodio de
+ * Radio.asWeek, con las preguntas en castellano hasta la 13, las glosas a la
+ * vista antes de escuchar, «¿lo dice o no lo dice?» (ascolto.info) en lugar
+ * del verdadero / falso, y lo guarda Radio.record (state.radio).
+ *
  * Antes de la primera tarea de un género se muestra su ficha
  * (GENRES[g].ficha: 4-6 pantallas con para qué sirve, estructura, fórmulas,
  * verbos y un modelo anotado); después se abre desde la tarea.
@@ -356,19 +362,22 @@
           (s.compito.fonte === "ascolto" ? "la escucha" : s.compito.fonte === "entrambi" ? "la lectura y la escucha" : "la lectura") });
     return out;
   }
-  function handles(kind) { return kind === "tr-asc" || kind === "tr-scr" || kind === "tr-brv"; }
+  // «radio»: the mission of the Radio series (radio.js), played here.
+  function handles(kind) { return kind === "tr-asc" || kind === "tr-scr" || kind === "tr-brv" || kind === "radio"; }
   function owns(screen) { return screen === "tramo-asc" || screen === "tramo-scr" || screen === "tramo-brv"; }
-  function go(kind, arg, from) { open(kind === "tr-asc" ? "asc" : kind === "tr-brv" ? "brv" : "scr", +arg, from || "briefing"); }
+  function go(kind, arg, from) {
+    open(kind === "tr-asc" ? "asc" : kind === "tr-brv" ? "brv" : kind === "radio" ? "rad" : "scr", +arg, from || "briefing");
+  }
 
+  function R() { return root.Radio || null; }
   function open(kind, weekN, from) {
-    var s = week(weekN);
+    var s = kind === "rad" ? (R() ? R().asWeek(weekN) : null) : week(weekN);
     if (!s || (kind === "brv" && !s.breve)) return;
     stop();
     cur = { kind: kind, week: weekN, s: s, from: from || "briefing", plays: 0, done: null, check: null, ai: null, ficha: null };
     // the first task of a genre starts with its ficha
-    var g = (D().GENRES || {})[s.compito.genre] || {};
-    if (kind === "scr" && fichaOf(g) && !store().fichas[s.compito.genre]) cur.ficha = 0;
-    H.show(kind === "asc" ? "tramo-asc" : kind === "brv" ? "tramo-brv" : "tramo-scr");
+    if (kind === "scr" && fichaOf((D().GENRES || {})[s.compito.genre]) && !store().fichas[s.compito.genre]) cur.ficha = 0;
+    H.show(kind === "asc" || kind === "rad" ? "tramo-asc" : kind === "brv" ? "tramo-brv" : "tramo-scr");
   }
   function back() {
     stop();
@@ -384,13 +393,23 @@
     if (root.speechSynthesis) try { root.speechSynthesis.cancel(); } catch (e) { /* */ }
   }
 
+  // Questions in the target language, or in Spanish (a.qlang "es": the
+  // Radio series up to week 13); then true / false / not said, or «does it
+  // say it?» (a.info, the Radio series).
   function questionsHtml(a, locked) {
-    var vf = VF(), html = '<ol class="equestions">';
+    var vf = VF(), ql = a.qlang === "es" ? "" : langAttr(), html = '<ol class="equestions">';
     a.questions.forEach(function (q, i) {
-      html += "<li><b" + langAttr() + ">" + esc(q[0]) + "</b>" + cur.order[i].map(function (o) {
-        return '<label class="eopt"' + langAttr() + '><input type="radio" name="tq' + i + '" value="' + esc(o) + '"' + (locked ? " disabled" : "") + "> " + esc(o) + "</label>";
+      html += "<li><b" + ql + ">" + esc(q[0]) + "</b>" + cur.order[i].map(function (o) {
+        return '<label class="eopt"' + ql + '><input type="radio" name="tq' + i + '" value="' + esc(o) + '"' + (locked ? " disabled" : "") + "> " + esc(o) + "</label>";
       }).join("") + "</li>";
     });
+    if (a.info) {
+      return html + "</ol><h3" + ql + ">" + esc(a.infoPrompt || "¿Lo dice o no lo dice?") + '</h3><ol class="equestions">' + a.info.map(function (v, i) {
+        return "<li><span" + ql + ">" + esc(v[0]) + "</span>" + [a.infoYes || "Lo dice", a.infoNo || "No lo dice"].map(function (o, k) {
+          return '<label class="eopt"' + ql + '><input type="radio" name="ti' + i + '" value="' + (k === 0 ? "y" : "n") + '"' + (locked ? " disabled" : "") + "> " + esc(o) + "</label>";
+        }).join("") + "</li>";
+      }).join("") + "</ol>";
+    }
     html += "</ol><h3" + langAttr() + ">" + esc(vf.prompt) + '</h3><ol class="equestions">';
     a.vf.forEach(function (v, i) {
       html += "<li><span" + langAttr() + ">" + esc(v[0]) + "</span>" + vf.options.map(function (o) {
@@ -401,28 +420,32 @@
   }
 
   function renderAsc() {
-    var s = cur.s, a = s.ascolto, head = '<button class="btn ghost" id="trback">← ' + (cur.from === "leggi" ? "a " + esc(H.ui().read) : "a la semana") + "</button>" +
-      "<h1>🎧 <span" + langAttr() + ">" + esc(a.title) + "</span></h1>" +
-      '<p class="lead"><span' + langAttr() + ">" + esc(a.genre) + "</span> · " + esc(s.level) + " · unas " + scriptWords(a) + " palabras</p>";
+    var s = cur.s, a = s.ascolto, rad = cur.kind === "rad";
+    var head = '<button class="btn ghost" id="trback">← ' + (cur.from === "leggi" ? "a " + esc(H.ui().read) : "a la semana") + "</button>" +
+      "<h1>" + (rad ? "📻" : "🎧") + " <span" + langAttr() + ">" + esc(a.title) + "</span></h1>" +
+      '<p class="lead">' + (rad ? esc(R().label()) + " · " : "") + "<span" + langAttr() + ">" + esc(a.genre) + "</span> · " + esc(s.level) + " · unas " + scriptWords(a) + " palabras</p>";
     if (!cur.order) cur.order = a.questions.map(function (q) { return H.shuffle(q[1]); });
     var tts = !!root.speechSynthesis;
     if (cur.done) {
       var r = cur.done;
       return head + '<div class="card"><div class="scorebig"><b>' + r.pct + " %</b><span>" + r.ok + " / " + r.n + "</span></div>" +
         '<table class="res">' + r.detail.map(function (d) {
-          return "<tr><td" + langAttr() + ">" + esc(d[0]) + "</td><td>" + (d[1] ? "✓" : "✗ <span" + langAttr() + ">" + esc(d[2]) + "</span>") + "</td></tr>";
+          var dl = a.qlang === "es" ? "" : langAttr();   // the Radio series asks in Spanish up to week 13
+          return "<tr><td" + dl + ">" + esc(d[0]) + "</td><td>" + (d[1] ? "✓" : "✗ <span" + dl + ">" + esc(d[2]) + "</span>") + "</td></tr>";
         }).join("") + "</table></div>" +
+        (rad ? '<p class="muted small" id="trverdict">' + esc(R().verdict(H.state(), cur.week)) + "</p>" : "") +
         '<div class="card"><h3>Transcripción</h3>' + transcript(a) +
         (tts ? '<div class="row" style="margin-top:10px"><button class="btn" id="trplay">🔊 Escuchar de nuevo con el texto</button><button class="tab" id="trstop">⏹</button></div>' : "") +
         glossHtml(a.gloss) + "</div>" +
         '<div class="row" style="margin-top:12px"><button class="btn" id="trdone">Listo</button>' +
-        '<button class="tab" id="trwrite">🖋️ Ir a la tarea</button></div>';
+        (rad ? '<button class="tab" id="trredo">🔁 Responder otra vez</button>' : '<button class="tab" id="trwrite">🖋️ Ir a la tarea</button>') + "</div>";
     }
     var who = a.speakers.map(function (n) { return "<b>" + esc(n) + "</b>"; });
     return head + '<div class="card"><p>' + esc(a.es) + "</p>" +
       '<p class="muted small">Hablan ' + (who.length > 2 ? who.slice(0, -1).join(", ") + " y " + who[who.length - 1] + ", con tres voces distintas. "
         : who[0] + " y " + who[1] + ", con dos voces distintas. ") +
       "Leé las preguntas antes, escuchá <b>dos veces</b> y respondé. La transcripción aparece después.</p>" +
+      (rad ? glossHtml(a.gloss, "Palabras nuevas, antes de escuchar") : "") +
       (tts ? '<div class="center"><button class="bigplay" id="trplay">🔊</button><p class="muted" id="trstate">' + playState() + "</p>" +
         '<div class="row" style="justify-content:center"><span class="seg">' + [[0.9, "0,9×"], [1, "1×"]].map(function (x) {
           return '<button class="tab' + ((cur.rate || 1) === x[0] ? " on" : "") + '" data-trrate="' + x[0] + '">' + x[1] + "</button>";
@@ -439,10 +462,10 @@
       return "<b>" + esc(speakerName(a, t[0])) + ":</b> " + esc(t[1]);
     }).join("<br>") + "</p>";
   }
-  function glossHtml(g) {
+  function glossHtml(g, title) {
     var k = Object.keys(g || {});
     if (!k.length) return "";
-    return '<details class="trgloss"><summary>Palabras y expresiones</summary><ul>' + k.map(function (w) {
+    return '<details class="trgloss"><summary>' + esc(title || "Palabras y expresiones") + "</summary><ul>" + k.map(function (w) {
       return "<li><b" + langAttr() + ">" + esc(w) + "</b> — " + esc(g[w]) + "</li>";
     }).join("") + "</ul></details>";
   }
@@ -505,16 +528,24 @@
       if (right) ok++;
       detail.push([q[0], right, q[2]]);
     });
-    a.vf.forEach(function (v, i) {
+    (a.info || []).forEach(function (v, i) {
+      var sel = document.querySelector('input[name="ti' + i + '"]:checked'), right = !!sel && (sel.value === "y") === v[1];
+      if (right) ok++;
+      detail.push([v[0], right, v[1] ? a.infoYes : a.infoNo]);
+    });
+    (a.info ? [] : a.vf).forEach(function (v, i) {
       var sel = document.querySelector('input[name="tv' + i + '"]:checked'), right = !!sel && sel.value === v[1];
       if (right) ok++;
       detail.push([v[0], right, v[1]]);
     });
-    var n = a.questions.length + a.vf.length, pct = Math.round(ok / n * 100);
+    var n = a.questions.length + (a.info ? a.info.length : a.vf.length), pct = Math.round(ok / n * 100);
     stop();
     cur.done = { ok: ok, n: n, pct: pct, detail: detail };
-    var t = store(), prev = t.asc[cur.week];
-    if (!prev || pct >= prev.pct) t.asc[cur.week] = { pct: pct, ok: ok, n: n, at: Date.now() };
+    if (cur.kind === "rad") R().record(H.state(), cur.week, cur.done);
+    else {
+      var t = store(), prev = t.asc[cur.week];
+      if (!prev || pct >= prev.pct) t.asc[cur.week] = { pct: pct, ok: ok, n: n, at: Date.now() };
+    }
     H.gain(ok * 3, "input");
     H.persist();
     H.render();
@@ -806,6 +837,9 @@
     document.querySelectorAll("[data-trbrv]").forEach(function (b) {
       b.onclick = function () { open("brv", +b.dataset.trbrv, "leggi"); };
     });
+    document.querySelectorAll("[data-radio]").forEach(function (b) {
+      b.onclick = function () { open("rad", +b.dataset.radio, "leggi"); };
+    });
     if (!owns(screen) && playing) stop();   // left the listening: silence it
     if (!owns(screen) || !cur) return;
     on("trback", back);
@@ -815,6 +849,7 @@
       on("trstop", function () { stop(); var b = document.getElementById("trplay"); if (b) b.disabled = false; });
       on("trdeliver", screen === "tramo-brv" ? deliverBrv : deliverAsc);
       on("trwrite", function () { open("scr", cur.week, cur.from); });
+      on("trredo", function () { open(cur.kind, cur.week, cur.from); root.scrollTo(0, 0); });
       document.querySelectorAll("[data-trrate]").forEach(function (b) {
         b.onclick = function () { cur.rate = +b.dataset.trrate; stop(); H.render(); };
       });
@@ -897,7 +932,7 @@
               leggiHtml: leggiHtml, episodes: episodes, lexTexts: lexTexts, evaluate: evaluate, variety: variety, connectors: connectors,
               fichaHtml: fichaHtml, sourceUse: sourceUse, countList: countList, fichaOf: fichaOf,
               week: week, weeks: weeks, words: words, copied: copied, readAI: readAI, stop: stop, busy: function () { return !!cur; }, registroOf: registroOf,
-              cellOk: cellOk, breveWords: breveWords, playScript: playScript };
+              cellOk: cellOk, breveWords: breveWords, playScript: playScript, _deliverAsc: deliverAsc };
   if (typeof module === "object" && module.exports) module.exports = api;
   root.Tramo = api;
 })(typeof window !== "undefined" ? window : globalThis);
