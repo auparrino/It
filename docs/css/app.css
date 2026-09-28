@@ -636,6 +636,16 @@ ul.errlog details p { margin: 6px 0 0; font-size: .9rem; }
 .feedback details.others li { margin: 3px 0; line-height: 1.35; }
 .feedback .diag.trap p, .feedback .diag.selfrepair p { margin: 4px 0 0; }
 .feedback .diff { overflow-wrap: anywhere; }
+/* «✓ Vale» con su nota, la regla la primera vez, el enlace a la regla desde la quinta */
+.feedback .diag.oknote p, .feedback .diag .capa { margin: 4px 0 0; }
+.feedback .diag .capa { font-size: .9rem; opacity: .9; }
+button.linkish { background: none; border: none; padding: 6px 0; min-height: 40px; font: inherit; font-size: .9rem;
+  font-weight: 700; color: inherit; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+/* Scrivi por unión: lo del corrector (seguro), lo de la IA, lo plegado y las dos opiniones */
+ol.findings .src { font-size: .72rem; font-weight: 700; opacity: .65; margin-left: 4px; white-space: nowrap; }
+ol.findings li.conflict { border-left: 3px solid color-mix(in srgb, currentColor 35%, transparent); padding-left: 8px; }
+details.minorf { margin: 6px 0 0; }
+details.minorf summary { cursor: pointer; font-weight: 700; opacity: .85; padding: 4px 0; }
 
 /* --- versión nueva --- */
 .updbar { position: fixed; left: 12px; right: 12px; bottom: calc(76px + env(safe-area-inset-bottom, 0px)); z-index: 60;

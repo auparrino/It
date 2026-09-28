@@ -1515,7 +1515,7 @@
     "«você» con verbo en tercera, «a gente» con verbo en singular, el artículo opcional ante posesivo, *em um* o *num*, son correctos; " +
     "lo coloquial (pra, tá, vi ele, tem por há) no es error en un texto informal, pero marcalo como \"estilo\" en uno formal. " +
     "No corrijas hacia el portugués europeo. Ortografía del Acuerdo de 1990 (ideia, voo, linguiça).";
-  function aiPrompt(text, week, task) {
+  function aiPrompt(text, week, task, ctx) {
     return "Sos profesor de portugués de Brasil, nativo, para un hispanohablante rioplatense que está en la semana " + week +
       " de 52 de un curso hasta C1 (nivel actual aproximado: " + levelOf(week) + ").\n" +
       "Consigna del ejercicio: «" + (task ? task.t : "texto libre") + "»." +
@@ -1535,18 +1535,22 @@
       "Los errores van en el orden en que aparecen en el texto. Cada error se marca una sola vez: no repitas un error ni marques uno " +
       "adentro de otro (si en «Eu tengo 32 anos» y «muy» hay dos errores, van separados). Las explicaciones, la consigna y el " +
       "comentario van en castellano, con portugués solo en los ejemplos. El comentario habla del texto del alumno, no del corregido. " +
-      "Antes de responder, revisá que cada explicación sea cierta.\n\nTexto:\n" + text;
+      "Antes de responder, revisá que cada explicación sea cierta." + ctxBlock(ctx, true) + "\n\nTexto:\n" + text;
   }
   /* A second teacher checks the first one's correction: drops what is not
      an error or is repeated, fixes wrong explanations, adds what was missed. */
-  function reviewPrompt(text, week, task, data, evidence) {
+  function reviewPrompt(text, week, task, data, evidence, ctx) {
     var ev = "";
     if (evidence && ((evidence.local || []).length || (evidence.lt || []).length)) {
       // A model cannot check its own work without outside evidence (Kamoi
       // et al. 2024): the rule checker and LanguageTool are that evidence.
-      ev = "\nEvidencia externa, para contrastar (verificá cada punto: puede tener falsos positivos, no la copies a ciegas):\n" +
-        (evidence.local || []).slice(0, 12).map(function (m) { return "- corrector de reglas: " + m; }).join("\n") +
-        ((evidence.lt || []).length ? "\n" + evidence.lt.slice(0, 12).map(function (m) { return "- LanguageTool: " + m; }).join("\n") : "") + "\n";
+      // The rule checker has no false alarms measured: its marks are sure,
+      // and the learner sees them anyway (the correction is the union).
+      ev = ((evidence.local || []).length ? "\nMarcas SEGURAS del corrector de reglas de la app (reglas revisadas, 0 falsas alarmas medidas; el alumno ya las ve): " +
+          "no hace falta repetirlas; si creés que alguna NO es un error, incluila con \"contradice\": true y explicá por qué.\n" +
+          evidence.local.slice(0, 12).map(function (m) { return "- " + m; }).join("\n") + "\n" : "") +
+        ((evidence.lt || []).length ? "\nLanguageTool (verificá cada punto: puede tener falsos positivos, no lo copies a ciegas):\n" +
+          evidence.lt.slice(0, 12).map(function (m) { return "- " + m; }).join("\n") + "\n" : "");
     }
     return "Sos un segundo profesor de portugués de Brasil, nativo, que revisa la corrección que un colega hizo del texto de un alumno " +
       "hispanohablante rioplatense (semana " + week + " de 52 de un curso hasta C1; consigna: «" + (task ? task.t : "texto libre") + "»).\n\n" +
@@ -1560,18 +1564,18 @@
       "6. Agregá los errores que el colega no vio (la evidencia externa puede señalarlos; confirmalos vos).\n" +
       "6b. Corrección mínima: cada \"bien\" cambia lo menos posible; sacá las correcciones de estilo disfrazadas de error.\n" +
       "7. \"corregido\" tiene que tener todos los arreglos y nada más; \"consigna\" y \"comentario\" tienen que ser ciertos y hablar del texto del alumno.\n" +
-      "Respondé SOLO con el JSON revisado, con el mismo formato.";
+      "Respondé SOLO con el JSON revisado, con el mismo formato." + ctxBlock(ctx, true);
   }
   // done(err, data, meta): meta says which provider and model corrected and which reviewed.
   function aiCheck(text, week, keys, done, onStage, opts) {
     var task = TASKS[week];
     opts = opts || {};
-    llm(aiPrompt(text, week, task), keys, function (err, data, meta) {
+    llm(aiPrompt(text, week, task, opts.ctx), keys, function (err, data, meta) {
       if (err) return done(err);
       if (onStage) onStage("review", meta);
       // the evidence may still be on its way (LanguageTool): wait for it a moment
       var go = function (evidence) {
-        llm(reviewPrompt(text, week, task, data, evidence), keys, function (err2, data2, meta2) {
+        llm(reviewPrompt(text, week, task, data, evidence, opts.ctx), keys, function (err2, data2, meta2) {
           var good = !err2 && data2 && Array.isArray(data2.errores);
           done(null, good ? data2 : data, { first: meta, review: good ? meta2 : null, evidence: !!evidence });
         });
@@ -1590,6 +1594,9 @@
       (x.feedback ? "\nCorrección que mostró la app: " + x.feedback : "") +
       (x.diff ? "\nDiferencia exacta (calculada por la app, es un hecho): " + x.diff : "") +
       (x.note ? "\nNota del ejercicio (revisada, es la regla que aplica): " + x.note : "") +
+      (x.stage === "mas" ? "\nEl alumno ya vio la solución y la explicación de la app, y pide que se lo expliques mejor: no repitas lo mismo con otras palabras; " +
+        "da la regla de fondo, un contraste con el español y un ejemplo distinto del ejercicio." : "") +
+      ctxBlock(x.ctx) +
       "\nNo inventes errores ni reglas: hablá solo del error que muestra la diferencia, todo en castellano rioplatense, sin comillas dobles ni HTML (las formas, entre *asteriscos*)." +
       "\n\nExplicale al alumno, en 2 a 4 oraciones en castellano rioplatense, qué está mal en su respuesta y cuál es la regla, " +
       "con un ejemplo corto en portugués. Si su respuesta en realidad también es correcta en el portugués de Brasil, o si la corrección de la app está mal o confunde, decilo claro.\n" +
@@ -1611,6 +1618,8 @@
       (x.accept && x.accept.length > 1 ? "\nOtras respuestas aceptadas: " + x.accept.join(" | ") : "") +
       (x.diff ? "\nDiferencia exacta (calculada por la app, es un hecho): " + x.diff : "") +
       (x.note ? "\nNota del ejercicio (revisada, es la regla que aplica): " + x.note : "") +
+      (x.feedback ? "\nLo que ya le dijo la app (su pista; no la repitas, sumá algo distinto): " + x.feedback : "") +
+      ctxBlock(x.ctx) +
       "\n\nReglas estrictas:\n" +
       "- Todo en castellano rioplatense (vos), sin frases en portugués de Brasil salvo los ejemplos entre *asteriscos*.\n" +
       "- Hablá SOLO del error real: el que muestra la diferencia exacta. No inventes errores ni reglas; si la nota del ejercicio dice la regla, usala tal cual.\n" +
@@ -1623,6 +1632,35 @@
       "Respondé SOLO con JSON: {\"pista1\": \"...\", \"pista2\": \"...\", \"explicacion\": \"...\", \"tambien_correcta\": true o false, \"app_equivocada\": true o false}";
   }
   function hints(x, keys, done) { llm(hintsPrompt(x), keys, done); }
+
+  /* The judge of an answer the item did not foresee (P4.1): the rules
+     fired on the vocabulary or the order, and they are not sure; before
+     the verdict, is it correct and does it say the same?  With what the app
+     said as evidence.  What the AI accepts is kept as a local variant. */
+  function judgePrompt(x) {
+    return "Sos profesor de portugués de Brasil para un hispanohablante rioplatense. Un alumno respondió un ejercicio de una app y su respuesta " +
+      "no está entre las previstas. Decidí dos cosas: si es portugués de Brasil culto o coloquial aceptado correcto y si dice lo mismo que la respuesta esperada (cumple la consigna).\n" +
+      "Consigna: " + (x.prompt || "") + "\nEnunciado: " + (x.stem || "") +
+      "\nRespuesta esperada: " + (x.answer || "") +
+      (x.accept && x.accept.length > 1 ? "\nOtras respuestas que la app acepta: " + x.accept.join(" | ") : "") +
+      "\nRespuesta del alumno: " + (x.given || "") +
+      (x.feedback ? "\nLo que dijo el corrector de reglas de la app (se equivoca a veces con sinónimos, el orden o formas no previstas): " + x.feedback : "") +
+      ctxBlock(x.ctx) + "\n" + PB_NORM + " " +
+      "No le des la razón por cortesía: si hay un error de gramática, de ortografía o el sentido cambia, es false. Ante la duda, false.\n" +
+      "Respondé SOLO con JSON: {\"correcta\": true o false, \"mismo_sentido\": true o false, " +
+      "\"explicacion\": \"una o dos oraciones en castellano rioplatense: por qué vale o qué tiene de malo, con las formas entre *asteriscos*\"}";
+  }
+  function judge(x, keys, done) { llm(judgePrompt(x), keys, done, { max: 300 }); }
+
+  // The course and the learner, for any request (js/errores.js builds it).
+  function ctxBlock(ctx, withFocus) {
+    if (!ctx) return "";
+    var E = root.Errores, t = typeof ctx === "string" ? ctx : E && E.promptCtx ? E.promptCtx(ctx) : "";
+    var focus = withFocus && typeof ctx === "object" && E && E.focusCats ? E.focusCats(ctx) : null;
+    if (focus && focus.length) t += "\nCorrección FOCALIZADA (el alumno es principiante): marcá todos los errores, pero cada uno lleva \"foco\": true si es de estas " +
+      "categorías (" + focus.join(", ") + ") o impide entender, y \"foco\": false si no (la app los muestra plegados).";
+    return t ? "\n\n" + t : "";
+  }
 
   /* ------------------------------------------------------------ fala
      Role-play with a goal (Wang et al. 2025; Dugan et al. 2026): hard,
@@ -1780,30 +1818,56 @@
     return IA.llm(prompt, keys, done, opts);
   }
 
-  // The AI's errors as findings on the text's tokens (each fragment is found
-  // in the text; what the local checker already marked is not repeated).
+  /* The AI's errors as findings on the text's tokens, to add to the local
+     ones (the union: C8).  Each one carries bad (the fragment as written),
+     good (the AI's correction), why (its explanation) and level.  What the
+     local checker already marked is not repeated, but when the AI proposes
+     another correction for it, or says it is not an error («contradice»),
+     both are shown (conflict).  A fragment not found word for word is looked
+     for without accents and punctuation, and if it is not there, it is still
+     listed (unplaced), never dropped.  foco: false (A1-A2) → minor, folded. */
   function fromAI(text, data, local) {
-    var tk = toks(text), taken = {}, low = String(text).normalize("NFC").replace(/[’‘`´]/g, "'").toLowerCase(), from = 0, out = [];
-    (local || []).forEach(function (f) { if (!f.lt) for (var j = 0; j < f.n; j++) taken[f.i + j] = 1; });
+    var src = String(text).normalize("NFC").replace(/[’‘`´]/g, "'"), tk = toks(text), taken = {}, low = src.toLowerCase(), from = 0, out = [];
+    var loose = function (x) { return String(x).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase(); };
+    var looseLow = loose(low);
+    var locAt = {};
+    (local || []).forEach(function (f) { if (!f.lt && !f.ai) for (var j = 0; j < f.n; j++) { taken[f.i + j] = 1; locAt[f.i + j] = f; } });
     ((data && data.errores) || []).forEach(function (e) {
       var bad = String(e.mal || "").normalize("NFC").replace(/[’‘`´]/g, "'").trim();
-      if (!bad || String(e.bien || "").normalize("NFC").replace(/[’‘`´]/g, "'").trim().toLowerCase() === bad.toLowerCase()) return;
+      var good = String(e.bien == null ? "" : e.bien).normalize("NFC").replace(/[’‘`´]/g, "'").trim();
+      var contra = e.contradice === true;
+      if (!bad || (!contra && good.toLowerCase() === bad.toLowerCase())) return;
       var at = low.indexOf(bad.toLowerCase(), from);
       if (at < 0) at = low.indexOf(bad.toLowerCase());
-      if (at < 0) return;
-      from = at + bad.length;
-      var first = -1, n = 0;
-      tk.forEach(function (t, i) { if (t.w && t.at < at + bad.length && t.at + t.len > at) { if (first < 0) first = i; n = i - first + 1; } });
-      if (first < 0) return;
-      var dup = true;
-      for (var j = 0; j < n; j++) if (!taken[first + j]) dup = false;
-      if (dup) return;
-      for (var j2 = 0; j2 < n; j2++) taken[first + j2] = 1;
+      if (at < 0) {   // the same without accents (same length: the offsets hold)
+        var lb = loose(bad);
+        if (lb.length === bad.length) at = looseLow.indexOf(lb);
+      }
       var tipo = String(e.tipo || "").trim().toLowerCase(), soft = tipo === "estilo";
-      out.push({ i: first, n: n, cat: AI_TYPES[tipo] && !soft ? tipo : soft ? "estilo" : "ia", soft: soft, ai: true,
-                 msg: (e.bien ? "*" + bad + "* → *" + String(e.bien).trim() + "*. " : "") + (soft ? "(Más natural) " : "") + String(e.explicacion || "").trim() });
+      var why = String(e.explicacion || "").trim();
+      var f = { cat: AI_TYPES[tipo] && !soft ? tipo : soft ? "estilo" : "ia", soft: soft, ai: true, bad: bad, good: e.bien == null ? null : good,
+                why: why, level: soft ? "poco_natural" : "wrong", minor: e.foco === false,
+                msg: (e.bien != null && !contra ? "*" + bad + "* → *" + (good || "(se borra)") + "*. " : "") + (soft ? "(Más natural) " : "") + why };
+      var first = -1, n = 0;
+      if (at >= 0) tk.forEach(function (t, i) { if (t.w && t.at < at + bad.length && t.at + t.len > at) { if (first < 0) first = i; n = i - first + 1; } });
+      if (first < 0) { f.i = -1; f.n = 0; f.unplaced = true; out.push(f); return; }
+      from = at + bad.length;
+      f.i = first; f.n = n;
+      var dup = true, j;
+      for (j = 0; j < n; j++) if (!taken[first + j]) dup = false;
+      if (dup) {
+        // over a local mark: agreement is silence; another correction or a «no es error», both shown
+        var lf = locAt[first], lg = lf && lf.good != null ? String(lf.good).toLowerCase() : null;
+        if (!lf || (!contra && (lg == null || lg === good.toLowerCase()))) return;
+        f.conflict = true; f.soft = true; f.minor = false;
+        f.msg = (contra ? "🤖 La IA no lo ve como error: " : "🤖 La IA propone otra corrección: *" + (good || "(se borra)") + "*. ") + why;
+        out.push(f);
+        return;
+      }
+      for (j = 0; j < n; j++) taken[first + j] = 1;
+      out.push(f);
     });
-    out.sort(function (x, y) { return x.i - y.i; });
+    out.sort(function (x, y) { return (x.i < 0 ? 1e9 : x.i) - (y.i < 0 ? 1e9 : y.i); });
     return out;
   }
 
@@ -1812,7 +1876,7 @@
   var api = { TASKS: TASKS, features: features, lint: lint, check: check, markup: markup, weeks: weeks, toks: toks,
               learn: learn, learnCourse: learnCourse, ltCheck: ltCheck, fromLT: fromLT,
               aiCheck: aiCheck, fromAI: fromAI, aiPrompt: aiPrompt, explain: explain, explainPrompt: explainPrompt, reviewPrompt: reviewPrompt,
-              hints: hints, hintsPrompt: hintsPrompt, parlaStart: parlaStart, parlaTurn: parlaTurn, parlaRewrite: parlaRewrite, parlaReview: parlaReview, parlaReviewPrompt: parlaReviewPrompt, correggi: correggi,
+              hints: hints, hintsPrompt: hintsPrompt, judge: judge, judgePrompt: judgePrompt, ctxBlock: ctxBlock, parlaStart: parlaStart, parlaTurn: parlaTurn, parlaRewrite: parlaRewrite, parlaReview: parlaReview, parlaReviewPrompt: parlaReviewPrompt, correggi: correggi,
               parlaScenarioPrompt: parlaScenarioPrompt, parlaTurnPrompt: parlaTurnPrompt, parlaTurnChat: parlaTurnChat, parlaGoals: parlaGoals, parlaGoalsPrompt: parlaGoalsPrompt, storia: storia, storiaRewrite: storiaRewrite, storiaPrompt: storiaPrompt, esame: esame, esamePrompt: esamePrompt, PROVIDERS: PROVIDERS, AI_TYPES: AI_TYPES };
   api.llm = llm;   // la reformulación de escritura_plus.js usa las mismas claves y proveedores
   if (typeof module === "object" && module.exports) module.exports = api;

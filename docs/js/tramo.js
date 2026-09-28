@@ -253,10 +253,25 @@
     return crit;
   }
 
+  /* The register the genre asks for (the checker and the error profile use
+     it): the task's, the genre's (GENRES[g].registro), or by the genre's
+     name: a formal letter, a report, an essay, an article, a summary, a
+     letter to the editor are formal; an informal e-mail is informal. */
+  var FORMAL_G = /^(lettera_formale|relazione|saggio|articolo|sintesi|lettera_lettore|carta_formal|carta_leitor|carta_aberta|artigo|resumo|texto_opiniao|proposta)$/;
+  var INFORMAL_G = /^(email_informale|email_informal)$/;
+  function registroOf(task, g) {
+    g = g || (D().GENRES || {})[task && task.genre] || {};
+    var r = (task && task.registro) || g.registro;
+    if (r) return /^(formal|formale|culto)$/i.test(r) ? "formal" : /^(informal|informale|coloquial)$/i.test(r) ? "informal" : null;
+    var id = String((task && task.genre) || "");
+    return FORMAL_G.test(id) ? "formal" : INFORMAL_G.test(id) ? "informal" : null;
+  }
+
   // opts.noCheck: skip the week's checker (the slowest part; the tests use it
   // for the texts that must fail anyway).
   function evaluate(task, text, weekN, src, opts) {
     var g = (D().GENRES || {})[task.genre] || {};
+    var reg = registroOf(task, g);
     var n = words(text), pars = paragraphs(text), v = variety(text), plainText = plain(text);
     var punti = (task.punti || []).map(function (p) {
       return { label: p[0], ok: p[1].some(function (k) { return plainText.indexOf(plain(k)) >= 0; }) };
@@ -266,7 +281,7 @@
     var head = pars.slice(0, 2).join(" "), tail = pars.slice(-2).join(" ");
     var opens = rx(g.open), closes = rx(g.close);
     var conns = connectors(text);
-    var chk = root.Scrivi && root.Scrivi.check && !(opts && opts.noCheck) ? root.Scrivi.check(text, weekN) : { findings: [], hard: 0 };
+    var chk = root.Scrivi && root.Scrivi.check && !(opts && opts.noCheck) ? root.Scrivi.check(text, weekN, reg ? { registro: reg } : undefined) : { findings: [], hard: 0 };
     var maxHard = Math.max(2, Math.floor(n / 50));
     var crit = [];
     crit.push({ id: "len", need: true, ok: n >= task.min,
@@ -293,10 +308,17 @@
     crit.push({ id: "conn", ok: conns.length >= 4,
       label: "Conectores distintos: " + conns.length + (conns.length ? " (" + conns.slice(0, 6).join(", ") + (conns.length > 6 ? "…" : "") + ")" : "") + " · al menos 4" });
     adequacao(task, g, text, src).forEach(function (c) { crit.push(c); });
+    /* The structures of the week's short text (Scrivi): from the 27th on it
+       is no longer a mission of its own, its structures are a criterion of
+       this task (audit F §2.2).  Not required: the task is judged by its
+       genre, and the structures count for the score. */
+    var su = (chk.reqs || []).filter(function (q) { return q.id; });
+    if (su.length) crit.push({ id: "struct", ok: su.every(function (q) { return q.ok; }),
+      label: "Estructuras de la semana: " + su.map(function (q) { return q.label + " (" + Math.min(q.n, q.need) + "/" + q.need + ")"; }).join(" · ") });
     crit.push({ id: "err", ok: chk.hard <= maxHard,
       label: chk.hard ? chk.hard + " cosas marcadas por el corrector: revisalas abajo (a veces se equivoca con palabras citadas o poco comunes)" : "El corrector de la semana no marcó errores" });
     var ok = crit.filter(function (c) { return c.need; }).every(function (c) { return c.ok; });
-    return { ok: ok, n: n, crit: crit, punti: punti, puntiOk: puntiOk, check: chk,
+    return { ok: ok, n: n, crit: crit, punti: punti, puntiOk: puntiOk, check: chk, registro: reg,
              score: crit.filter(function (c) { return c.ok; }).length, of: crit.length };
   }
 
@@ -602,13 +624,19 @@
       '<div class="row"><button class="tab" id="trsrc" data-src="' + fonte[0] + '">' + fonte[1] + "</button>" +
       (c.fonte === "entrambi" ? '<button class="tab" id="trsrc2">🎧 Volver a escuchar</button>' : "") +
       (fichaOf(g) ? '<button class="tab" id="trficha">📐 Ficha del género</button>' : "") + "</div>" +
-      (g.hint ? '<p class="muted small">📐 ' + esc(g.hint) + "</p>" : "") + "</div>" +
+      (g.hint ? '<p class="muted small">📐 ' + esc(g.hint) + "</p>" : "") + structsLine(cur.week) + "</div>" +
       '<textarea id="trtext" class="grow scrivi" rows="12" spellcheck="false" autocapitalize="sentences"' + langAttr() + ">" + esc(draft) + "</textarea>" +
       '<p class="muted small" id="trcount">' + countLine(draft) + "</p>" +
       '<div class="row" style="margin-top:10px"><button class="btn" id="trcheck">🔎 Revisar y entregar</button>' +
       '<button class="tab" id="trmodel">👀 Modelo</button></div>' +
       '<div id="trout">' + (cur.check ? checkHtml(cur.check, draft) : "") + "</div>";
     return html;
+  }
+  // The structures of the week's short text, asked here too (F §2.2).
+  function structsLine(weekN) {
+    var S = root.Scrivi, t = S && S.TASKS ? S.TASKS[weekN] : null;
+    if (!t || !t.use || !t.use.length) return "";
+    return '<p class="muted small">✍️ Usá también lo de la semana: ' + t.use.map(function (u) { return esc(u[2]); }).join(" · ") + "</p>";
   }
   function countLine(text) {
     var c = cur.s.compito, n = words(text);
@@ -672,6 +700,8 @@
     var rec = { ok: r.ok, n: r.n, score: r.score, of: r.of, punti: r.puntiOk, hard: r.check.hard, miss: miss, t: text.slice(0, 6000), at: Date.now(),
                 ai: prev && prev.t === text ? prev.ai : null };
     if (!prev || !prev.ok || r.ok) t.scr[cur.week] = rec;
+    // what the checker marked goes to the error profile, once per text (F §2.2)
+    if (H.recordFindings && !(prev && prev.t === text)) H.recordFindings(r.check.findings, text, r.registro);
     if (r.ok && !(prev && prev.ok)) { H.gain(20 + Math.round(r.n / 10), "output"); H.toast("🖋️ Tarea entregada · " + r.n + " palabras"); }
     H.persist();
     var out = document.getElementById("trout");
@@ -692,7 +722,10 @@
       cur.ai = a || { err: err ? String(err.message || err) : "respuesta sin la forma esperada" };
       if (a) {
         var t = store(), rec = t.scr[week0];
-        if (rec && rec.t === text) { rec.ai = { tot: a.tot }; H.persist(); }
+        if (rec && rec.t === text) {
+          if (!rec.ai && H.recordRows) H.recordRows(a.errors, mine.check && mine.check.registro);
+          rec.ai = { tot: a.tot }; H.persist();
+        }
       }
       if (H.screen() === "tramo-scr") refreshOut(text);
     });
@@ -837,7 +870,7 @@
   var api = { attach: attach, missions: missions, handles: handles, owns: owns, go: go, open: open, render: render, wire: wire,
               leggiHtml: leggiHtml, episodes: episodes, lexTexts: lexTexts, evaluate: evaluate, variety: variety, connectors: connectors,
               fichaHtml: fichaHtml, sourceUse: sourceUse, countList: countList, fichaOf: fichaOf,
-              week: week, weeks: weeks, words: words, copied: copied, readAI: readAI, stop: stop, busy: function () { return !!cur; },
+              week: week, weeks: weeks, words: words, copied: copied, readAI: readAI, stop: stop, busy: function () { return !!cur; }, registroOf: registroOf,
               cellOk: cellOk, breveWords: breveWords };
   if (typeof module === "object" && module.exports) module.exports = api;
   root.Tramo = api;
