@@ -169,8 +169,11 @@
     return out;
   }
 
-  function progress(prefix, cards) {
-    var all = ids(prefix);
+  /* Seen of all.  With a week, only what is open by then (a set of Capire
+     has sentences of later weeks: counting them left the mission of its
+     week impossible to finish, 10 / 12 with 100 %). */
+  function progress(prefix, cards, week) {
+    var all = ids(prefix).filter(function (k) { return !week || !BY_ID[k].week || BY_ID[k].week <= week; });
     return { total: all.length, seen: all.filter(function (k) { return cards[k]; }).length };
   }
 

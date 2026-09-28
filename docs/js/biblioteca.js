@@ -354,8 +354,15 @@
   function markRead(state, book, ch) {
     var b = ensure(state), first = !(b.done[book] && b.done[book][ch]);
     (b.done[book] || (b.done[book] = {}))[ch] = 1;
-    // the week of the course it was read in (the percorso's «Leé un capítulo»)
-    if (first) { var w = Math.max(1, Math.min(WEEKS, state.unlocked || 1)); b.wk[w] = (b.wk[w] || 0) + 1; }
+    // the week of the course it was read in (the percorso's «Leé un capítulo»):
+    // the week whose mission opened it, else the one the learner is in (a
+    // chapter opened from an earlier week counted for the current one, and
+    // the mission it came from never got done)
+    if (first) {
+      var w = Math.max(1, Math.min(WEEKS, creditWeek && creditWeek <= (state.unlocked || 1) ? creditWeek : state.unlocked || 1));
+      b.wk[w] = (b.wk[w] || 0) + 1;
+      creditWeek = null;
+    }
   }
   function isRead(state, book, ch) { var b = ensure(state); return !!(b.done[book] && b.done[book][ch]); }
   function readCount(state, book) { var b = ensure(state); return Object.keys(b.done[book] || {}).length; }
@@ -843,7 +850,9 @@
   }
 
   // Straight to a chapter (the percorso's «Leé un capítulo»); without one, the book.
-  function openChapter(view, id, ch) {
+  var creditWeek = null;   // the week of the mission that opened the chapter
+  function openChapter(view, id, ch, week) {
+    creditWeek = week || null;
     view.bxBook = id; view.bxAsk = false;
     if (ch == null || isNaN(ch)) { go(view, id ? "libro" : "biblioteca"); return; }
     view.bxCh = +ch;
@@ -867,6 +876,7 @@
     doc.querySelectorAll("[data-bxread]").forEach(function (e) {
       e.onclick = function () {
         view.bxBook = e.dataset.bxread; view.bxCh = +e.dataset.bxch; view.bxAsk = false;
+        creditWeek = null;
         var s = st(), p = ensure(s).pos[view.bxBook];
         view.bxPg = p && p.c === view.bxCh ? p.p : 0;
         reading = null;

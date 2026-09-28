@@ -767,7 +767,7 @@
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION = "c1-vN" in sw.js: test_game
      and the CI check it).  One version for the app and both languages. */
-  var APP_VERSION = "v3.0.2";
+  var APP_VERSION = "v3.0.3";
   // Settimana XVII: Roman numerals on the street signs (LANG.ui.romanWeeks).
   function romano(n) {
     var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
@@ -1765,6 +1765,7 @@
     return wk;
   }
 
+  var FALSI_GOAL = 20;   // the false friends of the mission (two rounds of ten)
   function weekPlan(w) {
     var st = weekStat(w.week), out = [];
     var pct = st.attempts ? Math.round(st.right / st.attempts * 100) : 0;
@@ -1778,7 +1779,7 @@
         m({ kind: "lez", arg: String(k), done: sessRead(w, k), ico: "📘", opt: true,
             title: p.h + (x.of > 1 ? " (" + (x.k + 1) + "/" + x.of + ")" : ""),
             sub: (sessRead(w, k) ? "Hecho · " : "Opcional · ") + "la regla en pasos cortos" +
-              (x.k === x.of - 1 ? " y " + p.items.length + " ejercicios del tema" : "") });
+              (x.k === x.of - 1 && p.items.length ? " y " + p.items.length + " ejercicios del tema" : "") });
       });
       var weak = Drills.weakItems(course, w, state, itemMap).length;
       m({ kind: "debil", done: !!(state.weakDone || {})[w.week], ico: "🩹", opt: true, title: "Tus puntos débiles",
@@ -1859,14 +1860,16 @@
             sub: p.seen + " / " + p.total + " palabras que ya sabés del español" });
       });
       if (w.week === falsiWeek()) {
-        var pf = Lab.progress("falso:", state.cards);
-        m({ kind: "falsi", done: pf.seen >= pf.total, ico: "🪤", title: UI.falsi,
-            sub: pf.seen + " / " + pf.total + " palabras que parecen y no son" });
+        // two rounds of ten: the rest of the list keeps coming in the pause
+        // and in the review (in Portuguese they are more than a hundred)
+        var pf = Lab.progress("falso:", state.cards), fGoal = Math.min(pf.total, FALSI_GOAL);
+        m({ kind: "falsi", done: pf.seen >= fGoal, ico: "🪤", title: UI.falsi,
+            sub: Math.min(pf.seen, fGoal) + " / " + fGoal + " palabras que parecen y no son" + (pf.total > fGoal ? " · " + pf.total + " en la lista" : "") });
       }
       Lab.CAPIRE.forEach(function (c) {
         if (c.week !== w.week) return;
         // 80 % in a session (the ones played before this version: seen is enough)
-        var pc = Lab.progress("capire:" + c.id + ":", state.cards), cp = (state.capirePct || {})[c.id];
+        var pc = Lab.progress("capire:" + c.id + ":", state.cards, w.week), cp = (state.capirePct || {})[c.id];
         var capOk = pc.seen >= pc.total && (cp == null || cp >= 80);
         m({ kind: "capire", arg: c.id, done: capOk, half: pc.seen >= pc.total && !capOk, ico: "🎯", title: UI.capire + ": " + c.h,
             sub: pc.seen + " / " + pc.total + (cp != null ? " · tu mejor: " + cp + " %" : "") + " · con 80 % queda hecha · leer la gramática antes de producirla" });
@@ -7012,6 +7015,39 @@
           return itemMap[x] ? Object.assign({}, itemMap[x]) : window.Lab && Lab.item ? Lab.item(x) : null;
         }).filter(Boolean);
         startRound("lista", its);
+      },
+      screen: function () { return view.screen; },
+      // the missions of a week, as the percorso shows them (test_misiones)
+      plan: function (week) {
+        return weekPlan(course.weeks[week - 1]).map(function (x) {
+          return { kind: x.kind, arg: x.arg == null ? null : String(x.arg), done: !!x.done, half: !!x.half, opt: !!x.opt, title: x.title, sub: x.sub };
+        });
+      },
+      // open a mission as its button does
+      mission: function (kind, arg, week) { view.week = week; view.tab = "percorso"; goMission(kind, arg); },
+      /* Answer the current question right (or with `verdict`), as a learner
+         who knows it: through settle, the same bookkeeping as a real answer;
+         a card, a word or an intro goes on, an answered one goes on. */
+      solve: function (verdict) {
+        // a lesson: the steps in order, the checks answered right
+        if (view.screen === "lezione" && les) {
+          var ls = les.steps[les.i];
+          if (!ls) return "none";
+          if (ls.q && !les.answered) {
+            var ok = Array.prototype.filter.call(document.querySelectorAll("[data-lq]"), function (b) { return b.textContent === ls.q.answer; })[0];
+            if (ok) { lesAnswer(ok); return "answered"; }
+          }
+          lesNext();
+          return "next";
+        }
+        if (!round || view.screen !== "gioco") return "none";
+        var it = round.items[round.i];
+        if (!it) return "none";
+        if (round.askPredict && round.predict == null && round.i === 0) { round.predict = 0; render(); return "next"; }
+        if (round.answered || it.type === "word" || it.type === "card" || it.type === "intro") { nextItem(); return "next"; }
+        if (!$("#fb")) return "stuck:" + it.type;
+        settle(verdict || "giusto", String(it.answer == null ? "" : it.answer).replace(/\s*\|\s*/g, " "), "");
+        return "answered";
       }
     };
   }
@@ -7033,7 +7069,7 @@
     show: function (sc) { view.screen = sc; render(); window.scrollTo(0, 0); },
     back: function () { go(view.tab || "frasi"); },
     refresh: function () { if (course && ["briefing", "percorso", "leggi"].indexOf(view.screen) >= 0) render(); },
-    openBook: function (id, ch) { if (window.Biblioteca) Biblioteca.openChapter(view, id, ch); },
+    openBook: function (id, ch) { if (window.Biblioteca) Biblioteca.openChapter(view, id, ch, view.week); },
     tre: function (week) {
       if (!window.EscrituraPlus) return;
       view.week = week; EscrituraPlus.start("tre", week); view.screen = "eplus"; render(); window.scrollTo(0, 0);
