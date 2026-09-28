@@ -1810,7 +1810,11 @@
       // besides its own structures, one of the month before (reglas.js)
       if (window.Reglas) Reglas.scriviExtra(state, w.week);
       var sd = (state.scritti || {})[w.week], task = Scrivi.TASKS[w.week];
-      m({ kind: "scrivi", done: !!sd, ico: "✍️", title: UI.scrivi + ": tu texto de la semana",
+      // Weeks 27-51: the task of the tramo is the week's writing and asks for
+      // these structures too (Tramo.evaluate, «struct»); the short text stays,
+      // optional (audit F §2.2).
+      var inTramo = !!(window.Tramo && Tramo.week && Tramo.week(w.week) && !w.boss);
+      m({ kind: "scrivi", done: !!sd, ico: "✍️", opt: inTramo || undefined, title: UI.scrivi + (inTramo ? ": texto corto (opcional)" : ": tu texto de la semana"),
           sub: sd ? "Entregado · " + sd.n + " palabras" + (sd.errs ? " · " + sd.errs + " cosas para revisar" : " · sin errores marcados")
                   : task.min + " palabras o más · " + task.use.map(function (u) { return u[2]; }).join(" · ") });
     }
@@ -2500,7 +2504,7 @@
     // Another sentence or a word unlike the answer: no rule to invent.
     if (useful && DV && DV.far(given, [it.answer], d)) useful = false;
     if (useful && DV) DV.tidy(d);
-    if (useful) recordError(d, given);
+    if (useful) recordError(d, given, { registro: itemRegister(it) });
     // a sentence: vos / bien with the words that change; a word: the tag and the why
     var long = String(it.answer).trim().split(/\s+/).length > 1;
     settle(verdict, given, useful ? diagHtml(d, long) : chosenHtml(it, given, verdict));
@@ -2584,7 +2588,7 @@
   }
 
   function produce(given) {
-    if (round.answered) return;
+    if (round.answered || round.judging) return;
     var it = currentItem();
     // Several blanks typed as «a / b» (or a | b): same as a b.
     if (/\|/.test(it.answer || "")) given = String(given).replace(/\s*[\/|]\s*/g, " ");
@@ -2603,8 +2607,18 @@
       settle(ves, given, ves === "giusto" ? "" : '<div class="note">Otras formas de decirlo: ' + esc((it.accept || [it.answer]).join(" · ")) + "</div>");
       return;
     }
+    // An answer the AI already judged valid for this item (a local variant, P4.1)
+    var vv = variantOf(it, given);
+    if (vv) {
+      settle("giusto", given, okNoteHtml({ note: "Esta forma no estaba prevista; la IA la revisó y vale" + (vv.x ? ": " + vv.x : ".") }), { label: "✓ Vale" });
+      return;
+    }
+    // The register the item asks for («Trova l'errore», a formal item): the
+    // diagnosis accepts the forms of speech with a note, or not.
+    var reg = itemRegister(it);
     var diagCtx = { stem: it.stem, prompt: it.prompt, nominal: it.type === "plural" || /plural/i.test(it.prompt || ""),
-                    week: DV ? DV.weekNow() : undefined };
+                    week: DV ? DV.weekNow() : undefined, tags: it.tags };
+    if (reg) diagCtx.registro = reg;
     var d = window.Diagnosi ? Diagnosi.diagnose(given, accept, diagCtx) : { verdict: "sbagliato" };
     if (DV) DV.tidy(d);
     // Garden path (Tomasello & Herron 1988): the learner was led into the
@@ -2647,12 +2661,15 @@
       verdict = "quasi";
     }
     if (verdict === "giusto") {
+      // Right, with a note: another valid form, the register of speech, correct
+      // but not what a native would say.  «✓ Vale»: full xp, not a slip.
+      var noteH = d.verdict === "giusto" && window.Errores && Errores.level(d) === "note" ? okNoteHtml(d) : "";
       if (round.tried) {
         markFixed(round.firstCat);
-        settle("quasi", given, selfRepairHtml(round.firstDiag), { label: "¡Eso es!", fixed: true });
+        settle("quasi", given, selfRepairHtml(round.firstDiag) + noteH, { label: "¡Eso es!", fixed: true });
       } else {
         if (it.frase && it.type === "write") state.written = (state.written || 0) + 1;
-        settle("giusto", given);
+        settle("giusto", given, noteH, noteH ? { label: "✓ Vale" } : undefined);
       }
       return;
     }
@@ -2663,19 +2680,123 @@
       if (inp0) { inp0.classList.remove("shake"); void inp0.offsetWidth; inp0.classList.add("shake"); inp0.focus(); }
       return;
     }
-    if (verdict === "sbagliato" && !round.tried && round.kind !== "boss" && round.kind !== "esame" && d.hint && d.cat !== "vuoto") {
-      round.tried = true;
-      round.lastGiven = String(given).trim();
-      round.promptAt = Date.now();
-      round.firstCat = d.cat;
-      round.firstDiag = d;
-      recordError(d, given);
-      showPrompt(d, DV ? DV.promptVerdict(given, accept, d) : null);
+    // Not sure (P4.1): the rule that fired is about the words or the order,
+    // the answer is near and not foreseen.  With a key, the AI judges it
+    // before the verdict, with what the app said as evidence.
+    if (!round.judged && needsJudge(it, d, given)) {
+      round.judged = true;
+      judgeFirst(it, given, accept, d, function (ok, data) {
+        if (ok) acceptByAI(it, given, data); else decide();
+      });
       return;
     }
-    if (!round.tried && d.cat) recordError(d, given);
-    // right but for a slip: what differed, without the list of the other categories
-    settle(verdict, given, d.cat ? diagHtml(d, true, verdict !== "sbagliato") : "");
+    decide();
+
+    function decide() {
+      if (round.answered) return;
+      if (verdict === "sbagliato" && !round.tried && round.kind !== "boss" && round.kind !== "esame" && d.hint && d.cat !== "vuoto") {
+        round.tried = true;
+        round.lastGiven = String(given).trim();
+        round.promptAt = Date.now();
+        round.firstCat = d.cat;
+        round.firstDiag = d;
+        recordError(d, given, { registro: reg });
+        showPrompt(d, DV ? DV.promptVerdict(given, accept, d) : null);
+        return;
+      }
+      if (!round.tried && d.cat) recordError(d, given, { registro: reg });
+      // right but for a slip: what differed, without the list of the other categories
+      settle(verdict, given, d.cat ? diagHtml(d, true, verdict !== "sbagliato") : "");
+    }
+  }
+
+  /* «✓ Vale» with its note: why it is fine and, if it is, what is more
+     natural or what the formal register says. */
+  function okNoteHtml(d) {
+    var txt = window.Errores ? Errores.noteOf(d) : String((d && d.note) || "");
+    if (!txt) return "";
+    var tag = d && d.level === "poco_natural" ? "💬 Más natural" : "💬 Una nota";
+    return '<div class="diag oknote"><span class="tag">' + tag + "</span><p>" + mk(DV ? DV.plain(txt) : txt) + "</p></div>";
+  }
+
+  /* ------------------------------------------ el juez de lo no previsto */
+
+  // What the AI accepted, item by item (state.variants[id] = [{g, x, at}]).
+  function variantOf(it, given) {
+    var list = (state.variants || {})[it.id];
+    if (!list || !list.length) return null;
+    var g = Engine.normalise(given);
+    return list.filter(function (v) { return v.g === g; })[0] || null;
+  }
+  function saveVariant(it, given, why) {
+    if (!state.variants) state.variants = {};
+    var list = state.variants[it.id] || (state.variants[it.id] = []);
+    var g = Engine.normalise(given);
+    if (!list.some(function (v) { return v.g === g; })) list.push({ g: g, x: String(why || "").slice(0, 300), at: Date.now() });
+    state.variants[it.id] = list.slice(-5);
+    var ids = Object.keys(state.variants);
+    if (ids.length > 300) {
+      ids.sort(function (a, b) { return (state.variants[a][0] || {}).at - (state.variants[b][0] || {}).at; });
+      ids.slice(0, ids.length - 300).forEach(function (k) { delete state.variants[k]; });
+    }
+  }
+  var JUDGE_CATS = { ordine: 1, orden: 1 };
+  function needsJudge(it, d, given) {
+    if (!aiKey() || !window.Scrivi || !Scrivi.judge || round.kind === "esame") return false;
+    if (it.options || it.type === "garden" || it.type === "dictation" || it.type === "listen" || it.src === "coniugatore" || it.dettato) return false;
+    if (!d || !d.cat || d.inSpanish || d.verdict === "giusto" || d.cat === "vuoto" || UNRECORDED[d.cat]) return false;
+    if (!(LEXICAL[d.cat] || GENERIC[d.cat] || JUDGE_CATS[d.cat])) return false;
+    // sentences: one word asked is one word (a synonym is not what the item teaches)
+    return String(it.answer || "").trim().split(/\s+/).length >= 3 && String(given).trim().split(/\s+/).length >= 2;
+  }
+  function aiItemX(it, given, sol, extra) {
+    var x = { prompt: it.prompt, stem: it.stem, options: it.options, given: given, answer: sol,
+              accept: it.accept, note: it.note || "", diff: gapDiff(given, sol) };
+    Object.keys(extra || {}).forEach(function (k) { x[k] = extra[k]; });
+    return x;
+  }
+  function aiCtx(extra) {
+    return window.Errores ? Errores.courseCtx(course, state, view.week, extra) : null;
+  }
+  function judgeFirst(it, given, accept, d, then) {
+    var r0 = round, done = false;
+    var finish = function (ok, data) {
+      if (done) return;
+      done = true;
+      clearTimeout(t);
+      r0.judging = false;
+      if (round !== r0 || currentItem() !== it || round.answered) return;
+      then(ok, data);
+    };
+    var cached = window.Errores ? Errores.cacheGet("judge", [it.id, given]) : null;
+    if (cached) return then(!!(cached.correcta && cached.mismo_sentido), cached);
+    round.judging = true;
+    $("#fb").innerHTML = '<div class="feedback prompt"><div class="verdict">🤖 Esa respuesta no la tenía prevista.</div>' +
+      '<p class="muted">Le pregunto a la IA si también vale…</p></div>';
+    // at most nine seconds: after that, the rules' verdict
+    var t = setTimeout(function () { finish(false, null); }, 9000);
+    var fbText = (d.label ? d.label + ": " : "") + (d.explain || d.hint || "");
+    Scrivi.judge(aiItemX(it, given, accept[0], { feedback: fbText.slice(0, 500), ctx: aiCtx({ cat: d.cat }) }), aiKeys(), function (err, data) {
+      if (err || !data) return finish(false, null);
+      if (window.Errores) Errores.cacheSet("judge", [it.id, given], { correcta: !!data.correcta, mismo_sentido: !!data.mismo_sentido, explicacion: String(data.explicacion || "").slice(0, 600) },
+                                          (it.stem || it.prompt || it.id) + " · " + given);
+      finish(!!(data.correcta && data.mismo_sentido), data);
+    });
+  }
+  function acceptByAI(it, given, data) {
+    var why = String((data && data.explicacion) || "");
+    saveVariant(it, given, why);
+    addAiNote({ id: it.id, prompt: it.prompt, stem: it.stem, given: given, answer: it.answer, ai: why, kind: "variante" });
+    settle("giusto", given, okNoteHtml({ note: "Tu respuesta no estaba prevista; la IA la revisó y vale. " + why +
+      " Quedó anotada en «Correcciones para revisar»." }), { label: "✓ Vale" });
+  }
+  function addAiNote(n) {
+    if (!state.aiNotes) state.aiNotes = [];
+    n.at = Date.now();
+    ["ai", "app"].forEach(function (k) { if (n[k]) n[k] = String(n[k]).slice(0, 600); });
+    state.aiNotes.unshift(n);
+    state.aiNotes = state.aiNotes.slice(0, 80);
+    persist();
   }
 
   function tokHtml(list, cls) {
@@ -2686,12 +2807,28 @@
 
   // brief: an answer that counts as right (a slip) does not list the other
   // categories («También: …»): the diff already marks every word.
+  /* The explanation at the learner's measure (P6), by how many times this
+     category has come up (state.errs[cat].n): the first time, the rule and
+     the contrast with Spanish; from the fifth, only the hint, with the
+     explanation folded and a link to the rule; in between, as it comes. */
   function diagHtml(d, withDiff, brief) {
     var diff = withDiff && d.given && d.given.length <= 24
       ? '<div class="diff"><span class="k">vos</span> ' + tokHtml(d.given, "bad") +
         '<br><span class="k">bien</span> ' + tokHtml(d.fixed, "fix") + "</div>" : "";
+    var E = window.Errores, lay = E && d.cat && !brief ? E.depth(state, d.cat) : "normal";
+    var body = "<p>" + mk(d.explain || "") + "</p>";
+    if (lay === "first") {
+      var add = E.firstLayer(d.cat, d.explain);
+      if (add.length) body += '<p class="capa">📐 ' + mk(DV ? DV.plain(add.join(" ")) : add.join(" ")) + "</p>";
+    } else if (lay === "brief" && d.hint && d.explain && d.hint !== d.explain) {
+      body = "<p>" + mk(d.hint) + "</p>" +
+        '<details class="why-ok"><summary>📐 La explicación completa</summary><p>' + mk(d.explain) + "</p></details>" +
+        '<button class="linkish" type="button" data-rulecat="' + esc(d.cat) + '">📖 Repasá la regla</button>';
+    }
+    // what was right in it (the Italian diagnosis says it in «note» on an error)
+    if (d.note && d.verdict !== "giusto" && String(d.explain || "").indexOf(String(d.note).slice(0, 30)) < 0) body += '<p class="capa">✓ ' + mk(DV ? DV.plain(String(d.note)) : String(d.note)) + "</p>";
     return '<div class="diag"><span class="tag">' + esc(d.label || "") + "</span>" + diff +
-      "<p>" + mk(d.explain || "") + "</p>" +
+      body +
       (!brief && d.all && d.all.length > 1 ? (function () {
         var seen = {}, rest = d.all.slice(1).filter(function (c) { if (seen[c] || c === d.cat) return false; seen[c] = 1; return true; });
         return rest.length ? '<div class="muted">También: ' + rest.map(function (c) { return esc(Diagnosi.LABEL[c] || c); }).join(", ") + "</div>" : "";
@@ -2820,8 +2957,10 @@
       (d.given && d.given.length <= 24 ? '<div class="diff">' + tokHtml(d.given, "bad") + "</div>" : "") +
       "<p>" + mk(d.hint) + "</p>" +
       '<div class="row">' + (masked ? '<button class="tab" id="morehint">💡 más pista</button>' : "") +
-      '<button class="tab" id="giveup">Ver la respuesta</button></div></div>';
+      (aiKey() && window.Scrivi && Scrivi.hints ? '<button class="tab" id="aihint">🤖 Explicame</button>' : "") +
+      '<button class="tab" id="giveup">Ver la respuesta</button></div><div id="aihintout"></div></div>';
     on("#giveup", function () { settle("sbagliato", "", diagHtml(d, true)); });
+    on("#aihint", function () { aiGradedHints(d); });
     on("#morehint", function () {
       var b = $("#morehint");
       if (b) b.outerHTML = '<span class="muted" style="align-self:center">' + esc(masked) + "</span>";
@@ -2832,18 +2971,178 @@
     if (input) { input.focus(); input.select && input.select(); }
   }
 
-  function recordError(d, given) {
-    if (!d || !d.cat || UNRECORDED[d.cat]) return;
-    if (!state.errs) state.errs = {};
-    if (!state.errLog) state.errLog = [];
-    var e = state.errs[d.cat] || (state.errs[d.cat] = { n: 0, fixed: 0, last: 0 });
-    e.n++;
-    e.last = Date.now();
-    // with its label and its why, so «Tus errores» can explain them later
-    state.errLog.unshift({ cat: d.cat, g: String(given).slice(0, 80), e: String(d.target || "").slice(0, 80), at: Date.now(),
-                           l: String(d.label || "").slice(0, 60), x: String(d.explain || d.hint || "").slice(0, 280) });
-    state.errLog = state.errLog.slice(0, 60);
+  /* «🤖 Explicame» before the solution (dynamic assessment: Aljaafreh &
+     Lantolf 1994): on the first failed attempt, the AI's graded hints (where
+     the problem is, then the rule as a question), with the app's own hint
+     and its category as evidence; the explanation waits for the final sheet.
+     Cached by (item, answer): the same question is not paid twice.
+     state.hintLevels counts how far the learner needed to go. */
+  function aiGradedHints(d) {
+    var it = currentItem(), out = $("#aihintout"), b = $("#aihint"), r0 = round;
+    if (!out || !it) return;
+    var given = round.lastGiven || "", sol = (it.accept && it.accept[0]) || it.answer;
+    if (b) b.disabled = true;
+    var show = function (data, lvl) {
+      if (round !== r0 || round.answered || !$("#aihintout")) return;
+      var o = $("#aihintout");
+      var p = function (t) { return mk(DV ? DV.plain(String(t || "")) : String(t || "")); };
+      o.innerHTML = '<div class="aiout"><p>🤖 <b>Pista:</b> ' + p(data.pista1) + "</p>" +
+        (lvl >= 2 ? "<p>🤖 <b>Otra pista:</b> " + p(data.pista2) + "</p>" : "") +
+        (lvl < 2 ? '<div class="row"><button class="tab" id="aihint2">💡 Otra pista</button></div>' : "") +
+        (data.tambien_correcta ? '<p class="muted small">La IA cree que tu respuesta también podría valer. Si estás seguro, mandala igual o tocá «Ver la respuesta» y después «🙋 Mi respuesta es válida».</p>' : "") +
+        "</div>";
+      if (!state.hintLevels) state.hintLevels = { 1: 0, 2: 0, 3: 0 };
+      state.hintLevels[lvl] = (state.hintLevels[lvl] || 0) + 1;
+      persist();
+      on("#aihint2", function () { show(data, 2); });
+      var inp = $("#ans") || $("#wans");
+      if (inp) inp.focus();
+    };
+    var cached = window.Errores ? Errores.cacheGet("hints", [it.id, given]) : null;
+    if (cached) { round.aiHints = cached; return show(cached, 1); }
+    out.innerHTML = '<p class="muted small">⏳ Preguntándole a la IA…</p>';
+    var x = aiItemX(it, given, sol, { feedback: String(d.hint || "").slice(0, 400), ctx: aiCtx({ cat: d.cat, appSaid: d.explain || "" }) });
+    Scrivi.hints(x, aiKeys(), function (err, data) {
+      if (round !== r0 || round.answered) return;
+      var o = $("#aihintout");
+      if (!o) return;
+      if (err || !data || !data.pista1) {
+        o.innerHTML = '<p class="muted small">No pude usar la IA (' + esc(String((err && err.message) || err || "respuesta vacía")) + ").</p>";
+        if ($("#aihint")) $("#aihint").disabled = false;
+        return;
+      }
+      var keep = { pista1: String(data.pista1 || "").slice(0, 400), pista2: String(data.pista2 || "").slice(0, 400),
+                   explicacion: String(data.explicacion || "").slice(0, 800), tambien_correcta: !!data.tambien_correcta, app_equivocada: !!data.app_equivocada };
+      if (window.Errores) Errores.cacheSet("hints", [it.id, given], keep, (it.stem || it.prompt || it.id) + " · " + given);
+      round.aiHints = keep;
+      show(keep, 1);
+    });
+  }
+
+  /* «🤖 Explicame más», on the final sheet: the solution and the app's
+     explanation are already there, so the AI is asked for the rule behind
+     it, a contrast with Spanish and another example, with the app's
+     correction, the category and the week as evidence.  If it thinks the
+     answer was valid after all, it goes to «Correcciones para revisar». */
+  function aiExplainMore(it, given, sol, dg, fbText) {
+    var b = $("#aiexp"), outE = $("#aiexpout");
+    if (b) b.disabled = true;
+    var show = function (data, meta) {
+      var o = $("#aiexpout");
+      if (!o) return;
+      var dispute = data.tambien_correcta || data.app_equivocada;
+      o.innerHTML = '<div class="aiout"><p>🤖 ' + mk(DV ? DV.plain(String(data.explicacion || "")) : String(data.explicacion || "")) + "</p>" +
+        (dispute ? '<p class="muted small">La IA cree que ' + (data.tambien_correcta ? "tu respuesta también vale" : "la corrección de la app no es buena") +
+           ". Quedó anotado en " + UI.me + " → «Correcciones para revisar».</p>" : "") +
+        (meta ? modelLine(meta) : '<p class="muted small modelline">IA: ya lo había explicado (guardado en el teléfono).</p>') + "</div>";
+    };
+    var cached = window.Errores ? Errores.cacheGet("explain", [it.id, given]) : null;
+    if (cached) return show(cached, null);
+    if (outE) outE.innerHTML = '<p class="muted small">⏳ Preguntándole a la IA…</p>';
+    var x = aiItemX(it, given, sol, { feedback: fbText, stage: "mas",
+                                      ctx: aiCtx({ cat: dg && dg.cat, appSaid: dg ? (dg.label ? dg.label + ": " : "") + (dg.explain || dg.hint || "") : "" }) });
+    Scrivi.explain(x, aiKeys(), function (err, data, meta) {
+      var o = $("#aiexpout");
+      if (!o) return;
+      if (err || !data) { o.innerHTML = '<p class="muted small">No pude usar la IA (' + esc(String((err && err.message) || err || "respuesta vacía")) + ").</p>"; if (b) b.disabled = false; return; }
+      var keep = { explicacion: String(data.explicacion || "").slice(0, 1200), tambien_correcta: !!data.tambien_correcta, app_equivocada: !!data.app_equivocada };
+      if (window.Errores) Errores.cacheSet("explain", [it.id, given], keep, (it.stem || it.prompt || it.id) + " · " + given);
+      if (keep.tambien_correcta || keep.app_equivocada) {
+        addAiNote({ id: it.id, prompt: it.prompt, stem: it.stem, given: given, answer: sol, app: fbText, ai: keep.explicacion, kind: "ia" });
+      }
+      show(keep, meta);
+    });
+  }
+
+  function canClaim(it, given, extra) {
+    if (!it || round.kind === "esame" || !String(given || "").trim()) return false;
+    if (SAY_TYPES[it.type] || it.type === "guess" || it.type === "coppia" || it.type === "hunt" || it.type === "intro") return false;
+    return !(it.type === "garden" && extra && extra.indexOf("La trampa") >= 0);
+  }
+  // The rule of a category, in the theory (the block that teaches it) or in «Consultar».
+  function openRuleOf(cat) {
+    var b = null;
+    try {
+      if (window.Porque && Porque.blockFor) b = Porque.blockFor({ id: "cat:" + cat, cat: cat, src: "clinica", type: "typed", answer: "", stem: "" },
+                                                            { course: course, unlocked: state.unlocked, week: view.week });
+    } catch (e) { b = null; }
+    if (b && window.Porque && Porque.open) Porque.open(b.week, b.i);
+    else if (window.Capas && Capas.open) Capas.open((window.Diagnosi && Diagnosi.LABEL[cat]) || "");
+  }
+
+  /* «🙋 Mi respuesta es válida» (P5), on any error sheet, with or without a
+     key: the answer is accepted provisionally (no xp, and the error recorded
+     for it is taken back from the profile, with its second pass), and it is
+     noted for review with the item, the answer and what the app said.  With
+     a key, the AI is asked too, with that evidence; if it agrees, the answer
+     becomes a local variant of the item. */
+  function claimValid(it, given, sol, fbText, dg) {
+    var b = $("#claim"), o = $("#claimout");
+    if (b) b.disabled = true;
+    (round.recorded || []).forEach(function (row) { if (window.Errores) Errores.unrecord(state, row); });
+    round.recorded = null;
+    // the easier second pass of this item is not needed
+    for (var k = round.i + 1; k < round.items.length; k++) {
+      if (round.items[k] && round.items[k].retry && round.items[k].id === it.id) { round.items.splice(k, 1); break; }
+    }
+    Array.prototype.forEach.call(document.querySelectorAll("#fb .note"), function (n) { if (/Te la vuelvo a preguntar/.test(n.textContent)) n.remove(); });
+    if (round.lives !== Infinity && round.lives < round.maxLives) round.lives++;
+    var last = round.log[round.log.length - 1];
+    if (last && last.id === it.id) last.claimed = true;
+    var note = { id: it.id, prompt: it.prompt, stem: it.stem, given: given, answer: sol, app: fbText, kind: "alumno" };
+    addAiNote(note);
+    if (o) o.innerHTML = '<div class="note">🙋 Anotada para revisar: esta vez no cuenta como error. ' +
+      "Queda en " + UI.me + " → «Correcciones para revisar», para copiarla y mandarla." + "</div>";
+    var hh = document.querySelector(".hud .hearts");
+    if (hh && round.lives !== Infinity) { var hs = ""; for (var q = 0; q < round.maxLives; q++) hs += q < round.lives ? "❤️" : "🤍"; hh.textContent = hs; }
+    if (!aiKey() || !window.Scrivi || !Scrivi.judge || !String(given || "").trim()) return;
+    if (o) o.insertAdjacentHTML("beforeend", '<p class="muted small" id="claimai">⏳ Le pregunto también a la IA…</p>');
+    Scrivi.judge(aiItemX(it, given, sol, { feedback: fbText, ctx: aiCtx({ cat: dg && dg.cat }) }), aiKeys(), function (err, data) {
+      var p = $("#claimai");
+      if (err || !data) { if (p) p.textContent = "No pude usar la IA; queda anotada igual."; return; }
+      var yes = !!(data.correcta && data.mismo_sentido), why = String(data.explicacion || "");
+      note.ai = (yes ? "vale: " : "no vale: ") + why.slice(0, 560);
+      if (yes) saveVariant(it, given, why);
+      persist();
+      if (p) p.innerHTML = "🤖 " + (yes ? "La IA coincide: vale. La próxima vez te la acepto. " : "La IA cree que no: ") + mk(DV ? DV.plain(why) : why);
+    });
+  }
+
+  /* Every correction goes to the error profile through here, as the common
+     error object of js/errores.js (what was written, the correction, the
+     hint, the rule, the contrast, the register, the source): a diagnosis of
+     a closed answer is turned into one; the other correctors pass theirs.
+     The rows of this answer are kept in round.recorded, so «🙋 Mi respuesta
+     es válida» can take them back. */
+  function recordError(d, given, o) {
+    if (!d || !d.cat || UNRECORDED[d.cat]) return null;
+    var E = window.Errores;
+    var err = d.fuente && d.mal !== undefined ? d : E ? E.fromDiag(d, given, o) : null;
+    var row = null;
+    if (E) row = E.record(state, err);
+    else {
+      if (!state.errs) state.errs = {};
+      if (!state.errLog) state.errLog = [];
+      var e = state.errs[d.cat] || (state.errs[d.cat] = { n: 0, fixed: 0, last: 0 });
+      e.n++; e.last = Date.now();
+      row = { cat: d.cat, g: String(given).slice(0, 80), e: String(d.target || "").slice(0, 80), at: Date.now(),
+              l: String(d.label || "").slice(0, 60), x: String(d.explain || d.hint || "").slice(0, 280) };
+      state.errLog.unshift(row);
+      state.errLog = state.errLog.slice(0, 60);
+    }
+    if (row && round && !round.answered) (round.recorded = round.recorded || []).push(row);
     persist();
+    return row;
+  }
+  // The register the item asks for (the Portuguese «pra» is fine in
+  // speech, not in a formal text): the item's field, its tags, «Trova
+  // l'errore» (the written norm); nothing otherwise.
+  function itemRegister(it) {
+    if (!it) return null;
+    if (it.registro) return /^(formal|culto)$/i.test(it.registro) ? "formal" : String(it.registro);
+    if ((it.tags || []).indexOf("formal") >= 0) return "formal";
+    if (it.type === "fixerr" || it.bank === "err") return "formal";
+    return null;
   }
 
   function markFixed(cat) {
@@ -2965,6 +3264,8 @@
     if (gained) xpFly(gained);
 
     var label = opts.label || { giusto: pick(UI.giusto), quasi: UI.quasi, sbagliato: pick(UI.sbagliato) }[verdict];
+    // what the learner can claim as valid: this answer, or the one before «Ver la respuesta»
+    var claimGiven = String(given || "").trim() ? given : round.tried ? round.lastGiven || "" : "";
     var rp = rightParts(it, given, q, extra, { ms: took, seen: seenBefore, fixed: !!opts.fixed });
     var sol = it.type === "listen" && it.frase ? it.frase.it + " — " + it.answer
             : it.frase ? it.frase.it : rp.sol || it.answer;
@@ -3004,8 +3305,9 @@
       '<div class="row" style="margin-top:10px">' +
         '<button class="btn" id="next">' + UI.next + "</button>" +
         '<button class="tab" id="say2">🔊 escuchar</button>' +
-        (q < 2 && aiKey() && window.Scrivi && it.type !== "hunt" ? '<button class="tab" id="aiexp">🤖 Explicame</button>' : "") +
-      '</div><div id="aiexpout"></div></div>';
+        (q < 2 && aiKey() && window.Scrivi && it.type !== "hunt" ? '<button class="tab" id="aiexp">🤖 Explicame más</button>' : "") +
+        (q < 2 && canClaim(it, claimGiven, extra) ? '<button class="tab" id="claim">🙋 Mi respuesta es válida</button>' : "") +
+      '</div><div id="aiexpout"></div><div id="claimout"></div></div>';
 
     $("#fb").innerHTML = fb;
     if (window.Porque) Porque.after(it, { q: q, given: given, round: round });   // 📖 ¿Por qué? · 🧐 ¿Qué tenía de malo?
@@ -3020,6 +3322,9 @@
       if (oth && !oth.querySelector("li")) oth.parentNode.removeChild(oth);
     }
     wireKeyword();
+    $("#fb").querySelectorAll("[data-rulecat]").forEach(function (b) {
+      b.onclick = function (e) { e.stopPropagation(); openRuleOf(b.getAttribute("data-rulecat")); };
+    });
     $("#fb").querySelectorAll("[data-sg]").forEach(function (b) {
       b.onclick = function (e) { e.stopPropagation(); showGloss(stemGloss[+b.dataset.sg]); };
     });
@@ -3053,50 +3358,12 @@
     // read: the sentence of the question is, when there is one.
     if (spanishText(spoken) || (spoken === it.answer && asksMeaning(it))) spoken = it.stem && !/_{3,}/.test(it.stem) && !spanishText(it.stem) ? it.stem : "";
     $("#next").onclick = nextAfterFeedback();
-    on("#aiexp", function () {
-      var b = $("#aiexp"), outE = $("#aiexpout");
-      if (b) b.disabled = true;
-      if (outE) outE.innerHTML = '<p class="muted small">⏳ Preguntándole a la IA…</p>';
-      var fbText = ($("#fb") || {}).innerText || "";
-      var x = { prompt: it.prompt, stem: it.stem, options: it.options, given: given, answer: sol,
-                accept: it.accept, feedback: fbText.split(UI.next)[0].replace(/\s+/g, " ").slice(0, 600),
-                note: it.note || "", diff: gapDiff(given, sol) };
-      // Graded hints (dynamic assessment): implicit → the rule as a
-      // question → the explanation.  The level reached is kept as a
-      // signal of how much mediation the learner needed.
-      Scrivi.hints(x, aiKeys(), function (err, data, meta) {
-        var o = $("#aiexpout");
-        if (!o) return;
-        if (err) { o.innerHTML = '<p class="muted small">No pude usar la IA (' + esc(String(err.message || err)) + ").</p>"; if (b) b.disabled = false; return; }
-        var dispute = data && (data.tambien_correcta || data.app_equivocada);
-        if (dispute) {
-          // Kept for review: the learner does not have to explain it to anyone.
-          if (!state.aiNotes) state.aiNotes = [];
-          state.aiNotes.unshift({ id: it.id, prompt: it.prompt, stem: it.stem, given: given, answer: sol,
-                                  ai: String(data.explicacion || "").slice(0, 600), at: Date.now() });
-          state.aiNotes = state.aiNotes.slice(0, 80);
-          persist();
-        }
-        var lvl = 1;
-        var show = function () {
-          o.innerHTML = '<div class="aiout">' +
-            '<p>🤖 <b>Pista 1:</b> ' + esc(String(data.pista1 || "")) + "</p>" +
-            (lvl >= 2 ? '<p><b>Pista 2:</b> ' + esc(String(data.pista2 || "")) + "</p>" : "") +
-            (lvl >= 3 ? "<p>" + mk(String(data.explicacion || "")) + "</p>" +
-              (dispute ? '<p class="muted small">La IA cree que ' + (data.tambien_correcta ? "tu respuesta también vale" : "la corrección de la app no es buena") +
-                 ". Quedó anotado en " + UI.me + " → «Correcciones para revisar».</p>" : "") + modelLine(meta) : "") +
-            (lvl < 3 ? '<div class="row"><button class="tab" id="morehint2">' + (lvl === 1 ? "💡 Más pista" : "📐 La explicación") + "</button></div>" : "") +
-            "</div>";
-          on("#morehint2", function () {
-            lvl++;
-            if (!state.hintLevels) state.hintLevels = { 1: 0, 2: 0, 3: 0 };
-            show();
-          });
-          if (lvl === 3 && state.hintLevels) state.hintLevels[3] = (state.hintLevels[3] || 0) + 1;
-        };
-        show();
-      });
-    });
+    var fbTextOf = function () {
+      var t = ($("#fb") || {}).innerText || "";
+      return t.split(UI.next)[0].replace(/\s+/g, " ").slice(0, 600);
+    };
+    on("#aiexp", function () { aiExplainMore(it, claimGiven || given, sol, dg || round.firstDiag, fbTextOf()); });
+    on("#claim", function () { claimValid(it, claimGiven, sol, fbTextOf(), dg || round.firstDiag); });
     $("#say2").onclick = function () { if (it.audio) speakItem(it, true); else speak(spoken, true); };
     if (!spoken && !it.audio) $("#say2").hidden = true;
     else if (q === 2 || it.frase) { if (it.audio) speakItem(it); else speak(spoken); }
@@ -3336,6 +3603,9 @@
     round.firstDiag = null;
     round.hinted = false;
     round.picked = [];
+    round.recorded = null;
+    round.judged = false;
+    round.aiHints = null;
     if (round.i >= round.items.length) {
       finishRound();
       return;
@@ -3986,12 +4256,15 @@
   function aiCard() {
     var notes = state.aiNotes || [];
     return '<div class="card" id="aicard"><h2>🤖 Corrector con IA</h2>' +
-      '<p class="muted small">Con una clave gratuita, ' + UI.scrivi + " corrige tu texto entero y en cualquier ejercicio aparece «🤖 Explicame».</p>" +
+      '<p class="muted small">Con una clave gratuita, la IA suma lo que ve a lo que marca el corrector de ' + UI.scrivi +
+        ", da pistas antes de la respuesta («🤖 Explicame»), explica más en la hoja final y juzga las respuestas que el ejercicio no tenía previstas.</p>" +
       aiKeyFields() +
       (notes.length ? "<h3>Correcciones para revisar (" + notes.length + ")</h3>" +
-        '<p class="muted small">La IA cree que en estos casos tu respuesta también valía o la corrección de la app no era buena. Copialas y pegámelas todas juntas.</p>' +
+        '<p class="muted small">Las respuestas que marcaste como válidas («🙋») y las que la IA cree que valían o que la app corrigió mal. ' +
+          "Copialas (van con las explicaciones que la IA ya dio) y pegámelas todas juntas.</p>" +
         '<ul class="ainotes">' + notes.slice(0, 8).map(function (n) {
-          return "<li><b>" + esc(n.given || "—") + "</b> ≠ " + esc(n.answer || "") + ' <small class="muted">' + esc((n.stem || "").slice(0, 60)) + "</small></li>";
+          var who = n.kind === "alumno" ? "🙋 " : n.kind === "variante" ? "✓ " : "🤖 ";
+          return "<li>" + who + "<b>" + esc(n.given || "—") + "</b> ≠ " + esc(n.answer || "") + ' <small class="muted">' + esc((n.stem || "").slice(0, 60)) + "</small></li>";
         }).join("") + "</ul>" +
         '<div class="row"><button class="tab" id="aicopy">📋 Copiar todas</button><button class="tab" id="aiclear">Borrar</button></div>' : "") +
       "</div>";
@@ -4014,14 +4287,16 @@
      before it was kept, show the name of the error).  Coming back to the
      why of your own errors is what the error log is for (Metcalfe 2017). */
   function errLogHtml(list) {
+    var SRC = { ia: "🤖 IA", lt: "LanguageTool" };
     return '<ul class="errlog">' + list.map(function (l) {
       var label = l.l || (window.Diagnosi && Diagnosi.LABEL[l.cat]) || "";
       var x = DV && l.x ? DV.plain(l.x) : l.x;
+      var why = (x ? "<p>" + mk(x) + "</p>" : "") + (l.c && (!x || x.indexOf(l.c) < 0) ? "<p>" + mk(DV ? DV.plain(l.c) : l.c) + "</p>" : "") +
+        (l.f && SRC[l.f] ? '<p class="muted small">Lo marcó ' + SRC[l.f] + (l.k ? "" : "; no cuenta para la Clínica") + ".</p>" : "");
       return '<li class="diag">' +
-        '<div class="diff"><span class="k">vos</span> ' + (l.e ? markWords(l.g, l.e, "bad") : '<b class="bad">' + esc(l.g) + "</b>") +
-          (l.e ? '<br><span class="k">bien</span> ' + markWords(l.e, l.g, "fix") : "") + "</div>" +
-        (x ? '<details><summary><span class="tag">' + esc(label || "Por qué") + '</span> <span class="muted small">¿por qué?</span></summary>' +
-               "<p>" + mk(x) + "</p></details>"
+        '<div class="diff"><span class="k">vos</span> ' + (l.e ? markWords(l.g, l.e, "bad") : '<b class="bad">' + esc(l.g || "—") + "</b>") +
+          (l.e ? '<br><span class="k">bien</span> ' + markWords(l.e, l.g, "fix") : l.d ? '<br><span class="k">bien</span> <i>(se borra)</i>' : "") + "</div>" +
+        (why ? '<details><summary><span class="tag">' + esc(label || "Por qué") + '</span> <span class="muted small">¿por qué?</span></summary>' + why + "</details>"
            : label ? '<span class="tag">' + esc(label) + "</span>" : "") +
         "</li>";
     }).join("") + "</ul>";
@@ -4029,7 +4304,7 @@
 
   function errorsCard() {
     var errs = state.errs || {};
-    var cats = Object.keys(errs).sort(function (a, b) { return errs[b].n - errs[a].n; });
+    var cats = Object.keys(errs).filter(function (c) { return errs[c].n > 0; }).sort(function (a, b) { return errs[b].n - errs[a].n; });
     if (!cats.length) return itanolCard();
     var max = errs[cats[0]].n;
     return '<div class="card"><h2>Tus errores</h2>' +
@@ -4626,7 +4901,8 @@
       Engine.addStrand(state, "input", Math.round(xp / 2));
       Engine.addStrand(state, "output", Math.round(xp / 2));
       Engine.touchStreak(state);
-      dg.findings.forEach(function (f) { recordError({ cat: f.cat, target: f.msg.replace(/\*/g, "").slice(0, 80) }, ""); });
+      // what the checker saw goes to the profile: what was written, the correction and why
+      if (window.Errores) Errores.recordFindings(state, dg.findings, given, {});
       // the blocks not recovered come back tomorrow, each one as a gap (reglas.js)
       if (window.Reglas) Reglas.fromDictogloss(state, t, r, w.week);
       dg.extras = missionCheck(w.week, before);
@@ -4985,11 +5261,12 @@
             if (!h || h[0] !== "me" || r.ok === true || !r.corretta) return;
             if (Engine.normalise(r.corretta) === Engine.normalise(h[1])) return;
             rec.push([h[1], String(r.corretta), String(r.nota || "")]);
-            // what went wrong in the role-play goes to the profile like any other error
-            var tipo = String(r.tipo || "").trim().toLowerCase();
-            if (Scrivi.AI_TYPES && Scrivi.AI_TYPES[tipo]) recordError({ cat: tipo, target: String(r.corretta), label: Scrivi.AI_TYPES[tipo], explain: String(r.nota || "") }, h[1]);
+            // what went wrong in the role-play goes to the profile like any other
+            // error (the common error object; an unknown type stays out of the score)
+            if (window.Errores) Errores.record(state, Errores.fromRow(h[1], String(r.corretta), String(r.nota || ""), r.tipo, { fuente: "ia" }));
           });
           parla.recasts = rec;
+          persist();
         }
         if (view.screen === "parla") render();
       });
@@ -5841,25 +6118,40 @@
       if (card) card.scrollIntoView({ block: "start" });
     });
     on("#scheck", function () {
-      var text = box.value, r = Scrivi.check(text, w.week), out = $("#sout");
-      // With a key, the AI is the corrector; the local rules and
-      // LanguageTool only step in when it cannot answer.
+      var text = box.value, r = Scrivi.check(text, w.week);
+      /* The union (C8): the local marks (no false alarms measured) are shown
+         as sure; with a key, what the AI finds is added to them, and where it
+         disagrees with a local mark both are shown.  Without a key (or if
+         the AI fails), LanguageTool adds its own. */
       r.local = r.findings;
-      if (aiKey() && text.trim()) { r.findings = []; r.hard = 0; runAI(); }
+      if (aiKey() && text.trim()) runAI();
       else fallback();
+      function union(data) {
+        r.findings = r.local.concat(Scrivi.fromAI(text, data, r.local));
+        r.hard = scriviHard(r.findings);
+      }
       function runAI() {
-        r.ai = "…"; r.aiStage = null; r.findings = []; r.hard = 0;
+        r.ai = "…"; r.aiStage = null; r.findings = r.local; r.hard = scriviHard(r.local); r.cached = null;
         showScrivi(w, text, r, null);
-        // The evidence for the reviewer: the rule checker now, LanguageTool
-        // when it answers (at most twelve seconds; without it, the review
-        // goes ahead with the local findings only).
+        // the same text, or every sentence already corrected: no new request
+        var hit = scriviCached(text, w.week);
+        if (hit) {
+          r.ai = "ok"; r.aiData = hit.data; r.aiMeta = null; r.cached = hit.how;
+          union(hit.data);
+          showScrivi(w, text, r, null);
+          return;
+        }
+        // The evidence for the reviewer: the rule checker now (sure),
+        // LanguageTool when it answers (at most six seconds; without it,
+        // the review goes ahead with the local findings only).
+        var sure = r.local.filter(function (f) { return !f.soft; }).map(function (f) { return window.Errores ? Errores.evidenceLine(f) : f.msg.replace(/\*/g, ""); });
         var ltMsgs = null, waiting = [];
         if (!state.ltOff) Scrivi.ltCheck(text, function (e2, matches) {
-          ltMsgs = e2 ? [] : Scrivi.fromLT(text, matches, []).map(function (f) { return f.msg.replace(/\*/g, ""); });
+          ltMsgs = e2 ? [] : Scrivi.fromLT(text, matches, r.local).map(function (f) { return f.msg.replace(/\*/g, ""); });
           waiting.splice(0).forEach(function (fn) { fn(); });
         }); else ltMsgs = [];
         var evidence = function (go) {
-          var pack = function () { return { local: r.local.filter(function (f) { return !f.soft; }).map(function (f) { return f.msg.replace(/\*/g, ""); }), lt: ltMsgs || [] }; };
+          var pack = function () { return { local: sure, lt: ltMsgs || [] }; };
           if (ltMsgs) return go(pack());
           var t = setTimeout(function () { if (waiting.length) { waiting.length = 0; go(pack()); } }, 6000);
           waiting.push(function () { clearTimeout(t); go(pack()); });
@@ -5868,19 +6160,19 @@
           if (view.screen !== "scrivi" || $("#stext") !== box || box.value !== text) return;
           if (err) { r.ai = "error"; r.aiErr = String(err.message || err); fallback(); return; }
           r.ai = "ok"; r.aiData = data; r.aiMeta = meta;
-          r.findings = Scrivi.fromAI(text, data, []);
-          r.hard = r.findings.filter(function (f) { return !f.soft; }).length;
+          scriviRemember(text, w.week, data);
+          union(data);
           showScrivi(w, text, r, null);
           on("#sretry", runAI);
         }, function (stage) {
           if (view.screen !== "scrivi" || $("#stext") !== box || box.value !== text) return;
           r.aiStage = stage;
           showScrivi(w, text, r, null);
-        }, { evidence: evidence });
+        }, { evidence: evidence, ctx: aiCtx({ week: w.week, local: sure }) });
       }
       function fallback() {
         r.findings = r.local;
-        r.hard = r.findings.filter(function (f) { return !f.soft; }).length;
+        r.hard = scriviHard(r.findings);
         showScrivi(w, text, r, state.ltOff || !text.trim() ? null : "…");
         on("#sretry", runAI);
         if (state.ltOff || !text.trim()) return;
@@ -5888,7 +6180,7 @@
           if (view.screen !== "scrivi" || $("#stext") !== box || box.value !== text || r.ai === "…" || r.ai === "ok") return;
           if (err) { r.lt = "error"; showScrivi(w, text, r, "error"); on("#sretry", runAI); return; }
           r.findings = r.findings.concat(Scrivi.fromLT(text, matches, r.findings)).sort(function (a, b) { return a.i - b.i; });
-          r.hard = r.findings.filter(function (f) { return !f.soft; }).length;
+          r.hard = scriviHard(r.findings);
           r.lt = "ok";
           showScrivi(w, text, r, "ok");
           on("#sretry", runAI);
@@ -5897,11 +6189,50 @@
     });
   }
 
+  // What counts as an error to fix: not the style, not the folded ones, not a second opinion.
+  function scriviHard(list) { return (list || []).filter(function (f) { return !f.soft && !f.minor && !f.conflict; }).length; }
+  /* The AI's correction of Scrivi, kept by text and by sentence (P4.4): the
+     same text, or a text whose sentences were all corrected before, is not
+     sent again. */
+  function scriviCached(text, week) {
+    var E = window.Errores;
+    if (!E) return null;
+    var full = E.cacheGet("scrivi", [week, text]);
+    if (full) return { data: full, how: "texto" };
+    var ss = E.sentences(text), errs = [];
+    if (!ss.length) return null;
+    for (var i = 0; i < ss.length; i++) {
+      var c = E.cacheGet("scrivi-s", [week, ss[i].s]);
+      if (!c) return null;
+      errs = errs.concat(c.errores || []);
+    }
+    return { data: { errores: errs, corregido: "", consigna: "", comentario: "" }, how: "oraciones" };
+  }
+  function scriviRemember(text, week, data) {
+    var E = window.Errores;
+    if (!E || !data || !Array.isArray(data.errores)) return;
+    E.cacheSet("scrivi", [week, text], data, "Scrivi " + week + " · " + text.slice(0, 80));
+    var ss = E.sentences(text), per = ss.map(function () { return []; });
+    data.errores.forEach(function (e) {
+      var bad = String((e && e.mal) || "").toLowerCase().trim();
+      if (!bad) return;
+      for (var i = 0; i < ss.length; i++) if (ss[i].s.toLowerCase().indexOf(bad) >= 0) { per[i].push(e); return; }
+    });
+    ss.forEach(function (x, i) { E.cacheSet("scrivi-s", [week, x.s], { errores: per[i] }, "Scrivi " + week + " · " + x.s.slice(0, 80)); });
+  }
+
   /* Tres vueltas y reformulación (docs/js/escritura_plus.js): lo que el
      módulo necesita de la app. */
   function epHost() {
     return { state: state, week: course.weeks[view.week - 1], esc: esc, mk: mk, UI: UI, persist: persist, gain: gain,
              toast: toast, aiKeys: aiKeys, aiKey: aiKey, lexicon: scriviLexicon,
+             // the errors of the last lap and of the text reformulated go to the profile (F §2.2)
+             recordFindings: function (findings, text, reg) {
+               if (!window.Errores) return 0;
+               var n = Errores.recordFindings(state, findings, text, { registro: reg || null }).length;
+               if (n) persist();
+               return n;
+             },
              rerender: function () { if (view.screen === "eplus") render(); },
              back: function () { EscrituraPlus.stop(); view.screen = "scrivi"; render(); window.scrollTo(0, 0); } };
   }
@@ -5909,23 +6240,34 @@
   function showScrivi(w, text, r, ltState) {
       var out = $("#sout");
       if (!out) return;
-      var hard = r.findings.filter(function (f) { return !f.soft; });
-      var list = r.findings.map(function (f, k) {
-        return '<li class="' + (f.soft ? "soft" : "bad") + '"><b>' + (k + 1) + ".</b> " + mk(f.msg) + "</li>";
-      }).join("");
+      var hard = r.findings.filter(function (f) { return !f.soft && !f.minor && !f.conflict; });
+      // the week's and the weak categories first; with a beginner, the rest folded (P4.5)
+      var major = r.findings.filter(function (f) { return !f.minor; }), minor = r.findings.filter(function (f) { return f.minor; });
+      var byPos = function (a, b) { return (a.i < 0 ? 1e9 : a.i) - (b.i < 0 ? 1e9 : b.i); };
+      var shown = major.sort(byPos).concat(minor.sort(byPos));
+      var item = function (f, k) {
+        var src = f.conflict ? "" : f.ai ? '<span class="src">🤖 IA</span>' : f.lt ? "" : r.ai === "ok" ? '<span class="src">✓ corrector</span>' : "";
+        return '<li class="' + (f.conflict ? "soft conflict" : f.soft ? "soft" : "bad") + '"><b>' + (k + 1) + ".</b> " +
+          mk(DV ? DV.plain(f.msg, w.week) : f.msg) + src + "</li>";
+      };
+      var list = major.map(item).join("");
+      var minorList = minor.map(function (f, k) { return item(f, major.length + k); }).join("");
       var missing = r.reqs.filter(function (q) { return !q.ok; });
       var busy = r.ai === "…";
       out.innerHTML = '<div class="card">' +
         (busy ? (r.aiStage === "review" ? '<p>⏳ Un segundo profesor está revisando la corrección…</p>' : '<p>⏳ La IA está corrigiendo tu texto…</p>') +
-                '<p class="muted small">Corrige y después revisa: suele tardar menos de 30 segundos.</p>'
-          : r.findings.length ? '<p class="scrivi-marked it">' + Scrivi.markup(text, r.findings, esc) + "</p><ol class=\"findings\">" + list + "</ol>"
-          : r.ai === "ok" ? "<p>✨ La IA no encontró errores.</p>"
+                '<p class="muted small">Corrige y después revisa: suele tardar menos de 30 segundos. Mientras, lo que ya marcó el corrector de la app:</p>' : "") +
+        (shown.length ? '<p class="scrivi-marked it">' + Scrivi.markup(text, shown, esc) + "</p>" +
+              (list ? '<ol class="findings">' + list + "</ol>" : "") +
+              (minorList ? '<details class="minorf"><summary>Otras cosas para más adelante (' + minor.length + ")</summary><ol class=\"findings\">" + minorList + "</ol></details>" : "")
+          : busy ? "" : r.ai === "ok" ? "<p>✨ Ni la IA ni el corrector encontraron errores.</p>"
           : '<p>✨ No encontré errores' + (ltState === "ok" ? ", y LanguageTool tampoco." : " de los que sé buscar.") + "</p>") +
         (r.ai === "ok" && r.aiData ? '<div class="aiout">' +
               (r.aiData.consigna ? '<p class="muted small">📋 ' + esc(r.aiData.consigna) + "</p>" : "") +
-              (r.aiData.comentario ? "<p>🤖 " + esc(r.aiData.comentario) + "</p>" : "") +
+              (r.aiData.comentario ? "<p>🤖 " + mk(DV ? DV.plain(r.aiData.comentario, w.week) : r.aiData.comentario) + "</p>" : "") +
               (r.aiData.corregido ? '<p class="muted small">Versión corregida:</p><p class="model it">' + esc(r.aiData.corregido) + "</p>" : "") +
-              (r.aiMeta ? modelLine(r.aiMeta.first, r.aiMeta.review) : "") +
+              (r.cached ? '<p class="muted small modelline">IA: ' + (r.cached === "texto" ? "este texto ya estaba corregido" : "cada oración ya estaba corregida") + " (guardado en el teléfono, sin volver a preguntar).</p>"
+                : r.aiMeta ? modelLine(r.aiMeta.first, r.aiMeta.review) : "") +
             "</div>" : "") +
         (r.ai === "error" ? '<p class="muted small">⚠️ No pude usar la IA (' + esc(r.aiErr || "") + "). " +
               (/clave|401|403/.test(r.aiErr || "") ? "Revisá las claves en " + UI.me + ". " : "") +
@@ -5945,16 +6287,18 @@
 
   function deliverScrivi(w, text, r) {
     var before = doneCount(w), first = !(state.scritti || {})[w.week];
-    var hard = r.findings.filter(function (f) { return !f.soft; });
+    var hard = r.findings.filter(function (f) { return !f.soft && !f.minor && !f.conflict; });
     if (!state.scritti) state.scritti = {};
     state.scritti[w.week] = { t: text.slice(0, 4000), at: Date.now(), n: r.words, errs: hard.length };
     if (state.scrittiDraft) delete state.scrittiDraft[w.week];
-    // The mistakes go to the error profile, like any other answer.
-    var toks = Scrivi.toks(text);
-    hard.forEach(function (f) {
-      var tk = toks[f.i] || {};
-      recordError({ cat: f.cat, target: f.msg.replace(/\*/g, "").slice(0, 80) }, tk.o || "");
-    });
+    // The mistakes go to the error profile, like any other answer: what was
+    // written, the correction and why (the common error object).
+    var task = Scrivi.TASKS[w.week] || {};
+    if (window.Errores) Errores.recordFindings(state, hard, text, { registro: task.reg || null });
+    else {
+      var toks = Scrivi.toks(text);
+      hard.forEach(function (f) { var tk = toks[f.i] || {}; recordError({ cat: f.cat, target: f.good || "", explain: f.why || f.msg }, f.bad || tk.o || ""); });
+    }
     // by the word (with a cap), by each structure asked and met, and clean (Engine.xpText)
     var xp = first ? (Engine.xpText ? Engine.xpText(r.words, (r.reqs || []).filter(function (q) { return q.ok && q.id; }).length, !hard.length)
                                     : 40 + Math.min(40, Math.floor(r.words / 5)) + (hard.length ? 0 : 20)) : 10;
@@ -6204,9 +6548,14 @@
         '<div class="diff"><span class="k">mal</span> ' + esc(it.bad) + ' <span class="k">→</span> ' +
         (it.good ? "<b class=\"fix\">" + esc(it.good) + "</b>" : "<i>(se borra)</i>") + "</div></div>";
     }
+    // the error of «Trova l'errore» as it is: the wrong words, the right ones, the why
+    var fixErr = function () {
+      return window.Errores ? Errores.make({ cat: it.cat, mal: it.bad, bien: it.good == null ? null : it.good, regla: it.note || "",
+                                             registro: "formal", label: label }) : { cat: it.cat, target: it.answer };
+    };
     function reveal() {
       markBad("missed");
-      recordError({ cat: it.cat, target: it.answer }, it.stem);
+      recordError(fixErr(), it.stem);
       settle("sbagliato", "", fixHtml());
     }
     function askFix() {
@@ -6225,7 +6574,7 @@
         // Other corrections that are just as right (fra/tra, para/pra…).
         var goods = [it.good].concat(it.goodAlt || []).filter(Boolean);
         var right = it.good === "" ? val === "" : window.Diagnosi &&
-          Diagnosi.diagnose(val, goods).verdict === Engine.VERDICT.RIGHT;
+          Diagnosi.diagnose(val, goods, { registro: "formal" }).verdict === Engine.VERDICT.RIGHT;
         if (right) {
           if (tries) markFixed(it.cat);
           settle(tries ? "quasi" : "giusto", val, fixHtml(),
@@ -6234,8 +6583,8 @@
         }
         tries++;
         if (tries === 1) {
-          recordError({ cat: it.cat, target: it.answer }, it.stem);
-          var d = it.good && window.Diagnosi ? Diagnosi.diagnose(val || "—", [it.good]) : null;
+          recordError(fixErr(), it.stem);
+          var d = it.good && window.Diagnosi ? Diagnosi.diagnose(val || "—", [it.good], { registro: "formal" }) : null;
           if (d && DV) DV.tidy(d);
           var closeTo = !DV || !it.good || !val || DV.near(val, goods, d);
           $("#fb").innerHTML = '<div class="feedback prompt"><div class="verdict">' + (closeTo ? "🔎 Casi." : "🔎 Todavía no.") + "</div><p>" +
@@ -6281,7 +6630,16 @@
     });
     on("#aicopy", function () {
       var txt = (state.aiNotes || []).map(function (n) {
-        return "[" + n.id + "] " + (n.prompt || "") + " | " + (n.stem || "") + " | yo: " + (n.given || "") + " | app: " + (n.answer || "") + " | IA: " + (n.ai || "");
+        return "[" + n.id + "] " + (n.kind ? "(" + n.kind + ") " : "") + (n.prompt || "") + " | " + (n.stem || "") + " | yo: " + (n.given || "") +
+          " | app: " + (n.answer || "") + (n.app ? " | la app dijo: " + n.app : "") + " | IA: " + (n.ai || "");
+      }).join("\n");
+      // what the AI already explained (the cache), so it can be reviewed and turned into content
+      var cached = window.Errores ? Errores.cacheAll().filter(function (c) { return c.kind === "hints" || c.kind === "explain" || c.kind === "judge"; }) : [];
+      if (cached.length) txt += "\n\n# Explicaciones de la IA guardadas (" + cached.length + ")\n" + cached.map(function (c) {
+        var v = c.v || {};
+        return "[" + c.kind + "] " + (c.q || "") + " | " + (v.explicacion || v.pista1 || "") +
+          (v.correcta != null ? " | correcta: " + v.correcta + ", mismo sentido: " + v.mismo_sentido : "") +
+          (v.tambien_correcta ? " | también correcta" : "");
       }).join("\n");
       var done = function () { toast("Copiadas " + (state.aiNotes || []).length + " correcciones."); };
       if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done, function () { prompt("Copiá:", txt); });
@@ -6562,6 +6920,16 @@
     gain: function (n, strand) { gain(n); if (strand && n) Engine.addStrand(state, strand, n); renderHeader(); },
     aiKey: aiKey, aiKeys: aiKeys, ui: function () { return UI; }, langName: function () { return UI.langEs; },
     screen: function () { return view.screen; },
+    // the task's errors go to the profile (the common error object of errores.js)
+    recordFindings: function (findings, text, reg) {
+      if (!window.Errores) return;
+      if (Errores.recordFindings(state, findings, text, { registro: reg || null }).length) persist();
+    },
+    recordRows: function (rows, reg) {
+      if (!window.Errores) return;
+      (rows || []).forEach(function (e) { Errores.record(state, Errores.fromRow(e[0], e[1], "", "ia", { registro: reg || null })); });
+      persist();
+    },
     show: function (sc) { view.screen = sc; render(); window.scrollTo(0, 0); },
     toWeek: function () { view.tab = "percorso"; view.screen = "briefing"; render(); window.scrollTo(0, 0); },
     openReading: function (id) { view.ep = id; view.epFrom = "briefing"; view.screen = "lettura"; render(); window.scrollTo(0, 0); }
@@ -6658,7 +7026,11 @@
   // The glossary is optional too: without it words are just not tappable.
   fetch(DATA("glossario.json"))
     .then(function (r) { return r.ok ? r.json() : null; })
-    .then(function (g) { glossario = g; })
+    .then(function (g) {
+      glossario = g;
+      // every word of the glossary exists for the diagnosis (not «no es una palabra»)
+      if (g && window.Diagnosi && typeof Diagnosi.addWords === "function") { try { Diagnosi.addWords(Object.keys(g)); } catch (e) { /* */ } }
+    })
     .catch(function () { /* sin glosario */ });
 
   // The frequency layer is optional too: without it, no coverage meter.
