@@ -345,5 +345,38 @@
       "risanato": "saneado",
       "tavolo permanente": "mesa de trabajo permanente"
     }
+  },
+  "breve": {
+    "title": "Riapre la spiaggia del lago",
+    "genre": "avviso pubblico",
+    "es": "Un comunicado de la municipalidad anuncia que la playa del lago vuelve a abrir y explica las reglas.",
+    "speaker": "Voce del Comune",
+    "voice": 0,
+    "text": [
+      "Comunicato del Comune di Vallombra. Si informano i cittadini che, a partire da sabato 3 giugno, la spiaggia del lago è di nuovo aperta alla balneazione. Le analisi dell'acqua, eseguite dall'Agenzia per l'ambiente nelle ultime quattro settimane, hanno dato risultati positivi.",
+      "La spiaggia sarà sorvegliata da un bagnino tutti i giorni dalle dieci alle diciannove. Il parcheggio del molo, invece, viene riservato ai residenti e alle persone con disabilità: tutti gli altri sono invitati a lasciare l'auto nel parcheggio della stazione, da cui parte una navetta gratuita ogni venti minuti.",
+      "È vietato portare cani sulla spiaggia e accendere fuochi sulle rive. I rifiuti vanno portati via o gettati negli appositi contenitori della raccolta differenziata. Chi non rispetta le regole può essere multato fino a duecento euro.",
+      "Per informazioni, rivolgersi all'Ufficio ambiente del Comune."
+    ],
+    "tabella": [
+      ["Giorno di riapertura della spiaggia", "3 giugno", ["sabato 3 giugno", "il 3 giugno", "tre giugno", "sabato"]],
+      ["Ora in cui finisce la sorveglianza del bagnino", "19", ["diciannove", "alle 19", "19:00", "19.00"]],
+      ["Ogni quanti minuti passa la navetta", "20", ["venti", "ogni 20 minuti", "ogni venti minuti"]],
+      ["Multa massima (euro)", "200", ["duecento"]]
+    ],
+    "info": [
+      ["Le analisi dell'acqua sono durate quattro settimane.", true],
+      ["Il parcheggio del molo è aperto a tutti.", false],
+      ["La navetta dalla stazione è gratuita.", true],
+      ["I cani possono stare sulla spiaggia al guinzaglio.", false],
+      ["È vietato accendere fuochi sulle rive.", true],
+      ["Il bagnino c'è solo nel fine settimana.", false]
+    ],
+    "gloss": {
+      "balneazione": "baño (en el mar, en el lago)",
+      "bagnino": "guardavidas",
+      "molo": "muelle",
+      "rive": "orillas"
+    }
   }
 }

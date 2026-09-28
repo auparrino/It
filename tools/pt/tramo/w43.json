@@ -47,7 +47,7 @@
       ["Segundo o texto, “Cordialmente” é o fecho mais adequado para escrever a um ministro.", "falso"]
     ],
     "hunt": {
-      "label": "Tocá las fórmulas de saludo, tratamiento y despedida de la correspondencia formal",
+      "label": "Toque nas fórmulas de saudação, tratamento e despedida da correspondência formal",
       "targets": ["prezado", "prezada", "prezados", "caro", "senhoria", "excelência", "senhor", "senhora", "venho", "respeitosamente", "atenciosamente", "cordialmente"]
     }
   },
@@ -116,13 +116,7 @@
     "es": "Mail formal a una autoridad académica con los datos del audio (proceso, firma pendiente, fecha de toma de posesión) y las convenciones de la lectura: asunto, Prezado, “o senhor”, Atenciosamente.",
     "min": 205,
     "max": 265,
-    "punti": [
-      ["Asunto y saludo formal", ["assunto", "prezado"]],
-      ["Identificarse y dar el número de proceso", ["0418", "processo"]],
-      ["Exponer los hechos (firma pendiente de la banca)", ["assinatura", "assinou", "banca"]],
-      ["Pedido con urgencia y adjunto", ["declaração", "posse", "anexo"]],
-      ["Cierre formal", ["atenciosamente", "respeitosamente"]]
-    ],
+    "punti": [["Asunto y saludo formal", ["assunto", "prezado"]], ["Identificarse y dar el número de proceso", ["0418", "processo"]], ["Exponer los hechos (firma pendiente de la banca)", ["assinatura", "assinou", "banca"]], ["Pedido con urgencia y adjunto", ["declaração", "posse", "anexo"]]],
     "model": "Assunto: Solicitação urgente de declaração de conclusão de mestrado – Processo 2026/0418\n\nPrezado Professor Rezende,\n\nMeu nome é Beatriz Andrade e defendi minha dissertação de mestrado neste Programa em março deste ano. Escrevo para solicitar, em caráter de urgência, a emissão de uma declaração de conclusão de curso.\n\nLogo após a defesa, dei entrada no pedido de diploma (processo nº 2026/0418) e entreguei toda a documentação exigida. Em contato telefônico com a secretaria, fui informada de que o processo está parado na etapa de homologação, pois um dos membros externos da banca ainda não assinou eletronicamente a ata de defesa. Já escrevi ao professor em questão, a quem expliquei a situação, e aguardo sua resposta.\n\nOcorre que fui aprovada em concurso público para professora de um instituto federal, e a posse está marcada para o dia 16 de outubro. Para assumir o cargo, preciso apresentar o diploma ou, no mínimo, uma declaração de conclusão. Segundo a secretaria, esse documento pode ser emitido mediante autorização da coordenação.\n\nDiante do exposto, solicito que o senhor autorize a emissão da declaração, a fim de que eu não perca a vaga. Envio em anexo o comprovante de aprovação no concurso, no qual consta a data da posse.\n\nAgradeço desde já a atenção e coloco-me à disposição para quaisquer esclarecimentos.\n\nAtenciosamente,\n\nBeatriz Andrade\nPrograma de Pós-Graduação em Letras\nTelefone: (31) 98765-4321",
     "gloss": {
       "dissertação de mestrado": "tesis de maestría",
@@ -133,6 +127,99 @@
       "concurso público": "concurso para un cargo del Estado",
       "a posse": "la toma de posesión del cargo",
       "a vaga": "el puesto, la vacante"
+    }
+  },
+  "breve": {
+    "title": "Recado da Secretaria Acadêmica",
+    "genre": "recado formal na caixa postal",
+    "es": "Un mensaje formal en el contestador: la secretaría de una universidad le avisa a Martín que su diploma está listo y cómo retirarlo.",
+    "speaker": "Sônia Albuquerque, da Secretaria",
+    "voice": 1,
+    "text": [
+      "Bom dia. Esta mensagem é para o senhor Martín Pérez. Aqui fala Sônia Albuquerque, da Secretaria Acadêmica da Universidade Federal de Minas Gerais.",
+      "Estou retornando o e-mail que o senhor nos enviou na segunda-feira sobre o seu diploma de mestrado. Informo que o diploma já foi registrado e está disponível para retirada aqui na secretaria, na sala 214 do prédio da reitoria.",
+      "O senhor pode retirá-lo pessoalmente, de segunda a sexta, das 9 às 16 horas, apresentando o passaporte. Caso prefira enviar outra pessoa, será necessária uma procuração com firma reconhecida em cartório. Se o senhor desejar receber o diploma pelo correio, o envio custa 38 reais e leva cerca de dez dias úteis.",
+      "Para qualquer dúvida, o senhor pode ligar para a secretaria, ramal 12. Tenha um bom dia."
+    ],
+    "tabella": [
+      [
+        "Sala onde se retira o diploma",
+        "214",
+        [
+          "sala 214",
+          "duzentos e catorze",
+          "duzentos e quatorze"
+        ]
+      ],
+      [
+        "Horário em que a secretaria fecha",
+        "16",
+        [
+          "16 horas",
+          "16h",
+          "quatro da tarde",
+          "16:00"
+        ]
+      ],
+      [
+        "Documento que Martín deve apresentar",
+        "passaporte",
+        [
+          "o passaporte"
+        ]
+      ],
+      [
+        "Custo do envio pelo correio (reais)",
+        "38",
+        [
+          "trinta e oito",
+          "38 reais",
+          "R$ 38"
+        ]
+      ],
+      [
+        "Prazo de entrega pelo correio (dias úteis)",
+        "10",
+        [
+          "dez",
+          "dez dias",
+          "10 dias",
+          "dez dias úteis"
+        ]
+      ]
+    ],
+    "info": [
+      [
+        "Martín tinha escrito um e-mail para a secretaria.",
+        true
+      ],
+      [
+        "O diploma ainda não foi registrado.",
+        false
+      ],
+      [
+        "Outra pessoa pode retirar o diploma com uma procuração.",
+        true
+      ],
+      [
+        "A secretaria atende também aos sábados.",
+        false
+      ],
+      [
+        "O diploma pode ser enviado pelo correio.",
+        true
+      ],
+      [
+        "O envio pelo correio é gratuito.",
+        false
+      ]
+    ],
+    "gloss": {
+      "retirada": "retiro",
+      "procuração": "poder (notarial)",
+      "firma reconhecida": "firma certificada",
+      "cartório": "escribanía",
+      "úteis": "hábiles"
     }
   }
 }

@@ -108,6 +108,21 @@ tu teléfono**. No usa cuentas ni servidores; la IA es opcional, con una clave g
   filosofía, sociología y literatura italianas: Dante, Maquiavelo, Galileo,
   Garibaldi, Gramsci, Primo Levi, el *boom* económico, Calvino, Beccaria y
   Natalia Ginzburg. Donde una frase famosa es apócrifa, el texto lo dice.
+  Desde la semana 27 se suman **24 tarjetas de *civiltà*** (`area:
+  "Civiltà"`, ids `cv-27` a `cv-51`), una por semana del tramo: cómo
+  funciona la vida en Italia para quien vive ahí. Escuela y universidad
+  (la triennale y el *trenta e lode*, el sistema escolar, la maturità),
+  sanidad (el SSN de 1978, el medico di base y la ricetta, el pronto
+  soccorso), trabajo (contrato y busta paga, sindicato y huelga), casa
+  (condominio, alquiler, residuos), fiestas (de Navidad a la Befana, las
+  sagre, Ferragosto), la mesa (el bar, el conto y el coperto), Estado y
+  política (Comune y Regione, el referendum, Camera y Senato, anagrafe,
+  SPID y PEC, el 112) y medios (la Rai y los diarios). Cada una tiene
+  120-140 palabras, va atada al campo léxico y a la gramática de su semana
+  (el SSN en passato remoto en la 37, la anagrafe con el causativo en la
+  40, el pronto soccorso con gerundios en la 44) y trae tres preguntas en
+  italiano y su caza de formas. `check_letture.py cv-` controla la
+  gramática y las palabras sin glosa (auditoría 3.0, D5.9).
 - Cada texto se abre en la semana cuya gramática usa (el episodio del
   imperfetto, en la 15; los de passato remoto, en la 37), así nunca leés
   antes de la teoría.
@@ -240,7 +255,7 @@ la voz del teléfono.
 oraciones de Common Voice (Mozilla, CC0) leídas por voluntarios distintos,
 revisadas a mano, con su semana. Suenan en el dictado y en «¿Qué forma
 escuchaste?»; el service worker las guarda la primera vez que suenan. Cómo
-se eligieron y cómo sumar más: `VOCES.md`.
+se eligieron y cómo sumar más: `tools/it/VOCES.md`.
 
 ### 📝 Dictogloss
 
@@ -263,6 +278,54 @@ palabras glosadas) y modo solo audio. Los minutos de escucha cuentan como
 input y suman xp. Con las lecturas ya hechas, *Ascolto facile* las
 reproduce una tras otra, solo audio, y se controla desde la pantalla de
 bloqueo (Media Session).
+
+### 📻 Radio Portici: una escucha por semana de la 6 a la 25
+
+Hasta el tramo C1 casi no había qué escuchar con contexto. Ahora, de la
+semana 6 a la 25 (sin el jefe de la 13), cada semana trae un episodio de
+**Radio Portici**, la radio del barrio en Bologna: Sara y Dario conducen
+«Buongiorno Portici» y llaman Martín (el de las lecturas: su hora en
+Rosario, la entrevista de trabajo en Módena, la oferta), la signora Franca y
+Leo, el cronista en bicicleta. Son 19 programas a dos voces, de 134 palabras
+en la 6 a 285 en la 25 (4.100 en total), cada uno con la gramática y las
+palabras de su semana (el presente irregular en la 6, el passato prossimo en
+la 11, *ne* y *ci* en la 21, el congiuntivo en la 24 y la 25).
+
+- Se escucha con el reproductor de las escuchas largas: dos voces del
+  teléfono, **dos escuchas con las preguntas a la vista**, 0,9× o 1× y la
+  **transcripción al final**; las glosas, antes de escuchar.
+- Tres preguntas de comprensión (en castellano hasta la 13, en italiano
+  desde la 14) y dos o tres **«¿lo dice o no lo dice?»**.
+- En el percorso es la misión **«📻 Radio: …»**, obligatoria: queda hecha con
+  60 % o al responder por segunda vez (como la lectura, con 70 % o releerla).
+  El plan del día la pone como bloque de input y los minutos escuchados
+  cuentan como input. En Leggi, la serie entera, plegada por estación.
+- `tools/it/check_radio.py` controla, como con las lecturas, que ni el guion
+  ni las preguntas en italiano usen gramática posterior a la semana y que
+  queden como mucho tres palabras desconocidas sin glosa;
+  `tools/lib/test_radio.js`, el largo, las voces, las preguntas, las formas y
+  palabras de la semana y que la transcripción sea el guion.
+
+### 📺 Fuori dalla app: una ficha por semana de la 6 a la 52
+
+La app no puede ser todo el input. Cada semana, desde la 6, trae una ficha
+**opcional** que manda afuera: entrevistas en la calle de *Easy Italian*, una
+receta de GialloZafferano, *Radio3 Scienza*, *Ulisse* de Alberto Angela, *Un
+posto al sole*, Montalbano, un cuento de Verga o de Pirandello, las clases de
+Barbero, y alguna canción (*Nel blu dipinto di blu*, *Azzurro*, *Caruso*).
+Cada ficha dice para qué sirve y cómo usarla, trae el enlace (se abre en otra
+pestaña; si se rompe, dice qué buscar), 6-8 palabras que vas a oír o leer con
+su glosa y tres preguntas para vos (en castellano hasta la 13, en italiano
+desde la 14).
+
+- **Anotás los minutos** con un toque (+5, +10, +20, +30): cuentan como
+  input en la meta del día, en el reloj de estudio y en los minutos de input
+  de la semana (120 por día como mucho; el último toque se puede deshacer).
+- **Después, contalo** en 40-60 palabras, con el corrector de Scrivi de la
+  semana y sin consigna obligatoria.
+- En el percorso es la misión **«📺 Fuori dalla app: …»**, opcional; en Leggi,
+  todas las fichas, plegadas por estación. Datos en
+  `docs/lang/it/fuera_data.js`; test en `tools/lib/test_fuera.js`.
 
 **Inondazioni**: doce textos de 150 a 230 palabras que repiten ocho veces o
 más una estructura que el español no tiene (*ne*, *ci*, *da* + tiempo,
@@ -395,14 +458,38 @@ aciertos.
 
 La semana 52 ya no es una ronda más: cinco pruebas como en el CILS TRE-C1,
 el CELI 4 y el PLIDA C1 (sin la parte oral), cada una con mínimo del 55 % y
-promedio del 60 %: **Ascolto** (una entrevista larga leída a dos voces, ocho
-preguntas y cuatro huecos), **Lettura** (un texto de 600 palabras con título
-por párrafo y vero/falso), **Strutture** (20 huecos racionales y
-transformaciones: *Sebbene fosse tardi → Pur essendo tardi*), **Lessico**
-(formación de palabras y registro) y **Scrittura** (argumentativo de 200
-palabras y carta formal de 120, calificados con la rúbrica de la
-certificación por la IA, o por el corrector propio sin clave). Datos en
-`docs/lang/it/esame_data.js` y `tools/it/authored/esame_c1.py`.
+promedio del 60 %, todo en italiano:
+
+- **Ascolto**, en dos partes. Un diálogo leído a dos voces con ocho
+  preguntas y cuatro huecos, y un monólogo de 4-5 minutos (una conferencia,
+  una presentación, un notiziario) con una tabla de 9 a 12 datos para
+  completar mientras se escucha. Cada grabación, dos veces. La tabla acepta
+  «quindici» por «15» y «alle 18» por «18:00» (`Tramo.cellOk`).
+- **Lettura**, en dos partes. Un texto de 600 palabras con título por
+  párrafo y vero/falso, y la *ricostruzione del testo*: seis párrafos con el
+  primero fijo y los otros cinco para ordenar (un punto por párrafo en su
+  lugar).
+- **Strutture**: 20 huecos racionales y transformaciones (*Sebbene fosse
+  tardi → Pur essendo tardi*).
+- **Lessico**: formación de palabras y registro.
+- **Scrittura**: un argumentativo de 250 palabras (230-280) y una carta
+  formal de 180 (160-200). Con clave, los califica la IA con la rúbrica de
+  la certificación. Sin clave, la revisión de la tarea C1 (`Tramo.evaluate`:
+  extensión, variedad léxica, estructura del género, conectores, errores),
+  que no aprueba un texto relleno.
+
+**Tres versiones** (A, B, C), cada una un examen entero con otro diálogo,
+otro monólogo, otra lectura, otro texto para ordenar, otras consignas y sus
+propios ítems de strutture y lessico. La primera vez toca la A; si no
+aprobás, el intento siguiente usa la versión que todavía no hiciste. La
+pantalla dice qué versión estás haciendo y cómo te fue en las otras.
+Después de aprobar, el plan de mantenimiento propone un simulacro cada tres
+meses con la versión siguiente. Se guarda en `state.esame`: la versión en
+curso y, por versión, las pruebas del intento y la mejor nota.
+
+Datos en `docs/lang/it/esame_data.js` (`EsameData.versioni`,
+`EsameData.versione(id)`) y `tools/it/authored/esame_c1.py` (los ítems,
+con `ver`).
 
 ### 🏦 El banco
 
@@ -479,6 +566,32 @@ probable que se borre. Igual, en *Io → Guardar copia* bajás (o compartís a D
 WhatsApp) un `.json` con todo tu progreso, y con *Restaurar copia* lo recuperás
 en otro teléfono.
 
+### Tu copia en otro teléfono: GitHub Gist (opcional)
+
+Para seguir en otro teléfono sin pasarte archivos y sin servidor de la app,
+en *Io → Tu copia → ☁️ Sincronizar con tu GitHub Gist* pegás un token
+personal de GitHub con permiso **solo de gist** (el enlace abre
+*github.com/settings/tokens/new* con «gist» ya marcado: elegís el
+vencimiento y tocás *Generate token*). Vale para los dos idiomas.
+
+- **Subir ahora**: la primera vez crea un gist **secreto** en tu cuenta,
+  con `laviac1.json` (el mismo sobre que *Guardar copia*: app, idioma,
+  versión, fecha y progreso) y un `LEEME.md`; después lo actualiza. Si otro
+  teléfono subió después de la última vez que este sincronizó, pregunta
+  antes de pisarla.
+- **Traer de la nube**: en el otro teléfono, con el mismo token, encuentra
+  el gist por el nombre del archivo, te dice si la copia es más nueva o más
+  vieja que lo que hay en el teléfono (con fecha y xp) y pregunta antes de
+  reemplazar; se restaura igual que un archivo (una copia de Rumo C1 no se
+  restaura en La Via C1).
+- **Subir sola al cerrar la app**: si la activás, al salir de la app sube
+  una vez por día como mucho, y solo si cambió algo. Si otro teléfono subió
+  una copia que este no trajo, no sube y te avisa en *Io*.
+
+El token queda solo en este teléfono, con las claves de IA, y nunca entra en
+la copia ni en el gist. Cómo funciona por dentro: `ARQUITECTURA.md`, «La
+copia en un GitHub Gist».
+
 ## Jugar en la computadora
 
 ```sh
@@ -553,10 +666,13 @@ Aparte están el **gimnasio de verbos** (conjugación generada al vuelo) y las
 cada uno una ronda corregida (elegir, completar varios blancos, traducir del
 español) con la regla explicada al responder; 80% o más gana su estrella.
 
-Cada semana trae además **📚 Palabras de la semana** (9 a 15 palabras nuevas,
-no transparentes, sacadas de sus propios ejercicios, con audio y una frase de
-ejemplo): primero elegís qué significan, después las escribís; quedan en el
-ripasso con repetición espaciada. En *Oggi* ves cuántas palabras practicaste
+Cada semana trae además **📚 Palabras de la semana** (12 en las semanas 1-4,
+19 o 20 desde la 5; ninguna en las de jefe), elegidas a mano por el campo de la
+semana y rescatadas de sus lecturas, con audio, una frase de ejemplo que usa
+solo la gramática ya vista y una nota de uso (régimen, auxiliar, colocación,
+falso amigo): primero elegís qué significan, después las escribís; quedan en el
+ripasso con repetición espaciada. Están en `tools/it/bank/parole_settimana.py`
+(1-4), `parole_ponte.py` (5-25) y `parole_c1.py` (27-51). En *Oggi* ves cuántas palabras practicaste
 contra la meta del trimestre (2.000 en el primero).
 
 **Reconocer antes de producir**: la primera vez que aparece un ejercicio de
@@ -647,8 +763,8 @@ Una semana cargada no se estudia de una sentada. Las semanas 1, 2, 3, 5, 6,
 50 y 51 tienen la lección dividida en **partes** (dos a seis), cada una con sus propios bloques de teoría y sus propios ejercicios.
 La semana 3, los artículos, tiene seis: *Género y el, la*, *lo, gli y el
 plural*, *Indeterminados*, *Dónde va el artículo (y dónde no)*,
-*Preposiciones articuladas* y *Partitivo y cantidades*, con dos o tres
-bloques por parte y dos o tres chequeos después de cada bloque. En el
+*Preposiciones articuladas* y *Partitivo y cantidades*, con uno a tres
+bloques por parte (14 en total: el apóstrofo del indeterminado, la tabla sin mirar y el negativo del partitivo se juntaron con el bloque vecino, como trampa o como «Más detalle») y dos o tres chequeos después de cada bloque. En el
 percorso cada parte es una misión («Lección 3/6: Indeterminados»), y «A
 entrenar esta parte» arma una ronda **solo** con los ejercicios de esa
 parte: sin gimnasio de verbos, sin repaso de otras semanas y sin palabras
@@ -709,6 +825,24 @@ podés ver un texto modelo. Lo que entregás cuenta como **output** en las
 cuatro cuerdas, suma xp y los errores van al perfil de la clínica. La misión
 es obligatoria para abrir la semana siguiente: es el único lugar del curso
 donde escribís sin respuesta cerrada.
+
+**Tareas situadas desde la semana 8 (v3.1).** Hasta el tramo, Scrivi pedía
+«contá tu fin de semana» sin nadie del otro lado. De la 8 a la 25 las
+consignas son ahora tareas de 40 a 80 palabras con **destinatario y
+propósito**, como la tarea del tramo en chico (auditoría 3.0, A-nucleo E9;
+el portugués ya lo tenía): un mensaje de bienvenida a un compañero nuevo con
+cinco preguntas (8), cómo llegar de la estación a tu casa (9), una nota en
+la heladera para el compañero que llega tarde (12), un mensaje a la futura
+compañera de departamento sobre tus gustos (14), el relato para una revista
+de extranjeros (15), un mail al hotel de Florencia (20), las compras del
+mercado por WhatsApp con *ne* y *ci* (21), el consejo a un amigo que no sabe
+si mudarse a Milán o a Bolonia (23), el mail a la responsable de personal
+sobre el trabajo desde casa (25). **Desde la 14 la consigna va en
+italiano.** Las estructuras de la semana siguen siendo el criterio que se
+tilda; cada modelo cumple la consigna sin marcas del corrector y no usa
+gramática posterior a su semana (`tools/it/sillabo.py`), y
+`tools/it/test_scrivi.js` controla el largo (mínimo 40-55, modelo de hasta
+80 palabras) y que desde la 14 la consigna esté en italiano.
 
 **Segunda opinión de LanguageTool.** Al revisar, la app también manda el
 texto a la API pública y gratuita de LanguageTool (sin clave; unas 20
@@ -816,38 +950,42 @@ estudiante comete de verdad.
 
 ## Estructura del repo
 
+El núcleo es común a los dos idiomas; lo del italiano está en su paquete y en
+sus herramientas. El mapa completo está en [ARQUITECTURA.md](ARQUITECTURA.md),
+y dónde va cada cosa que se escribe (ítems, lecciones, lecturas, frases,
+tramo C1) y qué test la controla, en [CONTENIDO.md](CONTENIDO.md).
+
 ```
-docs/                 el juego (sitio estático, listo para GitHub Pages)
-  index.html
-  css/app.css
-  manifest.webmanifest, sw.js, icons/   app instalable y sin conexión
-  js/conjugator.js    motor de conjugación italiano
-  js/engine.js        corrección, SRS, XP, meta diaria, racha y escudos, cofre, guardado
-  js/frasi.js         banco de frases de conversación y sus ejercicios
-  js/lab.js           laboratorio: cognados (Ponte), falsos amigos, input estructurado (Capire)
-  js/letture.js       lecturas graduadas: Martín a Bologna y Cultura
-  js/diagnosi.js      diagnóstico de errores: categoría, pista y explicación
-  js/banca.js         ejercicios generados desde el banco, y la Clínica
-  data/bank.json      banco compilado (palabras, oraciones, errores, interferencias)
-  js/drills.js        generación de rondas, bosses, repaso, pausa y lampo
-  js/app.js           interfaz
-  data/course.json    curso completo compilado
-tools/
-  extract_dummies.py     EPUB -> banco auto-corregible
-  extract_routledge.py   EPUB -> temario + desafíos
-  build_course.py        arma docs/lang/it/data/course.json
-  sillabo.py             desde qué semana se puede pedir cada ejercicio
-  lessico.py             desde qué semana se conoce cada palabra; glosario
-  check_lessons.py       formato y sillabo de la teoría
-  forms_lexicon.js       léxico de formas verbales para el sillabo
-  authored/              banco de ítems propios (Python legible)
-  lessons/               teoría de las 52 semanas (s1..s4, una por estación)
-  test_conjugator.js     1.442 comprobaciones de formas verbales
-  test_game.js           ~21.500 comprobaciones de datos y lógica
-  test_frasi.js          ~24.000 comprobaciones de frases, laboratorio, lecturas, pausa, racha y cofre
-  test_diagnosi.js       mete ~1.600 errores típicos en las oraciones del banco y verifica el diagnóstico
-  build_bank.py          valida y compila el banco
+docs/                    el juego (sitio estático, listo para GitHub Pages)
+  index.html, sw.js, manifest.webmanifest, css/, icons/, fonts/
+  js/                    el núcleo: boot, engine, drills, lezione, banca, frasi,
+                         lab, letture, suoni, voci, biblioteca, tramo, app…
+  lang/it/               el paquete del italiano
+    lang.js, rules.js    textos de la interfaz y reglas del idioma
+    conjugator.js        motor de conjugación
+    diagnosi.js          diagnóstico de errores: categoría, pista y explicación
+    scrivi.js            la escritura libre y su corrector
+    *_data.js            frases, laboratorio, lecturas, sonidos, dictogloss,
+                         examen, tramo C1…
+    data/                course.json, bank.json, glossario.json, frequenza.json
+                         (los compila tools/it)
+    biblioteca/          los libros de dominio público (tools/lib/build_biblioteca.js)
+    audio/               voces reales (tools/it/VOCES.md)
+tools/it/
+  build_bank.py          valida y compila el banco (bank/ → data/bank.json)
+  build_course.py        arma data/course.json con authored/, lessons/ y fuentes/
   bank/                  el banco en Python legible
+  authored/              ítems propios por tema
+  lessons/               la teoría de las 52 semanas (s1..s4, una por estación)
+  tramo/                 lecturas, escuchas y tareas largas de las semanas 27-51
+  radio/                 Radio Portici: un episodio por semana, de la 6 a la 25
+  fuentes/               extractos de los dos manuales y sus parches (no se publican)
+  sillabo.py, lessico.py desde qué semana se puede pedir cada ejercicio y cada palabra
+  check_lessons.py, check_letture.py, check_radio.py   formato y sillabo de la teoría, las lecturas y la radio
+  test_*.js              los tests del italiano (npm run test:it)
+  audit/                 la auditoría de contenido por pasadas (su README)
+tools/lib/               lo común: pack.js, sim_carriera.js, build_tramo.js, build_radio.js,
+                         build_biblioteca.js, smoke_browser.js y los test_*.js
 ```
 
 ## Cómo se acomoda a los cursos oficiales
@@ -890,17 +1028,21 @@ romper su orden gramatical:
 Los `.epub` no están en el repo. Con tus propias copias:
 
 ```sh
-python3 tools/it/extract_dummies.py   ruta/al/dummies.epub   docs/lang/it/data/bank_dummies.json
-python3 tools/it/extract_routledge.py ruta/al/soluzioni.epub docs/lang/it/data/bank_routledge.json
+python3 tools/it/extract_dummies.py   ruta/al/dummies.epub   tools/it/fuentes/bank_dummies.json
+python3 tools/it/extract_routledge.py ruta/al/soluzioni.epub tools/it/fuentes/bank_routledge.json
 python3 tools/it/build_course.py
 ```
+
+Los extractos quedan en `tools/it/fuentes/`, fuera de `docs/`: los usa el build
+pero no se publican.
 
 ## Tests
 
 ```sh
+npm test            # todo: italiano, portugués, lo común y los chequeos de contenido
 npm run test:it     # los siete juegos de tests del italiano
-npm run build       # recompila el banco y el curso
-npm run sim         # la carrera simulada de un año
+npm run build       # recompila el banco, el curso, el tramo y la Biblioteca
+npm run sim         # la carrera simulada de un año (falla si una semana no se domina)
 ```
 
 | Test | Qué comprueba |
@@ -913,9 +1055,9 @@ npm run sim         # la carrera simulada de un año
 | `tools/it/test_memoria.js` | FSRS, mantenimiento, noche y mañana, hipercorrección, registro, velocidad, calibración, hábito |
 | `tools/it/test_suoni.js` | datos de escucha, sesiones de Suoni, dictogloss, capa de frecuencia, examen, inundaciones |
 
-GitHub Actions (`.github/workflows/test.yml`) corre todo en cada push y
-comprueba que `docs/lang/it/data` esté al día con `tools/it/` y que la versión del
-service worker coincida con la de la app.
+GitHub Actions (`.github/workflows/test.yml`) corre todo en cada push: los
+tests, el lint, la simulación, la prueba de humo en Chromium y que `docs/`
+entero esté al día con `tools/` (detalle en [CONTENIDO.md](CONTENIDO.md)).
 
 ## Dos advertencias honestas
 
@@ -998,3 +1140,21 @@ largo del CILS y el CELI:
   `tools/lib/test_tramo.js` controla que las falsas alarmas no vuelvan a
   subir y `test_scrivi.js`, que los errores reales se sigan detectando.
 
+## Las capas: Input, Práctica, Referencia
+
+Cada pestaña es una capa. **Leggi** es el input: arriba lo de esta semana (la
+lectura y la escucha pendientes, el capítulo recomendado de la Biblioteca y
+los minutos leídos y escuchados en 7 días), después Historias, La semana,
+Lecturas largas, Escuchas y Biblioteca, plegadas por estación con la actual
+abierta, y la velocidad de lectura: cada lectura se cronometra sola y cuenta
+si después entendiste el 70 % o más, con la curva del año y los textos para
+releer contra el reloj. **Allena** es la práctica, con el mismo patrón.
+**Consultar** es la referencia: un diccionario del curso (glosa, semana,
+nivel y frecuencia, la forma verbal, combinaciones y usos reales ya leídos),
+Mi gramática (también lo que todavía no llegó, con aviso), Palabra por
+palabra, los mapas de preposiciones, las fórmulas fijas y los contrastes de
+Tres lenguas. En el percorso aparecen, opcionales, «Leé un capítulo» de la
+Biblioteca y «Tres vueltas». Qué hace cada módulo (Escritura guiada,
+Variaciones, C-test, Ordená, Tres vueltas, Reformulación, Mapas, Ubicación,
+Mi gramática, Desglose, Tres lenguas, Frecuencia): `ARQUITECTURA.md`, «Las
+capas y los módulos».

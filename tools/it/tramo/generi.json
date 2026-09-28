@@ -1,7 +1,7 @@
 {
   "series": { "id": "lunga", "name": "Letture lunghe", "emoji": "📰",
     "blurb": "De la semana 27 en adelante, un texto largo por semana (de 350 a 900 palabras) de un género real, con preguntas en italiano como en el CILS y el CELI." },
-  "names": { "ascolto": "Ascolti lunghi" },
+  "names": { "ascolto": "Ascolti lunghi", "breve": "Ascolti brevi" },
   "GENRES": {
     "lettera_formale": { "name": "Lettera formale", "paragraphs": 3,
       "open": ["\\b(gentile|gentili|egregio|egregia|spettabile|spett\\.le|alla cortese attenzione|all'attenzione)\\b"],

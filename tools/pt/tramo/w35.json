@@ -47,7 +47,7 @@
       ["Neide pretende se aposentar nos próximos meses.", "falso"]
     ],
     "hunt": {
-      "label": "Tocá los verbos cuya regencia exige atención (assistir a, obedecer a, visar a, namorar alguém, confiar em…)",
+      "label": "Toque nos verbos cuja regência exige atenção (assistir a, obedecer a, visar a, namorar alguém, confiar em…)",
       "targets": ["assiste", "obedecer", "depender", "preferia", "aspira", "visa", "implica", "simpatiza", "namora", "confiava", "gostam", "pensa"]
     }
   },
@@ -111,18 +111,102 @@
     "es": "Carta de lector formal: tiene que citar el perfil del diario, usar al menos dos ideas del texto, contar una experiencia propia y opinar. Cuidá la regencia (assistir a, recorrer a, obedecer a, concordar com).",
     "min": 165,
     "max": 225,
-    "punti": [
-      ["Identificar el texto comentado", ["despachantes", "perfil", "reportagem", "matéria"]],
-      ["Retomar al menos dos ideias o testimonios del texto", ["neide", "menezes", "juliana", "rodrigo", "aplicativo"]],
-      ["Contar una experiencia personal con trámites", ["cartório", "fila", "document", "processo"]],
-      ["Opinar sobre el futuro frente a la digitalización", ["digital", "futuro", "tecnologia"]]
-    ],
+    "punti": [["Identificar el texto comentado", ["despachantes", "perfil", "reportagem", "matéria"]], ["Retomar al menos dos ideias o testimonios del texto", ["neide", "menezes", "juliana", "rodrigo", "aplicativo"]], ["Contar una experiencia personal con trámites", ["cartório", "fila", "document", "processo"]], ["Opinar sobre el futuro frente a la digitalización", ["digital", "futuro"]]],
     "model": "Prezados editores,\n\nLi com grande interesse o perfil “Despachantes: os tradutores da burocracia”, publicado na última edição, e gostaria de acrescentar o ponto de vista de quem já dependeu desses profissionais.\n\nNo ano passado, precisei regularizar o apartamento que meus pais me deixaram. Assisti a uma verdadeira maratona: três idas ao cartório, duas filas intermináveis e um documento recusado porque faltava uma firma reconhecida. Só consegui concluir o processo quando recorri a uma despachante, que, assim como a senhora Neide, sabia exatamente a que regra obedecer e em que ordem agir.\n\nConcordo com o texto quando afirma que o aplicativo resolve apenas o simples. Também me pareceu justo o argumento de Carlos Menezes: não se deve confundir o profissional sério com o intermediário informal que oferece atalhos na porta das repartições.\n\nNo entanto, discordo do otimismo absoluto de Neide. A digitalização não vai eliminar a profissão, mas vai transformá-la, como mostra o exemplo de Juliana Prado. O despachante do futuro será menos um especialista em filas e mais um orientador que explica ao cidadão aquilo que o Estado insiste em complicar.\n\nAtenciosamente,\n\nMariana Lopes\nCampinas (SP)",
     "gloss": {
       "Despachantes": "gestores: los que hacen trámites por otros",
       "idas ao cartório": "idas al registro, a la escribanía",
       "firma reconhecida": "firma certificada por escribano",
       "repartições": "oficinas públicas"
+    }
+  },
+  "breve": {
+    "title": "Central de atendimento do Detran",
+    "genre": "mensagem automática de central de atendimento",
+    "es": "El mensaje grabado de la central de la oficina de tránsito de Río: horarios, teclas para cada trámite y una novedad sobre la inspección de vehículos.",
+    "speaker": "Voz gravada",
+    "voice": 1,
+    "text": [
+      "Olá! Você ligou para a central de atendimento do Detran do Rio de Janeiro. Esta ligação pode ser gravada. Atendemos de segunda a sexta, das 8 às 17 horas.",
+      "Se você precisa de informações sobre a primeira habilitação, digite 1. Se quer agendar a renovação da carteira de motorista, digite 2. Para consultar multas e pagar o boleto, digite 3. Para falar com um atendente, digite 9.",
+      "Atenção: a partir do dia 10, a vistoria de veículos só será feita com hora marcada. Não se esqueça do documento do carro e do comprovante de pagamento da taxa, que custa 234 reais. Quem chegar mais de 15 minutos atrasado vai precisar marcar outro dia.",
+      "Você também pode resolver quase tudo pelo aplicativo, sem sair de casa. Por favor, aguarde: em breve você será atendido."
+    ],
+    "tabella": [
+      [
+        "Horário em que a central fecha",
+        "17",
+        [
+          "17 horas",
+          "17h",
+          "cinco da tarde",
+          "17:00"
+        ]
+      ],
+      [
+        "Tecla para renovar a carteira de motorista",
+        "2",
+        [
+          "dois"
+        ]
+      ],
+      [
+        "Tecla para falar com um atendente",
+        "9",
+        [
+          "nove"
+        ]
+      ],
+      [
+        "Valor da taxa da vistoria (reais)",
+        "234",
+        [
+          "duzentos e trinta e quatro",
+          "R$ 234",
+          "234 reais"
+        ]
+      ],
+      [
+        "Tolerância de atraso na vistoria (minutos)",
+        "15",
+        [
+          "quinze",
+          "15 minutos"
+        ]
+      ]
+    ],
+    "info": [
+      [
+        "A central não atende nos fins de semana.",
+        true
+      ],
+      [
+        "As multas só podem ser pagas no banco.",
+        false
+      ],
+      [
+        "A vistoria vai precisar de agendamento.",
+        true
+      ],
+      [
+        "A vistoria é gratuita para carros novos.",
+        false
+      ],
+      [
+        "Muitos serviços podem ser feitos pelo aplicativo.",
+        true
+      ],
+      [
+        "Quem se atrasar pode fazer a vistoria no mesmo dia.",
+        false
+      ]
+    ],
+    "gloss": {
+      "habilitação": "registro de conducir",
+      "vistoria": "inspección técnica (como la VTV)",
+      "boleto": "boleta de pago",
+      "digite": "marcá (en el teclado)",
+      "multas": "multas"
     }
   }
 }

@@ -173,6 +173,8 @@ fx(W, 1, "ortografia", "Bom dia, señor!", "señor", "senhor",
 gd(W, 1, [["España", "Espanha"], ["señor", "senhor"], ["montaña", "montanha"]], "año → ___", "ano", "anho",
    "La ñ suele pasar a nh, pero año es ano, con n simple (igual que dano, pano). "
    "No todas las ñ del español tienen nh en portugués.")
+# Como mitad → metade: la excepción va en la semana 3, con Ponte (conserva su id, s1-01-41).
+ITEMS[-1].update(w=3, part=2)
 gd(W, 1, [["ciudad", "cidade"], ["verdad", "verdade"], ["universidad", "universidade"]], "mitad → ___", "metade", "mitade",
    "-dad → -dade, pero la raíz también cambia: mitad es metade, con e. Mirá la palabra entera, no solo el final.")
 # La regla -dad → -dade la presenta Ponte en la semana 3: esta excepción va
@@ -573,8 +575,8 @@ ch(W, 2, "Sou ___.", ["engenheira", "uma engenheira", "a engenheira"], "engenhei
    "La profesión con ser va sin artículo: sou engenheira.", prompt="«Soy ingeniera.»")
 ch(W, 2, "Trabalho num ___.", ["escritório", "oficina", "ofício"], "escritório",
    "Falso amigo: *escritório* es la «oficina» de trabajo; *oficina* es el «taller mecánico». Trabajás *num escritório*.", prompt="«Trabajo en una oficina.»")
-ch(W, 2, "Eu ___ cedo.", ["acordo", "me acordo", "acorda"], "acordo",
-   "Acordar = despertarse, sin pronombre: eu acordo cedo.", prompt="«Me despierto temprano.»")
+ch(W, 2, "Eu ___ cedo.", ["acordo", "despierto", "acorda"], "acordo",
+   "Acordar = despertarse, sin pronombre: eu acordo cedo. *Despierto* es español.", prompt="«Me despierto temprano.»")
 ch(W, 2, "Eu ___ ao meio-dia.", ["almoço", "almorzo", "almoça"], "almoço",
    "almoçar → eu almoço, con ç.", prompt="«Almuerzo al mediodía.»")
 ch(W, 2, "___ noite a gente janta em casa.", ["À", "A", "Na"], "À",
@@ -985,8 +987,8 @@ ch(W, 0, "Eles moram ___ Argentina.", ["na", "em", "a"], "na",
    "A Argentina lleva artículo: na Argentina.")
 ch(W, 0, "Estou ___ Portugal.", ["em", "no", "na"], "em",
    "Portugal va sin artículo: em Portugal (pero no Brasil).")
-ch(W, 0, "Vou ___ praia.", ["à", "em", "á"], "à",
-   "*Ir a* + *a praia* se funde en *vou à praia*, con acento grave (*crase*). En el habla se oye mucho *vou pra praia*.")
+ch(W, 0, "Vou ___ padaria.", ["à", "em", "á"], "à",
+   "*Ir a* + *a padaria* se funde en *vou à padaria*, con acento grave (*crase*). En el habla se oye mucho *vou pra padaria*.")
 ch(W, 0, "Vou ___ Salvador no verão, para morar lá.", ["para", "em", "de"], "para",
    "ir para: destino donde te quedás. ir a: visita corta.")
 ch(W, 0, "Chegamos ___ Rio às oito.", ["ao", "no", "para o"], "ao",
@@ -1430,8 +1432,8 @@ ch(W, 1, "A gente ___ no Rio.", ["mora", "moramos", "moram"], "mora",
    "a gente + tercera del singular.")
 ch(W, 1, "Ontem eles ___ aqui em casa.", ["vieram", "viram", "vinieram"], "vieram",
    "vir → vieram (vinieron); viram es de ver.", prompt="«Ayer vinieron a casa.»")
-ch(W, 1, "Amanhã eu ___ viajar.", ["vou", "vou a", "voy"], "vou",
-   "ir + infinitivo sin «a».")
+ch(W, 1, "Na sexta nós ___ jantar fora.", ["vamos", "vamos a", "imos"], "vamos",
+   "ir + infinitivo sin «a»: vamos jantar.")
 ch(W, 2, "A casa ___ é linda.", ["dela", "de ela", "sua"], "dela",
    "«De ella» es *dela*, detrás del sustantivo: *a casa dela*. *Sua* se entendería «tu» (de *você*).", prompt="«La casa de ella es linda.»")
 ch(W, 2, "___ lindas", ["muito", "muitas", "muy"], "muito",

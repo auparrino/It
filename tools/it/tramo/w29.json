@@ -115,5 +115,38 @@
       "navette": "combis, servicios de traslado",
       "sgravi fiscali": "rebajas de impuestos"
     }
+  },
+  "breve": {
+    "title": "Le previsioni del tempo per domani",
+    "genre": "previsioni del tempo",
+    "es": "El pronóstico del tiempo de un canal nacional para el viernes y el fin de semana.",
+    "speaker": "Meteorologa",
+    "voice": 1,
+    "text": [
+      "Buonasera, ecco le previsioni del tempo per domani, venerdì. Sembra che la perturbazione atlantica sia arrivata con qualche ora di anticipo: al Nord, fin dal mattino, cielo coperto e piogge diffuse, soprattutto in Liguria e in Piemonte, dove non si escludono temporali anche forti.",
+      "Al Centro la giornata comincerà con qualche nuvola, ma le piogge arriveranno solo in serata sulla Toscana e sull'Umbria. Sulle coste tirreniche vento forte di libeccio, con raffiche fino a sessanta chilometri orari: mare molto mosso.",
+      "Al Sud e sulle isole, invece, tempo ancora soleggiato e caldo, con massime fino a trentadue gradi in Sicilia. Temperature in calo al Nord, di cinque o sei gradi rispetto a oggi.",
+      "Per il fine settimana il tempo migliora da sabato pomeriggio, a partire dal Nord-ovest; domenica sole quasi ovunque. Vi consigliamo di controllare gli avvisi della protezione civile prima di mettervi in viaggio. Buona serata."
+    ],
+    "tabella": [
+      ["Nome del vento sulle coste tirreniche", "libeccio", []],
+      ["Velocità delle raffiche (km/h)", "60", ["sessanta"]],
+      ["Temperatura massima in Sicilia (gradi)", "32", ["trentadue"]],
+      ["Giorno in cui il tempo comincia a migliorare", "sabato", ["sabato pomeriggio", "da sabato", "da sabato pomeriggio"]]
+    ],
+    "info": [
+      ["La perturbazione è arrivata prima del previsto.", true],
+      ["Al Centro piove già dal mattino.", false],
+      ["Il mare sulle coste tirreniche sarà molto mosso.", true],
+      ["Al Sud le temperature scendono di cinque o sei gradi.", false],
+      ["Domenica ci sarà il sole quasi ovunque.", true],
+      ["La protezione civile ha chiuso le autostrade.", false]
+    ],
+    "gloss": {
+      "perturbazione": "frente de mal tiempo",
+      "raffiche": "ráfagas",
+      "mosso": "picado (el mar)",
+      "soleggiato": "soleado"
+    }
   }
 }

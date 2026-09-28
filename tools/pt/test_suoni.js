@@ -14,8 +14,7 @@ var Dg = ctx.DictoglossData;
 var S = ctx.Suoni;
 var V = ctx.Voci;
 var CV = ctx.VociCV;
-var fails = 0, checks = 0;
-function ok(cond, what) { checks++; if (!cond) { fails++; console.log("FAIL " + what); } }
+var T = require("../lib/testkit.js")("pt"), ok = T.ok;
 function optional(name, fn) {
   try { fn(); } catch (e) { console.log("aviso: " + name + " sin probar (" + e.message + ")"); }
 }
@@ -155,7 +154,7 @@ Dg.TESTI.forEach(function (t) {
   ok(!/\b(idéia|vôo|lingüiça|pára|pêlo|heróico|assembléia|européia|jóia)\b/i.test(t.text), "ortografía del Acuerdo de 1990: " + t.week);
 });
 ok(S.dgFor(13) === null && S.dgFor(26) === null && S.dgFor(39) === null && S.dgFor(11), "semanas de jefe sin texto");
-ok(S.chunkFound("a gente se vê amanhã", "a gente se vê logo amanhã") && !S.chunkFound("a gente se vê amanhã", "amanhã a gente se vê"), "orden y ventana");
+ok(S.chunkFound("a gente se vê amanhã", "a gente se vê logo amanhã") && S.chunkMatch("a gente se vê amanhã", "amanhã a gente se vê") === "variant" && !S.chunkFound("a gente se vê amanhã", "olá, tudo bem"), "orden y ventana: en otro orden cuenta, con el bloque original a la vista");
 ok(S.chunkFound("caça", "caca") && S.chunkFound("pau-brasil", "pau brasil") && S.chunkFound("não sei, não", "Não sei não"), "sin tildes, ç, guiones ni comas");
 ok(S.chunkFound("tinha percebido", "tinha percebdo"), "un error de tipeo perdonado en palabras largas");
 
@@ -173,5 +172,4 @@ optional("frequenza", function () {
   for (var q = 0; q < 30; q++) { var ps = F.pseudo("janela"); ok(ps && ps !== "janela" && !F.info(ps), "pseudopalabra: " + ps); }
 });
 
-console.log("controles: " + checks + "   errores: " + fails);
-process.exit(fails ? 1 : 0);
+T.done("");

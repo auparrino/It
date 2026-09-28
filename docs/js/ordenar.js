@@ -14,10 +14,11 @@
  * pistas son del paquete (ESCRITOS_DATA.clues, .refer).
  *
  * API (window.Ordenar y module.exports):
- *   build(text, opts)     {unit: "párrafos" | "oraciones", units: [texto],
+ *   build(text, opts)     {unit: "párrafos" | "oraciones" | opts.unit, units: [texto],
  *                         shuffled: [índice], anchor: 0} o null
  *   grade(units, order)   {pairs, of, pct, inPlace: [bool], ok}
  *   clues(unit)           [{at, end, word, hint, kind}] las pistas marcables
+ *   level(week)           {maxPars, maxSent}: más piezas a medida que avanza el curso
  */
 (function (root) {
   "use strict";
@@ -52,8 +53,12 @@
     var pars = String(text).split(/\n+/).map(function (p) { return p.trim(); }).filter(Boolean);
     var units, unit;
     var maxPars = opts.maxPars || 6, maxSent = opts.maxSent || 6;
-    if (pars.length >= 4 && pars.length <= maxPars) { units = pars; unit = "párrafos"; }
-    else if (pars.length > maxPars && !opts.sentences) { units = pars.slice(0, maxPars); unit = "párrafos"; }
+    if (pars.length >= 4 && pars.length <= maxPars) { units = pars; unit = opts.unit || "párrafos"; }
+    else if (pars.length > maxPars && !opts.sentences) {
+      // a long text: a run of consecutive paragraphs (opts.from, or the start)
+      var from = Math.max(0, Math.min(pars.length - maxPars, opts.from || 0));
+      units = pars.slice(from, from + maxPars); unit = opts.unit || "párrafos";
+    }
     else {
       var ss = sentences(text).filter(function (s) { return s.split(/\s+/).length >= 3; });
       units = bestWindow(ss, maxSent); unit = "oraciones";
@@ -116,7 +121,14 @@
     return found.sort(function (a, b) { return a.at - b.at; });
   }
 
-  var api = { build: build, grade: grade, clues: clues, shuffle: shuffle };
+  // More pieces as the course goes on: 4 → 8.
+  function level(week) {
+    week = +week || 1;
+    var n = week < 14 ? 4 : week < 27 ? 5 : week < 40 ? 6 : 8;
+    return { maxPars: n, maxSent: n };
+  }
+
+  var api = { build: build, level: level, grade: grade, clues: clues, shuffle: shuffle };
   if (typeof module === "object" && module.exports) module.exports = api;
   root.Ordenar = api;
 })(typeof window !== "undefined" ? window : globalThis);

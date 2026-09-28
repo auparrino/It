@@ -46,7 +46,7 @@
       ["Segundo Tiago, quinhentos assinantes bastariam para sustentar o site.", "verdadeiro"]
     ],
     "hunt": {
-      "label": "Tocá los verbos que introducen el discurso indirecto",
+      "label": "Toque nos verbos que introduzem o discurso indireto",
       "targets": ["contou", "explicou", "perguntei", "respondeu", "afirmou", "acrescentou", "lembrou", "perguntamos"]
     }
   },
@@ -107,13 +107,7 @@
     "es": "Un resumen objetivo: sin opinión personal, con las ideas principales en orden y las declaraciones pasadas a discurso indirecto (disse que…, afirmou que…, explicou que…).",
     "min": 143,
     "max": 203,
-    "punti": [
-      ["Presentar el reportaje y el diario", ["correio do vale", "semanário", "jornal"]],
-      ["Explicar los desertos de notícias", ["deserto"]],
-      ["El episodio del agua", ["água", "contaminada", "boato"]],
-      ["Posiciones de Marlene y Tiago", ["tiago", "filho", "digital", "site"]],
-      ["Discurso indirecto", ["afirmou que", "disse que", "explicou que", "segundo", "contou que"]]
-    ],
+    "punti": [["Presentar el reportaje y el diario", ["correio do vale", "semanário", "jornal"]], ["Explicar los desertos de notícias", ["deserto"]], ["El episodio del agua", ["água", "contaminada", "boato"]], ["Posiciones de Marlene y Tiago", ["tiago", "filho", "digital", "site"]], ["Discurso indirecto", ["afirmou que", "disse que", "explicou que", "segundo", "contou que"]]],
     "model": "A reportagem “O último jornal de papel do vale” conta a história do Correio do Vale, semanário fundado em 1974 e hoje o único veículo de imprensa de seis municípios do sul da Bahia. A jornalista Marlene Andrade, filha do fundador, explicou que a tiragem tinha caído de oito mil para pouco mais de mil exemplares e que a publicidade mal cobria os custos. Ela admitiu que pensava em fechar o jornal todos os dias.\n\nO texto relaciona o caso aos chamados desertos de notícias, municípios sem cobertura jornalística local. Segundo o professor Henrique Sales, nessas cidades ninguém fiscaliza a prefeitura e os boatos circulam sem contraponto. Marlene lembrou que, dois anos antes, um áudio falso sobre água contaminada tinha provocado pânico, e que foi o jornal que publicou a análise do laboratório e acalmou a população.\n\nQuanto ao futuro, o filho de Marlene, Tiago, afirmou que pretendia transformar o jornal em um site com assinatura digital e que quinhentos assinantes bastariam. A mãe disse que respeitava a ideia, mas duvidava que os leitores mais velhos acompanhassem a mudança.",
     "gloss": {
       "tiragem": "tirada, la cantidad de ejemplares impresos",
@@ -122,6 +116,92 @@
       "boatos": "rumores",
       "assinatura digital": "suscripción digital (assinatura = suscripción, también firma)",
       "assinantes": "suscriptores"
+    }
+  },
+  "breve": {
+    "title": "A última banca do centro",
+    "genre": "notícia de rádio",
+    "es": "Una noticia de radio de Itajubá: cierra el último puesto de diarios del centro; lo que dijo el dueño y lo que dijo la municipalidad.",
+    "speaker": "Repórter",
+    "voice": 0,
+    "text": [
+      "Rádio Vale Notícias, boa tarde. O principal assunto de hoje em Itajubá é o fechamento da última banca de jornal do centro.",
+      "A banca do seu Aristides, na praça da matriz, funcionou por 42 anos. Ontem, ele contou à nossa reportagem que vendia mais de 300 jornais por dia nos anos 90 e que hoje vende menos de 20. Disse que ia fechar no fim do mês porque o aluguel do ponto tinha subido de novo.",
+      "A prefeitura informou que estudava uma forma de manter a banca aberta como ponto de troca de livros. O secretário de Cultura, Renato Brandão, afirmou que a decisão seria tomada até sexta-feira e pediu que os moradores mandassem sugestões pelo site da prefeitura.",
+      "Seu Aristides agradeceu o apoio dos clientes e disse que, se a banca virar ponto de troca, quer continuar trabalhando lá como voluntário."
+    ],
+    "tabella": [
+      [
+        "Anos de funcionamento da banca",
+        "42",
+        [
+          "quarenta e dois",
+          "42 anos"
+        ]
+      ],
+      [
+        "Jornais vendidos por dia nos anos 90 (mais de…)",
+        "300",
+        [
+          "trezentos"
+        ]
+      ],
+      [
+        "Jornais vendidos por dia hoje (menos de…)",
+        "20",
+        [
+          "vinte"
+        ]
+      ],
+      [
+        "Prazo para a decisão da prefeitura",
+        "sexta-feira",
+        [
+          "sexta",
+          "sexta feira",
+          "até sexta"
+        ]
+      ],
+      [
+        "Nome do secretário de Cultura",
+        "Renato Brandão",
+        [
+          "Renato Brandao",
+          "Brandão"
+        ]
+      ]
+    ],
+    "info": [
+      [
+        "O dono da banca vai fechar por causa do aluguel.",
+        true
+      ],
+      [
+        "A prefeitura já decidiu comprar a banca.",
+        false
+      ],
+      [
+        "A prefeitura pediu sugestões aos moradores.",
+        true
+      ],
+      [
+        "Seu Aristides vai se mudar para outra cidade.",
+        false
+      ],
+      [
+        "Seu Aristides quer trabalhar como voluntário.",
+        true
+      ],
+      [
+        "A banca fica na estação de trem.",
+        false
+      ]
+    ],
+    "gloss": {
+      "banca": "puesto de diarios",
+      "ponto": "local (del negocio)",
+      "reportagem": "equipo de periodistas",
+      "prefeitura": "municipalidad"
     }
   }
 }

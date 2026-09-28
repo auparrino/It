@@ -319,5 +319,39 @@
       "lamentano": "se quejan de",
       "Resto a Sua disposizione": "quedo a su disposición"
     }
+  },
+  "breve": {
+    "title": "Le novità sulla settimana corta",
+    "genre": "messaggio vocale della direzione",
+    "es": "La directora de personal manda un audio a los empleados para resumir lo acordado con el gremio sobre la semana de cuatro días.",
+    "speaker": "Elena Guidi, direttrice del personale",
+    "voice": 1,
+    "text": [
+      "Buongiorno a tutte e a tutti, sono Elena Guidi, della direzione del personale. Vi lascio questo breve messaggio per riassumere le novità decise ieri con i sindacati sulla settimana corta.",
+      "Prima di tutto, la sperimentazione continuerà per altri due anni, alle stesse condizioni. Chi preferisse tornare all'orario su cinque giorni potrà chiederlo entro il 31 gennaio, compilando il modulo che trovate in bacheca.",
+      "Seconda novità: in manutenzione cambia il sistema di reperibilità. Invece di un solo tecnico a settimana ce ne saranno due, a turno, e la reperibilità verrà pagata di più: quaranta euro al giorno invece di trenta.",
+      "Infine, le riunioni del lunedì mattina, che sarebbero dovute tornare, restano abolite. Se avete domande, sarò in mensa giovedì dalle dodici alle quattordici. Grazie a tutti per il lavoro di quest'anno."
+    ],
+    "tabella": [
+      ["Durata della nuova sperimentazione", "2 anni", ["due anni", "altri due anni", "2"]],
+      ["Scadenza per tornare ai cinque giorni", "31 gennaio", ["il 31 gennaio", "trentuno gennaio"]],
+      ["Nuova paga di reperibilità (euro al giorno)", "40", ["quaranta"]],
+      ["Dove si trova il modulo", "bacheca", ["in bacheca", "la bacheca"]],
+      ["Giorno in cui Elena Guidi è in mensa", "giovedì", []]
+    ],
+    "info": [
+      ["La settimana corta continua per altri due anni.", true],
+      ["Tutti i dipendenti devono tornare ai cinque giorni.", false],
+      ["In manutenzione ci saranno due tecnici reperibili a turno.", true],
+      ["La reperibilità sarà pagata trenta euro al giorno.", false],
+      ["Le riunioni del lunedì tornano da febbraio.", false],
+      ["Elena Guidi risponderà alle domande in mensa.", true]
+    ],
+    "gloss": {
+      "sperimentazione": "prueba, experiencia piloto",
+      "bacheca": "cartelera",
+      "reperibilità": "guardia pasiva",
+      "mensa": "comedor"
+    }
   }
 }

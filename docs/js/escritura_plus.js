@@ -479,6 +479,9 @@
   function saveTre(h) {
     var s = store(h.state), first = !s.tre[cur.week];
     s.tre[cur.week] = { at: Date.now(), r: cur.ms.map(function (m) { return { words: m.words, errors: m.errors, structs: m.structs, wpm: m.wpm }; }) };
+    // the errors of the last lap go to the error profile, once (F §2.2)
+    var last = cur.ms[cur.ms.length - 1];
+    if (h.recordFindings && last && last.check) h.recordFindings(last.check.findings || [], cur.texts[cur.texts.length - 1] || "");
     var xp = first ? 30 : 10;
     h.gain(xp);
     if (root.Engine) { root.Engine.addStrand(h.state, "output", xp); root.Engine.touchStreak(h.state); }
@@ -601,6 +604,9 @@
     delete s.rif.draft[cur.week];
     h.persist();
     h.lexicon && h.lexicon();
+    // what the checker sees in the text goes to the error profile (F §2.2)
+    var S = Scrivi();
+    if (h.recordFindings && S) h.recordFindings((S.check(cur.text, taskWeek(cur.week) || cur.week).findings || []), cur.text);
     var local = function (err) { showCompare(h, localRewrite(cur.text, cur.week).text, "local", null, err ? String(err.message || err) : ""); };
     if (!h.aiKey()) return local();
     cur.step = "busy";

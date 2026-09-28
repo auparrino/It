@@ -46,7 +46,7 @@
       ["A pesquisa foi financiada pelo governo estadual.", "não se diz"]
     ],
     "hunt": {
-      "label": "Tocá los sustantivos que nominalizan una acción (evasão, análise, identificação…)",
+      "label": "Toque nos substantivos que nominalizam uma ação (evasão, análise, identificação…)",
       "targets": ["evasão", "análise", "realização", "identificação", "interpretação", "conciliação", "reprovação", "concessão", "ampliação", "implementação", "fortalecimento", "acompanhamento"]
     }
   },
@@ -110,13 +110,7 @@
     "es": "Resumen académico impersonal, sin opinión: objetivo, método, resultados, recomendaciones y límites. Reformulá con sustantivos (a identificação, a ampliação…) sin copiar el original.",
     "min": 188,
     "max": 248,
-    "punti": [
-      ["Objetivo del estudio", ["objetivo", "evasão", "abandono"]],
-      ["Metodología", ["entrevista", "mista", "registros"]],
-      ["Resultados principales", ["resultado", "fatores", "isolamento"]],
-      ["Recomendaciones", ["recomend", "acolhimento", "ampliação"]],
-      ["Limitaciones", ["limitaç", "amostra", "viés"]]
-    ],
+    "punti": [["Objetivo del estudio", ["objetivo", "evasão", "abandono"]], ["Metodología", ["entrevista", "mista", "registros"]], ["Resultados principales", ["resultado", "fatores", "isolamento"]], ["Recomendaciones", ["recomend", "acolhimento", "ampliação"]], ["Limitaciones", ["limitaç", "amostra", "viés"]]],
     "model": "Fatores de evasão no primeiro ano de graduação: resumo\n\nO relatório do Núcleo de Estudos sobre Permanência Estudantil (NEPE) tem como objetivo a identificação das causas do abandono de cursos no primeiro ano de graduação em uma universidade federal do Centro-Oeste. Para tanto, os pesquisadores adotaram uma abordagem mista, que associou a análise dos registros acadêmicos de aproximadamente 4.800 ingressantes à realização de 62 entrevistas em profundidade.\n\nOs resultados indicam que a evasão decorre da combinação de fatores econômicos, pedagógicos e afetivos. Destacam-se a dificuldade de conciliação entre trabalho e estudo, a reprovação em disciplinas introdutórias e o isolamento social nas primeiras semanas. O estudo aponta, ainda, o desconhecimento dos serviços de apoio pedagógico já oferecidos pela instituição.\n\nCom base nesses dados, o relatório recomenda a ampliação dos auxílios estudantis, a criação de um programa de acolhimento com mentoria de veteranos, a reformulação das disciplinas iniciais, a maior divulgação dos serviços de apoio e a implantação de um sistema de detecção precoce de estudantes em risco.\n\nPor fim, os autores reconhecem limitações, como a restrição da amostra a uma única universidade e a possibilidade de viés na seleção dos entrevistados, e sugerem a replicação do estudo em outras instituições.",
     "gloss": {
       "evasão": "deserción, abandono de los estudios",
@@ -127,6 +121,91 @@
       "acolhimento": "recibimiento y acompañamiento de los ingresantes",
       "veteranos": "estudiantes de años avanzados",
       "viés": "sesgo"
+    }
+  },
+  "breve": {
+    "title": "Comunicado da Pró-Reitoria",
+    "genre": "comunicado institucional",
+    "es": "Un comunicado formal de una universidad federal: la convocatoria para una ayuda de vivienda para estudiantes, con fechas, requisitos y condiciones.",
+    "speaker": "Voz da universidade",
+    "voice": 1,
+    "text": [
+      "Comunicado da Pró-Reitoria de Assuntos Estudantis da Universidade Federal Fluminense.",
+      "Informamos a abertura do processo de seleção para a concessão do auxílio-moradia do segundo semestre. O benefício, no valor mensal de 650 reais, destina-se a estudantes de graduação com renda familiar de até um salário mínimo e meio por pessoa.",
+      "O período de inscrição vai de 3 a 21 de julho, exclusivamente pelo sistema acadêmico. Após o encerramento das inscrições, será realizada a análise da documentação, seguida de entrevista com assistentes sociais. A divulgação do resultado está prevista para 15 de agosto.",
+      "Ressalta-se que a apresentação de documentos incompletos implica a eliminação do candidato. A renovação do benefício dependerá da frequência mínima de 75% nas disciplinas. Dúvidas devem ser encaminhadas ao e-mail da Pró-Reitoria."
+    ],
+    "tabella": [
+      [
+        "Valor mensal do auxílio (reais)",
+        "650",
+        [
+          "seiscentos e cinquenta",
+          "R$ 650",
+          "650 reais"
+        ]
+      ],
+      [
+        "Último dia de inscrição (julho)",
+        "21",
+        [
+          "21 de julho",
+          "vinte e um",
+          "dia 21"
+        ]
+      ],
+      [
+        "Data da divulgação do resultado",
+        "15 de agosto",
+        [
+          "15/8",
+          "15/08",
+          "dia 15 de agosto"
+        ]
+      ],
+      [
+        "Frequência mínima para renovar o benefício",
+        "75%",
+        [
+          "75",
+          "75 %",
+          "setenta e cinco por cento",
+          "75 por cento"
+        ]
+      ]
+    ],
+    "info": [
+      [
+        "O auxílio é para estudantes de graduação.",
+        true
+      ],
+      [
+        "As inscrições podem ser feitas pessoalmente.",
+        false
+      ],
+      [
+        "Haverá entrevista com assistentes sociais.",
+        true
+      ],
+      [
+        "O resultado sai no fim de julho.",
+        false
+      ],
+      [
+        "Documentos incompletos eliminam o candidato.",
+        true
+      ],
+      [
+        "O auxílio é pago uma vez por semestre.",
+        false
+      ]
+    ],
+    "gloss": {
+      "auxílio-moradia": "ayuda para la vivienda",
+      "renda": "ingreso",
+      "encerramento": "cierre",
+      "ressalta-se": "se destaca",
+      "frequência": "asistencia (a clase)"
     }
   }
 }

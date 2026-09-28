@@ -45,7 +45,7 @@
       ["A estação ao lado da oficina já não recebia trens.", "verdadeiro"]
     ],
     "hunt": {
-      "label": "Tocá los verbos en pretérito mais-que-perfeito simples (partira, dissera…)",
+      "label": "Toque nos verbos no pretérito mais-que-perfeito simples (partira, dissera…)",
       "targets": ["partira", "esperara", "parara", "dissera", "falara", "respondera", "costurara", "houvera", "detestara", "escrevera", "cumprira", "quisera"]
     }
   },
@@ -110,18 +110,103 @@
     "es": "Reseña con título: resumí la trama sin spoilear todo, analizá la memoria y el uso del mais-que-perfeito y cerrá con una valoración. Podés usar formas como “rompera”, “acreditara”.",
     "min": 193,
     "max": 253,
-    "punti": [
-      ["Presentar la trama (Helena, el padre, el reloj)", ["helena", "pai", "relógio"]],
-      ["Comentar el papel del pasado y la memoria", ["passado", "memória", "lembran"]],
-      ["Observar los tiempos verbales", ["mais-que-perfeito", "tempo verbal", "verbo"]],
-      ["Evaluar y recomendar (o no)", ["recomendo", "vale a pena", "leitura"]]
-    ],
+    "punti": [["Presentar la trama (Helena, el padre, el reloj)", ["helena", "pai", "relógio"]], ["Comentar el papel del pasado y la memoria", ["passado", "memória", "lembran"]], ["Observar los tiempos verbales", ["mais-que-perfeito", "tempo verbal", "tempos verbais", "verbo"]], ["Evaluar y recomendar (o no)", ["recomendo", "vale a pena", "indico", "não recomendo"]]],
     "model": "Um relógio parado e quarenta e dois anos de silêncio\n\n“O relógio da estação” é um conto breve que trata de um tema universal: o orgulho que separa pais e filhos. Helena, uma mulher de sessenta e poucos anos, volta à pequena cidade onde nasceu para o enterro do pai, com quem rompera aos dezenove anos. Ao receber a chave da antiga oficina de relógios, ela descobre objetos que a obrigam a rever tudo o que acreditara sobre aquela ruptura.\n\nO grande mérito do texto está na maneira como o passado invade o presente. Quase toda a história da família é contada por meio do mais-que-perfeito simples — “partira”, “dissera”, “escrevera” —, tempo verbal pouco usado na fala, mas que aqui cria camadas de memória e reforça a sensação de que tudo já estava decidido antes de a protagonista chegar. O relógio da praça, parado há décadas, funciona como símbolo dessa vida congelada.\n\nComo em Dom Casmurro, comentado recentemente no podcast Estante Aberta, o leitor percebe que a versão de uma única pessoa nunca é a história completa. Aqui, porém, a revelação não nasce da desconfiança, e sim da ternura.\n\nTalvez o desfecho pareça um pouco previsível para leitores experientes, mas a delicadeza da linguagem compensa. Recomendo a leitura a quem gosta de narrativas curtas, silenciosas e profundamente humanas.",
     "gloss": {
       "sessenta e poucos anos": "sesenta y pico",
       "oficina de relógios": "taller de relojería (oficina = taller)",
       "camadas de memória": "capas de memoria",
       "desfecho": "desenlace, final"
+    }
+  },
+  "breve": {
+    "title": "História em Cinco Minutos: o voo de Bagatelle",
+    "genre": "podcast de história",
+    "es": "Un podcast breve de historia: el vuelo de Santos Dumont en París en 1906 y lo que ya había hecho antes.",
+    "speaker": "Heitor Salles",
+    "voice": 0,
+    "text": [
+      "Olá, eu sou o Heitor Salles e este é o História em Cinco Minutos. Hoje: o dia em que um brasileiro voou em Paris.",
+      "No dia 23 de outubro de 1906, no campo de Bagatelle, Alberto Santos Dumont subiu no 14-bis diante de uma multidão. Ele já ficara famoso em Paris anos antes: em 1901 contornara a Torre Eiffel num dirigível e ganhara um prêmio de 100 mil francos, que dividira entre os seus mecânicos e os pobres da cidade.",
+      "Naquela tarde, o avião percorreu cerca de 60 metros, a uns três metros do chão. Foi o primeiro voo de um avião que decolou sozinho, sem catapulta, diante de juízes oficiais. Os irmãos Wright, nos Estados Unidos, já tinham voado em 1903, mas longe do público.",
+      "Santos Dumont nunca patenteou os seus inventos: queria que todos pudessem usá-los. Na semana que vem, a história do relógio de pulso que ele pedira a um amigo joalheiro, Louis Cartier."
+    ],
+    "tabella": [
+      [
+        "Data do voo em Bagatelle",
+        "23 de outubro de 1906",
+        [
+          "23 de outubro",
+          "23/10/1906",
+          "23/10"
+        ]
+      ],
+      [
+        "Ano em que contornou a Torre Eiffel",
+        "1901",
+        []
+      ],
+      [
+        "Valor do prêmio (francos)",
+        "100 mil",
+        [
+          "100.000",
+          "100000",
+          "cem mil"
+        ]
+      ],
+      [
+        "Distância percorrida pelo 14-bis (metros)",
+        "60",
+        [
+          "sessenta",
+          "60 metros",
+          "cerca de 60"
+        ]
+      ],
+      [
+        "Altura do voo (metros)",
+        "3",
+        [
+          "três",
+          "tres",
+          "3 metros",
+          "três metros"
+        ]
+      ]
+    ],
+    "info": [
+      [
+        "Santos Dumont dividiu o dinheiro do prêmio.",
+        true
+      ],
+      [
+        "O 14-bis voou em Londres.",
+        false
+      ],
+      [
+        "O avião decolou sem catapulta.",
+        true
+      ],
+      [
+        "Santos Dumont ficou rico com as patentes dos seus inventos.",
+        false
+      ],
+      [
+        "O próximo episódio fala de um relógio.",
+        true
+      ],
+      [
+        "Santos Dumont construiu o 14-bis com os irmãos Wright.",
+        false
+      ]
+    ],
+    "gloss": {
+      "contornara": "había rodeado",
+      "dirigível": "dirigible",
+      "decolou": "despegó",
+      "patenteou": "patentó",
+      "joalheiro": "joyero"
     }
   }
 }

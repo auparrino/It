@@ -11,8 +11,9 @@ var ctx = pack("pt");
 var Diagnosi = ctx.Diagnosi;
 
 var verbose = process.argv.indexOf("-v") >= 0;
-var fails = 0, checks = 0;
-function ok(c, what) { checks++; if (!c) { fails++; console.log("FAIL " + what); } }
+var T = require("../lib/testkit.js")("pt"), ok = T.ok;
+// El recall honesto de la tanda nueva del corpus, medido: si una regla lo baja, algo se rompió.
+var TANDA_FLOOR = 0.9;
 
 // The course data, when it is already Portuguese (the port goes module by
 // module): the bank feeds the diagnosis, and everything feeds the lexicon.
@@ -22,6 +23,8 @@ function isPt(list) {
   return /\b(você|não|também|está)\b/.test(txt) && !/\b(sono|della|perché|anche)\b/.test(txt);
 }
 var bank = readJSON("bank.json");
+// Como en la app: la frecuencia (window.Freq) le dice al corrector qué palabras existen aunque el curso no las enseñe.
+if (ctx.Freq && readJSON("frequenza.json")) ctx.Freq.load(readJSON("frequenza.json"));
 var Banca = null;
 if (bank && isPt((bank.sentences || []).map(function (s) { return (s.pt || s.it || [])[0]; }))) {
   try { Banca = ctx.Banca; Banca.load(bank); } catch (e) { Diagnosi.init(bank); }
@@ -191,9 +194,41 @@ ERR.forEach(function (e) {
    las versiones corregidas ni en las frases del curso.  Los pisos son el
    nivel medido: si una regla nueva los baja, algo se rompió. */
 (function () {
-  var C = JSON.parse(fs.readFileSync(path.join(__dirname, "scrivi_corpus.json"), "utf8"));
+  var ALL = JSON.parse(fs.readFileSync(path.join(__dirname, "scrivi_corpus.json"), "utf8"));
+  // La tanda 2026-09 se escribió después de las reglas, con otros temas y otras
+  // palabras: su recall es el honesto (auditoría C7).  Las primeras 144 sirvieron
+  // para armar las reglas y se miden aparte, con los pisos de siempre.
+  var C = ALL.filter(function (o) { return !o.tanda; }), NEW = ALL.filter(function (o) { return /^2026-09/.test(o.tanda || ""); });
   var hit = 0, tot = 0, falsos = [], byCat = {};
   ok(C.length >= 140, "corpus: " + C.length + " textos");
+  ok(NEW.length >= 25, "corpus, tanda nueva: " + NEW.length + " textos");
+  (function () {
+    var h = 0, n = 0, miss = [], cats = {}, held = [0, 0];
+    NEW.forEach(function (o) {
+      var tk = S.toks(o.text), f = S.lint(o.text, o.week).filter(function (x) { return !x.soft; }), from = 0;
+      o.errors.forEach(function (e) {
+        var a = o.text.indexOf(e.wrong, from), b = a + e.wrong.length, ids = [];
+        ok(a >= 0, "tanda nueva: «" + e.wrong + "» no está en el texto de la semana " + o.week);
+        ok(Diagnosi.LABEL[e.cat], "tanda nueva: categoría desconocida " + e.cat);
+        from = b;
+        tk.forEach(function (t, i) { if (t.w && t.at < b && t.at + t.len > a) ids.push(i); });
+        var got = f.some(function (x) { for (var k = x.i; k < x.i + x.n; k++) if (ids.indexOf(k) >= 0) return true; return false; });
+        var c = cats[e.cat] = cats[e.cat] || [0, 0]; c[1]++; n++;
+        if (o.tanda === "2026-09b") { held[1]++; if (got) held[0]++; }
+        if (got) { c[0]++; h++; } else miss.push("semana " + o.week + " " + e.cat + " «" + e.wrong + "»");
+      });
+      var tc = S.toks(o.corrected);
+      S.lint(o.corrected, o.week).filter(function (x) { return !x.soft; }).forEach(function (x) {
+        falsos.push("tanda nueva, semana " + o.week + " «" + tc.slice(x.i, x.i + x.n).map(function (z) { return z.o; }).join(" ") + "»: " + x.msg);
+      });
+    });
+    // 2026-09b no se usó para ajustar ninguna regla: es la medida honesta del corrector de hoy
+    console.log("corpus, tanda 2026-09b (sin ajustar reglas): " + held[0] + "/" + held[1] + " (" + Math.round(100 * held[0] / (held[1] || 1)) + " %)");
+    console.log("corpus, tandas nuevas: " + h + "/" + n + " (" + Math.round(100 * h / n) + " %) · " +
+      Object.keys(cats).map(function (k) { return k + " " + cats[k][0] + "/" + cats[k][1]; }).join(", "));
+    if (verbose) miss.forEach(function (m) { console.log("  no visto (tanda nueva): " + m); });
+    ok(h / n >= TANDA_FLOOR, "corpus, tanda nueva: " + h + "/" + n + " (piso " + Math.round(TANDA_FLOOR * 100) + " %)");
+  })();
   C.forEach(function (o) {
     var tk = S.toks(o.text), f = S.lint(o.text, o.week).filter(function (x) { return !x.soft; });
     var from = 0;
@@ -239,6 +274,30 @@ ERR.forEach(function (e) {
   ok(bad.length <= Math.ceil(clean.length * 0.002), "frases del curso (" + clean.length + "): " + bad.length + " marcadas: " + bad.slice(0, 6).join(" | "));
   if (verbose) bad.forEach(function (b) { console.log("  " + b); });
 
+  // The native Portuguese of the tramo (tools/pt/tramo/wNN.json): the readings and
+  // listenings are not the learner's text, so their register is free; the models
+  // follow the week's task.  No false alarms (auditoría C7: 52 marcas en 30.085
+  // palabras antes; queda una: una lectura sobre falsos amigos que cita «um vaso
+  // de água» como ejemplo del error).
+  (function () {
+    var dir = path.join(__dirname, "tramo"), marks = [], words = 0;
+    fs.readdirSync(dir).filter(function (f) { return /^w\d+\.json$/.test(f); }).forEach(function (f) {
+      var d = JSON.parse(fs.readFileSync(path.join(dir, f), "utf8"));
+      [["lectura", d.lettura && d.lettura.text, { registro: "informal" }],
+       ["escucha", ((d.ascolto && d.ascolto.turns) || []).map(function (t) { return Array.isArray(t) ? t[1] : ""; }).join("\n"), { registro: "informal" }],
+       ["modelo", d.compito && d.compito.model, null]].forEach(function (x) {
+        var t = String(x[1] || ""), tk = S.toks(t);
+        words += t.split(/\s+/).length;
+        S.lint(t, d.week, x[2]).filter(function (m) { return !m.soft; }).forEach(function (m) {
+          marks.push("semana " + d.week + " " + x[0] + " «" + tk.slice(m.i, m.i + m.n).map(function (z) { return z.o; }).join(" ") + "»: " + m.msg);
+          ok(x[0] !== "modelo", "tramo: el modelo de la semana " + d.week + " tiene una marca: " + marks[marks.length - 1]);
+        });
+      });
+    });
+    console.log("tramo, texto nativo: " + marks.length + " marcas en " + words + " palabras");
+    ok(marks.length <= 1, "tramo, texto nativo sin falsas alarmas: " + marks.join(" | "));
+  })();
+
   // The bank's «find the error» sentences: the checker sees most of them.
   if (bank && bank.errors) {
     var seen = 0;
@@ -254,14 +313,14 @@ ERR.forEach(function (e) {
    mismo sin él; clave mala → error claro; lee el JSON aunque venga con
    <think> o ```. */
 var GEM = [];
-function gem(name, plan, check, keys, mode) { GEM.push([name, plan, check, keys, mode]); }
+function gem(name, plan, check, keys, mode, first) { GEM.push([name, plan, check, keys, mode, first]); }
 function runGem() {
   if (!GEM.length) {
-    console.log("\ncontroles: " + checks + "   errores: " + fails);
-    process.exit(fails ? 1 : 0);
+    T.done();
   }
   var g = GEM.shift(), calls = [], mem = {};
   ctx.localStorage = { getItem: function (k) { return mem[k] || null; }, setItem: function (k, v) { mem[k] = v; } };
+  if (g[5]) mem["rumoc1.ia.first"] = g[5];   // qué proveedor va primero (Io)
   ctx.fetch = function (url, opt) {
     if (/\/models$/.test(url) && /googleapis/.test(url)) {
       return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve({ data: [
@@ -307,15 +366,15 @@ gem("todo saturado", function () { return { status: 503, body: {} }; },
 // Gemini de respaldo, con su propia búsqueda de modelos
 var BOTH = { groq: "gsk_x", gemini: "AIza_x" };
 gem("Groq saturado → Gemini", function (n, b) { return /gemini/.test(b.model) ? { status: 200, body: GOOD } : { status: 503, body: {} }; },
-    function (e, d, c) { var gi = c.filter(function (m) { return /gemini/.test(m); }); return !e && d.explicacion === "x" && gi[0] === "gemini-2.5-flash~" && !c.some(function (m) { return /embed|gemma/.test(m); }); }, BOTH);
+    function (e, d, c) { var gi = c.filter(function (m) { return /gemini/.test(m); }); return !e && d.explicacion === "x" && gi[0] === "gemini-2.5-flash~" && !c.some(function (m) { return /embed|gemma/.test(m); }); }, BOTH, undefined, "groq");
 gem("clave de Groq mala → Gemini", function (n, b) { return /gemini/.test(b.model) ? { status: 200, body: GOOD } : { status: 401, body: {} }; },
-    function (e, d, c) { return !e && c.length === 2 && c[1] === "gemini-2.5-flash~"; }, BOTH);
+    function (e, d, c) { return !e && c.length === 2 && c[1] === "gemini-2.5-flash~"; }, BOTH, undefined, "groq");
 gem("solo Gemini", function () { return { status: 200, body: GOOD }; },
     function (e, d, c) { return !e && c.length === 1 && c[0] === "gemini-2.5-flash~"; }, { gemini: "AIza_x" });
 gem("Gemini: modelo retirado (404) → el siguiente", function (n) { return n === 1 ? { status: 404, body: {} } : { status: 200, body: GOOD }; },
     function (e, d, c) { return !e && c[1] === "gemini-2.0-flash~"; }, { gemini: "AIza_x" });
 gem("los dos fallan", function () { return { status: 503, body: {} }; },
-    function (e) { return e && /Groq: /.test(e.message) && /Gemini: /.test(e.message); }, BOTH);
+    function (e) { return e && /Groq: /.test(e.message) && /Gemini: /.test(e.message); }, BOTH, undefined, "groq");
 // Scrivi: corrige y un segundo profesor revisa; si la revisión falla, queda la primera.
 var FIRST = reply(JSON.stringify({ errores: [{ mal: "tenho ido", bien: "fui", tipo: "perfeito_composto", explicacion: "a" },
                                              { mal: "ido", bien: "ido", tipo: "perfeito_composto", explicacion: "dup" }], corregido: "x" }));

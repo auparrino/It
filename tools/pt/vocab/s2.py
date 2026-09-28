@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 """Palabras de la semana, estação 2 (semanas 14-26).
 
-[palabra en portugués, significado en español, oración de ejemplo].
-12 por semana; la semana 26 (CHEFÃO) no tiene.  Los ejemplos usan solo la
-gramática vista hasta esa semana.
+[palabra en portugués, significado en español, oración de ejemplo, cómo se usa].
+18 por semana de la 15 a la 25 y 12 en la 14 (auditoría v3: de 12 a 18, con los
+campos que faltaban: Carnaval en la 17, fútbol en la 19, economía cotidiana en
+la 22, salud pública en la 23); la semana 26 (CHEFÃO) no tiene.  Los ejemplos
+usan solo la gramática vista hasta esa semana.
 """
 
 VOCAB = {
@@ -36,6 +38,12 @@ VOCAB = {
     ["bonde", "tranvía", "O bonde de Santa Teresa passava na frente da nossa casa.", "Masculino: *o bonde*. El de Santa Teresa es el tranvía histórico de Río."],
     ["costumar", "soler", "A gente costumava passar as férias em Petrópolis.", "*Costumar* + infinitivo, sin preposición: *costumo acordar cedo*. Pasado habitual: *costumava* + infinitivo."],
     ["merenda", "colación, merienda escolar", "Na escola, a merenda era pão com manteiga e suco.", "La comida que da la escuela: *merenda escolar*. La merienda de la tarde, en el habla común, es *lanche*."],
+    ["a infância", "la niñez", "Passei a infância numa casa com quintal em Niterói.", "*Na infância* = de chico. *Amigo de infância*. Adjetivo: *infantil*."],
+    ["o recreio", "el recreo", "No recreio, a gente trocava figurinhas.", "*Hora do recreio*. *Trocar figurinhas* = cambiar figuritas."],
+    ["a lancheira", "la vianda, la lonchera", "Eu levava a lancheira para a escola todo dia.", "*Lanche* = merienda; *lanchonete* = bar de comidas rápidas."],
+    ["antigamente", "antes, en otra época", "Antigamente, o bonde ia até o Centro.", "Con imperfeito: *antigamente a gente brincava na rua*. Mucho más usado que «antiguamente»."],
+    ["crescer", "crecer", "Eu cresci numa rua de terra, em Córdoba.", "Con *sc*: *eu cresço*. *A cidade cresceu muito*."],
+    ["o colégio", "la escuela (secundaria, a menudo privada)", "Eu estudava num colégio de freiras.", "*Escola* es la palabra general; *colégio* suele ser privado. El secundario es *o ensino médio*."],
 ],
 
 16: [
@@ -51,6 +59,12 @@ VOCAB = {
     ["pechinchar", "regatear", "Na feira, a Bia sempre pechincha e consegue um desconto.", "Regatear. El precio regalado es *uma pechincha*: *essa camisa foi uma pechincha*."],
     ["trocar", "cambiar (una cosa por otra)", "A camisa ficou pequena: posso trocá-la?", "Cambiar una cosa por otra, con *por*: *trocar por um tamanho maior*. También cambiar dinero: *trocar dinheiro*."],
     ["encomenda", "paquete, pedido (por encargo)", "Minha encomenda chegou e o porteiro a recebeu.", "Paquete o pedido. *Fazer uma encomenda* = encargar algo; *de encomenda* = hecho a pedido."],
+    ["o provador", "el probador", "O provador fica no fundo da loja.", "*Provar* = probarse. *Tamanho* = talle."],
+    ["provar", "probar(se) (ropa, comida)", "Posso provar essa calça?", "El probador es *o provador*. *Provar* también es demostrar."],
+    ["a promoção", "la oferta; el ascenso", "Comprei o tênis na promoção.", "*Em promoção* = en oferta; *liquidação* = liquidación. En el trabajo, *promoção* = ascenso."],
+    ["o desconto", "el descuento", "Se eu pagar à vista, tem desconto?", "*Dar desconto*, *pedir desconto*; *à vista* = al contado."],
+    ["a etiqueta", "el cartelito del precio", "A etiqueta diz trinta reais, mas no caixa cobraram mais.", "También las buenas maneras: *etiqueta*."],
+    ["o caixa", "la caja (donde se paga); el cajero", "Pode pagar no caixa, por favor.", "Masculino: *o caixa*. *A caixa* es la caja de cartón. *Caixa eletrônico* = cajero automático."],
 ],
 
 17: [
@@ -66,6 +80,12 @@ VOCAB = {
     ["trampo", "laburo (coloquial, São Paulo)", "Amanhã vou chegar tarde no trampo.", "Coloquial paulista; verbo *trampar* = laburar. Neutro: *trabalho*."],
     ["férias", "vacaciones", "Nas férias de julho iremos a Salvador.", "Siempre plural: *as férias*, *nas férias*. *Estar de férias* = estar de vacaciones."],
     ["cansativo", "cansador, agotador", "A semana será cansativa: teremos três provas.", "Lo que cansa: *uma semana cansativa*. Quien se cansa está *cansado*."],
+    ["o bloco", "la comparsa callejera (de Carnaval)", "No Carnaval, vou sair num bloco de rua em Santa Teresa.", "*Bloco de rua*: gente que sigue a una banda por la calle, gratis. *Sair num bloco* = ir en una comparsa."],
+    ["o desfile", "el paso de las escuelas por la avenida", "O desfile das escolas de samba vai ser no Sambódromo.", "Las escuelas desfilan en el Sambódromo de la Marquês de Sapucaí, de 1984, obra de Niemeyer."],
+    ["a escola de samba", "la escuela de samba", "A Mangueira é uma das escolas de samba mais tradicionais do Rio.", "Asociación de barrio que prepara el desfile todo el año: *o ensaio* (ensayo), *a quadra* (su sede)."],
+    ["a bateria", "la percusión (de la escuela de samba)", "A bateria da escola vai ensaiar na quadra no sábado.", "Cientos de músicos dirigidos por el *mestre de bateria*. También la batería del celular."],
+    ["o samba-enredo", "el samba del desfile", "Todo mundo vai cantar o samba-enredo da Portela na avenida.", "Cada escuela compone el suyo sobre el tema del año; *o puxador* es el cantante que lo lleva."],
+    ["a fantasia", "el disfraz", "Qual vai ser a sua fantasia este ano?", "Falso amigo: *fantasia* = disfraz. *Fantasiado de pirata* = disfrazado de pirata."],
 ],
 
 18: [
@@ -81,6 +101,12 @@ VOCAB = {
     ["encanador", "plomero", "Seria bom chamar um encanador: a pia está pingando.", "De *cano* (caño). En Portugal: *canalizador*. En el habla carioca también se le dice *bombeiro*."],
     ["chuveiro", "ducha", "O chuveiro do quarto não esquenta: você poderia mandar alguém?", "De *chuva*: la ducha. Bañarse es *tomar banho*, aunque sea en ducha. El *chuveiro elétrico* calienta el agua en el cabezal."],
     ["saideira", "la última ronda antes de irse", "Vamos tomar a saideira e ir embora?", "De *sair* (salir). Se pide *a saideira*: la última antes de irse, que casi nunca es la última."],
+    ["o quarto de casal", "la habitación doble (cama matrimonial)", "Eu gostaria de um quarto de casal com vista para o mar.", "*Quarto de solteiro* = individual; *cama de casal* = cama de dos plazas."],
+    ["a recepção", "la recepción", "Deixei a chave na recepção.", "En el hotel, *recepção*; el que atiende es *o recepcionista*."],
+    ["a toalha", "la toalla; el mantel", "Poderia trocar as toalhas do quarto?", "*Toalha de banho* y *toalha de mesa* (mantel)."],
+    ["o pernilongo", "el mosquito", "Tem muito pernilongo no quarto: vocês teriam um repelente?", "En el Sudeste, *pernilongo*; en otras regiones, *muriçoca* o *carapanã*."],
+    ["o ar-condicionado", "el aire acondicionado", "O ar-condicionado do quarto não está funcionando.", "Con guion. *Ligar / desligar o ar*."],
+    ["o frigobar", "el minibar", "As bebidas do frigobar não estão incluídas na diária.", "El minibar del hotel (de *frigorífico* + *bar*)."],
 ],
 
 19: [
@@ -96,6 +122,12 @@ VOCAB = {
     ["prestação", "cuota", "Comprei a televisão em dez prestações.", "*Em dez prestações* = en diez cuotas. También se dice *parcelado*: *em dez vezes sem juros*."],
     ["brinco", "aro (de oreja)", "Esses brincos de prata são mais baratos do que os de ouro.", "Masculino, casi siempre plural: *os brincos*. No confundir con *brinquedo* (juguete)."],
     ["brechó", "tienda de ropa usada", "Comprei essa jaqueta num brechó em Botafogo: foi baratíssima.", "Aguda con *ó*: *um brechó*. Ropa usada es *roupa de segunda mão*."],
+    ["o clássico", "el clásico (partido entre rivales)", "O Fla-Flu é o clássico mais famoso do Rio.", "*Fla-Flu* = Flamengo contra Fluminense; en São Paulo, *Corinthians x Palmeiras*."],
+    ["a torcida", "la hinchada", "A torcida do Flamengo é uma das maiores do Brasil.", "*Torcedor* = hincha; *torcer por* = hinchar por. *Torcida organizada* = barra."],
+    ["o artilheiro", "el goleador", "O artilheiro do campeonato fez mais gols do que muitos times.", "*Artilheiro* viene de *artilharia*; *fazer gol*, *marcar gol*. *Golaço* = golazo."],
+    ["o zagueiro", "el defensor central", "O zagueiro é mais alto do que o atacante.", "*Zagueiro* = central; *lateral*; *volante* (mediocampista defensivo); *atacante*."],
+    ["o juiz", "el árbitro (y el juez)", "O juiz foi pior do que o time!", "En fútbol, *juiz* = árbitro; *apitar* = dirigir el partido."],
+    ["a camisa dez", "la diez (el mejor jugador)", "Zico foi o maior camisa dez da história do Flamengo.", "*Camisa* = camiseta del equipo; *vestir a camisa* = ponerse la camiseta."],
 ],
 
 20: [
@@ -111,6 +143,12 @@ VOCAB = {
     ["combinado", "trato hecho, quedamos así", "— Às oito no Arpoador? — Combinado!", "Participio de *combinar* que sella un acuerdo. Refrán: *o combinado não sai caro* = lo pactado evita problemas."],
     ["tanto faz", "da igual", "— Praia ou piscina? — Tanto faz, as duas são ótimas.", "Fórmula fija: me da igual. Con pronombre: *para mim tanto faz*."],
     ["fala sério!", "¡no te puedo creer!, ¡hablá en serio!", "— Ninguém veio à festa. — Fala sério!", "Imperativo de *falar*: incredulidad o fastidio. Coloquial; parecido: *tá de brincadeira!* = ¡me estás cargando!"],
+    ["tá ligado?", "¿entendés?, ¿viste? (coloquial)", "O show é amanhã, tá ligado?", "Muy de los jóvenes y de São Paulo. *Estar ligado* = estar al tanto."],
+    ["o papo", "la charla", "O papo estava bom, mas eu tinha que ir embora.", "*Bater papo* = charlar; *papo furado* = charla sin sentido; *papo reto* = hablando claro."],
+    ["nem a pau", "ni loco", "— Você vai de ônibus? — Nem a pau, vou de metrô.", "Negación enfática, muy coloquial. Más suave: *de jeito nenhum*."],
+    ["o jeito", "la manera; la maña", "Não tem jeito: vou ter que ir.", "*Não tem jeito* = no hay caso; *de qualquer jeito* = de cualquier manera; *dar um jeito* = arreglárselas."],
+    ["papo furado", "charla vacía, verso", "Isso é papo furado: ninguém vai fazer nada.", "Lo que se dice sin intención de cumplir: *é só papo furado*."],
+    ["a bagunça", "el desorden, el quilombo", "Desculpa a bagunça, a casa está uma zona.", "*Bagunçar* = desordenar; *bagunceiro* = desordenado."],
 ],
 
 21: [
@@ -126,6 +164,12 @@ VOCAB = {
     ["pois é", "y sí, así es", "— O Rio tem mudado muito. — Pois é.", "Muy brasileño para darle la razón al otro sin agregar nada: «y sí». *Pois* solo = pues, entonces."],
     ["neném", "bebé", "O neném da vizinha tem chorado a noite toda.", "Aguda con *-ém* nasal, igual en género: *o neném*, *a neném*. Sinónimo: *bebê*."],
     ["rolar", "pasar, suceder (coloquial)", "E aí, o que rolou na festa?", "Coloquial: *o que rolou?* = ¿qué pasó? *Vai rolar* = se va a hacer. Sentido literal: rodar."],
+    ["mudar-se", "mudarse (de casa)", "Tenho pensado em me mudar para Niterói.", "*Mudar-se para* = mudarse a. Sin *se*, *mudar* = cambiar: *mudei de ideia*."],
+    ["engordar", "subir de peso", "Tenho engordado com tanto pão de queijo.", "*Ganhar peso*, más neutro. Perfeito composto: *tenho engordado* = vengo engordando."],
+    ["o namoro", "el noviazgo", "O namoro deles tem ido bem.", "*Namorar* = estar de novio, sin preposición: *namorar alguém*."],
+    ["formar-se", "recibirse", "Ela se formou em Direito no ano passado.", "*Formar-se em* + carrera. *A formatura* = la graduación (el acto y la fiesta)."],
+    ["pedir as contas", "renunciar (al trabajo)", "Ele pediu as contas e abriu um restaurante.", "Coloquial = *pedir demissão*. *Fazer as contas* = sacar cuentas."],
+    ["a novidade", "la novedad", "E aí, quais são as novidades?", "*Novidades* = noticias personales. *Alguma novidade?* = ¿hay algo nuevo?"],
 ],
 
 22: [
@@ -141,6 +185,12 @@ VOCAB = {
     ["passeata", "marcha, manifestación", "A passeata foi organizada pelos estudantes.", "Marcha a pie; *manifestação* es el término general. *Fazer uma passeata*."],
     ["desabamento", "derrumbe", "Ninguém foi ferido no desabamento do prédio.", "De *desabar* = derrumbarse: *o prédio desabou*. El alud de tierra es *deslizamento*."],
     ["bombeiro", "bombero", "O incêndio foi apagado pelos bombeiros.", "De *bomba* (la de agua). En el habla de Río, *bombeiro* también es el plomero."],
+    ["o boleto", "la boleta de pago", "O boleto do aluguel foi pago ontem.", "Se paga en el banco, en la lotérica o por app, con el código de barras. *O boleto vence dia dez*."],
+    ["o saldo", "lo que hay en la cuenta", "O saldo da conta foi conferido no aplicativo.", "*Saldo* = lo que hay en la cuenta; *extrato* = el resumen."],
+    ["o Pix", "la transferencia instantánea", "A conta foi paga por Pix.", "Sistema del Banco Central (2020): gratis y a toda hora, con una *chave Pix* (el celular, el CPF o el e-mail)."],
+    ["parcelar", "pagar en cuotas", "A geladeira foi parcelada em dez vezes sem juros.", "*Parcela* = cuota. *À vista* = al contado."],
+    ["os juros", "los intereses", "Sem juros, a compra sai mais barata.", "Siempre en plural: *os juros*. *Juros altos*; *sem juros* = sin interés."],
+    ["a nota fiscal", "la factura, el ticket", "O comprovante foi enviado junto com a nota fiscal.", "*Nota fiscal* (o *nota*) = factura. *CPF na nota?* = ¿querés el ticket con tu número?"],
 ],
 
 23: [
@@ -156,6 +206,12 @@ VOCAB = {
     ["levar um fora", "que te larguen o te rechacen", "Espero que ele não leve um fora de novo.", "*Levar um fora* = ser rechazado; *dar um fora* = rechazar a alguien o meter la pata. Se conjuga *levar*."],
     ["dica", "consejo, dato", "Uma dica: beba muita água no verão carioca.", "Femenino: *uma dica*. *Dar uma dica* = pasar un dato, dar una pista."],
     ["fazer as pazes", "amigarse, reconciliarse", "Tomara que eles façam as pazes logo.", "Siempre plural: *fazer as pazes com alguém*. Se conjuga *fazer*: *que eles façam as pazes*."],
+    ["o SUS", "el sistema público de salud", "É importante que todo mundo conheça o SUS.", "*Sistema Único de Saúde* (1988): gratuito y universal, también para extranjeros. *Pelo SUS* = por el hospital público."],
+    ["a vacina", "la vacuna", "É importante que as crianças tomem a vacina em dia.", "*Tomar vacina*; *vacinar-se*. *Em dia* = al día."],
+    ["o exame de sangue", "el análisis de sangre", "O médico quer que eu faça um exame de sangue.", "*Fazer exames* = hacerse estudios. *Em jejum* = en ayunas."],
+    ["o pronto-socorro", "la guardia (del hospital)", "É melhor que você vá ao pronto-socorro agora.", "La emergencia: *PS*. La *UPA* es la guardia pública 24 horas."],
+    ["a carteira de vacinação", "el carnet de vacunación", "Quero que você traga a carteira de vacinação da criança.", "*Tomar vacina*; *campanha de vacinação*. El SUS vacuna gratis."],
+    ["a bula", "el prospecto (del remedio)", "É importante que você leia a bula antes de tomar o remédio.", "El papel que viene en la caja. *Bula* es también un documento papal."],
 ],
 
 24: [
@@ -171,6 +227,12 @@ VOCAB = {
     ["lotado", "lleno, repleto", "No carnaval, o metrô fica lotado.", "Lleno de gente, sobre todo transporte o lugares: *o metrô fica lotado*."],
     ["passagem", "pasaje (boleto de viaje)", "Compre a passagem antes que o preço suba.", "Boleto de viaje: *passagem de avião*, *de ônibus*. Las palabras en *-agem* son femeninas: *a passagem*, *a viagem*."],
     ["bate-volta", "ida y vuelta en el día", "Fizemos um bate-volta do Rio a Petrópolis.", "*Bater* + *voltar*: ida y vuelta en el día, sin dormir allá. *Fazer um bate-volta*."],
+    ["o mochilão", "el viaje mochilero", "Vou fazer um mochilão pelo Nordeste, embora não tenha muito dinheiro.", "Aumentativo de *mochila*; *mochileiro* = mochilero."],
+    ["a hospedagem", "el alojamiento", "Caso a hospedagem seja cara, ficamos num albergue.", "*Hospedar-se* = alojarse. *Pousada* = posada, hotel chico."],
+    ["o albergue", "el hostel", "Vamos ficar num albergue para que sobre dinheiro para os passeios.", "*Albergue da juventude*; también *hostel*."],
+    ["a bagagem", "el equipaje", "Embora a bagagem esteja pesada, vou levar tudo.", "Femenino, como todo *-agem*: *a bagagem de mão*. *Mala* = valija."],
+    ["o câmbio", "la cotización de la moneda extranjera", "É melhor trocar dinheiro antes que o câmbio suba.", "*Casa de câmbio*; *trocar dinheiro* = cambiar plata."],
+    ["o perrengue", "el apuro, la complicación", "Para que a viagem não vire um perrengue, leve água e protetor.", "Muy brasileño y coloquial: *passar perrengue* = pasarla mal, sobre todo de viaje."],
 ],
 
 25: [
@@ -186,6 +248,12 @@ VOCAB = {
     ["barraca", "puesto de playa; carpa", "Alugamos cadeira e guarda-sol na barraca do Seu Zé.", "En la playa, el puesto que alquila silla y sombrilla; en el camping, la carpa: *montar a barraca*."],
     ["estojo", "cartuchera, estuche", "Onde está o estojo em que guardei os óculos?", "Masculino: *o estojo*. *Estojo de óculos* = estuche de anteojos."],
     ["magrelo", "flaco (coloquial)", "Aquele menino magrelo que joga no gol é meu primo.", "Coloquial, a veces cariñoso: *magrelo*, *magrela*. En el habla, *magrela* también es la bici."],
+    ["o porteiro", "el portero, el encargado", "O porteiro, que conhece todo mundo, sabe de tudo.", "Personaje central del edificio brasileño; *a portaria* = la entrada con portero."],
+    ["a portaria", "la entrada con portero", "Deixe a encomenda na portaria, onde o porteiro fica.", "*Portaria* = la entrada vigilada del edificio (y también una resolución oficial)."],
+    ["o inquilino", "el que alquila", "O inquilino que morava aqui deixou tudo limpo.", "El que alquila; el dueño que alquila es *o proprietário* o *o locador*."],
+    ["o dono", "el dueño", "O dono da casa em que moro vive em Petrópolis.", "*Dona* es también «señora» delante del nombre: *dona Lúcia*."],
+    ["o andar", "el piso (de un edificio)", "O apartamento que aluguei fica no quinto andar.", "*No terceiro andar*. *O piso* es el suelo."],
+    ["a vizinhança", "el vecindario", "A vizinhança onde cresci era muito tranquila.", "El barrio y sus vecinos. *Vizinho* = vecino."],
 ],
 
 26: [],

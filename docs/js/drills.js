@@ -49,8 +49,11 @@
   function pickFresh(pool, n, state) {
     var cards = (state && state.cards) || {};
     var now = Date.now(), DAY = 86400000;
+    var recog = (state && state.recog) || {};
     var rank = function (it) {
       var c = cards[it.id];
+      // recognised right, with no card (Reglas.afterAnswer): seen, and next time written
+      if (!c && recog[it.id]) return now - recog[it.id] * 60000 < 2 * DAY ? 4 + Math.random() : 2 + Math.random();
       if (!c) return 0 + Math.random();
       if (!c.due || c.due <= now) return 1 + Math.random();
       var last = c.last || (c.due - (c.interval || 0) * DAY);
@@ -117,15 +120,67 @@
      Everything is read defensively, so the drills run on every
      conjugator. */
   function infoOf(verb) { try { return Conj.info(verb) || {}; } catch (e) { return {}; } }
+  // A «tense» that conjugate() does not take (it is not in ALL_TENSES): the
+  // imperative, the gerund, the participle, when the curriculum lists them
+  // as the week's tenses (pt: gerúndio, particípio, imperativo).
+  function outsideConjugate(tense) {
+    return !!Conj.ALL_TENSES && Conj.ALL_TENSES.indexOf(tense) < 0;
+  }
+  // The verb has no such form, and the gym does not ask it: no imperative
+  // (poder, caber: imperative() gives null; chover, with one person only).
+  function lacksForm(verb, tense) {
+    if (tense !== "imperativo" || !CR.imperativeForms || !Conj.imperative || !outsideConjugate(tense)) return false;
+    var own = infoOf(verb).persons;
+    try { return !Conj.imperative(verb) || !!(own && own.length === 1); } catch (e) { return false; }
+  }
   function conjForms(verb, tense) {
-    if (tense === "imperativo" && CR.imperativeForms && Conj.imperative && !(Conj.TENSE_LABELS || {}).imperativo) {
+    if (tense === "imperativo" && CR.imperativeForms && Conj.imperative && outsideConjugate(tense)) {
       // imperative(inf): the language's persons, or null (poder, caber)
-      var im = Conj.imperative(verb);
-      if (!im) throw new Error("sin imperativo: " + verb);
-      return CR.imperativeForms(im);
+      if (lacksForm(verb, tense)) throw new Error("sin imperativo: " + verb);
+      return CR.imperativeForms(Conj.imperative(verb));
     }
     try { return Conj.conjugate(verb, tense, { partial: true }); }
     catch (e) { return Conj.conjugate(verb, tense); }
+  }
+  /* The non-finite forms (gerund, participle) when conjugate() does not take
+     them: one form, asked without a person.  { answer, accept, wrong } or
+     null.  wrong: what gets mixed up with it — the form of a learner who
+     treats the verb as regular (fazido, vido), the other non-finite form,
+     the infinitive, the present. */
+  function nonFinite(verb, tense) {
+    if ((tense !== "gerundio" && tense !== "participio") || !outsideConjugate(tense)) return null;
+    var fn = tense === "gerundio" ? Conj.gerund : Conj.participle;
+    if (!fn) return null;
+    var answer = fn(verb);
+    if (!answer) return null;
+    var accept = [answer];
+    if (tense === "participio" && Conj.participles) {
+      var ps = Conj.participles(verb) || {};
+      [ps.irregular, ps.regular].forEach(function (x) { if (x && accept.indexOf(x) < 0) accept.push(x); });
+    }
+    var wrong = [];
+    function add(f) { if (f && accept.indexOf(f) < 0 && wrong.indexOf(f) < 0) wrong.push(f); }
+    try { add(Conj.regular && Conj.regular(verb, tense)); } catch (e) { /* sin forma regular */ }
+    try { add(tense === "gerundio" ? Conj.participle && Conj.participle(verb) : Conj.gerund && Conj.gerund(verb)); } catch (e) { /* */ }
+    add(String(verb).replace(/-.*$/, ""));
+    try { add(Conj.conjugate(verb, "presente")[2]); } catch (e) { /* */ }
+    try { add(Conj.conjugate(verb, (Conj.ALL_TENSES || [])[1])[0]); } catch (e) { /* */ }
+    return { answer: answer, accept: accept, wrong: wrong };
+  }
+  function nonFiniteItem(verb, tense, nf, typed) {
+    var item = {
+      id: (typed ? "conjw:" : "conj:") + verb + ":" + tense + ":0",
+      src: "coniugatore",
+      type: typed ? "cloze" : "choice",
+      topic: "coniugazione",
+      prompt: (typed ? "Escribí" : "Elegí") + " el " + tenseLabel(tense) + " de «" + verb + "»" + esOf(verb),
+      stem: "___ (" + verb + ")",
+      answer: nf.answer,
+      accept: nf.accept,
+      note: verb + " · " + tenseLabel(tense) + ": " + nf.accept.join(" / ")
+    };
+    if (!typed) item.options = shuffle(sample(nf.wrong, 3).concat([nf.answer]));
+    return item;
   }
   var EXTRA_LABELS = CR.extraLabels || {};
   function tenseLabel(t) { return (Conj.TENSE_LABELS || {})[t] || EXTRA_LABELS[t] || t; }
@@ -188,6 +243,8 @@
   }
 
   function conjugationDrill(verb, tense, known, persons) {
+    var nf = nonFinite(verb, tense);
+    if (nf) return nonFiniteItem(verb, tense, nf, false);
     var forms = conjForms(verb, tense);
     var alt = altFor(verb, tense);
     var p = pickPerson(personsFor(verb, forms, persons));
@@ -243,6 +300,8 @@
   }
 
   function conjugationTyped(verb, tense, persons) {
+    var nf = nonFinite(verb, tense);
+    if (nf) return nonFiniteItem(verb, tense, nf, true);
     var forms = conjForms(verb, tense);
     var alt = altFor(verb, tense);
     var p = pickPerson(personsFor(verb, forms, persons));
@@ -378,7 +437,9 @@
     if (it.src === "coniugatore" && Conj) {
       var m = /^conjw?:([^:]+):([^:]+):(\d)$/.exec(it.id);
       if (m) {
-        try { shuffle(conjForms(m[1], m[2]).filter(function (x, i) { return !skipped(i) && x; })).forEach(add); } catch (e) { /* no */ }
+        var nfm = nonFinite(m[1], m[2]);
+        if (nfm) shuffle(nfm.wrong).forEach(add);
+        else try { shuffle(conjForms(m[1], m[2]).filter(function (x, i) { return !skipped(i) && x; })).forEach(add); } catch (e) { /* no */ }
       }
     }
     // 2. the typical errors on the answer itself
@@ -442,12 +503,13 @@
     return copy;
   }
 
-  // First sighting (no SRS card yet): recognition; otherwise as it is.
+  // First sighting (no SRS card yet, not recognised before): recognition;
+  // otherwise as it is.
   function firstRecognize(list, state, week, pool) {
-    var cards = (state && state.cards) || {};
+    var cards = (state && state.cards) || {}, recog = (state && state.recog) || {};
     return list.map(function (it) {
       // phrases have their own ladder (tiles → memory): left alone
-      if (!it || cards[it.id] || it.src === "frasi" || it.src === "lab" || it.src === "lettura") return it;
+      if (!it || cards[it.id] || recog[it.id] || it.src === "frasi" || it.src === "lab" || it.src === "lettura") return it;
       return recognitionOf(it, pool || list, week) || it;
     });
   }
@@ -457,7 +519,16 @@
   function itemsById(course) {
     var map = {};
     course.items.forEach(function (it) { map[it.id] = it; });
+    // The week whose lesson lists the item (it.wk is the first week whose
+    // grammar covers it, which can be much earlier): the statistics of the
+    // week (weekStats) are kept by this one, so the boss and the review
+    // look them up by it.
+    (course.weeks || []).forEach(function (w) {
+      (w.items || []).forEach(function (id) { var it = map[id]; if (it && it.week == null) it.week = w.week; });
+    });
     indexVocab(course);
+    // the rule cards (reglas.js) look exercises up in this same map
+    if (root.Reglas && root.Reglas.use) root.Reglas.use(course, map);
     return map;
   }
 
@@ -532,9 +603,6 @@
     var v = e.v, id = "v:" + v[0], card = state && state.cards && state.cards[id];
     if (!card) {
       // distractors: meanings of nearby weeks, never the same Spanish word
-      var near = Object.keys(VOC).map(function (k) { return VOC[k]; }).filter(function (x) {
-        return x.v[0] !== v[0] && x.v[1] !== v[1] && Math.abs(x.week - e.week) <= 3;
-      });
       // Same field first (hermano among hija, tío, abuelo), then the same
       // kind of word: a verb among nouns, or «ventana» next to «hermano»,
       // gives itself away.
@@ -625,12 +693,13 @@
     // focus: the training of one part of the lesson asks that part and
     // nothing else (no verb gym, no review, no words of the week).
     var focus = !!opts.focus;
+    var mix = roundMix(week, opts.state);
     var wantConj = focus ? 0 : Math.min(
-      week.verbs && week.verbs.length ? Math.ceil(size * (week.gymShare || 0.35)) : 0,
+      week.verbs && week.verbs.length ? Math.ceil(size * Math.max(0.15, Math.min(0.6, (week.gymShare || 0.35) + mix.gym))) : 0,
       size
     );
     var wantBook = size - wantConj;
-    var wantExtra = focus ? 0 : Math.min(extra.length, Math.round(wantBook / 4));
+    var wantExtra = focus ? 0 : Math.min(extra.length, Math.round(wantBook / 4 * mix.extra));
 
     pickFresh(bookItems, wantBook - wantExtra, opts.state).forEach(function (it) { out.push(it); });
     // What the last four weeks left unseen comes along, a couple per round,
@@ -639,7 +708,7 @@
     var carry = [];
     (course.weeks || []).forEach(function (pw) {
       if (pw.week >= week.week || pw.week < week.week - 4 || pw.boss) return;
-      (pw.items || []).forEach(function (id) { if (map[id] && !cards[id]) carry.push(map[id]); });
+      (pw.items || []).forEach(function (id) { if (map[id] && !cards[id] && !recogOf(opts.state)[id]) carry.push(map[id]); });
     });
     pickFresh(extra.concat(shuffle(carry).filter(audible)), wantExtra, opts.state).forEach(function (it) { out.push(it); });
 
@@ -647,7 +716,8 @@
       var verb = week.verbs[Math.floor(Math.random() * week.verbs.length)];
       var tense = week.tenses[Math.floor(Math.random() * week.tenses.length)];
       try {
-        out.push(i % 2 === 0 ? conjugationDrill(verb, tense, week.known, week.persons)
+        // a weak spot in the verbs (the error profile): more of them written
+        out.push(i % 2 === 0 && !mix.verbsWeak ? conjugationDrill(verb, tense, week.known, week.persons)
                              : conjugationTyped(verb, tense, week.persons));
       } catch (e) { /* un verbo que no se conjuga en ese tiempo: se salta */ }
     }
@@ -666,6 +736,31 @@
       out = out.slice(0, size - vs.length).concat(vs);
     }
     return withWordIntros(firstRecognize(shuffle(out).slice(0, size), opts.state, week.week, bookItems), opts.state);
+  }
+
+  function recogOf(state) { return (state && state.recog) || {}; }
+
+  /* The mix of a round follows how the week is going (E8): the accuracy of
+     the last answers of the week (weekStats.last) and the error profile.
+     Doing well: more review of the weeks before (interleaving) and more
+     verbs; struggling: the week's own exercises first.  A weak spot in the
+     verbs (the diagnosis' category) brings more verbs, written. */
+  var VERB_CATS = /coniug|ausil|aux|verb|tempo|tempi|persona|modo|congiunt|subjunt|particip|gerund|imperat|condiz|futur|passat|pret|imperf/i;
+  function roundMix(week, state) {
+    var out = { extra: 1, gym: 0, verbsWeak: false, acc: null };
+    var ws = state && state.weekStats && week && state.weekStats[week.week];
+    var l = (ws && ws.last) || [];
+    if (l.length >= 10) {
+      var acc = l.reduce(function (a, x) { return a + x; }, 0) / l.length;
+      out.acc = acc;
+      if (acc >= 0.9) { out.extra = 1.5; out.gym = 0.05; }
+      else if (acc < 0.7) { out.extra = 0.5; out.gym = -0.1; }
+    }
+    if (Banca && Banca.weakest && state && state.errs) {
+      var wk = Banca.weakest(state, 1)[0];
+      if (wk && VERB_CATS.test(wk.cat)) { out.verbsWeak = true; out.gym += 0.1; }
+    }
+    return out;
   }
 
   /* How badly the learner knows an item: a card that went back to zero or
@@ -724,26 +819,47 @@
     return firstRecognize(out, state, week.week);
   }
 
-  /* El jefe pesca de todas las semanas ya abiertas, no solo de la última. */
+  /* El jefe pesca de todas las semanas ya abiertas, no solo de la última.
+     Es un examen por destreza, como las certificaciones: una lectura con
+     sus preguntas (del tramo desde la 27; de «La settimana» antes), una
+     escucha con preguntas (la escucha larga del tramo, o un texto de la
+     estación leído en voz alta), producción escrita (12-15 ítems) y
+     estructuras (opción múltiple), cada una con su 55 % (it.skill).  Si se
+     repite el mismo día, otras preguntas y otros textos. */
+  var BOSS_WRITTEN = { cloze: 1, translate: 1, conjugate: 1, plural: 1, numbers: 1, qa: 1, typed: 1, write: 1, fixerr: 1, garden: 1 };
+  function bossUsed(state, wk) {
+    if (!state || !Engine) return { ids: {}, eps: [] };
+    var today = Engine.dayKey(), b = state.bossUsed || (state.bossUsed = {});
+    if (!b[wk] || b[wk].day !== today) b[wk] = { day: today, ids: {}, eps: [] };
+    return b[wk];
+  }
   function buildBoss(course, week, state, opts) {
     opts = opts || {};
     var size = opts.size || (week.week === 52 ? 40 : 25);
     var map = opts.map || itemsById(course);
+    var used = bossUsed(state, week.week);
     // Half from the season it closes, a quarter from the one before, the
     // rest from anywhere earlier: the C1 exam examines C1, not «io sono».
     var season = (course.seasons || []).filter(function (s) { return week.week >= s.weeks[0] && week.week <= s.weeks[1]; })[0];
     var lo = season ? season.weeks[0] : 1;
     var prevLo = Math.max(1, lo - 13);
-    var pools = { own: [], prev: [], old: [] };
+    var pools = { own: [], prev: [], old: [] }, all = 0;
     course.weeks.forEach(function (w) {
       if (w.week > week.week) return;
       (w.items || []).concat(w.extra || []).forEach(function (id) {
         var it = map[id];
-        if (!it) return;
-        var wk = it.wk || w.week;
+        // listening has its own section, with a text
+        if (!it || it.type === "listen") return;
+        var wk = it.week || w.week;
+        all++;
         (wk >= lo ? pools.own : wk >= prevLo ? pools.prev : pools.old).push(it);
       });
     });
+    // Again the same day: what was asked stays out, if there is enough else.
+    var nUsed = Object.keys(used.ids).length;
+    if (nUsed && all - nUsed >= size * 2) {
+      Object.keys(pools).forEach(function (k) { pools[k] = pools[k].filter(function (it) { return !used.ids[it.id]; }); });
+    }
     // Inside a season, one week at a time in turn: the boss of week 13 asks
     // about every week of the season, not thirteen times about «to be».
     // A week the learner got wrong more often gets more turns (up to three
@@ -754,7 +870,7 @@
     };
     var byWeek = function (pool, n) {
       var groups = {};
-      pool.forEach(function (it) { (groups[it.wk || 0] = groups[it.wk || 0] || []).push(it); });
+      pool.forEach(function (it) { var k = it.week || it.wk || 0; (groups[k] = groups[k] || []).push(it); });
       var keys = shuffle(Object.keys(groups)), picked = [], turns = [];
       keys.forEach(function (key) {
         groups[key] = shuffle(groups[key]).sort(function (a, b) { return weakness(state, a.id) - weakness(state, b.id); });
@@ -771,29 +887,107 @@
       return picked;
     };
     var nBook = Math.ceil(size * 0.8);
-    var out = byWeek(pools.own, Math.round(nBook * 0.5))
-      .concat(byWeek(pools.prev, Math.round(nBook * 0.25)))
-      .concat(byWeek(pools.old, nBook));
-    var seenB = {};
-    out = out.filter(function (it) { if (seenB[it.id]) return false; seenB[it.id] = 1; return true; });
-    // The first boss has no earlier season: top up from its own season
-    // rather than with conjugation drills.
-    shuffle(pools.own.concat(pools.prev, pools.old)).forEach(function (it) {
-      if (out.length < nBook && !seenB[it.id]) { seenB[it.id] = 1; out.push(it); }
-    });
-    out = out.slice(0, nBook);
+    // Written and multiple choice apart, each in the proportions of the seasons.
+    var isW = function (it) { return !!BOSS_WRITTEN[it.type] && !it.options; };
+    var split = function (pool) { return { w: pool.filter(isW), c: pool.filter(function (it) { return !isW(it); }) }; };
+    var P = { own: split(pools.own), prev: split(pools.prev), old: split(pools.old) };
+    var nProd = week.week === 52 ? 15 : 12, nStr = Math.max(4, nBook - nProd);
+    var pick = function (kind, n) {
+      var got = byWeek(P.own[kind], Math.round(n * 0.5)).concat(byWeek(P.prev[kind], Math.round(n * 0.25)), byWeek(P.old[kind], n));
+      var seen = {};
+      got = got.filter(function (it) { if (seen[it.id]) return false; seen[it.id] = 1; return true; });
+      // the first boss has no earlier season: its own season again
+      shuffle(P.own[kind].concat(P.prev[kind], P.old[kind])).forEach(function (it) {
+        if (got.length < n && !seen[it.id]) { seen[it.id] = 1; got.push(it); }
+      });
+      return got.slice(0, n);
+    };
+    var prod = pick("w", nProd), str = pick("c", nStr);
+    // Short of written items: the verbs of the week, written.
     var verbs = week.verbs || [], tenses = week.tenses || ["presente"];
-    while (out.length < size && verbs.length) {
+    for (var g = 0; prod.length < nProd && verbs.length && g < nProd * 2; g++) {
       var v = verbs[Math.floor(Math.random() * verbs.length)];
       var t = tenses[Math.floor(Math.random() * tenses.length)];
-      try { out.push(conjugationTyped(v, t)); } catch (e) { break; }
+      try { prod.push(conjugationTyped(v, t)); } catch (e) { break; }
     }
-    out = shuffle(out).slice(0, size);
+    // Short of multiple choice: more written.
+    if (str.length < nStr) {
+      var have = {};
+      prod.forEach(function (it) { have[it.id] = 1; });
+      var missing = nStr - str.length;
+      pick("w", nProd + missing).forEach(function (it) { if (missing > 0 && !have[it.id]) { have[it.id] = 1; prod.push(it); missing--; } });
+    }
+    var tag = function (list, skill) {
+      return list.map(function (it) { var c = {}; Object.keys(it).forEach(function (k) { c[k] = it[k]; }); c.skill = skill; return c; });
+    };
+    var out = shuffle(tag(prod, "produzione").concat(tag(str, "strutture")));
+    out.forEach(function (it) { if (map[it.id]) used.ids[it.id] = 1; });
+    // The reading and the listening, each one as a block of questions.
+    var texts = bossTexts(week, lo, used, opts.silent);
+    var blocks = out.map(function (x) { return [x]; });
+    if (texts.read.length) blocks.splice(Math.floor(blocks.length / 3), 0, texts.read);
+    if (texts.listen.length) blocks.splice(Math.floor(blocks.length * 2 / 3), 0, texts.listen);
     // One in five more: sentences of the bank never seen, on grammar already
     // taught, to see whether the rule generalises (reported apart).
     novelItems(state, Math.round(size * 0.2), out).forEach(function (it, k) {
-      out.splice(Math.floor((k + 1) * out.length / 6), 0, it);
+      blocks.splice(Math.floor((k + 1) * blocks.length / 6), 0, [it]);
     });
+    return [].concat.apply([], blocks);
+  }
+
+  /* The texts of the boss: a reading of the season with its questions, and
+     a listening (the long listening of the tramo from week 27; before, a
+     text of the season read aloud, sentence by sentence).  Never the same
+     text twice the same day. */
+  function bossTexts(week, lo, used, silent) {
+    var L = root.Letture, out = { read: [], listen: [] };
+    if (!L || !L.ofSeries) return out;
+    var inSeason = function (ep) { return ep.week >= lo && ep.week <= week.week && (ep.questions || []).length; };
+    var fresh = function (list) {
+      var f = list.filter(function (ep) { return used.eps.indexOf(ep.id) < 0; });
+      return shuffle(f.length ? f : list);
+    };
+    var longs = week.week >= 27 ? L.ofSeries("lunga").filter(inSeason) : [];
+    var rd = fresh(longs.length ? longs : L.ofSeries("settimana").filter(inSeason))[0];
+    if (rd) {
+      used.eps.push(rd.id);
+      out.read = L.session(rd).filter(function (x) { return x.type === "choice"; }).slice(0, 6).map(function (x) {
+        x.skill = "lettura"; x.nocard = true; x.bossText = rd.title;
+        return x;
+      });
+    }
+    if (silent) return out;
+    var TR = root.TRAMO_DATA, asc = null;
+    if (week.week >= 27 && TR && TR.SETTIMANE) {
+      var cands = fresh(TR.SETTIMANE.filter(function (s) {
+        return s.week >= lo && s.week <= week.week && s.ascolto && (s.ascolto.questions || []).length;
+      }).map(function (s) { return { id: "asc-" + s.week, s: s }; }));
+      if (cands[0]) {
+        var a = cands[0].s.ascolto;
+        asc = { id: cands[0].id, title: a.title, questions: a.questions, vf: a.vf,
+                parts: a.turns.map(function (t) { return [t[0], t[1]]; }) };
+      }
+    }
+    if (!asc) {
+      var other = fresh(L.ofSeries("settimana").filter(function (ep) { return inSeason(ep) && ep !== rd; }))[0];
+      if (other) {
+        asc = { id: other.id, title: other.title, questions: other.questions, vf: other.vf,
+                parts: String(other.text || "").replace(/([.!?…]["»”)]*)\s+/g, "$1\n").split(/\n+/)
+                  .filter(function (x) { return x.trim(); }).map(function (x) { return ["A", x.trim()]; }) };
+      }
+    }
+    if (asc && asc.parts.length) {
+      used.eps.push(asc.id);
+      var text = asc.parts.map(function (p) { return p[1]; }).join(" ");
+      out.listen = L.session({ id: "asc:" + asc.id, questions: asc.questions || [], vf: asc.vf || [], hunt: { label: "", targets: [] }, grammar: "" })
+        .filter(function (x) { return x.type === "choice"; }).slice(0, 6).map(function (x, k) {
+          var vf = /:vf\d+$/.test(x.id);
+          return { id: "boss:" + x.id, src: "lettura", type: "listen", skill: "ascolto", nocard: true, nopeek: true,
+                   prompt: vf ? x.prompt + " «" + x.stem + "»" : x.stem, stem: text, parts: asc.parts,
+                   options: x.options, answer: x.answer, accept: x.accept, note: x.note || "",
+                   noauto: k > 0, bossText: asc.title };
+        });
+    }
     return out;
   }
   function novelItems(state, n, have) {
@@ -816,14 +1010,21 @@
     if (Duelli && id.indexOf("duel:") === 0) return Duelli.reviewItem(id);
     if (root.EscrituraPlus && id.indexOf("ep:") === 0) return root.EscrituraPlus.reviewItem(id, opts && opts.state);   // reformulación
     if (root.Biblioteca && id.indexOf("lib:") === 0) return root.Biblioteca.reviewItem(id, opts && opts.state);   // 📌 de la Biblioteca
+    if (root.TresLenguas && id.indexOf("tres:") === 0) return root.TresLenguas.reviewItem(id);   // lo fallado en Tres lenguas
+    // a rule: a new sentence with it; an item another module left (Engine.enqueue)
+    if (root.Reglas && id.indexOf("r:") === 0) return root.Reglas.reviewItem(id, opts && opts.state);
+    if (root.Reglas && id.indexOf("own:") === 0) return root.Reglas.ownItem(opts && opts.state, id);
     return null;
   }
 
-  function knownId(map, id) {
+  function knownId(map, id, state) {
     return !!(map[id] || (id.indexOf("v:") === 0 && VOC && VOC[id.slice(2)]) || (Frasi && Frasi.BY_ID[id]) || (Lab && Lab.BY_ID[id]) ||
+              (root.Reglas && id.indexOf("r:") === 0 && root.Reglas.known(id)) ||
+              (id.indexOf("own:") === 0 && state && state.own && state.own[id]) ||
               (Banca && Banca.loaded() && id.indexOf("b:") === 0 && Banca.item(id)) ||
               (root.EscrituraPlus && id.indexOf("ep:") === 0) ||
               (root.Biblioteca && id.indexOf("lib:") === 0) ||
+              (root.TresLenguas && id.indexOf("tres:") === 0 && !!root.TresLenguas.reviewItem(id)) ||
               (Duelli && id.indexOf("duel:") === 0 && !!Duelli.reviewItem(id)));
   }
 
@@ -840,21 +1041,50 @@
     var maint = 0;
     Object.keys(state.cards).forEach(function (id) {
       var card = state.cards[id];
-      if (!knownId(map, id) || !card.due || card.due > now) return;
+      if (!card || !card.due || card.due > now || !knownId(map, id, state)) return;
       var isMaint = card.state === "maint" || (card.s == null && Engine && Engine.retired && Engine.retired(card));
+      var rw = id.indexOf("r:") === 0 ? +id.split(":")[1] : map[id] ? (map[id].week || map[id].wk) : 0;
       var pri = (card.night && card.night === today) || card.hyper ? -1
-              : card.reps === 0 ? 0 : (map[id] && map[id].wk === week) ? 1 : isMaint ? 3 : 2;
+              : card.reps === 0 ? 0 : rw === week ? 1 : isMaint ? 3 : 2;
       due.push({ id: id, due: card.due, pri: pri, maint: isMaint });
     });
     due.sort(function (a, b) { return a.pri - b.pri || a.due - b.due; });
-    return due.filter(function (d) { if (!d.maint) return true; return ++maint <= MAINT_A_DAY; });
+    var rules = 0;
+    return due.filter(function (d) {
+      // the rules (a new sentence each) are a few a day too: they wait, they never pile up
+      if (d.id.indexOf("r:") === 0 && d.pri > 0 && ++rules > RULES_A_DAY) return false;
+      if (!d.maint) return true;
+      return ++maint <= MAINT_A_DAY;
+    });
   }
+  var RULES_A_DAY = 4;
 
   function buildReview(course, state, size, opts) {
     var map = (opts && opts.map) || itemsById(course);
-    return dueList(map, state).slice(0, size || 20).map(function (d) {
-      return reviewItem(map, d.id, Object.assign({ state: state }, opts));
-    }).filter(Boolean);
+    var seen = {}, out = [], list = dueList(map, state);
+    for (var k = 0; k < list.length && out.length < (size || 20); k++) {
+      var it = reviewItem(map, list[k].id, Object.assign({ state: state }, opts));
+      // a rule brings a sentence that may be due on its own too: once
+      if (!it || seen[it.id]) continue;
+      seen[it.id] = 1;
+      out.push(it);
+    }
+    return out;
+  }
+
+  /* The cards with the lowest chance of recall now (retrievability), not
+     the first of the queue: the five minutes after a pause. */
+  function buildColdest(course, state, size, opts) {
+    var map = (opts && opts.map) || itemsById(course);
+    var ids = root.Reglas ? root.Reglas.coldest(state, (size || 10) * 2, function (id) { return knownId(map, id, state); })
+                          : dueList(map, state).map(function (d) { return d.id; });
+    var seen = {}, out = [];
+    ids.forEach(function (id) {
+      if (out.length >= (size || 10)) return;
+      var it = reviewItem(map, id, Object.assign({ state: state }, opts));
+      if (it && !seen[it.id] && !(opts && opts.silent && it.type === "listen")) { seen[it.id] = 1; out.push(it); }
+    });
+    return out;
   }
 
   function dueCount(course, state, map) {
@@ -887,8 +1117,17 @@
         if (!have[sameKey(it)]) { have[sameKey(it)] = 1; out.push(it); }
       });
     }
-    return shuffle(out);
+    out = shuffle(out);
+    // A few rules of a month ago or more, written, with new sentences
+    // (it.old: reported apart, they do not count for the 85 %).
+    if (root.Reglas && root.Reglas.oldItems && state) {
+      root.Reglas.oldItems(state, week.week, DOMINA_OLD).forEach(function (it, k) {
+        out.splice(Math.floor((k + 1) * out.length / (DOMINA_OLD + 1)), 0, it);
+      });
+    }
+    return out;
   }
+  var DOMINA_OLD = 4;
   // The week is mastered by passing that session, or (saves from before it
   // existed) by 85 % over the last 30 answers with the week covered.
   function dominated(ws, week, state) {
@@ -896,8 +1135,8 @@
   }
 
   function coverage(week, state) {
-    var cards = (state && state.cards) || {}, ids = week.items || [];
-    var seen = ids.filter(function (id) { return cards[id]; }).length;
+    var cards = (state && state.cards) || {}, ids = week.items || [], recog = recogOf(state);
+    var seen = ids.filter(function (id) { return cards[id] || recog[id]; }).length;
     return { seen: seen, total: ids.length, ok: ids.length === 0 || seen >= Math.min(40, Math.ceil(ids.length * 0.6)) };
   }
 
@@ -1025,6 +1264,7 @@
     itemsById: itemsById,
     conjugationDrill: conjugationDrill,
     conjugationTyped: conjugationTyped,
+    lacksForm: lacksForm,
     buildRound: buildRound,
     recognitionOf: recognitionOf,
     withWordIntros: withWordIntros,
@@ -1033,7 +1273,6 @@
     firstRecognize: firstRecognize,
     vocabSession: vocabSession,
     vocabItem: vocabItem,
-    recognitionOf: recognitionOf,
     pickFresh: pickFresh,
     buildBoss: buildBoss,
     buildWeak: buildWeak,
@@ -1042,6 +1281,9 @@
     DOMINA_SIZE: DOMINA_SIZE,
     weakItems: weakItems,
     buildReview: buildReview,
+    buildColdest: buildColdest,
+    roundMix: roundMix,
+    knownId: knownId,
     dueList: dueList,
     mastered: mastered,
     coverage: coverage,

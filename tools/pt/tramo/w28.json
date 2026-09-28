@@ -103,7 +103,7 @@
       ]
     ],
     "hunt": {
-      "label": "Tocá los verbos en imperfeito do subjuntivo",
+      "label": "Toque nos verbos no imperfeito do subjuntivo",
       "targets": [
         "fosse",
         "entrasse",
@@ -282,19 +282,22 @@
       [
         "Presentar la tesis del columnista",
         [
-          "colunista",
-          "coluna",
-          "autor"
+          "excesso de opções",
+          "menos opções",
+          "escolher menos",
+          "excesso de alternativas",
+          "quantidade",
+          "tese"
         ]
       ],
       [
-        "Tomar posición",
+        "Un ejemplo de la columna (el yogur, el abuelo, Caio)",
         [
-          "concordo",
-          "discordo",
-          "na minha opinião",
-          "acredito",
-          "creio"
+          "iogurte",
+          "prateleira",
+          "avô",
+          "caio",
+          "supermercado"
         ]
       ],
       [
@@ -306,16 +309,6 @@
           "curso",
           "adolesc"
         ]
-      ],
-      [
-        "Conclusión",
-        [
-          "portanto",
-          "por isso",
-          "enfim",
-          "em suma",
-          "assim"
-        ]
       ]
     ],
     "model": "Escolher cansa, mas não escolher cansa mais\n\nNa coluna “E se a gente escolhesse menos?”, o autor defende que o excesso de opções nos deixa ansiosos e insatisfeitos, e que seríamos mais felizes se tivéssemos menos alternativas. Concordo apenas em parte.\n\nÉ verdade que ninguém precisa de vinte e três tipos de iogurte. No consumo, a abundância muitas vezes só gera perda de tempo. No entanto, quando se trata de decisões importantes, reduzir as opções seria um erro. Se os jovens de hoje tivessem as mesmas possibilidades que seus avós, muitos estariam presos a profissões que não escolheram.\n\nO problema dos vestibulandos, a meu ver, não é a quantidade de cursos, mas a falsa ideia de que a primeira escolha é para sempre. Nesse ponto, o colunista acerta em cheio: se as escolas mostrassem que é possível mudar de caminho, a pressão diminuiria muito.\n\nPortanto, não precisamos de menos liberdade, e sim de menos medo de errar. Mais opções, com mais tolerância aos recomeços.",
@@ -326,6 +319,100 @@
       "No entanto": "sin embargo (conectores: se ven en la semana 34)",
       "e sim de menos medo de errar": "sino de menos miedo a equivocarse (não... e sim = no... sino)",
       "recomeços": "los nuevos comienzos, empezar de nuevo"
+    }
+  },
+  "breve": {
+    "title": "Pousada Mar de Dentro",
+    "genre": "propaganda de rádio",
+    "es": "Una publicidad de radio de una posada en Ilhabela, en la costa de São Paulo: habitaciones, desayuno, promoción de invierno y cómo llegar.",
+    "speaker": "Voz da propaganda",
+    "voice": 1,
+    "text": [
+      "E se você pudesse desligar o celular por três dias? E se, em vez do trânsito, você ouvisse só o barulho do mar? Então você precisa conhecer a Pousada Mar de Dentro, em Ilhabela, no litoral norte de São Paulo.",
+      "São só doze quartos, todos com varanda e vista para o canal. O café da manhã, com frutas da região e pão feito na casa, está incluído na diária, e o jantar é servido até as 22 horas.",
+      "Neste inverno, de maio a agosto, quem reservar quatro noites paga só três. E crianças de até 6 anos não pagam hospedagem. A pousada fica a 15 minutos da balsa, e nós buscamos você no porto sem custo.",
+      "Reservas pelo nosso site ou pelo WhatsApp. Pousada Mar de Dentro: se você tivesse um lugar para não fazer nada, seria aqui."
+    ],
+    "tabella": [
+      [
+        "Número de quartos da pousada",
+        "12",
+        [
+          "doze",
+          "12 quartos",
+          "doze quartos"
+        ]
+      ],
+      [
+        "Horário limite do jantar",
+        "22",
+        [
+          "22 horas",
+          "22h",
+          "dez da noite",
+          "22:00"
+        ]
+      ],
+      [
+        "Promoção de inverno: quem reserva quatro noites paga…",
+        "três",
+        [
+          "3",
+          "tres",
+          "três noites",
+          "3 noites"
+        ]
+      ],
+      [
+        "Idade até a qual as crianças não pagam",
+        "6",
+        [
+          "seis",
+          "6 anos",
+          "seis anos"
+        ]
+      ],
+      [
+        "Distância até a balsa (minutos)",
+        "15",
+        [
+          "quinze",
+          "15 minutos",
+          "quinze minutos"
+        ]
+      ]
+    ],
+    "info": [
+      [
+        "Todos os quartos têm varanda.",
+        true
+      ],
+      [
+        "O jantar está incluído na diária.",
+        false
+      ],
+      [
+        "A promoção vale de maio a agosto.",
+        true
+      ],
+      [
+        "A pousada fica no litoral do Rio de Janeiro.",
+        false
+      ],
+      [
+        "A pousada busca os hóspedes no porto sem cobrar.",
+        true
+      ],
+      [
+        "Para reservar, é preciso ligar para um telefone fixo.",
+        false
+      ]
+    ],
+    "gloss": {
+      "balsa": "balsa, ferry",
+      "diária": "tarifa por noche",
+      "hospedagem": "alojamiento",
+      "desligar": "apagar"
     }
   }
 }

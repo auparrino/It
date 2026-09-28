@@ -229,9 +229,25 @@
      forms (verb, tense, person) and words with a meaning in the glossary.
      The infinitive itself and words spelled like their Spanish meaning are
      not explained. */
+  /* A glossary entry can carry several readings, «sal · también, del verbo:
+     subir (sube)» (the tap on the word shows them all).  The breakdown reads
+     the sentence and picks the reading itself: it keeps only the first. */
+  function firstSense(G) {
+    if (G.__first) return G.__first;
+    var o = {}, any = false;
+    Object.keys(G).forEach(function (k) {
+      var e = G[k];
+      if (e && typeof e[1] === "string" && e[1].indexOf(" · ") >= 0) { o[k] = [e[0], e[1].split(" · ")[0]].concat(e.slice(2)); any = true; }
+      else o[k] = e;
+    });
+    if (!any) o = G;
+    try { Object.defineProperty(G, "__first", { value: o }); } catch (e) { /* frozen */ }
+    return o;
+  }
+
   function of(text, opts) {
     opts = opts || {};
-    var gloss = opts.gloss || {}, week = opts.week == null ? null : +opts.week;
+    var gloss = firstSense(opts.gloss || {}), week = opts.week == null ? null : +opts.week;
     var D = rules(), C = conj(), idx = index(), contr = contractions(), arts = articles();
     if (opts.bank && !NOMINAL) nominalFrom(opts.bank);
     else if (!NOMINAL && root.Banca && root.Banca.loaded && root.Banca.loaded()) nominalFrom(root.Banca.bank());
@@ -607,7 +623,7 @@
         tenses: r.tenses || [], persons: r.persons || [] };
     }
     function baseVerb(base, suf) {
-      var E = D.enclitic, cands = [], r = null;
+      var E = D.enclitic, cands = [];
       // one-syllable imperatives double the consonant: di' + mi = dimmi
       if (E.short) {
         var dbl = base.length >= 3 && base.charAt(base.length - 1) === suf.charAt(0) ? base.slice(0, -1) : null;

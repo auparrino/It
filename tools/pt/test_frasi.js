@@ -15,11 +15,7 @@ var Duelli = ctx.Duelli;
 var Letture = ctx.Letture;
 var course = pack.data("pt", "course.json");
 
-var fails = 0, checks = 0;
-function ok(cond, what) {
-  checks++;
-  if (!cond) { fails++; console.log("FAIL " + what); }
-}
+var T = require("../lib/testkit.js")("pt"), ok = T.ok;
 function uniq(a) {
   var m = {};
   a.forEach(function (x) { m[x] = true; });
@@ -432,5 +428,4 @@ ok(sb.streak === 11, "y al día siguiente la racha sigue");
   ok(uniq.length === 7 && ks[6] === Engine.dayKey(d), "7 días distintos hasta hoy: " + ks.join(" "));
 });
 
-console.log("\ncontroles: " + checks + "   errores: " + fails);
-process.exit(fails ? 1 : 0);
+T.done();

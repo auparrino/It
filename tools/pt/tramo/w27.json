@@ -45,7 +45,7 @@
       ["Renata admite que a família pode repensar a decisão no futuro.", "verdadeiro"]
     ],
     "hunt": {
-      "label": "Tocá los verbos en futuro do subjuntivo",
+      "label": "Toque nos verbos no futuro do subjuntivo",
       "targets": ["perguntar", "sair", "quiser", "estiver", "adaptarem", "continuar", "puder", "estiverem", "forem"]
     }
   },
@@ -101,19 +101,98 @@
     "es": "Un mail informal a una amiga: contale lo que leíste (Renata y los consejos del psicólogo) y aconsejala. Usá el futuro do subjuntivo (quando você for, se quiser) y cerrá con un saludo cariñoso.",
     "min": 120,
     "max": 180,
-    "punti": [
-      ["Saludo y motivo del mail (la mudanza de Camila)", ["oi", "querida", "olá"]],
-      ["Contar la experiencia de Renata", ["renata"]],
-      ["Un problema práctico (internet, hospital, escuela)", ["internet", "hospital", "escola", "médico"]],
-      ["El consejo de alquilar primero / hacer una prueba", ["alug", "teste", "experiment"]],
-      ["Cierre afectuoso", ["beijo", "abraço", "saudade"]]
-    ],
+    "punti": [["El motivo: la mudanza de Camila a la sierra", ["serra", "cidadezinha", "cidade pequena", "interior"]], ["La experiencia de Renata", ["renata", "designer"]], ["Un problema práctico (internet, hospital, escuela)", ["internet", "hospital", "escola", "médico"]], ["Un desafío de la vida social (la fiesta de la iglesia, las reuniones)", ["festa da igreja", "reuniões", "reunião", "vida social", "vizinh"]], ["El consejo del psicólogo: alquilar antes de vender", ["alug", "tenório", "psicólogo"]]],
     "model": "Oi, Camila, tudo bem?\n\nFiquei pensando na nossa conversa sobre a mudança para a serra e ontem li uma reportagem que tem tudo a ver com você. Conta a história da Renata, uma designer que saiu de São Paulo com os filhos e foi morar numa cidadezinha de Minas. Ela diz que valeu a pena, mas que não foi o paraíso que imaginava.\n\nOs problemas práticos aparecem logo: a internet cai quando chove e o hospital pode ficar longe. E a vida social exige paciência, porque ninguém vai bater na sua porta. Se você quiser fazer amigos, vai ter que ir à festa da igreja e às reuniões da escola.\n\nO psicólogo da reportagem dá um conselho ótimo: alugue uma casa por alguns meses antes de vender o apartamento. Se as crianças se adaptarem e o seu trabalho continuar funcionando, aí vocês decidem com calma.\n\nQuando você for visitar as cidades, me chama que eu vou junto!\n\nUm beijo grande,\nMarina",
     "gloss": {
       "tem tudo a ver com você": "tiene todo que ver con vos, te viene justo",
       "a internet cai": "se corta internet",
       "bater na sua porta": "golpear tu puerta",
       "me chama que eu vou junto": "avisame, que voy con vos (chamar = llamar, avisar; que = porque)"
+    }
+  },
+  "breve": {
+    "title": "Jornal da Serra, as notícias da manhã",
+    "genre": "noticiário de rádio",
+    "es": "El boletín de la mañana de una radio de Petrópolis: una calle cerrada por obras, el boleto de ómnibus, un museo abierto de noche y el tiempo.",
+    "speaker": "Locutor",
+    "voice": 0,
+    "text": [
+      "Bom dia! São sete horas e você está ouvindo o Jornal da Serra, na Rádio Serra FM, de Petrópolis. As principais notícias da manhã.",
+      "Trânsito. A partir de segunda-feira, a Rua do Imperador vai ficar fechada para carros das 8 às 18 horas, por causa das obras na rede de esgoto. A prefeitura informa que as obras devem durar três semanas. Quem precisar chegar ao centro de carro deve usar a Rua Treze de Maio.",
+      "Ônibus. A passagem de ônibus entre Petrópolis e o Rio vai ficar mais cara: passa de 28 para 31 reais no dia primeiro. Os estudantes continuam pagando meia.",
+      "Cultura. O Museu Imperial abre à noite nesta sexta, com entrada gratuita até as 22 horas. Se chover, o concerto do jardim vai acontecer no salão principal.",
+      "Tempo. Hoje, céu nublado de manhã e sol à tarde, com mínima de 14 graus e máxima de 24. Quem for subir a serra à noite deve levar um casaco: vai esfriar bastante.",
+      "O próximo boletim é ao meio-dia. Uma ótima quarta-feira para você."
+    ],
+    "tabella": [
+      [
+        "A Rua do Imperador fica fechada para carros até as…",
+        "18",
+        [
+          "18 horas",
+          "18h",
+          "dezoito",
+          "18:00"
+        ]
+      ],
+      [
+        "Duração prevista das obras",
+        "três semanas",
+        [
+          "3 semanas",
+          "tres semanas"
+        ]
+      ],
+      [
+        "Novo preço da passagem Petrópolis–Rio (reais)",
+        "31",
+        [
+          "trinta e um",
+          "31 reais",
+          "R$ 31"
+        ]
+      ],
+      [
+        "Temperatura mínima de hoje (graus)",
+        "14",
+        [
+          "catorze",
+          "quatorze",
+          "14 graus"
+        ]
+      ]
+    ],
+    "info": [
+      [
+        "As obras da Rua do Imperador são na rede de esgoto.",
+        true
+      ],
+      [
+        "Os estudantes vão pagar a passagem inteira.",
+        false
+      ],
+      [
+        "Na sexta à noite, a entrada no Museu Imperial é gratuita.",
+        true
+      ],
+      [
+        "O concerto de sexta foi cancelado por causa da chuva.",
+        false
+      ],
+      [
+        "À noite vai fazer frio na serra.",
+        true
+      ],
+      [
+        "O próximo boletim é às dez horas.",
+        false
+      ]
+    ],
+    "gloss": {
+      "esgoto": "cloacas",
+      "passagem": "pasaje, boleto",
+      "meia": "media tarifa",
+      "boletim": "boletín (de noticias)"
     }
   }
 }

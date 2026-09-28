@@ -262,6 +262,7 @@ LESSONS = {
  {"h": "El cuadro y el lugar del pronombre", "blocks": [0, 1]},
  {"h": "-lo, -la; «vi ele» y lhe", "blocks": [2, 3, 4]},
  {"h": "Pronombres con preposición", "blocks": [5]},
+ {"h": "Muletillas del relato, elogios y el tu del Sur", "blocks": [6, 7, 8]},
 ],
 "blocks": [
  {"h": "Directo e indirecto",
@@ -370,6 +371,26 @@ LESSONS = {
          "answer": "comigo", "options": ["comigo", "com mim", "conmigo"]},
         {"prompt": "«Es para mí.»", "stem": "É para ___.",
          "answer": "mim", "options": ["mim", "mí", "eu"]}]},
+
+ {"h": "Palavras que não estão no dicionário (3): aí, tipo, sabe?, entendeu?",
+  "q": [{"prompt": "En «Cheguei na festa e aí vi o João», ¿qué es aí?", "answer": "y entonces", "options": ["y entonces", "allá", "ahí mismo, en ese lugar"]}],
+  "r": "Para contar: *aí* encadena (= y entonces), *tipo* aproxima o ejemplifica, *sabe?* y *entendeu?* chequean que el otro te sigue.",
+  "ex": [["Cheguei na festa e *aí* vi o João.", "Llegué a la fiesta y entonces lo vi a João."], ["Eram *tipo* umas dez pessoas.", "Eran como unas diez personas."], ["Ela é muito tímida, *sabe*?", "Ella es muy tímida, ¿sabés?"], ["Tem que virar à direita, *entendeu*?", "Tenés que doblar a la derecha, ¿entendiste?"]],
+  "warn": "*aí* en un relato no es un lugar: es «y entonces». En un texto escrito, cambialo por *então* o *depois*.",
+  "tip": "*entendeu?* repetido suena a reto; *sabe?* es más suave."},
+
+ {"h": "Elogiar e responder a um elogio",
+  "q": [{"prompt": "—Que blusa linda! Elegí la respuesta más natural.", "answer": "Ah, obrigada! Comprei na feira.", "options": ["Ah, obrigada! Comprei na feira.", "Sim, eu sei.", "De nada."]}],
+  "r": "El elogio se recibe agradeciendo y quitándole peso: *ah, obrigada!*, *que bom que você gostou!*, *imagina!*. Aceptarlo sin más suena seco.",
+  "ex": [["Que casa *linda*!", "¡Qué linda casa!"], ["*Ficou ótimo!*", "¡Quedó genial!"], ["Você cozinha *muito bem*!", "¡Cocinás muy bien!"], ["— Adorei o bolo! — *Que bom que você gostou!*", "—¡Me encantó la torta! —¡Qué bueno que te gustó!"], ["— Que lindo! — *Imagina*, é simples.", "—¡Qué lindo! —No es nada, es simple."]],
+  "warn": "*De nada* responde a un «gracias», no a un elogio: a *Que blusa linda!* se contesta *obrigada!*."},
+
+ {"h": "Sotaque da semana: Rio Grande do Sul, y el tu",
+  "q": [{"prompt": "En Porto Alegre te preguntan «Tu vai no jogo?». ¿Qué quiere decir?", "answer": "¿Vas al partido?", "options": ["¿Vas al partido?", "¿Va usted al partido?", "¿Fuiste al partido?"]}],
+  "r": "El gaúcho usa *tu*, casi siempre con el verbo de *você* (*tu vai*, *tu quer*), y sus palabras: *bah* (asombro), *tchê* (che), *guri* (chico).",
+  "ex": [["*Bah*, que frio!", "¡Uh, qué frío!"], ["*Tu vai* no jogo do Grêmio?", "¿Vas al partido de Grêmio?"], ["Ô *tchê*, *tu quer* chimarrão?", "Che, ¿querés mate? (chimarrão = mate)"], ["O *guri* já chegou.", "El chico ya llegó."]],
+  "tip": "El *chimarrão* es el mate gaúcho, como en el Río de la Plata. La voz de la app es la estándar: el acento no se oye, las palabras sí."},
+
 ]},
 
 17: {
@@ -481,7 +502,7 @@ LESSONS = {
 "parts": [
  {"h": "La forma", "blocks": [0, 1]},
  {"h": "Pedir con cortesía", "blocks": [2, 3]},
- {"h": "Sugerir, imaginar y el futuro del pasado", "blocks": [4, 5]},
+ {"h": "Sugerir, imaginar y el futuro del pasado", "blocks": [4, 5, 6]},
 ],
 "blocks": [
  {"h": "Infinitivo + -ia",
@@ -560,6 +581,13 @@ LESSONS = {
          ["Ele prometeu que *ia ligar*.", "Prometió que iba a llamar. (habla)"]],
   "q": [{"prompt": "«Dijo que vendría.»", "stem": "Ele disse que ___.",
          "answer": "viria", "options": ["viria", "vendria", "virá"]}]},
+
+ {"h": "Recusar um convite sem ofender",
+  "q": [{"prompt": "Te invitan a un asado el sábado y no podés. Elegí lo más natural.", "answer": "Poxa, adoraria, mas vou viajar. Fica pra próxima!", "options": ["Poxa, adoraria, mas vou viajar. Fica pra próxima!", "Não, obrigado.", "Não posso. Tchau."]}],
+  "r": "Un «no» brasileño casi nunca es seco: agradecé, lamentá y dá una razón o una alternativa: *poxa, adoraria, mas…*, *fica pra próxima*.",
+  "ex": [["*Adoraria*, mas já tenho compromisso.", "Me encantaría, pero ya tengo un compromiso."], ["*Que pena*, nesse dia não *vai dar*.", "Qué lástima, ese día no voy a poder."], ["*Fica pra próxima!*", "¡Queda para la próxima!"], ["*Obrigado pelo convite*, de verdade.", "Gracias por la invitación, de verdad."], ["*Vou ver* e te falo.", "Voy a ver y te aviso."]],
+  "warn": "*Vou ver e te falo* muchas veces es un «no» educado. Y *não vai dar* es «no voy a poder»."},
+
 ]},
 
 19: {
@@ -663,6 +691,7 @@ LESSONS = {
 "parts": [
  {"h": "tudo, todo y los indefinidos", "blocks": [0, 1, 5]},
  {"h": "Negar en portugués de Brasil", "blocks": [2, 3, 4]},
+ {"h": "Reaccionar y no coincidir sin pelear", "blocks": [6, 7, 8]},
 ],
 "blocks": [
  {"h": "tudo ≠ todo",
@@ -747,6 +776,26 @@ LESSONS = {
           "varía: *cada dia*, *cada semana*.",
   "tip": "*bastante* = mucho, bastante: *bastante gente*. *um pouco de* = "
          "un poco de: *um pouco de farofa*."},
+
+ {"h": "Palavras que não estão no dicionário (4): ué, eita, nem pensar, pois é",
+  "q": [{"prompt": "—O ônibus atrasou de novo. ¿Cómo le das la razón?", "answer": "Pois é…", "options": ["Pois é…", "Pues es…", "Nem pensar!"]}],
+  "r": "Reacciones: *ué* (extrañeza), *eita* (sorpresa, susto), *nem pensar* y *de jeito nenhum* (negativa firme), *pois é* (dar la razón).",
+  "ex": [["*Ué*, a loja está fechada?", "¿Eh? ¿La tienda está cerrada?"], ["*Eita*, que susto!", "¡Uy, qué susto!"], ["— Empresta o carro? — *Nem pensar!*", "—¿Me prestás el auto? —¡Ni loco!"], ["— O ônibus atrasou de novo. — *Pois é…*", "—El colectivo se atrasó otra vez. —Y sí…"], ["*De jeito nenhum* vou sair com essa chuva.", "De ninguna manera salgo con esta lluvia."]],
+  "warn": "*pois é* no es «pues es»: es «y sí», «así es», para dar la razón o llenar una pausa.",
+  "tip": "*Eita* nació en el Nordeste y hoy se oye en todo Brasil."},
+
+ {"h": "Discordar sem brigar",
+  "q": [{"prompt": "Un colega dice que Río es la ciudad más cara de Brasil. No estás de acuerdo. Elegí lo más adecuado.", "answer": "Acho que não é bem assim: São Paulo é mais cara.", "options": ["Acho que não é bem assim: São Paulo é mais cara.", "Não. Você está errado.", "Nem pensar, você não sabe nada."]}],
+  "r": "Para no coincidir sin ofender: *acho que não é bem assim*, *entendo, mas…*, *em parte, você tem razão*. El *não* seco suena brusco.",
+  "ex": [["*Acho que não é bem assim.*", "Me parece que no es tan así."], ["*Entendo, mas* eu vejo de outro jeito.", "Te entiendo, pero yo lo veo de otra manera."], ["*Em parte*, você tem razão.", "En parte, tenés razón."], ["*Não sei, não…*", "Mmm, no sé…"]],
+  "warn": "«Estás equivocado» → *você está enganado* suena fuerte. Mejor *acho que não é bem assim*."},
+
+ {"h": "Sotaque da semana: Bahia",
+  "q": [{"prompt": "En Salvador, ¿quién es mainha?", "answer": "la mamá", "options": ["la mamá", "la abuela", "la madrina"]}],
+  "r": "El baiano abre las vocales y alarga las frases; sus marcas: *oxe* (sorpresa, fastidio), *meu rei* (trato cariñoso), *painho* y *mainha* (papá y mamá).",
+  "ex": [["*Oxe*, que foi isso?", "¡Epa! ¿Qué fue eso?"], ["Calma, *meu rei*!", "¡Tranquilo, querido!"], ["*Mainha* fez acarajé.", "Mamá hizo acarajé."]],
+  "tip": "*Oxe* y *oxente* se oyen en todo el Nordeste. La voz de la app es la estándar: el acento no se oye, las palabras sí."},
+
 ]},
 
 21: {
@@ -853,7 +902,7 @@ LESSONS = {
          "la gramática de las noticias y de los trámites.",
 "parts": [
  {"h": "Participios irregulares y dobles", "blocks": [0, 1, 2]},
- {"h": "La voz pasiva con ser y estar", "blocks": [3, 4]},
+ {"h": "La voz pasiva con ser y estar", "blocks": [3, 4, 5]},
 ],
 "blocks": [
  {"h": "Los irregulares de siempre",
@@ -936,6 +985,15 @@ LESSONS = {
           "los dobles: con *estar* va el corto, *está pago*, *está aceso*.",
   "q": [{"prompt": "«La cuenta está paga.»", "stem": "A conta está ___.",
          "answer": "paga", "options": ["paga", "pagada", "pago"]}]},
+
+ {"h": "Leer palabras largas: -ção, -mento, -dade",
+  "q": [{"prompt": "¿Qué significa «a construção»?", "answer": "la construcción", "options": ["la construcción", "construir", "construido"]}],
+  "r": "Muchas palabras largas son un verbo o un adjetivo con sufijo: *-ção* (-ción), *-mento* (-miento), *-dade* (-dad), *-eza* (-eza). Reconocelas y entendés el texto.",
+  "table": {"head": ["Base", "Palabra"], "rows": [["construir", "a construção"], ["pagar", "o pagamento"], ["cidadão", "a cidadania"], ["feliz", "a felicidade"], ["belo", "a beleza"]]},
+  "ex": [["A *construção* do Cristo durou nove anos.", "La construcción del Cristo duró nueve años."], ["O *pagamento* foi feito por Pix.", "El pago se hizo por Pix."], ["A *felicidade* não tem preço.", "La felicidad no tiene precio."], ["A *beleza* da baía é famosa.", "La belleza de la bahía es famosa."]],
+  "warn": "*-ção* es femenino (*a construção*), *-mento* masculino (*o pagamento*), *-dade* femenino (*a cidade*).",
+  "tip": "Esta semana, a leer; en la semana 44 vas a formarlas vos."},
+
 ]},
 
 23: {
@@ -1050,6 +1108,7 @@ LESSONS = {
  {"h": "Finalidad y tiempo", "blocks": [0, 1]},
  {"h": "Concesión y condición", "blocks": [2, 3]},
  {"h": "Imperativo formal y los que no piden subjuntivo", "blocks": [4, 5]},
+ {"h": "Dudar, desear e interrumpir", "blocks": [6, 7, 8]},
 ],
 "blocks": [
  {"h": "para que: finalidad",
@@ -1138,6 +1197,25 @@ LESSONS = {
          ["*Como* *chovia*, ficamos em casa.", "Como llovía, nos quedamos en casa."]],
   "warn": "No subjuntivices por analogía: la causa es un hecho y va en "
           "indicativo. «Porque esteja cansado» es error."},
+
+ {"h": "Palavras que não estão no dicionário (5): será que, vai que, sei lá, tomara",
+  "q": [{"prompt": "¿Cómo se dice «ojalá salga todo bien»?", "answer": "Tomara que dê tudo certo!", "options": ["Tomara que dê tudo certo!", "Tomara que dá tudo certo!", "Vai que dê tudo certo!"]}],
+  "r": "Para dudar y desear: *será que…?* (me pregunto si…), *vai que…* (por si…), *sei lá* (qué sé yo), *tomara que* + subjuntivo (ojalá).",
+  "ex": [["*Será que* vai chover?", "¿Irá a llover?"], ["Leva o guarda-chuva, *vai que* chove.", "Llevá el paraguas, por si llueve."], ["— Onde ele está? — *Sei lá!*", "—¿Dónde está? —¡Qué sé yo!"], ["*Tomara que* dê tudo certo!", "¡Ojalá salga todo bien!"]],
+  "warn": "*vai que* va en el habla con presente de indicativo (*vai que chove*); *tomara que*, siempre con subjuntivo (*tomara que chova*)."},
+
+ {"h": "Interromper e pedir um favor grande",
+  "q": [{"prompt": "Necesitás que una vecina te cuide el gato un mes. Elegí el pedido más adecuado.", "answer": "Será que você poderia cuidar do meu gato em julho?", "options": ["Será que você poderia cuidar do meu gato em julho?", "Cuida do meu gato em julho.", "Você cuida do gato, né?"]}],
+  "r": "Para interrumpir: *desculpa interromper*, *só um minutinho*. Un favor grande se prepara: *queria te pedir uma coisa*, *será que você poderia…?*.",
+  "ex": [["*Desculpa interromper*, mas o táxi chegou.", "Perdón que interrumpa, pero llegó el taxi."], ["*Só um minutinho*: deixa eu terminar.", "Un minutito: dejame terminar."], ["*Queria te pedir uma coisa.*", "Te quería pedir algo."], ["*Será que você poderia* me emprestar o carro?", "¿Me podrías prestar el auto?"], ["*Você se importaria de* regar as plantas?", "¿Te molestaría regar las plantas?"]],
+  "warn": "El imperativo solo (*Cuida do meu gato*) es para lo chico. Para lo grande, pregunta y condicional."},
+
+ {"h": "Sotaque da semana: Pernambuco",
+  "q": [{"prompt": "En Recife, «O show foi massa!» quiere decir…", "answer": "¡El recital estuvo bárbaro!", "options": ["¡El recital estuvo bárbaro!", "El recital fue masivo.", "El recital fue pesado."]}],
+  "r": "En Recife se usa *tu* y se abren las vocales. Sus palabras: *oxente* (sorpresa), *massa* (bárbaro), *arretado* (bárbaro, o enojado).",
+  "ex": [["*Oxente*, *tu* não sabia?", "¿Cómo? ¿No sabías?"], ["O show foi *massa*!", "¡El recital estuvo bárbaro!"], ["Esse frevo é *arretado*!", "¡Este frevo es bárbaro!"]],
+  "tip": "El *frevo* es el ritmo del carnaval de Recife y Olinda. La voz de la app es la estándar: el acento no se oye, las palabras sí."},
+
 ]},
 
 25: {

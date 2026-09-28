@@ -217,7 +217,7 @@
 
     /* I gradi: un titolo per ogni tappa, da turista a madrelingua.
        Calibrati su una carriera intera: chi gioca tutto il corso arriva al
-       livello 40 (tools/it/sim_carriera.js).  Madrelingua è la fine del corso. */
+       livello 40 (tools/lib/sim_carriera.js it).  Madrelingua è la fine del corso. */
     ranks: [
       [1, "Turista"], [3, "Viaggiatore"], [6, "Studente Erasmus"],
       [10, "Pendolare"], [14, "Cittadino"], [18, "Chiacchierone"],

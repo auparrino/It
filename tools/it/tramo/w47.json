@@ -346,5 +346,39 @@
       "sfratto": "desalojo",
       "mensilità": "meses de alquiler, mensualidades"
     }
+  },
+  "breve": {
+    "title": "Notiziario economico delle sette",
+    "genre": "notiziario radiofonico",
+    "es": "El boletín económico de la mañana: inflación, hipotecas, una residencia estudiantil y la Bolsa.",
+    "speaker": "Giornalista economica",
+    "voice": 1,
+    "text": [
+      "Notiziario economico delle sette. Secondo i dati diffusi ieri dall'Istat, a settembre l'inflazione è scesa all'uno virgola otto per cento, contro il due virgola tre del mese precedente. Calano soprattutto i prezzi dell'energia, mentre gli alimentari restano cari: più tre per cento in un anno.",
+      "Mutui: il tasso medio per l'acquisto della prima casa è sceso sotto il tre per cento per la prima volta da due anni. Secondo le associazioni dei consumatori, su un mutuo di centocinquantamila euro in venticinque anni si risparmiano circa quaranta euro al mese.",
+      "A Monteverde il nuovo studentato nell'ex caserma di via Garibaldi offrirà duecentocinquanta posti letto; i lavori, finanziati con sei milioni di euro, dovrebbero partire a gennaio.",
+      "In Borsa, apertura in lieve rialzo: Milano guadagna lo zero virgola quattro per cento."
+    ],
+    "tabella": [
+      ["Inflazione di settembre (%)", "1,8", ["1.8", "uno virgola otto", "1,8%"]],
+      ["Aumento degli alimentari in un anno (%)", "3", ["tre", "+3", "3%", "piu tre"]],
+      ["Risparmio al mese sul mutuo (euro)", "40", ["quaranta", "circa 40", "circa quaranta"]],
+      ["Posti letto dello studentato", "250", ["duecentocinquanta"]],
+      ["Mese di inizio dei lavori", "gennaio", ["a gennaio"]]
+    ],
+    "info": [
+      ["L'inflazione è salita rispetto al mese precedente.", false],
+      ["I prezzi dell'energia sono in calo.", true],
+      ["Il tasso dei mutui è sotto il tre per cento.", true],
+      ["Lo studentato costerà dodici milioni.", false],
+      ["La Borsa di Milano apre in calo.", false],
+      ["I prezzi degli alimentari restano alti.", true]
+    ],
+    "gloss": {
+      "mutui": "créditos hipotecarios",
+      "tasso": "tasa",
+      "studentato": "residencia estudiantil",
+      "rialzo": "suba"
+    }
   }
 }

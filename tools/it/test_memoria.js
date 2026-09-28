@@ -7,8 +7,7 @@ var ctx = pack("it");
 var Engine = ctx.Engine;
 var Frasi = ctx.Frasi;
 var Drills = ctx.Drills;
-var fails = 0, checks = 0;
-function ok(cond, what) { checks++; if (!cond) { fails++; console.log("FAIL " + what); } }
+var T = require("../lib/testkit.js")("it"), ok = T.ok;
 function near(a, b, tol) { return Math.abs(a - b) <= tol; }
 var DAY = 86400000;
 // a fixed noon, so the night mode does not kick in by accident
@@ -160,5 +159,4 @@ var sg = Engine.subGoals(s8);
 ok(sg.boss === 13 && sg.level === "A2" && sg.wordsPerWeek >= 10 && sg.weeksLeft === 13, "sotto-obiettivi: " + JSON.stringify(sg));
 ok(!Engine.noteRecord(s8, "sessione", 80) && Engine.noteRecord(s8, "sessione", 90) && !Engine.noteRecord(s8, "sessione", 85), "record personale");
 
-console.log("controlli: " + checks + "   errori: " + fails);
-process.exit(fails ? 1 : 0);
+T.done("");

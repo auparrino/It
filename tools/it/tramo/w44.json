@@ -352,5 +352,39 @@
       "falde": "napas (de agua)",
       "tagliare i fondi": "recortar el financiamiento"
     }
+  },
+  "breve": {
+    "title": "Prima di entrare in galleria",
+    "genre": "istruzioni di sicurezza",
+    "es": "Las instrucciones de seguridad antes de la visita a los laboratorios subterráneos del Gran Sasso.",
+    "speaker": "Guida",
+    "voice": 1,
+    "text": [
+      "Benvenuti ai Laboratori del Gran Sasso. Prima di entrare in galleria, ascoltate con attenzione queste istruzioni di sicurezza. Durante la visita indosserete il casco, che vi verrà consegnato all'ingresso, e porterete con voi un piccolo apparecchio di emergenza, tenendolo sempre agganciato alla cintura.",
+      "Camminando in galleria, restate dietro alla guida e non superate mai la linea gialla. Le sale sperimentali si visitano in gruppi di dieci persone al massimo; aspettando il vostro turno, potrete guardare il video nella sala d'accoglienza.",
+      "In caso di allarme, sentendo la sirena, lasciate ogni cosa e seguite le luci verdi fino al rifugio più vicino. Non usate i telefoni: sotto la montagna non c'è campo, e le comunicazioni passano solo attraverso la rete interna.",
+      "La visita dura circa due ore. È vietato fotografare le sale sperimentali senza il permesso della guida. Grazie, e buona visita."
+    ],
+    "tabella": [
+      ["Oggetto da tenere agganciato alla cintura", "apparecchio di emergenza", ["l'apparecchio di emergenza", "apparecchio"]],
+      ["Colore della linea da non superare", "gialla", ["giallo"]],
+      ["Persone al massimo per gruppo", "10", ["dieci"]],
+      ["Colore delle luci da seguire in caso di allarme", "verdi", ["verde"]],
+      ["Durata della visita", "2 ore", ["due ore", "circa due ore", "2"]]
+    ],
+    "info": [
+      ["Il casco si riceve all'ingresso.", true],
+      ["Si può camminare davanti alla guida.", false],
+      ["Mentre si aspetta il turno si può guardare un video.", true],
+      ["In caso di allarme bisogna telefonare subito ai soccorsi.", false],
+      ["Sotto la montagna i cellulari non hanno campo.", true],
+      ["Nelle sale sperimentali si possono fare foto liberamente.", false]
+    ],
+    "gloss": {
+      "galleria": "túnel",
+      "agganciato": "enganchado",
+      "rifugio": "refugio",
+      "campo": "señal (del celular)"
+    }
   }
 }

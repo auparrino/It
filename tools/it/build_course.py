@@ -2,11 +2,12 @@
 # -*- coding: utf-8 -*-
 """Assemble the playable course from the extracted banks + the authored items.
 
-Reads   docs/data/bank_dummies.json, docs/data/bank_routledge.json
-        tools/authored/*.py
-Writes  docs/data/course.json   (52 weekly missions + the graded item bank)
+Reads   tools/it/fuentes/bank_dummies.json, tools/it/fuentes/bank_routledge.json
+        (extractos de libros comerciales: no se publican, por eso no van en docs/)
+        tools/it/authored/*.py
+Writes  docs/lang/it/data/course.json   (52 weekly missions + the graded item bank)
 
-Run:  python3 tools/build_course.py
+Run:  python3 tools/it/build_course.py
 """
 import importlib.util
 import json
@@ -18,6 +19,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 DATA = os.path.join(ROOT, "docs", "lang", "it", "data")
+FUENTES = os.path.join(ROOT, "tools", "it", "fuentes")
 
 # --------------------------------------------------------------------------
 # El programa del año.  d = capítulos de "Italian Grammar For Dummies"
@@ -333,7 +335,7 @@ WEEKS = [
     dict(w=26, title="BOSS — Livello B1", level="B1", d=[16, 17, 18], r=[20, 21], boss=True,
          focus="Examen de la segunda estación: pasados, futuros, pronombres y congiuntivo presente.",
          keys=["Passato prossimo e imperfetto elegidos sin dudar.",
-               "Futuro y condicional con raíces irregulares.",
+               "Futuro y condizionale con raíces irregulares.",
                "Pronombres combinados, ne y ci.",
                "Congiuntivo presente después de opinión, deseo y duda.",
                "Comparativos y negaciones en frases largas."],
@@ -549,7 +551,7 @@ WEEKS = [
                "Evitar el calco del español en la subordinación."],
          v=["essere", "porre", "trarre", "tradurre"],
          tenses=["congiuntivo", "condizionale"], t=["connettivi"]),
-    dict(w=50, title="Lessico avanzato e falsi amici", level="C1", d=[], r=[6, 15],
+    dict(w=50, title="Lessico avanzato e falsi amici", level="C1", d=[], r=[6],
          focus="La última trampa del hispanohablante: el vocabulario que se parece.",
          keys=["burro, salire, aceto, guardare, prima, largo, esito, imbarazzata.",
                "Matices: sapere/conoscere, portare/prendere, andare/venire.",
@@ -759,7 +761,45 @@ def load_lessons() -> dict:
             if week in out:
                 raise ValueError("lezione doppia per la settimana %s" % week)
             out[week] = lesson
-    return out
+    return merge_extra_blocks(out, folder)
+
+
+def extra_blocks(folder=None) -> tuple:
+    """({week: [blocks]}, pin prefixes) of the lesson modules that add blocks
+    to other lessons (EXTRA_BLOCKS: tools/it/lessons/c1_extra.py)."""
+    folder = folder or os.path.join(ROOT, "tools", "it", "lessons")
+    extra, pins = {}, []
+    for fn in sorted(os.listdir(folder)):
+        if not fn.endswith(".py") or fn == "__init__.py":
+            continue
+        spec = importlib.util.spec_from_file_location(fn[:-3], os.path.join(folder, fn))
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        for week, blocks in getattr(mod, "EXTRA_BLOCKS", {}).items():
+            extra.setdefault(week, []).extend(blocks)
+        pins += list(getattr(mod, "PIN_PREFIXES", ()))
+    return extra, pins
+
+
+def merge_extra_blocks(lessons: dict, folder=None) -> dict:
+    """Append the extra blocks to their week's lesson (a copy): in a lesson in
+    parts they go to the last part, and the exercises named by the pin
+    prefixes (c1-fp-27-…) go there too, whatever the parts' patterns say."""
+    extra, pins = extra_blocks(folder)
+    for week, blocks in extra.items():
+        if week not in lessons:
+            continue
+        lesson = dict(lessons[week])
+        first = len(lesson["blocks"])
+        lesson["blocks"] = list(lesson["blocks"]) + list(blocks)
+        if lesson.get("parts"):
+            parts = [dict(p) for p in lesson["parts"]]
+            last = parts[-1]
+            last["blocks"] = list(last["blocks"]) + list(range(first, first + len(blocks)))
+            last["prefix"] = list(last.get("prefix") or []) + [p % week for p in pins]
+            lesson["parts"] = parts
+        lessons[week] = lesson
+    return lessons
 
 
 # The lesson is read on a phone: short rule, then the table or the examples.
@@ -964,10 +1004,32 @@ def place_by_syllabus(weeks: list, by_id: dict, challenges: list) -> None:
     print("sillabo: %d ejercicios pasan a una semana posterior, a su teoría" % len(moved))
 
 
+def clean_week_50(weeks: list, by_id: dict) -> None:
+    """Week 50 (lessico C1) keeps C1 lexicon and word formation.
+
+    As a review week it drew whole chapters, and 123 of its 179 items needed
+    only the grammar of week 9 or earlier (a / in / da, falsos amigos A2:
+    «Vado ___ supermercato»).  The prepositions chapter no longer comes in
+    (WEEKS: r=[6]); what still asks week-9 grammar leaves the week: it stays
+    where it already lives (week 9, 46, the extras of 10-31) or, if it lived
+    only here, goes to the review of week 13 (the boss of the first season).
+    """
+    by_week = {w["week"]: w for w in weeks}
+    w50, w13 = by_week[50], by_week[13]
+    elsewhere = {i for w in weeks if w["week"] != 50 and not w["boss"] for i in w["items"] + w["extra"]}
+    keep = []
+    for iid in w50["items"]:
+        if by_id[iid].get("wk", 1) > 9 or by_id[iid].get("w") == 50:
+            keep.append(iid)       # the week's own C1 items (w=50) stay
+        elif iid not in elsewhere:
+            w13["extra"].append(iid)
+    w50["items"] = keep
+
+
 def main() -> None:
-    with open(os.path.join(DATA, "bank_dummies.json"), encoding="utf-8") as fh:
+    with open(os.path.join(FUENTES, "bank_dummies.json"), encoding="utf-8") as fh:
         dummies = json.load(fh)
-    with open(os.path.join(DATA, "bank_routledge.json"), encoding="utf-8") as fh:
+    with open(os.path.join(FUENTES, "bank_routledge.json"), encoding="utf-8") as fh:
         routledge = json.load(fh)
     # The book restarts exercise numbers in every subsection, so the same id
     # can name several exercises: make each one unique (r07-02, r07-02b…),
@@ -989,11 +1051,11 @@ def main() -> None:
                 x["id"] = x["id"] + "abcdefghijklmnopqrstuvwxyz"[n]
 
     # --- graded items from the Dummies bank -----------------------------
-    # tools/audit/patches/dummies/*.json rewrites each exercise for a Spanish
+    # tools/it/fuentes/parches/dummies/*.json rewrites each exercise for a Spanish
     # speaker: specific instruction, blank where the answer goes, no English.
     patches = {}
-    pdir = os.path.join(ROOT, "tools", "it", "audit", "patches", "dummies")
-    for fn in sorted(os.listdir(pdir)) if os.path.isdir(pdir) else []:
+    pdir = os.path.join(FUENTES, "parches", "dummies")
+    for fn in sorted(os.listdir(pdir)):
         if fn.endswith(".json"):
             with open(os.path.join(pdir, fn), encoding="utf-8") as fh:
                 patches.update(json.load(fh)["items"])
@@ -1039,6 +1101,7 @@ def main() -> None:
         by_chapter.setdefault(it["chapter"], []).append(it["id"])
     by_topic = {}
     by_week_authored = {}
+    exam_ids = {it["id"] for it in authored if it.get("topic") == "esame"}
     for it in authored:
         if it.get("w"):
             by_week_authored.setdefault(int(it["w"]), []).append(it["id"])
@@ -1075,7 +1138,9 @@ def main() -> None:
             pool += by_topic.get(t, [])
         # authored items that name their own week («w»): garden path,
         # scopri la regola, output empujado, contrastes, colocaciones…
-        pool += [i for i in by_week_authored.get(spec["w"], []) if i not in pool]
+        # The final exam's items (topic «esame», w=52) are only asked in the
+        # exam: they stay out of week 52's training and of the boss round.
+        pool += [i for i in by_week_authored.get(spec["w"], []) if i not in pool and i not in exam_ids]
 
         chal = []
         review = spec.get("boss") or spec["w"] in (49, 50, 51)
@@ -1129,12 +1194,12 @@ def main() -> None:
         for m in missing:
             print("  -", m)
 
-    # Routledge challenges.  tools/audit/patches/sfide/*.json holds the answer
+    # Routledge challenges.  tools/it/fuentes/parches/sfide/*.json holds the answer
     # key: with it a challenge becomes a graded round (items "s:<id>:<label>"),
     # without it it stays self-scored.
     keys = {}
-    sdir = os.path.join(ROOT, "tools", "it", "audit", "patches", "sfide")
-    for fn in sorted(os.listdir(sdir)) if os.path.isdir(sdir) else []:
+    sdir = os.path.join(FUENTES, "parches", "sfide")
+    for fn in sorted(os.listdir(sdir)):
         if fn.endswith(".json"):
             with open(os.path.join(sdir, fn), encoding="utf-8") as fh:
                 keys.update(json.load(fh))
@@ -1171,6 +1236,7 @@ def main() -> None:
             flat.append(ch)
 
     place_by_syllabus(weeks, {i["id"]: i for i in items + authored + sfida_items}, flat)
+    clean_week_50(weeks, {i["id"]: i for i in items + authored + sfida_items})
 
     course = {
         "title": "La Via C1",
@@ -1199,7 +1265,8 @@ def main() -> None:
             ans = str(it.get("answer") or "").strip()
             home = len(parts) - 1
             # «ids»: exercises placed by hand in a part win over the patterns.
-            fixed = [k for k, p in enumerate(parts) if iid in (p.get("ids") or [])]
+            fixed = [k for k, p in enumerate(parts) if iid in (p.get("ids") or [])
+                     or any(iid.startswith(x) for x in p.get("prefix") or [])]
             for k, p in enumerate([] if fixed else parts):
                 # The answer alone may name the part («il», «uno»), except for
                 # patterns that exclude by lookahead: those read the whole text.

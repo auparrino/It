@@ -165,7 +165,7 @@ VOCAB = {
 12: [
     ["costas", "espalda (siempre plural)", "Estou com dor nas costas.", "Siempre plural: *as costas*. *Estou com dor nas costas* (em + as). *A costa*, en singular, es la del mar."],
     ["barriga", "panza", "Comi muito e estou com dor de barriga.", "*Dor de barriga* = dolor de panza. Femenino: *a barriga*. *Estou com dor de barriga* = me duele la panza."],
-    ["joelho", "rodilla", "Machuquei o joelho no futebol.", "Masculino: *o joelho*; *lh* suena parecido a «li». *De joelhos* = de rodillas."],
+    ["joelho", "rodilla", "Machuquei o joelho no futebol.", "Masculino: *o joelho*; *lh* es una sola consonante, como la «ll» de «calle» dicha a la antigua (nunca «li»). *De joelhos* = de rodillas."],
     ["ombro", "hombro", "Dói o ombro direito.", "Sin *h*: *o ombro*. *Encolher os ombros* = encogerse de hombros. Doler con sujeto: *dói o ombro*."],
     ["pescoço", "cuello", "Ela está com dor no pescoço.", "Masculino y neutro, sin tono despectivo: *dor no pescoço*. El cuello de la camisa es *a gola*."],
     ["tosse", "tos", "Tome este xarope para a tosse.", "Femenino: *a tosse*. Verbo *tossir*: *eu tusso*, *ele tosse*. *Estar com tosse* = tener tos."],

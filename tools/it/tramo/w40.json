@@ -337,5 +337,39 @@
       "In mancanza di": "a falta de",
       "tutelare": "proteger, defender"
     }
+  },
+  "breve": {
+    "title": "Il centro assistenza richiama",
+    "genre": "messaggio in segreteria",
+    "es": "El service técnico deja un mensaje sobre el lavarropas en garantía: qué se rompió, qué se paga y cuándo llega el repuesto.",
+    "speaker": "Operatrice del centro assistenza",
+    "voice": 1,
+    "text": [
+      "Buongiorno signor Ferri, la chiamiamo dal centro assistenza Tecnoservice per la sua richiesta di riparazione numero 4127. Il tecnico che ha visto la lavatrice ci ha fatto sapere che il guasto riguarda la scheda elettronica e che il pezzo va ordinato direttamente alla casa madre.",
+      "Poiché l'apparecchio è ancora in garanzia, la riparazione e il pezzo sono gratuiti: le faremo pagare soltanto il diritto di chiamata, trentacinque euro, come previsto dalle condizioni della garanzia.",
+      "Il pezzo dovrebbe arrivare entro dieci giorni lavorativi. Appena arriva, la faremo richiamare dal tecnico per fissare l'appuntamento. Se preferisce, può anche farsi sostituire l'apparecchio: in questo caso, però, dovrebbe portarci lo scontrino originale.",
+      "Per qualsiasi domanda ci chiami dal lunedì al venerdì, dalle nove alle diciassette, citando il numero della pratica. Buona giornata."
+    ],
+    "tabella": [
+      ["Numero della pratica", "4127", ["4 1 2 7"]],
+      ["Parte guasta", "scheda elettronica", ["la scheda elettronica", "scheda"]],
+      ["Costo da pagare (euro)", "35", ["trentacinque"]],
+      ["Tempo per l'arrivo del pezzo", "10 giorni", ["dieci giorni", "10 giorni lavorativi", "dieci giorni lavorativi", "entro dieci giorni"]],
+      ["Documento necessario per la sostituzione", "scontrino", ["lo scontrino", "scontrino originale", "lo scontrino originale"]]
+    ],
+    "info": [
+      ["La lavatrice non è più in garanzia.", false],
+      ["Il pezzo si ordina alla casa madre.", true],
+      ["Il tecnico chiamerà per fissare l'appuntamento.", true],
+      ["La riparazione costa trentacinque euro più il pezzo.", false],
+      ["Si può chiedere di sostituire la lavatrice.", true],
+      ["Il centro assistenza risponde anche il sabato.", false]
+    ],
+    "gloss": {
+      "scheda elettronica": "placa electrónica",
+      "diritto di chiamata": "costo de la visita (del técnico)",
+      "scontrino": "ticket de compra",
+      "pratica": "trámite, expediente"
+    }
   }
 }

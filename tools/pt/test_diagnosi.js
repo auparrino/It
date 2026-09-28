@@ -19,11 +19,7 @@ if (bank && !/\b(você|não|está|também)\b/.test((bank.sentences || []).slice(
 if (bank && Banca) Banca.load(bank); else if (bank) D.init(bank);
 function variants(s) { return s.pt || s.it; }
 
-var fails = 0, checks = 0;
-function ok(cond, what) {
-  checks++;
-  if (!cond) { fails++; console.log("FAIL " + what); }
-}
+var T = require("../lib/testkit.js")("pt"), ok = T.ok;
 
 /* ------------------------------------------------ casos escritos a mano */
 
@@ -196,7 +192,7 @@ var FAMILIES = [
   ["Eu lo vi ontem.", ["Eu o vi ontem."], {}, { cat: "pronome", notHint: /artículo/ }],
   ["se lo", ["para ela"], { stem: "Comprei um presente e dei ___." }, { choice: true, cat: "pronome", explain: /para ela/ }],
   // la mesóclise bien escrita
-  ["Lhe direi a verdade.", ["Dir-lhe-ei a verdade."], {}, { cat: "colocacao", explain: /dir-lhe-ei/, notExplain: /direi-lhe/ }],
+  ["Lhe direi a verdade.", ["Dir-lhe-ei a verdade."], { registro: "formal" }, { cat: "colocacao", explain: /dir-lhe-ei/, notExplain: /direi-lhe/ }],
   ["Eles mudarão se em março.", ["Eles se mudarão em março."], {}, { cat: "colocacao", explain: /mesóclise/ }],
   // el pronombre repetido
   ["Ela se chama-se Beatriz.", ["Ela se chama Beatriz."], {}, { cat: "pronome", explain: /una sola vez/ }],
@@ -493,5 +489,4 @@ if (bank) {
   }
 }
 
-console.log("\ncontroles: " + checks + "   errores: " + fails);
-process.exit(fails ? 1 : 0);
+T.done();

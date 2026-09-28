@@ -116,7 +116,7 @@
       ]
     ],
     "hunt": {
-      "label": "Tocá los verbos de decir que atribuyen con precisión lo que dice cada fuente",
+      "label": "Toque nos verbos de dizer que atribuem com precisão o que cada fonte diz",
       "targets": [
         "ressalta",
         "esclarece",
@@ -305,7 +305,7 @@
     "genre": "resumo",
     "title": "Aula mais tarde? O que diz a pesquisa",
     "fonte": "lettura",
-    "t": "Você faz parte do conselho de pais de uma escola estadual de Belo Horizonte, que está discutindo a possibilidade de mudar o horário de entrada das aulas. A direção pediu que você escreva, para o boletim informativo da escola, um resumo da reportagem “Sono, telas e o sinal das sete”, para que todas as famílias conheçam o assunto antes da próxima reunião. O resumo deve apresentar o estudo, os seus principais resultados, as posições favoráveis e contrárias à mudança e as recomendações dos pesquisadores, sem acrescentar a sua opinião. Não se esqueça de reformular com as suas palavras (sem copiar frases do texto) e de usar verbos de dizer precisos para atribuir cada ideia à sua fonte. Registro formal. Seu texto deve ter entre 233 e 293 palavras.",
+    "t": "Você faz parte do conselho de pais de uma escola estadual de Belo Horizonte, que está discutindo a possibilidade de mudar o horário de entrada das aulas. A direção pediu que você escreva, para o boletim informativo da escola, um resumo da reportagem “Sono, telas e o sinal das sete”, para que todas as famílias conheçam o assunto antes da próxima reunião. O resumo deve apresentar o estudo, os seus principais resultados, as posições favoráveis e contrárias à mudança e as recomendações dos pesquisadores, sem acrescentar a sua opinião. Não se esqueça de reformular com as suas palavras (sem copiar frases do texto) e de usar verbos de dizer precisos para atribuir cada ideia à sua fonte.",
     "es": "Resumen objetivo para el boletín de la escuela: estudio, resultados, posturas a favor y en contra, recomendaciones. Sin opinión propia, reformulando y atribuyendo cada idea con verbos precisos (admite, advierte, sostiene…).",
     "min": 233,
     "max": 293,
@@ -362,6 +362,97 @@
       "dias letivos": "días de clase",
       "por sua vez": "a su vez, por su parte",
       "experiências-piloto": "pruebas piloto"
+    }
+  },
+  "breve": {
+    "title": "Ciência de Bolso: celular na cama",
+    "genre": "podcast de divulgação científica",
+    "es": "Un podcast que resume un estudio sobre adolescentes, celulares y sueño, con los verbos que presentan lo que dice cada uno: afirmar, alertar, ressaltar, reconhecer, sugerir.",
+    "speaker": "Lívia Prado",
+    "voice": 1,
+    "text": [
+      "Oi, gente! Aqui é a Lívia Prado, e este é o Ciência de Bolso, o podcast que resume uma pesquisa em dois minutos.",
+      "A pesquisa de hoje foi feita pela Universidade de São Paulo com 1.200 adolescentes de 14 a 17 anos. Os autores afirmam que quem usa o celular na cama dorme, em média, 50 minutos a menos por noite. Eles alertam que o problema não é só a luz da tela, mas sobretudo as notificações, que acordam o cérebro.",
+      "A coordenadora do estudo, a médica Helena Costa, ressalta que a escola também tem um papel: nas escolas que começam as aulas às 7 horas, os alunos chegam mais cansados. Ela reconhece, porém, que mudar o horário não é simples, e sugere começar por uma medida barata: deixar o celular fora do quarto.",
+      "E você, dorme com o celular do lado? Conta pra gente nos comentários. Até a próxima!"
+    ],
+    "tabella": [
+      [
+        "Número de adolescentes na pesquisa",
+        "1.200",
+        [
+          "1200",
+          "mil e duzentos"
+        ]
+      ],
+      [
+        "Idade dos participantes",
+        "14 a 17",
+        [
+          "de 14 a 17",
+          "14-17",
+          "14 a 17 anos"
+        ]
+      ],
+      [
+        "Minutos de sono a menos por noite",
+        "50",
+        [
+          "cinquenta",
+          "50 minutos"
+        ]
+      ],
+      [
+        "Nome da coordenadora do estudo",
+        "Helena Costa",
+        [
+          "Helena",
+          "doutora Helena Costa"
+        ]
+      ],
+      [
+        "Horário de início das aulas citado",
+        "7",
+        [
+          "7 horas",
+          "7h",
+          "sete",
+          "sete horas",
+          "7:00"
+        ]
+      ]
+    ],
+    "info": [
+      [
+        "Segundo o estudo, as notificações são o maior problema.",
+        true
+      ],
+      [
+        "A pesquisa foi feita com universitários.",
+        false
+      ],
+      [
+        "A coordenadora admite que mudar o horário das aulas é difícil.",
+        true
+      ],
+      [
+        "Os autores recomendam proibir o celular nas escolas.",
+        false
+      ],
+      [
+        "A medida sugerida é deixar o celular fora do quarto.",
+        true
+      ],
+      [
+        "O estudo mostra que a luz da tela não faz mal.",
+        false
+      ]
+    ],
+    "gloss": {
+      "de bolso": "de bolsillo",
+      "notificações": "notificaciones",
+      "ressalta": "destaca",
+      "sobretudo": "sobre todo"
     }
   }
 }

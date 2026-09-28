@@ -7,7 +7,7 @@ self-scored "master challenges" rather than auto-graded items.  What we take
 from it is the structure: numbered sections per chapter, and the Esercizi
 laid out as <ol class="order1"> groups of <ol class="order2"> sub-items.
 
-Usage:  python3 tools/extract_routledge.py <epub> <out.json>
+Usage:  python3 tools/it/extract_routledge.py <epub> tools/it/fuentes/bank_routledge.json
 """
 import html
 import json

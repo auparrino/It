@@ -1,9 +1,15 @@
 # Cómo se escribe el contenido de Rumo C1
 
 Rumo C1 es la versión portuguesa de *La Via C1* (el curso-juego de italiano,
-repo hermano `auparrino/It`). Mismo motor, misma didáctica; el contenido es
-nuevo y está pensado para **hispanohablantes rioplatenses que aprenden
-portugués de Brasil** hasta C1 en un año (52 semanas).
+en este mismo repo). Mismo motor, misma didáctica; el contenido es nuevo y
+está pensado para **hispanohablantes rioplatenses que aprenden portugués de
+Brasil** hasta C1 en un año (52 semanas).
+
+Lo común a los dos idiomas (dónde va cada cosa, qué se genera, cómo se
+construye y qué controla cada test) está en `CONTENIDO.md`, en la raíz. Acá
+queda lo propio del portugués: la variedad, la ortografía, los puntos
+críticos del hispanohablante, el temario, el conjugador y el detalle de los
+tipos de ítem.
 
 ## Reglas generales
 
@@ -57,7 +63,7 @@ portugués de Brasil** hasta C1 en un año (52 semanas).
 
 ## El temario manda
 
-`tools/curriculo.py` es la fuente única: `WEEKS` (título, foco, puntos
+`tools/pt/curriculo.py` es la fuente única: `WEEKS` (título, foco, puntos
 clave, verbos del gimnasio, tiempos), `SAI_FARE` (función comunicativa y
 campo léxico) y `TENSE_WEEK` (semana en que se enseña cada tiempo).
 
@@ -71,7 +77,7 @@ Vocabulario: lo que el alumno **escribe** tiene que ser vocabulario ya visto
 o transparente para un hispanohablante; en lo que **lee** se toleran
 palabras nuevas glosadas.
 
-## Claves del conjugador (`docs/js/conjugator.js`, `window.Conj`)
+## Claves del conjugador (`docs/lang/pt/conjugator.js`, `window.Conj`)
 
 Personas (índices 0-5): `["eu", "tu", "ele/ela/você", "nós", "vós",
 "eles/elas/vocês"]`. *vós* existe en las tablas pero nunca se ejercita;
@@ -85,7 +91,7 @@ futuroComposto, condicionalComposto, subjPerfeito, subjMaisQuePerfeito,
 subjFuturoComposto`. Además `imperative(inf)`, `participle(inf)`
 (con participios dobles), `gerund(inf)`.
 
-## Ítems de ejercicio (tools/authored/*.py)
+## Ítems de ejercicio (`tools/pt/authored/*.py`)
 
 Cada módulo define `ITEMS = [dict(...), ...]`. Campos comunes:
 
@@ -94,6 +100,13 @@ Cada módulo define `ITEMS = [dict(...), ...]`. Campos comunes:
   opcional), `level` (A1…C1), `type`, `prompt` (consigna en español),
   `stem`, `answer`, `alt` (otras respuestas aceptadas), `note` (la regla
   explicada, 1-2 oraciones, que se muestra al responder).
+- **Consigna en portugués** (v3): el `prompt` se escribe en castellano y
+  `tools/pt/consignas.py` lo pasa al portugués en el build: las simples
+  (*Complete. Escolha a forma correta. Traduza para o português.*) desde la
+  semana 14, todas desde la 27. Una consigna nueva de la 27 en adelante
+  tiene que estar en esa tabla (el build lo avisa; `--strict` falla). La
+  `note` queda en castellano. Las preguntas de lectura de la 27 en adelante
+  se escriben directamente en portugués.
 - `choice`: `options` (3 o 4, la respuesta entre ellas). **Distractores
   parecidos**: la misma forma con el error típico del hispanohablante, otras
   personas del mismo verbo, otros miembros de la misma clase; nunca algo
@@ -117,7 +130,7 @@ Cada módulo define `ITEMS = [dict(...), ...]`. Campos comunes:
 - `listen`: `stem` es lo que se oye (TTS pt-BR), `options`, `answer`,
   `nopeek: true`.
 
-## Estilo de las lecciones (tools/lessons/s1..s4.py)
+## Estilo de las lecciones (`tools/pt/lessons/s*.py`)
 
 Mismo formato que las lecciones de italiano: `LESSONS = {semana: {"intro",
 "parts": [{"h", "blocks": [índices]}], "blocks": [{"h", "r", "table"?,
@@ -126,3 +139,31 @@ Mismo formato que las lecciones de italiano: `LESSONS = {semana: {"intro",
 [portugués con la forma marcada entre *asteriscos*, traducción/comentario].
 `q`: chequeos escritos a mano, 3 opciones exactas con la respuesta entre
 ellas. Cada parte es una sesión de ~12 pasos.
+
+## Tramo C1 y examen (v3)
+
+- **Fichas de género** (`tools/pt/tramo/fichas.json`): 4-6 pantallas por
+  género (para qué sirve, estructura, 8-10 fórmulas, verbos, modelo
+  anotado). `tramo.js` las muestra antes de la primera tarea del género.
+  Un género nuevo necesita su entrada en `generi.json` y su ficha.
+- **Adequação** (`generi.json`, `ADEQ` y por género `trat`, `registro`,
+  `proposito`, `fonteMin`): la revisión local mide tratamiento, propósito,
+  uso de la fuente y registro. Los `punti` de cada tarea son hechos de la
+  fuente (nombres, cifras, términos), nunca palabras que cualquier texto
+  trae (*quando, semana, hoje*): `test_tramo.js` lo controla.
+- **Enunciados**: desde la 45, sin extensión ni «registro formal» (como la
+  prova, que no los dice).
+- **Examen** (`docs/lang/pt/esame_data.js`): todo en portugués, tres
+  versiones de escucha, lectura y producción escrita (`versoes`, cuatro
+  tarefas integradas con su insumo); la forma exacta está en la cabecera.
+  Estruturas y Léxico (`authored/esame_c1.py`), también en tres versiones:
+  cada ítem lleva `ver` ("v1", "v2", "v3", los ids de `versoes`); los
+  huecos van por texto (`TEXT_VER`) y el resto se reparte de a uno por
+  versión en el orden de la lista (`OVERRIDE` separa dos ítems que se
+  delatarían en la misma versión). Un ítem nuevo va al final de su familia
+  y se revisa que las tres versiones sigan parejas;
+  `tools/lib/test_fix_contenido_pt.js` lo controla.
+- **Palabras de la semana**: 18 por semana de la 15 a la 25; en el tramo,
+  15 + 12 del léxico de la lectura y la escucha de la semana
+  (`vocab/s5_tramo.py`). Colocaciones: `authored/colocacoes.py` (dos por
+  semana desde la 14); pragmática: `authored/pragmatica.py`.

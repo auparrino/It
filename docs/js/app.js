@@ -77,7 +77,19 @@
   }
 
   var saveWarned = false;
+  /* Saving writes the whole state (hundreds of KB after a few months): a
+     burst of changes (every answer, every key in the exam) is saved once,
+     a quarter of a second later, and right away when the app is hidden or
+     closed. */
+  var persistTimer = null;
   function persist() {
+    // when the progress last changed: the cloud copy compares against it (nube.js)
+    state.savedAt = Date.now();
+    if (persistTimer) return;
+    persistTimer = setTimeout(flushPersist, 250);
+  }
+  function flushPersist() {
+    if (persistTimer) { clearTimeout(persistTimer); persistTimer = null; }
     if (!Engine.save(state) && !saveWarned) {
       saveWarned = true;
       toast("⚠️ No puedo guardar tu progreso: el teléfono no tiene espacio o bloquea el almacenamiento. " +
@@ -124,6 +136,8 @@
      gives colors (LANG.confetti.colors, CSS tokens), paper bits in the
      colors of the palette with an emoji now and then. */
   function confetti() {
+    // «Reduce motion» on the phone: no confetti falling
+    if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     var cf = LG.confetti || { bits: ["🎉", "✨", "⭐"], n: 16, ms: 1900 };
     var bits = cf.bits, col = null;
     if (cf.colors) {
@@ -384,9 +398,9 @@
             '<b>' + (pct >= 100 ? "✓" : todayXp) + '</b></div>' +
           (state.streak >= 7 ? '<div class="stat boost" title="racha de 7: xp ×1,2"><b>×1,2</b><span>xp</span></div>' : "") +
           (state.boost > 0 ? '<div class="stat boost" title="doble xp en la próxima ronda"><b>🎟️' + state.boost + '</b><span>doble</span></div>' : "") +
-          '<button class="mode" id="mode" title="modo oficina">' +
+          '<button class="mode" id="mode" title="modo oficina" aria-label="Modo oficina: sin sonidos" aria-pressed="' + (state.silent ? "true" : "false") + '">' +
             (state.silent ? "🤫" : "🔊") + '</button>' +
-          '<button class="mode" id="theme" title="tema claro u oscuro">' +
+          '<button class="mode" id="theme" title="tema claro u oscuro" aria-label="Tema oscuro" aria-pressed="' + (themeNow() === "dark" ? "true" : "false") + '">' +
             (themeNow() === "dark" ? "🌙" : "☀️") + '</button>' +
         '</div>' +
       '</div>' +
@@ -429,6 +443,11 @@
     view.tab = view.screen = tab;
     render();
     window.scrollTo(0, 0);
+    // The path opens at the week you are in, not at week 1 (52 nodes).
+    if (tab === "percorso") {
+      var cur = document.querySelector(".node.current") || document.querySelector(".node:not(.locked):last-of-type");
+      if (cur) try { cur.scrollIntoView({ block: "center" }); } catch (e) { /* */ }
+    }
   }
 
   /* ------------------------------------------------------------------ hoje */
@@ -440,7 +459,7 @@
     var chestOpen = state.chest === Engine.dayKey();
     var due = Drills.dueCount(course, state, itemMap);
     var dueToday = Math.min(due, 20);
-    var weekend = Engine.goalFor(state) < (state.goal || 200);
+    var weekend = Engine.goalFor(state) < (Engine.goalValue ? Engine.goalValue(state.goal) : state.goal || 200);
     var strands = Engine.strandsLast(state, 7);
     var dailyDone = state.dailyDone === Engine.dayKey();
     var w = course.weeks[Math.min(state.unlocked, 52) - 1];
@@ -449,81 +468,81 @@
     var known = Frasi.ALL.filter(function (x) { return state.cards[x.id]; }).length;
     var hour = new Date().getHours();
     var hello = UI.hello(hour);
+    if (window.Inicio) Inicio.checkPhase();          // aprobado el examen: el modo mantenimiento
+    var maint = state.phase === "mantenimiento";
+    var anyLesson = Object.keys(state.read || {}).length > 0 || Object.keys(state.readSess || {}).length > 0 || state.unlocked > 1;
 
     var plan = weekPlan(w), doneN = plan.filter(function (x) { return x.done; }).length;
     var nm = nextMission(w);
-    // Words: the course brings 9-15 a week; the bank (Parole / Palavras) adds 12 a session.
-    var nWords = Object.keys(state.cards).filter(function (id) {
-      return id.indexOf("v:") === 0 || id.indexOf("b:voc:") === 0;
-    }).length;
-    var wordGoal = state.unlocked <= 13 ? 800 : state.unlocked <= 26 ? 1800 : state.unlocked <= 39 ? 2800 : 3800;
+    var nWords = Object.keys(state.cards).filter(function (id) { return id.indexOf("v:") === 0 || id.indexOf("b:voc:") === 0; }).length;
+    // The top: the greeting and the plan of the day (inicio.js, plan.js).
+    var top = window.Inicio ? Inicio.oggiTop() : { first: false, html: "" };
     var html = '<h1 class="hello">' + hello + '</h1>' +
-      '<p class="lead">' + (weekend
-        ? "Fin de semana: meta a la mitad (" + goal + " xp). Algo liviano alcanza: una lectura, una pausa." +
-          (state.streak > 1 ? " Llevás <b>" + dias(state.streak) + "</b>." : "")
-        : state.streak > 1
-        ? "Llevás <b>" + dias(state.streak) + "</b> seguidos" + (state.streak >= 7 ? " y tu xp vale ×1,2" : "") + ". No cortes la racha."
-        : !lessonRead(1) ? "Empezás de cero. Tu camino es " + UI.pathEl + ": un paso por vez."
-        : "Tu próximo paso está marcado. Si tenés tres minutos, " + UI.pausaUna + ".") + "</p>";
+      '<p class="lead">' + (top.first ? "Empezás hoy. Un paso por vez: lo primero es la lección." :
+        maint ? "Terminaste el curso. Ahora, que no se pierda: poco y seguido."
+        : weekend ? "Fin de semana: meta a la mitad. Algo liviano alcanza." + (state.streak > 1 ? " Llevás <b>" + dias(state.streak) + "</b>." : "")
+        : state.streak > 1 ? "Llevás <b>" + dias(state.streak) + "</b> seguidos" + (state.streak >= 7 ? " y tu xp vale ×1,2" : "") + "."
+        : "Tu plan de hoy está armado. Tocá «Empezar» y te llevo paso a paso.") + "</p>";
 
     var pend = loadPending();
-    if (pend) {
-      html += '<div class="card weekcard first"><span class="muted">⏸️ Dejaste algo a medias</span>' +
+    var pendHtml = pend ? '<div class="card weekcard first"><span class="muted">⏸️ Dejaste algo a medias</span>' +
         "<b>" + esc(pendingTitle(pend)) + "</b>" +
         '<span class="row" style="margin-top:10px"><button class="btn" id="resume">Seguir donde estaba</button>' +
-        '<button class="tab" id="discard">Descartar</button></span></div>';
-    }
+        '<button class="tab" id="discard">Descartar</button></span></div>' : "";
 
-    if (window.Ubicacion) html += Ubicacion.banner(state);
-    html += oggiHabitCards();
+    // Until the first lesson: a single card (and what was left half done).
+    if (top.first) return html + pendHtml + top.html + versionLine();
+    html += top.html + pendHtml;
+    // One habit card a day at most, that can be put off (the return first).
+    html += window.Inicio ? Inicio.habit(oggiHabitCards()) : oggiHabitCards().map(function (c) { return c.html; }).join("");
 
-    // El camino antes que nada: la semana en curso y la próxima misión.
-    html += '<div class="card weekcard first hero">' +
+    // Everything else, folded: «Más para hoy».
+    var more = "";
+    // The week and its next mission (the plan already takes it; here, the whole week).
+    if (!maint) more += '<div class="card weekcard hero">' +
       '<span class="muted">🗺️ ' + UI.path + " · semana " + w.week + " · " + esc(w.level) + " · " + doneN + " / " + plan.length + " misiones</span>" +
       "<b>" + esc(w.title) + "</b>" +
       '<span class="prog"><i style="width:' + Math.round(doneN / Math.max(1, plan.length) * 100) + '%"></i></span>' +
       (nm
         ? '<span class="muted">Siguiente: <b>' + nm.ico + " " + nm.title + "</b></span>" +
-          '<span class="row" style="margin-top:10px"><button class="btn" id="heronext">▶︎ ' + esc(nm.title) + "</button>" +
+          '<span class="row" style="margin-top:10px"><button class="btn ghost" id="heronext">▶︎ ' + esc(nm.title) + "</button>" +
           '<button class="tab" data-week="' + w.week + '">Ver la semana</button></span>'
         : '<span class="muted">Semana completa. ' + (state.unlocked > w.week ? "Seguí con la siguiente." : "Repasá o entrená para abrir la siguiente.") + "</span>" +
-          '<span class="row" style="margin-top:10px"><button class="btn" data-week="' + w.week + '">Ver la semana</button>' +
+          '<span class="row" style="margin-top:10px"><button class="btn ghost" data-week="' + w.week + '">Ver la semana</button>' +
           '<button class="tab" id="topercorso">' + UI.path + "</button></span>") +
       "</div>";
 
-    // Meta del día + cofre
-    html += '<div class="card goal">' +
-      '<div class="goalrow"><div><b>Meta de hoy</b>' +
-        '<span class="muted"> ' + (reached ? "✓ " + todayXp + " xp hoy" : todayXp + " / " + goal + " xp") +
+    // xp: the game's currency (the goal is in minutes, in the plan above)
+    more += '<div class="card goal">' +
+      '<div class="goalrow"><div><b>xp de hoy</b>' +
+        '<span class="muted"> ' + (reached ? "✓ " + todayXp + " xp" : todayXp + " / " + goal + " xp") +
         "</span></div>" +
-        (reached && !chestOpen
-          ? '<button class="btn gold pulse" id="chest">🎁 Abrir cofre</button>'
-          : chestOpen ? '<span class="muted">🎁 cofre abierto · volvé mañana</span>'
-          : '<span class="muted">🎁 al llegar a la meta</span>') +
+        (chestOpen ? '<span class="muted">🎁 cofre abierto · volvé mañana</span>'
+          : reached ? '<span class="muted">🎁 el cofre está arriba</span>' : '<span class="muted">🎁 al llegar a ' + goal + " xp</span>") +
       "</div>" +
       '<div class="goalbar"><i style="width:' +
         Math.min(100, Math.round(todayXp / goal * 100)) + '%"></i></div>' +
       "</div>";
 
-    // Atajos: la pausa (mezcla la semana en curso), el repaso, el lampo.
-    html += '<div class="big">' +
-      '<button class="bigbtn pausa" id="pausa"><span class="e">☕</span>' +
-        UI.pausaBtn + "</button>" +
-      '<button class="bigbtn giorno" id="giorno"' + (dailyDone ? " disabled" : "") + '>' +
+    // Shortcuts, each when it makes sense: the pause once a lesson was
+    // read, the challenge too, the review when something is due, the lampo
+    // with 12 phrases seen.
+    more += '<div class="big">' +
+      (anyLesson ? '<button class="bigbtn pausa" id="pausa"><span class="e">☕</span>' + UI.pausaBtn + "</button>" : "") +
+      (anyLesson && !maint ? '<button class="bigbtn giorno" id="giorno"' + (dailyDone ? " disabled" : "") + '>' +
         '<span class="e">🎯</span><b>' + UI.daily + "</b><small>" +
-        (dailyDone ? "✓ hecha · mañana hay otra" : "6 preguntas · doble xp") + "</small></button>" +
-      '<button class="bigbtn ripasso" id="rev"' + (due ? "" : " disabled") + '>' +
-        '<span class="e">🔁</span><b>' + UI.review + "</b><small>" +
-        (due ? "hoy: " + dueToday + (due > 20 ? " (quedan " + due + ")" : " para repasar") : "nada pendiente") + "</small></button>" +
+        (dailyDone ? "✓ hecha · mañana hay otra" : "6 preguntas · doble xp") + "</small></button>" : "") +
+      (due ? '<button class="bigbtn ripasso" id="rev"><span class="e">🔁</span><b>' + UI.review + "</b><small>" +
+        "hoy: " + dueToday + (due > 20 ? " (quedan " + due + ")" : " para repasar") + "</small></button>" : "") +
       (state.unlocked >= 2 && Banca.loaded() ? '<button class="bigbtn parole" data-bank="b-voc"><span class="e">📚</span><b>' + UI.words + "</b><small>" +
-        nWords.toLocaleString("es-AR") + " / " + wordGoal.toLocaleString("es-AR") + " palabras" +
+        nWords.toLocaleString("es-AR") + " palabras" +
         (window.Freq && Freq.loaded() ? " · " + Freq.coverage(knownWords()).fundamental[0] + " de las 2.000 frecuentes" : "") + "</small></button>" : "") +
       (matureWords().length >= 30 ? '<button class="bigbtn lampo" id="lampoparole"><span class="e">🧠</span>' +
         "<b>" + UI.wordOrNot + "</b><small>reconocer en un segundo · récord: " + ((state.best || {}).lampoParole || 0) + "</small></button>" : "") +
       (known >= 12 ? '<button class="bigbtn lampo" id="lampo"><span class="e">⚡</span>' +
         "<b>" + UI.lampo + " 60″</b><small>récord: " + ((state.best || {}).lampo || 0) + "</small></button>" : "") +
       "</div>" +
-      (known < 12 ? '<p class="muted" style="margin:-6px 0 12px">⚡ ' + UI.lampoEl + " 60″ se abre con 12 frases vistas (llevás " + known + ").</p>" : "");
+      (known < 12 && anyLesson ? '<p class="muted" style="margin:-6px 0 12px">⚡ ' + UI.lampoEl + " 60″ se abre con 12 frases vistas (llevás " + known + ").</p>" : "");
 
     // Las cuatro cuerdas de la semana (Nation): dónde falta, un consejo.
     var tot = strands.input + strands.output + strands.forma + strands.fluidez;
@@ -532,25 +551,26 @@
       var TIP = { input: "leé un episodio o escuchá una escena", output: "escribí frases de memoria o traducí",
                   forma: "una ronda de la semana", fluidez: "un " + UI.lampo + " o repasá una escena" };
       var low = Engine.STRANDS.slice().sort(function (a, b) { return strands[a] - strands[b]; })[0];
-      html += '<div class="card"><b>🎻 Tus cuatro cuerdas · últimos 7 días</b>' +
+      more += '<div class="card"><b>🎻 Tus cuatro cuerdas · últimos 7 días</b>' +
         '<div class="strands">' + Engine.STRANDS.map(function (k) {
           return '<i class="s-' + k + '" style="width:' + Math.round(strands[k] / tot * 100) + '%" title="' + NAMES[k] + '"></i>';
         }).join("") + "</div>" +
         '<p class="muted">' + Engine.STRANDS.map(function (k) { return NAMES[k] + " " + Math.round(strands[k] / tot * 100) + " %"; }).join(" · ") +
         ". Te falta <b>" + NAMES[low].toLowerCase() + "</b>: " + TIP[low] + ".</p></div>";
     }
+    more += planLine();
 
     // La clínica: los errores que se repiten
     var weakO = Banca.loaded() ? Banca.weakest(state, 2) : [];
     if (weakO.length) {
-      html += '<button class="card weekcard clin" data-bank="clinica">' +
+      more += '<button class="card weekcard clin" data-bank="clinica">' +
         '<span class="muted">🩺 Clínica de tus errores</span>' +
         "<b>Practicá " + weakO.map(function (w) { return esc((Diagnosi.LABEL[w.cat] || w.cat).toLowerCase()); }).join(" y ") + "</b>" +
         '<span class="muted">12 ejercicios armados con lo que más te cuesta.</span></button>';
     }
 
     // Frase del giorno / do dia
-    html += '<div class="card fdg"><span class="muted">' + UI.fraseDay + "</span>" +
+    more += '<div class="card fdg"><span class="muted">' + UI.fraseDay + "</span>" +
       '<div class="fit">' + esc(fText) + "</div>" +
       '<div class="fes">' + esc(f.es) + "</div>" +
       (f.note ? '<div class="note">' + mk(f.note) + "</div>" : "") +
@@ -558,13 +578,16 @@
 
     // Calendario de los últimos 28 días
     var days = Engine.lastDays(state, 28);
-    html += '<div class="card"><h3 style="margin-top:0">Tus últimas 4 semanas</h3>' +
+    more += '<div class="card"><h3 style="margin-top:0">Tus últimas 4 semanas</h3>' +
       '<div class="heat">' + days.map(function (d) {
         var lvl = d.xp <= 0 ? 0 : d.xp < goal / 2 ? 1 : d.xp < goal ? 2 : 3;
         return '<i class="h' + lvl + '" title="' + d.key + ": " + d.xp + ' xp"></i>';
       }).join("") + "</div>" +
       '<p class="muted" style="margin:8px 0 0">Cada cuadrado es un día. ' + UI.calendarGreen + " = meta cumplida. " +
       "Cada 7 días de racha ganás un 🛡️ escudo que la salva si un día no podés.</p></div>";
+
+    html += '<details class="mas" id="masoggi"' + (window.Inicio && Inicio.moreOpen() ? " open" : "") + '><summary><span class="mas-t">Más para hoy</span><span class="muted small">' +
+      (maint ? "pausa, repaso, frase del día, calendario" : "la semana, pausa, sfida, repaso, frase del día, calendario") + "</span></summary>" + more + "</details>";
 
     // Instalación
     if (!isStandalone()) {
@@ -586,64 +609,82 @@
   var WHENS = [["manana", "a la mañana"], ["mediodia", "al mediodía"], ["noche", "a la noche"]];
 
   /* The cards of habit and motivation on Oggi / Hoje: the return after a pause
-     (no debt, a five-minute restart: Lally 2010; Mazza 2016), the plan
-     (implementation intention, Gollwitzer & Sheeran 2006, d = 0,65), the
-     ideal self (Dörnyei), the weekly sub-goal (Bandura & Schunk 1981) and
-     the weekly reflective close. */
+     (no debt, a five-minute restart: Lally 2010; Mazza 2016), the weekly
+     reflective close, the backup, the ideal self (Dörnyei) and the weekly
+     sub-goal (Bandura & Schunk 1981).  Candidates in order of priority:
+     Inicio.habit shows one a day at most, and each can be put off. */
   function oggiHabitCards() {
-    var html = "", away = Engine.daysAway(state), fresh = Engine.freshStart();
-    var sg = Engine.subGoals(state), ses = Engine.sessionsToday(state);
+    var out = [], away = Engine.daysAway(state), fresh = Engine.freshStart();
     var ideal = state.ideal && state.ideal.text ? state.ideal.text : "";
+    var maint = state.phase === "mantenimiento";
     if (away >= 3 && state.totals.attempts > 0) {
-      html += '<div class="card weekcard first ritorno"><span class="muted">👋 Volviste después de ' + away + " días</span>" +
+      out.push({ id: "ritorno", html: '<div class="card weekcard first ritorno"><span class="muted">👋 Volviste después de ' + away + " días</span>" +
         "<b>Lo que aprendiste no se borró: re-aprender lleva una fracción del tiempo.</b>" +
+        (state.streakBroken && state.streakBroken.n > 1 ? '<span class="muted small">La racha de ' + state.streakBroken.n + " días se cortó; tu mejor racha queda en " + (state.bestStreak || state.streakBroken.n) + ". Hoy empieza otra.</span>" : "") +
         '<span class="muted">' + (fresh === "semana" ? "Y es lunes: buen día para retomar. " : fresh === "mes" ? "Y empieza el mes: buen momento para volver. " : "") +
           "Cinco minutos con lo que más se enfrió y seguimos" + (ideal ? " hacia lo tuyo: «" + esc(ideal) + "»" : "") + ".</span>" +
         '<span class="row" style="margin-top:10px"><button class="btn" id="ritorno">▶︎ 5 minutos para retomar</button></span>' +
         (state.pauseAsk !== Engine.dayKey() ? '<span class="muted small">¿Qué pasó? <button class="tab" data-why="tiempo">sin tiempo</button> ' +
           '<button class="tab" data-why="dificil">se puso difícil</button> <button class="tab" data-why="aburrido">me aburrí</button> ' +
-          '<button class="tab" data-why="olvide">me olvidé</button></span>' : "") + "</div>";
-    }
-    if (!state.ideal && state.totals.attempts >= 10) {
-      html += '<div class="card weekcard"><span class="muted">🎯 ¿Para qué querés ' + UI.langEs + "?</span>" +
-        '<span class="chips">' + WHY.map(function (w) { return '<button class="tab" data-why2="' + w[0] + '">' + w[1] + "</button>"; }).join("") + "</span>" +
-        '<span class="muted small">Tener la meta a la vista sostiene el esfuerzo (Dörnyei: el yo ideal). Después la escribís con tus palabras en ' + UI.me + ".</span></div>";
-    }
-    if (state.unlocked >= 2) {
-      var left = Math.max(0, sg.wordsPerWeek - sg.wordsThisWeek);
-      html += '<div class="card goalweek"><b>🪜 Esta semana</b> <span class="muted">· hacia el ' + esc(sg.level) + " en la semana " + sg.boss + "</span>" +
-        '<div class="goalbar" style="margin:8px 0 4px"><i style="width:' + Math.min(100, Math.round(sg.wordsThisWeek / Math.max(1, sg.wordsPerWeek) * 100)) + '%"></i></div>' +
-        '<p class="muted" style="margin:0">' + sg.wordsThisWeek + " / " + sg.wordsPerWeek + " palabras nuevas" +
-          (left ? " · faltan " + left : " ✓") + " · " + sg.nWords.toLocaleString("es-AR") + " / " + sg.wordGoal.toLocaleString("es-AR") + " para el " + UI.boss +
-          (sg.weeksLeft > 1 ? " en " + sg.weeksLeft + " semanas" : "") + ". La cuota se recalcula sola si te atrasás.</p></div>";
+          '<button class="tab" data-why="olvide">me olvidé</button></span>' : "") + "</div>" });
     }
     // weekly close: on the first visit of a new week, about the week before
     var wk = Engine.weekKey(), prevWk = Engine.weekKey(new Date(Date.now() - 7 * 86400000));
     if (state.totals.attempts >= 50 && !(state.reflect || {})[prevWk] && (state.reflect || {}).skip !== wk && Engine.weekStreak(state) + Engine.daysAway(state) > 0 && new Date().getDay() <= 2) {
       var errs = state.errs || {}, cats = Object.keys(errs).sort(function (a, b) { return errs[b].n - errs[a].n; }).slice(0, 3);
-      html += '<div class="card weekcard reflect"><span class="muted">📓 Cierre de la semana pasada · tres toques</span>' +
+      out.push({ id: "reflect", html: '<div class="card weekcard reflect"><span class="muted">📓 Cierre de la semana pasada · tres toques</span>' +
         '<span class="muted small">¿Qué te costó más?</span><span class="chips">' +
           cats.map(function (c) { return '<button class="tab" data-rf="hard" data-v="' + esc(c) + '">' + esc(Diagnosi.LABEL[c] || c) + "</button>"; }).join("") +
           '<button class="tab" data-rf="hard" data-v="nada">nada en especial</button></span>' +
-        '<span class="muted small">¿Qué cambiás esta semana?</span><span class="chips">' +
+        '<span class="muted small">¿Qué cambiás esta semana? Tu plan del día lo tiene en cuenta.</span><span class="chips">' +
           CHANGES.map(function (c) { return '<button class="tab" data-rf="change" data-v="' + c[0] + '">' + c[1] + "</button>"; }).join("") + "</span>" +
         '<span class="muted small">¿Cuándo estudiás?</span><span class="chips">' +
           WHENS.map(function (c) { return '<button class="tab" data-rf="when" data-v="' + c[0] + '">' + c[1] + "</button>"; }).join("") + "</span>" +
-        '<span class="row"><button class="btn" id="rfsave">Guardar</button><button class="tab" id="rfskip">Ahora no</button></span></div>';
-    } else if ((state.reflect || {})[prevWk] && (state.reflect || {})[prevWk].change) {
-      var rf = state.reflect[prevWk], ch = CHANGES.filter(function (c) { return c[0] === rf.change; })[0];
-      var sw = Engine.strandsLast(state, 7);
-      var done = rf.change === "escucha" ? sw.input : rf.change === "escritura" ? sw.output : rf.change === "frases" ? sw.fluidez : null;
-      html += '<p class="muted small planline">📓 Dijiste: <b>' + esc(ch ? ch[1] : rf.change) + "</b>" +
-        (done != null ? " · llevás " + done + " xp de eso esta semana" : "") + ".</p>";
+        '<span class="row"><button class="btn" id="rfsave">Guardar</button><button class="tab" id="rfskip">Ahora no</button></span></div>' });
     }
-    return html;
+    // the backup: every 14 days once there is something to lose
+    var sinceCopy = state.exportedAt ? Math.floor((Date.now() - state.exportedAt) / 86400000) : null;
+    if (state.totals.attempts >= 150 && (sinceCopy == null || sinceCopy >= 14)) {
+      out.push({ id: "copia", html: '<div class="card weekcard copia"><span class="muted">💾 Tu copia</span>' +
+        "<b>" + (sinceCopy == null ? "Todavía no guardaste una copia de tu progreso." : "Hace " + sinceCopy + " días que no guardás una copia.") + "</b>" +
+        '<span class="muted">Todo vive solo en este teléfono. Un toque y la mandás a tu Drive, tu mail o un chat.</span>' +
+        '<span class="row" style="margin-top:10px"><button class="btn" id="hexport">💾 Guardar ahora</button></span></div>' });
+    }
+    if (!state.ideal && state.totals.attempts >= 10) {
+      out.push({ id: "why", html: '<div class="card weekcard"><span class="muted">🎯 ¿Para qué querés ' + UI.langEs + "?</span>" +
+        '<span class="chips">' + WHY.map(function (w) { return '<button class="tab" data-why2="' + w[0] + '">' + w[1] + "</button>"; }).join("") + "</span>" +
+        '<span class="muted small">Tener la meta a la vista sostiene el esfuerzo (Dörnyei: el yo ideal). Después la escribís con tus palabras en ' + UI.me + ".</span></div>" });
+    }
+    // The words of the week, as the course teaches them (progreso.js: the
+    // words of the week plus one session of the bank, not the gap to the
+    // boss divided by the weeks left).
+    if (state.unlocked >= 2 && !maint && window.Progreso) {
+      var q = Progreso.wordQuota(course, state, new Date(), Banca.loaded());
+      var left = Math.max(0, q.target - q.done);
+      out.push({ id: "semana", html: '<div class="card goalweek"><b>🪜 Esta semana</b> <span class="muted">· hacia el ' + esc(q.level) + " en la semana " + q.boss + "</span>" +
+        '<div class="goalbar" style="margin:8px 0 4px"><i style="width:' + Math.min(100, Math.round(q.done / Math.max(1, q.target) * 100)) + '%"></i></div>' +
+        '<p class="muted" style="margin:0">' + q.done + " / " + q.target + " palabras nuevas" + (left ? " · faltan " + left : " ✓") +
+          " (las " + q.weekWords + " de la semana" + (Banca.loaded() ? " y una sesión de " + UI.words : "") + "). " +
+          "Llevás " + q.nWords.toLocaleString("es-AR") + "; el curso enseña unas " + q.byBoss.toLocaleString("es-AR") + " hasta el " + UI.boss + ".</p></div>" });
+    }
+    return out;
+  }
+  // What the learner said they would change this week, as a line.
+  function planLine() {
+    var prevWk = Engine.weekKey(new Date(Date.now() - 7 * 86400000));
+    var rf = (state.reflect || {})[prevWk];
+    if (!rf || !rf.change) return "";
+    var ch = CHANGES.filter(function (c) { return c[0] === rf.change; })[0];
+    var sw = Engine.strandsLast(state, 7);
+    var done = rf.change === "escucha" ? sw.input : rf.change === "escritura" ? sw.output : rf.change === "frases" ? sw.fluidez : null;
+    return '<p class="muted small planline">📓 Dijiste: <b>' + esc(ch ? ch[1] : rf.change) + "</b>" +
+      (done != null ? " · llevás " + done + " xp de eso esta semana" : "") + ".</p>";
   }
 
   /* A five-minute restart after a pause: the ten cards with the lowest
      chance of recall, no backlog shown, the rest redistributes itself. */
   function ritornoItems() {
-    var items = Drills.buildReview(course, state, 10, drillOpts());
+    var items = Drills.buildColdest ? Drills.buildColdest(course, state, 10, drillOpts()) : Drills.buildReview(course, state, 10, drillOpts());
     if (items.length < 6) items = items.concat(Drills.buildRound(course, course.weeks[Math.min(state.unlocked, 52) - 1], { map: itemMap, state: state, silent: state.silent, size: 8 - items.length }));
     return items;
   }
@@ -668,19 +709,22 @@
     g.fillText("🔥 " + state.streak + " días · " + Engine.weekStreak(state) + " semanas · nivel " + Engine.levelFor(state.xp).level, W / 2, K.lines[0]);
     g.fillText(sg.nWords.toLocaleString("es-AR") + " palabras" + (cov != null ? " · " + cov + " de las 2.000 frecuentes" : ""), W / 2, K.lines[1]);
     g.font = "20px system-ui, sans-serif"; g.fillStyle = K.muted;
-    g.fillText("Esta semana: " + sg.wordsThisWeek + " palabras nuevas · " + Engine.strandsLast(state, 7).output + " xp de output", W / 2, K.lines[2]);
-    c.toBlob(function (blob) {
-      var name = K.file + stamp() + ".png";
-      try {
-        var file = new File([blob], name, { type: "image/png" });
-        if (navigator.canShare && navigator.canShare({ files: [file] })) { navigator.share({ files: [file], title: "Mi semana de " + UI.langEs }).catch(function () { download(blob, name); }); return; }
-      } catch (e) { /* sin share */ }
-      download(blob, name);
-    }, "image/png");
+    var wkMin = window.Progreso ? Math.round(Progreso.thisWeek(state).sec / 60) : 0;
+    g.fillText("Esta semana: " + sg.wordsThisWeek + " palabras nuevas" + (wkMin ? " · " + Progreso.fmtH(wkMin * 60) + " de estudio" : ""), W / 2, K.lines[2]);
+    c.toBlob(function (blob) { shareBlob(blob, K.file + stamp() + ".png", "Mi semana de " + UI.langEs); }, "image/png");
+  }
+  // A PNG to the share sheet (Web Share), or downloaded.
+  function shareBlob(blob, name, title) {
+    try {
+      var file = new File([blob], name, { type: "image/png" });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) { navigator.share({ files: [file], title: title }).catch(function () { download(blob, name); }); return; }
+    } catch (e) { /* sin share */ }
+    download(blob, name);
   }
 
   function wireHabit() {
     on("#ritorno", function () { state.pauseAsk = Engine.dayKey(); persist(); startRound("ritorno"); });
+    on("#hexport", function () { exportSave(); render(); });
     document.querySelectorAll("[data-why]").forEach(function (b) {
       b.onclick = function () {
         if (!state.pauses) state.pauses = [];
@@ -723,7 +767,7 @@
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION = "c1-vN" in sw.js: test_game
      and the CI check it).  One version for the app and both languages. */
-  var APP_VERSION = "v2.8";
+  var APP_VERSION = "v3.0";
   // Settimana XVII: Roman numerals on the street signs (LANG.ui.romanWeeks).
   function romano(n) {
     var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
@@ -757,16 +801,49 @@
       '<span class="muted">' + (locked ? "Se abre en la semana " + week + ", con la gramática que usa." : desc) + "</span></button>";
   }
 
+  /* Allena / Treino, la capa de práctica (js/capas.js): lo de esta semana
+     arriba —las escenas, el oído, el duelo que se abre, la escritura
+     guiada—, la entrada a «Consultar» y el resto plegado por secciones. */
   function renderFrasi() {
+    var week = Math.min(state.unlocked || 1, 52), C = window.Capas;
+    var fold = C ? C.fold : function (k, t, m, body) { return "<h2>" + t + "</h2>" + body; };
+    var noH2 = function (h) { return String(h || "").replace(/^\s*<h2>[\s\S]*?<\/h2>/, ""); };
     var html = "<h1>" + UI.train + "</h1>" +
-      '<p class="lead">Bloques listos para hablar ya, sin armar gramática en la cabeza. ' +
-      "Cada escena te presenta frases nuevas, te las hace armar con fichas y después " +
-      "<b>escribirlas de memoria</b>. Cuanto más rápido te salen escritas, más rápido " +
-      "te salen habladas.</p>";
+      '<p class="lead">Forma y fluidez: bloques listos para hablar, el oído, los errores que más te cuestan. ' +
+      "Arriba, lo de esta semana; lo demás, en las secciones.</p>";
+
+    // lo de esta semana
+    var wk = [];
+    if (window.Drills && window.Frasi) Drills.scenesOfWeek(week).forEach(function (sc) {
+      var p = Frasi.progress(sc.id, state.cards);
+      wk.push('<button class="ep' + (p.seen >= p.total ? " done" : "") + '" data-scene="' + sc.id + '"><span class="e">' + sc.emoji + "</span>" +
+        "<span><b>" + esc(sc.name) + '</b><span class="muted">Frases · ' + p.seen + " / " + p.total + " vistas</span></span></button>");
+    });
+    if (window.Suoni && Suoni.data() && week <= 40) {
+      var sp = Suoni.progress(week, state.cards), sdone = !!(state.suoniDone || {})[week];
+      wk.push('<button class="ep' + (sdone ? " done" : "") + '" data-lab="suoni"><span class="e">🎧</span><span><b>' + UI.suoni + "</b>" +
+        '<span class="muted">El oído de la semana · ' + sp.seen + " / " + sp.total + " pares</span></span></button>");
+    }
+    if (window.Duelli) Duelli.DUELLI.filter(function (d) { return d.week === week; }).forEach(function (d) {
+      var best = (state.duelli || {})[d.id];
+      wk.push('<button class="ep' + (best && best.pct >= 80 ? " done" : "") + '" data-duel="' + d.id + '"><span class="e">⚔️</span><span><b>Duelo: ' + esc(d.title) + "</b>" +
+        '<span class="muted">' + (best ? "Tu mejor: " + best.pct + " %" : esc(d.sub)) + "</span></span></button>");
+    });
+    if (Banca.loaded()) {
+      var weak = Banca.weakest(state, 2);
+      if (weak.length) wk.push('<button class="ep" data-bank="clinica"><span class="e">🩺</span><span><b>Clínica de tus errores</b>' +
+        '<span class="muted">' + weak.map(function (w) { return esc(Diagnosi.LABEL[w.cat] || w.cat); }).join(", ") + "</span></span></button>");
+    }
+    if (window.Variaciones && Variaciones.eligible(state, week).length)
+      wk.push('<button class="ep" data-esc="var"><span class="e">🔁</span><span><b>Variaciones de frase</b>' +
+        '<span class="muted">' + Variaciones.eligible(state, week).length + " frases que ya sabés, cambiando una pieza</span></span></button>");
+    html += '<div class="card capa-week"><h2>Esta semana <small class="muted">· semana ' + week + "</small></h2>" +
+      (wk.length ? '<div class="eps">' + wk.join("") + "</div>" : '<p class="muted">Esta semana no trae práctica nueva: repasá lo que quieras abajo.</p>') + "</div>";
+    if (C) html += C.entryHtml();
 
     var pp = Lab.progress("ponte:", state.cards), pf = Lab.progress("falso:", state.cards),
         pc = Lab.progress("capire:", state.cards);
-    html += "<h2>Laboratorio</h2>" +
+    html += fold("al:lab", "🧪 Laboratorio", pp.seen + pf.seen + pc.seen + " vistas",
       '<div class="labs">' +
         '<button class="lab" data-lab="ponte"><span class="e">🌉</span><b>Ponte</b>' +
           '<span class="muted">' + UI.ponte + "</span>" +
@@ -782,34 +859,33 @@
           '<span class="meta">' + Suoni.progress(state.unlocked, state.cards).seen + "/" + Suoni.progress(state.unlocked, state.cards).total + " pares</span></button>" : "") +
       "</div>" +
       '<p class="muted science">🔬 Ponte usa la transferencia desde tu lengua (Ringbom); ' +
-      UI.capire + " es input estructurado: primero interpretar la forma, después producirla (VanPatten).</p>";
-    if (window.Escritos) html += Escritos.treinoHtml(state);
+      UI.capire + " es input estructurado: primero interpretar la forma, después producirla (VanPatten).</p>");
+    if (window.Escritos) html += fold("al:esc", "✍️ Escritura guiada", "variaciones · C-test · ordená", noH2(Escritos.treinoHtml(state)));
 
-    if (window.Referencia) html += Referencia.entry();
     if (window.Duelli) {
-      var wkD = Math.min(state.unlocked || 1, 52);
-      html += "<h2>⚔️ Duelos</h2>" +
+      var list = Duelli.DUELLI.slice().sort(function (a, b) { return a.week - b.week; });
+      var openD = list.filter(function (d) { return d.week <= week; }).length;
+      html += fold("al:duel", "⚔️ Duelos", openD + " / " + list.length + " abiertos",
         '<p class="muted">Dos formas que se confunden, mezcladas: elegís una y después tocás la pista que te lo dijo.</p>' +
-        '<div class="labs">' + Duelli.DUELLI.slice().sort(function (a, b) { return a.week - b.week; }).map(function (d) {
+        '<div class="labs">' + list.map(function (d) {
           var best = (state.duelli || {})[d.id];
-          return '<button class="lab" data-duel="' + d.id + '"' + (d.week > wkD ? " disabled" : "") + '><span class="e">⚔️</span><b>' + esc(d.title) + "</b>" +
-            '<span class="muted">' + esc(d.week > wkD ? "Se abre en la semana " + d.week + "." : d.sub) + "</span>" +
+          return '<button class="lab" data-duel="' + d.id + '"' + (d.week > week ? " disabled" : "") + '><span class="e">⚔️</span><b>' + esc(d.title) + "</b>" +
+            '<span class="muted">' + esc(d.week > week ? "Se abre en la semana " + d.week + "." : d.sub) + "</span>" +
             (best ? '<span class="meta">mejor: ' + best.pct + " %</span>" : "") + "</button>";
         }).join("") + "</div>" +
-        '<p class="muted science">🔬 Intercalar formas que se parecen (Brunmair y Richter 2019) y explicar por qué (Bisra et al. 2018).</p>';
+        '<p class="muted science">🔬 Intercalar formas que se parecen (Brunmair y Richter 2019) y explicar por qué (Bisra et al. 2018).</p>');
     }
-    if (window.TresLenguas) html += TresLenguas.card(state);   // italiano ↔ portugués ↔ español (js/tres_lenguas.js)
 
     if (Banca.loaded()) {
-      var st = Banca.stats(), weak = Banca.weakest(state, 2);
-      html += "<h2>Banco</h2>" +
-        '<p class="muted">' + st.nouns + " sustantivos, " + st.verbs + " verbos, " + st.adjectives +
-        " adjetivos, " + st.sentences + " oraciones y " + st.errors + " errores típicos. " +
+      var bst = Banca.stats(), weak2 = Banca.weakest(state, 2);
+      html += fold("al:bank", "🏦 Banco", bst.nouns + bst.verbs + bst.adjectives + " palabras · " + bst.sentences + " oraciones",
+        '<p class="muted">' + bst.nouns + " sustantivos, " + bst.verbs + " verbos, " + bst.adjectives +
+        " adjetivos, " + bst.sentences + " oraciones y " + bst.errors + " errores típicos. " +
         "Cuando te equivocás, la app te dice qué tipo de error es y te deja corregirlo.</p>" +
         '<div class="labs">' +
-          (weak.length ? '<button class="lab clin" data-bank="clinica"><span class="e">🩺</span><b>Clínica de tus errores</b>' +
+          (weak2.length ? '<button class="lab clin" data-bank="clinica"><span class="e">🩺</span><b>Clínica de tus errores</b>' +
             '<span class="muted">Práctica armada con lo que más te cuesta: ' +
-            weak.map(function (w) { return esc(Diagnosi.LABEL[w.cat] || w.cat); }).join(", ") + ".</span></button>" : "") +
+            weak2.map(function (w) { return esc(Diagnosi.LABEL[w.cat] || w.cat); }).join(", ") + ".</span></button>" : "") +
           '<button class="lab" data-bank="b-voc"><span class="e">📚</span><b>' + UI.words + "</b>" +
             '<span class="muted">Vocabulario de tu nivel: primero reconocer, después escribir con el artículo.</span></button>' +
           bankBtn("b-tr", "✍️", UI.tr, "Oraciones del español al " + UI.langEs + ", con corrección que te explica el error.", Banca.TR_WEEK) +
@@ -820,16 +896,15 @@
               ? "Se abre en la semana " + Banca.ERR_WEEK + ": primero tenés que poder leer la oración."
               : "Encontrá y corregí el error típico de un hispanohablante.") + "</span></button>" +
           bankBtn("b-forme", "🧩", UI.forme, UI.formeSub, Banca.FORME_WEEK) +
-        "</div>";
+        "</div>");
     }
-    html += "<h2>" + UI.scenes + "</h2>";
-    html += '<div class="scenes">';
-    Frasi.SCENES.forEach(function (s) {
+
+    // Las escenas, por estación (cada una se abre con su semana).
+    var items = Frasi.SCENES.map(function (s) {
       var p = Frasi.progress(s.id, state.cards);
       var pct = Math.round(p.seen / p.total * 100);
-      // A scene opens with its week: its phrases use the grammar seen by then.
       var sw = Drills.sceneWeek(s.id), shut = sw > (state.unlocked || 1);
-      html += '<button class="scene' + (p.seen === p.total ? " done" : "") + (shut ? " locked" : "") +
+      return { week: sw, done: p.seen >= p.total, html: '<button class="scene' + (p.seen === p.total ? " done" : "") + (shut ? " locked" : "") +
         '" data-scene="' + s.id + '"' + (shut ? " disabled" : "") + ">" +
         '<span class="e">' + (shut ? "🔒" : s.emoji) + "</span>" +
         "<b>" + esc(s.name) + "</b>" +
@@ -837,52 +912,164 @@
         '<span class="meta">' + (shut ? "Se abre en la semana " + sw :
           p.seen + "/" + p.total + " vistas · " + p.strong + " firmes") + "</span>" +
         '<span class="prog"><i style="width:' + pct + '%"></i></span>' +
-        "</button>";
+        "</button>" };
     });
-    return html + "</div>";
+    var seenSc = items.filter(function (x) { return x.week <= week; }).length;
+    html += fold("al:scenes", "💬 " + esc(UI.scenes), seenSc + " / " + items.length + " abiertas",
+      C ? C.seasons("al:sc", items, week, (course.seasons || []).map(function (s) { return s.name; })).replace(/class="eps"/g, 'class="scenes"')
+        : '<div class="scenes">' + items.map(function (x) { return x.html; }).join("") + "</div>");
+
+    if (window.TresLenguas) html += fold("al:tres", "🔀 Tres lenguas", "contrastes · duelo", noH2(TresLenguas.card(state)));
+    return html;
   }
 
   /* ----------------------------------------------------------------- ler */
 
+  function epButton(ep, done) {
+    var d = done[ep.id], open = Letture.isOpen(ep, done, state.unlocked);
+    var wait = !open && ep.week > state.unlocked;
+    return '<button class="ep' + (d ? " done" : "") + '" data-ep="' + ep.id + '"' +
+      (open ? "" : " disabled") + ">" +
+      '<span class="e">' + (open ? ep.emoji : "🔒") + "</span>" +
+      "<span><b>" + esc(ep.title) + "</b>" +
+      '<span class="muted">' + (ep.area ? esc(ep.area) + " · " : ep.series === "settimana" || ep.series === "lunga" ? "semana " + ep.week + " · " : "episodio " + ep.n + " · ") +
+        esc(ep.level) + " · " + (wait ? "se abre en la semana " + ep.week : esc(ep.grammar)) +
+        "</span></span>" +
+      (d ? '<span class="score">' + d.pct + "%</span>" : "") +
+      "</button>";
+  }
+
+  /* Leggi / Ler, la capa de input (js/capas.js): arriba lo de esta semana
+     (la lectura y la escucha pendientes, el capítulo recomendado, los
+     minutos de input); después, plegadas: Historias, La settimana, Largas,
+     Escuchas, Biblioteca y la velocidad de lectura, cada lista por estación
+     con la actual abierta. */
   function renderLeggi() {
-    var done = state.letture || {};
+    var done = state.letture || {}, week = Math.min(state.unlocked || 1, 52), C = window.Capas;
+    var fold = C ? C.fold : function (k, t, m, body) { return "<h2>" + t + "</h2>" + body; };
+    var sNames = (course.seasons || []).map(function (s) { return s.name; });
+    var bySeason = function (key, list) {
+      var items = list.map(function (ep) { return { week: readingWeek(ep), done: !!done[ep.id], html: epButton(ep, done) }; });
+      return C ? C.seasons(key, items, week, sNames) : '<div class="eps">' + items.map(function (x) { return x.html; }).join("") + "</div>";
+    };
+    var count = function (list) { return list.filter(function (ep) { return done[ep.id]; }).length + " / " + list.length; };
     var html = "<h1>" + UI.read + "</h1>" +
-      '<p class="lead">Leer mucho, entendiendo casi todo, es de lo que más hace crecer una lengua. ' +
+      '<p class="lead">Leer y escuchar mucho, entendiendo casi todo, es de lo que más hace crecer una lengua. ' +
       "Tocá las palabras subrayadas para ver qué significan.</p>";
-    if (window.Biblioteca) html += Biblioteca.leggiCard();   // libros de dominio público (js/biblioteca.js)
-    Letture.SERIES.forEach(function (sr) {
-      html += "<h2>" + sr.emoji + " " + esc(sr.name) + "</h2>" +
-        '<p class="muted">' + esc(sr.blurb) + '</p><div class="eps">';
-      Letture.ofSeries(sr.id).forEach(function (ep) {
-        var d = done[ep.id], open = Letture.isOpen(ep, done, state.unlocked);
-        var wait = !open && ep.week > state.unlocked;
-        html += '<button class="ep' + (d ? " done" : "") + '" data-ep="' + ep.id + '"' +
-          (open ? "" : " disabled") + ">" +
-          '<span class="e">' + (open ? ep.emoji : "🔒") + "</span>" +
-          "<span><b>" + esc(ep.title) + "</b>" +
-          '<span class="muted">' + (ep.area ? esc(ep.area) + " · " : ep.series === "settimana" || ep.series === "lunga" ? "semana " + ep.week + " · " : "episodio " + ep.n + " · ") +
-            esc(ep.level) + " · " + (wait ? "se abre en la semana " + ep.week : esc(ep.grammar)) +
-            "</span></span>" +
-          (d ? '<span class="score">' + d.pct + "%</span>" : "") +
-          "</button>";
-      });
-      html += "</div>";
+
+    // lo de esta semana: lecturas de la semana, la escucha larga, el capítulo recomendado
+    var mine = Letture.EPISODI.filter(function (ep) { return readingWeek(ep) === week; })
+      .map(function (ep) {
+        // the story goes in order: the episode of the week waits for the one before
+        if (ep.series !== "martin" || Letture.isOpen(ep, done, state.unlocked)) return ep;
+        return Letture.next(done, "martin") || ep;
+      })
+      .filter(function (ep, k, a) { return a.indexOf(ep) === k; })
+      .sort(function (a, b) { return (a.series === "cultura" || a.series === "flood" ? 1 : 0) - (b.series === "cultura" || b.series === "flood" ? 1 : 0); });
+    var wk = mine.map(function (ep) { return epButton(ep, done); });
+    var trs = window.Tramo && Tramo.week ? Tramo.week(week) : null;
+    if (trs && trs.ascolto) {
+      var ad = ((state.tramo || {}).asc || {})[week];
+      wk.push('<button class="ep' + (ad ? " done" : "") + '" data-trasc="' + week + '"><span class="e">🎧</span><span><b lang="' + LG.tts + '">' + esc(trs.ascolto.title) + "</b>" +
+        '<span class="muted">Escucha larga · <span lang="' + LG.tts + '">' + esc(trs.ascolto.genre) + "</span></span></span>" +
+        (ad ? '<span class="score">' + ad.pct + "%</span>" : "") + "</button>");
+    }
+    if (window.Radio) wk = wk.concat(Radio.weekButtons(state, week));   // el episodio de la serie Radio (radio.js)
+    if (window.Fuera) wk = wk.concat(Fuera.weekButtons(state, week));   // la ficha de afuera de la semana (fuera.js)
+    var B = window.Biblioteca, rec = null;
+    if (B && B.loaded && B.loaded() && B.firstOpenWeek(B.index()) <= week) {
+      var lm = B.mission(B.index(), { week: week }, state);
+      rec = lm && lm.arg ? lm.arg.split("|") : null;
+      if (rec) wk.push('<button class="ep' + (lm.done ? " done" : "") + '" data-bxread="' + esc(rec[0]) + '" data-bxch="' + esc(rec[1]) + '"><span class="e">📚</span><span><b>' +
+        esc(lm.title) + '</b><span class="muted">' + esc(lm.sub.replace(/^Opcional · /, "")) + "</span></span></button>");
+    } else if (B && B.loadIndex && B.loaded && !B.loaded() && typeof fetch === "function") {
+      B.loadIndex().then(function () { if (view.screen === "leggi") render(); }).catch(function () { /* sin red */ });
+    }
+    var inp = C ? C.inputWeek(state) : { read: 0, listen: listeningWeek(), total: listeningWeek() };
+    var curve = Letture.speedCurve ? Letture.speedCurve(state) : [];
+    var lastSpeed = curve.length ? curve[curve.length - 1].wpm : 0;
+    html += '<div class="card capa-week"><h2>Esta semana <small class="muted">· semana ' + week + "</small></h2>" +
+      (wk.length ? '<div class="eps">' + wk.join("") + "</div>" : '<p class="muted">Esta semana no trae lectura nueva: elegí una de abajo.</p>') +
+      '<p class="small muted capa-input">⏱️ Input en 7 días: <b>' + inp.read + " min</b> leyendo · <b>" + inp.listen + " min</b> escuchando" +
+        (inp.out ? " · <b>" + inp.out + " min</b> fuera de la app" : "") +
+        (lastSpeed ? " · leés a ~" + lastSpeed + " palabras por minuto" : "") + "</p></div>";
+    if (C) html += C.entryHtml(true);
+
+    // Historias: Martín, los cuentos con tus palabras, la cultura y las inundaciones
+    var ser = {};
+    Letture.SERIES.forEach(function (sr) { ser[sr.id] = sr; });
+    var hist = "";
+    ["martin", "cultura", "flood"].forEach(function (id) {
+      var sr = ser[id], list = Letture.ofSeries(id);
+      if (!sr || !list.length) return;
+      var mineHere = list.some(function (ep) { return readingWeek(ep) <= week && !done[ep.id] && Letture.isOpen(ep, done, state.unlocked); });
+      hist += fold("lg:" + id, sr.emoji + " " + esc(sr.name) + (id !== "martin" ? ' <small class="muted">· opcional</small>' : ""), count(list),
+        '<p class="muted">' + esc(sr.blurb) + '</p><div class="eps">' + list.map(function (ep) { return epButton(ep, done); }).join("") + "</div>",
+        id === "martin" && mineHere, "capa-sub");
     });
-    if (window.Tramo) html += Tramo.leggiHtml(state);   // las escuchas largas del tramo C1
     if ((state.storie || []).length) {
-      html += "<h2>✨ " + UI.stories + "</h2><p class=\"muted\">Cuentos generados con las palabras de tu repaso.</p><div class=\"eps\">" +
+      hist += fold("lg:storie", "✨ " + UI.stories, state.storie.length + "",
+        '<p class="muted">Cuentos generados con las palabras de tu repaso.</p><div class="eps">' +
         state.storie.map(function (x) {
           var d = done[x.id];
           return '<button class="ep' + (d ? " done" : "") + '" data-ep="' + esc(x.id) + '"><span class="e">✨</span><span><b>' + esc(x.title) +
             "</b><span class=\"muted\">semana " + x.week + " · " + esc(x.targets.join(", ")) + "</span></span>" + (d ? '<span class="score">' + d.pct + "%</span>" : "") + "</button>";
-        }).join("") + "</div>";
+        }).join("") + "</div>", false, "capa-sub");
+    }
+    var histN = ["martin", "cultura", "flood"].reduce(function (n, id) { return n + Letture.ofSeries(id).length; }, 0);
+    if (hist) html += fold("lg:hist", "📖 Historias", histN + " textos", hist);
+
+    var sett = ser.settimana ? Letture.ofSeries("settimana") : [];
+    if (sett.length) html += fold("lg:sett", ser.settimana.emoji + " " + esc(ser.settimana.name), count(sett),
+      '<p class="muted">' + esc(ser.settimana.blurb) + "</p>" + bySeason("lg:sett", sett));
+    var lunghe = Letture.ofSeries("lunga");
+    if (lunghe.length && ser.lunga) html += fold("lg:lunga", ser.lunga.emoji + " " + esc(ser.lunga.name), week < 27 ? "🔒 desde la semana 27" : count(lunghe),
+      '<p class="muted">' + esc(ser.lunga.blurb) + "</p>" + bySeason("lg:lunga", lunghe));
+
+    if (window.Radio) html += Radio.leggiFold(state, week, sNames);   // la serie Radio, semanas 6-25 (radio.js)
+    if (window.Fuera) html += Fuera.leggiFold(state, week, sNames);   // material de afuera, semanas 6-52 (fuera.js)
+    // Escuchas: las largas del tramo y la re-escucha de lo ya leído
+    var asc = "", TD = window.TRAMO_DATA;
+    if (TD && (TD.SETTIMANE || []).length) {
+      var tasc = (state.tramo || {}).asc || {};
+      var aItems = TD.SETTIMANE.map(function (s) {
+        var open = s.week <= week, d = tasc[s.week];
+        return { week: s.week, done: !!d, html: '<button class="ep' + (d ? " done" : "") + '" data-trasc="' + s.week + '"' + (open ? "" : " disabled") + ">" +
+          '<span class="e">' + (open ? "🎧" : "🔒") + '</span><span><b lang="' + LG.tts + '">' + esc(s.ascolto.title) + "</b>" +
+          '<span class="muted">semana ' + s.week + " · " + esc(s.level) + " · " + (open ? '<span lang="' + LG.tts + '">' + esc(s.ascolto.genre) + "</span>" : "se abre en la semana " + s.week) + "</span></span>" +
+          (d ? '<span class="score">' + d.pct + "%</span>" : "") + "</button>" };
+      });
+      asc += '<p class="muted">De la semana 27 en adelante, una escucha larga a dos voces por semana, con preguntas en ' + UI.langEs + ".</p>" +
+        (C ? C.seasons("lg:asc", aItems, week, sNames) : "");
     }
     var doneN = Object.keys(done).filter(function (id) { return Letture.byId(id); }).length;
     if (doneN) {
-      html += '<div class="card"><b>🎧 ' + UI.easyListen + '</b><p class="muted">Re-escuchá las ' + doneN + " lecturas que ya hiciste, solo audio, una tras otra: " +
+      asc += '<div class="card"><b>🎧 ' + UI.easyListen + '</b><p class="muted">Re-escuchá las ' + doneN + " lecturas que ya hiciste, solo audio, una tras otra: " +
         "material conocido a velocidad normal es lo que hace crecer la fluidez del oído (Chang & Millett 2014). Esta semana: " + listeningWeek() + " min.</p>" +
         '<button class="btn" id="playlib">▶ Escuchar todas</button></div>';
     }
+    if (asc) html += fold("lg:asc", "🎧 " + esc((TD && TD.names && TD.names.ascolto) || "Escuchas"), inp.listen + " min en 7 días", asc);
+
+    if (B) html += fold("lg:bib", "📚 " + esc(((window.BIBLIO_DATA || {}).ui || {}).name || "Biblioteca"), B.minutes ? B.minutes(state, 7) + " min en 7 días" : "",
+      B.leggiCard().replace(/^<div class="card bx-entry"><h2>[\s\S]*?<\/h2>/, '<div class="bx-entry">'));
+
+    // La velocidad: la curva del año y los textos para releer contra el reloj
+    var sp = Letture.speedStore ? Letture.speedStore(state) : null;
+    var bestIds = sp ? Object.keys(sp.best).filter(function (id) { return Letture.byId(id); }) : [];
+    var lastAt = {};
+    if (sp) sp.runs.forEach(function (r) { lastAt[r.id] = Math.max(lastAt[r.id] || 0, r.at); });
+    bestIds.sort(function (a, b) { return (lastAt[b] || 0) - (lastAt[a] || 0); });
+    html += fold("lg:speed", "⏱️ Tu velocidad de lectura", lastSpeed ? "~" + lastSpeed + " palabras por minuto" : "todavía sin medir",
+      '<p class="muted">Cada lectura se cronometra sola: desde que abrís el texto hasta «Terminé». Cuenta si después contestás bien el 70 % o más ' +
+        "(leer rápido sin entender no es leer).</p>" +
+      (curve.length ? (C ? C.curveSvg(curve) : "") + '<p class="muted small">Palabras por minuto en la primera lectura de cada semana del curso.</p>'
+        : '<p class="muted small">Todavía no hay lecturas medidas.</p>') +
+      (bestIds.length ? "<h3>Releé para bajar el tiempo</h3><div class=\"eps\">" + bestIds.slice(0, 5).map(function (id) {
+        var ep = Letture.byId(id);
+        return '<button class="ep" data-ep="' + id + '"><span class="e">⏱️</span><span><b>' + esc(ep.title) + '</b><span class="muted">tu mejor: ' + sp.best[id] + " palabras por minuto</span></span></button>";
+      }).join("") + "</div>" : "") +
+      '<p class="muted science">🔬 Relectura cronometrada con comprensión controlada (Chang y Millett 2013; Nation 2009): la fluidez lectora crece releyendo lo conocido más rápido.</p>');
+
     html += '<p class="muted science">🔬 Input comprensible (Krashen) con glosario para cubrir ' +
       "el ~98% del vocabulario (Hu y Nation); después, la caza de formas te hace notar la " +
       "gramática dentro de un texto que ya entendiste (Schmidt).</p>";
@@ -903,7 +1090,7 @@
     if (mode !== "hunt" && Letture.mcTargets) Letture.mcTargets(ep).forEach(function (i) { mc[i] = 1; });
     var toks0 = Letture.allTokens(ep);
     Object.keys(mc).forEach(function (i) { if (mcDone[Letture.core(toks0[i])]) delete mc[i]; });
-    return '<div class="text' + (mode === "hunt" ? " hunt" : "") + (enh ? " enh" : "") + '">' +
+    return '<div class="text' + (mode === "hunt" ? " hunt" : "") + (enh ? " enh" : "") + '" lang="' + LG.tts + '">' +
       Letture.paragraphs(ep).map(function (par) {
         return "<p>" + Letture.tokens(par).map(function (t) {
           var i = k++;
@@ -913,20 +1100,49 @@
           var g = Letture.glossFor(ep, t);
           if (g && mc[i]) {
             glossIndex[i] = Letture.bare(t) + " — " + g;
-            return '<span class="w mcg' + (isForm(t) ? " form" : "") + '" data-k="' + i + '" data-mc="' + i + '">' + esc(t) + "</span>";
+            return '<span class="w mcg' + (isForm(t) ? " form" : "") + '" data-k="' + i + '" data-mc="' + i + '" role="button" tabindex="0">' + esc(t) + "</span>";
           }
           if (g) {
             glossIndex[i] = Letture.bare(t) + " — " + g;
-            return '<span class="w gl' + (isForm(t) ? " form" : "") + '" data-k="' + i + '" data-gl="' + i + '">' + esc(t) + "</span>";
+            return '<span class="w gl' + (isForm(t) ? " form" : "") + '" data-k="' + i + '" data-gl="' + i + '" role="button" tabindex="0">' + esc(t) + "</span>";
           }
           return '<span class="w' + (isForm(t) ? " form" : "") + '" data-k="' + i + '">' + esc(t) + "</span>";
         }).join(" ") + "</p>";
       }).join("") + "</div>";
   }
 
+  /* Relectura cronometrada (Letture.speedNote / speedCommit): el reloj corre
+     desde que se abre el texto hasta «Terminé», sin el tiempo con la
+     pantalla oculta; si se usó el karaoke, esa vuelta fue de escucha y no
+     se mide. */
+  var readClock = null;   // { id, t0, hid, hidAt, kar }
+  document.addEventListener("visibilitychange", function () {
+    if (!readClock) return;
+    if (document.hidden) readClock.hidAt = Date.now();
+    else if (readClock.hidAt) { readClock.hid += Date.now() - readClock.hidAt; readClock.hidAt = 0; }
+  });
+  function readElapsed() { return readClock ? Date.now() - readClock.t0 - readClock.hid - (readClock.hidAt ? Date.now() - readClock.hidAt : 0) : 0; }
+  // The questions are over: the time counts if this attempt got 70 % or more.
+  function noteReadingSpeed() {
+    if (view.screen !== "risultato" || !round || round.kind !== "lettura" || !view.result || !Letture.speedCommit) return;
+    var r = Letture.speedCommit(state, round.arg, view.result.pct);
+    if (r.why === "none") return;
+    persist();
+    var msg = r.counted ? "⏱️ Leíste a <b>" + r.wpm + " palabras por minuto</b>" +
+        (r.re && r.prev ? (r.wpm > r.prev ? ": ¡más rápido que tu mejor (" + r.prev + ")!" : " (tu mejor: " + r.prev + ").") : ".") +
+        " Releelo cuando quieras para bajar el tiempo."
+      : r.why === "comp" ? "⏱️ Esta vez el tiempo no cuenta: la comprensión quedó debajo del " + Letture.SPEED_MIN_PCT + " %."
+      : r.why === "fast" ? "⏱️ Muy rápido para ser lectura: el tiempo no cuenta."
+      : r.why === "audio" ? "⏱️ Con el audio puesto fue escucha: el tiempo de lectura no se mide." : "";
+    var host = app().querySelector(".card");
+    if (msg && host) { var pEl = document.createElement("p"); pEl.className = "note speed-note"; pEl.innerHTML = msg; host.appendChild(pEl); }
+  }
+
   function renderLettura(ep) {
     stopKaraoke();
     var rate = view.karRate || 1, enh = !!view.enh && !!ep.flood;
+    if (!readClock || readClock.id !== ep.id) readClock = { id: ep.id, t0: Date.now(), hid: 0, hidAt: 0, kar: false };
+    var best = Letture.speedStore ? Letture.speedStore(state).best[ep.id] : 0;
     return '<button class="btn ghost" id="lback">' + (view.epFrom === "briefing" ? "← a la semana" : "← a " + UI.read) + "</button>" +
       "<h1>" + ep.emoji + " " + esc(ep.title) + "</h1>" +
       '<p class="lead">' + (ep.area ? esc(ep.area) + " · " : ep.series === "flood" ? UI.series.flood + " · " + esc(ep.grammar) + " · " :
@@ -949,7 +1165,9 @@
         '<p class="muted small">Primera pasada con el texto a 0,8×, segunda a 1× solo con las palabras clave, tercera solo audio: la escucha ' +
         "cuenta como input y suma xp. Esta semana llevás " + listeningWeek() + " min de escucha.</p></div>" +
       (ep.flood && !enh ? '<button class="btn wide ghost" id="enh">🌊 Segunda lectura con la estructura resaltada</button>' : "") +
-      '<button class="btn wide" id="lquiz">Lo leí → preguntas y caza de formas</button>';
+      '<p class="muted small speed-line">⏱️ El reloj corre desde que abriste el texto: cuando termines, tocá «Terminé». ' +
+        (best ? "Tu mejor en este texto: <b>" + best + " palabras por minuto</b>." : "Cuenta si después entendiste el " + Letture.SPEED_MIN_PCT + " % o más.") + "</p>" +
+      '<button class="btn wide" id="lquiz">Terminé → preguntas y caza de formas</button>';
   }
 
   /* Toque en la palabra: cualquier palabra de la lengua en un ejercicio muestra
@@ -1077,9 +1295,11 @@
         html += '<div class="node' + (w.boss ? " boss" : "") + (open ? "" : " locked") +
             (current ? " current" : "") + (stars === 3 ? " full" : "") + '" style="--x:' + x + '%">' +
           (current ? '<span class="bubble">' + (weekStat(w.week).attempts || lessonRead(w.week) ? "SEGUÍ" : "EMPEZÁ") + "</span>" : "") +
-          '<button class="dot" data-week="' + w.week + '"' + (open ? "" : " disabled") + ">" +
+          '<button class="dot" data-week="' + w.week + '"' + (open ? "" : " disabled") +
+            ' aria-label="' + esc((w.boss ? UI.Boss + " · " : "") + UI.week + " " + w.week + ": " + w.title + " · " + stars + " de 3 estrellas" + (open ? "" : " · cerrada") + (current ? " · la actual" : "")) + '">' +
             (w.boss ? "⚔️" : open ? w.week : "🔒") + "</button>" +
-          '<span class="nt">' + esc(w.title) + "</span>" + starsHtml(stars) +
+          // the boss: a fourth star with 70 % in the sentences never seen
+          '<span class="nt">' + esc(w.title) + "</span>" + (w.boss && weekStat(w.week).star4 ? starsHtml(4, 4) : starsHtml(stars)) +
           (open && !w.boss ? (function () { var pl = weekPlan(w); return '<span class="nm">' +
             pl.filter(function (x) { return x.done; }).length + "/" + pl.length + " misiones</span>"; })() : "") +
           "</div>";
@@ -1221,6 +1441,7 @@
       html += '<details class="more"><summary>¿Por qué? Más detalle</summary>' +
         b.more.map(function (par) { return "<p>" + mk(par) + "</p>"; }).join("") + "</details>";
     }
+    if (window.Referencia) html += Referencia.blockLink(b);   // usos reales y estado (referencia.js)
     return html + "</section>";
   }
 
@@ -1408,8 +1629,10 @@
         '<p class="lead">Semana ' + w.week + " · " + esc(ssd[les.sess] ? ssd[les.sess].h : w.title) + "</p>" +
         '<div class="scorebig"><b>' + les.right + "/" + les.asked + '</b><span>+' + les.xp + " xp</span></div>" +
         (les.extras || []).map(function (x) { return '<p class="note selfrepair">' + esc(x) + "</p>"; }).join("") +
+        (window.Referencia ? Referencia.lessonNote(w.week, ssd[les.sess] ? ssd[les.sess].blocks : null) : "") +
         '<p class="muted">' + (pct === 100 ? "Perfecta: ni un error en los chequeos." :
-          pct >= 70 ? "Bien. Lo que fallaste vuelve en el entrenamiento." : "Repasala cuando quieras: se puede jugar de nuevo.") + "</p>" +
+          pct >= 70 ? "Bien. Lo que fallaste vuelve mañana en el repaso, con su regla." :
+          "Lo que fallaste vuelve mañana en el repaso, con su regla. Antes de seguir, entrená esta parte: el entrenamiento pasa adelante en la semana.") + "</p>" +
         '<div class="row centerrow" style="margin-top:14px">' +
         (nextS != null && !partDone ? '<button class="btn" id="lesnextpart" data-part="' + nextS + '">📘 Lección ' + (nextS + 1) + " →</button>" :
           '<button class="btn" id="lesplay">🎯 A entrenar' + (psd ? " esta parte" : "") + "</button>" +
@@ -1457,6 +1680,8 @@
     var ok = btn.textContent === q.answer;
     les.asked++;
     if (ok) { les.right++; fx.right(); } else fx.wrong();
+    // a check missed comes back tomorrow in the review, with its rule (reglas.js)
+    if (!ok && window.Reglas) { Reglas.fromLesson(state, les.w, q); persist(); }
     document.querySelectorAll("[data-lq]").forEach(function (b) {
       b.disabled = true;
       if (b.textContent === q.answer) b.classList.add("right");
@@ -1561,7 +1786,9 @@
       if (w.week === 52 && window.EsameData) m({ kind: "play", done: st.bossPassed, ico: "🎓", title: UI.examC1,
           sub: EX.missionSub, cls: "boss" });
       else m({ kind: "play", done: st.bossPassed, ico: "⚔️", title: "Vencé al " + UI.boss,
-          sub: "85% de aciertos. Pregunta más de lo que más te costó. Superarlo te da las 3 estrellas.", cls: "boss" });
+          sub: "Un examen por destreza: una lectura, una escucha, producción escrita y estructuras. 85 % en total y 55 % en cada una. " +
+            "Pregunta más de lo que más te costó. Superarlo te da las 3 estrellas; con 70 % en las frases nuevas, la cuarta" +
+            (st.star4 ? " ⭐" : st.transfer ? " (tu mejor: " + st.transfer + " %)" : "") + ".", cls: "boss" });
       return out;
     }
     // One mission per session: short lessons in order (a part's training
@@ -1575,36 +1802,55 @@
             (p && last ? p.items.length + " ejercicios de esta parte entran al entrenamiento" :
              !p && last && k === ssw.length - 1 ? "después, a entrenar la semana" : "teoría en pasos cortos, con chequeos") });
     });
+    /* Each mission with a criterion of quality, said on its card (E5): it
+       stays «a medias» (half, a grey star) until it is met.  Words: written
+       at least once, not only seen. */
     if (w.vocab && w.vocab.length) {
       var seenV = w.vocab.filter(function (v) { return state.cards["v:" + v[0]]; }).length;
-      m({ kind: "vocab", done: seenV >= w.vocab.length, ico: "📚", title: "Palabras de la semana",
-          sub: seenV + " / " + w.vocab.length + " practicadas · primero reconocer, después escribir" });
+      var prodV = w.vocab.filter(function (v) { return (state.cards["v:" + v[0]] || {}).prod; }).length;
+      m({ kind: "vocab", done: prodV >= w.vocab.length, half: seenV >= w.vocab.length && prodV < w.vocab.length, ico: "📚", title: "Palabras de la semana",
+          sub: prodV + " / " + w.vocab.length + " escritas al menos una vez" + (seenV > prodV ? " · " + seenV + " vistas" : "") + " · primero reconocer, después escribir" });
     }
     m({ kind: "play", done: st.right >= 20, ico: "🎯", title: "Superá la semana",
         sub: Math.min(st.right, 20) + " / 20 respuestas correctas con los ejercicios de la semana" });
     if (window.Scrivi && Scrivi.TASKS[w.week]) {
+      // besides its own structures, one of the month before (reglas.js)
+      if (window.Reglas) Reglas.scriviExtra(state, w.week);
       var sd = (state.scritti || {})[w.week], task = Scrivi.TASKS[w.week];
-      m({ kind: "scrivi", done: !!sd, ico: "✍️", title: UI.scrivi + ": tu texto de la semana",
+      // Weeks 27-51: the task of the tramo is the week's writing and asks for
+      // these structures too (Tramo.evaluate, «struct»); the short text stays,
+      // optional (audit F §2.2).
+      var inTramo = !!(window.Tramo && Tramo.week && Tramo.week(w.week) && !w.boss);
+      m({ kind: "scrivi", done: !!sd, ico: "✍️", opt: inTramo || undefined, title: UI.scrivi + (inTramo ? ": texto corto (opcional)" : ": tu texto de la semana"),
           sub: sd ? "Entregado · " + sd.n + " palabras" + (sd.errs ? " · " + sd.errs + " cosas para revisar" : " · sin errores marcados")
                   : task.min + " palabras o más · " + task.use.map(function (u) { return u[2]; }).join(" · ") });
     }
     if (window.Drills && window.Frasi) Drills.scenesOfWeek(w.week).forEach(function (sc) {
-      var p = Frasi.progress(sc.id, state.cards);
-      m({ kind: "scene", arg: sc.id, done: p.seen >= p.total, ico: sc.emoji, title: "Frases: " + sc.name,
-          sub: p.seen + " / " + p.total + " frases · " + sc.blurb });
+      // the scene: 60 % of its phrases firm (back three days apart or more), not only seen
+      var p = Frasi.progress(sc.id, state.cards), firm = p.total ? p.strong >= Math.ceil(p.total * 0.6) : true;
+      m({ kind: "scene", arg: sc.id, done: p.seen >= p.total && firm, half: p.seen >= p.total && !firm, ico: sc.emoji, title: "Frases: " + sc.name,
+          sub: p.seen + " / " + p.total + " frases · " + (p.seen >= p.total ? p.strong + " firmes (hacen falta " + Math.ceil(p.total * 0.6) + ") · " : "") + sc.blurb });
     });
     if (window.Letture) Letture.SERIES.forEach(function (sr) {
       Letture.ofSeries(sr.id).forEach(function (ep) {
         if (readingWeek(ep) !== w.week) return;
         var d = (state.letture || {})[ep.id];
-        m({ kind: "ep", arg: ep.id, done: !!d, ico: ep.emoji,
+        // Martín, «La settimana» and the long reading are part of the week;
+        // culture and the input floods are optional for real (they said so
+        // and still held the next week closed)
+        var optional = ep.series !== "martin" && ep.series !== "settimana" && ep.series !== "lunga";
+        // read with 70 % of comprehension, or read again
+        var readOk = !!d && (d.pct >= 70 || (d.n || 1) >= 2);
+        m({ kind: "ep", arg: ep.id, done: readOk, half: !!d && !readOk, ico: ep.emoji, opt: optional,
             title: (ep.series === "settimana" ? "Lectura y comprensión: " : ep.series === "lunga" ? "Lectura larga: " : ep.series === "martin" ? "Lectura: " : "Cultura: ") + ep.title,
-            sub: d ? "Leída · " + d.pct + "%" : esc(ep.level) + " · " + (ep.series === "lunga" ? esc(ep.genre) + " · " + Letture.allTokens(ep).length + " palabras, preguntas en " + UI.langEs
+            sub: d ? "Leída · " + d.pct + "%" + (readOk ? "" : " · con 70 % (o leyéndola otra vez) queda hecha") : esc(ep.level) + " · " + (ep.series === "lunga" ? esc(ep.genre) + " · " + Letture.allTokens(ep).length + " palabras, preguntas en " + UI.langEs
                    : esc(ep.area || ep.grammar || "")) +
-                 (ep.series === "martin" || ep.series === "settimana" || ep.series === "lunga" ? "" : " · opcional") });
+                 (optional ? " · opcional" : "") });
       });
     });
     if (window.Tramo) Tramo.missions(w, state).forEach(m);   // tramo C1 (tramo.js): escucha larga y tarea
+    if (window.Radio) Radio.missions(w, state).forEach(m);   // la serie Radio de las semanas 6-25 (radio.js)
+    if (window.Fuera) Fuera.missions(w, state).forEach(m);   // fuera de la app, opcional (fuera.js)
     if (window.Lab) {
       Lab.RULES.forEach(function (r, k) {
         if (ponteWeek(r, k) !== w.week) return;
@@ -1619,9 +1865,11 @@
       }
       Lab.CAPIRE.forEach(function (c) {
         if (c.week !== w.week) return;
-        var pc = Lab.progress("capire:" + c.id + ":", state.cards);
-        m({ kind: "capire", arg: c.id, done: pc.seen >= pc.total, ico: "🎯", title: UI.capire + ": " + c.h,
-            sub: pc.seen + " / " + pc.total + " · leer la gramática antes de producirla" });
+        // 80 % in a session (the ones played before this version: seen is enough)
+        var pc = Lab.progress("capire:" + c.id + ":", state.cards), cp = (state.capirePct || {})[c.id];
+        var capOk = pc.seen >= pc.total && (cp == null || cp >= 80);
+        m({ kind: "capire", arg: c.id, done: capOk, half: pc.seen >= pc.total && !capOk, ico: "🎯", title: UI.capire + ": " + c.h,
+            sub: pc.seen + " / " + pc.total + (cp != null ? " · tu mejor: " + cp + " %" : "") + " · con 80 % queda hecha · leer la gramática antes de producirla" });
       });
     }
     if (window.Banca && Banca.loaded()) {
@@ -1634,9 +1882,10 @@
         sub: "El verbo justo dentro de una oración real." });
     }
     if (window.Suoni && Suoni.data() && w.week <= 40) {
-      var sp = Suoni.progress(w.week, state.cards), sdone = !!(state.suoniDone || {})[w.week];
-      m({ kind: "suoni", done: sdone, ico: "🎧", title: UI.suoni + ": el oído",
-          sub: (sdone ? "Hecha · " : "") + "pares mínimos, habla conectada, entonación y un dictado · " + sp.seen + " / " + sp.total + " pares oídos" });
+      var sp = Suoni.progress(w.week, state.cards), sdone = !!(state.suoniDone || {})[w.week], spct = (state.suoniPct || {})[w.week];
+      m({ kind: "suoni", done: sdone, half: !sdone && spct != null, ico: "🎧", title: UI.suoni + ": el oído",
+          sub: (sdone ? "Hecha · " : spct != null ? "Tu mejor: " + spct + " % · con 70 % queda hecha · " : "Con 70 % queda hecha · ") +
+            "pares mínimos, habla conectada, entonación y un dictado · " + sp.seen + " / " + sp.total + " pares oídos" });
     }
     if (window.Suoni && Suoni.dgFor(w.week)) {
       var dgt = Suoni.dgFor(w.week), dgd = (state.dictogloss || {})[w.week];
@@ -1657,25 +1906,44 @@
           sub: best ? "Tu mejor: " + best.pct + " % · con 80 % queda hecho" : "Opcional · " + d.sub + ": las dos formas mezcladas y «¿qué te lo dijo?»" });
     });
     if (window.Escritos) Escritos.missions(w, state).forEach(m);   // escritura guiada (escritos.js), opcionales
+    if (window.Capas) Capas.missions(w, state).forEach(m);   // Biblioteca y Tres vueltas (capas.js), opcionales
     var domDone = Drills.dominated(st, w, state);
-    m({ kind: "play2", done: domDone, ico: "🏆", title: "Dominala",
+    m({ kind: "play2", done: domDone, half: !domDone && !!st.domBest, ico: "🏆", title: "Dominala",
         sub: domDone ? "Dominada" + (st.domPct ? " · " + st.domPct + " %" : "")
           : w.lesson && !lessonRead(w.week) ? "Se abre cuando termines la lección: pregunta toda la semana"
           : "Una sola sesión de " + Drills.DOMINA_SIZE + " preguntas de toda la semana, sin vidas: con 85 % la ganás" +
+            (w.week >= DOMINA_GATE ? " · abre la semana siguiente" : "") +
             (st.domBest ? " · tu mejor intento: " + st.domBest + " %" : "") });
+    // A lesson with less than 70 % in its checks: its training comes right
+    // after the lesson, before the rest.
+    if ((state.lessonScore || {})[w.week] != null && state.lessonScore[w.week] < 70) {
+      var pi = -1, lastLez = -1;
+      out.forEach(function (x, k) { if (x.kind === "play" && pi < 0) pi = k; if (x.kind === "lez") lastLez = k; });
+      if (pi > lastLez + 1 && !out[pi].done) {
+        var first = out.splice(pi, 1)[0];
+        first.sub = "Primero esto: los chequeos de la lección salieron por debajo del 70 % · " + first.sub;
+        out.splice(lastLez + 1, 0, first);
+      }
+    }
     return out;
   }
+  // From this week on, Dominala opens the next one (before, the lesson and
+  // the twenty right answers, so as not to scare anyone off).
+  var DOMINA_GATE = 5;
 
   function nextMission(w) {
     return weekPlan(w).filter(function (x) { return !x.done; })[0] || null;
   }
 
-  /* The next week opens when every mission of this one is done, «Dominala»
-     aside (that is the third star): the lesson, the words, the twenty right
-     answers, the phrases, the reading, the lab and the bank of the week. */
+  /* The next week opens when every mission of this one is done: the
+     lesson, the words, the twenty right answers, the phrases, the reading,
+     the lab and the bank of the week, each one with its criterion; and
+     from week 5 on, «Dominala» too (the only mission that asks producing
+     the whole week well). */
   function pendingToAdvance(w) {
     if (w.boss) return weekStat(w.week).bossPassed ? [] : ["Vencé al " + UI.boss];
-    return weekPlan(w).filter(function (x) { return !x.done && x.kind !== "play2" && !x.opt; }).map(function (x) { return x.title; });
+    return weekPlan(w).filter(function (x) { return !x.done && (x.kind !== "play2" || w.week >= DOMINA_GATE) && !x.opt; })
+      .map(function (x) { return x.title + (x.half ? " (a medias)" : ""); });
   }
   function tryAdvance(week) {
     var w = course.weeks[week - 1];
@@ -1706,6 +1974,8 @@
     else if (kind === "storia") { view.screen = "storia"; render(); window.scrollTo(0, 0); }
     else if (window.Escritos && Escritos.handles(kind)) Escritos.go(kind, arg);
     else if (window.Tramo && Tramo.handles(kind)) Tramo.go(kind, arg);
+    else if (window.Capas && Capas.handles(kind)) Capas.go(kind, arg);
+    else if (window.Fuera && Fuera.handles(kind)) Fuera.go(kind, arg);
   }
 
   function missions(w, st, nChal) {
@@ -1716,13 +1986,14 @@
       (w.boss ? (w.week < 52 ? '<p class="muted">⚔️ El ' + UI.boss + " abre la semana " + (w.week + 1) + ". Los repasos por tema y tus puntos débiles son opcionales: sirven para llegar preparado.</p>" : "")
         : w.week < 52 && state.unlocked <= w.week
         ? '<p class="muted">🔒 La semana ' + (w.week + 1) + " se abre al completar " + (left.length === 1 ? "esta misión" : "estas " + left.length + " misiones") +
-          " (todas menos Dominala).</p>"
+          (w.week >= DOMINA_GATE ? " (Dominala incluida)." : " (todas menos Dominala).") + " ☆ = a medias: falta el criterio de la tarjeta.</p>"
         : '<p class="muted">🔓 Semana ' + (w.week + 1) + " abierta.</p>") +
       "<div class=\"missions\">";
     plan.forEach(function (x, k) {
-      html += '<button class="mission' + (x.done ? " done" : "") + (x.cls ? " " + x.cls : "") +
+      html += '<button class="mission' + (x.done ? " done" : x.half ? " half" : "") + (x.cls ? " " + x.cls : "") +
         '" data-m="' + x.kind + '"' + (x.arg ? ' data-arg="' + esc(x.arg) + '"' : "") + ">" +
-        '<span class="mi">' + (x.done ? "★" : x.ico) + "</span><span><b>" + (k + 1) + ". " + x.title + "</b><small>" + x.sub + "</small></span>" +
+        '<span class="mi">' + (x.done ? "★" : x.half ? '<span class="halfstar" title="a medias">☆</span>' : x.ico) + "</span><span><b>" + (k + 1) + ". " + x.title +
+          (x.half ? ' <em class="muted">· a medias</em>' : "") + "</b><small>" + x.sub + "</small></span>" +
         '<span class="go">›</span></button>';
     });
     html += "</div>";
@@ -1791,6 +2062,7 @@
 
   /* Las cuatro cuerdas de Nation (la guía): input, output, forma, fluidez. */
   function strandOf(it, kind) {
+    if (it.unamas) return "output";      // «Ahora vos: una más» is writing practice (unamas.js)
     if (kind === "lettura" || kind === "capire" || kind === "suoni" || it.type === "listen" || it.type === "dictation" || SAY_TYPES[it.type]) return "input";
     if (it.type === "write" || it.type === "translate" || it.type === "typed" || it.type === "fixerr" || it.type === "combina" || kind === "b-tr") return "output";
     if (kind === "scene" || it.type === "flash") return "fluidez";
@@ -1804,9 +2076,11 @@
     if (kind === "giorno") {
       w = course.weeks[Math.min(state.unlocked, 52) - 1];
       view.week = w.week;
-      items = Drills.buildRound(course, w, { map: itemMap, state: state, silent: state.silent, size: 6, only: partItems(w) });
+      // six written questions of the rules that are due (reglas.js)
+      items = window.Reglas ? Reglas.dailyItems(state, 6) : [];
+      if (items.length < 6) items = items.concat(Drills.buildRound(course, w, { map: itemMap, state: state, silent: state.silent, size: 6 - items.length, only: partItems(w) }));
     }
-    else if (kind === "boss") items = Drills.buildBoss(course, w, state, { map: itemMap });
+    else if (kind === "boss") items = Drills.buildBoss(course, w, state, { map: itemMap, silent: state.silent });
     else if (kind === "debil") items = Drills.buildWeak(course, w, state, { map: itemMap, size: 15, only: partItems(w) });
     else if (kind === "domina") {
       // the whole week, so only once the whole lesson has been read
@@ -1865,8 +2139,7 @@
     else if (kind === "suoni") items = Suoni.session(state, arg || Math.min(state.unlocked, 52), { silent: state.silent });
     else if (kind === "ritorno") items = ritornoItems();
     else if (kind === "esame") {
-      var pool = course.items.filter(function (it) { return it.topic === "esame" && it.prova === arg; });
-      items = Drills.shuffle(pool).slice(0, arg === "strutture" ? 20 : 12);
+      items = esameItems(arg);   // the version's (the exam, below)
     }
     else if (kind === "micro") items = Drills.buildReview(course, state, 5, drillOpts());
     else if (kind === "duello") items = window.Duelli ? Duelli.session(arg, state.cards) : [];
@@ -1879,6 +2152,8 @@
     else if (kind === "b-gap") items = Banca.gapSession(state, 10);
     else if (kind === "b-err") items = Banca.errorSession(state, 8);
     else if (kind === "clinica") items = Banca.clinicaSession(state, 12);
+    // after the placement test: where Spanish gets in the way (ubicacion.js)
+    else if (kind === "diag") items = window.Ubicacion && Ubicacion.diagnosis ? Ubicacion.diagnosis(state) : [];
     else if (kind === "sfida") {
       var ch = course.challenges.filter(function (c) { return c.id === arg; })[0];
       items = ch && ch.play ? ch.play.map(function (id) { return itemMap[id]; }).filter(Boolean) : [];
@@ -1902,7 +2177,8 @@
       // A round that starts from the week (its briefing, its challenges, its
       // lesson's «A entrenar», a reading opened from it) goes back to the week.
       from: view.screen === "briefing" || view.screen === "sfide" || view.screen === "lezione" ||
-            (view.screen === "lettura" && view.epFrom === "briefing") ? "briefing" : null,
+            (view.screen === "lettura" && view.epFrom === "briefing") ? "briefing" :
+            view.screen === "lettura" && view.epFrom === "hoy" ? "hoy" : null,
       items: items,
       i: 0,
       right: 0,
@@ -1921,6 +2197,10 @@
       fixed: 0,
       week: view.week,
       planDone: doneCount(course.weeks[view.week - 1]),
+      // «¿Cuánto creés que vas a sacar?» before Dominala and the boss
+      askPredict: kind === "domina" || kind === "boss",
+      predict: null,
+      conf: null,
       // A chest ticket or the daily challenge: double xp for this round.
       boost: kind === "giorno" || (state.boost > 0 && kind !== "review" && kind !== "pausa")
     };
@@ -1946,7 +2226,7 @@
           Math.round(round.i / round.items.length * 100) + '"></i></span>' +
         '<span class="muted">' + (round.i + 1) + UI.of + round.items.length + "</span>" +
         dai(round.i, round.items.length) +
-        (round.combo > 1 ? '<span class="combo pop">🔥×' + round.combo + "</span>" : "") +
+        (round.combo > 1 ? '<span class="combo pop" title="Racha de respuestas escritas">✍️×' + round.combo + "</span>" : "") +
         '<button class="btn ghost" id="quit">✕</button>' +
       "</div>";
   }
@@ -1963,9 +2243,23 @@
     return acc(l.slice(-8)) <= acc(l) - 0.2;
   }
 
+  /* Before Dominala and the boss: a prediction of one tap, compared with
+     the result at the end (Dunlosky & Rawson 2012). */
+  function predictHtml() {
+    return hud() + '<div class="card intro predict">' +
+      '<div class="badge-new">🔮 Antes de empezar</div>' +
+      "<h2>¿Cuánto creés que vas a sacar?</h2>" +
+      '<p class="muted">Un toque. Al final lo comparamos con lo que saques: saber cuánto sabés también se entrena.</p>' +
+      '<div class="options">' + [60, 75, 90].map(function (p) {
+        return '<button class="opt" data-pred="' + p + '">' + p + " %</button>";
+      }).join("") + "</div>" +
+      '<button class="tab" id="nopred">Prefiero no decir</button></div>';
+  }
+
   function renderGioco() {
     var it = currentItem();
     if (!it) return "";
+    if (round.askPredict && round.predict == null && round.i === 0) return predictHtml();
     stemGloss = [];
     var fatigue = "";
     if (fatigued()) {
@@ -1982,8 +2276,12 @@
         return multi ? '<span class="gap n">' + (++gi) + "</span>" : '<span class="gap">&nbsp;</span>';
       });
     var prompt = (it.retry ? '<div class="badge-new">🔁 Segunda vez, más fácil</div>' : "") +
+      (it.unamas && window.UnaMas ? UnaMas.badge(it) : "") +
       '<div class="prompt">' + esc(DV ? DV.plain(it.prompt || "") : it.prompt || "") + "</div>" +
       (it.type === "guess" ? formulaHtml(it.frase) : "") +
+      // a check of the lesson missed comes back with its rule in sight
+      (it.ruleShown ? '<div class="note">📐 ' + mk(it.ruleShown) + "</div>" : "") +
+      (it.ruleReview && it.novel ? '<div class="muted small">🧭 Una regla de la semana ' + (Reglas.parse(it.rule) || {}).week + ", en una oración nueva</div>" : "") +
       // the second time, the rule with the answer covered: it shows after answering
       (function () {
         if (!it.retry || !it.note || it.recog || !DV) return "";
@@ -2145,7 +2443,7 @@
       '<div class="card">' +
         prompt.replace("</div>", sayBtn + "</div>") +
         lead +
-        (stem ? '<div class="stem">' + stem + "</div>" : "") +
+        (stem ? '<div class="stem"' + (it.type === "translate" || it.src === "vocab" ? "" : ' lang="' + LG.tts + '"') + ">" + stem + "</div>" : "") +
         body +
         // read aloud when it changes: the verdict and the correction
         '<div id="fb" aria-live="polite"></div>' +
@@ -2218,7 +2516,7 @@
     // Another sentence or a word unlike the answer: no rule to invent.
     if (useful && DV && DV.far(given, [it.answer], d)) useful = false;
     if (useful && DV) DV.tidy(d);
-    if (useful) recordError(d, given);
+    if (useful) recordError(d, given, { registro: itemRegister(it) });
     // a sentence: vos / bien with the words that change; a word: the tag and the why
     var long = String(it.answer).trim().split(/\s+/).length > 1;
     settle(verdict, given, useful ? diagHtml(d, long) : chosenHtml(it, given, verdict));
@@ -2283,12 +2581,35 @@
   /* Written answers get a diagnosis.  A rule error on the first attempt
      earns a prompt, not the answer: the learner corrects it (Lyster & Ranta
      1997; Lyster & Saito 2010).  Slips (accents, typos) are just flagged. */
+  /* In the written review (only there: the rounds must flow), how sure the
+     learner is, asked before the verdict: it feeds the calibration and the
+     hypercorrection (a confident error is retested the next morning:
+     Butterfield & Metcalfe 2001). */
+  var CONF_KINDS = { review: 1, micro: 1, ritorno: 1, giorno: 1 };
+  function askConf(given, then) {
+    var fb = $("#fb");
+    if (!fb) return then();
+    fb.innerHTML = '<div class="feedback prompt conf"><div class="verdict">Antes de ver: ¿qué tan seguro estás?</div>' +
+      '<div class="row">' + [["seguro", "😎 Seguro"], ["creo", "🤔 Creo"], ["adivino", "🎲 Adivino"]].map(function (c) {
+        return '<button class="btn ghost" data-conf="' + c[0] + '">' + c[1] + "</button>";
+      }).join("") + "</div></div>";
+    fb.querySelectorAll("[data-conf]").forEach(function (b) {
+      b.onclick = function () { round.conf = b.dataset.conf; then(); };
+    });
+    try { fb.querySelector("[data-conf]").focus({ preventScroll: true }); } catch (e) { /* */ }
+  }
+
   function produce(given) {
-    if (round.answered) return;
+    if (round.answered || round.judging) return;
     var it = currentItem();
     // Several blanks typed as «a / b» (or a | b): same as a b.
     if (/\|/.test(it.answer || "")) given = String(given).replace(/\s*[\/|]\s*/g, " ");
     if (!String(given || "").trim()) return;
+    if (CONF_KINDS[round.kind] && !round.conf && !round.tried && !it.retry) {
+      var g0 = given;
+      askConf(g0, function () { produce(g0); });
+      return;
+    }
     var accept = (it.accept && it.accept.length ? it.accept : [it.answer]).map(function (x) {
       return String(x).replace(/\s*\|\s*/g, " ");   // two blanks: typed one after the other
     });
@@ -2298,8 +2619,18 @@
       settle(ves, given, ves === "giusto" ? "" : '<div class="note">Otras formas de decirlo: ' + esc((it.accept || [it.answer]).join(" · ")) + "</div>");
       return;
     }
+    // An answer the AI already judged valid for this item (a local variant, P4.1)
+    var vv = variantOf(it, given);
+    if (vv) {
+      settle("giusto", given, okNoteHtml({ note: "Esta forma no estaba prevista; la IA la revisó y vale" + (vv.x ? ": " + vv.x : ".") }), { label: "✓ Vale" });
+      return;
+    }
+    // The register the item asks for («Trova l'errore», a formal item): the
+    // diagnosis accepts the forms of speech with a note, or not.
+    var reg = itemRegister(it);
     var diagCtx = { stem: it.stem, prompt: it.prompt, nominal: it.type === "plural" || /plural/i.test(it.prompt || ""),
-                    week: DV ? DV.weekNow() : undefined };
+                    week: DV ? DV.weekNow() : undefined, tags: it.tags };
+    if (reg) diagCtx.registro = reg;
     var d = window.Diagnosi ? Diagnosi.diagnose(given, accept, diagCtx) : { verdict: "sbagliato" };
     if (DV) DV.tidy(d);
     // Garden path (Tomasello & Herron 1988): the learner was led into the
@@ -2342,12 +2673,15 @@
       verdict = "quasi";
     }
     if (verdict === "giusto") {
+      // Right, with a note: another valid form, the register of speech, correct
+      // but not what a native would say.  «✓ Vale»: full xp, not a slip.
+      var noteH = d.verdict === "giusto" && window.Errores && Errores.level(d) === "note" ? okNoteHtml(d) : "";
       if (round.tried) {
         markFixed(round.firstCat);
-        settle("quasi", given, selfRepairHtml(round.firstDiag), { label: "¡Eso es!", fixed: true });
+        settle("quasi", given, selfRepairHtml(round.firstDiag) + noteH, { label: "¡Eso es!", fixed: true });
       } else {
         if (it.frase && it.type === "write") state.written = (state.written || 0) + 1;
-        settle("giusto", given);
+        settle("giusto", given, noteH, noteH ? { label: "✓ Vale" } : undefined);
       }
       return;
     }
@@ -2358,19 +2692,123 @@
       if (inp0) { inp0.classList.remove("shake"); void inp0.offsetWidth; inp0.classList.add("shake"); inp0.focus(); }
       return;
     }
-    if (verdict === "sbagliato" && !round.tried && round.kind !== "boss" && round.kind !== "esame" && d.hint && d.cat !== "vuoto") {
-      round.tried = true;
-      round.lastGiven = String(given).trim();
-      round.promptAt = Date.now();
-      round.firstCat = d.cat;
-      round.firstDiag = d;
-      recordError(d, given);
-      showPrompt(d, DV ? DV.promptVerdict(given, accept, d) : null);
+    // Not sure (P4.1): the rule that fired is about the words or the order,
+    // the answer is near and not foreseen.  With a key, the AI judges it
+    // before the verdict, with what the app said as evidence.
+    if (!round.judged && needsJudge(it, d, given)) {
+      round.judged = true;
+      judgeFirst(it, given, accept, d, function (ok, data) {
+        if (ok) acceptByAI(it, given, data); else decide();
+      });
       return;
     }
-    if (!round.tried && d.cat) recordError(d, given);
-    // right but for a slip: what differed, without the list of the other categories
-    settle(verdict, given, d.cat ? diagHtml(d, true, verdict !== "sbagliato") : "");
+    decide();
+
+    function decide() {
+      if (round.answered) return;
+      if (verdict === "sbagliato" && !round.tried && round.kind !== "boss" && round.kind !== "esame" && d.hint && d.cat !== "vuoto") {
+        round.tried = true;
+        round.lastGiven = String(given).trim();
+        round.promptAt = Date.now();
+        round.firstCat = d.cat;
+        round.firstDiag = d;
+        recordError(d, given, { registro: reg });
+        showPrompt(d, DV ? DV.promptVerdict(given, accept, d) : null);
+        return;
+      }
+      if (!round.tried && d.cat) recordError(d, given, { registro: reg });
+      // right but for a slip: what differed, without the list of the other categories
+      settle(verdict, given, d.cat ? diagHtml(d, true, verdict !== "sbagliato") : "");
+    }
+  }
+
+  /* «✓ Vale» with its note: why it is fine and, if it is, what is more
+     natural or what the formal register says. */
+  function okNoteHtml(d) {
+    var txt = window.Errores ? Errores.noteOf(d) : String((d && d.note) || "");
+    if (!txt) return "";
+    var tag = d && d.level === "poco_natural" ? "💬 Más natural" : "💬 Una nota";
+    return '<div class="diag oknote"><span class="tag">' + tag + "</span><p>" + mk(DV ? DV.plain(txt) : txt) + "</p></div>";
+  }
+
+  /* ------------------------------------------ el juez de lo no previsto */
+
+  // What the AI accepted, item by item (state.variants[id] = [{g, x, at}]).
+  function variantOf(it, given) {
+    var list = (state.variants || {})[it.id];
+    if (!list || !list.length) return null;
+    var g = Engine.normalise(given);
+    return list.filter(function (v) { return v.g === g; })[0] || null;
+  }
+  function saveVariant(it, given, why) {
+    if (!state.variants) state.variants = {};
+    var list = state.variants[it.id] || (state.variants[it.id] = []);
+    var g = Engine.normalise(given);
+    if (!list.some(function (v) { return v.g === g; })) list.push({ g: g, x: String(why || "").slice(0, 300), at: Date.now() });
+    state.variants[it.id] = list.slice(-5);
+    var ids = Object.keys(state.variants);
+    if (ids.length > 300) {
+      ids.sort(function (a, b) { return (state.variants[a][0] || {}).at - (state.variants[b][0] || {}).at; });
+      ids.slice(0, ids.length - 300).forEach(function (k) { delete state.variants[k]; });
+    }
+  }
+  var JUDGE_CATS = { ordine: 1, orden: 1 };
+  function needsJudge(it, d, given) {
+    if (!aiKey() || !window.Scrivi || !Scrivi.judge || round.kind === "esame") return false;
+    if (it.options || it.type === "garden" || it.type === "dictation" || it.type === "listen" || it.src === "coniugatore" || it.dettato) return false;
+    if (!d || !d.cat || d.inSpanish || d.verdict === "giusto" || d.cat === "vuoto" || UNRECORDED[d.cat]) return false;
+    if (!(LEXICAL[d.cat] || GENERIC[d.cat] || JUDGE_CATS[d.cat])) return false;
+    // sentences: one word asked is one word (a synonym is not what the item teaches)
+    return String(it.answer || "").trim().split(/\s+/).length >= 3 && String(given).trim().split(/\s+/).length >= 2;
+  }
+  function aiItemX(it, given, sol, extra) {
+    var x = { prompt: it.prompt, stem: it.stem, options: it.options, given: given, answer: sol,
+              accept: it.accept, note: it.note || "", diff: gapDiff(given, sol) };
+    Object.keys(extra || {}).forEach(function (k) { x[k] = extra[k]; });
+    return x;
+  }
+  function aiCtx(extra) {
+    return window.Errores ? Errores.courseCtx(course, state, view.week, extra) : null;
+  }
+  function judgeFirst(it, given, accept, d, then) {
+    var r0 = round, done = false;
+    var finish = function (ok, data) {
+      if (done) return;
+      done = true;
+      clearTimeout(t);
+      r0.judging = false;
+      if (round !== r0 || currentItem() !== it || round.answered) return;
+      then(ok, data);
+    };
+    var cached = window.Errores ? Errores.cacheGet("judge", [it.id, given]) : null;
+    if (cached) return then(!!(cached.correcta && cached.mismo_sentido), cached);
+    round.judging = true;
+    $("#fb").innerHTML = '<div class="feedback prompt"><div class="verdict">🤖 Esa respuesta no la tenía prevista.</div>' +
+      '<p class="muted">Le pregunto a la IA si también vale…</p></div>';
+    // at most nine seconds: after that, the rules' verdict
+    var t = setTimeout(function () { finish(false, null); }, 9000);
+    var fbText = (d.label ? d.label + ": " : "") + (d.explain || d.hint || "");
+    Scrivi.judge(aiItemX(it, given, accept[0], { feedback: fbText.slice(0, 500), ctx: aiCtx({ cat: d.cat }) }), aiKeys(), function (err, data) {
+      if (err || !data) return finish(false, null);
+      if (window.Errores) Errores.cacheSet("judge", [it.id, given], { correcta: !!data.correcta, mismo_sentido: !!data.mismo_sentido, explicacion: String(data.explicacion || "").slice(0, 600) },
+                                          (it.stem || it.prompt || it.id) + " · " + given);
+      finish(!!(data.correcta && data.mismo_sentido), data);
+    });
+  }
+  function acceptByAI(it, given, data) {
+    var why = String((data && data.explicacion) || "");
+    saveVariant(it, given, why);
+    addAiNote({ id: it.id, prompt: it.prompt, stem: it.stem, given: given, answer: it.answer, ai: why, kind: "variante" });
+    settle("giusto", given, okNoteHtml({ note: "Tu respuesta no estaba prevista; la IA la revisó y vale. " + why +
+      " Quedó anotada en «Correcciones para revisar»." }), { label: "✓ Vale" });
+  }
+  function addAiNote(n) {
+    if (!state.aiNotes) state.aiNotes = [];
+    n.at = Date.now();
+    ["ai", "app"].forEach(function (k) { if (n[k]) n[k] = String(n[k]).slice(0, 600); });
+    state.aiNotes.unshift(n);
+    state.aiNotes = state.aiNotes.slice(0, 80);
+    persist();
   }
 
   function tokHtml(list, cls) {
@@ -2381,12 +2819,28 @@
 
   // brief: an answer that counts as right (a slip) does not list the other
   // categories («También: …»): the diff already marks every word.
+  /* The explanation at the learner's measure (P6), by how many times this
+     category has come up (state.errs[cat].n): the first time, the rule and
+     the contrast with Spanish; from the fifth, only the hint, with the
+     explanation folded and a link to the rule; in between, as it comes. */
   function diagHtml(d, withDiff, brief) {
     var diff = withDiff && d.given && d.given.length <= 24
       ? '<div class="diff"><span class="k">vos</span> ' + tokHtml(d.given, "bad") +
         '<br><span class="k">bien</span> ' + tokHtml(d.fixed, "fix") + "</div>" : "";
+    var E = window.Errores, lay = E && d.cat && !brief ? E.depth(state, d.cat) : "normal";
+    var body = "<p>" + mk(d.explain || "") + "</p>";
+    if (lay === "first") {
+      var add = E.firstLayer(d.cat, d.explain);
+      if (add.length) body += '<p class="capa">📐 ' + mk(DV ? DV.plain(add.join(" ")) : add.join(" ")) + "</p>";
+    } else if (lay === "brief" && d.hint && d.explain && d.hint !== d.explain) {
+      body = "<p>" + mk(d.hint) + "</p>" +
+        '<details class="why-ok"><summary>📐 La explicación completa</summary><p>' + mk(d.explain) + "</p></details>" +
+        '<button class="linkish" type="button" data-rulecat="' + esc(d.cat) + '">📖 Repasá la regla</button>';
+    }
+    // what was right in it (the Italian diagnosis says it in «note» on an error)
+    if (d.note && d.verdict !== "giusto" && String(d.explain || "").indexOf(String(d.note).slice(0, 30)) < 0) body += '<p class="capa">✓ ' + mk(DV ? DV.plain(String(d.note)) : String(d.note)) + "</p>";
     return '<div class="diag"><span class="tag">' + esc(d.label || "") + "</span>" + diff +
-      "<p>" + mk(d.explain || "") + "</p>" +
+      body +
       (!brief && d.all && d.all.length > 1 ? (function () {
         var seen = {}, rest = d.all.slice(1).filter(function (c) { if (seen[c] || c === d.cat) return false; seen[c] = 1; return true; });
         return rest.length ? '<div class="muted">También: ' + rest.map(function (c) { return esc(Diagnosi.LABEL[c] || c); }).join(", ") + "</div>" : "";
@@ -2515,8 +2969,10 @@
       (d.given && d.given.length <= 24 ? '<div class="diff">' + tokHtml(d.given, "bad") + "</div>" : "") +
       "<p>" + mk(d.hint) + "</p>" +
       '<div class="row">' + (masked ? '<button class="tab" id="morehint">💡 más pista</button>' : "") +
-      '<button class="tab" id="giveup">Ver la respuesta</button></div></div>';
+      (aiKey() && window.Scrivi && Scrivi.hints ? '<button class="tab" id="aihint">🤖 Explicame</button>' : "") +
+      '<button class="tab" id="giveup">Ver la respuesta</button></div><div id="aihintout"></div></div>';
     on("#giveup", function () { settle("sbagliato", "", diagHtml(d, true)); });
+    on("#aihint", function () { aiGradedHints(d); });
     on("#morehint", function () {
       var b = $("#morehint");
       if (b) b.outerHTML = '<span class="muted" style="align-self:center">' + esc(masked) + "</span>";
@@ -2527,18 +2983,178 @@
     if (input) { input.focus(); input.select && input.select(); }
   }
 
-  function recordError(d, given) {
-    if (!d || !d.cat || UNRECORDED[d.cat]) return;
-    if (!state.errs) state.errs = {};
-    if (!state.errLog) state.errLog = [];
-    var e = state.errs[d.cat] || (state.errs[d.cat] = { n: 0, fixed: 0, last: 0 });
-    e.n++;
-    e.last = Date.now();
-    // with its label and its why, so «Tus errores» can explain them later
-    state.errLog.unshift({ cat: d.cat, g: String(given).slice(0, 80), e: String(d.target || "").slice(0, 80), at: Date.now(),
-                           l: String(d.label || "").slice(0, 60), x: String(d.explain || d.hint || "").slice(0, 280) });
-    state.errLog = state.errLog.slice(0, 60);
+  /* «🤖 Explicame» before the solution (dynamic assessment: Aljaafreh &
+     Lantolf 1994): on the first failed attempt, the AI's graded hints (where
+     the problem is, then the rule as a question), with the app's own hint
+     and its category as evidence; the explanation waits for the final sheet.
+     Cached by (item, answer): the same question is not paid twice.
+     state.hintLevels counts how far the learner needed to go. */
+  function aiGradedHints(d) {
+    var it = currentItem(), out = $("#aihintout"), b = $("#aihint"), r0 = round;
+    if (!out || !it) return;
+    var given = round.lastGiven || "", sol = (it.accept && it.accept[0]) || it.answer;
+    if (b) b.disabled = true;
+    var show = function (data, lvl) {
+      if (round !== r0 || round.answered || !$("#aihintout")) return;
+      var o = $("#aihintout");
+      var p = function (t) { return mk(DV ? DV.plain(String(t || "")) : String(t || "")); };
+      o.innerHTML = '<div class="aiout"><p>🤖 <b>Pista:</b> ' + p(data.pista1) + "</p>" +
+        (lvl >= 2 ? "<p>🤖 <b>Otra pista:</b> " + p(data.pista2) + "</p>" : "") +
+        (lvl < 2 ? '<div class="row"><button class="tab" id="aihint2">💡 Otra pista</button></div>' : "") +
+        (data.tambien_correcta ? '<p class="muted small">La IA cree que tu respuesta también podría valer. Si estás seguro, mandala igual o tocá «Ver la respuesta» y después «🙋 Mi respuesta es válida».</p>' : "") +
+        "</div>";
+      if (!state.hintLevels) state.hintLevels = { 1: 0, 2: 0, 3: 0 };
+      state.hintLevels[lvl] = (state.hintLevels[lvl] || 0) + 1;
+      persist();
+      on("#aihint2", function () { show(data, 2); });
+      var inp = $("#ans") || $("#wans");
+      if (inp) inp.focus();
+    };
+    var cached = window.Errores ? Errores.cacheGet("hints", [it.id, given]) : null;
+    if (cached) { round.aiHints = cached; return show(cached, 1); }
+    out.innerHTML = '<p class="muted small">⏳ Preguntándole a la IA…</p>';
+    var x = aiItemX(it, given, sol, { feedback: String(d.hint || "").slice(0, 400), ctx: aiCtx({ cat: d.cat, appSaid: d.explain || "" }) });
+    Scrivi.hints(x, aiKeys(), function (err, data) {
+      if (round !== r0 || round.answered) return;
+      var o = $("#aihintout");
+      if (!o) return;
+      if (err || !data || !data.pista1) {
+        o.innerHTML = '<p class="muted small">No pude usar la IA (' + esc(String((err && err.message) || err || "respuesta vacía")) + ").</p>";
+        if ($("#aihint")) $("#aihint").disabled = false;
+        return;
+      }
+      var keep = { pista1: String(data.pista1 || "").slice(0, 400), pista2: String(data.pista2 || "").slice(0, 400),
+                   explicacion: String(data.explicacion || "").slice(0, 800), tambien_correcta: !!data.tambien_correcta, app_equivocada: !!data.app_equivocada };
+      if (window.Errores) Errores.cacheSet("hints", [it.id, given], keep, (it.stem || it.prompt || it.id) + " · " + given);
+      round.aiHints = keep;
+      show(keep, 1);
+    });
+  }
+
+  /* «🤖 Explicame más», on the final sheet: the solution and the app's
+     explanation are already there, so the AI is asked for the rule behind
+     it, a contrast with Spanish and another example, with the app's
+     correction, the category and the week as evidence.  If it thinks the
+     answer was valid after all, it goes to «Correcciones para revisar». */
+  function aiExplainMore(it, given, sol, dg, fbText) {
+    var b = $("#aiexp"), outE = $("#aiexpout");
+    if (b) b.disabled = true;
+    var show = function (data, meta) {
+      var o = $("#aiexpout");
+      if (!o) return;
+      var dispute = data.tambien_correcta || data.app_equivocada;
+      o.innerHTML = '<div class="aiout"><p>🤖 ' + mk(DV ? DV.plain(String(data.explicacion || "")) : String(data.explicacion || "")) + "</p>" +
+        (dispute ? '<p class="muted small">La IA cree que ' + (data.tambien_correcta ? "tu respuesta también vale" : "la corrección de la app no es buena") +
+           ". Quedó anotado en " + UI.me + " → «Correcciones para revisar».</p>" : "") +
+        (meta ? modelLine(meta) : '<p class="muted small modelline">IA: ya lo había explicado (guardado en el teléfono).</p>') + "</div>";
+    };
+    var cached = window.Errores ? Errores.cacheGet("explain", [it.id, given]) : null;
+    if (cached) return show(cached, null);
+    if (outE) outE.innerHTML = '<p class="muted small">⏳ Preguntándole a la IA…</p>';
+    var x = aiItemX(it, given, sol, { feedback: fbText, stage: "mas",
+                                      ctx: aiCtx({ cat: dg && dg.cat, appSaid: dg ? (dg.label ? dg.label + ": " : "") + (dg.explain || dg.hint || "") : "" }) });
+    Scrivi.explain(x, aiKeys(), function (err, data, meta) {
+      var o = $("#aiexpout");
+      if (!o) return;
+      if (err || !data) { o.innerHTML = '<p class="muted small">No pude usar la IA (' + esc(String((err && err.message) || err || "respuesta vacía")) + ").</p>"; if (b) b.disabled = false; return; }
+      var keep = { explicacion: String(data.explicacion || "").slice(0, 1200), tambien_correcta: !!data.tambien_correcta, app_equivocada: !!data.app_equivocada };
+      if (window.Errores) Errores.cacheSet("explain", [it.id, given], keep, (it.stem || it.prompt || it.id) + " · " + given);
+      if (keep.tambien_correcta || keep.app_equivocada) {
+        addAiNote({ id: it.id, prompt: it.prompt, stem: it.stem, given: given, answer: sol, app: fbText, ai: keep.explicacion, kind: "ia" });
+      }
+      show(keep, meta);
+    });
+  }
+
+  function canClaim(it, given, extra) {
+    if (!it || round.kind === "esame" || !String(given || "").trim()) return false;
+    if (SAY_TYPES[it.type] || it.type === "guess" || it.type === "coppia" || it.type === "hunt" || it.type === "intro") return false;
+    return !(it.type === "garden" && extra && extra.indexOf("La trampa") >= 0);
+  }
+  // The rule of a category, in the theory (the block that teaches it) or in «Consultar».
+  function openRuleOf(cat) {
+    var b = null;
+    try {
+      if (window.Porque && Porque.blockFor) b = Porque.blockFor({ id: "cat:" + cat, cat: cat, src: "clinica", type: "typed", answer: "", stem: "" },
+                                                            { course: course, unlocked: state.unlocked, week: view.week });
+    } catch (e) { b = null; }
+    if (b && window.Porque && Porque.open) Porque.open(b.week, b.i);
+    else if (window.Capas && Capas.open) Capas.open((window.Diagnosi && Diagnosi.LABEL[cat]) || "");
+  }
+
+  /* «🙋 Mi respuesta es válida» (P5), on any error sheet, with or without a
+     key: the answer is accepted provisionally (no xp, and the error recorded
+     for it is taken back from the profile, with its second pass), and it is
+     noted for review with the item, the answer and what the app said.  With
+     a key, the AI is asked too, with that evidence; if it agrees, the answer
+     becomes a local variant of the item. */
+  function claimValid(it, given, sol, fbText, dg) {
+    var b = $("#claim"), o = $("#claimout");
+    if (b) b.disabled = true;
+    (round.recorded || []).forEach(function (row) { if (window.Errores) Errores.unrecord(state, row); });
+    round.recorded = null;
+    // the easier second pass of this item is not needed
+    for (var k = round.i + 1; k < round.items.length; k++) {
+      if (round.items[k] && round.items[k].retry && round.items[k].id === it.id) { round.items.splice(k, 1); break; }
+    }
+    Array.prototype.forEach.call(document.querySelectorAll("#fb .note"), function (n) { if (/Te la vuelvo a preguntar/.test(n.textContent)) n.remove(); });
+    if (round.lives !== Infinity && round.lives < round.maxLives) round.lives++;
+    var last = round.log[round.log.length - 1];
+    if (last && last.id === it.id) last.claimed = true;
+    var note = { id: it.id, prompt: it.prompt, stem: it.stem, given: given, answer: sol, app: fbText, kind: "alumno" };
+    addAiNote(note);
+    if (o) o.innerHTML = '<div class="note">🙋 Anotada para revisar: esta vez no cuenta como error. ' +
+      "Queda en " + UI.me + " → «Correcciones para revisar», para copiarla y mandarla." + "</div>";
+    var hh = document.querySelector(".hud .hearts");
+    if (hh && round.lives !== Infinity) { var hs = ""; for (var q = 0; q < round.maxLives; q++) hs += q < round.lives ? "❤️" : "🤍"; hh.textContent = hs; }
+    if (!aiKey() || !window.Scrivi || !Scrivi.judge || !String(given || "").trim()) return;
+    if (o) o.insertAdjacentHTML("beforeend", '<p class="muted small" id="claimai">⏳ Le pregunto también a la IA…</p>');
+    Scrivi.judge(aiItemX(it, given, sol, { feedback: fbText, ctx: aiCtx({ cat: dg && dg.cat }) }), aiKeys(), function (err, data) {
+      var p = $("#claimai");
+      if (err || !data) { if (p) p.textContent = "No pude usar la IA; queda anotada igual."; return; }
+      var yes = !!(data.correcta && data.mismo_sentido), why = String(data.explicacion || "");
+      note.ai = (yes ? "vale: " : "no vale: ") + why.slice(0, 560);
+      if (yes) saveVariant(it, given, why);
+      persist();
+      if (p) p.innerHTML = "🤖 " + (yes ? "La IA coincide: vale. La próxima vez te la acepto. " : "La IA cree que no: ") + mk(DV ? DV.plain(why) : why);
+    });
+  }
+
+  /* Every correction goes to the error profile through here, as the common
+     error object of js/errores.js (what was written, the correction, the
+     hint, the rule, the contrast, the register, the source): a diagnosis of
+     a closed answer is turned into one; the other correctors pass theirs.
+     The rows of this answer are kept in round.recorded, so «🙋 Mi respuesta
+     es válida» can take them back. */
+  function recordError(d, given, o) {
+    if (!d || !d.cat || UNRECORDED[d.cat]) return null;
+    var E = window.Errores;
+    var err = d.fuente && d.mal !== undefined ? d : E ? E.fromDiag(d, given, o) : null;
+    var row = null;
+    if (E) row = E.record(state, err);
+    else {
+      if (!state.errs) state.errs = {};
+      if (!state.errLog) state.errLog = [];
+      var e = state.errs[d.cat] || (state.errs[d.cat] = { n: 0, fixed: 0, last: 0 });
+      e.n++; e.last = Date.now();
+      row = { cat: d.cat, g: String(given).slice(0, 80), e: String(d.target || "").slice(0, 80), at: Date.now(),
+              l: String(d.label || "").slice(0, 60), x: String(d.explain || d.hint || "").slice(0, 280) };
+      state.errLog.unshift(row);
+      state.errLog = state.errLog.slice(0, 60);
+    }
+    if (row && round && !round.answered) (round.recorded = round.recorded || []).push(row);
     persist();
+    return row;
+  }
+  // The register the item asks for (the Portuguese «pra» is fine in
+  // speech, not in a formal text): the item's field, its tags, «Trova
+  // l'errore» (the written norm); nothing otherwise.
+  function itemRegister(it) {
+    if (!it) return null;
+    if (it.registro) return /^(formal|culto)$/i.test(it.registro) ? "formal" : String(it.registro);
+    if ((it.tags || []).indexOf("formal") >= 0) return "formal";
+    if (it.type === "fixerr" || it.bank === "err") return "formal";
+    return null;
   }
 
   function markFixed(cat) {
@@ -2563,59 +3179,82 @@
     // A guess before learning is never an error: it only primes the memory.
     if (it.type === "guess") return settleGuess(it, q, given);
 
+    // Written (produced) or recognised among options: the xp and the streak
+    // of written answers («racha de escritos») go by that.
+    var produced = !it.recog && it.type !== "choice" && !it.options;
+    var wrote = Engine.written ? Engine.written(it) : produced;
     if (q === 2) {
-      round.right++; round.combo++;
+      round.right++;
+      if (wrote) round.combo++;
       round.bestCombo = Math.max(round.bestCombo, round.combo);
       fx.right();
     } else if (q === 1) { round.close++; round.combo = 0; fx.close(); }
     else {
       round.wrong++; round.combo = 0; fx.wrong();
-      if (round.lives !== Infinity) round.lives--;
+      if (round.lives !== Infinity && !it.unamas) round.lives--;   // «una más» is optional: no life lost
     }
 
-    var gained = Engine.xpFor(verdict, round.combo);
+    // a rule of a month ago or more, written: it pays more (reglas.js)
+    var oldRule = !!(window.Reglas && Reglas.isOld(it, state));
+    var gained = Engine.xpFor(verdict, round.combo, it, { old: oldRule && wrote });
     if (it.retry) gained = Math.ceil(gained / 2);     // the easier second pass pays half
     if (state.streak >= 7) gained = Math.round(gained * 1.2);   // a week of streak pays more
     if (round.boost) gained *= 2;
     round.xp += gained;
     Engine.addStrand(state, strandOf(it, round.kind), gained);
     round.log.push({ id: it.id, verdict: verdict, given: given, answer: it.answer, retry: !!it.retry,
-                     novel: !!it.novel, fixed: !!opts.fixed,
+                     novel: !!it.novel, fixed: !!opts.fixed, skill: it.skill || "", old: !!it.old || oldRule,
+                     rule: it.rule || "",
                      es: it.frase ? it.frase.es : "", stem: it.stem || "", prompt: it.prompt || "" });
 
-    // SRS only tracks the fixed bank and the phrases; generated conjugation
-    // drills are endless by design, so they are not scheduled as cards.
-    // Right at first sight in the training: a light card (back in two
-    // weeks), so the review queue holds errors, phrases and words, not
-    // every exercise ever seen.
-    if (it.src !== "coniugatore" && it.src !== "lettura" && !it.nocard) {
-      var light = !it.frase && it.src !== "vocab" && it.src !== "lab" && it.src !== "banca" && !it.retry &&
-                  (round.kind === "round" || round.kind === "sfida" || round.kind === "giorno" || round.kind === "boss" || round.kind === "domina");
-      // The diagnosis says what kind of mistake it was (a slip, a word, a rule).
-      var dg = round.lastDiag; round.lastDiag = null;
-      var ekind = q === 1 && (!dg || dg.slip) ? "slip"
-        : q === 0 && dg && LEXICAL[dg.cat] ? "vocab" : q === 0 ? "rule" : null;
+    // How long it took: right and quick (under half of what counts as slow
+    // for this kind of item) is Easy; right and slow is Hard.
+    var slowT = window.Devolucion && Devolucion.slowAfter ? Devolucion.slowAfter(it) : null;
+    var fast = q === 2 && produced && !round.tried && took != null && slowT && took < slowT / 2;
+    var slow = q === 2 && took != null && slowT && took > slowT * 1.5;
+    // The diagnosis says what kind of mistake it was (a slip, a word, a rule).
+    var dg = round.lastDiag; round.lastDiag = null;
+    var ekind = q === 1 && (!dg || dg.slip) ? "slip"
+      : q === 0 && dg && LEXICAL[dg.cat] ? "vocab" : q === 0 ? "rule" : null;
+    /* The card of the item and the one of its rule (reglas.js): generated
+       conjugation drills are endless by design and make no card; in the
+       rounds a right recognition makes none either (it comes back written,
+       and its rule has a card that brings new sentences); what failed and
+       what was written enters.  The confidence asked in the written review
+       goes to the calibration. */
+    if (window.Reglas) {
+      Reglas.afterAnswer(state, it, q, { kind: round.kind, ekind: ekind, hint: !!round.tried || !!opts.fixed,
+        fast: !!fast, slow: !!slow, ms: took, conf: round.conf || null, notte: state.notte !== false, produced: produced });
+    } else if (it.src !== "coniugatore" && it.src !== "lettura" && !it.nocard) {
       state.cards[it.id] = Engine.schedule(state.cards[it.id], q, {
-        light: light, kind: ekind, id: it.id, state: state, retry: !!it.retry, hint: !!round.tried || !!opts.fixed,
-        notte: state.notte !== false });
+        kind: ekind, id: it.id, state: state, retry: !!it.retry, hint: !!round.tried || !!opts.fixed,
+        fast: !!fast, slow: !!slow, ms: took, notte: state.notte !== false });
       Engine.maybeFit(state);
     }
+    // The ladder inside the round: recognised right and quick → the next of
+    // the same rule written; written and missed → the next with options.
+    var recogFast = q === 2 && it.recog && took != null && slowT && took < slowT / 2;
+    if (window.Reglas && round.kind !== "boss" && round.kind !== "domina" && round.kind !== "esame") Reglas.adaptNext(round, it, q, recogFast);
     // Productive practice of the week's own rule, day by day (a rule is a
     // card of its own: three days of writing it right consolidate it).
     if (q === 2 && !it.recog && !it.options && !it.frase && it.src !== "coniugatore" && it.src !== "vocab" &&
-        it.src !== "lab" && it.src !== "lettura" && it.src !== "banca" && COUNT_KINDS[round.kind]) {
+        it.src !== "lab" && it.src !== "lettura" && it.src !== "banca" && !it.ruleReview && !it.old && !it.unamas && COUNT_KINDS[round.kind]) {
       Engine.noteProduction(state, view.week);
     }
 
     /* Successive relearning (Rawson & Dunlosky 2011): what you miss comes
        back later in the same session, until you get it (at most twice). */
     var relearn = "";
-    if (q < 2 && round.kind !== "boss" && round.kind !== "esame" && it.src !== "lettura" && !it.retry && !(round.again[it.id])) {
+    if (q < 2 && round.kind !== "boss" && round.kind !== "esame" && it.src !== "lettura" && !it.retry && !it.unamas && !(round.again[it.id])) {
       round.again[it.id] = 1;
       var at = Math.min(round.items.length, round.i + 3);
       round.items.splice(at, 0, retryVersion(it));
       relearn = '<div class="note">🔁 Te la vuelvo a preguntar en un rato, más fácil.</div>';
     }
+    // «Ahora vos: una más» (unamas.js): after a mistake of a rule, one new
+    // item of the same rule with other words, optional, as the next question.
+    var oneMore = window.UnaMas && q < 2 ? UnaMas.offer(it, { q: q, ekind: ekind, dg: dg || round.firstDiag, kind: round.kind,
+      state: state, round: round, map: itemMap, course: course }) : null;
 
     state.totals.attempts++;
     if (q === 2) state.totals.right++;
@@ -2623,9 +3262,10 @@
     else state.totals.wrong++;
 
     // Only the week's own exercises count towards its stars: not the gym,
-    // not the words (that is how a week got «mastered» after seeing 7 items).
+    // not the words (that is how a week got «mastered» after seeing 7 items),
+    // not the rules of other weeks (a new sentence, the old ones of Dominala).
     if (!it.frase && it.src !== "lab" && it.src !== "lettura" && it.src !== "banca" &&
-        it.src !== "coniugatore" && it.src !== "vocab" && COUNT_KINDS[round.kind]) {
+        it.src !== "coniugatore" && it.src !== "vocab" && !it.ruleReview && !it.old && !it.unamas && COUNT_KINDS[round.kind]) {
       var ws = state.weekStats[view.week] ||
         (state.weekStats[view.week] = { attempts: 0, right: 0, bossPassed: false });
       ws.attempts++;
@@ -2640,6 +3280,8 @@
     if (gained) xpFly(gained);
 
     var label = opts.label || { giusto: pick(UI.giusto), quasi: UI.quasi, sbagliato: pick(UI.sbagliato) }[verdict];
+    // what the learner can claim as valid: this answer, or the one before «Ver la respuesta»
+    var claimGiven = String(given || "").trim() ? given : round.tried ? round.lastGiven || "" : "";
     var rp = rightParts(it, given, q, extra, { ms: took, seen: seenBefore, fixed: !!opts.fixed });
     var sol = it.type === "listen" && it.frase ? it.frase.it + " — " + it.answer
             : it.frase ? it.frase.it : rp.sol || it.answer;
@@ -2678,9 +3320,11 @@
       relearn +
       '<div class="row" style="margin-top:10px">' +
         '<button class="btn" id="next">' + UI.next + "</button>" +
+        (oneMore ? UnaMas.button() : "") +
         '<button class="tab" id="say2">🔊 escuchar</button>' +
-        (q < 2 && aiKey() && window.Scrivi && it.type !== "hunt" ? '<button class="tab" id="aiexp">🤖 Explicame</button>' : "") +
-      '</div><div id="aiexpout"></div></div>';
+        (q < 2 && aiKey() && window.Scrivi && it.type !== "hunt" ? '<button class="tab" id="aiexp">🤖 Explicame más</button>' : "") +
+        (q < 2 && canClaim(it, claimGiven, extra) ? '<button class="tab" id="claim">🙋 Mi respuesta es válida</button>' : "") +
+      '</div><div id="aiexpout"></div><div id="claimout"></div></div>';
 
     $("#fb").innerHTML = fb;
     if (window.Porque) Porque.after(it, { q: q, given: given, round: round });   // 📖 ¿Por qué? · 🧐 ¿Qué tenía de malo?
@@ -2695,6 +3339,9 @@
       if (oth && !oth.querySelector("li")) oth.parentNode.removeChild(oth);
     }
     wireKeyword();
+    $("#fb").querySelectorAll("[data-rulecat]").forEach(function (b) {
+      b.onclick = function (e) { e.stopPropagation(); openRuleOf(b.getAttribute("data-rulecat")); };
+    });
     $("#fb").querySelectorAll("[data-sg]").forEach(function (b) {
       b.onclick = function (e) { e.stopPropagation(); showGloss(stemGloss[+b.dataset.sg]); };
     });
@@ -2703,13 +3350,13 @@
     if (qt && q < 2) qt.hidden = false;
 
     // Mark the chosen option so the learner sees what they picked.
-    var opts = document.querySelectorAll(".opt");
-    for (var i = 0; i < opts.length; i++) {
-      opts[i].disabled = true;
-      if (Engine.normalise(opts[i].textContent) === Engine.normalise(it.answer)) {
-        opts[i].classList.add("right");
-      } else if (Engine.normalise(opts[i].textContent) === Engine.normalise(given)) {
-        opts[i].classList.add("wrong");
+    var optEls = document.querySelectorAll(".opt");
+    for (var i = 0; i < optEls.length; i++) {
+      optEls[i].disabled = true;
+      if (Engine.normalise(optEls[i].textContent) === Engine.normalise(it.answer)) {
+        optEls[i].classList.add("right");
+      } else if (Engine.normalise(optEls[i].textContent) === Engine.normalise(given)) {
+        optEls[i].classList.add("wrong");
       }
     }
     var input = $("#ans");
@@ -2728,56 +3375,25 @@
     // read: the sentence of the question is, when there is one.
     if (spanishText(spoken) || (spoken === it.answer && asksMeaning(it))) spoken = it.stem && !/_{3,}/.test(it.stem) && !spanishText(it.stem) ? it.stem : "";
     $("#next").onclick = nextAfterFeedback();
-    on("#aiexp", function () {
-      var b = $("#aiexp"), outE = $("#aiexpout");
-      if (b) b.disabled = true;
-      if (outE) outE.innerHTML = '<p class="muted small">⏳ Preguntándole a la IA…</p>';
-      var fbText = ($("#fb") || {}).innerText || "";
-      var x = { prompt: it.prompt, stem: it.stem, options: it.options, given: given, answer: sol,
-                accept: it.accept, feedback: fbText.split(UI.next)[0].replace(/\s+/g, " ").slice(0, 600),
-                note: it.note || "", diff: gapDiff(given, sol) };
-      // Graded hints (dynamic assessment): implicit → the rule as a
-      // question → the explanation.  The level reached is kept as a
-      // signal of how much mediation the learner needed.
-      Scrivi.hints(x, aiKeys(), function (err, data, meta) {
-        var o = $("#aiexpout");
-        if (!o) return;
-        if (err) { o.innerHTML = '<p class="muted small">No pude usar la IA (' + esc(String(err.message || err)) + ").</p>"; if (b) b.disabled = false; return; }
-        var dispute = data && (data.tambien_correcta || data.app_equivocada);
-        if (dispute) {
-          // Kept for review: the learner does not have to explain it to anyone.
-          if (!state.aiNotes) state.aiNotes = [];
-          state.aiNotes.unshift({ id: it.id, prompt: it.prompt, stem: it.stem, given: given, answer: sol,
-                                  ai: String(data.explicacion || "").slice(0, 600), at: Date.now() });
-          state.aiNotes = state.aiNotes.slice(0, 80);
-          persist();
-        }
-        var lvl = 1;
-        var show = function () {
-          o.innerHTML = '<div class="aiout">' +
-            '<p>🤖 <b>Pista 1:</b> ' + esc(String(data.pista1 || "")) + "</p>" +
-            (lvl >= 2 ? '<p><b>Pista 2:</b> ' + esc(String(data.pista2 || "")) + "</p>" : "") +
-            (lvl >= 3 ? "<p>" + mk(String(data.explicacion || "")) + "</p>" +
-              (dispute ? '<p class="muted small">La IA cree que ' + (data.tambien_correcta ? "tu respuesta también vale" : "la corrección de la app no es buena") +
-                 ". Quedó anotado en " + UI.me + " → «Correcciones para revisar».</p>" : "") + modelLine(meta) : "") +
-            (lvl < 3 ? '<div class="row"><button class="tab" id="morehint2">' + (lvl === 1 ? "💡 Más pista" : "📐 La explicación") + "</button></div>" : "") +
-            "</div>";
-          on("#morehint2", function () {
-            lvl++;
-            if (!state.hintLevels) state.hintLevels = { 1: 0, 2: 0, 3: 0 };
-            show();
-          });
-          if (lvl === 3 && state.hintLevels) state.hintLevels[3] = (state.hintLevels[3] || 0) + 1;
-        };
-        show();
-      });
-    });
+    on("#unamas", function () { if (UnaMas.take(round, oneMore)) nextItem(); });
+    var fbTextOf = function () {
+      var t = ($("#fb") || {}).innerText || "";
+      return t.split(UI.next)[0].replace(/\s+/g, " ").slice(0, 600);
+    };
+    on("#aiexp", function () { aiExplainMore(it, claimGiven || given, sol, dg || round.firstDiag, fbTextOf()); });
+    on("#claim", function () { claimValid(it, claimGiven, sol, fbTextOf(), dg || round.firstDiag); });
     $("#say2").onclick = function () { if (it.audio) speakItem(it, true); else speak(spoken, true); };
     if (!spoken && !it.audio) $("#say2").hidden = true;
     else if (q === 2 || it.frase) { if (it.audio) speakItem(it); else speak(spoken); }
     $("#fb").scrollIntoView({ behavior: "smooth", block: "nearest" });
     // The keyboard goes on: Enter (or the screen reader) lands on «Siguiente».
     try { $("#next").focus({ preventScroll: true }); } catch (e) { /* */ }
+    // The answer is already counted (xp, card, lives): if the app closes now,
+    // «Retomar» has to start from the next question, not ask this one again.
+    var i0 = round.i;
+    round.i = i0 + 1;
+    savePending();
+    round.i = i0;
   }
 
   /* The second time comes in another shape: two options with the rule in
@@ -2909,7 +3525,7 @@
       '<div class="verdict">' + (q === 2 ? "¡Buen olfato!" : "Era esta. Mirá qué tenía tu opción:") +
         ' <span class="xpgain">+' + gained + " xp</span></div>" +
       (q === 2 ? "" : guessWhy(it, given)) +
-      '<div class="sol">' + esc(it.answer) + "</div>" +
+      '<div class="sol" lang="' + LG.tts + '">' + esc(it.answer) + "</div>" +
       (it.note ? '<div class="note">' + mk(it.note) + "</div>" : "") +
       (q === 2 ? guessOthers(it) : "") +
       desgloseHtml(targetText(it), true) +
@@ -2951,7 +3567,8 @@
                        right: round.right, close: round.close, wrong: round.wrong, fixed: round.fixed || 0,
                        combo: round.combo, bestCombo: round.bestCombo,
                        lives: round.lives === Infinity ? null : round.lives, maxLives: round.maxLives,
-                       xp: round.xp, again: round.again, log: round.log } };
+                       xp: round.xp, again: round.again, log: round.log, askPredict: !!round.askPredict, predict: round.predict,
+                       week: round.week, planDone: round.planDone } };
       } else if (view.screen === "lezione" && les && les.i < les.steps.length) {
         p = { type: "lezione", week: les.w.week, part: les.part, at: Date.now(), steps: les.steps, i: les.i, right: les.right, asked: les.asked };
       }
@@ -2973,7 +3590,8 @@
                     scene: "Frases", vocab: "Palabras de la semana", lettura: "Lectura", sfida: UI.sfida, ponte: "Ponte",
                     falsi: UI.falsi, capire: UI.capire, "b-voc": UI.words, "b-tr": UI.tr, "b-gap": UI.gap,
                     "b-forme": UI.forme, "b-err": UI.err, clinica: "Clínica", suoni: UI.suoni, "b-freq": UI.wordsFreq,
-                    ritorno: "Cinco minutos para retomar", micro: UI.micro, esame: UI.examC1, duello: "Duelo" };
+                    ritorno: "Cinco minutos para retomar", micro: UI.micro, esame: UI.examC1, duello: "Duelo",
+                    diag: "Mini diagnóstico" };
   function pendingTitle(p) {
     if (p.type === "lezione") return "Lección · semana " + p.week + " · " + (p.i + 1) + "/" + p.steps.length;
     return (KIND_NAME[p.round.kind] || "Ronda") + " · " + (p.round.i + 1) + "/" + p.round.items.length;
@@ -2996,12 +3614,16 @@
   function nextItem() {
     round.i++;
     round.answered = false;
+    round.conf = null;
     round.tried = false;
     round.lastGiven = null;
     round.firstCat = null;
     round.firstDiag = null;
     round.hinted = false;
     round.picked = [];
+    round.recorded = null;
+    round.judged = false;
+    round.aiHints = null;
     if (round.i >= round.items.length) {
       finishRound();
       return;
@@ -3039,19 +3661,37 @@
       toast(EX.provaToast(round.arg, proveName(round.arg)) + ": " + Math.round(okE / Math.max(1, firsts0.length) * 100) + " %", 3000);
       return;
     }
-    var passed = false, transfer = null;
+    var passed = false, transfer = null, skills = null, oldRules = null;
+    var okL = function (l) { return l.filter(function (x) { return x.verdict === Engine.VERDICT.RIGHT || x.fixed; }).length; };
+    // The rules of a month ago or more, apart (they say whether what was learnt stayed).
+    var oldOf = function (l) { var o = l.filter(function (x) { return x.old && !x.retry; }); return o.length ? { pct: Math.round(okL(o) / o.length * 100), n: o.length } : null; };
     if (round.kind === "boss") {
       // The new sentences (never practised) measure whether the rule
-      // generalises: reported apart, they do not count for passing.
-      var okL = function (l) { return l.filter(function (x) { return x.verdict === Engine.VERDICT.RIGHT || x.fixed; }).length; };
+      // generalises: reported apart, they do not count for passing, but
+      // they are the fourth star.
       var coreL = round.log.filter(function (x) { return !x.novel; }), novL = round.log.filter(function (x) { return x.novel; });
+      pct = coreL.length ? Math.round(okL(coreL) / coreL.length * 100) : pct;
       if (novL.length) {
-        pct = coreL.length ? Math.round(okL(coreL) / coreL.length * 100) : pct;
         transfer = { pct: Math.round(okL(novL) / novL.length * 100), n: novL.length };
+        transfer.gap = pct - transfer.pct;
       }
-      passed = pct >= 85;
+      // Like the certifications: one mark per ability, and each one has to
+      // reach 55 % (reading, listening, writing, structures).
+      skills = {};
+      coreL.forEach(function (l) {
+        var k = l.skill || "strutture", a = skills[k] || (skills[k] = { n: 0, ok: 0 });
+        a.n++;
+        if (l.verdict === Engine.VERDICT.RIGHT || l.fixed) a.ok++;
+      });
+      var eachOk = Object.keys(skills).every(function (k) { return skills[k].n < 2 || skills[k].ok / skills[k].n >= 0.55; });
+      oldRules = oldOf(coreL);
+      passed = pct >= 85 && eachOk;
       var ws = state.weekStats[view.week] ||
         (state.weekStats[view.week] = { attempts: 0, right: 0, bossPassed: false });
+      if (transfer) {
+        ws.transfer = Math.max(ws.transfer || 0, transfer.pct);
+        if (passed && transfer.pct >= 70) ws.star4 = true;
+      }
       if (passed) {
         ws.bossPassed = true;
         if (round.wrong === 0) ws.perfect = true;
@@ -3062,13 +3702,26 @@
     // (the next week opens from missionCheck, once every mission is done)
 
     if (round.kind === "debil") { if (!state.weakDone) state.weakDone = {}; state.weakDone[view.week] = true; }
-    if (round.kind === "suoni" && total >= 6) { if (!state.suoniDone) state.suoniDone = {}; state.suoniDone[round.arg || Math.min(state.unlocked, 52)] = Date.now(); }
+    // Suoni is done with 70 % (six answers at least), not just with six answers.
+    if (round.kind === "suoni" && total >= 6) {
+      var sw = round.arg || Math.min(state.unlocked, 52);
+      if (!state.suoniPct) state.suoniPct = {};
+      state.suoniPct[sw] = Math.max(state.suoniPct[sw] || 0, pct);
+      if (pct >= 70) { if (!state.suoniDone) state.suoniDone = {}; state.suoniDone[sw] = Date.now(); }
+    }
+    // Capire keeps its best (the mission asks 80 %).
+    if (round.kind === "capire" && round.arg && total >= 4) {
+      if (!state.capirePct) state.capirePct = {};
+      state.capirePct[round.arg] = Math.max(state.capirePct[round.arg] || 0, pct);
+    }
 
     // Dominala: the first answer to each question counts (the second, easier
     // pass after a miss is for learning, not for the score).
     var domExtra = null;
     if (round.kind === "domina") {
-      var firsts = round.log.filter(function (x) { return !x.retry; });
+      // (the rules of a month ago are reported apart)
+      oldRules = oldOf(round.log);
+      var firsts = round.log.filter(function (x) { return !x.retry && !x.old; });
       var okN = firsts.filter(function (x) { return x.verdict === Engine.VERDICT.RIGHT || x.verdict === Engine.VERDICT.CLOSE; }).length;
       var dp = firsts.length ? Math.round(okN / firsts.length * 100) : 0;
       var dws = state.weekStats[view.week] || (state.weekStats[view.week] = { attempts: 0, right: 0, bossPassed: false });
@@ -3101,7 +3754,8 @@
     if (round.kind === "lettura") {
       if (!state.letture) state.letture = {};
       var prev = state.letture[round.arg];
-      state.letture[round.arg] = { pct: Math.max(pct, prev ? prev.pct : 0), at: Date.now() };
+      // n: how many times it was read (a reading read again counts for the mission)
+      state.letture[round.arg] = { pct: Math.max(pct, prev ? prev.pct : 0), at: Date.now(), n: ((prev && prev.n) || 1) + (prev ? 1 : 0) };
       if (!prev) gain(20);
     }
 
@@ -3125,8 +3779,19 @@
     persist();
     renderHeader();
 
+    // The prediction against the result (kept, for Io's calibration).
+    var predicted = null;
+    if (round.predict) {
+      predicted = { said: round.predict, got: pct, gap: pct - round.predict };
+      if (!state.predictions) state.predictions = [];
+      state.predictions.push({ kind: round.kind, week: view.week, said: round.predict, got: pct, at: Date.now() });
+      state.predictions = state.predictions.slice(-40);
+      persist();
+    }
+
     view.screen = "risultato";
-    view.result = { pct: pct, passed: passed, won: won, extras: extras, transfer: transfer };
+    view.result = { pct: pct, passed: passed, won: won, extras: extras, transfer: transfer, skills: skills,
+                    oldRules: oldRules, predicted: predicted };
     if (pct >= 80 && total >= 5) setTimeout(confetti, 150);
     render();
   }
@@ -3167,7 +3832,7 @@
     var html = '<h1>' + title + "</h1>" +
       '<div class="card">' +
       '<div class="scorebig"><b>' + r.pct + '%</b><span>+' + round.xp + ' xp</span>' +
-        (round.bestCombo > 2 ? '<span>🔥 combo ×' + round.bestCombo + "</span>" : "") + "</div>" +
+        (round.bestCombo > 2 ? '<span>✍️ racha de escritos ×' + round.bestCombo + "</span>" : "") + "</div>" +
       '<div class="goalbar" style="margin:12px 0 4px"><i style="width:' +
         Math.min(100, Math.round(tx / goal * 100)) + '%"></i></div>' +
       '<p class="muted" style="margin:0 0 10px">Meta de hoy: ' + (tx >= goal ? tx + " xp" : tx + " / " + goal + " xp") +
@@ -3183,37 +3848,45 @@
     (r.extras || []).forEach(function (x) { html += '<p class="note selfrepair">' + esc(x) + "</p>"; });
     if (round.boost) html += '<p class="muted">🎟️ Ronda con doble xp.</p>';
 
+    // The prediction made before starting, against what came out.
+    if (r.predicted) {
+      var gp = r.predicted.gap;
+      html += '<p class="note">🔮 Dijiste ' + r.predicted.said + " %, sacaste " + r.predicted.got + " %: " +
+        (Math.abs(gp) <= 7 ? "te conocés bien." : gp > 0 ? "brecha de " + gp + " puntos: sabés más de lo que creés."
+          : "brecha de " + (-gp) + " puntos: creías saber más. Lo que falló vuelve en el repaso.") + "</p>";
+    }
     if (round.kind === "boss" && r.transfer) {
       html += '<h3>¿La regla generaliza?</h3><table class="res">' +
         "<tr><td>Con lo que practicaste</td><td>" + r.pct + " %</td></tr>" +
         "<tr><td>Con " + r.transfer.n + " frases nuevas</td><td>" + r.transfer.pct + " %</td></tr></table>" +
-        '<p class="muted">Las frases nuevas no las viste nunca: no cuentan para aprobar, pero dicen si sabés la regla o te ' +
-        (r.transfer.pct + 15 < r.pct ? "acordás de las frases. <b>Acá hay distancia</b>: la Clínica y los duelos ayudan a generalizar.</p>" : "acordás de las frases. Van parejas: la regla está.</p>");
+        '<p class="muted">Las frases nuevas no las viste nunca: no cuentan para aprobar, pero dicen si sabés la regla o te acordás de las frases' +
+        (r.transfer.gap > 0 ? " (brecha de " + r.transfer.gap + " puntos)" : "") + ". " +
+        (r.transfer.gap > 15 ? "<b>Acá hay distancia</b>: la Clínica y los duelos ayudan a generalizar."
+          : "Van parejas: la regla está.") +
+        (r.passed && r.transfer.pct >= 70 ? " <b>⭐ Cuarta estrella</b>: con 70 % o más en las frases nuevas." :
+          r.passed ? " La cuarta estrella pide 70 % en las frases nuevas." : "") + "</p>";
     }
     if (round.kind === "boss") {
       // Like the certifications: one mark per ability, each one has to pass.
       var AB = EX.abilities || {};
-      var ab = {};
-      round.log.forEach(function (l) {
-        if (l.novel) return;              // the new sentences are reported apart
-        var it = round.items.filter(function (x) { return x.id === l.id; })[0] || {};
-        var k = it.type === "listen" || it.type === "dictation" ? "ascolto"
-              : it.type === "translate" || it.type === "write" || it.type === "typed" || it.type === "combina" ? "produzione"
-              : it.type === "choice" && !it.recog ? "lettura" : "strutture";
-        var a = ab[k] || (ab[k] = { n: 0, ok: 0 });
-        a.n++; if (l.verdict === Engine.VERDICT.RIGHT) a.ok++;
-      });
-      html += "<h3>" + EX.byAbility + '</h3><table class="res">' + Object.keys(ab).map(function (k) {
+      var ab = r.skills || {};
+      var ORDER_AB = ["lettura", "ascolto", "produzione", "strutture"];
+      html += "<h3>" + EX.byAbility + '</h3><table class="res">' + ORDER_AB.filter(function (k) { return ab[k]; }).map(function (k) {
         var a = ab[k], p = Math.round(a.ok / a.n * 100);
-        return "<tr><td>" + AB[k] + "</td><td>" + a.ok + " / " + a.n + " · " + (p >= 55 ? "✓" : "✗ (mínimo 55 %)") + "</td></tr>";
-      }).join("") + "</table>";
+        return "<tr><td>" + (AB[k] || k) + "</td><td>" + a.ok + " / " + a.n + " · " + (p >= 55 ? "✓" : "✗ (mínimo 55 %)") + "</td></tr>";
+      }).join("") + "</table>" +
+      (!ab.ascolto && state.silent ? '<p class="muted small">Sin escucha: estás en modo silencioso.</p>' : "");
+    }
+    if (r.oldRules) {
+      html += '<p class="note">🗓️ Reglas de hace un mes o más: ' + r.oldRules.pct + " % en " + r.oldRules.n +
+        (r.oldRules.n === 1 ? " pregunta" : " preguntas") + (round.kind === "domina" ? " (aparte: no cuentan para dominar la semana)" : "") + ".</p>";
     }
     if (round.kind === "boss") {
       html += r.passed
         ? '<p style="margin-top:14px">Semana ' + Math.min(52, view.week + 1) +
           " desbloqueada. +" + Engine.XP.boss + " xp</p>"
-        : '<p style="margin-top:14px">Hace falta <b>85%</b> de aciertos. ' +
-          "Repasá el briefing y volvé a intentarlo.</p>";
+        : '<p style="margin-top:14px">Hace falta <b>85%</b> de aciertos y 55 % en cada destreza. ' +
+          "Repasá el briefing y volvé a intentarlo: si es hoy, con otras preguntas y otros textos.</p>";
     }
 
     if (r.won && r.won.length) {
@@ -3240,6 +3913,7 @@
     }
 
     html += '<div class="row" style="margin-top:16px">' +
+      (round.from === "hoy" && window.Inicio ? Inicio.resultButton() : "") +       // el plan de hoy sigue (inicio.js)
       (round.from === "briefing" ? '<button class="btn" id="backweek">← Seguir ' + UI.pathEl + "</button>" : "") +
       '<button class="btn' + (round.from === "briefing" ? " ghost" : "") + '" id="again">Otra ronda</button>' +
       '<button class="btn ghost" id="toggi">Inicio</button>' +
@@ -3413,66 +4087,72 @@
     }).length;
     var nextRank = null;
     Engine.RANKS.forEach(function (r) { if (!nextRank && r[0] > lv.level) nextRank = r; });
+    var R = window.Progreso ? Progreso.ritmo(state) : { min: 20, days: 5 };
+    var won = Engine.BADGES.filter(function (b) { return state.badges.indexOf(b.id) >= 0; }).length;
 
     return "<h1>" + UI.me + "</h1>" +
       '<div class="card rank"><div class="rk">' + esc(Engine.rankFor(lv.level)) + "</div>" +
         '<div class="muted">nivel ' + lv.level + " · " + state.xp + " xp totales" +
         (nextRank ? " · próximo rango: <b>" + esc(nextRank[1]) + "</b> en el nivel " +
           nextRank[0] : "") + "</div></div>" +
+      (window.Progreso ? Progreso.summaryCard() : "") +
       switchCard() +
 
       '<div class="card"><h2>Ajustes</h2>' +
-        '<label class="set"><span>Meta diaria</span><select id="goal">' +
-          [[100, "Relajada · 100 xp (2 o 3 pausas; 50 el finde)"], [200, "Normal · 200 xp (4 o 5 pausas; 100 el finde)"],
-           [350, "Seria · 350 xp"], [500, "Intensa · 500 xp"]].map(function (g) {
-            return '<option value="' + g[0] + '"' + (state.goal === g[0] ? " selected" : "") +
-              ">" + g[1] + "</option>";
+        '<label class="set"><span>Minutos por día<small>tu meta principal; la xp sigue siendo la moneda del juego</small></span><select id="ritmo-min">' +
+          [10, 15, 20, 30, 45].map(function (m) {
+            return '<option value="' + m + '"' + (R.min === m ? " selected" : "") + ">" + m + " min</option>";
           }).join("") + "</select></label>" +
+        '<label class="set"><span>Días por semana<small>los otros, descanso sin culpa</small></span><select id="ritmo-days">' +
+          [3, 4, 5, 6, 7].map(function (d) {
+            return '<option value="' + d + '"' + (R.days === d ? " selected" : "") + ">" + d + " días</option>";
+          }).join("") + "</select></label>" +
+        '<div class="set metafecha"><span>Meta con fecha<small>«llegar a la semana N para el día D»: te digo el ritmo que pide</small></span>' +
+          '<span class="row"><label class="mini">semana <input type="number" id="meta-week" min="2" max="52" inputmode="numeric" value="' + (R.week || "") + '" placeholder="' + Math.min(52, (state.unlocked || 1) + 12) + '"></label>' +
+          '<input type="date" id="meta-date" aria-label="Fecha de la meta" value="' + esc(R.date ? isoDate(R.date) : "") + '">' +
+          '<button class="tab" id="meta-save">Guardar</button>' + (R.week ? '<button class="tab" id="meta-clear">Borrar</button>' : "") + "</span></div>" +
+        (R.week && window.Progreso ? '<p class="muted small">' + Progreso.targetText(Progreso.target(state)) + "</p>" : "") +
         '<label class="set"><span>Tema<small>el ☀️/🌙 de arriba también lo cambia</small></span><select id="theme-set">' +
           [["", "Como el teléfono"], ["light", "Claro ☀️"], ["dark", "Oscuro 🌙"]].map(function (t) {
             return '<option value="' + t[0] + '"' + ((state.theme || "") === t[0] ? " selected" : "") + ">" + t[1] + "</option>";
           }).join("") + "</select></label>" +
         '<label class="set"><span>Modo oficina 🤫<small>nada suena solo; el 🔊 sigue andando si lo tocás</small></span>' +
           '<input type="checkbox" id="silent"' + (state.silent ? " checked" : "") + "></label>" +
-        '<label class="set"><span>Recordatorio diario<small>se agrega a tu calendario</small></span>' +
+        '<label class="set"><span>Recordatorio diario<small>se agrega a tu calendario y abre tu plan de hoy</small></span>' +
           '<span class="row"><input type="time" id="remtime" value="' +
             esc(state.remind || "13:30") + '"><button class="btn ghost" id="remind">📅 Agregar</button></span></label>' +
       "</div>" +
 
       planCard() +
       memoriaCard() +
-      lessicoCard() +
-      (window.Biblioteca ? Biblioteca.ioCard() : "") +   // input: palabras y minutos de lectura (js/biblioteca.js)
       '<div class="card"><h2>Tu copia</h2>' +
         '<p class="muted">Todo tu progreso vive <b>solo en este teléfono</b>, sin cuentas ni servidores. ' +
-        "Si borrás los datos del navegador se pierde: guardá una copia de vez en cuando.</p>" +
+        "Si borrás los datos del navegador se pierde: guardá una copia de vez en cuando." +
+        (state.exportedAt ? " La última: " + new Date(state.exportedAt).toLocaleDateString("es-AR") + "." : "") + "</p>" +
         '<div class="row"><button class="btn" id="export">💾 Guardar copia</button>' +
         '<button class="btn ghost" id="import">📂 Restaurar copia</button>' +
-        '<input type="file" id="importfile" accept="application/json,.json" hidden></div>' +
+        '<input type="file" id="importfile" aria-label="Archivo de la copia" accept="application/json,.json" hidden></div>' +
         '<p class="muted" id="persistmsg" style="margin-top:10px"></p>' +
+        nubeHtml() +
       "</div>" +
 
-      (window.Referencia ? Referencia.entry() : "") +
+      (window.Capas && Capas.entryHtml ? Capas.entryHtml() : window.Referencia ? Referencia.entry() : "") +
       errorsCard() +
       aiCard() +
-      (window.Voci && Voci.count() ? (function () {
-        var cr = Voci.credits();
-        return '<div class="card"><h2>🎙️ Voces reales</h2><p class="muted small">' + UI.suoni + " usa grabaciones de hablantes reales para " + Voci.count() +
-          " palabras. Voces de Lingua Libre (Wikimedia Commons), licencia CC BY-SA 4.0: " + Object.keys(cr).map(esc).join(", ") + ".</p></div>";
-      })() : "") +
-      (window.VociCV && (VociCV.ALL || []).length ? '<div class="card"><h2>🗣️ Oraciones grabadas</h2><p class="muted small">El dictado de ' + UI.suoni + " y «¿Qué forma escuchaste?» usan " +
-        VociCV.ALL.length + " oraciones leídas por voluntarios de Common Voice (Mozilla), de dominio público (CC0).</p></div>" : "") +
       (window.Ubicacion ? Ubicacion.card(state) : "") +
-      '<div class="card"><h2>Medallas</h2><div class="badges">' +
+
+      // Folded: the medals, the numbers and the credits.
+      '<details class="card fold"><summary><h2>🏅 Medallas <small class="muted">' + won + " / " + Engine.BADGES.length + "</small></h2></summary>" +
+        '<div class="badges">' +
         Engine.BADGES.map(function (b) {
-          var won = state.badges.indexOf(b.id) >= 0;
-          return '<div class="badge' + (won ? " won" : "") + '">' +
-            '<div class="ico">' + (won ? "🏅" : "🔒") + "</div>" +
+          var got = state.badges.indexOf(b.id) >= 0;
+          return '<div class="badge' + (got ? " won" : "") + '">' +
+            '<div class="ico">' + (got ? "🏅" : "🔒") + "</div>" +
             "<b>" + esc(b.name) + "</b><span>" + esc(b.desc) + "</span></div>";
         }).join("") +
-      "</div></div>" +
+      "</div></details>" +
 
-      '<div class="card"><h2>Estadísticas</h2><table class="res">' +
+      '<details class="card fold"><summary><h2>Estadísticas y créditos</h2></summary><table class="res">' +
         "<tr><td>Frases de conversación vistas</td><td>" + phrasesKnown + " / " +
           Frasi.ALL.length + "</td></tr>" +
         "<tr><td>Frases escritas de memoria</td><td>" + (state.written || 0) + "</td></tr>" +
@@ -3483,9 +4163,25 @@
         "<tr><td>Fichas en repaso</td><td>" + Object.keys(state.cards).length + "</td></tr>" +
         "<tr><td>Semana desbloqueada</td><td>" + state.unlocked + "/52</td></tr>" +
       "</table>" +
+      (window.Voci && Voci.count() ? (function () {
+        var cr = Voci.credits();
+        return '<h3>🎙️ Voces reales</h3><p class="muted small">' + UI.suoni + " usa grabaciones de hablantes reales para " + Voci.count() +
+          " palabras. Voces de Lingua Libre (Wikimedia Commons), licencia CC BY-SA 4.0: " + Object.keys(cr).map(esc).join(", ") + ".</p>";
+      })() : "") +
+      (window.VociCV && (VociCV.ALL || []).length ? '<h3>🗣️ Oraciones grabadas</h3><p class="muted small">El dictado de ' + UI.suoni + " y «¿Qué forma escuchaste?» usan " +
+        VociCV.ALL.length + " oraciones leídas por voluntarios de Common Voice (Mozilla), de dominio público (CC0).</p>" : "") +
       '<div class="row" style="margin-top:14px">' +
         '<button class="btn ghost" id="reset">Borrar mi progreso</button>' +
-      "</div></div>" + versionLine();
+      "</div></details>" + versionLine();
+  }
+  // "aaaa-m-d" → "aaaa-mm-dd" (the value of a date input), and back.
+  function isoDate(k) {
+    var p = String(k).split("-");
+    return p.length === 3 ? p[0] + "-" + ("0" + p[1]).slice(-2) + "-" + ("0" + p[2]).slice(-2) : "";
+  }
+  // The cards of the progress screen that live here (progreso.js shows them).
+  function progresoCards() {
+    return lessicoCard() + (window.Biblioteca ? Biblioteca.ioCard() : "");
   }
 
   /* Meta y récords: el «yo ideal» con las palabras del alumno, los récords
@@ -3496,7 +4192,7 @@
     return '<div class="card" id="plancard"><h2>🎯 Tu meta</h2>' +
       '<span class="chips">' + WHY.map(function (w) { return '<button class="tab' + (id.why === w[0] ? " on" : "") + '" data-why3="' + w[0] + '">' + w[1] + "</button>"; }).join("") + "</span>" +
       '<label class="set"><span>Con tus palabras<small>' + UI.metaEx + "</small></span></label>" +
-      '<div class="typed"><input id="idealtext" maxlength="120" value="' + esc(id.text || "") + '" placeholder="En seis meses…"><button class="tab" id="idealsave">Guardar</button></div>' +
+      '<div class="typed"><input id="idealtext" aria-label="Para qué querés aprender, con tus palabras" maxlength="120" value="' + esc(id.text || "") + '" placeholder="En seis meses…"><button class="tab" id="idealsave">Guardar</button></div>' +
       (why || id.text ? '<p class="muted small">Tu meta: ' + (why ? esc(why[1]) : "") + (id.text ? " · «" + esc(id.text) + "»" : "") + "</p>" : "") +
       '<h3>🏅 Récords personales</h3><table class="res">' +
         "<tr><td>Mejor sesión</td><td>" + (rec.sessione || 0) + " %</td></tr>" +
@@ -3579,12 +4275,15 @@
   function aiCard() {
     var notes = state.aiNotes || [];
     return '<div class="card" id="aicard"><h2>🤖 Corrector con IA</h2>' +
-      '<p class="muted small">Con una clave gratuita, ' + UI.scrivi + " corrige tu texto entero y en cualquier ejercicio aparece «🤖 Explicame».</p>" +
+      '<p class="muted small">Con una clave gratuita, la IA suma lo que ve a lo que marca el corrector de ' + UI.scrivi +
+        ", da pistas antes de la respuesta («🤖 Explicame»), explica más en la hoja final y juzga las respuestas que el ejercicio no tenía previstas.</p>" +
       aiKeyFields() +
       (notes.length ? "<h3>Correcciones para revisar (" + notes.length + ")</h3>" +
-        '<p class="muted small">La IA cree que en estos casos tu respuesta también valía o la corrección de la app no era buena. Copialas y pegámelas todas juntas.</p>' +
+        '<p class="muted small">Las respuestas que marcaste como válidas («🙋») y las que la IA cree que valían o que la app corrigió mal. ' +
+          "Copialas (van con las explicaciones que la IA ya dio) y pegámelas todas juntas.</p>" +
         '<ul class="ainotes">' + notes.slice(0, 8).map(function (n) {
-          return "<li><b>" + esc(n.given || "—") + "</b> ≠ " + esc(n.answer || "") + ' <small class="muted">' + esc((n.stem || "").slice(0, 60)) + "</small></li>";
+          var who = n.kind === "alumno" ? "🙋 " : n.kind === "variante" ? "✓ " : "🤖 ";
+          return "<li>" + who + "<b>" + esc(n.given || "—") + "</b> ≠ " + esc(n.answer || "") + ' <small class="muted">' + esc((n.stem || "").slice(0, 60)) + "</small></li>";
         }).join("") + "</ul>" +
         '<div class="row"><button class="tab" id="aicopy">📋 Copiar todas</button><button class="tab" id="aiclear">Borrar</button></div>' : "") +
       "</div>";
@@ -3607,14 +4306,16 @@
      before it was kept, show the name of the error).  Coming back to the
      why of your own errors is what the error log is for (Metcalfe 2017). */
   function errLogHtml(list) {
+    var SRC = { ia: "🤖 IA", lt: "LanguageTool" };
     return '<ul class="errlog">' + list.map(function (l) {
       var label = l.l || (window.Diagnosi && Diagnosi.LABEL[l.cat]) || "";
       var x = DV && l.x ? DV.plain(l.x) : l.x;
+      var why = (x ? "<p>" + mk(x) + "</p>" : "") + (l.c && (!x || x.indexOf(l.c) < 0) ? "<p>" + mk(DV ? DV.plain(l.c) : l.c) + "</p>" : "") +
+        (l.f && SRC[l.f] ? '<p class="muted small">Lo marcó ' + SRC[l.f] + (l.k ? "" : "; no cuenta para la Clínica") + ".</p>" : "");
       return '<li class="diag">' +
-        '<div class="diff"><span class="k">vos</span> ' + (l.e ? markWords(l.g, l.e, "bad") : '<b class="bad">' + esc(l.g) + "</b>") +
-          (l.e ? '<br><span class="k">bien</span> ' + markWords(l.e, l.g, "fix") : "") + "</div>" +
-        (x ? '<details><summary><span class="tag">' + esc(label || "Por qué") + '</span> <span class="muted small">¿por qué?</span></summary>' +
-               "<p>" + mk(x) + "</p></details>"
+        '<div class="diff"><span class="k">vos</span> ' + (l.e ? markWords(l.g, l.e, "bad") : '<b class="bad">' + esc(l.g || "—") + "</b>") +
+          (l.e ? '<br><span class="k">bien</span> ' + markWords(l.e, l.g, "fix") : l.d ? '<br><span class="k">bien</span> <i>(se borra)</i>' : "") + "</div>" +
+        (why ? '<details><summary><span class="tag">' + esc(label || "Por qué") + '</span> <span class="muted small">¿por qué?</span></summary>' + why + "</details>"
            : label ? '<span class="tag">' + esc(label) + "</span>" : "") +
         "</li>";
     }).join("") + "</ul>";
@@ -3622,7 +4323,7 @@
 
   function errorsCard() {
     var errs = state.errs || {};
-    var cats = Object.keys(errs).sort(function (a, b) { return errs[b].n - errs[a].n; });
+    var cats = Object.keys(errs).filter(function (c) { return errs[c].n > 0; }).sort(function (a, b) { return errs[b].n - errs[a].n; });
     if (!cats.length) return itanolCard();
     var max = errs[cats[0]].n;
     return '<div class="card"><h2>Tus errores</h2>' +
@@ -3645,9 +4346,17 @@
     return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate());
   }
 
+  /* The copy goes in an envelope that says which app, which language and
+     which version made it: a copy of Italian is not restored over
+     Portuguese by mistake. */
   function exportSave() {
+    state.exportedAt = Date.now();
+    persist();
     var name = UI.exportFile + stamp() + ".json";
-    var blob = new Blob([JSON.stringify(state)], { type: "application/json" });
+    state.exportedAt = Date.now();
+    persist();
+    var env = saveEnvelope();
+    var blob = new Blob([JSON.stringify(env)], { type: "application/json" });
     // On phones, the share sheet lets you drop the file in Drive, mail or chat.
     try {
       var file = new File([blob], name, { type: "application/json" });
@@ -3669,24 +4378,168 @@
     setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
   }
 
+  // The envelope of the copy, the same for the file and the gist (nube.js).
+  function saveEnvelope() {
+    return Nube.envelope(state, { lang: LG.code, brand: LG.brand, v: APP_VERSION });
+  }
+  function otherLangCopy(j) {
+    var other = (window.Boot && Boot.LANGS && Boot.LANGS[j.lang]) || {};
+    return "Esta copia es de " + (j.brand || other.brand || j.lang) + ". Cambiá de idioma en " + UI.me + " y restaurala ahí.";
+  }
+  /* A copy restored, from a file or from the cloud, the same way the
+     phone's own save is loaded (Engine.fromRaw: migrations, sanitize, the
+     cards to FSRS); a copy of the other language is not restored.  ask:
+     the question before replacing.  True when it was restored; throws on
+     something that is not a copy. */
+  function restoreEnvelope(j, ask) {
+    var s = j && j.app === "c1" && j.save ? j.save : j;
+    if (!s || typeof s.xp !== "number" || !s.cards) throw new Error("formato");
+    if (j.app === "c1" && j.lang && j.lang !== LG.code) { toast(otherLangCopy(j), 4000); return false; }
+    if (!confirm(ask || "Esto reemplaza tu progreso actual por la copia (" + s.xp +
+                 " xp" + (j.at ? ", del " + new Date(j.at).toLocaleDateString("es-AR") : "") + "). ¿Seguir?")) return false;
+    state = Engine.fromRaw(s);
+    clearPending();
+    persist();
+    renderHeader();
+    render();
+    toast("✓ Copia restaurada.");
+    return true;
+  }
   function importSave(file) {
     var reader = new FileReader();
     reader.onload = function () {
       try {
-        var s = JSON.parse(reader.result);
-        if (typeof s.xp !== "number" || !s.cards) throw new Error("formato");
-        if (!confirm("Esto reemplaza tu progreso actual por la copia (" + s.xp +
-                     " xp). ¿Seguir?")) return;
-        state = Engine.sanitize(Engine.migrateSyllabus(s));
-        persist();
-        renderHeader();
-        render();
-        toast("✓ Copia restaurada.");
+        restoreEnvelope(JSON.parse(reader.result));
       } catch (e) {
         toast("Ese archivo no es una copia válida.");
       }
     };
     reader.readAsText(file);
+  }
+
+  /* ------------------------------------------ la copia en tu GitHub Gist */
+  /* The optional channel to another phone (nube.js): the same envelope in
+     a secret gist of the learner's, with their own token.  The token and
+     what this phone knows of the gist live in its storage, never in the
+     copy. */
+  var nubeBusy = false;
+  function nubeWhen(t) {
+    var d = new Date(t);
+    return isNaN(d) ? "" : d.toLocaleDateString("es-AR") + " " + d.toLocaleTimeString("es-AR", { hour: "2-digit", minute: "2-digit", hour12: false });
+  }
+  function nubeSync(fn) {
+    var S = Nube.store(), sy = S.sync(LG.storage);
+    if (fn) { fn(sy); S.setSync(LG.storage, sy); }
+    return sy;
+  }
+  function nubeOpts(extra) {
+    return Object.assign({ token: Nube.store().token(), storage: LG.storage, lang: LG.code, id: nubeSync().id }, extra || {});
+  }
+  function nubeHtml() {
+    if (!window.Nube) return "";
+    var sy = nubeSync(), tok = Nube.store().token(), st = [];
+    if (sy.up) st.push("Última subida: " + nubeWhen(sy.up) + ".");
+    if (sy.down) st.push("La trajiste por última vez: " + nubeWhen(sy.down) + ".");
+    if (sy.conflict) st.push("⚠️ En la nube hay una copia subida desde otro teléfono el " + nubeWhen(sy.conflict) + ": traela, o subí la de este teléfono si es la buena.");
+    return '<details class="nube"' + (tok ? " open" : "") + "><summary>☁️ Sincronizar con tu GitHub Gist</summary>" +
+      '<p class="muted small">Para seguir en otro teléfono sin servidor de la app: tu copia va a un gist secreto de tu cuenta de GitHub. ' +
+        'Creá el token en <a href="' + Nube.TOKEN_URL + '" target="_blank" rel="noopener">github.com/settings/tokens</a> (viene marcado solo «gist»: elegí el vencimiento y tocá «Generate token») y pegalo acá.</p>' +
+      '<input id="gisttoken" type="password" autocomplete="off" aria-label="Token de GitHub" placeholder="Token de GitHub (ghp_…)" value="' + esc(tok) + '">' +
+      '<div class="row"><button class="btn" id="gistup">☁️ Subir ahora</button><button class="btn ghost" id="gistdown">⬇️ Traer de la nube</button></div>' +
+      '<label class="set"><span>Subir sola al cerrar la app<small>una vez por día como mucho, si cambió algo</small></span>' +
+        '<input type="checkbox" id="gistauto"' + (sy.auto ? " checked" : "") + "></label>" +
+      (st.length ? '<p class="muted small" id="giststate">' + esc(st.join(" ")) + "</p>" : "") +
+      '<p class="muted small">El token queda solo en este teléfono, con las claves de IA (sirve para los dos idiomas), y nunca entra en la copia.</p>' +
+      (tok ? '<div class="row"><button class="tab" id="gistforget">Olvidar el token</button></div>' : "") +
+      "</details>";
+  }
+  function nubeRefresh() { if (view.screen === "io") render(); }
+  /* Up: first a look at the gist's date (a light call); if another phone
+     uploaded since this one last synced, ask (auto: do not upload, and say
+     so in Io). */
+  function nubeUp(auto) {
+    if (!window.Nube) return Promise.resolve(false);
+    var sy = nubeSync(), o = nubeOpts();
+    if (!o.token) { if (!auto) toast(Nube.message({ code: "notoken" })); return Promise.resolve(false); }
+    if (nubeBusy) return Promise.resolve(false);
+    nubeBusy = true;
+    if (!auto) toast("☁️ Subiendo…", 1500);
+    flushPersist();
+    var mark = state.savedAt || Date.now();
+    return Nube.remote(o).then(function (r) {
+      if (r && Nube.conflict(r, sy)) {
+        if (auto) { nubeSync(function (x) { x.conflict = r.updated; }); return false; }
+        var q = (sy.gistAt ? "Otro teléfono subió una copia de " + LG.brand + " el " + nubeWhen(r.updated) + ", después de la última vez que este sincronizó."
+                           : "Ya hay una copia de " + LG.brand + " en tu gist, del " + nubeWhen(r.updated) + ", que este teléfono no trajo.") +
+          " ¿Reemplazarla por el progreso de este teléfono (" + state.xp + " xp)?";
+        if (!confirm(q)) return false;
+      }
+      return Nube.push(o, saveEnvelope(), r).then(function (g) {
+        nubeSync(function (x) {
+          x.id = g.id; x.gistAt = g.updated; x.up = Date.now(); x.mark = mark; x.conflict = null;
+          if (auto) x.day = Nube.dayKey();
+        });
+        if (!auto) toast(g.created ? "☁️ Listo: creé tu gist secreto y subí la copia." : "☁️ Copia subida.", 2500);
+        return true;
+      });
+    }).catch(function (e) {
+      if (!auto) toast(Nube.message(e), 4500);
+      return false;
+    }).then(function (done) {
+      nubeBusy = false;
+      if (!auto) nubeRefresh();
+      return done;
+    });
+  }
+  /* Down: the copy of this language from the gist, through restoreEnvelope,
+     always asking, and saying which one is newer. */
+  function nubeDown() {
+    if (!window.Nube) return Promise.resolve(false);
+    var o = nubeOpts();
+    if (!o.token) { toast(Nube.message({ code: "notoken" })); return Promise.resolve(false); }
+    if (nubeBusy) return Promise.resolve(false);
+    nubeBusy = true;
+    toast("☁️ Buscando tu copia…", 1500);
+    flushPersist();
+    return Nube.pull(o).then(function (r) {
+      var env = r.env, cmp = Nube.compare(env, state);
+      var cloud = nubeWhen(Nube.stamp(env)) + ", " + env.save.xp + " xp", here = (state.savedAt ? nubeWhen(state.savedAt) + ", " : "") + state.xp + " xp";
+      var ask = cmp === "newer"
+        ? "La copia de la nube (" + cloud + ") es más nueva que la de este teléfono (" + here + "). ¿Reemplazar el progreso de acá por la de la nube?"
+        : "⚠️ La copia de la nube (" + cloud + ") " + (cmp === "same" ? "es de la misma fecha que" : "es más vieja que") +
+          " la de este teléfono (" + here + "). ¿Reemplazar igual?";
+      nubeSync(function (x) { x.id = r.id; });
+      if (!restoreEnvelope(env, ask)) return false;
+      nubeSync(function (x) { x.gistAt = r.updated; x.down = Date.now(); x.mark = state.savedAt; x.conflict = null; });
+      return true;
+    }).catch(function (e) {
+      toast(e && e.code === "idioma" && e.env ? otherLangCopy(e.env) : e && e.code ? Nube.message(e) : "Lo que hay en la nube no es una copia válida.", 4500);
+      return false;
+    }).then(function (done) {
+      nubeBusy = false;
+      nubeRefresh();
+      return done;
+    });
+  }
+  // When the app is hidden or closed: the automatic upload, once a day.
+  function nubeAuto() {
+    if (!window.Nube || nubeBusy) return;
+    if (Nube.autoDue(nubeSync(), Nube.store().token(), state.savedAt)) nubeUp(true);
+  }
+  function wireNube() {
+    var box = $("#gisttoken");
+    if (!window.Nube || !box) return;
+    var S = Nube.store();
+    function take() { var t = (box.value || "").trim(); if (t !== S.token()) S.setToken(t); return t; }
+    box.onchange = take;
+    on("#gistup", function () { take(); nubeUp(false); });
+    on("#gistdown", function () { take(); nubeDown(); });
+    var auto = $("#gistauto");
+    if (auto) auto.onchange = function () {
+      nubeSync(function (x) { x.auto = auto.checked; });
+      toast(auto.checked ? "☁️ Al cerrar la app se sube sola, una vez por día." : "Subida automática apagada.", 2500);
+    };
+    on("#gistforget", function () { S.setToken(""); toast("Token borrado de este teléfono."); render(); });
   }
 
   /* Un evento que se repite (.ics): el teléfono lo agrega al calendario y
@@ -3701,7 +4554,9 @@
     var end = new Date(d.getTime() + 5 * 60000);
     var localEnd = end.getFullYear() + two(end.getMonth() + 1) + two(end.getDate()) + "T" +
       two(end.getHours()) + two(end.getMinutes()) + "00";
-    var url = location.href.split("#")[0];
+    // The event opens the plan of the day (#hoy).
+    var url = location.href.split("#")[0].replace(/[?&]test\b/, "") + "#hoy";
+    var r = window.Progreso ? Progreso.ritmo(state) : null;
     return [
       "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//" + LG.brand + "//" + UI.icsId,
       "BEGIN:VEVENT",
@@ -3709,9 +4564,9 @@
       "DTSTAMP:" + new Date().toISOString().replace(/[-:]/g, "").slice(0, 15) + "Z",
       "DTSTART:" + local,
       "DTEND:" + localEnd,
-      "RRULE:FREQ=DAILY",
+      "RRULE:FREQ=" + (!r || r.days >= 7 ? "DAILY" : "WEEKLY;BYDAY=" + { 3: "MO,WE,FR", 4: "MO,TU,TH,FR", 5: "MO,TU,WE,TH,FR", 6: "MO,TU,WE,TH,FR,SA" }[r.days]),
       "SUMMARY:" + UI.icsSummary,
-      "DESCRIPTION:Racha en juego. Abrí " + LG.brand + ": " + url,
+      "DESCRIPTION:Tu plan de hoy" + (r ? " (" + r.min + " minutos)" : "") + ". Abrí " + LG.brand + ": " + url,
       "URL:" + url,
       "BEGIN:VALARM", "TRIGGER:PT0M", "ACTION:DISPLAY",
       "DESCRIPTION:" + UI.icsAlarm, "END:VALARM",
@@ -3726,10 +4581,10 @@
   function renderNav() {
     var nav = $("#nav");
     if (!nav) return;
-    var inGame = ["gioco", "lampo", "lezione"].indexOf(view.screen) >= 0;
+    var inGame = ["gioco", "lampo", "lezione", "inicio"].indexOf(view.screen) >= 0;
     nav.hidden = inGame;
     nav.innerHTML = TABS.map(function (t) {
-      return '<button class="' + (view.tab === t[0] ? "on" : "") + '" data-tab="' + t[0] + '">' +
+      return '<button class="' + (view.tab === t[0] ? "on" : "") + '" data-tab="' + t[0] + '"' + (view.tab === t[0] ? ' aria-current="page"' : "") + ">" +
         '<span>' + t[1] + "</span>" + t[2] + "</button>";
     }).join("");
     nav.querySelectorAll("[data-tab]").forEach(function (b) {
@@ -3769,6 +4624,10 @@
     else if (s === "escritos" && window.Escritos) html = Escritos.render();
     else if (window.Biblioteca && Biblioteca.owns(s)) html = Biblioteca.render(s, view);
     else if (window.Tramo && Tramo.owns(s)) html = Tramo.render(s);
+    else if (window.Inicio && Inicio.owns(s)) html = Inicio.render(s);          // el primer arranque (inicio.js)
+    else if (window.Progreso && Progreso.owns(s)) html = Progreso.render(s);    // tu progreso (progreso.js)
+    else if (window.Capas && Capas.owns(s)) html = Capas.render(s);   // «Consultar» (js/capas.js)
+    else if (window.Fuera && Fuera.owns(s)) html = Fuera.render(s);   // fuera de la app (fuera.js)
 
     var gb = $("#glossbox");
     if (gb) gb.classList.remove("on");
@@ -3790,12 +4649,15 @@
   }
 
   /* El test de ubicación (ubicacion.js): al empezar un idioma y desde Io / Eu. */
-  function startUbicacion() {
+  function startUbicacion(then) {
     if (!window.Ubicacion) return;
     var from = view.tab || "oggi";
-    Ubicacion.start({ course: course, state: state, render: render, done: function (applied) {
+    Ubicacion.start({ course: course, state: state, render: render, done: function (applied, next) {
       persist();
       renderHeader();
+      if (typeof then === "function") { view.week = Math.min(state.unlocked, 52); then(applied); return; }
+      // the mini diagnosis of interference, right after the test
+      if (applied && next === "diag") { view.week = Math.min(state.unlocked, 52); view.tab = "oggi"; startRound("diag"); if (view.screen === "gioco") return; }
       if (applied) { view.week = Math.min(state.unlocked, 52); toast("🔓 Semanas 1 a " + (state.unlocked - 1) + " abiertas. Arrancás en la " + state.unlocked + "."); }
       go(applied ? "percorso" : from);
     } });
@@ -3865,9 +4727,10 @@
 
     on("#back", function () { go("percorso"); });
     on("#toggi", function () { go("oggi"); });
-    on("#ubicgo", startUbicacion);
+    on("#ubicgo", function () { startUbicacion(); });
     on("#ubicno", function () { state.ubicacion = { at: Date.now(), no: true }; persist(); render(); });
     if (window.TresLenguas) TresLenguas.wire(app(), {
+      state: function () { return state; }, persist: persist,
       show: function () { view.tab = "frasi"; view.screen = "tres"; render(); window.scrollTo(0, 0); },
       back: function () { go("frasi"); }, gain: function (n) { gain(n); persist(); renderHeader(); }, toast: toast });
 
@@ -3948,6 +4811,10 @@
     if (window.Escritos) Escritos.wire(view.screen);
     if (window.Biblioteca) Biblioteca.wire(view.screen, view);
     if (window.Tramo) Tramo.wire(view.screen);
+    if (window.Inicio) Inicio.wire(view.screen);
+    if (window.Progreso) Progreso.wire(view.screen);
+    if (window.Capas) Capas.wire(view.screen);
+    if (window.Fuera) Fuera.wire(view.screen);
     on("#lesback", function () { view.screen = "briefing"; render(); });
     on("#lesplay", function () {
       var lw = course.weeks[view.week - 1];
@@ -3963,6 +4830,7 @@
     on("#quit", function () {
       clearPending();
       if (round.from === "briefing") { view.tab = "percorso"; view.screen = "briefing"; render(); window.scrollTo(0, 0); }
+      else if (round.from === "hoy") go("oggi");
       else if (round.kind === "lettura") go("leggi");
       else if (["ponte", "falsi", "capire", "scene", "b-voc", "b-forme", "b-tr", "b-gap", "b-err", "b-freq", "clinica", "suoni", "duello", "variaciones"].indexOf(round.kind) >= 0) go("frasi");
       else if (round.kind === "pausa" || round.kind === "review" || round.kind === "giorno" || round.kind === "ritorno" || round.kind === "micro") go("oggi");
@@ -3992,10 +4860,21 @@
       };
     });
     on("#lback", function () {
+      readClock = null;
       if (view.epFrom === "briefing") { view.epFrom = null; view.tab = "percorso"; view.screen = "briefing"; render(); window.scrollTo(0, 0); }
+      else if (view.epFrom === "hoy") { view.epFrom = null; go("oggi"); }
       else go("leggi");
     });
-    on("#lquiz", function () { startRound("lettura", view.ep); });
+    on("#lquiz", function () {
+      var ep = Letture.byId(view.ep);
+      if (ep && readClock && readClock.id === ep.id && Letture.speedNote) {
+        Letture.speedNote(state, ep, readElapsed(), { kar: readClock.kar, week: Math.min(state.unlocked || 1, 52) });
+        persist();
+      }
+      readClock = null;
+      startRound("lettura", view.ep);
+    });
+    noteReadingSpeed();
     on("#playlib", function () {
       var ids = Object.keys(state.letture || {}).filter(function (id) { return Letture.byId(id); });
       if (!ids.length) return toast("Todavía no terminaste ninguna lectura.");
@@ -4098,10 +4977,13 @@
         '<div id="dgout"></div></div>';
     }
     var r = dg.result;
-    return head + '<div class="card"><div class="scorebig"><b>' + r.found.length + " / " + r.n + '</b><span>bloques recuperados</span><span>+' + dg.xp + " xp</span></div>" +
-      '<h3>El texto</h3><p class="muted small"><mark class="dgok">verde</mark>: lo recuperaste · <mark class="dgmiss">rojo</mark>: faltó</p>' +
-      '<p class="model it">' + dgMarked(t.text, r) + "</p>" + dgGlossHtml(t) +
-      (r.missed.length ? '<h3>Faltaron</h3><p>' + r.missed.map(esc).join(" · ") + "</p>" : "") +
+    var casi = r.partial || [], other = r.variant || [];
+    return head + '<div class="card"><div class="scorebig"><b>' + r.found.length + (casi.length ? " + " + casi.length + " casi" : "") + " / " + r.n + '</b><span>bloques recuperados</span><span>+' + dg.xp + " xp</span></div>" +
+      '<h3>El texto</h3><p class="muted small"><mark class="dgok">verde</mark>: lo recuperaste' + (casi.length ? ' · <mark class="dgcasi">amarillo</mark>: casi' : "") + ' · <mark class="dgmiss">rojo</mark>: faltó</p>' +
+      '<p class="model it" lang="' + LG.tts + '">' + dgMarked(t.text, r) + "</p>" + dgGlossHtml(t) +
+      (other.length ? '<h3>Los dijiste de otra forma</h3><p class="muted small">Cuentan enteros. Así estaban en el texto, para que notes la diferencia:</p><p lang="' + LG.tts + '">' + other.map(function (c) { return "<b>" + esc(c) + "</b>"; }).join(" · ") + "</p>" : "") +
+      (casi.length ? '<h3>Casi</h3><p class="muted small">Tenías parte de estos bloques (medio punto cada uno):</p><p lang="' + LG.tts + '">' + casi.map(esc).join(" · ") + "</p>" : "") +
+      (r.missed.length ? '<h3>Faltaron</h3><p lang="' + LG.tts + '">' + r.missed.map(esc).join(" · ") + "</p>" : "") +
       '<h3>Tu versión</h3><p class="dgnotesview it">' + esc(dg.given || "") + "</p>" +
       (dg.findings && dg.findings.length ? "<h3>Para revisar en tu versión</h3><ol class=\"findings\">" + dg.findings.map(function (f) { return "<li>" + mk(f.msg) + "</li>"; }).join("") + "</ol>" : "") +
       '<div class="row" style="margin-top:14px"><button class="btn" id="dgback2">← Seguir ' + UI.pathEl + "</button>" +
@@ -4113,7 +4995,7 @@
   // The original text with each chunk marked: recovered in green, missed in red.
   function dgMarked(text, r) {
     var marks = [];
-    [[r.found, "dgok"], [r.missed, "dgmiss"]].forEach(function (g) {
+    [[r.found, "dgok"], [r.partial || [], "dgcasi"], [r.missed, "dgmiss"]].forEach(function (g) {
       g[0].forEach(function (c) {
         var at = text.toLowerCase().indexOf(String(c).toLowerCase());
         if (at >= 0 && !marks.some(function (m) { return at < m.end && at + c.length > m.at; })) marks.push({ at: at, end: at + c.length, cls: g[1] });
@@ -4168,7 +5050,7 @@
       var chk = Scrivi.check(given, w.week);
       dg.findings = (chk.findings || []).filter(function (f) { return !f.soft; }).slice(0, 8);
       var first = !(state.dictogloss || {})[w.week];
-      var xp = r.found.length * 8 + (r.found.length >= 5 ? 20 : 0) - Math.min(20, (dg.help || 0) * 5);
+      var xp = r.found.length * 8 + (r.partial || []).length * 4 + (r.found.length >= 5 ? 20 : 0) - Math.min(20, (dg.help || 0) * 5);
       xp = Math.max(5, first ? xp : Math.round(xp / 3));
       if (!state.dictogloss) state.dictogloss = {};
       var prev = state.dictogloss[w.week];
@@ -4178,7 +5060,10 @@
       Engine.addStrand(state, "input", Math.round(xp / 2));
       Engine.addStrand(state, "output", Math.round(xp / 2));
       Engine.touchStreak(state);
-      dg.findings.forEach(function (f) { recordError({ cat: f.cat, target: f.msg.replace(/\*/g, "").slice(0, 80) }, ""); });
+      // what the checker saw goes to the profile: what was written, the correction and why
+      if (window.Errores) Errores.recordFindings(state, dg.findings, given, {});
+      // the blocks not recovered come back tomorrow, each one as a gap (reglas.js)
+      if (window.Reglas) Reglas.fromDictogloss(state, t, r, w.week);
       dg.extras = missionCheck(w.week, before);
       Engine.checkBadges(state);
       persist();
@@ -4278,7 +5163,7 @@
     })();
   }
   function wireLettura() {
-    if (view.screen !== "lettura") return;
+    if (view.screen !== "lettura") { readClock = null; return; }   // salir del texto para el reloj
     var ep = Letture.byId(view.ep);
     if (!ep) return;
     var rate = view.karRate || 1;
@@ -4287,6 +5172,7 @@
       if (karaoke) { stopKaraoke(); document.body.classList.remove("kar-partial", "kar-audio"); if (b) b.textContent = "🎧 " + UI.karaoke; return; }
       var mode = (document.querySelector("[data-karmode].on") || {}).dataset ? document.querySelector("[data-karmode].on").dataset.karmode : "full";
       if (b) b.textContent = "⏹ Parar";
+      if (readClock && readClock.id === ep.id) readClock.kar = true;   // con audio fue escucha: no se cronometra
       startKaraoke(ep, rate, mode);
     });
     document.querySelectorAll("[data-rate]").forEach(function (b) {
@@ -4339,6 +5225,8 @@
     var r = Scrivi.check(String(text || ""), week || 52);
     return ((r && r.findings) || []).filter(function (f) { return !f.soft; });
   }
+  // Milliseconds as «1,4».
+  function secs(ms) { return (Math.round((+ms || 0) / 100) / 10).toFixed(1).replace(".", ","); }
   // A capital at the start of every sentence.
   function sentenceCase(text) {
     return String(text || "").replace(/(^|[.!?]\s+|\n\s*)([a-zà-ÿ])/g, function (m, a, b) { return a + b.toUpperCase(); });
@@ -4358,13 +5246,12 @@
         '<button class="btn wide" id="pstart">🎭 Empezar</button><div id="pout"></div></div>';
     }
     var sc = parla.scen;
-    var objs = '<ul class="reqs">' + sc.obiettivi.map(function (o, i) {
-      var ok = parla.obj.indexOf(i + 1) >= 0;
-      return '<li class="' + (ok ? "ok" : "") + '">' + (ok ? "✓" : "○") + " " + esc(o) + "</li>";
-    }).join("") + "</ul>";
-    var chat = '<div class="chat">' + parla.history.map(function (h) {
-      return '<div class="bubble ' + (h[0] === "ia" ? "ia" : "me") + '">' + esc(h[1]) + "</div>";
-    }).join("") + (parla.busy ? '<div class="bubble ia muted">…</div>' : "") + "</div>";
+    var objs = parlaObjs();
+    var chat = '<div class="chat" aria-live="polite">' + parla.history.map(function (h) {
+      return '<div class="bubble ' + (h[0] === "ia" ? "ia" : "me") + '"' + (h[0] === "ia" ? ' lang="' + LG.tts + '"' : "") + ">" + esc(h[1]) +
+        (h[2] ? '<small class="easy">🪜 Más fácil: <span lang="' + LG.tts + '">' + esc(h[2]) + "</span></small>" : "") + "</div>";
+    }).join("") + (parla.busy ? '<div class="bubble ia" id="plive"' + (parla.live ? "" : ' aria-label="escribiendo"') + ">" + (parla.live ? esc(parla.live) : '<span class="typing"><i></i><i></i><i></i></span>') + "</div>" : "") + "</div>" +
+      (parla.meta ? '<p class="muted small modelline">IA: ' + esc(parla.meta.provider + " · " + parla.meta.model) + " · " + secs(parla.meta.first) + " s hasta la primera palabra</p>" : "");
     if (parla.done) {
       var rec = parla.reviewing ? '<p class="muted">⏳ Revisando tus frases…</p>' : parla.recasts.length ? '<h3>Tus frases, corregidas</h3><table class="res">' + parla.recasts.map(function (r) {
         return "<tr><td>" + esc(r[0]) + "</td><td><b>" + esc(r[1]) + "</b>" + (r[2] ? '<br><small class="muted">' + esc(r[2]) + "</small>" : "") + "</td></tr>";
@@ -4378,6 +5265,36 @@
       '<div class="typed"><textarea id="ptext" class="grow" rows="1" autocomplete="off" autocapitalize="sentences" autocorrect="off" spellcheck="false" enterkeyhint="send" placeholder="' + UI.parlaIn + '"' + (parla.busy ? " disabled" : "") + "></textarea>" +
       '<button class="btn" id="psend"' + (parla.busy ? " disabled" : "") + ">" + UI.send + "</button></div>" +
       '<div class="row" style="margin-top:8px"><button class="tab" id="pend">Terminar acá</button></div></div>';
+  }
+  // The three goals: reached ones ticked; a pending one can be ticked by
+  // hand when the learner knows it got it and the AI did not see it.
+  function parlaObjs() {
+    var sc = parla.scen, done = !!parla.done;
+    return '<ul class="reqs objs">' + sc.obiettivi.map(function (o, i) {
+      var ok = parla.obj.indexOf(i + 1) >= 0, byHand = (parla.hand || {})[i + 1];
+      var label = (ok ? "✓" : "○") + " " + esc(o) + (byHand ? ' <small class="muted">(marcado por vos)</small>' : "");
+      return '<li class="' + (ok ? "ok" : "") + '">' + (done ? label :
+        '<button class="objbtn" data-obj="' + (i + 1) + '" aria-pressed="' + (ok ? "true" : "false") + '">' + label + "</button>") + "</li>";
+    }).join("") + "</ul>" + (done ? "" : '<p class="muted small">Si cumpliste un objetivo y no se marcó, tocalo.</p>');
+  }
+  function refreshObjs() {
+    var ul = document.querySelector(".objs");
+    if (!ul || !parla) return;
+    var box = document.createElement("div");
+    box.innerHTML = parlaObjs();
+    ul.parentNode.replaceChild(box.firstChild, ul);
+    wireObjs();
+  }
+  function wireObjs() {
+    document.querySelectorAll(".objbtn").forEach(function (b) {
+      b.onclick = function () {
+        var n = +b.dataset.obj, at = parla.obj.indexOf(n);
+        if (!parla.hand) parla.hand = {};
+        if (at < 0) { parla.obj.push(n); parla.hand[n] = 1; }
+        else if (parla.hand[n]) { parla.obj.splice(at, 1); delete parla.hand[n]; }
+        refreshObjs();
+      };
+    });
   }
   function wireParla() {
     if (view.screen !== "parla") return;
@@ -4404,39 +5321,69 @@
       parla.history.push(["me", text]);
       parla.turns++;
       parla.busy = true;
+      parla.live = "";
       render();
+      var p0 = parla;
+      // the character's line appears while it is being written; only that
+      // bubble changes, the rest of the screen stays put
+      var stream = function (raw) {
+        if (parla !== p0) return;
+        var f = window.IA && IA.partialField(raw, "risposta");
+        if (!f || !f.text || f.text === parla.live) return;
+        parla.live = f.text;
+        var el = $("#plive");
+        if (el) { el.textContent = sentenceCase(f.text); el.removeAttribute("aria-label"); }
+      };
+      // Which goals are reached, judged apart and at the same time (the
+      // character, busy answering, forgot to mark them).
+      if (Scrivi.parlaGoals) Scrivi.parlaGoals(parla.scen, parla.history.slice(-16), aiKeys(), function (e3, d3) {
+        if (parla !== p0 || e3 || !d3 || !Array.isArray(d3.cumplidos)) return;
+        d3.cumplidos.forEach(function (n) { n = +n; if (n >= 1 && n <= 3 && parla.obj.indexOf(n) < 0) parla.obj.push(n); });
+        if (view.screen !== "parla" || parla.done) return;
+        refreshObjs();
+        if (!parla.busy && parla.obj.length >= 3) endParla(w);
+      });
       // the conversation before this turn (the turn itself goes apart), and
       // the goals already reached, so the character leads to the others
-      Scrivi.parlaTurn(parla.scen, parla.history.slice(-9, -1), text, parla.ctx, aiKeys(), function (err, data) {
-        if (view.screen !== "parla" || !parla) return;
-        var finish = function (reply) {
-          parla.busy = false;
-          parla.history.push(["ia", reply]);
-          if (data.recast && Engine.normalise(data.recast) !== Engine.normalise(text)) parla.recasts.push([text, String(data.recast), String(data.nota_es || "")]);
-          (data.obiettivi_raggiunti || []).forEach(function (n) { n = +n; if (n >= 1 && n <= 3 && parla.obj.indexOf(n) < 0) parla.obj.push(n); });
-          render();
-          speak(reply);
-          if (data.fine || parla.obj.length >= 3 || parla.turns >= 12) endParla(w);
-          else { var bx = $("#ptext"); if (bx) bx.focus(); }
-        };
-        if (err || !data) { parla.busy = false; parla.history.push(["ia", "(La IA no respondió: " + String(err && err.message || "") + ". Probá de nuevo.)"]); render(); return; }
-        var reply = sentenceCase(String(data.risposta || "").trim() || UI.ok);
+      Scrivi.parlaTurn(parla.scen, parla.history.slice(-13, -1), text, parla.ctx, aiKeys(), function (err, data, meta) {
+        if (parla !== p0) return;
+        parla.busy = false;
+        parla.live = "";
+        if (err || !data) {
+          parla.history.push(["ia", "(La IA no respondió: " + String(err && err.message || "") + ". Probá de nuevo.)"]);
+          if (view.screen === "parla") render();
+          return;
+        }
+        if (meta) parla.meta = meta;
+        var reply = sentenceCase(String(data.risposta || "").trim() || UI.ok), row = ["ia", reply];
+        parla.history.push(row);
+        if (data.recast && Engine.normalise(data.recast) !== Engine.normalise(text)) parla.recasts.push([text, String(data.recast), String(data.nota_es || "")]);
+        (Array.isArray(data.obiettivi_raggiunti) ? data.obiettivi_raggiunti : []).forEach(function (n) { n = +n; if (n >= 1 && n <= 3 && parla.obj.indexOf(n) < 0) parla.obj.push(n); });
+        if (view.screen !== "parla") return;
+        render();
+        speak(reply);
+        if (data.fine || parla.obj.length >= 3 || parla.turns >= 12) return endParla(w);
+        var bx = $("#ptext"); if (bx) bx.focus();
+        // too many unknown words: the same line with simpler synonyms, under
+        // the original (it no longer holds the conversation back)
         var hard = tooHard(reply);
         if (hard) {
-          // too many unknown words: those words, by simpler synonyms; the
-          // rewrite is taken only if its language is not worse
           var miss = hard.miss.filter(function (x, i, a) { return a.indexOf(x) === i; }).slice(0, 8);
           Scrivi.parlaRewrite(reply, miss, aiKeys(), function (e2, d2) {
             var alt = !e2 && d2 && d2.risposta ? sentenceCase(String(d2.risposta)) : "";
-            finish(alt && langErrors(alt, w.week).length <= langErrors(reply, w.week).length ? alt : reply);
+            if (parla !== p0 || !alt || Engine.normalise(alt) === Engine.normalise(reply)) return;
+            if (langErrors(alt, w.week).length > langErrors(reply, w.week).length) return;
+            row[2] = alt;
+            if (view.screen === "parla" && !parla.busy) { render(); var b2 = $("#ptext"); if (b2) b2.focus(); }
           });
-        } else finish(reply);
-      }, parla.obj.slice());
+        }
+      }, parla.obj.slice(), { stream: stream });
     };
     on("#psend", send);
     var box = $("#ptext");
     if (box) { box.onkeydown = function (e) { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } }; if (!parla.busy) box.focus(); }
     on("#pend", function () { endParla(w); });
+    wireObjs();
     on("#pagain", function () { parla = null; render(); });
   }
   function endParla(w) {
@@ -4473,8 +5420,12 @@
             if (!h || h[0] !== "me" || r.ok === true || !r.corretta) return;
             if (Engine.normalise(r.corretta) === Engine.normalise(h[1])) return;
             rec.push([h[1], String(r.corretta), String(r.nota || "")]);
+            // what went wrong in the role-play goes to the profile like any other
+            // error (the common error object; an unknown type stays out of the score)
+            if (window.Errores) Errores.record(state, Errores.fromRow(h[1], String(r.corretta), String(r.nota || ""), r.tipo, { fuente: "ia" }));
           });
           parla.recasts = rec;
+          persist();
         }
         if (view.screen === "parla") render();
       });
@@ -4587,63 +5538,223 @@
   /* ------------------------------------------------------------------ exame */
 
   /* The C1 exam, shaped like the certifications of the language without
-     the oral part: a long listening with two voices, a long text with
-     paragraph-title matching and true/false, structures (rational cloze
-     and transformations), lexicon (word formation, register) and two
-     written texts graded with the rubric of the language (LANG.exam).
-     Each prova needs 55 %, and the exam passes with an average of 60 %.
-     The ids of the provas (ascolto, lettura, strutture, lessico,
-     scrittura) are the data keys of esame_data.js and course.json
-     (item.prova); their names are the package's. */
+     the oral part, in versions (esame_data.js: EsameData.versioni and
+     versione(id) in Italian, EsameData.versoes in Portuguese).  A version
+     is a whole exam: a listening with two voices (and, when the package
+     has it, a monologue with a table of data), a long text with titles and
+     true/false (and a text to put back in order), structures and lexicon
+     (the items of course.json with its «ver», or the whole group when the
+     items have none) and the written production (two texts, or four
+     tarefas integradas with their insumo: the listening or the reading of
+     the version, a short audio, a short text).  Each prova needs 55 %, and
+     the exam passes with an average of 60 %; LANG.exam.optional lists the
+     provas that do not count.  The ids of the provas (ascolto, lettura,
+     strutture, lessico, scrittura) are the data keys of esame_data.js and
+     course.json (item.prova); their names are the package's.
+
+     Saved in state.esame: {ver: the version on screen, v: {id: {p: {prova:
+     {ok, n, pct, at}}, best: {avg, passed, at}, n: attempts, done: date}},
+     last: {at, ver}} («last» is what the plan of the day looks at).  The
+     first time, the first version; each new attempt, the next one not done;
+     after passing, a mock exam with the next one (openExam(ver)). */
   var EX = LG.exam || {};
   var PROVE = EX.prove || [];
   function proveName(id) { var p = PROVE.filter(function (x) { return x[0] === id; })[0]; return p ? p[1] : id; }
+  function proveOptional(id) { return (EX.optional || []).indexOf(id) >= 0; }
+  function proveCounted() { return PROVE.filter(function (p) { return !proveOptional(p[0]); }); }
   // The rubric of the written texts (esame_data.js, the AI's «punteggi»).
   var RUBRIC = EX.rubric || [];
   function kindName(k) { var K = EX.kinds || {}; return K[k] || K.other || k; }
-  var es = null;   // transient state of the prova on screen
-  function esameSet(prova, ok, n) {
-    if (!state.esame) state.esame = {};
-    var pct = n ? Math.round(ok / n * 100) : 0, prev = state.esame[prova];
-    if (!prev || pct >= prev.pct) state.esame[prova] = { ok: ok, n: n, pct: pct, at: Date.now() };
+  var es = null;          // transient state of the prova on screen
+  var esPlayer = null;    // the recording playing: {h: Tramo.playScript's, key, screen}
+  var esDraftTimer = null;
+
+  /* The versions of the data, the same shape for both languages. */
+  function esFind(list, id) { return (list || []).filter(function (x) { return x.id === id; })[0] || null; }
+  function esameVersions() {
+    var E = window.EsameData || {};
+    var list = E.versioni || E.versoes;
+    return list && list.length ? list.map(function (v) { return v.id; }) : ["A"];
   }
-  function esameResult() {
-    var r = state.esame || {}, all = PROVE.every(function (p) { return r[p[0]]; });
-    if (!all) return null;
+  function esVerLabel(id) { return "versión " + String(id).replace(/^v/, ""); }
+  function esVersion(id) {
+    var E = window.EsameData || {};
+    if (E.versioni && E.versione) {
+      var x = E.versione(id);
+      if (x) return x;
+    }
+    var v = esFind(E.versoes, id);
+    if (v) return { id: v.id, ascolto: esFind(E.ascolto, v.ascolto), lettura: esFind(E.lettura, v.lettura),
+                    monologo: null, ricostruzione: null, scrittura: v.scrittura || [] };
+    // the old data: one version
+    return { id: id, ascolto: (E.ascolto || [])[0], lettura: (E.lettura || [])[0], monologo: null, ricostruzione: null, scrittura: E.scrittura || [] };
+  }
+
+  /* state.esame, with the results of before the versions moved into the
+     first one. */
+  function esStore() {
+    var E = state.esame;
+    if (!E || typeof E !== "object" || Array.isArray(E)) E = state.esame = {};
+    if (!E.v || typeof E.v !== "object") {
+      var first = esameVersions()[0], old = {};
+      PROVE.forEach(function (p) { if (E[p[0]] && E[p[0]].pct != null) { old[p[0]] = E[p[0]]; delete E[p[0]]; } });
+      E.v = {};
+      if (Object.keys(old).length) {
+        E.v[first] = { p: old, n: 1 };
+        esCloseAttempt(first, E);
+      }
+    }
+    if (esameVersions().indexOf(E.ver) < 0) E.ver = esameVersions()[0];
+    return E;
+  }
+  function esRec(id, E) {
+    E = E || esStore();
+    var r = E.v[id] || (E.v[id] = { p: {}, n: 1 });
+    if (!r.p) r.p = {};
+    return r;
+  }
+  function esCurVer() { return esStore().ver; }
+
+  /* The result of one attempt: null until every prova that counts is done. */
+  function esVerResult(rec) {
+    var r = (rec && rec.p) || {}, C = proveCounted();
+    if (!C.length || !C.every(function (p) { return r[p[0]]; })) return null;
     var sum = 0, minOk = true;
-    PROVE.forEach(function (p) { sum += r[p[0]].pct; if (r[p[0]].pct < 55) minOk = false; });
-    return { avg: Math.round(sum / PROVE.length), minOk: minOk, passed: minOk && sum / PROVE.length >= 60 };
+    C.forEach(function (p) { sum += r[p[0]].pct; if (r[p[0]].pct < 55) minOk = false; });
+    return { avg: Math.round(sum / C.length), minOk: minOk, passed: minOk && sum / C.length >= 60 };
   }
+  // A finished attempt: its date and, when it is better, the version's best.
+  function esCloseAttempt(id, E) {
+    var rec = esRec(id, E), res = esVerResult(rec);
+    if (!res) return null;
+    if (!rec.done) rec.done = Date.now();
+    var b = rec.best;
+    if (!b || (res.passed && !b.passed) || (res.passed === b.passed && res.avg > b.avg)) rec.best = { avg: res.avg, passed: res.passed, minOk: res.minOk, at: Date.now() };
+    return res;
+  }
+  function esameSet(prova, ok, n) {
+    var E = esStore(), id = es && es.prova === prova && es.vid ? es.vid : E.ver, rec = esRec(id, E);
+    var pct = n ? Math.round(ok / n * 100) : 0, prev = rec.p[prova];
+    if (!prev || pct >= prev.pct) rec.p[prova] = { ok: ok, n: n, pct: pct, at: Date.now() };
+    E.last = { at: Date.now(), ver: id };
+    esCloseAttempt(id, E);
+  }
+  /* The exam's result for the rest of the app (the year, the phase): the
+     best version, a passed one first.  {avg, minOk, passed, ver} or null. */
+  function esameResult() {
+    var E = esStore(), best = null;
+    esameVersions().forEach(function (id) {
+      var b = (E.v[id] || {}).best;
+      if (b && (!best || (b.passed && !best.passed) || (b.passed === best.passed && b.avg > best.avg))) best = { avg: b.avg, minOk: b.minOk !== false, passed: b.passed, ver: id };
+    });
+    return best;
+  }
+  // The version of a new attempt: the next one never finished, else the next one.
+  function esameNext() {
+    var E = esStore(), ids = esameVersions(), k = ids.indexOf(E.ver);
+    for (var i = 1; i < ids.length; i++) {
+      var id = ids[(k + i) % ids.length];
+      if (!(E.v[id] && E.v[id].best)) return id;
+    }
+    return ids[(k + 1) % ids.length];
+  }
+  function esStarted(id) { var r = (esStore().v[id] || {}).p; return !!r && Object.keys(r).length > 0; }
+  // A new attempt with version id: its provas from zero (the best stays).
+  function esameAttempt(id) {
+    var E = esStore();
+    if (esameVersions().indexOf(id) < 0) return;
+    var rec = esRec(id, E);
+    if (esVerResult(rec)) {
+      rec.p = {}; rec.n = (rec.n || 1) + 1; rec.done = null;
+      if (state.esameDraft) esVersion(id).scrittura.forEach(function (t) { if (t) delete state.esameDraft[t.id]; });
+    }
+    E.ver = id;
+    persist();
+  }
+  /* The mock exam (plan.js: one every three months after the course; the
+     week 52): the exam screen with version ver, or, without it, the next
+     one when the version on screen is finished. */
+  function esameOpen(ver) {
+    var E = esStore();
+    if (ver && esameVersions().indexOf(ver) >= 0) esameAttempt(ver);
+    else if (esVerResult(E.v[E.ver])) esameAttempt(esameNext());
+    view.week = 52; view.tab = "percorso"; view.screen = "esame";
+    render(); window.scrollTo(0, 0);
+  }
+
+  // The items of structures or lexicon of the version, in the order of their
+  // text (a cloze follows its text).
+  function esameItems(prova) {
+    var pool = course.items.filter(function (it) { return it.topic === "esame" && it.prova === prova; });
+    var ver = esCurVer(), mine = pool.filter(function (it) { return it.ver === ver; });
+    if (mine.length) pool = mine;
+    var pos = {};
+    pool.forEach(function (it, i) { pos[it.id] = i; });
+    return Drills.shuffle(pool).slice(0, prova === "strutture" ? 20 : 12).sort(function (a, b) { return pos[a.id] - pos[b.id]; });
+  }
+
   function renderEsame() {
-    var r = state.esame || {}, res = esameResult(), st = weekStat(52);
+    var E = esStore(), vid = E.ver, rec = esRec(vid, E), r = rec.p, res = esVerResult(rec), st = weekStat(52);
+    if (res) esCloseAttempt(vid, E);
+    var overall = esameResult(), maint = state.phase === "mantenimiento" || !!(overall && overall.passed);
     var html = '<button class="btn ghost" id="eback">← a la semana</button>' +
       plate(EX.final, EX.levelC1, true) +
       '<p class="lead">' + EX.lead + "</p>" +
+      '<p class="muted small">📄 Estás haciendo la <b>' + esVerLabel(vid) + "</b>" + (rec.n > 1 ? " (intento " + rec.n + ")" : "") +
+        "</p>" +
       '<div class="missions">' + PROVE.map(function (p, k) {
-        var x = r[p[0]];
-        return '<button class="mission' + (x && x.pct >= 55 ? " done" : "") + '" data-prova="' + p[0] + '"><span class="mi">' + (x && x.pct >= 55 ? "★" : p[2]) + "</span>" +
-          "<span><b>" + (k + 1) + ". " + p[1] + "</b><small>" + (x ? x.pct + " % · " + x.ok + " / " + x.n + (x.pct < 55 ? " · por debajo del mínimo" : "") : (EX.sub || {})[p[0]] || "") + "</small></span><span class=\"go\">›</span></button>";
-      }).join("") + "</div>" +
-      (res ? '<div class="card"><div class="scorebig"><b>' + res.avg + " %</b><span>promedio</span></div>" +
+        var x = r[p[0]], opt = proveOptional(p[0]);
+        return '<button class="mission' + (x && x.pct >= 55 ? " done" : "") + (opt ? " half" : "") + '" data-prova="' + p[0] + '"><span class="mi">' + (x && x.pct >= 55 ? "★" : p[2]) + "</span>" +
+          "<span><b>" + (k + 1) + ". " + p[1] + (opt ? " · opcional" : "") + "</b><small>" +
+          (x ? x.pct + " % · " + x.ok + " / " + x.n + (x.pct < 55 && !opt ? " · por debajo del mínimo" : "") : (EX.sub || {})[p[0]] || "") +
+          "</small></span><span class=\"go\">›</span></button>";
+      }).join("") + "</div>";
+    if (res) {
+      html += '<div class="card"><div class="scorebig"><b>' + res.avg + " %</b><span>promedio · " + esVerLabel(vid) + "</span></div>" +
         (res.passed ? "<p>🎓 <b>" + EX.passed + "</b> " + (st.bossPassed ? "Ya figura en " + UI.pathTu + "." : "") + "</p>" +
           (!st.bossPassed ? '<button class="btn wide" id="econsegna">Registrar el resultado</button>' : "")
-          : "<p>" + (res.minOk ? "Falta llegar al 60 % de promedio." : "Alguna prueba está por debajo del 55 %: repetila.") + "</p>") + "</div>" : "") +
-      '<div class="row" style="margin-top:12px"><button class="tab" id="eboss">⚔️ Ronda clásica de ' + UI.boss + " (práctica)</button></div>";
+          : "<p>" + (res.minOk ? "Falta llegar al 60 % de promedio." : "Alguna prueba está por debajo del 55 %: repetila, o probá otra versión.") + "</p>");
+      var nx = esameNext();
+      html += '<button class="btn wide' + (res.passed && !st.bossPassed ? " ghost" : "") + '" id="enext" data-ver="' + esc(nx) + '" style="margin-top:10px">' +
+        (maint ? "🎓 Simulacro con la " : "🔁 Nuevo intento con la ") + esVerLabel(nx) + "</button></div>";
+    }
+    // The versions: which one this is, how the others went.
+    var ids = esameVersions();
+    if (ids.length > 1) {
+      html += '<div class="card"><h3>Las versiones</h3><p class="muted small">Cada versión es un examen entero con otras escuchas, otros textos y otras consignas. ' +
+        (maint ? "Después de aprobar, un simulacro cada tres meses mantiene el nivel." : "Si no aprobás, el intento siguiente usa otra.") + "</p>" +
+        '<table class="res">' + ids.map(function (id) {
+          var v = E.v[id] || {}, b = v.best, cur = id === vid, done = esVerResult(v), started = esStarted(id);
+          var what = cur ? (done ? "hecha ahora · " + done.avg + " %" : started ? "en curso" : "la de ahora")
+            : b ? "mejor nota: " + b.avg + " %" + (b.passed ? " · aprobada" : "") : started ? "empezada" : "sin hacer";
+          return "<tr><td><b>" + esVerLabel(id) + "</b>" + (cur ? " ◀" : "") + "</td><td>" + what +
+            (cur && b && !done ? " · antes: " + b.avg + " %" : "") + "</td><td>" +
+            (cur ? "" : '<button class="tab" data-ever="' + esc(id) + '">' + (started && !esVerResult(v) ? "Seguir" : b ? (maint ? "Simulacro" : "Repetir") : "Empezar") + "</button>") +
+            "</td></tr>";
+        }).join("") + "</table></div>";
+    }
+    html += '<div class="row" style="margin-top:12px"><button class="tab" id="eboss">⚔️ Ronda clásica de ' + UI.boss + " (práctica)</button></div>";
     return html;
   }
   function wireEsame() {
     var sc = view.screen;
+    // leaving a listening of the exam: silence
+    if (esPlayer && esPlayer.screen !== sc) esStop();
     if (sc === "esame") {
       on("#eback", function () { view.tab = "percorso"; view.screen = "briefing"; render(); window.scrollTo(0, 0); });
       on("#eboss", function () { startRound("boss"); });
       document.querySelectorAll("[data-prova]").forEach(function (b) {
         b.onclick = function () {
           var p = b.dataset.prova;
-          es = { prova: p, plays: 0, answers: {} };
+          es = { prova: p, vid: esCurVer(), plays: {}, answers: {} };
           if (p === "strutture" || p === "lessico") startRound("esame", p);
           else { view.screen = p === "ascolto" ? "esame-asc" : p === "lettura" ? "esame-let" : "esame-scr"; render(); window.scrollTo(0, 0); }
         };
       });
+      document.querySelectorAll("[data-ever]").forEach(function (b) {
+        b.onclick = function () { esameAttempt(b.dataset.ever); render(); window.scrollTo(0, 0); };
+      });
+      on("#enext", function () { esameAttempt($("#enext").dataset.ver); toast("📄 Nueva " + esVerLabel(esCurVer()), 2500); render(); window.scrollTo(0, 0); });
       on("#econsegna", function () {
         var ws = state.weekStats[52] || (state.weekStats[52] = { attempts: 0, right: 0, bossPassed: false });
         ws.bossPassed = true;
@@ -4655,54 +5766,125 @@
       });
       return;
     }
+    if (sc === "esame-asc" || sc === "esame-let" || sc === "esame-scr") {
+      esV();
+      on("#eback2", esBack); on("#eback3", esBack);
+      document.querySelectorAll("[data-eplay]").forEach(function (b) { b.onclick = function () { esPlay(b.dataset.eplay); }; });
+    }
     if (sc === "esame-asc") wireEsameAscolto();
     if (sc === "esame-let") wireEsameLettura();
     if (sc === "esame-scr") wireEsameScrittura();
   }
-  function esBack() { view.screen = "esame"; render(); window.scrollTo(0, 0); }
+  function esBack() { esStop(); view.screen = "esame"; render(); window.scrollTo(0, 0); }
+  // The prova on screen and its version (a reload lands here without one).
+  function esV() {
+    var sc = view.screen;
+    if (!es) es = { prova: sc === "esame-asc" ? "ascolto" : sc === "esame-let" ? "lettura" : "scrittura", vid: esCurVer(), plays: {}, answers: {} };
+    if (!es.vid) es.vid = esCurVer();
+    if (!es.v || es.v.id !== es.vid) es.v = esVersion(es.vid);
+    return es.v;
+  }
 
-  /* Ascolto: the interview is read turn by turn, two voices; two listenings. */
+  /* The recordings: two listenings each, read by the phone's voices
+     (Tramo.playScript): the dialogue ("d"), the monologue ("m") and the
+     insumo of a tarefa ("t0".."t3"). */
+  function esScript(key) {
+    var v = esV();
+    if (key === "d") return v.ascolto ? { parts: v.ascolto.turns } : null;
+    if (key === "m") return v.monologo ? { parts: v.monologo.text, mono: v.monologo.voice === 1 ? 1 : 0 } : null;
+    var t = v.scrittura[+key.slice(1)], ins = t && t.insumo;
+    if (!ins || ins.tipo !== "audio") return null;
+    if (ins.ref) { var a = esFind((window.EsameData || {}).ascolto, ins.ref); return a ? { parts: a.turns } : null; }
+    return ins.turns ? { parts: ins.turns } : null;
+  }
+  function esPlayHtml(key, what) {
+    var n = (es && es.plays[key]) || 0;
+    if (!window.speechSynthesis) return '<p class="note">Este navegador no tiene voces: la transcripción queda abajo, después de entregar.</p>';
+    return '<div class="center"><button class="bigplay" data-eplay="' + key + '"' + (n >= 2 ? " disabled" : "") + ' aria-label="Escuchar ' + esc(what || "") + '">🔊</button>' +
+      '<p class="muted" data-estate="' + key + '">' + esPlayState(n, false) + "</p></div>";
+  }
+  function esPlayState(n, on) { return on ? "Escucha " + n + " de 2…" : n >= 2 ? "Dos escuchas hechas" : n ? "Escucha 2 de 2 (cuando quieras)" : "Escucha 1 de 2"; }
+  function esPlay(key) {
+    var sc = esScript(key), b = document.querySelector('[data-eplay="' + key + '"]');
+    if (!sc || !window.Tramo || !Tramo.playScript || (es.plays[key] || 0) >= 2) return;
+    esStop();
+    var n = es.plays[key] = (es.plays[key] || 0) + 1, lbl = document.querySelector('[data-estate="' + key + '"]');
+    document.querySelectorAll("[data-eplay]").forEach(function (x) { x.disabled = true; });
+    if (lbl) lbl.textContent = esPlayState(n, true);
+    var me = esPlayer = { key: key, screen: view.screen };
+    me.h = Tramo.playScript(sc.parts, { mono: sc.mono, onend: function (sec) {
+      if (esPlayer !== me) return;
+      esPlayer = null;
+      noteListening(sec);
+      esPlayButtons();
+    } });
+    if (b) b.blur();
+  }
+  function esStop() {
+    if (!esPlayer) return;
+    var p = esPlayer;
+    esPlayer = null;
+    if (p.h) p.h.stop();
+    esPlayButtons();
+  }
+  function esPlayButtons() {
+    document.querySelectorAll("[data-eplay]").forEach(function (x) { x.disabled = ((es && es.plays[x.dataset.eplay]) || 0) >= 2; });
+    document.querySelectorAll("[data-estate]").forEach(function (x) { x.textContent = esPlayState((es && es.plays[x.dataset.estate]) || 0, false); });
+  }
+  function esTranscript(a) {
+    return '<p class="model" lang="' + LG.tts + '">' + a.turns.map(function (t) {
+      return "<b>" + esc(a.speakers[t[0] === "A" ? 0 : t[0] === "B" ? 1 : 2] || t[0]) + ":</b> " + esc(t[1]);
+    }).join("<br>") + "</p>";
+  }
+
+  /* Ascolto: the interview read turn by turn, two voices; in Italian, then a
+     monologue of 4-5 minutes with a table of data.  Two listenings each. */
   function renderEsameAscolto() {
-    var a = EsameData.ascolto[es.k != null ? es.k : (es.k = Math.floor(Math.random() * EsameData.ascolto.length))];
-    var head = '<button class="btn ghost" id="eback2">← al examen</button><h1>🎧 ' + esc(a.title) + "</h1>";
-    if (!es.done) {
-      return head + '<div class="card"><p class="muted">Vas a escuchar la grabación <b>dos veces</b>. Las preguntas se muestran ahora: leelas antes.</p>' +
-        '<div class="center"><button class="bigplay" id="eplay">🔊</button><p class="muted" id="estate">Escucha ' + Math.min(2, es.plays + 1) + " de 2</p></div>" +
-        esameQuestionsHtml(a) +
-        '<button class="btn wide" id="econsegna2">' + EX.deliver + "</button></div>";
-    }
-    return head + esameProvaResult(a);
+    var v = esV(), a = v.ascolto, m = v.monologo;
+    var head = '<button class="btn ghost" id="eback2">← al examen</button><h1>🎧 ' + esc(proveName("ascolto")) + "</h1>" +
+      '<p class="lead">' + esVerLabel(v.id) + (m ? " · dos partes" : "") + "</p>";
+    if (es.done) return head + esameProvaResult();
+    return head + '<div class="card">' + (m ? '<p class="muted small">Parte 1 de 2</p>' : "") + '<h2 lang="' + LG.tts + '">' + esc(a.title) + "</h2>" +
+        '<p class="muted">Vas a escuchar la grabación <b>dos veces</b>. Las preguntas se muestran ahora: leelas antes.</p>' +
+        esPlayHtml("d", a.title) + esameQuestionsHtml(a) + "</div>" +
+      (m ? '<div class="card"><p class="muted small">Parte 2 de 2</p><h2 lang="' + LG.tts + '">' + esc(m.title) + "</h2>" +
+        '<p class="muted">' + esc(m.speaker || "") + (m.genre ? ' · <span lang="' + LG.tts + '">' + esc(m.genre) + "</span>" : "") +
+        ". Una sola voz, unos cuatro o cinco minutos. Leé la tabla antes, escuchá <b>dos veces</b> y anotá los datos mientras escuchás (números, horas, nombres).</p>" +
+        esPlayHtml("m", m.title) +
+        '<table class="res">' + m.tabella.map(function (c, i) {
+          return '<tr><td lang="' + LG.tts + '">' + esc(c[0]) + '</td><td><input class="egap" data-cell="' + i + '" autocapitalize="off" autocorrect="off" spellcheck="false"></td></tr>';
+        }).join("") + "</table></div>" : "") +
+      '<button class="btn wide" id="econsegna2">' + EX.deliver + "</button>";
   }
   function esameQuestionsHtml(a) {
-    return '<ol class="equestions">' + a.questions.map(function (q, i) {
+    return '<ol class="equestions" lang="' + LG.tts + '">' + a.questions.map(function (q, i) {
       return "<li><b>" + esc(q[0]) + "</b>" + Drills.shuffle(q[1]).map(function (o) {
         return '<label class="eopt"><input type="radio" name="q' + i + '" value="' + esc(o) + '"> ' + esc(o) + "</label>";
       }).join("") + "</li>";
     }).join("") + "</ol><h3>Completá con una palabra del audio</h3><ol class=\"equestions\">" + a.completa.map(function (c, i) {
-      return "<li>" + esc(c[0]) + ' <input class="egap" data-gap="' + i + '" autocapitalize="off" autocorrect="off" spellcheck="false"></li>';
+      return '<li lang="' + LG.tts + '">' + esc(c[0]) + ' <input class="egap" data-gap="' + i + '" autocapitalize="off" autocorrect="off" spellcheck="false"></li>';
     }).join("") + "</ol>";
   }
-  function esameProvaResult(a) {
-    var r = es.result;
+  // The result of a prova: the score, each answer, and the transcriptions
+  // or the texts in their order.
+  function esameProvaResult() {
+    var r = es.result, v = esV();
+    var tail = "";
+    if (es.prova === "ascolto") {
+      tail = "<h3>" + EX.transcript + (v.monologo ? " · " + esc(v.ascolto.title) : "") + "</h3>" + esTranscript(v.ascolto) +
+        (v.monologo ? "<h3>" + EX.transcript + " · " + esc(v.monologo.title) + '</h3><p class="model" lang="' + LG.tts + '">' + v.monologo.text.map(esc).join("<br><br>") + "</p>" : "");
+    } else if (es.prova === "lettura" && v.ricostruzione) {
+      tail = "<h3>El orden del texto · " + esc(v.ricostruzione.title) + '</h3><ol class="esc-model" lang="' + LG.tts + '">' +
+        v.ricostruzione.paragraphs.map(function (p) { return "<li>" + esc(p) + "</li>"; }).join("") + "</ol>";
+    }
     return '<div class="card"><div class="scorebig"><b>' + r.pct + " %</b><span>" + r.ok + " / " + r.n + "</span></div>" +
-      (r.detail ? '<table class="res">' + r.detail.map(function (d) { return "<tr><td>" + esc(d[0]) + "</td><td>" + (d[1] ? "✓" : "✗ " + esc(d[2] || "")) + "</td></tr>"; }).join("") + "</table>" : "") +
-      (a.turns ? "<h3>" + EX.transcript + '</h3><p class="model it">' + a.turns.map(function (t) { return "<b>" + esc(a.speakers[t[0] === "A" ? 0 : 1]) + ":</b> " + esc(t[1]); }).join("<br>") + "</p>" : "") +
+      (r.detail ? '<table class="res">' + r.detail.map(function (d) {
+        return '<tr><td lang="' + LG.tts + '">' + esc(d[0]) + "</td><td>" + (d[1] ? "✓" : "✗ " + esc(d[2] || "")) + "</td></tr>";
+      }).join("") + "</table>" : "") + tail +
       '<div class="row" style="margin-top:12px"><button class="btn" id="eback3">← Volver al examen</button></div></div>';
   }
   function wireEsameAscolto() {
-    on("#eback2", esBack); on("#eback3", esBack);
-    var a = EsameData.ascolto[es.k];
-    on("#eplay", function () {
-      var b = $("#eplay");
-      if (!b || b.disabled || es.plays >= 2) return;
-      b.disabled = true;
-      var i = 0;
-      (function next() {
-        if (i >= a.turns.length) { es.plays++; b.disabled = es.plays >= 2; var st = $("#estate"); if (st) st.textContent = es.plays >= 2 ? "Dos escuchas hechas" : "Escucha 2 de 2"; noteListening(a.turns.length * 12); return; }
-        var t = a.turns[i++];
-        speak(t[1], true, 1, { keep: true, pitch: t[0] === "A" ? 0.9 : 1.1, vi: t[0] === "A" ? 0 : 1, onend: next });
-      })();
-    });
+    var v = esV(), a = v.ascolto, m = v.monologo;
     on("#econsegna2", function () {
       var ok = 0, detail = [];
       a.questions.forEach(function (q, i) {
@@ -4718,6 +5900,16 @@
         detail.push([c[0], right, c[1]]);
       });
       var n = a.questions.length + a.completa.length;
+      // the table of the monologue: numbers, hours, names (Tramo.cellOk)
+      if (m) m.tabella.forEach(function (c, i) {
+        var inp = document.querySelector('[data-cell="' + i + '"]');
+        var right = !!inp && (window.Tramo && Tramo.cellOk ? Tramo.cellOk(inp.value, c)
+          : Engine.grade(inp.value, { answer: c[1], accept: [c[1]].concat(c[2] || []) }) !== Engine.VERDICT.WRONG);
+        if (right) ok++;
+        n++;
+        detail.push([c[0], right, c[1]]);
+      });
+      esStop();
       es.done = true; es.result = { ok: ok, n: n, pct: Math.round(ok / n * 100), detail: detail };
       esameSet("ascolto", ok, n);
       Engine.addStrand(state, "input", ok * 3); gain(ok * 3);
@@ -4725,24 +5917,56 @@
     });
   }
 
-  /* Lettura: a title for every paragraph (two titles too many), then true/false. */
+  /* Lettura: a title for every paragraph (two titles too many), then
+     true/false; in Italian, then the ricostruzione: the first paragraph
+     stays, the other five are put back in order (a point for each one in
+     its place). */
   function renderEsameLettura() {
-    var l = EsameData.lettura[es.k != null ? es.k : (es.k = Math.floor(Math.random() * EsameData.lettura.length))];
-    var head = '<button class="btn ghost" id="eback2">← al examen</button><h1>📖 ' + esc(l.title) + "</h1>";
-    if (es.done) return head + esameProvaResult(l);
-    return head + '<div class="card"><p class="muted">Elegí el título de cada párrafo (sobran dos) y después decidí si cada afirmación es ' + EX.vfHelp + ".</p>" +
-      '<div class="text">' + l.paragraphs.map(function (p, i) {
+    var v = esV(), l = v.lettura, rc = v.ricostruzione;
+    var head = '<button class="btn ghost" id="eback2">← al examen</button><h1>📖 ' + esc(proveName("lettura")) + "</h1>" +
+      '<p class="lead">' + esVerLabel(v.id) + (rc ? " · dos partes" : "") + "</p>";
+    if (es.done) return head + esameProvaResult();
+    if (rc && !es.ric) {
+      var b = window.Ordenar ? Ordenar.build(rc.paragraphs.join("\n"), { maxPars: rc.paragraphs.length }) : null;
+      var rest = b ? b.shuffled : Drills.shuffle(rc.paragraphs.map(function (_, i) { return i; }).slice(1));
+      es.ric = { order: [], pool: rest.slice() };
+    }
+    return head + '<div class="card">' + (rc ? '<p class="muted small">Parte 1 de 2</p>' : "") + '<h2 lang="' + LG.tts + '">' + esc(l.title) + "</h2>" +
+      '<p class="muted">Elegí el título de cada párrafo (sobran dos) y después decidí si cada afirmación es ' + EX.vfHelp + ".</p>" +
+      '<div class="text" lang="' + LG.tts + '">' + l.paragraphs.map(function (p, i) {
         return '<p><select class="etitle" data-par="' + i + '"><option value="">— título del párrafo ' + (i + 1) + " —</option>" +
           l.titles.map(function (t, k) { return '<option value="' + k + '">' + esc(t) + "</option>"; }).join("") + "</select><br>" + esc(p) + "</p>";
       }).join("") + "</div>" +
-      "<h3>" + EX.vf + '</h3><ol class="equestions">' + l.vf.map(function (v, i) {
-        return "<li>" + esc(v[0]) + '<label class="eopt"><input type="radio" name="vf' + i + '" value="v"> ' + EX.yes + '</label><label class="eopt"><input type="radio" name="vf' + i + '" value="f"> ' + EX.no + "</label></li>";
-      }).join("") + "</ol>" +
-      '<button class="btn wide" id="econsegna3">' + EX.deliver + "</button></div>";
+      "<h3>" + EX.vf + '</h3><ol class="equestions">' + l.vf.map(function (x, i) {
+        return '<li><span lang="' + LG.tts + '">' + esc(x[0]) + '</span><label class="eopt"><input type="radio" name="vf' + i + '" value="v"> ' + EX.yes + '</label><label class="eopt"><input type="radio" name="vf' + i + '" value="f"> ' + EX.no + "</label></li>";
+      }).join("") + "</ol></div>" +
+      (rc ? '<div class="card"><p class="muted small">Parte 2 de 2</p><h2 lang="' + LG.tts + '">' + esc(rc.title) + "</h2>" +
+        '<p class="muted">Los párrafos de este texto están desordenados. El primero ya está en su lugar: tocá los demás en el orden en que van (tocá uno ya puesto para sacarlo).</p>' +
+        '<div id="eric">' + esRicHtml() + "</div></div>" : "") +
+      '<button class="btn wide" id="econsegna3">' + EX.deliver + "</button>";
   }
+  function esRicHtml() {
+    var ps = esV().ricostruzione.paragraphs, R = es.ric;
+    return '<div class="options esc-order" lang="' + LG.tts + '"><div class="opt esc-piece anchor">' + esc(ps[0]) + "</div>" +
+      R.order.map(function (u, i) { return '<button class="opt esc-piece" data-ericback="' + i + '">' + esc(ps[u]) + "</button>"; }).join("") + "</div>" +
+      (R.pool.length ? '<p class="muted small" style="margin-top:14px">Tocá el que sigue:</p><div class="esc-pool" lang="' + LG.tts + '">' + R.pool.map(function (u) {
+        return '<button class="tile esc-piece" data-ericput="' + u + '">' + esc(ps[u]) + "</button>";
+      }).join("") + "</div>" : '<p class="muted small" style="margin-top:10px">✓ Todos en su lugar: podés entregar (o tocar uno para sacarlo).</p>');
+  }
+  function esRicWire() {
+    var box = $("#eric");
+    if (!box) return;
+    box.querySelectorAll("[data-ericput]").forEach(function (b) {
+      b.onclick = function () { var u = +b.dataset.ericput; es.ric.pool = es.ric.pool.filter(function (x) { return x !== u; }); es.ric.order.push(u); esRicRedraw(); };
+    });
+    box.querySelectorAll("[data-ericback]").forEach(function (b) {
+      b.onclick = function () { var u = es.ric.order.splice(+b.dataset.ericback, 1)[0]; es.ric.pool.push(u); esRicRedraw(); };
+    });
+  }
+  function esRicRedraw() { var box = $("#eric"); if (box) { box.innerHTML = esRicHtml(); esRicWire(); } }
   function wireEsameLettura() {
-    on("#eback2", esBack); on("#eback3", esBack);
-    var l = EsameData.lettura[es.k];
+    var v = esV(), l = v.lettura, rc = v.ricostruzione;
+    esRicWire();
     on("#econsegna3", function () {
       var ok = 0, detail = [];
       l.match.forEach(function (want, i) {
@@ -4751,13 +5975,23 @@
         if (right) ok++;
         detail.push(["Párrafo " + (i + 1), right, l.titles[want]]);
       });
-      l.vf.forEach(function (v, i) {
+      l.vf.forEach(function (x, i) {
         var sel = document.querySelector('input[name="vf' + i + '"]:checked');
-        var right = !!sel && (sel.value === "v") === v[1];
+        var right = !!sel && (sel.value === "v") === x[1];
         if (right) ok++;
-        detail.push([v[0], right, (v[1] ? EX.yes : EX.no) + (v[2] ? " · " + v[2] : "")]);
+        detail.push([x[0], right, (x[1] ? EX.yes : EX.no) + (x[2] ? " · " + x[2] : "")]);
       });
       var n = l.match.length + l.vf.length;
+      if (rc && es.ric) {
+        // one point for each paragraph after the first in its place
+        var seq = es.ric.order;
+        for (var i = 1; i < rc.paragraphs.length; i++) {
+          var right = seq[i - 1] === i;
+          if (right) ok++;
+          n++;
+          detail.push([(EX.ricName || "Orden") + ": " + (i + 1) + ".º párrafo", right, rc.paragraphs[i].split(/\s+/).slice(0, 7).join(" ") + "…"]);
+        }
+      }
       es.done = true; es.result = { ok: ok, n: n, pct: Math.round(ok / n * 100), detail: detail };
       esameSet("lettura", ok, n);
       Engine.addStrand(state, "input", ok * 3); gain(ok * 3);
@@ -4765,40 +5999,115 @@
     });
   }
 
-  /* The written production: two texts; with a key the AI grades them with the
-     rubric, otherwise the local checker counts words and hard errors. */
+  /* The written production: two texts (Italian) or four tarefas integradas
+     with their insumo (Portuguese).  With a key the AI grades them with the
+     rubric; otherwise the review of the C1 task (Tramo.evaluate). */
+  function esInsumo(t) {
+    var ins = t.insumo, E = window.EsameData || {};
+    if (!ins) return null;
+    if (ins.ref) {
+      var a = ins.tipo === "audio" ? esFind(E.ascolto, ins.ref) : null, l = ins.tipo !== "audio" ? esFind(E.lettura, ins.ref) : null;
+      return { tipo: ins.tipo, ref: true, titulo: (a || l || {}).title || "", turns: a ? a.turns : null, speakers: a ? a.speakers : null,
+               texto: l ? l.paragraphs.join("\n\n") : "" };
+    }
+    return { tipo: ins.tipo, titulo: ins.titulo || "", turns: ins.turns || null, speakers: ins.speakers || null, texto: ins.texto || "" };
+  }
+  function esInsumoHtml(t, i) {
+    var x = esInsumo(t);
+    if (!x) return "";
+    if (x.tipo === "audio") return '<div class="call"><p><b>🎧 ' + (x.ref ? "La grabación de la prueba de escucha: " : "Un audio: ") + '</b><span lang="' + LG.tts + '">' + esc(x.titulo) + "</span>" +
+      (x.speakers ? ' <span class="muted small">(' + x.speakers.map(esc).join(", ") + ")</span>" : "") + "</p>" + esPlayHtml("t" + i, x.titulo) + "</div>";
+    if (x.ref) return '<details class="call"><summary><b>📖 El texto de la prueba de lectura:</b> <span lang="' + LG.tts + '">' + esc(x.titulo) + "</span></summary>" +
+      '<div class="text" lang="' + LG.tts + '">' + x.texto.split(/\n\n/).map(function (p) { return "<p>" + esc(p) + "</p>"; }).join("") + "</div></details>";
+    return '<div class="call"><p><b>📄 <span lang="' + LG.tts + '">' + esc(x.titulo) + '</span></b></p><p class="model" lang="' + LG.tts + '">' + esc(x.texto) + "</p></div>";
+  }
+  function esWords(s) { return String(s || "").split(/\s+/).filter(Boolean).length; }
+  // The extension a task asks for: said in Italian (min-max), not in the
+  // tarefas of Portuguese (words is only for the review).
+  function esSpan(t) { return { min: t.min || Math.round(t.words * 0.8), max: t.max || Math.round(t.words * 1.5), said: !!t.min }; }
   function renderEsameScrittura() {
-    var head = '<button class="btn ghost" id="eback2">← al examen</button><h1>✍️ ' + EX.writing + "</h1>";
+    var v = esV(), tasks = v.scrittura, tare = tasks.some(function (t) { return t.insumo; });
+    var head = '<button class="btn ghost" id="eback2">← al examen</button><h1>✍️ ' + EX.writing + "</h1>" +
+      '<p class="lead">' + esVerLabel(v.id) + "</p>";
     if (es.done) return head + '<div class="card"><div class="scorebig"><b>' + es.result.pct + ' %</b><span>' + es.result.ok + " / " + es.result.n + " puntos</span></div>" +
       es.result.parts.map(function (p) {
-        return "<h3>" + esc(p.title) + "</h3><p>" + (p.rubric ? RUBRIC.filter(function (r) { return p.rubric[r[0]] != null; }).map(function (r) { return esc(r[1]) + " " + p.rubric[r[0]] + "/5"; }).join(" · ") : p.local) + "</p>" +
+        return "<h3>" + esc(p.title) + "</h3><p>" + (p.rubric ? RUBRIC.filter(function (r) { return p.rubric[r[0]] != null; }).map(function (r) { return esc(r[1]) + " " + p.rubric[r[0]] + "/5"; }).join(" · ") : esc(p.local)) + "</p>" +
           (p.comment ? "<p>🤖 " + esc(p.comment) + "</p>" : "") +
-          (p.errors && p.errors.length ? '<table class="res">' + p.errors.map(function (e) { return "<tr><td>" + esc(e[0]) + "</td><td>" + esc(e[1]) + "</td></tr>"; }).join("") + "</table>" : "");
+          (p.errors && p.errors.length ? '<table class="res">' + p.errors.map(function (e) { return '<tr><td lang="' + LG.tts + '">' + esc(e[0]) + '</td><td lang="' + LG.tts + '">' + esc(e[1]) + "</td></tr>"; }).join("") + "</table>" : "");
       }).join("") +
+      (tasks.some(function (t) { return esInsumo(t) && esInsumo(t).tipo === "audio" && !esInsumo(t).ref; }) ? "<h3>" + EX.transcript + "</h3>" + tasks.map(function (t) {
+        var x = esInsumo(t);
+        return x && x.tipo === "audio" && !x.ref ? '<p class="muted small" lang="' + LG.tts + '">' + esc(x.titulo) + "</p>" + esTranscript({ turns: x.turns, speakers: x.speakers || [] }) : "";
+      }).join("") : "") +
       '<div class="row" style="margin-top:12px"><button class="btn" id="eback3">← Volver al examen</button></div></div>';
-    return head + '<div class="card"><p class="muted">Dos textos. ' + (aiKey() ? "La IA los califica con la rúbrica de la certificación." : "Sin clave de IA, el corrector propio cuenta palabras y errores marcados.") + "</p>" +
-      EsameData.scrittura.map(function (t, i) {
-        var d = (state.esameDraft || {})[t.id] || "";
-        return "<h3>" + (i + 1) + ". " + esc(kindName(t.kind)) + " · " + t.words + " palabras</h3><p>" + esc(t.t) + "</p>" +
-          '<textarea class="grow scrivi edraft" data-id="' + t.id + '" rows="8" spellcheck="false" autocapitalize="sentences">' + esc(d) + "</textarea>" +
-          '<p class="muted small ewords" data-for="' + t.id + '">' + d.split(/\s+/).filter(Boolean).length + " palabras</p>";
+    return head + '<div class="card"><p class="muted">' + (tare ? tasks.length + " tarefas: cada una parte de lo que escuchás o leés. Como en el Celpe-Bras, el enunciado no dice extensión ni registro: los decide el género, el interlocutor y el propósito. " : tasks.length + " textos. ") +
+      (aiKey() ? "La IA los califica con la rúbrica de la certificación." : "Sin clave de IA, los revisa el corrector de la tarea C1 (extensión, variedad, estructura del género, conectores, errores marcados).") + "</p></div>" +
+      tasks.map(function (t, i) {
+        var d = (state.esameDraft || {})[t.id] || "", sp = esSpan(t);
+        return '<div class="card"><h3>' + (t.insumo ? "Tarefa " + (i + 1) : (i + 1) + ". " + esc(kindName(t.kind)) + (sp.said ? " · " + sp.min + "–" + sp.max + " palabras" : "")) + "</h3>" +
+          esInsumoHtml(t, i) +
+          "<p" + (t.insumo ? ' lang="' + LG.tts + '"' : "") + ">" + esc(t.t) + "</p>" +
+          '<textarea class="grow scrivi edraft" data-id="' + esc(t.id) + '" rows="8" spellcheck="false" autocapitalize="sentences" lang="' + LG.tts + '">' + esc(d) + "</textarea>" +
+          '<p class="muted small ewords" data-for="' + esc(t.id) + '">' + esWords(d) + " palabras</p></div>";
       }).join("") +
-      '<button class="btn wide" id="econsegna4"' + (es.busy ? " disabled" : "") + ">" + (es.busy ? "⏳ Corrigiendo…" : EX.deliver) + "</button></div>";
+      '<button class="btn wide" id="econsegna4"' + (es.busy ? " disabled" : "") + ">" + (es.busy ? "⏳ Corrigiendo…" : EX.deliver) + "</button>";
+  }
+  // The review without a key: the C1 task's (tramo.js), which does not fall
+  // for padding or repetition, plus the checker's hard errors.  It is a
+  // guide, not a grade: the page says so.
+  function esLocalScore(task, text) {
+    var chk = Scrivi.check(text, 52), hard = chk.findings.filter(function (f) { return !f.soft; }).length;
+    var words = esWords(text), score, detail = "";
+    if (window.Tramo && Tramo.evaluate) {
+      var genres = (window.TRAMO_DATA && TRAMO_DATA.GENRES) || {}, keys = Object.keys(genres), G = EX.genres || {};
+      var genre = [G[task.genero], G[task.kind]].filter(function (g) { return g && genres[g]; })[0] ||
+        keys.filter(function (k) { return task.kind === "formale" ? /formal/.test(k) : /saggio|opiniao|articolo|artigo/.test(k); })[0] || keys[0];
+      var x = esInsumo(task), sp = esSpan(task);
+      var src = x ? { lettura: { text: x.texto || "" }, ascolto: { turns: x.turns || [] } } : null;
+      var ev = Tramo.evaluate({ genre: genre, min: sp.min, max: sp.max, punti: task.punti || [], t: task.t,
+                                fonte: x ? (x.tipo === "audio" ? "ascolto" : "lettura") : null }, text, 52, src);
+      // without points of the task, the criterion says nothing
+      var crit = ev.crit.filter(function (c) { return !(c.id === "punti" && !(task.punti || []).length); });
+      var need = crit.filter(function (c) { return c.need; }), needOk = need.every(function (c) { return c.ok; });
+      var frac = crit.filter(function (c) { return c.ok; }).length / Math.max(1, crit.length), errPart = Math.max(0, 1 - hard / Math.max(4, words / 25));
+      score = Math.round((frac * 12 + errPart * 8) * 10) / 10;
+      if (!needOk) score = Math.min(score, 9);
+      detail = crit.filter(function (c) { return !c.ok; }).map(function (c) { return c.label; }).slice(0, 3).join(" · ");
+    } else {
+      score = Math.round((Math.min(1, words / task.words) * 8 + Math.max(0, 12 - hard * 1.5)) * 10) / 10;
+    }
+    return { score: score, text: words + " palabras · " + hard + " errores marcados → nota orientativa " + score + " / 20" + (detail ? " · " + detail : "") };
+  }
+  // What the AI needs besides the prompt: the insumo, so it can judge its use.
+  function esAiTask(t) {
+    var x = esInsumo(t);
+    if (!x) return t;
+    var src = x.turns ? x.turns.map(function (u) { return u[1]; }).join(" ") : x.texto;
+    return Object.assign({}, t, { t: t.t + "\n\nInsumo (" + (x.tipo === "audio" ? "audio" : "texto") + ", «" + x.titulo + "»): " + String(src).slice(0, 5000) });
+  }
+  function esSaveDraft(id, value) {
+    if (!state.esameDraft) state.esameDraft = {};
+    state.esameDraft[id] = String(value).slice(0, 6000);
   }
   function wireEsameScrittura() {
-    on("#eback2", esBack); on("#eback3", esBack);
+    var v = esV();
     document.querySelectorAll(".edraft").forEach(function (t) {
       t.addEventListener("input", function () {
-        if (!state.esameDraft) state.esameDraft = {};
-        state.esameDraft[t.dataset.id] = t.value.slice(0, 6000);
+        esSaveDraft(t.dataset.id, t.value);
         var c = document.querySelector('.ewords[data-for="' + t.dataset.id + '"]');
-        if (c) c.textContent = t.value.split(/\s+/).filter(Boolean).length + " palabras";
-        persist();
+        if (c) c.textContent = esWords(t.value) + " palabras";
+        clearTimeout(esDraftTimer);
+        esDraftTimer = setTimeout(persist, 600);
       });
+      t.addEventListener("blur", function () { clearTimeout(esDraftTimer); persist(); });
     });
     on("#econsegna4", function () {
-      var texts = EsameData.scrittura.map(function (t) { return [t, ((state.esameDraft || {})[t.id] || "").trim()]; });
-      if (texts.some(function (x) { return x[1].split(/\s+/).filter(Boolean).length < x[0].words * 0.5; })) return toast("Cada texto necesita al menos la mitad de las palabras pedidas.", 3500);
+      clearTimeout(esDraftTimer);
+      var texts = v.scrittura.map(function (t) { return [t, ((state.esameDraft || {})[t.id] || "").trim()]; });
+      var short = texts.filter(function (x) { return esWords(x[1]) < x[0].words * 0.5; })[0];
+      if (short) return toast(short[0].insumo ? "La tarefa " + (texts.indexOf(short) + 1) + " parece incompleta: " + esWords(short[1]) + " palabras."
+        : "Cada texto necesita al menos la mitad de las palabras pedidas.", 3500);
+      esStop();
       es.busy = true; render();
       scriviLexicon();
       var parts = [], pending = texts.length, sum = 0, max = 0;
@@ -4807,24 +6116,23 @@
         es.result = { ok: Math.round(sum), n: max, pct: Math.round(sum / max * 100), parts: parts };
         esameSet("scrittura", Math.round(sum), max);
         Engine.addStrand(state, "output", Math.round(sum * 2)); gain(Math.round(sum * 2));
-        persist(); renderHeader(); render(); window.scrollTo(0, 0);
+        persist(); renderHeader();
+        if (view.screen === "esame-scr") { render(); window.scrollTo(0, 0); }
       };
-      texts.forEach(function (x) {
-        var task = x[0], text = x[1], title = kindName(task.kind);
+      texts.forEach(function (x, i) {
+        var task = x[0], text = x[1], title = (task.insumo ? "Tarefa " + (i + 1) + " · " : "") + kindName(task.kind);
         var local = function () {
-          var chk = Scrivi.check(text, 52), hard = chk.findings.filter(function (f) { return !f.soft; }).length;
-          var words = text.split(/\s+/).filter(Boolean).length, wordsOk = Math.min(1, words / task.words);
-          var score = Math.round((wordsOk * 8 + Math.max(0, 12 - hard * 1.5)) * 10) / 10;
-          parts.push({ title: title, local: words + " palabras · " + hard + " errores marcados por el corrector propio → " + score + " / 20", errors: [] });
-          sum += score; max += 20;
+          var l = esLocalScore(task, text);
+          parts[i] = { title: title, local: l.text, errors: [] };
+          sum += l.score; max += 20;
           if (--pending === 0) finish();
         };
         if (!aiKey()) return local();
-        Scrivi.esame(task, text, aiKeys(), function (err, data) {
+        Scrivi.esame(esAiTask(task), text, aiKeys(), function (err, data) {
           if (err || !data || !data.punteggi) return local();
           var pz = data.punteggi, sc = 0;
           RUBRIC.forEach(function (r) { var k = r[0]; pz[k] = Math.max(0, Math.min(5, +pz[k] || 0)); sc += pz[k]; });
-          parts.push({ title: title, rubric: pz, comment: String(data.commento || ""), errors: (data.errori || []).slice(0, 8) });
+          parts[i] = { title: title, rubric: pz, comment: String(data.commento || ""), errors: (data.errori || []).slice(0, 8) };
           sum += sc; max += 20;
           if (--pending === 0) finish();
         });
@@ -4852,6 +6160,8 @@
   function renderScrivi(w) {
     var task = Scrivi.TASKS[w.week];
     if (!task) return '<button class="btn ghost" id="sback">← a la semana</button><p>Esta semana no tiene texto.</p>';
+    // one structure of the month before, the most overdue rule's (reglas.js)
+    if (window.Reglas) Reglas.scriviExtra(state, w.week);
     scriviLexicon();
     var draft = ((state.scrittiDraft || {})[w.week]) || ((state.scritti || {})[w.week] || {}).t || "";
     var r = Scrivi.check(draft, w.week);
@@ -4867,7 +6177,7 @@
       '<label class="muted small ltopt"><input type="checkbox" id="slt"' + (state.ltOff ? "" : " checked") + "> " +
         "Si la IA no está, pedir la corrección de LanguageTool (gratis; el texto se envía a su servidor)</label>" +
       '<p class="muted small ailine">🤖 ' + (aiKey()
-        ? "Corrector con IA activado (" + [aiKeys().groq ? "Groq" : "", aiKeys().gemini ? (aiKeys().groq ? "Gemini de respaldo" : "Gemini") : ""].filter(Boolean).join(" + ") + "). "
+        ? "Corrector con IA activado (" + aiNames() + "). "
         : "Para que una IA marque todo y lo explique, cargá una clave gratuita. ") +
         '<a href="#" id="aigo">Claves en ' + UI.me + " →</a></p>" +
       '<div id="sout"></div>';
@@ -4893,6 +6203,12 @@
   function readKey(k) { try { return localStorage.getItem(k) || ""; } catch (e) { return ""; } }
   function aiKeys() { return { groq: readKey(AI_KEY), gemini: readKey(GEM_KEY) }; }
   function aiKey() { var k = aiKeys(); return k.groq || k.gemini; }
+  // «Gemini, y Groq de respaldo»: in the order the learner chose.
+  function aiNames() {
+    var k = aiKeys(), ids = (window.IA ? IA.order() : ["gemini", "groq"]).filter(function (id) { return k[id]; });
+    var name = { gemini: "Gemini", groq: "Groq" };
+    return ids.length > 1 ? name[ids[0]] + ", y " + name[ids[1]] + " de respaldo" : ids.map(function (id) { return name[id]; }).join("");
+  }
   // Which AI answered: «Groq · moonshotai/kimi-k2-instruct».
   function modelLine(m, m2) {
     var one = function (x) { return x ? esc(x.provider + " · " + x.model) : ""; };
@@ -4901,15 +6217,25 @@
   }
   function aiKeyFields() {
     var k = aiKeys();
-    return '<p class="muted small"><b>Groq</b> (principal): <a href="https://console.groq.com/keys" target="_blank" rel="noopener">console.groq.com/keys</a> → «Create API Key».</p>' +
-      '<input id="aikey" type="password" autocomplete="off" placeholder="Clave de Groq (gsk_…)" value="' + esc(k.groq) + '">' +
-      '<p class="muted small"><b>Gemini</b> (respaldo, si Groq falla): <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a> → «Create API key».</p>' +
+    var first = window.IA ? IA.order()[0] : "gemini", st = window.IA ? IA.stats() : {};
+    var lat = function (id) {
+      var x = st[id];
+      return x && x.lat ? ' <span class="muted">· última vez ' + esc(x.model) + ", " + secs(x.lat.first) + " s</span>" : "";
+    };
+    return '<p class="muted small"><label for="gemkey"><b>Gemini</b></label>: <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a> → «Create API key».' + lat("gemini") + "</p>" +
       '<input id="gemkey" type="password" autocomplete="off" placeholder="Clave de Gemini (AIza…)" value="' + esc(k.gemini) + '">' +
+      '<p class="muted small"><label for="aikey"><b>Groq</b></label>: <a href="https://console.groq.com/keys" target="_blank" rel="noopener">console.groq.com/keys</a> → «Create API Key».' + lat("groq") + "</p>" +
+      '<input id="aikey" type="password" autocomplete="off" placeholder="Clave de Groq (gsk_…)" value="' + esc(k.groq) + '">' +
+      '<fieldset class="aiorder"><legend class="muted small">Con las dos claves, primero preguntar a:</legend>' +
+      '<label><input type="radio" name="aifirst" value="gemini"' + (first === "gemini" ? " checked" : "") + "> Gemini <span class=\"muted small\">(mejor italiano y portugués)</span></label>" +
+      '<label><input type="radio" name="aifirst" value="groq"' + (first === "groq" ? " checked" : "") + "> Groq <span class=\"muted small\">(el más rápido)</span></label></fieldset>" +
       '<div class="row"><button class="tab" id="aisave">Guardar</button></div>' +
-      '<p class="muted small">Quedan solo en este teléfono; el texto se envía a Groq o a Google.</p>';
+      '<p class="muted small">Si uno falla o tarda en empezar a responder, la app le pregunta al otro. Las claves quedan solo en este teléfono; el texto se envía a Google o a Groq.</p>';
   }
   function saveKeys() {
     var g = (($("#aikey") || {}).value || "").trim(), m = (($("#gemkey") || {}).value || "").trim();
+    var pick = document.querySelector('input[name="aifirst"]:checked');
+    if (pick && window.IA) IA.setOrder(pick.value);
     try {
       if (g) localStorage.setItem(AI_KEY, g); else localStorage.removeItem(AI_KEY);
       if (m) localStorage.setItem(GEM_KEY, m); else localStorage.removeItem(GEM_KEY);
@@ -4951,25 +6277,40 @@
       if (card) card.scrollIntoView({ block: "start" });
     });
     on("#scheck", function () {
-      var text = box.value, r = Scrivi.check(text, w.week), out = $("#sout");
-      // With a key, the AI is the corrector; the local rules and
-      // LanguageTool only step in when it cannot answer.
+      var text = box.value, r = Scrivi.check(text, w.week);
+      /* The union (C8): the local marks (no false alarms measured) are shown
+         as sure; with a key, what the AI finds is added to them, and where it
+         disagrees with a local mark both are shown.  Without a key (or if
+         the AI fails), LanguageTool adds its own. */
       r.local = r.findings;
-      if (aiKey() && text.trim()) { r.findings = []; r.hard = 0; runAI(); }
+      if (aiKey() && text.trim()) runAI();
       else fallback();
+      function union(data) {
+        r.findings = r.local.concat(Scrivi.fromAI(text, data, r.local));
+        r.hard = scriviHard(r.findings);
+      }
       function runAI() {
-        r.ai = "…"; r.aiStage = null; r.findings = []; r.hard = 0;
+        r.ai = "…"; r.aiStage = null; r.findings = r.local; r.hard = scriviHard(r.local); r.cached = null;
         showScrivi(w, text, r, null);
-        // The evidence for the reviewer: the rule checker now, LanguageTool
-        // when it answers (at most twelve seconds; without it, the review
-        // goes ahead with the local findings only).
+        // the same text, or every sentence already corrected: no new request
+        var hit = scriviCached(text, w.week);
+        if (hit) {
+          r.ai = "ok"; r.aiData = hit.data; r.aiMeta = null; r.cached = hit.how;
+          union(hit.data);
+          showScrivi(w, text, r, null);
+          return;
+        }
+        // The evidence for the reviewer: the rule checker now (sure),
+        // LanguageTool when it answers (at most six seconds; without it,
+        // the review goes ahead with the local findings only).
+        var sure = r.local.filter(function (f) { return !f.soft; }).map(function (f) { return window.Errores ? Errores.evidenceLine(f) : f.msg.replace(/\*/g, ""); });
         var ltMsgs = null, waiting = [];
         if (!state.ltOff) Scrivi.ltCheck(text, function (e2, matches) {
-          ltMsgs = e2 ? [] : Scrivi.fromLT(text, matches, []).map(function (f) { return f.msg.replace(/\*/g, ""); });
+          ltMsgs = e2 ? [] : Scrivi.fromLT(text, matches, r.local).map(function (f) { return f.msg.replace(/\*/g, ""); });
           waiting.splice(0).forEach(function (fn) { fn(); });
         }); else ltMsgs = [];
         var evidence = function (go) {
-          var pack = function () { return { local: r.local.filter(function (f) { return !f.soft; }).map(function (f) { return f.msg.replace(/\*/g, ""); }), lt: ltMsgs || [] }; };
+          var pack = function () { return { local: sure, lt: ltMsgs || [] }; };
           if (ltMsgs) return go(pack());
           var t = setTimeout(function () { if (waiting.length) { waiting.length = 0; go(pack()); } }, 6000);
           waiting.push(function () { clearTimeout(t); go(pack()); });
@@ -4978,19 +6319,19 @@
           if (view.screen !== "scrivi" || $("#stext") !== box || box.value !== text) return;
           if (err) { r.ai = "error"; r.aiErr = String(err.message || err); fallback(); return; }
           r.ai = "ok"; r.aiData = data; r.aiMeta = meta;
-          r.findings = Scrivi.fromAI(text, data, []);
-          r.hard = r.findings.filter(function (f) { return !f.soft; }).length;
+          scriviRemember(text, w.week, data);
+          union(data);
           showScrivi(w, text, r, null);
           on("#sretry", runAI);
         }, function (stage) {
           if (view.screen !== "scrivi" || $("#stext") !== box || box.value !== text) return;
           r.aiStage = stage;
           showScrivi(w, text, r, null);
-        }, { evidence: evidence });
+        }, { evidence: evidence, ctx: aiCtx({ week: w.week, local: sure }) });
       }
       function fallback() {
         r.findings = r.local;
-        r.hard = r.findings.filter(function (f) { return !f.soft; }).length;
+        r.hard = scriviHard(r.findings);
         showScrivi(w, text, r, state.ltOff || !text.trim() ? null : "…");
         on("#sretry", runAI);
         if (state.ltOff || !text.trim()) return;
@@ -4998,7 +6339,7 @@
           if (view.screen !== "scrivi" || $("#stext") !== box || box.value !== text || r.ai === "…" || r.ai === "ok") return;
           if (err) { r.lt = "error"; showScrivi(w, text, r, "error"); on("#sretry", runAI); return; }
           r.findings = r.findings.concat(Scrivi.fromLT(text, matches, r.findings)).sort(function (a, b) { return a.i - b.i; });
-          r.hard = r.findings.filter(function (f) { return !f.soft; }).length;
+          r.hard = scriviHard(r.findings);
           r.lt = "ok";
           showScrivi(w, text, r, "ok");
           on("#sretry", runAI);
@@ -5007,11 +6348,50 @@
     });
   }
 
+  // What counts as an error to fix: not the style, not the folded ones, not a second opinion.
+  function scriviHard(list) { return (list || []).filter(function (f) { return !f.soft && !f.minor && !f.conflict; }).length; }
+  /* The AI's correction of Scrivi, kept by text and by sentence (P4.4): the
+     same text, or a text whose sentences were all corrected before, is not
+     sent again. */
+  function scriviCached(text, week) {
+    var E = window.Errores;
+    if (!E) return null;
+    var full = E.cacheGet("scrivi", [week, text]);
+    if (full) return { data: full, how: "texto" };
+    var ss = E.sentences(text), errs = [];
+    if (!ss.length) return null;
+    for (var i = 0; i < ss.length; i++) {
+      var c = E.cacheGet("scrivi-s", [week, ss[i].s]);
+      if (!c) return null;
+      errs = errs.concat(c.errores || []);
+    }
+    return { data: { errores: errs, corregido: "", consigna: "", comentario: "" }, how: "oraciones" };
+  }
+  function scriviRemember(text, week, data) {
+    var E = window.Errores;
+    if (!E || !data || !Array.isArray(data.errores)) return;
+    E.cacheSet("scrivi", [week, text], data, "Scrivi " + week + " · " + text.slice(0, 80));
+    var ss = E.sentences(text), per = ss.map(function () { return []; });
+    data.errores.forEach(function (e) {
+      var bad = String((e && e.mal) || "").toLowerCase().trim();
+      if (!bad) return;
+      for (var i = 0; i < ss.length; i++) if (ss[i].s.toLowerCase().indexOf(bad) >= 0) { per[i].push(e); return; }
+    });
+    ss.forEach(function (x, i) { E.cacheSet("scrivi-s", [week, x.s], { errores: per[i] }, "Scrivi " + week + " · " + x.s.slice(0, 80)); });
+  }
+
   /* Tres vueltas y reformulación (docs/js/escritura_plus.js): lo que el
      módulo necesita de la app. */
   function epHost() {
     return { state: state, week: course.weeks[view.week - 1], esc: esc, mk: mk, UI: UI, persist: persist, gain: gain,
              toast: toast, aiKeys: aiKeys, aiKey: aiKey, lexicon: scriviLexicon,
+             // the errors of the last lap and of the text reformulated go to the profile (F §2.2)
+             recordFindings: function (findings, text, reg) {
+               if (!window.Errores) return 0;
+               var n = Errores.recordFindings(state, findings, text, { registro: reg || null }).length;
+               if (n) persist();
+               return n;
+             },
              rerender: function () { if (view.screen === "eplus") render(); },
              back: function () { EscrituraPlus.stop(); view.screen = "scrivi"; render(); window.scrollTo(0, 0); } };
   }
@@ -5019,23 +6399,34 @@
   function showScrivi(w, text, r, ltState) {
       var out = $("#sout");
       if (!out) return;
-      var hard = r.findings.filter(function (f) { return !f.soft; });
-      var list = r.findings.map(function (f, k) {
-        return '<li class="' + (f.soft ? "soft" : "bad") + '"><b>' + (k + 1) + ".</b> " + mk(f.msg) + "</li>";
-      }).join("");
+      var hard = r.findings.filter(function (f) { return !f.soft && !f.minor && !f.conflict; });
+      // the week's and the weak categories first; with a beginner, the rest folded (P4.5)
+      var major = r.findings.filter(function (f) { return !f.minor; }), minor = r.findings.filter(function (f) { return f.minor; });
+      var byPos = function (a, b) { return (a.i < 0 ? 1e9 : a.i) - (b.i < 0 ? 1e9 : b.i); };
+      var shown = major.sort(byPos).concat(minor.sort(byPos));
+      var item = function (f, k) {
+        var src = f.conflict ? "" : f.ai ? '<span class="src">🤖 IA</span>' : f.lt ? "" : r.ai === "ok" ? '<span class="src">✓ corrector</span>' : "";
+        return '<li class="' + (f.conflict ? "soft conflict" : f.soft ? "soft" : "bad") + '"><b>' + (k + 1) + ".</b> " +
+          mk(DV ? DV.plain(f.msg, w.week) : f.msg) + src + "</li>";
+      };
+      var list = major.map(item).join("");
+      var minorList = minor.map(function (f, k) { return item(f, major.length + k); }).join("");
       var missing = r.reqs.filter(function (q) { return !q.ok; });
       var busy = r.ai === "…";
       out.innerHTML = '<div class="card">' +
         (busy ? (r.aiStage === "review" ? '<p>⏳ Un segundo profesor está revisando la corrección…</p>' : '<p>⏳ La IA está corrigiendo tu texto…</p>') +
-                '<p class="muted small">Corrige y después revisa: suele tardar menos de 30 segundos.</p>'
-          : r.findings.length ? '<p class="scrivi-marked it">' + Scrivi.markup(text, r.findings, esc) + "</p><ol class=\"findings\">" + list + "</ol>"
-          : r.ai === "ok" ? "<p>✨ La IA no encontró errores.</p>"
+                '<p class="muted small">Corrige y después revisa: suele tardar menos de 30 segundos. Mientras, lo que ya marcó el corrector de la app:</p>' : "") +
+        (shown.length ? '<p class="scrivi-marked it">' + Scrivi.markup(text, shown, esc) + "</p>" +
+              (list ? '<ol class="findings">' + list + "</ol>" : "") +
+              (minorList ? '<details class="minorf"><summary>Otras cosas para más adelante (' + minor.length + ")</summary><ol class=\"findings\">" + minorList + "</ol></details>" : "")
+          : busy ? "" : r.ai === "ok" ? "<p>✨ Ni la IA ni el corrector encontraron errores.</p>"
           : '<p>✨ No encontré errores' + (ltState === "ok" ? ", y LanguageTool tampoco." : " de los que sé buscar.") + "</p>") +
         (r.ai === "ok" && r.aiData ? '<div class="aiout">' +
               (r.aiData.consigna ? '<p class="muted small">📋 ' + esc(r.aiData.consigna) + "</p>" : "") +
-              (r.aiData.comentario ? "<p>🤖 " + esc(r.aiData.comentario) + "</p>" : "") +
+              (r.aiData.comentario ? "<p>🤖 " + mk(DV ? DV.plain(r.aiData.comentario, w.week) : r.aiData.comentario) + "</p>" : "") +
               (r.aiData.corregido ? '<p class="muted small">Versión corregida:</p><p class="model it">' + esc(r.aiData.corregido) + "</p>" : "") +
-              (r.aiMeta ? modelLine(r.aiMeta.first, r.aiMeta.review) : "") +
+              (r.cached ? '<p class="muted small modelline">IA: ' + (r.cached === "texto" ? "este texto ya estaba corregido" : "cada oración ya estaba corregida") + " (guardado en el teléfono, sin volver a preguntar).</p>"
+                : r.aiMeta ? modelLine(r.aiMeta.first, r.aiMeta.review) : "") +
             "</div>" : "") +
         (r.ai === "error" ? '<p class="muted small">⚠️ No pude usar la IA (' + esc(r.aiErr || "") + "). " +
               (/clave|401|403/.test(r.aiErr || "") ? "Revisá las claves en " + UI.me + ". " : "") +
@@ -5055,17 +6446,21 @@
 
   function deliverScrivi(w, text, r) {
     var before = doneCount(w), first = !(state.scritti || {})[w.week];
-    var hard = r.findings.filter(function (f) { return !f.soft; });
+    var hard = r.findings.filter(function (f) { return !f.soft && !f.minor && !f.conflict; });
     if (!state.scritti) state.scritti = {};
     state.scritti[w.week] = { t: text.slice(0, 4000), at: Date.now(), n: r.words, errs: hard.length };
     if (state.scrittiDraft) delete state.scrittiDraft[w.week];
-    // The mistakes go to the error profile, like any other answer.
-    var toks = Scrivi.toks(text);
-    hard.forEach(function (f) {
-      var tk = toks[f.i] || {};
-      recordError({ cat: f.cat, target: f.msg.replace(/\*/g, "").slice(0, 80) }, tk.o || "");
-    });
-    var xp = first ? 40 + Math.min(40, Math.floor(r.words / 5)) + (hard.length ? 0 : 20) : 10;
+    // The mistakes go to the error profile, like any other answer: what was
+    // written, the correction and why (the common error object).
+    var task = Scrivi.TASKS[w.week] || {};
+    if (window.Errores) Errores.recordFindings(state, hard, text, { registro: task.reg || null });
+    else {
+      var toks = Scrivi.toks(text);
+      hard.forEach(function (f) { var tk = toks[f.i] || {}; recordError({ cat: f.cat, target: f.good || "", explain: f.why || f.msg }, f.bad || tk.o || ""); });
+    }
+    // by the word (with a cap), by each structure asked and met, and clean (Engine.xpText)
+    var xp = first ? (Engine.xpText ? Engine.xpText(r.words, (r.reqs || []).filter(function (q) { return q.ok && q.id; }).length, !hard.length)
+                                    : 40 + Math.min(40, Math.floor(r.words / 5)) + (hard.length ? 0 : 20)) : 10;
     gain(xp);
     Engine.addStrand(state, "output", xp);
     if (first) state.written = (state.written || 0) + 1;
@@ -5084,6 +6479,13 @@
   function wireGioco() {
     if (view.screen !== "gioco" || !round) return;
     var it = currentItem();
+    if (round.askPredict && round.predict == null && round.i === 0) {
+      document.querySelectorAll("[data-pred]").forEach(function (b) {
+        b.onclick = function () { round.predict = +b.dataset.pred; render(); savePending(); };
+      });
+      on("#nopred", function () { round.predict = 0; render(); savePending(); });
+      return;
+    }
     // when this item appeared: a right answer after a long time counts as unsure
     var shownKey = round.i + ":" + it.id;
     if (round.shownKey !== shownKey) { round.shownKey = shownKey; round.shownAt = Date.now(); }
@@ -5208,10 +6610,19 @@
     }
 
     if (it.type === "listen") {
-      on("#play1", function () { speak(it.stem, true); });
-      on("#slow", function () { speak(it.stem, true, 0.6); });
+      // a long text (the listening of the boss): sentence by sentence or
+      // turn by turn, two voices for a dialogue; played once by itself
+      var sayIt = function (force, rate) {
+        if (!it.parts) return speak(it.stem, force, rate);
+        if (window.speechSynthesis) speechSynthesis.cancel();
+        it.parts.forEach(function (p) {
+          speak(p[1], force, rate || 0.95, { keep: true, vi: p[0] === "B" ? 1 : 0, pitch: p[0] === "B" ? 1.1 : p[0] === "A" && it.parts.some(function (x) { return x[0] === "B"; }) ? 0.92 : 1 });
+        });
+      };
+      on("#play1", function () { sayIt(true); });
+      on("#slow", function () { sayIt(true, 0.6); });
       on("#peek", function () { $("#peektxt").hidden = false; round.hinted = true; });
-      setTimeout(function () { speak(it.stem); }, 250);
+      if (!it.noauto) setTimeout(function () { sayIt(false); }, 250);
     }
     if (SAY_TYPES[it.type]) {
       on("#play1", function () { speakItem(it, true); });
@@ -5296,9 +6707,14 @@
         '<div class="diff"><span class="k">mal</span> ' + esc(it.bad) + ' <span class="k">→</span> ' +
         (it.good ? "<b class=\"fix\">" + esc(it.good) + "</b>" : "<i>(se borra)</i>") + "</div></div>";
     }
+    // the error of «Trova l'errore» as it is: the wrong words, the right ones, the why
+    var fixErr = function () {
+      return window.Errores ? Errores.make({ cat: it.cat, mal: it.bad, bien: it.good == null ? null : it.good, regla: it.note || "",
+                                             registro: "formal", label: label }) : { cat: it.cat, target: it.answer };
+    };
     function reveal() {
       markBad("missed");
-      recordError({ cat: it.cat, target: it.answer }, it.stem);
+      recordError(fixErr(), it.stem);
       settle("sbagliato", "", fixHtml());
     }
     function askFix() {
@@ -5317,7 +6733,7 @@
         // Other corrections that are just as right (fra/tra, para/pra…).
         var goods = [it.good].concat(it.goodAlt || []).filter(Boolean);
         var right = it.good === "" ? val === "" : window.Diagnosi &&
-          Diagnosi.diagnose(val, goods).verdict === Engine.VERDICT.RIGHT;
+          Diagnosi.diagnose(val, goods, { registro: "formal" }).verdict === Engine.VERDICT.RIGHT;
         if (right) {
           if (tries) markFixed(it.cat);
           settle(tries ? "quasi" : "giusto", val, fixHtml(),
@@ -5326,8 +6742,8 @@
         }
         tries++;
         if (tries === 1) {
-          recordError({ cat: it.cat, target: it.answer }, it.stem);
-          var d = it.good && window.Diagnosi ? Diagnosi.diagnose(val || "—", [it.good]) : null;
+          recordError(fixErr(), it.stem);
+          var d = it.good && window.Diagnosi ? Diagnosi.diagnose(val || "—", [it.good], { registro: "formal" }) : null;
           if (d && DV) DV.tidy(d);
           var closeTo = !DV || !it.good || !val || DV.near(val, goods, d);
           $("#fb").innerHTML = '<div class="feedback prompt"><div class="verdict">' + (closeTo ? "🔎 Casi." : "🔎 Todavía no.") + "</div><p>" +
@@ -5373,20 +6789,43 @@
     });
     on("#aicopy", function () {
       var txt = (state.aiNotes || []).map(function (n) {
-        return "[" + n.id + "] " + (n.prompt || "") + " | " + (n.stem || "") + " | yo: " + (n.given || "") + " | app: " + (n.answer || "") + " | IA: " + (n.ai || "");
+        return "[" + n.id + "] " + (n.kind ? "(" + n.kind + ") " : "") + (n.prompt || "") + " | " + (n.stem || "") + " | yo: " + (n.given || "") +
+          " | app: " + (n.answer || "") + (n.app ? " | la app dijo: " + n.app : "") + " | IA: " + (n.ai || "");
+      }).join("\n");
+      // what the AI already explained (the cache), so it can be reviewed and turned into content
+      var cached = window.Errores ? Errores.cacheAll().filter(function (c) { return c.kind === "hints" || c.kind === "explain" || c.kind === "judge"; }) : [];
+      if (cached.length) txt += "\n\n# Explicaciones de la IA guardadas (" + cached.length + ")\n" + cached.map(function (c) {
+        var v = c.v || {};
+        return "[" + c.kind + "] " + (c.q || "") + " | " + (v.explicacion || v.pista1 || "") +
+          (v.correcta != null ? " | correcta: " + v.correcta + ", mismo sentido: " + v.mismo_sentido : "") +
+          (v.tambien_correcta ? " | también correcta" : "");
       }).join("\n");
       var done = function () { toast("Copiadas " + (state.aiNotes || []).length + " correcciones."); };
       if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done, function () { prompt("Copiá:", txt); });
       else prompt("Copiá:", txt);
     });
     on("#aiclear", function () { state.aiNotes = []; persist(); render(); });
-    var goal = $("#goal");
-    if (goal) goal.onchange = function () {
-      state.goal = +goal.value;
+    // The goal in minutes and days (progreso.js); the xp goal follows.
+    var rmin = $("#ritmo-min"), rdays = $("#ritmo-days");
+    var setR = function () {
+      if (!window.Progreso) return;
+      Progreso.setRitmo(state, { min: +rmin.value, days: +rdays.value });
       persist();
       renderHeader();
-      toast("Meta: " + state.goal + " xp por día");
+      toast("Meta: " + rmin.value + " min por día, " + rdays.value + " días por semana. " + Progreso.etaLine(state).replace(/<[^>]+>/g, ""), 3500);
+      render();
     };
+    if (rmin) rmin.onchange = setR;
+    if (rdays) rdays.onchange = setR;
+    on("#meta-save", function () {
+      var wk = Math.round(+$("#meta-week").value), d = $("#meta-date").value;
+      if (!(wk >= 2 && wk <= 52) || !/^\d{4}-\d{2}-\d{2}$/.test(d)) { toast("Elegí una semana (2 a 52) y una fecha."); return; }
+      var p = d.split("-");
+      Progreso.setRitmo(state, { week: wk, date: +p[0] + "-" + (+p[1]) + "-" + (+p[2]) });
+      persist();
+      render();
+    });
+    on("#meta-clear", function () { Progreso.setRitmo(state, { week: null, date: null }); persist(); render(); });
     var themeSel = $("#theme-set");
     if (themeSel) themeSel.onchange = function () {
       state.theme = themeSel.value;
@@ -5420,10 +6859,11 @@
       toast("Abrí el archivo para agregarlo a tu calendario.", 3000);
     });
     on("#export", exportSave);
-    on("#switchlang", function () { if (window.Boot) Boot.switchTo(UI.switchCode); });
+    on("#switchlang", function () { flushPersist(); if (window.Boot) Boot.switchTo(UI.switchCode); });
     on("#import", function () { $("#importfile").click(); });
     var file = $("#importfile");
     if (file) file.onchange = function () { if (file.files[0]) importSave(file.files[0]); };
+    wireNube();
 
     var pm = $("#persistmsg");
     if (pm && navigator.storage && navigator.storage.persisted) {
@@ -5443,6 +6883,34 @@
       toast("Progreso borrado.");
     });
   }
+
+  /* Every box where the learner writes in the language of the game says
+     so (lang = the package's voice tag, LANG.tts): the keyboard can come up in that language
+     (Gboard and other keyboards on Android take the field's language as a
+     hint; on an iPhone the page cannot choose the keyboard).  The boxes in
+     Spanish (your goal, the keys, the searches) say lang="es". */
+  var SPANISH_BOXES = { idealtext: 1, refq: 1, aikey: 1, gemkey: 1 };
+  function langBoxes(root0) {
+    (root0 || document).querySelectorAll("textarea, input").forEach(function (el) {
+      if (el.hasAttribute("lang")) return;
+      var type = (el.getAttribute("type") || "text").toLowerCase();
+      if (type !== "text" && type !== "search" && el.tagName !== "TEXTAREA") return;
+      el.setAttribute("lang", SPANISH_BOXES[el.id] || el.dataset.es ? "es" : LG.tts);
+    });
+  }
+  if (window.MutationObserver) {
+    new MutationObserver(function (list) {
+      list.forEach(function (m) { m.addedNodes.forEach(function (n) { if (n.nodeType === 1) langBoxes(n.parentNode || document); }); });
+    }).observe(document.body, { childList: true, subtree: true });
+  }
+
+  // Words and chips that act like buttons (span role="button"): Enter and
+  // the space bar work on them as on a button.
+  document.addEventListener("keydown", function (e) {
+    var t = e.target;
+    if (!t || t.tagName === "BUTTON" || t.getAttribute("role") !== "button") return;
+    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); t.click(); }
+  });
 
   /* ------------------------------------------------------------------ arranque */
 
@@ -5466,17 +6934,16 @@
       navigator.serviceWorker.ready.then(function (reg) {
         if (reg.active) reg.active.postMessage({ keep: LG.code });
       }).catch(function () { /* */ });
-      // A new version took over: reload once so the screen runs it too
-      // (outside a round, so no answer is lost).
-      var hadController = !!navigator.serviceWorker.controller, reloading = false;
+      // A new version took over.  On a screen with nothing only in memory
+      // (Oggi, the path, a list), reload at once and come back to the same
+      // place; anywhere else (a round, a role-play, a draft, the exam, a
+      // book), a notice to update when the learner wants.
+      var hadController = !!navigator.serviceWorker.controller;
       navigator.serviceWorker.addEventListener("controllerchange", function () {
         if (!hadController || reloading) return;
-        var go = function () {
-          if (["gioco", "lampo", "lezione", "lettura", "tramo-asc", "tramo-scr"].indexOf(view.screen) >= 0) { setTimeout(go, 5000); return; }
-          reloading = true;
-          location.reload();
-        };
-        go();
+        updateReady = true;
+        if (safeToReload()) reloadHere();
+        else showUpdateBar();
       });
     });
   }
@@ -5485,14 +6952,54 @@
     navigator.storage.persist().catch(function () { /* */ });
   }
 
-  // Coming back to the app after a while: refresh the header (new day, streak).
+  var updateReady = false;
+  var SAFE_SCREENS = { oggi: 1, percorso: 1, briefing: 1, io: 1, allena: 1, leggi: 1 };
+  function safeToReload() {
+    var el = document.activeElement;
+    return !!SAFE_SCREENS[view.screen] && !(el && /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName));
+  }
+  // Reload and come back to the same screen and scroll (sessionStorage).
+  function reloadHere() {
+    reloading = true;
+    flushPersist();
+    try { sessionStorage.setItem(LG.storage + ".view", JSON.stringify({ tab: view.tab, screen: view.screen, week: view.week, y: window.scrollY, at: Date.now() })); } catch (e) { /* */ }
+    location.reload();
+  }
+  var reloading = false;
+  function showUpdateBar() {
+    if (document.getElementById("updbar")) return;
+    var b = document.createElement("div");
+    b.id = "updbar";
+    b.className = "updbar";
+    b.setAttribute("role", "status");
+    b.innerHTML = '<span>Hay una versión nueva.</span><button class="btn" id="updgo">Actualizar</button>';
+    document.body.appendChild(b);
+    document.getElementById("updgo").onclick = reloadHere;
+  }
+  function restoreView() {
+    try {
+      var v = JSON.parse(sessionStorage.getItem(LG.storage + ".view") || "null");
+      sessionStorage.removeItem(LG.storage + ".view");
+      if (!v || Date.now() - v.at > 60000 || !SAFE_SCREENS[v.screen]) return false;
+      view.tab = v.tab; view.screen = v.screen; view.week = v.week || view.week;
+      render();
+      setTimeout(function () { window.scrollTo(0, v.y || 0); }, 0);
+      return true;
+    } catch (e) { return false; }
+  }
+
+  // Coming back to the app after a while: refresh the header (new day, the
+  // streak as it really is).
   document.addEventListener("visibilitychange", function () {
     if (!document.hidden && course) {
+      if (Engine.checkStreak(state).status === "lost") persist();
       renderHeader();
       if (view.screen === "oggi") render();
+      if (updateReady && safeToReload()) reloadHere();
     }
-    if (document.hidden && course) updateBadge();
+    if (document.hidden && course) { flushPersist(); updateBadge(); nubeAuto(); }
   });
+  window.addEventListener("pagehide", function () { flushPersist(); });
   // The app icon shows how many cards are due (Badging API; a passive
   // reminder that needs no server and no permission on Android).
   function updateBadge() {
@@ -5520,6 +7027,8 @@
       round: function () { return round; },
       // start a round of a given week (the exploration and the smoke test)
       start: function (kind, arg, week) { if (week) view.week = week; startRound(kind, arg); },
+      // the C1 exam with a version (the smoke test)
+      esame: function (ver) { esameOpen(ver); },
       // play these items (ids of the course or of the lab, or items): the
       // correction of one exercise, answered on purpose
       play: function (list, week) {
@@ -5538,8 +7047,23 @@
     state: function () { return state; }, persist: persist,
     course: function () { return course; }, glossary: function () { return glossario; },
     fx: function (ok) { if (ok) fx.right(); else fx.wrong(); gain(ok ? 3 : 1); },
-    open: function () { view.screen = "gramatica"; render(); window.scrollTo(0, 0); },
-    back: function () { go(view.tab || "io"); }
+    open: function () { if (view.screen !== "gramatica") view.gramFrom = view.screen; view.screen = "gramatica"; render(); window.scrollTo(0, 0); },
+    back: function () {
+      if (view.gramFrom === "consultar") { view.gramFrom = null; view.screen = "consultar"; render(); window.scrollTo(0, 0); }
+      else go(view.tab || "io");
+    }
+  });
+  // Las capas (capas.js): «Consultar» y las misiones de la Biblioteca y de Tres vueltas.
+  if (window.Capas) Capas.attach({
+    state: function () { return state; }, persist: persist, speak: speak, glossary: function () { return glossario; },
+    show: function (sc) { view.screen = sc; render(); window.scrollTo(0, 0); },
+    back: function () { go(view.tab || "frasi"); },
+    refresh: function () { if (course && ["briefing", "percorso", "leggi"].indexOf(view.screen) >= 0) render(); },
+    openBook: function (id, ch) { if (window.Biblioteca) Biblioteca.openChapter(view, id, ch); },
+    tre: function (week) {
+      if (!window.EscrituraPlus) return;
+      view.week = week; EscrituraPlus.start("tre", week); view.screen = "eplus"; render(); window.scrollTo(0, 0);
+    }
   });
   // Escritura guiada (escritos.js): lo que necesita de la app.
   if (window.Escritos) Escritos.attach({
@@ -5556,9 +7080,93 @@
     gain: function (n, strand) { gain(n); if (strand && n) Engine.addStrand(state, strand, n); renderHeader(); },
     aiKey: aiKey, aiKeys: aiKeys, ui: function () { return UI; }, langName: function () { return UI.langEs; },
     screen: function () { return view.screen; },
+    // the task's errors go to the profile (the common error object of errores.js)
+    recordFindings: function (findings, text, reg) {
+      if (!window.Errores) return;
+      if (Errores.recordFindings(state, findings, text, { registro: reg || null }).length) persist();
+    },
+    recordRows: function (rows, reg) {
+      if (!window.Errores) return;
+      (rows || []).forEach(function (e) { Errores.record(state, Errores.fromRow(e[0], e[1], "", "ia", { registro: reg || null })); });
+      persist();
+    },
     show: function (sc) { view.screen = sc; render(); window.scrollTo(0, 0); },
     toWeek: function () { view.tab = "percorso"; view.screen = "briefing"; render(); window.scrollTo(0, 0); },
     openReading: function (id) { view.ep = id; view.epFrom = "briefing"; view.screen = "lettura"; render(); window.scrollTo(0, 0); }
+  });
+
+  // «Hoy», el primer arranque y el después del curso (inicio.js, plan.js):
+  // lo que necesitan de la app.
+  function showScreen(sc) { view.screen = sc; render(); window.scrollTo(0, 0); }
+  function roundFromHoy() { if (view.screen === "gioco" && round) { round.from = "hoy"; savePending(); } }
+  if (window.Inicio) Inicio.attach({
+    state: function () { return state; }, persist: persist, render: render, go: go, esc: esc, toast: toast,
+    ui: function () { return UI; }, lg: function () { return LG; }, course: function () { return course; },
+    week: function () { return course.weeks[Math.min(state.unlocked, 52) - 1]; },
+    nextMission: nextMission, missions: weekPlan,
+    missionDone: function (kind, arg, wk) {
+      var w = course.weeks[wk - 1];
+      return !!w && weekPlan(w).some(function (m) { return m.kind === kind && String(m.arg == null ? "" : m.arg) === String(arg == null ? "" : arg) && m.done; });
+    },
+    due: function () { return Drills.dueCount(course, state, itemMap); },
+    words: function (id) { var ep = Letture.byId(id); return ep ? Letture.allTokens(ep).length : 0; },
+    readingsDone: function () { return Object.keys(state.letture || {}).filter(function (id) { return Letture.byId(id); }).length; },
+    canTranslate: function () { return Banca.loaded() && (state.unlocked || 1) >= (Banca.TR_WEEK || 99); },
+    canPausa: function () { return Object.keys(state.read || {}).length > 0 || Object.keys(state.readSess || {}).length > 0 || state.unlocked > 1; },
+    maint: function () {
+      var t = state.tramo || {}, scrAt = 0, asc = [], scr = [];
+      Object.keys(t.scr || {}).forEach(function (k) { scrAt = Math.max(scrAt, (t.scr[k] || {}).at || 0); });
+      if (window.Tramo) course.weeks.forEach(function (w) {
+        Tramo.missions(w, state).forEach(function (m) {
+          (m.kind === "tr-asc" ? asc : scr).push({ week: w.week, title: m.title.replace(/^[^:]*:\s*/, "") });
+        });
+      });
+      return { reads: Letture.ofSeries("lunga").map(function (ep) { return { id: ep.id, title: ep.title, words: Letture.allTokens(ep).length }; }),
+               asc: asc, scr: scr, lastTask: scrAt, lastSim: state.simAt || state.phaseAt || 0 };
+    },
+    startRound: function (kind, arg) { view.week = Math.min(state.unlocked, 52); startRound(kind, arg); roundFromHoy(); },
+    startMission: function (kind, arg, wk) {
+      view.week = wk;
+      if (kind === "ep") { view.ep = arg; view.epFrom = "hoy"; view.tab = "oggi"; showScreen("lettura"); return; }
+      goMission(kind, arg);
+      if (view.screen === "gioco") roundFromHoy(); else view.tab = "percorso";
+      renderNav();
+    },
+    openReading: function (id) { view.ep = id; view.epFrom = "hoy"; showScreen("lettura"); },
+    openTramo: function (kind, arg) { view.tab = "leggi"; Tramo.go(kind, arg, "leggi"); },
+    openBiblio: function () { view.tab = "leggi"; showScreen("biblioteca"); },
+    // the exam screen; with a version ("A", "v2"…), a mock exam with it
+    openExam: function (ver) { esameOpen(ver); }, examNext: esameNext, examVersions: esameVersions,
+    playFacile: function () {
+      var ids = Object.keys(state.letture || {}).filter(function (id) { return Letture.byId(id); });
+      if (ids.length) playLibrary(Drills.shuffle(ids));
+    },
+    show: showScreen, ubicacion: startUbicacion, exam: esameResult,
+    ics: function (t) { download(new Blob([reminderIcs(t)], { type: "text/calendar" }), UI.icsFile); toast("Abrí el archivo para agregarlo a tu calendario.", 3000); },
+    share: shareBlob
+  });
+  // Tu progreso (progreso.js): la pantalla, y el reloj de estudio.
+  if (window.Progreso) Progreso.attach({
+    state: function () { return state; }, persist: persist, esc: esc, course: function () { return course; },
+    show: showScreen, back: function () { go(view.tab || "io"); },
+    screen: function () { return view.screen; }, roundKind: function () { return round ? round.kind : ""; },
+    listening: function () { return !!(window.speechSynthesis && speechSynthesis.speaking) || !!karaoke; },
+    coverage: function () { return window.Freq && Freq.loaded() ? Freq.coverage(knownWords()) : null; },
+    words: function (id) { var ep = Letture.byId(id); return ep ? Letture.allTokens(ep).length : 0; },
+    label: function (c) { return (window.Diagnosi && Diagnosi.LABEL[c]) || c; },
+    cards: progresoCards
+  });
+
+  // Fuera de la app (fuera.js): la ficha de la semana y los minutos de afuera.
+  if (window.Fuera) Fuera.attach({
+    state: function () { return state; }, persist: persist, render: render, go: go, toast: toast, mk: mk,
+    lexicon: scriviLexicon, ui: function () { return UI; },
+    gain: function (n, strand) { gain(n); if (strand && n) Engine.addStrand(state, strand, n); renderHeader(); },
+    recordFindings: function (findings, text) {
+      if (window.Errores && Errores.recordFindings(state, findings, text, {}).length) persist();
+    },
+    show: showScreen,
+    toWeek: function () { view.tab = "percorso"; view.screen = "briefing"; render(); window.scrollTo(0, 0); }
   });
 
   // La Biblioteca (biblioteca.js): libros enteros, con el lector y el input.
@@ -5570,17 +7178,49 @@
                playing: function () { return !!karaoke; } }
   });
 
-  // The glossary is optional too: without it words are just not tappable.
-  fetch(DATA("glossario.json"))
-    .then(function (r) { return r.ok ? r.json() : null; })
-    .then(function (g) { glossario = g; })
-    .catch(function () { /* sin glosario */ });
+  /* Something in the save breaks the screen: never a dead end.  The
+     learner can download the save as it is (to send it or restore it
+     later), try again, or open Oggi with the save untouched. */
+  function rescue(err) {
+    var raw = "";
+    try { raw = localStorage.getItem(LG.storage + ".save.v1") || ""; } catch (e) { /* */ }
+    app().innerHTML = '<div class="card"><h2>Algo de tu progreso no se pudo mostrar</h2>' +
+      "<p>Tu progreso sigue guardado en el teléfono. Bajá una copia antes de hacer cualquier otra cosa: sirve para restaurarla o para mandarla si hay que revisarla.</p>" +
+      '<div class="row"><button class="btn" id="rsdl">💾 Descargar mis datos</button><button class="btn ghost" id="rsagain">Reintentar</button></div>' +
+      '<p class="muted small">' + esc(String(err && err.message || err)) + "</p></div>";
+    on("#rsdl", function () {
+      download(new Blob([JSON.stringify({ app: "c1", lang: LG.code, brand: LG.brand, v: APP_VERSION, at: new Date().toISOString(), raw: raw })], { type: "application/json" }),
+               UI.exportFile + stamp() + "-rescate.json");
+    });
+    on("#rsagain", function () { location.reload(); });
+  }
 
-  // The frequency layer is optional too: without it, no coverage meter.
-  fetch(DATA("frequenza.json"))
-    .then(function (r) { return r.ok ? r.json() : null; })
-    .then(function (f) { if (f && window.Freq) { Freq.load(f); if (view.screen === "io" || view.screen === "oggi") render(); } })
-    .catch(function () { /* sin frecuencias */ });
+  /* The glossary and the frequency layer are optional and not needed for
+     the first screen (a million bytes between the two): they are asked
+     for once the first screen is drawn, so the course and the bank get the
+     whole connection first. */
+  var extrasAsked = false;
+  function loadExtras() {
+    if (extrasAsked) return;
+    extrasAsked = true;
+    // The glossary: without it words are just not tappable.
+    fetch(DATA("glossario.json"))
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (g) {
+        glossario = g;
+        // every word of the glossary exists for the diagnosis (not «no es una palabra»)
+        if (g && window.Diagnosi && typeof Diagnosi.addWords === "function") { try { Diagnosi.addWords(Object.keys(g)); } catch (e) { /* */ } }
+      })
+      .catch(function () { /* sin glosario */ });
+    // The frequency layer: without it, no coverage meter.
+    fetch(DATA("frequenza.json"))
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (f) { if (f && window.Freq) { Freq.load(f); if (view.screen === "io" || view.screen === "oggi") render(); } })
+      .catch(function () { /* sin frecuencias */ });
+  }
+  function loadExtrasSoon() {
+    if (window.requestIdleCallback) window.requestIdleCallback(loadExtras, { timeout: 1500 }); else setTimeout(loadExtras, 300);
+  }
 
   // The bank is optional: without it the app still works, just smaller.
   var bankP = fetch(DATA("bank.json"))
@@ -5596,17 +7236,26 @@
     .then(function (data) { return bankP.then(function () { return data; }); })
     .then(function (data) {
       course = data;
-      if (window.Mapas) Mapas.install(course);
-      itemMap = Drills.itemsById(course);
-      registerStories();
-      view.week = Math.min(state.unlocked, 52);
-      if (location.hash === "#pausa") { renderHeader(); startRound("pausa"); return; }
-      if (location.hash === "#micro") { renderHeader(); startRound("micro"); return; }
-      updateBadge();
-      renderHeader();
-      render();
-    })
+      try {
+        if (window.Mapas) Mapas.install(course);
+        itemMap = Drills.itemsById(course);
+        registerStories();
+        view.week = Math.min(state.unlocked, 52);
+        if (Engine.checkStreak(state).status === "lost") persist();
+        // A new learner: the three screens after the language picker (inicio.js).
+        if (window.Inicio && Inicio.boot(view)) { renderHeader(); render(); loadExtrasSoon(); return; }
+        if (location.hash === "#pausa") { renderHeader(); startRound("pausa"); loadExtrasSoon(); return; }
+        if (location.hash === "#micro") { renderHeader(); startRound("micro"); loadExtrasSoon(); return; }
+        updateBadge();
+        renderHeader();
+        if (!restoreView()) render();
+        loadExtrasSoon();
+        // «Hoy» from the app icon or the calendar reminder: the plan in sight.
+        if (location.hash === "#hoy") { var hp = document.getElementById("hoyplan"); if (hp && hp.scrollIntoView) hp.scrollIntoView({ block: "start" }); }
+      } catch (err) { rescue(err); }
+    }, function (e) { throw e; })
     .catch(function (e) {
+      if (course) return rescue(e);
       app().innerHTML = '<div class="card"><h2>No se pudo cargar el curso</h2>' +
         "<p>La primera vez la app necesita internet para descargarse; después funciona sin conexión. " +
         "Revisá la conexión y probá de nuevo.</p>" +

@@ -100,7 +100,7 @@ TIPS = {
     "compito": "*I compiti* = la tarea escolar (en plural). *Fare i compiti* = hacer la tarea.",
     "aereo": "Es *l'aereo*, plural *gli aerei*. *Prendere l'aereo*; en avión se dice *in aereo*.",
     "domenica": "Sin artículo es «este domingo»; *la domenica* es «los domingos». Minúscula.",
-    "forse": "Va con indicativo, no con subjuntivo: *forse viene* (quizás venga).",
+    "forse": "Va con indicativo, no con congiuntivo: *forse viene* (quizás venga).",
     "penna": "Es la birome o lapicera; «lápiz» es *matita*. *Penna* también es «pluma» de ave.",
     "indirizzo": "Para mail también: *indirizzo email*. Pregunta típica: *Qual è il tuo indirizzo?*",
     "gelato": "El que vende helado es *la gelateria*. Pedido: *un cono / una coppetta con due gusti*.",
@@ -108,7 +108,7 @@ TIPS = {
     # --- semana 9 ---
     "bere": "Se conjuga desde *bev-*: *bevo, bevi, beve, beviamo, bevete, bevono*; participio *bevuto*. *Qualcosa da bere* = algo para tomar.",
     "restare": "Pasado (semana 11) con *essere*: *sono restato*. *Restare a casa*; *mi resta poco tempo* = me queda poco tiempo.",
-    "sembrare": "Funciona como «parecer»: *mi sembra giusto*. Con infinitivo, sin preposición: *non sembra disposta*; *sembra che* + subjuntivo (semana 25).",
+    "sembrare": "Funciona como «parecer»: *mi sembra giusto*. Con infinitivo, sin preposición: *non sembra disposta*; *sembra che* + congiuntivo (semana 25).",
     "imparare": "Con infinitivo pide *a*: *imparo a guidare*. Idiomas con artículo: *imparare l'italiano*.",
     "dispiacere": "Se usa como «gustar»: *mi dispiace* = lo siento. *Ti dispiace se...?* = ¿te molesta si...?",
     "riuscire": "Con infinitivo pide *a*: *non riesco a dormire*. Se conjuga como *uscire*: *riesco, riesci*. Pasado con *essere*.",
@@ -198,10 +198,10 @@ TIPS = {
     "parola": "Plural *parole*. *Parola d'onore*; *in altre parole* = en otras palabras.",
     "cappotto": "Es el abrigo largo de invierno. *Mettersi il cappotto*.",
     "computer": "Invariable y masculino: *il computer*, *i computer*. Se pronuncia a la inglesa.",
-    "peccato": "*Che peccato!* o solo *Peccato!* = ¡qué lástima!. Con frase: *peccato che* + subjuntivo. Literal es «pecado».",
+    "peccato": "*Che peccato!* o solo *Peccato!* = ¡qué lástima!. Con frase: *peccato che* + congiuntivo. Literal es «pecado».",
     # --- semana 18 ---
     "spiegare": "Se explica algo *a* alguien: *spiegami*, *gli spiego*. En *tu spieghi* la *h* mantiene el sonido «g».",
-    "magari": "Solo, como respuesta, es «¡ojalá!». Con subjuntivo imperfecto (semana 30) expresa deseo: *magari fosse vero!*. En la charla también es «quizás»: *magari vengo*.",
+    "magari": "Solo, como respuesta, es «¡ojalá!». Con congiuntivo imperfetto (semana 30) expresa deseo: *magari fosse vero!*. En la charla también es «quizás»: *magari vengo*.",
     "successo": "Falso amigo: es «éxito». «Suceso» se dice *avvenimento*. Pero *è successo qualcosa* = pasó algo (de *succedere*).",
     "figurati": "Imperativo de *figurarsi*: responde a un gracias o una disculpa, como «¡de nada, por favor!». Con usted: *si figuri*.",
     "carità": "*Per carità!* rechaza con fuerza, como «¡ni loco!, ¡Dios me libre!». Invariable: *la carità*.",
@@ -213,7 +213,7 @@ TIPS = {
     "pasticcio": "Coloquial: un lío o un enchastre. *Che pasticcio!*, *mettersi nei pasticci* = meterse en líos.",
     "sbadato": "Es alguien distraído por costumbre. *Come sei sbadato!* La *s-* inicial niega o intensifica, como en *sfortunato*.",
     # --- semana 19 ---
-    "sicuro": "*Di sicuro* = seguro. *Essere sicuro di* + infinitivo o *che* + indicativo/subjuntivo: *sono sicuro che viene*.",
+    "sicuro": "*Di sicuro* = seguro. *Essere sicuro di* + infinitivo o *che* + indicativo/congiuntivo: *sono sicuro che viene*.",
     "almeno": "Una sola palabra: *almeno*. *Avrà almeno sessant'anni*: el futuro aquí es de suposición.",
     "benzina": "*Fare benzina* = cargar nafta. *Rimanere senza benzina*. El que atiende es *il benzinaio*.",
     "sciopero": "Esdrújula: *sciòpero*. *Fare sciopero* o *essere in sciopero*. Muy frecuente en noticias de transporte.",
@@ -227,7 +227,7 @@ TIPS = {
     "affolleranno": "Futuro de *affollare* (llenar de gente), de *folla* (multitud). El futuro italiano se arma sobre el infinitivo: *affoll-erò, -erai, -erà, -eranno*.",
     # --- semana 20 ---
     "caldo": "Es adjetivo (*il caffè è caldo*) y sustantivo: *fa caldo* (hace calor), *ho caldo* (tengo calor).",
-    "riposare": "Se usa solo o pronominal: *riposare* o *riposarsi*. *Dovresti riposare di più*: condicional para aconsejar.",
+    "riposare": "Se usa solo o pronominal: *riposare* o *riposarsi*. *Dovresti riposare di più*: condizionale para aconsejar.",
     "ormai": "Marca que algo ya es un hecho o es tarde: *ormai è tardi*. Suele ir al final o al principio.",
     "zia": "Plural *zie*. Con posesivo en singular, sin artículo: *mia zia*.",
     "davvero": "Solo es «¿en serio?». En la frase refuerza: *è davvero bravo* (es realmente bueno).",
@@ -278,13 +278,13 @@ TIPS = {
     "birra": "*Una birra alla spina* = chopp. Comparación: *più caro della birra* (*di* + artículo).",
     "prete": "Es el sacerdote. El título es *don*: *don Mario*.",
     # --- semana 24 ---
-    "dubitare": "Pide *che* + subjuntivo: *dubito che arrivi*. También *dubitare di qualcosa*.",
+    "dubitare": "Pide *che* + congiuntivo: *dubito che arrivi*. También *dubitare di qualcosa*.",
     "accomodarsi": "Invita a pasar o sentarse: *si accomodi!* (usted), *accomodati!* (vos).",
     "cinese": "Termina en *-e*: sirve para los dos géneros. Idiomas y gentilicios van en minúscula: *il cinese*, *una ragazza cinese*.",
     # --- semana 25 ---
     "lamentarsi": "Pronominal y pide *di*: *si lamenta del rumore*. *Non fa che lamentarsi* = no hace más que quejarse.",
     "giusto": "Además de «justo», es «correcto»: *la risposta giusta*. *Giusto!* = ¡exacto!",
-    "lieti": "Plural de *lieto*, formal. *Siamo lieti che* + subjuntivo. Fórmula: *molto lieto* al presentarse.",
+    "lieti": "Plural de *lieto*, formal. *Siamo lieti che* + congiuntivo. Fórmula: *molto lieto* al presentarse.",
     # --- semana 27 ---
     "guidare": "Es manejar un vehículo: *guidare la macchina*. *La patente di guida* = el registro.",
     "raramente": "Adverbio de *raro* + *-mente*: sinónimo de *di rado*.",
@@ -297,7 +297,7 @@ TIPS = {
     "soffiare": "*Il vento soffia*. *Soffiarsi il naso* = sonarse la nariz.",
     "cattivo": "Malo de carácter o de sabor: *un uomo cattivo*, *un odore cattivo*. «Malo» de calidad suele ser *brutto* o *scarso*.",
     # --- semana 28 ---
-    "comunque": "Solo, al final, es «igual, de todos modos»: *usciamo comunque*. Al principio, «en fin, de todas formas». Con subjuntivo: *comunque vada* = pase lo que pase.",
+    "comunque": "Solo, al final, es «igual, de todos modos»: *usciamo comunque*. Al principio, «en fin, de todas formas». Con congiuntivo: *comunque vada* = pase lo que pase.",
     "siccome": "Causal que va al principio de la oración, como nuestro «como»: *siccome piove, restiamo*. Si la causa va después, se usa *perché*.",
     "largo": "Falso amigo: *largo* es «ancho»; «largo» es *lungo*. *Stare alla larga* = mantenerse lejos.",
     "chiudere": "Participio irregular: *chiuso*. *Chiudere a chiave* = cerrar con llave.",
@@ -313,7 +313,7 @@ TIPS = {
     "promosso": "Con *essere*: *è stato promosso*. Sirve para aprobar en la escuela y para un ascenso en el trabajo.",
     "obiettato": "Participio de *obiettare* (objetar). *Obiettare che* + indicativo; el sustantivo es *l'obiezione*.",
     # --- semana 29 ---
-    "sorpreso": "Participio de *sorprendere*. *Sono sorpreso che* + subjuntivo: *sono sorpreso che tu sia qui*.",
+    "sorpreso": "Participio de *sorprendere*. *Sono sorpreso che* + congiuntivo: *sono sorpreso che tu sia qui*.",
     "rendere": "Con adjetivo es «volver, hacer»: *mi rende felice*. Participio *reso*. *Rendersi conto* = darse cuenta.",
     # --- semana 30 ---
     "guadagnare": "Es ganar plata o tiempo: *guadagnare bene*. Un partido se gana con *vincere*.",
@@ -331,19 +331,19 @@ TIPS = {
     "assicurare": "*Assicurare a qualcuno che* + indicativo. *Assicurarsi* = asegurarse, y también sacar un seguro.",
     "inviato": "Participio de *inviare*, más formal que *mandare*. Como sustantivo, *l'inviato* es el corresponsal.",
     "bolletta": "Es la factura de un servicio: *la bolletta della luce*, *del gas*. Una factura de compra es *la fattura*.",
-    "convinto": "Participio de *convincere*. *Sono convinto che* + subjuntivo: *sono convinto che abbia ragione*. Para un futuro visto desde el pasado, condicional compuesto: *avrebbe telefonato*.",
+    "convinto": "Participio de *convincere*. *Sono convinto che* + congiuntivo: *sono convinto che abbia ragione*. Para un futuro visto desde el pasado, condizionale passato: *avrebbe telefonato*.",
     "decollo": "Del verbo *decollare* (despegar). Lo contrario es *l'atterraggio*.",
     # --- semana 32 ---
     "fallo": "En el deporte es una falta: *fare fallo*. No es un «fallo» judicial (eso es *sentenza*) ni un error.",
     "genitore": "*I genitori* = los padres (papá y mamá). *Padri* son solo varones.",
     "addirittura": "Enfatiza lo inesperado: «hasta, incluso». Sola, como respuesta: *Addirittura!* = ¡nada menos!",
     "squadra": "Equipo deportivo o de trabajo: *la mia squadra*. Colectivo: el verbo va en singular.",
-    "affinché": "Siempre con subjuntivo: *affinché tu lo legga*. Más formal que *perché* con subjuntivo.",
+    "affinché": "Siempre con congiuntivo: *affinché tu lo legga*. Más formal que *perché* con congiuntivo.",
     # --- semana 33 ---
     "laurearsi": "Pronominal: *mi sono laureato in legge*. La carrera va con *in*.",
     "litigare": "Pide *con*: *ho litigato con mia sorella*. *Litigare* no es litigar en tribunales (eso es *fare causa*).",
     "debito": "Esdrújula: *dèbito*. *Avere un debito con qualcuno*; *essere in debito* = deberle.",
-    "purché": "Condición que pide subjuntivo: *purché tu guidi piano*. Tilde aguda: *-ché*.",
+    "purché": "Condición que pide congiuntivo: *purché tu guidi piano*. Tilde aguda: *-ché*.",
     "barca": "Plural *barche*. *Andare in barca* = navegar. *Barca a vela* = velero.",
     # --- semana 34 ---
     "cui": "Relativo invariable que va después de preposición: *in cui*, *con cui*, *a cui*. Entre artículo y sustantivo es «cuyo»: *la ragazza il cui padre...*",
@@ -360,7 +360,7 @@ TIPS = {
     # --- semana 35 ---
     "chiesa": "Plural *chiese*. *Andare in chiesa*, sin artículo.",
     "migliaio": "Plural irregular femenino: *un migliaio*, *migliaia di persone*. Pide *di*.",
-    "stupire": "Verbo en *-isc-*: *mi stupisce*. Funciona como «gustar» y pide subjuntivo: *mi stupisce che non abbia risposto*.",
+    "stupire": "Verbo en *-isc-*: *mi stupisce*. Funciona como «gustar» y pide congiuntivo: *mi stupisce che non abbia risposto*.",
     "giugno": "Meses en minúscula: *a giugno*, *il 2 giugno* (fiesta de la República).",
     "fuoco": "Plural *fuochi*. *I vigili del fuoco* = los bomberos; *fuochi d'artificio* = fuegos artificiales.",
     "consegnare": "*Consegnare a domicilio* = entregar a domicilio. La entrega es *la consegna*.",
@@ -492,9 +492,9 @@ TIPS = {
     "rumore": "Masculino en *-e*. *Fare rumore*. Con dislocación: *non lo sopporto, quel rumore* (anticipa el objeto).",
     "scattate": "De *scattare*: *scattare una foto* = sacar una foto. El participio concuerda con *le* antepuesto: *le ha scattate*.",
     # --- semana 49 ---
-    "nonostante": "Con sustantivo: *nonostante la pioggia*. Con verbo, *nonostante* + subjuntivo: *nonostante sia tardi*.",
+    "nonostante": "Con sustantivo: *nonostante la pioggia*. Con verbo, *nonostante* + congiuntivo: *nonostante sia tardi*.",
     "tuttavia": "Conector formal de contraste, como *però* pero más escrito. Suele ir al principio con coma.",
-    "benché": "Siempre con subjuntivo: *benché sia tardi*. Sinónimo: *sebbene*.",
+    "benché": "Siempre con congiuntivo: *benché sia tardi*. Sinónimo: *sebbene*.",
     "oltre": "*Oltre a* + sustantivo = además de: *oltre al lavoro*. Solo, es «más allá»: *andare oltre*.",
     "buio": "Adjetivo y sustantivo: *è buio*, *fa buio* (oscurece). *Al buio* = a oscuras.",
     "spiegazione": "Del verbo *spiegare*. *Dare una spiegazione*; femenino en *-zione*: *le spiegazioni*.",
@@ -521,7 +521,7 @@ TIPS = {
     "occhio": "Plural *gli occhi*. *Costare un occhio della testa* = costar un ojo de la cara. *Occhio!* = ¡cuidado!",
     "aceto": "Masculino: *l'aceto*. *Aceto balsamico* (de Módena); *sott'aceto* = en vinagre, en escabeche.",
     # --- semana 51 ---
-    "sebbene": "Siempre con subjuntivo: *sebbene sia tardi*. Igual que *benché*.",
+    "sebbene": "Siempre con congiuntivo: *sebbene sia tardi*. Igual que *benché*.",
     "tradire": "Verbo en *-isc-*: *tradisco*. *Il tradimento* = la traición (también infidelidad).",
     "cantina": "Falso amigo: es el sótano o la bodega donde se guarda el vino, no un bar. *Scendere in cantina*.",
     "ristrutturare": "Refaccionar una casa: *far ristrutturare la cucina* = mandarla a refaccionar (*fare* + infinitivo).",

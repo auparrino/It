@@ -1,16 +1,16 @@
 /* Linter deterministico dell'audit.  Deve finire con 0 problemi.
-   Run: node tools/audit/corpus.js && node tools/audit/lint.js
-   (requisiti: pip install spylls ; cd tools/audit && npm install)
-   Parole sconosciute ma giuste → tools/audit/whitelist.txt (una per riga, # commento). */
+   Run: node tools/it/audit/corpus.js && node tools/it/audit/lint.js
+   (requisiti: pip install spylls ; cd tools/it/audit && npm install)
+   Parole sconosciute ma giuste → tools/it/audit/whitelist.txt (una per riga, # commento). */
 var fs = require("fs");
 var path = require("path");
-var ROOT = path.join(__dirname, "..", "..");
+var pack = require("../../lib/pack.js");
 var OUT = path.join(__dirname, "out");
-var R = function (p) { return require(path.join(ROOT, p)); };
-var Conj = R("docs/js/conjugator.js");
-var Engine = R("docs/js/engine.js");
-var D = R("docs/js/diagnosi.js");
-var bank = R("docs/data/bank.json");
+var ctx = pack("it");
+var Conj = ctx.Conj;
+var Engine = ctx.Engine;
+var D = ctx.Diagnosi;
+var bank = pack.data("it", "bank.json");
 D.init(bank);
 
 var units = fs.readFileSync(path.join(OUT, "corpus.jsonl"), "utf8").trim().split("\n").map(JSON.parse);
@@ -23,7 +23,7 @@ var wlf = path.join(__dirname, "whitelist.txt");
 if (fs.existsSync(wlf)) fs.readFileSync(wlf, "utf8").split("\n").forEach(function (l) {
   l = l.replace(/#.*/, "").trim().toLowerCase(); if (l) WL.add(l);
 });
-// Hunspell (dizionari di LibreOffice) via tools/audit/spell.py, in un colpo solo
+// Hunspell (dizionari di LibreOffice) via tools/it/audit/spell.py, in un colpo solo
 var LEX = new Set();
 var cp = require("child_process");
 var UNKNOWN = null;   // parole che Hunspell non conosce, calcolate dopo aver raccolto tutto
@@ -186,7 +186,7 @@ var res = cp.spawnSync("python3", [path.join(__dirname, "spell.py")], { input: a
 if (res.status !== 0) { console.error(String(res.stderr)); process.exit(2); }
 UNKNOWN = new Set(String(res.stdout).split("\n").filter(Boolean));
 // Only one contrast language: Spanish.  English-only words are flagged, except
-// the loanwords Italian really uses (tools/audit/prestiti.txt).
+// the loanwords Italian really uses (tools/it/audit/prestiti.txt).
 var LOANS = new Set();
 var lf = path.join(__dirname, "prestiti.txt");
 if (fs.existsSync(lf)) fs.readFileSync(lf, "utf8").split("\n").forEach(function (l) {

@@ -44,127 +44,127 @@
     7: { t: "Escribí tu agenda de la semana: qué día, a qué hora, cuánto cuesta. Los números, con letras.", min: 25,
          use: [["horas", 3, "3 horas (às oito, à uma, ao meio-dia…)"], ["numeros", 3, "3 números escritos con letras"]],
          model: "Na segunda-feira, às oito, tenho aula de português. Na quarta, às seis e meia, jogo futevôlei em Ipanema. O show de samba na Lapa é na sexta, dia doze, às dez da noite. O ingresso custa quarenta reais." },
-    8: { t: "Vas a conocer a alguien en una roda de samba: escribí las preguntas que le harías y qué vas a hacer después.", min: 20,
-         use: [["perguntas", 5, "5 preguntas"], ["irInf", 1, "1 ir + infinitivo (vou sair, vai chover…)"]],
-         model: "Como você se chama? De onde você é? Onde você mora no Rio? O que você está fazendo aqui? Você quer dançar? Depois eu vou comer um pastel na feira." },
-    9: { t: "Contá adónde vas esta semana y cómo: en metro, en ómnibus, a pie, por dónde pasás.", min: 30,
-         use: [["preposicoes", 7, "7 preposiciones (em, a, para, de, por y sus contracciones)"]],
-         model: "Na segunda vou de metrô para o Centro. Na terça vou a pé até a praia de Ipanema. Na quinta vou de ônibus para a Urca e subo o Pão de Açúcar de bondinho. No sábado passo pela Lapa e volto para casa de táxi." },
-    10: { t: "Mostrale a un amigo fotos de tu familia: quién es este, de quién es aquella casa, de quién es el perro.", min: 30,
-          use: [["possessivos", 4, "4 posesivos (meu, minha, dele, dela…)"], ["demonstrativos", 2, "2 demostrativos (este, esse, aquele…)"]],
-          model: "Esta é a minha mãe e este é o meu pai, na varanda da nossa casa em Santa Teresa. Aquela moça de chapéu é a minha prima Carla. O carro dela é aquele vermelho. Esse cachorro é nosso: se chama Samba." },
-    11: { t: "Contá qué hiciste el fin de semana pasado.", min: 30,
-          use: [["perfeito", 5, "5 verbos en pretérito perfeito"]],
-          model: "No sábado passado fui a Paraty com dois amigos. Chegamos cedo e andamos pelo centro histórico. De tarde pegamos um barco e nadamos numa praia linda. De noite comemos peixe, e no domingo voltei para o Rio." },
-    12: { t: "Contá tu mañana (me levanto, me visto…) y dale a un amigo tres consejos con el imperativo.", min: 30,
-          use: [["reflexivos", 3, "3 verbos reflexivos"], ["imperativo", 2, "2 imperativos"]],
-          model: "Eu me levanto às sete, me lavo e me visto rápido. Tomo um café e saio para o trabalho. Três conselhos para você: beba muita água, use protetor solar na praia e não saia sem guarda-chuva no verão!" },
-    14: { t: "Contá qué te gusta y qué no (comida, música, deporte) y qué le gusta a otra persona.", min: 35,
-          use: [["gostar", 4, "4 veces gostar de"]],
-          model: "Eu gosto muito de feijoada, mas não gosto de jiló. Gosto de ouvir bossa nova, principalmente Tom Jobim. O meu namorado gosta de futebol: ele torce pelo Flamengo e adora o Maracanã. Nós dois gostamos de pão de queijo." },
-    15: { t: "Contá cómo era tu vida de chico (dónde vivías, qué hacías) y algo que pasó un día.", min: 35,
-          use: [["imperfeito", 5, "5 verbos en imperfeito"], ["perfeito", 1, "1 perfeito para lo que pasó"]],
-          model: "Quando eu era criança, morava em Córdoba com os meus avós. Todo verão a gente viajava para a praia e eu brincava na areia o dia inteiro. A minha avó fazia empanadas e o meu avô contava histórias. Um dia, fomos ao Brasil pela primeira vez e eu vi o mar de Copacabana." },
-    16: { t: "Te preguntan por gente y cosas («¿Conocés a la Bia? ¿Y el libro?»): respondé con pronombres de objeto.", min: 35,
-          use: [["pronomes", 4, "4 pronombres de objeto (o, a, os, as, lhe, -lo…)"]],
-          model: "A Bia? Eu a conheço desde 2019 e a vejo todo sábado na feira da Glória. Os meus pais? Eu os visito em janeiro e sempre lhes levo alfajores. O livro de crônicas? Comprei-o na Travessa e vou dá-lo à Bia no aniversário dela." },
-    17: { t: "Contá tus planes para el año que viene y hacé una previsión del tiempo para Río.", min: 35,
-          use: [["futuro", 5, "5 verbos en futuro do presente"]],
-          model: "No ano que vem farei um intercâmbio no Rio. Estudarei português na universidade e morarei em Botafogo. Nos fins de semana visitarei as praias do litoral e conhecerei Petrópolis. Segundo a previsão, amanhã choverá na cidade inteira, e o Cristo ficará escondido pelas nuvens." },
-    18: { t: "Escribile a un restaurante de Santa Teresa para reservar una mesa y pedir algo especial, con cortesía.", min: 35,
-          use: [["condicional", 3, "3 verbos en condicional (futuro do pretérito)"]],
-          model: "Boa tarde! Eu gostaria de reservar uma mesa para quatro pessoas no sábado, às oito. Seria possível uma mesa na varanda, com vista para a Baía de Guanabara? Vocês poderiam também preparar uma sobremesa sem glúten? Eu agradeceria muito. Obrigado!" },
-    19: { t: "Compará Río con otra ciudad que conozcas: tamaño, playas, comida, precios.", min: 40,
-          use: [["comparativos", 4, "4 comparaciones (mais… do que, tão… quanto, melhor, maior…)"]],
-          model: "O Rio é menor do que São Paulo, mas é mais bonito. Em São Paulo a comida é tão boa quanto no Rio, e os restaurantes são mais baratos. As praias de Ipanema são as mais famosas, mas para mim a Prainha é a melhor de todas. O trânsito paulistano é o pior do Brasil!" },
-    20: { t: "Un amigo te propone planes y a todo decís que no (nada, nadie, ningún, nunca). Cerrá con una frase con tudo.", min: 40,
-          use: [["negacoes", 4, "4 negaciones (nada, ninguém, nenhum, nunca, nem…)"]],
-          model: "Não, obrigado: hoje não quero fazer nada. Não conheço ninguém nessa festa e não tenho nenhuma roupa para ir. Também não vou à praia, porque está chovendo. Nunca saio no domingo à noite. Fico em casa e pronto: tudo bem assim." },
-    21: { t: "Contá lo que venís haciendo últimamente y algo que ya había pasado cuando llegaste a algún lado.", min: 40,
-          use: [["perfeitoComposto", 3, "3 perfeitos compostos (tenho trabalhado…)"], ["maisQuePerfeitoComposto", 1, "1 mais-que-perfeito (tinha começado…)"]],
-          model: "Ultimamente tenho trabalhado muito e tenho dormido pouco. Nas últimas semanas também tenho estudado português todas as noites. Ontem, quando cheguei à aula, a professora já tinha começado a explicação. Também tenho corrido no calçadão de Ipanema quase todas as manhãs." },
-    22: { t: "Contá la historia de un monumento de Río: cuándo fue construido, por quién, qué le pasó después.", min: 40,
-          use: [["passiva", 4, "4 pasivas (foi construído, é visitado…)"]],
-          model: "O Cristo Redentor foi construído entre 1922 e 1931 e foi inaugurado em outubro de 1931. A estátua foi feita de concreto armado e pedra-sabão. Em 2007 o monumento foi escolhido como uma das sete maravilhas do mundo moderno. Hoje ele é visitado por milhões de turistas." },
-    23: { t: "Una amiga está enferma y triste: escribile qué esperás, qué le recomendás y qué deseás.", min: 40,
-          use: [["subjuntivo", 4, "4 verbos en presente do subjuntivo"]],
-          model: "Querida Bia, espero que você esteja melhor hoje. É importante que você descanse e que beba muita água. Talvez seja uma boa ideia ficar em casa no fim de semana. Quero que você me ligue amanhã. Tomara que tudo dê certo!" },
-    24: { t: "Contá un viaje que estás planeando: para qué, con qué condiciones, aunque qué.", min: 40,
-          use: [["conjuncoes", 4, "4 conjunciones con subjuntivo (para que, embora, caso, antes que…)"]],
-          model: "Vou ao Rio em julho para que os meus filhos conheçam a cidade. Embora seja inverno, faz calor na praia. Caso chova, vamos ao Museu do Amanhã. Vou reservar o hotel hoje, antes que os preços subam. Quero que eles vejam o pôr do sol no Arpoador." },
-    25: { t: "Describí tu barrio: la calle donde vivís, la gente con la que vivís, lo que más te gusta.", min: 40,
-          use: [["relativos", 4, "4 relativos (que, quem, onde, cujo, o que…)"]],
-          model: "Moro num bairro de que eu gosto muito: Santa Teresa. A rua onde moro tem um bonde amarelo que passa o dia inteiro. A vizinha com quem divido o apartamento é uma artista cujos quadros estão num ateliê da Lapa. O que eu mais adoro é a vista da baía." },
-    27: { t: "Vas a mudarte a Río: contá qué vas a hacer cuando llegues, si conseguís trabajo, apenas puedas. Incluí un lugar histórico de la ciudad.", min: 45,
+    8: { t: "Le escribís un WhatsApp a Bia, tu vecina carioca, para invitarla a una roda de samba el sábado: contale qué estás haciendo ahora, qué van a hacer y hacele tres preguntas (la hora, el lugar, quién va).", min: 40,
+         use: [["perguntas", 3, "3 preguntas"], ["irInf", 1, "1 ir + infinitivo (vou sair, vai chover…)"]],
+         model: "Oi, Bia! Tudo bem? Estou estudando português agora, mas no sábado vou sair: tem uma roda de samba na Pedra do Sal. Você quer ir comigo? A que horas você pode sair de casa? Vou chamar o Rafa e a Ana também. Você conhece a Pedra do Sal? Depois a gente vai comer um pastel na feira. Beijos, Sofía" },
+    9: { t: "Una amiga llega el domingo a Río y se va a quedar en tu casa, en Botafogo. Escribile un mensaje para explicarle cómo llegar desde el aeropuerto: en qué va, por dónde pasa y dónde baja.", min: 45,
+         use: [["preposicoes", 5, "5 preposiciones (em, a, para, de, por y sus contracciones)"]],
+         model: "Oi, Carla! Do aeroporto Santos Dumont até a minha casa é fácil. Você sai pela porta principal e vai a pé até a estação do VLT. Aí você pega o VLT para a Cinelândia e lá desce para o metrô. No metrô, vai até Botafogo: são poucas estações. Na saída, pergunta pela Rua Voluntários da Pátria. Eu moro no número 50, perto da padaria. Beijo!" },
+    10: { t: "Tu profesora pidió que cada alumno presente a su familia al grupo con una foto. Escribí el texto que acompaña la foto: quién es quién y de quién es cada cosa.", min: 45,
+          use: [["possessivos", 3, "3 posesivos (meu, minha, dele, dela…)"], ["demonstrativos", 1, "1 demostrativo (este, esse, aquele…)"]],
+          model: "Oi, turma! Nesta foto está a minha família na casa dos meus avós, em Rosario. Este de camisa azul é o meu pai, e a mulher ao lado dele é a minha mãe. Aquela menina de chapéu é a minha irmã, Lucía; o cachorro é dela e se chama Tango. E essa bicicleta vermelha? É minha!" },
+    11: { t: "Un amigo porteño te pregunta por WhatsApp qué hiciste en tu primer fin de semana en Río. Contale adónde fuiste, qué comiste y qué fue lo que más te gustó.", min: 45,
+          use: [["perfeito", 4, "4 verbos en pretérito perfeito"]],
+          model: "Oi, Nico! O fim de semana foi incrível. No sábado fui ao Pão de Açúcar de bondinho e vi a cidade inteira lá de cima. Depois comi uma moqueca num restaurante da Urca. No domingo acordei cedo, corri no calçadão de Copacabana e tomei água de coco. Do que eu mais gostei? Do pôr do sol no Arpoador: a gente aplaudiu! Abraço." },
+    12: { t: "Tu compañero de departamento se levanta siempre tarde y con dolor de cabeza. Dejale una nota en la heladera: contale cómo es tu mañana y dale tres consejos.", min: 45,
+          use: [["reflexivos", 2, "2 verbos reflexivos"], ["imperativo", 2, "2 imperativos"]],
+          model: "Rafa, eu me levanto às sete, tomo banho e me visto sem pressa. Tomo um café na varanda antes de sair. Três conselhos para você: durma antes da meia-noite, beba muita água e não fique no celular na cama. Quando a cabeça dói, tome um remédio e descanse. Um abraço!" },
+    14: { t: "Você vai dividir um apartamento no Rio com uma estudante que ainda não conhece. Escreva uma mensagem para ela: conte do que você gosta e do que não gosta (comida, música, esporte) e pergunte dos gostos dela.", min: 50,
+          use: [["gostar", 3, "3 veces gostar de"]],
+          model: "Oi, Mariana! Sou a Sofía, sua nova colega de apartamento. Eu gosto muito de cozinhar, principalmente feijoada, mas não gosto de jiló. Gosto de ouvir samba e bossa nova, e nos fins de semana gosto de correr no Aterro. Não gosto de barulho depois das onze. E você? Do que você gosta? Precisa de alguma coisa para o quarto? Beijo!" },
+    15: { t: "Uma revista para imigrantes pediu relatos curtos sobre «a cidade onde eu cresci». Escreva o seu: como era a sua cidade, o que você fazia quando era criança e algo que aconteceu um dia.", min: 50,
+          use: [["imperfeito", 3, "3 verbos en imperfeito"], ["perfeito", 1, "1 perfeito para lo que pasó"]],
+          model: "Eu cresci em Córdoba, numa rua de terra perto do rio. Quando eu era criança, todo mundo se conhecia. Eu brincava na rua com os vizinhos até tarde, e a minha avó fazia empanadas aos domingos. No verão, a gente nadava no rio e pescava com o meu avô. Um dia, um temporal derrubou a árvore da esquina, e o bairro inteiro ajudou a limpar a rua." },
+    16: { t: "A sua vizinha, dona Lúcia, viajou e deixou você cuidando da casa. Escreva um bilhete para ela contando o que você fez com as coisas e com as pessoas: as plantas, o gato, as cartas, o eletricista.", min: 50,
+          use: [["pronomes", 3, "3 pronombres de objeto (o, a, os, as, lhe, -lo…)"]],
+          model: "Dona Lúcia, está tudo bem por aqui. As plantas? Eu as reguei todos os dias. O gato comeu bem: eu o vi na janela hoje de manhã. As cartas estão na mesa da cozinha; eu não as abri. O eletricista veio na terça, e eu lhe mostrei o problema do chuveiro. Ele vai voltar para consertá-lo na segunda. Um beijo, Sofía" },
+    17: { t: "Você vai fazer um intercâmbio no Rio no ano que vem. Escreva um e-mail para a coordenação do curso de português apresentando os seus planos: o que vai estudar, onde vai morar e o que vai fazer nos fins de semana.", min: 50,
+          use: [["futuro", 3, "3 verbos en futuro do presente"]],
+          model: "Prezada coordenação, meu nome é Martín Pérez e no ano que vem farei um intercâmbio de seis meses na UFRJ. Estudarei português de manhã e História do Brasil à tarde. Morarei numa casa de estudantes em Botafogo. Nos fins de semana, conhecerei Petrópolis e Paraty. Queria saber se o curso terá aulas aos sábados. Atenciosamente, Martín Pérez" },
+    18: { t: "Você e três amigos vão comemorar um aniversário num restaurante de Santa Teresa. Escreva uma mensagem para o restaurante reservando a mesa e fazendo dois pedidos especiais, com cortesia.", min: 50,
+          use: [["condicional", 2, "2 verbos en condicional (futuro do pretérito)"]],
+          model: "Boa tarde! Eu gostaria de reservar uma mesa para quatro pessoas no sábado, às oito, para comemorar o aniversário de uma amiga. Seria possível uma mesa na varanda, com vista para a Baía de Guanabara? Vocês poderiam também preparar uma sobremesa sem glúten? Uma das minhas amigas é celíaca. Eu agradeceria muito. Obrigado, Martín" },
+    19: { t: "Um amigo argentino não sabe se vai morar no Rio ou em São Paulo e pediu a sua opinião. Escreva uma mensagem comparando as duas cidades (preços, praias, trânsito, comida) e diga qual você escolheria.", min: 55,
+          use: [["comparativos", 3, "3 comparaciones (mais… do que, tão… quanto, melhor, maior…)"]],
+          model: "Oi, Nico! São Paulo é maior do que o Rio e tem mais empregos, mas o trânsito é pior. No Rio, os aluguéis são tão caros quanto em São Paulo, principalmente na Zona Sul. A comida paulistana é a melhor do Brasil, dizem, mas o Rio tem as praias mais bonitas. Eu escolheria o Rio: a qualidade de vida é melhor. Abraço!" },
+    20: { t: "O seu amigo Rafa convidou você para uma festa, mas você está cansado e não quer sair. Responda à mensagem dele recusando tudo, com educação e bom humor.", min: 50,
+          use: [["negacoes", 3, "3 negaciones (nada, ninguém, nenhum, nunca, nem…)"]],
+          model: "Oi, Rafa! Valeu pelo convite, mas hoje não vou a lugar nenhum. Não conheço ninguém nessa festa e não tenho nenhuma roupa limpa. Também não posso beber nada: amanhã trabalho cedo. E você sabe que eu nunca saio no domingo à noite, nem para ver o Flamengo. Fica para a próxima, tá? Abraço." },
+    21: { t: "Uma amiga que você não vê há meses mandou uma mensagem: «E aí, quais são as novidades?». Responda contando o que você tem feito ultimamente e algo que já tinha acontecido quando ela foi embora do Rio.", min: 55,
+          use: [["perfeitoComposto", 2, "2 perfeitos compostos (tenho trabalhado…)"], ["maisQuePerfeitoComposto", 1, "1 mais-que-perfeito (tinha começado…)"]],
+          model: "Oi, Ju! Quanto tempo! Ultimamente tenho trabalhado muito e tenho estudado português todas as noites. Também tenho corrido no Aterro nos fins de semana. Quando você foi embora do Rio, eu já tinha mudado de apartamento, lembra? Agora moro em Laranjeiras, perto do Largo do Machado. E você? O que tem feito em Salvador? Beijos!" },
+    22: { t: "Você escreve para o jornal da escola de português. Escreva uma nota curta sobre um monumento do Rio: quando foi construído, por quem e o que aconteceu com ele depois.", min: 55,
+          use: [["passiva", 3, "3 pasivas (foi construído, é visitado…)"]],
+          model: "O Cristo Redentor foi construído entre 1922 e 1931 e foi inaugurado em outubro de 1931. O projeto foi feito pelo engenheiro Heitor da Silva Costa, e o rosto foi esculpido pelo romeno Gheorghe Leonida. Em 2007, o monumento foi escolhido como uma das sete maravilhas do mundo moderno. Hoje ele é visitado por milhões de turistas todos os anos." },
+    23: { t: "A sua amiga Bia está doente e triste porque vai perder uma viagem. Escreva uma mensagem para animá-la: diga o que você espera, o que recomenda e o que deseja.", min: 55,
+          use: [["subjuntivo", 3, "3 verbos en presente do subjuntivo"]],
+          model: "Querida Bia, que pena que você não possa viajar! Espero que você esteja melhor hoje. É importante que você descanse e que beba muita água. Talvez seja uma boa ideia ficar em casa vendo séries no fim de semana. Quero que você me ligue amanhã, sem falta. Tomara que você fique boa logo e que a viagem seja só adiada! Um beijo, Sofía" },
+    24: { t: "Você está organizando uma viagem para Paraty com três amigos. Escreva uma mensagem para o grupo explicando o plano: para que, em que condições e apesar de quê.", min: 55,
+          use: [["conjuncoes", 3, "3 conjunciones con subjuntivo (para que, embora, caso, antes que…)"]],
+          model: "Pessoal, a ideia é sair na sexta às seis para que a gente pegue pouco trânsito. Embora a pousada seja simples, fica perto do centro histórico. Caso chova no sábado, vamos à cachoeira no domingo. Vou reservar hoje, antes que os preços subam. Cada um leva uma toalha, um chapéu e protetor solar. Quem topa? Beijos!" },
+    25: { t: "Um site de intercâmbio pediu que você descreva o seu bairro para os estudantes que vão chegar. Escreva o texto: a rua onde você mora, as pessoas com quem você convive e o lugar de que mais gosta.", min: 55,
+          use: [["relativos", 3, "3 relativos (que, quem, onde, cujo, o que…)"]],
+          model: "Moro num bairro de que eu gosto muito: Santa Teresa. A rua onde moro tem um bonde amarelo que passa o dia inteiro. A vizinha com quem divido o apartamento é uma artista cujos quadros estão num ateliê da Lapa. O que eu mais adoro é a vista da baía. Para quem vem estudar aqui, recomendo o café da esquina." },
+    27: { t: "Você vai se mudar para o Rio. Escreva uma mensagem a um amigo contando o que vai fazer quando chegar, se conseguir trabalho e assim que puder. Inclua um lugar histórico da cidade.", min: 45,
           use: [["futSubj", 4, "4 verbos en futuro do subjuntivo (quando eu for, se você quiser…)"]],
           model: "Quando eu me mudar para o Rio, vou morar no Centro. Se eu conseguir o emprego, vou visitar o Paço Imperial, onde o príncipe regente dom João despachava depois que a corte portuguesa chegou, em 1808. Assim que eu puder, vou à Biblioteca Nacional. Se você quiser, vamos juntos." },
-    28: { t: "¿A qué momento de la historia de Brasil viajarías si pudieras? Imaginá qué harías y a quién conocerías.", min: 45,
+    28: { t: "Se você pudesse viajar para um momento da história do Brasil, qual seria? Escreva um texto curto para o blog da turma imaginando o que faria e quem conheceria.", min: 45,
           use: [["subjImperfeito", 3, "3 verbos en imperfeito do subjuntivo (se eu fosse…)"], ["condicional", 2, "2 condicionales"]],
           model: "Se eu pudesse viajar no tempo, iria ao Rio de maio de 1888, quando a princesa Isabel assinou a Lei Áurea, que aboliu a escravidão. Se eu vivesse naquela época, gostaria de conhecer André Rebouças e Joaquim Nabuco, dois grandes abolicionistas. Se eu tivesse coragem, perguntaria a eles o que esperavam do futuro do país." },
-    29: { t: "¿Qué hace falta para que la gente aprenda de verdad? Usá el infinitivo personal y citá a un educador brasileño.", min: 45,
+    29: { t: "O que é preciso para as pessoas aprenderem de verdade? Escreva um parágrafo para o debate da turma, com o infinitivo pessoal, citando um educador brasileiro.", min: 45,
           use: [["infPessoal", 4, "4 infinitivos personales (para eles saberem, é bom nós irmos…)"]],
           model: "Para os alunos aprenderem de verdade, é importante os professores partirem da realidade deles. Essa era a ideia de Paulo Freire, que escreveu que a leitura do mundo precede a leitura da palavra. Em 1963, em Angicos, trezentos trabalhadores aprenderam a ler sem precisarem de cartilhas com frases alheias à vida deles: bastou eles discutirem palavras do próprio cotidiano." },
-    30: { t: "Pensá en un momento de la historia (tuya o de Brasil) que pudo haber sido distinto: qué habría pasado si…", min: 45,
+    30: { t: "Pense num momento da história (a sua ou a do Brasil) que poderia ter sido diferente e escreva o que teria acontecido se…", min: 45,
           use: [["hipotesePassado", 4, "4 tiempos compuestos de hipótesis (tivesse feito, teria ido…)"]],
           model: "Se o príncipe Pedro não tivesse proclamado a Independência em 7 de setembro de 1822, talvez o Brasil tivesse continuado ligado a Portugal por mais tempo. Na minha vida também foi assim: se eu não tivesse estudado português, não teria lido Machado de Assis no original e não teria conhecido os meus melhores amigos." },
-    31: { t: "Contá lo que te dijo alguien en una charla o entrevista: qué te contó, qué te preguntó, qué le respondiste.", min: 50,
+    31: { t: "Conte a um colega o que alguém disse numa palestra ou numa entrevista: o que contou, o que você perguntou, o que essa pessoa respondeu.", min: 50,
           use: [["indireto", 4, "4 verbos de decir con que, se o para (disse que…, perguntou se…)"]],
           model: "Na palestra, o historiador português disse que o 25 de Abril de 1974 tinha começado com canções no rádio: a senha final tinha sido Grândola, Vila Morena, de Zeca Afonso. Explicou que os militares derrubaram o Estado Novo quase sem violência. Perguntei se os cravos eram só um símbolo, e ele respondeu que uma mulher tinha distribuído cravos aos soldados. No fim, pediu que nós lêssemos Sophia de Mello Breyner." },
-    32: { t: "Escribí los carteles y avisos de una calle de Río: qué se alquila, qué se vende, qué se busca, qué no se permite.", min: 30,
+    32: { t: "Escreva os cartazes e avisos de uma rua do Rio: o que se aluga, o que se vende, o que se procura, o que não se permite.", min: 30,
           use: [["se", 4, "4 construcciones con se (aluga-se, vendem-se, precisa-se de…)"]],
           model: "Aluga-se apartamento de dois quartos em Botafogo. Vendem-se bicicletas usadas na loja da esquina. Precisa-se de garçons para o quiosque do calçadão. Aceitam-se cartões e Pix. Aqui não se permite fumar." },
-    33: { t: "Presentá a un escritor brasileño en un texto formal, con pronombres pegados al verbo (fez-se, conta-nos, dir-se-ia).", min: 50,
+    33: { reg: "formal", t: "Apresente um escritor brasileiro num texto formal para o boletim da biblioteca, com pronomes presos ao verbo (fez-se, conta-nos, dir-se-ia).", min: 50,
           use: [["encliticos", 4, "4 pronombres enclíticos o mesoclíticos"]],
           model: "Machado de Assis nasceu em 1839, no Morro do Livramento, no Rio de Janeiro. Filho de um pintor de paredes, fez-se escritor quase sozinho e tornou-se o maior romancista brasileiro. Em Dom Casmurro, de 1899, Bentinho conta-nos a sua versão da história e pede-nos que acreditemos nela. Dir-se-ia que o leitor é o verdadeiro juiz de Capitu." },
-    34: { t: "Opiná sobre una cuestión social de Río (la ciudad partida, las favelas, las playas): argumentá y conectá ideas.", min: 50,
+    34: { t: "Dê a sua opinião sobre uma questão social do Rio (a cidade partida, as favelas, as praias) num comentário para o site de um jornal: argumente e conecte as ideias.", min: 50,
           use: [["conectores", 5, "5 conectores distintos (porém, no entanto, aliás, portanto, já que…)"]],
           model: "Em 1994, o jornalista Zuenir Ventura chamou o Rio de cidade partida. De um lado há bairros ricos à beira-mar; do outro, favelas nos morros. No entanto, as duas cidades não vivem separadas: aliás, dependem uma da outra todos os dias. Portanto, a imagem é útil, porém incompleta, já que o samba, o funk e o futebol atravessam essas fronteiras." },
-    35: { t: "Contá una película o un libro brasileño que te marcó, con verbos y su preposición (assistir a, gostar de, pensar em, sonhar com…).", min: 50,
+    35: { t: "Conte a um amigo um filme ou um livro brasileiro que marcou você, com os verbos e as suas preposições (assistir a, gostar de, pensar em, sonhar com…).", min: 50,
           use: [["regencia", 4, "4 verbos con su preposición (assistir a, pensar em…)"]],
           model: "Ontem assisti ao filme Central do Brasil, de Walter Salles, pela terceira vez. Gosto muito da história da Dora e do menino Josué. Sempre penso na viagem dos dois pelo sertão e sonho com uma viagem assim pelo Nordeste. Preciso de muito mais tempo para conhecer o Brasil de verdade." },
-    36: { t: "Contá tu sábado en Río con horarios y lugares: la feria, la playa, la noche en la Lapa.", min: 45,
+    36: { t: "Conte à sua família como foi o seu sábado no Rio, com horários e lugares: a feira, a praia, a noite na Lapa.", min: 45,
           use: [["crase", 4, "4 veces la crase (à, às, àquele…)"]],
           model: "Todos os sábados vou à feira da Glória às nove da manhã. Depois vou à praia e, à tarde, dou uma volta à beira da Lagoa. Às vezes vou à Lapa à noite com os meus amigos para ouvir samba, e volto para casa às duas." },
-    37: { t: "Contá cómo trabaja un instituto científico o una oficina pública, con verbos como manter, obter, propor, prever, intervir.", min: 50,
+    37: { t: "Para a revista de divulgação da faculdade, explique como trabalha um instituto científico ou uma repartição pública, com verbos como manter, obter, propor, prever, intervir.", min: 50,
           use: [["irregDerivados", 4, "4 formas de verbos irregulares menos frecuentes (mantém, obtêm, propõe, preveem…)"]],
           model: "A Fiocruz, que nasceu em 1900 em Manguinhos, mantém até hoje a tradição de Oswaldo Cruz. Quando uma epidemia começa, os pesquisadores preveem os riscos, obtêm dados dos postos de saúde e propõem campanhas de vacinação. Às vezes o governo intervém, e nem sempre as ideias cabem no orçamento. Eu passeio pelo campus e admiro o castelo mourisco." },
-    38: { t: "Escribí un mensaje de WhatsApp a un amigo carioca, como se habla: invitalo al boteco.", min: 30,
+    38: { t: "Escreva uma mensagem de WhatsApp para um amigo carioca, do jeito que se fala, convidando-o para o boteco.", min: 30,
           use: [["coloquial", 4, "4 marcas del habla (tá, pra, né, cadê, a gente, tô…)"]],
           model: "E aí, Rafa, beleza? Cadê você? A gente tá no boteco da esquina, perto do Arpoador. Vem pra cá, né? Tô com saudade! Se não der, a gente se vê amanhã no futevôlei." },
-    40: { t: "Escribí un párrafo de informe sobre la Constitución de 1988, con registro formal y sustantivos en lugar de verbos.", min: 50,
+    40: { reg: "formal", t: "Escreva um parágrafo de relatório sobre a Constituição de 1988, com registro formal e substantivos no lugar de verbos.", min: 50,
           use: [["nominalizacoes", 5, "5 nominalizaciones (-ção, -mento, -dade, -ência…)"]],
           model: "A promulgação da Constituição de 1988 representou o encerramento formal da transição democrática no Brasil. O texto garantiu a ampliação dos direitos sociais e a universalização do acesso à saúde, com a criação do Sistema Único de Saúde. Houve, ainda, o reconhecimento dos direitos dos povos indígenas e das comunidades quilombolas." },
-    41: { t: "Resumí el comienzo de una novela brasileña como un narrador literario, con el mais-que-perfeito simple (fizera, dissera).", min: 50,
+    41: { t: "Para o clube de leitura, resuma o começo de um romance brasileiro como um narrador literário, com o mais-que-perfeito simples (fizera, dissera).", min: 50,
           use: [["maisQuePerfeito", 3, "3 verbos en mais-que-perfeito simple (fizera, deixara…)"]],
           model: "Quando Rubião se mudou para o Rio, o filósofo Quincas Borba já morrera e lhe deixara toda a fortuna, com uma condição: cuidar do cachorro, que também se chamava Quincas Borba. O antigo professor de Barbacena, que nunca imaginara tanta riqueza, herdara também uma filosofia estranha, o Humanitismo, que Machado de Assis inventara para rir dos sistemas do século XIX." },
-    42: { t: "Escribí una crónica de un domingo en Copacabana, condensando con gerundio, participio y al + infinitivo.", min: 50,
+    42: { t: "Escreva uma crônica de um domingo em Copacabana para o jornal do bairro, condensando com gerúndio, particípio e ao + infinitivo.", min: 50,
           use: [["gerundio", 2, "2 gerundios"], ["partAbs", 1, "1 participio absoluto (Terminado o almoço, …)"], ["aoInf", 1, "1 ao + infinitivo"]],
           model: "Chegando a Copacabana num domingo de sol, entendi por que Rubem Braga escrevia tanto sobre o mar. Terminado o almoço, descemos para o calçadão. Ao ver as ondas de pedra portuguesa, lembrei de Lisboa. Andando devagar até o Leme, ouvimos um vendedor de mate que cantava o preço como se fosse um samba." },
-    43: { t: "Escribí un mail formal a la Biblioteca Nacional pidiendo acceso a documentos para una investigación.", min: 60,
+    43: { reg: "formal", t: "Escreva um e-mail formal à Biblioteca Nacional pedindo acesso a documentos para uma pesquisa.", min: 60,
           use: [["formal", 4, "4 fórmulas formales (Prezado/a, venho por meio desta, solicito, Atenciosamente…)"]],
           model: "Prezada Senhora Diretora, venho por meio desta solicitar acesso ao acervo de jornais de 1897 sobre a Guerra de Canudos. Sou pesquisadora argentina e estudo a cobertura que Euclides da Cunha fez do conflito antes de escrever Os Sertões, publicado em 1902. Gostaria de saber se seria possível consultar os originais na Hemeroteca. Segue em anexo a carta da minha universidade. Fico no aguardo de sua resposta. Atenciosamente, Laura Gómez" },
-    44: { t: "Describí tu barrio con diminutivos, aumentativos y sustantivos derivados (cafezinho, casarão, jornaleiro…).", min: 50,
+    44: { t: "Descreva o seu bairro para um amigo estrangeiro com diminutivos, aumentativos e substantivos derivados (cafezinho, casarão, jornaleiro…).", min: 50,
           use: [["sufixos", 6, "6 palabras con sufijo (-inho, -zinho, -ão, -aço, -eiro…)"]],
           model: "Todo domingo tomo um cafezinho na padaria da esquina e compro um pãozinho quentinho. Na frente mora um senhor bonachão num casarão antigo de Santa Teresa. O jornaleiro sabe todas as notícias do bairro, e o sorveteiro passa pela praça às quatro. Ontem, no Maracanã, vi um golaço do Flamengo." },
-    45: { t: "Contale a un amigo tu primer mes en Río usando bien falsos amigos (vaso, copo, esquisito, embaraçada, borracha, escritório…).", min: 50,
+    45: { t: "Conte a um amigo o seu primeiro mês no Rio, usando bem os falsos amigos (vaso, copo, esquisito, embaraçada, borracha, escritório…).", min: 50,
           use: [["falsos", 3, "3 falsos amigos bien usados"]],
           model: "No meu primeiro mês no Rio, uma vizinha me deu um vaso com uma orquídea, e eu servi suco de caju num copo de vidro. Achei a comida do bar da esquina meio esquisita, mas depois me acostumei. Na praia, fiquei embaraçada quando não entendi uma piada. No escritório, uma colega me emprestou uma borracha para apagar o rascunho." },
-    46: { t: "Contá un viaje a Lisboa y a Maputo: qué palabras cambian, qué te llamó la atención, qué autor leíste.", min: 60,
+    46: { t: "Conte, num post de viagem, uma visita a Lisboa e a Maputo: que palavras mudam, o que chamou a sua atenção, que autor você leu.", min: 60,
           use: [["variantes", 3, "3 palabras del portugués europeo o africano (autocarro, comboio, pequeno-almoço…)"]],
           model: "Em Lisboa, em vez de ônibus, peguei o autocarro, e para ir a Sintra tomei o comboio. No pequeno-almoço, que é o nosso café da manhã, pedi uma bica, o cafezinho deles. Fernando Pessoa, pela voz de Bernardo Soares, escreveu que a sua pátria era a língua portuguesa. Em Maputo li contos de Mia Couto, que inventa palavras novas com o português de Moçambique." },
-    47: { t: "¿El jeitinho brasileño es una virtud o un problema? Sostené una tesis matizada.", min: 60,
+    47: { t: "O jeitinho brasileiro é uma virtude ou um problema? Defenda uma tese matizada num texto para o debate da turma.", min: 60,
           use: [["modalizadores", 4, "4 modalizadores y organizadores (é possível que, ainda que, além disso, em suma…)"]],
           model: "Em primeiro lugar, é possível que o jeitinho seja, como sugere Roberto DaMatta, uma forma de conciliar a lei impessoal com as relações pessoais. Além disso, ao que parece, ele nasce da desconfiança diante de instituições distantes. Por outro lado, ainda que pareça simpático, o jeitinho pode abrir caminho para a corrupção. Em suma, mais do que condená-lo, convém entender de onde ele vem." },
-    48: { t: "Resumí las ideas de un ensayo brasileño clásico, atribuyéndolas con precisión (segundo o autor, defende, ressalta…).", min: 60,
+    48: { reg: "formal", t: "Resuma para a turma as ideias de um ensaio brasileiro clássico, atribuindo-as com precisão (segundo o autor, defende, ressalta…).", min: 60,
           use: [["dicendi", 4, "4 verbos o expresiones para atribuir (defende, segundo, ressalta, ou seja…)"]],
           model: "Em Raízes do Brasil, de 1936, Sérgio Buarque de Holanda defende que o homem cordial é um traço da formação brasileira. Segundo o autor, cordial não quer dizer bondoso: vem de cor, coração, ou seja, de agir pelas emoções e não por regras impessoais. O historiador ressalta que essa cordialidade dificulta a separação entre o público e o privado. Para ele, a herança colonial explica boa parte desse comportamento." },
-    49: { t: "Pasá a registro culto un comentario coloquial sobre Carolina Maria de Jesus y su diario.", min: 60,
+    49: { reg: "formal", t: "Um colega escreveu um comentário coloquial sobre Carolina Maria de Jesus e o seu diário. Reescreva-o no registro culto, para a revista da faculdade.", min: 60,
           use: [["culto", 4, "4 marcas del registro culto (há, nós + verbo, pronombre enclítico, contudo…)"]],
           model: "Há, na obra de Carolina Maria de Jesus, uma força que poucos livros possuem. Em Quarto de Despejo, publicado em 1960, a autora descreve-nos a fome na favela do Canindé, em São Paulo. Nós, leitores, reconhecemo-nos na sua voz, embora vivamos longe daquela realidade. Contudo, convém lembrar que o diário foi editado pelo jornalista Audálio Dantas. Ainda hoje, o livro é lido e discutido nas escolas." },
-    50: { t: "Contá un pequeño lío con un amigo en Río usando expresiones idiomáticas (pisar na bola, dar um jeito, fazer questão…).", min: 50,
+    50: { t: "Conte num e-mail a uma amiga uma pequena confusão com um amigo no Rio, usando expressões idiomáticas (pisar na bola, dar um jeito, fazer questão…).", min: 50,
           use: [["expressoes", 4, "4 expresiones idiomáticas"]],
           model: "Ontem pisei na bola com a minha amiga Carla: esqueci o aniversário dela. Mas dei um jeito: fiz questão de levar um bolo de aipim à casa dela, em Botafogo. Ela levou tudo na brincadeira e ficou de boa. No fim, deu tudo certo e ainda matamos a saudade de tanto tempo." },
-    51: { t: "Escribile una carta a tu yo de hace un año: qué aprendiste, qué habría pasado si no hubieras empezado, qué le recomendás.", min: 60,
+    51: { t: "Escreva uma carta para você mesmo de um ano atrás: o que aprendeu, o que teria acontecido se não tivesse começado, o que recomenda.", min: 60,
           use: [["futSubj", 1, "1 futuro do subjuntivo"], ["perfeitoComposto", 1, "1 perfeito composto"], ["infPessoal", 1, "1 infinitivo pessoal"], ["crase", 1, "1 crase"]],
           model: "Querido eu de um ano atrás: quando você ler esta carta, já vai falar português. Tenho estudado todos os dias e tenho aprendido com os erros. Para nós chegarmos até aqui, foi preciso paciência. Se você tivesse desistido, não teria descoberto Guimarães Rosa, que escreveu que o correr da vida embrulha tudo. Vá à praia, leia muito e não tenha medo de errar." }
   };
@@ -214,6 +214,8 @@
     learn(list);
     learn(Object.keys(src.glossario || {}));
     learn(Object.keys(DATA.lex || {}));
+    // the diagnosis of the closed answers checks the same glossary before saying «no existe»
+    if (D && D.addWords) D.addWords(Object.keys(src.glossario || {}));
   }
   // The words of the models and the most frequent Portuguese: known even
   // before the course data arrives.
@@ -278,12 +280,31 @@
   function known(w) {
     if (!w) return false;
     if (LEXI[w] || (U.isPortuguese && U.isPortuguese(w)) || V(w).length || PP(w) || GER(w)) return true;
+    if (regVerbKnown(w)) return true;
     if (w.indexOf("-") > 0) {
       var sp = U.splitEnclitic && U.splitEnclitic(w);
       if (sp && (known(sp.v) || V(sp.v).length)) return true;
       return w.split("-").every(function (x) { return !x || LEXI[x] || (U.isPortuguese && U.isPortuguese(x)) || V(x).length || /^(se|me|te|nos|lhe|lhes|o|a|os|as|lo|la|los|las|no|na|ei|á|ás|emos|ão|ia|iam|íamos)$/.test(x); });
     }
     return false;
+  }
+  // A regular form of a verb the course or the dictionary knows (emociona ← emocionar),
+  // though the conjugator does not have that verb.
+  var REG_END = [["ar", /(o|a|as|am|amos|ei|ou|aram|ava|avam|ando|ado|ada|ados|adas|e|em|asse|assem|ará|arão|aria|ariam)$/],
+                 ["er", /(o|e|es|em|emos|i|eu|eram|ia|iam|endo|ido|ida|idos|idas|a|am|esse|essem|erá|erão|eria|eriam)$/],
+                 ["ir", /(o|e|es|em|imos|i|iu|iram|ia|iam|indo|ido|ida|idos|idas|a|am|isse|issem|irá|irão|iria|iriam)$/]];
+  function regVerbKnown(w) {
+    if (!/^[a-zà-ÿ]{5,}$/.test(w)) return false;
+    return REG_END.some(function (r) {
+      var m = r[1].exec(w);
+      if (!m) return false;
+      var stem = w.slice(0, m.index);
+      if (r[0] === "ar" && /^e/.test(m[0])) stem = stem.replace(/gu$/, "g").replace(/qu$/, "c").replace(/c$/, "ç");
+      var inf = stem + r[0];
+      // only verbs the conjugator lacks: for the ones it has, a form it does not list is wrong (sabo, fazi)
+      if (inf.length <= 4 || (U.isInfinitive && U.isInfinitive(inf)) || V(inf).length) return false;
+      return !!(LEXI[inf] || DATA.lex[inf] || (D && D.knownWord && D.knownWord(inf)));
+    });
   }
   // An adverb in -mente whose adjective is known (rapidamente, facilmente).
   function menteOK(w) {
@@ -348,7 +369,6 @@
     return null;
   }
   function isAdj(w) { return !!adjForms(w); }
-  var GN_IX = { ms: 0, fs: 1, mp: 2, fp: 3 };
 
   /* Género y número de un sustantivo: del banco, de los heterogenéricos o,
      con cuidado, de la terminación. */
@@ -404,9 +424,15 @@
   var EXPR = /\b(pis\w+ na bola|d\w+ (um )?jeito|f\w+ questão|lev\w+ a sério|lev\w+ (tudo )?na brincadeira|tom\w+ uma decisão|ench\w+ o saco|fic\w+ de boa|d\w+ (tudo )?certo|quem não tem cão caça com gato|de grão em grão|mat\w+ a saudade|bat\w+ (um )?papo|caiu a ficha|cai a ficha|chov\w+ no molhado|custa os olhos da cara|dar uma volta|dei uma volta|fazer falta|faz falta|tirar de letra|tirou de letra|pagar o pato|pagou o pato|dar bola|deu bola|fic\w+ na mão|pôr a mão na massa|meter o bedelho|puxar o saco|segurar vela|chutar o balde|chutou o balde|enfiar o pé na jaca|abrir o jogo|abriu o jogo|ficar a ver navios|arregaçar as mangas|levar em conta|tomar providências)\b/g;
   var VARIANT = /^(autocarro|autocarros|comboio|comboios|telemóvel|telemóveis|pequeno-almoço|bica|bicas|casa-de-banho|frigorífico|ecrã|sumo|sumos|fixe|miúdo|miúdos|miúda|rapariga|raparigas|talho|montra|passadeira|paragem|portagem|apelido|propinas|machimbombo|machimbombos|chapa|kota|bué|candongueiro|matabicho|puto|putos)$/;
   var COLLOQ = /^(tá|tô|tava|tavam|tamo|tamos|pra|pro|pros|pras|né|cadê|cê|ocê|vamo|tipo|beleza|valeu|mó|ó|aí|bora|galera|cara|parada|tranquilo|firmeza)$/;
+  // The register table is Diagnosi's: the same forms and the same note in the three checkers.
+  var REG = D && D.REGISTRO ? D.REGISTRO : null;
+  var REGSTD = Object.create(null);
+  if (REG) Object.keys(REG.forms).forEach(function (k) { REGSTD[k] = REG.forms[k][0]; });
+  function REGNOTE(said, std) {
+    return REG ? REG.note(said, std) : "*" + said + "* es del habla" + (std ? "; en un texto formal: *" + std + "*" : "") + ".";
+  }
   var CONJ_SUBJ = ["para que", "embora", "caso", "antes que", "sem que", "até que", "a fim de que", "desde que", "contanto que", "mesmo que",
                    "ainda que", "a não ser que", "por mais que", "a menos que", "logo que"];
-  var FUT_TRIG = /^(quando|se|assim|logo|enquanto|sempre|depois|conforme|como|onde|quem|caso)$/;
   var IRR_DERIV = /^(manter|conter|obter|deter|reter|entreter|abster|intervir|convir|provir|propor|compor|supor|dispor|impor|repor|expor|opor|prever|rever|caber|valer|perder|medir|passear|odiar|ansiar|mediar|remediar|incendiar|requerer|prover|reaver|construir|destruir)$/;
   var IRR_PRES = /^(ir|vir|ser|estar|ter|fazer|dizer|trazer|poder|querer|saber|ver|dar|pôr|ler|sair|pedir|dormir|ouvir|perder|haver|caber|valer|crer|rir|medir|subir|preferir|sentir|seguir|vestir|servir|repetir)$/;
 
@@ -658,7 +684,7 @@
                [/([aeiou])r([aeiou])/g, "$1rr$2", 0], [/c([ao])/g, "ç$1", 0], [/z/g, "ç", 0], [/z/g, "s", 0],
                [/qu(?=[ao])/g, "c", 0], [/ci/g, "ç", 0], [/b/g, "v", 0], [/v/g, "b", 0], [/n(?=[pb])/g, "m", 0], [/ls$/, "is", 0],
                [/aré$/, "arei", 1], [/eré$/, "erei", 1], [/iré$/, "irei", 1], [/imos$/, "emos", 1], [/é$/, "ei", 1], [/ó$/, "ou", 1],
-               [/aron$/, "aram", 1], [/ieron$/, "eram", 1], [/aj/g, "aix", 1], [/^gust/, "gost", 1], [/cito$/, "zinho", 1],
+               [/aron$/, "aram", 1], [/ieron$/, "eram", 1], [/^jug/, "jog", 1], [/aj/g, "aix", 1], [/^gust/, "gost", 1], [/cito$/, "zinho", 1],
                [/cita$/, "zinha", 1], [/citos$/, "zinhos", 1], [/ito$/, "inho", 1], [/ita$/, "inha", 1], [/itos$/, "inhos", 1],
                [/itas$/, "inhas", 1], [/azo$/, "aço", 1], [/ero$/, "eiro", 1], [/era$/, "eira", 1], [/eros$/, "eiros", 1],
                [/anz/g, "ãoz", 0], [/iz$/, "is", 1], [/ísim/, "íssim", 1], [/^conoc/, "conhec", 1], [/ersona/, "essoa", 1],
@@ -720,21 +746,44 @@
     return out.filter(function (f) {
       var t = tk[f.i];
       if (!t || t.at == null) return true;
-      if (spans.some(function (s) { return t.at >= s[0] && t.at < s[1]; })) return false;
+      var inQ = function (x) {
+        if (!x || x.at == null) return false;
+        // an affix cited with its hyphen: «-ção», «re-», «des-»
+        var b0 = src.charAt(x.at - 1), b1 = src.charAt(x.at - 2), a0 = src.charAt(x.at + x.len), a1 = src.charAt(x.at + x.len + 1);
+        if ((b0 === "-" && !/[a-zà-ÿ]/i.test(b1)) || (a0 === "-" && !/[a-zà-ÿ]/i.test(a1))) return true;
+        return spans.some(function (s) { return x.at >= s[0] && x.at < s[1]; });
+      };
+      for (var j = f.i; j < f.i + (f.n || 1); j++) if (inQ(tk[j])) return false;
       for (var k = f.i - 1; k >= 0 && k >= f.i - 1; k--) if (tk[k].w && NAMES.test(tk[k].w)) return false;
+      // «palavra terminada em ção»: the ending is named, not used
+      var w1 = f.i >= 1 && tk[f.i - 1] && tk[f.i - 1].w, w2 = f.i >= 2 && tk[f.i - 2] && tk[f.i - 2].w;
+      if (w1 === "em" && /^(terminad|acabad)/.test(w2 || "")) return false;
       return true;
     });
   }
 
-  function lint(text, week) {
+  /* lint(text, week, opts): opts.registro ("formal" | "informal") manda
+     sobre el de la tarea (TASKS[week].reg); sin nada, el registro es libre y
+     las formas del habla (pra, tô, cê, vi ele…) no se marcan, igual que en
+     las respuestas cerradas (Diagnosi.REGISTRO).  En un texto formal son
+     «casi» (level "close", cat "registro") con la forma escrita. */
+  function formalOf(week, opts) {
+    if (opts && opts.registro) return /^(formal|culto)$/i.test(opts.registro);
+    return !!(TASKS[week] && TASKS[week].reg === "formal");
+  }
+  function lint(text, week, opts) {
     week = week || 52;
+    var formal = formalOf(week, opts);
     var tk = toks(text), out = [];
     var srcT = String(text || "").normalize("NFC").replace(/[’‘`´]/g, "'");
-    var push = function (i, n, cat, msg, soft) {
+    // x: { good, why, level } cuando la regla los sabe; si no, finding() los deduce del mensaje
+    var push = function (i, n, cat, msg, soft, x) {
       var over = out.filter(function (f) { return i < f.i + f.n && f.i < i + (n || 1); });
       if (over.length && (soft || over.some(function (f) { return !f.soft; }))) return;
       if (over.length) out = out.filter(function (f) { return over.indexOf(f) < 0; });
-      out.push({ i: i, n: n || 1, cat: cat, msg: msg, soft: !!soft });
+      var f = { i: i, n: n || 1, cat: cat, msg: msg, soft: !!soft };
+      if (x) Object.keys(x).forEach(function (k) { f[k] = x[k]; });
+      out.push(f);
     };
     var it = function (s) { return "*" + s + "*"; };
     var wi = function (k, dir) { for (var x = k + dir; x >= 0 && x < tk.length; x += dir) { if (tk[x].w) return x; if (tk[x].p && /[.!?]/.test(tk[x].p)) return -1; } return -1; };
@@ -777,7 +826,11 @@
       var sp = U.splitEnclitic ? U.splitEnclitic(w) : null;
 
       /* 1. Español metido */
-      var esW = !proper && !LOAN[w] && !LEXI[w] && (ES_EXTRA[w] || (U.spanishWord && U.spanishWord(w)));
+      // words that are Portuguese too, in their Portuguese use: uma van, firmar parcerias, ó (the interjection)
+      var ptToo = (/^(van|vans)$/.test(w) && /^(um|uma|a|as|de|da|na|e|ou|numa|das|duas)$/.test(p)) ||
+        (/^firm(ar|ou|aram|a|am|e|ou)$/.test(w) && /^(parceria|parcerias|acordo|acordos|compromisso|compromissos|posição|pé|um|uma|o|a)$/.test(n)) || w === "ó" ||
+        (/^(solo|solos)$/.test(w) && /^(o|os|do|dos|no|nos|ao|aos|um|pelo|de|em|este|esse|bom|fértil)$/.test(p));   // o solo: la tierra
+      var esW = !proper && !LOAN[w] && !LEXI[w] && !ptToo && (ES_EXTRA[w] || (U.spanishWord && U.spanishWord(w)));
       if (esW && !(w === "como" || w === "a" || w === "o") && !(t.cap && t.start && /^(la|el)$/.test(w) && nxt && nxt.cap)) {
         var tr = String(esW).split(" / ")[0];
         if (/^(muy|mucho|mucha|muchos|muchas)$/.test(U.deaccent(w))) return push(i, 1, "muito", it(t.o) + " es español: «muy» y «mucho» son " + it(/^(muy|mucho)$/.test(U.deaccent(w)) ? "muito" : w.replace(/^much/, "muit")) + ".");
@@ -786,7 +839,7 @@
         if (/^(del|al)$/.test(w)) return push(i, 1, "contraccion", it(t.o) + " es español: " + it(w === "del" ? "do (da, dos, das)" : "ao (à, aos, às)") + ".");
         if (/^(le|les|lo)$/.test(w)) return push(i, 1, "pronome", it(t.o) + " es español: " + it(w === "lo" ? "o" : w === "le" ? "lhe" : "lhes") + ".");
         if (/^(he|ha|han|hemos|has)$/.test(w) && PP(n)) return push(i, 2, "perfeito_composto", it(t.o + " " + n) + " es español: «he comido» se dice con el perfeito simple, " + it(conjForm(PP(n), "perfeito", { he: 0, has: 2, ha: 2, hemos: 3, han: 5 }[w]) || "comi") + ".");
-        return push(i, 1, "espanol", it(t.o) + " es español; en portugués: " + it(tr) + ".");
+        return push(i, 1, "espanol", it(t.o) + " es español; en portugués: " + it(tr) + ".", false, { good: tr });
       }
       if (/^(y)$/.test(w)) return push(i, 1, "espanol", it("y") + " es español: la conjunción es " + it("e") + ".");
 
@@ -802,8 +855,10 @@
         return push(i, 1, "espanol", it(t.o) + " está escrita a la española" + (trl ? ": " + it(trl.pt) : ": ñ es *nh* y ll es *lh*") + ".");
       }
       if (!proper && !t.cap && /^[a-zà-ÿ]+$/.test(w) && /[áéíóú]zinh/.test(w)) return push(i, 1, "tilde", "Con *-zinho* la base pierde la tilde escrita: " + it(U.deaccent(w.replace(/zinh.*/, "")) + w.replace(/^.*?(zinh)/, "$1")) + ".");
-      if (!proper && !t.cap && /^[a-zà-ÿ-]+$/.test(w) && w.length > 1 && !known(w) && !LOAN[w] && !menteOK(w) && !(suffixed(w) && !/(ito|ita|itos|itas|azo|ero)$/.test(w)) && !(/[aei]ndo$/.test(w) && isInf(w.replace(/ndo$/, "r")))) {
-        var rm = regMap()[w];
+      // the frequency list knows the word (fera, emociona) and no accented word of the course is written like it (nao ≠ não)
+      var freqOK = function () { return D && D.knownWord && D.knownWord(w) && !(deaccIndex()[U.deaccent(w)] || []).some(function (x) { return x !== w; }); };
+      if (!proper && !t.cap && !ptToo && /^[a-zà-ÿ-]+$/.test(w) && w.length > 1 && !known(w) && !LOAN[w] && !freqOK() && !menteOK(w) && !(suffixed(w) && !/(ito|ita|itos|itas|azo|ero)$/.test(w)) && !(/[aei]ndo$/.test(w) && isInf(w.replace(/ndo$/, "r")))) {
+        var rm = /^(um|uma|a|o|as|os|essa|esta|que|numa|dessa)$/.test(p) ? null : regMap()[w];   // ficou uma fera: the noun
         if (rm) return push(i, 1, rm[2] === "participio" ? "participio" : "regularizacion", it(rm[1]) + " es irregular: " + it(rm[0]) + ", no " + it(t.o) + ".");
         if (/^(seje|sejem|esteje|estejem)$/.test(w)) return push(i, 1, "verbo_irregular", "El subjuntivo es " + it(w.replace(/je/, "ja")) + ".");
         if (!lexKeys) lexKeys = Object.keys(LEXI).concat(Object.keys(DATA.lex));
@@ -835,7 +890,8 @@
         if (U.looksSpanish && U.looksSpanish(w)) return push(i, 1, "espanol", it(t.o) + " parece español: revisá cómo se dice en portugués.", lexiN < 5000);
         if (/[^aeiouãõn]s$/.test(w) && known(w.slice(0, -1))) return push(i, 1, "plural", "Revisá el plural de " + it(w.slice(0, -1)) + ".");
         var bd = 9, near = null, lim = w.length > 6 ? 2 : 1;
-        for (var k2 = 0; k2 < lexKeys.length; k2++) {
+        // the guess is shown only while the lexicon is small (course data not loaded yet): skip the search otherwise
+        for (var k2 = 0; lexiN < 5000 && k2 < lexKeys.length; k2++) {
           var c = lexKeys[k2];
           if (Math.abs(c.length - w.length) > lim || c.indexOf(" ") >= 0) continue;
           var d = U.editDistance(c, w);
@@ -843,6 +899,14 @@
         }
         if (near && bd <= lim && lexiN < 5000) push(i, 1, "tipeo", "¿Quisiste decir " + it(near) + "?", true);
         else if (lexiN < 5000) push(i, 1, "lexico", "No conozco " + it(t.o) + ": revisá cómo se escribe.", true);
+      }
+
+      if (t.start && t.cap && !(nxt && nxt.cap) && /^[a-zà-ÿ]+$/.test(w) && w.length > 2 && !known(w) && !LOAN[w]) {
+        var cS = (deaccIndex()[U.deaccent(w)] || []).filter(function (x) { return x !== w; })[0];
+        if (cS && known(cS) && !V(cS).length && !(nxt && tk[i + 1] && tk[i + 1].p === ",")) {   // not a name before a comma (Vera, …)
+          var cSo = cS.charAt(0).toUpperCase() + cS.slice(1);
+          return push(i, 1, /[ãõ]/.test(cS) && !/[ãõ]/.test(w) ? "nasal" : "tilde", (/[ãõ]/.test(cS) && !/[ãõ]/.test(w) ? "Falta la til de la vocal nasal: " : "Revisá la tilde: ") + it(cSo) + ".", false, { good: cSo });
+        }
       }
 
       /* 2b. Artículos y pronombres del español sueltos; «no» por «não» */
@@ -872,12 +936,12 @@
       if (/^(em|de|a|por|en)$/.test(w) && ni === i + 1 && !tk[ni].cap) {
         var pw = w === "en" ? "em" : w;
         var cf = U.contract ? U.contract(pw, n) : null;
-        var quoted = /["“”«»']/.test(srcT.slice(t.at + t.len, tk[ni].at));
+        var quoted = /["“”«»'()]/.test(srcT.slice(t.at + t.len, tk[ni].at));
         var infAhead = [n2, W(wi(wi(ni, 1), 1)), W(wi(wi(wi(ni, 1), 1), 1))].some(function (x) { return isInf(x) || V(x).some(function (v) { return v.tense === "infPessoal" && /(rem|rmos|res)$/.test(x); }); });
         if (cf && !quoted && !(/^(ele|ela|eles|elas|este|esta|esse|essa|aquele|aquela|o|a|os|as)$/.test(n) && infAhead && /^(de|em)$/.test(pw)) && !(pw === "a" && /^(o|os)$/.test(n) && isVerb(n2)) && !(pw === "a" && n === "a" && isVerb(n2)) &&
             !(pw === "em" && /^(um|uma|uns|umas)$/.test(n)) && !(pw === "de" && /^(um|uma|uns|umas)$/.test(n)) && !(pw === "de" && /^(o|a|os|as)$/.test(n) && isInf(n2))) {
-          if (cf.charAt(0) === "à") return push(i, 2, "crase", it(w + " " + n) + " se funden con acento grave: " + it(cf) + " (crase).");
-          return push(i, 2, "contraccion", it(w + " " + n) + " se contrae: " + it(cf) + (w === "en" ? " (y *en* es español)" : "") + ".");
+          if (cf.charAt(0) === "à") return push(i, 2, "crase", it(w + " " + n) + " se funden con acento grave: " + it(cf) + " (crase).", false, { good: cf });
+          return push(i, 2, "contraccion", it(w + " " + n) + " se contrae: " + it(cf) + (w === "en" ? " (y *en* es español)" : "") + ".", false, { good: cf });
         }
       }
       // em / de / a + país con artículo: em Brasil → no Brasil
@@ -913,7 +977,7 @@
       /* 5. muito */
       if (/^(muito|muita|muitos|muitas|pouco|pouca|poucos|poucas)$/.test(w) && ni === i + 1) {
         var base = w.replace(/(o|a|os|as)$/, "");
-        var gnM = /^(todos|todas|tudo|os|as|o|a|mais|menos|bem|mal|pouco|tempo)$/.test(n) || PP(n) || /(ad|id)[oa]s?$/.test(n) ? null : nounGN(n) || (!isAdj(n) && !V(n).length ? guessGN(n) : null);
+        var gnM = /^(todos|todas|tudo|os|as|o|a|mais|menos|bem|mal|pouco|tempo|das|dos|da|do|de|nas|nos|na|no|pelas|pelos|pela|pelo|às|aos|à|ao|com|em|para)$/.test(n) || PP(n) || /(ad|id)[oa]s?$/.test(n) ? null : nounGN(n) || (!isAdj(n) && !V(n).length ? guessGN(n) : null);
         if (isAdj(n) && !isNoun(n) && w !== base + "o" && !nounGN(n) && !(/^(muitos|muitas|poucos|poucas)$/.test(w) && (/s$/.test(n))) ) push(i, 1, "muito", "Delante de un adjetivo es invariable: " + it(base + "o " + n) + ".");
         else if (gnM && gnM.n && base + { ms: "o", fs: "a", mp: "os", fp: "as" }[gnM.g + gnM.n] !== w && !isAdj(n) && !COMMON_G.test(n) &&
                  !(w === "muito" && (/^(continua|continuam|fica|ficam|está|estão|é|são|parece|parecem|estava|estavam|era|eram|ser|estar|ficar)$/.test(p))))
@@ -939,7 +1003,7 @@
       /* 7. «a» personal */
       if (/^(a|ao|aos)$/.test(w) && pi >= 0 && (lemmas(p).some(function (l) { return DO_VERB.test(l); }) || DO_VERB.test(PP(p) || "")) && ni >= 0) {
         var isP = (w !== "a" && (tk[ni].cap || PERSON_N.test(n) || POSS.test(n))) || (w === "a" && /^(um|uma)$/.test(n) && !lemmas(p).some(function (l) { return /^(ajudar|levar)$/.test(l); })) || (w === "a" && (/^(meu|meus|teu|seu|seus|nosso|nossos|minhas|suas|nossas|ele|eles|ela|elas|você|vocês|todos|ninguém|alguém|o|os)$/.test(n)));
-        if (isP && !/^(casa|pé)$/.test(n) && !isInf(n)) push(i, 1, "a_personal", "Sin «a»: el objeto directo de persona va directo (" + it(p + (w === "ao" ? " o" : w === "aos" ? " os" : "") + " " + tk[ni].o + (POSS.test(n) && W(wi(ni, 1)) ? " " + W(wi(ni, 1)) : "")) + ").");
+        if (isP && !/^(casa|pé)$/.test(n) && !isInf(n)) push(i, 1, "a_personal", "Sin «a»: la persona que recibe la acción (el objeto directo) va sin preposición (" + it(p + (w === "ao" ? " o" : w === "aos" ? " os" : "") + " " + tk[ni].o + (POSS.test(n) && W(wi(ni, 1)) ? " " + W(wi(ni, 1)) : "")) + ").");
       }
 
       /* 8. perfeito composto con un pasado cerrado; «he comido» */
@@ -969,7 +1033,7 @@
           var subj9 = subjectAndVerb(st), vk = subj9.k, subjP = subj9.p;
           var vw = W(vk), rd = V(vw);
           var sw2 = sentence(i).join(" ");
-          var futureMain = /(^| )(vou|vamos)( |$)/.test(sw2) || /(^| )(vai|vão) [a-zà-ú]+(ar|er|ir|or)( |$)/.test(sw2) || /\b(amanhã|que vem|próximo|próxima)\b/.test(sw2) ||
+          var futureMain = /(^| )(vou|vamos)( |$)/.test(sw2) || /(^| )(vai|vão) [a-zà-ú]+(ar|er|ir|or)( |$)/.test(sw2) || /\b(amanhã|(semana|mês|ano|domingo|sábado|verão|inverno) que vem|(próximo|próxima|próximos|próximas) (semana|mês|ano|anos|verão|inverno|domingo|sábado|segunda|vez|dia|dias|feriado|fim))\b/.test(sw2) ||
             sentence(i).some(function (x) { return V(x).some(function (v) { return v.tense === "futuro"; }); });
           if (vk >= 0 && vw && !tk[vk].cap && !/^(nada|tudo|como|algo|nenhum|ninguém)$/.test(vw)) {
             var pers = subjP != null ? subjP : 2;
@@ -1000,11 +1064,12 @@
         var past10 = w === "que" && V(p).some(function (v) { return /^(perfeito|imperfeito|condicional)$/.test(v.tense); }) && !/^(quero|espero)$/.test(p);
         var sv10 = subjectAndVerb(w === "tomara" && n === "que" ? ni : i), sk = sv10.k, sp2 = sv10.p;
         var sv = V(W(sk));
-        if (sk >= 0 && sv.length && !sv.some(function (v) { return /^subj/.test(v.tense) || v.tense === "infPessoal"; }) && !tk[sk].cap && !isInf(W(sk))) {
+        if (sk >= 0 && sv.length && !sv.some(function (v) { return /^subj/.test(v.tense) || v.tense === "infPessoal"; }) && !tk[sk].cap && !isInf(W(sk)) && !(/^(como|para|sobre|entre|segundo)$/.test(W(sk)) && SUBJ_PRON[W(wi(sk, -1))] == null)) {
           var pres = sv.filter(function (v) { return v.tense === "presente" || (past10 && /^(imperfeito|perfeito)$/.test(v.tense)); });
           var pick = pres.filter(function (v) { return v.p === sp2; })[0] || pres.filter(function (v) { return v.p === 2; })[0] || pres[0];
           var sf = pick && conjForm(pick.lemma, past10 ? "subjImperfeito" : "subjPresente", pick.p);
-          if (sf && sf !== W(sk)) push(sk, 1, "subjuntivo", "Después de " + it(w === "que" ? (trigW === "que" ? "que" : trigW + " que") : w) + " va subjuntivo: " + it(sf) + ".");
+          if (sf && sf !== W(sk)) push(sk, 1, "subjuntivo", "Después de " + it(w === "que" ? (trigW === "que" ? "que" : trigW + " que") : w) + " va subjuntivo: " + it(sf) + ".",
+            /^(sugere|sugerem|sugeriu|sugeriram)$/.test(trigW));
         }
       }
       if (w === "que" && /^(acho|achamos|acha|acham|acredito|creio|penso)$/.test(p) && week >= 23 && !/^(não|nunca)$/.test(p2)) {
@@ -1046,7 +1111,8 @@
       /* 14. crase */
       if (w === "a" && pi >= 0 && ni === i + 1 && PLACES_F.test(n) && (lemmas(p).some(function (l) { return MOTION.test(l); }) || isInf(p) && MOTION.test(p)) && !tk[ni].cap) push(i, 1, "crase", "Ir *a* + *a* praia = " + it("à " + n) + " (con crase; con masculino sería *ao*).");
       if (w === "a" && pi >= 0 && tk[ni] && tk[ni].cap && /^(lapa|urca|tijuca|glória|bahia|argentina|europa|itália|frança|espanha|alemanha|inglaterra|amazônia|áfrica|ásia)$/.test(n) && lemmas(p).some(function (l) { return MOTION.test(l); })) push(i, 1, "crase", "Con lugar femenino con artículo: " + it("à " + tk[ni].o) + ".");
-      if (w === "as" && HOURW.test(n) && ni === i + 1 && !/^(são|todas|eram|entre|das|desde|até|após|para|pelas|antes|depois|a|e)$/.test(p) && !(pi >= 0 && /^(de|das)$/.test(W(wi(i, -2)) )) && !ART.test(p) && (/^(horas|e|da|de|em)$/.test(n2) || tk[wi(ni, 1) - 1] && tk[wi(ni, 1) - 1].p || !n2)) push(i, 1, "crase", "Con la hora va crase: " + it("às " + n) + ".");
+      if (w === "as" && HOURW.test(n) && ni === i + 1 && !/^(são|todas|eram|entre|das|desde|até|após|para|pelas|antes|depois|a|e)$/.test(p) && !(pi >= 0 && /^(de|das)$/.test(W(wi(i, -2)) )) && !ART.test(p) && (/^(horas|e|da|de|em)$/.test(n2) || tk[wi(ni, 1) - 1] && tk[wi(ni, 1) - 1].p || !n2) &&
+          !(n2 === "horas" && /^(diárias|semanais|mensais|seguidas|por|extras|de|a)$/.test(W(wi(wi(ni, 1), 1))))) push(i, 1, "crase", "Con la hora va crase: " + it("às " + n) + ".");
       if (/^(à|às)$/.test(w) && ni === i + 1 && (nounGN(n) && nounGN(n).g === "m" && !/^(moda|maneira)$/.test(n) || isInf(n) || /^(pé|cavalo|vista|prazo)$/.test(n)) && !/^(à-toa)$/.test(n))
         push(i, 1, "crase", "Delante de " + (isInf(n) ? "un verbo" : "un masculino") + " no hay crase: " + it(w.replace("à", "a") + " " + n) + ".");
       if (w === "à" && /^(uma|dois|duas|três|quatro|cinco|seis|sete|oito|nove|dez)$/.test(n) && /^(anos|meses|dias|semanas|horas|minutos|séculos)$/.test(n2)) push(i, 1, "ortografia", "Tiempo pasado: " + it("há " + n + " " + n2) + " (hace).");
@@ -1080,8 +1146,7 @@
         try { parts = Conj && Conj.participles ? Conj.participles(lemP) : null; } catch (e) { parts = null; }
         if (parts && parts.regular && parts.irregular && parts.regular !== parts.irregular) {
           var regF = parts.regular, irrF = parts.irregular;
-          var suffixP = w.slice(regF.length - 1).replace(/^o/, "") ;
-          var isReg = w.replace(/(a|os|as)$/, "o") === regF, isIrr = w.replace(/(a|os|as)$/, "o") === irrF;
+          var isReg = w.replace(/(a|os|as)$/, "o") === regF;
           if (isReg && /^(é|são|foi|foram|era|eram|será|serão|seja|sejam|fosse|fossem|sido|ser|está|estão|estava|estavam|ficou|ficaram|fica|ficam)$/.test(p))
             push(i, 1, "participio", "Con *ser, estar* y *ficar* va el participio corto: " + it(irrF.replace(/o$/, w.slice(regF.length - 1))) + ".");
         }
@@ -1099,7 +1164,7 @@
 
       /* 19. tildes de verbo: ele e alto → é */
       var capP = pi >= 0 && tk[pi].cap && !tk[pi].start;
-      if (w === "e" && pi >= 0 && (/^(ele|ela|você|isso|isto|aquilo|tudo|onde|quem|qual)$/.test(p) || capP) && ni >= 0 &&
+      if (w === "e" && pi >= 0 && pi === i - 1 && (/^(ele|ela|você|isso|isto|aquilo|tudo|onde|quem|qual)$/.test(p) || capP) && ni >= 0 &&
           (isAdj(n) && !isNoun(n) || (!capP && /^(muito|um|uma|meu|minha|aqui|lá|verdade|possível|importante)$/.test(n))) && !(tk[ni].cap) && !(tk[wi(pi, -1)] && /^(e|,)$/.test(W(wi(pi, -1)))))
         push(i, 1, "tilde", "El verbo lleva tilde: " + it("é") + " (*e* sin tilde es «y»).");
 
@@ -1110,8 +1175,13 @@
 
       /* 20. mas / mais; porque en preguntas */
       if (w === "mais" && (t.start || t.clause) && (SUBJ_PRON[n] != null || /^(não|também|ninguém|nada)$/.test(n)) && !/^(ou)$/.test(p)) push(i, 1, "lexico", it("Mais") + " es «más»; «pero» es " + it("mas") + ".");
-      if (w === "porque" && t.start) {
-        for (var q2 = i + 1; q2 < tk.length; q2++) if (tk[q2].p && /[.!?]/.test(tk[q2].p)) { if (tk[q2].p === "?") push(i, 1, "ortografia", "En una pregunta, separado: " + it("Por que…?") + " (porque = porque, en la respuesta)."); break; }
+      // «Porque…» after a question is the answer (Por que…? Porque…), and «…, né?» / «…, sabe?» only asks for agreement
+      var afterQ = pi >= 0 && (function () { for (var q0 = i - 1; q0 >= 0; q0--) if (tk[q0].p && /[.!?]/.test(tk[q0].p)) return tk[q0].p === "?"; return false; })();
+      if (w === "porque" && t.start && !afterQ) {
+        for (var q2 = i + 1; q2 < tk.length; q2++) if (tk[q2].p && /[.!?]/.test(tk[q2].p)) {
+          if (tk[q2].p === "?" && !/^(né|sabe|entende|viu|certo)$/.test(W(wi(q2, -1)))) push(i, 1, "ortografia", "En una pregunta, separado: " + it("Por que…?") + " (porque = porque, en la respuesta).");
+          break;
+        }
       }
 
       /* 21. falsos amigos en contexto */
@@ -1154,7 +1224,7 @@
         var rp = rl.map(function (l) { return { gostar: "de", precisar: "de", lembrar: "de", depender: "de", falar: "de", pensar: "em", acreditar: "em", confiar: "em", sonhar: "com", casar: "com" }[l]; }).filter(Boolean)[0];
         if (rq >= 0 && rp && !(rl[0] === "falar" && W(wi(rq, 1)) === "com") && !/^(que|se)$/.test(W(wi(rq, 1)))) push(i, 1, "regencia", "El verbo del relativo pide su preposición delante: " + it((rp === "de" ? "de" : rp === "em" ? "em" : "com") + " que") + " (o bairro de que gosto, a pessoa em quem penso).", true);
       }
-      if (w === "de" && n === "que" && lemmas(p).some(function (l) { return /^(achar|pensar|acreditar|dizer|defender|afirmar|sustentar|crer|considerar|ressaltar|garantir|explicar)$/.test(l); }) && !(isNoun(n2) || (guessGN(n2) && !V(n2).length))) push(i, 1, "regencia", "Sin *de*: " + it(p + " que") + ".");
+      if (w === "de" && n === "que" && lemmas(p).some(function (l) { return /^(achar|pensar|acreditar|dizer|defender|afirmar|sustentar|crer|considerar|ressaltar|garantir|explicar)$/.test(l); }) && !ART.test(W(wi(pi, -1))) && !(isNoun(n2) || (guessGN(n2) && !V(n2).length))) push(i, 1, "regencia", "Sin *de*: " + it(p + " que") + ".");
 
       /* 23. más preposiciones */
       if (/^(os|as)$/.test(w) && (t.start || t.clause) && /^(domingos|sábados|segundas|terças|quartas|quintas|sextas|fins|feriados|finais)$/.test(n)) {
@@ -1187,7 +1257,7 @@
       }
 
       /* 26. subjuntivo e hipótesis */
-      if (w === "se" && (t.clause || /^(e|mas|que)$/.test(p))) {
+      if (w === "se" && (t.clause || /^(e|mas|que)$/.test(p)) && !(p === "que" && ni === i + 1 && V(n).length)) {
         var hk = wi(i, 1);
         while (hk >= 0 && (SUBJ_PRON[W(hk)] != null || /^(não|me|te|nos|lhe|o|a|os|as)$/.test(W(hk)) || (!V(W(hk)).length && !isInf(W(hk)) && hk <= i + 4 && !tk[hk].p))) hk = wi(hk, 1);
         var hw = W(hk), hv = V(hw);
@@ -1212,21 +1282,73 @@
       }
 
       /* 28. colocação en la escritura formal */
-      if (week === 33 && t.start && CLIT.test(w) && ni === i + 1 && (finite(n) || /(ou|ei|aram|eram|iram|ava|avam|ia|iam|am|em)$/.test(n)) && !/[,]/.test(tk.slice(i, i + 12).map(function (x) { return x.p || ""; }).join("")))
-        push(i, 2, "colocacao", "En la escritura formal no se empieza con pronombre átono: " + it(tk[ni].o.charAt(0).toUpperCase() + n.slice(1) + "-" + w) + ".");
+      if (formal && t.start && CLIT.test(w) && ni === i + 1 && (finite(n) || /(ou|ei|aram|eram|iram|ava|avam|ia|iam|am|em)$/.test(n)))
+        push(i, 2, "colocacao", "En la escritura formal no se empieza con un pronombre átono (me, te, se, lhe): " + it(tk[ni].o.charAt(0).toUpperCase() + n.slice(1) + "-" + w) + ". En el habla de Brasil, " + it(w + " " + n) + " es lo normal.",
+          false, { level: "close", good: tk[ni].o.charAt(0).toUpperCase() + n.slice(1) + "-" + w });
       if (week >= 32 && t.start && w === "se" && ni === i + 1 && V(n).some(function (v) { return v.tense === "presente" && (v.p === 2 || v.p === 5); })) {
         var sent7 = [];
         for (var q7 = i; q7 < tk.length && !(tk[q7].p && /[.!?]/.test(tk[q7].p)); q7++) sent7.push(tk[q7]);
         if (!sent7.some(function (x) { return x.p === ","; }) && !sent7.some(function (x) { return SUBJ_PRON[x.w] != null; })) push(i, 2, "colocacao", "En carteles y avisos: " + it(tk[ni].o.charAt(0).toUpperCase() + n.slice(1) + "-se") + " (vende-se, aluga-se).", week !== 32);
       }
 
-      /* 29. registro y léxico */
-      if (/^(40|43|48|49)$/.test(String(week)) && t.start && w === "tem" && ni >= 0 && !isInf(n) && !PP(n) && n !== "que" && sentEnd(i) !== "?") push(i, 1, "lexico", "En lo escrito, «hay» es " + it("há") + " (*tem* es del habla).");
-      if (/^(40|43|48|49)$/.test(String(week)) && COLLOQ.test(w) && !/^(cara|tipo|parada|tranquilo|aí|beleza)$/.test(w)) push(i, 1, "lexico", it(t.o) + " es del habla; en un texto formal: " + it({ "tá": "está", "tô": "estou", tava: "estava", pra: "para", pro: "para o", pros: "para os", pras: "para as", "né": "não é", "cadê": "onde está", "cê": "você", vamo: "vamos" }[w] || "otra palabra") + ".");
+      /* 29. registro (la tabla de Diagnosi.REGISTRO) y léxico */
+      if (formal && t.start && w === "tem" && ni >= 0 && !isInf(n) && !PP(n) && n !== "que" && sentEnd(i) !== "?")
+        push(i, 1, "registro", REGNOTE("tem", "há") + " (*tem* por «hay» es del habla).", false, { level: "close", good: "há" });
+      var stdR = REGSTD[w];
+      if (formal && (stdR || COLLOQ.test(w)) && !/^(cara|tipo|parada|tranquilo|aí|beleza)$/.test(w)) {
+        stdR = stdR || { "né": "não é", "cê": "você" }[w] || "";
+        push(i, 1, "registro", REGNOTE(t.o, stdR), false, { level: "close", good: stdR });
+      }
+      // vi ele, amo você: el pronombre del habla después del verbo
+      if (formal && finite(w) && !PREPS.test(w) && !/^(como|segundo|conforme|entre|sobre|contra|era|foi|são|é)$/.test(w) && !/^(ser|estar|ficar|parecer|ir|vir)$/.test(lemmas(w)[0] || "") && ni === i + 1 && /^(ele|ela|eles|elas|você)$/.test(n) && !finite(n2) && !isInf(n2) &&
+          (!n2 || PREPS.test(n2) || /^(ontem|hoje|amanhã|agora|ali|lá|aqui|sempre|também|depois|antes|ainda|já|muito|bem|mal|todo|toda|cedo|tarde)$/.test(n2) || (tk[ni + 1] && tk[ni + 1].p)) && !(pi >= 0 && /^(que|quem|onde|como|quando)$/.test(p))) {
+        var clR = { ele: "o", ela: "a", eles: "os", elas: "as", "você": "o" }[n];
+        push(i, 2, "registro", REGNOTE(t.o + " " + n, clR + " " + w) + " En lo escrito el objeto va con el pronombre átono (" + it(clR) + ").", false, { level: "close", good: clR + " " + w });
+      }
       if (w === "todo" && ni === i + 1 && finite(n) && !isNoun(n) && !guessGN(n)) push(i, 1, "lexico", "El pronombre invariable es " + it("tudo") + " (tudo está bem); *todo* acompaña a un sustantivo.");
       if (hasLem(w, /^pisar$/) && n === "a" && n2 === "bola") push(i, 3, "lexico", "La expresión es " + it("pisar na bola") + ".");
       if (w === "em" && n === "brincadeira") push(i, 2, "lexico", "La expresión es " + it("levar na brincadeira") + ".");
       if (w === "que" && n === "?" ) { /* */ }
+
+      /* 29b. regencia, ser/estar, persona y la hipótesis (tanda 2026-09 del corpus) */
+      // sonhar com (soñar con): nunca «sonhar de»
+      if (w === "de" && pi === i - 1 && hasLem(p, /^sonhar$/)) push(i, 1, "regencia", "*Sonhar* va con *com*: " + it(p + " com") + ", como «soñar con» en español.", false, { good: "com" });
+      // el estado de hoy va con estar: hoje a praia está cheia, hoje o tempo está quente
+      if (/^(é|são|era|eram)$/.test(w) && sentence(i).some(function (x) { return /^(hoje|agora|ontem)$/.test(x); }) &&
+          ((/^(cheio|cheia|cheios|cheias|lotado|lotada|lotados|lotadas|vazio|vazia|fechado|fechada|aberto|aberta)$/.test(n) && ni === i + 1) ||
+           (/^(tempo|dia)$/.test(p) && (/^(quente|frio|fria|nublado|chuvoso|abafado|ensolarado)$/.test(n) || (n === "muito" && /^(quente|frio|nublado|chuvoso|abafado)$/.test(n2)))))) {
+        var est = { "é": "está", "são": "estão", era: "estava", eram: "estavam" }[w];
+        push(i, 1, "ser_estar", "Para cómo está algo hoy va *estar*: " + it(est + " " + n) + " (como en español «hoy la playa está llena»); *ser* es para cómo es siempre.", false, { good: est });
+      }
+      // Meus pais mora → moram: sujeto plural con el verbo en singular
+      if (finite(w) && !PREPS.test(w) && !/^(como|sobre|entre|segundo|conforme|fora|cerca)$/.test(w) && pi === i - 1 && pi >= 1 && /^(os|as|meus|minhas|seus|suas|nossos|nossas|esses|essas|estes|estas|muitos|muitas|alguns|algumas|vários|várias|dois|duas|três)$/.test(W(pi - 1)) &&
+          (isNoun(p) || (nounGN(p) && nounGN(p).n === "p")) && /s$/.test(p) && !/^(é|era|foi|tem|vem|há)$/.test(w) &&
+          // the plural noun phrase opens the subject: at the start, or after e, mas, que, quando…
+          (tk[pi - 1].start || tk[pi - 1].clause || /^(e|mas|que|quando|porque|se|onde)$/.test(W(wi(pi - 1, -1))))) {
+        var rv = V(w).filter(function (v) { return v.p === 2 && /^(presente|perfeito|imperfeito)$/.test(v.tense); })[0];
+        var pl3 = rv && !V(w).some(function (v) { return v.p === 5; }) ? conjForm(rv.lemma, rv.tense, 5) : null;
+        if (pl3 && pl3 !== w) push(i, 1, "persona", "El sujeto es plural (" + it(W(pi - 1) + " " + p) + "): " + it(pl3) + ".", false, { good: pl3 });
+      }
+      // se + imperfeito do subjuntivo: la consecuencia va en condicional (se eu tivesse…, estudaria)
+      if (V(w).length && V(w).every(function (v) { return v.tense === "futuro"; }) && sentence(i).some(function (x) { return V(x).some(function (v) { return v.tense === "subjImperfeito"; }); }) &&
+          sentence(i).indexOf("se") >= 0) {
+        var fv = V(w)[0], cf6 = conjForm(fv.lemma, "condicional", fv.p);
+        if (cf6) push(i, 1, "tempo", "Con *se* + imperfeito do subjuntivo, la consecuencia va en condicional: " + it(cf6) + " (como «si tuviera…, estudiaría»).", false, { good: cf6 });
+      }
+      // se eu morava…, iria: la condición irreal va en imperfeito do subjuntivo
+      if (w === "se" && (t.clause || /^(e|mas)$/.test(p) || t.start)) {
+        var mk = wi(i, 1);
+        while (mk >= 0 && (SUBJ_PRON[W(mk)] != null || /^(não|me|te|nos|lhe)$/.test(W(mk)))) mk = wi(mk, 1);
+        var mv6 = V(W(mk));
+        if (mk >= 0 && mv6.length && mv6.every(function (v) { return v.tense === "imperfeito"; }) &&
+            sentence(i).some(function (x) { return V(x).some(function (v) { return v.tense === "condicional"; }); })) {
+          var si6 = conjForm(mv6[0].lemma, "subjImperfeito", mv6[0].p);
+          if (si6) push(mk, 1, "subjuntivo", "Condición irreal: *se* + imperfeito do subjuntivo, " + it(si6) + ", como «si viviera» en español (no «si vivía»).", false, { good: si6 });
+        }
+      }
+      // en un texto formal, «que tem muitos…» también es el «hay» del habla
+      if (formal && w === "tem" && p === "que" && /^(muito|muitos|muitas|pouco|poucos|poucas|um|uma|uns|umas|vários|várias|mais|menos|algum|alguma|alguns|algumas|nenhum|nenhuma)$/.test(n))
+        push(i, 1, "registro", REGNOTE("tem", "há") + " (*tem* por «hay» es del habla).", false, { level: "close", good: "há" });
 
       /* 30. palabras de más */
       if (w === "mais" && /^(maior|maiores|menor|menores|melhor|melhores|pior|piores)$/.test(n) && ni === i + 1) push(i, 1, "sobrante", it(n) + " ya es comparativo: sin " + it("mais") + ".");
@@ -1235,7 +1357,41 @@
 
     });
     out = citedOut(String(text || "").normalize("NFC").replace(/[’‘`´]/g, "'"), tk, out, /^(palavra|palavras|termo|termos|verbo|verbos|expressão|expressões|adjetivo|substantivo|forma|vocábulo)$/);
+    out.forEach(function (f) { finding(f, tk, srcT); });
     return out.sort(function (a, b) { return a.i - b.i; });
+  }
+
+  /* Cada marca, lista para el perfil de errores: bad (lo escrito), good (la
+     corrección mínima, si se sabe; si no, ""), why (la explicación: el
+     mensaje y, si es corto, la regla de la categoría con el contraste con el
+     español) y level ("wrong": error; "close": casi, como el registro del
+     habla en un texto formal o una sugerencia dudosa). */
+  function deacc(x) { return String(x).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase(); }
+  function guessGood(msg, bad) {
+    var segs = [], re = /\*([^*]+)\*/g, m, b = deacc(bad);
+    while ((m = re.exec(msg))) segs.push({ x: m[1], at: m.index });
+    segs = segs.filter(function (q) {
+      var d = deacc(q.x);
+      if (q.x.toLowerCase() === String(bad).toLowerCase() || /^-|,\s*-|\+|…/.test(q.x)) return false;
+      // a correction looks like what was written (same start, or near in spelling)
+      return d.charAt(0) === b.charAt(0) || (U.editDistance && U.editDistance(d, b) <= Math.max(2, Math.floor(b.length / 2)));
+    });
+    if (!segs.length) return "";
+    var colon = msg.indexOf(":");
+    var after = segs.filter(function (q) { return q.at > colon; })[0];
+    return (after || segs[0]).x;
+  }
+  function finding(f, tk, src) {
+    var a = tk[f.i], z = tk[Math.min(tk.length - 1, f.i + f.n - 1)];
+    if (f.bad == null) f.bad = a && z && a.at != null && z.at != null ? src.slice(a.at, z.at + z.len) : tk.slice(f.i, f.i + f.n).map(function (x) { return x.o || ""; }).join(" ");
+    if (f.good == null) f.good = guessGood(f.msg || "", f.bad);
+    if (f.why == null) {
+      var why = String(f.msg || ""), c = D && D.capa ? D.capa(f.cat) : null;
+      if (c && why.replace(/\*/g, "").length < 70) why += " " + c.regla + (/español|castellano|«/.test(why) ? "" : " " + c.es);
+      f.why = why.trim();
+    }
+    if (!f.level) f.level = f.soft ? "close" : "wrong";
+    return f;
   }
 
   function firstLemma(w) {
@@ -1252,14 +1408,14 @@
 
   /* ------------------------------------------------------------ revisión */
 
-  function check(text, week) {
+  function check(text, week, opts) {
     var task = TASKS[week] || { min: 20, use: [] };
     var f = features(text);
     var reqs = [{ label: task.min + " palabras", n: f.words || 0, need: task.min }].concat(task.use.map(function (u) {
       return { id: u[0], label: u[2], n: f[u[0]] || 0, need: u[1] };
     }));
     reqs.forEach(function (r) { r.ok = r.n >= r.need; });
-    var findings = lint(text, week);
+    var findings = lint(text, week, opts);
     return { words: f.words || 0, features: f, reqs: reqs, findings: findings,
              hard: findings.filter(function (x) { return !x.soft; }).length,
              ok: reqs.every(function (r) { return r.ok; }) };
@@ -1332,24 +1488,11 @@
   }
 
   /* ------------------------------------------------------------ IA
-     Optional: the learner's own free keys.  Groq first (no card, answers in
-     a second or two), Gemini as fallback when Groq fails or has no key.
-     Both speak the OpenAI-style API.  Which models a key can use changes
-     over time, so the app asks each provider for its list and takes the
-     best one available.  The keys never leave the phone except to them. */
-  var PROVIDERS = [
-    { id: "groq", name: "Groq", url: "https://api.groq.com/openai/v1", maxKey: "max_completion_tokens",
-      prefer: [/kimi-k2/i, /gpt-oss-120b/i, /llama-3\.3-70b/i, /qwen3?-32b|qwen\//i, /llama-4-maverick/i, /llama-4-scout/i, /gpt-oss-20b/i, /llama-3\.1-8b/i],
-      skip: /whisper|tts|guard|playai|orpheus|distil|compound|allam|embed/i,
-      fallback: ["moonshotai/kimi-k2-instruct", "openai/gpt-oss-120b", "llama-3.3-70b-versatile", "qwen/qwen3-32b", "llama-3.1-8b-instant"],
-      reasoning: function (m) { return /gpt-oss/i.test(m) ? "low" : /qwen3/i.test(m) ? "none" : null; } },
-    { id: "gemini", name: "Gemini", url: "https://generativelanguage.googleapis.com/v1beta/openai", maxKey: "max_tokens",
-      prefer: [/^gemini-2\.5-flash$/, /^gemini-flash-latest$/, /^gemini-2\.0-flash$/, /^gemini-2\.5-flash-lite$/, /^gemini-flash-lite-latest$/,
-               /^gemini-2\.0-flash-lite$/, /^gemini-2\.5-pro$/, /^gemini-[\d.]+-flash$/, /^gemini-.*flash/],
-      skip: /embed|imagen|veo|tts|aqa|image|audio|live|native|learnlm|gemma|robotics|computer|thinking/i,
-      fallback: ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-2.5-flash-lite"],
-      reasoning: function (m) { return /pro/i.test(m) ? "low" : /2\.5|latest/i.test(m) ? "none" : null; } }
-  ];
+     Optional: the learner's own free keys.  The client (providers, model
+     ranking, reasoning off, streaming, which provider goes first) lives in
+     the core, js/ia.js, the same for both languages; the prompts are here. */
+  var IA = root.IA;
+  var PROVIDERS = IA ? IA.PROVIDERS : [];
   // The error types of the clinic: the AI files each mistake under one of them.
   var AI_TYPES = {
     contraccion: "contracción obligatoria no hecha (em o → no, de ele → dele)", articulo: "artículo (forma, falta o sobra)",
@@ -1367,11 +1510,12 @@
     estilo: "correcto pero poco natural (sugerencia, no error)"
   };
   function levelOf(week) { return week <= 8 ? "A1" : week <= 18 ? "A2" : week <= 30 ? "B1" : week <= 42 ? "B2" : "C1"; }
-  var PB_NORM = "La referencia es el portugués de Brasil, norma urbana culta: la próclise del habla brasileña (me chamo, te amo), " +
+  // La norma de los pedidos a la IA sale de la tabla de registro de Diagnosi (la misma de las respuestas cerradas y de lint).
+  var PB_NORM = D && D.REGISTRO && D.REGISTRO.prompt ? D.REGISTRO.prompt : "La referencia es el portugués de Brasil, norma urbana culta: la próclise del habla brasileña (me chamo, te amo), " +
     "«você» con verbo en tercera, «a gente» con verbo en singular, el artículo opcional ante posesivo, *em um* o *num*, son correctos; " +
     "lo coloquial (pra, tá, vi ele, tem por há) no es error en un texto informal, pero marcalo como \"estilo\" en uno formal. " +
     "No corrijas hacia el portugués europeo. Ortografía del Acuerdo de 1990 (ideia, voo, linguiça).";
-  function aiPrompt(text, week, task) {
+  function aiPrompt(text, week, task, ctx) {
     return "Sos profesor de portugués de Brasil, nativo, para un hispanohablante rioplatense que está en la semana " + week +
       " de 52 de un curso hasta C1 (nivel actual aproximado: " + levelOf(week) + ").\n" +
       "Consigna del ejercicio: «" + (task ? task.t : "texto libre") + "»." +
@@ -1391,18 +1535,22 @@
       "Los errores van en el orden en que aparecen en el texto. Cada error se marca una sola vez: no repitas un error ni marques uno " +
       "adentro de otro (si en «Eu tengo 32 anos» y «muy» hay dos errores, van separados). Las explicaciones, la consigna y el " +
       "comentario van en castellano, con portugués solo en los ejemplos. El comentario habla del texto del alumno, no del corregido. " +
-      "Antes de responder, revisá que cada explicación sea cierta.\n\nTexto:\n" + text;
+      "Antes de responder, revisá que cada explicación sea cierta." + ctxBlock(ctx, true) + "\n\nTexto:\n" + text;
   }
   /* A second teacher checks the first one's correction: drops what is not
      an error or is repeated, fixes wrong explanations, adds what was missed. */
-  function reviewPrompt(text, week, task, data, evidence) {
+  function reviewPrompt(text, week, task, data, evidence, ctx) {
     var ev = "";
     if (evidence && ((evidence.local || []).length || (evidence.lt || []).length)) {
       // A model cannot check its own work without outside evidence (Kamoi
       // et al. 2024): the rule checker and LanguageTool are that evidence.
-      ev = "\nEvidencia externa, para contrastar (verificá cada punto: puede tener falsos positivos, no la copies a ciegas):\n" +
-        (evidence.local || []).slice(0, 12).map(function (m) { return "- corrector de reglas: " + m; }).join("\n") +
-        ((evidence.lt || []).length ? "\n" + evidence.lt.slice(0, 12).map(function (m) { return "- LanguageTool: " + m; }).join("\n") : "") + "\n";
+      // The rule checker has no false alarms measured: its marks are sure,
+      // and the learner sees them anyway (the correction is the union).
+      ev = ((evidence.local || []).length ? "\nMarcas SEGURAS del corrector de reglas de la app (reglas revisadas, 0 falsas alarmas medidas; el alumno ya las ve): " +
+          "no hace falta repetirlas; si creés que alguna NO es un error, incluila con \"contradice\": true y explicá por qué.\n" +
+          evidence.local.slice(0, 12).map(function (m) { return "- " + m; }).join("\n") + "\n" : "") +
+        ((evidence.lt || []).length ? "\nLanguageTool (verificá cada punto: puede tener falsos positivos, no lo copies a ciegas):\n" +
+          evidence.lt.slice(0, 12).map(function (m) { return "- " + m; }).join("\n") + "\n" : "");
     }
     return "Sos un segundo profesor de portugués de Brasil, nativo, que revisa la corrección que un colega hizo del texto de un alumno " +
       "hispanohablante rioplatense (semana " + week + " de 52 de un curso hasta C1; consigna: «" + (task ? task.t : "texto libre") + "»).\n\n" +
@@ -1416,18 +1564,18 @@
       "6. Agregá los errores que el colega no vio (la evidencia externa puede señalarlos; confirmalos vos).\n" +
       "6b. Corrección mínima: cada \"bien\" cambia lo menos posible; sacá las correcciones de estilo disfrazadas de error.\n" +
       "7. \"corregido\" tiene que tener todos los arreglos y nada más; \"consigna\" y \"comentario\" tienen que ser ciertos y hablar del texto del alumno.\n" +
-      "Respondé SOLO con el JSON revisado, con el mismo formato.";
+      "Respondé SOLO con el JSON revisado, con el mismo formato." + ctxBlock(ctx, true);
   }
   // done(err, data, meta): meta says which provider and model corrected and which reviewed.
   function aiCheck(text, week, keys, done, onStage, opts) {
     var task = TASKS[week];
     opts = opts || {};
-    llm(aiPrompt(text, week, task), keys, function (err, data, meta) {
+    llm(aiPrompt(text, week, task, opts.ctx), keys, function (err, data, meta) {
       if (err) return done(err);
       if (onStage) onStage("review", meta);
       // the evidence may still be on its way (LanguageTool): wait for it a moment
       var go = function (evidence) {
-        llm(reviewPrompt(text, week, task, data, evidence), keys, function (err2, data2, meta2) {
+        llm(reviewPrompt(text, week, task, data, evidence, opts.ctx), keys, function (err2, data2, meta2) {
           var good = !err2 && data2 && Array.isArray(data2.errores);
           done(null, good ? data2 : data, { first: meta, review: good ? meta2 : null, evidence: !!evidence });
         });
@@ -1446,6 +1594,9 @@
       (x.feedback ? "\nCorrección que mostró la app: " + x.feedback : "") +
       (x.diff ? "\nDiferencia exacta (calculada por la app, es un hecho): " + x.diff : "") +
       (x.note ? "\nNota del ejercicio (revisada, es la regla que aplica): " + x.note : "") +
+      (x.stage === "mas" ? "\nEl alumno ya vio la solución y la explicación de la app, y pide que se lo expliques mejor: no repitas lo mismo con otras palabras; " +
+        "da la regla de fondo, un contraste con el español y un ejemplo distinto del ejercicio." : "") +
+      ctxBlock(x.ctx) +
       "\nNo inventes errores ni reglas: hablá solo del error que muestra la diferencia, todo en castellano rioplatense, sin comillas dobles ni HTML (las formas, entre *asteriscos*)." +
       "\n\nExplicale al alumno, en 2 a 4 oraciones en castellano rioplatense, qué está mal en su respuesta y cuál es la regla, " +
       "con un ejemplo corto en portugués. Si su respuesta en realidad también es correcta en el portugués de Brasil, o si la corrección de la app está mal o confunde, decilo claro.\n" +
@@ -1467,6 +1618,8 @@
       (x.accept && x.accept.length > 1 ? "\nOtras respuestas aceptadas: " + x.accept.join(" | ") : "") +
       (x.diff ? "\nDiferencia exacta (calculada por la app, es un hecho): " + x.diff : "") +
       (x.note ? "\nNota del ejercicio (revisada, es la regla que aplica): " + x.note : "") +
+      (x.feedback ? "\nLo que ya le dijo la app (su pista; no la repitas, sumá algo distinto): " + x.feedback : "") +
+      ctxBlock(x.ctx) +
       "\n\nReglas estrictas:\n" +
       "- Todo en castellano rioplatense (vos), sin frases en portugués de Brasil salvo los ejemplos entre *asteriscos*.\n" +
       "- Hablá SOLO del error real: el que muestra la diferencia exacta. No inventes errores ni reglas; si la nota del ejercicio dice la regla, usala tal cual.\n" +
@@ -1479,6 +1632,35 @@
       "Respondé SOLO con JSON: {\"pista1\": \"...\", \"pista2\": \"...\", \"explicacion\": \"...\", \"tambien_correcta\": true o false, \"app_equivocada\": true o false}";
   }
   function hints(x, keys, done) { llm(hintsPrompt(x), keys, done); }
+
+  /* The judge of an answer the item did not foresee (P4.1): the rules
+     fired on the vocabulary or the order, and they are not sure; before
+     the verdict, is it correct and does it say the same?  With what the app
+     said as evidence.  What the AI accepts is kept as a local variant. */
+  function judgePrompt(x) {
+    return "Sos profesor de portugués de Brasil para un hispanohablante rioplatense. Un alumno respondió un ejercicio de una app y su respuesta " +
+      "no está entre las previstas. Decidí dos cosas: si es portugués de Brasil culto o coloquial aceptado correcto y si dice lo mismo que la respuesta esperada (cumple la consigna).\n" +
+      "Consigna: " + (x.prompt || "") + "\nEnunciado: " + (x.stem || "") +
+      "\nRespuesta esperada: " + (x.answer || "") +
+      (x.accept && x.accept.length > 1 ? "\nOtras respuestas que la app acepta: " + x.accept.join(" | ") : "") +
+      "\nRespuesta del alumno: " + (x.given || "") +
+      (x.feedback ? "\nLo que dijo el corrector de reglas de la app (se equivoca a veces con sinónimos, el orden o formas no previstas): " + x.feedback : "") +
+      ctxBlock(x.ctx) + "\n" + PB_NORM + " " +
+      "No le des la razón por cortesía: si hay un error de gramática, de ortografía o el sentido cambia, es false. Ante la duda, false.\n" +
+      "Respondé SOLO con JSON: {\"correcta\": true o false, \"mismo_sentido\": true o false, " +
+      "\"explicacion\": \"una o dos oraciones en castellano rioplatense: por qué vale o qué tiene de malo, con las formas entre *asteriscos*\"}";
+  }
+  function judge(x, keys, done) { llm(judgePrompt(x), keys, done, { max: 300 }); }
+
+  // The course and the learner, for any request (js/errores.js builds it).
+  function ctxBlock(ctx, withFocus) {
+    if (!ctx) return "";
+    var E = root.Errores, t = typeof ctx === "string" ? ctx : E && E.promptCtx ? E.promptCtx(ctx) : "";
+    var focus = withFocus && typeof ctx === "object" && E && E.focusCats ? E.focusCats(ctx) : null;
+    if (focus && focus.length) t += "\nCorrección FOCALIZADA (el alumno es principiante): marcá todos los errores, pero cada uno lleva \"foco\": true si es de estas " +
+      "categorías (" + focus.join(", ") + ") o impide entender, y \"foco\": false si no (la app los muestra plegados).";
+    return t ? "\n\n" + t : "";
+  }
 
   /* ------------------------------------------------------------ fala
      Role-play with a goal (Wang et al. 2025; Dugan et al. 2026): hard,
@@ -1505,7 +1687,7 @@
   function parlaTurnPrompt(scen, history, userText, ctx, done) {
     var pending = scen.obiettivi.map(function (o, i) { return (done || []).indexOf(i + 1) < 0 ? (i + 1) + ") " + o : null; }).filter(Boolean);
     return "Seguís un role-play en portugués de Brasil con un alumno hispanohablante de nivel " + ctx.level + ". Tu personaje: " + scen.ruolo_ia +
-      ". Situación: " + scen.situazione_es + ". Objetivos del alumno: " + scen.obiettivi.map(function (o, i) { return (i + 1) + ") " + o; }).join(" ") +
+      ". Situación: " + String(scen.situazione_es || "").replace(/\.\s*$/, "") + ". Objetivos del alumno: " + scen.obiettivi.map(function (o, i) { return (i + 1) + ") " + o; }).join(" ") +
       (pending.length ? ". Todavía le faltan: " + pending.join(" ") : "") + "\n" +
       "Cómo conversar: respondé primero a lo que el alumno acaba de decir o preguntar (si te pregunta algo, contestalo en personaje, con un dato concreto); " +
       "no repitas lo que ya dijiste antes; mantené el hilo de la situación; terminá con UNA pregunta simple que lo acerque a un objetivo pendiente. " +
@@ -1537,12 +1719,46 @@
       "artículos, concordancia, ortografía y tildes, el español metido (muy, tengo, pero, también) y sobre todo las palabras que cambian el sentido " +
       "(polvo = pulpo; esquisito = raro; largo = ancho; rato = ratón). " + PB_NORM + " Si la frase está bien, \"ok\": true. No inventes reglas.\n" +
       "Respondé SOLO con JSON: {\"frasi\": [{\"i\": número de la frase, \"ok\": true o false, \"corretta\": \"la frase corregida\", " +
-      "\"nota\": \"una observación breve en castellano rioplatense, o vacío\"}]} con una entrada para cada una de estas frases: " + mine.join(", ");
+      "\"nota\": \"una observación breve en castellano rioplatense, o vacío\", \"tipo\": \"el tipo del error principal, uno de: " + Object.keys(AI_TYPES).join(", ") + "\"}]} con una entrada para cada una de estas frases: " + mine.join(", ");
   }
-  function parlaStart(ctx, keys, done) { llm(parlaScenarioPrompt(ctx), keys, done); }
-  function parlaTurn(scen, history, userText, ctx, keys, done, reached) { llm(parlaTurnPrompt(scen, history, userText, ctx, reached), keys, done); }
-  function parlaRewrite(reply, miss, keys, done) { llm(parlaRewritePrompt(reply, miss), keys, done); }
-  function parlaReview(scen, history, keys, done) { llm(parlaReviewPrompt(scen, history), keys, done); }
+  /* The turn as a chat: the rules, the character and the goals go in the
+     system message (the same every turn, so the provider can reuse it), the
+     conversation as real turns, and the format with the learner's message. */
+  function parlaTurnChat(scen, history, userText, ctx, done) {
+    var full = parlaTurnPrompt(scen, [], "", ctx, done);
+    var cut = full.indexOf("Conversación hasta ahora:"), at = full.indexOf("Respondé SOLO con JSON");
+    var rules = cut > 0 ? full.slice(0, cut).trim() : full, fmt = at > 0 ? full.slice(at) : "";
+    var msgs = [{ role: "user", content: "(Empieza el role-play.)" }];
+    history.forEach(function (h) {
+      var text = String(h[1] || "");
+      if (h[0] === "ia" && /^\(/.test(text)) return;                 // avisos de la app, no del personaje
+      var role = h[0] === "ia" ? "assistant" : "user", last = msgs[msgs.length - 1];
+      if (last.role === role) last.content += "\n" + text; else msgs.push({ role: role, content: text });
+    });
+    if (msgs[msgs.length - 1].role === "user") msgs[msgs.length - 1].content += "\n" + userText; else msgs.push({ role: "user", content: userText });
+    // first what the learner just said (so the reply answers it), then the reply
+    fmt = fmt.replace('{\"risposta\"', '{\"capito\": \"en castellano y en pocas palabras, qué dijo, pidió o preguntó el alumno en su ÚLTIMO mensaje\", \"risposta\"');
+    return { system: rules + "\nCada mensaje del alumno llega como un turno. Tu \"risposta\" responde a ESE mensaje: si pregunta, contestá con un dato concreto; si pide algo, dáselo o negocialo en personaje; si cuenta algo, reaccioná a eso. Nunca sigas un guion propio ignorando lo que escribió.\n" + fmt, messages: msgs };
+  }
+  /* Which goals the learner has reached, judged apart from the reply (the
+     role-play model, busy being the character, often forgot to mark them). */
+  function parlaGoalsPrompt(scen, history) {
+    return "Sos profesor de portugués. Un alumno hispanohablante hace un role-play escrito. Situación: " + String(scen.situazione_es || "") + "\n" +
+      "Sus objetivos:\n" + scen.obiettivi.map(function (o, i) { return (i + 1) + ") " + o; }).join("\n") + "\n\n" +
+      "Conversación:\n" + history.map(function (h) { return (h[0] === "ia" ? "Personaje: " : "Alumno: ") + h[1]; }).join("\n") + "\n\n" +
+      "¿Qué objetivos ya cumplió el alumno con lo que ÉL escribió? Un objetivo está cumplido si lo intentó de forma comprensible, aunque tenga errores de " +
+      "gramática o use palabras del español; no hace falta que use palabras exactas. No cuenta lo que dijo el personaje.\n" +
+      "Respondé SOLO con JSON: {\"cumplidos\": [números], \"motivo\": \"una frase en castellano\"}";
+  }
+  function parlaGoals(scen, history, keys, done) { llm(parlaGoalsPrompt(scen, history), keys, done, { max: 200 }); }
+  function parlaStart(ctx, keys, done) { llm(parlaScenarioPrompt(ctx), keys, done, { max: 900 }); }
+  // opts.stream: the character's line as it is being written (the app shows it live).
+  function parlaTurn(scen, history, userText, ctx, keys, done, reached, opts) {
+    opts = opts || {};
+    llm(parlaTurnChat(scen, history, userText, ctx, reached), keys, done, { stream: opts.stream, max: 600, hedge: opts.hedge || 8000, temperature: 0.5 });
+  }
+  function parlaRewrite(reply, miss, keys, done) { llm(parlaRewritePrompt(reply, miss), keys, done, { max: 300 }); }
+  function parlaReview(scen, history, keys, done) { llm(parlaReviewPrompt(scen, history), keys, done, { think: "low" }); }
 
   /* ------------------------------------------------------- história
      A short story built on the words due for review plus what the learner
@@ -1596,141 +1812,72 @@
   function esame(task, text, keys, done) { llm(esamePrompt(task, text), keys, done); }
   function storiaRewrite(text, miss, keys, done) { llm(storiaRewritePrompt(text, miss), keys, done); }
 
-  /* One request at a time through the models of each provider, best first:
-     each attempt waits at most 20 s, each provider at most 40 s.  The model
-     that answered last time goes first next time. */
-  function store(P, k) { return "rumoc1." + P.id + "." + k; }
-  // Models that answered 402 (payment required) with this key: never asked again.
-  function paid(P) { try { return JSON.parse(localStorage.getItem(store(P, "paid")) || "{}") || {}; } catch (e) { return {}; } }
-  function markPaid(P, model) { var p = paid(P); p[model] = Date.now(); try { localStorage.setItem(store(P, "paid"), JSON.stringify(p)); } catch (e) { /* */ } }
-  function models(P, key, cb) {
-    try {
-      var c = JSON.parse(localStorage.getItem(store(P, "models")) || "null");
-      if (c && c.at > Date.now() - 86400000 && c.ids && c.ids.length) return cb(c.ids);
-    } catch (e) { /* */ }
-    var ctl = typeof AbortController === "function" ? new AbortController() : null;
-    var timer = setTimeout(function () { if (ctl) ctl.abort(); }, 8000);
-    fetch(P.url + "/models", { headers: { Authorization: "Bearer " + key }, signal: ctl ? ctl.signal : undefined })
-      .then(function (r) { return r.ok ? r.json() : null; })
-      .then(function (j) {
-        clearTimeout(timer);
-        var ids = ((j && j.data) || []).filter(function (m) { return m && m.id && m.active !== false; })
-          .map(function (m) { return String(m.id).replace(/^models\//, ""); })
-          .filter(function (id) { return !P.skip.test(id); });
-        var ranked = [];
-        P.prefer.forEach(function (rx) { ids.forEach(function (id) { if (rx.test(id) && ranked.indexOf(id) < 0) ranked.push(id); }); });
-        if (P.id === "groq") ids.forEach(function (id) { if (ranked.indexOf(id) < 0) ranked.push(id); });
-        if (ranked.length) { try { localStorage.setItem(store(P, "models"), JSON.stringify({ at: Date.now(), ids: ranked })); } catch (e) { /* */ } }
-        cb(ranked.length ? ranked : P.fallback.slice());
-      })
-      .catch(function () { clearTimeout(timer); cb(P.fallback.slice()); });
+  // Every request goes through the core client (js/ia.js).
+  function llm(prompt, keys, done, opts) {
+    if (!IA) return done(new Error("sin cliente de IA"));
+    return IA.llm(prompt, keys, done, opts);
   }
-  // The JSON inside a reply (some models think aloud in <think>…</think> or wrap it in ```).
-  function jsonOf(txt) {
-    txt = String(txt || "").replace(/<think>[\s\S]*?<\/think>/g, "").replace(/```(json)?/g, "").trim();
-    var a = txt.indexOf("{"), b = txt.lastIndexOf("}");
-    return JSON.parse(a >= 0 && b > a ? txt.slice(a, b + 1) : txt);
+
+  /* The AI's errors as findings on the text's tokens, to add to the local
+     ones (the union: C8).  Each one carries bad (the fragment as written),
+     good (the AI's correction), why (its explanation) and level.  What the
+     local checker already marked is not repeated, but when the AI proposes
+     another correction for it, or says it is not an error («contradice»),
+     both are shown (conflict).  A fragment not found word for word is looked
+     for without accents and punctuation, and if it is not there, it is still
+     listed (unplaced), never dropped.  foco: false (A1-A2) → minor, folded. */
+  // Where a fragment starts as whole words (*em* is not the end of *Ontem*).
+  function wordAt(hay, needle, from) {
+    var L = /[a-zà-ÿ0-9]/i, at = hay.indexOf(needle, from);
+    while (at >= 0) {
+      var before = at > 0 ? hay.charAt(at - 1) : "", after = hay.charAt(at + needle.length);
+      if ((!before || !L.test(before) || !L.test(needle.charAt(0))) && (!after || !L.test(after) || !L.test(needle.charAt(needle.length - 1)))) return at;
+      at = hay.indexOf(needle, at + 1);
+    }
+    return -1;
   }
-  // keys: {groq, gemini}, or just the Groq key as a string.
-  function llm(prompt, keys, done) {
-    if (typeof fetch !== "function") return done(new Error("sin fetch"));
-    if (typeof keys === "string") keys = { groq: keys };
-    keys = keys || {};
-    var todo = PROVIDERS.filter(function (P) { return keys[P.id]; }), errs = [];
-    if (!todo.length) return done(new Error("sin clave"));
-    (function nextProvider() {
-      var P = todo.shift();
-      if (!P) return done(new Error(errs.length > 1 ? errs.join(" · ") : errs[0].replace(/^\w+: /, "")));
-      ask(P, prompt, keys[P.id], function (err, data, model) {
-        if (!err) return done(null, data, { provider: P.name, model: model });
-        errs.push(P.name + ": " + String(err.message || err));
-        nextProvider();
-      });
-    })();
-  }
-  function ask(P, prompt, key, done) {
-    models(P, key, function (list) {
-      // every model of the key, the free-tier-sized ones too, minus those known to be paid
-      var skip = paid(P), order = list.filter(function (m) { return !skip[m]; }), deadline = Date.now() + 40000, lastErr = null, plain = {}, n402 = 0;
-      if (!order.length) order = list.slice();
-      try {
-        // the model that answered last goes first, but only if it is among the
-        // three best: a small model that answered once during an outage would
-        // otherwise stay forever
-        var good = localStorage.getItem(store(P, "model"));
-        if (good && order.indexOf(good) > 0 && order.indexOf(good) < 3) { order.splice(order.indexOf(good), 1); order.unshift(good); }
-      } catch (e) { /* */ }
-      var k = 0, over = false;
-      function finish(err, data, model) { if (over) return; over = true; done(err, data, model); }
-      function next(err) {
-        if (err) lastErr = err;
-        if (k >= order.length || Date.now() > deadline) {
-          var m = n402 && n402 === k ? P.name + " pide un plan pago para todos los modelos de tu cuenta (402)"
-                : lastErr && /abort/i.test(String(lastErr.message || lastErr)) ? "la IA no respondió a tiempo" : String((lastErr && lastErr.message) || lastErr || "sin respuesta");
-          return finish(new Error(m));
-        }
-        attempt(order[k++]);
-      }
-      function attempt(model) {
-        var ctl = typeof AbortController === "function" ? new AbortController() : null;
-        var timer = setTimeout(function () { if (ctl) ctl.abort(); }, Math.min(20000, Math.max(3000, deadline - Date.now())));
-        var body = { model: model, temperature: 0.2,
-                     messages: [{ role: "system", content: "Respondés solo con JSON válido." }, { role: "user", content: prompt }] };
-        body[P.maxKey] = 4096;
-        var re = P.reasoning(model);
-        if (!plain[model]) { body.response_format = { type: "json_object" }; if (re) body.reasoning_effort = re; }
-        fetch(P.url + "/chat/completions", {
-          method: "POST", signal: ctl ? ctl.signal : undefined,
-          headers: { "Content-Type": "application/json", Authorization: "Bearer " + key },
-          body: JSON.stringify(body)
-        }).then(function (r) {
-          if (r.ok) return r.json();
-          return r.text().then(function (b) {
-            clearTimeout(timer);
-            if ((r.status === 400 && /api.?key/i.test(b)) || r.status === 401 || r.status === 403) { finish(new Error("HTTP " + r.status + ", clave")); return null; }
-            // a model that rejects the JSON mode or the reasoning option: again without them
-            if (r.status === 400 && !plain[model] && /response_format|json|reasoning/i.test(b)) { plain[model] = 1; attempt(model); return null; }
-            if (r.status === 402) { n402++; markPaid(P, model); next(new Error("HTTP 402")); return null; }
-            next(new Error(r.status === 429 ? "se terminó el cupo por ahora (429)" : r.status >= 500 ? P.name + " está saturado ahora (" + r.status + ")" : "HTTP " + r.status));
-            return null;
-          });
-        }).then(function (j) {
-          if (!j) return;
-          clearTimeout(timer);
-          var msg = j.choices && j.choices[0] && j.choices[0].message;
-          var data;
-          try { data = jsonOf(msg && msg.content); } catch (e) { return next(new Error("respuesta ilegible")); }
-          try { localStorage.setItem(store(P, "model"), model); } catch (e) { /* */ }
-          finish(null, data, model);
-        }).catch(function (e) { clearTimeout(timer); next(e); });
-      }
-      next();
-    });
-  }
-  // The AI's errors as findings on the text's tokens (each fragment is found
-  // in the text; what the local checker already marked is not repeated).
   function fromAI(text, data, local) {
-    var tk = toks(text), taken = {}, low = String(text).normalize("NFC").replace(/[’‘`´]/g, "'").toLowerCase(), from = 0, out = [];
-    (local || []).forEach(function (f) { if (!f.lt) for (var j = 0; j < f.n; j++) taken[f.i + j] = 1; });
+    var src = String(text).normalize("NFC").replace(/[’‘`´]/g, "'"), tk = toks(text), taken = {}, low = src.toLowerCase(), from = 0, out = [];
+    var loose = function (x) { return String(x).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase(); };
+    var looseLow = loose(low);
+    var locAt = {};
+    (local || []).forEach(function (f) { if (!f.lt && !f.ai) for (var j = 0; j < f.n; j++) { taken[f.i + j] = 1; locAt[f.i + j] = f; } });
     ((data && data.errores) || []).forEach(function (e) {
       var bad = String(e.mal || "").normalize("NFC").replace(/[’‘`´]/g, "'").trim();
-      if (!bad || String(e.bien || "").normalize("NFC").replace(/[’‘`´]/g, "'").trim().toLowerCase() === bad.toLowerCase()) return;
-      var at = low.indexOf(bad.toLowerCase(), from);
-      if (at < 0) at = low.indexOf(bad.toLowerCase());
-      if (at < 0) return;
-      from = at + bad.length;
-      var first = -1, n = 0;
-      tk.forEach(function (t, i) { if (t.w && t.at < at + bad.length && t.at + t.len > at) { if (first < 0) first = i; n = i - first + 1; } });
-      if (first < 0) return;
-      var dup = true;
-      for (var j = 0; j < n; j++) if (!taken[first + j]) dup = false;
-      if (dup) return;
-      for (var j2 = 0; j2 < n; j2++) taken[first + j2] = 1;
+      var good = String(e.bien == null ? "" : e.bien).normalize("NFC").replace(/[’‘`´]/g, "'").trim();
+      var contra = e.contradice === true;
+      if (!bad || (!contra && good.toLowerCase() === bad.toLowerCase())) return;
+      var at = wordAt(low, bad.toLowerCase(), from);
+      if (at < 0) at = wordAt(low, bad.toLowerCase(), 0);
+      if (at < 0) {   // the same without accents (same length: the offsets hold)
+        var lb = loose(bad);
+        if (lb.length === bad.length) at = wordAt(looseLow, lb, 0);
+      }
       var tipo = String(e.tipo || "").trim().toLowerCase(), soft = tipo === "estilo";
-      out.push({ i: first, n: n, cat: AI_TYPES[tipo] && !soft ? tipo : soft ? "estilo" : "ia", soft: soft, ai: true,
-                 msg: (e.bien ? "*" + bad + "* → *" + String(e.bien).trim() + "*. " : "") + (soft ? "(Más natural) " : "") + String(e.explicacion || "").trim() });
+      var why = String(e.explicacion || "").trim();
+      var f = { cat: AI_TYPES[tipo] && !soft ? tipo : soft ? "estilo" : "ia", soft: soft, ai: true, bad: bad, good: e.bien == null ? null : good,
+                why: why, level: soft ? "poco_natural" : "wrong", minor: e.foco === false,
+                msg: (e.bien != null && !contra ? "*" + bad + "* → *" + (good || "(se borra)") + "*. " : "") + (soft ? "(Más natural) " : "") + why };
+      var first = -1, n = 0;
+      if (at >= 0) tk.forEach(function (t, i) { if (t.w && t.at < at + bad.length && t.at + t.len > at) { if (first < 0) first = i; n = i - first + 1; } });
+      if (first < 0) { f.i = -1; f.n = 0; f.unplaced = true; out.push(f); return; }
+      from = at + bad.length;
+      f.i = first; f.n = n;
+      var dup = true, j;
+      for (j = 0; j < n; j++) if (!taken[first + j]) dup = false;
+      if (dup) {
+        // over a local mark: agreement is silence; another correction or a «no es error», both shown
+        var lf = locAt[first], lg = lf && lf.good != null ? String(lf.good).toLowerCase() : null;
+        if (!lf || (!contra && (lg == null || lg === good.toLowerCase()))) return;
+        f.conflict = true; f.soft = true; f.minor = false;
+        f.msg = (contra ? "🤖 La IA no lo ve como error: " : "🤖 La IA propone otra corrección: *" + (good || "(se borra)") + "*. ") + why;
+        out.push(f);
+        return;
+      }
+      for (j = 0; j < n; j++) taken[first + j] = 1;
+      out.push(f);
     });
-    out.sort(function (x, y) { return x.i - y.i; });
+    out.sort(function (x, y) { return (x.i < 0 ? 1e9 : x.i) - (y.i < 0 ? 1e9 : y.i); });
     return out;
   }
 
@@ -1739,8 +1886,8 @@
   var api = { TASKS: TASKS, features: features, lint: lint, check: check, markup: markup, weeks: weeks, toks: toks,
               learn: learn, learnCourse: learnCourse, ltCheck: ltCheck, fromLT: fromLT,
               aiCheck: aiCheck, fromAI: fromAI, aiPrompt: aiPrompt, explain: explain, explainPrompt: explainPrompt, reviewPrompt: reviewPrompt,
-              hints: hints, hintsPrompt: hintsPrompt, parlaStart: parlaStart, parlaTurn: parlaTurn, parlaRewrite: parlaRewrite, parlaReview: parlaReview, parlaReviewPrompt: parlaReviewPrompt, correggi: correggi,
-              parlaScenarioPrompt: parlaScenarioPrompt, parlaTurnPrompt: parlaTurnPrompt, storia: storia, storiaRewrite: storiaRewrite, storiaPrompt: storiaPrompt, esame: esame, esamePrompt: esamePrompt, PROVIDERS: PROVIDERS, AI_TYPES: AI_TYPES };
+              hints: hints, hintsPrompt: hintsPrompt, judge: judge, judgePrompt: judgePrompt, ctxBlock: ctxBlock, parlaStart: parlaStart, parlaTurn: parlaTurn, parlaRewrite: parlaRewrite, parlaReview: parlaReview, parlaReviewPrompt: parlaReviewPrompt, correggi: correggi,
+              parlaScenarioPrompt: parlaScenarioPrompt, parlaTurnPrompt: parlaTurnPrompt, parlaTurnChat: parlaTurnChat, parlaGoals: parlaGoals, parlaGoalsPrompt: parlaGoalsPrompt, storia: storia, storiaRewrite: storiaRewrite, storiaPrompt: storiaPrompt, esame: esame, esamePrompt: esamePrompt, PROVIDERS: PROVIDERS, AI_TYPES: AI_TYPES };
   api.llm = llm;   // la reformulación de escritura_plus.js usa las mismas claves y proveedores
   if (typeof module === "object" && module.exports) module.exports = api;
   else root.Scrivi = api;

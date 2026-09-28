@@ -430,7 +430,7 @@ LESSONS = {
 "parts": [
  {"h": "Concordancia y plurales del adjetivo", "blocks": [0, 1]},
  {"h": "Nacionalidades y colores", "blocks": [2, 3]},
- {"h": "muito y cómo describir a alguien", "blocks": [4, 5]},
+ {"h": "muito y cómo describir a alguien", "blocks": [4, 5, 6]},
 ],
 "blocks": [
  {"h": "Adjetivos: cuatro formas o dos",
@@ -532,6 +532,13 @@ LESSONS = {
            "(rulos), *loiro* (rubio), *ruivo* (pelirrojo), *careca* "
            "(pelado). *pelado* en portugués significa «desnudo»: no lo "
            "uses para un calvo."]},
+
+ {"h": "Sotaque da semana: Rio de Janeiro",
+  "q": [{"prompt": "En Río, «Que maneiro!» quiere decir…", "answer": "¡Qué copado!", "options": ["¡Qué copado!", "¡Qué manera!", "¡Qué maniático!"]}],
+  "r": "El carioca *chia*: la *s* final suena como «sh» (*mais* ≈ «maish») y la *r* es aspirada. Tres palabras de la calle: *maneiro*, *mermão*, *partiu*.",
+  "ex": [["Que *maneiro*!", "¡Qué copado!"], ["Ô, *mermão*, tudo bem?", "Eh, hermano, ¿todo bien?"], ["*Partiu* praia!", "¡A la playa!"], ["Vamos à *Lapa* mais tarde?", "¿Vamos a Lapa más tarde? (la s de «mais» suena «sh»)"]],
+  "tip": "Cada cuatro semanas, un acento: Brasil tiene muchos y todos son portugués. La voz de la app es la estándar: el acento no se oye, las palabras sí."},
+
 ]},
 
 5: {
@@ -541,7 +548,7 @@ LESSONS = {
 "parts": [
  {"h": "Las tres conjugaciones", "blocks": [0, 1, 2]},
  {"h": "Pronombres y grafía", "blocks": [3, 4]},
- {"h": "Tu rutina y tu trabajo", "blocks": [5, 6]},
+ {"h": "Tu rutina y tu trabajo", "blocks": [5, 6, 7]},
 ],
 "blocks": [
  {"h": "-ar, -er, -ir en presente",
@@ -644,6 +651,14 @@ LESSONS = {
            "cuánto hace: *moro aqui há um ano* o *faz um ano* (hace un "
            "año); nunca «desde um ano»: *desde* va con una fecha, "
            "*desde 2020*."]},
+
+ {"h": "Tu con su verbo: tu falas, tu és",
+  "q": [{"prompt": "En Porto Alegre o en Belém, ¿cómo se dice «¿vos hablás portugués?» con tu y su verbo?", "answer": "Tu falas português?", "options": ["Tu falas português?", "Tu falar português?", "Tu fala portugueses?"]}],
+  "r": "En el Sur, el Norte y parte del Nordeste se usa *tu*: con su verbo en la norma (*tu falas*); en el habla, con el de *você* (*tu fala*).",
+  "table": {"head": ["você", "tu (norma)", "tu (habla)"], "rows": [["você fala", "tu falas", "tu fala"], ["você come", "tu comes", "tu come"], ["você é", "tu és", "tu é"], ["você tem", "tu tens", "tu tem"]]},
+  "ex": [["*Tu és* de Belém?", "¿Sos de Belém? (Pará: tu con su verbo)"], ["*Tu falas* muito bem!", "¡Hablás muy bien!"], ["*Tu vai* hoje? — Vou.", "¿Vas hoy? —Voy. (Sur, habla: tu + verbo de você)"]],
+  "warn": "Para producir, quedate con *você* + 3.ª persona: vale en todo Brasil. El *tu* lo tenés que entender, porque la mitad del país lo usa."},
+
 ]},
 
 6: {
@@ -886,6 +901,7 @@ LESSONS = {
  {"h": "Preguntas y el porquê", "blocks": [0, 1]},
  {"h": "ir + infinitivo: los planes", "blocks": [2, 3]},
  {"h": "estar + gerúndio", "blocks": [4, 5]},
+ {"h": "Palavras que não estão no dicionário", "blocks": [6, 7]},
 ],
 "blocks": [
  {"h": "Las palabras para preguntar",
@@ -979,6 +995,21 @@ LESSONS = {
            "primero es la forma brasileña y el segundo, la europea. En "
            "Brasil el gerundio también aparece en frases como *vou "
            "levando* (voy tirando), muy de la charla."]},
+
+ {"h": "Palavras que não estão no dicionário (1): né, então, olha, tá bom",
+  "q": [{"prompt": "—Te ligo amanhã. ¿Cómo aceptás, bien brasileño?", "answer": "Tá bom!", "options": ["Tá bom!", "Está bueno!", "Né!"]}],
+  "r": "Las muletillas ordenan la charla: *né?* pide acuerdo, *então* arranca o concluye, *olha* llama la atención y *tá bom* acepta.",
+  "table": {"head": ["Português", "Español"], "rows": [["né?", "¿no?, ¿viste?"], ["então", "entonces, bueno"], ["olha", "mirá"], ["tá bom", "dale, bueno"]]},
+  "ex": [["Está calor hoje, *né*?", "Hace calor hoy, ¿no?"], ["*Então*, vamos?", "Bueno, ¿vamos?"], ["*Olha*, eu acho que vai chover.", "Mirá, me parece que va a llover."], ["— Te ligo amanhã. — *Tá bom*!", "—Te llamo mañana. —¡Dale!"]],
+  "warn": "*né* es *não é* achicado y *tá* es *está*: son del habla, no de un texto formal. *Tá bom* es «dale», no «está bueno».",
+  "tip": "Son de las palabras más frecuentes del portugués hablado: prestales atención en las escuchas. La síntesis, en la semana 38."},
+
+ {"h": "Sotaque da semana: São Paulo",
+  "q": [{"prompt": "En São Paulo, ¿qué es o farol?", "answer": "el semáforo", "options": ["el semáforo", "el faro", "la farola"]}],
+  "r": "El paulistano no chia: la *s* final es *s*, y la *e* final suena más cerrada. En el interior, la *r* «caipira» se enrosca: *porta* ≈ «porrrta».",
+  "ex": [["*Meu*, que trânsito!", "¡Che, qué tránsito! (meu = che, en São Paulo)"], ["Vamos tomar um *café* na padaria?", "¿Vamos a tomar un café a la panadería?"], ["Pega o *farol* e vira à direita.", "En el semáforo, doblá a la derecha (farol = semáforo, en SP)"]],
+  "tip": "En Río el semáforo es *sinal*; en São Paulo, *farol*. La voz de la app es la estándar: el acento no se oye, las palabras sí."},
+
 ]},
 
 9: {
@@ -1357,6 +1388,7 @@ LESSONS = {
  {"h": "El imperativo: escrito y hablado", "blocks": [0, 1, 2]},
  {"h": "Reflexivos y la rutina", "blocks": [3, 4, 5]},
  {"h": "En la farmacia y en la cocina", "blocks": [6]},
+ {"h": "Pedir perdón, reclamar y las respuestas cortas", "blocks": [7, 8, 9]},
 ],
 "blocks": [
  {"h": "Imperativo de você",
@@ -1481,6 +1513,26 @@ LESSONS = {
          ["*Corte* a cebola e *misture* tudo.", "Corte la cebolla y mezcle todo."]],
   "warn": "*as costas* = la espalda (plural y femenino). «A costa» es la "
           "costa del mar. Y *a dor* es femenino: *uma dor forte*."},
+
+ {"h": "Palavras que não estão no dicionário (2): imagina, pode deixar, poxa, nossa",
+  "q": [{"prompt": "—Obrigada pela ajuda! ¿Qué respondés?", "answer": "Imagina!", "options": ["Imagina!", "Imagine!", "Nossa!"]}],
+  "r": "Respuestas cortas bien brasileñas: *imagina!* (de nada), *pode deixar!* (yo me ocupo), *poxa* (lástima, fastidio), *nossa!* (sorpresa).",
+  "ex": [["— Obrigada pela ajuda! — *Imagina!*", "—¡Gracias por la ayuda! —¡De nada!"], ["— Leva o lixo? — *Pode deixar!*", "—¿Sacás la basura? —¡Dejá, yo me ocupo!"], ["*Poxa*, que pena!", "¡Uh, qué lástima!"], ["*Nossa*, que calor!", "¡Uy, qué calor!"]],
+  "warn": "*imagina* después de un «gracias» no es «imaginá»: es «de nada, no es nada».",
+  "tip": "*Nossa* viene de *Nossa Senhora*; *poxa* es la versión suave de una mala palabra."},
+
+ {"h": "Pedir desculpas e reclamar",
+  "q": [{"prompt": "Llegaste tarde a encontrarte con un amigo. Elegí lo más natural.", "answer": "Foi mal, me atrasei!", "options": ["Foi mal, me atrasei!", "Com licença, me atrasei!", "De nada, me atrasei!"]}],
+  "r": "Para disculparte: *desculpa* (lo común), *foi mal* (informal), *sinto muito* (algo grave). Para reclamar sin pelear: *olha, acho que teve um engano*.",
+  "ex": [["*Desculpa* o atraso!", "¡Perdón por la demora!"], ["*Foi mal*, esqueci!", "¡Uh, perdón, me olvidé!"], ["*Sinto muito* pela sua avó.", "Lo siento mucho por tu abuela."], ["*Olha, acho que teve um engano*: pedi sem cebola.", "Mire, creo que hubo un error: pedí sin cebolla."], ["*Com licença*, posso passar?", "Permiso, ¿puedo pasar?"]],
+  "warn": "*Com licença* es «permiso» (para pasar o interrumpir), no «perdón por el error»: para eso, *desculpa*."},
+
+ {"h": "Sotaque da semana: Minas Gerais",
+  "q": [{"prompt": "En Minas, «Me passa esse trem» quiere decir…", "answer": "Pasame esa cosa.", "options": ["Pasame esa cosa.", "Pasame ese tren.", "Pasame ese trago."]}],
+  "r": "El mineiro «se come» sílabas (*pó pô* = *pode pôr*) y tiene su muletilla: *uai*, sorpresa o evidencia. *Trem* es «cosa», cualquier cosa.",
+  "ex": [["*Uai*, cê não vem?", "¿Eh? ¿No venís? (uai: sorpresa)"], ["Me passa esse *trem* aí.", "Pasame esa cosa (trem = cosa, en Minas)"], ["Ô, *sô*, vem cá!", "¡Eh, señor, vení! (sô = senhor)"]],
+  "tip": "La voz de la app es la estándar: el acento no se oye, las palabras sí."},
+
 ]},
 
 13: {

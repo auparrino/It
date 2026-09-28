@@ -105,7 +105,7 @@
       ]
     ],
     "hunt": {
-      "label": "Tocá las formas del auxiliar ter en los tiempos compuestos (tinha, tivesse, teria…)",
+      "label": "Toque nas formas do auxiliar ter nos tempos compostos (tinha, tivesse, teria…)",
       "targets": ["tinha", "tivesse", "teria", "terá", "ter"]
     }
   },
@@ -261,46 +261,7 @@
     "es": "Un relato personal: partí de la crónica (qué muestra sobre la memoria familiar), contá la historia de un objeto de tu familia y armá una hipótesis en el pasado (se tivesse…, teria…).",
     "min": 137,
     "max": 197,
-    "punti": [
-      [
-        "Comentar la crónica de las cartas",
-        [
-          "crônica",
-          "cartas",
-          "caixa",
-          "zefinha"
-        ]
-      ],
-      [
-        "Presentar el objeto y la persona de la familia",
-        [
-          "minha avó",
-          "meu avô",
-          "minha mãe",
-          "meu pai",
-          "bisav",
-          "tio",
-          "tia"
-        ]
-      ],
-      [
-        "Hipótesis en el pasado",
-        [
-          "tivesse",
-          "teria",
-          "teríamos"
-        ]
-      ],
-      [
-        "Reflexión sobre la memoria",
-        [
-          "memória",
-          "lembr",
-          "silêncio",
-          "segredo"
-        ]
-      ]
-    ],
+    "punti": [["Comentar la crónica de las cartas", ["crônica", "cartas", "caixa", "zefinha"]], ["Presentar el objeto y la persona de la familia", ["minha avó", "meu avô", "minha mãe", "meu pai", "bisav", "tio", "tia"]], ["Hipótesis en el pasado", ["tivesse", "teria", "teríamos"]], ["Reflexión sobre la memoria", ["memória", "lembr", "silêncio", "segredo"]]],
     "model": "O relógio que parou em Buenos Aires\n\nA crônica “As cartas da caixa de sapatos” me fez pensar que a memória de uma família também é feita de silêncios. Às vezes, um único objeto guarda uma história que ninguém teve coragem de contar.\n\nNa minha casa, esse objeto é um relógio de bolso que pertenceu ao meu bisavô, um espanhol que chegou a Buenos Aires em 1923. O relógio está parado às quatro e dez, e meu pai sempre disse que ninguém sabia por quê. Só no ano passado, conversando com uma tia, descobri que meu bisavô tinha comprado uma passagem para o Rio de Janeiro, onde um irmão o esperava. Na véspera da viagem, conheceu minha bisavó num baile e desistiu.\n\nSe ele tivesse embarcado, eu teria nascido brasileiro, e talvez estivesse escrevendo este relato na minha língua materna. Não sei se teríamos sido mais felizes. Sei que o relógio parado, hoje, me parece menos um defeito e mais uma lembrança daquela noite em que tudo poderia ter sido diferente.",
     "gloss": {
       "relógio de bolso": "reloj de bolsillo",
@@ -308,6 +269,89 @@
       "Na véspera da viagem": "la víspera del viaje, el día antes",
       "desistiu": "se echó atrás, renunció",
       "lembrança": "recuerdo"
+    }
+  },
+  "breve": {
+    "title": "Paranapiacaba, a vila da neblina",
+    "genre": "audioguia",
+    "es": "La audioguía de la vieja estación de Paranapiacaba, en la sierra de São Paulo: el ferrocarril inglés del café, el reloj de la torre y la niebla.",
+    "speaker": "Audioguia",
+    "voice": 0,
+    "text": [
+      "Bem-vindo à Vila de Paranapiacaba. Você está na antiga estação, a 800 metros de altitude, no alto da Serra do Mar, em São Paulo.",
+      "A ferrovia foi inaugurada em 1867 por uma companhia inglesa, para levar o café do interior até o porto de Santos. Se os engenheiros não tivessem encontrado uma solução para a serra, que é muito íngreme, o café teria continuado descendo em lombo de mula. A solução foram cabos de aço que puxavam os vagões.",
+      "A vila foi construída para os funcionários da ferrovia. O relógio da torre, que você vê à sua frente, foi trazido da Inglaterra e funciona até hoje.",
+      "Muitos visitantes perguntam pela neblina: ela aparece em quase todas as tardes do ano. Se você tivesse chegado de manhã cedo, talvez tivesse visto a vila inteira coberta de branco. Para continuar a visita, siga até a casa do engenheiro-chefe, a 200 metros daqui."
+    ],
+    "tabella": [
+      [
+        "Altitude da estação (metros)",
+        "800",
+        [
+          "oitocentos",
+          "800 metros"
+        ]
+      ],
+      [
+        "Ano da inauguração da ferrovia",
+        "1867",
+        []
+      ],
+      [
+        "Porto de destino do café",
+        "Santos",
+        [
+          "porto de Santos"
+        ]
+      ],
+      [
+        "País de onde veio o relógio da torre",
+        "Inglaterra",
+        [
+          "da Inglaterra"
+        ]
+      ],
+      [
+        "Distância até a casa do engenheiro-chefe (metros)",
+        "200",
+        [
+          "duzentos",
+          "200 metros"
+        ]
+      ]
+    ],
+    "info": [
+      [
+        "A ferrovia foi construída para transportar café.",
+        true
+      ],
+      [
+        "A companhia que construiu a ferrovia era francesa.",
+        false
+      ],
+      [
+        "Os vagões subiam a serra puxados por cabos.",
+        true
+      ],
+      [
+        "O relógio da torre está quebrado.",
+        false
+      ],
+      [
+        "A neblina é comum à tarde.",
+        true
+      ],
+      [
+        "A visita termina na estação.",
+        false
+      ]
+    ],
+    "gloss": {
+      "íngreme": "empinada",
+      "lombo de mula": "lomo de mula",
+      "aço": "acero",
+      "neblina": "niebla",
+      "puxavam": "tiraban de"
     }
   }
 }

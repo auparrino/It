@@ -136,10 +136,21 @@ pack.LANGS.forEach(function (code) {
   ok(T.available(null), tag + "abierto con los dos idiomas");
   storage.removeItem(DATA.LANGS[other].storage + ".save.v1");
   ok(T.available({ xp: 5, cards: {} }) === false, tag + "el estado propio no alcanza");
+  // Lo que se guarda va en el estado del idioma (state.tres), no suelto en localStorage.
+  var S = { xp: 5, cards: {} };
+  T.use(function () { return S; });
   T.enable(true);
-  ok(T.available(null), tag + "abierto a mano");
+  ok(T.available(S) && S.tres && S.tres.on === true, tag + "abierto a mano, guardado en state.tres");
+  ok(storage.getItem(T.KEY) === null, tag + "no escribe en la clave vieja");
   T.enable(false);
-  ok(!T.available(null), tag + "cerrado otra vez");
+  ok(!T.available(S), tag + "cerrado otra vez");
+  // El guardado viejo (c1.tres.v1) se copia una vez al estado del idioma.
+  storage.setItem(T.KEY, JSON.stringify({ on: true, best: { duel: 70 }, rounds: 3 }));
+  var S2 = { xp: 1, cards: {} };
+  ok(T.store(S2).on === true && S2.tres.best.duel === 70 && S2.tres.rounds === 3, tag + "copia el guardado viejo");
+  S2.tres.on = false;
+  ok(T.store(S2).on === false, tag + "la copia se hace una sola vez");
+  storage.removeItem(T.KEY);
 
   // The duel round
   var s = T.duelSession(Math.random, 10);
@@ -149,10 +160,13 @@ pack.LANGS.forEach(function (code) {
 
   // The interface without DOM: card, menu, topics, a whole duel.
   var gained = 0, shown = 0;
-  T.wire(null, { show: function () { shown++; }, back: function () {}, gain: function (x) { gained += x; }, toast: function () {} });
-  ok(/data-tres="on"/.test(T.card({ xp: 0, cards: {} })), tag + "tarjeta cerrada con «activar»");
+  var S3 = { xp: 0, cards: {} };
+  T.wire(null, { show: function () { shown++; }, back: function () {}, gain: function (x) { gained += x; }, toast: function () {},
+                 state: function () { return S3; }, persist: function () {} });
+  var shut = T.card(S3);
+  ok(/data-tres="on"/.test(shut) && /data-tres="menu"/.test(shut), tag + "los contrastes siempre abiertos; el duelo, con «activar»");
   T.enable(true);
-  var card = T.card({ xp: 0, cards: {} });
+  var card = T.card(S3);
   ok(/data-tres="menu"/.test(card) && /data-tres="duel"/.test(card), tag + "tarjeta abierta");
   ok(/data-tres="topic"/.test(T.render()), tag + "menú de temas");
   DATA.TOPICS.forEach(function (t) {
@@ -161,7 +175,7 @@ pack.LANGS.forEach(function (code) {
     ok((h.match(/<details/g) || []).length === DATA.CONTRASTS[t.id].length, tag + "tema " + t.id + " completo");
   });
   T._ui.screen = "duel";
-  T._ui.duel = { items: T.duelSession(Math.random, 10), i: 0, step: "lang", pts: 0, max: 0, log: [] };
+  T._ui.duel = { items: T.duelSession(Math.random, 10), i: 0, step: "lang", pts: 0, max: 0, log: [], fails: [] };
   var btn = function (attrs, text) { return { getAttribute: function (k) { return attrs[k]; }, textContent: text || "" }; };
   var guard = 0;
   while (T._ui.duel.i < T._ui.duel.items.length && guard++ < 100) {
@@ -176,8 +190,32 @@ pack.LANGS.forEach(function (code) {
   ok(T._ui.duel.pts === T._ui.duel.max && T._ui.duel.max > 10, tag + "duelo perfecto: " + T._ui.duel.pts + "/" + T._ui.duel.max);
   ok(/100 %/.test(T.render()), tag + "resultado 100 %");
   ok(gained > 0, tag + "suma xp");
-  ok(JSON.parse(storage.getItem(T.KEY)).best.duel === 100, tag + "guarda el mejor");
+  ok(S3.tres.best.duel === 100 && S3.tres.rounds === 1, tag + "guarda el mejor en state.tres");
+  ok(!Object.keys(S3.cards).some(function (k) { return /^tres:/.test(k); }), tag + "un duelo perfecto no manda nada al repaso");
+  // Un duelo con errores: lo fallado vuelve como ficha.
+  T._ui.screen = "duel";
+  T._ui.duel = { items: T.duelSession(Math.random, 10), i: 0, step: "lang", pts: 0, max: 0, log: [], fails: [] };
+  guard = 0;
+  while (T._ui.duel.i < T._ui.duel.items.length && guard++ < 100) {
+    var y = T._ui.duel.items[T._ui.duel.i], st2 = T._ui.duel.step;
+    T.render();
+    if (st2 === "lang") T._act("lang", btn({ "data-l": y.l === "it" ? "pt" : "it" }));
+    else if (st2 === "check") T._act("clean", btn({}));
+    else if (st2 === "fix") T._act("fix", btn({ "data-k": String(T._ui.duel.opts.indexOf(y.bad)) }));
+    else T._act("next", btn({}));
+  }
+  var tres = Object.keys(S3.cards).filter(function (k) { return /^tres:\d+$/.test(k); });
+  ok(tres.length >= 8, tag + "lo fallado va al repaso: " + tres.length + " fichas");
+  ok(/vuelven en tu repaso/.test(T.render()), tag + "el resultado lo dice");
+  // Cada ítem del duelo sabe volver como ficha: opción múltiple con la respuesta entre las opciones.
+  DATA.DUEL.forEach(function (x, k) {
+    var it = T.reviewItem("tres:" + k);
+    ok(it && it.type === "choice" && it.options.indexOf(it.answer) >= 0 && it.options.length >= 2, tag + "ficha del duelo " + k + " «" + x[0] + "»");
+    if (it && x[2] && /Cómo se dice «/.test(it.prompt)) ok(it.options.length === new Set(it.options).size, tag + "opciones distintas " + k);
+  });
+  ok(T.reviewItem("tres:99999") === null && T.reviewItem("duel:x:1") === null, tag + "ids ajenos: nada");
   T.enable(false);
+  T.use(null);
 });
 
 function c1(code) { return code === "it" ? "Oggi fa molto caldo" : "Hoje está muito quente"; }

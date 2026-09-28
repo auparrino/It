@@ -52,6 +52,9 @@ def main():
     only = args[0] if args else None
     folder = os.path.join(HERE, "lessons")
     problems = []
+    # the blocks other modules add to a week (lessons/c1_extra.py) are
+    # checked with the lesson they join
+    extra, _pins = build_course.extra_blocks(folder)
     for fn in sorted(os.listdir(folder)):
         if not fn.endswith(".py") or fn == "__init__.py":
             continue
@@ -60,7 +63,8 @@ def main():
         spec = importlib.util.spec_from_file_location(fn[:-3], os.path.join(folder, fn))
         mod = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(mod)
-        for week, lesson in sorted(mod.LESSONS.items()):
+        for week, lesson in sorted(getattr(mod, "LESSONS", {}).items()):
+            lesson = build_course.merge_extra_blocks({week: lesson}, folder)[week] if week in extra else lesson
             problems += build_course.check_lesson(week, lesson)
             if estilo:
                 problems += style(week, lesson)

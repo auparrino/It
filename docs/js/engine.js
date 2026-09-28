@@ -198,7 +198,9 @@
     if (q === 0) return 1;
     if (q === 1) return o.kind === "slip" ? 3 : 2;
     if (o.retry || o.hint || o.conf === "adivino") return 2;
-    if (o.light || (o.conf === "seguro" && o.fast)) return 4;
+    // right but slow: known, not yet automatic (DeKeyser & Suzuki 2025)
+    if (o.slow) return 2;
+    if (o.light || o.fast || (o.conf === "seguro" && o.fast)) return 4;
     return 3;
   }
 
@@ -270,7 +272,11 @@
     var ivl = intervalFor(card.s * speed, retention);
     if (r === 1) ivl = 1;                        // an error comes back tomorrow
     card.interval = ivl;
-    card.due = now + ivl * DAY;
+    // Due by day, not by the hour: from 4 am of the due day, so an error at
+    // 9 pm is in tomorrow morning's review and not after 9 pm tomorrow.
+    var dd = new Date(now + ivl * DAY);
+    dd.setHours(4, 0, 0, 0);
+    card.due = Math.max(dd.getTime(), now + 3600000);
     delete card.night; delete card.hyper;
     var hour = new Date(now).getHours();
     var hyper = r === 1 && opts.conf === "seguro";
@@ -280,12 +286,12 @@
       card.due = nextMorning(now); card.night = dayKey(new Date(card.due));
     } else if (hyper) {
       // Hypercorrection: the confident error is retested the next morning.
-      card.due = Math.min(card.due, nextMorning(now)); card.hyper = 1;
+      card.due = nextMorning(now); card.hyper = 1;
     }
     delete card.light; delete card.ease;
     card.last = now;
     card.seen = (card.seen || 0) + 1;
-    if (st && opts.id) logReview(st, opts.id, now, r, elapsed, sBefore, kind);
+    if (st && opts.id) logReview(st, opts.id, now, r, elapsed, sBefore, kind, opts.ms);
     return card;
   }
 
@@ -304,9 +310,13 @@
      learner forgets vocabulary and grammar (a «speed» that scales the
      default stabilities), and shows the calibration. */
   var LOG_MAX = 2500;
-  function logReview(state, id, now, r, elapsed, sBefore, kind) {
+  function logReview(state, id, now, r, elapsed, sBefore, kind, ms) {
     if (!state.log) state.log = [];
-    state.log.push([String(id), Math.round(now / 60000), r, Math.round(elapsed * 10) / 10, Math.round(sBefore * 10) / 10, kind]);
+    var row = [String(id), Math.round(now / 60000), r, Math.round(elapsed * 10) / 10, Math.round(sBefore * 10) / 10, kind];
+    if (ms != null && ms > 0 && ms < 600000) row.push(Math.round(ms / 100) / 10);   // seconds to answer
+    state.log.push(row);
+    // a counter that never goes back, so the refit keeps happening when the log is full
+    state.logTotal = (state.logTotal || state.log.length - 1) + 1;
     if (state.log.length > LOG_MAX) state.log = state.log.slice(-LOG_MAX);
   }
 
@@ -340,7 +350,8 @@
   }
   // Refit every 200 reviews.
   function maybeFit(state) {
-    var n = (state.log || []).length;
+    var n = state.logTotal || (state.log || []).length;
+    if ((state.log || []).length < 100) return null;
     if (n < 100 || (state.speed && state.speed.n && n - state.speed.n < 200)) return null;
     var f = fitSpeed(state);
     f.n = n;
@@ -486,8 +497,16 @@
 
   /* Fin de semana liviano (la guía): la meta baja a la mitad el sábado y el
      domingo, para no cortar la racha ni pedir las tres horas. */
+  /* The daily goals were set when every right answer paid 10 xp plus the
+     combo.  With the xp by cognitive cost the same minutes earn about 70 %
+     of that (measured with tools/<code>/sim_carriera.js: 2.434 → 1.725 xp
+     per hour in italiano, 2.561 → 1.641 in portugués), so the goal the
+     learner chose (100 / 200 / 350 / 500, the level of effort) is worth
+     that much xp now: the time a day does not change. */
+  var GOAL_SCALE = 0.7;
+  function goalValue(g) { return Math.round((+g || 200) * GOAL_SCALE / 10) * 10; }
   function goalFor(state, now) {
-    var d = now || new Date(), goal = state.goal || 200;
+    var d = now || new Date(), goal = goalValue(state.goal || 200);
     var wd = d.getDay();
     return wd === 0 || wd === 6 ? Math.max(50, Math.round(goal / 2 / 50) * 50) : goal;
   }
@@ -526,15 +545,94 @@
     return { level: lvl, into: xp - total, need: need };
   }
 
+  /* xp by cognitive cost, not the same for everything: recognising among
+     options pays less than writing, a rule of a month ago written from
+     memory pays more (retrieval effort: Bjork 1994; Rawson & Dunlosky
+     2022), and so does a phrase written from memory.  The streak bonus
+     («racha de escritos») grows only with written answers. */
   var XP = { right: 10, close: 4, bonusCombo: 2, boss: 150, challenge: 6,
-           lesson: 15 };
+             lesson: 15, recog: 6, written: 10, oldRule: 14, phrase: 12,
+             textWord: 0.5, textMax: 80, textStruct: 5, textClean: 20 };
+  var TYPED_KINDS = { cloze: 1, translate: 1, conjugate: 1, plural: 1, numbers: 1, qa: 1, typed: 1,
+                      write: 1, dictation: 1, fixerr: 1, garden: 1 };
 
-  function xpFor(verdict, combo) {
+  // Written (produced) or recognised among options (or tiles, or a card
+  // graded by the learner).
+  function written(it) {
+    if (!it) return true;
+    if (it.recog || it.options || it.type === "choice" || it.type === "flash") return false;
+    return !!TYPED_KINDS[it.type];
+  }
+  function costOf(it, ctx) {
+    if (!it) return XP.right;
+    if (!written(it)) return XP.recog;
+    if (ctx && ctx.old) return XP.oldRule;
+    if (it.frase) return XP.phrase;
+    return XP.written;
+  }
+  // xpFor(verdict, combo) as always; with the item, by its cost (ctx.old: a
+  // rule of a month or more ago).
+  function xpFor(verdict, combo, it, ctx) {
     if (verdict === VERDICT.RIGHT) {
-      return XP.right + Math.min(combo, 10) * XP.bonusCombo;
+      var base = costOf(it, ctx);
+      return base + (it && !written(it) ? 0 : Math.min(combo || 0, 10) * XP.bonusCombo);
     }
     if (verdict === VERDICT.CLOSE) return XP.close;
     return 0;
+  }
+  // Free text: by the word (with a cap), by each structure asked and met,
+  // and a bonus when the review found nothing to fix.
+  function xpText(words, structs, clean) {
+    return Math.min(XP.textMax, Math.round((+words || 0) * XP.textWord)) + (+structs || 0) * XP.textStruct +
+      (clean ? XP.textClean : 0);
+  }
+
+  /* ------------------------------------------- fichas desde cualquier módulo */
+
+  /* enqueue(state, id, item, opts): any module can put something in the
+     review: a check of the lesson missed, a question of a reading, a block
+     of the dictogloss not recovered, a gap of the C-test.  The item is
+     kept in state.own (the review can rebuild it from there); the card is
+     due tomorrow morning (opts.due: another moment; opts.now).  With
+     opts.maint the card starts in maintenance (what the placement test
+     skipped: known, it comes back a few a day, never as a debt); an
+     existing card is never overwritten by a maintenance one. */
+  var OWN_MAX = 200;
+  function enqueue(state, id, item, opts) {
+    opts = opts || {};
+    if (!state || !id) return null;
+    if (!state.cards) state.cards = {};
+    var now = opts.now || Date.now();
+    if (item) {
+      if (!state.own) state.own = {};
+      var copy = {};
+      Object.keys(item).forEach(function (k) { copy[k] = item[k]; });
+      copy.id = id;
+      delete copy.retry; delete copy.recogNote; delete copy.novel; delete copy.skill;
+      state.own[id] = { it: copy, at: now, src: opts.src || item.src || "", week: opts.week || item.week || 0 };
+      var keys = Object.keys(state.own);
+      if (keys.length > OWN_MAX) {
+        keys.sort(function (a, b) { return state.own[a].at - state.own[b].at; })
+          .slice(0, keys.length - OWN_MAX).forEach(function (k) { delete state.own[k]; delete state.cards[k]; });
+      }
+    }
+    var card = state.cards[id];
+    if (opts.maint) {
+      if (card) return card;
+      card = { s: MAINT_S, d: 5, reps: 1, lapses: 0, seen: 0, ok: 1, state: "maint",
+               interval: MAINT_S, due: opts.due || now, last: now, seeded: 1 };
+    } else {
+      var dd = new Date(now + DAY);
+      dd.setHours(4, 0, 0, 0);
+      var due = opts.due || dd.getTime();
+      if (card && card.due && card.due <= due && card.reps === 0) return card;     // already coming back
+      if (!card) card = { s: W[0], d: initD(1), reps: 0, lapses: 1, seen: 0, ok: 0, state: "learn", last: now };
+      else { card.reps = 0; card.state = "learn"; }
+      card.due = due;
+      card.interval = Math.max(0, Math.round((due - now) / DAY));
+    }
+    state.cards[id] = card;
+    return card;
   }
 
   /* --------------------------------------------------------------- guardado */
@@ -582,7 +680,10 @@
       reflect: {},        // cierre semanal: "aaaa-m-d" (lunes) -> { hard, change, when }
       records: {},        // récords personales por métrica
       pauses: [],         // pausas de 3+ días: { from, to, why }
-      keywords: {}        // palabra -> imagen mnemónica escrita por el alumno
+      keywords: {},       // palabra -> imagen mnemónica escrita por el alumno
+      own: {},            // fichas que crearon los módulos (Engine.enqueue): id -> { it, at, src, week }
+      recog: {},          // ejercicios reconocidos bien sin ficha: id -> minuto (la próxima vez, escritos)
+      predictions: []     // «¿cuánto creés que vas a sacar?»: { kind, week, said, got, at }
     };
   }
 
@@ -611,9 +712,27 @@
     return v;
   }
 
+  /* The fields the modules keep in the save (outside the base save): with
+     the wrong type (a string where an object goes, after a bad copy or an
+     old version) they are dropped, and the module starts them again empty.
+     Before 3.0 a single bad field could leave the app without a screen. */
+  var SAVE_V = 3;
+  var MODULE_OBJ = ["mcGloss", "readSess", "readParts", "variants", "hintLevels", "weakDone", "suoniPct", "suoniDone", "capirePct",
+    "duelli", "ubicacion", "dictogloss", "ascolto", "parlaLog", "esame", "esameDraft", "scrittiDraft", "scritti", "biblio",
+    "bossUsed", "strands", "streakBroken", "escritos", "escrituraPlus", "onboard", "hoy", "cierre", "porque", "ritmo", "tiempo",
+    "radio", "scriviExtra", "tramo", "tres", "fuera", "sync"];
+  var MODULE_ARR = ["aiNotes", "storie", "history"];
+  function sanitizeModules(s) {
+    MODULE_OBJ.forEach(function (k) { if (k in s && s[k] != null && !isObj(s[k])) delete s[k]; });
+    MODULE_ARR.forEach(function (k) { if (k in s && s[k] != null && !Array.isArray(s[k])) delete s[k]; });
+    if (s.phase != null && typeof s.phase !== "string") delete s.phase;
+  }
   function sanitize(s) {
     var base = blankSave();
     if (!isObj(s)) return base;
+    sanitizeModules(s);
+    // the version of the save: where a future migration starts from
+    s.v = SAVE_V;
     Object.keys(base).forEach(function (k) {
       var b = base[k], v = s[k];
       if (v === undefined) { s[k] = b; return; }
@@ -652,6 +771,8 @@
     Object.keys(s.sessions).forEach(function (k) { s.sessions[k] = num(s.sessions[k], 0, 0); });
     Object.keys(s.keywords).forEach(function (k) { if (typeof s.keywords[k] !== "string") delete s.keywords[k]; });
     s.pauses = s.pauses.filter(isObj).slice(-30);
+    Object.keys(s.own).forEach(function (k) { if (!isObj(s.own[k]) || !isObj(s.own[k].it)) delete s.own[k]; });
+    s.predictions = s.predictions.filter(isObj).slice(-40);
     Object.keys(s.days).forEach(function (k) {
       if (!isFinite(+s.days[k])) delete s.days[k]; else s.days[k] = +s.days[k];
     });
@@ -679,21 +800,31 @@
     return SAVE.syllabus ? SAVE.syllabus(s) : s;
   }
 
+  /* A save as it comes (from the phone or from a backup file) through every
+     upgrade: the syllabus renumbering, the language's own (a goal scale…),
+     the sanitizer and the cards to FSRS.  Loading and restoring a copy go
+     the same way. */
+  function fromRaw(obj) {
+    var s = migrateSyllabus(obj);
+    if (SAVE.load) s = SAVE.load(s);
+    s = sanitize(s);
+    // The SM-2 cards get a stability and a difficulty (nothing is lost).
+    if (s.srsV !== 2) {
+      Object.keys(s.cards).forEach(function (id) { upgradeCard(s.cards[id]); });
+      s.srsV = 2;
+    }
+    return s;
+  }
+  // A save that could not be read was kept aside: the learner can download it.
+  function damaged() {
+    try { return root.localStorage.getItem(KEY + ".damaged"); } catch (e) { return null; }
+  }
   function load() {
     var raw = null;
     try {
       raw = root.localStorage && root.localStorage.getItem(KEY);
       if (!raw) return blankSave();
-      var s = migrateSyllabus(JSON.parse(raw));
-      // The language's other upgrades of old saves (a goal scale…).
-      if (SAVE.load) s = SAVE.load(s);
-      s = sanitize(s);
-      // The SM-2 cards get a stability and a difficulty (nothing is lost).
-      if (s.srsV !== 2) {
-        Object.keys(s.cards).forEach(function (id) { upgradeCard(s.cards[id]); });
-        s.srsV = 2;
-      }
-      return s;
+      return fromRaw(JSON.parse(raw));
     } catch (e) {
       // Unreadable: keep a copy aside before a new save overwrites it.
       try { if (raw) root.localStorage.setItem(KEY + ".damaged", raw); } catch (e2) { /* */ }
@@ -715,8 +846,6 @@
     return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
   }
 
-  function today() { return dayKey(); }
-
   // Whole calendar days between two day keys (b - a).
   function daysBetween(a, b) {
     function parse(k) {
@@ -728,6 +857,23 @@
 
   /* The streak counts consecutive calendar days, not sessions.  A shield
      covers each missed day, so one bad day at work doesn't wipe a month. */
+  /* The streak as it really is when the app opens, not when the first
+     answer comes: missed days the shields cover keep it (they are spent on
+     the first answer, touchStreak); more than that and it ends now, so the
+     header does not say 140 while the card says «you are back after 9
+     days».  The shields are not wasted on a streak they cannot save. */
+  function checkStreak(state, now) {
+    now = now || new Date();
+    if (!state.lastPlayed || !state.streak) return { status: "ok" };
+    var gap = daysBetween(state.lastPlayed, dayKey(now)), missed = gap - 1;
+    if (gap <= 1) return { status: "ok" };
+    if (missed <= (state.shields || 0)) return { status: "saved", missed: missed };
+    var prev = state.streak;
+    state.bestStreak = Math.max(state.bestStreak || 0, prev);
+    state.streakBroken = { n: prev, at: dayKey(now), missed: missed };
+    state.streak = 0;
+    return { status: "lost", missed: missed, prev: prev };
+  }
   function touchStreak(state, now) {
     var t = dayKey(now);
     if (state.lastPlayed === t) return state.streak;
@@ -743,6 +889,7 @@
     } else state.streak = 1;
     // Every 7 days of streak earns a shield (max 3 in the pocket).
     if (state.streak % 7 === 0) state.shields = Math.min(3, (state.shields || 0) + 1);
+    if (state.streak > (state.bestStreak || 0)) state.bestStreak = state.streak;
     state.lastPlayed = t;
     return state.streak;
   }
@@ -801,7 +948,7 @@
 
   /* The ranks: a title for each stage, from tourist to native speaker
      (LANG.rules.ranks: [level, title], calibrated on a whole career by
-     tools/<code>/sim_carriera.js: the whole course reaches level 40). */
+     tools/lib/sim_carriera.js: the whole course reaches level 40). */
   var RANKS = R.ranks && R.ranks.length ? R.ranks : [[1, "1"]];
   function rankFor(level) {
     var r = RANKS[0][1];
@@ -886,7 +1033,7 @@
       test: function (s) { return (s.dailyWon || 0) >= 10; } },
     { id: "costante",
       test: function (s) {
-        var g = s.goal || 200;
+        var g = goalValue(s.goal || 200);
         return Object.keys(s.days || {}).filter(function (k) {
           return s.days[k] >= g;
         }).length >= 5;
@@ -947,17 +1094,22 @@
     RETENTIONS: RETENTIONS,
     MAINT_S: MAINT_S,
     goalFor: goalFor,
+    goalValue: goalValue,
+    GOAL_SCALE: GOAL_SCALE,
     STRANDS: STRANDS,
     addStrand: addStrand,
     strandsLast: strandsLast,
     levelFor: levelFor,
     xpFor: xpFor,
+    xpText: xpText,
+    written: written,
+    enqueue: enqueue,
     blankSave: blankSave,
     load: load,
     sanitize: sanitize,
     migrateSyllabus: migrateSyllabus,
     save: save,
-    touchStreak: touchStreak,
+    touchStreak: touchStreak, checkStreak: checkStreak, fromRaw: fromRaw, damaged: damaged, SAVE_V: SAVE_V, MODULE_OBJ: MODULE_OBJ, MODULE_ARR: MODULE_ARR,
     dayKey: dayKey,
     daysBetween: daysBetween,
     addXp: addXp,

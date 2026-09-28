@@ -16,9 +16,11 @@
  *
  * Cada texto: id, week, n, level, emoji, title, grammar (en portugués), text,
  * gloss {forma exacta del texto en minúsculas: significado}, questions
- * (3 × [pregunta en castellano, opciones, respuesta]), vf (afirmaciones en
+ * (3 × [pregunta, opciones, respuesta]: en castellano hasta la semana 26, en
+ * portugués desde la 27, como en el Celpe-Bras), vf (afirmaciones en
  * portugués: "verdadeiro" / "falso" / "não se diz", como en el Celpe-Bras) y
- * hunt {label, targets} (formas exactas, en minúsculas, a tocar en el texto).
+ * hunt {label, targets} (formas exactas, en minúsculas, a tocar en el texto;
+ * la consigna, en portugués desde la 27).
  * Las glosas limpias (1-2 palabras, no cognados) se vuelven glosas de opción
  * múltiple (letture.js, mcTargets).  Los controla tools/check_letture.py.
  */
@@ -628,12 +630,12 @@
                elevado: "elevado", reino: "reino", virou: "se volvió", império: "imperio", sobrar: "sobra",
                tropeçar: "tropezar", sozinha: "sola", quiser: "querés", estiver: "esté", puder: "pueda" },
       questions: [
-        ["¿Por qué la familia real portuguesa vino a Río?", ["huyó de las tropas de Napoleón", "buscaba oro", "quería ver el carnaval", "la invitó el emperador"], "huyó de las tropas de Napoleón"],
-        ["¿Qué pasó en 1815?", ["Brasil pasó a ser Reino Unido con Portugal", "Brasil se independizó", "se fundó Río", "se abolió la esclavitud en Brasil y en Portugal"], "Brasil pasó a ser Reino Unido con Portugal"],
-        ["¿Qué creó don João en 1808?", ["el Jardín Botánico", "la Quinta da Boa Vista", "el Paço Imperial", "el Cristo Redentor"], "el Jardín Botánico"]
+        ["Por que a família real portuguesa veio para o Rio?", ["fugiu das tropas de Napoleão", "procurava ouro", "queria ver o carnaval", "foi convidada pelo imperador"], "fugiu das tropas de Napoleão"],
+        ["O que aconteceu em 1815?", ["o Brasil passou a ser Reino Unido com Portugal", "o Brasil ficou independente", "o Rio foi fundado", "a escravidão foi abolida no Brasil e em Portugal"], "o Brasil passou a ser Reino Unido com Portugal"],
+        ["O que dom João criou em 1808?", ["o Jardim Botânico", "a Quinta da Boa Vista", "o Paço Imperial", "o Cristo Redentor"], "o Jardim Botânico"]
       ],
       vf: [["A família real chegou ao Rio em 1808.", "verdadeiro"], ["O Jardim Botânico foi criado por Napoleão.", "falso"], ["A Bia já levou outros amigos à Praça XV.", "não se diz"]],
-      hunt: { label: "Tocá los verbos en futuro do subjuntivo", targets: ["chegar", "quiser", "sobrar", "estiver", "puder"] } },
+      hunt: { label: "Toque nos verbos no futuro do subjuntivo", targets: ["chegar", "quiser", "sobrar", "estiver", "puder"] } },
 
     { id: "w-28", week: 28, n: 28, level: "B2", emoji: "⛓️", title: "Se vocês pudessem voltar a 1888",
       grammar: "imperfeito do subjuntivo e orações condicionais",
@@ -651,12 +653,12 @@
                pudessem: "pudieran", fariam: "harían", entrevistaria: "entrevistaría", libertos: "libertos (esclavos liberados)",
                terra: "tierra", quisesse: "quisiera", dívida: "deuda", turma: "clase, grupo de alumnos", abolir: "abolir" },
       questions: [
-        ["¿Quién firmó la Lei Áurea?", ["la princesa Isabel", "don Pedro I", "José do Patrocínio", "André Rebouças"], "la princesa Isabel"],
-        ["¿Qué haría un alumno si viajara en el tiempo?", ["iría a la Rua do Ouvidor a ver la fiesta", "entrevistaría a la princesa Isabel en el palacio", "se quedaría en casa", "viajaría a África"], "iría a la Rua do Ouvidor a ver la fiesta"],
-        ["Según Bia, ¿qué no les dio la ley a los libertos?", ["tierra, escuela ni trabajo", "la libertad", "un nombre", "la ciudadanía portuguesa"], "tierra, escuela ni trabajo"]
+        ["Quem assinou a Lei Áurea?", ["a princesa Isabel", "dom Pedro I", "José do Patrocínio", "André Rebouças"], "a princesa Isabel"],
+        ["O que um aluno faria se viajasse no tempo?", ["iria à Rua do Ouvidor ver a festa", "entrevistaria a princesa Isabel no palácio", "ficaria em casa", "viajaria para a África"], "iria à Rua do Ouvidor ver a festa"],
+        ["Segundo a Bia, o que a lei não deu aos libertos?", ["terra, escola nem trabalho", "a liberdade", "um nome", "a cidadania portuguesa"], "terra, escola nem trabalho"]
       ],
       vf: [["A Lei Áurea é de 1888.", "verdadeiro"], ["O Brasil foi o primeiro país das Américas a abolir a escravidão.", "falso"], ["A turma da Bia tem trinta alunos.", "não se diz"]],
-      hunt: { label: "Tocá los verbos de las hipótesis (subjuntivo imperfecto y condicional)", targets: ["pudessem", "fariam", "iria", "fosse", "entrevistaria", "quisesse", "começaria"] } },
+      hunt: { label: "Toque nos verbos das hipóteses (imperfeito do subjuntivo e futuro do pretérito)", targets: ["pudessem", "fariam", "iria", "fosse", "entrevistaria", "quisesse", "começaria"] } },
 
     { id: "w-29", week: 29, n: 29, level: "B2", emoji: "📚", title: "Paulo Freire e a leitura do mundo",
       grammar: "infinitivo pessoal",
@@ -675,12 +677,12 @@
                lerem: "lean", leitura: "lectura", golpe: "golpe", preso: "preso", exílio: "exilio",
                oprimido: "oprimido", trazerem: "traigan", começarem: "empiecen", conversarem: "charlen" },
       questions: [
-        ["¿Qué pasó en Angicos en 1963?", ["unos trescientos trabajadores aprendieron a leer", "Freire nació allí", "se fundó una universidad para trabajadores del campo", "hubo un golpe militar"], "unos trescientos trabajadores aprendieron a leer"],
-        ["¿De qué partía el método?", ["de palabras de la vida de los alumnos", "de las sílabas", "de libros europeos traducidos al portugués", "de canciones"], "de palabras de la vida de los alumnos"],
-        ["¿Dónde escribió Pedagogia do Oprimido?", ["en Chile", "en Angicos", "en Río", "en Portugal"], "en Chile"]
+        ["O que aconteceu em Angicos em 1963?", ["uns trezentos trabalhadores aprenderam a ler", "Freire nasceu lá", "foi fundada uma universidade para trabalhadores do campo", "houve um golpe militar"], "uns trezentos trabalhadores aprenderam a ler"],
+        ["De onde partia o método?", ["de palavras da vida dos alunos", "das sílabas", "de livros europeus traduzidos para o português", "de canções"], "de palavras da vida dos alunos"],
+        ["Onde ele escreveu Pedagogia do Oprimido?", ["no Chile", "em Angicos", "no Rio", "em Portugal"], "no Chile"]
       ],
       vf: [["Paulo Freire foi preso depois do golpe de 1964.", "verdadeiro"], ["O método começava pelas sílabas.", "falso"], ["A Bia conheceu Paulo Freire.", "não se diz"]],
-      hunt: { label: "Tocá los infinitivos personales (con -em, -mos…)", targets: ["discutirem", "decorarem", "saberem", "lerem", "trazerem", "começarem", "conversarem"] } },
+      hunt: { label: "Toque nos infinitivos pessoais (com -em, -mos…)", targets: ["discutirem", "decorarem", "saberem", "lerem", "trazerem", "começarem", "conversarem"] } },
 
     { id: "w-30", week: 30, n: 30, level: "B2", emoji: "🗡️", title: "Independência ou morte?",
       grammar: "tempos compostos e hipótese no passado",
@@ -699,12 +701,12 @@
                acontecido: "pasado, sucedido", vindo: "venido", dividido: "dividido", filho: "hijo",
                demorado: "tardado", aceitado: "aceptado", arrependido: "arrepentido", comigo: "conmigo" },
       questions: [
-        ["¿Qué habría gritado don Pedro?", ["«¡Independencia o muerte!»", "«¡Viva Portugal!»", "«¡Me quedo!»", "«¡Abajo el rey!»"], "«¡Independencia o muerte!»"],
-        ["Según algunos historiadores, sin la corte en Río, ¿qué habría pasado?", ["Brasil quizás se habría dividido en varios países", "Brasil sería más grande", "no habría carnaval", "Río seguiría siendo hoy la capital de todo Portugal"], "Brasil quizás se habría dividido en varios países"],
-        ["¿Qué habría pasado si Sofía no aceptaba el trabajo remoto?", ["nunca habría venido a Río", "viviría en São Paulo", "habría estudiado historia", "nada"], "nunca habría venido a Río"]
+        ["O que dom Pedro teria gritado?", ["«Independência ou morte!»", "«Viva Portugal!»", "«Fico!»", "«Abaixo o rei!»"], "«Independência ou morte!»"],
+        ["Segundo alguns historiadores, o que teria acontecido sem a corte no Rio?", ["o Brasil talvez tivesse se dividido em vários países", "o Brasil seria maior", "não haveria carnaval", "o Rio ainda seria hoje a capital de todo o Portugal"], "o Brasil talvez tivesse se dividido em vários países"],
+        ["O que teria acontecido se a Sofía não tivesse aceitado o trabalho remoto?", ["nunca teria vindo para o Rio", "moraria em São Paulo", "teria estudado história", "nada"], "nunca teria vindo para o Rio"]
       ],
       vf: [["O quadro de Pedro Américo foi pintado em 1888.", "verdadeiro"], ["Dom João VI ficou no Brasil até morrer.", "falso"], ["A Sofía se arrependeu de ter vindo ao Rio.", "não se diz"]],
-      hunt: { label: "Tocá los auxiliares de los tiempos compuestos (teria, tivesse, tenha, tiver)", targets: ["teria", "tivesse", "tenha", "tiver"] } },
+      hunt: { label: "Toque nos auxiliares dos tempos compostos (teria, tivesse, tenha, tiver)", targets: ["teria", "tivesse", "tenha", "tiver"] } },
 
     { id: "w-31", week: 31, n: 31, level: "B2", emoji: "📓", title: "Quarto de despejo",
       grammar: "discurso indireto",
@@ -724,12 +726,12 @@
                trechos: "fragmentos", contassem: "contaran", preço: "precio", fome: "hambre", jogava: "tiraba",
                sucesso: "éxito", rica: "rica" },
       questions: [
-        ["¿Dónde escribía Carolina su diario?", ["en cuadernos encontrados en la basura", "en una computadora", "en el diario de la ciudad, en una columna", "en cartas"], "en cuadernos encontrados en la basura"],
-        ["Según Rafael, ¿cómo llamaba Carolina a la favela?", ["el cuarto de los trastos de la ciudad", "su casa", "el corazón más alegre de la ciudad de São Paulo", "un jardín"], "el cuarto de los trastos de la ciudad"],
-        ["¿Qué respondió Bia sobre el éxito de Carolina?", ["que duró poco y murió pobre", "que se hizo rica", "que nunca publicó", "que se fue a Europa"], "que duró poco y murió pobre"]
+        ["Onde Carolina escrevia o diário?", ["em cadernos achados no lixo", "num computador", "no jornal da cidade, numa coluna", "em cartas"], "em cadernos achados no lixo"],
+        ["Segundo o Rafael, como Carolina chamava a favela?", ["o quarto de despejo da cidade", "a casa dela", "o coração mais alegre da cidade de São Paulo", "um jardim"], "o quarto de despejo da cidade"],
+        ["O que a Bia respondeu sobre o sucesso de Carolina?", ["que durou pouco e que ela morreu pobre", "que ela ficou rica", "que ela nunca publicou", "que ela foi para a Europa"], "que durou pouco e que ela morreu pobre"]
       ],
       vf: [["O livro foi traduzido para mais de dez línguas.", "verdadeiro"], ["Carolina morreu rica.", "falso"], ["A Júlia quer ser escritora.", "não se diz"]],
-      hunt: { label: "Tocá los verbos que introducen lo que dijo otro", targets: ["pediu", "disse", "comentou", "perguntou", "respondeu", "contou"] } },
+      hunt: { label: "Toque nos verbos que introduzem o que outra pessoa disse", targets: ["pediu", "disse", "comentou", "perguntou", "respondeu", "contou"] } },
 
     { id: "w-32", week: 32, n: 32, level: "B2", emoji: "🏛️", title: "A Era Vargas",
       grammar: "voz passiva sintética e sujeito indeterminado",
@@ -748,12 +750,12 @@
                "prendiam-se": "se encarcelaba a", opositores: "opositores", matou: "mató (se matou = se suicidó)",
                saio: "salgo", caminho: "camino" },
       questions: [
-        ["¿Qué se creó en 1953?", ["Petrobras", "el salario mínimo", "la CLT", "el Ministerio de Trabajo"], "Petrobras"],
-        ["¿Qué pasó durante el Estado Novo?", ["se cerró el Congreso y se censuró la prensa", "se votó libremente", "se fundó Brasilia", "Vargas vivió en el exilio y gobernó desde Uruguay"], "se cerró el Congreso y se censuró la prensa"],
-        ["¿Qué es hoy el Palacio del Catete?", ["el Museo de la República", "una escuela", "la casa de Sofía", "un ministerio"], "el Museo de la República"]
+        ["O que foi criado em 1953?", ["a Petrobras", "o salário mínimo", "a CLT", "o Ministério do Trabalho"], "a Petrobras"],
+        ["O que aconteceu durante o Estado Novo?", ["o Congresso foi fechado e a imprensa, censurada", "votou-se livremente", "Brasília foi fundada", "Vargas viveu no exílio e governou do Uruguai"], "o Congresso foi fechado e a imprensa, censurada"],
+        ["O que é hoje o Palácio do Catete?", ["o Museu da República", "uma escola", "a casa da Sofía", "um ministério"], "o Museu da República"]
       ],
       vf: [["A CLT reuniu as leis trabalhistas em 1943.", "verdadeiro"], ["Vargas morreu no exílio.", "falso"], ["A Sofía já visitou o Museu da República.", "não se diz"]],
-      hunt: { label: "Tocá los verbos de la pasiva con se (criou-se, fechou-se…)", targets: ["criou-se", "instituiu-se", "reuniram-se", "criaram-se", "fechou-se", "censurava-se", "prendiam-se"] } },
+      hunt: { label: "Toque nos verbos da passiva com se (criou-se, fechou-se…)", targets: ["criou-se", "instituiu-se", "reuniram-se", "criaram-se", "fechou-se", "censurava-se", "prendiam-se"] } },
 
     { id: "w-33", week: 33, n: 33, level: "B2", emoji: "🪶", title: "O bruxo do Cosme Velho",
       grammar: "colocação pronominal na escrita",
@@ -773,12 +775,12 @@
                frias: "frías", traiu: "traicionó", romances: "novelas", sebo: "librería de usados",
                "lê-los-ei": "los leeré", certeza: "certeza" },
       questions: [
-        ["¿Qué fundó Machado de Assis en 1897?", ["la Academia Brasileña de Letras", "la Universidad Federal de Río de Janeiro", "un diario", "un teatro"], "la Academia Brasileña de Letras"],
-        ["¿Quién narra Memórias Póstumas de Brás Cubas?", ["un difunto", "Capitu", "un gusano", "Machado de niño"], "un difunto"],
-        ["¿Qué deja Bentinho sin resolver?", ["si Capitu lo traicionó", "dónde nació", "quién escribió el libro", "cuándo murió"], "si Capitu lo traicionó"]
+        ["O que Machado de Assis fundou em 1897?", ["a Academia Brasileira de Letras", "a Universidade Federal do Rio de Janeiro", "um jornal", "um teatro"], "a Academia Brasileira de Letras"],
+        ["Quem narra Memórias Póstumas de Brás Cubas?", ["um defunto", "Capitu", "um verme", "Machado quando criança"], "um defunto"],
+        ["O que Bentinho deixa sem resposta?", ["se Capitu o traiu", "onde nasceu", "quem escreveu o livro", "quando morreu"], "se Capitu o traiu"]
       ],
       vf: [["Machado de Assis nasceu no Rio de Janeiro.", "verdadeiro"], ["Machado estudou numa universidade europeia.", "falso"], ["A Sofía pagou pouco pelos livros.", "não se diz"]],
-      hunt: { label: "Tocá los pronombres pegados al verbo (ênclise y mesóclise)", targets: ["tornou-se", "chamam-no", "dedicou-a", "deixa-nos", "lê-los-ei"] } },
+      hunt: { label: "Toque nos pronomes presos ao verbo (ênclise e mesóclise)", targets: ["tornou-se", "chamam-no", "dedicou-a", "deixa-nos", "lê-los-ei"] } },
 
     { id: "w-34", week: 34, n: 34, level: "B2", emoji: "🏚️", title: "Casa-grande e senzala",
       grammar: "conectores e coesão",
@@ -799,12 +801,12 @@
                suavizado: "suavizado", duramente: "duramente", igualdade: "igualdad", contudo: "sin embargo",
                negam: "niegan", pena: "pena (vale a pena = vale la pena)", "lê-lo": "leerlo", leiam: "lean" },
       questions: [
-        ["¿Qué era la senzala?", ["el lugar donde vivían los esclavizados", "la casa grande, donde vivía el dueño del ingenio", "el ingenio", "una iglesia"], "el lugar donde vivían los esclavizados"],
-        ["¿Qué se le critica a Freyre?", ["que idealizaba la convivencia entre amos y esclavizados", "que ignoraba a los africanos y solo hablaba de los portugueses", "que escribía mal", "que no era brasileño"], "que idealizaba la convivencia entre amos y esclavizados"],
-        ["¿Qué mostró Florestan Fernandes?", ["que el racismo seguía organizando la sociedad", "que la abolición trajo igualdad entre negros y blancos", "que Freyre tenía razón en todo", "que no hubo esclavitud"], "que el racismo seguía organizando la sociedad"]
+        ["O que era a senzala?", ["o lugar onde viviam os escravizados", "a casa-grande, onde morava o senhor de engenho", "o engenho", "uma igreja"], "o lugar onde viviam os escravizados"],
+        ["O que se critica em Freyre?", ["que idealizava a convivência entre senhores e escravizados", "que ignorava os africanos e só falava dos portugueses", "que escrevia mal", "que não era brasileiro"], "que idealizava a convivência entre senhores e escravizados"],
+        ["O que Florestan Fernandes mostrou?", ["que o racismo continuava organizando a sociedade", "que a abolição trouxe igualdade entre negros e brancos", "que Freyre tinha razão em tudo", "que não houve escravidão"], "que o racismo continuava organizando a sociedade"]
       ],
       vf: [["Casa-Grande & Senzala foi publicado em 1933.", "verdadeiro"], ["Florestan Fernandes defendeu a ideia de democracia racial.", "falso"], ["Freyre e Florestan eram amigos.", "não se diz"]],
-      hunt: { label: "Tocá los conectores (aliás, no entanto, contudo, portanto…)", targets: ["aliás", "isso", "entanto", "então", "seja", "contudo", "portanto"] } },
+      hunt: { label: "Toque nos conectores (aliás, no entanto, contudo, portanto…)", targets: ["aliás", "isso", "entanto", "então", "seja", "contudo", "portanto"] } },
 
     { id: "w-35", week: 35, n: 35, level: "B2", emoji: "❤️", title: "O homem cordial",
       grammar: "regência verbal",
@@ -825,12 +827,12 @@
                obedecer: "obedecer", chefe: "jefe", assistiu: "asistió (assistir a = ver, presenciar)",
                palestra: "charla, conferencia", namorou: "acarició (la idea)", avisou: "advirtió", bondade: "bondad" },
       questions: [
-        ["¿De dónde viene «cordial» según el autor?", ["del latín cor, cordis: corazón", "del latín curtis: la corte, la cortesía", "de un apellido", "del portugués antiguo"], "del latín cor, cordis: corazón"],
-        ["¿Qué hace el hombre cordial en la política?", ["confunde lo público con lo privado", "obedece las normas", "respeta la distancia entre lo público y lo privado", "no ayuda a nadie"], "confunde lo público con lo privado"],
-        ["¿Qué hizo Sofía la semana pasada?", ["asistió a una charla sobre el libro", "leyó el libro entero en una traducción al español", "conoció a Chico Buarque", "escribió sobre Argentina"], "asistió a una charla sobre el libro"]
+        ["De onde vem «cordial», segundo o autor?", ["do latim cor, cordis: coração", "do latim curtis: a corte, a cortesia", "de um sobrenome", "do português antigo"], "do latim cor, cordis: coração"],
+        ["O que o homem cordial faz na política?", ["confunde o público com o privado", "obedece às normas", "respeita a distância entre o público e o privado", "não ajuda ninguém"], "confunde o público com o privado"],
+        ["O que a Sofía fez na semana passada?", ["assistiu a uma palestra sobre o livro", "leu o livro inteiro numa tradução para o espanhol", "conheceu Chico Buarque", "escreveu sobre a Argentina"], "assistiu a uma palestra sobre o livro"]
       ],
       vf: [["Sérgio Buarque é o pai de Chico Buarque.", "verdadeiro"], ["Para o autor, cordial quer dizer bondoso.", "falso"], ["A palestra foi muito longa.", "não se diz"]],
-      hunt: { label: "Tocá los verbos cuyo régimen difiere del español (assistir a, namorar…)", targets: ["referiu-se", "aludia", "prefere", "obedecer", "assistiu", "namorou", "lembrou-se"] } },
+      hunt: { label: "Toque nos verbos cuja regência é diferente do espanhol (assistir a, namorar…)", targets: ["referiu-se", "aludia", "prefere", "obedecer", "assistiu", "namorou", "lembrou-se"] } },
 
     { id: "w-36", week: 36, n: 36, level: "B2", emoji: "🎨", title: "Uma noite na Lapa",
       grammar: "crase",
@@ -849,12 +851,12 @@
                aqueduto: "acueducto", concluído: "terminado", graças: "gracias (graças a = gracias a)",
                bolinhos: "croquetas", bacalhau: "bacalao", errava: "le erraba a", esquerda: "izquierda", direita: "derecha" },
       questions: [
-        ["¿Qué une la Escadaria Selarón?", ["la Lapa con Santa Teresa", "el Centro con Botafogo", "dos playas", "dos iglesias"], "la Lapa con Santa Teresa"],
-        ["¿Qué eran los Arcos de la Lapa?", ["un antiguo acueducto", "un puente para autos", "una iglesia", "un teatro"], "un antiguo acueducto"],
-        ["¿Qué comieron en el bar?", ["croquetas de bacalao", "feijoada", "pizza", "pastel de carne y queso"], "croquetas de bacalao"]
+        ["O que a Escadaria Selarón liga?", ["a Lapa a Santa Teresa", "o Centro a Botafogo", "duas praias", "duas igrejas"], "a Lapa a Santa Teresa"],
+        ["O que eram os Arcos da Lapa?", ["um antigo aqueduto", "uma ponte para carros", "uma igreja", "um teatro"], "um antigo aqueduto"],
+        ["O que eles comeram no bar?", ["bolinhos de bacalhau", "feijoada", "pizza", "pastel de carne e de queijo"], "bolinhos de bacalhau"]
       ],
       vf: [["Selarón era chileno.", "verdadeiro"], ["Os Arcos da Lapa são do século XX.", "falso"], ["O João toca na roda de choro.", "não se diz"]],
-      hunt: { label: "Tocá las crases (à, às, àquela)", targets: ["às", "à", "àquela"] } },
+      hunt: { label: "Toque nas crases (à, às, àquela)", targets: ["às", "à", "àquela"] } },
 
     { id: "w-37", week: 37, n: 37, level: "B2", emoji: "✈️", title: "Brasília, a capital inventada",
       grammar: "verbos irregulares e derivados",
@@ -874,12 +876,12 @@
                sobretudo: "sobre todo", intervieram: "intervinieron", etapa: "etapa", perdeu: "perdió",
                brincadeira: "broma", obtém: "obtiene", livre: "libre" },
       questions: [
-        ["¿Quién propuso construir Brasilia?", ["Juscelino Kubitschek", "Oscar Niemeyer", "Lúcio Costa", "Getúlio Vargas"], "Juscelino Kubitschek"],
-        ["¿Qué forma tiene el Plano Piloto?", ["de cruz o de avión", "de círculo", "de estrella de cinco puntas", "de cuadrado"], "de cruz o de avión"],
-        ["¿Qué dicen los cariocas en broma?", ["que Río sigue siendo la capital cultural", "que Brasilia es más linda", "que Río nunca fue la capital de Brasil de verdad", "que quieren mudarse"], "que Río sigue siendo la capital cultural"]
+        ["Quem propôs construir Brasília?", ["Juscelino Kubitschek", "Oscar Niemeyer", "Lúcio Costa", "Getúlio Vargas"], "Juscelino Kubitschek"],
+        ["Que forma tem o Plano Piloto?", ["de cruz ou de avião", "de círculo", "de estrela de cinco pontas", "de quadrado"], "de cruz ou de avião"],
+        ["O que os cariocas dizem, de brincadeira?", ["que o Rio continua sendo a capital cultural", "que Brasília é mais bonita", "que o Rio nunca foi de verdade a capital do Brasil", "que querem se mudar"], "que o Rio continua sendo a capital cultural"]
       ],
       vf: [["Brasília foi inaugurada em 1960.", "verdadeiro"], ["A ideia de mudar a capital nasceu com JK.", "falso"], ["A Sofía já visitou Brasília.", "não se diz"]],
-      hunt: { label: "Tocá los derivados de pôr, ver, ter y vir (propôs, previa…)", targets: ["propôs", "previa", "manteve", "intervieram", "obtém"] } },
+      hunt: { label: "Toque nos derivados de pôr, ver, ter e vir (propôs, previa…)", targets: ["propôs", "previa", "manteve", "intervieram", "obtém"] } },
 
     { id: "w-38", week: 38, n: 38, level: "B2", emoji: "🍺", title: "Papo de boteco",
       grammar: "português falado do Brasil",
@@ -902,12 +904,12 @@
                profetas: "profetas", pertinho: "cerquita", escolheu: "eligió", "pô": "¡che! (muletilla)", impostos: "impuestos",
                enforcado: "ahorcado", "cadê": "¿dónde está?", relaxa: "tranqui" },
       questions: [
-        ["¿Cómo se llamaba antes Ouro Preto?", ["Vila Rica", "Congonhas", "Tiradentes", "Minas Gerais"], "Vila Rica"],
-        ["¿Qué esculpió el Aleijadinho en Congonhas?", ["doce profetas en esteatita", "una iglesia de oro", "una gran estatua de Tiradentes", "un Cristo"], "doce profetas en esteatita"],
-        ["¿Qué le pasó a Tiradentes?", ["lo ahorcaron en Río en 1792", "fue presidente", "lo desterraron a Angola en 1792", "fundó Brasilia"], "lo ahorcaron en Río en 1792"]
+        ["Como Ouro Preto se chamava antes?", ["Vila Rica", "Congonhas", "Tiradentes", "Minas Gerais"], "Vila Rica"],
+        ["O que o Aleijadinho esculpiu em Congonhas?", ["doze profetas em pedra-sabão", "uma igreja de ouro", "uma grande estátua de Tiradentes", "um Cristo"], "doze profetas em pedra-sabão"],
+        ["O que aconteceu com Tiradentes?", ["foi enforcado no Rio em 1792", "foi presidente", "foi degredado para Angola em 1792", "fundou Brasília"], "foi enforcado no Rio em 1792"]
       ],
       vf: [["Tiradentes foi enforcado no Rio.", "verdadeiro"], ["O feriado de Tiradentes é em novembro.", "falso"], ["A Bia vai junto para Ouro Preto.", "não se diz"]],
-      hunt: { label: "Tocá las formas del portugués hablado (cê, pra, né, tô, tá…)", targets: ["cê", "pra", "né", "tô", "tipo", "pro", "tá", "pô", "cadê"] } },
+      hunt: { label: "Toque nas formas do português falado (cê, pra, né, tô, tá…)", targets: ["cê", "pra", "né", "tô", "tipo", "pro", "tá", "pô", "cadê"] } },
 
     { id: "w-39", week: 39, n: 39, level: "B2", emoji: "🗳️", title: "Diretas Já",
       grammar: "revisão B2",
@@ -927,12 +929,12 @@
                povo: "pueblo", adoeceu: "se enfermó", véspera: "víspera", posse: "asunción (del cargo)",
                arriscou: "arriesgó", "lembrem-se": "acuérdense" },
       questions: [
-        ["¿Qué pedían en la Candelária?", ["elecciones directas para presidente", "el fin del carnaval", "la vuelta del rey", "un nuevo estadio"], "elecciones directas para presidente"],
-        ["¿Qué pasó con la enmienda Dante de Oliveira?", ["no obtuvo los votos necesarios", "fue aprobada por el Congreso en 1984", "la firmó Tancredo", "nunca se votó"], "no obtuvo los votos necesarios"],
-        ["¿Quién gobernó finalmente?", ["José Sarney", "Tancredo Neves", "Leonel Brizola", "Ulysses Guimarães"], "José Sarney"]
+        ["O que se pedia na Candelária?", ["eleições diretas para presidente", "o fim do carnaval", "a volta do rei", "um estádio novo"], "eleições diretas para presidente"],
+        ["O que aconteceu com a emenda Dante de Oliveira?", ["não obteve os votos necessários", "foi aprovada pelo Congresso em 1984", "foi assinada por Tancredo", "nunca foi votada"], "não obteve os votos necessários"],
+        ["Quem acabou governando?", ["José Sarney", "Tancredo Neves", "Leonel Brizola", "Ulysses Guimarães"], "José Sarney"]
       ],
       vf: [["Tancredo Neves morreu antes de assumir.", "verdadeiro"], ["A emenda foi aprovada em 1984.", "falso"], ["A Dona Lúcia foi à Candelária com o marido.", "não se diz"]],
-      hunt: { label: "Tocá las formas de B2: futuro do subjuntivo, infinitivo pessoal y compuestos", targets: ["tivesse", "teria", "forem", "votarem"] } },
+      hunt: { label: "Toque nas formas do B2: futuro do subjuntivo, infinitivo pessoal e tempos compostos", targets: ["tivesse", "teria", "forem", "votarem"] } },
 
     // ------------------------------------------------ Estação 4 (B2 → C1)
     { id: "w-40", week: 40, n: 40, level: "B2", emoji: "📜", title: "A Constituição Cidadã",
@@ -955,12 +957,12 @@
                imprescritível: "imprescriptible", reconhecimento: "reconocimiento", povos: "pueblos",
                aponte: "señale", fonte: "fuente", afixou: "colgó, fijó", perante: "ante", qualquer: "cualquier" },
       questions: [
-        ["¿Cómo llamó Ulysses Guimarães a la Constitución?", ["«Constitución Ciudadana»", "«Constitución del Pueblo»", "«Ley Áurea»", "«Carta Magna Indígena»"], "«Constitución Ciudadana»"],
-        ["¿Qué sistema creó la Constitución?", ["el Sistema Único de Salud", "el salario mínimo", "la CLT", "Petrobras"], "el Sistema Único de Salud"],
-        ["¿Qué se critica del texto?", ["su extensión", "que es muy corto", "que no tiene derechos sociales", "que es de 1964"], "su extensión"]
+        ["Como Ulysses Guimarães chamou a Constituição?", ["«Constituição Cidadã»", "«Constituição do Povo»", "«Lei Áurea»", "«Carta Magna Indígena»"], "«Constituição Cidadã»"],
+        ["Que sistema a Constituição criou?", ["o Sistema Único de Saúde", "o salário mínimo", "a CLT", "a Petrobras"], "o Sistema Único de Saúde"],
+        ["O que se critica no texto?", ["a extensão", "que é muito curto", "que não tem direitos sociais", "que é de 1964"], "a extensão"]
       ],
       vf: [["O voto é facultativo aos 16 e 17 anos.", "verdadeiro"], ["A Constituição tem menos de cem artigos.", "falso"], ["Os alunos da Bia leram a Constituição inteira.", "não se diz"]],
-      hunt: { label: "Tocá las nominalizaciones (sustantivos en -ção, -mento, -são…)", targets: ["encerramento", "ocasião", "inovações", "ampliação", "criação", "definição", "reconhecimento", "extensão", "aplicação", "aprovação", "distinção"] } },
+      hunt: { label: "Toque nas nominalizações (substantivos em -ção, -mento, -são…)", targets: ["encerramento", "ocasião", "inovações", "ampliação", "criação", "definição", "reconhecimento", "extensão", "aplicação", "aprovação", "distinção"] } },
 
     { id: "w-41", week: 41, n: 41, level: "C1", emoji: "⭐", title: "Clarice no Leme",
       grammar: "pretérito mais-que-perfeito simples e narrativa",
@@ -981,12 +983,12 @@
                viera: "había venido", percebia: "notaba", datilógrafa: "dactilógrafa", "cachorro-quente": "pancho",
                recortava: "recortaba", anúncios: "avisos", calçadão: "rambla, paseo costero", lera: "había leído" },
       questions: [
-        ["¿Dónde nació Clarice Lispector?", ["en Ucrania", "en Recife", "en Río", "en Alagoas"], "en Ucrania"],
-        ["¿Quién es Macabéa?", ["una chica de Alagoas que vino a Río", "la madre de Clarice", "una periodista", "la narradora del libro, una periodista"], "una chica de Alagoas que vino a Río"],
-        ["¿Qué hay hoy en el paseo del Leme?", ["una estatua de Clarice con su perro", "una biblioteca con los libros de Clarice", "un museo", "una radio"], "una estatua de Clarice con su perro"]
+        ["Onde Clarice Lispector nasceu?", ["na Ucrânia", "no Recife", "no Rio", "em Alagoas"], "na Ucrânia"],
+        ["Quem é Macabéa?", ["uma moça de Alagoas que veio para o Rio", "a mãe de Clarice", "uma jornalista", "a narradora do livro, uma jornalista"], "uma moça de Alagoas que veio para o Rio"],
+        ["O que há hoje no calçadão do Leme?", ["uma estátua de Clarice com o cachorro dela", "uma biblioteca com os livros de Clarice", "um museu", "uma rádio"], "uma estátua de Clarice com o cachorro dela"]
       ],
       vf: [["Clarice morreu no mesmo ano em que publicou A Hora da Estrela.", "verdadeiro"], ["Macabéa era uma moça rica de Ipanema.", "falso"], ["A Sofía chorou ao ler o livro.", "não se diz"]],
-      hunt: { label: "Tocá los verbos en pretérito mais-que-perfeito simples", targets: ["tornara", "nascera", "fugira", "chegara", "crescera", "viera", "lera"] } },
+      hunt: { label: "Toque nos verbos no pretérito mais-que-perfeito simples", targets: ["tornara", "nascera", "fugira", "chegara", "crescera", "viera", "lera"] } },
 
     { id: "w-42", week: 42, n: 42, level: "C1", emoji: "🎸", title: "Chega de Saudade",
       grammar: "orações reduzidas",
@@ -1005,12 +1007,12 @@
                batida: "rasgueo, ritmo", maneira: "manera", passados: "pasados", conquistou: "conquistó",
                beco: "callejón", garrafas: "botellas", fechados: "cerrados", saudade: "nostalgia" },
       questions: [
-        ["¿Qué se considera el punto de partida de la bossa nova?", ["la grabación de «Chega de Saudade» de João Gilberto", "un disco de Elizeth Cardoso grabado en 1970 en São Paulo", "un recital en Brasilia", "un premio Grammy"], "la grabación de «Chega de Saudade» de João Gilberto"],
-        ["¿Cómo cantaba João Gilberto?", ["bajito, casi hablando", "a los gritos", "solo en inglés", "sin guitarra"], "bajito, casi hablando"],
-        ["¿Qué hizo Sofía al llegar a casa?", ["puso el disco y cerró los ojos", "llamó a doña Lúcia", "fue al Beco das Garrafas a escuchar", "tocó la guitarra"], "puso el disco y cerró los ojos"]
+        ["O que é considerado o ponto de partida da bossa nova?", ["a gravação de «Chega de Saudade» por João Gilberto", "um disco de Elizeth Cardoso gravado em 1970 em São Paulo", "um show em Brasília", "um prêmio Grammy"], "a gravação de «Chega de Saudade» por João Gilberto"],
+        ["Como João Gilberto cantava?", ["baixinho, quase falando", "aos gritos", "só em inglês", "sem violão"], "baixinho, quase falando"],
+        ["O que a Sofía fez ao chegar em casa?", ["pôs o disco e fechou os olhos", "ligou para a dona Lúcia", "foi ao Beco das Garrafas ouvir música", "tocou violão"], "pôs o disco e fechou os olhos"]
       ],
       vf: [["Elizeth Cardoso gravou a canção com João Gilberto ao violão.", "verdadeiro"], ["O disco Getz/Gilberto foi gravado no Rio.", "falso"], ["A Dona Lúcia conheceu João Gilberto.", "não se diz"]],
-      hunt: { label: "Tocá las formas de las oraciones reducidas (gerundio, participio, ao + infinitivo)", targets: ["lançada", "composta", "ouvindo", "cantando", "falando", "passados", "passar", "chegando", "fechados"] } },
+      hunt: { label: "Toque nas formas das orações reduzidas (gerúndio, particípio, ao + infinitivo)", targets: ["lançada", "composta", "ouvindo", "cantando", "falando", "passados", "passar", "chegando", "fechados"] } },
 
     { id: "w-43", week: 43, n: 43, level: "C1", emoji: "🏛️", title: "Carta à Biblioteca Nacional",
       grammar: "correspondência formal",
@@ -1034,12 +1036,12 @@
                anexo: "adjunto", agradeceria: "agradecería", procedimentos: "trámites",
                aguardo: "espera (fico no aguardo = quedo a la espera)", atenciosamente: "atentamente", leitores: "lectores" },
       questions: [
-        ["¿Qué pide Sofía en la carta?", ["consultar la primera edición de Os Sertões", "trabajar en la biblioteca durante el verano", "comprar un libro", "donar un libro"], "consultar la primera edición de Os Sertões"],
-        ["¿Sobre qué es su investigación?", ["las tapas de las primeras ediciones brasileñas", "la guerra de Canudos", "Euclides da Cunha", "la historia de la biblioteca y de sus lectores"], "las tapas de las primeras ediciones brasileñas"],
-        ["¿Qué adjunta?", ["una carta de presentación del curso", "su pasaporte", "un libro", "nada"], "una carta de presentación del curso"]
+        ["O que a Sofía pede na carta?", ["consultar a primeira edição de Os Sertões", "trabalhar na biblioteca durante o verão", "comprar um livro", "doar um livro"], "consultar a primeira edição de Os Sertões"],
+        ["Sobre o que é a pesquisa dela?", ["as capas das primeiras edições brasileiras", "a guerra de Canudos", "Euclides da Cunha", "a história da biblioteca e dos seus leitores"], "as capas das primeiras edições brasileiras"],
+        ["O que ela anexa?", ["uma carta de apresentação do curso", "o passaporte", "um livro", "nada"], "uma carta de apresentação do curso"]
       ],
       vf: [["Os Sertões foi publicado em 1902.", "verdadeiro"], ["Canudos fica no litoral do Rio.", "falso"], ["A biblioteca respondeu no dia seguinte.", "não se diz"]],
-      hunt: { label: "Tocá las fórmulas de la carta formal", targets: ["prezados", "venho", "solicitar", "informo", "segue", "agradeceria", "agradeço", "aguardo", "atenciosamente"] } },
+      hunt: { label: "Toque nas fórmulas da carta formal", targets: ["prezados", "venho", "solicitar", "informo", "segue", "agradeceria", "agradeço", "aguardo", "atenciosamente"] } },
 
     { id: "w-44", week: 44, n: 44, level: "C1", emoji: "🧬", title: "Darcy Ribeiro e o povo novo",
       grammar: "formação de palavras",
@@ -1060,12 +1062,12 @@
                ninguendade: "condición de no ser nadie (neologismo de Darcy)", "chiquérrimo": "elegantísimo (coloquial)",
                brincou: "bromeó", horário: "horario" },
       questions: [
-        ["¿Qué tres matrices describe Darcy Ribeiro?", ["indígena, europea y africana", "portuguesa, española e italiana", "urbana, rural e indígena", "blanca, negra y asiática"], "indígena, europea y africana"],
-        ["¿Cómo fue el mestizaje para Darcy?", ["un proceso marcado por la violencia", "una convivencia pacífica entre los pueblos", "algo sin importancia", "un invento de Freyre"], "un proceso marcado por la violencia"],
-        ["¿Qué ideó con Niemeyer?", ["el Sambódromo y los CIEPs", "Brasilia", "la Universidad de São Paulo", "el Cristo"], "el Sambódromo y los CIEPs"]
+        ["Que três matrizes Darcy Ribeiro descreve?", ["indígena, europeia e africana", "portuguesa, espanhola e italiana", "urbana, rural e indígena", "branca, negra e asiática"], "indígena, europeia e africana"],
+        ["Como foi a mestiçagem para Darcy?", ["um processo marcado pela violência", "uma convivência pacífica entre os povos", "algo sem importância", "uma invenção de Freyre"], "um processo marcado pela violência"],
+        ["O que ele idealizou com Niemeyer?", ["o Sambódromo e os CIEPs", "Brasília", "a Universidade de São Paulo", "o Cristo"], "o Sambódromo e os CIEPs"]
       ],
       vf: [["Darcy Ribeiro ajudou a fundar a Universidade de Brasília.", "verdadeiro"], ["Para Darcy, a mestiçagem foi pacífica.", "falso"], ["A Bia estudou num CIEP.", "não se diz"]],
-      hunt: { label: "Tocá las palabras derivadas (prefijos, sufijos, aumentativos, superlativos)", targets: ["desencontro", "mestiçagem", "desigualdade", "desenraizamento", "inventivo", "sambódromo", "brizolões", "brasilidade", "ninguendade", "chiquérrimo"] } },
+      hunt: { label: "Toque nas palavras derivadas (prefixos, sufixos, aumentativos, superlativos)", targets: ["desencontro", "mestiçagem", "desigualdade", "desenraizamento", "inventivo", "sambódromo", "brizolões", "brasilidade", "ninguendade", "chiquérrimo"] } },
 
     { id: "w-45", week: 45, n: 45, level: "C1", emoji: "🌵", title: "Tupi or not tupi",
       grammar: "falsos amigos e heterossemânticos",
@@ -1086,12 +1088,12 @@
                apelido: "apodo", apellido: "apellido (en español; en portugués: sobrenome)", polvo: "pulpo",
                "pó": "polvo, tierra", estante: "estante", brincadeira: "broma" },
       questions: [
-        ["¿Qué proponía el Manifiesto Antropófago?", ["devorar la cultura extranjera y transformarla", "rechazar todo lo extranjero y volver a lo indígena", "volver a Portugal", "hablar solo tupí"], "devorar la cultura extranjera y transformarla"],
-        ["¿Qué significa Abaporu?", ["hombre que come gente", "sol del sertão", "mujer de Oswald", "cactus gigante"], "hombre que come gente"],
-        ["¿Dónde está hoy el cuadro?", ["en el MALBA, en Buenos Aires", "en el MASP, en la ciudad de São Paulo", "en Río", "en París"], "en el MALBA, en Buenos Aires"]
+        ["O que o Manifesto Antropófago propunha?", ["devorar a cultura estrangeira e transformá-la", "rejeitar tudo o que é estrangeiro e voltar ao indígena", "voltar para Portugal", "falar só tupi"], "devorar a cultura estrangeira e transformá-la"],
+        ["O que significa Abaporu?", ["homem que come gente", "sol do sertão", "mulher de Oswald", "cacto gigante"], "homem que come gente"],
+        ["Onde está hoje o quadro?", ["no MALBA, em Buenos Aires", "no MASP, na cidade de São Paulo", "no Rio", "em Paris"], "no MALBA, em Buenos Aires"]
       ],
       vf: [["O Abaporu foi um presente de aniversário.", "verdadeiro"], ["Em português, apelido quer dizer sobrenome.", "falso"], ["Oswald e Tarsila se conheceram em Paris.", "não se diz"]],
-      hunt: { label: "Tocá los falsos amigos (palabras que en español significan otra cosa)", targets: ["brincadeira", "esquisito", "escritório", "apelido", "polvo"] } },
+      hunt: { label: "Toque nos falsos amigos (palavras que em espanhol significam outra coisa)", targets: ["brincadeira", "esquisito", "escritório", "apelido", "polvo"] } },
 
     { id: "w-46", week: 46, n: 46, level: "C1", emoji: "🎩", title: "O poeta é um fingidor",
       grammar: "variação: Brasil, Portugal e África",
@@ -1112,12 +1114,12 @@
                moçambicano: "mozambiqueño", fingidor: "fingidor", finge: "finge", dor: "dolor", deveras: "de verdad",
                começo: "comienzo", sente: "siente" },
       questions: [
-        ["¿Qué son los heterónimos de Pessoa?", ["poetas inventados con vida y estilo propios", "seudónimos que usaba para firmar en los diarios", "sus hermanos", "sus libros"], "poetas inventados con vida y estilo propios"],
-        ["¿Qué le llamó la atención a Sofía en el prólogo?", ["formas del portugués de Portugal", "errores de imprenta", "palabras en español", "que no tenía pronombres"], "formas del portugués de Portugal"],
-        ["¿Por qué es famoso Mia Couto?", ["por inventar palabras nuevas", "por ser portugués", "por traducir a Pessoa al inglés", "por vivir en Río"], "por inventar palabras nuevas"]
+        ["O que são os heterônimos de Pessoa?", ["poetas inventados, com vida e estilo próprios", "pseudônimos que ele usava para assinar nos jornais", "os irmãos dele", "os livros dele"], "poetas inventados, com vida e estilo próprios"],
+        ["O que chamou a atenção da Sofía no prefácio?", ["formas do português de Portugal", "erros de impressão", "palavras em espanhol", "que não tinha pronomes"], "formas do português de Portugal"],
+        ["Por que Mia Couto é famoso?", ["por inventar palavras novas", "por ser português", "por traduzir Pessoa para o inglês", "por morar no Rio"], "por inventar palavras novas"]
       ],
       vf: [["Em Portugal se diz \"autocarro\" para ônibus.", "verdadeiro"], ["Álvaro de Campos é o poeta clássico.", "falso"], ["O seu Manuel conheceu Mia Couto.", "não se diz"]],
-      hunt: { label: "Tocá las formas típicas de Portugal", targets: ["heterónimos", "autocarro", "disse-lhe", "conheci-o"] } },
+      hunt: { label: "Toque nas formas típicas de Portugal", targets: ["heterónimos", "autocarro", "disse-lhe", "conheci-o"] } },
 
     { id: "w-47", week: 47, n: 47, level: "C1", emoji: "⚖️", title: "O jeitinho: virtude ou vício?",
       grammar: "argumentação e modalização",
@@ -1139,12 +1141,12 @@
                reforce: "refuerce", ingênuo: "ingenuo", jeito: "manera (dar um jeito = arreglárselas)",
                suma: "suma (em suma = en resumen)" },
       questions: [
-        ["¿Qué es el jeitinho según el texto?", ["el arte de encontrar una salida para sortear una regla", "un baile carioca", "una ley", "un tipo de burocracia que obliga a cumplir cada regla al pie de la letra"], "el arte de encontrar una salida para sortear una regla"],
-        ["¿Qué analizó DaMatta?", ["el ritual de «¿Sabe con quién está hablando?»", "el carnaval de Salvador", "la Constitución de 1988 y los derechos que garantiza", "el fútbol"], "el ritual de «¿Sabe con quién está hablando?»"],
-        ["¿Qué pregunta propone el final?", ["para quién funciona el jeitinho", "si el jeitinho existe también fuera de Brasil", "cuándo nació", "quién lo inventó"], "para quién funciona el jeitinho"]
+        ["O que é o jeitinho, segundo o texto?", ["a arte de encontrar uma saída para contornar uma regra", "uma dança carioca", "uma lei", "um tipo de burocracia que obriga a cumprir cada regra ao pé da letra"], "a arte de encontrar uma saída para contornar uma regra"],
+        ["O que DaMatta analisou?", ["o ritual do «Você sabe com quem está falando?»", "o carnaval de Salvador", "a Constituição de 1988 e os direitos que ela garante", "o futebol"], "o ritual do «Você sabe com quem está falando?»"],
+        ["Que pergunta o final propõe?", ["para quem o jeitinho funciona", "se o jeitinho existe também fora do Brasil", "quando ele nasceu", "quem o inventou"], "para quem o jeitinho funciona"]
       ],
       vf: [["Segundo DaMatta, o país oscila entre a lei e as relações pessoais.", "verdadeiro"], ["O texto afirma que o jeitinho é sempre corrupção.", "falso"], ["DaMatta é carioca.", "não se diz"]],
-      hunt: { label: "Tocá las palabras que matizan (convém, tudo indica, ainda que, é possível, talvez)", targets: ["convém", "indica", "ainda", "possível", "talvez"] } },
+      hunt: { label: "Toque nas palavras que atenuam (convém, tudo indica, ainda que, é possível, talvez)", targets: ["convém", "indica", "ainda", "possível", "talvez"] } },
 
     { id: "w-48", week: 48, n: 48, level: "C1", emoji: "🧐", title: "As ideias fora do lugar",
       grammar: "resumo e reformulação",
@@ -1165,12 +1167,12 @@
                ornamento: "adorno", desmentidas: "desmentidas", ressalta: "destaca", linhas: "líneas",
                acordo: "acuerdo (de acordo com = según)" },
       questions: [
-        ["¿Cuál es la contradicción que señala Schwarz?", ["liberalismo importado en una economía esclavista", "una monarquía europea en un país que ya era republicano", "catolicismo y ateísmo", "campo y ciudad"], "liberalismo importado en una economía esclavista"],
-        ["¿De qué dependían los hombres libres y pobres?", ["del favor de los poderosos", "del salario", "de la ley", "del Estado"], "del favor de los poderosos"],
-        ["¿Cómo debe ser el resumen que pide Bia?", ["de cinco líneas, sin opinión", "largo, de una página, con opinión", "en español", "sobre Machado"], "de cinco líneas, sin opinión"]
+        ["Qual é a contradição que Schwarz aponta?", ["liberalismo importado numa economia escravista", "uma monarquia europeia num país que já era republicano", "catolicismo e ateísmo", "campo e cidade"], "liberalismo importado numa economia escravista"],
+        ["De que dependiam os homens livres e pobres?", ["do favor dos poderosos", "do salário", "da lei", "do Estado"], "do favor dos poderosos"],
+        ["Como deve ser o resumo que a Bia pede?", ["de cinco linhas, sem opinião", "longo, de uma página, com opinião", "em espanhol", "sobre Machado"], "de cinco linhas, sem opinião"]
       ],
       vf: [["Para Schwarz, as ideias liberais funcionavam como ornamento.", "verdadeiro"], ["O ensaio foi publicado em 1990.", "falso"], ["A Sofía tirou nota dez no resumo.", "não se diz"]],
-      hunt: { label: "Tocá lo que atribuye y reformula (segundo, sustenta, ressalta, em outras palavras…)", targets: ["segundo", "outras", "sustenta", "ressalta", "acordo"] } },
+      hunt: { label: "Toque no que atribui e reformula (segundo, sustenta, ressalta, em outras palavras…)", targets: ["segundo", "outras", "sustenta", "ressalta", "acordo"] } },
 
     { id: "w-49", week: 49, n: 49, level: "C1", emoji: "🌹", title: "Grândola, Vila Morena",
       grammar: "registro culto e coloquial",
@@ -1191,12 +1193,12 @@
                tava: "estaba (coloquial)", caprichando: "esmerándose", "emocionou-me": "me emocionó",
                presenciou: "presenció", acontecimentos: "sucesos", chorou: "lloró" },
       questions: [
-        ["¿Qué era «Grândola, Vila Morena» esa noche?", ["la señal para que salieran los capitanes", "el himno de Portugal", "una canción prohibida por el MFA en la radio", "la canción del carnaval"], "la señal para que salieran los capitanes"],
-        ["¿Por qué se llama Revolución de los Claveles?", ["los soldados pusieron claveles en los fusiles", "era primavera", "Salazar amaba los claveles", "la radio regaló flores a los que salieron a la calle"], "los soldados pusieron claveles en los fusiles"],
-        ["¿Cómo responde Sofía al audio de João?", ["en registro formal", "con un audio", "en español", "no responde"], "en registro formal"]
+        ["O que era «Grândola, Vila Morena» naquela noite?", ["o sinal para os capitães saírem", "o hino de Portugal", "uma canção proibida pelo MFA no rádio", "a música do carnaval"], "o sinal para os capitães saírem"],
+        ["Por que se chama Revolução dos Cravos?", ["os soldados puseram cravos nos fuzis", "era primavera", "Salazar adorava cravos", "a rádio deu flores a quem saiu à rua"], "os soldados puseram cravos nos fuzis"],
+        ["Como a Sofía responde ao áudio do João?", ["em registro formal", "com um áudio", "em espanhol", "não responde"], "em registro formal"]
       ],
       vf: [["O seu Manuel estava em Lisboa em 1974.", "verdadeiro"], ["Salazar ainda governava em 1974.", "falso"], ["O seu Manuel era soldado.", "não se diz"]],
-      hunt: { label: "Tocá las marcas del registro coloquial en el audio de João", targets: ["cara", "cê", "mano", "tava"] } },
+      hunt: { label: "Toque nas marcas do registro coloquial no áudio do João", targets: ["cara", "cê", "mano", "tava"] } },
 
     { id: "w-50", week: 50, n: 50, level: "C1", emoji: "🌊", title: "Lisboa, 1755",
       grammar: "colocações e expressões idiomáticas",
@@ -1217,12 +1219,12 @@
                retas: "rectas", madeira: "madera", gaiola: "jaula", pombalina: "de Pombal", tremores: "temblores", zombou: "se burló",
                otimismo: "optimismo", ditado: "refrán", bonança: "calma" },
       questions: [
-        ["¿Qué destruyó Lisboa en 1755?", ["un terremoto, un maremoto e incendios", "una guerra", "una inundación del Tajo y una epidemia", "una epidemia"], "un terremoto, un maremoto e incendios"],
-        ["¿Qué se sabe de la frase atribuida a Pombal?", ["que su autoría es dudosa", "que la dijo el rey", "que es de Voltaire", "que está en la Constitución"], "que su autoría es dudosa"],
-        ["¿Qué era la gaiola pombalina?", ["una estructura de madera contra los temblores", "una cárcel", "una plaza abierta para escapar de los temblores", "un barco"], "una estructura de madera contra los temblores"]
+        ["O que destruiu Lisboa em 1755?", ["um terremoto, um maremoto e incêndios", "uma guerra", "uma cheia do Tejo e uma epidemia", "uma epidemia"], "um terremoto, um maremoto e incêndios"],
+        ["O que se sabe da frase atribuída a Pombal?", ["que a autoria é duvidosa", "que foi o rei que a disse", "que é de Voltaire", "que está na Constituição"], "que a autoria é duvidosa"],
+        ["O que era a gaiola pombalina?", ["uma estrutura de madeira contra os tremores", "uma prisão", "uma praça aberta para fugir dos tremores", "um navio"], "uma estrutura de madeira contra os tremores"]
       ],
       vf: [["O terremoto aconteceu no Dia de Todos os Santos.", "verdadeiro"], ["Está provado que Pombal disse a frase.", "falso"], ["O seu Manuel já visitou a Baixa de Lisboa.", "não se diz"]],
-      hunt: { label: "Tocá las palabras de las colocaciones y expresiones (assumir as rédeas, tomar providências…)", targets: ["rédeas", "providências", "sério", "falar", "volta", "bonança"] } },
+      hunt: { label: "Toque nas palavras das colocações e expressões (assumir as rédeas, tomar providências…)", targets: ["rédeas", "providências", "sério", "falar", "volta", "bonança"] } },
 
     { id: "w-51", week: 51, n: 51, level: "C1", emoji: "✊🏿", title: "Palmares e a Consciência Negra",
       grammar: "revisão B2-C1",
@@ -1243,12 +1245,12 @@
                amefricanidade: "amefricanidad (concepto de Lélia Gonzalez)", lançou: "lanzó", tragam: "traigan",
                montar: "armar", verba: "fondos", lamentou: "lamentó", chegou: "llegó" },
       questions: [
-        ["¿Qué era Palmares?", ["la mayor comunidad de fugados de la esclavitud", "un ingenio azucarero", "una ciudad portuguesa", "un puerto"], "la mayor comunidad de fugados de la esclavitud"],
-        ["¿Por qué el 20 de noviembre es feriado?", ["es el día de Zumbi y de la Conciencia Negra", "es el día de la Abolición, la Ley Áurea de 1888", "es el día de Tiradentes", "es la Independencia"], "es el día de Zumbi y de la Conciencia Negra"],
-        ["¿Qué lamenta Bia?", ["no haber empezado antes para conseguir fondos", "no ir al viaje", "que los alumnos no quieran ir al viaje a Alagoas", "que llueva en noviembre"], "no haber empezado antes para conseguir fondos"]
+        ["O que era Palmares?", ["a maior comunidade de fugidos da escravidão", "um engenho de açúcar", "uma cidade portuguesa", "um porto"], "a maior comunidade de fugidos da escravidão"],
+        ["Por que o 20 de novembro é feriado?", ["é o dia de Zumbi e da Consciência Negra", "é o dia da Abolição, a Lei Áurea de 1888", "é o dia de Tiradentes", "é a Independência"], "é o dia de Zumbi e da Consciência Negra"],
+        ["Do que a Bia se arrepende?", ["de não ter começado antes a buscar recursos", "de não ir à viagem", "de os alunos não quererem ir à viagem a Alagoas", "de chover em novembro"], "de não ter começado antes a buscar recursos"]
       ],
       vf: [["Zumbi foi morto em 1695.", "verdadeiro"], ["Palmares resistiu apenas dez anos.", "falso"], ["Lélia Gonzalez nasceu em Minas Gerais.", "não se diz"]],
-      hunt: { label: "Tocá las formas que más cuestan: futuro do subjuntivo, infinitivo pessoal, compuestos…", targets: ["forem", "tragam", "pudesse", "iria", "fazerem", "estarem", "tivéssemos", "teríamos", "sido"] } },
+      hunt: { label: "Toque nas formas que mais custam: futuro do subjuntivo, infinitivo pessoal, tempos compostos…", targets: ["forem", "tragam", "pudesse", "iria", "fazerem", "estarem", "tivéssemos", "teríamos", "sido"] } },
 
     { id: "w-52", week: 52, n: 52, level: "C1", emoji: "🎓", title: "O mar da nossa língua",
       grammar: "exame final: todo o ano",
@@ -1269,12 +1271,12 @@
                pregou: "predicó", sermão: "sermón", colonos: "colonos", salgado: "salado", "lágrimas": "lágrimas",
                aplaudiu: "aplaudió" },
       questions: [
-        ["¿Sobre qué tema escribió Sofía?", ["el mar en la cultura de lengua portuguesa", "la bossa nova", "la historia de Río", "su año en Brasil y todo lo que aprendió allí"], "el mar en la cultura de lengua portuguesa"],
-        ["¿A quién critica Vieira a través de los peces?", ["a los colonos", "a los portugueses de Lisboa", "a los pescadores", "a los poetas"], "a los colonos"],
-        ["¿Qué hizo Sofía al saber el resultado?", ["fue al Arpoador y aplaudió el atardecer", "volvió a Buenos Aires", "hizo una fiesta en la Lapa con sus amigos", "llamó a su madre"], "fue al Arpoador y aplaudió el atardecer"]
+        ["Sobre que tema a Sofía escreveu?", ["o mar na cultura de língua portuguesa", "a bossa nova", "a história do Rio", "o ano dela no Brasil e tudo o que aprendeu lá"], "o mar na cultura de língua portuguesa"],
+        ["Quem Vieira critica por meio dos peixes?", ["os colonos", "os portugueses de Lisboa", "os pescadores", "os poetas"], "os colonos"],
+        ["O que a Sofía fez ao saber o resultado?", ["foi ao Arpoador e aplaudiu o pôr do sol", "voltou para Buenos Aires", "deu uma festa na Lapa com os amigos", "ligou para a mãe"], "foi ao Arpoador e aplaudiu o pôr do sol"]
       ],
       vf: [["Os Lusíadas foram publicados em 1572.", "verdadeiro"], ["Vieira pregou o sermão em Lisboa.", "falso"], ["A Bia foi ao Arpoador com a Sofía.", "não se diz"]],
-      hunt: { label: "Tocá los verbos en pretérito perfeito", targets: ["chegou", "pediram-lhe", "respirou", "escreveu", "publicou", "pregou", "foi", "pôs", "aplaudiu"] } }
+      hunt: { label: "Toque nos verbos no pretérito perfeito", targets: ["chegou", "pediram-lhe", "respirou", "escreveu", "publicou", "pregou", "foi", "pôs", "aplaudiu"] } }
   ];
 
   // «Verdadeiro, falso ou não se diz?»: comprensión en portugués, como en el

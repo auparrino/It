@@ -1,18 +1,18 @@
 # -*- coding: utf-8 -*-
-"""Compila el curso: docs/data/course.json y docs/data/glossario.json.
+"""Compila el curso: docs/lang/pt/data/course.json y glossario.json.
 
 Fuentes:
-  tools/curriculo.py   el temario (semanas, estaciones, tiempos)
-  tools/lessons/*.py   la teoría de cada semana, en partes
-  tools/vocab/*.py     las palabras de la semana
-  tools/authored/*.py  los ejercicios propios, cada uno con su semana («w»)
+  tools/pt/curriculo.py   el temario (semanas, estaciones, tiempos)
+  tools/pt/lessons/*.py   la teoría de cada semana, en partes
+  tools/pt/vocab/*.py     las palabras de la semana
+  tools/pt/authored/*.py  los ejercicios propios, cada uno con su semana («w»)
 
 A diferencia del curso de italiano, que tomaba los ejercicios de dos libros
 y tenía que adivinar su semana, acá cada ejercicio se escribe para una
-semana y una parte de su lección.  tools/sillabo.py igual controla que la
+semana y una parte de su lección.  tools/pt/sillabo.py igual controla que la
 respuesta no use un tiempo verbal que todavía no se enseñó (lo avisa).
 
-    python3 tools/build_course.py
+    python3 tools/pt/build_course.py
 """
 import importlib.util
 import json
@@ -25,6 +25,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 DATA = os.path.join(ROOT, "docs", "lang", "pt", "data")
 sys.path.insert(0, os.path.join(ROOT, "tools", "pt"))
 
+import consignas  # noqa: E402
 from curriculo import SEASONS, SAI_FARE, WEEKS, TENSE_WEEK, REVIEW_WEEKS, season_of, known_tenses  # noqa: E402
 
 # La lección se lee en el teléfono: regla corta, después la tabla o los
@@ -57,6 +58,61 @@ def load_lessons():
     return out
 
 
+def _plain(s):
+    import unicodedata
+    return "".join(c for c in unicodedata.normalize("NFD", s.lower()) if unicodedata.category(c) != "Mn")
+
+
+_SENSE_STOP = {"de", "la", "el", "los", "las", "un", "una", "en", "al", "del", "con", "por", "para", "que", "se",
+               "no", "es", "lo", "le", "su", "sus", "mas", "muy", "como", "algo", "alguien", "cosa", "coloquial",
+               "si", "sin", "tambien", "pt"}
+
+
+def same_sense(a, b):
+    """Dos glosas dicen lo mismo si comparten una palabra (o sus cuatro
+    primeras letras: «despertarse» y «despertar(se)», «vuelco» y «vuelta»)."""
+    wa = [w for w in re.findall(r"[a-zñ]+", _plain(a)) if w not in _SENSE_STOP]
+    wb = [w for w in re.findall(r"[a-zñ]+", _plain(b)) if w not in _SENSE_STOP]
+    return any(x == y or (len(x) >= 4 and len(y) >= 4 and x[:4] == y[:4]) for x in wa for y in wb)
+
+
+def vocab_keys(word):
+    """Las formas que se tocan de una palabra de la semana: sin artículo y
+    cada lado de «moço / moça»; las de varias palabras no se tocan enteras."""
+    out = []
+    for k in word.lower().split("/"):
+        k = re.sub(r"^(o|a|os|as|um|uma) ", "", k.strip())
+        if k and " " not in k and "-" not in k:
+            out.append(k)
+    return out
+
+
+def merge_senses(gloss, weeks):
+    """El toque en la palabra y la palabra de la semana dicen lo mismo
+    (auditoría 3.0, E-portugues P11): si la forma ya estaba en el glosario con
+    otra acepción (la del banco, o la de otro lema: «puxa» → puxar «tirar»,
+    «saque» → sacar, «virada» → virar, «juntar» «reunir» cuando la semana
+    enseña «ahorrar»), el toque muestra las dos, primero la de la semana.  Si
+    no estaba, entra con la glosa de la semana."""
+    n = 0
+    for wk in weeks:
+        for v in wk["vocab"]:
+            for k in vocab_keys(v[0]):
+                if k not in gloss:
+                    gloss[k] = [k, v[1], wk["week"]]
+                    continue
+                lemma, es, w0 = gloss[k]
+                own = lemma.lower() == k
+                if v[1] in es or (own and same_sense(v[1], es)):
+                    continue
+                # otro lema (virada → virar, tomada → tomar): se nombra
+                other = es if own else lemma if _plain(es) == _plain(lemma) else "%s, %s" % (lemma, es)
+                gloss[k] = [k, "%s · también: %s" % (v[1], other), min(w0, wk["week"])]
+                n += 1
+    print("glosario: %d palabras de la semana con las dos acepciones al tocarlas" % n)
+    return n
+
+
 def load_vocab():
     out = {}
     for fn, mod in _modules("vocab"):
@@ -77,6 +133,11 @@ def load_authored():
             item.setdefault("level", "B2")
             item.setdefault("topic", fn[:-3])
             item.setdefault("prompt", "Completá.")
+            # la consigna en portugués según la semana (tools/pt/consignas.py)
+            pt = consignas.consigna(item["prompt"], item["w"])
+            if pt != item["prompt"]:
+                item["prompt_es"] = item["prompt"]
+                item["prompt"] = pt
             item["accept"] = [item["answer"]] + [a for a in item.get("alt", []) if a and a != item["answer"]]
             out.append(item)
     return out
@@ -155,6 +216,8 @@ def main():
     problems = []
     for it in authored:
         problems += check_item(it)
+        if consignas.falta(it["prompt"], it["w"]):
+            problems.append("%s (semana %s): consigna sin portugués en tools/pt/consignas.py: %s" % (it["id"], it["w"], it["prompt"]))
 
     # Nada antes de su teoría: la respuesta no puede usar un tiempo que su
     # semana todavía no enseñó.  Solo avisa: el conjugador reconoce formas,
@@ -185,7 +248,9 @@ def main():
     weeks = []
     for spec in WEEKS:
         w = spec["w"]
-        own = [i["id"] for i in by_week.get(w, [])]
+        # los ítems del examen final (prova) no se entrenan en la semana 52:
+        # se ven por primera vez en el examen (app.js los toma de course.items)
+        own = [i["id"] for i in by_week.get(w, []) if not i.get("prova")]
         pool = list(own)
         if spec.get("boss") or w == 51:
             # un jefe (y el repaso final) usa todo lo de su estación: una
@@ -294,7 +359,9 @@ def main():
                 texts += [p[0].replace("*", "") for p in b.get("ex", [])]
             texts += [v[2] for v in wk["vocab"]]
         gloss = lessico.gloss_table(texts)
-        # las palabras de la semana se glosan desde su semana
+        # las palabras de la semana se glosan desde su semana, con la acepción
+        # de la semana primero
+        merge_senses(gloss, weeks)
         for wk in weeks:
             for v in wk["vocab"]:
                 key = v[0].lower()

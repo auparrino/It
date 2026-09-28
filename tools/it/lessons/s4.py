@@ -337,7 +337,10 @@ LESSONS = {
  {"h": "El gerundio", "blocks": [0, 1, 2, 3],
   "match": r"^(?!.*(particip|concisa|terminación)).*(gerundio|mientras|Cómo lo hacés|\bstare\b|ando\b|endo\b|Continuo a)"},
  {"h": "Los participios", "blocks": [4, 5],
-  "match": r"particip|concisa|terminación"},
+  "match": r"\S"},   # lo demás, como cuando era la última parte
+ {"h": "Ironía y sobreentendidos", "blocks": [6],
+  "ids": ["pr-44-%02d" % n for n in range(1, 13)],
+  "match": r"^(?!)"},
 ],
 "blocks": [
  {"h": "El gerundio simple",
@@ -376,14 +379,14 @@ LESSONS = {
   "tip": "Con *essendo*, el participio concuerda con el sujeto: *essendo "
          "arrivata tardi, Maria...*"},
 
- {"h": "stare + gerundio: el progresivo",
-  "r": "*stare* + gerundio = acción **en desarrollo ahora**. No sirve para "
-       "el futuro cercano ni para lo habitual.",
-  "ex": [["*Sto mangiando*.", "Estoy comiendo."],
-         ["*Stavo dormendo* quando hai chiamato.", "Estaba durmiendo cuando llamaste."],
-         ["Che cosa *stai facendo*?", "¿Qué estás haciendo?"]],
+ {"h": "stare + gerundio: ya lo viste en la semana 6",
+  "r": "Repaso de la semana 6: *stare* + gerundio = acción **en desarrollo**. "
+       "Con *stavo* va al pasado: la acción interrumpida.",
+  "ex": [["*Stavo dormendo* quando hai chiamato.", "Estaba durmiendo cuando llamaste."],
+         ["*Stavamo uscendo* quando è arrivato Luca.", "Estábamos saliendo cuando llegó Luca."]],
   "warn": "Se usa mucho menos que el «estar + -ndo» castellano. «Estoy "
-          "estudiando italiano este año» es *studio italiano quest'anno*."},
+          "estudiando italiano este año» es *studio italiano quest'anno*.",
+  "qq": [{"prompt": "Completá (dormire)", "stem": "Quando mi hai chiamato, ___.", "answer": "stavo dormendo", "options": ["stavo dormendo", "sto dormendo", "stavo dormito"]}]},
 
  {"h": "El participio pasado absoluto",
   "r": "Un participio solo, al principio, = «después de» o «como». "
@@ -408,6 +411,21 @@ LESSONS = {
   "more": ["Como verbo activo sobrevive en el registro jurídico y "
            "administrativo: *i cittadini residenti all'estero*, *le persone "
            "aventi diritto*."]},
+
+ {"h": "Ironía y sobreentendidos",
+  "r": "La ironía dice **lo contrario** con tono de elogio: *complimenti!*, *bella "
+       "roba!*. *Non male* elogia **quitándole peso**.",
+  "ex": [["Due ore di ritardo? *Complimenti!*", "¿Dos horas tarde? ¡Felicitaciones! (es un reproche)"],
+         ["Ha perso di nuovo le chiavi: *bella roba!*", "Perdió otra vez las llaves: ¡qué lindo! (es una queja)"],
+         ["Il tuo risotto? *Non male*, davvero.", "¿Tu risotto? Nada mal, en serio (es un elogio)."],
+         ["Pagare io? *Ma va'!*", "¿Pagar yo? ¡Ni loco! (rechazo en broma)"]],
+  "warn": "La ironía depende del tono: por escrito, a un desconocido o a un "
+          "superior se lee como agresión. Con ellos, decilo directo.",
+  "tip": "*Figurati!* puede ser «¡no es nada!» (a un gracias) o «¡ni lo sueñes!»: "
+         "*Lui, aiutarmi? Figurati!*",
+  "more": ["*Understatement*: *non è proprio un genio* (no es muy vivo), *non è il "
+           "massimo* (es bastante malo), *mica male* (bastante bueno). Decir menos "
+           "para decir más es muy italiano y muy de la charla."]},
 ]},
 
 45: {
@@ -699,6 +717,41 @@ LESSONS = {
          ["*Di lavorare* non ha nessuna voglia.", "Ganas de trabajar no tiene ninguna."]],
   "warn": "Son órdenes marcados: usalos para enfatizar, no por defecto. Un "
           "texto entero invertido suena artificial."},
+
+ {"h": "Tu, Lei, voi: cambiar de registro en la misma charla",
+  "r": "Se empieza con *Lei* y se pasa al *tu* cuando **lo propone** el mayor o "
+       "el de más rango: *diamoci del tu*.",
+  "ex": [["Possiamo *darci del tu*?", "¿Podemos tutearnos?"],
+         ["*Mi dia pure del tu*, signora.", "Tutéeme nomás, señora."],
+         ["Buongiorno, *dottore*. Ha un minuto?", "Buen día, doctor. ¿Tiene un minuto?"],
+         ["Ragazzi, *venite* anche *voi*?", "Chicos, ¿vienen ustedes también?"]],
+  "warn": "Pasar al *tu* sin que te lo ofrezcan, con alguien mayor o en una "
+          "oficina, se nota enseguida. Ante la duda, *Lei*.",
+  "tip": "*Dottore* / *dottoressa* sirve para cualquier graduado universitario, "
+         "no solo para médicos: en una oficina es la fórmula segura.",
+  "more": ["El *voi* de cortesía para una sola persona (*come state?* a un señor) "
+           "sobrevive en el sur y en el habla de los mayores; en el norte suena "
+           "anticuado. Para ustedes, plural, *voi* es lo normal en todas partes."]},
+
+ {"h": "El italiano neostandard: entendelo siempre, escribilo nunca",
+  "r": "En la charla se oyen usos que el escrito formal no admite. **Reconocelos** "
+       "al oír; en un texto formal, la forma estándar.",
+  "table": {"head": ["Se oye", "Por", "Escrito formal"],
+            "rows": [["gli dico (a ella)", "le dico", "Le dico la verità."],
+                     ["gli dico (a ellos)", "dico loro", "Dico loro la verità."],
+                     ["lui, lei, loro sujeto", "egli, ella, essi (solo en textos antiguos)", "Lui è partito: vale en los dos"],
+                     ["penso che è vero", "penso che sia vero", "Penso che sia vero."],
+                     ["a me mi piace", "a me piace / mi piace", "Mi piace."],
+                     ["ci ho fame", "ho fame", "Ho fame."],
+                     ["che polivalente: la casa che ci abito", "in cui abito", "La casa in cui abito."],
+                     ["mo', tipo, cioè", "adesso, come, ossia", "Adesso."]]},
+  "ex": [["A Maria *le* ho detto di venire.", "A María le dije que viniera. En la charla se oye «gli ho detto» también para ella."],
+         ["*A me piace* il mare.", "A mí me gusta el mar. En la charla: «a me mi piace»."],
+         ["Penso che *sia* vero.", "Creo que es cierto. En la charla: «penso che è vero»."]],
+  "warn": "En el examen y en un mail formal estos usos restan puntos. En la charla, "
+          "corregirlos al otro suena pedante.",
+  "tip": "*Lui*, *lei* y *loro* como sujeto ya son estándar: *egli* y *ella* solo "
+         "aparecen en textos viejos o muy formales."},
 ]},
 
 49: {
@@ -728,21 +781,15 @@ LESSONS = {
   "warn": "No repitas *ma... ma... ma*: alterná *tuttavia*, *per contro*, "
           "*d'altro canto*. La variedad es lo que se nota."},
 
- {"h": "Conectores que piden congiuntivo",
-  "r": "*benché, sebbene, nonostante, qualora, affinché, a condizione che, "
-       "prima che, senza che, a meno che non* → **congiuntivo**.",
-  "ex": [["*Benché sia* tardi, continuiamo.", "Aunque es tarde, seguimos."],
-         ["*Qualora ci fossero* problemi, avvisateci.", "En caso de que hubiera problemas, avísennos."],
-         ["Te lo ripeto *affinché* tu lo *capisca*.", "Te lo repito para que lo entiendas."],
-         ["Partiamo *prima che* *faccia* buio.", "Salgamos antes de que oscurezca."]],
-  "table": {"head": ["Conector", "Significa", "Ejemplo"],
-            "rows": [["benché, sebbene, nonostante", "aunque", "Benché sia tardi, resto."],
-                     ["qualora, nel caso in cui", "en caso de que", "Qualora piovesse, restiamo."],
-                     ["affinché", "para que", "Lo dico affinché tu sappia."],
-                     ["a condizione che, purché", "con la condición de que", "Vengo a condizione che tu venga."],
-                     ["prima che", "antes de que", "Esco prima che piova."],
+ {"h": "Conectores con congiuntivo: ya los viste en la semana 28",
+  "r": "Los de la semana 28 (*benché, affinché, purché, prima che*) más los "
+       "del registro formal: *qualora, senza che, a condizione che*.",
+  "ex": [["*Qualora ci fossero* problemi, avvisateci.", "En caso de que hubiera problemas, avísennos."],
+         ["È uscito *senza che* nessuno lo *vedesse*.", "Salió sin que nadie lo viera."]],
+  "table": {"head": ["Conector nuevo", "Significa", "Ejemplo"],
+            "rows": [["qualora, nel caso in cui", "en caso de que", "Qualora piovesse, restiamo."],
+                     ["a condizione che", "con la condición de que", "Vengo a condizione che tu venga."],
                      ["senza che", "sin que", "È uscito senza che lo vedessi."],
-                     ["a meno che non", "a menos que", "Vengo, a meno che non piova."],
                      ["mettiamo che, supponiamo che", "supongamos que", "Mettiamo che tu vinca."]]},
   "warn": "El conector elegante con indicativo detrás anula el efecto: "
           "«benché è tardi» es un error."},
@@ -1052,8 +1099,8 @@ LESSONS = {
             "rows": [["el auxiliar → la concordancia", "con essere, el participio sigue al sujeto"],
                      ["la subjetividad → el modo", "opinión, deseo, duda y emoción piden congiuntivo"],
                      ["la principal → la subordinada", "el tiempo de la principal decide el de la subordinada"],
-                     ["se hipotético", "indicativo (real) o congiuntivo (posible, irreal), nunca condicional"],
-                     ["futuro desde el pasado", "condicional COMPUESTO: disse che sarebbe venuto"]]}},
+                     ["se hipotético", "indicativo (real) o congiuntivo (posible, irreal), nunca condizionale"],
+                     ["futuro desde el pasado", "condizionale PASSATO: disse che sarebbe venuto"]]}},
 
  {"h": "Lo que separa un B2 de un C1",
   "r": "No es saber más reglas: es **usar los recursos que el B2 evita**.",
@@ -1076,7 +1123,7 @@ LESSONS = {
   "ex": [["Credo che *sia* giusto.", "Creo que es justo."],
          ["Ha detto che *sarebbe partito*.", "Dijo que se iría."]],
   "tip": "¿Dudás entre indicativo y congiuntivo tras un verbo de opinión? "
-         "Congiuntivo. ¿Entre condicional simple y compuesto mirando al "
+         "Congiuntivo. ¿Entre condizionale presente y passato mirando al "
          "futuro desde el pasado? Compuesto."},
 
  {"h": "Después del examen",

@@ -68,6 +68,24 @@ LESSONS = {
   "more": ["Si el que falta sos vos, el verbo va en primera: *gli manco* "
            "(ellos me extrañan: yo les falto), *ci mancate* (los extrañamos a "
            "ustedes). Primero preguntate quién falta: ese es el sujeto."]},
+
+ {"h": "Invitar, aceptar y decir que no",
+  "r": "Se invita con una **pregunta** (*ti va di…?*, *vuoi…?*) y se rechaza con "
+       "**disculpa y motivo**: *mi dispiace, ma…*.",
+  "ex": [["*Ti va di* venire al cinema stasera?", "¿Tenés ganas de venir al cine esta noche?"],
+         ["Sì, *volentieri*!", "¡Sí, con gusto!"],
+         ["*Mi dispiace, ma* stasera lavoro. *Magari un'altra volta*!", "Lo siento, pero esta noche trabajo. ¡Otra vez será!"],
+         ["*Purtroppo* non posso: ho un esame.", "Lamentablemente no puedo: tengo un examen."]],
+  "warn": "Un *no* solo, sin motivo, suena a desplante. El motivo puede ser vago "
+          "(*ho già un impegno*, ya tengo un compromiso): lo que cuenta es darlo.",
+  "tip": "*Magari un'altra volta* rechaza sin cerrar la puerta. Si no querés que "
+         "te vuelvan a invitar, no lo digas.",
+  "more": ["*Ti va di* + infinitivo es «¿tenés ganas de…?», con *andare* y el "
+           "pronombre como *piacere*: *ti va*, *le va*. Otra invitación muy común, "
+           "*che ne dici di…?* (¿qué te parece si…?), lleva el *ne* de la semana 21.",
+           "Para aceptar con entusiasmo: *certo!*, *perché no?*, *ci sto!* (¡me "
+           "prendo!). Para dudar: *non so, ti faccio sapere* (no sé, te aviso)."],
+  "qq": [{"prompt": "Un amigo te invita a cenar y no podés", "answer": "Mi dispiace, ma stasera non posso.", "options": ["Mi dispiace, ma stasera non posso.", "No.", "Non mi va di venire da te."]}]},
 ]},
 
 15: {
@@ -248,31 +266,24 @@ LESSONS = {
            "*quello lì* (este de acá, ese de allá). «Eso» abstracto: *questo* "
            "o *ciò* (más formal); *quello che* = lo que."]},
 
- {"h": "Posesivos: siempre con artículo",
-  "r": "El posesivo lleva **artículo** y concuerda con lo poseído, no con el "
-       "dueño: *la sua macchina*. *loro* no cambia.",
-  "table": {"head": ["", "m.sg", "f.sg", "m.pl", "f.pl"],
-            "rows": [["mio (mi, el mío)", "il mio", "la mia", "i miei", "le mie"],
-                     ["tuo (tu, el tuyo)", "il tuo", "la tua", "i tuoi", "le tue"],
-                     ["suo (su, el suyo: de él, de ella, de usted)", "il suo", "la sua", "i suoi", "le sue"],
-                     ["nostro (nuestro)", "il nostro", "la nostra", "i nostri", "le nostre"],
-                     ["vostro (su, de ustedes)", "il vostro", "la vostra", "i vostri", "le vostre"],
-                     ["loro (su, de ellos)", "il loro", "la loro", "i loro", "le loro"]]},
-  "ex": [["Anna e *il suo* cane.", "Ana y su perro."],
-         ["Marco e *la sua* macchina.", "Marco y su auto."],
-         ["È *la loro* casa.", "Es la casa de ellos."],
-         ["Dove sono *le mie* chiavi?", "¿Dónde están mis llaves?"]],
+ {"h": "Posesivos: ya los viste en la semana 3",
+  "r": "Repaso de la semana 3: el posesivo lleva **artículo** y concuerda con "
+       "lo poseído, no con el dueño. *loro* no cambia.",
+  "ex": [["Marco e *la sua* macchina.", "Marco y su auto (manda *macchina*)."],
+         ["È *la loro* casa.", "Es la casa de ellos."]],
   "warn": "*suo* no mira al dueño: *la sua macchina* es el auto de él o de "
           "ella. Manda *macchina*, que es femenino.",
-  "more": ["La misma forma sirve sola, sin sustantivo: *la tua macchina e la "
-           "mia* (la tuya y la mía). Después de *essere* el artículo suele "
-           "caer: *è mio* (es mío). Con número, indefinido o demostrativo, "
-           "sin artículo: *tre suoi amici* (tres amigos suyos), *quei tuoi "
-           "amici*. Para usted, con mayúscula: *il Suo cappotto*. «Propio» es "
-           "*proprio*: *la propria opinione*.",
+  "more": ["Lo nuevo: la misma forma sirve sola, sin sustantivo: *la tua "
+           "macchina e la mia* (la tuya y la mía). Después de *essere* el "
+           "artículo suele caer: *è mio* (es mío). Con número, indefinido o "
+           "demostrativo, sin artículo: *tre suoi amici* (tres amigos suyos), "
+           "*quei tuoi amici*. Para usted, con mayúscula: *il Suo cappotto*. "
+           "«Propio» es *proprio*: *la propria opinione*.",
            "Con partes del cuerpo y ropa no va el posesivo sino el artículo: "
            "*mi fa male il piede* (me duele el pie), *prendi l'ombrello* "
-           "(llevá tu paraguas)."]},
+           "(llevá tu paraguas)."],
+  "qq": [{"prompt": "Traducí: «sus llaves» (de Anna)", "answer": "le sue chiavi", "options": ["le sue chiavi", "le loro chiavi", "i suoi chiavi"]},
+         {"prompt": "Traducí: «es mío» (el libro)", "answer": "è mio", "options": ["è mio", "è il me", "è di me"]}]},
 
  {"h": "Familia: sin artículo",
   "q": [{"prompt": "¿Cuál está bien? «Mi padre es médico.»", "answer": "Mio padre è medico.", "options": ["Mio padre è medico.", "Il mio padre è medico.", "Lo mio padre è medico."]}, {"prompt": "¿Cuál está bien? «El padre de ellos es alto.»", "answer": "Il loro padre è alto.", "options": ["Il loro padre è alto.", "Loro padre è alto.", "Suo padre è alto."]}],
@@ -315,15 +326,15 @@ LESSONS = {
            "da nessuna parte*. Solos, sin sustantivo, *alcuni* y *molti* "
            "son pronombres: *alcuni non lavorano*, *molti pensano di sì*."]},
 
- {"h": "molto: adjetivo o adverbio",
-  "r": "Con sustantivo **concuerda**: *molti libri*. Con adjetivo, adverbio "
-       "o verbo **no cambia**: *molto stanchi*. Igual *poco, tanto, troppo*.",
-  "ex": [["Ho *molti* amici.", "Tengo muchos amigos."],
-         ["C'è *poca* gente.", "Hay poca gente."],
-         ["Sono *molto* contenta.", "Estoy muy contenta."],
+ {"h": "molto, poco, tanto, troppo: ya lo viste en la semana 4",
+  "r": "Como *molto* (semana 4): con sustantivo **concuerda**; con adjetivo, "
+       "adverbio o verbo **no cambia**. Igual *poco, tanto, troppo*.",
+  "ex": [["C'è *poca* gente.", "Hay poca gente."],
          ["Lavorano *troppo*.", "Trabajan demasiado."]],
   "warn": "*Sono molto stanchi*, nunca «molti stanchi»: delante de un "
-          "adjetivo es adverbio y no cambia, como «muy»."},
+          "adjetivo es adverbio y no cambia, como «muy».",
+  "qq": [{"prompt": "Completá", "stem": "In città ci sono ___ turisti.", "answer": "troppi", "options": ["troppi", "troppo", "troppe"]},
+         {"prompt": "Completá", "stem": "Le lezioni sono ___ lunghe.", "answer": "troppo", "options": ["troppo", "troppe", "troppi"]}]},
 ]},
 
 18: {
@@ -447,7 +458,7 @@ LESSONS = {
 
  {"h": "Raíces irregulares",
   "r": "Pocos verbos cambian la raíz; las terminaciones son las de siempre. "
-       "Esa misma raíz vuelve en el condicional.",
+       "Esa misma raíz vuelve en el condizionale.",
   "table": {"head": ["Verbo", "Raíz", "Verbo", "Raíz"],
             "rows": [["essere", "sar-", "avere", "avr-"],
                      ["andare", "andr-", "dovere", "dovr-"],
@@ -498,7 +509,7 @@ LESSONS = {
 ]},
 
 20: {
-"intro": "El condicional usa la raíz del futuro: si dominás la semana "
+"intro": "El condizionale usa la raíz del futuro: si dominás la semana "
          "pasada, lo tenés casi hecho. Sirve para pedir con cortesía, "
          "aconsejar y dar noticias no confirmadas.",
 "blocks": [
@@ -534,7 +545,7 @@ LESSONS = {
            "domanda* (tendría una pregunta)."]},
 
  {"h": "La noticia no confirmada",
-  "r": "Diarios y noticieros usan el condicional para datos **no "
+  "r": "Diarios y noticieros usan el condizionale para datos **no "
        "verificados**: leelo como «parece que».",
   "ex": [["Secondo fonti vicine al governo, il ministro si *dimetterebbe*.", "Según fuentes cercanas al gobierno, el ministro renunciaría."],
          ["Ci *sarebbero* venti feriti.", "Habría veinte heridos."],
@@ -542,8 +553,8 @@ LESSONS = {
   "tip": "Aparece en toda comprensión lectora: es un dato que el periodista "
          "no garantiza."},
 
- {"h": "Adelanto: nunca condicional tras se",
-  "r": "Detrás de *se* hipotético **nunca** va condicional: *Se avessi "
+ {"h": "Adelanto: nunca condizionale tras se",
+  "r": "Detrás de *se* hipotético **nunca** va condizionale: *Se avessi "
        "tempo, verrei*, jamás «se avrei tempo».",
   "ex": [["Se *avessi* tempo, *verrei*.", "Si tuviera tiempo, vendría."],
          ["Se *potessi*, ti *aiuterei*.", "Si pudiera, te ayudaría."]],
@@ -551,6 +562,24 @@ LESSONS = {
           "Es como decir «si tendría» en castellano.",
   "tip": "La estructura completa llega en la semana 33: por ahora, "
          "reconocela."},
+
+ {"h": "Pedir en escala: de puoi a le dispiacerebbe",
+  "r": "Cuanto más **grande** el favor o más **lejana** la persona, más suave el "
+       "pedido: *puoi* → *potresti* → *le dispiacerebbe*.",
+  "table": {"head": ["Pedido", "Cuándo"],
+            "rows": [["Mi passi il sale?", "en la mesa, en confianza"],
+                     ["Vorrei un biglietto per Roma.", "en un negocio o una ventanilla"],
+                     ["Potrebbe chiudere la finestra?", "a un desconocido"],
+                     ["Le dispiacerebbe spostare la macchina?", "un favor grande a un desconocido"],
+                     ["Sarebbe possibile cambiare la data?", "en una oficina, en un mail"],
+                     ["Non è che mi presteresti la bici?", "en confianza, un favor que da vergüenza"]]},
+  "ex": [["*Potrebbe* aprire la finestra?", "¿Podría abrir la ventana?"],
+         ["*Le dispiacerebbe* parlare più piano?", "¿Le molestaría hablar más despacio?"],
+         ["*Sarebbe possibile* avere una camera più tranquilla?", "¿Sería posible tener una habitación más tranquila?"]],
+  "warn": "*Le dispiacerebbe* para pedir la sal en la mesa suena a burla. La "
+          "cortesía va en escala: se usa la que pide la situación.",
+  "tip": "*Non è che…?* + condizionale es el pedido tímido entre amigos: *non è "
+         "che mi daresti una mano?* (¿no me darías una mano?)."},
 ]},
 
 21: {
@@ -954,8 +983,7 @@ LESSONS = {
 
  {"h": "Después de algunas conjunciones",
   "r": "*prima che* (antes de que), *senza che* (sin que), *sebbene* "
-       "(aunque), *purché* (con tal de que), *a meno che* (a menos que): "
-       "**siempre congiuntivo**.",
+       "(aunque), *purché* (con tal de que): **siempre congiuntivo**.",
   "ex": [["Ti telefono *prima che* tu *esca*.", "Te llamo antes de que salgas."],
          ["Lo faccio *senza che* nessuno lo *sappia*.", "Lo hago sin que nadie lo sepa."],
          ["È simpatico, *sebbene parli* poco.", "Es simpático, aunque hable poco."],
@@ -971,6 +999,20 @@ LESSONS = {
   "qq": [{"prompt": "Elegí la que va", "stem": "Ti chiamo prima che tu ___.", "answer": "parta", "options": ["parta", "parti", "partire"]},
          {"prompt": "Elegí la que va", "stem": "Anche se ___, esco.", "answer": "piove", "options": ["piove", "piova", "piovere"]},
          {"prompt": "Elegí la que va", "stem": "Cerco qualcuno che ___ il tedesco.", "answer": "sappia", "options": ["sappia", "sa", "sapere"]}]},
+
+ {"h": "Opinar y matizar sin imponer",
+  "r": "La opinión se **presenta como tuya**: *secondo me* (+ indicativo), *mi "
+       "sembra che* (+ congiuntivo). *Forse* y *non so se* matizan.",
+  "ex": [["*Secondo me* è troppo caro.", "Para mí es demasiado caro."],
+         ["*Mi sembra che* sia una buona idea.", "Me parece que es una buena idea."],
+         ["*Mi sa che* ha ragione lei.", "Me da que tiene razón ella."],
+         ["*Non so se* sia la soluzione giusta.", "No sé si es la solución correcta."]],
+  "warn": "*Hai torto* o *è così e basta* cierran la charla. Para disentir, primero "
+          "concedé algo: *capisco, però…*, *può darsi, ma secondo me…*.",
+  "tip": "*Mi sa che* (me da que) es coloquial y va con indicativo; *direi che* "
+         "(diría que) sirve en cualquier registro.",
+  "more": ["Pasarse de matices también confunde: *forse, non so, magari, può "
+           "darsi…* todo junto parece que no tenés opinión. Uno o dos alcanzan."]},
 ]},
 
 26: {
@@ -984,6 +1026,8 @@ LESSONS = {
   "match": r"^(?!.*piac).*(pronombre|combinad|«ne»|\bne\b|\bci\b|congiuntivo|subjuntivo|posesiv|indefinid)"},
  {"h": "Repaso: trampas de los verbos y de la frase", "blocks": [6, 7],
   "match": r"\S"},
+ {"h": "Las tres Italias", "blocks": [8],
+  "match": r"^(?!)"},
 ],
 "blocks": [
  {"h": "El mapa de los tiempos",
@@ -1031,8 +1075,8 @@ LESSONS = {
            "los pronominales (*mi sono accorto*) y los impersonales (*è "
            "successo*)."]},
 
- {"h": "Raíces de futuro y condicional",
-  "r": "La raíz irregular del futuro es la misma del condicional: *sarò / "
+ {"h": "Raíces de futuro y condizionale",
+  "r": "La raíz irregular del futuro es la misma del condizionale: *sarò / "
        "sarei*, *vorrò / vorrei*.",
   "table": {"head": ["Verbo", "Raíz", "Verbo", "Raíz"],
             "rows": [["essere", "sar-", "avere", "avr-"],
@@ -1076,7 +1120,7 @@ LESSONS = {
          ["Domani *parleremo* con lui.", "Mañana vamos a hablar con él."],
          ["*Parleremmo* volentieri con lui.", "Hablaríamos con gusto con él."],
          ["Quando *arriverai*, ti chiamerò.", "Cuando llegues, te llamo."]],
-  "tip": "Y detrás de *se* hipotético, nunca condicional: «se avrei» no "
+  "tip": "Y detrás de *se* hipotético, nunca condizionale: «se avrei» no "
          "existe."},
 
  {"h": "Repaso: trampas de la frase",
@@ -1088,6 +1132,21 @@ LESSONS = {
          ["Ho *qualche* amico a Roma.", "Tengo algunos amigos en Roma."]],
   "tip": "7. *mio padre*, sin artículo; pero *il loro padre* y *i miei "
          "fratelli*, con artículo."},
+
+ {"h": "Las tres Italias: cómo suena cada región",
+  "r": "Italia tiene **tres grandes zonas** de habla: norte, centro y sur. El "
+       "italiano es el mismo; cambian el acento y algunos usos.",
+  "table": {"head": ["Zona", "Qué se oye", "Ejemplo"],
+            "rows": [["Norte (Milano, Torino, Venezia)", "e y o cerradas; s sonora; passato prossimo siempre", "Ieri sono andato: nunca «andai»"],
+                     ["Centro (Firenze, Roma)", "la c aspirada en Toscana; si por noi", "la hasa; noi si va"],
+                     ["Sur (Napoli, Bari, Palermo)", "stare por essere; tenere por avere; passato remoto hablado", "sto stanco; tengo fame; ieri andai"]]},
+  "ex": [["*Ho* fame.", "Tengo hambre. En el sur se oye «tengo fame»."],
+         ["*Sono* stanco.", "Estoy cansado. En el sur se oye «sto stanco»."],
+         ["Ieri *sono andato* al mare.", "Ayer fui al mar. En el sur también se oye «ieri andai»."]],
+  "warn": "*Tengo fame* te va a sonar natural, pero en estándar es *ho fame*. "
+          "Reconocelo al oírlo; no lo copies.",
+  "tip": "El *dialetto* es otra lengua (el napolitano, el véneto); el *italiano "
+         "regionale* es el italiano con acento y giros de la zona."},
 ]},
 
 }

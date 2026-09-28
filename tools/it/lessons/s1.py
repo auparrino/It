@@ -37,7 +37,7 @@ LESSONS = {
                      ["ge, gi", "dy, como la j de «jeans»", "gelato (helado), giro (vuelta)"],
                      ["ghe, ghi", "gue, gui", "spaghetti, ghiaccio (hielo)"],
                      ["gn", "ñ", "signore (señor), bagno (baño)"],
-                     ["gli", "«ll» tradicional (no la porteña): casi «li» rápida", "figlio (hijo), aglio (ajo)"],
+                     ["gli", "la «ll» tradicional (no la porteña): lengua en el paladar, no «li»", "figlio (hijo), aglio (ajo)"],
                      ["sce, sci", "sh inglesa", "pesce (pescado), sciare (esquiar)"],
                      ["z", "ts o dz", "grazie (gracias), zero (cero)"]]},
   "ex": [["*ce*na / *che*", "cena / que: «chena», «ke»"],
@@ -250,14 +250,14 @@ LESSONS = {
           "g2-gd-37", "g2-sc-05", "g2-sc-05-a", "g2-sc-05-b", "g2-sc-05-c",
           "g2-va-21", "g2-va-44", "g2-va-45", "s:r02-01:a", "s:r02-02:b", "s:r02-02:c"],
   "match": r"determinado \(il|artículo correcto|^(il|lo|la|l'|l’|i|gli|le)$"},
- {"h": "Indeterminados: un, uno, una, un'", "blocks": [6, 7],
+ {"h": "Indeterminados: un, uno, una, un'", "blocks": [6],
   "match": r"indeterminado|^(un|uno|una|un'|un’)$"},
- {"h": "Dónde va el artículo (y dónde no)", "blocks": [8, 9, 10],
+ {"h": "Dónde va el artículo (y dónde no)", "blocks": [7, 8, 9],
   "ids": ["s:r02-02:a", "b2-prep-07"] + ["ar-u-%02d" % n for n in range(1, 15)],
   "match": r"posesiv|artículo donde"},
- {"h": "Preposiciones articuladas", "blocks": [11, 12, 13],
-  "match": r"preposición articulada|«in» y «di»|«di» con el|cada palabra una sola vez|«di» o «di» \+|donde corresponda"},
- {"h": "Partitivo y cantidades", "blocks": [14, 15, 16],
+ {"h": "Preposiciones articuladas", "blocks": [10, 11],
+  "match": r"preposición articulada|«in» y «di»|«di» con el|artículo o la preposición|«di» o «di» \+|donde corresponda"},
+ {"h": "Partitivo y cantidades", "blocks": [12, 13],
   "match": r"partitivo|reformul|alcun|qualche|nessun"},
 ],
 "blocks": [
@@ -372,30 +372,21 @@ LESSONS = {
                      ["l' (fem.)", "un'", "un'amica"]]},
   "ex": [["*un* libro", "un libro"],
          ["*uno* studente", "un estudiante"],
-         ["*una* casa", "una casa"]],
-  "qq": [{"prompt": "Elegí el artículo", "stem": "___ zaino", "answer": "uno", "options": ["uno", "un", "una"]},
-         {"prompt": "Elegí el artículo", "stem": "___ succo (el jugo)", "answer": "un", "options": ["un", "uno", "un'"]}]},
-
- {"h": "El apóstrofo es cosa del femenino",
-  "r": "*un'* existe solo en femenino: *un'amica*, *un'ora*, *un'idea*. El "
-       "masculino nunca lleva apóstrofo: *un amico*, *un errore*.",
-  "ex": [["*un* amico", "un amigo"],
+         ["*una* casa", "una casa"],
          ["*un'*amica", "una amiga"],
-         ["*un'*idea", "una idea"],
-         ["*un* errore", "un error"],
-         ["*un'*arancia", "una naranja"]],
-  "warn": "Pregunta clásica de examen: *un'amica* con apóstrofo, *un amico* "
-          "sin. Un *un'* delante de un masculino está mal.",
+         ["*un* amico", "un amigo"]],
+  "warn": "*un'* existe solo en femenino: *un'amica*, *un'idea*. El masculino "
+          "nunca lleva apóstrofo: *un amico*, *un errore*. Pregunta clásica de examen.",
   "tip": "En plural no hay indeterminado: «unos amigos» es *degli amici* o "
          "simplemente *amici*. Lo ves en la última parte.",
-  "qq": [{"prompt": "Elegí el artículo", "stem": "___ entrata (la entrada)", "answer": "un'", "options": ["un'", "un", "uno"]},
+  "qq": [{"prompt": "Elegí el artículo", "stem": "___ zaino", "answer": "uno", "options": ["uno", "un", "una"]},
+         {"prompt": "Elegí el artículo", "stem": "___ entrata (la entrada)", "answer": "un'", "options": ["un'", "un", "uno"]},
          {"prompt": "Elegí el artículo", "stem": "___ errore (el error)", "answer": "un", "options": ["un", "un'", "uno"]}]},
 
  # ---------------------------------------------------------------- parte 4
  {"h": "Posesivos: con artículo",
-  "r": "Lleva artículo y concuerda con lo poseído, no con el dueño: *la sua "
-       "casa*, *i suoi amici*. *loro* no cambia. Sin artículo: parientes en "
-       "singular, *mio padre*.",
+  "r": "Lleva artículo y concuerda con lo poseído: *la sua casa*, *i suoi "
+       "amici*. Sin artículo: parientes en singular, *mio padre*.",
   "table": {"head": ["", "m. sg.", "f. sg.", "m. pl.", "f. pl."],
             "rows": [["mi", "il mio", "la mia", "i miei", "le mie"],
                      ["tu (de vos)", "il tuo", "la tua", "i tuoi", "le tue"],
@@ -461,24 +452,13 @@ LESSONS = {
          ["una lettera *agli* amici", "una carta a los amigos (a: a)"],
          ["il treno *dalla* stazione", "el tren desde la estación (da: desde)"],
          ["*nella* borsa", "en la cartera (in: en)"],
-         ["*sul* tavolo", "sobre la mesa (su: sobre)"]]},
-
- {"h": "Armala sin mirar la tabla",
-  "r": "Tres pasos: elegí el artículo (*lo studio*); *di* → *de*, *in* → "
-       "*ne*; pegalos y doblá la *l*: *nello studio*.",
-  "table": {"head": ["", "Significa", "Ejemplo en singular", "Ejemplo en plural"],
-            "rows": [["di", "de", "la casa *della* nonna", "i giochi *dei* bambini"],
-                     ["a", "a", "un regalo *alla* mamma", "una lettera *agli* zii"],
-                     ["da", "desde, de; en lo de", "il treno *dal* mare; *dal* medico", "*dai* nonni (en lo de los abuelos)"],
-                     ["in", "en", "*nello* zaino", "*negli* Stati Uniti"],
-                     ["su", "sobre, en", "*sulla* sedia", "*sulle* scale"]]},
-  "ex": [["*nello* studio", "en el estudio"],
-         ["*della* macchina", "del auto"],
-         ["*dei* miei figli", "de mis hijos"],
-         ["*sul* tavolo", "sobre la mesa"],
-         ["*all'*amico", "al amigo"]],
+         ["*sul* tavolo", "sobre la mesa (su: sobre)"]],
   "tip": "*con* y *per* no se funden en el italiano de hoy: *con il treno*, "
          "*per la mamma*.",
+  "more": ["Para armarla sin mirar la tabla: elegí el artículo (*lo studio*); "
+           "*di* pasa a *de-*, *in* a *ne-*; pegalos y doblá la *l*: *nello "
+           "studio*, *della macchina*, *dei miei figli*, *all'amico*. *da* es "
+           "«desde», «de» y también «en lo de»: *dal medico*, *dai nonni*."],
   "qq": [{"prompt": "in + lo studio", "answer": "nello studio", "options": ["nello studio", "nel studio", "in lo studio"]},
          {"prompt": "di + i miei figli", "answer": "dei miei figli", "options": ["dei miei figli", "di i miei figli", "degli miei figli"]},
          {"prompt": "a + l'amico", "answer": "all'amico", "options": ["all'amico", "al amico", "a l'amico"]}]},
@@ -520,9 +500,16 @@ LESSONS = {
          "sciroppo*; *l'acqua* → *dell'acqua*.",
   "more": ["Si el verbo ya trae *di* (*ho bisogno di*, necesito), no se suma el "
            "partitivo: *ho bisogno di pane*, *ho bisogno di un'aspirina*. "
-           "Nunca «di del pane»."],
+           "Nunca «di del pane».",
+           "En negativo el partitivo desaparece: *non ho fratelli*, *non "
+           "abbiamo burro*. Para insistir, *nessun* + singular, que copia al "
+           "indeterminado: *non ho nessun problema*, *nessuno studente*, "
+           "*nessuna idea*. *neanche* vuelve con las demás negaciones en la "
+           "semana 18."],
   "qq": [{"prompt": "Completá", "stem": "Avete ___ pasta fresca?", "answer": "della", "options": ["della", "del", "delle"]},
-         {"prompt": "Completá", "stem": "Compro ___ olio.", "answer": "dell'", "options": ["dell'", "del", "degli"]}]},
+         {"prompt": "Completá", "stem": "Compro ___ olio.", "answer": "dell'", "options": ["dell'", "del", "degli"]},
+         {"prompt": "Completá", "stem": "Non ho ___ fratelli.", "answer": "(nada)", "options": ["(nada)", "dei", "nessuni"]},
+         {"prompt": "Completá", "stem": "Non c'è ___ lenzuolo.", "answer": "nessun", "options": ["nessun", "nessuno", "nessuna"]}]},
 
  {"h": "Otras maneras: un po' di, qualche, alcuni",
   "r": "*un po' di* + lo que no se cuenta; *qualche* + **singular**; "
@@ -536,23 +523,6 @@ LESSONS = {
           "*qualche giorno*, nunca *qualche giorni*.",
   "qq": [{"prompt": "«algunos días», con qualche", "answer": "qualche giorno", "options": ["qualche giorno", "qualche giorni", "qualcuni giorni"]},
          {"prompt": "Completá", "stem": "Ho ___ lettere da scrivere.", "answer": "alcune", "options": ["alcune", "alcuni", "qualche"]}]},
-
- {"h": "En negativo: nada, o nessun",
-  "r": "En negativo el partitivo desaparece: *non ho fratelli*, *non abbiamo "
-       "burro*. Para insistir, *nessun* + singular: *non ho nessun "
-       "problema*.",
-  "ex": [["*Non ho* fratelli.", "No tengo hermanos."],
-         ["*Non abbiamo* burro.", "No tenemos manteca."],
-         ["Non ho *nessun* problema.", "No tengo ningún problema."],
-         ["Non ho *nessuna* idea.", "No tengo ni idea."],
-         ["Non c'è *nessuno* studente.", "No hay ningún estudiante."]],
-  "tip": "*nessun* copia al indeterminado: *nessun libro*, *nessuno "
-         "studente*, *nessuna casa*, *nessun'amica*.",
-  "more": ["Con lo que no se cuenta, para insistir: *neanche un po' di* (ni "
-           "siquiera un poco de): *non abbiamo neanche un po' di burro*. "
-           "*neanche* vuelve con las demás negaciones en la semana 18."],
-  "qq": [{"prompt": "Completá", "stem": "Non ho ___ fratelli.", "answer": "(nada)", "options": ["(nada)", "dei", "nessuni"]},
-         {"prompt": "Completá", "stem": "Non c'è ___ lenzuolo.", "answer": "nessun", "options": ["nessun", "nessuno", "nessuna"]}]},
 ]},
 
 4: {
@@ -607,9 +577,8 @@ LESSONS = {
          "forma plena)."},
 
  {"h": "questo: este, esta, estos, estas",
-  "r": "*questo* es «este» y concuerda como un adjetivo en *-o*: *questo*, "
-       "*questa*, *questi*, *queste*. Delante de vocal se apostrofa: "
-       "*quest'anno*. «Ese / aquel» es *quello*.",
+  "r": "*questo* es «este» y concuerda como un adjetivo en *-o*: *questa*, "
+       "*questi*, *queste*. Ante vocal, *quest'anno*.",
   "table": {"head": ["", "singular", "plural"],
             "rows": [["masculino", "questo libro", "questi libri"],
                      ["femenino", "questa casa", "queste case"],
@@ -944,6 +913,9 @@ LESSONS = {
   "match": r"^(?!.*(sujeto al final|\bquale\b|qual è|\bquali\b)).*\S"},
  {"h": "che o quale, y el sujeto al final", "blocks": [3, 4],
   "match": r"sujeto|quale|qual"},
+ {"h": "Pedir con cortesía", "blocks": [5],
+  "ids": ["pr-08-%02d" % n for n in range(1, 13)],
+  "match": r"^(?!)"},
 ],
 "blocks": [
  {"h": "Sí o no: solo entonación",
@@ -1017,6 +989,25 @@ LESSONS = {
   "ex": [["Dove abita *Marco*?", "¿Dónde vive Marco?"],
          ["Che cosa dice *il professore*?", "¿Qué dice el profesor?"],
          ["Quanto costano *queste scarpe*?", "¿Cuánto cuestan estos zapatos?"]]},
+
+ {"h": "Pedir con cortesía: mi scusi, per caso, un attimo",
+  "r": "**Abrí** con *mi scusi* (usted) o *scusa* (vos) y **suavizá** con *per "
+       "favore*, *per caso* o una pregunta: *può…?*",
+  "ex": [["*Mi scusi*, *sa* dov'è la stazione?", "Disculpe, ¿sabe dónde está la estación?"],
+         ["*Scusa*, *per caso* hai una penna?", "Perdón, ¿no tendrás una lapicera?"],
+         ["*Può* ripetere, *per favore*?", "¿Puede repetir, por favor?"],
+         ["*Un attimo*, *per favore*.", "Un momento, por favor."]],
+  "warn": "*Voglio un caffè* es gramatical, pero en el bar suena a orden. Alcanza "
+          "con *un caffè, per favore*: es lo que dice todo el mundo.",
+  "tip": "*Per caso* es el «¿no tendrás…?» del castellano: convierte la pregunta "
+         "en un pedido que el otro puede rechazar sin quedar mal.",
+  "more": ["Tres fórmulas que vas a oír desde el primer día y que se aprenden "
+           "enteras: *senta!* (¡oiga!, para llamar la atención), *volevo chiedere* "
+           "(quería preguntar) y *vorrei* (quisiera). Su gramática llega en las "
+           "semanas 12, 15 y 20.",
+           "Pasarse también es un error: tres disculpas seguidas y dos *per favore* "
+           "suenan a súplica o a burla. Una fórmula al principio alcanza."],
+  "qq": [{"prompt": "En la calle, a una señora que no conocés", "answer": "Mi scusi, sa dov'è la stazione?", "options": ["Mi scusi, sa dov'è la stazione?", "Dov'è la stazione?", "Scusa, dov'è la stazione?"]}]},
 ]},
 
 9: {
@@ -1405,10 +1396,10 @@ LESSONS = {
   "tip": "Con pronombre, dos lugares posibles: pegado al infinitivo o "
          "delante. *Non toccarlo!* = *Non lo toccare!* (¡no lo toques!)."},
 
- {"h": "Adelanto: el formal es un subjuntivo",
-  "r": "*Lei* usa el congiuntivo (semana 24). Al revés que el informal: "
-       "*-are* → **-i** (*parli!*); *-ere / -ire* → **-a** (*prenda!*). "
-       "Irregulares, desde el *io*: *vengo → venga*.",
+ {"h": "Adelanto: el formal es un congiuntivo",
+  "r": "*Lei* usa el congiuntivo: *-are* → **-i** (*parli!*); *-ere / "
+       "-ire* → **-a** (*prenda!*). Irregulares, desde el *io*: *vengo → "
+       "venga*.",
   "table": {"head": ["Verbo", "io (presente)", "Lei (usted)", "Ejemplo"],
             "rows": [["parlare (hablar)", "parlo", "parli", "Parli piano! (¡Hable despacio!)"],
                      ["prendere (tomar)", "prendo", "prenda", "Prenda pure! (¡Tome nomás!)"],

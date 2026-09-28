@@ -538,11 +538,11 @@ fx(W, 1, "Pagado o boleto, a matrícula foi confirmada.", "Pagado", "Pago", "par
    "En la reducida y con ser/estar va el participio corto: pago o boleto.")
 
 gd(W, 0, [["falar", "falando"], ["comer", "comendo"], ["partir", "partindo"]],
-   "pôr → ___", "pondo", "poniendo",
-   "pôr (antiguo «poer») hace pondo. El español empuja a «poniendo».")
+   "pedir → ___", "pedindo", "pidindo",
+   "pedir hace pedindo: el gerúndio sale del infinitivo, sin el cambio e → i del español «pidiendo».")
 gd(W, 0, [["olhar", "olhando"], ["correr", "correndo"], ["abrir", "abrindo"]],
-   "ir → ___", "indo", "yendo",
-   "ir → indo, perfectamente regular en portugués. «Yendo» es español.")
+   "dormir → ___", "dormindo", "durmindo",
+   "dormir → dormindo, regular. El español cambia la vocal («durmiendo»); el portugués no.")
 gd(W, 1, [["terminar a reunião", "terminada a reunião"], ["fechar o bar", "fechado o bar"],
           ["resolver as questões", "resolvidas as questões"]],
    "fazer as contas → ___", "feitas as contas", "fazidas as contas",
@@ -594,8 +594,8 @@ ch(W, 0, "___ Senhora Diretora,",
    ["Prezada", "Prezado", "Querida"], "Prezada",
    "Apertura formal: Prezado(a), concordado con el destinatario. Querida es solo para gente cercana.")
 ch(W, 0, "Cierre de un mail al consulado: «___, Lucas Fernández».",
-   ["Atenciosamente", "Atentamente", "Saudos cordiais"], "Atenciosamente",
-   "El cierre formal estándar en Brasil es Atenciosamente. «Atentamente» no se usa así y «saudos» no existe.")
+   ["Atenciosamente", "Um grande beijo", "Saudos cordiais"], "Atenciosamente",
+   "El cierre formal estándar en Brasil es Atenciosamente. «Um grande beijo» es para gente cercana y «saudos» no existe. «Atentamente» también existe, pero es mucho menos frecuente y suena a traducción.")
 ch(W, 0, "Mail a un grupo de profesores: «___ professores,»",
    ["Prezados", "Prezado", "Prezada"], "Prezados",
    "A un grupo, en plural: Prezados professores, Prezados(as).")
@@ -701,11 +701,11 @@ fx(W, 0, "Saudos cordiais, Martín", "Saudos cordiais", "Atenciosamente", "espan
    goodAlt=["Cordialmente"])
 
 gd(W, 2, [["poder", "poderia"], ["gostar", "gostaria"], ["agradecer", "agradeceria"]],
-   "fazer → ___", "faria", "fazeria",
-   "fazer tiene condicional irregular: faria (como farei). El patrón regular engaña.")
+   "desfazer → ___", "desfaria", "desfazeria",
+   "desfazer se conjuga como fazer: desfaria (como faria). El patrón regular engaña.")
 gd(W, 2, [["solicitar", "solicitaria"], ["enviar", "enviaria"], ["precisar", "precisaria"]],
-   "dizer → ___", "diria", "dizeria",
-   "dizer → diria (como direi): pierde la -ze-.")
+   "refazer → ___", "refaria", "refazeria",
+   "refazer se conjuga como fazer: refaria (como faria), sin la -ze-.")
 gd(W, 2, [["poder", "se pudesse"], ["enviar", "se enviasse"], ["responder", "se respondesse"]],
    "vir → ___", "se viesse", "se vinesse",
    "El imperfeito do subjuntivo sale del perfeito vieram: viesse.")
@@ -752,7 +752,7 @@ cb(W, 2, "Recebi sua solicitação. Informo que ela foi deferida. (em relação 
 # ===========================================================================
 # Semana 44 — Formação de palavras
 # parts: 0 sufijos que hacen sustantivos · 1 -eiro, -ada, prefijos ·
-# 2 diminutivos y aumentativos
+# 2 diminutivos y aumentativos · 3 formá la palabra (producir)
 # ===========================================================================
 W = 44
 ch(W, 0, "A ___ do Rio impressionou Stefan Zweig, que escreveu «Brasil, país do futuro».",
@@ -910,6 +910,30 @@ cb(W, 2, "Moramos numa casinha. A casinha fica pertinho da praia. (que)",
    ["Moramos em uma casinha que fica pertinho da praia"],
    "El relativo que retoma casinha; pertinho = cerquita.")
 
+# Formá la palabra (parte 3): producir con los sufijos y prefijos de la semana
+# (auditoría 3.0, E-portugues §2.4: la 44 como semana de producir).
+FP = "Formá la palabra."
+cl(W, 3, "A ___ (organizar) do bloco começa em janeiro.", "organização",
+   "organizar → a organização: -ar da -ação, femenino y con til. En plural, -ções.", prompt=FP)
+cl(W, 3, "O ___ (atender) no posto de saúde foi rápido.", "atendimento",
+   "atender → o atendimento: -mento hace sustantivos masculinos de acción; la -e- del verbo pasa a -i-.", prompt=FP)
+cl(W, 3, "A ___ (curioso) das crianças não tem fim.", "curiosidade",
+   "curioso → a curiosidade: -oso pierde la -o y suma -idade («-dad»).", prompt=FP)
+cl(W, 3, "A ___ (limpo) da praia depende de todos.", "limpeza",
+   "limpo → a limpeza: -eza forma cualidades de adjetivos (beleza, tristeza, pureza).", prompt=FP)
+cl(W, 3, "Preciso de um encanador ___ (confiar) para consertar o chuveiro.", "confiável",
+   "confiar → confiável: -ar da -ável, con tilde. «Que se puede» + verbo.", prompt=FP)
+cl(W, 3, "O ___ (táxi) conhecia um atalho pela Lagoa.", "taxista",
+   "táxi → o taxista: -ista nombra el oficio y sirve para los dos géneros (o / a taxista). La tilde se va.", prompt=FP)
+cl(W, 3, "A ___ (dente) mandou eu voltar daqui a seis meses.", "dentista",
+   "dente → a dentista: -ista, igual en masculino y femenino; el artículo dice el género.", prompt=FP)
+cl(W, 3, "Depois da festa, a sala ficou toda ___ (arrumado, o contrário).", "desarrumada",
+   "arrumado → desarrumado: des- da el contrario. Concuerda con a sala: desarrumada.", prompt=FP)
+cl(W, 3, "Chegar atrasado todo dia é ___ (aceitável, o contrário).", "inaceitável",
+   "aceitável → inaceitável: in- da el contrario; ante vocal queda in- (inútil, inesquecível).", prompt=FP)
+cl(W, 3, "A prefeitura promete ___ (abrir de novo) o teatro em dezembro.", "reabrir",
+   "abrir → reabrir: re- («de nuevo») se pega sin guion: refazer, reler, reabrir.", prompt=FP)
+
 
 # ===========================================================================
 # Semana 45 — Falsos amigos e heterossemânticos
@@ -998,8 +1022,8 @@ tr(W, 1, "Voy a la oficina en metro.", "Vou ao escritório de metrô.",
    ["Eu vou ao escritório de metrô", "Vou para o escritório de metrô",
     "Eu vou para o escritório de metrô", "Vou pro escritório de metrô"],
    "oficina → escritório; los medios de transporte van con de: de metrô.")
-tr(W, 2, "La leche está fría.", "O leite está frio.", [],
-   "leite es masculino: o leite frio.")
+tr(W, 2, "La sal está en la mesa.", "O sal está na mesa.", [],
+   "sal es masculino en portugués: o sal.")
 tr(W, 2, "El puente Río-Niterói es largo.", "A ponte Rio-Niterói é comprida.",
    ["A ponte Rio-Niterói é longa"],
    "«Largo» (longitud) se dice *comprido* o *longo*; *largo* sería «ancho». *Ponte* es femenina: *a ponte é comprida*.")
@@ -1176,15 +1200,18 @@ tr(W, 2, "Pessoa escribió que su patria era la lengua portuguesa.",
     "Fernando Pessoa escreveu que a pátria dele era a língua portuguesa"],
    "pátria, con tilde; língua, también.")
 
-fx(W, 0, "(PT) Estou a fazendo o jantar.", "a fazendo", "a fazer", "tempo",
+fx(W, 0, "Estou a fazendo o jantar.", "a fazendo", "a fazer", "tempo",
    "En Portugal: estar a + infinitivo (a fazer). En Brasil: estar + gerundio (fazendo). Nunca mezclados.")
+# La etiqueta del registro va en la consigna, no dentro de lo que se escribe.
+ITEMS[-1].update(prompt="Portugués de Portugal. " + FX)
 fx(W, 2, "Tive uma idéia ótima para a viagem.", "idéia", "ideia", "ortografia",
    "Desde 1990, ideia sin tilde: los diptongos abiertos éi, ói de las llanas la perdieron.")
 fx(W, 2, "O meu vôo para Lisboa sai às dez.", "vôo", "voo", "ortografia",
    "Desde 1990, voo sin circunflejo.")
-fx(W, 1, "(Texto formal) Tu vai receber a resposta amanhã.", "Tu vai", "Você vai", "persona",
+fx(W, 1, "Tu vai receber a resposta amanhã.", "Tu vai", "Você vai", "persona",
    "«Tu vai» es habla (carioca, gaúcha). En lo escrito: você vai o tu vais.",
    goodAlt=["Tu vais"])
+ITEMS[-1].update(prompt="Texto formal. " + FX)
 
 gd(W, 0, [["me diz", "diz-me"], ["me ajuda", "ajuda-me"], ["te conto", "conto-te"]],
    "não me diz → (PT) ___", "não me diz", "não diz-me",
@@ -1881,9 +1908,9 @@ ch(W, 0, "Trouxe o livro para vocês ___.",
 ch(W, 0, "É melhor nós ___ cedo.",
    ["sairmos", "sair", "saímos"], "sairmos",
    "é melhor + sujeto + infinitivo pessoal: nós sairmos.")
-ch(W, 0, "Ultimamente ___ muito no Rio.",
-   ["tem chovido", "choveu", "ha chovido"], "tem chovido",
-   "Repetición hasta hoy: perfeito composto (tem chovido = viene lloviendo).")
+ch(W, 0, "Ultimamente ___ muito calor em São Paulo.",
+   ["tem feito", "fez", "ha feito"], "tem feito",
+   "Repetición hasta hoy: perfeito composto (tem feito = viene haciendo).")
 ch(W, 1, "Vou ___ feira ___ oito.",
    ["à / às", "a / as", "à / as"], "à / às",
    "à feira (a + a) y às oito (a + as): las horas siempre con crase.")
@@ -1894,9 +1921,9 @@ ch(W, 1, "Ela namora ___ Rafa há dois anos.",
    ["o", "com o", "com"], "o",
    "namorar alguém, sin preposición en la norma. «namorar com» es regional.",
    prompt="Elegí la forma de la norma culta.")
-ch(W, 1, "Assistimos ___ jogo no Maracanã.",
+ch(W, 1, "Ontem assistimos ___ show do Caetano.",
    ["ao", "o", "no"], "ao",
-   "assistir a (= ver un espectáculo): ao jogo. En el habla se oye «assistimos o jogo».",
+   "assistir a (= ver un espectáculo): ao show. En el habla se oye «assistimos o show».",
    prompt="Elegí la forma de la norma culta.")
 ch(W, 2, "Deixei o carro na ___ para consertar o freio.",
    ["oficina", "escritório", "loja"], "oficina",
@@ -1943,10 +1970,10 @@ tr(W, 0, "Si podés, vení al ensayo de la Mangueira.", "Se você puder, venha a
 tr(W, 0, "Es bueno que salgamos temprano.", "É bom sairmos cedo.",
    ["É bom que saiamos cedo", "É bom a gente sair cedo", "É bom nós sairmos cedo"],
    "Infinitivo pessoal (sairmos) o que + subjuntivo (saiamos).")
-tr(W, 0, "Vengo trabajando mucho.", "Tenho trabalhado muito.",
-   ["Eu tenho trabalhado muito", "Ando trabalhando muito", "Venho trabalhando muito",
-    "Eu ando trabalhando muito", "Eu venho trabalhando muito"],
-   "«Venir + gerundio» (algo repetido hasta hoy) se dice *ter* + participio: *tenho trabalhado muito*.")
+tr(W, 0, "Vengo estudiando mucho.", "Tenho estudado muito.",
+   ["Eu tenho estudado muito", "Ando estudando muito", "Venho estudando muito",
+    "Eu ando estudando muito", "Eu venho estudando muito"],
+   "«Venir + gerundio» (algo repetido hasta hoy) se dice *ter* + participio: *tenho estudado muito*.")
 tr(W, 1, "Vamos a la playa a las tres.", "Vamos à praia às três.",
    ["Vamos à praia às três horas", "A gente vai à praia às três", "A gente vai à praia às três horas"],
    "à praia, às três: dos crases.")

@@ -122,64 +122,42 @@
   "ascolto": {
     "title": "Le panchine che non ci sono più",
     "genre": "podcast di quartiere",
-    "es": "Los dos conductores de un podcast de barrio discuten la decisión del municipio de sacar los bancos de una plaza.",
+    "es": "Dos conductores de un podcast de barrio discuten la decisión de la municipalidad de sacar los bancos de una plaza; en la mitad se suma, por teléfono, la dueña del kiosco de diarios. Hablan como se habla: cortado, con muletillas.",
     "speakers": [
       "Chiara",
-      "Davide"
+      "Davide",
+      "Pina, edicolante"
     ],
     "turns": [
-      [
-        "A",
-        "Bentornati a Due passi, il podcast che si ascolta a piedi, o almeno così speriamo. Oggi, Davide, si parla di panchine. Anzi, di panchine che non ci sono più."
-      ],
-      [
-        "B",
-        "Eh sì. Per chi non lo sapesse: la settimana scorsa in piazza del Mercato sono state tolte le quattro panchine davanti alla fontana. Il Comune dice che lì si creavano assembramenti, rumore la notte, bottiglie abbandonate."
-      ],
-      [
-        "A",
-        "E tu che ne pensi?"
-      ],
-      [
-        "B",
-        "Guarda, io capisco i residenti. Se abiti sopra la piazza e alle due di notte non si riesce a dormire, hai ragione a lamentarti. Però togliere le panchine mi sembra come togliere le sedie da un ristorante perché qualcuno parla forte."
-      ],
-      [
-        "A",
-        "Sì, ma aspetta, faccio l'avvocato del diavolo. Qualcosa bisognava pur fare, no? Si erano già provate altre soluzioni, più vigili, il divieto di vendere alcolici in vetro..."
-      ],
-      [
-        "B",
-        "Certo, e non hanno funzionato. Ma il punto è: chi usava quelle panchine di giorno? Io ci passo ogni mattina. Ci si sedevano gli anziani che aspettavano il mercato, le mamme con i passeggini, i ragazzi che escono da scuola. Adesso quelle persone dove vanno?"
-      ],
-      [
-        "A",
-        "Ieri ho parlato con la signora Pina, quella dell'edicola. Mi ha detto una cosa che mi ha colpito: da quando non ci si può più sedere, in piazza non si ferma più nessuno. Si passa, si guarda la fontana e si tira dritto."
-      ],
-      [
-        "B",
-        "Ecco, appunto. È quella che gli urbanisti chiamano architettura ostile: si progettano gli spazi in modo che non ci si possa fermare, sdraiare, stare. E il problema non sparisce, si sposta semplicemente nella via accanto."
-      ],
-      [
-        "A",
-        "Quindi la tua proposta qual è? Rimetterle e basta?"
-      ],
-      [
-        "B",
-        "No, non così. Si potrebbero rimettere, ma con regole chiare e con qualcuno che si prende cura della piazza: più illuminazione, un bar che resta aperto fino a tardi, magari eventi organizzati dal quartiere. Una piazza vissuta si controlla da sola, diciamo."
-      ],
-      [
-        "A",
-        "Questo si dice sempre, però. Io qualche dubbio ce l'ho. Comunque, su una cosa sono d'accordo con te: decisioni del genere non si prendono senza chiedere a chi la piazza la usa davvero."
-      ],
-      [
-        "B",
-        "Esatto. E allora lanciamo l'idea: giovedì sera c'è l'assemblea del comitato di quartiere, alle nove, nella sala della parrocchia. Chi ha un'opinione, venga a dirla."
-      ],
-      [
-        "A",
-        "Anche chi non è d'accordo con Davide, mi raccomando. Alla prossima puntata!"
-      ]
+      ["A", "Bentornati a Due passi, il podcast che si ascolta a piedi. O almeno così speriamo. Oggi, Davide, si parla di panchine."],
+      ["B", "Anzi, di panchine che non ci sono più."],
+      ["A", "Ecco. Spiega, per chi non lo sapesse."],
+      ["B", "Allora, niente: la settimana scorsa in piazza del Mercato sono state tolte le quattro panchine davanti alla fontana."],
+      ["A", "Tutte e quattro."],
+      ["B", "Tutte e quattro. Il Comune dice che lì si creavano assembramenti, rumore la notte, bottiglie abbandonate…"],
+      ["A", "E tu che ne pensi?"],
+      ["B", "Guarda, io… cioè, io i residenti li capisco. Se abiti sopra la piazza e alle due di notte non si riesce a dormire, hai ragione a lamentarti."],
+      ["A", "Però?"],
+      ["B", "Però togliere le panchine mi sembra come togliere le sedie da un ristorante perché qualcuno parla forte."],
+      ["A", "Sì, ma aspetta, faccio l'avvocato del diavolo. Qualcosa bisognava pur fare, no? Si erano già provate altre soluzioni…"],
+      ["B", "…più vigili, il divieto di vendere alcolici in vetro, lo so."],
+      ["A", "Appunto."],
+      ["B", "E non hanno funzionato, d'accordo. Ma il punto è: chi le usava di giorno, quelle panchine? Io ci passo ogni mattina. Gli anziani che aspettavano il mercato, le mamme con i passeggini, i ragazzi che escono da scuola… Adesso dove vanno?"],
+      ["A", "Su questo abbiamo una testimone. In collegamento c'è la signora Pina, quella dell'edicola. Pina, ci sente?"],
+      ["C", "Sì, sì, vi sento! Buongiorno."],
+      ["A", "Buongiorno. Lei la piazza la vede tutto il giorno. Che cosa è cambiato?"],
+      ["C", "Eh, guardi… da quando non ci si può più sedere, in piazza non si ferma più nessuno. Si passa, si guarda la fontana e si tira dritto."],
+      ["B", "Ecco."],
+      ["C", "Prima uno si sedeva, due chiacchiere, comprava il giornale… Adesso, boh, sembra una stazione."],
+      ["A", "Grazie, Pina, gentilissima."],
+      ["B", "Vedi? È quella che gli urbanisti chiamano architettura ostile. Si progettano gli spazi in modo che non ci si possa fermare, sdraiare, stare. E il problema non sparisce: si sposta nella via accanto."],
+      ["A", "Quindi la tua proposta qual è? Rimetterle e basta?"],
+      ["B", "No, no, non così. Si potrebbero rimettere, ma con regole chiare. E con qualcuno che si prende cura della piazza: più illuminazione, un bar aperto fino a tardi, magari eventi del quartiere. Una piazza vissuta si controlla da sola, diciamo."],
+      ["A", "Mah. Questo si dice sempre, però. Io qualche dubbio ce l'ho."],
+      ["B", "Vabbè, lo so che non sei convinta."],
+      ["A", "Su una cosa, però, sono d'accordo con te: decisioni del genere non si prendono senza chiedere a chi la piazza la usa davvero."],
+      ["B", "Esatto. E allora lanciamo l'idea: giovedì sera, alle nove, c'è l'assemblea del comitato di quartiere, nella sala della parrocchia. Chi ha un'opinione, venga a dirla."],
+      ["A", "Anche chi non è d'accordo con Davide, mi raccomando. Alla prossima puntata!"]
     ],
     "gloss": {
       "raccomando": "(mi raccomando) ¡no se olviden!, ¡eh!",
@@ -196,77 +174,24 @@
       "sparisce": "desaparece",
       "vissuta": "vivida, con vida",
       "parrocchia": "parroquia",
-      "puntata": "episodio"
+      "puntata": "episodio",
+      "collegamento": "(in collegamento) en línea, conectada",
+      "boh": "qué sé yo (muletilla)",
+      "vabbè": "bueno, en fin (muletilla)",
+      "chiacchiere": "(due chiacchiere) una charla"
     },
     "questions": [
-      [
-        "Perché il Comune ha tolto le panchine?",
-        [
-          "Per rifare la pavimentazione della piazza",
-          "Perché erano vecchie e pericolose",
-          "Per i problemi di rumore e disordine notturno",
-          "Per fare spazio ai banchi del mercato"
-        ],
-        "Per i problemi di rumore e disordine notturno"
-      ],
-      [
-        "Che cosa vuole dire Davide con il paragone del ristorante?",
-        [
-          "Che la misura punisce tutti per colpa di pochi",
-          "Che i ristoranti della piazza fanno troppo rumore",
-          "Che le panchine andrebbero sostituite da sedie",
-          "Che i residenti esagerano con le loro proteste"
-        ],
-        "Che la misura punisce tutti per colpa di pochi"
-      ],
-      [
-        "Secondo la signora dell'edicola, che cosa è cambiato?",
-        [
-          "Per terra ci sono meno bottiglie",
-          "I clienti dell'edicola sono aumentati",
-          "Gli anziani vanno a un altro mercato",
-          "In piazza non si ferma più nessuno"
-        ],
-        "In piazza non si ferma più nessuno"
-      ],
-      [
-        "Che cos'è l'«architettura ostile» di cui parla Davide?",
-        [
-          "Chiudere le piazze al traffico senza consultare nessuno",
-          "Costruire edifici troppo alti intorno alle piazze",
-          "Progettare gli spazi per impedire alle persone di sostare",
-          "Usare materiali freddi e poco accoglienti"
-        ],
-        "Progettare gli spazi per impedire alle persone di sostare"
-      ],
-      [
-        "Qual è l'atteggiamento di Chiara verso la proposta di Davide?",
-        [
-          "Entusiasta: vuole organizzare subito gli eventi",
-          "Dubbiosa, ma d'accordo sul coinvolgere il quartiere",
-          "Critica: crede che le panchine vadano tolte anche altrove",
-          "Indifferente: la questione non la riguarda"
-        ],
-        "Dubbiosa, ma d'accordo sul coinvolgere il quartiere"
-      ]
+      ["Perché il Comune ha tolto le panchine?", ["Per rifare la pavimentazione della piazza", "Perché erano vecchie e pericolose", "Per i problemi di rumore e disordine notturno", "Per fare spazio ai banchi del mercato"], "Per i problemi di rumore e disordine notturno"],
+      ["Che cosa vuole dire Davide con il paragone del ristorante?", ["Che la misura punisce tutti per colpa di pochi", "Che i ristoranti della piazza fanno troppo rumore", "Che le panchine andrebbero sostituite da sedie", "Che i residenti esagerano con le loro proteste"], "Che la misura punisce tutti per colpa di pochi"],
+      ["Secondo la signora dell'edicola, che cosa è cambiato?", ["Per terra ci sono meno bottiglie", "I clienti dell'edicola sono aumentati", "Gli anziani vanno a un altro mercato", "In piazza non si ferma più nessuno"], "In piazza non si ferma più nessuno"],
+      ["Che cos'è l'«architettura ostile» di cui parla Davide?", ["Chiudere le piazze al traffico senza consultare nessuno", "Costruire edifici troppo alti intorno alle piazze", "Progettare gli spazi per impedire alle persone di sostare", "Usare materiali freddi e poco accoglienti"], "Progettare gli spazi per impedire alle persone di sostare"],
+      ["Qual è l'atteggiamento di Chiara verso la proposta di Davide?", ["Entusiasta: vuole organizzare subito gli eventi", "Dubbiosa, ma d'accordo sul coinvolgere il quartiere", "Critica: crede che le panchine vadano tolte anche altrove", "Indifferente: la questione non la riguarda"], "Dubbiosa, ma d'accordo sul coinvolgere il quartiere"]
     ],
     "vf": [
-      [
-        "Le panchine tolte dalla piazza erano quattro.",
-        "vero"
-      ],
-      [
-        "Prima di togliere le panchine non si era tentata nessun'altra soluzione.",
-        "falso"
-      ],
-      [
-        "La signora Pina abita sopra la piazza.",
-        "non si dice"
-      ],
-      [
-        "L'assemblea del comitato di quartiere si terrà giovedì sera.",
-        "vero"
-      ]
+      ["Le panchine tolte dalla piazza erano quattro.", "vero"],
+      ["Prima di togliere le panchine non si era tentata nessun'altra soluzione.", "falso"],
+      ["La signora Pina abita sopra la piazza.", "non si dice"],
+      ["L'assemblea del comitato di quartiere si terrà giovedì sera.", "vero"]
     ]
   },
   "compito": {
@@ -324,6 +249,39 @@
       "si affittano a notte": "se alquilan por noche",
       "botteghe storiche": "negocios tradicionales, de toda la vida",
       "affitti agevolati": "alquileres con precio subsidiado"
+    }
+  },
+  "breve": {
+    "title": "Assemblea di condominio",
+    "genre": "messaggio vocale dell'amministratore",
+    "es": "El administrador del edificio manda un audio al grupo de vecinos para convocar a una asamblea.",
+    "speaker": "Roberto Salvi, amministratore",
+    "voice": 0,
+    "text": [
+      "Buongiorno a tutti, sono Roberto Salvi, l'amministratore del condominio di via dei Serragli 12. Vi lascio questo messaggio sul gruppo per ricordarvi l'assemblea straordinaria di giovedì 9 novembre, alle 21, nella sala della parrocchia di San Frediano.",
+      "Si discuterà di tre punti. Primo: le regole per gli appartamenti affittati ai turisti. Si è notato che le chiavi vengono lasciate in una cassetta sul portone e che le scale si sporcano più del solito: si propone di vietare le cassette e di fare le pulizie due volte alla settimana.",
+      "Secondo: la sostituzione del citofono, che non funziona da mesi. Si sono chiesti tre preventivi; il più economico è di tremilacinquecento euro, da dividere tra tutti i condomini.",
+      "Terzo: varie ed eventuali. Chi non può partecipare può delegare un altro condomino, ma si ricorda che ognuno può avere al massimo due deleghe. Grazie, e a giovedì."
+    ],
+    "tabella": [
+      ["Giorno dell'assemblea", "giovedì 9 novembre", ["giovedì", "9 novembre", "il 9 novembre", "giovedì nove novembre"]],
+      ["Pulizie proposte alla settimana", "2", ["due", "due volte"]],
+      ["Costo del preventivo più economico (euro)", "3500", ["3.500", "tremilacinquecento"]],
+      ["Deleghe al massimo per persona", "2", ["due"]]
+    ],
+    "info": [
+      ["È un'assemblea ordinaria.", false],
+      ["Le chiavi dei turisti vengono lasciate in una cassetta sul portone.", true],
+      ["Si propone di vietare le cassette per le chiavi.", true],
+      ["Il citofono è stato riparato il mese scorso.", false],
+      ["Il costo del citofono sarà diviso tra tutti.", true],
+      ["Chi non viene all'assemblea non può votare in nessun modo.", false]
+    ],
+    "gloss": {
+      "citofono": "portero eléctrico",
+      "preventivi": "presupuestos",
+      "deleghe": "poderes, delegaciones",
+      "varie ed eventuali": "otros asuntos"
     }
   }
 }

@@ -340,5 +340,38 @@
       "rifarsi a": "basarse en, remitirse a",
       "entro quando": "hasta cuándo, en qué plazo"
     }
+  },
+  "breve": {
+    "title": "Ufficio tributi, resti in linea",
+    "genre": "messaggio automatico di un centralino",
+    "es": "El mensaje grabado de la oficina de impuestos municipales: opciones, vencimientos y horarios.",
+    "speaker": "Voce registrata",
+    "voice": 1,
+    "text": [
+      "Benvenuto nel servizio clienti dell'Ufficio tributi del Comune. La informiamo che la telefonata potrebbe essere registrata. Per richiedere informazioni sulla tassa sui rifiuti, prema uno. Per segnalare un errore in un avviso di pagamento, prema due. Per fissare un appuntamento allo sportello, prema tre. Per tutte le altre richieste, resti in linea.",
+      "Si ricorda che il termine per il pagamento della prima rata è fissato al 16 giugno. Chi non riceve l'avviso entro il 31 maggio è invitato a rivolgersi allo sportello, oppure a scaricarlo dal sito del Comune, nella sezione «Tributi».",
+      "Gli uffici sono aperti al pubblico dal lunedì al venerdì dalle nove alle dodici e trenta, e il martedì anche dalle quindici alle diciassette.",
+      "In questo momento tutti gli operatori sono occupati. La preghiamo di attendere: il tempo di attesa stimato è di circa otto minuti."
+    ],
+    "tabella": [
+      ["Tasto per segnalare un errore", "2", ["due"]],
+      ["Scadenza della prima rata", "16 giugno", ["il 16 giugno", "sedici giugno"]],
+      ["Giorno con apertura anche di pomeriggio", "martedì", ["il martedì"]],
+      ["Attesa stimata (minuti)", "8", ["otto", "circa otto", "otto minuti"]]
+    ],
+    "info": [
+      ["La telefonata potrebbe essere registrata.", true],
+      ["Con il tasto tre si prende un appuntamento allo sportello.", true],
+      ["L'avviso di pagamento si può scaricare dal sito.", true],
+      ["Gli uffici sono aperti anche il sabato mattina.", false],
+      ["Il termine per la prima rata è il 31 maggio.", false],
+      ["In questo momento c'è un operatore libero.", false]
+    ],
+    "gloss": {
+      "tributi": "impuestos, tasas",
+      "rata": "cuota",
+      "sportello": "ventanilla",
+      "resti in linea": "no corte"
+    }
   }
 }

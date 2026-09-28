@@ -107,7 +107,7 @@
       ]
     ],
     "hunt": {
-      "label": "Tocá los verbos que forman orações reduzidas de gerundio o participio (Terminada a leitura…, Chegando aqui…)",
+      "label": "Toque nos verbos que formam orações reduzidas de gerúndio ou particípio (Terminada a leitura…, Chegando aqui…)",
       "targets": [
         "terminada",
         "chegando",
@@ -305,7 +305,8 @@
           "banca",
           "bairro",
           "esquina",
-          "rua"
+          "padaria",
+          "cinema"
         ]
       ],
       [
@@ -313,24 +314,30 @@
         [
           "fechou",
           "desapare",
-          "mudou"
+          "mudou",
+          "demolid"
         ]
       ],
       [
-        "Relacionar con la crónica o el informe radial",
+        "Relacionar con la feria de la crónica o con el Cine Glória",
         [
           "feira",
-          "cine",
-          "crônica",
-          "reportagem"
+          "cine glória",
+          "glória",
+          "reabert"
         ]
       ],
       [
-        "Cerrar con una reflexión",
+        "Cerrar con una reflexión sobre la memoria del barrio",
         [
-          "hoje",
-          "percebi",
-          "aprendi"
+          "memória",
+          "lembrança",
+          "saudade",
+          "me ensinou",
+          "percebo que",
+          "esquecê",
+          "perde um pedaço",
+          "ainda procuro"
         ]
       ]
     ],
@@ -343,6 +350,104 @@
       "caixote": "cajón de madera",
       "assumir o ponto": "hacerse cargo del puesto (ponto = local de un comercio)",
       "cartazes de aluguel": "carteles de alquiler"
+    }
+  },
+  "breve": {
+    "title": "O Cine Glória reabre",
+    "genre": "anúncio de rádio",
+    "es": "Un anuncio de radio: reabre un viejo cine de Juiz de Fora; la sala, los precios, la función del estreno y los descuentos.",
+    "speaker": "Voz do anúncio",
+    "voice": 1,
+    "text": [
+      "Fechado há dez anos, o Cine Glória, no centro de Juiz de Fora, reabre as portas neste sábado. Totalmente reformado, o cinema de rua mais antigo da cidade volta com uma sala de 280 lugares e uma tela nova.",
+      "Para comemorar, a primeira semana é de clássicos brasileiros, com ingressos a 12 reais. Chegando antes das 18 horas, você ganha a pipoca. Comprando pelo site, você evita filas: os ingressos ficam no celular.",
+      "Na estreia, no sábado às 20 horas, será exibido O Auto da Compadecida, seguido de um debate com o diretor de fotografia do filme. Terminada a sessão, haverá música ao vivo no saguão.",
+      "Estudantes e maiores de 60 anos, apresentando documento, pagam meia. Cine Glória: um cinema de rua, de volta à rua. Avenida Rio Branco, 1.420."
+    ],
+    "tabella": [
+      [
+        "Anos em que o cinema ficou fechado",
+        "10",
+        [
+          "dez",
+          "dez anos",
+          "10 anos"
+        ]
+      ],
+      [
+        "Lugares da sala",
+        "280",
+        [
+          "duzentos e oitenta",
+          "280 lugares"
+        ]
+      ],
+      [
+        "Preço do ingresso na primeira semana (reais)",
+        "12",
+        [
+          "doze",
+          "12 reais",
+          "R$ 12"
+        ]
+      ],
+      [
+        "Até que horas se ganha a pipoca",
+        "18",
+        [
+          "18 horas",
+          "18h",
+          "seis da tarde",
+          "18:00"
+        ]
+      ],
+      [
+        "Filme da estreia",
+        "O Auto da Compadecida",
+        [
+          "Auto da Compadecida"
+        ]
+      ],
+      [
+        "Número na Avenida Rio Branco",
+        "1.420",
+        [
+          "1420",
+          "mil quatrocentos e vinte"
+        ]
+      ]
+    ],
+    "info": [
+      [
+        "O cinema passou por uma reforma completa.",
+        true
+      ],
+      [
+        "Os ingressos só podem ser comprados na bilheteria.",
+        false
+      ],
+      [
+        "Depois da estreia, haverá um debate.",
+        true
+      ],
+      [
+        "O diretor do filme vai estar na estreia.",
+        false
+      ],
+      [
+        "Quem tem mais de 60 anos paga meia com documento.",
+        true
+      ],
+      [
+        "A pipoca é grátis em todas as sessões.",
+        false
+      ]
+    ],
+    "gloss": {
+      "tela": "pantalla",
+      "pipoca": "pochoclo",
+      "saguão": "hall",
+      "ingressos": "entradas"
     }
   }
 }

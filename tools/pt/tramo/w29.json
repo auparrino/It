@@ -44,7 +44,7 @@
       ["No estágio não obrigatório, a empresa deve pagar bolsa e auxílio-transporte.", "verdadeiro"]
     ],
     "hunt": {
-      "label": "Tocá los infinitivos personales (infinitivo con persona)",
+      "label": "Toque nos infinitivos pessoais (o infinitivo com pessoa)",
       "targets": ["perderem", "conhecerem", "assinarem", "guardarem", "ficarem", "poderem", "pedirem", "cumprirem", "serem", "sofrerem", "quererem", "terminarem"]
     }
   },
@@ -103,14 +103,8 @@
     "es": "Una carta formal a Recursos Humanos: describí los tres problemas, apoyate en lo que dice la guía y proponé soluciones. Registro formal (Prezada Sra., Atenciosamente) y, si podés, infinitivo personal (para nós combinarmos…).",
     "min": 131,
     "max": 191,
-    "punti": [
-      ["Apertura formal y presentación", ["prezada", "senhora", "sra."]],
-      ["Jornada que pasa de seis horas", ["seis horas", "jornada", "horário"]],
-      ["Tareas sin relación con el curso", ["tarefas", "atividades", "cópias"]],
-      ["Pedir el termo de compromisso", ["termo", "compromisso"]],
-      ["Cierre formal", ["atenciosamente", "cordialmente", "respeitosamente"]]
-    ],
-    "model": "São Paulo, 12 de março de 2026\n\nPrezada Sra. Beatriz Andrade,\n\nMeu nome é Lucas Ferreira e faço estágio no setor de criação desta agência há oito meses. Escrevo para expor algumas questões e, principalmente, para buscarmos juntos uma solução.\n\nEm primeiro lugar, minha jornada tem ultrapassado com frequência as seis horas diárias. Segundo o guia do Coletivo Estágio Justo, esse é o limite para estudantes do ensino superior, e hora extra não faz parte do estágio. Além disso, grande parte do meu dia é dedicada a tarefas como tirar cópias e atender o telefone, que pouco têm a ver com a minha formação. Por fim, até hoje não recebi uma cópia do termo de compromisso.\n\nGostaria de sugerir uma reunião com o meu supervisor para revermos as atividades previstas e para eu receber o documento. Tenho certeza de que, com esses ajustes, o estágio será ainda mais proveitoso para ambas as partes.\n\nAgradeço desde já a atenção.\n\nAtenciosamente,\nLucas Ferreira",
+    "punti": [["La jornada que pasa de seis horas", ["seis horas", "6 horas", "jornada"]], ["Las tareas sin relación con el curso", ["tarefas", "atividades", "cópias"]], ["Lo que dice el guía sobre los derechos del pasante", ["lei", "11.788", "recesso", "seguro", "supervis", "direito"]], ["El termo de compromisso que nunca recibió", ["termo", "compromisso"]], ["Una solución concreta", ["propon", "sugir", "solução", "soluções", "reorganiz", "gostaria que", "seria possível"]]],
+    "model": "São Paulo, 12 de março de 2026\n\nPrezada Sra. Beatriz Andrade,\n\nMeu nome é Lucas Ferreira e faço estágio no setor de criação desta agência há oito meses. Escrevo para expor algumas questões e, principalmente, para buscarmos juntos uma solução.\n\nEm primeiro lugar, minha jornada tem ultrapassado com frequência as seis horas diárias. Segundo o guia do Coletivo Estágio Justo, esse é o limite para estudantes do ensino superior, e hora extra não faz parte do estágio, que é, pela lei, um ato educativo. Além disso, grande parte do meu dia é dedicada a tarefas como tirar cópias e atender o telefone, que pouco têm a ver com a minha formação. Por fim, até hoje não recebi uma cópia do termo de compromisso.\n\nGostaria de sugerir uma reunião com o meu supervisor e com o professor orientador para revermos as atividades previstas e para eu receber o documento. Tenho certeza de que, com esses ajustes, o estágio será ainda mais proveitoso para ambas as partes.\n\nAgradeço desde já a atenção.\n\nAtenciosamente,\nLucas Ferreira",
     "gloss": {
       "Prezada": "Estimada (fórmula de carta formal: se ve en la semana 43)",
       "faço estágio": "hago una pasantía",
@@ -118,6 +112,102 @@
       "termo de compromisso": "el convenio de pasantía que firman las partes",
       "Agradeço desde já a atenção": "desde ya, gracias por su atención (fórmula de cierre: semana 43)",
       "Atenciosamente": "saludo atentamente (se ve en la semana 43)"
+    }
+  },
+  "breve": {
+    "title": "Um recado da Editora Horizonte",
+    "genre": "recado na caixa postal",
+    "es": "Un mensaje en el contestador: la oficina de personal de una editorial cita a una candidata a una pasantía.",
+    "speaker": "Cláudia Mendes, do RH",
+    "voice": 1,
+    "text": [
+      "Oi, Juliana, boa tarde. Aqui é a Cláudia Mendes, do RH da Editora Horizonte. Estou ligando sobre a vaga de estágio em revisão de textos: você foi selecionada para a última etapa, parabéns!",
+      "A entrevista vai ser na quinta-feira, dia 14, às 10 horas, no nosso escritório da Rua da Assembleia, número 98, oitavo andar. Vai ser em grupo, com quatro candidatos. Antes de começarmos, cada um vai fazer um teste curto de revisão, de uns trinta minutos.",
+      "É importante vocês trazerem o comprovante de matrícula da faculdade e um documento com foto. A bolsa é de 1.800 reais, mais vale-transporte, para seis horas por dia.",
+      "Se não puder vir, me avisa até terça, tá? O meu ramal é 2173. Um abraço e até quinta!"
+    ],
+    "tabella": [
+      [
+        "Dia do mês da entrevista",
+        "14",
+        [
+          "dia 14",
+          "catorze",
+          "quatorze"
+        ]
+      ],
+      [
+        "Horário da entrevista",
+        "10",
+        [
+          "10 horas",
+          "10h",
+          "dez",
+          "dez horas",
+          "10:00"
+        ]
+      ],
+      [
+        "Andar do escritório",
+        "8",
+        [
+          "oitavo",
+          "8º",
+          "oitavo andar"
+        ]
+      ],
+      [
+        "Valor da bolsa (reais)",
+        "1.800",
+        [
+          "1800",
+          "mil e oitocentos",
+          "R$ 1.800",
+          "1.800 reais"
+        ]
+      ],
+      [
+        "Ramal da Cláudia",
+        "2173",
+        [
+          "2 1 7 3",
+          "21 73"
+        ]
+      ]
+    ],
+    "info": [
+      [
+        "A Juliana passou para a última etapa da seleção.",
+        true
+      ],
+      [
+        "A entrevista vai ser individual.",
+        false
+      ],
+      [
+        "Os candidatos vão fazer um teste de revisão.",
+        true
+      ],
+      [
+        "O estágio é de oito horas por dia.",
+        false
+      ],
+      [
+        "Além da bolsa, a editora paga o transporte.",
+        true
+      ],
+      [
+        "A Juliana precisa levar o currículo impresso.",
+        false
+      ]
+    ],
+    "gloss": {
+      "ramal": "interno (del teléfono)",
+      "bolsa": "pago de la pasantía",
+      "vale-transporte": "subsidio para el transporte",
+      "comprovante": "constancia",
+      "matrícula": "inscripción",
+      "estágio": "pasantía"
     }
   }
 }

@@ -10,7 +10,8 @@
   "blurb": "De la semana 27 en adelante, un texto largo por semana (de 350 a 900 palabras) de un género real, con preguntas en portugués como en el Celpe-Bras."
  },
  "names": {
-  "ascolto": "Escutas longas"
+  "ascolto": "Escutas longas",
+  "breve": "Escutas curtas"
  },
  "GENRES": {
   "carta_formal": {
@@ -24,7 +25,169 @@
    ],
    "openHint": "Prezado(a)…, Senhor(a)…",
    "closeHint": "Atenciosamente, Cordialmente + nome",
-   "hint": "Registro formal: vocativo, apresentação e motivo, desenvolvimento, pedido concreto, despedida e assinatura."
+   "hint": "Registro formal: vocativo, apresentação e motivo, desenvolvimento, pedido concreto, despedida e assinatura.",
+   "registro": "formal",
+   "trat": "senhor",
+   "propositoHint": "solicito, peço, venho informar, reclamo",
+   "proposito": [
+    "\\b(solicit\\w*|peç[oa]|pedi(r|mos)|gostaria de|venho|reclam\\w*|inform[oa]|informar|agradeceria|lament\\w*|justific\\w*|requeiro|encaminho|apresent(o|ar) (minhas|nossas) desculpas)"
+   ],
+   "ficha": [
+    {
+     "h": "Para que serve",
+     "p": "Una carta o un e-mail formal se escribe a una institución o a alguien con quien no tenés trato: una empresa, la coordinación de un curso, la prefeitura, una biblioteca. Sirve para pedir, reclamar, informar o justificar algo y deja constancia por escrito. Vos escribís con un rol (estudiante, vecino, cliente) a alguien con un cargo: tratalo de o senhor / a senhora, nunca de você.",
+     "list": [
+      [
+       "Você é estagiário(a) e escreve à coordenação do curso.",
+       "enunciador y destinatario: el Celpe-Bras siempre los dice"
+      ],
+      [
+       "solicitar, reclamar, informar, justificar, agradecer",
+       "los propósitos: cada carta tiene uno principal"
+      ],
+      [
+       "o senhor, a senhora, V. Sa. (Vossa Senhoria)",
+       "el tratamiento, con el verbo en 3.ª persona"
+      ]
+     ]
+    },
+    {
+     "h": "Estrutura",
+     "p": "Seis partes, siempre en este orden. En un e-mail, el asunto reemplaza el lugar y la fecha.",
+     "list": [
+      [
+       "Rio de Janeiro, 12 de março de 2026.",
+       "lugar y fecha (en carta)"
+      ],
+      [
+       "Prezada Senhora Coordenadora,",
+       "vocativo, con coma"
+      ],
+      [
+       "Meu nome é… e escrevo para…",
+       "quién sos y para qué escribís"
+      ],
+      [
+       "Desde fevereiro, … (datas, números, nomes)",
+       "los hechos, con datos"
+      ],
+      [
+       "Diante do exposto, solicito que…",
+       "el pedido concreto"
+      ],
+      [
+       "Atenciosamente, + nome completo",
+       "cierre y firma"
+      ]
+     ]
+    },
+    {
+     "h": "Fórmulas de abertura, corpo e fecho",
+     "p": "Diez fórmulas que resuelven casi cualquier carta formal. Aprendelas como bloques: no se traducen palabra por palabra.",
+     "list": [
+      [
+       "Prezado(a) Senhor(a),",
+       "Estimado/a señor/a:"
+      ],
+      [
+       "Prezados senhores,",
+       "a una institución, sin nombre"
+      ],
+      [
+       "Venho, por meio desta, solicitar…",
+       "Por la presente, solicito…"
+      ],
+      [
+       "Escrevo para manifestar minha insatisfação com…",
+       "para reclamar"
+      ],
+      [
+       "Gostaria de solicitar… / Solicito que…",
+       "para pedir"
+      ],
+      [
+       "Diante do exposto, peço que…",
+       "Por lo expuesto, pido que…"
+      ],
+      [
+       "Encaminho em anexo…",
+       "Adjunto…"
+      ],
+      [
+       "Coloco-me à disposição para quaisquer esclarecimentos.",
+       "Quedo a disposición."
+      ],
+      [
+       "Desde já, agradeço a atenção.",
+       "Agradezco de antemano."
+      ],
+      [
+       "Fico no aguardo de uma resposta.",
+       "Quedo a la espera de una respuesta."
+      ],
+      [
+       "Atenciosamente, / Cordialmente,",
+       "Atentamente, / Cordialmente,"
+      ]
+     ]
+    },
+    {
+     "h": "Tratamento e pedidos corteses",
+     "p": "Elegí un tratamiento y sostenelo hasta la firma: o senhor / a senhora, con el verbo en 3.ª persona y los pronombres o, a, lhe, seu. Mezclar você y o senhor en la misma carta es el error de adequação más común. El pedido más cortés: futuro do pretérito + imperfeito do subjuntivo.",
+     "list": [
+      [
+       "O senhor poderia me informar se…?",
+       "¿Usted podría informarme si…?"
+      ],
+      [
+       "Agradeceria se a senhora pudesse…",
+       "Le agradecería que pudiera…"
+      ],
+      [
+       "Peço-lhe que me envie…",
+       "Le pido que me envíe…"
+      ],
+      [
+       "Lamento informar que…",
+       "Lamento informarle que…"
+      ],
+      [
+       "Infelizmente, não será possível…",
+       "Lamentablemente, no será posible…"
+      ],
+      [
+       "você, te, teu",
+       "no van en una carta formal"
+      ]
+     ]
+    },
+    {
+     "h": "Modelo anotado",
+     "p": "Una carta de 90 palabras a la coordinación de un curso. A la derecha, qué hace cada parte.",
+     "model": [
+      [
+       "Prezada Senhora Coordenadora,",
+       "vocativo con el cargo, y coma"
+      ],
+      [
+       "Meu nome é Lucía Pereyra, sou aluna do terceiro período de Arquitetura e faço estágio no escritório Traço Urbano. Escrevo para relatar problemas no cumprimento do meu termo de estágio.",
+       "quién soy y para qué escribo, en dos oraciones"
+      ],
+      [
+       "Desde fevereiro, minha jornada tem passado de seis horas diárias, o limite previsto na Lei do Estágio, e tenho realizado tarefas sem relação com o curso.",
+       "los hechos, con datos: fecha, cifra, la ley"
+      ],
+      [
+       "Diante do exposto, solicito que a coordenação entre em contato com o escritório e me envie uma cópia do termo de compromisso.",
+       "el pedido, con verbo de propósito"
+      ],
+      [
+       "Coloco-me à disposição para esclarecimentos. Atenciosamente, Lucía Pereyra",
+       "cierre formal y firma con nombre completo"
+      ]
+     ]
+    }
+   ]
   },
   "email_informal": {
    "name": "E-mail informal",
@@ -37,7 +200,161 @@
    ],
    "openHint": "Oi…, Querida…",
    "closeHint": "Um abraço, Beijos, Até mais…",
-   "hint": "Registro informal (você, a gente), mas com parágrafos: saudação, motivo, desenvolvimento, despedida."
+   "hint": "Registro informal (você, a gente), mas com parágrafos: saudação, motivo, desenvolvimento, despedida.",
+   "registro": "informal",
+   "trat": "voce",
+   "propositoHint": "se eu fosse você, que tal, acho que vale a pena",
+   "proposito": [
+    "\\b(se eu fosse|acho que|vale a pena|que tal|não deixa|me conta|sugiro|recomendo|o melhor é|o ideal|você pode|você devia|você deveria|minha dica|conselh\\w*|dá uma olhada)"
+   ],
+   "ficha": [
+    {
+     "h": "Para que serve",
+     "p": "Un e-mail largo a alguien de confianza (un amigo, una prima, una excompañera) para contar, aconsejar, invitar o pedir un favor. El Celpe-Bras lo pide seguido: «Você é amigo(a) de…, escreva um e-mail…». Tratamiento: você y a gente. Registro informal, pero escrito: con párrafos y sin las abreviaturas del chat (vc, tb, pq, blz).",
+     "list": [
+      [
+       "Você é amigo(a) da Camila, que vai se mudar para o Rio.",
+       "quién escribe a quién"
+      ],
+      [
+       "contar, aconselhar, convidar, pedir um favor",
+       "los propósitos"
+      ],
+      [
+       "você, a gente, te, teu / seu",
+       "el tratamiento"
+      ]
+     ]
+    },
+    {
+     "h": "Estrutura",
+     "p": "Cinco movimientos. El segundo, retomar el contacto, es el que más olvidan los hispanohablantes.",
+     "list": [
+      [
+       "Oi, Camila! / Querida Camila,",
+       "saludo"
+      ],
+      [
+       "Que bom receber notícias suas!",
+       "retomar el contacto"
+      ],
+      [
+       "Estou te escrevendo porque…",
+       "el motivo"
+      ],
+      [
+       "Olha, se eu fosse você, …",
+       "el cuerpo: noticias, consejos, preguntas"
+      ],
+      [
+       "Me conta como foi! Um beijo, Sofía",
+       "despedida y firma"
+      ]
+     ]
+    },
+    {
+     "h": "Fórmulas de abertura, corpo e fecho",
+     "p": "Las que suenan naturales en un e-mail entre amigos brasileños.",
+     "list": [
+      [
+       "Oi, …! / E aí, tudo bem?",
+       "¡Hola…! / ¿Qué tal?"
+      ],
+      [
+       "Quanto tempo!",
+       "¡Cuánto tiempo!"
+      ],
+      [
+       "Desculpa a demora para responder.",
+       "Perdón por tardar en contestar."
+      ],
+      [
+       "Que notícia boa!",
+       "¡Qué buena noticia!"
+      ],
+      [
+       "Olha, … / Sabe o que eu acho?",
+       "para dar una opinión"
+      ],
+      [
+       "Se eu fosse você, …",
+       "Yo que vos…"
+      ],
+      [
+       "Que tal + infinitivo?",
+       "¿Qué te parece si…?"
+      ],
+      [
+       "Estou torcendo por você!",
+       "¡Te deseo lo mejor! / Cruzo los dedos"
+      ],
+      [
+       "Me conta tudo depois!",
+       "¡Después contame todo!"
+      ],
+      [
+       "Um beijo, / Um abraço, / Beijos,",
+       "Un beso, / Un abrazo,"
+      ]
+     ]
+    },
+    {
+     "h": "Aconselhar e combinar",
+     "p": "El consejo es el corazón de muchos e-mails del examen. Variá la forma: no repitas «você deve». Y el tono informal no es desorden: un párrafo por idea.",
+     "list": [
+      [
+       "Se eu fosse você, alugaria antes de comprar.",
+       "hipótesis: imperfeito do subjuntivo + futuro do pretérito"
+      ],
+      [
+       "Acho que vale a pena…",
+       "Creo que vale la pena…"
+      ],
+      [
+       "O melhor é… / O ideal seria…",
+       "Lo mejor es… / Lo ideal sería…"
+      ],
+      [
+       "Não deixa de…",
+       "No dejes de…"
+      ],
+      [
+       "Vamos combinar assim: …",
+       "Hagamos así: …"
+      ],
+      [
+       "vc, tb, pq, blz",
+       "en el examen, nunca: escribí você, também, porque, beleza"
+      ]
+     ]
+    },
+    {
+     "h": "Modelo anotado",
+     "p": "Un e-mail de 95 palabras para una amiga que se muda a Río.",
+     "model": [
+      [
+       "Oi, Camila!",
+       "saludo informal"
+      ],
+      [
+       "Que notícia boa! Então você vai mesmo morar no Rio? Estou te escrevendo porque passei por isso há dois anos e aprendi umas coisas.",
+       "retoma, confirma la noticia y da el motivo"
+      ],
+      [
+       "Olha, se eu fosse você, alugaria um apartamento por uns meses antes de comprar. A minha amiga Renata comprou logo e se arrependeu: o bairro era lindo, mas não tinha escola perto.",
+       "el consejo, con un ejemplo concreto"
+      ],
+      [
+       "Qualquer coisa, me liga. Estou torcendo por você!",
+       "ofrecer ayuda"
+      ],
+      [
+       "Um beijo, Sofía",
+       "despedida y firma"
+      ]
+     ]
+    }
+   ]
   },
   "carta_leitor": {
    "name": "Carta do leitor",
@@ -50,34 +367,1505 @@
    ],
    "openHint": "Prezados editores…, À redação…",
    "closeHint": "Atenciosamente + nome e cidade",
-   "hint": "Responde a uma matéria publicada: mencioná-la, posicionar-se, argumentar e fechar com uma proposta."
+   "hint": "Responde a uma matéria publicada: mencioná-la, posicionar-se, argumentar e fechar com uma proposta.",
+   "registro": "formal",
+   "propositoHint": "concordo, discordo, sugiro, proponho",
+   "proposito": [
+    "\\b(concordo|discordo|parabeniz\\w*|sugiro|sugestão|proponho|defendo|lamento|critico|seria importante|faço um apelo)",
+    "(^|\\s)é preciso"
+   ],
+   "ficha": [
+    {
+     "h": "Para que serve",
+     "p": "La carta del lector responde a una nota publicada en un diario o una revista: el lector opina, corrige, completa o propone. Se dirige a la redacción, pero habla para los otros lectores. Tiene que nombrar la nota (título, fecha o autor) y tomar posición. Registro formal o semiformal; se firma con nombre, ciudad y, a veces, profesión.",
+     "list": [
+      [
+       "Você é leitor(a) do jornal e leu a reportagem «…».",
+       "quién escribe a quién"
+      ],
+      [
+       "concordar, discordar, completar, corrigir, propor",
+       "los propósitos"
+      ],
+      [
+       "Prezados editores, / À redação,",
+       "el destinatario formal"
+      ]
+     ]
+    },
+    {
+     "h": "Estrutura",
+     "p": "Cinco partes. La referencia a la nota va arriba de todo: sin ella, el lector no sabe de qué hablás.",
+     "list": [
+      [
+       "Prezados editores,",
+       "vocativo"
+      ],
+      [
+       "Li com interesse a reportagem «…», publicada no dia…",
+       "la nota que comentás"
+      ],
+      [
+       "Concordo em parte com a autora, mas…",
+       "tu posición"
+      ],
+      [
+       "Moro em… e vejo todos os dias que…",
+       "argumentos con ejemplos (tu experiencia vale)"
+      ],
+      [
+       "Fica aqui a minha sugestão: …",
+       "propuesta o llamado"
+      ],
+      [
+       "Atenciosamente, Ana Souza, professora, Niterói (RJ)",
+       "firma: nombre, profesión, ciudad"
+      ]
+     ]
+    },
+    {
+     "h": "Fórmulas de abertura, corpo e fecho",
+     "p": "Para entrar en el tema sin rodeos y salir con una propuesta.",
+     "list": [
+      [
+       "Li com atenção a matéria «…», publicada em…",
+       "Leí con atención la nota…"
+      ],
+      [
+       "Gostaria de parabenizar o jornal pela reportagem sobre…",
+       "felicitar"
+      ],
+      [
+       "Venho manifestar minha discordância em relação a…",
+       "discrepar"
+      ],
+      [
+       "Como leitor(a) e morador(a) de…, não posso deixar de comentar…",
+       "presentarse con autoridad"
+      ],
+      [
+       "O texto tem o mérito de…, mas deixa de lado…",
+       "conceder y criticar"
+      ],
+      [
+       "É preciso lembrar que…",
+       "Hay que recordar que…"
+      ],
+      [
+       "Seria importante que as autoridades…",
+       "pedir, con subjuntivo"
+      ],
+      [
+       "Fica aqui a minha sugestão: …",
+       "Dejo mi sugerencia:"
+      ],
+      [
+       "Atenciosamente, / Cordialmente,",
+       "cierre"
+      ]
+     ]
+    },
+    {
+     "h": "Posicionar-se com matizes",
+     "p": "Una carta del lector convence más cuando concede algo antes de discrepar. Usá los modalizadores para no afirmar lo que no sabés.",
+     "list": [
+      [
+       "Concordo com… / Discordo de… / Concordo em parte com…",
+       "tomar posición (ojo: discordar de)"
+      ],
+      [
+       "Sem dúvida, … / É inegável que…",
+       "afirmar con fuerza"
+      ],
+      [
+       "Talvez… / É possível que + subjuntivo",
+       "matizar"
+      ],
+      [
+       "Parece-me que… / Tudo indica que…",
+       "presentar como probable"
+      ],
+      [
+       "É verdade que…; no entanto, …",
+       "conceder y contraargumentar"
+      ]
+     ]
+    },
+    {
+     "h": "Modelo anotado",
+     "p": "Una carta de 90 palabras sobre una nota de ciclovías.",
+     "model": [
+      [
+       "Prezados editores,",
+       "vocativo"
+      ],
+      [
+       "Li com interesse a reportagem «Pedalar no Rio», publicada no domingo. Concordo em parte com a autora: as ciclovias da orla funcionam bem.",
+       "referencia y posición matizada"
+      ],
+      [
+       "No entanto, moro na Tijuca e sei que longe do mar ninguém pedala tranquilo. É preciso lembrar que a maioria dos trabalhadores não mora na Zona Sul.",
+       "argumento con la propia experiencia"
+      ],
+      [
+       "Fica aqui a minha sugestão: que a prefeitura ligue as ciclovias às estações de metrô.",
+       "propuesta concreta"
+      ],
+      [
+       "Atenciosamente, Marcos Lima, professor, Rio de Janeiro",
+       "firma completa"
+      ]
+     ]
+    }
+   ]
   },
   "artigo": {
    "name": "Artigo",
    "paragraphs": 3,
    "title": true,
-   "hint": "Título na primeira linha; abertura que prenda o leitor, desenvolvimento com informações do texto ou do áudio, conclusão."
+   "hint": "Título na primeira linha; abertura que prenda o leitor, desenvolvimento com informações do texto ou do áudio, conclusão.",
+   "registro": "formal",
+   "fonteMin": 8,
+   "propositoHint": "segundo…, é preciso…, diante disso…",
+   "proposito": [
+    "\\b(segundo|de acordo com|conforme|devemos|deveria(m)?|propo(nho|mos)|diante disso|resta saber|cabe (a|ao|à) |defendo|mostra(m)? que|revela(m)? que|a questão (não )?é)",
+    "(^|\\s)é (preciso|necessário|urgente)"
+   ],
+   "ficha": [
+    {
+     "h": "Para que serve",
+     "p": "Un artículo se publica en un diario, una revista, el blog de una institución o un sitio. Quien escribe informa a un público amplio y, casi siempre, toma posición. Lleva título, una apertura que atrape, desarrollo con los datos de las fuentes (atribuidos) y una conclusión. Registro formal o neutro; tercera persona o nós.",
+     "list": [
+      [
+       "Você é colaborador(a) da revista do bairro.",
+       "quién escribe"
+      ],
+      [
+       "informar, explicar, alertar, defender",
+       "los propósitos"
+      ],
+      [
+       "os leitores da revista",
+       "el destinatario: un público, no una persona"
+      ]
+     ]
+    },
+    {
+     "h": "Estrutura",
+     "p": "Título en la primera línea, sin punto final. Después, cuatro movimientos.",
+     "list": [
+      [
+       "A cidade que aprendeu a beber chuva",
+       "título: corto, con imagen o pregunta"
+      ],
+      [
+       "Você já parou para pensar em…?",
+       "apertura: pregunta, dato o escena"
+      ],
+      [
+       "Segundo a reportagem…, / De acordo com o especialista…,",
+       "desarrollo con las fuentes"
+      ],
+      [
+       "Há quem diga que…; no entanto, …",
+       "contraargumento"
+      ],
+      [
+       "Diante disso, … / Resta saber se…",
+       "conclusión: propuesta o pregunta"
+      ]
+     ]
+    },
+    {
+     "h": "Fórmulas de abertura, corpo e fecho",
+     "p": "El artículo vive de dos cosas: enganchar al lector y citar bien.",
+     "list": [
+      [
+       "Você já parou para pensar em…?",
+       "¿Alguna vez pensaste en…?"
+      ],
+      [
+       "Não é de hoje que…",
+       "No es nuevo que…"
+      ],
+      [
+       "Segundo dados do IBGE, …",
+       "Según datos del IBGE, …"
+      ],
+      [
+       "Um estudo recente mostra que…",
+       "Un estudio reciente muestra que…"
+      ],
+      [
+       "De acordo com especialistas, …",
+       "Según especialistas, …"
+      ],
+      [
+       "Por outro lado, …",
+       "Por otro lado, …"
+      ],
+      [
+       "Há quem diga que…; no entanto, …",
+       "Hay quien dice que…; sin embargo, …"
+      ],
+      [
+       "Diante disso, …",
+       "Ante eso, …"
+      ],
+      [
+       "Mais do que…, é preciso…",
+       "Más que…, hace falta…"
+      ],
+      [
+       "Resta saber se…",
+       "Queda por ver si…"
+      ]
+     ]
+    },
+    {
+     "h": "Citar a fonte",
+     "p": "Todo dato del texto o del audio va atribuido. Los verbos de decir dicen cómo te posicionás frente a la fuente.",
+     "list": [
+      [
+       "segundo, de acordo com, conforme",
+       "según"
+      ],
+      [
+       "afirma, aponta, revela, alerta que…",
+       "afirma, señala, revela, advierte que…"
+      ],
+      [
+       "a pesquisadora ouvida pelo programa",
+       "la investigadora que entrevistó el programa"
+      ],
+      [
+       "É provável que… / Tudo indica que…",
+       "modalizar lo que no es seguro"
+      ],
+      [
+       "o texto diz, o texto diz, o texto diz",
+       "variá: no repitas dizer"
+      ]
+     ]
+    },
+    {
+     "h": "Modelo anotado",
+     "p": "Un artículo de 100 palabras para la revista de un barrio.",
+     "model": [
+      [
+       "Menos asfalto, mais árvores",
+       "título sin punto"
+      ],
+      [
+       "Você já reparou que as ruas do bairro viram rios em qualquer temporal?",
+       "apertura con una pregunta al lector"
+      ],
+      [
+       "Segundo a reportagem sobre as cidades-esponja, parques alagáveis e calçadas permeáveis absorvem boa parte da chuva. Em Recife, sensores já avisam os moradores antes das enchentes.",
+       "datos de la fuente, atribuidos"
+      ],
+      [
+       "Há quem diga que essas obras são caras demais; no entanto, cada enchente também custa caro.",
+       "contraargumento y respuesta"
+      ],
+      [
+       "Diante disso, resta saber se a prefeitura vai incluir o bairro no plano.",
+       "conclusión con pregunta abierta"
+      ]
+     ]
+    }
+   ]
   },
   "resenha": {
    "name": "Resenha",
    "paragraphs": 3,
    "title": true,
-   "hint": "Título; apresentação da obra ou do evento, pontos fortes e fracos com exemplos, avaliação final e recomendação."
+   "hint": "Título; apresentação da obra ou do evento, pontos fortes e fracos com exemplos, avaliação final e recomendação.",
+   "propositoHint": "recomendo, vale a pena, o ponto alto",
+   "proposito": [
+    "\\b(recomend\\w*|vale a pena|ponto alto|ponto fraco|merece|peca|deixa a desejar|imperdível|indico|não perca)"
+   ],
+   "ficha": [
+    {
+     "h": "Para que serve",
+     "p": "La reseña presenta y evalúa una obra o un evento: un libro, una película, una serie, un show, una exposición, un podcast. Informa (qué es, de quién, de qué trata) y juzga (qué vale y qué no) para que el lector decida. Se publica en un diario, un blog o un sitio cultural. Lleva título; registro semiformal, con la 1.ª persona moderada.",
+     "list": [
+      [
+       "Você colabora com o blog cultural da faculdade.",
+       "quién escribe"
+      ],
+      [
+       "apresentar, avaliar, recomendar",
+       "los propósitos"
+      ],
+      [
+       "os leitores do blog",
+       "el destinatario"
+      ]
+     ]
+    },
+    {
+     "h": "Estrutura",
+     "p": "Cinco partes. El resumen de la obra es corto y no cuenta el final: la reseña no es un resumo.",
+     "list": [
+      [
+       "Um relógio parado e uma família inteira",
+       "título"
+      ],
+      [
+       "Publicado em 2024, o conto de… narra…",
+       "presentación: obra, autor, año, género"
+      ],
+      [
+       "A história gira em torno de…",
+       "resumen breve, sin el final"
+      ],
+      [
+       "O ponto alto é… Por outro lado, peca por…",
+       "evaluación con ejemplos"
+      ],
+      [
+       "Recomendo para quem…",
+       "recomendación: a quién y por qué"
+      ]
+     ]
+    },
+    {
+     "h": "Fórmulas de abertura, corpo e fecho",
+     "p": "Las fórmulas de la crítica cultural brasileña.",
+     "list": [
+      [
+       "Lançado em 2023, o livro…",
+       "presentar con el año"
+      ],
+      [
+       "Dirigido por…, o filme conta a história de…",
+       "presentar una película"
+      ],
+      [
+       "A obra gira em torno de…",
+       "La obra gira en torno a…"
+      ],
+      [
+       "O ponto alto é…",
+       "Lo mejor es…"
+      ],
+      [
+       "O grande mérito do autor é…",
+       "El gran mérito del autor es…"
+      ],
+      [
+       "O ponto fraco é… / A obra peca por…",
+       "Lo más flojo es… / Peca de…"
+      ],
+      [
+       "Deixa a desejar em…",
+       "Deja que desear en…"
+      ],
+      [
+       "Vale a pena ler (ver, ouvir) porque…",
+       "Vale la pena…"
+      ],
+      [
+       "Recomendo para quem gosta de…",
+       "Lo recomiendo a quien…"
+      ],
+      [
+       "Não é para quem procura…",
+       "No es para quien busca…"
+      ]
+     ]
+    },
+    {
+     "h": "Palavras para avaliar",
+     "p": "Juzgar con precisión: un adjetivo exacto vale más que «muito bom». Y cada juicio, con un ejemplo de la obra.",
+     "list": [
+      [
+       "envolvente, instigante, comovente",
+       "atrapante, que da que pensar, conmovedor"
+      ],
+      [
+       "bem construído, bem-humorado, sensível",
+       "bien armado, con humor, sensible"
+      ],
+      [
+       "previsível, arrastado, superficial",
+       "previsible, lento, superficial"
+      ],
+      [
+       "prende o leitor do começo ao fim",
+       "atrapa al lector de principio a fin"
+      ],
+      [
+       "surpreende ao…",
+       "sorprende al…"
+      ],
+      [
+       "muito bom, muito legal, muito ruim",
+       "demasiado vagos en una reseña"
+      ]
+     ]
+    },
+    {
+     "h": "Modelo anotado",
+     "p": "Una reseña de 95 palabras de un cuento.",
+     "model": [
+      [
+       "Um relógio que não anda",
+       "título"
+      ],
+      [
+       "Publicado em 2024, o conto «O relógio do meu pai», de Helena Duarte, narra a volta de uma filha à casa da família depois do enterro do pai.",
+       "presentación: obra, autora, año, tema"
+      ],
+      [
+       "O ponto alto é a linguagem: frases curtas, quase sem adjetivos, que deixam o silêncio falar. Por outro lado, o final peca por explicar demais o que o leitor já tinha entendido.",
+       "evaluación con un punto fuerte y uno débil"
+      ],
+      [
+       "Mesmo assim, vale a pena ler. Recomendo para quem gosta de histórias sobre memória e família.",
+       "recomendación con destinatario"
+      ]
+     ]
+    }
+   ]
   },
   "texto_opiniao": {
    "name": "Texto de opinião",
    "paragraphs": 4,
-   "hint": "Tese na introdução, pelo menos dois argumentos com exemplos, um contra-argumento refutado, conclusão."
+   "hint": "Tese na introdução, pelo menos dois argumentos com exemplos, um contra-argumento refutado, conclusão.",
+   "registro": "formal",
+   "propositoHint": "defendo que, a meu ver, acredito que",
+   "proposito": [
+    "\\b(defendo|acredito|na minha opinião|a meu ver|concordo|discordo|penso que|considero|creio|sustento)"
+   ],
+   "ficha": [
+    {
+     "h": "Para que serve",
+     "p": "El texto de opinión defiende una tesis sobre un tema polémico («¿Seríamos más felices con menos opciones?») para la sección de opinión o de debate de un medio. Se evalúa: una tesis clara, argumentos con ejemplos, un contraargumento respondido y una conclusión. Registro formal; no repitas «eu acho».",
+     "list": [
+      [
+       "Você é leitor(a) e participa da seção Debate do jornal.",
+       "quién escribe"
+      ],
+      [
+       "defender, argumentar, refutar, propor",
+       "los propósitos"
+      ],
+      [
+       "os leitores do jornal",
+       "el destinatario"
+      ]
+     ]
+    },
+    {
+     "h": "Estrutura",
+     "p": "Cuatro o cinco párrafos, uno por movimiento.",
+     "list": [
+      [
+       "Muito se discute hoje se… Defendo que…",
+       "introducción con la tesis"
+      ],
+      [
+       "Em primeiro lugar, … É o caso de…",
+       "argumento 1 con ejemplo"
+      ],
+      [
+       "Além disso, …",
+       "argumento 2 con ejemplo"
+      ],
+      [
+       "É verdade que…; no entanto, …",
+       "contraargumento y respuesta"
+      ],
+      [
+       "Diante do exposto, … Cabe a…",
+       "conclusión: retoma la tesis y propone"
+      ]
+     ]
+    },
+    {
+     "h": "Fórmulas de abertura, corpo e fecho",
+     "p": "Los conectores ordenan el razonamiento: el corrector local cuenta cuántos distintos usás.",
+     "list": [
+      [
+       "Muito se discute hoje se…",
+       "Mucho se discute hoy si…"
+      ],
+      [
+       "A meu ver, / Na minha opinião, …",
+       "A mi entender, / En mi opinión, …"
+      ],
+      [
+       "Defendo que…",
+       "Sostengo que…"
+      ],
+      [
+       "Em primeiro lugar, …",
+       "En primer lugar, …"
+      ],
+      [
+       "Além disso, / Ademais, …",
+       "Además, …"
+      ],
+      [
+       "É o caso de…",
+       "Es el caso de…"
+      ],
+      [
+       "É verdade que…; no entanto, …",
+       "Es cierto que…; sin embargo, …"
+      ],
+      [
+       "Há quem argumente que…, mas…",
+       "Hay quien sostiene que…, pero…"
+      ],
+      [
+       "Diante do exposto, / Portanto, …",
+       "Por lo expuesto, / Por lo tanto, …"
+      ],
+      [
+       "Cabe ao poder público…",
+       "Le corresponde al Estado…"
+      ]
+     ]
+    },
+    {
+     "h": "Modalizar a opinião",
+     "p": "Modalizar es decir cuán seguro estás. Algunos piden subjuntivo, otros indicativo: es la diferencia que más se nota.",
+     "list": [
+      [
+       "É possível que / É provável que + subjuntivo",
+       "é possível que as pessoas escolham melhor"
+      ],
+      [
+       "Tudo indica que / Parece que + indicativo",
+       "tudo indica que a ansiedade aumentou"
+      ],
+      [
+       "Talvez + subjuntivo",
+       "talvez fôssemos mais felizes"
+      ],
+      [
+       "Sem dúvida, / Certamente, …",
+       "afirmar con fuerza"
+      ],
+      [
+       "Não acho que + subjuntivo",
+       "no creo que… (negado: subjuntivo)"
+      ]
+     ]
+    },
+    {
+     "h": "Modelo anotado",
+     "p": "Un texto de opinión de 100 palabras.",
+     "model": [
+      [
+       "Muito se discute hoje se o excesso de opções nos deixa infelizes. Defendo que escolher é bom, desde que se aprenda a escolher.",
+       "tesis en la primera oración"
+      ],
+      [
+       "Em primeiro lugar, ninguém gostaria de voltar a um tempo em que a família decidia a profissão dos filhos. Além disso, é possível que a ansiedade venha menos das opções do que da ideia de que toda escolha é definitiva.",
+       "dos argumentos, uno modalizado"
+      ],
+      [
+       "É verdade que vinte tipos de iogurte cansam; no entanto, isso se resolve com hábito, não com proibição.",
+       "concesión y refutación"
+      ],
+      [
+       "Portanto, cabe à escola ensinar os jovens a escolher sem medo de errar.",
+       "conclusión con propuesta"
+      ]
+     ]
+    }
+   ]
   },
   "resumo": {
    "name": "Resumo",
    "paragraphs": 3,
-   "hint": "As ideias principais com suas palavras, na ordem lógica, atribuídas ao autor (segundo o autor, o texto defende…), sem opinião."
+   "hint": "As ideias principais com suas palavras, na ordem lógica, atribuídas ao autor (segundo o autor, o texto defende…), sem opinião.",
+   "registro": "formal",
+   "fonteMin": 8,
+   "propositoHint": "o texto trata de, segundo o autor, conclui",
+   "proposito": [
+    "\\b(trata-se|trata d[eoa]s?|aborda|segundo|de acordo com|defende|afirma|aponta|conclui|ressalta|apresenta|sustenta|explica)"
+   ],
+   "ficha": [
+    {
+     "h": "Para que serve",
+     "p": "El resumo reduce un texto o un audio a sus ideas principales, con tus palabras y sin opinar. Se usa en la universidad, en informes, en el trabajo. Lo esencial: atribuir siempre al autor, mantener el orden lógico, no copiar frases y no agregar lo que la fuente no dice. Presente y tercera persona.",
+     "list": [
+      [
+       "Você é estudante e precisa resumir a reportagem para a turma.",
+       "quién escribe a quién"
+      ],
+      [
+       "resumir, reformular, atribuir",
+       "los propósitos"
+      ],
+      [
+       "o professor, a turma, o chefe",
+       "el destinatario: alguien que no leyó la fuente"
+      ]
+     ]
+    },
+    {
+     "h": "Estrutura",
+     "p": "Cuatro movimientos, en el orden de la fuente (o en un orden lógico si la fuente es desordenada).",
+     "list": [
+      [
+       "A reportagem «…», publicada em…, trata de…",
+       "referencia y tema"
+      ],
+      [
+       "O autor defende que… / O estudo tem como objetivo…",
+       "tesis u objetivo"
+      ],
+      [
+       "Em seguida, apresenta… Além disso, aponta…",
+       "ideas principales, en orden"
+      ],
+      [
+       "Por fim, conclui que…",
+       "conclusión de la fuente, no la tuya"
+      ]
+     ]
+    },
+    {
+     "h": "Fórmulas de abertura, corpo e fecho",
+     "p": "Casi todas giran alrededor de un verbo de decir.",
+     "list": [
+      [
+       "O texto «…», de…, publicado em…, trata de…",
+       "presentar la fuente"
+      ],
+      [
+       "A reportagem aborda…",
+       "El reportaje aborda…"
+      ],
+      [
+       "O autor defende que…",
+       "El autor sostiene que…"
+      ],
+      [
+       "Segundo a autora, …",
+       "Según la autora, …"
+      ],
+      [
+       "Para ilustrar, cita o caso de…",
+       "Para ilustrarlo, cita el caso de…"
+      ],
+      [
+       "Em seguida, apresenta…",
+       "A continuación, presenta…"
+      ],
+      [
+       "Além disso, aponta…",
+       "Además, señala…"
+      ],
+      [
+       "O texto ressalta que…",
+       "El texto destaca que…"
+      ],
+      [
+       "Por fim, conclui que…",
+       "Por último, concluye que…"
+      ],
+      [
+       "Em síntese, …",
+       "En síntesis, …"
+      ]
+     ]
+    },
+    {
+     "h": "Verbos de dizer e o que não vai",
+     "p": "Cada verbo de decir tiene un matiz: elegí el preciso y no repitas «diz». Y lo que no va en un resumo: tu opinión.",
+     "list": [
+      [
+       "afirmar, explicar, apresentar",
+       "neutros"
+      ],
+      [
+       "defender, sustentar, argumentar",
+       "para una tesis"
+      ],
+      [
+       "apontar, ressaltar, destacar",
+       "para lo que el autor subraya"
+      ],
+      [
+       "reconhecer, admitir",
+       "para lo que el autor concede"
+      ],
+      [
+       "concluir",
+       "para el cierre"
+      ],
+      [
+       "eu acho, na minha opinião, concordo",
+       "no van en un resumo: van en la resenha o el texto de opinião"
+      ]
+     ]
+    },
+    {
+     "h": "Modelo anotado",
+     "p": "Un resumo de 90 palabras de un reportaje.",
+     "model": [
+      [
+       "A reportagem «Desertos de notícias», publicada no jornal O Dia, trata das cidades brasileiras que não têm nenhum veículo de imprensa local.",
+       "referencia y tema"
+      ],
+      [
+       "Segundo o texto, quase metade dos municípios do país vive nessa situação.",
+       "dato central, atribuido"
+      ],
+      [
+       "Para ilustrar, a repórter cita o caso de uma cidade que ficou sem água por uma semana sem que ninguém noticiasse o problema. Além disso, ouve uma rádio comunitária que tenta cobrir o vazio.",
+       "ideas principales, en orden"
+      ],
+      [
+       "Por fim, conclui que a falta de jornalismo local enfraquece a vida democrática.",
+       "conclusión de la fuente"
+      ]
+     ]
+    }
+   ]
   },
   "relato": {
    "name": "Relato",
    "paragraphs": 3,
-   "hint": "Narração em primeira pessoa com contexto (quando, onde, quem), fatos em ordem, e uma reflexão final."
+   "hint": "Narração em primeira pessoa com contexto (quando, onde, quem), fatos em ordem, e uma reflexão final.",
+   "fonteMin": 3,
+   "propositoHint": "foi então que, naquela época, hoje percebo",
+   "proposito": [
+    "\\b(foi então|de repente|naquel[ea]|lembro|percebi|aprendi|hoje (sei|percebo|entendo)|nunca vou esquecer|essa experiência|no fim das contas|descobri|me fez pensar|lembrança)"
+   ],
+   "ficha": [
+    {
+     "h": "Para que serve",
+     "p": "El relato cuenta en primera persona algo que viviste: para un blog, una revista, una convocatoria («conte sua experiência»). Importa situar (cuándo, dónde, con quién), contar los hechos en orden y cerrar con lo que eso te dejó. El lector tiene que poder imaginar la escena.",
+     "list": [
+      [
+       "Você participa de uma coletânea de relatos de leitores.",
+       "quién escribe"
+      ],
+      [
+       "narrar, descrever, refletir",
+       "los propósitos"
+      ],
+      [
+       "os leitores da revista ou do blog",
+       "el destinatario"
+      ]
+     ]
+    },
+    {
+     "h": "Estrutura",
+     "p": "Cinco momentos. El último, la reflexión, es lo que distingue un relato de una lista de hechos.",
+     "list": [
+      [
+       "Foi em 2019, quando eu morava em Córdoba.",
+       "situación: cuándo, dónde"
+      ],
+      [
+       "Naquela época, eu trabalhava…",
+       "el fondo, en imperfeito"
+      ],
+      [
+       "Um dia, … De repente, …",
+       "lo que pasó, en perfeito"
+      ],
+      [
+       "Foi então que…",
+       "el momento clave"
+      ],
+      [
+       "Hoje percebo que…",
+       "reflexión final"
+      ]
+     ]
+    },
+    {
+     "h": "Fórmulas de abertura, corpo e fecho",
+     "p": "Los marcadores de tiempo hacen avanzar la historia.",
+     "list": [
+      [
+       "Foi em…, quando eu…",
+       "Fue en…, cuando…"
+      ],
+      [
+       "Nunca vou esquecer o dia em que…",
+       "Nunca me voy a olvidar del día en que…"
+      ],
+      [
+       "Naquela época, …",
+       "En esa época, …"
+      ],
+      [
+       "No começo, …",
+       "Al principio, …"
+      ],
+      [
+       "De repente, …",
+       "De pronto, …"
+      ],
+      [
+       "Foi então que…",
+       "Fue entonces cuando…"
+      ],
+      [
+       "Pouco depois, / Dias depois, …",
+       "Poco después, / Días después, …"
+      ],
+      [
+       "No fim das contas, …",
+       "Al final, …"
+      ],
+      [
+       "Hoje percebo que…",
+       "Hoy me doy cuenta de que…"
+      ],
+      [
+       "Essa experiência me ensinou que…",
+       "Esa experiencia me enseñó que…"
+      ]
+     ]
+    },
+    {
+     "h": "Os tempos do relato",
+     "p": "Tres pasados, cada uno con su trabajo. Es la gramática que más pesa en un relato.",
+     "list": [
+      [
+       "cheguei, disse, percebi",
+       "perfeito: lo que pasó y hace avanzar la historia"
+      ],
+      [
+       "morava, era, chovia, estava",
+       "imperfeito: el fondo, lo que duraba"
+      ],
+      [
+       "tinha saído, já tinha começado",
+       "mais-que-perfeito composto: lo que había pasado antes"
+      ],
+      [
+       "hoje sei, até hoje lembro",
+       "presente: la reflexión de ahora"
+      ],
+      [
+       "He llegado ayer",
+       "en portugués, cheguei ontem: nunca «tenho chegado»"
+      ]
+     ]
+    },
+    {
+     "h": "Modelo anotado",
+     "p": "Un relato de 95 palabras.",
+     "model": [
+      [
+       "Foi em março de 2022, na minha primeira semana no Rio. Eu morava em Botafogo e ainda não conhecia ninguém.",
+       "situación, con imperfeito para el fondo"
+      ],
+      [
+       "Um dia, a vizinha me disse que eu tinha que «dar um pulo» na casa dela. Fiquei parada: pular por quê? Foi então que ela riu e explicou que era só uma visita rápida.",
+       "los hechos en perfeito y el momento clave"
+      ],
+      [
+       "Hoje percebo que aquela confusão me ensinou mais do que qualquer aula: a língua mora nas expressões, e errar é parte do caminho.",
+       "reflexión final en presente"
+      ]
+     ]
+    }
+   ]
+  },
+  "carta_aberta": {
+   "name": "Carta aberta",
+   "paragraphs": 4,
+   "title": true,
+   "open": [
+    "\\b(carta aberta|nós, |prezad[oa]s?|senhor[a]? secretári[oa]|excelentíssim[oa])"
+   ],
+   "close": [
+    "\\b(assinam|atenciosamente|cordialmente|contamos com|esperamos|confiamos)"
+   ],
+   "openHint": "Carta aberta a…, Nós, usuários…",
+   "closeHint": "Assinam esta carta…, Atenciosamente",
+   "hint": "Título com o destinatário; quem assina e por quê; os fatos; os argumentos; a reivindicação concreta; fecho com as assinaturas. É dirigida a uma autoridade, mas escrita para o público.",
+   "registro": "formal",
+   "trat": "senhor",
+   "propositoHint": "reivindicamos, solicitamos, propomos",
+   "proposito": [
+    "\\b(reivindic\\w*|solicitamos|pedimos|exigimos|propomos|defendemos|manifestar|vimos a público)"
+   ],
+   "ficha": [
+    {
+     "h": "Para que serve",
+     "p": "La carta abierta se dirige a una autoridad (un secretario, un intendente, una empresa) pero se publica para que la lea todo el mundo: en un diario, en las redes, en una cartelera. Quien firma suele ser un grupo (vecinos, usuarios, estudiantes), y el propósito es presionar: reclamar, proponer, pedir que se revise una decisión.",
+     "list": [
+      [
+       "Carta aberta ao secretário municipal de Cultura",
+       "el título dice a quién"
+      ],
+      [
+       "Nós, usuários da Biblioteca…",
+       "quién firma: un colectivo"
+      ],
+      [
+       "reivindicar, propor, pedir a revisão",
+       "los propósitos"
+      ]
+     ]
+    },
+    {
+     "h": "Estrutura",
+     "p": "Cinco movimientos. El título ya es parte del texto.",
+     "list": [
+      [
+       "Carta aberta à Secretaria Municipal de Cultura",
+       "título con el destinatario"
+      ],
+      [
+       "Nós, frequentadores da biblioteca, vimos a público…",
+       "quién firma y por qué"
+      ],
+      [
+       "A partir do próximo mês, …",
+       "los hechos, con datos"
+      ],
+      [
+       "A medida atinge justamente…",
+       "los argumentos"
+      ],
+      [
+       "Por isso, reivindicamos que…",
+       "el pedido concreto"
+      ],
+      [
+       "Assinam esta carta…",
+       "las firmas"
+      ]
+     ]
+    },
+    {
+     "h": "Fórmulas de abertura, corpo e fecho",
+     "p": "El «nosotros» colectivo es la marca del género.",
+     "list": [
+      [
+       "Carta aberta a…",
+       "Carta abierta a…"
+      ],
+      [
+       "Nós, moradores de…, vimos a público…",
+       "Nosotros, vecinos de…, nos dirigimos públicamente…"
+      ],
+      [
+       "Tomamos conhecimento, com preocupação, de que…",
+       "Nos enteramos con preocupación de que…"
+      ],
+      [
+       "Não se trata apenas de…, mas de…",
+       "No se trata solo de…, sino de…"
+      ],
+      [
+       "É inaceitável que…",
+       "Es inaceptable que…"
+      ],
+      [
+       "Diante disso, reivindicamos…",
+       "Por eso, reclamamos…"
+      ],
+      [
+       "Propomos, como alternativa, …",
+       "Proponemos, como alternativa…"
+      ],
+      [
+       "Contamos com a sensibilidade de V. Sa.",
+       "Contamos con su sensibilidad"
+      ],
+      [
+       "Assinam esta carta…",
+       "Firman esta carta…"
+      ]
+     ]
+    },
+    {
+     "h": "Tom: firme sem ser agressivo",
+     "p": "Una carta abierta convence al público, no solo a la autoridad. Los datos pesan más que los adjetivos, y la propuesta vale más que la queja.",
+     "list": [
+      [
+       "reivindicamos, solicitamos, propomos",
+       "verbos de acción, en «nós»"
+      ],
+      [
+       "o senhor secretário, V. Sa.",
+       "el trato con la autoridad"
+      ],
+      [
+       "uma vergonha, um absurdo",
+       "suenan a desahogo: mejor un dato"
+      ],
+      [
+       "trezentas pessoas por semana",
+       "un número convence más que «muita gente»"
+      ]
+     ]
+    },
+    {
+     "h": "Modelo anotado",
+     "p": "Una carta abierta de 80 palabras.",
+     "model": [
+      [
+       "Carta aberta à Secretaria Municipal de Cultura",
+       "título con el destinatario"
+      ],
+      [
+       "Nós, frequentadores da Biblioteca Lima Barreto, vimos a público manifestar nossa preocupação com o possível fechamento do prédio.",
+       "quién firma y para qué"
+      ],
+      [
+       "A biblioteca recebe trezentas pessoas por semana, sobretudo estudantes e idosos.",
+       "un dato"
+      ],
+      [
+       "Por isso, reivindicamos que a reforma seja feita por etapas, sem fechar o espaço.",
+       "el pedido concreto"
+      ],
+      [
+       "Assinam esta carta 412 usuários da biblioteca.",
+       "las firmas"
+      ]
+     ]
+    }
+   ]
+  },
+  "post_blog": {
+   "name": "Post de blog",
+   "paragraphs": 4,
+   "title": true,
+   "hint": "Título que chame a atenção; abertura pessoal; desenvolvimento com as fontes e a sua posição; fecho que convida o leitor a comentar. Tom próximo, mas cuidado.",
+   "propositoHint": "neste post, deixe nos comentários, defendo",
+   "proposito": [
+    "\\b(neste post|hoje (eu )?(quero|vou)|deixe (seu|sua|nos)|coment[ea]|me cont[ae]|compartilh\\w*|defendo|acredito)"
+   ],
+   "ficha": [
+    {
+     "h": "Para que serve",
+     "p": "El post de blog cuenta, opina o explica algo para lectores que te eligieron: el tono es cercano, en primera persona, pero no es un chat. El Celpe-Bras lo pide seguido («escreva um texto para o blog…»). Tiene título, párrafos cortos y termina invitando a comentar.",
+     "list": [
+      [
+       "Você mantém um blog sobre…",
+       "quién escribe"
+      ],
+      [
+       "os leitores do blog",
+       "el destinatario: un público que te sigue"
+      ],
+      [
+       "contar, opinar, recomendar",
+       "los propósitos"
+      ]
+     ]
+    },
+    {
+     "h": "Estrutura",
+     "p": "Cuatro movimientos.",
+     "list": [
+      [
+       "Um título que desperte curiosidade",
+       "título, a veces con pregunta"
+      ],
+      [
+       "Semana passada, eu… / Você já reparou que…?",
+       "apertura personal o pregunta al lector"
+      ],
+      [
+       "Segundo o podcast… / O artigo mostra que…",
+       "desarrollo con las fuentes"
+      ],
+      [
+       "E você, o que acha? Deixe nos comentários!",
+       "cierre que invita a participar"
+      ]
+     ]
+    },
+    {
+     "h": "Fórmulas de abertura, corpo e fecho",
+     "p": "Las del blog brasileño.",
+     "list": [
+      [
+       "Você já parou para pensar que…?",
+       "¿Alguna vez pensaste que…?"
+      ],
+      [
+       "Hoje eu quero falar de…",
+       "Hoy quiero hablar de…"
+      ],
+      [
+       "Neste post, vou contar…",
+       "En este post te cuento…"
+      ],
+      [
+       "Confesso que…",
+       "Confieso que…"
+      ],
+      [
+       "O que me chamou a atenção foi…",
+       "Lo que me llamó la atención fue…"
+      ],
+      [
+       "Pois é: …",
+       "Y sí: …"
+      ],
+      [
+       "Resumindo: …",
+       "Resumiendo: …"
+      ],
+      [
+       "E você, o que acha?",
+       "¿Y vos qué pensás?"
+      ],
+      [
+       "Deixe sua opinião nos comentários!",
+       "¡Dejá tu opinión en los comentarios!"
+      ],
+      [
+       "Compartilhe com quem…",
+       "Compartilo con quien…"
+      ]
+     ]
+    },
+    {
+     "h": "O tom do blog",
+     "p": "Cercano no es descuidado: *você* y *a gente* sí; abreviaturas de chat (vc, tb) no. Las fuentes se citan igual que en un artículo.",
+     "list": [
+      [
+       "você, a gente, eu",
+       "el trato"
+      ],
+      [
+       "segundo o especialista, como contou o podcast",
+       "atribuir"
+      ],
+      [
+       "vc, tb, kkk",
+       "nunca en un post del examen"
+      ],
+      [
+       "Acho que… / Defendo que…",
+       "la opinión, en primera persona"
+      ]
+     ]
+    },
+    {
+     "h": "Modelo anotado",
+     "p": "Un post de 70 palabras.",
+     "model": [
+      [
+       "Meu celular quebrou. E agora?",
+       "título con pregunta"
+      ],
+      [
+       "Semana passada, a tela do meu celular rachou, e descobri que consertar custa quase o preço de um novo.",
+       "apertura personal"
+      ],
+      [
+       "Segundo o técnico que ouvi no podcast Fio Terra, muitos aparelhos já são feitos para não abrir.",
+       "la fuente"
+      ],
+      [
+       "Defendo o direito ao reparo. E você, o que acha? Deixe nos comentários!",
+       "posición y cierre"
+      ]
+     ]
+    }
+   ]
+  },
+  "texto_instrucional": {
+   "name": "Texto instrucional (guia, dicas)",
+   "paragraphs": 3,
+   "title": true,
+   "hint": "Título; para quem é e para que serve; as dicas em ordem, cada uma com um verbo no imperativo e uma explicação ou exemplo; fecho animador.",
+   "fonteMin": 5,
+   "propositoHint": "dica, evite, prefira, lembre-se",
+   "proposito": [
+    "\\b(dicas?|evite|prefira|procure|lembre-se|não se preocupe|preste atenção|observe|use|experimente)\\b"
+   ],
+   "ficha": [
+    {
+     "h": "Para que serve",
+     "p": "El texto instructivo (guía, lista de consejos, instrucciones) le dice al lector qué hacer y cómo. Aparece en el Celpe-Bras como «dicas para…», «guia para recém-chegados», «orientações». Es claro, ordenado y habla directo al lector.",
+     "list": [
+      [
+       "Guia para recém-chegados",
+       "el título dice para quién"
+      ],
+      [
+       "os novos funcionários, os estudantes estrangeiros",
+       "el destinatario"
+      ],
+      [
+       "orientar, aconselhar, alertar",
+       "los propósitos"
+      ]
+     ]
+    },
+    {
+     "h": "Estrutura",
+     "p": "Una introducción corta, las indicaciones en orden (numeradas o con un verbo al principio) y un cierre.",
+     "list": [
+      [
+       "Apelidos no trabalho: um guia rápido",
+       "título"
+      ],
+      [
+       "Se você acabou de chegar ao Brasil, …",
+       "para quién y para qué"
+      ],
+      [
+       "1. Não se assuste com… 2. Observe… 3. Evite…",
+       "las indicaciones, con imperativo"
+      ],
+      [
+       "Com o tempo, você vai…",
+       "cierre"
+      ]
+     ]
+    },
+    {
+     "h": "Fórmulas e verbos",
+     "p": "El imperativo de *você* (semana 12) es el verbo del género; también *é bom*, *vale a pena*, *convém* + infinitivo.",
+     "list": [
+      [
+       "Evite… / Prefira…",
+       "Evitá… / Preferí…"
+      ],
+      [
+       "Não se assuste com…",
+       "No te asustes con…"
+      ],
+      [
+       "Observe como…",
+       "Fijate cómo…"
+      ],
+      [
+       "Lembre-se de que…",
+       "Acordate de que…"
+      ],
+      [
+       "Vale a pena… / Convém…",
+       "Vale la pena… / Conviene…"
+      ],
+      [
+       "Antes de…, procure…",
+       "Antes de…, tratá de…"
+      ],
+      [
+       "Em caso de dúvida, …",
+       "Ante la duda, …"
+      ],
+      [
+       "Por exemplo: …",
+       "Por ejemplo: …"
+      ],
+      [
+       "Em primeiro lugar, … Depois, … Por fim, …",
+       "el orden"
+      ]
+     ]
+    },
+    {
+     "h": "Claro e útil",
+     "p": "Cada consejo, con una razón o un ejemplo sacado de la fuente. Una idea por indicación.",
+     "list": [
+      [
+       "Observe como os colegas se tratam: se todos usam apelidos, …",
+       "consejo + razón"
+      ],
+      [
+       "Segundo o professor Tiago, …",
+       "la fuente da autoridad"
+      ],
+      [
+       "faça, não faça, evite",
+       "imperativo de você, en todo el texto"
+      ]
+     ]
+    },
+    {
+     "h": "Modelo anotado",
+     "p": "Un guía de 60 palabras.",
+     "model": [
+      [
+       "Apelidos no trabalho: três dicas",
+       "título"
+      ],
+      [
+       "Se você acabou de chegar a uma empresa brasileira, prepare-se: vão mudar o seu nome.",
+       "para quién"
+      ],
+      [
+       "1. Não se assuste: o diminutivo quase sempre é carinho. 2. Observe como os colegas tratam a chefia. 3. Se algo incomodar, diga com leveza.",
+       "las indicaciones"
+      ],
+      [
+       "Com o tempo, você vai sentir falta do seu apelido.",
+       "cierre"
+      ]
+     ]
+    }
+   ]
+  },
+  "proposta": {
+   "name": "Proposta",
+   "paragraphs": 4,
+   "title": true,
+   "close": [
+    "\\b(atenciosamente|colocamo-nos|contamos com|ficamos à disposição|resultados esperados)"
+   ],
+   "closeHint": "Resultados esperados…, Atenciosamente",
+   "hint": "Título; a quem se dirige e quem propõe; o problema, com dados; as propostas, numeradas; os resultados esperados e o fecho formal.",
+   "registro": "formal",
+   "trat": "senhor",
+   "fonteMin": 8,
+   "propositoHint": "propomos, recomendamos, solicitamos",
+   "proposito": [
+    "\\b(propomos|propõe-se|a proposta|recomendamos|solicitamos|sugerimos)"
+   ],
+   "ficha": [
+    {
+     "h": "Para que serve",
+     "p": "La propuesta (proposta, projeto) se dirige a una institución —la prefeitura, una escuela, una empresa— para que haga algo. Expone un problema con datos, propone medidas concretas y dice qué se espera lograr. Es un género de la vida ciudadana y del trabajo, y aparece en las provas del Celpe-Bras.",
+     "list": [
+      [
+       "A associação de moradores propõe à Secretaria…",
+       "quién propone a quién"
+      ],
+      [
+       "propor, justificar, solicitar",
+       "los propósitos"
+      ],
+      [
+       "o senhor secretário, V. Sa.",
+       "el trato"
+      ]
+     ]
+    },
+    {
+     "h": "Estrutura",
+     "p": "Cinco partes, a menudo con subtítulos.",
+     "list": [
+      [
+       "Proposta: moradia no centro para quem já vive nele",
+       "título"
+      ],
+      [
+       "À Secretaria Municipal de Urbanismo",
+       "destinatario"
+      ],
+      [
+       "O problema: …",
+       "el problema, con datos de las fuentes"
+      ],
+      [
+       "Propomos: 1. … 2. … 3. …",
+       "las medidas, numeradas"
+      ],
+      [
+       "Resultados esperados: …",
+       "lo que se logra"
+      ],
+      [
+       "Atenciosamente, + quem assina",
+       "cierre formal"
+      ]
+     ]
+    },
+    {
+     "h": "Fórmulas",
+     "p": "Muy nominales, como el informe (semana 40).",
+     "list": [
+      [
+       "Vimos apresentar a V. Sa. a seguinte proposta…",
+       "Nos dirigimos a usted para presentar…"
+      ],
+      [
+       "O objetivo desta proposta é…",
+       "El objetivo de esta propuesta es…"
+      ],
+      [
+       "Constata-se que… / Segundo dados de…",
+       "Se constata que… / Según datos de…"
+      ],
+      [
+       "Propomos, em primeiro lugar, …",
+       "Proponemos, en primer lugar…"
+      ],
+      [
+       "A medida permitiria…",
+       "La medida permitiría…"
+      ],
+      [
+       "Recomendamos ainda…",
+       "Recomendamos además…"
+      ],
+      [
+       "Com isso, espera-se…",
+       "Con eso, se espera…"
+      ],
+      [
+       "Colocamo-nos à disposição para…",
+       "Quedamos a disposición para…"
+      ],
+      [
+       "Atenciosamente,",
+       "Atentamente,"
+      ]
+     ]
+    },
+    {
+     "h": "Precisão",
+     "p": "Una propuesta vale por lo concreta: quién hace qué, cuándo y con qué recursos. Sustantivos precisos y verbos en futuro do pretérito para los efectos (*permitiria*, *reduziria*).",
+     "list": [
+      [
+       "a destinação de 30% das unidades",
+       "precisa"
+      ],
+      [
+       "fazer alguma coisa pelo centro",
+       "vaga: evitala"
+      ],
+      [
+       "reduziria, permitiria, garantiria",
+       "efectos esperados"
+      ]
+     ]
+    },
+    {
+     "h": "Modelo anotado",
+     "p": "Una propuesta de 80 palabras.",
+     "model": [
+      [
+       "Proposta: horário noturno na biblioteca",
+       "título"
+      ],
+      [
+       "À Secretaria Municipal de Cultura. Vimos apresentar a seguinte proposta.",
+       "destinatario y propósito"
+      ],
+      [
+       "Constata-se que metade dos usuários frequenta a biblioteca depois das 18h.",
+       "el problema, con un dato"
+      ],
+      [
+       "Propomos: 1. abrir até as 21h três vezes por semana; 2. contratar estagiários por meio de convênios.",
+       "las medidas"
+      ],
+      [
+       "Com isso, espera-se manter o atendimento sem aumentar os gastos. Atenciosamente, Associação de Moradores",
+       "resultados y cierre"
+      ]
+     ]
+    }
+   ]
   }
  },
  "CONNETTIVI": [
@@ -228,7 +2016,7 @@
      ]
     ],
     "hunt": {
-     "label": "Tocá los verbos en futuro do subjuntivo",
+     "label": "Toque nos verbos no futuro do subjuntivo",
      "targets": [
       "perguntar",
       "sair",
@@ -389,17 +2177,19 @@
     "max": 180,
     "punti": [
      [
-      "Saludo y motivo del mail (la mudanza de Camila)",
+      "El motivo: la mudanza de Camila a la sierra",
       [
-       "oi",
-       "querida",
-       "olá"
+       "serra",
+       "cidadezinha",
+       "cidade pequena",
+       "interior"
       ]
      ],
      [
-      "Contar la experiencia de Renata",
+      "La experiencia de Renata",
       [
-       "renata"
+       "renata",
+       "designer"
       ]
      ],
      [
@@ -412,19 +2202,21 @@
       ]
      ],
      [
-      "El consejo de alquilar primero / hacer una prueba",
+      "Un desafío de la vida social (la fiesta de la iglesia, las reuniones)",
       [
-       "alug",
-       "teste",
-       "experiment"
+       "festa da igreja",
+       "reuniões",
+       "reunião",
+       "vida social",
+       "vizinh"
       ]
      ],
      [
-      "Cierre afectuoso",
+      "El consejo del psicólogo: alquilar antes de vender",
       [
-       "beijo",
-       "abraço",
-       "saudade"
+       "alug",
+       "tenório",
+       "psicólogo"
       ]
      ]
     ],
@@ -434,6 +2226,91 @@
      "a internet cai": "se corta internet",
      "bater na sua porta": "golpear tu puerta",
      "me chama que eu vou junto": "avisame, que voy con vos (chamar = llamar, avisar; que = porque)"
+    }
+   },
+   "breve": {
+    "title": "Jornal da Serra, as notícias da manhã",
+    "genre": "noticiário de rádio",
+    "es": "El boletín de la mañana de una radio de Petrópolis: una calle cerrada por obras, el boleto de ómnibus, un museo abierto de noche y el tiempo.",
+    "speaker": "Locutor",
+    "voice": 0,
+    "text": [
+     "Bom dia! São sete horas e você está ouvindo o Jornal da Serra, na Rádio Serra FM, de Petrópolis. As principais notícias da manhã.",
+     "Trânsito. A partir de segunda-feira, a Rua do Imperador vai ficar fechada para carros das 8 às 18 horas, por causa das obras na rede de esgoto. A prefeitura informa que as obras devem durar três semanas. Quem precisar chegar ao centro de carro deve usar a Rua Treze de Maio.",
+     "Ônibus. A passagem de ônibus entre Petrópolis e o Rio vai ficar mais cara: passa de 28 para 31 reais no dia primeiro. Os estudantes continuam pagando meia.",
+     "Cultura. O Museu Imperial abre à noite nesta sexta, com entrada gratuita até as 22 horas. Se chover, o concerto do jardim vai acontecer no salão principal.",
+     "Tempo. Hoje, céu nublado de manhã e sol à tarde, com mínima de 14 graus e máxima de 24. Quem for subir a serra à noite deve levar um casaco: vai esfriar bastante.",
+     "O próximo boletim é ao meio-dia. Uma ótima quarta-feira para você."
+    ],
+    "tabella": [
+     [
+      "A Rua do Imperador fica fechada para carros até as…",
+      "18",
+      [
+       "18 horas",
+       "18h",
+       "dezoito",
+       "18:00"
+      ]
+     ],
+     [
+      "Duração prevista das obras",
+      "três semanas",
+      [
+       "3 semanas",
+       "tres semanas"
+      ]
+     ],
+     [
+      "Novo preço da passagem Petrópolis–Rio (reais)",
+      "31",
+      [
+       "trinta e um",
+       "31 reais",
+       "R$ 31"
+      ]
+     ],
+     [
+      "Temperatura mínima de hoje (graus)",
+      "14",
+      [
+       "catorze",
+       "quatorze",
+       "14 graus"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "As obras da Rua do Imperador são na rede de esgoto.",
+      true
+     ],
+     [
+      "Os estudantes vão pagar a passagem inteira.",
+      false
+     ],
+     [
+      "Na sexta à noite, a entrada no Museu Imperial é gratuita.",
+      true
+     ],
+     [
+      "O concerto de sexta foi cancelado por causa da chuva.",
+      false
+     ],
+     [
+      "À noite vai fazer frio na serra.",
+      true
+     ],
+     [
+      "O próximo boletim é às dez horas.",
+      false
+     ]
+    ],
+    "gloss": {
+     "esgoto": "cloacas",
+     "passagem": "pasaje, boleto",
+     "meia": "media tarifa",
+     "boletim": "boletín (de noticias)"
     }
    }
   },
@@ -542,7 +2419,7 @@
      ]
     ],
     "hunt": {
-     "label": "Tocá los verbos en imperfeito do subjuntivo",
+     "label": "Toque nos verbos no imperfeito do subjuntivo",
      "targets": [
       "fosse",
       "entrasse",
@@ -721,19 +2598,22 @@
      [
       "Presentar la tesis del columnista",
       [
-       "colunista",
-       "coluna",
-       "autor"
+       "excesso de opções",
+       "menos opções",
+       "escolher menos",
+       "excesso de alternativas",
+       "quantidade",
+       "tese"
       ]
      ],
      [
-      "Tomar posición",
+      "Un ejemplo de la columna (el yogur, el abuelo, Caio)",
       [
-       "concordo",
-       "discordo",
-       "na minha opinião",
-       "acredito",
-       "creio"
+       "iogurte",
+       "prateleira",
+       "avô",
+       "caio",
+       "supermercado"
       ]
      ],
      [
@@ -745,16 +2625,6 @@
        "curso",
        "adolesc"
       ]
-     ],
-     [
-      "Conclusión",
-      [
-       "portanto",
-       "por isso",
-       "enfim",
-       "em suma",
-       "assim"
-      ]
      ]
     ],
     "model": "Escolher cansa, mas não escolher cansa mais\n\nNa coluna “E se a gente escolhesse menos?”, o autor defende que o excesso de opções nos deixa ansiosos e insatisfeitos, e que seríamos mais felizes se tivéssemos menos alternativas. Concordo apenas em parte.\n\nÉ verdade que ninguém precisa de vinte e três tipos de iogurte. No consumo, a abundância muitas vezes só gera perda de tempo. No entanto, quando se trata de decisões importantes, reduzir as opções seria um erro. Se os jovens de hoje tivessem as mesmas possibilidades que seus avós, muitos estariam presos a profissões que não escolheram.\n\nO problema dos vestibulandos, a meu ver, não é a quantidade de cursos, mas a falsa ideia de que a primeira escolha é para sempre. Nesse ponto, o colunista acerta em cheio: se as escolas mostrassem que é possível mudar de caminho, a pressão diminuiria muito.\n\nPortanto, não precisamos de menos liberdade, e sim de menos medo de errar. Mais opções, com mais tolerância aos recomeços.",
@@ -765,6 +2635,100 @@
      "No entanto": "sin embargo (conectores: se ven en la semana 34)",
      "e sim de menos medo de errar": "sino de menos miedo a equivocarse (não... e sim = no... sino)",
      "recomeços": "los nuevos comienzos, empezar de nuevo"
+    }
+   },
+   "breve": {
+    "title": "Pousada Mar de Dentro",
+    "genre": "propaganda de rádio",
+    "es": "Una publicidad de radio de una posada en Ilhabela, en la costa de São Paulo: habitaciones, desayuno, promoción de invierno y cómo llegar.",
+    "speaker": "Voz da propaganda",
+    "voice": 1,
+    "text": [
+     "E se você pudesse desligar o celular por três dias? E se, em vez do trânsito, você ouvisse só o barulho do mar? Então você precisa conhecer a Pousada Mar de Dentro, em Ilhabela, no litoral norte de São Paulo.",
+     "São só doze quartos, todos com varanda e vista para o canal. O café da manhã, com frutas da região e pão feito na casa, está incluído na diária, e o jantar é servido até as 22 horas.",
+     "Neste inverno, de maio a agosto, quem reservar quatro noites paga só três. E crianças de até 6 anos não pagam hospedagem. A pousada fica a 15 minutos da balsa, e nós buscamos você no porto sem custo.",
+     "Reservas pelo nosso site ou pelo WhatsApp. Pousada Mar de Dentro: se você tivesse um lugar para não fazer nada, seria aqui."
+    ],
+    "tabella": [
+     [
+      "Número de quartos da pousada",
+      "12",
+      [
+       "doze",
+       "12 quartos",
+       "doze quartos"
+      ]
+     ],
+     [
+      "Horário limite do jantar",
+      "22",
+      [
+       "22 horas",
+       "22h",
+       "dez da noite",
+       "22:00"
+      ]
+     ],
+     [
+      "Promoção de inverno: quem reserva quatro noites paga…",
+      "três",
+      [
+       "3",
+       "tres",
+       "três noites",
+       "3 noites"
+      ]
+     ],
+     [
+      "Idade até a qual as crianças não pagam",
+      "6",
+      [
+       "seis",
+       "6 anos",
+       "seis anos"
+      ]
+     ],
+     [
+      "Distância até a balsa (minutos)",
+      "15",
+      [
+       "quinze",
+       "15 minutos",
+       "quinze minutos"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "Todos os quartos têm varanda.",
+      true
+     ],
+     [
+      "O jantar está incluído na diária.",
+      false
+     ],
+     [
+      "A promoção vale de maio a agosto.",
+      true
+     ],
+     [
+      "A pousada fica no litoral do Rio de Janeiro.",
+      false
+     ],
+     [
+      "A pousada busca os hóspedes no porto sem cobrar.",
+      true
+     ],
+     [
+      "Para reservar, é preciso ligar para um telefone fixo.",
+      false
+     ]
+    ],
+    "gloss": {
+     "balsa": "balsa, ferry",
+     "diária": "tarifa por noche",
+     "hospedagem": "alojamiento",
+     "desligar": "apagar"
     }
    }
   },
@@ -874,7 +2838,7 @@
      ]
     ],
     "hunt": {
-     "label": "Tocá los infinitivos personales (infinitivo con persona)",
+     "label": "Toque nos infinitivos pessoais (o infinitivo com pessoa)",
      "targets": [
       "perderem",
       "conhecerem",
@@ -1044,23 +3008,15 @@
     "max": 191,
     "punti": [
      [
-      "Apertura formal y presentación",
-      [
-       "prezada",
-       "senhora",
-       "sra."
-      ]
-     ],
-     [
-      "Jornada que pasa de seis horas",
+      "La jornada que pasa de seis horas",
       [
        "seis horas",
-       "jornada",
-       "horário"
+       "6 horas",
+       "jornada"
       ]
      ],
      [
-      "Tareas sin relación con el curso",
+      "Las tareas sin relación con el curso",
       [
        "tarefas",
        "atividades",
@@ -1068,22 +3024,37 @@
       ]
      ],
      [
-      "Pedir el termo de compromisso",
+      "Lo que dice el guía sobre los derechos del pasante",
+      [
+       "lei",
+       "11.788",
+       "recesso",
+       "seguro",
+       "supervis",
+       "direito"
+      ]
+     ],
+     [
+      "El termo de compromisso que nunca recibió",
       [
        "termo",
        "compromisso"
       ]
      ],
      [
-      "Cierre formal",
+      "Una solución concreta",
       [
-       "atenciosamente",
-       "cordialmente",
-       "respeitosamente"
+       "propon",
+       "sugir",
+       "solução",
+       "soluções",
+       "reorganiz",
+       "gostaria que",
+       "seria possível"
       ]
      ]
     ],
-    "model": "São Paulo, 12 de março de 2026\n\nPrezada Sra. Beatriz Andrade,\n\nMeu nome é Lucas Ferreira e faço estágio no setor de criação desta agência há oito meses. Escrevo para expor algumas questões e, principalmente, para buscarmos juntos uma solução.\n\nEm primeiro lugar, minha jornada tem ultrapassado com frequência as seis horas diárias. Segundo o guia do Coletivo Estágio Justo, esse é o limite para estudantes do ensino superior, e hora extra não faz parte do estágio. Além disso, grande parte do meu dia é dedicada a tarefas como tirar cópias e atender o telefone, que pouco têm a ver com a minha formação. Por fim, até hoje não recebi uma cópia do termo de compromisso.\n\nGostaria de sugerir uma reunião com o meu supervisor para revermos as atividades previstas e para eu receber o documento. Tenho certeza de que, com esses ajustes, o estágio será ainda mais proveitoso para ambas as partes.\n\nAgradeço desde já a atenção.\n\nAtenciosamente,\nLucas Ferreira",
+    "model": "São Paulo, 12 de março de 2026\n\nPrezada Sra. Beatriz Andrade,\n\nMeu nome é Lucas Ferreira e faço estágio no setor de criação desta agência há oito meses. Escrevo para expor algumas questões e, principalmente, para buscarmos juntos uma solução.\n\nEm primeiro lugar, minha jornada tem ultrapassado com frequência as seis horas diárias. Segundo o guia do Coletivo Estágio Justo, esse é o limite para estudantes do ensino superior, e hora extra não faz parte do estágio, que é, pela lei, um ato educativo. Além disso, grande parte do meu dia é dedicada a tarefas como tirar cópias e atender o telefone, que pouco têm a ver com a minha formação. Por fim, até hoje não recebi uma cópia do termo de compromisso.\n\nGostaria de sugerir uma reunião com o meu supervisor e com o professor orientador para revermos as atividades previstas e para eu receber o documento. Tenho certeza de que, com esses ajustes, o estágio será ainda mais proveitoso para ambas as partes.\n\nAgradeço desde já a atenção.\n\nAtenciosamente,\nLucas Ferreira",
     "gloss": {
      "Prezada": "Estimada (fórmula de carta formal: se ve en la semana 43)",
      "faço estágio": "hago una pasantía",
@@ -1091,6 +3062,102 @@
      "termo de compromisso": "el convenio de pasantía que firman las partes",
      "Agradeço desde já a atenção": "desde ya, gracias por su atención (fórmula de cierre: semana 43)",
      "Atenciosamente": "saludo atentamente (se ve en la semana 43)"
+    }
+   },
+   "breve": {
+    "title": "Um recado da Editora Horizonte",
+    "genre": "recado na caixa postal",
+    "es": "Un mensaje en el contestador: la oficina de personal de una editorial cita a una candidata a una pasantía.",
+    "speaker": "Cláudia Mendes, do RH",
+    "voice": 1,
+    "text": [
+     "Oi, Juliana, boa tarde. Aqui é a Cláudia Mendes, do RH da Editora Horizonte. Estou ligando sobre a vaga de estágio em revisão de textos: você foi selecionada para a última etapa, parabéns!",
+     "A entrevista vai ser na quinta-feira, dia 14, às 10 horas, no nosso escritório da Rua da Assembleia, número 98, oitavo andar. Vai ser em grupo, com quatro candidatos. Antes de começarmos, cada um vai fazer um teste curto de revisão, de uns trinta minutos.",
+     "É importante vocês trazerem o comprovante de matrícula da faculdade e um documento com foto. A bolsa é de 1.800 reais, mais vale-transporte, para seis horas por dia.",
+     "Se não puder vir, me avisa até terça, tá? O meu ramal é 2173. Um abraço e até quinta!"
+    ],
+    "tabella": [
+     [
+      "Dia do mês da entrevista",
+      "14",
+      [
+       "dia 14",
+       "catorze",
+       "quatorze"
+      ]
+     ],
+     [
+      "Horário da entrevista",
+      "10",
+      [
+       "10 horas",
+       "10h",
+       "dez",
+       "dez horas",
+       "10:00"
+      ]
+     ],
+     [
+      "Andar do escritório",
+      "8",
+      [
+       "oitavo",
+       "8º",
+       "oitavo andar"
+      ]
+     ],
+     [
+      "Valor da bolsa (reais)",
+      "1.800",
+      [
+       "1800",
+       "mil e oitocentos",
+       "R$ 1.800",
+       "1.800 reais"
+      ]
+     ],
+     [
+      "Ramal da Cláudia",
+      "2173",
+      [
+       "2 1 7 3",
+       "21 73"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "A Juliana passou para a última etapa da seleção.",
+      true
+     ],
+     [
+      "A entrevista vai ser individual.",
+      false
+     ],
+     [
+      "Os candidatos vão fazer um teste de revisão.",
+      true
+     ],
+     [
+      "O estágio é de oito horas por dia.",
+      false
+     ],
+     [
+      "Além da bolsa, a editora paga o transporte.",
+      true
+     ],
+     [
+      "A Juliana precisa levar o currículo impresso.",
+      false
+     ]
+    ],
+    "gloss": {
+     "ramal": "interno (del teléfono)",
+     "bolsa": "pago de la pasantía",
+     "vale-transporte": "subsidio para el transporte",
+     "comprovante": "constancia",
+     "matrícula": "inscripción",
+     "estágio": "pasantía"
     }
    }
   },
@@ -1201,7 +3268,7 @@
      ]
     ],
     "hunt": {
-     "label": "Tocá las formas del auxiliar ter en los tiempos compuestos (tinha, tivesse, teria…)",
+     "label": "Toque nas formas do auxiliar ter nos tempos compostos (tinha, tivesse, teria…)",
      "targets": [
       "tinha",
       "tivesse",
@@ -1411,6 +3478,89 @@
      "desistiu": "se echó atrás, renunció",
      "lembrança": "recuerdo"
     }
+   },
+   "breve": {
+    "title": "Paranapiacaba, a vila da neblina",
+    "genre": "audioguia",
+    "es": "La audioguía de la vieja estación de Paranapiacaba, en la sierra de São Paulo: el ferrocarril inglés del café, el reloj de la torre y la niebla.",
+    "speaker": "Audioguia",
+    "voice": 0,
+    "text": [
+     "Bem-vindo à Vila de Paranapiacaba. Você está na antiga estação, a 800 metros de altitude, no alto da Serra do Mar, em São Paulo.",
+     "A ferrovia foi inaugurada em 1867 por uma companhia inglesa, para levar o café do interior até o porto de Santos. Se os engenheiros não tivessem encontrado uma solução para a serra, que é muito íngreme, o café teria continuado descendo em lombo de mula. A solução foram cabos de aço que puxavam os vagões.",
+     "A vila foi construída para os funcionários da ferrovia. O relógio da torre, que você vê à sua frente, foi trazido da Inglaterra e funciona até hoje.",
+     "Muitos visitantes perguntam pela neblina: ela aparece em quase todas as tardes do ano. Se você tivesse chegado de manhã cedo, talvez tivesse visto a vila inteira coberta de branco. Para continuar a visita, siga até a casa do engenheiro-chefe, a 200 metros daqui."
+    ],
+    "tabella": [
+     [
+      "Altitude da estação (metros)",
+      "800",
+      [
+       "oitocentos",
+       "800 metros"
+      ]
+     ],
+     [
+      "Ano da inauguração da ferrovia",
+      "1867",
+      []
+     ],
+     [
+      "Porto de destino do café",
+      "Santos",
+      [
+       "porto de Santos"
+      ]
+     ],
+     [
+      "País de onde veio o relógio da torre",
+      "Inglaterra",
+      [
+       "da Inglaterra"
+      ]
+     ],
+     [
+      "Distância até a casa do engenheiro-chefe (metros)",
+      "200",
+      [
+       "duzentos",
+       "200 metros"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "A ferrovia foi construída para transportar café.",
+      true
+     ],
+     [
+      "A companhia que construiu a ferrovia era francesa.",
+      false
+     ],
+     [
+      "Os vagões subiam a serra puxados por cabos.",
+      true
+     ],
+     [
+      "O relógio da torre está quebrado.",
+      false
+     ],
+     [
+      "A neblina é comum à tarde.",
+      true
+     ],
+     [
+      "A visita termina na estação.",
+      false
+     ]
+    ],
+    "gloss": {
+     "íngreme": "empinada",
+     "lombo de mula": "lomo de mula",
+     "aço": "acero",
+     "neblina": "niebla",
+     "puxavam": "tiraban de"
+    }
    }
   },
   {
@@ -1521,7 +3671,7 @@
      ]
     ],
     "hunt": {
-     "label": "Tocá los verbos que introducen el discurso indirecto",
+     "label": "Toque nos verbos que introduzem o discurso indireto",
      "targets": [
       "contou",
       "explicou",
@@ -1742,6 +3892,92 @@
      "assinatura digital": "suscripción digital (assinatura = suscripción, también firma)",
      "assinantes": "suscriptores"
     }
+   },
+   "breve": {
+    "title": "A última banca do centro",
+    "genre": "notícia de rádio",
+    "es": "Una noticia de radio de Itajubá: cierra el último puesto de diarios del centro; lo que dijo el dueño y lo que dijo la municipalidad.",
+    "speaker": "Repórter",
+    "voice": 0,
+    "text": [
+     "Rádio Vale Notícias, boa tarde. O principal assunto de hoje em Itajubá é o fechamento da última banca de jornal do centro.",
+     "A banca do seu Aristides, na praça da matriz, funcionou por 42 anos. Ontem, ele contou à nossa reportagem que vendia mais de 300 jornais por dia nos anos 90 e que hoje vende menos de 20. Disse que ia fechar no fim do mês porque o aluguel do ponto tinha subido de novo.",
+     "A prefeitura informou que estudava uma forma de manter a banca aberta como ponto de troca de livros. O secretário de Cultura, Renato Brandão, afirmou que a decisão seria tomada até sexta-feira e pediu que os moradores mandassem sugestões pelo site da prefeitura.",
+     "Seu Aristides agradeceu o apoio dos clientes e disse que, se a banca virar ponto de troca, quer continuar trabalhando lá como voluntário."
+    ],
+    "tabella": [
+     [
+      "Anos de funcionamento da banca",
+      "42",
+      [
+       "quarenta e dois",
+       "42 anos"
+      ]
+     ],
+     [
+      "Jornais vendidos por dia nos anos 90 (mais de…)",
+      "300",
+      [
+       "trezentos"
+      ]
+     ],
+     [
+      "Jornais vendidos por dia hoje (menos de…)",
+      "20",
+      [
+       "vinte"
+      ]
+     ],
+     [
+      "Prazo para a decisão da prefeitura",
+      "sexta-feira",
+      [
+       "sexta",
+       "sexta feira",
+       "até sexta"
+      ]
+     ],
+     [
+      "Nome do secretário de Cultura",
+      "Renato Brandão",
+      [
+       "Renato Brandao",
+       "Brandão"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "O dono da banca vai fechar por causa do aluguel.",
+      true
+     ],
+     [
+      "A prefeitura já decidiu comprar a banca.",
+      false
+     ],
+     [
+      "A prefeitura pediu sugestões aos moradores.",
+      true
+     ],
+     [
+      "Seu Aristides vai se mudar para outra cidade.",
+      false
+     ],
+     [
+      "Seu Aristides quer trabalhar como voluntário.",
+      true
+     ],
+     [
+      "A banca fica na estação de trem.",
+      false
+     ]
+    ],
+    "gloss": {
+     "banca": "puesto de diarios",
+     "ponto": "local (del negocio)",
+     "reportagem": "equipo de periodistas",
+     "prefeitura": "municipalidad"
+    }
    }
   },
   {
@@ -1852,7 +4088,7 @@
      ]
     ],
     "hunt": {
-     "label": "Tocá las formas con “-se” de pasiva sintética o sujeto indeterminado",
+     "label": "Toque nas formas com “-se” de passiva sintética ou de sujeito indeterminado",
      "targets": [
       "aluga-se",
       "vende-se",
@@ -2079,6 +4315,99 @@
      "inclusive": "incluso (conector: se ve en la semana 34)",
      "vereadores": "concejales"
     }
+   },
+   "breve": {
+    "title": "Domingo na Avenida",
+    "genre": "aviso público",
+    "es": "Un aviso de la municipalidad de Belo Horizonte: una avenida cerrada a los autos el domingo, bicicletas prestadas y voluntarios.",
+    "speaker": "Voz da prefeitura",
+    "voice": 1,
+    "text": [
+     "Atenção, moradores e visitantes. A Prefeitura de Belo Horizonte informa: neste domingo, a Avenida Afonso Pena fica fechada para carros das 7 às 14 horas, entre a Praça Sete e a Rua da Bahia, para o programa Avenida Viva.",
+     "Na avenida, permite-se o uso de bicicletas, patins e skates. Não se permite estacionar nenhum veículo a partir das 6 horas: os carros estacionados serão rebocados. Os ônibus que passam pela Afonso Pena vão usar a Avenida Augusto de Lima.",
+     "Durante o evento, emprestam-se bicicletas de graça na barraca da Praça Sete: basta apresentar um documento com foto. Procuram-se também voluntários para ajudar na organização; as inscrições se fazem no site da prefeitura até sexta.",
+     "Em caso de chuva forte, o programa será cancelado e a avenida será aberta ao trânsito. Obrigado e bom domingo!"
+    ],
+    "tabella": [
+     [
+      "Horário em que a avenida reabre para os carros",
+      "14",
+      [
+       "14 horas",
+       "14h",
+       "duas da tarde",
+       "14:00"
+      ]
+     ],
+     [
+      "A partir de que horas não se pode estacionar",
+      "6",
+      [
+       "6 horas",
+       "6h",
+       "seis",
+       "seis horas",
+       "6:00"
+      ]
+     ],
+     [
+      "Avenida que os ônibus vão usar",
+      "Augusto de Lima",
+      [
+       "Avenida Augusto de Lima",
+       "Augusto Lima"
+      ]
+     ],
+     [
+      "Onde se pegam as bicicletas emprestadas",
+      "Praça Sete",
+      [
+       "na Praça Sete",
+       "Praça 7",
+       "barraca da Praça Sete"
+      ]
+     ],
+     [
+      "O que é preciso apresentar para pegar a bicicleta",
+      "documento com foto",
+      [
+       "documento",
+       "um documento com foto"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "Os carros estacionados na avenida serão levados pelo guincho.",
+      true
+     ],
+     [
+      "As bicicletas emprestadas custam dez reais.",
+      false
+     ],
+     [
+      "A prefeitura procura voluntários.",
+      true
+     ],
+     [
+      "Se chover, o evento passa para o sábado.",
+      false
+     ],
+     [
+      "Patins e skates são permitidos na avenida.",
+      true
+     ],
+     [
+      "O programa acontece todos os dias da semana.",
+      false
+     ]
+    ],
+    "gloss": {
+     "rebocados": "llevados por la grúa",
+     "barraca": "carpa, puesto",
+     "patins": "patines",
+     "emprestam-se": "se prestan"
+    }
    }
   },
   {
@@ -2195,7 +4524,7 @@
      ]
     ],
     "hunt": {
-     "label": "Tocá los pronombres en ênclise o mesóclise (unidos al verbo con guion)",
+     "label": "Toque nos pronomes em ênclise ou mesóclise (ligados ao verbo por hífen)",
      "targets": [
       "recebeu-o",
       "sentando-se",
@@ -2406,6 +4735,84 @@
      "cartório": "escribanía",
      "oficina": "taller (falso amigo: se ve en la semana 45)"
     }
+   },
+   "breve": {
+    "title": "Memorial Carlos Drummond de Andrade",
+    "genre": "audioguia de exposição",
+    "es": "La audioguía de una sala del museo de Drummond en Itabira: la máquina de escribir, el poema de la piedra y lo que no se puede fotografiar.",
+    "speaker": "Audioguia",
+    "voice": 0,
+    "text": [
+     "Sala dois. Bem-vindo ao Memorial Carlos Drummond de Andrade, em Itabira, a cidade onde o poeta nasceu em 1902. Os objetos desta sala foram doados pela família e contam-nos a juventude do escritor.",
+     "Na vitrine à esquerda, vê-se a máquina de escrever que Drummond usou por mais de 30 anos. Ele mudou-se para o Rio de Janeiro em 1934 e trabalhou como funcionário público durante quase toda a vida: escrevia os poemas à noite, depois do expediente.",
+     "O poema mais famoso da sala é No meio do caminho, publicado em 1928. Na época, muitos críticos zombaram dele: diziam que repetir «tinha uma pedra no meio do caminho» não era poesia. Hoje, o verso é lido nas escolas de todo o país.",
+     "Pede-se aos visitantes que não fotografem as cartas originais, por causa da luz. A próxima sala, à direita, apresenta-lhe os livros de crônicas."
+    ],
+    "tabella": [
+     [
+      "Ano de nascimento do poeta",
+      "1902",
+      []
+     ],
+     [
+      "Anos em que usou a máquina de escrever (mais de…)",
+      "30",
+      [
+       "trinta",
+       "30 anos"
+      ]
+     ],
+     [
+      "Ano da mudança para o Rio",
+      "1934",
+      []
+     ],
+     [
+      "Ano de publicação de No meio do caminho",
+      "1928",
+      []
+     ],
+     [
+      "Lado onde fica a próxima sala",
+      "direita",
+      [
+       "à direita",
+       "a direita"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "Os objetos da sala foram doados pela família do poeta.",
+      true
+     ],
+     [
+      "Drummond vivia só da poesia.",
+      false
+     ],
+     [
+      "Drummond escrevia depois do trabalho.",
+      true
+     ],
+     [
+      "No meio do caminho foi elogiado por todos os críticos.",
+      false
+     ],
+     [
+      "Não se pode fotografar as cartas originais.",
+      true
+     ],
+     [
+      "A sala seguinte mostra as fotografias do poeta.",
+      false
+     ]
+    ],
+    "gloss": {
+     "doados": "donados",
+     "vitrine": "vitrina",
+     "expediente": "horario de trabajo",
+     "zombaram": "se burlaron"
+    }
    }
   },
   {
@@ -2514,7 +4921,7 @@
      ]
     ],
     "hunt": {
-     "label": "Tocá los conectores (adversativos, explicativos, conclusivos…)",
+     "label": "Toque nos conectores (adversativos, explicativos, conclusivos…)",
      "targets": [
       "entanto",
       "aliás",
@@ -2705,21 +5112,13 @@
       ]
      ],
      [
-      "Conectores adversativos",
+      "Qué podría hacer la ciudad",
       [
-       "no entanto",
-       "contudo",
-       "porém",
-       "todavia"
-      ]
-     ],
-     [
-      "Conclusión",
-      [
-       "portanto",
-       "em suma",
-       "por conseguinte",
-       "dessa forma"
+       "prefeitura",
+       "planej",
+       "município",
+       "poder público",
+       "prazos de adaptação"
       ]
      ]
     ],
@@ -2732,6 +5131,90 @@
      "Já no debate": "en cambio, en el debate (já marca contraste con lo anterior)",
      "prazos de adaptação": "plazos para adaptarse",
      "continuaremos pagando a conta": "vamos a seguir pagando las consecuencias"
+    }
+   },
+   "breve": {
+    "title": "Minuto Verde: o calor do concreto",
+    "genre": "boletim de rádio",
+    "es": "Un micro de radio sobre ambiente: un estudio sobre el calor en los barrios de Recife, los árboles, los techos verdes y lo que cuestan.",
+    "speaker": "Débora Lins",
+    "voice": 1,
+    "text": [
+     "Olá, aqui é a Débora Lins e este é o Minuto Verde, da Rádio Cidade. Hoje o assunto é o calor nas grandes cidades.",
+     "Um estudo da universidade federal mediu a temperatura em dez bairros do Recife. Nos bairros com muito concreto e poucas árvores, a temperatura ao meio-dia foi até 5 graus mais alta do que nos bairros arborizados. Além disso, nesses bairros o asfalto continua quente até de madrugada.",
+     "A solução parece simples: plantar árvores. No entanto, uma árvore leva de oito a dez anos para fazer sombra de verdade. Por isso, os pesquisadores sugerem também medidas mais rápidas, como telhados verdes e calçadas mais claras. Por outro lado, lembram que essas medidas custam caro e, portanto, precisam do apoio da prefeitura.",
+     "E você? Já contou quantas árvores há na sua rua? Mande a sua resposta pelo nosso WhatsApp. Até amanhã, no Minuto Verde."
+    ],
+    "tabella": [
+     [
+      "Número de bairros estudados",
+      "10",
+      [
+       "dez",
+       "dez bairros",
+       "10 bairros"
+      ]
+     ],
+     [
+      "Diferença máxima de temperatura (graus)",
+      "5",
+      [
+       "cinco",
+       "5 graus",
+       "cinco graus"
+      ]
+     ],
+     [
+      "Cidade do estudo",
+      "Recife",
+      [
+       "o Recife",
+       "do Recife"
+      ]
+     ],
+     [
+      "Anos para uma árvore fazer sombra",
+      "8 a 10",
+      [
+       "oito a dez",
+       "de oito a dez",
+       "8-10",
+       "8 a 10 anos"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "Nos bairros com poucas árvores faz mais calor.",
+      true
+     ],
+     [
+      "O asfalto esfria logo depois do pôr do sol.",
+      false
+     ],
+     [
+      "Plantar árvores não resolve o problema rapidamente.",
+      true
+     ],
+     [
+      "Os telhados verdes são uma solução barata.",
+      false
+     ],
+     [
+      "Os pesquisadores pedem o apoio da prefeitura.",
+      true
+     ],
+     [
+      "O estudo foi feito em São Paulo.",
+      false
+     ]
+    ],
+    "gloss": {
+     "concreto": "hormigón",
+     "arborizados": "con árboles",
+     "calçadas": "veredas",
+     "telhados": "techos",
+     "madrugada": "madrugada"
     }
    }
   },
@@ -2844,7 +5327,7 @@
      ]
     ],
     "hunt": {
-     "label": "Tocá los verbos cuya regencia exige atención (assistir a, obedecer a, visar a, namorar alguém, confiar em…)",
+     "label": "Toque nos verbos cuja regência exige atenção (assistir a, obedecer a, visar a, namorar alguém, confiar em…)",
      "targets": [
       "assiste",
       "obedecer",
@@ -3059,8 +5542,7 @@
       "Opinar sobre el futuro frente a la digitalización",
       [
        "digital",
-       "futuro",
-       "tecnologia"
+       "futuro"
       ]
      ]
     ],
@@ -3070,6 +5552,95 @@
      "idas ao cartório": "idas al registro, a la escribanía",
      "firma reconhecida": "firma certificada por escribano",
      "repartições": "oficinas públicas"
+    }
+   },
+   "breve": {
+    "title": "Central de atendimento do Detran",
+    "genre": "mensagem automática de central de atendimento",
+    "es": "El mensaje grabado de la central de la oficina de tránsito de Río: horarios, teclas para cada trámite y una novedad sobre la inspección de vehículos.",
+    "speaker": "Voz gravada",
+    "voice": 1,
+    "text": [
+     "Olá! Você ligou para a central de atendimento do Detran do Rio de Janeiro. Esta ligação pode ser gravada. Atendemos de segunda a sexta, das 8 às 17 horas.",
+     "Se você precisa de informações sobre a primeira habilitação, digite 1. Se quer agendar a renovação da carteira de motorista, digite 2. Para consultar multas e pagar o boleto, digite 3. Para falar com um atendente, digite 9.",
+     "Atenção: a partir do dia 10, a vistoria de veículos só será feita com hora marcada. Não se esqueça do documento do carro e do comprovante de pagamento da taxa, que custa 234 reais. Quem chegar mais de 15 minutos atrasado vai precisar marcar outro dia.",
+     "Você também pode resolver quase tudo pelo aplicativo, sem sair de casa. Por favor, aguarde: em breve você será atendido."
+    ],
+    "tabella": [
+     [
+      "Horário em que a central fecha",
+      "17",
+      [
+       "17 horas",
+       "17h",
+       "cinco da tarde",
+       "17:00"
+      ]
+     ],
+     [
+      "Tecla para renovar a carteira de motorista",
+      "2",
+      [
+       "dois"
+      ]
+     ],
+     [
+      "Tecla para falar com um atendente",
+      "9",
+      [
+       "nove"
+      ]
+     ],
+     [
+      "Valor da taxa da vistoria (reais)",
+      "234",
+      [
+       "duzentos e trinta e quatro",
+       "R$ 234",
+       "234 reais"
+      ]
+     ],
+     [
+      "Tolerância de atraso na vistoria (minutos)",
+      "15",
+      [
+       "quinze",
+       "15 minutos"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "A central não atende nos fins de semana.",
+      true
+     ],
+     [
+      "As multas só podem ser pagas no banco.",
+      false
+     ],
+     [
+      "A vistoria vai precisar de agendamento.",
+      true
+     ],
+     [
+      "A vistoria é gratuita para carros novos.",
+      false
+     ],
+     [
+      "Muitos serviços podem ser feitos pelo aplicativo.",
+      true
+     ],
+     [
+      "Quem se atrasar pode fazer a vistoria no mesmo dia.",
+      false
+     ]
+    ],
+    "gloss": {
+     "habilitação": "registro de conducir",
+     "vistoria": "inspección técnica (como la VTV)",
+     "boleto": "boleta de pago",
+     "digite": "marcá (en el teclado)",
+     "multas": "multas"
     }
    }
   },
@@ -3180,7 +5751,7 @@
      ]
     ],
     "hunt": {
-     "label": "Tocá todas las formas con acento grave (à, às, àquele, àquela, àquilo), también las mal puestas de los carteles",
+     "label": "Toque em todas as formas com acento grave (à, às, àquele, àquela, àquilo), inclusive as mal colocadas dos cartazes",
      "targets": [
       "à",
       "às",
@@ -3346,19 +5917,19 @@
     ]
    },
    "compito": {
-    "genre": "carta_formal",
-    "title": "Carta à Secretaria de Cultura",
+    "genre": "carta_aberta",
+    "title": "Carta aberta pela biblioteca à noite",
     "fonte": "ascolto",
-    "t": "Você frequenta a Biblioteca Pública Municipal à noite, depois do trabalho. Após ouvir o boletim de serviço da rádio, escreva uma carta formal à Secretaria Municipal de Cultura, dentro do prazo da consulta pública, manifestando-se sobre a redução do horário da biblioteca. Na carta, retome as informações do boletim (horário atual, novo horário e justificativa apresentada), explique como a mudança afeta você e outros usuários e proponha pelo menos uma alternativa. Não se esqueça de incluir local e data, destinatário, assunto, saudação e fecho adequados. Use registro formal e cuide do uso da crase nas indicações de horário. Seu texto deve ter entre 171 e 231 palavras.",
-    "es": "Carta formal de reclamo con propuesta: datos del audio (horarios y motivo), cómo te afecta y una alternativa. Ojo con la crase: “das 10h às 17h”, pero “de terça a sábado”.",
+    "t": "Você frequenta a Biblioteca Pública Municipal à noite, depois do trabalho, e faz parte de um grupo de usuários que se organizou depois do boletim de serviço da rádio. Em nome do grupo, escreva uma carta aberta à Secretaria Municipal de Cultura, que será publicada no jornal da cidade durante a consulta pública, manifestando-se sobre a redução do horário da biblioteca. Retome as informações do boletim (horário atual, novo horário e justificativa), mostre quem é afetado e apresente pelo menos uma alternativa. Cuide do uso da crase nas indicações de horário.",
+    "es": "Carta abierta (un colectivo, a una autoridad, para el público): datos del audio (horarios y motivo), a quiénes afecta y una alternativa. Ojo con la crase: «das 10h às 17h», pero «de terça a sábado».",
     "min": 171,
     "max": 231,
     "punti": [
      [
       "Retomar los horarios anunciados",
       [
-       "às 17h",
        "17h",
+       "21h",
        "horário"
       ]
      ],
@@ -3371,38 +5942,135 @@
       ]
      ],
      [
-      "Explicar cómo afecta a los usuarios",
+      "Mostrar quién es afectado",
       [
        "noite",
        "trabalh",
+       "concursos",
        "estud"
+      ]
+     ],
+     [
+      "La consulta pública",
+      [
+       "consulta pública",
+       "prazo"
       ]
      ],
      [
       "Proponer una alternativa",
       [
-       "propon",
-       "sugir",
-       "alternativ"
-      ]
-     ],
-     [
-      "Saludo y cierre formales",
-      [
-       "prezad",
-       "atenciosamente",
-       "respeitosamente"
+       "propomos",
+       "alternativa",
+       "parcerias"
       ]
      ]
     ],
-    "model": "Belo Horizonte, 12 de setembro de 2026.\n\nÀ Secretaria Municipal de Cultura\nAssunto: redução do horário da Biblioteca Pública Municipal\n\nPrezados senhores,\n\nDirijo-me a esta Secretaria para manifestar, dentro do prazo da consulta pública, minha preocupação com a mudança anunciada pela Biblioteca Pública Municipal. Segundo informações divulgadas pela rádio, a partir do próximo mês a biblioteca funcionará apenas de terça a sábado, das 10h às 17h, e não mais de segunda a sábado, das 8h às 21h.\n\nCompreendo que a decisão se deve à falta de funcionários e à necessidade de reduzir gastos com energia. No entanto, a medida atinge justamente quem mais depende do espaço. Trabalho das 8h às 18h e só consigo estudar à noite; como eu, dezenas de estudantes que se preparam para concursos perderão o único ambiente silencioso a que têm acesso.\n\nDiante disso, proponho uma alternativa: manter a abertura noturna ao menos três vezes por semana, fechando a biblioteca pela manhã, quando o movimento é menor. Outra possibilidade seria firmar parcerias com universidades para a contratação de estagiários.\n\nCerto de que a Secretaria levará em conta a opinião dos usuários, coloco-me à disposição para colaborar.\n\nAtenciosamente,\n\nRafael Nunes Teixeira",
+    "model": "Carta aberta à Secretaria Municipal de Cultura\n\nNós, usuários da Biblioteca Pública Municipal que estudam depois do trabalho, vimos a público manifestar, dentro do prazo da consulta pública, nossa preocupação com a mudança anunciada. Segundo o boletim divulgado pela rádio, a partir do próximo mês a biblioteca funcionará apenas de terça a sábado, das 10h às 17h, e não mais de segunda a sábado, das 8h às 21h.\n\nCompreendemos que a decisão se deve à falta de funcionários e à necessidade de reduzir gastos com energia. No entanto, a medida atinge justamente quem mais depende do espaço. A maioria de nós trabalha das 8h às 18h e só consegue estudar à noite; além disso, dezenas de estudantes que se preparam para concursos perderão o único ambiente silencioso a que têm acesso.\n\nDiante disso, propomos uma alternativa: manter a abertura noturna ao menos três vezes por semana, fechando a biblioteca pela manhã, quando o movimento é menor. Outra possibilidade seria firmar parcerias com universidades para a contratação de estagiários.\n\nContamos com a sensibilidade desta Secretaria e reivindicamos que a opinião dos usuários seja levada em conta antes da decisão final.\n\nAssinam esta carta 146 usuários da Biblioteca Pública Municipal.",
     "gloss": {
      "atinge justamente": "afecta justamente",
      "concursos": "concursos públicos: exámenes para entrar a un empleo del Estado",
      "firmar parcerias": "establecer convenios (firmar = establecer, cerrar)",
-     "estagiários": "pasantes",
-     "Certo de que": "seguro de que",
-     "coloco-me à disposição": "quedo a disposición (fórmula de cierre: se ve en la semana 43)"
+     "estagiários": "pasantes"
+    }
+   },
+   "breve": {
+    "title": "Agenda do fim de semana em Salvador",
+    "genre": "agenda cultural de rádio",
+    "es": "La agenda del fin de semana de una radio de Salvador: samba de roda, feria de artesanías, una carrera y dónde ver la puesta del sol.",
+    "speaker": "Locutora",
+    "voice": 1,
+    "text": [
+     "Rádio Salvador FM, agenda do fim de semana. Anote aí!",
+     "Na sexta, às 20 horas, tem show de samba de roda no Pelourinho, no Largo Tereza Batista. A entrada custa 40 reais, e quem chegar antes das 19 horas paga meia.",
+     "No sábado, a feira de artesanato da Praça da Sé funciona das 9 às 18 horas. À tarde, às 16 horas, tem oficina gratuita de capoeira para crianças, à sombra das árvores da praça.",
+     "No domingo, o Farol da Barra recebe a Corrida da Baía, de 10 quilômetros, com largada às 6 horas da manhã. As inscrições vão até sexta, à meia-noite, pelo site da corrida. Atenção: por causa da corrida, a Avenida Oceânica fica fechada aos carros até as 11 horas.",
+     "E à noite, para fechar o domingo, o pôr do sol no Farol da Barra, que é de graça. Bom fim de semana!"
+    ],
+    "tabella": [
+     [
+      "Preço da entrada do show de sexta (reais)",
+      "40",
+      [
+       "quarenta",
+       "40 reais",
+       "R$ 40"
+      ]
+     ],
+     [
+      "Horário em que a feira de sábado fecha",
+      "18",
+      [
+       "18 horas",
+       "18h",
+       "seis da tarde",
+       "18:00"
+      ]
+     ],
+     [
+      "Distância da corrida (quilômetros)",
+      "10",
+      [
+       "dez",
+       "10 km",
+       "10 quilômetros",
+       "dez quilômetros"
+      ]
+     ],
+     [
+      "Horário da largada",
+      "6",
+      [
+       "6 horas",
+       "6h",
+       "seis",
+       "seis da manhã",
+       "6:00"
+      ]
+     ],
+     [
+      "Até que horas a Avenida Oceânica fica fechada",
+      "11",
+      [
+       "11 horas",
+       "11h",
+       "onze",
+       "onze horas",
+       "11:00"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "Quem chega cedo ao show paga meia-entrada.",
+      true
+     ],
+     [
+      "A oficina de capoeira é paga.",
+      false
+     ],
+     [
+      "As inscrições para a corrida são pela internet.",
+      true
+     ],
+     [
+      "A corrida começa à tarde.",
+      false
+     ],
+     [
+      "Ver o pôr do sol no Farol é de graça.",
+      true
+     ],
+     [
+      "A feira de artesanato funciona também no domingo.",
+      false
+     ]
+    ],
+    "gloss": {
+     "anote": "anotá",
+     "meia": "media entrada",
+     "oficina": "taller",
+     "largada": "largada, salida"
     }
    }
   },
@@ -3513,7 +6181,7 @@
      ]
     ],
     "hunt": {
-     "label": "Tocá las formas de los verbos irregulares y sus derivados (propor, prever, manter, deter, obter, intervir) y de los verbos en -ear/-iar",
+     "label": "Toque nas formas dos verbos irregulares e seus derivados (propor, prever, manter, deter, obter, intervir) e dos verbos em -ear/-iar",
      "targets": [
       "propôs",
       "preveem",
@@ -3701,20 +6369,14 @@
     ]
    },
    "compito": {
-    "genre": "artigo",
+    "genre": "post_blog",
     "title": "Tecnologia a serviço de quem?",
     "fonte": "entrambi",
-    "t": "Você colabora com uma revista de divulgação científica para jovens, que prepara uma edição especial com o tema “Tecnologia a serviço de quem?”. Após ler o artigo sobre os sensores contra deslizamentos no Recife e ouvir o episódio do podcast Fio Terra sobre o conserto de celulares, escreva um artigo de opinião para a revista. No seu texto, compare as duas experiências, usando informações do artigo e do podcast, e defenda uma posição sobre o papel da tecnologia e do poder público. Não se esqueça de dar um título ao artigo. Use registro formal, mas acessível ao público jovem. Seu texto deve ter entre 177 e 237 palavras.",
-    "es": "Artículo con título que compare los dos casos de la semana (sensores en Recife y derecho a reparar) y tome posición. Aprovechá verbos como propor, manter, obter, intervir, prever.",
+    "t": "Você mantém um blog sobre ciência e cotidiano, lido principalmente por jovens. Depois de ler o artigo sobre os sensores contra deslizamentos no Recife e de ouvir o episódio do podcast Fio Terra sobre o conserto de celulares, escreva um post para o blog comparando as duas experiências, usando informações do artigo e do podcast, e posicionando-se sobre o papel da tecnologia e do poder público. Convide os seus leitores a participar da discussão.",
+    "es": "Post de blog con título: tono cercano pero cuidado, las dos fuentes de la semana (sensores en Recife y derecho a reparar), tu posición y un cierre que invite a comentar.",
     "min": 177,
     "max": 237,
     "punti": [
-     [
-      "Poner un título",
-      [
-       "tecnologia"
-      ]
-     ],
      [
       "Usar el caso de los sensores de Recife",
       [
@@ -3734,24 +6396,128 @@
       ]
      ],
      [
-      "Tomar una posición y concluir",
+      "Comparar las dos experiencias",
       [
-       "defendo",
-       "acredito",
-       "portanto",
-       "por isso"
+       "duas experiências",
+       "dois casos",
+       "caso oposto",
+       "comparando"
+      ]
+     ],
+     [
+      "El papel del poder público",
+      [
+       "poder público",
+       "governo",
+       "direito ao reparo",
+       "financiando"
+      ]
+     ],
+     [
+      "Invitar a los lectores a participar",
+      [
+       "comentários",
+       "o que acha",
+       "deixe"
       ]
      ]
     ],
-    "model": "Tecnologia a serviço de quem?\n\nCostumamos associar inovação a aparelhos cada vez mais caros e sofisticados. Mas duas experiências recentes mostram que a pergunta decisiva não é o que a tecnologia consegue fazer, e sim a quem ela serve.\n\nNo Recife, uma equipe de geólogos instalou sensores de baixo custo nas encostas dos morros. Cruzando dados de umidade do solo com a previsão do tempo, os pesquisadores obtiveram alertas com cerca de quarenta minutos de antecedência. O detalhe mais importante, porém, não é técnico: o projeto só funcionou porque manteve diálogo constante com os moradores, que indicaram onde a terra costumava ceder.\n\nO caso oposto aparece no mercado de celulares. Como relatou um técnico de Campinas no podcast Fio Terra, muitos fabricantes projetam aparelhos que não podem ser abertos e bloqueiam peças originais trocadas fora da rede autorizada. Nesse modelo, a inovação serve para prender o consumidor, e não para resolver seus problemas.\n\nComparar as duas situações ajuda a entender que a tecnologia não é neutra. Quando nasce da escuta da comunidade, protege vidas; quando é desenhada para impedir o conserto, gera lixo e dependência. Por isso, defendo que o poder público intervenha nos dois casos: financiando projetos como o do Recife e garantindo o direito ao reparo. Só assim a tecnologia estará, de fato, a serviço de todos.",
+    "model": "Tecnologia a serviço de quem?\n\nVocê já parou para pensar em quem ganha com cada aparelho novo que sai por aí? Esta semana, duas histórias me fizeram voltar a essa pergunta, e hoje eu quero dividir com vocês o que aprendi.\n\nA primeira vem do Recife. Uma equipe de geólogos instalou sensores de baixo custo nas encostas dos morros. Cruzando dados de umidade do solo com a previsão do tempo, os pesquisadores obtiveram alertas com cerca de quarenta minutos de antecedência. O detalhe mais bonito, porém, não é técnico: o projeto só funcionou porque manteve diálogo com os moradores, que indicaram onde a terra costumava ceder.\n\nA segunda é o caso oposto. Como contou um técnico de Campinas no podcast Fio Terra, muitos fabricantes projetam celulares que não podem ser abertos e bloqueiam peças trocadas fora da rede autorizada. Nesse modelo, a inovação serve para prender o consumidor, e não para resolver os seus problemas.\n\nComparando as duas experiências, fica claro que a tecnologia não é neutra. Por isso, defendo que o poder público intervenha nos dois casos: financiando projetos como o do Recife e garantindo, por lei, o direito ao reparo.\n\nE você, o que acha? Já tentou consertar um celular e desistiu? Deixe sua opinião nos comentários!",
     "gloss": {
      "encostas dos morros": "las laderas de los cerros",
      "Cruzando dados": "cruzando datos (oración reducida de gerundio: se ve en la semana 42)",
      "costumava ceder": "solía hundirse, desmoronarse",
-     "peças originais": "repuestos originales",
-     "rede autorizada": "la red de services oficiales",
-     "conserto": "arreglo, reparación",
-     "lixo": "basura"
+     "rede autorizada": "la red de services oficiales"
+    }
+   },
+   "breve": {
+    "title": "Defesa Civil: quando a sirene tocar",
+    "genre": "instruções",
+    "es": "Las instrucciones de Defensa Civil de Petrópolis para los vecinos de las zonas de riesgo: las sirenas, qué llevar, adónde ir y cómo recibir alertas.",
+    "speaker": "Voz da Defesa Civil",
+    "voice": 0,
+    "text": [
+     "Olá, aqui é a Defesa Civil de Petrópolis, com as instruções para os moradores das áreas de risco. Ouça com atenção.",
+     "A Defesa Civil mantém 22 sirenes na cidade. Elas tocam quando os pluviômetros registram mais de 40 milímetros de chuva em uma hora. Os técnicos preveem que o próximo verão vai ser muito chuvoso.",
+     "Quando a sirene tocar, mantenha a calma e saia de casa imediatamente. Não pare para arrumar malas: leve só documentos, remédios e o celular. Siga as placas verdes até o ponto de apoio mais próximo, que normalmente fica numa escola ou numa igreja.",
+     "Se você tiver vizinhos idosos ou pessoas com deficiência, avise-os e, se puder, ajude-os. Não volte para casa antes que a Defesa Civil libere a área. Para receber alertas por mensagem de texto, envie o seu CEP para o número 40199. O serviço é gratuito."
+    ],
+    "tabella": [
+     [
+      "Número de sirenes na cidade",
+      "22",
+      [
+       "vinte e duas",
+       "22 sirenes"
+      ]
+     ],
+     [
+      "Chuva que faz a sirene tocar (milímetros em uma hora, mais de…)",
+      "40",
+      [
+       "quarenta",
+       "40 milímetros",
+       "40 mm"
+      ]
+     ],
+     [
+      "Cor das placas que levam ao ponto de apoio",
+      "verde",
+      [
+       "verdes",
+       "placas verdes"
+      ]
+     ],
+     [
+      "Número para receber os alertas",
+      "40199",
+      [
+       "40 199",
+       "40.199"
+      ]
+     ],
+     [
+      "O que se envia para receber os alertas",
+      "CEP",
+      [
+       "o CEP",
+       "o seu CEP",
+       "código postal"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "A sirene toca por causa da quantidade de chuva.",
+      true
+     ],
+     [
+      "É preciso levar malas com roupas.",
+      false
+     ],
+     [
+      "Os pontos de apoio ficam, em geral, em escolas ou igrejas.",
+      true
+     ],
+     [
+      "O serviço de alertas custa dois reais por mês.",
+      false
+     ],
+     [
+      "Os moradores devem ajudar os vizinhos idosos, se puderem.",
+      true
+     ],
+     [
+      "Depois de meia hora, os moradores podem voltar para casa.",
+      false
+     ]
+    ],
+    "gloss": {
+     "pluviômetros": "pluviómetros",
+     "ponto de apoio": "refugio, punto de encuentro",
+     "idosos": "ancianos",
+     "libere": "habilite",
+     "cep": "código postal"
     }
    }
   },
@@ -3859,7 +6625,7 @@
      ]
     ],
     "hunt": {
-     "label": "Tocá las formas típicas del portugués hablado de Brasil (né, tá, tô, cadê, a gente, pra, pro, tamo)",
+     "label": "Toque nas formas típicas do português falado no Brasil (né, tá, tô, cadê, a gente, pra, pro, tamo)",
      "targets": [
       "né",
       "tá",
@@ -3911,11 +6677,11 @@
      ],
      [
       "B",
-      "Dá, tá nas configurações, lá em privacidade. Depois eu te mostro. Mas vem cá, o que cê tá achando?"
+      "Dá, tá nas configurações, lá em… em privacidade. Depois eu te mostro. Mas vem cá, o que cê tá achando?"
      ],
      [
       "A",
-      "Olha, no começo eu achei meio parado, sabe? Aí lá pelo terceiro episódio a coisa engrenou. E o que eu mais gosto é o jeito que eles falam. Parece a minha família, cara. Minha tia fala igualzinho à dona Cida."
+      "Olha, no começo eu achei meio… meio parado, sabe? Aí lá pelo terceiro episódio a coisa engrenou. E o que eu mais gosto é o jeito que eles falam. Parece a minha família, cara. Minha tia fala igualzinho à dona Cida."
      ],
      [
       "B",
@@ -3923,7 +6689,7 @@
      ],
      [
       "A",
-      "Ah, por isso! Eu sempre vejo com legenda porque o som do meu notebook é horrível, e eu reparei que tava escrito pra, tá, essas coisas. Achei estranho no começo."
+      "Ah, por isso! Eu sempre vejo com legenda porque o som do meu notebook é, é horrível, e eu reparei que tava escrito pra, tá, essas coisas. Achei estranho no começo."
      ],
      [
       "B",
@@ -3931,7 +6697,7 @@
      ],
      [
       "A",
-      "É, mas minha mãe, que é professora, reclamou. Falou que a gente já escreve tudo errado no celular e que agora nem a série ajuda. Ela acha que isso confunde os alunos dela."
+      "É, mas minha mãe, que é pro… que é professora, reclamou. Falou que a gente já escreve tudo errado no celular e que agora nem a série ajuda. Ela acha que isso confunde os alunos dela."
      ],
      [
       "B",
@@ -3939,7 +6705,7 @@
      ],
      [
       "A",
-      "Verdade. Bom, mudando de assunto, cê vai na festa da Lari sábado?"
+      "Verdade. Bom, hum, mudando de assunto, cê vai na festa da Lari sábado?"
      ],
      [
       "B",
@@ -4101,7 +6867,7 @@
       ]
      ]
     ],
-    "model": "Oi, Tom!\n\nQue bom receber notícias suas! Adorei saber que você tá maratonando séries brasileiras pra treinar o português. E pode ficar tranquilo: você não tá ficando louco. A confusão tem explicação.\n\nO que você aprende na aula, tipo “nós estamos” e “onde está”, é o português escrito, mais formal. Já o que você ouve nas séries é o português falado do Brasil, que tem suas próprias formas. “A gente” no lugar de “nós”, “tá” no lugar de “está”, “cadê” no lugar de “onde está” e o famoso “né” no fim das frases não são erros: todo mundo usa, até professor universitário.\n\nLi uma reportagem esses dias que explicava justamente isso. Antes, as legendas corrigiam a fala dos atores; agora, em várias produções nacionais, elas respeitam o jeito como a gente fala. Alguns professores reclamam, mas a própria reportagem conclui que tudo depende do contexto: ninguém escreve um contrato com “cadê”.\n\nTambém ouvi uma conversa de dois amigos comentando uma série, e um deles resumiu bem: uma coisa é mensagem, outra é redação da escola.\n\nEntão minha dica é: aprende as duas coisas. Usa “a gente” e “pra” quando conversar com os amigos e guarda o “nós” e o “para” pros e-mails de trabalho e pras provas.\n\nUm abraço e boa maratona!\n\nLucas",
+    "model": "Oi, Tom!\n\nQue bom receber notícias suas! Adorei saber que você tá maratonando séries brasileiras pra treinar o português. Fica tranquilo: você não tá ficando louco. A confusão tem explicação.\n\nO que você aprende na aula, tipo “nós estamos” e “onde está”, é o português escrito, mais formal. Já o que você ouve nas séries é o português falado do Brasil, que tem suas próprias formas. “A gente” no lugar de “nós”, “tá” no lugar de “está”, “cadê” no lugar de “onde está” e o famoso “né” no fim das frases não são erros: todo mundo usa.\n\nLi uma reportagem esses dias que explicava justamente isso. Antes, as legendas corrigiam a fala dos atores; agora, em várias produções nacionais, elas respeitam o jeito como a gente fala. A Luana Freitas, que coordena as legendas de uma produtora de streaming, contou que o pedido veio do público, principalmente de pessoas surdas. E sabia que “cadê” vem de “que é de”? Alguns professores reclamam, mas a própria reportagem conclui que tudo depende do contexto: ninguém escreve um contrato com “cadê”.\n\nTambém ouvi uma conversa de dois amigos comentando uma série, e um deles resumiu bem: uma coisa é mensagem, outra é redação da escola.\n\nEntão minha dica é: aprende as duas coisas. Usa “a gente” e “pra” quando conversar com os amigos e guarda o “nós” e o “para” pros e-mails de trabalho e pras provas.\n\nUm abraço e boa maratona!\n\nLucas",
     "gloss": {
      "maratonando séries": "viendo series de un tirón",
      "pode ficar tranquilo": "quedate tranquilo",
@@ -4109,6 +6875,98 @@
      "o jeito como a gente fala": "la manera en que hablamos",
      "redação da escola": "la composición del colegio",
      "aprende as duas coisas": "aprendé las dos cosas (imperativo del habla: la forma de tú, que es la del presente)"
+    }
+   },
+   "breve": {
+    "title": "Áudio do Rafa: a estreia da série",
+    "genre": "mensagem de voz",
+    "es": "Un audio de WhatsApp, bien coloquial: un amigo invita a ver el estreno de una serie en su casa; la dirección nueva, la pizza y qué llevar.",
+    "speaker": "Rafa",
+    "voice": 0,
+    "text": [
+     "Fala, Bia! Tudo certo? Então, é o seguinte: a estreia da nova temporada é sexta, né, às nove da noite. A gente vai ver lá em casa, tá? Cê topa?",
+     "O endereço cê sabe, né, Rua Bambina, 45, mas agora é no apartamento 302, porque eu mudei de andar. O porteiro já tá avisado, é só falar que vai pro 302.",
+     "Ó, pra comida a gente pensou em pizza. Deu 30 reais pra cada um, pode mandar no Pix, beleza? Se cê quiser trazer alguma coisa, traz um refri, que cerveja já tem. Ah, e cadê aquele meu carregador que eu te emprestei? Traz também, por favor, que eu tô sem.",
+     "E ó, sem spoiler, hein! Quem tiver visto o trailer vazado fica calado. Beijo, até sexta!"
+    ],
+    "tabella": [
+     [
+      "Hora da estreia",
+      "9",
+      [
+       "nove",
+       "21",
+       "21h",
+       "21 horas",
+       "nove da noite",
+       "9 da noite"
+      ]
+     ],
+     [
+      "Número do apartamento",
+      "302",
+      [
+       "trezentos e dois",
+       "apartamento 302"
+      ]
+     ],
+     [
+      "Número do prédio na Rua Bambina",
+      "45",
+      [
+       "quarenta e cinco"
+      ]
+     ],
+     [
+      "Quanto cada um paga pela pizza (reais)",
+      "30",
+      [
+       "trinta",
+       "30 reais",
+       "R$ 30"
+      ]
+     ],
+     [
+      "Bebida que a Bia pode levar",
+      "refri",
+      [
+       "refrigerante",
+       "um refri"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "O Rafa mudou de apartamento no mesmo prédio.",
+      true
+     ],
+     [
+      "A comida vai ser churrasco.",
+      false
+     ],
+     [
+      "O dinheiro da pizza pode ser mandado por Pix.",
+      true
+     ],
+     [
+      "A Bia precisa levar cerveja.",
+      false
+     ],
+     [
+      "O Rafa quer de volta o carregador.",
+      true
+     ],
+     [
+      "O Rafa vai mostrar o trailer para todo mundo.",
+      false
+     ]
+    ],
+    "gloss": {
+     "topa": "¿te prendés?",
+     "refri": "gaseosa",
+     "carregador": "cargador",
+     "vazado": "filtrado",
+     "estreia": "estreno"
     }
    }
   },
@@ -4220,7 +7078,7 @@
      ]
     ],
     "hunt": {
-     "label": "Tocá los sustantivos que nominalizan una acción (evasão, análise, identificação…)",
+     "label": "Toque nos substantivos que nominalizam uma ação (evasão, análise, identificação…)",
      "targets": [
       "evasão",
       "análise",
@@ -4461,6 +7319,91 @@
      "veteranos": "estudiantes de años avanzados",
      "viés": "sesgo"
     }
+   },
+   "breve": {
+    "title": "Comunicado da Pró-Reitoria",
+    "genre": "comunicado institucional",
+    "es": "Un comunicado formal de una universidad federal: la convocatoria para una ayuda de vivienda para estudiantes, con fechas, requisitos y condiciones.",
+    "speaker": "Voz da universidade",
+    "voice": 1,
+    "text": [
+     "Comunicado da Pró-Reitoria de Assuntos Estudantis da Universidade Federal Fluminense.",
+     "Informamos a abertura do processo de seleção para a concessão do auxílio-moradia do segundo semestre. O benefício, no valor mensal de 650 reais, destina-se a estudantes de graduação com renda familiar de até um salário mínimo e meio por pessoa.",
+     "O período de inscrição vai de 3 a 21 de julho, exclusivamente pelo sistema acadêmico. Após o encerramento das inscrições, será realizada a análise da documentação, seguida de entrevista com assistentes sociais. A divulgação do resultado está prevista para 15 de agosto.",
+     "Ressalta-se que a apresentação de documentos incompletos implica a eliminação do candidato. A renovação do benefício dependerá da frequência mínima de 75% nas disciplinas. Dúvidas devem ser encaminhadas ao e-mail da Pró-Reitoria."
+    ],
+    "tabella": [
+     [
+      "Valor mensal do auxílio (reais)",
+      "650",
+      [
+       "seiscentos e cinquenta",
+       "R$ 650",
+       "650 reais"
+      ]
+     ],
+     [
+      "Último dia de inscrição (julho)",
+      "21",
+      [
+       "21 de julho",
+       "vinte e um",
+       "dia 21"
+      ]
+     ],
+     [
+      "Data da divulgação do resultado",
+      "15 de agosto",
+      [
+       "15/8",
+       "15/08",
+       "dia 15 de agosto"
+      ]
+     ],
+     [
+      "Frequência mínima para renovar o benefício",
+      "75%",
+      [
+       "75",
+       "75 %",
+       "setenta e cinco por cento",
+       "75 por cento"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "O auxílio é para estudantes de graduação.",
+      true
+     ],
+     [
+      "As inscrições podem ser feitas pessoalmente.",
+      false
+     ],
+     [
+      "Haverá entrevista com assistentes sociais.",
+      true
+     ],
+     [
+      "O resultado sai no fim de julho.",
+      false
+     ],
+     [
+      "Documentos incompletos eliminam o candidato.",
+      true
+     ],
+     [
+      "O auxílio é pago uma vez por semestre.",
+      false
+     ]
+    ],
+    "gloss": {
+     "auxílio-moradia": "ayuda para la vivienda",
+     "renda": "ingreso",
+     "encerramento": "cierre",
+     "ressalta-se": "se destaca",
+     "frequência": "asistencia (a clase)"
+    }
    }
   },
   {
@@ -4570,7 +7513,7 @@
      ]
     ],
     "hunt": {
-     "label": "Tocá los verbos en pretérito mais-que-perfeito simples (partira, dissera…)",
+     "label": "Toque nos verbos no pretérito mais-que-perfeito simples (partira, dissera…)",
      "targets": [
       "partira",
       "esperara",
@@ -4775,6 +7718,7 @@
       [
        "mais-que-perfeito",
        "tempo verbal",
+       "tempos verbais",
        "verbo"
       ]
      ],
@@ -4783,7 +7727,8 @@
       [
        "recomendo",
        "vale a pena",
-       "leitura"
+       "indico",
+       "não recomendo"
       ]
      ]
     ],
@@ -4793,6 +7738,96 @@
      "oficina de relógios": "taller de relojería (oficina = taller)",
      "camadas de memória": "capas de memoria",
      "desfecho": "desenlace, final"
+    }
+   },
+   "breve": {
+    "title": "História em Cinco Minutos: o voo de Bagatelle",
+    "genre": "podcast de história",
+    "es": "Un podcast breve de historia: el vuelo de Santos Dumont en París en 1906 y lo que ya había hecho antes.",
+    "speaker": "Heitor Salles",
+    "voice": 0,
+    "text": [
+     "Olá, eu sou o Heitor Salles e este é o História em Cinco Minutos. Hoje: o dia em que um brasileiro voou em Paris.",
+     "No dia 23 de outubro de 1906, no campo de Bagatelle, Alberto Santos Dumont subiu no 14-bis diante de uma multidão. Ele já ficara famoso em Paris anos antes: em 1901 contornara a Torre Eiffel num dirigível e ganhara um prêmio de 100 mil francos, que dividira entre os seus mecânicos e os pobres da cidade.",
+     "Naquela tarde, o avião percorreu cerca de 60 metros, a uns três metros do chão. Foi o primeiro voo de um avião que decolou sozinho, sem catapulta, diante de juízes oficiais. Os irmãos Wright, nos Estados Unidos, já tinham voado em 1903, mas longe do público.",
+     "Santos Dumont nunca patenteou os seus inventos: queria que todos pudessem usá-los. Na semana que vem, a história do relógio de pulso que ele pedira a um amigo joalheiro, Louis Cartier."
+    ],
+    "tabella": [
+     [
+      "Data do voo em Bagatelle",
+      "23 de outubro de 1906",
+      [
+       "23 de outubro",
+       "23/10/1906",
+       "23/10"
+      ]
+     ],
+     [
+      "Ano em que contornou a Torre Eiffel",
+      "1901",
+      []
+     ],
+     [
+      "Valor do prêmio (francos)",
+      "100 mil",
+      [
+       "100.000",
+       "100000",
+       "cem mil"
+      ]
+     ],
+     [
+      "Distância percorrida pelo 14-bis (metros)",
+      "60",
+      [
+       "sessenta",
+       "60 metros",
+       "cerca de 60"
+      ]
+     ],
+     [
+      "Altura do voo (metros)",
+      "3",
+      [
+       "três",
+       "tres",
+       "3 metros",
+       "três metros"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "Santos Dumont dividiu o dinheiro do prêmio.",
+      true
+     ],
+     [
+      "O 14-bis voou em Londres.",
+      false
+     ],
+     [
+      "O avião decolou sem catapulta.",
+      true
+     ],
+     [
+      "Santos Dumont ficou rico com as patentes dos seus inventos.",
+      false
+     ],
+     [
+      "O próximo episódio fala de um relógio.",
+      true
+     ],
+     [
+      "Santos Dumont construiu o 14-bis com os irmãos Wright.",
+      false
+     ]
+    ],
+    "gloss": {
+     "contornara": "había rodeado",
+     "dirigível": "dirigible",
+     "decolou": "despegó",
+     "patenteou": "patentó",
+     "joalheiro": "joyero"
     }
    }
   },
@@ -4905,7 +7940,7 @@
      ]
     ],
     "hunt": {
-     "label": "Tocá los verbos que forman orações reduzidas de gerundio o participio (Terminada a leitura…, Chegando aqui…)",
+     "label": "Toque nos verbos que formam orações reduzidas de gerúndio ou particípio (Terminada a leitura…, Chegando aqui…)",
      "targets": [
       "terminada",
       "chegando",
@@ -5103,7 +8138,8 @@
        "banca",
        "bairro",
        "esquina",
-       "rua"
+       "padaria",
+       "cinema"
       ]
      ],
      [
@@ -5111,24 +8147,30 @@
       [
        "fechou",
        "desapare",
-       "mudou"
+       "mudou",
+       "demolid"
       ]
      ],
      [
-      "Relacionar con la crónica o el informe radial",
+      "Relacionar con la feria de la crónica o con el Cine Glória",
       [
        "feira",
-       "cine",
-       "crônica",
-       "reportagem"
+       "cine glória",
+       "glória",
+       "reabert"
       ]
      ],
      [
-      "Cerrar con una reflexión",
+      "Cerrar con una reflexión sobre la memoria del barrio",
       [
-       "hoje",
-       "percebi",
-       "aprendi"
+       "memória",
+       "lembrança",
+       "saudade",
+       "me ensinou",
+       "percebo que",
+       "esquecê",
+       "perde um pedaço",
+       "ainda procuro"
       ]
      ]
     ],
@@ -5141,6 +8183,104 @@
      "caixote": "cajón de madera",
      "assumir o ponto": "hacerse cargo del puesto (ponto = local de un comercio)",
      "cartazes de aluguel": "carteles de alquiler"
+    }
+   },
+   "breve": {
+    "title": "O Cine Glória reabre",
+    "genre": "anúncio de rádio",
+    "es": "Un anuncio de radio: reabre un viejo cine de Juiz de Fora; la sala, los precios, la función del estreno y los descuentos.",
+    "speaker": "Voz do anúncio",
+    "voice": 1,
+    "text": [
+     "Fechado há dez anos, o Cine Glória, no centro de Juiz de Fora, reabre as portas neste sábado. Totalmente reformado, o cinema de rua mais antigo da cidade volta com uma sala de 280 lugares e uma tela nova.",
+     "Para comemorar, a primeira semana é de clássicos brasileiros, com ingressos a 12 reais. Chegando antes das 18 horas, você ganha a pipoca. Comprando pelo site, você evita filas: os ingressos ficam no celular.",
+     "Na estreia, no sábado às 20 horas, será exibido O Auto da Compadecida, seguido de um debate com o diretor de fotografia do filme. Terminada a sessão, haverá música ao vivo no saguão.",
+     "Estudantes e maiores de 60 anos, apresentando documento, pagam meia. Cine Glória: um cinema de rua, de volta à rua. Avenida Rio Branco, 1.420."
+    ],
+    "tabella": [
+     [
+      "Anos em que o cinema ficou fechado",
+      "10",
+      [
+       "dez",
+       "dez anos",
+       "10 anos"
+      ]
+     ],
+     [
+      "Lugares da sala",
+      "280",
+      [
+       "duzentos e oitenta",
+       "280 lugares"
+      ]
+     ],
+     [
+      "Preço do ingresso na primeira semana (reais)",
+      "12",
+      [
+       "doze",
+       "12 reais",
+       "R$ 12"
+      ]
+     ],
+     [
+      "Até que horas se ganha a pipoca",
+      "18",
+      [
+       "18 horas",
+       "18h",
+       "seis da tarde",
+       "18:00"
+      ]
+     ],
+     [
+      "Filme da estreia",
+      "O Auto da Compadecida",
+      [
+       "Auto da Compadecida"
+      ]
+     ],
+     [
+      "Número na Avenida Rio Branco",
+      "1.420",
+      [
+       "1420",
+       "mil quatrocentos e vinte"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "O cinema passou por uma reforma completa.",
+      true
+     ],
+     [
+      "Os ingressos só podem ser comprados na bilheteria.",
+      false
+     ],
+     [
+      "Depois da estreia, haverá um debate.",
+      true
+     ],
+     [
+      "O diretor do filme vai estar na estreia.",
+      false
+     ],
+     [
+      "Quem tem mais de 60 anos paga meia com documento.",
+      true
+     ],
+     [
+      "A pipoca é grátis em todas as sessões.",
+      false
+     ]
+    ],
+    "gloss": {
+     "tela": "pantalla",
+     "pipoca": "pochoclo",
+     "saguão": "hall",
+     "ingressos": "entradas"
     }
    }
   },
@@ -5253,7 +8393,7 @@
      ]
     ],
     "hunt": {
-     "label": "Tocá las fórmulas de saludo, tratamiento y despedida de la correspondencia formal",
+     "label": "Toque nas fórmulas de saudação, tratamento e despedida da correspondência formal",
      "targets": [
       "prezado",
       "prezada",
@@ -5482,13 +8622,6 @@
        "posse",
        "anexo"
       ]
-     ],
-     [
-      "Cierre formal",
-      [
-       "atenciosamente",
-       "respeitosamente"
-      ]
      ]
     ],
     "model": "Assunto: Solicitação urgente de declaração de conclusão de mestrado – Processo 2026/0418\n\nPrezado Professor Rezende,\n\nMeu nome é Beatriz Andrade e defendi minha dissertação de mestrado neste Programa em março deste ano. Escrevo para solicitar, em caráter de urgência, a emissão de uma declaração de conclusão de curso.\n\nLogo após a defesa, dei entrada no pedido de diploma (processo nº 2026/0418) e entreguei toda a documentação exigida. Em contato telefônico com a secretaria, fui informada de que o processo está parado na etapa de homologação, pois um dos membros externos da banca ainda não assinou eletronicamente a ata de defesa. Já escrevi ao professor em questão, a quem expliquei a situação, e aguardo sua resposta.\n\nOcorre que fui aprovada em concurso público para professora de um instituto federal, e a posse está marcada para o dia 16 de outubro. Para assumir o cargo, preciso apresentar o diploma ou, no mínimo, uma declaração de conclusão. Segundo a secretaria, esse documento pode ser emitido mediante autorização da coordenação.\n\nDiante do exposto, solicito que o senhor autorize a emissão da declaração, a fim de que eu não perca a vaga. Envio em anexo o comprovante de aprovação no concurso, no qual consta a data da posse.\n\nAgradeço desde já a atenção e coloco-me à disposição para quaisquer esclarecimentos.\n\nAtenciosamente,\n\nBeatriz Andrade\nPrograma de Pós-Graduação em Letras\nTelefone: (31) 98765-4321",
@@ -5501,6 +8634,99 @@
      "concurso público": "concurso para un cargo del Estado",
      "a posse": "la toma de posesión del cargo",
      "a vaga": "el puesto, la vacante"
+    }
+   },
+   "breve": {
+    "title": "Recado da Secretaria Acadêmica",
+    "genre": "recado formal na caixa postal",
+    "es": "Un mensaje formal en el contestador: la secretaría de una universidad le avisa a Martín que su diploma está listo y cómo retirarlo.",
+    "speaker": "Sônia Albuquerque, da Secretaria",
+    "voice": 1,
+    "text": [
+     "Bom dia. Esta mensagem é para o senhor Martín Pérez. Aqui fala Sônia Albuquerque, da Secretaria Acadêmica da Universidade Federal de Minas Gerais.",
+     "Estou retornando o e-mail que o senhor nos enviou na segunda-feira sobre o seu diploma de mestrado. Informo que o diploma já foi registrado e está disponível para retirada aqui na secretaria, na sala 214 do prédio da reitoria.",
+     "O senhor pode retirá-lo pessoalmente, de segunda a sexta, das 9 às 16 horas, apresentando o passaporte. Caso prefira enviar outra pessoa, será necessária uma procuração com firma reconhecida em cartório. Se o senhor desejar receber o diploma pelo correio, o envio custa 38 reais e leva cerca de dez dias úteis.",
+     "Para qualquer dúvida, o senhor pode ligar para a secretaria, ramal 12. Tenha um bom dia."
+    ],
+    "tabella": [
+     [
+      "Sala onde se retira o diploma",
+      "214",
+      [
+       "sala 214",
+       "duzentos e catorze",
+       "duzentos e quatorze"
+      ]
+     ],
+     [
+      "Horário em que a secretaria fecha",
+      "16",
+      [
+       "16 horas",
+       "16h",
+       "quatro da tarde",
+       "16:00"
+      ]
+     ],
+     [
+      "Documento que Martín deve apresentar",
+      "passaporte",
+      [
+       "o passaporte"
+      ]
+     ],
+     [
+      "Custo do envio pelo correio (reais)",
+      "38",
+      [
+       "trinta e oito",
+       "38 reais",
+       "R$ 38"
+      ]
+     ],
+     [
+      "Prazo de entrega pelo correio (dias úteis)",
+      "10",
+      [
+       "dez",
+       "dez dias",
+       "10 dias",
+       "dez dias úteis"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "Martín tinha escrito um e-mail para a secretaria.",
+      true
+     ],
+     [
+      "O diploma ainda não foi registrado.",
+      false
+     ],
+     [
+      "Outra pessoa pode retirar o diploma com uma procuração.",
+      true
+     ],
+     [
+      "A secretaria atende também aos sábados.",
+      false
+     ],
+     [
+      "O diploma pode ser enviado pelo correio.",
+      true
+     ],
+     [
+      "O envio pelo correio é gratuito.",
+      false
+     ]
+    ],
+    "gloss": {
+     "retirada": "retiro",
+     "procuração": "poder (notarial)",
+     "firma reconhecida": "firma certificada",
+     "cartório": "escribanía",
+     "úteis": "hábiles"
     }
    }
   },
@@ -5624,7 +8850,7 @@
      ]
     ],
     "hunt": {
-     "label": "Tocá las palabras formadas con sufijos o prefijos (diminutivos, aumentativos, des-, re-, super-, -mento…)",
+     "label": "Toque nas palavras formadas com sufixos ou prefixos (diminutivos, aumentativos, des-, re-, super-, -mento…)",
      "targets": [
       "cafezinho",
       "rapidinho",
@@ -5803,11 +9029,11 @@
     ]
    },
    "compito": {
-    "genre": "email_informal",
-    "title": "Luzinha ou Lucião?",
+    "genre": "texto_instrucional",
+    "title": "Apelidos no trabalho: um guia",
     "fonte": "ascolto",
-    "t": "Você é argentino(a) e mora em São Paulo há três anos. Sua prima Lucía acaba de começar a trabalhar numa empresa em Curitiba e lhe escreveu contando que os colegas a chamam de “Lu”, “Luzinha” e até de “Lucião”, e que ela não sabe se deve se sentir ofendida. Após ouvir o episódio do podcast Língua Solta, escreva um e-mail para a sua prima explicando, com base no que diz o professor Tiago, como os brasileiros formam e usam os apelidos, o que significam o diminutivo e o aumentativo nesses casos e em que situações convém ter cuidado. Dê a ela um conselho. Não se esqueça de usar exemplos do episódio. Registro informal. Seu texto deve ter entre 210 e 270 palavras.",
-    "es": "Mail informal a tu prima: explicá con ejemplos del podcast cómo se forman los apodos, qué valor tienen el diminutivo y el aumentativo, y aconsejala. Cuidá el tono cercano (saludo y despedida informales).",
+    "t": "Você é argentino(a), mora em São Paulo há três anos e colabora com o programa de boas-vindas de uma empresa que contrata muitos estrangeiros. Muitos recém-chegados se assustam quando os colegas começam a mudar o nome deles. Após ouvir o episódio do podcast Língua Solta, escreva um guia com dicas para o boletim interno da empresa, explicando, com base no que diz o professor Tiago, como os brasileiros formam e usam os apelidos, o que significam o diminutivo e o aumentativo nesses casos e em que situações convém ter cuidado. Use exemplos do episódio.",
+    "es": "Guía de consejos (texto instructivo) para el boletín interno: cómo se forman los apodos, qué valor tienen el diminutivo y el aumentativo y cuándo tener cuidado, con ejemplos del podcast. Imperativo de você en cada consejo.",
     "min": 210,
     "max": 270,
     "punti": [
@@ -5830,32 +9056,121 @@
       ]
      ],
      [
-      "Tranquilizarla: el apodo suele indicar aceptación, con límites (jefes, clientes)",
+      "Cuándo tener cuidado (jefes, clientes)",
       [
-       "aceit",
-       "respeito",
        "cliente",
        "chefe"
       ]
      ],
      [
-      "Dar un consejo y cerrar con tono informal",
+      "Consejos con imperativo",
       [
-       "conselho",
-       "beijo",
-       "abraço"
+       "observe",
+       "desconfie",
+       "prefira",
+       "diga",
+       "conheça"
       ]
      ]
     ],
-    "model": "Oi, Lu! (Ou Luzinha? Ou Lucião?)\n\nAdorei receber notícias suas! Ri sozinho com a sua mensagem, mas entendo o susto. Por coincidência, ontem ouvi um episódio do podcast Língua Solta que falava exatamente disso, então vou te contar o que aprendi.\n\nO professor entrevistado, o Tiago, explicou que o brasileiro tem mania de mexer nos nomes. Basicamente, a gente encurta (Gabriela vira Gabi, Rafael vira Rafa), duplica uma sílaba, como em Dudu ou Juju, e acrescenta sufixos. O diminutivo, tipo Luzinha, quase sempre é carinho. E o aumentativo nem sempre fala de tamanho: ele contou de um colega baixinho que todo mundo chama de Paulão, por pura ironia carinhosa. Ou seja, o seu “Lucião” provavelmente quer dizer que você já é querida no escritório, e não que alguém te acha grandona.\n\nSegundo ele, receber um apelido no trabalho costuma ser sinal de que você foi aceita no grupo, e não falta de respeito. Só com chefes e com clientes que a gente acabou de conhecer é melhor esperar e ver como a pessoa se apresenta.\n\nMeu conselho? Relaxa e experimenta um pouquinho. Se algum apelido realmente te incomodar, fala com leveza, algo como “prefiro que me chamem de Lucía mesmo”. Ninguém vai se ofender. Aliás, o Tiago contou que muitos estrangeiros sentem falta dos apelidos quando voltam para casa, então aproveita!\n\nMe conta como está a vida em Curitiba. Já sobreviveu ao frio de lá?\n\nUm beijo enorme,\nMartín",
+    "model": "Apelidos no trabalho: um guia para recém-chegados\n\nSe você acabou de chegar a uma empresa brasileira, prepare-se: em poucas semanas, é bem provável que o seu nome mude. Não se preocupe. Segundo o professor Tiago, entrevistado no podcast Língua Solta, o brasileiro tem mania de mexer nos nomes, e isso quase nunca é falta de respeito. Reunimos aqui algumas dicas para você entender o que está acontecendo.\n\n1. Conheça as regras do jogo. Basicamente, os brasileiros encurtam o nome (Gabriela vira Gabi, Rafael vira Rafa), duplicam uma sílaba, como em Dudu ou Juju, e acrescentam sufixos.\n\n2. Não leve o diminutivo ao pé da letra. Uma Luzinha não é uma pessoa pequena: o diminutivo, na maioria das vezes, expressa carinho.\n\n3. Desconfie do tamanho do aumentativo. O professor contou o caso de um colega baixinho que todo mundo chama de Paulão, por pura ironia carinhosa. Ou seja, um aumentativo também pode ser sinal de afeto.\n\n4. Observe o contexto. Receber um apelido costuma ser sinal de que você foi aceito no grupo. Com chefes e com clientes que você acabou de conhecer, porém, prefira esperar e ver como a pessoa se apresenta.\n\n5. Se algo incomodar, diga com leveza. Algo como «prefiro que me chamem de Lucía mesmo» resolve, e ninguém vai se ofender.\n\nPor fim, aproveite: segundo o Tiago, muitos estrangeiros sentem falta dos apelidos quando voltam para casa.",
     "gloss": {
      "tem mania de mexer nos nomes": "tiene la manía de jugar con los nombres",
      "encurta": "acorta",
      "apelido": "sobrenombre (falso amigo: se ve en la semana 45)",
-     "te acha grandona": "te ve grandota (achar = creer, opinar)",
-     "Relaxa": "relajate, tranqui",
      "com leveza": "con liviandad, sin drama",
      "sentem falta dos apelidos": "extrañan los apodos (sentir falta de = extrañar)"
+    }
+   },
+   "breve": {
+    "title": "Feira de Trocas do Bairro Floresta",
+    "genre": "propaganda de rádio",
+    "es": "Una publicidad de radio de una feria de trueque en Belo Horizonte, llena de palabras derivadas: reutilização, desperdício, reutilizável, imperdível.",
+    "speaker": "Voz da propaganda",
+    "voice": 0,
+    "text": [
+     "Tem roupa parada no armário? Livro que você já leu? Brinquedo que as crianças esqueceram? Então venha para a Feira de Trocas do Bairro Floresta, a maior feira de reutilização de Belo Horizonte!",
+     "Funciona assim: você traz até dez peças em bom estado e recebe uma ficha para cada uma. Com as fichas, você escolhe o que quiser entre milhares de objetos. Sem dinheiro, sem desperdício e com muita novidade.",
+     "A feira acontece no último domingo do mês, das 10 às 15 horas, na Praça Floresta. Tem oficina de conserto de bicicletas, com um mecânico voluntário, e uma área de reciclagem para o que não tiver mais conserto.",
+     "Importante: não se aceitam eletrônicos nem roupas rasgadas. E não esqueça a sua sacola reutilizável! Feira de Trocas: renovar o armário é possível, e é imperdível."
+    ],
+    "tabella": [
+     [
+      "Número máximo de peças que cada pessoa traz",
+      "10",
+      [
+       "dez",
+       "dez peças",
+       "10 peças"
+      ]
+     ],
+     [
+      "Dia da feira",
+      "último domingo do mês",
+      [
+       "último domingo",
+       "domingo"
+      ]
+     ],
+     [
+      "Horário em que a feira termina",
+      "15",
+      [
+       "15 horas",
+       "15h",
+       "três da tarde",
+       "15:00"
+      ]
+     ],
+     [
+      "Local da feira",
+      "Praça Floresta",
+      [
+       "na Praça Floresta",
+       "Praca Floresta"
+      ]
+     ],
+     [
+      "O que se recebe por cada peça",
+      "ficha",
+      [
+       "uma ficha",
+       "fichas"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "Na feira não se usa dinheiro.",
+      true
+     ],
+     [
+      "A feira acontece todos os sábados.",
+      false
+     ],
+     [
+      "Há um mecânico que conserta bicicletas.",
+      true
+     ],
+     [
+      "Os eletrônicos são aceitos se funcionarem.",
+      false
+     ],
+     [
+      "É bom levar uma sacola de casa.",
+      true
+     ],
+     [
+      "As fichas custam dois reais cada uma.",
+      false
+     ]
+    ],
+    "gloss": {
+     "desperdício": "derroche",
+     "rasgadas": "rotas",
+     "sacola": "bolsa (de compras)",
+     "conserto": "arreglo",
+     "trocas": "trueques, intercambios"
     }
    }
   },
@@ -5982,7 +9297,7 @@
      ]
     ],
     "hunt": {
-     "label": "Tocá los falsos amigos del español (palabras que parecen iguales pero significan otra cosa)",
+     "label": "Toque nos falsos amigos do espanhol (palavras que parecem iguais, mas significam outra coisa)",
      "targets": [
       "esquisito",
       "polvo",
@@ -6169,7 +9484,7 @@
     "genre": "carta_leitor",
     "title": "O português que a gente acha que entende",
     "fonte": "lettura",
-    "t": "Você é um(a) leitor(a) hispanofalante do Diário Paulistano, jornal em que foi publicada a crônica “Esquisito é o polvo”. Após ler a crônica, escreva uma carta do leitor ao jornal comentando o texto. Na sua carta, relacione a crônica com uma experiência sua (real ou imaginada) com falsos amigos entre o espanhol e o português e posicione-se sobre a ideia, citada pela cronista, de que o maior perigo é “o português que a gente acha que entende”. Não se esqueça de identificar-se no final e de usar um registro formal, próprio de uma carta publicada em jornal. Seu texto deve ter entre 216 e 276 palavras.",
+    "t": "Você é um(a) leitor(a) hispanofalante do Diário Paulistano, jornal em que foi publicada a crônica “Esquisito é o polvo”. Após ler a crônica, escreva uma carta do leitor ao jornal comentando o texto. Na sua carta, relacione a crônica com uma experiência sua (real ou imaginada) com falsos amigos entre o espanhol e o português e posicione-se sobre a ideia, citada pela cronista, de que o maior perigo é “o português que a gente acha que entende”. Não se esqueça de identificar-se no final.",
     "es": "Carta de lector a un diario: comentá la crónica, contá una anécdota propia con un falso amigo (que no sea solo repetir las de la crónica) y tomá posición sobre la frase del profesor. Registro formal, con vocativo, despedida y firma.",
     "min": 216,
     "max": 276,
@@ -6177,37 +9492,35 @@
      [
       "Referirse a la crónica y a lo que cuenta",
       [
-       "crônica",
+       "esquisito é o polvo",
+       "diário paulistano",
        "cronista",
-       "polvo",
-       "esquisito"
+       "crônica"
       ]
      ],
      [
-      "Contar una experiencia propia con un falso amigo",
+      "Contar una experiencia con un falso amigo (polvo, esquisito, apelido…)",
       [
-       "experiência",
-       "comigo",
-       "no meu caso",
-       "aconteceu"
+       "polvo",
+       "esquisito",
+       "exquisito",
+       "embaraçad",
+       "borracha",
+       "apelido",
+       "oficina",
+       "escritório",
+       "sobremesa",
+       "falso amigo",
+       "falsos amigos"
       ]
      ],
      [
-      "Tomar posición sobre “o português que a gente acha que entende”",
+      "Tomar posición sobre «o português que a gente acha que entende»",
       [
        "concordo",
        "discordo",
        "acha que entende",
        "achamos que entendemos"
-      ]
-     ],
-     [
-      "Formato de carta de lector: vocativo, despedida e identificación",
-      [
-       "senhor editor",
-       "prezad",
-       "atenciosamente",
-       "cordialmente"
       ]
      ]
     ],
@@ -6217,6 +9530,99 @@
      "só valera pelo pudim": "solo había valido por el budín (pluscuamperfecto simple)",
      "tropeços": "tropiezos",
      "passar uma impressão": "dar una impresión"
+    }
+   },
+   "breve": {
+    "title": "Promoções do Supermercado Bom Preço",
+    "genre": "anúncio de supermercado",
+    "es": "Un anuncio por los parlantes de un supermercado, con falsos amigos por todas partes: presunto, polvo, talheres, borracha.",
+    "speaker": "Voz do supermercado",
+    "voice": 1,
+    "text": [
+     "Atenção, senhores clientes do Supermercado Bom Preço! Só hoje, até as 20 horas, promoções imperdíveis para o seu fim de semana.",
+     "No balcão de frios, o presunto fatiado sai a 39 reais o quilo, e o queijo prato a 42. Na peixaria, o polvo congelado está com 25% de desconto: aproveite para fazer aquele arroz de polvo no domingo.",
+     "No corredor 7, os copos e as taças de vidro estão pela metade do preço, e na compra de um jogo de talheres você ganha um pano de prato. E para a volta às aulas: na compra de um caderno, a borracha é grátis.",
+     "Lembramos que o estacionamento é gratuito por duas horas para quem apresentar o cupom fiscal no caixa. Bom Preço: o seu supermercado de todo dia."
+    ],
+    "tabella": [
+     [
+      "Preço do quilo do presunto (reais)",
+      "39",
+      [
+       "trinta e nove",
+       "39 reais",
+       "R$ 39"
+      ]
+     ],
+     [
+      "Desconto no polvo",
+      "25%",
+      [
+       "25",
+       "25 %",
+       "vinte e cinco por cento",
+       "25 por cento"
+      ]
+     ],
+     [
+      "Corredor dos copos e das taças",
+      "7",
+      [
+       "sete",
+       "corredor 7"
+      ]
+     ],
+     [
+      "Brinde na compra de um caderno",
+      "borracha",
+      [
+       "uma borracha",
+       "a borracha"
+      ]
+     ],
+     [
+      "Horas de estacionamento grátis",
+      "2",
+      [
+       "duas",
+       "duas horas",
+       "2 horas"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "As promoções valem só hoje.",
+      true
+     ],
+     [
+      "O polvo é vendido fresco.",
+      false
+     ],
+     [
+      "Quem compra talheres ganha um pano de prato.",
+      true
+     ],
+     [
+      "O estacionamento é pago para todos.",
+      false
+     ],
+     [
+      "Para ter o estacionamento grátis, é preciso mostrar o cupom fiscal.",
+      true
+     ],
+     [
+      "O queijo está pela metade do preço.",
+      false
+     ]
+    ],
+    "gloss": {
+     "presunto": "jamón (no «presunto»)",
+     "polvo": "pulpo",
+     "talheres": "cubiertos",
+     "borracha": "goma de borrar",
+     "frios": "fiambres",
+     "taças": "copas"
     }
    }
   },
@@ -6331,7 +9737,7 @@
      ]
     ],
     "hunt": {
-     "label": "Tocá las palabras propias del portugués europeo o africano (las que en Brasil se dicen de otra manera)",
+     "label": "Toque nas palavras próprias do português europeu ou africano (as que no Brasil se dizem de outro jeito)",
      "targets": [
       "telemóvel",
       "autocarro",
@@ -6528,7 +9934,7 @@
     "genre": "resenha",
     "title": "Resenha: Sotaques do Mundo com Nádia",
     "fonte": "ascolto",
-    "t": "Você colabora com o blog de uma escola de português para hispanofalantes em Buenos Aires, que publica resenhas de podcasts e programas de rádio úteis para os alunos. Após ouvir a entrevista do programa Sotaques do Mundo com a estudante angolana Nádia, escreva uma resenha do episódio para os leitores do blog. Na sua resenha, apresente o programa e a entrevistada, resuma os principais temas tratados, avalie o episódio (pontos fortes e fracos) e diga se o recomenda e para quem. Não se esqueça de dar um título à resenha e de usar informações e exemplos da entrevista. Registro semiformal. Seu texto deve ter entre 222 e 282 palavras.",
+    "t": "Você colabora com o blog de uma escola de português para hispanofalantes em Buenos Aires, que publica resenhas de podcasts e programas de rádio úteis para os alunos. Após ouvir a entrevista do programa Sotaques do Mundo com a estudante angolana Nádia, escreva uma resenha do episódio para os leitores do blog. Na sua resenha, apresente o programa e a entrevistada, resuma os principais temas tratados, avalie o episódio (pontos fortes e fracos) e diga se o recomenda e para quem. Não se esqueça de dar um título à resenha e de usar informações e exemplos da entrevista.",
     "es": "Reseña de un episodio de radio para el blog de una escuela: presentá, resumí con ejemplos concretos del audio, evaluá (algo bueno y algo flojo) y recomendá. Ponele título.",
     "min": 222,
     "max": 282,
@@ -6538,7 +9944,7 @@
       [
        "nádia",
        "angolan",
-       "entrevista",
+       "sotaques do mundo",
        "episódio"
       ]
      ],
@@ -6556,9 +9962,9 @@
       [
        "ponto alto",
        "ponto fraco",
-       "porém",
        "infelizmente",
-       "destaque"
+       "destaque",
+       "deixa a desejar"
       ]
      ],
      [
@@ -6579,6 +9985,103 @@
      "bué": "mucho (en Angola y Portugal)",
      "rapariga": "chica en Angola y Portugal; en parte de Brasil, insulto (prostituta)",
      "O ponto alto": "lo mejor, el punto fuerte"
+    }
+   },
+   "breve": {
+    "title": "Aviso na estação do Cais do Sodré",
+    "genre": "aviso na estação (português de Portugal)",
+    "es": "Un aviso en la estación de trenes de Cais do Sodré, en Lisboa, en portugués de Portugal: comboio, autocarro, telemóvel, casa de banho.",
+    "speaker": "Voz da estação (Lisboa)",
+    "voice": 0,
+    "text": [
+     "Senhores passageiros, bom dia. A CP informa: o comboio das 9 e 15 com destino a Cascais vai partir da linha 3, e não da linha 1, como estava previsto.",
+     "Devido a obras na via entre Oeiras e Carcavelos, a partir das 22 horas e até ao fim do mês, os comboios só circulam até Oeiras. Entre Oeiras e Cascais, há autocarros de substituição, sem custo adicional, à saída da estação.",
+     "Lembramos que os bilhetes podem ser comprados nas máquinas automáticas ou pelo telemóvel, na aplicação da CP. Os passageiros com passe mensal não precisam de comprar bilhete para o autocarro.",
+     "As casas de banho da estação encontram-se encerradas para limpeza até às 10 horas. Pedimos desculpa pelo incómodo. Obrigado e boa viagem."
+    ],
+    "tabella": [
+     [
+      "Hora do comboio para Cascais",
+      "9h15",
+      [
+       "9:15",
+       "9.15",
+       "9 e 15",
+       "nove e quinze"
+      ]
+     ],
+     [
+      "Linha de onde parte o comboio",
+      "3",
+      [
+       "três",
+       "tres",
+       "linha 3"
+      ]
+     ],
+     [
+      "Até onde circulam os comboios à noite",
+      "Oeiras",
+      [
+       "até Oeiras"
+      ]
+     ],
+     [
+      "Horário em que as casas de banho reabrem",
+      "10",
+      [
+       "10 horas",
+       "10h",
+       "dez",
+       "dez horas",
+       "10:00"
+      ]
+     ],
+     [
+      "Quanto custa o autocarro de substituição",
+      "nada",
+      [
+       "sem custo",
+       "grátis",
+       "gratuito",
+       "0",
+       "zero"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "O comboio para Cascais mudou de linha.",
+      true
+     ],
+     [
+      "As obras duram só um fim de semana.",
+      false
+     ],
+     [
+      "Entre Oeiras e Cascais, os passageiros seguem de autocarro.",
+      true
+     ],
+     [
+      "Os bilhetes só se vendem na bilheteira.",
+      false
+     ],
+     [
+      "Quem tem passe mensal não paga o autocarro.",
+      true
+     ],
+     [
+      "As casas de banho estão encerradas o dia todo.",
+      false
+     ]
+    ],
+    "gloss": {
+     "comboio": "tren (en Brasil, trem)",
+     "autocarros": "colectivos (en Brasil, ônibus)",
+     "telemóvel": "celular (en Brasil, celular)",
+     "casas de banho": "baños (en Brasil, banheiros)",
+     "encerradas": "cerradas",
+     "passe": "abono"
     }
    }
   },
@@ -6699,7 +10202,7 @@
      ]
     ],
     "hunt": {
-     "label": "Tocá los modalizadores: adverbios, verbos y expresiones que matizan la certeza, la probabilidad o la obligación",
+     "label": "Toque nos modalizadores: advérbios, verbos e expressões que matizam a certeza, a probabilidade ou a obrigação",
      "targets": [
       "supostamente",
       "convém",
@@ -6880,7 +10383,7 @@
     "genre": "texto_opiniao",
     "title": "Tarifa zero: a sua opinião",
     "fonte": "lettura",
-    "t": "Você mora numa grande cidade brasileira e leu, no site do jornal local, a coluna “Tarifa zero: nem milagre, nem delírio”, de Marcelo Antunes. O jornal abriu um espaço para textos de opinião dos leitores sobre o tema. Escreva um texto de opinião em que você se posicione sobre a tarifa zero, dialogando com a coluna: concorde ou discorde de pelo menos dois argumentos do colunista (por exemplo, o do financiamento, o de que “o que é gratuito não é valorizado” ou a proposta de implantação por etapas) e apresente uma sugestão própria. Não se esqueça de dar um título ao texto, de modalizar as suas afirmações (talvez, provavelmente, a meu ver…) e de usar um registro formal. Seu texto deve ter entre 227 e 287 palavras.",
+    "t": "Você mora numa grande cidade brasileira e leu, no site do jornal local, a coluna “Tarifa zero: nem milagre, nem delírio”, de Marcelo Antunes. O jornal abriu um espaço para textos de opinião dos leitores sobre o tema. Escreva um texto de opinião em que você se posicione sobre a tarifa zero, dialogando com a coluna: concorde ou discorde de pelo menos dois argumentos do colunista (por exemplo, o do financiamento, o de que “o que é gratuito não é valorizado” ou a proposta de implantação por etapas) e apresente uma sugestão própria. Não se esqueça de dar um título ao texto e de modalizar as suas afirmações.",
     "es": "Texto de opinión para la sección de lectores: tomá posición, discutí al menos dos argumentos concretos de la columna y proponé algo tuyo. Usá modalizadores y ponele título.",
     "min": 227,
     "max": 287,
@@ -6891,15 +10394,6 @@
        "coluna",
        "colunista",
        "antunes"
-      ]
-     ],
-     [
-      "Tomar una posición clara",
-      [
-       "concordo",
-       "discordo",
-       "a meu ver",
-       "na minha opinião"
       ]
      ],
      [
@@ -6920,16 +10414,6 @@
        "talvez",
        "provavelmente"
       ]
-     ],
-     [
-      "Cerrar con una conclusión",
-      [
-       "pior cenário",
-       "portanto",
-       "em suma",
-       "por isso",
-       "conclu"
-      ]
      ]
     ],
     "model": "Tarifa zero: o preço de não decidir\n\nNa coluna publicada nesta semana, Marcelo Antunes propõe que o debate sobre a tarifa zero deixe de lado a pergunta “sim ou não” e se concentre no financiamento. Concordo com boa parte do diagnóstico, mas, a meu ver, o texto é prudente demais nas conclusões.\n\nÉ inegável, como afirma o colunista, que o modelo atual está esgotado. Quem mora na periferia, como eu, sabe que cada reajuste empurra vizinhos para a moto ou os prende em casa. Também me parece correto rebater a ideia de que o que é gratuito não é valorizado: ninguém depreda a escola pública por ela ser gratuita.\n\nDiscordo, porém, da ênfase na implantação por etapas começando pelos domingos. A medida talvez seja simpática, mas dificilmente mudaria a vida de quem precisa do ônibus para trabalhar de segunda a sexta. Se o transporte é um direito, como os próprios defensores argumentam, a gratuidade deveria valer primeiro nos dias úteis e nas linhas das periferias, e não como um passeio de fim de semana.\n\nQuanto ao financiamento, as sugestões da coluna são razoáveis, e eu acrescentaria uma: rever os privilégios de quem usa carro, como as vagas gratuitas nas ruas centrais. Provavelmente não bastaria para pagar a conta inteira, mas seria um sinal claro de prioridade.\n\nO colunista tem razão ao dizer que o pior cenário é engavetar a proposta. Eu apenas lembraria que esperar demais por um projeto perfeito também tem um custo, e quem o paga, como sempre, é quem está no ponto de ônibus.",
@@ -6942,6 +10426,90 @@
      "vagas gratuitas": "lugares de estacionamiento gratis",
      "engavetar": "cajonear, archivar sin tratar",
      "ponto de ônibus": "la parada del colectivo"
+    }
+   },
+   "breve": {
+    "title": "Boletim da economia",
+    "genre": "noticiário econômico",
+    "es": "El boletín económico de la mañana: el balance de un año de colectivos gratis, la tasa de interés y la semana de cuatro días, con cifras y con cautela.",
+    "speaker": "Jornalista",
+    "voice": 1,
+    "text": [
+     "Boletim da economia, Rádio Capital, sete horas. Os destaques desta terça-feira.",
+     "Tarifa zero. A prefeitura de Vila Serena, no Ceará, divulgou ontem o balanço de um ano de ônibus gratuitos. Segundo a prefeitura, o número de passageiros por dia passou de 20 mil para 62 mil. O comércio do centro registrou alta de 12% nas vendas, mas os economistas ouvidos pela rádio são cautelosos: é possível que parte desse aumento se deva a outros fatores.",
+     "Juros. O Banco Central anuncia amanhã a nova taxa básica de juros. Tudo indica que a taxa deve cair meio ponto, para 9,75% ao ano, embora alguns analistas ainda não descartem uma manutenção.",
+     "Semana de quatro dias. Das 21 empresas brasileiras que testaram o modelo desde janeiro, 19 decidiram mantê-lo. O resultado, no entanto, não deve ser generalizado: a maioria são empresas pequenas, de tecnologia.",
+     "O próximo boletim é às nove. Bom dia."
+    ],
+    "tabella": [
+     [
+      "Passageiros por dia depois da tarifa zero",
+      "62 mil",
+      [
+       "62.000",
+       "62000",
+       "sessenta e dois mil"
+      ]
+     ],
+     [
+      "Aumento das vendas no comércio do centro",
+      "12%",
+      [
+       "12",
+       "12 %",
+       "doze por cento",
+       "12 por cento"
+      ]
+     ],
+     [
+      "Taxa de juros prevista (ao ano)",
+      "9,75%",
+      [
+       "9,75",
+       "9.75",
+       "9,75 %"
+      ]
+     ],
+     [
+      "Empresas que mantiveram a semana de quatro dias",
+      "19",
+      [
+       "dezenove"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "O número de passageiros aumentou depois da tarifa zero.",
+      true
+     ],
+     [
+      "Os economistas afirmam que a tarifa zero é a única causa do aumento das vendas.",
+      false
+     ],
+     [
+      "A decisão sobre os juros sai amanhã.",
+      true
+     ],
+     [
+      "Todos os analistas têm certeza de que os juros vão cair.",
+      false
+     ],
+     [
+      "A maioria das empresas do teste é pequena.",
+      true
+     ],
+     [
+      "O teste da semana de quatro dias foi feito em empresas de vários países.",
+      false
+     ]
+    ],
+    "gloss": {
+     "balanço": "balance",
+     "juros": "intereses",
+     "cautelosos": "cautos",
+     "descartem": "descarten",
+     "manutenção": "mantenimiento (de la tasa)"
     }
    }
   },
@@ -7063,7 +10631,7 @@
      ]
     ],
     "hunt": {
-     "label": "Tocá los verbos de decir que atribuyen con precisión lo que dice cada fuente",
+     "label": "Toque nos verbos de dizer que atribuem com precisão o que cada fonte diz",
      "targets": [
       "ressalta",
       "esclarece",
@@ -7252,7 +10820,7 @@
     "genre": "resumo",
     "title": "Aula mais tarde? O que diz a pesquisa",
     "fonte": "lettura",
-    "t": "Você faz parte do conselho de pais de uma escola estadual de Belo Horizonte, que está discutindo a possibilidade de mudar o horário de entrada das aulas. A direção pediu que você escreva, para o boletim informativo da escola, um resumo da reportagem “Sono, telas e o sinal das sete”, para que todas as famílias conheçam o assunto antes da próxima reunião. O resumo deve apresentar o estudo, os seus principais resultados, as posições favoráveis e contrárias à mudança e as recomendações dos pesquisadores, sem acrescentar a sua opinião. Não se esqueça de reformular com as suas palavras (sem copiar frases do texto) e de usar verbos de dizer precisos para atribuir cada ideia à sua fonte. Registro formal. Seu texto deve ter entre 233 e 293 palavras.",
+    "t": "Você faz parte do conselho de pais de uma escola estadual de Belo Horizonte, que está discutindo a possibilidade de mudar o horário de entrada das aulas. A direção pediu que você escreva, para o boletim informativo da escola, um resumo da reportagem “Sono, telas e o sinal das sete”, para que todas as famílias conheçam o assunto antes da próxima reunião. O resumo deve apresentar o estudo, os seus principais resultados, as posições favoráveis e contrárias à mudança e as recomendações dos pesquisadores, sem acrescentar a sua opinião. Não se esqueça de reformular com as suas palavras (sem copiar frases do texto) e de usar verbos de dizer precisos para atribuir cada ideia à sua fonte.",
     "es": "Resumen objetivo para el boletín de la escuela: estudio, resultados, posturas a favor y en contra, recomendaciones. Sin opinión propia, reformulando y atribuyendo cada idea con verbos precisos (admite, advierte, sostiene…).",
     "min": 233,
     "max": 293,
@@ -7309,6 +10877,97 @@
      "dias letivos": "días de clase",
      "por sua vez": "a su vez, por su parte",
      "experiências-piloto": "pruebas piloto"
+    }
+   },
+   "breve": {
+    "title": "Ciência de Bolso: celular na cama",
+    "genre": "podcast de divulgação científica",
+    "es": "Un podcast que resume un estudio sobre adolescentes, celulares y sueño, con los verbos que presentan lo que dice cada uno: afirmar, alertar, ressaltar, reconhecer, sugerir.",
+    "speaker": "Lívia Prado",
+    "voice": 1,
+    "text": [
+     "Oi, gente! Aqui é a Lívia Prado, e este é o Ciência de Bolso, o podcast que resume uma pesquisa em dois minutos.",
+     "A pesquisa de hoje foi feita pela Universidade de São Paulo com 1.200 adolescentes de 14 a 17 anos. Os autores afirmam que quem usa o celular na cama dorme, em média, 50 minutos a menos por noite. Eles alertam que o problema não é só a luz da tela, mas sobretudo as notificações, que acordam o cérebro.",
+     "A coordenadora do estudo, a médica Helena Costa, ressalta que a escola também tem um papel: nas escolas que começam as aulas às 7 horas, os alunos chegam mais cansados. Ela reconhece, porém, que mudar o horário não é simples, e sugere começar por uma medida barata: deixar o celular fora do quarto.",
+     "E você, dorme com o celular do lado? Conta pra gente nos comentários. Até a próxima!"
+    ],
+    "tabella": [
+     [
+      "Número de adolescentes na pesquisa",
+      "1.200",
+      [
+       "1200",
+       "mil e duzentos"
+      ]
+     ],
+     [
+      "Idade dos participantes",
+      "14 a 17",
+      [
+       "de 14 a 17",
+       "14-17",
+       "14 a 17 anos"
+      ]
+     ],
+     [
+      "Minutos de sono a menos por noite",
+      "50",
+      [
+       "cinquenta",
+       "50 minutos"
+      ]
+     ],
+     [
+      "Nome da coordenadora do estudo",
+      "Helena Costa",
+      [
+       "Helena",
+       "doutora Helena Costa"
+      ]
+     ],
+     [
+      "Horário de início das aulas citado",
+      "7",
+      [
+       "7 horas",
+       "7h",
+       "sete",
+       "sete horas",
+       "7:00"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "Segundo o estudo, as notificações são o maior problema.",
+      true
+     ],
+     [
+      "A pesquisa foi feita com universitários.",
+      false
+     ],
+     [
+      "A coordenadora admite que mudar o horário das aulas é difícil.",
+      true
+     ],
+     [
+      "Os autores recomendam proibir o celular nas escolas.",
+      false
+     ],
+     [
+      "A medida sugerida é deixar o celular fora do quarto.",
+      true
+     ],
+     [
+      "O estudo mostra que a luz da tela não faz mal.",
+      false
+     ]
+    ],
+    "gloss": {
+     "de bolso": "de bolsillo",
+     "notificações": "notificaciones",
+     "ressalta": "destaca",
+     "sobretudo": "sobre todo"
     }
    }
   },
@@ -7423,7 +11082,7 @@
      ]
     ],
     "hunt": {
-     "label": "Tocá las formas del registro coloquial (reducciones, abreviaturas y palabras típicas de la charla informal)",
+     "label": "Toque nas formas do registro coloquial (reduções, abreviações e palavras típicas da conversa informal)",
      "targets": [
       "vc",
       "tô",
@@ -7622,7 +11281,7 @@
     "genre": "carta_formal",
     "title": "Resposta ao cliente",
     "fonte": "ascolto",
-    "t": "Você é Lucas, estagiário de uma agência digital. Após ouvir a conversa com a sua gerente, Renata, escreva o e-mail formal de resposta ao senhor Otávio Mendes, diretor de compras da rede de farmácias cliente, que respondeu à sua mensagem anterior pedindo um “posicionamento formal da empresa”. No seu e-mail, siga as orientações de Renata: peça desculpas pelo atraso e pelo tom da mensagem anterior, explique o motivo do atraso de forma profissional, informe o novo prazo de entrega da proposta e ofereça a videoconferência. Não se esqueça de incluir assunto, vocativo e fecho adequados ao registro formal e de assinar com nome e cargo. Seu texto deve ter entre 239 e 299 palavras.",
+    "t": "Você é Lucas, estagiário de uma agência digital. Após ouvir a conversa com a sua gerente, Renata, escreva o e-mail formal de resposta ao senhor Otávio Mendes, diretor de compras da rede de farmácias cliente, que respondeu à sua mensagem anterior pedindo um “posicionamento formal da empresa”. No seu e-mail, siga as orientações de Renata: peça desculpas pelo atraso e pelo tom da mensagem anterior, explique o motivo do atraso de forma profissional, informe o novo prazo de entrega da proposta e ofereça a videoconferência. Não se esqueça de incluir assunto, vocativo e fecho e de assinar com nome e cargo.",
     "es": "E-mail formal de respuesta al cliente con los datos del audio: disculpas, motivo (validación de costos), nuevo plazo (viernes, 18 h) y videoconferencia el lunes. Cuidá el registro culto: nada de “oi”, “relaxa” ni abreviaturas.",
     "min": 239,
     "max": 299,
@@ -7645,7 +11304,9 @@
      [
       "Informar el nuevo plazo (viernes, 18 h)",
       [
-       "sexta"
+       "sexta",
+       "18h",
+       "18 h"
       ]
      ],
      [
@@ -7653,14 +11314,6 @@
       [
        "videoconferência",
        "reunião"
-      ]
-     ],
-     [
-      "Registro formal: vocativo y cierre",
-      [
-       "prezado",
-       "atenciosamente",
-       "cordialmente"
       ]
      ]
     ],
@@ -7673,6 +11326,99 @@
      "Ressalto que": "destaco que",
      "contemplará": "incluirá, abarcará",
      "está em cópia": "va con copia en este correo"
+    }
+   },
+   "breve": {
+    "title": "Convocação do síndico",
+    "genre": "comunicado formal",
+    "es": "Un comunicado formal del administrador de un edificio: convoca a una asamblea extraordinaria sobre los ascensores, con fecha, presupuesto y reglas para votar.",
+    "speaker": "Ricardo Moura, síndico",
+    "voice": 0,
+    "text": [
+     "Prezados moradores do Condomínio Edifício Atlântico, bom dia. Aqui fala Ricardo Moura, síndico do prédio, com um comunicado da administração.",
+     "Ficam todos convocados para a assembleia geral extraordinária, que será realizada na próxima quinta-feira, às 19 horas e 30 minutos, no salão de festas. Na pauta, a troca dos dois elevadores, cujo orçamento é de 380 mil reais, e a instalação de câmeras na garagem.",
+     "Caso a proposta seja aprovada, a obra será paga em 12 parcelas, a partir de março. Solicita-se aos moradores que não puderem comparecer que enviem uma procuração por escrito a um vizinho de confiança. Lembramos que só poderão votar os condôminos em dia com a taxa condominial.",
+     "Agradeço desde já a presença de todos. Atenciosamente, Ricardo Moura, síndico."
+    ],
+    "tabella": [
+     [
+      "Horário da assembleia",
+      "19h30",
+      [
+       "19:30",
+       "19.30",
+       "19 e 30",
+       "19 horas e 30",
+       "sete e meia",
+       "19 e meia"
+      ]
+     ],
+     [
+      "Local da assembleia",
+      "salão de festas",
+      [
+       "no salão de festas",
+       "salao de festas"
+      ]
+     ],
+     [
+      "Orçamento da troca dos elevadores (reais)",
+      "380 mil",
+      [
+       "380.000",
+       "380000",
+       "trezentos e oitenta mil"
+      ]
+     ],
+     [
+      "Número de parcelas",
+      "12",
+      [
+       "doze",
+       "12 parcelas"
+      ]
+     ],
+     [
+      "Mês em que começa o pagamento",
+      "março",
+      [
+       "em março",
+       "marco"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "A assembleia vai discutir a troca dos elevadores.",
+      true
+     ],
+     [
+      "As câmeras vão ser instaladas na entrada do prédio.",
+      false
+     ],
+     [
+      "Quem não puder ir pode mandar uma procuração.",
+      true
+     ],
+     [
+      "Todos os moradores podem votar.",
+      false
+     ],
+     [
+      "O comunicado é do síndico.",
+      true
+     ],
+     [
+      "A obra vai ser paga de uma só vez.",
+      false
+     ]
+    ],
+    "gloss": {
+     "síndico": "administrador del consorcio",
+     "pauta": "orden del día",
+     "orçamento": "presupuesto",
+     "parcelas": "cuotas",
+     "em dia": "al día"
     }
    }
   },
@@ -7790,7 +11536,7 @@
      ]
     ],
     "hunt": {
-     "label": "Tocá la palabra clave (el sustantivo que da la imagen) de cada expresión idiomática",
+     "label": "Toque na palavra-chave (o substantivo que dá a imagem) de cada expressão idiomática",
      "targets": [
       "balde",
       "botas",
@@ -7809,7 +11555,7 @@
    "ascolto": {
     "title": "O casamento em que tudo deu errado",
     "genre": "conversa entre amigos",
-    "es": "Dos amigos se encuentran en un café: él, organizador de eventos, le cuenta a ella cómo fue el casamiento que organizó el fin de semana.",
+    "es": "Dos amigos se encuentran en un café: él, organizador de eventos y gaúcho (usa tu y bah), le cuenta a ella cómo fue el casamiento que organizó el fin de semana.",
     "speakers": [
      "Carol",
      "Bruno"
@@ -7821,7 +11567,7 @@
      ],
      [
       "B",
-      "Nem me fala, Carol. Passei o fim de semana inteiro de cabelo em pé. Lembra do casamento que eu estava organizando lá em Petrópolis?"
+      "Bah, nem me fala, Carol. Passei o fim de semana inteiro de cabelo em pé. Tu lembra do casamento que eu tava organizando lá em Petrópolis?"
      ],
      [
       "A",
@@ -7829,7 +11575,7 @@
      ],
      [
       "B",
-      "Certo? Olha, se alguma coisa podia dar errado, deu. Pra começar, o bufê pisou na bola feio. Às dez da manhã me ligaram dizendo que o caminhão tinha quebrado na serra e que a comida só chegaria à noite."
+      "Certo? Olha… se alguma coisa podia dar errado, deu. Pra começar, o bufê… o bufê pisou na bola feio. Às dez da manhã me ligaram dizendo que o caminhão tinha quebrado na serra e que a comida só chegaria à noite."
      ],
      [
       "A",
@@ -7837,7 +11583,7 @@
      ],
      [
       "B",
-      "Às quatro da tarde. Aí, você sabe, não tinha tempo para chorar. Tive que dar um jeito. Liguei para uma amiga que tem um restaurante lá perto e pedi, pelo amor de Deus, que ela quebrasse o meu galho."
+      "Às quatro da tarde. Aí, tu sabe, não tinha tempo pra chorar. Tive que dar um jeito. Liguei para uma amiga que tem um restaurante lá perto e pedi, pelo amor de Deus, que ela quebrasse o meu galho."
      ],
      [
       "A",
@@ -7853,11 +11599,11 @@
      ],
      [
       "B",
-      "Por enquanto, eu. Adiantei do meu bolso, porque não dava para esperar a boa vontade de ninguém. Depois vou acertar com o bufê. Mas, sinceramente, naquela hora eu nem pensei em dinheiro. Só pensava nos cento e cinquenta convidados chegando e nas mesas vazias."
+      "É… por enquanto, eu. Adiantei do meu bolso, porque não dava para esperar a boa vontade de ninguém. Depois vou acertar com o bufê. Mas, sinceramente, naquela hora eu nem pensei em dinheiro. Só pensava nos cento e cinquenta convidados chegando e nas mesas vazias."
      ],
      [
       "A",
-      "Imagino o desespero. E o bufê não deu nenhuma satisfação?"
+      "Hum, imagino o desespero. E o bufê não deu nenhuma satisfação?"
      ],
      [
       "B",
@@ -7865,7 +11611,7 @@
      ],
      [
       "A",
-      "Menos mal. E os noivos perceberam?"
+      "Menos mal. E os noivos… os noivos perceberam?"
      ],
      [
       "B",
@@ -7877,7 +11623,7 @@
      ],
      [
       "B",
-      "Eu segurei a onda. Levei ela para um canto, expliquei tudo com calma, mostrei as mensagens do bufê. Falei: olha, a culpa não é sua nem minha, mas eu vou resolver. E prometi que a empresa do bufê ia devolver todo o dinheiro."
+      "Eu segurei a onda. Levei ela para um canto, expliquei tudo com calma, mostrei as mensagens do bufê. Falei: olha, a culpa não é tua nem minha, mas eu vou resolver. E prometi que a empresa do bufê ia devolver todo o dinheiro."
      ],
      [
       "A",
@@ -7893,7 +11639,7 @@
      ],
      [
       "B",
-      "Tirar de letra é exagero. Eu suei a camisa, isso sim. Pus a mão na massa, carreguei caixa, ajudei a montar mesa, servi refrigerante. E o mais engraçado é que, no final, os convidados adoraram a comida da minha amiga. Teve tio pedindo o telefone do restaurante."
+      "Bah, tirar de letra é exagero. Eu suei a camisa, isso sim. Pus a mão na massa, carreguei caixa, ajudei a montar mesa, servi refrigerante. E o mais engraçado é que, no final, os convidados adoraram a comida da minha amiga. Teve tio pedindo o telefone do restaurante."
      ],
      [
       "A",
@@ -7937,7 +11683,9 @@
      "adiantei": "adelanté (plata)",
      "satisfação": "explicación",
      "vista": "vista (fazer vista grossa = hacerse el distraído)",
-     "multa": "multa"
+     "multa": "multa",
+     "bah": "(gaúcho) ¡uh!, ¡pucha!: sorpresa o fastidio",
+     "tu": "vos: en el Sur, tu con el verbo de você (tu lembra, tu sabe)"
     },
     "questions": [
      [
@@ -8014,54 +11762,66 @@
     "genre": "relato",
     "title": "Tropeços da Língua",
     "fonte": "lettura",
-    "t": "A revista que publicou a entrevista com a professora e lexicógrafa Marta Siqueira convidou os leitores a enviar relatos de mal-entendidos com expressões idiomáticas para a seção Tropeços da Língua. Você é hispanofalante e mora (ou morou) no Brasil. Escreva um relato, em primeira pessoa, contando um mal-entendido (real ou imaginado) com uma expressão idiomática ou uma colocação do português: onde e quando aconteceu, o que você entendeu, o que a expressão significava de fato e o que você aprendeu com isso. Relacione a sua experiência com pelo menos uma ideia da entrevista. Não se esqueça de dar um título ao relato e de usar, além da expressão central, pelo menos outras duas expressões idiomáticas ou colocações. Registro semiformal. Seu texto deve ter entre 244 e 304 palavras.",
+    "t": "A revista que publicou a entrevista com a professora e lexicógrafa Marta Siqueira convidou os leitores a enviar relatos de mal-entendidos com expressões idiomáticas para a seção Tropeços da Língua. Você é hispanofalante e mora (ou morou) no Brasil. Escreva um relato, em primeira pessoa, contando um mal-entendido (real ou imaginado) com uma expressão idiomática ou uma colocação do português: onde e quando aconteceu, o que você entendeu, o que a expressão significava de fato e o que você aprendeu com isso. Relacione a sua experiência com pelo menos uma ideia da entrevista. Não se esqueça de dar um título ao relato e de usar, além da expressão central, pelo menos outras duas expressões idiomáticas ou colocações.",
     "es": "Relato en primera persona para una sección de la revista: situación, qué entendiste, qué significaba y qué aprendiste, conectándolo con algo que dice Marta. Usá varias expresiones idiomáticas bien usadas y ponele título.",
     "min": 244,
     "max": 304,
     "punti": [
      [
-      "Situar la anécdota: dónde, cuándo, con quién",
+      "La expresión del malentendido",
       [
-       "quando",
-       "cheguei",
-       "semana",
-       "morava"
+       "ficha caiu",
+       "pisar na bola",
+       "pisei na bola",
+       "pagar o pato",
+       "tirar de letra",
+       "dar um jeito",
+       "dar um pulo",
+       "quebrar o galho",
+       "engolir sapo",
+       "chutar o balde",
+       "cara de pau",
+       "encher linguiça",
+       "segurar vela",
+       "dor de cotovelo",
+       "enfiar o pé na jaca",
+       "fazer uma vaquinha"
       ]
      ],
      [
-      "Explicar qué entendió y qué significaba la expresión",
+      "Qué entendiste y qué significaba de verdad",
       [
-       "significa",
-       "entendi",
        "ao pé da letra",
-       "queria dizer"
+       "literalmente",
+       "queria dizer",
+       "significava",
+       "na verdade",
+       "sentido figurado"
       ]
      ],
      [
-      "Relacionar con una idea de la entrevista",
+      "Una idea de la entrevista con Marta Siqueira",
       [
        "marta",
-       "entrevista",
+       "siqueira",
+       "lexicógrafa",
        "dicionário"
       ]
      ],
      [
-      "Usar otras expresiones idiomáticas o colocaciones",
+      "Otras dos expresiones idiomáticas o colocaciones",
       [
        "ficha caiu",
        "pisado na bola",
        "pisei na bola",
        "dar um jeito",
        "pagar o pato",
-       "tirar de letra"
-      ]
-     ],
-     [
-      "Cerrar con lo que aprendió",
-      [
-       "aprendi",
-       "me mostrou",
-       "lição"
+       "tirar de letra",
+       "tomar uma decisão",
+       "fazer questão",
+       "dar certo",
+       "engolir sapo",
+       "quebrar o galho"
       ]
      ]
     ],
@@ -8074,6 +11834,99 @@
      "com pena de mim": "con lástima de mí",
      "quis sumir de vergonha": "quise que me tragara la tierra",
      "gringo": "extranjero, cualquiera que sea de afuera"
+    }
+   },
+   "breve": {
+    "title": "Mudança Tranquila",
+    "genre": "propaganda de rádio",
+    "es": "Una publicidad de radio de una empresa de mudanzas de Curitiba, hecha de expresiones idiomáticas: pisar na bola, tirar de letra, custar os olhos da cara.",
+    "speaker": "Voz da propaganda",
+    "voice": 1,
+    "text": [
+     "Mudar de casa deixa você com os nervos à flor da pele? Tem medo de que o caminhão pise na bola e chegue atrasado? Relaxa: com a Mudança Tranquila, você tira a mudança de letra.",
+     "A gente embala tudo, desmonta os móveis e monta de novo na casa nova. Fazemos questão de cumprir o horário: se o caminhão atrasar mais de uma hora, você ganha 20% de desconto. E não custa os olhos da cara: o orçamento é grátis e sai em 24 horas.",
+     "Para mudanças de até 15 quilômetros dentro de Curitiba, o preço começa em 890 reais. Pagando à vista, você ainda ganha as caixas de papelão de mão beijada.",
+     "Ligue já para a Mudança Tranquila: a gente dá um jeito, e você só troca a chave."
+    ],
+    "tabella": [
+     [
+      "Desconto se o caminhão atrasar mais de uma hora",
+      "20%",
+      [
+       "20",
+       "20 %",
+       "vinte por cento",
+       "20 por cento"
+      ]
+     ],
+     [
+      "Prazo para receber o orçamento (horas)",
+      "24",
+      [
+       "vinte e quatro",
+       "24 horas",
+       "24h"
+      ]
+     ],
+     [
+      "Distância máxima dentro da cidade (quilômetros)",
+      "15",
+      [
+       "quinze",
+       "15 km",
+       "15 quilômetros"
+      ]
+     ],
+     [
+      "Preço inicial da mudança (reais)",
+      "890",
+      [
+       "oitocentos e noventa",
+       "R$ 890",
+       "890 reais"
+      ]
+     ],
+     [
+      "Cidade da empresa",
+      "Curitiba",
+      [
+       "em Curitiba"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "A empresa desmonta e monta os móveis.",
+      true
+     ],
+     [
+      "O orçamento custa cinquenta reais.",
+      false
+     ],
+     [
+      "Quem paga à vista ganha as caixas.",
+      true
+     ],
+     [
+      "A empresa faz mudanças para outros países.",
+      false
+     ],
+     [
+      "A empresa promete chegar na hora.",
+      true
+     ],
+     [
+      "A empresa também guarda os móveis num depósito.",
+      false
+     ]
+    ],
+    "gloss": {
+     "pise na bola": "se mande una macana",
+     "de letra": "(tirar de letra) hacer sin esfuerzo",
+     "os olhos da cara": "un ojo de la cara",
+     "de mão beijada": "de regalo",
+     "papelão": "cartón",
+     "à vista": "al contado"
     }
    }
   },
@@ -8192,7 +12045,7 @@
      ]
     ],
     "hunt": {
-     "label": "Tocá los verbos en futuro del subjuntivo (se voltarem, quando chegarem…) y en infinitivo personal (para os proprietários tirarem…)",
+     "label": "Toque nos verbos no futuro do subjuntivo (se voltarem, quando chegarem…) e no infinitivo pessoal (para os proprietários tirarem…)",
      "targets": [
       "voltarem",
       "morarem",
@@ -8366,11 +12219,11 @@
     ]
    },
    "compito": {
-    "genre": "artigo",
-    "title": "Um centro para quem?",
+    "genre": "proposta",
+    "title": "Proposta: um centro para quem já vive nele",
     "fonte": "entrambi",
-    "t": "Você mora no centro de uma capital brasileira e colabora com o jornal da associação de moradores do bairro. Após ler a reportagem “O centro vai voltar a ter moradores?” e ouvir a palestra do urbanista Henrique Tavares, escreva um artigo para o jornal do bairro discutindo se a reforma de prédios vazios (o retrofit) pode trazer vida nova ao centro sem expulsar quem já vive lá. No seu artigo, apresente o problema, use informações e argumentos dos dois textos (citando pelo menos uma pessoa de cada um), discuta os riscos e apresente propostas concretas. Não se esqueça de dar um título ao artigo e de usar um registro formal. Seu texto deve ter entre 250 e 310 palavras.",
-    "es": "Artículo de opinión-informativo para el diario del barrio que integre la lectura y la charla: problema, argumentos con fuentes de ambos, riesgos (expulsión) y propuestas. Título y registro formal; es la tarea tipo examen.",
+    "t": "Você mora no centro de uma capital brasileira e faz parte da associação de moradores do bairro. A Secretaria Municipal de Urbanismo abriu uma chamada para receber propostas da sociedade civil sobre a reforma de prédios vazios (o retrofit). Após ler a reportagem «O centro vai voltar a ter moradores?» e ouvir a palestra do urbanista Henrique Tavares, escreva, em nome da associação, uma proposta à Secretaria para que o retrofit traga vida nova ao centro sem expulsar quem já vive lá. Apresente o problema, use informações e argumentos dos dois textos (citando pelo menos uma pessoa de cada um), exponha as medidas propostas e os resultados esperados.",
+    "es": "Propuesta a una institución, en nombre de la asociación: el problema con datos, las fuentes de la lectura y de la charla, medidas numeradas y resultados esperados. Registro formal y trato de V. Sa. / o senhor.",
     "min": 250,
     "max": 310,
     "punti": [
@@ -8379,7 +12232,8 @@
       [
        "vazio",
        "esvazi",
-       "abandon"
+       "apagadas",
+       "fechadas"
       ]
      ],
      [
@@ -8400,38 +12254,233 @@
       ]
      ],
      [
-      "Discutir el riesgo de expulsión de los habitantes actuales",
+      "Discutir el riesgo de expulsión",
       [
        "substituição",
        "expuls",
-       "gentrifica",
        "exclusivo"
       ]
      ],
      [
-      "Proponer medidas concretas",
+      "Medidas numeradas y resultados esperados",
       [
        "habitação social",
        "aluguel social",
-       "fachada",
-       "proponho",
-       "defendo"
+       "espera-se",
+       "propomos"
       ]
      ]
     ],
-    "model": "Um centro para quem?\n\nQuem passa pela nossa região depois das sete da noite conhece a cena: lojas fechadas, faixas de “aluga-se” desbotadas e prédios inteiros com as janelas apagadas. Não por acaso, a transformação desses edifícios em moradia, o chamado retrofit, virou tema de reportagens, palestras e conversas de calçada. A pergunta que precisamos fazer, porém, não é apenas se o centro vai voltar a ter moradores, mas quem serão esses moradores.\n\nOs argumentos a favor são fortes. Como lembra a arquiteta Camila Rocha, ouvida numa reportagem recente, se os prédios voltarem a ser habitados, a rua volta a ter gente e a sensação de insegurança diminui. Além disso, como explicou o urbanista Henrique Tavares numa palestra aqui no bairro, reformar costuma ser mais sustentável do que demolir, porque aproveita uma estrutura que já existe e preserva a memória da cidade.\n\nO risco, contudo, é real. Se os incentivos públicos servirem apenas para que grandes incorporadoras vendam apartamentos pequenos e caros, teremos trocado um centro vazio por um centro exclusivo. Dona Cida, moradora de um prédio ocupado, resumiu bem o problema: sem cuidado, não haverá revitalização, e sim substituição.\n\nPor isso, defendo três medidas. Primeiro, que uma parte das unidades reformadas seja obrigatoriamente destinada à habitação social, inclusive por meio de programas de aluguel social. Segundo, que os moradores atuais, das ocupações e dos cortiços, sejam ouvidos antes de qualquer projeto, e não depois. Terceiro, que o térreo dos prédios continue sendo comércio, com fachadas ativas, para os comerciantes da nossa rua fazerem parte da solução.\n\nO centro nunca esteve realmente vazio. Cabe a nós garantir que a sua nova vida inclua quem nunca o abandonou.",
+    "model": "Proposta: um centro para quem já vive nele\n\nÀ Secretaria Municipal de Urbanismo\n\nA Associação de Moradores do Centro vem apresentar a esta Secretaria a seguinte proposta, em resposta à chamada pública sobre a reforma de prédios vazios. Quem passa pela nossa região depois das sete da noite conhece a cena: lojas fechadas, faixas de «aluga-se» desbotadas e prédios inteiros com as janelas apagadas. O chamado retrofit pode mudar esse quadro, mas é preciso definir para quem.\n\nOs argumentos a favor são fortes. Como lembra a arquiteta Camila Rocha, ouvida numa reportagem recente, se os prédios voltarem a ser habitados, a rua volta a ter gente e a sensação de insegurança diminui. Além disso, como explicou o urbanista Henrique Tavares em palestra no bairro, reformar costuma ser mais sustentável do que demolir. O risco, contudo, é real: se os incentivos servirem apenas às grandes incorporadoras, teremos trocado um centro vazio por um centro exclusivo. Dona Cida, moradora de um prédio ocupado, resumiu bem: sem cuidado, não haverá revitalização, e sim substituição.\n\nPropomos, portanto, três medidas. Primeiro, que uma parte das unidades reformadas seja obrigatoriamente destinada à habitação social, inclusive por meio de programas de aluguel social. Segundo, que os moradores das ocupações e dos cortiços sejam ouvidos antes de qualquer projeto. Terceiro, que o térreo dos prédios continue sendo comércio, com fachadas ativas.\n\nCom isso, espera-se um centro ocupado dia e noite, com comércio vivo e sem expulsão de quem nunca o abandonou. Colocamo-nos à disposição para detalhar a proposta.\n\nAtenciosamente,\nAssociação de Moradores do Centro",
     "gloss": {
      "faixas": "carteles de tela, pasacalles",
      "desbotadas": "descoloridas",
-     "conversas de calçada": "charlas de vereda",
      "incorporadoras": "empresas desarrolladoras inmobiliarias",
      "prédio ocupado": "edificio tomado por familias sin vivienda",
      "cortiços": "conventillos",
-     "térreo": "planta baja",
-     "Cabe a nós": "nos toca a nosotros"
+     "térreo": "planta baja"
+    }
+   },
+   "breve": {
+    "title": "Rádio Câmara: o programa Centro Vivo",
+    "genre": "notícia de rádio",
+    "es": "Una noticia de la radio del concejo municipal de Porto Alegre: se aprueba un programa para volver a poblar el centro; cifras, condiciones y la crítica de la oposición.",
+    "speaker": "Repórter",
+    "voice": 0,
+    "text": [
+     "Rádio Câmara, boletim das seis da tarde. A Câmara Municipal de Porto Alegre aprovou ontem, por 24 votos a 11, o programa Centro Vivo, que pretende trazer de volta moradores para o Centro Histórico.",
+     "Pelo projeto, prédios de escritórios vazios há mais de cinco anos poderão ser transformados em apartamentos. Os proprietários que aderirem ao programa terão desconto de até 60% no IPTU durante dez anos. Em contrapartida, 20% dos apartamentos deverão ser alugados a famílias de baixa renda, com aluguel limitado a um terço da renda familiar.",
+     "A oposição votou contra: segundo o vereador Paulo Nunes, sem investimento em segurança e transporte, o programa pode acabar beneficiando só as construtoras. Já a prefeitura estima que, se tudo correr como previsto, cerca de 4 mil pessoas passem a morar no centro até 2030.",
+     "O projeto segue agora para a sanção do prefeito, que tem 15 dias úteis para assinar. Voltamos amanhã, no mesmo horário."
+    ],
+    "tabella": [
+     [
+      "Votos a favor do programa",
+      "24",
+      [
+       "vinte e quatro",
+       "24 votos"
+      ]
+     ],
+     [
+      "Desconto máximo no IPTU",
+      "60%",
+      [
+       "60",
+       "60 %",
+       "sessenta por cento",
+       "60 por cento"
+      ]
+     ],
+     [
+      "Parte dos apartamentos para famílias de baixa renda",
+      "20%",
+      [
+       "20",
+       "20 %",
+       "vinte por cento",
+       "20 por cento"
+      ]
+     ],
+     [
+      "Pessoas que devem morar no centro até 2030",
+      "4 mil",
+      [
+       "4.000",
+       "4000",
+       "quatro mil"
+      ]
+     ],
+     [
+      "Prazo do prefeito para assinar (dias úteis)",
+      "15",
+      [
+       "quinze",
+       "15 dias",
+       "15 dias úteis"
+      ]
+     ]
+    ],
+    "info": [
+     [
+      "O programa quer transformar escritórios vazios em moradias.",
+      true
+     ],
+     [
+      "O projeto foi aprovado por unanimidade.",
+      false
+     ],
+     [
+      "Os proprietários que aderirem pagam menos imposto.",
+      true
+     ],
+     [
+      "Todos os apartamentos serão para famílias de baixa renda.",
+      false
+     ],
+     [
+      "Para a oposição, o programa pode favorecer as construtoras.",
+      true
+     ],
+     [
+      "O prefeito já assinou o projeto.",
+      false
+     ]
+    ],
+    "gloss": {
+     "vereador": "concejal",
+     "iptu": "impuesto inmobiliario (como el ABL)",
+     "contrapartida": "contrapartida",
+     "sanção": "promulgación",
+     "aderirem": "adhieran",
+     "renda": "ingreso"
     }
    }
   }
+ ],
+ "ADEQ": {
+  "_doc": "Criterios de adequação de la revisión local (tramo.js, adequacao): tratamiento (voce contra senhor, según GENRES[g].trat), uso de la fuente (al menos fonteMin palabras de contenido del texto o del audio que la consigna no trae; stop: las que no cuentan), registro (coloquial contra formal según GENRES[g].registro; formalForte: lo que no va en un texto informal).",
+  "fonteMin": 5,
+  "dfMax": 3,
+  "stemLen": 6,
+  "wordMin": 5,
+  "coloqMax": 1,
+  "stop": "quando porque também ainda sempre muito muita muitos muitas outro outra outros outras todos todas sobre entre depois antes assim então mesmo mesma mesmos mesmas apenas porém pessoa pessoas coisa coisas tempo vezes parte gente fazer dizer estar ficar tinha estava havia podem seria sendo tenho temos estão nosso nossa nossos nossas aquele aquela aqueles aquelas desse dessa deste desta nesse nessa neste nesta disso nisso primeiro primeira grande grandes melhor maior menos semana hoje ontem amanhã agora dentro contra desde durante quase talvez nunca nenhum nenhuma alguns algumas algum alguma cada qualquer quanto quanta quantos quantas onde tanto tanta tantos tantas mesma além pouco pouca poucos poucas próprio própria verdade certo certa claro claramente mundo forma maneira exemplo lugar lugares precisa preciso sabe saber acho achar falar falou disse dizer ainda aquilo aqui desde enquanto sobretudo portanto contudo entretanto todavia embora apesar texto áudio leitura escuta reportagem matéria programa entrevista",
+  "voce": [
+   "você",
+   "vocês",
+   "te",
+   "teu",
+   "tua",
+   "teus",
+   "tuas",
+   "contigo",
+   "cê"
+  ],
+  "senhor": [
+   "o senhor",
+   "a senhora",
+   "os senhores",
+   "as senhoras",
+   "do senhor",
+   "da senhora",
+   "ao senhor",
+   "à senhora",
+   "vossa senhoria",
+   "V. Sa."
+  ],
+  "coloquial": [
+   "pra",
+   "pras",
+   "pros",
+   "tá",
+   "tô",
+   "tava",
+   "né",
+   "cê",
+   "a gente",
+   "vc",
+   "tb",
+   "pq",
+   "blz",
+   "cadê",
+   "valeu",
+   "tipo assim"
+  ],
+  "formal": [
+   "porém",
+   "portanto",
+   "contudo",
+   "todavia",
+   "entretanto",
+   "no entanto",
+   "cujo",
+   "cuja",
+   "ademais",
+   "diante do exposto",
+   "dessa forma",
+   "desse modo",
+   "ainda que",
+   "visto que",
+   "uma vez que"
+  ],
+  "formalForte": [
+   "prezado",
+   "prezada",
+   "prezados",
+   "prezadas",
+   "atenciosamente",
+   "vossa senhoria",
+   "venho por meio",
+   "sem mais para o momento"
+  ]
+ },
+ "cellStop": [
+  "o",
+  "os",
+  "as",
+  "às",
+  "à",
+  "ao",
+  "aos",
+  "um",
+  "uma",
+  "do",
+  "da",
+  "dos",
+  "das",
+  "de",
+  "em",
+  "no",
+  "na",
+  "até",
+  "cerca",
+  "horas",
+  "hora",
+  "hs",
+  "reais",
+  "real",
+  "r"
  ]
 };
   if (typeof module === "object" && module.exports) module.exports = root.TRAMO_DATA;

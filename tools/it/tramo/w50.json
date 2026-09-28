@@ -350,5 +350,37 @@
       "avrei gradito": "me hubiera gustado",
       "riprenderlo in mano": "volver a agarrarlo"
     }
+  },
+  "breve": {
+    "title": "Tradurre il Novecento, il festival",
+    "genre": "annuncio radiofonico",
+    "es": "Un aviso de radio presenta un festival de traducción literaria en Turín.",
+    "speaker": "Voce dell'annuncio",
+    "voice": 1,
+    "text": [
+      "Ci sono parole che sembrano uguali e non lo sono mai. Per chi ama le lingue torna a Torino «Tradurre il Novecento», il festival dedicato ai traduttori e alle traduttrici, dal 24 al 26 novembre, alla Biblioteca civica centrale.",
+      "Tre giorni di incontri, letture e laboratori: si parlerà di Natalia Ginzburg, Primo Levi, Italo Calvino ed Elsa Morante con chi li ha tradotti in spagnolo, in inglese e in tedesco. Sabato mattina, laboratorio per studenti: «Falsi amici, veri nemici», dieci euro a persona, iscrizione obbligatoria.",
+      "Domenica alle diciotto, incontro di chiusura con la scrittrice Eleonora Masi, che presenterà il suo nuovo romanzo, già tradotto in dodici lingue prima ancora di uscire in Italia.",
+      "Tutti gli incontri sono gratuiti, tranne i laboratori. Programma completo sul sito del festival."
+    ],
+    "tabella": [
+      ["Città del festival", "Torino", []],
+      ["Primo giorno del festival", "24 novembre", ["il 24 novembre", "24", "ventiquattro novembre"]],
+      ["Costo del laboratorio (euro)", "10", ["dieci"]],
+      ["Lingue in cui è già tradotto il romanzo (numero)", "12", ["dodici"]]
+    ],
+    "info": [
+      ["Il festival si svolge in una biblioteca.", true],
+      ["Si parla solo di traduzioni in spagnolo.", false],
+      ["Il laboratorio di sabato è per studenti.", true],
+      ["Il romanzo di Eleonora Masi è già uscito in Italia.", false],
+      ["Anche i laboratori sono gratuiti.", false],
+      ["L'incontro di chiusura è domenica.", true]
+    ],
+    "gloss": {
+      "laboratori": "talleres",
+      "iscrizione": "inscripción",
+      "tranne": "excepto"
+    }
   }
 }

@@ -20,6 +20,8 @@
 :root {
   --coral: #ee5a33;             /* el atardecer en el Arpoador */
   --coral-escuro: #c2401c;
+  /* el botón principal: texto blanco con 5,2:1 (el coral del atardecer daba 3,4:1) */
+  --boton: #c2401c; --boton-hover: #a3340f; --boton-tinta: #fff;
   --coral-claro: #ff8a5c;
   --mata: #1a8a4f;              /* la Mata Atlântica */
   --mata-claro: #2fb36c;
@@ -54,6 +56,7 @@
 @media (prefers-color-scheme: dark) {
   html:not([data-theme="light"]) {
     --coral: #ff7a52; --coral-escuro: #e0582f; --coral-claro: #ff9c78;
+    --boton: #ff7a52; --boton-hover: #ff9c78; --boton-tinta: #1f0a02;
     --mata: #3fc27a; --mata-claro: #62d894; --mata-escuro: #22945a;
     --sol: #ffd25c; --sol-escuro: #e0aa1c;
     --mar: #2cc6c0; --mar-escuro: #169b98; --mar-claro: #5fe0d8;
@@ -69,6 +72,7 @@
 }
 html[data-theme="dark"] {
     --coral: #ff7a52; --coral-escuro: #e0582f; --coral-claro: #ff9c78;
+    --boton: #ff7a52; --boton-hover: #ff9c78; --boton-tinta: #1f0a02;
     --mata: #3fc27a; --mata-claro: #62d894; --mata-escuro: #22945a;
     --sol: #ffd25c; --sol-escuro: #e0aa1c;
     --mar: #2cc6c0; --mar-escuro: #169b98; --mar-claro: #5fe0d8;
@@ -127,7 +131,7 @@ header.top::before {
 .placa.big .p-sup { font-size: .68rem; letter-spacing: .28em; }
 .placa.big .p-rua { font-size: 1.55rem; letter-spacing: .01em; line-height: 1.15; margin-top: 2px; }
 @media (max-width: 520px) { .placa.big .p-rua { font-size: 1.3rem; } }
-.stat span { font-size: .56rem; color: var(--cinza); text-transform: uppercase; letter-spacing: .1em; font-weight: 700; }
+.stat span { font-size: .6875rem; color: var(--cinza); text-transform: uppercase; letter-spacing: .1em; font-weight: 700; }
 .stat.hot b { color: var(--coral); }
 /* el anillo de la meta: un sol que se completa */
 .ring { --p: 0; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; flex: none;
@@ -164,11 +168,11 @@ p.version { text-align: center; margin: 18px 0 8px; opacity: .8; }
 
 .btn {
   border: none; border-radius: 12px; padding: 13px 20px; font-weight: 700; letter-spacing: .01em;
-  background: var(--coral); color: #fff;
+  background: var(--boton); color: var(--boton-tinta);
   transition: transform .08s, background .15s, filter .15s;
 }
-@media (hover: hover) { .btn:hover:not(:disabled) { background: var(--coral-escuro); } }
-.btn:active:not(:disabled) { transform: scale(.98); background: var(--coral-escuro); }
+@media (hover: hover) { .btn:hover:not(:disabled) { background: var(--boton-hover); } }
+.btn:active:not(:disabled) { transform: scale(.98); background: var(--boton-hover); }
 .btn.ghost { background: var(--papel); color: var(--tinta); border: 1.5px solid var(--cinza-claro); }
 @media (hover: hover) { .btn.ghost:hover:not(:disabled) { background: var(--areia); } }
 .btn.ghost:active:not(:disabled) { background: var(--areia); }
@@ -365,7 +369,7 @@ html[data-theme="dark"] .opt.right { color: var(--mata-claro); } html[data-theme
   flex: 1; min-width: 0; padding: 14px 16px; border-radius: 12px; background: var(--papel);
   border: 1.5px solid var(--cinza-claro); color: inherit; font: inherit; font-size: 1.08rem; font-weight: 700; }
 .typed textarea { flex: 1 1 100%; resize: none; overflow: hidden; line-height: 1.4; min-height: 54px; }
-.typed input:focus, .typed textarea:focus { outline: none; border-color: var(--coral);
+.typed input:focus, .typed textarea:focus { border-color: var(--coral);
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--coral) 15%, transparent); }
 .accents button { border: 1.5px solid var(--cinza-claro); background: var(--papel); color: inherit;
   border-radius: 10px; padding: 7px 12px; font-weight: 700; }
@@ -494,13 +498,13 @@ ul.reqs li.ok { color: var(--mata); font-weight: 700; }
 textarea.scrivi { width: 100%; box-sizing: border-box; min-height: 160px; resize: none; overflow: hidden;
   font: inherit; font-size: 1.05rem; line-height: 1.5; padding: 14px; border-radius: 12px;
   border: 1.5px solid var(--cinza-claro); background: var(--papel); color: var(--tinta); }
-textarea.scrivi:focus { outline: none; border-color: var(--coral); }
+textarea.scrivi:focus { border-color: var(--coral); }
 .scrivi-marked mark.bad { background: color-mix(in srgb, var(--coral) 22%, transparent); text-decoration: underline wavy var(--coral); }
 .scrivi-marked mark.soft { background: color-mix(in srgb, var(--sol) 20%, transparent); }
 ol.findings li { padding: 6px 0; border-top: 1px solid var(--cinza-claro); }
 ol.findings li.soft { color: var(--cinza); }
 p.model { font-size: 1.02rem; line-height: 1.6; }
-details.aibox input, .card input#aikey, .card input#gemkey { display: block; width: 100%; box-sizing: border-box; min-width: 0;
+details.aibox input, .card input#aikey, .card input#gemkey, .card input#gisttoken { display: block; width: 100%; box-sizing: border-box; min-width: 0;
   padding: 10px 12px; border-radius: 12px; border: 1.5px solid var(--cinza-claro); background: var(--papel); color: var(--tinta); font: inherit; }
 .aiout { border-top: 1px solid var(--cinza-claro); margin-top: 10px; padding-top: 8px; }
 
@@ -520,7 +524,7 @@ details.aibox input, .card input#aikey, .card input#gemkey { display: block; wid
   header.top .bar { padding: 8px 12px; gap: 6px; }
   .stats { gap: 7px; }
   .stat { min-width: 32px; }
-  .stat span { font-size: .5rem; letter-spacing: .06em; }
+  .stat span { font-size: .6875rem; letter-spacing: .02em; }
   .mode { width: 34px; height: 34px; font-size: .95rem; }
   .ring { width: 36px; height: 36px; } .ring b { width: 28px; height: 28px; font-size: .68rem; }
   .placa { padding: 4px 9px 3px; } .placa .p-rua { font-size: 1rem; } .placa .p-sup { font-size: .52rem; }
@@ -553,6 +557,7 @@ body.kar-partial .text .w:not(.gl):not(.now) { color: transparent; border-bottom
   background: color-mix(in srgb, var(--sol) 12%, transparent); }
 mark.dgok { background: color-mix(in srgb, var(--mata) 26%, transparent); color: inherit; border-radius: 3px; }
 mark.dgmiss { background: color-mix(in srgb, var(--coral) 24%, transparent); color: inherit; border-radius: 3px; }
+mark.dgcasi { background: color-mix(in srgb, var(--sol, #f5c518) 38%, transparent); color: inherit; border-radius: 3px; }
 
 /* Glosas de opción múltiple en las lecturas */
 .text .w.mcg { background: color-mix(in srgb, var(--sol) 30%, transparent); border-radius: 4px; padding: 0 2px;

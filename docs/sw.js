@@ -18,7 +18,7 @@
  * las viejas de esta misma app (La Via C1: «laviac1-v…») se borran las
  * versiones; las voces ya descargadas («laviac1-voci») se siguen leyendo.
  */
-var VERSION = "c1-v2.8";
+var VERSION = "c1-v3.0";
 var PREFIX = "c1-";
 var VOCI = "c1-voci";
 var LEGACY = /^laviac1-v\d/;          // the old versions of this same app
@@ -42,10 +42,24 @@ var SHELL = [
   "icons/apple-touch-icon.png"
 ].concat(Boot.coreFiles());
 
-function fill(cache, files) {
+function fill(cache, files, mode) {
   // cache: "reload" skips the browser's HTTP cache (GitHub Pages keeps files
   // 10 minutes): otherwise a new version could be filled with old files.
-  return cache.addAll(files.map(function (f) { return new Request(f, { cache: "reload" }); }));
+  // On the very first install the page has just downloaded these same
+  // files: "default" takes them from the HTTP cache instead of downloading
+  // six megabytes twice.
+  return cache.addAll(files.map(function (f) { return new Request(f, { cache: mode || "reload" }); }));
+}
+// Whether this phone already had a version of the app (then an install is an update).
+function firstInstall() {
+  return caches.keys().then(function (keys) { return !keys.some(function (k) { return k.indexOf(PREFIX) === 0 || LEGACY.test(k); }); });
+}
+// The copy in the background skips the HTTP cache too (it revalidates, a
+// 304 when nothing changed): otherwise an old app.js could be stored next
+// to a new engine.js and the next start would mix versions.
+function fresh(req) {
+  if (req.mode === "navigate") return fetch(req.url, { cache: "no-cache", credentials: "same-origin" });
+  return fetch(new Request(req, { cache: "no-cache" }));
 }
 
 // The languages this phone already uses: those whose lang.js is in one of
@@ -69,10 +83,13 @@ function langsInUse() {
 }
 
 self.addEventListener("install", function (e) {
-  e.waitUntil(caches.open(VERSION).then(function (cache) {
-    return fill(cache, SHELL).then(function () {
-      return langsInUse().then(function (codes) {
-        return Promise.all(codes.map(function (c) { return fill(cache, Boot.langFiles(c)); }));
+  e.waitUntil(firstInstall().then(function (first) {
+    var mode = first ? "default" : "reload";
+    return caches.open(VERSION).then(function (cache) {
+      return fill(cache, SHELL, mode).then(function () {
+        return langsInUse().then(function (codes) {
+          return Promise.all(codes.map(function (c) { return fill(cache, Boot.langFiles(c), mode); }));
+        });
       });
     });
   }).then(function () { return self.skipWaiting(); }));
@@ -147,7 +164,7 @@ self.addEventListener("fetch", function (e) {
   }
   e.respondWith(caches.open(VERSION).then(function (cache) {
     return cache.match(e.request, { ignoreSearch: true }).then(function (hit) {
-      var net = fetch(e.request).then(function (res) {
+      var net = fresh(e.request).then(function (res) {
         if (res && res.ok) cache.put(e.request, res.clone());
         return res;
       }).catch(function () { return hit; });

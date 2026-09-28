@@ -3,6 +3,7 @@
   "short_name": "C1",
   "description": "Italiano o portugués de Brasil hasta C1 en un año, para hispanohablantes: frases, escucha, pausas de 3 minutos y gramática. Funciona sin internet.",
   "lang": "es",
+  "id": "./",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
@@ -16,6 +17,8 @@
     { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml" }
   ],
   "shortcuts": [
+    { "name": "Hoy: tu plan del día", "short_name": "Hoy", "url": "./#hoy",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
     { "name": "Pausa de 3 minutos", "short_name": "Pausa", "url": "./#pausa",
       "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
     { "name": "Repaso de 2 minutos", "short_name": "2 min", "url": "./#micro",

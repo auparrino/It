@@ -1,5 +1,5 @@
 /* Divide il corpus in lotti per una passata di revisione.
-   Run: node tools/audit/shard.js <passata> <lotti>
+   Run: node tools/it/audit/shard.js <passata> <lotti>
    Ogni passata sposta i confini dei lotti, così ogni unità capita accanto
    a vicini diversi e sotto occhi diversi. */
 var fs = require("fs");

@@ -132,5 +132,38 @@
       "era stato girato": "había sido filmado (voz pasiva: se ve en la semana 35)",
       "insegne": "carteles de los negocios"
     }
+  },
+  "breve": {
+    "title": "Giornale radio delle tredici",
+    "genre": "notiziario radiofonico",
+    "es": "El noticiero del mediodía de una radio de la ciudad: un desmentido, una serie en el cine y el fútbol.",
+    "speaker": "Speaker",
+    "voice": 0,
+    "text": [
+      "Giornale radio delle tredici. In apertura, una smentita. Da ieri circola sui social un messaggio secondo cui lunedì tutte le scuole della città resterebbero chiuse per un'allerta meteo. Non è vero: il sindaco ha precisato che nessuna ordinanza è stata firmata e che le lezioni si svolgeranno regolarmente.",
+      "Il messaggio, spiega la polizia postale, sembrava ufficiale perché riportava il logo del Comune, ma conteneva diversi errori. Chi lo ha ricevuto è invitato a non condividerlo e a consultare soltanto il sito del Comune.",
+      "Cultura. Stasera alle 21, al cinema Odeon, la regista Chiara Ventura presenta la serie «Condiviso». Dopo la proiezione del primo episodio, incontro con il pubblico. Ingresso libero fino a esaurimento dei posti.",
+      "Sport. Pareggio, uno a uno, nel derby di ieri sera; la squadra di casa ha giocato gli ultimi venti minuti con un uomo in meno. Prossimo aggiornamento alle quindici."
+    ],
+    "tabella": [
+      ["Giorno in cui, secondo il messaggio falso, le scuole restavano chiuse", "lunedì", []],
+      ["Nome del cinema", "Odeon", ["cinema Odeon"]],
+      ["Ora della presentazione della serie", "21", ["ventuno", "alle 21", "21:00", "21.00"]],
+      ["Risultato del derby", "1-1", ["uno a uno", "1 a 1", "1 1", "1:1"]]
+    ],
+    "info": [
+      ["Il sindaco ha firmato un'ordinanza per chiudere le scuole.", false],
+      ["Il messaggio falso aveva il logo del Comune.", true],
+      ["La polizia postale chiede di non condividere il messaggio.", true],
+      ["Per vedere la serie al cinema bisogna pagare il biglietto.", false],
+      ["Dopo la proiezione la regista incontra il pubblico.", true],
+      ["La squadra di casa ha vinto il derby.", false]
+    ],
+    "gloss": {
+      "smentita": "desmentida",
+      "allerta": "alerta",
+      "proiezione": "proyección",
+      "pareggio": "empate"
+    }
   }
 }
