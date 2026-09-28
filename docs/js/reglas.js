@@ -17,7 +17,7 @@
  *    un criterio (F4): en las rondas, un reconocimiento acertado de un
  *    ejercicio sin ficha no crea ficha (queda anotado: la próxima vez viene
  *    escrito, y la regla ya tiene la suya); entra lo que falló y lo que se
- *    escribió.  La confianza (seguro / creo / adivino) va a la calibración.
+ *    escribió.
  *
  * 3. Transferencia por ítem (Engine.enqueue): el chequeo de la lección
  *    fallado, la pregunta de lectura fallada, el bloque del dictogloss que
@@ -203,7 +203,7 @@
   function feed(state, rule, q, o) {
     var Eg = E(), now = o.now || Date.now();
     var c = state.cards[rule] = Eg.schedule(state.cards[rule], q, {
-      id: rule, state: state, now: now, fast: !!o.fast, slow: !!o.slow, hint: !!o.hint, conf: o.conf,
+      id: rule, state: state, now: now, fast: !!o.fast, slow: !!o.slow, hint: !!o.hint,
       retry: !!o.retry, notte: o.notte });
     if (q === 0) c.failDay = Eg.dayKey(new Date(now));
     return c;
@@ -211,7 +211,7 @@
 
   /* afterAnswer(state, it, q, o): the card of the item and of its rule.
      q: 0 wrong, 1 close, 2 right.  o: { kind (of the round), now, ekind
-     (slip / vocab / rule), fast, slow, ms, hint, conf, notte, produced }.
+     (slip / vocab / rule), fast, slow, ms, hint, notte, produced }.
      → { card: created or updated, rule: the rule card or null } */
   function afterAnswer(state, it, q, o) {
     o = o || {};
@@ -244,15 +244,14 @@
                     !it.retry && !it.ruleReview && !!LIGHT[o.kind];
         state.cards[it.id] = Eg.schedule(state.cards[it.id], q, {
           light: light, kind: o.ekind, id: it.id, state: state, retry: !!it.retry, hint: !!o.hint,
-          fast: !!o.fast, slow: !!o.slow, ms: o.ms, conf: o.conf, notte: o.notte, now: now });
+          fast: !!o.fast, slow: !!o.slow, ms: o.ms, notte: o.notte, now: now });
         if (produced && q === 2) state.cards[it.id].prod = 1;
         Eg.maybeFit(state);
         res.card = true;
       }
     }
-    if (it.ruleReview && it.rule) res.rule = feed(state, it.rule, q, { now: now, fast: o.fast, slow: o.slow, hint: o.hint, conf: o.conf, retry: it.retry, notte: o.notte });
+    if (it.ruleReview && it.rule) res.rule = feed(state, it.rule, q, { now: now, fast: o.fast, slow: o.slow, hint: o.hint, retry: it.retry, notte: o.notte });
     else if (!it.retry && it.src !== "coniugatore") res.rule = touch(state, it, q, { now: now, produced: produced, fast: o.fast });
-    if (o.conf && Eg.noteConfidence) Eg.noteConfidence(state, o.conf, q === 2, new Date(now));
     return res;
   }
 

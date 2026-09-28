@@ -1,5 +1,5 @@
 /* Rumo C1 — el motor de la memoria: FSRS, mantenimiento, noche y mañana,
-   hipercorrección, registro de repasos, velocidad estimada, calibración,
+   registro de repasos, velocidad estimada,
    reglas como fichas, cola de repaso, saneamiento del guardado y hábito.
    Corre: node tools/pt/test_memoria.js  */
 var pack = require("../lib/pack.js");
@@ -27,8 +27,6 @@ ok(Engine.ratingFor(1, { kind: "slip" }) === 3, "un tipeo no es un error: Good")
 ok(Engine.ratingFor(2) === 3, "correcto = Good");
 ok(Engine.ratingFor(2, { hint: true }) === 2, "correcto con pista = Hard");
 ok(Engine.ratingFor(2, { retry: true }) === 2, "la segunda vez, más fácil = Hard");
-ok(Engine.ratingFor(2, { conf: "adivino" }) === 2, "adivinado = Hard");
-ok(Engine.ratingFor(2, { conf: "seguro", fast: true }) === 4, "seguro y rápido = Easy");
 ok(Engine.ratingFor(2, { light: true }) === 4, "correcto a la primera en el entrenamiento = Easy");
 
 /* --------------------------------------------------- una ficha */
@@ -77,9 +75,6 @@ var nc2 = Engine.schedule(null, 2, { now: NIGHT, notte: false });
 ok(nc2.due > NIGHT + 2 * DAY, "modo noche apagado: intervalo normal");
 var day = Engine.schedule(null, 2, { now: NOON });
 ok(!day.night && day.due > NOON + 2 * DAY, "de día, sin modo noche");
-// hypercorrection: sure and wrong comes back next morning
-var hy = Engine.schedule({ s: 30, d: 4, reps: 3, due: NOON, last: NOON - 30 * DAY }, 0, { now: NOON, conf: "seguro" });
-ok(hy.hyper === 1 && new Date(hy.due).getHours() === 7 && new Date(hy.due).getDate() === 11, "seguro e incorrecto: mañana a la mañana");
 
 /* ------------------------------------------------ registro y velocidad */
 var s2 = Engine.blankSave();
@@ -103,13 +98,6 @@ var slow = Engine.schedule(null, 2, { now: NOON, notte: false, state: s4, id: "d
 ok(slow.interval < c.interval, "quien olvida antes repasa antes: " + slow.interval + " < " + c.interval);
 var ms = Engine.memoryStats(s2, NOON);
 ok(ms.n === 1 && ms.recall === 100, "estadísticas de la memoria");
-
-/* --------------------------------------------------- calibración */
-var s5 = Engine.blankSave();
-for (var j = 0; j < 10; j++) Engine.noteConfidence(s5, "seguro", j < 8, new Date(NOON));
-Engine.noteConfidence(s5, "adivino", true, new Date(NOON));
-var cal = Engine.calibration(s5, new Date(NOON));
-ok(cal.n === 10 && cal.over === 20 && cal.guesses === 1 && cal.guessRight === 1, "20 % de «seguro» incorrectos: " + JSON.stringify(cal));
 
 /* ------------------------------------------- la regla como ficha */
 var s6 = Engine.blankSave();

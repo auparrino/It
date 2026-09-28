@@ -1030,8 +1030,8 @@
 
   /* La cola de repaso: primero los errores (reps 0), después la semana en
      curso, después el resto por vencimiento. */
-  /* Order: what was learnt last night (sleep in between: Mazza 2016) and
-     the confident errors (hypercorrection), then the errors, then the
+  /* Order: what was learnt last night (sleep in between: Mazza 2016),
+     then the errors, then the
      current week, then the rest by due date; the cards in maintenance
      (months apart) last, at most MAINT_A_DAY a day, so the queue never
      becomes a debt. */
@@ -1044,7 +1044,7 @@
       if (!card || !card.due || card.due > now || !knownId(map, id, state)) return;
       var isMaint = card.state === "maint" || (card.s == null && Engine && Engine.retired && Engine.retired(card));
       var rw = id.indexOf("r:") === 0 ? +id.split(":")[1] : map[id] ? (map[id].week || map[id].wk) : 0;
-      var pri = (card.night && card.night === today) || card.hyper ? -1
+      var pri = card.night && card.night === today ? -1
               : card.reps === 0 ? 0 : rw === week ? 1 : isMaint ? 3 : 2;
       due.push({ id: id, due: card.due, pri: pri, maint: isMaint });
     });
