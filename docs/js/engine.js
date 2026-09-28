@@ -712,9 +712,27 @@
     return v;
   }
 
+  /* The fields the modules keep in the save (outside the base save): with
+     the wrong type (a string where an object goes, after a bad copy or an
+     old version) they are dropped, and the module starts them again empty.
+     Before 3.0 a single bad field could leave the app without a screen. */
+  var SAVE_V = 3;
+  var MODULE_OBJ = ["mcGloss", "readSess", "readParts", "variants", "hintLevels", "weakDone", "suoniPct", "suoniDone", "capirePct",
+    "duelli", "ubicacion", "dictogloss", "ascolto", "parlaLog", "esame", "esameDraft", "scrittiDraft", "scritti", "biblio",
+    "bossUsed", "strands", "streakBroken", "escritos", "escrituraPlus", "onboard", "hoy", "cierre", "porque", "ritmo", "tiempo",
+    "radio", "scriviExtra", "tramo", "tres", "fuera", "sync"];
+  var MODULE_ARR = ["aiNotes", "storie", "history"];
+  function sanitizeModules(s) {
+    MODULE_OBJ.forEach(function (k) { if (k in s && s[k] != null && !isObj(s[k])) delete s[k]; });
+    MODULE_ARR.forEach(function (k) { if (k in s && s[k] != null && !Array.isArray(s[k])) delete s[k]; });
+    if (s.phase != null && typeof s.phase !== "string") delete s.phase;
+  }
   function sanitize(s) {
     var base = blankSave();
     if (!isObj(s)) return base;
+    sanitizeModules(s);
+    // the version of the save: where a future migration starts from
+    s.v = SAVE_V;
     Object.keys(base).forEach(function (k) {
       var b = base[k], v = s[k];
       if (v === undefined) { s[k] = b; return; }
@@ -1091,7 +1109,7 @@
     sanitize: sanitize,
     migrateSyllabus: migrateSyllabus,
     save: save,
-    touchStreak: touchStreak, checkStreak: checkStreak, fromRaw: fromRaw, damaged: damaged,
+    touchStreak: touchStreak, checkStreak: checkStreak, fromRaw: fromRaw, damaged: damaged, SAVE_V: SAVE_V, MODULE_OBJ: MODULE_OBJ, MODULE_ARR: MODULE_ARR,
     dayKey: dayKey,
     daysBetween: daysBetween,
     addXp: addXp,
