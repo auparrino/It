@@ -597,11 +597,11 @@
     return [v[3] || "", v[2] ? "Ejemplo: *" + v[2] + "*" : ""].filter(Boolean).join(" ");
   }
 
-  function vocabItem(word, state) {
+  function vocabItem(word, state, write) {
     var e = VOC && VOC[word];
     if (!e) return null;
     var v = e.v, id = "v:" + v[0], card = state && state.cards && state.cards[id];
-    if (!card) {
+    if (!card && !write) {
       // distractors: meanings of nearby weeks, never the same Spanish word
       // Same field first (hermano among hija, tío, abuelo), then the same
       // kind of word: a verb among nouns, or «ventana» next to «hermano»,
@@ -650,19 +650,34 @@
     return out;
   }
 
-  // The week's words, new ones first, plus a few of earlier weeks that are due.
+  /* The week's words: each new one is recognised (the meaning among four)
+     and, later in the same round, written; then the ones seen and never
+     written, then the rest of the week, then a few of earlier weeks that
+     are due.  Before 3.0.2 a first round was all recognition and the
+     mission («written at least once») stayed at 0 after playing it.
+     With a small size (two words inside a round, shuffled) there is no
+     pair: the new ones are only recognised, as before. */
+  var VOCAB_NEW = 7;
   function vocabSession(course, week, state, size) {
     if (!VOC) indexVocab(course);
+    size = size || 14;
     var cards = (state && state.cards) || {}, now = Date.now();
-    var own = (week.vocab || []).map(function (v) { return v[0]; });
-    var fresh = own.filter(function (w) { return !cards["v:" + w]; });
-    var known = own.filter(function (w) { return cards["v:" + w]; });
-    var due = Object.keys(VOC).filter(function (w) {
+    var own = (week.vocab || []).map(function (v) { return v[0]; }).filter(function (w) { return VOC[w]; });
+    var pair = size >= 6;
+    var fresh = own.filter(function (w) { return !cards["v:" + w]; }).slice(0, pair ? Math.min(VOCAB_NEW, Math.floor(size / 2)) : size);
+    var unwritten = shuffle(own.filter(function (w) { return cards["v:" + w] && !cards["v:" + w].prod; }));
+    var written = shuffle(own.filter(function (w) { return cards["v:" + w] && cards["v:" + w].prod; }));
+    var due = shuffle(Object.keys(VOC).filter(function (w) {
       var c = cards["v:" + w];
       return VOC[w].week < week.week && c && c.due <= now;
-    });
-    return fresh.concat(shuffle(known), shuffle(due).slice(0, 4)).slice(0, size || 14)
-      .map(function (w) { return vocabItem(w, state); }).filter(Boolean);
+    })).slice(0, 4);
+    var recog = fresh.map(function (w) { return vocabItem(w, state); });
+    // the new words written after all the recognitions, in another order
+    var writeNew = pair ? shuffle(fresh).map(function (w) { return vocabItem(w, state, true); }) : [];
+    var room = Math.max(0, size - recog.length - writeNew.length);
+    var rest = unwritten.concat(written, due).slice(0, Math.max(room, fresh.length ? 0 : size))
+      .map(function (w) { return vocabItem(w, state); });
+    return recog.concat(writeNew, rest).filter(Boolean).slice(0, size);
   }
 
   /* Una ronda mezcla tres fuentes para que ninguna sesión sea igual: los

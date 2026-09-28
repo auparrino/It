@@ -247,6 +247,30 @@ pack.LANGS.forEach(function (code) {
   var cl = B.clinicaSession(sl, 12);
   ok(cl.length && cl[0].type === "card" && /errores de esta semana/.test(cl[0].prompt), tag + "la Clínica abre con tus errores de esta semana");
   ok(cl.some(function (x) { return String(x.id).indexOf("own:") === 0; }), tag + "y mezcla tus ítems propios");
+
+  /* «Palabras de la semana»: a round played to the end leaves words written
+     (the mission counts the written ones); before 3.0.2 the first round was
+     all recognition and the mission stayed at 0. */
+  var wv = course.weeks.filter(function (w) { return (w.vocab || []).length >= 12; })[0];
+  var sv = ctx.Engine.blankSave(), rounds = 0;
+  function written() { return wv.vocab.filter(function (v) { return (sv.cards["v:" + v[0]] || {}).prod; }).length; }
+  while (written() < wv.vocab.length && rounds < 6) {
+    rounds++;
+    var vs = D.vocabSession(course, wv, sv, 14);
+    vs.forEach(function (it) {
+      R.afterAnswer(sv, it, 2, { kind: "vocab", produced: !it.recog && it.type !== "choice" && !it.options });
+    });
+    if (rounds === 1) {
+      ok(written() >= 5, tag + "semana " + wv.week + ": la primera ronda de palabras deja palabras escritas (" + written() + ")");
+      var fstIdx = {}, ordered = true;
+      vs.forEach(function (it, k) { if (it.type === "choice") fstIdx[it.id] = k; else if (it.id in fstIdx === false && !sv.cards[it.id]) ordered = false; });
+      ok(ordered && vs.length <= 14, tag + "cada palabra nueva se reconoce antes de escribirse, y la ronda no pasa de 14");
+    }
+  }
+  ok(written() === wv.vocab.length && rounds <= Math.ceil(wv.vocab.length / 7) + 1,
+     tag + "semana " + wv.week + ": las " + wv.vocab.length + " palabras escritas en " + rounds + " rondas");
+  ok(D.vocabSession(course, wv, ctx.Engine.blankSave(), 2).every(function (it) { return it.type === "choice"; }),
+     tag + "dentro de una ronda (2 palabras) las nuevas solo se reconocen");
 });
 
 console.log("controles: " + checks + "   errores: " + fails);
