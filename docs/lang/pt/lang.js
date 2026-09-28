@@ -163,7 +163,9 @@
     ui: {
       langEs: "portugués",
       wordAdj: "portuguesa",
-      tabs: [["oggi", "☀️", "Hoje"], ["frasi", "🏄", "Treino"], ["leggi", "📖", "Ler"], ["percorso", "🧭", "Trilha"], ["io", "👤", "Eu"]],
+      tabs: [["oggi", "☀️", "Hoje"], ["percorso", "🧭", "Trilha"], ["io", "👤", "Eu"]],
+      // Treino and Ler left the bar in 3.4 (their content lives in each week); still screens, reached from Eu
+      allTabs: [["frasi", "🏄", "Treino"], ["leggi", "📖", "Ler"]],
       today: "Hoje", train: "Treino", read: "Ler", me: "Eu",
       path: "A trilha", pathEl: "la trilha", pathAl: "a la trilha", pathTu: "tu trilha",
       // The logo is a street sign of Rio (blue enamel, white letters): «Rumo» is the course.

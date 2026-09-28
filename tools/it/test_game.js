@@ -378,7 +378,7 @@ ok(Drills.dueCount(course, state) >= 30, "le schede scadute rientrano in coda");
   (core.match(/\bLG\.[a-zA-Z0-9]+/g) || []).forEach(function (k) { need[k.slice(3)] = k.slice(3) in L ? true : undefined; });
   var missing = Object.keys(need).filter(function (k) { return need[k] === undefined; });
   ok(!missing.length, "LANG (lang/it/lang.js) trae todo lo que usa app.js; faltan: " + missing.join(", "));
-  ok(L.ui.tabs.length === 5 && L.ui.tabs[0][2] === "Oggi" && L.ui.tabs[4][2] === "Io", "las pestañas: Oggi … Io");
+  ok(L.ui.tabs.length === 3 && L.ui.tabs[0][2] === "Oggi" && L.ui.tabs[2][2] === "Io" && L.ui.allTabs.length === 2, "las pestañas (3.4): Oggi, Percorso, Io; Allena y Leggi desde Io");
   ok(L.spanish.sure.test("¿Qué tal?") && !L.spanish.sure.test("Che cosa fai?"), "español o italiano: la ñ, ¿, ¡ y las tildes agudas");
   ok(L.glue("l'") === "next" && L.glue("un po'") === null, "hueco elidido: l'amica se pega, un po' no");
 })();

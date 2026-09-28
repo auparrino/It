@@ -14,7 +14,7 @@
  *     tiene prioridad.
  *   · El primer arranque: tres pantallas una sola vez, después del
  *     selector de idioma (para qué y cuántos minutos; ¿de cero o con el test
- *     de ubicación?; cómo funciona la semana y las cinco pestañas), y Oggi
+ *     de ubicación?; cómo funciona la semana y las pestañas), y Oggi
  *     con una sola tarjeta hasta terminar la primera lección.  Nunca a quien
  *     ya tiene progreso.
  *   · Después del curso: aprobado el examen de la semana 52,
@@ -105,8 +105,8 @@
       oggi: "la próxima misión de tu semana, el repaso y atajos.",
       frasi: "para practicar más: frases, palabras, sonidos, la Clínica de tus errores.",
       leggi: "lecturas y escuchas de tu nivel, y la Biblioteca de libros enteros.",
-      percorso: "las 52 semanas en cuatro estaciones; cada estación termina con un " + esc(U.boss || "jefe") + ".",
-      io: "tu progreso, tus metas, tus ajustes y la copia de seguridad."
+      percorso: "las 52 semanas en cuatro estaciones; cada semana trae sus palabras, sus misiones y más práctica; cada estación termina con un " + esc(U.boss || "jefe") + ".",
+      io: "tu progreso, tus ajustes, la copia de seguridad y todo el material junto: lecturas, Biblioteca, práctica, Consultar."
     };
     var start = st.unlocked > 1 ? "Arrancás en la semana " + st.unlocked + "." : "Arrancás en la semana 1.";
     return dots(3) + '<h1 class="onb-h">Cómo funciona</h1>' +
@@ -115,7 +115,7 @@
       '<ol class="onb-week"><li>📘 la lección, en pasos cortos</li><li>📚 las palabras</li><li>🎯 entrenar hasta 20 respuestas bien</li>' +
       "<li>✍️ un texto tuyo</li><li>💬 frases para usar</li><li>📖 una lectura</li><li>🏆 «Dominala»: una sesión que muestra que la sabés</li></ol>" +
       '<p class="muted small">Cuando terminás las misiones se abre la semana siguiente. En ' + esc(U.today || "Hoy") + " siempre está la próxima misión de tu semana.</p></div>" +
-      '<div class="card onb"><h2>Las cinco pestañas</h2><ul class="onb-tabs">' +
+      '<div class="card onb"><h2>Las ' + (tabs.length === 3 ? "tres" : tabs.length) + ' pestañas</h2><ul class="onb-tabs">' +
       tabs.map(function (t) { return "<li><span>" + t[1] + "</span><span><b>" + esc(t[2]) + "</b> · " + (TAB[t[0]] || "") + "</span></li>"; }).join("") + "</ul></div>" +
       '<p class="muted onb-start">' + esc(start) + "</p>" +
       '<div class="row onb-foot"><button class="btn" id="obgo">Empezar</button>' +

@@ -151,7 +151,9 @@
     ui: {
       langEs: "italiano",            // «en italiano», «tu italiano escrito»
       wordAdj: "italiana",           // «¿Es una palabra italiana?»
-      tabs: [["oggi", "🍋", "Oggi"], ["frasi", "🚣", "Allena"], ["leggi", "📖", "Leggi"], ["percorso", "⛵", "Percorso"], ["io", "👤", "Io"]],
+      tabs: [["oggi", "🍋", "Oggi"], ["percorso", "⛵", "Percorso"], ["io", "👤", "Io"]],
+      // Allena and Leggi left the bar in 3.4 (their content lives in each week); still screens, reached from Io
+      allTabs: [["frasi", "🚣", "Allena"], ["leggi", "📖", "Leggi"]],
       today: "Oggi", train: "Allena", read: "Leggi", me: "Io",
       path: "Il percorso", pathEl: "el percorso", pathAl: "al percorso", pathTu: "tu percorso",
       // The logo and the titles are a hand-painted majolica plate, like the

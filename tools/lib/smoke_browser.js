@@ -226,7 +226,7 @@ async function smokeEsame(page, code, P, snap, note, errors) {
     await page.waitForSelector("#obgo");
     await snap(page, P("inicio-3"), true);
     const onbTabs = await page.$$eval(".onb-tabs li", els => els.length);
-    if (onbTabs !== 5) errors.push(code + ": «Cómo funciona» no nombra las cinco pestañas (" + onbTabs + ")");
+    if (onbTabs !== 3) errors.push(code + ": «Cómo funciona» no nombra las tres pestañas (" + onbTabs + ")");
     await page.click("#obgo");
     // Until the first lesson, a single card.
     await page.waitForSelector("#hoyfirst", { timeout: 5000 });
@@ -358,7 +358,7 @@ async function smokeEsame(page, code, P, snap, note, errors) {
     note(code + " · últimos errores: " + elog.slice(0, 2).join(" / "));
 
     // Allena / Treino → Suoni / Sons
-    await page.click("[data-tab='frasi']");
+    await page.click("[data-tab='io']"); await page.waitForTimeout(250); await page.click("[data-goto='frasi']");  // out of the bar since 3.4
     await page.waitForSelector(".capa-week");
     await snap(page, P("entrenar-claro"), true);
     if (await page.$("[data-lab='suoni']")) {
@@ -373,7 +373,7 @@ async function smokeEsame(page, code, P, snap, note, errors) {
     } else errors.push(code + ": no hay Suoni/Sons en entrenar");
 
     // Leggi / Ler → the first open reading, with karaoke
-    await page.click("[data-tab='leggi']");
+    await page.click("[data-tab='io']"); await page.waitForTimeout(250); await page.click("[data-goto='leggi']");  // out of the bar since 3.4
     await page.waitForSelector(".eps");
     await snap(page, P("leer-claro"));
     const ep = await page.$("[data-ep]:not([disabled])");
