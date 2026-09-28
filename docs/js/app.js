@@ -83,6 +83,8 @@
      closed. */
   var persistTimer = null;
   function persist() {
+    // when the progress last changed: the cloud copy compares against it (nube.js)
+    state.savedAt = Date.now();
     if (persistTimer) return;
     persistTimer = setTimeout(flushPersist, 250);
   }
@@ -4118,6 +4120,7 @@
         '<button class="btn ghost" id="import">📂 Restaurar copia</button>' +
         '<input type="file" id="importfile" aria-label="Archivo de la copia" accept="application/json,.json" hidden></div>' +
         '<p class="muted" id="persistmsg" style="margin-top:10px"></p>' +
+        nubeHtml() +
       "</div>" +
 
       (window.Capas && Capas.entryHtml ? Capas.entryHtml() : window.Referencia ? Referencia.entry() : "") +
@@ -4339,7 +4342,7 @@
     var name = UI.exportFile + stamp() + ".json";
     state.exportedAt = Date.now();
     persist();
-    var env = { app: "c1", lang: LG.code, brand: LG.brand, v: APP_VERSION, at: new Date().toISOString(), save: state };
+    var env = saveEnvelope();
     var blob = new Blob([JSON.stringify(env)], { type: "application/json" });
     // On phones, the share sheet lets you drop the file in Drive, mail or chat.
     try {
@@ -4362,30 +4365,168 @@
     setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
   }
 
+  // The envelope of the copy, the same for the file and the gist (nube.js).
+  function saveEnvelope() {
+    return Nube.envelope(state, { lang: LG.code, brand: LG.brand, v: APP_VERSION });
+  }
+  function otherLangCopy(j) {
+    var other = (window.Boot && Boot.LANGS && Boot.LANGS[j.lang]) || {};
+    return "Esta copia es de " + (j.brand || other.brand || j.lang) + ". Cambiá de idioma en " + UI.me + " y restaurala ahí.";
+  }
+  /* A copy restored, from a file or from the cloud, the same way the
+     phone's own save is loaded (Engine.fromRaw: migrations, sanitize, the
+     cards to FSRS); a copy of the other language is not restored.  ask:
+     the question before replacing.  True when it was restored; throws on
+     something that is not a copy. */
+  function restoreEnvelope(j, ask) {
+    var s = j && j.app === "c1" && j.save ? j.save : j;
+    if (!s || typeof s.xp !== "number" || !s.cards) throw new Error("formato");
+    if (j.app === "c1" && j.lang && j.lang !== LG.code) { toast(otherLangCopy(j), 4000); return false; }
+    if (!confirm(ask || "Esto reemplaza tu progreso actual por la copia (" + s.xp +
+                 " xp" + (j.at ? ", del " + new Date(j.at).toLocaleDateString("es-AR") : "") + "). ¿Seguir?")) return false;
+    state = Engine.fromRaw(s);
+    clearPending();
+    persist();
+    renderHeader();
+    render();
+    toast("✓ Copia restaurada.");
+    return true;
+  }
   function importSave(file) {
     var reader = new FileReader();
     reader.onload = function () {
       try {
-        var j = JSON.parse(reader.result), s = j && j.app === "c1" && j.save ? j.save : j;
-        if (!s || typeof s.xp !== "number" || !s.cards) throw new Error("formato");
-        if (j.app === "c1" && j.lang && j.lang !== LG.code) {
-          var other = (window.Boot && Boot.LANGS && Boot.LANGS[j.lang]) || {};
-          toast("Esta copia es de " + (j.brand || other.brand || j.lang) + ". Cambiá de idioma en " + UI.me + " y restaurala ahí.");
-          return;
-        }
-        if (!confirm("Esto reemplaza tu progreso actual por la copia (" + s.xp +
-                     " xp" + (j.at ? ", del " + new Date(j.at).toLocaleDateString("es-AR") : "") + "). ¿Seguir?")) return;
-        state = Engine.fromRaw(s);
-        clearPending();
-        persist();
-        renderHeader();
-        render();
-        toast("✓ Copia restaurada.");
+        restoreEnvelope(JSON.parse(reader.result));
       } catch (e) {
         toast("Ese archivo no es una copia válida.");
       }
     };
     reader.readAsText(file);
+  }
+
+  /* ------------------------------------------ la copia en tu GitHub Gist */
+  /* The optional channel to another phone (nube.js): the same envelope in
+     a secret gist of the learner's, with their own token.  The token and
+     what this phone knows of the gist live in its storage, never in the
+     copy. */
+  var nubeBusy = false;
+  function nubeWhen(t) {
+    var d = new Date(t);
+    return isNaN(d) ? "" : d.toLocaleDateString("es-AR") + " " + d.toLocaleTimeString("es-AR", { hour: "2-digit", minute: "2-digit", hour12: false });
+  }
+  function nubeSync(fn) {
+    var S = Nube.store(), sy = S.sync(LG.storage);
+    if (fn) { fn(sy); S.setSync(LG.storage, sy); }
+    return sy;
+  }
+  function nubeOpts(extra) {
+    return Object.assign({ token: Nube.store().token(), storage: LG.storage, lang: LG.code, id: nubeSync().id }, extra || {});
+  }
+  function nubeHtml() {
+    if (!window.Nube) return "";
+    var sy = nubeSync(), tok = Nube.store().token(), st = [];
+    if (sy.up) st.push("Última subida: " + nubeWhen(sy.up) + ".");
+    if (sy.down) st.push("La trajiste por última vez: " + nubeWhen(sy.down) + ".");
+    if (sy.conflict) st.push("⚠️ En la nube hay una copia subida desde otro teléfono el " + nubeWhen(sy.conflict) + ": traela, o subí la de este teléfono si es la buena.");
+    return '<details class="nube"' + (tok ? " open" : "") + "><summary>☁️ Sincronizar con tu GitHub Gist</summary>" +
+      '<p class="muted small">Para seguir en otro teléfono sin servidor de la app: tu copia va a un gist secreto de tu cuenta de GitHub. ' +
+        'Creá el token en <a href="' + Nube.TOKEN_URL + '" target="_blank" rel="noopener">github.com/settings/tokens</a> (viene marcado solo «gist»: elegí el vencimiento y tocá «Generate token») y pegalo acá.</p>' +
+      '<input id="gisttoken" type="password" autocomplete="off" aria-label="Token de GitHub" placeholder="Token de GitHub (ghp_…)" value="' + esc(tok) + '">' +
+      '<div class="row"><button class="btn" id="gistup">☁️ Subir ahora</button><button class="btn ghost" id="gistdown">⬇️ Traer de la nube</button></div>' +
+      '<label class="set"><span>Subir sola al cerrar la app<small>una vez por día como mucho, si cambió algo</small></span>' +
+        '<input type="checkbox" id="gistauto"' + (sy.auto ? " checked" : "") + "></label>" +
+      (st.length ? '<p class="muted small" id="giststate">' + esc(st.join(" ")) + "</p>" : "") +
+      '<p class="muted small">El token queda solo en este teléfono, con las claves de IA (sirve para los dos idiomas), y nunca entra en la copia.</p>' +
+      (tok ? '<div class="row"><button class="tab" id="gistforget">Olvidar el token</button></div>' : "") +
+      "</details>";
+  }
+  function nubeRefresh() { if (view.screen === "io") render(); }
+  /* Up: first a look at the gist's date (a light call); if another phone
+     uploaded since this one last synced, ask (auto: do not upload, and say
+     so in Io). */
+  function nubeUp(auto) {
+    if (!window.Nube) return Promise.resolve(false);
+    var sy = nubeSync(), o = nubeOpts();
+    if (!o.token) { if (!auto) toast(Nube.message({ code: "notoken" })); return Promise.resolve(false); }
+    if (nubeBusy) return Promise.resolve(false);
+    nubeBusy = true;
+    if (!auto) toast("☁️ Subiendo…", 1500);
+    flushPersist();
+    var mark = state.savedAt || Date.now();
+    return Nube.remote(o).then(function (r) {
+      if (r && Nube.conflict(r, sy)) {
+        if (auto) { nubeSync(function (x) { x.conflict = r.updated; }); return false; }
+        var q = (sy.gistAt ? "Otro teléfono subió una copia de " + LG.brand + " el " + nubeWhen(r.updated) + ", después de la última vez que este sincronizó."
+                           : "Ya hay una copia de " + LG.brand + " en tu gist, del " + nubeWhen(r.updated) + ", que este teléfono no trajo.") +
+          " ¿Reemplazarla por el progreso de este teléfono (" + state.xp + " xp)?";
+        if (!confirm(q)) return false;
+      }
+      return Nube.push(o, saveEnvelope(), r).then(function (g) {
+        nubeSync(function (x) {
+          x.id = g.id; x.gistAt = g.updated; x.up = Date.now(); x.mark = mark; x.conflict = null;
+          if (auto) x.day = Nube.dayKey();
+        });
+        if (!auto) toast(g.created ? "☁️ Listo: creé tu gist secreto y subí la copia." : "☁️ Copia subida.", 2500);
+        return true;
+      });
+    }).catch(function (e) {
+      if (!auto) toast(Nube.message(e), 4500);
+      return false;
+    }).then(function (done) {
+      nubeBusy = false;
+      if (!auto) nubeRefresh();
+      return done;
+    });
+  }
+  /* Down: the copy of this language from the gist, through restoreEnvelope,
+     always asking, and saying which one is newer. */
+  function nubeDown() {
+    if (!window.Nube) return Promise.resolve(false);
+    var o = nubeOpts();
+    if (!o.token) { toast(Nube.message({ code: "notoken" })); return Promise.resolve(false); }
+    if (nubeBusy) return Promise.resolve(false);
+    nubeBusy = true;
+    toast("☁️ Buscando tu copia…", 1500);
+    flushPersist();
+    return Nube.pull(o).then(function (r) {
+      var env = r.env, cmp = Nube.compare(env, state);
+      var cloud = nubeWhen(Nube.stamp(env)) + ", " + env.save.xp + " xp", here = (state.savedAt ? nubeWhen(state.savedAt) + ", " : "") + state.xp + " xp";
+      var ask = cmp === "newer"
+        ? "La copia de la nube (" + cloud + ") es más nueva que la de este teléfono (" + here + "). ¿Reemplazar el progreso de acá por la de la nube?"
+        : "⚠️ La copia de la nube (" + cloud + ") " + (cmp === "same" ? "es de la misma fecha que" : "es más vieja que") +
+          " la de este teléfono (" + here + "). ¿Reemplazar igual?";
+      nubeSync(function (x) { x.id = r.id; });
+      if (!restoreEnvelope(env, ask)) return false;
+      nubeSync(function (x) { x.gistAt = r.updated; x.down = Date.now(); x.mark = state.savedAt; x.conflict = null; });
+      return true;
+    }).catch(function (e) {
+      toast(e && e.code === "idioma" && e.env ? otherLangCopy(e.env) : e && e.code ? Nube.message(e) : "Lo que hay en la nube no es una copia válida.", 4500);
+      return false;
+    }).then(function (done) {
+      nubeBusy = false;
+      nubeRefresh();
+      return done;
+    });
+  }
+  // When the app is hidden or closed: the automatic upload, once a day.
+  function nubeAuto() {
+    if (!window.Nube || nubeBusy) return;
+    if (Nube.autoDue(nubeSync(), Nube.store().token(), state.savedAt)) nubeUp(true);
+  }
+  function wireNube() {
+    var box = $("#gisttoken");
+    if (!window.Nube || !box) return;
+    var S = Nube.store();
+    function take() { var t = (box.value || "").trim(); if (t !== S.token()) S.setToken(t); return t; }
+    box.onchange = take;
+    on("#gistup", function () { take(); nubeUp(false); });
+    on("#gistdown", function () { take(); nubeDown(); });
+    var auto = $("#gistauto");
+    if (auto) auto.onchange = function () {
+      nubeSync(function (x) { x.auto = auto.checked; });
+      toast(auto.checked ? "☁️ Al cerrar la app se sube sola, una vez por día." : "Subida automática apagada.", 2500);
+    };
+    on("#gistforget", function () { S.setToken(""); toast("Token borrado de este teléfono."); render(); });
   }
 
   /* Un evento que se repite (.ics): el teléfono lo agrega al calendario y
@@ -6707,6 +6848,7 @@
     on("#import", function () { $("#importfile").click(); });
     var file = $("#importfile");
     if (file) file.onchange = function () { if (file.files[0]) importSave(file.files[0]); };
+    wireNube();
 
     var pm = $("#persistmsg");
     if (pm && navigator.storage && navigator.storage.persisted) {
@@ -6840,7 +6982,7 @@
       if (view.screen === "oggi") render();
       if (updateReady && safeToReload()) reloadHere();
     }
-    if (document.hidden && course) { flushPersist(); updateBadge(); }
+    if (document.hidden && course) { flushPersist(); updateBadge(); nubeAuto(); }
   });
   window.addEventListener("pagehide", function () { flushPersist(); });
   // The app icon shows how many cards are due (Badging API; a passive

@@ -6,7 +6,8 @@
    karaoke, el camino y la semana 1, una lección, el dictogloss, Io/Eu, el
    examen C1 (smokeEsame: cada prueba de la primera versión, el resultado,
    el intento siguiente y un simulacro), «Tu progreso», el modo mantenimiento después del examen,
-   «Parola o no? / Palavra ou não?», los módulos de las capas
+   «Parola o no? / Palavra ou não?», la copia en un GitHub Gist con la API
+   simulada (smoke_nube.js), los módulos de las capas
    (smoke_modulos.js: Leggi y Allena plegadas, lectura cronometrada,
    Consultar, Biblioteca, escritura guiada, duelos, Tres lenguas, Tres
    vueltas), el cambio de idioma desde el
@@ -496,6 +497,8 @@ async function smokeEsame(page, code, P, snap, note, errors) {
     await require("./smoke_modulos.js")(page, { code, errors, note, snap });
     // the Radio series (weeks 6-25): the mission, the player, Leggi (tools/lib/smoke_radio.js)
     await require("./smoke_radio.js")(page, { code, errors, note, snap });
+    // the copy in the learner's GitHub Gist, with the API simulated (tools/lib/smoke_nube.js)
+    await require("./smoke_nube.js")(page, { code, errors, note, snap });
 
     // the service worker keeps the core and this package
     const sw = await page.evaluate(async (c) => {

@@ -504,7 +504,7 @@ textarea.scrivi:focus { border-color: var(--coral); }
 ol.findings li { padding: 6px 0; border-top: 1px solid var(--cinza-claro); }
 ol.findings li.soft { color: var(--cinza); }
 p.model { font-size: 1.02rem; line-height: 1.6; }
-details.aibox input, .card input#aikey, .card input#gemkey { display: block; width: 100%; box-sizing: border-box; min-width: 0;
+details.aibox input, .card input#aikey, .card input#gemkey, .card input#gisttoken { display: block; width: 100%; box-sizing: border-box; min-width: 0;
   padding: 10px 12px; border-radius: 12px; border: 1.5px solid var(--cinza-claro); background: var(--papel); color: var(--tinta); font: inherit; }
 .aiout { border-top: 1px solid var(--cinza-claro); margin-top: 10px; padding-top: 8px; }
 
