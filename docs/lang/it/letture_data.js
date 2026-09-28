@@ -969,14 +969,519 @@
         ["¿A qué hora recibe la foto la madre?", ["a las tres de la mañana", "a las siete", "al mediodía", "a las nueve de la noche"], "a las tres de la mañana"]
       ],
       hunt: { label: "Tocá todos los gerundios", targets:
-        ["ridendo", "pensando", "attraversando", "arrivando", "sudando", "contando", "correndo", "sapendo", "appoggiandosi", "guardando", "riprendendo", "camminando", "parlando", "sedendosi", "essendo", "scendendo", "vedendolo"] } }
+        ["ridendo", "pensando", "attraversando", "arrivando", "sudando", "contando", "correndo", "sapendo", "appoggiandosi", "guardando", "riprendendo", "camminando", "parlando", "sedendosi", "essendo", "scendendo", "vedendolo"] } },
+
+    /* ---------------------------------------------- Cultura: civiltà.
+       Una tarjeta por semana del tramo (27-51, sin la 39) sobre cómo funciona
+       la vida en Italia (escuela y universidad, sanidad, trabajo, casa y
+       alquiler, fiestas, comer, Estado y política, medios), atada al campo
+       léxico y a la gramática de su semana, con preguntas en italiano.  Son
+       lecturas opcionales de la serie Cultura (auditoría 3.0, D5.9). */
+
+    { id: "cv-27", week: 27, series: "cultura", area: "Civiltà", n: 11, level: "B1", emoji: "☕",
+      title: "Il bar: al banco o al tavolo", grammar: "avverbi in -mente",
+      text:
+        "In Italia il bar è soprattutto un luogo di passaggio. La mattina molti italiani entrano, ordinano velocemente " +
+        "un caffè e un cornetto e fanno colazione in piedi, al banco, in cinque minuti.\n\n" +
+        "Nei bar delle città, di solito, prima paghi alla cassa e ricevi lo scontrino; poi lo dai al barista e ordini. " +
+        "Attenzione ai prezzi: al banco un caffè costa circa un euro e venti, ma se ti siedi al tavolo il conto può " +
+        "essere tranquillamente il doppio, perché paghi anche il servizio.\n\n" +
+        "Il cappuccino, tradizionalmente, è una bevanda della mattina. Dopo pranzo gli italiani prendono quasi sempre " +
+        "un espresso, e ordinare un cappuccino alle tre del pomeriggio fa sorridere il barista. Naturalmente nessuno te lo vieta!",
+      gloss: { passaggio: "paso", banco: "barra (del bar)", cornetto: "medialuna", cassa: "caja", scontrino: "ticket (de caja)",
+               servizio: "servicio de mesa", bevanda: "bebida", sorridere: "sonreír", vieta: "prohíbe" },
+      questions: [
+        ["Dove fanno colazione molti italiani, la mattina?", ["al banco, in piedi", "seduti al tavolo", "a casa, a letto", "in ufficio, in riunione"], "al banco, in piedi"],
+        ["Che cosa fai prima di ordinare, nei bar di città?", ["paghi alla cassa", "chiedi il menù", "lasci la mancia", "ti siedi al tavolo"], "paghi alla cassa"],
+        ["Perché al tavolo il caffè costa di più?", ["perché paghi il servizio", "perché la tazza è più grande", "perché è più buono", "perché lo porta il capo"], "perché paghi il servizio"]
+      ],
+      hunt: { label: "Tocá los adverbios en -mente", targets: ["velocemente", "tranquillamente", "tradizionalmente", "naturalmente"] } },
+
+    { id: "cv-28", week: 28, series: "cultura", area: "Civiltà", n: 12, level: "B1", emoji: "🏘️",
+      title: "Comune, Provincia, Regione", grammar: "connettivi",
+      text:
+        "Chi vive in Italia ha a che fare soprattutto con il Comune. Infatti è il Comune che raccoglie i rifiuti, " +
+        "gestisce l'anagrafe e decide dove costruire una scuola o un parcheggio. Alla sua guida c'è il sindaco, che i " +
+        "cittadini eleggono ogni cinque anni.\n\n" +
+        "Sopra i Comuni ci sono le Regioni, che sono venti. Cinque hanno uno statuto speciale, cioè più autonomia: tra " +
+        "queste, la Sicilia e la Valle d'Aosta. Inoltre le Regioni hanno un compito molto importante: organizzano la " +
+        "sanità. Per questo un ospedale in Lombardia non funziona esattamente come uno in Calabria.\n\n" +
+        "E le Province? Esistono ancora, però contano meno di prima: si occupano soprattutto di strade e di scuole " +
+        "superiori. Insomma, per un documento vai in Comune; per il medico, invece, dipende dalla Regione.",
+      gloss: { rifiuti: "residuos", gestisce: "maneja, administra", anagrafe: "registro civil", guida: "(alla guida) al frente",
+               sindaco: "intendente", eleggono: "eligen", statuto: "estatuto", compito: "tarea, función", sanità: "salud pública",
+               contano: "pesan, cuentan" },
+      questions: [
+        ["Chi guida il Comune?", ["il sindaco", "il presidente", "il prefetto", "il ministro"], "il sindaco"],
+        ["Quante sono le Regioni italiane?", ["venti", "cinque", "cento", "dodici"], "venti"],
+        ["Che cosa organizzano le Regioni?", ["la sanità", "l'anagrafe", "la raccolta dei rifiuti", "le carte d'identità"], "la sanità"]
+      ],
+      hunt: { label: "Tocá los conectores", targets: ["infatti", "cioè", "inoltre", "però", "insomma", "invece"] } },
+
+    { id: "cv-29", week: 29, series: "cultura", area: "Civiltà", n: 13, level: "B2", emoji: "🗳️",
+      title: "Il referendum", grammar: "congiuntivo passato",
+      text:
+        "Il referendum è uno strumento che gli italiani conoscono bene. Il più famoso è quello del 2 giugno 1946, quando " +
+        "i cittadini hanno scelto tra monarchia e repubblica, e per la prima volta hanno votato anche le donne.\n\n" +
+        "Oggi il referendum più comune è quello abrogativo: i cittadini possono cancellare una legge o una parte di una " +
+        "legge. Per chiederlo servono cinquecentomila firme. Però attenzione al quorum: il risultato vale solo se ha " +
+        "votato più della metà degli elettori.\n\n" +
+        "Negli ultimi anni molti referendum non hanno raggiunto il quorum. Alcuni pensano che gli italiani abbiano perso " +
+        "interesse per la politica; altri credono che molti elettori siano rimasti a casa apposta, perché restare a casa " +
+        "è anche un modo di votare «no». Probabilmente hanno ragione un po' tutti.",
+      gloss: { strumento: "herramienta", monarchia: "monarquía", abrogativo: "derogatorio (anula una ley)", firme: "firmas",
+               quorum: "quórum", elettori: "electores", raggiunto: "alcanzado", apposta: "a propósito" },
+      questions: [
+        ["Che cosa hanno scelto gli italiani il 2 giugno 1946?", ["tra monarchia e repubblica", "il nuovo presidente", "una nuova legge sul lavoro", "tra due partiti"], "tra monarchia e repubblica"],
+        ["Quando è valido un referendum abrogativo?", ["se vota più della metà degli elettori", "se lo firmano cinquecentomila cittadini", "se il governo è d'accordo", "sempre, con qualsiasi risultato"], "se vota più della metà degli elettori"],
+        ["Che cosa pensano alcuni degli italiani di oggi?", ["che non si interessino più alla politica", "che votino troppo spesso", "che non abbiano mai capito come si vota", "che preferiscano la monarchia"], "che non si interessino più alla politica"]
+      ],
+      hunt: { label: "Tocá los auxiliares del congiuntivo passato (abbiano, siano)", targets: ["abbiano", "siano"] } },
+
+    { id: "cv-30", week: 30, series: "cultura", area: "Civiltà", n: 14, level: "B2", emoji: "📺",
+      title: "La Rai e i giornali", grammar: "congiuntivo imperfetto",
+      text:
+        "Per molti anni in Italia c'è stata solo la Rai, la televisione pubblica. Negli anni Cinquanta poche famiglie " +
+        "avevano un televisore, e la sera i vicini andavano al bar perché tutti potessero vedere in compagnia i quiz " +
+        "del giovedì. Negli anni Sessanta un maestro, Alberto Manzi, ha insegnato a leggere agli adulti con il programma " +
+        "Non è mai troppo tardi: lo Stato voleva che anche chi non era andato a scuola imparasse l'italiano. Ancora " +
+        "oggi chi ha un televisore paga il canone Rai, che arriva con la bolletta della luce.\n\n" +
+        "Anche i giornali hanno una lunga storia. I quotidiani più letti sono il Corriere della Sera e la Repubblica, " +
+        "ma per molto tempo il più venduto è stato un giornale sportivo, la Gazzetta dello Sport, su carta rosa. Molti " +
+        "lettori, però, vorrebbero che i giornali online fossero gratis.",
+      gloss: { televisore: "televisor", quiz: "programa de preguntas", maestro: "maestro de escuela", tardi: "tarde",
+               canone: "abono, tasa", bolletta: "factura", quotidiani: "diarios", venduto: "vendido", gratis: "gratis" },
+      questions: [
+        ["Perché negli anni Cinquanta i vicini andavano al bar?", ["per vedere la televisione insieme", "per leggere il giornale", "per ascoltare la radio", "per giocare a carte con gli amici"], "per vedere la televisione insieme"],
+        ["Che cosa voleva lo Stato con il programma di Manzi?", ["che gli adulti imparassero a leggere", "che i bambini guardassero la tv", "che la gente comprasse un televisore", "che i giornali costassero meno"], "che gli adulti imparassero a leggere"],
+        ["Di che colore è la carta della Gazzetta dello Sport?", ["rosa", "bianca", "gialla", "verde"], "rosa"]
+      ],
+      hunt: { label: "Tocá el congiuntivo imperfetto", targets: ["potessero", "imparasse", "fossero"] } },
+
+    { id: "cv-31", week: 31, series: "cultura", area: "Civiltà", n: 15, level: "B2", emoji: "💼",
+      title: "Il contratto e la busta paga", grammar: "condizionale passato",
+      text:
+        "Chi comincia a lavorare in Italia deve capire prima di tutto il suo contratto. Il più sicuro è quello a tempo " +
+        "indeterminato; molti giovani, però, cominciano con un contratto a termine o con uno stage.\n\n" +
+        "Ogni mese arriva la busta paga, e la prima sorpresa è la differenza tra lordo e netto: dallo stipendio lordo " +
+        "spariscono le tasse e i contributi per la pensione, che vanno all'INPS. Ma ci sono anche buone notizie: a " +
+        "dicembre molti lavoratori ricevono la tredicesima, uno stipendio in più, e quando il contratto finisce c'è il " +
+        "TFR, una somma che l'azienda ha messo da parte per te.\n\n" +
+        "Martina, ventisei anni, racconta: «Al primo stipendio avrei voluto comprare mille cose. Poi ho visto il netto " +
+        "e ho capito che avrei dovuto leggere meglio il contratto!»",
+      gloss: { indeterminato: "(a tempo indeterminato) por tiempo indeterminado, fijo", termine: "(a termine) a plazo fijo",
+               stage: "pasantía", busta: "(busta paga) recibo de sueldo", lordo: "bruto", netto: "neto", stipendio: "sueldo",
+               contributi: "aportes", pensione: "jubilación", tredicesima: "aguinaldo", somma: "suma" },
+      questions: [
+        ["Che cos'è la tredicesima?", ["uno stipendio in più a dicembre", "una tassa per la pensione", "un contratto che dura tredici mesi", "un giorno di ferie"], "uno stipendio in più a dicembre"],
+        ["Dove vanno i contributi per la pensione?", ["all'INPS", "al Comune", "all'azienda", "alla banca"], "all'INPS"],
+        ["Che cosa avrebbe dovuto fare Martina?", ["leggere meglio il contratto", "chiedere uno stipendio più alto", "comprare meno cose", "cambiare lavoro subito"], "leggere meglio il contratto"]
+      ],
+      hunt: { label: "Tocá el auxiliar del condizionale passato", targets: ["avrei"] } },
+
+    { id: "cv-32", week: 32, series: "cultura", area: "Civiltà", n: 16, level: "B2", emoji: "🪪",
+      title: "Codice fiscale e tessera sanitaria", grammar: "concordanza dei tempi",
+      text:
+        "Quando Julián è arrivato a Torino, pensava che per lavorare bastasse il passaporto. All'agenzia, invece, gli " +
+        "hanno detto che prima doveva avere il codice fiscale.\n\n" +
+        "Il codice fiscale è una sigla di sedici caratteri, tra lettere e numeri, che contiene il cognome, il nome, la " +
+        "data e il luogo di nascita. Serve quasi per tutto: per firmare un contratto d'affitto, per aprire un conto in " +
+        "banca, per comprare un telefono. Gli stranieri lo chiedono all'Agenzia delle Entrate o al consolato.\n\n" +
+        "Qualche settimana dopo è arrivata per posta la tessera sanitaria, con lo stesso codice. Julián non sapeva che " +
+        "servisse anche in farmacia: il farmacista gli ha spiegato che con la tessera avrebbe potuto scaricare le spese " +
+        "dei medicinali dalle tasse. «Nessuno me l'aveva detto!», racconta.",
+      gloss: { sigla: "sigla, código", caratteri: "caracteres", cognome: "apellido", affitto: "alquiler",
+               entrate: "(Agenzia delle Entrate) la oficina de impuestos", tessera: "tarjeta", sanitaria: "de salud",
+               scaricare: "deducir", spese: "gastos", medicinali: "remedios" },
+      questions: [
+        ["Che cosa pensava Julián quando è arrivato?", ["che bastasse il passaporto", "che il lavoro fosse facile", "che Torino fosse piccola", "che servisse un visto"], "che bastasse il passaporto"],
+        ["Quanti caratteri ha il codice fiscale?", ["sedici", "dieci", "otto", "venti"], "sedici"],
+        ["A che cosa serve la tessera in farmacia?", ["a scaricare le spese dalle tasse", "a pagare meno le medicine subito", "a comprare medicine senza ricetta", "a vedere il medico di base"], "a scaricare le spese dalle tasse"]
+      ],
+      hunt: { label: "Tocá los verbos de la concordancia en pasado", targets: ["bastasse", "doveva", "servisse", "avrebbe", "aveva"] } },
+
+    { id: "cv-33", week: 33, series: "cultura", area: "Civiltà", n: 17, level: "B2", emoji: "🎓",
+      title: "L'università italiana", grammar: "periodo ipotetico",
+      text:
+        "L'università italiana ha due livelli: la laurea triennale, di tre anni, e la laurea magistrale, di altri due. " +
+        "Medicina e Giurisprudenza, invece, durano cinque o sei anni tutte insieme.\n\n" +
+        "Una differenza che sorprende gli argentini sono gli esami. Molti sono orali: lo studente si siede davanti al " +
+        "professore e risponde alle domande per venti minuti. Il voto va da diciotto a trenta, e i più bravi prendono " +
+        "«trenta e lode». Se il voto non ti piace, puoi rifiutarlo e ripetere l'esame alla sessione successiva.\n\n" +
+        "«Se avessi saputo che gli esami erano orali, avrei studiato in un altro modo», racconta Tomás, studente a " +
+        "Padova. «Ma se dovessi scegliere di nuovo, sceglierei ancora l'Italia: il giorno della laurea, con la corona " +
+        "d'alloro in testa, è stato indimenticabile.»",
+      gloss: { laurea: "título universitario", triennale: "de tres años", giurisprudenza: "Derecho", lode: "(trenta e lode) diez felicitado",
+               rifiutarlo: "rechazarlo", sessione: "turno de exámenes", corona: "corona", alloro: "laurel", indimenticabile: "inolvidable" },
+      questions: [
+        ["Quanto dura la laurea triennale?", ["tre anni", "due anni", "cinque anni", "sei anni"], "tre anni"],
+        ["Che cosa puoi fare se il voto non ti piace?", ["rifiutarlo e ripetere l'esame", "chiedere di cambiare professore subito", "pagare per cambiarlo", "scrivere al rettore"], "rifiutarlo e ripetere l'esame"],
+        ["Che cosa avrebbe fatto Tomás, se avesse saputo degli esami orali?", ["avrebbe studiato in un altro modo", "avrebbe scelto un'altra università", "non sarebbe venuto in Italia", "avrebbe cambiato facoltà"], "avrebbe studiato in un altro modo"]
+      ],
+      hunt: { label: "Tocá el congiuntivo después de se", targets: ["avessi", "dovessi"] } },
+
+    { id: "cv-34", week: 34, series: "cultura", area: "Civiltà", n: 18, level: "B2", emoji: "🎄",
+      title: "Da Natale alla Befana", grammar: "pronomi relativi",
+      text:
+        "Le feste di fine anno, in Italia, durano quasi due settimane. Il 24 dicembre molte famiglie del Sud mangiano il " +
+        "cenone della vigilia, in cui di solito non c'è carne ma molto pesce. Il 25 è il giorno del pranzo in famiglia, " +
+        "che può durare tutto il pomeriggio.\n\n" +
+        "Poi arriva il Capodanno. La sera del 31 gli italiani mangiano le lenticchie, che secondo la tradizione portano " +
+        "soldi, e a mezzanotte brindano con lo spumante.\n\n" +
+        "La festa che chiude tutto è il 6 gennaio, l'Epifania. La notte prima passa la Befana, una vecchia signora su una " +
+        "scopa che porta dolci ai bambini buoni e carbone a quelli cattivi. C'è un proverbio che tutti i bambini " +
+        "conoscono: «L'Epifania tutte le feste porta via».",
+      gloss: { cenone: "gran cena", vigilia: "víspera (Nochebuena)", lenticchie: "lentejas", brindano: "brindan",
+               spumante: "espumante", scopa: "escoba", carbone: "carbón", proverbio: "refrán", via: "(portare via) llevarse" },
+      questions: [
+        ["Che cosa mangiano molte famiglie del Sud la sera del 24?", ["molto pesce", "solo carne", "le lenticchie", "il panettone e basta"], "molto pesce"],
+        ["Perché gli italiani mangiano le lenticchie a Capodanno?", ["perché portano soldi", "perché sono leggere", "perché costano poco", "perché piacciono ai bambini"], "perché portano soldi"],
+        ["Che cosa porta la Befana ai bambini cattivi?", ["il carbone", "i dolci", "i regali", "niente"], "il carbone"]
+      ],
+      hunt: { label: "Tocá los pronombres relativos", targets: ["cui", "che"] } },
+
+    { id: "cv-35", week: 35, series: "cultura", area: "Civiltà", n: 19, level: "B2", emoji: "♻️",
+      title: "La raccolta differenziata", grammar: "voce passiva",
+      text:
+        "In molte città italiane i rifiuti vengono divisi in casa: la carta, la plastica, il vetro, l'umido e " +
+        "l'indifferenziata. Ogni tipo di rifiuto va messo in un sacchetto o in un bidone di un colore diverso.\n\n" +
+        "In alcuni Comuni i bidoni sono in strada; in altri la raccolta viene fatta porta a porta, con un calendario " +
+        "preciso: il lunedì viene ritirata la carta, il martedì l'umido, e così via. Chi sbaglia rischia una multa, e un " +
+        "sacchetto sbagliato può essere lasciato davanti alla porta con un adesivo rosso.\n\n" +
+        "Per uno straniero, all'inizio, è un piccolo incubo. Però i risultati sono evidenti: in alcune regioni del Nord " +
+        "più del settanta per cento dei rifiuti viene riciclato.",
+      gloss: { rifiuti: "residuos", vetro: "vidrio", umido: "residuos orgánicos", indifferenziata: "lo que no se recicla",
+               sacchetto: "bolsita", bidone: "tacho", ritirata: "retirada", adesivo: "calco, etiqueta", incubo: "pesadilla",
+               riciclato: "reciclado" },
+      questions: [
+        ["Come viene fatta la raccolta in alcuni Comuni?", ["porta a porta, con un calendario", "solo una volta al mese", "dai cittadini, con la propria macchina", "di notte, senza calendario"], "porta a porta, con un calendario"],
+        ["Che cosa rischia chi sbaglia?", ["una multa", "il carcere", "un corso obbligatorio", "niente"], "una multa"],
+        ["Quanti rifiuti vengono riciclati in alcune regioni del Nord?", ["più del settanta per cento", "meno della metà", "circa il dieci per cento", "tutti"], "più del settanta per cento"]
+      ],
+      hunt: { label: "Tocá los auxiliares de la pasiva (venire, andare)", targets: ["vengono", "viene", "va"] } },
+
+    { id: "cv-36", week: 36, series: "cultura", area: "Civiltà", n: 20, level: "B2", emoji: "🏢",
+      title: "Vivere in condominio", grammar: "si passivante e impersonale",
+      text:
+        "Gli italiani che abitano in città vivono quasi sempre in un condominio. Le regole si trovano nel regolamento, e " +
+        "chi non le rispetta se ne accorge presto: in condominio si sa tutto di tutti.\n\n" +
+        "Di solito non si può fare rumore dopo le dieci di sera e nelle ore del riposo, dopo pranzo. Non si stendono i " +
+        "panni sul balcone che dà sulla strada, e le biciclette non si lasciano nell'androne.\n\n" +
+        "Le spese comuni, come le pulizie delle scale o l'ascensore, si dividono in millesimi: chi ha un appartamento " +
+        "più grande paga di più. Una volta all'anno si fa l'assemblea, dove si discute di tutto, dal tetto che perde al " +
+        "vicino che parcheggia male. L'amministratore scrive il verbale e si cerca di mettere d'accordo tutti.",
+      gloss: { regolamento: "reglamento", accorge: "(accorgersene) darse cuenta", riposo: "descanso, siesta",
+               stendono: "cuelgan (la ropa)", panni: "ropa lavada", androne: "hall de entrada", pulizie: "limpieza",
+               millesimi: "milésimos (según el tamaño)", tetto: "techo", verbale: "acta" },
+      questions: [
+        ["Quando non si può fare rumore?", ["dopo le dieci e dopo pranzo", "solo la domenica mattina", "mai, in nessun momento", "prima delle otto di mattina"], "dopo le dieci e dopo pranzo"],
+        ["Come si dividono le spese comuni?", ["in millesimi, secondo l'appartamento", "in parti uguali tra tutti", "le paga l'amministratore", "le paga chi abita al piano terra"], "in millesimi, secondo l'appartamento"],
+        ["Chi scrive il verbale dell'assemblea?", ["l'amministratore", "il vicino più anziano", "il portiere", "il sindaco"], "l'amministratore"]
+      ],
+      hunt: { label: "Tocá cada si impersonal o pasivante", targets: ["si"] } },
+
+    { id: "cv-37", week: 37, series: "cultura", area: "Civiltà", n: 21, level: "B2", emoji: "🏥",
+      title: "Il Servizio sanitario nazionale", grammar: "passato remoto",
+      text:
+        "Il Servizio sanitario nazionale nacque nel dicembre del 1978. Prima di quella data l'assistenza dipendeva dalle " +
+        "«mutue», cioè da casse diverse per ogni categoria di lavoratori, e molte persone non avevano nessuna copertura. " +
+        "La riforma stabilì un principio semplice: la salute è un diritto di tutti, e lo Stato la garantisce con le tasse.\n\n" +
+        "Da allora ogni residente ha un medico di base, che si sceglie da un elenco della ASL, l'azienda sanitaria " +
+        "locale. Le visite dal medico di base sono gratuite; per gli esami e le visite specialistiche, invece, si paga " +
+        "spesso una piccola quota, il ticket.\n\n" +
+        "La legge fu votata quasi da tutti i partiti, e Tina Anselmi, la ministra che la firmò, era stata due anni " +
+        "prima la prima donna ministro della storia d'Italia.",
+      gloss: { assistenza: "atención médica", sanitario: "de salud", sanitaria: "sanitaria (de salud)", residente: "residente", base: "(medico di base) médico de cabecera", specialistiche: "de especialistas", mutue: "obras sociales (de antes)", casse: "cajas", copertura: "cobertura", stabilì: "estableció",
+               diritto: "derecho", elenco: "lista", visite: "consultas", quota: "cuota", ticket: "copago", firmò: "firmó" },
+      questions: [
+        ["Quando nacque il Servizio sanitario nazionale?", ["nel 1978", "nel 1946", "nel 1968", "nel 1990"], "nel 1978"],
+        ["Che cosa si paga spesso per gli esami?", ["il ticket", "la mutua", "il medico di base", "la tessera"], "il ticket"],
+        ["Chi era Tina Anselmi?", ["la ministra che firmò la legge", "la prima presidente della Repubblica", "una dottoressa della ASL", "la fondatrice delle mutue"], "la ministra che firmò la legge"]
+      ],
+      hunt: { label: "Tocá el passato remoto", targets: ["nacque", "stabilì", "fu", "firmò"] } },
+
+    { id: "cv-38", week: 38, series: "cultura", area: "Civiltà", n: 22, level: "B2", emoji: "✊",
+      title: "Il sindacato e lo sciopero", grammar: "discorso indiretto",
+      text:
+        "In Italia lo sciopero è un diritto scritto nella Costituzione, e i sindacati sono ancora forti: i tre più grandi " +
+        "sono CGIL, CISL e UIL.\n\n" +
+        "Venerdì scorso i lavoratori dei trasporti hanno incrociato le braccia per ventiquattro ore. I sindacati hanno " +
+        "spiegato che chiedevano contratti migliori e che gli stipendi erano fermi da anni. Il ministro ha risposto che " +
+        "il governo avrebbe aperto un tavolo di trattativa la settimana successiva.\n\n" +
+        "Chi usa i mezzi pubblici conosce bene le «fasce di garanzia»: anche durante lo sciopero, treni e autobus devono " +
+        "circolare in alcune ore, di solito la mattina presto e il tardo pomeriggio. Una pendolare ha detto che quel " +
+        "giorno era uscita di casa alle sei e che sperava di tornare prima di sera.",
+      gloss: { sciopero: "huelga", sindacati: "sindicatos", incrociato: "(incrociare le braccia) parar, hacer huelga",
+               braccia: "brazos", fermi: "congelados, quietos", tavolo: "(tavolo di trattativa) mesa de negociación",
+               trattativa: "negociación", fasce: "franjas", garanzia: "garantía",
+               pendolare: "persona que viaja todos los días al trabajo" },
+      questions: [
+        ["Che cosa chiedevano i sindacati?", ["contratti migliori", "meno ore di lavoro", "nuovi treni", "un ministro diverso"], "contratti migliori"],
+        ["Che cosa ha risposto il ministro?", ["che avrebbe aperto una trattativa", "che lo sciopero era illegale", "che gli stipendi sarebbero aumentati", "che non c'erano soldi"], "che avrebbe aperto una trattativa"],
+        ["Che cosa sono le fasce di garanzia?", ["ore in cui i mezzi devono circolare", "giorni in cui è vietato scioperare", "sconti sui biglietti del treno", "aumenti di stipendio garantiti"], "ore in cui i mezzi devono circolare"]
+      ],
+      hunt: { label: "Tocá los verbos que presentan lo que dijo otro", targets: ["spiegato", "risposto", "detto"] } },
+
+    { id: "cv-40", week: 40, series: "cultura", area: "Civiltà", n: 23, level: "C1", emoji: "🗂️",
+      title: "All'anagrafe", grammar: "il causativo: fare e lasciare",
+      text:
+        "Per avere la residenza in Italia bisogna andare all'anagrafe del Comune. È lì che uno straniero si fa registrare " +
+        "e, qualche giorno dopo, riceve la visita di un vigile, che controlla che abiti davvero a quell'indirizzo.\n\n" +
+        "Con la residenza puoi farti fare la carta d'identità elettronica. Di solito si prende appuntamento online; allo " +
+        "sportello poi ti fanno lasciare le impronte e ti fanno firmare un modulo. La foto, invece, te la fai fare prima, " +
+        "in una cabina o da un fotografo. La carta arriva per posta dopo circa sei giorni.\n\n" +
+        "«Il primo giorno volevo sbrigare tutto da sola», racconta Camila, venezuelana, «ma l'impiegata mi ha lasciato " +
+        "parlare dieci minuti in spagnolo senza capire niente. Alla fine mi sono fatta aiutare da una vicina.»",
+      gloss: { residenza: "domicilio legal", anagrafe: "registro civil", registrare: "registrar", vigile: "agente municipal",
+               sportello: "ventanilla", impronte: "huellas", modulo: "formulario", cabina: "cabina (de fotos)",
+               sbrigare: "resolver (un trámite)", impiegata: "empleada" },
+      questions: [
+        ["Chi controlla l'indirizzo dopo la registrazione?", ["un vigile", "il sindaco", "un vicino di casa", "il proprietario"], "un vigile"],
+        ["Quanto tempo ci vuole per ricevere la carta?", ["circa sei giorni", "più o meno due mesi", "un anno", "un'ora"], "circa sei giorni"],
+        ["Chi ha aiutato Camila?", ["una vicina", "l'impiegata", "un fotografo", "un vigile"], "una vicina"]
+      ],
+      hunt: { label: "Tocá las formas de fare y lasciare del causativo", targets: ["fa", "farti", "fanno", "fai", "lasciato", "fatta"] } },
+
+    { id: "cv-41", week: 41, series: "cultura", area: "Civiltà", n: 24, level: "C1", emoji: "🚨",
+      title: "Il 112, numero unico", grammar: "verbi di percezione",
+      text:
+        "In Italia, per ogni emergenza, oggi basta un solo numero: il 112. Prima c'erano numeri diversi per la polizia, " +
+        "i carabinieri, i pompieri e l'ambulanza; oggi, in quasi tutte le regioni, risponde una centrale unica che " +
+        "smista la chiamata.\n\n" +
+        "Quando chiami, l'operatore ti chiede subito dove ti trovi e che cosa succede. Cerca di descrivere quello che " +
+        "vedi e senti: se vedi uscire del fumo da una finestra, se senti qualcuno gridare, se hai visto una macchina " +
+        "uscire di strada. Non riattaccare finché l'operatore non te lo dice.\n\n" +
+        "«Ho sentito la voce dell'operatrice rimanere calmissima», racconta Andrea, che una notte ha visto il palazzo di " +
+        "fronte riempirsi di fumo. «E dopo otto minuti ho sentito arrivare i pompieri.»",
+      gloss: { carabinieri: "carabineros (policía militar)", pompieri: "bomberos", centrale: "central", smista: "deriva, distribuye",
+               fumo: "humo", gridare: "gritar", riattaccare: "cortar (el teléfono)", finché: "hasta que", riempirsi: "llenarse" },
+      questions: [
+        ["Che cosa fa la centrale unica?", ["smista la chiamata", "manda sempre la polizia", "chiama i parenti", "scrive una multa"], "smista la chiamata"],
+        ["Che cosa non devi fare durante la chiamata?", ["riattaccare prima del tempo", "descrivere quello che vedi", "dire dove ti trovi", "rispondere alle domande"], "riattaccare prima del tempo"],
+        ["Dopo quanti minuti sono arrivati i pompieri?", ["otto", "due", "venti", "quaranta"], "otto"]
+      ],
+      hunt: { label: "Tocá los infinitivos después de vedere y sentire", targets: ["uscire", "gridare", "rimanere", "riempirsi", "arrivare"] } },
+
+    { id: "cv-42", week: 42, series: "cultura", area: "Civiltà", n: 25, level: "C1", emoji: "💻",
+      title: "SPID e PEC", grammar: "verbi e preposizioni",
+      text:
+        "Chi ha a che fare con la burocrazia italiana impara presto due sigle: SPID e PEC. Lo SPID è un'identità " +
+        "digitale: con un nome utente e una password permette di accedere ai siti della pubblica amministrazione, " +
+        "dall'INPS all'Agenzia delle Entrate, senza andare allo sportello.\n\n" +
+        "La PEC, la posta elettronica certificata, serve invece a mandare messaggi con lo stesso valore di una " +
+        "raccomandata con ricevuta di ritorno. Molti uffici chiedono di inviare i documenti via PEC e si rifiutano di " +
+        "accettare una mail normale.\n\n" +
+        "Il linguaggio, però, resta difficile. Una lettera tipica invita il cittadino «a provvedere al pagamento entro " +
+        "trenta giorni» e gli ricorda «di attenersi alle istruzioni». Tradotto: paga entro un mese e segui le regole. " +
+        "Molti stranieri finiscono per rivolgersi a un patronato, che li aiuta gratis.",
+      gloss: { certificata: "certificada", inviare: "enviar", linguaggio: "lenguaje", sigle: "siglas", utente: "(nome utente) usuario", accedere: "acceder", sportello: "ventanilla",
+               raccomandata: "carta certificada", ricevuta: "(ricevuta di ritorno) acuse de recibo", rifiutano: "(si rifiutano) se niegan",
+               provvedere: "(provvedere a) encargarse de", attenersi: "atenerse", rivolgersi: "recurrir",
+               patronato: "oficina gratuita de ayuda con trámites" },
+      questions: [
+        ["A che cosa serve lo SPID?", ["ad accedere ai siti pubblici", "a mandare lettere certificate", "a pagare le tasse in banca", "a chiedere la residenza"], "ad accedere ai siti pubblici"],
+        ["Che valore ha un messaggio PEC?", ["quello di una raccomandata", "nessun valore legale", "quello di una firma dal notaio", "quello di una telefonata"], "quello di una raccomandata"],
+        ["Che cosa fanno molti stranieri alla fine?", ["si rivolgono a un patronato", "chiedono aiuto al sindaco", "rinunciano alla residenza", "pagano un avvocato"], "si rivolgono a un patronato"]
+      ],
+      hunt: { label: "Tocá los verbos que piden a o di", targets: ["permette", "serve", "chiedono", "rifiutano", "invita", "provvedere", "ricorda", "attenersi", "finiscono", "rivolgersi"] } },
+
+    { id: "cv-43", week: 43, series: "cultura", area: "Civiltà", n: 26, level: "C1", emoji: "🩺",
+      title: "Il medico di base", grammar: "l'infinito",
+      text:
+        "Scegliere il medico di base è una delle prime cose da fare dopo aver preso la residenza. Il medico si sceglie " +
+        "alla ASL o online, da un elenco di medici della zona, e visitarlo non costa niente.\n\n" +
+        "Ma attenzione: il medico di base non fa tutto. Per un esame del sangue o per vedere uno specialista bisogna " +
+        "farsi scrivere prima la ricetta, chiamata anche impegnativa. Poi si prenota attraverso il CUP, il centro unico " +
+        "di prenotazione, e si paga il ticket. Aspettare mesi per una visita specialistica, purtroppo, non è raro.\n\n" +
+        "«All'inizio non capivo perché dovessi passare sempre dal medico prima di prenotare», racconta Lucía, di " +
+        "Montevideo. «Adesso lo trovo comodo: sapere che qualcuno conosce tutta la mia storia è rassicurante.»",
+      gloss: { base: "(medico di base) médico de cabecera", residenza: "domicilio legal", elenco: "lista", sangue: "sangre", specialista: "especialista", ricetta: "receta, orden médica",
+               impegnativa: "orden de derivación", prenota: "(prenotare) sacar turno", prenotazione: "turnos",
+               ticket: "copago", rassicurante: "tranquilizador" },
+      questions: [
+        ["Quanto costa una visita dal medico di base?", ["niente", "il ticket", "trenta euro", "dipende dalla ASL"], "niente"],
+        ["Che cosa serve per vedere uno specialista?", ["la ricetta del medico di base", "solo la tessera sanitaria", "una lettera firmata dall'ospedale", "il permesso del Comune"], "la ricetta del medico di base"],
+        ["Che cosa pensa oggi Lucía del medico di base?", ["che è comodo e rassicurante", "che è inutile e lento", "che costa troppo", "che non conosce la sua storia"], "che è comodo e rassicurante"]
+      ],
+      hunt: { label: "Tocá los infinitivos", targets: ["scegliere", "fare", "aver", "visitarlo", "vedere", "farsi", "scrivere", "prenotare", "aspettare", "passare", "sapere"] } },
+
+    { id: "cv-44", week: 44, series: "cultura", area: "Civiltà", n: 27, level: "C1", emoji: "🚑",
+      title: "Al pronto soccorso", grammar: "gerundio e participio",
+      text:
+        "Arrivati al pronto soccorso, i pazienti non vengono visitati in ordine di arrivo. Un infermiere, parlando con il " +
+        "paziente e misurando pressione e febbre, decide subito la gravità del caso e gli assegna un codice.\n\n" +
+        "Il sistema, cambiato di recente in molte regioni, usa numeri e colori: il rosso è per chi è in pericolo di vita, " +
+        "mentre chi arriva con un codice bianco, cioè con un problema non urgente, può aspettare anche molte ore. In " +
+        "questi casi, avendo tempo, conviene andare dal medico di base o dalla guardia medica, che di notte e nei giorni " +
+        "festivi sostituisce il medico.\n\n" +
+        "«Ho aspettato cinque ore per una distorsione alla caviglia», racconta Diego. «Arrabbiato, ho chiesto " +
+        "spiegazioni. Poi, vedendo arrivare un'ambulanza dopo l'altra, ho capito.»",
+      gloss: { soccorso: "(pronto soccorso) guardia, emergencias", infermiere: "enfermero", pressione: "presión",
+               gravità: "gravedad", assegna: "asigna", guardia: "(guardia medica) médico de guardia", festivi: "feriados",
+               distorsione: "esguince", caviglia: "tobillo" },
+      questions: [
+        ["Chi decide il codice?", ["un infermiere", "il primo medico libero", "il paziente", "la guardia medica"], "un infermiere"],
+        ["Che cosa significa il codice bianco?", ["un problema non urgente", "un pericolo di vita", "un caso da operare subito", "un paziente di passaggio"], "un problema non urgente"],
+        ["Perché Diego alla fine ha capito?", ["ha visto arrivare molte ambulanze", "un medico gli ha spiegato tutto", "la caviglia non gli faceva più male", "ha letto un cartello"], "ha visto arrivare molte ambulanze"]
+      ],
+      hunt: { label: "Tocá los gerundios", targets: ["parlando", "misurando", "avendo", "vedendo"] } },
+
+    { id: "cv-45", week: 45, series: "cultura", area: "Civiltà", n: 28, level: "C1", emoji: "🍝",
+      title: "Il conto, per favore", grammar: "costruzioni verbali speciali",
+      text:
+        "Al ristorante, in Italia, ci vuole un po' di pazienza: il cameriere non porta il conto finché non lo chiedi tu. " +
+        "Portarlo prima sarebbe scortese, come dire «andatevene».\n\n" +
+        "Quando arriva il conto, molti stranieri se la prendono per due voci misteriose: il coperto, cioè il pane e il " +
+        "servizio della tavola, da uno a tre euro a persona, e a volte il servizio. Se il menù le indica, il ristorante ha il diritto di farle pagare. La " +
+        "mancia, invece, non è obbligatoria: chi desidera lascia qualche euro, ma nessuno ci rimane male se non lo fai.\n\n" +
+        "E se il gruppo è grande? Gli italiani spesso pagano «alla romana», cioè dividendo il totale in parti uguali. Chi " +
+        "ha mangiato solo un'insalata magari non ci sta, ma di solito se ne frega e paga lo stesso.",
+      gloss: { pazienza: "paciencia", scortese: "descortés", coperto: "cubierto (pan y servicio de mesa)", voci: "ítems",
+               mancia: "propina", rimane: "(rimanerci male) ofenderse", romana: "(alla romana) en partes iguales",
+               insalata: "ensalada", frega: "(fregarsene) no importarle nada" },
+      questions: [
+        ["Quando porta il conto il cameriere?", ["quando lo chiedi tu", "subito dopo il dolce", "insieme al caffè", "prima di servire"], "quando lo chiedi tu"],
+        ["Che cos'è il coperto?", ["il pane e il servizio della tavola", "la mancia per il cameriere", "una tassa del Comune", "il prezzo del vino della casa e dell'acqua"], "il pane e il servizio della tavola"],
+        ["Che cosa significa pagare «alla romana»?", ["dividere il totale in parti uguali", "pagare solo quello che hai mangiato", "lasciare pagare chi ha invitato", "pagare in contanti"], "dividere il totale in parti uguali"]
+      ],
+      hunt: { label: "Tocá los verbos pronominales (ci vuole, se la prendono…)", targets: ["vuole", "andatevene", "prendono", "rimane", "sta", "frega"] } },
+
+    { id: "cv-46", week: 46, series: "cultura", area: "Civiltà", n: 29, level: "C1", emoji: "🎪",
+      title: "Sagre e feste di paese", grammar: "suffissi e alterazione",
+      text:
+        "D'estate, in quasi ogni paesino italiano, c'è una sagra: una festa popolare dedicata a un prodotto tipico, come " +
+        "la sagra del tortellino, della porchetta o del pesce azzurro. Nella piazzetta si montano tavoloni di legno e i " +
+        "volontari del paese cucinano per centinaia di persone.\n\n" +
+        "Si mangia bene e si spende poco: un piatto di pasta costa sette o otto euro, un bicchiere di vinello della casa " +
+        "due. Tra le bancarelle si trovano formaggini, salamini e dolcetti fatti in casa.\n\n" +
+        "La sera arriva l'orchestrina e anche i nonni ballano il liscio. I ragazzini corrono tra i tavoli, e qualcuno " +
+        "torna a casa con un palloncino in mano. L'unico difetto? Il parcheggio: bisogna lasciare la macchina " +
+        "lontanissimo e fare una bella camminata.",
+      gloss: { sagra: "fiesta popular (gastronómica)", porchetta: "cerdo asado", tavoloni: "mesones", legno: "madera",
+               volontari: "voluntarios", bancarelle: "puestitos", liscio: "baile de salón popular", palloncino: "globito",
+               camminata: "caminata" },
+      questions: [
+        ["Che cos'è una sagra?", ["una festa dedicata a un prodotto tipico", "una gara di cucina tra i ristoranti della regione", "un mercato di vestiti usati", "la festa del patrono in chiesa"], "una festa dedicata a un prodotto tipico"],
+        ["Chi cucina alla sagra?", ["i volontari del paese", "i ristoranti vicini", "un cuoco famoso", "le scuole"], "i volontari del paese"],
+        ["Qual è l'unico difetto della sagra?", ["il parcheggio", "i prezzi alti", "la musica", "il cibo freddo"], "il parcheggio"]
+      ],
+      hunt: { label: "Tocá las palabras con sufijo (-ino, -etto, -one, -ello…)", targets: ["paesino", "piazzetta", "tavoloni", "vinello", "formaggini", "salamini", "dolcetti", "orchestrina", "ragazzini", "palloncino"] } },
+
+    { id: "cv-47", week: 47, series: "cultura", area: "Civiltà", n: 30, level: "C1", emoji: "🔑",
+      title: "Cercare casa in affitto", grammar: "numerali, misure e quantità",
+      text:
+        "Chi cerca casa in affitto in Italia deve conoscere qualche numero. Il contratto più comune è il «quattro più " +
+        "quattro»: dura quattro anni e si rinnova automaticamente per altri quattro. Esiste anche il «tre più due», a " +
+        "canone concordato, con un affitto più basso e qualche vantaggio fiscale.\n\n" +
+        "Alla firma il proprietario chiede di solito una caparra di due o tre mensilità, che restituisce alla fine se la " +
+        "casa è in buone condizioni. A questa somma si aggiungono le spese condominiali, spesso tra i cinquanta e i cento " +
+        "euro al mese, e, se c'è un'agenzia, una provvigione pari a circa una mensilità.\n\n" +
+        "In una grande città una stanza per studenti fuorisede può costare più di cinquecento euro. Non a caso, quasi un " +
+        "giovane su due vive ancora con i genitori.",
+      gloss: { affitto: "alquiler", rinnova: "renueva", canone: "monto del alquiler", concordato: "acordado (regulado)",
+               caparra: "depósito de garantía", mensilità: "mes (de alquiler)", restituisce: "devuelve",
+               condominiali: "(spese condominiali) expensas", provvigione: "comisión",
+               fuorisede: "que estudia lejos de su ciudad" },
+      questions: [
+        ["Quanto dura il primo periodo del contratto «quattro più quattro»?", ["quattro anni", "otto anni", "due anni", "un anno"], "quattro anni"],
+        ["Che cos'è la caparra?", ["un deposito restituito alla fine", "una tassa del Comune che non si recupera", "il costo dell'agenzia", "l'affitto del primo mese"], "un deposito restituito alla fine"],
+        ["Quanti giovani vivono ancora con i genitori?", ["quasi uno su due", "uno su dieci", "quasi tutti", "pochissimi"], "quasi uno su due"]
+      ],
+      hunt: { label: "Tocá los números", targets: ["quattro", "tre", "due", "cinquanta", "cento", "cinquecento"] } },
+
+    { id: "cv-48", week: 48, series: "cultura", area: "Civiltà", n: 31, level: "C1", emoji: "🏛️",
+      title: "Camera e Senato", grammar: "ordine delle parole e dislocazioni",
+      text:
+        "Le leggi, in Italia, le fa il Parlamento, che ha due Camere: la Camera dei deputati e il Senato. È un sistema " +
+        "che si chiama «bicameralismo perfetto»: ogni legge deve essere approvata da tutte e due, con un testo identico.\n\n" +
+        "Il governo, invece, lo guida il presidente del Consiglio, e per governare ha bisogno della fiducia delle due " +
+        "Camere. Se la perde, cade. Nella storia della Repubblica i governi sono stati quasi settanta: è stata " +
+        "l'instabilità, più che le idee, a fare notizia all'estero.\n\n" +
+        "E il presidente della Repubblica? Lo eleggono deputati e senatori insieme, ogni sette anni. Il suo ruolo, lo " +
+        "dicono tutti i manuali, è quello di un arbitro: non governa, ma può sciogliere le Camere e firma le leggi prima " +
+        "che entrino in vigore.",
+      gloss: { bicameralismo: "sistema de dos cámaras", senatori: "senadores", deputati: "diputados", approvata: "aprobada", consiglio: "(presidente del Consiglio) primer ministro",
+               fiducia: "confianza (del Parlamento)", cade: "cae", instabilità: "inestabilidad", eleggono: "eligen",
+               arbitro: "árbitro", sciogliere: "disolver", vigore: "(entrare in vigore) entrar en vigencia" },
+      questions: [
+        ["Che cosa significa «bicameralismo perfetto»?", ["le due Camere approvano lo stesso testo", "il presidente sceglie quale Camera vota la legge", "c'è una sola Camera", "il governo scrive le leggi"], "le due Camere approvano lo stesso testo"],
+        ["Che cosa succede se il governo perde la fiducia?", ["cade", "cambia nome", "va al Senato", "resta per un anno"], "cade"],
+        ["Ogni quanti anni viene eletto il presidente della Repubblica?", ["sette", "cinque", "quattro", "dieci"], "sette"]
+      ],
+      hunt: { label: "Tocá los pronombres que retoman lo ya dicho", targets: ["lo"] } },
+
+    { id: "cv-49", week: 49, series: "cultura", area: "Civiltà", n: 32, level: "C1", emoji: "🏫",
+      title: "La scuola in Italia", grammar: "registro alto e coesione testuale",
+      text:
+        "Il sistema scolastico italiano si articola in tre cicli. Dopo la scuola dell'infanzia, facoltativa, i bambini " +
+        "frequentano cinque anni di scuola primaria e tre di secondaria di primo grado, che molti chiamano ancora «le " +
+        "medie».\n\n" +
+        "Successivamente gli studenti scelgono tra licei, istituti tecnici e istituti professionali. Tale scelta, sebbene " +
+        "avvenga a soli quattordici anni, condiziona spesso l'intero percorso di studi; pertanto molte famiglie la vivono " +
+        "con una certa ansia. L'obbligo scolastico, peraltro, dura fino ai sedici anni.\n\n" +
+        "Il percorso si conclude con l'esame di Stato, la cosiddetta maturità. Va inoltre ricordato che la scuola " +
+        "pubblica è largamente maggioritaria: le scuole private, in gran parte cattoliche, accolgono meno di un alunno " +
+        "su dieci. In conclusione, si tratta di un sistema tradizionale, ma radicato.",
+      gloss: { scolastico: "escolar", cicli: "ciclos", primaria: "primaria", secondaria: "secundaria", medie: "(le medie) la secundaria básica", istituti: "institutos, escuelas", professionali: "profesionales", condiziona: "condiciona", peraltro: "por otra parte", articola: "se organiza", facoltativa: "optativa", frequentano: "cursan", licei: "liceos (bachilleratos)",
+               avvenga: "ocurra", percorso: "recorrido", obbligo: "obligatoriedad", cosiddetta: "la llamada",
+               accolgono: "reciben", radicato: "arraigado" },
+      questions: [
+        ["Come chiamano molti la secondaria di primo grado?", ["le medie", "il liceo", "le elementari", "la maturità"], "le medie"],
+        ["A che età gli studenti scelgono la scuola superiore?", ["a quattordici anni", "a sedici anni", "a dieci anni", "a diciotto anni"], "a quattordici anni"],
+        ["Quanti alunni frequentano le scuole private?", ["meno di uno su dieci", "circa la metà", "quasi tutti", "uno su tre"], "meno di uno su dieci"]
+      ],
+      hunt: { label: "Tocá los conectores del registro alto", targets: ["successivamente", "tale", "sebbene", "pertanto", "peraltro", "inoltre", "conclusione"] } },
+
+    { id: "cv-50", week: 50, series: "cultura", area: "Civiltà", n: 33, level: "C1", emoji: "📝",
+      title: "La maturità", grammar: "lessico avanzato e falsi amici",
+      text:
+        "A giugno, per circa mezzo milione di ragazzi, arriva la maturità, l'esame che chiude la scuola superiore. Il " +
+        "primo giorno c'è la prima prova, un tema di italiano che il ministero comunica solo la mattina stessa. Per " +
+        "settimane i giornali cercano di indovinare gli autori: uscirà Pascoli? Toccherà a Ungaretti o a Montale?\n\n" +
+        "Il giorno dopo c'è la seconda prova, diversa per ogni scuola: latino al liceo classico, matematica allo " +
+        "scientifico. Infine c'è il colloquio orale, davanti a una commissione di professori. Molti studenti confessano " +
+        "un certo disagio, e qualcuno arriva così imbarazzato da non riuscire a parlare.\n\n" +
+        "L'esito si esprime in centesimi, da sessanta a cento, con la lode per i migliori. Anni dopo, quasi tutti gli " +
+        "italiani ricordano ancora la traccia che scelsero quel giorno.",
+      gloss: { ministero: "ministerio", confessano: "confiesan", tema: "composición (redacción)", indovinare: "adivinar", toccherà: "(toccare a) le tocará a",
+               colloquio: "examen oral", commissione: "tribunal", disagio: "incomodidad, malestar",
+               imbarazzato: "incómodo, avergonzado (no «embarazado»)", esito: "resultado (no «éxito»)",
+               centesimi: "centésimos", traccia: "consigna (del tema)" },
+      questions: [
+        ["Quando conoscono gli studenti gli autori della prima prova?", ["la mattina stessa", "una settimana prima", "il giorno dopo", "a maggio"], "la mattina stessa"],
+        ["Che cosa significa «esito» in questo testo?", ["risultato", "successo", "uscita", "voto massimo"], "risultato"],
+        ["Com'è la seconda prova?", ["diversa per ogni tipo di scuola", "sempre di matematica, in tutte le scuole", "uguale per tutti", "solo orale"], "diversa per ogni tipo di scuola"]
+      ],
+      hunt: { label: "Tocá los falsos amigos (tema, colloquio, disagio…)", targets: ["tema", "colloquio", "disagio", "imbarazzato", "esito", "traccia"] } },
+
+    { id: "cv-51", week: 51, series: "cultura", area: "Civiltà", n: 34, level: "C1", emoji: "☀️",
+      title: "Ferragosto e le ferie", grammar: "ripasso generale C1",
+      text:
+        "Se c'è una data che ferma l'Italia, è il 15 agosto, Ferragosto. Il nome viene dalle «feriae Augusti», il " +
+        "riposo che l'imperatore Augusto concesse ai Romani; più tardi la Chiesa fece coincidere la festa con " +
+        "l'Assunzione di Maria.\n\n" +
+        "Per decenni molte fabbriche chiudevano per tutto il mese e le città si svuotavano: chi poteva partiva per il " +
+        "mare o la montagna, e chi restava trovava i negozi con il cartello «chiuso per ferie». Oggi le cose sono " +
+        "cambiate, sebbene agosto resti il mese delle vacanze per eccellenza: i lavoratori hanno diritto ad almeno " +
+        "quattro settimane di ferie pagate, e molti le spezzano in più periodi.\n\n" +
+        "Resta intatto, invece, il rito del giorno: una grigliata con gli amici, un bagno al mare e, per i più " +
+        "fortunati, i fuochi d'artificio sulla spiaggia.",
+      gloss: { imperatore: "emperador", ferie: "vacaciones (del trabajo)", eccellenza: "(per eccellenza) por excelencia", intatto: "intacto", concesse: "concedió", coincidere: "coincidir", assunzione: "Asunción", decenni: "décadas", fabbriche: "fábricas",
+               svuotavano: "vaciaban", cartello: "cartel", spezzano: "dividen", rito: "ritual", grigliata: "asado a la parrilla",
+               fuochi: "(fuochi d'artificio) fuegos artificiales" },
+      questions: [
+        ["Da dove viene il nome Ferragosto?", ["dal riposo concesso da Augusto", "da una festa della Chiesa", "dal nome di un santo", "da una battaglia romana"], "dal riposo concesso da Augusto"],
+        ["Quante settimane di ferie pagate hanno almeno i lavoratori?", ["quattro", "due", "sei", "otto"], "quattro"],
+        ["Che cosa fanno molti italiani il giorno di Ferragosto?", ["una grigliata con gli amici", "una visita ai nonni in città", "un pranzo di lavoro", "una gita in montagna da soli"], "una grigliata con gli amici"]
+      ],
+      hunt: { label: "Tocá el passato remoto y el congiuntivo", targets: ["concesse", "fece", "resti"] } }
   ];
 
   var SERIES = [
     { id: "martin", name: "Martín a Bologna", emoji: "📖",
       blurb: "Una historia por capítulos, de A1 a B2. Cada episodio usa la gramática que estás viendo y abre el siguiente." },
     { id: "cultura", name: "Cultura", emoji: "🏛️",
-      blurb: "Historia, filosofía, sociología y literatura italianas en textos graduados. Cada uno se abre con la gramática que usa; entre los abiertos, elegí el que te interese." },
+      blurb: "Historia, filosofía, sociología y literatura italianas en textos graduados, y desde la semana 27 la civiltà: cómo funcionan en Italia la escuela, la sanidad, el trabajo, la casa, las fiestas, la mesa, el Estado y los medios. Cada uno se abre con la gramática que usa; entre los abiertos, elegí el que te interese." },
     { id: "settimana", name: "La settimana", emoji: "🗞️",
       blurb: "Un texto corto por semana con la gramática que estás viendo y palabras que ya conocés: para leer sin diccionario." },
     { id: "flood", name: "Inondazioni", emoji: "🌊",

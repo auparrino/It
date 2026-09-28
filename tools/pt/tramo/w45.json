@@ -355,5 +355,98 @@
       "tropeços": "tropiezos",
       "passar uma impressão": "dar una impresión"
     }
+  },
+  "breve": {
+    "title": "Promoções do Supermercado Bom Preço",
+    "genre": "anúncio de supermercado",
+    "es": "Un anuncio por los parlantes de un supermercado, con falsos amigos por todas partes: presunto, polvo, talheres, borracha.",
+    "speaker": "Voz do supermercado",
+    "voice": 1,
+    "text": [
+      "Atenção, senhores clientes do Supermercado Bom Preço! Só hoje, até as 20 horas, promoções imperdíveis para o seu fim de semana.",
+      "No balcão de frios, o presunto fatiado sai a 39 reais o quilo, e o queijo prato a 42. Na peixaria, o polvo congelado está com 25% de desconto: aproveite para fazer aquele arroz de polvo no domingo.",
+      "No corredor 7, os copos e as taças de vidro estão pela metade do preço, e na compra de um jogo de talheres você ganha um pano de prato. E para a volta às aulas: na compra de um caderno, a borracha é grátis.",
+      "Lembramos que o estacionamento é gratuito por duas horas para quem apresentar o cupom fiscal no caixa. Bom Preço: o seu supermercado de todo dia."
+    ],
+    "tabella": [
+      [
+        "Preço do quilo do presunto (reais)",
+        "39",
+        [
+          "trinta e nove",
+          "39 reais",
+          "R$ 39"
+        ]
+      ],
+      [
+        "Desconto no polvo",
+        "25%",
+        [
+          "25",
+          "25 %",
+          "vinte e cinco por cento",
+          "25 por cento"
+        ]
+      ],
+      [
+        "Corredor dos copos e das taças",
+        "7",
+        [
+          "sete",
+          "corredor 7"
+        ]
+      ],
+      [
+        "Brinde na compra de um caderno",
+        "borracha",
+        [
+          "uma borracha",
+          "a borracha"
+        ]
+      ],
+      [
+        "Horas de estacionamento grátis",
+        "2",
+        [
+          "duas",
+          "duas horas",
+          "2 horas"
+        ]
+      ]
+    ],
+    "info": [
+      [
+        "As promoções valem só hoje.",
+        true
+      ],
+      [
+        "O polvo é vendido fresco.",
+        false
+      ],
+      [
+        "Quem compra talheres ganha um pano de prato.",
+        true
+      ],
+      [
+        "O estacionamento é pago para todos.",
+        false
+      ],
+      [
+        "Para ter o estacionamento grátis, é preciso mostrar o cupom fiscal.",
+        true
+      ],
+      [
+        "O queijo está pela metade do preço.",
+        false
+      ]
+    ],
+    "gloss": {
+      "presunto": "jamón (no «presunto»)",
+      "polvo": "pulpo",
+      "talheres": "cubiertos",
+      "borracha": "goma de borrar",
+      "frios": "fiambres",
+      "taças": "copas"
+    }
   }
 }

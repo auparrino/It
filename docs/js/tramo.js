@@ -92,10 +92,24 @@
 
   // A cell of the table of a short listening: numbers, hours, names.  «18»,
   // «alle 18», «18:00» and «diciotto» are the same answer when the data say
-  // so; accents, case, articles and punctuation do not count.
+  // so; accents, case, articles and punctuation do not count.  The package
+  // can add its own particles (TRAMO_DATA.cellStop: «às», «reais»…); «18h»
+  // and «18h30» are hours too.
+  var cellStopRe = null, cellStopOf = null;
+  function cellStop() {
+    var extra = D().cellStop || [];
+    if (cellStopOf !== extra) {
+      cellStopOf = extra;
+      var base = ["il", "lo", "la", "l", "i", "gli", "le", "un", "una", "alle", "alla", "al", "dalle", "dalla", "dal", "entro", "ogni",
+                  "circa", "ore", "euro", "di", "del", "della", "a", "e"];
+      cellStopRe = new RegExp("\\b(" + base.concat(extra.map(plain)).join("|") + ")\\b", "g");
+    }
+    return cellStopRe;
+  }
   function cellKey(s) {
-    return plain(s).replace(/(\d)[:.,](00)\b/g, "$1").replace(/(\d)[:.](\d)/g, "$1 $2").replace(/[^a-z0-9%\s]/g, " ")
-      .replace(/\b(il|lo|la|l|i|gli|le|un|una|alle|alla|al|dalle|dalla|dal|entro|ogni|circa|ore|euro|di|del|della|a|e)\b/g, " ")
+    return plain(s).replace(/(\d)\s*h\s*(\d\d)\b/g, "$1:$2").replace(/(\d)\s*h\b/g, "$1")
+      .replace(/(\d)[:.,](00)\b/g, "$1").replace(/(\d)[:.](\d)/g, "$1 $2").replace(/[^a-z0-9%\s]/g, " ")
+      .replace(cellStop(), " ")
       .replace(/\s+/g, " ").trim();
   }
   function cellOk(given, cell) {

@@ -26,6 +26,14 @@ S.weeks().forEach(function (w) {
   if (verbose && r.findings.length) console.log("  sem " + w + " notas: " + r.findings.map(function (f) { return f.msg; }).join(" | "));
 });
 
+// De la 8 a la 25, tareas situadas (destinatario y propósito) de 40-80
+// palabras; desde la 14 la consigna va en italiano.
+S.weeks().filter(function (w) { return w >= 8 && w <= 25; }).forEach(function (w) {
+  var t = S.TASKS[w], n = S.check(t.model, w).reqs[0].n;
+  ok(t.min >= 40 && t.min <= 55 && n >= t.min && n <= 80, "semana " + w + ": tarea de 40-80 palabras (mínimo " + t.min + ", modelo " + n + ")");
+  if (w >= 14) ok(/\b(scrivi|rispondi|racconta|chiedi)\w*/i.test(t.t) && !/[¿¡]|\b(contá|escribí|decile)\b/i.test(t.t), "semana " + w + ": la consigna va en italiano");
+});
+
 // [texto, semana, categoría esperada]
 var ERR = [
   ["Ieri ho andato al cinema con Marco.", 11, "ausiliare"],

@@ -124,5 +124,97 @@
       "redação da escola": "la composición del colegio",
       "aprende as duas coisas": "aprendé las dos cosas (imperativo del habla: la forma de tú, que es la del presente)"
     }
+  },
+  "breve": {
+    "title": "Áudio do Rafa: a estreia da série",
+    "genre": "mensagem de voz",
+    "es": "Un audio de WhatsApp, bien coloquial: un amigo invita a ver el estreno de una serie en su casa; la dirección nueva, la pizza y qué llevar.",
+    "speaker": "Rafa",
+    "voice": 0,
+    "text": [
+      "Fala, Bia! Tudo certo? Então, é o seguinte: a estreia da nova temporada é sexta, né, às nove da noite. A gente vai ver lá em casa, tá? Cê topa?",
+      "O endereço cê sabe, né, Rua Bambina, 45, mas agora é no apartamento 302, porque eu mudei de andar. O porteiro já tá avisado, é só falar que vai pro 302.",
+      "Ó, pra comida a gente pensou em pizza. Deu 30 reais pra cada um, pode mandar no Pix, beleza? Se cê quiser trazer alguma coisa, traz um refri, que cerveja já tem. Ah, e cadê aquele meu carregador que eu te emprestei? Traz também, por favor, que eu tô sem.",
+      "E ó, sem spoiler, hein! Quem tiver visto o trailer vazado fica calado. Beijo, até sexta!"
+    ],
+    "tabella": [
+      [
+        "Hora da estreia",
+        "9",
+        [
+          "nove",
+          "21",
+          "21h",
+          "21 horas",
+          "nove da noite",
+          "9 da noite"
+        ]
+      ],
+      [
+        "Número do apartamento",
+        "302",
+        [
+          "trezentos e dois",
+          "apartamento 302"
+        ]
+      ],
+      [
+        "Número do prédio na Rua Bambina",
+        "45",
+        [
+          "quarenta e cinco"
+        ]
+      ],
+      [
+        "Quanto cada um paga pela pizza (reais)",
+        "30",
+        [
+          "trinta",
+          "30 reais",
+          "R$ 30"
+        ]
+      ],
+      [
+        "Bebida que a Bia pode levar",
+        "refri",
+        [
+          "refrigerante",
+          "um refri"
+        ]
+      ]
+    ],
+    "info": [
+      [
+        "O Rafa mudou de apartamento no mesmo prédio.",
+        true
+      ],
+      [
+        "A comida vai ser churrasco.",
+        false
+      ],
+      [
+        "O dinheiro da pizza pode ser mandado por Pix.",
+        true
+      ],
+      [
+        "A Bia precisa levar cerveja.",
+        false
+      ],
+      [
+        "O Rafa quer de volta o carregador.",
+        true
+      ],
+      [
+        "O Rafa vai mostrar o trailer para todo mundo.",
+        false
+      ]
+    ],
+    "gloss": {
+      "topa": "¿te prendés?",
+      "refri": "gaseosa",
+      "carregador": "cargador",
+      "vazado": "filtrado",
+      "estreia": "estreno"
+    }
   }
 }

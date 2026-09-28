@@ -443,6 +443,7 @@ LESSONS = {
  {"h": "Sufijos que hacen sustantivos", "blocks": [0, 1]},
  {"h": "Oficios, árboles, golpes y prefijos", "blocks": [2, 3, 4]},
  {"h": "Diminutivos y aumentativos", "blocks": [5, 6, 7]},
+ {"h": "Formá la palabra", "blocks": [8]},
 ],
 "blocks": [
  {"h": "-dade, -eza, -ice, -ura",
@@ -581,6 +582,30 @@ LESSONS = {
   "r": "En Curitiba la *e* final se pronuncia *e* (*leite quente*, no «leiti quenti») y hay palabras propias: *piá* (chico), *vina* (salchicha).",
   "ex": [["O *piá* foi pra escola.", "El chico fue a la escuela."], ["Um cachorro-quente com duas *vinas*, por favor.", "Un pancho con dos salchichas, por favor."], ["*Leite quente* dá dor de dente.", "La leche caliente da dolor de muelas (el dicho con que se burlan del acento)."]],
   "tip": "Con el diminutivo y los sufijos de esta semana: *piazinho*, *vininha*. La voz de la app es la estándar: el acento no se oye, las palabras sí."},
+
+ {"h": "Producir: -vel, -ista, in-, des-, re-",
+  "q": [{"prompt": "Elegí la palabra formada.", "stem": "Uma roupa que se pode lavar é ___.", "answer": "lavável", "options": ["lavável", "lavada", "lavadora"]}],
+  "r": "Para escribir, no solo para leer: *-vel* dice «que se puede» (*lavar → "
+       "lavável*), *-ista* nombra oficios (*táxi → taxista*), *in- / des-* dan el "
+       "contrario y *re-*, «de nuevo».",
+  "table": {"head": ["Base", "Derivado", "Cómo"],
+            "rows": [["lavar", "lavável", "-ar → -ável"],
+                     ["preferir", "preferível", "-er / -ir → -ível"],
+                     ["jornal", "jornalista", "-ista: oficio"],
+                     ["táxi", "taxista", "-ista: oficio"],
+                     ["útil", "inútil", "in-: el contrario"],
+                     ["paciente", "impaciente", "im- ante p y b"],
+                     ["conhecido", "desconhecido", "des-: el contrario"],
+                     ["abrir", "reabrir", "re-: de nuevo"]]},
+  "ex": [["Essa camisa é *lavável* à máquina.", "Esta camisa se puede lavar en el lavarropas."],
+         ["O *taxista* conhecia um atalho.", "El taxista conocía un atajo."],
+         ["Foi uma reunião *inútil*.", "Fue una reunión inútil."],
+         ["Um número *desconhecido* me ligou.", "Me llamó un número desconocido."]],
+  "warn": "«-ble» → *-vel*, con tilde en la vocal de antes: *possível*, "
+          "*confiável*; plural *-veis*. Y *-ista* no cambia en femenino: *o / a "
+          "taxista*.",
+  "tip": "Para formar, pensá en la regla y no en el español: *-ção* y *-dade* "
+         "(femeninos), *-mento* (masculino), *-eza* de adjetivos."},
 
 ]},
 

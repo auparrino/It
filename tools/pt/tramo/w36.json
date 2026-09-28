@@ -110,5 +110,104 @@
     "punti": [["Retomar los horarios anunciados", ["17h", "21h", "horário"]], ["Mencionar la justificación dada", ["funcionários", "gastos", "energia"]], ["Mostrar quién es afectado", ["noite", "trabalh", "concursos", "estud"]], ["La consulta pública", ["consulta pública", "prazo"]], ["Proponer una alternativa", ["propomos", "alternativa", "parcerias"]]],
     "model": "Carta aberta à Secretaria Municipal de Cultura\n\nNós, usuários da Biblioteca Pública Municipal que estudam depois do trabalho, vimos a público manifestar, dentro do prazo da consulta pública, nossa preocupação com a mudança anunciada. Segundo o boletim divulgado pela rádio, a partir do próximo mês a biblioteca funcionará apenas de terça a sábado, das 10h às 17h, e não mais de segunda a sábado, das 8h às 21h.\n\nCompreendemos que a decisão se deve à falta de funcionários e à necessidade de reduzir gastos com energia. No entanto, a medida atinge justamente quem mais depende do espaço. A maioria de nós trabalha das 8h às 18h e só consegue estudar à noite; além disso, dezenas de estudantes que se preparam para concursos perderão o único ambiente silencioso a que têm acesso.\n\nDiante disso, propomos uma alternativa: manter a abertura noturna ao menos três vezes por semana, fechando a biblioteca pela manhã, quando o movimento é menor. Outra possibilidade seria firmar parcerias com universidades para a contratação de estagiários.\n\nContamos com a sensibilidade desta Secretaria e reivindicamos que a opinião dos usuários seja levada em conta antes da decisão final.\n\nAssinam esta carta 146 usuários da Biblioteca Pública Municipal.",
     "gloss": {"atinge justamente": "afecta justamente", "concursos": "concursos públicos: exámenes para entrar a un empleo del Estado", "firmar parcerias": "establecer convenios (firmar = establecer, cerrar)", "estagiários": "pasantes"}
+  },
+  "breve": {
+    "title": "Agenda do fim de semana em Salvador",
+    "genre": "agenda cultural de rádio",
+    "es": "La agenda del fin de semana de una radio de Salvador: samba de roda, feria de artesanías, una carrera y dónde ver la puesta del sol.",
+    "speaker": "Locutora",
+    "voice": 1,
+    "text": [
+      "Rádio Salvador FM, agenda do fim de semana. Anote aí!",
+      "Na sexta, às 20 horas, tem show de samba de roda no Pelourinho, no Largo Tereza Batista. A entrada custa 40 reais, e quem chegar antes das 19 horas paga meia.",
+      "No sábado, a feira de artesanato da Praça da Sé funciona das 9 às 18 horas. À tarde, às 16 horas, tem oficina gratuita de capoeira para crianças, à sombra das árvores da praça.",
+      "No domingo, o Farol da Barra recebe a Corrida da Baía, de 10 quilômetros, com largada às 6 horas da manhã. As inscrições vão até sexta, à meia-noite, pelo site da corrida. Atenção: por causa da corrida, a Avenida Oceânica fica fechada aos carros até as 11 horas.",
+      "E à noite, para fechar o domingo, o pôr do sol no Farol da Barra, que é de graça. Bom fim de semana!"
+    ],
+    "tabella": [
+      [
+        "Preço da entrada do show de sexta (reais)",
+        "40",
+        [
+          "quarenta",
+          "40 reais",
+          "R$ 40"
+        ]
+      ],
+      [
+        "Horário em que a feira de sábado fecha",
+        "18",
+        [
+          "18 horas",
+          "18h",
+          "seis da tarde",
+          "18:00"
+        ]
+      ],
+      [
+        "Distância da corrida (quilômetros)",
+        "10",
+        [
+          "dez",
+          "10 km",
+          "10 quilômetros",
+          "dez quilômetros"
+        ]
+      ],
+      [
+        "Horário da largada",
+        "6",
+        [
+          "6 horas",
+          "6h",
+          "seis",
+          "seis da manhã",
+          "6:00"
+        ]
+      ],
+      [
+        "Até que horas a Avenida Oceânica fica fechada",
+        "11",
+        [
+          "11 horas",
+          "11h",
+          "onze",
+          "onze horas",
+          "11:00"
+        ]
+      ]
+    ],
+    "info": [
+      [
+        "Quem chega cedo ao show paga meia-entrada.",
+        true
+      ],
+      [
+        "A oficina de capoeira é paga.",
+        false
+      ],
+      [
+        "As inscrições para a corrida são pela internet.",
+        true
+      ],
+      [
+        "A corrida começa à tarde.",
+        false
+      ],
+      [
+        "Ver o pôr do sol no Farol é de graça.",
+        true
+      ],
+      [
+        "A feira de artesanato funciona também no domingo.",
+        false
+      ]
+    ],
+    "gloss": {
+      "anote": "anotá",
+      "meia": "media entrada",
+      "oficina": "taller",
+      "largada": "largada, salida"
+    }
   }
 }

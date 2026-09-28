@@ -117,5 +117,91 @@
       "assinatura digital": "suscripción digital (assinatura = suscripción, también firma)",
       "assinantes": "suscriptores"
     }
+  },
+  "breve": {
+    "title": "A última banca do centro",
+    "genre": "notícia de rádio",
+    "es": "Una noticia de radio de Itajubá: cierra el último puesto de diarios del centro; lo que dijo el dueño y lo que dijo la municipalidad.",
+    "speaker": "Repórter",
+    "voice": 0,
+    "text": [
+      "Rádio Vale Notícias, boa tarde. O principal assunto de hoje em Itajubá é o fechamento da última banca de jornal do centro.",
+      "A banca do seu Aristides, na praça da matriz, funcionou por 42 anos. Ontem, ele contou à nossa reportagem que vendia mais de 300 jornais por dia nos anos 90 e que hoje vende menos de 20. Disse que ia fechar no fim do mês porque o aluguel do ponto tinha subido de novo.",
+      "A prefeitura informou que estudava uma forma de manter a banca aberta como ponto de troca de livros. O secretário de Cultura, Renato Brandão, afirmou que a decisão seria tomada até sexta-feira e pediu que os moradores mandassem sugestões pelo site da prefeitura.",
+      "Seu Aristides agradeceu o apoio dos clientes e disse que, se a banca virar ponto de troca, quer continuar trabalhando lá como voluntário."
+    ],
+    "tabella": [
+      [
+        "Anos de funcionamento da banca",
+        "42",
+        [
+          "quarenta e dois",
+          "42 anos"
+        ]
+      ],
+      [
+        "Jornais vendidos por dia nos anos 90 (mais de…)",
+        "300",
+        [
+          "trezentos"
+        ]
+      ],
+      [
+        "Jornais vendidos por dia hoje (menos de…)",
+        "20",
+        [
+          "vinte"
+        ]
+      ],
+      [
+        "Prazo para a decisão da prefeitura",
+        "sexta-feira",
+        [
+          "sexta",
+          "sexta feira",
+          "até sexta"
+        ]
+      ],
+      [
+        "Nome do secretário de Cultura",
+        "Renato Brandão",
+        [
+          "Renato Brandao",
+          "Brandão"
+        ]
+      ]
+    ],
+    "info": [
+      [
+        "O dono da banca vai fechar por causa do aluguel.",
+        true
+      ],
+      [
+        "A prefeitura já decidiu comprar a banca.",
+        false
+      ],
+      [
+        "A prefeitura pediu sugestões aos moradores.",
+        true
+      ],
+      [
+        "Seu Aristides vai se mudar para outra cidade.",
+        false
+      ],
+      [
+        "Seu Aristides quer trabalhar como voluntário.",
+        true
+      ],
+      [
+        "A banca fica na estação de trem.",
+        false
+      ]
+    ],
+    "gloss": {
+      "banca": "puesto de diarios",
+      "ponto": "local (del negocio)",
+      "reportagem": "equipo de periodistas",
+      "prefeitura": "municipalidad"
+    }
   }
 }

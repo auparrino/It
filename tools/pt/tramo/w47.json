@@ -340,5 +340,89 @@
       "engavetar": "cajonear, archivar sin tratar",
       "ponto de ônibus": "la parada del colectivo"
     }
+  },
+  "breve": {
+    "title": "Boletim da economia",
+    "genre": "noticiário econômico",
+    "es": "El boletín económico de la mañana: el balance de un año de colectivos gratis, la tasa de interés y la semana de cuatro días, con cifras y con cautela.",
+    "speaker": "Jornalista",
+    "voice": 1,
+    "text": [
+      "Boletim da economia, Rádio Capital, sete horas. Os destaques desta terça-feira.",
+      "Tarifa zero. A prefeitura de Vila Serena, no Ceará, divulgou ontem o balanço de um ano de ônibus gratuitos. Segundo a prefeitura, o número de passageiros por dia passou de 20 mil para 62 mil. O comércio do centro registrou alta de 12% nas vendas, mas os economistas ouvidos pela rádio são cautelosos: é possível que parte desse aumento se deva a outros fatores.",
+      "Juros. O Banco Central anuncia amanhã a nova taxa básica de juros. Tudo indica que a taxa deve cair meio ponto, para 9,75% ao ano, embora alguns analistas ainda não descartem uma manutenção.",
+      "Semana de quatro dias. Das 21 empresas brasileiras que testaram o modelo desde janeiro, 19 decidiram mantê-lo. O resultado, no entanto, não deve ser generalizado: a maioria são empresas pequenas, de tecnologia.",
+      "O próximo boletim é às nove. Bom dia."
+    ],
+    "tabella": [
+      [
+        "Passageiros por dia depois da tarifa zero",
+        "62 mil",
+        [
+          "62.000",
+          "62000",
+          "sessenta e dois mil"
+        ]
+      ],
+      [
+        "Aumento das vendas no comércio do centro",
+        "12%",
+        [
+          "12",
+          "12 %",
+          "doze por cento",
+          "12 por cento"
+        ]
+      ],
+      [
+        "Taxa de juros prevista (ao ano)",
+        "9,75%",
+        [
+          "9,75",
+          "9.75",
+          "9,75 %"
+        ]
+      ],
+      [
+        "Empresas que mantiveram a semana de quatro dias",
+        "19",
+        [
+          "dezenove"
+        ]
+      ]
+    ],
+    "info": [
+      [
+        "O número de passageiros aumentou depois da tarifa zero.",
+        true
+      ],
+      [
+        "Os economistas afirmam que a tarifa zero é a única causa do aumento das vendas.",
+        false
+      ],
+      [
+        "A decisão sobre os juros sai amanhã.",
+        true
+      ],
+      [
+        "Todos os analistas têm certeza de que os juros vão cair.",
+        false
+      ],
+      [
+        "A maioria das empresas do teste é pequena.",
+        true
+      ],
+      [
+        "O teste da semana de quatro dias foi feito em empresas de vários países.",
+        false
+      ]
+    ],
+    "gloss": {
+      "balanço": "balance",
+      "juros": "intereses",
+      "cautelosos": "cautos",
+      "descartem": "descarten",
+      "manutenção": "mantenimiento (de la tasa)"
+    }
   }
 }

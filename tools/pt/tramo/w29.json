@@ -113,5 +113,101 @@
       "Agradeço desde já a atenção": "desde ya, gracias por su atención (fórmula de cierre: semana 43)",
       "Atenciosamente": "saludo atentamente (se ve en la semana 43)"
     }
+  },
+  "breve": {
+    "title": "Um recado da Editora Horizonte",
+    "genre": "recado na caixa postal",
+    "es": "Un mensaje en el contestador: la oficina de personal de una editorial cita a una candidata a una pasantía.",
+    "speaker": "Cláudia Mendes, do RH",
+    "voice": 1,
+    "text": [
+      "Oi, Juliana, boa tarde. Aqui é a Cláudia Mendes, do RH da Editora Horizonte. Estou ligando sobre a vaga de estágio em revisão de textos: você foi selecionada para a última etapa, parabéns!",
+      "A entrevista vai ser na quinta-feira, dia 14, às 10 horas, no nosso escritório da Rua da Assembleia, número 98, oitavo andar. Vai ser em grupo, com quatro candidatos. Antes de começarmos, cada um vai fazer um teste curto de revisão, de uns trinta minutos.",
+      "É importante vocês trazerem o comprovante de matrícula da faculdade e um documento com foto. A bolsa é de 1.800 reais, mais vale-transporte, para seis horas por dia.",
+      "Se não puder vir, me avisa até terça, tá? O meu ramal é 2173. Um abraço e até quinta!"
+    ],
+    "tabella": [
+      [
+        "Dia do mês da entrevista",
+        "14",
+        [
+          "dia 14",
+          "catorze",
+          "quatorze"
+        ]
+      ],
+      [
+        "Horário da entrevista",
+        "10",
+        [
+          "10 horas",
+          "10h",
+          "dez",
+          "dez horas",
+          "10:00"
+        ]
+      ],
+      [
+        "Andar do escritório",
+        "8",
+        [
+          "oitavo",
+          "8º",
+          "oitavo andar"
+        ]
+      ],
+      [
+        "Valor da bolsa (reais)",
+        "1.800",
+        [
+          "1800",
+          "mil e oitocentos",
+          "R$ 1.800",
+          "1.800 reais"
+        ]
+      ],
+      [
+        "Ramal da Cláudia",
+        "2173",
+        [
+          "2 1 7 3",
+          "21 73"
+        ]
+      ]
+    ],
+    "info": [
+      [
+        "A Juliana passou para a última etapa da seleção.",
+        true
+      ],
+      [
+        "A entrevista vai ser individual.",
+        false
+      ],
+      [
+        "Os candidatos vão fazer um teste de revisão.",
+        true
+      ],
+      [
+        "O estágio é de oito horas por dia.",
+        false
+      ],
+      [
+        "Além da bolsa, a editora paga o transporte.",
+        true
+      ],
+      [
+        "A Juliana precisa levar o currículo impresso.",
+        false
+      ]
+    ],
+    "gloss": {
+      "ramal": "interno (del teléfono)",
+      "bolsa": "pago de la pasantía",
+      "vale-transporte": "subsidio para el transporte",
+      "comprovante": "constancia",
+      "matrícula": "inscripción",
+      "estágio": "pasantía"
+    }
   }
 }

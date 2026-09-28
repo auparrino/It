@@ -60,7 +60,7 @@ VOCAB = {
     ["a ressaca", "la resaca; también «el mar de fondo»", "A ressaca derrubou parte da ciclovia na Avenida Niemeyer.", "Mar de fondo con olas fuertes, y también resaca del alcohol: *estou de ressaca*."],
     ["o arrastão", "el robo masivo en banda (en la playa)", "O arrastão em Ipanema virou manchete no dia seguinte.", "De *arrastar*: literal, red de arrastre. Aumentativo en *-ão*, masculino."],
     ["o alagamento", "el anegamiento, la calle inundada", "Com o alagamento, o trânsito parou na Praça da Bandeira.", "De *alagar* = inundar: *a rua alagou*. La crecida grande es *a enchente*."],
-    ["o saque", "el saqueo; también «la extracción de dinero»", "Fiz um saque no caixa eletrônico antes de ir à feira.", "De *sacar*: *fazer um saque* = retirar plata. En vóley, el saque."],
+    ["o saque", "la extracción de dinero; también «el saqueo»", "Fiz um saque no caixa eletrônico antes de ir à feira.", "De *sacar*: *fazer um saque* = retirar plata. En vóley, el saque."],
     ["a estiagem", "la sequía, la temporada sin lluvia", "A estiagem no sertão inspirou Vidas Secas.", "Femenino en *-agem*, más técnico que *seca*. De *estiar* = dejar de llover."],
 ],
 

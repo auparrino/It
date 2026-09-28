@@ -58,6 +58,61 @@ def load_lessons():
     return out
 
 
+def _plain(s):
+    import unicodedata
+    return "".join(c for c in unicodedata.normalize("NFD", s.lower()) if unicodedata.category(c) != "Mn")
+
+
+_SENSE_STOP = {"de", "la", "el", "los", "las", "un", "una", "en", "al", "del", "con", "por", "para", "que", "se",
+               "no", "es", "lo", "le", "su", "sus", "mas", "muy", "como", "algo", "alguien", "cosa", "coloquial",
+               "si", "sin", "tambien", "pt"}
+
+
+def same_sense(a, b):
+    """Dos glosas dicen lo mismo si comparten una palabra (o sus cuatro
+    primeras letras: «despertarse» y «despertar(se)», «vuelco» y «vuelta»)."""
+    wa = [w for w in re.findall(r"[a-zñ]+", _plain(a)) if w not in _SENSE_STOP]
+    wb = [w for w in re.findall(r"[a-zñ]+", _plain(b)) if w not in _SENSE_STOP]
+    return any(x == y or (len(x) >= 4 and len(y) >= 4 and x[:4] == y[:4]) for x in wa for y in wb)
+
+
+def vocab_keys(word):
+    """Las formas que se tocan de una palabra de la semana: sin artículo y
+    cada lado de «moço / moça»; las de varias palabras no se tocan enteras."""
+    out = []
+    for k in word.lower().split("/"):
+        k = re.sub(r"^(o|a|os|as|um|uma) ", "", k.strip())
+        if k and " " not in k and "-" not in k:
+            out.append(k)
+    return out
+
+
+def merge_senses(gloss, weeks):
+    """El toque en la palabra y la palabra de la semana dicen lo mismo
+    (auditoría 3.0, E-portugues P11): si la forma ya estaba en el glosario con
+    otra acepción (la del banco, o la de otro lema: «puxa» → puxar «tirar»,
+    «saque» → sacar, «virada» → virar, «juntar» «reunir» cuando la semana
+    enseña «ahorrar»), el toque muestra las dos, primero la de la semana.  Si
+    no estaba, entra con la glosa de la semana."""
+    n = 0
+    for wk in weeks:
+        for v in wk["vocab"]:
+            for k in vocab_keys(v[0]):
+                if k not in gloss:
+                    gloss[k] = [k, v[1], wk["week"]]
+                    continue
+                lemma, es, w0 = gloss[k]
+                own = lemma.lower() == k
+                if v[1] in es or (own and same_sense(v[1], es)):
+                    continue
+                # otro lema (virada → virar, tomada → tomar): se nombra
+                other = es if own else lemma if _plain(es) == _plain(lemma) else "%s, %s" % (lemma, es)
+                gloss[k] = [k, "%s · también: %s" % (v[1], other), min(w0, wk["week"])]
+                n += 1
+    print("glosario: %d palabras de la semana con las dos acepciones al tocarlas" % n)
+    return n
+
+
 def load_vocab():
     out = {}
     for fn, mod in _modules("vocab"):
@@ -304,7 +359,9 @@ def main():
                 texts += [p[0].replace("*", "") for p in b.get("ex", [])]
             texts += [v[2] for v in wk["vocab"]]
         gloss = lessico.gloss_table(texts)
-        # las palabras de la semana se glosan desde su semana
+        # las palabras de la semana se glosan desde su semana, con la acepción
+        # de la semana primero
+        merge_senses(gloss, weeks)
         for wk in weeks:
             for v in wk["vocab"]:
                 key = v[0].lower()

@@ -99,8 +99,16 @@ patrón hace equivocar. El detalle de cada tipo está en `tools/pt/CONTENIDO.md`
  "ascolto": {"title": "", "genre": "", "es": "", "speakers": [], "turns": [["A", "…"]],
              "gloss": {}, "questions": [], "vf": []},
  "compito": {"genre": "", "title": "", "fonte": "", "t": "", "es": "", "min": 120,
-             "max": 180, "punti": [], "model": "", "gloss": {}}}
+             "max": 180, "punti": [], "model": "", "gloss": {}},
+ "breve": {"title": "", "genre": "", "es": "", "speaker": "", "voice": 0,
+           "text": ["párrafo", "…"], "tabella": [["dato", "respuesta", ["otras formas"]]],
+           "info": [["Afirmación.", true]], "gloss": {}}}
 ```
+
+`breve` es la escucha corta de monólogo (los dos idiomas): 110-320 palabras,
+4-6 datos en la tabla, seis afirmaciones (tres que el audio dice y tres que
+no); en portugués, `cellStop` de `generi.json` dice qué palabras no cuentan en
+la tabla (*às*, *horas*, *reais*).
 
 **Lectura de la semana** (`letture_settimana.js`): `{ id: "w-NN", week, n,
 level, emoji, title, grammar, text, gloss: {palabra: "glosa"}, questions:

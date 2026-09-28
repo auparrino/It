@@ -108,6 +108,21 @@ tu teléfono**. No usa cuentas ni servidores; la IA es opcional, con una clave g
   filosofía, sociología y literatura italianas: Dante, Maquiavelo, Galileo,
   Garibaldi, Gramsci, Primo Levi, el *boom* económico, Calvino, Beccaria y
   Natalia Ginzburg. Donde una frase famosa es apócrifa, el texto lo dice.
+  Desde la semana 27 se suman **24 tarjetas de *civiltà*** (`area:
+  "Civiltà"`, ids `cv-27` a `cv-51`), una por semana del tramo: cómo
+  funciona la vida en Italia para quien vive ahí. Escuela y universidad
+  (la triennale y el *trenta e lode*, el sistema escolar, la maturità),
+  sanidad (el SSN de 1978, el medico di base y la ricetta, el pronto
+  soccorso), trabajo (contrato y busta paga, sindicato y huelga), casa
+  (condominio, alquiler, residuos), fiestas (de Navidad a la Befana, las
+  sagre, Ferragosto), la mesa (el bar, el conto y el coperto), Estado y
+  política (Comune y Regione, el referendum, Camera y Senato, anagrafe,
+  SPID y PEC, el 112) y medios (la Rai y los diarios). Cada una tiene
+  120-140 palabras, va atada al campo léxico y a la gramática de su semana
+  (el SSN en passato remoto en la 37, la anagrafe con el causativo en la
+  40, el pronto soccorso con gerundios en la 44) y trae tres preguntas en
+  italiano y su caza de formas. `check_letture.py cv-` controla la
+  gramática y las palabras sin glosa (auditoría 3.0, D5.9).
 - Cada texto se abre en la semana cuya gramática usa (el episodio del
   imperfetto, en la 15; los de passato remoto, en la 37), así nunca leés
   antes de la teoría.
@@ -736,6 +751,24 @@ podés ver un texto modelo. Lo que entregás cuenta como **output** en las
 cuatro cuerdas, suma xp y los errores van al perfil de la clínica. La misión
 es obligatoria para abrir la semana siguiente: es el único lugar del curso
 donde escribís sin respuesta cerrada.
+
+**Tareas situadas desde la semana 8 (v3.1).** Hasta el tramo, Scrivi pedía
+«contá tu fin de semana» sin nadie del otro lado. De la 8 a la 25 las
+consignas son ahora tareas de 40 a 80 palabras con **destinatario y
+propósito**, como la tarea del tramo en chico (auditoría 3.0, A-nucleo E9;
+el portugués ya lo tenía): un mensaje de bienvenida a un compañero nuevo con
+cinco preguntas (8), cómo llegar de la estación a tu casa (9), una nota en
+la heladera para el compañero que llega tarde (12), un mensaje a la futura
+compañera de departamento sobre tus gustos (14), el relato para una revista
+de extranjeros (15), un mail al hotel de Florencia (20), las compras del
+mercado por WhatsApp con *ne* y *ci* (21), el consejo a un amigo que no sabe
+si mudarse a Milán o a Bolonia (23), el mail a la responsable de personal
+sobre el trabajo desde casa (25). **Desde la 14 la consigna va en
+italiano.** Las estructuras de la semana siguen siendo el criterio que se
+tilda; cada modelo cumple la consigna sin marcas del corrector y no usa
+gramática posterior a su semana (`tools/it/sillabo.py`), y
+`tools/it/test_scrivi.js` controla el largo (mínimo 40-55, modelo de hasta
+80 palabras) y que desde la 14 la consigna esté en italiano.
 
 **Segunda opinión de LanguageTool.** Al revisar, la app también manda el
 texto a la API pública y gratuita de LanguageTool (sin clave; unas 20

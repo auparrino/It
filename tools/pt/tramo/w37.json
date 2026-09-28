@@ -116,5 +116,95 @@
     "punti": [["Usar el caso de los sensores de Recife", ["sensor", "recife", "encosta", "morro"]], ["Usar el caso del podcast sobre reparación", ["conserto", "reparo", "peça", "celular"]], ["Comparar las dos experiencias", ["duas experiências", "dois casos", "caso oposto", "comparando"]], ["El papel del poder público", ["poder público", "governo", "direito ao reparo", "financiando"]], ["Invitar a los lectores a participar", ["comentários", "o que acha", "deixe"]]],
     "model": "Tecnologia a serviço de quem?\n\nVocê já parou para pensar em quem ganha com cada aparelho novo que sai por aí? Esta semana, duas histórias me fizeram voltar a essa pergunta, e hoje eu quero dividir com vocês o que aprendi.\n\nA primeira vem do Recife. Uma equipe de geólogos instalou sensores de baixo custo nas encostas dos morros. Cruzando dados de umidade do solo com a previsão do tempo, os pesquisadores obtiveram alertas com cerca de quarenta minutos de antecedência. O detalhe mais bonito, porém, não é técnico: o projeto só funcionou porque manteve diálogo com os moradores, que indicaram onde a terra costumava ceder.\n\nA segunda é o caso oposto. Como contou um técnico de Campinas no podcast Fio Terra, muitos fabricantes projetam celulares que não podem ser abertos e bloqueiam peças trocadas fora da rede autorizada. Nesse modelo, a inovação serve para prender o consumidor, e não para resolver os seus problemas.\n\nComparando as duas experiências, fica claro que a tecnologia não é neutra. Por isso, defendo que o poder público intervenha nos dois casos: financiando projetos como o do Recife e garantindo, por lei, o direito ao reparo.\n\nE você, o que acha? Já tentou consertar um celular e desistiu? Deixe sua opinião nos comentários!",
     "gloss": {"encostas dos morros": "las laderas de los cerros", "Cruzando dados": "cruzando datos (oración reducida de gerundio: se ve en la semana 42)", "costumava ceder": "solía hundirse, desmoronarse", "rede autorizada": "la red de services oficiales"}
+  },
+  "breve": {
+    "title": "Defesa Civil: quando a sirene tocar",
+    "genre": "instruções",
+    "es": "Las instrucciones de Defensa Civil de Petrópolis para los vecinos de las zonas de riesgo: las sirenas, qué llevar, adónde ir y cómo recibir alertas.",
+    "speaker": "Voz da Defesa Civil",
+    "voice": 0,
+    "text": [
+      "Olá, aqui é a Defesa Civil de Petrópolis, com as instruções para os moradores das áreas de risco. Ouça com atenção.",
+      "A Defesa Civil mantém 22 sirenes na cidade. Elas tocam quando os pluviômetros registram mais de 40 milímetros de chuva em uma hora. Os técnicos preveem que o próximo verão vai ser muito chuvoso.",
+      "Quando a sirene tocar, mantenha a calma e saia de casa imediatamente. Não pare para arrumar malas: leve só documentos, remédios e o celular. Siga as placas verdes até o ponto de apoio mais próximo, que normalmente fica numa escola ou numa igreja.",
+      "Se você tiver vizinhos idosos ou pessoas com deficiência, avise-os e, se puder, ajude-os. Não volte para casa antes que a Defesa Civil libere a área. Para receber alertas por mensagem de texto, envie o seu CEP para o número 40199. O serviço é gratuito."
+    ],
+    "tabella": [
+      [
+        "Número de sirenes na cidade",
+        "22",
+        [
+          "vinte e duas",
+          "22 sirenes"
+        ]
+      ],
+      [
+        "Chuva que faz a sirene tocar (milímetros em uma hora, mais de…)",
+        "40",
+        [
+          "quarenta",
+          "40 milímetros",
+          "40 mm"
+        ]
+      ],
+      [
+        "Cor das placas que levam ao ponto de apoio",
+        "verde",
+        [
+          "verdes",
+          "placas verdes"
+        ]
+      ],
+      [
+        "Número para receber os alertas",
+        "40199",
+        [
+          "40 199",
+          "40.199"
+        ]
+      ],
+      [
+        "O que se envia para receber os alertas",
+        "CEP",
+        [
+          "o CEP",
+          "o seu CEP",
+          "código postal"
+        ]
+      ]
+    ],
+    "info": [
+      [
+        "A sirene toca por causa da quantidade de chuva.",
+        true
+      ],
+      [
+        "É preciso levar malas com roupas.",
+        false
+      ],
+      [
+        "Os pontos de apoio ficam, em geral, em escolas ou igrejas.",
+        true
+      ],
+      [
+        "O serviço de alertas custa dois reais por mês.",
+        false
+      ],
+      [
+        "Os moradores devem ajudar os vizinhos idosos, se puderem.",
+        true
+      ],
+      [
+        "Depois de meia hora, os moradores podem voltar para casa.",
+        false
+      ]
+    ],
+    "gloss": {
+      "pluviômetros": "pluviómetros",
+      "ponto de apoio": "refugio, punto de encuentro",
+      "idosos": "ancianos",
+      "libere": "habilite",
+      "cep": "código postal"
+    }
   }
 }

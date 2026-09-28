@@ -752,7 +752,7 @@ cb(W, 2, "Recebi sua solicitação. Informo que ela foi deferida. (em relação 
 # ===========================================================================
 # Semana 44 — Formação de palavras
 # parts: 0 sufijos que hacen sustantivos · 1 -eiro, -ada, prefijos ·
-# 2 diminutivos y aumentativos
+# 2 diminutivos y aumentativos · 3 formá la palabra (producir)
 # ===========================================================================
 W = 44
 ch(W, 0, "A ___ do Rio impressionou Stefan Zweig, que escreveu «Brasil, país do futuro».",
@@ -909,6 +909,30 @@ cb(W, 2, "Moramos numa casinha. A casinha fica pertinho da praia. (que)",
    "Moramos numa casinha que fica pertinho da praia.",
    ["Moramos em uma casinha que fica pertinho da praia"],
    "El relativo que retoma casinha; pertinho = cerquita.")
+
+# Formá la palabra (parte 3): producir con los sufijos y prefijos de la semana
+# (auditoría 3.0, E-portugues §2.4: la 44 como semana de producir).
+FP = "Formá la palabra."
+cl(W, 3, "A ___ (organizar) do bloco começa em janeiro.", "organização",
+   "organizar → a organização: -ar da -ação, femenino y con til. En plural, -ções.", prompt=FP)
+cl(W, 3, "O ___ (atender) no posto de saúde foi rápido.", "atendimento",
+   "atender → o atendimento: -mento hace sustantivos masculinos de acción; la -e- del verbo pasa a -i-.", prompt=FP)
+cl(W, 3, "A ___ (curioso) das crianças não tem fim.", "curiosidade",
+   "curioso → a curiosidade: -oso pierde la -o y suma -idade («-dad»).", prompt=FP)
+cl(W, 3, "A ___ (limpo) da praia depende de todos.", "limpeza",
+   "limpo → a limpeza: -eza forma cualidades de adjetivos (beleza, tristeza, pureza).", prompt=FP)
+cl(W, 3, "Preciso de um encanador ___ (confiar) para consertar o chuveiro.", "confiável",
+   "confiar → confiável: -ar da -ável, con tilde. «Que se puede» + verbo.", prompt=FP)
+cl(W, 3, "O ___ (táxi) conhecia um atalho pela Lagoa.", "taxista",
+   "táxi → o taxista: -ista nombra el oficio y sirve para los dos géneros (o / a taxista). La tilde se va.", prompt=FP)
+cl(W, 3, "A ___ (dente) mandou eu voltar daqui a seis meses.", "dentista",
+   "dente → a dentista: -ista, igual en masculino y femenino; el artículo dice el género.", prompt=FP)
+cl(W, 3, "Depois da festa, a sala ficou toda ___ (arrumado, o contrário).", "desarrumada",
+   "arrumado → desarrumado: des- da el contrario. Concuerda con a sala: desarrumada.", prompt=FP)
+cl(W, 3, "Chegar atrasado todo dia é ___ (aceitável, o contrário).", "inaceitável",
+   "aceitável → inaceitável: in- da el contrario; ante vocal queda in- (inútil, inesquecível).", prompt=FP)
+cl(W, 3, "A prefeitura promete ___ (abrir de novo) o teatro em dezembro.", "reabrir",
+   "abrir → reabrir: re- («de nuevo») se pega sin guion: refazer, reler, reabrir.", prompt=FP)
 
 
 # ===========================================================================

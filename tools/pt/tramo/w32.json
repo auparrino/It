@@ -333,5 +333,98 @@
       "inclusive": "incluso (conector: se ve en la semana 34)",
       "vereadores": "concejales"
     }
+  },
+  "breve": {
+    "title": "Domingo na Avenida",
+    "genre": "aviso público",
+    "es": "Un aviso de la municipalidad de Belo Horizonte: una avenida cerrada a los autos el domingo, bicicletas prestadas y voluntarios.",
+    "speaker": "Voz da prefeitura",
+    "voice": 1,
+    "text": [
+      "Atenção, moradores e visitantes. A Prefeitura de Belo Horizonte informa: neste domingo, a Avenida Afonso Pena fica fechada para carros das 7 às 14 horas, entre a Praça Sete e a Rua da Bahia, para o programa Avenida Viva.",
+      "Na avenida, permite-se o uso de bicicletas, patins e skates. Não se permite estacionar nenhum veículo a partir das 6 horas: os carros estacionados serão rebocados. Os ônibus que passam pela Afonso Pena vão usar a Avenida Augusto de Lima.",
+      "Durante o evento, emprestam-se bicicletas de graça na barraca da Praça Sete: basta apresentar um documento com foto. Procuram-se também voluntários para ajudar na organização; as inscrições se fazem no site da prefeitura até sexta.",
+      "Em caso de chuva forte, o programa será cancelado e a avenida será aberta ao trânsito. Obrigado e bom domingo!"
+    ],
+    "tabella": [
+      [
+        "Horário em que a avenida reabre para os carros",
+        "14",
+        [
+          "14 horas",
+          "14h",
+          "duas da tarde",
+          "14:00"
+        ]
+      ],
+      [
+        "A partir de que horas não se pode estacionar",
+        "6",
+        [
+          "6 horas",
+          "6h",
+          "seis",
+          "seis horas",
+          "6:00"
+        ]
+      ],
+      [
+        "Avenida que os ônibus vão usar",
+        "Augusto de Lima",
+        [
+          "Avenida Augusto de Lima",
+          "Augusto Lima"
+        ]
+      ],
+      [
+        "Onde se pegam as bicicletas emprestadas",
+        "Praça Sete",
+        [
+          "na Praça Sete",
+          "Praça 7",
+          "barraca da Praça Sete"
+        ]
+      ],
+      [
+        "O que é preciso apresentar para pegar a bicicleta",
+        "documento com foto",
+        [
+          "documento",
+          "um documento com foto"
+        ]
+      ]
+    ],
+    "info": [
+      [
+        "Os carros estacionados na avenida serão levados pelo guincho.",
+        true
+      ],
+      [
+        "As bicicletas emprestadas custam dez reais.",
+        false
+      ],
+      [
+        "A prefeitura procura voluntários.",
+        true
+      ],
+      [
+        "Se chover, o evento passa para o sábado.",
+        false
+      ],
+      [
+        "Patins e skates são permitidos na avenida.",
+        true
+      ],
+      [
+        "O programa acontece todos os dias da semana.",
+        false
+      ]
+    ],
+    "gloss": {
+      "rebocados": "llevados por la grúa",
+      "barraca": "carpa, puesto",
+      "patins": "patines",
+      "emprestam-se": "se prestan"
+    }
   }
 }

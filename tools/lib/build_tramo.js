@@ -4,7 +4,8 @@
  * de cada idioma: tools/<código>/tramo/generi.json (la serie, los géneros de
  * la tarea y sus marcas, los conectores, y ADEQ: los criterios de adequação
  * de la revisión local, si el idioma los tiene), tools/<código>/tramo/fichas.json
- * (opcional: las fichas de cada género, que van a GENRES[g].ficha) y
+ * (opcional: las fichas de cada género, que van a GENRES[g].ficha; cellStop,
+ * opcional, las palabras que no cuentan en la tabla de la escucha corta) y
  * tools/<código>/tramo/wNN.json (una semana: lectura larga, escucha larga,
  * tarea integrada).  Lo usan
  * js/letture.js (la serie «lunga») y js/tramo.js; lo controla
@@ -29,6 +30,7 @@ function build(code) {
   }
   var data = { series: base.series, names: base.names, GENRES: base.GENRES, CONNETTIVI: base.CONNETTIVI, SETTIMANE: weeks };
   if (base.ADEQ) data.ADEQ = base.ADEQ;
+  if (base.cellStop) data.cellStop = base.cellStop;
   var out = "/* Tramo C1: generado por tools/lib/build_tramo.js a partir de tools/" + code + "/tramo/.\n" +
     "   No editar a mano: editá los JSON de cada semana y corré npm run build. */\n" +
     "(function (root) {\n  \"use strict\";\n  root.TRAMO_DATA = " + JSON.stringify(data, null, 1) + ";\n" +

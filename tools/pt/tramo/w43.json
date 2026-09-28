@@ -128,5 +128,98 @@
       "a posse": "la toma de posesión del cargo",
       "a vaga": "el puesto, la vacante"
     }
+  },
+  "breve": {
+    "title": "Recado da Secretaria Acadêmica",
+    "genre": "recado formal na caixa postal",
+    "es": "Un mensaje formal en el contestador: la secretaría de una universidad le avisa a Martín que su diploma está listo y cómo retirarlo.",
+    "speaker": "Sônia Albuquerque, da Secretaria",
+    "voice": 1,
+    "text": [
+      "Bom dia. Esta mensagem é para o senhor Martín Pérez. Aqui fala Sônia Albuquerque, da Secretaria Acadêmica da Universidade Federal de Minas Gerais.",
+      "Estou retornando o e-mail que o senhor nos enviou na segunda-feira sobre o seu diploma de mestrado. Informo que o diploma já foi registrado e está disponível para retirada aqui na secretaria, na sala 214 do prédio da reitoria.",
+      "O senhor pode retirá-lo pessoalmente, de segunda a sexta, das 9 às 16 horas, apresentando o passaporte. Caso prefira enviar outra pessoa, será necessária uma procuração com firma reconhecida em cartório. Se o senhor desejar receber o diploma pelo correio, o envio custa 38 reais e leva cerca de dez dias úteis.",
+      "Para qualquer dúvida, o senhor pode ligar para a secretaria, ramal 12. Tenha um bom dia."
+    ],
+    "tabella": [
+      [
+        "Sala onde se retira o diploma",
+        "214",
+        [
+          "sala 214",
+          "duzentos e catorze",
+          "duzentos e quatorze"
+        ]
+      ],
+      [
+        "Horário em que a secretaria fecha",
+        "16",
+        [
+          "16 horas",
+          "16h",
+          "quatro da tarde",
+          "16:00"
+        ]
+      ],
+      [
+        "Documento que Martín deve apresentar",
+        "passaporte",
+        [
+          "o passaporte"
+        ]
+      ],
+      [
+        "Custo do envio pelo correio (reais)",
+        "38",
+        [
+          "trinta e oito",
+          "38 reais",
+          "R$ 38"
+        ]
+      ],
+      [
+        "Prazo de entrega pelo correio (dias úteis)",
+        "10",
+        [
+          "dez",
+          "dez dias",
+          "10 dias",
+          "dez dias úteis"
+        ]
+      ]
+    ],
+    "info": [
+      [
+        "Martín tinha escrito um e-mail para a secretaria.",
+        true
+      ],
+      [
+        "O diploma ainda não foi registrado.",
+        false
+      ],
+      [
+        "Outra pessoa pode retirar o diploma com uma procuração.",
+        true
+      ],
+      [
+        "A secretaria atende também aos sábados.",
+        false
+      ],
+      [
+        "O diploma pode ser enviado pelo correio.",
+        true
+      ],
+      [
+        "O envio pelo correio é gratuito.",
+        false
+      ]
+    ],
+    "gloss": {
+      "retirada": "retiro",
+      "procuração": "poder (notarial)",
+      "firma reconhecida": "firma certificada",
+      "cartório": "escribanía",
+      "úteis": "hábiles"
+    }
   }
 }

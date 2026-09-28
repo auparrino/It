@@ -307,5 +307,96 @@
     "punti": [["Explicar cómo se forman los apodos (acortar, duplicar sílabas, sufijos)", ["encurt", "duplic", "sílaba", "sufixo"]], ["Interpretar el diminutivo y el aumentativo con ejemplos del podcast", ["paulão", "carinho", "aumentativo", "diminutivo"]], ["Cuándo tener cuidado (jefes, clientes)", ["cliente", "chefe"]], ["Consejos con imperativo", ["observe", "desconfie", "prefira", "diga", "conheça"]]],
     "model": "Apelidos no trabalho: um guia para recém-chegados\n\nSe você acabou de chegar a uma empresa brasileira, prepare-se: em poucas semanas, é bem provável que o seu nome mude. Não se preocupe. Segundo o professor Tiago, entrevistado no podcast Língua Solta, o brasileiro tem mania de mexer nos nomes, e isso quase nunca é falta de respeito. Reunimos aqui algumas dicas para você entender o que está acontecendo.\n\n1. Conheça as regras do jogo. Basicamente, os brasileiros encurtam o nome (Gabriela vira Gabi, Rafael vira Rafa), duplicam uma sílaba, como em Dudu ou Juju, e acrescentam sufixos.\n\n2. Não leve o diminutivo ao pé da letra. Uma Luzinha não é uma pessoa pequena: o diminutivo, na maioria das vezes, expressa carinho.\n\n3. Desconfie do tamanho do aumentativo. O professor contou o caso de um colega baixinho que todo mundo chama de Paulão, por pura ironia carinhosa. Ou seja, um aumentativo também pode ser sinal de afeto.\n\n4. Observe o contexto. Receber um apelido costuma ser sinal de que você foi aceito no grupo. Com chefes e com clientes que você acabou de conhecer, porém, prefira esperar e ver como a pessoa se apresenta.\n\n5. Se algo incomodar, diga com leveza. Algo como «prefiro que me chamem de Lucía mesmo» resolve, e ninguém vai se ofender.\n\nPor fim, aproveite: segundo o Tiago, muitos estrangeiros sentem falta dos apelidos quando voltam para casa.",
     "gloss": {"tem mania de mexer nos nomes": "tiene la manía de jugar con los nombres", "encurta": "acorta", "apelido": "sobrenombre (falso amigo: se ve en la semana 45)", "com leveza": "con liviandad, sin drama", "sentem falta dos apelidos": "extrañan los apodos (sentir falta de = extrañar)"}
+  },
+  "breve": {
+    "title": "Feira de Trocas do Bairro Floresta",
+    "genre": "propaganda de rádio",
+    "es": "Una publicidad de radio de una feria de trueque en Belo Horizonte, llena de palabras derivadas: reutilização, desperdício, reutilizável, imperdível.",
+    "speaker": "Voz da propaganda",
+    "voice": 0,
+    "text": [
+      "Tem roupa parada no armário? Livro que você já leu? Brinquedo que as crianças esqueceram? Então venha para a Feira de Trocas do Bairro Floresta, a maior feira de reutilização de Belo Horizonte!",
+      "Funciona assim: você traz até dez peças em bom estado e recebe uma ficha para cada uma. Com as fichas, você escolhe o que quiser entre milhares de objetos. Sem dinheiro, sem desperdício e com muita novidade.",
+      "A feira acontece no último domingo do mês, das 10 às 15 horas, na Praça Floresta. Tem oficina de conserto de bicicletas, com um mecânico voluntário, e uma área de reciclagem para o que não tiver mais conserto.",
+      "Importante: não se aceitam eletrônicos nem roupas rasgadas. E não esqueça a sua sacola reutilizável! Feira de Trocas: renovar o armário é possível, e é imperdível."
+    ],
+    "tabella": [
+      [
+        "Número máximo de peças que cada pessoa traz",
+        "10",
+        [
+          "dez",
+          "dez peças",
+          "10 peças"
+        ]
+      ],
+      [
+        "Dia da feira",
+        "último domingo do mês",
+        [
+          "último domingo",
+          "domingo"
+        ]
+      ],
+      [
+        "Horário em que a feira termina",
+        "15",
+        [
+          "15 horas",
+          "15h",
+          "três da tarde",
+          "15:00"
+        ]
+      ],
+      [
+        "Local da feira",
+        "Praça Floresta",
+        [
+          "na Praça Floresta",
+          "Praca Floresta"
+        ]
+      ],
+      [
+        "O que se recebe por cada peça",
+        "ficha",
+        [
+          "uma ficha",
+          "fichas"
+        ]
+      ]
+    ],
+    "info": [
+      [
+        "Na feira não se usa dinheiro.",
+        true
+      ],
+      [
+        "A feira acontece todos os sábados.",
+        false
+      ],
+      [
+        "Há um mecânico que conserta bicicletas.",
+        true
+      ],
+      [
+        "Os eletrônicos são aceitos se funcionarem.",
+        false
+      ],
+      [
+        "É bom levar uma sacola de casa.",
+        true
+      ],
+      [
+        "As fichas custam dois reais cada uma.",
+        false
+      ]
+    ],
+    "gloss": {
+      "desperdício": "derroche",
+      "rasgadas": "rotas",
+      "sacola": "bolsa (de compras)",
+      "conserto": "arreglo",
+      "trocas": "trueques, intercambios"
+    }
   }
 }

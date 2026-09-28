@@ -270,5 +270,88 @@
       "desistiu": "se echó atrás, renunció",
       "lembrança": "recuerdo"
     }
+  },
+  "breve": {
+    "title": "Paranapiacaba, a vila da neblina",
+    "genre": "audioguia",
+    "es": "La audioguía de la vieja estación de Paranapiacaba, en la sierra de São Paulo: el ferrocarril inglés del café, el reloj de la torre y la niebla.",
+    "speaker": "Audioguia",
+    "voice": 0,
+    "text": [
+      "Bem-vindo à Vila de Paranapiacaba. Você está na antiga estação, a 800 metros de altitude, no alto da Serra do Mar, em São Paulo.",
+      "A ferrovia foi inaugurada em 1867 por uma companhia inglesa, para levar o café do interior até o porto de Santos. Se os engenheiros não tivessem encontrado uma solução para a serra, que é muito íngreme, o café teria continuado descendo em lombo de mula. A solução foram cabos de aço que puxavam os vagões.",
+      "A vila foi construída para os funcionários da ferrovia. O relógio da torre, que você vê à sua frente, foi trazido da Inglaterra e funciona até hoje.",
+      "Muitos visitantes perguntam pela neblina: ela aparece em quase todas as tardes do ano. Se você tivesse chegado de manhã cedo, talvez tivesse visto a vila inteira coberta de branco. Para continuar a visita, siga até a casa do engenheiro-chefe, a 200 metros daqui."
+    ],
+    "tabella": [
+      [
+        "Altitude da estação (metros)",
+        "800",
+        [
+          "oitocentos",
+          "800 metros"
+        ]
+      ],
+      [
+        "Ano da inauguração da ferrovia",
+        "1867",
+        []
+      ],
+      [
+        "Porto de destino do café",
+        "Santos",
+        [
+          "porto de Santos"
+        ]
+      ],
+      [
+        "País de onde veio o relógio da torre",
+        "Inglaterra",
+        [
+          "da Inglaterra"
+        ]
+      ],
+      [
+        "Distância até a casa do engenheiro-chefe (metros)",
+        "200",
+        [
+          "duzentos",
+          "200 metros"
+        ]
+      ]
+    ],
+    "info": [
+      [
+        "A ferrovia foi construída para transportar café.",
+        true
+      ],
+      [
+        "A companhia que construiu a ferrovia era francesa.",
+        false
+      ],
+      [
+        "Os vagões subiam a serra puxados por cabos.",
+        true
+      ],
+      [
+        "O relógio da torre está quebrado.",
+        false
+      ],
+      [
+        "A neblina é comum à tarde.",
+        true
+      ],
+      [
+        "A visita termina na estação.",
+        false
+      ]
+    ],
+    "gloss": {
+      "íngreme": "empinada",
+      "lombo de mula": "lomo de mula",
+      "aço": "acero",
+      "neblina": "niebla",
+      "puxavam": "tiraban de"
+    }
   }
 }

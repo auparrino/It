@@ -118,5 +118,95 @@
       "camadas de memória": "capas de memoria",
       "desfecho": "desenlace, final"
     }
+  },
+  "breve": {
+    "title": "História em Cinco Minutos: o voo de Bagatelle",
+    "genre": "podcast de história",
+    "es": "Un podcast breve de historia: el vuelo de Santos Dumont en París en 1906 y lo que ya había hecho antes.",
+    "speaker": "Heitor Salles",
+    "voice": 0,
+    "text": [
+      "Olá, eu sou o Heitor Salles e este é o História em Cinco Minutos. Hoje: o dia em que um brasileiro voou em Paris.",
+      "No dia 23 de outubro de 1906, no campo de Bagatelle, Alberto Santos Dumont subiu no 14-bis diante de uma multidão. Ele já ficara famoso em Paris anos antes: em 1901 contornara a Torre Eiffel num dirigível e ganhara um prêmio de 100 mil francos, que dividira entre os seus mecânicos e os pobres da cidade.",
+      "Naquela tarde, o avião percorreu cerca de 60 metros, a uns três metros do chão. Foi o primeiro voo de um avião que decolou sozinho, sem catapulta, diante de juízes oficiais. Os irmãos Wright, nos Estados Unidos, já tinham voado em 1903, mas longe do público.",
+      "Santos Dumont nunca patenteou os seus inventos: queria que todos pudessem usá-los. Na semana que vem, a história do relógio de pulso que ele pedira a um amigo joalheiro, Louis Cartier."
+    ],
+    "tabella": [
+      [
+        "Data do voo em Bagatelle",
+        "23 de outubro de 1906",
+        [
+          "23 de outubro",
+          "23/10/1906",
+          "23/10"
+        ]
+      ],
+      [
+        "Ano em que contornou a Torre Eiffel",
+        "1901",
+        []
+      ],
+      [
+        "Valor do prêmio (francos)",
+        "100 mil",
+        [
+          "100.000",
+          "100000",
+          "cem mil"
+        ]
+      ],
+      [
+        "Distância percorrida pelo 14-bis (metros)",
+        "60",
+        [
+          "sessenta",
+          "60 metros",
+          "cerca de 60"
+        ]
+      ],
+      [
+        "Altura do voo (metros)",
+        "3",
+        [
+          "três",
+          "tres",
+          "3 metros",
+          "três metros"
+        ]
+      ]
+    ],
+    "info": [
+      [
+        "Santos Dumont dividiu o dinheiro do prêmio.",
+        true
+      ],
+      [
+        "O 14-bis voou em Londres.",
+        false
+      ],
+      [
+        "O avião decolou sem catapulta.",
+        true
+      ],
+      [
+        "Santos Dumont ficou rico com as patentes dos seus inventos.",
+        false
+      ],
+      [
+        "O próximo episódio fala de um relógio.",
+        true
+      ],
+      [
+        "Santos Dumont construiu o 14-bis com os irmãos Wright.",
+        false
+      ]
+    ],
+    "gloss": {
+      "contornara": "había rodeado",
+      "dirigível": "dirigible",
+      "decolou": "despegó",
+      "patenteou": "patentó",
+      "joalheiro": "joyero"
+    }
   }
 }

@@ -57,6 +57,7 @@ PT.update({
         "Complete com uma só palavra ou com a forma pedida do verbo entre parênteses.",
     "Reescribí la frase manteniendo el sentido: escribí solo lo que falta en el hueco.":
         "Reformule a frase sem mudar o sentido: complete só o que falta na lacuna.",
+    "Formá la palabra.": "Forme a palavra.",
     "Formá la palabra pedida a partir de la que está en la base.":
         "Complete com a palavra pedida, formada a partir da palavra-base.",
     "Elegí el equivalente en el registro pedido.": "Escolha o equivalente no registro pedido.",

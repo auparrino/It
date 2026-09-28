@@ -119,5 +119,83 @@
       "cartório": "escribanía",
       "oficina": "taller (falso amigo: se ve en la semana 45)"
     }
+  },
+  "breve": {
+    "title": "Memorial Carlos Drummond de Andrade",
+    "genre": "audioguia de exposição",
+    "es": "La audioguía de una sala del museo de Drummond en Itabira: la máquina de escribir, el poema de la piedra y lo que no se puede fotografiar.",
+    "speaker": "Audioguia",
+    "voice": 0,
+    "text": [
+      "Sala dois. Bem-vindo ao Memorial Carlos Drummond de Andrade, em Itabira, a cidade onde o poeta nasceu em 1902. Os objetos desta sala foram doados pela família e contam-nos a juventude do escritor.",
+      "Na vitrine à esquerda, vê-se a máquina de escrever que Drummond usou por mais de 30 anos. Ele mudou-se para o Rio de Janeiro em 1934 e trabalhou como funcionário público durante quase toda a vida: escrevia os poemas à noite, depois do expediente.",
+      "O poema mais famoso da sala é No meio do caminho, publicado em 1928. Na época, muitos críticos zombaram dele: diziam que repetir «tinha uma pedra no meio do caminho» não era poesia. Hoje, o verso é lido nas escolas de todo o país.",
+      "Pede-se aos visitantes que não fotografem as cartas originais, por causa da luz. A próxima sala, à direita, apresenta-lhe os livros de crônicas."
+    ],
+    "tabella": [
+      [
+        "Ano de nascimento do poeta",
+        "1902",
+        []
+      ],
+      [
+        "Anos em que usou a máquina de escrever (mais de…)",
+        "30",
+        [
+          "trinta",
+          "30 anos"
+        ]
+      ],
+      [
+        "Ano da mudança para o Rio",
+        "1934",
+        []
+      ],
+      [
+        "Ano de publicação de No meio do caminho",
+        "1928",
+        []
+      ],
+      [
+        "Lado onde fica a próxima sala",
+        "direita",
+        [
+          "à direita",
+          "a direita"
+        ]
+      ]
+    ],
+    "info": [
+      [
+        "Os objetos da sala foram doados pela família do poeta.",
+        true
+      ],
+      [
+        "Drummond vivia só da poesia.",
+        false
+      ],
+      [
+        "Drummond escrevia depois do trabalho.",
+        true
+      ],
+      [
+        "No meio do caminho foi elogiado por todos os críticos.",
+        false
+      ],
+      [
+        "Não se pode fotografar as cartas originais.",
+        true
+      ],
+      [
+        "A sala seguinte mostra as fotografias do poeta.",
+        false
+      ]
+    ],
+    "gloss": {
+      "doados": "donados",
+      "vitrine": "vitrina",
+      "expediente": "horario de trabajo",
+      "zombaram": "se burlaron"
+    }
   }
 }
