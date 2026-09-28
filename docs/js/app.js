@@ -452,6 +452,21 @@
 
   /* ------------------------------------------------------------------ hoje */
 
+  function weekTopHtml(w, plan, doneN, nm) {
+    return '<div class="card weekcard hero" id="weektop">' +
+      '<span class="muted">🗺️ ' + UI.path + " · semana " + w.week + " · " + esc(w.level) + " · " + doneN + " / " + plan.length + " misiones</span>" +
+      "<b>" + esc(w.title) + "</b>" +
+      '<span class="prog"><i style="width:' + Math.round(doneN / Math.max(1, plan.length) * 100) + '%"></i></span>' +
+      (nm
+        ? '<span class="muted">Siguiente: <b>' + nm.ico + " " + nm.title + "</b>" + (nm.sub ? " · " + nm.sub.split(" · ")[0] : "") + "</span>" +
+          '<span class="row" style="margin-top:10px"><button class="btn" id="heronext">▶︎ Seguir</button>' +
+          '<button class="tab" data-week="' + w.week + '">Ver la semana</button></span>'
+        : '<span class="muted">Semana completa. ' + (state.unlocked > w.week ? "Seguí con la siguiente." : "Repasá o entrená para abrir la siguiente.") + "</span>" +
+          '<span class="row" style="margin-top:10px"><button class="btn" data-week="' + w.week + '">Ver la semana</button>' +
+          '<button class="tab" id="topercorso">' + UI.path + "</button></span>") +
+      "</div>";
+  }
+
   function renderOggi() {
     var goal = Engine.goalFor(state);
     var todayXp = Engine.todayXp(state);
@@ -482,7 +497,7 @@
         maint ? "Terminaste el curso. Ahora, que no se pierda: poco y seguido."
         : weekend ? "Fin de semana: meta a la mitad. Algo liviano alcanza." + (state.streak > 1 ? " Llevás <b>" + dias(state.streak) + "</b>." : "")
         : state.streak > 1 ? "Llevás <b>" + dias(state.streak) + "</b> seguidos" + (state.streak >= 7 ? " y tu xp vale ×1,2" : "") + "."
-        : "Tu plan de hoy está armado. Tocá «Empezar» y te llevo paso a paso.") + "</p>";
+        : "Seguí con tu semana: la próxima misión está acá abajo.") + "</p>";
 
     var pend = loadPending();
     var pendHtml = pend ? '<div class="card weekcard first"><span class="muted">⏸️ Dejaste algo a medias</span>' +
@@ -493,25 +508,14 @@
     // Until the first lesson: a single card (and what was left half done).
     if (top.first) return html + pendHtml + top.html + versionLine();
     html += top.html + pendHtml;
+    // The week of the percorso and its next mission, on top (3.2: the
+    // percorso organises the day, not a plan by minutes).
+    if (!maint) html += weekTopHtml(w, plan, doneN, nm);
     // One habit card a day at most, that can be put off (the return first).
     html += window.Inicio ? Inicio.habit(oggiHabitCards()) : oggiHabitCards().map(function (c) { return c.html; }).join("");
 
-    // Everything else, folded: «Más para hoy».
+    // Everything else, folded: «Más».
     var more = "";
-    // The week and its next mission (the plan already takes it; here, the whole week).
-    if (!maint) more += '<div class="card weekcard hero">' +
-      '<span class="muted">🗺️ ' + UI.path + " · semana " + w.week + " · " + esc(w.level) + " · " + doneN + " / " + plan.length + " misiones</span>" +
-      "<b>" + esc(w.title) + "</b>" +
-      '<span class="prog"><i style="width:' + Math.round(doneN / Math.max(1, plan.length) * 100) + '%"></i></span>' +
-      (nm
-        ? '<span class="muted">Siguiente: <b>' + nm.ico + " " + nm.title + "</b></span>" +
-          '<span class="row" style="margin-top:10px"><button class="btn ghost" id="heronext">▶︎ ' + esc(nm.title) + "</button>" +
-          '<button class="tab" data-week="' + w.week + '">Ver la semana</button></span>'
-        : '<span class="muted">Semana completa. ' + (state.unlocked > w.week ? "Seguí con la siguiente." : "Repasá o entrená para abrir la siguiente.") + "</span>" +
-          '<span class="row" style="margin-top:10px"><button class="btn ghost" data-week="' + w.week + '">Ver la semana</button>' +
-          '<button class="tab" id="topercorso">' + UI.path + "</button></span>") +
-      "</div>";
-
     // xp: the game's currency (the goal is in minutes, in the plan above)
     more += '<div class="card goal">' +
       '<div class="goalrow"><div><b>xp de hoy</b>' +
@@ -586,8 +590,8 @@
       '<p class="muted" style="margin:8px 0 0">Cada cuadrado es un día. ' + UI.calendarGreen + " = meta cumplida. " +
       "Cada 7 días de racha ganás un 🛡️ escudo que la salva si un día no podés.</p></div>";
 
-    html += '<details class="mas" id="masoggi"' + (window.Inicio && Inicio.moreOpen() ? " open" : "") + '><summary><span class="mas-t">Más para hoy</span><span class="muted small">' +
-      (maint ? "pausa, repaso, frase del día, calendario" : "la semana, pausa, sfida, repaso, frase del día, calendario") + "</span></summary>" + more + "</details>";
+    html += '<details class="mas" id="masoggi"' + (window.Inicio && Inicio.moreOpen() ? " open" : "") + '><summary><span class="mas-t">Más</span><span class="muted small">' +
+      (maint ? "pausa, repaso, frase del día, calendario" : "pausa, sfida, repaso, frase del día, calendario") + "</span></summary>" + more + "</details>";
 
     // Instalación
     if (!isStandalone()) {
@@ -767,7 +771,7 @@
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION = "c1-vN" in sw.js: test_game
      and the CI check it).  One version for the app and both languages. */
-  var APP_VERSION = "v3.1";
+  var APP_VERSION = "v3.2";
   // Settimana XVII: Roman numerals on the street signs (LANG.ui.romanWeeks).
   function romano(n) {
     var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
@@ -4578,7 +4582,7 @@
       "DTEND:" + localEnd,
       "RRULE:FREQ=" + (!r || r.days >= 7 ? "DAILY" : "WEEKLY;BYDAY=" + { 3: "MO,WE,FR", 4: "MO,TU,TH,FR", 5: "MO,TU,WE,TH,FR", 6: "MO,TU,WE,TH,FR,SA" }[r.days]),
       "SUMMARY:" + UI.icsSummary,
-      "DESCRIPTION:Tu plan de hoy" + (r ? " (" + r.min + " minutos)" : "") + ". Abrí " + LG.brand + ": " + url,
+      "DESCRIPTION:La próxima misión de tu semana" + (r ? " (" + r.min + " minutos)" : "") + ". Abrí " + LG.brand + ": " + url,
       "URL:" + url,
       "BEGIN:VALARM", "TRIGGER:PT0M", "ACTION:DISPLAY",
       "DESCRIPTION:" + UI.icsAlarm, "END:VALARM",
@@ -7296,7 +7300,7 @@
         if (!restoreView()) render();
         loadExtrasSoon();
         // «Hoy» from the app icon or the calendar reminder: the plan in sight.
-        if (location.hash === "#hoy") { var hp = document.getElementById("hoyplan"); if (hp && hp.scrollIntoView) hp.scrollIntoView({ block: "start" }); }
+        if (location.hash === "#hoy") { var hp = document.getElementById("hoyplan") || document.getElementById("weektop"); if (hp && hp.scrollIntoView) hp.scrollIntoView({ block: "start" }); }
       } catch (err) { rescue(err); }
     }, function (e) { throw e; })
     .catch(function (e) {

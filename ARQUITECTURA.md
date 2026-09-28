@@ -199,19 +199,21 @@ y trae de vuelta los minutos como input.
   Chromium: la misión de la 6, +10 min, la pregunta, el corrector y la ficha
   de la 20 desde Leggi).
 
-**Hoy, el primer arranque y el progreso.** Oggi / Hoje arma el día por minutos.
+**Oggi, el primer arranque y el progreso.** Durante el curso, arriba de Oggi / Hoje va la semana
+del percorso con su próxima misión (`weekTopHtml` en `app.js`, «▶︎ Seguir»): el percorso organiza
+el día. El plan por minutos se probó en la 3.0 y desde la 3.2 queda solo para después del curso.
 - **Plan del día**: `js/plan.js` (`Plan.today(course, state, minutos, ctx)`, sin DOM): 5, 15 o
   30 minutos con lo vencido del repaso (nunca más de la mitad), el paso siguiente de la semana, un
   bloque de input y uno de producción si la cuerda de output viene baja. Los minutos salen de los
   segundos por tipo de la simulación, calibrados con los tiempos del registro de repasos. Después
   del examen de la semana 52 (`state.phase = "mantenimiento"`), repaso a meses, lectura extensiva,
   escuchas largas, una tarea al azar del tramo y un simulacro cada tres meses.
-- **La pantalla**: `js/inicio.js` (la tarjeta «Hoy» con «Empezar», una tarjeta de hábito por día,
+- **La pantalla**: `js/inicio.js` (la tarjeta «Hoy» con «Empezar» después del curso, una tarjeta de hábito por día,
   las tres pantallas del primer arranque, el cierre del año). Guarda en `state.hoy`, `state.onboard`.
 - **Progreso**: `js/progreso.js` (la meta en minutos `state.ritmo`, el reloj de estudio
   `state.tiempo`, un punto por semana en `state.history`, la fecha de cada jefe, la pantalla
   «Tu progreso»).
-- **Test**: `tools/lib/test_plan.js`. El atajo `./#hoy` del manifiesto abre el plan.
+- **Test**: `tools/lib/test_plan.js`. El atajo `./#hoy` del manifiesto abre Oggi en la semana.
 ## Las capas y los módulos
 
 Los módulos se ordenan por lo que hacen, no por dónde cupieron. Cada

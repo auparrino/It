@@ -1,7 +1,9 @@
 /*
  * El día, el principio y el final.
  *
- *   · «Hoy»: la tarjeta de arriba de Oggi / Hoje.  El plan del día
+ *   · «Hoy»: después del curso, la tarjeta de arriba de Oggi / Hoje (durante
+ *     el curso la organización es el percorso: su próxima misión va arriba
+ *     de Oggi, desde la 3.2).  El plan del día
  *     (Plan.today, js/plan.js) como lista tildable, el selector 5 / 15 / 30
  *     minutos (queda recordado), un botón «Empezar» que encadena los pasos
  *     y la meta en minutos con la fecha estimada de llegada a C1.  El plan
@@ -100,7 +102,7 @@
   function onbStep3() {
     var st = S(), U = UI(), tabs = U.tabs || [];
     var TAB = {
-      oggi: "tu plan del día: repaso, el paso siguiente y algo para leer, según los minutos que tengas.",
+      oggi: "la próxima misión de tu semana, el repaso y atajos.",
       frasi: "para practicar más: frases, palabras, sonidos, la Clínica de tus errores.",
       leggi: "lecturas y escuchas de tu nivel, y la Biblioteca de libros enteros.",
       percorso: "las 52 semanas en cuatro estaciones; cada estación termina con un " + esc(U.boss || "jefe") + ".",
@@ -112,7 +114,7 @@
       '<p class="muted">Cada semana tiene su gramática y sus palabras. El camino es siempre el mismo:</p>' +
       '<ol class="onb-week"><li>📘 la lección, en pasos cortos</li><li>📚 las palabras</li><li>🎯 entrenar hasta 20 respuestas bien</li>' +
       "<li>✍️ un texto tuyo</li><li>💬 frases para usar</li><li>📖 una lectura</li><li>🏆 «Dominala»: una sesión que muestra que la sabés</li></ol>" +
-      '<p class="muted small">Cuando terminás las misiones se abre la semana siguiente. No hace falta acordarse de nada: ' + esc(U.today || "Hoy") + " te arma el día.</p></div>" +
+      '<p class="muted small">Cuando terminás las misiones se abre la semana siguiente. En ' + esc(U.today || "Hoy") + " siempre está la próxima misión de tu semana.</p></div>" +
       '<div class="card onb"><h2>Las cinco pestañas</h2><ul class="onb-tabs">' +
       tabs.map(function (t) { return "<li><span>" + t[1] + "</span><span><b>" + esc(t[2]) + "</b> · " + (TAB[t[0]] || "") + "</span></li>"; }).join("") + "</ul></div>" +
       '<p class="muted onb-start">' + esc(start) + "</p>" +
@@ -326,9 +328,11 @@
     checkPhase();
     if (P()) P().snapshot(st, null);
     if (firstMode(st)) return { first: true, html: firstCard() };
-    var html = hoyCard();
-    if (st.phase === "mantenimiento") html += cierreCard();
-    return { first: false, html: html };
+    // During the course the percorso organises the day (its next mission is
+    // on top of Oggi, app.js): the plan by minutes was clearer on paper than
+    // in use (3.2).  After the exam there is no percorso: the maintenance plan.
+    if (st.phase !== "mantenimiento") return { first: false, html: "" };
+    return { first: false, html: hoyCard() + cierreCard() };
   }
 
   /* ------------------------------------------------------ tarjetas de hábito */
