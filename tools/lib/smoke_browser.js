@@ -452,6 +452,20 @@ async function smokeEsame(page, code, P, snap, note, errors) {
     if (await page.$("#quit")) { await page.click("#quit"); await page.waitForTimeout(300); }
     else if (await page.$("#lesquit")) { await page.click("#lesquit"); await page.waitForTimeout(300); }
     else if (await page.$("#lback")) { await page.click("#lback"); await page.waitForTimeout(300); }
+    // «Para practicar más» inside the week (3.3): what lived only in Allena
+    // and Leggi, and a round started there comes back to the week
+    await page.click("[data-tab='percorso']");
+    await page.click("[data-week='5']");
+    await page.waitForSelector(".missions");
+    const extras = await page.$$eval(".wextras .lab", els => els.map(e => (e.querySelector("b") || e).textContent.trim()));
+    if (!extras.length) errors.push(code + ": la semana 5 no tiene «Para practicar más»");
+    note(code + " · para practicar más (semana 5): " + extras.join(" | "));
+    if (await page.$(".wextras [data-bank='b-voc']")) {
+      await page.$eval(".wextras [data-bank='b-voc']", b => b.click());
+      await page.waitForTimeout(400);
+      if (await page.$("#quit")) { await page.click("#quit"); await page.waitForTimeout(300); }
+      if (!(await page.$(".wextras"))) errors.push(code + ": salir de una práctica de «Para practicar más» no vuelve a la semana");
+    }
     // Tu progreso, from Io
     await page.click("[data-tab='io']");
     await page.waitForSelector("#toprog");
