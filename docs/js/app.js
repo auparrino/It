@@ -767,7 +767,7 @@
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION = "c1-vN" in sw.js: test_game
      and the CI check it).  One version for the app and both languages. */
-  var APP_VERSION = "v3.0";
+  var APP_VERSION = "v3.0.1";
   // Settimana XVII: Roman numerals on the street signs (LANG.ui.romanWeeks).
   function romano(n) {
     var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
@@ -2200,7 +2200,6 @@
       // «¿Cuánto creés que vas a sacar?» before Dominala and the boss
       askPredict: kind === "domina" || kind === "boss",
       predict: null,
-      conf: null,
       // A chest ticket or the daily challenge: double xp for this round.
       boost: kind === "giorno" || (state.boost > 0 && kind !== "review" && kind !== "pausa")
     };
@@ -2581,35 +2580,12 @@
   /* Written answers get a diagnosis.  A rule error on the first attempt
      earns a prompt, not the answer: the learner corrects it (Lyster & Ranta
      1997; Lyster & Saito 2010).  Slips (accents, typos) are just flagged. */
-  /* In the written review (only there: the rounds must flow), how sure the
-     learner is, asked before the verdict: it feeds the calibration and the
-     hypercorrection (a confident error is retested the next morning:
-     Butterfield & Metcalfe 2001). */
-  var CONF_KINDS = { review: 1, micro: 1, ritorno: 1, giorno: 1 };
-  function askConf(given, then) {
-    var fb = $("#fb");
-    if (!fb) return then();
-    fb.innerHTML = '<div class="feedback prompt conf"><div class="verdict">Antes de ver: ¿qué tan seguro estás?</div>' +
-      '<div class="row">' + [["seguro", "😎 Seguro"], ["creo", "🤔 Creo"], ["adivino", "🎲 Adivino"]].map(function (c) {
-        return '<button class="btn ghost" data-conf="' + c[0] + '">' + c[1] + "</button>";
-      }).join("") + "</div></div>";
-    fb.querySelectorAll("[data-conf]").forEach(function (b) {
-      b.onclick = function () { round.conf = b.dataset.conf; then(); };
-    });
-    try { fb.querySelector("[data-conf]").focus({ preventScroll: true }); } catch (e) { /* */ }
-  }
-
   function produce(given) {
     if (round.answered || round.judging) return;
     var it = currentItem();
     // Several blanks typed as «a / b» (or a | b): same as a b.
     if (/\|/.test(it.answer || "")) given = String(given).replace(/\s*[\/|]\s*/g, " ");
     if (!String(given || "").trim()) return;
-    if (CONF_KINDS[round.kind] && !round.conf && !round.tried && !it.retry) {
-      var g0 = given;
-      askConf(g0, function () { produce(g0); });
-      return;
-    }
     var accept = (it.accept && it.accept.length ? it.accept : [it.answer]).map(function (x) {
       return String(x).replace(/\s*\|\s*/g, " ");   // two blanks: typed one after the other
     });
@@ -3220,11 +3196,10 @@
        conjugation drills are endless by design and make no card; in the
        rounds a right recognition makes none either (it comes back written,
        and its rule has a card that brings new sentences); what failed and
-       what was written enters.  The confidence asked in the written review
-       goes to the calibration. */
+       what was written enters. */
     if (window.Reglas) {
       Reglas.afterAnswer(state, it, q, { kind: round.kind, ekind: ekind, hint: !!round.tried || !!opts.fixed,
-        fast: !!fast, slow: !!slow, ms: took, conf: round.conf || null, notte: state.notte !== false, produced: produced });
+        fast: !!fast, slow: !!slow, ms: took, notte: state.notte !== false, produced: produced });
     } else if (it.src !== "coniugatore" && it.src !== "lettura" && !it.nocard) {
       state.cards[it.id] = Engine.schedule(state.cards[it.id], q, {
         kind: ekind, id: it.id, state: state, retry: !!it.retry, hint: !!round.tried || !!opts.fixed,
@@ -3614,7 +3589,6 @@
   function nextItem() {
     round.i++;
     round.answered = false;
-    round.conf = null;
     round.tried = false;
     round.lastGiven = null;
     round.firstCat = null;

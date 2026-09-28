@@ -189,18 +189,16 @@
 
   /* The rating (1 Again, 2 Hard, 3 Good, 4 Easy) from what the app knows:
      the verdict, whether a hint was needed, the second easier pass, the
-     learner's confidence (Butterfield & Metcalfe: «Seguro» and wrong is the
-     error that gets corrected best; «Adivino» and right is not knowledge:
-     Memory 2019).  A slip (an accent, a typo) is knowledge with a finger
+     time taken.  A slip (an accent, a typo) is knowledge with a finger
      error: it keeps moving forward. */
   function ratingFor(q, o) {
     o = o || {};
     if (q === 0) return 1;
     if (q === 1) return o.kind === "slip" ? 3 : 2;
-    if (o.retry || o.hint || o.conf === "adivino") return 2;
+    if (o.retry || o.hint) return 2;
     // right but slow: known, not yet automatic (DeKeyser & Suzuki 2025)
     if (o.slow) return 2;
-    if (o.light || o.fast || (o.conf === "seguro" && o.fast)) return 4;
+    if (o.light || o.fast) return 4;
     return 3;
   }
 
@@ -233,7 +231,7 @@
 
   /* schedule(card, quality, opts): quality 0 incorrecto, 1 casi, 2 correcto.
      opts: kind (slip/vocab/rule), light (right at first sight in the
-     training), retry, hint, conf ("seguro"/"creo"/"adivino"), fast,
+     training), retry, hint, fast,
      rating (1-4, overrides), now, id, state (for the review log, the
      retention target and the fitted speeds), notte (false to switch off
      the night → morning schedule). */
@@ -279,14 +277,10 @@
     card.due = Math.max(dd.getTime(), now + 3600000);
     delete card.night; delete card.hyper;
     var hour = new Date(now).getHours();
-    var hyper = r === 1 && opts.conf === "seguro";
     // Learn at night, review in the morning, with sleep in between (Mazza
     // et al. 2016): what is new after 8 pm is asked again at breakfast.
-    if (opts.notte !== false && hour >= 20 && (isNew || hyper)) {
+    if (opts.notte !== false && hour >= 20 && isNew) {
       card.due = nextMorning(now); card.night = dayKey(new Date(card.due));
-    } else if (hyper) {
-      // Hypercorrection: the confident error is retested the next morning.
-      card.due = nextMorning(now); card.hyper = 1;
     }
     delete card.light; delete card.ease;
     card.last = now;
@@ -308,7 +302,7 @@
   /* Every review is logged (id, minute, rating, days elapsed, stability
      before, kind): with it the app fits, on the phone, how fast this
      learner forgets vocabulary and grammar (a «speed» that scales the
-     default stabilities), and shows the calibration. */
+     default stabilities). */
   var LOG_MAX = 2500;
   function logReview(state, id, now, r, elapsed, sBefore, kind, ms) {
     if (!state.log) state.log = [];
@@ -373,34 +367,6 @@
     });
     out.recall = out.n ? Math.round(sum / out.n * 100) : 0;
     return out;
-  }
-
-  /* ----------------------------------------------------- calibración */
-
-  // conf: "seguro" | "creo" | "adivino"; right: boolean.
-  function noteConfidence(state, conf, right, now) {
-    if (!conf) return;
-    var k = dayKey(now);
-    if (!state.conf) state.conf = {};
-    var d = state.conf[k] || (state.conf[k] = {});
-    var c = d[conf] || (d[conf] = [0, 0]);
-    c[0]++;
-    if (!right) c[1]++;
-    Object.keys(state.conf).forEach(function (kk) { if (daysBetween(kk, k) > 28) delete state.conf[kk]; });
-  }
-  // Over-confidence: the share of «Seguro» answers that were wrong, this
-  // week and the one before.
-  function calibration(state, now) {
-    var k = dayKey(now), cur = { n: 0, wrong: 0, guessRight: 0, guesses: 0 }, prev = { n: 0, wrong: 0 };
-    Object.keys(state.conf || {}).forEach(function (kk) {
-      var age = daysBetween(kk, k), d = state.conf[kk];
-      var s = d.seguro || [0, 0], a = d.adivino || [0, 0];
-      if (age < 7) { cur.n += s[0]; cur.wrong += s[1]; cur.guesses += a[0]; cur.guessRight += a[0] - a[1]; }
-      else if (age < 14) { prev.n += s[0]; prev.wrong += s[1]; }
-    });
-    return { n: cur.n, over: cur.n ? Math.round(cur.wrong / cur.n * 100) : null,
-             overPrev: prev.n ? Math.round(prev.wrong / prev.n * 100) : null,
-             guesses: cur.guesses, guessRight: cur.guessRight };
   }
 
   /* ------------------------------------------------- hábito y metas */
@@ -672,7 +638,6 @@
       notte: true,        // lo nuevo de noche se repasa a la mañana
       log: [],            // registro de repasos: [id, minuto, nota, días, s, tipo]
       speed: {},          // velocidades de olvido estimadas: { v: {k, n}, g: {k, n} }
-      conf: {},           // "aaaa-m-d" -> { seguro: [n, errores], creo: [..], adivino: [..] }
       sessions: {},       // "aaaa-m-d" -> sesiones jugadas ese día
       plan: null,         // intención de implementación: { when, where, at }
       ideal: null,        // el «yo ideal»: { why, text, at }
@@ -767,7 +732,7 @@
     });
     if (RETENTIONS.indexOf(s.retention) < 0) s.retention = 0.9;
     s.log = s.log.filter(Array.isArray).slice(-LOG_MAX);
-    Object.keys(s.conf).forEach(function (k) { if (!isObj(s.conf[k])) delete s.conf[k]; });
+    delete s.conf;   // the confidence asked before 3.0 (no longer asked)
     Object.keys(s.sessions).forEach(function (k) { s.sessions[k] = num(s.sessions[k], 0, 0); });
     Object.keys(s.keywords).forEach(function (k) { if (typeof s.keywords[k] !== "string") delete s.keywords[k]; });
     s.pauses = s.pauses.filter(isObj).slice(-30);
@@ -1078,8 +1043,6 @@
     fitSpeed: fitSpeed,
     maybeFit: maybeFit,
     memoryStats: memoryStats,
-    noteConfidence: noteConfidence,
-    calibration: calibration,
     noteProduction: noteProduction,
     consolidated: consolidated,
     noteSession: noteSession,

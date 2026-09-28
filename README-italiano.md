@@ -211,7 +211,7 @@ mejor que SM-2 y que el algoritmo de Duolingo. Cada ficha tiene una
 
 `tools/it/test_memoria.js` prueba las fórmulas, el mantenimiento, la
 migración de las fichas viejas, el modo noche, la estimación de velocidad
-y la calibración.
+y el hábito.
 
 ### 🎧 Suoni: el oído
 
@@ -1052,7 +1052,7 @@ npm run sim         # la carrera simulada de un año (falla si una semana no se 
 | `tools/it/test_frasi.js` | frases, laboratorio, lecturas (incluidas las inundaciones), pausa, racha, cofre, guardado |
 | `tools/it/test_diagnosi.js` | ~1.600 errores típicos inyectados en oraciones del banco |
 | `tools/it/test_scrivi.js` | los textos modelo cumplen su consigna sin marcas; el corpus de errores |
-| `tools/it/test_memoria.js` | FSRS, mantenimiento, noche y mañana, hipercorrección, registro, velocidad, calibración, hábito |
+| `tools/it/test_memoria.js` | FSRS, mantenimiento, noche y mañana, registro, velocidad, hábito |
 | `tools/it/test_suoni.js` | datos de escucha, sesiones de Suoni, dictogloss, capa de frecuencia, examen, inundaciones |
 
 GitHub Actions (`.github/workflows/test.yml`) corre todo en cada push: los
