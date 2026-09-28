@@ -369,6 +369,30 @@
     return out;
   }
 
+  /* ------------------------------------------- misiones con criterio */
+
+  /* A comprehension mission (a reading, a listening, the radio) is done
+     with `pass` % or more; a second attempt completes it with 40 % or more,
+     a third one always: the week never stays locked, but an answer sheet
+     left blank no longer counts (3.1).  Records saved before 3.1 (without
+     v: 31) keep the old rule, «the second attempt completes it». */
+  var FLOOR2 = 40;
+  function passed(rec, pass, tries) {
+    if (!rec) return false;
+    var best = rec.pct || 0;
+    tries = tries != null ? tries : rec.tries || 1;
+    if (best >= pass) return true;
+    if (rec.v !== 31) return tries >= 2;
+    return (tries >= 2 && best >= FLOOR2) || tries >= 3;
+  }
+  // What is still missing, said the same way in every mission.
+  function passMissing(rec, pass, tries) {
+    tries = tries != null ? tries : (rec && rec.tries) || 0;
+    if (!rec) return "Te falta: hacerla (con " + pass + " % queda hecha)";
+    if (tries <= 1) return "Te falta: " + pass + " %, o un segundo intento con " + FLOOR2 + " % o más";
+    return "Te falta: " + pass + " %, o " + FLOOR2 + " % en otro intento (el tercero la completa igual)";
+  }
+
   /* ------------------------------------------------- hábito y metas */
 
   /* Sessions a day (frequency predicts gains better than minutes: Sudina &
@@ -1074,6 +1098,7 @@
     save: save,
     touchStreak: touchStreak, checkStreak: checkStreak, fromRaw: fromRaw, damaged: damaged, SAVE_V: SAVE_V, MODULE_OBJ: MODULE_OBJ, MODULE_ARR: MODULE_ARR,
     dayKey: dayKey,
+    passed: passed, passMissing: passMissing, FLOOR2: FLOOR2,
     daysBetween: daysBetween,
     addXp: addXp,
     todayXp: todayXp,

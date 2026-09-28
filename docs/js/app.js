@@ -767,7 +767,7 @@
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION = "c1-vN" in sw.js: test_game
      and the CI check it).  One version for the app and both languages. */
-  var APP_VERSION = "v3.0.3";
+  var APP_VERSION = "v3.1";
   // Settimana XVII: Roman numerals on the street signs (LANG.ui.romanWeeks).
   function romano(n) {
     var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
@@ -1810,7 +1810,8 @@
       var seenV = w.vocab.filter(function (v) { return state.cards["v:" + v[0]]; }).length;
       var prodV = w.vocab.filter(function (v) { return (state.cards["v:" + v[0]] || {}).prod; }).length;
       m({ kind: "vocab", done: prodV >= w.vocab.length, half: seenV >= w.vocab.length && prodV < w.vocab.length, ico: "📚", title: "Palabras de la semana",
-          sub: prodV + " / " + w.vocab.length + " escritas al menos una vez" + (seenV > prodV ? " · " + seenV + " vistas" : "") + " · primero reconocer, después escribir" });
+          sub: prodV + " / " + w.vocab.length + " escritas al menos una vez" + (seenV > prodV ? " · " + seenV + " vistas" : "") +
+            (prodV && prodV < w.vocab.length ? " · Te falta: escribir " + (w.vocab.length - prodV) : " · primero reconocer, después escribir") });
     }
     m({ kind: "play", done: st.right >= 20, ico: "🎯", title: "Superá la semana",
         sub: Math.min(st.right, 20) + " / 20 respuestas correctas con los ejercicios de la semana" });
@@ -1830,7 +1831,8 @@
       // the scene: 60 % of its phrases firm (back three days apart or more), not only seen
       var p = Frasi.progress(sc.id, state.cards), firm = p.total ? p.strong >= Math.ceil(p.total * 0.6) : true;
       m({ kind: "scene", arg: sc.id, done: p.seen >= p.total && firm, half: p.seen >= p.total && !firm, ico: sc.emoji, title: "Frases: " + sc.name,
-          sub: p.seen + " / " + p.total + " frases · " + (p.seen >= p.total ? p.strong + " firmes (hacen falta " + Math.ceil(p.total * 0.6) + ") · " : "") + sc.blurb });
+          sub: p.seen + " / " + p.total + " frases · " + (p.seen >= p.total && !firm ? "Te falta: " + (Math.ceil(p.total * 0.6) - p.strong) +
+            " frases firmes (vuelven con días de por medio: repasalas en días distintos) · " : p.seen >= p.total ? p.strong + " firmes · " : "") + sc.blurb });
     });
     if (window.Letture) Letture.SERIES.forEach(function (sr) {
       Letture.ofSeries(sr.id).forEach(function (ep) {
@@ -1841,10 +1843,11 @@
         // and still held the next week closed)
         var optional = ep.series !== "martin" && ep.series !== "settimana" && ep.series !== "lunga";
         // read with 70 % of comprehension, or read again
-        var readOk = !!d && (d.pct >= 70 || (d.n || 1) >= 2);
+        // read with 70 %, or again with 40 %, or a third time (Engine.passed, 3.1)
+        var readOk = !!d && Engine.passed(d, 70, d.n || 1);
         m({ kind: "ep", arg: ep.id, done: readOk, half: !!d && !readOk, ico: ep.emoji, opt: optional,
             title: (ep.series === "settimana" ? "Lectura y comprensión: " : ep.series === "lunga" ? "Lectura larga: " : ep.series === "martin" ? "Lectura: " : "Cultura: ") + ep.title,
-            sub: d ? "Leída · " + d.pct + "%" + (readOk ? "" : " · con 70 % (o leyéndola otra vez) queda hecha") : esc(ep.level) + " · " + (ep.series === "lunga" ? esc(ep.genre) + " · " + Letture.allTokens(ep).length + " palabras, preguntas en " + UI.langEs
+            sub: d ? "Leída · " + d.pct + "%" + (readOk ? "" : " · " + Engine.passMissing(d, 70, d.n || 1)) : esc(ep.level) + " · " + (ep.series === "lunga" ? esc(ep.genre) + " · " + Letture.allTokens(ep).length + " palabras, preguntas en " + UI.langEs
                    : esc(ep.area || ep.grammar || "")) +
                  (optional ? " · opcional" : "") });
       });
@@ -1872,7 +1875,8 @@
         var pc = Lab.progress("capire:" + c.id + ":", state.cards, w.week), cp = (state.capirePct || {})[c.id];
         var capOk = pc.seen >= pc.total && (cp == null || cp >= 80);
         m({ kind: "capire", arg: c.id, done: capOk, half: pc.seen >= pc.total && !capOk, ico: "🎯", title: UI.capire + ": " + c.h,
-            sub: pc.seen + " / " + pc.total + (cp != null ? " · tu mejor: " + cp + " %" : "") + " · con 80 % queda hecha · leer la gramática antes de producirla" });
+            sub: pc.seen + " / " + pc.total + (cp != null ? " · tu mejor: " + cp + " %" : "") +
+              (capOk ? "" : pc.seen < pc.total ? " · Te falta: ver " + (pc.total - pc.seen) + " más" : " · Te falta: 80 % en una sesión") + " · leer la gramática antes de producirla" });
       });
     }
     if (window.Banca && Banca.loaded()) {
@@ -1887,7 +1891,7 @@
     if (window.Suoni && Suoni.data() && w.week <= 40) {
       var sp = Suoni.progress(w.week, state.cards), sdone = !!(state.suoniDone || {})[w.week], spct = (state.suoniPct || {})[w.week];
       m({ kind: "suoni", done: sdone, half: !sdone && spct != null, ico: "🎧", title: UI.suoni + ": el oído",
-          sub: (sdone ? "Hecha · " : spct != null ? "Tu mejor: " + spct + " % · con 70 % queda hecha · " : "Con 70 % queda hecha · ") +
+          sub: (sdone ? "Hecha · " : spct != null ? "Tu mejor: " + spct + " % · Te falta: 70 % · " : "Con 70 % queda hecha · ") +
             "pares mínimos, habla conectada, entonación y un dictado · " + sp.seen + " / " + sp.total + " pares oídos" });
     }
     if (window.Suoni && Suoni.dgFor(w.week)) {
@@ -1906,7 +1910,7 @@
     if (window.Duelli) Duelli.DUELLI.filter(function (d) { return d.week === w.week; }).forEach(function (d) {
       var best = (state.duelli || {})[d.id];
       m({ kind: "duello", arg: d.id, done: !!best && best.pct >= 80, ico: "⚔️", title: "Duelo: " + d.title, opt: true,
-          sub: best ? "Tu mejor: " + best.pct + " % · con 80 % queda hecho" : "Opcional · " + d.sub + ": las dos formas mezcladas y «¿qué te lo dijo?»" });
+          sub: best ? "Tu mejor: " + best.pct + " %" + (best.pct >= 80 ? "" : " · Te falta: 80 %") : "Opcional · " + d.sub + ": las dos formas mezcladas y «¿qué te lo dijo?»" });
     });
     if (window.Escritos) Escritos.missions(w, state).forEach(m);   // escritura guiada (escritos.js), opcionales
     if (window.Capas) Capas.missions(w, state).forEach(m);   // Biblioteca y Tres vueltas (capas.js), opcionales
@@ -1916,7 +1920,7 @@
           : w.lesson && !lessonRead(w.week) ? "Se abre cuando termines la lección: pregunta toda la semana"
           : "Una sola sesión de " + Drills.DOMINA_SIZE + " preguntas de toda la semana, sin vidas: con 85 % la ganás" +
             (w.week >= DOMINA_GATE ? " · abre la semana siguiente" : "") +
-            (st.domBest ? " · tu mejor intento: " + st.domBest + " %" : "") });
+            (st.domBest ? " · tu mejor intento: " + st.domBest + " % · Te falta: 85 %" : "") });
     // A lesson with less than 70 % in its checks: its training comes right
     // after the lesson, before the rest.
     if ((state.lessonScore || {})[w.week] != null && state.lessonScore[w.week] < 70) {
@@ -2072,6 +2076,33 @@
     return "forma";
   }
   function doneCount(w) { return weekPlan(w).filter(function (x) { return x.done; }).length; }
+  function planKey(x) { return x.kind + "|" + (x.arg == null ? "" : x.arg); }
+  function planSnap(w) {
+    var o = {};
+    if (w) weekPlan(w).forEach(function (x) { o[planKey(x)] = { done: !!x.done, sub: x.sub, right: x.kind === "play" ? weekStat(w.week).right : null }; });
+    return o;
+  }
+  /* What a round moved in the week's missions: the ones done now and the
+     ones that advanced, with their count («Superá la semana: 13 / 20 · +7
+     en esta ronda · te faltan 7»).  Before 3.1 the result said nothing and
+     a mission that barely moved looked stuck. */
+  function planMovedHtml(r0) {
+    var w = course.weeks[(round.week || view.week) - 1];
+    if (!w || !r0) return "";
+    var lines = [];
+    weekPlan(w).forEach(function (x) {
+      var b = r0[planKey(x)];
+      if (!b || b.done) return;
+      if (x.done) { lines.push("✅ <b>" + x.title + "</b>: hecha"); return; }
+      if (x.kind === "play") {
+        var now = weekStat(w.week).right, plus = now - (b.right || 0);
+        if (plus > 0) lines.push("🎯 <b>" + x.title + "</b>: " + Math.min(now, 20) + " / 20 · +" + plus + " en esta ronda · te faltan " + Math.max(0, 20 - now));
+        return;
+      }
+      if (x.sub !== b.sub) lines.push(x.ico + " <b>" + x.title + "</b>: " + x.sub.split(" · ")[0]);
+    });
+    return lines.length ? '<div class="note planmoved"><b>En la semana ' + w.week + "</b><br>" + lines.join("<br>") + "</div>" : "";
+  }
 
   function startRound(kind, arg) {
     var w = course.weeks[view.week - 1];
@@ -2166,7 +2197,8 @@
       // «A entrenar esta parte»: only the exercises of that part.
       var pk = /^part:\d+$/.test(arg || "") ? +arg.slice(5) : null, pps = partsOf(w);
       var only = pk != null && pps && pps[pk] ? pps[pk].items.reduce(function (o, id) { o[id] = 1; return o; }, {}) : partItems(w);
-      items = Drills.buildRound(course, w, { map: itemMap, state: state, silent: state.silent, only: only, focus: pk != null });
+      items = Drills.buildRound(course, w, { map: itemMap, state: state, silent: state.silent, only: only, focus: pk != null,
+                                             push: kind === "round" && weekStat(w.week).right < 20 });
     }
 
     if (!items.length) { toast("No hay preguntas para este modo todavía."); return; }
@@ -2200,6 +2232,8 @@
       fixed: 0,
       week: view.week,
       planDone: doneCount(course.weeks[view.week - 1]),
+      // the week's missions before the round: the result says what moved (3.1)
+      plan0: planSnap(course.weeks[view.week - 1]),
       // «¿Cuánto creés que vas a sacar?» before Dominala and the boss
       askPredict: kind === "domina" || kind === "boss",
       predict: null,
@@ -3732,7 +3766,7 @@
       if (!state.letture) state.letture = {};
       var prev = state.letture[round.arg];
       // n: how many times it was read (a reading read again counts for the mission)
-      state.letture[round.arg] = { pct: Math.max(pct, prev ? prev.pct : 0), at: Date.now(), n: ((prev && prev.n) || 1) + (prev ? 1 : 0) };
+      state.letture[round.arg] = { pct: Math.max(pct, prev ? prev.pct : 0), at: Date.now(), n: ((prev && prev.n) || 1) + (prev ? 1 : 0), v: 31 };
       if (!prev) gain(20);
     }
 
@@ -3822,6 +3856,7 @@
         "<tr><td>Racha</td><td>" + dias(state.streak) + " 🔥</td></tr>" +
       "</table>";
 
+    html += planMovedHtml(round.plan0);
     (r.extras || []).forEach(function (x) { html += '<p class="note selfrepair">' + esc(x) + "</p>"; });
     if (round.boost) html += '<p class="muted">🎟️ Ronda con doble xp.</p>';
 
@@ -4233,8 +4268,8 @@
         "<tr><td>Probabilidad media de recordarlas hoy</td><td>" + m.recall + " %</td></tr>" +
       "</table>" +
       '<p class="muted small">' + speedLine("v", "Vocabulario") + " " + speedLine("g", "Gramática") + "</p>" +
-      '<label class="set"><span>Qué tan seguro querés recordar<small>menos = menos repasos por día</small></span><select id="retention">' +
-        [[0.85, "Relajado · 85 %"], [0.9, "Normal · 90 %"], [0.95, "Examen · 95 %"]].map(function (r) {
+      '<label class="set"><span>Cuántos repasos por día<small>más repasos = recordás más; el porcentaje es lo que vas a recordar de cada ficha</small></span><select id="retention">' +
+        [[0.85, "Menos · recordás 85 %"], [0.9, "Normal · recordás 90 %"], [0.95, "Más · recordás 95 %"]].map(function (r) {
           return '<option value="' + r[0] + '"' + ((state.retention || 0.9) === r[0] ? " selected" : "") + ">" + r[1] + "</option>";
         }).join("") + "</select></label>" +
       '<label class="set"><span>Noche y mañana 🌙☀️<small>lo nuevo después de las 20 h vuelve al desayuno, con el sueño en el medio</small></span>' +

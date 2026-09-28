@@ -344,17 +344,28 @@
 
   /* --------------------------------------------------------- misiones */
 
+  /* The listenings of the tramo: the best mark and every attempt (3.1: a
+     sheet delivered blank no longer completes the mission; Engine.passed). */
+  var LISTEN_PASS = 60;
+  function better(prev, r) {
+    return { pct: Math.max(r.pct, prev ? prev.pct || 0 : 0), ok: prev && prev.pct > r.pct ? prev.ok : r.ok, n: r.n,
+             last: r.pct, tries: ((prev && prev.tries) || (prev ? 1 : 0)) + 1, at: Date.now(), v: 31 };
+  }
+
   function missions(w, state) {
     if (!w || w.boss) return [];
     var s = week(w.week);
     if (!s) return [];
+    // before 3.1 any delivery completed it: those records stay done
+    var E = root.Engine, pass = function (r) { return !!r && (r.v !== 31 || !E || !E.passed || E.passed(r, LISTEN_PASS)); };
+    var miss = function (r) { return E && E.passMissing ? E.passMissing(r, LISTEN_PASS) : ""; };
     var t = store(state), out = [], a = t.asc[w.week], r = t.scr[w.week], g = (D().GENRES || {})[s.compito.genre] || {};
-    out.push({ kind: "tr-asc", arg: String(w.week), done: !!a, ico: "🎧", title: "Escucha larga: " + s.ascolto.title,
-      sub: a ? "Hecha · " + a.pct + " %" : esc(s.ascolto.genre) + " · unas " + scriptWords(s.ascolto) + " palabras · dos escuchas, preguntas en " + H.langName() });
+    out.push({ kind: "tr-asc", arg: String(w.week), done: pass(a), half: !!a && !pass(a), ico: "🎧", title: "Escucha larga: " + s.ascolto.title,
+      sub: a && pass(a) ? "Hecha · " + a.pct + " %" : a ? "Tu mejor: " + a.pct + " % · " + miss(a) : esc(s.ascolto.genre) + " · unas " + scriptWords(s.ascolto) + " palabras · dos escuchas, preguntas en " + H.langName() });
     if (s.breve) {
       var b = t.brv[w.week];
-      out.push({ kind: "tr-brv", arg: String(w.week), done: !!b, ico: "📻", title: "Escucha corta: " + s.breve.title,
-        sub: b ? "Hecha · " + b.pct + " %" : esc(s.breve.genre) + " · unas " + breveWords(s.breve) + " palabras · una voz, datos para anotar" });
+      out.push({ kind: "tr-brv", arg: String(w.week), done: pass(b), half: !!b && !pass(b), ico: "📻", title: "Escucha corta: " + s.breve.title,
+        sub: b && pass(b) ? "Hecha · " + b.pct + " %" : b ? "Tu mejor: " + b.pct + " % · " + miss(b) : esc(s.breve.genre) + " · unas " + breveWords(s.breve) + " palabras · una voz, datos para anotar" });
     }
     out.push({ kind: "tr-scr", arg: String(w.week), done: !!(r && r.ok), ico: "🖋️", title: "Tarea: " + (g.name || s.compito.genre),
       sub: r && r.ok ? "Entregada · " + r.n + " palabras · " + r.score + " / " + r.of + " criterios" + (r.ai ? " · IA " + r.ai.tot + " / 20" : "")
@@ -544,7 +555,7 @@
     if (cur.kind === "rad") R().record(H.state(), cur.week, cur.done);
     else {
       var t = store(), prev = t.asc[cur.week];
-      if (!prev || pct >= prev.pct) t.asc[cur.week] = { pct: pct, ok: ok, n: n, at: Date.now() };
+      t.asc[cur.week] = better(prev, { pct: pct, ok: ok, n: n });
     }
     H.gain(ok * 3, "input");
     H.persist();
@@ -619,7 +630,7 @@
     stop();
     cur.done = { ok: ok, n: n, pct: pct, detail: detail };
     var t = store(), prev = t.brv[cur.week];
-    if (!prev || pct >= prev.pct) t.brv[cur.week] = { pct: pct, ok: ok, n: n, at: Date.now() };
+    t.brv[cur.week] = better(prev, { pct: pct, ok: ok, n: n });
     H.gain(ok * 2, "input");
     H.persist();
     H.render();
