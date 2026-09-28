@@ -7026,21 +7026,32 @@
     on("#rsagain", function () { location.reload(); });
   }
 
-  // The glossary is optional too: without it words are just not tappable.
-  fetch(DATA("glossario.json"))
-    .then(function (r) { return r.ok ? r.json() : null; })
-    .then(function (g) {
-      glossario = g;
-      // every word of the glossary exists for the diagnosis (not «no es una palabra»)
-      if (g && window.Diagnosi && typeof Diagnosi.addWords === "function") { try { Diagnosi.addWords(Object.keys(g)); } catch (e) { /* */ } }
-    })
-    .catch(function () { /* sin glosario */ });
-
-  // The frequency layer is optional too: without it, no coverage meter.
-  fetch(DATA("frequenza.json"))
-    .then(function (r) { return r.ok ? r.json() : null; })
-    .then(function (f) { if (f && window.Freq) { Freq.load(f); if (view.screen === "io" || view.screen === "oggi") render(); } })
-    .catch(function () { /* sin frecuencias */ });
+  /* The glossary and the frequency layer are optional and not needed for
+     the first screen (a million bytes between the two): they are asked
+     for once the first screen is drawn, so the course and the bank get the
+     whole connection first. */
+  var extrasAsked = false;
+  function loadExtras() {
+    if (extrasAsked) return;
+    extrasAsked = true;
+    // The glossary: without it words are just not tappable.
+    fetch(DATA("glossario.json"))
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (g) {
+        glossario = g;
+        // every word of the glossary exists for the diagnosis (not «no es una palabra»)
+        if (g && window.Diagnosi && typeof Diagnosi.addWords === "function") { try { Diagnosi.addWords(Object.keys(g)); } catch (e) { /* */ } }
+      })
+      .catch(function () { /* sin glosario */ });
+    // The frequency layer: without it, no coverage meter.
+    fetch(DATA("frequenza.json"))
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (f) { if (f && window.Freq) { Freq.load(f); if (view.screen === "io" || view.screen === "oggi") render(); } })
+      .catch(function () { /* sin frecuencias */ });
+  }
+  function loadExtrasSoon() {
+    if (window.requestIdleCallback) requestIdleCallback(loadExtras, { timeout: 1500 }); else setTimeout(loadExtras, 300);
+  }
 
   // The bank is optional: without it the app still works, just smaller.
   var bankP = fetch(DATA("bank.json"))
@@ -7063,12 +7074,13 @@
         view.week = Math.min(state.unlocked, 52);
         if (Engine.checkStreak(state).status === "lost") persist();
         // A new learner: the three screens after the language picker (inicio.js).
-        if (window.Inicio && Inicio.boot(view)) { renderHeader(); render(); return; }
-        if (location.hash === "#pausa") { renderHeader(); startRound("pausa"); return; }
-        if (location.hash === "#micro") { renderHeader(); startRound("micro"); return; }
+        if (window.Inicio && Inicio.boot(view)) { renderHeader(); render(); loadExtrasSoon(); return; }
+        if (location.hash === "#pausa") { renderHeader(); startRound("pausa"); loadExtrasSoon(); return; }
+        if (location.hash === "#micro") { renderHeader(); startRound("micro"); loadExtrasSoon(); return; }
         updateBadge();
         renderHeader();
         if (!restoreView()) render();
+        loadExtrasSoon();
         // «Hoy» from the app icon or the calendar reminder: the plan in sight.
         if (location.hash === "#hoy") { var hp = document.getElementById("hoyplan"); if (hp && hp.scrollIntoView) hp.scrollIntoView({ block: "start" }); }
       } catch (err) { rescue(err); }
