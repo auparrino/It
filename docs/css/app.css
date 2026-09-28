@@ -646,6 +646,10 @@ ol.findings .src { font-size: .72rem; font-weight: 700; opacity: .65; margin-lef
 ol.findings li.conflict { border-left: 3px solid color-mix(in srgb, currentColor 35%, transparent); padding-left: 8px; }
 details.minorf { margin: 6px 0 0; }
 details.minorf summary { cursor: pointer; font-weight: 700; opacity: .85; padding: 4px 0; }
+details.nube { margin: 14px 0 0; border-top: 1px solid var(--k-line); padding-top: 6px; }
+details.nube > summary { cursor: pointer; font-weight: 700; padding: 12px 0; }
+details.nube .row { margin: 10px 0 4px; }
+details.nube .set { margin-top: 6px; }
 
 /* --- versión nueva --- */
 .updbar { position: fixed; left: 12px; right: 12px; bottom: calc(76px + env(safe-area-inset-bottom, 0px)); z-index: 60;

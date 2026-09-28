@@ -566,6 +566,32 @@ probable que se borre. Igual, en *Io → Guardar copia* bajás (o compartís a D
 WhatsApp) un `.json` con todo tu progreso, y con *Restaurar copia* lo recuperás
 en otro teléfono.
 
+### Tu copia en otro teléfono: GitHub Gist (opcional)
+
+Para seguir en otro teléfono sin pasarte archivos y sin servidor de la app,
+en *Io → Tu copia → ☁️ Sincronizar con tu GitHub Gist* pegás un token
+personal de GitHub con permiso **solo de gist** (el enlace abre
+*github.com/settings/tokens/new* con «gist» ya marcado: elegís el
+vencimiento y tocás *Generate token*). Vale para los dos idiomas.
+
+- **Subir ahora**: la primera vez crea un gist **secreto** en tu cuenta,
+  con `laviac1.json` (el mismo sobre que *Guardar copia*: app, idioma,
+  versión, fecha y progreso) y un `LEEME.md`; después lo actualiza. Si otro
+  teléfono subió después de la última vez que este sincronizó, pregunta
+  antes de pisarla.
+- **Traer de la nube**: en el otro teléfono, con el mismo token, encuentra
+  el gist por el nombre del archivo, te dice si la copia es más nueva o más
+  vieja que lo que hay en el teléfono (con fecha y xp) y pregunta antes de
+  reemplazar; se restaura igual que un archivo (una copia de Rumo C1 no se
+  restaura en La Via C1).
+- **Subir sola al cerrar la app**: si la activás, al salir de la app sube
+  una vez por día como mucho, y solo si cambió algo. Si otro teléfono subió
+  una copia que este no trajo, no sube y te avisa en *Io*.
+
+El token queda solo en este teléfono, con las claves de IA, y nunca entra en
+la copia ni en el gist. Cómo funciona por dentro: `ARQUITECTURA.md`, «La
+copia en un GitHub Gist».
+
 ## Jugar en la computadora
 
 ```sh

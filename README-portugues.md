@@ -25,6 +25,34 @@ Si se publica en el mismo dominio que La Via C1 (`usuario.github.io/It` y
 `/pt`), no se pisan: todas las claves de guardado llevan el prefijo `rumoc1.` y
 el service worker solo toca sus propias cachés.
 
+### Tu copia en otro teléfono: GitHub Gist (opcional)
+
+*Eu → Guardar copia* baja (o comparte) un `.json` con todo el progreso, y
+*Restaurar copia* lo recupera. Para seguir en otro teléfono sin pasarte
+archivos y sin servidor de la app, en *Eu → Tu copia → ☁️ Sincronizar con
+tu GitHub Gist* pegás un token personal de GitHub con permiso **solo de
+gist** (el enlace abre *github.com/settings/tokens/new* con «gist» ya
+marcado: elegís el vencimiento y tocás *Generate token*). Vale para los dos
+idiomas.
+
+- **Subir ahora**: la primera vez crea un gist **secreto** en tu cuenta,
+  con `rumoc1.json` (el mismo sobre que *Guardar copia*: app, idioma,
+  versión, fecha y progreso) y un `LEEME.md`; después lo actualiza. Si otro
+  teléfono subió después de la última vez que este sincronizó, pregunta
+  antes de pisarla.
+- **Traer de la nube**: en el otro teléfono, con el mismo token, encuentra
+  el gist por el nombre del archivo, te dice si la copia es más nueva o más
+  vieja que lo que hay en el teléfono (con fecha y xp) y pregunta antes de
+  reemplazar; se restaura igual que un archivo (una copia de La Via C1 no se
+  restaura en Rumo C1).
+- **Subir sola al cerrar la app**: si la activás, al salir de la app sube
+  una vez por día como mucho, y solo si cambió algo. Si otro teléfono subió
+  una copia que este no trajo, no sube y te avisa en *Eu*.
+
+El token queda solo en este teléfono, con las claves de IA, y nunca entra en
+la copia ni en el gist. Cómo funciona por dentro: `ARQUITECTURA.md`, «La
+copia en un GitHub Gist».
+
 ## Cómo está armado el año
 
 | Estación | Semanas | Nivel | Contenido |
@@ -60,7 +88,7 @@ reales; las apócrifas se dicen apócrifas.
 | Módulo | Contenido |
 |---|---|
 | Lecciones (`tools/pt/lessons/`) | 52 lecciones, 370 bloques de teoría en sesiones cortas, con chequeos: marcadores del habla desde la 8, actos de habla, un *sotaque* cada cuatro semanas, los géneros desde la 28 |
-| Ejercicios (`tools/pt/authored/`) | 2.573: elegir, completar, traducir, encontrar el error, *garden path*, *descubrí la regla*, combinar oraciones, escucha, colocaciones, pragmática, examen; la consigna, en portugués desde la 14 (las simples) y la 27 (todas) |
+| Ejercicios (`tools/pt/authored/`) | 2.601: elegir, completar, traducir, encontrar el error, *garden path*, *descubrí la regla*, combinar oraciones, escucha, colocaciones, pragmática, examen; la consigna, en portugués desde la 14 (las simples) y la 27 (todas) |
 | Palabras de la semana (`tools/pt/vocab/`) | 1.008, cada una con significado, ejemplo y **cómo se usa** |
 | Conjugador (`docs/lang/pt/conjugator.js`) | 419 verbos, 17 tiempos, participios dobles, infinitivo pessoal, imperativo, reflexivos; 8.187 controles |
 | Frases (`docs/js/frasi.js`) | 32 escenas, 539 frases de conversación, todas con su nota de construcción |
@@ -216,10 +244,20 @@ que cuenta y el 60 % de promedio.
   la IA la califica con las tres *adequações* (contexto, discursiva,
   lingüística, léxico) y recibe el insumo para juzgar cómo se usó.
 - **Estruturas** y **Léxico**: opcionales, como en los exámenes europeos. El
-  Celpe-Bras no las tiene, así que no cuentan para aprobar.
+  Celpe-Bras no las tiene, así que no cuentan para aprobar. Cada versión
+  tiene los suyos (`ver` en cada ítem de `tools/pt/authored/esame_c1.py`):
+  los huecos de un texto (cloze racional: conectores, preposiciones,
+  relativos, pronombres y la forma pedida del verbo) — la 1, el ensayo
+  sobre Gilberto Freyre y sus críticos; la 2, la narración en Santa Teresa;
+  la 3, dos textos más cortos, el pau-brasil (divulgación) y «O vizinho do
+  302» (crónica) — y, repartidos de a uno, transformaciones, formación de
+  palabras, registro, colocaciones y falsos amigos. Son 192 ítems: 33 a 35
+  de Estruturas y 30 de Léxico por versión (la prueba toma 20 y 12), sin
+  repetir ninguno entre versiones y ninguno en el entrenamiento de la
+  semana 52 (`tools/lib/test_fix_contenido_pt.js`).
 
-**Tres versiones**, cada una con su entrevista, su lectura y sus cuatro
-tarefas. La primera vez toca la 1; si no aprobás, el intento siguiente usa
+**Tres versiones**, cada una con su entrevista, su lectura, sus cuatro
+tarefas y sus Estruturas y Léxico. La primera vez toca la 1; si no aprobás, el intento siguiente usa
 la que todavía no hiciste. La pantalla dice qué versión estás haciendo y cómo
 te fue en las otras. Después de aprobar, el plan de mantenimiento propone un
 simulacro cada tres meses con la versión siguiente. Se guarda en

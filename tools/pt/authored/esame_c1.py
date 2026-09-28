@@ -8,9 +8,11 @@ europeos, como en el examen de italiano.
 
 Dos pruebas, distinguidas por el campo `prova` (los valores son los mismos
 que en el módulo italiano porque app.js los usa como claves):
-  - "strutture" (Estruturas): huecos sobre dos textos coherentes (Texto 1:
+  - "strutture" (Estruturas): huecos sobre textos coherentes (Texto 1:
     ensayo sobre Gilberto Freyre y sus críticos; Texto 2: narración en
-    Santa Teresa, con cartas del exilio) y transformaciones de frase
+    Santa Teresa, con cartas del exilio; Texto 3: divulgación sobre el
+    pau-brasil; Texto 4: crónica de un vecino y una roda de samba) y
+    transformaciones de frase
     (concesivas, orações reduzidas, futuro do subjuntivo, infinitivo
     pessoal, pasiva, discurso indirecto, colocação pronominal, mesóclise,
     crase, regência).
@@ -21,7 +23,20 @@ que en el módulo italiano porque app.js los usa como claves):
 Todos los ítems tienen w=52, level="C1", topic="esame" e id con prefijo
 "ex-".  Los huecos llevan un campo `text` con la etiqueta del texto, para
 que la app pueda agruparlos.  Compreensão oral, leitura y produção escrita
-están en docs/js/esame_data.js.
+están en docs/lang/pt/esame_data.js.
+
+Tres versiones del examen, las mismas de esame_data.js (versoes: "v1",
+"v2", "v3"): cada ítem lleva `ver` y la pantalla del examen toma solo los
+de la versión en curso.  Los huecos van por texto: v1 el Texto 1 (ensayo),
+v2 el Texto 2 (narración), v3 los Textos 3 (divulgación) y 4 (crónica),
+más cortos.  Las transformaciones y el léxico se reparten de a uno por
+versión en el orden de la lista (1 → v1, 2 → v2, 3 → v3, 4 → v1…), así
+cada versión tiene un poco de cada tipo; OVERRIDE corrige los casos en que
+dos ítems de una misma versión se delatarían entre sí.  Quedan unos 34
+ítems de Estruturas y 30 de Léxico por versión, sin repetir ninguno entre
+versiones.  Ninguno entra en el entrenamiento de la semana 52
+(build_course.py deja afuera todo ítem con `prova`): se ven solo en el
+examen.
 
 Datos históricos verificados (fechas, obras, leyes); lo que la tradición
 cuenta sin prueba firme se marca en la nota.
@@ -33,6 +48,14 @@ T = "esame"
 
 T1 = "Texto 1: Casa-Grande & Senzala e seus críticos"
 T2 = "Texto 2: Uma tarde em Santa Teresa"
+T3 = "Texto 3: A árvore que deu nome ao país"
+T4 = "Texto 4: O vizinho do 302"
+
+TEXT_VER = {T1: "v1", T2: "v2", T3: "v3", T4: "v3"}
+VERS = ("v1", "v2", "v3")
+# (familia, número) → versión, cuando el reparto de a uno juntaría dos
+# ítems que se contestan entre sí: rg-12 y co-12 son los dos «pisar na bola».
+OVERRIDE = {("co", 11): "v3", ("co", 12): "v2"}
 
 P_CLOZE = "Completá con una sola palabra o con la forma pedida del verbo entre paréntesis."
 P_FORM = "Formá la palabra pedida a partir de la que está en la base."
@@ -42,16 +65,21 @@ P_COL = "Elegí la palabra que forma la combinación usual en portugués."
 P_FAL = "Elegí el significado correcto (ojo con el español)."
 
 
+def _ver(fam, n):
+    """Version of item n of a family: one each in turn (1 → v1, 2 → v2…)."""
+    return OVERRIDE.get((fam, n)) or VERS[(n - 1) % 3]
+
+
 def cz(n, text, stem, answer, note, alt=None):
     d = dict(id="ex-cl-%02d" % n, type="cloze", topic=T, level=LV, w=W, prova="strutture",
-             text=text, prompt=P_CLOZE, stem=stem, answer=answer, note=note)
+             ver=TEXT_VER[text], text=text, prompt=P_CLOZE, stem=stem, answer=answer, note=note)
     if alt:
         d["alt"] = alt
     return d
 
 
 def fp(n, stem, answer, note, alt=None):
-    d = dict(id="ex-fp-%02d" % n, type="cloze", topic=T, level=LV, w=W, prova="lessico",
+    d = dict(id="ex-fp-%02d" % n, type="cloze", topic=T, level=LV, w=W, prova="lessico", ver=_ver("fp", n),
              prompt=P_FORM, stem=stem, answer=answer, note=note)
     if alt:
         d["alt"] = alt
@@ -59,7 +87,7 @@ def fp(n, stem, answer, note, alt=None):
 
 
 def tr(n, stem, answer, note, alt=None):
-    d = dict(id="ex-tr-%02d" % n, type="typed", topic=T, level=LV, w=W, prova="strutture",
+    d = dict(id="ex-tr-%02d" % n, type="typed", topic=T, level=LV, w=W, prova="strutture", ver=_ver("tr", n),
              prompt=P_TRAS, stem=stem, answer=answer, note=note)
     if alt:
         d["alt"] = alt
@@ -67,17 +95,17 @@ def tr(n, stem, answer, note, alt=None):
 
 
 def rg(n, stem, options, answer, note):
-    return dict(id="ex-rg-%02d" % n, type="choice", topic=T, level=LV, w=W, prova="lessico",
+    return dict(id="ex-rg-%02d" % n, type="choice", topic=T, level=LV, w=W, prova="lessico", ver=_ver("rg", n),
                 prompt=P_REG, stem=stem, options=options, answer=answer, note=note)
 
 
 def co(n, stem, options, answer, note):
-    return dict(id="ex-co-%02d" % n, type="choice", topic=T, level=LV, w=W, prova="lessico",
+    return dict(id="ex-co-%02d" % n, type="choice", topic=T, level=LV, w=W, prova="lessico", ver=_ver("co", n),
                 prompt=P_COL, stem=stem, options=options, answer=answer, note=note)
 
 
 def fa(n, stem, options, answer, note):
-    return dict(id="ex-fa-%02d" % n, type="choice", topic=T, level=LV, w=W, prova="lessico",
+    return dict(id="ex-fa-%02d" % n, type="choice", topic=T, level=LV, w=W, prova="lessico", ver=_ver("fa", n),
                 prompt=P_FAL, stem=stem, options=options, answer=answer, note=note)
 
 
@@ -193,6 +221,74 @@ ITEMS = [
        "concordasse", "Condicional hipotético: se + subjuntivo imperfeito (concordasse) + futuro do pretérito (transformaria)."),
     cz(48, T2, "Afinal, o avô sempre dissera que livros fechados não servem ___ nada.",
        "para", "*Servir para* conserva la misma preposición que en español: *não servir para nada*. *Dissera* es el pluscuamperfecto simple, propio de la escritura; en el habla se usa *tinha dito*."),
+
+    # ------------------------------------------------------------------
+    # Huecos, Texto 3: A árvore que deu nome ao país (divulgación, v3)
+    # ------------------------------------------------------------------
+    cz(49, T3, "Poucos países devem o nome ___ uma árvore, e o Brasil é um deles.",
+       "a", "Regência: «dever algo a alguém». Sin crase porque «uma» no lleva artículo: devem o nome a uma árvore, pero à árvore."),
+    cz(50, T3, "Quando os portugueses chegaram, em 1500, o pau-brasil ___ (crescer) em boa parte da Mata Atlântica.",
+       "crescia", "Imperfeito para describir el estado de cosas de fondo; el perfeito (chegaram) cuenta la acción puntual. Igual que en español: crecía."),
+    cz(51, T3, "Da sua madeira se extraía uma tinta vermelha, ___ cor lembrava a de uma brasa: daí o nome.",
+       "cuja", "«Cujo» concuerda con lo poseído (a cor → cuja), no con el poseedor (a tinta), y no lleva artículo detrás. «Brasil» viene de «brasa»: el color del tinte."),
+    cz(52, T3, "O comércio era tão lucrativo ___ a Coroa logo o transformou em monopólio.",
+       "que", "Consecutiva: «tão + adjetivo + que». La Corona portuguesa se reservó el comercio del pau-brasil desde los primeros años."),
+    cz(53, T3, "Os troncos eram cortados e ___ (carregar) até a costa por indígenas, que recebiam em troca facas, espelhos e tecidos.",
+       "carregados", "Pasiva coordinada: el «eram» sirve para los dos participios, y cada uno concuerda con el sujeto (os troncos → cortados, carregados). Ese trueque se llamaba «escambo»."),
+    cz(54, T3, "No século XIX, a tinta ___ (deixar) de interessar à indústria, porque os corantes sintéticos eram mais baratos.",
+       "deixou", "Perfeito para el cambio puntual: deixou de (= dejó de). «Interessar a» + «a indústria» = à indústria, con crase."),
+    cz(55, T3, "Mesmo assim, a madeira continuou a ser procurada, ___ é a preferida dos fabricantes de arcos de violino.",
+       "pois", "Causal que explica lo anterior: pois / porque / já que / uma vez que. «Pois» causal va entre las dos oraciones, nunca al principio de la frase.",
+       alt=["porque", "já que", "uma vez que", "visto que"]),
+    cz(56, T3, "Hoje a espécie está ameaçada de extinção, e o corte só é permitido ___ autorização dos órgãos ambientais.",
+       "com", "Preposición del medio o la condición: «com autorização» (o «mediante autorização», más formal), sin artículo, como «con permiso». «Ameaçada de extinção»: en peligro de extinción.",
+       alt=["mediante"]),
+    cz(57, T3, "Em 1978, uma lei federal ___ declarou árvore nacional.",
+       "a", "Objeto directo femenino (a espécie): «a», nunca ✗la. En PB culto va antes del verbo cuando hay sujeto expreso: uma lei a declarou. Es la Lei 6.607, de 1978."),
+    cz(58, T3, "É curioso que um país tão grande ___ (lembrar) tão pouco da árvore que lhe deu o nome.",
+       "se lembre", "«É curioso que» + subjuntivo presente. «Lembrar-se de» es la forma culta; en el habla brasileña «lembrar de», sin pronombre, es lo normal.",
+       alt=["lembre"]),
+    cz(59, T3, "Muitos brasileiros nunca viram um pau-brasil, ___ ele esteja plantado em praças e jardins botânicos de várias cidades.",
+       "embora", "Concesiva con subjuntivo: embora / ainda que / mesmo que + esteja. En español «aunque está» es posible; en portugués «embora» exige subjuntivo.",
+       alt=["ainda que", "mesmo que", "se bem que", "conquanto"]),
+    cz(60, T3, "Se cada escola ___ (plantar) uma muda, a história do país estaria mais perto das crianças.",
+       "plantasse", "Hipótesis del presente: se + subjuntivo imperfeito (plantasse) + futuro do pretérito (estaria). «Uma muda» = un plantín."),
+
+    # ------------------------------------------------------------------
+    # Huecos, Texto 4: O vizinho do 302 (crónica, v3)
+    # ------------------------------------------------------------------
+    cz(61, T4, "___ três anos, quando me mudei para este prédio em Botafogo, ninguém me cumprimentava no elevador.",
+       "Há", "Tiempo transcurrido: «há» (de haver, impersonal, con h y tilde) = hace. En el habla también «faz». No confundir con «a» (daqui a três anos: dentro de tres años).",
+       alt=["Faz"]),
+    cz(62, T4, "O único que falava comigo era seu Álvaro, o vizinho do 302, ___ passava as tardes regando as plantas da varanda.",
+       "que", "Relativo sujeto después de coma: «que» (o «o qual», más formal). «Seu Álvaro»: «seu» es el tratamiento popular de «senhor» delante del nombre.",
+       alt=["o qual"]),
+    cz(63, T4, "Um dia, ele me perguntou se eu ___ (gostar) de samba de roda.",
+       "gostava", "Interrogativa indirecta en pasado: «Você gosta?» → perguntou se eu gostava. Imperfeito de indicativo, no subjuntivo. Y «gostar de», siempre con «de»."),
+    cz(64, T4, "Respondi que sim, e ele me convidou ___ ir a uma roda na Pedra do Sal na sexta seguinte.",
+       "para", "«Convidar alguém para» + infinitivo (o «a», más formal). En Brasil no se dice ✗convidar de.",
+       alt=["a"]),
+    cz(65, T4, "Nunca ___ (ouvir) falar daquele lugar, apesar de já morar no Rio havia algum tempo.",
+       "tinha ouvido", "Anterioridad en el pasado: mais-que-perfeito composto (tinha ouvido) o simple (ouvira, literario). «Havia algum tempo» = hacía un tiempo, siempre en singular.",
+       alt=["havia ouvido", "ouvira"]),
+    cz(66, T4, "Na sexta, ___ (chegar) à Pedra do Sal, entendi por que ele gostava tanto de lá.",
+       "chegando", "Oração reduzida de gerúndio con valor temporal: chegando (= cuando llegué). Con «ao» + infinitivo también: ao chegar. «Por que» va separado en la interrogativa indirecta.",
+       alt=["ao chegar"]),
+    cz(67, T4, "Seu Álvaro conhecia todo mundo: os músicos o ___ (receber) com abraços.",
+       "receberam", "Perfeito para la acción puntual (o imperfeito si era la costumbre: recebiam). El pronombre «o» va antes del verbo porque hay sujeto expreso.",
+       alt=["recebiam"]),
+    cz(68, T4, "Contou-me que, na juventude, tocara pandeiro ___ uma escola de samba da Zona Norte.",
+       "numa", "La preposición «em» se contrae con el artículo indefinido: em + uma → numa (en la escritura culta también «em uma»). «Tocara» es el mais-que-perfeito simples: tinha tocado.",
+       alt=["em uma"]),
+    cz(69, T4, "— Quando você ___ (vir) de novo, traga um amigo — disse um dos músicos.",
+       "vier", "Futuro do subjuntivo de vir: vieram → vier (cuando vengas). Trampa: «vir» es el futuro do subjuntivo de ver (quando você o vir = cuando lo veas)."),
+    cz(70, T4, "Desde então, eu e seu Álvaro ___ (ir) juntos à roda quase todas as semanas.",
+       "temos ido", "Pretérito perfeito composto: algo que se repite desde un punto del pasado hasta hoy (temos ido = venimos yendo). No equivale al pretérito perfecto español «hemos ido». Con presente también vale: vamos.",
+       alt=["vamos"]),
+    cz(71, T4, "No mês passado, ele fez oitenta anos e pediu que ninguém lhe ___ (dar) presentes.",
+       "desse", "«Pedir que» + subjuntivo; con el verbo principal en pasado, imperfeito: desse (dieran). «Fazer oitenta anos» = cumplir ochenta."),
+    cz(72, T4, "Na festa, fui eu ___ tocou o pandeiro que ele me ensinou a tocar.",
+       "quem", "Con «fui eu quem» el verbo va en 3.ª persona (tocou); con «fui eu que», concuerda con «eu» (fui eu que toquei). Como después del hueco viene «tocou», la respuesta es «quem»."),
 
     # ------------------------------------------------------------------
     # Transformações (estruturas)
@@ -350,6 +446,8 @@ ITEMS = [
        "En el habla informal: próclise al inicio (me responde) e indicativo con valor de pedido."),
     rg(20, "(coloquial) Ele é muito gente boa. → (formal) Ele é muito ___.", ["simpático", "boa gente", "gentil gente"], "simpático",
        "*Gente boa* funciona como adjetivo invariable (*ele é muito gente boa*), como nuestro «buena onda». En registro neutro o formal: *simpático*, *amável*."),
+    rg(21, "(coloquial) Qualquer coisa, me chama. → (e-mail formal) ___", ["Fico à disposição para esclarecimentos.", "Qualquer coisa, é só me dar um toque.", "Se precisar de algo, me chama no zap, beleza?"], "Fico à disposição para esclarecimentos.",
+       "«Qualquer coisa, me chama» cierra un mensaje informal (próclise al inicio, «chamar» = contactar). En un e-mail formal: «Fico à disposição» o «Coloco-me à disposição». «Dar um toque» y «zap» (WhatsApp) son del habla."),
 
     # ------------------------------------------------------------------
     # Colocações (léxico)
@@ -382,6 +480,8 @@ ITEMS = [
        "«Tomar uma decisão», como en español. Trampa: ✗fazer uma decisão (calco del inglés)."),
     co(14, "Depois da praia, a primeira coisa que faço é ___ banho.", ["tomar", "dar", "fazer"], "tomar",
        "*Tomar banho* es bañarse o ducharse uno mismo, sin pronombre reflexivo. *Dar banho* es bañar a otro: *dar banho no cachorro*."),
+    co(15, "Antes da reunião, vou ___ uma olhada no relatório. (= echar un vistazo)", ["dar", "jogar", "botar"], "dar",
+       "*Dar uma olhada* es «echar un vistazo»: el verbo es *dar*. *Jogar uma olhada* es calco de «echar»; en Brasil no se dice."),
 
     # ------------------------------------------------------------------
     # Falsos amigos y heterogenéricos (léxico)
@@ -418,4 +518,8 @@ ITEMS = [
        "Heterogenérico: a viagem (femenino), como a coragem, a garagem, a origem. En español, el viaje."),
     fa(16, "Estou com ___ dor nas costas desde ontem.", ["uma", "um", "una"], "uma",
        "Heterogenérico: a dor (femenino). En español, el dolor."),
+    fa(17, "Ela estava na cozinha picando salsa para o feijão. «salsa» =", ["perejil", "salsa de tomate", "cebolla"], "perejil",
+       "Falso amigo: *salsa* es «perejil». La salsa para la comida es *molho* (*molho de tomate*); la música, esa sí, es *salsa*."),
+    fa(18, "Hoje acordei às seis da manhã. «acordei» =", ["me desperté", "me acordé", "acordé, decidí"], "me desperté",
+       "Falso amigo: *acordar* es «despertar(se)», sin pronombre en Brasil. «Acordarse» es *lembrar-se*; «acordar algo» (decidir juntos), *combinar* o *decidir*."),
 ]

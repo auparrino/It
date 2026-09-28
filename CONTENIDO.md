@@ -44,7 +44,7 @@ italiano.
 | Escucha, pares mínimos, dictogloss | `docs/lang/<código>/ascolto_data.js`, `docs/lang/<código>/dictogloss_data.js` | `test_suoni.js` |
 | Laboratorio (cognados, falsos amigos, input estructurado) | `docs/lang/<código>/lab_data.js` | `test_frasi.js` |
 | Escritura libre (*Scrivi*) | `TASKS` en `docs/lang/<código>/scrivi.js` | `test_scrivi.js` |
-| Examen final C1 | `docs/lang/<código>/esame_data.js` y `tools/<código>/authored/esame_c1.py` | `test_suoni.js`, `test_game.js` |
+| Examen final C1 | `docs/lang/<código>/esame_data.js` y `tools/<código>/authored/esame_c1.py` | `test_suoni.js`, `test_game.js`; en portugués, `tools/lib/test_fix_contenido_pt.js` (las tres versiones de Estruturas y Léxico) |
 | Tramo C1 (semanas 27-51: lectura, escucha y tarea largas) | `tools/<código>/tramo/wNN.json` y `generi.json` | `tools/lib/test_tramo.js` |
 | Serie Radio / Rádio (semanas 6-25: un programa a dos voces por semana) | `tools/<código>/radio/wNN.json` y `serie.json` | `tools/lib/test_radio.js`, `tools/it/check_radio.py`, `tools/pt/check_radio.py` |
 | Biblioteca (libros de dominio público) | `tools/lib/biblioteca_fuentes.js` | `tools/lib/test_biblioteca.js` |

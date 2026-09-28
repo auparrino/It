@@ -11,7 +11,8 @@ docs/
   js/boot.js            elige el idioma y carga paquete + núcleo en ORDER
   js/*.js               el núcleo: engine, drills, lezione, banca, frasi, lab,
                         letture, duelli, suoni, voci, frequenza, porque, capas,
-                        app (y los módulos de «Las capas y los módulos»)
+                        nube (la copia en un GitHub Gist), app (y los
+                        módulos de «Las capas y los módulos»)
   css/app.css           la estructura (usa los tokens del tema)
   fonts/, icons/        lo común (Atkinson Hyperlegible, el ícono de la app)
   sw.js                 un service worker para todo: el núcleo siempre,
@@ -59,6 +60,48 @@ paquete lo que necesita (`LANG`, `LANG.rules`, `Conj`, `Diagnosi`, los
 `rumoc1.` para portugués), así el progreso de uno no toca el del otro y
 quien ya estudiaba italiano no pierde nada. El idioma elegido queda en
 `c1.lang`.
+
+**La copia en un GitHub Gist** (`js/nube.js`, opcional; auditoría 3.0, B
+4.5, escalón 3). Un canal para otro teléfono sin servidor de la app, con
+la misma lógica de «clave propia» que la IA.
+- **El sobre**: el de «💾 Guardar copia», `{app: "c1", lang, brand, v, at,
+  save}` (`Nube.envelope`, que `exportSave` también usa). `persist()`
+  anota en `state.savedAt` cuándo cambió el progreso.
+- **Dónde va**: un gist secreto por idioma, con `laviac1.json` o
+  `rumoc1.json` y un `LEEME.md`. `Nube.push` lo crea la primera vez (POST
+  `/gists`, `public: false`) y después lo actualiza (PATCH); si el gist se
+  borró, crea otro. `Nube.remote` lo busca en la lista de gists del alumno
+  (sin contenido: una llamada liviana) por el nombre del archivo, así otro
+  teléfono lo encuentra con el mismo token. `Nube.pull` lo baja (pasado
+  1 MB la API lo corta y se lee de `raw_url`) y controla que sea una copia
+  y del idioma.
+- **Restaurar**: «Traer de la nube» pasa por `restoreEnvelope` en `app.js`,
+  el mismo camino que un archivo (`Engine.fromRaw`, control de idioma,
+  `clearPending`), y pregunta siempre, diciendo si la copia es más nueva o
+  más vieja que la del teléfono (`Nube.compare`, por `savedAt`).
+- **Conflictos**: cada teléfono anota la fecha del gist (la del servidor)
+  cuando sube o trae; antes de subir, si cambió (`Nube.conflict`: otro
+  teléfono subió), pregunta antes de pisarla.
+- **Subida automática**: si el alumno la activa, al ocultar la app
+  (`visibilitychange`), una vez por día como mucho y solo si el progreso
+  cambió desde la última sincronización (`Nube.autoDue`); con conflicto no
+  sube y lo avisa en Io.
+- **Lo que no entra en la copia**: el token (`c1.gist.token`, uno para los
+  dos idiomas) y lo que el teléfono sabe del gist (`<prefijo>.gist`: id,
+  fechas, subida automática) viven en `localStorage`, fuera del guardado,
+  como las claves de IA.
+- **Tests**: `tools/lib/test_nube.js` (la API de gists simulada: crear,
+  actualizar, leer, el raw de más de 1 MB, 401, 403, 404, límite, red
+  caída) y `tools/lib/smoke_nube.js` (en Chromium, con `page.route`).
+
+**Examen C1 en versiones.** Cada idioma tiene tres versiones completas
+(`esame_data.js`: `versioni` en italiano, `versoes` en portugués) y los
+ítems de Estructuras y Léxico de `course.json` llevan `ver` con el id de su
+versión (A, B, C; v1, v2, v3): la pantalla del examen (`esameItems` en
+`app.js`) toma solo los de la versión en curso. Los arman
+`tools/<código>/authored/esame_c1.py`; ninguno entra en el entrenamiento de
+la semana 52. Controles: `tools/it/test_suoni.js` y
+`tools/lib/test_fix_contenido_pt.js`.
 
 **Tests.** `npm test` corre la batería de cada idioma (`tools/it/test_*.js`,
 `tools/pt/test_*.js`) contra el mismo núcleo, cargado con `tools/lib/pack.js`,

@@ -65,7 +65,7 @@
     { lang: "radio_data.js" }, { core: "radio.js" }, { core: "tramo.js" },
     { lang: "fuera_data.js" }, { core: "fuera.js" },
     { core: "plan.js" }, { core: "progreso.js" }, { core: "inicio.js" },
-    { core: "capas.js" },
+    { core: "capas.js" }, { core: "nube.js" },
     { core: "app.js" }
   ];
 

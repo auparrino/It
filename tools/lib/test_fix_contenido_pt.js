@@ -8,6 +8,10 @@
  *     la regla» (ítems scopri del curso compilado), la respuesta es la única
  *     opción más larga en a lo sumo el 40 % de cada conjunto.  Y, para no
  *     pasarse al revés, tampoco es la única más corta en más del 40 %.
+ *  1b. Portugués (auditoría 3.0, P8): el examen final, con las preguntas
+ *     de escucha en portugués, las tres versoes de la producción escrita y
+ *     Estruturas y Léxico en tres versiones parejas (`ver`), sin ítems
+ *     repetidos entre versiones y fuera del entrenamiento de la semana 52.
  *  2. Portugués: la escucha de las semanas 1, 2 y 7 va a la parte de la
  *     lección que enseña esos sonidos; «si» no es opción; el duelo ser/estar
  *     de la semana 1 no usa contracciones, posesivos ni presente de otros
@@ -99,7 +103,43 @@ pack.LANGS.forEach(function (code) {
   var c = pack.data("pt", "course.json"), w52 = c.weeks[51], byId = {};
   c.items.forEach(function (it) { byId[it.id] = it; });
   ok(w52.items.every(function (id) { return !byId[id].prova; }), "examen: la semana 52 no entrena los ítems del examen");
+
+  /* Estruturas y Léxico en tres versiones (auditoría 3.0, P8): cada ítem
+     lleva `ver` con el id de una de las versoes, cada versión alcanza para
+     la prueba que arma app.js (20 de Estruturas, 12 de Léxico) con margen,
+     las tres son parejas, ningún ítem se repite entre versiones, cada texto
+     de huecos es de una sola versión y ninguno entra en la semana 52 (ni en
+     sus ítems ni en los extra). */
+  var exam = c.items.filter(function (it) { return it.topic === "esame"; }), vids = E.versoes.map(function (v) { return v.id; });
+  ok(exam.length >= 180, "examen: al menos 180 ítems de Estruturas y Léxico (" + exam.length + ")");
+  ok(exam.every(function (it) { return vids.indexOf(it.ver) >= 0; }), "examen: cada ítem lleva la versión (v1, v2 o v3)");
+  var cuenta = {}, textos = {}, vistos = {};
+  exam.forEach(function (it) {
+    var k = it.ver + ":" + it.prova;
+    cuenta[k] = (cuenta[k] || 0) + 1;
+    if (it.text) (textos[it.text] = textos[it.text] || {})[it.ver] = 1;
+    var firma = normExam(it.stem) + "→" + normExam(it.answer);
+    ok(!vistos[firma], "examen: ítem repetido entre versiones: " + it.id + " = " + vistos[firma]);
+    vistos[firma] = it.id;
+  });
+  ["strutture", "lessico"].forEach(function (p) {
+    var n = vids.map(function (v) { return cuenta[v + ":" + p] || 0; });
+    ok(Math.min.apply(null, n) >= (p === "strutture" ? 30 : 27), "examen: " + p + " alcanza en cada versión: " + n.join(" / "));
+    ok(Math.max.apply(null, n) - Math.min.apply(null, n) <= 3, "examen: " + p + " parejo entre versiones: " + n.join(" / "));
+  });
+  Object.keys(textos).forEach(function (t) { ok(Object.keys(textos[t]).length === 1, "examen: el texto «" + t + "» es de una sola versión"); });
+  vids.forEach(function (v) {
+    ok(exam.some(function (it) { return it.ver === v && it.text; }), "examen " + v + ": tiene un texto de huecos");
+    ["tr", "fp", "rg", "co", "fa"].forEach(function (f) {
+      ok(exam.some(function (it) { return it.ver === v && it.id.indexOf("ex-" + f + "-") === 0; }), "examen " + v + ": tiene ítems ex-" + f);
+    });
+  });
+  var dentro52 = {};
+  (w52.items || []).concat(w52.extra || []).forEach(function (id) { dentro52[id] = 1; });
+  ok(exam.every(function (it) { return !dentro52[it.id]; }), "examen: ningún ítem de Estruturas y Léxico en el entrenamiento de la semana 52");
+  ok(exam.every(function (it) { return it.options ? it.options.indexOf(it.answer) >= 0 : true; }), "examen: la respuesta está entre las opciones");
 })();
+function normExam(s) { return String(s || "").toLowerCase().replace(/\s+/g, " ").trim(); }
 
 /* ------------------------------------------------------- 2. portugués */
 
