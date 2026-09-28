@@ -973,6 +973,7 @@
         (ad ? '<span class="score">' + ad.pct + "%</span>" : "") + "</button>");
     }
     if (window.Radio) wk = wk.concat(Radio.weekButtons(state, week));   // el episodio de la serie Radio (radio.js)
+    if (window.Fuera) wk = wk.concat(Fuera.weekButtons(state, week));   // la ficha de afuera de la semana (fuera.js)
     var B = window.Biblioteca, rec = null;
     if (B && B.loaded && B.loaded() && B.firstOpenWeek(B.index()) <= week) {
       var lm = B.mission(B.index(), { week: week }, state);
@@ -988,6 +989,7 @@
     html += '<div class="card capa-week"><h2>Esta semana <small class="muted">· semana ' + week + "</small></h2>" +
       (wk.length ? '<div class="eps">' + wk.join("") + "</div>" : '<p class="muted">Esta semana no trae lectura nueva: elegí una de abajo.</p>') +
       '<p class="small muted capa-input">⏱️ Input en 7 días: <b>' + inp.read + " min</b> leyendo · <b>" + inp.listen + " min</b> escuchando" +
+        (inp.out ? " · <b>" + inp.out + " min</b> fuera de la app" : "") +
         (lastSpeed ? " · leés a ~" + lastSpeed + " palabras por minuto" : "") + "</p></div>";
     if (C) html += C.entryHtml(true);
 
@@ -1023,6 +1025,7 @@
       '<p class="muted">' + esc(ser.lunga.blurb) + "</p>" + bySeason("lg:lunga", lunghe));
 
     if (window.Radio) html += Radio.leggiFold(state, week, sNames);   // la serie Radio, semanas 6-25 (radio.js)
+    if (window.Fuera) html += Fuera.leggiFold(state, week, sNames);   // material de afuera, semanas 6-52 (fuera.js)
     // Escuchas: las largas del tramo y la re-escucha de lo ya leído
     var asc = "", TD = window.TRAMO_DATA;
     if (TD && (TD.SETTIMANE || []).length) {
@@ -1845,6 +1848,7 @@
     });
     if (window.Tramo) Tramo.missions(w, state).forEach(m);   // tramo C1 (tramo.js): escucha larga y tarea
     if (window.Radio) Radio.missions(w, state).forEach(m);   // la serie Radio de las semanas 6-25 (radio.js)
+    if (window.Fuera) Fuera.missions(w, state).forEach(m);   // fuera de la app, opcional (fuera.js)
     if (window.Lab) {
       Lab.RULES.forEach(function (r, k) {
         if (ponteWeek(r, k) !== w.week) return;
@@ -1969,6 +1973,7 @@
     else if (window.Escritos && Escritos.handles(kind)) Escritos.go(kind, arg);
     else if (window.Tramo && Tramo.handles(kind)) Tramo.go(kind, arg);
     else if (window.Capas && Capas.handles(kind)) Capas.go(kind, arg);
+    else if (window.Fuera && Fuera.handles(kind)) Fuera.go(kind, arg);
   }
 
   function missions(w, st, nChal) {
@@ -4481,6 +4486,7 @@
     else if (window.Inicio && Inicio.owns(s)) html = Inicio.render(s);          // el primer arranque (inicio.js)
     else if (window.Progreso && Progreso.owns(s)) html = Progreso.render(s);    // tu progreso (progreso.js)
     else if (window.Capas && Capas.owns(s)) html = Capas.render(s);   // «Consultar» (js/capas.js)
+    else if (window.Fuera && Fuera.owns(s)) html = Fuera.render(s);   // fuera de la app (fuera.js)
 
     var gb = $("#glossbox");
     if (gb) gb.classList.remove("on");
@@ -4667,6 +4673,7 @@
     if (window.Inicio) Inicio.wire(view.screen);
     if (window.Progreso) Progreso.wire(view.screen);
     if (window.Capas) Capas.wire(view.screen);
+    if (window.Fuera) Fuera.wire(view.screen);
     on("#lesback", function () { view.screen = "briefing"; render(); });
     on("#lesplay", function () {
       var lw = course.weeks[view.week - 1];
@@ -7008,6 +7015,18 @@
     cards: progresoCards
   });
 
+  // Fuera de la app (fuera.js): la ficha de la semana y los minutos de afuera.
+  if (window.Fuera) Fuera.attach({
+    state: function () { return state; }, persist: persist, render: render, go: go, toast: toast, mk: mk,
+    lexicon: scriviLexicon, ui: function () { return UI; },
+    gain: function (n, strand) { gain(n); if (strand && n) Engine.addStrand(state, strand, n); renderHeader(); },
+    recordFindings: function (findings, text) {
+      if (window.Errores && Errores.recordFindings(state, findings, text, {}).length) persist();
+    },
+    show: showScreen,
+    toWeek: function () { view.tab = "percorso"; view.screen = "briefing"; render(); window.scrollTo(0, 0); }
+  });
+
   // La Biblioteca (biblioteca.js): libros enteros, con el lector y el input.
   if (window.Biblioteca) Biblioteca.init({
     state: function () { return state; }, view: function () { return view; }, persist: persist, gain: gain,
@@ -7058,7 +7077,7 @@
       .catch(function () { /* sin frecuencias */ });
   }
   function loadExtrasSoon() {
-    if (window.requestIdleCallback) requestIdleCallback(loadExtras, { timeout: 1500 }); else setTimeout(loadExtras, 300);
+    if (window.requestIdleCallback) window.requestIdleCallback(loadExtras, { timeout: 1500 }); else setTimeout(loadExtras, 300);
   }
 
   // The bank is optional: without it the app still works, just smaller.

@@ -847,3 +847,12 @@ svg.speed-curve path { fill: none; stroke: currentColor; stroke-width: 2; opacit
 svg.speed-curve circle { fill: currentColor; }
 svg.speed-curve line.ax { stroke: currentColor; opacity: .25; }
 svg.speed-curve text { font-size: 9px; fill: currentColor; opacity: .6; }
+
+/* Fuera de la app (fuera.js): la ficha de la semana */
+.fu-card .fu-go { text-align: center; text-decoration: none; margin: 10px 0 4px; }
+.fu-words { list-style: none; padding: 0; margin: 4px 0; columns: 2 14rem; column-gap: 18px; }
+.fu-words li { padding: 3px 0; break-inside: avoid; }
+.fu-q { padding-left: 1.3em; }
+.fu-q li { margin: 8px 0; line-height: 1.45; }
+.fu-q .chip { min-height: 36px; margin-left: 6px; border: 1.5px solid var(--k-line); border-radius: 99px; padding: 4px 12px; background: none; color: inherit; font: inherit; font-size: .875rem; }
+.fu-q .chip.on { border-color: var(--k-acc); background: var(--k-acc); color: #fff; }

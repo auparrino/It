@@ -129,7 +129,8 @@
 
   /* Input minutes this week: the time measured in reading and listening,
      or what the records say was read and heard (listening seconds, pages of
-     the Library, readings and long listenings finished, dictogloss), the
+     the Library, readings and long listenings finished, dictogloss, the
+     minutes logged out of the app), the
      larger of the two.  ctx.words(id): words of a reading. */
   function inputWeek(state, ctx, now) {
     now = now || new Date();
@@ -144,6 +145,8 @@
       if (l && inWeek(l.at)) rec += ctx.words ? Math.max(2, (ctx.words(id) || 200) / 100) : 3;
     });
     Object.keys(state.dictogloss || {}).forEach(function (w) { if (inWeek((state.dictogloss[w] || {}).at)) rec += 6; });
+    var fd = (state.fuera && state.fuera.d) || {};   // the minutes logged out of the app (fuera.js)
+    Object.keys(fd).forEach(function (k) { if (weekKey(parseKey(k)) === wk) rec += (fd[k] || [])[0] || 0; });
     return Math.round(Math.max(measured, rec));
   }
   function inputTarget(level) {

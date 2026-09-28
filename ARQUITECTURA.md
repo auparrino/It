@@ -129,6 +129,33 @@ palabras en la 6 a ~300 en la 25.
   semana, en `npm run test:content`) y `tools/lib/smoke_radio.js` (el
   episodio en Chromium, desde el percorso y desde Leggi).
 
+**Fuera de la app (semanas 6-52).** Una ficha opcional por semana que manda
+a material auténtico de afuera (un video, una radio, una nota, una canción)
+y trae de vuelta los minutos como input.
+- **Datos**: `lang/<código>/fuera_data.js` (`window.FUERA_DATA`), escrito a
+  mano: `FUENTES` {clave: {name, note}} y `FICHAS` [{week, level, kind:
+  escucha|video|lectura|cancion, fuente, title, url, buscar, min, why, how,
+  words [[palabra, glosa]], questions (3), tell}], más `label`, `blurb` y
+  `metaFrom` (14: desde ahí las preguntas van en la lengua meta). Solo
+  enlaces a portadas de programas, secciones o búsquedas, con `buscar` por si
+  se rompen; de las canciones, título y quién canta, nunca la letra.
+- **Código**: `js/fuera.js` tiene la misión opcional «📺 …»
+  (`Fuera.missions`, en `weekPlan`; hecha con minutos anotados), la pantalla
+  `fuera` (`owns`, `render`, `wire`; el enlace se abre en otra pestaña), los
+  toques de 5-30 minutos (`Fuera.log`, 120 por día, 30 de xp; `undo` para el
+  último de hoy) que van a `Progreso.addTime(…, "input")` y a
+  `state.fuera.d`, las tres preguntas que se marcan, y el «contalo» de 40-60
+  palabras con `Scrivi.check` de la semana (`Fuera.review`, xp una vez; los
+  errores al perfil por `recordFindings`). En Leggi / Ler,
+  `Fuera.weekButtons` y `Fuera.leggiFold`. `Capas.inputWeek` (campo `out`) y
+  `Progreso.inputWeek` suman los minutos; en `js/plan.js`, `fuera` es un
+  bloque de input. Guarda en `state.fuera` = {w: {semana: {min, taps, q, t,
+  n, hard, at}}, d: {día: [min, xp]}}.
+- **Tests**: `tools/lib/test_fuera.js` (las 47 fichas, los topes, el input,
+  la misión, el «contalo», la pantalla) y `tools/lib/smoke_fuera.js` (en
+  Chromium: la misión de la 6, +10 min, la pregunta, el corrector y la ficha
+  de la 20 desde Leggi).
+
 **Hoy, el primer arranque y el progreso.** Oggi / Hoje arma el día por minutos.
 - **Plan del día**: `js/plan.js` (`Plan.today(course, state, minutos, ctx)`, sin DOM): 5, 15 o
   30 minutos con lo vencido del repaso (nunca más de la mitad), el paso siguiente de la semana, un

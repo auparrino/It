@@ -53,14 +53,15 @@
   var MISSION_MIN = {
     lez: 4, vocab: 4, play: 4, play2: 7, scrivi: 8, scene: 3, suoni: 4, dictogloss: 8,
     ponte: 3, falsi: 3, capire: 3, "b-forme": 4, "b-tr": 4, "b-gap": 4, duello: 3,
-    parla: 8, debil: 5, storia: 6, "tr-asc": 10, radio: 7, "tr-scr": 25, review: 0, micro: 0,
+    parla: 8, debil: 5, storia: 6, "tr-asc": 10, radio: 7, "tr-scr": 25, review: 0, micro: 0, fuera: 15,
     pausa: 3, biblio: 8, facile: 6, boss: 8, esame: 45
   };
   // Kinds whose time is items answered: the learner's own speed moves them.
   var ITEMS = { vocab: 1, play: 1, play2: 1, scene: 1, suoni: 1, ponte: 1, falsi: 1, capire: 1,
                 "b-forme": 1, "b-tr": 1, "b-gap": 1, duello: 1, debil: 1, pausa: 1, boss: 1 };
-  // Input: reading, listening (the Radio series of weeks 6-25 too).  Output: writing.
-  var INPUT = { ep: 1, "tr-asc": 1, radio: 1, dictogloss: 1, biblio: 1, facile: 1 };
+  // Input: reading, listening (the Radio series of weeks 6-25 too, and the
+  // material out of the app of fuera.js).  Output: writing.
+  var INPUT = { ep: 1, "tr-asc": 1, radio: 1, dictogloss: 1, biblio: 1, facile: 1, fuera: 1 };
   var OUTPUT = { scrivi: 1, "tr-scr": 1, parla: 1, "b-tr": 1 };
   // Words per minute reading a text of the level, a second language (and
   // with the glosses): slow at the start, near native at C1.

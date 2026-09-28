@@ -125,6 +125,27 @@ no aparezcan antes).
   gramática posterior a la semana y como mucho tres palabras desconocidas
   sin glosa.
 
+## 📺 Fora do app: una ficha por semana de la 6 a la 52
+
+La app no puede ser todo el input. Cada semana, desde la 6, trae una ficha
+**opcional** que manda afuera: entrevistas en la calle de *Easy Brazilian
+Portuguese*, una receta de brigadeiro, la Radioagência Nacional, *Caminhos da
+Reportagem*, *Rádio Novelo Apresenta*, un cuento de Machado de Assis, *Roda
+Viva*, el portugués de Portugal en RTP Ensina (semana 46) y alguna canción
+(*Aquarela*, *Garota de Ipanema*, *Trem das Onze*). Cada ficha dice para qué
+sirve y cómo usarla, trae el enlace (se abre en otra pestaña; si se rompe,
+dice qué buscar), 6-8 palabras con su glosa y tres preguntas (en castellano
+hasta la 13, en portugués desde la 14).
+
+- **Anotás los minutos** con un toque (+5, +10, +20, +30): cuentan como
+  input en la meta del día, en el reloj de estudio y en los minutos de input
+  de la semana (120 por día como mucho; el último toque se deshace).
+- **Después, contalo** en 40-60 palabras, con el corrector de la semana y sin
+  consigna obligatoria.
+- En el percorso es la misión **«📺 Fora do app: …»**, opcional; en Ler, todas
+  las fichas. Datos en `docs/lang/pt/fuera_data.js`; test en
+  `tools/lib/test_fuera.js`.
+
 ## Tramo C1: la tarea integrada del Celpe-Bras
 
 El Celpe-Bras no pregunta gramática: da un texto o un audio y pide escribir

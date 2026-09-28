@@ -306,6 +306,27 @@ la 11, *ne* y *ci* en la 21, el congiuntivo en la 24 y la 25).
   `tools/lib/test_radio.js`, el largo, las voces, las preguntas, las formas y
   palabras de la semana y que la transcripción sea el guion.
 
+### 📺 Fuori dalla app: una ficha por semana de la 6 a la 52
+
+La app no puede ser todo el input. Cada semana, desde la 6, trae una ficha
+**opcional** que manda afuera: entrevistas en la calle de *Easy Italian*, una
+receta de GialloZafferano, *Radio3 Scienza*, *Ulisse* de Alberto Angela, *Un
+posto al sole*, Montalbano, un cuento de Verga o de Pirandello, las clases de
+Barbero, y alguna canción (*Nel blu dipinto di blu*, *Azzurro*, *Caruso*).
+Cada ficha dice para qué sirve y cómo usarla, trae el enlace (se abre en otra
+pestaña; si se rompe, dice qué buscar), 6-8 palabras que vas a oír o leer con
+su glosa y tres preguntas para vos (en castellano hasta la 13, en italiano
+desde la 14).
+
+- **Anotás los minutos** con un toque (+5, +10, +20, +30): cuentan como
+  input en la meta del día, en el reloj de estudio y en los minutos de input
+  de la semana (120 por día como mucho; el último toque se puede deshacer).
+- **Después, contalo** en 40-60 palabras, con el corrector de Scrivi de la
+  semana y sin consigna obligatoria.
+- En el percorso es la misión **«📺 Fuori dalla app: …»**, opcional; en Leggi,
+  todas las fichas, plegadas por estación. Datos en
+  `docs/lang/it/fuera_data.js`; test en `tools/lib/test_fuera.js`.
+
 **Inondazioni**: doce textos de 150 a 230 palabras que repiten ocho veces o
 más una estructura que el español no tiene (*ne*, *ci*, *da* + tiempo,
 *mica*, pronombres combinados, congiuntivo, condizionale passato, relativos,

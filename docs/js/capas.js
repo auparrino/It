@@ -117,7 +117,8 @@
 
   /* The minutes of input of the last seven days: listening (karaoke, the
      tramo, «Ascolto facile»: state.ascolto), reading timed in the reader
-     (Letture.speedMinutes) and the library's pages (Biblioteca). */
+     (Letture.speedMinutes), the library's pages (Biblioteca) and the
+     minutes logged out of the app (Fuera, fuera.js). */
   function inputWeek(state, now) {
     state = state || st();
     now = now || Date.now();
@@ -128,7 +129,8 @@
     var listen = Math.round(sec / 60);
     var timed = root.Letture && root.Letture.speedMinutes ? root.Letture.speedMinutes(state, 7, now) : 0;
     var lib = root.Biblioteca && root.Biblioteca.minutes ? root.Biblioteca.minutes(state, 7) : 0;
-    return { listen: listen, read: timed + lib, lib: lib, timed: timed, total: listen + timed + lib };
+    var out = root.Fuera && root.Fuera.minutes ? root.Fuera.minutes(state, 7, new Date(now)) : 0;
+    return { listen: listen, read: timed + lib, lib: lib, timed: timed, out: out, total: listen + timed + lib + out };
   }
 
   /* The curve of the year (Letture.speedCurve) as a small SVG: words per

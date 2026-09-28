@@ -496,6 +496,8 @@ async function smokeEsame(page, code, P, snap, note, errors) {
     await require("./smoke_modulos.js")(page, { code, errors, note, snap });
     // the Radio series (weeks 6-25): the mission, the player, Leggi (tools/lib/smoke_radio.js)
     await require("./smoke_radio.js")(page, { code, errors, note, snap });
+    // out of the app (weeks 6-52): the card, the minutes, Leggi (tools/lib/smoke_fuera.js)
+    await require("./smoke_fuera.js")(page, { code, errors, note, snap });
 
     // the service worker keeps the core and this package
     const sw = await page.evaluate(async (c) => {
