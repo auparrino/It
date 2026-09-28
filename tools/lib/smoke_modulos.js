@@ -17,7 +17,12 @@ module.exports = async function modulos(page, ctx) {
   const P = (n) => code + "-" + n;
   const W = WORDS[code];
   const fail = (m) => errors.push(code + " · módulos: " + m);
-  const tab = async (t) => { await page.click("[data-tab='" + t + "']"); await page.waitForTimeout(350); };
+  // Allena / Leggi left the bar in 3.4: reached from Io → «Todo el material»
+  const tab = async (t) => {
+    if (await page.$("[data-tab='" + t + "']")) await page.click("[data-tab='" + t + "']");
+    else { await page.click("[data-tab='io']"); await page.waitForTimeout(250); await page.click("[data-goto='" + t + "']"); }
+    await page.waitForTimeout(350);
+  };
   const height = () => page.evaluate(() => document.documentElement.scrollHeight);
   const openFold = async (key) => {
     const sel = "details.capa[data-capa='" + key + "']";

@@ -11,7 +11,12 @@
 module.exports = async function fuera(page, ctx) {
   const { code, errors, note, snap } = ctx;
   const fail = (m) => errors.push(code + " · fuera: " + m);
-  const tab = async (t) => { await page.click("[data-tab='" + t + "']"); await page.waitForTimeout(350); };
+  // Allena / Leggi left the bar in 3.4: reached from Io → «Todo el material»
+  const tab = async (t) => {
+    if (await page.$("[data-tab='" + t + "']")) await page.click("[data-tab='" + t + "']");
+    else { await page.click("[data-tab='io']"); await page.waitForTimeout(250); await page.click("[data-goto='" + t + "']"); }
+    await page.waitForTimeout(350);
+  };
   const prev = await page.evaluate(() => window.__test.state().unlocked);
   await page.evaluate(() => { const s = window.__test.state(); s.unlocked = Math.max(s.unlocked, 20); delete s.fuera; });
 

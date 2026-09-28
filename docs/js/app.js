@@ -771,7 +771,7 @@
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION = "c1-vN" in sw.js: test_game
      and the CI check it).  One version for the app and both languages. */
-  var APP_VERSION = "v3.3";
+  var APP_VERSION = "v3.4";
   // Settimana XVII: Roman numerals on the street signs (LANG.ui.romanWeeks).
   function romano(n) {
     var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
@@ -812,7 +812,7 @@
     var week = Math.min(state.unlocked || 1, 52), C = window.Capas;
     var fold = C ? C.fold : function (k, t, m, body) { return "<h2>" + t + "</h2>" + body; };
     var noH2 = function (h) { return String(h || "").replace(/^\s*<h2>[\s\S]*?<\/h2>/, ""); };
-    var html = "<h1>" + UI.train + "</h1>" +
+    var html = '<button class="btn ghost" id="toio">← ' + UI.me + "</button>" + "<h1>" + UI.train + "</h1>" +
       '<p class="lead">Forma y fluidez: bloques listos para hablar, el oído, los errores que más te cuestan. ' +
       "Arriba, lo de esta semana; lo demás, en las secciones.</p>";
 
@@ -957,7 +957,7 @@
       return C ? C.seasons(key, items, week, sNames) : '<div class="eps">' + items.map(function (x) { return x.html; }).join("") + "</div>";
     };
     var count = function (list) { return list.filter(function (ep) { return done[ep.id]; }).length + " / " + list.length; };
-    var html = "<h1>" + UI.read + "</h1>" +
+    var html = '<button class="btn ghost" id="toio">← ' + UI.me + "</button>" + "<h1>" + UI.read + "</h1>" +
       '<p class="lead">Leer y escuchar mucho, entendiendo casi todo, es de lo que más hace crecer una lengua. ' +
       "Tocá las palabras subrayadas para ver qué significan.</p>";
 
@@ -2016,17 +2016,22 @@
     return html;
   }
 
-  /* The week's words: listen to them, then a round that goes from
-     recognising the meaning to writing the word. */
+  /* The week's words, the first thing of the week (3.4), in the same
+     display as its missions: one row per word, 🔊 to hear it, the meaning
+     and the example; ★ once written right at least once.  Below, the round
+     that goes from recognising the meaning to writing the word. */
   function vocabCard(w) {
     if (!w.vocab || !w.vocab.length) return "";
-    var seen = w.vocab.filter(function (v) { return state.cards["v:" + v[0]]; }).length;
-    return '<div class="card"><h2>📚 Palabras de la semana <small class="muted">' + seen + " / " + w.vocab.length + "</small></h2>" +
-      '<ul class="vocab">' + w.vocab.map(function (v) {
-        return '<li><button class="say" data-say="' + esc(v[0]) + '" aria-label="Escuchar">🔊</button> <b>' + esc(v[0]) +
-          "</b> <span>" + esc(v[1]) + "</span>" + (window.Referencia ? " " + Referencia.button(v[0]) : "") +
-          (v[2] ? '<small><i>' + esc(v[2]) + "</i></small>" : "") + "</li>";
-      }).join("") + "</ul>" +
+    var prod = w.vocab.filter(function (v) { return (state.cards["v:" + v[0]] || {}).prod; }).length;
+    return '<div class="card wwords"><h2>📚 Palabras de la semana <small class="muted">' + prod + " / " + w.vocab.length + " escritas</small></h2>" +
+      '<div class="missions">' + w.vocab.map(function (v) {
+        var c = state.cards["v:" + v[0]], ok = !!(c && c.prod);
+        return '<div class="mission word' + (ok ? " done" : "") + '">' +
+          '<button class="mi say" data-say="' + esc(v[0]) + '" aria-label="Escuchar ' + esc(v[0]) + '">' + (ok ? "★" : "🔊") + "</button>" +
+          '<span><b lang="' + LG.tts + '">' + esc(v[0]) + "</b><small>" + esc(v[1]) +
+            (v[2] ? ' · <i lang="' + LG.tts + '">' + esc(v[2]) + "</i>" : "") + "</small></span>" +
+          (window.Referencia ? Referencia.button(v[0]) : "") + "</div>";
+      }).join("") + "</div>" +
       '<div class="row" style="margin-top:10px"><button class="btn" id="vocab">Practicar las palabras</button></div></div>';
   }
 
@@ -2071,7 +2076,7 @@
     if (window.TresLenguas) groups.push(["Las tres lenguas", [btn('data-tres="menu"', "🔀", "Tres lenguas", "Las tres lenguas que manejás: dónde se parecen y dónde te traicionan.")]]);
     if (!groups.length) return "";
     return '<div class="card wextras"><h2>🧰 Para practicar más</h2>' +
-      '<p class="muted small">Opcional: no hace falta para abrir la semana siguiente. Es lo mismo que está en ' + esc(UI.train) + " y " + esc(UI.read) + ".</p>" +
+      '<p class="muted small">Opcional: no hace falta para abrir la semana siguiente. Todo junto, de todas las semanas, está en ' + esc(UI.me) + " → Todo el material.</p>" +
       groups.map(function (g) { return "<h3>" + g[0] + '</h3><div class="labs">' + g[1].join("") + "</div>"; }).join("") + "</div>";
   }
 
@@ -2095,9 +2100,9 @@
       '<p class="lead">' + esc(w.focus) + '</p>' +
       (w.fare ? '<p class="fare">🎯 Al final de la semana: <b>' + esc(w.fare) + '</b>' +
         (w.tema ? ' <span class="muted">· ' + esc(w.tema) + '</span>' : '') + '</p>' : '') +
+      vocabCard(w) +
       missions(w, st, nChal) +
       weekExtrasHtml(w) +
-      vocabCard(w) +
       '<div class="card"><h2>Lo que se juega esta semana</h2>' +
         '<ul class="keys">' +
           w.keys.map(function (k) { return "<li>" + esc(k) + "</li>"; }).join("") +
@@ -4142,6 +4147,23 @@
 
   /* ------------------------------------------------------------------- eu */
 
+  /* «Todo el material» (3.4): Allena and Leggi left the bar (their things
+     live in each week of the percorso), but the whole library stays one
+     tap away: every reading and listening, the Library, your stories, the
+     reading speed, all the practice, and «Consultar». */
+  function allMaterialCard() {
+    var all = UI.allTabs || [["frasi", "🚣", UI.train], ["leggi", "📖", UI.read]];
+    var desc = { frasi: "la práctica de todas las semanas: frases, Laboratorio, duelos, Banco, escritura guiada, Tres lenguas",
+                 leggi: "todas las lecturas y escuchas, la Biblioteca, tus cuentos y tu velocidad de lectura" };
+    return '<div class="card allmat"><h2>📦 Todo el material</h2>' +
+      '<p class="muted small">Lo de cada semana está en la página de esa semana. Acá, todo junto:</p>' +
+      '<div class="labs">' + all.map(function (t) {
+        return '<button class="lab" data-goto="' + t[0] + '"><span class="e">' + t[1] + "</span><b>" + esc(t[2]) + '</b><span class="muted">' + desc[t[0]] + "</span></button>";
+      }).join("") +
+      (window.Capas ? '<button class="lab" data-goto="consultar"><span class="e">🔎</span><b>Consultar</b><span class="muted">diccionario, «Mi gramática» y cómo se usa una palabra</span></button>' : "") +
+      "</div></div>";
+  }
+
   function renderIo() {
     var lv = Engine.levelFor(state.xp);
     var phrasesKnown = Object.keys(state.cards).filter(function (k) {
@@ -4158,6 +4180,7 @@
         (nextRank ? " · próximo rango: <b>" + esc(nextRank[1]) + "</b> en el nivel " +
           nextRank[0] : "") + "</div></div>" +
       (window.Progreso ? Progreso.summaryCard() : "") +
+      allMaterialCard() +
       switchCard() +
 
       '<div class="card"><h2>Ajustes</h2>' +
@@ -4180,7 +4203,7 @@
           }).join("") + "</select></label>" +
         '<label class="set"><span>Modo oficina 🤫<small>nada suena solo; el 🔊 sigue andando si lo tocás</small></span>' +
           '<input type="checkbox" id="silent"' + (state.silent ? " checked" : "") + "></label>" +
-        '<label class="set"><span>Recordatorio diario<small>se agrega a tu calendario y abre tu plan de hoy</small></span>' +
+        '<label class="set"><span>Recordatorio diario<small>se agrega a tu calendario y abre tu semana</small></span>' +
           '<span class="row"><input type="time" id="remtime" value="' +
             esc(state.remind || "13:30") + '"><button class="btn ghost" id="remind">📅 Agregar</button></span></label>' +
       "</div>" +
@@ -4786,9 +4809,18 @@
     document.querySelectorAll("[data-scene]").forEach(function (b) {
       b.onclick = function () { startRound("scene", b.dataset.scene); };
     });
+    // «Todo el material» in Io: the screens that left the bar (3.4)
+    document.querySelectorAll("[data-goto]").forEach(function (b) {
+      b.onclick = function () {
+        var to = b.dataset.goto;
+        if (to === "consultar" && window.Capas && Capas.open) { Capas.open(); return; }
+        go(to);
+      };
+    });
 
     on("#back", function () { go("percorso"); });
     on("#toggi", function () { go("oggi"); });
+    on("#toio", function () { go("io"); });
     on("#ubicgo", function () { startUbicacion(); });
     on("#ubicno", function () { state.ubicacion = { at: Date.now(), no: true }; persist(); render(); });
     if (window.TresLenguas) TresLenguas.wire(app(), {

@@ -425,7 +425,7 @@ ok(Drills.dueCount(course, state) >= 30, "las fichas vencidas vuelven a la cola"
   (core.match(/\bLG\.[a-zA-Z0-9]+/g) || []).forEach(function (k) { need[k.slice(3)] = k.slice(3) in L ? true : undefined; });
   var missing = Object.keys(need).filter(function (k) { return need[k] === undefined; });
   ok(!missing.length, "LANG (lang/pt/lang.js) trae todo lo que usa app.js; faltan: " + missing.join(", "));
-  ok(L.ui.tabs.length === 5 && L.ui.tabs[0][2] === "Hoje" && L.ui.tabs[4][2] === "Eu", "las pestañas: Hoje … Eu");
+  ok(L.ui.tabs.length === 3 && L.ui.tabs[0][2] === "Hoje" && L.ui.tabs[2][2] === "Eu" && L.ui.allTabs.length === 2, "las pestañas (3.4): Hoje, Trilha, Eu; Treino y Ler desde Eu");
   ok(L.spanish.sure.test("¿Qué tal?") && L.spanish.notEs.test("Não sei") && !L.spanish.sure.test("Tudo bem?"), "español o portugués: ñ ¿ ¡ -ción / ã õ ç -ção");
   ok(L.glue("-se") === "prev" && L.glue("se") === null, "hueco con guion: chama-se se pega a la palabra de antes");
   ok(L.rules.persons.skip.indexOf(4) >= 0, "vós no se marca en las lecciones (LANG.rules.persons.skip)");
