@@ -570,11 +570,11 @@ LESSONS = {
          ["Vive in un quartiere *multi*etnico.", "Vive en un barrio multiétnico."],
          ["Ho preso il *tele*comando.", "Agarré el control remoto."]],
   "table": {"head": ["Prefissoide", "Sentido", "Ejemplos"],
-            "rows": [["auto-", "de uno mismo", "autostima, autoscuola"],
+            "rows": [["auto-", "de uno mismo", "autostima, autocritica"],
                      ["tele-", "a distancia", "telelavoro, telecomando"],
                      ["micro- / macro-", "muy pequeño / muy grande", "microonde, macroeconomia"],
                      ["multi- / poli-", "muchos", "multietnico, polifunzionale"],
-                     ["eco-", "ambiente, economía", "ecosistema, ecoturismo"]]},
+                     ["eco-", "ambiente", "ecosistema, ecoturismo"]]},
   "tip": "No alteran una palabra como *-ino*: **crean** una nueva. Ojo: *il "
          "telecomando* es el control remoto."},
 ]},
