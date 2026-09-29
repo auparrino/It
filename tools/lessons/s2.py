@@ -464,13 +464,13 @@ LESSONS = {
                      ["pagare", "pagherebbe, pagherebbero", "g + h ante e"],
                      ["mangiare", "mangeresti, mangeremmo", "cae la i"],
                      ["cominciare", "comincerei", "cae la i"],
-                     ["studiare", "studieremmo", "la i es tónica: se queda"]]},
+                     ["studiare", "studieremmo", "no es -ciare/-giare: la i se queda"]]},
   "ex": [["Io *pagherei* volentieri.", "Yo pagaría con gusto."],
          ["Loro *cercherebbero* un albergo.", "Ellos buscarían un hotel."],
          ["Tu *mangeresti* qualcosa?", "¿Comerías algo?"],
          ["Noi *studieremmo* di più.", "Estudiaríamos más."]],
   "warn": "Igual que en el futuro (*pagherò*, *cercherò*): si sabés uno, "
-          "sabés el otro. Escribir *pagarebbe* es el error más común."},
+          "sabés el otro. Escribir *pagarebbe* (sin h) es un error frecuente."},
 
  {"h": "Raíces irregulares",
   "r": "Las raíces son las **mismas del futuro**, así que se aprenden una vez: "
@@ -691,7 +691,7 @@ LESSONS = {
          ["Non *dirmelo*!", "¡No me lo digas!"],
          ["Non *me lo* dire!", "¡No me lo digas!"]],
   "warn": "Con **tú** afirmativo van pegados (*dammelo*); con **Lei**, no: "
-          "*me lo dia*, nunca *diamelo*."},
+          "*me lo dica*, nunca *dicamelo*."},
 
  {"h": "Tres tropiezos típicos",
   "r": "Los errores del hispanohablante son tres: *mi lo* (correcto *me lo*), "
@@ -949,7 +949,7 @@ LESSONS = {
          ["*Non dico che sia* stanco.", "No digo que esté cansado."],
          ["*Non penso che* tu *abbia* torto.", "No creo que te equivoques."],
          ["Non so se *viene*.", "No sé si viene."]],
-  "warn": "*non so se* no lleva congiuntivo en el uso corriente: *se* no es "
+  "warn": "*non so se* suele llevar indicativo: *se* no es "
           "*che*. Y *non sono sicuro che* va con congiuntivo."},
 
  {"h": "Relativas y superlativos",
