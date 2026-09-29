@@ -681,10 +681,12 @@ LESSONS = {
          "diferencia grande con el castellano: el italiano casi nunca "
          "diptonga.",
 "parts": [
- {"h": "Los pilares, los modales y seis irregulares más", "blocks": [0, 1, 2],
-  "match": r"andare, d|de fare|modales|infinitivo|pregunta y la respuesta|de avere"},
+ {"h": "Los pilares, los modales y siete irregulares más", "blocks": [0, 1, 2, 6],
+  "match": r"andare, d|de fare|modales|infinitivo|pregunta y la respuesta|de avere|tenere|salire",
+  "ids": ["mj-06-14"]},
  {"h": "No diptonga, essere o stare, stare + gerundio", "blocks": [3, 4, 5],
-  "match": r"stare|gerundio|essere|diptong"},
+  "match": r"stare|gerundio|essere|diptong",
+  "ids": ["mj-06-%02d" % n for n in range(1, 14)]},
 ],
 "blocks": [
  {"h": "Los cuatro pilares",
@@ -768,6 +770,23 @@ LESSONS = {
           "esco*.",
   "more": ["Los irregulares salen de la raíz larga: *fare → facendo*, *dire "
            "→ dicendo*, *bere → bevendo*."]},
+
+ {"h": "tenere y salire",
+  "r": "*tenere* (sostener, guardar) y *salire* (subir) también meten la **g** "
+       "en *io* y *loro*: *tengo / tengono*, *salgo / salgono*.",
+  "table": {"head": ["", "tenere", "salire"],
+            "rows": [["io", "tengo", "salgo"],
+                     ["tu", "tieni", "sali"],
+                     ["lui/lei", "tiene", "sale"],
+                     ["noi", "teniamo", "saliamo"],
+                     ["voi", "tenete", "salite"],
+                     ["loro", "tengono", "salgono"]]},
+  "ex": [["*Tengo* il telefono in tasca.", "Llevo el teléfono en el bolsillo."],
+         ["Lei *tiene* la porta aperta.", "Ella deja la puerta abierta."],
+         ["*Salgo* al terzo piano.", "Subo al tercer piso."],
+         ["I prezzi *salgono*.", "Los precios suben."]],
+  "warn": "*tenere* no es «tener» de posesión: eso es *avere* (*ho fame*, *ho "
+          "due figli*). *tenere* es sostener, mantener o guardar."},
 ]},
 
 7: {
@@ -912,10 +931,12 @@ LESSONS = {
          "rápido. Unos pocos patrones cubren la mayoría de los casos y "
          "evitan los errores más visibles.",
 "parts": [
- {"h": "Las simples: a o in (y da para ir a lo de alguien)", "blocks": [0, 1],
-  "match": r"Vado|Ci vediamo|a o in|a, in, da|\(a, in, da, di\)|a o di|in con el verbo"},
- {"h": "da: origen, agente, «desde hace»", "blocks": [2, 3],
-  "match": r"Completá con da|desde|Desde cuándo|presente \+ da|da \+|hace .* que|da quanto|\bda\b"},
+ {"h": "Las simples: a o in (y da para ir a lo de alguien)", "blocks": [0, 1, 5, 6],
+  "match": r"Vado|Ci vediamo|a o in|a, in, da|\(a, in, da, di\)|a o di|in con el verbo",
+  "ids": ["mj-09-%02d" % n for n in range(1, 11)]},
+ {"h": "da: origen, agente, «desde hace»", "blocks": [2, 3, 7],
+  "match": r"Completá con da|desde|Desde cuándo|presente \+ da|da \+|hace .* que|da quanto|\bda\b",
+  "ids": ["mj-09-%02d" % n for n in range(11, 15)]},
  {"h": "Verbos con su preposición", "blocks": [4],
   "match": r"verbo|expresión|su, in, per"},
 ],
@@ -927,7 +948,7 @@ LESSONS = {
             "rows": [["di", "posesión, materia, origen, cantidad", "il libro di Marco; sono di Roma"],
                      ["a", "destino a ciudad, hora, complemento indirecto", "vado a Roma; alle otto; scrivo a Luca"],
                      ["da", "origen, casa de alguien, agente, finalidad, duración", "vengo da Milano; vado da Anna"],
-                     ["in", "lugar cerrado, países, medios de transporte", "in Italia; in banca; in treno"],
+                     ["in", "lugares (in banca), países, medios de transporte", "in Italia; in banca; in treno"],
                      ["con", "compañía, instrumento", "esco con Anna"],
                      ["su", "sobre, acerca de", "sul tavolo; un libro su Dante"],
                      ["per", "finalidad, destino, duración", "parto per Roma; per due ore"],
@@ -964,11 +985,11 @@ LESSONS = {
          ["Stasera ceno *da* Anna.", "Esta noche ceno en lo de Ana."],
          ["gli occhiali *da* sole", "los anteojos de sol"]],
   "warn": "A lo de una persona se va con *da*, no con *a*: *vado da Marco*, "
-          "*vado dal dentista*. «Vado al medico» suena a extranjero."},
+          "*vado dal dentista*. «Vado al medico» se entiende, pero es calco del castellano."},
 
  {"h": "Presente + da: lo que sigue pasando",
   "r": "Para algo que empezó antes y **sigue**: **presente + da** + tiempo. "
-       "Nunca pasado.",
+       "En presente, no en pasado.",
   "ex": [["*Abito* qui *da* cinque anni.", "Vivo acá desde hace cinco años."],
          ["Ti *aspetto da* un'ora!", "¡Hace una hora que te espero!"],
          ["*Studio* italiano *da* due anni.", "Estudio italiano desde hace dos años."]],
@@ -989,6 +1010,55 @@ LESSONS = {
            "in* (entrar a), *cominciare a* (empezar a), *sognare di* + "
            "infinitivo (soñar con hacer algo), *innamorarsi di* (enamorarse "
            "de), *sposarsi con* (casarse con)."]},
+
+ {"h": "Medios de transporte: in, a piedi, con",
+  "r": "El medio en general va con **in**, sin artículo: *in treno*. Andando: "
+       "**a piedi**. Con un medio concreto, *con* + artículo.",
+  "table": {"head": ["Medio", "Se dice", "Ejemplo"],
+            "rows": [["tren", "in treno", "Vado a Roma in treno."],
+                     ["colectivo", "in autobus", "Vengo in autobus."],
+                     ["auto", "in macchina", "Andiamo in macchina."],
+                     ["avión", "in aereo", "Parto in aereo."],
+                     ["bici, moto", "in bici, in moto", "Vai in bici?"],
+                     ["a pie", "a piedi", "Vado a scuola a piedi."],
+                     ["uno en concreto", "con il treno delle otto", "Vengo con il treno delle otto."]]},
+  "ex": [["Vado al lavoro *in* autobus.", "Voy al trabajo en colectivo."],
+         ["Torniamo *a piedi*.", "Volvemos a pie."],
+         ["Arrivo *con il* treno delle nove.", "Llego en el tren de las nueve."]],
+  "warn": "Sin artículo y sin «en el»: *in treno*, nunca «nel treno» para el "
+          "trayecto. Y «a pie» es *a piedi*; *in piedi* significa «de pie».",
+  "tip": "*con l'autobus* o *con il treno* también se oyen para el medio en "
+         "general: *in* es la forma neutra."},
+
+ {"h": "Repaso: al, nel, dal, sul con lugares",
+  "r": "En la semana 3 viste que **a, da, in, su** + artículo se funden. Con "
+       "lugares las vas a usar siempre.",
+  "table": {"head": ["", "il", "lo", "la", "l'", "i", "gli", "le"],
+            "rows": [["a", "al", "allo", "alla", "all'", "ai", "agli", "alle"],
+                     ["da", "dal", "dallo", "dalla", "dall'", "dai", "dagli", "dalle"],
+                     ["in", "nel", "nello", "nella", "nell'", "nei", "negli", "nelle"],
+                     ["su", "sul", "sullo", "sulla", "sull'", "sui", "sugli", "sulle"]]},
+  "ex": [["Vado *al* mare.", "Voy a la playa."],
+         ["Il treno parte *dalla* stazione.", "El tren sale de la estación."],
+         ["Abito *nel* centro di Torino.", "Vivo en el centro de Turín."],
+         ["Vengo *dall'*aeroporto.", "Vengo del aeropuerto."]],
+  "warn": "*con, per, tra / fra* no se funden: *con il treno*, *per il centro*. "
+          "Sin artículo la preposición queda sola: *in banca*, pero *nella "
+          "banca di via Roma*."},
+
+ {"h": "Tiempo: per, da, tra",
+  "r": "Tres relojes distintos: **per** = duración con final; **da** = desde "
+       "hace, y sigue; **tra / fra** = dentro de.",
+  "table": {"head": ["Prep.", "Sentido", "Ejemplo"],
+            "rows": [["per", "dura un tiempo", "Resto qui per tre giorni."],
+                     ["da", "empezó y sigue", "Abito qui da tre anni."],
+                     ["tra / fra", "a partir de ahora", "Parto tra tre giorni."]]},
+  "ex": [["Resto a Roma *per* una settimana.", "Me quedo en Roma una semana."],
+         ["*Da* quanto tempo studi italiano?", "¿Desde hace cuánto estudiás italiano?"],
+         ["*Da* quando lavori qui?", "¿Desde cuándo trabajás acá?"],
+         ["Il film comincia *tra* dieci minuti.", "La película empieza dentro de diez minutos."]],
+  "warn": "*da quanto tempo* pide una duración (*da due anni*); *da quando*, un "
+          "momento (*da marzo*). «Hace dos años» en pasado es *due anni fa*."},
 ]},
 
 10: {
