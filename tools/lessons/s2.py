@@ -456,6 +456,54 @@ LESSONS = {
   "warn": "*noi* lleva **dos emes**: *parleremmo* (hablaríamos). Con una "
           "sola, *parleremo*, es futuro (vamos a hablar)."},
 
+ {"h": "Ortografía: cher-, gher-, mangi-",
+  "r": "Los verbos en *-care* y *-gare* llevan una **h**: *cercherebbe*, "
+       "*pagherei*. En *-ciare* y *-giare* cae la *i*.",
+  "table": {"head": ["Infinitivo", "Condizionale", "Qué pasa"],
+            "rows": [["cercare", "cercherei, cercheresti", "c + h ante e"],
+                     ["pagare", "pagherebbe, pagherebbero", "g + h ante e"],
+                     ["mangiare", "mangeresti, mangeremmo", "cae la i"],
+                     ["cominciare", "comincerei", "cae la i"],
+                     ["studiare", "studieremmo", "la i es tónica: se queda"]]},
+  "ex": [["Io *pagherei* volentieri.", "Yo pagaría con gusto."],
+         ["Loro *cercherebbero* un albergo.", "Ellos buscarían un hotel."],
+         ["Tu *mangeresti* qualcosa?", "¿Comerías algo?"],
+         ["Noi *studieremmo* di più.", "Estudiaríamos más."]],
+  "warn": "Igual que en el futuro (*pagherò*, *cercherò*): si sabés uno, "
+          "sabés el otro. Escribir *pagarebbe* es el error más común."},
+
+ {"h": "Raíces irregulares",
+  "r": "Las raíces son las **mismas del futuro**, así que se aprenden una vez: "
+       "*andr-*, *dovr-*, *potr-*, *sapr-*, *vedr-*, *vivr-*, *verr-*, *berr-*.",
+  "table": {"head": ["Infinitivo", "Futuro (io)", "Condizionale (io)"],
+            "rows": [["andare", "andrò", "andrei"],
+                     ["dovere", "dovrò", "dovrei"],
+                     ["potere", "potrò", "potrei"],
+                     ["sapere", "saprò", "saprei"],
+                     ["venire", "verrò", "verrei"],
+                     ["bere", "berrò", "berrei"],
+                     ["dare / fare / stare", "darò / farò / starò", "darei / farei / starei"]]},
+  "ex": [["*Dovresti* riposare.", "Deberías descansar."],
+         ["*Verrei* volentieri.", "Vendría con gusto."],
+         ["*Potrebbe* aiutarmi?", "¿Podría ayudarme?"],
+         ["*Andremmo* al mare.", "Iríamos al mar."]],
+  "warn": "Con *venire*, *volere* y *bere* la *rr* es doble: *verrei*, "
+          "*vorrei*, *berrei*. Y con *noi*, la *mm*: *verremmo*, *vorremmo*."},
+
+ {"h": "Pedir con registro: tú, Lei, voi",
+  "r": "El condizionale cambia según a quién le hablás: *Potresti* (tú), "
+       "*Potrebbe* (Lei), *Potreste* (voi).",
+  "ex": [["*Potresti* aiutarmi, Marco?", "¿Podrías ayudarme, Marco?"],
+         ["Scusi, *potrebbe* ripetere?", "Disculpe, ¿podría repetir?"],
+         ["Ragazzi, *potreste* aspettare?", "Chicos, ¿podrían esperar?"],
+         ["*Avrei bisogno di* un consiglio.", "Necesitaría un consejo."],
+         ["Le *dispiacerebbe* chiudere la porta?", "¿Le molestaría cerrar la puerta?"]],
+  "warn": "Con Lei el verbo va en tercera persona: *potrebbe*, no *potresti*. "
+          "Y en un bar o una oficina, *vorrei* (no *voglio*) y *avrei "
+          "bisogno di* suenan naturales y corteses.",
+  "tip": "Para el español «quisiera / querría / me gustaría» el italiano usa "
+         "una sola forma: *vorrei* (o *mi piacerebbe* + infinitivo)."},
+
  {"h": "Cortesía, deseo y consejo",
   "r": "Para pedir, desear o aconsejar sin imponer: *vorrei*, *potresti*, "
        "*mi piacerebbe*, *dovresti*.",
@@ -482,7 +530,8 @@ LESSONS = {
   "ex": [["Se *avessi* tempo, *verrei*.", "Si tuviera tiempo, vendría."],
          ["Se *potessi*, ti *aiuterei*.", "Si pudiera, te ayudaría."]],
   "warn": "En el italiano hablado regional se oye «se avrei»: no lo imites. "
-          "Es como decir «si tendría» en castellano.",
+          "Es como decir «si tendría». *avessi* y *potessi* son otro "
+          "tiempo (congiuntivo): por ahora, tomalos como fórmula.",
   "tip": "La estructura completa llega en la semana 33: por ahora, "
          "reconocela."},
 ]},
@@ -611,8 +660,8 @@ LESSONS = {
           "participio te dice si era «lo» o «la»: *me l'ha dato / data*."},
 
  {"h": "Con infinitivo e imperativo, pegados",
-  "r": "Con infinitivo e imperativo van **pegados al final**, como en "
-       "castellano: *dirtelo*, *dammelo*.",
+  "r": "Con infinitivo e imperativo **afirmativo** (tú, noi, voi) van "
+       "**pegados al final**, como en castellano: *dirtelo*, *dammelo*.",
   "ex": [["Voglio *dirtelo*.", "Quiero decírtelo."],
          ["Puoi *portarmelo*?", "¿Me lo podés traer?"],
          ["*Dammelo*!", "¡Dámelo!"],
@@ -622,6 +671,36 @@ LESSONS = {
           "*dammelo*, *fammelo*. Con *gli*, no: *diglielo*.",
   "tip": "Con los modales valen las dos: *te lo voglio dire* = *voglio "
          "dirtelo*. Elegí una y usala siempre hasta que salga sola."},
+ {"h": "«ne» en los combinados",
+  "r": "*ne* (de eso, de ellos) va **último** y el indirecto cambia como "
+       "siempre: *me ne*, *te ne*, *ce ne*, *gliene*.",
+  "ex": [["Vuoi delle olive? *Te ne* do un po'.", "¿Querés aceitunas? Te doy unas pocas."],
+         ["Ad Anna *gliene* parlo io.", "De eso le hablo yo a Ana."],
+         ["Di mele, *ce ne* hanno date tre.", "De manzanas, nos dieron tres."],
+         ["*Me ne* porti due?", "¿Me traés dos?"]],
+  "warn": "Con *ne* que indica cantidad, el participio concuerda con lo "
+          "contado: *ne ho comprati tre* (libri), *ne ho comprate tre* "
+          "(mele). *gliene* no cambia nunca.",
+  "tip": "*ce ne* también puede ser lugar + *ne*: *ce ne sono due* = hay dos."},
+
+ {"h": "Imperativo formal y negativo",
+  "r": "Con **Lei** los pronombres van **delante**: *me lo dica*. Con *non* "
+       "+ infinitivo valen las dos posiciones.",
+  "ex": [["Signora, *me la* mostri, per favore.", "Señora, muéstremela, por favor."],
+         ["Signora, *me la* porti pure.", "Señora, tráigamela nomás."],
+         ["Non *dirmelo*!", "¡No me lo digas!"],
+         ["Non *me lo* dire!", "¡No me lo digas!"]],
+  "warn": "Con **tú** afirmativo van pegados (*dammelo*); con **Lei**, no: "
+          "*me lo dia*, nunca *diamelo*."},
+
+ {"h": "Tres tropiezos típicos",
+  "r": "Los errores del hispanohablante son tres: *mi lo* (correcto *me lo*), "
+       "*gli lo* (*glielo*) y *glie lo* separado (*glielo*).",
+  "ex": [["Me lo dici? (no «*mi lo*»)", "¿Me lo decís?"],
+         ["*Glielo* dico io. (no «*gli lo*»)", "Se lo digo yo."],
+         ["*Gliele* ho date. (no «*glie le*»)", "Se las di."]],
+  "warn": "Y no calques *se lo* de «se lo doy»: para él o ella es *glielo*. "
+          "*se lo* en italiano es un reflexivo (*se lo mette*)."},
 ]},
 
 23: {
@@ -802,7 +881,7 @@ LESSONS = {
        "**distintos**.",
   "table": {"head": ["Categoría", "Verbos", "Ejemplo"],
             "rows": [["opinión", "credere, pensare, ritenere, immaginare", "Credo che sia tardi."],
-                     ["duda", "dubitare, non sapere se", "Dubito che venga."],
+                     ["duda", "dubitare, non essere sicuro che", "Dubito che venga."],
                      ["deseo/voluntad", "volere, desiderare, preferire, sperare", "Voglio che tu venga."],
                      ["emoción", "essere contento, temere, avere paura", "Sono contento che tu stia bene."],
                      ["espera", "aspettare che", "Aspetto che finisca."],
@@ -819,8 +898,9 @@ LESSONS = {
          ["Penso che *sia* una buona idea.", "Pienso que es una buena idea."],
          ["Mi sembra che *sia* in ritardo.", "Me parece que está atrasado."],
          ["Immagino che tu *sia* stanco.", "Imagino que estás cansado."]],
-  "warn": "Es el error que más rápido delata a un hispanohablante. La buena "
-          "noticia: la regla es muy estable y se corrige rápido."},
+  "warn": "En el italiano hablado se oye también *credo che è*; para "
+          "escribir y en un examen, se espera el congiuntivo.",
+  "tip": "*sperare* admite futuro: *spero che verrà* es correcto."},
 
  {"h": "Cuándo NO va congiuntivo",
   "r": "Si el principal presenta **un hecho** (*so che*, *è vero che*, *vedo "
@@ -835,15 +915,52 @@ LESSONS = {
            "*è chiaro che*, *dico che*, *sono sicuro che*."]},
 
  {"h": "Mismo sujeto: infinitivo",
-  "r": "Si el sujeto es **el mismo**, nada de *che*: *di* + infinitivo. Como "
-       "en castellano: «creo tener razón».",
-  "ex": [["Credo *di avere* ragione.", "Creo tener razón."],
+  "r": "Si el sujeto es **el mismo**, nada de *che*: *di* + infinitivo. "
+       "Castellano: «creo que tengo»; italiano: *credo di avere*.",
+  "ex": [["Credo *di avere* ragione.", "Creo que tengo razón. (mismo sujeto)"],
          ["Spero *di arrivare* in tempo.", "Espero llegar a tiempo."],
          ["Voglio *partire* domani.", "Quiero irme mañana. (sin di)"],
          ["Voglio che tu *parta* domani.", "Quiero que te vayas mañana."]],
   "warn": "*volere*, *potere*, *dovere*, *preferire*, *desiderare* van con "
           "infinitivo **sin** *di*: *voglio partire*. *sperare*, *credere*, "
           "*pensare* piden *di*: *spero di partire*."},
+ {"h": "Conjunciones con congiuntivo",
+  "r": "Algunas conjunciones piden **siempre** congiuntivo: *benché*, "
+       "*sebbene*, *affinché*, *purché*, *prima che*, *senza che*, *a meno che*.",
+  "table": {"head": ["Conjunción", "Significa", "Ejemplo"],
+            "rows": [["benché / sebbene", "aunque", "Esco, benché piova."],
+                     ["affinché", "para que", "Te lo dico affinché tu capisca."],
+                     ["purché", "con tal de que", "Vengo purché ci sia posto."],
+                     ["prima che", "antes de que", "Parto prima che sia buio."],
+                     ["senza che", "sin que", "Esce senza che nessuno lo veda."],
+                     ["a meno che (non)", "a menos que", "Vengo, a meno che non piova."]]},
+  "ex": [["*Benché sia* stanco, lavora.", "Aunque está cansado, trabaja."],
+         ["Te lo ripeto *affinché tu capisca*.", "Te lo repito para que entiendas."],
+         ["Ti presto l'auto *purché tu la usi* con cura.", "Te presto el auto con tal de que lo uses con cuidado."],
+         ["Chiamami *prima che sia* tardi.", "Llamame antes de que sea tarde."]],
+  "warn": "*anche se* va con **indicativo**: *anche se è stanco, lavora*. "
+          "Con el mismo sujeto y *prima*, *senza*: infinitivo (*prima di "
+          "partire*, *senza dire nulla*)."},
+
+ {"h": "Negar un verbo declarativo",
+  "r": "*dire*, *sapere*, *vedere* dan un hecho (indicativo); en **negativo** "
+       "o con duda pasan a congiuntivo: *non dico che sia*.",
+  "ex": [["Dico che *è* stanco.", "Digo que está cansado."],
+         ["*Non dico che sia* stanco.", "No digo que esté cansado."],
+         ["*Non penso che* tu *abbia* torto.", "No creo que te equivoques."],
+         ["Non so se *viene*.", "No sé si viene."]],
+  "warn": "*non so se* no lleva congiuntivo en el uso corriente: *se* no es "
+          "*che*. Y *non sono sicuro che* va con congiuntivo."},
+
+ {"h": "Relativas y superlativos",
+  "r": "Con un antecedente **buscado o indefinido**, o tras un superlativo, la "
+       "relativa lleva congiuntivo: *cerco un posto che sia tranquillo*.",
+  "ex": [["Cerco un ristorante che *serva* cucina vegana.", "Busco un restaurante que sirva cocina vegana."],
+         ["Conosco un ristorante che *serve* cucina vegana.", "Conozco un restaurante que sirve cocina vegana."],
+         ["È la persona più simpatica che *io conosca*.", "Es la persona más simpática que conozco."],
+         ["Chiunque *venga* è benvenuto.", "Quien venga es bienvenido."]],
+  "tip": "Si el antecedente **existe y lo conocés**, indicativo. Si lo "
+         "**buscás o no sabés si existe**, congiuntivo."},
 ]},
 
 26: {
