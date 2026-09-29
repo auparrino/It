@@ -983,6 +983,100 @@
 
   function paragraphs(ep) { return ep.text.split(/\n+/); }
 
+  /* Who says what, so a dialogue is read with two voices (or more): the
+     narration is speaker 0, each character who talks between «» gets a
+     number of their own.  Returns, for each paragraph, its pieces
+     [{ text, start, who }] (start: where the piece begins in the paragraph).
+     Who is speaking comes from the words around the quote: «…» chiede
+     Giulia / Giulia ride: «…» / Martín mangia. «…»; with no name, the other
+     one of the conversation answers, and «…» dice. «…» is the same person
+     going on.  A short quote inside a sentence («pena» invece di «penna»)
+     is a word, not a line: the narrator reads it. */
+  var SPEECH = /^(dice|disse|chiede|chiese|risponde|rispose|aggiunge|sussurra|grida|gridava|urla|esclama|domanda|mormora|ride|sorride|scrive|continua|insiste|fa)\b/;
+  var NOT_NAME = /^(Il|Lo|La|I|Gli|Le|Un|Una|Uno|E|Ma|Poi|Alla|Al|A|In|Da|Di|Con|Per|Non|Sì|No|Se|Quando|Allora|Oggi|Ieri|Domani|Ogni|Anche|Ecco|Dopo|Finita|Secondo|Spesso|Ancora|Molti|Nel|Nella|Nei|Sul|Sulla|Che|Chi|Come|Cosa|Dove|Mentre|Questo|Questa|Quel|Quella|Tutti|Tutto|Io|Tu|Lui|Lei|Noi|Voi|Loro|Lunedì|Martedì|Mercoledì|Giovedì|Venerdì|Sabato|Domenica|Silenzio|Mamma|Papà)$/;
+  // Who a piece of narration names as the one acting: «Giulia», or «il
+  // signore» of «il signore del banco».  «a Giulia» is who is spoken to.
+  function subjectOf(chunk) {
+    var c = chunk.replace(/^[\s,]+/, "");
+    var m = /^([A-ZÀ-Ý][a-zà-ÿ]+)/.exec(c);
+    if (m && !NOT_NAME.test(m[1])) return m[1];
+    m = /^(il|lo|la|l'|l’|un|una|uno|sua|suo)\s*([a-zà-ÿ]{3,})/i.exec(c);
+    if (m) return m[1].toLowerCase() + " " + m[2].toLowerCase();
+    return null;
+  }
+  // The names in a piece of narration, in order; not «a Giulia», «con
+  // Marco», «da Napoli», «in via del Piombo».
+  var PREP = /\b(a|ad|al|alla|allo|con|da|dal|dalla|di|del|della|dello|per|in|nel|nella|sul|sulla|via|piazza)\s+$/i;
+  function namesIn(chunk) {
+    var m, re = /(^|[^\wÀ-ÿ'’])([A-ZÀ-Ý][a-zà-ÿ]+)/g, out = [];
+    while ((m = re.exec(chunk))) {
+      if (NOT_NAME.test(m[2]) || PREP.test(chunk.slice(0, m.index + m[1].length))) continue;
+      out.push(m[2]);
+    }
+    return out;
+  }
+  function addresseeOf(chunk) {
+    var m = /\b(?:a|ad)\s+([A-ZÀ-Ý][a-zà-ÿ]+)/.exec(chunk);
+    return m && !NOT_NAME.test(m[1]) ? m[1] : null;
+  }
+  function cast(pars) {
+    var slots = {}, next = 1, last = [], open = 0;    // last: who spoke, newest first
+    function slotOf(name) { if (!slots[name]) slots[name] = next++; return slots[name]; }
+    // The one who answers «not»: the last other one who talked, or someone new.
+    function other(not) {
+      for (var j = 0; j < last.length; j++) if (last[j] !== not) return last[j];
+      return next++;
+    }
+    function said(who) { var k = last.indexOf(who); if (k >= 0) last.splice(k, 1); last.unshift(who); }
+    return pars.map(function (p) {
+      var out = [], m, pos = 0, prev = null;
+      // A line that goes on from the paragraph before (a letter, a story).
+      if (open) {
+        var close = p.indexOf("»");
+        var upto = close < 0 ? p.length : close + 1;
+        out.push({ text: p.slice(0, upto), start: 0, who: open });
+        pos = upto;
+        if (close >= 0) open = 0;
+      }
+      var re = /«[^»]*(»|$)/g;
+      re.lastIndex = pos;
+      while ((m = re.exec(p)) && m[0]) {
+        var q = m[0], end = m.index + q.length;
+        var gap = p.slice(pos, m.index), after = p.slice(end);
+        var attr = /^[\s,]*([a-zà-ÿ][^.!?«]*)/.exec(after);
+        var verb = attr && attr[1].replace(/^(gli|le|mi|ti|ci|vi)\s+/, "");
+        attr = verb && SPEECH.test(verb) ? verb.replace(SPEECH, "") : null;    // what follows «dice»
+        var words = q.replace(/[«»]/g, "").trim().split(/\s+/).length;
+        var line = !gap.trim() || /[:.!?…]\s*$/.test(gap) || attr != null || /[.!?…]\s*»?$/.test(q) || words > 4;
+        if (!line) continue;                         // a word quoted inside the narration
+        if (gap.trim()) out.push({ text: gap, start: pos, who: 0 });
+        var sentences = gap.split(/[.!?…]\s+/).filter(function (x) { return x.trim(); });
+        var lastS = sentences.length ? sentences[sentences.length - 1] : "";
+        var who = null, name = attr ? subjectOf(attr) : null;
+        if (!name && lastS && /^[\s,]*[A-ZÀ-Ý]/.test(lastS) && /\s\S/.test(lastS.trim())) name = namesIn(lastS)[0] || subjectOf(lastS);
+        if (name) who = slotOf(name);
+        else if (prev && gap.trim()) {
+          // «…» dice. «…» / «Secondo me…» dice Paolo. «Credo…»: the same one
+          // goes on; after a question or an answer (chiede, risponde) or a
+          // sentence of the story (Silenzio.), the other one talks.
+          var asks = /^[\s,]*(gli |le |mi |ti |ci |vi )?(chiede|chiese|domanda|risponde|rispose)\b/.test(gap);
+          var addr = asks && addresseeOf(gap);
+          if (addr) who = slotOf(addr);
+          else if (asks || !/^[\s,]*[a-zà-ÿ]/.test(gap)) who = other(prev.who);
+          else who = prev.who;
+        } else who = other(last[0]);
+        var seg = { text: q, start: m.index, who: who };
+        out.push(seg);
+        said(who);
+        prev = seg;
+        pos = end;
+        if (!/»$/.test(q)) open = who;
+      }
+      if (p.slice(pos).trim()) out.push({ text: p.slice(pos), start: pos, who: 0 });
+      return out;
+    });
+  }
+
   function allTokens(ep) {
     var out = [];
     paragraphs(ep).forEach(function (p) { tokens(p).forEach(function (t) { out.push(t); }); });
@@ -1170,6 +1264,7 @@
     bare: bare,
     core: core,
     paragraphs: paragraphs,
+    cast: cast,
     allTokens: allTokens,
     glossFor: glossFor,
     mcTargets: mcTargets,

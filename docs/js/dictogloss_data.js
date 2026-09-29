@@ -12,7 +12,7 @@
 
     { week: 3, level: "A1", title: "Al bar",
       es: "Una mañana en un bar italiano: qué hay en la barra, qué toma la gente y cómo se pide un café.",
-      text: "Al bar c'è sempre molta gente. Il caffè è buono e il cornetto è caldo. Sul bancone ci sono i giornali e lo zucchero. Un signore ha un cappuccino e una brioche. Le paste sono nella vetrina. Il barista è simpatico. Buongiorno, un caffè, per favore. Grazie mille. Prego, ecco il caffè.",
+      text: "Al bar c'è sempre molta gente. Il caffè è buono e il cornetto è caldo. Sul bancone ci sono i giornali e lo zucchero. Un signore ha un cappuccino e una brioche. Le paste sono nella vetrina. Il barista è simpatico. «Buongiorno, un caffè, per favore.» «Prego, ecco il caffè.» «Grazie mille.»",
       chunks: ["molta gente", "sul bancone", "lo zucchero", "una brioche", "per favore", "grazie mille"],
       keywords: ["bar", "caffè", "cornetto", "bancone", "zucchero", "cappuccino", "barista"] },
 
@@ -66,7 +66,7 @@
 
     { week: 12, level: "A2", title: "La mattina di Sara",
       es: "La rutina matinal de Sara y los consejos que le da su mamá.",
-      text: "Sara si sveglia alle sette, ma si alza alle sette e mezza. Si fa la doccia, si veste in fretta e fa colazione. Poi si lava i denti ed esce di casa. La mamma le dice sempre: mangia qualcosa, dormi di più e non lavorare troppo! Sara ride e risponde: stai tranquilla, mamma. Si sente bene, ma la sera si addormenta davanti alla televisione.",
+      text: "Sara si sveglia alle sette, ma si alza alle sette e mezza. Si fa la doccia, si veste in fretta e fa colazione. Poi si lava i denti ed esce di casa. La mamma le dice sempre: «Mangia qualcosa, dormi di più e non lavorare troppo!» Sara ride e risponde: «Stai tranquilla, mamma.» Si sente bene, ma la sera si addormenta davanti alla televisione.",
       chunks: ["si sveglia alle sette", "si fa la doccia", "in fretta", "esce di casa", "dormi di più", "stai tranquilla"],
       keywords: ["Sara", "sveglia", "doccia", "colazione", "denti", "mamma", "televisione"] },
 

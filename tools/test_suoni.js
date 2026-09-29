@@ -137,6 +137,31 @@ Es.lettura.forEach(function (l) {
 var fl = L.ofSeries("flood");
 ok(fl.length === 12, "12 inondazioni");
 fl.forEach(function (e) { ok(L.huntTargets(e).length >= 8 && e.flood && e.flood.forms.length, "inondazione con almeno 8 forme: " + e.id); });
+/* ------------------------------------------- dialoghi a più voci */
+function whoOf(ep) {
+  var out = [];
+  L.cast(L.paragraphs(L.byId(ep))).forEach(function (segs) { segs.forEach(function (x) { if (/^«/.test(x.text)) out.push(x.who); }); });
+  return out;
+}
+// the pieces give back the paragraph, each where it says
+L.EPISODI.forEach(function (e) {
+  var ps = L.paragraphs(e);
+  L.cast(ps).forEach(function (segs, i) {
+    ok(segs.map(function (x) { return x.text; }).join("").replace(/\s/g, "") === ps[i].replace(/\s/g, ""), "cast ricompone il paragrafo: " + e.id);
+    segs.forEach(function (x) { ok(ps[i].substr(x.start, x.text.length) === x.text, "cast start: " + e.id); });
+  });
+});
+// two people talking one after the other never share a voice
+var w7 = whoOf("ep7");
+ok(w7.length === 8 && w7.every(function (w, i) { return w && (!i || w !== w7[i - 1]); }), "ep7: botta e risposta a due voci");
+var w2 = whoOf("ep2");      // Giulia, Martín, il signore, Martín, Giulia
+ok(w2[0] === w2[4] && w2[1] === w2[3] && w2[2] !== w2[0] && w2[2] !== w2[1] && w2[0] !== w2[1], "ep2: ognuno la sua voce");
+var w10 = whoOf("ep10");    // «Sai…?» dice. «Se dovessi…»: the same one goes on
+ok(w10[2] === w10[3], "ep10: «…» dice. «…» stessa voce");
+// «pena» invece di «penna»: words, not lines
+ok(L.cast(["dice «pena» invece di «penna» e tutti ridono."])[0].every(function (x) { return x.who === 0; }), "parole citate: voce del narratore");
+var dg3 = L.cast([Dg.TESTI.filter(function (t) { return t.week === 3; })[0].text])[0].filter(function (x) { return x.who; });
+ok(dg3.length === 3 && dg3[0].who !== dg3[1].who, "dictogloss al bar: cliente e barista");
 
 console.log("controlli: " + checks + "   errori: " + fails);
 process.exit(fails ? 1 : 0);

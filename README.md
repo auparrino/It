@@ -235,6 +235,16 @@ dictado, palabra nueva, frase), al responder no se vuelve a leer encima;
 si la consigna no sonó, se lee la respuesta. El botón 🔊 escuchar sigue
 disponible siempre.
 
+**Diálogos a dos voces**: cuando hablan dos personas, suenan distintas. En
+las lecturas (y en el dictogloss) `Letture.cast` separa narración y
+parlamentos entre «»: la voz de siempre narra y cada personaje tiene la
+suya, sacada de quién habla («…» chiede Giulia / Giulia ride: «…» / «…»
+dice. «…»); sin nombre, contesta el otro de la conversación. Los mini
+diálogos con raya (— Vieni? — Magari!) alternan dos voces, y el examen de
+escucha usa una por hablante. Si el teléfono tiene varias voces italianas
+se usan voces distintas; siempre cambia además el tono, así se notan dos
+personas aunque haya una sola voz instalada.
+
 **Idioma del teclado**: cada campo de texto dice en qué idioma se escribe
 (`lang="it-IT"` si la respuesta es en italiano, `lang="pt-BR"` si es en
 castellano, para Gboard con teclados italiano y portugués). En Android el

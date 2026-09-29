@@ -164,6 +164,10 @@
     if (!window.speechSynthesis) return null;
     if (state.silent && !force) return null;
     opts = opts || {};
+    // «— Vieni con noi? — Magari!»: two people, two voices.
+    var turns = opts.who == null && opts.vi == null ? dashTurns(text) : null;
+    if (turns) return speakParts(turns, force, rate, opts);
+    if (opts.who != null) { var c = castVoice(opts.who); opts.vi = c.vi; opts.pitch = c.pitch; }
     var u = new SpeechSynthesisUtterance(String(text).replace(/_+/g, " "));
     u.lang = "it-IT";
     var v = opts.vi != null && voices.length ? voices[opts.vi % voices.length] : voice;
@@ -173,9 +177,53 @@
     if (opts.onboundary) u.onboundary = opts.onboundary;
     if (opts.onend) u.onend = opts.onend;
     if (opts.onstart) u.onstart = opts.onstart;
-    if (!opts.keep) window.speechSynthesis.cancel();
+    if (!opts.keep) stopSpeech();
     window.speechSynthesis.speak(u);
     return u;
+  }
+  /* The voices of a dialogue: 0 is the narrator (the usual voice), 1, 2…
+     each character.  Another voice of the phone when it has more than one
+     Italian voice, and always another pitch, so that two people sound like
+     two people even with a single voice installed. */
+  var CAST = [{ vi: 0, pitch: 1 }, { vi: 1, pitch: 1.3 }, { vi: 2, pitch: 0.75 }, { vi: 3, pitch: 1.5 }, { vi: 4, pitch: 0.9 }];
+  function castVoice(who) {
+    return who ? CAST[1 + (who - 1) % (CAST.length - 1)] : CAST[0];
+  }
+  // «— Sei stanco? — Per forza!»: the lines, one voice each (1, 2, 1…).
+  function dashTurns(text) {
+    var t = String(text || "").trim();
+    if (!/^[—–]/.test(t)) return null;
+    var parts = t.split(/\s*[—–]\s*/).filter(function (x) { return x.trim(); });
+    if (parts.length < 2) return null;
+    return parts.map(function (x, i) { return { text: x, who: 1 + (i % 2) }; });
+  }
+  // Everything that stops the voice goes through here: a dialogue being
+  // read piece by piece stops too (speechGen changes).
+  var speechGen = 0;
+  function stopSpeech() {
+    speechGen++;
+    if (window.speechSynthesis) window.speechSynthesis.cancel();
+  }
+  // Pieces [{ text, who, start }] one after the other, each with its voice.
+  // opts.onboundary gets the charIndex moved by the piece's start.
+  function speakParts(parts, force, rate, opts) {
+    opts = opts || {};
+    var i = 0, first = null, gen = null;
+    (function next() {
+      if (gen != null && gen !== speechGen) return;          // stopped, or something else is playing
+      if (i >= parts.length) { if (opts.onend) opts.onend(); return; }
+      var p = parts[i++];
+      var u = speak(p.text, force, rate, {
+        who: p.who || 0, keep: opts.keep || i > 1,
+        onstart: i === 1 ? opts.onstart : null,
+        onboundary: opts.onboundary ? function (e) {
+          opts.onboundary({ name: e.name, charIndex: e.charIndex + (p.start || 0) });
+        } : null,
+        onend: next });
+      if (gen == null) gen = speechGen;
+      if (!first) first = u;
+    })();
+    return first;
   }
   var realAudio = null;
   // An item of the listening module carries its own voice (variability).
@@ -186,7 +234,7 @@
     // only when it cannot play (offline the first time, an old browser).
     if (it.audio && typeof Audio === "function") {
       if (state.silent && !force) return null;
-      if (window.speechSynthesis) speechSynthesis.cancel();
+      stopSpeech();
       try {
         if (realAudio) realAudio.pause();
         var a = realAudio = new Audio(it.audio), fell = false;
@@ -203,7 +251,7 @@
     // (not for open/closed vowels: the file name cannot tell pèsca from pésca).
     if (window.Voci && it.type === "coppia" && it.cat !== "vocali" && Voci.usable(it.say)) {
       if (state.silent && !force) return null;
-      if (window.speechSynthesis) speechSynthesis.cancel();
+      stopSpeech();
       Voci.play(it.say, { rate: rate && rate < 0.9 ? 0.75 : 1, onplay: function (who) {
         var c = $("#vcredit"); if (c) c.textContent = "🎙️ Voz real: " + who;
       } }, tts);
@@ -273,7 +321,16 @@
   function pickVoice() {
     if (!window.speechSynthesis) return;
     var vs = window.speechSynthesis.getVoices();
-    voices = vs.filter(function (v) { return /^it/i.test(v.lang); });
+    // The same speaker can come twice (it-it-x-itb-local / -network):
+    // once is enough, so that voice 1 and voice 2 are two people.
+    var seen = {};
+    voices = vs.filter(function (v) {
+      if (!/^it/i.test(v.lang)) return false;
+      var k = String(v.name).toLowerCase().replace(/[-_ ]?(local|network|online|offline)$/, "");
+      if (seen[k]) return false;
+      seen[k] = 1;
+      return true;
+    });
     voice = voices[0] || null;
   }
   if (window.speechSynthesis) {
@@ -638,7 +695,7 @@
 
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION in sw.js: test_game checks it). */
-  var APP_VERSION = "v1.56";
+  var APP_VERSION = "v1.57";
   function versionLine() {
     return '<p class="muted small version">La Via C1 · versión ' + APP_VERSION + "</p>";
   }
@@ -3618,10 +3675,12 @@
     });
     return out + esc(text.slice(pos));
   }
+  // A dictogloss with a dialogue («Buongiorno…» «Prego…»): a voice each.
+  function dgParts(t) { return Letture.cast([t.text])[0]; }
   function wireDictogloss() {
     if (view.screen !== "dictogloss") return;
     var w = course.weeks[view.week - 1], t = Suoni.dgFor(w.week);
-    var back = function () { dg = null; window.speechSynthesis && speechSynthesis.cancel(); view.tab = "percorso"; view.screen = "briefing"; render(); window.scrollTo(0, 0); };
+    var back = function () { dg = null; stopSpeech(); view.tab = "percorso"; view.screen = "briefing"; render(); window.scrollTo(0, 0); };
     on("#dgback", back); on("#dgback2", back);
     if (!t) return;
     on("#dgplay", function () {
@@ -3635,7 +3694,7 @@
         var nt = $("#dgnotes"); if (nt) nt.focus();
       }
       if (st) st.textContent = second ? "Escucha 2 de 2: anotá mientras escuchás…" : "Escucha 1 de 2…";
-      speak(t.text, true, 0.95, { onend: function () {
+      speakParts(dgParts(t), true, 0.95, { onend: function () {
         dg.plays++;
         b.disabled = false;
         if (st) st.textContent = dg.plays >= 2 ? "Listo: ahora reconstruilo" : "Escucha 2 de 2: tocá 🔊 y anotá mientras escuchás";
@@ -3649,7 +3708,7 @@
     var draft = $("#dgtext");
     if (draft) draft.oninput = function () { dg.given = draft.value; };
     on("#dgwrite", function () { var n = $("#dgnotes"); if (n) dg.notes = n.value; dg.step = 1; render(); window.scrollTo(0, 0); });
-    on("#dgagain", function () { dg.help = (dg.help || 0) + 1; speak(t.text, true, 0.95); });
+    on("#dgagain", function () { dg.help = (dg.help || 0) + 1; speakParts(dgParts(t), true, 0.95); });
     on("#dgcheck", function () {
       var box = $("#dgtext"), given = box ? box.value : "";
       if (!given.trim()) return;
@@ -3705,7 +3764,7 @@
 
   var karaoke = null;   // { ep, rate, mode: "full" | "partial" | "audio", par, u }
   function stopKaraoke() {
-    if (karaoke && window.speechSynthesis) speechSynthesis.cancel();
+    if (karaoke) stopSpeech();
     karaoke = null;
     document.querySelectorAll(".text .w.now").forEach(function (e) { e.classList.remove("now"); });
   }
@@ -3717,6 +3776,7 @@
     stopKaraoke();
     karaoke = { ep: ep, rate: rate || 1, mode: mode || "full", par: 0, started: Date.now() };
     var pars = Letture.paragraphs(ep);
+    var casts = Letture.cast(pars);      // the narrator and each character, their own voice
     var offsets = [], k = 0;
     pars.forEach(function (p) { var toks = Letture.tokens(p), o = [], pos = 0; toks.forEach(function (t) { var at = p.indexOf(t, pos); o.push([at, k++]); pos = at + t.length; }); offsets.push(o); });
     document.body.classList.toggle("kar-partial", karaoke.mode === "partial");
@@ -3730,7 +3790,7 @@
         return;
       }
       var i = karaoke.par, off = offsets[i];
-      speak(pars[i], true, karaoke.rate, { keep: true,
+      speakParts(casts[i], true, karaoke.rate, { keep: true,
         onboundary: function (e) {
           if (!karaoke || e.name !== "word") return;
           var idx = -1;
@@ -3764,8 +3824,10 @@
       var ep = Letture.byId(id);
       if (!ep) return next();
       toast("🎧 " + ep.title, 2500);
-      mediaSession(ep.title, function () { list = []; speechSynthesis.cancel(); });
-      speak(ep.text, true, 1, { onend: next });
+      mediaSession(ep.title, function () { list = []; stopSpeech(); });
+      var parts = [];
+      Letture.cast(Letture.paragraphs(ep)).forEach(function (segs) { parts = parts.concat(segs); });
+      speakParts(parts, true, 1, { onend: next });
     })();
   }
   function wireLettura() {
@@ -4188,7 +4250,7 @@
       (function next() {
         if (i >= a.turns.length) { es.plays++; b.disabled = es.plays >= 2; var st = $("#estate"); if (st) st.textContent = es.plays >= 2 ? "Dos escuchas hechas" : "Escucha 2 de 2"; noteListening(a.turns.length * 12); return; }
         var t = a.turns[i++];
-        speak(t[1], true, 1, { keep: true, pitch: t[0] === "A" ? 0.9 : 1.1, vi: t[0] === "A" ? 0 : 1, onend: next });
+        speak(t[1], true, 1, { keep: true, who: t[0] === "A" ? 1 : 2, onend: next });
       })();
     });
     on("#econsegna2", function () {
