@@ -545,7 +545,7 @@
    {
     "label": "a",
     "type": "cloze",
-    "stem": "Enrico VIII, re ___ Inghilterra, era stato Principe ___ Galles. (di/dell' – di/del)",
+    "stem": "Enrico VIII, re ___ Inghilterra, era stato Principe ___ Galles. (d'/dell' – di/del)",
     "answer": "d' | di",
     "alt": [
      "di | di"
@@ -993,7 +993,7 @@
     "stem": "Venite anche ___ (ustedes)? – No, ___ (nosotros) non veniamo, viene solo Marco.",
     "answer": "voi | noi",
     "alt": [],
-    "note": "«Ustedes» informal es «voi»; se expresa el pronombre para contrastar."
+    "note": "«Ustedes» es «voi» (en plural no hay distinción formal/informal); se expresa el pronombre para contrastar."
    },
    {
     "label": "c",
@@ -1059,7 +1059,7 @@
     "stem": "Noi andiamo al cinema, ___? (¿y ustedes dos?)",
     "answer": "e voi due",
     "alt": [],
-    "note": "«Ustedes» informal es «voi»."
+    "note": "«Ustedes» es «voi» (en plural no hay distinción formal/informal)."
    },
    {
     "label": "e",
@@ -3433,9 +3433,7 @@
     "type": "cloze",
     "stem": "Ha mandato la lettera? – No, non ___ ha ancora ___.",
     "answer": "l' | mandata",
-    "alt": [
-     "la | mandata"
-    ],
+    "alt": [],
     "note": "Con «l'» (la) delante, el participio concuerda: mandata."
    },
    {

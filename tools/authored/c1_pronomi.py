@@ -109,7 +109,7 @@ ITEMS = [
          prompt="Completá la terminación.",
          stem="Maria si è lava___ le mani.",
          answer="ta",
-         alt=["te"],
+         alt=[],
          note="Reflexivo con objeto directo propio: en uso corriente concuerda con "
               "el sujeto (lavata). Con el objeto delante en pronombre: «se le è lavate»."),
     dict(id="c1-part-05", type="choice", topic="participio",

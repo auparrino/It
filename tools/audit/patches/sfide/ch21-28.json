@@ -48,7 +48,7 @@
    {
     "label": "a",
     "type": "cloze",
-    "stem": "___ volentieri ma ho un appuntamento. (venire – io)",
+    "stem": "___ volentieri, ma ho un appuntamento. (venire – io)",
     "answer": "verrei",
     "alt": [],
     "note": "Venire tiene condicional irregular con doble r: verrei."
@@ -2057,7 +2057,6 @@
     "alt": [
      "Può darsi che se ne sia già andato.",
      "Può darsi che sia partito già.",
-     "Forse è già partito.",
      "Può essere che sia già partito.",
      "Può darsi che sia già partita.",
      "Può darsi che se ne sia già andata.",
@@ -4028,9 +4027,7 @@
     "type": "translate",
     "stem": "___ studiare medicina. (Hacé que estudie…)",
     "answer": "Fagli",
-    "alt": [
-     "Fallo"
-    ],
+    "alt": [],
     "note": "Con objeto (medicina), quien realiza la acción va en indirecto: fagli."
    },
    {
@@ -4585,7 +4582,7 @@
   ]
  },
  "r28-01": {
-  "consigna": "Traducí al italiano (verbos seguidos de infinitivo sin preposición).",
+  "consigna": "Traducí al italiano (verbos seguidos de infinitivo, con o sin preposición).",
   "interactive": true,
   "items": [
    {
