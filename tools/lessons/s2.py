@@ -518,12 +518,12 @@ LESSONS = {
 
  {"h": "CI: un lugar",
   "r": "*ci* reemplaza **un lugar** ya nombrado: «ahí». En castellano muchas "
-       "veces no se dice; en italiano, sí.",
+       "veces no se dice; en italiano es más habitual.",
   "ex": [["Vai a Roma? — Sì, *ci* vado domani.", "¿Vas a Roma? — Sí, voy mañana."],
          ["Sei mai stato in Grecia? — No, non *ci* sono mai stato.", "¿Estuviste alguna vez en Grecia? — No, nunca."],
          ["Abiti ancora a Roma? — Sì, *ci* abito da dieci anni.", "¿Seguís viviendo en Roma? — Sí, vivo ahí hace diez años."]],
-  "warn": "«Sí, voy mañana» a secas suena incompleto en italiano: *sì, ci "
-          "vado domani*."},
+  "warn": "Sin *ci* la frase también es correcta, pero en italiano es más "
+          "habitual retomar el lugar ya nombrado: *sì, ci vado domani*."},
 
  {"h": "CI: a + algo",
   "r": "*ci* también reemplaza **a / in / su + algo**: *pensare al lavoro → "

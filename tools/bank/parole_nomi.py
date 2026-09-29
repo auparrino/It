@@ -9,7 +9,7 @@ NOUNS = [
 
     # ------------------------------------------------------------------ casa
     ("casa", "f", "case", "casa", "casa", "A1", ""),
-    ("appartamento", "m", "appartamenti", "departamento", "casa", "A1", "Doble p y doble t: appartamento."),
+    ("appartamento", "m", "appartamenti", "departamento", "casa", "A1", "Doble p: appartamento (una sola t)."),
     ("stanza", "f", "stanze", "habitación / cuarto", "casa", "A1", ""),
     ("camera", "f", "camere", "habitación / dormitorio", "casa", "A1", "Falso amigo: camera = habitación; la cámara de fotos es la macchina fotografica."),
     ("cucina", "f", "cucine", "cocina", "casa", "A1", ""),

@@ -855,7 +855,7 @@ _RAW = [
     ("B1", "parola_spagnola", "Scusa, non ho capito: puoi ripetere più despacio?", "despacio", "piano",
      "Despacio se dice piano o lentamente: parla più piano. Piano también significa «bajito»."),
     ("A2", "parola_spagnola", "Ho dimenticato la cartera a casa.", "la cartera", "il portafoglio",
-     "Cartera (billetera) es portafoglio. Cartella es una carpeta o mochila escolar."),
+     "«Cartera» es falso amigo: en España/México es billetera (portafoglio); en Argentina es el bolso de mujer (borsa). Cartella es una carpeta o mochila escolar."),
     ("B1", "parola_spagnola", "Quando sono nervoso mi fa male la barriga.", "la barriga", "la pancia",
      "Barriga (panza) se dice pancia: mi fa male la pancia."),
     ("B1", "falso_amico", "Stasera chiudo un negozio importante con un cliente.", "negozio", "affare",

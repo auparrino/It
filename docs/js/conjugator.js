@@ -4,7 +4,7 @@
  *
  * Covers every mood and tense a C1 learner is expected to produce, the
  * orthographic rules (-care/-gare/-ciare/-giare), and the irregular verbs that
- * carry most of the traffic. Irregular passato remoto follows Italian's 1-3-3
+ * carry most of the traffic. Irregular passato remoto follows Italian's 1-3-6
  * pattern: irregular in io/lui/loro, regular in tu/noi/voi, so one stored stem
  * covers the whole tense.
  */

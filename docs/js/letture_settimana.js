@@ -94,7 +94,7 @@
         ["¿Qué tiene que hacer Sara mañana?", ["trabajar temprano", "estar enferma", "ir al cine con Laura", "quedarse en casa"], "trabajar temprano"]
       ],
       vf: [["Sara fa l'infermiera.", "vero"], ["Sara esce di casa alle otto.", "falso"], ["Laura lavora con Sara in ospedale.", "non si dice"]],
-      hunt: { label: "Tocá los verbos irregulares (fa, esce, va, dice…)", targets: ["fa", "esce", "va", "dice", "può", "deve", "beve", "viene", "vuoi", "vengo", "devo"] } },
+      hunt: { label: "Tocá los verbos irregulares (fa, esce, va, dice…)", targets: ["fa", "esce", "va", "dice", "può", "deve", "beve", "vuoi", "vengo", "devo"] } },
 
     { id: "w-07", week: 7, n: 5, level: "A1", emoji: "📅", title: "L'agenda di Paolo",
       grammar: "numeri, date e ora",

@@ -3385,10 +3385,10 @@
    {
     "label": "d",
     "type": "cloze",
-    "stem": "Le finestre ___ pulite. (tendrían que haber sido)",
+    "stem": "Le finestre ___ pulite. (había que limpiarlas)",
     "answer": "andavano",
     "alt": [],
-    "note": "Imperfecto de andare = tendrían que haber sido."
+    "note": "Imperfecto de andare = obligación en el pasado: andavano pulite = había que limpiarlas."
    }
   ]
  },
@@ -3480,14 +3480,14 @@
    {
     "label": "c",
     "type": "choice",
-    "stem": "Dove si mette la TV?",
+    "stem": "Dove si mettono le valigie?",
     "options": [
      "passivante",
      "impersonale"
     ],
     "answer": "passivante",
     "alt": [],
-    "note": "La TV es el sujeto gramatical: si pasivante."
+    "note": "El verbo concuerda con le valigie: si pasivante."
    },
    {
     "label": "d",

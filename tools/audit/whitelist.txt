@@ -340,3 +340,6 @@ pèsca                    # lesson:1: pèsca / pésca, vocales abiertas y cerrad
 pésca                    # lesson:1: pèsca / pésca
 pòrta                    # lesson:1: pòrta / sóle, o abierta
 sóle                     # lesson:1: pòrta / sóle, o cerrada
+lindísimo
+vu
+erà

@@ -1007,3 +1007,10 @@ Examen final coherente con el programa: la mayoría de los 160 ítems y de las 2
 ## 9. Cómo reproducir
 
 Los dossiers y prompts usados están descritos en la sección 2. Las capas automáticas: `npm test`, `python3 tools/check_lessons.py`, `python3 tools/check_letture.py`, `node tools/audit/corpus.js && node tools/audit/lint.js`. Los informes JSON completos de cada revisor y verificador (con el texto exacto de cada hallazgo, incluidas dudas y mejoras no verificadas) están en `tools/audit/semanal/` (ver commit).
+
+## 10. Correcciones aplicadas (v1.56)
+
+Se aplicaron en las fuentes (`tools/`, `docs/js/`) los **errores confirmados** de la sección 3, con el build (`npm run build`) regenerado, `npm test` en verde, `check_lessons` y `check_letture` en 0 y `lint.js` en la línea base (144 falsos positivos didácticos). Versión de la app y del service worker: v1.56.
+
+- Aplicados: suoni (24), ejercicios de autor y `c1_*` (22), lecturas y dictogloss (17), refuerzos/esame/lessico2 (19), parches de Routledge/Dummies (21), lecciones y bancos (19) y los cruzados que quedaron entre grupos (`s:r26-04:d`, `s:r26-02b:c`, comentario `1-3-3` del conjugador). Además se acortaron tres textos de lección que pasaban el límite de palabras tras las correcciones y se agregaron bloques nuevos de la semana 1 (saludos, *tu/Lei*, deletreo) y la semana 2 (*c'è / ci sono*).
+- **Pendientes** (mejoras estructurales, no errores): alinear teoría y práctica en el resto de las semanas (sección 6, punto 1), rehacer el reparto de sfide (punto 4), práctica de producción en las semanas 27-51 (5), subir el techo de nivel de los bancos (9), `rf-46-18` (*infischiarsene* sin lección en la semana 46) y `s:r26-03` (*rimanere* no enseñado en la semana 35).

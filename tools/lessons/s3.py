@@ -102,11 +102,11 @@ LESSONS = {
           "bien, suena nativo."},
 
  {"h": "Causa y consecuencia",
-  "r": "*perché* = porque. *siccome* (como) va **siempre al principio**. "
+  "r": "*perché* = porque. *siccome* (como) suele ir **al principio** de la oración. "
        "*quindi, dunque, perciò* = por lo tanto.",
   "table": {"head": ["Conector", "Sentido", "Nota"],
             "rows": [["perché", "porque", "el más común"],
-                     ["poiché / siccome", "como / puesto que", "siccome va siempre al principio"],
+                     ["poiché / siccome", "como / puesto que", "siccome suele ir al principio"],
                      ["dato che / visto che", "dado que", "coloquial y frecuente"],
                      ["quindi / dunque / perciò", "por lo tanto", "los tres equivalen"],
                      ["allora", "entonces", "también muletilla oral"],
@@ -637,8 +637,8 @@ LESSONS = {
          "= hablo)."},
 
  {"h": "El patrón 1-3-6 de los irregulares",
-  "r": "Los irregulares lo son solo en **io, lui/lei y loro**, con la misma "
-       "raíz: *-i, -e, -ero*. El resto es regular.",
+  "r": "Los irregulares lo son sobre todo en **io, lui/lei y loro**, con la "
+       "misma raíz: *-i, -e, -ero*. El resto lleva terminaciones regulares.",
   "ex": [["Lui *prese* il treno; noi *prendemmo* l'autobus.", "Él tomó el tren; nosotros, el colectivo."],
          ["Mi *scrissero* una lettera lunghissima.", "Me escribieron una carta larguísima."],
          ["Lo *vidi* e gli *dissi* tutto.", "Lo vi y le dije todo."],
@@ -651,8 +651,9 @@ LESSONS = {
                      ["fare", "feci", "facesti", "fece", "facemmo", "faceste", "fecero"],
                      ["venire", "venni", "venisti", "venne", "venimmo", "veniste", "vennero"],
                      ["avere", "ebbi", "avesti", "ebbe", "avemmo", "aveste", "ebbero"]]},
-  "tip": "*essere* es el único irregular entero: *fui, fosti, fu, fummo, "
-         "foste, furono*. Y *dare*: *diedi / detti*; *stare*: *stetti*."},
+  "tip": "*essere* es irregular entero: *fui, fosti, fu, fummo, foste, "
+         "furono*. *dare* (*diedi, desti…*) y *stare* (*stetti, stesti…*) "
+         "cambian de raíz en todas las personas."},
 
  {"h": "Cuándo se usa",
   "r": "Para hechos **cerrados y sin lazo con el presente**: historia y "

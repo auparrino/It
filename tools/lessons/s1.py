@@ -11,7 +11,7 @@ LESSONS = {
   "match": r"Escuchá|sonido duro|sonido suave|doble"},
  {"h": "Acento, detalles y vocales", "blocks": [3, 4, 5],
   "match": r"Cómo se escribe|«è»|«o»|tilde|acento|vocal"},
- {"h": "Tus dos primeros verbos: essere y avere", "blocks": [6],
+ {"h": "Saludar y tus dos primeros verbos: essere y avere", "blocks": [6, 7],
   "match": r"essere|avere"},
 ],
 "blocks": [
@@ -30,8 +30,8 @@ LESSONS = {
        "endurece; una *i* muda las ablanda.",
   "table": {"head": ["Se escribe", "Suena", "Ejemplo"],
             "rows": [["ca, co, cu", "ka, ko, ku", "casa, cosa, cubo"],
-                     ["ce, ci", "che, chi (como en «chico»)", "cena, cinema"],
-                     ["che, chi", "ke, ki", "perché, chiave"],
+                     ["ce, ci", "ch de chico (tʃe, tʃi)", "cena, cinema"],
+                     ["che, chi", "k de queso (ke, ki)", "perché, chiave"],
                      ["cia, cio, ciu", "cha, cho, chu", "ciao, cioccolata"],
                      ["ga, go, gu", "ga, go, gu", "gatto, gonna"],
                      ["ge, gi", "dy, como la j de «jeans»", "gelato, giro"],
@@ -44,8 +44,8 @@ LESSONS = {
          ["*ge*lato / spa*ghe*tti", "helado / spaghetti: «dyelato», «spaguetti»"],
          ["*cia*o, *gio*rno", "chau, día: la i no suena"],
          ["pe*sce*", "pescado: «peshe»"]],
-  "warn": "*gi* y *ge* no son la j castellana ni la ll porteña: *gelato* "
-          "suena «dyelato». Y *che* se lee «ke», nunca «che»."},
+  "warn": "*gi, ge* no son la j castellana ni la ll porteña: *gelato* "
+          "suena «dyelato». *che, chi* suenan «ke, ki»; *ce, ci* sí suenan «che, chi»."},
 
  {"h": "Las dobles consonantes",
   "r": "Una consonante doble **dura más** y cambia la palabra: *nono* "
@@ -121,6 +121,25 @@ LESSONS = {
            "torto* (tengo razón / estoy equivocado). *sono* sirve para «yo "
            "soy» y para «ellos son»: el contexto decide. El resto de los "
            "verbos llega en las semanas 5 y 6."]},
+
+ {"h": "Saludar, tu / Lei y deletrear",
+  "r": "*ciao* saluda y despide entre amigos; *buongiorno* y *arrivederci* "
+       "son más neutros. Con desconocidos y en lo formal, **Lei**; con "
+       "amigos, *tu*.",
+  "table": {"head": ["Situación", "Informal (tu)", "Formal (Lei)"],
+            "rows": [["Saludar", "ciao", "buongiorno / buonasera"],
+                     ["Despedirte", "ciao / a presto", "arrivederci"],
+                     ["Preguntar el nombre", "Come ti chiami?", "Come si chiama?"],
+                     ["Presentarte", "Mi chiamo Ana.", "Mi chiamo Ana."]]},
+  "ex": [["*Ciao*, mi chiamo Marco.", "Hola, me llamo Marco."],
+         ["*Buongiorno*, come sta?", "Buen día, ¿cómo está usted?"],
+         ["*Arrivederci*, signora!", "¡Hasta luego, señora!"],
+         ["Come si scrive? *A - B - C*", "¿Cómo se escribe? A - B - C"]],
+  "warn": "Al deletrear, las letras se dicen a la italiana: *a, bi, ci, "
+          "di, e, effe, gi, acca, i, elle, emme, enne, o, pi, cu, erre, "
+          "esse, ti, u, vu, zeta*.",
+  "tip": "Para pedir que deletreen: *Come si scrive?* Para presentarte: "
+         "*Mi chiamo…* o *Sono…*."},
 ]},
 
 2: {
@@ -128,8 +147,8 @@ LESSONS = {
          "adjetivo. Esta semana: las terminaciones, los plurales con trampa "
          "y los géneros que no coinciden con el castellano.",
 "parts": [
- {"h": "Género: el esquema y las sorpresas", "blocks": [0, 4, 5],
-  "match": r"masculino o femenino|género"},
+ {"h": "Género: el esquema, las sorpresas y «hay»", "blocks": [0, 4, 5, 6],
+  "match": r"masculino o femenino|género|c'è|ci sono"},
  {"h": "Plural: regulares, con h, invariables e irregulares", "blocks": [1, 2, 3],
   "match": r"plural"},
 ],
@@ -222,6 +241,21 @@ LESSONS = {
   "ex": [["*il* turista / *la* turista", "el turista / la turista"],
          ["i turist*i* / le turist*e*", "los turistas / las turistas"],
          ["*la* dentista", "la dentista"]]},
+
+ {"h": "Decir qué hay: c'è / ci sono",
+  "r": "«Hay» es invariable en castellano; en italiano **concuerda** con lo "
+       "que hay: *c'è* + singular, *ci sono* + plural.",
+  "table": {"head": ["Forma", "Se usa con", "Ejemplo"],
+            "rows": [["c'è", "singular", "C'è una lavagna."],
+                     ["ci sono", "plural", "Ci sono tre sedie."],
+                     ["non c'è", "negación, singular", "Non c'è il professore."],
+                     ["non ci sono", "negación, plural", "Non ci sono studenti."]]},
+  "ex": [["*C'è* un libro sul tavolo.", "Hay un libro sobre la mesa."],
+         ["*Ci sono* due finestre.", "Hay dos ventanas."],
+         ["*Non c'è* nessuno.", "No hay nadie."],
+         ["*Ci sono* molte persone.", "Hay mucha gente."]],
+  "warn": "No digas «ci sono molta gente»: *gente* es singular, entonces "
+          "*c'è molta gente*."},
 ]},
 
 3: {
@@ -409,9 +443,8 @@ LESSONS = {
          ["*Roma* è bella.", "Roma es linda."],
          ["*Il* Canada è grande.", "Canadá es grande."],
          ["*Le* Filippine sono in Asia.", "Filipinas está en Asia."]],
-  "warn": "Las islas chicas y los países-ciudad van como las ciudades, sin "
-          "artículo: *Malta*, *Cuba*, *Capri*. Las islas grandes lo llevan: "
-          "*la Sicilia*, *la Sardegna*.",
+  "warn": "Muchas islas van sin artículo: *Malta*, *Cuba*, *Capri*. Otras "
+          "lo llevan: *la Sicilia*, *la Sardegna*. Se memorizan.",
   "qq": [{"prompt": "Completá", "stem": "___ Francia è grande.", "answer": "La", "options": ["La", "(nada)", "Il"]},
          {"prompt": "Completá", "stem": "___ Milano è in Lombardia.", "answer": "(nada)", "options": ["(nada)", "Il", "La"]}]},
 
@@ -809,8 +842,8 @@ LESSONS = {
 
 8: {
 "intro": "Preguntar en italiano es casi igual que en castellano: sin "
-         "inversión ni auxiliar. Cambian la posición de la preposición y "
-         "algunas formas fijas.",
+         "inversión ni auxiliar. Cambian sobre todo algunas formas fijas "
+         "(*qual è*, *come mai*, *che cosa*).",
 "parts": [
  {"h": "Sí o no, los interrogativos y la preposición", "blocks": [0, 1, 2],
   "match": r"^(?!.*(sujeto al final|\bquale\b|qual è|\bquali\b)).*\S"},
@@ -866,8 +899,9 @@ LESSONS = {
           "correctores."},
 
  {"h": "El sujeto va al final",
-  "r": "Si la pregunta tiene sujeto explícito, va **después del verbo**, al "
-       "final.",
+  "r": "Con un interrogativo, el sujeto explícito suele ir **después del "
+       "verbo**, al final; ponerlo antes (*Perché Marco non viene?*) también "
+       "es normal.",
   "ex": [["Dove abita *Marco*?", "¿Dónde vive Marco?"],
          ["Che cosa dice *il professore*?", "¿Qué dice el profesor?"],
          ["Quanto costano *queste scarpe*?", "¿Cuánto cuestan estos zapatos?"]]},

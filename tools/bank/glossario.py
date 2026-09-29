@@ -64,7 +64,7 @@ GLOSS = {
     "paesino": ("pueblito", "A2"), "mesetto": ("un mesecito", "A2"),
     "maluccio": ("medio mal", "A2"), "arrivederla": ("adiós (a usted)", "A2"),
     "ringrazio": ("agradezco", "A2"), "ringraziarti": ("agradecerte", "A2"),
-    "ringraziati": ("agradecidos", "A2"), "cameriera": ("moza, camarera", "A2"),
+    "ringraziati": ("agradecidos (part. de ringraziare: «los agradecí»)", "A2"), "cameriera": ("moza, camarera", "A2"),
     "documentario": ("documental", "A2"), "affascinante": ("fascinante", "A2"),
     "meraviglia": ("maravilla", "A2"), "francobolli": ("estampillas", "A2"),
     "lieto": ("contento", "A2"), "lieti": ("contentos", "A2"), "bell'uomo": ("hombre lindo", "A2"),
