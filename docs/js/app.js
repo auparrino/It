@@ -149,6 +149,13 @@
 
   /* ------------------------------------------------------------- pronuncia */
 
+  /* The keyboard's language: a field where the answer is Italian says
+     lang="it", one in Spanish says the other keyboard of the learner
+     (Portuguese on Gboard, close enough to Spanish).  On Android the
+     browser can pass it to the keyboard as a hint (hintLocales); if the
+     keyboard does not follow it, nothing breaks. */
+  var KB_IT = ' lang="it-IT"', KB_ES = ' lang="pt-BR"';
+
   var voice = null, voices = [];
   // force: the learner tapped 🔊 explicitly, so play even in office mode
   // (they may have earphones on).  opts: { pitch, vi (which Italian voice),
@@ -631,7 +638,7 @@
 
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION in sw.js: test_game checks it). */
-  var APP_VERSION = "v1.55";
+  var APP_VERSION = "v1.56";
   function versionLine() {
     return '<p class="muted small version">La Via C1 · versión ' + APP_VERSION + "</p>";
   }
@@ -1919,7 +1926,7 @@
         '<div><button class="tab" id="slow">🐢 más lento</button></div>' +
         (it.audio ? '<p class="muted small" id="vcredit"></p>' : "") + "</div>" +
         '<div class="typed">' +
-        '<textarea id="wans" class="grow" rows="1" autocomplete="off" autocapitalize="sentences" ' +
+        '<textarea id="wans"' + KB_IT + ' class="grow" rows="1" autocomplete="off" autocapitalize="sentences" ' +
         'autocorrect="off" spellcheck="false" enterkeyhint="send" placeholder="lo que escuchás…"></textarea>' +
         '<button class="btn" id="wsend">Controlla</button></div>';
       stem = "";
@@ -1952,7 +1959,7 @@
       stem = "";
     } else if (it.type === "write") {
       body = '<div class="typed">' +
-        '<textarea id="wans" class="grow" rows="1" autocomplete="off" autocapitalize="sentences" ' +
+        '<textarea id="wans"' + KB_IT + ' class="grow" rows="1" autocomplete="off" autocapitalize="sentences" ' +
         'autocorrect="off" spellcheck="false" enterkeyhint="send" placeholder="in italiano…"></textarea>' +
         '<button class="btn" id="wsend">Controlla</button></div>' +
         '<div class="row" style="margin-top:8px">' +
@@ -1965,7 +1972,7 @@
       /* handled above */
     } else {
       body = '<div class="typed">' +
-        '<textarea id="ans" class="grow" rows="1" autocomplete="off" autocapitalize="off" ' +
+        '<textarea id="ans"' + (it.dir === "it-es" || spanishText(it.answer) || asksMeaning(it) ? KB_ES : KB_IT) + ' class="grow" rows="1" autocomplete="off" autocapitalize="off" ' +
         'autocorrect="off" spellcheck="false" enterkeyhint="send" placeholder="' +
           (multi ? "las " + gaps + " respuestas en orden: 1 / 2" + (gaps > 2 ? " / 3" : "")
                  : it.type === "translate" ? "in italiano…" : "tu respuesta…") + '"></textarea>' +
@@ -2403,7 +2410,10 @@
     });
     $("#say2").onclick = function () { if (it.audio) speakItem(it, true); else speak(spoken, true); };
     if (!spoken && !it.audio) $("#say2").hidden = true;
-    else if (q === 2 || it.frase) { if (it.audio) speakItem(it); else speak(spoken); }
+    // Read aloud once per exercise: when the prompt was already spoken
+    // (listening, dictation, a new word), the answer is not read over it;
+    // 🔊 escuchar is still there.
+    else if (!round.promptSpoken && (q === 2 || it.frase)) { if (it.audio) speakItem(it); else speak(spoken); }
     $("#fb").scrollIntoView({ behavior: "smooth", block: "nearest" });
   }
 
@@ -2417,7 +2427,7 @@
     if (!word) return "";
     var kw = (state.keywords || {})[word] || "";
     return '<div class="keyword"><label class="muted small">🧷 Tu imagen para recordarla <small>(opcional: «burro» → un burro untado en manteca)</small></label>' +
-      '<div class="typed"><input id="kwin" data-kw="' + esc(word) + '" maxlength="80" placeholder="una imagen, una rima…" value="' + esc(kw) + '">' +
+      '<div class="typed"><input id="kwin"' + KB_ES + ' data-kw="' + esc(word) + '" maxlength="80" placeholder="una imagen, una rima…" value="' + esc(kw) + '">' +
       '<button class="tab" id="kwsave">Guardar</button></div></div>';
   }
   function wireKeyword() {
@@ -2541,6 +2551,7 @@
     round.lastGiven = null;
     round.firstCat = null;
     round.picked = [];
+    round.promptSpoken = false;
     if (round.i >= round.items.length) {
       finishRound();
       return;
@@ -3030,7 +3041,7 @@
     return '<div class="card" id="plancard"><h2>🎯 Tu meta</h2>' +
       '<span class="chips">' + WHY.map(function (w) { return '<button class="tab' + (id.why === w[0] ? " on" : "") + '" data-why3="' + w[0] + '">' + w[1] + "</button>"; }).join("") + "</span>" +
       '<label class="set"><span>Con tus palabras<small>«En seis meses pido un café en Nápoles sin pensar»</small></span></label>' +
-      '<div class="typed"><input id="idealtext" maxlength="120" value="' + esc(id.text || "") + '" placeholder="En seis meses…"><button class="tab" id="idealsave">Guardar</button></div>' +
+      '<div class="typed"><input id="idealtext"' + KB_ES + ' maxlength="120" value="' + esc(id.text || "") + '" placeholder="En seis meses…"><button class="tab" id="idealsave">Guardar</button></div>' +
       (why || id.text ? '<p class="muted small">Tu meta: ' + (why ? esc(why[1]) : "") + (id.text ? " · «" + esc(id.text) + "»" : "") + "</p>" : "") +
       '<h3>🏅 Récords personales</h3><table class="res">' +
         "<tr><td>Mejor sesión</td><td>" + (rec.sessione || 0) + " %</td></tr>" +
@@ -3562,7 +3573,7 @@
           (dg.plays >= 2 ? "Listo: ahora reconstruilo" : second ? "Escucha 2 de 2: anotá mientras escuchás" : "Escucha 1 de 2") + "</p></div>" +
         '<div id="dgkeys">' + (second ? dgKeysHtml(t) : "") + "</div>" +
         '<label class="dgnotes"' + (second ? "" : " hidden") + '><span class="muted small">📝 Tus notas (palabras sueltas, como salgan)</span>' +
-          '<textarea id="dgnotes" class="grow" rows="3" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder="sabato… amici… per fortuna…">' +
+          '<textarea id="dgnotes"' + KB_IT + ' class="grow" rows="3" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder="sabato… amici… per fortuna…">' +
           esc(dg.notes || "") + "</textarea></label>" +
         '<button class="btn wide" id="dgwrite"' + (dg.plays >= 2 ? "" : " disabled") + '>Ya escuché las dos → reconstruir</button></div>';
     }
@@ -3572,7 +3583,7 @@
         dgKeysHtml(t) +
         '<p class="muted small">Escribí acá el texto en italiano: lo que recordás y tus notas, con tus palabras donde haga falta. ' +
         "Bloques a recuperar: " + t.chunks.length + ".</p>" +
-        '<textarea id="dgtext" class="grow scrivi" rows="7" spellcheck="false" autocapitalize="sentences" placeholder="Ricostruisci il testo…">' + esc(dg.given || "") + "</textarea>" +
+        '<textarea id="dgtext"' + KB_IT + ' class="grow scrivi" rows="7" spellcheck="false" autocapitalize="sentences" placeholder="Ricostruisci il testo…">' + esc(dg.given || "") + "</textarea>" +
         '<div class="row" style="margin-top:10px"><button class="btn" id="dgcheck">Controlla</button>' +
         '<button class="tab" id="dgagain">🔊 escuchar otra vez (cuenta como ayuda)</button></div>' +
         '<div id="dgout"></div></div>';
@@ -3855,7 +3866,7 @@
     }
     return head + '<div class="card"><p class="muted">' + esc(sc.situazione_es) + "</p>" + objs +
       '<p class="muted small">Palabras útiles: <i>' + (sc.parole_utili || []).map(esc).join(" · ") + "</i></p>" + chat +
-      '<div class="typed"><textarea id="ptext" class="grow" rows="1" autocomplete="off" autocapitalize="sentences" autocorrect="off" spellcheck="false" enterkeyhint="send" placeholder="Scrivi in italiano…"' + (parla.busy ? " disabled" : "") + "></textarea>" +
+      '<div class="typed"><textarea id="ptext"' + KB_IT + ' class="grow" rows="1" autocomplete="off" autocapitalize="sentences" autocorrect="off" spellcheck="false" enterkeyhint="send" placeholder="Scrivi in italiano…"' + (parla.busy ? " disabled" : "") + "></textarea>" +
       '<button class="btn" id="psend"' + (parla.busy ? " disabled" : "") + ">Invia</button></div>" +
       '<div class="row" style="margin-top:8px"><button class="tab" id="pend">Terminar acá</button></div></div>';
   }
@@ -4156,7 +4167,7 @@
         return '<label class="eopt"><input type="radio" name="q' + i + '" value="' + esc(o) + '"> ' + esc(o) + "</label>";
       }).join("") + "</li>";
     }).join("") + "</ol><h3>Completá con una palabra del audio</h3><ol class=\"equestions\">" + a.completa.map(function (c, i) {
-      return "<li>" + esc(c[0]) + ' <input class="egap" data-gap="' + i + '" autocapitalize="off" autocorrect="off" spellcheck="false"></li>';
+      return "<li>" + esc(c[0]) + ' <input class="egap"' + KB_IT + ' data-gap="' + i + '" autocapitalize="off" autocorrect="off" spellcheck="false"></li>';
     }).join("") + "</ol>";
   }
   function esameProvaResult(a) {
@@ -4257,7 +4268,7 @@
       EsameData.scrittura.map(function (t, i) {
         var d = (state.esameDraft || {})[t.id] || "";
         return "<h3>" + (i + 1) + ". " + esc(t.kind === "argomentativo" ? "Testo argomentativo" : "Lettera formale") + " · " + t.words + " palabras</h3><p>" + esc(t.t) + "</p>" +
-          '<textarea class="grow scrivi edraft" data-id="' + t.id + '" rows="8" spellcheck="false" autocapitalize="sentences">' + esc(d) + "</textarea>" +
+          '<textarea' + KB_IT + ' class="grow scrivi edraft" data-id="' + t.id + '" rows="8" spellcheck="false" autocapitalize="sentences">' + esc(d) + "</textarea>" +
           '<p class="muted small ewords" data-for="' + t.id + '">' + d.split(/\s+/).filter(Boolean).length + " palabras</p>";
       }).join("") +
       '<button class="btn wide" id="econsegna4"' + (es.busy ? " disabled" : "") + ">" + (es.busy ? "⏳ Corrigiendo…" : "Consegnare") + "</button></div>";
@@ -4336,7 +4347,7 @@
       '<span class="t-via">' + esc(w.fare || w.title) + "</span></h1>" +
       '<div class="card"><p>' + mk(task.t) + '</p><ul class="reqs" id="sreqs">' + reqsHtml(r) + "</ul>" +
       '<p class="muted small">Escribí sin traductor: lo que te equivoques es lo que más vas a aprender. Podés dejarlo a medias y volver.</p></div>' +
-      '<textarea id="stext" class="grow scrivi" rows="7" spellcheck="false" autocapitalize="sentences" placeholder="Scrivi qui, in italiano…">' + esc(draft) + "</textarea>" +
+      '<textarea id="stext"' + KB_IT + ' class="grow scrivi" rows="7" spellcheck="false" autocapitalize="sentences" placeholder="Scrivi qui, in italiano…">' + esc(draft) + "</textarea>" +
       '<div class="row" style="margin-top:10px"><button class="btn" id="scheck">🔎 Revisar</button>' +
       '<button class="tab" id="smodel">👀 Ver un modelo</button></div>' +
       '<label class="muted small ltopt"><input type="checkbox" id="slt"' + (state.ltOff ? "" : " checked") + "> " +
@@ -4587,6 +4598,7 @@
       on("#next", nextItem);
       on("#sayit", function () { speak(it.stem, true); });
       wireKeyword();
+      round.promptSpoken = true;
       speak(it.stem);
     }
 
@@ -4626,6 +4638,7 @@
     if (it.type === "dictation") {
       on("#play1", function () { it.voice ? speakItem(it, true) : speak(it.answer, true); });
       on("#slow", function () { it.voice ? speakItem(it, true, 0.6) : speak(it.answer, true, 0.6); });
+      round.promptSpoken = true;
       setTimeout(function () { it.voice ? speakItem(it) : speak(it.answer); }, 250);
     }
 
@@ -4633,6 +4646,7 @@
       on("#next", nextItem);
       on("#sayit", function () { speak(it.frase.it, true); });
       on("#slow", function () { speak(it.frase.it, true, 0.6); });
+      round.promptSpoken = true;
       speak(it.frase.it);
     }
 
@@ -4659,6 +4673,7 @@
       on("#play1", function () { speak(it.stem, true); });
       on("#slow", function () { speak(it.stem, true, 0.6); });
       on("#peek", function () { $("#peektxt").hidden = false; });
+      round.promptSpoken = true;
       setTimeout(function () { speak(it.stem); }, 250);
     }
     if (SAY_TYPES[it.type]) {
@@ -4671,6 +4686,7 @@
           speak(it.pair.b, true, v.rate, { pitch: v.pitch, vi: v.vi, keep: true });
         } });
       });
+      round.promptSpoken = true;
       setTimeout(function () { speakItem(it); }, 250);
     }
 
@@ -4745,7 +4761,7 @@
     function askFix() {
       $("#fixbox").innerHTML = '<p class="muted">¡Bien visto! Ahora corregila: escribí lo que va en su lugar' +
         ' o, si sobra, borrala.</p>' +
-        '<div class="typed"><textarea id="fxin" class="grow" rows="1" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="send">' +
+        '<div class="typed"><textarea id="fxin"' + KB_IT + ' class="grow" rows="1" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="send">' +
         esc(it.bad) + '</textarea><button class="btn" id="fxsend">Controlla</button></div>' +
         '<div class="row" style="margin-top:8px"><button class="tab" id="fxdel">🗑️ sobra: borrarla</button></div>';
       var inp = $("#fxin");

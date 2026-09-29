@@ -230,6 +230,17 @@ teléfono la primera vez y el service worker guarda el audio para usarlo sin
 conexión; si no hay grabación (o es un par de vocal abierta/cerrada), suena
 la voz del teléfono.
 
+**Una sola lectura por ejercicio**: si la consigna ya sonó sola (escucha,
+dictado, palabra nueva, frase), al responder no se vuelve a leer encima;
+si la consigna no sonó, se lee la respuesta. El botón 🔊 escuchar sigue
+disponible siempre.
+
+**Idioma del teclado**: cada campo de texto dice en qué idioma se escribe
+(`lang="it-IT"` si la respuesta es en italiano, `lang="pt-BR"` si es en
+castellano, para Gboard con teclados italiano y portugués). En Android el
+navegador puede pasárselo al teclado como pista; si el teclado no le hace
+caso, no cambia nada.
+
 **Oraciones grabadas** (`docs/js/voci_cv_data.js`, `docs/audio/cv/`): 128
 oraciones de Common Voice (Mozilla, CC0) leídas por voluntarios distintos,
 revisadas a mano, con su semana. Suenan en el dictado y en «¿Qué forma
