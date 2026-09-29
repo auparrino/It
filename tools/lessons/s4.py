@@ -388,6 +388,24 @@ LESSONS = {
          ["Non *me la sono sentita*.", "No me animé."],
          ["*Ci ho messo* un'ora.", "Tardé una hora."]]},
 
+ {"h": "volerci vs metterci: qué hace falta, cuánto tardás",
+  "r": "*Volerci* es **impersonal**: lo que hace falta es el sujeto y "
+       "concuerda. *Metterci* es **personal**: alguien tarda, y lo marca "
+       "la persona.",
+  "ex": [["*Ci vuole* un'ora per arrivare.", "Se necesita una hora para llegar."],
+         ["*Ci vogliono* due ore di treno.", "Hacen falta dos horas de tren."],
+         ["*Ci metto* un'ora ad arrivare.", "Tardo una hora en llegar."],
+         ["*Ci abbiamo messo* tre ore.", "Tardamos tres horas."],
+         ["*Ci sono volute* due ore.", "Hicieron falta dos horas."]],
+  "table": {"head": ["Punto", "volerci", "metterci"],
+            "rows": [["Sujeto", "la cosa necesaria", "quien tarda"],
+                     ["Concuerda", "ci vuole / ci vogliono", "con la persona: ci metto, ci mette"],
+                     ["Compuesto", "essere: ci sono volute", "avere: ci ho messo"],
+                     ["Español", "hacer falta, llevar (tiempo)", "tardar"]]},
+  "warn": "«Ci voglio un'ora» no existe: *volerci* nunca se conjuga con "
+          "quien tarda. Para «tardo» decí *ci metto*; para «hace falta» "
+          "decí *ci vuole*."},
+
  {"h": "El participio en -a",
   "r": "Con las formas en *la*, el participio **termina en -a**: concuerda "
        "con esa *la* que no se refiere a nada concreto.",
@@ -424,6 +442,25 @@ LESSONS = {
                      ["fare a meno di", "prescindir de"]]},
   "tip": "*Sto per uscire* = «estoy por salir»: así se dice el futuro "
          "inminente. *stare* + gerundio NO sirve para eso."},
+
+ {"h": "stare a, finire con l', infischiarsene, prendersela comoda",
+  "r": "Cuatro construcciones de conversación que no se deducen: *stare a* "
+       "+ infinitivo, *finire con l'* + infinitivo, *infischiarsene di* y "
+       "*prendersela comoda*.",
+  "ex": [["*Sta a te* decidere.", "Te toca a vos decidir."],
+         ["*Non sta a me* giudicare.", "No me corresponde a mí juzgar."],
+         ["Ha finito *con l'accettare*.", "Terminó aceptando."],
+         ["*Me ne infischio* delle critiche.", "Me importan un bledo las críticas."],
+         ["*Se l'è presa comoda*, come sempre.", "Se lo tomó con calma, como siempre."]],
+  "table": {"head": ["Construcción", "Sentido", "Ejemplo"],
+            "rows": [["stare a + infinito", "corresponder, tocar", "Sta a te scegliere."],
+                     ["finire con l' + infinito", "terminar + gerundio (= finire per)", "Finirai con l'ammetterlo."],
+                     ["infischiarsene di", "importarle un bledo", "Se ne infischia del regolamento."],
+                     ["prendersela comoda", "tomárselo con calma", "Se la prende comoda."],
+                     ["prendersela con", "agarrársela con", "Se la prende con tutti."]]},
+  "warn": "*Prendersela comoda* no es *prendersela* («ofenderse»): el "
+          "adjetivo *comoda* cambia el sentido. *Infischiarsene* es "
+          "coloquial; en registro más neutro, *non curarsi di*."},
 ]},
 
 46: {
@@ -444,7 +481,8 @@ LESSONS = {
                      ["-ello / -ella", "pequeño, a veces despectivo", "alberello, cattivello"],
                      ["-one / -ona", "grande, aumentativo", "librone, portone, pigrone"],
                      ["-accio / -accia", "feo, malo, despectivo", "tempaccio, parolaccia, ragazzaccio"],
-                     ["-uccio / -uccia", "cariñoso, un poco menor", "caruccio, boccuccia"]]},
+                     ["-uccio / -uccia", "cariñoso, un poco menor", "caruccio, boccuccia"],
+                     ["-astro / -astra", "despectivo o «tirando a»", "poetastro, giallastro"]]},
   "warn": "*-one* suele volver masculino un sustantivo femenino: *la porta → "
           "il portone*, *la donna → il donnone*."},
 
@@ -484,6 +522,61 @@ LESSONS = {
   "tip": "*ri-* va con casi cualquier verbo: *te lo rispiego* (te lo vuelvo "
          "a explicar), *ci risentiamo* (volvemos a hablar). Ahorra "
          "perífrasis."},
+
+ {"h": "Interfijos y ortografía con h",
+  "r": "Muchas bases piden un **interfijo** (*-c-, -ol-, -er-, -icci-*). "
+       "Y *c/g* duras conservan su sonido con una **h**.",
+  "ex": [["Un *bastoncino* di pane.", "Un palito de pan."],
+         ["Ha un *cagnolino* nero.", "Tiene un perrito negro."],
+         ["Una *pioggerellina* fastidiosa.", "Una llovizna molesta."],
+         ["È un *amichetto* di mio figlio.", "Es un amiguito de mi hijo."],
+         ["Ce n'è *pochino*.", "Queda muy poquito."]],
+  "table": {"head": ["Base", "Alterado", "Qué pasa"],
+            "rows": [["bastone", "bastoncino", "interfijo -c-"],
+                     ["fiore", "fiorellino", "interfijo -ell-"],
+                     ["cane", "cagnolino", "cambia la raíz y suma -ol-"],
+                     ["pioggia", "pioggerellina", "interfijo -er- y -ell-"],
+                     ["porto", "porticciolo", "interfijo -icci- + -olo"],
+                     ["amico, poco", "amichetto, pochino", "c dura + i/e: entra la h"],
+                     ["lago, lungo", "laghetto, lunghetto", "g dura + i/e: entra la h"],
+                     ["camicia, bacio", "camicetta, bacino", "-cia / -cio pierde la i"]]},
+  "warn": "No hay regla que prediga el interfijo: se aprende palabra por "
+          "palabra. Y cuidado: *cane → cagnolino*, no *canino* (¡es el "
+          "colmillo!)."},
+
+ {"h": "Contraste con el español: no calques el diminutivo",
+  "r": "El español achica todo con *-ito*; el italiano **elige** el sufijo "
+       "según la palabra. Algunos alterados no son de tamaño.",
+  "ex": [["Abitiamo in una *casetta*.", "Vivimos en una casita."],
+         ["Che *libraccio*!", "¡Qué libro espantoso!"],
+         ["Sei un *chiacchierone*.", "Sos un charlatán."],
+         ["Non fare il *brontolone*.", "No seas gruñón."],
+         ["È un *mangione*.", "Es un glotón."]],
+  "table": {"head": ["Español", "Italiano", "Trampa"],
+            "rows": [["casita", "casetta", "no *casina*"],
+                     ["poquito", "pochino, pochetto", "el español pone -qu-; el italiano, -ch-"],
+                     ["librazo", "librone", "*libraccio* es un libro malo, no grande"]]},
+  "warn": "*-one* sobre un **verbo** no agranda: nombra a quien hace algo "
+          "seguido (*chiacchierare → chiacchierone*, *brontolare → "
+          "brontolone*). Suele criticar, pero entre amigos es cariñoso."},
+
+ {"h": "Prefissoidi: elementos griegos y latinos",
+  "r": "Los *prefissoidi* (*auto-, tele-, micro-, multi-, eco-*) son "
+       "raíces cultas que se pegan a otras palabras. Casi todos coinciden "
+       "con el español.",
+  "ex": [["Faccio *tele*lavoro due giorni.", "Trabajo dos días a distancia."],
+         ["Ha poca *auto*stima.", "Tiene poca autoestima."],
+         ["Scaldalo nel *micro*onde.", "Calentalo en el microondas."],
+         ["Vive in un quartiere *multi*etnico.", "Vive en un barrio multiétnico."],
+         ["Ho preso il *tele*comando.", "Agarré el control remoto."]],
+  "table": {"head": ["Prefissoide", "Sentido", "Ejemplos"],
+            "rows": [["auto-", "de uno mismo", "autostima, autoscuola"],
+                     ["tele-", "a distancia", "telelavoro, telecomando"],
+                     ["micro- / macro-", "muy pequeño / muy grande", "microonde, macroeconomia"],
+                     ["multi- / poli-", "muchos", "multietnico, polifunzionale"],
+                     ["eco-", "ambiente, economía", "ecosistema, ecoturismo"]]},
+  "tip": "No alteran una palabra como *-ino*: **crean** una nueva. Ojo: *il "
+         "telecomando* es el control remoto."},
 ]},
 
 47: {
