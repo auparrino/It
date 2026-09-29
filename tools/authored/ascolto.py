@@ -19,7 +19,7 @@ PAIRS = [
     ("caro", ["carro"], "caro = caro, r simple; carro = carro, r fuerte."),
     ("sono", ["sonno"], "sono = soy / son; sonno = sueño, con doble n."),
     ("cappello", ["capello"], "cappello = sombrero (doble p); capello = pelo."),
-    ("anno", ["ano"], "anno = año: la doble n es la que en español es ñ."),
+    ("anno", ["ano"], "anno = año (con doble n; sin la doble, «ano» es otra palabra). Ojo: la ñ del español se escribe gn en italiano (bagno)."),
     ("chiesa", ["ciesa", "cesa"], "ch + i suena como k (como «quie» en español): chiesa = iglesia."),
     ("cena", ["chena", "scena"], "c + e suena como la ch española: cena = cena. Para el sonido k se escribe ch."),
     ("figlio", ["filio", "fillo"], "gl + i: un sonido como la ll bien pronunciada; figlio = hijo."),

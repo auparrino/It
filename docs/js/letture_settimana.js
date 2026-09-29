@@ -82,7 +82,7 @@
         "e va al lavoro in autobus. Dice sempre che la mattina presto la città è molto bella.\n\n" +
         "In ospedale non può mai stare ferma: deve controllare i pazienti, dare le medicine " +
         "e parlare con i medici. A mezzogiorno beve un caffè veloce con i colleghi.\n\n" +
-        "Il pomeriggio viene a casa stanca, ma la sera esce con gli amici. " +
+        "Il pomeriggio torna a casa stanca, ma la sera esce con gli amici. " +
         "\"Vuoi venire al cinema?\" chiede la sua amica Laura. \"Sì, vengo volentieri, " +
         "ma domani devo lavorare presto!\" risponde Sara.",
       gloss: { infermiera: "enfermera", ospedale: "hospital", ferma: "quieta", controllare: "controlar",
@@ -91,7 +91,7 @@
       questions: [
         ["¿Cómo va Sara al trabajo?", ["en colectivo", "a pie", "en auto", "en tren"], "en colectivo"],
         ["¿Qué hace al mediodía?", ["toma un café rápido", "almuerza en casa", "duerme", "va al cine"], "toma un café rápido"],
-        ["¿Por qué no puede quedarse hasta tarde?", ["mañana trabaja temprano", "está enferma", "no le gusta el cine", "no tiene plata"], "mañana trabaja temprano"]
+        ["¿Qué tiene que hacer Sara mañana?", ["trabajar temprano", "estar enferma", "ir al cine con Laura", "quedarse en casa"], "trabajar temprano"]
       ],
       vf: [["Sara fa l'infermiera.", "vero"], ["Sara esce di casa alle otto.", "falso"], ["Laura lavora con Sara in ospedale.", "non si dice"]],
       hunt: { label: "Tocá los verbos irregulares (fa, esce, va, dice…)", targets: ["fa", "esce", "va", "dice", "può", "deve", "beve", "viene", "vuoi", "vengo", "devo"] } },
@@ -327,11 +327,11 @@
         "è stato citato perfino da Boccaccio nel Decameron.",
       gloss: { soltanto: "solamente", province: "provincias", munto: "ordeñado", caldaie: "calderas", rame: "cobre",
                forma: "horma", immersa: "sumergida", sistemate: "acomodadas", scaffali: "estantes",
-               girate: "dadas vuelta", stagionato: "estacionado", almeno: "por lo menos", esaminata: "examinada",
+               girate: "dadas vuelta", stagionato: "curado", almeno: "por lo menos", esaminata: "examinada",
                batte: "golpea", martelletto: "martillito", apprezzato: "apreciado", pare: "parece", perfino: "hasta, incluso", citato: "citado" },
       questions: [
         ["¿Cuándo se ordeña la leche?", ["a la tarde y a la mañana", "solo de noche", "una vez por semana", "al mediodía"], "a la tarde y a la mañana"],
-        ["¿Cuánto tiempo se estaciona como mínimo?", ["doce meses", "veinte días", "dos años", "seis meses"], "doce meses"],
+        ["¿Cuánto tiempo madura como mínimo?", ["doce meses", "veinte días", "dos años", "seis meses"], "doce meses"],
         ["¿Para qué el experto golpea la horma?", ["para oír si está perfecta", "para cortarla", "para limpiarla", "para darla vuelta"], "para oír si está perfecta"]
       ],
       vf: [["Il parmigiano si stagiona almeno dodici mesi.", "vero"], ["Il latte si lavora in caldaie di plastica.", "falso"], ["Un chilo di parmigiano costa venti euro.", "non si dice"]],
@@ -412,22 +412,22 @@
       text:
         "Appena arrivata a Roma, Valeria ha detto al suo coinquilino che era \"molto imbarazzata\", " +
         "volendo dire che si vergognava. Lui ha capito subito, ma altre parole sono state più insidiose.\n\n" +
-        "In un negozio ha chiesto una \"salsa\" per la pasta e le hanno dato del ketchup: " +
-        "in italiano si dice \"sugo\". Poi ha raccontato che il suo capo era \"molto largo\", " +
+        "Una sera il coinquilino le ha chiesto di passargli il \"burro\" e lei, che pensava all'animale, " +
+        "è rimasta a guardarlo confusa: in italiano il burro si spalma sul pane. Poi ha raccontato che il suo capo era \"molto largo\", " +
         "pensando alla generosità, e i colleghi si sono messi a ridere.\n\n" +
         "Ormai Valeria ha imparato la lezione: prima di usare una parola che somiglia allo spagnolo, " +
         "la controlla sul dizionario. \"Le parole più pericolose\", dice, " +
         "\"sono quelle che sembrano facili\".",
       gloss: { imbarazzata: "avergonzada, incómoda", vergognava: "le daba vergüenza", coinquilino: "compañero de departamento",
-               insidiose: "traicioneras", negozio: "negocio", sugo: "salsa (para pasta)", largo: "ancho",
+               insidiose: "traicioneras", burro: "manteca (no el animal)", spalma: "se unta", largo: "ancho",
                generosità: "generosidad", ormai: "a esta altura", somiglia: "se parece", pericolose: "peligrosas" },
       questions: [
-        ["¿Qué le dieron cuando pidió «salsa»?", ["ketchup", "salsa de tomate", "aceite", "queso"], "ketchup"],
+        ["¿Qué le pidió el compañero?", ["que le pasara la manteca", "que le pasara el pan", "que le pasara el queso", "que le pasara la sal"], "que le pasara la manteca"],
         ["¿Por qué se rieron los compañeros?", ["dijo «largo» pensando en «generoso»", "llegó tarde", "habló en español", "se equivocó de oficina"], "dijo «largo» pensando en «generoso»"],
         ["¿Qué hace ahora Valeria?", ["controla en el diccionario las palabras parecidas al español", "habla solo en inglés", "no usa palabras nuevas", "pregunta al jefe"], "controla en el diccionario las palabras parecidas al español"]
       ],
-      vf: [["Valeria ha chiesto una salsa e le hanno dato il ketchup.", "vero"], ["I colleghi hanno capito subito cosa voleva dire con largo.", "falso"], ["Valeria studia medicina.", "non si dice"]],
-      hunt: { label: "Tocá los falsos amigos del texto", targets: ["imbarazzata", "salsa", "largo"] } },
+      vf: [["Il coinquilino ha chiesto a Valeria di passargli il burro.", "vero"], ["I colleghi hanno capito subito cosa voleva dire con largo.", "falso"], ["Valeria studia medicina.", "non si dice"]],
+      hunt: { label: "Tocá los falsos amigos del texto", targets: ["imbarazzata", "burro", "largo"] } },
 
     { id: "w-01", week: 1, level: "A1", emoji: "👋", title: "Sono Lucia",
       grammar: "essere e avere",
@@ -630,7 +630,7 @@
       gloss: { felice: "feliz", pesce: "pescado", fresco: "fresco", tramonto: "atardecer", terrazza: "terraza",
                imparare: "aprender", guadagnare: "ganar (plata)", almeno: "al menos", libero: "libre", forse: "quizás" },
       questions: [
-        ["¿Qué quiere hacer Marco?", ["abrir un restaurante en el mar", "cambiar de banco", "irse a vivir con Paolo", "aprender a nadar"], "abrir un restaurante en el mar"],
+        ["¿Qué quiere hacer Marco?", ["abrir un restaurante frente al mar", "cambiar de banco", "irse a vivir con Paolo", "aprender a nadar"], "abrir un restaurante frente al mar"],
         ["¿Qué problema ve Paolo?", ["Marco no sabe cocinar", "Cerdeña es cara", "no hay pescado", "Marco es muy joven"], "Marco no sabe cocinar"],
         ["¿Cómo iría Paolo al restaurante?", ["solo como cliente", "como cocinero", "como socio", "no iría"], "solo como cliente"]
       ],
@@ -817,7 +817,7 @@
         ["¿Qué habrían hecho el año pasado?", ["cerrar las calles a los autos", "construir un parque", "cambiar de maestra", "abrir más escuelas"], "cerrar las calles a los autos"]
       ],
       vf: [["Luca costruirebbe un parco giochi.", "vero"], ["Marco vorrebbe cominciare la scuola alle otto.", "falso"], ["La maestra è stata sindaca.", "non si dice"]],
-      hunt: { label: "Tocá los verbos de la «se» (foste, fossi, avessi, comandassi)", targets: ["foste", "fossi", "avessi", "comandassi"] } },
+      hunt: { label: "Tocá los verbos de las condiciones con «se»", targets: ["foste", "fossi", "avessi", "comandassi"] } },
 
     { id: "w-34", week: 34, level: "B2", emoji: "📖", title: "La mia libreria",
       grammar: "pronomi relativi",
@@ -967,7 +967,7 @@
       grammar: "verbi e preposizioni",
       text:
         "A gennaio Luca ha deciso di cambiare vita. Ha smesso di fumare e ha cominciato a correre ogni mattina. " +
-        "Ha promesso alla moglie di tornare a casa prima la sera e ha provato a imparare a cucinare.\n\n" +
+        "Ha promesso alla moglie di tornare a casa prima di sera e ha provato a imparare a cucinare.\n\n" +
         "Ha anche pensato di iscriversi a un corso di chitarra, ma non è riuscito a trovare il tempo. " +
         "Si è abituato a svegliarsi alle sei, però si è stancato di mangiare solo insalata.\n\n" +
         "A marzo sua moglie gli ha chiesto: \"Continui a correre?\" Luca ha finto di non sentire. " +
@@ -978,7 +978,7 @@
       questions: [
         ["¿Qué dejó Luca en enero?", ["de fumar", "de correr", "de trabajar", "de cocinar"], "de fumar"],
         ["¿Por qué no hizo el curso de guitarra?", ["no encontró tiempo", "era caro", "no le gustaba", "se lastimó"], "no encontró tiempo"],
-        ["¿Qué pasa en marzo?", ["finge no oír si sigue corriendo", "sigue corriendo", "vuelve a fumar", "empieza guitarra"], "finge no oír si sigue corriendo"]
+        ["¿Qué pasa en marzo?", ["su esposa le pregunta si sigue corriendo y él finge no oír", "anuncia que corre todos los días", "vuelve a fumar", "empieza guitarra"], "su esposa le pregunta si sigue corriendo y él finge no oír"]
       ],
       vf: [["Luca ha smesso di fumare.", "vero"], ["Luca si è iscritto a un corso di chitarra.", "falso"], ["Luca ha perso cinque chili.", "non si dice"]],
       hunt: { label: "Tocá las preposiciones que siguen al verbo (di, a)", targets: ["di", "a"] } },
@@ -1032,7 +1032,7 @@
         "\"La Juve, quest'anno, non la ferma nessuno\", dice lui. \"Ma che dici? Lo scudetto lo vince l'Inter\", " +
         "rispondo io.\n\n" +
         "È stato lui a farmi conoscere mia moglie: era una cliente anche lei. Il cornetto, invece, l'ho sempre " +
-        "preso altrove, perché quelli di Gino sono duri come pietre. Ma questo, a lui, non l'ho mai detto.",
+        "preso altrove, perché quelli di Gino sono duri come pietre. Ma questo, a lui, non gliel'ho mai detto.",
       gloss: { tifiamo: "somos hinchas", squadre: "equipos", ferma: "para", scudetto: "campeonato",
                cornetto: "medialuna", altrove: "en otro lado", duri: "duros", pietre: "piedras" },
       questions: [
@@ -1047,7 +1047,7 @@
       grammar: "registro alto e coesione",
       text:
         "Gentili condomini, si comunica che, a partire da lunedì 3 marzo, avranno inizio i lavori di " +
-        "manutenzione dell'ascensore. Durante tale periodo, la cui durata si prevede di due settimane, " +
+        "manutenzione dell'ascensore. Durante tale periodo, la cui durata è prevista in due settimane, " +
         "l'impianto non sarà utilizzabile.\n\n" +
         "Si invitano pertanto i residenti a servirsi delle scale e a prestare particolare attenzione ai " +
         "materiali depositati nell'atrio. Qualora vi fossero esigenze specifiche, in particolare per persone " +
@@ -1097,7 +1097,7 @@
         "Poi chiamò la sua insegnante: \"Ce l'ho fatta!\"",
       gloss: { documento: "documento", cuore: "corazón", batteva: "latía", dimostrare: "demostrar",
                raggiunto: "alcanzado", prova: "prueba", ascolto: "escucha", giornalisti: "periodistas",
-               agio: "gusto (a suo agio = cómoda)", produzione: "producción", volte: "veces", argomentare: "argumentar", superato: "aprobado",
+               agio: "comodidad (a suo agio = cómoda)", produzione: "producción", volte: "veces", argomentare: "argumentar", superato: "aprobado",
                insegnante: "profesora" },
       questions: [
         ["¿Qué prueba fue la más difícil?", ["la de escucha", "la escrita", "la oral", "la de lectura"], "la de escucha"],
