@@ -610,6 +610,55 @@ LESSONS = {
           "italiano también tiene *buon'amica* en femenino.",
   "tip": "Delante de *s* + consonante vuelve la forma plena: *un buono "
          "studente*, *Santo Stefano*."},
+
+ {"h": "Plurales en -co, -ca, -go, -ga",
+  "r": "*-ca, -ga* hacen *-che, -ghe*. *-co, -go* hacen *-chi, -ghi*; "
+       "los esdrújulos en *-co* hacen *-ci*.",
+  "table": {"head": ["Singular", "Plural", "Por qué"],
+            "rows": [["bianco / bianca", "bianchi / bianche", "la h conserva el sonido duro"],
+                     ["lungo / lunga", "lunghi / lunghe", "igual con la g"],
+                     ["stanco / stanca", "stanchi / stanche", "palabra llana: h"],
+                     ["simpatico", "simpatici", "esdrújula: -ci"],
+                     ["simpatica", "simpatiche", "el femenino siempre lleva h"]]},
+  "ex": [["Le strade sono *lunghe*.", "Las calles son largas."],
+         ["Marco e Luca sono *stanchi*.", "Marco y Luca están cansados."],
+         ["Sono *simpatici* e *ricchi*.", "Son simpáticos y ricos."],
+         ["Le case *bianche* sono nuove.", "Las casas blancas son nuevas."]],
+  "warn": "Sin h no hay sonido duro: «simpatichi» y «bianci» están mal. "
+          "Sustantivos que rompen la regla: *amico → amici*, *nemico → nemici*, "
+          "*greco → greci*."},
+
+ {"h": "molto, y avere para edad y sensaciones",
+  "r": "Ante un adjetivo, *molto* significa «muy» y **no cambia**. Ante un "
+       "sustantivo es «mucho» y **concuerda**.",
+  "table": {"head": ["Ante...", "Ejemplo", "Cambia?"],
+            "rows": [["adjetivo", "Anna è molto stanca.", "no: molto"],
+                     ["sustantivo", "Ho molti amici. Ho molta fame.", "sí: molto, molta, molti, molte"],
+                     ["poco, igual", "Sono poco simpatici. Ho poche amiche.", "igual que molto"]]},
+  "ex": [["Le case sono *molto* grandi.", "Las casas son muy grandes."],
+         ["Ho *molte* amiche a Roma.", "Tengo muchas amigas en Roma."],
+         ["Ho *molta* fame e *molto* sonno.", "Tengo mucha hambre y mucho sueño."],
+         ["*Ho* trent'anni.", "Tengo treinta años."]],
+  "warn": "Edad y sensaciones van con *avere*: *ho vent'anni*, *ho freddo*, "
+          "*ha caldo*, *abbiamo fame*. «Sono freddo» dice que sos frío de carácter.",
+  "tip": "El error típico es «sono molti stanchi»: ante adjetivo, *molto* "
+         "queda igual."},
+
+ {"h": "Nacionalidades y profesiones",
+  "r": "Con *essere*, la nacionalidad y el oficio van en minúscula y **sin "
+       "artículo**: *Sono argentina. Lucia è insegnante.*",
+  "table": {"head": ["Terminación", "m.sg", "f.sg", "m.pl / f.pl"],
+            "rows": [["-ano", "messicano", "messicana", "messicani / messicane"],
+                     ["-ino", "argentino", "argentina", "argentini / argentine"],
+                     ["-ese (una forma)", "francese", "francese", "francesi / francesi"],
+                     ["otras en -o", "spagnolo, tedesco", "spagnola, tedesca", "spagnoli, tedeschi / spagnole, tedesche"]]},
+  "ex": [["Sono *argentina*, di Rosario.", "Soy argentina, de Rosario."],
+         ["Marco è *francese*, Anna è *inglese*.", "Marco es francés, Anna es inglesa."],
+         ["Lui è *studente*, lei è *studentessa*.", "Él es estudiante, ella es estudiante."],
+         ["Sara è *cuoca*. Luca è *dentista*.", "Sara es cocinera. Luca es dentista."]],
+  "warn": "Los oficios cambian por grupos: *cuoco / cuoca*, *studente / "
+          "studentessa*, y otros no cambian: *insegnante, dentista*. Si sumás "
+          "un adjetivo, vuelve el artículo: *Luca è un bravo dentista*."},
 ]},
 
 5: {
@@ -1240,15 +1289,19 @@ LESSONS = {
 ]},
 
 12: {
-"intro": "Reflexivos e imperativo: la rutina diaria y las órdenes. Comparten "
-         "un rasgo clave: el pronombre se pega al final del verbo.",
+"intro": "Reflexivos e imperativo: la rutina diaria, el cuerpo y las órdenes. "
+         "Comparten un rasgo clave: con el imperativo y el infinitivo, el "
+         "pronombre se pega al final; con el verbo conjugado va delante.",
 "parts": [
- {"h": "Reflexivos y recíprocos", "blocks": [0, 1],
-  "match": r"reflexiv|recíproc"},
- {"h": "Imperativo de tu y voi, negativo y formas cortas", "blocks": [2, 3, 5],
-  "match": r"imperativo de tu y de voi|tu y después el de voi|sugerencias|hagamos|persona \(tu|de tu\b|negativ|corta"},
+ {"h": "Reflexivos, recíprocos y el cuerpo", "blocks": [0, 1, 6],
+  "match": r"reflexiv|recíproc|cuerpo",
+  "ids": ["mj-12-%02d" % n for n in range(1, 5)]},
+ {"h": "Imperativo de tu y voi, negativo, farmacia y formas cortas", "blocks": [2, 3, 7, 8, 5],
+  "match": r"imperativo de tu y de voi|tu y después el de voi|sugerencias|hagamos|persona \(tu|de tu\b|negativ|corta",
+  "ids": ["mj-12-%02d" % n for n in range(5, 13)]},
  {"h": "Imperativo formal: Lei", "blocks": [4],
-  "match": r"Lei|formal"},
+  "match": r"Lei|formal",
+  "ids": ["mj-12-13", "mj-12-14"]},
 ],
 "blocks": [
  {"h": "Los reflexivos",
@@ -1323,6 +1376,46 @@ LESSONS = {
          ["*Vacci* tu!", "¡Andá vos!"]],
   "warn": "Única excepción: *gli* no se duplica. *Dagli il libro*, nunca "
           "«daggli»."},
+
+ {"h": "El cuerpo: artículo, no posesivo",
+  "r": "Con partes del cuerpo el italiano usa el **artículo**, no el posesivo: *mi lavo le mani*, no «le mie mani».",
+  "ex": [["*Mi lavo le* mani.", "Me lavo las manos."],
+         ["*Ti lavi i* denti?", "¿Te lavás los dientes?"],
+         ["*Mi fa male la* testa.", "Me duele la cabeza."],
+         ["*Mi fanno male i* piedi.", "Me duelen los pies."]],
+  "warn": "*fa male* concuerda con lo que duele: *la gola* → *fa*, *i piedi* → "
+          "*fanno*. Y con *mi* delante: *mi fa*, no «fa mi»."},
+
+ {"h": "En la farmacia: síntomas y consejos",
+  "r": "Para aconsejar, imperativo de *tu*. Para el síntoma, *ho mal di* + parte del cuerpo, sin artículo.",
+  "table": {"head": ["Síntoma", "Consejo"],
+            "rows": [["Ho mal di testa.", "Prendi una pastiglia."],
+                     ["Ho la tosse.", "Bevi un tè caldo."],
+                     ["Ho la febbre.", "Riposati e bevi molta acqua."],
+                     ["Ho mal di gola.", "Non parlare troppo."]]},
+  "ex": [["*Prendi* una pastiglia dopo cena.", "Tomá una pastilla después de la cena."],
+         ["*Bevi* molta acqua e *riposati*.", "Tomá mucha agua y descansá."],
+         ["*Non fumare*!", "¡No fumes!"],
+         ["*Non preoccuparti*: è solo un raffreddore.", "No te preocupes: es solo un resfrío."]],
+  "warn": "Con *tu* negativo el pronombre puede ir pegado al infinitivo o "
+          "delante: *non preoccuparti* = *non ti preoccupare*.",
+  "tip": "En la farmacia: *una pastiglia, una compressa, uno sciroppo, una "
+         "pomata, la ricetta*."},
+
+ {"h": "Imperativo de tu con forma propia",
+  "r": "*essere, avere, sapere* tienen imperativo propio. *andare, fare, dire, dare, stare* usan formas cortas con apóstrofo.",
+  "table": {"head": ["Verbo", "tu", "voi"],
+            "rows": [["essere", "sii", "siate"],
+                     ["avere", "abbi", "abbiate"],
+                     ["sapere", "sappi", "sappiate"],
+                     ["andare, fare, dare, stare", "va', fa', da', sta'", "andate, fate, date, state"],
+                     ["dire", "di'", "dite"]]},
+  "ex": [["*Sii* gentile con lui!", "¡Sé amable con él!"],
+         ["*Abbi* pazienza!", "¡Tené paciencia!"],
+         ["*Vieni* qui e *siediti*!", "¡Vení acá y sentate!"],
+         ["*Di'* la verità!", "¡Decí la verdad!"]],
+  "warn": "El castellano dice «sé» y «tené»; el italiano, *sii* y *abbi*. Las "
+          "formas cortas llevan apóstrofo, nunca acento: *di'*, *fa'*, *va'*."},
 ]},
 
 13: {
