@@ -493,7 +493,7 @@ LESSONS = {
  {"h": "Pedir con registro: tú, Lei, voi",
   "r": "El condizionale cambia según a quién le hablás: *Potresti* (tú), "
        "*Potrebbe* (Lei), *Potreste* (voi).",
-  "ex": [["*Potresti* aiutarmi, Marco?", "¿Podrías ayudarme, Marco?"],
+  "ex": [["Marco, *potresti* aiutarmi con questo?", "Marco, ¿podrías ayudarme con esto?"],
          ["Scusi, *potrebbe* ripetere?", "Disculpe, ¿podría repetir?"],
          ["Ragazzi, *potreste* aspettare?", "Chicos, ¿podrían esperar?"],
          ["*Avrei bisogno di* un consiglio.", "Necesitaría un consejo."],
@@ -542,7 +542,7 @@ LESSONS = {
 "parts": [
  {"h": "NE: cantidades y «de eso»", "blocks": [0, 1, 5],
   "match": r"^(?!.*(\bci\b|c'è|ci sono|volerci|metterci|lugar)).*(\bne\b|«ne»)"},
- {"h": "CI: lugar, «a algo» y expresiones", "blocks": [2, 3, 4],
+ {"h": "CI: lugar, «a algo» y expresiones", "blocks": [2, 3, 4, 6, 7],
   "match": r"\bci\b|c'è|lugar"},
 ],
 "blocks": [
