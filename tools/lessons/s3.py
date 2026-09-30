@@ -366,8 +366,22 @@ LESSONS = {
          ["*Sarei venuto*, ma non ho potuto.", "Habría venido, pero no pude."],
          ["Al posto tuo, *avrei detto* di no.", "En tu lugar, habría dicho que no."],
          ["*Avresti dovuto* avvisarmi.", "Me tendrías que haber avisado."]],
-  "tip": "*Avresti dovuto / potuto / voluto* + infinitivo es la fórmula del "
-         "reproche y del arrepentimiento. Muy útil y muy frecuente."},
+  "tip": "*Avresti* o *avrebbe dovuto* + infinitivo es el reproche a otro; "
+         "*avrei dovuto / potuto / voluto* + infinitivo, el arrepentimiento "
+         "propio. Muy útiles y muy frecuentes."},
+
+ {"h": "Dovere, potere, volere en el pasado",
+  "r": "*Dovere, potere, volere* + infinitivo toman el auxiliar del infinitivo: *sarei dovuto partire*. Con *avere* también es correcto: *avrei dovuto partire*.",
+  "ex": [["*Sarei dovuto* partire prima.", "Habría tenido que salir antes."],
+         ["*Avrei dovuto* partire prima.", "Habría tenido que salir antes."],
+         ["Non *saremmo potuti* venire prima.", "No habríamos podido venir antes."],
+         ["*Avresti dovuto dirmelo*.", "Tendrías que habérmelo dicho."],
+         ["Me lo *avresti dovuto dire*.", "Me lo tendrías que haber dicho."]],
+  "table": {"head": ["Pronombre delante del modal", "Pronombre pegado al infinitivo"],
+            "rows": [["Mi sarei dovuto alzare", "Avrei dovuto alzarmi"],
+                     ["Te lo avrei dovuto dire", "Avrei dovuto dirtelo"],
+                     ["Ci saremmo dovuti fermare", "Avremmo dovuto fermarci"]]},
+  "warn": "Con el pronombre pegado al infinitivo (*dirtelo*, *alzarmi*) lo normal es *avere*; con el pronombre delante del modal, *essere*: *mi sarei dovuto alzare*."},
 
  {"h": "Uso 2: el futuro en el pasado",
   "r": "«Dijo que vendría» = *ha detto che sarebbe venuto*. Futuro visto "
@@ -376,15 +390,27 @@ LESSONS = {
          ["Non sapevo che *avrebbe portato* gli amici.", "No sabía que iba a traer a los amigos."],
          ["Era sicuro che *avremmo vinto*.", "Estaba seguro de que íbamos a ganar."],
          ["Pensavo che ti *sarebbe piaciuto*.", "Pensaba que te iba a gustar."]],
-  "warn": "*ha detto che verrebbe* es el calco del castellano y está mal. El "
-          "castellano usa el condicional simple; el italiano, el compuesto."},
+  "warn": "*ha detto che verrebbe* es calco del castellano. En el habla se oye también el imperfetto (*veniva*). El simple queda para lo probable: *dovrebbe arrivare*."},
 
  {"h": "Uso 3: la noticia sin confirmar",
   "r": "En la prensa, presenta un hecho pasado **no confirmado**, como el "
        "«habría» periodístico del castellano.",
   "ex": [["Il ladro *sarebbe fuggito* in auto.", "El ladrón habría huido en auto."],
          ["Secondo il giornale, *avrebbero* già *firmato*.", "Según el diario, ya habrían firmado."],
-         ["Il ministro *si sarebbe dimesso* ieri sera.", "El ministro habría renunciado anoche."]]},
+         ["Il ministro *si sarebbe dimesso* ieri sera.", "El ministro habría renunciado anoche."]],
+  "tip": "Suele ir con *secondo*, *stando a* o *a quanto pare*: el periodista cuenta el hecho sin garantizarlo."},
+
+ {"h": "Trampas del hispanohablante",
+  "r": "Tres tropiezos: *avrei venuto* en vez de *sarei venuto*, *verrebbe* en vez de *sarebbe venuto*, y *potrei* por *avrei potuto*.",
+  "ex": [["*Sarei uscito* con voi.", "Habría salido con ustedes."],
+         ["Ha detto che *sarebbe uscito* più tardi.", "Dijo que saldría más tarde."],
+         ["Adesso *potrei* aiutarti; ieri *avrei potuto*.", "Ahora podría ayudarte; ayer habría podido."]],
+  "table": {"head": ["Calco", "Italiano"],
+            "rows": [["avrei venuto", "sarei venuto"],
+                     ["ha detto che verrebbe", "ha detto che sarebbe venuto"],
+                     ["ieri potrei aiutarti", "ieri avrei potuto aiutarti"],
+                     ["avrei alzato presto (yo)", "mi sarei alzato presto"]]},
+  "warn": "Los verbos de movimiento (*venire, andare, uscire, partire, arrivare*) y los reflexivos llevan *essere*, también en el condicional compuesto."},
 ]},
 
 32: {
@@ -647,9 +673,8 @@ LESSONS = {
   "ex": [["Qui *si parla* italiano.", "Acá se habla italiano."],
          ["*Si vendono* libri usati.", "Se venden libros usados."],
          ["In questo ristorante *si mangiano* ottimi piatti.", "En este restaurante se comen platos excelentes."]],
-  "warn": "«Si vende libri» está mal: *si vendono libri*, *si affittano "
-          "camere*, *si cercano collaboratori*. Los carteles reales se "
-          "equivocan seguido; el examen no perdona."},
+  "more": ["Con un modal, el que concuerda con el objeto es el modal: *si devono pulire le finestre*, pero sin objeto, *non si può fumare*."],
+  "warn": "«Si vende libri» se oye en los carteles, pero la norma y el examen piden *si vendono libri*, *si affittano camere*."},
 
  {"h": "Si impersonale: siempre singular",
   "r": "Sin objeto, o con verbo intransitivo, *si* = «uno, la gente», y el "
@@ -666,7 +691,7 @@ LESSONS = {
          ["Si è sempre *giovani* dentro.", "Uno siempre es joven por dentro."],
          ["Da *piccoli* si è più *felici*.", "De chico uno es más feliz."]],
   "warn": "No tiene paralelo en castellano («uno está cansado», en singular) "
-          "y aparece en todos los exámenes B2.",
+          "y es un punto frecuente en los exámenes B2.",
   "more": ["En los tiempos compuestos el auxiliar es siempre *essere*: *si è "
            "mangiato bene*. Con verbos que ya van con *essere*, el participio "
            "también pasa a plural: *si è arrivati tardi*."]},
@@ -677,6 +702,32 @@ LESSONS = {
   "ex": [["D'estate *ci si sveglia* presto.", "En verano uno se despierta temprano."],
          ["Con lui non *ci si annoia* mai.", "Con él uno no se aburre nunca."],
          ["A tutto *ci si abitua*.", "Uno se acostumbra a todo."]]},
+
+ {"h": "Tiempos compuestos con si",
+  "r": "Siempre *essere*. En el passivante, el participio concuerda con el objeto: *si sono venduti*. En el impersonal, sin objeto: *si è mangiato*.",
+  "ex": [["Alla festa *si sono bevuti* troppi spritz.", "En la fiesta se tomaron demasiados spritz."],
+         ["Quest'anno *si sono vendute* molte case.", "Este año se vendieron muchas casas."],
+         ["Ieri sera *si è mangiato* benissimo.", "Anoche se comió muy bien."],
+         ["Al carnevale *ci si è divertiti* molto.", "En el carnaval uno se divirtió mucho."]],
+  "table": {"head": ["Tipo", "Presente", "Compuesto"],
+            "rows": [["passivante", "Si vendono molti libri", "Si sono venduti molti libri"],
+                     ["impersonale (avere)", "Si mangia bene", "Si è mangiato bene"],
+                     ["impersonale (essere)", "Si arriva tardi", "Si è arrivati tardi"],
+                     ["reflexivo", "Ci si diverte", "Ci si è divertiti"]]},
+  "warn": "*Si sono bevuti troppi spritz* tiene objeto (passivante); *si è arrivati tardi* no lo tiene (impersonal). En los dos, el auxiliar es *essere*."},
+
+ {"h": "Si con pronombres: lo si, se ne",
+  "r": "*Lo, la, li, le* van antes de *si*: *lo si beve*. Con *ne*, *si* pasa a *se*: *se ne parla*.",
+  "ex": [["Il caffè? *Lo si beve* al banco.", "¿El café? Se toma en la barra."],
+         ["Del clima *se ne parla* ogni giorno.", "Del clima se habla todos los días."],
+         ["Di questo film *se n'è parlato* molto.", "De esta película se habló mucho."],
+         ["In questa casa *ci si sta* bene.", "En esta casa se está bien."]],
+  "table": {"head": ["Sin pronombre", "Con pronombre"],
+            "rows": [["Si beve il caffè", "Lo si beve"],
+                     ["Si vede la cupola", "La si vede"],
+                     ["Si parla del clima", "Se ne parla"],
+                     ["Si dorme bene qui", "Ci si dorme bene"]]},
+  "warn": "«Si lo beve» y «si ne parla» no existen. *Se lo beve* sí existe, pero es otra cosa: un reflexivo enfático («se lo toma él»)."},
 
  {"h": "El si toscano por noi",
   "r": "En el habla, sobre todo en Toscana, *si* + tercera singular "
