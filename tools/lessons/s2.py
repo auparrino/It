@@ -632,10 +632,10 @@ LESSONS = {
                      ["con + cosa", "ci", "ci scrivo"]]},
   "ex": [["Voglio andar*ci* domani.", "Quiero ir ahí mañana."],
          ["Non voglio parlar*ne*.", "No quiero hablar de eso."],
-         ["*Ci* voglio andare domani.", "Quiero ir ahí mañana."]],
-  "warn": "Con un infinitivo, el clítico se pega al final (*andarci*, "
-          "*parlarne*) o va antes del verbo conjugado. Con *ci* y *ne* "
-          "no cambia el sentido."},
+         ["*Ne* voglio parlare domani.", "Quiero hablar de eso mañana."]],
+  "warn": "Con un verbo modal + infinitivo, el clítico se pega al final "
+          "(*andarci*, *parlarne*) o va antes del modal (*ci voglio andare*). "
+          "El sentido es el mismo."},
 ]},
 
 22: {
@@ -904,8 +904,8 @@ LESSONS = {
          ["Si *accomodi*!", "¡Póngase cómodo!"]]},
 
  {"h": "Ortografía: la h y la i que sobra",
-  "r": "Los verbos en **-care / -gare** ponen *h* antes de *i*. En "
-       "**-ciare / -giare / -iare** no se repite la *i*.",
+  "r": "**-care / -gare** ponen *h* antes de *i*. **-ciare / -giare** "
+       "y casi todos los **-iare** no repiten la *i*.",
   "table": {"head": ["Infinitivo", "io/tu/lui", "noi", "loro"],
             "rows": [["cercare", "cerchi", "cerchiamo", "cerchino"],
                      ["pagare", "paghi", "paghiamo", "paghino"],
@@ -916,11 +916,12 @@ LESSONS = {
          ["Credo che *cerchino* un'altra casa.", "Creo que buscan otra casa."],
          ["Voglio che *mangi* qualcosa.", "Quiero que coma algo."]],
   "warn": "El castellano cambia la letra (*busque*, *pague*); el italiano "
-          "agrega la *h*: *cerchi*, *paghi*. Y nunca «mangii»: una sola *i*."},
+          "agrega la *h*: *cerchi*, *paghi*. Y nunca «mangii»: una sola *i* "
+          "(salvo *inviare* → *invii*, con *i* tónica)."},
 
  {"h": "Disparadores mínimos",
   "r": "Para practicar las formas alcanza con la señal: tras *spero che*, "
-       "*voglio che*, *credo che* y *è meglio che* va congiuntivo.",
+       "*voglio che*, *credo che* y *è meglio che* usamos congiuntivo.",
   "table": {"head": ["Señal", "Ejemplo"],
             "rows": [["spero che", "Spero che tu *stia* meglio."],
                      ["voglio che", "Voglio che *vengano* anche loro."],

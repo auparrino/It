@@ -42,9 +42,9 @@ T24 = "congiuntivo forme"
 ITEMS = [
     # ---- settimana 21
     ch("mj-21-01", 21, T21, "B1", "Parli spesso di politica? — Sì, ___ parlo spesso.",
-       ["ne", "ci", "lo"], "ne", "parlare DI algo: di → ne. Ci sería para a / in / su.", CN),
+       ["ne", "ci"], "ne", "parlare DI algo: di → ne. Ci sería para a / in / su."),
     ch("mj-21-02", 21, T21, "B1", "Pensi ancora al viaggio? — Sì, ___ penso ancora.",
-       ["ci", "ne", "lo"], "ci", "pensare A algo: a → ci. Ne sería para di.", CN),
+       ["ci", "ne"], "ci", "pensare A algo: a → ci. Ne sería para di."),
     cl("mj-21-03", 21, T21, "B1", "Quante mele vuoi? — ___ voglio due chili.", "ne",
        "Cantidad sin nombrar la cosa: ne obligatorio (ne voglio due chili).", CN),
     cl("mj-21-04", 21, T21, "B1", "Sei mai stata a Lisbona? — No, non ___ sono mai stata.", "ci",
@@ -54,9 +54,9 @@ ITEMS = [
     cl("mj-21-06", 21, T21, "B1", "Sei ancora in ufficio? — No, ___ sono uscita mezz'ora fa.", "ne",
        "uscire da un luogo: ne. El participio concuerda con el sujeto (sono uscita).", CN),
     ch("mj-21-07", 21, T21, "B1", "Con questa penna ___ scrivo tutte le mie note.",
-       ["ci", "ne", "lo"], "ci", "ci puede reemplazar con + cosa: con questa penna ci scrivo.", CN),
+       ["ci", "ne"], "ci", "ci puede reemplazar con + cosa: con questa penna ci scrivo."),
     ch("mj-21-08", 21, T21, "B1", "Sono stanchissimo, non ___ posso più!",
-       ["ne", "ci", "la"], "ne", "non poterne più es fija, con ne: non ne posso più.", CN),
+       ["ne", "ci"], "ne", "non poterne più es fija, con ne: non ne posso più."),
     tr("mj-21-09", 21, T21, "B1", "¿Tenés hermanos? — Sí, tengo dos.", "Hai fratelli? — Sì, ne ho due.",
        "Cantidad sin nombrar la cosa: ne ho due (no «ho due»).",
        alt=["Hai fratelli? Sì, ne ho due.", "Hai dei fratelli? — Sì, ne ho due.",
