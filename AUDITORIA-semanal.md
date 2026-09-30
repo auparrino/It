@@ -1034,4 +1034,22 @@ Teoría y práctica alineadas en las semanas **6, 9, 20, 22, 25, 27, 28, 35, 45 
 
 Cada bloque y ejercicio nuevo pasó por una revisión independiente que corrigió 34 problemas antes de publicar (una regla falsa sobre *venire*, datos falsos en la tabla de prefissoidi, traducciones erróneas, `alt` incompletos, distractores defendibles). Con esto quedan resueltos `rf-46-18` y `s:r26-03` de la lista de pendientes.
 
-**Sigue pendiente:** reparto de sfide (sección 5.1: semanas 23 y 50 sin ninguna en tema, 28 sfide sin semana), semanas 4, 12, 21, 24, 31, 36, 40, 42, 47, 49 y 51 con desfase teoría/práctica, práctica de producción en las semanas 27-51 (solo se sumó en las 10 tratadas), subir el techo de nivel de los bancos de frases y de errores, y las dudas/mejoras no verificadas del informe.
+### Segunda tanda (v1.58): las 11 semanas restantes
+
+| Semana | Bloques de teoría nuevos | Ejercicios nuevos |
+|---|---|---|
+| 4 | plurales -co/-ca/-go/-ga; *molto* y *avere* para edad y sensaciones; nacionalidades y profesiones | 14 |
+| 12 | cuerpo con artículo; farmacia y consejos; imperativo con forma propia | 14 |
+| 21 | *ne* de + lugar; *ci* con + algo; ¿*ne* o *ci*? la preposición decide | 15 |
+| 24 | ortografía h/i; disparadores mínimos | 17 |
+| 31 | dovere/potere/volere en el pasado (modal + essere); trampas del hispanohablante | 14 |
+| 36 | tiempos compuestos con *si*; *lo si*, *se ne* | 14 |
+| 40 | agente con *da*; pronombres, participio y modales con *fare* | 13 |
+| 42 | verbos del mail formal; *Con la presente / in allegato* | 14 |
+| 47 | ordinales; partitivo y *qualche*; cifras en prensa | 14 |
+| 49 | nominalización; *malgrado / laddove / ove*; calcos | 14 |
+| 51 | causativo y pasiva; dislocaciones; periodo mixto y concesión | 14 |
+
+La revisión independiente corrigió otros 35 puntos (absolutos falsos como «-iare no repite la i», tabla de ordinales, distractores defendibles, `alt` incompletos). Total de la operación: **21 semanas con teoría y práctica alineadas, unos 300 ejercicios nuevos**. Simulación de la carrera completa: 4 jefes aprobados, nivel 44 *Madrelingua*, 124 h en el año.
+
+**Sigue pendiente:** reparto de sfide (sección 5.1: semanas 23 y 50 sin ninguna en tema, 28 sfide sin semana), práctica de producción en las semanas 27-51 no tratadas, subir el techo de nivel de los bancos de frases y de errores, y las dudas/mejoras no verificadas del informe. Quedan además las semanas con `necesita trabajo` por la práctica escasa: 41 y 43 (agregar ítems propios) y la lectura `w-49` (revisada, pero no reescrita).

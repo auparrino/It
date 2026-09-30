@@ -270,7 +270,7 @@ LESSONS = {
                      ["essere tenuto a + inf.", "a", "Siamo tenuti a rispettare il termine."],
                      ["riservarsi di + inf.", "di", "Mi riservo di ricorrere."],
                      ["restare in attesa di + nombre", "di", "Resto in attesa di una risposta."]]},
-  "warn": "*La prego* lleva pronombre directo; *Le chiedo*, indirecto. No las mezcles: «le prego di» y «la chiedo di» suenan mal."},
+  "warn": "*La prego* lleva pronombre directo; *Le chiedo*, indirecto. No las mezcles: «la chiedo di» es un error, y «le prego di» no es la norma culta."},
 
  {"h": "Con la presente, in allegato, in attesa di",
   "r": "Apertura, adjunto y cierre del mail formal son fórmulas fijas: usalas enteras, sin traducir del castellano.",
@@ -710,9 +710,9 @@ LESSONS = {
   "table": {"head": ["Número", "Ordinal", "Nota"],
             "rows": [["1 a 10", "primo, secondo, terzo, quarto, quinto, sesto, settimo, ottavo, nono, decimo", "concuerdan: la terza volta"],
                      ["11, 12, 16", "undicesimo, dodicesimo, sedicesimo", "se cae la -i final"],
-                     ["20, 30", "ventesimo, trentesimo", "se cae la -i final"],
+                     ["20, 30", "ventesimo, trentesimo", "se cae la vocal final"],
                      ["21, 23", "ventunesimo, ventitreesimo", "-uno y -tre se conservan"],
-                     ["100, 1000", "centesimo, millesimo", "se cae la -o final"]]},
+                     ["100, 1000", "centesimo, millesimo", "se cae la vocal final"]]},
   "warn": "En las fechas solo el día uno es ordinal: *il primo maggio*, pero *il due maggio*."},
 
  {"h": "Partitivo y cuantificadores",
@@ -1139,7 +1139,7 @@ LESSONS = {
   "warn": "Con el objeto adelantado el pronombre es obligatorio: *il pane lo compro*, no «il pane compro»."},
 
  {"h": "Repaso: periodo mixto y concesión",
-  "r": "Periodo mixto: condición pasada, efecto presente: *se avessi studiato, ora sarei laureato*. Concesión: *benché* + congiuntivo.",
+  "r": "Periodo mixto: condición y efecto en tiempos distintos, como pasado y presente: *se avessi studiato, ora sarei laureato*. Concesión: *benché* + congiuntivo.",
   "ex": [["*Se avessi studiato*, ora *sarei* laureato.", "Si hubiera estudiado, ahora estaría recibido."],
          ["*Se fossi* più paziente, *avresti evitato* quell'errore.", "Si fueras más paciente, habrías evitado ese error."],
          ["*Sebbene fosse* stanco, ha finito il lavoro.", "Aunque estaba cansado, terminó el trabajo."],
