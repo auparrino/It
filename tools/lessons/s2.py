@@ -540,7 +540,7 @@ LESSONS = {
 "intro": "*ne* y *ci* no existen en castellano y el italiano los usa en casi "
          "cada frase. Sin ellos, tu italiano suena correcto pero extranjero.",
 "parts": [
- {"h": "NE: cantidades y «de eso»", "blocks": [0, 1],
+ {"h": "NE: cantidades y «de eso»", "blocks": [0, 1, 5],
   "match": r"^(?!.*(\bci\b|c'è|ci sono|volerci|metterci|lugar)).*(\bne\b|«ne»)"},
  {"h": "CI: lugar, «a algo» y expresiones", "blocks": [2, 3, 4],
   "match": r"\bci\b|c'è|lugar"},
@@ -548,12 +548,13 @@ LESSONS = {
 "blocks": [
  {"h": "NE: una cantidad",
   "r": "*ne* reemplaza **una cantidad** de algo ya nombrado. En castellano "
-       "no se dice nada; en italiano es **obligatorio**.",
+       "no se dice nada; en italiano, sin el sustantivo, es **obligatorio**.",
   "ex": [["Quanti libri hai? — *Ne* ho tre.", "¿Cuántos libros tenés? — Tengo tres."],
          ["Vuoi del pane? — Sì, *ne* prendo un po'.", "¿Querés pan? — Sí, agarro un poco."],
          ["Hai sigarette? — No, non *ne* ho.", "¿Tenés cigarrillos? — No, no tengo."]],
-  "warn": "*Ho tre* sin *ne* es agramatical. Cada vez que respondas con una "
-          "cantidad, *ne* tiene que estar.",
+  "warn": "Si respondés con la cantidad **sin nombrar la cosa**, *ne* tiene "
+          "que estar: *ne ho tre*, no *ho tre*. Si nombrás la cosa, no se usa: "
+          "*ho tre libri*.",
   "tip": "En tiempos compuestos, el participio concuerda con lo contado: *ne "
          "ho comprati tre* (libros), *ne ho comprate due* (revistas)."},
 
@@ -602,6 +603,39 @@ LESSONS = {
          ["*Ne ho abbastanza*.", "Estoy harto."]],
   "warn": "*ci metto due ore* = yo tardo dos horas (personal). *ci vogliono "
           "due ore* = se necesitan dos horas (impersonal). No los mezcles."},
+ 
+ {"h": "NE: de + lugar",
+  "r": "*ne* también reemplaza **de + lugar**: «de ahí». Va con verbos de "
+       "movimiento como *uscire*, *tornare*, *venire*, *partire*.",
+  "ex": [["Quando esci dall'ufficio? — *Ne* esco alle sei.", "¿Cuándo salís de la oficina? — Salgo a las seis."],
+         ["Torni da Roma? — Sì, *ne* torno domani.", "¿Volvés de Roma? — Sí, vuelvo mañana."],
+         ["*Ne* sto uscendo proprio adesso.", "Justo estoy saliendo de ahí."]],
+  "warn": "En castellano lo dejás implícito o decís «de ahí». Con *da* + "
+          "lugar, el clítico es *ne*, no *ci*: *ne esco*, no «ci esco»."},
+
+ {"h": "CI: con + algo",
+  "r": "*ci* también puede reemplazar **con / en + cosa**: el objeto que "
+       "usás o donde hacés algo.",
+  "ex": [["Hai un coltello? — Sì, *ci* taglio il pane.", "¿Tenés un cuchillo? — Sí, corto el pan con eso."],
+         ["Con questa penna *ci* scrivo tutto.", "Con esta lapicera escribo todo."]],
+  "tip": "Con **personas**, *ci* y *ne* no son lo más seguro: usá los "
+         "tónicos. *Penso a lui*, *parlo di lei*."},
+
+ {"h": "¿NE o CI? La preposición decide",
+  "r": "Mirá la preposición que pide el verbo: **di** o **da** llevan *ne*; "
+       "**a**, **in**, **su** o **con** llevan *ci*.",
+  "table": {"head": ["Preposición", "Clítico", "Ejemplo"],
+            "rows": [["di + cosa / cantidad", "ne", "ne parlo, ne ho due"],
+                     ["da + lugar", "ne", "ne esco"],
+                     ["a / in + lugar", "ci", "ci vado, ci abito"],
+                     ["a / su + cosa", "ci", "ci penso, ci conto"],
+                     ["con + cosa", "ci", "ci scrivo"]]},
+  "ex": [["Voglio andar*ci* domani.", "Quiero ir ahí mañana."],
+         ["Non voglio parlar*ne*.", "No quiero hablar de eso."],
+         ["*Ci* voglio andare domani.", "Quiero ir ahí mañana."]],
+  "warn": "Con un infinitivo, el clítico se pega al final (*andarci*, "
+          "*parlarne*) o va antes del verbo conjugado. Con *ci* y *ne* "
+          "no cambia el sentido."},
 ]},
 
 22: {
@@ -786,9 +820,9 @@ LESSONS = {
          "regulares, irregulares y la trampa de la vocal. El uso, la semana "
          "que viene.",
 "parts": [
- {"h": "Cómo se arma el congiuntivo", "blocks": [0, 1, 2],
+ {"h": "Cómo se arma el congiuntivo", "blocks": [0, 1, 2, 5],
   "match": r"^(?!.*(irregular|prefieren|registro cuidado)).*(congiuntivo|subjuntivo)"},
- {"h": "Irregulares y usos", "blocks": [3, 4],
+ {"h": "Irregulares y usos", "blocks": [3, 4, 6],
   "match": r"irregular|prefieren"},
 ],
 "blocks": [
@@ -821,14 +855,14 @@ LESSONS = {
           "vos o él."},
 
  {"h": "La vocal que confunde",
-  "r": "Al revés que en castellano: *-are* hace **-i** (*che parli*); *-ere* "
-       "e *-ire* hacen **-a** (*che prenda*, *che dorma*).",
+  "r": "*-are* hace **-i** (*che parli*), no *-e*. *-ere* e *-ire* hacen "
+       "**-a**, como en castellano (*che prenda*, *che dorma*).",
   "ex": [["Credo che lui *parli* bene.", "Creo que él habla bien."],
          ["Credo che lui *prenda* il treno.", "Creo que toma el tren."],
          ["Spero che tu *dorma* bene.", "Espero que duermas bien."],
          ["Spero che *arrivino* presto.", "Espero que lleguen pronto."]],
   "warn": "Como el indicativo es *parla*, el instinto produce «che parla»: "
-          "indicativo, error. Es la confusión más común del hispanohablante.",
+          "indicativo, error. Otro error típico es la *-e* castellana: «che parle».",
   "more": ["En castellano, *-ar* usa *e* (que hable) y *-er/-ir* usan *a* "
            "(que coma, que viva). El italiano coincide en *-ere/-ire*, pero "
            "en *-are* usa *i*, no *e*."]},
@@ -868,6 +902,34 @@ LESSONS = {
          ["Mi *dica*!", "¡Dígame!"],
          ["*Prenda* pure!", "¡Tome nomás! (usted)"],
          ["Si *accomodi*!", "¡Póngase cómodo!"]]},
+
+ {"h": "Ortografía: la h y la i que sobra",
+  "r": "Los verbos en **-care / -gare** ponen *h* antes de *i*. En "
+       "**-ciare / -giare / -iare** no se repite la *i*.",
+  "table": {"head": ["Infinitivo", "io/tu/lui", "noi", "loro"],
+            "rows": [["cercare", "cerchi", "cerchiamo", "cerchino"],
+                     ["pagare", "paghi", "paghiamo", "paghino"],
+                     ["cominciare", "cominci", "cominciamo", "comincino"],
+                     ["mangiare", "mangi", "mangiamo", "mangino"],
+                     ["studiare", "studi", "studiamo", "studino"]]},
+  "ex": [["Spero che tu *paghi* con la carta.", "Espero que pagues con tarjeta."],
+         ["Credo che *cerchino* un'altra casa.", "Creo que buscan otra casa."],
+         ["Voglio che *mangi* qualcosa.", "Quiero que coma algo."]],
+  "warn": "El castellano cambia la letra (*busque*, *pague*); el italiano "
+          "agrega la *h*: *cerchi*, *paghi*. Y nunca «mangii»: una sola *i*."},
+
+ {"h": "Disparadores mínimos",
+  "r": "Para practicar las formas alcanza con la señal: tras *spero che*, "
+       "*voglio che*, *credo che* y *è meglio che* va congiuntivo.",
+  "table": {"head": ["Señal", "Ejemplo"],
+            "rows": [["spero che", "Spero che tu *stia* meglio."],
+                     ["voglio che", "Voglio che *vengano* anche loro."],
+                     ["credo che", "Credo che *abbia* ragione."],
+                     ["è meglio che", "È meglio che *paghi* tu."]]},
+  "ex": [["Spero che *finisca* presto.", "Espero que termine pronto."],
+         ["È meglio che *tu esca* prima.", "Es mejor que salgas antes."]],
+  "tip": "Por ahora la señal viene dada en cada ejercicio: tu trabajo es "
+         "armar bien la forma. Cuándo usarlo y cuándo no, en la semana 25."},
 ]},
 
 25: {
