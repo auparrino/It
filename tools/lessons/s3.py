@@ -381,7 +381,7 @@ LESSONS = {
             "rows": [["Mi sarei dovuto alzare", "Avrei dovuto alzarmi"],
                      ["Te lo avrei dovuto dire", "Avrei dovuto dirtelo"],
                      ["Ci saremmo dovuti fermare", "Avremmo dovuto fermarci"]]},
-  "warn": "Con el pronombre pegado al infinitivo (*dirtelo*, *alzarmi*) lo normal es *avere*; con el pronombre delante del modal, *essere*: *mi sarei dovuto alzare*."},
+  "warn": "Reflexivo pegado al infinitivo (*alzarmi*): *avere*; delante del modal, *essere*: *mi sarei dovuto alzare*. Verbos con *avere*: siempre *avere*."},
 
  {"h": "Uso 2: el futuro en el pasado",
   "r": "«Dijo que vendría» = *ha detto che sarebbe venuto*. Futuro visto "
@@ -401,7 +401,7 @@ LESSONS = {
   "tip": "Suele ir con *secondo*, *stando a* o *a quanto pare*: el periodista cuenta el hecho sin garantizarlo."},
 
  {"h": "Trampas del hispanohablante",
-  "r": "Tres tropiezos: *avrei venuto* en vez de *sarei venuto*, *verrebbe* en vez de *sarebbe venuto*, y *potrei* por *avrei potuto*.",
+  "r": "Cuatro calcos frecuentes: auxiliar equivocado, condicional simple, *potrei* por *avrei potuto* y reflexivo sin *essere*.",
   "ex": [["*Sarei uscito* con voi.", "Habría salido con ustedes."],
          ["Ha detto che *sarebbe uscito* più tardi.", "Dijo que saldría más tarde."],
          ["Adesso *potrei* aiutarti; ieri *avrei potuto*.", "Ahora podría ayudarte; ayer habría podido."]],
@@ -410,7 +410,7 @@ LESSONS = {
                      ["ha detto che verrebbe", "ha detto che sarebbe venuto"],
                      ["ieri potrei aiutarti", "ieri avrei potuto aiutarti"],
                      ["avrei alzato presto (yo)", "mi sarei alzato presto"]]},
-  "warn": "Los verbos de movimiento (*venire, andare, uscire, partire, arrivare*) y los reflexivos llevan *essere*, también en el condicional compuesto."},
+  "warn": "*Venire, andare, uscire, partire, arrivare* y los reflexivos llevan *essere*, también en el condicional compuesto."},
 ]},
 
 32: {
