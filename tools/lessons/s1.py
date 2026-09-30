@@ -631,7 +631,7 @@ LESSONS = {
  {"h": "molto, y avere para edad y sensaciones",
   "r": "Ante un adjetivo, *molto* significa «muy» y **no cambia**. Ante un "
        "sustantivo es «mucho» y **concuerda**.",
-  "table": {"head": ["Ante...", "Ejemplo", "Cambia?"],
+  "table": {"head": ["Ante...", "Ejemplo", "¿Cambia?"],
             "rows": [["adjetivo", "Anna è molto stanca.", "no: molto"],
                      ["sustantivo", "Ho molti amici. Ho molta fame.", "sí: molto, molta, molti, molte"],
                      ["poco, igual", "Sono poco simpatici. Ho poche amiche.", "igual que molto"]]},
@@ -1414,8 +1414,9 @@ LESSONS = {
          ["*Abbi* pazienza!", "¡Tené paciencia!"],
          ["*Vieni* qui e *siediti*!", "¡Vení acá y sentate!"],
          ["*Di'* la verità!", "¡Decí la verdad!"]],
-  "warn": "El castellano dice «sé» y «tené»; el italiano, *sii* y *abbi*. Las "
-          "formas cortas llevan apóstrofo, nunca acento: *di'*, *fa'*, *va'*."},
+  "warn": "El español dice «sé» y «tené»; el italiano, *sii* y *abbi*. Las "
+          "formas cortas llevan apóstrofo, nunca acento: *di'*, *fa'*, *va'* "
+          "(también existen *vai, fai, dai, stai*)."},
 ]},
 
 13: {
