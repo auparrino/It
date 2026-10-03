@@ -939,7 +939,7 @@
       [/ll/g, "lh", "La ll se escribe *lh*: trabalho, mulher, filho.", "La *ll* no existe en portugués: ¿cómo se escribe ese sonido?"],
       [/ciones$/, "ções", "-ciones se escribe *-ções*."], [/ción$/, "ção", "-ción se escribe *-ção*: canção, nação, informação."],
       [/siones$/, "sões", "-siones es *-sões*."], [/sión$/, "são", "-sión es *-são*: televisão, decisão."],
-      [/zón$/, "ção", "-zón es *-ção*: coração, razão."], [/ón$/, "ão", "-ón es *-ão*: melão, avião."],
+      [/zón$/, "ção", "-zón es *-ção* o *-zão*: coração, razão."], [/ón$/, "ão", "-ón es *-ão*: melão, avião."],
       [/idad$/, "idade", "-dad es *-dade*: cidade, verdade, universidade."], [/dad$/, "dade", "-dad es *-dade*."],
       [/tad$/, "dade", "-tad es *-dade*: liberdade, vontade."], [/bles$/, "veis", "-bles es *-veis*: possíveis."],
       [/ble$/, "vel", "-ble es *-vel*: possível, incrível, agradável."], [/ajes$/, "agens", "-ajes es *-agens*."],

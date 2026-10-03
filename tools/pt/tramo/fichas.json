@@ -15,7 +15,7 @@
             ["Diante do exposto, solicito que…", "el pedido concreto"],
             ["Atenciosamente, + nome completo", "cierre y firma"]]},
   {"h": "Fórmulas de abertura, corpo e fecho",
-   "p": "Diez fórmulas que resuelven casi cualquier carta formal. Aprendelas como bloques: no se traducen palabra por palabra.",
+   "p": "Once fórmulas que resuelven casi cualquier carta formal. Aprendelas como bloques: no se traducen palabra por palabra.",
    "list": [["Prezado(a) Senhor(a),", "Estimado/a señor/a:"],
             ["Prezados senhores,", "a una institución, sin nombre"],
             ["Venho, por meio desta, solicitar…", "Por la presente, solicito…"],
@@ -77,7 +77,7 @@
             ["Vamos combinar assim: …", "Hagamos así: …"],
             ["vc, tb, pq, blz", "en el examen, nunca: escribí você, também, porque, beleza"]]},
   {"h": "Modelo anotado",
-   "p": "Un e-mail de 95 palabras para una amiga que se muda a Río.",
+   "p": "Un e-mail de 69 palabras para una amiga que se muda a Río.",
    "model": [["Oi, Camila!", "saludo informal"],
              ["Que notícia boa! Então você vai mesmo morar no Rio? Estou te escrevendo porque passei por isso há dois anos e aprendi umas coisas.", "retoma, confirma la noticia y da el motivo"],
              ["Olha, se eu fosse você, alugaria um apartamento por uns meses antes de comprar. A minha amiga Renata comprou logo e se arrependeu: o bairro era lindo, mas não tinha escola perto.", "el consejo, con un ejemplo concreto"],
@@ -117,7 +117,7 @@
             ["Parece-me que… / Tudo indica que…", "presentar como probable"],
             ["É verdade que…; no entanto, …", "conceder y contraargumentar"]]},
   {"h": "Modelo anotado",
-   "p": "Una carta de 90 palabras sobre una nota de ciclovías.",
+   "p": "Una carta de 74 palabras sobre una nota de ciclovías.",
    "model": [["Prezados editores,", "vocativo"],
              ["Li com interesse a reportagem «Pedalar no Rio», publicada no domingo. Concordo em parte com a autora: as ciclovias da orla funcionam bem.", "referencia y posición matizada"],
              ["No entanto, moro na Tijuca e sei que longe do mar ninguém pedala tranquilo. É preciso lembrar que a maioria dos trabalhadores não mora na Zona Sul.", "argumento con la propia experiencia"],
@@ -157,7 +157,7 @@
             ["É provável que… / Tudo indica que…", "modalizar lo que no es seguro"],
             ["o texto diz, o texto diz, o texto diz", "variá: no repitas dizer"]]},
   {"h": "Modelo anotado",
-   "p": "Un artículo de 100 palabras para la revista de un barrio.",
+   "p": "Un artículo de 72 palabras para la revista de un barrio.",
    "model": [["Menos asfalto, mais árvores", "título sin punto"],
              ["Você já reparou que as ruas do bairro viram rios em qualquer temporal?", "apertura con una pregunta al lector"],
              ["Segundo a reportagem sobre as cidades-esponja, parques alagáveis e calçadas permeáveis absorvem boa parte da chuva. Em Recife, sensores já avisam os moradores antes das enchentes.", "datos de la fuente, atribuidos"],
@@ -198,7 +198,7 @@
             ["surpreende ao…", "sorprende al…"],
             ["muito bom, muito legal, muito ruim", "demasiado vagos en una reseña"]]},
   {"h": "Modelo anotado",
-   "p": "Una reseña de 95 palabras de un cuento.",
+   "p": "Una reseña de 81 palabras de un cuento.",
    "model": [["Um relógio que não anda", "título"],
              ["Publicado em 2024, o conto «O relógio do meu pai», de Helena Duarte, narra a volta de uma filha à casa da família depois do enterro do pai.", "presentación: obra, autora, año, tema"],
              ["O ponto alto é a linguagem: frases curtas, quase sem adjetivos, que deixam o silêncio falar. Por outro lado, o final peca por explicar demais o que o leitor já tinha entendido.", "evaluación con un punto fuerte y uno débil"],
@@ -276,7 +276,7 @@
             ["concluir", "para el cierre"],
             ["eu acho, na minha opinião, concordo", "no van en un resumo: van en la resenha o el texto de opinião"]]},
   {"h": "Modelo anotado",
-   "p": "Un resumo de 90 palabras de un reportaje.",
+   "p": "Un resumo de 81 palabras de un reportaje.",
    "model": [["A reportagem «Desertos de notícias», publicada no jornal O Dia, trata das cidades brasileiras que não têm nenhum veículo de imprensa local.", "referencia y tema"],
              ["Segundo o texto, quase metade dos municípios do país vive nessa situação.", "dato central, atribuido"],
              ["Para ilustrar, a repórter cita o caso de uma cidade que ficou sem água por uma semana sem que ninguém noticiasse o problema. Além disso, ouve uma rádio comunitária que tenta cobrir o vazio.", "ideas principales, en orden"],
@@ -315,7 +315,7 @@
             ["hoje sei, até hoje lembro", "presente: la reflexión de ahora"],
             ["He llegado ayer", "en portugués, cheguei ontem: nunca «tenho chegado»"]]},
   {"h": "Modelo anotado",
-   "p": "Un relato de 95 palabras.",
+   "p": "Un relato de 77 palabras.",
    "model": [["Foi em março de 2022, na minha primeira semana no Rio. Eu morava em Botafogo e ainda não conhecia ninguém.", "situación, con imperfeito para el fondo"],
              ["Um dia, a vizinha me disse que eu tinha que «dar um pulo» na casa dela. Fiquei parada: pular por quê? Foi então que ela riu e explicou que era só uma visita rápida.", "los hechos en perfeito y el momento clave"],
              ["Hoje percebo que aquela confusão me ensinou mais do que qualquer aula: a língua mora nas expressões, e errar é parte do caminho.", "reflexión final en presente"]]}
@@ -435,7 +435,7 @@
   },
   {
    "h": "Modelo anotado",
-   "p": "Una carta abierta de 80 palabras.",
+   "p": "Una carta abierta de 57 palabras.",
    "model": [
     [
      "Carta aberta à Secretaria Municipal de Cultura",
@@ -571,7 +571,7 @@
   },
   {
    "h": "Modelo anotado",
-   "p": "Un post de 70 palabras.",
+   "p": "Un post de 54 palabras.",
    "model": [
     [
      "Meu celular quebrou. E agora?",
@@ -695,7 +695,7 @@
   },
   {
    "h": "Modelo anotado",
-   "p": "Un guía de 60 palabras.",
+   "p": "Una guía de 55 palabras.",
    "model": [
     [
      "Apelidos no trabalho: três dicas",
@@ -827,7 +827,7 @@
   },
   {
    "h": "Modelo anotado",
-   "p": "Una propuesta de 80 palabras.",
+   "p": "Una propuesta de 57 palabras.",
    "model": [
     [
      "Proposta: horário noturno na biblioteca",

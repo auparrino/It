@@ -6,7 +6,7 @@
     "emoji": "🥛",
     "genre": "coluna de opinião",
     "grammar": "imperfeito do subjuntivo e condicionais",
-    "text": "Outro dia, na fila do supermercado, uma senhora me perguntou qual iogurte eu levaria se fosse ela. Havia, contei depois, vinte e três tipos na prateleira: integral, desnatado, grego, com mel, sem lactose, com pedaços de fruta. Respondi qualquer coisa e fiquei pensando que, se meu avô entrasse naquele corredor, sairia de mãos vazias. Não por falta de dinheiro, mas por excesso de alternativas.\n\nA gente cresceu ouvindo que liberdade é poder escolher. E é, claro. Ninguém em sã consciência gostaria de voltar a um tempo em que a profissão, o casamento e a cidade de uma pessoa fossem decididos pela família. Mas desconfio que confundimos liberdade com quantidade. Se tivéssemos menos opções, talvez escolhêssemos com mais calma e, principalmente, ficássemos mais satisfeitos com o que escolhemos.\n\nPenso nos meus alunos do cursinho. Aos dezessete anos, eles precisam decidir o que vão fazer da vida, como se a decisão fosse irreversível. Muitos me dizem que prefeririam que alguém escolhesse por eles. Um deles, o Caio, me confessou: “Se eu soubesse que dá para mudar depois, eu não estaria tão nervoso”. Seria cômico, se não fosse triste: passamos a adolescência inteira dizendo aos jovens que o mundo está aberto e esquecemos de avisar que as portas também se abrem mais tarde.\n\nNão estou propondo que as prateleiras voltem a ter um único iogurte, nem que os vestibulandos sorteiem o curso. Proponho algo mais modesto: que parássemos de tratar cada escolha como se fosse a última. Se encarássemos as decisões como experimentos, e não como sentenças, o medo de errar diminuiria bastante. Quem dera as escolas ensinassem isso com a mesma seriedade com que ensinam logaritmos.\n\nVoltando à senhora do supermercado: ela acabou levando o primeiro iogurte que viu, o mais simples de todos, e pareceu aliviada. Eu, que tinha passado cinco minutos comparando rótulos, saí com dois, e em casa descobri que não gostava de nenhum. Se fosse para dar um conselho, eu diria: escolha, prove e, se não gostar, escolha outra vez. A vida raramente é tão definitiva quanto parece na fila do caixa.",
+    "text": "Outro dia, na fila do supermercado, uma senhora me perguntou qual iogurte eu levaria se fosse ela. Havia, contei depois, vinte e três tipos na prateleira: integral, desnatado, grego, com mel, sem lactose, com pedaços de fruta. Respondi qualquer coisa e fiquei pensando que, se meu avô entrasse naquele corredor, sairia de mãos vazias. Não por falta de dinheiro, mas por excesso de alternativas.\n\nA gente cresceu ouvindo que liberdade é poder escolher. E é, claro. Ninguém em sã consciência gostaria de voltar a um tempo em que a profissão, o casamento e a cidade de uma pessoa fossem decididos pela família. Mas desconfio que confundimos liberdade com quantidade. Se tivéssemos menos opções, talvez escolhêssemos com mais calma e, principalmente, ficássemos mais satisfeitos com o que escolhemos.\n\nPenso nos meus alunos do cursinho. Aos dezessete anos, eles precisam decidir o que vão fazer da vida, como se a decisão fosse irreversível. Muitos me dizem que prefeririam que alguém escolhesse por eles. Um deles, o Caio, me confessou: “Se eu soubesse que dá para mudar depois, eu não estaria tão nervoso”. Seria cômico, se não fosse triste: passamos a adolescência inteira dizendo aos jovens que o mundo está aberto e esquecemos de avisar que as portas também se abrem mais tarde.\n\nNão estou propondo que as prateleiras voltem a ter um único iogurte, nem que os vestibulandos sorteiem o curso. Proponho algo mais modesto: que paremos de tratar cada escolha como se fosse a última. Se encarássemos as decisões como experimentos, e não como sentenças, o medo de errar diminuiria bastante. Quem dera as escolas ensinassem isso com a mesma seriedade com que ensinam logaritmos.\n\nVoltando à senhora do supermercado: ela acabou levando o primeiro iogurte que viu, o mais simples de todos, e pareceu aliviada. Eu, que tinha passado cinco minutos comparando rótulos, saí com dois, e em casa descobri que não gostava de nenhum. Se fosse para dar um conselho, eu diria: escolha, prove e, se não gostar, escolha outra vez. A vida raramente é tão definitiva quanto parece na fila do caixa.",
     "gloss": {
       "dera": "(quem dera) ojalá",
       "fila": "fila, cola",
@@ -20,7 +20,7 @@
       "prefeririam": "preferirían",
       "vestibulandos": "aspirantes al examen de ingreso a la universidad",
       "sorteiem": "sorteen",
-      "parássemos": "dejáramos",
+      "paremos": "dejemos",
       "encarássemos": "encaráramos, viéramos",
       "errar": "equivocarse",
       "aliviada": "aliviada",
@@ -113,7 +113,6 @@
         "ficássemos",
         "soubesse",
         "escolhesse",
-        "parássemos",
         "encarássemos",
         "ensinassem"
       ]

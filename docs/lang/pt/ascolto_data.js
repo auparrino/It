@@ -100,7 +100,7 @@
     P("p-057", "palatais", 5, "falha", "fala", "falla", "habla", LH),
     P("p-058", "palatais", 7, "julho", "Júlio", "julio (el mes)", "Julio (el nombre)", "lh no es «li»: julho (el mes) tiene una sola sílaba final; Júlio, dos (-li-o)."),
     P("p-059", "palatais", 8, "calha", "cala", "canaleta", "calla", LH),
-    P("p-060", "palatais", 8, "sonha", "Sônia", "sueña", "Sonia", "nh (una sola consonante, «soña») contra ni (dos sonidos, «Sô-nia»); y la o cambia: ó abierta en sonha, ô cerrada en Sônia."),
+    P("p-060", "palatais", 8, "sonha", "Sônia", "sueña", "Sonia", "nh (una sola consonante, «soña») contra ni (dos sonidos, «Sô-nia»). En ambas la o es cerrada y nasalizada: la diferencia está en nh contra ni."),
     P("p-061", "palatais", 9, "malha", "mala", "malla, tejido", "valija", LH),
     P("p-062", "palatais", 10, "filho", "filo", "hijo", "filo (biología)", LH),
     P("p-063", "palatais", 10, "manha", "mana", "berrinche", "hermana (coloquial)", NH),

@@ -163,7 +163,7 @@ window.FUERA_DATA = {
       url: "https://agenciabrasil.ebc.com.br/radioagencia-nacional", buscar: "Radioagência Nacional", min: 8,
       why: "Noticias de radio de dos o tres minutos: «tem chovido muito», «o governo tinha anunciado». Perfeito composto y mais-que-perfeito.",
       how: "Escuchá tres notas cortas. Anotá una frase con «tem» + participio.",
-      words: [["tem chovido", "viene lloviendo"], ["tinha anunciado", "había anunciado"], ["o repórter", "el cronista"], ["a prefeitura", "la municipalidad"], ["o ministério", "el ministerio"], ["o balanço", "el balance"]],
+      words: [["tem chovido", "viene lloviendo"], ["tinha anunciado", "había anunciado"], ["o repórter", "el reportero"], ["a prefeitura", "la municipalidad"], ["o ministério", "el ministerio"], ["o balanço", "el balance"]],
       questions: ["Quais são as três notícias?", "Qual frase com «tem» você ouviu?", "Qual notícia você achou mais importante?"],
       tell: "las tres noticias en una frase cada una." },
     { week: 22, level: "B1", kind: "lectura", fuente: "agbr", title: "As manchetes da Agência Brasil",

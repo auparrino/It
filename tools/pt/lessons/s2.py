@@ -234,7 +234,7 @@ LESSONS = {
          ["*Estávamos jantando* e a luz *acabou*.", "Estábamos cenando y se cortó la luz."],
          ["Enquanto ela *tomava* banho, eu *fazia* o café.", "Mientras ella se bañaba, yo hacía el café."]],
   "tip": "En Brasil, *estava fazendo* suena más natural que *fazia* para la "
-         "acción en curso: úsalo sin miedo.",
+         "acción en curso: usalo sin miedo.",
   "more": ["*enquanto* (mientras) une dos acciones de fondo, las dos en "
            "imperfeito. Con *quando* suele haber un hecho que corta: *quando "
            "cheguei, eles estavam comendo*."],
@@ -403,8 +403,8 @@ LESSONS = {
 ],
 "blocks": [
  {"h": "Infinitivo + -ei, -á, -emos, -ão",
-  "r": "Al infinitivo entero se suman *-ei, -ás, -á, -emos, -ão*. Todas "
-       "llevan tilde menos *nós*: *falarei, falará, falaremos, falarão*.",
+  "r": "Al infinitivo entero se suman *-ei, -ás, -á, -emos, -ão*. Llevan "
+       "tilde *-ás, -á, -ão*; *-ei* y *-emos* no: *falarei, falará, falaremos, falarão*.",
   "table": {"head": ["", "falar", "comer", "partir"],
             "rows": [["eu", "falarei", "comerei", "partirei"],
                      ["tu", "falarás", "comerás", "partirás"],
@@ -765,7 +765,7 @@ LESSONS = {
            "por *para*."]},
 
  {"h": "Cantidad: muito, pouco, bastante, demais",
-  "r": "*muito / pouco* concuerdan con el sustantivo (*muitas pessoas*) e "
+  "r": "*muito / pouco* concuerdan con el sustantivo (*muitas pessoas*) y "
        "no varían como adverbio (*muito caro*). *demais* = demasiado o muchísimo.",
   "ex": [["Tinha *muitas* pessoas no bloco.", "Había mucha gente en el bloque."],
          ["Ela é *muito* simpática.", "Es muy simpática."],
@@ -1266,7 +1266,7 @@ LESSONS = {
   "r": "«lo que» es *o que*: *não entendi o que ele disse*; «todo lo "
        "que», *tudo o que*. *O que* también pregunta: *o que é isso?*",
   "ex": [["Não entendi *o que* ele disse.", "No entendí lo que dijo."],
-         ["*O que* eu mais gosto no Rio é a praia.", "Lo que más me gusta de Río es la playa."],
+         ["*Do que* eu mais gosto no Rio é a praia.", "Lo que más me gusta de Río es la playa."],
          ["Fiz *tudo o que* você pediu.", "Hice todo lo que pediste."],
          ["Ele chegou tarde, *o que* é normal.", "Llegó tarde, lo que es normal."]],
   "warn": "Nunca «lo que»: es español puro. «Lo» no existe en portugués: "

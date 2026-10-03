@@ -1384,7 +1384,7 @@ WORDS = [
     ("ninguém", "nadie", "pronome", "A2", ""),
     ("algum", "algún / alguno", "pronome", "A2", "algum, alguma, alguns, algumas."),
     ("nenhum", "ningún / ninguno", "pronome", "A2", "nenhum, nenhuma."),
-    ("outro", "otro", "pronome", "A1", "Sin artículo indefinido: outro dia (no «um outro»)."),
+    ("outro", "otro", "pronome", "A1", "Sin artículo en expresiones como outro dia, outra vez, outra coisa; «um outro» también existe y es más enfático."),
     ("cada", "cada", "pronome", "A2", "Invariable."),
     ("qualquer", "cualquier / cualquiera", "pronome", "B1", "Plural quaisquer."),
     ("certo", "cierto", "pronome", "B2", "Certo dia = cierto día."),

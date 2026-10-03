@@ -114,7 +114,7 @@
               ["moneda", "moeda"], ["corona", "coroa"]] },
 
     { id: "it", week: 13, h: "-ch- → -it-",
-      body: "Donde el español tiene **ch** (del latín *ct*), el portugués tiene **it**: *noche → noite*, *leche → leite*, *ocho → oito*, *hecho → feito*, *mucho → muito*.",
+      body: "Donde el español tiene **ch** (del latín *ct*), el portugués tiene **it**: *noche → noite*, *leche → leite*, *ocho → oito*, *hecho → feito*. Lo mismo en *mucho → muito* (del latín *multum*, con *lt*).",
       ex: [["noche", "noite"], ["leche", "leite"]],
       words: [["noche", "noite"], ["leche", "leite"], ["hecho", "feito"], ["ocho", "oito"],
               ["pecho", "peito"], ["derecho", "direito"], ["estrecho", "estreito"], ["mucho", "muito"],
@@ -136,7 +136,7 @@
               ["discusión", "discussão"], ["lindísimo", "lindíssimo"], ["riquísimo", "riquíssimo"]] },
 
     { id: "agem", week: 17, h: "-aje → -agem",
-      body: "Las palabras en **-aje** pasan a **-agem** y son **femeninas**: *el viaje → a viagem*, *el mensaje → a mensagem*. Plural en **-agens**.",
+      body: "Las palabras en **-aje** pasan a **-agem** y son casi todas **femeninas** (excepción frecuente: *o personagem*): *el viaje → a viagem*, *el mensaje → a mensagem*. Plural en **-agens**.",
       ex: [["viaje", "viagem"], ["mensaje", "mensagem"]],
       words: [["viaje", "viagem"], ["mensaje", "mensagem"], ["paisaje", "paisagem"],
               ["coraje", "coragem"], ["personaje", "personagem"], ["pasaje", "passagem"],

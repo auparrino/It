@@ -97,7 +97,7 @@
                moro: "vivo (morar = vivir)", meu: "mi (o meu quarto = mi pieza)" },
       questions: [
         ["¿Quién es el dueño de la panadería?", ["un portugués de Oporto", "un vecino carioca de Botafogo", "Bia", "un argentino"], "un portugués de Oporto"],
-        ["¿Qué ve Sofía desde la ventana?", ["el Cristo Redentor", "el mar", "la playa", "el subte"], "el Cristo Redentor"],
+        ["¿Qué ve el narrador desde la ventana de su cuarto?", ["el Cristo Redentor", "el mar", "la playa", "el subte"], "el Cristo Redentor"],
         ["¿De quién es la calle los domingos?", ["de los chicos y los perros", "de los autos", "de los turistas y los autos", "de nadie"], "de los chicos y los perros"]
       ],
       vf: [["O seu Manuel é do Porto.", "verdadeiro"], ["O pão de queijo da padaria é ruim.", "falso"], ["O seu Manuel tem dois filhos.", "não se diz"]],
@@ -131,12 +131,11 @@
         "Ela acorda cedo, abre a janela e olha o morro. Depois, bebe um café forte e começa a trabalhar.\n\n" +
         "A Bia não trabalha em casa: ensina história numa escola pública do Catete. " +
         "Ela almoça com os alunos e volta de tarde.\n\n" +
-        "De tarde, a gente estuda junto: a Sofía estuda português e a Bia estuda espanhol. " +
+        "De tarde, elas estudam juntas: a Sofía estuda português e a Bia estuda espanhol. " +
         "A Sofía fala muito rápido e a Bia escreve tudo num caderno. De noite, elas cozinham, " +
         "comem na varanda e conversam sobre o dia. E vocês? Vocês moram com um amigo?",
       gloss: { desenha: "diseña", acorda: "se despierta", cedo: "temprano", morro: "cerro", ensina: "enseña",
-               almoça: "almuerza", alunos: "alumnos", volta: "vuelve", gente: "gente (a gente = nosotros)",
-               junto: "junto", caderno: "cuaderno", cozinham: "cocinan", varanda: "balcón", moram: "viven" },
+               almoça: "almuerza", alunos: "alumnos", volta: "vuelve", juntas: "juntas", caderno: "cuaderno", cozinham: "cocinan", varanda: "balcón", moram: "viven" },
       questions: [
         ["¿Qué hace Sofía?", ["es diseñadora", "es profesora", "es cocinera", "es periodista"], "es diseñadora"],
         ["¿Dónde enseña Bia?", ["en una escuela pública de Catete", "en su casa", "en una universidad privada de Botafogo", "en Buenos Aires"], "en una escuela pública de Catete"],
@@ -420,12 +419,12 @@
         "— Pois não. Seria um quarto de solteiro?\n" +
         "— Sim. Vocês teriam um quarto com vista para o mar?\n" +
         "— Teríamos, mas custaria seiscentos reais por noite.\n" +
-        "— Nossa! Seria possível um desconto? Ele ficaria três noites.\n" +
+        "— Nossa! Seria possível um desconto? Ele ficaria duas noites.\n" +
         "— Eu poderia fazer quinhentos, com o café da manhã.\n" +
         "— Perfeito. E você poderia indicar um bom restaurante perto?\n" +
         "— Eu iria ao boteco da esquina: a comida é simples, mas é muito boa.\n" +
         "— Muito obrigada. Eu queria também o endereço do hotel, por favor.",
-      gloss: { pois: "pues (pois não = cómo no)", solteiro: "single, individual", desconto: "descuento",
+      gloss: { pois: "pues (pois não = cómo no)", solteiro: "individual (quarto de solteiro = habitación individual)", desconto: "descuento",
                nossa: "¡uy! (sorpresa)", quinhentos: "quinientos", seiscentos: "seiscientos",
                endereço: "dirección", obrigada: "gracias (dicho por una mujer)", indicar: "recomendar", perto: "cerca" },
       questions: [
@@ -433,7 +432,7 @@
         ["¿Cuánto cuesta al final por noche?", ["quinientos reales, con desayuno", "seiscientos reales, sin desayuno", "trescientos reales", "es gratis"], "quinientos reales, con desayuno"],
         ["¿Qué restaurante recomienda el recepcionista?", ["el bar de la esquina", "el restaurante del hotel", "uno en Copacabana", "ninguno"], "el bar de la esquina"]
       ],
-      vf: [["O Lucas ficaria três noites.", "verdadeiro"], ["No final, o quarto custa seiscentos reais.", "falso"], ["O Lucas já conhece o Rio.", "não se diz"]],
+      vf: [["O Lucas ficaria duas noites.", "verdadeiro"], ["No final, o quarto custa seiscentos reais.", "falso"], ["O Lucas já conhece o Rio.", "não se diz"]],
       hunt: { label: "Tocá los verbos en futuro do pretérito (condicional)", targets: ["gostaria", "seria", "teriam", "teríamos", "custaria", "ficaria", "poderia", "iria"] } },
 
     { id: "w-19", week: 19, n: 19, level: "B1", emoji: "🏙️", title: "Rio ou São Paulo?",
@@ -760,7 +759,7 @@
     { id: "w-33", week: 33, n: 33, level: "B2", emoji: "🪶", title: "O bruxo do Cosme Velho",
       grammar: "colocação pronominal na escrita",
       text:
-        "Joaquim Maria Machado de Assis nasceu em 1839, no Morro do Livramento, filho de um pintor de " +
+        "Joaquim Maria Machado de Assis nasceu em 1839, no Morro do Livramento, no Rio de Janeiro, filho de um pintor de " +
         "paredes e de uma lavadeira dos Açores. Sem ter feito universidade, tornou-se o escritor mais " +
         "admirado do país e, em 1897, ajudou a fundar a Academia Brasileira de Letras, que o elegeu seu " +
         "primeiro presidente. Chamam-no de Bruxo do Cosme Velho, o bairro onde morou, por causa de um " +

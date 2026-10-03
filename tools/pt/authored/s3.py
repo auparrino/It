@@ -65,8 +65,8 @@ def tr(part, stem, answer, note, alt=None):
     return _add(part, "translate", TR, stem, answer, note, alt=alt)
 
 
-def fx(part, stem, bad, good, answer, cat, note, goodAlt=None):
-    d = _add(part, "fixerr", FX, stem, answer, note, bad=bad, good=good, cat=cat)
+def fx(part, stem, bad, good, answer, cat, note, goodAlt=None, alt=None):
+    d = _add(part, "fixerr", FX, stem, answer, note, alt=alt, bad=bad, good=good, cat=cat)
     if goodAlt:
         d["goodAlt"] = goodAlt
     return d
@@ -164,8 +164,8 @@ tr(1, "Cuando veas a Rafa, dale un abrazo.", "Quando você vir o Rafa, dá um ab
 tr(1, "Apenas lleguemos a Río, te llamamos.", "Assim que chegarmos ao Rio, te ligamos",
    "«Apenas» = assim que / logo que, con futuro do subjuntivo: chegarmos.",
    alt=["Assim que nós chegarmos ao Rio, te ligamos", "Logo que chegarmos ao Rio, te ligamos",
-        "Assim que chegarmos no Rio, te ligamos", "Assim que a gente chegar ao Rio, te liga",
-        "Assim que a gente chegar no Rio, te liga", "Assim que chegarmos ao Rio, ligamos para você",
+        "Assim que chegarmos no Rio, te ligamos", "Assim que a gente chegar ao Rio, a gente te liga",
+        "Assim que a gente chegar no Rio, a gente te liga", "Assim que chegarmos ao Rio, ligamos para você",
         "Assim que chegarmos ao Rio, ligamos pra você", "Assim que chegarmos ao Rio, nós te ligamos"])
 tr(1, "Mientras estés acá, la casa es tuya.", "Enquanto você estiver aqui, a casa é sua",
    "*Enquanto* referido al futuro pide futuro do subjuntivo: *enquanto você estiver aqui*. Con *você*, el posesivo es *seu / sua*: *a casa é sua*.",
@@ -498,7 +498,8 @@ fx(2, "Trouxe biscoito Globo pra a gente comermos na praia.", "comermos", "comer
    "«A gente» concuerda en singular: pra a gente comer. Con -mos, «para nós comermos».")
 fx(1, "É importante que vocês chegarem cedo.", "chegarem", "cheguem",
    "É importante que vocês cheguem cedo.", "subjuntivo",
-   "Con «que» va subjuntivo (que vocês cheguem); sin «que», infinitivo pessoal (é importante vocês chegarem). No se mezclan.")
+   "Con «que» va subjuntivo (que vocês cheguem); sin «que», infinitivo pessoal (é importante vocês chegarem). No se mezclan.",
+   alt=["É importante vocês chegarem cedo."])
 
 _L29 = [["falar", "para eles falarem"], ["comer", "para eles comerem"], ["abrir", "para eles abrirem"]]
 gd(0, _L29, "sair → para eles ___", "saírem", "sairem",
@@ -506,7 +507,7 @@ gd(0, _L29, "sair → para eles ___", "saírem", "sairem",
 gd(0, _L29, "pôr → para eles ___", "porem", "pôrem",
    "La tilde de pôr solo distingue el infinitivo de la preposición «por»; en porem ya no hace falta.")
 gd(0, _L29, "ter → para eles ___", "terem", "tiverem",
-   "En los regulares coincide con el futuro do subjuntivo y eso confunde: ter da terem (infinitivo pessoal) y tiverem (futuro do subjuntivo).")
+   "En los regulares el infinitivo pessoal coincide con el futuro do subjuntivo (falarem) y eso confunde; con ter se separan: terem (infinitivo pessoal) ≠ tiverem (futuro do subjuntivo).")
 
 sc(0, ["falar → falarem", "ser → serem", "fazer → fazerem", "ter → terem", "ir → irem", "sair → saírem"],
    "¿Sobre qué se forma el infinitivo pessoal?",
@@ -871,7 +872,7 @@ ch(1, "___ que vai chover no fim de semana.", ["Dizem", "Diz", "Dizemos"], "Dize
 ch(1, "No bandejão da faculdade, ___ pega a bandeja e se serve.", ["você", "eles", "se"], "você",
    "En el habla, «você» genérico = uno, como el «vos» genérico rioplatense: acá agarrás la bandeja.")
 ch(1, "Ontem ___ pra você: era do banco.", ["ligaram", "ligaram-se", "se ligaram"], "ligaram",
-   "Sujeto indeterminado: ligaram (me llamaron). «Se ligaram» es otra cosa: «se dieron cuenta».")
+   "Sujeto indeterminado: ligaram (te llamaron). «Se ligaram» es otra cosa: «se dieron cuenta».")
 
 cl(0, "___ (alugar) quarto em Santa Teresa.", "Aluga-se",
    "Un cuarto: aluga-se. En carteles, ênclise con guion.", prompt="Completá el cartel con la pasiva con se.")
@@ -1304,8 +1305,8 @@ ch(0, "A Bia namora ___ Rafa há dois anos.", ["o", "com o", "ao"], "o",
    "namorar alguém, sin preposición: namora o Rafa (o = artículo).")
 ch(0, "Ela casou ___ um mineiro.", ["com", "a", "de"], "com",
    "casar com (o casar-se com), como en español.")
-ch(0, "Sonho ___ morar em Ipanema.", ["em", "com", "de"], "em",
-   "sonhar em + infinitivo (soñar con hacer algo); sonhar com + sustantivo.")
+ch(0, "Sonho ___ uma casa em Ipanema.", ["com", "em", "de"], "com",
+   "sonhar com + sustantivo: sonho com uma casa. Con infinitivo se usa sonhar em o sonhar com (sonho em/com morar).")
 ch(1, "Ajudei ___ vizinho com a mudança.", ["o", "ao", "para o"], "o",
    "ajudar lleva objeto directo: ajudei o vizinho. No hay «a» personal.")
 ch(1, "Vou visitar ___ avós em Recife.", ["os meus", "aos meus", "para os meus"], "os meus",

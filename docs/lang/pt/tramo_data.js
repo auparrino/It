@@ -83,7 +83,7 @@
     },
     {
      "h": "Fórmulas de abertura, corpo e fecho",
-     "p": "Diez fórmulas que resuelven casi cualquier carta formal. Aprendelas como bloques: no se traducen palabra por palabra.",
+     "p": "Once fórmulas que resuelven casi cualquier carta formal. Aprendelas como bloques: no se traducen palabra por palabra.",
      "list": [
       [
        "Prezado(a) Senhor(a),",
@@ -330,7 +330,7 @@
     },
     {
      "h": "Modelo anotado",
-     "p": "Un e-mail de 95 palabras para una amiga que se muda a Río.",
+     "p": "Un e-mail de 69 palabras para una amiga que se muda a Río.",
      "model": [
       [
        "Oi, Camila!",
@@ -493,7 +493,7 @@
     },
     {
      "h": "Modelo anotado",
-     "p": "Una carta de 90 palabras sobre una nota de ciclovías.",
+     "p": "Una carta de 74 palabras sobre una nota de ciclovías.",
      "model": [
       [
        "Prezados editores,",
@@ -650,7 +650,7 @@
     },
     {
      "h": "Modelo anotado",
-     "p": "Un artículo de 100 palabras para la revista de un barrio.",
+     "p": "Un artículo de 72 palabras para la revista de un barrio.",
      "model": [
       [
        "Menos asfalto, mais árvores",
@@ -808,7 +808,7 @@
     },
     {
      "h": "Modelo anotado",
-     "p": "Una reseña de 95 palabras de un cuento.",
+     "p": "Una reseña de 81 palabras de un cuento.",
      "model": [
       [
        "Um relógio que não anda",
@@ -1109,7 +1109,7 @@
     },
     {
      "h": "Modelo anotado",
-     "p": "Un resumo de 90 palabras de un reportaje.",
+     "p": "Un resumo de 81 palabras de un reportaje.",
      "model": [
       [
        "A reportagem «Desertos de notícias», publicada no jornal O Dia, trata das cidades brasileiras que não têm nenhum veículo de imprensa local.",
@@ -1259,7 +1259,7 @@
     },
     {
      "h": "Modelo anotado",
-     "p": "Un relato de 95 palabras.",
+     "p": "Un relato de 77 palabras.",
      "model": [
       [
        "Foi em março de 2022, na minha primeira semana no Rio. Eu morava em Botafogo e ainda não conhecia ninguém.",
@@ -1411,7 +1411,7 @@
     },
     {
      "h": "Modelo anotado",
-     "p": "Una carta abierta de 80 palabras.",
+     "p": "Una carta abierta de 57 palabras.",
      "model": [
       [
        "Carta aberta à Secretaria Municipal de Cultura",
@@ -1557,7 +1557,7 @@
     },
     {
      "h": "Modelo anotado",
-     "p": "Un post de 70 palabras.",
+     "p": "Un post de 54 palabras.",
      "model": [
       [
        "Meu celular quebrou. E agora?",
@@ -1692,7 +1692,7 @@
     },
     {
      "h": "Modelo anotado",
-     "p": "Un guía de 60 palabras.",
+     "p": "Una guía de 55 palabras.",
      "model": [
       [
        "Apelidos no trabalho: três dicas",
@@ -1841,7 +1841,7 @@
     },
     {
      "h": "Modelo anotado",
-     "p": "Una propuesta de 80 palabras.",
+     "p": "Una propuesta de 57 palabras.",
      "model": [
       [
        "Proposta: horário noturno na biblioteca",
@@ -2322,7 +2322,7 @@
     "emoji": "🥛",
     "genre": "coluna de opinião",
     "grammar": "imperfeito do subjuntivo e condicionais",
-    "text": "Outro dia, na fila do supermercado, uma senhora me perguntou qual iogurte eu levaria se fosse ela. Havia, contei depois, vinte e três tipos na prateleira: integral, desnatado, grego, com mel, sem lactose, com pedaços de fruta. Respondi qualquer coisa e fiquei pensando que, se meu avô entrasse naquele corredor, sairia de mãos vazias. Não por falta de dinheiro, mas por excesso de alternativas.\n\nA gente cresceu ouvindo que liberdade é poder escolher. E é, claro. Ninguém em sã consciência gostaria de voltar a um tempo em que a profissão, o casamento e a cidade de uma pessoa fossem decididos pela família. Mas desconfio que confundimos liberdade com quantidade. Se tivéssemos menos opções, talvez escolhêssemos com mais calma e, principalmente, ficássemos mais satisfeitos com o que escolhemos.\n\nPenso nos meus alunos do cursinho. Aos dezessete anos, eles precisam decidir o que vão fazer da vida, como se a decisão fosse irreversível. Muitos me dizem que prefeririam que alguém escolhesse por eles. Um deles, o Caio, me confessou: “Se eu soubesse que dá para mudar depois, eu não estaria tão nervoso”. Seria cômico, se não fosse triste: passamos a adolescência inteira dizendo aos jovens que o mundo está aberto e esquecemos de avisar que as portas também se abrem mais tarde.\n\nNão estou propondo que as prateleiras voltem a ter um único iogurte, nem que os vestibulandos sorteiem o curso. Proponho algo mais modesto: que parássemos de tratar cada escolha como se fosse a última. Se encarássemos as decisões como experimentos, e não como sentenças, o medo de errar diminuiria bastante. Quem dera as escolas ensinassem isso com a mesma seriedade com que ensinam logaritmos.\n\nVoltando à senhora do supermercado: ela acabou levando o primeiro iogurte que viu, o mais simples de todos, e pareceu aliviada. Eu, que tinha passado cinco minutos comparando rótulos, saí com dois, e em casa descobri que não gostava de nenhum. Se fosse para dar um conselho, eu diria: escolha, prove e, se não gostar, escolha outra vez. A vida raramente é tão definitiva quanto parece na fila do caixa.",
+    "text": "Outro dia, na fila do supermercado, uma senhora me perguntou qual iogurte eu levaria se fosse ela. Havia, contei depois, vinte e três tipos na prateleira: integral, desnatado, grego, com mel, sem lactose, com pedaços de fruta. Respondi qualquer coisa e fiquei pensando que, se meu avô entrasse naquele corredor, sairia de mãos vazias. Não por falta de dinheiro, mas por excesso de alternativas.\n\nA gente cresceu ouvindo que liberdade é poder escolher. E é, claro. Ninguém em sã consciência gostaria de voltar a um tempo em que a profissão, o casamento e a cidade de uma pessoa fossem decididos pela família. Mas desconfio que confundimos liberdade com quantidade. Se tivéssemos menos opções, talvez escolhêssemos com mais calma e, principalmente, ficássemos mais satisfeitos com o que escolhemos.\n\nPenso nos meus alunos do cursinho. Aos dezessete anos, eles precisam decidir o que vão fazer da vida, como se a decisão fosse irreversível. Muitos me dizem que prefeririam que alguém escolhesse por eles. Um deles, o Caio, me confessou: “Se eu soubesse que dá para mudar depois, eu não estaria tão nervoso”. Seria cômico, se não fosse triste: passamos a adolescência inteira dizendo aos jovens que o mundo está aberto e esquecemos de avisar que as portas também se abrem mais tarde.\n\nNão estou propondo que as prateleiras voltem a ter um único iogurte, nem que os vestibulandos sorteiem o curso. Proponho algo mais modesto: que paremos de tratar cada escolha como se fosse a última. Se encarássemos as decisões como experimentos, e não como sentenças, o medo de errar diminuiria bastante. Quem dera as escolas ensinassem isso com a mesma seriedade com que ensinam logaritmos.\n\nVoltando à senhora do supermercado: ela acabou levando o primeiro iogurte que viu, o mais simples de todos, e pareceu aliviada. Eu, que tinha passado cinco minutos comparando rótulos, saí com dois, e em casa descobri que não gostava de nenhum. Se fosse para dar um conselho, eu diria: escolha, prove e, se não gostar, escolha outra vez. A vida raramente é tão definitiva quanto parece na fila do caixa.",
     "gloss": {
      "dera": "(quem dera) ojalá",
      "fila": "fila, cola",
@@ -2336,7 +2336,7 @@
      "prefeririam": "preferirían",
      "vestibulandos": "aspirantes al examen de ingreso a la universidad",
      "sorteiem": "sorteen",
-     "parássemos": "dejáramos",
+     "paremos": "dejemos",
      "encarássemos": "encaráramos, viéramos",
      "errar": "equivocarse",
      "aliviada": "aliviada",
@@ -2429,7 +2429,6 @@
       "ficássemos",
       "soubesse",
       "escolhesse",
-      "parássemos",
       "encarássemos",
       "ensinassem"
      ]
@@ -4536,7 +4535,13 @@
       "espalhou-se",
       "entregou-lhe",
       "levou-a",
-      "far-se-á"
+      "far-se-á",
+      "diga-me",
+      "resumiam-se",
+      "montá-lo",
+      "refazê-lo",
+      "respondeu-lhe",
+      "riram-se"
      ]
     }
    },
@@ -11771,10 +11776,14 @@
       "La expresión del malentendido",
       [
        "ficha caiu",
+       "caiu a ficha",
        "pisar na bola",
        "pisei na bola",
+       "pisou na bola",
        "pagar o pato",
+       "paguei o pato",
        "tirar de letra",
+       "tirei de letra",
        "dar um jeito",
        "dar um pulo",
        "quebrar o galho",
@@ -11785,6 +11794,7 @@
        "segurar vela",
        "dor de cotovelo",
        "enfiar o pé na jaca",
+       "enfiei o pé na jaca",
        "fazer uma vaquinha"
       ]
      ],
@@ -11812,14 +11822,20 @@
       "Otras dos expresiones idiomáticas o colocaciones",
       [
        "ficha caiu",
+       "caiu a ficha",
        "pisado na bola",
        "pisei na bola",
+       "pisou na bola",
        "dar um jeito",
        "pagar o pato",
+       "paguei o pato",
        "tirar de letra",
+       "tirei de letra",
        "tomar uma decisão",
        "fazer questão",
+       "fiz questão",
        "dar certo",
+       "deu certo",
        "engolir sapo",
        "quebrar o galho"
       ]

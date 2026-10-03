@@ -1346,7 +1346,7 @@
     { id: "fl-dele", week: 10, series: "flood", n: 4, level: "A2", emoji: "🧊",
       title: "De quem é?", grammar: "dele, dela, deles, delas",
       flood: { target: "dele / dela", forms: ["dele", "dela", "deles", "delas"], n: 15,
-               es: "Mirá «dele / dela» (de él, de ella): van después de la cosa («o irmão dela») y sacan la duda de «seu», que puede ser de você, de él o de ella. En español «su» tiene el mismo problema, pero no tiene esta solución." },
+               es: "Mirá «dele / dela» (de él, de ella): van después de la cosa («o irmão dela») y sacan la duda de «seu», que puede ser de você, de él o de ella. En español «su» también es ambiguo y también se puede aclarar con «de él / de ella», pero en portugués esa solución es la normal." },
       text:
         "A geladeira da casa de Santa Teresa é pequena, e a Bia e o Martín têm uma regra: cada um " +
         "tem a sua prateleira. A de cima é dela, a de baixo é dele. Mas hoje a Carol e o irmão " +

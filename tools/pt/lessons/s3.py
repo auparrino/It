@@ -272,8 +272,8 @@ LESSONS = {
   "ex": [["É melhor *irmos* de metrô.", "Es mejor que vayamos en subte."],
          ["Trouxe o mapa para vocês *acharem* o Cristo.", "Traje el mapa para que encuentren el Cristo."],
          ["Antes de *saírem*, passem protetor.", "Antes de salir, pónganse protector."]],
-  "tip": "*sair, cair, sorrir*: *saírem, caírem* llevan tilde en la *i* "
-         "para romper el diptongo."},
+  "tip": "*sair, cair*: *saíres, saírem* (y *caíres, caírem*) llevan tilde en la *í* "
+         "porque forman hiato (sa-í-rem). *Sairmos* no la lleva: la *i* va con la *r* en la misma sílaba."},
 
  {"h": "fazerem no es fizerem",
   "q": [{"prompt": "«Es hora de que ellos hagan la tarea.» → Está na hora de eles ___ o dever.", "answer": "fazerem", "options": ["fazerem", "fizerem", "façam"]},
@@ -589,7 +589,7 @@ LESSONS = {
        "*precisa-se de vendedores*.",
   "ex": [["*Precisa-se de* garçons.", "Se necesitan mozos."],
          ["*Trata-se de* casos raros.", "Se trata de casos raros."],
-         ["Aqui *se gosta de* samba.", "Acá gusta el samba."],
+         ["Aqui *se gosta de* samba.", "Acá les gusta el samba."],
          ["*Vive-se* bem no Rio.", "Se vive bien en Río."]],
   "warn": "El español dice «se necesitan mozos», en plural. En portugués, "
           "por el *de*: *precisa-se de garçons*. «Precisam-se de» es "
@@ -928,9 +928,9 @@ LESSONS = {
 
  {"h": "namorar, casar, sonhar, pensar",
   "q": [{"prompt": "«Bia está de novia con Rafa.» → A Bia ___ o Rafa.", "answer": "namora", "options": ["namora", "namora com", "namora a"]},
-        {"prompt": "«Sueño con vivir en Río.» → Sonho ___ morar no Rio.", "answer": "em", "options": ["em", "com", "de"]}],
+        {"prompt": "«Sueño con una casa en Río.» → Sonho ___ uma casa no Rio.", "answer": "com", "options": ["em", "com", "de"]}],
   "r": "*namorar alguém* (sin *com*), *casar com*, *sonhar com* (alguien, "
-       "algo), *sonhar em* + infinitivo, *pensar em*.",
+       "algo, o + infinitivo), *sonhar em* + infinitivo también, *pensar em*.",
   "ex": [["A Bia *namora o* Rafa há dois anos.", "Bia está de novia con Rafa hace dos años."],
          ["Ela *casou com* um mineiro.", "Se casó con un mineiro."],
          ["*Sonhei com* você.", "Soñé con vos."],
@@ -988,7 +988,7 @@ LESSONS = {
   "ex": [["O show *a que* assisti foi incrível.", "El show que vi fue increíble."],
          ["A pessoa *de quem* te falei é carioca.", "La persona de la que te hablé es carioca."],
          ["O bairro *em que* moro é tranquilo.", "El barrio en el que vivo es tranquilo."],
-         ["O cara *com quem* ela namora é gaúcho.", "El chico con el que sale es gaúcho."],
+         ["O cara *com quem* ela casou é gaúcho.", "El chico con el que se casó es gaúcho."],
          ["A revolução *a que* Portugal assistiu em 1974 foi quase sem tiros.", "La revolución que vivió Portugal en 1974 fue casi sin tiros."]],
   "tip": "Hablando se suele caer la preposición («o filme que assisti»). "
          "Escribiendo, no la pierdas."},
@@ -1077,8 +1077,8 @@ LESSONS = {
          ["Refiro-me *àquela* reunião.", "Me refiero a aquella reunión."],
          ["Não dei importância *àquilo*.", "No le di importancia a eso."],
          ["Fui *a* esta praia uma vez.", "Fui a esta playa una vez (sin crase)."]],
-  "tip": "Truco: si con masculino queda *a aquele*, ya está: se funde en "
-         "*àquele*."},
+  "tip": "Si el verbo pide *a* y sigue *aquele / aquela / aquilo*, siempre se funden: "
+         "*àquele*, *àquela*, *àquilo*."},
 
  {"h": "Locuciones y à moda de",
   "q": [{"prompt": "«Pagué al contado.» → Paguei ___.", "answer": "à vista", "options": ["à vista", "a vista", "ao contado"]}],

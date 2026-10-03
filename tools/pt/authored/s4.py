@@ -46,11 +46,11 @@ def tr(w, p, stem, answer, alt, note, prompt=TR):
     _add(w, p, "translate", prompt, stem, answer, note, alt)
 
 
-def fx(w, p, stem, bad, good, cat, note, goodAlt=None):
+def fx(w, p, stem, bad, good, cat, note, goodAlt=None, alt=None):
     extra = dict(bad=bad, good=good, cat=cat)
     if goodAlt:
         extra["goodAlt"] = goodAlt
-    _add(w, p, "fixerr", FX, stem, stem.replace(bad, good, 1), note, **extra)
+    _add(w, p, "fixerr", FX, stem, stem.replace(bad, good, 1), note, alt, **extra)
 
 
 def gd(w, p, lead, stem, answer, trap, note, alt=None):
@@ -698,7 +698,7 @@ fx(W, 2, "Fico a disposição para qualquer dúvida.", "a disposição", "à dis
    "à disposição: preposición a + artículo a.")
 fx(W, 0, "Saudos cordiais, Martín", "Saudos cordiais", "Atenciosamente", "espanol",
    "«Saludos cordiales» no se calca: en un mail formal, Atenciosamente o Cordialmente.",
-   goodAlt=["Cordialmente"])
+   goodAlt=["Cordialmente"], alt=["Cordialmente, Martín"])
 
 gd(W, 2, [["poder", "poderia"], ["gostar", "gostaria"], ["agradecer", "agradeceria"]],
    "desfazer → ___", "desfaria", "desfazeria",
@@ -997,7 +997,7 @@ cl(W, 1, "Um sanduíche de ___ (jamón) e queijo.", "presunto",
 cl(W, 2, "Estou com ___ dor terrível nas costas.", "uma",
    "dor es femenino: uma dor, a dor.")
 cl(W, 2, "A ponte Rio-Niterói é muito ___ (larga, de longitud).", "comprida",
-   "ponte es femenina y «largo» de longitud es comprido: comprida.")
+   "ponte es femenina y «largo» de longitud es comprido o longo: comprida / longa.", alt=["longa"])
 cl(W, 2, "Vou à ___ (gimnasio) três vezes por semana.", "academia",
    "Falso amigo: *academia* es el «gimnasio» (*vou à academia*, con *crase*). Se pronuncia a-ca-de-MI-a, con acento en la *i*.")
 cl(W, 2, "A ___ (policía) fechou a rua.", "polícia",
@@ -1141,7 +1141,7 @@ cl(W, 0, "(PT) Estou ___ (ler) um livro de Eça de Queirós.", "a ler",
    "Portugal: estar a + infinitivo. Eça escribió Os Maias (1888).")
 cl(W, 0, "(BR) Estou ___ (ler) Os Maias.", "lendo",
    "Brasil: estar + gerundio.")
-cl(W, 0, "Em Portugal, o jugo é «___»; no Brasil, «suco».", "sumo",
+cl(W, 0, "No Brasil, «suco»; em Portugal, «___».", "sumo",
    "Brasil y Portugal difieren: el jugo es *suco* en Brasil y *sumo* en Portugal. En Brasil, *sumo* es un verbo (*sumir*, «desaparecer»).")
 cl(W, 0, "(PT) O ___ (tren) para o Porto sai às nove.", "comboio",
    "El tren es *trem* en Brasil y *comboio* en Portugal. En Brasil *comboio* es solo una caravana de vehículos.")
@@ -1188,7 +1188,7 @@ tr(W, 1, "En Río decimos aipim; en Recife, macaxeira.", "No Rio a gente diz aip
    "Rio: aipim; Nordeste: macaxeira. em + o Rio = no Rio; Recife va sin artículo.")
 tr(W, 1, "El chiado carioca se parece al de Lisboa.", "O chiado carioca se parece com o de Lisboa.",
    ["O chiado carioca parece-se com o de Lisboa", "O chiado carioca é parecido com o de Lisboa",
-    "O chiado carioca se parece ao de Lisboa"],
+    ],
    "«Parecerse a» es *parecer-se com*: la preposición es *com*, no *a*. *O chiado carioca se parece com o de Lisboa*.")
 tr(W, 2, "Mia Couto es mozambiqueño y escribe en portugués.", "Mia Couto é moçambicano e escreve em português.", [],
    "moçambicano, con ç. La norma escrita de Mozambique sigue a la de Portugal.")
@@ -1368,7 +1368,8 @@ tr(W, 2, "Por lo tanto, es urgente limpiar la Bahía de Guanabara.", "Portanto, 
 fx(W, 1, "Embora a praia está suja, muita gente vai lá.", "está", "esteja", "subjuntivo",
    "embora exige subjuntivo: embora esteja.")
 fx(W, 0, "En minha opinião, a reforma é necessária.", "En minha", "Na minha", "contraccion",
-   "em + a = na: na minha opinião.")
+   "«En» es el error: se dice em minha opinião o na minha opinião (em + a = na).",
+   alt=["Em minha opinião, a reforma é necessária."])
 fx(W, 2, "Además, o projeto não resolve nada.", "Además", "Além disso", "espanol",
    "«Además» se dice *além disso* (o *ademais*, formal). *Además* no existe en portugués.", goodAlt=["Ademais"])
 fx(W, 1, "Apesar de que é caro, vale a pena.", "Apesar de que é", "Apesar de ser", "espanol",
@@ -1437,7 +1438,7 @@ ch(W, 0, "Florestan Fernandes discorda ___ ideia de «democracia racial».",
    "discordar de: de + a = da. Florestan mostró la discriminación que la idea de «democracia racial» ocultaba.")
 ch(W, 0, "O texto se refere ___ Revolução dos Cravos.",
    ["à", "a", "na"], "à",
-   "*Referir-se a* + *a Revolução* da *à Revolução*, con *crase*. La Revolução dos Cravos derribó al Estado Novo el 25 de abril de 1974.")
+   "*Referir-se a* + *a Revolução* dá *à Revolução*, con *crase*. La Revolução dos Cravos derribó al Estado Novo el 25 de abril de 1974.")
 ch(W, 0, "Lélia Gonzalez chama a atenção ___ o racismo na língua e na cultura.",
    ["para", "a", "em"], "para",
    "chamar a atenção para = llamar la atención sobre. Lélia Gonzalez acuñó «pretuguês» para el portugués marcado por lo africano.")
@@ -1493,7 +1494,7 @@ cl(W, 2, "O cantor ___ (cancelar, condicional compuesto) o show, segundo fãs.",
 
 tr(W, 0, "Estoy de acuerdo con el autor.", "Concordo com o autor.",
    ["Eu concordo com o autor", "Estou de acordo com o autor"],
-   "concordar com o estar de acordo com.")
+   "concordar com = estar de acordo com. Ojo con la preposición: se concuerda «com» alguien, no «a».")
 tr(W, 0, "El texto se refiere a la dictadura militar.", "O texto se refere à ditadura militar.",
    ["O texto refere-se à ditadura militar", "O texto faz referência à ditadura militar"],
    "*Referir-se a* + *a ditadura* se contrae en *à ditadura*: la *crase* une la preposición del verbo y el artículo femenino.")
@@ -1538,7 +1539,7 @@ gd(W, 0, [["argumentar", "o argumento"], ["pensar", "o pensamento"], ["tratar", 
    "resumir → o resumo, sin sufijo.")
 gd(W, 0, [["citar", "a citação"], ["alegar", "a alegação"], ["explicar", "a explicação"]],
    "concluir → ___", "a conclusão", "a concluição",
-   "Los verbos en -uir dan -são: concluir → conclusão, incluir → inclusão.")
+   "concluir → conclusão (como incluir → inclusão). Ojo: no es regla general de -uir: construir → construção, contribuir → contribuição.")
 
 sc(W, 2, ["O suspeito teria fugido.", "O ministro teria mentido.", "O jogador estaria lesionado.",
           "Segundo fontes, o show seria cancelado.", "A polícia confirmou: o suspeito fugiu.",

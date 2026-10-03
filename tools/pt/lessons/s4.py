@@ -430,8 +430,9 @@ LESSONS = {
          ["Fico *à disposição*.", "Quedo a disposición."],
          ["*Em relação à* sua solicitação...", "En relación con su solicitud..."],
          ["Encaminho o pedido *ao* setor responsável.", "Derivo el pedido al sector responsable."]],
-  "warn": "Con crase fija: *à disposição*, *em relação à*, *devido à*. Sin "
-          "crase ante verbo y ante masculino: *a partir de hoje*, *a pedido "
+  "warn": "Con crase fija: *à disposição*. En *em relação a* y *devido a* depende "
+          "de lo que sigue: *em relação à proposta*, *em relação ao prazo*, *devido a problemas*. "
+          "Sin crase ante verbo y ante masculino: *a partir de hoje*, *a pedido "
           "do senhor*."},
 ]},
 
@@ -719,7 +720,7 @@ LESSONS = {
                      ["o sal (la sal)", "a viagem (el viaje)"],
                      ["o nariz (la nariz)", "a origem (el origen)"],
                      ["o costume (la costumbre)", "a cor (el color)"],
-                     ["o legume (la verdura)", "a análise (el análisis)"]]},
+                     ["o legume (la legumbre)", "a análise (el análisis)"]]},
   "ex": [["*O leite* está *quente*.", "La leche está caliente."],
          ["Estou com *uma dor* de cabeça *forte*.", "Tengo un dolor de cabeza fuerte."],
          ["*A ponte* Rio-Niterói é *comprida*.", "El puente Río-Niterói es largo."],
@@ -1239,14 +1240,14 @@ LESSONS = {
                      ["custar os olhos da cara", "costar un ojo de la cara"],
                      ["estar com a pulga atrás da orelha", "tener la mosca detrás de la oreja"],
                      ["pagar o pato", "pagar el pato"],
-                     ["chover no molhado", "llover sobre mojado"],
                      ["tirar o cavalo da chuva", "olvidarse de algo, desistir"]]},
   "ex": [["Só depois *caiu a ficha*.", "Recién después me cayó la ficha."],
          ["O apartamento no Leblon *custa os olhos da cara*.", "El depto en Leblon cuesta un ojo de la cara."],
          ["Fiquei *com a pulga atrás da orelha*.", "Me quedé con la mosca detrás de la oreja."],
          ["Pode *tirar o cavalo da chuva*: ele não vem.", "Olvidate: él no viene."]],
   "warn": "En portugués es una **pulga**, no una mosca, y los *olhos* son "
-          "dos: *os olhos da cara*."},
+          "dos: *os olhos da cara*. Falso amigo: *chover no molhado* es decir algo "
+          "obvio o inútil, no «llover sobre mojado»."},
 
  {"h": "Refranes",
   "r": "Los refranes brasileños tienen su equivalente, con otras imágenes. "

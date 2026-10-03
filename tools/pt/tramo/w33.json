@@ -53,7 +53,7 @@
     ],
     "hunt": {
       "label": "Toque nos pronomes em ênclise ou mesóclise (ligados ao verbo por hífen)",
-      "targets": ["recebeu-o", "sentando-se", "chamava-se", "deixá-lo-ei", "abrir-se-ia", "dissuadi-lo", "perguntou-lhe", "espalhou-se", "entregou-lhe", "levou-a", "far-se-á"]
+      "targets": ["recebeu-o", "sentando-se", "chamava-se", "deixá-lo-ei", "abrir-se-ia", "dissuadi-lo", "perguntou-lhe", "espalhou-se", "entregou-lhe", "levou-a", "far-se-á", "diga-me", "resumiam-se", "montá-lo", "refazê-lo", "respondeu-lhe", "riram-se"]
     }
   },
   "ascolto": {
