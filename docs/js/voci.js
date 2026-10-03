@@ -1,44 +1,79 @@
 /*
- * Voci vere: grabaciones de hablantes reales de Lingua Libre (Wikimedia
- * Commons, CC BY-SA 4.0) para las palabras de los pares mínimos de Suoni.
+ * Voces reales: grabaciones de hablantes reales de Lingua Libre (Wikimedia
+ * Commons, CC BY-SA 4.0) para las palabras de los pares mínimos del oído.
  *
  * El HVPT funciona por la variedad de hablantes reales (Uchihara, Karas &
  * Thomson 2025): la voz del teléfono simula esa variedad con velocidad y
  * tono, pero es una sola voz.  La app busca en Commons, desde el teléfono y
- * la primera vez, las grabaciones «LL-Q652 (ita)-<hablante>-<palabra>.wav»;
- * guarda qué encontró (localStorage) y el service worker guarda el audio,
- * así la segunda vez anda sin conexión.  Si no hay grabación, sin conexión
- * la primera vez o si falla, suena la voz del teléfono como siempre.
+ * la primera vez, las grabaciones «LL-<Q> (<idioma>)-<hablante>-<palabra>.wav»
+ * (Q652 ita, Q5146 por…); guarda qué encontró (localStorage) y el service
+ * worker guarda el audio, así la segunda vez anda sin conexión.  Si no hay
+ * grabación, sin conexión la primera vez o si falla, suena la voz del
+ * teléfono como siempre.
+ *
+ * Lo que es del idioma viene del paquete: LANG.lingualibre y
+ * VociCV.LINGUA_LIBRE (voci_cv_data.js): { q: código de Wikidata, tag:
+ * etiqueta del archivo, letters: las letras de una palabra buscable (una
+ * clase de regex), prefer / avoid: hablantes que van primero / al final (por
+ * variedad) }.  El guardado usa el prefijo del idioma (LANG.storage).
  */
 (function (root) {
   "use strict";
 
-  var KEY = "laviac1.voci.v1";
   var API = "https://commons.wikimedia.org/w/api.php";
   var MISS_TTL = 30 * 86400000;          // a word with no recording is asked again after a month
   var LICENSE = "Lingua Libre · CC BY-SA 4.0";
 
-  function load() { try { return JSON.parse(root.localStorage.getItem(KEY) || "{}") || {}; } catch (e) { return {}; } }
-  function save(db) { try { root.localStorage.setItem(KEY, JSON.stringify(db)); } catch (e) { /* lleno o bloqueado */ } }
+  var CFG = null;
+  function cfg() {
+    if (CFG) return CFG;
+    var mine = (root.VociCV && root.VociCV.LINGUA_LIBRE) || {};
+    var L = (root.LANG && root.LANG.lingualibre) || {};
+    var esc = function (s) { return String(s || "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); };
+    var c = {
+      q: L.q || mine.q || "", tag: L.tag || L.code || mine.tag || "",
+      letters: mine.letters || L.letters || "a-z",
+      prefer: mine.prefer || L.prefer || [], avoid: mine.avoid || L.avoid || []
+    };
+    c.prefix = "LL-" + c.q + " (" + c.tag + ")";
+    c.title = new RegExp("^File:" + esc(c.prefix) + "-(.+)-([^-]+)\\.(wav|ogg|flac|mp3)$", "i");
+    c.word = new RegExp("^[" + c.letters + "]+$");
+    return (CFG = c);
+  }
+  function key() { return ((root.LANG && root.LANG.storage) || "c1") + ".voci.v1"; }
+
+  function load() { try { return JSON.parse(root.localStorage.getItem(key()) || "{}") || {}; } catch (e) { return {}; } }
+  function save(db) { try { root.localStorage.setItem(key(), JSON.stringify(db)); } catch (e) { /* lleno o bloqueado */ } }
   var db = null;
   function store() { return db || (db = load()); }
 
-  // Only plain words: a written accent marks an open/closed vowel or the
-  // stress (pèsca / pésca, àncora / ancóra), which the file name cannot tell.
-  function usable(word) { return /^[a-z]+$/.test(String(word || "")); }
+  // Preferred speakers first (the variety of the course), avoided ones last.
+  function rank(user) {
+    var c = cfg();
+    return c.prefer.indexOf(user) >= 0 ? 0 : c.avoid.indexOf(user) >= 0 ? 2 : 1;
+  }
+  function nfc(s) { s = String(s || "").toLowerCase(); return s.normalize ? s.normalize("NFC") : s; }
+
+  // Una palabra suelta, con las letras del idioma (LINGUA_LIBRE.letters):
+  // nada de frases, guiones ni apóstrofos, y sin tildes donde el nombre del
+  // archivo no las distingue.
+  function usable(word) { return cfg().word.test(nfc(word)); }
 
   // File:LL-Q652 (ita)-Hablante-palabra.wav → { user, word }
   function parseTitle(title) {
-    var m = /^File:LL-Q652 \(ita\)-(.+)-([^-]+)\.(wav|ogg|flac|mp3)$/i.exec(String(title || ""));
-    return m ? { user: m[1], word: m[2].toLowerCase() } : null;
+    var m = cfg().title.exec(String(title || ""));
+    return m ? { user: m[1], word: nfc(m[2]) } : null;
   }
   function searchUrl(word) {
     return API + "?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=20" +
-      "&gsrsearch=" + encodeURIComponent('intitle:"LL-Q652 (ita)" intitle:"' + word + '"') +
+      "&gsrsearch=" + encodeURIComponent('intitle:"' + cfg().prefix + '" intitle:"' + word + '"') +
       "&prop=imageinfo&iiprop=url";
   }
-  // The recordings of exactly this word (not «nonna» for «nonno»), up to four speakers.
+  // Las grabaciones de exactamente esta palabra (no «nonna» por «nonno», ni
+  // «avó» por «avô», que la búsqueda de Commons confunde al ignorar tildes),
+  // hasta cuatro hablantes, los preferidos primero.
   function fromApi(word, json) {
+    word = nfc(word);
     var pages = (json && json.query && json.query.pages) || {}, out = [], users = {};
     Object.keys(pages).forEach(function (k) {
       var p = pages[k], t = parseTitle(p.title), info = p.imageinfo && p.imageinfo[0];
@@ -46,13 +81,14 @@
       users[t.user] = 1;
       out.push({ url: info.url, user: t.user });
     });
+    out.sort(function (a, b) { return rank(a.user) - rank(b.user); });
     return out.slice(0, 4);
   }
 
   var pending = {};
-  // cb(list): [] when there is none (or no network, the first time).
+  // cb(list): [] cuando no hay ninguna (o no hay red, la primera vez).
   function lookup(word, cb) {
-    word = String(word || "").toLowerCase();
+    word = nfc(word);
     if (!usable(word) || typeof fetch !== "function") return cb([]);
     var hit = store()[word];
     if (hit && (hit.list.length || Date.now() - hit.at < MISS_TTL)) return cb(hit.list);
@@ -68,15 +104,15 @@
     fetch(searchUrl(word), { signal: ctl ? ctl.signal : undefined })
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (j) { clearTimeout(timer); done(j ? fromApi(word, j) : [], !!j); })
-      .catch(function () { clearTimeout(timer); done([], false); });     // offline: ask again next time
+      .catch(function () { clearTimeout(timer); done([], false); });     // sin conexión: se vuelve a preguntar la próxima vez
   }
-  // Warm the cache for the words of a session (the first tap then plays at once).
+  // Calienta la caché con las palabras de una sesión (así el primer toque suena enseguida).
   function prefetch(words) { (words || []).forEach(function (w) { lookup(w, function () {}); }); }
 
   var last = 0, current = null;
-  /* Plays a real recording of the word, a different speaker each time.
-     opts.rate: playback speed; opts.onplay(credit): what to credit;
-     fallback(): the phone's voice, when there is nothing to play. */
+  /* Reproduce una grabación real de la palabra, con un hablante distinto
+     cada vez.  opts.rate: velocidad; opts.onplay(crédito): a quién citar;
+     fallback(): la voz del teléfono, cuando no hay nada que reproducir. */
   function play(word, opts, fallback) {
     opts = opts || {};
     lookup(word, function (list) {
@@ -94,7 +130,7 @@
       } catch (e) { if (fallback) fallback(); }
     });
   }
-  // Everyone whose voice the app has used: for the credits in Io.
+  // Todos aquellos cuya voz usó la app: para los créditos en el perfil.
   function credits() {
     var users = {};
     var s = store();
@@ -109,7 +145,8 @@
 
   var api = { lookup: lookup, prefetch: prefetch, play: play, usable: usable, parseTitle: parseTitle,
               fromApi: fromApi, searchUrl: searchUrl, credits: credits, count: count, LICENSE: LICENSE,
-              _reset: function () { db = {}; } };
+              PREFER: cfg().prefer, AVOID: cfg().avoid,
+              _reset: function () { db = {}; CFG = null; } };
   if (typeof module === "object" && module.exports) module.exports = api;
   else root.Voci = api;
 })(typeof window !== "undefined" ? window : globalThis);
