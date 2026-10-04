@@ -25,6 +25,11 @@
 
   var DATA = root.FRASI_DATA || { SCENES: [] };
   var SCENES = DATA.SCENES || [];
+  /* The scenes of the work route (lang/<código>/trabajo_data.js, js/trabajo.js):
+     their phrases are phrases like these (same ids «frase:<escena>:<n>», same
+     exercises, same review), but they live on their own screen: they stay out
+     of SCENES (the lists of Allena, the scenes of the week, the simulation). */
+  var WORK = ((root.TRABAJO_DATA || {}).SCENES || []).filter(function (s) { return s && s.phrases && s.phrases.length; });
   var UI = DATA.ui || {};
   var STOP = DATA.STOP || [];
 
@@ -34,7 +39,7 @@
   // written only); DATA.registro says it in words, at the start of the note.
   var REGISTRO = DATA.registro || {};
   var ALL = [];
-  SCENES.forEach(function (s) {
+  SCENES.concat(WORK).forEach(function (s) {
     s.phrases.forEach(function (p, i) {
       ALL.push({
         id: "frase:" + s.id + ":" + i,
@@ -45,6 +50,7 @@
         pt: p[0],
         es: p[1],
         reg: p[3] || "",
+        work: WORK.indexOf(s) >= 0 ? 1 : 0,
         note: (REGISTRO[p[3]] ? REGISTRO[p[3]] + " " : "") + (p[2] || "")
       });
     });
@@ -65,10 +71,11 @@
 
   // The week each scene opens (none: open from the start).
   var SCENE_WEEK = {};
-  SCENES.forEach(function (s) { SCENE_WEEK[s.id] = s.week; });
+  SCENES.concat(WORK).forEach(function (s) { SCENE_WEEK[s.id] = s.week; });
 
   function scene(id) {
-    for (var i = 0; i < SCENES.length; i++) if (SCENES[i].id === id) return SCENES[i];
+    var all = SCENES.concat(WORK);
+    for (var i = 0; i < all.length; i++) if (all[i].id === id) return all[i];
     return null;
   }
 
@@ -516,14 +523,16 @@
   // phrases of scenes already open (no Camões for a beginner).
   function ofTheDay(d, week) {
     d = d || new Date();
-    var pool = week ? ALL.filter(function (f) { return (f.week || 1) <= week; }) : ALL;
-    if (!pool.length) pool = ALL;
+    var talk = ALL.filter(function (f) { return !f.work; });
+    var pool = week ? talk.filter(function (f) { return (f.week || 1) <= week; }) : talk;
+    if (!pool.length) pool = talk;
     var n = d.getFullYear() * 400 + d.getMonth() * 31 + d.getDate();
     return pool[(n * 7919) % pool.length];
   }
 
   var api = {
     SCENES: SCENES,
+    WORK: WORK,
     SCENE_WEEK: SCENE_WEEK,
     ALL: ALL,
     BY_ID: BY_ID,

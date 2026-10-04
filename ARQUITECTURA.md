@@ -199,6 +199,27 @@ y trae de vuelta los minutos como input.
   Chromium: la misión de la 6, +10 min, la pregunta, el corrector y la ficha
   de la 20 desde Leggi).
 
+**Para el trabajo (desde el A2).** Una ruta paralela al percorso con escenas
+de oficina (presentarse, la charla del café, llamadas, mails, opinar,
+presentar resultados, quejarse, negociar plazos, coordinar), cada una en la
+semana cuya gramática usa.
+- **Datos**: `lang/<código>/trabajo_data.js` (`window.TRABAJO_DATA`), escrito
+  a mano; se carga antes de `frasi.js`, que suma sus frases a las de siempre
+  (ids `frase:<escena>:<n>`, mismos ejercicios y mismo repaso) sin meterlas en
+  `Frasi.SCENES` (quedan en `Frasi.WORK`). El portugués la tiene vacía hasta
+  el paso 1.5 del plan: sin escenas no aparece nada.
+- **Código**: `js/trabajo.js`: la pantalla `trabajo` (el diálogo con una voz
+  por personaje y la traducción a pedido, las frases con su construcción, la
+  ronda de frases y la de producción —`startRound("trabajo", "<escena>:frasi"
+  | "<escena>:prod")`, que al terminar vuelve a la escena— y la tarea con su
+  lista, el corrector de Scrivi y el modelo después de escribir), la misión
+  opcional «💼 …» de la semana (`Trabajo.missions`, hecha con la producción en
+  60 % y la tarea escrita a su largo) y la sección en Allena
+  (`Trabajo.weekButtons`, `Trabajo.allenaFold`). Los ítems vuelven al repaso
+  como `trab:<escena>:<n>` (`Drills.reviewItem`). Guarda en `state.trabajo`.
+- **Tests**: `tools/lib/test_trabajo.js`, `tools/it/check_trabajo.py` (en
+  `npm run test:content`) y `tools/lib/smoke_trabajo.js` (en Chromium).
+
 **Oggi, el primer arranque y el progreso.** Durante el curso, arriba de Oggi / Hoje va la semana
 del percorso con su próxima misión (`weekTopHtml` en `app.js`, «▶︎ Seguir»): el percorso organiza
 el día. El plan por minutos se probó en la 3.0 y desde la 3.2 queda solo para después del curso.

@@ -168,6 +168,14 @@ function modulos(c, code) {
 
   c.add("fuera", byWeek(mod("fuera_data.js").FUERA_DATA.FICHAS));
 
+  // la ruta de trabajo (trabajo_data.js): la escena, sus frases y sus ítems
+  ((mod("trabajo_data.js").TRABAJO_DATA || {}).SCENES || []).forEach(function (s) {
+    c.add("trabajo-escena", [[s.id, { id: s.id, week: s.week, name: s.name, blurb: s.blurb, grammar: s.grammar,
+      situazione: s.situazione, dialogo: s.dialogo, gloss: s.gloss, compito: s.compito }]]);
+    c.add("trabajo-frases", idx(s.phrases, function (p, i) { return s.id + "." + pad(i + 1); }));
+    c.add("trabajo-items", idx(s.items, function (x, i) { return s.id + "." + pad(i + 1); }));
+  });
+
   var l = mod("lab_data.js").LAB_DATA;
   c.add("lab-reglas", byId(l.RULES));
   c.add("lab-falsos", idx(l.FALSI, function (x) { return slug(x[0]); }));

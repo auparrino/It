@@ -35,7 +35,7 @@
   var ORDER = [
     { lang: "lang.js" }, { lang: "rules.js" }, { lang: "conjugator.js" },
     { core: "engine.js" }, { core: "ia.js" }, { core: "errores.js" },
-    { lang: "frasi_data.js" }, { core: "frasi.js" },
+    { lang: "frasi_data.js" }, { lang: "trabajo_data.js" }, { core: "frasi.js" },
     { lang: "formule_data.js" }, { core: "formule.js" },
     { lang: "lab_data.js" }, { core: "lab.js" },
     { lang: "letture_settimana.js" }, { lang: "tramo_data.js" }, { lang: "letture_data.js" }, { core: "letture.js" },
@@ -63,7 +63,7 @@
     { lang: "biblioteca_data.js" }, { core: "biblioteca.js" },
     { shared: "tres_lenguas_data.js" }, { core: "tres_lenguas.js" },
     { lang: "radio_data.js" }, { core: "radio.js" }, { core: "tramo.js" },
-    { lang: "fuera_data.js" }, { core: "fuera.js" },
+    { lang: "fuera_data.js" }, { core: "fuera.js" }, { core: "trabajo.js" },
     { core: "plan.js" }, { core: "progreso.js" }, { core: "inicio.js" },
     { core: "capas.js" }, { core: "nube.js" },
     { core: "app.js" }
