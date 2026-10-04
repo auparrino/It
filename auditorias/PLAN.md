@@ -43,7 +43,7 @@ dos, si son chicos). No hace falta explicar nada más.
 |---|---|---|---|---|
 | 0.1 | Inventario de todo lo revisable + registro con hash | Sonnet | hecho | 2026-10-04 |
 | 0.2 | Tablero de cobertura (cuánto falta, por módulo e idioma) | Sonnet | hecho | 2026-10-04 |
-| 1.1 | Arranque de un toque y día mínimo de 2 minutos | Sonnet | pendiente | |
+| 1.1 | Arranque de un toque y día mínimo de 2 minutos | Sonnet | hecho | 2026-10-04 |
 | 1.2 | Recordatorio diario sin servidor (evento de calendario .ics) | Sonnet | pendiente | |
 | 1.3 | Racha con comodín y «nunca dos días seguidos» | Sonnet | pendiente | |
 | 1.4 | Ruta de trabajo: escenas laborales (italiano) | Opus | pendiente | |
@@ -101,6 +101,12 @@ Las fases 2-5 corrigen; la 6 rediseña sobre contenido ya limpio.
   banco) van por posición o por hash del español, así que insertar a mitad de
   una lista reabre las unidades que se corren. Para los pasos 2-5:
   `inventario.js --marcar <it|pt|comun> lote.json` anota una pasada.
+- 2026-10-04 · 1.1 hecho (v3.5.0). Botón «⚡ 2 minutos» arriba de Oggi
+  (también en mantenimiento): ronda de 6 ítems (repaso vencido y, si falta,
+  práctica de la semana), sin menús; al terminar marca `state.dos[día]` y dice
+  «Día cumplido». La tarjeta muestra los días con estudio de la semana
+  (`Progreso.daysThisWeek`, que es la medida de días activos). Pendiente: probar
+  en el teléfono (aspecto del botón en IT/PT) → paso 7.1.
 
 ---
 

@@ -507,7 +507,7 @@
 
     // Until the first lesson: a single card (and what was left half done).
     if (top.first) return html + pendHtml + top.html + versionLine();
-    html += top.html + pendHtml;
+    html += top.html + pendHtml + (pend ? "" : dosCard());
     // The week of the percorso and its next mission, on top (3.2: the
     // percorso organises the day, not a plan by minutes).
     if (!maint) html += weekTopHtml(w, plan, doneN, nm);
@@ -693,6 +693,25 @@
     return items;
   }
 
+  /* «2 minutos» (plan 1.1): six items, no menus: the cards due first, the
+     week's practice for what is missing.  Two minutes make a day (state.dos):
+     what matters is not breaking the chain. */
+  function dosItems() {
+    var items = Drills.buildReview(course, state, 6, drillOpts());
+    if (items.length < 6) {
+      var w = course.weeks[Math.min(state.unlocked, 52) - 1];
+      items = items.concat(Drills.buildRound(course, w, { map: itemMap, state: state, silent: state.silent, size: 6 - items.length, only: partItems(w) }));
+    }
+    return items.slice(0, 6);
+  }
+  function dosCard() {
+    var n = window.Progreso ? Progreso.daysThisWeek(state) : 0;
+    var done = (state.dos || {})[Engine.dayKey()];
+    return '<div class="card weekcard dos"><button class="bigbtn giorno dos" id="dos"><span class="e">⚡</span><b>2 minutos</b><small>' +
+      (done ? "✓ hoy ya cuenta · otra vez, si querés" : "un toque, sin menús · alcanza para el día") + "</small></button>" +
+      '<span class="muted small">' + (n ? "Esta semana: " + dias(n) + " con estudio." : "Hoy empieza la cuenta de la semana.") + "</span></div>";
+  }
+
   /* The shareable card: a PNG drawn on a canvas (week, xp, streak, words),
      handed to the share sheet (Web Share) or downloaded. */
   function shareCard() {
@@ -727,6 +746,7 @@
   }
 
   function wireHabit() {
+    on("#dos", function () { startRound("dos"); });
     on("#ritorno", function () { state.pauseAsk = Engine.dayKey(); persist(); startRound("ritorno"); });
     on("#hexport", function () { exportSave(); render(); });
     document.querySelectorAll("[data-why]").forEach(function (b) {
@@ -771,7 +791,7 @@
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION = "c1-vN" in sw.js: test_game
      and the CI check it).  One version for the app and both languages. */
-  var APP_VERSION = "v3.4.2";
+  var APP_VERSION = "v3.5.0";
   // Settimana XVII: Roman numerals on the street signs (LANG.ui.romanWeeks).
   function romano(n) {
     var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
@@ -2227,6 +2247,7 @@
     // counts); from Allena / Treino: everything up to where the learner got.
     else if (kind === "suoni") items = Suoni.session(state, arg || Math.min(state.unlocked, 52), { silent: state.silent });
     else if (kind === "ritorno") items = ritornoItems();
+    else if (kind === "dos") items = dosItems();
     else if (kind === "esame") {
       items = esameItems(arg);   // the version's (the exam, below)
     }
@@ -3708,6 +3729,7 @@
     clearPending();
     Engine.touchStreak(state);
     Engine.noteSession(state);
+    if (round.kind === "dos" && total >= 1) { if (!state.dos) state.dos = {}; state.dos[Engine.dayKey()] = true; }
     if (!state.best) state.best = {};
     state.best.combo = Math.max(state.best.combo || 0, round.bestCombo);
     var records = [];
@@ -3911,6 +3933,7 @@
         "<tr><td>Racha</td><td>" + dias(state.streak) + " 🔥</td></tr>" +
       "</table>";
 
+    if (round.kind === "dos") html += '<p class="note">✅ Día cumplido. Dos minutos alcanzan para no cortar la cadena; si te quedan ganas, seguí.</p>';
     html += planMovedHtml(round.plan0);
     (r.extras || []).forEach(function (x) { html += '<p class="note selfrepair">' + esc(x) + "</p>"; });
     if (round.boost) html += '<p class="muted">🎟️ Ronda con doble xp.</p>';
@@ -4927,7 +4950,7 @@
       else if (round.from === "hoy") go("oggi");
       else if (round.kind === "lettura") go("leggi");
       else if (["ponte", "falsi", "capire", "scene", "b-voc", "b-forme", "b-tr", "b-gap", "b-err", "b-freq", "clinica", "suoni", "duello", "variaciones"].indexOf(round.kind) >= 0) go("frasi");
-      else if (round.kind === "pausa" || round.kind === "review" || round.kind === "giorno" || round.kind === "ritorno" || round.kind === "micro") go("oggi");
+      else if (round.kind === "pausa" || round.kind === "review" || round.kind === "giorno" || round.kind === "ritorno" || round.kind === "micro" || round.kind === "dos") go("oggi");
       else if (round.kind === "sfida") { view.screen = "sfide"; render(); }
       else if (round.kind === "esame") { view.screen = "esame"; render(); }
       else { view.screen = "briefing"; render(); }
