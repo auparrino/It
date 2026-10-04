@@ -44,7 +44,7 @@ dos, si son chicos). No hace falta explicar nada más.
 | 0.1 | Inventario de todo lo revisable + registro con hash | Sonnet | hecho | 2026-10-04 |
 | 0.2 | Tablero de cobertura (cuánto falta, por módulo e idioma) | Sonnet | hecho | 2026-10-04 |
 | 1.1 | Arranque de un toque y día mínimo de 2 minutos | Sonnet | hecho | 2026-10-04 |
-| 1.2 | Recordatorio diario sin servidor (evento de calendario .ics) | Sonnet | pendiente | |
+| 1.2 | Recordatorio diario sin servidor (evento de calendario .ics) | Sonnet | hecho | 2026-10-04 |
 | 1.3 | Racha con comodín y «nunca dos días seguidos» | Sonnet | pendiente | |
 | 1.4 | Ruta de trabajo: escenas laborales (italiano) | Opus | pendiente | |
 | 1.5 | Ruta de trabajo: escenas laborales (portugués) | Opus | pendiente | |
@@ -107,6 +107,12 @@ Las fases 2-5 corrigen; la 6 rediseña sobre contenido ya limpio.
   «Día cumplido». La tarjeta muestra los días con estudio de la semana
   (`Progreso.daysThisWeek`, que es la medida de días activos). Pendiente: probar
   en el teléfono (aspecto del botón en IT/PT) → paso 7.1.
+- 2026-10-04 · 1.2 hecho (v3.5.1). El `.ics` recurrente ya existía (perfil y
+  arranque); ahora todo pasa por `scheduleReminder` (guarda hora y `state.icsAt`),
+  el perfil dice «Agendar mi rato diario», y hay una tarjeta «📅 Para no
+  olvidarte» (con hora, pospone 3 días) desde los 10 intentos hasta que se
+  agenda, más un botón en la tarjeta de regreso. Pendiente: abrir el .ics en un
+  iPhone y un Android reales → paso 7.1.
 
 ---
 

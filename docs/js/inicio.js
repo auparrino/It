@@ -337,7 +337,7 @@
 
   /* ------------------------------------------------------ tarjetas de hábito */
 
-  var SNOOZE = { ritorno: 1, reflect: 1, copia: 3, why: 2, semana: 3 };
+  var SNOOZE = { agenda: 3, ritorno: 1, reflect: 1, copia: 3, why: 2, semana: 3 };
   function addDays(n) { var d = new Date(); d.setDate(d.getDate() + n); return dk(d); }
   function before(a, b) {   // day key a earlier than b
     var p = function (k) { var x = String(k).split("-"); return Date.UTC(+x[0], +x[1] - 1, +x[2]); };
