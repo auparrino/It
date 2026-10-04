@@ -747,7 +747,7 @@ _ROWS += [
     (11, "¿Te gustó el Pan de Azúcar?", ["Você gostou do Pão de Açúcar?", "Tu gostaste do Pão de Açúcar?"],
      "perfeito gostar", ("gostou", "gostar"),
      "Gostar de + o = do."),
-    (11, "Empecé a estudar portugués en marzo.", "{Eu |}comecei a estudar português em março.",
+    (11, "Empecé a estudiar portugués en marzo.", "{Eu |}comecei a estudar português em março.",
      "perfeito", ("comecei", "começar"),
      "Começar → comecei (ç → c ante e)."),
     (11, "Ellos vieron el partido en un bar.", "Eles viram o jogo {num|em um} bar.",

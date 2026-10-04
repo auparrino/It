@@ -385,7 +385,7 @@
         "stupiscono": "asombran (stupire = asombrar, no «estupidizar»)"
       } },
 
-    { week: 38, level: "B2", title: "Una telefonata con Paola",
+    { week: 38, level: "B2", title: "Un incontro con Paola",
       es: "Un encuentro casual con Paola contado en estilo indirecto: qué dijo, qué preguntó, qué prometió el narrador y no cumplió.",
       text: "Il mese scorso ho incontrato Paola per caso. Mi ha detto che aveva cambiato lavoro e che era molto contenta. Mi ha chiesto se volessi andare con lei a una festa il sabato dopo. Le ho risposto che mi sarebbe piaciuto, ma che purtroppo dovevo lavorare fino a tardi. Allora mi ha proposto di vederci la settimana successiva e mi ha raccomandato di non dimenticare, come al solito. Le ho promesso che l'avrei chiamata io. Ovviamente me ne sono dimenticato, e lei mi ha scritto per chiedermi se fossi ancora vivo.",
       chunks: ["per caso", "mi ha detto che", "mi ha chiesto se", "mi sarebbe piaciuto", "come al solito", "me ne sono dimenticato"],

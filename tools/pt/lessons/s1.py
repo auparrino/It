@@ -136,11 +136,11 @@ LESSONS = {
            "son correctas."]},
 
  {"h": "ser, estar y ter",
-  "q": [{"prompt": "«Tengo hambre.»", "answer": "Estou com fome.", "options": ["Estou com fome.", "Tenho fome.", "Sou com fome."]},
+  "q": [{"prompt": "«Tengo hambre.»", "answer": "Estou com fome.", "options": ["Estou com fome.", "Sou fome.", "Sou com fome."]},
         {"prompt": "«¿Vos sos de Córdoba?»", "answer": "Você é de Córdoba?", "options": ["Você é de Córdoba?", "Você és de Córdoba?", "Você está de Córdoba?"]}],
   "r": "*ser* y *estar* se reparten casi como en español; *ter* = tener. "
-       "Una diferencia: dónde **queda** algo fijo va con *ser*: *o "
-       "apartamento é em Botafogo*.",
+       "Una diferencia: dónde **queda** algo fijo va con *ficar* (o *estar*): "
+       "*o apartamento fica em Botafogo*; con eventos, *ser*: *a festa é em Botafogo*.",
   "table": {"head": ["Persona", "ser", "estar", "ter"],
             "rows": [["eu (yo)", "sou", "estou", "tenho"],
                      ["tu (vos, tú)", "és", "estás", "tens"],
@@ -150,10 +150,10 @@ LESSONS = {
   "ex": [["*Sou* argentina, de Mendoza.", "Soy argentina, de Mendoza."],
          ["*Tenho* um irmão. Eles *têm* filhos.", "Tengo un hermano. Ellos tienen hijos."],
          ["*Estou com* fome e *com* sede.", "Tengo hambre y sed."],
-         ["O apartamento *é* em Botafogo; eu *estou* em Copacabana.", "El departamento queda en Botafogo; yo estoy en Copacabana."],
+         ["O apartamento *fica* em Botafogo; eu *estou* em Copacabana.", "El departamento queda en Botafogo; yo estoy en Copacabana."],
          ["*Não* sou carioca: sou argentino.", "No soy carioca: soy argentino (la negación, não, va antes del verbo)."]],
-  "warn": "Hambre, sed, frío, sueño y apuro van con *estar com*: *estou com "
-          "frio*, *está com sono*. «Tenho fome» se entiende, pero suena raro.",
+  "warn": "En Brasil es muy común *estar com* + sensación: *estou com "
+          "frio*, *está com sono*. *Tenho fome* también se dice y es correcto.",
   "tip": "*tem* (él tiene) y *têm* (ellos tienen) suenan casi igual: el "
          "circunflejo solo se escribe en el plural.",
   "more": ["La lista de *estar com*: *fome* (hambre), *sede* (sed), *frio* "
@@ -228,7 +228,7 @@ LESSONS = {
  {"h": "Masculino y femenino: lo general",
   "q": [{"prompt": "¿Cuál está bien? «la ciudad»", "answer": "a cidade", "options": ["a cidade", "o cidade", "a cidada"]}, {"prompt": "¿Cuál está bien? «el problema»", "answer": "o problema", "options": ["o problema", "a problema", "o problemo"]}, {"prompt": "¿Cuál está bien? «la foto»", "answer": "a foto", "options": ["a foto", "o foto", "a fota"]}],
   "r": "Como en español: *-o* suele ser masculino y *-a* femenino. *-dade* "
-       "es femenino; *-agem*, también: **siempre**.",
+       "es femenino; *-agem*, casi siempre.",
   "ex": [["*o* amigo / *a* amiga", "el amigo / la amiga"],
          ["*a* cidade, *a* verdade", "la ciudad, la verdad"],
          ["*o* dia, *o* mapa, *o* problema", "masculinos en -a, como en español"],
@@ -255,9 +255,9 @@ LESSONS = {
   "warn": "El adjetivo acompaña al género portugués: *o leite* está "
           "*frio*, *a dor* es *forte*, *a árvore* es *alta*."},
 
- {"h": "-agem: siempre femenino",
-  "r": "Las palabras en *-agem* (español *-aje*) son **femeninas**: *a "
-       "viagem, a mensagem, a garagem, a paisagem*.",
+ {"h": "-agem: casi siempre femenino",
+  "r": "Las palabras en *-agem* (español *-aje*) son casi siempre **femeninas**: *a "
+       "viagem, a mensagem, a garagem, a paisagem* (excepciones: *o personagem, o pajem*).",
   "ex": [["*a* viag*em*", "el viaje"],
          ["*a* mensag*em*", "el mensaje"],
          ["*uma* paisag*em* linda", "un paisaje lindo"],
@@ -375,7 +375,7 @@ LESSONS = {
          ["um passeio *pelo* calçadão", "un paseo por la rambla"],
          ["*pela* manhã", "por la mañana"]],
   "warn": "Nunca «por o» ni «por a»: *pelo, pela*. Y *à* lleva acento "
-          "grave (`), no agudo: «á» no existe.",
+          "grave (`), no agudo: *á* es otra cosa (*já*, *lá*, *está*), no la fusión a + a.",
   "more": ["El acento grave de *à* se llama *crase* y marca la fusión de la "
            "preposición *a* con el artículo *a*. Vas a verla a fondo en la "
            "semana 36; por ahora alcanza con *vou à praia*, *às duas* y "
@@ -794,7 +794,7 @@ LESSONS = {
 "blocks": [
  {"h": "Del 0 al 20",
   "r": "Casi como en español. Las trampas: *dezesseis, dezessete, "
-       "dezoito, dezenove* (con *e*), *catorze* y *quinze*.",
+       "dezenove* (con *e*: dez + e + unidad), *dezoito* (sin *e*), *catorze* y *quinze*.",
   "table": {"head": ["", "", "", ""],
             "rows": [["0 zero", "6 seis", "11 onze", "16 dezesseis"],
                      ["1 um / uma", "7 sete", "12 doze", "17 dezessete"],
@@ -829,7 +829,7 @@ LESSONS = {
        "concuerdan con el sustantivo, también dentro de números grandes.",
   "ex": [["*uma* cerveja, *duas* cervejas", "una cerveza, dos cervezas"],
          ["*dois* chopes", "dos chopps"],
-         ["vinte e *uma* pessoas", "veintiún personas"],
+         ["vinte e *uma* pessoas", "veintiuna personas"],
          ["*duzentas* pessoas", "doscientas personas"],
          ["*trezentos* reais", "trescientos reales"]],
   "warn": "«Dois cervejas» y «vinte e um pessoas» son errores muy "
@@ -1548,7 +1548,7 @@ LESSONS = {
  {"h": "Plurales y géneros",
   "q": [{"prompt": "Plural de «a estação»:", "answer": "as estações", "options": ["as estações", "as estaçãos", "as estaciones"]}],
   "r": "*-ão → -ões* (casi siempre), *-l → -is*, *-m → -ns*. Géneros al "
-       "revés: *o leite, a árvore*, y todo *-agem* femenino.",
+       "revés: *o leite, a árvore*, y casi todo *-agem* femenino (excepciones: *o personagem, o pajem*).",
   "ex": [["limão → *limões*, pão → *pães*, mão → *mãos*", "los tres plurales de -ão"],
          ["animal → *animais*, papel → *papéis*", "-l → -is"],
          ["homem → *homens*", "-m → -ns"],
@@ -1605,7 +1605,7 @@ LESSONS = {
   "warn": "*foi* ≠ *fui*; *vi* ≠ *vim*; *viu* ≠ *veio*. Y «he comido» es "
           "*comi*, nunca «tenho comido»."},
 
- {"h": "Posesivos, lugares e imperativo",
+ {"h": "Posesivos, lugares y imperativo",
   "r": "*seu* = de *você*; *dele / dela* para terceros. *em* para estar, "
        "*a / para* para ir, *de* + transporte. Imperativo: *fale / fala*.",
   "ex": [["O carro *dele* é vermelho.", "El auto de él es rojo."],

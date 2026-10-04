@@ -11,7 +11,7 @@ Portugal, y usan solo gramática vista hasta esa semana.
 VOCAB = {
 
 40: [  # Informes, textos académicos
-    ["o relatório", "el informe", "O relatório do IBGE mostra que a população do Rio envelheceu.", "De *relatar* = informar, relatar. *Fazer* o *apresentar um relatório*. Masculino."],
+    ["o relatório", "el informe", "O relatório do IBGE mostra que a população do Rio envelheceu.", "De *relatar* = informar, relatar. *Apresentar um relatório* / *fazer um relatório*. Masculino."],
     ["o levantamento", "el relevamiento, el estudio de datos", "Um levantamento recente analisou os quilombos reconhecidos no estado do Rio.", "De *levantar* (datos): *fazer um levantamento* = hacer un relevamiento. También levantamiento de pesas."],
     ["a queda", "la caída, la baja", "Houve uma queda no número de turistas no inverno.", "De *cair*: *queda de preços* = baja de precios. *Ter uma queda por alguém* = tener debilidad por alguien."],
     ["a alta", "la suba (de precios, de casos)", "A alta do aluguel em Botafogo preocupa os moradores.", "*Em alta* = en suba, de moda: *a alta do dólar*. En el hospital, *receber alta* = recibir el alta."],

@@ -521,7 +521,7 @@ ES_IT.update({
     "fue": ("è stato / è andato", "Fue = è stato / è andato (literario: fu)."),
     "fuimos": ("siamo stati / siamo andati", ""),
     "fueron": ("sono stati / sono andati", ""),
-    "estuve": ("sono stato", "Estar y ser comparten pasado: sono stato."),
+    "estuve": ("sono stato", "Estuve = sono stato. En italiano essere y stare comparten el participio (stato)."),
     "estuvo": ("è stato", ""),
     "tuve": ("ho avuto", ""),
     "tuvo": ("ha avuto", ""),

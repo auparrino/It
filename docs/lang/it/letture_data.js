@@ -58,7 +58,7 @@
         "Giulia ride: «Benvenuto in Emilia-Romagna. Qui si mangia bene, ma si spende " +
         "anche tanto.»",
       gloss: { banco: "puesto (del mercado)", taglia: "corta", pezzo: "pedazo",
-               stagionato: "estacionado, curado", provare: "probar",
+               stagionato: "curado, añejado", provare: "probar",
                occhi: "ojos", ride: "se ríe", spende: "gasta", sembra: "parece" },
       questions: [
         ["¿Qué compra siempre Giulia?", ["pan fresco y fruta", "queso, mortadela y vino", "tortellini", "vino"], "pan fresco y fruta"],
@@ -645,7 +645,7 @@
                piatti: "platos", lascia: "deja", ride: "se ríe" },
       questions: [
         ["¿Por qué no hay nada en la heladera?", ["ninguno de los dos hizo las compras", "Giulia se comió todo", "se rompió la heladera el fin de semana", "Martín está de viaje"], "ninguno de los dos hizo las compras"],
-        ["¿Por qué Martín no quiere pagar?", ["el sueldo le llega mañana", "es tacaño", "Giulia se lo prohibió", "el restaurante es gratis"], "el sueldo le llega mañana"],
+        ["¿Por qué Martín no puede pagar hoy?", ["el sueldo le llega mañana", "es tacaño", "Giulia se lo prohibió", "el restaurante es gratis"], "el sueldo le llega mañana"],
         ["¿Qué hace Martín con las tagliatelle?", ["se come todo", "deja la mitad", "no las prueba", "las comparte con Marco"], "se come todo"]
       ],
       hunt: { label: "Tocá todas las palabras negativas (mica, niente, mai, nessuno…)", targets:
@@ -724,7 +724,7 @@
         "«Per posta? È pesante, e poi vorrei anche ringraziarla. Vorrei dirglielo di persona.»\n" +
         "«Allora scrivile. Chiedile un appuntamento e portaglielo tu.»\n\n" +
         "Martín scrive. La professoressa risponde in cinque minuti: «Il dizionario? Glielo " +
-        "regalo: a lei serve più che a me. E gli appunti del corso, se li ha ancora, glieli lascio " +
+        "regalo: a lei serve più che a me. E gli appunti del corso, se li ho ancora, glieli lascio " +
         "volentieri.»\n" +
         "Martín legge il messaggio a Giulia due volte. «Gliene devo almeno uno, di caffè.»\n" +
         "«Gliene devi una decina, direi. E anche una torta.»\n" +
@@ -954,7 +954,7 @@
         "fiato. Paola torna indietro e lo aspetta camminando al suo fianco. Salgono l'ultimo tratto " +
         "parlando di tutto, tranne che della salita.\n\n" +
         "In cima, sedendosi sui gradini della basilica, Martín tira fuori il telefono e manda una " +
-        "foto a sua madre: «Ce l'ho fatta». Lei risponde subito, essendo le tre di notte a Buenos " +
+        "foto a sua madre: «Ce l'ho fatta». Lei risponde subito, pur essendo le tre di notte a Buenos " +
         "Aires: «Sapevo che ce la facevi. Ora scendi con calma.»\n\n" +
         "Scendendo, Martín capisce che Paola l'ha ingannato: la corsa era la scusa. Vedendolo " +
         "felice, lei sorride e non dice niente.",

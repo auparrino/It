@@ -2815,7 +2815,7 @@
   "d22-020": {
    "consigna": "Completá con el congiuntivo trapassato. El auxiliar está indicado (auxiliar/verbo).",
    "type": "cloze",
-   "stem": "Lui insisteva che io gli ___ (avere/scrivere).",
+   "stem": "Lui sosteneva che io gli ___ (avere/scrivere).",
    "answer": "avessi scritto",
    "alt": [],
    "drop": false,

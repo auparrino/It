@@ -153,13 +153,13 @@ tr(W, 2, "Soy de Buenos Aires.", "Sou de Buenos Aires.", ["Eu sou de Buenos Aire
    "El origen va con ser + de. Las ciudades sin artículo llevan de a secas.")
 tr(W, 2, "Tengo treinta años.", "Tenho trinta anos.", ["Eu tenho trinta anos."],
    "La edad va con ter. Anos: la ñ de «años» se pierde (ano).")
-tr(W, 2, "Tengo hambre.", "Estou com fome.", ["Eu estou com fome.", "Tô com fome.", "Eu tô com fome."],
-   "Hambre, sed, frío y sueño: estar com. Fome = hambre.")
+tr(W, 2, "Tengo hambre.", "Estou com fome.", ["Eu estou com fome.", "Tô com fome.", "Eu tô com fome.", "Tenho fome.", "Eu tenho fome."],
+   "Hambre, sed, frío y sueño: lo más común es estar com. Fome = hambre.")
 tr(W, 2, "Estamos en Copacabana.", "Estamos em Copacabana.",
    ["Nós estamos em Copacabana.", "A gente está em Copacabana.", "A gente tá em Copacabana."],
    "estar + em. Copacabana se usa sin artículo: em Copacabana.")
-tr(W, 2, "Ellos tienen sed.", "Eles estão com sede.", ["Elas estão com sede.", "Eles tão com sede."],
-   "Las sensaciones van con *estar com* + sustantivo, no con «tener»: *estar com sede* «tener sed», *estar com fome* «tener hambre». *Sede* también es «sede».")
+tr(W, 2, "Ellos tienen sed.", "Eles estão com sede.", ["Elas estão com sede.", "Eles tão com sede.", "Elas têm sede.", "Eles têm sede.", "Eles tem sede."],
+   "Lo más común es *estar com* + sustantivo; *ter sede* también se oye: *estar com sede* «tener sed», *estar com fome* «tener hambre». *Sede* también es «sede».")
 
 fx(W, 0, "persona", "Você és brasileiro?", "és", "é",
    "Con você, siempre tercera persona: você é. «És» es la forma de tu.")
@@ -181,7 +181,7 @@ gd(W, 1, [["ciudad", "cidade"], ["verdad", "verdade"], ["universidad", "universi
 # ahí (conserva su id, s1-01-42, para no mover el repaso de nadie).
 ITEMS[-1].update(w=3, part=2)
 gd(W, 1, [["nación", "nação"], ["canción", "canção"], ["estación", "estação"]], "corazón → ___", "coração", "corazão",
-   "-ción → -ção, y también -zón → -ção: coração, razão. La z del español no se conserva: se escribe ç.")
+   "-ción → -ção (nação, canção); -zón → -ção o -zão: corazón → coração, pero razón → razão (la z se conserva). Mirá la palabra entera.")
 
 sc(W, 0, ["Você é argentino?", "Você está cansada?", "Você tem irmãos?", "Ele é argentino.", "Ela está cansada.", "Ele tem irmãos."],
    "¿Con qué forma del verbo va «você»?",
@@ -190,11 +190,11 @@ sc(W, 0, ["Você é argentino?", "Você está cansada?", "Você tem irmãos?", "
    "Você nació de una fórmula de respeto (vossa mercê) y por eso conjuga en tercera persona: você é, você está, você tem.")
 sc(W, 2, ["Estou com fome.", "Ela está com sede.", "Estamos com frio.", "Eles estão com sono.", "Tenho trinta anos.", "Ela tem vinte anos."],
    "¿Cuándo va «estar com» y cuándo «ter»?",
-   ["Sensaciones (hambre, sed, frío, sueño) con «estar com»; la edad con «ter».",
-    "Todo lo físico va con «ter» (tenho fome, tenho sede, tenho frio), como en español.",
+   ["Con hambre, sed, frío y sueño se usa sobre todo «estar com» («ter» también se oye); la edad va siempre con «ter».",
+    "La edad va con «estar com» (estou com trinta anos).",
     "«estar com» en plural y «ter» en singular."],
-   "Sensaciones (hambre, sed, frío, sueño) con «estar com»; la edad con «ter».",
-   "Lo que en español «tenés» por un rato (hambre, frío) en Brasil se «está con»: estou com fome. La edad, como en español, con ter.")
+   "Con hambre, sed, frío y sueño se usa sobre todo «estar com» («ter» también se oye); la edad va siempre con «ter».",
+   "En Brasil lo normal es estou com fome / com frio; tenho fome también existe. La edad, como en español, con ter.")
 
 ty(W, 1, "Escribí «no» en portugués.", "«no» → ___", "não",
    "Não: ã nasal, como en mão y pão. La negación va antes del verbo: não sou.")
@@ -340,7 +340,7 @@ ch(W, 1, "O hotel é perto ___ metrô.", ["do", "de o", "da"], "do",
 ch(W, 1, "Vou ___ Maracanã.", ["ao", "a o", "à"], "ao",
    "a + o = ao. El Maracanã es masculino (o estádio): ao Maracanã.")
 ch(W, 1, "Vou ___ praia.", ["à", "a", "á"], "à",
-   "La preposición *a* + el artículo *a* se funden en *à*, con acento grave (la *crase*): *vou à praia*. *Á* con acento agudo no existe en portugués.")
+   "La preposición *a* + el artículo *a* se funden en *à*, con acento grave (la *crase*): *vou à praia*. Con acento agudo (*á*) no marca esta fusión: la crase siempre es grave (*à*).")
 ch(W, 1, "Um passeio ___ calçadão.", ["pelo", "por o", "polo"], "pelo",
    "*Por* + artículo se contrae siempre: *pelo, pela, pelos, pelas*. ✗*por o* no existe, a diferencia del español «por el».")
 ch(W, 1, "A casa ___ Bia é em Santa Teresa.", ["da", "de a", "do"], "da",
@@ -471,8 +471,8 @@ ch(W, 2, "Tem ___ gente na praia.", ["muita", "muito", "muy"], "muita",
 ch(W, 2, "Ele é ___.", ["chato", "pesado", "esquisito"], "chato",
    "*Chato* es «pesado, aburrido» (una persona que cansa), no «de nariz chata». *Esquisito* sería «raro».",
    prompt="«Él es un pesado.»")
-ch(W, 2, "Ela é ___.", ["esquisita", "rara", "exquisita"], "esquisita",
-   "*Esquisito/a* es «raro, extraño». Y ojo: *raro* en portugués significa «poco frecuente», no «extraño».",
+ch(W, 2, "Ela é ___.", ["esquisita", "estrangeira", "exquisita"], "esquisita",
+   "*Esquisito/a* es «raro, extraño». *Raro* se usa más para «poco frecuente»; para decir que alguien es extraño, *esquisito*.",
    prompt="«Ella es rara (extraña).»")
 
 cz(W, 0, "As casas são ___. (branco)", "brancas", "Adjetivo en -o: cuatro formas. Casas (fem. pl.) → brancas.",
@@ -636,7 +636,7 @@ fx(W, 0, "persona", "A gente moramos em Niterói.", "moramos", "mora",
    "A gente lleva el verbo en tercera del singular: a gente mora.")
 fx(W, 1, "ortografia", "Eu conhezco a Lapa.", "conhezco", "conheço",
    "conhecer → conheço: solo c → ç, sin la z del español.")
-fx(W, 2, "falso_amigo", "Ela trabalha numa oficina de advogados.", "oficina", "escritório",
+fx(W, 2, "falso_amigo", "Ela trabalha numa oficina de advogados.", "numa oficina", "num escritório",
    "La oficina de trabajo es escritório; oficina es un taller mecánico.")
 
 gd(W, 1, [["comer", "eu como"], ["beber", "eu bebo"], ["vender", "eu vendo"]], "conhecer → eu ___", "conheço", "conheco",
@@ -774,7 +774,7 @@ ty(W, 1, "Escribí la forma de «pôr» para «eu».", "eu ___", "ponho", "pôr 
 # ============================================================================
 W = 7
 ch(W, 0, "16 → ___", ["dezesseis", "dezeseis", "dieciseis"], "dezesseis",
-   "Los números del 16 al 19 se escriben con *dez-* y *e*: *dezesseis* lleva doble *s* para que suene [s] entre vocales. Nada de *dieci-* como en español.", prompt="¿Cómo se escribe el número?")
+   "Los números 16, 17 y 19 se escriben con *dez-* + *e* + unidad (*dezesseis*, *dezessete*, *dezenove*): *dezesseis* lleva doble *s* para que suene [s] entre vocales. El 18 es *dezoito*, sin *e*. Nada de *dieci-* como en español.", prompt="¿Cómo se escribe el número?")
 ch(W, 0, "19 → ___", ["dezenove", "dezenueve", "diecinove"], "dezenove",
    "19 = dezenove: dez + e + nove.", prompt="¿Cómo se escribe el número?")
 ch(W, 0, "500 → ___", ["quinhentos", "cincocentos", "quinientos"], "quinhentos",
@@ -1090,8 +1090,8 @@ ch(W, 0, "___ pais moram em Rosario.", ["Meus", "Mis", "Minhas"], "Meus",
    "Pais es masculino plural: meus pais.", prompt="«Mis padres viven en Rosario.»")
 ch(W, 0, "Essa mala é ___.", ["minha", "mia", "meu"], "minha",
    "El posesivo concuerda con lo poseído (a mala): minha.", prompt="«Esa valija es mía.»")
-ch(W, 0, "Estou ___ minha casa.", ["na", "em a", "em"], "na",
-   "Con posesivo, *em* + *a minha casa* se contrae: *na minha casa*. ✗*em a* no existe.")
+ch(W, 0, "Estou ___ casa da minha avó.", ["na", "em a", "no"], "na",
+   "*Em* + *a casa* se contrae: *na casa da minha avó*. ✗*em a* no existe.")
 ch(W, 0, "o carro ___", ["dele", "de ele", "seu"], "dele",
    "«De él» sin ambigüedad: dele, siempre contraído y después del sustantivo. Seu se entiende «de você».",
    prompt="«el auto de él»")
@@ -1356,7 +1356,7 @@ cz(W, 1, "Nós ___ cedo. (deitar-se)", "nos deitamos", "nós nos deitamos (acost
    prompt="Completá con el presente.")
 cz(W, 1, "Você ___ do nome dela? (lembrar)", "lembra", "lembrar de = acordarse de; también se lembra.",
    alt=["se lembra"], prompt="Completá con el presente.")
-cz(W, 1, "Ela ___ os dentes. (escovar)", "escova", "«Cepillarse los dientes» es *escovar os dentes*, sin reflexivo: el portugués no repite el *se* cuando la parte del cuerpo ya lleva artículo.",
+cz(W, 1, "Ela ___ os dentes. (escovar)", "escova", "«Cepillarse los dientes» es *escovar os dentes*, sin reflexivo: *escovar* se usa sin *se* (*Ela escova os dentes*). Es particularidad del verbo; *se vestir* y *se levantar* sí llevan *se*.",
    prompt="Completá con el presente.")
 cz(W, 2, "___ o joelho. (doer)", "Dói", "doer: dói (con tilde) cuando duele una parte: dói o joelho.",
    prompt="Completá con el presente.")

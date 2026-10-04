@@ -2281,7 +2281,6 @@
     "alt": [
      "Dio me ne scampi",
      "Neanche per sogno",
-     "Ci mancherebbe",
      "Per l'amor di Dio",
      "Ma figurati",
      "Macché",
@@ -2407,8 +2406,7 @@
     "stem": "¿Alguien vio mis anteojos?",
     "answer": "Qualcuno ha visto i miei occhiali?",
     "alt": [
-     "Ha visto qualcuno i miei occhiali?",
-     "Nessuno ha visto i miei occhiali?"
+     "Ha visto qualcuno i miei occhiali?"
     ],
     "note": "Qualcuno como sujeto va con verbo en singular."
    }

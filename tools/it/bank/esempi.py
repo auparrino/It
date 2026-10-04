@@ -82,6 +82,7 @@ ESEMPI = {
     "squadra": "Pensavo che la squadra avesse già giocato.",
     "litigare": "Se non avessero litigato, sarebbero ancora insieme.",
     "debito": "Ha pagato tutti i debiti.",
+    "ragazzo": "Il ragazzo è simpatico.",
     "pigro": "Il ragazzo che conosci è pigro.",
     "magazzino": "La merce che hai ordinato è nel magazzino.",
     "affittare": "La casa che affittiamo è in centro.",

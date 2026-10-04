@@ -19,7 +19,7 @@ PAIRS = [
     ("caro", ["carro"], "La r simple suena como la de «caro» y la doble *rr* vibra como la de «carro»: acá el contraste es el mismo que en castellano."),
     ("sono", ["sonno"], "*sono* (soy/son) con n simple; *sonno* (sueño) la sostiene. La doble consonante es la única diferencia entre las dos palabras."),
     ("cappello", ["capello"], "*cappello* (sombrero) con p doble, *capello* (un pelo) con una sola: en italiano duplicar la consonante cambia el significado."),
-    ("anno", ["ano"], "anno = año: la doble n es la que en español es ñ."),
+    ("anno", ["ano"], "anno = año (con doble n; sin la doble, «ano» es otra palabra). Ojo: la ñ del español se escribe gn en italiano (bagno)."),
     ("chiesa", ["ciesa", "cesa"], "ch + i suena como k (como «quie» en español): chiesa = iglesia."),
     ("cena", ["chena", "scena"], "c + e suena como la ch española: cena = cena. Para el sonido k se escribe ch."),
     ("figlio", ["filio", "fillo"], "gl + i: un sonido como la ll bien pronunciada; figlio = hijo."),

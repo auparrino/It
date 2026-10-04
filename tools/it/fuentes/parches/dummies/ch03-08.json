@@ -575,7 +575,7 @@
   "d03-056": {
    "consigna": "Escribí en italiano la palabra formada con el sufijo o prefijo indicado.",
    "type": "cloze",
-   "stem": "Mariíta, con cariño (Maria + -uccia) → ___",
+   "stem": "María, en diminutivo cariñoso (Maria + -uccia) → ___",
    "answer": "Mariuccia",
    "alt": [],
    "drop": false,
@@ -613,7 +613,7 @@
   "d03-060": {
    "consigna": "Escribí en italiano la palabra formada con el sufijo o prefijo indicado.",
    "type": "cloze",
-   "stem": "reserva (notazione + prefijo pre-) → ___",
+   "stem": "reserva (notare + prefijo pre- + sufijo -zione) → ___",
    "answer": "prenotazione",
    "alt": [],
    "drop": false,
@@ -1856,7 +1856,9 @@
    "stem": "Termino.",
    "answer": "Finisco.",
    "alt": [
-    "Io finisco."
+    "Io finisco.",
+    "Termino.",
+    "Io termino."
    ],
    "drop": false,
    "note": "*finire* («terminar») lleva -isc- en *io*: *finisco*; el sujeto se omite, como en castellano."
@@ -1960,7 +1962,11 @@
    "alt": [
     "Loro cominciano ma non finiscono.",
     "Iniziano ma non finiscono.",
-    "Loro iniziano ma non finiscono."
+    "Loro iniziano ma non finiscono.",
+    "Cominciano ma non terminano.",
+    "Loro cominciano ma non terminano.",
+    "Iniziano ma non terminano.",
+    "Loro iniziano ma non terminano."
    ],
    "drop": false,
    "note": "«Pero» es *ma*; *cominciare* no cambia la c: *cominciano*."
@@ -2646,10 +2652,10 @@
   "d07-066": {
    "consigna": "Traducí al italiano usando la expresión con essere que se indica.",
    "type": "translate",
-   "stem": "Ella es una persona honestísima. (essere un Cincinnato)",
-   "answer": "Lei è un Cincinnato.",
+   "stem": "Ella está sin un peso. (essere al verde)",
+   "answer": "Lei è al verde.",
    "alt": [
-    "È un Cincinnato."
+    "È al verde."
    ],
    "drop": false,
    "note": "*essere un Cincinnato* = «ser una persona íntegra»: *essere* + nombre de un personaje, como nuestro «ser un Quijote»."

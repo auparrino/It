@@ -96,7 +96,7 @@ _C = [
   "Meter la pata → pisar na bola (en el habla). Más formal: cometer uma gafe.", "pisar na bola", "meter la pata", "cotidiano"),
  (30, "Se a gente tivesse dado ___ do recado, o chefe não teria reclamado.", "conta", ["conta", "cabo", "fim"],
   "Poder con algo, cumplir → dar conta (de algo, do recado). Não dou conta = no llego, no puedo con todo.", "dar conta de", "poder con, cumplir", "trabalho"),
- (31, "O jornalista disse que ia ___ contato com o ministério.", "entrar em", ["entrar em", "meter-se em", "ficar em"],
+ (31, "O jornalista disse que ia ___ contato com o ministério.", "entrar em", ["entrar em", "meter-se em", "cair em"],
   "Ponerse en contacto → entrar em contato (com alguém).", "entrar em contato", "ponerse en contacto", "trabalho"),
  (31, "A ministra afirmou que a lei ___ em vigor em janeiro.", "entraria", ["entraria", "ficaria", "daria"],
   "Entrar en vigencia → entrar em vigor.", "entrar em vigor", "entrar en vigencia", "política"),

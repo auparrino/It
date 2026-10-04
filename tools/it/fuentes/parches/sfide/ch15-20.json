@@ -3523,8 +3523,7 @@
      "Vado a trovarla, allora.",
      "Vado a trovarla allora.",
      "La vado a trovare, allora.",
-     "La vado a trovare allora.",
-     "Allora andrò a trovarla."
+     "La vado a trovare allora."
     ],
     "note": "Para una decisión tomada en el momento se usa el presente."
    },
@@ -3733,7 +3732,7 @@
      "il clima terrestre cambierà",
      "cambierà il clima della Terra"
     ],
-    "note": "Cambiare → cambierà (pierde la i)."
+    "note": "Cambiare → cambierà (a → e; la i se conserva: cambi-erà; solo -ciare/-giare/-sciare pierden la i)."
    }
   ]
  },
@@ -4217,10 +4216,8 @@
     "type": "cloze",
     "stem": "Angelo, ti sei mess___ la giacca? – No, non me la sono mess___, fa troppo caldo.",
     "answer": "o | a",
-    "alt": [
-     "a | a"
-    ],
-    "note": "Con reflexivo concuerda con el sujeto (messo; también se admite messa, con el objeto); con la delante, con el objeto (messa)."
+    "alt": [],
+    "note": "Con reflexivo el participio concuerda con el sujeto (messo); con la delante, con el objeto (me la sono messa)."
    }
   ]
  },
@@ -4777,7 +4774,15 @@
      "L'anno scorso sono andato in Corsica, mi è piaciuta molto.",
      "L'anno scorso sono andato in Corsica mi è piaciuta molto.",
      "L'anno scorso sono andata in Corsica, mi è piaciuta molto.",
-     "L'anno scorso sono andata in Corsica mi è piaciuta molto."
+     "L'anno scorso sono andata in Corsica mi è piaciuta molto.",
+     "L'anno scorso sono andato in Corsica. Mi è piaciuto molto.",
+     "L'anno scorso sono andata in Corsica. Mi è piaciuto molto.",
+     "L'anno scorso sono andato in Corsica. Mi è piaciuto moltissimo.",
+     "L'anno scorso sono andata in Corsica. Mi è piaciuto moltissimo.",
+     "L'anno scorso sono andato in Corsica, mi è piaciuto molto.",
+     "L'anno scorso sono andato in Corsica mi è piaciuto molto.",
+     "L'anno scorso sono andata in Corsica, mi è piaciuto molto.",
+     "L'anno scorso sono andata in Corsica mi è piaciuto molto."
     ],
     "note": "Juicio sobre una experiencia terminada: passato prossimo."
    },

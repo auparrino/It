@@ -8,9 +8,11 @@ LESSONS = {
          "alguien haga» o «mandar a hacer», donde el castellano arma una "
          "subordinada entera.",
 "parts": [
- {"h": "fare + infinito: quién hace qué", "blocks": [0, 1, 2, 3],
+ {"h": "fare + infinito: quién hace qué", "blocks": [0, 1, 2, 3, 6],
+  "ids": ["mj-40-%02d" % n for n in (1, 2, 3, 4, 5, 6)],
   "match": r"^(?!.*(lasciare|Lascia|Consejos|Problemas de viaje|Dejo que)).*\S"},
- {"h": "lasciare y expresiones con fare", "blocks": [4, 5],
+ {"h": "lasciare y expresiones con fare", "blocks": [4, 5, 7],
+  "ids": ["mj-40-%02d" % n for n in (7, 8, 9, 10, 11, 12, 13)],
   "match": r"lasciare|Lascia|Consejos|Problemas de viaje|Dejo que"},
 ],
 "blocks": [
@@ -90,8 +92,30 @@ LESSONS = {
                      ["far conoscere", "presentar a alguien", "Te lo faccio conoscere."],
                      ["dare da fare", "dar trabajo", "Questo lavoro mi dà da fare."],
                      ["farcela", "lograrlo", "Ce l'ho fatta!"]]},
-  "tip": "Para «mostrar» un italiano dice *far vedere*: *fammi vedere*. "
-         "*Mostrami* existe, pero suena raro en el habla cotidiana."},
+  "tip": "Para cosas concretas se dice *far vedere*: *fammi vedere*. "
+         "*Mostrare* es normal, pero más formal o abstracto: *mostrare interesse*."},
+
+ {"h": "El agente con da: mandar a alguien",
+  "r": "Con *fare* y *farsi*, quien ejecuta puede ir con *da*: sobre todo un oficio, un profesional o una empresa.",
+  "ex": [["Ho fatto riparare la macchina *dal meccanico*.", "Mandé a arreglar el auto al mecánico."],
+         ["Si è fatto tagliare i capelli *da Gino*.", "Se cortó el pelo con Gino."],
+         ["Mi sono fatta operare *dal dottor Rossi*.", "Me operó el doctor Rossi."],
+         ["Faccio pulire l'ufficio *da una ditta* esterna.", "Hago limpiar la oficina a una empresa externa."]],
+  "table": {"head": ["Construcción", "Quién ejecuta", "Ejemplo"],
+            "rows": [["fare + inf. + a", "alguien cercano, un dato más", "Faccio leggere il libro a Marco."],
+                     ["fare + inf. + da", "un servicio o un oficio", "Faccio riparare l'auto dal meccanico."],
+                     ["farsi + inf. + da", "siempre con da", "Mi sono fatto visitare da un medico."]]},
+  "warn": "Con *farsi* el agente va siempre con *da*, nunca con *a*: *mi sono fatto fare un vestito da una sarta*."},
+
+ {"h": "Pronombres, participio y modales",
+  "r": "El participio concuerda con el pronombre directo que va delante: *l'ho fatta riparare*, *li ho lasciati uscire*.",
+  "ex": [["*L'ho fatta* riparare ieri.", "La mandé a arreglar ayer."],
+         ["*Li ho lasciati* uscire.", "Los dejé salir."],
+         ["*Gliel'ho fatta* leggere.", "Se la hice leer."],
+         ["*Fammelo* sapere presto.", "Avisame pronto."],
+         ["Non *lo posso far* entrare.", "No puedo hacerlo entrar."]],
+  "warn": "Concuerda con el pronombre, no con el infinitivo: *l'ho fatta riparare* (la macchina), *l'ho fatto riparare* (il computer).",
+  "tip": "Con un modal, el pronombre elige lugar: *lo devo far venire* o *devo farlo venire*, pero nunca «devo far venirlo»."},
 ]},
 
 41: {
@@ -173,14 +197,19 @@ LESSONS = {
          "hay regla: se memoriza, pero por grupos bastante estables.",
 "parts": [
  {"h": "Verbos con a y con di + infinitivo", "blocks": [0, 1],
+  "ids": ["mj-42-%02d" % n for n in range(1, 6)],
   "match": r"di o a|a \+ infinitivo|pensare|di \+|con di|con a\b|credere y parlare"},
  {"h": "Sin preposición, los que cambian y cómo estudiarlos", "blocks": [2, 3, 4],
-  "match": r"sin preposición|verbo indicado|preposición de cada verbo|distinto|Elegí"},
+  "ids": ["mj-42-06"],
+  "match": r"\S"},
+ {"h": "El mail formal: régimen y fórmulas", "blocks": [5, 6],
+  "ids": ["mj-42-%02d" % n for n in range(7, 15)],
+  "match": r"Con la presente|La prego|allegato|Le chiedo|riscontro"},
 ],
 "blocks": [
  {"h": "Verbos con a + infinitivo",
   "r": "Empezar, seguir, lograr, aprender, ayudar y empujar a otro llevan "
-       "**a** (*ad* ante vocal).",
+       "**a** (*ad* ante vocal, sobre todo ante otra *a*).",
   "ex": [["Ho *cominciato a* studiare italiano.", "Empecé a estudiar italiano."],
          ["Non *riesco a* capire.", "No logro entender."],
          ["Mi sono *messo a* ridere.", "Me puse a reír."],
@@ -202,9 +231,10 @@ LESSONS = {
   "ex": [["Ho *smesso di* fumare.", "Dejé de fumar."],
          ["*Cerca di* capire.", "Tratá de entender."],
          ["Ho *deciso di* partire.", "Decidí irme."],
-         ["Ho *voglia di* uscire.", "Tengo ganas de salir."]],
+         ["Ho *voglia di* uscire.", "Tengo ganas de salir."],
+         ["Alla fine *ha finito per* accettare.", "Al final terminó aceptando."]],
   "table": {"head": ["Idea", "Verbos", "Ejemplo"],
-            "rows": [["terminar / dejar", "finire di (terminar de), smettere di (dejar de)", "Ho smesso di fumare."],
+            "rows": [["terminar / dejar", "finire di (terminar de), smettere di (dejar de); finire per = acabar haciendo", "Ho smesso di fumare."],
                      ["intentar / decidir", "cercare di (tratar de), tentare di (intentar), decidere di (decidir)", "Cerca di dormire."],
                      ["pensar / creer / esperar", "pensare di (pensar + verbo), credere di, sperare di", "Spero di vederti."],
                      ["memoria", "dimenticare di (olvidarse de), ricordarsi di (acordarse de)", "Ricordati di chiamare."],
@@ -214,7 +244,7 @@ LESSONS = {
                      ["expresiones", "avere bisogno di, avere voglia di, avere paura di, essere contento di", "Ho paura di sbagliare."]]},
   "warn": "Donde el castellano no pone nada, el italiano pone *di*: «decidí "
           "irme» → *ho deciso di partire*; «espero verte» → *spero di "
-          "vederti*.",
+          "vederti*. Pero no con los modales: *voglio partire*.",
   "more": ["«Pedirle a alguien que haga» no lleva *che*: persona con *a* "
            "(indirecto) + *di* + infinitivo: *le ho chiesto di rimanere*, "
            "*gli ho detto di venire*. Con *convincere*, *costringere*, "
@@ -271,6 +301,38 @@ LESSONS = {
          ["Mi sono *abituato ad* alzarmi presto.", "Me acostumbré a levantarme temprano."],
          ["Ho *bisogno di* dormire.", "Necesito dormir."]],
   "tip": "Así la preposición se recupera sola al hablar: sale con la frase."},
+
+ {"h": "Verbos del mail formal",
+  "r": "En el mail formal manda el régimen: *pregare* pide objeto directo, *chiedere* indirecto; *rivolgersi* y *provvedere* piden *a*.",
+  "ex": [["*La prego di* inviarmi il documento.", "Le ruego que me envíe el documento."],
+         ["*Le chiedo di* confermare la data.", "Le pido que confirme la fecha."],
+         ["*Mi sono rivolto* all'ufficio competente.", "Me dirigí a la oficina competente."],
+         ["*Provvederemo a* rispondere entro una settimana.", "Nos ocuparemos de responder en una semana."],
+         ["*Sono tenuto a* informarLa che il termine è scaduto.", "Estoy obligado a informarle que el plazo venció."]],
+  "table": {"head": ["Verbo", "Régimen", "Ejemplo"],
+            "rows": [["pregare qn di + inf.", "directo", "La prego di attendere."],
+                     ["chiedere a qn di + inf.", "indirecto", "Le chiedo di attendere."],
+                     ["comunicare a qn che", "indirecto", "Le comunico che la pratica è chiusa."],
+                     ["essere tenuto a + inf.", "a", "Siamo tenuti a rispettare il termine."],
+                     ["riservarsi di + inf.", "di", "Mi riservo di ricorrere."],
+                     ["restare in attesa di + nombre", "di", "Resto in attesa di una risposta."]]},
+  "warn": "*La prego* lleva pronombre directo; *Le chiedo*, indirecto. No las mezcles: «la chiedo di» es un error, y «le prego di» no es la norma culta."},
+
+ {"h": "Con la presente, in allegato, in attesa di",
+  "r": "Apertura, adjunto y cierre del mail formal son fórmulas fijas: usalas enteras, sin traducir del castellano.",
+  "ex": [["*Con la presente* chiedo di essere informato sull'esito.", "Por la presente solicito que se me informe sobre el resultado."],
+         ["*In allegato* trova il modulo compilato.", "Adjunto encontrará el formulario completo."],
+         ["*Resto a disposizione per* eventuali chiarimenti.", "Quedo a disposición para eventuales aclaraciones."],
+         ["Non *sono in grado di* fornire altri dettagli.", "No estoy en condiciones de dar más detalles."],
+         ["*In attesa di* Suo riscontro, porgo *distinti saluti*.", "En espera de su respuesta, saludo atentamente."]],
+  "table": {"head": ["Fórmula", "Función", "En castellano"],
+            "rows": [["con la presente", "abrir el motivo", "por la presente"],
+                     ["in allegato", "señalar el adjunto", "adjunto"],
+                     ["essere in grado di", "capacidad", "estar en condiciones de"],
+                     ["avere la possibilità di", "posibilidad", "tener la posibilidad de"],
+                     ["mostrarsi disposto a", "actitud", "mostrarse dispuesto a"],
+                     ["resto in attesa di", "cierre", "quedo a la espera de"]]},
+  "warn": "En un mail formal, *Lei* y sus formas van con mayúscula: *Le scrivo*, *Suo riscontro*, *informarLa*."},
 ]},
 
 43: {
@@ -474,6 +536,24 @@ LESSONS = {
          "*andatevene!*, *smettila!*. Con negación, delante o pegadas: *non "
          "te la prendere* o *non prendertela*."},
 
+ {"h": "volerci vs metterci: qué hace falta, cuánto tardás",
+  "r": "*Volerci* es **impersonal**: lo que hace falta es el sujeto y "
+       "concuerda. *Metterci* es **personal**: alguien tarda, y lo marca "
+       "la persona.",
+  "ex": [["*Ci vuole* un'ora per arrivare.", "Se necesita una hora para llegar."],
+         ["*Ci vogliono* due ore di treno.", "Hacen falta dos horas de tren."],
+         ["*Ci metto* un'ora ad arrivare.", "Tardo una hora en llegar."],
+         ["*Ci abbiamo messo* tre ore.", "Tardamos tres horas."],
+         ["*Ci sono volute* due ore.", "Hicieron falta dos horas."]],
+  "table": {"head": ["Punto", "volerci", "metterci"],
+            "rows": [["Sujeto", "la cosa necesaria", "quien tarda"],
+                     ["Concuerda", "ci vuole / ci vogliono", "con la persona: ci metto, ci mette"],
+                     ["Compuesto", "essere: ci sono volute", "avere: ci ho messo"],
+                     ["Español", "hacer falta, llevar (tiempo)", "tardar"]]},
+  "warn": "«Ci voglio un'ora» no existe: *volerci* nunca se conjuga con "
+          "quien tarda. Para «tardo» decí *ci metto*; para «hace falta» "
+          "decí *ci vuole*."},
+
  {"h": "El participio en -a",
   "r": "Con las formas en *la*, el participio **termina en -a**: concuerda "
        "con esa *la* que no se refiere a nada concreto.",
@@ -510,6 +590,25 @@ LESSONS = {
                      ["fare a meno di", "prescindir de, arreglarse sin", "Non posso fare a meno del caffè."]]},
   "tip": "*Sto per uscire* = «estoy por salir»: así se dice el futuro "
          "inminente. *stare* + gerundio NO sirve para eso."},
+
+ {"h": "stare a, finire con l', infischiarsene, prendersela comoda",
+  "r": "Cuatro construcciones de conversación que no se deducen: *stare a* "
+       "+ infinitivo, *finire con l'* + infinitivo, *infischiarsene di* y "
+       "*prendersela comoda*.",
+  "ex": [["*Sta a te* decidere.", "Te toca a vos decidir."],
+         ["*Non sta a me* giudicare.", "No me corresponde a mí juzgar."],
+         ["Ha finito *con l'accettare*.", "Terminó aceptando."],
+         ["*Me ne infischio* delle critiche.", "Me importan un bledo las críticas."],
+         ["*Se l'è presa comoda*, come sempre.", "Se lo tomó con calma, como siempre."]],
+  "table": {"head": ["Construcción", "Sentido", "Ejemplo"],
+            "rows": [["stare a + infinito", "corresponder, tocar", "Sta a te scegliere."],
+                     ["finire con l' + infinito", "terminar + gerundio (= finire per)", "Finirai con l'ammetterlo."],
+                     ["infischiarsene di", "importarle un bledo", "Se ne infischia del regolamento."],
+                     ["prendersela comoda", "tomárselo con calma", "Se la prende comoda."],
+                     ["prendersela con", "agarrársela con", "Se la prende con tutti."]]},
+  "warn": "*Prendersela comoda* no es *prendersela* («ofenderse»): el "
+          "adjetivo *comoda* cambia el sentido. *Infischiarsene* es "
+          "coloquial; en registro más neutro, *non curarsi di*."},
 ]},
 
 46: {
@@ -576,6 +675,61 @@ LESSONS = {
   "tip": "*ri-* va con casi cualquier verbo: *te lo rispiego* (te lo vuelvo "
          "a explicar), *ci risentiamo* (volvemos a hablar). Ahorra "
          "perífrasis."},
+
+ {"h": "Interfijos y ortografía con h",
+  "r": "Muchas bases piden un **interfijo** (*-c-, -ol-, -er-, -icci-*). "
+       "Y *c/g* duras conservan su sonido con una **h**.",
+  "ex": [["Un *bastoncino* di pane.", "Un palito de pan."],
+         ["Ha un *cagnolino* nero.", "Tiene un perrito negro."],
+         ["Una *pioggerellina* fastidiosa.", "Una llovizna molesta."],
+         ["È un *amichetto* di mio figlio.", "Es un amiguito de mi hijo."],
+         ["Ce n'è *pochino*.", "Queda muy poquito."]],
+  "table": {"head": ["Base", "Alterado", "Qué pasa"],
+            "rows": [["bastone", "bastoncino", "interfijo -c-"],
+                     ["fiore", "fiorellino", "interfijo -ell-"],
+                     ["cane", "cagnolino", "cambia la raíz y suma -ol-"],
+                     ["pioggia", "pioggerellina", "interfijo -er- y -ell-"],
+                     ["porto", "porticciolo", "interfijo -icci- + -olo"],
+                     ["amico, poco", "amichetto, pochino", "c dura + i/e: entra la h"],
+                     ["lago, lungo", "laghetto, lunghetto", "g dura + i/e: entra la h"],
+                     ["camicia, bacio", "camicetta, bacino", "-cia / -cio pierde la i"]]},
+  "warn": "No hay regla que prediga el interfijo: se aprende palabra por "
+          "palabra. Y cuidado: *cane → cagnolino*, no *canino* (¡es el "
+          "colmillo!)."},
+
+ {"h": "Contraste con el español: no calques el diminutivo",
+  "r": "El español achica todo con *-ito*; el italiano **elige** el sufijo "
+       "según la palabra. Algunos alterados no son de tamaño.",
+  "ex": [["Abitiamo in una *casetta*.", "Vivimos en una casita."],
+         ["Che *libraccio*!", "¡Qué libro espantoso!"],
+         ["Sei un *chiacchierone*.", "Sos un charlatán."],
+         ["Non fare il *brontolone*.", "No seas gruñón."],
+         ["È un *mangione*.", "Es un glotón."]],
+  "table": {"head": ["Español", "Italiano", "Trampa"],
+            "rows": [["casita", "casetta", "no *casina*"],
+                     ["poquito", "pochino, pochetto", "el español pone -qu-; el italiano, -ch-"],
+                     ["librazo", "librone", "*libraccio* es un libro malo, no grande"]]},
+  "warn": "*-one* sobre un **verbo** no agranda: nombra a quien hace algo "
+          "seguido (*chiacchierare → chiacchierone*, *brontolare → "
+          "brontolone*). Suele criticar, pero entre amigos es cariñoso."},
+
+ {"h": "Prefissoidi: elementos griegos y latinos",
+  "r": "Los *prefissoidi* (*auto-, tele-, micro-, multi-, eco-*) son "
+       "raíces cultas que se pegan a otras palabras. Casi todos coinciden "
+       "con el español.",
+  "ex": [["Faccio *tele*lavoro due giorni.", "Trabajo dos días a distancia."],
+         ["Ha poca *auto*stima.", "Tiene poca autoestima."],
+         ["Scaldalo nel *micro*onde.", "Calentalo en el microondas."],
+         ["Vive in un quartiere *multi*etnico.", "Vive en un barrio multiétnico."],
+         ["Ho preso il *tele*comando.", "Agarré el control remoto."]],
+  "table": {"head": ["Prefissoide", "Sentido", "Ejemplos"],
+            "rows": [["auto-", "de uno mismo", "autostima, autocritica"],
+                     ["tele-", "a distancia", "telelavoro, telecomando"],
+                     ["micro- / macro-", "muy pequeño / muy grande", "microonde, macroeconomia"],
+                     ["multi- / poli-", "muchos", "multietnico, polifunzionale"],
+                     ["eco-", "ambiente", "ecosistema, ecoturismo"]]},
+  "tip": "No alteran una palabra como *-ino*: **crean** una nueva. Ojo: *il "
+         "telecomando* es el control remoto."},
 ]},
 
 47: {
@@ -607,7 +761,8 @@ LESSONS = {
   "ex": [["Ho letto *metà* del libro.", "Leí la mitad del libro."],
          ["*Un quarto* d'ora.", "Un cuarto de hora."],
          ["*Due terzi* degli studenti sono d'accordo.", "Dos tercios de los estudiantes están de acuerdo."],
-         ["Costa *il doppio*.", "Cuesta el doble."]]},
+         ["Costa *il doppio*.", "Cuesta el doble."]],
+  "warn": "*Metà* es sustantivo; *mezzo* es adjetivo y concuerda: *mezzo litro*, *un'ora e mezza*, *due chili e mezzo*."},
 
  {"h": "Porcentajes",
   "r": "Llevan **artículo masculino**: *il 20%*, *l'8%*. El verbo va en "
@@ -615,8 +770,7 @@ LESSONS = {
   "ex": [["*Il 30%* degli studenti sono stranieri.", "El 30% de los estudiantes son extranjeros."],
          ["*Il 20%* degli italiani vive qui.", "El 20% de los italianos vive acá."],
          ["Ha preso *l'8%* dei voti.", "Sacó el 8% de los votos."]],
-  "warn": "Nunca sin artículo: «30% degli studenti» es de titular de diario. "
-          "En una frase normal, *il 30%*.",
+  "warn": "Casi siempre con artículo. Sin él se ve en titulares: «30% degli studenti a rischio». Tras preposición se contrae: *del 20%*, *al 5%*.",
   "tip": "Se lee *per cento*, en dos palabras: *il 25%* = *il venticinque "
          "per cento*."},
 
@@ -628,7 +782,7 @@ LESSONS = {
          ["*Mezzo litro* di latte.", "Medio litro de leche."],
          ["*Quant'è*?", "¿Cuánto es?"],
          ["Costa dieci euro *al chilo*.", "Cuesta diez euros el kilo."]],
-  "tip": "Nadie pide «200 grammi»: se piden *due etti*. Igual *al giorno*, "
+  "tip": "Se pide mucho por *etti*, aunque también se oye «duecento grammi». Igual *al giorno*, "
          "*all'ora*: *a* + artículo donde el castellano dice «por» o «el»."},
 
  {"h": "Operaciones y números escritos",
@@ -640,6 +794,21 @@ LESSONS = {
          ["Costa *1.500* euro.", "Cuesta mil quinientos euros."]],
   "warn": "Ojo con *per*: en una cuenta es «por» (×), no «para»: *tre per "
           "tre fa nove*."},
+
+ {"h": "Ordinales",
+  "r": "Del 1 al 10 son palabras propias; desde el 11 se agrega *-esimo* al número, sin la vocal final.",
+  "ex": [["Abita al *terzo* piano.", "Vive en el tercer piso."],
+         ["È la *quinta* volta che chiamo.", "Es la quinta vez que llamo."],
+         ["Sono arrivato *undicesimo*.", "Llegué undécimo."],
+         ["Siamo nel *ventunesimo* secolo.", "Estamos en el siglo veintiuno."],
+         ["Il *primo* maggio è festa.", "El primero de mayo es feriado."]],
+  "table": {"head": ["Número", "Ordinal", "Nota"],
+            "rows": [["1 a 10", "primo, secondo, terzo, quarto, quinto, sesto, settimo, ottavo, nono, decimo", "concuerdan: la terza volta"],
+                     ["11, 12, 16", "undicesimo, dodicesimo, sedicesimo", "se cae la -i final"],
+                     ["20, 30", "ventesimo, trentesimo", "se cae la vocal final"],
+                     ["21, 23", "ventunesimo, ventitreesimo", "-uno y -tre se conservan"],
+                     ["100, 1000", "centesimo, millesimo", "se cae la vocal final"]]},
+  "warn": "En las fechas solo el día uno es ordinal: *il primo maggio*, pero *il due maggio*."},
 
  {"h": "Siglos, décadas y años",
   "r": "Del XIII al XX, el siglo se nombra por sus cientos: *il Cinquecento* "
@@ -660,6 +829,36 @@ LESSONS = {
           "(1900). Para el ordinal, *il ventesimo secolo*.",
   "qq": [{"prompt": "¿Qué es «il Settecento»?", "answer": "el siglo XVIII", "options": ["el siglo XVIII", "el siglo VII", "el siglo XVII"]},
          {"prompt": "Completá", "stem": "È nato ___ 1985.", "answer": "nel", "options": ["nel", "in", "il"]}]},
+
+ {"h": "Partitivo y cuantificadores",
+  "r": "*del, della, dei, delle* + sustantivo = un poco o unos. Se suman *un po' di*, *qualche* y *alcuni*.",
+  "ex": [["Compro *dell'*acqua e *delle* mele.", "Compro agua y unas manzanas."],
+         ["Ho *un po' di* tempo.", "Tengo un poco de tiempo."],
+         ["Ho invitato *alcuni* amici.", "Invité a algunos amigos."],
+         ["*Qualche* amico è venuto.", "Vinieron algunos amigos."]],
+  "table": {"head": ["Forma", "Va con", "Ejemplo"],
+            "rows": [["del, dello, della, dell'", "incontable singular", "Bevo del vino."],
+                     ["dei, degli, delle", "plural indefinido", "Ho comprato dei libri."],
+                     ["un po' di", "incontable", "un po' di sale"],
+                     ["qualche", "singular, sentido plural", "qualche libro"],
+                     ["alcuni, alcune", "plural", "alcuni libri"]]},
+  "warn": "*Qualche* lleva sustantivo y verbo en singular: *qualche amico è venuto*, no «qualche amici sono venuti».",
+  "tip": "En negativas el partitivo suele omitirse: *non ho pane*, más natural que «non ho del pane»."},
+
+ {"h": "Cifras en la prensa económica",
+  "r": "El periodismo económico usa porcentajes, puntos y proporciones: *un aumento del 3%*, *di due punti percentuali*.",
+  "ex": [["I prezzi sono aumentati *del 3,2%*.", "Los precios aumentaron un 3,2%."],
+         ["Il tasso è passato *dal 4 al 6 per cento*.", "La tasa pasó del 4 al 6 por ciento."],
+         ["Un calo *di due punti percentuali*.", "Una caída de dos puntos porcentuales."],
+         ["*Oltre un terzo* delle imprese ha chiuso.", "Más de un tercio de las empresas cerró."],
+         ["Il fatturato è *quasi raddoppiato*.", "La facturación casi se duplicó."]],
+  "table": {"head": ["Expresión", "Sentido", "Ejemplo"],
+            "rows": [["aumento / calo di + %", "subida / caída", "un calo del 2%"],
+                     ["passare da... a...", "pasar de... a...", "dal 4 al 6%"],
+                     ["oltre, più di / meno di, quasi, circa", "límites y aproximación", "oltre il 10%"],
+                     ["dimezzare, raddoppiare, triplicare", "reducir a la mitad, duplicar, triplicar", "i costi sono triplicati"],
+                     ["il doppio, il triplo", "múltiplos", "il doppio del 2010"]]},
+  "warn": "*Del 3%* o *di due punti* dicen cuánto cambió; *al 4%* dice dónde se llegó: *è sceso al 4%*."},
 ]},
 
 48: {
@@ -836,6 +1035,46 @@ LESSONS = {
                      ["argomenti", "dos o tres, con ejemplos"],
                      ["controargomento", "lo reconocés y lo refutás: *certo..., tuttavia...*"],
                      ["conclusione", "retoma la tesis sin repetirla textualmente"]]}},
+
+ {"h": "Nominalización: del verbo al sustantivo",
+  "r": "En registro alto la acción se vuelve sustantivo: *i prezzi sono aumentati* → *l'aumento dei prezzi*.",
+  "ex": [["*L'aumento dei prezzi* preoccupa le famiglie.", "El aumento de los precios preocupa a las familias."],
+         ["*La chiusura della fabbrica* ha lasciato senza lavoro cento persone.", "El cierre de la fábrica dejó sin trabajo a cien personas."],
+         ["*Con l'introduzione* di nuove regole, il sistema è cambiato.", "Con la introducción de nuevas reglas, el sistema cambió."],
+         ["*La riduzione della spesa* è stata approvata.", "La reducción del gasto fue aprobada."]],
+  "table": {"head": ["Verbo", "Sustantivo", "Cómo se forma"],
+            "rows": [["ridurre, introdurre", "la riduzione, l'introduzione", "-zione"],
+                     ["decidere", "la decisione", "-sione"],
+                     ["migliorare", "il miglioramento", "-mento"],
+                     ["chiudere", "la chiusura", "-ura"],
+                     ["crescere, perdere", "la crescita, la perdita", "-ita (femenino)"]]},
+  "warn": "El castellano conserva el verbo (*al llegar*); el italiano prefiere el sustantivo: *all'arrivo del treno*, no «all'arrivare»."},
+
+ {"h": "Malgrado, laddove, ove",
+  "r": "*Malgrado* concede como *nonostante*; *laddove* y *ove* condicionan o contrastan. Los tres son de registro escrito.",
+  "ex": [["*Malgrado* le difficoltà, il progetto va avanti.", "A pesar de las dificultades, el proyecto sigue."],
+         ["*Laddove* possibile, si preferisce il lavoro da remoto.", "Cuando es posible, se prefiere el trabajo remoto."],
+         ["*Ove* necessario, il termine può essere prorogato.", "De ser necesario, el plazo puede prorrogarse."],
+         ["*Laddove* il primo studio indicava un calo, il secondo rileva una crescita.", "Mientras el primer estudio indicaba una caída, el segundo registra un aumento."]],
+  "table": {"head": ["Conector", "Valor", "Ejemplo"],
+            "rows": [["malgrado + sustantivo", "concesión (= nonostante)", "malgrado la pioggia"],
+                     ["laddove + adjetivo", "condición (= se, qualora)", "laddove possibile"],
+                     ["laddove + indicativo", "contraste (= mentre)", "laddove il primo indicava..."],
+                     ["ove + adjetivo o congiuntivo", "condición (= qualora)", "ove necessario"]]},
+  "warn": "Son de escritura formal: dichos en voz alta suenan a decreto. Para el lugar, en el habla, *dove*."},
+
+ {"h": "Calcos del español que bajan el registro",
+  "r": "Cuatro conectores calcados del castellano bajan la nota. Cambian el modo o la forma entera.",
+  "ex": [["*Benché sia* stanco, continua a lavorare.", "Aunque está cansado, sigue trabajando."],
+         ["*Anche se* è stanco, continua a lavorare.", "Aunque está cansado, sigue trabajando."],
+         ["*Grazie al fatto che* ha studiato, ha superato l'esame.", "Gracias a que estudió, aprobó el examen."],
+         ["*Per quanto riguarda* i costi, il quadro è chiaro.", "En cuanto a los costos, el panorama es claro."]],
+  "table": {"head": ["Castellano", "Calco (error)", "Italiano"],
+            "rows": [["aunque esté cansado", "anche se sia stanco", "benché sia stanco / anche se è stanco"],
+                     ["a fin de que entiendas", "per che tu capisca", "affinché tu capisca"],
+                     ["antes de que llegue", "prima di che arrivi", "prima che arrivi"],
+                     ["gracias a que", "grazie a che", "grazie al fatto che"]]},
+  "warn": "*Benché* siempre con congiuntivo; *anche se* casi siempre con indicativo, salvo hipótesis: *anche se fosse vero*."},
 ]},
 
 50: {
@@ -974,7 +1213,10 @@ LESSONS = {
  {"h": "Lista de control: tiempos", "blocks": [1],
   "match": r"condicional|condizionale|futuro|imperfetto|passato|remoto|puedo / podría"},
  {"h": "Pronombres y las faltas más caras", "blocks": [2, 3, 4],
-  "match": r"pronombre|\bne\b|\bci\b"},
+  "match": r"\S"},
+ {"h": "Repaso C1: causativo, pasiva, dislocaciones, periodo mixto", "blocks": [5, 6, 7],
+  "ids": ["mj-51-%02d" % n for n in range(1, 15)],
+  "match": r"causativ|dislocaci|periodo misto"},
 ],
 "blocks": [
  {"h": "Lista de control: congiuntivo",
@@ -988,12 +1230,12 @@ LESSONS = {
             "rows": [["verbo de opinión, duda, deseo, emoción o voluntad", "congiuntivo"],
                      ["sujetos distintos", "che + congiuntivo"],
                      ["mismo sujeto", "di + infinito"],
-                     ["principal en pasado", "congiuntivo imperfetto o trapassato"],
+                     ["principal en pasado + verbo que pide congiuntivo", "congiuntivo imperfetto o trapassato"],
                      ["benché, affinché, nonostante, prima che, senza che, a meno che non", "congiuntivo sí o sí"],
                      ["superlativo relativo o l'unico che", "congiuntivo"]]}},
 
  {"h": "Lista de control: tiempos",
-  "r": "Las ocho frases que **más se equivocan**. Si dudás, buscá la tuya "
+  "r": "Las ocho frases en las que **más se falla**. Si dudás, buscá la tuya "
        "acá.",
   "ex": [["Ha detto che *sarebbe venuto*.", "Dijo que vendría."],
          ["Se *avessi* tempo, *andrei*.", "Si tuviera tiempo, iría."],
@@ -1025,7 +1267,7 @@ LESSONS = {
                      ["participio", "concuerda con lo, la, li, le y con essere"]]}},
 
  {"h": "Las quince faltas más caras",
-  "r": "Quince errores que **bajan la nota** siempre. Leelos en voz alta "
+  "r": "Quince errores que **suelen bajar la nota**. Leelos en voz alta "
        "hasta que la forma correcta te salga sola.",
   "ex": [["Credo che *sia* così.", "Creo que es así."],
          ["*Mi sono lavato* le mani.", "Me lavé las manos."],
@@ -1035,7 +1277,7 @@ LESSONS = {
             "rows": [["credo che è", "credo che sia"],
                      ["mi ho lavato", "mi sono lavato"],
                      ["se avrei", "se avessi"],
-                     ["ha detto che verrebbe", "ha detto che sarebbe venuto"],
+                     ["ha detto che verrebbe (se oye en el habla)", "ha detto che sarebbe venuto (forma estándar)"],
                      ["si vende libri", "si vendono libri"],
                      ["dopo mangiare", "dopo aver mangiato"],
                      ["ho tre (de algo ya nombrado)", "ne ho tre"],
@@ -1045,7 +1287,7 @@ LESSONS = {
                      ["facilemente", "facilmente"],
                      ["qual'è", "qual è (sin apóstrofo)"],
                      ["parleremo (por «hablaríamos»)", "parleremmo"],
-                     ["sto studiando quest'anno", "studio quest'anno (más natural)"],
+                     ["sto studiando quest'anno (no es falta)", "studio quest'anno (más natural)"],
                      ["poso (por «puedo»)", "posso, con doble s"]]}},
 
  {"h": "Cómo llegar al jefe final",
@@ -1054,8 +1296,45 @@ LESSONS = {
   "ex": [["Se *fossi* in te, ripasserei.", "Yo que vos, repasaría."],
          ["Pensavo che *fosse* già *partito*.", "Pensaba que ya se había ido."],
          ["Se *avessi studiato*, avrei passato l'esame.", "Si hubiera estudiado, habría aprobado el examen."]],
-  "tip": "Después repasá esta hoja en voz alta: leer las trampas en voz alta "
-         "las fija mejor que releerlas."},
+  "tip": "Después repasá esta hoja en voz alta: decir las trampas en voz alta "
+         "las fija mejor que releerlas en silencio."},
+
+ {"h": "Repaso: causativo y pasiva",
+  "r": "Causativo: *fare* + infinitivo. Pasivas: *essere*, *venire* o *andare* + participio, o *si* + verbo.",
+  "ex": [["*Ho fatto riparare* il tetto dal muratore.", "Mandé a arreglar el techo al albañil."],
+         ["Il lavoro *è stato consegnato* ieri.", "El trabajo fue entregado ayer."],
+         ["Il modulo *va compilato* entro venerdì.", "El formulario debe completarse antes del viernes."],
+         ["*Si vendono* case in centro.", "Se venden casas en el centro."]],
+  "table": {"head": ["Forma", "Valor", "Ejemplo"],
+            "rows": [["fare + infinito", "hacer hacer, mandar a hacer", "Ho fatto riparare l'auto."],
+                     ["essere + participio", "acción hecha o estado", "La porta è chiusa."],
+                     ["venire + participio", "acción en curso", "Viene pubblicato oggi."],
+                     ["andare + participio", "obligación o pérdida", "Va fatto subito."],
+                     ["si passivante", "el verbo concuerda con el objeto", "Si vendono case."]]},
+  "warn": "En el *si passivante* el verbo concuerda con lo que se vende: *si vende una casa*, *si vendono case*."},
+
+ {"h": "Repaso: dislocaciones y foco",
+  "r": "Dislocar es adelantar el elemento y retomarlo con un pronombre. La escindida pone el foco: *è... che*.",
+  "ex": [["*Il pane lo* compro io.", "El pan lo compro yo."],
+         ["*A Marco gliel'*ho già detto.", "A Marco ya se lo dije."],
+         ["*L'*ho letto, *il libro*.", "Lo leí, el libro."],
+         ["*È* Marco *che* ha telefonato.", "Fue Marco el que llamó."]],
+  "warn": "Con el objeto adelantado el pronombre es obligatorio: *il pane lo compro*, no «il pane compro»."},
+
+ {"h": "Repaso: periodo mixto y concesión",
+  "r": "Periodo mixto: condición y efecto en tiempos distintos, como pasado y presente: *se avessi studiato, ora sarei laureato*. Concesión: *benché* + congiuntivo.",
+  "ex": [["*Se avessi studiato*, ora *sarei* laureato.", "Si hubiera estudiado, ahora estaría recibido."],
+         ["*Se fossi* più paziente, *avresti evitato* quell'errore.", "Si fueras más paciente, habrías evitado ese error."],
+         ["*Sebbene fosse* stanco, ha finito il lavoro.", "Aunque estaba cansado, terminó el trabajo."],
+         ["*Malgrado* la pioggia, siamo usciti.", "A pesar de la lluvia, salimos."],
+         ["*Nonostante costi* molto, lo compro.", "Aunque cuesta mucho, lo compro."]],
+  "table": {"head": ["Tipo", "Estructura", "Ejemplo"],
+            "rows": [["real", "se + indicativo, indicativo", "Se piove, resto a casa."],
+                     ["posible", "se + congiuntivo imperfetto, condizionale presente", "Se avessi tempo, verrei."],
+                     ["irreal pasado", "se + trapassato, condizionale passato", "Se avessi saputo, sarei venuto."],
+                     ["mixto", "se + trapassato, condizionale presente", "Se avessi studiato, ora sarei laureato."],
+                     ["concesión", "sebbene, benché, nonostante + congiuntivo", "Benché sia tardi, resto."]]},
+  "warn": "Después de *se* hipotético va congiuntivo, nunca condicional: «se avrei tempo» no existe."},
 ]},
 
 52: {

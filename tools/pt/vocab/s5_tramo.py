@@ -259,7 +259,7 @@ VOCAB = {
 45: [
     ["embaraçado", "avergonzado, incómodo (no «embarazada»)", "Perguntar a uma colega se ela está embaraçada pode deixá-la constrangida.", "Falso amigo clásico: embarazada es *grávida*. *Embaraçar* = avergonzar, y también enredar."],
     ["a escrivaninha", "el escritorio (el mueble)", "O escritório não é o móvel onde escrevo: esse é a escrivaninha.", "El mueble; *o escritório* es la oficina. Femenino: *a escrivaninha*."],
-    ["folgado", "holgado, suelto; (coloquial) aprovechado", "Uma camiseta larga, em português, é uma camiseta folgada.", "*Roupa folgada*. De una persona, *folgado* = fresco, caradura. *A folga* = el franco del trabajo."],
+    ["folgado", "holgado, suelto; (coloquial) aprovechado", "Uma camiseta folgada não aperta o corpo.", "*Roupa folgada*. De una persona, *folgado* = fresco, caradura. *A folga* = el franco del trabajo."],
     ["a pegadinha", "la trampa, la pregunta capciosa; la cámara oculta", "O caminho inverso, do português para o espanhol, também tem as suas pegadinhas.", "*Cair numa pegadinha* = caer en la trampa. En la tele, *programa de pegadinhas* = de cámara oculta."],
     ["o crachá", "la credencial, la tarjeta identificatoria", "Quando me pediram o apelido para o crachá, respondi com o sobrenome.", "La tarjeta con nombre y foto que se cuelga en el trabajo o en un evento. Masculino, con tilde: *o crachá*."],
     ["caprichar", "esmerarse", "Resolvi caprichar no português: «Que comida exquisita!».", "*Caprichar em algo* = esmerarse; *caprichado* = bien hecho. Nada que ver con el antojo."],

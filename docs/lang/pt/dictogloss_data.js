@@ -439,8 +439,8 @@
 
     { week: 46, level: "C1", title: "Uma língua, muitos sotaques",
       es: "El portugués de Brasil, Portugal, Angola, Mozambique y Cabo Verde: palabras distintas, acentos y el escritor Mia Couto.",
-      text: "O português é falado por mais de duzentos e cinquenta milhões de pessoas, em países como Brasil, Portugal, Angola, Moçambique e Cabo Verde. Em Lisboa, pega-se o comboio, e não o trem; toma-se o pequeno-almoço, e não o café da manhã. Em Luanda, ouvem-se palavras de origem quimbundo, e em Cabo Verde fala-se também o crioulo. O moçambicano Mia Couto, prêmio Camões em dois mil e treze, inventa palavras com uma liberdade que lembra Guimarães Rosa. Uma língua, muitos sotaques.",
-      chunks: ["mais de duzentos e cinquenta milhões", "pega-se o comboio", "toma-se o pequeno-almoço", "de origem quimbundo", "prêmio Camões", "muitos sotaques"],
+      text: "O português é falado por mais de duzentos e cinquenta milhões de pessoas, em países como Brasil, Portugal, Angola, Moçambique e Cabo Verde. Em Lisboa, apanha-se o comboio, e não o trem; toma-se o pequeno-almoço, e não o café da manhã. Em Luanda, ouvem-se palavras de origem quimbundo, e em Cabo Verde fala-se também o crioulo. O moçambicano Mia Couto, prêmio Camões em dois mil e treze, inventa palavras com uma liberdade que lembra Guimarães Rosa. Uma língua, muitos sotaques.",
+      chunks: ["mais de duzentos e cinquenta milhões", "apanha-se o comboio", "toma-se o pequeno-almoço", "de origem quimbundo", "prêmio Camões", "muitos sotaques"],
       keywords: ["Portugal", "Angola", "Moçambique", "Cabo Verde", "comboio", "Luanda", "crioulo", "Mia Couto"],
       gloss: {
         "sotaques": "acentos, tonadas (sotaque = acento al hablar)",

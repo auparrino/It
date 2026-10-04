@@ -27,20 +27,20 @@ ITEMS = [
          note="*andare* + participio expresa obligación en pasiva: *va compilato*, "
               "«tiene que ser completado». No tiene equivalente directo en castellano "
               "y es muy frecuente en el lenguaje administrativo."),
-    dict(id="c1-pass-04", type="cloze", topic="passivo",
-         prompt="Reescribí con el «si passivante».",
+    dict(id="c1-pass-04", type="cloze", topic="si impersonale",
+         prompt="Completá con el verbo en la forma del «si passivante».",
          stem="In Italia si ___ (mangiare) molte verdure.",
          answer="mangiano",
          note="El «si passivante» concuerda con el objeto: verdure (plural) → "
               "mangiano. Error típico: dejar «si mangia»."),
-    dict(id="c1-pass-05", type="choice", topic="passivo",
+    dict(id="c1-pass-05", type="choice", topic="si impersonale",
          prompt="Elegí la forma correcta (si impersonale).",
          stem="Quando si è stanchi, si ___ presto.",
          options=["va a dormire", "vanno a dormire", "si dorme"],
          answer="va a dormire",
          note="«Si» impersonal + verbo en 3ª singular; el adjetivo, en cambio, "
               "va en plural masculino: «si è stanchi»."),
-    dict(id="c1-pass-06", type="translate", topic="passivo",
+    dict(id="c1-pass-06", type="translate", topic="si impersonale",
          prompt="Traducí al italiano (pasiva refleja).",
          stem="Aquí se venden libros usados.",
          answer="Qui si vendono libri usati",
