@@ -1001,7 +1001,7 @@ LESSONS = {
 "parts": [
  {"h": "Qué es la crase y el truco del masculino", "blocks": [0, 1, 2]},
  {"h": "Cuándo nunca, y los lugares", "blocks": [3, 4]},
- {"h": "àquele y las locuciones", "blocks": [5, 6, 7]},
+ {"h": "àquele y las locuciones", "blocks": [5, 6, 7, 8]},
 ],
 "blocks": [
  {"h": "a + a = à",
@@ -1102,6 +1102,24 @@ LESSONS = {
            "también lo es: *vou à minha casa* o *vou a minha casa*. Y "
            "*casa* sin determinar (la propia) no lleva: *voltei a casa*; "
            "pero *voltei à casa da Ana*."]},
+
+ {"h": "à medida que, à procura de: locuciones que unen",
+  "q": [{"prompt": "«A medida que pasaban los años, el barrio cambiaba.»", "stem": "___ os anos passavam, o bairro mudava.", "answer": "À medida que", "options": ["À medida que", "A medida que", "Ao medida que"]}],
+  "r": "También llevan crase las locuciones femeninas que unen frases o "
+       "arman preposiciones: *à medida que*, *à procura de*, *à custa de*, "
+       "*à frente de*, *à base de*.",
+  "table": {"head": ["Locución", "Significa", "Ejemplo"],
+            "rows": [["à medida que", "a medida que", "À medida que a noite cai, a Lapa enche."],
+                     ["à procura de", "en busca de", "Estou à procura de um apartamento."],
+                     ["à custa de", "a costa de", "Ele vive à custa dos pais."],
+                     ["à frente de", "al frente de, delante de", "Ela está à frente do projeto."],
+                     ["à base de", "a base de", "É um bolo à base de mandioca."]]},
+  "ex": [["*À medida que* a noite cai, a Lapa fica cheia.", "A medida que cae la noche, Lapa se llena."],
+         ["Estamos *à procura de* um apartamento no Flamengo.", "Estamos buscando un departamento en Flamengo."],
+         ["Ela está *à frente do* projeto desde março.", "Ella está al frente del proyecto desde marzo."],
+         ["Ele vive *à custa dos* pais.", "Vive a costa de sus padres."]],
+  "warn": "*à medida que* (a medida que: progresión) no es *na medida em "
+          "que* (en la medida en que). Y nunca «à medida em que»."},
 
  {"h": "Sotaque da semana: Luanda",
   "q": [{"prompt": "En Luanda, «Gosto bué desta música» quiere decir…", "answer": "Me gusta mucho esta música.", "options": ["Me gusta mucho esta música.", "Me gusta poco esta música.", "Me gustaba esta música."]}],

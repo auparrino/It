@@ -17,8 +17,8 @@ LESSONS = {
 ],
 "blocks": [
  {"h": "fare + infinito",
-  "r": "*fare* conjugado + infinitivo = hacer que alguien haga, o mandar a "
-       "hacer. **Nada en el medio**: van pegados.",
+  "r": "*fare* conjugado + infinitivo = hacer que alguien haga o mandar a "
+       "hacer. Van **pegados**, salvo un adverbio: *mi fa sempre ridere*.",
   "ex": [["*Ho fatto riparare* la macchina.", "Mandé a arreglar el auto."],
          ["Mi *fai ridere*.", "Me hacés reír."],
          ["Il professore ci *fa studiare* molto.", "El profesor nos hace estudiar mucho."],
@@ -32,9 +32,9 @@ LESSONS = {
   "ex": [["*Si è fatto tagliare* i capelli.", "Se cortó el pelo (en la peluquería)."],
          ["*Mi sono fatto fare* un vestito.", "Me mandé a hacer un traje."],
          ["*Si è fatta operare* al ginocchio.", "Se operó la rodilla."]],
-  "warn": "*Mi sono tagliato i capelli* = me corté el pelo yo mismo, con la "
-          "tijera. Si fuiste a la peluquería: *mi sono fatto tagliare i "
-          "capelli*."},
+  "warn": "*Mi sono tagliato i capelli* puede ser con tu tijera o, en el "
+          "habla, en la peluquería. Para dejarlo claro: *mi sono fatto "
+          "tagliare i capelli*."},
 
  {"h": "Quién hace qué",
   "q": [{"prompt": "Reemplazá «il libro» y «a Marco».", "stem": "Faccio leggere il libro a Marco → ___ faccio leggere.", "answer": "Glielo", "options": ["Glielo", "Lo gli", "Gli"]}, {"prompt": "Reemplazá «Marco».", "stem": "Faccio lavorare Marco → ___ faccio lavorare.", "answer": "Lo", "options": ["Lo", "Gli", "Le"]}],
@@ -60,8 +60,9 @@ LESSONS = {
          ["*Te lo* faccio vedere.", "Te lo muestro."],
          ["*Fallo* entrare.", "Hacelo entrar."],
          ["Devo *farlo* venire.", "Tengo que hacerlo venir."]],
-  "warn": "Solo se pegan a *fare* cuando *fare* está en imperativo informal "
-          "o infinitivo: *fallo entrare*, *devo farlo venire*."},
+  "warn": "Se pegan a *fare* solo cuando está en infinitivo, gerundio o "
+          "imperativo informal: *devo farlo venire*, *facendolo entrare*, "
+          "*fallo entrare*."},
 
  {"h": "lasciare: permitir en vez de obligar",
   "r": "*lasciare* + infinitivo = «dejar que», y se arma igual que *fare*. "
@@ -357,9 +358,9 @@ LESSONS = {
          ["*Dopo essere arrivati*, ci siamo riposati.", "Después de llegar, descansamos."],
          ["Credo di *aver capito*.", "Creo haber entendido."],
          ["Mi dispiace di *essere arrivato* tardi.", "Lamento haber llegado tarde."]],
-  "warn": "*Dopo* + infinitivo simple es un error: siempre *dopo aver...* o "
-          "*dopo essere...*. En cambio *prima di* pide infinitivo simple: "
-          "*prima di uscire*.",
+  "warn": "*Dopo* + infinitivo pide el compuesto: *dopo aver...*, *dopo "
+          "essere...*. *Prima di* va con el simple (*prima di uscire*), salvo "
+          "para subrayar lo terminado: *prima di aver finito*.",
   "tip": "Los pronombres se pegan al auxiliar: *dopo avergli parlato* "
          "(después de hablarle), *grazie di averci aiutato*, *sono contento "
          "di essermi divertito*."},
@@ -422,9 +423,9 @@ LESSONS = {
            "*alzandosi*. Y para «seguir haciendo» no va gerundio sino "
            "*continuare a*: *continuo a studiare* (sigo estudiando)."]},
 
- {"h": "El gerundio exige el mismo sujeto",
-  "r": "El sujeto del gerundio tiene que ser **el mismo** que el de la frase "
-       "principal.",
+ {"h": "El gerundio y su sujeto",
+  "r": "El gerundio toma **el sujeto** de la principal; en registro escrito "
+       "puede llevar uno propio: *essendo Marco malato, restiamo a casa*.",
   "ex": [["*Uscendo* di casa, ho incontrato Marco.", "Al salir de casa, me encontré con Marco."],
          ["*Tornando* a casa, ho visto Luca.", "Volviendo a casa, vi a Luca."],
          ["*Mentre uscivo* di casa, ha cominciato a piovere.", "Cuando salía de casa, empezó a llover."]],
@@ -521,9 +522,8 @@ LESSONS = {
          "ejemplo."},
 
  {"h": "Cómo se conjugan",
-  "r": "El reflexivo cambia con la persona; *la*, *ne*, *ci* **quedan "
-       "fijos**. Compuestos con *essere*, salvo *farcela, avercela, "
-       "metterci*.",
+  "r": "El reflexivo cambia; *la*, *ne*, *ci* **quedan fijos**. Con "
+       "reflexivo, *essere*; sin él, el auxiliar del verbo: *ce l'ho fatta*.",
   "ex": [["*Me ne sono andato* / *Ce ne siamo andati*.", "Me fui / Nos fuimos."],
          ["*Ce l'ho fatta*!", "¡Lo logré!"],
          ["*Se l'è presa*.", "Se ofendió."],
@@ -698,7 +698,7 @@ LESSONS = {
           "colmillo!)."},
 
  {"h": "Contraste con el español: no calques el diminutivo",
-  "r": "El español achica todo con *-ito*; el italiano **elige** el sufijo "
+  "r": "El español achica casi todo con *-ito*; el italiano **elige** el sufijo "
        "según la palabra. Algunos alterados no son de tamaño.",
   "ex": [["Abitiamo in una *casetta*.", "Vivimos en una casita."],
          ["Che *libraccio*!", "¡Qué libro espantoso!"],
@@ -706,7 +706,7 @@ LESSONS = {
          ["Non fare il *brontolone*.", "No seas gruñón."],
          ["È un *mangione*.", "Es un glotón."]],
   "table": {"head": ["Español", "Italiano", "Trampa"],
-            "rows": [["casita", "casetta", "no *casina*"],
+            "rows": [["casita", "casetta", "*casina* es regional; *casino* es un lío"],
                      ["poquito", "pochino, pochetto", "el español pone -qu-; el italiano, -ch-"],
                      ["librazo", "librone", "*libraccio* es un libro malo, no grande"]]},
   "warn": "*-one* sobre un **verbo** no agranda: nombra a quien hace algo "
@@ -796,7 +796,7 @@ LESSONS = {
           "tre fa nove*."},
 
  {"h": "Ordinales",
-  "r": "Del 1 al 10 son palabras propias; desde el 11 se agrega *-esimo* al número, sin la vocal final.",
+  "r": "Del 1 al 10, palabras propias; desde el 11, número + *-esimo* sin la vocal final (salvo *-tre* y *-sei*: *ventitreesimo*).",
   "ex": [["Abita al *terzo* piano.", "Vive en el tercer piso."],
          ["È la *quinta* volta che chiamo.", "Es la quinta vez que llamo."],
          ["Sono arrivato *undicesimo*.", "Llegué undécimo."],
@@ -811,8 +811,8 @@ LESSONS = {
   "warn": "En las fechas solo el día uno es ordinal: *il primo maggio*, pero *il due maggio*."},
 
  {"h": "Siglos, décadas y años",
-  "r": "Del XIII al XX, el siglo se nombra por sus cientos: *il Cinquecento* "
-       "= los 1500, el siglo XVI. Los años llevan artículo: *nel 1861*.",
+  "r": "Del XIII al XX el siglo se nombra por sus cientos: *il Cinquecento*, "
+       "el XVI. Los años llevan artículo: *nel 1861*.",
   "ex": [["Michelangelo dipinse la Sistina *nel Cinquecento*.", "Miguel Ángel pintó la Sixtina en el siglo XVI."],
          ["*Il Novecento* è *il ventesimo secolo*.", "El Novecientos es el siglo XX."],
          ["È nato *nel* 1990.", "Nació en 1990."],
@@ -932,13 +932,13 @@ LESSONS = {
            "sobrevive en el sur y en el habla de los mayores; en el norte suena "
            "anticuado. Para ustedes, plural, *voi* es lo normal en todas partes."]},
 
- {"h": "El italiano neostandard: entendelo siempre, escribilo nunca",
+ {"h": "El italiano neostandard: entendelo siempre, escribilo con cuidado",
   "r": "En la charla se oyen usos que el escrito formal no admite. **Reconocelos** "
        "al oír; en un texto formal, la forma estándar.",
   "table": {"head": ["Se oye", "Por", "Escrito formal"],
             "rows": [["gli dico (a ella)", "le dico", "Le dico la verità."],
                      ["gli dico (a ellos)", "dico loro", "Dico loro la verità."],
-                     ["lui, lei, loro sujeto", "egli, ella, essi (solo en textos antiguos)", "Lui è partito: vale en los dos"],
+                     ["lui, lei, loro sujeto", "egli, ella, essi (textos formales o antiguos)", "Lui è partito: vale en los dos"],
                      ["penso che è vero", "penso che sia vero", "Penso che sia vero."],
                      ["a me mi piace", "a me piace / mi piace", "Mi piace."],
                      ["ci ho fame", "ho fame", "Ho fame."],
@@ -1074,7 +1074,7 @@ LESSONS = {
                      ["a fin de que entiendas", "per che tu capisca", "affinché tu capisca"],
                      ["antes de que llegue", "prima di che arrivi", "prima che arrivi"],
                      ["gracias a que", "grazie a che", "grazie al fatto che"]]},
-  "warn": "*Benché* siempre con congiuntivo; *anche se* casi siempre con indicativo, salvo hipótesis: *anche se fosse vero*."},
+  "warn": "*Benché* va con congiuntivo (o condicional: *benché preferirei restare*); *anche se*, con indicativo, salvo hipótesis: *anche se fosse vero*."},
 ]},
 
 50: {
@@ -1196,7 +1196,7 @@ LESSONS = {
   "warn": "*fra* o *tra* + tiempo = dentro de (*torno fra un'ora*). *Vado da "
           "Marco* = voy a lo de Marco; *vado a Roma*, *vado in centro*.",
   "more": ["Delante de un pronombre tónico, *dopo, senza, dietro, dentro, "
-           "verso, sopra, sotto* suman *di*: *senza di te* (sin vos), *dopo "
+           "verso, sopra, sotto* suelen sumar *di* (*senza te* también se oye): *senza di te* (sin vos), *dopo "
            "di me*, *dietro di te*. Con sustantivo, no: *senza musica*, "
            "*dopo cena*, *dietro la porta*.",
            "Muchos adjetivos tienen su preposición: *interessato a*, *deciso "
@@ -1254,7 +1254,7 @@ LESSONS = {
  {"h": "Lista de control: pronombres",
   "q": [{"prompt": "¿Cuál está bien? «Te lo digo.»", "answer": "Te lo dico.", "options": ["Te lo dico.", "Ti lo dico.", "Lo ti dico."]}, {"prompt": "¿Cuál está bien? «Tengo tres» (hermanos).", "answer": "Ne ho tre.", "options": ["Ne ho tre.", "Ho tre.", "Li ho tre."]}],
   "r": "Pronombres **delante** del verbo conjugado; **pegados** al "
-       "infinitivo, gerundio e imperativo informal.",
+       "infinitivo, gerundio e imperativo informal. Con modal, los dos: *lo devo fare*, *devo farlo*.",
   "ex": [["*Te lo* dico domani.", "Te lo digo mañana."],
          ["*Gliel'*ho già detto.", "Ya se lo dije."],
          ["Quanti fratelli hai? — *Ne* ho tre.", "¿Cuántos hermanos tenés? — Tengo tres."],
@@ -1262,7 +1262,7 @@ LESSONS = {
   "table": {"head": ["Punto", "Regla"],
             "rows": [["combinados", "me lo, te la, ce ne, ve li, se ne: la i pasa a e"],
                      ["gli + lo", "se pega: glielo, gliela, gliene"],
-                     ["ne", "obligatorio con cantidades: ne ho tre"],
+                     ["ne", "obligatorio con una cantidad sin su sustantivo: ne ho tre"],
                      ["ci", "lugar y complementos con a / in / su"],
                      ["participio", "concuerda con lo, la, li, le y con essere"]]}},
 
@@ -1319,7 +1319,7 @@ LESSONS = {
          ["*A Marco gliel'*ho già detto.", "A Marco ya se lo dije."],
          ["*L'*ho letto, *il libro*.", "Lo leí, el libro."],
          ["*È* Marco *che* ha telefonato.", "Fue Marco el que llamó."]],
-  "warn": "Con el objeto adelantado el pronombre es obligatorio: *il pane lo compro*, no «il pane compro»."},
+  "warn": "Con el objeto adelantado como tema, el pronombre es obligatorio: *il pane lo compro*. Sin pronombre, solo como foco contrastivo: *IL PANE compro, non la pasta*."},
 
  {"h": "Repaso: periodo mixto y concesión",
   "r": "Periodo mixto: condición y efecto en tiempos distintos, como pasado y presente: *se avessi studiato, ora sarei laureato*. Concesión: *benché* + congiuntivo.",

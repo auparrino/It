@@ -70,11 +70,12 @@ ITEMS = [
          note="*lasciare* + infinitivo = «dejar que» (permiso: *lascio parlare Marco*); *fare* + infinitivo = «hacer que» (causa). Los dos van sin «que»."),
     dict(id="c1-caus-04", type="translate", topic="causativo",
          prompt="Traducí al italiano.",
-         stem="Me corté el pelo (fui a la peluquería).",
+         stem="Me hice cortar el pelo.",
          answer="Mi sono fatto tagliare i capelli",
          alt=["Mi sono fatta tagliare i capelli"],
          note="Causativo reflexivo: si lo hizo otro por vos, «farsi + infinito». "
-              "«Mi sono tagliato i capelli» = te lo cortaste vos."),
+              "«Mi sono tagliato i capelli» también se dice al volver de la peluquería, "
+              "pero puede entenderse que te lo cortaste vos; el causativo lo deja claro."),
     dict(id="c1-caus-05", type="choice", topic="percezione",
          prompt="Elegí la forma correcta.",
          stem="Dalla finestra ho visto Maria ___.",

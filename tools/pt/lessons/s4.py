@@ -245,8 +245,8 @@ LESSONS = {
          "*quando*, *porque* y *depois que*.",
 "parts": [
  {"h": "Gerundio e infinitivo", "blocks": [0, 1, 2]},
- {"h": "El participio que abre la frase", "blocks": [3, 4]},
- {"h": "Desarmar y armar", "blocks": [5, 6]},
+ {"h": "El participio que abre la frase", "blocks": [3, 4, 5]},
+ {"h": "Desarmar y armar", "blocks": [6, 7]},
 ],
 "blocks": [
  {"h": "Reducida de gerundio",
@@ -308,6 +308,20 @@ LESSONS = {
   "warn": "Con participios dobles, la reducida usa el **corto**: *pago o "
           "boleto*, *aceito o convite*, *entregues as chaves* (no «pagado», "
           "«aceitado»)."},
+
+ {"h": "tendo + participio: lo que pasó antes",
+  "q": [{"prompt": "«Después de haber leído el informe, la jueza decidió.»", "stem": "___ o relatório, a juíza decidiu.", "answer": "Tendo lido", "options": ["Tendo lido", "Tendo lendo", "Tenho lido"]}],
+  "r": "*tendo* + participio cuenta algo cumplido antes de la acción "
+       "principal: *tendo lido o relatório, decidiu* = después de haber "
+       "leído el informe, decidió.",
+  "ex": [["*Tendo estudado* em Coimbra, ele conhecia bem Portugal.", "Como había estudiado en Coimbra, conocía bien Portugal."],
+         ["*Tendo chegado* tarde, perdi o começo do show.", "Como llegué tarde, me perdí el comienzo del show."],
+         ["*Não tendo recebido* resposta, ela ligou de novo.", "Como no había recibido respuesta, volvió a llamar."],
+         ["*Tendo sido* eleito, o prefeito mudou de ideia.", "Una vez elegido, el intendente cambió de idea."]],
+  "warn": "Con *tendo* solo, el participio no concuerda: *tendo feito as contas* "
+          "(nunca «feitas»). Sin *tendo*, o con *tendo sido*, sí: *feitas as contas*, *tendo sido eleitas*.",
+  "tip": "Hablando se prefiere *depois de* + infinitivo: *depois de ler o "
+         "relatório, decidiu*. *Tendo lido* suena a texto escrito."},
 
  {"h": "Desarmar y armar",
   "r": "Cada reducida tiene su versión desarrollada. Pasar de una a otra es "
@@ -1054,9 +1068,9 @@ LESSONS = {
 "intro": "Vas a pasar de la charla carioca al texto formal y de vuelta: "
          "sujetos, pronombres, *tem / há*, reducciones y vocabulario.",
 "parts": [
- {"h": "La gramática que cambia", "blocks": [0, 1, 2]},
- {"h": "Reducciones y pronombres formales", "blocks": [3, 4]},
- {"h": "Vocabulario y el camino de vuelta", "blocks": [5, 6]},
+ {"h": "La gramática que cambia", "blocks": [0, 1, 2, 3]},
+ {"h": "Reducciones y pronombres formales", "blocks": [4, 5]},
+ {"h": "Vocabulario y el camino de vuelta", "blocks": [6, 7]},
 ],
 "blocks": [
  {"h": "a gente → nós",
@@ -1085,6 +1099,27 @@ LESSONS = {
   "warn": "Tras infinitivo, la *-r* cae y la vocal lleva tilde: *ajudar + o "
           "→ ajudá-lo*, *vender + a → vendê-la*, *partir + os → "
           "parti-los*."},
+
+ {"h": "Repaso: fazê-lo, fi-lo, põe-no",
+  "q": [{"prompt": "En lo formal: «Dão ele de presente.»", "answer": "Dão-no de presente.", "options": ["Dão-no de presente.", "Dão-lo de presente.", "Dão-o de presente."]}],
+  "qq": [{"prompt": "En lo formal: «Fiz ele sem pensar.»", "answer": "Fi-lo sem pensar.", "options": ["Fi-lo sem pensar.", "Fiz-lo sem pensar.", "Fiz-o sem pensar."]}],
+  "r": "Lo viste en la semana 33: tras *-r, -s, -z* la consonante cae y "
+       "el pronombre pasa a *-lo, -la* (*fazê-lo*, *fi-lo*); tras nasal, a "
+       "*-no, -na* (*põe-no*).",
+  "table": {"head": ["Habla", "Formal"],
+            "rows": [["Vou fazer ele.", "Vou fazê-lo."],
+                     ["Fazemos ele.", "Fazemo-lo."],
+                     ["Fiz ele.", "Fi-lo."],
+                     ["Põem ele na mesa.", "Põem-no na mesa."],
+                     ["Trazem elas.", "Trazem-nas."]]},
+  "ex": [["Preciso *fazê-lo* hoje.", "Tengo que hacerlo hoy (-r)."],
+         ["*Fazemo-lo* com prazer.", "Lo hacemos con gusto (-s)."],
+         ["*Fi-lo* porque quis.", "Lo hice porque quise (-z)."],
+         ["As chaves? O porteiro *põe-nas* na caixa.", "¿Las llaves? El portero las pone en la caja (nasal)."]],
+  "warn": "Con *-mos* cae solo la *s*: *fazemos + o → fazemo-lo*. Tras "
+          "nasal no cae nada: *põe-no*, *dão-no*, *trazem-nas*.",
+  "tip": "En Brasil estas formas son de la escritura formal. Hablando, *vou "
+         "fazer isso* o *fiz isso* suenan mucho más naturales."},
 
  {"h": "tem → há",
   "q": [{"prompt": "En lo escrito: «Teve show no Circo Voador.»", "answer": "Houve show no Circo Voador.", "options": ["Houve show no Circo Voador.", "Há show no Circo Voador.", "Haverá show no Circo Voador."]}, {"prompt": "Completá (escrito)", "stem": "___ protestos no centro ontem.", "answer": "Houve", "options": ["Houve", "Houveram", "Tiveram"]}],
