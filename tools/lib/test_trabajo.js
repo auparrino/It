@@ -12,6 +12,8 @@
  *   al repaso como «trab:<escena>:<n>» (Drills);
  * - la misión de la semana es opcional y queda hecha con la producción en
  *   60 % o más y la tarea escrita a su largo; la tarea paga xp una vez;
+ * - cada oración del diálogo y del modelo empieza con mayúscula (la tercera
+ *   pasada encontró cinco «Le» de cortesía bajados a minúscula al empezar);
  * - el guardado descarta un state.trabajo roto; el núcleo no nombra ningún
  *   idioma; app.js llama al módulo en la semana, la ronda, Allena y la pantalla.
  * La gramática y las palabras de cada escena, contra el curso: tools/it/check_trabajo.py.
@@ -81,6 +83,8 @@ pack.LANGS.forEach(function (code) {
       ok(Array.isArray(d) && d.length === 3 && d[0] && d[1] && d[2], S + "turno " + i + ": [quién, lengua, castellano]");
       who[d[0]] = 1;
       ok(!/[¿¡]/.test(d[1]), S + "turno " + i + ": sin ¿ ni ¡ en la lengua meta");
+      // «… alle cinque. la chiamo»: a sentence starts with a capital (the polite «Le» lowered by mistake)
+      ok(!/[.!?]\s+[a-zà-ù]/.test(d[1]) && !/^[a-zà-ù]/.test(d[1]), S + "turno " + i + ": cada oración empieza con mayúscula: " + d[1]);
     });
     ok(Object.keys(who).length >= 2, S + "dos voces o más");
     ok(!s.gloss || Object.keys(s.gloss).every(function (k) { return s.gloss[k]; }), S + "cada glosa con su significado");
@@ -126,6 +130,7 @@ pack.LANGS.forEach(function (code) {
     var c = s.compito || {};
     ok(c.genre === "mail" || c.genre === "messaggio" || c.genre === "mensagem", S + "la tarea es un mail o un mensaje: " + c.genre);
     ok(c.title && c.t && c.model, S + "título, consigna y modelo");
+    ok(!/[.!?]\s+[a-zà-ù]/.test(c.model), S + "el modelo: cada oración empieza con mayúscula");
     ok(Array.isArray(c.punti) && c.punti.length >= 4 && c.punti.length <= 6, S + "4-6 puntos para chequear");
     ok(c.min >= 30 && c.max > c.min && c.max <= 180, S + "el largo: " + c.min + "-" + c.max);
     var nm = words(c.model);
