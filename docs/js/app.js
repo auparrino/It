@@ -507,12 +507,16 @@
 
     // Until the first lesson: a single card (and what was left half done).
     if (top.first) return html + pendHtml + top.html + versionLine();
-    html += top.html + pendHtml + (pend ? "" : dosCard());
+    // «Never two days in a row» (plan 1.3): if yesterday had nothing and today
+    // has nothing yet, the top is only the 2-minute button (the return card,
+    // after three days away, has its own).
+    var gentle = Engine.daysAway(state) >= 2 && Engine.daysAway(state) < 3 && state.totals.attempts > 0 && Engine.todayXp(state) <= 0;
+    html += top.html + pendHtml + (pend ? "" : dosCard(gentle));
     // The week of the percorso and its next mission, on top (3.2: the
     // percorso organises the day, not a plan by minutes).
-    if (!maint) html += weekTopHtml(w, plan, doneN, nm);
+    if (!maint && !gentle) html += weekTopHtml(w, plan, doneN, nm);
     // One habit card a day at most, that can be put off (the return first).
-    html += window.Inicio ? Inicio.habit(oggiHabitCards()) : oggiHabitCards().map(function (c) { return c.html; }).join("");
+    if (!gentle) html += window.Inicio ? Inicio.habit(oggiHabitCards()) : oggiHabitCards().map(function (c) { return c.html; }).join("");
 
     // Everything else, folded: «Más».
     var more = "";
@@ -588,7 +592,8 @@
         return '<i class="h' + lvl + '" title="' + d.key + ": " + d.xp + ' xp"></i>';
       }).join("") + "</div>" +
       '<p class="muted" style="margin:8px 0 0">Cada cuadrado es un día. ' + UI.calendarGreen + " = meta cumplida. " +
-      "Cada 7 días de racha ganás un 🛡️ escudo que la salva si un día no podés.</p></div>";
+      "Un día perdido por semana no corta la racha (🃏 comodín, " + (Engine.jokerLeft(state) ? "esta semana todavía lo tenés" : "esta semana ya lo usaste") + "). " +
+      "Cada 7 días de racha ganás además un 🛡️ escudo para los días de más.</p></div>";
 
     html += '<details class="mas" id="masoggi"' + (window.Inicio && Inicio.moreOpen() ? " open" : "") + '><summary><span class="mas-t">Más</span><span class="muted small">' +
       (maint ? "pausa, repaso, frase del día, calendario" : "pausa, sfida, repaso, frase del día, calendario") + "</span></summary>" + more + "</details>";
@@ -712,11 +717,11 @@
     }
     return items.slice(0, 6);
   }
-  function dosCard() {
+  function dosCard(gentle) {
     var n = window.Progreso ? Progreso.daysThisWeek(state) : 0;
     var done = (state.dos || {})[Engine.dayKey()];
     return '<div class="card weekcard dos"><button class="bigbtn giorno dos" id="dos"><span class="e">⚡</span><b>2 minutos</b><small>' +
-      (done ? "✓ hoy ya cuenta · otra vez, si querés" : "un toque, sin menús · alcanza para el día") + "</small></button>" +
+      (done ? "✓ hoy ya cuenta · otra vez, si querés" : gentle ? "ayer no hubo, no pasa nada: hoy alcanza con esto" : "un toque, sin menús · alcanza para el día") + "</small></button>" +
       '<span class="muted small">' + (n ? "Esta semana: " + dias(n) + " con estudio." : "Hoy empieza la cuenta de la semana.") + "</span></div>";
   }
 
@@ -804,7 +809,7 @@
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION = "c1-vN" in sw.js: test_game
      and the CI check it).  One version for the app and both languages. */
-  var APP_VERSION = "v3.5.1";
+  var APP_VERSION = "v3.6.0";
   // Settimana XVII: Roman numerals on the street signs (LANG.ui.romanWeeks).
   function romano(n) {
     var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
