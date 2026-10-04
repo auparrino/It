@@ -851,12 +851,29 @@
      the first answer, touchStreak); more than that and it ends now, so the
      header does not say 140 while the card says «you are back after 9
      days».  The shields are not wasted on a streak they cannot save. */
+  /* The weekly wild card (plan 1.3): each calendar week one missed day does
+     not break the streak and costs no shield.  What the missed days cost:
+     the wild card for the first one (if that week's is unspent) and a shield
+     for each of the rest.  state.jokerWeek: the week whose wild card went. */
+  function coverPlan(state, nowKey) {
+    var missed = Math.max(0, daysBetween(state.lastPlayed, nowKey) - 1), joker = 0;
+    if (missed > 0) {
+      var p = String(state.lastPlayed).split("-");
+      var first = new Date(+p[0], +p[1] - 1, +p[2] + 1, 12);
+      if (state.jokerWeek !== weekKey(first)) joker = 1;
+      return { missed: missed, joker: joker, shields: missed - joker, week: weekKey(first) };
+    }
+    return { missed: 0, joker: 0, shields: 0, week: null };
+  }
+  // Is this week's wild card still there?
+  function jokerLeft(state, now) { return state.jokerWeek !== weekKey(now || new Date()); }
   function checkStreak(state, now) {
     now = now || new Date();
     if (!state.lastPlayed || !state.streak) return { status: "ok" };
     var gap = daysBetween(state.lastPlayed, dayKey(now)), missed = gap - 1;
     if (gap <= 1) return { status: "ok" };
-    if (missed <= (state.shields || 0)) return { status: "saved", missed: missed };
+    var plan = coverPlan(state, dayKey(now));
+    if (plan.shields <= (state.shields || 0)) return { status: "saved", missed: missed, joker: !!plan.joker };
     var prev = state.streak;
     state.bestStreak = Math.max(state.bestStreak || 0, prev);
     state.streakBroken = { n: prev, at: dayKey(now), missed: missed };
@@ -869,11 +886,11 @@
     var gap = state.lastPlayed ? daysBetween(state.lastPlayed, t) : 99;
     // The phone's clock went back (manual change, travel): keep the streak.
     if (gap < 0) return state.streak;
-    var missed = gap - 1;
+    var missed = gap - 1, plan = gap > 1 && state.lastPlayed ? coverPlan(state, t) : null;
     if (gap === 1) state.streak += 1;
-    else if (missed > 0 && missed <= (state.shields || 0) && state.streak > 0) {
-      state.shields -= missed;
-      state.shieldUsed = t;
+    else if (plan && missed > 0 && plan.shields <= (state.shields || 0) && state.streak > 0) {
+      if (plan.joker) state.jokerWeek = plan.week;
+      if (plan.shields > 0) { state.shields -= plan.shields; state.shieldUsed = t; }
       state.streak += 1;
     } else state.streak = 1;
     // Every 7 days of streak earns a shield (max 3 in the pocket).
@@ -1096,7 +1113,7 @@
     sanitize: sanitize,
     migrateSyllabus: migrateSyllabus,
     save: save,
-    touchStreak: touchStreak, checkStreak: checkStreak, fromRaw: fromRaw, damaged: damaged, SAVE_V: SAVE_V, MODULE_OBJ: MODULE_OBJ, MODULE_ARR: MODULE_ARR,
+    touchStreak: touchStreak, checkStreak: checkStreak, coverPlan: coverPlan, jokerLeft: jokerLeft, fromRaw: fromRaw, damaged: damaged, SAVE_V: SAVE_V, MODULE_OBJ: MODULE_OBJ, MODULE_ARR: MODULE_ARR,
     dayKey: dayKey,
     passed: passed, passMissing: passMissing, FLOOR2: FLOOR2,
     daysBetween: daysBetween,

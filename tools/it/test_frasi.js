@@ -256,11 +256,11 @@ Engine.touchStreak(s, day(2026, 3, 2, 20));
 ok(s.streak === 2, "due giorni di fila: " + s.streak);
 ok(s.shields === 1, "si parte con uno scudo");
 Engine.touchStreak(s, day(2026, 3, 4));       // saltato il 3
-ok(s.streak === 3 && s.shields === 0, "lo scudo salva la serie: " + s.streak + "/" + s.shields);
+ok(s.streak === 3 && s.shields === 1 && s.jokerWeek, "il jolly della settimana salva la serie (non lo scudo): " + s.streak + "/" + s.shields);
 Engine.touchStreak(s, day(2026, 3, 7));       // saltati 5 e 6, niente scudi
 ok(s.streak === 1, "senza scudi la serie riparte");
 for (var d = 8; d <= 13; d++) Engine.touchStreak(s, day(2026, 3, d));
-ok(s.streak === 7 && s.shields === 1, "7 giorni regalano uno scudo: " + s.shields);
+ok(s.streak === 7 && s.shields === 2, "7 giorni regalano uno scudo: " + s.shields);
 Engine.touchStreak(s, day(2026, 3, 31));
 Engine.touchStreak(s, day(2026, 4, 1));
 ok(s.streak === 2, "la serie attraversa il cambio di mese");

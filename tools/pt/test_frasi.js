@@ -359,11 +359,11 @@ Engine.touchStreak(s, day(2026, 3, 2, 20));
 ok(s.streak === 2, "dos días seguidos: " + s.streak);
 ok(s.shields === 1, "se empieza con un escudo");
 Engine.touchStreak(s, day(2026, 3, 4));       // se saltea el 3
-ok(s.streak === 3 && s.shields === 0, "el escudo salva la racha: " + s.streak + "/" + s.shields);
+ok(s.streak === 3 && s.shields === 1 && s.jokerWeek, "el comodín de la semana salva la racha (no el escudo): " + s.streak + "/" + s.shields);
 Engine.touchStreak(s, day(2026, 3, 7));       // se saltean el 5 y el 6, sin escudos
 ok(s.streak === 1, "sin escudos la racha vuelve a empezar");
 for (var d = 8; d <= 13; d++) Engine.touchStreak(s, day(2026, 3, d));
-ok(s.streak === 7 && s.shields === 1, "7 días regalan un escudo: " + s.shields);
+ok(s.streak === 7 && s.shields === 2, "7 días regalan un escudo: " + s.shields);
 Engine.touchStreak(s, day(2026, 3, 31));
 Engine.touchStreak(s, day(2026, 4, 1));
 ok(s.streak === 2, "la racha cruza el cambio de mes");

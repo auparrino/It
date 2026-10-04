@@ -45,7 +45,7 @@ dos, si son chicos). No hace falta explicar nada más.
 | 0.2 | Tablero de cobertura (cuánto falta, por módulo e idioma) | Sonnet | hecho | 2026-10-04 |
 | 1.1 | Arranque de un toque y día mínimo de 2 minutos | Sonnet | hecho | 2026-10-04 |
 | 1.2 | Recordatorio diario sin servidor (evento de calendario .ics) | Sonnet | hecho | 2026-10-04 |
-| 1.3 | Racha con comodín y «nunca dos días seguidos» | Sonnet | pendiente | |
+| 1.3 | Racha con comodín y «nunca dos días seguidos» | Sonnet | hecho | 2026-10-04 |
 | 1.4 | Ruta de trabajo: escenas laborales (italiano) | Opus | pendiente | |
 | 1.5 | Ruta de trabajo: escenas laborales (portugués) | Opus | pendiente | |
 | 1.6 | Juegos de rol laborales con la IA | Opus | pendiente | |
@@ -113,6 +113,14 @@ Las fases 2-5 corrigen; la 6 rediseña sobre contenido ya limpio.
   olvidarte» (con hora, pospone 3 días) desde los 10 intentos hasta que se
   agenda, más un botón en la tarjeta de regreso. Pendiente: abrir el .ics en un
   iPhone y un Android reales → paso 7.1.
+- 2026-10-04 · 1.3 hecho (v3.6.0). Comodín semanal en `engine.js`
+  (`coverPlan`): cada semana (lunes a domingo) el primer día perdido no corta la
+  racha ni gasta escudo (`state.jokerWeek`); los demás días perdidos siguen
+  costando un escudo cada uno. Si ayer no hubo (y no son 3+ días, que tiene su
+  tarjeta de regreso), arriba de Oggi queda solo el botón «2 minutos», con
+  «ayer no hubo, no pasa nada». Cambié dos expectativas de `test_frasi` (IT y
+  PT): el día 3 de marzo ahora lo salva el comodín, no el escudo. Pendiente: la
+  cabecera no muestra el comodín (solo el texto del calendario de Oggi).
 
 ---
 
