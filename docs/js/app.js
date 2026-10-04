@@ -809,7 +809,7 @@
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION = "c1-vN" in sw.js: test_game
      and the CI check it).  One version for the app and both languages. */
-  var APP_VERSION = "v3.6.0";
+  var APP_VERSION = "v3.7.0";
   // Settimana XVII: Roman numerals on the street signs (LANG.ui.romanWeeks).
   function romano(n) {
     var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
@@ -876,6 +876,7 @@
       if (weak.length) wk.push('<button class="ep" data-bank="clinica"><span class="e">🩺</span><span><b>Clínica de tus errores</b>' +
         '<span class="muted">' + weak.map(function (w) { return esc(Diagnosi.LABEL[w.cat] || w.cat); }).join(", ") + "</span></span></button>");
     }
+    if (window.Trabajo) wk = wk.concat(Trabajo.weekButtons(state, week));   // la escena de trabajo de la semana (trabajo.js)
     if (window.Variaciones && Variaciones.eligible(state, week).length)
       wk.push('<button class="ep" data-esc="var"><span class="e">🔁</span><span><b>Variaciones de frase</b>' +
         '<span class="muted">' + Variaciones.eligible(state, week).length + " frases que ya sabés, cambiando una pieza</span></span></button>");
@@ -961,6 +962,7 @@
       C ? C.seasons("al:sc", items, week, (course.seasons || []).map(function (s) { return s.name; })).replace(/class="eps"/g, 'class="scenes"')
         : '<div class="scenes">' + items.map(function (x) { return x.html; }).join("") + "</div>");
 
+    if (window.Trabajo) html += Trabajo.allenaFold(state, week, (course.seasons || []).map(function (s) { return s.name; }));   // para el trabajo (trabajo.js)
     if (window.TresLenguas) html += fold("al:tres", "🔀 Tres lenguas", "contrastes · duelo", noH2(TresLenguas.card(state)));
     return html;
   }
@@ -1897,6 +1899,7 @@
     if (window.Tramo) Tramo.missions(w, state).forEach(m);   // tramo C1 (tramo.js): escucha larga y tarea
     if (window.Radio) Radio.missions(w, state).forEach(m);   // la serie Radio de las semanas 6-25 (radio.js)
     if (window.Fuera) Fuera.missions(w, state).forEach(m);   // fuera de la app, opcional (fuera.js)
+    if (window.Trabajo) Trabajo.missions(w, state).forEach(m);   // la escena de trabajo de la semana, opcional (trabajo.js)
     if (window.Lab) {
       Lab.RULES.forEach(function (r, k) {
         if (ponteWeek(r, k) !== w.week) return;
@@ -2025,6 +2028,7 @@
     else if (window.Tramo && Tramo.handles(kind)) Tramo.go(kind, arg);
     else if (window.Capas && Capas.handles(kind)) Capas.go(kind, arg);
     else if (window.Fuera && Fuera.handles(kind)) Fuera.go(kind, arg);
+    else if (window.Trabajo && Trabajo.handles(kind)) Trabajo.go(kind, arg);
   }
 
   function missions(w, st, nChal) {
@@ -2272,6 +2276,8 @@
     else if (kind === "micro") items = Drills.buildReview(course, state, 5, drillOpts());
     else if (kind === "duello") items = window.Duelli ? Duelli.session(arg, state.cards) : [];
     else if (kind === "variaciones") items = window.Escritos ? Escritos.variaciones(state, arg, course) : [];
+    // a scene of the work route: its phrases or its production items (trabajo.js)
+    else if (kind === "trabajo") items = window.Trabajo ? Trabajo.session(arg, state, { silent: state.silent }) : [];
     else if (kind === "b-voc") items = Banca.vocabSession(state, 12);
     else if (kind === "b-freq") items = Banca.vocabSessionFor(state, freqGaps(24), 12);
     else if (kind === "b-forme") items = Banca.formsSession(state, 12);
@@ -3850,6 +3856,8 @@
       var duelExtra = "⚔️ Forma elegida bien: " + dpct + " %" + (dC.length ? " · pista encontrada: " + Math.round(okD(dC) / dC.length * 100) + " %" : "");
     }
 
+    if (round.kind === "trabajo" && window.Trabajo) Trabajo.roundDone(state, round.arg, pct);
+
     if (round.kind === "sfida") {
       var prevS = state.challengeLog[round.arg];
       state.challengeLog[round.arg] = { q: pct >= 80 ? 2 : pct >= 50 ? 1 : 0,
@@ -4194,7 +4202,8 @@
      reading speed, all the practice, and «Consultar». */
   function allMaterialCard() {
     var all = UI.allTabs || [["frasi", "🚣", UI.train], ["leggi", "📖", UI.read]];
-    var desc = { frasi: "la práctica de todas las semanas: frases, Laboratorio, duelos, Banco, escritura guiada, Tres lenguas",
+    var desc = { frasi: "la práctica de todas las semanas: frases, Laboratorio, duelos, Banco, escritura guiada, " +
+                   (window.Trabajo && Trabajo.scenes().length ? "las escenas de trabajo, " : "") + "Tres lenguas",
                  leggi: "todas las lecturas y escuchas, la Biblioteca, tus cuentos y tu velocidad de lectura" };
     return '<div class="card allmat"><h2>📦 Todo el material</h2>' +
       '<p class="muted small">Lo de cada semana está en la página de esa semana. Acá, todo junto:</p>' +
@@ -4764,6 +4773,7 @@
     else if (window.Progreso && Progreso.owns(s)) html = Progreso.render(s);    // tu progreso (progreso.js)
     else if (window.Capas && Capas.owns(s)) html = Capas.render(s);   // «Consultar» (js/capas.js)
     else if (window.Fuera && Fuera.owns(s)) html = Fuera.render(s);   // fuera de la app (fuera.js)
+    else if (window.Trabajo && Trabajo.owns(s)) html = Trabajo.render(s);   // para el trabajo (trabajo.js)
 
     var gb = $("#glossbox");
     if (gb) gb.classList.remove("on");
@@ -4960,6 +4970,7 @@
     if (window.Progreso) Progreso.wire(view.screen);
     if (window.Capas) Capas.wire(view.screen);
     if (window.Fuera) Fuera.wire(view.screen);
+    if (window.Trabajo) Trabajo.wire(view.screen);
     on("#lesback", function () { view.screen = "briefing"; render(); });
     on("#lesplay", function () {
       var lw = course.weeks[view.week - 1];
@@ -4974,6 +4985,7 @@
     on("#again", function () { startRound(round.kind, round.arg); });
     on("#quit", function () {
       clearPending();
+      if (round.kind === "trabajo" && window.Trabajo && Trabajo.reopen(round.arg)) return;   // back to the scene (trabajo.js)
       if (round.from === "briefing") { view.tab = "percorso"; view.screen = "briefing"; render(); window.scrollTo(0, 0); }
       else if (round.from === "hoy") go("oggi");
       else if (round.kind === "lettura") go("leggi");
@@ -7337,6 +7349,19 @@
     recordFindings: function (findings, text) {
       if (window.Errores && Errores.recordFindings(state, findings, text, {}).length) persist();
     },
+    show: showScreen,
+    toWeek: function () { view.tab = "percorso"; view.screen = "briefing"; render(); window.scrollTo(0, 0); }
+  });
+
+  // Para el trabajo (trabajo.js): las escenas de oficina, desde el A2.
+  if (window.Trabajo) Trabajo.attach({
+    state: function () { return state; }, persist: persist, render: render, go: go, toast: toast, mk: mk,
+    lexicon: scriviLexicon, ui: function () { return UI; }, speak: speak,
+    gain: function (n, strand) { gain(n); if (strand && n) Engine.addStrand(state, strand, n); renderHeader(); },
+    recordFindings: function (findings, text) {
+      if (window.Errores && Errores.recordFindings(state, findings, text, {}).length) persist();
+    },
+    startRound: function (kind, arg) { startRound(kind, arg); },
     show: showScreen,
     toWeek: function () { view.tab = "percorso"; view.screen = "briefing"; render(); window.scrollTo(0, 0); }
   });

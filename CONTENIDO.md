@@ -39,6 +39,7 @@ italiano.
 | Banco (palabras, oraciones, errores, interferencias) | `tools/<código>/bank/*.py` | `build_bank.py` (descarta y avisa lo que no valida), `test_diagnosi.js`, `tools/lib/test_fix_banco.js` |
 | Palabras de la semana | `tools/it/bank/parole_settimana.py`, `tools/it/bank/parole_c1.py`; `tools/pt/vocab/s*.py` | `test_game.js` |
 | Frases de conversación (escenas) | `docs/lang/<código>/frasi_data.js` | `test_frasi.js`, `tools/lib/test_fix_frases.js` |
+| Ruta de trabajo (escenas de oficina: diálogo, frases, ejercicios, mail) | `docs/lang/<código>/trabajo_data.js` | `tools/lib/test_trabajo.js`, `tools/it/check_trabajo.py` |
 | Lectura de la semana | `docs/lang/<código>/letture_settimana.js` | `tools/it/check_letture.py`, `tools/pt/check_letture.py` |
 | Lecturas en serie y de cultura | `docs/lang/<código>/letture_data.js` | `test_frasi.js` |
 | Escucha, pares mínimos, dictogloss | `docs/lang/<código>/ascolto_data.js`, `docs/lang/<código>/dictogloss_data.js` | `test_suoni.js` |
@@ -121,6 +122,13 @@ chunks: [seis bloques a recuperar], keywords, gloss }`.
 
 **Frase** (`frasi_data.js`): cada escena `{ id, week, emoji, name, blurb,
 phrases: [[lengua meta, castellano, nota]] }`.
+
+**Escena de trabajo** (`trabajo_data.js`): `{ id: "t-…", week, level, emoji,
+name, blurb, grammar, situazione, dialogo: [[quién, lengua meta, castellano]],
+gloss, phrases: [[lengua meta, castellano, nota, registro]], items: [ítems
+translate, cloze, typed o fixerr], compito: {genre, title, min, max, t, punti,
+model} }`. Los ítems vuelven al repaso por su posición (`trab:<escena>:<n>`):
+se corrigen en su lugar, no se insertan en el medio.
 
 ## Construir y probar
 

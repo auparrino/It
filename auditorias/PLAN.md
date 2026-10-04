@@ -46,7 +46,7 @@ dos, si son chicos). No hace falta explicar nada más.
 | 1.1 | Arranque de un toque y día mínimo de 2 minutos | Sonnet | hecho | 2026-10-04 |
 | 1.2 | Recordatorio diario sin servidor (evento de calendario .ics) | Sonnet | hecho | 2026-10-04 |
 | 1.3 | Racha con comodín y «nunca dos días seguidos» | Sonnet | hecho | 2026-10-04 |
-| 1.4 | Ruta de trabajo: escenas laborales (italiano) | Opus | pendiente | |
+| 1.4 | Ruta de trabajo: escenas laborales (italiano) | Opus | hecho | 2026-10-04 |
 | 1.5 | Ruta de trabajo: escenas laborales (portugués) | Opus | pendiente | |
 | 1.6 | Juegos de rol laborales con la IA | Opus | pendiente | |
 | 2.1 | Auditoría exhaustiva IT: lecciones (387 bloques) | Opus | pendiente | |
@@ -121,6 +121,22 @@ Las fases 2-5 corrigen; la 6 rediseña sobre contenido ya limpio.
   «ayer no hubo, no pasa nada». Cambié dos expectativas de `test_frasi` (IT y
   PT): el día 3 de marzo ahora lo salva el comodín, no el escudo. Pendiente: la
   cabecera no muestra el comodín (solo el texto del calendario de Oggi).
+- 2026-10-04 · 1.4 hecho (v3.7.0). Ruta «Per il lavoro»: `js/trabajo.js` +
+  `lang/it/trabajo_data.js`, 13 escenas de la semana 8 a la 40 (presentarse,
+  pausa café, instrucciones, llegar tarde, videollamada, mail formal,
+  contestar y reenviar, teléfono, opinar, resultados, reclamo, plazos,
+  delegar), cada una con diálogo (una voz por personaje), 12-13 frases con su
+  construcción (son frases de Frasi: mismo repaso), 6 ítems de producción
+  (repaso `trab:`) y un mail o mensaje con lista, corrector y modelo. Misión
+  opcional en su semana y sección en Allena. `tools/it/check_trabajo.py`
+  controla gramática y palabras contra el curso. Revisión: dos revisores
+  independientes (70 y 73 hallazgos, ~22 comunes en la primera mitad: ~2 %
+  sin ver), un tercero decidió y una tercera pasada corrigió 6 más (5 de una
+  clase, ahora en el test: oraciones que empezaban con minúscula). Registro:
+  las 249 unidades en `revisada-2`. De paso, tres falsos positivos del
+  corrector de Scrivi (*te la inoltro*, *del 10% rispetto*, *come mai*).
+  `lang/pt/trabajo_data.js` queda vacío para el 1.5. Pendiente: probar en el
+  teléfono la lectura del diálogo con varias voces → paso 7.1.
 
 ---
 

@@ -69,7 +69,7 @@ inventario (unidades sin registrar, huérfanas, o revisadas con un hash viejo).
 
 | idioma | unidades | 2× | 1× | disp | pend | abiertos | terminado |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| it | 14029 | 0 | 0 | 0 | 14029 | 0 | 0,0 % |
+| it | 14278 | 249 | 0 | 0 | 14029 | 0 | 1,7 % |
 | pt | 11827 | 0 | 0 | 0 | 11827 | 0 | 0,0 % |
 | comun | 204 | 0 | 0 | 0 | 204 | 0 | 0,0 % |
 
@@ -124,12 +124,15 @@ inventario (unidades sin registrar, huérfanas, o revisadas con un hash viejo).
 | scrivi | 48 | 0 | 0 | 0 | 48 | 0 | 0,0 % |
 | semana | 52 | 0 | 0 | 0 | 52 | 0 | 0,0 % |
 | sfide | 339 | 0 | 0 | 0 | 339 | 0 | 0,0 % |
+| trabajo-escena | 13 | 13 | 0 | 0 | 0 | 0 | 100,0 % |
+| trabajo-frases | 158 | 158 | 0 | 0 | 0 | 0 | 100,0 % |
+| trabajo-items | 78 | 78 | 0 | 0 | 0 | 0 | 100,0 % |
 | tramo | 24 | 0 | 0 | 0 | 24 | 0 | 0,0 % |
 | tramo-generos | 8 | 0 | 0 | 0 | 8 | 0 | 0,0 % |
 | variaciones | 29 | 0 | 0 | 0 | 29 | 0 | 0,0 % |
 | vocab-semana | 917 | 0 | 0 | 0 | 917 | 0 | 0,0 % |
 | voces | 128 | 0 | 0 | 0 | 128 | 0 | 0,0 % |
-| **total it** | 14029 | 0 | 0 | 0 | 14029 | 0 | 0,0 % |
+| **total it** | 14278 | 249 | 0 | 0 | 14029 | 0 | 1,7 % |
 
 </details>
 

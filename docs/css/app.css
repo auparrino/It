@@ -864,6 +864,23 @@ svg.speed-curve text { font-size: 9px; fill: currentColor; opacity: .6; }
 .fu-q .chip { min-height: 36px; margin-left: 6px; border: 1.5px solid var(--k-line); border-radius: 99px; padding: 4px 12px; background: none; color: inherit; font: inherit; font-size: .875rem; }
 .fu-q .chip.on { border-color: var(--k-acc); background: var(--k-acc); color: #fff; }
 
+/* Para el trabajo (trabajo.js): la escena */
+.tr-dlg { list-style: none; padding: 0; margin: 10px 0 6px; }
+.tr-dlg li { margin: 0 0 10px; line-height: 1.5; }
+.tr-who { display: inline-block; min-width: 4.5em; }
+.tr-es { display: block; font-size: .9rem; margin-top: 2px; }
+.tr-say, .tr-punti .chip { min-height: 36px; min-width: 36px; border: 1.5px solid var(--k-line); border-radius: 99px; padding: 2px 8px; background: none; color: inherit; font: inherit; font-size: .875rem; cursor: pointer; }
+.tr-punti { list-style: none; padding: 0; margin: 4px 0 10px; }
+.tr-punti li { margin: 6px 0; line-height: 1.45; }
+.tr-punti .chip.on { border-color: var(--k-acc); background: var(--k-acc); color: #fff; }
+.tr-frasi { margin: 6px 0 12px; }
+.tr-f { border-bottom: 1px solid var(--k-line); padding: 8px 0; }
+.tr-f summary { cursor: pointer; line-height: 1.45; }
+.tr-f summary .muted { display: block; font-size: .9rem; }
+.tr-f .note { margin-top: 6px; }
+.tr-gloss ul { columns: 2 14rem; column-gap: 18px; padding-left: 1.1em; }
+.tr-model p { white-space: pre-line; line-height: 1.55; }
+
 /* Las palabras de la semana, primero y como las misiones (3.4) */
 .mission.word { cursor: default; }
 .mission.word:active { transform: none; }

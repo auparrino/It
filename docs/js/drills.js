@@ -1032,6 +1032,7 @@
     if (root.EscrituraPlus && id.indexOf("ep:") === 0) return root.EscrituraPlus.reviewItem(id, opts && opts.state);   // reformulación
     if (root.Biblioteca && id.indexOf("lib:") === 0) return root.Biblioteca.reviewItem(id, opts && opts.state);   // 📌 de la Biblioteca
     if (root.TresLenguas && id.indexOf("tres:") === 0) return root.TresLenguas.reviewItem(id);   // lo fallado en Tres lenguas
+    if (root.Trabajo && id.indexOf("trab:") === 0) return root.Trabajo.reviewItem(id);   // los ejercicios de las escenas de trabajo
     // a rule: a new sentence with it; an item another module left (Engine.enqueue)
     if (root.Reglas && id.indexOf("r:") === 0) return root.Reglas.reviewItem(id, opts && opts.state);
     if (root.Reglas && id.indexOf("own:") === 0) return root.Reglas.ownItem(opts && opts.state, id);
@@ -1046,6 +1047,7 @@
               (root.EscrituraPlus && id.indexOf("ep:") === 0) ||
               (root.Biblioteca && id.indexOf("lib:") === 0) ||
               (root.TresLenguas && id.indexOf("tres:") === 0 && !!root.TresLenguas.reviewItem(id)) ||
+              (root.Trabajo && id.indexOf("trab:") === 0 && !!root.Trabajo.reviewItem(id)) ||
               (Duelli && id.indexOf("duel:") === 0 && !!Duelli.reviewItem(id)));
   }
 
