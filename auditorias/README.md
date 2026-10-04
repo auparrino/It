@@ -7,6 +7,9 @@ haber cambiado después (por eso el test de rutas de los `.md`,
 
 | Documento | Versión | Qué mira |
 |---|---|---|
+| [PLAN.md](PLAN.md) | v3.4 → | **El plan vigente**: auditoría exhaustiva con registro, hábito y ruta de trabajo, didáctica. Se ejecuta paso a paso («Seguí con el plan») |
+| [2026-10-portugues-contenido.md](2026-10-portugues-contenido.md) | v3.4 | Auditoría de contenido de *Rumo C1*, semana por semana |
+| [2026-09-semanal.md](2026-09-semanal.md) | v3.4 | Auditoría semanal de *La Via C1*, ejercicio por ejercicio |
 | [2026-09-v3.md](2026-09-v3.md) | v2.8 → 3.0 | Síntesis de la auditoría para la 3.0; el detalle por frente está en [2026-09-v3/](2026-09-v3/) (A núcleo, B experiencia, C corrección, D italiano, E portugués, F módulos, G base técnica) |
 | [2026-09-general.md](2026-09-general.md) | v2.5 | Auditoría general: núcleo, teléfono, herramientas y CI (sección B), contenido de los dos idiomas |
 | [2026-09-italiano.md](2026-09-italiano.md) | v2.1 | *La Via C1* jugada como principiante absoluto |
