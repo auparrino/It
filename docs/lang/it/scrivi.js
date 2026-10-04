@@ -813,7 +813,8 @@
       }
       // 17. Después de un número, plural: 32 anni (no «anno», ni «anne»)
       if ((/^\d+$/.test(w) && +w > 1) || (NUMS.test(w) && !/^(uno|una|un|primo|prima|secondo|terzo|quarto|quinto|sesto|settimo|ottavo|nono|decimo|mezzogiorno|mezzanotte|sei)$/.test(w))) {
-        if (ni === i + 1 && !personFlag[ni] && !/^(alle|le|dalle|entro|verso|delle)$/.test(p) && !/^(gennaio|febbraio|marzo|aprile|maggio|giugno|luglio|agosto|settembre|ottobre|novembre|dicembre|euro|per|volte|e|o)$/.test(n)) {
+        // «del 10% rispetto all'anno scorso»: a percentage, not a count of «rispetto»
+        if (ni === i + 1 && !personFlag[ni] && !/^(alle|le|dalle|entro|verso|delle)$/.test(p) && String(text).charAt(t.at + t.len) !== "%" && !/^(gennaio|febbraio|marzo|aprile|maggio|giugno|luglio|agosto|settembre|ottobre|novembre|dicembre|euro|per|volte|e|o)$/.test(n)) {
           var nw = n, pluralOk = DATA.nounsByPlural[nw] && DATA.nounsByPlural[nw].pl === nw;
           var cand = DATA.nouns[nw] && DATA.nouns[nw].s === nw && DATA.nouns[nw].pl !== nw ? DATA.nouns[nw].pl : null;
           if (ES_EXTRA[nw]) cand = null;
@@ -1273,7 +1274,8 @@
       /* --- artículos por sonido y elisión --- */
       var fem1 = n ? feminine(n) : false;
       if (tk[i + 1] && tk[i + 1].w && !taken(i, 2) && !/^(e|o|a|ed|ad)$/.test(n)) {
-        var pronLike = /^(lo|la|gli)$/.test(w) && (isVerb(n) || isInf(n) || AVE_PRES[n]);
+        // «te la inoltro», «me lo mandi»: after me/te/ce/ve/se, a clitic, never an article
+        var pronLike = (/^(lo|la|gli)$/.test(w) && (isVerb(n) || isInf(n) || AVE_PRES[n])) || (/^(lo|la|li|le)$/.test(w) && /^(me|te|ce|ve|se)$/.test(p));
         if (U.ARTICLES[w] && !pronLike && !(w === "gli" && !isNoun(n) && !DATA.adj[n] && known(n)) && !(w === "uno" && !isNoun(n) && !DATA.adj[n]) &&
             !(/^(uno|una)$/.test(w) && /^(di|d'|dei|degli|delle|del|dello|della|tra|fra|dai|dagli|dalle|che)$/.test(n)) &&   // uno dei, una delle: a pronoun
             !(w === "una" && !isNoun(n) && !DATA.adj[n] && known(n)) && !(w === "lo" && !isNoun(n) && !DATA.adj[n]) && !NUMS.test(n) &&
@@ -1699,7 +1701,8 @@
 
     /* --- orden --- */
     // «Mai vado» → non vado mai; «già ha finito» → ha già finito
-    if ((w === "mai" || w === "già") && (t.start || t.clause || (p && (isNoun(p) || tk[i - 1].cap || /^(io|tu|lui|lei|noi|voi|loro)$/.test(p)))) && p !== "non") {
+    // («come mai sono…?» is «¿por qué…?», not a negation)
+    if ((w === "mai" || w === "già") && (t.start || t.clause || (p && (isNoun(p) || tk[i - 1].cap || /^(io|tu|lui|lei|noi|voi|loro)$/.test(p)))) && p !== "non" && p !== "come") {
       var vk = i + 1;
       if (CLITIC.test(W(vk))) vk++;
       var vw = W(vk);
