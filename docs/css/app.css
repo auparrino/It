@@ -72,6 +72,9 @@ h2 { font-size: 1.2rem; font-weight: 800; margin: 22px 0 10px; letter-spacing: -
 .big { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 14px 0; }
 .bigbtn:active:not(:disabled) { transform: scale(.985); filter: brightness(.94); }
 .bigbtn:disabled { opacity: .55; filter: saturate(.4); }
+.bigbtn.dos { width: 100%; min-height: 84px; margin-bottom: 8px; }
+.card.dos { padding: 0; background: none; border: 0; box-shadow: none; }
+.card.dos > .muted { display: block; text-align: center; }
 .bigbtn .e { font-size: 1.5rem; line-height: 1; margin-bottom: 8px; }
 .bigbtn small { opacity: .9; font-size: .78rem; font-weight: 600; letter-spacing: .01em; }
 
