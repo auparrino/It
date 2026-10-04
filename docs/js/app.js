@@ -627,10 +627,18 @@
         (state.streakBroken && state.streakBroken.n > 1 ? '<span class="muted small">La racha de ' + state.streakBroken.n + " días se cortó; tu mejor racha queda en " + (state.bestStreak || state.streakBroken.n) + ". Hoy empieza otra.</span>" : "") +
         '<span class="muted">' + (fresh === "semana" ? "Y es lunes: buen día para retomar. " : fresh === "mes" ? "Y empieza el mes: buen momento para volver. " : "") +
           "Cinco minutos con lo que más se enfrió y seguimos" + (ideal ? " hacia lo tuyo: «" + esc(ideal) + "»" : "") + ".</span>" +
-        '<span class="row" style="margin-top:10px"><button class="btn" id="ritorno">▶︎ 5 minutos para retomar</button></span>' +
+        '<span class="row" style="margin-top:10px"><button class="btn" id="ritorno">▶︎ 5 minutos para retomar</button>' +
+          (state.icsAt ? "" : '<button class="tab" id="agendar" data-t="' + esc(state.remind || "13:30") + '">📅 Agendar mi rato diario</button>') + "</span>" +
         (state.pauseAsk !== Engine.dayKey() ? '<span class="muted small">¿Qué pasó? <button class="tab" data-why="tiempo">sin tiempo</button> ' +
           '<button class="tab" data-why="dificil">se puso difícil</button> <button class="tab" data-why="aburrido">me aburrí</button> ' +
           '<button class="tab" data-why="olvide">me olvidé</button></span>' : "") + "</div>" });
+    }
+    // First week: the daily slot in the calendar (plan 1.2), once, until it is done
+    if (!state.icsAt && !maint && state.totals.attempts >= 10 && state.totals.attempts < 400) {
+      out.push({ id: "agenda", html: '<div class="card weekcard agenda"><span class="muted">📅 Para no olvidarte</span>' +
+        "<b>Agendá tu rato diario: un evento en tu calendario, con alarma, que abre tu semana.</b>" +
+        '<span class="row" style="margin-top:10px"><input type="time" id="agendatime" value="' + esc(state.remind || "13:30") + '">' +
+        '<button class="btn" id="agendar">Agendar</button></span></div>' });
     }
     // weekly close: on the first visit of a new week, about the week before
     var wk = Engine.weekKey(), prevWk = Engine.weekKey(new Date(Date.now() - 7 * 86400000));
@@ -747,6 +755,11 @@
 
   function wireHabit() {
     on("#dos", function () { startRound("dos"); });
+    on("#agendar", function () {
+      var ti = $("#agendatime"), b = $("#agendar");
+      scheduleReminder((ti && ti.value) || (b && b.dataset.t) || "13:30");
+      render();
+    });
     on("#ritorno", function () { state.pauseAsk = Engine.dayKey(); persist(); startRound("ritorno"); });
     on("#hexport", function () { exportSave(); render(); });
     document.querySelectorAll("[data-why]").forEach(function (b) {
@@ -791,7 +804,7 @@
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION = "c1-vN" in sw.js: test_game
      and the CI check it).  One version for the app and both languages. */
-  var APP_VERSION = "v3.5.0";
+  var APP_VERSION = "v3.5.1";
   // Settimana XVII: Roman numerals on the street signs (LANG.ui.romanWeeks).
   function romano(n) {
     var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
@@ -4226,7 +4239,7 @@
           }).join("") + "</select></label>" +
         '<label class="set"><span>Modo oficina 🤫<small>nada suena solo; el 🔊 sigue andando si lo tocás</small></span>' +
           '<input type="checkbox" id="silent"' + (state.silent ? " checked" : "") + "></label>" +
-        '<label class="set"><span>Recordatorio diario<small>se agrega a tu calendario y abre tu semana</small></span>' +
+        '<label class="set"><span>Agendar mi rato diario<small>' + (state.icsAt ? 'ya lo agregaste · de nuevo si cambiás la hora' : 'un evento en tu calendario, con alarma, que abre tu semana') + '</small></span>' +
           '<span class="row"><input type="time" id="remtime" value="' +
             esc(state.remind || "13:30") + '"><button class="btn ghost" id="remind">📅 Agregar</button></span></label>' +
       "</div>" +
@@ -4680,6 +4693,16 @@
       "DESCRIPTION:" + UI.icsAlarm, "END:VALARM",
       "END:VEVENT", "END:VCALENDAR"
     ].join("\r\n");
+  }
+
+  /* Agendar mi rato diario (plan 1.2): the .ics, the time kept and the day
+     it was added (state.icsAt: the offers stop once the learner did it). */
+  function scheduleReminder(t) {
+    state.remind = t;
+    state.icsAt = Date.now();
+    persist();
+    download(new Blob([reminderIcs(t)], { type: "text/calendar" }), UI.icsFile);
+    toast("Abrí el archivo para agregarlo a tu calendario.", 3000);
   }
 
   /* ---------------------------------------------------------------- router */
@@ -6968,13 +6991,7 @@
     if (ret) ret.onchange = function () { state.retention = +ret.value; persist(); toast("Retención: " + Math.round(state.retention * 100) + " %"); };
     var notte = $("#notte");
     if (notte) notte.onchange = function () { state.notte = notte.checked; persist(); };
-    on("#remind", function () {
-      var t = $("#remtime").value || "13:30";
-      state.remind = t;
-      persist();
-      download(new Blob([reminderIcs(t)], { type: "text/calendar" }), UI.icsFile);
-      toast("Abrí el archivo para agregarlo a tu calendario.", 3000);
-    });
+    on("#remind", function () { scheduleReminder($("#remtime").value || "13:30"); });
     on("#export", exportSave);
     on("#switchlang", function () { flushPersist(); if (window.Boot) Boot.switchTo(UI.switchCode); });
     on("#import", function () { $("#importfile").click(); });
@@ -7292,7 +7309,7 @@
       if (ids.length) playLibrary(Drills.shuffle(ids));
     },
     show: showScreen, ubicacion: startUbicacion, exam: esameResult,
-    ics: function (t) { download(new Blob([reminderIcs(t)], { type: "text/calendar" }), UI.icsFile); toast("Abrí el archivo para agregarlo a tu calendario.", 3000); },
+    ics: scheduleReminder,
     share: shareBlob
   });
   // Tu progreso (progreso.js): la pantalla, y el reloj de estudio.

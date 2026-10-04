@@ -14,4 +14,10 @@ ok(/dosItems\(\) \{[\s\S]*?slice\(0, 6\)/.test(APP), "la ronda es de seis ítems
 
 var E = pack("it", { upTo: "app.js" }).Engine;
 ok(E.MODULE_OBJ.indexOf("dos") >= 0, "state.dos está entre los campos de módulo (test_estado lo controla)");
+// Plan 1.2: agendar el rato diario
+ok(/function scheduleReminder\(t\)[\s\S]*?state\.icsAt = Date\.now\(\)[\s\S]*?text\/calendar/.test(APP), "scheduleReminder guarda la hora y el día y baja el .ics");
+ok(/ics: scheduleReminder/.test(APP) && /on\("#remind", function \(\) \{ scheduleReminder/.test(APP), "el perfil y el arranque usan scheduleReminder");
+ok(/id: "agenda"/.test(APP) && /!state\.icsAt/.test(APP), "tarjeta «agenda» mientras no esté agendado");
+ok(/id="agendar" data-t=/.test(APP), "la tarjeta de regreso ofrece agendar");
+ok(/agenda: 3/.test(fs.readFileSync(path.join(pack.DOCS, "js", "inicio.js"), "utf8")), "«Después» pospone la tarjeta agenda");
 T.done();
