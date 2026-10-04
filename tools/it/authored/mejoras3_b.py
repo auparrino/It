@@ -278,9 +278,9 @@ ITEMS = [
 
     # ============ Settimana 49: registro alto e coesione testuale ============
     _tr("m3-49-01", 49, R49,
-        "Cabe señalar que los datos disponibles todavía son incompletos.",
+        "Cabe señalar que los datos disponibles todavía no están completos.",
         ["{Va rilevato|Va notato|Va sottolineato|Va detto|Occorre rilevare|Occorre notare|Bisogna rilevare} "
-         "che i dati disponibili {sono|risultano} ancora incompleti."],
+         "che i dati disponibili non {sono|risultano} ancora completi."],
         "Fórmula impersonal de registro alto: *va rilevato che* (cabe señalar que). También *occorre "
         "notare che* o *va sottolineato che*.", prompt=TRF),
     _tr("m3-49-02", 49, R49,
@@ -334,8 +334,8 @@ ITEMS = [
         "*Però* y *passare* son del habla; en un texto formal van *tuttavia* o *ciononostante* (con "
         "punto y coma delante) y *superare l'esame*.", prompt=P49, typ="typed"),
     _ty("m3-49-10", 49, R49, P49,
-        "Ho parlato con il direttore e con il suo assistente; l'assistente mi ha dato i moduli. → "
-        "Ho parlato con il direttore e con il suo assistente; ___ mi ha dato i moduli.",
+        "Ho parlato con il direttore e con il suo segretario; il segretario mi ha dato i moduli. → "
+        "Ho parlato con il direttore e con il suo segretario; ___ mi ha dato i moduli.",
         "quest'ultimo",
         "*Quest'ultimo* retoma al último nombrado sin repetirlo y evita la ambigüedad de un simple "
         "*lui*, que podría ser el director."),
