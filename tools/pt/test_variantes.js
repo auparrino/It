@@ -221,7 +221,8 @@ SRC.forEach(function (src) {
       if (seen[key] || src.accept.some(function (a) { return same(a, v); })) return;
       seen[key] = 1;
       var j = judge(v, src);
-      var reg = fam === "habla" || fam === "pronombre_habla";
+      var reg = fam === "habla" || fam === "pronombre_habla" ||
+                (fam === "sinonimos" && /\b(grana|busão)\b/.test(v));   // sinónimos del habla
       // registro formal: la forma del habla es «Casi», no «bien» ni «mal»
       var good = reg && src.formal ? j.verdict === "quasi" : j.verdict === "giusto";
       tally(stat, fam, good);

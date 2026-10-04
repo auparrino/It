@@ -347,8 +347,9 @@ LESSONS = {
          ["*Sebbene abbia dormito* dieci ore, è ancora stanco.", "Aunque durmió diez horas, sigue cansado."],
          ["È la cosa più bella che io *abbia* mai *visto*.", "Es lo más lindo que vi en mi vida."],
          ["*Chiunque sia stato*, ha sbagliato.", "Quienquiera que haya sido, se equivocó."]],
-  "warn": "*dopo che* no es concesiva: va con **indicativo**. *Dopo che è "
-          "partito...*, nunca «dopo che sia partito».",
+  "warn": "*dopo che* no es concesiva: va con **indicativo**: *dopo che è "
+          "partito...* «Dopo che sia partito» se oye, por contagio de "
+          "*prima che*, pero la norma lo desaconseja.",
   "more": ["También piden congiuntivo *l'unico che* (el único que: *è "
            "l'unico che mi abbia aiutato*) y *chiunque* (quienquiera que, "
            "cualquiera que): *chiunque abbia aperto la porta, dovrà "
@@ -601,7 +602,7 @@ LESSONS = {
 ]},
 
 33: {
-"intro": "El período hipotético: tres tipos y una prohibición. Si lo tenés "
+"intro": "El período hipotético: tres tipos y una trampa. Si lo tenés "
          "automatizado, tenés el B2.",
 "parts": [
  {"h": "Realidad y posibilidad", "blocks": [0, 1],
@@ -625,15 +626,18 @@ LESSONS = {
            "algo improbable o contrario a los hechos de hoy. El III, de algo "
            "que ya no puede pasar porque el momento pasó."]},
 
- {"h": "Nunca condizionale después de se",
-  "r": "Detrás de *se* **nunca** va condizionale: congiuntivo con el *se*, "
-       "condizionale en la otra parte.",
+ {"h": "Sin condizionale detrás del se hipotético",
+  "r": "Detrás del *se* que pone una condición no va condizionale: congiuntivo "
+       "con el *se*, condizionale en la otra parte.",
   "ex": [["Se *fossi* ricco, *comprerei* una casa al mare.", "Si fuera rico, me compraría una casa en la playa."],
          ["Se *potessi*, *verrei* subito.", "Si pudiera, iría enseguida."],
          ["Se *fosse venuto*, l'*avremmo visto*.", "Si hubiera venido, lo habríamos visto."]],
   "warn": "Nada de «se avrei», «se sarei» ni «se vorrei». El castellano "
           "correcto también dice «si tuviera», pero el «si tendría» que se "
-          "oye por ahí se cuela."},
+          "oye por ahí se cuela.",
+  "tip": "La excepción: el *se* de pregunta indirecta («no sé si») no pone "
+         "condición y sí admite condizionale: *non so se verrebbe* (no sé si "
+         "vendría)."},
 
  {"h": "Los mixtos, los más reales",
   "r": "Se puede cruzar un pasado imposible con una consecuencia presente, o "
@@ -968,7 +972,7 @@ LESSONS = {
          "= hablo)."},
 
  {"h": "El patrón 1-3-6 de los irregulares",
-  "r": "Los irregulares lo son sobre todo en **io, lui/lei y loro**, con la "
+  "r": "Los irregulares cambian sobre todo en **io, lui/lei y loro**, con la "
        "misma raíz: *-i, -e, -ero*. El resto lleva terminaciones regulares.",
   "ex": [["Lui *prese* il treno; noi *prendemmo* l'autobus.", "Él tomó el tren; nosotros, el colectivo."],
          ["Mi *scrissero* una lettera lunghissima.", "Me escribieron una carta larguísima."],
@@ -1125,8 +1129,8 @@ LESSONS = {
                      ["trapassato", "che io avessi parlato / fossi andato", "principal pasado; antes"]]}},
 
  {"h": "El período hipotético",
-  "r": "Tres tipos: real, posible, imposible. **Nunca** condizionale después "
-       "de *se*.",
+  "r": "Tres tipos: real, posible, imposible. Detrás del *se* hipotético, "
+       "**nunca** condizionale; el *se* de pregunta indirecta sí lo admite.",
   "ex": [["Se *ho* tempo, ti *chiamo*.", "Si tengo tiempo, te llamo."],
          ["Se *avessi* tempo, ti *chiamerei*.", "Si tuviera tiempo, te llamaría."],
          ["Se *avessi avuto* tempo, ti *avrei chiamato*.", "Si hubiera tenido tiempo, te habría llamado."]]},
