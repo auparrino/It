@@ -41,8 +41,8 @@ dos, si son chicos). No hace falta explicar nada más.
 
 | Paso | Qué | Modelo | Estado | PR / fecha |
 |---|---|---|---|---|
-| 0.1 | Inventario de todo lo revisable + registro con hash | Sonnet | pendiente | |
-| 0.2 | Tablero de cobertura (cuánto falta, por módulo e idioma) | Sonnet | pendiente | |
+| 0.1 | Inventario de todo lo revisable + registro con hash | Sonnet | hecho | 2026-10-04 |
+| 0.2 | Tablero de cobertura (cuánto falta, por módulo e idioma) | Sonnet | hecho | 2026-10-04 |
 | 1.1 | Arranque de un toque y día mínimo de 2 minutos | Sonnet | pendiente | |
 | 1.2 | Recordatorio diario sin servidor (evento de calendario .ics) | Sonnet | pendiente | |
 | 1.3 | Racha con comodín y «nunca dos días seguidos» | Sonnet | pendiente | |
@@ -91,6 +91,16 @@ Las fases 2-5 corrigen; la 6 rediseña sobre contenido ya limpio.
 
 - 2026-10-04 · plan creado. Antes: auditorías semanales IT/PT con muestreo
   (PR #64) y una tanda de producción IT 28-50 / C1 PT 43-50 (PR #65).
+- 2026-10-04 · 0.1 y 0.2 hechos. `tools/audit/inventario.js` lista 14.029
+  unidades en `it`, 11.827 en `pt` y 204 en `comun` (Tres lenguas), todas
+  `pendiente`; `npm run cobertura` es el tablero (resumen en
+  `auditorias/registro/README.md`). Quedó fuera a propósito la lógica de los
+  módulos, la configuración (`freq_data.js`, `rules.js`) y lo derivado
+  (`formule_data.js`, `frequenza.json`, Biblioteca). Ids por clave natural o
+  `id` propio; donde no hay (frases de escena, bloques de lección, pares de
+  banco) van por posición o por hash del español, así que insertar a mitad de
+  una lista reabre las unidades que se corren. Para los pasos 2-5:
+  `inventario.js --marcar <it|pt|comun> lote.json` anota una pasada.
 
 ---
 
@@ -236,6 +246,10 @@ módulo donde aparecieron.
   correr `npm run build` hasta que dos corridas seguidas no cambien nada,
   copiar ese `docs/` al repo y commitear. Si no, falla el job «docs/ se
   reproduce desde las fuentes».
+- **Registro:** si agregás, borrás o editás contenido, después de regenerar
+  `docs/` corré `node tools/audit/inventario.js --sync` y commiteá
+  `auditorias/registro/` (el test `tools/lib/test_registro.js` falla si no).
+  Para ver el avance: `npm run cobertura`.
 - **Antes de subir:** `npm test`, `npm run sim` (sin duplicados), y que cada
   ítem nuevo quede en su semana (si el sílabo lo mueve, reescribirlo con
   palabras y gramática ya vistas).
