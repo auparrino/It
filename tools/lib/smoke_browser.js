@@ -241,6 +241,24 @@ async function smokeEsame(page, code, P, snap, note, errors) {
     note(code + " · " + N.today + ": " + (await page.textContent("h1")).trim() + " · pestañas: " + (await tabs(page)));
     await snap(page, P("hoy-claro"), true);
 
+    // the answer box says nothing to the keyboard (Gboard then detects the
+    // language and lets you change it); with «Teclado fijo» it says the language
+    const kb = await page.evaluate(async () => {
+      const it = { id: "kb-1", type: "translate", prompt: "Traducí.", stem: "hola", answer: "x", accept: ["x"] };
+      window.__test.play([it], 1);
+      await new Promise((r) => setTimeout(r, 300));
+      const a = document.querySelector("#ans"), off = a && a.getAttribute("lang");
+      const s = window.__test.state(); s.kbLang = true;
+      window.__test.play([Object.assign({}, it, { id: "kb-2" })], 1);
+      await new Promise((r) => setTimeout(r, 300));
+      const b = document.querySelector("#ans"), on = b && b.getAttribute("lang");
+      s.kbLang = false;
+      return { found: !!a && !!b, off, on };
+    });
+    if (!kb.found) errors.push(code + ": teclado: no apareció el campo de respuesta");
+    else if (kb.off || !kb.on) errors.push(code + ": teclado: lang " + JSON.stringify(kb) + " (apagado: ninguno; encendido: el idioma)");
+    if (await page.$("#quit")) { await page.click("#quit"); await page.waitForTimeout(300); }
+
     // a pausa: answer the items whatever they are (the first day it is not
     // on screen: it appears once a lesson was read)
     await page.evaluate(() => window.__test.start("pausa"));
