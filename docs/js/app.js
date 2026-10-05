@@ -809,7 +809,7 @@
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION = "c1-vN" in sw.js: test_game
      and the CI check it).  One version for the app and both languages. */
-  var APP_VERSION = "v3.7.0";
+  var APP_VERSION = "v3.7.1";
   // Settimana XVII: Roman numerals on the street signs (LANG.ui.romanWeeks).
   function romano(n) {
     var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
@@ -4251,6 +4251,9 @@
           [["", "Como el teléfono"], ["light", "Claro ☀️"], ["dark", "Oscuro 🌙"]].map(function (t) {
             return '<option value="' + t[0] + '"' + ((state.theme || "") === t[0] ? " selected" : "") + ">" + t[1] + "</option>";
           }).join("") + "</select></label>" +
+        '<label class="set"><span>Teclado fijo en ' + esc(UI.langEs || "la lengua") + '<small>el teclado aparece siempre en ' + esc(UI.langEs || "la lengua") +
+          ' al escribir; apagado, Gboard detecta el idioma solo y lo podés cambiar</small></span>' +
+          '<input type="checkbox" id="kblang"' + (state.kbLang ? " checked" : "") + "></label>" +
         '<label class="set"><span>Modo oficina 🤫<small>nada suena solo; el 🔊 sigue andando si lo tocás</small></span>' +
           '<input type="checkbox" id="silent"' + (state.silent ? " checked" : "") + "></label>" +
         '<label class="set"><span>Agendar mi rato diario<small>' + (state.icsAt ? 'ya lo agregaste · de nuevo si cambiás la hora' : 'un evento en tu calendario, con alarma, que abre tu semana') + '</small></span>' +
@@ -4785,6 +4788,7 @@
       try { history.pushState({ sub: 1 }, ""); subEntry = true; } catch (e) { /* */ }
     }
     app().innerHTML = html;
+    langBoxes(app());   // before anything takes the focus: the keyboard reads the box's lang when it opens
     document.body.classList.toggle("ingame", s === "gioco" || s === "lampo" || s === "lezione");
     var pl = document.querySelector(".progressline i[data-to]");
     if (pl) requestAnimationFrame(function () { requestAnimationFrame(function () { pl.style.width = pl.dataset.to + "%"; }); });
@@ -6990,6 +6994,8 @@
       applyTheme();
       renderHeader();
     };
+    var kbl = $("#kblang");
+    if (kbl) kbl.onchange = function () { state.kbLang = kbl.checked; persist(); langBoxes(); };
     var silent = $("#silent");
     if (silent) silent.onchange = function () {
       state.silent = silent.checked;
@@ -7035,18 +7041,27 @@
     });
   }
 
-  /* Every box where the learner writes in the language of the game says
-     so (lang = the package's voice tag, LANG.tts): the keyboard can come up in that language
-     (Gboard and other keyboards on Android take the field's language as a
-     hint; on an iPhone the page cannot choose the keyboard).  The boxes in
-     Spanish (your goal, the keys, the searches) say lang="es". */
+  /* With «Teclado fijo» on (state.kbLang), every box where the learner
+     writes in the language of the game says so (lang = the package's voice
+     tag, LANG.tts) and the boxes in Spanish (your goal, the keys, the
+     searches) say lang="es": Gboard and other keyboards on Android take the
+     field's language as an order, and then neither detect the language as
+     you type nor let you change it inside the game (every question is a new
+     box, and the language comes back).  Off (the default), the boxes say
+     nothing and the keyboard stays the learner's: no lang at all, not even
+     the one a module wrote in its own textarea. */
   var SPANISH_BOXES = { idealtext: 1, refq: 1, aikey: 1, gemkey: 1 };
   function langBoxes(root0) {
     (root0 || document).querySelectorAll("textarea, input").forEach(function (el) {
-      if (el.hasAttribute("lang")) return;
       var type = (el.getAttribute("type") || "text").toLowerCase();
       if (type !== "text" && type !== "search" && el.tagName !== "TEXTAREA") return;
-      el.setAttribute("lang", SPANISH_BOXES[el.id] || el.dataset.es ? "es" : LG.tts);
+      if (!state.kbLang) {
+        if (el.hasAttribute("lang")) { el.setAttribute("data-kblang", el.getAttribute("lang")); el.removeAttribute("lang"); }
+        return;
+      }
+      if (el.hasAttribute("lang")) return;
+      var own = el.getAttribute("data-kblang");
+      el.setAttribute("lang", own || (SPANISH_BOXES[el.id] || el.dataset.es ? "es" : LG.tts));
     });
   }
   if (window.MutationObserver) {
