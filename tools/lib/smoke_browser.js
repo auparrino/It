@@ -241,22 +241,25 @@ async function smokeEsame(page, code, P, snap, note, errors) {
     note(code + " · " + N.today + ": " + (await page.textContent("h1")).trim() + " · pestañas: " + (await tabs(page)));
     await snap(page, P("hoy-claro"), true);
 
-    // the answer box says nothing to the keyboard (Gboard then detects the
-    // language and lets you change it); with «Teclado fijo» it says the language
+    // the answer box lets the keyboard suggest (no autocomplete="off": with it
+    // Gboard neither detects the language nor lets you pick it from its bar)
+    // and never autocorrects; «Teclado sin sugerencias» puts it back
     const kb = await page.evaluate(async () => {
       const it = { id: "kb-1", type: "translate", prompt: "Traducí.", stem: "hola", answer: "x", accept: ["x"] };
+      const box = () => { const a = document.querySelector("#ans"); return a && [a.getAttribute("autocomplete"), a.getAttribute("autocorrect"), a.getAttribute("lang")]; };
       window.__test.play([it], 1);
       await new Promise((r) => setTimeout(r, 300));
-      const a = document.querySelector("#ans"), off = a && a.getAttribute("lang");
-      const s = window.__test.state(); s.kbLang = true;
+      const off = box();
+      const s = window.__test.state(); s.kbQuiet = true;
       window.__test.play([Object.assign({}, it, { id: "kb-2" })], 1);
       await new Promise((r) => setTimeout(r, 300));
-      const b = document.querySelector("#ans"), on = b && b.getAttribute("lang");
-      s.kbLang = false;
-      return { found: !!a && !!b, off, on };
+      const on = box();
+      s.kbQuiet = false;
+      return { off, on };
     });
-    if (!kb.found) errors.push(code + ": teclado: no apareció el campo de respuesta");
-    else if (kb.off || !kb.on) errors.push(code + ": teclado: lang " + JSON.stringify(kb) + " (apagado: ninguno; encendido: el idioma)");
+    if (!kb.off || !kb.on) errors.push(code + ": teclado: no apareció el campo de respuesta");
+    else if (kb.off[0] !== null || kb.off[1] !== "off" || kb.on[0] !== "off" || kb.on[1] !== "off" || !kb.off[2])
+      errors.push(code + ": teclado: " + JSON.stringify(kb) + " (por defecto sin autocomplete, siempre autocorrect off)");
     if (await page.$("#quit")) { await page.click("#quit"); await page.waitForTimeout(300); }
 
     // a pausa: answer the items whatever they are (the first day it is not

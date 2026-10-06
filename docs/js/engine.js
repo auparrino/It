@@ -652,7 +652,7 @@
       chest: null,        // día en que abriste el cofre
       best: {},           // récords: relâmpago, combo
       silent: false,      // modo oficina: nada suena solo
-      kbLang: false,      // teclado fijo en la lengua del juego (lang en los campos): Gboard no deja cambiarlo
+      kbQuiet: false,     // teclado sin sugerencias (autocomplete="off"): Gboard no detecta ni deja cambiar el idioma
       theme: "",          // "" como el teléfono, "light" u "dark"
       written: 0,         // frases escritas de memoria sin errores
       letture: {},        // lectura -> { pct, at } de las lecturas hechas
