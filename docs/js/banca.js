@@ -393,6 +393,153 @@
     return prefer(state, ids, "b:gap:").slice(0, size || 10).map(gapItem).filter(Boolean);
   }
 
+  /* ¿Qué preposición va?  Una oración del banco con una preposición (o una
+     contracción: no, do, pelo, alla, nel) borrada y cuatro opciones; la
+     oración en español al lado para que no haya dos respuestas posibles.
+     Es lo que más le cuesta a un hispanohablante y acá se reconoce antes de
+     escribirse. */
+  function prepList() {
+    var D = root.ESCRITOS_DATA || {}, arts = {};
+    Object.keys(CONTR).forEach(function (p) { Object.keys(CONTR[p]).forEach(function (a) { arts[a] = 1; }); });
+    return (D.prep || []).filter(function (w) { return !arts[w]; });
+  }
+  // The words of a list in a sentence (not the first one, unless anyCase:
+  // a connector often opens the sentence, «Ma…», «Quindi…»).
+  function wordTokens(text, list, anyCase) {
+    var out = [], re = /[A-Za-zÀ-ÖØ-öø-ÿ]+/g, m, k = 0;
+    while ((m = re.exec(text))) {
+      var w = anyCase ? m[0].toLowerCase() : m[0];
+      if ((k > 0 || anyCase) && list.indexOf(w) >= 0) out.push({ at: m.index, w: m[0] });
+      k++;
+    }
+    return out;
+  }
+  function prepTokens(text, preps) { return wordTokens(text, preps, false); }
+  function prepChoiceItem(i, pos) {
+    var s = B && B.sentences[i], preps = prepList();
+    if (!s || !preps.length) return null;
+    var main = s.it[0], toks = prepTokens(main, preps), t = toks.filter(function (x) { return x.at === +pos; })[0];
+    if (!t) return null;
+    var D = root.ESCRITOS_DATA || {}, same = [t.w];
+    (D.equiv || []).forEach(function (g) { if (g.indexOf(t.w) >= 0) same = same.concat(g); });
+    var stem = main.slice(0, t.at) + "___" + main.slice(t.at + t.w.length);
+    // a distractor that makes one of the accepted versions is not wrong
+    var fits = function (o) { return s.it.some(function (v) { return v === main.slice(0, t.at) + o + main.slice(t.at + t.w.length); }); };
+    var opts = [t.w], seed = i * 31 + t.at;
+    var pool = preps.filter(function (o) { return same.indexOf(o) < 0 && !fits(o); });
+    // the same seed gives the same options (the card comes back the same)
+    for (var j = 0; opts.length < 4 && j < pool.length * 3; j++) {
+      var o = pool[(seed + j * 7) % pool.length];
+      if (opts.indexOf(o) < 0) opts.push(o);
+    }
+    if (opts.length < 3) return null;
+    return { id: "b:pc:" + i + ":" + t.at, src: "banca", bank: "pc", type: "choice",
+             prompt: TX.prepChoice || "¿Qué preposición va? («" + s.es + "»)", stem: stem,
+             options: shuffle(opts), answer: t.w, accept: same.filter(function (x) { return x.indexOf(" ") < 0; }),
+             note: s.note || "", tags: s.tags, lvl: s.lvl, diag: false, cat: "preposicion", say: main };
+  }
+  function prepChoiceSession(state, size, tagFilter) {
+    var preps = prepList();
+    if (!B || !preps.length) return [];
+    var ids = sentencePool(state, function (s) {
+      return (!tagFilter || (s.tags || []).some(function (t) { return tagFilter.indexOf(t) >= 0; })) && prepTokens(s.it[0], preps).length;
+    }, "w");
+    return prefer(state, ids, "b:pc:").slice(0, (size || 8) * 2).map(function (i) {
+      var tk = prepTokens(B.sentences[i].it[0], preps);
+      return prepChoiceItem(i, tk[(i * 7) % tk.length].at);
+    }).filter(Boolean).slice(0, size || 8);
+  }
+
+  /* ¿Qué conector va?  Lo mismo con los conectores (pero, entonces,
+     aunque, mientras…): lo que ordena un texto y lo que pide un C1.  Sin
+     los cortos que entran en casi cualquier lado (e, o, se). */
+  var LOOSE_CONN = { e: 1, ed: 1, o: 1, ou: 1, se: 1, "né": 1, nem: 1, antes: 1, logo: 1, assim: 1 };
+  function connList() {
+    return ((root.ESCRITOS_DATA || {}).conn || []).filter(function (w) { return w.indexOf(" ") < 0 && !LOOSE_CONN[w]; });
+  }
+  function connChoiceItem(i, pos) {
+    var s = B && B.sentences[i], conns = connList();
+    if (!s || conns.length < 4) return null;
+    var main = s.it[0], t = wordTokens(main, conns, true).filter(function (x) { return x.at === +pos; })[0];
+    if (!t) return null;
+    var low = t.w.toLowerCase(), D = root.ESCRITOS_DATA || {}, same = [low];
+    (D.equiv || []).forEach(function (g) { if (g.indexOf(low) >= 0) same = same.concat(g); });
+    var cap = function (o) { return t.w[0] !== low[0] ? o[0].toUpperCase() + o.slice(1) : o; };
+    var fits = function (o) { return s.it.some(function (v) { return v === main.slice(0, t.at) + cap(o) + main.slice(t.at + t.w.length); }); };
+    var pool = conns.filter(function (o) { return same.indexOf(o) < 0 && !fits(o); }), opts = [low], seed = i * 17 + t.at;
+    for (var j = 0; opts.length < 4 && j < pool.length * 3; j++) {
+      var o = pool[(seed + j * 5) % pool.length];
+      if (opts.indexOf(o) < 0) opts.push(o);
+    }
+    var stem = main.slice(0, t.at) + "___" + main.slice(t.at + t.w.length);
+    return { id: "b:cc:" + i + ":" + t.at, src: "banca", bank: "cc", type: "choice",
+             prompt: "¿Qué palabra va? («" + s.es + "»)", stem: stem, options: shuffle(opts), answer: low,
+             accept: same.filter(function (x) { return x.indexOf(" ") < 0; }), note: s.note || "", tags: s.tags, lvl: s.lvl, cat: "conector", say: main };
+  }
+  function connChoiceSession(state, size) {
+    var conns = connList();
+    if (!B || conns.length < 4) return [];
+    // not a question that opens with it («Quando você vai voltar?»: there it is «cuándo»)
+    var ids = sentencePool(state, function (s) { return !/\?\s*$/.test(s.it[0]) && wordTokens(s.it[0], conns, true).length; }, "w");
+    return prefer(state, ids, "b:cc:").slice(0, (size || 6) * 2).map(function (i) {
+      var tk = wordTokens(B.sentences[i].it[0], conns, true);
+      return connChoiceItem(i, tk[(i * 5) % tk.length].at);
+    }).filter(Boolean).slice(0, size || 6);
+  }
+
+  /* ¿Cuál está bien?  La misma oración dos veces, una con el error típico
+     del hispanohablante: reconocerlo antes de tener que encontrarlo. */
+  function whichItem(i) {
+    var e = B && B.errors[i];
+    if (!e || !e.wrong || !e.right || e.wrong === e.right) return null;
+    return { id: "b:cual:" + i, src: "banca", bank: "cual", type: "choice",
+             prompt: "¿Cuál está bien?", stem: "", options: shuffle([e.right, e.wrong]), answer: e.right, accept: [e.right],
+             cat: e.cat, note: e.why, lvl: e.lvl, say: e.right };
+  }
+  function whichSession(state, size, cats) {
+    if ((state.unlocked || 1) < ERR_WEEK) return [];
+    var ids = [];
+    B.errors.forEach(function (e, i) {
+      if (within(e.lvl, levelOf(state)) && taught(e, state) && (!cats || cats.indexOf(e.cat) >= 0)) ids.push(i);
+    });
+    return prefer(state, ids, "b:cual:").slice(0, size || 6).map(whichItem).filter(Boolean);
+  }
+
+  /* «Lo que más te cuesta»: una ronda de reconocer, armada con las áreas
+     más flojas del alumno (encontrar el error, elegir la preposición, armar
+     la forma), y sus propios errores recientes.  Sin un patrón de errores
+     todavía, lo que más le cuesta a un hispanohablante: preposiciones,
+     contracciones y artículos. */
+  var PREP_CATS = /prep|contr|regenc|crase|faltante|sobrante|mancante|in_piu|articol|articul/;
+  function weakSession(state, size) {
+    size = size || 12;
+    var RG = root.Reglas, out = [];
+    var own = RG && RG.ownRecent ? RG.ownRecent(state, 3) : [];
+    var weak = weakest(state, 3);
+    if (weak.length) {
+      weak.forEach(function (w, k) {
+        var c = CURE[w.cat], share = Math.max(2, Math.round((size - own.length) * (k === 0 ? 0.5 : 0.25))), parts = [];
+        if (c.err) parts = parts.concat(errorSession(state, Math.ceil(share / 3), c.err), whichSession(state, Math.ceil(share / 3), c.err));
+        if (PREP_CATS.test(w.cat)) parts = parts.concat(prepChoiceSession(state, 3, c.tags));
+        if (/ordin|orden|connett|conector/.test(w.cat) || (c.tags || []).some(function (t) { return /connett|conector/.test(t); })) parts = parts.concat(connChoiceSession(state, 3));
+        if (c.forms) parts = parts.concat(formsSession(state, 2, c.forms));
+        shuffle(parts).slice(0, share).forEach(function (x) { x.clinic = w.cat; out.push(x); });
+      });
+    }
+    if (out.length < size - own.length) {
+      var need = size - own.length - out.length;
+      // without a pattern yet: a bit of each kind of recognising
+      out = out.concat(prepChoiceSession(state, Math.ceil(need / 3)),
+                       whichSession(state, Math.ceil(need / 6)),
+                       errorSession(state, Math.ceil(need / 6)),
+                       connChoiceSession(state, Math.ceil(need / 6)),
+                       formsSession(state, Math.ceil(need / 6), "prep"));
+    }
+    var seen = {};
+    out = own.concat(shuffle(out)).filter(function (x) { if (!x || seen[x.id]) return false; seen[x.id] = 1; return true; });
+    return out.slice(0, size);
+  }
+
   /* Encontrar un error necesita una oración que ya se pueda leer: antes de
      la semana 5 (presente regular) no hay con qué compararla. */
   var ERR_WEEK = 5;
@@ -484,6 +631,9 @@
     if (p[1] === "tr" && B.sentences[+p[2]]) return translateItem(+p[2]);
     if (p[1] === "gap" && B.sentences[+p[2]]) return gapItem(+p[2]);
     if (p[1] === "err" && B.errors[+p[2]]) return errorItem(+p[2]);
+    if (p[1] === "pc" && B.sentences[+p[2]]) return prepChoiceItem(+p[2], +p[3]);
+    if (p[1] === "cc" && B.sentences[+p[2]]) return connChoiceItem(+p[2], +p[3]);
+    if (p[1] === "cual" && B.errors[+p[2]]) return whichItem(+p[2]);
     return null;
   }
 
@@ -536,6 +686,13 @@
     gapSession: gapSession,
     errorItem: errorItem,
     errorSession: errorSession,
+    prepChoiceItem: prepChoiceItem,
+    prepChoiceSession: prepChoiceSession,
+    weakSession: weakSession,
+    connChoiceItem: connChoiceItem,
+    connChoiceSession: connChoiceSession,
+    whichItem: whichItem,
+    whichSession: whichSession,
     ERR_WEEK: ERR_WEEK,
     TR_WEEK: TR_WEEK, GAP_WEEK: GAP_WEEK, FORME_WEEK: FORME_WEEK, CRASE_WEEK: CRASE_WEEK,
     weakest: weakest,
