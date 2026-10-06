@@ -141,7 +141,7 @@ pack.LANGS.forEach(function (code) {
   var ms4 = E.missions({ week: 35 }, st4);
   var or = ms4.filter(function (m) { return m.kind === "esc-ordenar"; })[0];
   ok(!ms4.some(function (m) { return m.kind === "esc-huecos"; }), tag + "el C-test ya no es misión de la semana");
-  ok(or && /^as:35\|/.test(or.arg), tag + "«Ordená» de la semana 35 va sobre la escucha");
+  ok(or && !/^(as|ep|dg):[^|]*35\|/.test(or.arg) && E.byId(or.arg.split("|")[0]).week < 35, tag + "«Ordená» de la semana 35 no es el texto de esa semana (" + (or && or.arg) + ")");
   var lsrc = larga.filter(function (y) { return y.week === 45; })[0];
   var ps = E.passages(lsrc.text, E.passageWords(45));
   ok(ps.length >= 2 && ps.every(function (p) { return p.split(/\s+/).length <= 700; }), tag + "la lectura larga se trabaja por pasajes (" + ps.length + ")");

@@ -119,12 +119,26 @@ pack.LANGS.forEach(function (code) {
   var w5 = course.weeks[4];
   var none = E.missions(w5, { cards: {}, letture: {}, dictogloss: {}, unlocked: 5 });
   ok(none.every(function (m) { return m.opt; }), code + ": misiones opcionales");
-  ok(!none.some(function (m) { return m.kind === "esc-huecos" || m.kind === "esc-ordenar"; }), code + ": sin textos leídos no hay huecos ni orden");
+  ok(!none.some(function (m) { return m.kind === "esc-huecos"; }), code + ": sin textos leídos no hay huecos");
+  var on = none.filter(function (m) { return m.kind === "esc-ordenar"; })[0];
+  ok(!on || E.byId(on.arg.split("|")[0]).week < 5, code + ": sin textos leídos, «Ordená» usa uno de una semana anterior, sin leer");
   ok(E.pausaItem({ cards: {}, letture: {}, dictogloss: {} }, 5, function () { return 0.9; }) === null, code + ": pausa sin nada leído ni aprendido: nada");
   var read = { cards: {}, letture: {}, dictogloss: {}, unlocked: 5 };
   ctx.Letture.EPISODI.forEach(function (e) { if (e.week <= 5 && e.text) read.letture[e.id] = { pct: 80, at: 1 }; });
   var ms = E.missions(w5, read);
   ok(!ms.some(function (m) { return m.kind === "esc-huecos"; }) && ms.some(function (m) { return m.kind === "esc-ordenar"; }), code + ": con textos leídos, misión de orden (el C-test ya no es misión)");
+  // «Ordená» nunca es el texto de la semana: uno de antes no leído, o leído hace 3 semanas o más
+  var allRead = { cards: {}, letture: {}, dictogloss: {}, unlocked: 52, tramo: { asc: {} } };
+  ctx.Letture.EPISODI.forEach(function (e) { if (e.text) allRead.letture[e.id] = { pct: 80, at: 1 }; });
+  for (var aw = 1; aw <= 52; aw++) { allRead.tramo.asc[aw] = { pct: 90 }; allRead.dictogloss[aw] = { pct: 80 }; }
+  course.weeks.forEach(function (w) {
+    if (w.boss || w.week < 3) return;
+    var mo = E.missions(w, allRead).filter(function (m) { return m.kind === "esc-ordenar"; })[0];
+    ok(!!mo, code + " semana " + w.week + ": hay «Ordená»");
+    if (!mo) return;
+    var src = E.byId(mo.arg.split("|")[0]);
+    ok(src.week < w.week && (w.week < 6 || src.week <= w.week - 3), code + " semana " + w.week + ": «Ordená» sobre un texto viejo (semana " + src.week + ")");
+  });
   // las piezas de «Ordená» traen sus pistas repartidas: como mucho una sin
   // ninguna (la respuesta a una pregunta tiene la pista en la pregunta)
   var c0 = ctx.ESCRITOS_DATA.clues[0][0];
