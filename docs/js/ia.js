@@ -21,6 +21,9 @@
  *             max: tope de tokens de la respuesta (por defecto 4096)
  *             hedge: ms; si el primer proveedor no empezó a responder en ese
  *                    tiempo, se pregunta también al segundo y gana el primero
+ *             anyProvider: true para usar Groq de respaldo aunque haya clave
+ *                    de Gemini (sin esto, con Gemini primero, Groq solo atiende
+ *                    el chat de a poco)
  *
  * Por qué era lento Gemini: los modelos nuevos rechazan
  * reasoning_effort: "none" y la app reintentaba sin ninguna opción, o sea
@@ -161,13 +164,17 @@
     return [{ role: "system", content: "Respondés solo con JSON válido." }, { role: "user", content: String(prompt) }];
   }
 
+  // Las esperas antes de volver a preguntar a los modelos saturados (una por vuelta extra).
+  var RETRY_WAITS = [2000, 5000];
+
   // Un pedido a un proveedor, modelo por modelo, el mejor primero: cada
-  // intento espera como mucho 20 s, cada proveedor 40 s.
+  // intento espera como mucho 20 s, cada proveedor 40 s.  Si todos
+  // responden 503/429, dos vueltas más tras 2 y 5 s.
   function ask(P, prompt, key, opts, done, onStart, handle) {
     handle = handle || {};
     models(P, key, function (list) {
       var skip = paid(P), ord = list.filter(function (m) { return !skip[m]; }), deadline = Date.now() + (opts.stream ? 45000 : 40000);
-      var lastErr = null, noJson = {}, n402 = 0, k = 0, over = false;
+      var lastErr = null, noJson = {}, n402 = 0, k = 0, over = false, busy = [], round = 0;
       if (!ord.length) ord = list.slice();
       // el modelo que respondió la última vez va primero, pero solo si está
       // entre los tres mejores (un modelo chico que respondió una vez durante
@@ -175,10 +182,19 @@
       var good = readStr(store(P, "model"));
       if (good && ord.indexOf(good) > 0 && ord.indexOf(good) < 3) { ord.splice(ord.indexOf(good), 1); ord.unshift(good); }
       function finish(err, data, meta) { if (over) return; over = true; done(err, data, meta); }
-      function next(err) {
+      function next(err, model) {
         if (over) return;
         if (handle.cancelled) return finish(new Error("cancelado"));
         if (err) lastErr = err;
+        // saturado (5xx) o sin cupo por el minuto (429): vale volver a preguntarle
+        if (model && err && /\((429|5\d\d)\)/.test(String(err.message || ""))) busy.push(model);
+        // todos dijeron «ocupado»: una espera corta y otra vuelta con ellos,
+        // mientras haya tiempo (los 503 de Gemini suelen durar segundos)
+        if (k >= ord.length && busy.length && round < RETRY_WAITS.length && Date.now() + RETRY_WAITS[round] + 3000 < deadline) {
+          ord = busy; busy = []; k = 0;
+          setTimeout(function () { if (!over && !handle.cancelled) attempt(ord[k++], null); else next(); }, RETRY_WAITS[round++]);
+          return;
+        }
         if (k >= ord.length || Date.now() > deadline) {
           var m = n402 && n402 === k ? P.name + " pide un plan pago para todos los modelos de tu cuenta (402)"
                 : lastErr && /abort/i.test(String(lastErr.message || lastErr)) ? "la IA no respondió a tiempo" : String((lastErr && lastErr.message) || lastErr || "sin respuesta");
@@ -217,7 +233,7 @@
             if (r.status === 400 && /reasoning|thinking|budget/i.test(b) && i + 1 < ladder.length) { attempt(model, i + 1); return null; }
             if (r.status === 400 && !noJson[model] && /response_format|json/i.test(b)) { noJson[model] = 1; attempt(model, i); return null; }
             if (r.status === 402) { n402++; markPaid(P, model); next(new Error("HTTP 402")); return null; }
-            next(new Error(r.status === 429 ? "se terminó el cupo por ahora (429)" : r.status >= 500 ? P.name + " está saturado ahora (" + r.status + ")" : "HTTP " + r.status));
+            next(new Error(r.status === 429 ? "se terminó el cupo por ahora (429)" : r.status >= 500 ? P.name + " está saturado ahora (" + r.status + ")" : "HTTP " + r.status), model);
             return null;
           });
         }).then(function (txt) {
@@ -280,6 +296,10 @@
     keys = keys || {};
     var ids = (opts.order || order()).filter(function (id) { return keys[id] && byId(id); });
     PROVIDERS.forEach(function (P) { if (keys[P.id] && ids.indexOf(P.id) < 0) ids.push(P.id); });
+    // Groq corrige mal: con clave de Gemini (y Gemini primero, lo de
+    // siempre), Groq queda solo para la charla del role-play (la respuesta
+    // de a poco), nunca de respaldo para corregir o explicar
+    if (keys.gemini && ids[0] === "gemini" && !opts.stream && !opts.anyProvider) ids = ids.filter(function (id) { return id !== "groq"; });
     if (!ids.length) return done(new Error("sin clave"));
     var errs = [], over = false, running = 0, started = null, backup = null, hedgeTimer = null, handles = {};
     function finish(err, data, meta) {
@@ -329,7 +349,7 @@
     }
   }
 
-  var api = { PROVIDERS: PROVIDERS, llm: llm, jsonOf: jsonOf, partialField: partialField, order: order, setOrder: setOrder, stats: stats };
+  var api = { PROVIDERS: PROVIDERS, llm: llm, retryWaits: function (w) { RETRY_WAITS = w; }, jsonOf: jsonOf, partialField: partialField, order: order, setOrder: setOrder, stats: stats };
   if (typeof module === "object" && module.exports) module.exports = api;
   root.IA = api;
 })(typeof window !== "undefined" ? window : globalThis);

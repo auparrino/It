@@ -114,7 +114,8 @@ module.exports = async function modulos(page, ctx) {
   await page.click("[data-week='30']");
   await page.waitForSelector(".missions");
   const ms = await page.$$eval("[data-m]", (els) => els.map((e) => e.dataset.m));
-  ["lib", "esc-huecos", "esc-ordenar"].forEach((k) => { if (ms.indexOf(k) < 0) fail("la semana 30 no tiene la misión «" + k + "»"); });
+  ["lib", "esc-ordenar", "b-forme", "b-err"].forEach((k) => { if (ms.indexOf(k) < 0) fail("la semana 30 no tiene la misión «" + k + "»"); });
+  ["esc-huecos", "tre"].forEach((k) => { if (ms.indexOf(k) >= 0) fail("la semana 30 todavía tiene la misión «" + k + "»"); });
   const hasTre = ms.indexOf("tre") >= 0;
   note(code + " · semana 30: " + ms.filter((k) => /lib|esc-|tre/.test(k)).join(", "));
   if (ms.indexOf("esc-huecos") >= 0) {

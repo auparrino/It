@@ -34,7 +34,7 @@ const PLAYS = {
   play2: 1,        // Dominala: one session, 85 %
   scene: 1,        // 60 % of the phrases firm: back three days apart; one play only has to move it
   // a sheet delivered blank: two tries do not complete it, the third does (Engine.passed, 3.1)
-  "tr-asc": 3, "tr-brv": 3, radio: 3, "esc-huecos": 3, "esc-ordenar": 3,
+  "tr-asc": 3, "tr-brv": 3, radio: 3, "esc-ordenar": 3, "b-forme": 2, "b-err": 2,
   default: 2
 };
 // Missions whose «done» needs days to pass: one play must move them, not finish them.

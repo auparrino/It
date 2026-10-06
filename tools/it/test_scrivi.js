@@ -193,6 +193,7 @@ var GEM = [];
 function gem(name, plan, check, keys, mode, first) { GEM.push([name, plan, check, keys, mode, first]); }
 function runGem() {
   if (!GEM.length) return T.done();
+  ctx.IA.retryWaits([0, 0]);
   var g = GEM.shift(), calls = [], mem = {};
   ctx.localStorage = { getItem: function (k) { return mem[k] || null; }, setItem: function (k, v) { mem[k] = v; } };
   if (g[5]) mem["laviac1.ia.first"] = g[5];   // qué proveedor va primero (Io)
@@ -235,10 +236,15 @@ gem("pagos (402) hasta llegar al gratuito", function (n, b) { return /8b-instant
     function (e, d, c) { return !e && c.length === 4 && /llama-3\.1-8b-instant/.test(c[3]); });
 gem("todo pago", function () { return { status: 402, body: {} }; },
     function (e, d, c) { return e && /plan pago/.test(e.message) && c.length === 4; });
+// todos saturados: dos vueltas más con los mismos modelos (sin espera en la prueba)
 gem("todo saturado", function () { return { status: 503, body: {} }; },
-    function (e, d, c) { return e && /saturado/.test(e.message) && c.length === 4; });
+    function (e, d, c) { return e && /saturado/.test(e.message) && c.length === 12; });
+gem("saturado en la primera vuelta, responde en la segunda", function (n) { return n <= 4 ? { status: 503, body: {} } : { status: 200, body: GOOD }; },
+    function (e, d, c) { return !e && d.explicacion === "x" && c.length === 5 && c[4] === "moonshotai/kimi-k2-instruct~"; });
 // Gemini de respaldo, con su propia búsqueda de modelos
 var BOTH = { groq: "gsk_x", gemini: "AIza_x" };
+gem("con Gemini primero, Groq no corrige aunque Gemini falle", function (n, b) { return /gemini/.test(b.model) ? { status: 503, body: {} } : { status: 200, body: GOOD }; },
+    function (e, d, c) { return e && /saturado/.test(e.message) && !c.some(function (m) { return !/gemini/.test(m); }); }, BOTH);
 gem("Groq saturado → Gemini", function (n, b) { return /gemini/.test(b.model) ? { status: 200, body: GOOD } : { status: 503, body: {} }; },
     function (e, d, c) { var gi = c.filter(function (m) { return /gemini/.test(m); }); return !e && d.explicacion === "x" && gi[0] === "gemini-2.5-flash~" && !c.some(function (m) { return /embed|gemma/.test(m); }); }, BOTH, undefined, "groq");
 gem("clave de Groq mala → Gemini", function (n, b) { return /gemini/.test(b.model) ? { status: 200, body: GOOD } : { status: 401, body: {} }; },

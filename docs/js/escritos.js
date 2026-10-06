@@ -123,7 +123,11 @@
     own.sort(function (a, b) { return rank(a) - rank(b); });
     return own[0] || list[0] || null;
   }
-  function orderable(s) { return !!(root.Ordenar && root.Ordenar.build(passage(s, s.week).text)); }
+  // with the pieces of the week it is played in (more pieces later on)
+  function orderable(s, week) {
+    var O = root.Ordenar;
+    return !!(O && O.build(passage(s, week || s.week).text, O.level ? O.level(week || s.week) : {}));
+  }
   function clozeable(s) { return !!(root.CTest && root.CTest.build(passage(s, s.week).text, "cloze").gaps.length >= 4); }
   function modeFor(week) { return week >= CTEST_WEEK ? "ctest" : "cloze"; }
   var MODE = { ctest: "C-test", cloze: "Cloze" };
@@ -154,17 +158,10 @@
       var ok = !wk[f + "N"] || !E || !E.passed || E.passed(rec, pass);
       return { done: ok, half: !ok, sub: ok ? "Hecho · " + pct + " %" : "Tu mejor: " + pct + " % · " + E.passMissing(rec, pass) };
     };
-    if (w.week >= 2 && root.CTest) {
-      var md = modeFor(w.week), s = weekSource(state, w.week, md === "cloze" ? clozeable : null, ["larga", "lectura", "escucha", "dictogloss"]);
-      var rh = res("huecos", 50);
-      if (s) out.push({ kind: "esc-huecos", arg: s.id + "|" + w.week + "|" + md, done: rh.done, half: rh.half, ico: "🧩", opt: true,
-        title: MODE[md] + ": «" + s.title + "»",
-        sub: rh.sub + " · " +
-          (s.kind === "larga" ? "un pasaje de la lectura larga, " : s.kind === "escucha" ? "la escucha que ya hiciste, transcripta, " : "el texto que ya leíste, ") +
-          (md === "ctest" ? "con la mitad de las palabras borrada" : "sin sus conectores ni preposiciones") });
-    }
+    // (el C-test / cloze ya no es misión: queda en Escritura guiada; en su
+    // lugar la semana trae ejercicios de identificar formas y errores)
     if (w.week >= 3 && root.Ordenar) {
-      var so = weekSource(state, w.week, orderable, ["escucha", "larga", "lectura", "dictogloss"]);
+      var so = weekSource(state, w.week, function (x) { return orderable(x, w.week); }, ["escucha", "larga", "lectura", "dictogloss"]);
       var ro = res("ordenar", 60);
       if (so) out.push({ kind: "esc-ordenar", arg: so.id + "|" + w.week, done: ro.done, half: ro.half, ico: "🔀", opt: true,
         title: "Ordená el texto: «" + so.title + "»",

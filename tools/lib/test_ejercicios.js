@@ -124,7 +124,16 @@ pack.LANGS.forEach(function (code) {
   var read = { cards: {}, letture: {}, dictogloss: {}, unlocked: 5 };
   ctx.Letture.EPISODI.forEach(function (e) { if (e.week <= 5 && e.text) read.letture[e.id] = { pct: 80, at: 1 }; });
   var ms = E.missions(w5, read);
-  ok(ms.some(function (m) { return m.kind === "esc-huecos"; }) && ms.some(function (m) { return m.kind === "esc-ordenar"; }), code + ": con textos leídos, misiones de huecos y de orden");
+  ok(!ms.some(function (m) { return m.kind === "esc-huecos"; }) && ms.some(function (m) { return m.kind === "esc-ordenar"; }), code + ": con textos leídos, misión de orden (el C-test ya no es misión)");
+  // las piezas de «Ordená» traen sus pistas repartidas: como mucho una sin
+  // ninguna (la respuesta a una pregunta tiene la pista en la pregunta)
+  var c0 = ctx.ESCRITOS_DATA.clues[0][0];
+  ok(!O.spread(["A.", "B.", "C.", c0 + " D."]) && O.spread(["A.", c0 + " B.", "C?", "D."]), code + ": spread()");
+  texts.forEach(function (ep) {
+    var b = O.build(ep.text);
+    if (!b) return;
+    ok(O.spread(b.units), code + " " + ep.id + ": pistas repartidas en «Ordená»");
+  });
   ok(E.pausaItem(read, 5, function () { return 0.2; }) === null, code + ": la pausa la mitad de las veces no trae nada");
   var got = 0;
   for (var i = 0; i < 40; i++) {

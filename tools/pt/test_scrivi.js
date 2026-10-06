@@ -316,6 +316,7 @@ var GEM = [];
 function gem(name, plan, check, keys, mode, first) { GEM.push([name, plan, check, keys, mode, first]); }
 function runGem() {
   if (!GEM.length) {
+  ctx.IA.retryWaits([0, 0]);
     T.done();
   }
   var g = GEM.shift(), calls = [], mem = {};
@@ -361,8 +362,9 @@ gem("pagos (402) hasta llegar al gratuito", function (n, b) { return /8b-instant
     function (e, d, c) { return !e && c.length === 4 && /llama-3\.1-8b-instant/.test(c[3]); });
 gem("todo pago", function () { return { status: 402, body: {} }; },
     function (e, d, c) { return e && /plan pago/.test(e.message) && c.length === 4; });
+// todos saturados: dos vueltas más con los mismos modelos (sin espera en la prueba)
 gem("todo saturado", function () { return { status: 503, body: {} }; },
-    function (e, d, c) { return e && /saturado/.test(e.message) && c.length === 4; });
+    function (e, d, c) { return e && /saturado/.test(e.message) && c.length === 12; });
 // Gemini de respaldo, con su propia búsqueda de modelos
 var BOTH = { groq: "gsk_x", gemini: "AIza_x" };
 gem("Groq saturado → Gemini", function (n, b) { return /gemini/.test(b.model) ? { status: 200, body: GOOD } : { status: 503, body: {} }; },
