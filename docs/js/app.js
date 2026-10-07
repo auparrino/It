@@ -809,7 +809,7 @@
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION = "c1-vN" in sw.js: test_game
      and the CI check it).  One version for the app and both languages. */
-  var APP_VERSION = "v3.9";
+  var APP_VERSION = "v3.10";
   // Settimana XVII: Roman numerals on the street signs (LANG.ui.romanWeeks).
   function romano(n) {
     var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
@@ -1941,7 +1941,7 @@
         var wk2 = Banca.weakest(state, 2), ip2 = ident("b-ident");
         m({ kind: "b-ident", arg: "w:" + w.week, done: ip2 >= 70, half: ip2 != null && ip2 < 70, opt: true, ico: "🎯", title: "Lo que más te cuesta",
             sub: identSub("b-ident", (wk2.length ? "Tus puntos flojos: " + wk2.map(function (x) { return ((Diagnosi.LABEL || {})[x.cat] || x.cat).toLowerCase(); }).join(", ")
-                                                  : "Preposiciones, contracciones y artículos") + ". Elegí la preposición o el conector, decidí cuál está bien, encontrá el error.") });
+                                                  : "Preposiciones, contracciones y artículos") + ". Preposiciones, pronombres, conectores, el verbo justo, falsos amigos y cuál está bien.") });
       }
       if (w.week >= Banca.ERR_WEEK) {
         var ep2 = ident("b-err");

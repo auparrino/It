@@ -1,6 +1,8 @@
 /* «Lo que más te cuesta» (banca.js): las rondas de reconocer armadas con
    los puntos flojos del alumno, y sus ítems: «¿qué preposición va?»,
-   «¿qué palabra va?» (conectores) y «¿cuál está bien?».
+   «¿qué palabra va?» (conectores), «¿cuál está bien?», «¿qué verbo va?»
+   (essere/avere, ser/estar), «¿qué pronombre va?» y «¿qué significa
+   acá?» (un falso amigo en su oración).
      - cada ítem de preposición tiene la respuesta entre las opciones, una
        sola correcta (sin equivalentes: tra/fra, para/pra), el motor la
        acepta y vuelve igual desde su id (la tarjeta del repaso);
@@ -40,6 +42,26 @@ pack.LANGS.forEach(function (code) {
   });
   ok(cc.every(function (x) { return !/^___.*\?\s*$/.test(x.stem); }), code + ": sin preguntas que abren con la palabra (cuándo)");
   ok(cual.every(function (x) { return x.options.length === 2; }), code + ": ¿cuál está bien?, dos versiones");
+  // ¿qué verbo va? (essere/avere, ser/estar), ¿qué pronombre va?, ¿qué significa acá? (falsos amigos)
+  var vp = B.verbPairSession({ cards: {}, unlocked: 52 }, 2000), cl = B.cliticSession({ cards: {}, unlocked: 52 }, 2000),
+      fa = B.falsoSession({ cards: {}, unlocked: 52 }, 2000);
+  ok(vp.length >= 25 && cl.length >= 40 && fa.length >= 25, code + ": verbo " + vp.length + ", pronombre " + cl.length + ", falsos amigos " + fa.length);
+  vp.concat(cl, fa).forEach(function (x) {
+    var tag = code + " " + x.id + " «" + x.stem + "»";
+    var right = x.options.filter(function (o) { return x.accept.indexOf(o) >= 0; });
+    ok(x.options.length >= 2 && right.length === 1 && ctx.Engine.grade(x.answer, x) === "giusto", tag + ": una sola correcta (" + x.options.join(" | ") + ")");
+    var y = B.item(x.id);
+    ok(y && y.answer === x.answer && y.stem === x.stem, tag + ": vuelve igual desde su id");
+  });
+  var pair = ctx.LANG.rules.banca.verbPair;
+  vp.forEach(function (x) {
+    ok(!/^___/.test(x.stem) || x.answer[0] === x.answer[0].toUpperCase(), code + " " + x.id + ": mayúscula al empezar");
+  });
+  ok(!vp.some(function (x) { return /___ (Paulo|Luís)/.test(x.stem); }), code + ": «São Paulo» no es el verbo ser");
+  ok(!cl.some(function (x) { return /___ (ser|marcas|casa)\b/.test(x.stem); }), code + ": ni artículos ni la preposición «a» como pronombre");
+  ok(!fa.some(function (x) { return /«(di|su|alla|come|mas|da)»/i.test(x.stem); }), code + ": las palabras gramaticales no son falsos amigos");
+  ok(fa.every(function (x) { return /«[^»]+»/.test(x.stem); }), code + ": el falso amigo marcado en la oración");
+  ok(pair && pair.length === 2, code + ": el par de verbos del paquete");
   var early = B.prepChoiceSession({ cards: {}, unlocked: 3 }, 50);
   ok(early.every(function (x) { return x.lvl === "A1"; }), code + ": al principio, solo oraciones A1");
 
