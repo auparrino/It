@@ -410,6 +410,12 @@
       // El nivel del recorrido (tools/pt/curriculo.py: A1 semanas 1-8, A2
       // 9-16, B1 17-27, B2 28-40, C1 41-52): la última semana de A1…B2.
       levels: [8, 16, 27, 40],
+      // «¿Qué verbo va?» (banca.js): el par que confunde al hispanohablante
+      // (o banheiro é no segundo andar, estou com fome) y las oraciones que lo trabajan.
+      verbPair: ["ser", "estar"],
+      verbPairTags: ["ser_estar", "presente", "perfeito", "imperfeito", "formal", "coloquial"],
+      // «¿Qué pronombre va?»: los átonos (o, a, lhe, me…), delante o detrás del verbo.
+      clitics: ["o", "a", "os", "as", "lhe", "lhes", "me", "te", "se", "nos"],
       defArt: defArt,
       indefArt: indefArt,
       // El género no cambia en plural (o ovo → os ovos).

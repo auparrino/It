@@ -6,7 +6,9 @@
  * tiempo (a la mañana, a la noche, al día siguiente) y lo que remite a algo
  * ya dicho (él, ella, eso).  La app los marca como pista.
  *
- * La primera pieza queda en su lugar (el ancla); el resto se ordena.  Se
+ * La primera pieza queda en su lugar (el ancla); el resto se ordena.  Las
+ * pistas tienen que estar repartidas: como mucho una pieza sin ninguna (si
+ * no, las oraciones sin pista se pegan a la anterior o el texto no sirve).  Se
  * puntúa por pares: cuántas piezas tienen detrás la que va (una pieza fuera
  * de lugar no arruina todo lo demás).
  *
@@ -14,7 +16,7 @@
  * pistas son del paquete (ESCRITOS_DATA.clues, .refer).
  *
  * API (window.Ordenar y module.exports):
- *   build(text, opts)     {unit: "párrafos" | "oraciones" | opts.unit, units: [texto],
+ *   build(text, opts)     {unit: "párrafos" | "oraciones" | "partes" | opts.unit, units: [texto],
  *                         shuffled: [índice], anchor: 0} o null
  *   grade(units, order)   {pairs, of, pct, inPlace: [bool], ok}
  *   clues(unit)           [{at, end, word, hint, kind}] las pistas marcables
@@ -48,6 +50,25 @@
     return ss.slice(at, at + size);
   }
 
+  /* The pieces after the anchor carry the clues: at most one without any
+     (a text whose only connectors sit in one sentence cannot be ordered by
+     them, it is a guess). */
+  function spread(units) {
+    var bare = 0;
+    // a turn that answers a question has its clue in the question
+    for (var i = 1; i < units.length; i++) if (!clues(units[i]).length && !/\?\s*$/.test(units[i - 1])) bare++;
+    return bare <= 1;
+  }
+  // Each sentence without a clue joins the one before it.
+  function glue(ss) {
+    var out = [];
+    ss.forEach(function (s, i) {
+      if (i > 0 && out.length && !clues(s).length) out[out.length - 1] += " " + s;
+      else out.push(s);
+    });
+    return out;
+  }
+
   function build(text, opts) {
     opts = opts || {};
     var pars = String(text).split(/\n+/).map(function (p) { return p.trim(); }).filter(Boolean);
@@ -55,15 +76,23 @@
     var maxPars = opts.maxPars || 6, maxSent = opts.maxSent || 6;
     if (pars.length >= 4 && pars.length <= maxPars) { units = pars; unit = opts.unit || "párrafos"; }
     else if (pars.length > maxPars && !opts.sentences) {
-      // a long text: a run of consecutive paragraphs (opts.from, or the start)
-      var from = Math.max(0, Math.min(pars.length - maxPars, opts.from || 0));
+      // a long text: a run of consecutive paragraphs (opts.from, or the
+      // start; if its clues are not spread, the next run that has them)
+      var last = pars.length - maxPars, from = Math.max(0, Math.min(last, opts.from || 0));
+      for (var f = 0; f <= last; f++) {
+        var at = (from + f) % (last + 1);
+        if (spread(pars.slice(at, at + maxPars))) { from = at; break; }
+      }
       units = pars.slice(from, from + maxPars); unit = opts.unit || "párrafos";
     }
     else {
       var ss = sentences(text).filter(function (s) { return s.split(/\s+/).length >= 3; });
       units = bestWindow(ss, maxSent); unit = "oraciones";
+      // pistas amontonadas en una sola oración: cada oración sin pista se
+      // pega a la anterior, así cada pieza trae algo que la ubica
+      if (!spread(units)) { units = bestWindow(glue(ss), maxSent); unit = "partes"; }
     }
-    if (units.length < 4) return null;
+    if (units.length < 4 || !spread(units)) return null;
     var rest = units.map(function (_, i) { return i; }).slice(1), sh = rest;
     for (var tries = 0; tries < 10; tries++) {
       sh = shuffle(rest, opts.rnd);
@@ -128,7 +157,7 @@
     return { maxPars: n, maxSent: n };
   }
 
-  var api = { build: build, level: level, grade: grade, clues: clues, shuffle: shuffle };
+  var api = { build: build, level: level, grade: grade, clues: clues, shuffle: shuffle, spread: spread };
   if (typeof module === "object" && module.exports) module.exports = api;
   root.Ordenar = api;
 })(typeof window !== "undefined" ? window : globalThis);

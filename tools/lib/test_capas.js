@@ -65,8 +65,7 @@ pack.LANGS.forEach(function (code) {
         ok(bk && B.openWeek(bk) <= w.week, tag + "semana " + w.week + ": recomienda un libro ya abierto");
       }
     }
-    var tre = ms.filter(function (m) { return m.kind === "tre"; })[0];
-    ok(!!tre === !!(ctx.Scrivi && ctx.Scrivi.TASKS[w.week] && !w.boss), tag + "semana " + w.week + ": «Tres vueltas» sí y solo si hay consigna de Scrivi");
+    ok(!ms.some(function (m) { return m.kind === "tre"; }), tag + "semana " + w.week + ": «Tres vueltas» ya no es misión");
   });
   ok(libWeeks >= 20, tag + "la Biblioteca está en " + libWeeks + " semanas del percorso");
   // leer un capítulo en esa semana la cumple
@@ -76,13 +75,6 @@ pack.LANGS.forEach(function (code) {
   ok(lm && lm.done, tag + "un capítulo leído en la semana cumple la misión");
   B.markRead(sw, index.books[0].id, 0);
   ok(sw.biblio.wk[first + 2] === 1, tag + "releer el mismo capítulo no cuenta dos veces");
-  // tres vueltas hecha
-  var tw = Object.keys(ctx.Scrivi.TASKS).map(Number)[3];
-  var st3 = { unlocked: tw, cards: {}, escrituraPlus: { tre: {} } };
-  st3.escrituraPlus.tre[tw] = { at: 1, r: [{ words: 40 }, { words: 50 }, { words: 55 }] };
-  var tm = C.missions(course.weeks[tw - 1], st3).filter(function (m) { return m.kind === "tre"; })[0];
-  ok(tm && tm.done && /40 → 50 → 55/.test(tm.sub), tag + "«Tres vueltas» hecha, con las palabras de cada vuelta");
-
   /* ------------------------------------------------ el plegado */
   var items = [];
   for (var wk = 1; wk <= 52; wk += 3) items.push({ week: wk, done: wk < 10, html: "<b>" + wk + "</b>" });
@@ -147,9 +139,9 @@ pack.LANGS.forEach(function (code) {
   ok(!E.sources(st4).some(function (y) { return y.kind === "escucha"; }), tag + "una escucha no hecha no es fuente");
   st4.letture["l-35"] = { pct: 80 }; st4.tramo.asc[35] = { pct: 90 };
   var ms4 = E.missions({ week: 35 }, st4);
-  var hu = ms4.filter(function (m) { return m.kind === "esc-huecos"; })[0], or = ms4.filter(function (m) { return m.kind === "esc-ordenar"; })[0];
-  ok(hu && /^ep:l-35\|/.test(hu.arg), tag + "el C-test de la semana 35 va sobre la lectura larga");
-  ok(or && /^as:35\|/.test(or.arg), tag + "«Ordená» de la semana 35 va sobre la escucha");
+  var or = ms4.filter(function (m) { return m.kind === "esc-ordenar"; })[0];
+  ok(!ms4.some(function (m) { return m.kind === "esc-huecos"; }), tag + "el C-test ya no es misión de la semana");
+  ok(or && !/^(as|ep|dg):[^|]*35\|/.test(or.arg) && E.byId(or.arg.split("|")[0]).week < 35, tag + "«Ordená» de la semana 35 no es el texto de esa semana (" + (or && or.arg) + ")");
   var lsrc = larga.filter(function (y) { return y.week === 45; })[0];
   var ps = E.passages(lsrc.text, E.passageWords(45));
   ok(ps.length >= 2 && ps.every(function (p) { return p.split(/\s+/).length <= 700; }), tag + "la lectura larga se trabaja por pasajes (" + ps.length + ")");

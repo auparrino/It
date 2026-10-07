@@ -707,7 +707,7 @@
      old version) they are dropped, and the module starts them again empty.
      Before 3.0 a single bad field could leave the app without a screen. */
   var SAVE_V = 3;
-  var MODULE_OBJ = ["mcGloss", "readSess", "readParts", "variants", "hintLevels", "weakDone", "suoniPct", "suoniDone", "capirePct",
+  var MODULE_OBJ = ["mcGloss", "readSess", "readParts", "variants", "hintLevels", "weakDone", "suoniPct", "suoniDone", "capirePct", "identPct",
     "duelli", "ubicacion", "dictogloss", "ascolto", "parlaLog", "esame", "esameDraft", "scrittiDraft", "scritti", "biblio",
     "bossUsed", "strands", "streakBroken", "escritos", "escrituraPlus", "onboard", "hoy", "cierre", "porque", "ritmo", "tiempo",
     "dos", "radio", "scriviExtra", "tramo", "tres", "fuera", "trabajo", "sync"];
