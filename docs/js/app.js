@@ -4440,7 +4440,7 @@
   function aiCard() {
     var notes = state.aiNotes || [];
     return '<div class="card" id="aicard"><h2>🤖 Corrector con IA</h2>' +
-      '<p class="muted small">Con una clave gratuita, la IA suma lo que ve a lo que marca el corrector de ' + UI.scrivi +
+      '<p class="muted small">Con una clave de Anthropic (Claude Haiku), la IA suma lo que ve a lo que marca el corrector de ' + UI.scrivi +
         ", da pistas antes de la respuesta («🤖 Explicame»), explica más en la hoja final y juzga las respuestas que el ejercicio no tenía previstas.</p>" +
       aiKeyFields() +
       (notes.length ? "<h3>Correcciones para revisar (" + notes.length + ")</h3>" +
@@ -5424,7 +5424,7 @@
   function renderParla(w) {
     var head = '<button class="btn ghost" id="pback">← a la semana</button>' +
       plate(UI.parla + " · " + UI.week + " " + weekNum(w.week), esc(parla && parla.scen ? parla.scen.titolo : "Role-play"));
-    if (!aiKey()) return head + '<div class="card"><p>Para hablar con la IA hace falta una clave gratuita. <a href="#" id="aigo2">Cargala en ' + UI.me + " →</a></p></div>";
+    if (!aiKey()) return head + '<div class="card"><p>Para hablar con la IA hace falta una clave de Anthropic. <a href="#" id="aigo2">Cargala en ' + UI.me + " →</a></p></div>";
     if (!parla || parla.week !== w.week) {
       return head + '<div class="card"><p>Un personaje te espera con una situación de la semana (<b>' + esc(w.fare || w.title) + "</b>). " +
         "Tenés que conseguir <b>tres objetivos</b> escribiendo en " + UI.langEs + ". La IA no te corrige mientras hablan: al final ves tus frases " +
@@ -5646,7 +5646,7 @@
   function renderStoria(w) {
     var head = '<button class="btn ghost" id="sback2">← a la semana</button>' +
       plate(UI.storia + " · " + UI.week + " " + weekNum(w.week), UI.storiaOf);
-    if (!aiKey()) return head + '<div class="card"><p>Para generar la historia hace falta una clave gratuita. <a href="#" id="aigo3">Cargala en ' + UI.me + " →</a></p></div>";
+    if (!aiKey()) return head + '<div class="card"><p>Para generar la historia hace falta una clave de Anthropic. <a href="#" id="aigo3">Cargala en ' + UI.me + " →</a></p></div>";
     var mine = (state.storie || []).filter(function (x) { return x.week === w.week; });
     var due = Drills.buildReview(course, state, 40, drillOpts()).map(function (it) { return vocabWordOf(it); }).filter(Boolean);
     var targets = due.slice(0, 8);
@@ -6373,7 +6373,7 @@
         "Si la IA no está, pedir la corrección de LanguageTool (gratis; el texto se envía a su servidor)</label>" +
       '<p class="muted small ailine">🤖 ' + (aiKey()
         ? "Corrector con IA activado (" + aiNames() + "). "
-        : "Para que una IA marque todo y lo explique, cargá una clave gratuita. ") +
+        : "Para que una IA marque todo y lo explique, cargá una clave de Anthropic. ") +
         '<a href="#" id="aigo">Claves en ' + UI.me + " →</a></p>" +
       '<div id="sout"></div>';
   }
@@ -6392,50 +6392,31 @@
   }
 
   var scriviTimer = null;
-  /* The AI keys: Groq first, Gemini as fallback.  Only in this phone's
+  /* The AI key: Anthropic, for Claude Haiku.  Only in this phone's
      storage, never in the backup. */
-  var AI_KEY = SKEY("groq.key"), GEM_KEY = SKEY("gemini.key");
+  var AI_KEY = SKEY("claude.key");
   function readKey(k) { try { return localStorage.getItem(k) || ""; } catch (e) { return ""; } }
-  function aiKeys() { return { groq: readKey(AI_KEY), gemini: readKey(GEM_KEY) }; }
-  function aiKey() { var k = aiKeys(); return k.groq || k.gemini; }
-  // «Gemini, y Groq de respaldo»: in the order the learner chose.
-  function aiNames() {
-    var k = aiKeys(), ids = (window.IA ? IA.order() : ["gemini", "groq"]).filter(function (id) { return k[id]; });
-    var name = { gemini: "Gemini", groq: "Groq" };
-    return ids.length > 1 ? name[ids[0]] + ", y " + name[ids[1]] + " de respaldo" : ids.map(function (id) { return name[id]; }).join("");
-  }
-  // Which AI answered: «Groq · moonshotai/kimi-k2-instruct».
+  function aiKeys() { return { claude: readKey(AI_KEY) }; }
+  function aiKey() { return aiKeys().claude; }
+  function aiNames() { return aiKey() ? "Claude Haiku" : ""; }
+  // Which AI answered: «Claude · claude-haiku-5-5».
   function modelLine(m, m2) {
     var one = function (x) { return x ? esc(x.provider + " · " + x.model) : ""; };
     if (!m) return "";
     return '<p class="muted small modelline">' + (m2 ? "Corrigió " + one(m) + " · revisó " + one(m2) : "IA: " + one(m)) + "</p>";
   }
   function aiKeyFields() {
-    var k = aiKeys();
-    var first = window.IA ? IA.order()[0] : "gemini", st = window.IA ? IA.stats() : {};
-    var lat = function (id) {
-      var x = st[id];
-      return x && x.lat ? ' <span class="muted">· última vez ' + esc(x.model) + ", " + secs(x.lat.first) + " s</span>" : "";
-    };
-    return '<p class="muted small"><label for="gemkey"><b>Gemini</b></label>: <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a> → «Create API key».' + lat("gemini") + "</p>" +
-      '<input id="gemkey" type="password" autocomplete="off" placeholder="Clave de Gemini (AIza…)" value="' + esc(k.gemini) + '">' +
-      '<p class="muted small"><label for="aikey"><b>Groq</b></label>: <a href="https://console.groq.com/keys" target="_blank" rel="noopener">console.groq.com/keys</a> → «Create API Key».' + lat("groq") + "</p>" +
-      '<input id="aikey" type="password" autocomplete="off" placeholder="Clave de Groq (gsk_…)" value="' + esc(k.groq) + '">' +
-      '<fieldset class="aiorder"><legend class="muted small">Con las dos claves, primero preguntar a:</legend>' +
-      '<label><input type="radio" name="aifirst" value="gemini"' + (first === "gemini" ? " checked" : "") + "> Gemini <span class=\"muted small\">(mejor italiano y portugués)</span></label>" +
-      '<label><input type="radio" name="aifirst" value="groq"' + (first === "groq" ? " checked" : "") + "> Groq <span class=\"muted small\">(el más rápido)</span></label></fieldset>" +
+    var k = aiKeys(), st = window.IA ? IA.stats().claude : null;
+    var lat = st && st.lat ? ' <span class="muted">· última vez ' + secs(st.lat.first) + " s</span>" : "";
+    return '<p class="muted small"><label for="aikey"><b>Claude Haiku</b></label> (Anthropic): <a href="https://console.anthropic.com/settings/keys" target="_blank" rel="noopener">console.anthropic.com/settings/keys</a> → «Create Key».' + lat + "</p>" +
+      '<input id="aikey" type="password" autocomplete="off" placeholder="Clave de Anthropic (sk-ant-…)" value="' + esc(k.claude) + '">' +
       '<div class="row"><button class="tab" id="aisave">Guardar</button></div>' +
-      '<p class="muted small">Si uno falla o tarda en empezar a responder, la app le pregunta al otro. Las claves quedan solo en este teléfono; el texto se envía a Google o a Groq.</p>';
+      '<p class="muted small">La clave queda solo en este teléfono; el texto se envía a Anthropic. La API se paga por uso: con Haiku, centavos por cientos de correcciones.</p>';
   }
   function saveKeys() {
-    var g = (($("#aikey") || {}).value || "").trim(), m = (($("#gemkey") || {}).value || "").trim();
-    var pick = document.querySelector('input[name="aifirst"]:checked');
-    if (pick && window.IA) IA.setOrder(pick.value);
-    try {
-      if (g) localStorage.setItem(AI_KEY, g); else localStorage.removeItem(AI_KEY);
-      if (m) localStorage.setItem(GEM_KEY, m); else localStorage.removeItem(GEM_KEY);
-    } catch (e) { /* */ }
-    return (g ? "Groq" : "") + (g && m ? " y " : "") + (m ? "Gemini" : "");
+    var g = (($("#aikey") || {}).value || "").trim();
+    try { if (g) localStorage.setItem(AI_KEY, g); else localStorage.removeItem(AI_KEY); } catch (e) { /* */ }
+    return g ? "la clave de Claude" : "";
   }
   function wireScrivi() {
     if (view.screen !== "scrivi") return;
@@ -7087,7 +7068,7 @@
      the keyboard must not fix the learner's answer); «Teclado sin
      sugerencias» (state.kbQuiet) puts autocomplete="off" back.  The search
      boxes and the keys (type search, password) are left as they are. */
-  var SPANISH_BOXES = { idealtext: 1, refq: 1, aikey: 1, gemkey: 1 };
+  var SPANISH_BOXES = { idealtext: 1, refq: 1, aikey: 1 };
   function langBoxes(root0) {
     (root0 || document).querySelectorAll("textarea, input").forEach(function (el) {
       var type = (el.getAttribute("type") || "text").toLowerCase();

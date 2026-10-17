@@ -17,7 +17,7 @@ como para hacerte tropezar.
 
 Es una **app web instalable** (PWA): se publica una vez y queda en tu pantalla de
 inicio como cualquier app, **funciona sin internet** y guarda tu progreso **solo en
-tu teléfono**. No usa cuentas ni servidores; la IA es opcional, con una clave gratuita tuya.
+tu teléfono**. No usa cuentas ni servidores; la IA es opcional, con una clave de Anthropic tuya (Claude Haiku).
 
 1. Publicá la carpeta `docs/` con GitHub Pages: *Settings → Pages → Deploy from a
    branch →* la rama que tenga estos cambios, carpeta `/docs`.
@@ -870,19 +870,14 @@ responde, con un botón para volver a probar la IA.
 
 **Corrector con IA (opcional).** LanguageTool casi no controla la
 concordancia ni la persona del verbo en italiano. Para una corrección
-completa, la app usa **Groq** con una clave gratuita del usuario
-(*console.groq.com/keys → Create API Key*, empieza con `gsk_`) y, de
-respaldo, **Gemini** (*aistudio.google.com/apikey*, empieza con `AIza`):
-si Groq falla, no responde a tiempo o no hay clave de Groq, pregunta a
-Gemini. La IA marca cada error del texto con su explicación en castellano y
-agrega la versión corregida y una devolución. A cada servicio la app le pide
-la lista de modelos de esa clave y usa el mejor disponible (en Groq Kimi K2,
-gpt-oss-120b, Llama 3.3 70B…; en Gemini 2.5 Flash, 2.0 Flash, Flash-Lite…),
-así no depende de nombres que cambian; descarta los de audio, imagen,
-embeddings y los inactivos. Si un modelo tarda más de 20 segundos, está
-saturado, pide plan pago o no acepta el modo JSON, prueba el siguiente, y
-recuerda el que anduvo. Las claves quedan solo en el teléfono (no entran en
-las copias de seguridad) y el texto se envía a Groq o a Google. Lo que la IA marca reemplaza lo que el corrector
+completa, la app usa **Claude Haiku** (`claude-haiku-5-5`, de Anthropic) con
+una clave del usuario (*console.anthropic.com/settings/keys → Create Key*,
+empieza con `sk-ant-`; la API se paga por uso, y con Haiku son centavos).
+La IA marca cada error del texto con su explicación en castellano y
+agrega la versión corregida y una devolución. Cada pedido espera hasta 20
+segundos; si Anthropic está saturado, prueba dos veces más. La clave queda
+solo en el teléfono (no entra en las copias de seguridad) y el texto se
+envía a Anthropic. Lo que la IA marca reemplaza lo que el corrector
 propio o LanguageTool dijeron sobre las mismas palabras.
 
 **«🤖 Explicame» en cualquier ejercicio.** Con la clave guardada (en
