@@ -107,6 +107,37 @@ function chromiumPath() {
     await tap(page, "a"); await tap(page, "enter"); await tap(page, "b");
     const long = await page.inputValue("#kblong");
     if (long !== "a\nb") errors.push(code + ": ↵ en un texto largo no hizo un renglón nuevo: " + JSON.stringify(long));
+    // ▾ hides the keyboard and changes nothing: the next box opens it again
+    await tap(page, "hide");
+    await page.waitForTimeout(250);
+    if (await panelOn(page)) errors.push(code + ": ▾ no ocultó el teclado");
+    if ((await page.evaluate(() => window.Teclado.mode())) !== "app") errors.push(code + ": ▾ cambió de teclado");
+    await page.focus("#kblong");
+    await page.waitForTimeout(250);
+    if (!(await panelOn(page))) errors.push(code + ": después de ▾ la caja no volvió a abrir el teclado de la app");
+    // a box drawn and focused at once, before the app marks it (Scrivi):
+    // marked on the focus, with the app's keyboard
+    await page.evaluate(() => {
+      const t = document.createElement("textarea");
+      t.id = "kbnew"; t.className = "grow scrivi";
+      document.getElementById("app").appendChild(t);
+      t.focus();
+    });
+    await page.waitForTimeout(400);
+    const nb = await page.evaluate(() => ({ im: document.querySelector("#kbnew").getAttribute("inputmode"), act: document.activeElement && document.activeElement.id }));
+    if (nb.im !== "none" || nb.act !== "kbnew" || !(await panelOn(page))) errors.push(code + ": una caja enfocada antes de marcarla no abrió el teclado de la app: " + JSON.stringify(nb));
+    // with the phone's keyboard, a box without a row of accents: the button on top brings the app's back
+    await tap(page, "phone");
+    await page.waitForTimeout(300);
+    await page.focus("#kbnew");
+    await page.waitForTimeout(250);
+    const chip = await page.evaluate(() => { const c = document.getElementById("kbchip"); return !!c && !c.hidden; });
+    if (!chip) errors.push(code + ": con el teclado del teléfono no aparece «⌨️ Teclado de la app»");
+    else {
+      await page.click("#kbchip");
+      await page.waitForTimeout(400);
+      if ((await page.evaluate(() => window.Teclado.mode())) !== "app" || !(await panelOn(page))) errors.push(code + ": «⌨️ Teclado de la app» no volvió al teclado de la app");
+    }
     await page.context().close();
 
     // a computer: nothing changes

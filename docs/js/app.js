@@ -828,7 +828,7 @@
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION = "c1-vN" in sw.js: test_game
      and the CI check it).  One version for the app and both languages. */
-  var APP_VERSION = "v3.11";
+  var APP_VERSION = "v3.11.1";
   // Settimana XVII: Roman numerals on the street signs (LANG.ui.romanWeeks).
   function romano(n) {
     var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
@@ -7108,6 +7108,14 @@
      sugerencias» (state.kbQuiet) puts autocomplete="off" back.  The search
      boxes and the keys (type search, password) are left as they are. */
   var SPANISH_BOXES = { idealtext: 1, refq: 1, aikey: 1 };
+  // A box where the learner writes in the language of the course (the app's keyboard, teclado.js).
+  function courseBox(el) {
+    var type = (el.getAttribute("type") || "text").toLowerCase();
+    if (type !== "text" && el.tagName !== "TEXTAREA") return false;
+    if (el.tagName !== "TEXTAREA" && el.tagName !== "INPUT") return false;
+    return !(SPANISH_BOXES[el.id] || el.dataset.es || (el.getAttribute("lang") && el.getAttribute("lang") === "es"));
+  }
+  if (window.Teclado) Teclado.qualify = courseBox;
   function langBoxes(root0) {
     (root0 || document).querySelectorAll("textarea, input").forEach(function (el) {
       var type = (el.getAttribute("type") || "text").toLowerCase();

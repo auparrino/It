@@ -49,7 +49,25 @@
   function marked(el) { return !!(el && el.getAttribute && el.getAttribute("data-kb") === "1"); }
   function remark() { Array.prototype.forEach.call(doc.querySelectorAll("[data-kb='1']"), mark); }
 
-  var panel = null, target = null, shift = false, layer = "abc", hideTimer = null, lastBox = null;
+  var panel = null, target = null, shift = false, layer = "abc", hideTimer = null, lastBox = null, chip = null;
+
+  /* With the phone's keyboard: a button to bring the app's one back, on top
+     of the screen (the phone's keyboard covers the bottom), while an answer
+     box has the focus.  Every screen has it, not only the ones with a row of
+     accents. */
+  function showChip() {
+    if (!chip) {
+      chip = doc.createElement("button");
+      chip.type = "button";
+      chip.id = "kbchip";
+      chip.className = "kbchip";
+      chip.setAttribute("data-kbapp", "1");
+      chip.textContent = "⌨️ Teclado de la app";
+      doc.body.appendChild(chip);
+    }
+    chip.hidden = false;
+  }
+  function hideChip() { if (chip) chip.hidden = true; }
 
   function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
   function key(ch, cls, label, title) {
@@ -57,7 +75,10 @@
       (title ? ' aria-label="' + esc(title) + '"' : "") + ">" + esc(label || ch) + "</button>";
   }
   function draw() {
-    var L = layout(), rows = layer === "abc" ? L.rows : SYMBOLS, html = "";
+    var L = layout(), rows = layer === "abc" ? L.rows : SYMBOLS;
+    // the way to the phone's keyboard says what it does (the ⌨️ of before
+    // looked like Gboard's «hide the keyboard» and was pressed for that)
+    var html = '<div class="kbtop"><button type="button" class="kblink" data-k="phone">Usar el teclado del teléfono</button></div>';
     if (layer === "abc" && L.extra.length) {
       html += '<div class="kbrow kbextra">' + L.extra.map(function (c) { return key(shift ? c.toUpperCase() : c); }).join("") + "</div>";
     }
@@ -70,7 +91,7 @@
       html += '<div class="kbrow">' + keys + "</div>";
     });
     html += '<div class="kbrow">' +
-      key("phone", "kbmod kbphone", "⌨️", "usar el teclado del teléfono") +
+      key("hide", "kbmod", "▾", "ocultar el teclado") +
       (layer === "abc" ? key("123", "kbmod", "123", "números y signos") : key("abc", "kbmod", "abc", "letras")) +
       key(" ", "kbspace", (root.LANG && root.LANG.name) || "espacio", "espacio") +
       key("enter", "kbmod kbenter", "↵", "enviar") + "</div>";
@@ -121,6 +142,7 @@
     if (k === "123" || k === "abc") { layer = k === "123" ? "sym" : "abc"; draw(); return; }
     if (k === "back") { back(el); return; }
     if (k === "phone") { usePhone(); return; }
+    if (k === "hide") { var h = target; hide(); if (h) h.blur(); return; }
     if (k === "enter") {
       var ev;
       try { ev = new root.KeyboardEvent("keydown", { key: "Enter", code: "Enter", bubbles: true, cancelable: true }); }
@@ -175,23 +197,40 @@
   if (doc && doc.addEventListener) {
     doc.addEventListener("focusin", function (e) {
       var el = e.target;
+      // a box the app drew and focused before marking it (a screen that
+      // draws itself and takes the focus in one go): marked now, and given
+      // the focus again so that the phone's keyboard that started to open closes
+      if (!marked(el) && api.qualify && el && el.tagName && api.qualify(el)) {
+        mark(el);
+        if (active()) { el.blur(); setTimeout(function () { el.focus(); }, 30); return; }
+      }
       if (marked(el)) lastBox = el;
-      if (marked(el) && active()) show(el);
-      else if (panel && !panel.contains(el)) hideSoon();
+      if (marked(el) && active()) { hideChip(); show(el); }
+      else {
+        if (panel && !panel.contains(el)) hideSoon();
+        if (marked(el) && touch()) showChip(); else if (!(chip && chip.contains(el))) hideChip();
+      }
     });
-    doc.addEventListener("focusout", function (e) { if (target && e.target === target) hideSoon(); });
+    doc.addEventListener("focusout", function (e) {
+      if (target && e.target === target) hideSoon();
+      if (chip && marked(e.target)) setTimeout(function () { if (!marked(doc.activeElement)) hideChip(); }, 150);
+    });
     // the button that brings the app's keyboard back (in the accents row):
     // tapping it does not take the focus away from the box
     doc.addEventListener("mousedown", function (e) {
       if (e.target && e.target.closest && e.target.closest("[data-kbapp]")) e.preventDefault();
     });
+    doc.addEventListener("pointerdown", function (e) {
+      if (e.target && e.target.closest && e.target.closest("[data-kbapp]")) e.preventDefault();
+    });
     doc.addEventListener("click", function (e) {
       var b = e.target && e.target.closest ? e.target.closest("[data-kbapp]") : null;
-      if (b) { e.preventDefault(); useApp(); }
+      if (b) { e.preventDefault(); hideChip(); useApp(); }
     });
   }
 
-  var api = { mark: mark, active: active, mode: mode, setMode: function (m) { setMode(m); remark(); if (!active()) hide(); },
+  // api.qualify(el): app.js says which boxes are answers in the language of the course
+  var api = { qualify: null, mark: mark, active: active, mode: mode, setMode: function (m) { setMode(m); remark(); if (!active()) hide(); },
               touch: touch, layout: layout, useApp: useApp, usePhone: usePhone, press: press, show: show, hide: hide };
   if (typeof module === "object" && module.exports) module.exports = api;
   root.Teclado = api;

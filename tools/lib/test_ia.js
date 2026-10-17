@@ -95,6 +95,24 @@ test("saturado: espera y otra vuelta; si sigue, error claro", function (next) {
   });
 });
 
+test("un 400 por las opciones de razonamiento: otra vez sin ellas; otro 400: el motivo a la vista", function (next) {
+  memStore();
+  var bodies = [];
+  ctx.fetch = function (url, opt) {
+    var b = JSON.parse(opt.body); bodies.push(b);
+    return b.thinking || b.output_config ? jsonResp(400, { type: "error", error: { type: "invalid_request_error", message: "thinking: not supported" } })
+                                          : jsonResp(200, reply('{"ok": 2}'));
+  };
+  IA.llm("p", { claude: "k" }, function (e, d) {
+    ok(!e && d.ok === 2 && bodies.length === 2 && !bodies[1].thinking && !bodies[1].output_config, "sin razonamiento la segunda vez: " + (e && e.message));
+    ctx.fetch = function () { return jsonResp(400, { type: "error", error: { type: "invalid_request_error", message: "messages: text content blocks must be non-empty" } }); };
+    IA.llm("p", { claude: "k" }, function (e2) {
+      ok(e2 && /HTTP 400: messages: text content blocks must be non-empty/.test(e2.message), "el motivo del 400 llega al mensaje: " + (e2 && e2.message));
+      next();
+    });
+  });
+});
+
 test("clave mala, sin crédito o rechazo: sin reintentar", function (next) {
   memStore();
   var n = 0;
