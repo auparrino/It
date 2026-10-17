@@ -1,0 +1,110 @@
+/* El teclado de la app (docs/js/teclado.js) en el navegador, en cada idioma:
+   - en un celular (pantalla táctil), la caja de la respuesta lleva
+     inputmode="none" y al tomar el foco aparece el teclado de la app, con
+     las letras de la lengua (ä ö ü ß en alemán, à è ì ò ù en italiano…);
+   - las teclas escriben donde está el cursor (con ⇧, ⌫ y la capa 123), y
+     ↵ manda la respuesta como el Enter de siempre;
+   - ⌨️ pasa al teclado del teléfono (sin inputmode, sin panel) y el ⌨️ de
+     la fila de acentos vuelve al de la app; la elección queda guardada;
+   - con mouse y teclado físico (una computadora) no aparece nada.
+     NODE_PATH=$(npm root -g) node tools/lib/smoke_teclado.js
+     LANGS=it,pt,de   los idiomas (por defecto, todos los de boot.js)
+     SHOTS=dir        capturas a 390×844 */
+"use strict";
+const { chromium } = require("playwright");
+const { spawn } = require("child_process");
+const fs = require("fs"), path = require("path");
+const Boot = require("../../docs/js/boot.js");
+
+function chromiumPath() {
+  const base = "/opt/pw-browsers";
+  try {
+    const dir = fs.readdirSync(base).filter(d => /^chromium-\d+$/.test(d)).sort().pop();
+    return dir && ["chrome-linux", "chrome-linux64"].map(d => path.join(base, dir, d, "chrome")).filter(f => fs.existsSync(f))[0];
+  } catch (e) { return undefined; }
+}
+
+(async () => {
+  const port = +(process.env.PORT || 8766), shots = process.env.SHOTS || "";
+  const langs = (process.env.LANGS || Object.keys(Boot.LANGS).join(",")).split(",");
+  if (shots) fs.mkdirSync(shots, { recursive: true });
+  const srv = spawn("python3", ["-m", "http.server", String(port)], { cwd: path.join(__dirname, "..", "..", "docs"), stdio: "ignore" });
+  await new Promise(r => setTimeout(r, 1200));
+  const browser = await chromium.launch().catch(() => chromium.launch({ executablePath: chromiumPath() }));
+  const errors = [], base = "http://localhost:" + port + "/";
+  const note = (s) => console.log("· " + s);
+
+  async function open(code, mobile) {
+    const ctx = await browser.newContext(mobile ? { viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true }
+                                                : { viewport: { width: 1200, height: 800 } });
+    const page = await ctx.newPage();
+    page.on("pageerror", e => errors.push(code + ": pageerror: " + e.message));
+    await page.goto(base + "?test&lang=" + code, { waitUntil: "networkidle" });
+    await page.waitForFunction(() => window.__test && window.__test.state && window.Teclado, null, { timeout: 20000 });
+    return page;
+  }
+  // a question to write, and the box with the focus
+  async function ask(page, answer, id) {
+    await page.evaluate(([a, i]) => window.__test.play([{ id: i, type: "translate", prompt: "Traducí.", stem: "prueba", answer: a, accept: [a] }], 1), [answer, id]);
+    await page.waitForSelector("#ans", { timeout: 5000 });
+    await page.waitForTimeout(350);
+    await page.focus("#ans");
+    await page.waitForTimeout(250);
+  }
+  const panelOn = (page) => page.evaluate(() => { const p = document.getElementById("kbapp"); return !!p && !p.hidden; });
+  const tap = async (page, k) => { await page.click('#kbapp [data-k="' + k + '"]'); await page.waitForTimeout(40); };
+
+  for (const code of langs) {
+    const page = await open(code, true);
+    const special = await page.evaluate(() => (window.LANG.ui.keys || []).filter(c => c.length === 1 && /[^a-z'\-]/.test(c))[0]);
+    const word = "ab" + (special || "");
+    await ask(page, word, "kb-" + code + "-1");
+    const im = await page.getAttribute("#ans", "inputmode");
+    if (im !== "none") errors.push(code + ": la caja no lleva inputmode=none (" + im + ")");
+    if (!(await panelOn(page))) errors.push(code + ": el teclado de la app no apareció");
+    const keys = await page.$$eval("#kbapp [data-k]", bs => bs.map(b => b.getAttribute("data-k")));
+    if (special && keys.indexOf(special) < 0) errors.push(code + ": falta la tecla «" + special + "» (" + keys.join("") + ")");
+    if (shots) await page.screenshot({ path: path.join(shots, code + "-teclado.png") });
+    // typing: a, ⇧ B → «aB», ⌫, b, the special letter, and ↵ sends it
+    await tap(page, "a"); await tap(page, "shift"); await tap(page, "B");
+    let v = await page.inputValue("#ans");
+    if (v !== "aB") errors.push(code + ": ⇧ no puso la mayúscula: «" + v + "»");
+    await tap(page, "back"); await tap(page, "b");
+    if (special) await tap(page, special);
+    v = await page.inputValue("#ans");
+    if (v !== word) errors.push(code + ": las teclas escribieron «" + v + "», no «" + word + "»");
+    if ((await page.evaluate(() => document.activeElement && document.activeElement.id)) !== "ans") errors.push(code + ": la caja perdió el foco al tocar teclas");
+    await tap(page, "123"); await tap(page, "1"); await tap(page, "back"); await tap(page, "abc");
+    await tap(page, "enter");
+    await page.waitForTimeout(500);
+    const fb = await page.$("#fb .feedback.giusto, .feedback.giusto");
+    if (!fb) errors.push(code + ": ↵ no mandó la respuesta (o no se corrigió como buena)");
+    note(code + " · teclado de la app: " + keys.filter(k => k.length === 1).join("") + " · escribió «" + v + "» y ↵ la mandó");
+    // ⌨️: to the phone's keyboard, and back from the accents row
+    await ask(page, "x", "kb-" + code + "-2");
+    await tap(page, "phone");
+    await page.waitForTimeout(300);
+    const after = await page.evaluate(() => ({ im: document.querySelector("#ans").getAttribute("inputmode"), mode: window.Teclado.mode(),
+      panel: !document.getElementById("kbapp").hidden, back: !!document.querySelector(".accents [data-kbapp]") }));
+    if (after.im === "none" || after.mode !== "phone" || after.panel) errors.push(code + ": ⌨️ no pasó al teclado del teléfono: " + JSON.stringify(after));
+    if (!after.back) errors.push(code + ": falta el ⌨️ para volver en la fila de acentos");
+    await ask(page, "x", "kb-" + code + "-3");
+    if ((await page.getAttribute("#ans", "inputmode")) === "none" || await panelOn(page)) errors.push(code + ": la elección del teclado del teléfono no quedó");
+    await page.click(".accents [data-kbapp]");
+    await page.waitForTimeout(400);
+    const back = await page.evaluate(() => ({ im: document.querySelector("#ans").getAttribute("inputmode"), mode: window.Teclado.mode() }));
+    if (back.im !== "none" || back.mode !== "app") errors.push(code + ": el ⌨️ de la fila no volvió al teclado de la app: " + JSON.stringify(back));
+    if (!(await panelOn(page))) errors.push(code + ": al volver, el teclado de la app no se abrió");
+    note(code + " · ⌨️ al teclado del teléfono y vuelta");
+    await page.context().close();
+
+    // a computer: nothing changes
+    const pc = await open(code, false);
+    await ask(pc, "x", "kb-" + code + "-pc");
+    if ((await pc.getAttribute("#ans", "inputmode")) === "none" || await panelOn(pc)) errors.push(code + ": en la computadora apareció el teclado de la app");
+    await pc.context().close();
+  }
+  console.log(errors.length ? "\nERRORES:\n" + errors.join("\n") : "\nsin errores · teclado de la app en " + langs.join(", "));
+  await browser.close(); srv.kill();
+  process.exit(errors.length ? 1 : 0);
+})();

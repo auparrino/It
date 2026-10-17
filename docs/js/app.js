@@ -2589,6 +2589,8 @@
           UI.keys.map(function (c) {
             return '<button data-ins="' + c + '">' + c + "</button>";
           }).join("") +
+          // with the phone's keyboard: back to the app's (teclado.js)
+          '<button class="kbback" data-kbapp="1" title="teclado de la app">⌨️</button>' +
         "</div>" +
         '<button class="btn" id="send">' + UI.check + "</button></div>";
     }
@@ -4279,6 +4281,11 @@
           [["", "Como el teléfono"], ["light", "Claro ☀️"], ["dark", "Oscuro 🌙"]].map(function (t) {
             return '<option value="' + t[0] + '"' + ((state.theme || "") === t[0] ? " selected" : "") + ">" + t[1] + "</option>";
           }).join("") + "</select></label>" +
+        (window.Teclado && Teclado.touch() ? '<label class="set"><span>Teclado para responder<small>el de la app tiene las letras de ' + esc(UI.langEs || "la lengua") +
+          ' y no autocorrige en castellano; el del teléfono no se puede poner en otro idioma desde una web</small></span><select id="kbmode">' +
+          [["app", "El de la app"], ["phone", "El del teléfono"]].map(function (t) {
+            return '<option value="' + t[0] + '"' + (Teclado.mode() === t[0] ? " selected" : "") + ">" + t[1] + "</option>";
+          }).join("") + "</select></label>" : "") +
         '<label class="set"><span>Teclado sin sugerencias<small>el teclado no te propone palabras (más difícil), pero tampoco detecta el idioma solo ni deja elegirlo desde su barra</small></span>' +
           '<input type="checkbox" id="kbquiet"' + (state.kbQuiet ? " checked" : "") + "></label>" +
         '<label class="set"><span>Modo oficina 🤫<small>nada suena solo; el 🔊 sigue andando si lo tocás</small></span>' +
@@ -7009,6 +7016,8 @@
       applyTheme();
       renderHeader();
     };
+    var kbm = $("#kbmode");
+    if (kbm) kbm.onchange = function () { Teclado.setMode(kbm.value); toast(kbm.value === "app" ? "Respondés con el teclado de la app." : "Respondés con el teclado del teléfono."); };
     var kbq = $("#kbquiet");
     if (kbq) kbq.onchange = function () { state.kbQuiet = kbq.checked; persist(); langBoxes(); };
     var silent = $("#silent");
@@ -7076,6 +7085,8 @@
       var es = !!(SPANISH_BOXES[el.id] || el.dataset.es);
       if (!el.hasAttribute("lang")) el.setAttribute("lang", es ? "es" : LG.tts);
       if (type === "search" || es) return;
+      // the app's own keyboard, in the language of the course (teclado.js)
+      if (window.Teclado) Teclado.mark(el);
       el.setAttribute("autocorrect", "off");
       if (state.kbQuiet) el.setAttribute("autocomplete", "off");
       else el.removeAttribute("autocomplete");

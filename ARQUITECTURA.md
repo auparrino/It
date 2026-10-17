@@ -39,6 +39,7 @@ docs/
 tools/
   lib/pack.js           carga un idioma completo en node, en el orden de boot.js
   lib/sim_carriera.js   un año simulado de un idioma (npm run sim)
+  lib/smoke_teclado.js  el teclado de la app en cada idioma (como celular y como computadora)
   lib/smoke_browser.js  recorre los dos idiomas en Chromium (selector, cambio
                         de idioma, pantallas, service worker)
   lib/test_*.js         los tests de lo común, en los dos idiomas
@@ -111,6 +112,25 @@ los tests de lo común (`tools/lib/test_*.js`) y los chequeos de contenido
 repetidos) y `npm run smoke`. El CI (`.github/workflows/test.yml`) corre todo
 eso y controla que `npm run build` reproduzca `docs/` exacto; el detalle, en
 [CONTENIDO.md](CONTENIDO.md).
+
+**El teclado de la app** (`js/teclado.js`). Una página web no puede elegir
+el idioma del teclado del teléfono: Chrome en Android no le pasa al teclado
+el `lang` del campo (`EditorInfo.hintLocales`, que sí ponen las apps nativas
+como Duolingo) y Safari en el iPhone tampoco. Por eso las respuestas en la
+lengua del curso se escriben con un teclado propio, en pantalla:
+- **Qué cajas**: las que `langBoxes` (en `app.js`) marca con `Teclado.mark`,
+  o sea las que no son en castellano ni de búsqueda; llevan `inputmode="none"`
+  para que el teclado del teléfono no se abra.
+- **La distribución**: `LANG.ui.kbRows` (las filas de letras; si falta,
+  QWERTY) y, arriba, las letras de `LANG.ui.keys` que no están en las filas.
+  Con ⇧, ⌫, una capa de números y signos, la barra con el nombre del idioma
+  y ↵, que manda la respuesta como el Enter de siempre.
+- **Solo en pantallas táctiles** (`pointer: coarse`): con mouse y teclado
+  físico no aparece. ⌨️ pasa al teclado del teléfono; el ⌨️ de la fila de
+  acentos vuelve. La elección vive en `localStorage` (`c1.kb`: `app` o
+  `phone`), para todos los idiomas, y también se cambia en Io.
+- **Test**: `tools/lib/smoke_teclado.js` (en Chromium, como un celular y como
+  una computadora, en cada idioma).
 
 **Versión.** Una sola: `package.json` (X.Y.Z), que tiene que coincidir con
 `APP_VERSION` de `docs/js/app.js` y `VERSION` de `docs/sw.js`

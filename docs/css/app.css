@@ -690,6 +690,7 @@ body {
   --k-paper: var(--carta, var(--papel, #fffdf9));
   --k-in: var(--azzurro, var(--mar, #0d5ba8));
   --k-gold: var(--oro, var(--sol, #f7c600));
+  --k-ink: var(--inchiostro, var(--tinta, #172437));
 }
 .hoy { padding-top: 16px; }
 .hoy-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
@@ -891,3 +892,25 @@ svg.speed-curve text { font-size: 9px; fill: currentColor; opacity: .6; }
 /* «Para practicar más» dentro de la semana del percorso (3.3) */
 .wextras h3 { margin: 14px 0 6px; font-size: .95rem; }
 .wextras .labs { margin-bottom: 4px; }
+
+/* ---------- el teclado de la app (js/teclado.js): la lengua del curso en pantalla */
+.kbapp { position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
+  background: var(--k-line); border-top: 1px solid var(--k-line);
+  box-shadow: 0 -6px 18px rgba(0,0,0,.10); display: flex; flex-direction: column; gap: 6px;
+  user-select: none; -webkit-user-select: none; touch-action: manipulation; }
+.kbapp[hidden] { display: none; }
+.kbrow { display: flex; gap: 4px; justify-content: center; }
+.kbk { flex: 1 1 0; min-width: 0; max-width: 42px; height: 44px; padding: 0; border: 0; border-radius: 7px;
+  background: var(--k-paper); color: var(--k-ink, #172437); font: 600 1.1rem/1 inherit;
+  box-shadow: 0 1px 0 rgba(0,0,0,.18); cursor: pointer; }
+.kbk:active { background: var(--k-line); transform: translateY(1px); }
+.kbk.kbmod { max-width: 56px; flex: 1.4 1 0; background: var(--k-line); font-size: 1rem; }
+.kbk.kbmod.on { background: var(--k-ink, #172437); color: var(--k-paper); }
+.kbk.kbspace { max-width: none; flex: 5 1 0; font-size: .85rem; font-weight: 500; color: var(--k-muted); }
+.kbk.kbenter { background: var(--k-acc); color: #fff; }
+.kbextra .kbk { background: var(--k-paper); }
+body.kb-open .wrap { padding-bottom: 300px; }
+/* con el teclado de la app, la fila de acentos sobra; con el del teléfono, su ⌨️ trae el de la app */
+body.kb-open .accents { display: none; }
+.accents .kbback { margin-left: auto; }
+@media (pointer: fine) { .accents .kbback { display: none; } }
