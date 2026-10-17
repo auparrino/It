@@ -104,3 +104,7 @@ jobs:
         run: node tools/lib/smoke_browser.js
       - name: Cada misión jugada entera queda hecha (tools/lib/smoke_misiones.js)
         run: node tools/lib/smoke_misiones.js
+      - name: El teclado de la app en cada idioma (tools/lib/smoke_teclado.js)
+        run: node tools/lib/smoke_teclado.js
+      - name: El alemán en Chromium (tools/lib/smoke_aleman.js)
+        run: node tools/lib/smoke_aleman.js

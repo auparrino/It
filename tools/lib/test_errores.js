@@ -32,7 +32,7 @@ function jsonResp(body) {
   return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve(body); },
                            text: function () { return Promise.resolve(JSON.stringify(body)); } });
 }
-function reply(obj) { return { choices: [{ message: { content: JSON.stringify(obj) } }] }; }
+function reply(obj) { return { model: "claude-haiku-5-5", stop_reason: "end_turn", content: [{ type: "text", text: JSON.stringify(obj) }] }; }
 
 var CTX = {};
 ["it", "pt"].forEach(function (code) {
@@ -193,21 +193,20 @@ var CTX = {};
   var ctx = CTX.it, S = ctx.Scrivi, bodies = [];
   memStore(ctx);
   ctx.fetch = function (url, opt) {
-    if (/\/models$/.test(url)) return jsonResp({ data: [{ id: "models/gemini-2.5-flash" }] });
     var b = JSON.parse(opt.body);
-    bodies.push(b.messages.map(function (m) { return m.content; }).join("\n"));
+    bodies.push([b.system || ""].concat(b.messages.map(function (m) { return m.content; })).join("\n"));
     if (/no está entre las previstas/.test(bodies[bodies.length - 1])) return jsonResp(reply({ correcta: true, mismo_sentido: true, explicacion: "*Oggi non lavoro* también vale." }));
     return jsonResp(reply({ errores: [{ mal: "ho", bien: "sono", tipo: "ausiliare", explicacion: "movimiento" }], corregido: "", consigna: "", comentario: "" }));
   };
   var pending = 2;
   var fin = function () { if (--pending === 0) T.done(); };
-  S.judge({ prompt: "Traducí", stem: "Hoy no trabajo", given: "Non lavoro oggi", answer: "Oggi non lavoro", feedback: "Orden: *Oggi non lavoro*" }, { gemini: "k" }, function (e, d) {
+  S.judge({ prompt: "Traducí", stem: "Hoy no trabajo", given: "Non lavoro oggi", answer: "Oggi non lavoro", feedback: "Orden: *Oggi non lavoro*" }, { claude: "k" }, function (e, d) {
     ok(!e && d.correcta === true && d.mismo_sentido === true, "[it] el juez responde con JSON (fetch simulado): " + (e ? e.message : JSON.stringify(d)));
     ok(/Orden: \*Oggi non lavoro\*/.test(bodies[0]), "[it] el juez recibe lo que dijo la app");
     fin();
   });
   var ctxC = ctx.Errores.courseCtx(pack.data("it", "course.json"), { errs: {} }, 6, { local: ["«ho» → «sono»: auxiliar"] });
-  S.aiCheck("Ieri ho andato al mare.", 6, { gemini: "k" }, function (e, d, meta) {
+  S.aiCheck("Ieri ho andato al mare.", 6, { claude: "k" }, function (e, d, meta) {
     var two = bodies.filter(function (b) { return /Marcas SEGURAS/.test(b); });
     ok(!e && d.errores.length === 1 && meta.review, "[it] corrige y revisa (dos pedidos)");
     ok(two.length >= 2 && two.every(function (b) { return /semana 6/.test(b); }), "[it] los dos pedidos llevan el curso y las marcas seguras");

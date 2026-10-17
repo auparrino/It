@@ -105,10 +105,10 @@ pack.LANGS.forEach(function (code) {
   ok(typeof S.llm === "function", code + ": Scrivi expone llm (las mismas claves y proveedores)");
   var realLlm = S.llm, got = null;
   S.llm = function (prompt, keys, done) { done(null, { testo: "Frase  nuova ’bella’." }, { provider: "X", model: "y" }); };
-  E.reformulate("Frase vecchia.", { week: 11 }, { groq: "k" }, function (err, t, meta) { got = [err, t, meta]; });
+  E.reformulate("Frase vecchia.", { week: 11 }, { claude: "k" }, function (err, t, meta) { got = [err, t, meta]; });
   ok(got && !got[0] && got[1] === "Frase nuova 'bella'." && got[2].model === "y", code + ": la respuesta de la IA se limpia y llega");
   S.llm = function (prompt, keys, done) { done(null, { otra: 1 }); };
-  E.reformulate("Frase vecchia.", { week: 11 }, { groq: "k" }, function (err) { got = [err]; });
+  E.reformulate("Frase vecchia.", { week: 11 }, { claude: "k" }, function (err) { got = [err]; });
   ok(got && got[0], code + ": una respuesta sin texto es un error (y la app cae al corrector propio)");
   S.llm = realLlm;
 });

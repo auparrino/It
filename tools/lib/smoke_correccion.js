@@ -2,7 +2,7 @@
    «✓ Vale» con nota (pt: *pra*), «🤖 Explicame» antes de la solución,
    «Explicame más» y «🙋 Mi respuesta es válida» en la hoja final, el juez de
    respuestas no previstas, Scrivi por unión, «Tus errores» y la tarea del
-   tramo con las estructuras de la semana.  Las llamadas a Gemini se
+   tramo con las estructuras de la semana.  Las llamadas a Claude se
    contestan acá (page.route): la red del contenedor no llega.
      node tools/lib/smoke_correccion.js          (necesita Playwright)
      PORT=8742   puerto del servidor local
@@ -24,7 +24,7 @@ function chromiumPath() {
 
 // What the simulated AI answers, by what the request asks.
 function aiAnswer(body) {
-  const txt = (body.messages || []).map(m => m.content).join("\n");
+  const txt = [body.system || ""].concat((body.messages || []).map(m => m.content)).join("\n");
   if (/no está entre las previstas/.test(txt)) {
     const yes = /Respuesta del alumno: Eu estou com muita fome/.test(txt);
     return { correcta: yes, mismo_sentido: yes, explicacion: yes ? "*Estar com fome* es tan natural como *ter fome*: dice lo mismo." : "El verbo no concuerda con el sujeto: *eu vou*." };
@@ -51,13 +51,11 @@ function aiAnswer(body) {
   const errors = [], seen = [];
   const base = "http://localhost:" + port + "/";
   const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, colorScheme: "light" });
-  // a key of Gemini, and Gemini answered here
-  await ctx.addInitScript(() => { try { localStorage.setItem("rumoc1.gemini.key", "AIzaFAKE"); } catch (e) { /* */ } });
-  await ctx.route(/generativelanguage\.googleapis\.com/, async (route) => {
-    const req = route.request();
-    if (/\/models$/.test(req.url())) return route.fulfill({ json: { data: [{ id: "models/gemini-2.5-flash" }] } });
-    const body = JSON.parse(req.postData() || "{}");
-    return route.fulfill({ json: { choices: [{ message: { content: JSON.stringify(aiAnswer(body)) } }] } });
+  // a key of Anthropic, and Claude Haiku answered here
+  await ctx.addInitScript(() => { try { localStorage.setItem("rumoc1.claude.key", "sk-ant-FAKE"); } catch (e) { /* */ } });
+  await ctx.route(/api\.anthropic\.com/, async (route) => {
+    const body = JSON.parse(route.request().postData() || "{}");
+    return route.fulfill({ json: { model: "claude-haiku-5-5", stop_reason: "end_turn", content: [{ type: "text", text: JSON.stringify(aiAnswer(body)) }] } });
   });
   await ctx.route(/languagetool\.org/, (route) => route.fulfill({ json: { matches: [] } }));
   const page = await ctx.newPage();

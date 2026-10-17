@@ -183,7 +183,8 @@
       if (week && FALSI_WEEK && k.indexOf("falso:") === 0) return week >= FALSI_WEEK || !!cards[k];
       return !week || !BY_ID[k].week || BY_ID[k].week <= week;
     });
-    if (!pool.length) pool = ids("ponte:" + RULES[0].id + ":");
+    if (!pool.length && RULES.length) pool = ids("ponte:" + RULES[0].id + ":");
+    if (!pool.length) return null;                 // a package without a lab yet
     var seen = pool.filter(function (k) { return cards[k]; });
     var src = seen.length >= 6 && Math.random() < 0.5 ? seen : pool;
     var id = src[Math.floor(Math.random() * src.length)];

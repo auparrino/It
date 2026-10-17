@@ -27,7 +27,21 @@
     pt: { name: "Português", flag: "🇧🇷", brand: "Rumo C1", storage: "rumoc1",
           blurb: "Portugués de Brasil hasta C1, con el calçadão de Copacabana de fondo.",
           themeColor: { light: "#9fdcea", dark: "#071a26" }, bg: "#fbf4e6",
-          fonts: ["fonts/fraunces-normal.woff2", "fonts/fraunces-italic.woff2"] }
+          fonts: ["fonts/fraunces-normal.woff2", "fonts/fraunces-italic.woff2"] },
+    // El alemán arranca chico: las seis semanas de A1 (en construcción).
+    // missing: los archivos del paquete que todavía no tiene (el núcleo
+    // anda sin ellos: sin frases, lecturas, radio, examen…).
+    de: { name: "Deutsch", flag: "🇩🇪", brand: "Weg C1", storage: "wegc1",
+          blurb: "Alemán desde cero: las primeras seis semanas de A1, con Berlín de fondo. En construcción.",
+          themeColor: { light: "#c9d6e4", dark: "#121a26" }, bg: "#f6f4ef",
+          fonts: [],
+          missing: ["conjugator.js", "frasi_data.js", "trabajo_data.js", "formule_data.js", "lab_data.js",
+                    "letture_settimana.js", "tramo_data.js", "letture_data.js", "mapas_data.js", "diagnosi.js", "scrivi.js",
+                    "freq_data.js", "ascolto_data.js", "dictogloss_data.js", "esame_data.js",
+                    "voci_cv_data.js", "duelli_data.js", "devolucion_data.js", "porque_data.js", "escritura_plus_data.js",
+                    "variaciones_data.js", "escritos_data.js", "desglose_data.js", "biblioteca_data.js", "radio_data.js",
+                    "fuera_data.js"],
+          data: ["course.json"] }
   };
 
   // {lang: archivo} vive en docs/lang/<código>/; {core: archivo} en docs/js/;
@@ -65,7 +79,7 @@
     { lang: "radio_data.js" }, { core: "radio.js" }, { core: "tramo.js" },
     { lang: "fuera_data.js" }, { core: "fuera.js" }, { core: "trabajo.js" },
     { core: "plan.js" }, { core: "progreso.js" }, { core: "inicio.js" },
-    { core: "capas.js" }, { core: "nube.js" },
+    { core: "capas.js" }, { core: "nube.js" }, { core: "teclado.js" },
     { core: "app.js" }
   ];
 
@@ -81,15 +95,18 @@
 
   /* Every file of the core (docs/js/) and of one package, relative to
      docs/: what the service worker keeps for offline use. */
+  // Does the package have this file?  (missing: not yet, see LANGS.de)
+  function has(entry, code) { return !(entry.lang && LANGS[code] && (LANGS[code].missing || []).indexOf(entry.lang) >= 0); }
+
   function coreFiles() {
     return ORDER.filter(function (e) { return e.core || e.shared; }).map(function (e) { return src(e); });
   }
   function langFiles(code) {
     var base = "lang/" + code + "/";
-    return ORDER.filter(function (e) { return e.lang; }).map(function (e) { return src(e, code); })
+    return ORDER.filter(function (e) { return e.lang && has(e, code); }).map(function (e) { return src(e, code); })
       .concat([base + "theme.css"])
       .concat(LANGS[code].fonts.map(function (f) { return base + f; }))
-      .concat(DATA.map(function (f) { return base + "data/" + f; }));
+      .concat((LANGS[code].data || DATA).map(function (f) { return base + "data/" + f; }));
   }
 
   function get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
@@ -119,10 +136,12 @@
     });
     var at = doc.querySelector('meta[name="apple-mobile-web-app-title"]');
     if (at) at.content = L.name;
-    var pre = doc.createElement("link");
-    pre.rel = "preload"; pre.as = "font"; pre.type = "font/woff2"; pre.crossOrigin = "anonymous";
-    pre.href = "lang/" + code + "/" + L.fonts[0];
-    doc.head.appendChild(pre);
+    if (L.fonts.length) {
+      var pre = doc.createElement("link");
+      pre.rel = "preload"; pre.as = "font"; pre.type = "font/woff2"; pre.crossOrigin = "anonymous";
+      pre.href = "lang/" + code + "/" + L.fonts[0];
+      doc.head.appendChild(pre);
+    }
     var css = doc.createElement("link");
     css.rel = "stylesheet";
     css.href = "lang/" + code + "/theme.css";
@@ -135,7 +154,7 @@
      not when app.js asks for them. */
   function load(code) {
     dress(code);
-    ["course.json", "bank.json"].forEach(function (f) {
+    ["course.json", "bank.json"].filter(function (f) { return (LANGS[code].data || DATA).indexOf(f) >= 0; }).forEach(function (f) {
       var l = document.createElement("link");
       l.rel = "preload"; l.as = "fetch"; l.crossOrigin = "anonymous";
       l.href = "lang/" + code + "/data/" + f;
@@ -143,6 +162,7 @@
     });
     var failed = false;
     ORDER.forEach(function (entry) {
+      if (!has(entry, code)) return;
       var s = document.createElement("script");
       s.src = src(entry, code);
       s.async = false;
@@ -159,7 +179,7 @@
   /* El selector: una tarjeta por idioma, cada una con su mundo (el cielo
      de una plaza italiana y su placa de travertino; el mar de Ipanema, las
      ondas del calçadão y la placa azul de Río). */
-  var PLATE = { it: ["la", "Via C1"], pt: ["rua", "Rumo C1"] };
+  var PLATE = { it: ["la", "Via C1"], pt: ["rua", "Rumo C1"], de: ["der", "Weg C1"] };
   function picker() {
     var app = document.getElementById("app");
     document.documentElement.setAttribute("data-lang", "pick");
@@ -192,7 +212,7 @@
   }
 
   var api = { LANGS: LANGS, ORDER: ORDER, DATA: DATA, KEY: KEY, src: src, switchTo: switchTo,
-              coreFiles: coreFiles, langFiles: langFiles, installPrompt: null };
+              coreFiles: coreFiles, langFiles: langFiles, has: has, installPrompt: null };
 
   if (typeof module === "object" && module.exports) { module.exports = api; return; }
   root.Boot = api;

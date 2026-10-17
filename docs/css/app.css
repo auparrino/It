@@ -371,6 +371,11 @@ html[data-lang="pick"] header.top, html[data-lang="pick"] nav.nav { display: non
 .pick-lang.pt::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 26px; opacity: .22;
   background: radial-gradient(circle at 20px -6px, transparent 16px, #fff 17px, #fff 22px, transparent 23px) 0 0 / 40px 26px repeat-x; }
 .pick-lang.pt .plate { background: #0f4c85; color: #fff; border: 2px solid #fff; box-shadow: 0 0 0 1px #0f4c85; }
+/* Weg C1: Berlín de noche, con la bandera abajo */
+.pick-lang.de { padding-bottom: 30px; background: linear-gradient(160deg, #3d5576 0, #1f3b5c 55%, #142740 100%); }
+.pick-lang.de::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 10px;
+  background: linear-gradient(90deg, #1b1b1b 0 33.3%, #c8102e 33.3% 66.6%, #f2b705 66.6%); }
+.pick-lang.de .plate { background: #fff; color: #1f3b5c; border: 2px solid #1f3b5c; box-shadow: 0 0 0 2px #fff; }
 .pick-foot { text-align: center; color: var(--pk-gris); font-size: .85rem; margin-top: 18px; }
 
 /* «Cómo se arma»: la frase palabra por palabra (docs/js/desglose.js) */
@@ -690,6 +695,7 @@ body {
   --k-paper: var(--carta, var(--papel, #fffdf9));
   --k-in: var(--azzurro, var(--mar, #0d5ba8));
   --k-gold: var(--oro, var(--sol, #f7c600));
+  --k-ink: var(--inchiostro, var(--tinta, #172437));
 }
 .hoy { padding-top: 16px; }
 .hoy-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
@@ -891,3 +897,25 @@ svg.speed-curve text { font-size: 9px; fill: currentColor; opacity: .6; }
 /* «Para practicar más» dentro de la semana del percorso (3.3) */
 .wextras h3 { margin: 14px 0 6px; font-size: .95rem; }
 .wextras .labs { margin-bottom: 4px; }
+
+/* ---------- el teclado de la app (js/teclado.js): la lengua del curso en pantalla */
+.kbapp { position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
+  background: var(--k-line); border-top: 1px solid var(--k-line);
+  box-shadow: 0 -6px 18px rgba(0,0,0,.10); display: flex; flex-direction: column; gap: 6px;
+  user-select: none; -webkit-user-select: none; touch-action: manipulation; }
+.kbapp[hidden] { display: none; }
+.kbrow { display: flex; gap: 4px; justify-content: center; }
+.kbk { flex: 1 1 0; min-width: 0; max-width: 42px; height: 44px; padding: 0; border: 0; border-radius: 7px;
+  background: var(--k-paper); color: var(--k-ink, #172437); font: 600 1.1rem/1 inherit;
+  box-shadow: 0 1px 0 rgba(0,0,0,.18); cursor: pointer; }
+.kbk:active { background: var(--k-line); transform: translateY(1px); }
+.kbk.kbmod { max-width: 56px; flex: 1.4 1 0; background: var(--k-line); font-size: 1rem; }
+.kbk.kbmod.on { background: var(--k-ink, #172437); color: var(--k-paper); }
+.kbk.kbspace { max-width: none; flex: 5 1 0; font-size: .85rem; font-weight: 500; color: var(--k-muted); }
+.kbk.kbenter { background: var(--k-acc); color: #fff; }
+.kbextra .kbk { background: var(--k-paper); }
+body.kb-open .wrap { padding-bottom: 300px; }
+/* con el teclado de la app, la fila de acentos sobra; con el del teléfono, su ⌨️ trae el de la app */
+body.kb-open .accents { display: none; }
+.accents .kbback { margin-left: auto; }
+@media (pointer: fine) { .accents .kbback { display: none; } }

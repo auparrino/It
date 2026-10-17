@@ -24,8 +24,8 @@ var fs = require("fs"), path = require("path"), vm = require("vm");
 var pack = require("./pack.js");
 var args = process.argv.slice(2);
 var CODE = args.filter(function (a, i) { return a[0] !== "-" && args[i - 1] !== "--seed"; })[0];
-if (!CODE || pack.LANGS.indexOf(CODE) < 0) {
-  console.error("uso: node tools/lib/sim_carriera.js <" + pack.LANGS.join("|") + "> [--json] [--seed N]");
+if (!CODE || pack.ALL.indexOf(CODE) < 0) {
+  console.error("uso: node tools/lib/sim_carriera.js <" + pack.ALL.join("|") + "> [--json] [--seed N]");
   process.exit(2);
 }
 var SEED = args.indexOf("--seed") >= 0 ? +args[args.indexOf("--seed") + 1] : 12345;
@@ -61,12 +61,14 @@ var ctx = pack(CODE, { extra: { Date: FakeDate, Math: SeededMath } });
 var Engine = ctx.Engine, Drills = ctx.Drills, Frasi = ctx.Frasi, Lab = ctx.Lab, Letture = ctx.Letture,
     Lezione = ctx.Lezione, Banca = ctx.Banca, Conj = ctx.Conjugator || ctx.Conj;
 var course = pack.data(CODE, "course.json");
-Banca.load(pack.data(CODE, "bank.json"));
+// a language that is starting (Boot.LANGS.de) may have only its course
+var optData = function (name) { return fs.existsSync(pack.dataPath(CODE, name)) ? pack.data(CODE, name) : null; };
+var bank = optData("bank.json");
+if (bank) Banca.load(bank);
 var map = Drills.itemsById(course);
 var Scrivi = ctx.Scrivi;
-Scrivi.learnCourse({ items: course.items, bank: Banca.bank(), phrases: Frasi.ALL, readings: Letture.EPISODI,
-  glossario: pack.data(CODE, "glossario.json") });
-var glossario = pack.data(CODE, "glossario.json");
+var glossario = optData("glossario.json") || {};
+if (Scrivi) Scrivi.learnCourse({ items: course.items, bank: Banca.bank(), phrases: Frasi.ALL, readings: Letture.EPISODI, glossario: glossario });
 var isTarget = function (w) { return !!glossario[String(w).toLowerCase()]; };
 
 /* ------------------------------------------------------------ el jugador */
@@ -259,7 +261,7 @@ course.weeks.forEach(function (w) {
 
   // 1b. Scrivi: el texto de la semana (la simulación entrega el modelo y
   // comprueba que cumpla la consigna; escribir, a unas 8 palabras por minuto)
-  if (Scrivi.TASKS[w.week]) {
+  if (Scrivi && Scrivi.TASKS[w.week]) {
     var sr = Scrivi.check(Scrivi.TASKS[w.week].model, w.week);
     if (!sr.ok || sr.hard) log.itemIssues.push({ id: "scrivi:" + w.week, wk: w.week, type: "scrivi", msg: "el modelo no cumple la consigna o tiene errores marcados" });
     totalSec += Math.round(sr.words / 8 * 60) + 120;
@@ -399,10 +401,10 @@ course.weeks.forEach(function (w) {
     missions.push({ m: "capire", set: c.h, asked: cacc.asked, sec: cacc.sec });
   });
 
-  // 7. banco
-  if (w.week === Banca.FORME_WEEK) { var fo = play(Banca.formsSession(state, 12), "b-forme", w.week); missions.push({ m: "banco forme", asked: fo.asked, sec: fo.sec }); }
-  if (w.week === Banca.TR_WEEK) { var tr = play(Banca.translateSession(state, 8), "b-tr", w.week); missions.push({ m: "banco traduci", asked: tr.asked, sec: tr.sec }); }
-  if (w.week === Banca.GAP_WEEK) { var ga = play(Banca.gapSession(state, 10), "b-gap", w.week); missions.push({ m: "banco coniuga", asked: ga.asked, sec: ga.sec }); }
+  // 7. banco (si el idioma lo tiene)
+  if (Banca.loaded() && w.week === Banca.FORME_WEEK) { var fo = play(Banca.formsSession(state, 12), "b-forme", w.week); missions.push({ m: "banco forme", asked: fo.asked, sec: fo.sec }); }
+  if (Banca.loaded() && w.week === Banca.TR_WEEK) { var tr = play(Banca.translateSession(state, 8), "b-tr", w.week); missions.push({ m: "banco traduci", asked: tr.asked, sec: tr.sec }); }
+  if (Banca.loaded() && w.week === Banca.GAP_WEEK) { var ga = play(Banca.gapSession(state, 10), "b-gap", w.week); missions.push({ m: "banco coniuga", asked: ga.asked, sec: ga.sec }); }
 
   // 8. sfide del maestro
   var ch = (w.challenges || []).map(function (id) { return course.challenges.filter(function (c) { return c.id === id; })[0]; }).filter(Boolean);
@@ -514,6 +516,6 @@ if (fails.length) {
   out("\nsim " + CODE + " FALLA (semilla " + SEED + "): " + fails.join("; "));
   process.exitCode = 1;
 } else {
-  out("\nsim " + CODE + " OK (semilla " + SEED + "): 52 semanas, todas dominadas, sin errores ni duplicados" +
+  out("\nsim " + CODE + " OK (semilla " + SEED + "): " + course.weeks.length + " semanas, todas dominadas, sin errores ni duplicados" +
       (log.itemIssues.length ? " (" + log.itemIssues.length + " avisos de ítems)" : ""));
 }

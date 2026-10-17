@@ -185,83 +185,52 @@ ERR.forEach(function (e) {
   ok(!bad.length, "frases del curso (" + clean.length + "): " + bad.length + " marcadas: " + bad.slice(0, 5).join(" | "));
 })();
 
-// La llamada a Groq, con fetch simulado: elige el mejor modelo de la
-// lista que devuelve la clave; saturado → otro modelo; un modelo que no
-// acepta el modo JSON → el mismo sin él; clave mala → error claro; lee el
-// JSON aunque venga con <think> o ```.
+/* La llamada a la IA (Claude Haiku), con fetch simulado: un pedido bien
+   armado; saturado → otra vuelta; clave mala → error claro; lee el JSON
+   aunque venga con ``` o texto alrededor. */
 var GEM = [];
-function gem(name, plan, check, keys, mode, first) { GEM.push([name, plan, check, keys, mode, first]); }
+function gem(name, plan, check, keys, mode) { GEM.push([name, plan, check, keys, mode]); }
 function runGem() {
   if (!GEM.length) return T.done();
   ctx.IA.retryWaits([0, 0]);
   var g = GEM.shift(), calls = [], mem = {};
   ctx.localStorage = { getItem: function (k) { return mem[k] || null; }, setItem: function (k, v) { mem[k] = v; } };
-  if (g[5]) mem["laviac1.ia.first"] = g[5];   // qué proveedor va primero (Io)
   ctx.fetch = function (url, opt) {
-    if (/\/models$/.test(url) && /googleapis/.test(url)) {
-      return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve({ data: [
-        { id: "models/gemini-2.0-flash" }, { id: "models/text-embedding-004" }, { id: "models/gemini-2.5-flash" }, { id: "models/gemma-3-27b-it" }] }); } });
-    }
-    if (/\/models$/.test(url)) {
-      return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve({ data: [
-        { id: "llama-3.1-8b-instant" }, { id: "openai/gpt-oss-120b" }, { id: "moonshotai/kimi-k2-instruct" },
-        { id: "llama-3.3-70b-versatile" }, { id: "whisper-large-v3" }, { id: "viejo-70b", active: false }] }); } });
-    }
     var body = JSON.parse(opt.body);
-    calls.push(body.model + (body.response_format ? "~" : "") + (/segundo profesor/.test(body.messages[1].content) ? "#rev" : ""));
+    calls.push(body.model + (/anthropic\.com\/v1\/messages$/.test(url) && opt.headers["x-api-key"] ? "~" : "?") +
+               (/segundo profesor/.test(body.messages[0].content) ? "#rev" : ""));
     var a = g[1](calls.length, body);
     return Promise.resolve({ ok: a.status === 200, status: a.status, json: function () { return Promise.resolve(a.body); },
                              text: function () { return Promise.resolve(JSON.stringify(a.body || {})); } });
   };
   var cb = function (err, data, meta) {
-    ok(g[2](err, data, calls, meta), "groq " + g[0] + ": " + (err ? err.message : "ok") + " · " + calls.join(" → "));
+    ok(g[2](err, data, calls, meta), "ia " + g[0] + ": " + (err ? err.message : "ok") + " · " + calls.join(" → "));
     runGem();
   };
   if (g[4] === "aicheck") S.aiCheck("Io ho andato a casa.", 11, g[3] || "K", cb);
   else S.explain({ prompt: "p", stem: "s", given: "a", answer: "b" }, g[3] || "K", cb);
 }
-function reply(txt) { return { choices: [{ message: { content: txt } }] }; }
+function reply(txt) { return { model: "claude-haiku-5-5", stop_reason: "end_turn", content: [{ type: "text", text: txt }] }; }
 var GOOD = reply('{"tambien_correcta":false,"explicacion":"x"}');
-gem("mejor modelo primero", function () { return { status: 200, body: GOOD }; },
-    function (e, d, c) { return !e && d.explicacion === "x" && c[0] === "moonshotai/kimi-k2-instruct~" && !c.some(function (m) { return /whisper|viejo/.test(m); }); });
-gem("saturado", function (n) { return n === 1 ? { status: 503, body: {} } : { status: 200, body: GOOD }; },
-    function (e, d, c) { return !e && c.length === 2 && c[1] === "openai/gpt-oss-120b~"; });
-gem("sin modo JSON", function (n, b) { return b.response_format ? { status: 400, body: { message: "response_format not supported" } } : { status: 200, body: GOOD }; },
-    function (e, d, c) { return !e && c.length === 2 && c[0] === c[1] + "~"; });
-gem("clave mala", function () { return { status: 401, body: { message: "Wrong API Key" } }; },
-    function (e) { return e && /clave/.test(e.message); });
-gem("JSON con <think> y ```", function () { return { status: 200, body: reply('<think>mmm</think>```json\n{"tambien_correcta":true,"explicacion":"y"}\n```') }; },
-    function (e, d) { return !e && d.tambien_correcta === true && d.explicacion === "y"; });
-gem("pagos (402) hasta llegar al gratuito", function (n, b) { return /8b-instant/.test(b.model) ? { status: 200, body: GOOD } : { status: 402, body: { message: "payment required" } }; },
-    function (e, d, c) { return !e && c.length === 4 && /llama-3\.1-8b-instant/.test(c[3]); });
-gem("todo pago", function () { return { status: 402, body: {} }; },
-    function (e, d, c) { return e && /plan pago/.test(e.message) && c.length === 4; });
-// todos saturados: dos vueltas más con los mismos modelos (sin espera en la prueba)
+gem("Claude Haiku", function () { return { status: 200, body: GOOD }; },
+    function (e, d, c, m) { return !e && d.explicacion === "x" && c[0] === "claude-haiku-5-5~" && m.provider === "Claude"; });
+gem("la clave en un objeto", function () { return { status: 200, body: GOOD }; },
+    function (e, d, c) { return !e && c.length === 1; }, { claude: "sk-ant-x" });
+gem("saturado → otra vuelta", function (n) { return n === 1 ? { status: 529, body: {} } : { status: 200, body: GOOD }; },
+    function (e, d, c) { return !e && c.length === 2; });
 gem("todo saturado", function () { return { status: 503, body: {} }; },
-    function (e, d, c) { return e && /saturado/.test(e.message) && c.length === 12; });
-gem("saturado en la primera vuelta, responde en la segunda", function (n) { return n <= 4 ? { status: 503, body: {} } : { status: 200, body: GOOD }; },
-    function (e, d, c) { return !e && d.explicacion === "x" && c.length === 5 && c[4] === "moonshotai/kimi-k2-instruct~"; });
-// Gemini de respaldo, con su propia búsqueda de modelos
-var BOTH = { groq: "gsk_x", gemini: "AIza_x" };
-gem("con Gemini primero, Groq no corrige aunque Gemini falle", function (n, b) { return /gemini/.test(b.model) ? { status: 503, body: {} } : { status: 200, body: GOOD }; },
-    function (e, d, c) { return e && /saturado/.test(e.message) && !c.some(function (m) { return !/gemini/.test(m); }); }, BOTH);
-gem("Groq saturado → Gemini", function (n, b) { return /gemini/.test(b.model) ? { status: 200, body: GOOD } : { status: 503, body: {} }; },
-    function (e, d, c) { var gi = c.filter(function (m) { return /gemini/.test(m); }); return !e && d.explicacion === "x" && gi[0] === "gemini-2.5-flash~" && !c.some(function (m) { return /embed|gemma/.test(m); }); }, BOTH, undefined, "groq");
-gem("clave de Groq mala → Gemini", function (n, b) { return /gemini/.test(b.model) ? { status: 200, body: GOOD } : { status: 401, body: {} }; },
-    function (e, d, c) { return !e && c.length === 2 && c[1] === "gemini-2.5-flash~"; }, BOTH, undefined, "groq");
-gem("solo Gemini", function () { return { status: 200, body: GOOD }; },
-    function (e, d, c) { return !e && c.length === 1 && c[0] === "gemini-2.5-flash~"; }, { gemini: "AIza_x" });
-gem("Gemini: modelo retirado (404) → el siguiente", function (n) { return n === 1 ? { status: 404, body: {} } : { status: 200, body: GOOD }; },
-    function (e, d, c) { return !e && c[1] === "gemini-2.0-flash~"; }, { gemini: "AIza_x" });
-gem("los dos fallan", function () { return { status: 503, body: {} }; },
-    function (e) { return e && /Groq: /.test(e.message) && /Gemini: /.test(e.message); }, BOTH, undefined, "groq");
+    function (e, d, c) { return e && /saturado/.test(e.message) && c.length === 3; });
+gem("clave mala", function () { return { status: 401, body: { error: { message: "invalid x-api-key" } } }; },
+    function (e, d, c) { return e && /clave/.test(e.message) && c.length === 1; });
+gem("JSON con ``` y texto alrededor", function () { return { status: 200, body: reply('Acá va:\n```json\n{"tambien_correcta":true,"explicacion":"y"}\n```') }; },
+    function (e, d) { return !e && d.tambien_correcta === true && d.explicacion === "y"; });
 // Scrivi: corrige y un segundo profesor revisa; si la revisión falla, queda la primera.
 var FIRST = reply(JSON.stringify({ errores: [{ mal: "ho andato", bien: "sono andato", tipo: "ausiliare", explicacion: "a" },
                                              { mal: "andato", bien: "andato", tipo: "ausiliare", explicacion: "dup" }], corregido: "x" }));
 var REV = reply(JSON.stringify({ errores: [{ mal: "ho andato", bien: "sono andato", tipo: "ausiliare", explicacion: "revisada" }], corregido: "x" }));
-gem("corrige y revisa", function (n, b) { return { status: 200, body: /segundo profesor/.test(b.messages[1].content) ? REV : FIRST }; },
+gem("corrige y revisa", function (n, b) { return { status: 200, body: /segundo profesor/.test(b.messages[0].content) ? REV : FIRST }; },
     function (e, d, c, m) { return !e && d.errores.length === 1 && d.errores[0].explicacion === "revisada" && c.length === 2 && /#rev$/.test(c[1]) &&
-      m && m.first.provider === "Groq" && m.first.model === "moonshotai/kimi-k2-instruct" && m.review && m.review.model === "moonshotai/kimi-k2-instruct"; }, "K", "aicheck");
-gem("la revisión falla → queda la primera", function (n, b) { return /segundo profesor/.test(b.messages[1].content) ? { status: 503, body: {} } : { status: 200, body: FIRST }; },
+      m && m.first.provider === "Claude" && m.first.model === "claude-haiku-5-5" && m.review && m.review.model === "claude-haiku-5-5"; }, "K", "aicheck");
+gem("la revisión falla → queda la primera", function (n, b) { return /segundo profesor/.test(b.messages[0].content) ? { status: 401, body: {} } : { status: 200, body: FIRST }; },
     function (e, d, c, m) { return !e && d.errores.length === 2 && m && m.first && !m.review; }, "K", "aicheck");
 runGem();

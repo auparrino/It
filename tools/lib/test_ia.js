@@ -1,11 +1,12 @@
 /* El cliente de IA del núcleo (docs/js/ia.js), con fetch simulado:
-   - Gemini va primero salvo que el alumno elija Groq;
-   - el razonamiento se apaga con la escalera none → minimal → low, y el
-     escalón que anduvo se recuerda por modelo (no se vuelve a pagar el 400);
+   - un pedido a Claude Haiku por la API de Mensajes, con la clave, la
+     versión y el permiso para el navegador; sin temperatura;
+   - «think: off» apaga el razonamiento; «low» lo deja, con más tokens;
+   - saturado (429, 5xx, 529): espera y otra vuelta; clave mala o sin
+     crédito: error claro sin reintentar; un rechazo se informa;
    - la respuesta de a poco (stream) se muestra mientras llega y se lee el
      JSON al final; el campo parcial se extrae bien con escapes;
-   - con dos claves y `hedge`, si el primero no empieza a tiempo responde el
-     segundo y el primero se cancela.
+   - el chat va con el system aparte y empieza con el alumno.
    Run: node tools/lib/test_ia.js */
 "use strict";
 var pack = require("./pack.js");
@@ -14,6 +15,7 @@ ctx.TextDecoder = TextDecoder;
 ctx.TextEncoder = TextEncoder;
 ctx.AbortController = AbortController;
 var IA = ctx.IA;
+IA.retryWaits([5, 10]);
 
 var fails = 0, checks = 0;
 function ok(c, what) { checks++; if (!c) { fails++; console.log("FAIL " + what); } }
@@ -27,12 +29,8 @@ function jsonResp(status, body) {
   return Promise.resolve({ ok: status === 200, status: status, json: function () { return Promise.resolve(body); },
                            text: function () { return Promise.resolve(JSON.stringify(body || {})); } });
 }
-function reply(txt) { return { choices: [{ message: { content: txt } }] }; }
-function modelsList(url) {
-  if (/googleapis/.test(url)) return { data: [{ id: "models/gemini-2.5-flash" }, { id: "models/gemini-2.0-flash" }] };
-  return { data: [{ id: "moonshotai/kimi-k2-instruct" }, { id: "llama-3.1-8b-instant" }] };
-}
-// Un cuerpo que llega de a pedazos, como text/event-stream.
+function reply(txt) { return { model: "claude-haiku-5-5", stop_reason: "end_turn", content: [{ type: "thinking", thinking: "" }, { type: "text", text: txt }] }; }
+// Un cuerpo que llega de a pedazos, como el text/event-stream de la API de Mensajes.
 function sseBody(chunks, delay) {
   var enc = new TextEncoder(), i = 0;
   return { getReader: function () {
@@ -41,7 +39,9 @@ function sseBody(chunks, delay) {
         setTimeout(function () {
           if (i >= chunks.length) return res({ done: true });
           var c = chunks[i++];
-          res({ done: false, value: enc.encode("data: " + JSON.stringify({ choices: [{ delta: { content: c } }] }) + "\n\n" + (i === chunks.length ? "data: [DONE]\n\n" : "")) });
+          res({ done: false, value: enc.encode("event: content_block_delta\ndata: " +
+            JSON.stringify({ type: "content_block_delta", index: 0, delta: { type: "text_delta", text: c } }) + "\n\n" +
+            (i === chunks.length ? "event: message_stop\ndata: {\"type\": \"message_stop\"}\n\n" : "")) });
         }, delay || 1);
       });
     }, cancel: function () {} };
@@ -56,96 +56,61 @@ function run() {
   c[1](function () { run(); });
 }
 
-test("Gemini primero por defecto; Groq si el alumno lo elige", function (next) {
-  var mem = memStore(), calls = [];
-  ctx.fetch = function (url, opt) {
-    if (/\/models$/.test(url)) return jsonResp(200, modelsList(url));
-    calls.push(JSON.parse(opt.body).model);
-    return jsonResp(200, reply('{"a":1}'));
-  };
-  IA.llm("p", { groq: "g", gemini: "m" }, function (e, d, meta) {
-    ok(!e && d.a === 1 && meta.id === "gemini" && calls[0] === "gemini-2.5-flash", "Gemini primero: " + calls.join(","));
-    IA.setOrder("groq");
-    ok(mem["laviac1.ia.first"] === "groq", "el orden queda guardado con el prefijo del idioma");
-    calls.length = 0;
-    IA.llm("p", { groq: "g", gemini: "m" }, function (e2, d2, meta2) {
-      ok(!e2 && meta2.id === "groq" && /kimi/.test(calls[0]), "Groq primero si se elige: " + calls.join(","));
-      next();
+test("un pedido a Claude Haiku, bien armado", function (next) {
+  memStore();
+  var seen = [];
+  ctx.fetch = function (url, opt) { seen.push([url, opt]); return jsonResp(200, reply('{"ok": 1}')); };
+  IA.llm("p", { claude: "sk-ant-x" }, function (e, d, meta) {
+    var b = JSON.parse(seen[0][1].body), h = seen[0][1].headers;
+    ok(!e && d.ok === 1 && meta.provider === "Claude" && meta.model === "claude-haiku-5-5", "respuesta y meta: " + (e && e.message));
+    ok(seen[0][0] === "https://api.anthropic.com/v1/messages" && h["x-api-key"] === "sk-ant-x" && h["anthropic-version"] &&
+       h["anthropic-dangerous-direct-browser-access"] === "true", "URL y cabeceras");
+    ok(b.model === "claude-haiku-5-5" && b.temperature === undefined && b.thinking && b.thinking.type === "disabled" &&
+       b.output_config.effort === "low" && b.messages[0].role === "user" && /JSON/.test(b.system), "cuerpo: " + seen[0][1].body.slice(0, 200));
+    IA.llm("p", "sk-ant-y", function (e2) {
+      ok(!e2 && seen[1][1].headers["x-api-key"] === "sk-ant-y", "la clave sola, como texto");
+      IA.llm("p", { claude: "k" }, function () {
+        var b3 = JSON.parse(seen[2][1].body);
+        ok(!b3.thinking && b3.max_tokens >= 8000, "think: low deja razonar, con más tokens");
+        next();
+      }, { think: "low" });
     });
   });
 });
 
-test("Gemini saturado: espera y otra vuelta, sin caer en Groq para corregir", function (next) {
+test("saturado: espera y otra vuelta; si sigue, error claro", function (next) {
   memStore();
-  IA.retryWaits([5, 5]);
-  var calls = [];
-  ctx.fetch = function (url, opt) {
-    if (/\/models$/.test(url)) return jsonResp(200, modelsList(url));
-    var b = JSON.parse(opt.body);
-    calls.push(b.model);
-    return calls.length <= 2 ? jsonResp(503, {}) : jsonResp(200, reply('{"ok":3}'));
-  };
-  IA.llm("p", { groq: "g", gemini: "m" }, function (e, d, meta) {
-    ok(!e && d.ok === 3 && meta.id === "gemini" && calls.length === 3 && !calls.some(function (m) { return /kimi|llama/.test(m); }),
-       "segunda vuelta con Gemini: " + calls.join(","));
-    calls.length = 0;
-    ctx.fetch = function (url, opt) {
-      if (/\/models$/.test(url)) return jsonResp(200, modelsList(url));
-      calls.push(JSON.parse(opt.body).model);
-      return jsonResp(503, {});
-    };
-    IA.llm("p", { groq: "g", gemini: "m" }, function (e2) {
-      ok(e2 && /saturado/.test(e2.message) && calls.length === 6 && !calls.some(function (m) { return /kimi|llama/.test(m); }),
-         "todo saturado: tres vueltas y error, sin Groq: " + calls.join(","));
-      calls.length = 0;
-      ctx.fetch = function (url, opt) {
-        if (/\/models$/.test(url)) return jsonResp(200, modelsList(url));
-        calls.push(JSON.parse(opt.body).model);
-        return jsonResp(404, {});
-      };
-      IA.llm("p", { gemini: "m" }, function (e3) {
-        ok(e3 && calls.length === 2, "un 404 no se reintenta: " + calls.join(","));
-        IA.retryWaits([2000, 5000]);
-        next();
+  var n = 0;
+  ctx.fetch = function () { n++; return n < 3 ? jsonResp(529, {}) : jsonResp(200, reply('{"ok": 3}')); };
+  IA.llm("p", { claude: "k" }, function (e, d) {
+    ok(!e && d.ok === 3 && n === 3, "dos esperas y responde: " + n);
+    n = 0;
+    ctx.fetch = function () { n++; return jsonResp(503, {}); };
+    IA.llm("p", { claude: "k" }, function (e2) {
+      ok(e2 && /saturado/.test(e2.message) && n === 3, "tres intentos y el error: " + (e2 && e2.message) + " · " + n);
+      n = 0;
+      ctx.fetch = function () { n++; return jsonResp(429, {}); };
+      IA.llm("p", { claude: "k" }, function (e3) { ok(e3 && /cupo/.test(e3.message), "429: sin cupo"); next(); });
+    });
+  });
+});
+
+test("clave mala, sin crédito o rechazo: sin reintentar", function (next) {
+  memStore();
+  var n = 0;
+  ctx.fetch = function () { n++; return jsonResp(401, { error: { message: "invalid x-api-key" } }); };
+  IA.llm("p", { claude: "k" }, function (e) {
+    ok(e && /clave/.test(e.message) && n === 1, "401: la clave");
+    ctx.fetch = function () { return jsonResp(400, { error: { message: "Your credit balance is too low" } }); };
+    IA.llm("p", { claude: "k" }, function (e2) {
+      ok(e2 && /crédito/.test(e2.message), "400 sin crédito");
+      ctx.fetch = function () { return jsonResp(200, { stop_reason: "refusal", content: [] }); };
+      IA.llm("p", { claude: "k" }, function (e3) {
+        ok(e3 && /no quiso/.test(e3.message), "rechazo");
+        ctx.fetch = function () { return jsonResp(200, reply("no es json")); };
+        IA.llm("p", { claude: "k" }, function (e4) { ok(e4 && /ilegible/.test(e4.message), "respuesta ilegible"); next(); });
       });
     });
-  });
-});
-
-test("razonamiento apagado: none → minimal, y el escalón queda recordado", function (next) {
-  memStore();
-  var effs = [];
-  ctx.fetch = function (url, opt) {
-    if (/\/models$/.test(url)) return jsonResp(200, modelsList(url));
-    var b = JSON.parse(opt.body);
-    effs.push(b.reasoning_effort || "-");
-    if (b.reasoning_effort === "none") return jsonResp(400, { error: { message: "reasoning_effort 'none' is not supported for this model" } });
-    return jsonResp(200, reply('{"ok":true}'));
-  };
-  IA.llm("p", { gemini: "m" }, function (e, d) {
-    ok(!e && d.ok && effs.join(",") === "none,minimal", "escalera: " + effs.join(","));
-    effs.length = 0;
-    IA.llm("p", { gemini: "m" }, function (e2) {
-      ok(!e2 && effs.join(",") === "minimal", "la segunda vez va directo a minimal: " + effs.join(","));
-      next();
-    });
-  });
-});
-
-test("un 400 por el modo JSON no apaga el razonamiento", function (next) {
-  memStore();
-  var bodies = [];
-  ctx.fetch = function (url, opt) {
-    if (/\/models$/.test(url)) return jsonResp(200, modelsList(url));
-    var b = JSON.parse(opt.body);
-    bodies.push(b);
-    if (b.response_format) return jsonResp(400, { error: { message: "response_format json_object not supported" } });
-    return jsonResp(200, reply('```json\n{"ok":2}\n```'));
-  };
-  IA.llm("p", { gemini: "m" }, function (e, d) {
-    ok(!e && d.ok === 2 && bodies.length === 2 && bodies[1].reasoning_effort === "none" && !bodies[1].response_format,
-       "sin modo JSON pero con el razonamiento apagado: " + JSON.stringify(bodies.map(function (b) { return [b.reasoning_effort, !!b.response_format]; })));
-    next();
   });
 });
 
@@ -153,46 +118,29 @@ test("de a poco: el turno se muestra mientras llega", function (next) {
   memStore();
   var seen = [];
   ctx.fetch = function (url, opt) {
-    if (/\/models$/.test(url)) return jsonResp(200, modelsList(url));
-    var b = JSON.parse(opt.body);
-    ok(b.stream === true && !b.response_format, "pide stream sin modo JSON");
-    return Promise.resolve({ ok: true, status: 200, body: sseBody(['{"risposta": "Ciao', ', come', ' stai?", "recast": "", ', '"fine": false}']) });
+    ok(JSON.parse(opt.body).stream === true, "pide la respuesta de a poco");
+    return Promise.resolve({ ok: true, status: 200, body: sseBody(['{"risposta": "Buon', "giorno", '!", "fine": true}']) });
   };
-  IA.llm("p", { gemini: "m" }, function (e, d, meta) {
-    ok(!e && d.risposta === "Ciao, come stai?" && d.fine === false, "JSON final: " + JSON.stringify(d) + (e ? e.message : ""));
-    ok(seen.length >= 2 && seen[0] === "Ciao" && seen[seen.length - 1] === "Ciao, come stai?", "texto parcial: " + JSON.stringify(seen));
-    ok(meta && meta.first >= 0 && meta.ms >= meta.first, "mide el primer fragmento y el total");
+  IA.llm("p", { claude: "k" }, function (e, d, meta) {
+    ok(!e && d.risposta === "Buongiorno!" && d.fine === true, "el JSON entero al final: " + (e && e.message));
+    ok(seen.length >= 2 && seen[0] === "Buon" && seen[seen.length - 1] === "Buongiorno!", "se ve mientras llega: " + JSON.stringify(seen));
+    ok(meta && meta.first <= meta.ms, "tiempo hasta el primer pedazo");
     next();
   }, { stream: function (raw) { var f = IA.partialField(raw, "risposta"); if (f && (!seen.length || seen[seen.length - 1] !== f.text)) seen.push(f.text); } });
 });
 
 test("campo parcial con escapes", function (next) {
-  var f = IA.partialField('{"risposta": "Dice \\"sì\\"\\ne va', "risposta");
-  ok(f && f.text === 'Dice "sì"\ne va' && !f.closed, "escapes: " + JSON.stringify(f));
-  var g = IA.partialField('{"x":1,"risposta":"fin"}', "risposta");
-  ok(g && g.text === "fin" && g.closed, "cerrado");
-  ok(IA.partialField('{"x":1', "risposta") === null, "sin el campo todavía");
+  var f = IA.partialField('{"risposta": "Ciao \\"Marco\\",\\nbenvenuto \\u00e8', "risposta");
+  ok(f && f.text === 'Ciao "Marco",\nbenvenuto è' && !f.closed, "escapes: " + JSON.stringify(f));
+  ok(IA.partialField('{"a": "x"', "risposta") === null, "campo ausente");
   next();
 });
 
-test("carrera: Gemini tarda en empezar, Groq responde y Gemini se cancela", function (next) {
-  memStore();
-  var aborted = false, streamed = [];
-  ctx.fetch = function (url, opt) {
-    if (/\/models$/.test(url)) return jsonResp(200, modelsList(url));
-    if (/googleapis/.test(url)) {
-      return new Promise(function (res, rej) {
-        if (opt.signal) opt.signal.addEventListener("abort", function () { aborted = true; rej(new Error("AbortError")); });
-        setTimeout(function () { res({ ok: true, status: 200, body: sseBody(['{"risposta": "tardi"}']) }); }, 400);
-      });
-    }
-    return Promise.resolve({ ok: true, status: 200, body: sseBody(['{"risposta": "pronto"', "}"]) });
-  };
-  IA.llm("p", { groq: "g", gemini: "m" }, function (e, d, meta) {
-    ok(!e && d.risposta === "pronto" && meta.id === "groq", "gana el que empezó: " + JSON.stringify(d) + (e ? e.message : ""));
-    ok(streamed.every(function (s) { return s.indexOf("tardi") < 0; }), "la pantalla muestra solo al ganador");
-    setTimeout(function () { ok(aborted, "el lento se cancela"); next(); }, 30);
-  }, { stream: function (raw) { streamed.push(raw); }, hedge: 50 });
+test("el chat: system aparte y empieza con el alumno", function (next) {
+  var m = IA.messagesOf({ system: "Sos Marco.", messages: [{ role: "assistant", content: "Ciao!" }, { role: "user", content: "Ciao" }] });
+  ok(/^Sos Marco\./.test(m.system) && /JSON/.test(m.system), "system: " + m.system);
+  ok(m.messages[0].role === "user" && m.messages[1].role === "assistant" && m.messages[2].content === "Ciao", "empieza con el alumno: " + JSON.stringify(m.messages));
+  next();
 });
 
 test("sin clave", function (next) {

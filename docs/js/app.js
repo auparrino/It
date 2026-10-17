@@ -22,6 +22,12 @@
   // the language writes it inside words (chama-se).
   var WCH = "a-zà-ÿ'" + (LG.hyphenWords ? "-" : "");
   var DATA = function (f) { return (LG.base || "") + "data/" + f; };
+  // The data files the package has (a language that is just starting may
+  // have only its course: Boot.LANGS[code].data).
+  var hasData = function (f) {
+    var L = window.Boot && Boot.LANGS && Boot.LANGS[LG.code];
+    return !L || !L.data || L.data.indexOf(f) >= 0;
+  };
   // «Settimana XVII» or «Semana 17».
   function weekNum(n) { return UI.romanWeeks ? romano(n) : String(n); }
   // The street sign of the logo and the titles (a Roman targa, a sign of Rio).
@@ -467,6 +473,19 @@
       "</div>";
   }
 
+  /* The phrase of the day; a package without phrases yet: a word of the
+     weeks already open (the same one all day), with its example. */
+  function phraseOfTheDay() {
+    var f = Frasi.ofTheDay(new Date(), Math.min(state.unlocked || 1, 52));
+    if (f) return f;
+    var pool = [];
+    course.weeks.slice(0, Math.min(state.unlocked || 1, course.weeks.length)).forEach(function (w) { (w.vocab || []).forEach(function (v) { pool.push(v); }); });
+    var d = new Date(), v = pool.length ? pool[(d.getFullYear() * 400 + d.getMonth() * 31 + d.getDate()) % pool.length] : ["", "", ""];
+    var o = { es: v[1], note: v[2] ? "*" + v[2] + "*" : "" };
+    o[LG.code] = v[0];
+    return o;
+  }
+
   function renderOggi() {
     var goal = Engine.goalFor(state);
     var todayXp = Engine.todayXp(state);
@@ -478,7 +497,7 @@
     var strands = Engine.strandsLast(state, 7);
     var dailyDone = state.dailyDone === Engine.dayKey();
     var w = course.weeks[Math.min(state.unlocked, 52) - 1];
-    var f = Frasi.ofTheDay(new Date(), Math.min(state.unlocked || 1, 52));
+    var f = phraseOfTheDay();
     var fText = f[LG.code] || f.it;
     var known = Frasi.ALL.filter(function (x) { return state.cards[x.id]; }).length;
     var hour = new Date().getHours();
@@ -809,7 +828,7 @@
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION = "c1-vN" in sw.js: test_game
      and the CI check it).  One version for the app and both languages. */
-  var APP_VERSION = "v3.10";
+  var APP_VERSION = "v3.11";
   // Settimana XVII: Roman numerals on the street signs (LANG.ui.romanWeeks).
   function romano(n) {
     var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
@@ -817,13 +836,20 @@
     return out;
   }
 
-  /* The other language: one button in Io / Eu (boot.js switches; each
-     language keeps its own progress). */
+  /* The other languages: one button each in Io / Eu (boot.js switches;
+     each language keeps its own progress).  The package's own (UI.switchTo,
+     the id #switchlang) goes first. */
   function switchCard() {
-    if (!window.Boot || !UI.switchCode || !Boot.LANGS[UI.switchCode]) return "";
-    var o = Boot.LANGS[UI.switchCode];
-    return '<div class="card switchlang"><div class="row"><button class="btn ghost" id="switchlang">' + esc(UI.switchTo) + "</button></div>" +
-      '<p class="muted small">' + esc(o.brand) + " guarda su propio progreso: podés ir y volver cuando quieras.</p></div>";
+    if (!window.Boot || !Boot.LANGS) return "";
+    var codes = Object.keys(Boot.LANGS).filter(function (c) { return c !== LG.code; });
+    if (UI.switchCode && codes.indexOf(UI.switchCode) > 0) { codes.splice(codes.indexOf(UI.switchCode), 1); codes.unshift(UI.switchCode); }
+    if (!codes.length) return "";
+    return '<div class="card switchlang"><div class="row">' + codes.map(function (c) {
+      var o = Boot.LANGS[c];
+      return '<button class="btn ghost"' + (c === UI.switchCode ? ' id="switchlang"' : "") + ' data-switchlang="' + c + '">' +
+        esc(c === UI.switchCode && UI.switchTo ? UI.switchTo : "Cambiar a " + o.name + " " + o.flag) + "</button>";
+    }).join("") + "</div>" +
+      '<p class="muted small">Cada idioma guarda su propio progreso: podés ir y volver cuando quieras.</p></div>';
   }
 
   function versionLine() {
@@ -2017,11 +2043,13 @@
     return weekPlan(w).filter(function (x) { return !x.done && (x.kind !== "play2" || w.week >= DOMINA_GATE) && !x.opt; })
       .map(function (x) { return x.title + (x.half ? " (a medias)" : ""); });
   }
+  // The weeks of the course (52; a package that is just starting, fewer).
+  function NW() { return course && course.weeks && course.weeks.length || 52; }
   function tryAdvance(week) {
     var w = course.weeks[week - 1];
-    if (!w || w.boss || week < state.unlocked || week >= 52) return false;
+    if (!w || w.boss || week < state.unlocked || week >= NW()) return false;
     if (pendingToAdvance(w).length) return false;
-    state.unlocked = Math.min(52, week + 1);
+    state.unlocked = Math.min(NW(), week + 1);
     return true;
   }
 
@@ -2056,8 +2084,8 @@
     var left = pendingToAdvance(w);
     var html = '<div class="card"><h2>Misiones ' + starsHtml(weekStars(w)) +
       ' <small class="muted">' + doneN + " / " + plan.length + "</small></h2>" +
-      (w.boss ? (w.week < 52 ? '<p class="muted">⚔️ El ' + UI.boss + " abre la semana " + (w.week + 1) + ". Los repasos por tema y tus puntos débiles son opcionales: sirven para llegar preparado.</p>" : "")
-        : w.week < 52 && state.unlocked <= w.week
+      (w.boss ? (w.week < NW() ? '<p class="muted">⚔️ El ' + UI.boss + " abre la semana " + (w.week + 1) + ". Los repasos por tema y tus puntos débiles son opcionales: sirven para llegar preparado.</p>" : "")
+        : w.week < NW() && state.unlocked <= w.week
         ? '<p class="muted">🔒 La semana ' + (w.week + 1) + " se abre al completar " + (left.length === 1 ? "esta misión" : "estas " + left.length + " misiones") +
           (w.week >= DOMINA_GATE ? " (Dominala incluida)." : " (todas menos Dominala).") + " ☆ = a medias: falta el criterio de la tarjeta.</p>"
         : '<p class="muted">🔓 Semana ' + (w.week + 1) + " abierta.</p>") +
@@ -2589,6 +2617,8 @@
           UI.keys.map(function (c) {
             return '<button data-ins="' + c + '">' + c + "</button>";
           }).join("") +
+          // with the phone's keyboard: back to the app's (teclado.js)
+          '<button class="kbback" data-kbapp="1" title="teclado de la app">⌨️</button>' +
         "</div>" +
         '<button class="btn" id="send">' + UI.check + "</button></div>";
     }
@@ -3829,7 +3859,7 @@
         ws.bossPassed = true;
         if (round.wrong === 0) ws.perfect = true;
         gain(Engine.XP.boss);
-        if (view.week >= state.unlocked) state.unlocked = Math.min(52, view.week + 1);
+        if (view.week >= state.unlocked) state.unlocked = Math.min(NW(), view.week + 1);
       }
     }
     // (the next week opens from missionCheck, once every mission is done)
@@ -4279,6 +4309,11 @@
           [["", "Como el teléfono"], ["light", "Claro ☀️"], ["dark", "Oscuro 🌙"]].map(function (t) {
             return '<option value="' + t[0] + '"' + ((state.theme || "") === t[0] ? " selected" : "") + ">" + t[1] + "</option>";
           }).join("") + "</select></label>" +
+        (window.Teclado && Teclado.touch() ? '<label class="set"><span>Teclado para responder<small>el de la app tiene las letras de ' + esc(UI.langEs || "la lengua") +
+          ' y no autocorrige en castellano; el del teléfono no se puede poner en otro idioma desde una web</small></span><select id="kbmode">' +
+          [["app", "El de la app"], ["phone", "El del teléfono"]].map(function (t) {
+            return '<option value="' + t[0] + '"' + (Teclado.mode() === t[0] ? " selected" : "") + ">" + t[1] + "</option>";
+          }).join("") + "</select></label>" : "") +
         '<label class="set"><span>Teclado sin sugerencias<small>el teclado no te propone palabras (más difícil), pero tampoco detecta el idioma solo ni deja elegirlo desde su barra</small></span>' +
           '<input type="checkbox" id="kbquiet"' + (state.kbQuiet ? " checked" : "") + "></label>" +
         '<label class="set"><span>Modo oficina 🤫<small>nada suena solo; el 🔊 sigue andando si lo tocás</small></span>' +
@@ -4326,7 +4361,7 @@
         "<tr><td>Respuestas totales</td><td>" + state.totals.attempts + "</td></tr>" +
         "<tr><td>Correctas</td><td>" + state.totals.right + "</td></tr>" +
         "<tr><td>Fichas en repaso</td><td>" + Object.keys(state.cards).length + "</td></tr>" +
-        "<tr><td>Semana desbloqueada</td><td>" + state.unlocked + "/52</td></tr>" +
+        "<tr><td>Semana desbloqueada</td><td>" + state.unlocked + "/" + NW() + "</td></tr>" +
       "</table>" +
       (window.Voci && Voci.count() ? (function () {
         var cr = Voci.credits();
@@ -4440,7 +4475,7 @@
   function aiCard() {
     var notes = state.aiNotes || [];
     return '<div class="card" id="aicard"><h2>🤖 Corrector con IA</h2>' +
-      '<p class="muted small">Con una clave gratuita, la IA suma lo que ve a lo que marca el corrector de ' + UI.scrivi +
+      '<p class="muted small">Con una clave de Anthropic (Claude Haiku), la IA suma lo que ve a lo que marca el corrector de ' + UI.scrivi +
         ", da pistas antes de la respuesta («🤖 Explicame»), explica más en la hoja final y juzga las respuestas que el ejercicio no tenía previstas.</p>" +
       aiKeyFields() +
       (notes.length ? "<h3>Correcciones para revisar (" + notes.length + ")</h3>" +
@@ -4926,7 +4961,7 @@
     on("#lampo", function () { startLampo("frasi"); });
     on("#scena", function () { startRound("scene", Drills.nextScene(state).id); });
     on("#rev", function () { startRound("review"); });
-    on("#sayfdg", function () { var fd = Frasi.ofTheDay(new Date(), Math.min(state.unlocked || 1, 52)); speak(fd[LG.code] || fd.it, true); });
+    on("#sayfdg", function () { var fd = phraseOfTheDay(); speak(fd[LG.code] || fd.it, true); });
     on("#firstles", function () { view.week = 1; startLezione(); });
     on("#install", function () {
       if (!installPrompt) return;
@@ -5424,7 +5459,7 @@
   function renderParla(w) {
     var head = '<button class="btn ghost" id="pback">← a la semana</button>' +
       plate(UI.parla + " · " + UI.week + " " + weekNum(w.week), esc(parla && parla.scen ? parla.scen.titolo : "Role-play"));
-    if (!aiKey()) return head + '<div class="card"><p>Para hablar con la IA hace falta una clave gratuita. <a href="#" id="aigo2">Cargala en ' + UI.me + " →</a></p></div>";
+    if (!aiKey()) return head + '<div class="card"><p>Para hablar con la IA hace falta una clave de Anthropic. <a href="#" id="aigo2">Cargala en ' + UI.me + " →</a></p></div>";
     if (!parla || parla.week !== w.week) {
       return head + '<div class="card"><p>Un personaje te espera con una situación de la semana (<b>' + esc(w.fare || w.title) + "</b>). " +
         "Tenés que conseguir <b>tres objetivos</b> escribiendo en " + UI.langEs + ". La IA no te corrige mientras hablan: al final ves tus frases " +
@@ -5646,7 +5681,7 @@
   function renderStoria(w) {
     var head = '<button class="btn ghost" id="sback2">← a la semana</button>' +
       plate(UI.storia + " · " + UI.week + " " + weekNum(w.week), UI.storiaOf);
-    if (!aiKey()) return head + '<div class="card"><p>Para generar la historia hace falta una clave gratuita. <a href="#" id="aigo3">Cargala en ' + UI.me + " →</a></p></div>";
+    if (!aiKey()) return head + '<div class="card"><p>Para generar la historia hace falta una clave de Anthropic. <a href="#" id="aigo3">Cargala en ' + UI.me + " →</a></p></div>";
     var mine = (state.storie || []).filter(function (x) { return x.week === w.week; });
     var due = Drills.buildReview(course, state, 40, drillOpts()).map(function (it) { return vocabWordOf(it); }).filter(Boolean);
     var targets = due.slice(0, 8);
@@ -6373,7 +6408,7 @@
         "Si la IA no está, pedir la corrección de LanguageTool (gratis; el texto se envía a su servidor)</label>" +
       '<p class="muted small ailine">🤖 ' + (aiKey()
         ? "Corrector con IA activado (" + aiNames() + "). "
-        : "Para que una IA marque todo y lo explique, cargá una clave gratuita. ") +
+        : "Para que una IA marque todo y lo explique, cargá una clave de Anthropic. ") +
         '<a href="#" id="aigo">Claves en ' + UI.me + " →</a></p>" +
       '<div id="sout"></div>';
   }
@@ -6392,50 +6427,31 @@
   }
 
   var scriviTimer = null;
-  /* The AI keys: Groq first, Gemini as fallback.  Only in this phone's
+  /* The AI key: Anthropic, for Claude Haiku.  Only in this phone's
      storage, never in the backup. */
-  var AI_KEY = SKEY("groq.key"), GEM_KEY = SKEY("gemini.key");
+  var AI_KEY = SKEY("claude.key");
   function readKey(k) { try { return localStorage.getItem(k) || ""; } catch (e) { return ""; } }
-  function aiKeys() { return { groq: readKey(AI_KEY), gemini: readKey(GEM_KEY) }; }
-  function aiKey() { var k = aiKeys(); return k.groq || k.gemini; }
-  // «Gemini, y Groq de respaldo»: in the order the learner chose.
-  function aiNames() {
-    var k = aiKeys(), ids = (window.IA ? IA.order() : ["gemini", "groq"]).filter(function (id) { return k[id]; });
-    var name = { gemini: "Gemini", groq: "Groq" };
-    return ids.length > 1 ? name[ids[0]] + ", y " + name[ids[1]] + " de respaldo" : ids.map(function (id) { return name[id]; }).join("");
-  }
-  // Which AI answered: «Groq · moonshotai/kimi-k2-instruct».
+  function aiKeys() { return { claude: readKey(AI_KEY) }; }
+  function aiKey() { return aiKeys().claude; }
+  function aiNames() { return aiKey() ? "Claude Haiku" : ""; }
+  // Which AI answered: «Claude · claude-haiku-5-5».
   function modelLine(m, m2) {
     var one = function (x) { return x ? esc(x.provider + " · " + x.model) : ""; };
     if (!m) return "";
     return '<p class="muted small modelline">' + (m2 ? "Corrigió " + one(m) + " · revisó " + one(m2) : "IA: " + one(m)) + "</p>";
   }
   function aiKeyFields() {
-    var k = aiKeys();
-    var first = window.IA ? IA.order()[0] : "gemini", st = window.IA ? IA.stats() : {};
-    var lat = function (id) {
-      var x = st[id];
-      return x && x.lat ? ' <span class="muted">· última vez ' + esc(x.model) + ", " + secs(x.lat.first) + " s</span>" : "";
-    };
-    return '<p class="muted small"><label for="gemkey"><b>Gemini</b></label>: <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a> → «Create API key».' + lat("gemini") + "</p>" +
-      '<input id="gemkey" type="password" autocomplete="off" placeholder="Clave de Gemini (AIza…)" value="' + esc(k.gemini) + '">' +
-      '<p class="muted small"><label for="aikey"><b>Groq</b></label>: <a href="https://console.groq.com/keys" target="_blank" rel="noopener">console.groq.com/keys</a> → «Create API Key».' + lat("groq") + "</p>" +
-      '<input id="aikey" type="password" autocomplete="off" placeholder="Clave de Groq (gsk_…)" value="' + esc(k.groq) + '">' +
-      '<fieldset class="aiorder"><legend class="muted small">Con las dos claves, primero preguntar a:</legend>' +
-      '<label><input type="radio" name="aifirst" value="gemini"' + (first === "gemini" ? " checked" : "") + "> Gemini <span class=\"muted small\">(mejor italiano y portugués)</span></label>" +
-      '<label><input type="radio" name="aifirst" value="groq"' + (first === "groq" ? " checked" : "") + "> Groq <span class=\"muted small\">(el más rápido)</span></label></fieldset>" +
+    var k = aiKeys(), st = window.IA ? IA.stats().claude : null;
+    var lat = st && st.lat ? ' <span class="muted">· última vez ' + secs(st.lat.first) + " s</span>" : "";
+    return '<p class="muted small"><label for="aikey"><b>Claude Haiku</b></label> (Anthropic): <a href="https://console.anthropic.com/settings/keys" target="_blank" rel="noopener">console.anthropic.com/settings/keys</a> → «Create Key».' + lat + "</p>" +
+      '<input id="aikey" type="password" autocomplete="off" placeholder="Clave de Anthropic (sk-ant-…)" value="' + esc(k.claude) + '">' +
       '<div class="row"><button class="tab" id="aisave">Guardar</button></div>' +
-      '<p class="muted small">Si uno falla o tarda en empezar a responder, la app le pregunta al otro. Las claves quedan solo en este teléfono; el texto se envía a Google o a Groq.</p>';
+      '<p class="muted small">La clave queda solo en este teléfono; el texto se envía a Anthropic. La API se paga por uso: con Haiku, centavos por cientos de correcciones.</p>';
   }
   function saveKeys() {
-    var g = (($("#aikey") || {}).value || "").trim(), m = (($("#gemkey") || {}).value || "").trim();
-    var pick = document.querySelector('input[name="aifirst"]:checked');
-    if (pick && window.IA) IA.setOrder(pick.value);
-    try {
-      if (g) localStorage.setItem(AI_KEY, g); else localStorage.removeItem(AI_KEY);
-      if (m) localStorage.setItem(GEM_KEY, m); else localStorage.removeItem(GEM_KEY);
-    } catch (e) { /* */ }
-    return (g ? "Groq" : "") + (g && m ? " y " : "") + (m ? "Gemini" : "");
+    var g = (($("#aikey") || {}).value || "").trim();
+    try { if (g) localStorage.setItem(AI_KEY, g); else localStorage.removeItem(AI_KEY); } catch (e) { /* */ }
+    return g ? "la clave de Claude" : "";
   }
   function wireScrivi() {
     if (view.screen !== "scrivi") return;
@@ -7028,6 +7044,8 @@
       applyTheme();
       renderHeader();
     };
+    var kbm = $("#kbmode");
+    if (kbm) kbm.onchange = function () { Teclado.setMode(kbm.value); toast(kbm.value === "app" ? "Respondés con el teclado de la app." : "Respondés con el teclado del teléfono."); };
     var kbq = $("#kbquiet");
     if (kbq) kbq.onchange = function () { state.kbQuiet = kbq.checked; persist(); langBoxes(); };
     var silent = $("#silent");
@@ -7050,7 +7068,9 @@
     if (notte) notte.onchange = function () { state.notte = notte.checked; persist(); };
     on("#remind", function () { scheduleReminder($("#remtime").value || "13:30"); });
     on("#export", exportSave);
-    on("#switchlang", function () { flushPersist(); if (window.Boot) Boot.switchTo(UI.switchCode); });
+    document.querySelectorAll("[data-switchlang]").forEach(function (b) {
+      b.onclick = function () { flushPersist(); if (window.Boot) Boot.switchTo(b.getAttribute("data-switchlang")); };
+    });
     on("#import", function () { $("#importfile").click(); });
     var file = $("#importfile");
     if (file) file.onchange = function () { if (file.files[0]) importSave(file.files[0]); };
@@ -7087,7 +7107,7 @@
      the keyboard must not fix the learner's answer); «Teclado sin
      sugerencias» (state.kbQuiet) puts autocomplete="off" back.  The search
      boxes and the keys (type search, password) are left as they are. */
-  var SPANISH_BOXES = { idealtext: 1, refq: 1, aikey: 1, gemkey: 1 };
+  var SPANISH_BOXES = { idealtext: 1, refq: 1, aikey: 1 };
   function langBoxes(root0) {
     (root0 || document).querySelectorAll("textarea, input").forEach(function (el) {
       var type = (el.getAttribute("type") || "text").toLowerCase();
@@ -7095,6 +7115,8 @@
       var es = !!(SPANISH_BOXES[el.id] || el.dataset.es);
       if (!el.hasAttribute("lang")) el.setAttribute("lang", es ? "es" : LG.tts);
       if (type === "search" || es) return;
+      // the app's own keyboard, in the language of the course (teclado.js)
+      if (window.Teclado) Teclado.mark(el);
       el.setAttribute("autocorrect", "off");
       if (state.kbQuiet) el.setAttribute("autocomplete", "off");
       else el.removeAttribute("autocomplete");
@@ -7452,7 +7474,7 @@
     if (extrasAsked) return;
     extrasAsked = true;
     // The glossary: without it words are just not tappable.
-    fetch(DATA("glossario.json"))
+    if (hasData("glossario.json")) fetch(DATA("glossario.json"))
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (g) {
         glossario = g;
@@ -7461,7 +7483,7 @@
       })
       .catch(function () { /* sin glosario */ });
     // The frequency layer: without it, no coverage meter.
-    fetch(DATA("frequenza.json"))
+    if (hasData("frequenza.json")) fetch(DATA("frequenza.json"))
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (f) { if (f && window.Freq) { Freq.load(f); if (view.screen === "io" || view.screen === "oggi") render(); } })
       .catch(function () { /* sin frecuencias */ });
@@ -7471,7 +7493,7 @@
   }
 
   // The bank is optional: without it the app still works, just smaller.
-  var bankP = fetch(DATA("bank.json"))
+  var bankP = !hasData("bank.json") ? Promise.resolve() : fetch(DATA("bank.json"))
     .then(function (r) { return r.ok ? r.json() : null; })
     .then(function (b) { if (b) Banca.load(b); })
     .catch(function () { /* sin banco */ });

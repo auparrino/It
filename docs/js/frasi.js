@@ -526,6 +526,7 @@
     var talk = ALL.filter(function (f) { return !f.work; });
     var pool = week ? talk.filter(function (f) { return (f.week || 1) <= week; }) : talk;
     if (!pool.length) pool = talk;
+    if (!pool.length) return null;                  // a package without phrases yet
     var n = d.getFullYear() * 400 + d.getMonth() * 31 + d.getDate();
     return pool[(n * 7919) % pool.length];
   }
