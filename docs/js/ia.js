@@ -8,7 +8,8 @@
  *
  *   IA.llm(prompt, keys, done, opts)
  *     prompt  un texto, o {system, messages: [{role, content}…]} para un chat
- *     keys    {claude}, o la clave sola
+ *     keys    {claude, ws}, o la clave sola (ws: el ID del workspace de
+ *             Anthropic, para las claves que no son de un workspace)
  *     done    function (err, data, meta)  data = el JSON de la respuesta;
  *             meta = {provider, id, model, ms, first}
  *     opts    stream: function (raw) — la respuesta a medida que llega
@@ -108,6 +109,7 @@
     if (typeof root.fetch !== "function") return done(new Error("sin fetch"));
     var key = typeof keys === "string" ? keys : (keys || {}).claude;
     if (!key) return done(new Error("sin clave"));
+    var ws = typeof keys === "string" ? "" : String((keys || {}).ws || "").trim();
     var deadline = Date.now() + (opts.stream ? 45000 : 40000), round = 0, over = false, plain = false;
     var pm = messagesOf(prompt);
     function finish(err, data, meta) { if (over) return; over = true; done(err, data, meta); }
@@ -129,10 +131,11 @@
         else body.thinking = { type: "disabled" };
       }
       if (opts.stream) body.stream = true;
+      var headers = { "Content-Type": "application/json", "x-api-key": key, "anthropic-version": "2023-06-01",
+                      "anthropic-dangerous-direct-browser-access": "true" };
+      if (ws) headers["anthropic-workspace-id"] = ws;
       root.fetch(URL, {
-        method: "POST", signal: ctl ? ctl.signal : undefined,
-        headers: { "Content-Type": "application/json", "x-api-key": key, "anthropic-version": "2023-06-01",
-                   "anthropic-dangerous-direct-browser-access": "true" },
+        method: "POST", signal: ctl ? ctl.signal : undefined, headers: headers,
         body: JSON.stringify(body)
       }).then(function (r) {
         if (over) return null;
@@ -150,6 +153,7 @@
           try { why = String((JSON.parse(b).error || {}).message || ""); } catch (e) { why = ""; }
           why = why.replace(/\s+/g, " ").slice(0, 160);
           if (r.status === 401 || r.status === 403) finish(new Error("HTTP " + r.status + ", clave" + (why ? ": " + why : "")));
+          else if (r.status === 400 && /workspace/i.test(b)) finish(new Error(ws ? "el ID del workspace no sirve con esta clave (400)" : "esta clave no es de un workspace: en el perfil (abajo a la derecha) poné el ID del workspace (wrkspc_…)"));
           else if (r.status === 400 && /credit|billing/i.test(b)) finish(new Error("la cuenta de Anthropic no tiene crédito (400)"));
           else if (r.status === 400 && !plain && /thinking|effort|output_config|budget/i.test(b)) { plain = true; attempt(); }
           else if (r.status === 429 || r.status === 529 || r.status >= 500) retry(new Error(r.status === 429 ? "se terminó el cupo por ahora (429)" : "Claude está saturado ahora (" + r.status + ")"));
