@@ -34,6 +34,7 @@ italiano.
 | Qué | Dónde se escribe | Qué lo controla |
 |---|---|---|
 | Temario: títulos, foco, verbos y tiempos del gimnasio por semana | `tools/it/build_course.py` (`WEEKS`) y `tools/it/sillabo.py`; `tools/pt/curriculo.py` | `test_game.js`, `sim_carriera.js` |
+| Alemán (todo: lecciones, ejercicios y palabras de las seis semanas de A1) | `tools/de/curso.py` (lo compila `tools/de/build_course.py`) | `tools/de/test_curso.js`, `sim_carriera.js de`, `tools/lib/smoke_aleman.js` |
 | Lecciones (teoría de las 52 semanas) | `tools/<código>/lessons/s1.py` … `s4.py` | `tools/it/check_lessons.py`, `tools/lib/test_lecciones.js`, `tools/lib/test_orden_lecciones.js` |
 | Ítems de ejercicio | `tools/<código>/authored/*.py` (it además `tools/it/fuentes/`) | `test_game.js`, `tools/lib/test_notas_it.js`, `tools/lib/test_huecos.js`, la simulación |
 | Banco (palabras, oraciones, errores, interferencias) | `tools/<código>/bank/*.py` | `build_bank.py` (descarta y avisa lo que no valida), `test_diagnosi.js`, `tools/lib/test_fix_banco.js` |

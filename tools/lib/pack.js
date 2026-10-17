@@ -39,6 +39,7 @@ function pack(code, opts) {
   for (var i = 0; i < Boot.ORDER.length; i++) {
     var e = Boot.ORDER[i], name = e.lang || e.core || e.shared;
     if (name === stop && !opts.includeStop) break;
+    if (!Boot.has(e, code)) continue;          // a file the package does not have yet
     var f = file(e, code);
     if (!fs.existsSync(f)) {
       if (opts.strict) throw new Error("falta " + path.relative(ROOT, f));
@@ -52,7 +53,11 @@ function pack(code, opts) {
 
 pack.ROOT = ROOT;
 pack.DOCS = DOCS;
-pack.LANGS = Object.keys(Boot.LANGS);
+// The complete languages (every file of the package): what the tests of
+// the core go through.  ALL adds the ones that are starting (Boot.LANGS
+// with «missing»: German), which have their own tests (tools/de/).
+pack.ALL = Object.keys(Boot.LANGS);
+pack.LANGS = pack.ALL.filter(function (c) { return !(Boot.LANGS[c].missing || []).length; });
 pack.langDir = function (code) { return path.join(DOCS, "lang", code); };
 pack.dataPath = function (code, name) { return path.join(DOCS, "lang", code, "data", name); };
 pack.data = function (code, name) { return JSON.parse(fs.readFileSync(pack.dataPath(code, name), "utf8")); };

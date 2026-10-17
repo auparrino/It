@@ -519,7 +519,11 @@
       .catch(function (e) { delete DATA.loading[what]; throw e; });
     return p;
   }
-  function loadIndex() { return DATA.index ? Promise.resolve(DATA.index) : load("index", base() + "biblioteca/index.json", function (x) { DATA.index = x; }); }
+  function loadIndex() {
+    // a package without a library yet (no biblioteca_data.js): nothing to ask for
+    if (!root.BIBLIO_DATA) return Promise.reject(new Error("sin biblioteca"));
+    return DATA.index ? Promise.resolve(DATA.index) : load("index", base() + "biblioteca/index.json", function (x) { DATA.index = x; });
+  }
   function loadBook(id) {
     return DATA.books[id] ? Promise.resolve(DATA.books[id]) : load("b:" + id, base() + "biblioteca/" + id + ".json", function (x) { DATA.books[id] = x; });
   }

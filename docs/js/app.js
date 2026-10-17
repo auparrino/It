@@ -22,6 +22,12 @@
   // the language writes it inside words (chama-se).
   var WCH = "a-zà-ÿ'" + (LG.hyphenWords ? "-" : "");
   var DATA = function (f) { return (LG.base || "") + "data/" + f; };
+  // The data files the package has (a language that is just starting may
+  // have only its course: Boot.LANGS[code].data).
+  var hasData = function (f) {
+    var L = window.Boot && Boot.LANGS && Boot.LANGS[LG.code];
+    return !L || !L.data || L.data.indexOf(f) >= 0;
+  };
   // «Settimana XVII» or «Semana 17».
   function weekNum(n) { return UI.romanWeeks ? romano(n) : String(n); }
   // The street sign of the logo and the titles (a Roman targa, a sign of Rio).
@@ -467,6 +473,19 @@
       "</div>";
   }
 
+  /* The phrase of the day; a package without phrases yet: a word of the
+     weeks already open (the same one all day), with its example. */
+  function phraseOfTheDay() {
+    var f = Frasi.ofTheDay(new Date(), Math.min(state.unlocked || 1, 52));
+    if (f) return f;
+    var pool = [];
+    course.weeks.slice(0, Math.min(state.unlocked || 1, course.weeks.length)).forEach(function (w) { (w.vocab || []).forEach(function (v) { pool.push(v); }); });
+    var d = new Date(), v = pool.length ? pool[(d.getFullYear() * 400 + d.getMonth() * 31 + d.getDate()) % pool.length] : ["", "", ""];
+    var o = { es: v[1], note: v[2] ? "*" + v[2] + "*" : "" };
+    o[LG.code] = v[0];
+    return o;
+  }
+
   function renderOggi() {
     var goal = Engine.goalFor(state);
     var todayXp = Engine.todayXp(state);
@@ -478,7 +497,7 @@
     var strands = Engine.strandsLast(state, 7);
     var dailyDone = state.dailyDone === Engine.dayKey();
     var w = course.weeks[Math.min(state.unlocked, 52) - 1];
-    var f = Frasi.ofTheDay(new Date(), Math.min(state.unlocked || 1, 52));
+    var f = phraseOfTheDay();
     var fText = f[LG.code] || f.it;
     var known = Frasi.ALL.filter(function (x) { return state.cards[x.id]; }).length;
     var hour = new Date().getHours();
@@ -809,7 +828,7 @@
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION = "c1-vN" in sw.js: test_game
      and the CI check it).  One version for the app and both languages. */
-  var APP_VERSION = "v3.10";
+  var APP_VERSION = "v3.11";
   // Settimana XVII: Roman numerals on the street signs (LANG.ui.romanWeeks).
   function romano(n) {
     var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
@@ -817,13 +836,20 @@
     return out;
   }
 
-  /* The other language: one button in Io / Eu (boot.js switches; each
-     language keeps its own progress). */
+  /* The other languages: one button each in Io / Eu (boot.js switches;
+     each language keeps its own progress).  The package's own (UI.switchTo,
+     the id #switchlang) goes first. */
   function switchCard() {
-    if (!window.Boot || !UI.switchCode || !Boot.LANGS[UI.switchCode]) return "";
-    var o = Boot.LANGS[UI.switchCode];
-    return '<div class="card switchlang"><div class="row"><button class="btn ghost" id="switchlang">' + esc(UI.switchTo) + "</button></div>" +
-      '<p class="muted small">' + esc(o.brand) + " guarda su propio progreso: podés ir y volver cuando quieras.</p></div>";
+    if (!window.Boot || !Boot.LANGS) return "";
+    var codes = Object.keys(Boot.LANGS).filter(function (c) { return c !== LG.code; });
+    if (UI.switchCode && codes.indexOf(UI.switchCode) > 0) { codes.splice(codes.indexOf(UI.switchCode), 1); codes.unshift(UI.switchCode); }
+    if (!codes.length) return "";
+    return '<div class="card switchlang"><div class="row">' + codes.map(function (c) {
+      var o = Boot.LANGS[c];
+      return '<button class="btn ghost"' + (c === UI.switchCode ? ' id="switchlang"' : "") + ' data-switchlang="' + c + '">' +
+        esc(c === UI.switchCode && UI.switchTo ? UI.switchTo : "Cambiar a " + o.name + " " + o.flag) + "</button>";
+    }).join("") + "</div>" +
+      '<p class="muted small">Cada idioma guarda su propio progreso: podés ir y volver cuando quieras.</p></div>';
   }
 
   function versionLine() {
@@ -2017,11 +2043,13 @@
     return weekPlan(w).filter(function (x) { return !x.done && (x.kind !== "play2" || w.week >= DOMINA_GATE) && !x.opt; })
       .map(function (x) { return x.title + (x.half ? " (a medias)" : ""); });
   }
+  // The weeks of the course (52; a package that is just starting, fewer).
+  function NW() { return course && course.weeks && course.weeks.length || 52; }
   function tryAdvance(week) {
     var w = course.weeks[week - 1];
-    if (!w || w.boss || week < state.unlocked || week >= 52) return false;
+    if (!w || w.boss || week < state.unlocked || week >= NW()) return false;
     if (pendingToAdvance(w).length) return false;
-    state.unlocked = Math.min(52, week + 1);
+    state.unlocked = Math.min(NW(), week + 1);
     return true;
   }
 
@@ -2056,8 +2084,8 @@
     var left = pendingToAdvance(w);
     var html = '<div class="card"><h2>Misiones ' + starsHtml(weekStars(w)) +
       ' <small class="muted">' + doneN + " / " + plan.length + "</small></h2>" +
-      (w.boss ? (w.week < 52 ? '<p class="muted">⚔️ El ' + UI.boss + " abre la semana " + (w.week + 1) + ". Los repasos por tema y tus puntos débiles son opcionales: sirven para llegar preparado.</p>" : "")
-        : w.week < 52 && state.unlocked <= w.week
+      (w.boss ? (w.week < NW() ? '<p class="muted">⚔️ El ' + UI.boss + " abre la semana " + (w.week + 1) + ". Los repasos por tema y tus puntos débiles son opcionales: sirven para llegar preparado.</p>" : "")
+        : w.week < NW() && state.unlocked <= w.week
         ? '<p class="muted">🔒 La semana ' + (w.week + 1) + " se abre al completar " + (left.length === 1 ? "esta misión" : "estas " + left.length + " misiones") +
           (w.week >= DOMINA_GATE ? " (Dominala incluida)." : " (todas menos Dominala).") + " ☆ = a medias: falta el criterio de la tarjeta.</p>"
         : '<p class="muted">🔓 Semana ' + (w.week + 1) + " abierta.</p>") +
@@ -3831,7 +3859,7 @@
         ws.bossPassed = true;
         if (round.wrong === 0) ws.perfect = true;
         gain(Engine.XP.boss);
-        if (view.week >= state.unlocked) state.unlocked = Math.min(52, view.week + 1);
+        if (view.week >= state.unlocked) state.unlocked = Math.min(NW(), view.week + 1);
       }
     }
     // (the next week opens from missionCheck, once every mission is done)
@@ -4333,7 +4361,7 @@
         "<tr><td>Respuestas totales</td><td>" + state.totals.attempts + "</td></tr>" +
         "<tr><td>Correctas</td><td>" + state.totals.right + "</td></tr>" +
         "<tr><td>Fichas en repaso</td><td>" + Object.keys(state.cards).length + "</td></tr>" +
-        "<tr><td>Semana desbloqueada</td><td>" + state.unlocked + "/52</td></tr>" +
+        "<tr><td>Semana desbloqueada</td><td>" + state.unlocked + "/" + NW() + "</td></tr>" +
       "</table>" +
       (window.Voci && Voci.count() ? (function () {
         var cr = Voci.credits();
@@ -4933,7 +4961,7 @@
     on("#lampo", function () { startLampo("frasi"); });
     on("#scena", function () { startRound("scene", Drills.nextScene(state).id); });
     on("#rev", function () { startRound("review"); });
-    on("#sayfdg", function () { var fd = Frasi.ofTheDay(new Date(), Math.min(state.unlocked || 1, 52)); speak(fd[LG.code] || fd.it, true); });
+    on("#sayfdg", function () { var fd = phraseOfTheDay(); speak(fd[LG.code] || fd.it, true); });
     on("#firstles", function () { view.week = 1; startLezione(); });
     on("#install", function () {
       if (!installPrompt) return;
@@ -7040,7 +7068,9 @@
     if (notte) notte.onchange = function () { state.notte = notte.checked; persist(); };
     on("#remind", function () { scheduleReminder($("#remtime").value || "13:30"); });
     on("#export", exportSave);
-    on("#switchlang", function () { flushPersist(); if (window.Boot) Boot.switchTo(UI.switchCode); });
+    document.querySelectorAll("[data-switchlang]").forEach(function (b) {
+      b.onclick = function () { flushPersist(); if (window.Boot) Boot.switchTo(b.getAttribute("data-switchlang")); };
+    });
     on("#import", function () { $("#importfile").click(); });
     var file = $("#importfile");
     if (file) file.onchange = function () { if (file.files[0]) importSave(file.files[0]); };
@@ -7444,7 +7474,7 @@
     if (extrasAsked) return;
     extrasAsked = true;
     // The glossary: without it words are just not tappable.
-    fetch(DATA("glossario.json"))
+    if (hasData("glossario.json")) fetch(DATA("glossario.json"))
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (g) {
         glossario = g;
@@ -7453,7 +7483,7 @@
       })
       .catch(function () { /* sin glosario */ });
     // The frequency layer: without it, no coverage meter.
-    fetch(DATA("frequenza.json"))
+    if (hasData("frequenza.json")) fetch(DATA("frequenza.json"))
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (f) { if (f && window.Freq) { Freq.load(f); if (view.screen === "io" || view.screen === "oggi") render(); } })
       .catch(function () { /* sin frecuencias */ });
@@ -7463,7 +7493,7 @@
   }
 
   // The bank is optional: without it the app still works, just smaller.
-  var bankP = fetch(DATA("bank.json"))
+  var bankP = !hasData("bank.json") ? Promise.resolve() : fetch(DATA("bank.json"))
     .then(function (r) { return r.ok ? r.json() : null; })
     .then(function (b) { if (b) Banca.load(b); })
     .catch(function () { /* sin banco */ });

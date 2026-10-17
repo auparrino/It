@@ -1213,7 +1213,11 @@
     review.forEach(function (it) { seenIds[it.id] = true; });
 
     var intros = [], drills = [], filler = review.slice();
-    if (Frasi) {
+    // a package without phrase scenes yet (a language that is starting):
+    // the words of the week take their place
+    var noScenes = !Frasi || !Frasi.SCENES || !Frasi.SCENES.length;
+    if (noScenes && week) vocabSession(course, week, state, 3).forEach(function (it) { if (!seenIds[it.id]) { filler.push(it); seenIds[it.id] = true; } });
+    if (!noScenes) {
       var sc = nextScene(state);
       Frasi.ofScene(sc.id).filter(function (f) {
         return !state.cards[f.id] && !seenIds[f.id];
@@ -1231,7 +1235,8 @@
     // Interleaving (Rohrer & Taylor 2007): una pregunta del laboratorio.
     // week: the last week whose lesson the learner has read.  Before the
     // first lesson there is no grammar to practise: only phrases and words.
-    if (Lab && week) filler.push(Lab.randomItem(state.cards, week.week));
+    var labIt = Lab && week ? Lab.randomItem(state.cards, week.week) : null;
+    if (labIt) filler.push(labIt);
 
     // De la semana, solo preguntas de opción: en la pausa se va rápido.
     var bookChoice = ((week && week.items) || []).map(function (id) { return map[id]; })

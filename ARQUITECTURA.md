@@ -1,6 +1,7 @@
-# Una app, dos idiomas
+# Una app, varios idiomas
 
-*La Via C1* (italiano) y *Rumo C1* (portugués de Brasil) son una sola app:
+*La Via C1* (italiano), *Rumo C1* (portugués de Brasil) y *Weg C1* (alemán,
+en construcción) son una sola app:
 un **núcleo** común y un **paquete** por idioma. Un arreglo en el núcleo vale
 para los dos idiomas; cada idioma conserva su contenido, sus reglas, su
 estética y su progreso.
@@ -17,7 +18,8 @@ docs/
   fonts/, icons/        lo común (Atkinson Hyperlegible, el ícono de la app)
   sw.js                 un service worker para todo: el núcleo siempre,
                         el paquete del idioma en uso (el otro, a demanda)
-  lang/it/, lang/pt/    un paquete por idioma:
+  lang/it/, lang/pt/,   un paquete por idioma (el alemán, lang/de/, arranca con
+  lang/de/              lang.js, rules.js, theme.css y el curso; ver abajo):
     lang.js             window.LANG: código, marca, TTS, prefijo de guardado,
                         textos de la interfaz (pestañas, secciones, rangos…)
     rules.js            LANG.rules: las reglas del idioma que usan el motor,
@@ -131,6 +133,26 @@ lengua del curso se escriben con un teclado propio, en pantalla:
   `phone`), para todos los idiomas, y también se cambia en Io.
 - **Test**: `tools/lib/smoke_teclado.js` (en Chromium, como un celular y como
   una computadora, en cada idioma).
+
+**Un idioma que arranca** (el alemán). Un paquete puede no tener todavía
+todos sus archivos: `Boot.LANGS.<código>.missing` dice cuáles faltan y
+`Boot.LANGS.<código>.data` qué datos tiene (`course.json` solo). `boot.js`
+no los pide, el service worker no los guarda, `app.js` no busca banco,
+glosario ni frecuencias, y el núcleo anda sin ellos: sin frases la pausa usa
+las palabras de la semana y Oggi muestra la palabra del día; sin laboratorio,
+biblioteca, lecturas ni examen, esas misiones no aparecen. Las semanas son
+las del curso (`NW()` en `app.js`: el alemán tiene seis). `tools/lib/pack.js`
+expone `pack.LANGS` (los idiomas completos, que recorren los tests comunes)
+y `pack.ALL` (todos); el alemán tiene su propio test (`tools/de/test_curso.js`),
+su año simulado (`npm run sim`) y su prueba en el navegador
+(`tools/lib/smoke_aleman.js`). Detalle en [README-aleman.md](README-aleman.md).
+
+**La IA** (`js/ia.js`): Claude Haiku (`claude-haiku-5-5`), con la clave de
+Anthropic del alumno (`<prefijo>.claude.key`, fuera del guardado), por la API
+de Mensajes directo desde el navegador. La misma interfaz para todos los
+módulos (`IA.llm(prompt, keys, done, opts)`): chat con el system aparte,
+respuesta de a poco para el role-play, reintentos si está saturado.
+Test: `tools/lib/test_ia.js`.
 
 **Versión.** Una sola: `package.json` (X.Y.Z), que tiene que coincidir con
 `APP_VERSION` de `docs/js/app.js` y `VERSION` de `docs/sw.js`
