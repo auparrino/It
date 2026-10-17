@@ -96,6 +96,17 @@ function chromiumPath() {
     if (back.im !== "none" || back.mode !== "app") errors.push(code + ": el ⌨️ de la fila no volvió al teclado de la app: " + JSON.stringify(back));
     if (!(await panelOn(page))) errors.push(code + ": al volver, el teclado de la app no se abrió");
     note(code + " · ⌨️ al teclado del teléfono y vuelta");
+    // a box where Enter does not send (a long text): ↵ is a new line
+    await page.evaluate(() => {
+      const t = document.createElement("textarea");
+      t.id = "kblong"; t.setAttribute("data-kb", "1"); t.setAttribute("inputmode", "none");
+      document.getElementById("app").appendChild(t);
+    });
+    await page.focus("#kblong");
+    await page.waitForTimeout(250);
+    await tap(page, "a"); await tap(page, "enter"); await tap(page, "b");
+    const long = await page.inputValue("#kblong");
+    if (long !== "a\nb") errors.push(code + ": ↵ en un texto largo no hizo un renglón nuevo: " + JSON.stringify(long));
     await page.context().close();
 
     // a computer: nothing changes

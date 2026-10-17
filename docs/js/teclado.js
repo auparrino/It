@@ -126,6 +126,8 @@
       try { ev = new root.KeyboardEvent("keydown", { key: "Enter", code: "Enter", bubbles: true, cancelable: true }); }
       catch (e) { ev = doc.createEvent("Event"); ev.initEvent("keydown", true, true); ev.key = "Enter"; }
       el.dispatchEvent(ev);
+      // the screen did not take the Enter (a long text): a new line, as the phone's keyboard does
+      if (!ev.defaultPrevented && el.tagName === "TEXTAREA" && doc.body.contains(el)) insert(el, "\n");
       return;
     }
     insert(el, k);
