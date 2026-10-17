@@ -828,7 +828,7 @@
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION = "c1-vN" in sw.js: test_game
      and the CI check it).  One version for the app and both languages. */
-  var APP_VERSION = "v3.11.1";
+  var APP_VERSION = "v3.11.2";
   // Settimana XVII: Roman numerals on the street signs (LANG.ui.romanWeeks).
   function romano(n) {
     var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
@@ -6429,9 +6429,9 @@
   var scriviTimer = null;
   /* The AI key: Anthropic, for Claude Haiku.  Only in this phone's
      storage, never in the backup. */
-  var AI_KEY = SKEY("claude.key");
+  var AI_KEY = SKEY("claude.key"), AI_WS = SKEY("claude.ws");
   function readKey(k) { try { return localStorage.getItem(k) || ""; } catch (e) { return ""; } }
-  function aiKeys() { return { claude: readKey(AI_KEY) }; }
+  function aiKeys() { return { claude: readKey(AI_KEY), ws: readKey(AI_WS) }; }
   function aiKey() { return aiKeys().claude; }
   function aiNames() { return aiKey() ? "Claude Haiku" : ""; }
   // Which AI answered: «Claude · claude-haiku-5-5».
@@ -6445,12 +6445,16 @@
     var lat = st && st.lat ? ' <span class="muted">· última vez ' + secs(st.lat.first) + " s</span>" : "";
     return '<p class="muted small"><label for="aikey"><b>Claude Haiku</b></label> (Anthropic): <a href="https://console.anthropic.com/settings/keys" target="_blank" rel="noopener">console.anthropic.com/settings/keys</a> → «Create Key».' + lat + "</p>" +
       '<input id="aikey" type="password" autocomplete="off" placeholder="Clave de Anthropic (sk-ant-…)" value="' + esc(k.claude) + '">' +
+      '<p class="muted small"><label for="aiws">ID del workspace</label> (solo si Anthropic lo pide: «not scoped to a workspace»). En la consola, Settings → Workspaces → el workspace → empieza con <code>wrkspc_</code>.</p>' +
+      '<input id="aiws" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="wrkspc_… (opcional)" value="' + esc(k.ws) + '">' +
       '<div class="row"><button class="tab" id="aisave">Guardar</button></div>' +
       '<p class="muted small">La clave queda solo en este teléfono; el texto se envía a Anthropic. La API se paga por uso: con Haiku, centavos por cientos de correcciones.</p>';
   }
   function saveKeys() {
     var g = (($("#aikey") || {}).value || "").trim();
+    var ws = (($("#aiws") || {}).value || "").trim();
     try { if (g) localStorage.setItem(AI_KEY, g); else localStorage.removeItem(AI_KEY); } catch (e) { /* */ }
+    try { if (ws) localStorage.setItem(AI_WS, ws); else localStorage.removeItem(AI_WS); } catch (e) { /* */ }
     return g ? "la clave de Claude" : "";
   }
   function wireScrivi() {
@@ -7107,7 +7111,7 @@
      the keyboard must not fix the learner's answer); «Teclado sin
      sugerencias» (state.kbQuiet) puts autocomplete="off" back.  The search
      boxes and the keys (type search, password) are left as they are. */
-  var SPANISH_BOXES = { idealtext: 1, refq: 1, aikey: 1 };
+  var SPANISH_BOXES = { idealtext: 1, refq: 1, aikey: 1, aiws: 1 };
   // A box where the learner writes in the language of the course (the app's keyboard, teclado.js).
   function courseBox(el) {
     var type = (el.getAttribute("type") || "text").toLowerCase();

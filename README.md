@@ -35,7 +35,10 @@ cuando quieras, y la app lo recuerda (también se elige en el perfil).
 La corrección con IA, las pistas, el role-play y las historias usan
 **Claude Haiku** (`claude-haiku-5-5`, de Anthropic) con una clave tuya
 (*console.anthropic.com → API keys*). La clave queda en el teléfono; la API
-se paga por uso, y con Haiku son centavos.
+se paga por uso, y con Haiku son centavos. Si Anthropic contesta que la clave
+«is not scoped to a workspace», en el perfil va también el ID del workspace
+(`wrkspc_…`, en *Settings → Workspaces*): la app lo manda en el encabezado
+`anthropic-workspace-id`.
 
 ## En el celular
 

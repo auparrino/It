@@ -161,6 +161,23 @@ test("el chat: system aparte y empieza con el alumno", function (next) {
   next();
 });
 
+test("una clave sin workspace: el ID va en el encabezado", function (next) {
+  memStore();
+  var hs = [];
+  ctx.fetch = function (url, opt) {
+    hs.push(opt.headers);
+    return opt.headers["anthropic-workspace-id"] ? jsonResp(200, reply('{"ok": 3}'))
+      : jsonResp(400, { error: { message: "This API key is not scoped to a workspace, so this request must include the anthropic-workspace-id header" } });
+  };
+  IA.llm("p", { claude: "k" }, function (e) {
+    ok(e && /ID del workspace/.test(e.message) && hs.length === 1, "sin ID: dice qué falta: " + (e && e.message));
+    IA.llm("p", { claude: "k", ws: " wrkspc_01 " }, function (e2, d2) {
+      ok(!e2 && d2.ok === 3 && hs[1]["anthropic-workspace-id"] === "wrkspc_01", "con ID: va en el encabezado");
+      next();
+    });
+  });
+});
+
 test("sin clave", function (next) {
   IA.llm("p", {}, function (e) { ok(e && /sin clave/.test(e.message), "error claro"); next(); });
 });
