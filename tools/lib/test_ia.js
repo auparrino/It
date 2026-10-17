@@ -75,6 +75,43 @@ test("Gemini primero por defecto; Groq si el alumno lo elige", function (next) {
   });
 });
 
+test("Gemini saturado: espera y otra vuelta, sin caer en Groq para corregir", function (next) {
+  memStore();
+  IA.retryWaits([5, 5]);
+  var calls = [];
+  ctx.fetch = function (url, opt) {
+    if (/\/models$/.test(url)) return jsonResp(200, modelsList(url));
+    var b = JSON.parse(opt.body);
+    calls.push(b.model);
+    return calls.length <= 2 ? jsonResp(503, {}) : jsonResp(200, reply('{"ok":3}'));
+  };
+  IA.llm("p", { groq: "g", gemini: "m" }, function (e, d, meta) {
+    ok(!e && d.ok === 3 && meta.id === "gemini" && calls.length === 3 && !calls.some(function (m) { return /kimi|llama/.test(m); }),
+       "segunda vuelta con Gemini: " + calls.join(","));
+    calls.length = 0;
+    ctx.fetch = function (url, opt) {
+      if (/\/models$/.test(url)) return jsonResp(200, modelsList(url));
+      calls.push(JSON.parse(opt.body).model);
+      return jsonResp(503, {});
+    };
+    IA.llm("p", { groq: "g", gemini: "m" }, function (e2) {
+      ok(e2 && /saturado/.test(e2.message) && calls.length === 6 && !calls.some(function (m) { return /kimi|llama/.test(m); }),
+         "todo saturado: tres vueltas y error, sin Groq: " + calls.join(","));
+      calls.length = 0;
+      ctx.fetch = function (url, opt) {
+        if (/\/models$/.test(url)) return jsonResp(200, modelsList(url));
+        calls.push(JSON.parse(opt.body).model);
+        return jsonResp(404, {});
+      };
+      IA.llm("p", { gemini: "m" }, function (e3) {
+        ok(e3 && calls.length === 2, "un 404 no se reintenta: " + calls.join(","));
+        IA.retryWaits([2000, 5000]);
+        next();
+      });
+    });
+  });
+});
+
 test("razonamiento apagado: none → minimal, y el escalón queda recordado", function (next) {
   memStore();
   var effs = [];

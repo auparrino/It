@@ -359,6 +359,12 @@
     banca: {
       // Il livello del percorso decide cosa è alla portata: the last week of A1, A2, B1, B2.
       levels: [8, 18, 30, 42],
+      // «¿Qué verbo va?» (banca.js): el par que confunde al hispanohablante
+      // (sono andato / *ho andato, ho fame / *sono fame) y las oraciones que lo trabajan.
+      verbPair: ["essere", "avere"],
+      verbPairTags: ["essere_avere", "ausiliare_essere", "passato_prossimo", "participio_accordo", "riflessivi", "piacere"],
+      // «¿Qué pronombre va?»: los átonos sueltos, delante del verbo o pegados al imperativo.
+      clitics: ["lo", "la", "li", "le", "gli", "ne", "ci", "mi", "ti", "si", "vi"],
       soundOf: soundOf,
       defArt: defArt,
       indefArt: indefArt,

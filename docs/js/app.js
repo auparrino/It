@@ -809,7 +809,7 @@
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION = "c1-vN" in sw.js: test_game
      and the CI check it).  One version for the app and both languages. */
-  var APP_VERSION = "v3.7.2";
+  var APP_VERSION = "v3.10";
   // Settimana XVII: Roman numerals on the street signs (LANG.ui.romanWeeks).
   function romano(n) {
     var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
@@ -1926,8 +1926,28 @@
     }
     if (window.Banca && Banca.loaded()) {
       var bankDone = function (rx) { return Object.keys(state.cards).filter(function (k) { return rx.test(k); }).length >= 8; };
-      if (w.week === Banca.FORME_WEEK) m({ kind: "b-forme", done: bankDone(/^b:(art|pl|prep|agg|acc)/), ico: "🧩", title: "Banco: " + UI.forme,
-        sub: UI.formeMission });
+      // Identificar: armar las formas (contracciones, artículos, plurales) y
+      // encontrar el error, cada semana; hechas con 70 % en una ronda
+      // lanzada desde la semana (en la semana de las formas, obligatoria)
+      var ident = function (kind) { return ((state.identPct || {})[w.week] || {})[kind]; };
+      var identSub = function (kind, txt) { var p = ident(kind); return (p >= 70 ? "Hecha · " + p + " % · " : p != null ? "Tu mejor: " + p + " % · Te falta: 70 % · " : (w.week === Banca.FORME_WEEK && kind === "b-forme" ? "" : "Opcional · ")) + txt; };
+      if (w.week === Banca.FORME_WEEK) {
+        var fp = ident("b-forme");
+        m({ kind: "b-forme", arg: "w:" + w.week, done: fp >= 70 || bankDone(/^b:(art|pl|prep|agg|acc)/), half: fp != null && fp < 70,
+            ico: "🧩", title: UI.forme + ": armá artículos y contracciones", sub: identSub("b-forme", UI.formeMission) });
+      }
+      // lo que más le cuesta a este alumno (sus errores), para reconocer
+      if (w.week > Banca.FORME_WEEK) {
+        var wk2 = Banca.weakest(state, 2), ip2 = ident("b-ident");
+        m({ kind: "b-ident", arg: "w:" + w.week, done: ip2 >= 70, half: ip2 != null && ip2 < 70, opt: true, ico: "🎯", title: "Lo que más te cuesta",
+            sub: identSub("b-ident", (wk2.length ? "Tus puntos flojos: " + wk2.map(function (x) { return ((Diagnosi.LABEL || {})[x.cat] || x.cat).toLowerCase(); }).join(", ")
+                                                  : "Preposiciones, contracciones y artículos") + ". Preposiciones, pronombres, conectores, el verbo justo, falsos amigos y cuál está bien.") });
+      }
+      if (w.week >= Banca.ERR_WEEK) {
+        var ep2 = ident("b-err");
+        m({ kind: "b-err", arg: "w:" + w.week, done: ep2 >= 70, half: ep2 != null && ep2 < 70, opt: true, ico: "🔍", title: UI.err,
+            sub: identSub("b-err", "Tocá la palabra que está mal y corregila: el error típico de un hispanohablante.") });
+      }
       if (w.week === Banca.TR_WEEK) m({ kind: "b-tr", done: bankDone(/^b:tr:/), ico: "✍️", title: "Banco: " + UI.tr,
         sub: "Oraciones del español al " + UI.langEs + ", con corrección que explica el error." });
       if (w.week === Banca.GAP_WEEK) m({ kind: "b-gap", done: bankDone(/^b:gap:/), ico: "🔧", title: "Banco: " + UI.gap,
@@ -2017,7 +2037,7 @@
     else if (kind === "debil") startRound("debil");
     else if (kind === "scrivi") { view.screen = "scrivi"; render(); window.scrollTo(0, 0); }
     else if (kind === "scene" || kind === "ponte" || kind === "falsi" || kind === "capire" ||
-             kind === "b-forme" || kind === "b-tr" || kind === "b-gap") startRound(kind, arg);
+             kind === "b-forme" || kind === "b-tr" || kind === "b-gap" || kind === "b-err" || kind === "b-ident") startRound(kind, arg);
     else if (kind === "ep") { view.ep = arg; view.epFrom = "briefing"; view.screen = "lettura"; render(); window.scrollTo(0, 0); }
     else if (kind === "suoni") startRound("suoni", w.week);
     else if (kind === "duello") startRound("duello", arg);
@@ -2285,6 +2305,7 @@
     else if (kind === "lista") items = (arg || []).slice();       // the items given (__test.play)
     else if (kind === "b-gap") items = Banca.gapSession(state, 10);
     else if (kind === "b-err") items = Banca.errorSession(state, 8);
+    else if (kind === "b-ident") items = Banca.weakSession(state, 12);
     else if (kind === "clinica") items = Banca.clinicaSession(state, 12);
     // after the placement test: where Spanish gets in the way (ubicacion.js)
     else if (kind === "diag") items = window.Ubicacion && Ubicacion.diagnosis ? Ubicacion.diagnosis(state) : [];
@@ -3701,7 +3722,7 @@
   var KIND_NAME = { debil: "Puntos débiles", domina: "Dominala", round: "Entrenamiento", giorno: UI.daily, boss: UI.Boss, gym: "Gimnasio de verbos", pausa: UI.pausa, review: UI.review,
                     scene: "Frases", vocab: "Palabras de la semana", lettura: "Lectura", sfida: UI.sfida, ponte: "Ponte",
                     falsi: UI.falsi, capire: UI.capire, "b-voc": UI.words, "b-tr": UI.tr, "b-gap": UI.gap,
-                    "b-forme": UI.forme, "b-err": UI.err, clinica: "Clínica", suoni: UI.suoni, "b-freq": UI.wordsFreq,
+                    "b-forme": UI.forme, "b-err": UI.err, "b-ident": "Lo que más te cuesta", clinica: "Clínica", suoni: UI.suoni, "b-freq": UI.wordsFreq,
                     ritorno: "Cinco minutos para retomar", micro: UI.micro, esame: UI.examC1, duello: "Duelo",
                     diag: "Mini diagnóstico" };
   function pendingTitle(p) {
@@ -3820,6 +3841,13 @@
       if (!state.suoniPct) state.suoniPct = {};
       state.suoniPct[sw] = Math.max(state.suoniPct[sw] || 0, pct);
       if (pct >= 70) { if (!state.suoniDone) state.suoniDone = {}; state.suoniDone[sw] = Date.now(); }
+    }
+    // The identification missions of the week (b-forme, b-err) keep their best.
+    if ((round.kind === "b-forme" || round.kind === "b-err" || round.kind === "b-ident") && /^w:\d+$/.test(String(round.arg || "")) && total >= 6) {
+      var iw = +String(round.arg).slice(2);
+      if (!state.identPct) state.identPct = {};
+      var ip = state.identPct[iw] || (state.identPct[iw] = {});
+      ip[round.kind] = Math.max(ip[round.kind] || 0, pct);
     }
     // Capire keeps its best (the mission asks 80 %).
     if (round.kind === "capire" && round.arg && total >= 4) {
@@ -4992,7 +5020,7 @@
       if (round.from === "briefing") { view.tab = "percorso"; view.screen = "briefing"; render(); window.scrollTo(0, 0); }
       else if (round.from === "hoy") go("oggi");
       else if (round.kind === "lettura") go("leggi");
-      else if (["ponte", "falsi", "capire", "scene", "b-voc", "b-forme", "b-tr", "b-gap", "b-err", "b-freq", "clinica", "suoni", "duello", "variaciones"].indexOf(round.kind) >= 0) go("frasi");
+      else if (["ponte", "falsi", "capire", "scene", "b-voc", "b-forme", "b-tr", "b-gap", "b-err", "b-ident", "b-freq", "clinica", "suoni", "duello", "variaciones"].indexOf(round.kind) >= 0) go("frasi");
       else if (round.kind === "pausa" || round.kind === "review" || round.kind === "giorno" || round.kind === "ritorno" || round.kind === "micro" || round.kind === "dos") go("oggi");
       else if (round.kind === "sfida") { view.screen = "sfide"; render(); }
       else if (round.kind === "esame") { view.screen = "esame"; render(); }
@@ -5422,7 +5450,9 @@
     }
     return head + '<div class="card"><p class="muted">' + esc(sc.situazione_es) + "</p>" + objs +
       '<p class="muted small">Palabras útiles: <i>' + (sc.parole_utili || []).map(esc).join(" · ") + "</i></p>" + chat +
-      '<div class="typed"><textarea id="ptext" class="grow" rows="1" autocomplete="off" autocapitalize="sentences" autocorrect="off" spellcheck="false" enterkeyhint="send" placeholder="' + UI.parlaIn + '"' + (parla.busy ? " disabled" : "") + "></textarea>" +
+      (parla.retry && !parla.busy ? '<p class="muted small">⚠️ La IA no respondió (' + esc(parla.retry.msg) + "). Tu frase quedó abajo: tocá <b>" + UI.send + "</b> para mandarla de nuevo.</p>" : "") +
+      '<div class="typed"><textarea id="ptext" class="grow" rows="1" autocomplete="off" autocapitalize="sentences" autocorrect="off" spellcheck="false" enterkeyhint="send" placeholder="' + UI.parlaIn + '"' + (parla.busy ? " disabled" : "") + ">" +
+      (parla.retry && !parla.busy ? esc(parla.retry.text) : "") + "</textarea>" +
       '<button class="btn" id="psend"' + (parla.busy ? " disabled" : "") + ">" + UI.send + "</button></div>" +
       '<div class="row" style="margin-top:8px"><button class="tab" id="pend">Terminar acá</button></div></div>';
   }
@@ -5510,10 +5540,15 @@
         parla.busy = false;
         parla.live = "";
         if (err || !data) {
-          parla.history.push(["ia", "(La IA no respondió: " + String(err && err.message || "") + ". Probá de nuevo.)"]);
+          // the turn did not happen: the sentence goes back to the box, to
+          // send again with one tap (and the conversation stays clean)
+          var last = parla.history[parla.history.length - 1];
+          if (last && last[0] === "me" && last[1] === text) { parla.history.pop(); parla.turns--; }
+          parla.retry = { text: text, msg: String(err && err.message || "respuesta rara") };
           if (view.screen === "parla") render();
           return;
         }
+        parla.retry = null;
         if (meta) parla.meta = meta;
         var reply = sentenceCase(String(data.risposta || "").trim() || UI.ok), row = ["ia", reply];
         parla.history.push(row);

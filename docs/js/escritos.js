@@ -123,7 +123,30 @@
     own.sort(function (a, b) { return rank(a) - rank(b); });
     return own[0] || list[0] || null;
   }
-  function orderable(s) { return !!(root.Ordenar && root.Ordenar.build(passage(s, s.week).text)); }
+  /* The text of «Ordená»: never the week's own (that one is ordered from
+     memory, not by its connectors).  First a text of the last weeks the
+     learner did not read (its level is already known); else one read at
+     least three weeks ago (the plot is forgotten by then), the most recent
+     of those; at the start of the course, the oldest one there is.  Stable:
+     the same text for the week while nothing changes. */
+  function orderSource(state, week) {
+    var ok = function (s) { return s.week < week && orderable(s, week); };
+    var all = allSources().filter(ok);
+    var near = all.filter(function (s) { return !seen(state, s) && s.week >= week - 6; })
+      .sort(function (a, b) { return b.week - a.week || (a.id < b.id ? -1 : 1); });
+    if (near.length) return near[0];
+    var read = all.filter(function (s) { return seen(state, s); });
+    var old = read.filter(function (s) { return s.week <= week - 3; }).sort(function (a, b) { return b.week - a.week || (a.id < b.id ? -1 : 1); });
+    if (old.length) return old[0];
+    // weeks 3-4: nothing that old yet; the oldest text before this week
+    var early = all.sort(function (a, b) { return a.week - b.week || (a.id < b.id ? -1 : 1); });
+    return early[0] || null;
+  }
+  // with the pieces of the week it is played in (more pieces later on)
+  function orderable(s, week) {
+    var O = root.Ordenar;
+    return !!(O && O.build(passage(s, week || s.week).text, O.level ? O.level(week || s.week) : {}));
+  }
   function clozeable(s) { return !!(root.CTest && root.CTest.build(passage(s, s.week).text, "cloze").gaps.length >= 4); }
   function modeFor(week) { return week >= CTEST_WEEK ? "ctest" : "cloze"; }
   var MODE = { ctest: "C-test", cloze: "Cloze" };
@@ -154,22 +177,15 @@
       var ok = !wk[f + "N"] || !E || !E.passed || E.passed(rec, pass);
       return { done: ok, half: !ok, sub: ok ? "Hecho · " + pct + " %" : "Tu mejor: " + pct + " % · " + E.passMissing(rec, pass) };
     };
-    if (w.week >= 2 && root.CTest) {
-      var md = modeFor(w.week), s = weekSource(state, w.week, md === "cloze" ? clozeable : null, ["larga", "lectura", "escucha", "dictogloss"]);
-      var rh = res("huecos", 50);
-      if (s) out.push({ kind: "esc-huecos", arg: s.id + "|" + w.week + "|" + md, done: rh.done, half: rh.half, ico: "🧩", opt: true,
-        title: MODE[md] + ": «" + s.title + "»",
-        sub: rh.sub + " · " +
-          (s.kind === "larga" ? "un pasaje de la lectura larga, " : s.kind === "escucha" ? "la escucha que ya hiciste, transcripta, " : "el texto que ya leíste, ") +
-          (md === "ctest" ? "con la mitad de las palabras borrada" : "sin sus conectores ni preposiciones") });
-    }
+    // (el C-test / cloze ya no es misión: queda en Escritura guiada; en su
+    // lugar la semana trae ejercicios de identificar formas y errores)
     if (w.week >= 3 && root.Ordenar) {
-      var so = weekSource(state, w.week, orderable, ["escucha", "larga", "lectura", "dictogloss"]);
+      var so = orderSource(state, w.week);
       var ro = res("ordenar", 60);
       if (so) out.push({ kind: "esc-ordenar", arg: so.id + "|" + w.week, done: ro.done, half: ro.half, ico: "🔀", opt: true,
         title: "Ordená el texto: «" + so.title + "»",
-        sub: ro.sub + " · " +
-          (so.kind === "escucha" ? "los turnos de la escucha, desordenados" : "las partes desordenadas") + "; los conectores son la pista" });
+        sub: ro.sub + " · " + (seen(state, so) ? "un texto de la semana " + so.week + ", no el de esta" : "un texto nuevo para vos") + ": " +
+          (so.kind === "escucha" ? "los turnos desordenados" : "las partes desordenadas") + "; los conectores son la pista" });
     }
     return out;
   }
@@ -618,7 +634,7 @@
   var api = { attach: attach, missions: missions, handles: handles, go: go, open: open, render: render, wire: wire,
               variaciones: variaciones, roundDone: roundDone, pausaItem: pausaItem, treinoHtml: treinoHtml,
               sources: sources, allSources: allSources, passages: passages, passage: passage, passageWords: passageWords,
-              clozeItem: clozeItem, tilesItem: tilesItem, current: function () { return cur; } };
+              clozeItem: clozeItem, tilesItem: tilesItem, byId: byId, orderSource: orderSource, current: function () { return cur; } };
   if (typeof module === "object" && module.exports) module.exports = api;
   root.Escritos = api;
 })(typeof window !== "undefined" ? window : globalThis);

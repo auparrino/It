@@ -43,6 +43,7 @@
 
   function load(bank) {
     B = bank;
+    NOUNS = null;
     if (Diagnosi) Diagnosi.init(bank);
     IDX = { noun: {}, sent: {}, err: {}, adj: {}, word: {}, verb: {} };
     B.nouns.forEach(function (n) { IDX.noun[n[0]] = n; });
@@ -393,6 +394,327 @@
     return prefer(state, ids, "b:gap:").slice(0, size || 10).map(gapItem).filter(Boolean);
   }
 
+  /* ¿Qué preposición va?  Una oración del banco con una preposición (o una
+     contracción: no, do, pelo, alla, nel) borrada y cuatro opciones; la
+     oración en español al lado para que no haya dos respuestas posibles.
+     Es lo que más le cuesta a un hispanohablante y acá se reconoce antes de
+     escribirse. */
+  function prepList() {
+    var D = root.ESCRITOS_DATA || {}, arts = {};
+    Object.keys(CONTR).forEach(function (p) { Object.keys(CONTR[p]).forEach(function (a) { arts[a] = 1; }); });
+    return (D.prep || []).filter(function (w) { return !arts[w]; });
+  }
+  // The words of a list in a sentence (not the first one, unless anyCase:
+  // a connector often opens the sentence, «Ma…», «Quindi…»).
+  function wordTokens(text, list, anyCase) {
+    var out = [], re = /[A-Za-zÀ-ÖØ-öø-ÿ]+/g, m, k = 0;
+    while ((m = re.exec(text))) {
+      var w = anyCase ? m[0].toLowerCase() : m[0];
+      if ((k > 0 || anyCase) && list.indexOf(w) >= 0) out.push({ at: m.index, w: m[0] });
+      k++;
+    }
+    return out;
+  }
+  function prepTokens(text, preps) { return wordTokens(text, preps, false); }
+  function prepChoiceItem(i, pos) {
+    var s = B && B.sentences[i], preps = prepList();
+    if (!s || !preps.length) return null;
+    var main = s.it[0], toks = prepTokens(main, preps), t = toks.filter(function (x) { return x.at === +pos; })[0];
+    if (!t) return null;
+    var D = root.ESCRITOS_DATA || {}, same = [t.w];
+    (D.equiv || []).forEach(function (g) { if (g.indexOf(t.w) >= 0) same = same.concat(g); });
+    var stem = main.slice(0, t.at) + "___" + main.slice(t.at + t.w.length);
+    // a distractor that makes one of the accepted versions is not wrong
+    var fits = function (o) { return s.it.some(function (v) { return v === main.slice(0, t.at) + o + main.slice(t.at + t.w.length); }); };
+    var opts = [t.w], seed = i * 31 + t.at;
+    var pool = preps.filter(function (o) { return same.indexOf(o) < 0 && !fits(o); });
+    // the same seed gives the same options (the card comes back the same)
+    for (var j = 0; opts.length < 4 && j < pool.length * 3; j++) {
+      var o = pool[(seed + j * 7) % pool.length];
+      if (opts.indexOf(o) < 0) opts.push(o);
+    }
+    if (opts.length < 3) return null;
+    return { id: "b:pc:" + i + ":" + t.at, src: "banca", bank: "pc", type: "choice",
+             prompt: TX.prepChoice || "¿Qué preposición va? («" + s.es + "»)", stem: stem,
+             options: shuffle(opts), answer: t.w, accept: same.filter(function (x) { return x.indexOf(" ") < 0; }),
+             note: s.note || "", tags: s.tags, lvl: s.lvl, diag: false, cat: "preposicion", say: main };
+  }
+  function prepChoiceSession(state, size, tagFilter) {
+    var preps = prepList();
+    if (!B || !preps.length) return [];
+    var ids = sentencePool(state, function (s) {
+      return (!tagFilter || (s.tags || []).some(function (t) { return tagFilter.indexOf(t) >= 0; })) && prepTokens(s.it[0], preps).length;
+    }, "w");
+    return prefer(state, ids, "b:pc:").slice(0, (size || 8) * 2).map(function (i) {
+      var tk = prepTokens(B.sentences[i].it[0], preps);
+      return prepChoiceItem(i, tk[(i * 7) % tk.length].at);
+    }).filter(Boolean).slice(0, size || 8);
+  }
+
+  /* ¿Qué conector va?  Lo mismo con los conectores (pero, entonces,
+     aunque, mientras…): lo que ordena un texto y lo que pide un C1.  Sin
+     los cortos que entran en casi cualquier lado (e, o, se). */
+  var LOOSE_CONN = { e: 1, ed: 1, o: 1, ou: 1, se: 1, "né": 1, nem: 1, antes: 1, logo: 1, assim: 1 };
+  function connList() {
+    return ((root.ESCRITOS_DATA || {}).conn || []).filter(function (w) { return w.indexOf(" ") < 0 && !LOOSE_CONN[w]; });
+  }
+  function connChoiceItem(i, pos) {
+    var s = B && B.sentences[i], conns = connList();
+    if (!s || conns.length < 4) return null;
+    var main = s.it[0], t = wordTokens(main, conns, true).filter(function (x) { return x.at === +pos; })[0];
+    if (!t) return null;
+    var low = t.w.toLowerCase(), D = root.ESCRITOS_DATA || {}, same = [low];
+    (D.equiv || []).forEach(function (g) { if (g.indexOf(low) >= 0) same = same.concat(g); });
+    var cap = function (o) { return t.w[0] !== low[0] ? o[0].toUpperCase() + o.slice(1) : o; };
+    var fits = function (o) { return s.it.some(function (v) { return v === main.slice(0, t.at) + cap(o) + main.slice(t.at + t.w.length); }); };
+    var pool = conns.filter(function (o) { return same.indexOf(o) < 0 && !fits(o); }), opts = [low], seed = i * 17 + t.at;
+    for (var j = 0; opts.length < 4 && j < pool.length * 3; j++) {
+      var o = pool[(seed + j * 5) % pool.length];
+      if (opts.indexOf(o) < 0) opts.push(o);
+    }
+    var stem = main.slice(0, t.at) + "___" + main.slice(t.at + t.w.length);
+    return { id: "b:cc:" + i + ":" + t.at, src: "banca", bank: "cc", type: "choice",
+             prompt: "¿Qué palabra va? («" + s.es + "»)", stem: stem, options: shuffle(opts), answer: low,
+             accept: same.filter(function (x) { return x.indexOf(" ") < 0; }), note: s.note || "", tags: s.tags, lvl: s.lvl, cat: "conector", say: main };
+  }
+  function connChoiceSession(state, size) {
+    var conns = connList();
+    if (!B || conns.length < 4) return [];
+    // not a question that opens with it («Quando você vai voltar?»: there it is «cuándo»)
+    var ids = sentencePool(state, function (s) { return !/\?\s*$/.test(s.it[0]) && wordTokens(s.it[0], conns, true).length; }, "w");
+    return prefer(state, ids, "b:cc:").slice(0, (size || 6) * 2).map(function (i) {
+      var tk = wordTokens(B.sentences[i].it[0], conns, true);
+      return connChoiceItem(i, tk[(i * 5) % tk.length].at);
+    }).filter(Boolean).slice(0, size || 6);
+  }
+
+  /* ¿Cuál está bien?  La misma oración dos veces, una con el error típico
+     del hispanohablante: reconocerlo antes de tener que encontrarlo. */
+  function whichItem(i) {
+    var e = B && B.errors[i];
+    if (!e || !e.wrong || !e.right || e.wrong === e.right) return null;
+    return { id: "b:cual:" + i, src: "banca", bank: "cual", type: "choice",
+             prompt: "¿Cuál está bien?", stem: "", options: shuffle([e.right, e.wrong]), answer: e.right, accept: [e.right],
+             cat: e.cat, note: e.why, lvl: e.lvl, say: e.right };
+  }
+  function whichSession(state, size, cats) {
+    if ((state.unlocked || 1) < ERR_WEEK) return [];
+    var ids = [];
+    B.errors.forEach(function (e, i) {
+      if (within(e.lvl, levelOf(state)) && taught(e, state) && (!cats || cats.indexOf(e.cat) >= 0)) ids.push(i);
+    });
+    return prefer(state, ids, "b:cual:").slice(0, size || 6).map(whichItem).filter(Boolean);
+  }
+
+  /* Las formas de todos los verbos del conjugador (forma → [[infinitivo,
+     tiempo, persona]]), para reconocer un verbo en una oración y armar la
+     forma paralela de otro verbo.  Se arma una vez, la primera vez que hace
+     falta. */
+  var VFORMS = null;
+  function verbForms() {
+    if (VFORMS) return VFORMS;
+    var C = root.Conj, map = {};
+    if (!C || !C.list) return map;
+    C.list().forEach(function (inf) {
+      (C.SIMPLE_TENSES || []).forEach(function (t) {
+        var forms;
+        try { forms = C.conjugate(inf, t, { partial: true }); } catch (e) { return; }
+        (forms || []).forEach(function (f, pp) {
+          if (!f) return;
+          var w = String(f).split(" ").pop().toLowerCase();
+          (map[w] = map[w] || []).push([inf, t, pp]);
+        });
+      });
+      try { var pc = C.participle(inf); if (pc) (map[pc] = map[pc] || []).push([inf, "participio", -1]); } catch (e) { /* */ }
+    });
+    VFORMS = map;
+    return map;
+  }
+  function tokensOf(text) {
+    var out = [], re = /[A-Za-zÀ-ÖØ-öø-ÿ]+/g, m;
+    while ((m = re.exec(text))) out.push({ at: m.index, w: m[0], low: m[0].toLowerCase(), hy: text[m.index - 1] === "-" });
+    return out;
+  }
+  function capLike(model, w) { return model[0] !== model[0].toLowerCase() ? w[0].toUpperCase() + w.slice(1) : w; }
+  function variantFits(s, at, len, o) { return s.it.some(function (v) { return v === s.it[0].slice(0, at) + o + s.it[0].slice(at + len); }); }
+
+  /* ¿Qué verbo va?  El par que confunde (essere/avere, ser/estar): la forma
+     de la oración y la del otro verbo en el mismo tiempo y persona. */
+  function verbPairItem(i, pos) {
+    var s = B && B.sentences[i], pair = BR.verbPair, C = root.Conj;
+    if (!s || !pair || !C) return null;
+    var main = s.it[0], t = tokensOf(main).filter(function (x) { return x.at === +pos; })[0];
+    if (!t) return null;
+    var an = verbForms()[t.low] || [];
+    // only a form of the pair, and of nothing else (pt «for»: ser or ir)
+    if (!an.length || !an.every(function (a) { return pair.indexOf(a[0]) >= 0; })) return null;
+    var alts = [];
+    an.forEach(function (a) {
+      if (a[1] === "participio") return;
+      var other = a[0] === pair[0] ? pair[1] : pair[0], f;
+      try { f = (C.conjugate(other, a[1], { partial: true }) || [])[a[2]]; } catch (e) { f = null; }
+      if (!f) return;
+      f = capLike(t.w, String(f).split(" ").pop().toLowerCase());
+      if (f.toLowerCase() !== t.low && alts.indexOf(f) < 0 && !variantFits(s, t.at, t.w.length, f)) alts.push(f);
+    });
+    if (!alts.length) return null;
+    var stem = main.slice(0, t.at) + "___" + main.slice(t.at + t.w.length);
+    return { id: "b:vp:" + i + ":" + t.at, src: "banca", bank: "vp", type: "choice",
+             prompt: "¿Qué verbo va? («" + s.es + "»)", stem: stem, options: shuffle([t.w].concat(alts.slice(0, 2))),
+             answer: t.w, accept: [t.w], note: s.note || "", tags: s.tags, lvl: s.lvl, cat: "ausiliare", say: main };
+  }
+  function verbPairTokens(s) {
+    var pair = BR.verbPair, vf = verbForms();
+    return tokensOf(s.it[0]).filter(function (t, k) {
+      // not a name (São Paulo): a capital only at the start
+      if (k > 0 && t.w !== t.low) return false;
+      var an = vf[t.low];
+      return an && an.length && an.every(function (a) { return pair.indexOf(a[0]) >= 0 && a[1] !== "participio"; });
+    });
+  }
+  function verbPairSession(state, size) {
+    if (!B || !BR.verbPair || !root.Conj) return [];
+    var tags = BR.verbPairTags || [];
+    var ids = sentencePool(state, function (x) { return (!tags.length || (x.tags || []).some(function (t) { return tags.indexOf(t) >= 0; })) && verbPairTokens(x).length; }, "w");
+    return prefer(state, ids, "b:vp:").slice(0, (size || 6) * 2).map(function (i) {
+      var tk = verbPairTokens(B.sentences[i]);
+      return verbPairItem(i, tk[(i * 3) % tk.length].at);
+    }).filter(Boolean).slice(0, size || 6);
+  }
+
+  /* ¿Qué pronombre va?  Un átono (lo, gli, ne; o, lhe, me) delante de un
+     verbo o pegado con guion; no el artículo igual (la casa, o livro):
+     lo que sigue tiene que ser un verbo y no un sustantivo del banco.  Sin
+     el «se» del portugués, que también es «si». */
+  // Singular and plural nouns of the bank (le chiavi, as marcas: an article).
+  var NOUNS = null;
+  function nouns() {
+    if (NOUNS) return NOUNS;
+    NOUNS = {};
+    (B.nouns || []).forEach(function (n) { NOUNS[String(n[0]).toLowerCase()] = 1; if (n[2]) NOUNS[String(n[2]).toLowerCase()] = 1; });
+    return NOUNS;
+  }
+  function cliticTokens(s) {
+    var list = BR.clitics || [], vf = verbForms(), tk = tokensOf(s.it[0]);
+    return tk.filter(function (t, k) {
+      if (k === 0 && !t.hy) return false;
+      if (list.indexOf(t.low) < 0 || (t.low === "se" && !t.hy && BR.verbPair && BR.verbPair[0] === "ser")) return false;
+      if (t.hy) return true;
+      var nx = tk[k + 1];
+      if (!nx || !vf[nx.low] || nouns()[nx.low] || s.it[0].slice(t.at + t.w.length, nx.at) !== " ") return false;
+      // pt «a» before an infinitive is the preposition (continuar a ser)
+      return !(t.low === "a" && /r$/.test(nx.low));
+    });
+  }
+  function cliticItem(i, pos) {
+    var s = B && B.sentences[i], list = BR.clitics || [];
+    if (!s || list.length < 4) return null;
+    var main = s.it[0], t = cliticTokens(s).filter(function (x) { return x.at === +pos; })[0];
+    if (!t) return null;
+    var pool = list.filter(function (o) { return o !== t.low && !variantFits(s, t.at, t.w.length, capLike(t.w, o)); });
+    var opts = [t.w], seed = i * 13 + t.at;
+    for (var j = 0; opts.length < 4 && j < pool.length * 3; j++) {
+      var o = capLike(t.w, pool[(seed + j * 3) % pool.length]);
+      if (opts.indexOf(o) < 0) opts.push(o);
+    }
+    var stem = main.slice(0, t.at) + "___" + main.slice(t.at + t.w.length);
+    return { id: "b:cl:" + i + ":" + t.at, src: "banca", bank: "cl", type: "choice",
+             prompt: "¿Qué pronombre va? («" + s.es + "»)", stem: stem, options: shuffle(opts), answer: t.w, accept: [t.w],
+             note: s.note || "", tags: s.tags, lvl: s.lvl, cat: "pronome", say: main };
+  }
+  function cliticSession(state, size) {
+    if (!B || !(BR.clitics || []).length) return [];
+    var ids = sentencePool(state, function (x) { return cliticTokens(x).length; }, "w");
+    return prefer(state, ids, "b:cl:").slice(0, (size || 6) * 2).map(function (i) {
+      var tk = cliticTokens(B.sentences[i]);
+      return cliticItem(i, tk[(i * 3) % tk.length].at);
+    }).filter(Boolean).slice(0, size || 6);
+  }
+
+  /* ¿Qué significa acá?  Un falso amigo dentro de una oración: su sentido,
+     el que parece en castellano (la trampa) y otros dos. */
+  // not the grammar words (di, su, alla, come, mas: there the meaning is
+  // the grammar, not a trap)
+  function falsoTokens(s) {
+    var F = (B && B.falsi) || {}, D = root.ESCRITOS_DATA || {};
+    var gram = [].concat(D.prep || [], D.conn || [], BR.clitics || []);
+    (B.words || []).forEach(function (w) { if (/interrogativo|preposizione|contrazione|congiunzione|pronome/.test(w[2])) gram.push(String(w[0]).toLowerCase()); });
+    return tokensOf(s.it[0]).filter(function (t, k) {
+      return t.low.length >= 4 && (k === 0 || t.w === t.low) && gram.indexOf(t.low) < 0 && F[t.low] && F[t.low][0];
+    });
+  }
+  function falsoItem(i, pos) {
+    var s = B && B.sentences[i], F = (B && B.falsi) || {};
+    if (!s) return null;
+    var t = falsoTokens(s).filter(function (x) { return x.at === +pos; })[0];
+    if (!t) return null;
+    var f = F[t.low], ans = String(f[0]), opts = [ans];
+    // the trap: the same word read as Spanish, unless it is also its meaning
+    if (ans.toLowerCase().indexOf(t.low) < 0) opts.push(t.low);
+    var others = Object.keys(F).filter(function (k) { return k !== t.low && F[k][0] && F[k][0] !== ans; }), seed = i * 11 + t.at;
+    for (var j = 0; opts.length < 4 && others.length && j < others.length; j++) {
+      var o = String(F[others[(seed + j * 7) % others.length]][0]);
+      if (opts.indexOf(o) < 0) opts.push(o);
+    }
+    var main = s.it[0];
+    return { id: "b:fa:" + i + ":" + t.at, src: "banca", bank: "fa", type: "choice",
+             prompt: "¿Qué significa «" + t.w + "» acá?", stem: main.slice(0, t.at) + "«" + t.w + "»" + main.slice(t.at + t.w.length),
+             options: shuffle(opts), answer: ans, accept: [ans], note: String(f[2] || s.note || ""), tags: s.tags, lvl: s.lvl,
+             cat: "falso_amigo", say: main };
+  }
+  function falsoSession(state, size) {
+    if (!B || !B.falsi) return [];
+    var ids = sentencePool(state, function (x) { return falsoTokens(x).length; }, "w");
+    return prefer(state, ids, "b:fa:").slice(0, (size || 6) * 2).map(function (i) {
+      var tk = falsoTokens(B.sentences[i]);
+      return falsoItem(i, tk[(i * 3) % tk.length].at);
+    }).filter(Boolean).slice(0, size || 6);
+  }
+
+  /* «Lo que más te cuesta»: una ronda de reconocer, armada con las áreas
+     más flojas del alumno (encontrar el error, elegir la preposición, armar
+     la forma), y sus propios errores recientes.  Sin un patrón de errores
+     todavía, lo que más le cuesta a un hispanohablante: preposiciones,
+     contracciones y artículos. */
+  var PREP_CATS = /prep|contr|regenc|crase|faltante|sobrante|mancante|in_piu|articol|articul/;
+  function weakSession(state, size) {
+    size = size || 12;
+    var RG = root.Reglas, out = [];
+    var own = RG && RG.ownRecent ? RG.ownRecent(state, 3) : [];
+    var weak = weakest(state, 3);
+    if (weak.length) {
+      weak.forEach(function (w, k) {
+        // one weak area alone takes most of the round; with more, the worst half
+        var c = CURE[w.cat], part = k === 0 ? (weak.length === 1 ? 0.75 : 0.5) : 0.25;
+        var share = Math.max(2, Math.round((size - own.length) * part)), parts = [];
+        if (c.err) parts = parts.concat(errorSession(state, Math.ceil(share / 3), c.err), whichSession(state, Math.ceil(share / 3), c.err));
+        if (PREP_CATS.test(w.cat)) parts = parts.concat(prepChoiceSession(state, 3, c.tags));
+        if (/ausiliare|participio|ser_estar|essere/.test(w.cat)) parts = parts.concat(verbPairSession(state, 3));
+        if (/pronom|colocac|ci_ne|posizione/.test(w.cat)) parts = parts.concat(cliticSession(state, 3));
+        if (/falso|lessico|lexico|spagnol|espanol/.test(w.cat)) parts = parts.concat(falsoSession(state, 3));
+        if (/ordin|orden|connett|conector/.test(w.cat) || (c.tags || []).some(function (t) { return /connett|conector/.test(t); })) parts = parts.concat(connChoiceSession(state, 3));
+        if (c.forms) parts = parts.concat(formsSession(state, 2, c.forms));
+        shuffle(parts).slice(0, share).forEach(function (x) { x.clinic = w.cat; out.push(x); });
+      });
+    }
+    if (out.length < size - own.length) {
+      // without a pattern yet (or to fill up): a bit of each kind of
+      // recognising, taken in turns so that every kind is there
+      var need = size - own.length - out.length, n = Math.ceil(need / 4) + 1;
+      var lists = [prepChoiceSession(state, n), whichSession(state, n), connChoiceSession(state, n), verbPairSession(state, n),
+                   cliticSession(state, n), falsoSession(state, n), errorSession(state, n), formsSession(state, n, "prep")]
+        .map(shuffle).filter(function (l) { return l.length; });
+      // the prepositions first: the error every Spanish speaker makes
+      for (var r = 0, added = 0; added < need && r < n; r++) {
+        lists.forEach(function (l) { if (added < need && l[r]) { out.push(l[r]); added++; } });
+      }
+    }
+    // without repeats (the weak area's copy wins: it is first), then mixed
+    var seen = {}, uniq = function (x) { if (!x || seen[x.id]) return false; seen[x.id] = 1; return true; };
+    own = own.filter(uniq);
+    return own.concat(shuffle(out.filter(uniq))).slice(0, size);
+  }
+
   /* Encontrar un error necesita una oración que ya se pueda leer: antes de
      la semana 5 (presente regular) no hay con qué compararla. */
   var ERR_WEEK = 5;
@@ -484,6 +806,12 @@
     if (p[1] === "tr" && B.sentences[+p[2]]) return translateItem(+p[2]);
     if (p[1] === "gap" && B.sentences[+p[2]]) return gapItem(+p[2]);
     if (p[1] === "err" && B.errors[+p[2]]) return errorItem(+p[2]);
+    if (p[1] === "pc" && B.sentences[+p[2]]) return prepChoiceItem(+p[2], +p[3]);
+    if (p[1] === "cc" && B.sentences[+p[2]]) return connChoiceItem(+p[2], +p[3]);
+    if (p[1] === "cual" && B.errors[+p[2]]) return whichItem(+p[2]);
+    if (p[1] === "vp" && B.sentences[+p[2]]) return verbPairItem(+p[2], +p[3]);
+    if (p[1] === "cl" && B.sentences[+p[2]]) return cliticItem(+p[2], +p[3]);
+    if (p[1] === "fa" && B.sentences[+p[2]]) return falsoItem(+p[2], +p[3]);
     return null;
   }
 
@@ -536,6 +864,16 @@
     gapSession: gapSession,
     errorItem: errorItem,
     errorSession: errorSession,
+    prepChoiceItem: prepChoiceItem,
+    prepChoiceSession: prepChoiceSession,
+    weakSession: weakSession,
+    connChoiceItem: connChoiceItem,
+    connChoiceSession: connChoiceSession,
+    whichItem: whichItem,
+    whichSession: whichSession,
+    verbPairItem: verbPairItem, verbPairSession: verbPairSession,
+    cliticItem: cliticItem, cliticSession: cliticSession,
+    falsoItem: falsoItem, falsoSession: falsoSession,
     ERR_WEEK: ERR_WEEK,
     TR_WEEK: TR_WEEK, GAP_WEEK: GAP_WEEK, FORME_WEEK: FORME_WEEK, CRASE_WEEK: CRASE_WEEK,
     weakest: weakest,

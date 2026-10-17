@@ -61,13 +61,7 @@
       var lm = B.loaded && B.loaded() ? B.mission(B.index(), w, state) : null;
       if (lm) out.push(lm);
     }
-    var EP = root.EscrituraPlus, S = root.Scrivi;
-    if (EP && S && S.TASKS && S.TASKS[w.week]) {
-      var tre = ((state.escrituraPlus || {}).tre || {})[w.week];
-      out.push({ kind: "tre", arg: String(w.week), done: !!tre, ico: "⏱️", opt: true, title: "Tres vueltas: el mismo texto, 5, 4 y 3 minutos",
-        sub: tre ? "Hecha · " + tre.r.map(function (x) { return x.words; }).join(" → ") + " palabras"
-                 : "Opcional · la consigna de " + (UI().scrivi || "Scrivi") + " escrita tres veces, cada vez más rápido" });
-    }
+    // (Tres vueltas ya no es misión: queda en la pantalla de la consigna)
     return out;
   }
   function handles(kind) { return !!MISSION_KINDS[kind]; }
