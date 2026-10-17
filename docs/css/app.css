@@ -918,4 +918,10 @@ body.kb-open .wrap { padding-bottom: 300px; }
 /* con el teclado de la app, la fila de acentos sobra; con el del teléfono, su ⌨️ trae el de la app */
 body.kb-open .accents { display: none; }
 .accents .kbback { margin-left: auto; }
+.kbtop { display: flex; justify-content: flex-end; margin: -2px 2px -2px; }
+.kblink { border: 0; background: none; padding: 2px 4px; color: var(--k-muted); font-size: .8rem; text-decoration: underline; cursor: pointer; }
+.kbchip { position: fixed; top: calc(8px + env(safe-area-inset-top)); right: 10px; z-index: 61; padding: 8px 12px; border-radius: 999px;
+  border: 1.5px solid var(--k-line); background: var(--k-paper); color: var(--k-ink); font-weight: 700; font-size: .9rem;
+  box-shadow: 0 4px 14px rgba(0,0,0,.15); cursor: pointer; }
+.kbchip[hidden] { display: none; }
 @media (pointer: fine) { .accents .kbback { display: none; } }

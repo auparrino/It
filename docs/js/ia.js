@@ -92,7 +92,8 @@
     var sys = "Respondés solo con JSON válido.", msgs;
     if (prompt && typeof prompt === "object" && prompt.messages) {
       if (prompt.system) sys = prompt.system + "\n\n" + sys;
-      msgs = prompt.messages.filter(function (m) { return m && m.content != null && m.role !== "system"; })
+      // (an empty message is a 400 for the API: left out)
+      msgs = prompt.messages.filter(function (m) { return m && m.content != null && String(m.content).trim() && m.role !== "system"; })
         .map(function (m) { return { role: m.role === "assistant" ? "assistant" : "user", content: String(m.content) }; });
     } else msgs = [{ role: "user", content: String(prompt) }];
     if (!msgs.length || msgs[0].role !== "user") msgs.unshift({ role: "user", content: "(Empezá.)" });
@@ -107,7 +108,7 @@
     if (typeof root.fetch !== "function") return done(new Error("sin fetch"));
     var key = typeof keys === "string" ? keys : (keys || {}).claude;
     if (!key) return done(new Error("sin clave"));
-    var deadline = Date.now() + (opts.stream ? 45000 : 40000), round = 0, over = false;
+    var deadline = Date.now() + (opts.stream ? 45000 : 40000), round = 0, over = false, plain = false;
     var pm = messagesOf(prompt);
     function finish(err, data, meta) { if (over) return; over = true; done(err, data, meta); }
     function retry(err) {
@@ -120,10 +121,13 @@
       var t0 = Date.now(), firstAt = 0;
       var timer = setTimeout(function () { if (ctl) ctl.abort(); }, Math.min(opts.stream ? 15000 : 20000, Math.max(3000, deadline - Date.now())));
       // «off»: sin razonamiento (rápido); «low»: razona poco antes de responder
-      var body = { model: MODEL, max_tokens: opts.max || 4096, system: pm.system, messages: pm.messages,
-                   output_config: { effort: "low" } };
-      if (opts.think === "low") body.max_tokens = Math.max(body.max_tokens, 8000);
-      else body.thinking = { type: "disabled" };
+      // plain: the API rejected the reasoning options once: the bare request
+      var body = { model: MODEL, max_tokens: opts.max || 4096, system: pm.system, messages: pm.messages };
+      if (!plain) {
+        body.output_config = { effort: "low" };
+        if (opts.think === "low") body.max_tokens = Math.max(body.max_tokens, 8000);
+        else body.thinking = { type: "disabled" };
+      }
       if (opts.stream) body.stream = true;
       root.fetch(URL, {
         method: "POST", signal: ctl ? ctl.signal : undefined,
@@ -141,10 +145,15 @@
         }
         return r.text().then(function (b) {
           clearTimeout(timer);
-          if (r.status === 401 || r.status === 403) finish(new Error("HTTP " + r.status + ", clave"));
+          // what Anthropic says (shown to the learner: it names the problem)
+          var why = "";
+          try { why = String((JSON.parse(b).error || {}).message || ""); } catch (e) { why = ""; }
+          why = why.replace(/\s+/g, " ").slice(0, 160);
+          if (r.status === 401 || r.status === 403) finish(new Error("HTTP " + r.status + ", clave" + (why ? ": " + why : "")));
           else if (r.status === 400 && /credit|billing/i.test(b)) finish(new Error("la cuenta de Anthropic no tiene crédito (400)"));
-          else if (r.status === 429 || r.status >= 500) retry(new Error(r.status === 429 ? "se terminó el cupo por ahora (429)" : "Claude está saturado ahora (" + r.status + ")"));
-          else finish(new Error("HTTP " + r.status));
+          else if (r.status === 400 && !plain && /thinking|effort|output_config|budget/i.test(b)) { plain = true; attempt(); }
+          else if (r.status === 429 || r.status === 529 || r.status >= 500) retry(new Error(r.status === 429 ? "se terminó el cupo por ahora (429)" : "Claude está saturado ahora (" + r.status + ")"));
+          else finish(new Error("HTTP " + r.status + (why ? ": " + why : "")));
           return null;
         });
       }).then(function (txt) {
