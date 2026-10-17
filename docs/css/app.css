@@ -908,7 +908,7 @@ svg.speed-curve text { font-size: 9px; fill: currentColor; opacity: .6; }
 .kbk { flex: 1 1 0; min-width: 0; max-width: 42px; height: 44px; padding: 0; border: 0; border-radius: 7px;
   background: var(--k-paper); color: var(--k-ink, #172437); font: 600 1.1rem/1 inherit;
   box-shadow: 0 1px 0 rgba(0,0,0,.18); cursor: pointer; }
-.kbk:active { background: var(--k-line); transform: translateY(1px); }
+.kbk:active, .kbk.down { background: var(--k-line); transform: translateY(1px); }
 .kbk.kbmod { max-width: 56px; flex: 1.4 1 0; background: var(--k-line); font-size: 1rem; }
 .kbk.kbmod.on { background: var(--k-ink, #172437); color: var(--k-paper); }
 .kbk.kbspace { max-width: none; flex: 5 1 0; font-size: .85rem; font-weight: 500; color: var(--k-muted); }
