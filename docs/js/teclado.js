@@ -16,17 +16,26 @@
  * este.  Solo en pantallas táctiles: con mouse y teclado físico, nada.
  * El botón ⌨️ pasa al teclado del teléfono, y en la fila de acentos de
  * cada ejercicio hay uno para volver.  La elección queda en este teléfono
- * («c1.kb»: app | phone), para todos los idiomas.
+ * («c1.kb2»: app | phone), para todos los idiomas.  «c1.kb2» y no «c1.kb»:
+ * hasta la v3.11 el botón ⌨️ parecía el «ocultar» de Gboard y dejaba
+ * elegido el teclado del teléfono sin querer; esa elección no se hereda.
  */
 (function (root) {
   "use strict";
 
-  var KEY = "c1.kb";
+  var KEY = "c1.kb2";
   var doc = root.document;
 
   function mode() { try { return root.localStorage.getItem(KEY) || "app"; } catch (e) { return "app"; } }
   function setMode(m) { try { root.localStorage.setItem(KEY, m === "phone" ? "phone" : "app"); } catch (e) { /* sin almacenamiento */ } }
-  function touch() { return !!(root.matchMedia && root.matchMedia("(pointer: coarse)").matches); }
+  // a phone or a tablet: a finger is the main pointer, or there is a touch
+  // screen and no mouse (some phones report the pen or a cover as «fine»)
+  function touch() {
+    var mm = function (q) { return !!(root.matchMedia && root.matchMedia(q).matches); };
+    if (mm("(pointer: coarse)")) return true;
+    var nav = root.navigator || {};
+    return (nav.maxTouchPoints > 0 || mm("(any-pointer: coarse)")) && mm("(hover: none)");
+  }
   // ¿Se usa el teclado de la app en este momento?
   function active() { return touch() && mode() === "app"; }
 

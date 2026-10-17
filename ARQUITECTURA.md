@@ -129,7 +129,7 @@ lengua del curso se escriben con un teclado propio, en pantalla:
   y ↵, que manda la respuesta como el Enter de siempre.
 - **Solo en pantallas táctiles** (`pointer: coarse`): con mouse y teclado
   físico no aparece. ⌨️ pasa al teclado del teléfono; el ⌨️ de la fila de
-  acentos vuelve. La elección vive en `localStorage` (`c1.kb`: `app` o
+  acentos vuelve. La elección vive en `localStorage` (`c1.kb2`: `app` o
   `phone`), para todos los idiomas, y también se cambia en Io.
 - **Test**: `tools/lib/smoke_teclado.js` (en Chromium, como un celular y como
   una computadora, en cada idioma).

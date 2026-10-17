@@ -38,6 +38,8 @@ function chromiumPath() {
     const ctx = await browser.newContext(mobile ? { viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true }
                                                 : { viewport: { width: 1200, height: 800 } });
     const page = await ctx.newPage();
+    // the choice saved before v3.11.3 (c1.kb), often by mistake, is not inherited
+    if (mobile) await page.addInitScript(() => { try { if (!sessionStorage.getItem("kbseed")) { localStorage.setItem("c1.kb", "phone"); sessionStorage.setItem("kbseed", "1"); } } catch (e) { /* */ } });
     page.on("pageerror", e => errors.push(code + ": pageerror: " + e.message));
     await page.goto(base + "?test&lang=" + code, { waitUntil: "networkidle" });
     await page.waitForFunction(() => window.__test && window.__test.state && window.Teclado, null, { timeout: 20000 });
