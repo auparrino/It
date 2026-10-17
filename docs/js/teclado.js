@@ -115,15 +115,55 @@
     panel.setAttribute("aria-label", "teclado");
     panel.hidden = true;
     doc.body.appendChild(panel);
-    // the keys never take the focus: the caret stays in the answer box
-    panel.addEventListener("pointerdown", function (e) { e.preventDefault(); });
+    // The keys never take the focus: the caret stays in the answer box.
+    // A key writes when the finger touches it (pointerdown), not on «click»:
+    // typing fast with two thumbs, the next finger lands before the last one
+    // lifts, and the browser drops those clicks (half the letters were lost).
+    // A touch between two keys goes to the nearest one.
+    panel.addEventListener("pointerdown", function (e) {
+      e.preventDefault();
+      var b = keyAt(e);
+      if (!b || !target) return;
+      lastDown = Date.now();
+      flash(b);
+      var k = b.getAttribute("data-k");
+      press(k);
+      if (k === "back") repeatBack();
+    });
+    ["pointerup", "pointercancel", "pointerleave"].forEach(function (t) { panel.addEventListener(t, stopRepeat); });
     panel.addEventListener("mousedown", function (e) { e.preventDefault(); });
+    // a click without a pointerdown before it (a screen reader, a test): the key too
     panel.addEventListener("click", function (e) {
+      if (Date.now() - lastDown < 800) return;
       var b = e.target.closest ? e.target.closest("[data-k]") : null;
       if (!b || !target) return;
       press(b.getAttribute("data-k"));
     });
   }
+  var lastDown = 0, repeatTimer = null;
+  function keyAt(e) {
+    var b = e.target && e.target.closest ? e.target.closest("[data-k]") : null;
+    if (b && panel.contains(b)) return b;
+    var best = null, bd = 18 * 18;
+    Array.prototype.forEach.call(panel.querySelectorAll("[data-k]"), function (k) {
+      var r = k.getBoundingClientRect();
+      var dx = Math.max(r.left - e.clientX, 0, e.clientX - r.right), dy = Math.max(r.top - e.clientY, 0, e.clientY - r.bottom);
+      if (dx * dx + dy * dy < bd) { bd = dx * dx + dy * dy; best = k; }
+    });
+    return best;
+  }
+  // the pressed look, also when the press was not on the key itself
+  function flash(b) { b.classList.add("down"); setTimeout(function () { b.classList.remove("down"); }, 110); }
+  // ⌫ held down keeps erasing, as on the phone's keyboard
+  function repeatBack() {
+    stopRepeat();
+    repeatTimer = setTimeout(function step() {
+      if (!target) return;
+      press("back");
+      repeatTimer = setTimeout(step, 70);
+    }, 450);
+  }
+  function stopRepeat() { clearTimeout(repeatTimer); repeatTimer = null; }
 
   function fire(el, type) {
     var ev;
@@ -180,6 +220,7 @@
     if (!panel) return;
     panel.hidden = true;
     target = null;
+    stopRepeat();
     doc.body.classList.remove("kb-open");
   }
   // A new question re-renders the screen: the box leaves and another one

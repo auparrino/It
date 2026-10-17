@@ -2,7 +2,8 @@
    - en un celular (pantalla táctil), la caja de la respuesta lleva
      inputmode="none" y al tomar el foco aparece el teclado de la app, con
      las letras de la lengua (ä ö ü ß en alemán, à è ì ò ù en italiano…);
-   - las teclas escriben donde está el cursor (con ⇧, ⌫ y la capa 123), y
+   - las teclas escriben donde está el cursor (con ⇧, ⌫ y la capa 123),
+     también escribiendo rápido con dos dedos y tocando entre dos teclas, y
      ↵ manda la respuesta como el Enter de siempre;
    - ⌨️ pasa al teclado del teléfono (sin inputmode, sin panel) y el ⌨️ de
      la fila de acentos vuelve al de la app; la elección queda guardada;
@@ -76,6 +77,28 @@ function chromiumPath() {
     v = await page.inputValue("#ans");
     if (v !== word) errors.push(code + ": las teclas escribieron «" + v + "», no «" + word + "»");
     if ((await page.evaluate(() => document.activeElement && document.activeElement.id)) !== "ans") errors.push(code + ": la caja perdió el foco al tocar teclas");
+    // typing fast with two thumbs: the next finger lands before the last one lifts
+    // (real touches, by CDP); and a touch in the gap between two keys
+    const cdp = await page.context().newCDPSession(page);
+    const at = (k) => page.$eval('#kbapp [data-k="' + k + '"]', b => { const r = b.getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2, r: r.right, top: r.top }; });
+    const touch = (type, pts) => cdp.send("Input.dispatchTouchEvent", { type, touchPoints: pts });
+    const before = await page.inputValue("#ans");
+    const ka = await at("e"), kb = await at("r"), kc = await at("t");
+    // (touchStart lists every finger down; touchEnd, the ones that lift)
+    const A = { x: ka.x, y: ka.y, id: 1 }, B = { x: kb.x, y: kb.y, id: 2 }, C = { x: kc.x, y: kc.y, id: 3 };
+    await touch("touchStart", [A]);
+    await touch("touchStart", [A, B]);
+    await touch("touchEnd", [A]);
+    await touch("touchStart", [B, C]);
+    await touch("touchEnd", [B]);
+    await touch("touchEnd", [C]);
+    const G = { x: kc.r + 1, y: kc.y, id: 4 };   // between t and the next key
+    await touch("touchStart", [G]);
+    await touch("touchEnd", [G]);
+    await page.waitForTimeout(150);
+    const fast = (await page.inputValue("#ans")).slice(before.length);
+    if (!/^ert.$/.test(fast)) errors.push(code + ": escribiendo rápido con dos dedos quedó «" + fast + "», no «ert» y una letra más");
+    for (let i = 0; i < fast.length; i++) await tap(page, "back");
     await tap(page, "123"); await tap(page, "1"); await tap(page, "back"); await tap(page, "abc");
     await tap(page, "enter");
     await page.waitForTimeout(500);
