@@ -77,16 +77,18 @@
     var g = normalise(given);
     if (!g) return VERDICT.WRONG;
 
-    var accepted = (item.accept && item.accept.length ? item.accept : [item.answer])
-      .map(normalise)
-      .filter(Boolean);
+    var raw = (item.accept && item.accept.length ? item.accept : [item.answer]);
+    var accepted = raw.map(normalise).filter(Boolean);
+    // A sentence ends with . ! or ?: «Zahlen, bitte.» is one answer.
+    var sentence = {};
+    raw.forEach(function (a) { if (/[.!?]\s*$/.test(String(a || ""))) sentence[normalise(a)] = 1; });
 
     // Some answers are a list of equally valid words ("grandi, buone").
     var expanded = accepted.slice();
     accepted.forEach(function (a) {
       // Only a list of single words is a list of alternatives; a sentence
       // with commas is one answer and its pieces are not right on their own.
-      if (a.indexOf(",") >= 0 && a.split(",").every(function (p) { return p.trim().split(/\s+/).length <= 2; })) {
+      if (a.indexOf(",") >= 0 && !sentence[a] && a.split(",").every(function (p) { return p.trim().split(/\s+/).length <= 2; })) {
         a.split(",").forEach(function (p) {
           p = normalise(p);
           if (p) expanded.push(p);

@@ -4,8 +4,8 @@
  * window.LANG lo lee el núcleo (docs/js/*.js): la marca, la voz, el prefijo
  * de guardado, dónde están los datos y todos los textos de la interfaz que
  * dependen de la lengua.  rules.js (LANG.rules) le agrega lo suyo después.
- * Lo que se ve está en alemán y en castellano rioplatense, con Berlín de
- * fondo.  El paquete arranca chico: las seis semanas de A1 (Boot.LANGS.de
+ * Lo que se ve está en alemán y en castellano rioplatense, con Baviera de
+ * fondo (el tema: theme.css).  El paquete arranca chico: las seis semanas de A1 (Boot.LANGS.de
  * dice qué archivos todavía no tiene).
  */
 (function (root) {
@@ -32,7 +32,7 @@
     base: "lang/de/",
     lt: "de-DE",                  // LanguageTool
     lingualibre: { q: "Q188", code: "deu", tag: "deu" },
-    themeColor: { light: "#c9d6e4", dark: "#121a26" },
+    themeColor: { light: "#bfdcf3", dark: "#13253c" },
     hyphenWords: false,
 
     /* Spanish or German?  What is read aloud after an answer is only German:
@@ -107,27 +107,40 @@
       writing: "Schreiben"
     },
 
-    /* The shareable card: the Berlin sky, the Spree below and a blue street
-       sign with white letters on top. */
+    /* The shareable card: the Föhn sky, the Alps below, a strip of white
+       and blue Rauten and a wooden Wirtshaus sign with gold letters. */
     card: {
       file: "weg-c1-",
       frame: function (g, W, H) {
-        var grad = g.createLinearGradient(0, 0, 0, H); grad.addColorStop(0, "#c9d6e4"); grad.addColorStop(0.65, "#f6f4ef"); grad.addColorStop(1, "#d9cdb8");
+        var grad = g.createLinearGradient(0, 0, 0, H); grad.addColorStop(0, "#bfdcf3"); grad.addColorStop(0.6, "#e9f3fb"); grad.addColorStop(1, "#f7f5f0");
         g.fillStyle = grad; g.fillRect(0, 0, W, H);
-        g.fillStyle = "#1f3b5c"; g.fillRect(0, H - 26, W, 26);
-        g.fillStyle = "#fffdf8"; g.fillRect(40, 36, W - 80, H - 110);
-        g.strokeStyle = "#1f3b5c"; g.lineWidth = 6; g.strokeRect(40, 36, W - 80, H - 110);
-        g.fillStyle = "#1f3b5c"; g.fillRect(40, 36, W - 80, 44);
+        // the Alps: the far range with snow, then the near one
+        g.fillStyle = "#9cc3e4"; g.beginPath(); g.moveTo(0, H);
+        [[0, 0.78], [0.12, 0.6], [0.22, 0.7], [0.36, 0.42], [0.46, 0.6], [0.6, 0.5], [0.72, 0.36], [0.84, 0.56], [1, 0.62], [1, 1]]
+          .forEach(function (p) { g.lineTo(p[0] * W, p[1] * H); });
+        g.fill();
+        g.fillStyle = "#4f8f5a"; g.beginPath(); g.moveTo(0, H);
+        [[0, 0.88], [0.2, 0.8], [0.4, 0.86], [0.6, 0.78], [0.8, 0.85], [1, 0.8], [1, 1]]
+          .forEach(function (p) { g.lineTo(p[0] * W, p[1] * H); });
+        g.fill();
+        // the Rauten along the bottom edge
+        g.fillStyle = "#ffffff"; g.fillRect(0, H - 22, W, 22);
+        g.fillStyle = "#1b6fb3";
+        for (var x = 0; x < W; x += 22) { g.beginPath(); g.moveTo(x + 11, H - 22); g.lineTo(x + 22, H - 11); g.lineTo(x + 11, H); g.lineTo(x, H - 11); g.fill(); }
+        // the card and its wooden sign
+        g.fillStyle = "#fffefa"; g.fillRect(40, 36, W - 80, H - 110);
+        g.strokeStyle = "#6e4224"; g.lineWidth = 6; g.strokeRect(40, 36, W - 80, H - 110);
+        g.fillStyle = "#6e4224"; g.fillRect(40, 36, W - 80, 44);
       },
-      head: { y: 66, color: "#ffffff" },
-      text: "#1b2430", muted: "#5d6672",
+      head: { y: 66, color: "#f5d27a" },
+      text: "#182433", muted: "#5a6472",
       rank: { font: "bold 56px Georgia, serif", y: 150 },
       lines: [200, 240, 276]
     },
 
-    // Confetti: the colors of the theme and a pretzel, a beer mug, a flag.
-    confetti: { bits: ["🥨", "🍺", "🇩🇪", "🐻", "🚋"], n: 30, ms: 2900,
-                colors: ["--mar", "--coral", "--sol", "--mata", "--ceu", "--coral-claro", "--mar-claro"], fallback: "#c8102e" },
+    // Confetti: the blue of the Rauten, the beer gold, the firs, and a Brezel, a Maß, the Alps, a castle.
+    confetti: { bits: ["🥨", "🍺", "⛰️", "🏰", "🌲"], n: 30, ms: 2900,
+                colors: ["--mar", "--mar-claro", "--sol", "--mata", "--ceu", "--coral", "--holz"], fallback: "#1b6fb3" },
 
     ui: {
       langEs: "alemán",
@@ -136,7 +149,7 @@
       allTabs: [["frasi", "🚋", "Training"], ["leggi", "📖", "Lesen"]],
       today: "Heute", train: "Training", read: "Lesen", me: "Ich",
       path: "Der Weg", pathEl: "el Weg", pathAl: "al Weg", pathTu: "tu Weg",
-      // The logo is a street sign (blue enamel, white letters): «Weg» is the way.
+      // The logo is a Wirtshaus sign (carved wood, gold letters): «Weg» is the way.
       plate: { cls: "placa", sup: "p-sup", main: "p-rua" },
       logo: "Weg C1", level: "Stufe",
       week: "Woche", weekLow: "semana", romanWeeks: false,
@@ -183,7 +196,7 @@
       great: "🏆 ¡Ausgezeichnet!", good: "👏 ¡Sehr gut!",
       chal: "Aufgaben", chalLead: "Desafíos extra de la semana: cada uno es una ronda corta, con corrección. ",
       scrivi: "Schreib", parla: "Sprich", storia: "Geschichte", storiaOf: "der Woche", storiaArea: "Geschichte der Woche",
-      metaEx: "«En seis meses pido un Brezel en Berlín sin pensar»",
+      metaEx: "«En seis meses pido un Brezel en Múnich sin pensar»",
       freqNote: "Palabras por frecuencia: las 2.000 más frecuentes cubren más del 80 % de lo que se dice. ",
       exportFile: "weg-c1-copia-", icsFile: "aleman-diario.ics", icsId: "DE",
       icsSummary: "☕ Kaffeepause: 3 minutos de alemán", icsAlarm: "Los geht's! 3 minutos de alemán",

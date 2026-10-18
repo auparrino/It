@@ -222,5 +222,14 @@ ok(/choiceInLanguage\(it, o\) \|\| asksMeaning\(it\) \|\| spanishText\(it\.answe
    "app.js: el porqué de las otras opciones solo si son la lengua");
 ok(/round\.hinted = true/.test(app) && /round\.shownAt = Date\.now\(\)/.test(app), "app.js: la pista y el tiempo cuentan para «insegura»");
 
+// A sentence with a comma is one answer: «bitte» alone is not «Zahlen, bitte.»;
+// a list of single words still is a list («grandi, buone»).
+(function () {
+  var E = pack("de").Engine, z = { answer: "Zahlen, bitte.", accept: ["Zahlen, bitte.", "Zahlen bitte."] };
+  ok(E.grade("bitte", z) === E.VERDICT.WRONG, "engine: «bitte» solo no es «Zahlen, bitte.»");
+  ok(E.grade("Zahlen bitte", z) === E.VERDICT.RIGHT, "engine: «Zahlen bitte» sí");
+  ok(E.grade("grandi", { answer: "grandi, buone" }) === E.VERDICT.RIGHT, "engine: una lista de palabras sigue siendo lista");
+})();
+
 console.log((bad ? bad + " fallas" : "ok") + " · " + n + " chequeos (la corrección)");
 process.exit(bad ? 1 : 0);

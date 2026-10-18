@@ -39,7 +39,7 @@ el tramo C1 y el examen.
 | El contenido (lecciones, ejercicios, palabras) | `tools/de/curso.py` (Python legible) |
 | El curso compilado | `docs/lang/de/data/course.json` (lo arma `tools/de/build_course.py`) |
 | La configuración, la interfaz y las reglas | `docs/lang/de/lang.js`, `docs/lang/de/rules.js` |
-| El tema (Berlín) | `docs/lang/de/theme.css` |
+| El tema (Baviera: las Rauten, los Alpes, el cartel de madera; títulos en Grenze Gotisch) | `docs/lang/de/theme.css`, `docs/lang/de/fonts/` |
 | Los tests | `tools/de/test_curso.js` (en `npm test`), `tools/lib/smoke_aleman.js` (en el navegador), `npm run sim` |
 
 Lo ideal es que un hablante nativo revise el contenido. Los puntos dudosos

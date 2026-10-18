@@ -3,7 +3,8 @@
    guarda (boot.js LANGS.fonts), el color de la barra coincide con el de
    lang.js, los tokens que usa el confeti existen, y los pares de colores
    del texto pasan AA (4,5:1) en claro y en oscuro.  Nació con el rediseño
-   del italiano (la Costiera Amalfitana). */
+   del italiano (la Costiera Amalfitana); el alemán entra desde el tema
+   bávaro, aunque su paquete todavía esté incompleto. */
 "use strict";
 var fs = require("fs"), path = require("path");
 var pack = require("./pack.js");
@@ -41,10 +42,19 @@ var PAIRS = {
   pt: {
     light: [["tinta", "areia"], ["tinta", "papel"], ["cinza", "papel"]],
     dark: [["tinta", "areia"], ["tinta", "papel"], ["cinza", "papel"]]
+  },
+  de: {
+    light: [["tinta", "areia"], ["tinta", "papel"], ["cinza", "papel"], ["cinza", "areia"],
+            ["#ffffff", "boton"], ["#ffffff", "boton-hover"], ["mar", "papel"], ["mar-escuro", "papel"],
+            ["mata", "papel"], ["mata-escuro", "papel"], ["coral", "papel"], ["coral-escuro", "papel"],
+            ["sol-escuro", "papel"], ["#3a2600", "sol"], ["#ffffff", "mar"], ["#ffffff", "mata"], ["#ffffff", "coral"],
+            ["gold", "holz"], ["gold", "holz-escuro"]],
+    dark: [["tinta", "areia"], ["tinta", "papel"], ["cinza", "papel"], ["boton-tinta", "boton"],
+           ["mar", "papel"], ["mata", "papel"], ["coral", "papel"], ["sol", "papel"], ["gold", "holz"]]
   }
 };
 
-pack.LANGS.forEach(function (code) {
+pack.ALL.forEach(function (code) {
   var dir = pack.langDir(code);
   var css = fs.readFileSync(path.join(dir, "theme.css"), "utf8");
   var c = pack(code, { upTo: "rules.js" }), L = c.LANG;
@@ -101,6 +111,13 @@ var it = fs.readFileSync(path.join(pack.langDir("it"), "theme.css"), "utf8");
   ok(it.indexOf(k) >= 0, "it: el tema no tiene " + k);
 });
 ok(!/bodoni/i.test(it + JSON.stringify(Boot.LANGS.it)), "it: queda una referencia a Bodoni");
+
+// The Bavarian theme: the Rauten, the Alps, the wooden sign, Grenze Gotisch; nothing left of Berlin.
+var de = fs.readFileSync(path.join(pack.langDir("de"), "theme.css"), "utf8");
+["--rauten", "--alpen", "--maibaum", "--holz", "Grenze Gotisch"].forEach(function (k) {
+  ok(de.indexOf(k) >= 0, "de: el tema no tiene " + k);
+});
+ok(!/berl[ií]n|spree|tiergarten/i.test(de + JSON.stringify(Boot.LANGS.de)), "de: queda una referencia a Berlín en el tema");
 
 console.log("tema: " + n + " comprobaciones, " + bad + " errores");
 process.exit(bad ? 1 : 0);
