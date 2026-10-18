@@ -35,6 +35,10 @@ errores por categoría, escritura libre (*Scrivi*) y la IA, frases de
 conversación, lecturas, radio, sonidos, dictogloss, duelos, banco, Biblioteca,
 el tramo C1 y el examen.
 
+**En los tres idiomas**: el 🤫 modo silencioso (nada suena y los ejercicios
+de escuchar pasan a ser escritos) y el botón 🤔 *No lo entiendo* en cada
+corrección, que con tu clave de IA te explica lo mismo de otra forma.
+
 ## Dónde está
 
 | Qué | Dónde |

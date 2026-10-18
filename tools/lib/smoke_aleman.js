@@ -102,8 +102,33 @@ function chromiumPath() {
   await page.waitForTimeout(500);
   const ids = await page.evaluate(() => (window.__test.round() || { items: [] }).items.map(x => x.id || ""));
   note("pausa: " + ids.length + " ítems");
+
+  // Silent mode: the rounds of week 1 (which has listening items) bring
+  // nothing to listen to, and keep their size.
+  await page.evaluate(() => { window.__test.state().silent = true; });
+  let ear = 0, total = 0, loud = 0;
+  for (let k = 0; k < 6; k++) {
+    for (const kind of ["round", "pausa"]) {
+      await page.evaluate(([kd]) => window.__test.start(kd, null, 1), [kind]);
+      await page.waitForTimeout(150);
+      const its = await page.evaluate(() => (window.__test.round() || { items: [] }).items.map(x => [x.type, !!x.dettato, !!x.audio]));
+      total += its.length;
+      ear += its.filter(t => /^(listen|dictation|coppia|conta|scegli|intonazione|accento|forma)$/.test(t[0]) || t[1] || t[2]).length;
+    }
+  }
+  await page.evaluate(() => { window.__test.state().silent = false; });
+  for (let k = 0; k < 6; k++) {
+    await page.evaluate(() => window.__test.start("round", null, 1));
+    await page.waitForTimeout(150);
+    loud += await page.evaluate(() => (window.__test.round() || { items: [] }).items.filter(x => x.type === "listen").length);
+  }
+  note("modo silencioso: " + total + " ítems, " + ear + " de escuchar (sin él: " + loud + " de escuchar en 6 rondas)");
+  if (ear) errors.push("modo silencioso: quedaron " + ear + " ejercicios de escuchar");
+  if (!loud) errors.push("sin modo silencioso la semana 1 no trajo ejercicios de escuchar: la prueba no prueba nada");
+  await page.evaluate(() => window.__test.start("pausa"));   // back to the pause, as before
+  await page.waitForTimeout(300);
   if (ids.some(id => /^(frase|lab|lettura|b:|suoni)/.test(id))) errors.push("la pausa trae cosas que no son del alemán: " + ids.join(","));
-  await play(15);
+  await play(40);
   // Ich: the profile, the language switch
   await page.evaluate(() => { location.hash = ""; });
   await page.click("#nav button >> nth=2").catch(() => {});

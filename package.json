@@ -1,6 +1,6 @@
 {
   "name": "la-via-rumo-c1",
-  "version": "3.12.0",
+  "version": "3.13.0",
   "private": true,
   "description": "Una app, tres idiomas: italiano (La Via C1) y portugués de Brasil (Rumo C1) hasta C1 en un año, y alemán (Weg C1) desde cero, para hispanohablantes. Sitio estático sin dependencias.",
   "engines": {

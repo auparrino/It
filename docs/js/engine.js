@@ -672,7 +672,7 @@
       shields: 1,         // escudos que salvan la racha si faltás un día
       chest: null,        // día en que abriste el cofre
       best: {},           // récords: relâmpago, combo
-      silent: false,      // modo oficina: nada suena solo
+      silent: false,      // modo silencioso: nada suena ni hay que escuchar
       kbQuiet: false,     // teclado sin sugerencias (autocomplete="off"): Gboard no detecta ni deja cambiar el idioma
       theme: "",          // "" como el teléfono, "light" u "dark"
       written: 0,         // frases escritas de memoria sin errores
