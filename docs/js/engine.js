@@ -123,9 +123,23 @@
     // grave accent is grammar, not spelling (the crase: «a» for «à» is a
     // rule error, never partial credit).
     var flat = function (x) { return deaccent(x).replace(/-/g, " "); };
+    // The words that differ between two answers of as many words.
+    var pairs = function (a, b) {
+      var x = a.split(/\s+/), y = b.split(/\s+/);
+      if (x.length !== y.length) return null;
+      return x.map(function (w, i) { return [w, y[i]]; }).filter(function (p) { return p[0] !== p[1]; });
+    };
+    // With grade.fold, a spelling variant is partial credit (German: ss for ß).
+    if (GR.fold) {
+      for (var f = 0; f < expanded.length; f++) if (GR.fold(g) === GR.fold(expanded[f])) return VERDICT.CLOSE;
+    }
     var other = false;
     for (var k = 0; k < expanded.length; k++) {
       if (deaccent(g) === deaccent(expanded[k]) || (GR.hyphen && flat(g) === flat(expanded[k]))) {
+        // With grade.markIsGrammar, a missing mark that leaves another real
+        // word is that word, not a slip (German: fahrt for fährt, Bruder for Brüder).
+        var pm = GR.markIsGrammar && pairs(g, expanded[k]);
+        if (pm && pm.some(function (p) { return GR.markIsGrammar(p[0], p[1]); })) { other = true; continue; }
         if (!GR.strictMarks) return VERDICT.CLOSE;
         var mg = marks(g), mw = marks(expanded[k]);
         if (mg.every(function (m) { return mw.indexOf(m) >= 0; }) &&
@@ -141,7 +155,12 @@
     for (var i = 0; i < expanded.length; i++) {
       var want = expanded[i];
       var budget = want.length > 20 ? 2 : want.length > 8 ? 1 : 0;
-      if (budget && editDistance(g, want) <= budget) return VERDICT.CLOSE;
+      if (!budget || editDistance(g, want) > budget) continue;
+      // With grade.typoIsGrammar, a slip that is grammar (an article, an
+      // ending: ein for einen, wohnst for wohnt) is not a typo.
+      var pt = GR.typoIsGrammar && pairs(g, want);
+      if (pt && pt.some(function (p) { return GR.typoIsGrammar(p[0], p[1]); })) continue;
+      return VERDICT.CLOSE;
     }
     return VERDICT.WRONG;
   }

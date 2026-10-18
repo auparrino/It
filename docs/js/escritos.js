@@ -306,7 +306,7 @@
           : "Se abre cuando leas tu primer texto.", "", !ns) +
       "</div>" +
       '<p class="muted science">🔬 Cambiar una pieza de un bloque que ya sabés (N. Ellis 2002); C-test (Klein-Braley 1985); ' +
-      "cloze racional (Bachman 1985); cohesión y conectores (Halliday y Hasan 1976), como en Celpe-Bras y CELI.</p>";
+      "cloze racional (Bachman 1985); cohesión y conectores (Halliday y Hasan 1976), como en los exámenes oficiales.</p>";
   }
 
   /* ----------------------------------------------------------- pantallas */

@@ -326,10 +326,13 @@
     return "C1 en <b>" + fmtMonth(E.c1) + "</b> " + src + ".";
   }
 
+  // The weeks of the course (52; fewer while a language is under construction).
+  function nWeeks() { var c = H.course(); return (c && c.weeks && c.weeks.length) || 52; }
+
   function summaryCard() {
     var st = S(), E = eta(st), lv = levelNow(H.course(), st), wk = thisWeek(st);
     return '<div class="card prog-sum"><h2>📈 Tu progreso</h2>' +
-      '<p class="lead-s">Nivel estimado <b>' + esc(lv) + "</b> · semana " + Math.min(st.unlocked || 1, 52) + " de 52</p>" +
+      '<p class="lead-s">Nivel estimado <b>' + esc(lv) + "</b> · semana " + Math.min(st.unlocked || 1, nWeeks()) + " de " + nWeeks() + "</p>" +
       '<p class="muted">' + etaLine(st) + " Esta semana: " + fmtH(wk.sec) + " de estudio.</p>" +
       '<div class="row"><button class="btn" id="toprog">Ver tu progreso</button></div></div>';
   }
@@ -353,7 +356,7 @@
 
     // 1. level and the bosses
     html += '<div class="card"><h2>Nivel estimado: ' + esc(lv) + "</h2>" +
-      '<p class="muted">Semana ' + Math.min(st.unlocked || 1, 52) + " de 52 · " +
+      '<p class="muted">Semana ' + Math.min(st.unlocked || 1, nWeeks()) + " de " + nWeeks() + " · " +
       (E.src === "meta" ? "con tu meta (" + R.min + " min × " + R.days + " días por semana) avanzás unas "
                         : "a tu ritmo de las últimas semanas avanzás ") + semanas(E.pace) + " del curso por semana.</p>" +
       '<table class="res prog-boss">' + E.bosses.map(function (b) {
@@ -397,7 +400,7 @@
     html += '<div class="card"><h2>🎧 Input de la semana</h2>' +
       '<div class="goalbar"><i style="width:' + Math.min(100, Math.round(inW / inT * 100)) + '%"></i></div>' +
       '<p class="muted">' + inW + " / " + inT + " minutos leyendo y escuchando (la meta de " + esc(lv.slice(0, 2)) + "). " +
-      "Suman las lecturas, las escuchas, la Biblioteca, Ascolto facile y el dictogloss.</p></div>";
+      "Suman las lecturas, las escuchas, la Biblioteca, " + esc(((root.LANG || {}).ui || {}).easyListen || "la escucha tranquila") + " y el dictogloss.</p></div>";
 
     // 4. what costs the most, and its trend
     var tr = errTrend(st, now, 6);

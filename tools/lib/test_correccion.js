@@ -229,6 +229,16 @@ ok(/round\.hinted = true/.test(app) && /round\.shownAt = Date\.now\(\)/.test(app
   ok(E.grade("bitte", z) === E.VERDICT.WRONG, "engine: «bitte» solo no es «Zahlen, bitte.»");
   ok(E.grade("Zahlen bitte", z) === E.VERDICT.RIGHT, "engine: «Zahlen bitte» sí");
   ok(E.grade("grandi", { answer: "grandi, buone" }) === E.VERDICT.RIGHT, "engine: una lista de palabras sigue siendo lista");
+  // German: ss for ß is «casi»; an article, an ending or an umlaut that is grammar is wrong; a typo is «casi».
+  var V = E.VERDICT;
+  [["Ich heisse Pablo.", "Ich heiße Pablo.", V.CLOSE], ["fünfunddreissig", "fünfunddreißig", V.CLOSE],
+   ["Ich habe ein Bruder.", "Ich habe einen Bruder.", V.WRONG], ["Das ist eine Buch.", "Das ist ein Buch.", V.WRONG],
+   ["Ich hat einen Bruder.", "Ich habe einen Bruder.", V.WRONG], ["Er wohnst in Berlin.", "Er wohnt in Berlin.", V.WRONG],
+   ["Heute fahrt er Fahrrad.", "Heute fährt er Fahrrad.", V.WRONG], ["Ich mochte einen Kaffee.", "Ich möchte einen Kaffee.", V.WRONG],
+   ["Ich wohne in Munchen.", "Ich wohne in München.", V.CLOSE], ["Ich trinke einen Kafee.", "Ich trinke einen Kaffee.", V.CLOSE],
+   ["Guten Morgn!", "Guten Morgen!", V.CLOSE]].forEach(function (c) {
+    ok(E.grade(c[0], { answer: c[1] }) === c[2], "engine de: «" + c[0] + "» por «" + c[1] + "» debería ser " + c[2]);
+  });
 })();
 
 console.log((bad ? bad + " fallas" : "ok") + " · " + n + " chequeos (la corrección)");

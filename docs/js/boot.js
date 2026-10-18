@@ -130,7 +130,7 @@
   function dress(code) {
     var L = LANGS[code], doc = document;
     doc.documentElement.setAttribute("data-lang", code);
-    doc.title = L.brand + " — " + L.name.toLowerCase();
+    doc.title = L.brand + " — " + (code === "de" ? L.name : L.name.toLowerCase());
     Array.prototype.forEach.call(doc.querySelectorAll('meta[name="theme-color"]'), function (m) {
       m.content = /dark/.test(m.media || "") ? L.themeColor.dark : L.themeColor.light;
     });

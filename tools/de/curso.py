@@ -300,7 +300,7 @@ WEEKS.append({
         ch(0, "¿Cómo se pronuncia?", "Wasser (agua)", "«vasa»", ["«vasa»", "«uaser»", "«basser»"], "*w* = v, y la *-er* final suena casi como una a suave."),
         ch(0, "¿Cómo se pronuncia?", "Zeit (tiempo)", "«tsait»", ["«tsait»", "«seit»", "«tseit»"], "*z* = ts y *ei* = ai."),
         ch(0, "¿En qué palabra la vocal es larga?", "Sohn / Sonne / Mutter", "Sohn", ["Sohn", "Sonne", "Mutter"], "La *h* tras la vocal no suena: la alarga. *Sohn* (hijo) ≈ «soon»."),
-        ch(0, "¿Cómo suena la letra marcada?", "Stra*ß*e (calle)", "como una s sorda, la nuestra", ["como una s sorda, la nuestra", "como una b", "como «sz», dos sonidos"], "*ß* es una s sorda, como la castellana; nunca una b."),
+        ch(0, "¿Cómo suena la letra marcada?", "la ß de Straße (calle)", "como una s sorda, la nuestra", ["como una s sorda, la nuestra", "como una b", "como «sz», dos sonidos"], "*ß* es una s sorda, como la castellana; nunca una b."),
         ch(0, "¿Cómo se pronuncia?", "heute (hoy)", "«hoite»", ["«hoite»", "«heute»", "«haute»"], "*eu* suena «oi»."),
         ch(0, "¿Cómo se pronuncia?", "Vater (padre)", "«fata»", ["«fata»", "«vater»", "«bater»"], "*v* = f y la *-er* final suena casi como una a."),
         ch(0, "¿Cómo suena la *ch* de esta palabra?", "ich (yo)", "como una j muy suave, casi un soplido", ["como una j muy suave, casi un soplido", "como la ch de «chico»", "como una k: «ik»"], "Tras *i, e, ä, ö, ü*, la *ch* es un soplido suave, no «ch» ni «k»."),

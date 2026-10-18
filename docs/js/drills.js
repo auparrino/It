@@ -347,7 +347,14 @@
   function wordVariants(it) {
     var ans = String(it.answer || "").trim().replace(/’/g, "'"), low = ans.toLowerCase(), out = [];
     if (!ans || /\s/.test(ans) || ans.length < (DR.minLen || 1)) return out;
-    var push = function (v) { if (v && v.toLowerCase() !== low && out.indexOf(v) < 0) out.push(v); };
+    // Every option starts like the answer (capital or not): the capital
+    // must not give the answer away (Tisch / tische, Woher / wer).
+    var up = ans[0] !== low[0];
+    var push = function (v) {
+      if (!v) return;
+      v = up ? v.charAt(0).toUpperCase() + v.slice(1) : v.charAt(0).toLowerCase() + v.slice(1);
+      if (v.toLowerCase() !== low && out.indexOf(v) < 0) out.push(v);
+    };
     if (ART_SG.indexOf(low) >= 0) shuffle(ART_SG).forEach(push);
     else if (ART_PL.indexOf(low) >= 0) shuffle(ART_PL).forEach(push);
     Object.keys(PREP_ART).forEach(function (p) { if (PREP_ART[p].indexOf(low) >= 0) shuffle(PREP_ART[p]).forEach(push); });

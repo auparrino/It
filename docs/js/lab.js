@@ -129,6 +129,7 @@
   /* Ponte: la regla, después sus palabras, después dos palabras de reglas
      ya vistas (intercalar: Rohrer & Taylor 2007). */
   function ponteSession(cards, groupId, week) {
+    if (!RULES.length) return [];
     var g = groupId ? RULES.filter(function (r) { return r.id === groupId; })[0]
                     : freshestGroup(ponteOpen(week).length ? ponteOpen(week) : RULES.slice(0, 1), "ponte:", cards);
     var out = [card(g.h, g.body, g.ex)];

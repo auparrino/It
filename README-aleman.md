@@ -24,7 +24,10 @@ pausa (*Kaffeepause*), el desafío del día, el repaso con FSRS y la palabra del
 día. La voz es la del teléfono en alemán (`de-DE`). Los ejercicios escritos
 usan el teclado de la app en QWERTZ, con *ä ö ü ß* (o el del teléfono, con una
 fila de *ä ö ü ß*). La corrección no mira mayúsculas, y marca como *casi* lo
-que solo pierde la diéresis o escribe *ss* en vez de *ß*.
+que solo pierde la diéresis o escribe *ss* en vez de *ß*; pero si sin la
+diéresis queda otra palabra (*schon/schön*, *fahrt/fährt*, *Bruder/Brüder*), o
+lo que cambia es un artículo, un pronombre o una terminación (*ein/einen*,
+*wohnst/wohnt*), es un error, no un tipeo.
 
 **Todavía no tiene** (el paquete los declara en `missing`, en `docs/js/boot.js`,
 y el núcleo anda sin ellos): conjugador y gimnasio de verbos, diagnóstico de

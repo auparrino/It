@@ -39,7 +39,7 @@
        a Spanish gloss or option is never read with the German voice
        (app.js spanishText). */
     spanish: {
-      sure: /[ñ¿¡áéíóú]|ción\b|\bll/i,
+      sure: /[ñ¿¡áéíóú]|ción\b|(?:^|\s)ll/i,
       notEs: /[äöüß]|sch|tz|\b(der|die|das|und|ist|nicht|ich)\b/i,
       unknownEs: /[dz]$/,
       word: /[a-zà-ÿß]+/g,
@@ -146,7 +146,9 @@
       langEs: "alemán",
       wordAdj: "alemana",
       tabs: [["oggi", "☀️", "Heute"], ["percorso", "🧭", "Weg"], ["io", "👤", "Ich"]],
-      allTabs: [["frasi", "🚋", "Training"], ["leggi", "📖", "Lesen"]],
+      // Still no readings: only the training of every week (app.js allMaterialCard).
+      allTabs: [["frasi", "🚋", "Training"]],
+      allDesc: { frasi: "la práctica de todas las semanas: palabras, repaso y lo que ya viste" },
       today: "Heute", train: "Training", read: "Lesen", me: "Ich",
       path: "Der Weg", pathEl: "el Weg", pathAl: "al Weg", pathTu: "tu Weg",
       // The logo is a Wirtshaus sign (carved wood, gold letters): «Weg» is the way.
@@ -203,7 +205,13 @@
       dgNotes: "Samstag… Freunde… zum Glück…", dgText: "Rekonstruiere den Text…",
       parlaIn: "Schreib auf Deutsch…", send: "Senden", hi: "Hallo! Wie geht's?", ok: "Verstanden.",
       scriviIn: "Schreib hier, auf Deutsch…",
-      switchTo: "Cambiar a Italiano 🇮🇹", switchCode: "it"
+      switchTo: "Cambiar a Italiano 🇮🇹", switchCode: "it",
+      // The course is under construction: the first start says what there is (inicio.js).
+      partial: {
+        pace: "Por ahora son seis semanas de A1: con 20 minutos, 5 días por semana, las terminás en un mes y medio. El resto del camino hasta C1 está en construcción.",
+        path: "las seis semanas de A1 que ya están (el resto, en construcción); cada semana trae sus palabras, sus misiones y más práctica.",
+        weekSteps: "<li>☕ la Kaffeepause y el repaso</li>"
+      }
     }
   };
 

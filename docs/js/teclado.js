@@ -89,10 +89,11 @@
     // looked like Gboard's «hide the keyboard» and was pressed for that)
     var html = '<div class="kbtop"><button type="button" class="kblink" data-k="phone">Usar el teclado del teléfono</button></div>';
     if (layer === "abc" && L.extra.length) {
-      html += '<div class="kbrow kbextra">' + L.extra.map(function (c) { return key(shift ? c.toUpperCase() : c); }).join("") + "</div>";
+      html += '<div class="kbrow kbextra">' + L.extra.map(function (c) { return key(shift && c !== "ß" ? c.toUpperCase() : c); }).join("") + "</div>";
     }
     rows.forEach(function (r, i) {
-      var keys = r.split("").map(function (c) { return key(shift && layer === "abc" ? c.toUpperCase() : c); }).join("");
+      // ß has no capital on the keyboard («SS» is two letters): it stays.
+      var keys = r.split("").map(function (c) { return key(shift && layer === "abc" && c !== "ß" ? c.toUpperCase() : c); }).join("");
       if (i === rows.length - 1) {
         keys = (layer === "abc" ? key("shift", "kbmod" + (shift ? " on" : ""), "⇧", "mayúscula") : key("abc", "kbmod", "abc", "letras")) +
                keys + key("back", "kbmod", "⌫", "borrar");

@@ -45,6 +45,10 @@ def build():
             for key in ("type", "prompt", "stem", "answer", "options", "note"):
                 if it.get(key) not in (None, ""):
                     out[key] = it[key]
+            # the prompt and the stem are shown as plain text: no *marks* in sight
+            for key in ("prompt", "stem"):
+                if key in out:
+                    out[key] = out[key].replace("*", "")
             acc = list(it.get("accept") or [])
             if it["answer"] not in acc:
                 acc.insert(0, it["answer"])

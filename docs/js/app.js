@@ -615,7 +615,7 @@
       "Cada 7 días de racha ganás además un 🛡️ escudo para los días de más.</p></div>";
 
     html += '<details class="mas" id="masoggi"' + (window.Inicio && Inicio.moreOpen() ? " open" : "") + '><summary><span class="mas-t">Más</span><span class="muted small">' +
-      (maint ? "pausa, repaso, frase del día, calendario" : "pausa, sfida, repaso, frase del día, calendario") + "</span></summary>" + more + "</details>";
+      (maint ? "pausa, repaso, frase del día, calendario" : "pausa, desafío, repaso, frase del día, calendario") + "</span></summary>" + more + "</details>";
 
     // Instalación
     if (!isStandalone()) {
@@ -912,7 +912,8 @@
 
     var pp = Lab.progress("ponte:", state.cards), pf = Lab.progress("falso:", state.cards),
         pc = Lab.progress("capire:", state.cards);
-    html += fold("al:lab", "🧪 Laboratorio", pp.seen + pf.seen + pc.seen + " vistas",
+    // A language without the lab yet (German): no empty doors.
+    if (pp.total + pf.total + pc.total) html += fold("al:lab", "🧪 Laboratorio", pp.seen + pf.seen + pc.seen + " vistas",
       '<div class="labs">' +
         '<button class="lab" data-lab="ponte"><span class="e">🌉</span><b>Ponte</b>' +
           '<span class="muted">' + UI.ponte + "</span>" +
@@ -929,9 +930,9 @@
       "</div>" +
       '<p class="muted science">🔬 Ponte usa la transferencia desde tu lengua (Ringbom); ' +
       UI.capire + " es input estructurado: primero interpretar la forma, después producirla (VanPatten).</p>");
-    if (window.Escritos) html += fold("al:esc", "✍️ Escritura guiada", "variaciones · C-test · ordená", noH2(Escritos.treinoHtml(state)));
+    if (window.Escritos && window.ESCRITOS_DATA) html += fold("al:esc", "✍️ Escritura guiada", "variaciones · C-test · ordená", noH2(Escritos.treinoHtml(state)));
 
-    if (window.Duelli) {
+    if (window.Duelli && Duelli.DUELLI.length) {
       var list = Duelli.DUELLI.slice().sort(function (a, b) { return a.week - b.week; });
       var openD = list.filter(function (d) { return d.week <= week; }).length;
       html += fold("al:duel", "⚔️ Duelos", openD + " / " + list.length + " abiertos",
@@ -984,7 +985,7 @@
         "</button>" };
     });
     var seenSc = items.filter(function (x) { return x.week <= week; }).length;
-    html += fold("al:scenes", "💬 " + esc(UI.scenes), seenSc + " / " + items.length + " abiertas",
+    if (items.length) html += fold("al:scenes", "💬 " + esc(UI.scenes), seenSc + " / " + items.length + " abiertas",
       C ? C.seasons("al:sc", items, week, (course.seasons || []).map(function (s) { return s.name; })).replace(/class="eps"/g, 'class="scenes"')
         : '<div class="scenes">' + items.map(function (x) { return x.html; }).join("") + "</div>");
 
@@ -2100,7 +2101,7 @@
     html += "</div>";
     html += '<div class="row" style="margin-top:12px">' +
       (w.lesson ? '<button class="tab" id="teo">📄 Ver la teoría entera</button>' : "") +
-      (w.boss ? "" : '<button class="tab" id="gym">🏋️ Gimnasio de verbos</button>') +
+      (w.boss || !window.Conj || !(w.verbs || []).length ? "" : '<button class="tab" id="gym">🏋️ Gimnasio de verbos</button>') +
       (nChal ? '<button class="tab" id="chal">📖 ' + UI.chal + " (" + nChal + ")</button>" : "") +
       "</div></div>";
     return html;
@@ -4263,6 +4264,9 @@
     var desc = { frasi: "la práctica de todas las semanas: frases, Laboratorio, duelos, Banco, escritura guiada, " +
                    (window.Trabajo && Trabajo.scenes().length ? "las escenas de trabajo, " : "") + "Tres lenguas",
                  leggi: "todas las lecturas y escuchas, la Biblioteca, tus cuentos y tu velocidad de lectura" };
+    // optional: a package can say what its tabs hold (German, under construction)
+    var own = UI["allDesc"] || {};
+    Object.keys(own).forEach(function (k) { desc[k] = own[k]; });
     return '<div class="card allmat"><h2>📦 Todo el material</h2>' +
       '<p class="muted small">Lo de cada semana está en la página de esa semana. Acá, todo junto:</p>' +
       '<div class="labs">' + all.map(function (t) {
@@ -7522,7 +7526,10 @@
         if (window.Mapas) Mapas.install(course);
         itemMap = Drills.itemsById(course);
         registerStories();
-        view.week = Math.min(state.unlocked, 52);
+        // A course shorter than 52 weeks (German, under construction): never
+        // open a week it does not have (an old placement test could).
+        if (state.unlocked > NW()) { state.unlocked = NW(); persist(); }
+        view.week = Math.min(state.unlocked, NW());
         if (Engine.checkStreak(state).status === "lost") persist();
         // A new learner: the three screens after the language picker (inicio.js).
         if (window.Inicio && Inicio.boot(view)) { renderHeader(); render(); loadExtrasSoon(); return; }

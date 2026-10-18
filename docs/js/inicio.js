@@ -73,7 +73,7 @@
       '<p class="muted small">Tener la meta a la vista ayuda a sostener el esfuerzo. Podés cambiarla en ' + esc(UI().me) + ".</p>" +
       '<span class="chips">' + why.map(function (w) { return chip("data-obwhy", w[0], esc(w[1]), ob.why === w[0]); }).join("") + "</span></div>" +
       '<div class="card onb"><h2>¿Cuánto tiempo por día?</h2>' +
-      '<p class="muted small">Con 20 minutos, 5 días por semana, el curso lleva un año. Menos también sirve: tarda más.</p>' +
+      '<p class="muted small">' + esc((UI().partial || {}).pace || "Con 20 minutos, 5 días por semana, el curso lleva un año. Menos también sirve: tarda más.") + "</p>" +
       '<span class="chips">' + [10, 15, 20, 30, 45].map(function (m) { return chip("data-obmin", m, m + " min", ob.min === m); }).join("") + "</span>" +
       '<p class="muted small" style="margin-top:10px">¿Cuántos días por semana?</p>' +
       '<span class="chips">' + [3, 4, 5, 6, 7].map(function (d) { return chip("data-obdays", d, d + " días", ob.days === d); }).join("") + "</span>" +
@@ -83,7 +83,8 @@
       '<div class="row onb-foot"><button class="btn" id="obnext">Siguiente</button><button class="tab" id="obskip">Saltar</button></div>';
   }
   function etaFor(min, days) {
-    if (!P()) return "";
+    // A course under construction (LANG.ui.partial) has no date for C1.
+    if (!P() || UI().partial) return "";
     var pace = min * days / P().weekMinutes(1), d = new Date(Date.now() + 52 / Math.max(0.05, pace) * 7 * DAY);
     return "A ese ritmo, llegás a C1 en " + P().fmtMonth(d) + ".";
   }
@@ -105,7 +106,7 @@
       oggi: "la próxima misión de tu semana, el repaso y atajos.",
       frasi: "para practicar más: frases, palabras, sonidos, la Clínica de tus errores.",
       leggi: "lecturas y escuchas de tu nivel, y la Biblioteca de libros enteros.",
-      percorso: "las 52 semanas en cuatro estaciones; cada semana trae sus palabras, sus misiones y más práctica; cada estación termina con un " + esc(U.boss || "jefe") + ".",
+      percorso: (U.partial || {}).path || "las 52 semanas en cuatro estaciones; cada semana trae sus palabras, sus misiones y más práctica; cada estación termina con un " + esc(U.boss || "jefe") + ".",
       io: "tu progreso, tus ajustes, la copia de seguridad y todo el material junto: lecturas, Biblioteca, práctica, Consultar."
     };
     var start = st.unlocked > 1 ? "Arrancás en la semana " + st.unlocked + "." : "Arrancás en la semana 1.";
@@ -113,7 +114,8 @@
       '<div class="card onb"><h2>Una semana, un tema</h2>' +
       '<p class="muted">Cada semana tiene su gramática y sus palabras. El camino es siempre el mismo:</p>' +
       '<ol class="onb-week"><li>📘 la lección, en pasos cortos</li><li>📚 las palabras</li><li>🎯 entrenar hasta 20 respuestas bien</li>' +
-      "<li>✍️ un texto tuyo</li><li>💬 frases para usar</li><li>📖 una lectura</li><li>🏆 «Dominala»: una sesión que muestra que la sabés</li></ol>" +
+      ((U.partial || {}).weekSteps || "<li>✍️ un texto tuyo</li><li>💬 frases para usar</li><li>📖 una lectura</li>") +
+      "<li>🏆 «Dominala»: una sesión que muestra que la sabés</li></ol>" +
       '<p class="muted small">Cuando terminás las misiones se abre la semana siguiente. En ' + esc(U.today || "Hoy") + " siempre está la próxima misión de tu semana.</p></div>" +
       '<div class="card onb"><h2>Las ' + (tabs.length === 3 ? "tres" : tabs.length) + ' pestañas</h2><ul class="onb-tabs">' +
       tabs.map(function (t) { return "<li><span>" + t[1] + "</span><span><b>" + esc(t[2]) + "</b> · " + (TAB[t[0]] || "") + "</span></li>"; }).join("") + "</ul></div>" +
