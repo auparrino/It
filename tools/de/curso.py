@@ -1,55 +1,35 @@
 # -*- coding: utf-8 -*-
-"""Curso de alemán A1 (6 semanas) para hispanohablantes rioplatenses.
+"""Curso de alemán de A1 a C1 (52 semanas) para hispanohablantes rioplatenses.
 
-Datos puros: SEASON y WEEKS.  Los ejercicios se arman con funciones chicas
-(q, ch, cz, tr, li, ty) que devuelven dicts con el esquema del curso.
+Datos puros: SEASONS y WEEKS.  Acá están las semanas 1-6; de la 7 a la 52,
+cada una en su archivo de tools/de/semanas/ (sNN.py, con su WEEK).  Los
+ejercicios se arman con las funciones chicas de base.py (q, ch, cz, tr, li,
+ty), que devuelven dicts con el esquema del curso.
 """
+import importlib
+import os
+import re
+import sys
 
 
-def q(prompt, answer, options, stem=None):
-    d = {"prompt": prompt, "answer": answer, "options": list(options)}
-    if stem:
-        d["stem"] = stem
-    return d
+from base import q, ch, li, cz, tr, ty, MAY  # noqa: E402,F401
 
 
-def _acc(answer, accept):
-    acc = list(accept or [])
-    if answer not in acc:
-        acc.insert(0, answer)
-    return acc
-
-
-def ch(part, prompt, stem, answer, options, note=""):
-    return {"type": "choice", "part": part, "prompt": prompt, "stem": stem,
-            "answer": answer, "options": list(options), "note": note}
-
-
-def li(part, word, options, note=""):
-    return {"type": "listen", "part": part, "prompt": "Escuchá: ¿qué palabra dice?",
-            "stem": word, "answer": word, "options": list(options), "note": note}
-
-
-def cz(part, prompt, stem, answer, accept=None, note=""):
-    return {"type": "cloze", "part": part, "prompt": prompt, "stem": stem,
-            "answer": answer, "accept": _acc(answer, accept), "note": note}
-
-
-def tr(part, stem, answer, accept=None, note=""):
-    return {"type": "translate", "part": part, "prompt": "Traducí al alemán.", "stem": stem,
-            "answer": answer, "accept": _acc(answer, accept), "note": note}
-
-
-def ty(part, prompt, stem, answer, accept=None, note=""):
-    return {"type": "typed", "part": part, "prompt": prompt, "stem": stem,
-            "answer": answer, "accept": _acc(answer, accept), "note": note}
-
-
-MAY = "La app no corrige mayúsculas, pero en alemán los sustantivos van siempre con mayúscula."
-
-SEASON = {"n": 1, "name": "Die Grundlagen", "weeks": [1, 6], "level": "A1",
-          "blurb": "Seis semanas para leer en voz alta, presentarte, nombrar cosas con su artículo, "
-                   "hablar de tu familia, comprar y pedir en el café, y contar tu día."}
+SEASONS = [
+    {"n": 1, "name": "Die Grundlagen", "weeks": [1, 13], "level": "A1 → A2",
+     "blurb": "Leer en voz alta, presentarte, nombrar cosas con su artículo, comprar, contar tu día, "
+              "decir lo que podés y tenés que hacer, moverte por la ciudad y contar lo que hiciste."},
+    {"n": 2, "name": "Die Brücke", "weeks": [14, 26], "level": "A2 → B1",
+     "blurb": "Los casos en serio: dónde y adónde, los adjetivos declinados, comparar, explicar por qué, "
+              "contar el pasado, hacer planes y pedir con cortesía."},
+    {"n": 3, "name": "Der Strom", "weeks": [27, 39], "level": "B1 → B2",
+     "blurb": "El alemán de los diarios y del trabajo: la voz pasiva, los conectores dobles, lo que no fue, "
+              "el discurso indirecto y las frases largas que se arman con participios y sustantivos."},
+    {"n": 4, "name": "Der Gipfel", "weeks": [40, 52], "level": "B2 → C1",
+     "blurb": "Argumentar, cambiar de registro, las partículas que suenan nativas, el orden fino de la oración, "
+              "la lengua académica, las variedades del alemán y el examen final."},
+]
+SEASON = SEASONS[0]       # compatibilidad: la primera temporada
 
 WEEKS = []
 
@@ -1675,3 +1655,17 @@ WEEKS.append({
         ty(2, "Escribí en alemán.", "«¿Cuándo?»", "Wann?", ["Wann?", "Wann"], "*Wann?*"),
     ],
 })
+
+
+# ---------------------------------------------------------------------------
+# Semanas 7-52: una por archivo en tools/de/semanas/
+# ---------------------------------------------------------------------------
+_SEM = os.path.join(os.path.dirname(os.path.abspath(__file__)), "semanas")
+if _SEM not in sys.path:
+    sys.path.insert(0, _SEM)
+# DE_SEMANAS=7,8 carga solo esas (check_semana.py, mientras se escriben otras)
+_SOLO = {"s%02d.py" % int(x) for x in os.environ.get("DE_SEMANAS", "").split(",") if x.strip()}
+for _f in sorted(os.listdir(_SEM)) if os.path.isdir(_SEM) else []:
+    if re.match(r"^s\d\d\.py$", _f) and (not _SOLO or _f in _SOLO):
+        WEEKS.append(importlib.import_module(_f[:-3]).WEEK)
+WEEKS.sort(key=lambda w: w["week"])
