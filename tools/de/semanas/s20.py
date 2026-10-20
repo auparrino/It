@@ -233,7 +233,7 @@ WEEK = {
         cz(1, "Escribí la preposición.", "Der Brief ist ___ meiner Mutter.", "von", note="De parte de quién: *von*."),
         cz(1, "Escribí la terminación del sustantivo.", "Ich spiele mit den Kind___.", "ern", ["ern"], "Dativo plural: *den Kindern*, con *-n*."),
         tr(1, "Voy al correo.", "Ich gehe zur Post.", note="*zu der Post* → *zur Post*."),
-        tr(1, "Soy de Argentina.", "Ich komme aus Argentinien.", ["Ich komme aus Argentinien.", "Ich bin aus Argentinien."], "Origen: *aus*."),
+        tr(1, "Mi amiga es de Uruguay.", "Meine Freundin kommt aus Uruguay.", ["Meine Freundin kommt aus Uruguay.", "Meine Freundin ist aus Uruguay."], "Origen: *aus* + dativo."),
         tr(1, "Voy a casa.", "Ich gehe nach Hause.", ["Ich gehe nach Hause.", "Ich fahre nach Hause."], "*nach Hause* = a casa (adónde)."),
         tr(1, "Después del trabajo voy al banco.", "Nach der Arbeit gehe ich zur Bank.", ["Nach der Arbeit gehe ich zur Bank.", "Ich gehe nach der Arbeit zur Bank."], "*nach der Arbeit* y *zur Bank*, dos dativos."),
         # parte 2 — seit y los trámites

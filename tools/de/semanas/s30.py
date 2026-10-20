@@ -195,7 +195,7 @@ WEEK = {
         tr(0, "Yo no lo habría hecho.", "Ich hätte das nicht gemacht.", ["Ich hätte das nicht gemacht.", "Ich hätte es nicht gemacht.", "Das hätte ich nicht gemacht.", "Ich hätte das nicht getan.", "Ich hätte es nicht getan.", "Das hätte ich nicht getan."], "«habría hecho» = *hätte gemacht*."),
         tr(0, "Ella habría venido.", "Sie wäre gekommen.", note="*kommen* → *wäre gekommen*."),
         ty(0, "Pasá al Konjunktiv II pasado.", "Ich habe es gewusst.", "Ich hätte es gewusst.", note="*habe* → *hätte*."),
-        li(0, "hätte", ["hätte", "hatte", "Hütte"], "*hätte* (habría) con *ä*; *hatte* (había, tenía) con *a*."),
+        li(0, "wäre", ["wäre", "war", "Ware"], "*wäre* (habría sido, estaría) con *ä*; *war* (era, estaba) sin diéresis."),
         # parte 1 — irreales y lamentos
         ch(1, "Elegí el auxiliar.", "Wenn ich früher aufgestanden ___, hätte ich den Zug nicht verpasst.", "wäre", ["wäre", "hätte", "würde"], "*aufstehen* va con *sein*."),
         ch(1, "Elegí el auxiliar.", "Wenn du mich gefragt hättest, ___ ich dir geholfen.", "hätte", ["hätte", "wäre", "habe"], "Consecuencia irreal: *hätte geholfen*."),
