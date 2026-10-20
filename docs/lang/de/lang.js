@@ -5,8 +5,8 @@
  * de guardado, dónde están los datos y todos los textos de la interfaz que
  * dependen de la lengua.  rules.js (LANG.rules) le agrega lo suyo después.
  * Lo que se ve está en alemán y en castellano rioplatense, con Baviera de
- * fondo (el tema: theme.css).  El paquete arranca chico: las seis semanas de A1 (Boot.LANGS.de
- * dice qué archivos todavía no tiene).
+ * fondo (el tema: theme.css).  El curso tiene las 52 semanas de A1 a C1, pero el paquete
+ * todavía no trae todos los módulos (Boot.LANGS.de dice qué archivos le faltan).
  */
 (function (root) {
   "use strict";
@@ -166,7 +166,7 @@
       wordOrNot: "Wort oder nicht?", wordYes: "✓ Wort", wordNo: "✗ Kein Wort",
       lampo: "Blitz", lampoEl: "El Blitz",
       boss: "Endgegner", Boss: "Endgegner",
-      pathLead: "Alemán desde cero. Por ahora, las seis semanas de A1; el resto del camino hasta C1 está en construcción. Cada semana tiene <b>3 estrellas</b>: " +
+      pathLead: "Alemán desde cero hasta C1, en 52 semanas. Cada semana tiene <b>3 estrellas</b>: " +
         "jugar la lección, superar la semana y dominarla.",
       fraseDay: "Wort des Tages",
       calendarGreen: "Grün",
@@ -206,10 +206,10 @@
       parlaIn: "Schreib auf Deutsch…", send: "Senden", hi: "Hallo! Wie geht's?", ok: "Verstanden.",
       scriviIn: "Schreib hier, auf Deutsch…",
       switchTo: "Cambiar a Italiano 🇮🇹", switchCode: "it",
-      // The course is under construction: the first start says what there is (inicio.js).
+      // The 52 weeks are there, but not every module yet: the first start
+      // says what a week brings (inicio.js); no pace, so it gives the date for C1.
       partial: {
-        pace: "Por ahora son seis semanas de A1: con 20 minutos, 5 días por semana, las terminás en un mes y medio. El resto del camino hasta C1 está en construcción.",
-        path: "las seis semanas de A1 que ya están (el resto, en construcción); cada semana trae sus palabras, sus misiones y más práctica.",
+        path: "las 52 semanas, de A1 a C1, en cuatro temporadas; cada semana trae sus palabras, sus misiones y más práctica.",
         weekSteps: "<li>☕ la Kaffeepause y el repaso</li>"
       }
     }
