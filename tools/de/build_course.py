@@ -60,6 +60,10 @@ def build():
             acc = list(it.get("accept") or [])
             if it["answer"] not in acc:
                 acc.insert(0, it["answer"])
+            # the same answer without its inner commas is right too, in every
+            # week (the correction only drops the final punctuation)
+            if it["type"] in ("translate", "typed", "cloze"):
+                acc += [a.replace(",", "") for a in acc if "," in a and a.replace(",", "") not in acc]
             out["accept"] = acc
             if it["type"] == "listen":
                 out["nopeek"] = True
