@@ -589,7 +589,9 @@
     });
   }
 
-  install();
+  // A language outside the three (German): the module is not there.
+  var foreign = !!(LG.code && !DATA.LANGS[LG.code]);
+  if (!foreign) install();
 
   var api = { CAT: CAT, HOME: HOME, OTHER: OTHER, KEY: KEY, DATA: DATA, intruders: intruders, amend: amend,
               store: store, reviewItem: reviewItem, toReview: toReview, cardId: cardId,
@@ -598,5 +600,5 @@
               enable: enable, duelSession: duelSession, card: card, render: render, wire: wire,
               _ui: ui, _act: act };
   if (typeof module === "object" && module.exports) module.exports = api;
-  else root.TresLenguas = api;
+  else if (!foreign) root.TresLenguas = api;
 })(typeof window !== "undefined" ? window : globalThis);

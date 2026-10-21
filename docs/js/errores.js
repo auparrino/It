@@ -309,7 +309,7 @@
     var S = root.Scrivi, task = S && S.TASKS ? S.TASKS[week] : null;
     var P = root.PORQUE_DATA, D = Dg(), wc = [];
     if (P && P.weeks && D && D.LABEL) Object.keys(P.weeks).forEach(function (k) { if (P.weeks[k] === week && D.LABEL[k]) wc.push(k); });
-    var o = { week: week, level: w.level || levelOfWeek(week), grammar: titles.slice(-14), tenses: tenses,
+    var o = { week: week, of: weeks.length || 52, level: w.level || levelOfWeek(week), grammar: titles.slice(-14), tenses: tenses,
               weak: weak, weekCats: wc, structs: task && task.use ? task.use.map(function (u) { return u[2]; }) : [] };
     Object.keys(extra || {}).forEach(function (k) { o[k] = extra[k]; });
     return o;
@@ -318,7 +318,7 @@
     if (!c) return "";
     if (typeof c === "string") return c;
     var lines = [];
-    if (c.week) lines.push("El alumno está en la semana " + c.week + " de 52 (nivel " + (c.level || levelOfWeek(c.week)) + ").");
+    if (c.week) lines.push("El alumno está en la semana " + c.week + " de " + (c.of || 52) + " (nivel " + (c.level || levelOfWeek(c.week)) + ").");
     if (c.grammar && c.grammar.length) lines.push("Gramática vista hasta ahora (las últimas lecciones): " + c.grammar.join("; ") + ".");
     if (c.tenses && c.tenses.length) lines.push("Tiempos verbales que ya conoce: " + c.tenses.join(", ") + ". No uses nombres de tiempos que todavía no vio: describilos con palabras simples.");
     if (c.structs && c.structs.length) lines.push("Lo que practica esta semana: " + c.structs.join("; ") + ".");

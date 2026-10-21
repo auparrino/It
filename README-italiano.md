@@ -41,8 +41,14 @@ tu teléfono**. No usa cuentas ni servidores; la IA es opcional, con una clave d
   maneras: armarla con fichas, escucharla, tarjeta rápida y, sobre todo,
   **escribirla de memoria**, que es lo que te hace rápido para hablar. Al
   escribir no cuentan los acentos ni la puntuación, pero sí el orden de las palabras.
-- **🤫 Modo oficina** (botón arriba a la derecha): no suena nada solo y no
-  aparecen ejercicios de escucha. El 🔊 sigue andando si lo tocás con auriculares.
+- **🤫 Modo silencioso** (botón arriba a la derecha, en los tres idiomas): no
+  suena nada solo y cada ejercicio de escuchar se cambia por uno escrito (la
+  frase para armar o escribir, u otro ejercicio de la semana); lo que es solo
+  sonido (los pares, las grabaciones) no aparece. El 🔊 sigue andando si lo
+  tocás con auriculares.
+- **🤔 No lo entiendo** (en cada corrección, también cuando está bien): con tu
+  clave de IA, Claude lee la corrección que viste y la teoría del ejercicio y
+  te lo explica de otra forma, con otro ejemplo.
 
 ### Lo que te mantiene enganchado
 

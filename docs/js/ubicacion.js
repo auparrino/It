@@ -145,7 +145,7 @@
     function result() {
       var median = quantile(S.post, 0.5), low = quantile(S.post, 0.25);
       // a little under the estimate: better to review than to get lost
-      var start = Math.max(1, Math.min(TOP, low + 1));
+      var start = Math.max(1, Math.min(TOP, weeks[weeks.length - 1] || 1, low + 1));
       if (start <= 2) start = 1;
       return { level: median, start: start, asked: S.asked.length, right: S.right,
                top: S.asked.reduce(function (m, a) { return a.ok ? Math.max(m, a.week) : m; }, 0),
@@ -170,7 +170,8 @@
   // Never lowers what is open.  Returns how many weeks it opened.
   // With the course, the test talks to the review too (seed).
   function apply(state, start, res, course) {
-    start = Math.max(1, Math.min(52, Math.round(+start || 1)));
+    var last = course && course.weeks && course.weeks.length || 52;
+    start = Math.max(1, Math.min(last, 52, Math.round(+start || 1)));
     var before = state.unlocked || 1;
     var rec = { at: Date.now(), start: start, from: before };
     if (res) { rec.level = res.level; rec.asked = res.asked; rec.right = res.right; }

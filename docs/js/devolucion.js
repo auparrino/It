@@ -369,12 +369,13 @@
     }
     return out;
   }
-  var SLIP = {
+  // LANG.rules.slip renames them (German: diéresis, not tilde).
+  var SLIP = Object.assign({
     mayus: "va con mayúscula", minus: "va con minúscula",
     falta_tilde: "lleva tilde", sobra_tilde: "va sin tilde", otra_tilde: "lleva otra tilde",
     falta_doble: "lleva consonante doble", sobra_doble: "va con una sola consonante",
     signo: "lleva apóstrofo o guion así", letra: "se escribe así"
-  };
+  }, (root.LANG && root.LANG.rules && root.LANG.rules.slip) || {});
   // «*lunedì* lleva tilde (escribiste *lunedi*)»: the language between asterisks.
   function slipText(s) {
     return "*" + s.t + "* " + (SLIP[s.what] || "se escribe así") + " (escribiste *" + s.g + "*)";

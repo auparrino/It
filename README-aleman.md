@@ -24,13 +24,20 @@ pausa (*Kaffeepause*), el desafío del día, el repaso con FSRS y la palabra del
 día. La voz es la del teléfono en alemán (`de-DE`). Los ejercicios escritos
 usan el teclado de la app en QWERTZ, con *ä ö ü ß* (o el del teléfono, con una
 fila de *ä ö ü ß*). La corrección no mira mayúsculas, y marca como *casi* lo
-que solo pierde la diéresis o escribe *ss* en vez de *ß*.
+que solo pierde la diéresis o escribe *ss* en vez de *ß*; pero si sin la
+diéresis queda otra palabra (*schon/schön*, *fahrt/fährt*, *Bruder/Brüder*), o
+lo que cambia es un artículo, un pronombre o una terminación (*ein/einen*,
+*wohnst/wohnt*), es un error, no un tipeo.
 
 **Todavía no tiene** (el paquete los declara en `missing`, en `docs/js/boot.js`,
 y el núcleo anda sin ellos): conjugador y gimnasio de verbos, diagnóstico de
 errores por categoría, escritura libre (*Scrivi*) y la IA, frases de
 conversación, lecturas, radio, sonidos, dictogloss, duelos, banco, Biblioteca,
 el tramo C1 y el examen.
+
+**En los tres idiomas**: el 🤫 modo silencioso (nada suena y los ejercicios
+de escuchar pasan a ser escritos) y el botón 🤔 *No lo entiendo* en cada
+corrección, que con tu clave de IA te explica lo mismo de otra forma.
 
 ## Dónde está
 
@@ -39,7 +46,7 @@ el tramo C1 y el examen.
 | El contenido (lecciones, ejercicios, palabras) | `tools/de/curso.py` (Python legible) |
 | El curso compilado | `docs/lang/de/data/course.json` (lo arma `tools/de/build_course.py`) |
 | La configuración, la interfaz y las reglas | `docs/lang/de/lang.js`, `docs/lang/de/rules.js` |
-| El tema (Berlín) | `docs/lang/de/theme.css` |
+| El tema (Baviera: las Rauten, los Alpes, el cartel de madera; títulos en Grenze Gotisch) | `docs/lang/de/theme.css`, `docs/lang/de/fonts/` |
 | Los tests | `tools/de/test_curso.js` (en `npm test`), `tools/lib/smoke_aleman.js` (en el navegador), `npm run sim` |
 
 Lo ideal es que un hablante nativo revise el contenido. Los puntos dudosos

@@ -404,7 +404,7 @@
             '<b>' + (pct >= 100 ? "✓" : todayXp) + '</b></div>' +
           (state.streak >= 7 ? '<div class="stat boost" title="racha de 7: xp ×1,2"><b>×1,2</b><span>xp</span></div>' : "") +
           (state.boost > 0 ? '<div class="stat boost" title="doble xp en la próxima ronda"><b>🎟️' + state.boost + '</b><span>doble</span></div>' : "") +
-          '<button class="mode" id="mode" title="modo oficina" aria-label="Modo oficina: sin sonidos" aria-pressed="' + (state.silent ? "true" : "false") + '">' +
+          '<button class="mode" id="mode" title="modo silencioso" aria-label="Modo silencioso: sin sonido ni ejercicios de escuchar" aria-pressed="' + (state.silent ? "true" : "false") + '">' +
             (state.silent ? "🤫" : "🔊") + '</button>' +
           '<button class="mode" id="theme" title="tema claro u oscuro" aria-label="Tema oscuro" aria-pressed="' + (themeNow() === "dark" ? "true" : "false") + '">' +
             (themeNow() === "dark" ? "🌙" : "☀️") + '</button>' +
@@ -425,8 +425,8 @@
       persist();
       renderHeader();
       toast(state.silent
-        ? "🤫 Modo oficina: nada suena solo. Todo con el pulgar."
-        : "🔊 Modo normal: las frases se leen en voz alta.", 2800);
+        ? "🤫 Modo silencioso: nada suena y los ejercicios de escuchar pasan a ser escritos."
+        : "🔊 Modo normal: las frases se leen en voz alta y vuelven los de escuchar.", 2800);
       if (view.screen !== "gioco") render();
     };
   }
@@ -615,7 +615,7 @@
       "Cada 7 días de racha ganás además un 🛡️ escudo para los días de más.</p></div>";
 
     html += '<details class="mas" id="masoggi"' + (window.Inicio && Inicio.moreOpen() ? " open" : "") + '><summary><span class="mas-t">Más</span><span class="muted small">' +
-      (maint ? "pausa, repaso, frase del día, calendario" : "pausa, sfida, repaso, frase del día, calendario") + "</span></summary>" + more + "</details>";
+      (maint ? "pausa, repaso, frase del día, calendario" : "pausa, desafío, repaso, frase del día, calendario") + "</span></summary>" + more + "</details>";
 
     // Instalación
     if (!isStandalone()) {
@@ -828,7 +828,7 @@
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION = "c1-vN" in sw.js: test_game
      and the CI check it).  One version for the app and both languages. */
-  var APP_VERSION = "v3.11.4";
+  var APP_VERSION = "v3.13.0";
   // Settimana XVII: Roman numerals on the street signs (LANG.ui.romanWeeks).
   function romano(n) {
     var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
@@ -912,7 +912,8 @@
 
     var pp = Lab.progress("ponte:", state.cards), pf = Lab.progress("falso:", state.cards),
         pc = Lab.progress("capire:", state.cards);
-    html += fold("al:lab", "🧪 Laboratorio", pp.seen + pf.seen + pc.seen + " vistas",
+    // A language without the lab yet (German): no empty doors.
+    if (pp.total + pf.total + pc.total) html += fold("al:lab", "🧪 Laboratorio", pp.seen + pf.seen + pc.seen + " vistas",
       '<div class="labs">' +
         '<button class="lab" data-lab="ponte"><span class="e">🌉</span><b>Ponte</b>' +
           '<span class="muted">' + UI.ponte + "</span>" +
@@ -929,9 +930,9 @@
       "</div>" +
       '<p class="muted science">🔬 Ponte usa la transferencia desde tu lengua (Ringbom); ' +
       UI.capire + " es input estructurado: primero interpretar la forma, después producirla (VanPatten).</p>");
-    if (window.Escritos) html += fold("al:esc", "✍️ Escritura guiada", "variaciones · C-test · ordená", noH2(Escritos.treinoHtml(state)));
+    if (window.Escritos && window.ESCRITOS_DATA) html += fold("al:esc", "✍️ Escritura guiada", "variaciones · C-test · ordená", noH2(Escritos.treinoHtml(state)));
 
-    if (window.Duelli) {
+    if (window.Duelli && Duelli.DUELLI.length) {
       var list = Duelli.DUELLI.slice().sort(function (a, b) { return a.week - b.week; });
       var openD = list.filter(function (d) { return d.week <= week; }).length;
       html += fold("al:duel", "⚔️ Duelos", openD + " / " + list.length + " abiertos",
@@ -984,7 +985,7 @@
         "</button>" };
     });
     var seenSc = items.filter(function (x) { return x.week <= week; }).length;
-    html += fold("al:scenes", "💬 " + esc(UI.scenes), seenSc + " / " + items.length + " abiertas",
+    if (items.length) html += fold("al:scenes", "💬 " + esc(UI.scenes), seenSc + " / " + items.length + " abiertas",
       C ? C.seasons("al:sc", items, week, (course.seasons || []).map(function (s) { return s.name; })).replace(/class="eps"/g, 'class="scenes"')
         : '<div class="scenes">' + items.map(function (x) { return x.html; }).join("") + "</div>");
 
@@ -2100,7 +2101,7 @@
     html += "</div>";
     html += '<div class="row" style="margin-top:12px">' +
       (w.lesson ? '<button class="tab" id="teo">📄 Ver la teoría entera</button>' : "") +
-      (w.boss ? "" : '<button class="tab" id="gym">🏋️ Gimnasio de verbos</button>') +
+      (w.boss || !window.Conj || !(w.verbs || []).length ? "" : '<button class="tab" id="gym">🏋️ Gimnasio de verbos</button>') +
       (nChal ? '<button class="tab" id="chal">📖 ' + UI.chal + " (" + nChal + ")</button>" : "") +
       "</div></div>";
     return html;
@@ -2350,6 +2351,11 @@
                                              push: kind === "round" && weekStat(w.week).right < 20 });
     }
 
+    // Silent mode: nothing to listen to (silentItems).
+    if (state.silent && items.length) {
+      items = silentItems(items, w);
+      if (!items.length) { toast("🤫 Modo silencioso: esto es todo de escuchar. Sacalo (🤫 arriba) para practicarlo."); return; }
+    }
     if (!items.length) { toast("No hay preguntas para este modo todavía."); return; }
     // the real voices of the pairs, looked up while the round starts
     if (window.Voci) Voci.prefetch(items.filter(function (x) { return x.type === "coppia" && !(LG.realVoiceSkip || {})[x.cat]; })
@@ -2418,6 +2424,36 @@
 
   // Items of the listening module: the audio is the question.
   var SAY_TYPES = { coppia: 1, conta: 1, scegli: 1, intonazione: 1, accento: 1, forma: 1 };
+
+  /* Silent mode (state.silent): nothing sounds by itself and nothing has
+     to be heard.  An exercise that needs the ear becomes its written
+     version (a phrase: put it together or write it, Frasi.pickItem), or
+     another exercise of the week; what is only sound (the pairs, the
+     recordings) goes. */
+  function needsEar(it) {
+    return !!it && (it.type === "listen" || it.type === "dictation" || !!SAY_TYPES[it.type] || !!it.dettato || !!it.audio);
+  }
+  function silentItems(items, w) {
+    if (!items.some(needsEar)) return items;
+    var have = {}, pool = null;
+    items.forEach(function (it) { if (it && it.id) have[it.id] = 1; });
+    var spare = function () {
+      if (!pool) pool = w ? Drills.buildRound(course, w, { map: itemMap, state: state, silent: true, size: 12, only: partItems(w) }) : [];
+      while (pool.length) {
+        var x = pool.shift();
+        if (x && !needsEar(x) && !have[x.id]) { have[x.id] = 1; return x; }
+      }
+      return null;
+    };
+    var out = [];
+    items.forEach(function (it) {
+      if (!needsEar(it)) { out.push(it); return; }
+      var sub = it.frase && window.Frasi ? Frasi.pickItem(it.frase, { silent: true }) : null;
+      if (!sub || needsEar(sub)) sub = it.type === "coppia" || SAY_TYPES[it.type] || it.audio ? null : spare();
+      if (sub) out.push(sub);
+    });
+    return out;
+  }
   /* Fatigue: when the accuracy of the last eight answers drops twenty
      points under the session's, the round offers to stop (no new items
      are learnt tired: intra-session dropout models, Riiid 2020). */
@@ -3195,12 +3231,52 @@
     });
   }
 
-  /* «🤖 Explicame más», on the final sheet: the solution and the app's
-     explanation are already there, so the AI is asked for the rule behind
-     it, a contrast with Spanish and another example, with the app's
-     correction, the category and the week as evidence.  If it thinks the
-     answer was valid after all, it goes to «Correcciones para revisar». */
-  function aiExplainMore(it, given, sol, dg, fbText) {
+  /* «🤔 No lo entiendo», on every sheet (right, almost or wrong): the last
+     resort after the app's explanation and the theory.  The AI reads what
+     the learner already read (the correction on screen, the item's note,
+     the theory block of the exercise) and explains it ANOTHER way: another
+     angle, another example, never the same words.  Same prompt for every
+     language (the core builds it), with the category and the week as
+     evidence.  If it thinks the answer was valid after all, it goes to
+     «Correcciones para revisar». */
+  function theoryOf(it) {
+    try {
+      var b = window.Porque && Porque.blockFor ? Porque.blockFor(it, { course: course, unlocked: state.unlocked, week: view.week }) : null;
+      var w = b && course.weeks[b.week - 1], bl = w && w.lesson && w.lesson.blocks[b.i];
+      if (!bl) return "";
+      return [bl.h, bl.r, bl.warn, bl.tip].filter(Boolean).join(" · ").replace(/\*\*/g, "").slice(0, 900);
+    } catch (e) { return ""; }
+  }
+  function explainAgainPrompt(x, q) {
+    var L = UI.langEs || LG.name || "el idioma", ok = q === 2;
+    return "Sos profesor de " + L + " para un hispanohablante rioplatense. Un alumno hizo un ejercicio de una app de idiomas " +
+      (ok ? "y lo contestó BIEN, pero no entiende por qué está bien." : q === 1 ? "y le salió CASI bien, y no entiende la corrección." :
+            "y se equivocó, y no entiende la corrección.") +
+      "\nConsigna: " + (x.prompt || "") + "\nEnunciado: " + (x.stem || "") +
+      (x.options && x.options.length ? "\nOpciones: " + x.options.join(" | ") : "") +
+      "\nRespuesta del alumno: " + (x.given || "(vacía)") + "\nRespuesta que la app da por correcta: " + (x.answer || "") +
+      (x.accept && x.accept.length > 1 ? "\nOtras respuestas que la app acepta: " + x.accept.join(" | ") : "") +
+      (x.diff && !ok ? "\nDiferencia exacta (calculada por la app, es un hecho): " + x.diff : "") +
+      (x.note ? "\nNota del ejercicio (revisada, es la regla que aplica): " + x.note : "") +
+      (x.theory ? "\nLa teoría de la app sobre esto (ya la leyó): " + x.theory : "") +
+      "\nLo que la app le mostró en pantalla (ya lo leyó y no le alcanzó): " + (x.feedback || "(nada)") +
+      (x.appSaid ? "\nEl diagnóstico de la app: " + x.appSaid : "") +
+      (x.ctx ? "\n\n" + (window.Errores && Errores.promptCtx && typeof x.ctx === "object" ? Errores.promptCtx(x.ctx) : String(x.ctx)) : "") +
+      "\n\nLeé con atención la explicación de la app y la teoría, y explicalo de una forma NUEVA: no repitas esas frases ni el mismo ejemplo. " +
+      "Elegí otro camino: la regla de fondo dicha más simple, una comparación con el castellano, un truco para acordarse, o el razonamiento paso a paso, " +
+      "y un ejemplo distinto del ejercicio." +
+      (ok && x.options && x.options.length ? " Decí también por qué las otras opciones no van." : "") +
+      "\nNo inventes errores ni reglas; verificá la regla antes de afirmarla y, si no estás seguro, decilo. " +
+      "Todo en castellano rioplatense (vos), 3 a 5 oraciones, sin comillas dobles ni HTML (las formas en " + L + ", entre *asteriscos*)." +
+      "\nNo le des la razón por cortesía: «tambien_correcta» solo si su respuesta es correcta y cumple la consigna aunque la app la haya marcado mal; " +
+      "«app_equivocada» si la corrección o la explicación de la app está mal o confunde." +
+      "\nRespondé SOLO con JSON: {\"tambien_correcta\": true o false, \"app_equivocada\": true o false, \"explicacion\": \"...\"}";
+  }
+  function aiExplainMore(it, given, sol, dg, fbText, q) {
+    if (!aiKey() || !window.IA) {
+      toast("🤔 Para que la IA te lo explique de otra forma, poné tu clave de Anthropic en " + UI.me + " → IA.", 4200);
+      return;
+    }
     var b = $("#aiexp"), outE = $("#aiexpout");
     if (b) b.disabled = true;
     var show = function (data, meta) {
@@ -3212,17 +3288,18 @@
            ". Quedó anotado en " + UI.me + " → «Correcciones para revisar».</p>" : "") +
         (meta ? modelLine(meta) : '<p class="muted small modelline">IA: ya lo había explicado (guardado en el teléfono).</p>') + "</div>";
     };
-    var cached = window.Errores ? Errores.cacheGet("explain", [it.id, given]) : null;
+    var cached = window.Errores ? Errores.cacheGet("explain2", [it.id, given]) : null;
     if (cached) return show(cached, null);
     if (outE) outE.innerHTML = '<p class="muted small">⏳ Preguntándole a la IA…</p>';
-    var x = aiItemX(it, given, sol, { feedback: fbText, stage: "mas",
-                                      ctx: aiCtx({ cat: dg && dg.cat, appSaid: dg ? (dg.label ? dg.label + ": " : "") + (dg.explain || dg.hint || "") : "" }) });
-    Scrivi.explain(x, aiKeys(), function (err, data, meta) {
+    var x = aiItemX(it, given, sol, { feedback: fbText, theory: theoryOf(it),
+                                      appSaid: dg ? (dg.label ? dg.label + ": " : "") + (dg.explain || dg.hint || "") : "",
+                                      ctx: aiCtx({ cat: dg && dg.cat }) });
+    IA.llm(explainAgainPrompt(x, q), aiKeys(), function (err, data, meta) {
       var o = $("#aiexpout");
       if (!o) return;
       if (err || !data) { o.innerHTML = '<p class="muted small">No pude usar la IA (' + esc(String((err && err.message) || err || "respuesta vacía")) + ").</p>"; if (b) b.disabled = false; return; }
-      var keep = { explicacion: String(data.explicacion || "").slice(0, 1200), tambien_correcta: !!data.tambien_correcta, app_equivocada: !!data.app_equivocada };
-      if (window.Errores) Errores.cacheSet("explain", [it.id, given], keep, (it.stem || it.prompt || it.id) + " · " + given);
+      var keep = { explicacion: String(data.explicacion || "").slice(0, 1200), tambien_correcta: !!data.tambien_correcta && q < 2, app_equivocada: !!data.app_equivocada };
+      if (window.Errores) Errores.cacheSet("explain2", [it.id, given], keep, (it.stem || it.prompt || it.id) + " · " + given);
       if (keep.tambien_correcta || keep.app_equivocada) {
         addAiNote({ id: it.id, prompt: it.prompt, stem: it.stem, given: given, answer: sol, app: fbText, ai: keep.explicacion, kind: "ia" });
       }
@@ -3485,7 +3562,7 @@
         '<button class="btn" id="next">' + UI.next + "</button>" +
         (oneMore ? UnaMas.button() : "") +
         '<button class="tab" id="say2">🔊 escuchar</button>' +
-        (q < 2 && aiKey() && window.Scrivi && it.type !== "hunt" ? '<button class="tab" id="aiexp">🤖 Explicame más</button>' : "") +
+        (it.type !== "hunt" && !SAY_TYPES[it.type] ? '<button class="tab" id="aiexp">🤔 No lo entiendo</button>' : "") +
         (q < 2 && canClaim(it, claimGiven, extra) ? '<button class="tab" id="claim">🙋 Mi respuesta es válida</button>' : "") +
       '</div><div id="aiexpout"></div><div id="claimout"></div></div>';
 
@@ -3543,7 +3620,7 @@
       var t = ($("#fb") || {}).innerText || "";
       return t.split(UI.next)[0].replace(/\s+/g, " ").slice(0, 600);
     };
-    on("#aiexp", function () { aiExplainMore(it, claimGiven || given, sol, dg || round.firstDiag, fbTextOf()); });
+    on("#aiexp", function () { aiExplainMore(it, claimGiven || given, sol, dg || round.firstDiag, fbTextOf(), q); });
     on("#claim", function () { claimValid(it, claimGiven, sol, fbTextOf(), dg || round.firstDiag); });
     $("#say2").onclick = function () { if (it.audio) speakItem(it, true); else speak(spoken, true); };
     if (!spoken && !it.audio) $("#say2").hidden = true;
@@ -4263,6 +4340,9 @@
     var desc = { frasi: "la práctica de todas las semanas: frases, Laboratorio, duelos, Banco, escritura guiada, " +
                    (window.Trabajo && Trabajo.scenes().length ? "las escenas de trabajo, " : "") + "Tres lenguas",
                  leggi: "todas las lecturas y escuchas, la Biblioteca, tus cuentos y tu velocidad de lectura" };
+    // optional: a package can say what its tabs hold (German, under construction)
+    var own = UI["allDesc"] || {};
+    Object.keys(own).forEach(function (k) { desc[k] = own[k]; });
     return '<div class="card allmat"><h2>📦 Todo el material</h2>' +
       '<p class="muted small">Lo de cada semana está en la página de esa semana. Acá, todo junto:</p>' +
       '<div class="labs">' + all.map(function (t) {
@@ -4316,7 +4396,7 @@
           }).join("") + "</select></label>" : "") +
         '<label class="set"><span>Teclado sin sugerencias<small>el teclado no te propone palabras (más difícil), pero tampoco detecta el idioma solo ni deja elegirlo desde su barra</small></span>' +
           '<input type="checkbox" id="kbquiet"' + (state.kbQuiet ? " checked" : "") + "></label>" +
-        '<label class="set"><span>Modo oficina 🤫<small>nada suena solo; el 🔊 sigue andando si lo tocás</small></span>' +
+        '<label class="set"><span>Modo silencioso 🤫<small>nada suena solo y los ejercicios de escuchar se cambian por otros escritos; el 🔊 sigue andando si lo tocás</small></span>' +
           '<input type="checkbox" id="silent"' + (state.silent ? " checked" : "") + "></label>" +
         '<label class="set"><span>Agendar mi rato diario<small>' + (state.icsAt ? 'ya lo agregaste · de nuevo si cambiás la hora' : 'un evento en tu calendario, con alarma, que abre tu semana') + '</small></span>' +
           '<span class="row"><input type="time" id="remtime" value="' +
@@ -7522,7 +7602,10 @@
         if (window.Mapas) Mapas.install(course);
         itemMap = Drills.itemsById(course);
         registerStories();
-        view.week = Math.min(state.unlocked, 52);
+        // A course shorter than 52 weeks (German, under construction): never
+        // open a week it does not have (an old placement test could).
+        if (state.unlocked > NW()) { state.unlocked = NW(); persist(); }
+        view.week = Math.min(state.unlocked, NW());
         if (Engine.checkStreak(state).status === "lost") persist();
         // A new learner: the three screens after the language picker (inicio.js).
         if (window.Inicio && Inicio.boot(view)) { renderHeader(); render(); loadExtrasSoon(); return; }

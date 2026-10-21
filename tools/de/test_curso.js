@@ -112,7 +112,9 @@ var it1 = { answer: "Ich heiße Ana.", accept: ["Ich heiße Ana."] };
 ok(Engine.grade("ich heiße ana", it1) === "giusto", "sin mayúsculas ni punto final");
 ok(Engine.grade("Ich heisse Ana", it1) !== "giusto", "ss en vez de ß: no es «bien»");
 var it2 = { answer: "schön", accept: ["schön"] };
-ok(Engine.grade("schon", it2) === "quasi", "sin diéresis: casi");
+ok(Engine.grade("schon", it2) === "sbagliato", "sin diéresis, otra palabra (schon): mal");
+ok(Engine.grade("Osterreich", { answer: "Österreich" }) === "quasi", "sin diéresis: casi");
+ok(Engine.grade("Ich heisse Ana", it1) === "quasi", "ss en vez de ß: casi");
 ok(Engine.grade("schön".normalize("NFD"), it2) === "giusto", "diéresis combinada (NFD)");
 ok(Engine.grade("die Kaffee", { answer: "der Kaffee", accept: ["der Kaffee"] }) === "sbagliato", "otro artículo: mal");
 

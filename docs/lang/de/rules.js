@@ -93,23 +93,57 @@
   function defArt(word, g, plural) { return plural ? "die" : g === "m" ? "der" : g === "f" ? "die" : "das"; }
   function indefArt(word, g, plural) { return plural ? "" : g === "f" ? "eine" : "ein"; }
 
+  // The words without umlaut that are other forms: «er fahrt» is «ihr fahrt», not a slip.
+  var UMLAUT_GRAMMAR = {};
+  ("schon zahlen mochte mochtest mochten hatte hattest hatten wurde wurdest wurden konnte konnten musste mussten " +
+   "durfte durften fahrt fahrst schlaft schlafst lauft laufst tragt tragst wascht waschst halt haltst lasst " +
+   "bruder vater mutter tochter apfel garten mantel vogel ofen boden laden fruh zuruck").split(" ")
+    .forEach(function (w) { UMLAUT_GRAMMAR[w] = 1; });
+  // The closed words: articles, possessives, pronouns, sein and haben.
+  var CLOSED = {};
+  ("der die das den dem des ein eine einen einem einer eines kein keine keinen keinem keiner " +
+   "mein meine meinen meinem dein deine deinen deinem ich du er sie es wir ihr mich dich mir dir ihn ihm uns euch " +
+   "bin bist ist sind seid sein habe hast hat haben habt").split(" ").forEach(function (w) { CLOSED[w] = 1; });
+  // What is left after the common stem when the difference is an ending.
+  var ENDING = /^(|e|en|er|es|em|n|s|st|t|et|est|te|ten)$/;
+
   LANG.rules = {
     /* Corrección (engine.js grade).  Las diéresis cuentan (schon ≠ schön):
        la que falta es «casi»; una en otro lugar es otra palabra
        (strictMarks).  Las mayúsculas no cuentan (la corrección no las mira:
        las notas lo recuerdan). */
-    grade: { strictMarks: true, graveIsGrammar: false, hyphen: false },
+    grade: {
+      strictMarks: true, graveIsGrammar: false, hyphen: false,
+      // ss for ß (heisse, Strasse) is «casi»: the spelling of Switzerland.
+      fold: function (s) { return s.replace(/ß/g, "ss"); },
+      // A missing umlaut that leaves another real word is grammar, not a slip:
+      // the plural, the verb that changes its vowel, the Konjunktiv.
+      markIsGrammar: function (given) { return !!UMLAUT_GRAMMAR[given]; },
+      // An article, a pronoun, sein/haben or an ending is grammar, not a typo.
+      typoIsGrammar: function (given, want) {
+        if (CLOSED[given] || CLOSED[want]) return true;
+        var i = 0;
+        while (i < given.length && i < want.length && given[i] === want[i]) i++;
+        var a = given.slice(i), b = want.slice(i);
+        // a lost e before n is a typo (Morgn for Morgen), not an ending
+        if ((a === "n" && b === "en") || (a === "en" && b === "n")) return false;
+        return i >= 3 && ENDING.test(a) && ENDING.test(b);
+      }
+    },
+
+    // The umlaut is not a tilde (devolucion.js slipText).
+    slip: { falta_tilde: "lleva diéresis", sobra_tilde: "va sin diéresis", otra_tilde: "lleva otra diéresis" },
 
     save: {
       blank: { syllabusV: 1 },
       syllabus: migrateSyllabus
     },
 
-    /* Los rangos: del turista que baja en Tegel al berlinés de toda la vida. */
+    /* Los rangos: del turista que llega a Múnich al bávaro de toda la vida. */
     ranks: [
       [1, "Tourist"], [3, "Gast"], [6, "Besucher"],
       [10, "Nachbar"], [14, "Stammgast"], [18, "Plaudertasche"],
-      [23, "Kenner"], [28, "Dichter"], [34, "Berliner"], [40, "Urberliner"]
+      [23, "Kenner"], [28, "Dichter"], [34, "Münchner"], [40, "Urbayer"]
     ],
 
     /* Las medallas: nombres en alemán, descripción en castellano.  Los id
@@ -203,9 +237,14 @@
       ],
       minLen: 1,
       glued: glued,
-      baseRe: [/([A-Za-zÄÖÜäöüß]+)\s*→/i, /\(([A-Za-zÄÖÜäöüß]+)\)/i],
-      // «(mamá)»: a Spanish gloss is not the word to transform.
-      glossRe: /[ñ¿¡áéíóú]/,
+      // In parentheses only a noun (capital) or an infinitive: «(ella)»,
+      // «(tomar)» are Spanish glosses, not the word to transform.
+      baseRe: [/([A-Za-zÄÖÜäöüß]+)\s*→/i, /\(([A-ZÄÖÜ][a-zäöüß]+|[a-zäöüß]+(?:en|ern|eln))\)/],
+      // «(mamá)», «(Argentina)»: a Spanish gloss is not the word to transform.
+      glossRe: { test: function (w) {
+        return /[ñ¿¡áéíóú]/.test(w) || (" " + LANG.spanish.es + " ").indexOf(" " + w.toLowerCase() + " ") >= 0 ||
+          /(ción|dad|ar|ir|ina|ana)$/i.test(w);
+      } },
       shapes: shapes,
       pluralTraps: pluralTraps
     },

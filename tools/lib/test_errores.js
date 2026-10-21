@@ -182,7 +182,11 @@ var CTX = {};
   ok((read("escritura_plus.js").match(/h\.recordFindings\(/g) || []).length >= 2, "Escritura plus (tres vueltas y reformulación) anota");
   ok(/\.fromDiag\(d, given, o\)/.test(app), "las respuestas cerradas pasan por el objeto común");
   ok(/r\.local\.concat\(Scrivi\.fromAI\(text, data, r\.local\)\)/.test(app) && !/r\.findings = \[\]; r\.hard = 0; runAI\(\)/.test(app), "Scrivi con clave suma la IA a lo local (no lo tira)");
-  ok(/id="aihint">🤖 Explicame/.test(app) && /Explicame más/.test(app), "«Explicame» antes de la solución y «Explicame más» en la hoja final");
+  ok(/id="aihint">🤖 Explicame/.test(app) && /id="aiexp">🤔 No lo entiendo/.test(app), "«Explicame» antes de la solución y «No lo entiendo» en la hoja final");
+  // «No lo entiendo»: on every sheet (right too), the AI reads what the app said and the theory, and explains it another way
+  ok(/function explainAgainPrompt/.test(app) && /Lo que la app le mostró en pantalla/.test(app) && /La teoría de la app sobre esto/.test(app) &&
+     /forma NUEVA: no repitas/.test(app), "«No lo entiendo»: el prompt lee la corrección y la teoría y pide otra explicación");
+  ok(!/q < 2 && [^\n]*id="aiexp"/.test(app), "«No lo entiendo» también cuando la respuesta está bien");
   ok(/🙋 Mi respuesta es válida/.test(app) && /function claimValid/.test(app), "«🙋 Mi respuesta es válida» en la hoja de error");
   ok(/Diagnosi\.addWords\(Object\.keys\(g\)\)/.test(app), "el glosario se suma al diccionario del diagnóstico");
   ok(/opt: inTramo/.test(app), "en 27-51 el Scrivi corto no es misión obligatoria");

@@ -1,75 +1,101 @@
-/* Weg C1 — el tema berlinés (docs/lang/de/theme.css).
+/* Weg C1 — el tema bávaro (docs/lang/de/theme.css).
 
-   Se carga después de css/app.css (la estructura común).  Sale del tema
-   carioca (la misma estructura de componentes) con los colores de Berlín:
-   el rojo y el oro de la bandera sobre el negro, el azul del Spree y del
-   cartel de calle, el gris de la piedra, el verde del Tiergarten.  El
-   filete de la cabecera es la bandera; sin ondas ni tipografías propias
-   (los títulos van en Georgia). */
+   Se carga después de css/app.css (la estructura común).  Baviera en un
+   día de Föhn: arriba el cielo azul con nubes blancas, abajo el blanco de
+   cal de las casas (modo claro) o la noche en los Alpes (modo oscuro).  Lo
+   que se toca lleva los colores de allá: el azul de las Rauten (los rombos
+   blancos y azules del escudo), el verde de los abetos, el oro de la
+   cerveza y del Brezel, el rojo de los geranios en los balcones y la
+   madera oscura de los Wirtshäuser.  Las Rauten aparecen en los detalles
+   (el filete de la cabecera, las tarjetas especiales, los banners, el
+   escudo del jefe); los Alpes, al pie de los banners; el progreso se pinta
+   como un Maibaum, en espiral blanca y azul.  La marca es un cartel de
+   Wirtshaus: madera tallada, letras de oro en gótica.  Títulos en Grenze
+   Gotisch (una gótica hecha para leerse en pantalla); el resto en Atkinson
+   Hyperlegible. */
 
 :root {
-  --coral: #c8102e;             /* el rojo de la bandera */
-  --coral-escuro: #9e0c24;
-  --boton: #b00e28; --boton-hover: #8f0b20; --boton-tinta: #fff;
-  --coral-claro: #e0475f;
-  --mata: #2e7d32;              /* el Tiergarten */
-  --mata-claro: #43a047;
-  --mata-escuro: #1b5e20;
-  --sol: #f2b705;               /* el oro */
-  --sol-escuro: #a87d00;
-  --mar: #1f5f99;               /* el Spree */
-  --mar-escuro: #154676;
-  --mar-claro: #4a8fd0;
-  --ceu: #c9d6e4;               /* el cielo gris azulado */
-  --ceu-claro: #eef2f6;
-  --areia: #f6f4ef;             /* el fondo */
-  --papel: #fffefb;             /* las tarjetas */
-  --pedra: #e9e4da;             /* la piedra arenisca */
-  --tinta: #1b2430;
-  --cinza: #5d6672;
-  --cinza-claro: #e2ddd3;       /* los filetes */
-  --placa: #1f3b5c;             /* el cartel de calle: azul oscuro */
-  --sombra: 0 1px 2px rgba(20,30,50,.06), 0 8px 24px rgba(20,30,50,.10);
+  --coral: #c42b2b;             /* los geranios de los balcones */
+  --coral-escuro: #941d1d;
+  --coral-claro: #e05a5a;
+  --boton: #1a64a2; --boton-hover: #134e80; --boton-tinta: #fff;   /* el azul de las Rauten */
+  --mata: #2c6b38;              /* los abetos */
+  --mata-claro: #46944f;
+  --mata-escuro: #1d4d26;
+  --sol: #e9a91d;               /* la cerveza y el Brezel */
+  --sol-escuro: #8c6000;
+  --mar: #1b6fb3;               /* el azul de las Rauten y de los lagos */
+  --mar-escuro: #12548a;
+  --mar-claro: #4fa0de;
+  --ceu: #bfdcf3;               /* el cielo de Föhn */
+  --ceu-claro: #e9f3fb;
+  --areia: #f7f5f0;             /* el blanco de cal: el fondo */
+  --papel: #fffefa;             /* las tarjetas */
+  --pedra: #ede6d8;             /* la mesa de madera clara del Biergarten */
+  --tinta: #182433;
+  --cinza: #5a6472;
+  --cinza-claro: #e0dacd;       /* los filetes */
+  --holz: #6e4224;              /* la madera del cartel */
+  --holz-escuro: #48280f;
+  --gold: #f5d27a;              /* las letras de oro tallado */
+  --sombra: 0 1px 2px rgba(20,35,60,.06), 0 8px 24px rgba(20,35,60,.10);
   --raio: 14px;
-  --serif: "Georgia", "Times New Roman", serif;
+  --serif: "Grenze Gotisch", "Georgia", "Times New Roman", serif;
   --sans: "Atkinson", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  /* el filete: negro, rojo y oro */
-  --calcadao: linear-gradient(90deg, #1b1b1b 0 33.3%, #c8102e 33.3% 66.6%, #f2b705 66.6%);
-  --ondas-claras: none;
-  --ondas-tinta: none;
+  /* Las Rauten: rombos azules sobre blanco, el escudo de Baviera.  A todo
+     color (el filete de la cabecera), en blanco apenas visible (banners y
+     botones grandes) y en tinta azul (tarjetas especiales y el escudo). */
+  --rauten: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='10'%3E%3Crect width='16' height='10' fill='%23fff'/%3E%3Cpath d='M8 0l8 5-8 5-8-5z' fill='%231b6fb3'/%3E%3C/svg%3E");
+  --rauten-claras: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='10'%3E%3Cpath d='M8 0l8 5-8 5-8-5z' fill='%23fff' fill-opacity='.13'/%3E%3C/svg%3E");
+  --rauten-tinta: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='10'%3E%3Cpath d='M8 0l8 5-8 5-8-5z' fill='%231b6fb3' fill-opacity='.06'/%3E%3C/svg%3E");
+  /* los Alpes: una cadena atrás, con nieve en las puntas, y la de adelante */
+  --alpen: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 48'%3E%3Cpath d='M0 48V34l14-8 10 5 16-20 10 10 8-6 16 15 16-14 14-12 14 14 10-6 18 14 14-4v26z' fill='%23fff' fill-opacity='.55'/%3E%3Cpath d='M34 18l6-7 6 7-3-1-3 2-3-2zM98 14l6-8 6 8-3-1-3 2-3-2z' fill='%23fff'/%3E%3Cpath d='M0 48v-8l20-6 16 4 18-10 16 8 18-6 22 8 20-6 30 8v8z' fill='%23fff' fill-opacity='.9'/%3E%3C/svg%3E");
+  /* el Brezel, en un trazo */
+  --brezn: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 52'%3E%3Cg fill='none' stroke='%23fff' stroke-width='6' stroke-linecap='round'%3E%3Cpath d='M9 24c0 22 46 22 46 0'/%3E%3Cpath d='M9 24C8 6 27 3 31 16l7 20'/%3E%3Cpath d='M55 24C56 6 37 3 33 16l-7 20'/%3E%3C/g%3E%3C/svg%3E");
+  /* el Maibaum: la espiral blanca y azul del progreso */
+  --maibaum: repeating-linear-gradient(135deg, var(--mar) 0 7px, #e9f3fb 7px 12px);
+  /* lo que el núcleo llama así: el filete y los dibujos de fondo */
+  --calcadao: var(--rauten) repeat-x 0 0 / 13px 8px;
+  --ondas-claras: var(--rauten-claras);
+  --ondas-tinta: var(--rauten-tinta);
   color-scheme: light;
 }
 
-/* oscuro: Berlín de noche, azul pizarra */
+/* oscuro: la noche en los Alpes, azul de pizarra, con la luz cálida de las ventanas */
 @media (prefers-color-scheme: dark) {
   html:not([data-theme="light"]) {
-    --coral: #ff5a6e; --coral-escuro: #e03a50; --coral-claro: #ff8494;
-    --boton: #ff5a6e; --boton-hover: #ff8494; --boton-tinta: #1f0306;
-    --mata: #5cc165; --mata-claro: #7fd487; --mata-escuro: #3b9a44;
-    --sol: #ffd04a; --sol-escuro: #e0aa1c;
-    --mar: #6aa8e8; --mar-escuro: #4a8fd0; --mar-claro: #93c2f2;
-    --ceu: #172233; --ceu-claro: #111a27;
-    --areia: #0d141f; --papel: #162131; --pedra: #1f2c3f;
-    --tinta: #eef1f5; --cinza: #a5afbc; --cinza-claro: #263449;
-    --placa: #2c5280;
+    --coral: #ff6b6b; --coral-escuro: #e04848; --coral-claro: #ff9090;
+    --boton: #6cb2ec; --boton-hover: #93c8f3; --boton-tinta: #06182a;
+    --mata: #62bd70; --mata-claro: #86d192; --mata-escuro: #3f9a4d;
+    --sol: #ffcc4d; --sol-escuro: #e0aa1c;
+    --mar: #6cb2ec; --mar-escuro: #4f9ad8; --mar-claro: #93c8f3;
+    --ceu: #13253c; --ceu-claro: #0e1b2c;
+    --areia: #0b1522; --papel: #132031; --pedra: #1d2c3f;
+    --tinta: #eef2f6; --cinza: #a6b0bd; --cinza-claro: #24344a;
+    --holz: #5a361c; --holz-escuro: #3a210d; --gold: #f5d27a;
     --sombra: 0 1px 2px rgba(0,0,0,.4), 0 6px 18px rgba(0,0,0,.35);
+    --maibaum: repeating-linear-gradient(135deg, var(--mar) 0 7px, #d8e8f6 7px 12px);
     color-scheme: dark;
   }
 }
 html[data-theme="dark"] {
-    --coral: #ff5a6e; --coral-escuro: #e03a50; --coral-claro: #ff8494;
-    --boton: #ff5a6e; --boton-hover: #ff8494; --boton-tinta: #1f0306;
-    --mata: #5cc165; --mata-claro: #7fd487; --mata-escuro: #3b9a44;
-    --sol: #ffd04a; --sol-escuro: #e0aa1c;
-    --mar: #6aa8e8; --mar-escuro: #4a8fd0; --mar-claro: #93c2f2;
-    --ceu: #172233; --ceu-claro: #111a27;
-    --areia: #0d141f; --papel: #162131; --pedra: #1f2c3f;
-    --tinta: #eef1f5; --cinza: #a5afbc; --cinza-claro: #263449;
-    --placa: #2c5280;
+    --coral: #ff6b6b; --coral-escuro: #e04848; --coral-claro: #ff9090;
+    --boton: #6cb2ec; --boton-hover: #93c8f3; --boton-tinta: #06182a;
+    --mata: #62bd70; --mata-claro: #86d192; --mata-escuro: #3f9a4d;
+    --sol: #ffcc4d; --sol-escuro: #e0aa1c;
+    --mar: #6cb2ec; --mar-escuro: #4f9ad8; --mar-claro: #93c8f3;
+    --ceu: #13253c; --ceu-claro: #0e1b2c;
+    --areia: #0b1522; --papel: #132031; --pedra: #1d2c3f;
+    --tinta: #eef2f6; --cinza: #a6b0bd; --cinza-claro: #24344a;
+    --holz: #5a361c; --holz-escuro: #3a210d; --gold: #f5d27a;
     --sombra: 0 1px 2px rgba(0,0,0,.4), 0 6px 18px rgba(0,0,0,.35);
+    --maibaum: repeating-linear-gradient(135deg, var(--mar) 0 7px, #d8e8f6 7px 12px);
     color-scheme: dark;
   }
+
+@font-face { font-family: "Grenze Gotisch"; font-style: normal; font-weight: 500 900; font-display: swap;
+  src: url(fonts/grenze-gotisch.woff2) format("woff2"); }
 
 body {
   margin: 0;
@@ -79,48 +105,62 @@ body {
   letter-spacing: .005em;
   line-height: 1.55;
   color: var(--tinta);
-  /* el cielo arriba, y abajo el fondo claro (o la noche) */
-  background: linear-gradient(180deg, var(--ceu) 0, var(--ceu-claro) 240px, var(--areia) 480px) fixed, var(--areia);
+  /* el cielo de Föhn con dos nubes blancas arriba, y abajo el blanco de cal (o la noche) */
+  background:
+    radial-gradient(60px 22px at 18% 70px, color-mix(in srgb, #fff 55%, transparent), transparent) fixed,
+    radial-gradient(90px 26px at 78% 120px, color-mix(in srgb, #fff 45%, transparent), transparent) fixed,
+    linear-gradient(180deg, var(--ceu) 0, var(--ceu-claro) 240px, var(--areia) 480px) fixed, var(--areia);
   -webkit-text-size-adjust: 100%;
   min-height: 100vh;
 }
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) body { background: linear-gradient(180deg, var(--ceu) 0, var(--ceu-claro) 240px, var(--areia) 480px) fixed, var(--areia); }
+}
+html[data-theme="dark"] body { background: linear-gradient(180deg, var(--ceu) 0, var(--ceu-claro) 240px, var(--areia) 480px) fixed, var(--areia); }
 
-/* ---------- cabecera: papel translúcido, con el filete del calçadão */
+/* ---------- cabecera: papel translúcido, con el filete de Rauten */
 header.top {
   position: sticky; top: 0; z-index: 20;
   background: color-mix(in srgb, var(--papel) 84%, transparent);
   -webkit-backdrop-filter: saturate(1.3) blur(14px); backdrop-filter: saturate(1.3) blur(14px);
-  padding: calc(6px + env(safe-area-inset-top)) 0 0; border-bottom: 1px solid color-mix(in srgb, var(--cinza-claro) 60%, transparent);
+  padding: calc(8px + env(safe-area-inset-top)) 0 0; border-bottom: 1px solid color-mix(in srgb, var(--cinza-claro) 60%, transparent);
 }
 header.top::before {
-  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 6px;
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 8px;
   background: var(--calcadao);
 }
 
-/* la placa de calle de Río: azul esmaltado, filete blanco, letras blancas */
+/* el cartel del Wirtshaus: madera oscura con la veta, una tira de Rauten
+   arriba y las letras de oro en gótica */
 .placa { display: inline-flex; flex-direction: column; align-items: center;
-  background: var(--placa); color: #fff; border-radius: 6px; padding: 4px 12px 5px;
-  text-align: center; box-shadow: inset 0 0 0 2px var(--placa), inset 0 0 0 3.5px rgba(255,255,255,.9), 0 2px 6px rgba(10,40,80,.18); }
+  background: var(--rauten) repeat-x 0 0 / 10px 6px,
+    repeating-linear-gradient(90deg, rgba(255,255,255,.035) 0 2px, transparent 2px 9px),
+    linear-gradient(180deg, var(--holz), var(--holz-escuro));
+  color: var(--gold); border-radius: 6px 6px 8px 8px; padding: 9px 13px 4px;
+  text-align: center; box-shadow: inset 0 0 0 1.5px rgba(245,210,122,.55), 0 2px 6px rgba(40,20,5,.25); }
 .placa .p-sup { font-family: var(--sans); font-size: .56rem; font-weight: 700; letter-spacing: .2em;
-  text-transform: uppercase; color: rgba(255,255,255,.82); line-height: 1.4; }
-.placa .p-rua { font-family: var(--serif); font-weight: 800; font-size: 1.12rem; letter-spacing: .02em;
-  line-height: 1.1; }
+  text-transform: uppercase; color: rgba(255,240,205,.85); line-height: 1.4; }
+.placa .p-rua { font-family: var(--serif); font-weight: 700; font-size: 1.3rem; letter-spacing: .01em;
+  line-height: 1.05; text-shadow: 0 1px 0 rgba(0,0,0,.35); }
 .brand.placa { margin: 2px 0; }
-.placa.big { display: flex; width: 100%; margin: 18px 0 10px; padding: 14px 18px 16px; border-radius: 10px;
-  box-shadow: inset 0 0 0 4px var(--placa), inset 0 0 0 6px rgba(255,255,255,.9), var(--sombra); }
+.placa.big { display: flex; width: 100%; box-sizing: border-box; margin: 18px 0 10px; padding: 20px 18px 14px; border-radius: 10px 10px 14px 14px;
+  background: var(--rauten) repeat-x 0 0 / 16px 10px,
+    repeating-linear-gradient(90deg, rgba(255,255,255,.035) 0 2px, transparent 2px 11px),
+    linear-gradient(180deg, var(--holz), var(--holz-escuro));
+  box-shadow: inset 0 0 0 2px rgba(245,210,122,.6), var(--sombra); }
 .placa.big .p-sup { font-size: .68rem; letter-spacing: .28em; }
-.placa.big .p-rua { font-size: 1.55rem; letter-spacing: .01em; line-height: 1.15; margin-top: 2px; }
-@media (max-width: 520px) { .placa.big .p-rua { font-size: 1.3rem; } }
+.placa.big .p-rua { font-size: 1.9rem; letter-spacing: .01em; line-height: 1.1; margin-top: 2px; }
+@media (max-width: 520px) { .placa.big .p-rua { font-size: 1.6rem; } }
 .stat span { font-size: .6875rem; color: var(--cinza); text-transform: uppercase; letter-spacing: .1em; font-weight: 700; }
 .stat.hot b { color: var(--coral); }
-/* el anillo de la meta: un sol que se completa */
+/* el anillo de la meta: del azul al oro, como un vaso que se llena */
 .ring { --p: 0; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; flex: none;
-  background: conic-gradient(var(--sol) 0, var(--coral) calc(var(--p) * 1%), var(--cinza-claro) 0); }
+  background: conic-gradient(var(--mar) 0, var(--sol) calc(var(--p) * 1%), var(--cinza-claro) 0); }
 .ring b { width: 32px; height: 32px; border-radius: 50%; background: var(--papel);
   display: grid; place-items: center; font-size: .72rem; font-weight: 800; }
 .mode { border: 1px solid var(--cinza-claro); background: var(--papel); color: inherit;
   border-radius: 50%; width: 38px; height: 38px; font-size: 1rem; padding: 0; }
-.xpbar i { display: block; height: 100%; background: linear-gradient(90deg, var(--mar-claro), var(--sol), var(--coral)); transition: width .6s cubic-bezier(.2,.8,.2,1); }
+.xpbar i { display: block; height: 100%; background: var(--maibaum); transition: width .6s cubic-bezier(.2,.8,.2,1); }
 
 /* ------------------------------------------------------------------ tarjetas */
 
@@ -131,17 +171,17 @@ header.top::before {
 
 /* ------------------------------------------------------------------- texto */
 
-h1 { font-family: var(--serif); font-size: 2rem; font-weight: 800; letter-spacing: -.01em; line-height: 1.12; margin: 24px 0 6px; }
-h1.hello { font-size: 2.15rem; }
+h1 { font-family: var(--serif); font-size: 2.2rem; font-weight: 700; letter-spacing: 0; line-height: 1.08; margin: 24px 0 6px; }
+h1.hello { font-size: 2.4rem; }
 h3 { font-size: .78rem; margin: 18px 0 8px; text-transform: uppercase; letter-spacing: .12em;
      color: var(--cinza); font-weight: 700; }
 p.lead { color: var(--cinza); margin: 0 0 18px; font-size: 1.04rem; }
 p.fare { margin: -8px 0 16px; font-size: .95rem; }
 .muted { color: var(--cinza); font-size: .85rem; }
 .note { font-size: .88rem; color: var(--cinza); margin-top: 6px; }
-/* el portugués dentro del texto: cursiva legible, verde mata */
+/* el alemán dentro del texto: cursiva legible, en el azul de las Rauten */
 .lesson i.it, ul.exs .it, .note i.it, .call i.it, .diag i.it, .feedback p i.it {
-  font-style: italic; font-weight: 700; color: var(--mata); }
+  font-style: italic; font-weight: 700; color: var(--mar-escuro); }
 p.version { text-align: center; margin: 18px 0 8px; opacity: .8; }
 
 /* ----------------------------------------------------------------- botones */
@@ -156,37 +196,38 @@ p.version { text-align: center; margin: 18px 0 8px; opacity: .8; }
 .btn.ghost { background: var(--papel); color: var(--tinta); border: 1.5px solid var(--cinza-claro); }
 @media (hover: hover) { .btn.ghost:hover:not(:disabled) { background: var(--areia); } }
 .btn.ghost:active:not(:disabled) { background: var(--areia); }
-.btn.gold { background: var(--sol); color: #3a2a00; }
+.btn.gold { background: var(--sol); color: #3a2600; }
 @media (hover: hover) { .btn.gold:hover:not(:disabled) { background: var(--sol-escuro); color: #fff; } }
 .btn.gold:active:not(:disabled) { background: var(--sol-escuro); color: #fff; }
 .tab { border: none; background: transparent; color: var(--cinza);
        padding: 8px 14px; border-radius: 10px; font-weight: 700; }
 .tab.on { background: var(--papel); color: var(--tinta); border: 1px solid var(--cinza-claro); }
 .goalbar { height: 8px; background: var(--cinza-claro); border-radius: 99px; overflow: hidden; margin-top: 10px; }
-.goalbar i { display: block; height: 100%; border-radius: 99px; background: linear-gradient(90deg, var(--sol), var(--coral)); transition: width .5s ease; }
+.goalbar i { display: block; height: 100%; border-radius: 99px; background: var(--maibaum); transition: width .5s ease; }
 .bigbtn { border: none; border-radius: 14px; padding: 16px 16px 14px; text-align: left; color: #fff;
   display: flex; flex-direction: column; gap: 2px; min-height: 118px; position: relative;
   box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 6px 16px color-mix(in srgb, var(--tono, #000) 28%, transparent);
   overflow: hidden; isolation: isolate;
   transition: transform .08s, filter .15s; }
 .bigbtn b { font-size: 1.2rem; font-weight: 800; margin-top: auto; letter-spacing: -.005em; }
-.bigbtn.pausa { --tono: var(--coral); grid-column: span 2; min-height: 112px;
-  background: var(--ondas-claras) repeat 0 100% / 80px 36px, linear-gradient(165deg, #ffb347 0, var(--coral-claro) 35%, var(--coral) 70%, #c73a55); }
-.bigbtn.pausa::after { content: ""; position: absolute; right: 18px; top: 14px; width: 54px; height: 54px; border-radius: 50%;
-  background: radial-gradient(circle, #ffe38a 0 55%, rgba(255,227,138,0) 70%); opacity: .85; z-index: -1; }
-.bigbtn.giorno { --tono: var(--sol-escuro); background: linear-gradient(160deg, #ffe07a, var(--sol) 60%, #f0a91c); color: #3a2a00; }
+/* la Kaffeepause: el café con leche y un Brezel; el repaso, las Rauten */
+.bigbtn.pausa { --tono: #7a4a26; grid-column: span 2; min-height: 112px;
+  background: linear-gradient(165deg, #c88b52 0, #a5683a 40%, #7a4a26 80%, #5c3519); }
+.bigbtn.pausa::after { content: ""; position: absolute; right: 16px; top: 12px; width: 64px; height: 52px;
+  background: var(--brezn) no-repeat center / contain; opacity: .5; z-index: -1; }
+.bigbtn.giorno { --tono: var(--sol-escuro); background: linear-gradient(160deg, #ffe07a, var(--sol) 60%, #d99510); color: #3a2600; }
 .bigbtn.ripasso { --tono: var(--mar); grid-column: span 2; min-height: 84px;
-  background: var(--ondas-claras) repeat 0 0 / 80px 36px, linear-gradient(160deg, var(--mar-claro), var(--mar) 60%, var(--mar-escuro)); }
+  background: var(--rauten-claras) repeat 0 0 / 24px 15px, linear-gradient(160deg, var(--mar-claro), var(--mar) 60%, var(--mar-escuro)); }
 .bigbtn.parole { --tono: var(--mata); background: linear-gradient(160deg, var(--mata-claro), var(--mata) 60%, var(--mata-escuro)); }
-.bigbtn.lampo { --tono: #0f4c85; background: linear-gradient(160deg, #2a78c2, #0f4c85 65%, #0a3560); }
-.bigbtn.scena { --tono: var(--coral); background: linear-gradient(160deg, #ff9a7a, var(--coral-claro) 60%, var(--coral)); }
+.bigbtn.lampo { --tono: #0e3f6e; background: linear-gradient(160deg, #2a78c2, #0e3f6e 65%, #0a2e52); }
+.bigbtn.scena { --tono: var(--coral); background: linear-gradient(160deg, #f08a7a, var(--coral-claro) 50%, var(--coral)); }
 .weekcard > b { font-size: 1.25rem; font-weight: 800; }
 .weekcard .prog, .scene .prog { height: 5px; background: var(--cinza-claro); border-radius: 99px; overflow: hidden; margin-top: 6px; }
 .weekcard .prog i, .scene .prog i { display: block; height: 100%; background: var(--mata-claro); }
-.weekcard.first { border-left: 4px solid var(--coral); }
-/* la tarjeta de la trilha: la vereda de Copacabana, apenas insinuada */
-.weekcard.hero { background: var(--ondas-tinta) repeat 0 0 / 80px 36px, var(--papel); }
-.weekcard.first > b { color: var(--coral); }
+.weekcard.first { border-left: 4px solid var(--mar); }
+/* la tarjeta del camino: las Rauten, apenas insinuadas */
+.weekcard.hero { background: var(--rauten-tinta) repeat 0 0 / 24px 15px, var(--papel); }
+.weekcard.first > b { color: var(--mar-escuro); }
 .weekcard.clin, .lab.clin { border-color: var(--coral); }
 
 .fdg { border-left: 5px solid var(--sol); }
@@ -195,7 +236,7 @@ p.version { text-align: center; margin: 18px 0 8px; opacity: .8; }
 .fes { color: var(--cinza); }
 .heat i { aspect-ratio: 1; border-radius: 5px; background: var(--cinza-claro); }
 .heat i.h1 { background: color-mix(in srgb, var(--sol) 45%, transparent); }
-.heat i.h2 { background: color-mix(in srgb, var(--coral-claro) 70%, transparent); }
+.heat i.h2 { background: color-mix(in srgb, var(--mar-claro) 70%, transparent); }
 .heat i.h3 { background: var(--mata); }
 .heat i:last-child { outline: 2px solid var(--sol); outline-offset: 1px; }
 
@@ -209,32 +250,42 @@ p.version { text-align: center; margin: 18px 0 8px; opacity: .8; }
 .season p { margin: 0 0 12px; font-size: .9rem; }
 .banner { position: relative; border-radius: var(--raio); padding: 16px 18px; color: #fff; margin-top: 8px;
   box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 6px 16px rgba(20,50,90,.14); }
-.banner h2 { margin: 2px 0; font-family: var(--serif); font-weight: 800; font-size: 1.55rem; letter-spacing: -.005em; }
+.banner h2 { margin: 2px 0; font-family: var(--serif); font-weight: 700; font-size: 1.85rem; letter-spacing: .005em; line-height: 1.1; }
 .banner p { margin: 0; font-size: .88rem; opacity: .92; color: inherit; }
-/* las cuatro estaciones: la arena y el sol (Primeiros Passos), la Mata
-   Atlântica (Pé na Estrada), el mar abierto (Mar Aberto) y el atardecer
-   sobre el Pão de Açúcar (O Cume), con las ondas del calçadão encima */
-.season .banner { background-blend-mode: normal; }
-.season .banner.s1 { background: var(--ondas-claras) repeat 0 0 / 80px 36px, linear-gradient(160deg, #ffe07a, var(--sol) 55%, #f0a01c); color: #3a2a00; }
-.season .banner.s2 { background: var(--ondas-claras) repeat 0 0 / 80px 36px, linear-gradient(160deg, var(--mata-claro), var(--mata) 60%, var(--mata-escuro)); }
-.season .banner.s3 { background: var(--ondas-claras) repeat 0 0 / 80px 36px, linear-gradient(160deg, var(--mar-claro), var(--mar) 60%, var(--mar-escuro)); }
-.season .banner.s4 { background: var(--ondas-claras) repeat 0 0 / 80px 36px, linear-gradient(165deg, #ffb347, var(--coral) 55%, #9d3a6a); }
-.season .banner.s4::after { content: ""; position: absolute; right: 14px; bottom: 0; width: 120px; height: 46px; opacity: .35;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 46'%3E%3Cpath d='M0 46V38C10 36 16 30 22 22 27 16 31 20 34 26 38 33 44 36 52 34 60 12 70 2 80 1 92 0 99 14 104 30 108 38 114 42 120 42V46z' fill='%23fff'/%3E%3C/svg%3E") no-repeat 100% 100% / contain; }
+/* las cuatro estaciones, de abajo hacia la cumbre: el prado verde del
+   Biergarten, el azul de los lagos (el Königssee), el oro del Oktoberfest
+   y el Alpenglühen, el rosa del atardecer sobre la Zugspitze; con las
+   Rauten encima y los Alpes al pie */
+.season .banner { overflow: hidden; isolation: isolate; padding-bottom: 30px; }
+.season .banner::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 44px; opacity: .32; z-index: -1;
+  background: var(--alpen) repeat-x 0 100% / 160px 44px; pointer-events: none; }
+.season .banner.s1 { background: var(--rauten-claras) repeat 0 0 / 24px 15px, linear-gradient(160deg, var(--mata-claro), var(--mata) 60%, var(--mata-escuro)); }
+.season .banner.s2 { background: var(--rauten-claras) repeat 0 0 / 24px 15px, linear-gradient(160deg, var(--mar-claro), var(--mar) 60%, var(--mar-escuro)); }
+.season .banner.s3 { background: var(--rauten-claras) repeat 0 0 / 24px 15px, linear-gradient(160deg, #ffe07a, var(--sol) 55%, #d99510); color: #3a2600; }
+.season .banner.s3::after { opacity: .5; }
+.season .banner.s4 { background: var(--rauten-claras) repeat 0 0 / 24px 15px, linear-gradient(165deg, #f6a65a, #d8566a 55%, #6d3a7a); }
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) .season .banner.s1 { background: var(--rauten-claras) repeat 0 0 / 24px 15px, linear-gradient(160deg, #2f7a3c, #22592c 60%, #173d1f); }
+  html:not([data-theme="light"]) .season .banner.s2 { background: var(--rauten-claras) repeat 0 0 / 24px 15px, linear-gradient(160deg, #2a78c2, #1a5a96 60%, #103d68); }
+}
+html[data-theme="dark"] .season .banner.s1 { background: var(--rauten-claras) repeat 0 0 / 24px 15px, linear-gradient(160deg, #2f7a3c, #22592c 60%, #173d1f); }
+html[data-theme="dark"] .season .banner.s2 { background: var(--rauten-claras) repeat 0 0 / 24px 15px, linear-gradient(160deg, #2a78c2, #1a5a96 60%, #103d68); }
 .node .dot { width: 68px; height: 68px; border-radius: 50%; font-size: 1.4rem; font-weight: 800;
   color: var(--mata); background: var(--papel); border: 2px solid var(--mata); transition: transform .08s; }
-.node.full .dot { background: var(--sol); border-color: var(--sol); color: #3a2a00; }
-.node.current .dot { background: var(--coral); border-color: var(--coral); color: #fff;
+.node.full .dot { background: var(--sol); border-color: var(--sol); color: #3a2600; }
+.node.current .dot { background: var(--mar); border-color: var(--mar); color: #fff;
   animation: nodepulse 1.8s ease-in-out infinite; }
-@keyframes nodepulse { 50% { box-shadow: 0 0 0 9px color-mix(in srgb, var(--coral) 22%, transparent); } }
-.node.boss .dot { width: 80px; height: 80px; font-size: 1.8rem; border-radius: 18px;
-  border-color: var(--coral); color: var(--coral); background: var(--ondas-tinta) repeat 0 0 / 40px 18px, var(--papel); }
-.node.boss.current .dot, .node.boss.full .dot { background: var(--coral); color: #fff; border-color: var(--coral); }
+@keyframes nodepulse { 50% { box-shadow: 0 0 0 9px color-mix(in srgb, var(--mar) 22%, transparent); } }
+/* el jefe: el escudo de Baviera, con sus Rauten */
+.node.boss .dot { width: 78px; height: 86px; font-size: 1.8rem; border-radius: 14px 14px 50% 50% / 14px 14px 46% 46%;
+  border-color: var(--mar); color: var(--mar-escuro); background: var(--rauten-tinta) repeat 0 0 / 16px 10px, var(--papel); }
+.node.boss.current .dot, .node.boss.full .dot { background: var(--rauten-claras) repeat 0 0 / 16px 10px, var(--mar); color: #fff; border-color: var(--mar); }
+.node.boss.full .dot { box-shadow: 0 0 0 3px var(--sol); }
 .node.locked .dot { background: transparent; border: 2px dashed var(--cinza-claro); color: var(--cinza); font-size: 1.1rem; }
-.node .bubble { position: absolute; top: -30px; background: var(--coral); color: #fff; font-weight: 800; font-size: .7rem;
+.node .bubble { position: absolute; top: -30px; background: var(--mar-escuro); color: #fff; font-weight: 800; font-size: .7rem;
   letter-spacing: .08em; padding: 4px 12px; border-radius: 8px; animation: bob 1.4s ease-in-out infinite; z-index: 2; }
 .node .bubble::after { content: ""; position: absolute; left: 50%; bottom: -6px; margin-left: -6px; border: 6px solid transparent;
-  border-top-color: var(--coral); border-bottom: 0; }
+  border-top-color: var(--mar-escuro); border-bottom: 0; }
 .node .nt { font-size: .76rem; font-weight: 700; line-height: 1.25; margin-top: 8px; color: var(--tinta); }
 .node .nm { display: block; font-size: .7rem; color: var(--cinza); font-weight: 600; }
 .node.locked .nt { color: var(--cinza); }
@@ -257,8 +308,8 @@ p.version { text-align: center; margin: 18px 0 8px; opacity: .8; }
 .mission.done .mi { background: var(--mata); color: #fff; }
 .mission b { display: block; font-size: 1.05rem; font-weight: 800; }
 .mission small { display: block; color: var(--cinza); font-weight: 600; font-size: .78rem; line-height: 1.3; }
-.mission .go { font-size: 1.4rem; color: var(--coral); font-weight: 800; }
-.mission.boss { border-color: var(--coral); }
+.mission .go { font-size: 1.4rem; color: var(--mar); font-weight: 800; }
+.mission.boss { border-color: var(--mar); }
 .scene, .lab, .ep { background: var(--papel); border: 1px solid var(--cinza-claro); border-radius: 12px;
   padding: 13px 14px; text-align: left; color: inherit; display: flex; flex-direction: column; gap: 3px; position: relative;
   transition: transform .08s; }
@@ -312,14 +363,14 @@ html[data-theme="dark"] .hud .muted { color: var(--mar); }
   color: var(--coral); white-space: nowrap; animation: rise .4s ease backwards; }
 .hearts .over { font-size: .72rem; font-weight: 900; color: var(--coral); vertical-align: middle; }
 .combo { font-weight: 800; color: var(--coral); white-space: nowrap; }
-/* el rumbo: una línea que avanza, del sol al atardecer */
+/* el camino de la ronda: un Maibaum que crece */
 .progressline { flex: 1 1 140px; height: 8px; background: color-mix(in srgb, var(--papel) 55%, transparent); border-radius: 99px;
   overflow: hidden; min-width: 0; }
-.progressline i { display: block; height: 100%; background: linear-gradient(90deg, var(--sol), var(--coral)); border-radius: 99px;
+.progressline i { display: block; height: 100%; background: var(--maibaum); border-radius: 99px;
   transition: width .5s cubic-bezier(.2,.8,.2,1); }
 #quit, #lesquit { padding: 6px 12px; border: none; background: transparent; font-size: 1.1rem; color: var(--cinza); }
 body.ingame #app > .card::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 6px;
-  background: var(--calcadao); opacity: .9; }
+  background: var(--rauten) repeat-x 0 0 / 10px 6px; opacity: .9; }
 .prompt { color: var(--cinza); font-size: .9rem; font-weight: 600; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
 .stem .gap { color: var(--mar); border-bottom: 3px solid var(--mar); padding: 0 18px; }
 .stem .gap.n { display: inline-grid; place-items: center; min-width: 30px; height: 26px; padding: 0 8px; margin: 0 2px;
@@ -335,8 +386,8 @@ html[data-theme="dark"] .stem .gap.n { color: var(--sol); }
 .opt::before { counter-increment: opt; content: counter(opt); position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
   width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-size: .9rem;
   font-weight: 800; color: var(--cinza); border: 1.5px solid var(--cinza-claro); }
-@media (hover: hover) { .opt:hover:not(:disabled) { border-color: var(--coral); } }
-.opt:active:not(:disabled) { transform: scale(.99); border-color: var(--coral); }
+@media (hover: hover) { .opt:hover:not(:disabled) { border-color: var(--mar); } }
+.opt:active:not(:disabled) { transform: scale(.99); border-color: var(--mar); }
 .opt.right { border-color: var(--mata); background: color-mix(in srgb, var(--mata) 14%, var(--papel)); color: var(--mata-escuro);
   animation: bump .35s cubic-bezier(.3,1.6,.5,1); }
 .opt.right::before { content: "✓"; color: #fff; background: var(--mata); border-color: var(--mata); }
@@ -349,8 +400,8 @@ html[data-theme="dark"] .opt.right { color: var(--mata-claro); } html[data-theme
   flex: 1; min-width: 0; padding: 14px 16px; border-radius: 12px; background: var(--papel);
   border: 1.5px solid var(--cinza-claro); color: inherit; font: inherit; font-size: 1.08rem; font-weight: 700; }
 .typed textarea { flex: 1 1 100%; resize: none; overflow: hidden; line-height: 1.4; min-height: 54px; }
-.typed input:focus, .typed textarea:focus { border-color: var(--coral);
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--coral) 15%, transparent); }
+.typed input:focus, .typed textarea:focus { border-color: var(--mar);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--mar) 15%, transparent); }
 .accents button { border: 1.5px solid var(--cinza-claro); background: var(--papel); color: inherit;
   border-radius: 10px; padding: 7px 12px; font-weight: 700; }
 .accents button:active { background: var(--areia); }
@@ -360,11 +411,11 @@ html[data-theme="dark"] .opt.right { color: var(--mata-claro); } html[data-theme
 .tile { border: 1.5px solid var(--cinza-claro); background: var(--papel); color: inherit;
   border-radius: 10px; padding: 10px 15px; font-weight: 700; font-size: 1.05rem;
   transition: transform .06s, opacity .2s, border-color .15s; }
-.tile:active:not(:disabled) { transform: scale(.97); border-color: var(--coral); }
-.tile.on { border-color: var(--coral); }
+.tile:active:not(:disabled) { transform: scale(.97); border-color: var(--mar); }
+.tile.on { border-color: var(--mar); }
 
 .bigplay { width: 92px; height: 92px; border-radius: 50%; border: none; font-size: 2.3rem;
-  background: var(--coral); color: #fff; margin: 6px 0 8px; transition: transform .08s; }
+  background: var(--boton); color: var(--boton-tinta); margin: 6px 0 8px; transition: transform .08s; }
 .peek { margin: 8px 0; font-weight: 600; color: var(--mata); }
 .words .hit { color: var(--mata); }
 .words .miss { color: var(--coral); text-decoration: underline dotted; }
@@ -374,15 +425,15 @@ html[data-theme="dark"] .opt.right { color: var(--mata-claro); } html[data-theme
   padding: 3px 10px; border-radius: 4px; margin-bottom: 8px; }
 .lescard.quiz .badge-new { color: var(--coral); background: color-mix(in srgb, var(--coral) 10%, transparent); }
 
-/* el veredicto: una hoja que sube desde abajo, con el «Muito bem!» en Fraunces */
+/* el veredicto: una hoja que sube desde abajo, con el «Richtig!» en gótica */
 .feedback { margin-top: 16px; padding: 14px 16px; border-radius: 12px;
             border-left: 4px solid var(--cinza); background: var(--areia); animation: slide .22s ease; }
 .feedback.giusto { border-color: var(--mata); }
 .feedback.quasi { border-color: var(--sol); }
 .feedback.sbagliato { border-color: var(--coral); }
-.feedback .verdict { font-family: var(--serif); font-size: 1.45rem; font-weight: 800;
-  letter-spacing: -.005em; margin-bottom: 6px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-.xpgain { font-size: .85rem; font-weight: 800; background: var(--sol); color: #3a2a00;
+.feedback .verdict { font-family: var(--serif); font-size: 1.75rem; font-weight: 700;
+  letter-spacing: .005em; margin-bottom: 6px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.xpgain { font-size: .85rem; font-weight: 800; font-family: var(--sans); background: var(--sol); color: #3a2600;
   padding: 2px 10px; border-radius: 99px; animation: pop .4s cubic-bezier(.3,1.6,.5,1) .15s both; }
 
 body.ingame .feedback:not(.prompt) {
@@ -393,16 +444,16 @@ body.ingame .feedback:not(.prompt) {
   animation: sheet .32s cubic-bezier(.2,.9,.25,1.05);
 }
 @media (min-width: 700px) { body.ingame .feedback:not(.prompt) { left: 50%; width: 660px; margin-left: -330px; } }
-/* correcto: la mata; casi: la arena al sol; incorrecto: el coral del atardecer */
-body.ingame .feedback.giusto { background: #dcf5e4; color: #0e5530; border-top-color: var(--mata); }
-body.ingame .feedback.quasi { background: #fff0c4; color: #5a4100; border-top-color: var(--sol); }
-body.ingame .feedback.sbagliato { background: #ffe2d6; color: #7a2811; border-top-color: var(--coral); }
+/* correcto: el verde de los abetos; casi: el oro de la cerveza; incorrecto: el rojo de los geranios */
+body.ingame .feedback.giusto { background: #dff1e1; color: #164a20; border-top-color: var(--mata); }
+body.ingame .feedback.quasi { background: #fdf0c8; color: #563d00; border-top-color: var(--sol); }
+body.ingame .feedback.sbagliato { background: #fbe1df; color: #7c1b1b; border-top-color: var(--coral); }
 @media (prefers-color-scheme: dark) {
   html:not([data-theme="light"]) body.ingame .feedback.giusto { background: #0f3b2a; color: #d6f6e3; } html:not([data-theme="light"]) body.ingame .feedback.quasi { background: #3a2f10; color: #ffefc2; } html:not([data-theme="light"]) body.ingame .feedback.sbagliato { background: #44201a; color: #ffdccf; }
 }
 html[data-theme="dark"] body.ingame .feedback.giusto { background: #0f3b2a; color: #d6f6e3; } html[data-theme="dark"] body.ingame .feedback.quasi { background: #3a2f10; color: #ffefc2; } html[data-theme="dark"] body.ingame .feedback.sbagliato { background: #44201a; color: #ffdccf; }
 body.ingame .feedback.giusto #next, body.ingame .feedback.giusto #lesnext2 { background: var(--mata); }
-body.ingame .feedback.quasi #next { background: var(--sol); color: #3a2a00; }
+body.ingame .feedback.quasi #next { background: var(--sol); color: #3a2600; }
 body.ingame .feedback.sbagliato #next, body.ingame .feedback.sbagliato #lesnext2 { background: var(--coral); }
 .feedback.prompt { display: block; color: inherit; font-size: inherit; font-weight: inherit; margin-bottom: 0;
   border-left-width: 4px; border-color: var(--sol); border-radius: 12px;
@@ -425,10 +476,10 @@ html[data-theme="dark"] .diag .tag { color: var(--coral-claro); }
 .diff b.fix { color: var(--mata); font-weight: 800; }
 .selfrepair { color: var(--mata); font-weight: 650; }
 .fixerr .w.missed { background: color-mix(in srgb, var(--sol) 35%, transparent); }
-.scorebig b { font-family: var(--serif); font-size: 3.4rem; line-height: 1; font-weight: 900; letter-spacing: -.02em; color: var(--mar); }
+.scorebig b { font-family: var(--serif); font-size: 3.8rem; line-height: 1; font-weight: 800; letter-spacing: 0; color: var(--mar); }
 .scorebig span { color: var(--cinza); font-weight: 700; background: var(--areia); padding: 4px 12px; border-radius: 99px; }
 .lesdone .bigstar { font-size: 5rem; line-height: 1; color: var(--sol); animation: starpop .7s cubic-bezier(.3,1.6,.5,1); }
-.lampobar i { background: linear-gradient(90deg, var(--coral), var(--sol)); transition: width .1s linear; }
+.lampobar i { background: linear-gradient(90deg, var(--mar), var(--sol)); transition: width .1s linear; }
 
 /* ------------------------------------------------------------------- teoría */
 
@@ -478,7 +529,7 @@ ul.reqs li.ok { color: var(--mata); font-weight: 700; }
 textarea.scrivi { width: 100%; box-sizing: border-box; min-height: 160px; resize: none; overflow: hidden;
   font: inherit; font-size: 1.05rem; line-height: 1.5; padding: 14px; border-radius: 12px;
   border: 1.5px solid var(--cinza-claro); background: var(--papel); color: var(--tinta); }
-textarea.scrivi:focus { border-color: var(--coral); }
+textarea.scrivi:focus { border-color: var(--mar); }
 .scrivi-marked mark.bad { background: color-mix(in srgb, var(--coral) 22%, transparent); text-decoration: underline wavy var(--coral); }
 .scrivi-marked mark.soft { background: color-mix(in srgb, var(--sol) 20%, transparent); }
 ol.findings li { padding: 6px 0; border-top: 1px solid var(--cinza-claro); }
@@ -507,9 +558,9 @@ details.aibox input, .card input#aikey, .card input#gemkey, .card input#gisttoke
   .stat span { font-size: .6875rem; letter-spacing: .02em; }
   .mode { width: 34px; height: 34px; font-size: .95rem; }
   .ring { width: 36px; height: 36px; } .ring b { width: 28px; height: 28px; font-size: .68rem; }
-  .placa { padding: 4px 9px 3px; } .placa .p-rua { font-size: 1rem; } .placa .p-sup { font-size: .52rem; }
-  h1 { font-size: 1.85rem; margin-top: 16px; }
-  h1.hello { font-size: 2rem; }
+  .placa { padding: 8px 9px 3px; } .placa .p-rua { font-size: 1.15rem; } .placa .p-sup { font-size: .52rem; }
+  h1 { font-size: 2rem; margin-top: 16px; }
+  h1.hello { font-size: 2.2rem; }
   .card { padding: 16px; }
   .stem { font-size: 1.38rem; }
 }
@@ -554,7 +605,7 @@ mark.hl { background: color-mix(in srgb, var(--sol) 38%, transparent); color: in
 ul.exs.look .it { font-size: 1.08rem; color: var(--tinta); font-weight: 600; }
 .rowcard { border: 1px solid var(--cinza-claro); border-radius: 14px; padding: 12px 16px;
   background: var(--papel); box-shadow: var(--sombra); }
-.rowcard .rc-h { font-weight: 800; font-size: 1.1rem; margin-bottom: 4px; color: var(--mata-escuro); }
+.rowcard .rc-h { font-weight: 800; font-size: 1.1rem; margin-bottom: 4px; color: var(--mar-escuro); }
 .rowcard .rc-line { display: flex; align-items: baseline; gap: 10px; padding: 5px 0; border-top: 1px dashed var(--cinza-claro); }
 .rowcard .rc-k { display: block; font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; color: var(--cinza); }
 

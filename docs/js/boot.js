@@ -32,9 +32,9 @@
     // missing: los archivos del paquete que todavía no tiene (el núcleo
     // anda sin ellos: sin frases, lecturas, radio, examen…).
     de: { name: "Deutsch", flag: "🇩🇪", brand: "Weg C1", storage: "wegc1",
-          blurb: "Alemán desde cero: las primeras seis semanas de A1, con Berlín de fondo. En construcción.",
-          themeColor: { light: "#c9d6e4", dark: "#121a26" }, bg: "#f6f4ef",
-          fonts: [],
+          blurb: "Alemán desde cero: las primeras seis semanas de A1, con los Alpes y el cielo blanco y azul de Baviera. En construcción.",
+          themeColor: { light: "#bfdcf3", dark: "#13253c" }, bg: "#f7f5f0",
+          fonts: ["fonts/grenze-gotisch.woff2"],
           missing: ["conjugator.js", "frasi_data.js", "trabajo_data.js", "formule_data.js", "lab_data.js",
                     "letture_settimana.js", "tramo_data.js", "letture_data.js", "mapas_data.js", "diagnosi.js", "scrivi.js",
                     "freq_data.js", "ascolto_data.js", "dictogloss_data.js", "esame_data.js",
@@ -130,7 +130,7 @@
   function dress(code) {
     var L = LANGS[code], doc = document;
     doc.documentElement.setAttribute("data-lang", code);
-    doc.title = L.brand + " — " + L.name.toLowerCase();
+    doc.title = L.brand + " — " + (code === "de" ? L.name : L.name.toLowerCase());
     Array.prototype.forEach.call(doc.querySelectorAll('meta[name="theme-color"]'), function (m) {
       m.content = /dark/.test(m.media || "") ? L.themeColor.dark : L.themeColor.light;
     });
@@ -178,7 +178,8 @@
 
   /* El selector: una tarjeta por idioma, cada una con su mundo (el cielo
      de una plaza italiana y su placa de travertino; el mar de Ipanema, las
-     ondas del calçadão y la placa azul de Río). */
+     ondas del calçadão y la placa azul de Río; el cielo de Baviera con sus
+     Rauten, los Alpes y el cartel de madera de un Wirtshaus). */
   var PLATE = { it: ["la", "Via C1"], pt: ["rua", "Rumo C1"], de: ["der", "Weg C1"] };
   function picker() {
     var app = document.getElementById("app");
