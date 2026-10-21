@@ -26,7 +26,11 @@ ok(["ä", "ö", "ü", "ß"].every(function (c) { return LANG.ui.keys.indexOf(c) 
 
 /* ------------------------------------------------ el curso */
 ok(course.weeks.length >= 6, "semanas: " + course.weeks.length);
-ok(course.seasons.length === 1 && course.seasons[0].weeks[1] === course.weeks.length, "la temporada cubre las semanas");
+ok(course.weeks.length === 52, "de A1 a C1: 52 semanas");
+// the seasons follow one another with no gap and cover every week
+ok(course.seasons.every(function (s, k) { return s.n === k + 1 && s.weeks[0] === (k ? course.seasons[k - 1].weeks[1] + 1 : 1); }) &&
+   course.seasons[course.seasons.length - 1].weeks[1] === course.weeks.length, "las temporadas cubren las semanas");
+ok(course.weeks.every(function (w) { var s = course.seasons[w.season - 1]; return s && w.week >= s.weeks[0] && w.week <= s.weeks[1]; }), "cada semana en su temporada");
 
 var ids = {}, map = {};
 course.items.forEach(function (it) {

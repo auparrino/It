@@ -6,7 +6,7 @@ Una sola app para hispanohablantes rioplatenses con dos cursos completos y uno q
 |---|---|---|---|
 | 🇮🇹 **La Via C1** | Italiano, de cero a C1 (CILS / CELI / PLIDA) | La Costiera Amalfitana: mayólicas, limones, Playfair Display | [README-italiano.md](README-italiano.md) |
 | 🇧🇷 **Rumo C1** | Portugués de Brasil, de cero a C1 (Celpe-Bras) | Carioca: el calçadão, el mar de Ipanema, el Pão de Açúcar | [README-portugues.md](README-portugues.md) |
-| 🇩🇪 **Weg C1** | Alemán desde cero: por ahora las seis semanas de A1 (Goethe-Zertifikat A1), en construcción | Berlín: el rojo, el negro y el oro, el azul del Spree | [README-aleman.md](README-aleman.md) |
+| 🇩🇪 **Weg C1** | Alemán desde cero hasta C1 en 52 semanas (los niveles del Goethe-Zertifikat, A1 a C1) | Berlín: el rojo, el negro y el oro, el azul del Spree | [README-aleman.md](README-aleman.md) |
 
 Los tres comparten el mismo motor y la misma didáctica (el alemán, por ahora, con lo esencial): 52 semanas en cuatro
 estaciones con jefes, lecciones en pasos cortos con chequeos, repaso

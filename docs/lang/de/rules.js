@@ -3,7 +3,7 @@
  * corrección, el guardado, los rangos y las medallas, los distractores de
  * los ejercicios, las trampas de las lecciones y el banco.
  *
- * El paquete arranca chico (las seis semanas de A1): no hay todavía
+ * El curso tiene sus 52 semanas, pero el paquete no trae todavía
  * conjugador, diagnóstico ni banco alemanes; lo que el núcleo les pide a
  * esas piezas queda acá con lo justo, para que crezca cuando lleguen.
  */
@@ -274,8 +274,8 @@
               ["Präsens", "Perfekt", "Präteritum", "Futur", "Konjunktiv II", "Imperativ", "Passiv"]],
 
     banca: {
-      // El nivel del recorrido: por ahora, las seis semanas de A1.
-      levels: [6, 16, 27, 40],
+      // La última semana de A1, A2, B1 y B2 en el temario (tools/de/TEMARIO.md).
+      levels: [10, 20, 32, 42],
       verbPair: ["sein", "haben"],
       verbPairTags: ["sein", "haben", "presente"],
       clitics: ["mich", "dich", "ihn", "sie", "es", "uns", "euch"],

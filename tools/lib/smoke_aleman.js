@@ -1,5 +1,5 @@
-/* El alemán en el navegador (docs/lang/de/: las seis semanas de A1, en
-   construcción).  Elige Deutsch en el selector, pasa el primer arranque,
+/* El alemán en el navegador (docs/lang/de/: las 52 semanas, de A1 a C1,
+   sin todos los módulos todavía).  Elige Deutsch en el selector, pasa el primer arranque,
    recorre Heute, el Weg, la semana 1 con su lección y su ronda, la pausa,
    el repaso e Ich, y cambia de idioma y vuelve: ningún error de la página,
    ningún archivo pedido que no exista, y lo que el paquete todavía no tiene

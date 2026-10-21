@@ -83,8 +83,8 @@
       '<div class="row onb-foot"><button class="btn" id="obnext">Siguiente</button><button class="tab" id="obskip">Saltar</button></div>';
   }
   function etaFor(min, days) {
-    // A course under construction (LANG.ui.partial) has no date for C1.
-    if (!P() || UI().partial) return "";
+    // A course under construction (LANG.ui.partial.pace) has no date for C1.
+    if (!P() || (UI().partial || {}).pace) return "";
     var pace = min * days / P().weekMinutes(1), d = new Date(Date.now() + 52 / Math.max(0.05, pace) * 7 * DAY);
     return "A ese ritmo, llegás a C1 en " + P().fmtMonth(d) + ".";
   }

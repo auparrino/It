@@ -28,11 +28,11 @@
           blurb: "Portugués de Brasil hasta C1, con el calçadão de Copacabana de fondo.",
           themeColor: { light: "#9fdcea", dark: "#071a26" }, bg: "#fbf4e6",
           fonts: ["fonts/fraunces-normal.woff2", "fonts/fraunces-italic.woff2"] },
-    // El alemán arranca chico: las seis semanas de A1 (en construcción).
+    // El alemán: las 52 semanas de A1 a C1, sin todos los módulos todavía.
     // missing: los archivos del paquete que todavía no tiene (el núcleo
     // anda sin ellos: sin frases, lecturas, radio, examen…).
     de: { name: "Deutsch", flag: "🇩🇪", brand: "Weg C1", storage: "wegc1",
-          blurb: "Alemán desde cero: las primeras seis semanas de A1, con los Alpes y el cielo blanco y azul de Baviera. En construcción.",
+          blurb: "Alemán desde cero hasta C1 en un año, con los Alpes y el cielo blanco y azul de Baviera.",
           themeColor: { light: "#bfdcf3", dark: "#13253c" }, bg: "#f7f5f0",
           fonts: ["fonts/grenze-gotisch.woff2"],
           missing: ["conjugator.js", "frasi_data.js", "trabajo_data.js", "formule_data.js", "lab_data.js",

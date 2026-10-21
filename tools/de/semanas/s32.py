@@ -1,0 +1,266 @@
+# -*- coding: utf-8 -*-
+"""Semana 32 — Eine Entscheidung treffen (B1): Nomen-Verb-Verbindungen en el trabajo."""
+from base import q, ch, li, cz, tr, ty, MAY  # noqa: F401
+
+
+def _nc(*xs):
+    """Cada variante, también sin comas (la corrección no saca las comas del medio)."""
+    out = []
+    for x in xs:
+        for y in (x, x.replace(",", "")):
+            if y not in out:
+                out.append(y)
+    return out
+
+
+WEEK = {
+    "week": 32,
+    "title": "Eine Entscheidung treffen",
+    "level": "B1",
+    "focus": "Las Nomen-Verb-Verbindungen: un sustantivo que pone el significado y un verbo que casi solo pone la gramática.",
+    "fare": "Participar en una reunión de trabajo: proponer, preguntar, avisar, poner algo a disposición y tomar decisiones con las fórmulas de la oficina.",
+    "tema": "Nomen-Verb-Verbindungen (treffen, stellen, nehmen, kommen, bringen, stehen), Bescheid, reuniones, el mundo laboral",
+    "keys": [
+        "*eine Entscheidung treffen* = *entscheiden*: el sustantivo da el sentido; el verbo, la gramática.",
+        "El verbo se conjuga y el sustantivo queda al final: *Er hat keine Entscheidung getroffen*.",
+        "Negación: *keine Frage stellen*, pero *nicht in Frage kommen*.",
+        "Pares: *zur Verfügung stellen* (alguien da) / *zur Verfügung stehen* (está disponible).",
+        "*Bescheid sagen* + dativo, sin artículo: *Sag mir Bescheid!*",
+        "*in Frage kommen* = ser una opción; *in Frage stellen* = poner en duda.",
+    ],
+    "lesson": {
+        "intro": "En la oficina casi nadie dice *entscheiden* a secas: dice *eine Entscheidung treffen*. Estas parejas fijas de sustantivo y verbo (Nomen-Verb-Verbindungen) son el idioma de las reuniones, los mails de trabajo y los diarios. El castellano también las tiene (tomar una decisión, dar aviso), pero el verbo casi nunca coincide.",
+        "parts": [
+            {"h": "Qué son y cómo funcionan", "blocks": [0, 1]},
+            {"h": "Las más usadas en el trabajo", "blocks": [2, 3, 4]},
+            {"h": "En la reunión", "blocks": [5, 6]},
+        ],
+        "blocks": [
+            {
+                "h": "Un sustantivo y un verbo casi vacío",
+                "r": "Una **Nomen-Verb-Verbindung** es un sustantivo más un verbo que juntos dicen lo mismo que un solo verbo: *eine Entscheidung treffen* = *entscheiden*. El **significado lo pone el sustantivo**; el verbo (*treffen, stellen, nehmen, machen, geben, kommen, bringen*) aporta poco, por eso hay que aprender la pareja entera.",
+                "table": {"head": ["Nomen-Verb-Verbindung", "Verbo simple", "Castellano"], "rows": [
+                    ["eine Entscheidung treffen", "entscheiden", "tomar una decisión"],
+                    ["eine Frage stellen", "fragen", "hacer una pregunta"],
+                    ["einen Vorschlag machen", "vorschlagen", "hacer una propuesta"],
+                    ["eine Antwort geben", "antworten", "dar una respuesta"],
+                    ["Kritik üben", "kritisieren", "criticar, formular críticas"],
+                    ["Bescheid sagen", "informieren", "avisar"],
+                ]},
+                "ex": [
+                    ["Wir müssen heute *eine Entscheidung treffen*.", "Hoy tenemos que tomar una decisión."],
+                    ["Darf ich *eine Frage stellen*?", "¿Puedo hacer una pregunta?"],
+                    ["Meine Kollegin *macht einen Vorschlag*.", "Mi compañera hace una propuesta."],
+                    ["Der Bericht *übt* scharfe *Kritik* an der Firma.", "El informe critica duramente a la empresa."],
+                ],
+                "warn": "No traduzcas el verbo del castellano: «tomar una decisión» no es *eine Entscheidung nehmen* sino ***treffen***; «hacer una pregunta» no es *eine Frage machen* sino ***stellen***.",
+                "tip": "Anotá siempre la pareja completa, con artículo y preposición: *die Entscheidung — treffen*, *die Frage — stellen*.",
+                "q": [
+                    q("Completá: *Wir müssen eine Entscheidung ___.*", "treffen", ["treffen", "nehmen", "machen"]),
+                    q("¿Qué verbo simple equivale a *eine Frage stellen*?", "fragen", ["fragen", "stellen", "antworten"]),
+                ],
+            },
+            {
+                "h": "El verbo se conjuga, el sustantivo se queda",
+                "r": "El verbo funcional hace **todo el trabajo gramatical**: se conjuga, va en posición 2, se va al final con un modal, en Perfekt o en una subordinada. El sustantivo (o la frase con preposición) queda **al final del campo medio, pegado al verbo**, como un prefijo separable. Para negar: si el sustantivo lleva *ein*, va ***kein***; si es una frase fija con preposición, va ***nicht*** justo antes.",
+                "ex": [
+                    ["Die Chefin *trifft* morgen *eine Entscheidung*.", "La jefa toma mañana una decisión."],
+                    ["Sie *hat* noch *keine Entscheidung getroffen*.", "Todavía no tomó ninguna decisión."],
+                    ["Wir *müssen* den Kunden *Bescheid sagen*.", "Tenemos que avisarles a los clientes."],
+                    ["Ich weiß nicht, ob er *einen Vorschlag macht*.", "No sé si va a hacer una propuesta."],
+                    ["Das *kommt nicht in Frage*.", "Eso no es una opción. / Ni hablar."],
+                ],
+                "warn": "*Das kommt in Frage nicht* está mal: *nicht* va **antes** de la frase fija, nunca después. Y *Er hat nicht eine Entscheidung getroffen* suena raro: con *eine*, la negación normal es *keine*.",
+                "tip": "Pensá la Nomen-Verb-Verbindung como un verbo separable largo: *Bescheid … sagen* se comporta igual que *an … rufen*.",
+                "q": [
+                    q("¿Cuál es correcta?", "Das kommt nicht in Frage.", ["Das kommt nicht in Frage.", "Das kommt in Frage nicht.", "Das nicht kommt in Frage."]),
+                    q("Completá: *Wir haben noch ___ Entscheidung getroffen.*", "keine", ["keine", "nicht", "kein"]),
+                ],
+            },
+            {
+                "h": "Con treffen, stellen y nehmen",
+                "r": "Tres verbos arman muchísimas Nomen-Verb-Verbindungen de la oficina. Fijate que varias llevan **preposición fija** con su caso.",
+                "table": {"head": ["Alemán", "Castellano"], "rows": [
+                    ["eine Entscheidung treffen", "tomar una decisión"],
+                    ["eine Vereinbarung treffen", "llegar a un acuerdo"],
+                    ["eine Frage stellen", "hacer una pregunta"],
+                    ["einen Antrag stellen", "presentar una solicitud"],
+                    ["Rücksicht nehmen auf + Akk.", "tener consideración con"],
+                    ["Stellung nehmen zu + Dat.", "tomar posición sobre, opinar sobre"],
+                    ["etwas in Anspruch nehmen", "llevar (tiempo), hacer uso de"],
+                    ["etwas zur Kenntnis nehmen", "tomar nota de algo"],
+                ]},
+                "ex": [
+                    ["Wir haben mit der Firma *eine Vereinbarung getroffen*.", "Llegamos a un acuerdo con la empresa."],
+                    ["Bitte *nehmen* Sie *Rücksicht auf* die Kollegen im Großraumbüro.", "Por favor, tenga consideración con los compañeros de la oficina abierta."],
+                    ["Der Abteilungsleiter *nimmt* morgen *zu* dem Vorschlag *Stellung*.", "El jefe de área se pronuncia mañana sobre la propuesta."],
+                    ["Das Projekt *nimmt* viel Zeit *in Anspruch*.", "El proyecto lleva mucho tiempo."],
+                    ["Ich habe Ihre Mail *zur Kenntnis genommen*.", "Tomé nota de su mail."],
+                ],
+                "warn": "Aunque en castellano digas «tomar», no siempre es *nehmen*: «tomar una decisión» es *treffen*. Y al revés: *Rücksicht nehmen* no se traduce con «tomar» sino con «tener consideración».",
+                "q": [
+                    q("Completá: *Bitte nehmen Sie Rücksicht ___ die Nachbarn.*", "auf", ["auf", "an", "für"]),
+                    q("*Das nimmt viel Zeit in Anspruch* significa…", "Eso lleva mucho tiempo.", ["Eso lleva mucho tiempo.", "Eso ahorra mucho tiempo.", "Eso reclama por el tiempo."]),
+                ],
+            },
+            {
+                "h": "Con kommen, stehen, bringen: el par activo y el par sin agente",
+                "r": "Muchas Nomen-Verb-Verbindungen con preposición vienen **de a pares**. Con *stellen* o *bringen*, **alguien hace** algo (tiene objeto en acusativo). Con *stehen* o *kommen*, el asunto **está** o **llega** solo, sin que se diga quién: es casi una pasiva.",
+                "table": {"head": ["Alguien lo hace", "Pasa / está", "Castellano"], "rows": [
+                    ["etwas zur Verfügung stellen", "zur Verfügung stehen", "poner / estar a disposición"],
+                    ["etwas zur Sprache bringen", "zur Sprache kommen", "plantear un tema / salir el tema"],
+                    ["etwas zum Abschluss bringen", "zum Abschluss kommen", "concluir algo / llegar a su fin"],
+                    ["etwas in Gang bringen", "in Gang kommen", "poner en marcha / arrancar"],
+                    ["etwas zum Ausdruck bringen", "zum Ausdruck kommen", "expresar algo / expresarse"],
+                ]},
+                "ex": [
+                    ["Die Firma *stellt* uns einen Laptop *zur Verfügung*.", "La empresa nos pone una laptop a disposición."],
+                    ["Der Raum *steht* Ihnen den ganzen Tag *zur Verfügung*.", "La sala está a su disposición todo el día."],
+                    ["Sie hat das Problem in der Sitzung *zur Sprache gebracht*.", "Ella planteó el problema en la reunión."],
+                    ["Auch das Budget *kam zur Sprache*.", "También salió el tema del presupuesto."],
+                    ["Endlich *kommt* das Projekt *in Gang*.", "Por fin arranca el proyecto."],
+                ],
+                "warn": "*in Frage kommen* y *in Frage stellen* **no** son un par: *Das kommt in Frage* = «es una opción, es posible»; *Er stellt den Plan in Frage* = «pone en duda el plan». *Das kommt nicht in Frage!* es un «¡ni hablar!» muy usado.",
+                "tip": "Las contracciones son fijas: *zur* (zu der), *zum* (zu dem). Y *in Frage* también se escribe junto: *infrage*; las dos formas están bien.",
+                "q": [
+                    q("Completá: *Der Drucker ___ allen zur Verfügung.*", "steht", ["steht", "stellt", "bringt"]),
+                    q("*Sie stellt den Plan in Frage* significa…", "Pone en duda el plan.", ["Pone en duda el plan.", "Pregunta por el plan.", "El plan es una opción."]),
+                ],
+            },
+            {
+                "h": "Bescheid: avisar y estar al tanto",
+                "r": "*Bescheid* es una palabra de todos los días, en la oficina y en casa. ***Bescheid sagen*** o ***Bescheid geben*** = avisar; ***Bescheid wissen*** = estar al tanto, saber de qué se trata. Va **sin artículo**, y la persona a la que avisás va en **dativo**.",
+                "ex": [
+                    ["Sag *mir* bitte *Bescheid*, wenn du fertig bist.", "Avisame cuando termines."],
+                    ["Ich *gebe Ihnen* morgen *Bescheid*.", "Le aviso mañana."],
+                    ["Kannst du *der Chefin Bescheid sagen*?", "¿Le podés avisar a la jefa?"],
+                    ["*Weißt* du über das neue Projekt *Bescheid*?", "¿Estás al tanto del proyecto nuevo?"],
+                ],
+                "warn": "*Sag mich Bescheid* es un error típico: la persona va en dativo, *mir*. Y no lleva artículo: nada de «einen Bescheid sagen». Con artículo, *der Bescheid* es otra cosa: la **resolución oficial** que te manda una oficina pública (*Ich habe einen Bescheid vom Amt bekommen*).",
+                "more": ["Más formal que *Bescheid sagen*: *jemanden in Kenntnis setzen* (poner a alguien en conocimiento). En un mail: *Bitte setzen Sie mich in Kenntnis, sobald…*"],
+                "q": [
+                    q("Completá: *Sag ___ bitte Bescheid!*", "mir", ["mir", "mich", "ich"]),
+                    q("*Ich weiß Bescheid* significa…", "Estoy al tanto.", ["Estoy al tanto.", "Te aviso.", "Recibí una resolución."]),
+                ],
+            },
+            {
+                "h": "¿Para qué usarlas? Registro y matiz",
+                "r": "El verbo simple y la Nomen-Verb-Verbindung no siempre son intercambiables. La versión con sustantivo suena **más formal** (empresa, administración, prensa) y a veces agrega un matiz: el **comienzo** (*in Gang kommen*), el **resultado** (*zum Abschluss bringen*) o la falta de agente (*zur Sprache kommen*). Algunas **no tienen** verbo simple: *Rücksicht nehmen, eine Rolle spielen, in Kraft treten*.",
+                "table": {"head": ["Más coloquial", "Más formal (Nomen-Verb-Verbindung)"], "rows": [
+                    ["Wir entscheiden morgen.", "Wir treffen morgen eine Entscheidung."],
+                    ["Ich möchte etwas fragen.", "Ich möchte eine Frage stellen."],
+                    ["Das geht auf keinen Fall.", "Das kommt nicht in Frage."],
+                    ["Die Firma gibt Ihnen einen Laptop.", "Die Firma stellt Ihnen einen Laptop zur Verfügung."],
+                    ["Wir sind mit dem Projekt fertig.", "Wir haben das Projekt zum Abschluss gebracht."],
+                    ["Das Gesetz gilt ab Mai.", "Das Gesetz tritt im Mai in Kraft."],
+                ]},
+                "ex": [
+                    ["Das neue Gesetz *tritt* am ersten Mai *in Kraft*.", "La nueva ley entra en vigor el primero de mayo."],
+                    ["Geld *spielt* dabei keine *Rolle*.", "La plata ahí no importa."],
+                ],
+                "warn": "No las metas en una charla con amigos: *Ich treffe heute die Entscheidung, Pizza zu essen* suena a acta de directorio. En la oficina y por escrito, en cambio, son lo normal.",
+                "q": [
+                    q("¿Cuál suena más formal?", "Wir treffen morgen eine Entscheidung.", ["Wir treffen morgen eine Entscheidung.", "Wir entscheiden morgen.", "Morgen entscheiden wir."]),
+                    q("Completá: *Das Gesetz tritt im Mai in ___.*", "Kraft", ["Kraft", "Gang", "Frage"]),
+                ],
+            },
+            {
+                "h": "El vocabulario de la reunión",
+                "r": "Una reunión (*die Sitzung*, *die Besprechung*) tiene su orden del día (*die Tagesordnung*), alguien que levanta el acta (*das Protokoll*) y, al final, una votación (*die Abstimmung*) y una resolución (*der Beschluss*). Cada palabra viene con **su verbo fijo**.",
+                "table": {"head": ["Alemán", "Castellano"], "rows": [
+                    ["etwas auf die Tagesordnung setzen", "poner algo en el orden del día"],
+                    ["das Protokoll führen", "levantar el acta"],
+                    ["einen Einwand erheben", "plantear una objeción"],
+                    ["zur Abstimmung kommen", "someterse a votación"],
+                    ["einen Beschluss fassen", "tomar una resolución"],
+                    ["Zustimmung finden", "obtener aprobación"],
+                    ["eine Rolle spielen", "tener importancia, jugar un papel"],
+                ]},
+                "ex": [
+                    ["Was steht heute *auf der Tagesordnung*?", "¿Qué hay hoy en el orden del día?"],
+                    ["Frau Weber *führt* heute *das Protokoll*.", "La señora Weber levanta hoy el acta."],
+                    ["Der Vorschlag *kommt* morgen *zur Abstimmung*.", "La propuesta se vota mañana."],
+                    ["Am Ende hat der Vorstand *einen Beschluss gefasst*.", "Al final, el directorio tomó una resolución."],
+                    ["Die Idee hat breite *Zustimmung gefunden*.", "La idea obtuvo amplia aprobación."],
+                ],
+                "warn": "*einen Beschluss fassen*, no *machen*; *einen Einwand erheben*, no *machen*. Fijate también en el caso: *etwas **auf die** Tagesordnung setzen* (acusativo, movimiento) pero *Das steht **auf der** Tagesordnung* (dativo, lugar), como en la semana 14.",
+                "q": [
+                    q("Completá: *Der Vorstand hat einen Beschluss ___.*", "gefasst", ["gefasst", "gemacht", "genommen"]),
+                    q("Completá: *Wer führt heute das ___?*", "Protokoll", ["Protokoll", "Beschluss", "Bescheid"]),
+                ],
+            },
+        ],
+    },
+    "vocab": [
+        ["die Sitzung", "la reunión, la sesión", "Die Sitzung beginnt um zehn Uhr."],
+        ["die Tagesordnung", "el orden del día", "Was steht heute auf der Tagesordnung?"],
+        ["das Protokoll", "el acta", "Wer führt heute das Protokoll?"],
+        ["der Beschluss", "la resolución, la decisión formal", "Der Vorstand hat einen Beschluss gefasst."],
+        ["die Abstimmung", "la votación", "Der Vorschlag kommt morgen zur Abstimmung."],
+        ["der Vorschlag", "la propuesta", "Meine Kollegin hat einen guten Vorschlag gemacht."],
+        ["die Zustimmung", "la aprobación, el apoyo", "Die Idee hat viel Zustimmung gefunden."],
+        ["der Vorstand", "el directorio, la comisión directiva", "Der Vorstand trifft sich einmal im Monat."],
+        ["die Vereinbarung", "el acuerdo", "Wir haben eine Vereinbarung getroffen."],
+        ["der Bescheid", "el aviso; la resolución oficial", "Gib mir bitte Bescheid, wenn du ankommst."],
+        ["die Verfügung", "la disposición", "Der Raum steht Ihnen den ganzen Tag zur Verfügung."],
+        ["der Kompromiss", "el acuerdo intermedio, la solución de compromiso", "Nach langer Diskussion haben wir einen Kompromiss geschlossen."],
+        ["das Anliegen", "el asunto, el pedido (que alguien plantea)", "Ich habe ein Anliegen: Können wir über mein Gehalt sprechen?"],
+        ["der Anspruch", "el derecho, la pretensión", "Die Renovierung nimmt viel Zeit in Anspruch."],
+        ["die Kenntnis", "el conocimiento (de un hecho)", "Ich habe Ihre Nachricht zur Kenntnis genommen."],
+    ],
+    "items": [
+        # parte 0 — qué son y cómo funcionan
+        ch(0, "Elegí el verbo.", "Wir müssen heute eine Entscheidung ___.", "treffen", ["treffen", "nehmen", "machen"], "«Tomar una decisión» = *eine Entscheidung treffen*, nunca *nehmen*."),
+        ch(0, "Elegí el verbo.", "Darf ich Ihnen eine Frage ___?", "stellen", ["stellen", "machen", "geben"], "«Hacer una pregunta» = *eine Frage stellen*."),
+        ch(0, "¿Qué verbo simple equivale?", "einen Vorschlag machen", "vorschlagen", ["vorschlagen", "versprechen", "vorstellen"], "*der Vorschlag* viene de *vorschlagen* (proponer)."),
+        ch(0, "¿Qué verbo simple equivale?", "Kritik üben", "kritisieren", ["kritisieren", "trainieren", "korrigieren"], "Acá *üben* no es «practicar»: *Kritik üben* = criticar, en registro formal."),
+        ch(0, "Elegí la negación.", "Der Chef hat noch ___ Entscheidung getroffen.", "keine", ["keine", "nicht", "kein"], "Sustantivo con artículo indefinido → *kein*, declinado: *keine Entscheidung*."),
+        ch(0, "Elegí la oración correcta.", "(Eso no es una opción.)", "Das kommt nicht in Frage.", ["Das kommt nicht in Frage.", "Das kommt in Frage nicht.", "Das nicht kommt in Frage."], "*nicht* va justo antes de la frase fija."),
+        ch(0, "Elegí el orden correcto.", "(Ella todavía no tomó una decisión.)", "Sie hat noch keine Entscheidung getroffen.", ["Sie hat noch keine Entscheidung getroffen.", "Sie hat getroffen noch keine Entscheidung.", "Sie hat noch getroffen keine Entscheidung."], "Perfekt: el participio al final y el sustantivo justo antes."),
+        ch(0, "Elegí el orden correcto.", "(… porque él hace una propuesta.)", "…, weil er einen Vorschlag macht.", ["…, weil er einen Vorschlag macht.", "…, weil er macht einen Vorschlag.", "…, weil macht er einen Vorschlag."], "Con *weil* el verbo conjugado va al final, detrás del sustantivo."),
+        cz(0, "Escribí el verbo que falta.", "Ich möchte eine Frage ___.", "stellen", note="*eine Frage stellen*: con el modal, el verbo va al final en infinitivo."),
+        cz(0, "Escribí el participio de *treffen*.", "Wir haben gestern eine Entscheidung ___.", "getroffen", note="*treffen – traf – getroffen*."),
+        cz(0, "Escribí la forma de *machen*.", "Mein Kollege ___ immer gute Vorschläge.", "macht", note="*einen Vorschlag machen*; acá en plural: *Vorschläge machen*."),
+        cz(0, "Escribí la negación.", "Das kommt ___ in Frage!", "nicht", note="Frase fija con preposición → *nicht*."),
+        cz(0, "Escribí la negación.", "Er hat mir ___ Antwort gegeben.", "keine", note="*eine Antwort* → *keine Antwort*."),
+        tr(0, "Tenemos que tomar una decisión.", "Wir müssen eine Entscheidung treffen.", note="*treffen* va al final, en infinitivo, por el modal."),
+        tr(0, "¿Puedo hacer una pregunta?", "Darf ich eine Frage stellen?", ["Darf ich eine Frage stellen?", "Kann ich eine Frage stellen?"], "*eine Frage stellen*, nunca *machen*."),
+        ty(0, "Escribí la Nomen-Verb-Verbindung, en infinitivo.", "«dar una respuesta»", "eine Antwort geben", ["eine Antwort geben", "Antwort geben"], "*eine Antwort geben* = *antworten*."),
+        # parte 1 — las más usadas
+        ch(1, "Elegí el verbo.", "Bitte ___ Sie Rücksicht auf die Kollegen.", "nehmen", ["nehmen", "geben", "machen"], "*Rücksicht nehmen auf* + acusativo."),
+        ch(1, "Elegí la preposición.", "Der Minister nimmt morgen ___ dem Bericht Stellung.", "zu", ["zu", "über", "auf"], "*Stellung nehmen zu* + dativo: *zu dem (zum) Bericht*."),
+        ch(1, "¿Qué significa?", "Das kommt nicht in Frage!", "¡Ni hablar!", ["¡Ni hablar!", "Eso no es una pregunta.", "Eso lo dudamos."], "*in Frage kommen* = ser una opción; negado, «de ninguna manera»."),
+        ch(1, "¿Qué significa?", "Sie stellt das Ergebnis in Frage.", "Pone en duda el resultado.", ["Pone en duda el resultado.", "Pregunta por el resultado.", "El resultado es posible."], "*in Frage stellen* = poner en duda."),
+        ch(1, "Elegí el verbo.", "Der Laptop ___ Ihnen ab Montag zur Verfügung.", "steht", ["steht", "stellt", "gibt"], "El laptop «está» a disposición: *stehen*. *stellen* necesita a alguien que lo ponga."),
+        ch(1, "Elegí el verbo.", "Die Firma ___ uns einen Raum zur Verfügung.", "stellt", ["stellt", "steht", "kommt"], "La empresa hace algo y hay objeto (*einen Raum*): *zur Verfügung stellen*."),
+        ch(1, "Elegí el pronombre.", "Sag ___ bitte Bescheid!", "mir", ["mir", "mich", "ich"], "*Bescheid sagen* + dativo: *mir*."),
+        cz(1, "Escribí la contracción.", "Der neue Drucker steht allen ___ Verfügung.", "zur", note="*zu + der = zur*: *die Verfügung* es femenino."),
+        cz(1, "Escribí el participio de *bringen*.", "Sie hat das Thema in der Sitzung zur Sprache ___.", "gebracht", note="Alguien plantea el tema: *zur Sprache bringen – gebracht*."),
+        cz(1, "Escribí el verbo en presente (con *ich*).", "Ich ___ Ihnen morgen Bescheid.", "gebe", ["gebe", "sage"], "*Bescheid geben* o *Bescheid sagen*: las dos sirven."),
+        cz(1, "Escribí la palabra que falta.", "Weißt du schon ___? – Ja, Paul hat mir alles erzählt.", "Bescheid", note="*Bescheid wissen* = estar al tanto, sin artículo."),
+        cz(1, "Escribí el sustantivo.", "Das Projekt nimmt viel Zeit in ___.", "Anspruch", note="*in Anspruch nehmen* = llevar (tiempo). " + MAY),
+        cz(1, "Escribí el verbo en presente.", "Endlich ___ das Projekt in Gang.", "kommt", note="Arranca solo, sin agente: *in Gang kommen*."),
+        tr(1, "Avisame, por favor.", "Sag mir bitte Bescheid.", ["Sag mir bitte Bescheid.", "Bitte sag mir Bescheid.", "Sag mir Bescheid.", "Gib mir bitte Bescheid.", "Bitte gib mir Bescheid.", "Gib mir Bescheid."], "*Bescheid sagen/geben* + dativo, sin artículo."),
+        tr(1, "La sala está a su disposición.", "Der Raum steht Ihnen zur Verfügung.", ["Der Raum steht Ihnen zur Verfügung.", "Der Saal steht Ihnen zur Verfügung.", "Der Raum steht zu Ihrer Verfügung.", "Der Saal steht zu Ihrer Verfügung.", "Der Sitzungsraum steht Ihnen zur Verfügung."], "La sala «está»: *zur Verfügung stehen* + dativo."),
+        tr(1, "Eso no es una opción.", "Das kommt nicht in Frage.", ["Das kommt nicht in Frage.", "Das kommt nicht infrage."], "*in Frage* o *infrage*: las dos grafías valen."),
+        ty(1, "Escribí el sustantivo, con artículo.", "«la consideración» (*___ nehmen auf*)", "die Rücksicht", note="*Rücksicht nehmen auf* + acusativo. " + MAY),
+        # parte 2 — en la reunión
+        ch(2, "Elegí el participio.", "Am Ende hat der Vorstand einen Beschluss ___.", "gefasst", ["gefasst", "gemacht", "genommen"], "*einen Beschluss fassen* = tomar una resolución."),
+        ch(2, "Elegí el verbo.", "Wer ___ heute das Protokoll?", "führt", ["führt", "fährt", "stellt"], "*das Protokoll führen* = levantar el acta. Ojo: *fährt* es de *fahren*."),
+        ch(2, "Elegí la versión formal.", "Wir entscheiden morgen.", "Wir treffen morgen eine Entscheidung.", ["Wir treffen morgen eine Entscheidung.", "Wir nehmen morgen eine Entscheidung.", "Wir machen morgen eine Entscheidung."], "Solo *treffen* va con *Entscheidung*."),
+        ch(2, "Elegí el verbo.", "Das neue Gesetz ___ im Mai in Kraft.", "tritt", ["tritt", "kommt", "steht"], "*in Kraft treten* = entrar en vigor; *treten → er tritt*."),
+        ch(2, "¿Qué significa?", "Der Vorschlag hat breite Zustimmung gefunden.", "Muchos apoyaron la propuesta.", ["Muchos apoyaron la propuesta.", "Por fin encontraron la propuesta.", "La propuesta fue rechazada."], "*Zustimmung finden* = obtener aprobación."),
+        ch(2, "Elegí el sustantivo.", "Geld spielt dabei keine ___.", "Rolle", ["Rolle", "Frage", "Sprache"], "*eine Rolle spielen* = tener importancia."),
+        ch(2, "Elegí el artículo.", "Wir setzen das Thema auf ___ Tagesordnung.", "die", ["die", "der", "den"], "*setzen* = movimiento: *auf* + acusativo, *die Tagesordnung*."),
+        cz(2, "Escribí el verbo en infinitivo.", "Ich möchte einen Einwand ___.", "erheben", note="*einen Einwand erheben* = plantear una objeción."),
+        cz(2, "Escribí el participio de *bringen*.", "Wir haben das Projekt pünktlich zum Abschluss ___.", "gebracht", note="*zum Abschluss bringen* = concluir."),
+        cz(2, "Escribí la contracción.", "Der Vorschlag kommt morgen ___ Abstimmung.", "zur", note="*zu + der Abstimmung = zur Abstimmung*."),
+        cz(2, "Escribí el sustantivo.", "Was steht heute auf der ___? – Das Budget und die Urlaubsplanung.", "Tagesordnung", note="*die Tagesordnung* = el orden del día. " + MAY),
+        cz(2, "Escribí el participio de *nehmen*.", "Ich habe Ihre Mail zur Kenntnis ___.", "genommen", note="*zur Kenntnis nehmen* = tomar nota."),
+        tr(2, "El directorio tomó una resolución.", "Der Vorstand hat einen Beschluss gefasst.", ["Der Vorstand hat einen Beschluss gefasst.", "Der Vorstand fasste einen Beschluss."], "*einen Beschluss fassen*."),
+        tr(2, "Llegamos a un acuerdo.", "Wir haben eine Vereinbarung getroffen.", ["Wir haben eine Vereinbarung getroffen.", "Wir trafen eine Vereinbarung."], "*eine Vereinbarung treffen*, como *eine Entscheidung treffen*."),
+        tr(2, "La empresa nos pone una laptop a disposición.", "Die Firma stellt uns einen Laptop zur Verfügung.", ["Die Firma stellt uns einen Laptop zur Verfügung.", "Das Unternehmen stellt uns einen Laptop zur Verfügung.", "Die Firma stellt uns ein Laptop zur Verfügung.", "Das Unternehmen stellt uns ein Laptop zur Verfügung."], "Alguien da algo: *zur Verfügung stellen*. (*Laptop* es *der* o *das*.)"),
+        ty(2, "Escribí en alemán, con artículo.", "«el orden del día»", "die Tagesordnung", note="*der Tag* + *die Ordnung*: manda la última palabra. " + MAY),
+        li(2, "Tagesordnung", ["Tagesordnung", "Tageszeitung", "Tagesablauf"], "*die Tagesordnung* = el orden del día."),
+    ],
+}
