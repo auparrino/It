@@ -828,7 +828,7 @@
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION = "c1-vN" in sw.js: test_game
      and the CI check it).  One version for the app and both languages. */
-  var APP_VERSION = "v3.14.0";
+  var APP_VERSION = "v3.15.0";
   // Settimana XVII: Roman numerals on the street signs (LANG.ui.romanWeeks).
   function romano(n) {
     var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
@@ -6508,10 +6508,35 @@
 
   var scriviTimer = null;
   /* The AI key: Anthropic, for Claude Haiku.  Only in this phone's
-     storage, never in the backup. */
-  var AI_KEY = SKEY("claude.key"), AI_WS = SKEY("claude.ws");
-  function readKey(k) { try { return localStorage.getItem(k) || ""; } catch (e) { return ""; } }
-  function aiKeys() { return { claude: readKey(AI_KEY), ws: readKey(AI_WS) }; }
+     storage, never in the backup.  One for every language (like the Gist
+     token): «c1.claude.key».  Up to v3.14 each language kept its own
+     («laviac1.claude.key», «rumoc1.…»): the first read takes this
+     language's, or else any other, and moves it to the shared one. */
+  var AI_KEY = "c1.claude.key", AI_WS = "c1.claude.ws";
+  // (a pasted key can bring spaces, line breaks or invisible characters: out)
+  function cleanKey(v) { return String(v || "").replace(/[\s\u200B-\u200D\u2060\uFEFF"'«»“”]/g, ""); }
+  function readKey(k) { try { return cleanKey(localStorage.getItem(k)); } catch (e) { return ""; } }
+  function oldKeys(name) {
+    var out = [];
+    try {
+      for (var i = 0; i < localStorage.length; i++) {
+        var k = localStorage.key(i);
+        if (k && k !== "c1." + name && k.slice(-name.length - 1) === "." + name) out.push(k);
+      }
+    } catch (e) { /* */ }
+    return out;
+  }
+  function migrateKeys() {
+    try {
+      if (localStorage.getItem(AI_KEY)) return;
+      var olds = oldKeys("claude.key"), mine = SKEY("claude.key"), from = olds.indexOf(mine) >= 0 ? mine : olds[0];
+      if (!from) return;
+      localStorage.setItem(AI_KEY, readKey(from));
+      var ws = readKey(from.replace(/claude\.key$/, "claude.ws"));
+      if (ws) localStorage.setItem(AI_WS, ws);
+    } catch (e) { /* */ }
+  }
+  function aiKeys() { migrateKeys(); return { claude: readKey(AI_KEY), ws: readKey(AI_WS) }; }
   function aiKey() { return aiKeys().claude; }
   function aiNames() { return aiKey() ? "Claude Haiku" : ""; }
   // Which AI answered: «Claude · claude-haiku-5-5».
@@ -6528,13 +6553,15 @@
       '<p class="muted small"><label for="aiws">ID del workspace</label> (solo si Anthropic lo pide: «not scoped to a workspace»). En la consola, Settings → Workspaces → el workspace → empieza con <code>wrkspc_</code>.</p>' +
       '<input id="aiws" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="wrkspc_… (opcional)" value="' + esc(k.ws) + '">' +
       '<div class="row"><button class="tab" id="aisave">Guardar</button></div>' +
-      '<p class="muted small">La clave queda solo en este teléfono; el texto se envía a Anthropic. La API se paga por uso: con Haiku, centavos por cientos de correcciones.</p>';
+      '<p class="muted small">La clave sirve para todos los idiomas y queda solo en este teléfono; el texto se envía a Anthropic. La API se paga por uso: con Haiku, centavos por cientos de correcciones.</p>';
   }
   function saveKeys() {
-    var g = (($("#aikey") || {}).value || "").trim();
-    var ws = (($("#aiws") || {}).value || "").trim();
+    var g = cleanKey(($("#aikey") || {}).value);
+    var ws = cleanKey(($("#aiws") || {}).value);
     try { if (g) localStorage.setItem(AI_KEY, g); else localStorage.removeItem(AI_KEY); } catch (e) { /* */ }
     try { if (ws) localStorage.setItem(AI_WS, ws); else localStorage.removeItem(AI_WS); } catch (e) { /* */ }
+    // the per-language ones of before: gone, so an old wrong key never comes back
+    oldKeys("claude.key").concat(oldKeys("claude.ws")).forEach(function (k) { try { localStorage.removeItem(k); } catch (e) { /* */ } });
     return g ? "la clave de Claude" : "";
   }
   function wireScrivi() {
