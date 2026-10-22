@@ -2237,7 +2237,7 @@
       "Reglas: el alumno tiene que conseguir TRES objetivos comunicativos concretos y verificables hablando con vos. " +
       "Vos hacés un personaje con un rol claro (empleado, vecino, amigo…), no un profesor. Frases de máximo " + ctx.maxWords + " palabras. " +
       "Usá solo estos tiempos verbales: " + ctx.tenses + ". " + ITALIANO_PRIMA + " El alumno conoce, entre otras: " + ctx.words.slice(0, 100).join(", ") + ".\n" +
-      "Respondé SOLO con JSON: {\"titolo\": \"título corto en italiano\", \"ruolo_ia\": \"quién sos, en italiano\", " +
+      "Respondé SOLO con JSON, con estos nombres de campo tal cual (sin traducirlos ni envolverlos en otro objeto): {\"titolo\": \"título corto en italiano\", \"ruolo_ia\": \"quién sos, en italiano\", " +
       "\"situazione_es\": \"la situación explicada al alumno en castellano, 2 oraciones\", " +
       "\"obiettivi\": [\"objetivo 1 en castellano\", \"objetivo 2\", \"objetivo 3\"], " +
       "\"apertura\": \"tu primera frase en italiano, en personaje\", \"parole_utili\": [\"6 palabras o expresiones italianas útiles\"]}";

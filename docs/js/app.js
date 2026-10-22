@@ -828,7 +828,7 @@
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION = "c1-vN" in sw.js: test_game
      and the CI check it).  One version for the app and both languages. */
-  var APP_VERSION = "v3.15.0";
+  var APP_VERSION = "v3.15.1";
   // Settimana XVII: Roman numerals on the street signs (LANG.ui.romanWeeks).
   function romano(n) {
     var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
@@ -5613,7 +5613,13 @@
       if (out) out.innerHTML = '<p class="muted small">⏳ La IA arma la escena…</p>';
       Scrivi.parlaStart(ctx, aiKeys(), function (err, data) {
         if (view.screen !== "parla") return;
-        if (err || !data || !data.obiettivi) { if (out) out.innerHTML = '<p class="muted small">No pude usar la IA (' + esc(String(err && err.message || "respuesta rara")) + ").</p>"; if (b) b.disabled = false; return; }
+        data = err ? data : scenOf(data);
+        if (err || !data || !data.obiettivi) {
+          var why = err ? String(err.message || err) : "la escena llegó sin objetivos" + (data && typeof data === "object" ? " (trajo: " + Object.keys(data).slice(0, 6).join(", ") + ")" : "");
+          if (out) out.innerHTML = '<p class="muted small">No pude usar la IA (' + esc(why) + "). Probá de nuevo.</p>";
+          if (b) b.disabled = false;
+          return;
+        }
         data.obiettivi = data.obiettivi.slice(0, 3);
         parla = { week: w.week, scen: data, history: [["ia", String(data.apertura || UI.hi)]], done: false, recasts: [], obj: [], turns: 0, busy: false, ctx: ctx };
         render();
@@ -6506,6 +6512,31 @@
     return out.length ? out.join("; ") : "los huecos coinciden: solo cambian la puntuación o los espacios";
   }
 
+  /* The role-play scene as the prompts ask for it ({titolo, ruolo_ia,
+     situazione_es, obiettivi, apertura, parole_utili}).  The model sometimes
+     wraps it in one more object ({"roleplay": {…}}) or translates the field
+     names to the course's language (objetivos, Ziele…): both are taken. */
+  var SCEN_ALIAS = {
+    obiettivi: /^(obiettivi|objetivos?|objectives?|goals?|ziele|metas?)$/i,
+    titolo: /^(titolo|t[i\u00ed]tulo|title|titel)$/i,
+    ruolo_ia: /^(ruolo(_ia)?|papel(_ia)?|rol(_ia)?|role(_ai)?|rolle)$/i,
+    situazione_es: /^(situazione(_es)?|situa[c\u00e7][a\u00e3]o(_es)?|situaci[o\u00f3]n(_es)?|situation)$/i,
+    apertura: /^(apertura|abertura|opening|er[o\u00f6]ffnung)$/i,
+    parole_utili: /^(parole_utili|palavras?_[u\u00fa]teis|palabras?_[u\u00fa]tiles|useful_words|n[u\u00fc]tzliche_w[o\u00f6]rter)$/i
+  };
+  function scenOf(d) {
+    if (!d || typeof d !== "object") return d;
+    var ks = Object.keys(d);
+    if (ks.length === 1 && d[ks[0]] && typeof d[ks[0]] === "object" && !Array.isArray(d[ks[0]])) d = d[ks[0]];
+    Object.keys(SCEN_ALIAS).forEach(function (f) {
+      if (d[f] != null) return;
+      var k = Object.keys(d).filter(function (x) { return SCEN_ALIAS[f].test(x); })[0];
+      if (k) d[f] = d[k];
+    });
+    if (typeof d.obiettivi === "string") d.obiettivi = d.obiettivi.split(/\n+|\s*\d\)\s*|;\s*/).map(function (x) { return x.trim(); }).filter(Boolean);
+    if (!Array.isArray(d.obiettivi) || !d.obiettivi.length) delete d.obiettivi;
+    return d;
+  }
   var scriviTimer = null;
   /* The AI key: Anthropic, for Claude Haiku.  Only in this phone's
      storage, never in the backup.  One for every language (like the Gist
