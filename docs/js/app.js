@@ -6510,8 +6510,9 @@
   /* The AI key: Anthropic, for Claude Haiku.  Only in this phone's
      storage, never in the backup.  One for every language (like the Gist
      token): «c1.claude.key».  Up to v3.14 each language kept its own
-     («laviac1.claude.key», «rumoc1.…»): the first read takes this
-     language's, or else any other, and moves it to the shared one. */
+     («laviac1.claude.key», «rumoc1.…»): the first read takes the
+     key that last got an answer (else this language's, else any) and moves
+     it to the shared one. */
   var AI_KEY = "c1.claude.key", AI_WS = "c1.claude.ws";
   // (a pasted key can bring spaces, line breaks or invisible characters: out)
   function cleanKey(v) { return String(v || "").replace(/[\s\u200B-\u200D\u2060\uFEFF"'«»“”]/g, ""); }
@@ -6529,8 +6530,15 @@
   function migrateKeys() {
     try {
       if (localStorage.getItem(AI_KEY)) return;
-      var olds = oldKeys("claude.key"), mine = SKEY("claude.key"), from = olds.indexOf(mine) >= 0 ? mine : olds[0];
-      if (!from) return;
+      var olds = oldKeys("claude.key"), mine = SKEY("claude.key");
+      if (!olds.length) return;
+      // the key that last got an answer (ia.js notes «<lang>.claude.lat» on
+      // every success: a key that only fails never has one); else this
+      // language's; else any
+      var lastOk = function (k) {
+        try { return (JSON.parse(localStorage.getItem(k.replace(/claude\.key$/, "claude.lat")) || "null") || {}).at || 0; } catch (e) { return 0; }
+      };
+      var from = olds.slice().sort(function (a, b) { return lastOk(b) - lastOk(a) || (b === mine) - (a === mine); })[0];
       localStorage.setItem(AI_KEY, readKey(from));
       var ws = readKey(from.replace(/claude\.key$/, "claude.ws"));
       if (ws) localStorage.setItem(AI_WS, ws);
