@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Semana 24 — Der Mann, der… (B1): oraciones de relativo (nominativo, acusativo, dativo, con preposición, wo y was)."""
-from base import q, ch, li, cz, tr, ty, MAY  # noqa: F401
+from base import q, ch, li, cz, tr, ty, fx, di, MAY  # noqa: F401
 
 WEEK = {
     "week": 24,
@@ -254,5 +254,23 @@ WEEK = {
         tr(2, "Me voy tres semanas a Italia.", "Ich fahre für drei Wochen nach Italien.", ["Ich fahre für drei Wochen nach Italien.", "Ich fliege für drei Wochen nach Italien.", "Ich fahre drei Wochen nach Italien.", "Ich fliege drei Wochen nach Italien.", "Für drei Wochen fahre ich nach Italien.", "Für drei Wochen fliege ich nach Italien."], "Duración prevista: *für drei Wochen*. *seit* sería algo que ya empezó."),
         ch(2, "Elegí la preposición.", "Der neue Kurs beginnt ___ zwei Wochen. (dentro de dos semanas)", "in", ["in", "nach", "vor"], "Plazo hacia el futuro: *in zwei Wochen*. *vor* = hace; *nach* = después de algo."),
         cz(2, "Escribí el artículo.", "Er hängt das Bild an ___ Wand. (die Wand)", "die", note="*hängen* con objeto: destino, acusativo: *an die Wand*. Después: *Das Bild hängt an der Wand*."),
+        # encontrá el error, dictado, repaso intercalado y producción
+        # encontrá el error
+        fx(0, "Das ist der Mann, den mir geholfen hat.", "den", "der", "caso", "El caso del relativo lo decide la relativa: ahí el hombre es quien ayuda, el sujeto → *der*. Que la principal diga *der Mann* no alcanza para saberlo."),
+        fx(0, "Der Kollege, der kommt aus Spanien, ist sehr nett.", "kommt aus Spanien", "aus Spanien kommt", "orden", "La relativa es una subordinada: el verbo va al final, *der aus Spanien kommt*. Es el mismo orden que con *weil* o *dass*."),
+        fx(1, "Die Frau, der ich gestern gesehen habe, ist meine Chefin.", "der", "die", "caso", "En la relativa (*ich habe sie gesehen*) la mujer es objeto directo → acusativo femenino, *die*. *der* sería dativo: *die Frau, der ich geholfen habe*."),
+        # dictado
+        di(1, "Das ist die Kollegin, mit der ich jeden Tag arbeite.", note="Preposición + relativo: *mit der* (dativo femenino) y el verbo *arbeite* al final."),
+        di(0, "Der Film, den wir gesehen haben, war gut.", note="*den*: acusativo masculino (vimos la película: objeto directo). Escuchá la *-n*: no es *der* ni *dem*."),
+        # repaso intercalado
+        cz(2, "Escribí *um* o *damit*.", "Ich erkläre es dir noch einmal, ___ du es verstehst.", "damit", note="Repaso (semana 23): dos sujetos distintos (yo explico, vos entendés) → *damit*, con el verbo al final. *um … zu* solo cuando el sujeto es el mismo."),
+        tr(2, "Mi hermano se hizo médico.", "Mein Bruder wurde Arzt.", ["Mein Bruder ist Arzt geworden."], "Repaso (semanas 21 y 23): «hacerse, llegar a ser» = *werden*: en pasado *wurde* o *ist … geworden* (con *sein*). Sin artículo delante de la profesión."),
+        cz(2, "Escribí la preposición.", "Interessierst du dich ___ Musik?", "für", note="Repaso (semana 22): *sich interessieren für* + acusativo. «Interesarse en» o «por» no sirven de guía: la preposición va con el verbo."),
+        cz(2, "Escribí *als* o *wenn*.", "___ meine Oma jung war, gab es noch keine Handys.", "Als", note="Repaso (semana 21): una época del pasado («cuando era joven») → *als*."),
+        # producción
+        ty(2, "Describí a dos personas con una relativa: tu vecina es una mujer que siempre ayuda; tu jefe es un hombre al que nadie entiende.", "(Describir con relativas)", "Meine Nachbarin ist eine Frau, die immer hilft. Mein Chef ist ein Mann, den niemand versteht.",
+           [a + " " + b for a in ("Meine Nachbarin ist eine Frau, die immer hilft.", "Meine Nachbarin ist eine Frau, die immer hilfsbereit ist.", "Meine Nachbarin ist eine Frau, die allen hilft.", "Meine Nachbarin ist eine Frau, die immer allen hilft.", "Meine Nachbarin ist eine Frau, die uns immer hilft.")
+            for b in ("Mein Chef ist ein Mann, den niemand versteht.", "Mein Chef ist ein Mann, den keiner versteht.")],
+           "La vecina es quien ayuda (sujeto) → *die*; al jefe nadie lo entiende (objeto) → *den*. En las dos relativas, el verbo al final."),
     ],
 }

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Semana 19 — Mein Beruf (A2): el adjetivo tras artículo indefinido y sin artículo, profesiones, el trabajo, buscar empleo."""
-from base import q, ch, li, cz, tr, ty, MAY  # noqa: F401
+from base import q, ch, li, cz, tr, ty, fx, di, MAY  # noqa: F401
 
 WEEK = {
     "week": 19,
@@ -299,5 +299,23 @@ WEEK = {
         tr(2, "Puse la llave en el cajón.", "Ich habe den Schlüssel in die Schublade gelegt.", ["Ich habe den Schlüssel in die Schublade gelegt.", "Ich habe den Schlüssel in die Schublade getan.", "Ich legte den Schlüssel in die Schublade."], "«Puse en» = destino: *in die Schublade* (acusativo). Después queda: *Der Schlüssel liegt in der Schublade*."),
         ch(2, "Elegí.", "Die Chefin ist in ihrem Büro und ruft: «Kommen Sie bitte ___!»", "rein", ["rein", "raus", "drinnen"], "Ella está adentro y el otro viene hacia ella: *rein* (*herein*). *drinnen* es dónde, no adónde."),
         tr(2, "Los viernes trabajo desde casa.", "Freitags arbeite ich von zu Hause.", ["Freitags arbeite ich von zu Hause.", "Ich arbeite freitags von zu Hause.", "Freitags arbeite ich von zu Hause aus.", "Ich arbeite freitags von zu Hause aus.", "Freitags arbeite ich im Homeoffice.", "Ich arbeite freitags im Homeoffice."], "Costumbre: *freitags* (todos los viernes), no *am Freitag* (un viernes concreto)."),
+        # encontrá el error, dictado, repaso intercalado y producción
+        # encontrá el error
+        fx(0, "Sie arbeitet in Siemens.", "in", "bei", "preposición", "Con el nombre de una empresa va *bei*: *bei Siemens*. *in* es para el lugar físico: *in einer Bank, in einem Büro*. «Trabaja en…» no sirve de guía."),
+        fx(1, "Er hat einen neuer Chef.", "neuer", "neuen", "terminación", "Acusativo masculino: *einen neuen Chef*. La *-er* aparece solo en nominativo (*ein neuer Chef*), porque ahí *ein* no muestra el género y lo hace el adjetivo."),
+        fx(2, "Wir suchen eine Köchin mit langjährige Erfahrung.", "langjährige", "langjähriger", "terminación", "Sin artículo, el adjetivo carga solo con el caso: *mit* pide dativo y *Erfahrung* es femenino → *langjähriger* (de muchos años), la misma terminación que *der*. Es la fórmula típica de los avisos."),
+        # dictado
+        di(1, "Ich habe einen netten Chef und eine nette Kollegin.", note="*einen netten* (acusativo masculino, *-en*) frente a *eine nette* (femenino, *-e*). Las *-n* finales se oyen poco: escuchalo lento."),
+        di(1, "Mein neuer Kollege kommt aus Spanien.", note="*mein neuer*: nominativo masculino. *mein* no muestra el género, así que lo muestra el adjetivo con *-er*."),
+        # repaso intercalado
+        cz(2, "Escribí el conector («por eso»).", "Ich spreche gut Englisch, ___ habe ich die Stelle bekommen.", "deshalb", ["darum", "deswegen"], note="Repaso (semana 18): lo que sigue es la consecuencia y el verbo va enseguida (*habe ich*): *deshalb*. Con *weil* el verbo iría al final."),
+        cz(2, "Escribí el pronombre reflexivo.", "Bewirbst du ___ bei der Firma?", "dich", note="Repaso (semana 17): *sich bewerben* con *du* → *dich*. El reflexivo cambia con la persona, igual que «te postulás»."),
+        tr(2, "Gano menos que mi hermana.", "Ich verdiene weniger als meine Schwester.", note="Repaso (semana 16): «menos que» = *weniger als*. Después de un comparativo va siempre *als*, nunca *wie*."),
+        tr(2, "Mañana tengo que llamar a la empresa.", "Morgen muss ich die Firma anrufen.", ["Ich muss morgen die Firma anrufen.", "Ich muss morgen bei der Firma anrufen.", "Morgen muss ich bei der Firma anrufen."], "Repaso (semanas 7-8): con modal, el separable va entero al final: *anrufen*. *jemanden anrufen* lleva acusativo, sin preposición (o *bei der Firma anrufen*)."),
+        # producción
+        ty(2, "Presentate en dos oraciones: sos cocinero o cocinera, trabajás en un restaurante chico y tenés mucha experiencia.", "(En la entrevista de trabajo)", "Ich bin Koch und arbeite in einem kleinen Restaurant. Ich habe viel Erfahrung.",
+           [a + " " + b for a in ("Ich bin Koch und arbeite in einem kleinen Restaurant.", "Ich bin Köchin und arbeite in einem kleinen Restaurant.", "Ich arbeite als Koch in einem kleinen Restaurant.", "Ich arbeite als Köchin in einem kleinen Restaurant.", "Ich bin Koch. Ich arbeite in einem kleinen Restaurant.", "Ich bin Köchin. Ich arbeite in einem kleinen Restaurant.")
+            for b in ("Ich habe viel Erfahrung.", "Ich habe sehr viel Erfahrung.")],
+           "La profesión va sin artículo (*Ich bin Koch*, *als Köchin*). *in einem kleinen Restaurant*: dativo neutro con *einem*, adjetivo en *-en*."),
     ],
 }

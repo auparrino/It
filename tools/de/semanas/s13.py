@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Semana 13 — Mit wem? (A2): el dativo, verbos con dativo y dos objetos; regalos y fiestas."""
-from base import q, ch, li, cz, tr, ty, MAY  # noqa: F401
+from base import q, ch, li, cz, tr, ty, fx, di, MAY  # noqa: F401
 
 WEEK = {
     "week": 13,
@@ -308,5 +308,17 @@ WEEK = {
         tr(2, "No le regalo nada a mi hermano.", "Ich schenke meinem Bruder nichts.", ["Ich schenke meinem Bruder nichts.", "Meinem Bruder schenke ich nichts."], "«No … nada» = solo *nichts*, sin *nicht*; el dativo *meinem Bruder* va antes."),
         cz(2, "Escribí *nicht* o la forma de *kein*.", "Ich habe meiner Mutter ___ Blumen gekauft.", "keine", note="*Blumen* sin artículo → *keine Blumen*."),
         ty(2, "Ordená: cuándo antes que dónde.", "Ich habe / im Laden / gestern / ein Geschenk / gekauft", "Ich habe gestern im Laden ein Geschenk gekauft.", ["Ich habe gestern im Laden ein Geschenk gekauft.", "Gestern habe ich im Laden ein Geschenk gekauft.", "Ich habe gestern ein Geschenk im Laden gekauft.", "Gestern habe ich ein Geschenk im Laden gekauft."], "*gestern* (cuándo) antes de *im Laden* (dónde); el participio cierra."),
+        # encontrá el error y dictado
+        fx(1, "Kannst du mich helfen?", "mich", "mir", "caso", "*helfen* pide dativo: *Kannst du mir helfen?* En castellano «ayudame» parece objeto directo; en alemán la persona va en dativo: *mir*."),
+        fx(1, "Die Wohnung gefällt ich sehr.", "ich", "mir", "calco", "Con *gefallen*, lo que gusta es el sujeto (*die Wohnung*) y la persona va en dativo: *Die Wohnung gefällt mir sehr*. Igual que «me gusta»: no es «yo gusto»."),
+        fx(0, "Wir feiern mit unseren Freunde.", "Freunde", "Freunden", "caso", "En dativo plural el sustantivo suma -n: *mit unseren Freunden*. La -n final apenas se oye, pero es la marca del dativo."),
+        di(2, "Ich schenke meinem Bruder ein Buch.", note="*meinem* (dativo, con -m) y no *meinen* (acusativo, con -n): solo cambia la última letra. Escuchá bien esa -m."),
+        di(0, "Wir feiern mit den Kindern.", note="Dativo plural: *den Kindern*, con -n en el artículo y en el sustantivo."),
+        # repaso de las semanas 9 a 12
+        cz(2, "Escribí *haben* o *sein* conjugado.", "Wir ___ am Wochenende nach Hamburg gefahren.", "sind", note="Repaso de la semana 12: *fahren* de un lugar a otro → Perfekt con *sein*: *wir sind gefahren*."),
+        cz(2, "Escribí *haben* o *sein* conjugado.", "Ich ___ gestern mit Anna telefoniert.", "habe", note="Repaso de las semanas 11 y 12: *telefonieren* no es movimiento → *haben*. Y va sin *ge-*, como todos los *-ieren*."),
+        tr(2, "¿Qué te pasó?", "Was ist dir passiert?", ["Was ist dir passiert?", "Was ist mit dir passiert?"], note="Repaso de la semana 12: *passieren* va con *sein*. Y a quien le pasa va en dativo: *dir*."),
+        cz(2, "Escribí el imperativo de *aussteigen* (a un amigo).", "___ an der Haltestelle aus!", "Steig", ["Steig", "Steige"], "Repaso de la semana 9: *du steigst aus* → sin *du* y sin *-st*: *Steig aus!*, con el prefijo al final."),
+        cz(2, "Escribí el posesivo (nuestro).", "___ Wohnung ist hell und ruhig.", "Unsere", note="Repaso de la semana 10: *unser* + -e con un femenino. Y *hell*, *ruhig* sin terminación, porque van después de *sein*."),
     ],
 }

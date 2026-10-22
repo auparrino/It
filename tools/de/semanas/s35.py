@@ -1,6 +1,18 @@
 # -*- coding: utf-8 -*-
 """Semana 35 — Er sagte, er sei krank (B2): discurso indirecto con Konjunktiv I (y II de reemplazo)."""
-from base import q, ch, li, cz, tr, ty, MAY  # noqa: F401
+from base import q, ch, li, cz, tr, ty, fx, di, MAY  # noqa: F401
+
+
+def _mix(*slots):
+    """Todas las combinaciones (una frase de cada lista), también sin comas y con punto en vez de «!»."""
+    import itertools
+    out = []
+    for combo in itertools.product(*slots):
+        s = " ".join(combo)
+        for y in (s, s.replace(",", ""), s.replace("!", "."), s.replace(",", "").replace("!", ".")):
+            if y not in out:
+                out.append(y)
+    return out
 
 
 def _nc(*xs):
@@ -318,5 +330,16 @@ WEEK = {
         # parte 2 — repaso de la pasiva en pasado (semana 31) en noticias
         cz(2, "Escribí la palabra que falta (pasiva en pasado).", "Laut Polizei sei niemand verletzt ___.", "worden", note="Pasiva en pasado + Konjunktiv I: *sei … verletzt worden*. Con otro participio, *worden* va sin *ge-*."),
         cz(2, "Escribí el auxiliar en Konjunktiv I.", "Der Sprecher sagte, die Fabrik ___ bereits geschlossen worden.", "sei", note="*Die Fabrik ist geschlossen worden* → indirecto *die Fabrik sei geschlossen worden*. La pasiva hace el pasado con *sein*."),
+        # encontrá el error, dictado y repaso (semanas 14 a 30)
+        fx(0, "Sie sagte, sie seie sehr müde.", "seie", "sei", "conjugación", "*sein* es el único irregular del Konjunktiv I: *ich sei, er sei*, sin la *-e* final. La *-e* se cuela por *habe, komme*."),
+        fx(1, "Er sagte, er habe gestern früh nach Hause gegangen.", "habe", "sei", "auxiliar", "En el discurso indirecto el auxiliar del Perfekt no cambia, solo pasa al Konjunktiv I. *gehen* va con *sein* → *er sei … gegangen*."),
+        fx(2, "Sie fragte mich, wenn ich morgen Zeit habe.", "wenn", "ob", "conector", "La pregunta indirecta de sí o no va con *ob*. El castellano usa «si» para las dos cosas; el alemán separa: *wenn* (condición) y *ob* (pregunta)."),
+        di(2, "Der Zeuge sagte, er habe einen blauen Wagen gesehen.", ["Der Zeuge sagte er habe einen blauen Wagen gesehen."], "*einen blauen Wagen*: masculino en acusativo, -en en el artículo y en el adjetivo. *habe*: Konjunktiv I."),
+        di(1, "Laut der Meldung sei der Minister mit dem Auto gekommen.", note="*laut der Meldung*: femenino, con -er. *mit dem Auto*, con -em. *sei … gekommen*: pasado con *sein*."),
+        ty(2, "Contá en dos oraciones, con Konjunktiv I, lo que dijo el vocero.", "(el vocero: «La empresa no tiene problemas. El jefe vuelve el lunes.»)", "Der Sprecher sagte, die Firma habe keine Probleme. Der Chef komme am Montag zurück.", _mix(["Der Sprecher sagte, die Firma habe keine Probleme.", "Der Sprecher sagte, das Unternehmen habe keine Probleme.", "Der Sprecher sagte, dass die Firma keine Probleme habe.", "Der Sprecher sagte, dass das Unternehmen keine Probleme habe.", "Der Sprecher erklärte, die Firma habe keine Probleme.", "Der Sprecher betonte, die Firma habe keine Probleme."], ["Der Chef komme am Montag zurück.", "Der Chef kehre am Montag zurück.", "Er sagte auch, der Chef komme am Montag zurück.", "Am Montag komme der Chef zurück."]), "Konjunktiv I = raíz + *-e*: *habe*, *komme*. La segunda oración puede ir sola: el Konjunktiv ya marca que sigue hablando el vocero."),
+        cz(2, "Escribí *als* o *wenn*.", "Immer ___ der Minister eine Pressekonferenz gab, kamen viele Journalisten.", "wenn", note="Repaso de la semana 21: algo que se repetía en el pasado («cada vez que») → *wenn*, aunque sea pasado. *als* es para una sola vez."),
+        cz(2, "Escribí el artículo.", "Der Sprecher stand vor ___ Rathaus. (das Rathaus)", "dem", note="Repaso de la semana 14: dónde estaba, sin movimiento → *vor* + dativo: *vor dem Rathaus*."),
+        tr(2, "Si hubiera leído la noticia, te habría llamado.", "Wenn ich die Meldung gelesen hätte, hätte ich dich angerufen.", _mix(["Wenn ich die Meldung gelesen hätte, hätte ich dich angerufen.", "Wenn ich die Nachricht gelesen hätte, hätte ich dich angerufen.", "Hätte ich die Meldung gelesen, hätte ich dich angerufen.", "Hätte ich die Nachricht gelesen, hätte ich dich angerufen."]), "Repaso de la semana 30: irreal del pasado → *hätte* + participio en las dos partes. El «habría» castellano no es *würde*: *hätte ich dich angerufen*."),
+        cz(2, "Escribí *nachdem* o *bevor*.", "___ die Zeitung die Meldung gedruckt hatte, dementierte der Minister alles.", "Nachdem", note="Repaso de la semana 28: primero se imprimió (Plusquamperfekt, *hatte*) y después vino lo otro → *nachdem*."),
     ],
 }

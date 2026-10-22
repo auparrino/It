@@ -1,6 +1,18 @@
 # -*- coding: utf-8 -*-
 """Semana 38 — Die Lösung des Problems (B2): nominalización, estilo verbal y nominal, preposiciones en lugar de subordinadas."""
-from base import q, ch, li, cz, tr, ty, MAY  # noqa: F401
+from base import q, ch, li, cz, tr, ty, fx, di, MAY  # noqa: F401
+
+
+def _mix(*slots):
+    """Todas las combinaciones (una frase de cada lista), también sin comas y con punto en vez de «!»."""
+    import itertools
+    out = []
+    for combo in itertools.product(*slots):
+        s = " ".join(combo)
+        for y in (s, s.replace(",", ""), s.replace("!", "."), s.replace(",", "").replace("!", ".")):
+            if y not in out:
+                out.append(y)
+    return out
 
 WEEK = {
     "week": 38,
@@ -247,5 +259,17 @@ WEEK = {
         ty(2, "Reescribí en estilo verbal, con *damit*.", "Zur besseren Orientierung der Besucher hängen überall Schilder.", "Damit sich die Besucher besser orientieren können, hängen überall Schilder.", ["Damit sich die Besucher besser orientieren können, hängen überall Schilder.", "Damit die Besucher sich besser orientieren können, hängen überall Schilder.", "Überall hängen Schilder, damit sich die Besucher besser orientieren können.", "Überall hängen Schilder, damit die Besucher sich besser orientieren können.", "Damit sich die Besucher besser orientieren, hängen überall Schilder.", "Überall hängen Schilder, damit sich die Besucher besser orientieren."], "Otro sujeto (los visitantes) → *damit* + verbo al final; después de la coma, verbo de la principal (*hängen*)."),
         tr(2, "El experimento no fue ni barato ni rápido.", "Das Experiment war weder billig noch schnell.", ["Das Experiment war weder billig noch schnell.", "Der Versuch war weder billig noch schnell.", "Das Experiment war weder günstig noch schnell.", "Der Versuch war weder günstig noch schnell."], "«ni … ni» = *weder … noch*, sin otro *nicht*: la doble negación castellana no se copia."),
         ch(2, "Elegí el conector. (tanto … como)", "Für das Projekt brauchen wir ___ mehr Zeit ___ mehr Geld.", "sowohl … als auch", ["sowohl … als auch", "entweder … als auch", "nicht nur … aber auch"], "«tanto … como» = *sowohl … als auch*. Los pares no se mezclan: *nicht nur … sondern auch*."),
+        # encontrá el error, dictado y repaso (semanas 12 a 35)
+        fx(0, "Das Untersuchung dauerte zwei Jahre.", "Das", "Die", "género", "Los sustantivos con el sufijo *-ung* son siempre femeninos: *die Untersuchung*, *die Entwicklung*, *die Lösung*. No hay que adivinar: el sufijo decide el género."),
+        fx(1, "Die schnell Entwicklung des Medikaments war ein großer Erfolg.", "schnell", "schnelle", "adjetivo", "Al pasar a sustantivo, el adverbio se vuelve adjetivo y se declina: *die schnelle Entwicklung* (de *Das Medikament wurde schnell entwickelt*)."),
+        fx(2, "Während die Untersuchung wurden viele Proben genommen.", "die Untersuchung", "der Untersuchung", "caso", "*während* como preposición pide genitivo: *während der Untersuchung*. Con *während die …* tendría que seguir una oración con el verbo al final."),
+        di(1, "Die Auswertung der neuen Daten dauert einen Monat.", note="*der neuen Daten*: genitivo plural, -er en el artículo y -en en el adjetivo. *einen Monat*: acusativo de tiempo."),
+        di(2, "Nach der Entdeckung des Fehlers wurde das Labor geschlossen.", note="*nach der Entdeckung*: dativo femenino. *des Fehlers*: genitivo, con -s. Y *wurde*: pasiva en pasado."),
+        ty(2, "Escribí dos oraciones de informe, en estilo nominal (sustantivos en vez de verbos).", "(la medición duró un mes · después de la evaluación de los datos, se publicaron los resultados)", "Die Messung dauerte einen Monat. Nach der Auswertung der Daten wurden die Ergebnisse veröffentlicht.", _mix(["Die Messung dauerte einen Monat.", "Die Messung dauerte einen Monat lang.", "Die Messung hat einen Monat gedauert."], ["Nach der Auswertung der Daten wurden die Ergebnisse veröffentlicht.", "Die Ergebnisse wurden nach der Auswertung der Daten veröffentlicht.", "Nach der Auswertung der Daten sind die Ergebnisse veröffentlicht worden.", "Nach der Datenauswertung wurden die Ergebnisse veröffentlicht."]), "*messen* → *die Messung*; *auswerten* → *die Auswertung*, con el objeto en genitivo (*der Daten*). *nach* + dativo en lugar de «después de que…»."),
+        cz(2, "Escribí el auxiliar del Perfekt.", "Der Verbrauch ___ im letzten Jahr stark gestiegen.", "ist", note="Repaso de la semana 12: *steigen* es un cambio (algo sube) → *sein*: *ist gestiegen*."),
+        cz(2, "Escribí el relativo.", "Das ist die Wissenschaftlerin, ___ Entdeckung alle überrascht hat.", "deren", note="Repaso de las semanas 24 y 26: «cuyo» con una dueña femenina → *deren*. Concuerda con *die Wissenschaftlerin*, no con *Entdeckung*."),
+        cz(2, "Escribí *sein* en Konjunktiv I.", "Der Forscher betonte, die Ergebnisse ___ sicher.", "seien", note="Repaso de la semana 35: discurso indirecto → Konjunktiv I; de *sein*, en plural: *seien*."),
+        tr(2, "Los resultados se publican el lunes.", "Die Ergebnisse werden am Montag veröffentlicht.", ["Die Ergebnisse werden am Montag veröffentlicht.", "Am Montag werden die Ergebnisse veröffentlicht."], "Repaso de la semana 27: «se publican» → pasiva con *werden* en plural (*die Ergebnisse*). El «se» no es *sich*."),
+        cz(2, "Escribí el artículo.", "Trotz ___ hohen Kosten wurde das Projekt fortgesetzt.", "der", note="Repaso de las semanas 26 y 34: *trotz* + genitivo; en plural → *der hohen Kosten*."),
     ],
 }

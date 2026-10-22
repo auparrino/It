@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Semana 40 — Das lässt sich machen (B2): alternativas a la pasiva (sich lassen, -bar, sein + zu, es gilt zu, man)."""
-from base import q, ch, li, cz, tr, ty, MAY  # noqa: F401
+from base import q, ch, li, cz, tr, ty, fx, di, MAY  # noqa: F401
 
 WEEK = {
     "week": 40,
@@ -243,5 +243,23 @@ WEEK = {
         # parte 1 — repaso (semana 31): brauchen nicht zu frente a haben zu
         ch(1, "Elegí la forma correcta.", "(No hace falta que usted pague nada.) Sie ___ nichts zu bezahlen.", "brauchen", ["brauchen", "müssen", "dürfen"], "*brauchen nicht/nichts zu* = no hace falta. Los modales *müssen* y *dürfen* nunca llevan *zu*: sería *Sie müssen nichts bezahlen*."),
         ty(1, "Reescribí con *brauchen … zu*.", "Sie müssen das Formular nicht ausfüllen.", "Sie brauchen das Formular nicht auszufüllen.", note="*muss nicht* = *braucht nicht zu*; separable: *auszufüllen*, con *zu* en el medio."),
+        # encontrá el error, dictado, repaso intercalado y producción
+        # encontrá el error
+        fx(0, "Das Fenster kann sich nicht öffnen.", "kann", "lässt", "calco", "«No se puede abrir» no es *kann sich*: el «se» castellano no pasa al alemán con *können*. Para la posibilidad, *sich lassen* + infinitivo: *Das Fenster lässt sich nicht öffnen* (o *Man kann das Fenster nicht öffnen*)."),
+        fx(1, "Das Formular ist bis Freitag zu ausfüllen.", "zu ausfüllen", "auszufüllen", "infinitivo", "*ausfüllen* es separable: el *zu* va entre el prefijo y el verbo, todo junto, *auszufüllen*. Lo mismo con *zurückzuschicken, einzureichen, aufzubewahren*."),
+        fx(2, "Man muss sein Kassenbon gut aufbewahren.", "sein", "seinen", "caso", "El posesivo de *man* es *sein*, pero lleva su terminación: *der Kassenbon* es masculino y acá es objeto directo, así que va en acusativo, *seinen Kassenbon* (como *einen*)."),
+        # dictado
+        di(0, "Die neue Jacke lässt sich mit kaltem Wasser waschen.", note="*mit kaltem Wasser*: sin artículo, el adjetivo carga la marca del dativo, *-em*. *die neue Jacke*: después de *die*, solo *-e*."),
+        di(2, "Das Geschäft muss einem den ganzen Kaufpreis erstatten.", note="*einem*: dativo de *man*. *den ganzen Kaufpreis*: acusativo masculino, *-en* en el artículo y en el adjetivo. Las dos terminaciones casi no se oyen."),
+        # repaso intercalado
+        cz(2, "Escribí el artículo.", "Ich habe die Rechnung in ___ Schublade gelegt. (die Schublade)", "die", note="Repaso (semana 14): *legen* es poner, con destino (¿adónde?): acusativo, *in die Schublade*. Si dijeras dónde está (*liegen*), sería *in der Schublade*."),
+        tr(2, "El paquete llegó ayer, pero ya lo devolví.", "Das Paket ist gestern angekommen, aber ich habe es schon zurückgeschickt.", [a + b for a in ("Das Paket ist gestern angekommen, aber ", "Das Paket ist gestern gekommen, aber ", "Das Paket kam gestern an, aber ", "Gestern ist das Paket angekommen, aber ") for b in ("ich habe es schon zurückgeschickt.", "ich habe es bereits zurückgeschickt.", "ich habe es schon zurückgegeben.")], "Repaso (semanas 11-12): *ankommen* (llegar) es cambio de lugar y va con *sein*; *zurückschicken* tiene objeto y va con *haben*. En castellano los dos llevan «haber»."),
+        cz(2, "Escribí *weil*, *denn* o *deshalb*.", "Ich habe den Drucker zurückgeschickt, ___ er sich nicht reparieren ließ.", "weil", note="Repaso (semana 18): el verbo conjugado (*ließ*) está al final, así que va *weil*. Con *denn* el orden sería normal (*denn er ließ sich nicht reparieren*), y con *deshalb*, el verbo justo después."),
+        cz(1, "Escribí *wurde* o *würde*.", "Das Gerät ___ letzte Woche repariert, aber es funktioniert schon wieder nicht.", "wurde", note="Repaso (semana 27): pasiva en pasado = *wurde* + participio (fue reparado). *würde* (con *ü*) es condicional: «se repararía». En el habla rápida la diéresis casi no se oye, pero cambia todo."),
+        # producción
+        ty(0, "Escribile al dueño del departamento en dos oraciones: que la ventana de tu cuarto no se puede abrir (con *sich lassen*) y que la calefacción no se puede reparar (con *-bar*).", "(Problemas en el departamento)", "Das Fenster in meinem Zimmer lässt sich nicht öffnen. Die Heizung ist nicht reparierbar.",
+           [a + " " + b for a in ("Das Fenster in meinem Zimmer lässt sich nicht öffnen.", "Das Fenster in meinem Zimmer lässt sich nicht mehr öffnen.", "Das Fenster meines Zimmers lässt sich nicht öffnen.", "Das Fenster in meinem Zimmer lässt sich nicht aufmachen.")
+            for b in ("Die Heizung ist nicht reparierbar.", "Die Heizung ist nicht mehr reparierbar.", "Und die Heizung ist nicht reparierbar.", "Außerdem ist die Heizung nicht reparierbar.")],
+           "*lässt sich nicht* + infinitivo al final = no se puede. *-bar* sobre la raíz del verbo: *reparieren → reparierbar*, y con *nicht* adelante (o *unreparierbar*, que casi no se usa)."),
     ],
 }

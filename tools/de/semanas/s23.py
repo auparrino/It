@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Semana 23 — Ich werde… (B1): werden y el Futur I, infinitivo con zu, um … zu y damit."""
-from base import q, ch, li, cz, tr, ty, MAY  # noqa: F401
+from base import q, ch, li, cz, tr, ty, fx, di, MAY  # noqa: F401
 
 WEEK = {
     "week": 23,
@@ -302,5 +302,23 @@ WEEK = {
         cz(1, "Escribí *einkaufen*, con *zu* solo si hace falta.", "Ich habe vergessen, ___.", "einzukaufen", note="*vergessen* pide *zu*; separable: *ein-zu-kaufen*. Compará con *Ich gehe einkaufen*, sin *zu*."),
         tr(1, "Espero que mi hermana me visite.", "Ich hoffe, dass meine Schwester mich besucht.", ["Ich hoffe, dass meine Schwester mich besucht.", "Ich hoffe, dass mich meine Schwester besucht.", "Ich hoffe, dass meine Schwester mich besuchen kommt.", "Ich hoffe, meine Schwester besucht mich."], "Otro sujeto → *dass*, con el verbo al final y en **indicativo** (*besucht*). No hay subjuntivo como nuestro «visite»."),
         ty(1, "Uní las dos oraciones con *zu* (el sujeto es el mismo).", "Ich hoffe. Ich bestehe die Prüfung.", "Ich hoffe, die Prüfung zu bestehen.", ["Ich hoffe, die Prüfung zu bestehen.", "Ich hoffe die Prüfung zu bestehen."], "Mismo sujeto (*ich*): se borra el sujeto de la segunda y el verbo va al final con *zu*."),
+        # encontrá el error, dictado, repaso intercalado y producción
+        # encontrá el error
+        fx(0, "Morgen ich werde mehr Sport machen.", "ich werde", "werde ich", "orden", "*werde* es el verbo conjugado y va en segundo lugar: *Morgen werde ich…*. El infinitivo (*machen*) queda al final."),
+        fx(1, "Ich versuche, mit dem Rauchen zu aufhören.", "zu aufhören", "aufzuhören", "infinitivo", "En los separables el *zu* va en el medio y se escribe todo junto: *aufzuhören*, *anzurufen*, *einzukaufen*."),
+        fx(2, "Ich lerne Deutsch, für in Deutschland zu arbeiten.", "für", "um", "calco", "«Para + verbo» es *um … zu*: *um in Deutschland zu arbeiten*. *für* va solo con sustantivos: *für die Arbeit*."),
+        # dictado
+        di(2, "Ich arbeite viel, um mir ein neues Fahrrad zu kaufen.", note="*um … zu* con el infinitivo al final; *ein neues Fahrrad* (neutro con *ein* → *-es*) y *mir* en dativo."),
+        di(0, "Nächstes Jahr werde ich einen Kurs an der Volkshochschule machen.", note="*werde* en segundo lugar y *machen* al final; *einen Kurs* (acusativo masculino) y *an der* (dativo femenino)."),
+        # repaso intercalado
+        cz(2, "Escribí la preposición.", "Ich habe mich sehr ___ deine Nachricht gefreut. (ya la recibí)", "über", note="Repaso (semana 22): *sich freuen über* = alegrarse por algo que ya pasó; *sich freuen auf* = por algo que todavía viene."),
+        cz(2, "Escribí la palabra.", "Wartest du auf den Bus? – Ja, ich warte ___.", "darauf", note="Repaso (semana 22): para una cosa, *da(r)-* + preposición: *darauf*. *auf ihn* sonaría a que esperás a una persona."),
+        cz(2, "Escribí *als* o *wenn*.", "___ ich mein Ziel erreicht habe, mache ich eine Party.", "Wenn", note="Repaso (semana 21): para el futuro va siempre *wenn*. *als* es solo para una vez en el pasado."),
+        tr(2, "Hago el curso sin mi novio.", "Ich mache den Kurs ohne meinen Freund.", ["Ich mache den Kurs ohne meinen festen Freund."], "Repaso (semana 20): *ohne* va siempre con acusativo: *ohne meinen Freund*. «Novio» suele ser simplemente *mein Freund*."),
+        # producción
+        ty(2, "En una oración: decí que el año que viene vas a aprender alemán para trabajar en Alemania (con *werden* y *um … zu*).", "(Tu propósito para el año que viene)", "Nächstes Jahr werde ich Deutsch lernen, um in Deutschland zu arbeiten.",
+           [a + b for a in ("Nächstes Jahr werde ich Deutsch lernen", "Ich werde nächstes Jahr Deutsch lernen", "Im nächsten Jahr werde ich Deutsch lernen", "Ich werde im nächsten Jahr Deutsch lernen")
+            for b in (", um in Deutschland zu arbeiten.", ", um später in Deutschland zu arbeiten.", ", um in Deutschland arbeiten zu können.")],
+           "*werde* en segundo lugar y *lernen* al final. Como el sujeto es el mismo, *um … zu* con el infinitivo al final: *um in Deutschland zu arbeiten*."),
     ],
 }

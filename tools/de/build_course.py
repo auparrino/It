@@ -18,7 +18,7 @@ sys.path.insert(0, HERE)
 import curso  # noqa: E402
 
 OUT = os.path.join(ROOT, "docs", "lang", "de", "data", "course.json")
-TYPES = {"choice", "cloze", "translate", "listen", "typed"}
+TYPES = {"choice", "cloze", "translate", "listen", "typed", "fixerr", "dictation"}
 
 
 def nfc(x):
@@ -50,7 +50,7 @@ def build():
                 raise SystemExit("semana %d, ejercicio %d: tipo %r" % (n, k, it["type"]))
             iid = "de%02d-%03d" % (n, k)
             out = {"id": iid, "src": "autore", "level": w["level"], "topic": "de%d" % n, "wk": n}
-            for key in ("type", "prompt", "stem", "answer", "options", "note"):
+            for key in ("type", "prompt", "stem", "answer", "options", "note", "bad", "cat"):
                 if it.get(key) not in (None, ""):
                     out[key] = it[key]
             # the prompt and the stem are shown as plain text: no *marks* in sight
@@ -62,10 +62,12 @@ def build():
                 acc.insert(0, it["answer"])
             # the same answer without its inner commas is right too, in every
             # week (the correction only drops the final punctuation)
-            if it["type"] in ("translate", "typed", "cloze"):
+            if it["type"] in ("translate", "typed", "cloze", "fixerr", "dictation"):
                 acc += [a.replace(",", "") for a in acc if "," in a and a.replace(",", "") not in acc]
             out["accept"] = acc
-            if it["type"] == "listen":
+            if it["type"] == "fixerr":
+                out["good"] = it["good"]
+            if it["type"] in ("listen", "dictation"):
                 out["nopeek"] = True
             items.append(out)
             ids.append(iid)

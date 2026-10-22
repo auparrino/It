@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Semana 16 — Größer, am größten (A2): comparativo y superlativo, als / wie, el clima y las estaciones."""
-from base import q, ch, li, cz, tr, ty, MAY  # noqa: F401
+from base import q, ch, li, cz, tr, ty, fx, di, MAY  # noqa: F401
 
 WEEK = {
     "week": 16,
@@ -269,5 +269,23 @@ WEEK = {
         tr(2, "En verano hace más calor que en primavera.", "Im Sommer ist es wärmer als im Frühling.", ["Im Sommer ist es wärmer als im Frühling.", "Es ist im Sommer wärmer als im Frühling.", "Im Sommer ist es heißer als im Frühling."], "*im Sommer*, *wärmer als*."),
         tr(2, "¿Cuál es tu estación favorita?", "Welche Jahreszeit magst du am liebsten?", ["Welche Jahreszeit magst du am liebsten?", "Was ist deine Lieblingsjahreszeit?", "Welche Jahreszeit gefällt dir am besten?", "Welche ist deine Lieblingsjahreszeit?", "Was ist deine liebste Jahreszeit?"], "*am liebsten* o *am besten* para lo favorito. *magst* = te gusta (de *mögen*); también vale *Welche Jahreszeit gefällt dir am besten?*"),
         ty(2, "Escribí en alemán, con artículo.", "«el invierno»", "der Winter", note=MAY),
+        # encontrá el error, dictado, repaso intercalado y producción
+        # encontrá el error
+        fx(0, "Berlin ist größer wie Köln.", "wie", "als", "comparación", "Para una diferencia (*größer*) va *als*: *größer als*. *wie* es para la igualdad: *so groß wie*. Pensalo así: «más… que» → *als*; «tan… como» → *wie*."),
+        fx(0, "Heute ist es mehr kalt als gestern.", "mehr kalt", "kälter", "calco", "Calco de «más frío»: en alemán el comparativo se arma con *-er* en el adjetivo, nunca con *mehr*. Y los cortos con *a, o, u* suman diéresis: *kalt → kälter*."),
+        fx(1, "Im Sommer ist es am wärmste.", "wärmste", "wärmsten", "terminación", "Con *am* el superlativo termina siempre en *-sten*: *am wärmsten*. *der wärmste* aparece solo delante de un sustantivo: *der wärmste Monat*."),
+        # dictado
+        di(0, "Im Winter ist es kälter als im Herbst.", note="*kälter* (con *ä*) y *als*. Con las estaciones va *im*: *im Winter, im Herbst*."),
+        di(1, "Der Juli ist der wärmste Monat.", note="Delante del sustantivo el superlativo se declina como cualquier adjetivo: *der wärmste Monat* (*-e* después de *der*). Sin sustantivo sería *am wärmsten*."),
+        # repaso intercalado
+        cz(2, "Escribí el adjetivo.", "Im Winter trage ich den ___ Mantel. (dick)", "dicken", note="Repaso (semana 15): acusativo masculino con *den*: el adjetivo va en *-en*, *den dicken Mantel*."),
+        tr(2, "En invierno vamos a la montaña.", "Im Winter fahren wir in die Berge.", ["Wir fahren im Winter in die Berge.", "Im Winter gehen wir in die Berge.", "Wir gehen im Winter in die Berge.", "Im Winter fahren wir ins Gebirge.", "Wir fahren im Winter ins Gebirge."], "Repaso (semana 14): adónde → acusativo: *in die Berge*. En alemán, «a la montaña» se dice casi siempre en plural."),
+        tr(2, "No encuentro mi tapado.", "Ich finde meinen Mantel nicht.", ["Ich kann meinen Mantel nicht finden."], "Repaso (semanas 4 y 10): objeto directo masculino → acusativo, *meinen*. Y *nicht* va al final, después del objeto."),
+        tr(2, "Esta noche te llamo.", "Heute Abend rufe ich dich an.", ["Ich rufe dich heute Abend an."], "Repaso (semana 8): *anrufen* es separable: *an* va al final. Con *Heute Abend* adelante, el verbo va segundo. «Llamar a alguien» lleva acusativo: *dich*."),
+        # producción
+        ty(2, "Compará en dos oraciones el tiempo en enero: en Buenos Aires hace más calor que en Berlín, y en Berlín nieva más.", "(Buenos Aires y Berlín en enero)", "Im Januar ist es in Buenos Aires wärmer als in Berlin. In Berlin schneit es mehr.",
+           [a + " " + b for a in ("Im Januar ist es in Buenos Aires wärmer als in Berlin.", "In Buenos Aires ist es im Januar wärmer als in Berlin.", "Im Januar ist es in Buenos Aires heißer als in Berlin.", "In Buenos Aires ist es im Januar heißer als in Berlin.", "Im Januar ist es in Buenos Aires heisser als in Berlin.")
+            for b in ("In Berlin schneit es mehr.", "In Berlin schneit es mehr als in Buenos Aires.", "In Berlin schneit es öfter.", "Es schneit mehr in Berlin.")],
+           "*wärmer als* (con *als*, nunca *wie*); *mehr* es el comparativo irregular de *viel*. Después de *Im Januar* o *In Berlin* el verbo va segundo: *ist es, schneit es*."),
     ],
 }

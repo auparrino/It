@@ -1,6 +1,18 @@
 # -*- coding: utf-8 -*-
 """Semana 37 — Er soll reich sein (B2): los modales subjetivos para suponer y para repetir lo que dicen otros."""
-from base import q, ch, li, cz, tr, ty, MAY  # noqa: F401
+from base import q, ch, li, cz, tr, ty, fx, di, MAY  # noqa: F401
+
+
+def _mix(*slots):
+    """Todas las combinaciones (una frase de cada lista), también sin comas y con punto en vez de «!»."""
+    import itertools
+    out = []
+    for combo in itertools.product(*slots):
+        s = " ".join(combo)
+        for y in (s, s.replace(",", ""), s.replace("!", "."), s.replace(",", "").replace("!", ".")):
+            if y not in out:
+                out.append(y)
+    return out
 
 WEEK = {
     "week": 37,
@@ -276,5 +288,17 @@ WEEK = {
         ty(1, "Reescribí con *sollen*.", "Laut Polizei sei der Täter nach Spanien geflohen.", "Der Täter soll nach Spanien geflohen sein.", ["Der Täter soll nach Spanien geflohen sein.", "Laut Polizei soll der Täter nach Spanien geflohen sein."], note="Konjunktiv I con fuente → *soll* + infinitivo perfecto. *geflohen sein*, porque *fliehen* va con *sein*."),
         ty(1, "Reescribí con *sollen*.", "Die Zeugen sagen, der Fahrer sei zu schnell gefahren.", "Der Fahrer soll zu schnell gefahren sein.", note="«Dicen que…» + Konjunktiv I = *soll*. *gefahren sein*: *fahren* va con *sein*."),
         ch(1, "¿Qué oración dice lo mismo?", "Er will nichts gewusst haben.", "Er behauptet, er habe nichts gewusst.", ["Er behauptet, er habe nichts gewusst.", "Man sagt, er habe nichts gewusst.", "Er wollte nichts wissen."], "*will* = lo afirma él mismo (*er behauptet*), con Konjunktiv I para la cita. *Man sagt…* sería *soll*."),
+        # encontrá el error, dictado y repaso (semanas 19 a 34)
+        fx(0, "Sie muss den Schlüssel verloren hat.", "verloren hat", "verloren haben", "verbo", "Para suponer sobre el pasado, el modal va con el infinitivo perfecto: participio + *haben* sin conjugar: *muss … verloren haben*. El modal ya está conjugado."),
+        fx(1, "Er soll ins Ausland gefahren haben.", "haben", "sein", "auxiliar", "En el infinitivo perfecto va el auxiliar del Perfekt: *fahren* se hace con *sein* → *soll … gefahren sein*."),
+        fx(2, "Bis Freitag werde ich die Arbeit beendet.", "beendet", "beendet haben", "verbo", "Futur II = *werden* + participio + *haben* (o *sein*): *werde … beendet haben*. Sin *haben*, *werde … beendet* parece una pasiva («voy a ser terminado»)."),
+        di(0, "Er dürfte den letzten Zug verpasst haben.", note="*den letzten Zug*: acusativo masculino, -en dos veces. *dürfte*, con ü: «probablemente»."),
+        di(1, "Der Täter soll mit einem roten Auto weggefahren sein.", note="*mit einem roten Auto*: dativo neutro, -em en el artículo y -en en el adjetivo. *weggefahren sein*: infinitivo perfecto con *sein*."),
+        ty(0, "Escribí dos suposiciones sobre tu vecino, que no abre la puerta: una con *muss* y otra con *könnte*.", "(seguro que está durmiendo · capaz que se fue de viaje)", "Er muss noch schlafen. Er könnte verreist sein.", _mix(["Er muss noch schlafen.", "Er muss schon schlafen.", "Er muss gerade schlafen.", "Er muss wohl schlafen.", "Er muss schlafen."], ["Er könnte verreist sein.", "Er könnte weggefahren sein.", "Er könnte in Urlaub gefahren sein.", "Er könnte auf Reisen sein."]), "*muss* = casi seguro. *könnte* = es posible. Para lo que ya pasó (irse de viaje), infinitivo perfecto con *sein*: *könnte verreist sein*."),
+        cz(2, "Escribí *worden* o *geworden*.", "Der Täter ist nie gefunden ___.", "worden", note="Repaso de la semana 31: pasiva en Perfekt → *ist* + participio + *worden*. *geworden* va cuando *werden* es «volverse»."),
+        cz(2, "Escribí *worden* o *geworden*.", "Nach dem Einbruch ist sie sehr vorsichtig ___.", "geworden", note="Repaso de la semana 31: acá *werden* es «volverse» (con un adjetivo, sin otro participio) → *ist … geworden*."),
+        cz(2, "Escribí el adjetivo con su terminación.", "Die Polizei sucht einen ___ Mann. (groß)", "großen", note="Repaso de la semana 19: *einen*, acusativo masculino → adjetivo con *-en*: *einen großen Mann*."),
+        tr(2, "Aunque tenía coartada, la policía sospechaba de él.", "Obwohl er ein Alibi hatte, verdächtigte ihn die Polizei.", _mix(["Obwohl er ein Alibi hatte, verdächtigte ihn die Polizei.", "Obwohl er ein Alibi hatte, verdächtigte die Polizei ihn.", "Obwohl er ein Alibi hatte, hat ihn die Polizei verdächtigt.", "Obwohl er ein Alibi hatte, hat die Polizei ihn verdächtigt.", "Die Polizei verdächtigte ihn, obwohl er ein Alibi hatte."]), "Repaso de la semana 34: *obwohl* manda el verbo al final; después de la coma, el verbo enseguida. Y *verdächtigen* + acusativo: *ihn*, sin «de»."),
+        cz(2, "Escribí *um* o *damit*.", "Ich schließe die Tür ab, ___ niemand einbrechen kann.", "damit", note="Repaso de la semana 23: sujetos distintos (*ich* / *niemand*) → *damit*, con el verbo al final. *um … zu* va solo con el mismo sujeto."),
     ],
 }

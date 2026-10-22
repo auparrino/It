@@ -35,7 +35,9 @@ ok(course.weeks.every(function (w) { var s = course.seasons[w.season - 1]; retur
 var ids = {}, map = {};
 course.items.forEach(function (it) {
   ok(!ids[it.id], "id repetido " + it.id); ids[it.id] = 1; map[it.id] = it;
-  ok(["choice", "cloze", "translate", "listen", "typed"].indexOf(it.type) >= 0, it.id + ": tipo " + it.type);
+  ok(["choice", "cloze", "translate", "listen", "typed", "fixerr", "dictation"].indexOf(it.type) >= 0, it.id + ": tipo " + it.type);
+  if (it.type === "fixerr") ok(it.bad && it.stem.indexOf(it.bad) >= 0 && it.stem.split(it.bad).length === 2 && it.answer !== it.stem && it.cat, it.id + ": el error, una sola vez, y su categoría");
+  if (it.type === "dictation") ok(it.nopeek && it.stem === it.answer, it.id + ": dictado");
   ok(it.prompt && it.stem && it.answer, it.id + ": prompt, stem y answer");
   ok(it.accept.indexOf(it.answer) >= 0, it.id + ": accept trae la respuesta");
   if (it.options) {
@@ -121,5 +123,25 @@ ok(Engine.grade("Osterreich", { answer: "Österreich" }) === "quasi", "sin diér
 ok(Engine.grade("Ich heisse Ana", it1) === "quasi", "ss en vez de ß: casi");
 ok(Engine.grade("schön".normalize("NFD"), it2) === "giusto", "diéresis combinada (NFD)");
 ok(Engine.grade("die Kaffee", { answer: "der Kaffee", accept: ["der Kaffee"] }) === "sbagliato", "otro artículo: mal");
+
+// Los duelos (duelli_data.js) y el input estructurado (lab_data.js, solo CAPIRE)
+var Duelli = ctx.Duelli, Lab = ctx.Lab;
+ok(Duelli && Duelli.DUELLI.length >= 8, "ocho duelos o más");
+Duelli.DUELLI.forEach(function (d) {
+  var sides = [0, 0];
+  ok(d.items.length >= 20 && d.week >= 1 && d.week <= 52, "duelo " + d.id + ": 20 oraciones y su semana");
+  d.items.forEach(function (x, k) {
+    sides[Duelli.side(d, x)]++;
+    ok(x.a !== x.b && x.s.split("___").length === 2, "duelo " + d.id + " " + k + ": formas o hueco");
+    ok(Duelli.filled(x).indexOf(x.cue) >= 0 && x.cue !== x.a, "duelo " + d.id + " " + k + ": la pista");
+    ok(!!Duelli.cueItem(d, k) && x.why && x.why.length <= 320, "duelo " + d.id + " " + k + ": «¿qué te lo dijo?» y la regla");
+  });
+  ok(Math.abs(sides[0] - sides[1]) <= 2, "duelo " + d.id + ": lados desparejos " + sides);
+});
+ok(Lab && Lab.CAPIRE.length >= 8 && !Lab.RULES.length && !Lab.FALSI.length, "Capire sí; Ponte y falsos amigos todavía no");
+Lab.CAPIRE.forEach(function (c) {
+  ok(c.items.length >= 12 && c.week >= 1 && c.week <= 52, "Capire " + c.id + ": 12 ítems y su semana");
+  c.items.forEach(function (x) { ok(c.opts.indexOf(x[1]) >= 0 && (!x[2] || x[2] >= c.week), "Capire " + c.id + ": " + x[0]); });
+});
 
 T.done();

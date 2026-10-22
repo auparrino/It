@@ -2,7 +2,7 @@
 """Semana 42 — Einerseits, andererseits (B2): conectores para argumentar y Redemittel de debate."""
 from itertools import product
 
-from base import q, ch, li, cz, tr, ty, MAY  # noqa: F401
+from base import q, ch, li, cz, tr, ty, fx, di, MAY  # noqa: F401
 
 
 def V(*parts):
@@ -282,5 +282,23 @@ WEEK = {
         ch(2, "Elegí el conector.", "Das Tempolimit ist ___ gut für die Umwelt, ___ es rettet auch Leben.", "nicht nur … sondern", ["nicht nur … sondern", "zwar … sondern", "weder … sondern"], "Sumar y subrayar lo segundo: *nicht nur … sondern (auch)*. *sondern* no cuenta: después va *es rettet* en orden normal."),
         ch(2, "Elegí el orden correcto.", "(Cuanto más se discute, menos se decide.)", "Je mehr man diskutiert, desto weniger entscheidet man.", ["Je mehr man diskutiert, desto weniger entscheidet man.", "Je mehr man diskutiert, desto weniger man entscheidet.", "Je mehr diskutiert man, desto weniger entscheidet man."], "*je*: verbo al final; *desto* + comparativo + verbo + sujeto."),
         ty(2, "Uní con *damit* o *um … zu* (lo que corresponda).", "Die Regierung senkt die Steuern. Die Bürger sollen mehr Geld haben.", "Die Regierung senkt die Steuern, damit die Bürger mehr Geld haben.", ["Die Regierung senkt die Steuern, damit die Bürger mehr Geld haben.", "Die Regierung senkt die Steuern, damit die Bürger mehr Geld zur Verfügung haben."], "Sujetos distintos (gobierno / ciudadanos) → *damit*; el *sollen* desaparece."),
+        # encontrá el error, dictado, repaso intercalado y producción
+        # encontrá el error
+        fx(1, "Die Idee ist gut. Dennoch ich bin dagegen.", "ich bin", "bin ich", "orden", "*dennoch* es adverbio, no conjunción: ocupa la posición 1 y el verbo va enseguida, *Dennoch bin ich dagegen*. Lo mismo con *trotzdem, allerdings, zudem*. Solo *aber, und, denn* dejan el orden como está."),
+        fx(2, "Ich widerspreche Sie in diesem Punkt.", "Sie", "Ihnen", "caso", "*widersprechen* va con dativo: *Ich widerspreche Ihnen*. En castellano «contradecirlo» parece objeto directo, pero en alemán es dativo, como *helfen*, *danken* o *zustimmen*."),
+        fx(2, "Ich halte das als einen Fehler.", "als", "für", "calco", "«Considerar algo un error» es *halten für* + acusativo: *Ich halte das für einen Fehler*. El «como» del castellano («lo tengo como…») no pasa al alemán con *als*."),
+        # dictado
+        di(0, "Während die Befürworter einen klaren Vorteil sehen, haben die Gegner viele Einwände.", note="*einen klaren Vorteil*: acusativo masculino, *-en* en el artículo y en el adjetivo. *während* manda el verbo al final (*sehen*), y la principal arranca con el verbo (*haben*)."),
+        di(2, "Ich halte das für einen berechtigten Einwand.", note="*halten für* + acusativo: *einen berechtigten Einwand*, con *-en* en las dos palabras. En el habla rápida suena casi como *ein berechtigte*, pero se escribe completo."),
+        # repaso intercalado
+        cz(1, "Escribí el pronombre (a mí).", "Das Argument gefällt ___ nicht, aber es überzeugt mich.", "mir", note="Repaso (semana 13): *gefallen* va con dativo (*mir*); *überzeugen*, con acusativo (*mich*). En castellano los dos son «me», por eso hay que aprender el caso con el verbo."),
+        cz(1, "Escribí *worden* o *geworden*.", "Das Thema ist in den letzten Jahren immer wichtiger ___.", "geworden", note="Repaso (semana 31): *werden* solo (= volverse, ponerse) hace el Perfekt con *geworden*. *worden* va únicamente con otro participio, en la pasiva: *Das Thema ist viel diskutiert worden*."),
+        tr(2, "Si lo hubiera sabido, no lo habría votado.", "Wenn ich das gewusst hätte, hätte ich ihn nicht gewählt.", [a + b for a in ("Wenn ich das gewusst hätte, ", "Wenn ich es gewusst hätte, ", "Hätte ich das gewusst, ", "Hätte ich es gewusst, ") for b in ("hätte ich ihn nicht gewählt.", "hätte ich nicht für ihn gestimmt.")], "Repaso (semana 30): irreal del pasado = *hätte/wäre* + participio en las dos partes. El «habría» castellano también es *hätte*, no *würde*."),
+        cz(2, "Escribí el auxiliar.", "Nachdem wir lange diskutiert ___, stimmten wir ab.", "hatten", note="Repaso (semana 28): con *nachdem*, lo anterior va en Plusquamperfekt: *diskutiert hatten*. En castellano decimos «después de que discutimos», pero en alemán el auxiliar va un paso más atrás."),
+        # producción
+        ty(0, "Con *einerseits … andererseits*, decí en dos partes que trabajar desde casa ahorra tiempo, pero que falta el contacto con los compañeros.", "(Homeoffice: pros y contras)", "Einerseits spart man Zeit, andererseits fehlt der Kontakt zu den Kollegen.",
+           [a + s + b for a in ("Einerseits spart man Zeit", "Einerseits spart man viel Zeit", "Einerseits spart man im Homeoffice Zeit")
+            for s in (", a", ". A") for b in ("ndererseits fehlt der Kontakt zu den Kollegen.", "ndererseits fehlt einem der Kontakt zu den Kollegen.", "ndererseits hat man weniger Kontakt zu den Kollegen.")],
+           "*einerseits* y *andererseits* son adverbios: en la posición 1, el verbo va enseguida (*spart man*, *fehlt der Kontakt*). *Kontakt zu* + dativo plural: *zu den Kollegen*."),
     ],
 }

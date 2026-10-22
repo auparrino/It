@@ -1,6 +1,18 @@
 # -*- coding: utf-8 -*-
 """Semana 29 — Entweder … oder (B1): conectores dobles para elegir, sumar, conceder y comparar."""
-from base import q, ch, li, cz, tr, ty, MAY  # noqa: F401
+from base import q, ch, li, cz, tr, ty, fx, di, MAY  # noqa: F401
+
+
+def _mix(*slots):
+    """Todas las combinaciones (una frase de cada lista), también sin comas y con punto en vez de «!»."""
+    import itertools
+    out = []
+    for combo in itertools.product(*slots):
+        s = " ".join(combo)
+        for y in (s, s.replace(",", ""), s.replace("!", "."), s.replace(",", "").replace("!", ".")):
+            if y not in out:
+                out.append(y)
+    return out
 
 WEEK = {
     "week": 29,
@@ -241,5 +253,16 @@ WEEK = {
         ch(0, "Elegí preposición y caso.", "Entweder fahre ich ___ Freundin in den Urlaub, oder ich bleibe zu Hause. (con mi novia)", "mit meiner", ["mit meiner", "mit meine", "für meine"], "Compañía: *mit* + dativo femenino → *meiner*."),
         cz(0, "Escribí el posesivo.", "Das war sowohl für ___ Eltern als auch für mich schwer. (mis)", "meine", note="*für* + acusativo plural: *meine Eltern*. Con *mit* sería *meinen Eltern*."),
         cz(0, "Escribí el posesivo.", "Weder mit ___ Bruder noch mit meiner Schwester kann ich darüber reden. (mi)", "meinem", note="*mit* + dativo masculino: *meinem Bruder*."),
+        # encontrá el error, dictado y repaso (semanas 12 a 26)
+        fx(0, "Ich habe weder Zeit noch kein Geld.", "kein Geld", "Geld", "negación", "*weder … noch* ya niega las dos cosas: no se suma *kein*. En castellano decimos «no tengo ni tiempo ni plata», con doble negación; en alemán alcanza con una."),
+        fx(1, "Er spricht nicht nur Deutsch, aber auch Englisch.", "aber", "sondern", "conector", "Es *nicht nur … sondern auch*: después de una negación que se corrige va *sondern* («sino»). *aber* es «pero» y acá no sirve."),
+        fx(2, "Je mehr ich lerne, desto ich weiß mehr.", "desto ich weiß mehr", "desto mehr weiß ich", "orden", "Después de *desto* va pegado el comparativo y enseguida el verbo: *desto mehr weiß ich*. En la parte con *je*, el verbo va al final."),
+        di(0, "Entweder nehmen wir den Bus oder wir gehen zu Fuß.", ["Entweder nehmen wir den Bus, oder wir gehen zu Fuß."], "*den Bus*: masculino en acusativo, con -en. Acá *entweder* lleva el verbo enseguida: *nehmen wir*."),
+        di(1, "Ich habe sowohl einen Bruder als auch eine Schwester.", note="*einen Bruder*, con -en (masculino en acusativo), y *eine Schwester*: dos terminaciones que casi no se oyen."),
+        ty(0, "Escribí dos oraciones sobre tus planes: una con *entweder … oder* y otra con *nicht nur … sondern auch*.", "(estudiar en Alemania o trabajar · aprender no solo alemán sino también inglés)", "Entweder studiere ich in Deutschland oder ich arbeite. Ich lerne nicht nur Deutsch, sondern auch Englisch.", _mix(["Entweder studiere ich in Deutschland oder ich arbeite.", "Entweder ich studiere in Deutschland oder ich arbeite.", "Entweder studiere ich in Deutschland oder ich gehe arbeiten.", "Entweder ich studiere in Deutschland oder ich gehe arbeiten."], ["Ich lerne nicht nur Deutsch, sondern auch Englisch.", "Ich lerne nicht nur Deutsch, sondern auch noch Englisch."]), "*entweder* puede llevar el verbo enseguida o dejar el orden normal; *oder* no cuenta. *nicht nur … sondern auch*: «sino» es *sondern*, no *aber*."),
+        cz(2, "Escribí el auxiliar del Perfekt.", "Er ___ in der Prüfung durchgefallen.", "ist", note="Repaso de la semana 12: *durchfallen* (desaprobar) es un cambio de estado → *sein*: *er ist durchgefallen*."),
+        cz(2, "Escribí el relativo.", "Das ist der Studiengang, ___ ich gewählt habe.", "den", note="Repaso de la semana 24: en la relativa *der Studiengang* es lo que elegí, el objeto → acusativo masculino: *den*."),
+        tr(2, "No pudo venir por la lluvia. (él)", "Wegen des Regens konnte er nicht kommen.", ["Wegen des Regens konnte er nicht kommen.", "Er konnte wegen des Regens nicht kommen."], "Repaso de la semana 26: «por» + causa = *wegen* + genitivo: *des Regens*, con -s. Y el modal en pasado: *konnte*."),
+        cz(2, "Escribí la preposición.", "Ich warte noch ___ eine Antwort der Universität.", "auf", note="Repaso de la semana 22: *warten auf* + acusativo. En castellano «espero una respuesta» va sin preposición; en alemán no se puede sacar."),
     ],
 }

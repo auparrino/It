@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Semana 20 — Für, mit, seit (A2): preposiciones con acusativo y con dativo, seit + presente, banco, correo y trámites."""
-from base import q, ch, li, cz, tr, ty, MAY  # noqa: F401
+from base import q, ch, li, cz, tr, ty, fx, di, MAY  # noqa: F401
 
 WEEK = {
     "week": 20,
@@ -365,5 +365,23 @@ WEEK = {
         cz(2, "Escribí la preposición.", "___ Montag ist das Büro wieder offen. (a partir del lunes)", "Ab", ["Ab", "ab"], "*ab* = a partir de. Con *seit* no: *seit* mira hacia atrás."),
         cz(2, "Escribí la preposición.", "Der Termin ist ___ halb zehn.", "um", note="Hora exacta: *um*. Día: *am*; mes o estación: *im*."),
         cz(2, "Escribí la preposición con artículo.", "___ Juli habe ich Urlaub.", "Im", ["Im", "im"], "Meses y estaciones: *im* (*in dem*): *im Juli, im Sommer*."),
+        # encontrá el error, dictado, repaso intercalado y producción
+        # encontrá el error
+        fx(0, "Das Geschenk ist für dir.", "dir", "dich", "caso", "*für* va siempre con acusativo: *für dich*. En castellano «para vos» no cambia, pero en alemán la preposición decide el caso."),
+        fx(1, "Ich fahre mit den Bus zur Arbeit.", "den", "dem", "caso", "*mit* va siempre con dativo: *mit dem Bus*. Que haya movimiento no cambia nada: *mit* no es de dos casos."),
+        fx(2, "Ich lerne schon für zwei Jahre Deutsch.", "für zwei Jahre", "seit zwei Jahren", "preposición", "Algo que empezó antes y sigue: *seit* + dativo (*seit zwei Jahren*, con *-n*) y el verbo en presente. «Hace dos años que estudio» no lleva pasado ni *für*."),
+        # dictado
+        di(1, "Nach dem Termin gehe ich mit den Kindern zur Post.", note="*nach dem*, *mit den Kindern* (dativo plural: *-n* también en el sustantivo) y *zur* = *zu der*."),
+        di(0, "Ich habe das Paket für meinen Vater abgeholt.", note="*für meinen Vater*: acusativo masculino, con *-en*. *abgeholt*: separable, el *ge* va en el medio."),
+        # repaso intercalado
+        cz(2, "Escribí el adjetivo.", "Ich brauche ein ___ Formular. (neu)", "neues", note="Repaso (semana 19): con *ein* neutro (nominativo o acusativo) el adjetivo muestra el género: *ein neues Formular*."),
+        tr(2, "No puedo ir al banco porque no tengo tiempo.", "Ich kann nicht zur Bank gehen, weil ich keine Zeit habe.", ["Ich kann nicht zur Bank gehen, denn ich habe keine Zeit.", "Ich kann nicht zur Bank, weil ich keine Zeit habe.", "Ich kann nicht zur Bank, denn ich habe keine Zeit.", "Ich kann nicht in die Bank gehen, weil ich keine Zeit habe."], "Repaso (semana 18): con *weil* el verbo va al final (*habe*); con *denn*, orden normal (*denn ich habe*)."),
+        cz(2, "Escribí el artículo.", "Der Geldautomat steht neben ___ Post.", "der", note="Repaso (semana 14): *neben* es de dos casos; *stehen* = ¿dónde? → dativo femenino, *neben der Post*. A diferencia de *mit*, acá decide la pregunta."),
+        cz(2, "Escribí el auxiliar.", "Ich ___ gestern 200 Euro überwiesen.", "habe", note="Repaso (semana 11): *überweisen* va con *haben*, y como *über-* acá no se separa, el participio va sin *ge-*: *überwiesen*."),
+        # producción
+        ty(2, "Escribí dos oraciones: que vivís en Rosario hace cinco años y que vas al trabajo con tu hermano.", "(Desde cuándo y con quién)", "Ich wohne seit fünf Jahren in Rosario. Ich fahre mit meinem Bruder zur Arbeit.",
+           [a + " " + b for a in ("Ich wohne seit fünf Jahren in Rosario.", "Ich lebe seit fünf Jahren in Rosario.", "Seit fünf Jahren wohne ich in Rosario.", "Seit fünf Jahren lebe ich in Rosario.")
+            for b in ("Ich fahre mit meinem Bruder zur Arbeit.", "Ich gehe mit meinem Bruder zur Arbeit.", "Mit meinem Bruder fahre ich zur Arbeit.", "Ich fahre mit meinem Bruder zusammen zur Arbeit.", "Ich fahre mit meinem Bruder mit dem Bus zur Arbeit.")],
+           "*seit* + dativo (*fünf Jahren*, con *-n*) y verbo en presente. *mit meinem Bruder* (dativo) y *zur Arbeit* (*zu der*, dativo)."),
     ],
 }

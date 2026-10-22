@@ -1,6 +1,18 @@
 # -*- coding: utf-8 -*-
 """Semana 31 — Das muss gemacht werden (B1): pasiva con modales, pasiva en Perfekt y Zustandspassiv."""
-from base import q, ch, li, cz, tr, ty, MAY  # noqa: F401
+from base import q, ch, li, cz, tr, ty, fx, di, MAY  # noqa: F401
+
+
+def _mix(*slots):
+    """Todas las combinaciones (una frase de cada lista), también sin comas y con punto en vez de «!»."""
+    import itertools
+    out = []
+    for combo in itertools.product(*slots):
+        s = " ".join(combo)
+        for y in (s, s.replace(",", ""), s.replace("!", "."), s.replace(",", "").replace("!", ".")):
+            if y not in out:
+                out.append(y)
+    return out
 
 WEEK = {
     "week": 31,
@@ -248,5 +260,16 @@ WEEK = {
         cz(0, "Escribí el infinitivo con *zu* de *anrufen*.", "Wenn du Hilfe brauchst, brauchst du nur ___.", "anzurufen", note="*brauchen nur zu* = solo tenés que. Con separable, *zu* en el medio: *anzurufen*."),
         tr(0, "No hace falta que me esperes.", "Du brauchst nicht auf mich zu warten.", ["Du brauchst nicht auf mich zu warten.", "Du musst nicht auf mich warten.", "Ihr braucht nicht auf mich zu warten.", "Ihr müsst nicht auf mich warten.", "Sie brauchen nicht auf mich zu warten.", "Sie müssen nicht auf mich warten."], "«No hace falta que…» = *brauchst nicht zu* (o *musst nicht*). Ojo: no es *darfst nicht* (prohibido), y nuestro subjuntivo «esperes» desaparece."),
         ty(0, "Reescribí con *brauchen*.", "Du musst nicht kommen.", "Du brauchst nicht zu kommen.", note="*muss nicht* = *braucht nicht zu*: con *brauchen* el infinitivo lleva *zu*."),
+        # encontrá el error, dictado y repaso (semanas 13 a 26)
+        fx(0, "Der Drucker muss heute noch repariert wird.", "wird", "werden", "verbo", "Con modal, *werden* va en infinitivo al final: *muss … repariert werden*. El modal ya está conjugado; el otro verbo no se conjuga."),
+        fx(1, "Der Wasserhahn ist gestern repariert geworden.", "geworden", "worden", "auxiliar", "En la pasiva, el participio de *werden* pierde el *ge-*: *ist repariert worden*. *geworden* es «se volvió, llegó a ser»: *Er ist Arzt geworden*."),
+        fx(1, "Ich glaube, dass der Drucker schon ist repariert worden.", "ist repariert worden", "repariert worden ist", "orden", "En la subordinada el verbo conjugado (*ist*) va al final de todo, después de *repariert worden*."),
+        di(1, "Der Wasserhahn ist von einem Handwerker repariert worden.", note="*von einem Handwerker*: dativo masculino, con -em. Y *worden*, sin *ge-*."),
+        di(0, "Die Rechnung muss bis zum Ende des Monats bezahlt werden.", note="*zum* = *zu dem*; *des Monats*, genitivo con -s; y *werden* cierra la oración."),
+        ty(1, "Contá en dos oraciones cómo va el arreglo del baño: una con *ist … worden* y otra con *muss … werden*.", "(la canilla ya fue cambiada · el baño todavía hay que limpiarlo)", "Der Wasserhahn ist schon ausgetauscht worden. Das Bad muss noch geputzt werden.", _mix(["Der Wasserhahn ist schon ausgetauscht worden.", "Der Wasserhahn ist bereits ausgetauscht worden.", "Der Wasserhahn ist schon gewechselt worden.", "Der Wasserhahn ist bereits gewechselt worden."], ["Das Bad muss noch geputzt werden.", "Das Bad muss noch gereinigt werden.", "Das Bad muss noch sauber gemacht werden.", "Das Badezimmer muss noch geputzt werden.", "Das Badezimmer muss noch gereinigt werden."]), "Perfekt de la pasiva: *ist* + participio + *worden* (sin ge-). Con modal: *muss* + participio + *werden*, al final."),
+        cz(2, "Escribí *wenn* u *ob*.", "Der Handwerker hat gefragt, ___ wir morgen zu Hause sind.", "ob", note="Repaso de la semana 26: pregunta indirecta de sí o no → *ob* («si»). *wenn* es el «si» de las condiciones."),
+        cz(2, "Escribí el pronombre (a mí).", "Kannst du ___ bitte die Anleitung geben?", "mir", note="Repaso de la semana 13: a quién se le da algo va en dativo: *mir*. *mich* sería acusativo, y con *geben* el acusativo ya es *die Anleitung*."),
+        cz(2, "Escribí la forma de *werden* que falta.", "Ich ___ den Wasserhahn gern selbst reparieren, aber ich habe keine Zeit.", "würde", note="Repaso de la semana 25: lo que harías → *würde* + infinitivo, con ü. *wurde* (sin ü) es el pasado."),
+        cz(2, "Escribí *als* o *wie*.", "Der neue Drucker ist genauso laut ___ der alte.", "wie", note="Repaso de la semana 16: igualdad (*so*, *genauso* + adjetivo) → *wie*. *als* solo después de un comparativo: *lauter als*."),
     ],
 }

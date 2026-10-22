@@ -46,4 +46,20 @@ def ty(part, prompt, stem, answer, accept=None, note=""):
             "answer": answer, "accept": _acc(answer, accept), "note": note}
 
 
+def fx(part, stem, bad, good, cat, note, accept=None):
+    """Encontrá el error: stem con una sola palabra (o grupo) mal, bad; good la
+    corrige (None: sobra).  La respuesta es la oración corregida."""
+    answer = stem.replace(bad, good, 1) if good is not None else " ".join(stem.replace(bad, "", 1).split())
+    return {"type": "fixerr", "part": part, "prompt": "Encontrá el error: tocá la palabra que está mal y corregila.",
+            "stem": stem, "answer": answer, "accept": _acc(answer, accept), "bad": bad, "good": good,
+            "cat": cat, "note": note}
+
+
+def di(part, sentence, accept=None, note=""):
+    """Dictado: se escucha la oración y se escribe entera (las terminaciones
+    que el hispanohablante no oye: -em/-en/-er, ein/einen)."""
+    return {"type": "dictation", "part": part, "prompt": "Dictado: escuchá y escribí lo que oís.",
+            "stem": sentence, "answer": sentence, "accept": _acc(sentence, accept), "note": note}
+
+
 MAY = "La app no corrige mayúsculas, pero en alemán los sustantivos van siempre con mayúscula."

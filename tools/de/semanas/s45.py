@@ -2,7 +2,7 @@
 """Semana 45 — Sehr geehrte Damen und Herren (C1): registro formal, cartas y alemán administrativo."""
 from itertools import product
 
-from base import q, ch, li, cz, tr, ty, MAY  # noqa: F401
+from base import q, ch, li, cz, tr, ty, fx, di, MAY  # noqa: F401
 
 
 def V(*parts):
@@ -323,5 +323,23 @@ WEEK = {
         ch(1, "Elegí el conector.", "Ich möchte wissen, ___ mein Antrag schon bearbeitet wurde.", "ob", ["ob", "wenn", "dass"], "«si ya se tramitó» es una pregunta de sí o no → *ob*. *wenn* es «si» de condición."),
         tr(1, "Le agradecería que me dijera si el formulario está completo. (formal)", "Ich wäre Ihnen dankbar, wenn Sie mir sagen könnten, ob das Formular vollständig ist.", ["Ich wäre Ihnen dankbar, wenn Sie mir sagen könnten, ob das Formular vollständig ist.", "Ich wäre Ihnen dankbar, wenn Sie mir mitteilen könnten, ob das Formular vollständig ist.", "Ich wäre Ihnen dankbar, wenn Sie mir sagen würden, ob das Formular vollständig ist.", "Ich wäre Ihnen dankbar, wenn Sie mir mitteilen würden, ob das Formular vollständig ist.", "Ich wäre Ihnen sehr dankbar, wenn Sie mir sagen könnten, ob das Formular vollständig ist.", "Ich wäre Ihnen sehr dankbar, wenn Sie mir mitteilen könnten, ob das Formular vollständig ist."], "Las dos clases de «si» juntas: *wenn* (condición de cortesía) y *ob* (pregunta). Las dos con el verbo al final."),
         ty(1, "Pasá a pregunta indirecta formal, empezando con *Könnten Sie mir mitteilen, …*", "Wann bekomme ich den Bescheid?", "Könnten Sie mir mitteilen, wann ich den Bescheid bekomme?", ["Könnten Sie mir mitteilen, wann ich den Bescheid bekomme?", "Könnten Sie mir mitteilen, wann ich den Bescheid erhalte?", "Könnten Sie mir mitteilen wann ich den Bescheid bekomme?"], "La palabra W se queda (*wann*) y el verbo pasa al final: *wann ich den Bescheid bekomme*."),
+        # encontrá el error, dictado, repaso intercalado y producción
+        # encontrá el error
+        fx(0, "Ich beziehe mich zu Ihrem Schreiben vom 3. Mai.", "zu Ihrem", "auf Ihr", "preposición", "*sich beziehen auf* + acusativo: *Ich beziehe mich auf Ihr Schreiben*. Al cambiar la preposición cambia el caso: de *Ihrem* (dativo) a *Ihr* (acusativo neutro)."),
+        fx(1, "Sollten Sie Fragen haben, Sie können mich gern anrufen.", "Sie können", "können Sie", "orden", "*Sollten Sie Fragen haben* ocupa la posición 1 (es como una oración con *wenn*), así que la principal sigue con el verbo: *…, können Sie mich gern anrufen*."),
+        fx(1, "Ich freue mich, Sie persönlich kennengelernt zu sein.", "zu sein", "zu haben", "auxiliar", "El infinitivo pasado usa el auxiliar del Perfekt: *Ich habe Sie kennengelernt*, así que *kennengelernt zu haben*. *zu sein* es para verbos con *sein*: *froh, angekommen zu sein*."),
+        # dictado
+        di(1, "Hiermit beantrage ich einen neuen Termin bei Ihrem Sachbearbeiter.", note="*einen neuen Termin*: acusativo masculino, *-en* en las dos palabras. *bei Ihrem Sachbearbeiter*: *bei* pide dativo, con *-em*."),
+        di(2, "Bitte fügen Sie dem Antrag eine Kopie Ihres Ausweises bei.", note="*beifügen* + dativo: *dem Antrag* (*-m*). *Ihres Ausweises*: genitivo masculino, *-es* en el posesivo y en el sustantivo. *bei* va al final: es separable."),
+        # repaso intercalado
+        cz(2, "Escribí el artículo.", "Das Formular liegt schon auf ___ Schreibtisch des Sachbearbeiters.", "dem", note="Repaso (semana 14): *liegen* es un estado (¿dónde?): dativo, *auf dem Schreibtisch*. Con *legen* (lo ponés ahí) sería *auf den Schreibtisch*."),
+        cz(1, "Escribí *wurde* o *würde*.", "Ich ___ mich freuen, wenn Sie mir bald antworten könnten.", "würde", note="Repaso (semana 25): cortesía = Konjunktiv II, *würde* + infinitivo (con *ü*). *wurde* es pasado: «me alegré». En una carta formal, esa diéresis es la diferencia entre pedir y contar."),
+        cz(1, "Escribí la palabra (da- + preposición).", "Ich möchte Sie ___ hinweisen, dass die Frist morgen endet.", "darauf", note="Repaso (semana 22): *hinweisen auf* + una oración con *dass* → *darauf hinweisen, dass …*. El *da(r)-* anuncia la oración que viene."),
+        tr(2, "Cuando llegó la carta, el plazo ya había vencido.", "Als der Brief ankam, war die Frist schon abgelaufen.", [a + b for a in ("Als der Brief ankam, ", "Als der Brief kam, ", "Als das Schreiben ankam, ") for b in ("war die Frist schon abgelaufen.", "war die Frist bereits abgelaufen.")], "Repaso (semanas 21 y 28): una vez en el pasado → *als*. Lo anterior va en Plusquamperfekt con *sein* (*war … abgelaufen*), porque *ablaufen* no tiene objeto."),
+        # producción
+        ty(0, "Empezá un reclamo formal en dos oraciones: que te referís a la factura del 3 de mayo y que por la presente solicitás el reembolso del importe (con *hiermit*).", "(Reclamo por una factura)", "Ich beziehe mich auf Ihre Rechnung vom 3. Mai. Hiermit beantrage ich die Erstattung des Betrags.",
+           [a + " " + b for a in ("Ich beziehe mich auf Ihre Rechnung vom 3. Mai.", "Ich schreibe Ihnen bezüglich Ihrer Rechnung vom 3. Mai.", "Ich beziehe mich auf die Rechnung vom 3. Mai.", "Ich schreibe Ihnen wegen Ihrer Rechnung vom 3. Mai.")
+            for b in ("Hiermit beantrage ich die Erstattung des Betrags.", "Hiermit beantrage ich die Erstattung des Betrages.", "Hiermit beantrage ich die Rückerstattung des Betrags.", "Hiermit fordere ich die Erstattung des Betrags.", "Hiermit bitte ich um die Erstattung des Betrags.")],
+           "*sich beziehen auf* + acusativo (*Ihre Rechnung*), o *bezüglich* + genitivo (*Ihrer Rechnung*). *Hiermit* ocupa la posición 1, así que sigue el verbo: *beantrage ich*. *des Betrags*: genitivo."),
     ],
 }

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Semana 10 — Meine Wohnung (A1): posesivos, adjetivo predicativo y es gibt."""
-from base import q, ch, li, cz, tr, ty, MAY  # noqa: F401
+from base import q, ch, li, cz, tr, ty, fx, di, MAY  # noqa: F401
 
 WEEK = {
     "week": 10,
@@ -284,5 +284,16 @@ WEEK = {
         ty(2, "Negá la oración.", "Die Küche ist groß.", "Die Küche ist nicht groß.", note="Adjetivo → *nicht* justo antes: *nicht groß*."),
         tr(2, "No necesito el ropero.", "Ich brauche den Schrank nicht.", note="Objeto con *den* → *nicht* después, al final. (*keinen Schrank* = ningún ropero)."),
         ch(2, "Contestá que sí.", "Ist die Wohnung nicht möbliert? – ___, sie ist möbliert.", "Doch", ["Doch", "Ja", "Nein"], "Pregunta con *nicht* y respuesta que la contradice → *doch*."),
+        # encontrá el error y dictado
+        fx(0, "Das ist Anna und das ist sein Bruder.", "sein", "ihr", "posesivo", "«Su» de ella es *ihr*: *ihr Bruder*. *sein* es de él. El castellano dice «su» para los dos; el alemán mira de quién es la cosa."),
+        fx(1, "Es gibt ein Balkon und zwei Schlafzimmer.", "ein Balkon", "einen Balkon", "caso", "Lo que hay va en acusativo: *der Balkon* → *Es gibt einen Balkon*. En castellano «hay» no deja ver el caso; en alemán la cosa es objeto de *gibt*."),
+        fx(1, "Die Zimmer sind sehr große.", "große", "groß", "adjetivo", "Después de *sein* el adjetivo va sin terminación, aunque el sustantivo sea plural: *Die Zimmer sind groß*. El castellano concuerda («grandes»); el alemán, acá, no."),
+        di(0, "Unsere Wohnung hat einen Balkon und eine Küche.", note="*unsere* lleva -e (femenino) y *einen Balkon*, -en (masculino en acusativo)."),
+        di(1, "Es gibt keinen Schrank im Schlafzimmer.", note="*es gibt* + acusativo: *keinen Schrank*, con -en. *im* = *in dem*."),
+        # repaso de las semanas 6 a 9
+        cz(2, "Escribí el imperativo de *nehmen* (a un amigo).", "___ die U-Bahn!", "Nimm", note="Repaso de la semana 9: de *du nimmst* sacás *du* y *-st* → *Nimm!*. El cambio e → i se queda."),
+        cz(2, "Escribí el artículo.", "Ich fahre mit ___ Fahrrad zur Arbeit.", "dem", note="Repaso de la semana 9: *mit* + dativo; *das Fahrrad* → *mit dem Fahrrad*."),
+        tr(2, "Tengo que levantarme temprano.", "Ich muss früh aufstehen.", note="Repaso de las semanas 7 y 8: con modal, el separable va entero al final: *aufstehen*. El «me» no se traduce."),
+        cz(2, "Escribí la forma de *fernsehen*.", "Am Abend ___ er fern.", "sieht", note="Repaso de las semanas 6 y 8: *sehen* → *er sieht*, y *fernsehen* hace lo mismo: *er sieht … fern*."),
     ],
 }

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Semana 12 — Wir sind gefahren (A2): Perfekt con sein, war y hatte, contar un viaje."""
-from base import q, ch, li, cz, tr, ty, MAY  # noqa: F401
+from base import q, ch, li, cz, tr, ty, fx, di, MAY  # noqa: F401
 
 WEEK = {
     "week": 12,
@@ -348,5 +348,16 @@ WEEK = {
         ch(2, "¿Qué significa?", "Samstags gehe ich auf den Markt.", "Los sábados voy a la feria.", ["Los sábados voy a la feria.", "Este sábado voy a la feria.", "El sábado pasado fui a la feria."], "*samstags* (con *-s*) = todos los sábados, costumbre. Un sábado concreto sería *am Samstag*."),
         tr(2, "Los lunes no trabajo.", "Montags arbeite ich nicht.", ["Montags arbeite ich nicht.", "Ich arbeite montags nicht.", "Montags arbeite ich nie.", "Ich arbeite montags nie."], "Costumbre: *montags*. *Am Montag arbeite ich nicht* se entiende como «este lunes»."),
         tr(2, "Algún día voy a vivir en Alemania.", "Eines Tages wohne ich in Deutschland.", ["Eines Tages wohne ich in Deutschland.", "Eines Tages lebe ich in Deutschland.", "Ich wohne eines Tages in Deutschland.", "Ich lebe eines Tages in Deutschland.", "Eines Tages werde ich in Deutschland wohnen.", "Eines Tages werde ich in Deutschland leben."], "«Algún día» = *eines Tages*, fórmula en genitivo. El presente alcanza para el futuro."),
+        # encontrá el error y dictado
+        fx(0, "Letztes Jahr habe ich nach Rom geflogen.", "habe", "bin", "auxiliar", "*fliegen* es ir de un lugar a otro: Perfekt con *sein*: *Letztes Jahr bin ich nach Rom geflogen*. En castellano todo va con «haber»; por eso se cuela *habe*."),
+        fx(0, "Am Sonntag hat er zu Hause geblieben.", "hat", "ist", "auxiliar", "*bleiben* no es movimiento, pero va con *sein*: *er ist geblieben*. Lo mismo *sein* (*ist gewesen*) y *passieren* (*ist passiert*)."),
+        fx(1, "Gestern ich war am Strand.", "ich war", "war ich", "orden", "*war* también va en la posición 2: si empezás con *Gestern*, sigue *war* y después el sujeto: *Gestern war ich am Strand*."),
+        di(2, "Wir sind mit dem Zug ans Meer gefahren.", note="*mit dem Zug* (dativo) y *ans Meer* (adónde). *sind … gefahren*: ir de un lugar a otro → *sein*."),
+        di(1, "Er hatte keinen Reisepass.", note="*hatte* sin terminación con *er*, y *keinen Reisepass*: masculino en acusativo, con -en."),
+        # repaso de las semanas 8 a 11
+        cz(2, "Escribí el participio de *bezahlen*.", "Hast du das Essen schon ___?", "bezahlt", note="Repaso de la semana 11: *be-* no se separa, así que no hay *ge-*: *bezahlt*."),
+        cz(2, "Escribí el participio de *anrufen*.", "Ich habe dich gestern ___.", "angerufen", note="Repaso de la semana 11: separable → *ge-* en el medio; *rufen* es irregular → *-en*: *angerufen*."),
+        tr(2, "Anna y su hermano viven en Bremen.", "Anna und ihr Bruder wohnen in Bremen.", ["Anna und ihr Bruder wohnen in Bremen.", "Anna und ihr Bruder leben in Bremen."], "Repaso de la semana 10: «su» de ella → *ihr Bruder*. *sein* sería de él."),
+        cz(2, "Escribí el imperativo de *aussteigen* (de usted).", "___ Sie bitte am Bahnhof aus!", "Steigen", note="Repaso de la semana 9: imperativo de *Sie* = infinitivo + *Sie*, con el verbo primero; el prefijo *aus* va al final."),
     ],
 }

@@ -35,10 +35,10 @@
           blurb: "Alemán desde cero hasta C1 en un año, con los Alpes y el cielo blanco y azul de Baviera.",
           themeColor: { light: "#bfdcf3", dark: "#13253c" }, bg: "#f7f5f0",
           fonts: ["fonts/grenze-gotisch.woff2"],
-          missing: ["conjugator.js", "frasi_data.js", "trabajo_data.js", "formule_data.js", "lab_data.js",
+          missing: ["conjugator.js", "frasi_data.js", "trabajo_data.js", "formule_data.js",
                     "letture_settimana.js", "tramo_data.js", "letture_data.js", "mapas_data.js", "diagnosi.js", "scrivi.js",
                     "freq_data.js", "ascolto_data.js", "dictogloss_data.js", "esame_data.js",
-                    "voci_cv_data.js", "duelli_data.js", "devolucion_data.js", "porque_data.js", "escritura_plus_data.js",
+                    "voci_cv_data.js", "devolucion_data.js", "porque_data.js", "escritura_plus_data.js",
                     "variaciones_data.js", "escritos_data.js", "desglose_data.js", "biblioteca_data.js", "radio_data.js",
                     "fuera_data.js"],
           data: ["course.json"] }

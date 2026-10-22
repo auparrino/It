@@ -16,7 +16,7 @@ if sys.argv[1:]:
     os.environ["DE_SEMANAS"] = ",".join(sys.argv[1:])      # no carga las que se están escribiendo
 import curso  # noqa: E402
 
-TYPES = {"choice", "cloze", "translate", "listen", "typed"}
+TYPES = {"choice", "cloze", "translate", "listen", "typed", "fixerr", "dictation"}
 SPANISH = re.compile(r"[ñáéíóú¿¡]", re.I)
 LEVELS = {"A1", "A2", "B1", "B2", "C1"}
 
@@ -92,7 +92,12 @@ def check(w, errs):
                 bad("%s: opciones repetidas sin mirar mayúsculas %r" % (t, o))
         if it["type"] == "cloze" and not re.search(r"_{3,}", it["stem"]):
             bad("%s: hueco sin ___" % t)
-        if it["type"] in ("translate", "typed", "cloze"):
+        if it["type"] == "fixerr":
+            if not it.get("bad") or it["stem"].count(it["bad"]) != 1 or not it.get("cat"):
+                bad("%s: encontrá el error sin «bad» (una sola vez en el stem) o sin categoría" % t)
+        if it["type"] == "dictation" and SPANISH.search(it["stem"]):
+            bad("%s: dictado que no es en alemán" % t)
+        if it["type"] in ("translate", "typed", "cloze", "fixerr", "dictation"):
             for a in it.get("accept", []):
                 if SPANISH.search(a):
                     bad("%s: respuesta escrita con letras del castellano %r" % (t, a))

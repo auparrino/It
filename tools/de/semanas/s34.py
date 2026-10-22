@@ -1,6 +1,18 @@
 # -*- coding: utf-8 -*-
 """Semana 34 — Obwohl, trotzdem, deshalb (B2): concesivos y consecutivos, y dónde va el verbo."""
-from base import q, ch, li, cz, tr, ty, MAY  # noqa: F401
+from base import q, ch, li, cz, tr, ty, fx, di, MAY  # noqa: F401
+
+
+def _mix(*slots):
+    """Todas las combinaciones (una frase de cada lista), también sin comas y con punto en vez de «!»."""
+    import itertools
+    out = []
+    for combo in itertools.product(*slots):
+        s = " ".join(combo)
+        for y in (s, s.replace(",", ""), s.replace("!", "."), s.replace(",", "").replace("!", ".")):
+            if y not in out:
+                out.append(y)
+    return out
 
 
 def _nc(*xs):
@@ -299,5 +311,16 @@ WEEK = {
         ch(0, "Elegí el artículo.", "Trotz des Regens bin ich mit ___ Fahrrad gefahren.", "dem", ["dem", "das", "den"], "*trotz* + genitivo, pero *mit* + dativo: *mit dem Fahrrad*."),
         tr(0, "Aunque ya no trabaja, se levanta a las seis. (él)", "Obwohl er nicht mehr arbeitet, steht er um sechs auf.", ["Obwohl er nicht mehr arbeitet, steht er um sechs auf.", "Obwohl er nicht mehr arbeitet, steht er um sechs Uhr auf.", "Er steht um sechs auf, obwohl er nicht mehr arbeitet.", "Er steht um sechs Uhr auf, obwohl er nicht mehr arbeitet."], "«Ya no» = *nicht mehr*; con *obwohl*, verbo al final."),
         tr(0, "Recién empecé hace dos semanas.", "Ich habe erst vor zwei Wochen angefangen.", ["Ich habe erst vor zwei Wochen angefangen.", "Erst vor zwei Wochen habe ich angefangen.", "Ich habe erst vor zwei Wochen begonnen."], "«Recién» (hace poco, menos de lo esperado) = *erst*; «hace» terminado = *vor*."),
+        # encontrá el error, dictado y repaso (semanas 19 a 27)
+        fx(0, "Obwohl es regnet, wir gehen spazieren.", "wir gehen", "gehen wir", "orden", "La subordinada con *obwohl* ocupa la posición 1: después de la coma va el verbo y después el sujeto: *gehen wir spazieren*."),
+        fx(0, "Trotzdem dem Regen sind wir gegangen.", "Trotzdem dem Regen", "Trotz des Regens", "preposición", "Delante de un sustantivo va la preposición *trotz* + genitivo: *trotz des Regens*. *trotzdem* es un adverbio y va solo: *Es regnete. Trotzdem sind wir gegangen.*"),
+        fx(1, "Ich war krank, deshalb ich bin zu Hause geblieben.", "deshalb ich bin", "deshalb bin ich", "orden", "*deshalb* ocupa la posición 1: el verbo viene enseguida: *deshalb bin ich*. El castellano «por eso yo me quedé» no cambia el orden; el alemán sí."),
+        di(0, "Trotz des schlechten Wetters sind wir ans Meer gefahren.", note="*trotz* + genitivo: *des schlechten Wetters*, con -es y -en. *ans* = *an das*: hacia dónde, acusativo."),
+        di(1, "Er hat keinen Job gefunden, deshalb ist er zurückgekehrt.", ["Er hat keinen Job gefunden deshalb ist er zurückgekehrt."], "*keinen Job*: masculino en acusativo, con -en. Y *deshalb* + verbo enseguida: *ist er*."),
+        ty(2, "Escribí dos oraciones sobre una amiga que se mudó a Alemania: una con *obwohl* y otra con *deshalb*.", "(aunque al principio no hablaba alemán, se adaptó rápido · por eso ahora se siente como en casa)", "Obwohl sie am Anfang kein Deutsch sprach, hat sie sich schnell eingelebt. Deshalb fühlt sie sich jetzt zu Hause.", _mix(["Obwohl sie am Anfang kein Deutsch sprach, hat sie sich schnell eingelebt.", "Obwohl sie anfangs kein Deutsch sprach, hat sie sich schnell eingelebt.", "Obwohl sie am Anfang kein Deutsch gesprochen hat, hat sie sich schnell eingelebt.", "Obwohl sie am Anfang kein Deutsch sprach, lebte sie sich schnell ein.", "Sie hat sich schnell eingelebt, obwohl sie am Anfang kein Deutsch sprach."], ["Deshalb fühlt sie sich jetzt zu Hause.", "Deshalb fühlt sie sich jetzt wie zu Hause.", "Deshalb fühlt sie sich jetzt wohl.", "Sie fühlt sich deshalb jetzt zu Hause.", "Jetzt fühlt sie sich deshalb wie zu Hause."]), "*obwohl* manda el verbo al final; después de la coma, el verbo de la principal. *deshalb* en posición 1 → verbo enseguida: *Deshalb fühlt sie sich*."),
+        cz(2, "Escribí *wurde*, *würde* o *worden*.", "Wenn ich mehr Zeit hätte, ___ ich einen Sprachkurs machen.", "würde", note="Repaso de la semana 25: lo que harías → *würde* + infinitivo. *wurde* es pasado (o pasiva) y *worden* va solo en la pasiva con *ist*."),
+        cz(2, "Escribí el adjetivo con su terminación.", "Viele Menschen haben ___ Vorurteile. (alt)", "alte", note="Repaso de la semana 19: sin artículo, el adjetivo lleva la terminación que tendría el artículo: plural en acusativo (*die*) → *alte Vorurteile*."),
+        tr(2, "En Alemania se habla mucho de la inmigración.", "In Deutschland wird viel über Einwanderung gesprochen.", ["In Deutschland wird viel über Einwanderung gesprochen.", "In Deutschland wird viel über die Einwanderung gesprochen.", "Es wird in Deutschland viel über Einwanderung gesprochen.", "Es wird in Deutschland viel über die Einwanderung gesprochen.", "In Deutschland spricht man viel über Einwanderung.", "In Deutschland spricht man viel über die Einwanderung."], "Repaso de las semanas 22 y 27: «se habla» → pasiva sin sujeto, siempre en singular: *wird … gesprochen*. Y «hablar de» = *sprechen über* + acusativo."),
+        cz(2, "Escribí el artículo.", "Wegen ___ Krieges mussten viele Menschen ihre Heimat verlassen.", "des", note="Repaso de la semana 26: *wegen* + genitivo; *der Krieg* → *des Krieges*, con -es."),
     ],
 }

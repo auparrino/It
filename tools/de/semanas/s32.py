@@ -1,6 +1,18 @@
 # -*- coding: utf-8 -*-
 """Semana 32 — Eine Entscheidung treffen (B1): Nomen-Verb-Verbindungen en el trabajo."""
-from base import q, ch, li, cz, tr, ty, MAY  # noqa: F401
+from base import q, ch, li, cz, tr, ty, fx, di, MAY  # noqa: F401
+
+
+def _mix(*slots):
+    """Todas las combinaciones (una frase de cada lista), también sin comas y con punto en vez de «!»."""
+    import itertools
+    out = []
+    for combo in itertools.product(*slots):
+        s = " ".join(combo)
+        for y in (s, s.replace(",", ""), s.replace("!", "."), s.replace(",", "").replace("!", ".")):
+            if y not in out:
+                out.append(y)
+    return out
 
 
 def _nc(*xs):
@@ -262,5 +274,16 @@ WEEK = {
         tr(2, "La empresa nos pone una laptop a disposición.", "Die Firma stellt uns einen Laptop zur Verfügung.", ["Die Firma stellt uns einen Laptop zur Verfügung.", "Das Unternehmen stellt uns einen Laptop zur Verfügung.", "Die Firma stellt uns ein Laptop zur Verfügung.", "Das Unternehmen stellt uns ein Laptop zur Verfügung."], "Alguien da algo: *zur Verfügung stellen*. (*Laptop* es *der* o *das*.)"),
         ty(2, "Escribí en alemán, con artículo.", "«el orden del día»", "die Tagesordnung", note="*der Tag* + *die Ordnung*: manda la última palabra. " + MAY),
         li(2, "Tagesordnung", ["Tagesordnung", "Tageszeitung", "Tagesablauf"], "*die Tagesordnung* = el orden del día."),
+        # encontrá el error, dictado y repaso (semanas 18 a 31)
+        fx(0, "Wir müssen heute eine Entscheidung machen.", "machen", "treffen", "calco", "Una decisión no se «hace» en alemán: se dice *eine Entscheidung treffen*. «Tomar» o «hacer» una decisión es calco: el verbo de estas combinaciones se aprende pegado al sustantivo."),
+        fx(1, "Darf ich eine Frage machen?", "machen", "stellen", "calco", "Una pregunta se «pone»: *eine Frage stellen*. «Hacer una pregunta» no se traduce palabra por palabra."),
+        fx(1, "Ich gebe dich morgen Bescheid.", "dich", "dir", "caso", "*Bescheid geben* funciona como *geben*: a quién se le avisa va en dativo: *dir*. En castellano «te aviso» no deja ver el caso."),
+        di(1, "Wir haben gestern einen wichtigen Beschluss gefasst.", note="*einen wichtigen Beschluss*: masculino en acusativo, con -en en el artículo y en el adjetivo."),
+        di(2, "Der Vorschlag wurde vom Vorstand angenommen.", ["Der Vorschlag wurde von dem Vorstand angenommen."], "*vom* = *von dem*, dativo. *wurde*, con u: pasiva en pasado."),
+        ty(1, "Escribí dos oraciones: ya decidiste algo y le vas a avisar a tu jefa. Usá *eine Entscheidung treffen* (en Perfekt) y *Bescheid geben*.", "(ya tomé una decisión · mañana le aviso a mi jefa)", "Ich habe schon eine Entscheidung getroffen. Morgen gebe ich meiner Chefin Bescheid.", _mix(["Ich habe schon eine Entscheidung getroffen.", "Ich habe bereits eine Entscheidung getroffen.", "Ich habe eine Entscheidung getroffen."], ["Morgen gebe ich meiner Chefin Bescheid.", "Ich gebe meiner Chefin morgen Bescheid.", "Ich gebe morgen meiner Chefin Bescheid.", "Morgen sage ich meiner Chefin Bescheid.", "Ich sage meiner Chefin morgen Bescheid."]), "*getroffen* es el participio de *treffen*. *Bescheid geben* pide dativo: *meiner Chefin*. Si empezás con *Morgen*, el verbo va enseguida."),
+        cz(2, "Escribí *weil* o *denn*.", "Die Sitzung fällt aus, ___ der Chef ist krank.", "denn", note="Repaso de la semana 18: el verbo *ist* va segundo, no al final, así que es *denn*. Con *weil* sería *weil der Chef krank ist*."),
+        cz(2, "Escribí la palabra que falta.", "Der Vertrag ist gestern unterschrieben ___.", "worden", note="Repaso de la semana 31: Perfekt de la pasiva = *ist* + participio + *worden*, sin *ge-*."),
+        tr(2, "Después de escribir el acta, se la mandé al jefe.", "Nachdem ich das Protokoll geschrieben hatte, schickte ich es dem Chef.", _mix(["Nachdem ich das Protokoll geschrieben hatte, schickte ich es dem Chef.", "Nachdem ich das Protokoll geschrieben hatte, schickte ich es an den Chef.", "Nachdem ich das Protokoll geschrieben hatte, habe ich es dem Chef geschickt.", "Nachdem ich das Protokoll geschrieben hatte, habe ich es an den Chef geschickt."]), "Repaso de la semana 28: *nachdem* + Plusquamperfekt (*geschrieben hatte*) para lo anterior. Después de la coma, el verbo enseguida: *schickte ich*."),
+        cz(2, "Escribí la pregunta (wo- + preposición).", "___ denkst du? – An die Sitzung morgen.", "Woran", note="Repaso de la semana 22: *denken an* + cosa → se pregunta con *wo(r)-* + preposición: *Woran?* Para una persona: *An wen?*"),
     ],
 }

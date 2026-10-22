@@ -1,6 +1,18 @@
 # -*- coding: utf-8 -*-
 """Semana 33 — Der lachende Mann (B2): el participio I y II como adjetivo."""
-from base import q, ch, li, cz, tr, ty, MAY  # noqa: F401
+from base import q, ch, li, cz, tr, ty, fx, di, MAY  # noqa: F401
+
+
+def _mix(*slots):
+    """Todas las combinaciones (una frase de cada lista), también sin comas y con punto en vez de «!»."""
+    import itertools
+    out = []
+    for combo in itertools.product(*slots):
+        s = " ".join(combo)
+        for y in (s, s.replace(",", ""), s.replace("!", "."), s.replace(",", "").replace("!", ".")):
+            if y not in out:
+                out.append(y)
+    return out
 
 
 def _nc(*xs):
@@ -287,5 +299,16 @@ WEEK = {
         ch(2, "Elegí.", "Häng das nasse Handtuch bitte ___ Balkon!", "auf den", ["auf den", "auf dem", "am"], "*hängen* con objeto = colgar algo: destino, acusativo: *auf den Balkon*."),
         cz(2, "Escribí el artículo.", "Das frisch gewaschene Handtuch hängt auf ___ Balkon. (der Balkon)", "dem", note="*hängen* sin objeto = estar colgado: dónde, dativo: *auf dem Balkon*."),
         tr(2, "Las llaves están en el cajón.", "Die Schlüssel liegen in der Schublade.", ["Die Schlüssel liegen in der Schublade.", "Die Schlüssel sind in der Schublade."], "Sin movimiento: *in der Schublade* (dativo), con *liegen*."),
+        # encontrá el error, dictado y repaso (semanas 12 a 30)
+        fx(0, "Wir hörten die lachend Kinder im Garten.", "lachend Kinder", "lachenden Kinder", "adjetivo", "Delante del sustantivo, el participio se declina como cualquier adjetivo: *die lachenden Kinder*. Sin terminación solo va cuando dice «cómo»: *Sie kamen lachend herein*."),
+        fx(1, "Wir haben das reparierten Auto abgeholt.", "reparierten", "reparierte", "adjetivo", "*das Auto* en acusativo, después de *das* → *-e*: *das reparierte Auto*. *-en* iría con *den* (masculino) o en dativo."),
+        fx(2, "Ich bin sehr spannend auf das Ergebnis.", "spannend", "gespannt", "participio", "*gespannt* (participio II) dice cómo estás vos: intrigado, ansioso. *spannend* (participio I) es lo que produce ese efecto: *ein spannender Film*. Como «aburrido» y «aburridor»."),
+        di(0, "Im Vordergrund sieht man einen schlafenden Hund.", note="*einen schlafenden Hund*: masculino en acusativo, -en en el artículo y en el participio."),
+        di(2, "Vor dem alten Brunnen sitzt ein lesender Mann.", note="*vor dem alten Brunnen*: dónde → dativo, -em y -en. *ein lesender Mann*: nominativo masculino, con -er."),
+        ty(2, "Describí un cuadro en dos oraciones, con un participio I y un participio II delante del sustantivo.", "(adelante: una mujer leyendo · al fondo: una ventana abierta)", "Im Vordergrund sieht man eine lesende Frau. Im Hintergrund sieht man ein geöffnetes Fenster.", _mix(["Im Vordergrund sieht man eine lesende Frau.", "Im Vordergrund ist eine lesende Frau.", "Im Vordergrund sitzt eine lesende Frau.", "Im Vordergrund gibt es eine lesende Frau."], ["Im Hintergrund sieht man ein geöffnetes Fenster.", "Im Hintergrund ist ein geöffnetes Fenster.", "Im Hintergrund gibt es ein geöffnetes Fenster."]), "Participio I (*lesend*) = lo que está haciendo; participio II (*geöffnet*) = lo que ya está hecho. Los dos llevan la terminación del adjetivo: *eine lesende Frau*, *ein geöffnetes Fenster*."),
+        cz(2, "Escribí el auxiliar del Perfekt.", "Wir ___ lange vor dem Gemälde stehen geblieben.", "sind", note="Repaso de la semana 12: *bleiben* va con *sein* aunque no haya movimiento: *wir sind geblieben*."),
+        cz(2, "Escribí el relativo.", "Der Künstler, mit ___ ich gesprochen habe, kommt aus Wien.", "dem", note="Repaso de la semana 24: *mit* pide dativo → *dem* (masculino). El relativo toma el caso de su preposición, no el de *der Künstler*."),
+        tr(2, "Fui al museo para ver el cuadro.", "Ich bin ins Museum gegangen, um das Gemälde zu sehen.", _mix(["Ich bin ins Museum gegangen, um das Gemälde zu sehen.", "Ich ging ins Museum, um das Gemälde zu sehen.", "Ich bin ins Museum gegangen, um das Bild zu sehen.", "Ich ging ins Museum, um das Bild zu sehen."]), "Repaso de las semanas 12 y 23: *gehen* → Perfekt con *sein*. «Para» + infinitivo → *um … zu*, con el infinitivo al final."),
+        cz(2, "Escribí *hätte* o *wäre*.", "Wenn ich Zeit gehabt hätte, ___ ich auch ins Museum gegangen.", "wäre", note="Repaso de la semana 30: *gehen* hace el Perfekt con *sein* → el irreal también: *wäre … gegangen*."),
     ],
 }
