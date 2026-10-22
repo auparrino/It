@@ -24,7 +24,7 @@ ene y qué no
 entrenamiento y la *Dominala* de cada semana, las palabras de la semana, la
 pausa (*Kaffeepause*), el desafío del día, el repaso con FSRS y la palabra del
 día. La voz es la del teléfono en alemán (`de-DE`). Los ejercicios escritos
-usan el teclado de la app en QWERTZ, con *ä ö ü ß* (o el del teléfono, con una
+usan el teclado de la app en QWERTY, con una fila de *ä ö ü ß* arriba (o el del teléfono, con una
 fila de *ä ö ü ß*). La corrección no mira mayúsculas, y marca como *casi* lo
 que solo pierde la diéresis o escribe *ss* en vez de *ß*; pero si sin la
 diéresis queda otra palabra (*schon/schön*, *fahrt/fährt*, *Bruder/Brüder*), o

@@ -7,7 +7,7 @@
  * (EditorInfo.hintLocales: lo ponen las apps nativas como Duolingo, nunca
  * Chrome) y Safari en el iPhone tampoco; entonces Gboard sigue en
  * castellano y autocorrige «sono» en «sonó».  El teclado propio no depende
- * del teléfono: QWERTY con à è ì ò ù, con ã ç õ, o QWERTZ con ä ö ü ß
+ * del teléfono: QWERTY, con una fila arriba de à è ì ò ù, de ã ç õ o de ä ö ü ß
  * (LANG.ui.kbRows y LANG.ui.keys del paquete), sin autocorrector.
  *
  * Cómo: app.js marca con Teclado.mark() cada caja donde el alumno escribe
@@ -282,7 +282,8 @@
 
   // api.qualify(el): app.js says which boxes are answers in the language of the course
   var api = { qualify: null, mark: mark, active: active, mode: mode, setMode: function (m) { setMode(m); remark(); if (!active()) hide(); },
-              touch: touch, layout: layout, useApp: useApp, usePhone: usePhone, press: press, show: show, hide: hide };
+              touch: touch, layout: layout, useApp: useApp, usePhone: usePhone, press: press, show: show, hide: hide,
+              isOpen: function () { return !!(panel && !panel.hidden); } };
   if (typeof module === "object" && module.exports) module.exports = api;
   root.Teclado = api;
 })(typeof window !== "undefined" ? window : globalThis);

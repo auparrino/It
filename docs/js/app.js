@@ -828,7 +828,7 @@
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION = "c1-vN" in sw.js: test_game
      and the CI check it).  One version for the app and both languages. */
-  var APP_VERSION = "v3.14.0";
+  var APP_VERSION = "v3.15.1";
   // Settimana XVII: Roman numerals on the street signs (LANG.ui.romanWeeks).
   function romano(n) {
     var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
@@ -4958,10 +4958,31 @@
     window.scrollTo(0, 0);
   }
 
-  var subEntry = false;
+  var subEntry = false, backWarned = 0;
+  // the screens where the learner is answering: the phone's back (or the
+  // swipe from the edge, easy to do by accident) does not throw them out
+  var EXERCISE = ["gioco", "lampo", "lezione", "parla", "dictogloss", "scrivi", "eplus", "storia",
+                  "esame", "esame-asc", "esame-let", "esame-scr", "ubicacion"];
+  function stay() { try { history.pushState({ sub: 1 }, ""); subEntry = true; } catch (e) { /* */ } }
   window.addEventListener("popstate", function () {
     subEntry = false;
     if (!course || TABS.some(function (t) { return t[0] === view.screen; })) return;
+    // back with the app's keyboard open only closes the keyboard, as on the phone's
+    if (window.Teclado && Teclado.isOpen && Teclado.isOpen()) {
+      var a = document.activeElement;
+      Teclado.hide();
+      if (a && a.blur) a.blur();
+      stay();
+      return;
+    }
+    // in an exercise: the first back warns, a second one within 3 s leaves
+    if (EXERCISE.indexOf(view.screen) >= 0 && Date.now() - backWarned > 3000) {
+      backWarned = Date.now();
+      stay();
+      toast("Para salir, tocá atrás otra vez (o la ✕).");
+      return;
+    }
+    backWarned = 0;
     if (view.screen === "gioco") toast("Ronda interrumpida. Lo que respondiste ya quedó guardado.");
     go(view.tab || "oggi");
   });
@@ -5613,7 +5634,13 @@
       if (out) out.innerHTML = '<p class="muted small">⏳ La IA arma la escena…</p>';
       Scrivi.parlaStart(ctx, aiKeys(), function (err, data) {
         if (view.screen !== "parla") return;
-        if (err || !data || !data.obiettivi) { if (out) out.innerHTML = '<p class="muted small">No pude usar la IA (' + esc(String(err && err.message || "respuesta rara")) + ").</p>"; if (b) b.disabled = false; return; }
+        data = err ? data : scenOf(data);
+        if (err || !data || !data.obiettivi) {
+          var why = err ? String(err.message || err) : "la escena llegó sin objetivos" + (data && typeof data === "object" ? " (trajo: " + Object.keys(data).slice(0, 6).join(", ") + ")" : "");
+          if (out) out.innerHTML = '<p class="muted small">No pude usar la IA (' + esc(why) + "). Probá de nuevo.</p>";
+          if (b) b.disabled = false;
+          return;
+        }
         data.obiettivi = data.obiettivi.slice(0, 3);
         parla = { week: w.week, scen: data, history: [["ia", String(data.apertura || UI.hi)]], done: false, recasts: [], obj: [], turns: 0, busy: false, ctx: ctx };
         render();
@@ -6506,12 +6533,70 @@
     return out.length ? out.join("; ") : "los huecos coinciden: solo cambian la puntuación o los espacios";
   }
 
+  /* The role-play scene as the prompts ask for it ({titolo, ruolo_ia,
+     situazione_es, obiettivi, apertura, parole_utili}).  The model sometimes
+     wraps it in one more object ({"roleplay": {…}}) or translates the field
+     names to the course's language (objetivos, Ziele…): both are taken. */
+  var SCEN_ALIAS = {
+    obiettivi: /^(obiettivi|objetivos?|objectives?|goals?|ziele|metas?)$/i,
+    titolo: /^(titolo|t[i\u00ed]tulo|title|titel)$/i,
+    ruolo_ia: /^(ruolo(_ia)?|papel(_ia)?|rol(_ia)?|role(_ai)?|rolle)$/i,
+    situazione_es: /^(situazione(_es)?|situa[c\u00e7][a\u00e3]o(_es)?|situaci[o\u00f3]n(_es)?|situation)$/i,
+    apertura: /^(apertura|abertura|opening|er[o\u00f6]ffnung)$/i,
+    parole_utili: /^(parole_utili|palavras?_[u\u00fa]teis|palabras?_[u\u00fa]tiles|useful_words|n[u\u00fc]tzliche_w[o\u00f6]rter)$/i
+  };
+  function scenOf(d) {
+    if (!d || typeof d !== "object") return d;
+    var ks = Object.keys(d);
+    if (ks.length === 1 && d[ks[0]] && typeof d[ks[0]] === "object" && !Array.isArray(d[ks[0]])) d = d[ks[0]];
+    Object.keys(SCEN_ALIAS).forEach(function (f) {
+      if (d[f] != null) return;
+      var k = Object.keys(d).filter(function (x) { return SCEN_ALIAS[f].test(x); })[0];
+      if (k) d[f] = d[k];
+    });
+    if (typeof d.obiettivi === "string") d.obiettivi = d.obiettivi.split(/\n+|\s*\d\)\s*|;\s*/).map(function (x) { return x.trim(); }).filter(Boolean);
+    if (!Array.isArray(d.obiettivi) || !d.obiettivi.length) delete d.obiettivi;
+    return d;
+  }
   var scriviTimer = null;
   /* The AI key: Anthropic, for Claude Haiku.  Only in this phone's
-     storage, never in the backup. */
-  var AI_KEY = SKEY("claude.key"), AI_WS = SKEY("claude.ws");
-  function readKey(k) { try { return localStorage.getItem(k) || ""; } catch (e) { return ""; } }
-  function aiKeys() { return { claude: readKey(AI_KEY), ws: readKey(AI_WS) }; }
+     storage, never in the backup.  One for every language (like the Gist
+     token): «c1.claude.key».  Up to v3.14 each language kept its own
+     («laviac1.claude.key», «rumoc1.…»): the first read takes the
+     key that last got an answer (else this language's, else any) and moves
+     it to the shared one. */
+  var AI_KEY = "c1.claude.key", AI_WS = "c1.claude.ws";
+  // (a pasted key can bring spaces, line breaks or invisible characters: out)
+  function cleanKey(v) { return String(v || "").replace(/[\s\u200B-\u200D\u2060\uFEFF"'«»“”]/g, ""); }
+  function readKey(k) { try { return cleanKey(localStorage.getItem(k)); } catch (e) { return ""; } }
+  function oldKeys(name) {
+    var out = [];
+    try {
+      for (var i = 0; i < localStorage.length; i++) {
+        var k = localStorage.key(i);
+        if (k && k !== "c1." + name && k.slice(-name.length - 1) === "." + name) out.push(k);
+      }
+    } catch (e) { /* */ }
+    return out;
+  }
+  function migrateKeys() {
+    try {
+      if (localStorage.getItem(AI_KEY)) return;
+      var olds = oldKeys("claude.key"), mine = SKEY("claude.key");
+      if (!olds.length) return;
+      // the key that last got an answer (ia.js notes «<lang>.claude.lat» on
+      // every success: a key that only fails never has one); else this
+      // language's; else any
+      var lastOk = function (k) {
+        try { return (JSON.parse(localStorage.getItem(k.replace(/claude\.key$/, "claude.lat")) || "null") || {}).at || 0; } catch (e) { return 0; }
+      };
+      var from = olds.slice().sort(function (a, b) { return lastOk(b) - lastOk(a) || (b === mine) - (a === mine); })[0];
+      localStorage.setItem(AI_KEY, readKey(from));
+      var ws = readKey(from.replace(/claude\.key$/, "claude.ws"));
+      if (ws) localStorage.setItem(AI_WS, ws);
+    } catch (e) { /* */ }
+  }
+  function aiKeys() { migrateKeys(); return { claude: readKey(AI_KEY), ws: readKey(AI_WS) }; }
   function aiKey() { return aiKeys().claude; }
   function aiNames() { return aiKey() ? "Claude Haiku" : ""; }
   // Which AI answered: «Claude · claude-haiku-5-5».
@@ -6528,13 +6613,15 @@
       '<p class="muted small"><label for="aiws">ID del workspace</label> (solo si Anthropic lo pide: «not scoped to a workspace»). En la consola, Settings → Workspaces → el workspace → empieza con <code>wrkspc_</code>.</p>' +
       '<input id="aiws" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="wrkspc_… (opcional)" value="' + esc(k.ws) + '">' +
       '<div class="row"><button class="tab" id="aisave">Guardar</button></div>' +
-      '<p class="muted small">La clave queda solo en este teléfono; el texto se envía a Anthropic. La API se paga por uso: con Haiku, centavos por cientos de correcciones.</p>';
+      '<p class="muted small">La clave sirve para todos los idiomas y queda solo en este teléfono; el texto se envía a Anthropic. La API se paga por uso: con Haiku, centavos por cientos de correcciones.</p>';
   }
   function saveKeys() {
-    var g = (($("#aikey") || {}).value || "").trim();
-    var ws = (($("#aiws") || {}).value || "").trim();
+    var g = cleanKey(($("#aikey") || {}).value);
+    var ws = cleanKey(($("#aiws") || {}).value);
     try { if (g) localStorage.setItem(AI_KEY, g); else localStorage.removeItem(AI_KEY); } catch (e) { /* */ }
     try { if (ws) localStorage.setItem(AI_WS, ws); else localStorage.removeItem(AI_WS); } catch (e) { /* */ }
+    // the per-language ones of before: gone, so an old wrong key never comes back
+    oldKeys("claude.key").concat(oldKeys("claude.ws")).forEach(function (k) { try { localStorage.removeItem(k); } catch (e) { /* */ } });
     return g ? "la clave de Claude" : "";
   }
   function wireScrivi() {

@@ -24,7 +24,7 @@ sigue donde estaba).
 
 En el celular, las respuestas en la lengua del curso se escriben con un
 **teclado propio** que aparece en pantalla, con la distribución del idioma
-(QWERTY con *à è ì ò ù*, con *ã ç õ*, o QWERTZ con *ä ö ü ß*) y sin el
+(QWERTY con *à è ì ò ù*, con *ã ç õ*, o con *ä ö ü ß*) y sin el
 autocorrector en castellano. Una página web no puede poner el teclado del
 teléfono en otro idioma (Chrome en Android no se lo pide al teclado; Safari
 tampoco), así que este es el camino. Con ⌨️ volvés al teclado del teléfono

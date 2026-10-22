@@ -21,7 +21,7 @@ var SPANISH = /[ñáéíóú¿¡]/i;
 /* ------------------------------------------------ el paquete */
 ok(LANG.code === "de" && LANG.storage === "wegc1" && LANG.tts === "de-DE", "lang.js del alemán");
 ok(LANG.rules && LANG.rules.grade && LANG.rules.traps && LANG.rules.distract, "rules.js del alemán");
-ok(LANG.ui.kbRows && LANG.ui.kbRows[0].indexOf("z") === 5, "el teclado de la app es QWERTZ");
+ok(LANG.ui.kbRows && LANG.ui.kbRows[0] === "qwertyuiop" && !/[äöüß]/.test(LANG.ui.kbRows.join("")), "el teclado de la app es QWERTY (ä ö ü ß van en su fila de arriba)");
 ok(["ä", "ö", "ü", "ß"].every(function (c) { return LANG.ui.keys.indexOf(c) >= 0; }), "las teclas ä ö ü ß");
 
 /* ------------------------------------------------ el curso */
