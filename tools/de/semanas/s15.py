@@ -21,7 +21,7 @@ WEEK = {
         "intro": "En la semana 10 dijiste *Die Wohnung ist hell*. Para decir «el pulóver azul» el adjetivo se pone delante y lleva terminación. Después del artículo definido, son solo dos.",
         "parts": [
             {"h": "El adjetivo después de der, die, das", "blocks": [0, 1, 2]},
-            {"h": "dieser y welcher", "blocks": [3, 4]},
+            {"h": "dieser y welcher", "blocks": [3, 4, 7]},
             {"h": "En el negocio de ropa", "blocks": [5, 6]},
         ],
         "blocks": [
@@ -99,6 +99,7 @@ WEEK = {
                 ],
                 "warn": "*dieses* (neutro) termina en *-es*, como *das*: *dieses Kleid*. «dieser Kleid» está mal.",
                 "tip": "Mirá la última letra del artículo: *der → dieser, die → diese, das → dieses, den → diesen, dem → diesem*.",
+                "more": ["*welcher* pregunta **cuál** dentro de un grupo concreto (*Welcher Pullover, der blaue oder der graue?*). *Was für ein…?* pregunta **qué tipo, qué clase**: *Was für eine Jacke suchst du? – Eine Regenjacke.* Ahí *ein* se declina según el verbo (*Was für einen Mantel suchen Sie?*): *für* no decide nada. En plural va sin *ein*: *Was für Schuhe?*"],
                 "q": [
                     q("Completá: *___ Jacke nimmst du?*", "Welche", ["Welche", "Welcher", "Welches"]),
                     q("Completá: *Ich kaufe dies___ Mantel.*", "-en", ["-en", "-er", "-es"]),
@@ -163,6 +164,30 @@ WEEK = {
                     q("«¿Me puedo probar el vestido?»", "Kann ich das Kleid anprobieren?", ["Kann ich das Kleid anprobieren?", "Kann ich das Kleid probieren an?", "Kann ich anprobieren das Kleid?"]),
                 ],
             },
+            {
+                "h": "Den finde ich gut: der, die, das sin sustantivo",
+                "r": "En la charla, *der, die, das* se usan **solos**, sin sustantivo, en lugar de *er, sie, es*: señalan algo o a alguien que ya nombraste, como nuestro «ese, esa». Toman las formas del artículo (*den, dem, der*), salvo el dativo plural, que es ***denen***. Casi siempre van **adelante**, y el verbo sigue segundo.",
+                "table": {"head": ["Caso", "Masculino", "Femenino", "Neutro", "Plural"], "rows": [
+                    ["Nominativ", "der", "die", "das", "die"],
+                    ["Akkusativ", "den", "die", "das", "die"],
+                    ["Dativ", "dem", "der", "dem", "denen"],
+                ]},
+                "ex": [
+                    ["Wie findest du den Film? – *Den* finde ich langweilig.", "¿Qué te parece la peli? – Me parece aburrida."],
+                    ["Die Jacke? *Die* ist super!", "¿La campera? ¡Está buenísima!"],
+                    ["Kennst du Paul? – Ja, *den* kenne ich.", "¿Conocés a Paul? – Sí, lo conozco."],
+                    ["Mit *dem* rede ich nicht mehr.", "Con ese no hablo más."],
+                    ["Die Nachbarn? Mit *denen* habe ich keinen Kontakt.", "¿Los vecinos? Con ellos no tengo contacto."],
+                ],
+                "warn": "No es un artículo: detrás no viene ningún sustantivo. *Den finde ich gut* = «ese me parece bien», con el pronombre adelante y el verbo segundo (no «Den ich finde gut»). Y en dativo plural es *denen*, no «den»: *mit denen*.",
+                "tip": "Con personas suena coloquial y a veces un poco despectivo (*Der da?* = ¿ese?). Para hablar con respeto de alguien, mejor *er / sie*.",
+                "more": ["Estas mismas formas, con *denen* incluido, vuelven en la semana 24 como pronombres relativos: *der Film, den ich gesehen habe*."],
+                "q": [
+                    q("*Wie findest du den Rock? – ___ finde ich zu kurz.*", "Den", ["Den", "Der", "Das"]),
+                    q("*Die Schuhe? ___ sind zu teuer.*", "Die", ["Die", "Denen", "Das"]),
+                    q("*Die Kollegen? Mit ___ arbeite ich gern.*", "denen", ["denen", "den", "die"]),
+                ],
+            },
         ],
     },
     "vocab": [
@@ -218,6 +243,17 @@ WEEK = {
         tr(1, "¿Qué campera te gusta?", "Welche Jacke gefällt dir?", note="*die Jacke* → *welche*; *gefallen* + dativo."),
         tr(1, "Me llevo este vestido.", "Ich nehme dieses Kleid.", ["Ich nehme dieses Kleid.", "Ich kaufe dieses Kleid."], "*das Kleid* → *dieses*."),
         ty(1, "Respondé: la roja.", "Welchen Rock kaufst du?", "Den roten.", ["Den roten.", "Den roten Rock.", "Ich kaufe den roten.", "Ich kaufe den roten Rock."], "*der Rock* en acusativo: *den roten*."),
+        # parte 1 — welcher o was für ein
+        ch(1, "Elegí la pregunta.", "Hier sind zwei Hemden. ___ gefällt dir besser?", "Welches", ["Welches", "Was für eins", "Welcher"], "Elegís entre dos concretos → *welcher*; *das Hemd* → *welches*."),
+        cz(1, "Escribí la forma de *ein*.", "Was für ___ Mantel suchen Sie? – Einen Wintermantel.", "einen", note="*Was für ein…?* = ¿qué tipo de…? *ein* toma el caso del verbo (*suchen* + acusativo → *einen*); *für* acá no rige nada."),
+        tr(1, "¿Qué tipo de campera buscás?", "Was für eine Jacke suchst du?", ["Was für eine Jacke suchst du?", "Was für eine Jacke suchen Sie?"], "«qué tipo de» = *Was für ein…?*; *welche Jacke* sería «cuál de estas»."),
+        # parte 1 — der, die, das como pronombre
+        cz(1, "Escribí el pronombre (der, den, dem…).", "Wie findest du den Rock? – ___ finde ich zu kurz.", "Den", note="*der Rock* es el objeto de *finden* → *den*, adelante y sin sustantivo."),
+        cz(1, "Escribí el pronombre (der, die, das…).", "Die Schuhe? ___ sind super!", "Die", note="Plural sujeto: *die*. Reemplaza a *sie* en la charla."),
+        cz(1, "Escribí el pronombre.", "Die Kollegen? Mit ___ arbeite ich gern.", "denen", note="Dativo plural del pronombre: *denen* (no *den*, que es el artículo)."),
+        ch(1, "Elegí el pronombre.", "Kennst du Lisa? – Ja, ___ kenne ich gut.", "die", ["die", "der", "den"], "Lisa es el objeto (acusativo femenino): *die*, igual que el artículo."),
+        ch(1, "Encontrá el error.", "¿Qué oración tiene un error?", "Den ich kenne nicht.", ["Den ich kenne nicht.", "Den kenne ich nicht.", "Ich kenne den nicht."], "Con el pronombre adelante, el verbo sigue segundo: *Den kenne ich nicht*."),
+        tr(1, "¿La campera? Me la llevo.", "Die Jacke? Die nehme ich.", ["Die Jacke? Die nehme ich.", "Die Jacke? Ich nehme sie.", "Die Jacke? Die kaufe ich.", "Die Jacke? Ich kaufe sie."], "En la charla, *die* adelante (= «esa»); *ich nehme sie* también vale. Sin «me»: *nehmen* no es reflexivo."),
         # parte 2 — en el negocio
         ch(2, "¿Cómo se dice?", "«la pollera»", "der Rock", ["der Rock", "die Rock", "das Rock"], "*der Rock*: masculino."),
         ch(2, "¿Cómo se dice?", "«la camisa»", "das Hemd", ["das Hemd", "die Hemd", "der Hemd"], "*das Hemd*: neutro."),

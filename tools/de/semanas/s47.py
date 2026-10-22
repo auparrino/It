@@ -254,5 +254,9 @@ WEEK = {
         ty(2, "Empezá con el objeto para contrastar.", "Ich habe den Brief gelesen. → Den Brief …", "Den Brief habe ich gelesen.", note="Objeto en el Vorfeld, verbo segundo, sujeto detrás."),
         ty(2, "Empezá con *Gestern*.", "Es kamen viele Gäste.", "Gestern kamen viele Gäste.", note="El *es* de relleno desaparece cuando otro elemento ocupa el Vorfeld."),
         li(2, "ausgerechnet", ["ausgerechnet", "ausgezeichnet", "ausgerichtet"], "*ausgerechnet* = justo, precisamente (*ausgezeichnet* = excelente)."),
+        # parte 2 — repaso: conectores dobles y je … desto en el Vorfeld (semana 29)
+        ch(2, "Elegí el orden correcto.", "(Por un lado la ciudad es cara, pero es linda.)", "Zwar ist die Stadt teuer, aber sie ist schön.", ["Zwar ist die Stadt teuer, aber sie ist schön.", "Zwar die Stadt ist teuer, aber sie ist schön.", "Zwar ist die Stadt teuer, aber ist sie schön."], "*zwar* en el Vorfeld → verbo enseguida; *aber* no cuenta y deja el orden normal."),
+        tr(2, "No hablé ni con él ni con su jefe.", "Ich habe weder mit ihm noch mit seinem Chef gesprochen.", ["Ich habe weder mit ihm noch mit seinem Chef gesprochen.", "Ich habe weder mit ihm noch mit seinem Chef geredet.", "Weder mit ihm noch mit seinem Chef habe ich gesprochen.", "Weder mit ihm noch mit seinem Chef habe ich geredet."], "*weder … noch* reemplaza al *nicht*: nada de «nicht weder». Si va en el Vorfeld, el verbo sigue segundo."),
+        ty(2, "Uní con *je … desto*.", "Man kennt eine Sprache besser. Man versteht die Witze besser.", "Je besser man eine Sprache kennt, desto besser versteht man die Witze.", V("Je besser man eine Sprache kennt, desto besser versteht man die Witze.", "Je besser man eine Sprache kennt, umso besser versteht man die Witze."), "*je*: verbo al final (*kennt*); *desto* + comparativo + verbo + sujeto."),
     ],
 }

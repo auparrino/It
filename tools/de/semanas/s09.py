@@ -206,9 +206,14 @@ WEEK = {
         cz(0, "Escribí el imperativo con *du*.", "___ den Apfel! (essen)", "Iss", note="*du isst → Iss!*"),
         cz(0, "Escribí el imperativo de *sein* con *ihr*.", "___ bitte leise!", "Seid", note="*Seid!*, con *d*."),
         tr(0, "¡Espere acá, por favor! (usted)", "Warten Sie bitte hier!", ["Warten Sie bitte hier!", "Bitte warten Sie hier!", "Warten Sie hier, bitte!", "Warten Sie hier bitte!"], "Infinitivo + *Sie*; *bitte* suaviza."),
-        tr(0, "¡Llamame! (a un amigo)", "Ruf mich an!", ["Ruf mich an!", "Rufe mich an!"], "*anrufen* → *Ruf … an!* *mich* = me (la forma de *ich* como objeto, como *dich* = te; la regla, en la semana 13)."),
+        tr(0, "¡Llamame! (a un amigo)", "Ruf mich an!", ["Ruf mich an!", "Rufe mich an!"], "*anrufen* → *Ruf … an!* *mich* = me (*ich* como objeto, semana 4), después del verbo."),
         tr(0, "¡Vení con nosotros! (a un amigo, con *mitkommen*)", "Komm mit!", ["Komm mit!", "Komm doch mit!", "Komme mit!"], "*mitkommen* → *Komm mit!*"),
         li(0, "Nimm", ["Nimm", "Nimmt", "Nehmt"], "*Nimm!* (du), *nimmt* (er), *Nehmt!* (ihr)."),
+        cz(0, "Escribí el imperativo con *du*.", "___ mir bitte die Adresse! (geben)", "Gib", note="*du gibst → Gib!*: el *e → i* se queda. «Geb!» es un error muy común."),
+        cz(0, "Escribí el imperativo con *du*.", "___ mal, da ist der Bahnhof! (sehen)", "Sieh", note="*du siehst → Sieh!* (e → ie se queda). En la charla también se oye *Guck mal!*"),
+        cz(0, "Escribí el imperativo con *du*.", "___ deinen Schlüssel nicht! (vergessen)", "Vergiss", note="*du vergisst → Vergiss!* Se saca *-st* y queda *vergiss*, con ss."),
+        ch(0, "Elegí el imperativo con *du*.", "___ schneller! Der Bus kommt! (laufen)", "Lauf", ["Lauf", "Läuf", "Läufst"], "*a → ä* (y *au → äu*) se va en el imperativo: *du läufst → Lauf!*, como *Fahr!*"),
+        tr(0, "¡Ayudame, por favor! (a un amigo)", "Hilf mir bitte!", ["Hilf mir bitte!", "Bitte hilf mir!", "Hilf mir, bitte!"], "*du hilfst → Hilf!* (el *e → i* se queda). *mir* = me; con *helfen* va así (semana 13)."),
         # parte 1 — mit + transporte
         ch(1, "Elegí la forma correcta.", "Ich fahre ___ Bus. (der Bus)", "mit dem", ["mit dem", "mit der", "mit den"], "*der* → *mit dem*."),
         ch(1, "Elegí la forma correcta.", "Wir fahren ___ U-Bahn. (die U-Bahn)", "mit der", ["mit der", "mit dem", "mit die"], "*die* → *mit der*."),
@@ -225,6 +230,9 @@ WEEK = {
         tr(1, "Voy al trabajo en colectivo.", "Ich fahre mit dem Bus zur Arbeit.", ["Ich fahre mit dem Bus zur Arbeit.", "Ich fahre zur Arbeit mit dem Bus."], "*mit dem Bus*; «al trabajo» = *zur Arbeit*."),
         tr(1, "Vamos en subte.", "Wir fahren mit der U-Bahn.", note="*die U-Bahn* → *mit der U-Bahn*."),
         ty(1, "Escribí en alemán, con artículo.", "«la estación de tren»", "der Bahnhof", note="*die Bahn* + *der Hof*: manda *Hof*, masculino. " + MAY),
+        # parte 1 — repaso: plural
+        cz(1, "Escribí el plural. (die Haltestelle, -n)", "Bis zum Bahnhof sind es nur zwei ___.", "Haltestellen", note="Femeninos en *-e* → *-n*: *die Haltestellen*. " + MAY),
+        cz(1, "Escribí el plural. (der Zug, ¨-e)", "Am Sonntag fahren nur wenige ___.", "Züge", ["Züge", "Zuege"], "*der Zug, ¨-e*: diéresis + *-e* → *die Züge*. " + MAY),
         # parte 2 — preguntar y dar indicaciones
         ch(2, "Elegí la pregunta correcta.", "(¿Cómo llego a la estación?)", "Wie komme ich zum Bahnhof?", ["Wie komme ich zum Bahnhof?", "Wie komme ich zur Bahnhof?", "Wie komme ich nach Bahnhof?"], "*der Bahnhof* → *zum*."),
         ch(2, "Elegí la forma correcta.", "Wie komme ich ___ Post? (die Post)", "zur", ["zur", "zum", "zu"], "*die* → *zur*."),
@@ -241,5 +249,6 @@ WEEK = {
         tr(2, "En el semáforo, doble a la izquierda. (usted)", "Gehen Sie an der Ampel links.", ["Gehen Sie an der Ampel links.", "An der Ampel gehen Sie links.", "Gehen Sie an der Ampel nach links.", "An der Ampel gehen Sie nach links.", "Biegen Sie an der Ampel links ab.", "An der Ampel biegen Sie links ab.", "Biegen Sie an der Ampel nach links ab."], "Imperativo con *Sie* + *an der Ampel* + *links*."),
         tr(2, "Tome la primera calle a la derecha.", "Nehmen Sie die erste Straße rechts.", ["Nehmen Sie die erste Straße rechts.", "Nehmen Sie die erste Strasse rechts.", "Nehmen Sie die erste Straße nach rechts."], "Se cuentan las calles: *die erste Straße*."),
         ty(2, "Escribí en alemán, con artículo.", "«el semáforo»", "die Ampel", note="Femenino. " + MAY),
+        cz(2, "Escribí el ordinal. (3.ª)", "Nehmen Sie die ___ Straße links.", "dritte", note="Los ordinales de la semana 6: *erste, zweite, dritte* (irregular). Con *die* + sustantivo, *-e*: *die dritte Straße*."),
     ],
 }

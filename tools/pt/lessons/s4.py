@@ -9,7 +9,7 @@ LESSONS = {
          "facultad y de la oficina.",
 "parts": [
  {"h": "De verbo a sustantivo", "blocks": [0, 1, 2]},
- {"h": "haver y los verbos del informe", "blocks": [3, 4]},
+ {"h": "haver y los verbos del informe", "blocks": [3, 4, 8]},
  {"h": "Sin repetir y sin «yo»", "blocks": [5, 6, 7]},
 ],
 "blocks": [
@@ -115,12 +115,18 @@ LESSONS = {
   "ex": [["Gilberto Freyre publicou *Casa-Grande & Senzala* em 1933. *O sociólogo pernambucano*...", "Gilberto Freyre publicó Casa-Grande & Senzala en 1933. El sociólogo de Pernambuco..."],
          ["Os técnicos analisaram os dados e *os* publicaram.", "Los técnicos analizaron los datos y los publicaron."],
          ["Ipanema e Leblon são vizinhos; *este* é mais caro que *aquele*.", "Ipanema y Leblon son vecinos; este es más caro que aquel."],
-         ["A lei foi aprovada em 2020. *A referida* lei prevê multas.", "La ley se aprobó en 2020. La mencionada ley prevé multas."]],
+         ["A lei foi aprovada em 2020. *A referida* lei prevê multas.", "La ley se aprobó en 2020. La mencionada ley prevé multas."],
+         ["Os aluguéis subiram 20%. *Isso* preocupa os estudantes. / *Tal aumento*…", "Los alquileres subieron 20%. Eso preocupa a los estudiantes. / Tal aumento…"]],
   "warn": "Evitá *o mesmo* como pronombre: «verifique se *o mesmo* está "
           "parado» (el ascensor) suena burocrático y la norma lo critica. "
           "Mejor: *se ele está parado*.",
   "tip": "*este* retoma lo último nombrado; *aquele*, lo primero: igual que "
-         "«este / aquel» en español."},
+         "«este / aquel» en español.",
+  "more": ["Para retomar una idea entera, *isso* o un sustantivo que la "
+           "resuma con *tal* o *esse*: *tal medida*, *tais cortes*, *esse "
+           "aumento*. Para dos nombres ya dichos, *o primeiro… o segundo*. Y "
+           "si varias oraciones tienen el mismo sujeto, no lo repitas: *A "
+           "ministra chegou cedo. Depois, deu uma entrevista.*"]},
 
  {"h": "Impersonalidad: constata-se, observa-se",
   "q": [{"prompt": "¿Cuál va en un informe?", "answer": "Realizaram-se três reuniões.", "options": ["Realizaram-se três reuniões.", "Realizou-se três reuniões.", "Eu acho que teve três reuniões."]}, {"prompt": "¿Cuál va en un informe?", "answer": "Observa-se um aumento das chuvas.", "options": ["Observa-se um aumento das chuvas.", "Se observa um aumento das chuvas.", "Eu observo um aumento das chuvas."]}],
@@ -144,6 +150,29 @@ LESSONS = {
   "r": "En Mozambique el portugués convive con el changana y otras lenguas bantúes; la gramática sigue la norma europea: *estou a trabalhar*.",
   "ex": [["Apanhei o *machimbombo* às sete.", "Tomé el colectivo a las siete. (Brasil: ônibus)"], ["*Estou a trabalhar* na baixa.", "Estoy trabajando en el centro."], ["Vamos comer *matapa*?", "¿Comemos matapa? (hojas de mandioca con maní)"]],
   "tip": "Mia Couto, el escritor mozambiqueño que vas a leer en la 51, juega con este portugués."},
+
+ {"h": "Concordancia: cuando el sujeto complica",
+  "q": [{"prompt": "«Bia y yo fuimos al show.»", "answer": "Eu e a Bia fomos ao show.", "options": ["Eu e a Bia fomos ao show.", "Eu e a Bia foi ao show.", "Eu e a Bia foram ao show."]},
+        {"prompt": "Elegí la forma de la norma culta.", "stem": "Mais de um morador ___ do barulho.", "answer": "reclamou", "options": ["reclamou", "reclamaram", "reclamamos"]}],
+  "r": "Sujeto compuesto: plural (*eu e a Bia* = *nós*). *A maioria de* + "
+       "plural: singular o plural. Porcentaje: concuerda con lo que sigue. "
+       "*Mais de um*: singular.",
+  "table": {"head": ["Sujeto", "Verbo", "Ejemplo"],
+            "rows": [["eu + otra persona", "nós", "Eu e a Bia fomos."],
+                     ["a maioria dos…", "singular o plural", "A maioria dos alunos chegou / chegaram."],
+                     ["porcentaje + de + plural", "plural", "40% dos cariocas usam ônibus."],
+                     ["mais de um", "singular", "Mais de um aluno faltou."],
+                     ["sujeto detrás del verbo", "concuerda igual", "Faltaram dois alunos."]]},
+  "ex": [["O pai e a mãe *chegaram* cedo.", "El padre y la madre llegaron temprano."],
+         ["*Fui* eu que fiz. / *Fui* eu quem fez.", "Fui yo el que lo hizo."],
+         ["*Chegaram* as encomendas.", "Llegaron los paquetes."],
+         ["*É proibida* a entrada. / *É proibido* entrada.", "Se prohíbe la entrada."]],
+  "warn": "Con el verbo delante, concuerda igual. «Faltou dois alunos» o "
+          "«chegou as encomendas» se oyen, pero en lo escrito son error: "
+          "*faltaram*, *chegaram*.",
+  "tip": "*É proibido, é necessário*: sin artículo, invariables (*é proibido "
+         "entrada*); con artículo, concuerdan (*é proibida a entrada*, *é "
+         "necessária a paciência*)."},
 
 ]},
 
@@ -199,8 +228,9 @@ LESSONS = {
   "ex": [["Quando o bloco passou, eu já *tinha ido* embora.", "Cuando pasó la comparsa, yo ya me había ido."],
          ["O governo *havia prometido* obras.", "El gobierno había prometido obras."],
          ["A moça *partira* sem dizer nada.", "La muchacha había partido sin decir nada."]],
-  "tip": "Para hablar y escribir vos, usá *tinha feito*. *fizera* es para "
-         "**reconocerlo** cuando leés."},
+  "tip": "Para hablar y escribir vos, usá *tinha feito*. *fizera* es sobre "
+         "todo para **reconocerlo** al leer: formarlo ayuda a verlo al toque, "
+         "y en un texto literario podés usarlo."},
 
  {"h": "Dónde lo vas a leer",
   "q": [{"prompt": "En una charla en el boteco, ¿qué suena natural?", "answer": "Eu já tinha visto esse filme.", "options": ["Eu já tinha visto esse filme.", "Eu já vira esse filme.", "Eu já tive visto esse filme."]}],
@@ -221,16 +251,23 @@ LESSONS = {
            "*vira*."]},
 
  {"h": "Quem me dera! Tomara! Pudera!",
-  "q": [{"prompt": "Completá.", "stem": "Tomara que o sol ___ amanhã no Arpoador.", "answer": "apareça", "options": ["apareça", "aparece", "aparecer"]}],
+  "q": [{"prompt": "Completá.", "stem": "Tomara que o sol ___ amanhã no Arpoador.", "answer": "apareça", "options": ["apareça", "aparece", "aparecer"]},
+        {"prompt": "«¡Ojalá estuvieras acá!» (no estás)", "stem": "Quem me dera que você ___ aqui!", "answer": "estivesse", "options": ["estivesse", "esteja", "estiver"]}],
   "r": "Tres restos del mais-que-perfeito que sí se dicen en la calle: "
        "*quem me dera* (quién pudiera), *tomara que* (ojalá) y *pudera!* "
        "(¡con razón!).",
   "ex": [["*Quem me dera* morar em Ipanema!", "¡Quién pudiera vivir en Ipanema!"],
          ["*Tomara que* não chova no desfile.", "Ojalá no llueva en el desfile."],
          ["Ele está cansado. — *Pudera!* Trabalhou o dia todo.", "Está cansado. — ¡Con razón! Trabajó todo el día."],
-         ["*Quem me dera* ter tempo!", "¡Ojalá tuviera tiempo!"]],
+         ["*Quem me dera* ter tempo!", "¡Ojalá tuviera tiempo!"],
+         ["*Tomara que fosse* verdade! / *Quem me dera que* ele *viesse*!", "¡Ojalá fuera verdad! / ¡Ojalá viniera!"]],
   "warn": "*tomara que* pide subjuntivo: *tomara que chova*, *tomara que "
-          "você venha*. Nunca «tomara que vem»."},
+          "você venha*. Nunca «tomara que vem».",
+  "more": ["Deseo posible: presente do subjuntivo (*tomara que seja "
+           "verdade*, ojalá sea). Deseo difícil o irreal: imperfeito do "
+           "subjuntivo (*tomara que fosse verdade*, ojalá fuera; *quem me dera "
+           "que ele viesse*). Es la misma diferencia que «ojalá venga» / "
+           "«ojalá viniera»."]},
 
  {"h": "Narrar con tres pasados",
   "r": "El *perfeito* hace avanzar la historia, el *imperfeito* pinta el "
@@ -369,7 +406,8 @@ LESSONS = {
 "parts": [
  {"h": "Abrir y cerrar", "blocks": [0, 1]},
  {"h": "Tratamiento y fórmulas", "blocks": [2, 3]},
- {"h": "Pedir sin errores", "blocks": [4, 5]},
+ {"h": "Pedir sin errores", "blocks": [4, 5, 6]},
+ {"h": "El e-mail de reclamação", "blocks": [7]},
 ],
 "blocks": [
  {"h": "Abrir: Prezado, Caro, Olá",
@@ -461,6 +499,46 @@ LESSONS = {
           "de lo que sigue: *em relação à proposta*, *em relação ao prazo*, *devido a problemas*. "
           "Sin crase ante verbo y ante masculino: *a partir de hoje*, *a pedido "
           "do senhor*."},
+
+ {"h": "Sin gerundismo: vou enviar",
+  "r": "En mails y atención al cliente se cuela *vou estar enviando*: es el "
+       "**gerundismo**, muy criticado. Para un acto futuro puntual: *vou "
+       "enviar*, *enviarei*, *envio ainda hoje*.",
+  "ex": [["«Vou estar enviando» → *Vou enviar* o relatório.", "Voy a enviar el informe."],
+         ["«Vamos estar verificando» → *Vamos verificar* / *Verificaremos*.", "Vamos a verificar / Verificaremos."],
+         ["«O senhor vai estar recebendo» → O senhor *receberá* o boleto.", "Usted recibirá la boleta."],
+         ["Amanhã às dez *vou estar viajando*.", "Mañana a las diez voy a estar viajando (en curso: está bien)."]],
+  "warn": "No todo *estar* + gerundio en futuro es error: *amanhã às dez vou "
+          "estar viajando* (en curso en ese momento) está bien. Lo criticado "
+          "es el acto puntual.",
+  "q": [{"prompt": "Mail formal: «Le enviaré el contrato hoy.»", "stem": "___ o contrato ainda hoje.",
+         "answer": "Enviarei", "options": ["Enviarei", "Vou estar enviando", "Estarei enviando"]},
+        {"prompt": "¿Cuál está bien en un mail al cliente?", "answer": "Vamos verificar o seu pedido.",
+         "options": ["Vamos verificar o seu pedido.", "Vamos estar verificando o seu pedido.", "Vamos a verificar o seu pedido."]}]},
+
+ {"h": "E-mail de reclamação: firme y cortés",
+  "q": [{"prompt": "Para abrir una reclamação formal:", "answer": "Venho registrar minha insatisfação com o atendimento recebido.", "options": ["Venho registrar minha insatisfação com o atendimento recebido.", "Estou furioso com vocês!", "Venho a reclamar do atendimento."]},
+        {"prompt": "Para pedir una solución con plazo:", "answer": "Solicito que o valor seja devolvido no prazo de dez dias.", "options": ["Solicito que o valor seja devolvido no prazo de dez dias.", "Solicito que o valor é devolvido no prazo de dez dias.", "Quero meu dinheiro de volta já."]}],
+  "r": "Cuatro partes: qué pasó (con fecha), qué número de protocolo "
+       "tenés, qué solución pedís y en qué plazo, y el cierre. Tono "
+       "firme, nunca agresivo.",
+  "table": {"head": ["Parte", "Fórmula"],
+            "rows": [["1. Motivo", "Venho registrar minha insatisfação com… / Venho por meio deste formalizar uma reclamação sobre…"],
+                     ["2. Los hechos", "No dia 3 de março, adquiri… ; No entanto, o produto chegou com defeito."],
+                     ["3. La prueba", "Protocolo de atendimento nº 12345; Segue em anexo a nota fiscal."],
+                     ["4. El pedido", "Solicito que… (+ subjuntivo) no prazo de… / Solicito a troca do produto."],
+                     ["5. Cierre", "Aguardo retorno. / Aguardo uma solução. Atenciosamente,"]]},
+  "ex": [["*Venho registrar minha insatisfação com* a entrega do pedido nº 4521.", "Quiero dejar constancia de mi disconformidad con la entrega del pedido 4521."],
+         ["*No dia* 10 de maio, *entrei em contato* com o SAC (*protocolo nº* 88231).", "El 10 de mayo me comuniqué con atención al cliente (reclamo n.º 88231)."],
+         ["*Solicito que* o valor *seja estornado no prazo de* cinco dias úteis.", "Pido que se me reintegre el importe en cinco días hábiles."],
+         ["*Caso contrário*, recorrerei ao Procon.", "De lo contrario, acudiré a Defensa del Consumidor."],
+         ["*Aguardo retorno.* Atenciosamente,", "Espero su respuesta. Saludos cordiales,"]],
+  "warn": "*Solicito que* va con **subjuntivo**: *que seja devolvido*, no «que "
+          "é». Y «reclamo» (el trámite) es *a reclamação*; *o protocolo* es "
+          "el número que te da la empresa.",
+  "tip": "La amenaza educada, al final y una sola vez: *caso contrário, "
+         "recorrerei ao Procon* (Defensa del Consumidor) o *aos órgãos "
+         "competentes*."},
 ]},
 
 44: {
@@ -469,7 +547,7 @@ LESSONS = {
          "entendés miles de palabras nuevas.",
 "parts": [
  {"h": "Sufijos que hacen sustantivos", "blocks": [0, 1]},
- {"h": "Oficios, árboles, golpes y prefijos", "blocks": [2, 3, 4]},
+ {"h": "Oficios, árboles, golpes y prefijos", "blocks": [2, 3, 4, 9]},
  {"h": "Diminutivos y aumentativos", "blocks": [5, 6, 7]},
  {"h": "Formá la palabra", "blocks": [8]},
 ],
@@ -639,6 +717,28 @@ LESSONS = {
   "tip": "Para formar, pensá en la regla y no en el español: *-ção* y *-dade* "
          "(femeninos), *-mento* (masculino), *-eza* de adjetivos."},
 
+ {"h": "El guion después del Acuerdo: micro-ondas, antissocial",
+  "q": [{"prompt": "Elegí la grafía correcta.", "answer": "antissocial", "options": ["antissocial", "antisocial", "anti-social"]},
+        {"prompt": "Elegí la grafía correcta.", "answer": "micro-ondas", "options": ["micro-ondas", "microondas", "micro-hondas"]},
+        {"prompt": "Elegí la grafía correcta.", "answer": "autoescola", "options": ["autoescola", "auto-escola", "auto escola"]}],
+  "r": "Con prefijos terminados en vocal (*anti-, auto-, micro-, contra-, "
+       "ultra-, semi-*), decide la primera letra de la palabra que sigue.",
+  "table": {"head": ["Si la palabra empieza con…", "Resultado", "Ejemplos"],
+            "rows": [["la misma vocal del prefijo", "guion", "micro-ondas, anti-inflamatório, contra-ataque"],
+                     ["otra vocal", "junto", "autoescola, infraestrutura, extraoficial"],
+                     ["r o s", "junto y se duplica", "antissocial, ultrassom, contrarregra, minissaia"],
+                     ["h", "guion", "super-homem, anti-higiênico, pré-história"],
+                     ["consonante (no r, s, h)", "junto", "antivírus, autopeça, semifinal"]]},
+  "ex": [["Esquenta no *micro-ondas*.", "Calentalo en el microondas."],
+         ["Ele é meio *antissocial*.", "Es medio antisocial."],
+         ["Estou fazendo *autoescola*.", "Estoy yendo a la escuela de manejo."],
+         ["Comprei dois *guarda-chuvas*.", "Compré dos paraguas: compuesto con guion, plural solo en el sustantivo."]],
+  "warn": "Excepción: *co-* y *re-* se pegan siempre: *cooperar*, "
+          "*coordenar*, *reeleger*. Y los compuestos de verbo + sustantivo "
+          "llevan guion: *guarda-chuva*, *beija-flor*, *para-brisa*.",
+  "tip": "¿Por qué *ss*? Entre vocales una *s* sola suena z (*casa*): "
+         "*antissocial* conserva el sonido de s. Igual con *rr*: "
+         "*contrarregra*."},
 ]},
 
 45: {
@@ -961,8 +1061,8 @@ LESSONS = {
          ["*Apesar de* o projeto ser bom, falta verba.", "A pesar de que el proyecto es bueno, faltan fondos."],
          ["*Por um lado*..., *por outro*...", "Por un lado..., por el otro..."]],
   "warn": "«A pesar de que es bueno» → *apesar de ser bom* o *embora seja "
-          "bom*. *Apesar de que* existe, pero en el texto cuidado se "
-          "prefieren esas dos."},
+          "bom*. *Apesar de que* + indicativo es de la charla: en el texto, "
+          "esas dos."},
 
  {"h": "Ordenar los argumentos",
   "q": [{"prompt": "Elegí el conector para sumar un argumento.", "stem": "O projeto é caro. ___, não resolve o problema.", "answer": "Além disso", "options": ["Além disso", "Demais", "Aliás de"]}],
@@ -993,7 +1093,12 @@ LESSONS = {
          ["*Dessa forma*, seria possível reduzir o lixo.", "De esa forma, sería posible reducir la basura."],
          ["*Portanto*, é urgente limpar a Baía de Guanabara.", "Por lo tanto, es urgente limpiar la Bahía de Guanabara."]],
   "tip": "La redação del ENEM pide cerrar con una **propuesta de "
-         "intervención**: quién hace qué, cómo y para qué."},
+         "intervención**: quién hace qué, cómo y para qué.",
+  "more": ["La **carta aberta** argumenta igual, pero tiene destinatario "
+           "público y habla por un grupo: *Senhor Secretário,* / *Excelentíssimo "
+           "Senhor Prefeito,*; *Nós, moradores do bairro X, vimos a público "
+           "manifestar…*; *em nome da associação…*; cierra con el pedido "
+           "concreto y la firma colectiva (*Associação de Moradores de…*)."]},
 ]},
 
 48: {
@@ -1228,7 +1333,7 @@ LESSONS = {
          "algunos refranes.",
 "parts": [
  {"h": "Verbos que van juntos", "blocks": [0, 1]},
- {"h": "Expresiones del día a día", "blocks": [2, 3]},
+ {"h": "Expresiones del día a día", "blocks": [2, 3, 6]},
  {"h": "Refranes y colocaciones formales", "blocks": [4, 5]},
 ],
 "blocks": [
@@ -1351,6 +1456,30 @@ LESSONS = {
   "warn": "«Tener en cuenta» → *levar em conta* (*ter em conta* se usa más "
           "en Portugal). *dar início a* + femenino plural = *às*: *deu "
           "início às obras*."},
+
+ {"h": "Fórmulas con subjuntivo: custe o que custar",
+  "r": "El mismo verbo dos veces: presente do subjuntivo + relativo + "
+       "**futuro** do subjuntivo: *custe o que custar*, *venha o que vier*, "
+       "*seja como for*.",
+  "table": {"head": ["Portugués", "Español"],
+            "rows": [["seja como for / seja o que for", "sea como sea / sea lo que sea"],
+                     ["aconteça o que acontecer", "pase lo que pase"],
+                     ["custe o que custar", "cueste lo que cueste"],
+                     ["doa a quem doer", "le duela a quien le duela"],
+                     ["venha o que vier", "venga lo que venga"],
+                     ["quer queira, quer não (habla: queira ou não)", "quiera o no"],
+                     ["que eu saiba", "que yo sepa"],
+                     ["Deus me livre! / oxalá (formal, literario)", "¡Dios me libre! / ojalá"]]},
+  "ex": [["*Custe o que custar*, vou terminar a obra.", "Cueste lo que cueste, voy a terminar la obra."],
+         ["*Que eu saiba*, a reunião é às dez.", "Que yo sepa, la reunión es a las diez."],
+         ["*Doa a quem doer*, a verdade vai aparecer.", "Le duela a quien le duela, la verdad va a salir."]],
+  "warn": "El español repite el presente («cueste lo que cueste»); el "
+          "portugués, no: la segunda vez, futuro do subjuntivo. «Custe o "
+          "que custe» suena a castellano.",
+  "q": [{"prompt": "«Venga lo que venga.»", "stem": "Venha o que ___.",
+         "answer": "vier", "options": ["vier", "venha", "vir"]},
+        {"prompt": "«Cueste lo que cueste.»", "stem": "Custe o que ___.",
+         "answer": "custar", "options": ["custar", "custe", "custa"]}]},
 ]},
 
 51: {

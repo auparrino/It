@@ -98,7 +98,7 @@ WEEK = {
                     ["Das sind die Freunde, *denen* ich vertraue.", "Esos son los amigos en los que confío."],
                 ],
                 "warn": "Dativo plural: **denen**, no *den*: *die Leute, denen ich helfe*. Es el error más típico, porque el artículo sí es *den* (*den Leuten*).",
-                "more": ["Existe también un genitivo relativo (*dessen, deren*: «cuyo, cuya»): *der Mann, dessen Auto…*. Lo vas a ver más adelante, junto con el genitivo."],
+                "more": ["Existe también un genitivo relativo (*dessen, deren*: «cuyo, cuya»): *der Mann, dessen Auto…*. Lo vas a ver en la semana 26, junto con el genitivo."],
                 "q": [
                     q("Completá: *Das ist die Kollegin, ___ ich oft helfe.*", "der", ["der", "die", "den"]),
                     q("Completá: *Die Kinder, ___ wir Geschenke kaufen, sind meine Neffen.*", "denen", ["denen", "den", "die"]),
@@ -223,6 +223,12 @@ WEEK = {
         tr(1, "Es el amigo con el que viajé.", "Das ist der Freund, mit dem ich gereist bin.", ["Das ist der Freund, mit dem ich gereist bin.", "Das ist der Freund, mit dem ich gefahren bin.", "Das ist der Freund mit dem ich gereist bin."], "*mit dem* al principio de la relativa; *reisen* hace el Perfekt con *sein*."),
         tr(1, "La empresa para la que trabajo es grande.", "Die Firma, für die ich arbeite, ist groß.", ["Die Firma, für die ich arbeite, ist groß."], "*für* + acusativo: *für die*."),
         ty(1, "Escribí el relativo.", "dativo plural (a los que, a quienes)", "denen", note="Dativo plural: *denen*, no *den*."),
+        # parte 1 — repaso: der/die/das demostrativo (semana 15) y adjetivo
+        ch(1, "¿Relativo o demostrativo?", "Kennst du Tom? – Ja, den kenne ich gut.", "demostrativo: verbo segundo, «a ese»", ["demostrativo: verbo segundo, «a ese»", "relativo: verbo al final", "artículo de un sustantivo"], "Mismas formas que el relativo, pero acá abre una oración principal (verbo en 2.º lugar). El relativo manda el verbo al final: *Tom, den ich gut kenne*."),
+        cz(1, "Escribí el demostrativo.", "Die Nachbarn? Mit ___ rede ich nicht mehr.", "denen", note="Dativo plural, igual que el relativo: *denen*. «mit den» sin sustantivo está mal."),
+        cz(1, "Escribí el relativo.", "Das ist der Kollege, ___ ich jeden Tag helfe.", "dem", note="*helfen* + dativo → *dem*. Y ojo: *der Kollege* → *dem Kollegen* si lo nombrás en dativo."),
+        cz(1, "Escribí *schwarz* con su terminación.", "Das ist der Mann mit dem ___ Hut.", "schwarzen", note="Dativo tras *dem*: *-en*."),
+        cz(1, "Escribí *nett* con su terminación.", "Sie ist ein sehr ___ Mensch, der allen hilft.", "netter", note="*der Mensch* nominativo con *ein*: *-er* (semana 19). Y fijate: el relativo sigue al género alemán (*der*), aunque hable de una mujer."),
         # parte 2 — wo, was, definir
         ch(2, "Elegí el relativo.", "Das ist alles, ___ ich weiß.", "was", ["was", "das", "dass"], "Después de *alles*: *was*."),
         ch(2, "Elegí el relativo.", "Mendoza ist die Stadt, ___ ich geboren bin.", "wo", ["wo", "was", "die"], "Lugar: *wo* (o *in der*)."),
@@ -240,5 +246,13 @@ WEEK = {
         tr(2, "Un taxista es alguien que maneja un taxi.", "Ein Taxifahrer ist jemand, der Taxi fährt.", ["Ein Taxifahrer ist jemand, der Taxi fährt.", "Ein Taxifahrer ist jemand, der ein Taxi fährt.", "Ein Taxifahrer ist jemand der Taxi fährt.", "Ein Taxifahrer ist jemand der ein Taxi fährt."], "Definir personas: *jemand, der…*"),
         ty(2, "Escribí en alemán.", "«todo lo que sé»", "alles, was ich weiß", ["alles, was ich weiß", "alles was ich weiß"], "*alles, was…*, con el verbo al final."),
         li(2, "jemand", ["jemand", "niemand", "jemals"], "*jemand* = alguien; *niemand* = nadie."),
+        # parte 2 — repaso: preposiciones de lugar y de tiempo (semanas 14 y 20)
+        cz(2, "Escribí el posesivo.", "Am Wochenende fahre ich mit ___ Schwester nach Hamburg. (mi)", "meiner", note="*mit* + dativo femenino: *meiner*. Con *für* u *ohne* sería *meine*."),
+        cz(2, "Escribí el posesivo.", "Ich habe ein Geschenk für ___ Schwester gekauft. (mi)", "meine", note="*für* + acusativo; en femenino es igual al nominativo: *meine*."),
+        ch(2, "Elegí.", "Ich komme gerade ___ Zahnarzt, mir tut alles weh.", "vom", ["vom", "beim", "zum"], "De dónde (persona, médico): *von* → *vom*. *beim* = dónde; *zum* = adónde."),
+        tr(2, "Mañana voy a lo de mis viejos.", "Morgen fahre ich zu meinen Eltern.", ["Morgen fahre ich zu meinen Eltern.", "Ich fahre morgen zu meinen Eltern.", "Morgen gehe ich zu meinen Eltern.", "Ich gehe morgen zu meinen Eltern."], "«a lo de» (persona) = *zu* + dativo plural: *zu meinen Eltern*. Estando allá: *bei meinen Eltern*."),
+        tr(2, "Me voy tres semanas a Italia.", "Ich fahre für drei Wochen nach Italien.", ["Ich fahre für drei Wochen nach Italien.", "Ich fliege für drei Wochen nach Italien.", "Ich fahre drei Wochen nach Italien.", "Ich fliege drei Wochen nach Italien.", "Für drei Wochen fahre ich nach Italien.", "Für drei Wochen fliege ich nach Italien."], "Duración prevista: *für drei Wochen*. *seit* sería algo que ya empezó."),
+        ch(2, "Elegí la preposición.", "Der neue Kurs beginnt ___ zwei Wochen. (dentro de dos semanas)", "in", ["in", "nach", "vor"], "Plazo hacia el futuro: *in zwei Wochen*. *vor* = hace; *nach* = después de algo."),
+        cz(2, "Escribí el artículo.", "Er hängt das Bild an ___ Wand. (die Wand)", "die", note="*hängen* con objeto: destino, acusativo: *an die Wand*. Después: *Das Bild hängt an der Wand*."),
     ],
 }

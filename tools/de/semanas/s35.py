@@ -32,7 +32,7 @@ WEEK = {
         "intro": "Cuando un diario alemán cuenta lo que dijo un ministro, no escribe *Er sagt, er ist krank*, sino *Er sagt, er sei krank*. Ese *sei* es el **Konjunktiv I**: la forma que marca «esto lo dice él, no yo». En castellano lo hacemos con los tiempos (dijo que estaba enfermo); en alemán, con el modo.",
         "parts": [
             {"h": "El Konjunktiv I", "blocks": [0, 1]},
-            {"h": "Reemplazos y tiempos", "blocks": [2, 3, 4]},
+            {"h": "Reemplazos y tiempos", "blocks": [2, 3, 4, 8]},
             {"h": "Contar lo que dijo otro", "blocks": [5, 6, 7]},
         ],
         "blocks": [
@@ -98,6 +98,7 @@ WEEK = {
                 ],
                 "warn": "Acá el Konjunktiv II **no** significa «irreal» ni «cortés»: es solo el repuesto del I. *Sie sagen, sie hätten keine Zeit* = dicen que no tienen tiempo (no «que no tendrían»).",
                 "tip": "Receta: probá el Konjunktiv I; si suena igual al indicativo, pasá al II; si el II suena igual al Präteritum, *würde* + infinitivo.",
+                "more": ["*kämen* sale del Präteritum *kamen* + diéresis. Así se forma el Konjunktiv II de todos los verbos irregulares (*ging → ginge*, *blieb → bliebe*): lo ves en el bloque «Leer el Konjunktiv II de los irregulares», al final de esta parte."],
                 "q": [
                     q("Completá: *Die Nachbarn sagen, sie ___ nichts gehört.*", "hätten", ["hätten", "haben", "habe"]),
                     q("Completá: *Die Firmen sagen, sie ___ keine Fachkräfte finden.* (können)", "könnten", ["könnten", "können", "könne"]),
@@ -201,6 +202,35 @@ WEEK = {
                     q("En una charla con amigos, lo más natural es…", "Er hat gesagt, dass er krank ist.", ["Er hat gesagt, dass er krank ist.", "Er hat gesagt, dass er ist krank.", "Er hat gesagt, er seie krank."]),
                 ],
             },
+            {
+                "h": "Leer el Konjunktiv II de los irregulares",
+                "r": "El Konjunktiv II propio de un verbo irregular se arma con la **raíz del Präteritum + diéresis (si es *a, o, u*) + *-e***: *kam → käme*, *ging → ginge*, *blieb → bliebe*. Hablando casi siempre se dice *würde* + infinitivo (*er würde kommen*), salvo con *wäre, hätte, wüsste, gäbe* y los modales. Pero en diarios y libros vas a leer estas formas todo el tiempo: tenés que reconocerlas.",
+                "table": {"head": ["Infinitivo", "Präteritum", "Konjunktiv II"], "rows": [
+                    ["kommen", "kam", "käme"],
+                    ["gehen", "ging", "ginge"],
+                    ["bleiben", "blieb", "bliebe"],
+                    ["finden", "fand", "fände"],
+                    ["liegen", "lag", "läge"],
+                    ["halten", "hielt", "hielte"],
+                    ["sehen", "sah", "sähe"],
+                    ["nehmen", "nahm", "nähme"],
+                    ["stehen", "stand", "stünde / stände"],
+                    ["wissen", "wusste", "wüsste"],
+                ]},
+                "ex": [
+                    ["*Als* er *kam*, war es schon spät.", "Cuando llegó, ya era tarde. (Präteritum: pasó)"],
+                    ["*Wenn* er *käme*, wäre alles einfacher.", "Si viniera, todo sería más fácil. (irreal)"],
+                    ["Sie sagten, sie *gingen* nicht zur Wahl.", "Dijeron que no iban a votar. (reemplazo: *gingen* es igual al Präteritum, por eso muchos escriben *sie würden nicht gehen*)"],
+                    ["Das *fände* ich toll.", "Eso me parecería genial. (irreal: *fände*, de *fand*)"],
+                ],
+                "warn": "La diferencia con el Präteritum es a veces **una sola letra**: *kam / käme*, *lag / läge*, *ging / ginge*. Esa *-e* final (y la diéresis) es la que dice «irreal o citado». En castellano pasa algo parecido: «vino / viniera».",
+                "tip": "Si el Präteritum no tiene *a, o, u*, no hay diéresis y solo suma la *-e*: *ging → ginge*, *blieb → bliebe*, *hielt → hielte*. En esos verbos sin diéresis, *wir/sie* es igual al Präteritum (*sie gingen*): por eso ahí se pasa a *würden gehen*. Con diéresis no hay problema: *sie kamen / sie kämen*.",
+                "q": [
+                    q("*Wenn sie käme, …* ¿Pasó o es irreal?", "irreal: si viniera", ["irreal: si viniera", "pasó: cuando vino", "futuro: cuando venga"]),
+                    q("Konjunktiv II de *finden* (Präteritum *fand*):", "fände", ["fände", "fande", "fünde"]),
+                    q("Konjunktiv II de *bleiben* (Präteritum *blieb*):", "bliebe", ["bliebe", "bliebte", "bleibe"]),
+                ],
+            },
         ],
     },
     "vocab": [
@@ -273,5 +303,20 @@ WEEK = {
         tr(2, "El médico me dijo que durmiera más.", "Der Arzt sagte, ich solle mehr schlafen.", _nc("Der Arzt sagte, ich solle mehr schlafen.", "Der Arzt sagte, dass ich mehr schlafen solle.", "Der Arzt hat gesagt, ich solle mehr schlafen.", "Der Arzt sagte, ich sollte mehr schlafen.", "Die Ärztin sagte, ich solle mehr schlafen.", "Die Ärztin hat gesagt, ich solle mehr schlafen.", "Die Ärztin sagte, ich sollte mehr schlafen.", "Der Arzt sagte mir, ich solle mehr schlafen.", "Der Arzt sagte mir, ich sollte mehr schlafen.", "Der Arzt hat mir gesagt, ich solle mehr schlafen.", "Der Arzt sagte mir, dass ich mehr schlafen solle.", "Die Ärztin sagte mir, ich solle mehr schlafen.", "Die Ärztin sagte mir, ich sollte mehr schlafen.", "Die Ärztin hat mir gesagt, ich solle mehr schlafen.", "Die Ärztin sagte mir, dass ich mehr schlafen solle."), "Pedido indirecto → *sollen*."),
         ty(2, "Escribí en alemán, con artículo.", "«el titular (de un diario)»", "die Schlagzeile", note="*die Schlagzeile*: *die Zeile* = la línea. " + MAY),
         li(2, "Pressekonferenz", ["Pressekonferenz", "Pressefreiheit", "Pressemeldung"], "*die Pressekonferenz* = la conferencia de prensa."),
+        ch(2, "Elegí el pronombre.", "„Ich kann ___ das nicht leisten“, sagte er.", "mir", ["mir", "mich", "sich"], "*sich etwas leisten*: hay otro objeto (*das*), así que dativo: *mir*. En estilo indirecto quedaría *er könne sich das nicht leisten*."),
+        ch(2, "Elegí el pronombre.", "„Stell ___ vor, wir haben gewonnen!“, rief sie.", "dir", ["dir", "dich", "sich"], "*sich etwas vorstellen* = imaginarse: dativo, *Stell dir vor!* (*Stell dich vor!* sería «¡presentate!»)."),
+        ty(2, "Pasá al estilo indirecto (Konjunktiv I), empezando con *Sie sagte, sie…*", "„Ich wünsche mir mehr Zeit für meine Familie.“", "Sie sagte, sie wünsche sich mehr Zeit für ihre Familie.", ["Sie sagte, sie wünsche sich mehr Zeit für ihre Familie.", "Sie sagte, dass sie sich mehr Zeit für ihre Familie wünsche."], "*ich wünsche mir* → *sie wünsche sich*: el reflexivo cambia de persona (*mir* → *sich*) y el posesivo también (*meine* → *ihre*)."),
+        # parte 1 — leer el Konjunktiv II de los irregulares
+        ch(1, "¿Pasó o es irreal?", "Wenn er heute käme, könnten wir zusammen essen.", "irreal: si viniera hoy", ["irreal: si viniera hoy", "pasó: cuando vino hoy", "es una cita: dice que viene hoy"], "*käme* (con diéresis y *-e*) es Konjunktiv II: irreal. El Präteritum sería *kam*."),
+        ch(1, "¿Pasó o es irreal?", "Als sie nach Hause kam, schlief das Kind schon.", "pasó: cuando llegó", ["pasó: cuando llegó", "irreal: si llegara", "es una cita: dice que llegó"], "*kam*, sin diéresis ni *-e*: Präteritum. Con *als* se cuenta algo que pasó una vez."),
+        ch(1, "Elegí el Konjunktiv II.", "(Si yo supiera la respuesta, te la diría.) Wenn ich die Antwort ___, würde ich sie dir sagen.", "wüsste", ["wüsste", "wusste", "weiß"], "*wusste* + diéresis + *-e* = *wüsste*. *wusste* sería «sabía» (pasado real)."),
+        ch(1, "Elegí el Konjunktiv II.", "(Ojalá se quedara más tiempo.) Wenn sie doch länger ___!", "bliebe", ["bliebe", "blieb", "bleibt"], "*blieb* + *-e* = *bliebe* (no hay *a, o, u*, así que no lleva diéresis). Hablando: *Wenn sie doch länger bleiben würde!*"),
+        ch(1, "¿Qué significa?", "Ohne die Hilfe der Nachbarn läge das Haus heute in Trümmern.", "Sin la ayuda de los vecinos, hoy la casa estaría en ruinas.", ["Sin la ayuda de los vecinos, hoy la casa estaría en ruinas.", "Sin la ayuda de los vecinos, la casa quedó en ruinas.", "Sin la ayuda de los vecinos, la casa está en ruinas."], "*läge* (de *lag*) es Konjunktiv II: algo irreal. El Präteritum sería *lag*."),
+        ch(1, "Elegí la forma que se usa hablando.", "(Si fuera a la fiesta, la vería.) Wenn ich zur Party ___, würde ich sie sehen.", "gehen würde", ["gehen würde", "ging", "gehe"], "En la charla, *würde* + infinitivo; *Wenn ich zur Party ginge* también es correcto, pero suena escrito. *ging* es Präteritum (fui) y *gehe* es Konjunktiv I, que no sirve para lo irreal."),
+        cz(1, "Escribí el Konjunktiv II de *finden* (Präteritum *fand*).", "Ich ___ es gut, wenn wir früher anfangen würden.", "fände", note="*fand* + diéresis + *-e* = *fände*. *Ich fände es gut* (me parecería bien) es muy común, también hablando."),
+        cz(1, "Escribí el Konjunktiv II de *kommen* (reemplazo del Konjunktiv I).", "Die Veranstalter sagten, es ___ mehr als 5000 Besucher.", "kämen", note="*sie kommen* en Konjunktiv I es igual al indicativo → Konjunktiv II *kämen* (de *kamen*). También se podría *es würden … kommen*, con *kommen* al final."),
+        # parte 2 — repaso de la pasiva en pasado (semana 31) en noticias
+        cz(2, "Escribí la palabra que falta (pasiva en pasado).", "Laut Polizei sei niemand verletzt ___.", "worden", note="Pasiva en pasado + Konjunktiv I: *sei … verletzt worden*. Con otro participio, *worden* va sin *ge-*."),
+        cz(2, "Escribí el auxiliar en Konjunktiv I.", "Der Sprecher sagte, die Fabrik ___ bereits geschlossen worden.", "sei", note="*Die Fabrik ist geschlossen worden* → indirecto *die Fabrik sei geschlossen worden*. La pasiva hace el pasado con *sein*."),
     ],
 }

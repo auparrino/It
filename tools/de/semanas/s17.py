@@ -21,7 +21,7 @@ WEEK = {
     "lesson": {
         "intro": "Enfermarse en otro país es una de las situaciones donde más necesitás el idioma. Esta semana: el cuerpo, qué te duele, los verbos reflexivos (muy parecidos a los nuestros, con algunas trampas) y *sollen* para contar lo que te dijo el médico.",
         "parts": [
-            {"h": "El cuerpo y lo que te duele", "blocks": [0, 1]},
+            {"h": "El cuerpo y lo que te duele", "blocks": [0, 1, 8]},
             {"h": "Los verbos reflexivos", "blocks": [2, 3, 4]},
             {"h": "En el médico: sollen", "blocks": [5, 6, 7]},
         ],
@@ -99,6 +99,7 @@ WEEK = {
                 "more": [
                     "Otros reflexivos frecuentes: *sich setzen* (sentarse), *sich hinlegen* (acostarse un rato), *sich beeilen* (apurarse), *sich bewegen* (moverse), *sich waschen* (lavarse).",
                     "Con modal, el reflexivo va detrás del modal y el infinitivo al final: *Du sollst dich hinlegen*.",
+                    "*uns, euch, sich* en plural también son **recíprocos**, como nuestro «nos»: *Wir kennen uns seit Jahren* (nos conocemos), *Sie sehen sich jeden Tag* (se ven). Si hace falta aclarar que es «uno al otro», se usa *einander*, y con preposición va todo junto: *miteinander* (entre ellos, uno con otro), *voneinander, aufeinander*: *Die Kollegen sprechen oft miteinander*.",
                 ],
                 "q": [
                     q("Completá: *Wir fühlen ___ müde.*", "uns", ["uns", "sich", "euch"]),
@@ -192,7 +193,9 @@ WEEK = {
                 ],
                 "warn": "En el imperativo con *du* el reflexivo sigue estando: *Setz dich!*, *Beeil dich!*, *Leg dich hin!* Sin *dich* la oración queda incompleta.",
                 "tip": "*Soll ich das Fenster aufmachen?* = ¿abro la ventana? Es la forma más natural de ofrecer algo.",
+                "more": ["Para calmar o retar a alguien vas a necesitar *haben* y *sein* en imperativo: *Hab keine Angst!* (¡no tengas miedo!; la raíz de *haben*, sin *-en*: *hab*), *Sei leise!* / *Seid leise!* (¡no hagas ruido! / ¡no hagan ruido!), *Seien Sie vorsichtig!* (¡tenga cuidado!). Ojo: *Sei ruhig!* suele ser «¡callate!»; para «quedate tranquilo» se dice *Bleib ruhig!*. «Habe keine Angst» es correcto pero suena a libro."],
                 "q": [
+                    q("«¡No tengas miedo!» (a un amigo)", "Hab keine Angst!", ["Hab keine Angst!", "Hast keine Angst!", "Habst keine Angst!"]),
                     q("«¿Querés que te traiga agua?»", "Soll ich dir Wasser bringen?", ["Soll ich dir Wasser bringen?", "Muss ich dir Wasser bringen?", "Soll ich dich Wasser bringen?"]),
                     q("«¡Sentate!» (a un amigo)", "Setz dich!", ["Setz dich!", "Setz dir!", "Setz!"]),
                 ],
@@ -215,6 +218,32 @@ WEEK = {
                 "q": [
                     q("La receta del médico se lleva a…", "die Apotheke", ["die Apotheke", "die Drogerie", "die Praxis"]),
                     q("¿Qué le decís a alguien que está enfermo?", "Gute Besserung!", ["Gute Besserung!", "Gesundheit!", "Gute Verbesserung!"]),
+                ],
+            },
+            {
+                "h": "Mir ist kalt, das ist mir egal: el dativo de quien lo siente",
+                "r": "Igual que *Mir tut der Kopf weh*, muchos adjetivos con *sein* ponen a la persona que **siente** o **a quien le importa** en **dativo**. El sujeto es *es* o la cosa; la persona va en *mir, dir, ihm, ihr, uns, euch, ihnen, Ihnen*.",
+                "table": {"head": ["Alemán", "Castellano"], "rows": [
+                    ["Mir ist kalt / warm.", "Tengo frío / calor."],
+                    ["Mir ist schlecht / schwindlig.", "Estoy descompuesto/a / mareado/a."],
+                    ["Mir ist langweilig.", "Estoy aburrido/a."],
+                    ["Das ist mir egal.", "Me da igual."],
+                    ["Das ist mir peinlich.", "Me da vergüenza."],
+                    ["Das ist mir wichtig.", "Eso es importante para mí."],
+                    ["Die Schuhe sind mir zu klein.", "Los zapatos me quedan chicos."],
+                    ["Er ist seinem Vater ähnlich.", "Se parece a su papá."],
+                ]},
+                "ex": [
+                    ["*Ist dir* kalt? – Nein, *mir ist* warm.", "¿Tenés frío? – No, tengo calor."],
+                    ["*Mir ist* schlecht, ich glaube, ich habe Fieber.", "Estoy descompuesto, creo que tengo fiebre."],
+                    ["Das ist *ihr* total *peinlich*.", "A ella le da muchísima vergüenza."],
+                    ["Sie ist *ihrer Mutter* sehr *ähnlich*.", "Se parece mucho a la mamá."],
+                ],
+                "warn": "Con persona, «estoy aburrido» o «tengo frío» **no** es *Ich bin …*: *Ich bin kalt* significa «soy frío» (de carácter) y *Ich bin langweilig*, «soy aburrido» (un plomo). Lo que sentís va con dativo: *Mir ist kalt, mir ist langweilig*.",
+                "tip": "Pista: si en castellano lo decís con «me» (*me* da igual, *me* da vergüenza, *me* queda chico), casi seguro en alemán va *mir*.",
+                "q": [
+                    q("«Tengo frío.»", "Mir ist kalt.", ["Mir ist kalt.", "Ich bin kalt.", "Ich habe kalt."]),
+                    q("Completá: *Er ist ___ Vater sehr ähnlich.*", "seinem", ["seinem", "seinen", "sein"]),
                 ],
             },
         ],
@@ -256,6 +285,10 @@ WEEK = {
         tr(0, "¿Te duele la espalda?", "Tut dir der Rücken weh?", ["Tut dir der Rücken weh?", "Hast du Rückenschmerzen?", "Tut der Rücken dir weh?"], "*dir* = a vos, en dativo."),
         ty(0, "Escribí en alemán, con artículo.", "«el pie»", "der Fuß", note="Plural *die Füße*. " + MAY),
         li(0, "Bauchschmerzen", ["Bauchschmerzen", "Rückenschmerzen", "Kopfschmerzen"], "*der Bauch* = la panza."),
+        # parte 0 — repaso: adjetivo tras der, die, das (semana 15)
+        cz(0, "Escribí *link-* con su terminación.", "Der ___ Arm tut mir weh.", "linke", note="Nominativo masculino tras *der*: *-e* (semana 15). *link-* (izquierdo) solo existe delante del sustantivo."),
+        ch(0, "Elegí la terminación.", "Mir tun die recht___ Finger weh.", "rechten", ["rechten", "rechte", "rechter"], "Plural tras *die*: siempre *-en*."),
+        cz(0, "Escribí *link-* con su terminación.", "Ich kann das ___ Bein nicht bewegen.", "linke", note="Acusativo neutro tras *das*: *-e*, igual que el nominativo."),
         # parte 1 — verbos reflexivos
         ch(1, "Elegí el reflexivo.", "Wie fühlst du ___?", "dich", ["dich", "dir", "sich"], "Sin otro objeto: acusativo, *dich*."),
         ch(1, "Elegí el reflexivo.", "Er hat ___ erkältet.", "sich", ["sich", "ihn", "ihm"], "Tercera persona: siempre *sich*."),
@@ -275,6 +308,11 @@ WEEK = {
         tr(1, "Me lavo las manos.", "Ich wasche mir die Hände.", note="Otro objeto → *mir*; y artículo, no posesivo."),
         tr(1, "¿Cómo te sentís?", "Wie fühlst du dich?", note="*du* → *dich*."),
         ty(1, "Escribí el infinitivo alemán, con *sich*.", "«apurarse»", "sich beeilen", ["sich beeilen", "beeilen"], "*sich beeilen*: *Beeil dich!*"),
+        # parte 1 — recíproco
+        tr(1, "Nos conocemos desde 2010.", "Wir kennen uns seit 2010.", ["Wir kennen uns seit 2010.", "Wir kennen uns seit zweitausendzehn.", "Wir kennen einander seit 2010.", "Seit 2010 kennen wir uns."], "«nos conocemos» = uno al otro: *uns* recíproco. Y el presente con *seit*, como en castellano («nos conocemos desde»)."),
+        cz(1, "Escribí el pronombre.", "Anna und Paul sehen ___ jeden Tag.", "sich", note="Recíproco en 3.ª plural: *sich* (se ven uno al otro)."),
+        cz(1, "Completá la palabra.", "Die Kollegen sprechen oft mit___.", "einander", note="«entre ellos, uno con otro» con preposición: *mit* + *einander*, todo junto: *miteinander*."),
+        ch(1, "Elegí el reflexivo.", "Ich habe ___ den linken Arm gebrochen.", "mir", ["mir", "mich", "meinen"], "Hay otro objeto (*den Arm*) → dativo *mir*; y artículo, no posesivo. *linken*: acusativo masculino tras *den*."),
         # parte 2 — sollen, en el médico
         ch(2, "Elegí la forma de *sollen*.", "Der Arzt sagt, ich ___ viel schlafen.", "soll", ["soll", "sollst", "sollen"], "*ich soll*, sin terminación."),
         ch(2, "Elegí la forma de *sollen*.", "Ihr ___ die Tabletten nehmen.", "sollt", ["sollt", "sollen", "soll"], "*ihr sollt*."),
@@ -287,9 +325,28 @@ WEEK = {
         cz(2, "Escribí la forma de *sollen*.", "Sie (ella) ___ im Bett bleiben.", "soll", note="*sie soll*."),
         cz(2, "Escribí la palabra.", "Ich möchte einen ___ machen. (un turno)", "Termin", note="*der Termin* = el turno. " + MAY),
         cz(2, "Escribí el reflexivo.", "Leg ___ ein bisschen hin!", "dich", note="Imperativo con *du*: *Leg dich hin!*"),
+        tr(2, "¡Apurate! (a un amigo)", "Beeil dich!", ["Beeil dich!", "Beeile dich!", "Beeil dich bitte!", "Bitte beeil dich!"], "*sich beeilen* → *Beeil dich!* En el imperativo el reflexivo no se cae: «¡Beeil!» solo está incompleto."),
+        cz(2, "Escribí el imperativo de *haben* con *du*.", "___ keine Angst, das ist nicht schlimm!", "Hab", ["Habe"], "*haben → Hab!*: la raíz, sin *-en* (ojo, no sale de *du hast*). *Habe!* también vale, pero suena a libro."),
+        ch(2, "Elegí el imperativo de *sein*.", "Kinder, ___ bitte leise, Papa schläft!", "seid", ["seid", "sind", "seit"], "A varios (*ihr*): *Seid!*, con *d*. *seit* es «desde»."),
+        cz(2, "Escribí el imperativo de *sein* con *du*.", "___ nicht so nervös! Das ist nur ein Test.", "Sei", note="*sein* es irregular: *Sei!* (du), *Seid!* (ihr), *Seien Sie!* (usted)."),
         tr(2, "El médico dice que me quede en cama.", "Der Arzt sagt, ich soll im Bett bleiben.", ["Der Arzt sagt, ich soll im Bett bleiben.", "Die Ärztin sagt, ich soll im Bett bleiben.", "Der Arzt sagt ich soll im Bett bleiben."], "La indicación de otro: *sollen*."),
         tr(2, "¿Querés que te haga un té?", "Soll ich dir einen Tee machen?", ["Soll ich dir einen Tee machen?", "Soll ich dir Tee machen?", "Soll ich einen Tee für dich machen?"], "*Soll ich…?* para ofrecer."),
         tr(2, "Tenés que tomar mucha agua.", "Du sollst viel Wasser trinken.", ["Du sollst viel Wasser trinken.", "Du musst viel Wasser trinken."], "Si es el consejo del médico, *sollst*; *musst* también es correcto."),
         ty(2, "Escribí en alemán, con artículo.", "«la farmacia»", "die Apotheke", note="*die Drogerie* vende cosméticos, no remedios. " + MAY),
+        # parte 2 — repaso: dos objetos y sein/ihr
+        ch(2, "Elegí el orden. (te lo compro; lo = das Medikament)", "Ich kaufe ___ in der Apotheke.", "es dir", ["es dir", "dir es", "dich es"], "Dos pronombres: primero el acusativo (*es*), después el dativo (*dir*). Al revés que «te lo»."),
+        tr(2, "¿Me lo mostrás? (lo = das Rezept)", "Zeigst du es mir?", ["Zeigst du es mir?", "Kannst du es mir zeigen?", "Zeigst du mir das?", "Kannst du mir das zeigen?"], "*es* antes de *mir*: al revés que «me lo». «Zeigst du mir es» está mal. (Con el demostrativo *das* sí se dice *mir das*.)"),
+        cz(2, "Escribí el posesivo (su = de ella).", "Die Mutter bringt ___ Sohn zum Arzt.", "ihren", note="De la madre → *ihr-*; *der Sohn* acusativo → *-en*: *ihren*."),
+        tr(2, "Ana busca su llave.", "Anna sucht ihren Schlüssel.", ["Anna sucht ihren Schlüssel.", "Ana sucht ihren Schlüssel."], "De ella → *ihr-*, y *der Schlüssel* en acusativo → *ihren*. «seinen» sería de él."),
+        # parte 0 — mir ist kalt, das ist mir egal
+        ch(0, "Elegí.", "(Estoy aburrido.)", "Mir ist langweilig.", ["Mir ist langweilig.", "Ich bin langweilig.", "Ich habe langweilig."], "Lo que sentís: dativo, *mir ist langweilig*. *Ich bin langweilig* = soy un plomo."),
+        cz(0, "Escribí el posesivo.", "Er ist ___ Vater sehr ähnlich. (su = de él)", "seinem", note="*ähnlich* pide dativo: *seinem Vater* (der Vater). En castellano «se parece **a** su papá»: el «a» te avisa del dativo."),
+        tr(0, "Me da vergüenza.", "Das ist mir peinlich.", ["Das ist mir peinlich.", "Es ist mir peinlich.", "Mir ist das peinlich.", "Mir ist es peinlich."], "*peinlich* + dativo de la persona: *mir*. «Ich bin peinlich» sería «soy vergonzoso» (hago pasar vergüenza)."),
+        tr(0, "¿Tenés frío?", "Ist dir kalt?", ["Ist dir kalt?", "Ist dir auch kalt?"], "*dir* (dativo) + *ist kalt*. «Bist du kalt?» pregunta si sos frío de carácter."),
+        ch(0, "Encontrá el error.", "¿Qué oración tiene un error?", "Ich bin schlecht, ich gehe nach Hause.", ["Ich bin schlecht, ich gehe nach Hause.", "Mir ist schlecht, ich gehe nach Hause.", "Das ist mir egal."], "«Estoy descompuesto» = *Mir ist schlecht*. *Ich bin schlecht* es «soy malo»."),
+        # parte 2 — repaso: wo o wohin (semana 14)
+        cz(2, "Escribí el artículo.", "Leg das Rezept bitte auf ___ Tisch. (der Tisch)", "den", note="*legen* = poner: hay destino (*Wohin?*), acusativo: *auf den Tisch*."),
+        cz(2, "Escribí el artículo.", "Das Rezept liegt auf ___ Tisch. (der Tisch)", "dem", note="*liegen* = estar: sin destino (*Wo?*), dativo: *auf dem Tisch*."),
+        tr(2, "Puse los remedios en el cajón.", "Ich habe die Medikamente in die Schublade gelegt.", ["Ich habe die Medikamente in die Schublade gelegt.", "Ich habe die Medikamente in die Schublade getan.", "Ich habe die Tabletten in die Schublade gelegt.", "Ich habe die Tabletten in die Schublade getan."], "«Puse… en» tiene destino: *in die Schublade* (acusativo), con *legen → gelegt*."),
     ],
 }

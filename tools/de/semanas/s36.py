@@ -227,5 +227,15 @@ WEEK = {
         tr(2, "La encuesta publicada ayer muestra un aumento.", "Die gestern veröffentlichte Umfrage zeigt einen Anstieg.", _nc("Die gestern veröffentlichte Umfrage zeigt einen Anstieg.", "Die Umfrage, die gestern veröffentlicht wurde, zeigt einen Anstieg.", "Die gestern publizierte Umfrage zeigt einen Anstieg."), "Atributo extendido de prensa: *die gestern veröffentlichte Umfrage*."),
         ty(2, "Convertí en atributo con participio.", "der Zug, der um acht Uhr abgefahren ist", "der um acht Uhr abgefahrene Zug", ["der um acht Uhr abgefahrene Zug", "der um 8 Uhr abgefahrene Zug"], "Perfekt con *sein* → Partizip II activo."),
         li(2, "Pressemitteilung", ["Pressemitteilung", "Pressesprecherin", "Pressefreiheit"], "*die Pressemitteilung* = el comunicado de prensa."),
+        ty(2, "Pasá al Präteritum, como en una noticia.", "Die Polizei hat den Täter am Bahnhof gefunden.", "Die Polizei fand den Täter am Bahnhof.", note="La prensa escrita cuenta en Präteritum: *finden – fand – gefunden*. Un solo verbo, sin auxiliar."),
+        ty(2, "Pasá al Präteritum, como en una noticia.", "Der Minister ist gestern nach Brüssel geflogen.", "Der Minister flog gestern nach Brüssel.", note="*fliegen – flog – ist geflogen* (ie → o)."),
+        ty(2, "Pasá al Präteritum, como en una noticia.", "Die Partei hat die Wahl verloren.", "Die Partei verlor die Wahl.", note="*verlieren – verlor – verloren*."),
+        ty(2, "Pasá al Präteritum, como en una noticia.", "Der Präsident hat lange mit den Journalisten gesprochen.", "Der Präsident sprach lange mit den Journalisten.", note="*sprechen – sprach – gesprochen* (e → a)."),
+        ch(2, "Elegí el Präteritum.", "Der Unfall ___ sich gegen 8 Uhr. (ereignen, regular)", "ereignete", ["ereignete", "ereignet", "ereignte"], "Regular con raíz en *-n* tras consonante: lleva *e* de apoyo, *ereignete*, como *öffnete*."),
+        cz(2, "Escribí el Präteritum de *bringen*.", "Ein Hubschrauber ___ die Verletzten ins Krankenhaus.", "brachte", note="Mixto: *bringen – brachte – gebracht*. Cambia la vocal **y** lleva *-te*."),
+        # parte 1 — repaso: relativo en genitivo y con preposición (semanas 24 y 26)
+        ch(1, "Elegí el relativo.", "Die Autorin, ___ Roman gerade verfilmt wird, lebt in Wien.", "deren", ["deren", "dessen", "die"], "«cuya novela»: el dueño es *die Autorin* → *deren*, aunque *Roman* sea masculino."),
+        tr(1, "el político cuyo discurso criticaron todos", "der Politiker, dessen Rede alle kritisiert haben", ["der Politiker, dessen Rede alle kritisiert haben", "der Politiker, dessen Rede alle kritisierten", "der Politiker, dessen Rede von allen kritisiert wurde", "der Politiker, dessen Rede von allen kritisiert worden ist"], "Dueño masculino → *dessen*; lo poseído sin artículo (*Rede*) y verbo al final."),
+        cz(1, "Escribí el relativo.", "Das Gesetz, über ___ seit Monaten diskutiert wird, tritt im Mai in Kraft.", "das", note="*über* + acusativo, *das Gesetz* neutro → *über das*. La preposición va delante del relativo."),
     ],
 }

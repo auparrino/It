@@ -285,21 +285,28 @@ ch(W, 2, "Era manhã de 1.º de novembro de 1755 em Lisboa. De repente, a terra 
 
 cl(W, 0, "Quando chegamos ao cais, o navio já ___ (partir, mais-que-perfeito simples).", "partira",
    "partiram → partira (había partido).", alt=["tinha partido", "havia partido"])
-cl(W, 0, "Eles nunca ___ (ver, mais-que-perfeito simples) o mar antes de chegar ao Rio.", "viram",
-   "En 3.ª plural el mais-que-perfeito es igual al perfeito: viram. El contexto («antes de») marca la anterioridad.",
-   alt=["tinham visto", "haviam visto"])
-cl(W, 0, "Nós ___ (estar, mais-que-perfeito simples) em Coimbra dois anos antes.", "estivéramos",
-   "estiveram → estivéramos, con tilde en la 1.ª plural.", alt=["tínhamos estado", "havíamos estado"])
-cl(W, 0, "Saramago contou que na juventude ___ (ser, mais-que-perfeito simples) serralheiro mecânico.", "fora",
-   "ser e ir: foram → fora. Saramago trabajó de joven como cerrajero mecánico antes de ser escritor.",
-   alt=["tinha sido", "havia sido"])
+ch(W, 0, "Em «eles nunca viram o mar antes de chegar ao Rio», «viram» equivale a ___.",
+   ["tinham visto", "viam", "vissem"], "tinham visto",
+   "En 3.ª plural el mais-que-perfeito es igual al perfeito: viram. Acá «antes de chegar» lo vuelve "
+   "anterior: tinham visto (habían visto). «Vissem» es subjuntivo, el calco de «vieran».",
+   prompt="Elegí la equivalencia.")
+ch(W, 0, "Nós estivéramos em Coimbra dois anos antes. «Estivéramos» = ___",
+   ["habíamos estado", "estuviéramos", "estaríamos"], "habíamos estado",
+   "La -ra portuguesa es indicativo: estivéramos = tínhamos estado (habíamos estado). «Estuviéramos» "
+   "sería estivéssemos.", prompt="Elegí el significado.")
+cl(W, 0, "Saramago contou que na juventude fora serralheiro mecânico. → Saramago contou que na juventude ___ serralheiro mecânico.",
+   "tinha sido",
+   "fora (de ser) = tinha sido: al hablar, tinha + participio. Saramago trabajó de joven como cerrajero "
+   "mecánico antes de ser escritor.", alt=["havia sido"], prompt="Completá como en el habla de Brasil.")
 cl(W, 0, "Eu ___ (dizer, mais-que-perfeito simples) a verdade, mas ninguém acreditou.", "dissera",
    "disseram → dissera (había dicho), no «dijera».", alt=["tinha dito", "havia dito"])
 cl(W, 1, "Quando a ditadura acabou, muitos exilados já ___ (voltar, habla) com a Anistia de 1979.", "tinham voltado",
    "En el habla: tinha + participio. La Lei da Anistia es de 1979; el régimen militar terminó en 1985.",
    alt=["haviam voltado", "voltaram"])
-cl(W, 1, "Quando publicou A Hora da Estrela, em 1977, Clarice já ___ (escrever, mais-que-perfeito simples) A Paixão segundo G.H.", "escrevera",
-   "escreveram → escrevera. A Paixão segundo G.H. es de 1964.", alt=["tinha escrito", "havia escrito"])
+cl(W, 1, "Quando publicou A Hora da Estrela, em 1977, Clarice já escrevera A Paixão segundo G.H. → Clarice já ___ A Paixão segundo G.H.",
+   "tinha escrito",
+   "escrevera = tinha escrito (había escrito): lo que leés en -ra, al hablar va con tinha + participio. "
+   "A Paixão segundo G.H. es de 1964.", alt=["havia escrito"], prompt="Completá como en el habla de Brasil.")
 cl(W, 1, "O jornal noticiou que o incêndio ___ (começar, mais-que-perfeito simples) de madrugada.", "começara",
    "começaram → começara: la prensa escrita todavía usa esta forma.", alt=["tinha começado", "havia começado"])
 cl(W, 2, "Quem me ___ (dar) morar perto do mar!", "dera",
@@ -308,8 +315,10 @@ cl(W, 2, "Tomara que ela ___ (vir) ao ensaio da Portela.", "venha",
    "tomara que + subjuntivo presente: venha.")
 cl(W, 2, "Era tarde. Joana ___ (fechar, perfeito) a janela e se deitou.", "fechou",
    "La acción que avanza en el relato va en perfeito: fechou.")
-cl(W, 2, "Quando a moça acordou, o sol já ___ (nascer, mais-que-perfeito simples).", "nascera",
-   "nasceram → nascera: pasó antes de que ella se despertara.", alt=["tinha nascido", "havia nascido"])
+ch(W, 2, "Quando a moça acordou, o sol já nascera. «Nascera» = ___",
+   ["había salido", "saliera", "saldría"], "había salido",
+   "nascera = tinha nascido: pasó antes de que ella se despertara. No es subjuntivo («saliera» sería "
+   "nascesse). Y el sol en portugués nasce: «sale el sol» = o sol nasce.", prompt="Elegí el significado.")
 
 tr(W, 0, "Cuando llegué, ella ya había salido.",
    "Quando cheguei, ela já tinha saído.",

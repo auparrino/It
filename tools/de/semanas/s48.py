@@ -275,5 +275,9 @@ WEEK = {
         tr(2, "Eso requiere una explicación. (bedürfen)", "Das bedarf einer Erklärung.", ["Das bedarf einer Erklärung.", "Dies bedarf einer Erklärung."], "*bedürfen* + Gen.: *einer Erklärung*."),
         tr(2, "Soy consciente de mi responsabilidad.", "Ich bin mir meiner Verantwortung bewusst.", note="Dativo reflexivo *mir* + genitivo *meiner Verantwortung*."),
         ty(2, "Pasalo al registro literario, con genitivo.", "Ich erinnere mich an jenen Tag.", "Ich erinnere mich jenes Tages.", note="*sich erinnern* + Gen. es literario: *jenes Tages*."),
+        # parte 0 — repaso: relativa con la preposición del adjetivo (semana 24) y el *es* que anuncia (semana 22)
+        cz(0, "Escribí el relativo.", "Das ist die Arbeit, auf ___ ich am meisten stolz bin.", "die", note="*stolz auf* + acusativo, *die Arbeit* femenino → *auf die*. La preposición del adjetivo pasa delante del relativo; en castellano coloquial queda colgando («el trabajo que estoy orgulloso»)."),
+        tr(0, "Es un problema del que todos somos conscientes.", "Das ist ein Problem, dessen wir uns alle bewusst sind.", V("Das ist ein Problem, dessen wir uns alle bewusst sind.", "Es ist ein Problem, dessen wir uns alle bewusst sind.", "Das ist ein Problem, über das wir uns alle im Klaren sind.", "Das ist ein Problem, das uns allen bewusst ist.", "Es ist ein Problem, das uns allen bewusst ist."), "*sich einer Sache bewusst sein* pide genitivo → relativo *dessen* (masculino/neutro). Más llano: *das uns allen bewusst ist*."),
+        ch(0, "¿Va *es* o no?", "Dass er so abhängig von seinen Eltern ist, wundert ___.", "mich", ["mich", "es mich", "mich es"], "La oración con *dass* ocupa el Vorfeld: el *es* que la anuncia desaparece (*Es wundert mich, dass…* ↔ *Dass…, wundert mich*)."),
     ],
 }

@@ -22,7 +22,7 @@ WEEK = {
         "parts": [
             {"h": "La pasiva con werden", "blocks": [0, 1, 2]},
             {"h": "En pasado y con agente", "blocks": [3, 4, 5]},
-            {"h": "Se fuma, se recicla: procesos", "blocks": [6, 7]},
+            {"h": "Se fuma, se recicla: procesos", "blocks": [6, 7, 8]},
         ],
         "blocks": [
             {
@@ -178,6 +178,30 @@ WEEK = {
                     q("¿Qué orden es correcto?", "Dann wird es geschmolzen.", ["Dann wird es geschmolzen.", "Dann es wird geschmolzen.", "Dann es geschmolzen wird."]),
                 ],
             },
+            {
+                "h": "lassen: mandar a hacer y dejar",
+                "r": "*lassen* (*du lässt, er lässt*; Präteritum *ließ*) tiene dos usos frecuentes. Con **otro verbo en infinitivo** al final, como un modal: (1) **hacer que otro lo haga**: *Ich lasse das Auto reparieren* = llevo el auto a arreglar; (2) **dejar, permitir**: *Lass mich das machen!* = dejame hacerlo a mí. **Sin otro verbo**, es **dejar algo en un lugar**: *Ich lasse den Schirm im Auto*. En el Perfekt: con otro verbo, **doble infinitivo** (*habe … reparieren lassen*); sin otro verbo, **participio** (*habe … gelassen*).",
+                "table": {"head": ["Alemán", "Castellano", "Uso"], "rows": [
+                    ["Ich lasse das Auto reparieren.", "Llevo el auto a arreglar.", "mandar a hacer"],
+                    ["Ich lasse mir die Haare schneiden.", "Me corto el pelo (en la peluquería).", "mandar a hacer (a mí)"],
+                    ["Lass mich das machen!", "¡Dejame hacerlo a mí!", "dejar, permitir"],
+                    ["Ich habe die Jacke im Auto gelassen.", "Dejé la campera en el auto.", "dejar en un lugar"],
+                    ["Ich habe das Auto reparieren lassen.", "Mandé a arreglar el auto.", "Perfekt con otro verbo"],
+                ]},
+                "ex": [
+                    ["Wir *lassen* die Wohnung streichen.", "Mandamos a pintar el departamento."],
+                    ["Meine Eltern *ließen* mich nie allein ausgehen.", "Mis viejos nunca me dejaban salir solo."],
+                    ["*Lass* mich in Ruhe!", "¡Dejame en paz!"],
+                    ["Wo hast du den Schlüssel *gelassen*?", "¿Dónde dejaste la llave?"],
+                ],
+                "warn": "«Me corté el pelo» en castellano no dice si fuiste a la peluquería. En alemán sí: *Ich habe mir die Haare geschnitten* = me lo corté yo mismo (con tijera, en casa). Si te lo cortó otro: *Ich habe mir die Haare schneiden lassen*. Lo mismo con «me arreglé el auto», «me hice un tatuaje», etc.",
+                "tip": "Pensá en la pasiva: *Das Auto wird repariert* (alguien lo arregla). Con *lassen* decís, además, que **vos** lo encargaste: *Ich lasse das Auto reparieren*.",
+                "q": [
+                    q("*Ich lasse meinen Computer reparieren* significa…", "Llevo la computadora a arreglar.", ["Llevo la computadora a arreglar.", "Arreglo mi computadora yo mismo.", "Dejo de arreglar la computadora."]),
+                    q("Completá: *Ich habe meine Brille zu Hause ___.*", "gelassen", ["gelassen", "lassen", "gelasst"]),
+                    q("Completá: *Wir haben das Dach reparieren ___.*", "lassen", ["lassen", "gelassen", "lässt"]),
+                ],
+            },
         ],
     },
     "vocab": [
@@ -214,6 +238,10 @@ WEEK = {
         tr(0, "Acá se recicla vidrio.", "Hier wird Glas recycelt.", ["Hier wird Glas recycelt.", "Glas wird hier recycelt.", "Hier wird Altglas recycelt.", "Altglas wird hier recycelt.", "Hier recycelt man Glas."], "*Hier* adelante, *wird* segundo, participio al final."),
         ty(0, "Pasá a pasiva.", "Man schützt die Umwelt.", "Die Umwelt wird geschützt.", note="*die Umwelt* (acusativo femenino) pasa a sujeto: no cambia la forma, pero el verbo es *wird*."),
         li(0, "getrennt", ["getrennt", "gerannt", "gekannt"], "*getrennt* = separado, de *trennen*."),
+        ch(0, "¿Qué hace *werden* acá?", "Mein Bruder wird Arzt.", "Verbo solo: «llegar a ser».", ["Verbo solo: «llegar a ser».", "Futuro: «va a ...».", "Pasiva: «es ...-do»."], "Sin otro verbo, *werden* es ponerse / llegar a ser: mi hermano va a ser médico (se está recibiendo)."),
+        ch(0, "¿Qué hace *werden* acá?", "Der Arzt wird morgen kommen.", "Futuro: «va a ...».", ["Futuro: «va a ...».", "Pasiva: «es ...-do».", "Verbo solo: «llegar a ser»."], "*werden* + **infinitivo** (*kommen*) = Futur I: el médico va a venir mañana."),
+        ch(0, "¿Qué hace *werden* acá?", "Der Patient wird morgen operiert.", "Pasiva: «es ...-do».", ["Pasiva: «es ...-do».", "Futuro: «va a ...».", "Verbo solo: «llegar a ser»."], "*werden* + **participio** (*operiert*) = pasiva: al paciente lo operan mañana. Fijate en la forma del final: infinitivo o participio."),
+        ch(0, "¿Qué significa?", "Das Haus wird verkauft.", "La casa se vende / la están vendiendo.", ["La casa se vende / la están vendiendo.", "La casa va a vender.", "La casa se va a convertir en venta."], "*wird* + participio (*verkauft*) = pasiva. «La casa va a vender» sería futuro activo, y no tiene sentido: la casa no vende nada."),
         # parte 1 — wurde, von, durch
         ch(1, "Elegí la forma correcta.", "Die Fabrik ___ 1960 gebaut.", "wurde", ["wurde", "wird", "würde"], "Hecho pasado: *wurde* + participio."),
         ch(1, "Elegí la forma correcta.", "Die Fenster ___ gestern geputzt.", "wurden", ["wurden", "wurde", "worden"], "*die Fenster* es plural → *wurden*."),
@@ -246,5 +274,14 @@ WEEK = {
         tr(2, "En la fiesta se baila.", "Auf der Party wird getanzt.", ["Auf der Party wird getanzt.", "Es wird auf der Party getanzt.", "Auf dem Fest wird getanzt.", "Es wird auf dem Fest getanzt.", "Auf der Party tanzt man.", "Auf dem Fest tanzt man."], "*tanzen* no tiene acusativo: pasiva sin sujeto con *wird*."),
         ty(2, "Pasá a pasiva.", "Man produziert hier Strom.", "Hier wird Strom produziert.", ["Hier wird Strom produziert.", "Strom wird hier produziert.", "Es wird hier Strom produziert."], "*Strom* pasa a sujeto; *wird* segundo, *produziert* al final."),
         ty(2, "Escribí en alemán, con artículo.", "«el medio ambiente»", "die Umwelt", note="*die Umwelt*: «el mundo de alrededor». " + MAY),
+        # parte 2 — lassen
+        ch(2, "Elegí la forma.", "Ich habe mein Handy im Büro ___.", "gelassen", ["gelassen", "lassen", "gelasst"], "Sin otro verbo, *lassen* = dejar en un lugar, y en el Perfekt va el participio: *gelassen*."),
+        ch(2, "Elegí la forma.", "Ich habe mein Handy reparieren ___.", "lassen", ["lassen", "gelassen", "gelasst"], "Con otro verbo (*reparieren*), doble infinitivo, como los modales: *reparieren lassen*."),
+        ch(2, "¿Qué significa?", "Ich habe mir die Haare geschnitten.", "Me corté el pelo yo mismo.", ["Me corté el pelo yo mismo.", "Fui a la peluquería a cortarme el pelo.", "Dejé que me crezca el pelo."], "Sin *lassen*, lo hiciste vos. Si fue el peluquero: *Ich habe mir die Haare schneiden lassen*."),
+        tr(2, "Me corté el pelo. (en la peluquería)", "Ich habe mir die Haare schneiden lassen.", ["Ich habe mir die Haare schneiden lassen.", "Ich ließ mir die Haare schneiden."], "Lo hizo otro: *lassen* + infinitivo, y en Perfekt doble infinitivo (*schneiden lassen*, nunca «gelassen»). «Ich habe mir die Haare geschnitten» diría que te lo cortaste solo."),
+        tr(2, "Mandamos a arreglar el auto.", "Wir haben das Auto reparieren lassen.", ["Wir haben das Auto reparieren lassen.", "Wir ließen das Auto reparieren.", "Wir lassen das Auto reparieren."], "*lassen* + infinitivo = hacer que otro lo haga. Perfekt: *haben … reparieren lassen*."),
+        tr(2, "¡Dejame en paz! (a un amigo)", "Lass mich in Ruhe!", ["Lass mich in Ruhe!", "Lass mich bitte in Ruhe!"], "*lassen* = dejar. Imperativo con *du*: *du lässt → Lass!* (el *a → ä* se va, como en *Fahr!*)."),
+        cz(2, "Escribí la forma de *lassen* en Präteritum.", "Meine Eltern ___ mich nie allein ausgehen.", "ließen", note="*lassen* = dejar, permitir. Präteritum irregular: *ließ*, *sie ließen*."),
+        ty(2, "Escribí en alemán.", "«Dejé la campera en el auto.»", "Ich habe die Jacke im Auto gelassen.", ["Ich habe die Jacke im Auto gelassen.", "Ich habe meine Jacke im Auto gelassen.", "Ich ließ die Jacke im Auto.", "Ich ließ meine Jacke im Auto.", "Ich habe die Jacke im Auto liegen lassen.", "Ich habe meine Jacke im Auto liegen lassen."], "Sin otro verbo: participio *gelassen*. También se dice *im Auto liegen lassen*: ahí hay otro verbo (*liegen*), así que doble infinitivo."),
     ],
 }

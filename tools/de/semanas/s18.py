@@ -21,7 +21,7 @@ WEEK = {
     "lesson": {
         "intro": "Hasta ahora el verbo iba segundo o, con modales y Perfekt, mandaba una parte al final. Esta semana aparece la otra gran regla del alemán: en las subordinadas el verbo conjugado se va a la última posición. Con eso ya podés dar razones, opinar y poner condiciones.",
         "parts": [
-            {"h": "Dar razones: weil y denn", "blocks": [0, 1, 2]},
+            {"h": "Dar razones: weil y denn", "blocks": [0, 1, 2, 9, 7, 8]},
             {"h": "Opinar: dass", "blocks": [3, 4]},
             {"h": "Condiciones: wenn", "blocks": [5, 6]},
         ],
@@ -162,6 +162,63 @@ WEEK = {
                     q("Completá: *Weil es kalt ist, ___ ich eine Jacke an.*", "ziehe", ["ziehe", "ich ziehe", "anziehe"]),
                 ],
             },
+            {
+                "h": "deshalb: por eso",
+                "r": "*weil* da la **causa**; *deshalb* (por eso) da la **consecuencia**. *deshalb* no es conjunción sino **adverbio**: ocupa la posición 1 (o va en el medio), así que el verbo va **enseguida**, en el segundo lugar. Igual que *dann* o *heute*.",
+                "table": {"head": ["Causa", "Consecuencia"], "rows": [
+                    ["Ich bin krank,", "*deshalb* bleibe ich zu Hause."],
+                    ["Ich bin krank.", "Ich bleibe *deshalb* zu Hause."],
+                    ["Weil ich krank bin,", "bleibe ich zu Hause."],
+                ]},
+                "ex": [
+                    ["Es regnet, *deshalb* nehmen wir den Bus.", "Llueve, por eso tomamos el colectivo."],
+                    ["Der Zug hatte Verspätung. *Deshalb* bin ich zu spät gekommen.", "El tren venía atrasado. Por eso llegué tarde."],
+                ],
+                "warn": "Calco del castellano: «deshalb ich bleibe zu Hause». Está mal: después de *deshalb* va el **verbo**: *deshalb bleibe ich*. Y no lo confundas con *weil*: «Ich bleibe zu Hause, deshalb ich krank bin» dice otra cosa (y está mal armado).",
+                "tip": "Pregunta para elegir: ¿lo que sigue es el motivo («porque…»)? → *weil/denn*. ¿Es el resultado («por eso…»)? → *deshalb*.",
+                "q": [
+                    q("¿Cuál es correcta?", "Ich habe Hunger, deshalb koche ich.", ["Ich habe Hunger, deshalb koche ich.", "Ich habe Hunger, deshalb ich koche.", "Ich habe Hunger, deshalb ich koche nicht."]),
+                    q("«Estoy cansado, por eso me voy a dormir.»", "Ich bin müde, deshalb gehe ich schlafen.", ["Ich bin müde, deshalb gehe ich schlafen.", "Ich bin müde, weil ich schlafen gehe.", "Ich bin müde, deshalb ich gehe schlafen."]),
+                ],
+            },
+            {
+                "h": "aber o sondern",
+                "r": "Las dos son «pero/sino» y no mueven el verbo. *sondern* es el **«sino»**: va solo después de una **negación** (*nicht, kein*) y **reemplaza** lo negado por lo correcto. *aber* es «pero»: agrega algo que contrasta, con o sin negación antes.",
+                "table": {"head": ["Castellano", "Alemán"], "rows": [
+                    ["No es mi perro, sino el de Paul.", "Das ist nicht mein Hund, *sondern* Pauls Hund."],
+                    ["No vivo en Berlín, sino en Hamburgo.", "Ich wohne nicht in Berlin, *sondern* in Hamburg."],
+                    ["No tengo auto, pero tengo bici.", "Ich habe kein Auto, *aber* ich habe ein Fahrrad."],
+                    ["Es caro, pero lindo.", "Es ist teuer, *aber* schön."],
+                ]},
+                "warn": "El error es usar *aber* para «sino»: «Das ist nicht mein Hund, aber Pauls Hund» está mal. Si corregís lo negado (no esto → esto otro), es *sondern*: *Ich trinke keinen Kaffee, sondern Tee*.",
+                "tip": "Prueba: si en castellano entra «sino», es *sondern*; si entra «pero», es *aber*.",
+                "q": [
+                    q("Completá: *Er kommt nicht heute, ___ morgen.*", "sondern", ["sondern", "aber", "denn"]),
+                    q("Completá: *Ich bin müde, ___ ich komme mit.*", "aber", ["aber", "sondern", "deshalb"]),
+                ],
+            },
+            {
+                "h": "denn, mal, doch: hacer amable el alemán",
+                "r": "Ojo: *denn* tiene **otro** uso que no es «porque». Dentro de una **pregunta**, sin acento, es una **partícula**: no cambia el significado, pero suena interesado y amable. Lo mismo hacen *mal* y *doch* en los pedidos. Van **en el medio**, después del verbo y de los pronombres, nunca al principio.",
+                "table": {"head": ["Partícula", "Dónde", "Ejemplo", "Suena como…"], "rows": [
+                    ["denn", "preguntas", "Wie heißt du denn? · Was ist denn los?", "«¿y cómo te llamás?», «¿qué pasa, che?»"],
+                    ["mal", "pedidos", "Komm mal her! · Kannst du mal helfen?", "«vení un toque», «¿me das una mano?»"],
+                    ["doch", "pedidos, consejos", "Komm doch mit! · Setz dich doch!", "«dale, vení», «sentate, dale»"],
+                ]},
+                "ex": [
+                    ["Was machst du *denn* hier?", "¿Y vos qué hacés acá?"],
+                    ["Wo wohnst du *denn*?", "¿Y dónde vivís?"],
+                    ["Gib mir *mal* das Salz, bitte.", "Pasame la sal, porfa."],
+                    ["Ruf mich *doch* morgen an!", "¡Dale, llamame mañana!"],
+                ],
+                "warn": "No confundas: *…, denn ich bin krank* (= porque, une dos oraciones) y *Was ist denn los?* (partícula, adentro de una pregunta). Y sin *mal* o *doch* un imperativo como *Gib mir das Salz!* suena seco, casi una orden.",
+                "tip": "Estas partículas no se traducen palabra por palabra: en castellano el mismo efecto lo hacen el tono, «che», «dale», «un toque».",
+                "more": ["La lista completa de partículas (*ja, eben, halt, wohl, schon…*) llega en la semana 46."],
+                "q": [
+                    q("¿Qué hace *denn* en *Wie heißt du denn?*", "suaviza la pregunta", ["suaviza la pregunta", "significa «porque»", "significa «entonces»"]),
+                    q("Pedido amable: *Kannst du ___ das Fenster aufmachen?*", "mal", ["mal", "denn", "aber"]),
+                ],
+            },
         ],
     },
     "vocab": [
@@ -199,6 +256,20 @@ WEEK = {
         tr(0, "Me quedo en casa porque estoy enfermo.", "Ich bleibe zu Hause, weil ich krank bin.", ["Ich bleibe zu Hause, weil ich krank bin.", "Ich bleibe zu Hause, denn ich bin krank.", "Weil ich krank bin, bleibe ich zu Hause.", "Ich bleibe daheim, weil ich krank bin."], "*weil* + verbo al final (o *denn* + orden normal)."),
         tr(0, "Estudio alemán porque quiero vivir en Berlín.", "Ich lerne Deutsch, weil ich in Berlin wohnen will.", ["Ich lerne Deutsch, weil ich in Berlin wohnen will.", "Ich lerne Deutsch, weil ich in Berlin leben will.", "Ich lerne Deutsch, weil ich in Berlin wohnen möchte.", "Ich lerne Deutsch, weil ich in Berlin leben möchte.", "Ich lerne Deutsch, denn ich will in Berlin wohnen.", "Ich lerne Deutsch, denn ich will in Berlin leben."], "Modal conjugado al final: *wohnen will*."),
         tr(0, "Llego tarde porque el tren está atrasado.", "Ich komme zu spät, weil der Zug Verspätung hat.", ["Ich komme zu spät, weil der Zug Verspätung hat.", "Ich komme spät, weil der Zug Verspätung hat.", "Ich komme zu spät, denn der Zug hat Verspätung."], "*Verspätung haben* = estar atrasado."),
+        # parte 0 — deshalb
+        ch(0, "Elegí el orden correcto.", "Es regnet, deshalb ___", "nehmen wir den Bus.", ["nehmen wir den Bus.", "wir nehmen den Bus.", "wir den Bus nehmen."], "*deshalb* es adverbio y ocupa la posición 1: el verbo va enseguida."),
+        ch(0, "Elegí el conector.", "Ich habe keine Zeit, ___ kann ich nicht kommen.", "deshalb", ["deshalb", "weil", "denn"], "Lo que sigue es la consecuencia y el verbo va enseguida (*kann ich*): *deshalb*."),
+        ch(0, "Elegí el conector.", "Ich kann nicht kommen, ___ ich keine Zeit habe.", "weil", ["weil", "deshalb", "denn"], "Lo que sigue es la causa y el verbo va al final (*habe*): *weil*."),
+        cz(0, "Escribí el verbo (y el sujeto) en el orden correcto.", "Der Zug hatte Verspätung, deshalb ___ zu spät gekommen. (ich bin)", "bin ich", note="Después de *deshalb*: verbo + sujeto. «deshalb ich bin» es el calco del castellano."),
+        tr(0, "Estoy enfermo, por eso me quedo en casa.", "Ich bin krank, deshalb bleibe ich zu Hause.", ["Ich bin krank, deshalb bleibe ich zu Hause.", "Ich bin krank, deshalb bleibe ich daheim.", "Ich bin krank. Deshalb bleibe ich zu Hause.", "Ich bin krank, deswegen bleibe ich zu Hause.", "Ich bin krank, darum bleibe ich zu Hause.", "Ich bin krank und bleibe deshalb zu Hause."], "«por eso» = *deshalb*, y después el verbo: *bleibe ich*, no «ich bleibe»."),
+        ty(0, "Uní con *deshalb*.", "Ich habe Hunger. Ich koche. (deshalb)", "Ich habe Hunger, deshalb koche ich.", ["Ich habe Hunger, deshalb koche ich.", "Ich habe Hunger. Deshalb koche ich.", "Ich habe Hunger und koche deshalb.", "Ich habe Hunger, ich koche deshalb."], "*deshalb* en la posición 1 → *koche ich*."),
+        # parte 0 — aber o sondern
+        ch(0, "Elegí el conector.", "Das ist nicht mein Handy, ___ Pauls Handy.", "sondern", ["sondern", "aber", "denn"], "Después de una negación, para poner lo correcto en lugar de lo negado («sino»): *sondern*."),
+        ch(0, "Elegí el conector.", "Ich habe kein Auto, ___ ich habe ein Fahrrad.", "aber", ["aber", "sondern", "deshalb"], "No reemplaza lo negado, agrega un contraste («pero tengo bici»): *aber*."),
+        ch(0, "Encontrá el error.", "¿Qué oración tiene un error?", "Das ist nicht mein Hund, aber Pauls Hund.", ["Das ist nicht mein Hund, aber Pauls Hund.", "Ich trinke keinen Kaffee, sondern Tee.", "Ich trinke keinen Kaffee, aber ich trinke gern Tee."], "«No es mi perro, sino el de Paul»: corregís lo negado → *sondern*. *aber* no reemplaza, agrega algo: *…, aber ich trinke gern Tee*."),
+        cz(0, "Escribí *aber* o *sondern*.", "Wir fahren nicht nach Berlin, ___ nach Hamburg.", "sondern", note="«No a Berlín, sino a Hamburgo» → *sondern*."),
+        cz(0, "Escribí *aber* o *sondern*.", "Die Wohnung ist klein, ___ sehr gemütlich.", "aber", note="No hay negación que corregir: «chica, pero acogedora» → *aber*."),
+        tr(0, "No vivo en Berlín, sino en Hamburgo.", "Ich wohne nicht in Berlin, sondern in Hamburg.", ["Ich wohne nicht in Berlin, sondern in Hamburg.", "Ich lebe nicht in Berlin, sondern in Hamburg."], "«sino» después de *nicht* = *sondern*, nunca *aber*."),
         # parte 1 — dass y opinar
         ch(1, "Elegí la palabra.", "Ich glaube, ___ er recht hat.", "dass", ["dass", "das", "denn"], "Conjunción «que»: *dass*, con ss."),
         ch(1, "Elegí la palabra.", "Ich weiß, dass ___ stimmt.", "das", ["das", "dass", "weil"], "«eso»: *das*, con una s."),
@@ -215,6 +286,9 @@ WEEK = {
         tr(1, "Creo que tenés razón.", "Ich glaube, dass du recht hast.", ["Ich glaube, dass du recht hast.", "Ich glaube, du hast recht.", "Ich denke, dass du recht hast.", "Ich denke, du hast recht."], "*recht haben*; con *dass*, *hast* al final."),
         tr(1, "Me parece que la película es aburrida.", "Ich finde, dass der Film langweilig ist.", ["Ich finde, dass der Film langweilig ist.", "Ich finde, der Film ist langweilig.", "Ich finde den Film langweilig."], "Con *dass* verbo al final; también *Ich finde den Film langweilig*."),
         tr(1, "Sé que eso es cierto.", "Ich weiß, dass das stimmt.", ["Ich weiß, dass das stimmt.", "Ich weiß, dass das richtig ist.", "Ich weiß, dass das wahr ist."], "*dass* (que) + *das* (eso)."),
+        ch(1, "Elegí el verbo.", "Ich ___, dass sie in Hamburg wohnt, aber ich ___ sie nicht gut.", "weiß … kenne", ["weiß … kenne", "kenne … weiß", "weiß … weiß"], "Un dato (dónde vive) es *wissen*; a una persona la conocés con *kennen*. El castellano dice «sé» y «conozco», el alemán también los separa."),
+        cz(1, "Escribí la forma de *wissen*.", "Mein Bruder ___, dass ich morgen komme.", "weiß", note="*er weiß*, sin -t. Después de *wissen* va muy seguido *dass* con el verbo al final."),
+        tr(1, "¿Sabés que Paul tiene un perro?", "Weißt du, dass Paul einen Hund hat?", note="Saber un dato: *wissen* (no *kennen*). *du weißt*; con *dass*, *hat* al final."),
         ty(1, "Escribí en alemán, con artículo.", "«la opinión»", "die Meinung", note="*Meiner Meinung nach* = en mi opinión. " + MAY),
         # parte 2 — wenn
         ch(2, "Elegí el conector.", "___ du Hunger hast, mach dir ein Brot. (Si tenés hambre, hacete un sándwich.)", "Wenn", ["Wenn", "Weil", "Denn"], "Condición («si tenés hambre»): *wenn*."),
@@ -232,5 +306,12 @@ WEEK = {
         tr(2, "Si hace lindo, vamos al parque.", "Wenn das Wetter schön ist, gehen wir in den Park.", ["Wenn das Wetter schön ist, gehen wir in den Park.", "Wenn das Wetter gut ist, gehen wir in den Park.", "Wir gehen in den Park, wenn das Wetter schön ist.", "Wir gehen in den Park, wenn das Wetter gut ist.", "Wenn es schön ist, gehen wir in den Park."], "Subordinada primero → *…ist, gehen wir…*."),
         ty(2, "Escribí la conjunción alemana.", "«si» (condición: si llueve…)", "wenn", note="*Wenn es regnet…*"),
         li(2, "weil", ["weil", "wenn", "will"], "*weil* = porque; *will* es de *wollen*."),
+        # parte 0 — denn, mal, doch como partículas
+        cz(0, "Escribí la partícula que hace más amable la pregunta.", "Wie heißt du ___?", "denn", note="En preguntas, *denn* sin acento suaviza: «¿y cómo te llamás?». No es el *denn* = porque."),
+        cz(0, "Escribí la partícula del pedido amable («un toque»).", "Komm ___ her!", "mal", ["mal", "doch"], "*mal* suaviza el imperativo: *Komm mal her!* (*Komm doch her!* también suena natural, más insistente)."),
+        ch(0, "¿Qué *denn* es partícula y no «porque»?", "Elegí la oración.", "Was ist denn los?", ["Was ist denn los?", "Ich bleibe zu Hause, denn ich bin krank.", "Wir nehmen ein Taxi, denn es ist spät."], "Dentro de una pregunta, *denn* es partícula. Entre dos oraciones, es «porque»."),
+        ch(0, "Elegí la posición.", "(Dale, vení con nosotros.)", "Komm doch mit!", ["Komm doch mit!", "Doch komm mit!", "Komm mit doch!"], "La partícula va en el medio: después del verbo, antes de la parte separable *mit*."),
+        tr(0, "¿Y vos qué hacés acá?", "Was machst du denn hier?", ["Was machst du denn hier?", "Was machst du denn da?"], "*denn* en la pregunta hace el «¿y vos…?» de interés o sorpresa. Va después del verbo y del sujeto."),
+        tr(0, "¿Me das una mano un toque?", "Kannst du mir mal helfen?", ["Kannst du mir mal helfen?", "Kannst du mal helfen?", "Hilfst du mir mal?", "Könntest du mir mal helfen?"], "*mal* = «un toque»: suaviza el pedido. Va después de los pronombres (*mir mal*)."),
     ],
 }

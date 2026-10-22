@@ -29,8 +29,9 @@ LESSONS = {
          ["*A me* piace, *a lui* no.", "A mí me gusta, a él no."],
          ["*A noi* piacciono le montagne.", "A nosotros nos gustan las montañas."],
          ["Mi piace *un sacco*.", "Me gusta muchísimo. (coloquial)"]],
-  "warn": "Nada de «a me mi piace»: el castellano repite («a mí me gusta»), "
-          "el italiano no. O *a me piace*, o *mi piace*.",
+  "warn": "«A me mi piace» se oye charlando, pero escrito es error: el "
+          "castellano repite («a mí me gusta»), el italiano no. O *a me "
+          "piace*, o *mi piace*.",
   "tip": "*Ti va di uscire?* (¿tenés ganas de salir?) funciona igual que "
          "*piacere*."},
 
@@ -86,6 +87,23 @@ LESSONS = {
            "Para aceptar con entusiasmo: *certo!*, *perché no?*, *ci sto!* (¡me "
            "prendo!). Para dudar: *non so, ti faccio sapere* (no sé, te aviso)."],
   "qq": [{"prompt": "Un amigo te invita a cenar y no podés", "answer": "Mi dispiace, ma stasera non posso.", "options": ["Mi dispiace, ma stasera non posso.", "No.", "Non mi va di venire da te."]}]},
+
+ {"h": "Vengo da te: andare o venire, portare o prendere",
+  "r": "Si vas **hacia donde está el otro**, *venire*, aunque en castellano digas «voy». *Andare* es ir a un tercer lugar.",
+  "table": {"head": ["Castellano", "Italiano", "Por qué"],
+            "rows": [["¿Venís a la fiesta? — ¡Sí, voy!", "Vieni alla festa? — Sì, vengo!", "vas adonde está el que invita"],
+                     ["Esta noche voy a tu casa.", "Stasera vengo da te.", "vas hacia el otro"],
+                     ["Mañana voy a Roma.", "Domani vado a Roma.", "un tercer lugar: andare"],
+                     ["Traé el vino.", "Porta il vino.", "portare = llevar y traer"],
+                     ["Te paso a buscar a las ocho.", "Ti vengo a prendere alle otto.", "prendere = agarrar, ir a buscar"]]},
+  "ex": [["Vieni al cinema? — Sì, *vengo*!", "¿Venís al cine? — ¡Sí, voy!"],
+         ["Stasera *vengo da* te.", "Esta noche voy a tu casa."],
+         ["*Porto* io il dolce.", "Llevo yo el postre."],
+         ["*Ti vengo a prendere* alla stazione.", "Te paso a buscar por la estación."]],
+  "warn": "«Vieni alla festa? — Sì, vado» suena a que te vas a otro lado. Respondé con el verbo de la pregunta: *Sì, vengo!*",
+  "tip": "*portare* no distingue llevar de traer: *portami un caffè* (traeme), *porto il vino da Anna* (llevo). Para «agarrar» o «ir a buscar», *prendere*.",
+  "q": [{"prompt": "Te invitan: «Vieni alla festa?»", "stem": "Sì, ___!", "answer": "vengo", "options": ["vengo", "vado", "porto"]},
+        {"prompt": "«Te paso a buscar a las ocho.»", "stem": "Ti vengo a ___ alle otto.", "answer": "prendere", "options": ["prendere", "portare", "cercare"]}]},
 ]},
 
 15: {
@@ -227,17 +245,35 @@ LESSONS = {
          ["Non *ho potuto* fermar*mi*.", "No me pude detener."]],
   "warn": "Lo que no vale es mezclar: ni «mi ho dovuto alzare» ni «sono "
           "dovuto alzarmi»."},
+
+ {"h": "Adelanto: se vende, se habla",
+  "q": [{"prompt": "¿Cuál está bien? «Se venden bicicletas.»", "answer": "Si vendono biciclette.", "options": ["Si vendono biciclette.", "Si vende biciclette.", "Si vendiamo biciclette."]}, {"prompt": "Elegí la que va", "stem": "Qui si ___ italiano.", "answer": "parla", "options": ["parla", "parlano", "parliamo"]}],
+  "r": "*si* + tercera persona = el «se» impersonal: *si mangia bene*. Con "
+       "sustantivo plural, verbo en **plural**: *si vendono case*.",
+  "ex": [["In Italia *si mangia* bene.", "En Italia se come bien."],
+         ["Qui *si parla* italiano.", "Acá se habla italiano."],
+         ["*Si vendono* biciclette usate.", "Se venden bicicletas usadas."],
+         ["Come *si dice* «grazie» in spagnolo?", "¿Cómo se dice «grazie» en castellano?"]],
+  "warn": "Igual que «se venden casas»: el verbo concuerda con lo que se "
+          "vende. «Si vende case» se ve en carteles, pero está mal.",
+  "tip": "El resto (*ci si diverte*, *si è stanchi*, el pasado) llega en la "
+         "semana 36."},
 ]},
 
 17: {
-"intro": "Demostrativos, posesivos e indefinidos: las piezas chicas que "
-         "arman cualquier frase larga. Casi todo calca el castellano; esta "
+"intro": "Demostrativos, posesivos, indefinidos y relativos: las piezas "
+         "chicas que arman cualquier frase larga. Casi todo calca el castellano; esta "
          "semana fijás los pocos puntos donde no.",
 "parts": [
  {"h": "Demostrativos: questo y quello", "blocks": [0],
   "match": r"questo|quello|demostrativ"},
- {"h": "Posesivos: con artículo, salvo la familia", "blocks": [1, 2],
-  "match": r"posesiv|suo o loro|invitados|devolviendo|\bmio\b|\btuo\b|\bsuo\b|\bloro\b|famil"},
+ {"h": "Posesivos: con artículo, salvo la familia", "blocks": [1, 2, 5],
+  "match": r"posesiv|suo o loro|invitados|devolviendo|\bmio\b|\btuo\b|\bsuo\b|\bloro\b|famil",
+  "prefix": ["gr2-17-po-"]},
+ {"h": "Relativos: che y cui", "blocks": [6],
+  "match": r"\bcui\b|relativ", "prefix": ["gr2-17-re-"]},
+ {"h": "Dónde está: vicino a, davanti a, lontano da", "blocks": [7],
+  "match": r"^(?!)", "prefix": ["gr4-17-lu-"]},
  {"h": "Indefinidos y molto", "blocks": [3, 4],
   "match": r"indefinid|tutto|molto|alcun|qualche|nessun|ogn|poch|tropp"},
 ],
@@ -340,6 +376,71 @@ LESSONS = {
           "adjetivo es adverbio y no cambia, como «muy».",
   "qq": [{"prompt": "Completá", "stem": "In città ci sono ___ turisti.", "answer": "troppi", "options": ["troppi", "troppo", "troppe"]},
          {"prompt": "Completá", "stem": "Le lezioni sono ___ lunghe.", "answer": "troppo", "options": ["troppo", "troppe", "troppi"]}]},
+
+ {"h": "Posesivos que dicen más",
+  "q": [{"prompt": "Traducí: «Estoy de tu lado.»", "answer": "Sono dalla tua parte.", "options": ["Sono dalla tua parte.", "Sono al tuo lato.", "Sono della tua parte."]},
+        {"prompt": "Traducí: «¿Venís a mi casa?»", "answer": "Vieni a casa mia?", "options": ["Vieni a casa mia?", "Vieni alla mia casa?", "Vieni a mia casa?"]}],
+  "r": "Algunas frases con posesivo son **fijas**: *i miei* (mis viejos), "
+       "*a casa mia*, *dalla tua parte*, *dire la sua*, *un mio amico*.",
+  "table": {"head": ["Italiano", "Castellano"],
+            "rows": [["i miei, i tuoi, i suoi", "mis, tus, sus viejos (los padres)"],
+                     ["a casa mia / da me", "a mi casa, en mi casa"],
+                     ["essere dalla parte di qualcuno", "estar del lado de alguien"],
+                     ["dire la sua", "dar su opinión"],
+                     ["un mio amico", "un amigo mío"]]},
+  "ex": [["Stasera ceno *dai miei*.", "Esta noche ceno en lo de mis viejos."],
+         ["Vieni *a casa mia*?", "¿Venís a mi casa?"],
+         ["Tranquillo, sono *dalla tua parte*.", "Tranqui, estoy de tu lado."],
+         ["In riunione ognuno ha detto *la sua*.", "En la reunión cada uno dio su opinión."],
+         ["Ti presento *un mio amico*.", "Te presento a un amigo mío."]],
+  "warn": "Con *casa* el posesivo va detrás y sin artículo: *a casa mia*, "
+          "nunca «alla mia casa». Y «del lado» es *dalla parte*, no «al lato».",
+  "more": ["*I miei* solo, sin un sustantivo del que se venga hablando, son los padres. *Dire la "
+           "sua* sobreentiende *opinione*: por eso es femenino (*voglio dire "
+           "la mia*). Con *ne* (semana 21) vas a ver *ne ha fatta una delle "
+           "sue*: se mandó una de las suyas."]},
+
+ {"h": "Relativos: che, y con preposición cui",
+  "q": [{"prompt": "Elegí el relativo", "stem": "La ragazza con ___ esco è di Verona.", "answer": "cui", "options": ["cui", "che", "la che"]},
+        {"prompt": "Elegí el relativo", "stem": "Il film ___ guardo stasera è lungo.", "answer": "che", "options": ["che", "cui", "a cui"]}],
+  "r": "*che* = «que» **sin** preposición. Detrás de una preposición va "
+       "**cui**, invariable y sin artículo: *in cui*, *con cui*.",
+  "table": {"head": ["Castellano", "Italiano"],
+            "rows": [["el libro que leo", "il libro che leggo"],
+                     ["la ciudad en la que vivo", "la città in cui vivo"],
+                     ["la chica con la que salgo", "la ragazza con cui esco"],
+                     ["el libro del que hablo", "il libro di cui parlo"],
+                     ["el amigo al que le escribo", "l'amico a cui scrivo"],
+                     ["el motivo por el que vengo", "il motivo per cui vengo"]]},
+  "ex": [["Il libro *che* leggo è di Calvino.", "El libro que leo es de Calvino."],
+         ["La città *in cui* vivo è piccola.", "La ciudad en la que vivo es chica."],
+         ["La ragazza *con cui* esco è di Verona.", "La chica con la que salgo es de Verona."],
+         ["Il film *di cui* ti ho parlato è stupendo.", "La película de la que te hablé es buenísima."]],
+  "warn": "«Con la que», «en el que», «del que»: el castellano pone artículo; "
+          "el italiano no. Nunca «con che» ni «con la che»: *con cui*.",
+  "tip": "¿Hay preposición delante del «que»? Sí: *cui*. No: *che*.",
+  "more": ["*il cui* (cuyo), *il quale* y *chi* llegan en la semana 34."]},
+
+ {"h": "Dónde está: vicino a, davanti a, lontano da",
+  "r": "Para ubicar algo: adverbio + **a** (o **da**, o **di**). La preposición final se funde con el artículo: *vicino alla banca*.",
+  "table": {"head": ["Italiano", "Castellano", "Ejemplo"],
+            "rows": [["vicino a", "cerca de", "Abito vicino alla stazione."],
+                     ["lontano da", "lejos de", "Il mare è lontano dal centro."],
+                     ["davanti a", "delante de, frente a", "Ci vediamo davanti al cinema."],
+                     ["dietro (a)", "detrás de", "Il giardino è dietro la casa."],
+                     ["accanto a", "al lado de", "La farmacia è accanto alla banca."],
+                     ["di fronte a", "enfrente de", "Il bar è di fronte alla scuola."],
+                     ["sopra / sotto", "arriba de / abajo de", "Il gatto è sotto il letto."],
+                     ["in fondo a", "al fondo de", "Il bagno è in fondo al corridoio."],
+                     ["in mezzo a", "en el medio de", "C'è un tavolo in mezzo alla stanza."]]},
+  "ex": [["Abito *vicino al* centro.", "Vivo cerca del centro."],
+         ["La scuola è *lontano da* casa mia.", "La escuela está lejos de mi casa."],
+         ["Ti aspetto *davanti alla* farmacia.", "Te espero frente a la farmacia."],
+         ["Il libro è *sotto il* letto.", "El libro está abajo de la cama."]],
+  "warn": "«Cerca **de**» es *vicino **a***; «lejos **de**», *lontano **da***; «al lado **de**», *accanto **a***. Nunca «vicino di»: *il vicino di casa* es el vecino.",
+  "tip": "*sopra, sotto, dietro* suelen ir sin preposición ante un sustantivo: *sotto il letto* (charlando también *sotto al letto*). Con pronombre suman *di*: *dietro di me*.",
+  "q": [{"prompt": "«Vivo cerca de la estación.»", "stem": "Abito vicino ___ stazione.", "answer": "alla", "options": ["alla", "della", "dalla"]},
+        {"prompt": "«El mar está lejos del centro.»", "stem": "Il mare è lontano ___ centro.", "answer": "dal", "options": ["dal", "del", "al"]}]},
 ]},
 
 18: {
@@ -485,9 +586,11 @@ LESSONS = {
        "momento futuro.",
   "ex": [["Quando *avrò finito*, ti chiamerò.", "Cuando termine, te llamo."],
          ["Tra un'ora *avremo finito*.", "En una hora ya vamos a haber terminado."],
-         ["*Saranno* già *partiti*.", "Ya se habrán ido."]],
-  "tip": "También sirve para suponer sobre el pasado: *saranno già partiti* "
-         "= ya se habrán ido."},
+         ["*Saranno* già *partiti*.", "Ya se habrán ido."],
+         ["Non è ancora qui? *Avrà perso* il treno.", "¿Todavía no llegó? Habrá perdido el tren (supongo)."]],
+  "tip": "También sirve para suponer sobre el pasado: *avrà perso il treno* "
+         "= habrá perdido el tren (supongo que lo perdió). Es una "
+         "suposición, no un hecho futuro."},
 
  {"h": "Futuro para suponer",
   "q": [{"prompt": "¿Cuál está bien? «¿Dónde está Marco? — Estará en casa.»", "answer": "Dov'è Marco? — Sarà a casa.", "options": ["Dov'è Marco? — Sarà a casa.", "Dov'è Marco? — Starà a casa.", "Dov'è Marco? — Sarebbe a casa."]}, {"prompt": "«Avrà quarant'anni» quiere decir…", "answer": "Debe tener unos cuarenta años.", "options": ["Debe tener unos cuarenta años.", "Va a cumplir cuarenta años.", "Tuvo cuarenta años."]}],
@@ -582,6 +685,22 @@ LESSONS = {
   "tip": "Para el español «quisiera / querría / me gustaría» el italiano usa "
          "una sola forma: *vorrei* (o *mi piacerebbe* + infinitivo)."},
 
+ {"h": "Lei: verbo en 3ª, adjetivo según la persona",
+  "r": "Con *Lei* el verbo va en 3ª persona, pero adjetivo y participio "
+       "siguen a **la persona real**: hombre, *-o*; mujer, *-a*.",
+  "ex": [["Signor Rossi, Lei è *stanco*?", "Señor Rossi, ¿usted está cansado?"],
+         ["Signora, Lei è *arrivata* ieri?", "Señora, ¿usted llegó ayer?"],
+         ["Dottore, *La* ringrazio.", "Doctor, le agradezco."],
+         ["Signora, *La* chiamo domani.", "Señora, la llamo mañana."]],
+  "warn": "Que *Lei* sea femenino no vuelve femenino al señor: *Lei è stanco*, "
+          "no «stanca». Y el pronombre átono formal es *La* para los dos: *La "
+          "ringrazio*, no «Le ringrazio».",
+  "tip": "*ringraziare*, *chiamare*, *aiutare* llevan objeto directo: *La "
+         "ringrazio*, *La aiuto*. Con los de «a» (*dire*, *telefonare*), *Le*: "
+         "*Le telefono domani*.",
+  "q": [{"prompt": "A un señor, de usted.", "stem": "Signor Bianchi, Lei è ___?", "answer": "pronto", "options": ["pronto", "pronta", "pronti"]},
+        {"prompt": "A un señor, de usted: «Lo ayudo yo.»", "stem": "Signor Conti, ___ aiuto io.", "answer": "La", "options": ["La", "Le", "Ti"]}]},
+
  {"h": "Cortesía, deseo y consejo",
   "r": "Para pedir, desear o aconsejar sin imponer: *vorrei*, *potresti*, "
        "*mi piacerebbe*, *dovresti*.",
@@ -642,7 +761,7 @@ LESSONS = {
 "parts": [
  {"h": "NE: cantidades y «de eso»", "blocks": [0, 1, 5],
   "match": r"^(?!.*(\bci\b|c'è|ci sono|volerci|metterci|lugar)).*(\bne\b|«ne»)"},
- {"h": "CI: lugar, «a algo» y expresiones", "blocks": [2, 3, 4, 6, 7],
+ {"h": "CI: lugar, «a algo» y expresiones", "blocks": [2, 3, 4, 6, 7, 8],
   "match": r"\bci\b|c'è|lugar"},
 ],
 "blocks": [
@@ -759,6 +878,22 @@ LESSONS = {
   "warn": "Con un verbo modal + infinitivo, el clítico se pega al final "
           "(*andarci*, *parlarne*) o va antes del modal (*ci voglio andare*). "
           "El sentido es el mismo."},
+
+ {"h": "Adelanto: el tema adelante, y un pronombre lo retoma",
+  "q": [{"prompt": "Elegí la que va", "stem": "Il caffè ___ prendo amaro.", "answer": "lo", "options": ["lo", "ne", "ci"]},
+        {"prompt": "Elegí la que va", "stem": "Di pane ___ compro due chili.", "answer": "ne", "options": ["ne", "lo", "ci"]},
+        {"prompt": "¿Cuál está bien? «A Marco lo conozco bien.»", "answer": "Marco lo conosco bene.", "options": ["Marco lo conosco bene.", "A Marco lo conosco bene.", "Marco conosco bene."]}],
+  "r": "Lo que ya se nombró va **al principio**, y un pronombre lo retoma: "
+       "*lo/la/li/le*, *ne* o *ci*.",
+  "ex": [["*Il caffè lo* prendo amaro.", "El café lo tomo amargo."],
+         ["*Di pane ne* compro due chili.", "De pan, compro dos kilos."],
+         ["*A Roma ci* vado domani.", "A Roma voy mañana."],
+         ["*Questo libro l'*ho già letto.", "Este libro ya lo leí."]],
+  "warn": "El objeto directo va sin *a*, aunque sea persona: *Marco lo "
+          "conosco bene*, no «A Marco lo conosco». Y sin pronombre queda "
+          "cojo: «Il caffè prendo amaro».",
+  "tip": "El rioplatense hace lo mismo («el café lo tomo amargo»): animate "
+         "a usarlo charlando. En la semana 48 lo vas a ver a fondo."},
 ]},
 
 22: {
@@ -866,6 +1001,44 @@ LESSONS = {
          ["*Gliele* ho date. (no «*glie le*»)", "Se las di."]],
   "warn": "Y no calques *se lo* de «se lo doy»: para él o ella es *glielo*. "
           "*se lo* en italiano es un reflexivo (*se lo mette*)."},
+
+ {"h": "Verbo + a / di + infinitivo: los de todos los días",
+  "r": "Entre verbo e infinitivo, el italiano suele poner **a** o **di** donde el castellano no pone nada. Se aprenden pegados al verbo.",
+  "table": {"head": ["Con a", "Con di", "Sin preposición"],
+            "rows": [["cominciare a (empezar a)", "finire di (terminar de)", "volere (querer)"],
+                     ["continuare a (seguir + -ndo)", "smettere di (dejar de)", "potere (poder)"],
+                     ["riuscire a (lograr)", "cercare di (tratar de)", "dovere (tener que)"],
+                     ["provare a (intentar)", "decidere di (decidir)", "sapere (saber)"],
+                     ["imparare a (aprender a)", "ricordarsi di (acordarse de)", "preferire (preferir)"],
+                     ["aiutare a (ayudar a)", "dimenticarsi di (olvidarse de)", "piacere (gustar)"],
+                     ["—", "sperare di (esperar)", "—"]]},
+  "ex": [["Ho *deciso di* partire.", "Decidí irme."],
+         ["Non *riesco a* dormire.", "No logro dormir."],
+         ["*Continua a* piovere.", "Sigue lloviendo."],
+         ["*Spero di* vederti presto.", "Espero verte pronto."],
+         ["*Voglio* partire domani.", "Quiero irme mañana."]],
+  "warn": "Donde el castellano no pone nada, va *di*: «decidí irme» → *ho deciso di partire*. Y «sigue lloviendo» es *continua a piovere*, no gerundio.",
+  "tip": "*a* delante de vocal suele volverse *ad*: *riesco ad aprire*. La lista larga (*convincere a*, *pregare di*) llega en la semana 42.",
+  "q": [{"prompt": "«Dejé de fumar.»", "stem": "Ho smesso ___ fumare.", "answer": "di", "options": ["di", "a", "—"]},
+        {"prompt": "«No logro entender.»", "stem": "Non riesco ___ capire.", "answer": "a", "options": ["a", "di", "—"]}]},
+
+ {"h": "Adjetivo + di / a + infinitivo",
+  "r": "Los adjetivos de estado (*contento, stanco, sicuro, capace*) piden **di**; los de disposición (*pronto, abituato, disposto*), **a**.",
+  "table": {"head": ["Adjetivo", "Ejemplo", "Castellano"],
+            "rows": [["contento di", "Sono contento di vederti.", "Me alegra verte."],
+                     ["stanco di", "Sono stanca di aspettare.", "Estoy cansada de esperar."],
+                     ["sicuro di", "Sei sicuro di avere ragione?", "¿Estás seguro de tener razón?"],
+                     ["capace di", "È capace di farlo da solo.", "Es capaz de hacerlo solo."],
+                     ["pronto a", "Siamo pronti a partire.", "Estamos listos para salir."],
+                     ["abituato a", "Sono abituata ad alzarmi presto.", "Estoy acostumbrada a levantarme temprano."],
+                     ["interessato a", "Sono interessato al corso.", "Me interesa el curso."]]},
+  "ex": [["Sono *contento di* vederti.", "Me alegra verte."],
+         ["Sono *stanca di* aspettare.", "Estoy cansada de esperar."],
+         ["Siamo *pronti a* partire.", "Estamos listos para salir."],
+         ["Sono *interessato a* questo corso.", "Me interesa este curso."]],
+  "warn": "Tres calcos: «contento con» → *contento di* (*del risultato*); «interesado en» → *interessato a*; «cansado de esperar» → *stanco di aspettare*, nunca «da».",
+  "q": [{"prompt": "«Estoy contento con el resultado.»", "stem": "Sono contento ___ risultato.", "answer": "del", "options": ["del", "con il", "al"]},
+        {"prompt": "«¿Estás listo para salir?»", "stem": "Sei pronto ___ partire?", "answer": "a", "options": ["a", "di", "da"]}]},
 ]},
 
 23: {
@@ -875,6 +1048,8 @@ LESSONS = {
 "parts": [
  {"h": "Comparativos: di o che, igualdad", "blocks": [0, 1],
   "match": r"^(?!.*(superlativ|issimo|más largo|mayor|malísima|máxima|mínima)).*(compar|tan alto|menos|di \+ artículo)"},
+ {"h": "Diminutivos y aumentativos", "blocks": [5],
+  "match": r"^(?!)", "prefix": ["gr4-23-al-"]},
  {"h": "Superlativos e irregulares", "blocks": [2, 3, 4],
   "match": r"superlativ|issimo|mayor|más"},
 ],
@@ -932,7 +1107,12 @@ LESSONS = {
          ["È *bravissima*.", "Es buenísima (en lo que hace)."],
          ["Le case sono *molto belle*.", "Las casas son muy lindas."]],
   "tip": "Los terminados en *-co* / *-go* suman *h*: *ricco → ricchissimo*, "
-         "*lungo → lunghissimo*."},
+         "*lungo → lunghissimo*.",
+  "more": ["En el habla, *stra-* y *super-* hacen de «re» o «súper»: "
+           "*strapieno* (lleno hasta el tope), *straricco*, *superveloce*. "
+           "*arci-* es más culto: *arcistufo* (hartísimo), *arcinoto* "
+           "(conocidísimo). Repetir la palabra también intensifica: *piano "
+           "piano* (despacito), *buono buono* (bien portadito)."]},
 
  {"h": "Las formas irregulares",
   "r": "*buono, cattivo, grande, piccolo* tienen comparativo propio: "
@@ -954,6 +1134,25 @@ LESSONS = {
            "maggiore*. *è meglio* + infinitivo = es mejor: *è meglio non "
            "farlo*. «Lo más / lo menos posible»: *il più possibile*, *il meno "
            "possibile*. Y nunca «più meglio»: *meglio* ya es comparativo."]},
+
+ {"h": "Más chico, más grande: -ino, -etto, -one, -accio",
+  "r": "Un sufijo cambia el tamaño o el juicio: *-ino* y *-etto* achican, *-one* agranda, *-accio* critica. No todo admite todos.",
+  "table": {"head": ["Base", "Alterado", "Castellano"],
+            "rows": [["gatto", "gattino", "gatito"],
+                     ["casa", "casetta", "casita"],
+                     ["attimo", "attimino", "un segundito"],
+                     ["libro", "librone", "libro enorme"],
+                     ["porta", "il portone", "portón (pasa a masculino)"],
+                     ["parola", "parolaccia", "mala palabra"],
+                     ["tempo", "tempaccio", "tiempo horrible"]]},
+  "ex": [["Abbiamo un *gattino*.", "Tenemos un gatito."],
+         ["Vivono in una *casetta* al mare.", "Viven en una casita en la playa."],
+         ["È un *librone* di mille pagine.", "Es un libro enorme de mil páginas."],
+         ["Che *tempaccio*!", "¡Qué tiempo horrible!"]],
+  "warn": "*-one* vuelve masculino al femenino: *la porta → il portone*. Y ojo: *casino* no es una casa chica, es un lío.",
+  "tip": "No le pongas sufijo a todo como con *-ito*: si dudás, *piccolo* o *grande* nunca fallan (*una piccola casa*).",
+  "q": [{"prompt": "«¡Qué día de porquería!»", "stem": "Che ___!", "answer": "giornataccia", "options": ["giornataccia", "giornatina", "giornatona"]},
+        {"prompt": "La puerta grande de un edificio:", "stem": "il ___", "answer": "portone", "options": ["portone", "portona", "portina"]}]},
 ]},
 
 24: {
@@ -1141,6 +1340,7 @@ LESSONS = {
   "table": {"head": ["Conjunción", "Significa", "Ejemplo"],
             "rows": [["benché / sebbene", "aunque", "Esco, benché piova."],
                      ["affinché", "para que", "Te lo dico affinché tu capisca."],
+                     ["perché + congiuntivo", "para que (con indicativo: porque)", "Te lo dico perché tu capisca."],
                      ["purché", "con tal de que", "Vengo purché ci sia posto."],
                      ["prima che", "antes de que", "Parto prima che sia buio."],
                      ["senza che", "sin que", "Esce senza che nessuno lo veda."],
@@ -1152,7 +1352,10 @@ LESSONS = {
   "warn": "*anche se* va con **indicativo**: *anche se è stanco, lavora*. "
           "Con el mismo sujeto y *prima*, *senza*: infinitivo (*prima di "
           "partire*, *senza dire nulla*).",
-  "more": ["Tras *a meno che*, el *non* no niega: *a meno che non piova*."],
+  "more": ["Tras *a meno che*, el *non* no niega: *a meno che non piova*.",
+           "*perché* tiene dos caras y el modo decide: *te lo ripeto perché "
+           "non capisci* (porque no entendés: causa, indicativo) / *te lo "
+           "ripeto perché tu capisca* (para que entiendas: fin, congiuntivo)."],
   "qq": [{"prompt": "Elegí la que va", "stem": "Ti chiamo prima che tu ___.", "answer": "parta", "options": ["parta", "parti", "partire"]},
          {"prompt": "Elegí la que va", "stem": "Anche se ___, esco.", "answer": "piove", "options": ["piove", "piova", "piovere"]},
          {"prompt": "Elegí la que va", "stem": "Esco, benché ___ freddo.", "answer": "faccia", "options": ["faccia", "fa", "fare"]}]},
@@ -1165,8 +1368,9 @@ LESSONS = {
          ["*Non dico che sia* stanco.", "No digo que esté cansado."],
          ["*Non penso che* tu *abbia* torto.", "No creo que te equivoques."],
          ["Non so se *viene*.", "No sé si viene."]],
-  "warn": "*non so se* suele llevar indicativo: *se* no es "
-          "*che*. Y *non sono sicuro che* va con congiuntivo."},
+  "warn": "Tras *non so se* valen los dos: indicativo al hablar (*non so se "
+          "viene*), congiuntivo en registro cuidado (*non so se venga*). "
+          "*Non sono sicuro che*: congiuntivo."},
 
  {"h": "Relativas y superlativos",
   "r": "Con un antecedente **buscado o indefinido**, o tras un superlativo, la "
@@ -1176,7 +1380,10 @@ LESSONS = {
          ["È la persona più simpatica che *io conosca*.", "Es la persona más simpática que conozco."],
          ["Chiunque *venga* è benvenuto.", "Quien venga es bienvenido."]],
   "tip": "Si el antecedente **existe y lo conocés**, indicativo. Si lo "
-         "**buscás o no sabés si existe**, congiuntivo."},
+         "**buscás o no sabés si existe**, congiuntivo.",
+  "warn": "Ojo: en castellano decís «la más linda que vi» (indicativo); en "
+          "italiano, *la più bella che abbia mai visto*. Hablando se oye *che "
+          "ho visto*; escrito, congiuntivo."},
 
  {"h": "Opinar y matizar sin imponer",
   "r": "La opinión se **presenta como tuya**: *secondo me* (+ indicativo), *mi "

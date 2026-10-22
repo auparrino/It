@@ -80,7 +80,9 @@ ITEMS = [
     dict(id="mj-28-03", type="choice", topic="connettivi", level="B1", w=28, prompt=CE,
          stem="Ti aspetto ___ non arrivi.",
          options=["finché", "mentre", "dopo"], answer="finché",
-         note="Finché non + verbo = hasta que. Ojo: el italiano lleva «non» aunque el español no tenga negación."),
+         note="Finché (non) + verbo = hasta que. El «non» es optativo y no niega nada: "
+              "«finché arrivi» y «finché non arrivi» dicen lo mismo, como «hasta que (no) llegues». "
+              "Y va en indicativo, aunque el castellano ponga subjuntivo."),
     dict(id="mj-28-04", type="translate", topic="connettivi", level="B1", w=28, prompt=TR,
          stem="Apenas llegue, te llamo.",
          answer="Appena arrivo, ti chiamo",
@@ -88,7 +90,9 @@ ITEMS = [
               "Appena arriverò, ti chiamo", "Appena arriverò ti chiamo",
               "Appena sarò arrivato, ti chiamo", "Appena sarò arrivata, ti chiamo",
               "Non appena arrivo, ti chiamo", "Appena arrivato, ti chiamo", "Appena arrivata, ti chiamo"],
-         note="Appena = en cuanto. Ojo con el tiempo: con verbo en presente, como en «appena arrivo»."),
+         note="Appena = en cuanto. Donde el castellano pone subjuntivo («llegue»), el italiano "
+              "pone futuro: «appena arriverò» es lo cuidado; charlando, «appena arrivo» también vale. "
+              "El congiuntivo («appena io arrivi») no va nunca."),
     dict(id="mj-28-05", type="fixerr", topic="connettivi", level="B1", w=28, prompt=VA, cat="tempo_verbale",
          stem="Dopo mangiare, sono uscito.", bad="mangiare", good="aver mangiato",
          answer="Dopo aver mangiato, sono uscito.",

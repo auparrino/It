@@ -68,6 +68,8 @@ WEEK = {
                     ["irreal pasado", "hätte / wäre + participio", "Wenn ich es gewusst hätte, wäre ich gekommen."],
                     ["reproche", "hätte + inf. + modal", "Du hättest mich anrufen sollen."],
                     ["comparación irreal", "als ob / als + Konj. II", "Er tut so, als wäre er der Chef."],
+                    ["suponer (pasado)", "muss / dürfte / kann nicht + part. + haben/sein", "Er dürfte es vergessen haben."],
+                    ["rumor, versión ajena", "soll / will + infinitivo", "Der Minister soll gelogen haben."],
                 ]},
                 "ex": [
                     ["Die Sprecherin betonte, man *habe* alles getan.", "La vocera subrayó que se había hecho todo."],
@@ -132,6 +134,7 @@ WEEK = {
                     ["Wenn man das Gerät benutzt, …", "Bei der Benutzung des Geräts …"],
                     ["das Auto, das vor zwei Jahren gekauft wurde", "das vor zwei Jahren gekaufte Auto"],
                     ["der Laden, der seit Jahren leer steht", "der seit Jahren leer stehende Laden"],
+                    ["die Fragen, die noch geklärt werden müssen", "die noch zu klärenden Fragen"],
                 ]},
                 "ex": [
                     ["*Nach* Abschluss *des Studiums* zog sie nach Hamburg.", "Después de terminar la carrera se mudó a Hamburgo."],
@@ -279,5 +282,30 @@ WEEK = {
         tr(2, "En mi opinión, la propuesta tiene más ventajas que desventajas.", "Meiner Meinung nach hat der Vorschlag mehr Vorteile als Nachteile.", V("Meiner Meinung nach hat der Vorschlag mehr Vorteile als Nachteile.", "Meines Erachtens hat der Vorschlag mehr Vorteile als Nachteile.", "Meiner Ansicht nach hat der Vorschlag mehr Vorteile als Nachteile.", "Ich bin der Meinung, dass der Vorschlag mehr Vorteile als Nachteile hat.", "Ich finde, dass der Vorschlag mehr Vorteile als Nachteile hat.", "Ich finde, der Vorschlag hat mehr Vorteile als Nachteile."), "*Meiner Meinung nach* / *Meines Erachtens* ocupan la posición 1: verbo segundo."),
         tr(2, "¿Podría repetir la pregunta, por favor?", "Könnten Sie die Frage bitte wiederholen?", ["Könnten Sie die Frage bitte wiederholen?", "Könnten Sie bitte die Frage wiederholen?", "Können Sie die Frage bitte wiederholen?", "Können Sie bitte die Frage wiederholen?", "Würden Sie die Frage bitte wiederholen?", "Könnten Sie die Frage bitte noch einmal stellen?"], "Konjunktiv II de cortesía: *Könnten Sie …?*"),
         li(2, "das Lampenfieber", ["das Lampenfieber", "das Reisefieber", "das Lampenlicht"], "*das Lampenfieber* = los nervios antes de salir a escena (o de la prueba oral); *das Reisefieber* = los nervios antes de viajar."),
+        # parte 0 — repaso: discurso indirecto, modales subjetivos y pasiva en Konjunktiv
+        ch(0, "¿Qué significa?", "Er dürfte es vergessen haben.", "Probablemente se lo olvidó.", ["Probablemente se lo olvidó.", "Tenía permiso para olvidarlo.", "Tendría que haberlo olvidado."], "*dürfte* + infinitivo perfecto = suposición probable sobre el pasado (semana 37)."),
+        ch(0, "Elegí el modal.", "(Según la prensa, la empresa evadió impuestos.) Die Firma ___ Steuern hinterzogen haben.", "soll", ["soll", "will", "muss"], "Lo dicen otros: *soll*. *will* sería la versión de la propia empresa; *muss*, una conclusión tuya."),
+        ch(0, "¿Qué significa?", "Er kann nicht dort gewesen sein.", "Es imposible que haya estado ahí.", ["Es imposible que haya estado ahí.", "No pudo ir ahí.", "No necesariamente estuvo ahí."], "*kann nicht* + infinitivo perfecto = lo descartás. «No pudo ir» (objetivo) sería *Er konnte nicht dorthin gehen*."),
+        cz(0, "Escribí el verbo en Konjunktiv I o el II de reemplazo.", "Die Gewerkschaft erklärte, die Mitarbeiter ___ seit Monaten kein Gehalt bekommen.", "hätten", note="*sie haben* en Konjunktiv I es igual al indicativo → *hätten*. No es irreal: es la cita."),
+        cz(0, "Escribí el verbo en Konjunktiv I.", "Laut Polizei ___ bei dem Brand niemand verletzt worden.", "sei", note="Pasiva en pasado + Konjunktiv I: *sei … verletzt worden*."),
+        ty(0, "Pasá a discurso indirecto, empezando con *Die Ministerin sagte, …*", "„Wir haben die Steuern nicht erhöht. Das ist eine Lüge der Opposition.“", "Die Ministerin sagte, sie hätten die Steuern nicht erhöht. Das sei eine Lüge der Opposition.", ["Die Ministerin sagte, sie hätten die Steuern nicht erhöht. Das sei eine Lüge der Opposition.", "Die Ministerin sagte, sie hätten die Steuern nicht erhöht, das sei eine Lüge der Opposition.", "Die Ministerin sagte, man habe die Steuern nicht erhöht. Das sei eine Lüge der Opposition.", "Die Ministerin sagte, man habe die Steuern nicht erhöht, das sei eine Lüge der Opposition.", "Die Ministerin sagte, die Regierung habe die Steuern nicht erhöht. Das sei eine Lüge der Opposition.", "Die Ministerin sagte, die Regierung habe die Steuern nicht erhöht, das sei eine Lüge der Opposition."], "*wir haben* → *sie hätten* (el Konjunktiv I *haben* no se nota) o *man habe*; la segunda oración sigue en Konjunktiv I aunque no repitas *sagte*: *das sei*."),
+        ch(0, "¿Qué significa?", "Der Bericht hätte früher geschrieben werden müssen.", "Habría que haber escrito el informe antes.", ["Habría que haber escrito el informe antes.", "El informe tuvo que escribirse antes.", "El informe se escribió antes."], "Pasiva + modal en Konjunktiv II pasado (semana 43): algo que debía hacerse y no se hizo."),
+        ch(0, "Reconocé la forma.", "…, dass das Unglück nicht hatte verhindert werden können.", "no se había podido evitar", ["no se había podido evitar", "no se podría evitar", "no se habría podido evitar"], "Plusquamperfekt de la pasiva con modal: *hatte* adelante de *verhindert werden können*, como con todo doble infinitivo en la subordinada. Con *hätte* sería «no se habría podido evitar»."),
+        # parte 1 — repaso: participio con zu
+        ch(1, "¿Qué significa?", "die noch zu klärenden Fragen", "las cuestiones que quedan por aclarar", ["las cuestiones que quedan por aclarar", "las cuestiones ya aclaradas", "las cuestiones que aclaran"], "*zu* + participio I = algo que **hay que** hacer todavía. *geklärt* sería «aclaradas» y *klärend*, «que aclaran»."),
+        ch(1, "¿Qué significa?", "Die zu erwartenden Kosten sind hoch.", "Los costos previstos son altos.", ["Los costos previstos son altos.", "Los costos esperados ya se pagaron.", "Los costos que esperan son altos."], "*die zu erwartenden Kosten* = los costos que hay que esperar, los previstos."),
+        # parte 1 — repaso: als / wenn / wann y falls / ob
+        ch(1, "Elegí el conector.", "___ ich zum ersten Mal in Berlin war, verstand ich fast nichts.", "Als", ["Als", "Wenn", "Wann"], "Una vez en el pasado → *als*. *wenn* en pasado es «cada vez que»; *wann*, solo pregunta."),
+        cz(1, "Escribí *als* o *wenn*.", "Jedes Mal, ___ ich deutsche Nachrichten hörte, lernte ich neue Wörter.", "wenn", note="«cada vez que» (repetido) → *wenn*, también en pasado."),
+        tr(1, "Avisame en caso de que no puedas venir.", "Sag mir Bescheid, falls du nicht kommen kannst.", V("Sag mir Bescheid, falls du nicht kommen kannst.", "Gib mir Bescheid, falls du nicht kommen kannst.", "Sag mir Bescheid, wenn du nicht kommen kannst.", "Gib mir Bescheid, wenn du nicht kommen kannst.", "Falls du nicht kommen kannst, sag mir Bescheid.", "Falls du nicht kommen kannst, gib mir Bescheid."), "«en caso de que» + subjuntivo → *falls* + indicativo, con el modal al final (*kommen kannst*)."),
+        # parte 0 — repaso: preposiciones y adjetivos con preposición
+        cz(0, "Escribí el artículo.", "Wir müssen leider ohne ___ Chef entscheiden. (der Chef)", "den", note="*ohne* + acusativo: *den Chef*."),
+        ch(0, "Elegí preposición y caso.", "Ich habe gestern lange ___ Kollegin telefoniert. (con mi colega)", "mit meiner", ["mit meiner", "mit meine", "für meine"], "*mit* + dativo femenino: *meiner*."),
+        tr(0, "Te dejé el informe sobre tu escritorio.", "Ich habe dir den Bericht auf deinen Schreibtisch gelegt.", ["Ich habe dir den Bericht auf deinen Schreibtisch gelegt.", "Ich habe den Bericht auf deinen Schreibtisch gelegt.", "Ich habe dir den Bericht auf den Schreibtisch gelegt.", "Ich habe den Bericht auf den Schreibtisch gelegt."], "*legen* = destino: *auf deinen Schreibtisch* (acusativo). Ahí queda: *Er liegt auf deinem Schreibtisch* (dativo)."),
+        cz(0, "Escribí el posesivo.", "Der Bericht liegt auf ___ Schreibtisch. (tu)", "deinem", note="*liegen*: dónde, dativo: *auf deinem Schreibtisch*."),
+        cz(0, "Escribí la preposición.", "Wir sind sehr stolz ___ unser Team.", "auf", note="*stolz auf* + acusativo, aunque en castellano sea «orgulloso **de**»."),
+        tr(0, "Estoy muy interesado en el puesto.", "Ich bin sehr an der Stelle interessiert.", ["Ich bin sehr an der Stelle interessiert.", "Ich bin an der Stelle sehr interessiert.", "Ich interessiere mich sehr für die Stelle.", "Ich bin sehr an der Position interessiert.", "Ich interessiere mich sehr für die Position."], "Adjetivo: *interessiert an* + dativo; verbo: *sich interessieren für* + acusativo."),
+        # parte 2 — repaso: partículas modales al hablar
+        ch(2, "Elegí la partícula.", "(En la parte oral, al compañero) Wie siehst du das ___?", "denn", ["denn", "mal", "doch"], "En preguntas, *denn* suena interesado y natural en una charla."),
     ],
 }

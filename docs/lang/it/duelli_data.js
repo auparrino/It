@@ -118,7 +118,7 @@
       { s: "Mia sorella ___ sempre un'ora a prepararsi.", a: "ci mette", b: "ci vuole", cue: "Mia sorella", why: "La que tarda es tu hermana: metterci, ci mette." },
       { s: "Noi ___ mezz'ora a piedi fino alla stazione.", a: "ci mettiamo", b: "ci vogliono", cue: "Noi", why: "Los que tardan somos nosotros: ci mettiamo." }
     ] },
-    { id: "relativi", week: 34, title: "che o cui", sub: "con o sin preposición", items: [
+    { id: "relativi", week: 17, title: "che o cui", sub: "con o sin preposición", items: [
       { s: "Il libro ___ leggo è bello.", a: "che", b: "cui", cue: "leggo", why: "Objeto directo, sin preposición: che." },
       { s: "Il libro di ___ ti ho parlato è bello.", a: "cui", b: "che", cue: "di", why: "Después de preposición: cui." },
       { s: "La ragazza ___ abita qui è spagnola.", a: "che", b: "cui", cue: "abita", why: "Sujeto: che." },
@@ -129,6 +129,67 @@
       { s: "Le persone ___ lavorano qui sono gentili.", a: "che", b: "cui", cue: "lavorano", why: "Sujeto: che." },
       { s: "Il motivo per ___ sono qui è semplice.", a: "cui", b: "che", cue: "per", why: "Después de preposición: cui." },
       { s: "La casa ___ ho comprato è vecchia.", a: "che", b: "cui", cue: "ho comprato", why: "Objeto directo: che." }
+    ] },
+    { id: "dicche", week: 23, title: "di o che", sub: "en el comparativo, los dos son «que»", items: [
+      { s: "Marco è più alto ___ Luca.", a: "di", b: "che", cue: "Luca", why: "Dos personas, una cualidad: di ante el sustantivo.", k: 0 },
+      { s: "È più simpatico ___ bello.", a: "che", b: "di", cue: "bello", why: "Dos adjetivos de la misma persona: che.", k: 1 },
+      { s: "Anna è più giovane ___ me.", a: "di", b: "che", cue: "me", why: "Ante pronombre: di (di me, nunca «di io»).", k: 0 },
+      { s: "Bevo più tè ___ caffè.", a: "che", b: "di", cue: "caffè", why: "Dos sustantivos con el mismo verbo: che.", k: 1 },
+      { s: "Ho più ___ venti libri.", a: "di", b: "che", cue: "venti", why: "Ante número: di.", k: 0 },
+      { s: "È più facile dire ___ fare.", a: "che", b: "di", cue: "fare", why: "Dos verbos: che.", k: 1 },
+      { s: "Roma è più grande ___ Firenze.", a: "di", b: "che", cue: "Firenze", why: "Dos ciudades, una cualidad: di.", k: 0 },
+      { s: "Vado più spesso a Roma ___ a Milano.", a: "che", b: "di", cue: "a Milano", why: "Ante preposición: che.", k: 1 },
+      { s: "Questo film è meno noioso ___ quello di ieri.", a: "di", b: "che", cue: "quello", why: "Ante pronombre (quello): di.", k: 0 },
+      { s: "Mi piace più leggere ___ guardare la TV.", a: "che", b: "di", cue: "guardare", why: "Dos infinitivos: che.", k: 1 }
+    ] },
+    { id: "qualchealcuni", week: 3, title: "qualche o alcuni", sub: "los dos son «algunos»: con singular o con plural", items: [
+      { s: "Ho ___ amico italiano a Roma.", a: "qualche", b: "alcuni", cue: "amico", why: "Sustantivo en singular: qualche (= algunos).", k: 0 },
+      { s: "Ho ___ amici italiani a Roma.", a: "alcuni", b: "qualche", cue: "amici", why: "Sustantivo en plural: alcuni. «Qualche amici» es error seguro.", k: 1 },
+      { s: "Leggo ___ libro d'estate.", a: "qualche", b: "alcuni", cue: "libro", why: "Singular: qualche libro.", k: 0 },
+      { s: "Oggi ci sono ___ problemi con il treno.", a: "alcuni", b: "qualche", cue: "problemi", why: "Plural: alcuni problemi (problema es masculino).", k: 1 },
+      { s: "Aspetto ___ minuto e poi esco.", a: "qualche", b: "alcuni", cue: "minuto", why: "Singular: qualche minuto = unos minutos.", k: 0 },
+      { s: "Vedo ___ ragazze in piazza.", a: "alcune", b: "qualche", cue: "ragazze", why: "Femenino plural: alcune. Qualche no cambia, pero pide singular.", k: 1 },
+      { s: "C'è ___ studente in classe?", a: "qualche", b: "alcuni", cue: "studente", why: "Singular y c'è: qualche studente.", k: 0 },
+      { s: "Ho ___ domande per il professore.", a: "alcune", b: "qualche", cue: "domande", why: "Femenino plural: alcune domande.", k: 1 },
+      { s: "Compro ___ mela per la torta.", a: "qualche", b: "alcune", cue: "mela", why: "Singular: qualche mela.", k: 0 },
+      { s: "Ci sono ___ studenti nuovi.", a: "alcuni", b: "qualche", cue: "studenti", why: "Plural: alcuni studenti.", k: 1 }
+    ] },
+    // k explícito: 0 = la primera forma del título, 1 = la segunda.
+    { id: "esserestare", week: 6, title: "essere o stare", sub: "cómo sos y dónde estás, o tu salud y quedarte", items: [
+      { s: "Oggi ___ molto stanco.", a: "sono", b: "sto", cue: "stanco", why: "Cansado es un estado: essere. «Sto stanco» es el calco del castellano.", k: 0 },
+      { s: "Ciao Luca, come ___?", a: "stai", b: "sei", cue: "come", why: "La salud, «¿cómo estás?»: stare.", k: 1 },
+      { s: "Come ___ i tuoi genitori? — Bene, grazie.", a: "stanno", b: "sono", cue: "Bene, grazie", why: "Preguntás por la salud: come stanno. «Come sono?» es «¿cómo son?».", k: 1 },
+      { s: "La porta della cucina ___ aperta.", a: "è", b: "sta", cue: "aperta", why: "Cómo está una cosa: essere.", k: 0 },
+      { s: "Il famoso Colosseo ___ a Roma.", a: "è", b: "sta", cue: "a Roma", why: "Dónde está algo: essere (è a Roma). «Sta», para lugares, es regional.", k: 0 },
+      { s: "Mio nonno ___ male da una settimana.", a: "sta", b: "è", cue: "male", why: "La salud: stare bene / stare male.", k: 1 },
+      { s: "Noi ___ contenti del viaggio.", a: "siamo", b: "stiamo", cue: "contenti", why: "Contento es un estado de ánimo: essere.", k: 0 },
+      { s: "Grazie, ___ bene, e la tua famiglia?", a: "sto", b: "sono", cue: "bene", why: "«Estoy bien» de salud: sto bene.", k: 1 },
+      { s: "Questo caffè ___ già freddo!", a: "è", b: "sta", cue: "freddo", why: "Cómo está una cosa: essere.", k: 0 },
+      { s: "Il bambino ha la febbre e non ___ bene.", a: "sta", b: "è", cue: "bene", why: "La salud: stare bene, aunque el castellano diga «no está bien».", k: 1 }
+    ] },
+    { id: "imptulei", week: 12, title: "imperativo: tu o Lei", sub: "a un amigo o de usted, también en negativo", items: [
+      { s: "Marco, ___ più piano!", a: "parla", b: "parli", cue: "Marco", why: "A un amigo, tu: en -are termina en -a (parla).", k: 0 },
+      { s: "Signora, ___ più piano, per favore!", a: "parli", b: "parla", cue: "Signora", why: "De usted, Lei: el congiuntivo, -are → -i (parli).", k: 1 },
+      { s: "Luca, ___ il treno delle otto!", a: "prendi", b: "prenda", cue: "Luca", why: "tu: igual que el presente (prendi).", k: 0 },
+      { s: "Dottore, ___ pure una sedia!", a: "prenda", b: "prendi", cue: "Dottore", why: "Lei: -ere → -a (prenda).", k: 1 },
+      { s: "Anna, non ___ niente a nessuno!", a: "dire", b: "dica", cue: "Anna", why: "tu negativo: non + infinitivo (non dire).", k: 0 },
+      { s: "Signor Rossi, non ___ niente a nessuno!", a: "dica", b: "dire", cue: "Signor Rossi", why: "Lei negativo: non + congiuntivo (non dica).", k: 1 },
+      { s: "Paolo, ___ qui, ti aspetto!", a: "vieni", b: "venga", cue: "ti aspetto", why: "«ti aspetto» marca el tu: vieni.", k: 0 },
+      { s: "Scusi, ___ pure avanti!", a: "venga", b: "vieni", cue: "Scusi", why: "«Scusi» ya es de usted: venga.", k: 1 },
+      { s: "Giulia, non ___ così tardi!", a: "tornare", b: "torni", cue: "Giulia", why: "tu negativo: non tornare. «Non torni» es de usted.", k: 0 },
+      { s: "Signora, non si ___, è tutto a posto.", a: "preoccupi", b: "preoccupare", cue: "Signora", why: "Lei negativo: non si preoccupi. Al amigo: non ti preoccupare.", k: 1 }
+    ] },
+    { id: "andarevenire", week: 14, title: "andare o venire", sub: "ir a otro lado o ir hacia donde está el otro", items: [
+      { s: "Vieni alla festa? — Sì, ___!", a: "vengo", b: "vado", cue: "Vieni", why: "Vas adonde está el que invita: venire. «Sì, vado» suena a que te vas a otro lado.", k: 1 },
+      { s: "Domani ___ a Roma per lavoro.", a: "vado", b: "vengo", cue: "a Roma", why: "Un lugar donde no está el que te escucha: andare.", k: 0 },
+      { s: "Stasera ___ da te alle otto.", a: "vengo", b: "vado", cue: "da te", why: "Hacia la casa del que te escucha: venire, aunque digas «voy».", k: 1 },
+      { s: "Mamma, ___ a scuola, ciao!", a: "vado", b: "vengo", cue: "ciao", why: "Te alejás del que te escucha: andare.", k: 0 },
+      { s: "Aspettatemi, ___ anch'io con voi!", a: "vengo", b: "vado", cue: "con voi", why: "Te sumás a los que te hablan: venire con voi.", k: 1 },
+      { s: "Sono stanco, ___ a dormire.", a: "vado", b: "vengo", cue: "a dormire", why: "Te vas a otro lugar (la cama): andare.", k: 0 },
+      { s: "Marco, ___ qui un attimo!", a: "vieni", b: "vai", cue: "qui", why: "Hacia donde está el que habla (qui): venire.", k: 1 },
+      { s: "Perché non ___ al mare con loro?", a: "vai", b: "vieni", cue: "con loro", why: "Con otros, a un lugar donde no está el que habla: andare.", k: 0 },
+      { s: "Se ___ a Milano, passa a trovarmi!", a: "vieni", b: "vai", cue: "trovarmi", why: "Milán es donde vive el que habla: venire.", k: 1 },
+      { s: "Stasera ___ al cinema con Luca. Tu che fai?", a: "vado", b: "vengo", cue: "con Luca", why: "Un tercer lugar, sin el que escucha: andare.", k: 0 }
     ] }
   ];
 

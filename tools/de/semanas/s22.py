@@ -20,7 +20,7 @@ WEEK = {
     "lesson": {
         "intro": "En castellano pensamos «en» algo y soñamos «con» algo; en alemán también hay preposiciones fijas, pero casi nunca son las nuestras. Esta semana las aprendés de a pares, y con ellas las preguntas *Worauf?* y *Auf wen?* y las respuestas *darauf* y *auf ihn*.",
         "parts": [
-            {"h": "Verbos que vienen con preposición", "blocks": [0, 1, 2]},
+            {"h": "Verbos que vienen con preposición", "blocks": [0, 1, 2, 8]},
             {"h": "Preguntar: worauf? y auf wen?", "blocks": [3, 4]},
             {"h": "Responder con da- y hablar de medios", "blocks": [5, 6, 7]},
         ],
@@ -94,6 +94,7 @@ WEEK = {
                 ],
                 "warn": "«Acordarse **de**» no es *von*: es *sich erinnern an*. Y «enamorarse **de**» es *sich verlieben in*. El «de» castellano casi nunca es *von* en estos verbos.",
                 "tip": "*Ich freue mich auf dich!* = «¡tengo ganas de verte!». Es el cierre típico de un mensaje antes de un encuentro: *Ich freue mich auf Samstag!*",
+                "more": ["Recíproco con preposición: si «uno del otro, uno en el otro» va con estos verbos, la preposición se pega a *einander*: *Wir freuen uns aufeinander* (tenemos ganas de vernos), *Sie denken oft aneinander*, *Wir haben lange nichts voneinander gehört*. Sin preposición alcanza con *uns / sich*: *Wir haben uns 2015 kennengelernt*."],
                 "q": [
                     q("El concierto es la semana que viene: *Ich freue mich ___ das Konzert.*", "auf", ["auf", "über", "an"]),
                     q("Te acaban de regalar flores: *Ich freue mich ___ die Blumen.*", "über", ["über", "auf", "für"]),
@@ -171,7 +172,8 @@ WEEK = {
                     ["Es geht *darum*, *dass* alle mitmachen.", "Se trata de que todos participen."],
                 ],
                 "warn": "Coma antes de *dass* y verbo al final: *darauf, dass du morgen kommst*, nunca *darauf, dass du kommst morgen*.",
-                "more": ["Con *es geht um* (se trata de) el *darum* es obligatorio: *Es geht darum, dass…*. Con *sich freuen* o *sich ärgern* muchas veces se omite en el habla: *Ich freue mich, dass du da bist.*"],
+                "more": ["Con *es geht um* (se trata de) el *darum* es obligatorio: *Es geht darum, dass…*. Con *sich freuen* o *sich ärgern* muchas veces se omite en el habla: *Ich freue mich, dass du da bist.*",
+                         "Sin preposición, el cartel es ***es***: *Es freut mich, dass du kommst* (me alegra que vengas), *Ich finde **es** wichtig, dass…*, *Es ist schade, dass…*. Si la oración con *dass* pasa **adelante**, el *es* desaparece: *Dass du kommst, freut mich* (nunca «Dass du kommst, freut es mich»). En castellano no hay nada parecido: «me alegra que…» no lleva ningún «lo»."],
                 "q": [
                     q("Completá: *Er ärgert sich ___, dass der Bus zu spät kommt.*", "darüber", ["darüber", "worüber", "über"]),
                     q("¿Qué orden es correcto?", "Ich freue mich darauf, dass du morgen kommst.", ["Ich freue mich darauf, dass du morgen kommst.", "Ich freue mich darauf, dass du kommst morgen.", "Ich freue mich darauf, dass kommst du morgen."]),
@@ -196,6 +198,32 @@ WEEK = {
                 "q": [
                     q("Completá: *Niemand reagiert ___ meine Nachricht.*", "auf", ["auf", "an", "über"]),
                     q("«quejarse de»", "sich beschweren über", ["sich beschweren über", "sich beschweren von", "sich beschweren an"]),
+                ],
+            },
+            {
+                "h": "Adjetivos con preposición: los 8 básicos",
+                "r": "No solo los verbos: muchos adjetivos con *sein* también traen su **preposición fija**, y casi nunca es la del castellano. Se aprenden igual: adjetivo + preposición + caso.",
+                "table": {"head": ["Alemán", "Castellano", "Ejemplo"], "rows": [
+                    ["stolz auf + Akk.", "orgulloso de", "Ich bin stolz auf dich."],
+                    ["sauer auf + Akk.", "enojado con", "Sie ist sauer auf ihren Chef."],
+                    ["verliebt in + Akk.", "enamorado de", "Er ist in Lisa verliebt."],
+                    ["verantwortlich für + Akk.", "responsable de", "Wer ist für das Projekt verantwortlich?"],
+                    ["interessiert an + Dat.", "interesado en", "Ich bin an dem Job interessiert."],
+                    ["zufrieden mit + Dat.", "conforme con, contento con", "Bist du mit der Wohnung zufrieden?"],
+                    ["fertig mit + Dat.", "terminar con, haber terminado", "Ich bin mit der Arbeit fertig."],
+                    ["bereit zu + Dat.", "dispuesto a", "Ich bin zu allem bereit."],
+                ]},
+                "ex": [
+                    ["Meine Eltern sind sehr *stolz auf* mich.", "Mis viejos están muy orgullosos de mí."],
+                    ["Bist du *mit* dem Ergebnis *zufrieden*?", "¿Estás conforme con el resultado?"],
+                    ["Ich bin noch nicht *mit* den Hausaufgaben *fertig*.", "Todavía no terminé la tarea."],
+                ],
+                "warn": "En castellano casi todo es «de» u «con», y en esta lista **no hay ni un *von***: «orgulloso **de**» es *stolz **auf***, «enamorado **de**» es *verliebt **in***. Y ojo con *interessiert **an*** (adjetivo) frente a *sich interessieren **für*** (verbo).",
+                "tip": "Las preguntas y respuestas funcionan igual que con los verbos: *Worauf bist du stolz? – Darauf, dass ich die Prüfung bestanden habe*.",
+                "more": ["La lista larga (*abhängig von, neidisch auf, gespannt auf…*) llega en la semana 48."],
+                "q": [
+                    q("«Estoy orgulloso de vos.»", "Ich bin stolz auf dich.", ["Ich bin stolz auf dich.", "Ich bin stolz von dir.", "Ich bin stolz über dich."]),
+                    q("Completá: *Er ist ___ Lisa verliebt.*", "in", ["in", "von", "mit"]),
                 ],
             },
         ],
@@ -234,8 +262,14 @@ WEEK = {
         cz(0, "Escribí el artículo (der Kurs).", "Sie nimmt an ___ Kurs teil.", "dem", note="*teilnehmen an* + dativo: *an dem Kurs* (o *am Kurs*)."),
         cz(0, "Escribí la preposición.", "Meine Eltern machen sich Sorgen ___ mich.", "um", note="*sich Sorgen machen um* + acusativo."),
         tr(0, "Te espero.", "Ich warte auf dich.", note="*warten auf* + acusativo: *auf dich*."),
+        tr(0, "¡Esperame! (a un amigo)", "Warte auf mich!", ["Warte auf mich!", "Wart auf mich!", "Warte bitte auf mich!", "Bitte warte auf mich!"], "Imperativo con *du*: *Warte!* (la raíz en *-t* conserva la *-e*). Y «esperar a alguien» lleva *auf*: «Warte mich» es el calco del castellano."),
+        cz(0, "Escribí la preposición.", "Denk bitte ___ den Termin morgen!", "an", note="Imperativo *Denk!* + *denken an* + acusativo: ¡acordate del turno!"),
         tr(0, "Ella piensa en su hijo.", "Sie denkt an ihren Sohn.", note="*denken an* + acusativo: *an ihren Sohn*."),
         tr(0, "Me interesa la política.", "Ich interessiere mich für Politik.", ["Ich interessiere mich für Politik.", "Ich interessiere mich für die Politik.", "Politik interessiert mich.", "Mich interessiert Politik."], "*sich interessieren für*; también *Politik interessiert mich*."),
+        # parte 0 — recíproco con preposición
+        cz(0, "Completá la palabra (uno del otro).", "Wir haben lange nichts ___ gehört.", "voneinander", note="*von* + *einander*, todo junto: *voneinander*. «von uns» sería ambiguo."),
+        cz(0, "Completá la palabra.", "Die beiden freuen sich schon auf___.", "einander", note="*sich freuen auf* + recíproco → *aufeinander* (tienen ganas de verse)."),
+        tr(0, "Nos conocimos en 2015.", "Wir haben uns 2015 kennengelernt.", ["Wir haben uns 2015 kennengelernt.", "Wir haben uns im Jahr 2015 kennengelernt.", "2015 haben wir uns kennengelernt.", "Wir lernten uns 2015 kennen."], "«nos» recíproco = *uns*; el año, solo o con *im Jahr* (no «in 2015»)."),
         ty(0, "Escribí el verbo con su preposición.", "«soñar con»", "träumen von", note="*träumen von* + dativo, no «mit»."),
         # parte 1 — preguntar
         ch(1, "Elegí la pregunta.", "___ wartest du? – Auf den Bus.", "Worauf", ["Worauf", "Wofür", "Woran"], "Cosa + *warten auf* → *Worauf?*"),
@@ -271,5 +305,20 @@ WEEK = {
         tr(2, "Sí, me acuerdo (no me lo olvido).", "Ja, ich denke daran.", accept=["Ja, ich denke daran.", "Ja, ich denke dran.", "Ja, ich vergesse es nicht.", "Ja, ich werde daran denken."], note="*Ich denke daran* = lo tengo presente, no me olvido."),
         tr(2, "Chateo con mi hermana.", "Ich chatte mit meiner Schwester.", note="*chatten mit* + dativo: *mit meiner Schwester*."),
         ty(2, "Escribí el compuesto con da- de *über*.", "da + über", "darüber", note="*über* empieza con vocal: se agrega *r*."),
+        # parte 2 — es como cartel: es freut mich, dass…
+        ch(2, "¿Va *es* o no?", "Dass du anrufst, freut ___ sehr.", "mich", ["mich", "es mich", "mich es"], "La oración con *dass* ya ocupa la posición 1: el *es* desaparece. *Dass du anrufst, freut mich sehr*."),
+        ch(2, "¿Va *es* o no?", "___ freut mich, dass du anrufst.", "Es", ["Es", "Das es", "Dass"], "Si la oración con *dass* va al final, adelante hace falta el cartel *es*: *Es freut mich, dass…*"),
+        ch(2, "Encontrá el error.", "¿Qué oración tiene un error?", "Dass er nicht kommt, ist es schade.", ["Dass er nicht kommt, ist es schade.", "Es ist schade, dass er nicht kommt.", "Dass er nicht kommt, ist schade."], "Con la oración con *dass* adelante, el *es* sobra: *Dass er nicht kommt, ist schade*."),
+        tr(2, "Me parece importante que todos participen.", "Ich finde es wichtig, dass alle mitmachen.", ["Ich finde es wichtig, dass alle mitmachen.", "Ich finde es wichtig, dass alle teilnehmen.", "Ich finde wichtig, dass alle mitmachen.", "Ich finde wichtig, dass alle teilnehmen.", "Es ist mir wichtig, dass alle mitmachen.", "Mir ist wichtig, dass alle mitmachen."], "Lo normal es *Ich finde **es** wichtig, dass…*: el *es* anuncia la oración con *dass* (en castellano no hay nada)."),
+        # parte 0 — adjetivos con preposición
+        cz(0, "Escribí la preposición.", "Meine Eltern sind stolz ___ mich.", "auf", note="*stolz auf* + acusativo. En castellano «orgulloso **de**», pero no es *von*."),
+        cz(0, "Escribí la preposición.", "Bist du ___ deiner neuen Wohnung zufrieden?", "mit", note="*zufrieden mit* + dativo (*deiner*)."),
+        ch(0, "Elegí la preposición.", "Ich bin sehr ___ dem Job interessiert.", "an", ["an", "für", "in"], "Adjetivo: *interessiert an* + dativo. El verbo es distinto: *sich interessieren für*."),
+        ch(0, "Elegí la preposición.", "Sie ist total sauer ___ ihren Bruder.", "auf", ["auf", "mit", "gegen"], "*sauer auf* + acusativo = enojado con. «mit» es un calco del castellano."),
+        tr(0, "Él está enamorado de Ana.", "Er ist in Ana verliebt.", ["Er ist in Ana verliebt.", "Er ist in Anna verliebt.", "Er hat sich in Ana verliebt.", "Er hat sich in Anna verliebt."], "«enamorado de» = *verliebt in* + acusativo. Nada de «von»."),
+        tr(0, "Todavía no terminé el trabajo.", "Ich bin mit der Arbeit noch nicht fertig.", ["Ich bin mit der Arbeit noch nicht fertig.", "Ich bin noch nicht mit der Arbeit fertig.", "Ich bin noch nicht fertig mit der Arbeit.","Ich habe die Arbeit noch nicht fertig."], "«terminar algo» se dice muchas veces *mit etwas fertig sein* (+ dativo)."),
+        # parte 2 — repaso: preposiciones de dos casos y Woher/Wo/Wohin (semanas 14 y 20)
+        cz(2, "Escribí el artículo.", "Ich hänge die Jacke an ___ Haken. (der Haken)", "den", note="*hängen* con objeto (colgar algo): destino, acusativo: *an den Haken*."),
+        cz(2, "Escribí el artículo.", "Die Jacke hängt an ___ Haken. (der Haken)", "dem", note="*hängen* sin objeto (estar colgado): dónde, dativo: *an dem Haken* (*am Haken*)."),
     ],
 }

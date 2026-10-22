@@ -20,7 +20,7 @@ WEEK = {
     "lesson": {
         "intro": "Trenes que no salen, vuelos demorados, reservas que hay que cancelar: el viaje con problemas es el escenario perfecto para el genitivo (*wegen des Streiks*) y para las preguntas indirectas (*Können Sie mir sagen, ob…?*). Con esto cerrás la segunda temporada.",
         "parts": [
-            {"h": "El genitivo", "blocks": [0, 1, 2]},
+            {"h": "El genitivo", "blocks": [0, 1, 2, 8]},
             {"h": "wegen, trotz, während", "blocks": [3, 4]},
             {"h": "Preguntas indirectas y reclamos", "blocks": [5, 6, 7]},
         ],
@@ -49,7 +49,8 @@ WEEK = {
             },
             {
                 "h": "Annas Koffer, des Kollegen y von",
-                "r": "Con **nombres de personas** el genitivo es una **-s** pegada y va **delante**, sin apóstrofo: *Annas Koffer*, *Peters Handy*. Si el nombre termina en *-s, -ß, -x, -z*, va solo un apóstrofo: *Lukas' Zimmer*. Los masculinos que en acusativo y dativo ya terminan en *-n* (*der Kollege, der Kunde, der Student, der Herr*) llevan *-n/-en* y no *-s*: *des Kollegen*.",
+                "r": "Con **nombres de personas** el genitivo es una **-s** pegada y va **delante**, sin apóstrofo: *Annas Koffer*, *Peters Handy*. Si el nombre termina en *-s, -ß, -x, -z*, va solo un apóstrofo: *Lukas' Zimmer*. Los masculinos con *-n* de la semana 13 (*der Kollege, der Kunde, der Student, der Nachbar, der Herr*), que ya suman *-n* en acusativo y dativo, también la llevan en genitivo, y **sin** *-s*: *des Kollegen, des Herrn*. Excepción: *des Namens*.",
+                "more": ["Para preguntar de quién es algo: ***Wessen*** + sustantivo, sin artículo: *Wessen Koffer ist das? – Annas.* Es el genitivo de *wer*; en la charla se dice más *Wem gehört der Koffer?*"],
                 "ex": [
                     ["*Annas* Bruder wohnt in Graz.", "El hermano de Anna vive en Graz."],
                     ["Das ist *Lukas'* Zimmer.", "Esa es la habitación de Lukas."],
@@ -170,6 +171,27 @@ WEEK = {
                     q("¿Cuál es la más cortés?", "Könnten Sie mir sagen, wann der nächste Zug fährt?", ["Könnten Sie mir sagen, wann der nächste Zug fährt?", "Wann fährt der nächste Zug?", "Sagen Sie mir, wann fährt der nächste Zug!"]),
                 ],
             },
+            {
+                "h": "dessen y deren: cuyo",
+                "r": "El relativo en genitivo es el «cuyo»: **dessen** si el dueño es masculino o neutro, **deren** si es femenino o plural. Concuerda con el **dueño** (la palabra de antes), no con lo que se posee. Lo poseído va **sin artículo** y la oración, como toda relativa, con el verbo al final.",
+                "table": {"head": ["Dueño", "Relativo", "Ejemplo"], "rows": [
+                    ["der Nachbar", "dessen", "der Nachbar, *dessen* Auto kaputt ist"],
+                    ["das Kind", "dessen", "das Kind, *dessen* Mutter Ärztin ist"],
+                    ["die Nachbarin", "deren", "die Nachbarin, *deren* Auto kaputt ist"],
+                    ["die Gäste", "deren", "die Gäste, *deren* Koffer fehlen"],
+                ]},
+                "ex": [
+                    ["Das ist der Mann, *dessen* Koffer verloren gegangen ist.", "Ese es el hombre cuya valija se perdió."],
+                    ["Die Frau, *deren* Sohn in Berlin studiert, ist meine Lehrerin.", "La mujer cuyo hijo estudia en Berlín es mi profesora."],
+                    ["Wir haben ein Hotel gebucht, *dessen* neues Restaurant sehr gut ist.", "Reservamos un hotel cuyo restaurante nuevo es muy bueno."],
+                ],
+                "warn": "La trampa: en castellano «cuyo/cuya» concuerda con lo poseído («la mujer **cuyo** hijo»). En alemán mirás al dueño: *die Frau* → ***deren** Sohn*, aunque *Sohn* sea masculino. Y nada de artículo después: «dessen das Auto» está mal.",
+                "tip": "El adjetivo que sigue va con terminación fuerte, como si no hubiera artículo: *dessen neu**es** Auto*, *deren klein**er** Sohn*. Truco para elegir: *dessen* ↔ *sein*, *deren* ↔ *ihr* (*Die Frau – **ihr** Sohn* → *deren Sohn*).",
+                "q": [
+                    q("«el hombre cuya hija vive en Viena»", "der Mann, dessen Tochter in Wien wohnt", ["der Mann, dessen Tochter in Wien wohnt", "der Mann, deren Tochter in Wien wohnt", "der Mann, dessen die Tochter in Wien wohnt"]),
+                    q("Completá: *die Frau, ___ Sohn Arzt ist*", "deren", ["deren", "dessen", "der"]),
+                ],
+            },
         ],
     },
     "vocab": [
@@ -207,6 +229,22 @@ WEEK = {
         tr(0, "el auto de mi papá", "das Auto meines Vaters", ["das Auto meines Vaters", "das Auto von meinem Vater"], "Genitivo detrás: *meines Vaters*. En el habla, *von meinem Vater*."),
         tr(0, "el nombre de la calle", "der Name der Straße", note="*die Straße* → genitivo *der Straße*."),
         ty(0, "Escribí con genitivo.", "«la casa de mis padres»", "das Haus meiner Eltern", note="Plural: *meiner Eltern*."),
+        # parte 0 — wessen, masculinos con -n y repaso del adjetivo
+        cz(0, "Escribí la palabra interrogativa (¿de quién?).", "___ Koffer ist das? – Das ist Annas Koffer.", "Wessen", note="Genitivo de *wer*: *Wessen?* + sustantivo, sin artículo. En la charla: *Wem gehört der Koffer?*"),
+        tr(0, "¿De quién es este celular?", "Wessen Handy ist das?", ["Wessen Handy ist das?", "Wem gehört das Handy?", "Wem gehört dieses Handy?"],"«¿De quién…?» = *Wessen…?* (genitivo) o *Wem gehört…?* (dativo). «Von wem ist das Handy» se oye, pero es más flojo."),
+        cz(0, "Escribí *der Nachbar* en genitivo.", "Das ist das Auto unseres ___.", "Nachbarn", note="Masculino con *-n*: *des / unseres Nachbarn*, sin *-s*. " + MAY),
+        ch(0, "Elegí la terminación (el adjetivo sin artículo, con *ein* o con *der*).", "Ich trinke gern heiß___ Kaffee mit einem gut___ Freund.", "heißen … guten", ["heißen … guten", "heißer … guter", "heiße … gutem"], "Sin artículo, acusativo masculino: *heißen* (como *den*); tras *einem* (dativo): *guten*."),
+        ch(0, "Elegí la terminación.", "Das ist ein interessant___ Buch.", "interessantes", ["interessantes", "interessante", "interessanten"], "Neutro con *ein*: *-es*, porque *ein* no muestra el género (semana 19)."),
+        cz(0, "Escribí *neu* con su terminación.", "Wie findest du die ___ Wohnung von Paul?", "neue", note="Acusativo femenino tras *die*: *-e* (semana 15)."),
+        # parte 0 — dessen y deren
+        ch(0, "Elegí el relativo.", "Das ist der Kollege, ___ Frau aus Chile kommt.", "dessen", ["dessen", "deren", "dem"], "El dueño es *der Kollege* (masculino) → *dessen*, aunque *Frau* sea femenino. En castellano sería «cuya» porque mira a la esposa."),
+        ch(0, "Elegí el relativo.", "Die Frau, ___ Sohn in Berlin studiert, ist meine Lehrerin.", "deren", ["deren", "dessen", "die"], "El dueño es *die Frau* → *deren*. «cuyo hijo» mira a *hijo*; *deren* mira a la mujer."),
+        ch(0, "Elegí el relativo.", "Die Fahrgäste, ___ Zug ausgefallen ist, warten am Schalter.", "deren", ["deren", "dessen", "denen"], "Dueño en plural (*die Fahrgäste*) → *deren*."),
+        ch(0, "Encontrá el error.", "¿Qué oración tiene un error?", "Das ist das Hotel, dessen das Restaurant so gut ist.", ["Das ist das Hotel, dessen das Restaurant so gut ist.", "Das ist das Hotel, dessen Restaurant so gut ist.", "Das ist das Hotel, dessen neues Restaurant so gut ist."], "Después de *dessen/deren* no va artículo: *dessen Restaurant*. El adjetivo lleva terminación fuerte: *dessen neues Restaurant*."),
+        cz(0, "Escribí *dessen* o *deren*.", "Das Kind, ___ Eltern noch nicht da sind, wartet am Ausgang.", "dessen", note="El dueño es *das Kind* (neutro) → *dessen*, aunque *Eltern* sea plural."),
+        tr(0, "la mujer cuyo hijo es médico", "die Frau, deren Sohn Arzt ist", ["die Frau, deren Sohn Arzt ist", "die Frau deren Sohn Arzt ist"], "El dueño es *die Frau* → *deren*; *Sohn* sin artículo y verbo al final."),
+        tr(0, "El hombre cuyo auto está roto vive al lado.", "Der Mann, dessen Auto kaputt ist, wohnt nebenan.", ["Der Mann, dessen Auto kaputt ist, wohnt nebenan.", "Der Mann, dessen Auto kaputt ist, wohnt neben uns.", "Der Mann, dessen Auto kaputt ist, wohnt nebenan bei uns."], "*der Mann* → *dessen*; la relativa va entre comas y termina con el verbo (*ist*)."),
+        ty(0, "Uní con *dessen* o *deren*.", "Das ist meine Nachbarin. Ihr Hund bellt immer.", "Das ist meine Nachbarin, deren Hund immer bellt.", ["Das ist meine Nachbarin, deren Hund immer bellt.", "Das ist meine Nachbarin deren Hund immer bellt."], "*ihr Hund* (de ella) → *deren Hund*; verbo al final."),
         # parte 1 — wegen, trotz, während
         ch(1, "Elegí la preposición.", "___ des Streiks fallen viele Züge aus.", "Wegen", ["Wegen", "Trotz", "Während"], "La huelga es la causa: *wegen*."),
         ch(1, "Elegí la preposición.", "___ des schlechten Wetters sind wir gewandert.", "Trotz", ["Trotz", "Wegen", "Weil"], "El mal tiempo no lo impidió: *trotz*."),
@@ -240,5 +278,21 @@ WEEK = {
         tr(2, "¿Podría decirme dónde está el andén 3?", "Könnten Sie mir sagen, wo Gleis 3 ist?", ["Könnten Sie mir sagen, wo Gleis 3 ist?", "Könnten Sie mir bitte sagen, wo Gleis 3 ist?", "Können Sie mir sagen, wo Gleis 3 ist?", "Können Sie mir bitte sagen, wo Gleis 3 ist?", "Könnten Sie mir sagen, wo das Gleis 3 ist?"], "*Könnten Sie mir sagen, wo…* + verbo al final."),
         ty(2, "Escribí la conjunción.", "«si» en una pregunta indirecta (no sé si…)", "ob", note="*ob* para preguntas indirectas de sí o no; *wenn* para condiciones."),
         li(2, "Gleis", ["Gleis", "gleich", "Glas"], "*Gleis* (andén): *ei* se lee «ai»."),
+        # parte 2 — más preguntas indirectas (producción)
+        tr(2, "¿Sabe a qué hora abre el banco?", "Wissen Sie, wann die Bank öffnet?", ["Wissen Sie, wann die Bank öffnet?", "Wissen Sie, wann die Bank aufmacht?", "Wissen Sie, um wie viel Uhr die Bank öffnet?", "Wissen Sie, um wie viel Uhr die Bank aufmacht?"], "En castellano «¿a qué hora abre?» mantiene el orden; en la pregunta indirecta alemana el verbo va al final: *wann die Bank öffnet*."),
+        ty(2, "Hacé la pregunta indirecta.", "Wo ist die Post? → Können Sie mir sagen, …", "Können Sie mir sagen, wo die Post ist?", ["Können Sie mir sagen, wo die Post ist?", "Können Sie mir sagen wo die Post ist?"], "La palabra W se queda y el verbo va al final: *wo die Post ist*, no «wo ist die Post»."),
+        ty(2, "Hacé la pregunta indirecta.", "Fährt der Bus zum Bahnhof? → Wissen Sie, …", "Wissen Sie, ob der Bus zum Bahnhof fährt?", ["Wissen Sie, ob der Bus zum Bahnhof fährt?", "Wissen Sie ob der Bus zum Bahnhof fährt?"], "Pregunta de sí o no → *ob* + verbo al final."),
+        ch(2, "Encontrá el error.", "¿Qué oración tiene un error?", "Ich weiß nicht, wenn er heute kommt.", ["Ich weiß nicht, wenn er heute kommt.", "Ich weiß nicht, ob er heute kommt.", "Wenn er heute kommt, essen wir zusammen."], "El «si» de una pregunta (no sé si…) es *ob*; *wenn* es el «si» de una condición."),
+        tr(2, "Me gustaría saber si el hotel tiene wifi.", "Ich würde gern wissen, ob das Hotel WLAN hat.", ["Ich würde gern wissen, ob das Hotel WLAN hat.", "Ich würde gerne wissen, ob das Hotel WLAN hat.", "Ich möchte wissen, ob das Hotel WLAN hat.", "Ich möchte gern wissen, ob das Hotel WLAN hat.", "Ich möchte gerne wissen, ob das Hotel WLAN hat.", "Ich würde gern wissen, ob es im Hotel WLAN gibt.", "Ich möchte wissen, ob es im Hotel WLAN gibt."], "«si» + pregunta de sí o no → *ob*, verbo al final (*hat*). No es *wenn*."),
+        # parte 2 — repaso: relativo con preposición y en dativo
+        cz(2, "Escribí el relativo.", "Der Zug, mit ___ ich fahren wollte, ist ausgefallen.", "dem", note="*mit* + dativo, *der Zug* masculino → *mit dem*. La preposición va adelante, nunca al final como en «el tren que viajé en él»."),
+        tr(2, "El hotel en el que dormimos era muy caro.", "Das Hotel, in dem wir geschlafen haben, war sehr teuer.", ["Das Hotel, in dem wir geschlafen haben, war sehr teuer.", "Das Hotel, in dem wir übernachtet haben, war sehr teuer.", "Das Hotel, in dem wir schliefen, war sehr teuer.", "Das Hotel, wo wir geschlafen haben, war sehr teuer.", "Das Hotel, wo wir übernachtet haben, war sehr teuer.", "Das Hotel, in dem wir waren, war sehr teuer."], "*in* + dativo neutro → *in dem* (o *wo*); el auxiliar al final de la relativa."),
+        # parte 1 — repaso: preposiciones con acusativo y de tiempo (semana 20)
+        cz(1, "Escribí el posesivo.", "Trotz des Regens habe ich ein Geschenk für ___ Vater gekauft. (mi)", "meinen", note="*trotz* + genitivo (*des Regens*), pero *für* + acusativo: *meinen Vater*."),
+        ch(1, "Elegí.", "Ich gehe nie ohne ___ Handy aus dem Haus.", "mein", ["mein", "meinem", "meinen"], "*ohne* + acusativo; *das Handy* es neutro, y en acusativo neutro queda *mein* (sin terminación)."),
+        tr(1, "A partir de la semana que viene tengo vacaciones.", "Ab nächster Woche habe ich Urlaub.", ["Ab nächster Woche habe ich Urlaub.", "Ab nächste Woche habe ich Urlaub.", "Ich habe ab nächster Woche Urlaub.", "Ich habe ab nächste Woche Urlaub.", "Ab nächster Woche habe ich Ferien.", "Ich habe ab nächster Woche Ferien."], "«A partir de» = *ab* (con dativo: *ab nächster Woche*; en el habla también *ab nächste Woche*)."),
+        # parte 2 — repaso: el dativo de quien lo siente (semana 17)
+        tr(2, "Me da igual.", "Das ist mir egal.", ["Das ist mir egal.", "Es ist mir egal.", "Mir ist das egal.", "Ist mir egal.", "Mir ist es egal."], "La persona a la que le da igual va en dativo: *mir*. «Ich bin egal» significa «yo no importo»."),
+        cz(2, "Escribí el posesivo.", "Sie ist ___ Mutter sehr ähnlich. (su = de ella)", "ihrer", note="*ähnlich* + dativo: *ihrer Mutter* (die Mutter). «Se parece **a**…» → dativo."),
     ],
 }

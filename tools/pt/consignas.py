@@ -46,6 +46,9 @@ SIMPLES = {
     "Encontrá el error: tocá la palabra que está mal y corregila.": "Encontre o erro: toque na palavra errada e corrija.",
     "Uní las frases en una sola usando el conector entre paréntesis.": "Junte as frases numa só, com o conector entre parênteses.",
     "Completá con la forma correcta del verbo entre paréntesis.": "Complete com a forma correta do verbo entre parênteses.",
+    "Completá con la forma correcta de la palabra entre paréntesis.": "Complete com a forma correta da palavra entre parênteses.",
+    "Elegí la forma que retoma el término sin repetirlo.": "Escolha a forma que retoma o termo sem repeti-lo.",
+    "Portugués de Portugal. Encontrá el error: tocá la palabra que está mal y corregila.": "Português de Portugal. Encontre o erro: toque na palavra errada e corrija.",
     "Completá con de + artículo.": "Complete com de + artigo.",
 }
 

@@ -975,7 +975,8 @@ ITEMS = [
     dict(id="rf-48-15", type="cloze", topic="ordine", level="C1",
          prompt="Completá con el pronombre de retoma.",
          stem="A Marco ___ piace il calcio, a me no.", answer="gli",
-         note="Indirecto masculino dislocado → gli, igual que el «le» del español."),
+         note="Indirecto masculino dislocado → gli, igual que el «le» del español. Es el registro "
+              "hablado (como «a me mi piace»): en un texto cuidado, sin retoma: «A Marco piace il calcio»."),
     dict(id="rf-48-16", type="cloze", topic="ordine", level="C1",
          prompt="Completá con el pronombre de retoma.",
          stem="Del viaggio in Patagonia ___ parliamo domani.", answer="ne",

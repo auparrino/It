@@ -29,7 +29,7 @@ WEEK = {
         "intro": "En Alemania, casi todo trámite pasa por una carta: reclamar, rescindir un contrato, pedir un permiso, impugnar una resolución. Esta semana: los registros del alemán, las fórmulas fijas de la carta formal y cómo leer el alemán de las oficinas públicas sin desesperar.",
         "parts": [
             {"h": "Registro y forma de la carta", "blocks": [0, 1, 2]},
-            {"h": "Reclamar y solicitar", "blocks": [3, 4]},
+            {"h": "Reclamar y solicitar", "blocks": [3, 4, 8]},
             {"h": "El alemán de las oficinas", "blocks": [5, 6, 7]},
         ],
         "blocks": [
@@ -207,6 +207,25 @@ WEEK = {
                     q("¿Qué caso lleva *bezüglich*?", "genitivo", ["genitivo", "dativo", "acusativo"]),
                 ],
             },
+            {
+                "h": "Haber hecho: el infinitivo perfecto con zu",
+                "r": "Cuando lo que decís con *zu* **ya pasó**, el infinitivo va en pasado: **participio + *zu haben*** o ***zu sein*** (el mismo auxiliar del Perfekt). *Ich freue mich, Sie **kennengelernt zu haben*** = me alegra haberlo conocido. Es muy de cartas y mails formales: agradecer, lamentar, confirmar.",
+                "table": {"head": ["Presente (ahora o después)", "Pasado (ya pasó)"], "rows": [
+                    ["Ich freue mich, Sie kennenzulernen.", "Ich freue mich, Sie kennengelernt zu haben."],
+                    ["Ich bedauere, Ihnen das mitzuteilen.", "Ich bedauere, Ihnen nicht früher geantwortet zu haben."],
+                    ["Er behauptet, krank zu sein.", "Er behauptet, krank gewesen zu sein."],
+                    ["Sie hofft, pünktlich anzukommen.", "Sie ist froh, pünktlich angekommen zu sein."],
+                ]},
+                "ex": [
+                    ["Wir bedauern, Sie nicht rechtzeitig *informiert zu haben*.", "Lamentamos no haberlo informado a tiempo."],
+                    ["Ich bestätige hiermit, die Unterlagen *erhalten zu haben*.", "Por la presente confirmo haber recibido la documentación."],
+                ],
+                "warn": "El castellano dice «haber + participio» y el alemán lo da vuelta: **participio + zu + haben**, al final. Nada de «zu haben erhalten». Con verbos de movimiento o cambio, *zu sein*: *angekommen zu sein*.",
+                "q": [
+                    q("«Me alegra haberlo conocido»:", "Ich freue mich, Sie kennengelernt zu haben.", ["Ich freue mich, Sie kennengelernt zu haben.", "Ich freue mich, Sie zu haben kennengelernt.", "Ich freue mich, Sie kennenzulernen haben."]),
+                    q("Completá: *Er ist froh, rechtzeitig angekommen zu ___.*", "sein", ["sein", "haben", "werden"]),
+                ],
+            },
         ],
     },
     "vocab": [
@@ -244,6 +263,11 @@ WEEK = {
         tr(0, "Estimada señora Weber:", "Sehr geehrte Frau Weber,", ["Sehr geehrte Frau Weber,", "Sehr geehrte Frau Weber"], "Coma, no dos puntos. *Frau* → *geehrte*."),
         ty(0, "Escribí la versión formal de *kriegen*.", "kriegen → …", "erhalten", note="*kriegen* (coloquial) → *bekommen* (estándar) → *erhalten* (formal)."),
         li(0, "erhalten", ["erhalten", "enthalten", "behalten"], "*erhalten* (recibir), *enthalten* (contener), *behalten* (quedarse con)."),
+        # parte 0 — repaso: Herrn y el adjetivo sin artículo en las fórmulas
+        cz(0, "Escribí la forma de *Herr* (en el sobre o el asunto).", "An ___ Thomas Weber, Hauptstraße 5, 10115 Berlin", "Herrn", note="*an* + acusativo y *der Herr* es masculino con *-n*: *an Herrn Weber*. Solo en el saludo, que es nominativo, va *Herr*: *Sehr geehrter Herr Weber*. " + MAY),
+        ch(0, "Encontrá el error.", "¿Qué frase tiene un error?", "Ich habe mit Herr Weber telefoniert.", ["Ich habe mit Herr Weber telefoniert.", "Ich habe mit Herrn Weber telefoniert.", "Herr Weber hat mich angerufen."], "*mit* + dativo: *Herrn Weber*. *Herr* sin *-n* solo como sujeto o en el saludo."),
+        ch(0, "Elegí la terminación (saludo informal a un hombre).", "Lieb___ Tom,", "Lieber", ["Lieber", "Liebe", "Lieben"], "Sin artículo, nominativo masculino: *-er* (semana 19). A una mujer: *Liebe Anna*."),
+        cz(0, "Escribí *freundlich* con su terminación.", "Mit ___ Grüßen", "freundlichen", note="*mit* + dativo plural sin artículo → *-en*, como *den*. Por eso también *Mit besten Grüßen*, pero *Viele Grüße* y *Liebe Grüße* (acusativo plural, *-e*)."),
         # parte 1 — reclamar y solicitar
         ch(1, "Elegí el pronombre.", "Ich wende ___ an Sie, weil meine Bestellung nicht angekommen ist.", "mich", ["mich", "mir", "uns"], "*sich an jemanden wenden*: reflexivo en acusativo."),
         ch(1, "Elegí la palabra.", "___ Sie Fragen haben, wenden Sie sich bitte an uns.", "Sollten", ["Sollten", "Sollen", "Würden"], "*Sollten Sie …* = *Wenn Sie …*, en registro formal."),
@@ -254,6 +278,9 @@ WEEK = {
         ch(1, "Elegí la palabra.", "Ich fordere Sie hiermit auf, den Betrag ___ erstatten.", "zu", ["zu", "um", "dass"], "*jemanden auffordern, etwas zu tun*: infinitivo con *zu*."),
         cz(1, "Escribí la palabra («de antemano»).", "Vielen Dank im ___.", "Voraus", note="*im Voraus* = de antemano. " + MAY),
         cz(1, "Escribí el adverbio formal («de inmediato»).", "Ich bitte Sie, mir ___ Ersatz zu schicken.", "umgehend", ["umgehend", "unverzüglich", "sofort"], "*umgehend* o *unverzüglich*: muy de carta."),
+        tr(1, "Por favor, envíenos los documentos hasta el viernes. (formal)", "Bitte senden Sie uns die Unterlagen bis Freitag zu.",
+           V(["Bitte senden Sie uns die Unterlagen bis Freitag", "Senden Sie uns bitte die Unterlagen bis Freitag", "Senden Sie uns die Unterlagen bitte bis Freitag", "Bitte schicken Sie uns die Unterlagen bis Freitag", "Schicken Sie uns bitte die Unterlagen bis Freitag"], [" zu.", "."]),
+           "Imperativo formal: verbo + *Sie* al principio, con *bitte*. *zusenden* es separable: *zu* al final (también vale *senden* sin *zu*)."),
         cz(1, "Escribí el verbo formal de «decir».", "Leider muss ich Ihnen ___, dass die Ware beschädigt ist.", "mitteilen", note="*mitteilen* = comunicar."),
         cz(1, "Escribí la palabra (condición formal, sin *wenn*).", "___ die Zahlung nicht eingehen, erhalten Sie eine Mahnung.", "Sollte", note="*Sollte die Zahlung nicht eingehen* = si el pago no llegara."),
         tr(1, "Me dirijo a usted porque mi pedido no llegó.", "Ich wende mich an Sie, weil meine Bestellung nicht angekommen ist.",
@@ -288,5 +315,13 @@ WEEK = {
         tr(2, "En el adjunto encontrará una copia de la factura.", "In der Anlage finden Sie eine Kopie der Rechnung.",
            V(["In der Anlage", "Anbei", "Als Anlage"], " ", ["finden", "erhalten"], " Sie eine Kopie der Rechnung."),
            "*in der Anlage* o *anbei* = adjunto."),
+        # parte 1 — infinitivo perfecto con zu
+        ch(1, "Elegí la forma correcta.", "Wir bedauern, Ihre Anfrage nicht früher ___.", "beantwortet zu haben", ["beantwortet zu haben", "zu haben beantwortet", "zu beantworten haben"], "Algo que ya pasó: participio + *zu haben*, todo al final. El castellano «haber respondido» va en el orden inverso."),
+        cz(1, "Escribí el auxiliar en infinitivo (*haben* o *sein*).", "Ich bin froh, die Prüfung bestanden zu ___.", "haben", note="*Ich habe bestanden* → *bestanden zu haben*: el mismo auxiliar que en el Perfekt."),
+        tr(1, "Lamento no haberle escrito antes. (formal)", "Ich bedauere, Ihnen nicht früher geschrieben zu haben.", ["Ich bedauere, Ihnen nicht früher geschrieben zu haben.", "Ich bedauere, Ihnen nicht eher geschrieben zu haben.", "Ich bedauere, Ihnen nicht schon früher geschrieben zu haben.", "Es tut mir leid, Ihnen nicht früher geschrieben zu haben.", "Ich bedauere, dass ich Ihnen nicht früher geschrieben habe.", "Es tut mir leid, dass ich Ihnen nicht früher geschrieben habe."], "Mismo sujeto y algo que ya pasó: *geschrieben zu haben*, al final. Con *dass* también vale: *dass ich Ihnen nicht früher geschrieben habe*."),
+        # parte 1 — repaso: preguntas indirectas en cartas (ob / wenn / W-)
+        ch(1, "Elegí el conector.", "Ich möchte wissen, ___ mein Antrag schon bearbeitet wurde.", "ob", ["ob", "wenn", "dass"], "«si ya se tramitó» es una pregunta de sí o no → *ob*. *wenn* es «si» de condición."),
+        tr(1, "Le agradecería que me dijera si el formulario está completo. (formal)", "Ich wäre Ihnen dankbar, wenn Sie mir sagen könnten, ob das Formular vollständig ist.", ["Ich wäre Ihnen dankbar, wenn Sie mir sagen könnten, ob das Formular vollständig ist.", "Ich wäre Ihnen dankbar, wenn Sie mir mitteilen könnten, ob das Formular vollständig ist.", "Ich wäre Ihnen dankbar, wenn Sie mir sagen würden, ob das Formular vollständig ist.", "Ich wäre Ihnen dankbar, wenn Sie mir mitteilen würden, ob das Formular vollständig ist.", "Ich wäre Ihnen sehr dankbar, wenn Sie mir sagen könnten, ob das Formular vollständig ist.", "Ich wäre Ihnen sehr dankbar, wenn Sie mir mitteilen könnten, ob das Formular vollständig ist."], "Las dos clases de «si» juntas: *wenn* (condición de cortesía) y *ob* (pregunta). Las dos con el verbo al final."),
+        ty(1, "Pasá a pregunta indirecta formal, empezando con *Könnten Sie mir mitteilen, …*", "Wann bekomme ich den Bescheid?", "Könnten Sie mir mitteilen, wann ich den Bescheid bekomme?", ["Könnten Sie mir mitteilen, wann ich den Bescheid bekomme?", "Könnten Sie mir mitteilen, wann ich den Bescheid erhalte?", "Könnten Sie mir mitteilen wann ich den Bescheid bekomme?"], "La palabra W se queda (*wann*) y el verbo pasa al final: *wann ich den Bescheid bekomme*."),
     ],
 }
