@@ -1235,7 +1235,7 @@
   "d18-035": {
    "consigna": "Traducí al italiano. Ojo: después de «quando» y «appena», si la acción es futura, el italiano prefiere el futuro (no el subjuntivo como en castellano; en la lengua hablada también se oye el presente); después de «se» sirven el futuro o el presente.",
    "type": "translate",
-   "stem": "Si tienen un rato libre, van a venir a visitarnos.",
+   "stem": "Si tienen un rato libre, van a venir a visitarnos. («visitar a alguien» = venire a trovare)",
    "answer": "Se avranno un momento libero, verranno a trovarci.",
    "alt": [
     "Se avranno un momento libero verranno a trovarci",

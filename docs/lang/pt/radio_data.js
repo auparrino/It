@@ -2575,7 +2575,8 @@
     "prefeitura": "municipalidad",
     "elogio": "elogio",
     "ouvinte": "oyente",
-    "ouvintes": "oyentes"
+    "ouvintes": "oyentes",
+    "Qualquer": "cualquier"
    },
    "questions": [
     [
@@ -3364,7 +3365,7 @@
     ],
     [
      "B",
-     "E se chove o feriadão inteiro? Aí eu adio a viagem?"
+     "E se chover o feriadão inteiro? Aí eu adio a viagem?"
     ],
     [
      "A",
@@ -3376,7 +3377,7 @@
     ],
     [
      "A",
-     "E, se o dinheiro acaba, tem sempre o bate-volta: você vai e volta no mesmo dia. Mas acho que não vai ser preciso."
+     "E, se o dinheiro acabar, tem sempre o bate-volta: você vai e volta no mesmo dia. Mas acho que não vai ser preciso."
     ],
     [
      "B",

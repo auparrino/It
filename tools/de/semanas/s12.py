@@ -189,7 +189,7 @@ WEEK = {
                     ["Im Sommer *war* ich in den Bergen.", "En verano estuve en la montaña."],
                     ["Vor zwei Wochen *ist* sie nach Hamburg *gefahren*.", "Hace dos semanas se fue a Hamburgo."],
                 ],
-                "warn": "«hace dos semanas» es *vor zwei Wochen*: *vor* va **adelante**. Nada de «macht zwei Wochen».",
+                "warn": "«hace dos semanas» es *vor zwei Wochen*: *vor* va **adelante**. Nada de «macht zwei Wochen». Con días: *vor drei Tagen* (esa *-n* es del dativo, semana 13: por ahora, fórmula).",
                 "tip": "*letzt-* cambia con el género: *letzte Woche* (die), *letzten Monat* (der), *letztes Jahr* (das). Aprendelas como bloques.",
                 "q": [
                     q("¿Qué oración es correcta?", "Letztes Jahr sind wir nach Peru geflogen.", ["Letztes Jahr sind wir nach Peru geflogen.", "Letztes Jahr wir sind nach Peru geflogen.", "Letztes Jahr sind wir geflogen nach Peru."]),

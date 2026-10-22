@@ -1038,11 +1038,19 @@ cl(1, "___ (fiz + o) sem ajuda.", "Fi-lo",
 cl(1, "Os alunos ___ (fazem + a) em casa.", "fazem-na",
    "Tras nasal, a → na: fazem-na. Con sujeto delante, en Brasil se acepta también a fazem.",
    alt=["a fazem"], prompt=_CF)
-cl(1, "___ (encontraremos + nos) no cais do Valongo.", "Encontrar-nos-emos",
-   "Futuro sin atractor: mesóclise, encontrar-nos-emos. El cais do Valongo, en Río, fue el mayor puerto de llegada de esclavizados de América.",
-   prompt=_CF)
-cl(1, "___ (faria + se) a obra em 2030.", "Far-se-ia",
-   "Condicional al inicio: mesóclise, far-se-ia.", prompt=_CF)
+ch(1, "«Encontrar-nos-emos no cais do Valongo.»",
+   ["Nos encontraremos en el muelle de Valongo.", "Nos encontraríamos en el muelle de Valongo.",
+    "Nos encontramos en el muelle de Valongo."],
+   "Nos encontraremos en el muelle de Valongo.",
+   "Mesóclise: encontrar-nos-emos = encontraremos + nos (futuro, con el pronombre en el medio). Se lee en textos muy formales; "
+   "en Brasil se dice a gente vai se encontrar. El cais do Valongo, en Río, fue el mayor puerto de llegada de esclavizados de América.",
+   prompt="Elegí el significado.")
+ch(1, "«Far-se-ia a obra em 2030.»",
+   ["A obra seria feita em 2030.", "A obra será feita em 2030.", "A obra foi feita em 2030."],
+   "A obra seria feita em 2030.",
+   "Far-se-ia = faria + se: condicional (futuro do pretérito) con el se de la pasiva en el medio, «se haría». "
+   "En un texto actual de Brasil: a obra seria feita, o en la charla, iam fazer a obra.",
+   prompt="Elegí la equivalencia.")
 cl(2, "Eu ___ (estou + te) esperando no calçadão.", "estou te",
    "En Brasil, en las perífrasis el pronombre va delante del verbo principal, sin guion: estou te esperando.",
    alt=["tô te", "te estou"], prompt="Completá como en el habla de Brasil.")
@@ -1118,8 +1126,10 @@ sc(1, ["comprar + o → comprá-lo", "vender + a → vendê-la", "partir + os �
 
 ty(1, "Uní verbo y pronombre (formal).", "fazer + o → ___", "fazê-lo",
    "fazer + o → fazê-lo.")
-ty(1, "Uní con mesóclise (formal).", "direi + lhe → ___", "dir-lhe-ei",
-   "Futuro: el pronombre entra entre el infinitivo y la terminación: dir-lhe-ei.")
+ty(1, "Completá como en el habla de Brasil.", "Dir-lhe-ei a verdade. → ___ a verdade.", "Vou lhe dizer",
+   "Dir-lhe-ei es mesóclise (direi + lhe): se lee en textos jurídicos o literarios, pero en Brasil no se dice. "
+   "Lo natural es vou lhe dizer, o con você en la charla, vou te dizer.",
+   alt=["Eu vou lhe dizer", "Vou te dizer", "Eu vou te dizer", "Eu lhe direi", "Lhe direi"])
 
 cb(0, "Deram-me um livro. O livro é de Clarice Lispector. (que)", "O livro que me deram é de Clarice Lispector.",
    "El relativo «que» atrae el pronombre: que me deram.",

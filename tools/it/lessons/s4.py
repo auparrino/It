@@ -275,6 +275,7 @@ LESSONS = {
          ["*Penso a* te.", "Pienso en vos."]],
   "table": {"head": ["Italiano", "Castellano"],
             "rows": [["pensare a qualcosa / pensare di fare", "pensar en algo / pensar hacer"],
+                     ["che pensi di...?", "¿qué opinás de...? (*di* = opinión)"],
                      ["sognare qualcuno", "soñar con alguien"],
                      ["entrare in casa", "entrar a / en casa"],
                      ["salire su un treno", "subir a un tren"],
@@ -288,7 +289,7 @@ LESSONS = {
                      ["credere a qualcuno", "creerle a alguien (gli credo)"],
                      ["pagare qualcosa a qualcuno", "pagarle algo a alguien"],
                      ["partecipare a", "participar en"],
-                     ["contare su", "contar con"],
+                     ["contare su, informarsi su", "contar con, informarse sobre (con pronombre, *su di*: *su di te*)"],
                      ["scusarsi con qualcuno", "pedirle disculpas a alguien"],
                      ["ringraziare qualcuno per / di", "agradecerle algo a alguien"]]},
   "warn": "*Sposare* y *aspettare* van sin *a*: *ho sposato Laura*, *aspetto "
@@ -470,6 +471,9 @@ LESSONS = {
          ["La settimana *seguente*.", "La semana siguiente."],
          ["I cittadini *residenti* all'estero.", "Los ciudadanos residentes en el exterior."],
          ["Le persone *aventi* diritto.", "Las personas que tienen derecho."]],
+  "warn": "El gerundio no describe a un sustantivo: «una cassa contenendo "
+          "documenti» está mal. Decí *una cassa che conteneva documenti* o, "
+          "en registro escrito, *contenente*.",
   "more": ["Como verbo activo sobrevive en el registro jurídico y "
            "administrativo: *i cittadini residenti all'estero*, *le persone "
            "aventi diritto*."]},
@@ -705,7 +709,8 @@ LESSONS = {
   "table": {"head": ["Español", "Italiano", "Trampa"],
             "rows": [["casita", "casetta", "*casina* es regional; *casino* es un lío"],
                      ["poquito", "pochino, pochetto", "el español pone -qu-; el italiano, -ch-"],
-                     ["librazo", "librone", "*libraccio* es un libro malo, no grande"]]},
+                     ["librazo", "librone", "*libraccio* es un libro malo, no grande"],
+                     ["quedar mal / quedar muy bien", "fare una figuraccia / una figurona", "el sufijo da el juicio: *-accia* critica, *-ona* elogia"]]},
   "warn": "*-one* sobre un **verbo** no agranda: nombra a quien hace algo "
           "seguido (*chiacchierare → chiacchierone*, *brontolare → "
           "brontolone*). Suele criticar, pero entre amigos es cariñoso."},
@@ -963,7 +968,7 @@ LESSONS = {
          ["*Pertanto* la proposta va respinta.", "Por lo tanto, la propuesta debe rechazarse."],
          ["*In definitiva*, la riforma è necessaria.", "En definitiva, la reforma es necesaria."]],
   "table": {"head": ["Función", "Formas", "Ejemplo"],
-            "rows": [["añadir", "inoltre (además), per di più (encima), altresì (asimismo), non solo... ma anche", "Inoltre, i costi sono aumentati."],
+            "rows": [["añadir", "inoltre (además), per di più (encima), altresì (asimismo), nonché (así como, y además), non solo... ma anche", "Inoltre, i costi sono aumentati."],
                      ["sumar dos", "sia... sia / sia... che (tanto... como), come pure (y también), né... né (ni... ni)", "Parla sia inglese sia francese."],
                      ["oponer", "tuttavia (sin embargo), ciononostante (pese a eso), per contro / d'altro canto (en cambio, por otro lado)", "Tuttavia, il problema resta."],
                      ["conceder", "certo... tuttavia (es cierto que... pero), se è vero che... è altrettanto vero che", "Certo, è caro; tuttavia conviene."],

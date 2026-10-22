@@ -1086,7 +1086,7 @@ ITEMS += [
        "Participio invariable con ter: comido."),
     cl(W, 2, "O filme ___ (terminar) quando entramos. (había terminado)", "tinha terminado",
        "Pasado del pasado: tinha terminado (escrito: havia terminado).", alt=["havia terminado"]),
-    tr(W, 2, "Cuando llegué, ya se habían ido.", "Quando cheguei, eles já tinham ido embora",
+    tr(W, 2, "Cuando llegué, ya se habían ido. (irse = ir embora)", "Quando cheguei, eles já tinham ido embora",
        ["Quando eu cheguei, eles já tinham ido embora", "Quando cheguei, eles já tinham saído",
         "Quando eu cheguei, eles já tinham saído", "Quando cheguei, já tinham ido embora",
         "Quando cheguei, já tinham saído", "Quando cheguei, eles já haviam saído",

@@ -181,7 +181,7 @@
     ["tirar", "sacar, quitar", "tirar (arrojar)", "*Tirar uma foto* = sacar una foto. Arrojar = *jogar*."],
     ["pegar", "agarrar; tomar (un transporte)", "pegar (golpear)", "Golpear = *bater*. *Pegar o ônibus* = tomar el colectivo."],
     ["fechar", "cerrar", "fechar (poner fecha)", "Poner fecha = *datar*."],
-    ["contestar", "cuestionar, impugnar", "contestar (responder)", "Responder = *responder*."],
+    ["contestar", "cuestionar, impugnar", "contestar (responder)", "Responder = *responder*; contestar el teléfono = *atender*."],
     ["acordar", "despertar(se)", "acordar (ponerse de acuerdo)", "Ponerse de acuerdo = *combinar*, *concordar*."],
     ["assinatura", "firma; suscripción", "asignatura", "La asignatura = *matéria*, *disciplina*."],
     ["presunto", "jamón", "presunto (supuesto)", "Supuesto = *suposto*."],

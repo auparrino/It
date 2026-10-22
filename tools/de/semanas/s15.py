@@ -228,7 +228,7 @@ WEEK = {
         cz(2, "Escribí la parte separable.", "Ich probiere den Rock ___.", "an", note="*anprobieren*: *an* va al final."),
         cz(2, "Escribí la palabra que falta.", "Welche ___ haben Sie? – 42.", "Größe", ["Größe", "Groesse"], "*die Größe* = el talle. " + MAY),
         cz(2, "Escribí *rot* con su terminación.", "Ich nehme den ___ Pullover.", "roten", note="Acusativo masculino: *den roten*."),
-        cz(2, "Escribí la forma de *tragen*.", "Er ___ heute die blaue Jacke.", "trägt", note="*tragen* cambia *a → ä*: *er trägt*."),
+        cz(2, "Escribí la forma de *tragen* (llevar puesto; cambia la vocal como *fahren*).","Er ___ heute die blaue Jacke.", "trägt", note="*tragen* cambia *a → ä*: *er trägt*."),
         cz(2, "Escribí la forma de *gefallen*.", "Die grünen Schuhe ___ mir.", "gefallen", note="Sujeto plural: *gefallen*."),
         cz(2, "Escribí *eng* con su terminación.", "Die ___ Hose passt mir nicht.", "enge", note="Nominativo femenino tras *die*: *-e*."),
         tr(2, "¿Me puedo probar el vestido?", "Kann ich das Kleid anprobieren?", ["Kann ich das Kleid anprobieren?", "Darf ich das Kleid anprobieren?"], "*anprobieren* entero al final, tras el modal."),

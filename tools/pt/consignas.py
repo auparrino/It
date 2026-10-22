@@ -188,6 +188,7 @@ PT.update({
     "Completá la expresión (meter la pata).": "Complete a expressão (meter la pata).",
     "Completá el refrán.": "Complete o provérbio.",
     "Escribí el futuro do subjuntivo.": "Qual é o futuro do subjuntivo?",
+    "Dictado: escuchá y escribí lo que oís.": "Ditado: escute e escreva o que você ouvir.",
     "Escribí cómo se dice «oficina» (lugar de trabajo) en Brasil.":
         "Como se diz «oficina» (lugar de trabalho) no Brasil?",
     # --- las consignas de los ítems nuevos (colocações, marcadores, atos de fala)

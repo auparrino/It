@@ -70,7 +70,7 @@ WEEK = {
                 "warn": "*letzterer* retoma lo **último mencionado**, no «el último de una serie» en el tiempo. Y concuerda en género con aquello a lo que remite: *die Assistentin* → *letztere*.",
                 "more": ["*derselbe* se escribe junto y declina las dos partes: *demselben, derselben, denselben*. En registro neutro, *der gleiche* se usa a menudo igual (*das gleiche Auto*), aunque en sentido estricto *derselbe* es «el mismo ejemplar»."],
                 "q": [
-                    q("*Paris und Rom sind schön; ___ ist aber teurer.* (Rom)", "letzteres", ["letzteres", "letzterer", "letztere"]),
+                    q("*Paris und Rom sind schön; ___ ist aber teurer.* (Rom; los nombres de ciudad son neutros)", "letzteres", ["letzteres", "letzterer", "letztere"]),
                     q("*Kaffee oder Tee? ___ macht mich nervös.* (el café)", "Ersterer", ["Ersterer", "Erstere", "Letzterer"]),
                 ],
             },

@@ -162,7 +162,7 @@
    {
     "label": "g",
     "type": "choice",
-    "stem": "Il maestro era già ___ dell'orchestra.",
+    "stem": "Il maestro era già ___ dell'orchestra. (El director ya estaba en el foso de la orquesta; il buco = agujero, la buca = fosa.)",
     "options": [
      "nel buco",
      "nella buca"
@@ -416,7 +416,7 @@
   ]
  },
  "r02-09": {
-  "consigna": "Completá con el artículo o la preposición que corresponde. Pista: il, le, la, in, da, dall', dell', della. Cipro y Bratislava van sin artículo.",
+  "consigna": "Completá con el artículo o la preposición que corresponde. Pista: il, le, la, in, da, dall', dell', della. Cipro y Bratislava van sin artículo; «lejos de» es «lontano da».",
   "interactive": true,
   "items": [
    {
@@ -729,7 +729,7 @@
    {
     "label": "d",
     "type": "cloze",
-    "stem": "Non abbiamo burro. → Non abbiamo ___ burro. (ni siquiera un poco de)",
+    "stem": "Non abbiamo burro. → Non abbiamo ___ burro. (ni siquiera un poco de; ni siquiera: «neanche»)",
     "answer": "neanche un po' di",
     "alt": [
      "nemmeno un po' di",
@@ -1128,7 +1128,7 @@
    {
     "label": "f",
     "type": "cloze",
-    "stem": "___ a Roma per due giorni. (loro – trattenersi)",
+    "stem": "___ a Roma per due giorni. (loro – trattenersi, se conjuga como tenere)",
     "answer": "Si trattengono",
     "alt": [],
     "note": "Trattenersi se conjuga como tenere: si trattengono."
@@ -1482,7 +1482,7 @@
    {
     "label": "e",
     "type": "cloze",
-    "stem": "I clienti hanno i documenti? – Sì, ___ hanno.",
+    "stem": "I clienti hanno i documenti? – Sì, ___ hanno. (con avere de posesión, al hablar se suma ci delante: ce l'ho, ce li ho)",
     "answer": "ce li",
     "alt": [],
     "note": "Con «avere» de posesión: ce li hanno."
@@ -1802,7 +1802,7 @@
    {
     "label": "a",
     "type": "cloze",
-    "stem": "___ ringrazio tanto, signore.",
+    "stem": "___ ringrazio tanto, signore. (ringraziare qualcuno)",
     "answer": "La",
     "alt": [],
     "note": "«Ringraziare qualcuno» rige objeto directo: La."
@@ -1842,7 +1842,7 @@
    {
     "label": "f",
     "type": "cloze",
-    "stem": "Signore, ___ prego di tornare domani.",
+    "stem": "Signore, ___ prego di tornare domani. (pregare qualcuno di)",
     "answer": "La",
     "alt": [],
     "note": "«Pregare qualcuno di» rige objeto directo: La."

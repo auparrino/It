@@ -43,19 +43,19 @@ ITEMS = [
          note="«È chiaro/evidente/certo che» = certeza: indicativo. Pero "
               "«non è chiaro che...» → congiuntivo."),
     dict(id="c1-cong-07", type="choice", topic="congiuntivo",
-         prompt="Elegí la forma correcta.",
+         prompt="Elegí la forma correcta: después de «aspetto che» (espero a que) va congiuntivo.",
          stem="Aspetto che ___ il treno.",
          options=["arrivi", "arriva", "arriverà"], answer="arrivi",
          note="«Aspettare che» y «prima che» piden congiuntivo («finché non» lo "
               "admite, aunque suele ir con indicativo)."),
     dict(id="c1-cong-08", type="choice", topic="congiuntivo",
-         prompt="Elegí la forma correcta.",
+         prompt="Elegí la forma correcta: después de «prima che» (antes de que) va congiuntivo.",
          stem="Ti telefono prima che tu ___ di casa.",
          options=["esca", "esci", "uscirai"], answer="esca",
          note="«Prima che» + congiuntivo siempre. Si el sujeto no cambia: "
               "«prima di uscire» + infinitivo."),
     dict(id="c1-cong-09", type="choice", topic="congiuntivo",
-         prompt="Elegí la forma correcta.",
+         prompt="Elegí la forma correcta: si buscás algo que no sabés si existe, la relativa va en congiuntivo, como «que sepa».",
          stem="Cerco una segretaria che ___ il cinese.",
          options=["sappia", "sa", "saprebbe"], answer="sappia",
          note="Relativa de antecedente no identificado (busco una, cualquiera) → "

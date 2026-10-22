@@ -236,9 +236,14 @@ LESSONS = {
   "warn": "*il sangue* (la sangre), *il costume* (la costumbre), *il "
           "carcere* (la cárcel), *l'analisi* (f., el análisis). Son las que "
           "más puntos hacen perder.",
-  "more": ["Más de la lista: *il miele* (la miel), *l'arte* (f., el arte), "
-           "*l'origine* (f., el origen), *la domenica* (el domingo, único día "
-           "femenino).",
+  "more": ["Más de la lista: *il miele* (la miel), *l'arte* (f.), "
+           "*l'origine* (f.), *la domenica* (el domingo, único día "
+           "femenino). Cambian de sentido: *il fine* (el objetivo) / *la fine* (el "
+           "final), *la banca* "
+           "(el banco) / *il banco* (el pupitre), "
+           "*il manico* (el mango) / *la manica* (la manga), *la morale* (la "
+           "moraleja) / *il morale* (el ánimo), *il tavolo* (la mesa) / *la "
+           "tavola* (la mesa servida).",
            "Los helenismos en *-ma* y *-eta* son masculinos como en "
            "castellano y hacen el plural en *-i*: *il problema → i "
            "problemi*, *il programma, il sistema, il tema, il poeta*."]},
@@ -581,12 +586,13 @@ LESSONS = {
 
  {"h": "Delante o detrás: cambia el sentido",
   "r": "El adjetivo va **detrás**. Algunos frecuentes (*bello, buono, "
-       "grande, vecchio, nuovo, povero*) van delante, y a veces cambian de "
-       "sentido.",
+       "grande, piccolo, vecchio, nuovo, povero, caro*) van delante, y a veces "
+       "cambian de sentido.",
   "ex": [["un uomo *grande* / un *grand'*uomo", "un hombre corpulento / un gran hombre"],
          ["un amico *vecchio* / un *vecchio* amico", "un amigo viejo / un amigo de hace años"],
          ["una casa *nuova* / una *nuova* casa", "una casa recién hecha / otra casa, la nueva"],
-         ["un uomo *povero* / un *povero* uomo", "un hombre pobre / un pobre hombre"]],
+         ["un uomo *povero* / un *povero* uomo", "un hombre pobre / un pobre hombre"],
+         ["una borsa *cara* / una *cara* amica", "una cartera cara / una amiga querida"]],
   "warn": "Colores, nacionalidades y formas van siempre detrás: *una "
           "macchina rossa*, *un vino italiano*, nunca «una rossa macchina»."},
 
@@ -767,7 +773,7 @@ LESSONS = {
   "tip": "Algo que empezó y sigue: presente + *da*. *Abito qui da due anni* "
          "(vivo acá desde hace dos años). Lo ves a fondo en la semana 9.",
   "more": ["Para unir frases: *e* (y; *ed* delante de vocal, sobre todo de "
-           "*e*: *io ed Emilio*), *ma* (pero), *o* (o) y *perché* (porque): "
+           "*e*: *io ed Emilio*), *ma* o *però* (pero), *o* (o) y *perché* (porque): "
            "*Cominciano ma non finiscono*, *Dormono perché sono stanchi*."]},
 ]},
 
@@ -827,7 +833,12 @@ LESSONS = {
            "*fare la doccia* (ducharse), *fare la spesa* (hacer las compras), "
            "*fare una passeggiata* (dar un paseo), *fare la fila* (hacer "
            "cola), *fare il pieno* (llenar el tanque), *fare attenzione* "
-           "(prestar atención), *fa freddo / caldo* (hace frío / calor)."]},
+           "(prestar atención), *fa freddo / caldo* (hace frío / calor).",
+           "Más con *fare*: *fare il bagno* (bañarse), *fare una domanda* "
+           "(hacer una pregunta), *fare un giro* o *due passi* (dar una vuelta), "
+           "*fare il biglietto* (sacar el boleto), *fare una foto*, *fare una "
+           "telefonata*, *fare tardi* (quedarse hasta tarde), *fare lo "
+           "spiritoso* (hacerse el gracioso)."]},
 
  {"h": "Seis irregulares más",
   "r": "*venire, uscire, dire, bere, dare, rimanere*. *venire* y *rimanere* "
@@ -907,7 +918,10 @@ LESSONS = {
          ["*Salgo* al terzo piano.", "Subo al tercer piso."],
          ["I prezzi *salgono*.", "Los precios suben."]],
   "warn": "*tenere* no es «tener» de posesión: eso es *avere* (*ho fame*, *ho "
-          "due figli*). *tenere* es sostener, mantener o guardar."},
+          "due figli*). *tenere* es sostener, mantener o guardar.",
+  "more": ["Frases con *tenere*: *tenere a* (importarle a uno: *tengo alla mia "
+           "famiglia*), *tenere d'occhio* (vigilar), *tenere conto di* (tener en "
+           "cuenta). Y «tener que ver con» es *avere a che fare con*."]},
 ]},
 
 7: {
@@ -964,6 +978,10 @@ LESSONS = {
  {"h": "Fechas",
   "r": "*il* + número + mes, **sin «de»**. Cardinal para todos los días "
        "salvo el 1, que es *primo*.",
+  "table": {"head": ["Días (lunes → domingo)", "Meses (enero → diciembre)"],
+            "rows": [["lunedì, martedì, mercoledì", "gennaio, febbraio, marzo, aprile"],
+                     ["giovedì, venerdì", "maggio, giugno, luglio, agosto"],
+                     ["sabato, domenica", "settembre, ottobre, novembre, dicembre"]]},
   "ex": [["Oggi è *il 5 maggio*.", "Hoy es el 5 de mayo."],
          ["*Il primo* gennaio.", "El primero de enero."],
          ["*Nel* 2003.", "En 2003."]],
@@ -1022,7 +1040,8 @@ LESSONS = {
          "lunedì, vero?* (se van el lunes, ¿no?).",
   "more": ["Para responder, además de *sì* y *no*: *forse* (quizás), *boh!* "
            "(ni idea), *magari!* (¡ojalá!), *dai!* (¡dale!), *allora* "
-           "(entonces), *mica* (para nada: *non è mica vero*). Vuelven en la "
+           "(entonces), *mica* (para nada: *non è mica vero*), *beh* (bueno…), "
+           "*già* (ah, cierto), *ormai* (ya, a esta altura). Vuelven en la "
            "semana 18."]},
 
  {"h": "Los interrogativos",
@@ -1151,10 +1170,11 @@ LESSONS = {
   "tip": "Con *in*: *banca, centro, ufficio, montagna, chiesa, piazza, "
          "farmacia*. Con *a*: *al cinema, al mare, al ristorante, a teatro, "
          "a scuola, a casa, a letto*.",
-  "more": ["Más con *in*: *in biblioteca, in piscina, in campagna, in "
+  "more": ["Más con *in*: *in biblioteca, in piscina, in trattoria, in campagna, in "
            "periferia*, y el transporte: *in treno, in aereo, in macchina* "
            "(pero *con la macchina*, con artículo). Más con *a*: *allo zoo, "
-           "al supermercato, alla fermata, all'angolo, a destra*. Las islas "
+           "al supermercato, alla fermata, all'angolo, a destra, all'ultimo "
+           "piano, al telefono, alla televisione*. Las islas "
            "chicas van con *a* (*a Capri*), las grandes con *in* (*in "
            "Sicilia*). Meses y fiestas: *a dicembre, a Natale*."]},
 
@@ -1201,11 +1221,14 @@ LESSONS = {
            "in* (entrar a), *cominciare a* (empezar a), *sognare di* + "
            "infinitivo (soñar con hacer algo), *innamorarsi di* (enamorarse "
            "de), *sposarsi con* (casarse con), *decidere di* (decidir), "
-           "*riuscire a* (lograr), *contare su* (contar con).",
+           "*riuscire a* (lograr), *contare su* (contar con), *dimenticarsi di* "
+           "(olvidarse de), *partecipare a* (participar en).",
            "Los adjetivos también: *pieno di* (lleno de), *contento di*, "
            "*bravo a / in* (bueno en: *bravo a scuola*, *bravo in "
            "italiano*), *interessato a*, *deciso a* (decidido a), *gentile "
-           "con* (amable con). Sin preposición: *preferire*, *volere*, "
+           "con* (amable con), *ansioso di* (ansioso por), *disposto a*, "
+           "*portato / negato per* (con o sin talento para), *costituito da* "
+           "(formado por). Sin preposición: *preferire*, *volere*, "
            "*dovere* + infinitivo."]},
 
  {"h": "Medios de transporte: in, a piedi, con",
@@ -1303,7 +1326,8 @@ LESSONS = {
          ["Conosco i tuoi amici → *Li* conosco.", "Conozco a tus amigos → Los conozco."]],
   "more": ["*gli* sirve también para «a ellos / a ellas»: *devi rispondere "
            "alle ragazze → devi rispondergli*; *loro* detrás del verbo es formal. *lo* "
-           "puede reemplazar una frase entera: *lo so* (lo sé). Y «¿Tenés la "
+           "puede reemplazar una frase entera (*lo so*, lo sé) o un adjetivo "
+           "(*sei stanco? — sì, lo sono*). Y «¿Tenés la "
            "llave? — Sí, la tengo» se dice *sì, ce l'ho*: con *avere*, *lo / "
            "la* van con *ce* delante."]},
 

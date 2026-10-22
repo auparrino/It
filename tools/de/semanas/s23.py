@@ -228,7 +228,7 @@ WEEK = {
         ch(1, "Elegí la forma correcta.", "Sie hat beschlossen, Medizin ___.", "zu studieren", ["zu studieren", "studieren", "zustudieren"], "*studieren* no es separable: *zu studieren*, separado."),
         cz(1, "Escribí la palabra que falta.", "Ich versuche, jeden Tag Deutsch ___ sprechen.", "zu", note="*versuchen* + *zu* + infinitivo."),
         cz(1, "Escribí la palabra que falta.", "Wir haben vor, im Sommer ans Meer ___ fahren.", "zu", note="*vorhaben* + *zu*."),
-        cz(1, "Escribí *wiederholen* con *zu*.", "Es ist wichtig, die Wörter oft ___.", "zu wiederholen", note="*wiederholen* (repetir) es inseparable: *zu wiederholen*."),
+        cz(1, "Escribí *wiederholen* (repetir; no se separa) con *zu*.", "Es ist wichtig, die Wörter oft ___.", "zu wiederholen", note="*wiederholen* (repetir) es inseparable: *zu wiederholen*."),
         cz(1, "Escribí *einkaufen* con *zu*.", "Ich habe keine Lust, heute ___.", "einzukaufen", note="Separable: *ein-zu-kaufen*."),
         cz(1, "Escribí *anrufen* con *zu*.", "Er hat mir versprochen, mich ___.", "anzurufen", note="Separable: *an-zu-rufen*."),
         cz(1, "Escribí *kennenlernen* con *zu*.", "Es macht Spaß, neue Leute ___.", "kennenzulernen", ["kennenzulernen", "kennen zu lernen"], "*kennen-zu-lernen*, todo junto."),

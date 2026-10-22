@@ -609,8 +609,9 @@ LESSONS = {
          ["Ela tem *mais* paciência *do que* eu.", "Tiene más paciencia que yo."]],
   "warn": "«más» se escribe *mais*: nunca «mas» (que es «pero») ni «más». "
           "Y tras *que*, el pronombre es sujeto: *do que eu*, no «do que mim».",
-  "tip": "*do que* y *que* son iguales; *do que* es lo más frecuente al "
-         "hablar y al escribir.",
+  "tip": "*do que* y *que* son iguales; *do que* es lo más frecuente. Ojo: "
+         "«más grande» es *maior*, nunca «mais grande»; los otros "
+         "comparativos propios vienen más abajo.",
   "q": [{"prompt": "«Río es más grande que Niterói.» (¡ojo!)", "stem": "O Rio é ___ Niterói.",
          "answer": "maior do que", "options": ["maior do que", "mais grande do que", "mais maior que"]}]},
 
@@ -726,7 +727,9 @@ LESSONS = {
          ["Não tenho *nenhuma* ideia.", "No tengo ninguna idea."],
          ["Você quer *alguma coisa*?", "¿Querés algo?"]],
   "warn": "«ninguno» es *nenhum* (con nh y m): nunca «ninguno». Y va en "
-          "singular: *nenhum amigo*, no «nenhuns amigos»."},
+          "singular: *nenhum amigo*, no «nenhuns amigos».",
+  "tip": "*qualquer* = cualquier, cualquiera, y no varía en género: "
+         "*qualquer dia*, *qualquer pessoa*."},
 
  {"h": "La doble negación",
   "r": "Si la palabra negativa va **detrás** del verbo, delante va *não*: "
@@ -805,7 +808,7 @@ LESSONS = {
          "*tinha feito*.",
 "parts": [
  {"h": "La forma y los participios", "blocks": [0, 1]},
- {"h": "tenho feito ≠ he hecho", "blocks": [2, 3, 4]},
+ {"h": "tenho feito ≠ he hecho", "blocks": [2, 3, 4, 6]},
  {"h": "tinha feito: el pasado del pasado", "blocks": [5]},
 ],
 "blocks": [
@@ -822,6 +825,8 @@ LESSONS = {
          ["Nós *temos ido* à praia todo fim de semana.", "Venimos yendo a la playa todos los fines de semana."]],
   "warn": "El participio no concuerda: *ela tem saído*, nunca «saída». Y "
           "*eles têm* lleva circunflejo; *ele tem*, no.",
+  "tip": "Con pronombre, en Brasil va entre *ter* y el participio: *o chefe "
+         "tem me pedido relatórios*, *a gente tem se falado pouco*.",
   "q": [{"prompt": "«Ellos vienen estudiando mucho.»", "stem": "Eles ___ estudado muito.",
          "answer": "têm", "options": ["têm", "tem", "han"]}]},
 
@@ -896,6 +901,20 @@ LESSONS = {
          "participio. Solo cambia el auxiliar: *ter*, no «haver» al hablar.",
   "q": [{"prompt": "«Ya habíamos cenado.»", "stem": "Nós já ___ jantado.",
          "answer": "tínhamos", "options": ["tínhamos", "tinhamos", "temos"]}]},
+
+ {"h": "acabei de: recién",
+  "r": "«Acabo de llegar», «recién llegué»: en Brasil, *acabar de* + "
+       "infinitivo va en **perfeito**: *acabei de chegar*.",
+  "ex": [["*Acabei de* chegar.", "Acabo de llegar. / Recién llegué."],
+         ["A gente *acabou de* jantar.", "Recién terminamos de cenar."],
+         ["O ônibus *acabou de* passar.", "El colectivo acaba de pasar."],
+         ["*Faz* três anos que moro aqui. / Moro aqui *há* três anos.", "Hace tres años que vivo acá."]],
+  "warn": "*Acabo de chegar* también es correcto, pero suena más escrito; "
+          "al hablar, *acabei de*. Y *recém* solo va pegado a un participio: "
+          "*recém-casados*.",
+  "tip": "«Desde hace» es solo *há* o *faz*: *não vejo a Bia há um mês*.",
+  "q": [{"prompt": "«Recién llegué.»", "stem": "___ de chegar.",
+         "answer": "Acabei", "options": ["Acabei", "Terminei", "Recém"]}]},
 ]},
 
 22: {
@@ -904,6 +923,7 @@ LESSONS = {
 "parts": [
  {"h": "Participios irregulares y dobles", "blocks": [0, 1, 2]},
  {"h": "La voz pasiva con ser y estar", "blocks": [3, 4, 5]},
+ {"h": "Ponerse, volverse, hacerse", "blocks": [6]},
 ],
 "blocks": [
  {"h": "Los irregulares de siempre",
@@ -995,6 +1015,28 @@ LESSONS = {
   "warn": "*-ção* es femenino (*a construção*), *-mento* masculino (*o pagamento*), *-dade* femenino (*a cidade*).",
   "tip": "Esta semana, a leer; en la semana 44 vas a formarlas vos."},
 
+ {"h": "virar, tornar-se, passar a, ficar: cambiar de estado",
+  "r": "Sin «ponerse» ni «volverse»: *ficar* + adjetivo (*fiquei nervoso*), "
+       "*virar* o *tornar-se* + sustantivo (*virou médico*), *passar a* + "
+       "infinitivo (empezar y seguir).",
+  "table": {"head": ["Español", "Portugués", "Ejemplo"],
+            "rows": [["ponerse (nervioso, rojo)", "ficar", "Ficou vermelho."],
+                     ["quedarse (sin plata, ciego)", "ficar", "Ficou sem dinheiro."],
+                     ["hacerse, volverse + sustantivo", "virar (habla) / tornar-se", "Virou médico. / Tornou-se um clássico."],
+                     ["hacerse (amigos, famoso)", "ficar", "Ficamos amigos."],
+                     ["empezar a (y seguir)", "passar a + infinitivo", "Passei a correr."]]},
+  "ex": [["Quando viu a conta, ele *ficou* vermelho.", "Cuando vio la cuenta, se puso rojo."],
+         ["A Bia *virou* vegetariana.", "Bia se hizo vegetariana."],
+         ["Com a chuva, a rua *virou* um rio.", "Con la lluvia, la calle se convirtió en un río."],
+         ["Machado de Assis *se tornou* um clássico.", "Machado de Assis se convirtió en un clásico."],
+         ["Depois da viagem, *passei a* comer menos carne.", "Después del viaje, empecé a comer menos carne."]],
+  "warn": "«Me puse nervioso» no es «me pus nervoso»: *fiquei nervoso*. Y "
+          "*virar* va sin «em»: *virou médico*, nunca «virou em médico».",
+  "tip": "*ficar* resuelve casi todo: *ficar bravo, ficar feliz, ficar pronto*, "
+         "y *ficar sabendo* = enterarse.",
+  "q": [{"prompt": "«Me puse muy contento.»", "stem": "___ muito contente.",
+         "answer": "Fiquei", "options": ["Fiquei", "Me pus", "Virei"]}]},
+
 ]},
 
 23: {
@@ -1066,6 +1108,9 @@ LESSONS = {
   "warn": "«Ojalá» es *tomara que* (o *oxalá*, más literario), siempre con "
           "subjuntivo. Con *espero que*, ojo a *goste*: el que gusta sigue "
           "siendo el sujeto.",
+  "tip": "Igual con pedidos y sentimientos, como en español: *peço que "
+         "você feche a porta*, *sinto muito que você esteja doente*, *fico "
+         "feliz que você venha*.",
   "q": [{"prompt": "«Ojalá que no llueva.»", "stem": "Tomara que não ___.",
          "answer": "chova", "options": ["chova", "chove", "llova"]}]},
 
@@ -1166,6 +1211,8 @@ LESSONS = {
          ["Vamos à praia, *a menos que* *chova*.", "Vamos a la playa, a menos que llueva."]],
   "warn": "*desde que* + subjuntivo es condición; + indicativo, tiempo: "
           "*desde que cheguei, chove* = desde que llegué, llueve.",
+  "tip": "También con subjuntivo: *contanto que* (con tal de que) y *a "
+         "menos que* o *a não ser que* (a menos que): *a não ser que chova*.",
   "more": ["Con *se* («si») el portugués usa otro tiempo que el español no "
            "tiene, el futuro do subjuntivo: *se chover*. Llega en la semana "
            "27; por ahora, para la hipótesis futura, *caso* + subjuntivo "

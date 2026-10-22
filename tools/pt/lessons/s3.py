@@ -105,7 +105,12 @@ LESSONS = {
          ["*Onde* você *estiver*, eu vou.", "Donde estés, voy."]],
   "warn": "Tras *se* va presente de indicativo solo con hechos de ahora: "
           "*se você quer, pode ir* (ya querés). Para el futuro, *se você "
-          "quiser*. Nunca *se* + presente de subjuntivo."},
+          "quiser*. Nunca *se* + presente de subjuntivo.",
+  "more": ["Ojo con el calco: el castellano dice «quien quiera», «lo que "
+           "digas», «adonde vayas» con presente de subjuntivo; el portugués, "
+           "con futuro do subjuntivo: *quem quiser*, *o que você disser*, "
+           "*aonde você for*. Nunca «quem queira». En el mail formal son "
+           "fórmulas: *para o que for necessário*, *como preferir*."]},
 
  {"h": "Qué va en la otra mitad",
   "r": "La principal va en presente, *vou* + infinitivo, futuro o "
@@ -669,8 +674,8 @@ LESSONS = {
 "parts": [
  {"h": "Próclise y ênclise", "blocks": [0, 1, 2]},
  {"h": "Formas enclíticas y mesóclise", "blocks": [3, 4]},
- {"h": "Tiempos compuestos y habla", "blocks": [5, 6]},
- {"h": "La resenha", "blocks": [7]},
+ {"h": "Tiempos compuestos, perífrasis y habla", "blocks": [5, 7, 6]},
+ {"h": "La resenha", "blocks": [8]},
 ],
 "blocks": [
  {"h": "Tres posiciones",
@@ -779,6 +784,24 @@ LESSONS = {
   "tip": "Si dudás al escribir: pronombre detrás del verbo, salvo que haya "
          "*não*, *que* o un adverbio delante."},
 
+ {"h": "Perífrasis: voltar a, chegar a, vir a, viver + gerúndio, ficar de",
+  "r": "Verbo + *a* + infinitivo, como en castellano: *voltei a fumar*, "
+       "*cheguei a pensar*, *veio a ser*. *Andar / viver* + gerundio: "
+       "repetición. *Ficar de* = quedar en.",
+  "table": {"head": ["Portugués", "Español"],
+            "rows": [["voltar a + inf.", "volver a"],
+                     ["chegar a + inf.", "llegar a (al punto de)"],
+                     ["vir a + inf.", "llegar a, terminar (con el tiempo)"],
+                     ["andar / viver + gerúndio", "andar / pasársela + gerundio"],
+                     ["ficar de + inf.", "quedar en (acordar)"]]},
+  "ex": [["*Voltei a* fumar.", "Volví a fumar."],
+         ["*Cheguei a* pensar que você não vinha.", "Llegué a pensar que no venías."],
+         ["Ele *veio a* ser presidente do clube.", "Llegó a ser presidente del club."],
+         ["Ela *vive* reclamando.", "Se la pasa quejándose."],
+         ["A gente *ficou de* se ver na sexta.", "Quedamos en vernos el viernes."]],
+  "warn": "«Quedamos en» no es «ficamos em» (quedarse en un lugar): es "
+          "*ficamos de* + infinitivo, o *combinamos de*."},
+
  {"h": "Reseñar: presentar, evaluar, recomendar",
   "q": [{"prompt": "¿Cuál es la fórmula correcta para recomendar?", "answer": "Vale a pena ler.", "options": ["Vale a pena ler.", "Vale o pena ler.", "Vale la pena ler."]}],
   "r": "La *resenha* presenta la obra (quién, cuándo, de qué trata), la evalúa con ejemplos y recomienda, sin contar el final.",
@@ -810,7 +833,8 @@ LESSONS = {
          ["A lei existe; *todavia*, ninguém a cumpre.", "La ley existe; sin embargo, nadie la cumple."],
          ["Para Sérgio Buarque, o brasileiro é cordial; *entretanto*, cordial não quer dizer educado.", "Para Sérgio Buarque, el brasileño es «cordial»; sin embargo, cordial no quiere decir cortés."]],
   "warn": "*todavia* ≠ «todavía» (= *ainda*). *entretanto* ≠ «entretanto» "
-          "(mientras tanto): en Brasil significa «sin embargo».",
+          "(mientras tanto): en Brasil significa «sin embargo». "
+          "«Mientras tanto» es *enquanto isso*.",
   "more": ["El portugués no tiene «sino»: *não… mas* o *não… e sim*: "
            "*não era o ângulo reto que o atraía, e sim a curva* (no el "
            "ángulo recto, sino la curva).",
@@ -1065,6 +1089,7 @@ LESSONS = {
   "table": {"head": ["Volto…", "Vou…", "¿Crase?"],
             "rows": [["da Lapa", "à Lapa", "sí"],
                      ["da Bahia", "à Bahia", "sí"],
+                     ["da Urca", "à Urca", "sí"],
                      ["de Copacabana", "a Copacabana", "no"],
                      ["de Ipanema", "a Ipanema", "no"],
                      ["do Leblon", "ao Leblon", "masculino"],

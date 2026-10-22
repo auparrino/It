@@ -564,7 +564,7 @@
   "d03-055": {
    "consigna": "Traducí al italiano con el artículo determinado.",
    "type": "translate",
-   "stem": "el casamiento",
+   "stem": "el casamiento (matrimonio)",
    "answer": "il matrimonio",
    "alt": [
     "le nozze"
@@ -1569,7 +1569,7 @@
   "d06-027": {
    "consigna": "Conjugá el verbo entre paréntesis en presente, cuidando la ortografía.",
    "type": "conjugate",
-   "stem": "Tu ___ (inviare).",
+   "stem": "Tu ___ (inviare). (Ojo: io invìo, con la i tónica.)",
    "answer": "invii",
    "alt": [],
    "drop": false,
@@ -1934,7 +1934,7 @@
   "d06-063": {
    "consigna": "Traducí al italiano usando e, ma, o, perché.",
    "type": "translate",
-   "stem": "Ella escucha la radio y él mira televisión.",
+   "stem": "Ella escucha la radio y él mira televisión. (escuchar: ascoltare; mirar: guardare)",
    "answer": "Lei ascolta la radio e lui guarda la televisione.",
    "alt": [
     "Lei ascolta la radio e lui guarda la tv.",

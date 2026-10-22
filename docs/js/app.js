@@ -828,7 +828,7 @@
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION = "c1-vN" in sw.js: test_game
      and the CI check it).  One version for the app and both languages. */
-  var APP_VERSION = "v3.15.2";
+  var APP_VERSION = "v3.15.3";
   // Settimana XVII: Roman numerals on the street signs (LANG.ui.romanWeeks).
   function romano(n) {
     var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
@@ -6543,12 +6543,13 @@
      wraps it in one more object ({"roleplay": {…}}) or translates the field
      names to the course's language (objetivos, Ziele…): both are taken. */
   var SCEN_ALIAS = {
-    obiettivi: /^(obiettivi|objetivos?|objectives?|goals?|ziele|metas?)$/i,
-    titolo: /^(titolo|t[i\u00ed]tulo|title|titel)$/i,
-    ruolo_ia: /^(ruolo(_ia)?|papel(_ia)?|rol(_ia)?|role(_ai)?|rolle)$/i,
-    situazione_es: /^(situazione(_es)?|situa[c\u00e7][a\u00e3]o(_es)?|situaci[o\u00f3]n(_es)?|situation)$/i,
-    apertura: /^(apertura|abertura|opening|er[o\u00f6]ffnung)$/i,
-    parole_utili: /^(parole_utili|palavras?_[u\u00fa]teis|palabras?_[u\u00fa]tiles|useful_words|n[u\u00fc]tzliche_w[o\u00f6]rter)$/i
+    // by how the name starts: the model also mixes languages (obiettivos)
+    obiettivi: /^(obiet|objet|object|obbiet|goal|ziel|meta|tarea|tarefa)/i,
+    titolo: /^(tit|t\u00edt|title)/i,
+    ruolo_ia: /^(ruol|papel|rol|role)/i,
+    situazione_es: /^(situa|scen|escen)/i,
+    apertura: /^(apert|abert|open|er[o\u00f6]ff|inicio|in\u00edcio)/i,
+    parole_utili: /^(parol|palav|palab|useful|n[u\u00fc]tzl|words|vocab)/i
   };
   function scenOf(d) {
     if (!d || typeof d !== "object") return d;
@@ -6559,6 +6560,13 @@
       var k = Object.keys(d).filter(function (x) { return SCEN_ALIAS[f].test(x); })[0];
       if (k) d[f] = d[k];
     });
+    // still nothing: the one list of three or so sentences that is not the words
+    if (d.obiettivi == null) {
+      var lists = Object.keys(d).filter(function (x) {
+        return x !== "parole_utili" && Array.isArray(d[x]) && d[x].length >= 2 && d[x].every(function (v) { return typeof v === "string" && v.split(/\s+/).length >= 3; });
+      });
+      if (lists.length === 1) d.obiettivi = d[lists[0]];
+    }
     if (typeof d.obiettivi === "string") d.obiettivi = d.obiettivi.split(/\n+|\s*\d\)\s*|;\s*/).map(function (x) { return x.trim(); }).filter(Boolean);
     if (!Array.isArray(d.obiettivi) || !d.obiettivi.length) delete d.obiettivi;
     return d;

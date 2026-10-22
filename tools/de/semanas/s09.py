@@ -206,7 +206,7 @@ WEEK = {
         cz(0, "Escribí el imperativo con *du*.", "___ den Apfel! (essen)", "Iss", note="*du isst → Iss!*"),
         cz(0, "Escribí el imperativo de *sein* con *ihr*.", "___ bitte leise!", "Seid", note="*Seid!*, con *d*."),
         tr(0, "¡Espere acá, por favor! (usted)", "Warten Sie bitte hier!", ["Warten Sie bitte hier!", "Bitte warten Sie hier!", "Warten Sie hier, bitte!", "Warten Sie hier bitte!"], "Infinitivo + *Sie*; *bitte* suaviza."),
-        tr(0, "¡Llamame! (a un amigo)", "Ruf mich an!", ["Ruf mich an!", "Rufe mich an!"], "*anrufen* → *Ruf … an!*"),
+        tr(0, "¡Llamame! (a un amigo)", "Ruf mich an!", ["Ruf mich an!", "Rufe mich an!"], "*anrufen* → *Ruf … an!* *mich* = me (la forma de *ich* como objeto, como *dich* = te; la regla, en la semana 13)."),
         tr(0, "¡Vení con nosotros! (a un amigo, con *mitkommen*)", "Komm mit!", ["Komm mit!", "Komm doch mit!", "Komme mit!"], "*mitkommen* → *Komm mit!*"),
         li(0, "Nimm", ["Nimm", "Nimmt", "Nehmt"], "*Nimm!* (du), *nimmt* (er), *Nehmt!* (ihr)."),
         # parte 1 — mit + transporte

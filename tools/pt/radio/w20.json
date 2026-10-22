@@ -35,7 +35,8 @@
   "prefeitura": "municipalidad",
   "elogio": "elogio",
   "ouvinte": "oyente",
-  "ouvintes": "oyentes"
+  "ouvintes": "oyentes",
+  "Qualquer": "cualquier"
  },
  "questions": [
   ["Qual é a reclamação do seu Jorge?", ["O ônibus 511 nunca passa na hora certa", "Não tem nenhum banco na rua dele", "O vizinho canta de manhã", "A praça está suja"], "Não tem nenhum banco na rua dele"],

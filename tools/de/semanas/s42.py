@@ -264,7 +264,7 @@ WEEK = {
         ch(2, "¿Qué frase concede antes de contradecir?", "Querés reconocer un punto del otro y después oponerte.", "Da haben Sie zwar recht, aber …", ["Da haben Sie zwar recht, aber …", "Das ist völliger Unsinn.", "Ich bin ganz Ihrer Meinung."], "*zwar …, aber*: primero concedés, después contradecís."),
         ch(2, "Elegí la forma correcta.", "Ich bin ___ Meinung. (otra opinión)", "anderer", ["anderer", "andere", "anderen"], "Genitivo fijo y sin artículo: *Ich bin anderer Meinung*."),
         ch(2, "Completá la fórmula formal.", "Meines ___ fehlt eine klare Strategie.", "Erachtens", ["Erachtens", "Erachten", "Erachtung"], "*Meines Erachtens* (m. E.) = a mi juicio."),
-        ch(2, "Elegí el verbo (registro alto).", "Es lässt sich nicht ___, dass sich das Klima verändert.", "leugnen", ["leugnen", "lügen", "ablehnen"], "*leugnen* = negar (un hecho). *Es lässt sich nicht leugnen* = no se puede negar."),
+        ch(2, "Elegí el verbo («negar un hecho», registro alto).", "Es lässt sich nicht ___, dass sich das Klima verändert.", "leugnen", ["leugnen", "lügen", "ablehnen"], "*leugnen* = negar (un hecho). *Es lässt sich nicht leugnen* = no se puede negar."),
         cz(2, "Escribí el verbo («sostengo»).", "Ich ___ den Standpunkt, dass das Tempolimit sinnvoll ist.", "vertrete", note="*einen Standpunkt vertreten* = sostener una postura."),
         cz(2, "Escribí la partícula separable («admito»).", "Ich gebe ___, dass das Argument nicht ganz falsch ist.", "zu", note="*zugeben* es separable: *Ich gebe zu, dass…*"),
         cz(2, "Escribí la preposición.", "Was halten Sie ___ dem Vorschlag?", "von", note="En la pregunta: *Was halten Sie von…?* (+ dativo)."),

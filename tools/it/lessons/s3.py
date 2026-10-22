@@ -164,6 +164,8 @@ LESSONS = {
   "table": {"head": ["Conector", "Sentido", "Ejemplo"],
             "rows": [["e / ed", "y (ed ante e)", "Anna ed Elena"],
                      ["anche", "también", "Viene anche lui."],
+                     ["come pure", "y también (al final)", "Viene lui, come pure lei."],
+                     ["sia... che / sia... sia", "tanto... como", "Vengono sia Anna che Luca."],
                      ["inoltre / in più", "además", "Inoltre, costa poco."],
                      ["oltre a", "además de", "Oltre a Roma, ho visto Napoli."],
                      ["non solo... ma anche", "no solo... sino también", "Parla non solo inglese, ma anche cinese."],
@@ -173,10 +175,14 @@ LESSONS = {
                      ["però", "sin embargo", "Non posso, però ci provo."],
                      ["eppure", "y sin embargo", "Sta male, eppure lavora."],
                      ["invece", "en cambio", "Io resto, lui invece parte."],
+                     ["invece di + infinitivo", "en vez de", "Invece di parlare, ascolta."],
                      ["anzi", "es más / al contrario", "Non è brutto, anzi!"],
+                     ["piuttosto", "más bien", "Non è caro, piuttosto è lontano."],
+                     ["non... bensì", "no... sino (formal)", "Non è rosso, bensì arancione."],
                      ["mentre", "mientras / en cambio", "Mentre tu dormi, io lavoro."],
                      ["cioè", "o sea, es decir", "Vengo alle sei, cioè fra un'ora."],
-                     ["tuttavia", "no obstante (formal)", "Tuttavia, il risultato è buono."]]},
+                     ["tuttavia", "no obstante (formal)", "Tuttavia, il risultato è buono."],
+                     ["tranne / a parte", "excepto / aparte de", "Tutti tranne lui."]]},
   "warn": "*anzi* corrige o refuerza lo dicho, a menudo con el sentido opuesto: "
           "*Non mi dispiace, anzi mi piace molto.* No tiene calco castellano; usado "
           "bien, suena nativo.",
@@ -195,7 +201,8 @@ LESSONS = {
                      ["allora", "entonces", "también muletilla oral"],
                      ["così", "así que", "Piove, così resto a casa."],
                      ["così / tanto... che", "tan... que", "Era così stanco che dormiva in piedi."],
-                     ["altrimenti", "si no", "Corri, altrimenti perdi il treno."]]},
+                     ["altrimenti", "si no", "Corri, altrimenti perdi il treno."],
+                     ["infatti", "en efecto (confirma o explica, no contradice)", "Non è venuto: infatti era malato."]]},
   "ex": [["Resto a casa *perché* sono stanco.", "Me quedo en casa porque estoy cansado."],
          ["*Siccome* piove, restiamo a casa.", "Como llueve, nos quedamos en casa."],
          ["Non viene, *quindi* cominciamo senza di lui.", "No viene, así que empezamos sin él."],
@@ -255,6 +262,7 @@ LESSONS = {
             "rows": [["benché / sebbene", "aunque", "Benché sia tardi, resto."],
                      ["nonostante / malgrado", "aunque; a pesar de", "Nonostante piova, esco."],
                      ["affinché / perché", "para que", "Te lo dico perché tu capisca."],
+                     ["in modo che", "de modo que (para que)", "Parlo piano in modo che tu capisca."],
                      ["purché / a patto che", "con tal de que, siempre que", "Vengo, purché tu venga."],
                      ["a meno che non", "a menos que", "Vengo, a meno che non piova."],
                      ["prima che", "antes de que", "Esco prima che piova."],
@@ -279,6 +287,7 @@ LESSONS = {
   "table": {"head": ["Conector", "Sentido", "Ojo con"],
             "rows": [["anche se", "aunque (hecho real)", "indicativo; benché pide congiuntivo"],
                      ["comunque / lo stesso", "de todos modos / igual", "Ci provo lo stesso."],
+                     ["comunque + congiuntivo", "como sea que", "Comunque vada, ci provo."],
                      ["né… né", "ni… ni", "con el verbo antes, lleva non"],
                      ["non solo… ma anche", "no solo… sino también", "Non solo studia, ma anche lavora."]]},
   "warn": "Con *né… né* tras el verbo, *non* va delante: *Non sono venuti né Anna né Luca*. Con *né… né* delante del verbo, no se agrega *non*."},
@@ -431,7 +440,11 @@ LESSONS = {
   "more": ["Lo posterior también va en imperfetto después de un condizionale "
            "o de un verbo de voluntad: *volevo che venisse* (quería que "
            "viniera). Con verbos de opinión, en cambio, lo posterior va en "
-           "condizionale passato: lo ves en la semana 32."]},
+           "condizionale passato: lo ves en la semana 32.",
+           "Una subordinada con *che* que abre la frase como sujeto también "
+           "pide congiuntivo: *Che fosse stanco era evidente*. Igual *il "
+           "fatto che* (el hecho de que, sin *di*): *il fatto che non "
+           "studiasse le pesava*."]},
 
  {"h": "Ojalá, como si",
   "r": "*Magari*, *se solo* y *come se* piden congiuntivo imperfetto (o "
@@ -441,7 +454,9 @@ LESSONS = {
          ["Parla *come se fosse* un esperto.", "Habla como si fuera un experto."],
          ["Fa *come se* non *fosse successo* niente.", "Hace como si no hubiera pasado nada."]],
   "warn": "*come se* va **siempre** con imperfetto o trapassato: *come se "
-          "fosse*, *come se non fosse successo niente*. Nunca «come se è»."},
+          "fosse*, *come se non fosse successo niente*. Nunca «come se è».",
+  "tip": "*Mettiamo che* o *supponiamo che* (supongamos que) también abren "
+         "una hipótesis con congiuntivo: *mettiamo che piovesse...*"},
 ]},
 
 31: {
@@ -812,7 +827,7 @@ LESSONS = {
          "que»."},
 
  {"h": "Cuándo conviene evitarla",
-  "q": [{"prompt": "¿Cuál es lo más natural? «Se dice que va a llover.»", "answer": "Si dice che pioverà.", "options": ["Si dice che pioverà.", "È detto che pioverà.", "Viene detto che pioverà."]}],
+  "q": [{"prompt": "¿Cuál es lo más natural? «Dicen que va a llover.»", "answer": "Dicono che pioverà.", "options": ["Dicono che pioverà.", "È detto che pioverà.", "Viene detto che pioverà."]}],
   "r": "Si el agente no importa, suena mejor el *si* (semana 36) o la "
        "tercera plural impersonal: *dicono che...*",
   "ex": [["*Dicono che* pioverà.", "Dicen que va a llover."],

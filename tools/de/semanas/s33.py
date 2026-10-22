@@ -164,7 +164,7 @@ WEEK = {
                     ["Der *Vorsitzende* eröffnet die Sitzung.", "El presidente abre la sesión."],
                     ["*Das Gesagte* bleibt unter uns.", "Lo dicho queda entre nosotros."],
                 ],
-                "warn": "*ein Angestellter*, pero *der Angestellte*: la terminación depende del artículo, igual que en *ein guter / der gute*. Y en plural sin artículo: *zwei Verletzte*, no «Verletzten».",
+                "warn": "*ein Angestellter*, pero *der Angestellte*: la terminación depende del artículo, igual que en *ein guter / der gute*. Y en plural sin artículo: *zwei Verletzte*, no «Verletzten». Pero *alle* funciona como *die*: *alle Reisenden*.",
                 "tip": "*die Studierenden* (de *studieren*) se usa mucho en las universidades porque incluye a hombres y mujeres sin decir *Studentinnen und Studenten*.",
                 "q": [
                     q("Completá: *Er ist ein ___.* (viajero)", "Reisender", ["Reisender", "Reisende", "Reisenden"]),
@@ -260,7 +260,7 @@ WEEK = {
         tr(1, "el auto comprado", "das gekaufte Auto", ["das gekaufte Auto", "der gekaufte Wagen"], "Pasivo y terminado: Partizip II."),
         tr(1, "los precios que subieron", "die gestiegenen Preise", _nc("die gestiegenen Preise", "die Preise, die gestiegen sind"), "*steigen* hace Perfekt con *sein*: Partizip II activo."),
         # parte 2 — participios para describir
-        ch(2, "Elegí la forma correcta.", "Alle ___ müssen hier aussteigen.", "Reisenden", ["Reisenden", "Reisende", "Reisender"], "Después de *alle*, terminación *-en*."),
+        ch(2, "Elegí la forma correcta.", "Alle ___ müssen hier aussteigen.", "Reisenden", ["Reisenden", "Reisende", "Reisender"], "*alle* funciona como *die*: terminación *-en*."),
         ch(2, "Elegí la forma correcta.", "Sie ist ___ bei einer Bank. (empleada)", "Angestellte", ["Angestellte", "Angestellter", "Angestellten"], "Femenino sin artículo: *-e*, como *eine Angestellte*."),
         ch(2, "Elegí la forma correcta.", "Bei dem Unfall gab es zwei ___.", "Verletzte", ["Verletzte", "Verletzten", "Verletzter"], "Plural sin artículo (*es gibt* + acusativo): *-e*."),
         ch(2, "¿spannend o gespannt?", "Ich bin ___, wie der Film endet.", "gespannt", ["gespannt", "spannend", "spannende"], "La persona está expectante: *gespannt*."),

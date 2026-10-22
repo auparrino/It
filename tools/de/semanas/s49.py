@@ -254,7 +254,7 @@ WEEK = {
         ch(2, "¿Qué significa?", "In der Sitzung kam auch das Budget zur Sprache.", "En la reunión también se habló del presupuesto.", ["En la reunión también se habló del presupuesto.", "El presupuesto llegó tarde a la reunión.", "Alguien presentó el presupuesto por escrito."], "*zur Sprache kommen* = ser mencionado (pasivo de *zur Sprache bringen*)."),
         cz(2, "Escribí el verbo (infinitivo).", "Er musste seine Fähigkeiten erst unter Beweis ___.", "stellen", note="*unter Beweis stellen* = demostrar."),
         cz(2, "Escribí el verbo.", "Viele Freiwillige ___ einen wichtigen Beitrag zur Integration.", "leisten", note="*einen Beitrag leisten zu* = contribuir a."),
-        cz(2, "Escribí el participio.", "Die Kommission ist zu dem Ergebnis ___, dass das Projekt zu teuer ist.", "gekommen", note="*zu dem Ergebnis kommen* = llegar a la conclusión."),
+        cz(2, "Escribí el participio (*zu dem Ergebnis kommen* = llegar a la conclusión).", "Die Kommission ist zu dem Ergebnis ___, dass das Projekt zu teuer ist.", "gekommen", note="*zu dem Ergebnis kommen* = llegar a la conclusión."),
         cz(2, "Escribí el sustantivo.", "Bitte nehmen Sie die neuen Regeln zur ___.", "Kenntnis", note="*zur Kenntnis nehmen* = tomar nota. " + MAY),
         ty(2, "Reescribí con *in Frage stellen*.", "Viele bezweifeln die Methode.", "Viele stellen die Methode in Frage.", ["Viele stellen die Methode in Frage.", "Viele stellen die Methode infrage."], "*in Frage stellen* (también *infrage*) = poner en duda."),
         ty(2, "Reescribí con *Anwendung finden*.", "Die Methode wird häufig angewendet.", "Die Methode findet häufig Anwendung.", note="*Anwendung finden* reemplaza la pasiva."),
