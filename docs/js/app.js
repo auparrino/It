@@ -828,7 +828,7 @@
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION = "c1-vN" in sw.js: test_game
      and the CI check it).  One version for the app and both languages. */
-  var APP_VERSION = "v3.15.3";
+  var APP_VERSION = "v3.15.4";
   // Settimana XVII: Roman numerals on the street signs (LANG.ui.romanWeeks).
   function romano(n) {
     var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
@@ -5006,7 +5006,13 @@
      sends (as before); Shift+Enter is a new line; the box grows with the text. */
   function growBoxes() {
     document.querySelectorAll("textarea.grow").forEach(function (t) {
-      var fit = function () { t.style.height = "auto"; t.style.height = Math.min(t.scrollHeight + 2, 220) + "px"; };
+      // keep the page where it is while the box is measured (height:auto
+      // shrinks it for a moment and the browser scrolls the page)
+      var fit = function () {
+        var y = window.scrollY;
+        t.style.height = "auto"; t.style.height = Math.min(t.scrollHeight + 2, 220) + "px";
+        if (window.scrollY !== y) window.scrollTo(0, y);
+      };
       t.addEventListener("input", fit);
       fit();
     });
