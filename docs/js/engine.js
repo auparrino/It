@@ -68,6 +68,77 @@
     return prev[b.length];
   }
 
+  /* A finger slip, not a language error: the same words except for an
+     accent, a doubled or undoubled letter, a key next to the right one on
+     the QWERTY keyboard (the app's and the phone's), or two letters
+     swapped.  Never on the last letter of a word (the ending is grammar:
+     parlo/parli, falo/fala), never on words of under four letters (ein,
+     dem, il, no), never what the package calls grammar (typoIsGrammar,
+     markIsGrammar, the crase).  At most one word in three. */
+  var KB_ROWS = ["qwertyuiop", "asdfghjklñ", "zxcvbnm"];
+  var NEAR = {};
+  KB_ROWS.forEach(function (row, r) {
+    row.split("").forEach(function (c, i) {
+      var n = NEAR[c] || (NEAR[c] = {});
+      [[r, i - 1], [r, i + 1], [r - 1, i], [r - 1, i + 1], [r + 1, i - 1], [r + 1, i]].forEach(function (p) {
+        var o = KB_ROWS[p[0]] && KB_ROWS[p[0]][p[1]];
+        if (o) n[o] = 1;
+      });
+    });
+  });
+  function near(a, b) { a = deaccent(a); b = deaccent(b); return a === b || !!(NEAR[a] && NEAR[a][b]); }
+  function degeminate(w) { return w.replace(/(.)\1+/g, "$1"); }
+  function wordSlip(g, w) {
+    if (g === w) return true;
+    var plainSame = deaccent(g) === deaccent(w);
+    if (plainSame) {
+      if (GR.markIsGrammar && GR.markIsGrammar(g, w)) return false;
+      if (GR.graveIsGrammar && /\u0300/.test(String(w).normalize("NFD")) !== /\u0300/.test(String(g).normalize("NFD"))) return false;
+      return true;
+    }
+    if (GR.fold && GR.fold(g) === GR.fold(w)) return true;
+    var dg = deaccent(g), dw = deaccent(w);
+    if (dw.length < 4 || (GR.typoIsGrammar && GR.typoIsGrammar(g, w))) return false;
+    var last = dw.length - 1;
+    // a doubled or undoubled letter inside the word
+    if (degeminate(dg) === degeminate(dw) && Math.abs(dg.length - dw.length) === 1) {
+      return dg.slice(-1) === dw.slice(-1);
+    }
+    if (dg.length === dw.length) {
+      var diff = [];
+      for (var i = 0; i < dw.length; i++) if (dg[i] !== dw[i]) diff.push(i);
+      if (diff.length === 1) return diff[0] < last && near(dg[diff[0]], dw[diff[0]]);
+      // two neighbours swapped (teh for the)
+      return diff.length === 2 && diff[1] === diff[0] + 1 && diff[1] < last &&
+        dg[diff[0]] === dw[diff[1]] && dg[diff[1]] === dw[diff[0]];
+    }
+    // one extra key pressed next to its neighbour (paralo for parlo)
+    if (dg.length === dw.length + 1) {
+      var j = 0;
+      while (j < dw.length && dg[j] === dw[j]) j++;
+      return j < last && dg.slice(j + 1) === dw.slice(j) &&
+        (near(dg[j], dw[j] || "") || (j > 0 && near(dg[j], dw[j - 1])));
+    }
+    return false;
+  }
+  function slipOf(given, answers) {
+    var g = normalise(given);
+    if (!g) return false;
+    return (answers || []).some(function (a) {
+      var w = normalise(a);
+      if (!w || w === g) return false;
+      var x = g.split(/\s+/), y = w.split(/\s+/);
+      if (x.length !== y.length) return false;
+      var bad = 0;
+      for (var i = 0; i < y.length; i++) {
+        if (x[i] === y[i]) continue;
+        if (!wordSlip(x[i], y[i])) return false;
+        bad++;
+      }
+      return bad > 0 && bad <= Math.max(1, Math.floor(y.length / 3));
+    });
+  }
+
   /* The verdicts are internal tokens shared by every module (diagnosi.js,
      frasi.js, letture.js, the CSS classes .feedback.giusto…): RIGHT =
      correct, CLOSE = almost, WRONG = wrong. */
@@ -162,6 +233,8 @@
       if (pt && pt.some(function (p) { return GR.typoIsGrammar(p[0], p[1]); })) continue;
       return VERDICT.CLOSE;
     }
+    // a finger slip on a short word too (mattina for matina, vpcê for você)
+    if (!other && slipOf(g, expanded)) return VERDICT.CLOSE;
     return VERDICT.WRONG;
   }
 
@@ -1094,6 +1167,7 @@
     deaccent: deaccent,
     editDistance: editDistance,
     grade: grade,
+    slipOf: slipOf,
     schedule: schedule,
     isDue: isDue,
     retired: retired,

@@ -2868,6 +2868,11 @@
     var verdict = v1 === "giusto" || d.verdict === "giusto" ? "giusto"
                 : d.verdict === "sbagliato" && d.cat ? "sbagliato"
                 : v1 === "quasi" || d.verdict === "quasi" ? "quasi" : "sbagliato";
+    // A finger slip (a key next to the right one, a doubled letter, an
+    // accent) is «casi» even when the diagnosis names it: no life lost,
+    // and the explanation still shows (Engine.slipOf leaves out endings
+    // and what the language calls grammar).
+    if (verdict === "sbagliato" && Engine.slipOf && Engine.slipOf(given, accept) && !(it.type === "garden" && it.trap)) verdict = "quasi";
     // Phrase drills stay lenient on accents only.
     if (it.frase && verdict === "sbagliato" && d.all && d.all.every(function (c) { return SLIPS[c]; })) {
       verdict = "quasi";
