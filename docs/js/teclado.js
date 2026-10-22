@@ -198,7 +198,7 @@
     var el = target;
     if (k === "shift") { shift = !shift; draw(); return; }
     if (k === "123" || k === "abc") { layer = k === "123" ? "sym" : "abc"; draw(); return; }
-    if (k === "back") { back(el); return; }
+    if (k === "back") { back(el); keepVisible(); return; }
     if (k === "phone") { usePhone(); return; }
     if (k === "hide") {
       // the keyboard goes away under the finger: the click that follows the
@@ -218,6 +218,19 @@
     }
     insert(el, k);
     if (shift) { shift = false; draw(); }
+    keepVisible();
+  }
+  // The box stays above the keyboard while it is written in: a box that
+  // grows with the text (or a page that moved) would go under the keys.
+  function keepVisible() {
+    if (!panel || panel.hidden || !target) return;
+    root.requestAnimationFrame(function () {
+      if (!target || panel.hidden) return;
+      var r = target.getBoundingClientRect(), top = panel.getBoundingClientRect().top;
+      var gap = 12;
+      if (r.bottom > top - gap) root.scrollBy(0, r.bottom - top + gap);
+      else if (r.top < gap) root.scrollBy(0, r.top - gap);
+    });
   }
 
   function show(el) {
