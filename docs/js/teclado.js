@@ -100,10 +100,15 @@
       }
       html += '<div class="kbrow">' + keys + "</div>";
     });
+    // the most used punctuation at hand, without going to 123: , and . around
+    // the space, ? and the apostrophe or hyphen of the language (l'uomo, fala-se)
+    var ks = ui().keys || [], mark = ks.indexOf("'") >= 0 ? "'" : ks.indexOf("-") >= 0 ? "-" : "";
     html += '<div class="kbrow">' +
       key("hide", "kbmod", "▾", "ocultar el teclado") +
       (layer === "abc" ? key("123", "kbmod", "123", "números y signos") : key("abc", "kbmod", "abc", "letras")) +
+      (layer === "abc" ? key(",", "kbpunct") + (mark ? key(mark, "kbpunct") : "") : "") +
       key(" ", "kbspace", (root.LANG && root.LANG.name) || "espacio", "espacio") +
+      (layer === "abc" ? key(".", "kbpunct") + key("?", "kbpunct") : "") +
       key("enter", "kbmod kbenter", "↵", "enviar") + "</div>";
     panel.innerHTML = html;
   }
@@ -141,7 +146,10 @@
       press(b.getAttribute("data-k"));
     });
   }
-  var lastDown = 0, repeatTimer = null;
+  var lastDown = 0, repeatTimer = null, swallowUntil = 0;
+  if (doc) doc.addEventListener("click", function (e) {
+    if (Date.now() < swallowUntil && !(panel && panel.contains(e.target))) { e.preventDefault(); e.stopPropagation(); swallowUntil = 0; }
+  }, true);
   function keyAt(e) {
     var b = e.target && e.target.closest ? e.target.closest("[data-k]") : null;
     if (b && panel.contains(b)) return b;
@@ -192,7 +200,13 @@
     if (k === "123" || k === "abc") { layer = k === "123" ? "sym" : "abc"; draw(); return; }
     if (k === "back") { back(el); return; }
     if (k === "phone") { usePhone(); return; }
-    if (k === "hide") { var h = target; hide(); if (h) h.blur(); return; }
+    if (k === "hide") {
+      // the keyboard goes away under the finger: the click that follows the
+      // touch would land on what was below (the tab bar) and leave the
+      // exercise; that click is swallowed
+      swallowUntil = Date.now() + 600;
+      var h = target; hide(); if (h) h.blur(); return;
+    }
     if (k === "enter") {
       var ev;
       try { ev = new root.KeyboardEvent("keydown", { key: "Enter", code: "Enter", bubbles: true, cancelable: true }); }
