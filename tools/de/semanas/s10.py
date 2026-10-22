@@ -82,10 +82,10 @@ WEEK = {
                     ["Ich finde *eure* Wohnung schön.", "El departamento de ustedes me parece lindo."],
                     ["Er ruft *seine* Mutter an.", "Llama a su mamá."],
                 ],
-                "warn": "*euer* pierde la segunda *e* cuando lleva terminación: *eure Küche, euren Balkon*, nunca «euere». *unser* en cambio la mantiene: *unsere, unseren*.",
+                "warn": "*euer* pierde la segunda *e* cuando lleva terminación: *eure Küche, euren Balkon*: lo normal es *eure*, *euren*; *euere* existe pero casi no se usa. *unser* en cambio la mantiene: *unsere, unseren*.",
                 "q": [
                     q("Completá: *Ich suche ___ Schlüssel.* (mi)", "meinen", ["meinen", "mein", "meine"]),
-                    q("Completá: *Habt ihr ___ Balkon?* (de ustedes)", "euren", ["euren", "eueren", "euer"]),
+                    q("Completá: *Habt ihr ___ Balkon?* (de ustedes)", "euren", ["euren", "eure", "euer"]),
                 ],
             },
             {
@@ -108,7 +108,7 @@ WEEK = {
                 "tip": "Para matizar: *sehr* (muy), *ziemlich* (bastante), *zu* (demasiado), *nicht so* (no tan). *zu teuer* es una queja: más de lo que querés.",
                 "q": [
                     q("Completá: *Die Zimmer sind ___.*", "groß", ["groß", "große", "großen"]),
-                    q("*zu laut* significa…", "demasiado ruidoso", ["demasiado ruidoso", "muy tranquilo", "bastante ruidoso"]),
+                    q("*zu laut* significa…", "demasiado ruidoso", ["demasiado ruidoso", "muy ruidoso", "bastante ruidoso"]),
                 ],
             },
             {
@@ -126,7 +126,7 @@ WEEK = {
                 "more": ["Si empezás con otro elemento, *es* va después del verbo: *Hier gibt es…*, *Im Bad gibt es…*"],
                 "q": [
                     q("Completá: *Es gibt ___ Balkon.*", "einen", ["einen", "ein", "eine"]),
-                    q("«Hay tres habitaciones.»", "Es gibt drei Zimmer.", ["Es gibt drei Zimmer.", "Es geben drei Zimmer.", "Es sind drei Zimmer gibt."]),
+                    q("«Hay tres habitaciones.»", "Es gibt drei Zimmer.", ["Es gibt drei Zimmer.", "Es geben drei Zimmer.", "Es gibt drei Zimmers."]),
                 ],
             },
             {
@@ -166,7 +166,7 @@ WEEK = {
                 "more": ["*die WG* (*Wohngemeinschaft*) es un departamento compartido: muy común entre estudiantes. *Zimmer in WG frei* = se alquila pieza en departamento compartido.", "*der Vermieter / die Vermieterin* es quien te alquila; vos sos *der Mieter / die Mieterin*."],
                 "q": [
                     q("*eine Zweizimmerwohnung* es…", "un dos ambientes", ["un dos ambientes", "un monoambiente", "una casa de dos pisos"]),
-                    q("«¿Cuánto es el alquiler?» (lo más habitual)", "Wie hoch ist die Miete?", ["Wie hoch ist die Miete?", "Wie groß ist die Miete?", "Wie alt ist die Miete?"]),
+                    q("«¿Cuánto es el alquiler?» (lo más habitual)", "Wie hoch ist die Miete?", ["Wie hoch ist die Miete?", "Wie groß ist die Miete?", "Wie hoch kostet die Miete?"]),
                 ],
             },
         ],
@@ -196,7 +196,7 @@ WEEK = {
         ch(0, "Elegí el posesivo.", "Anna und ___ Balkon (de ella)", "ihr", ["ihr", "sein", "ihre"], "De ella → *ihr*; *der Balkon* → sin terminación."),
         ch(0, "Elegí el posesivo.", "Paul und ___ Wohnung (de él)", "seine", ["seine", "sein", "ihre"], "De él → *sein-*; *die Wohnung* → *-e*."),
         ch(0, "Elegí el posesivo.", "Ich suche ___ Schlüssel. (mi)", "meinen", ["meinen", "mein", "meine"], "Acusativo masculino: *meinen*."),
-        ch(0, "Elegí el posesivo.", "___ Küche ist schön. (de ustedes, amigos)", "Eure", ["Eure", "Euere", "Euer"], "*euer* + *-e* = *eure*."),
+        ch(0, "Elegí el posesivo.", "___ Küche ist schön. (de ustedes, amigos)", "Eure", ["Eure", "Euren", "Euer"], "*euer* + *-e* = *eure*."),
         ch(0, "A la señora Weber: elegí el posesivo.", "Ist das ___ Auto, Frau Weber?", "Ihr", ["Ihr", "dein", "sein"], "De usted → *Ihr*, con mayúscula."),
         cz(0, "Escribí el posesivo (nuestro).", "___ Wohnung ist klein.", "Unsere", note="*unser* + *-e* (femenino)."),
         cz(0, "Escribí el posesivo (mi).", "Das ist ___ Bett.", "mein", note="*das Bett*: neutro, sin terminación."),
@@ -212,7 +212,7 @@ WEEK = {
         ch(1, "Elegí la forma correcta.", "Es ___ zwei Schlafzimmer.", "gibt", ["gibt", "geben", "sind"], "Siempre *es gibt*, en singular."),
         ch(1, "Elegí la forma correcta.", "Es gibt ___ Balkon.", "einen", ["einen", "ein", "eine"], "*es gibt* + acusativo: *einen Balkon*."),
         ch(1, "Elegí la respuesta negativa.", "Gibt es hier einen Supermarkt?", "Nein, hier gibt es keinen Supermarkt.", ["Nein, hier gibt es keinen Supermarkt.", "Nein, hier gibt es kein Supermarkt.", "Nein, hier gibt es nicht Supermarkt."], "*kein* en acusativo masculino: *keinen*."),
-        ch(1, "¿Qué significa?", "Die Wohnung ist zu teuer.", "El departamento es demasiado caro.", ["El departamento es demasiado caro.", "El departamento es muy barato.", "El departamento también es caro."], "*zu* + adjetivo = demasiado."),
+        ch(1, "¿Qué significa?", "Die Wohnung ist zu teuer.", "El departamento es demasiado caro.", ["El departamento es demasiado caro.", "El departamento es muy caro.", "El departamento también es caro."], "*zu* + adjetivo = demasiado."),
         ch(1, "Elegí la forma correcta.", "Die Wohnung hat ___ Balkon.", "einen", ["einen", "ein", "einem"], "*haben* también lleva acusativo."),
         cz(1, "Escribí la forma de *geben*.", "Im Bad ___ es eine Dusche.", "gibt", note="*Im Bad* primero → *gibt es*."),
         cz(1, "Escribí el artículo (acusativo).", "Es gibt ___ Kühlschrank.", "einen", note="*der Kühlschrank* → *einen*."),
@@ -226,7 +226,7 @@ WEEK = {
         # parte 2 — buscar departamento
         ch(2, "Elegí el artículo.", "___ Schlafzimmer", "das", ["das", "der", "die"], "Compuesto de *das Zimmer*: neutro."),
         ch(2, "¿Qué es?", "der Kühlschrank", "la heladera", ["la heladera", "el ropero", "la cocina"], "*kühl* (fresco) + *der Schrank*."),
-        ch(2, "Elegí la pregunta más habitual.", "(¿Cuánto es el alquiler?)", "Wie hoch ist die Miete?", ["Wie hoch ist die Miete?", "Wie groß ist die Miete?", "Wo ist die Miete?"], "Fórmula: *Wie hoch ist die Miete?*"),
+        ch(2, "Elegí la pregunta más habitual.", "(¿Cuánto es el alquiler?)", "Wie hoch ist die Miete?", ["Wie hoch ist die Miete?", "Wie groß ist die Miete?", "Wie hoch kostet die Miete?"], "Fórmula: *Wie hoch ist die Miete?*"),
         ch(2, "¿Qué significa?", "Ist die Wohnung noch frei?", "¿El departamento sigue disponible?", ["¿El departamento sigue disponible?", "¿El departamento es gratis?", "¿El departamento es nuevo?"], "*frei* = libre, disponible (y a veces gratis)."),
         ch(2, "En un aviso: *Zweizimmerwohnung*", "¿Qué es?", "un dos ambientes", ["un dos ambientes", "dos departamentos", "un monoambiente"], "*Zimmer* cuenta los ambientes sin cocina ni baño."),
         ch(2, "¿Quién te alquila el departamento?", "der …", "der Vermieter", ["der Vermieter", "der Mieter", "der Nachbar"], "*vermieten* = alquilar (dar en alquiler)."),
@@ -238,6 +238,6 @@ WEEK = {
         tr(2, "Mi dormitorio es chico, pero acogedor.", "Mein Schlafzimmer ist klein, aber gemütlich.", ["Mein Schlafzimmer ist klein, aber gemütlich.", "Mein Schlafzimmer ist klein aber gemütlich."], "*das Schlafzimmer* → *mein*; adjetivos sin terminación."),
         tr(2, "¿Cuándo puedo ver el departamento?", "Wann kann ich die Wohnung sehen?", ["Wann kann ich die Wohnung sehen?", "Wann kann ich die Wohnung besichtigen?", "Wann kann ich mir die Wohnung ansehen?"], "Modal segundo, infinitivo al final."),
         ty(2, "Escribí en alemán, con artículo.", "«el ropero»", "der Schrank", note="Masculino. " + MAY),
-        li(2, "gemütlich", ["gemütlich", "möbliert", "ruhig"], "*gemütlich* = acogedor; *ü* con labios redondos."),
+        li(2, "gemütlich", ["gemütlich", "gemächlich", "gemeinsam"], "*gemütlich* = acogedor; *ü* con labios redondos."),
     ],
 }

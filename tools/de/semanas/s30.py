@@ -94,7 +94,7 @@ WEEK = {
                 "warn": "Sin *wenn* no hay verbo al final: *Hätte ich das gewusst, …*, no *Ich das gewusst hätte, …*.",
                 "tip": "*Hätte ich das bloß gewusst!*, sin segunda parte, ya es un lamento (bloque siguiente).",
                 "q": [
-                    q("Transformá: *Wenn ich mehr gelernt hätte, …*", "Hätte ich mehr gelernt, …", ["Hätte ich mehr gelernt, …", "Ich hätte mehr gelernt, …", "Gelernt hätte ich mehr, …"]),
+                    q("Transformá: *Wenn ich mehr gelernt hätte, …*", "Hätte ich mehr gelernt, …", ["Hätte ich mehr gelernt, …", "Ich hätte mehr gelernt, …", "Wenn hätte ich mehr gelernt, …"]),
                 ],
             },
             {
@@ -109,7 +109,7 @@ WEEK = {
                 "warn": "El «ojalá» del pasado no es *hoffentlich*: *hoffentlich* mira a algo posible (*Hoffentlich kommt er* = ojalá venga). Para lo que ya no tiene arreglo: *Wenn er doch gekommen wäre!*",
                 "more": ["*bereuen* (arrepentirse) va con acusativo y sin *sich*: *Ich bereue nichts*. *Er bereut, dass er nicht studiert hat.*"],
                 "q": [
-                    q("«¡Si hubiera sabido eso!»", "Hätte ich das nur gewusst!", ["Hätte ich das nur gewusst!", "Hoffentlich habe ich das gewusst!", "Ich hatte das nur gewusst!"]),
+                    q("«¡Si hubiera sabido eso!»", "Hätte ich das nur gewusst!", ["Hätte ich das nur gewusst!", "Wäre ich das nur gewusst!", "Ich hatte das nur gewusst!"]),
                     q("Completá: *Ich wünschte, ich ___ mutiger gewesen.*", "wäre", ["wäre", "hätte", "bin"]),
                 ],
             },
@@ -201,7 +201,7 @@ WEEK = {
         ch(1, "Elegí el auxiliar.", "Wenn du mich gefragt hättest, ___ ich dir geholfen.", "hätte", ["hätte", "wäre", "habe"], "Consecuencia irreal: *hätte geholfen*."),
         ch(1, "¿Qué oración es correcta?", "(Si lo hubiera sabido, habría venido.)", "Wenn ich das gewusst hätte, wäre ich gekommen.", ["Wenn ich das gewusst hätte, wäre ich gekommen.", "Wenn ich hätte das gewusst, wäre ich gekommen.", "Wenn ich das gewusst hätte, ich wäre gekommen."], "Auxiliar al final en la subordinada; verbo primero en la principal."),
         ch(1, "Elegí la forma.", "___ ich das nur gewusst!", "Hätte", ["Hätte", "Hatte", "Wäre"], "Lamento: *Hätte ich das nur gewusst!*"),
-        ch(1, "¿Qué expresa?", "Wäre ich doch zu Hause geblieben!", "un arrepentimiento", ["un arrepentimiento", "un plan para mañana", "una orden"], "Auxiliar adelante + *doch*: lamento por el pasado."),
+        ch(1, "¿Qué expresa?", "Wäre ich doch zu Hause geblieben!", "un arrepentimiento", ["un arrepentimiento", "un deseo para el futuro", "una pregunta"], "Auxiliar adelante + *doch* y signo de exclamación: lamento por el pasado, no pregunta."),
         ch(1, "Elegí la forma.", "Wenn ich gespart hätte, ___ ich jetzt mehr Geld.", "hätte", ["hätte", "hatte", "hätte gehabt"], "Consecuencia en el presente (*jetzt*): Konjunktiv II presente."),
         cz(1, "Escribí el auxiliar.", "Wenn es nicht geregnet ___, wären wir an den Strand gefahren.", "hätte", note="*regnen* va con *haben*: *geregnet hätte*."),
         cz(1, "Escribí el auxiliar.", "Wenn wir nicht so lange gezögert hätten, ___ wir die Wohnung bekommen.", "hätten", note="*bekommen* va con *haben*: *hätten bekommen*."),
@@ -215,7 +215,7 @@ WEEK = {
         # parte 2 — als ob
         ch(2, "Elegí la forma.", "Er tut so, als ob er alles ___.", "wüsste", ["wüsste", "gewusst", "wusste"], "*als ob* + Konjunktiv II: *wüsste* (con diéresis)."),
         ch(2, "Elegí la forma.", "Du siehst aus, als ob du müde ___.", "wärst", ["wärst", "warst", "bist gewesen"], "*als ob* + Konjunktiv II presente: *wärst*."),
-        ch(2, "Transformá.", "Sie tut so, als ob sie keine Zeit hätte.", "Sie tut so, als hätte sie keine Zeit.", ["Sie tut so, als hätte sie keine Zeit.", "Sie tut so, als sie keine Zeit hätte.", "Sie tut so, als hätte keine Zeit sie."], "Con *als* solo, el verbo va enseguida."),
+        ch(2, "Transformá.", "Sie tut so, als ob sie keine Zeit hätte.", "Sie tut so, als hätte sie keine Zeit.", ["Sie tut so, als hätte sie keine Zeit.", "Sie tut so, als sie keine Zeit hätte.", "Sie tut so, als ob hätte sie keine Zeit."], "Con *als* solo, el verbo va enseguida."),
         ch(2, "¿Qué significa?", "Er spricht, als wäre er der Chef.", "Habla como si fuera el jefe.", ["Habla como si fuera el jefe.", "Habla cuando es el jefe.", "Habla porque es el jefe."], "*als* + verbo en Konjunktiv II = como si."),
         ch(2, "Elegí la forma.", "Es hört sich an, als ___ es regnen.", "würde", ["würde", "wird", "wurde"], "*als würde es regnen*: Konjunktiv II con *würde*."),
         cz(2, "Escribí la forma de *sein*.", "Er redet, als ob er der Chef ___.", "wäre", note="*als ob* + *wäre*, al final."),

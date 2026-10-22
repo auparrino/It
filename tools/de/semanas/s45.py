@@ -40,8 +40,8 @@ WEEK = {
                     ["kriegen", "bekommen", "erhalten"],
                     ["gucken", "sehen, schauen", "betrachten"],
                     ["kapieren", "verstehen", "nachvollziehen"],
-                    ["Bescheid sagen", "sagen", "mitteilen"],
-                    ["schicken", "senden", "zusenden, übermitteln"],
+                    ["Bescheid sagen", "Bescheid geben, informieren", "mitteilen"],
+                    ["rüberschicken", "schicken", "zusenden, übermitteln"],
                     ["kaputt", "defekt", "beschädigt, funktionsunfähig"],
                     ["Sorry!", "Entschuldigung!", "Wir bitten um Entschuldigung."],
                 ]},
@@ -52,7 +52,7 @@ WEEK = {
                 ],
                 "warn": "El error más común no es olvidarse del *Sie*, sino **mezclar**: arrancar con *Sehr geehrte Frau Weber* y seguir con *Ich hab das nicht kapiert*. Elegí un registro y sostenelo.",
                 "q": [
-                    q("¿Cuál es el equivalente formal de *kriegen*?", "erhalten", ["erhalten", "kapieren", "gucken"]),
+                    q("¿Cuál es el equivalente formal de *kriegen*?", "erhalten", ["erhalten", "kapieren", "holen"]),
                     q("*mitteilen* es la versión formal de…", "sagen", ["sagen", "schicken", "fragen"]),
                 ],
             },
@@ -99,7 +99,7 @@ WEEK = {
                 "more": ["*Bezug nehmend auf* también se escribe junto: *bezugnehmend auf*. Las dos grafías están admitidas."],
                 "q": [
                     q("En *Ich danke Ihnen*, *Ihnen* es…", "usted (formal)", ["usted (formal)", "ellos", "ella"]),
-                    q("¿Con qué empieza el texto de una carta formal alemana?", "con el motivo, directo", ["con el motivo, directo", "preguntando cómo está el otro", "con un refrán"]),
+                    q("¿Con qué empieza el texto de una carta formal alemana?", "con el motivo, directo", ["con el motivo, directo", "preguntando cómo está el otro", "con una disculpa por la molestia"]),
                 ],
             },
             {
@@ -140,7 +140,7 @@ WEEK = {
                 "warn": "Después de *Sollten Sie Fragen haben*, la principal arranca con el **verbo**: *Sollten Sie Fragen haben, wenden Sie sich bitte an …*. Y este *sollte* no significa «deber»: es solo un «si».",
                 "q": [
                     q("¿Cuál es la versión formal de *Wenn Sie Fragen haben*?", "Sollten Sie Fragen haben", ["Sollten Sie Fragen haben", "Sollen Sie Fragen haben", "Sie sollten Fragen haben"]),
-                    q("Completá: *Ich ___ Ihnen dankbar, wenn Sie mir helfen könnten.*", "wäre", ["wäre", "bin gewesen", "werde"]),
+                    q("Completá: *Ich ___ Ihnen dankbar, wenn Sie mir helfen könnten.*", "wäre", ["wäre", "würde", "werde"]),
                 ],
             },
             {
@@ -235,7 +235,7 @@ WEEK = {
         ch(0, "Elegí el saludo.", "No sabés quién va a leer tu carta.", "Sehr geehrte Damen und Herren,", ["Sehr geehrte Damen und Herren,", "Hallo zusammen,", "Sehr geehrte Leute,"], "Destinatario desconocido: *Sehr geehrte Damen und Herren,*"),
         ch(0, "¿Cómo sigue el texto después del saludo?", "Sehr geehrte Damen und Herren …", "coma, y minúscula en la línea siguiente", ["coma, y minúscula en la línea siguiente", "dos puntos, y mayúscula", "signo de exclamación, y mayúscula"], "En alemán: coma, y el texto sigue con minúscula."),
         ch(0, "¿Qué significa, con minúscula?", "Wir danken ihnen für ihr Schreiben.", "Les agradecemos a ellos su carta.", ["Les agradecemos a ellos su carta.", "Le agradecemos a usted su carta.", "Nos agradecen nuestra carta."], "*ihnen / ihr* con minúscula = ellos. Usted sería *Ihnen / Ihr*."),
-        ch(0, "Elegí el verbo formal.", "Bitte ___ Sie uns Ihre neue Adresse mit.", "teilen", ["teilen", "sagen", "kriegen"], "*mitteilen* (separable) = comunicar: *teilen Sie … mit*."),
+        ch(0, "Elegí el verbo formal.", "Bitte ___ Sie uns Ihre neue Adresse mit.", "teilen", ["teilen", "sagen", "informieren"], "*mitteilen* (separable) = comunicar: *teilen Sie … mit*."),
         cz(0, "Escribí la palabra que falta (despedida formal).", "Mit freundlichen ___", "Grüßen", note="*Mit freundlichen Grüßen*, sin coma. " + MAY),
         cz(0, "Escribí la palabra («por la presente»).", "___ kündige ich meinen Vertrag zum 31. März.", "Hiermit", note="*Hiermit* = por la presente."),
         cz(0, "Escribí la preposición.", "Bezug nehmend ___ Ihr Schreiben vom 3. Mai teile ich Ihnen mit, dass …", "auf", note="*Bezug nehmend auf* + acusativo."),
@@ -270,7 +270,7 @@ WEEK = {
         # parte 2 — Behördendeutsch
         ch(2, "¿Qué significa?", "Der Antrag ist bis zum 1. Juni einzureichen.", "Hay que presentar la solicitud hasta el 1 de junio.", ["Hay que presentar la solicitud hasta el 1 de junio.", "La solicitud fue presentada el 1 de junio.", "La solicitud se puede presentar después del 1 de junio."], "*sein + zu* = obligación: debe presentarse."),
         ch(2, "Elegí la palabra.", "Gegen den Bescheid kann ___ eingelegt werden.", "Widerspruch", ["Widerspruch", "Antrag", "Anlage"], "*Widerspruch einlegen* = impugnar."),
-        ch(2, "¿Qué significa en alemán llano?", "Die Erstattung erfolgt innerhalb von vier Wochen.", "Sie bekommen das Geld in vier Wochen zurück.", ["Sie bekommen das Geld in vier Wochen zurück.", "Sie müssen in vier Wochen zahlen.", "Sie bekommen in vier Wochen einen Termin."], "*die Erstattung* = el reintegro; *erfolgen* = realizarse."),
+        ch(2, "¿Qué significa en alemán llano?", "Die Erstattung erfolgt innerhalb von vier Wochen.", "Sie bekommen das Geld spätestens in vier Wochen zurück.", ["Sie bekommen das Geld spätestens in vier Wochen zurück.", "Sie müssen in vier Wochen zahlen.", "Sie bekommen in vier Wochen einen Termin."], "*die Erstattung* = el reintegro; *erfolgen* = realizarse."),
         ch(2, "¿Qué significa *z. Hd.*?", "Weber GmbH, z. Hd. Frau Schulz", "a la atención de", ["a la atención de", "por orden de", "entre otras cosas"], "*z. Hd.* = *zu Händen*."),
         ch(2, "Elegí la forma correcta.", "bezüglich ___ Anfrage vom 3. Mai", "Ihrer", ["Ihrer", "Ihre", "Ihren"], "*bezüglich* + genitivo: *Ihrer Anfrage*."),
         ch(2, "Elegí la forma correcta.", "gemäß ___ Vertrag", "dem", ["dem", "des", "den"], "*gemäß* + dativo: *gemäß dem Vertrag*."),

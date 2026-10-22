@@ -65,7 +65,7 @@ WEEK = {
                 ],
                 "warn": "En castellano el futuro es una palabra («estudiaré») o «voy a + infinitivo». En alemán son dos piezas separadas: *Ich werde nächstes Jahr studieren*, nunca *Ich werde studieren nächstes Jahr*. Y cuidado con el inglés: *Ich will* es «quiero», no «voy a».",
                 "q": [
-                    q("¿Qué orden es correcto?", "Ich werde dich morgen anrufen.", ["Ich werde dich morgen anrufen.", "Ich werde anrufen dich morgen.", "Ich werde dich morgen anrufe."]),
+                    q("¿Qué orden es correcto?", "Ich werde dich morgen anrufen.", ["Ich werde dich morgen anrufen.", "Ich werde anrufen dich morgen.", "Ich werde dich morgen rufen an."]),
                     q("«Quiero estudiar» es…", "Ich will studieren.", ["Ich will studieren.", "Ich werde studieren.", "Ich werde zu studieren."]),
                 ],
             },
@@ -125,8 +125,8 @@ WEEK = {
                 ],
                 "warn": "Los inseparables no se abren: *zu besuchen*, nunca *bezusuchen*; *zu verstehen*, nunca *verzustehen*.",
                 "q": [
-                    q("*aufhören* con *zu*:", "aufzuhören", ["aufzuhören", "zu aufhören", "aufhörenzu"]),
-                    q("*verstehen* con *zu*:", "zu verstehen", ["zu verstehen", "verzustehen", "verstehenzu"]),
+                    q("*aufhören* con *zu*:", "aufzuhören", ["aufzuhören", "zu aufhören", "auf zu hören"]),
+                    q("*verstehen* con *zu*:", "zu verstehen", ["zu verstehen", "verzustehen", "zuverstehen"]),
                 ],
             },
             {
@@ -161,7 +161,7 @@ WEEK = {
                 "warn": "*damit* tiene dos vidas: conjunción («para que», verbo al final) y compuesto con *da-* de la semana 22 («con eso»: *Was machst du damit?*). Mirá dónde está el verbo.",
                 "more": ["Con el mismo sujeto también se puede usar *damit* (*Ich schreibe es auf, damit ich es nicht vergesse*), pero *um … zu* suena más natural."],
                 "q": [
-                    q("Completá: *Ich rufe dich an, ___ du nicht allein bist.*", "damit", ["damit", "um", "dass"]),
+                    q("Completá: *Ich rufe dich an, ___ du nicht allein bist.*", "damit", ["damit", "um", "für"]),
                     q("¿Cuál está bien?", "Sie arbeitet viel, damit ihr Sohn studieren kann.", ["Sie arbeitet viel, damit ihr Sohn studieren kann.", "Sie arbeitet viel, um ihr Sohn studieren kann.", "Sie arbeitet viel, damit ihr Sohn kann studieren."]),
                 ],
             },
@@ -205,7 +205,7 @@ WEEK = {
     "items": [
         # parte 0 — werden y el futuro
         ch(0, "Elegí la forma de *werden*.", "Du ___ bestimmt eine gute Lehrerin.", "wirst", ["wirst", "wird", "werdest"], "*du wirst*: sin *e* en la raíz."),
-        ch(0, "Elegí la forma de *werden*.", "Ihr ___ das sicher schaffen.", "werdet", ["werdet", "würdet", "wirdet"], "*ihr werdet*, con *e*."),
+        ch(0, "Elegí la forma de *werden*.", "Ihr ___ das sicher schaffen.", "werdet", ["werdet", "wirst", "wird"], "*ihr werdet*, con *e*."),
         ch(0, "Elegí la forma de *werden*.", "Es ___ langsam dunkel.", "wird", ["wird", "werd", "wirst"], "*es wird*: una sola *d*."),
         ch(0, "Elegí el orden correcto.", "(El año que viene voy a estudiar en Viena.)", "Ich werde nächstes Jahr in Wien studieren.", ["Ich werde nächstes Jahr in Wien studieren.", "Ich werde studieren nächstes Jahr in Wien.", "Ich werde nächstes Jahr in Wien studiere."], "*werden* en la posición 2, infinitivo al final."),
         ch(0, "¿Cómo se dice?", "«Quiero aprender alemán.»", "Ich will Deutsch lernen.", ["Ich will Deutsch lernen.", "Ich werde Deutsch lernen.", "Ich werde Deutsch zu lernen."], "*wollen* = querer. *Ich werde* es «voy a»."),
@@ -222,7 +222,7 @@ WEEK = {
         # parte 1 — infinitivo con zu
         ch(1, "Elegí la forma correcta.", "Hast du Lust, ins Kino ___?", "zu gehen", ["zu gehen", "gehen", "um gehen"], "*Lust haben* + *zu* + infinitivo."),
         ch(1, "¿Cuál está bien?", "(Mañana tengo que levantarme temprano.)", "Ich muss morgen früh aufstehen.", ["Ich muss morgen früh aufstehen.", "Ich muss morgen früh aufzustehen.", "Ich muss morgen früh zu aufstehen."], "Con modales, sin *zu*."),
-        ch(1, "Elegí la forma correcta.", "Es ist schwer, früh ___.", "aufzustehen", ["aufzustehen", "zu aufstehen", "aufstehen zu"], "Separable: *auf-zu-stehen*."),
+        ch(1, "Elegí la forma correcta.", "Es ist schwer, früh ___.", "aufzustehen", ["aufzustehen", "zu aufstehen", "aufstehen"], "Separable: *auf-zu-stehen*."),
         ch(1, "Elegí la forma correcta.", "Er versucht, mit dem Rauchen ___.", "aufzuhören", ["aufzuhören", "aufhören", "zu aufhören"], "*versuchen* + *zu*; separable: *aufzuhören*."),
         ch(1, "Elegí la forma correcta.", "Vergiss nicht, die Tür ___!", "abzuschließen", ["abzuschließen", "zu abschließen", "abschließen"], "*abschließen* es separable: *abzuschließen*."),
         ch(1, "Elegí la forma correcta.", "Sie hat beschlossen, Medizin ___.", "zu studieren", ["zu studieren", "studieren", "zustudieren"], "*studieren* no es separable: *zu studieren*, separado."),
@@ -237,12 +237,12 @@ WEEK = {
         ty(1, "Escribí *anfangen* con *zu*.", "anfangen → ?", "anzufangen", note="Separable: el *zu* va en el medio."),
         # parte 2 — um … zu, damit, wozu
         ch(2, "Elegí la conjunción.", "Ich lerne Deutsch, ___ in Berlin zu arbeiten.", "um", ["um", "damit", "für"], "Mismo sujeto (*ich*) y *zu* al final: *um … zu*."),
-        ch(2, "Elegí la conjunción.", "Ich erkläre es dir, ___ du es verstehst.", "damit", ["damit", "um", "zu"], "Cambia el sujeto (*ich* → *du*): *damit*."),
+        ch(2, "Elegí la conjunción.", "Ich erkläre es dir, ___ du es verstehst.", "damit", ["damit", "um", "für"], "Cambia el sujeto (*ich* → *du*): *damit*."),
         ch(2, "Elegí el orden correcto.", "(Ahorra plata para comprarse un auto.)", "Sie spart Geld, um ein Auto zu kaufen.", ["Sie spart Geld, um ein Auto zu kaufen.", "Sie spart Geld, um zu kaufen ein Auto.", "Sie spart Geld, für ein Auto zu kaufen."], "*um* + resto + *zu* + infinitivo."),
         ch(2, "Elegí el orden correcto.", "(Te escribo para que tengas la dirección.)", "Ich schreibe dir, damit du die Adresse hast.", ["Ich schreibe dir, damit du die Adresse hast.", "Ich schreibe dir, damit du hast die Adresse.", "Ich schreibe dir, um du die Adresse hast."], "*damit* + verbo al final."),
         ch(2, "Elegí la pregunta.", "___ lernst du Deutsch? – Um in Österreich zu studieren.", "Wozu", ["Wozu", "Wohin", "Wann"], "Finalidad: *Wozu?*"),
         ch(2, "Elegí la pregunta.", "___ lernst du Deutsch? – Weil mein Freund aus Bremen kommt.", "Warum", ["Warum", "Wozu", "Wohin"], "Causa con *weil*: *Warum?*"),
-        ch(2, "Elegí el final.", "Um fit zu bleiben, ___.", "gehe ich joggen", ["gehe ich joggen", "ich gehe joggen", "joggen ich gehe"], "Después del grupo con *um … zu*, el verbo de la principal va primero."),
+        ch(2, "Elegí el final.", "Um fit zu bleiben, ___.", "gehe ich joggen", ["gehe ich joggen", "ich gehe joggen", "ich joggen gehe"], "Después del grupo con *um … zu*, el verbo de la principal va primero."),
         cz(2, "Escribí la conjunción.", "Wir stehen früh auf, ___ den Zug nicht zu verpassen.", "um", note="Mismo sujeto: *um … zu*."),
         cz(2, "Escribí la conjunción.", "Sprich bitte lauter, ___ alle dich hören.", "damit", note="Otro sujeto (*alle*): *damit*."),
         cz(2, "Escribí el pronombre.", "Ich nehme ___ vor, weniger zu arbeiten.", "mir", note="*sich vornehmen* con dativo: *ich nehme mir vor*."),

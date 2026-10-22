@@ -53,7 +53,7 @@ WEEK = {
                     ["Präsens", "Das Problem lässt sich lösen."],
                     ["Präteritum", "Das Problem ließ sich lösen."],
                     ["Perfekt", "Das Problem hat sich lösen lassen."],
-                    ["con modal", "Das Problem wird sich lösen lassen."],
+                    ["Futur I", "Das Problem wird sich lösen lassen."],
                 ]},
                 "ex": [
                     ["Der Vertrag *lässt sich* jederzeit *kündigen*.", "El contrato se puede rescindir en cualquier momento."],
@@ -86,8 +86,8 @@ WEEK = {
                 ],
                 "warn": "*-bar* solo funciona con verbos que tienen objeto directo: «schlafbar» o «gehbar» no existen (salvo *begehbar*, con *be-*: transitable).",
                 "q": [
-                    q("«La campera se puede lavar»: *Die Jacke ist ___.*", "waschbar", ["waschbar", "waschlich", "waschlos"]),
-                    q("«Los alquileres en Múnich no se pueden pagar»: *Die Mieten in München sind ___.*", "unbezahlbar", ["unbezahlbar", "unbezahlt", "bezahllos"]),
+                    q("«La campera se puede lavar»: *Die Jacke ist ___.*", "waschbar", ["waschbar", "gewaschen", "waschbare"]),
+                    q("«Los alquileres en Múnich no se pueden pagar»: *Die Mieten in München sind ___.*", "unbezahlbar", ["unbezahlbar", "unbezahlt", "bezahlbar"]),
                 ],
             },
             {
@@ -108,7 +108,7 @@ WEEK = {
                 "tip": "Pensá en nuestro «a + infinitivo» de los papeles: «total a pagar», «asuntos a tratar». *Der zu zahlende Betrag* es exactamente eso.",
                 "q": [
                     q("*Die Rechnung ist bis Freitag zu bezahlen* =", "La factura debe pagarse hasta el viernes.", ["La factura debe pagarse hasta el viernes.", "La factura fue pagada el viernes.", "La factura se pagará el viernes."]),
-                    q("Completá: *Das Formular ist bis Montag ___.* (abgeben)", "abzugeben", ["abzugeben", "zu abgeben", "abgeben zu"]),
+                    q("Completá: *Das Formular ist bis Montag ___.* (abgeben)", "abzugeben", ["abzugeben", "zu abgeben", "abgeben"]),
                 ],
             },
             {
@@ -124,7 +124,7 @@ WEEK = {
                 "more": ["*sein + zu* y *haben + zu* vuelven en la semana 49, en la lengua académica: *Es ist davon auszugehen, dass …*"],
                 "q": [
                     q("*Sie haben die Gebühr bis Montag zu zahlen* =", "Sie müssen die Gebühr bis Montag zahlen.", ["Sie müssen die Gebühr bis Montag zahlen.", "Sie haben die Gebühr bis Montag gezahlt.", "Sie können die Gebühr bis Montag zahlen."]),
-                    q("«Queda por ver»:", "Es bleibt abzuwarten.", ["Es bleibt abzuwarten.", "Es gilt abzuwarten.", "Es bleibt zu abwarten."]),
+                    q("«Queda por ver»:", "Es bleibt abzuwarten.", ["Es bleibt abzuwarten.", "Es bleibt abwarten.", "Es bleibt zu abwarten."]),
                 ],
             },
             {
@@ -191,8 +191,8 @@ WEEK = {
         ch(0, "¿Qué oración dice lo mismo?", "Das Fenster kann nicht geöffnet werden.", "Das Fenster lässt sich nicht öffnen.", ["Das Fenster lässt sich nicht öffnen.", "Das Fenster lässt nicht öffnen.", "Das Fenster lässt sich nicht geöffnet."], "*sich lassen* + infinitivo = *können* + pasiva."),
         ch(0, "Elegí la forma.", "Der Fehler ___ sich leicht beheben.", "lässt", ["lässt", "lassen", "ist"], "Sujeto singular (*der Fehler*): *lässt*."),
         ch(0, "Elegí la forma.", "Der Drucker hat sich nicht reparieren ___.", "lassen", ["lassen", "gelassen", "lässt"], "Perfekt con otro infinitivo: *lassen* va en infinitivo."),
-        ch(0, "Elegí el adjetivo.", "Das Gerät kann man reparieren. = Das Gerät ist ___.", "reparierbar", ["reparierbar", "reparierlich", "reparierlos"], "*-bar* = que se puede."),
-        ch(0, "Elegí el adjetivo.", "Die Mieten kann niemand bezahlen. = Die Mieten sind ___.", "unbezahlbar", ["unbezahlbar", "unbezahlt", "bezahllos"], "*un- … -bar* = que no se puede. *unbezahlt* = no pagado."),
+        ch(0, "Elegí el adjetivo.", "Das Gerät kann man reparieren. = Das Gerät ist ___.", "reparierbar", ["reparierbar", "repariert", "reparierbares"], "*-bar* = que se puede."),
+        ch(0, "Elegí el adjetivo.", "Die Mieten kann niemand bezahlen. = Die Mieten sind ___.", "unbezahlbar", ["unbezahlbar", "unbezahlt", "bezahlbar"], "*un- … -bar* = que no se puede. *unbezahlt* = no pagado."),
         ch(0, "¿Qué significa?", "Ich lasse das Handy reparieren.", "Mando a arreglar el celular.", ["Mando a arreglar el celular.", "El celular se puede arreglar.", "Dejo de arreglar el celular."], "Sin *sich*, *lassen* = hacer que otro lo haga."),
         ch(0, "¿Qué significa?", "Das lässt sich machen.", "Eso se puede hacer.", ["Eso se puede hacer.", "Dejá que lo haga.", "Eso hay que hacerlo."], "*sich lassen* = posibilidad."),
         cz(0, "Escribí la forma de *lassen*.", "Die Tür ___ sich nicht schließen.", "lässt", ["lässt", "laesst"], "*die Tür* = *sie* → *lässt*."),
@@ -207,7 +207,7 @@ WEEK = {
         # parte 1 — sein + zu, es gilt zu, haben + zu
         ch(1, "¿Qué significa?", "Die Rechnung ist bis Freitag zu bezahlen.", "La factura debe pagarse hasta el viernes.", ["La factura debe pagarse hasta el viernes.", "La factura se puede pagar el viernes.", "La factura fue pagada el viernes."], "En normas y facturas, *sein + zu* = obligación."),
         ch(1, "¿Qué significa?", "Der Fehler ist leicht zu finden.", "El error es fácil de encontrar.", ["El error es fácil de encontrar.", "El error tiene que encontrarse.", "El error fue encontrado."], "Con *leicht*, *sein + zu* = posibilidad."),
-        ch(1, "Elegí la forma.", "Die Ware ist innerhalb von 14 Tagen ___.", "zurückzuschicken", ["zurückzuschicken", "zu zurückschicken", "zurückschicken zu"], "Separable: *zu* en el medio, todo junto."),
+        ch(1, "Elegí la forma.", "Die Ware ist innerhalb von 14 Tagen ___.", "zurückzuschicken", ["zurückzuschicken", "zu zurückschicken", "zurückschicken"], "Separable: *zu* en el medio, todo junto."),
         ch(1, "¿Qué oración dice lo mismo?", "Das ist nicht zu glauben.", "Das kann man nicht glauben.", ["Das kann man nicht glauben.", "Das muss man nicht glauben.", "Das darf man nicht glauben."], "*nicht zu* + infinitivo = no se puede."),
         ch(1, "¿Qué significa?", "Jetzt gilt es, schnell eine Lösung zu finden.", "Ahora hay que encontrar rápido una solución.", ["Ahora hay que encontrar rápido una solución.", "Ahora vale la solución rápida.", "Ahora se encontró rápido una solución."], "*es gilt, … zu* = hay que, se trata de."),
         ch(1, "¿Qué oración dice lo mismo?", "Sie haben die Gebühr bis Montag zu zahlen.", "Sie müssen die Gebühr bis Montag zahlen.", ["Sie müssen die Gebühr bis Montag zahlen.", "Sie haben die Gebühr bis Montag gezahlt.", "Sie können die Gebühr bis Montag zahlen."], "*haben + zu* = tener que (formal)."),

@@ -86,7 +86,7 @@ WEEK = {
                 "warn": "No mezcles las dos: *als ob wäre nichts* o *als nichts passiert wäre* están mal. Con *ob*, verbo al final; sin *ob*, verbo pegado a *als*.",
                 "tip": "*Als ob!*, solo y con ironía, es nuestro «¡Sí, seguro!»: *Er will pünktlich sein? Als ob!*",
                 "q": [
-                    q("Completá sin *ob*: *Er tut, als ___ er nichts gesehen.*", "hätte", ["hätte", "habe", "hat"]),
+                    q("Completá sin *ob*: *Er tut, als ___ er nichts gesehen.*", "hätte", ["hätte", "hatte", "hat"]),
                     q("¿Qué oración es correcta?", "Sie lacht, als wäre nichts passiert.", ["Sie lacht, als wäre nichts passiert.", "Sie lacht, als nichts passiert wäre.", "Sie lacht, als ob wäre nichts passiert."]),
                 ],
             },
@@ -124,7 +124,7 @@ WEEK = {
                 "warn": "*vorwerfen* lleva **dativo** de persona y acusativo de cosa: *Sie wirft* ***ihm*** *Leichtsinn vor*. Es separable: el *vor* va al final.",
                 "tip": "*Das hättest du dir sparen können* es el clásico para cuando alguien hizo un comentario innecesario.",
                 "q": [
-                    q("¿Cómo decís «¡Por lo menos podrías haber llamado!»?", "Du hättest wenigstens anrufen können!", ["Du hättest wenigstens anrufen können!", "Du hättest wenigstens angerufen können!", "Du könntest wenigstens anrufen gehabt!"]),
+                    q("¿Cómo decís «¡Por lo menos podrías haber llamado!»?", "Du hättest wenigstens anrufen können!", ["Du hättest wenigstens anrufen können!", "Du hättest wenigstens angerufen können!", "Du hättest wenigstens anrufen gekonnt!"]),
                     q("Completá: *Sie wirft ___ Unpünktlichkeit vor.* (a él)", "ihm", ["ihm", "ihn", "er"]),
                 ],
             },
@@ -197,7 +197,7 @@ WEEK = {
         ["die Rücksicht", "la consideración (por los demás)", "Du hättest mehr Rücksicht auf die Nachbarn nehmen sollen."],
         ["ahnen", "sospechar, intuir", "Das konnte doch niemand ahnen!"],
         ["sich einmischen", "meterse (en algo ajeno)", "Misch dich nicht in meine Angelegenheiten ein!"],
-        ["beleidigt", "ofendido", "Sie ist beleidigt, als hätte ich sie angeschrien."],
+        ["beleidigt", "ofendido", "Sie ist so beleidigt, als hätte ich sie angeschrien."],
         ["die Gewissensbisse", "el remordimiento (en plural)", "Er hatte Gewissensbisse, weil er nicht angerufen hatte."],
         ["die Einbildung", "la imaginación (lo imaginado), la ilusión", "Das ist reine Einbildung."],
     ],

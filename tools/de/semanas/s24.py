@@ -80,7 +80,7 @@ WEEK = {
                 "tip": "Fijate que en castellano el subjuntivo marca lo que buscás y no conocés («un departamento que **cueste** poco»); en alemán, indicativo normal: *eine Wohnung, die wenig **kostet***.",
                 "q": [
                     q("¿Qué orden es correcto?", "Das ist die Frau, die gestern angerufen hat.", ["Das ist die Frau, die gestern angerufen hat.", "Das ist die Frau, die hat gestern angerufen.", "Das ist die Frau, die gestern hat angerufen."]),
-                    q("Completá: *Ich kaufe das Handy, ___.*", "das mir gefällt", ["das mir gefällt", "das gefällt mir", "das mir gefallen"]),
+                    q("Completá: *Ich kaufe das Handy, ___.*", "das mir gefällt", ["das mir gefällt", "das gefällt mir", "der mir gefällt"]),
                 ],
             },
             {
@@ -147,7 +147,7 @@ WEEK = {
                     ["superlativo", "Das ist das Beste, was du machen kannst.", "Es lo mejor que podés hacer."],
                     ["toda la oración", "Er kommt immer zu spät, was mich ärgert.", "Siempre llega tarde, lo que me da bronca."],
                 ]},
-                "warn": "Con *alles*, *nichts* y *etwas* no uses *das*: *alles, das ich weiß* está mal; va *alles, **was** ich weiß*. Con un sustantivo neutro, en cambio, sí va *das*: *das Buch, das ich lese*.",
+                "warn": "Con *alles* y *nichts* va *was* (*alles, **was** ich weiß*); con *etwas* lo más común es *was*, aunque *das* también se usa. Con un sustantivo neutro, en cambio, sí va *das*: *das Buch, das ich lese*.",
                 "q": [
                     q("Completá: *Das ist alles, ___ ich habe.*", "was", ["was", "das", "dass"]),
                     q("Completá: *Er hat die Prüfung bestanden, ___ alle überrascht hat.*", "was", ["was", "das", "der"]),
@@ -213,7 +213,7 @@ WEEK = {
         ch(1, "Elegí el relativo.", "Das sind die Kollegen, mit ___ ich arbeite.", "denen", ["denen", "den", "die"], "*mit* + dativo plural: *denen*."),
         ch(1, "Elegí el relativo.", "Das ist der Bus, auf ___ ich warte.", "den", ["den", "dem", "der"], "*warten auf* + acusativo: *auf den*."),
         ch(1, "Elegí el relativo.", "Die Stadt, in ___ ich wohne, ist sehr grün.", "der", ["der", "die", "dem"], "*in* + dativo (dónde), femenino: *in der*."),
-        ch(1, "Elegí el relativo.", "Das Thema, über ___ wir sprechen, ist wichtig.", "das", ["das", "dem", "was"], "*sprechen über* + acusativo, neutro: *über das*."),
+        ch(1, "Elegí el relativo.", "Das Thema, über ___ wir sprechen, ist wichtig.", "das", ["das", "dem", "den"], "*sprechen über* + acusativo, neutro: *über das*."),
         ch(1, "Elegí el relativo.", "Wie heißt das Mädchen, ___ du die Blumen geschenkt hast?", "dem", ["dem", "das", "der"], "*das Mädchen* es neutro; *schenken* + dativo de persona → *dem*."),
         cz(1, "Escribí el relativo.", "Die Freunde, ___ ich vertraue, kann ich immer anrufen.", "denen", note="*vertrauen* + dativo plural: *denen*."),
         cz(1, "Escribí el relativo.", "Das ist die Kollegin, mit ___ ich oft Mittag esse.", "der", note="*mit* + dativo femenino: *der*."),
@@ -232,7 +232,7 @@ WEEK = {
         ch(2, "Elegí el relativo.", "Ein Dosenöffner ist ein Gerät, mit ___ man Dosen öffnet.", "dem", ["dem", "das", "was"], "*das Gerät*, con *mit* + dativo: *mit dem*."),
         ch(2, "Elegí el relativo.", "Das ist das Schönste, ___ ich je gesehen habe.", "was", ["was", "das", "wo"], "Después de un superlativo neutro: *was*."),
         cz(2, "Escribí el relativo.", "Das, ___ du sagst, ist nicht richtig.", "was", note="*das, was…* = lo que."),
-        cz(2, "Escribí el relativo.", "Gibt es etwas, ___ du nicht isst?", "was", note="Después de *etwas*: *was*."),
+        cz(2, "Escribí el relativo.", "Gibt es etwas, ___ du nicht isst?", "was", accept=["was", "das"], note="Después de *etwas*: lo más común es *was* (también se usa *das*)."),
         cz(2, "Escribí el relativo.", "Eine Bibliothek ist ein Ort, ___ man Bücher ausleihen kann.", "wo", ["wo", "an dem"], "Lugar: *wo* (o *an dem*, por *der Ort*)."),
         cz(2, "Escribí el relativo.", "Eine Schere ist ein Gegenstand, mit ___ man Papier schneidet.", "dem", note="Concuerda con *der Gegenstand*: *mit dem*."),
         cz(2, "Escribí el relativo.", "Ein Kellner ist jemand, ___ im Restaurant arbeitet.", "der", note="*jemand, der…*"),

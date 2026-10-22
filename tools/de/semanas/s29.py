@@ -141,7 +141,7 @@ WEEK = {
                 "tip": "*Je eher, desto besser* es una frase hecha que te va a servir en todos lados, sin verbo ni nada.",
                 "q": [
                     q("Completá: *Je ___ das Wetter ist, desto lieber gehe ich raus.* (gut)", "besser", ["besser", "guter", "am besten"]),
-                    q("¿Qué podés usar en lugar de *desto*?", "umso", ["umso", "als", "wie"]),
+                    q("¿Qué podés usar en lugar de *desto*?", "umso", ["umso", "als", "dann"]),
                 ],
             },
             {
@@ -218,11 +218,11 @@ WEEK = {
         ty(1, "Uní las dos oraciones con *zwar … aber*.", "Das Stipendium ist klein. Es reicht.", "Das Stipendium ist zwar klein, aber es reicht.", ["Das Stipendium ist zwar klein, aber es reicht.", "Zwar ist das Stipendium klein, aber es reicht."], "*zwar* en la primera oración, *aber* abre la segunda."),
         li(1, "Zeugnis", ["Zeugnis", "Zeichnung", "Zeugen"], "*das Zeugnis* = el boletín, el certificado."),
         # parte 2 — je … desto y el sistema educativo
-        ch(2, "Elegí la palabra.", "Je mehr du lernst, ___ besser wird deine Note.", "desto", ["desto", "als", "wie"], "*je … desto*."),
+        ch(2, "Elegí la palabra.", "Je mehr du lernst, ___ besser wird deine Note.", "desto", ["desto", "als", "dann"], "*je … desto*."),
         ch(2, "¿Qué orden es correcto?", "(Cuanto más viejo uno es, menos duerme.)", "Je älter man wird, desto weniger schläft man.", ["Je älter man wird, desto weniger schläft man.", "Je älter man wird, desto weniger man schläft.", "Je älter wird man, desto weniger schläft man."], "*je*: verbo al final; *desto* + comparativo + verbo + sujeto."),
         ch(2, "Elegí la forma.", "Je ___ du übst, desto sicherer wirst du.", "öfter", ["öfter", "oft", "am öftesten"], "Hace falta un comparativo: *öfter*."),
         ch(2, "Elegí el final.", "Je früher wir anfangen, …", "desto früher sind wir fertig.", ["desto früher sind wir fertig.", "desto früher wir sind fertig.", "desto früher wir fertig sind."], "Después de *desto* + comparativo, el verbo."),
-        ch(2, "¿Qué es *das Abitur*?", "Nach dem Abitur möchte sie studieren.", "el título secundario que habilita a la universidad", ["el título secundario que habilita a la universidad", "el examen de manejo", "una carrera universitaria"], "El *Abitur* cierra el *Gymnasium*."),
+        ch(2, "¿Qué es *das Abitur*?", "Nach dem Abitur möchte sie studieren.", "el título secundario que habilita a la universidad", ["el título secundario que habilita a la universidad", "un curso de formación profesional", "una carrera universitaria"], "El *Abitur* cierra el *Gymnasium*."),
         cz(2, "Escribí el comparativo de *gut*.", "Je mehr ich lese, desto ___ verstehe ich die Texte.", "besser", note="*gut* → *besser*."),
         cz(2, "Escribí el comparativo de *viel*.", "Je ___ Studenten es gibt, desto voller sind die Hörsäle.", "mehr", note="*viel* → *mehr*."),
         cz(2, "Escribí lo que falta.", "___ länger ich in Berlin wohne, desto besser gefällt mir die Stadt.", "Je", note="*Je* + comparativo, verbo al final."),

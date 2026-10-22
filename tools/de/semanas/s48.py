@@ -194,7 +194,7 @@ WEEK = {
                 ]},
                 "ex": [
                     ["Bist du dir *der Konsequenzen* bewusst?", "¿Sos consciente de las consecuencias?"],
-                    ["Der Aufwand war *der Mühe* wert.", "El esfuerzo valió la pena."],
+                    ["Die Reise war *der Mühe* wert.", "El viaje valió la pena."],
                 ],
                 "warn": "*sich bewusst sein* lleva **dos** cosas: el reflexivo en dativo (*mir, dir, sich*) y la cosa en genitivo: *Ich bin **mir des** Problems bewusst.* Nada de *von* ni *über*.",
                 "more": ["*wert* también va con acusativo en el habla: *Das ist einen Versuch wert* (vale la pena intentarlo), *Es ist die Mühe wert*. En expresiones fijas como *nicht der Rede wert*, genitivo."],

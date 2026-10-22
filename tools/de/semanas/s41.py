@@ -131,7 +131,7 @@ WEEK = {
                 "warn": "*bzgl.* (bezüglich) no es lo mismo que *bzw.* (*beziehungsweise* = o bien, respectivamente). Las dos abreviaturas aparecen en los mismos mails.",
                 "tip": "En un mail, *Bezüglich Ihrer Anfrage …* abre con elegancia. En la charla decís simplemente *Wegen deiner Frage …* o *Zu deiner Frage …*",
                 "q": [
-                    q("*bzgl.* es la abreviatura de…", "bezüglich", ["bezüglich", "beziehungsweise", "bezahlt"]),
+                    q("*bzgl.* es la abreviatura de…", "bezüglich", ["bezüglich", "beziehungsweise", "beispielsweise"]),
                     q("Completá: *Bezüglich ___ Termins melde ich mich morgen.*", "des", ["des", "dem", "den"]),
                 ],
             },
@@ -169,7 +169,7 @@ WEEK = {
                 "warn": "«Dentro de tres días» como plazo **máximo** es *innerhalb von drei Tagen*; si querés decir «dentro de tres días» como momento futuro («de acá a tres días»), es *in drei Tagen*.",
                 "q": [
                     q("Completá: *innerhalb ___ drei Monaten*", "von", ["von", "der", "des"]),
-                    q("«Fuera de la UE»:", "außerhalb der EU", ["außerhalb der EU", "außerhalb die EU", "außerhalb von der EU"]),
+                    q("«Fuera de la UE»:", "außerhalb der EU", ["außerhalb der EU", "außerhalb die EU", "außer der EU"]),
                 ],
             },
             {
@@ -205,7 +205,7 @@ WEEK = {
                 "warn": "*wegen dem* en un examen escrito o un mail formal es un error de registro. Y no exageres en la charla: decir *angesichts* en un asado suena a noticiero.",
                 "q": [
                     q("¿Cuál es la forma del registro escrito?", "wegen des Streiks", ["wegen des Streiks", "wegen dem Streik", "wegen der Streik"]),
-                    q("*Weil die Nachfrage sinkt* → ___ der sinkenden Nachfrage", "Aufgrund", ["Aufgrund", "Anstatt", "Außerhalb"]),
+                    q("*Weil die Nachfrage sinkt* → ___ der sinkenden Nachfrage", "Aufgrund", ["Aufgrund", "Anstatt", "Trotz"]),
                 ],
             },
         ],
@@ -252,7 +252,7 @@ WEEK = {
         ch(1, "Elegí la preposición.", "Er nahm den Zug ___ des Flugzeugs.", "statt", ["statt", "bezüglich", "mittels"], "«En lugar de»: *(an)statt*."),
         ch(1, "¿Qué significa?", "Anstatt zu investieren, hat die Firma gespart.", "En lugar de invertir, la empresa ahorró.", ["En lugar de invertir, la empresa ahorró.", "Para invertir, la empresa ahorró.", "Aunque invirtió, la empresa ahorró."], "*anstatt … zu* = en lugar de + infinitivo."),
         ch(1, "¿Qué significa?", "Hinsichtlich der Kosten gibt es noch Fragen.", "En cuanto a los costos, todavía hay preguntas.", ["En cuanto a los costos, todavía hay preguntas.", "A pesar de los costos, todavía hay preguntas.", "Por los costos, ya no hay preguntas."], "*hinsichtlich* = en cuanto a."),
-        ch(1, "¿Qué significa la abreviatura?", "bzgl.", "bezüglich", ["bezüglich", "beziehungsweise", "bezahlt"], "*bzgl.* = bezüglich; *bzw.* = beziehungsweise."),
+        ch(1, "¿Qué significa la abreviatura?", "bzgl.", "bezüglich", ["bezüglich", "beziehungsweise", "beispielsweise"], "*bzgl.* = bezüglich; *bzw.* = beziehungsweise."),
         cz(1, "Escribí el artículo.", "Bezüglich ___ Termins melde ich mich morgen.", "des", note="*der Termin* → *des Termins*."),
         cz(1, "Escribí el artículo.", "Die Produkte unterscheiden sich hinsichtlich ___ Qualität.", "der", note="*die Qualität* → *der Qualität*."),
         cz(1, "Escribí la preposición (mediante).", "Die Zahlung erfolgt ___ Überweisung.", "mittels", note="*mittels* = mediante; aquí sin artículo."),

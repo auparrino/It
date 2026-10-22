@@ -52,7 +52,7 @@ WEEK = {
                 "warn": "*Schwein haben* no tiene nada de insulto: es positivo. En cambio, decirle *Schwein* a alguien sí es un insulto.",
                 "tip": "*der Kater* es también el gato macho: *mein Kater* puede ser tu gato o tu resaca. Decide el contexto.",
                 "q": [
-                    q("*Schwein haben* significa…", "tener suerte", ["tener suerte", "ser sucio", "comer mucho"]),
+                    q("*Schwein haben* significa…", "tener suerte", ["tener suerte", "ser un chancho", "pasarla bomba"]),
                     q("Si en una fiesta *steppt der Bär*…", "hay mucha diversión", ["hay mucha diversión", "hay un problema", "se terminó temprano"]),
                 ],
             },
@@ -78,7 +78,7 @@ WEEK = {
                 "tip": "*Das ist mir Wurst* también se escribe con minúscula, *wurst*: las dos grafías son correctas.",
                 "q": [
                     q("Completá: *Du gehst ___ auf den Keks!*", "mir", ["mir", "mich", "ich"]),
-                    q("*Das ist mir Wurst* significa…", "me da igual", ["me da igual", "tengo hambre", "es una mentira"]),
+                    q("*Das ist mir Wurst* significa…", "me da igual", ["me da igual", "me parece raro", "estoy harto"]),
                 ],
             },
             {
@@ -125,8 +125,8 @@ WEEK = {
                 "warn": "*Das kommt mir spanisch vor* no tiene nada que ver con el castellano: significa que algo es **raro**. *vorkommen* es separable: *kommt … vor*.",
                 "tip": "Su *Groschen* era la monedita de diez *Pfennig* de los viejos aparatos automáticos: misma imagen que nuestra ficha de teléfono, otra moneda.",
                 "q": [
-                    q("*Ich verstehe nur Bahnhof* significa…", "no entiendo nada", ["no entiendo nada", "solo entiendo de trenes", "entiendo todo"]),
-                    q("*Das kommt mir spanisch vor* significa…", "me parece raro", ["me parece raro", "suena a castellano", "me gusta mucho"]),
+                    q("*Ich verstehe nur Bahnhof* significa…", "no entiendo nada", ["no entiendo nada", "solo entiendo de trenes", "me parece raro"]),
+                    q("*Das kommt mir spanisch vor* significa…", "me parece raro", ["me parece raro", "suena a castellano", "me suena conocido"]),
                 ],
             },
             {
@@ -149,7 +149,7 @@ WEEK = {
                 "warn": "*herumreden* es separable: *Er redet um den heißen Brei herum*. Y *ins Fettnäpfchen treten* hace el Perfekt con *sein*, porque hay movimiento: *Ich bin ins Fettnäpfchen getreten*.",
                 "q": [
                     q("Le preguntaste a una mujer para cuándo espera el bebé, y no está embarazada. ¿Qué hiciste?", "ins Fettnäpfchen getreten", ["ins Fettnäpfchen getreten", "auf dem Schlauch gestanden", "die Kirche im Dorf gelassen"]),
-                    q("*um den heißen Brei herumreden* significa…", "andar con vueltas", ["andar con vueltas", "cocinar mal", "hablar demasiado rápido"]),
+                    q("*um den heißen Brei herumreden* significa…", "andar con vueltas", ["andar con vueltas", "meter la pata", "hablar demasiado rápido"]),
                 ],
             },
             {
@@ -187,7 +187,7 @@ WEEK = {
                 "more": ["En un texto argumentativo un refrán puede cerrar un párrafo, pero en C1 se espera que no abuses: uno por texto alcanza."],
                 "q": [
                     q("«De tal palo, tal astilla» es…", "Der Apfel fällt nicht weit vom Stamm.", ["Der Apfel fällt nicht weit vom Stamm.", "Übung macht den Meister.", "Aller Anfang ist schwer."]),
-                    q("Completá: *Lügen haben kurze ___.*", "Beine", ["Beine", "Arme", "Ohren"]),
+                    q("Completá: *Lügen haben kurze ___.*", "Beine", ["Beine", "Pfoten", "Füße"]),
                 ],
             },
             {
@@ -208,7 +208,7 @@ WEEK = {
                 "tip": "Para sonar natural sin riesgo: *Ich drücke dir die Daumen* y *Schwein gehabt!* sirven en casi cualquier contexto informal.",
                 "q": [
                     q("En un mail formal, en vez de *Das ist mir Wurst*, escribís…", "Das ist mir gleichgültig.", ["Das ist mir gleichgültig.", "Das ist mir Käse.", "Das ist nicht mein Bier."]),
-                    q("*Ich glaub, mein Schwein pfeift!* expresa…", "asombro", ["asombro", "hambre", "tristeza"]),
+                    q("*Ich glaub, mein Schwein pfeift!* expresa…", "asombro", ["asombro", "suerte", "tristeza"]),
                 ],
             },
         ],
@@ -235,11 +235,11 @@ WEEK = {
         # parte 0 — animales, comida, cuerpo
         ch(0, "Elegí la palabra.", "Wir haben den letzten Zug noch erwischt. Da haben wir ___ gehabt!", "Schwein", ["Schwein", "Hund", "Bär"], "*Schwein haben* = tener suerte."),
         ch(0, "Elegí el verbo.", "Ich ___ dir morgen die Daumen.", "drücke", ["drücke", "kreuze", "halte"], "En alemán se aprietan los pulgares: *die Daumen drücken*."),
-        ch(0, "Elegí la palabra.", "Hast du ___ auf den Augen? Der Schlüssel liegt doch vor dir!", "Tomaten", ["Tomaten", "Kartoffeln", "Gurken"], "*Tomaten auf den Augen haben* = no ver lo evidente."),
-        ch(0, "¿Qué significa?", "Ich habe die Nase voll.", "Estoy harto.", ["Estoy harto.", "Estoy resfriado.", "Estoy satisfecho."], "*die Nase voll haben* = estar harto."),
+        ch(0, "Elegí la palabra.", "Hast du ___ auf den Augen? Der Schlüssel liegt doch vor dir!", "Tomaten", ["Tomaten", "Sand", "ein Brett"], "*Tomaten auf den Augen haben* = no ver lo evidente."),
+        ch(0, "¿Qué significa?", "Ich habe die Nase voll.", "Estoy harto.", ["Estoy harto.", "Estoy resfriado.", "Estoy lleno."], "*die Nase voll haben* = estar harto."),
         ch(0, "Elegí el verbo.", "Auf der Party gestern ___ der Bär!", "steppte", ["steppte", "lief", "schlief"], "*Da steppt der Bär*: había fiesta en serio."),
         ch(0, "Elegí el pronombre.", "Du gehst ___ auf den Keks.", "mir", ["mir", "mich", "ich"], "*jemandem auf den Keks gehen*: dativo."),
-        ch(0, "Elegí la palabra.", "Pizza oder Pasta? Das ist mir ___.", "Wurst", ["Wurst", "Brot", "Senf"], "*Das ist mir Wurst* = me da igual."),
+        ch(0, "Elegí la palabra.", "Pizza oder Pasta? Das ist mir ___.", "Wurst", ["Wurst", "Käse", "Senf"], "*Das ist mir Wurst* = me da igual."),
         cz(0, "Escribí la palabra que falta («arrugó»).", "Kurz vor der Hochzeit bekam er kalte ___.", "Füße", note="*kalte Füße bekommen* = echarse atrás por miedo. " + MAY),
         cz(0, "Escribí la partícula separable.", "Diesmal drücke ich noch ein Auge ___.", "zu", note="*ein Auge zudrücken*: separable."),
         cz(0, "Escribí la palabra («resaca»).", "Nach der Party hatte sie einen ___.", "Kater", note="*einen Kater haben* = estar de resaca. " + MAY),
@@ -254,12 +254,12 @@ WEEK = {
            "Coloquial: *Schwein haben*; neutro: *Glück haben*."),
         li(0, "Schwein", ["Schwein", "Schwan", "Schein"], "*Schwein* (chancho, y suerte), *Schwan* (cisne), *Schein* (billete, apariencia)."),
         # parte 1 — entender, meter la pata
-        ch(1, "Elegí la palabra.", "Er hat mir die Steuererklärung erklärt, aber ich verstehe nur ___.", "Bahnhof", ["Bahnhof", "Flughafen", "Bahnsteig"], "*Ich verstehe nur Bahnhof* = no entiendo nada."),
+        ch(1, "Elegí la palabra.", "Er hat mir die Steuererklärung erklärt, aber ich verstehe nur ___.", "Bahnhof", ["Bahnhof", "Spanisch", "Bahnsteig"], "*Ich verstehe nur Bahnhof* = no entiendo nada."),
         ch(1, "Elegí la palabra.", "Dass er plötzlich so nett ist, kommt mir ___ vor.", "spanisch", ["spanisch", "chinesisch", "deutsch"], "*Das kommt mir spanisch vor* = me parece raro."),
-        ch(1, "¿Qué significa *auf dem Schlauch stehen*?", "Ich stehe gerade auf dem Schlauch.", "no caer, estar bloqueado", ["no caer, estar bloqueado", "esperar el colectivo", "regar el jardín"], "*auf dem Schlauch stehen*: no te sale la idea."),
+        ch(1, "¿Qué significa *auf dem Schlauch stehen*?", "Ich stehe gerade auf dem Schlauch.", "no caer, estar bloqueado", ["no caer, estar bloqueado", "meter la pata", "tomarle el pelo a alguien"], "*auf dem Schlauch stehen*: no te sale la idea."),
         ch(1, "Elegí el participio.", "Mit dieser Bemerkung hast du den Nagel auf den Kopf ___.", "getroffen", ["getroffen", "geschlagen", "gefunden"], "*den Nagel auf den Kopf treffen* = dar en el clavo."),
-        ch(1, "Elegí la palabra.", "Red nicht um den heißen ___ herum!", "Brei", ["Brei", "Kaffee", "Tee"], "*um den heißen Brei herumreden* = andar con vueltas."),
-        ch(1, "Elegí la palabra.", "Du willst mich doch auf den ___ nehmen!", "Arm", ["Arm", "Kopf", "Fuß"], "*jemanden auf den Arm nehmen* = tomarle el pelo."),
+        ch(1, "Elegí la palabra.", "Red nicht um den heißen ___ herum!", "Brei", ["Brei", "Busch", "Stein"], "*um den heißen Brei herumreden* = andar con vueltas."),
+        ch(1, "Elegí la palabra.", "Du willst mich doch auf den ___ nehmen!", "Arm", ["Arm", "Kopf", "Keks"], "*jemanden auf den Arm nehmen* = tomarle el pelo."),
         ch(1, "Elegí la continuación correcta.", "Gestern …", "bin ich total ins Fettnäpfchen getreten.", ["bin ich total ins Fettnäpfchen getreten.", "habe ich total ins Fettnäpfchen getreten.", "bin ich total ins Fettnäpfchen getrittet."], "*treten* con dirección: Perfekt con *sein*; participio *getreten*."),
         cz(1, "Escribí el participio («me cayó la ficha»).", "Ach so! Jetzt ist der Groschen ___.", "gefallen", note="*Der Groschen ist gefallen* = por fin entendí."),
         cz(1, "Escribí la palabra («no caigo»).", "Sorry, ich stehe gerade auf dem ___.", "Schlauch", note="*auf dem Schlauch stehen*. " + MAY),
@@ -275,12 +275,12 @@ WEEK = {
         ty(1, "Escribí el modismo en infinitivo.", "«meter la pata»", "ins Fettnäpfchen treten", note="*ins Fettnäpfchen treten*: pisar el potecito de grasa."),
         # parte 2 — refranes y registro
         ch(2, "¿Cómo se dice?", "«La mentira tiene patas cortas.»", "Lügen haben kurze Beine.", ["Lügen haben kurze Beine.", "Lügen haben lange Nasen.", "Lügen haben kurze Arme."], "Igual que en castellano, pero en plural: *Lügen*."),
-        ch(2, "Elegí la palabra.", "Der Apfel fällt nicht weit vom ___.", "Stamm", ["Stamm", "Garten", "Ast"], "*vom Stamm* (del tronco) = de tal palo, tal astilla."),
+        ch(2, "Elegí la palabra.", "Der Apfel fällt nicht weit vom ___.", "Stamm", ["Stamm", "Stock", "Ast"], "*vom Stamm* (del tronco) = de tal palo, tal astilla."),
         ch(2, "Elegí la palabra.", "Übung macht den ___.", "Meister", ["Meister", "Lehrer", "Schüler"], "*Übung macht den Meister* = la práctica hace al maestro."),
         ch(2, "¿Cómo se dice?", "«Nadie nace sabiendo.»", "Es ist noch kein Meister vom Himmel gefallen.", ["Es ist noch kein Meister vom Himmel gefallen.", "Aller Anfang ist leicht.", "Morgenstund hat Gold im Mund."], "Literal: todavía no cayó ningún maestro del cielo."),
         ch(2, "Le escribís al banco. ¿Qué frase es adecuada?", "No entendiste una carta del banco.", "Das ist mir leider nicht ganz klar.", ["Das ist mir leider nicht ganz klar.", "Ich verstehe nur Bahnhof.", "Da stehe ich auf dem Schlauch."], "En registro formal, nada de modismos coloquiales."),
         ch(2, "¿Qué significa?", "Ich glaub, mein Schwein pfeift!", "¡No lo puedo creer!", ["¡No lo puedo creer!", "¡Tengo hambre!", "¡Qué suerte!"], "Asombro (coloquial). No confundir con *Schwein haben*."),
-        ch(2, "Elegí la palabra.", "Morgenstund hat ___ im Mund.", "Gold", ["Gold", "Brot", "Geld"], "Al que madruga, Dios lo ayuda: la mañana tiene oro en la boca."),
+        ch(2, "Elegí la palabra.", "Morgenstund hat ___ im Mund.", "Gold", ["Gold", "Gott", "Geld"], "Al que madruga, Dios lo ayuda: la mañana tiene oro en la boca."),
         cz(2, "Escribí la letra que falta.", "Wer A sagt, muss auch ___ sagen.", "B", note="Lo que se empieza, se termina."),
         cz(2, "Escribí la palabra que falta.", "Aller ___ ist schwer.", "Anfang", note="*Aller Anfang ist schwer* = todo comienzo es difícil. " + MAY),
         cz(2, "Escribí la palabra que falta.", "Ende gut, ___ gut.", "alles", note="Bien está lo que bien acaba."),

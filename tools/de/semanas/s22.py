@@ -120,7 +120,7 @@ WEEK = {
                 "tip": "*Worum geht es?* (¿de qué se trata?) es la pregunta clave para hablar de películas, series y artículos.",
                 "q": [
                     q("Completá: *___ denkst du?* (an)", "Woran", ["Woran", "Woan", "Wo an"]),
-                    q("Completá: *___ freust du dich?* (über)", "Worüber", ["Worüber", "Woüber", "Wasüber"]),
+                    q("Completá: *___ freust du dich?* (über)", "Worüber", ["Worüber", "Wovon", "Über wem"]),
                 ],
             },
             {
@@ -243,7 +243,7 @@ WEEK = {
         ch(1, "Elegí la pregunta.", "___ sprecht ihr? – Über die neue Serie.", "Worüber", ["Worüber", "Woran", "Wofür"], "*sprechen über* → *Worüber?*, con *r* porque *über* empieza con vocal."),
         ch(1, "Elegí el pronombre.", "Mit ___ chattest du so lange?", "wem", ["wem", "wen", "was"], "*mit* + dativo, persona → *mit wem?*"),
         ch(1, "Elegí la pregunta.", "___ geht es in dem Film? – Um eine Familie in Berlin.", "Worum", ["Worum", "Wovon", "Woran"], "*es geht um* → *Worum geht es?*"),
-        ch(1, "Elegí la pregunta.", "___ interessierst du dich? – Für Fotografie.", "Wofür", ["Wofür", "Worfür", "Wovor"], "*für* empieza con consonante: *wofür*, sin *r*."),
+        ch(1, "Elegí la pregunta.", "___ interessierst du dich? – Für Fotografie.", "Wofür", ["Wofür", "Wozu", "Wovor"], "*für* empieza con consonante: *wofür*, sin *r*."),
         cz(1, "Escribí la pregunta con wo-.", "___ denkst du? – An die Prüfung.", "Woran", note="*denken an* + cosa → *Woran?*"),
         cz(1, "Escribí la pregunta con wo-.", "___ träumst du? – Von einem Haus am Meer.", "Wovon", note="*träumen von* + cosa → *Wovon?*"),
         cz(1, "Escribí el pronombre.", "An ___ denkst du? – An meine Mutter.", "wen", note="Persona + *denken an* (acusativo) → *an wen?*"),
@@ -268,7 +268,7 @@ WEEK = {
         cz(2, "Escribí el compuesto con da-.", "Träumst du von einem eigenen Haus? – Ja, ich träume ___.", "davon", note="*träumen von* + cosa → *davon*."),
         cz(2, "Escribí la preposición.", "Ich beschwere mich ___ die laute Musik.", "über", note="*sich beschweren über* + acusativo."),
         tr(2, "Me alegra que estés acá.", "Ich freue mich, dass du hier bist.", ["Ich freue mich, dass du hier bist.", "Ich freue mich, dass du da bist.", "Ich freue mich darüber, dass du hier bist.", "Ich freue mich darüber, dass du da bist.", "Ich freue mich dass du hier bist.", "Ich freue mich dass du da bist."], "Algo que ya pasa: *sich freuen (darüber), dass…*, con el verbo al final."),
-        tr(2, "Sí, me acuerdo (no me lo olvido).", "Ja, ich denke daran.", note="*Ich denke daran* = lo tengo presente, no me olvido."),
+        tr(2, "Sí, me acuerdo (no me lo olvido).", "Ja, ich denke daran.", accept=["Ja, ich denke daran.", "Ja, ich denke dran.", "Ja, ich vergesse es nicht.", "Ja, ich werde daran denken."], note="*Ich denke daran* = lo tengo presente, no me olvido."),
         tr(2, "Chateo con mi hermana.", "Ich chatte mit meiner Schwester.", note="*chatten mit* + dativo: *mit meiner Schwester*."),
         ty(2, "Escribí el compuesto con da- de *über*.", "da + über", "darüber", note="*über* empieza con vocal: se agrega *r*."),
     ],

@@ -198,7 +198,7 @@ WEEKS.append({
                 "tip": "La respuesta para salir del paso: *Gut, danke. Und dir?*",
                 "q": [
                     q("¿Qué significa *Es geht*?", "más o menos", ["más o menos", "está yendo", "muy bien"]),
-                    q("Te preguntan *Wie geht's?* ¿Qué es lo más natural?", "Gut, danke. Und dir?", ["Gut, danke. Und dir?", "Bitte, gut.", "Ja, danke."]),
+                    q("Te preguntan *Wie geht's?* ¿Qué es lo más natural?", "Gut, danke. Und dir?", ["Gut, danke. Und dir?", "Ich bin gut, danke.", "Ja, danke."]),
                 ],
             },
             {
@@ -287,9 +287,9 @@ WEEKS.append({
         ch(0, "¿Cómo suena la letra final?", "Tag (día)", "como una k", ["como una k", "como una g", "como una j"], "Al final de palabra *b, d, g* se endurecen: *Tag* = «tak»."),
         ch(0, "¿Cómo se pronuncia?", "Schule (escuela)", "«shule»", ["«shule»", "«eskule»", "«chule»"], "*sch* = sh y la *u* suena como la nuestra."),
         ch(0, "¿Cómo se pronuncia?", "Spiel (juego)", "«shpil»", ["«shpil»", "«spiel»", "«espil»"], "*sp* al principio suena «shp» e *ie* es una i larga."),
-        ch(0, "¿Cuál está bien escrita?", "«el problema»", "das Problem", ["das Problem", "das Problema", "das Problemo"], "En alemán es *Problem*, sin -a ni -o (y con mayúscula, como todo sustantivo)."),
+        ch(0, "¿Cuál está bien escrita?", "«el problema»", "das Problem", ["das Problem", "das Problema", "der Problem"], "En alemán es *das Problem*: neutro (aunque «el problema» sea masculino) y sin la -a del castellano."),
         ch(0, "¿Qué significa?", "der Rat", "el consejo", ["el consejo", "la rata", "el rato"], "Falso amigo: *der Rat* es «consejo»."),
-        ch(0, "¿Qué significa?", "bekommen", "recibir", ["recibir", "convertirse en", "comer bien"], "Falso amigo: *bekommen* es «recibir», no el «become» del inglés."),
+        ch(0, "¿Qué significa?", "bekommen", "recibir", ["recibir", "convertirse en", "venir"], "Falso amigo: *bekommen* es «recibir», no el «become» del inglés."),
         ty(0, "Escribí en alemán, con artículo.", "«el hotel» (artículo: das)", "das Hotel", note=MAY),
         ty(0, "Escribí en alemán, con artículo.", "«la información» (artículo: die)", "die Information", note="Se escribe casi igual, con *-tion* y sin tilde. " + MAY),
         # parte 1 — saludos
@@ -299,11 +299,11 @@ WEEKS.append({
         ch(1, "¿Cuál es informal?", "Para despedirte de un amigo:", "Tschüss!", ["Tschüss!", "Auf Wiedersehen!", "Guten Tag!"], "*Tschüss* (o *Tschüs*) es el «chau» alemán."),
         ch(1, "¿Qué significa?", "Bis morgen!", "¡Hasta mañana!", ["¡Hasta mañana!", "¡Buen día!", "¡Buenas tardes!"], "*bis* = hasta, *morgen* (con minúscula) = mañana, el día siguiente."),
         ch(1, "¿Qué significa *bitte* acá?", "Kaffee? – Ja, bitte!", "por favor", ["por favor", "de nada", "¿perdón?"], "*Ja, bitte!* = «sí, por favor»."),
-        ch(1, "¿Qué respondés?", "Alguien te dice: *Danke schön!*", "Bitte schön!", ["Bitte schön!", "Danke schön!", "Gute Nacht!"], "A *Danke schön* se contesta *Bitte schön* (de nada)."),
+        ch(1, "¿Qué respondés?", "Alguien te dice: *Danke schön!*", "Bitte schön!", ["Bitte schön!", "Danke schön!", "Ja, bitte!"], "A *Danke schön* se contesta *Bitte schön* (de nada)."),
         ch(1, "¿Qué decís?", "Sin querer, le pisás el pie a alguien en el tren.", "Entschuldigung!", ["Entschuldigung!", "Bitte schön!", "Hallo!"], "*Entschuldigung* = perdón, disculpe."),
         ch(1, "¿Qué respuesta es negativa?", "Wie geht's? – …", "Nicht so gut.", ["Nicht so gut.", "Sehr gut!", "Gut, danke."], "*Nicht so gut* = no muy bien."),
         ch(1, "¿Qué significa?", "Gut, danke. Und dir?", "Bien, gracias. ¿Y vos?", ["Bien, gracias. ¿Y vos?", "Bien, gracias. ¿Y usted?", "Bien, gracias. ¿Y él?"], "*dir* es «a vos»: es la respuesta informal."),
-        ch(1, "¿Qué decís?", "Te ofrecen un café y querés aceptarlo.", "Ja, gern!", ["Ja, gern!", "Nein, danke.", "Tschüss!"], "*Ja, gern!* = ¡sí, con gusto!"),
+        ch(1, "¿Qué decís?", "Te ofrecen un café y querés aceptarlo.", "Ja, gern!", ["Ja, gern!", "Nein, danke.", "Gern geschehen!"], "*Ja, gern!* = ¡sí, con gusto!"),
         ch(1, "Completá el saludo.", "Gute ___!", "Nacht", ["Nacht", "Morgen", "Abend"], "Entre estos saludos, *Gute* sin -n va solo con *Nacht*: *Guten Morgen*, *Guten Abend*."),
         ch(1, "Completá el saludo (es de noche y llegás).", "Guten ___!", "Abend", ["Abend", "Nacht", "Morgen"], "Al llegar de noche: *Guten Abend*."),
         ty(1, "Escribí en alemán.", "«gracias»", "danke", ["danke", "Danke schön", "Dankeschön", "Danke sehr", "Vielen Dank"], "*Danke* o *Danke schön*."),
@@ -319,7 +319,7 @@ WEEKS.append({
         ch(2, "Te deletrean: «fau – a – te – e – er». ¿Qué palabra es?", "fau – a – te – e – er", "Vater", ["Vater", "Water", "Fater"], "«fau» es la V: V-A-T-E-R."),
         ch(2, "¿Cómo se nombra la letra?", "ß", "«es-tset»", ["«es-tset»", "«beta»", "«doble ese»"], "*ß* se llama *Eszett* (o *scharfes S*)."),
         ch(2, "¿Qué preguntás?", "Alguien te dice su apellido y no sabés cómo escribirlo.", "Wie schreibt man das?", ["Wie schreibt man das?", "Wie geht's?", "Wie heißt das?"], "*Wie schreibt man das?* = ¿Cómo se escribe?"),
-        ch(2, "¿Cuál es el saludo correcto?", "Saludás a la señora Weber, tu nueva jefa.", "Guten Tag, Frau Weber!", ["Guten Tag, Frau Weber!", "Guten Tag, Frau!", "Tschüss, Weber!"], "*Frau* + apellido es «señora»; sin apellido no se usa así."),
+        ch(2, "¿Cuál es el saludo correcto?", "Saludás a la señora Weber, tu nueva jefa.", "Guten Tag, Frau Weber!", ["Guten Tag, Frau Weber!", "Guten Tag, Frau!", "Guten Tag, Weber!"], "*Frau* + apellido es «señora»; sin apellido no se usa así."),
         ch(2, "¿Qué pregunta es formal?", "Querés saber cómo está un cliente.", "Wie geht es Ihnen?", ["Wie geht es Ihnen?", "Wie geht's dir?", "Und dir?"], "*Ihnen* va con *Sie*; *dir* va con *du*."),
         ch(2, "Elegí la forma correcta (trato formal).", "Wie geht es ___?", "Ihnen", ["Ihnen", "dir", "dich"], "La forma de usted va siempre con mayúscula: *Ihnen*. *dir* es para *du*."),
         ch(2, "¿Cómo la tratás?", "Una compañera de curso de 25 años te dice *Hallo!*", "con du", ["con du", "con Sie", "con ihr"], "Entre jóvenes y compañeros se usa *du*."),
@@ -458,7 +458,7 @@ WEEKS.append({
                 "warn": "Casi todos los países van sin artículo: *aus Spanien*. Unos pocos lo llevan, y entonces cambia: *die Schweiz → aus der Schweiz*, *die USA → aus den USA*. Aprendelos como frase hecha.",
                 "tip": "*Ich bin aus Argentinien* también se dice, pero lo más común es *Ich komme aus…*",
                 "q": [
-                    q("¿Cómo decís «Soy de Argentina»?", "Ich komme aus Argentinien.", ["Ich komme aus Argentinien.", "Ich komme in Argentinien.", "Ich wohne aus Argentinien."]),
+                    q("¿Cómo decís «Soy de Argentina»?", "Ich komme aus Argentinien.", ["Ich komme aus Argentinien.", "Ich komme in Argentinien.", "Ich bin von Argentinien."]),
                     q("¿Cómo decís «Soy de Suiza»?", "Ich komme aus der Schweiz.", ["Ich komme aus der Schweiz.", "Ich komme aus Schweiz.", "Ich komme aus die Schweiz."]),
                 ],
             },
@@ -511,7 +511,7 @@ WEEKS.append({
                 "warn": "*In Berlin ich wohne* está mal: si el primer lugar ya está ocupado, el verbo va segundo y el sujeto, después.",
                 "tip": "Pensá el verbo como un ancla fija en el casillero 2: lo demás se acomoda alrededor. *In Berlin* cuenta como un solo casillero.",
                 "q": [
-                    q("¿Qué oración es correcta?", "In Rosario wohne ich.", ["In Rosario wohne ich.", "In Rosario ich wohne.", "Wohne in Rosario ich."]),
+                    q("¿Qué oración es correcta?", "In Rosario wohne ich.", ["In Rosario wohne ich.", "In Rosario ich wohne.", "In Rosario wohnt ich."]),
                 ],
             },
             {
@@ -550,7 +550,7 @@ WEEKS.append({
     "items": [
         # parte 0 — pronombres y sein
         li(0, "wohnen", ["wohnen", "wollen", "Bohnen"], "*w* = v y la *h* alarga la o: «voonen»."),
-        li(0, "heißen", ["heißen", "Hessen", "heiß"], "*ei* = ai y *ß* = s fuerte: «haisen»."),
+        li(0, "heißen", ["heißen", "Hessen", "heiß"], "*ei* = ai y *ß* = s sorda, como la nuestra: «haisen». *Hessen* tiene e, no ai."),
         li(0, "Woher", ["Woher", "Wo", "Wer"], "*Woher* (de dónde) tiene dos sílabas: vo-HER."),
         ch(0, "Elegí el pronombre.", "___ bin Ana.", "Ich", ["Ich", "Du", "Er"], "*bin* va solo con *ich*."),
         ch(0, "Elegí el pronombre.", "___ seid hier.", "Ihr", ["Ihr", "Wir", "Du"], "*seid* va con *ihr* (ustedes, con confianza)."),
@@ -573,7 +573,7 @@ WEEKS.append({
         ch(1, "Elegí la preposición.", "Ich komme ___ Argentinien.", "aus", ["aus", "in", "von"], "Origen: *kommen aus*."),
         ch(1, "Elegí la preposición.", "Ich wohne ___ Buenos Aires.", "in", ["in", "aus", "nach"], "Lugar donde vivís: *wohnen in*."),
         ch(1, "¿Qué preguntás?", "Querés saber el nombre de una señora mayor que no conocés.", "Wie heißen Sie?", ["Wie heißen Sie?", "Wie heißt du?", "Wie heißt Sie?"], "Con *Sie*, el verbo termina en *-en*: *heißen Sie*."),
-        ch(1, "Elegí la respuesta.", "Woher kommen Sie? – …", "Ich komme aus Chile.", ["Ich komme aus Chile.", "Ich komme in Chile.", "Ich heiße Chile."], "*Woher?* pregunta el origen: *Ich komme aus…*"),
+        ch(1, "Elegí la respuesta.", "Woher kommen Sie? – …", "Ich komme aus Chile.", ["Ich komme aus Chile.", "Ich komme in Chile.", "Ich komme von Chile."], "*Woher?* pregunta el origen: *Ich komme aus…*"),
         ch(1, "Completá.", "Ich komme aus ___. (Suiza)", "der Schweiz", ["der Schweiz", "Schweiz", "die Schweiz"], "*die Schweiz* lleva artículo: *aus der Schweiz*."),
         ch(1, "Elegí la forma correcta.", "Er ___ in Wien.", "wohnt", ["wohnt", "wohnst", "wohne"], "*er* → *-t*: *er wohnt*."),
         cz(1, "Escribí la forma de *heißen*.", "Ich ___ Marta.", "heiße", note="*ich heiße*, sin «me»."),
@@ -765,7 +765,7 @@ WEEKS.append({
                 "tip": "Los femeninos en *-e* y *-ung* casi siempre hacen *-n/-en*: *die Wohnungen*. Y *-in* duplica la n: *die Lehrerinnen*.",
                 "q": [
                     q("Plural de *das Kind*:", "die Kinder", ["die Kinder", "die Kinds", "die Kinden"]),
-                    q("Plural de *das Handy*:", "die Handys", ["die Handys", "die Handies", "die Händer"]),
+                    q("Plural de *das Handy*:", "die Handys", ["die Handys", "die Handies", "die Handy"]),
                 ],
             },
             {
@@ -847,8 +847,8 @@ WEEKS.append({
         # parte 2 — plural y compuestas
         ch(2, "Elegí el plural.", "das Kind →", "die Kinder", ["die Kinder", "die Kinds", "die Kinde"], "*-er*: *die Kinder*."),
         ch(2, "Elegí el plural.", "das Buch →", "die Bücher", ["die Bücher", "die Buchs", "die Buche"], "Diéresis + *-er*: *die Bücher*."),
-        ch(2, "Elegí el plural.", "das Auto →", "die Autos", ["die Autos", "die Auten", "die Äuter"], "Palabra extranjera: *-s*."),
-        ch(2, "Elegí el plural.", "die Lampe →", "die Lampen", ["die Lampen", "die Lampes", "die Lämpe"], "Femenino en *-e*: *-n*."),
+        ch(2, "Elegí el plural.", "das Auto →", "die Autos", ["die Autos", "die Auten", "die Auto"], "Palabra extranjera: *-s*."),
+        ch(2, "Elegí el plural.", "die Lampe →", "die Lampen", ["die Lampen", "die Lampes", "die Lampe"], "Femenino en *-e*: *-n*."),
         ch(2, "Elegí el plural.", "der Stuhl →", "die Stühle", ["die Stühle", "die Stuhls", "die Stuhlen"], "Diéresis + *-e*: *die Stühle*."),
         ch(2, "¿Qué artículo lleva todo plural?", "___ Tische, ___ Lampen, ___ Häuser", "die", ["die", "der", "das"], "En plural, siempre *die*."),
         ch(2, "Elegí la negación.", "Das sind ___ Bücher.", "keine", ["keine", "kein", "nicht"], "En plural: *keine*."),
@@ -1086,7 +1086,7 @@ WEEKS.append({
         ch(0, "Elegí la forma de *haben*.", "Wir ___ Zeit.", "haben", ["haben", "habt", "hat"], "*wir haben*."),
         ch(0, "Elegí la forma de *haben*.", "Er ___ Durst.", "hat", ["hat", "habt", "haben"], "*er hat*."),
         ch(0, "Elegí la forma de *haben*.", "Du ___ Hunger.", "hast", ["hast", "habst", "hat"], "*du hast*: la b desaparece."),
-        ch(0, "Elegí la forma correcta.", "Sie (ella) ___ in Hamburg.", "arbeitet", ["arbeitet", "arbeit", "arbeitt"], "Raíz en *-t* + e de apoyo: *arbeitet*."),
+        ch(0, "Elegí la forma correcta.", "Sie (ella) ___ in Hamburg.", "arbeitet", ["arbeitet", "arbeit", "arbeitest"], "Raíz en *-t* + e de apoyo: *arbeitet*."),
         ch(0, "Elegí la terminación.", "du lern___", "-st", ["-st", "-t", "-en"], "*du lernst*."),
         ch(0, "¿Qué significa?", "Ich spiele gern Gitarre.", "Me gusta tocar la guitarra.", ["Me gusta tocar la guitarra.", "Juego con la guitarra.", "Quiero una guitarra."], "*spielen* = tocar; *gern* = con gusto, me gusta."),
         ty(0, "Escribí la forma de *haben*.", "er ___ (él tiene)", "hat", note="*er hat*: sin b, con una sola t."),
@@ -1181,7 +1181,7 @@ WEEKS.append({
                     ["*eins, zwei, drei*!", "¡uno, dos, tres!"],
                 ],
                 "warn": "*zwei* se dice «tsvai» y *vier*, «fir». Como *zwei* y *drei* se confunden de oído, al teléfono muchos dicen *zwo* para el 2.",
-                "tip": "*sechs*: la *chs* suena «ks» y la s inicial es sonora: «zeks».",
+                "tip": "*sechs*: la *chs* suena «ks» y la s inicial es sonora, como un zumbido de abeja (no como nuestra s; en el sur y en Austria, sorda).",
                 "q": [
                     q("¿Qué número es *zwölf*?", "12", ["12", "11", "20"]),
                     q("¿Cómo se lee *vier*?", "«fir»", ["«fir»", "«vier»", "«bir»"]),
@@ -1265,7 +1265,7 @@ WEEKS.append({
                 "tip": "Sin artículo, como en castellano, para hablar en general: *Ich trinke Tee* (tomo té).",
                 "q": [
                     q("¿Qué artículo lleva *Käse*?", "der", ["der", "die", "das"]),
-                    q("¿Cómo decís «Tomo agua»?", "Ich trinke Wasser.", ["Ich trinke Wasser.", "Ich trinken Wasser.", "Ich bin Wasser."]),
+                    q("¿Cómo decís «Tomo agua»?", "Ich trinke Wasser.", ["Ich trinke Wasser.", "Ich trinken Wasser.", "Ich trinkst Wasser."]),
                 ],
             },
             {
@@ -1282,7 +1282,7 @@ WEEKS.append({
                 "more": ["*Ich nehme…* está bien aunque *nehmen* sea irregular: con *ich* es regular. El resto de sus formas viene en la semana 6."],
                 "q": [
                     q("Completá: *Ich hätte gern ___ Tee.*", "einen", ["einen", "ein", "eine"]),
-                    q("¿Cómo pedís la cuenta?", "Zahlen, bitte!", ["Zahlen, bitte!", "Kosten, bitte!", "Zählen, bitte!"]),
+                    q("¿Cómo pedís la cuenta?", "Zahlen, bitte!", ["Zahlen, bitte!", "Das Konto, bitte!", "Zählen, bitte!"]),
                 ],
             },
             {
@@ -1297,8 +1297,8 @@ WEEKS.append({
                 "warn": "No traduzcas el «de»: es *ein Kilo Tomaten*, nunca «ein Kilo von Tomaten».",
                 "tip": "*kaufen* es «comprar»: *Ich kaufe Brot*.",
                 "q": [
-                    q("¿Cómo decís «un kilo de manzanas»?", "ein Kilo Äpfel", ["ein Kilo Äpfel", "ein Kilo von Äpfel", "ein Kilo de Äpfel"]),
-                    q("¿Qué significa *Sonst noch etwas?*", "¿Algo más?", ["¿Algo más?", "¿Algo menos?", "¿Otra vez?"]),
+                    q("¿Cómo decís «un kilo de manzanas»?", "ein Kilo Äpfel", ["ein Kilo Äpfel", "ein Kilo von Äpfel", "einen Kilo Äpfel"]),
+                    q("¿Qué significa *Sonst noch etwas?*", "¿Algo más?", ["¿Algo más?", "¿Si no, qué?", "¿Otra vez?"]),
                 ],
             },
         ],
@@ -1365,7 +1365,7 @@ WEEKS.append({
         ch(2, "Elegí el artículo.", "Ich hätte gern ___ Brötchen.", "ein", ["ein", "einen", "eine"], "*das Brötchen* (neutro) no cambia."),
         ch(2, "Elegí el artículo.", "Ich nehme ___ Apfelsaft.", "einen", ["einen", "ein", "eine"], "Compuesto: manda *der Saft* → *einen Apfelsaft*."),
         ch(2, "¿Qué significa?", "Das ist alles.", "Eso es todo.", ["Eso es todo.", "Es para todos.", "Todo está bien."], "Lo decís cuando no querés nada más."),
-        ch(2, "¿Qué decís?", "Ya no querés nada más.", "Nein, danke. Das ist alles.", ["Nein, danke. Das ist alles.", "Ja, bitte. Das ist alles.", "Nein, bitte. Alles."], "*Nein, danke. Das ist alles.*"),
+        ch(2, "¿Qué decís?", "Ya no querés nada más.", "Nein, danke. Das ist alles.", ["Nein, danke. Das ist alles.", "Ja, bitte. Das ist alles.", "Nein, bitte. Das ist alles."], "*Nein, danke. Das ist alles.*"),
         ch(2, "¿Cuál es la frase hecha?", "Comprás tomates en la feria:", "auf dem Markt", ["auf dem Markt", "auf das Markt", "auf die Markt"], "Frase hecha: *auf dem Markt* (en el mercado)."),
         ch(2, "Elegí la forma correcta.", "«Quisiera un kilo de tomates.»", "Ich hätte gern ein Kilo Tomaten.", ["Ich hätte gern ein Kilo Tomaten.", "Ich hätte gern ein Kilo von Tomaten.", "Ich hätte gern einen Kilo Tomaten."], "Sin «de», y *das Kilo* → *ein Kilo*."),
         cz(2, "Escribí el artículo en acusativo.", "Ich hätte gern ___ Kaffee.", "einen", note="*der Kaffee* → *einen Kaffee*."),
@@ -1593,12 +1593,12 @@ WEEKS.append({
         # parte 0 — verbos con cambio vocálico
         ch(0, "Elegí la forma correcta.", "Er ___ Pizza. (essen)", "isst", ["isst", "esst", "ist"], "*essen* → *er isst*. (*ist* es de *sein*.)"),
         ch(0, "Elegí la forma correcta.", "Du ___ ein Buch. (lesen)", "liest", ["liest", "lest", "lesst"], "*lesen* → *du liest*."),
-        ch(0, "Elegí la forma correcta.", "Sie (ella) ___ Deutsch. (sprechen)", "spricht", ["spricht", "sprecht", "sprechet"], "*sprechen* → *sie spricht*."),
+        ch(0, "Elegí la forma correcta.", "Sie (ella) ___ Deutsch. (sprechen)", "spricht", ["spricht", "sprecht", "sprichst"], "*sprechen* → *sie spricht*."),
         ch(0, "Elegí la forma correcta.", "Was ___ du? (nehmen)", "nimmst", ["nimmst", "nehmst", "nimmt"], "*nehmen* → *du nimmst*."),
         ch(0, "Elegí la forma correcta.", "Er ___ nach Berlin. (fahren)", "fährt", ["fährt", "fahrt", "fährst"], "*fahren* → *er fährt*."),
         ch(0, "Elegí la forma correcta.", "Das Baby ___ viel. (schlafen)", "schläft", ["schläft", "schlaft", "schlafen"], "*das Baby* = *es* → *schläft*."),
         ch(0, "Elegí la forma correcta.", "Wir ___ Spanisch. (sprechen)", "sprechen", ["sprechen", "sprichen", "spricht"], "Con *wir* no hay cambio: *sprechen*."),
-        ch(0, "Elegí la forma correcta.", "Ihr ___ viel. (essen)", "esst", ["esst", "isst", "esset"], "Con *ihr* no hay cambio: *ihr esst*."),
+        ch(0, "Elegí la forma correcta.", "Ihr ___ viel. (essen)", "esst", ["esst", "isst", "essen"], "Con *ihr* no hay cambio: *ihr esst*."),
         cz(0, "Escribí la forma de *sprechen*.", "Du ___ gut Deutsch.", "sprichst", note="*e → i*: *du sprichst*."),
         cz(0, "Escribí la forma de *lesen*.", "Er ___ die Zeitung.", "liest", note="*e → ie*: *er liest*."),
         cz(0, "Escribí la forma de *essen*.", "Anna ___ einen Apfel.", "isst", note="*e → i*: *sie isst*, con doble s."),
@@ -1635,7 +1635,7 @@ WEEKS.append({
         ty(1, "Escribí en alemán.", "«miércoles»", "Mittwoch", ["Mittwoch", "der Mittwoch"], "*der Mittwoch*, «mitad de la semana»."),
         # parte 2 — rutina
         ch(2, "Elegí el orden correcto.", "(El lunes trabajo.)", "Am Montag arbeite ich.", ["Am Montag arbeite ich.", "Am Montag ich arbeite.", "Am Montag arbeiten ich."], "Tiempo, verbo, sujeto."),
-        ch(2, "Elegí el orden correcto.", "(A las siete como.)", "Um sieben Uhr esse ich.", ["Um sieben Uhr esse ich.", "Um sieben Uhr ich esse.", "Ich um sieben Uhr esse."], "El verbo siempre en el casillero 2."),
+        ch(2, "Elegí el orden correcto.", "(A las siete como.)", "Um sieben Uhr esse ich.", ["Um sieben Uhr esse ich.", "Um sieben Uhr ich esse.", "Um sieben Uhr esse."], "El verbo siempre en el casillero 2."),
         ch(2, "Elegí la palabra interrogativa.", "___ isst du? – Um zwölf Uhr.", "Wann", ["Wann", "Wo", "Wie"], "La respuesta es una hora: *Wann?*"),
         ch(2, "Elegí la respuesta.", "Was machst du am Abend? – …", "Am Abend lese ich.", ["Am Abend lese ich.", "Am Abend ich lese.", "Am Abend liest ich."], "Tiempo + verbo + sujeto, y *ich lese*."),
         ch(2, "Elegí la forma correcta.", "Heute ___ ich nicht.", "arbeite", ["arbeite", "arbeitet", "arbeiten"], "El sujeto es *ich*, aunque vaya detrás: *arbeite*."),

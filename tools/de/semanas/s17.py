@@ -153,7 +153,7 @@ WEEK = {
                 "q": [
                     q("Completá: *Ich putze ___ die Zähne.*", "mir", ["mir", "mich", "sich"]),
                     q("Completá: *Du wäschst ___.* (sin otro objeto)", "dich", ["dich", "dir", "sich"]),
-                    q("Completá: *Sie (ella) hat ___ den Fuß gebrochen.*", "sich", ["sich", "ihr", "mir"]),
+                    q("Completá: *Sie (ella) hat ___ den Fuß gebrochen.* (ella se rompió el pie)", "sich", ["sich", "ihr", "mir"]),
                 ],
             },
             {
@@ -214,7 +214,7 @@ WEEK = {
                 ],
                 "q": [
                     q("La receta del médico se lleva a…", "die Apotheke", ["die Apotheke", "die Drogerie", "die Praxis"]),
-                    q("¿Qué le decís a alguien que está enfermo?", "Gute Besserung!", ["Gute Besserung!", "Guten Appetit!", "Viel Glück!"]),
+                    q("¿Qué le decís a alguien que está enfermo?", "Gute Besserung!", ["Gute Besserung!", "Gesundheit!", "Gute Verbesserung!"]),
                 ],
             },
         ],
@@ -251,7 +251,7 @@ WEEK = {
         cz(0, "Escribí el pronombre en dativo.", "___ tut der Rücken weh. (a mí)", "Mir", note="«Me duele» = *mir tut … weh*."),
         cz(0, "Escribí la forma de *wehtun*.", "Ihm ___ der Zahn weh.", "tut", note="*wehtun* se separa: *tut … weh*."),
         cz(0, "Completá la palabra.", "Ich habe ___schmerzen. (cabeza)", "Kopf", note="*die Kopfschmerzen* = dolor de cabeza."),
-        tr(0, "Me duele la cabeza.", "Mir tut der Kopf weh.", ["Mir tut der Kopf weh.", "Ich habe Kopfschmerzen.", "Der Kopf tut mir weh."], "Dativo + *tut … weh*, o *Kopfschmerzen haben*."),
+        tr(0, "Me duele la cabeza.", "Mir tut der Kopf weh.", ["Mir tut der Kopf weh.", "Ich habe Kopfschmerzen.", "Der Kopf tut mir weh.", "Mein Kopf tut weh.", "Ich habe Kopfweh."], "Dativo + *tut … weh*, o *Kopfschmerzen haben*."),
         tr(0, "Tengo fiebre.", "Ich habe Fieber.", note="*Fieber* sin artículo."),
         tr(0, "¿Te duele la espalda?", "Tut dir der Rücken weh?", ["Tut dir der Rücken weh?", "Hast du Rückenschmerzen?", "Tut der Rücken dir weh?"], "*dir* = a vos, en dativo."),
         ty(0, "Escribí en alemán, con artículo.", "«el pie»", "der Fuß", note="Plural *die Füße*. " + MAY),
@@ -276,12 +276,12 @@ WEEK = {
         tr(1, "¿Cómo te sentís?", "Wie fühlst du dich?", note="*du* → *dich*."),
         ty(1, "Escribí el infinitivo alemán, con *sich*.", "«apurarse»", "sich beeilen", ["sich beeilen", "beeilen"], "*sich beeilen*: *Beeil dich!*"),
         # parte 2 — sollen, en el médico
-        ch(2, "Elegí la forma de *sollen*.", "Der Arzt sagt, ich ___ viel schlafen.", "soll", ["soll", "sollst", "solle"], "*ich soll*, sin terminación."),
+        ch(2, "Elegí la forma de *sollen*.", "Der Arzt sagt, ich ___ viel schlafen.", "soll", ["soll", "sollst", "sollen"], "*ich soll*, sin terminación."),
         ch(2, "Elegí la forma de *sollen*.", "Ihr ___ die Tabletten nehmen.", "sollt", ["sollt", "sollen", "soll"], "*ihr sollt*."),
         ch(2, "Elegí el verbo.", "Der Arzt sagt, du ___ nicht arbeiten.", "sollst", ["sollst", "musst", "kannst"], "La indicación viene de otro (el médico): *sollen*."),
         ch(2, "¿Qué significa?", "Soll ich das Fenster aufmachen?", "¿Abro la ventana?", ["¿Abro la ventana?", "¿Tengo que cerrar la ventana?", "¿Puedo abrir la ventana?"], "*Soll ich…?* ofrece ayuda: «¿querés que…?»."),
         ch(2, "¿Adónde llevás la receta?", "Mit dem Rezept gehe ich ___.", "in die Apotheke", ["in die Apotheke", "in die Drogerie", "ins Wartezimmer"], "Los remedios con receta, en *die Apotheke*."),
-        ch(2, "¿Qué le decís a alguien enfermo?", "…", "Gute Besserung!", ["Gute Besserung!", "Guten Appetit!", "Gute Reise!"], "*Gute Besserung!* = ¡que te mejores!"),
+        ch(2, "¿Qué le decís a alguien enfermo?", "…", "Gute Besserung!", ["Gute Besserung!", "Gesundheit!", "Gute Verbesserung!"], "*Gute Besserung!* = ¡que te mejores!"),
         ch(2, "Elegí el orden correcto.", "(Tenés que descansar.)", "Du sollst dich ausruhen.", ["Du sollst dich ausruhen.", "Du sollst ausruhen dich.", "Du dich sollst ausruhen."], "Modal en 2.º lugar, reflexivo después, infinitivo al final."),
         cz(2, "Escribí la forma de *sollen*.", "Was ___ ich machen?", "soll", note="*ich soll*."),
         cz(2, "Escribí la forma de *sollen*.", "Sie (ella) ___ im Bett bleiben.", "soll", note="*sie soll*."),

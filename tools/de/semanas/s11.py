@@ -175,8 +175,8 @@ WEEK = {
                 "warn": "*grillen* no es exactamente nuestro asado, pero es lo más parecido: carne o salchichas a la parrilla, al aire libre. *Wir haben gegrillt* = hicimos un asado.",
                 "tip": "Para encadenar: *zuerst* (primero), *dann* (después), *danach* (después de eso). Después de *dann*, el verbo sigue segundo: *Dann habe ich gekocht*.",
                 "q": [
-                    q("¿Qué oración es correcta?", "Am Sonntag habe ich gekocht.", ["Am Sonntag habe ich gekocht.", "Am Sonntag ich habe gekocht.", "Am Sonntag habe gekocht ich."]),
-                    q("«Ayer no trabajé.»", "Gestern habe ich nicht gearbeitet.", ["Gestern habe ich nicht gearbeitet.", "Gestern habe ich gearbeitet nicht.", "Gestern nicht habe ich gearbeitet."]),
+                    q("¿Qué oración es correcta?", "Am Sonntag habe ich gekocht.", ["Am Sonntag habe ich gekocht.", "Am Sonntag ich habe gekocht.", "Am Sonntag habe ich kocht."]),
+                    q("«Ayer no trabajé.»", "Gestern habe ich nicht gearbeitet.", ["Gestern habe ich nicht gearbeitet.", "Gestern habe ich gearbeitet nicht.", "Gestern ich habe nicht gearbeitet."]),
                 ],
             },
         ],
@@ -230,7 +230,7 @@ WEEK = {
         cz(1, "Escribí el participio de *sprechen*.", "Habt ihr Deutsch ___?", "gesprochen", note="*e → o*: *gesprochen*."),
         cz(1, "Escribí el participio de *denken*.", "Ich habe an dich ___.", "gedacht", note="Mixto: *gedacht*."),
         tr(1, "Ya vi la película.", "Ich habe den Film schon gesehen.", ["Ich habe den Film schon gesehen.", "Den Film habe ich schon gesehen.", "Ich habe schon den Film gesehen."], "*sehen* → *gesehen*, al final."),
-        tr(1, "No lo sabía.", "Das habe ich nicht gewusst.", ["Das habe ich nicht gewusst.", "Ich habe das nicht gewusst."], "El Perfekt cubre también nuestro imperfecto."),
+        tr(1, "No lo sabía.", "Das habe ich nicht gewusst.", ["Das habe ich nicht gewusst.", "Ich habe das nicht gewusst.", "Das wusste ich nicht.", "Ich wusste das nicht."], "El Perfekt cubre también nuestro imperfecto."),
         li(1, "getrunken", ["getrunken", "getroffen", "gefunden"], "*trinken → getrunken*; *treffen → getroffen*; *finden → gefunden*."),
         # parte 2 — separables, sin ge-, contar
         ch(2, "Elegí el participio.", "Ich habe am Samstag ___. (einkaufen)", "eingekauft", ["eingekauft", "geeinkauft", "eingekaufen"], "Separable: *ge-* en el medio."),
@@ -238,7 +238,7 @@ WEEK = {
         ch(2, "Elegí el participio.", "Wir haben Oma ___. (besuchen)", "besucht", ["besucht", "gebesucht", "besuchen"], "*be-* no lleva *ge-*."),
         ch(2, "Elegí el participio.", "Sie hat lange ___. (telefonieren)", "telefoniert", ["telefoniert", "getelefoniert", "telefonierte"], "*-ieren*: sin *ge-*."),
         ch(2, "Elegí el participio.", "Ich habe das nicht ___. (verstehen)", "verstanden", ["verstanden", "verstehen", "geverstanden"], "*ver-* sin *ge-*; *stehen* → *-standen*."),
-        ch(2, "Elegí la respuesta.", "Was hast du gestern Abend gemacht?", "Ich habe ferngesehen.", ["Ich habe ferngesehen.", "Ich habe gefernsehen.", "Ich sehe fern gestern."], "*fernsehen* → *ferngesehen*."),
+        ch(2, "Elegí la respuesta.", "Was hast du gestern Abend gemacht?", "Ich habe ferngesehen.", ["Ich habe ferngesehen.", "Ich habe gefernsehen.", "Ich habe ferngeseht."], "*fernsehen* → *ferngesehen*."),
         cz(2, "Escribí el participio de *aufräumen*.", "Am Sonntag habe ich die Wohnung ___.", "aufgeräumt", ["aufgeräumt", "aufgeraeumt"], "*auf* + *ge* + *räumt*."),
         cz(2, "Escribí el participio de *bezahlen*.", "Hast du schon ___?", "bezahlt", note="*be-* → sin *ge-*."),
         cz(2, "Escribí el participio de *einladen*.", "Sie hat uns zum Essen ___.", "eingeladen", note="*laden* es irregular: *eingeladen*."),
@@ -246,7 +246,7 @@ WEEK = {
         cz(2, "Escribí la palabra que falta (ayer).", "___ habe ich lange geschlafen.", "Gestern", note="*gestern* en la posición 1 → *habe ich*."),
         tr(2, "El sábado hice las compras.", "Am Samstag habe ich eingekauft.", ["Am Samstag habe ich eingekauft.", "Ich habe am Samstag eingekauft."], "*einkaufen* → *eingekauft*."),
         tr(2, "¿Llamaste a Paul?", "Hast du Paul angerufen?", note="*anrufen* → *angerufen*."),
-        tr(2, "La pasamos muy bien.", "Wir haben viel Spaß gehabt.", ["Wir haben viel Spaß gehabt.", "Wir haben viel Spass gehabt."], "*Spaß haben* = pasarla bien → *Spaß gehabt*."),
+        tr(2, "La pasamos muy bien.", "Wir haben viel Spaß gehabt.", ["Wir haben viel Spaß gehabt.", "Wir haben viel Spass gehabt.", "Wir hatten viel Spaß.", "Wir hatten viel Spass."], "*Spaß haben* = pasarla bien → *Spaß gehabt*."),
         ty(2, "Escribí el participio.", "fotografieren →", "fotografiert", note="Los verbos en *-ieren* no llevan *ge-*."),
     ],
 }

@@ -79,7 +79,7 @@ WEEK = {
                 "warn": "Es la *n* que más se olvida: *mit den Kinder* está mal; es *mit den Kindern*.",
                 "q": [
                     q("Completá: *Ich helfe den ___.* (Kinder)", "Kindern", ["Kindern", "Kinder", "Kinders"]),
-                    q("Completá: *mit den ___* (Autos)", "Autos", ["Autos", "Autosn", "Auton"]),
+                    q("Completá: *mit den ___* (Autos)", "Autos", ["Autos", "Autosn", "Auto"]),
                 ],
             },
             {
@@ -206,7 +206,7 @@ WEEK = {
         ch(0, "Elegí el artículo.", "Ich gebe ___ Kind einen Apfel.", "dem", ["dem", "den", "das"], "*das Kind* en dativo: *dem*."),
         ch(0, "Elegí el artículo.", "Wir helfen ___ Frau.", "der", ["der", "die", "dem"], "Femenino en dativo: *der*."),
         ch(0, "Elegí el artículo.", "Sie schenkt ___ Vater eine Uhr.", "dem", ["dem", "den", "der"], "*der Vater* recibe: dativo *dem*."),
-        ch(0, "Elegí la forma.", "Er spielt mit den ___.", "Kindern", ["Kindern", "Kinder", "Kinden"], "Dativo plural: *den Kindern*, con *-n*."),
+        ch(0, "Elegí la forma.", "Er spielt mit den ___.", "Kindern", ["Kindern", "Kinder", "Kinders"], "Dativo plural: *den Kindern*, con *-n*."),
         ch(0, "Elegí la pregunta.", "___ schenkst du die Blumen? – Meiner Oma.", "Wem", ["Wem", "Wen", "Wer"], "Preguntás por quien recibe: *Wem?*"),
         ch(0, "Elegí el artículo.", "Ich danke ___ Gästen.", "den", ["den", "dem", "der"], "Plural en dativo: *den Gästen*."),
         cz(0, "Escribí el artículo en dativo.", "Ich zeige ___ Lehrer (der) das Foto.", "dem", note="Masculino en dativo: *dem*."),
@@ -235,9 +235,9 @@ WEEK = {
         cz(1, "Escribí el pronombre en dativo.", "Das Essen schmeckt ___ nicht. (a nosotros)", "uns", note="*wir* → *uns*, igual que en acusativo."),
         tr(1, "Te ayudo.", "Ich helfe dir.", note="*helfen* + dativo: *dir*, no *dich*."),
         tr(1, "¿Te gusta la torta?", "Schmeckt dir die Torte?", ["Schmeckt dir die Torte?", "Schmeckt dir der Kuchen?"], "Para la comida, *schmecken* + dativo."),
-        tr(1, "La valija es mía.", "Der Koffer gehört mir.", ["Der Koffer gehört mir.", "Das ist mein Koffer."], "*gehören* + dativo: *mir*."),
+        tr(1, "La valija es mía.", "Der Koffer gehört mir.", ["Der Koffer gehört mir.", "Das ist mein Koffer.", "Der Koffer ist meiner."], "*gehören* + dativo: *mir*."),
         # parte 2 — dos objetos
-        ch(2, "Elegí el orden correcto.", "(Le regalo flores a mi novia.)", "Ich schenke meiner Freundin Blumen.", ["Ich schenke meiner Freundin Blumen.", "Ich schenke meine Freundin Blumen.", "Ich schenke Blumen meine Freundin."], "Persona en dativo (*meiner*) antes de la cosa."),
+        ch(2, "Elegí el orden correcto.", "(Le regalo flores a mi novia.)", "Ich schenke meiner Freundin Blumen.", ["Ich schenke meiner Freundin Blumen.", "Ich schenke meine Freundin Blumen.", "Ich schenke Blumen zu meiner Freundin."], "Persona en dativo (*meiner*) antes de la cosa."),
         ch(2, "Elegí el orden correcto.", "(Se lo doy a él; lo = das Buch.)", "Ich gebe es ihm.", ["Ich gebe es ihm.", "Ich gebe ihm es.", "Ich gebe ihn es."], "Pronombre acusativo antes que el dativo: *es ihm*."),
         ch(2, "Elegí el pronombre.", "Der Pullover ist schön. Ich kaufe ___ dir.", "ihn", ["ihn", "ihm", "er"], "*der Pullover* es la cosa (acusativo): *ihn*."),
         ch(2, "Elegí el pronombre.", "Zeigst du mir die Fotos? – Ja, ich zeige ___ dir.", "sie", ["sie", "ihr", "ihnen"], "*die Fotos* en acusativo: *sie*."),

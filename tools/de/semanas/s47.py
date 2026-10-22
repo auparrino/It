@@ -93,7 +93,7 @@ WEEK = {
                 "tip": "La **dirección** (*wohin?*) está casi pegada al verbo: queda al final del campo medio, justo antes del participio o del infinitivo: *Ich bin gestern mit Freunden **ins Kino** gegangen.*",
                 "q": [
                     q("Elegí el orden neutro.", "Ich bin gestern mit dem Rad zur Uni gefahren.", ["Ich bin gestern mit dem Rad zur Uni gefahren.", "Ich bin zur Uni mit dem Rad gestern gefahren.", "Ich bin mit dem Rad zur Uni gestern gefahren."]),
-                    q("¿Qué significa *Ka* en TeKaMoLo?", "kausal: ¿por qué?", ["kausal: ¿por qué?", "konkret: ¿qué?", "Kasus: ¿qué caso?"]),
+                    q("¿Qué significa *Ka* en TeKaMoLo?", "kausal: ¿por qué?", ["kausal: ¿por qué?", "konzessiv: ¿a pesar de qué?", "Kasus: ¿qué caso?"]),
                 ],
             },
             {
@@ -221,9 +221,9 @@ WEEK = {
         ty(0, "Reemplazá los dos objetos por pronombres.", "Ich bringe dem Gast den Kaffee.", "Ich bringe ihn ihm.", note="*den Kaffee* → *ihn*, *dem Gast* → *ihm*: acusativo antes que dativo."),
         # parte 1 — TeKaMoLo y nicht
         ch(1, "Elegí el orden neutro.", "Ich fahre ___.", "morgen mit dem Zug nach Wien", ["morgen mit dem Zug nach Wien", "nach Wien mit dem Zug morgen", "mit dem Zug nach Wien morgen"], "TeKaMoLo: tiempo – modo – lugar; la dirección, al final."),
-        ch(1, "Elegí el orden neutro.", "Sie ist ___ zu Hause geblieben.", "gestern wegen der Erkältung", ["gestern wegen der Erkältung", "wegen gestern der Erkältung", "der Erkältung gestern wegen"], "Temporal (*gestern*) antes que causal (*wegen der Erkältung*)."),
-        ch(1, "Negá toda la oración.", "Ich kenne ___.", "den Mann nicht", ["den Mann nicht", "den nicht Mann", "nicht den nicht Mann"], "Negación oracional: *nicht* después del objeto directo."),
-        ch(1, "Negá toda la oración.", "Wir fahren ___ in Urlaub.", "dieses Jahr nicht", ["dieses Jahr nicht", "dieses nicht Jahr", "nicht dieses Jahr nicht"], "*nicht* va después del tiempo y antes de la dirección (*in Urlaub*)."),
+        ch(1, "Elegí el orden neutro.", "Sie ist ___ zu Hause geblieben.", "gestern wegen der Erkältung", ["gestern wegen der Erkältung", "wegen der Erkältung gestern", "gestern wegen die Erkältung"], "Temporal (*gestern*) antes que causal (*wegen der Erkältung*)."),
+        ch(1, "Negá toda la oración (*Ich kenne den Mann*).", "Ich kenne ___.", "den Mann nicht", ["den Mann nicht", "nicht den Mann", "keinen Mann"], "Negación oracional: *nicht* después del objeto directo."),
+        ch(1, "Negá toda la oración.", "Wir fahren ___ in Urlaub.", "dieses Jahr nicht", ["dieses Jahr nicht", "nicht dieses Jahr", "dieses Jahr nichts"], "*nicht* va después del tiempo y antes de la dirección (*in Urlaub*)."),
         ch(1, "Negá toda la oración.", "Er hat ___.", "sich nicht für die Stelle beworben", ["sich nicht für die Stelle beworben", "nicht sich für die Stelle beworben", "sich für die Stelle beworben nicht"], "Objeto con preposición y participio: *nicht* va antes de los dos."),
         ch(1, "Negá toda la oración.", "Das Hotel war ___.", "nicht besonders sauber", ["nicht besonders sauber", "besonders sauber nicht", "sauber nicht besonders"], "Predicativo (*sauber*): *nicht* va delante."),
         ch(1, "Elegí la oración correcta.", "(Anoche no pude dormir.)", "Ich konnte letzte Nacht nicht schlafen.", ["Ich konnte letzte Nacht nicht schlafen.", "Ich nicht konnte letzte Nacht schlafen.", "Ich konnte letzte Nacht schlafen nicht."], "*nicht* después del tiempo y antes del infinitivo."),
@@ -243,7 +243,7 @@ WEEK = {
         ch(2, "Elegí el verbo.", "Gestern ___ viele Leute zum Konzert.", "kamen", ["kamen", "es kamen", "kam es"], "Si otro elemento ocupa el Vorfeld, el *es* de relleno desaparece."),
         ch(2, "¿Cuál suena mejor?", "(Conocí a una mujer que habla seis idiomas.)", "Ich habe eine Frau kennengelernt, die sechs Sprachen spricht.", ["Ich habe eine Frau kennengelernt, die sechs Sprachen spricht.", "Ich habe kennengelernt eine Frau, die sechs Sprachen spricht.", "Ich habe eine Frau die sechs Sprachen spricht kennengelernt."], "La relativa va al Nachfeld, detrás del participio; el objeto se queda adentro."),
         ch(2, "¿Qué destaca la oración?", "Dem Chef habe ich das nicht gesagt.", "que justamente al jefe no se lo dije", ["que justamente al jefe no se lo dije", "que el jefe no dijo nada", "que nadie le dijo nada al jefe"], "El dativo en el Vorfeld es el tema contrastado: «al jefe, no se lo dije»."),
-        ch(2, "¿Cuál suena más natural?", "(Ganó más de lo que esperábamos.)", "Sie hat mehr verdient, als wir erwartet hatten.", ["Sie hat mehr verdient, als wir erwartet hatten.", "Sie hat mehr als verdient, wir erwartet hatten.", "Sie hat, als wir erwartet hatten, mehr verdient."], "La comparación con *als* va al Nachfeld, después del participio."),
+        ch(2, "¿Cuál suena más natural?", "(Ganó más de lo que esperábamos.)", "Sie hat mehr verdient, als wir erwartet hatten.", ["Sie hat mehr verdient, als wir erwartet hatten.", "Sie hat mehr, als wir erwartet hatten, verdient.", "Sie hat, als wir erwartet hatten, mehr verdient."], "La comparación con *als* va al Nachfeld, después del participio."),
         ch(2, "¿Qué es lo nuevo (el foco)?", "Er hat den Wagen letzte Woche einem Kollegen verkauft.", "a quién lo vendió", ["a quién lo vendió", "qué vendió", "cuándo lo vendió"], "Lo último del campo medio, antes del participio, es el foco."),
         cz(2, "Escribí la palabra que llena el Vorfeld.", "___ fehlen noch drei Unterschriften.", "Es", note="*es* de relleno; el sujeto real es *drei Unterschriften*, por eso *fehlen* en plural."),
         cz(2, "Escribí la palabra de la comparación.", "Die Reise hat länger gedauert, ___ wir gedacht hatten.", "als", note="Comparativo + *als*, en el Nachfeld."),

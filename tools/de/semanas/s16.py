@@ -86,12 +86,12 @@ WEEK = {
                 "tip": "*als* = desigualdad (más, menos); *wie* = igualdad (tan, igual de).",
                 "q": [
                     q("Completá: *Köln ist nicht so groß ___ Berlin.*", "wie", ["wie", "als", "so"]),
-                    q("Completá: *Paris ist teurer ___ Rom.*", "als", ["als", "wie", "dann"]),
+                    q("Completá: *Paris ist teurer ___ Rom.*", "als", ["als", "wie", "dass"]),
                 ],
             },
             {
                 "h": "El superlativo: am …-sten",
-                "r": "Para «el más …» después del verbo: **am** + adjetivo + **-sten**. Si el adjetivo termina en *-d, -t, -s, -ß, -z*, se agrega una *e*: *am ältesten, am heißesten, am kürzesten*.",
+                "r": "Para «el más …» después del verbo: **am** + adjetivo + **-sten**. Si el adjetivo termina en *-d, -t, -s, -ß, -z* (o *-sch*), casi siempre se agrega una *e*: *am ältesten, am heißesten, am kürzesten*. Ojo: *groß → am größten*, sin *e*.",
                 "ex": [
                     ["Im Juli ist es hier *am heißesten*.", "En julio es cuando más calor hace acá."],
                     ["Der Zug ist schnell, aber das Flugzeug ist *am schnellsten*.", "El tren es rápido, pero el avión es el más rápido."],
@@ -121,7 +121,7 @@ WEEK = {
                     ["Wer hat *mehr* Zeit?", "¿Quién tiene más tiempo?"],
                 ],
                 "warn": "*gern – lieber – am liebsten* es cómo decís **qué preferís**: *Ich fahre lieber mit dem Zug* (prefiero ir en tren). «gerner» no existe.",
-                "more": ["*hoch* pierde la *c* delante del sustantivo: *der hohe Berg*, pero *höher*."],
+                "more": ["*hoch* pierde la *c* delante del sustantivo y en el comparativo: *der hohe Berg, höher*; en el superlativo vuelve: *am höchsten*."],
                 "q": [
                     q("Completá: *Ich trinke ___ Wasser als Saft.* (preferencia)", "lieber", ["lieber", "gerner", "mehr gern"]),
                     q("Comparativo de *gut*:", "besser", ["besser", "guter", "mehr gut"]),
@@ -207,10 +207,10 @@ WEEK = {
     "items": [
         # parte 0 — el comparativo
         ch(0, "Elegí el comparativo.", "Der Bus ist ___ als das Fahrrad.", "schneller", ["schneller", "schnellerer", "mehr schnell"], "Comparativo: *-er*, sin *mehr*."),
-        ch(0, "Elegí.", "Hamburg ist kleiner ___ Berlin.", "als", ["als", "wie", "von"], "Comparativo + *als*."),
+        ch(0, "Elegí.", "Hamburg ist kleiner ___ Berlin.", "als", ["als", "wie", "dass"], "Comparativo + *als*."),
         ch(0, "Elegí.", "Wien ist so schön ___ Prag.", "wie", ["wie", "als", "so"], "Igualdad: *so … wie*."),
         ch(0, "Elegí el comparativo.", "Mein Vater ist ___ als meine Mutter. (alt)", "älter", ["älter", "alter", "mehr alt"], "*alt → älter*, con diéresis."),
-        ch(0, "Elegí el comparativo.", "Das Hotel ist ___ als die Jugendherberge. (teuer)", "teurer", ["teurer", "teuer", "teuersten"], "*teuer* pierde la *e*: *teurer*."),
+        ch(0, "Elegí el comparativo.", "Das Hotel ist ___ als die Jugendherberge. (teuer)", "teurer", ["teurer", "teuer", "mehr teuer"], "*teuer* pierde la *e*: *teurer*."),
         ch(0, "Elegí.", "Heute ist es nicht so kalt ___ gestern.", "wie", ["wie", "als", "dass"], "*nicht so … wie*."),
         ch(0, "Elegí el comparativo.", "Im Sommer sind die Tage ___. (lang)", "länger", ["länger", "langer", "längerer"], "*lang → länger*."),
         cz(0, "Escribí el comparativo de *klein*.", "Mein Zimmer ist ___ als dein Zimmer.", "kleiner", note="*klein → kleiner*."),
@@ -226,9 +226,9 @@ WEEK = {
         ch(1, "Elegí el superlativo.", "Im Juli ist es ___. (heiß)", "am heißesten", ["am heißesten", "am heißsten", "am meisten heiß"], "*heiß* termina en *ß*: *am heißesten*."),
         ch(1, "Elegí.", "Ich trinke ___ Tee als Kaffee.", "lieber", ["lieber", "gerner", "besser"], "Preferencia: *gern → lieber*."),
         ch(1, "Elegí.", "Pizza schmeckt mir ___ als Pasta.", "besser", ["besser", "guter", "mehr gut"], "*gut → besser*."),
-        ch(1, "Elegí.", "Wer hat ___ Geld, Anna oder Paul?", "mehr", ["mehr", "viel", "meister"], "*viel → mehr*."),
+        ch(1, "Elegí.", "Wer hat ___ Geld, Anna oder Paul?", "mehr", ["mehr", "viel", "mehrere"], "*viel → mehr*."),
         ch(1, "Elegí.", "Das ist ___ Stadt in Deutschland.", "die größte", ["die größte", "die am größten", "die größer"], "Delante del sustantivo, sin *am*: *die größte Stadt*."),
-        ch(1, "Elegí.", "Am Sonntag schlafe ich ___ lange.", "am liebsten", ["am liebsten", "am gernsten", "am besten gern"], "*gern → lieber → am liebsten*."),
+        ch(1, "Elegí.", "Am Sonntag schlafe ich ___ lange.", "am liebsten", ["am liebsten", "am gernsten", "am meisten"], "*gern → lieber → am liebsten*."),
         ch(1, "Elegí.", "Der Winter ist die ___ Jahreszeit.", "kälteste", ["kälteste", "kältesten", "am kältesten"], "Nominativo femenino tras *die*: *-e*."),
         li(1, "lieber", ["lieber", "Leber", "liebe"], "*lieber* (preferentemente) tiene *ie* larga y termina en *-er*. *die Leber* es el hígado."),
         cz(1, "Escribí el superlativo con *am*. (schnell)", "Das Flugzeug ist ___.", "am schnellsten", note="*am* + *-sten*."),
@@ -243,7 +243,7 @@ WEEK = {
         ch(2, "¿Cómo se dice?", "«Llueve.»", "Es regnet.", ["Es regnet.", "Es macht Regen.", "Es ist Regen."], "El tiempo con *es*: *Es regnet*."),
         ch(2, "¿Cómo se dice?", "«Tengo frío.»", "Mir ist kalt.", ["Mir ist kalt.", "Ich bin kalt.", "Ich habe kalt."], "Sensación con dativo: *Mir ist kalt*."),
         ch(2, "Elegí.", "___ Herbst regnet es oft.", "Im", ["Im", "Am", "In"], "Estaciones: *im*."),
-        ch(2, "Elegí.", "Wie ist das Wetter? – Die Sonne ___.", "scheint", ["scheint", "regnet", "schneit"], "*Die Sonne scheint* = hay sol."),
+        ch(2, "Elegí.", "Wie ist das Wetter? – Die Sonne ___.", "scheint", ["scheint", "macht", "gibt"], "*Die Sonne scheint* = hay sol."),
         ch(2, "¿Qué estación es?", "der Frühling", "la primavera", ["la primavera", "el verano", "el otoño"], "*der Frühling* = la primavera."),
         ch(2, "Elegí.", "Im Januar ist es in Buenos Aires ___ als in Berlin.", "wärmer", ["wärmer", "kälter", "so warm"], "En enero, allá es verano: *wärmer*."),
         cz(2, "Escribí la forma de *schneien*.", "Im Winter ___ es in den Alpen oft.", "schneit", note="*es schneit*; el verbo, segundo."),

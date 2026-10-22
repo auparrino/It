@@ -144,7 +144,7 @@ WEEK = {
                 ],
                 "warn": "*Die Tür ist geöffnet worden* (alguien la abrió: Perfekt pasivo) ≠ *Die Tür ist geöffnet* (está abierta: estado). Un *worden* cambia todo.",
                 "q": [
-                    q("¿Proceso o estado? *Die Wohnung ist renoviert.*", "estado", ["estado", "proceso", "futuro"]),
+                    q("¿Proceso o estado? *Die Wohnung ist renoviert.*", "estado", ["estado", "proceso", "pasado"]),
                     q("Completá: *Das Auto ___ gerade repariert.* (lo están arreglando)", "wird", ["wird", "ist", "hat"]),
                 ],
             },

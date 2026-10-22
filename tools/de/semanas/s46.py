@@ -51,7 +51,7 @@ WEEK = {
                 "tip": "Escuchá una serie o un podcast en alemán prestando atención solo a estas palabritas: aparecen en casi cada oración.",
                 "q": [
                     q("¿Dónde va una partícula modal?", "en el campo medio, después del verbo conjugado", ["en el campo medio, después del verbo conjugado", "siempre en la posición 1", "al final, después de todo"]),
-                    q("*Was ist denn los?* suena…", "interesado o preocupado", ["interesado o preocupado", "más formal", "en pasado"]),
+                    q("*Was ist denn los?* suena…", "interesado o preocupado", ["interesado o preocupado", "más formal", "más distante y frío"]),
                 ],
             },
             {
@@ -73,8 +73,8 @@ WEEK = {
                 "warn": "El *doch* partícula no es el de las respuestas: *Kommst du nicht? – Doch!* (¡sí!) lleva acento y va solo. En *Ich habe doch keine Zeit*, *doch* no lleva acento.",
                 "tip": "Nuestro «¡pero si…!» de queja (*¡Pero si te lo dije!*) es casi siempre *doch*: *Ich habe es dir doch gesagt!*",
                 "q": [
-                    q("«¡Pero si te lo dije ayer!»", "Ich habe es dir doch gestern gesagt!", ["Ich habe es dir doch gestern gesagt!", "Ich habe es dir ja gestern nicht gesagt!", "Doch ich habe es dir gestern gesagt!"]),
-                    q("*Du bist ja ganz blass!* expresa…", "sorpresa", ["sorpresa", "un reproche", "una orden"]),
+                    q("«¡Pero si te lo dije ayer!»", "Ich habe es dir doch gestern gesagt!", ["Ich habe es dir doch gestern gesagt!", "Ich habe es dir ja gestern nicht gesagt!", "Ich habe doch es dir gestern gesagt!"]),
+                    q("*Du bist ja ganz blass!* expresa…", "sorpresa", ["sorpresa", "un reproche", "una suposición"]),
                 ],
             },
             {
@@ -90,8 +90,8 @@ WEEK = {
                 "warn": "El orden es fijo: ***doch mal***, nunca *mal doch*. Y *mal* no es nuestro «mal» (eso es *schlecht*): es lo que queda de *einmal*.",
                 "tip": "Un imperativo seco (*Komm her!*) puede sonar a orden militar. *Komm mal her!* es lo que dice cualquiera.",
                 "q": [
-                    q("¿Qué orden es correcto?", "Ruf doch mal an!", ["Ruf doch mal an!", "Ruf mal doch an!", "Doch ruf mal an!"]),
-                    q("*Kannst du mal das Fenster aufmachen?* suena…", "como un pedido amable y casual", ["como un pedido amable y casual", "como una orden seca", "como una pregunta sobre el pasado"]),
+                    q("¿Qué orden es correcto?", "Ruf doch mal an!", ["Ruf doch mal an!", "Ruf mal doch an!", "Ruf an doch mal!"]),
+                    q("*Kannst du mal das Fenster aufmachen?* suena…", "como un pedido amable y casual", ["como un pedido amable y casual", "como una orden seca", "como una pregunta sobre si sos capaz de abrirla"]),
                 ],
             },
             {
@@ -164,7 +164,7 @@ WEEK = {
                 "tip": "*etwa* fuera de las preguntas es «aproximadamente» (*etwa zehn Leute*). En *Bist du etwa krank?* es partícula: «¿no me digas que…?».",
                 "q": [
                     q("«¡Ni se te ocurra llegar tarde!»", "Komm bloß nicht zu spät!", ["Komm bloß nicht zu spät!", "Komm ruhig zu spät!", "Komm etwa zu spät!"]),
-                    q("*Du kannst ruhig das Fenster aufmachen.* significa…", "Abrí la ventana nomás, no hay problema.", ["Abrí la ventana nomás, no hay problema.", "Abrí la ventana sin hacer ruido.", "¿Abriste la ventana?"]),
+                    q("*Du kannst ruhig das Fenster aufmachen.* significa…", "Abrí la ventana nomás, no hay problema.", ["Abrí la ventana nomás, no hay problema.", "Abrí la ventana sin hacer ruido.", "Tenés que abrir la ventana."]),
                 ],
             },
             {
@@ -186,7 +186,7 @@ WEEK = {
                 "tip": "Si dudás, empezá por tres combinaciones seguras: *doch mal* (invitar), *ja wohl* (indignarte) y *denn eigentlich* (preguntar).",
                 "q": [
                     q("¿Qué orden es correcto?", "Komm doch mal vorbei!", ["Komm doch mal vorbei!", "Komm mal doch vorbei!", "Komm vorbei doch mal!"]),
-                    q("*Das ist ja wohl nicht dein Ernst!* expresa…", "indignación", ["indignación", "alegría", "una suposición neutra"]),
+                    q("*Das ist ja wohl nicht dein Ernst!* expresa…", "indignación", ["indignación", "sorpresa agradable", "una suposición neutra"]),
                 ],
             },
         ],
@@ -210,12 +210,12 @@ WEEK = {
     ],
     "items": [
         # parte 0 — ja, doch, mal
-        ch(0, "Elegí la partícula («¡pero si te lo dije!»).", "Ich habe es dir ___ gesagt!", "doch", ["doch", "mal", "denn"], "Recordar con reproche: *doch*."),
-        ch(0, "Elegí la partícula (sorpresa).", "Du bist ___ ganz nass! Regnet es?", "ja", ["ja", "mal", "denn"], "Sorpresa en exclamación: *ja*."),
-        ch(0, "Elegí la partícula (pedido suave).", "Kannst du ___ kurz das Fenster zumachen?", "mal", ["mal", "ja", "wohl"], "*mal* suaviza el pedido: un toque."),
-        ch(0, "Elegí la partícula (invitación insistente).", "Nimm ___ noch ein Stück Kuchen!", "doch", ["doch", "ja", "denn"], "Insistir en una invitación: *doch*."),
+        ch(0, "Elegí la partícula («¡pero si te lo dije!»).", "Ich habe es dir ___ gesagt!", "doch", ["doch", "etwa", "denn"], "Recordar con reproche: *doch*."),
+        ch(0, "Elegí la partícula (sorpresa).", "Du bist ___ ganz nass! Regnet es?", "ja", ["ja", "wohl", "denn"], "Sorpresa en exclamación: *ja*."),
+        ch(0, "Elegí la partícula (pedido suave).", "Kannst du ___ kurz das Fenster zumachen?", "mal", ["mal", "ja", "doch"], "*mal* suaviza el pedido: un toque."),
+        ch(0, "Elegí la partícula (invitación insistente).", "Nimm ___ noch ein Stück Kuchen!", "doch", ["doch", "etwa", "denn"], "Insistir en una invitación: *doch*."),
         ch(0, "Elegí el orden correcto.", "Ruf ihn ___ an!", "doch mal", ["doch mal", "mal doch", "denn mal"], "Orden fijo: *doch mal*."),
-        ch(0, "Elegí la partícula (algo que los dos saben).", "Du weißt ___, dass ich kein Fleisch esse.", "ja", ["ja", "mal", "denn"], "Conocimiento compartido: *ja* (como sabés)."),
+        ch(0, "Elegí la partícula (algo que los dos saben).", "Du weißt ___, dass ich kein Fleisch esse.", "ja", ["ja", "wohl", "denn"], "Conocimiento compartido: *ja* (como sabés)."),
         ch(0, "¿En cuál *doch* es partícula modal?", "Elegí la oración.", "Das ist doch klar!", ["Das ist doch klar!", "Kommst du nicht? – Doch!", "Ich wollte gehen, doch es regnete."], "Sin acento y en el campo medio: partícula. Las otras son respuesta (¡sí!) y conector (pero)."),
         ch(0, "*Komm mal her!* comparado con *Komm her!* suena…", "Komm mal her!", "más amable", ["más amable", "más enojado", "más formal"], "*mal* quita peso a la orden."),
         cz(0, "Escribí la partícula (sorpresa).", "Das ist ___ unglaublich!", "ja", note="Exclamación de sorpresa: *ja*."),
@@ -230,7 +230,7 @@ WEEK = {
         li(0, "doch", ["doch", "Dach", "dich"], "*doch* (partícula; sí), *das Dach* (el techo), *dich* (te)."),
         # parte 1 — eben, halt, wohl, schon
         ch(1, "Elegí la partícula («tomate un taxi y listo»).", "Wenn der Bus nicht kommt, nimm ___ ein Taxi.", "eben", ["eben", "etwa", "denn"], "Consejo resignado: *eben* (o *halt*)."),
-        ch(1, "Elegí la partícula (suposición).", "Er ist ___ krank, er geht nicht ans Telefon.", "wohl", ["wohl", "mal", "denn"], "Suposición: *wohl* = debe de."),
+        ch(1, "Elegí la partícula (suposición).", "Er ist ___ krank, er geht nicht ans Telefon.", "wohl", ["wohl", "etwa", "denn"], "Suposición: *wohl* = debe de."),
         ch(1, "Elegí la partícula (tranquilizar).", "Keine Sorge, das wird ___ klappen.", "schon", ["schon", "etwa", "mal"], "*schon* tranquiliza: ya va a salir bien."),
         ch(1, "Elegí la partícula (resignación).", "Ich habe ___ keine Lust, was soll ich machen?", "halt", ["halt", "etwa", "denn"], "Es lo que hay: *halt*."),
         ch(1, "¿Qué significa?", "Sie hat wohl den Zug verpasst.", "Seguramente perdió el tren.", ["Seguramente perdió el tren.", "Perdió bien el tren.", "Ya perdió el tren."], "*wohl* = suposición."),
@@ -244,7 +244,7 @@ WEEK = {
         tr(1, "Y bueno, no tengo ganas.", "Ich habe halt keine Lust.",
            V(["Ich habe", "Ich hab"], " ", ["halt", "eben"], " keine Lust."),
            "Resignación: *halt* / *eben*."),
-        tr(1, "Él debe de estar enfermo. (con partícula)", "Er ist wohl krank.", ["Er ist wohl krank.", "Er ist wohl krank geworden."], "Suposición con *wohl*."),
+        tr(1, "Él debe de estar enfermo. (con partícula)", "Er ist wohl krank.", ["Er ist wohl krank.", "Er ist wohl gerade krank."], "Suposición con *wohl*."),
         ty(1, "Escribí en alemán, con *klappen*.", "«Ya va a salir bien.»", "Das wird schon klappen.", ["Das wird schon klappen.", "Es wird schon klappen.", "Das klappt schon."], "*schon* tranquiliza."),
         # parte 2 — denn, eigentlich, bloß, nur, ruhig, etwa, combinaciones
         ch(2, "Elegí la partícula (pregunta con interés).", "Was ist ___ hier los?", "denn", ["denn", "halt", "ruhig"], "En preguntas: *denn*."),
