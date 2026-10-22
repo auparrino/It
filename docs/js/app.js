@@ -4958,10 +4958,31 @@
     window.scrollTo(0, 0);
   }
 
-  var subEntry = false;
+  var subEntry = false, backWarned = 0;
+  // the screens where the learner is answering: the phone's back (or the
+  // swipe from the edge, easy to do by accident) does not throw them out
+  var EXERCISE = ["gioco", "lampo", "lezione", "parla", "dictogloss", "scrivi", "eplus", "storia",
+                  "esame", "esame-asc", "esame-let", "esame-scr", "ubicacion"];
+  function stay() { try { history.pushState({ sub: 1 }, ""); subEntry = true; } catch (e) { /* */ } }
   window.addEventListener("popstate", function () {
     subEntry = false;
     if (!course || TABS.some(function (t) { return t[0] === view.screen; })) return;
+    // back with the app's keyboard open only closes the keyboard, as on the phone's
+    if (window.Teclado && Teclado.isOpen && Teclado.isOpen()) {
+      var a = document.activeElement;
+      Teclado.hide();
+      if (a && a.blur) a.blur();
+      stay();
+      return;
+    }
+    // in an exercise: the first back warns, a second one within 3 s leaves
+    if (EXERCISE.indexOf(view.screen) >= 0 && Date.now() - backWarned > 3000) {
+      backWarned = Date.now();
+      stay();
+      toast("Para salir, tocá atrás otra vez (o la ✕).");
+      return;
+    }
+    backWarned = 0;
     if (view.screen === "gioco") toast("Ronda interrumpida. Lo que respondiste ya quedó guardado.");
     go(view.tab || "oggi");
   });

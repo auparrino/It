@@ -187,8 +187,10 @@
       // the letters a Spanish keyboard does not have at hand, for the
       // phones without long press (and the app's keyboard, teclado.js)
       keys: ["ä", "ö", "ü", "ß"],
-      // QWERTZ, with the umlauts where a German keyboard has them
-      kbRows: ["qwertzuiopü", "asdfghjklöä", "yxcvbnmß"],
+      // QWERTY, the one a Spanish speaker types on without thinking; ä ö ü ß
+      // go in their own row on top (teclado.js puts there the keys that
+      // are not in the rows)
+      kbRows: ["qwertyuiop", "asdfghjkl", "zxcvbnm"],
       giusto: ["Richtig!", "Super!", "Genau!", "Sehr gut!", "Prima!", "Toll!"],
       quasi: "Fast! Nur ein Detail.",
       sbagliato: ["Macht nichts. Era así:", "Kein Problem. Era así:", "Tranqui, era así:"],
