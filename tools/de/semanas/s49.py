@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Semana 49 — Es ist davon auszugehen (C1): la lengua académica (impersonales, sein/haben + zu, Funktionsverbgefüge avanzados)."""
-from base import q, ch, li, cz, tr, ty, MAY  # noqa: F401
+from base import q, ch, li, cz, tr, ty, fx, di, MAY  # noqa: F401
 
 
 def V(*xs):
@@ -264,5 +264,23 @@ WEEK = {
         # parte 1 — más participio con zu
         ty(1, "Reescribí con un participio con *zu*.", "die Kosten, die man erwarten muss", "die zu erwartenden Kosten", note="*die Kosten* es plural con artículo definido: *zu erwartend-en*. «Los costos que hay que esperar» = *die zu erwartenden Kosten*."),
         ch(1, "¿Qué significa?", "der zu zahlende Betrag", "el monto a pagar", ["el monto a pagar", "el monto pagado", "el monto que paga"], "*zu* + participio I = algo que **hay que** hacer (sentido pasivo). Como nuestro «a pagar» de las facturas."),
+        # encontrá el error, dictado, repaso intercalado y producción
+        # encontrá el error
+        fx(0, "Es handelt sich über eine neue Methode.", "über", "um", "preposición", "*es handelt sich um* + acusativo = se trata de: *Es handelt sich um eine neue Methode*. Sin *sich*, *handeln von* = tratar sobre: *Der Text handelt von …*."),
+        fx(0, "In dieser Arbeit es wird gezeigt, dass die Hypothese falsch ist.", "es wird", "wird", "orden", "Si otro elemento ocupa el Vorfeld (*In dieser Arbeit*), el *es* de relleno desaparece y el verbo va segundo: *In dieser Arbeit wird gezeigt, dass …*. El *es* solo está para llenar la posición 1."),
+        fx(2, "Wir müssen diese Annahme in Frage setzen.", "setzen", "stellen", "calco", "«Poner en duda» es *infrage stellen* (o *in Frage stellen*). *stellen* es el verbo de los FVG de discusión: *zur Diskussion stellen*, *eine Frage stellen*. El «poner» castellano lleva a *setzen*.", ["Wir müssen diese Annahme infrage stellen."]),
+        # dictado
+        di(0, "Bei der vorliegenden Arbeit handelt es sich um einen kurzen Überblick.", note="*bei der vorliegenden Arbeit*: dativo femenino, *der* y adjetivo en *-en*. *um einen kurzen Überblick*: *um* pide acusativo, *-en* en el artículo y en el adjetivo."),
+        di(2, "Die neue Methode findet in vielen Studien Anwendung.", note="*in vielen Studien*: dativo plural, *-en* en el adjetivo. *Anwendung finden* = se aplica: un FVG con sentido pasivo."),
+        # repaso intercalado
+        cz(2, "Escribí el artículo.", "Die Autorin stellt die These in ___ Mittelpunkt ihrer Arbeit.", "den", note="Repaso (semana 14): *stellen* es poner (¿adónde?): acusativo, *in den Mittelpunkt*. Si la tesis ya está ahí (*stehen*), sería *im Mittelpunkt*."),
+        tr(0, "Se hicieron entrevistas para comprobar la hipótesis.", "Es wurden Interviews durchgeführt, um die Hypothese zu überprüfen.", [a + b for a in ("Es wurden Interviews durchgeführt, ", "Es wurden Interviews geführt, ") for b in ("um die Hypothese zu überprüfen.", "um die Hypothese zu prüfen.")] + ["Um die Hypothese zu überprüfen, wurden Interviews durchgeführt.", "Um die Hypothese zu prüfen, wurden Interviews durchgeführt.", "Interviews wurden durchgeführt, um die Hypothese zu überprüfen.", "Interviews wurden durchgeführt, um die Hypothese zu prüfen."], "Repaso (semana 23): «para» + verbo es *um … zu*, con el infinitivo al final, nunca *für*. El *es* del comienzo es solo de relleno: si otra cosa ocupa la posición 1, desaparece."),
+        tr(1, "Si se hubiera usado otro método, el resultado habría sido distinto.", "Wenn eine andere Methode verwendet worden wäre, wäre das Ergebnis anders gewesen.", [a + "wäre das Ergebnis anders gewesen." for a in ("Wäre eine andere Methode verwendet worden, ", "Wenn eine andere Methode angewendet worden wäre, ", "Wäre eine andere Methode angewendet worden, ", "Wenn man eine andere Methode verwendet hätte, ", "Hätte man eine andere Methode verwendet, ")], "Repaso (semanas 30 y 31): irreal del pasado en pasiva = *verwendet worden wäre*. Los tiempos compuestos de la pasiva van con *sein*, y *worden* va sin *ge-*."),
+        cz(0, "Escribí el artículo.", "Trotz ___ großen Aufwands blieben die Ergebnisse unklar.", "des", note="Repaso (semana 26): *trotz* va con genitivo: *des großen Aufwands* (masculino: *des*, *-en* en el adjetivo y *-s* en el sustantivo)."),
+        # producción
+        ty(1, "Escribí dos oraciones de un trabajo: que en el capítulo 2 se muestra que la hipótesis es correcta (pasiva, sin *es*) y que hay que tener en cuenta un problema (*sein + zu*).", "(Un trabajo académico, sin «yo»)", "Im zweiten Kapitel wird gezeigt, dass die Hypothese richtig ist. Ein Problem ist allerdings zu berücksichtigen.",
+           [a + " " + b for a in ("Im zweiten Kapitel wird gezeigt, dass die Hypothese richtig ist.", "In Kapitel 2 wird gezeigt, dass die Hypothese richtig ist.", "Im zweiten Kapitel wird gezeigt, dass die Hypothese zutrifft.", "Im zweiten Kapitel wird gezeigt, dass die Hypothese korrekt ist.", "In Kapitel 2 wird gezeigt, dass die Hypothese zutrifft.")
+            for b in ("Ein Problem ist allerdings zu berücksichtigen.", "Allerdings ist ein Problem zu berücksichtigen.", "Dabei ist ein Problem zu berücksichtigen.", "Ein Problem ist zu berücksichtigen.", "Allerdings ist ein Problem zu beachten.", "Ein Problem ist allerdings zu beachten.")],
+           "Con *Im zweiten Kapitel* en la posición 1, la pasiva va sin *es*: *wird gezeigt, dass …*. *sein + zu* = hay que: *ist zu berücksichtigen* (inseparable: *zu* separado)."),
     ],
 }

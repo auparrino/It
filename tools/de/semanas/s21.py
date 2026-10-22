@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Semana 21 — Als ich klein war (B1): Präteritum de los modales y de los verbos frecuentes, als y wenn, la infancia."""
-from base import q, ch, li, cz, tr, ty, MAY  # noqa: F401
+from base import q, ch, li, cz, tr, ty, fx, di, MAY  # noqa: F401
 
 WEEK = {
     "week": 21,
@@ -379,5 +379,23 @@ WEEK = {
         ch(2, "Elegí la respuesta.", "Spielst du noch Fußball? – Nein, ___.", "nicht mehr", ["nicht mehr", "noch nicht", "kein mehr"], "Lo contrario de *noch* (todavía) es *nicht mehr* (ya no)."),
         cz(2, "Escribí la palabra («hasta», «incluso»).", "Alle haben getanzt, ___ meine Oma.", "sogar", ["sogar", "selbst"], "«Incluso / hasta» = *sogar* (o *selbst*)."),
         ch(2, "Encontrá el error.", "¿Qué oración tiene un error?", "Möchtest du noch einen Kaffee? – Nein, ich möchte nicht mehr Kaffee.", ["Möchtest du noch einen Kaffee? – Nein, ich möchte nicht mehr Kaffee.", "Möchtest du noch einen Kaffee? – Nein, danke, keinen Kaffee mehr.", "Möchtest du noch einen Kaffee? – Ja, gern, noch einen."], "*noch ein* ↔ *kein … mehr*: «no quiero más café» = *Ich möchte keinen Kaffee mehr*."),
+        # encontrá el error, dictado, repaso intercalado y producción
+        # encontrá el error
+        fx(0, "Als Kind könnte ich nicht schwimmen.", "könnte", "konnte", "forma verbal", "El pasado de *können* es *konnte*, sin diéresis: los modales la pierden en el Präteritum. *könnte* (con *ö*) es otra cosa: «podría»."),
+        fx(2, "Wenn ich klein war, wohnten wir in einem Dorf.", "Wenn", "Als", "conector", "Una sola vez o una época del pasado («cuando era chico») → *als*. *wenn* en pasado es solo para lo que se repetía: «cada vez que»."),
+        fx(2, "Als ich nach Hause kam, meine Mutter kochte.", "meine Mutter kochte", "kochte meine Mutter", "orden", "La oración con *als* ocupa el primer lugar, así que el verbo principal va enseguida: *…, kochte meine Mutter*."),
+        # dictado
+        di(1, "Damals hatten wir kein Auto und keinen Garten.", note="*kein Auto* (neutro) y *keinen Garten* (acusativo masculino, con *-en*). *hatten*: Präteritum de *haben*, con doble *t*."),
+        di(2, "Als ich zehn war, hatte ich ein rotes Fahrrad.", note="*ein rotes Fahrrad*: neutro con *ein*, el adjetivo muestra el género con *-es*."),
+        # repaso intercalado
+        tr(2, "Vivo en Alemania desde 2020.", "Ich wohne seit 2020 in Deutschland.", ["Seit 2020 wohne ich in Deutschland.", "Ich lebe seit 2020 in Deutschland.", "Seit 2020 lebe ich in Deutschland."], "Repaso (semana 20): algo que empezó y sigue → *seit* + presente. Con *ich habe gewohnt* dirías que ya no vivís ahí."),
+        cz(2, "Escribí el adjetivo.", "Ich hatte einen ___ Hund. (klein)", "kleinen", note="Repaso (semana 19): acusativo masculino con *einen* → *kleinen*. La *-er* (*ein kleiner Hund*) es solo para el nominativo."),
+        tr(2, "Mi abuela me contaba cuentos.", "Meine Oma erzählte mir Märchen.", ["Meine Großmutter erzählte mir Märchen.", "Meine Oma hat mir Märchen erzählt.", "Meine Großmutter hat mir Märchen erzählt.", "Meine Grossmutter erzählte mir Märchen.", "Meine Oma erzählte mir Geschichten.", "Meine Großmutter erzählte mir Geschichten.", "Meine Oma hat mir Geschichten erzählt.", "Meine Großmutter hat mir Geschichten erzählt."], "Repaso (semana 13): a quién se cuenta va en dativo (*mir*); lo que se cuenta, en acusativo. *erzählen* es regular: *erzählte*."),
+        tr(2, "Antes el pueblo era más tranquilo que hoy.", "Früher war das Dorf ruhiger als heute.", ["Das Dorf war früher ruhiger als heute."], "Repaso (semana 16): comparativo con *-er* y *als*: *ruhiger als*. «Más tranquilo» nunca es *mehr ruhig*."),
+        # producción
+        ty(2, "Contá en dos oraciones, en Präteritum: cuando eras chico o chica vivías en un pueblo (con *als*) y no te dejaban ver tele (con *dürfen*).", "(Un recuerdo de la infancia)", "Als ich klein war, wohnte ich in einem Dorf. Ich durfte nicht fernsehen.",
+           [a + " " + b for a in ("Als ich klein war, wohnte ich in einem Dorf.", "Als ich klein war, lebte ich in einem Dorf.", "Als ich ein Kind war, wohnte ich in einem Dorf.", "Als ich ein Kind war, lebte ich in einem Dorf.", "Als ich klein war, wohnten wir in einem Dorf.", "Als ich ein Kind war, wohnten wir in einem Dorf.")
+            for b in ("Ich durfte nicht fernsehen.", "Ich durfte nie fernsehen.")],
+           "Con *als* el verbo va al final (*klein war*) y el principal enseguida (*wohnte ich*). *durfte*: los modales pierden la diéresis en pasado."),
     ],
 }

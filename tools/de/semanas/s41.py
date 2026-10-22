@@ -2,7 +2,7 @@
 """Semana 41 — Aufgrund der Krise (B2): preposiciones con genitivo del registro escrito, en la economía y la empresa."""
 from itertools import product
 
-from base import q, ch, li, cz, tr, ty, MAY  # noqa: F401
+from base import q, ch, li, cz, tr, ty, fx, di, MAY  # noqa: F401
 
 
 def _todas(*partes):
@@ -333,5 +333,24 @@ WEEK = {
         cz(2, "Escribí el relativo.", "Die Firma, für ___ sie seit zehn Jahren arbeitet, wurde verkauft.", "die", note="*für* + acusativo, *die Firma* femenino → *für die*. La preposición va delante, no al final como en el castellano coloquial «la empresa que trabaja para ella»."),
         ch(2, "Elegí el relativo.", "Die Kunden, ___ wir die Ware geliefert haben, sind zufrieden.", "denen", ["denen", "den", "die"], "*liefern* + dativo (a quién) y plural → *denen*, no *den*."),
         tr(2, "Es un tema sobre el que se discute mucho.", "Das ist ein Thema, über das viel diskutiert wird.", ["Das ist ein Thema, über das viel diskutiert wird.", "Das ist ein Thema, über das man viel diskutiert.", "Das ist ein Thema, worüber viel diskutiert wird.", "Das ist ein Thema, worüber man viel diskutiert.", "Es ist ein Thema, über das viel diskutiert wird.", "Es ist ein Thema, über das man viel diskutiert."], "*diskutieren über* + acusativo → *über das* (neutro). *worüber* también se usa."),
+        # encontrá el error, dictado, repaso intercalado y producción
+        # encontrá el error
+        fx(0, "Aufgrund dem Streik fallen heute viele Züge aus.", "dem Streik", "des Streiks", "caso", "*aufgrund* pide genitivo: *aufgrund des Streiks*, con *-s* también en el sustantivo. El dativo (*wegen dem Streik*) se oye en la charla, pero en un texto escrito es un error."),
+        fx(1, "Anstatt zu arbeiten, er hat den ganzen Tag im Internet gesurft.", "er hat", "hat er", "orden", "La construcción con *anstatt … zu* ocupa la posición 1 entera, así que el verbo conjugado va enseguida: *…, hat er den ganzen Tag gesurft*. En castellano el sujeto puede ir primero; en alemán manda el V2."),
+        fx(2, "Innerhalb zwei Wochen müssen Sie die Rechnung bezahlen.", "Innerhalb zwei Wochen", "Innerhalb von zwei Wochen", "preposición", "Con un número y sin artículo, el genitivo no se nota, así que se usa *von* + dativo: *innerhalb von zwei Wochen*. Con artículo sí va el genitivo: *innerhalb der nächsten zwei Wochen*."),
+        # dictado
+        di(0, "Angesichts der hohen Inflation investieren viele Firmen weniger.", note="*angesichts der hohen Inflation*: genitivo femenino, *der* y el adjetivo en *-en*. No es *die hohe*: la preposición cambia las dos terminaciones."),
+        di(2, "Laut einem Bericht des Ministeriums ist der Gewinn gestiegen.", note="*laut einem Bericht*: dativo, con *-em*. *des Ministeriums*: genitivo neutro, *des* y *-s* en el sustantivo. *ist gestiegen*: *steigen* va con *sein*."),
+        # repaso intercalado
+        cz(2, "Escribí *ob*, *wenn* o *dass*.", "Die Geschäftsführung weiß noch nicht, ___ sie Mitarbeiter entlassen muss.", "ob", note="Repaso (semana 26): «si» de duda, en una pregunta indirecta = *ob*. *wenn* es el «si» de condición: *Wenn der Umsatz sinkt, …*. *dass* no sirve: no sabe *si* tiene que despedir."),
+        cz(2, "Escribí *als* o *wenn*.", "___ die Firma 2019 Insolvenz anmelden musste, verloren 200 Leute ihre Arbeit.", "Als", note="Repaso (semana 21): una sola vez en el pasado → *als*. *wenn* en pasado solo sirve para lo que se repetía («cada vez que»)."),
+        cz(1, "Escribí la terminación del adjetivo.", "Wir suchen einen zuverlässig___ Zulieferer.", "en", note="Repaso (semana 19): *einen* + masculino en acusativo: el adjetivo va con *-en*, *einen zuverlässigen Zulieferer*."),
+        tr(1, "La empresa con la que trabajamos tiene problemas.", "Die Firma, mit der wir arbeiten, hat Probleme.", ["Die Firma, mit der wir zusammenarbeiten, hat Probleme.", "Das Unternehmen, mit dem wir arbeiten, hat Probleme.", "Das Unternehmen, mit dem wir zusammenarbeiten, hat Probleme."], "Repaso (semana 24): la preposición va delante del relativo, y el relativo toma el caso de *mit* (dativo) y el género de *die Firma*: *mit der*. El verbo de la relativa, al final."),
+        cz(1, "Escribí la preposición.", "Wir warten noch ___ die Antwort des Zulieferers.", "auf", note="Repaso (semana 22): *warten auf* + acusativo. No es *für*, aunque en castellano a veces digamos «esperar por»."),
+        # producción
+        ty(0, "Escribile a un cliente en dos oraciones formales: que debido a la gran demanda la entrega se demora (con *aufgrund*) y que el producto llega dentro de una semana (con *innerhalb*).", "(Mail a un cliente)", "Aufgrund der hohen Nachfrage verzögert sich die Lieferung. Das Produkt kommt innerhalb einer Woche an.",
+           [a + " " + b for a in ("Aufgrund der hohen Nachfrage verzögert sich die Lieferung.", "Aufgrund der großen Nachfrage verzögert sich die Lieferung.", "Die Lieferung verzögert sich aufgrund der hohen Nachfrage.", "Die Lieferung verzögert sich aufgrund der großen Nachfrage.")
+            for b in ("Das Produkt kommt innerhalb einer Woche an.", "Das Produkt wird innerhalb einer Woche geliefert.", "Sie erhalten das Produkt innerhalb einer Woche.", "Sie bekommen das Produkt innerhalb einer Woche.")],
+           "*aufgrund* y *innerhalb* piden genitivo: *der hohen Nachfrage* (femenino, adjetivo en *-en*) y *einer Woche*. Si *aufgrund* abre la oración, el verbo va enseguida: *verzögert sich*."),
     ],
 }

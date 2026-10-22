@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Semana 51 — Grüezi und Servus (C1): las variedades del alemán (Austria, Suiza, norte y sur) y los falsos amigos con el castellano."""
-from base import q, ch, li, cz, tr, ty, MAY  # noqa: F401
+from base import q, ch, li, cz, tr, ty, fx, di, MAY  # noqa: F401
 
 
 WEEK = {
@@ -265,5 +265,23 @@ WEEK = {
         tr(2, "Mi hermano trabaja en una empresa grande.", "Mein Bruder arbeitet in einer großen Firma.", ["Mein Bruder arbeitet in einer großen Firma.", "Mein Bruder arbeitet bei einer großen Firma.", "Mein Bruder arbeitet in einem großen Unternehmen.", "Mein Bruder arbeitet bei einem großen Unternehmen."], "*die Firma* = la empresa (falso amigo)."),
         tr(2, "Voy al gimnasio tres veces por semana.", "Ich gehe dreimal pro Woche ins Fitnessstudio.", ["Ich gehe dreimal pro Woche ins Fitnessstudio.", "Ich gehe dreimal in der Woche ins Fitnessstudio.", "Ich gehe dreimal die Woche ins Fitnessstudio.", "Dreimal pro Woche gehe ich ins Fitnessstudio.", "Dreimal in der Woche gehe ich ins Fitnessstudio."], "«El gimnasio» = *das Fitnessstudio*, no *das Gymnasium*."),
         tr(2, "Leí una noticia interesante.", "Ich habe eine interessante Nachricht gelesen.", ["Ich habe eine interessante Nachricht gelesen.", "Ich habe eine interessante Meldung gelesen.", "Ich las eine interessante Nachricht."], "«Noticia» = *die Nachricht*; *die Notiz* es un apunte."),
+        # encontrá el error, dictado, repaso intercalado y producción
+        # encontrá el error
+        fx(1, "In der Schweiz man spricht vier Sprachen.", "man spricht", "spricht man", "orden", "*In der Schweiz* ocupa la posición 1, así que el verbo va segundo: *In der Schweiz spricht man vier Sprachen*. El sujeto (*man*) pasa detrás del verbo."),
+        fx(2, "Bitte setzen Sie Ihre Firma unter den Vertrag.", "Firma", "Unterschrift", "falso amigo", "*die Firma* es la empresa; «la firma» de un documento es *die Unterschrift*. Más simple todavía: *Bitte unterschreiben Sie den Vertrag*."),
+        fx(2, "Nach der Arbeit gehe ich ins Gymnasium, um Sport zu machen.", "Gymnasium", "Fitnessstudio", "falso amigo", "*das Gymnasium* es la escuela secundaria que prepara para la universidad. El gimnasio para entrenar es *das Fitnessstudio*.", ["Nach der Arbeit gehe ich ins Fitness-Studio, um Sport zu machen."]),
+        # dictado
+        di(0, "Heuer fahren wir im Jänner mit einem kleinen Bus in die Berge.", note="*mit einem kleinen Bus*: dativo, *-em* en el artículo y *-en* en el adjetivo. *in die Berge*: adónde, acusativo plural. *heuer* y *Jänner* son de Austria."),
+        di(2, "Mein Vater ist seit einem Jahr in Rente.", note="*seit einem Jahr*: *seit* pide dativo, con *-em*. *die Rente* es la jubilación (falso amigo)."),
+        # repaso intercalado
+        cz(0, "Escribí *bin* o *habe* (estándar de Alemania).", "Gestern ___ ich lange im Café gesessen.", "habe", note="Repaso (semana 12): en Alemania, *sitzen, stehen, liegen* (estados, sin movimiento) van con *haben*. En Austria, Suiza y el sur se dice *bin gesessen*, y allá también es correcto."),
+        cz(0, "Escribí la terminación del adjetivo.", "In Wien habe ich einen frisch___ Marillenkuchen gegessen.", "en", note="Repaso (semana 19): acusativo masculino con *einen* → *einen frischen Marillenkuchen*."),
+        tr(2, "El guía dijo que la ciudad era muy antigua. (discurso indirecto)", "Der Reiseleiter sagte, die Stadt sei sehr alt.", [a + b for a in ("Der Reiseleiter sagte, ", "Der Reiseführer sagte, ", "Der Reiseleiter hat gesagt, ", "Die Reiseleiterin sagte, ") for b in ("die Stadt sei sehr alt.", "dass die Stadt sehr alt sei.")], "Repaso (semana 35): en el discurso indirecto el tiempo no «retrocede» como en castellano: «era» → *sei* (Konjunktiv I presente), porque la ciudad sigue siendo antigua."),
+        cz(1, "Escribí *obwohl* o *trotzdem*.", "___ ich Deutsch gut verstehe, verstehe ich in Zürich fast nichts.", "Obwohl", note="Repaso (semana 34): después del hueco el verbo va al final (*verstehe*) y la principal arranca con el verbo: es *obwohl*. *trotzdem* iría en la segunda parte: *…, trotzdem verstehe ich …*."),
+        # producción
+        ty(0, "Contá en dos oraciones, en Perfekt y con las palabras austríacas: que en Viena comiste una torta de damasco y que en el mercado compraste papas.", "(Un viaje a Viena)", "In Wien habe ich einen Marillenkuchen gegessen. Auf dem Markt habe ich Erdäpfel gekauft.",
+           [a + " " + b for a in ("In Wien habe ich einen Marillenkuchen gegessen.", "Ich habe in Wien einen Marillenkuchen gegessen.", "In Wien habe ich eine Marillentorte gegessen.", "Ich habe in Wien eine Marillentorte gegessen.")
+            for b in ("Auf dem Markt habe ich Erdäpfel gekauft.", "Ich habe auf dem Markt Erdäpfel gekauft.", "Auf dem Markt habe ich auch Erdäpfel gekauft.", "Und auf dem Markt habe ich Erdäpfel gekauft.")],
+           "*die Marille* = damasco y *der Erdapfel* (plural *Erdäpfel*) = papa, en Austria. *essen* y *kaufen* tienen objeto: Perfekt con *haben*. *auf dem Markt*: dónde, dativo."),
     ],
 }

@@ -1,6 +1,18 @@
 # -*- coding: utf-8 -*-
 """Semana 30 — Hätte ich das gewusst! (B1): Konjunktiv II del pasado, irreales, lamentos y als ob."""
-from base import q, ch, li, cz, tr, ty, MAY  # noqa: F401
+from base import q, ch, li, cz, tr, ty, fx, di, MAY  # noqa: F401
+
+
+def _mix(*slots):
+    """Todas las combinaciones (una frase de cada lista), también sin comas y con punto en vez de «!»."""
+    import itertools
+    out = []
+    for combo in itertools.product(*slots):
+        s = " ".join(combo)
+        for y in (s, s.replace(",", ""), s.replace("!", "."), s.replace(",", "").replace("!", ".")):
+            if y not in out:
+                out.append(y)
+    return out
 
 WEEK = {
     "week": 30,
@@ -244,5 +256,16 @@ WEEK = {
         tr(2, "Él hace como si fuera rico.", "Er tut so, als ob er reich wäre.", ["Er tut so, als ob er reich wäre.", "Er tut so, als wäre er reich.", "Er benimmt sich, als ob er reich wäre.", "Er benimmt sich, als wäre er reich."], "Konjunktiv II presente, aunque en castellano digas «fuera»."),
         ty(2, "Pasá a la forma corta con *als* + verbo.", "Er lacht, als ob er glücklich wäre.", "Er lacht, als wäre er glücklich.", note="*als ob … wäre* → *als wäre …*"),
         ty(2, "Escribí en alemán, con artículo.", "«la oportunidad»", "die Gelegenheit", ["die Gelegenheit", "die Chance"], "*die Gelegenheit* (también *die Chance*). " + MAY),
+        # encontrá el error, dictado y repaso (semanas 14 a 28)
+        fx(0, "Ich hätte früher gekommen.", "hätte", "wäre", "auxiliar", "*kommen* hace el Perfekt con *sein* (*ich bin gekommen*), así que el irreal también: *ich wäre gekommen*. El castellano dice «habría» para todo; el alemán copia el auxiliar del Perfekt."),
+        fx(1, "Wenn ich mehr gelernt hätte, ich hätte die Prüfung bestanden.", "ich hätte die", "hätte ich die", "orden", "La subordinada con *wenn* ocupa la posición 1: después de la coma va el verbo y después el sujeto: *hätte ich die Prüfung bestanden*."),
+        fx(1, "Wenn ich das gewusst hatte, wäre ich nicht gegangen.", "hatte", "hätte", "Konjunktiv", "Para el irreal hace falta *hätte*, con ä. *hatte* es el indicativo («lo había sabido»): la oración pasaría a decir que sí lo sabías."),
+        di(1, "Ich hätte dir gern bei der Arbeit geholfen.", note="*dir*: dativo, porque *helfen* pide dativo. *bei der Arbeit*: dativo femenino. Y *hätte*, con ä."),
+        di(2, "Er tut so, als ob er keinen Hunger hätte.", ["Er tut so als ob er keinen Hunger hätte."], "*keinen Hunger*: masculino en acusativo, con -en. *hätte* con ä, al final."),
+        ty(1, "Escribí dos lamentos sobre tu pasado, uno con *hätte* y otro con *wäre*.", "(no aprendí alemán antes · no me fui a vivir a Berlín)", "Hätte ich doch früher Deutsch gelernt! Wäre ich doch nach Berlin gezogen!", _mix(["Hätte ich doch früher Deutsch gelernt!", "Hätte ich nur früher Deutsch gelernt!", "Wenn ich doch früher Deutsch gelernt hätte!", "Wenn ich nur früher Deutsch gelernt hätte!"], ["Wäre ich doch nach Berlin gezogen!", "Wäre ich nur nach Berlin gezogen!", "Wenn ich doch nach Berlin gezogen wäre!", "Wenn ich nur nach Berlin gezogen wäre!"]), "*lernen* va con *haben* → *hätte … gelernt*; *ziehen* (mudarse) con *sein* → *wäre … gezogen*. Con *doch* o *nur*, el verbo adelante, como en una pregunta."),
+        cz(2, "Escribí el artículo.", "Ich habe den Schlüssel auf ___ Tisch gelegt. (der Tisch)", "den", note="Repaso de la semana 14: *legen* es poner, hay movimiento → *auf* + acusativo: *auf den Tisch*. Si ya está ahí, *liegen* + dativo: *auf dem Tisch*."),
+        cz(2, "Escribí el adjetivo con su terminación.", "Wir haben mit einem ___ Mann gesprochen. (mutig)", "mutigen", note="Repaso de la semana 19: *mit* pide dativo; después de *einem*, el adjetivo va con *-en*: *mit einem mutigen Mann*."),
+        tr(2, "Ahorro para poder viajar.", "Ich spare, um reisen zu können.", _mix(["Ich spare, um reisen zu können.", "Ich spare Geld, um reisen zu können.", "Ich spare, damit ich reisen kann.", "Ich spare Geld, damit ich reisen kann."]), "Repaso de la semana 23: «para» + infinitivo, con el mismo sujeto → *um … zu*, y el modal queda último: *reisen zu können*."),
+        cz(2, "Escribí el auxiliar.", "Als wir ankamen, ___ der Zug schon abgefahren.", "war", note="Repaso de la semana 28: lo que pasó antes va en Plusquamperfekt; *abfahren* es moverse → *sein*: *war … abgefahren*."),
     ],
 }

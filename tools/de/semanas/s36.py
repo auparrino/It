@@ -1,6 +1,18 @@
 # -*- coding: utf-8 -*-
 """Semana 36 — Die von ihm geschriebene Mail (B2): atributos de participio extendidos y su paráfrasis con relativa."""
-from base import q, ch, li, cz, tr, ty, MAY  # noqa: F401
+from base import q, ch, li, cz, tr, ty, fx, di, MAY  # noqa: F401
+
+
+def _mix(*slots):
+    """Todas las combinaciones (una frase de cada lista), también sin comas y con punto en vez de «!»."""
+    import itertools
+    out = []
+    for combo in itertools.product(*slots):
+        s = " ".join(combo)
+        for y in (s, s.replace(",", ""), s.replace("!", "."), s.replace(",", "").replace("!", ".")):
+            if y not in out:
+                out.append(y)
+    return out
 
 
 def _nc(*xs):
@@ -237,5 +249,17 @@ WEEK = {
         ch(1, "Elegí el relativo.", "Die Autorin, ___ Roman gerade verfilmt wird, lebt in Wien.", "deren", ["deren", "dessen", "die"], "«cuya novela»: el dueño es *die Autorin* → *deren*, aunque *Roman* sea masculino."),
         tr(1, "el político cuyo discurso criticaron todos", "der Politiker, dessen Rede alle kritisiert haben", ["der Politiker, dessen Rede alle kritisiert haben", "der Politiker, dessen Rede alle kritisierten", "der Politiker, dessen Rede von allen kritisiert wurde", "der Politiker, dessen Rede von allen kritisiert worden ist"], "Dueño masculino → *dessen*; lo poseído sin artículo (*Rede*) y verbo al final."),
         cz(1, "Escribí el relativo.", "Das Gesetz, über ___ seit Monaten diskutiert wird, tritt im Mai in Kraft.", "das", note="*über* + acusativo, *das Gesetz* neutro → *über das*. La preposición va delante del relativo."),
+        # encontrá el error, dictado y repaso (semanas 13 a 34)
+        fx(0, "Ich habe den von dir geschrieben Bericht gelesen.", "geschrieben Bericht", "geschriebenen Bericht", "adjetivo", "El participio va pegado al sustantivo y se declina como un adjetivo: *den … geschriebenen Bericht* (acusativo masculino). Lo del medio (*von dir*) no cambia nada."),
+        fx(1, "Die Studie, die gestern veröffentlicht hat, ist sehr interessant.", "veröffentlicht hat", "veröffentlicht wurde", "voz", "*die veröffentlichte Studie* es pasiva: alguien la publicó. En la relativa hace falta *wurde*: *die gestern veröffentlicht wurde*. Con *hat*, la *Studie* sería la que publica algo.", ["Die Studie, die gestern veröffentlicht worden ist, ist sehr interessant."]),
+        fx(2, "Die Zahl der in Deutschland lebende Zuwanderer steigt.", "lebende", "lebenden", "adjetivo", "*der … Zuwanderer* es genitivo plural; después de *der*, el participio lleva *-en*: *der in Deutschland lebenden Zuwanderer*."),
+        di(0, "Die im letzten Jahr veröffentlichte Studie war sehr interessant.", note="*im letzten Jahr*: dativo, con -en. *veröffentlichte* con -e porque va después de *die*."),
+        di(2, "Der Anteil der jungen Befragten ist gestiegen.", note="*der jungen Befragten*: genitivo plural; el adjetivo y el participio sustantivado van con *-en*."),
+        ty(2, "Escribí dos oraciones de informe, cada una con un atributo de participio extendido.", "(el informe publicado ayer es interesante · los datos reunidos por nosotros son nuevos)", "Der gestern veröffentlichte Bericht ist interessant. Die von uns gesammelten Daten sind neu.", _mix(["Der gestern veröffentlichte Bericht ist interessant.", "Der gestern veröffentlichte Jahresbericht ist interessant.", "Der gestern publizierte Bericht ist interessant."], ["Die von uns gesammelten Daten sind neu.", "Die von uns erhobenen Daten sind neu.", "Die von uns zusammengetragenen Daten sind neu."]), "El corchete: artículo + lo que agregás (*gestern*, *von uns*) + participio con terminación + sustantivo. *der … veröffentlichte Bericht*, *die … gesammelten Daten*."),
+        cz(2, "Escribí el pronombre (a mí).", "Die Studie gefällt ___ nicht.", "mir", note="Repaso de la semana 13: *gefallen* va con dativo: *mir*. Como en «me gusta», la cosa que gusta es el sujeto."),
+        cz(2, "Escribí la preposición.", "Die Studie beschäftigt sich ___ der Frage, wie viel wir schlafen.", "mit", note="Repaso de la semana 22: *sich beschäftigen mit* + dativo. En castellano «se ocupa de»: la preposición no se traduce, se aprende con el verbo."),
+        cz(2, "Escribí *deshalb*, *weil* o *denn*.", "Die Stichprobe war sehr klein, ___ sind die Ergebnisse nicht sicher.", "deshalb", note="Repaso de la semana 34: el verbo (*sind*) viene enseguida → un adverbio en posición 1: *deshalb*. Con *weil* el verbo iría al final, y *denn* da la causa, no la consecuencia."),
+        tr(2, "El estudio fue hecho por una universidad.", "Die Studie wurde von einer Universität durchgeführt.", ["Die Studie wurde von einer Universität durchgeführt.", "Die Studie wurde von einer Universität gemacht.", "Die Studie wurde von einer Uni durchgeführt.", "Die Studie wurde von einer Uni gemacht."], "Repaso de la semana 27: «por» + quien lo hace → *von* + dativo: *von einer Universität*. No *durch*, que es para la causa o el medio."),
+        cz(2, "Escribí *hätte* o *wäre*.", "Ohne die Studie ___ niemand das Problem bemerkt.", "hätte", note="Repaso de la semana 30: *bemerken* hace el Perfekt con *haben* → *hätte … bemerkt*."),
     ],
 }

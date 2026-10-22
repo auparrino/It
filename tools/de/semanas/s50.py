@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Semana 50 — Kurz gesagt (C1): la cohesión del texto (remisiones, conectores textuales, resumir y referir)."""
-from base import q, ch, li, cz, tr, ty, MAY  # noqa: F401
+from base import q, ch, li, cz, tr, ty, fx, di, MAY  # noqa: F401
 
 
 def V(*xs):
@@ -274,5 +274,23 @@ WEEK = {
         # parte 0 — repaso: partículas modales (semanas 18 y 46)
         cz(0, "Escribí la partícula que suaviza el pedido.", "Kannst du mir ___ kurz helfen?", "mal", note="*mal* = «un toque»: hace el pedido amable. Sin partícula suena seco."),
         ch(0, "Elegí la partícula.", "Was ist ___ los? Du siehst so traurig aus.", "denn", ["denn", "mal", "halt"], "En preguntas, *denn* muestra interés o preocupación («¿qué pasa, che?»)."),
+        # encontrá el error, dictado, repaso intercalado y producción
+        # encontrá el error
+        fx(0, "Er hat die Prüfung bestanden, das mich sehr freut.", "das", "was", "relativo", "Si la relativa retoma toda la oración anterior, el pronombre es *was* (lo cual): *…, was mich sehr freut*. *das* solo retoma un sustantivo neutro: *das Buch, das mich freut*."),
+        fx(1, "Ich konnte nicht kommen. Nämlich hatte ich keine Zeit.", "Nämlich hatte ich", "Ich hatte nämlich", "orden", "*nämlich* nunca va en la posición 1: va en el campo medio, después del verbo: *Ich hatte nämlich keine Zeit*. Es nuestro «es que», que en castellano sí va adelante."),
+        fx(2, "Zusammenfassend man kann sagen, dass das Projekt erfolgreich war.", "man kann", "kann man", "orden", "Los conectores textuales ocupan la posición 1: el verbo va enseguida y el sujeto, detrás: *Zusammenfassend kann man sagen, …*. Igual con *Erstens, Abschließend, Kurzum*."),
+        # dictado
+        di(0, "Die Autorin vertritt einen klaren Standpunkt, den sie mit vielen Beispielen belegt.", note="*einen klaren Standpunkt* y el relativo *den*: acusativo masculino. *mit vielen Beispielen*: dativo plural, con *-en* en el adjetivo y *-n* en el sustantivo."),
+        di(2, "Dem Autor zufolge habe die Regierung einen großen Fehler gemacht.", note="*dem Autor zufolge*: dativo, con *zufolge* detrás. *einen großen Fehler*: acusativo masculino, *-en*. *habe … gemacht*: Konjunktiv I, porque lo afirma el autor."),
+        # repaso intercalado
+        cz(2, "Escribí *als* o *wenn*.", "___ ich den Text zum ersten Mal las, verstand ich nur die Hälfte.", "Als", note="Repaso (semana 21): una vez en el pasado → *als*. *zum ersten Mal* lo deja claro: pasó una sola vez."),
+        cz(0, "Escribí la palabra interrogativa (wo- + preposición).", "___ denkst du gerade? – An die Prüfung.", "Woran", note="Repaso (semana 22): para preguntar por una cosa con *denken an*: *wo(r)-* + preposición, *Woran?* Para una persona sería *An wen?*"),
+        tr(2, "Dicen que el autor vivió en Buenos Aires. (con un modal)", "Der Autor soll in Buenos Aires gelebt haben.", ["Der Autor soll in Buenos Aires gewohnt haben.", "Die Autorin soll in Buenos Aires gelebt haben."], "Repaso (semana 37): *sollen* para repetir lo que dicen otros, con infinitivo pasado al final: *soll … gelebt haben*. Acá no es obligación: es «dicen que»."),
+        cz(1, "Escribí la preposición (en lugar de).", "___ einer langen Einleitung beginnt die Autorin direkt mit ihrer These.", "Statt", ["Statt", "Anstatt"], "Repaso (semana 41): *(an)statt* + genitivo = en lugar de: *statt einer langen Einleitung* (femenino, *-er*). Ocupa la posición 1, así que sigue el verbo: *beginnt*."),
+        # producción
+        ty(2, "Resumí un artículo en dos oraciones: que trata del teletrabajo (*handeln von*) y que la autora afirma que aumenta la productividad (en Konjunktiv I).", "(Resumen de un artículo)", "Der Text handelt vom Homeoffice. Die Autorin behauptet, es steigere die Produktivität.",
+           [a + " " + b for a in ("Der Text handelt vom Homeoffice.", "Der Artikel handelt vom Homeoffice.", "Der Text handelt von der Arbeit im Homeoffice.", "Der Artikel handelt von der Arbeit im Homeoffice.")
+            for b in ("Die Autorin behauptet, es steigere die Produktivität.", "Die Autorin behauptet, das Homeoffice steigere die Produktivität.", "Die Autorin behauptet, dass das Homeoffice die Produktivität steigere.", "Die Autorin behauptet, es erhöhe die Produktivität.", "Die Autorin behauptet, das Homeoffice erhöhe die Produktivität.", "Die Autorin behauptet, dass es die Produktivität steigere.")],
+           "*handeln von* + dativo: *vom Homeoffice*. Lo que afirma la autora va en Konjunktiv I (*steigere*, *erhöhe*): así marcás que es su tesis, no la tuya. El resumen, en presente."),
     ],
 }

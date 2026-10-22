@@ -2,7 +2,7 @@
 """Semana 43 — Als ob nichts wäre (C1): als ob / als wenn, modales en Konjunktiv II pasado y es sei denn."""
 from itertools import product
 
-from base import q, ch, li, cz, tr, ty, MAY  # noqa: F401
+from base import q, ch, li, cz, tr, ty, fx, di, MAY  # noqa: F401
 
 
 def V(*parts):
@@ -319,5 +319,23 @@ WEEK = {
         ch(1, "¿Qué significa?", "Das hätte früher gemacht werden müssen.", "Habría que haberlo hecho antes.", ["Habría que haberlo hecho antes.", "Eso tuvo que hacerse antes.", "Eso debe de haberse hecho antes."], "*hätte* + participio + *werden müssen* = pasiva con modal en Konjunktiv II pasado: algo que no se hizo y debía hacerse."),
         cz(1, "Escribí *worden* o *geworden*.", "Wäre das Haus besser gebaut ___, wäre es nicht eingestürzt.", "worden", note="Con otro participio (*gebaut*) la pasiva usa *worden*. *geworden* es solo cuando *werden* es el verbo principal (*Er ist Arzt geworden*)."),
         tr(1, "El accidente se podría haber evitado.", "Der Unfall hätte verhindert werden können.", ["Der Unfall hätte verhindert werden können.", "Der Unfall hätte vermieden werden können.", "Man hätte den Unfall verhindern können.", "Man hätte den Unfall vermeiden können.", "Den Unfall hätte man verhindern können.", "Den Unfall hätte man vermeiden können."], "Pasiva + modal en Konjunktiv II pasado: *hätte* + participio + *werden können*. También con *man*: *Man hätte … verhindern können*."),
+        # encontrá el error, dictado, repaso intercalado y producción
+        # encontrá el error
+        fx(0, "Er tut so, als ob er nichts weiß.", "weiß", "wüsste", "modo", "Después de *als ob* va Konjunktiv II: *als ob er nichts wüsste*. Es nuestro «como si supiera». El indicativo (*weiß*) se oye en la charla, pero en un texto cuidado es un error.", ["Er tut so, als ob er nichts wisse."]),
+        fx(1, "Du hättest mich anrufen gemusst.", "gemusst", "müssen", "forma verbal", "Con otro infinitivo, el modal no va en participio sino en infinitivo: *Du hättest mich anrufen müssen* (doble infinitivo). *gemusst* solo aparece cuando el modal está solo: *Ich habe das gemusst*."),
+        fx(1, "Er ärgert sich, weil er das Angebot annehmen sollen hätte.", "annehmen sollen hätte", "hätte annehmen sollen", "orden", "En subordinada con doble infinitivo, *hätte* no va al final sino delante de los dos infinitivos: *weil er das Angebot hätte annehmen sollen*. Es la gran excepción al verbo al final."),
+        # dictado
+        di(0, "Sie sah mich an, als hätte sie einen Geist gesehen.", note="*als* + verbo: sin *ob*, el verbo conjugado (*hätte*) va enseguida. *einen Geist*: acusativo masculino, con *-en*; *ein Geist* sería el sujeto."),
+        di(1, "Du hättest deinem Bruder früher helfen sollen.", note="*deinem Bruder*: *helfen* pide dativo, con *-em*. *hättest … helfen sollen*: doble infinitivo, el modal no va en participio."),
+        # repaso intercalado
+        cz(1, "Escribí la forma de *sein* o *haben* (Konjunktiv II).", "Wenn du früher losgefahren ___, hättest du den Zug noch erreicht.", "wärst", ["wärst", "wärest"], "Repaso (semana 12): *losfahren* es movimiento, así que va con *sein*, y en el irreal también: *wärst losgefahren*. *erreichen* tiene objeto: *hättest erreicht*."),
+        cz(2, "Escribí *denn*, *weil* o *deshalb*.", "Ich war zu müde, ___ bin ich nicht mitgekommen.", "deshalb", ["deshalb", "deswegen", "darum", "daher"], "Repaso (semana 34): el verbo (*bin*) va justo después del hueco, así que es *deshalb*, que ocupa la posición 1. *denn* no cambia el orden (*denn ich war …*) y *weil* manda el verbo al final."),
+        tr(2, "El jefe dice que no tiene tiempo. (discurso indirecto, formal)", "Der Chef sagt, er habe keine Zeit.", ["Der Chef sagt, dass er keine Zeit habe.", "Der Chef sagt, er hätte keine Zeit.", "Der Chef sagt, dass er keine Zeit hätte.", "Die Chefin sagt, sie habe keine Zeit."], "Repaso (semana 35): en un registro formal, lo que dice otro va en Konjunktiv I: *er habe*. Así queda claro que lo cuenta él, no vos. Con *dass*, el verbo va al final."),
+        cz(0, "Escribí la terminación del adjetivo.", "Er tat so, als hätte er einen wichtig___ Termin.", "en", note="Repaso (semana 19): *einen* + masculino en acusativo → *einen wichtigen Termin*. Que el verbo esté en Konjunktiv no cambia las terminaciones."),
+        # producción
+        ty(1, "Reprochale a un amigo en dos oraciones: que tendría que haberte avisado (*hättest … sollen*) y que no haga como si no hubiera pasado nada (*als ob* o *als*).", "(Tu amigo no vino y no avisó)", "Du hättest mir Bescheid sagen sollen. Tu nicht so, als ob nichts passiert wäre.",
+           [a + " " + b for a in ("Du hättest mir Bescheid sagen sollen.", "Du hättest mir Bescheid geben sollen.", "Du hättest mich anrufen sollen.", "Du hättest mir wenigstens Bescheid sagen sollen.")
+            for b in ("Tu nicht so, als ob nichts passiert wäre.", "Tu nicht so, als wäre nichts passiert.", "Tu nicht so, als wenn nichts passiert wäre.", "Tu doch nicht so, als ob nichts passiert wäre.", "Tu doch nicht so, als wäre nichts passiert.", "Tu nicht so, als ob nichts gewesen wäre.", "Tu nicht so, als wäre nichts gewesen.")],
+           "Reproche: *hättest* + infinitivo + *sollen* al final. «Como si no hubiera pasado nada»: Konjunktiv II pasado, *passiert wäre* (con *sein*); sin *ob*, el verbo va enseguida: *als wäre nichts passiert*."),
     ],
 }

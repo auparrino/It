@@ -2,7 +2,7 @@
 """Semana 46 — Das ist ja doch … (C1): partículas modales para sonar natural en la conversación."""
 from itertools import product
 
-from base import q, ch, li, cz, tr, ty, MAY  # noqa: F401
+from base import q, ch, li, cz, tr, ty, fx, di, MAY  # noqa: F401
 
 
 def V(*parts):
@@ -264,5 +264,23 @@ WEEK = {
            V("Ich wollte ", ["doch", "ja"], " ", ["nur", "bloß"], " helfen!"),
            "*doch nur*: ¡pero si solo…!"),
         ty(2, "Agregá dos partículas para una invitación amistosa.", "Komm vorbei!", "Komm doch mal vorbei!", note="*doch mal*, en ese orden."),
+        # encontrá el error, dictado, repaso intercalado y producción
+        # encontrá el error
+        fx(0, "Komm mal doch vorbei!", "mal doch", "doch mal", "orden", "Cuando se juntan, *doch* va antes que *mal*: *Komm doch mal vorbei!* Al revés suena raro a cualquier alemán, aunque cada partícula esté bien usada."),
+        fx(2, "Wo denn wohnst du jetzt?", "denn wohnst du", "wohnst du denn", "orden", "Las partículas van en el campo medio, nunca antes del verbo: *Wo wohnst du denn jetzt?* El *denn* va detrás del verbo y del pronombre, no pegado a la palabra interrogativa."),
+        fx(2, "Das ist nicht ja so schlimm.", "nicht ja", "ja nicht", "orden", "Las partículas van delante de *nicht*: *Das ist ja nicht so schlimm*. El *nicht* queda pegado a lo que niega (*so schlimm*)."),
+        # dictado
+        di(1, "Das wird schon klappen, du hast ja einen guten Plan.", note="*einen guten Plan*: acusativo masculino, *-en* en las dos palabras. *schon* (tranquilizar) y *ja* (ya lo sabemos) van sin acento, por eso cuesta oírlos."),
+        di(0, "Gib mir doch mal den kleinen Schlüssel!", note="*mir* (dativo) y *den kleinen Schlüssel* (acusativo masculino, *-en* en las dos palabras). *doch mal*: primero *doch*, después *mal*."),
+        # repaso intercalado
+        tr(1, "Si hubieras venido, te habrías divertido.", "Wenn du gekommen wärst, hättest du Spaß gehabt.", ["Wärst du gekommen, hättest du Spaß gehabt.", "Wenn du gekommen wärest, hättest du Spaß gehabt.", "Wenn du gekommen wärst, hättest du dich amüsiert.", "Wärst du gekommen, hättest du dich amüsiert."], "Repaso (semana 30): irreal del pasado en las dos partes. *kommen* va con *sein* → *wärst gekommen*; *Spaß haben*, con *haben* → *hättest gehabt*. Cada verbo conserva su auxiliar."),
+        cz(2, "Escribí la terminación del adjetivo.", "Das ist ja eine tolle Idee! Mit so einem gut___ Plan kann nichts schiefgehen.", "en", note="Repaso (semana 19): *mit* pide dativo; *einem* + masculino → *einem guten Plan*. Después de *einem*, el adjetivo va siempre con *-en*."),
+        cz(1, "Escribí *weil* o *denn*.", "Ich komme halt nicht mit, ___ ich habe keine Zeit.", "denn", note="Repaso (semana 18): después del hueco viene *ich habe* (orden normal), así que es *denn*. Con *weil*, el verbo iría al final: *weil ich keine Zeit habe*."),
+        cz(1, "Escribí el modal de suposición (Konjunktiv II de *dürfen*).", "Es ist schon zehn Uhr. Er ___ wohl schon zu Hause sein.", "dürfte", note="Repaso (semana 37): *dürfte* = «probablemente»: una suposición bastante segura, no un permiso. *wohl* la refuerza."),
+        # producción
+        ty(0, "En dos oraciones, con *ja* en la primera y *doch* en la segunda: recordale a tu amigo que el tren sale a las ocho y pedile que venga un poco antes.", "(Tu amigo siempre llega tarde)", "Der Zug fährt ja um acht. Komm doch etwas früher!",
+           [a + " " + b for a in ("Der Zug fährt ja um acht.", "Der Zug fährt ja um acht Uhr.", "Du weißt ja, dass der Zug um acht fährt.", "Du weißt ja, dass der Zug um acht Uhr fährt.", "Der Zug fährt ja schon um acht.")
+            for b in ("Komm doch etwas früher!", "Komm doch ein bisschen früher!", "Komm doch bitte etwas früher!", "Komm doch früher!", "Komm doch etwas früher.", "Komm doch ein bisschen früher.")],
+           "*ja* = algo que los dos ya saben; va en el campo medio, después del verbo. *doch* en el imperativo insiste con buena onda. Ninguna de las dos va en la posición 1."),
     ],
 }

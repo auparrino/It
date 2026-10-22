@@ -12,7 +12,7 @@ import re
 import sys
 
 
-from base import q, ch, li, cz, tr, ty, MAY  # noqa: E402,F401
+from base import q, ch, li, cz, tr, ty, fx, di, MAY  # noqa: E402,F401
 
 
 SEASONS = [
@@ -326,6 +326,11 @@ WEEKS.append({
         ty(2, "Escribí en alemán.", "«señor Müller»", "Herr Müller", note="*Herr* = señor. " + MAY),
         ty(2, "Escribí en alemán.", "«¿Cómo está usted?»", "Wie geht es Ihnen?", ["Wie geht es Ihnen?", "Wie geht's Ihnen?", "Wie gehts Ihnen?"], note="Fórmula fija con *Sie*: *Ihnen*, con mayúscula (es el dativo, que se ve en la semana 13)."),
         ty(2, "Escribí en alemán.", "«¿Cómo se escribe?»", "Wie schreibt man das?", note="Fórmula fija para pedir que te deletreen algo."),
+        # encontrá el error y dictado
+        fx(1, "Gute Morgen, Herr Müller!", "Gute", "Guten", "terminación", "Con *Morgen*, *Tag* y *Abend* va *Guten*, con -n: *Guten Morgen*. Solo *Gute Nacht* va sin -n. Esa -n casi no se oye, por eso se pierde al escribir."),
+        fx(2, "Guten Tag, Frau Weber! Wie geht es dir?", "dir", "Ihnen", "du/Sie", "A *Frau Weber* (señora + apellido) la tratás de *Sie*: *Wie geht es Ihnen?* *dir* es para alguien que tuteás, como un amigo o un compañero de curso."),
+        di(1, "Guten Abend, Frau Weber!", note="*Guten* lleva -n, aunque casi no suene. Y *Frau* + apellido, con mayúscula."),
+        di(2, "Wie geht es Ihnen?", note="La fórmula de *Sie*: *Ihnen*, con mayúscula. Si oís *dir*, es la de *du*."),
     ],
 })
 
@@ -611,6 +616,16 @@ WEEKS.append({
         tr(2, "¿Es usted la señora Schmidt?", "Sind Sie Frau Schmidt?", note="Verbo primero, y sin artículo antes de *Frau*."),
         tr(2, "¿De dónde son ustedes?", "Woher kommt ihr?", ["Woher kommt ihr?", "Woher seid ihr?", "Woher kommen Sie?", "Woher sind Sie?"], "«Ustedes» puede ser *ihr* (con confianza) o *Sie* (formal)."),
         ty(2, "Escribí la palabra interrogativa.", "«¿de dónde?»", "Woher", note="*Woher?*"),
+        # encontrá el error y dictado
+        fx(1, "Ich komme von Argentinien.", "von", "aus", "preposición", "El origen se dice con *aus*: *Ich komme aus Argentinien*. «De» no siempre es *von*: para decir de dónde sos, va *aus*."),
+        fx(2, "Wo du wohnst?", "du wohnst", "wohnst du", "orden", "En la pregunta con W el verbo va en la posición 2, pegado a la palabra W, y el sujeto detrás: *Wo wohnst du?* En castellano el orden da igual; en alemán, no."),
+        fx(2, "In Berlin ich wohne.", "ich wohne", "wohne ich", "orden", "Si arrancás con el lugar, el verbo sigue en la posición 2 y el sujeto pasa detrás: *In Berlin wohne ich*. El verbo no se mueve del segundo lugar."),
+        di(1, "Ich heiße Ana und ich komme aus Chile.", note="Con *ich* el verbo termina en *-e*: *heiße, komme*. Suena muy suave, pero se escribe."),
+        di(2, "Woher kommst du und wo wohnst du?", note="Con *du* el verbo termina en *-st*: *kommst, wohnst*. La *t* final casi no se oye."),
+        # repaso de la semana 1
+        cz(2, "Escribí la palabra que falta (a tu profesora, de usted).", "Guten Tag, Frau Weber! Wie geht es ___?", "Ihnen", note="Repaso de la semana 1: a quien tratás de *Sie*, *Wie geht es Ihnen?*, con mayúscula. *dir* es para alguien que tuteás."),
+        tr(2, "Buenas noches, señor Müller. ¿Cómo está usted? (llegás a una cena)", "Guten Abend, Herr Müller. Wie geht es Ihnen?", ["Guten Abend, Herr Müller. Wie geht es Ihnen?", "Guten Abend, Herr Müller! Wie geht es Ihnen?", "Guten Abend, Herr Müller, wie geht es Ihnen?", "Guten Abend, Herr Müller. Wie geht's Ihnen?"], "Repaso: al llegar de noche se dice *Guten Abend*; *Gute Nacht* es para irse a dormir. Y de usted, *Ihnen*."),
+        cz(2, "Escribí la palabra que falta (te vas a dormir).", "Gute ___! Bis morgen!", "Nacht", note="Repaso de la semana 1: para irte a dormir, *Gute Nacht*, sin -n en *Gute*. Al llegar de noche sería *Guten Abend*."),
     ],
 })
 
@@ -869,6 +884,16 @@ WEEKS.append({
         tr(2, "No son libros.", "Das sind keine Bücher.", note="Plural negado: *keine*."),
         tr(2, "¿Dónde están las sillas?", "Wo sind die Stühle?", note="*der Stuhl* → *die Stühle*."),
         ty(2, "Escribí en alemán, con artículo.", "«el guante» (mano + zapato)", "der Handschuh", note="*die Hand* + *der Schuh* = *der Handschuh*. " + MAY),
+        # encontrá el error y dictado
+        fx(0, "Die Mädchen heißt Lea.", "Die", "Das", "género", "*Mädchen* es neutro: todo lo que termina en *-chen* es *das*, aunque sea una chica. El castellano («la chica») empuja a poner *die*."),
+        fx(1, "Das ist ein Tasche.", "ein", "eine", "género", "*die Tasche* es femenina → *eine Tasche*. *ein* va con *der* y *das*. Mirá el artículo alemán, no el de «la cartera»."),
+        fx(1, "Das ist nicht ein Handy, das ist ein Buch.", "nicht ein", "kein", "negación", "«No es un…» no se dice *nicht ein*: un sustantivo con *ein* se niega con *kein*: *Das ist kein Handy*. Pensalo como *k* + *ein*."),
+        di(1, "Das ist ein Stuhl und das ist eine Lampe.", note="*ein* (der, das) y *eine* (die): la -e final se oye poco, pero marca el femenino."),
+        di(2, "Hier sind keine Stühle.", note="En plural no hay *ein*, pero sí *keine*, con -e. Y *Stühle* lleva diéresis: suena «schtüle»."),
+        # repaso de las semanas 1 y 2
+        cz(2, "Escribí la forma de *kommen* (de usted).", "Woher ___ Sie, Frau Weber?", "kommen", note="Repaso de la semana 2: con *Sie* el verbo va como con *wir*: *Sie kommen*. *kommst* es de *du*."),
+        tr(2, "Acá vive Anna.", "Hier wohnt Anna.", ["Hier wohnt Anna.", "Anna wohnt hier."], "Repaso de la semana 2: si empezás con *Hier*, el verbo sigue segundo y *Anna* va detrás."),
+        tr(2, "¿Vos sos Tom?", "Bist du Tom?", note="Repaso: pregunta de sí o no, con el verbo primero. *sein* con *du* → *bist*."),
     ],
 })
 
@@ -1236,6 +1261,17 @@ WEEKS.append({
         ch(2, "¿Qué quiere decir?", "Wohnst du nicht hier? – Nein.", "No, no vivo acá.", ["No, no vivo acá.", "Sí, vivo acá.", "No sé."], "*nein* confirma lo negativo: no vive acá. Para decir que sí vive acá: *Doch!*"),
         cz(2, "Escribí *ja*, *nein* o *doch*.", "Wohnst du nicht in Berlin? – ___, ich wohne in Berlin.", "Doch", note="Pregunta con *nicht* y respuesta que dice que sí → *doch*."),
         ty(2, "Contestá que sí, con oración completa.", "Hast du keine Zeit?", "Doch, ich habe Zeit.", ["Doch, ich habe Zeit.", "Doch ich habe Zeit.", "Doch, ich habe Zeit!"], "El «sí» contra *keine* es *doch*, y después la oración afirmativa sin *keine*."),
+        # encontrá el error y dictado
+        fx(1, "Ich habe ein Bruder und eine Schwester.", "ein Bruder", "einen Bruder", "caso", "*Bruder* es masculino y acá es objeto directo de *haben*: acusativo, *einen Bruder*. Femenino y neutro no cambian (*eine Schwester*); por eso el error salta solo con el masculino."),
+        fx(1, "Hast du einen Katze?", "einen", "eine", "género", "*die Katze* es femenina, y en acusativo el femenino no cambia: *eine Katze*. *einen* es solo para masculinos (*einen Hund*): no le pongas -n a todo."),
+        fx(2, "Ich habe nicht Zeit.", "nicht", "keine", "negación", "*Zeit* va sin artículo, así que se niega con *kein*: *Ich habe keine Zeit*. «No tengo tiempo» invita a poner *nicht*, pero *nicht* no niega un sustantivo sin artículo."),
+        di(1, "Hast du einen Hund oder eine Katze?", note="*einen Hund* (masculino, acusativo) y *eine Katze* (femenino): la diferencia es una -n que casi no se oye."),
+        di(2, "Wir brauchen keinen Tisch.", note="*der Tisch* como objeto → *keinen Tisch*. Al hablar la -en se come; al escribir, no."),
+        # repaso de las semanas 1 a 3
+        cz(2, "Escribí el pronombre (er, sie o es).", "Wo ist die Tasche? – ___ ist hier.", "Sie", note="Repaso de la semana 3: *die Tasche* → *sie*, aunque sea una cosa. El pronombre copia el artículo alemán."),
+        tr(2, "¿Dónde vive usted, señora Weber?", "Wo wohnen Sie, Frau Weber?", ["Wo wohnen Sie, Frau Weber?", "Frau Weber, wo wohnen Sie?"], "Repaso: W-Frage con el verbo segundo y, con *Sie*, la forma de *wir*: *wohnen*."),
+        tr(2, "No es una mesa, es una silla.", "Das ist kein Tisch, das ist ein Stuhl.", ["Das ist kein Tisch, das ist ein Stuhl.", "Das ist kein Tisch. Das ist ein Stuhl.", "Das ist kein Tisch, sondern ein Stuhl."], "Repaso de la semana 3: «no es un» = *kein*, no *nicht ein*. *Tisch* y *Stuhl* son masculinos."),
+        cz(2, "Escribí el artículo.", "___ Mädchen heißt Lea.", "Das", note="Repaso de la semana 3: todo lo que termina en *-chen* es neutro, aunque sea una chica."),
     ],
 })
 
@@ -1516,6 +1552,17 @@ WEEKS.append({
         tr(2, "¿Algo más?", "Sonst noch etwas?", ["Sonst noch etwas?", "Noch etwas?", "Sonst noch was?", "Noch was?"], "*Sonst noch etwas?*"),
         ty(2, "Escribí en alemán, con artículo.", "«el huevo»", "das Ei", note="*das Ei*, plural *die Eier*. " + MAY),
         ty(2, "Escribí en alemán, con artículo.", "«la leche»", "die Milch", note="*die Milch*. " + MAY),
+        # encontrá el error y dictado
+        fx(2, "Ich möchte ein Kaffee, bitte.", "ein", "einen", "caso", "Lo que pedís es objeto directo: va en acusativo. *der Kaffee* → *einen Kaffee*. En el café la -n se pierde al hablar, pero se escribe."),
+        fx(1, "Was kostet die Äpfel?", "kostet", "kosten", "concordancia", "*die Äpfel* es plural, así que el verbo va en plural: *Was kosten die Äpfel?* Con un solo producto, *Was kostet der Käse?*"),
+        fx(2, "Ich kaufe ein Kilo von Tomaten.", "von", None, "calco", "Peso y cantidad van sin «de»: *ein Kilo Tomaten*. El *von* es un calco del castellano: sobra."),
+        di(2, "Ich nehme einen Kaffee und ein Brötchen.", note="*einen Kaffee* (masculino, con -en) y *ein Brötchen* (neutro, sin cambio)."),
+        di(1, "Der Käse kostet drei Euro fünfzig.", note="Primero los euros, después los centavos. Y *Euro* no lleva plural después de un número."),
+        # repaso de las semanas 2 a 4
+        cz(2, "Escribí *kein* con la terminación que va.", "Ich trinke ___ Kaffee. (no tomo café)", "keinen", note="Repaso de la semana 4: *Kaffee* sin artículo se niega con *kein*; como es masculino y objeto directo, *keinen*."),
+        cz(2, "Escribí el pronombre.", "Der Kuchen? Ich kaufe ___.", "ihn", note="Repaso de la semana 4: *der Kuchen* como objeto → *ihn*. Es masculino, aunque digas «la torta»: el pronombre sigue al artículo alemán."),
+        tr(2, "¿Tenés hermanos?", "Hast du Geschwister?", note="Repaso: pregunta de sí o no, con el verbo primero; *haben* con *du* → *hast*. «Hermanos» en general es *Geschwister*."),
+        tr(2, "Anna no vive en Berlín.", "Anna wohnt nicht in Berlin.", note="Repaso de la semana 4: *nicht* va antes del lugar. El «no» castellano va pegado al verbo; el *nicht* alemán, no."),
     ],
 })
 
@@ -1827,6 +1874,17 @@ WEEKS.append({
         cz(2, "Escribí *nicht* o la forma de *kein*.", "Am Morgen esse ich ___ Brot.", "kein", note="*Brot* sin artículo → *kein Brot*."),
         ty(2, "Negá la oración con *nicht*.", "Am Montag arbeite ich.", "Am Montag arbeite ich nicht.", note="*nicht* va al final, después del sujeto que quedó detrás del verbo."),
         ch(2, "Contestá que sí.", "Schläfst du am Samstag nicht lange? – ___, bis zehn Uhr.", "Doch", ["Doch", "Ja", "Nein"], "Pregunta con *nicht*, respuesta que la contradice → *doch*."),
+        # encontrá el error y dictado
+        fx(0, "Fahrst du heute nach Berlin?", "Fahrst", "Fährst", "conjugación", "*fahren* cambia *a → ä* con *du* y *er/sie/es*: *du fährst, er fährt*. Con *wir* y *ihr* vuelve la *a*: *wir fahren*."),
+        fx(0, "Er esst einen Apfel.", "esst", "isst", "conjugación", "*essen* cambia *e → i* con *du* y *er/sie/es*: *er isst*. Como la raíz termina en *s*, con *du* tampoco se suma otra: *du isst*."),
+        fx(2, "Am Montag ich arbeite bis fünf Uhr.", "ich arbeite", "arbeite ich", "orden", "Si arrancás con el cuándo (*Am Montag*), el verbo sigue en la posición 2 y el sujeto va detrás. «El lunes yo trabajo» está bien en castellano; en alemán, no."),
+        di(0, "Er isst einen Apfel und liest ein Buch.", note="*isst* y *liest*: cambio de vocal con *er*. Y *einen Apfel*, masculino en acusativo, con una -n que apenas suena."),
+        di(1, "Am Montag fährt sie um halb acht.", note="*fährt* con ä. *halb acht* son las 7:30: media hora antes de las ocho."),
+        # repaso de las semanas 2 a 5
+        cz(2, "Escribí el número en letras.", "3,50 € = drei Euro ___", "fünfzig", note="Repaso de la semana 5: el precio se lee euros y después centavos: *drei Euro fünfzig*."),
+        tr(2, "Quisiera un té y un pancito.", "Ich möchte einen Tee und ein Brötchen.", ["Ich möchte einen Tee und ein Brötchen.", "Ich hätte gern einen Tee und ein Brötchen.", "Ich nehme einen Tee und ein Brötchen.", "Ich möchte einen Tee und ein Brot.", "Ich hätte gern einen Tee und ein Brot."], "Repaso: *der Tee* → *einen Tee*; *das Brötchen* no cambia. En acusativo solo el masculino suma -en."),
+        cz(2, "Escribí *nicht* o *kein* con su terminación.", "Heute habe ich ___ Zeit.", "keine", note="Repaso de la semana 4: sin artículo se niega con *kein*; *die Zeit* → *keine Zeit*."),
+        tr(2, "¿De dónde es el señor Müller?", "Woher kommt Herr Müller?", ["Woher kommt Herr Müller?", "Woher ist Herr Müller?"], "Repaso de la semana 2: palabra W, verbo y sujeto. *Herr Müller* es él: *kommt*, en tercera persona."),
     ],
 })
 

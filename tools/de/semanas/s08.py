@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Semana 8 — Ich stehe früh auf (A1): verbos separables, la hora informal y las citas."""
-from base import q, ch, li, cz, tr, ty, MAY  # noqa: F401
+from base import q, ch, li, cz, tr, ty, fx, di, MAY  # noqa: F401
 
 WEEK = {
     "week": 8,
@@ -280,5 +280,16 @@ WEEK = {
         cz(2, "Escribí el plural. (der Termin, -e)", "Heute habe ich drei ___.", "Termine", note="*der Termin, -e* → *die Termine*. Nada de *-s*: «Termins» es el plural castellano. " + MAY),
         cz(2, "Escribí el plural. (die Einladung, -en)", "Danke für die ___!", "Einladungen", note="Femeninos en *-ung* → *-en*: *die Einladungen*. " + MAY),
         ch(2, "Elegí el pronombre.", "Der Film ist super. Ich sehe ___ am Samstag.", "ihn", ["ihn", "er", "ihm"], "*der Film* como objeto → *ihn* (lo). *ihm* (con m) es «le»: otro caso, que llega en la semana 13."),
+        # encontrá el error y dictado
+        fx(0, "Kannst du mich morgen rufen an?", "rufen an", "anrufen", "orden", "Con modal, el separable va entero y junto al final: *Kannst du mich morgen anrufen?* Solo se separa cuando el verbo está conjugado: *Ich rufe dich an*."),
+        fx(0, "Er ladet uns am Samstag ein.", "ladet", "lädt", "conjugación", "*einladen* cambia la vocal como *fahren*: *er lädt … ein*. El prefijo no cambia nada: la parte que se conjuga se porta como *laden*."),
+        fx(0, "Ich aufstehe um sieben.", "aufstehe um sieben", "stehe um sieben auf", "orden", "En presente el prefijo se separa y va al final: *Ich stehe um sieben auf*. «Me levanto» es una sola palabra; *aufstehen*, conjugado, son dos."),
+        di(0, "Ich rufe dich morgen an.", note="El prefijo *an* va al final y suena corto: no te lo comas. *dich* es el acusativo de *du*."),
+        di(2, "Holst du mich um Viertel nach sieben ab?", note="*abholen* se separa: *holst … ab*. Y *Viertel nach sieben* son las 7:15."),
+        # repaso de las semanas 4 a 7
+        cz(2, "Escribí la forma de *dürfen* o *müssen*.", "Hier ___ man nicht parken. (está prohibido)", "darf", note="Repaso de la semana 7: prohibido = *nicht dürfen*. *muss nicht* sería «no hace falta»."),
+        tr(2, "Mañana tengo que trabajar.", "Morgen muss ich arbeiten.", ["Morgen muss ich arbeiten.", "Ich muss morgen arbeiten."], "Repaso de la semana 7: modal segundo, infinitivo al final. Si empezás con *Morgen*, el sujeto va detrás del modal."),
+        cz(2, "Escribí la forma de *schlafen*.", "Am Sonntag ___ er bis zehn Uhr.", "schläft", note="Repaso de la semana 6: *schlafen* → *er schläft*, a → ä solo con *du* y *er/sie/es*."),
+        tr(2, "No tenemos tiempo.", "Wir haben keine Zeit.", note="Repaso de la semana 4: un sustantivo sin artículo se niega con *kein*: *Zeit* es femenino, *keine Zeit*. Nunca *nicht Zeit*."),
     ],
 }

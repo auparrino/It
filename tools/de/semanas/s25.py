@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Semana 25 — Wenn ich reich wäre (B1): Konjunktiv II presente para lo irreal, los deseos, los consejos y la cortesía."""
-from base import q, ch, li, cz, tr, ty, MAY  # noqa: F401
+from base import q, ch, li, cz, tr, ty, fx, di, MAY  # noqa: F401
 
 WEEK = {
     "week": 25,
@@ -286,5 +286,23 @@ WEEK = {
         tr(2, "Ya no fumo.", "Ich rauche nicht mehr.", ["Ich rauche nicht mehr."], "«Ya no» = *nicht mehr* (lo contrario de *noch*)."),
         ch(2, "Elegí.", "Ich bin ___ 15, ich darf noch nicht Auto fahren.", "erst", ["erst", "nur", "schon"], "Edad, «todavía soy chico» (y va a cambiar): *erst 15*. *nur* es para cantidades."),
         tr(2, "Si tuviera plata, me compraría otro auto. Pero ya no tengo plata.", "Wenn ich Geld hätte, würde ich mir noch ein Auto kaufen. Aber ich habe kein Geld mehr.", ["Wenn ich Geld hätte, würde ich mir noch ein Auto kaufen. Aber ich habe kein Geld mehr.", "Wenn ich Geld hätte, würde ich noch ein Auto kaufen. Aber ich habe kein Geld mehr.", "Wenn ich Geld hätte, würde ich mir ein anderes Auto kaufen. Aber ich habe kein Geld mehr.", "Wenn ich Geld hätte, würde ich ein anderes Auto kaufen. Aber ich habe kein Geld mehr.", "Wenn ich Geld hätte, kaufte ich mir noch ein Auto. Aber ich habe kein Geld mehr."], "«Ya no tengo plata» = *kein Geld mehr* (no «nicht mehr Geld»). «Otro» (uno más) = *noch ein*; (uno distinto) = *ein anderes*."),
+        # encontrá el error, dictado, repaso intercalado y producción
+        # encontrá el error
+        fx(0, "An deiner Stelle wurde ich kündigen.", "wurde", "würde", "forma verbal", "Para «yo que vos, renunciaría» va *würde*, con diéresis. *wurde* sin diéresis es el pasado de *werden* («se hizo», «se puso»)."),
+        fx(1, "Wenn ich mehr Geld habe, würde ich mir ein Auto kaufen.", "habe", "hätte", "modo", "Si es irreal («si tuviera»), las dos partes van en Konjunktiv II: *Wenn ich mehr Geld hätte, …*. Con *habe* sería una condición real."),
+        fx(1, "Wenn ich reich wäre, ich würde eine Weltreise machen.", "ich würde", "würde ich", "orden", "La oración con *wenn* ocupa el primer lugar: el verbo principal va enseguida, *…, würde ich eine Weltreise machen*."),
+        # dictado
+        di(0, "Ich hätte gern einen großen Kaffee.", ["Ich hätte gern einen grossen Kaffee.", "Ich hätte gerne einen großen Kaffee."], "*hätte gern* es el pedido cortés; *einen großen*: acusativo masculino, las dos con *-n*."),
+        di(2, "Könnten Sie mir bitte helfen?", note="*könnten* (con *ö*) es el pedido cortés; *konnten* sería el pasado. *mir*: *helfen* pide dativo."),
+        # repaso intercalado
+        cz(2, "Escribí el pronombre relativo.", "Das ist die Nachbarin, ___ ich oft helfe.", "der", note="Repaso (semana 24): *helfen* pide dativo (*ich helfe ihr*) → relativo dativo femenino, *der*."),
+        tr(2, "Trabajo los sábados para poder viajar.", "Ich arbeite samstags, um reisen zu können.", ["Ich arbeite am Samstag, um reisen zu können.", "Samstags arbeite ich, um reisen zu können.", "Ich arbeite samstags, damit ich reisen kann.", "Ich arbeite am Samstag, damit ich reisen kann.", "Ich arbeite samstags, um zu reisen.", "Ich arbeite am Samstag, um zu reisen."], "Repaso (semana 23): mismo sujeto → *um … zu*, con el infinitivo al final (*reisen zu können*). *für* no sirve delante de un verbo."),
+        cz(2, "Escribí la palabra («de eso»).", "Träumst du auch von einer Weltreise? – Ja, ich träume oft ___.", "davon", note="Repaso (semana 22): *träumen von*; para una cosa, *da-* + preposición: *davon*."),
+        cz(2, "Escribí el conector («por eso»).", "Ich habe im Lotto gewonnen, ___ kann ich mir ein Haus leisten.", "deshalb", ["darum", "deswegen"], "Repaso (semana 18): lo que sigue es la consecuencia y el verbo va enseguida (*kann ich*) → *deshalb*."),
+        # producción
+        ty(2, "Escribí dos oraciones: si fueras millonario o millonaria, darías la vuelta al mundo; y a un amigo cansado aconsejale descansar más (*An deiner Stelle…*).", "(Un sueño y un consejo)", "Wenn ich Millionär wäre, würde ich eine Weltreise machen. An deiner Stelle würde ich mich mehr ausruhen.",
+           [a + " " + b for a in ("Wenn ich Millionär wäre, würde ich eine Weltreise machen.", "Wenn ich Millionärin wäre, würde ich eine Weltreise machen.", "Wenn ich Millionär wäre, würde ich um die Welt reisen.", "Wenn ich Millionärin wäre, würde ich um die Welt reisen.", "Wenn ich reich wäre, würde ich eine Weltreise machen.", "Wäre ich Millionär, würde ich eine Weltreise machen.")
+            for b in ("An deiner Stelle würde ich mich mehr ausruhen.", "An deiner Stelle würde ich mich öfter ausruhen.", "An deiner Stelle würde ich mehr schlafen.")],
+           "Irreal: *wäre* en la parte con *wenn* y *würde* + infinitivo en la otra; el verbo principal va enseguida. *An deiner Stelle* ocupa el primer lugar: *würde ich*."),
     ],
 }

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Semana 48 — Stolz auf, abhängig von (C1): adjetivos y sustantivos con preposición, verbos y adjetivos con genitivo."""
-from base import q, ch, li, cz, tr, ty, MAY  # noqa: F401
+from base import q, ch, li, cz, tr, ty, fx, di, MAY  # noqa: F401
 
 
 def V(*xs):
@@ -279,5 +279,23 @@ WEEK = {
         cz(0, "Escribí el relativo.", "Das ist die Arbeit, auf ___ ich am meisten stolz bin.", "die", note="*stolz auf* + acusativo, *die Arbeit* femenino → *auf die*. La preposición del adjetivo pasa delante del relativo; en castellano coloquial queda colgando («el trabajo que estoy orgulloso»)."),
         tr(0, "Es un problema del que todos somos conscientes.", "Das ist ein Problem, dessen wir uns alle bewusst sind.", V("Das ist ein Problem, dessen wir uns alle bewusst sind.", "Es ist ein Problem, dessen wir uns alle bewusst sind.", "Das ist ein Problem, über das wir uns alle im Klaren sind.", "Das ist ein Problem, das uns allen bewusst ist.", "Es ist ein Problem, das uns allen bewusst ist."), "*sich einer Sache bewusst sein* pide genitivo → relativo *dessen* (masculino/neutro). Más llano: *das uns allen bewusst ist*."),
         ch(0, "¿Va *es* o no?", "Dass er so abhängig von seinen Eltern ist, wundert ___.", "mich", ["mich", "es mich", "mich es"], "La oración con *dass* ocupa el Vorfeld: el *es* que la anuncia desaparece (*Es wundert mich, dass…* ↔ *Dass…, wundert mich*)."),
+        # encontrá el error, dictado, repaso intercalado y producción
+        # encontrá el error
+        fx(0, "Ich bin stolz von meiner Tochter.", "von meiner", "auf meine", "preposición", "*stolz auf* + acusativo: *stolz auf meine Tochter*. El «orgulloso de» castellano empuja a *von*, pero la preposición del adjetivo hay que aprenderla con él, y con ella cambia el caso."),
+        fx(0, "Ich bin an dem Wetter hier noch nicht gewöhnt.", "an dem", "an das", "caso", "*gewöhnt an* va con acusativo: *an das Wetter* (o *ans Wetter*). Ojo: *interessiert an* va con dativo. *an* es de dos casos y el adjetivo decide cuál.", ["Ich bin ans Wetter hier noch nicht gewöhnt."]),
+        fx(1, "Ich interessiere mich sehr an Politik.", "an", "für", "preposición", "*sich interessieren für* + acusativo: *Ich interessiere mich für Politik*. El *an* (+ dativo) va con el adjetivo y el sustantivo: *interessiert an*, *Interesse an*. Del verbo al adjetivo, la preposición cambia."),
+        # dictado
+        di(0, "Mein Bruder ist sehr neidisch auf meinen neuen Job.", note="*neidisch auf* + acusativo: *meinen neuen Job*, masculino, con *-en* en el posesivo y en el adjetivo."),
+        di(2, "Wir gedenken heute der Opfer des Krieges.", note="*gedenken* pide genitivo: *der Opfer* (plural) y *des Krieges* (masculino, con *-es*). Suenan como un nominativo, pero son genitivos."),
+        # repaso intercalado
+        cz(1, "Escribí *worden* o *geworden*.", "Er ist nach der Trennung sehr nachtragend ___.", "geworden", note="Repaso (semanas 23 y 31): *werden* + adjetivo (volverse) → *ist … geworden*. *worden* va solo con otro participio, en la pasiva: *Er ist verlassen worden*."),
+        cz(0, "Escribí el relativo.", "Das ist die Freundin, auf ___ ich so stolz bin.", "die", note="Repaso (semana 24): *stolz auf* + acusativo, y *die Freundin* es femenino → *auf die*. La preposición va delante del relativo y el verbo, al final."),
+        tr(2, "Aunque estaba cansada, fue a la fiesta.", "Obwohl sie müde war, ist sie zur Party gegangen.", [a + b for a, b in [("Obwohl sie müde war, ", "ist sie zur Party gegangen."), ("Obwohl sie müde war, ", "ging sie zur Party."), ("Obwohl sie müde war, ", "ist sie auf die Party gegangen."), ("Obwohl sie müde war, ", "ging sie auf die Party."), ("Sie ist zur Party gegangen, ", "obwohl sie müde war."), ("Sie ging zur Party, ", "obwohl sie müde war."), ("Sie ist auf die Party gegangen, ", "obwohl sie müde war."), ("Sie ging auf die Party, ", "obwohl sie müde war.")]], "Repaso (semana 34): *obwohl* manda el verbo al final (*müde war*), y la principal arranca con el verbo: *…, ist sie*. Con *trotzdem*: *Sie war müde, trotzdem ist sie …*."),
+        cz(1, "Escribí la forma de *lassen*.", "Gefühle ___ sich nicht immer kontrollieren.", "lassen", note="Repaso (semana 40): *sich lassen* + infinitivo = «se puede». El sujeto es plural (*Gefühle*), así que *lassen*."),
+        # producción
+        ty(0, "Contá en dos oraciones: que estás orgulloso de tu hermana y que todavía no te acostumbraste al clima alemán (*stolz auf*, *gewöhnt an*).", "(Tu vida en Alemania)", "Ich bin stolz auf meine Schwester. Ich bin noch nicht an das deutsche Wetter gewöhnt.",
+           [a + " " + b for a in ("Ich bin stolz auf meine Schwester.", "Ich bin sehr stolz auf meine Schwester.", "Auf meine Schwester bin ich stolz.")
+            for b in ("Ich bin noch nicht an das deutsche Wetter gewöhnt.", "Ich bin noch nicht ans deutsche Wetter gewöhnt.", "Ich bin an das deutsche Wetter noch nicht gewöhnt.", "An das deutsche Wetter bin ich noch nicht gewöhnt.", "Ich bin noch nicht an das deutsche Klima gewöhnt.", "Ich bin noch nicht ans deutsche Klima gewöhnt.", "An das deutsche Klima bin ich noch nicht gewöhnt.", "Ich habe mich noch nicht an das deutsche Wetter gewöhnt.")],
+           "*stolz auf* y *gewöhnt an* van con acusativo: *auf meine Schwester*, *an das* (*ans*) *deutsche Wetter*. *nicht* va antes del grupo con preposición y del participio."),
     ],
 }

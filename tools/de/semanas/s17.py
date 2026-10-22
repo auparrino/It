@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Semana 17 — Gute Besserung! (A2): verbos reflexivos, sollen para consejos, el cuerpo y el médico."""
-from base import q, ch, li, cz, tr, ty, MAY  # noqa: F401
+from base import q, ch, li, cz, tr, ty, fx, di, MAY  # noqa: F401
 
 WEEK = {
     "week": 17,
@@ -348,5 +348,23 @@ WEEK = {
         cz(2, "Escribí el artículo.", "Leg das Rezept bitte auf ___ Tisch. (der Tisch)", "den", note="*legen* = poner: hay destino (*Wohin?*), acusativo: *auf den Tisch*."),
         cz(2, "Escribí el artículo.", "Das Rezept liegt auf ___ Tisch. (der Tisch)", "dem", note="*liegen* = estar: sin destino (*Wo?*), dativo: *auf dem Tisch*."),
         tr(2, "Puse los remedios en el cajón.", "Ich habe die Medikamente in die Schublade gelegt.", ["Ich habe die Medikamente in die Schublade gelegt.", "Ich habe die Medikamente in die Schublade getan.", "Ich habe die Tabletten in die Schublade gelegt.", "Ich habe die Tabletten in die Schublade getan."], "«Puse… en» tiene destino: *in die Schublade* (acusativo), con *legen → gelegt*."),
+        # encontrá el error, dictado, repaso intercalado y producción
+        # encontrá el error
+        fx(0, "Mein Kopf tut mich weh.", "mich", "mir", "caso", "Con *wehtun* la persona va en dativo: *Mein Kopf tut mir weh* (o *Mir tut der Kopf weh*). El «me» de «me duele» acá no es *mich*."),
+        fx(1, "Ich fühle heute nicht gut.", "fühle", "fühle mich", "reflexivo", "*sich fühlen* es reflexivo: *Ich fühle mich nicht gut*, como «me siento». Sin *mich*, el verbo pide un objeto («siento algo») y la oración queda coja."),
+        fx(1, "Ich wasche mich die Hände.", "mich", "mir", "caso", "Si ya hay otro objeto (*die Hände*), el reflexivo pasa a dativo: *Ich wasche mir die Hände*. Sin otro objeto, acusativo: *Ich wasche mich*."),
+        # dictado
+        di(1, "Ich habe mir den Arm gebrochen.", note="*mir* (dativo) porque ya hay otro objeto, *den Arm* (acusativo masculino, con *-n*)."),
+        di(2, "Du sollst dich ausruhen.", note="*sollst* (la *-st* se pierde fácil) y *dich*: con *sich ausruhen* no hay otro objeto, así que el reflexivo va en acusativo."),
+        # repaso intercalado
+        cz(2, "Escribí la palabra.", "Heute geht es mir besser ___ gestern.", "als", note="Repaso (semana 16): después de un comparativo (*besser*) va *als*. *wie* es para la igualdad: *so gut wie gestern*."),
+        cz(2, "Escribí el adjetivo.", "Die ___ Tabletten helfen nicht. (neu)", "neuen", note="Repaso (semana 15): en plural, después de *die*, el adjetivo va en *-en*: *die neuen Tabletten*. La *-e* sola es para el singular."),
+        tr(2, "Las pastillas están en el cajón.", "Die Tabletten liegen in der Schublade.", ["Die Tabletten sind in der Schublade."], "Repaso (semana 14): ¿dónde? → dativo, *in der Schublade*. Para cosas que están acostadas, lo natural es *liegen*."),
+        tr(2, "Ayer fui al médico.", "Ich bin gestern zum Arzt gegangen.", ["Gestern bin ich zum Arzt gegangen.", "Ich war gestern beim Arzt.", "Gestern war ich beim Arzt.", "Ich bin gestern zur Ärztin gegangen.", "Gestern bin ich zur Ärztin gegangen."], "Repaso (semana 12): *gehen* va con *sein*. A una persona se va con *zu* (*zum Arzt*), no con *in*; o decís dónde estuviste: *beim Arzt*."),
+        # producción
+        ty(2, "Escribí dos oraciones: decí que te duelen la cabeza y la garganta, y que la médica dice que tenés que descansar (con *sollen*).", "(En el médico)", "Ich habe Kopfschmerzen und Halsschmerzen. Die Ärztin sagt, ich soll mich ausruhen.",
+           [a + " " + b for a in ("Ich habe Kopfschmerzen und Halsschmerzen.", "Ich habe Kopf- und Halsschmerzen.", "Mir tun der Kopf und der Hals weh.", "Der Kopf und der Hals tun mir weh.", "Mir tut der Kopf weh und der Hals tut mir auch weh.")
+            for b in ("Die Ärztin sagt, ich soll mich ausruhen.", "Die Ärztin sagt, ich soll mich mehr ausruhen.", "Die Ärztin sagt, dass ich mich ausruhen soll.")],
+           "Dolor: *-schmerzen* o *wehtun* con dativo (*mir*). Lo que manda otra persona va con *sollen*, y *sich ausruhen* lleva *mich* con *ich*."),
     ],
 }

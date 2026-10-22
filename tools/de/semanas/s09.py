@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Semana 9 — In der Stadt (A1): imperativo, mit + dativo de transporte y direcciones."""
-from base import q, ch, li, cz, tr, ty, MAY  # noqa: F401
+from base import q, ch, li, cz, tr, ty, fx, di, MAY  # noqa: F401
 
 WEEK = {
     "week": 9,
@@ -250,5 +250,16 @@ WEEK = {
         tr(2, "Tome la primera calle a la derecha.", "Nehmen Sie die erste Straße rechts.", ["Nehmen Sie die erste Straße rechts.", "Nehmen Sie die erste Strasse rechts.", "Nehmen Sie die erste Straße nach rechts."], "Se cuentan las calles: *die erste Straße*."),
         ty(2, "Escribí en alemán, con artículo.", "«el semáforo»", "die Ampel", note="Femenino. " + MAY),
         cz(2, "Escribí el ordinal. (3.ª)", "Nehmen Sie die ___ Straße links.", "dritte", note="Los ordinales de la semana 6: *erste, zweite, dritte* (irregular). Con *die* + sustantivo, *-e*: *die dritte Straße*."),
+        # encontrá el error y dictado
+        fx(0, "Gehst geradeaus und dann links!", "Gehst", "Geh", "imperativo", "Imperativo de *du*: la forma de *du* sin *du* y sin *-st*: *du gehst → Geh!* (*Gehe* también vale, más formal).", ["Gehe geradeaus und dann links!"]),
+        fx(1, "Ich fahre mit die U-Bahn zur Arbeit.", "die", "der", "caso", "*mit* pide dativo: *die U-Bahn* → *mit der U-Bahn*; *der Bus* → *mit dem Bus*. En castellano «en el subte» no cambia; en alemán el artículo sí."),
+        fx(1, "Wir fahren in dem Zug nach Hamburg.", "in dem", "mit dem", "calco", "El medio de transporte va con *mit*: *mit dem Zug*. «En tren» empuja a *in*, pero *im Zug* es estar adentro del tren, no viajar en él."),
+        di(1, "Wir fahren mit dem Zug und dann mit der U-Bahn.", note="*mit dem* (der, das) y *mit der* (die): lo único que cambia es la última letra, y casi no suena."),
+        di(0, "Nimm den Bus und steig am Bahnhof aus!", note="*Nimm* (de *du nimmst*), *den Bus* en acusativo y el prefijo *aus* al final."),
+        # repaso de las semanas 5 a 8
+        cz(2, "Escribí la forma de *anfangen*.", "Der Kurs ___ um neun Uhr an.", "fängt", note="Repaso de la semana 8: *anfangen* se separa y cambia la vocal como *fahren*: *er fängt … an*."),
+        tr(2, "¿Querés venir con nosotros? (a un amigo)", "Willst du mitkommen?", ["Willst du mitkommen?", "Möchtest du mitkommen?", "Kommst du mit?", "Willst du mit uns kommen?", "Möchtest du mit uns kommen?"], "Repaso de las semanas 7 y 8: con modal, el separable va entero al final (*mitkommen*); sin modal se separa: *Kommst du mit?*"),
+        cz(2, "Escribí la forma de *müssen*.", "Du ___ nicht kochen. Ich mache das. (no hace falta)", "musst", note="Repaso de la semana 7: *nicht müssen* = no hace falta. No prohíbe: para eso está *nicht dürfen*."),
+        tr(2, "Él se pide un café.", "Er nimmt einen Kaffee.", ["Er nimmt einen Kaffee.", "Er bestellt einen Kaffee."], "Repaso: *nehmen* → *er nimmt* (e → i y doble m); *der Kaffee* → *einen Kaffee*, en acusativo."),
     ],
 }

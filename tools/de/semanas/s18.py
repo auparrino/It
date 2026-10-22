@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Semana 18 — Weil, dass, wenn (A2): subordinadas con el verbo al final, denn vs. weil, opinar y dar razones."""
-from base import q, ch, li, cz, tr, ty, MAY  # noqa: F401
+from base import q, ch, li, cz, tr, ty, fx, di, MAY  # noqa: F401
 
 WEEK = {
     "week": 18,
@@ -313,5 +313,23 @@ WEEK = {
         ch(0, "Elegí la posición.", "(Dale, vení con nosotros.)", "Komm doch mit!", ["Komm doch mit!", "Doch komm mit!", "Komm mit doch!"], "La partícula va en el medio: después del verbo, antes de la parte separable *mit*."),
         tr(0, "¿Y vos qué hacés acá?", "Was machst du denn hier?", ["Was machst du denn hier?", "Was machst du denn da?"], "*denn* en la pregunta hace el «¿y vos…?» de interés o sorpresa. Va después del verbo y del sujeto."),
         tr(0, "¿Me das una mano un toque?", "Kannst du mir mal helfen?", ["Kannst du mir mal helfen?", "Kannst du mal helfen?", "Hilfst du mir mal?", "Könntest du mir mal helfen?"], "*mal* = «un toque»: suaviza el pedido. Va después de los pronombres (*mir mal*)."),
+        # encontrá el error, dictado, repaso intercalado y producción
+        # encontrá el error
+        fx(0, "Ich bleibe zu Hause, weil ich bin krank.", "ich bin krank", "ich krank bin", "orden", "Después de *weil* el verbo conjugado va al final: *weil ich krank bin*. Con *denn* sí queda como en castellano: *denn ich bin krank*.", ["Ich bleibe zu Hause, denn ich bin krank."]),
+        fx(1, "Ich glaube, dass er hat recht.", "hat recht", "recht hat", "orden", "*dass* manda el verbo al final: *dass er recht hat*. Si sacás el *dass*, vuelve el orden normal: *Ich glaube, er hat recht*.", ["Ich glaube, er hat recht."]),
+        fx(2, "Wenn ich Zeit habe, ich komme mit.", "ich komme", "komme ich", "orden", "La oración con *wenn* ocupa el primer lugar, así que el verbo principal va enseguida: *…, komme ich mit*. Es el calco de «si tengo tiempo, yo voy»."),
+        # dictado
+        di(0, "Ich komme nicht, weil ich keine Zeit habe.", note="*keine Zeit* (femenino, acusativo) y *habe* al final por *weil*."),
+        di(1, "Ich hoffe, dass es dir besser geht.", note="*dass* → verbo al final (*geht*). *dir* va en dativo: es *es geht mir/dir gut*."),
+        # repaso intercalado
+        cz(2, "Escribí el pronombre reflexivo.", "Ich kaufe ___ eine neue Jacke. (para mí)", "mir", note="Repaso (semana 17): ya hay un objeto en acusativo (*eine neue Jacke*), así que el reflexivo va en dativo: *mir*."),
+        tr(2, "Mi hermano es más alto que yo.", "Mein Bruder ist größer als ich.", ["Mein Bruder ist grösser als ich."], "Repaso (semana 16): «alto» para personas es *groß*, con diéresis en el comparativo: *größer als*. Después de *als*, nominativo: *als ich*, no *als mich*."),
+        cz(2, "Escribí el pronombre.", "Dein Argument überzeugt ___ nicht. (a mí)", "mich", note="Repaso (semana 13): *überzeugen* lleva acusativo: *mich*. Aunque digas «no me convence», no es como *helfen*, que va con *mir*."),
+        tr(2, "Me gusta la camisa blanca.", "Mir gefällt das weiße Hemd.", ["Das weiße Hemd gefällt mir.", "Ich mag das weiße Hemd.", "Mir gefällt das weisse Hemd.", "Das weisse Hemd gefällt mir."], "Repaso (semanas 13 y 15): con *gefallen*, la persona va en dativo (*mir*) y lo que gusta es el sujeto: *das weiße Hemd*, nominativo neutro, adjetivo en *-e*."),
+        # producción
+        ty(2, "Escribí dos oraciones: opiná que el colectivo es demasiado caro (con *dass*) y decí que vas en bici porque es más barato (con *weil*).", "(Tu opinión y tu razón)", "Ich finde, dass der Bus zu teuer ist. Ich fahre Fahrrad, weil es billiger ist.",
+           [a + " " + b for a in ("Ich finde, dass der Bus zu teuer ist.", "Ich glaube, dass der Bus zu teuer ist.", "Ich meine, dass der Bus zu teuer ist.", "Ich finde, dass der Bus viel zu teuer ist.")
+            for b in ("Ich fahre Fahrrad, weil es billiger ist.", "Ich fahre mit dem Fahrrad, weil es billiger ist.", "Ich fahre Fahrrad, weil das billiger ist.", "Ich fahre mit dem Fahrrad, weil das billiger ist.", "Weil es billiger ist, fahre ich Fahrrad.", "Weil es billiger ist, fahre ich mit dem Fahrrad.", "Ich nehme das Fahrrad, weil es billiger ist.")],
+           "*dass* y *weil* mandan el verbo al final (*teuer ist, billiger ist*). Si empezás con *Weil…*, el verbo principal va enseguida: *fahre ich*."),
     ],
 }

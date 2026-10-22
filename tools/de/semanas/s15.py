@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Semana 15 — Der blaue Pullover (A2): el adjetivo tras artículo definido, dieser y welcher, la ropa."""
-from base import q, ch, li, cz, tr, ty, MAY  # noqa: F401
+from base import q, ch, li, cz, tr, ty, fx, di, MAY  # noqa: F401
 
 WEEK = {
     "week": 15,
@@ -271,5 +271,23 @@ WEEK = {
         tr(2, "El pantalón es demasiado caro.", "Die Hose ist zu teuer.", note="*zu* = demasiado; *die Hose* es singular."),
         tr(2, "Me llevo la camisa blanca.", "Ich nehme das weiße Hemd.", ["Ich nehme das weiße Hemd.", "Ich kaufe das weiße Hemd.", "Ich nehme das weisse Hemd.", "Ich kaufe das weisse Hemd."], "*das Hemd* es neutro: *das weiße*."),
         ty(2, "Escribí en alemán, con artículo.", "«el probador»", "die Umkleidekabine", ["die Umkleidekabine", "die Kabine"], MAY),
+        # encontrá el error, dictado, repaso intercalado y producción
+        # encontrá el error
+        fx(0, "Ich nehme den blaue Pullover.", "blaue", "blauen", "terminación", "Después de *den* (acusativo masculino) el adjetivo va con *-en*: *den blauen Pullover*. La *-e* sola queda para el nominativo (*der blaue*) y para *die/das* en acusativo."),
+        fx(0, "Mit der rote Jacke gehe ich ins Konzert.", "rote", "roten", "terminación", "Ese *der* no es nominativo: es dativo femenino, por *mit*. En dativo, después del artículo, el adjetivo va siempre con *-en*: *mit der roten Jacke*."),
+        fx(1, "Welcher Hose gefällt dir?", "Welcher", "Welche", "género", "«El pantalón» es masculino en castellano, pero *die Hose* es femenino: *Welche Hose?* *welcher/welche/welches* llevan las mismas terminaciones que *der/die/das*."),
+        # dictado
+        di(0, "Ich probiere den grünen Rock an.", note="*den grünen*: acusativo masculino, las dos palabras terminan en *-n*. Si te sonó «de grüne», escuchalo más lento."),
+        di(2, "Das weiße Hemd gefällt mir nicht.", ["Das weisse Hemd gefällt mir nicht."], "*das weiße Hemd* es el sujeto (nominativo neutro): adjetivo en *-e*. Ojo: *das Hemd* es neutro aunque «la camisa» sea femenino."),
+        # repaso intercalado
+        cz(2, "Escribí el artículo.", "Die Jacke hängt schon in ___ Schrank.", "dem", note="Repaso (semana 14): *hängen* acá es un estado: ¿dónde? → dativo masculino, *in dem Schrank* (*im Schrank*)."),
+        cz(2, "Escribí el artículo.", "Leg den Pullover bitte auf ___ Bett!", "das", note="Repaso (semana 14): *legen* es una acción: ¿adónde? → acusativo neutro, *auf das Bett* (o *aufs Bett*)."),
+        tr(2, "Le regalo una blusa a mi hermana.", "Ich schenke meiner Schwester eine Bluse.", ["Meiner Schwester schenke ich eine Bluse."], "Repaso (semana 13): quien recibe va en dativo (*meiner Schwester*) y lo que se regala en acusativo (*eine Bluse*). Sin «le» ni «a»: el caso ya lo dice."),
+        tr(2, "Ayer me probé una campera.", "Ich habe gestern eine Jacke anprobiert.", ["Gestern habe ich eine Jacke anprobiert."], "Repaso (semana 11): *anprobieren* termina en *-ieren*, así que el participio va sin *ge-*: *anprobiert* (no «angeprobiert»). Va con *haben*, y el «me» no se traduce."),
+        # producción
+        ty(2, "Escribí dos oraciones en el negocio: preguntá si te podés probar el pantalón negro y decí que la campera azul es demasiado chica.", "(En el negocio de ropa)", "Kann ich die schwarze Hose anprobieren? Die blaue Jacke ist zu klein.",
+           [a + " " + b for a in ("Kann ich die schwarze Hose anprobieren?", "Darf ich die schwarze Hose anprobieren?", "Kann ich die schwarze Hose mal anprobieren?", "Darf ich die schwarze Hose mal anprobieren?", "Kann ich bitte die schwarze Hose anprobieren?", "Darf ich bitte die schwarze Hose anprobieren?")
+            for b in ("Die blaue Jacke ist zu klein.", "Die blaue Jacke ist mir zu klein.", "Die blaue Jacke ist leider zu klein.")],
+           "*die Hose* y *die Jacke* son femeninos: con *die*, en nominativo o acusativo, el adjetivo va en *-e* (*die schwarze Hose, die blaue Jacke*). Con *kann/darf*, *anprobieren* va al final."),
     ],
 }

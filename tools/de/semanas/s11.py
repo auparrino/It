@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Semana 11 — Was hast du gemacht? (A2): el Perfekt con haben y los participios."""
-from base import q, ch, li, cz, tr, ty, MAY  # noqa: F401
+from base import q, ch, li, cz, tr, ty, fx, di, MAY  # noqa: F401
 
 WEEK = {
     "week": 11,
@@ -277,5 +277,16 @@ WEEK = {
         # parte 2 — repaso: plural
         cz(2, "Escribí el plural. (der Ausflug, ¨-e)", "Im Sommer haben wir zwei ___ gemacht.", "Ausflüge", ["Ausflüge", "Ausfluege"], "*der Ausflug, ¨-e* → *die Ausflüge*, como *der Zug → die Züge*. " + MAY),
         cz(2, "Escribí el plural. (das Konzert, -e)", "Am Wochenende hat es drei ___ gegeben.", "Konzerte", note="*das Konzert, -e* → *die Konzerte*. La *-s* («Konzerts») es del castellano. " + MAY),
+        # encontrá el error y dictado
+        fx(2, "Am Samstag habe ich meine Eltern gebesucht.", "gebesucht", "besucht", "participio", "*besuchen* empieza con *be-*, un prefijo que no se separa: el participio va sin *ge-*: *besucht*. Lo mismo *bezahlt*; y los verbos en *-ieren* tampoco llevan *ge-*: *telefoniert*."),
+        fx(0, "Gestern habe ich gemacht einen Kuchen.", "gemacht einen Kuchen", "einen Kuchen gemacht", "orden", "El participio va al final, como el infinitivo con modal: *Gestern habe ich einen Kuchen gemacht*. En castellano «hice una torta» va junto."),
+        fx(1, "Ich habe gestern ein Buch gelest.", "gelest", "gelesen", "participio", "*lesen* es irregular: participio en *-en*, *gelesen*. Igual *gegessen* o *gesehen*. La -t es de los regulares (*gemacht*)."),
+        di(2, "Wir haben am Samstag die Wohnung aufgeräumt.", note="*auf-ge-räumt*: el *ge-* va en el medio. *haben* en la posición 2 y el participio al final."),
+        di(1, "Hast du den Kuchen gegessen?", note="*den Kuchen* (masculino, acusativo) y el participio irregular *gegessen*, con doble s."),
+        # repaso de las semanas 7 a 10
+        cz(2, "Escribí el posesivo (de ella).", "Lisa sucht ___ Hund.", "ihren", note="Repaso de la semana 10: «su» de ella → *ihr*; *der Hund* es objeto (acusativo masculino) → *ihren*."),
+        tr(2, "En la cocina hay una mesa.", "In der Küche gibt es einen Tisch.", ["In der Küche gibt es einen Tisch.", "Es gibt einen Tisch in der Küche."], "Repaso de la semana 10: *es gibt* + acusativo → *einen Tisch*. Si arrancás con el lugar, *gibt es*."),
+        cz(2, "Escribí el artículo.", "Fahrt ihr mit ___ Straßenbahn?", "der", note="Repaso de la semana 9: *mit* + dativo; *die Straßenbahn* → *mit der*."),
+        cz(2, "Escribí el imperativo de *mitkommen* (a tus amigos).", "___ doch morgen mit!", "Kommt", note="Repaso de las semanas 8 y 9: con *ihr*, la forma de *ihr* sin pronombre: *Kommt mit!*, con el prefijo al final."),
     ],
 }

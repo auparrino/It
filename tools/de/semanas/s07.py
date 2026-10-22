@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Semana 7 — Ich kann, ich muss (A1): los verbos modales y el corchete verbal."""
-from base import q, ch, li, cz, tr, ty, MAY  # noqa: F401
+from base import q, ch, li, cz, tr, ty, fx, di, MAY  # noqa: F401
 
 WEEK = {
     "week": 7,
@@ -323,5 +323,16 @@ WEEK = {
         ch(2, "Contestá que sí.", "Kannst du nicht schwimmen? – ___, ich kann gut schwimmen.", "Doch", ["Doch", "Ja", "Nein"], "Pregunta con *nicht* y la respuesta la contradice → *doch*."),
         ty(2, "Contestá que sí, con oración completa.", "Musst du heute nicht arbeiten?", "Doch, ich muss heute arbeiten.", ["Doch, ich muss heute arbeiten.", "Doch ich muss heute arbeiten.", "Doch, heute muss ich arbeiten.", "Doch, ich muss arbeiten."], "Contradecís una pregunta negativa → *doch*; después la oración sin *nicht*."),
         tr(2, "No conozco a tu hermano.", "Ich kenne deinen Bruder nicht.", note="Objeto con posesivo: *nicht* va después, al final. «Ich nicht kenne…» es el calco del castellano."),
+        # encontrá el error y dictado
+        fx(0, "Ich kann schwimmen gut.", "schwimmen gut", "gut schwimmen", "orden", "Con modal, el infinitivo va al final de todo: *Ich kann gut schwimmen*. El castellano junta «sé nadar»; el alemán los separa y pone lo demás en el medio."),
+        fx(0, "Er kannt sehr gut kochen.", "kannt", "kann", "conjugación", "Los modales no llevan terminación con *ich* ni con *er/sie/es*: *er kann*, igual que *ich kann*. Se cuela la -t porque los demás verbos sí la llevan."),
+        fx(2, "Ich muss heute arbeiten nicht.", "arbeiten nicht", "nicht arbeiten", "orden", "El infinitivo es lo último de la oración; *nicht* va antes: *Ich muss heute nicht arbeiten*."),
+        di(1, "Ich möchte einen Kaffee trinken.", note="*einen Kaffee*: masculino en acusativo. Y el infinitivo *trinken* cierra la oración."),
+        di(0, "Kannst du heute einen Kuchen machen?", note="*Kannst* con -st (de *du*) y *einen Kuchen* con -en: dos terminaciones que casi no se oyen."),
+        # repaso de las semanas 3 a 6
+        cz(2, "Escribí la forma de *fahren*.", "Wann ___ du nach Hause?", "fährst", note="Repaso de la semana 6: *fahren* → *du fährst*, con ä solo con *du* y *er/sie/es*."),
+        cz(2, "Escribí la forma de *lesen*.", "Anna ___ gern Bücher.", "liest", note="Repaso de la semana 6: *lesen* → *sie liest* (e → ie). Como la raíz termina en *s*, *du liest* tampoco suma otra s."),
+        tr(2, "Las manzanas cuestan dos euros.", "Die Äpfel kosten zwei Euro.", ["Die Äpfel kosten zwei Euro.", "Die Äpfel kosten 2 Euro."], "Repaso de la semana 5: plural → *kosten*; y después de un número, *Euro* sin plural."),
+        cz(2, "Escribí el pronombre.", "Wo ist das Handy? – ___ ist hier.", "Es", note="Repaso de la semana 3: *das Handy* → *es*. El pronombre copia el artículo alemán, no «el celular»."),
     ],
 }

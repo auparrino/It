@@ -1,6 +1,18 @@
 # -*- coding: utf-8 -*-
 """Semana 27 — Es wird gemacht (B1): la voz pasiva (werden + participio) en presente y Präteritum."""
-from base import q, ch, li, cz, tr, ty, MAY  # noqa: F401
+from base import q, ch, li, cz, tr, ty, fx, di, MAY  # noqa: F401
+
+
+def _mix(*slots):
+    """Todas las combinaciones (una frase de cada lista), también sin comas y con punto en vez de «!»."""
+    import itertools
+    out = []
+    for combo in itertools.product(*slots):
+        s = " ".join(combo)
+        for y in (s, s.replace(",", ""), s.replace("!", "."), s.replace(",", "").replace("!", ".")):
+            if y not in out:
+                out.append(y)
+    return out
 
 WEEK = {
     "week": 27,
@@ -283,5 +295,16 @@ WEEK = {
         tr(2, "¡Dejame en paz! (a un amigo)", "Lass mich in Ruhe!", ["Lass mich in Ruhe!", "Lass mich bitte in Ruhe!"], "*lassen* = dejar. Imperativo con *du*: *du lässt → Lass!* (el *a → ä* se va, como en *Fahr!*)."),
         cz(2, "Escribí la forma de *lassen* en Präteritum.", "Meine Eltern ___ mich nie allein ausgehen.", "ließen", note="*lassen* = dejar, permitir. Präteritum irregular: *ließ*, *sie ließen*."),
         ty(2, "Escribí en alemán.", "«Dejé la campera en el auto.»", "Ich habe die Jacke im Auto gelassen.", ["Ich habe die Jacke im Auto gelassen.", "Ich habe meine Jacke im Auto gelassen.", "Ich ließ die Jacke im Auto.", "Ich ließ meine Jacke im Auto.", "Ich habe die Jacke im Auto liegen lassen.", "Ich habe meine Jacke im Auto liegen lassen."], "Sin otro verbo: participio *gelassen*. También se dice *im Auto liegen lassen*: ahí hay otro verbo (*liegen*), así que doble infinitivo."),
+        # encontrá el error, dictado y repaso (semanas 9 a 16)
+        fx(0, "In Deutschland trennt sich der Müll.", "trennt sich der Müll", "wird der Müll getrennt", "calco", "El «se» de «se separa» no es *sich*: si alguien lo hace, es pasiva: *wird … getrennt*. *trennt sich* diría que la basura se separa sola."),
+        fx(1, "Das Haus wurde durch meinen Großvater gebaut.", "durch meinen Großvater", "von meinem Großvater", "preposición", "La persona que hace la acción va con *von* + dativo: *von meinem Großvater*. *durch* (con acusativo) es para la causa o el medio. El «por» castellano sirve para los dos; el alemán los separa."),
+        fx(1, "Die Brücke würde 1960 gebaut.", "würde", "wurde", "auxiliar", "Un hecho pasado en pasiva va con *wurde*, sin diéresis. *würde* es el condicional («sería, haría»): la ü cambia todo el sentido."),
+        di(1, "Der Brief wurde von meiner Mutter geschrieben.", note="*von* + dativo: *meiner Mutter*, con -er. Y *wurde*, con u: pasiva en pasado."),
+        di(2, "Zuerst werden die Flaschen mit heißem Wasser gewaschen.", note="*mit* + dativo sin artículo: *heißem Wasser*, con -em. *werden* en plural, por *die Flaschen*."),
+        ty(2, "Contá en dos oraciones cómo se reciclan las botellas, con la pasiva (*werden* + participio).", "(primero se juntan las botellas · después se lavan)", "Zuerst werden die Flaschen gesammelt. Dann werden sie gewaschen.", _mix(["Zuerst werden die Flaschen gesammelt.", "Erst werden die Flaschen gesammelt.", "Die Flaschen werden zuerst gesammelt."], ["Dann werden sie gewaschen.", "Danach werden sie gewaschen.", "Dann werden die Flaschen gewaschen.", "Danach werden die Flaschen gewaschen.", "Anschließend werden sie gewaschen.", "Dann werden sie gespült.", "Danach werden sie gespült."]), "*werden* en plural (*die Flaschen*, *sie*) en la posición 2 y el participio al final. Si arrancás con *Zuerst* o *Dann*, el verbo va enseguida."),
+        cz(2, "Escribí el pronombre (a mí).", "Im Geschäft wurde ___ sofort geholfen.", "mir", note="Repaso de la semana 13: *helfen* pide dativo, y en la pasiva el dativo no se vuelve sujeto: *mir wurde geholfen*, nunca «ich wurde geholfen»."),
+        cz(2, "Escribí el artículo.", "Die Mülltonne steht hinter ___ Haus. (das Haus)", "dem", note="Repaso de la semana 14: *steht* dice dónde está, sin movimiento → *hinter* + dativo: *hinter dem Haus*."),
+        tr(2, "Fuimos en tren a Berlín.", "Wir sind mit dem Zug nach Berlin gefahren.", ["Wir sind mit dem Zug nach Berlin gefahren.", "Wir fuhren mit dem Zug nach Berlin.", "Wir sind mit der Bahn nach Berlin gefahren.", "Wir fuhren mit der Bahn nach Berlin."], "Repaso de las semanas 9 y 12: *fahren* es moverse → Perfekt con *sein*. «En tren» = *mit dem Zug*, no «in dem Zug»."),
+        cz(2, "Escribí *als* o *wie*.", "Glas wird öfter recycelt ___ Plastik.", "als", note="Repaso de la semana 16: después de un comparativo (*öfter*) va *als*. *wie* va con la igualdad: *so oft wie*."),
     ],
 }

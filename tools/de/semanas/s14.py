@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Semana 14 — Wo oder wohin? (A2): preposiciones de dos casos, poner y estar, la mudanza."""
-from base import q, ch, li, cz, tr, ty, MAY  # noqa: F401
+from base import q, ch, li, cz, tr, ty, fx, di, MAY  # noqa: F401
 
 WEEK = {
     "week": 14,
@@ -306,5 +306,24 @@ WEEK = {
         cz(2, "Escribí la palabra que falta.", "Wo kommst du ___? – Aus Argentinien.", "her", note="*Wo … her?* = *Woher?* (de dónde). *her*: hacia quien habla."),
         tr(2, "Bajá, te estoy esperando abajo.", "Komm runter, ich warte unten.", ["Komm runter, ich warte unten.", "Komm runter, ich warte unten auf dich.", "Komm nach unten, ich warte unten.", "Komm herunter, ich warte unten.", "Komm runter, ich warte schon unten.", "Komm nach unten, ich warte unten auf dich.", "Komm runter, ich warte auf dich unten.", "Komm herunter, ich warte unten auf dich."], "Movimiento hacia mí y hacia abajo: *runter* (o *nach unten*); donde espero: *unten*."),
         tr(2, "¡Vení para acá!", "Komm her!", ["Komm her!", "Komm hierher!", "Komm mal her!"], "Hacia quien habla: *her*. «Komm hier» está mal: *hier* es dónde, no adónde."),
+        # encontrá el error, dictado, repaso intercalado y producción
+        # encontrá el error
+        fx(0, "Das Buch liegt auf den Tisch.", "den", "dem", "caso", "*liegen* es un estado (¿dónde?): dativo, *auf dem Tisch*. *auf den Tisch* va con *legen*, cuando lo ponés. En castellano «sobre la mesa» no cambia; en alemán, el artículo te dice si está o si va."),
+        fx(1, "Ich stelle die Flasche auf dem Tisch.", "dem", "den", "caso", "*stellen* es una acción con destino (¿adónde?): acusativo, *auf den Tisch*. Con *stehen* (estado) sí iría *auf dem Tisch*: el verbo te dice qué pregunta hacer."),
+        fx(2, "Wir haben letzten Monat umgezogen.", "haben", "sind", "auxiliar", "*umziehen* (mudarse) es cambiar de lugar: va con *sein*, *Wir sind umgezogen*. El castellano no ayuda, porque usa siempre «haber»."),
+        # dictado
+        di(0, "Die Katze liegt unter dem Bett.", note="*unter dem Bett*: la *-m* del dativo se oye poco. La gata está quieta (¿dónde?), así que es dativo."),
+        di(1, "Ich lege das Kissen auf das Sofa.", ["Ich lege das Kissen aufs Sofa."], "Acción con destino: *auf das Sofa* (o *aufs Sofa*), acusativo. No es *auf dem*: el almohadón todavía no está ahí."),
+        # repaso intercalado
+        cz(2, "Escribí el pronombre.", "Der Umzug ist schwer. Kannst du ___ helfen? (a mí)", "mir", note="Repaso (semana 13): *helfen* va con dativo: *mir*. En castellano «ayudarme» parece objeto directo, pero en alemán no es *mich*."),
+        tr(2, "Ayer fuimos al parque y jugamos al fútbol.", "Gestern sind wir in den Park gegangen und haben Fußball gespielt.", ["Wir sind gestern in den Park gegangen und haben Fußball gespielt.", "Gestern sind wir in den Park gegangen und haben Fussball gespielt.", "Wir sind gestern in den Park gegangen und haben Fussball gespielt."], "Repaso (semanas 11-12): *gehen* (movimiento) va con *sein* y *spielen* con *haben*: cada verbo elige su auxiliar. *in den Park*: adónde, acusativo."),
+        tr(2, "Mañana tengo que ordenar mi cuarto.", "Morgen muss ich mein Zimmer aufräumen.", ["Ich muss morgen mein Zimmer aufräumen."], "Repaso (semanas 7-8): con un modal (*muss*), el otro verbo va al final en infinitivo, y el separable queda entero: *aufräumen*."),
+        cz(2, "Escribí el artículo.", "Wir fahren mit ___ Auto nach Köln.", "dem", note="Repaso (semanas 9 y 13): *mit* va siempre con dativo, aunque haya movimiento: *mit dem Auto*. No es una de las nueve preposiciones de dos casos."),
+        # producción
+        ty(2, "Contá en tres oraciones, en Perfekt, que pusiste el sofá en el living, la alfombra en el pasillo y el espejo en la pared.", "(Después de la mudanza: ¿dónde pusiste las cosas?)", "Ich habe das Sofa ins Wohnzimmer gestellt. Ich habe den Teppich in den Flur gelegt. Ich habe den Spiegel an die Wand gehängt.",
+           [a + " " + b + " " + c for a in ("Ich habe das Sofa ins Wohnzimmer gestellt.", "Ich habe das Sofa in das Wohnzimmer gestellt.")
+            for b in ("Ich habe den Teppich in den Flur gelegt.", "Den Teppich habe ich in den Flur gelegt.")
+            for c in ("Ich habe den Spiegel an die Wand gehängt.", "Den Spiegel habe ich an die Wand gehängt.")],
+           "Las tres son acciones con destino (¿adónde?), así que van en acusativo: *ins Wohnzimmer, in den Flur, an die Wand*. Participios: *gestellt, gelegt, gehängt*, todos con *haben*."),
     ],
 }

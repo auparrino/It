@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Semana 26 — Wegen des Wetters (B1): el genitivo, wegen / trotz / während y las preguntas indirectas con ob y W-."""
-from base import q, ch, li, cz, tr, ty, MAY  # noqa: F401
+from base import q, ch, li, cz, tr, ty, fx, di, MAY  # noqa: F401
 
 WEEK = {
     "week": 26,
@@ -294,5 +294,24 @@ WEEK = {
         # parte 2 — repaso: el dativo de quien lo siente (semana 17)
         tr(2, "Me da igual.", "Das ist mir egal.", ["Das ist mir egal.", "Es ist mir egal.", "Mir ist das egal.", "Ist mir egal.", "Mir ist es egal."], "La persona a la que le da igual va en dativo: *mir*. «Ich bin egal» significa «yo no importo»."),
         cz(2, "Escribí el posesivo.", "Sie ist ___ Mutter sehr ähnlich. (su = de ella)", "ihrer", note="*ähnlich* + dativo: *ihrer Mutter* (die Mutter). «Se parece **a**…» → dativo."),
+        # encontrá el error, dictado, repaso intercalado y producción
+        # encontrá el error
+        fx(0, "Die Verspätung des Zug war sehr lang.", "Zug", "Zuges", "terminación", "En genitivo, los masculinos y neutros suman *-s* o *-es* también en el sustantivo: *des Zuges* (o *des Zugs*). El artículo solo no alcanza.", ["Die Verspätung des Zugs war sehr lang."]),
+        fx(2, "Können Sie mir sagen, wann fährt der nächste Zug?", "fährt der nächste Zug", "der nächste Zug fährt", "orden", "La pregunta indirecta es una subordinada: el verbo va al final, *…, wann der nächste Zug fährt?*"),
+        fx(2, "Ich weiß nicht, wenn der Zug pünktlich ist.", "wenn", "ob", "conector", "El «si» de una pregunta de sí o no es *ob*: *Ich weiß nicht, ob…*. *wenn* es el «si» de una condición."),
+        # dictado
+        di(1, "Trotz des schlechten Wetters sind wir gefahren.", note="*trotz* + genitivo: *des schlechten Wetters*, *-en* en el adjetivo y *-s* en el sustantivo."),
+        di(1, "Während der Fahrt hat der Zug zweimal gehalten.", note="*während der Fahrt*: genitivo femenino, que suena igual que el dativo: *der*."),
+        # repaso intercalado
+        cz(2, "Escribí *wurde* o *würde*.", "Es ___ immer später, und der Zug kam nicht.", "wurde", note="Repaso (semanas 21 y 23): pasado de *werden* («se hacía cada vez más tarde») → *wurde*. *würde*, con diéresis, es «se haría»."),
+        cz(2, "Escribí *wurde* o *würde*.", "Ich ___ mich gern beschweren, aber ich habe keine Zeit.", "würde", note="Repaso (semana 25): algo hipotético («me quejaría») → *würde*, con diéresis."),
+        cz(2, "Escribí el pronombre relativo.", "Der Zug, ___ wir genommen haben, hatte eine Stunde Verspätung.", "den", note="Repaso (semana 24): en la relativa (*wir haben den Zug genommen*) el tren es objeto directo → *den*."),
+        tr(2, "Voy a la ventanilla para pedir información.", "Ich gehe zum Schalter, um eine Auskunft zu bekommen.", ["Ich gehe zum Schalter, um Auskunft zu bekommen.", "Ich gehe zum Schalter, um mich zu informieren.", "Ich gehe zum Schalter, um nach einer Auskunft zu fragen.", "Ich gehe zum Schalter, um um Auskunft zu bitten."], "Repaso (semana 23): «para + verbo» con el mismo sujeto → *um … zu*, con el infinitivo al final. *für* no sirve delante de un verbo."),
+        cz(2, "Escribí *als* o *wenn*.", "___ der Zug endlich kam, war es schon dunkel.", "Als", note="Repaso (semana 21): una sola vez en el pasado → *als*."),
+        # producción
+        ty(2, "Escribí dos oraciones de reclamo: que el tren llegó tarde por la huelga (con *wegen*) y preguntá con cortesía si te dan una indemnización (*Können Sie mir sagen, ob…*).", "(Un reclamo en la estación)", "Wegen des Streiks hatte der Zug Verspätung. Können Sie mir sagen, ob ich eine Entschädigung bekomme?",
+           [a + " " + b for a in ("Wegen des Streiks hatte der Zug Verspätung.", "Der Zug hatte wegen des Streiks Verspätung.", "Wegen des Streiks hat der Zug Verspätung gehabt.", "Der Zug hat wegen des Streiks Verspätung gehabt.", "Wegen des Streiks ist der Zug zu spät gekommen.", "Der Zug ist wegen des Streiks zu spät gekommen.", "Wegen des Streiks kam der Zug zu spät.", "Der Zug kam wegen des Streiks zu spät.")
+            for b in ("Können Sie mir sagen, ob ich eine Entschädigung bekomme?", "Können Sie mir bitte sagen, ob ich eine Entschädigung bekomme?", "Könnten Sie mir sagen, ob ich eine Entschädigung bekomme?", "Könnten Sie mir bitte sagen, ob ich eine Entschädigung bekomme?")],
+           "*wegen* + genitivo: *des Streiks* (*-s* en el sustantivo). Con *ob* (pregunta de sí o no) el verbo va al final: *ob ich … bekomme*."),
     ],
 }

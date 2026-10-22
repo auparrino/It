@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Semana 47 — Wer, wann, wie, wo (C1): el orden fino de la oración (campo medio, nicht, Vorfeld y Nachfeld)."""
-from base import q, ch, li, cz, tr, ty, MAY  # noqa: F401
+from base import q, ch, li, cz, tr, ty, fx, di, MAY  # noqa: F401
 
 
 def V(*xs):
@@ -258,5 +258,23 @@ WEEK = {
         ch(2, "Elegí el orden correcto.", "(Por un lado la ciudad es cara, pero es linda.)", "Zwar ist die Stadt teuer, aber sie ist schön.", ["Zwar ist die Stadt teuer, aber sie ist schön.", "Zwar die Stadt ist teuer, aber sie ist schön.", "Zwar ist die Stadt teuer, aber ist sie schön."], "*zwar* en el Vorfeld → verbo enseguida; *aber* no cuenta y deja el orden normal."),
         tr(2, "No hablé ni con él ni con su jefe.", "Ich habe weder mit ihm noch mit seinem Chef gesprochen.", ["Ich habe weder mit ihm noch mit seinem Chef gesprochen.", "Ich habe weder mit ihm noch mit seinem Chef geredet.", "Weder mit ihm noch mit seinem Chef habe ich gesprochen.", "Weder mit ihm noch mit seinem Chef habe ich geredet."], "*weder … noch* reemplaza al *nicht*: nada de «nicht weder». Si va en el Vorfeld, el verbo sigue segundo."),
         ty(2, "Uní con *je … desto*.", "Man kennt eine Sprache besser. Man versteht die Witze besser.", "Je besser man eine Sprache kennt, desto besser versteht man die Witze.", V("Je besser man eine Sprache kennt, desto besser versteht man die Witze.", "Je besser man eine Sprache kennt, umso besser versteht man die Witze."), "*je*: verbo al final (*kennt*); *desto* + comparativo + verbo + sujeto."),
+        # encontrá el error, dictado, repaso intercalado y producción
+        # encontrá el error
+        fx(0, "Kannst du mir es morgen geben?", "mir es", "es mir", "orden", "Con dos pronombres, el acusativo va primero: *Kannst du es mir morgen geben?* Con dos sustantivos es al revés (*dem Gast das Zimmer*). El castellano «dármelo» pone el dativo primero, y de ahí el error."),
+        fx(1, "Ich kann nicht heute kommen, ich bin krank.", "nicht heute", "heute nicht", "orden", "Para negar toda la oración, *nicht* va lo más atrás posible: después del tiempo (*heute*) y antes del infinitivo. *nicht heute* niega solo el día y deja esperando un *sondern morgen*."),
+        fx(1, "Wir fahren nach Berlin morgen mit dem Zug.", "nach Berlin morgen mit dem Zug", "morgen mit dem Zug nach Berlin", "orden", "Orden neutro: tiempo – modo – lugar (TeKaMoLo), y la dirección (*nach Berlin*) cierra el campo medio, pegada al verbo. En castellano «vamos a Berlín mañana en tren» pone el lugar primero."),
+        # dictado
+        di(0, "Sie zeigt dem neuen Kollegen das Büro.", note="Dos sustantivos: dativo antes que acusativo. *dem neuen Kollegen*: *Kollege* es de la n-Deklination y suma *-n*; el adjetivo, *-en*."),
+        di(2, "Gestern hat mir mein Chef einen langen Brief geschrieben.", note="El pronombre *mir* se adelanta, antes que el sujeto *mein Chef*. *einen langen Brief*: acusativo masculino, *-en* en el artículo y en el adjetivo."),
+        # repaso intercalado
+        tr(1, "Me levanté temprano y fui a la oficina.", "Ich bin früh aufgestanden und ins Büro gegangen.", ["Ich bin früh aufgestanden und bin ins Büro gegangen.", "Ich bin früh aufgestanden und in das Büro gegangen.", "Ich bin früh aufgestanden und ins Büro gefahren."], "Repaso (semanas 8 y 12): *aufstehen* y *gehen* son cambio de estado y de lugar: los dos van con *sein*. *aufgestanden*: separable, con el *ge* en el medio."),
+        cz(2, "Escribí *ob*, *wenn* o *dass*.", "Sie hat mich gefragt, ___ ich ihr das Buch leihen kann.", "ob", note="Repaso (semana 26): una pregunta de sí o no, contada → *ob* («si»). *wenn* es condición o tiempo, y *dass* no va después de *fragen*."),
+        tr(2, "El ministro dijo que no sabía nada del problema. (discurso indirecto)", "Der Minister sagte, er habe nichts von dem Problem gewusst.", ["Der Minister sagte, dass er nichts von dem Problem gewusst habe.", "Der Minister sagte, er habe nichts vom Problem gewusst.", "Der Minister sagte, er habe von dem Problem nichts gewusst.", "Der Minister hat gesagt, er habe nichts von dem Problem gewusst.", "Der Minister sagte, er wisse nichts von dem Problem.", "Der Minister sagte, dass er nichts von dem Problem wisse.", "Der Minister sagte, er habe nichts über das Problem gewusst."], "Repaso (semana 35): el pasado en Konjunktiv I es *habe* + participio: *er habe … gewusst*. Si quiso decir que sigue sin saber, también vale *er wisse nichts*."),
+        cz(2, "Escribí la palabra que falta.", "Ich habe weder Zeit ___ Lust, heute noch zu arbeiten.", "noch", note="Repaso (semana 29): *weder … noch* = ni … ni. No lleva *nicht* ni *kein*: la negación ya está en *weder*."),
+        # producción
+        ty(0, "Contestá en dos oraciones, con pronombres: sí, se lo diste ayer, pero todavía no te lo devolvió.", "Hast du deiner Schwester das Buch schon gegeben?", "Ja, ich habe es ihr gestern gegeben. Aber sie hat es mir noch nicht zurückgegeben.",
+           [a + " " + b for a in ("Ja, ich habe es ihr gestern gegeben.", "Ja, gestern habe ich es ihr gegeben.", "Ja, ich habe es ihr schon gestern gegeben.", "Ja, ich habe es ihr gestern schon gegeben.")
+            for b in ("Aber sie hat es mir noch nicht zurückgegeben.", "Sie hat es mir aber noch nicht zurückgegeben.", "Aber sie hat es mir immer noch nicht zurückgegeben.")],
+           "Dos pronombres: acusativo antes que dativo, *es ihr*, *es mir*. *nicht* va al final del campo medio, justo antes del participio: *noch nicht zurückgegeben*."),
     ],
 }

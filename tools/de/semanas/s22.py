@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Semana 22 — Ich warte auf dich (B1): verbos con preposición y compuestos con da- y wo-."""
-from base import q, ch, li, cz, tr, ty, MAY  # noqa: F401
+from base import q, ch, li, cz, tr, ty, fx, di, MAY  # noqa: F401
 
 WEEK = {
     "week": 22,
@@ -320,5 +320,23 @@ WEEK = {
         # parte 2 — repaso: preposiciones de dos casos y Woher/Wo/Wohin (semanas 14 y 20)
         cz(2, "Escribí el artículo.", "Ich hänge die Jacke an ___ Haken. (der Haken)", "den", note="*hängen* con objeto (colgar algo): destino, acusativo: *an den Haken*."),
         cz(2, "Escribí el artículo.", "Die Jacke hängt an ___ Haken. (der Haken)", "dem", note="*hängen* sin objeto (estar colgado): dónde, dativo: *an dem Haken* (*am Haken*)."),
+        # encontrá el error, dictado, repaso intercalado y producción
+        # encontrá el error
+        fx(0, "Ich warte für den Bus.", "für", "auf", "calco", "*warten* va con *auf* + acusativo: *auf den Bus*. Es el calco de «esperar por»: la preposición alemana no sale del castellano, se aprende con el verbo."),
+        fx(0, "Ich denke oft in dich.", "in", "an", "calco", "«Pensar en» es *denken an* + acusativo: *an dich*. Otra vez, la preposición va pegada al verbo y no se traduce."),
+        fx(2, "Die Party ist am Samstag. Ich freue mich schon auf sie.", "auf sie", "darauf", "pronombre", "Para una cosa (*die Party*), preposición + pronombre se dice con *da(r)-*: *darauf*. *auf sie* se usa para una persona."),
+        # dictado
+        di(0, "Wir warten auf den nächsten Zug.", note="*warten auf* + acusativo: *auf den nächsten Zug*, artículo y adjetivo con *-n*."),
+        di(1, "Ich erinnere mich gern an meinen Kindergarten.", note="*sich erinnern an* + acusativo: *an meinen*. *mich*, porque no hay otro objeto."),
+        # repaso intercalado
+        cz(2, "Escribí *als* o *wenn*.", "Immer ___ ich Werbung sehe, ärgere ich mich.", "wenn", note="Repaso (semana 21): «cada vez que» (algo que se repite) → *wenn*. *als* es solo para una vez en el pasado."),
+        cz(2, "Escribí *als* o *wenn*.", "___ ich gestern nach Hause kam, war die Sendung schon vorbei.", "Als", note="Repaso (semana 21): una sola vez en el pasado («ayer») → *als*."),
+        tr(2, "Hace una semana que espero tu respuesta.", "Ich warte seit einer Woche auf deine Antwort.", ["Seit einer Woche warte ich auf deine Antwort."], "Repaso (semana 20): *seit* + dativo (*einer Woche*) y el verbo en presente. «Hace una semana que…» no lleva pasado ni *vor*."),
+        cz(2, "Escribí el conector.", "Ich lese keine Zeitung, ___ ich alles im Internet lese.", "weil", note="Repaso (semana 18): el verbo está al final (*lese*), así que va *weil*. Con *denn* sería *denn ich lese alles…*."),
+        # producción
+        ty(2, "Escribí dos oraciones: que esperás con ganas el fin de semana y que te enoja la publicidad en internet.", "(Lo que te alegra y lo que te enoja)", "Ich freue mich auf das Wochenende. Ich ärgere mich über die Werbung im Internet.",
+           [a + " " + b for a in ("Ich freue mich auf das Wochenende.", "Ich freue mich aufs Wochenende.", "Ich freue mich schon auf das Wochenende.", "Ich freue mich schon aufs Wochenende.")
+            for b in ("Ich ärgere mich über die Werbung im Internet.", "Ich ärgere mich oft über die Werbung im Internet.", "Die Werbung im Internet ärgert mich.", "Über die Werbung im Internet ärgere ich mich.")],
+           "*sich freuen auf* (algo que viene) y *sich ärgern über*, los dos con acusativo. El reflexivo con *ich* es *mich*."),
     ],
 }

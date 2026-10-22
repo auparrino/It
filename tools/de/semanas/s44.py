@@ -2,7 +2,7 @@
 """Semana 44 — Da steppt der Bär (C1): expresiones idiomáticas, refranes y lengua coloquial."""
 from itertools import product
 
-from base import q, ch, li, cz, tr, ty, MAY  # noqa: F401
+from base import q, ch, li, cz, tr, ty, fx, di, MAY  # noqa: F401
 
 
 def V(*parts):
@@ -315,5 +315,23 @@ WEEK = {
         tr(2, "El que tenga preguntas puede llamarme.", "Wer Fragen hat, kann mich anrufen.", ["Wer Fragen hat, kann mich anrufen.", "Wer Fragen hat, der kann mich anrufen.", "Wer eine Frage hat, kann mich anrufen.", "Wer eine Frage hat, der kann mich anrufen.", "Wer Fragen hat, kann mich gerne anrufen.", "Wer Fragen hat, kann mich gern anrufen.", "Wer Fragen hat, darf mich anrufen.", "Wer Fragen hat kann mich anrufen."], "«El que tenga» (subjuntivo) → *Wer … hat* (indicativo); después, verbo de la principal."),
         ty(2, "Pasá a registro formal (con *gleichgültig*).", "Das ist mir Wurst.", "Das ist mir gleichgültig.", ["Das ist mir gleichgültig.", "Es ist mir gleichgültig.", "Das ist für mich gleichgültig."], "*gleichgültig* = indiferente; registro neutro o formal."),
         ty(2, "Escribí el refrán alemán.", "«De tal palo, tal astilla.»", "Der Apfel fällt nicht weit vom Stamm.", note="*Der Apfel fällt nicht weit vom Stamm*."),
+        # encontrá el error, dictado, repaso intercalado y producción
+        # encontrá el error
+        fx(1, "Gestern habe ich beim Abendessen ins Fettnäpfchen getreten.", "habe", "bin", "auxiliar", "*ins Fettnäpfchen treten* es «pisar» algo, un movimiento sin objeto directo: va con *sein*, *Gestern bin ich ins Fettnäpfchen getreten*. El modismo es fijo, pero la gramática del verbo sigue funcionando."),
+        fx(0, "Ich drücke dich die Daumen.", "dich", "dir", "caso", "*jemandem die Daumen drücken*: la persona va en dativo, *dir*, porque *die Daumen* ya ocupa el acusativo. Dos objetos, uno de cada caso, como en *Ich gebe dir das Buch*."),
+        fx(2, "Wer zuletzt lacht, er lacht am besten.", "er lacht", "lacht", "pronombre", "Después de *wer …*, la principal arranca con el verbo o con *der*: *Wer zuletzt lacht, (der) lacht am besten*. *er* no retoma a *wer*.", ["Wer zuletzt lacht, der lacht am besten."]),
+        # dictado
+        di(0, "Ich habe einem alten Freund die Daumen gedrückt.", note="*einem alten Freund*: dativo masculino, *-em* en el artículo y *-en* en el adjetivo. *die Daumen* es el acusativo (plural)."),
+        di(1, "Er hat mit seinem Kommentar den Nagel auf den Kopf getroffen.", note="*mit seinem Kommentar*: dativo, *-em*. *den Nagel auf den Kopf*: dos acusativos masculinos con *den*. *getroffen*: participio de *treffen*."),
+        # repaso intercalado
+        cz(1, "Escribí *als* o *wenn*.", "Immer ___ ich ihn sehe, nimmt er mich auf den Arm.", "wenn", note="Repaso (semana 21): *immer wenn* = cada vez que. En presente es siempre *wenn*; *als* es solo para una vez en el pasado."),
+        cz(0, "Escribí el relativo.", "Das ist der Kollege, ___ ich gestern die Daumen gedrückt habe.", "dem", note="Repaso (semana 24): *jemandem die Daumen drücken* pide dativo, así que el relativo es *dem* (masculino). El caso lo decide el verbo de la relativa, no *der Kollege*."),
+        tr(2, "Ahorro plata para que mis hijos puedan estudiar.", "Ich spare Geld, damit meine Kinder studieren können.", ["Ich spare, damit meine Kinder studieren können.", "Ich spare Geld, damit meine Kinder studieren dürfen."], "Repaso (semana 23): otro sujeto (*meine Kinder*) → *damit*, con el verbo al final. *um … zu* solo sirve si el sujeto es el mismo."),
+        cz(2, "Escribí *obwohl* o *trotzdem*.", "Er hatte kalte Füße bekommen, ___ ist er zur Hochzeit gegangen.", "trotzdem", ["trotzdem", "dennoch"], "Repaso (semana 34): el verbo (*ist*) va justo después del hueco: es *trotzdem*, adverbio en la posición 1. *obwohl* manda el verbo al final: *obwohl er kalte Füße bekommen hatte*."),
+        # producción
+        ty(1, "Contá en dos oraciones, en Perfekt: que ayer en la cena metiste la pata y que tu amigo no entendió nada (con *nur Bahnhof*).", "(Una cena complicada)", "Gestern bin ich beim Abendessen ins Fettnäpfchen getreten. Mein Freund hat nur Bahnhof verstanden.",
+           [a + " " + b for a in ("Gestern bin ich beim Abendessen ins Fettnäpfchen getreten.", "Ich bin gestern beim Abendessen ins Fettnäpfchen getreten.", "Gestern beim Abendessen bin ich ins Fettnäpfchen getreten.")
+            for b in ("Mein Freund hat nur Bahnhof verstanden.", "Meine Freundin hat nur Bahnhof verstanden.", "Und mein Freund hat nur Bahnhof verstanden.", "Mein Freund hat mal wieder nur Bahnhof verstanden.")],
+           "*treten* (pisar) va con *sein*: *bin … getreten*; *verstehen* tiene objeto y va con *haben*. En el modismo solo se conjuga el verbo: *ins Fettnäpfchen* y *nur Bahnhof* no cambian."),
     ],
 }

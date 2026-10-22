@@ -1,6 +1,18 @@
 # -*- coding: utf-8 -*-
 """Semana 28 — Nachdem er gegessen hatte (B1): Plusquamperfekt y conectores temporales para contar una historia."""
-from base import q, ch, li, cz, tr, ty, MAY  # noqa: F401
+from base import q, ch, li, cz, tr, ty, fx, di, MAY  # noqa: F401
+
+
+def _mix(*slots):
+    """Todas las combinaciones (una frase de cada lista), también sin comas y con punto en vez de «!»."""
+    import itertools
+    out = []
+    for combo in itertools.product(*slots):
+        s = " ".join(combo)
+        for y in (s, s.replace(",", ""), s.replace("!", "."), s.replace(",", "").replace("!", ".")):
+            if y not in out:
+                out.append(y)
+    return out
 
 WEEK = {
     "week": 28,
@@ -272,5 +284,16 @@ WEEK = {
         # parte 2 — repaso: relativas con preposición
         cz(2, "Escribí el relativo.", "Das ist die Stadt, in ___ meine Großeltern geheiratet haben.", "der", ["der"], "*in* + dativo, *die Stadt* femenino → *in der*. (También se dice *wo*, pero acá se pide el relativo.)"),
         tr(2, "Los amigos con los que viajó eran de Chile.", "Die Freunde, mit denen er gereist ist, kamen aus Chile.", ["Die Freunde, mit denen er gereist ist, kamen aus Chile.", "Die Freunde, mit denen er reiste, kamen aus Chile.", "Die Freunde, mit denen er gereist war, kamen aus Chile.", "Die Freunde, mit denen sie gereist ist, kamen aus Chile.", "Die Freunde, mit denen sie reiste, kamen aus Chile.", "Die Freunde, mit denen er gereist ist, waren aus Chile.", "Die Freunde, mit denen er reiste, waren aus Chile."], "Plural en dativo → *denen* (no «den»), con *mit* adelante."),
+        # encontrá el error, dictado y repaso (semanas 18 a 27)
+        fx(0, "Mein Onkel hatte schon nach Kanada ausgewandert.", "hatte", "war", "auxiliar", "*auswandern* es moverse de un lugar a otro: como en el Perfekt, va con *sein*: *war … ausgewandert*. El castellano dice «había» para todo; el alemán copia el auxiliar del Perfekt."),
+        fx(1, "Nachdem sie das Studium beendet hatte, sie zog nach Berlin.", "sie zog", "zog sie", "orden", "La subordinada con *nachdem* ocupa la posición 1: después de la coma va primero el verbo y después el sujeto: *zog sie nach Berlin*."),
+        fx(2, "Ich warte hier, bis du kommst nach Hause.", "kommst nach Hause", "nach Hause kommst", "orden", "*bis* es subordinante: el verbo conjugado va al final de todo, también después de *nach Hause*: *bis du nach Hause kommst*."),
+        di(1, "Nachdem wir den Film gesehen hatten, gingen wir in eine Bar.", ["Nachdem wir den Film gesehen hatten gingen wir in eine Bar."], "*den Film*: masculino en acusativo, -en. *in eine Bar*: hacia dónde → acusativo. *hatten* y *gingen* con -en, por *wir*."),
+        di(2, "Während des Krieges lebte sie bei ihrer Tante.", note="*während* + genitivo: *des Krieges*, con -es. *bei ihrer Tante*: dativo femenino, con -er."),
+        ty(1, "Escribí dos oraciones sobre Ana: una con *nachdem* y otra con *bevor*, en pasado.", "(terminó la escuela → se mudó a Madrid · antes de irse, aprendió español)", "Nachdem Ana die Schule beendet hatte, zog sie nach Madrid. Bevor sie wegging, lernte sie Spanisch.", _mix(["Nachdem Ana die Schule beendet hatte, zog sie nach Madrid.", "Nachdem Ana die Schule abgeschlossen hatte, zog sie nach Madrid.", "Nachdem Ana mit der Schule fertig war, zog sie nach Madrid.", "Nachdem Ana die Schule beendet hatte, ist sie nach Madrid gezogen.", "Ana zog nach Madrid, nachdem sie die Schule beendet hatte."], ["Bevor sie wegging, lernte sie Spanisch.", "Bevor sie umzog, lernte sie Spanisch.", "Bevor sie nach Madrid zog, lernte sie Spanisch.", "Bevor sie wegging, hat sie Spanisch gelernt.", "Bevor sie umzog, hat sie Spanisch gelernt."]), "*nachdem* + Plusquamperfekt (*beendet hatte*) para lo que pasó antes; con *bevor*, los dos verbos en pasado. La subordinada adelante, y después de la coma, el verbo."),
+        cz(2, "Escribí *weil* o *denn*.", "Er ist zurückgekehrt, ___ er Heimweh hatte.", "weil", note="Repaso de la semana 18: el verbo *hatte* está al final, así que es *weil*. Con *denn* el orden sería el normal: *denn er hatte Heimweh*."),
+        cz(2, "Escribí *als* o *wenn*.", "___ ich ein Kind war, wollte ich Pilot werden.", "Als", note="Repaso de la semana 21: una etapa única del pasado (la infancia) → *als*. *wenn* es para lo que se repetía o para el presente y el futuro."),
+        cz(2, "Escribí el adjetivo con su terminación.", "Sie war eine ___ Schriftstellerin. (berühmt)", "berühmte", note="Repaso de la semana 19: después de *eine*, femenino en nominativo → *-e*: *eine berühmte Schriftstellerin*."),
+        tr(2, "El libro fue escrito en 1950.", "Das Buch wurde 1950 geschrieben.", ["Das Buch wurde 1950 geschrieben.", "1950 wurde das Buch geschrieben.", "Das Buch wurde im Jahr 1950 geschrieben.", "Im Jahr 1950 wurde das Buch geschrieben."], "Repaso de la semana 27: «fue + participio» cuenta un hecho → *wurde* + participio. «war geschrieben» diría otra cosa (que ya estaba escrito)."),
     ],
 }

@@ -1,6 +1,18 @@
 # -*- coding: utf-8 -*-
 """Semana 39 — Unglaublich, machbar (B2): formación de palabras con prefijos y sufijos."""
-from base import q, ch, li, cz, tr, ty, MAY  # noqa: F401
+from base import q, ch, li, cz, tr, ty, fx, di, MAY  # noqa: F401
+
+
+def _mix(*slots):
+    """Todas las combinaciones (una frase de cada lista), también sin comas y con punto en vez de «!»."""
+    import itertools
+    out = []
+    for combo in itertools.product(*slots):
+        s = " ".join(combo)
+        for y in (s, s.replace(",", ""), s.replace("!", "."), s.replace(",", "").replace("!", ".")):
+            if y not in out:
+                out.append(y)
+    return out
 
 WEEK = {
     "week": 39,
@@ -332,5 +344,16 @@ WEEK = {
         ch(1, "Elegí la forma.", "die Wohnung + die Suche", "die Wohnungssuche", ["die Wohnungssuche", "die Wohnungsuche", "die Wohnungensuche"], "Después de *-ung* va siempre *-s-*: *Wohnung-s-suche* (con dos s)."),
         ch(1, "Elegí el artículo.", "___ Universitätsbibliothek", "die", ["die", "der", "das"], "Manda la última parte: *die Bibliothek*. La *-s-* es de unión, viene de *-tät*."),
         ty(1, "Armá el compuesto, con artículo.", "schreiben + der Tisch", "der Schreibtisch", note="Verbo como primera parte: solo la raíz (*schreib-*). " + MAY),
+        # encontrá el error, dictado y repaso (semanas 21 a 35)
+        fx(0, "Ich habe den Brief ins Deutsche übergesetzt.", "übergesetzt", "übersetzt", "participio", "*übersetzen* (traducir) es inseparable: el acento cae en *-set-* y el participio no lleva *ge-*: *übersetzt*. Igual que *verstanden*, *bekommen*, *erklärt*."),
+        fx(1, "Unser Freundschaft ist mir sehr wichtig.", "Unser", "Unsere", "género", "*-schaft* hace sustantivos femeninos: *unsere Freundschaft*, aunque *der Freund* sea masculino. En los derivados manda el sufijo."),
+        fx(2, "Das Wasser ist hier nicht trinklich.", "trinklich", "trinkbar", "sufijo", "«Que se puede + verbo» es *-bar*: *trinkbar* (potable), *machbar*, *lesbar*. *-lich* también existe (*verständlich*), pero no con todos los verbos."),
+        di(1, "Die Freundlichkeit der Leute hat mich überrascht.", note="*-keit* hace femeninos: *die Freundlichkeit*. *der Leute*: genitivo plural."),
+        di(2, "In der Mensa gibt es einen kostenlosen Kaffee.", note="*es gibt* + acusativo: *einen kostenlosen Kaffee*, con -en dos veces. *-los* = sin (costo)."),
+        ty(2, "Escribí dos oraciones sobre tu primera semana en la facu: una con un adjetivo con *un-* y otra con uno con *-los*.", "(la clase fue incomprensible · el café en el comedor es gratis)", "Die Vorlesung war unverständlich. Der Kaffee in der Mensa ist kostenlos.", _mix(["Die Vorlesung war unverständlich.", "Die Vorlesung war völlig unverständlich.", "Die Vorlesung war total unverständlich.", "Die Vorlesung war für mich unverständlich."], ["Der Kaffee in der Mensa ist kostenlos.", "In der Mensa ist der Kaffee kostenlos.", "Der Kaffee ist in der Mensa kostenlos."]), "*un-* da lo contrario: *verständlich* → *unverständlich*. *-los* = sin: *kostenlos*, gratis. Con *In der Mensa* adelante, el verbo va enseguida."),
+        cz(2, "Escribí *wurde* o *würde*.", "Ich ___ gern an der Vorlesung teilnehmen, aber ich muss arbeiten.", "würde", note="Repaso de la semana 25: deseo o cortesía → *würde* + infinitivo, con ü. *wurde* (sin ü) es el pasado."),
+        cz(2, "Escribí *deshalb* o *trotzdem*.", "Die Vorlesung war langweilig, ___ bin ich bis zum Ende geblieben.", "trotzdem", note="Repaso de la semana 34: «igual, de todas formas» → *trotzdem*, con el verbo enseguida. *deshalb* diría que te quedaste porque era aburrida."),
+        tr(2, "Cuando llegué al aula, la clase ya había empezado.", "Als ich in den Hörsaal kam, hatte die Vorlesung schon angefangen.", _mix(["Als ich in den Hörsaal kam, hatte die Vorlesung schon angefangen.", "Als ich in den Hörsaal kam, hatte die Vorlesung schon begonnen.", "Als ich in den Hörsaal kam, hatte die Vorlesung bereits angefangen.", "Als ich in den Hörsaal kam, hatte die Vorlesung bereits begonnen.", "Als ich im Hörsaal ankam, hatte die Vorlesung schon angefangen.", "Als ich im Hörsaal ankam, hatte die Vorlesung schon begonnen."]), "Repaso de las semanas 21 y 28: una vez en el pasado → *als*; lo que pasó antes, en Plusquamperfekt: *hatte … angefangen*."),
+        cz(2, "Escribí *sein* en Konjunktiv I.", "Die Professorin sagte, die Klausur ___ nicht schwer.", "sei", note="Repaso de la semana 35: discurso indirecto → Konjunktiv I: *sei*, sin *-e* final."),
     ],
 }

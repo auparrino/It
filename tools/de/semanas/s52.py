@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Semana 52 — Die Prüfung (C1): repaso final integrador estilo Goethe C1 (casos, Konjunktiv, pasiva, conectores, estilo nominal, registro)."""
-from base import q, ch, li, cz, tr, ty, MAY  # noqa: F401
+from base import q, ch, li, cz, tr, ty, fx, di, MAY  # noqa: F401
 
 
 def V(*xs):
@@ -307,5 +307,23 @@ WEEK = {
         tr(0, "Estoy muy interesado en el puesto.", "Ich bin sehr an der Stelle interessiert.", ["Ich bin sehr an der Stelle interessiert.", "Ich bin an der Stelle sehr interessiert.", "Ich interessiere mich sehr für die Stelle.", "Ich bin sehr an der Position interessiert.", "Ich interessiere mich sehr für die Position."], "Adjetivo: *interessiert an* + dativo; verbo: *sich interessieren für* + acusativo."),
         # parte 2 — repaso: partículas modales al hablar
         ch(2, "Elegí la partícula.", "(En la parte oral, al compañero) Wie siehst du das ___?", "denn", ["denn", "mal", "doch"], "En preguntas, *denn* suena interesado y natural en una charla."),
+        # encontrá el error, dictado, repaso intercalado y producción
+        # encontrá el error
+        fx(0, "Ich habe gestern mit einem Kollege gesprochen.", "Kollege", "Kollegen", "caso", "*der Kollege* es de la n-Deklination: suma *-n* en todos los casos menos el nominativo singular. *mit einem Kollegen*, *den Kollegen*, *des Kollegen*."),
+        fx(1, "Obwohl das Thema ist wichtig, wird es kaum diskutiert.", "das Thema ist wichtig", "das Thema wichtig ist", "orden", "*obwohl* es subordinante: el verbo conjugado va al final, *obwohl das Thema wichtig ist*. Es de los errores que más cuestan en un C1, porque el castellano no cambia el orden."),
+        fx(0, "Die Maßnahme ist letztes Jahr eingeführt geworden.", "geworden", "worden", "pasiva", "En la pasiva en Perfekt, *werden* va como *worden*, sin *ge-*: *ist eingeführt worden*. *geworden* es «se volvió»: *Es ist teurer geworden*."),
+        # dictado
+        di(0, "Trotz des schlechten Wetters sind wir mit den Kindern ans Meer gefahren.", note="*trotz des schlechten Wetters*: genitivo, *-en* en el adjetivo y *-s* en el sustantivo. *mit den Kindern*: dativo plural, con *-n* también en el sustantivo."),
+        di(2, "Ich bin davon überzeugt, dass man einen eigenen Weg finden muss.", note="*davon überzeugt*: el *da-* anuncia la oración con *dass*. *einen eigenen Weg*: acusativo masculino, *-en* en el artículo y en el adjetivo."),
+        # repaso intercalado
+        cz(2, "Escribí *beantworten* con *sein + zu*.", "Alle Fragen sind auf dem Antwortblatt ___.", "zu beantworten", note="Repaso (semana 40): *sein + zu* en una consigna = «hay que»: *sind zu beantworten*. *beantworten* es inseparable, así que *zu* va separado, delante."),
+        cz(1, "Escribí el artículo.", "Wegen ___ Lampenfiebers konnte sie kaum sprechen.", "des", note="Repaso (semana 26): *wegen* + genitivo en lo escrito: *des Lampenfiebers* (neutro, con *-s*). *wegen dem* se oye en la charla, pero en el examen es un error."),
+        tr(1, "Debido a mi enfermedad, no pude hacer el examen.", "Aufgrund meiner Krankheit konnte ich die Prüfung nicht machen.", [a + b for a in ("Aufgrund meiner Krankheit konnte ich ", "Wegen meiner Krankheit konnte ich ") for b in ("die Prüfung nicht machen.", "die Prüfung nicht ablegen.", "die Prüfung nicht schreiben.")], "Repaso (semana 41): *aufgrund* + genitivo: *meiner Krankheit* (femenino, *-er*). Ocupa la posición 1, así que el verbo va enseguida: *konnte ich*."),
+        cz(1, "Escribí la palabra que falta.", "Je mehr du übst, ___ sicherer wirst du.", "desto", ["desto", "umso"], "Repaso (semana 29): *je* + verbo al final, *desto* (o *umso*) + verbo segundo: «cuanto más…, más…»."),
+        # producción
+        ty(2, "Empezá un aporte a un foro en dos oraciones: presentá el tema de las redes sociales (con la pasiva *wird … diskutiert*) y tu postura con *Meiner Meinung nach* (más ventajas o más desventajas).", "(Schreiben, Teil 1: Forumsbeitrag)", "In letzter Zeit wird viel über soziale Medien diskutiert. Meiner Meinung nach haben sie mehr Vorteile als Nachteile.",
+           [a + " " + b for a in ("In letzter Zeit wird viel über soziale Medien diskutiert.", "In letzter Zeit wird viel über die sozialen Medien diskutiert.", "Heutzutage wird viel über soziale Medien diskutiert.", "Zurzeit wird viel über soziale Medien diskutiert.", "Über soziale Medien wird in letzter Zeit viel diskutiert.")
+            for b in ("Meiner Meinung nach haben sie mehr Vorteile als Nachteile.", "Meiner Meinung nach haben sie mehr Nachteile als Vorteile.", "Meiner Meinung nach überwiegen die Vorteile.", "Meiner Meinung nach überwiegen die Nachteile.")],
+           "La pasiva presenta el tema sin nombrar a nadie: *wird … diskutiert*, con *über* + acusativo. *Meiner Meinung nach* ocupa la posición 1, así que el verbo va enseguida: *haben sie*."),
     ],
 }
