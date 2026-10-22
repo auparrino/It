@@ -10,7 +10,7 @@ WEEK = {
     "fare": "Adivinar el significado de palabras que nunca viste, multiplicar tu vocabulario y moverte en el mundo de la universidad.",
     "tema": "Prefijos un-, miss-, ver-, zer-, be-; sufijos -ung, -heit, -keit, -schaft (sustantivos) y -bar, -los, -lich, -ig, -isch (adjetivos); la universidad",
     "keys": [
-        "*un-* niega adjetivos: *glaublich → unglaublich*; *miss-* = mal, al revés: *missverstehen*.",
+        "*un-* niega adjetivos: *ehrlich → unehrlich*; *miss-* = mal, al revés: *missverstehen*.",
         "*zer-* = en pedazos (*zerbrechen*); *be-* vuelve transitivo: *auf die Frage antworten → die Frage beantworten*.",
         "*ver-, zer-, be-, miss-* son inseparables: participio sin *ge-* (*verstanden, zerstört*).",
         "*-ung, -heit, -keit, -schaft* forman sustantivos **femeninos**.",
@@ -27,9 +27,9 @@ WEEK = {
         "blocks": [
             {
                 "h": "un-: lo contrario",
-                "r": "*un-* delante de un **adjetivo** (o de algunos sustantivos) da lo contrario, como nuestro *in-* o *des-*: *möglich → unmöglich*, *bekannt → unbekannt*. El acento cae sobre *un-*.",
+                "r": "*un-* delante de un **adjetivo** (o de algunos sustantivos) da lo contrario, como nuestro *in-* o *des-*: *möglich → unmöglich*, *bekannt → unbekannt*. El acento suele caer sobre *un-* (*UNbekannt*); en *unmöglich* o *unglaublich* también se oye en la raíz.",
                 "table": {"head": ["Base", "Con un-", "Castellano"], "rows": [
-                    ["glaublich", "unglaublich", "increíble"],
+                    ["ehrlich", "unehrlich", "deshonesto"],
                     ["zufrieden", "unzufrieden", "insatisfecho, disconforme"],
                     ["verständlich", "unverständlich", "incomprensible"],
                     ["pünktlich", "unpünktlich", "impuntual"],
@@ -113,7 +113,7 @@ WEEK = {
             },
             {
                 "h": "-heit, -keit, -schaft",
-                "r": "**-heit** y **-keit** forman sustantivos abstractos a partir de **adjetivos** (como nuestro *-dad*): *frei → die Freiheit*. *-keit* va después de **-ig, -lich, -bar, -sam**; *-heit*, en casi todos los demás. **-schaft** forma colectivos o relaciones a partir de sustantivos: *der Freund → die Freundschaft*. Los tres son **femeninos**.",
+                "r": "**-heit** y **-keit** forman sustantivos abstractos a partir de **adjetivos** (como nuestro *-dad*): *frei → die Freiheit*. *-keit* va después de **-ig, -lich, -bar, -sam** y, en general, de **-er/-el** (*Sauberkeit, Tapferkeit*; excepciones: *Sicherheit, Dunkelheit*); *-heit*, en casi todos los demás. **-schaft** forma colectivos o relaciones a partir de sustantivos: *der Freund → die Freundschaft*. Los tres son **femeninos**.",
                 "table": {"head": ["Sufijo", "Ejemplos"], "rows": [
                     ["-heit", "frei → Freiheit, krank → Krankheit, gesund → Gesundheit, sicher → Sicherheit"],
                     ["-keit", "möglich → Möglichkeit, schwierig → Schwierigkeit, dankbar → Dankbarkeit, einsam → Einsamkeit"],
@@ -146,7 +146,7 @@ WEEK = {
                     ["Die Sprechstunde ist *kostenlos*.", "La consulta es gratuita."],
                     ["Seine Handschrift ist *unlesbar*.", "Su letra es ilegible."],
                 ],
-                "warn": "*-los* va pegado al sustantivo, a veces con una *-s-* o una *-n-* de unión: *arbeitslos, hoffnungslos, kostenlos*. No lo confundas con *los* (suelto) de *Was ist los?*",
+                "warn": "*-los* va pegado al sustantivo, a veces con una *-s-* o una *-n-* de unión: *arbeitslos, hoffnungslos, namenlos* (*Name* + *n*). No lo confundas con *los* (suelto) de *Was ist los?*",
                 "more": ["La semana que viene vas a usar *-bar* como alternativa a la pasiva: *Das Gerät ist reparierbar* = se puede reparar."],
                 "q": [
                     q("«Se puede hacer» →", "machbar", ["machbar", "machlos", "machig"]),
@@ -204,7 +204,7 @@ WEEK = {
         ch(0, "Elegí el participio.", "Wir haben das Thema im Seminar ___.", "besprochen", ["besprochen", "gebesprochen", "besprecht"], "*be-* es inseparable: sin *ge-*."),
         ch(0, "Elegí el participio.", "Leider ist der Versuch ___.", "misslungen", ["misslungen", "gemisslungen", "verlungen"], "*misslingen* → *ist misslungen*, sin *ge-*."),
         cz(0, "Escribí el prefijo (increíble).", "Das ist ___glaublich!", "un", note="*unglaublich* = increíble."),
-        cz(0, "Escribí el prefijo (editar, trabajar un texto).", "Ich muss meine Hausarbeit noch ___arbeiten.", "be", note="*an etwas arbeiten → etwas bearbeiten*."),
+        cz(0, "Escribí el prefijo (tramitar, procesar).", "Bitte ___arbeiten Sie den Antrag bis Freitag.", "be", note="*an etwas arbeiten → etwas bearbeiten*."),
         cz(0, "Escribí el prefijo (destruir).", "Der Sturm hat viele Häuser ___stört.", "zer", note="*zerstören* = destruir."),
         cz(0, "Escribí el prefijo (perderse a pie).", "Er hat sich auf dem Campus ___laufen.", "ver", note="*sich verlaufen*: el *ver-* del error."),
         cz(0, "Escribí el prefijo (desconfiar).", "Ich ___traue diesen Zahlen.", "miss", note="*misstrauen* + dativo = desconfiar de."),

@@ -194,7 +194,7 @@ WEEK = {
         # parte 0 — el genitivo
         ch(0, "Elegí el artículo en genitivo.", "das Ende ___ Reise", "der", ["der", "des", "dem"], "*die Reise*, femenino: genitivo *der*."),
         ch(0, "Elegí el artículo en genitivo.", "der Name ___ Hotels", "des", ["des", "der", "dem"], "*das Hotel*, neutro: *des Hotels*."),
-        ch(0, "Elegí el posesivo en genitivo.", "die Farbe ___ Autos", "meines", ["meines", "meiner", "meinem"], "Neutro: *meines Autos*."),
+        ch(0, "Elegí el posesivo en genitivo.", "die Farbe ___ Mantels", "meines", ["meines", "meiner", "meinem"], "Masculino: *meines Mantels*."),
         ch(0, "¿Cómo se dice?", "«la valija de Anna»", "Annas Koffer", ["Annas Koffer", "Anna's Koffer", "Koffer Annas"], "Nombre + *-s*, adelante y sin apóstrofo."),
         ch(0, "Elegí el adjetivo.", "die Abfahrt des ___ Zuges", "letzten", ["letzten", "letzte", "letztes"], "Adjetivo en genitivo con artículo: siempre *-en*."),
         ch(0, "Elegí la forma.", "das Zimmer des ___ (der Student)", "Studenten", ["Studenten", "Studentes", "Students"], "*der Student* lleva *-en* en todos los casos menos el nominativo."),
@@ -202,7 +202,7 @@ WEEK = {
         cz(0, "Escribí el artículo (die Firma).", "die Adresse ___ Firma", "der", note="Femenino: *der Firma*."),
         cz(0, "Escribí el artículo (das Kind).", "das Zimmer ___ Kindes", "des", note="Neutro: *des Kindes*."),
         cz(0, "Escribí *Ticket* en genitivo.", "der Preis des ___", "Tickets", note="Neutro de varias sílabas: *-s*."),
-        cz(0, "Escribí el artículo (der Kunde).", "die Meinung ___ Kunden", "des", note="Masculino: *des*; y *Kunde* toma *-n*."),
+        cz(0, "Escribí el artículo (del cliente).", "die Meinung ___ Kunden", "des", note="Masculino: *des*; y *Kunde* toma *-n*."),
         cz(0, "Escribí *Film* en genitivo.", "das Ende des ___", "Films", ["Films", "Filmes"], "Masculino: *des Films* (o *Filmes*)."),
         tr(0, "el auto de mi papá", "das Auto meines Vaters", ["das Auto meines Vaters", "das Auto von meinem Vater"], "Genitivo detrás: *meines Vaters*. En el habla, *von meinem Vater*."),
         tr(0, "el nombre de la calle", "der Name der Straße", note="*die Straße* → genitivo *der Straße*."),

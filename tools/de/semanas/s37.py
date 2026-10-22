@@ -133,7 +133,7 @@ WEEK = {
                     ["Er *wird* den Termin *wohl* vergessen *haben*.", "Se habrá olvidado del turno."],
                     ["Der Täter ist *angeblich* ins Ausland geflohen.", "El autor supuestamente huyó al extranjero."],
                 ],
-                "warn": "*wird wohl* casi nunca es futuro: *Er wird wohl schlafen* = «estará durmiendo» (ahora). Igual que nuestro futuro de probabilidad: «¿Qué hora será?»",
+                "warn": "Sin un adverbio de futuro, *wird wohl* casi siempre es una suposición sobre el presente: *Er wird wohl schlafen* = «estará durmiendo» (ahora). Con *morgen, nächste Woche…*, es futuro probable: *Er wird wohl morgen kommen*. Igual que nuestro futuro de probabilidad: «¿Qué hora será?»",
                 "q": [
                     q("¿Qué adverbio equivale a *soll*?", "angeblich", ["angeblich", "sicher", "vielleicht"]),
                     q("*Er wird wohl im Büro sein* significa…", "seguramente está en la oficina", ["seguramente está en la oficina", "mañana va a estar en la oficina", "quiere estar en la oficina"]),
@@ -195,7 +195,7 @@ WEEK = {
         cz(0, "Escribí el auxiliar.", "Er kann nicht in Berlin gewesen ___.", "sein", note="*er ist gewesen* → *gewesen sein*."),
         tr(0, "Él debe de estar en casa.", "Er muss zu Hause sein.", ["Er muss zu Hause sein.", "Er muss zuhause sein.", "Er muss daheim sein."], "Suposición casi segura: *muss*."),
         tr(0, "Eso no puede ser verdad.", "Das kann nicht wahr sein.", ["Das kann nicht wahr sein.", "Das kann nicht stimmen.", "Das kann doch nicht wahr sein."], "Lo imposible: *kann nicht*."),
-        tr(0, "Ella debe de haber perdido la llave.", "Sie muss den Schlüssel verloren haben.", note="Modal en presente + *verloren haben*."),
+        tr(0, "Ella debe de haber perdido la llave.", "Sie muss den Schlüssel verloren haben.", ["Sie muss den Schlüssel verloren haben.", "Sie muss ihren Schlüssel verloren haben."], note="Modal en presente + *verloren haben*."),
         # parte 1 — soll y will
         ch(1, "Elegí el modal.", "(Dicen que es muy rico.) Er ___ sehr reich sein.", "soll", ["soll", "will", "muss"], "Lo dicen otros: *soll*."),
         ch(1, "Elegí el modal.", "(Él asegura que es médico, pero no le creo.) Er ___ Arzt sein.", "will", ["will", "soll", "muss"], "Lo afirma el sujeto sobre sí mismo: *will*."),
@@ -229,7 +229,7 @@ WEEK = {
         ty(2, "Reescribí con un modal.", "Er ist sicher im Büro.", "Er muss im Büro sein.", note="*sicher* ≈ *muss*."),
         ty(2, "Reescribí con *können* en Konjunktiv II.", "Es ist möglich, dass sie den Bus verpasst hat.", "Sie könnte den Bus verpasst haben.", note="Posibilidad sobre el pasado: *könnte* + *verpasst haben*."),
         ty(2, "Reescribí con *dürfen*.", "Wahrscheinlich hat er es vergessen.", "Er dürfte es vergessen haben.", note="*wahrscheinlich* ≈ *dürfte*; el pasado va en el infinitivo: *vergessen haben*."),
-        tr(2, "Seguramente él ya está durmiendo.", "Er wird wohl schon schlafen.", ["Er wird wohl schon schlafen.", "Er schläft wohl schon.", "Er dürfte schon schlafen.", "Er schläft wahrscheinlich schon.", "Er schläft vermutlich schon.", "Wahrscheinlich schläft er schon.", "Vermutlich schläft er schon."], "Nuestro «seguramente» es probabilidad: *wird wohl*, *dürfte* o *wahrscheinlich*."),
+        tr(2, "Seguramente él ya está durmiendo.", "Er wird wohl schon schlafen.", ["Er wird wohl schon schlafen.", "Er schläft wohl schon.", "Er dürfte schon schlafen.", "Er schläft wahrscheinlich schon.", "Er schläft vermutlich schon.", "Wahrscheinlich schläft er schon.", "Vermutlich schläft er schon.", "Er schläft sicher schon.", "Er schläft bestimmt schon.", "Sicher schläft er schon.", "Er muss schon schlafen."], "Nuestro «seguramente» es probabilidad: *wird wohl*, *dürfte* o *wahrscheinlich*."),
         tr(2, "Es imposible que él haya escrito esta carta.", "Er kann diesen Brief nicht geschrieben haben.", ["Er kann diesen Brief nicht geschrieben haben.", "Er kann den Brief nicht geschrieben haben."], "*kann nicht* + infinitivo perfecto."),
         li(2, "vermutlich", ["vermutlich", "verständlich", "vergeblich"], "*vermutlich* = probablemente; viene de *vermuten*."),
     ],

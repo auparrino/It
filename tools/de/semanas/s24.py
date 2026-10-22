@@ -147,7 +147,7 @@ WEEK = {
                     ["superlativo", "Das ist das Beste, was du machen kannst.", "Es lo mejor que podés hacer."],
                     ["toda la oración", "Er kommt immer zu spät, was mich ärgert.", "Siempre llega tarde, lo que me da bronca."],
                 ]},
-                "warn": "Con *alles*, *nichts* y *etwas* no uses *das*: *alles, das ich weiß* está mal; va *alles, **was** ich weiß*. Con un sustantivo neutro, en cambio, sí va *das*: *das Buch, das ich lese*.",
+                "warn": "Con *alles* y *nichts* va *was* (*alles, **was** ich weiß*); con *etwas* lo más común es *was*, aunque *das* también se usa. Con un sustantivo neutro, en cambio, sí va *das*: *das Buch, das ich lese*.",
                 "q": [
                     q("Completá: *Das ist alles, ___ ich habe.*", "was", ["was", "das", "dass"]),
                     q("Completá: *Er hat die Prüfung bestanden, ___ alle überrascht hat.*", "was", ["was", "das", "der"]),
@@ -232,7 +232,7 @@ WEEK = {
         ch(2, "Elegí el relativo.", "Ein Dosenöffner ist ein Gerät, mit ___ man Dosen öffnet.", "dem", ["dem", "das", "was"], "*das Gerät*, con *mit* + dativo: *mit dem*."),
         ch(2, "Elegí el relativo.", "Das ist das Schönste, ___ ich je gesehen habe.", "was", ["was", "das", "wo"], "Después de un superlativo neutro: *was*."),
         cz(2, "Escribí el relativo.", "Das, ___ du sagst, ist nicht richtig.", "was", note="*das, was…* = lo que."),
-        cz(2, "Escribí el relativo.", "Gibt es etwas, ___ du nicht isst?", "was", note="Después de *etwas*: *was*."),
+        cz(2, "Escribí el relativo.", "Gibt es etwas, ___ du nicht isst?", "was", accept=["was", "das"], note="Después de *etwas*: lo más común es *was* (también se usa *das*)."),
         cz(2, "Escribí el relativo.", "Eine Bibliothek ist ein Ort, ___ man Bücher ausleihen kann.", "wo", ["wo", "an dem"], "Lugar: *wo* (o *an dem*, por *der Ort*)."),
         cz(2, "Escribí el relativo.", "Eine Schere ist ein Gegenstand, mit ___ man Papier schneidet.", "dem", note="Concuerda con *der Gegenstand*: *mit dem*."),
         cz(2, "Escribí el relativo.", "Ein Kellner ist jemand, ___ im Restaurant arbeitet.", "der", note="*jemand, der…*"),

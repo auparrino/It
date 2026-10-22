@@ -82,10 +82,10 @@ WEEK = {
                     ["Ich finde *eure* Wohnung schön.", "El departamento de ustedes me parece lindo."],
                     ["Er ruft *seine* Mutter an.", "Llama a su mamá."],
                 ],
-                "warn": "*euer* pierde la segunda *e* cuando lleva terminación: *eure Küche, euren Balkon*, nunca «euere». *unser* en cambio la mantiene: *unsere, unseren*.",
+                "warn": "*euer* pierde la segunda *e* cuando lleva terminación: *eure Küche, euren Balkon*: lo normal es *eure*, *euren*; *euere* existe pero casi no se usa. *unser* en cambio la mantiene: *unsere, unseren*.",
                 "q": [
                     q("Completá: *Ich suche ___ Schlüssel.* (mi)", "meinen", ["meinen", "mein", "meine"]),
-                    q("Completá: *Habt ihr ___ Balkon?* (de ustedes)", "euren", ["euren", "eueren", "euer"]),
+                    q("Completá: *Habt ihr ___ Balkon?* (de ustedes)", "euren", ["euren", "eure", "euer"]),
                 ],
             },
             {
@@ -196,7 +196,7 @@ WEEK = {
         ch(0, "Elegí el posesivo.", "Anna und ___ Balkon (de ella)", "ihr", ["ihr", "sein", "ihre"], "De ella → *ihr*; *der Balkon* → sin terminación."),
         ch(0, "Elegí el posesivo.", "Paul und ___ Wohnung (de él)", "seine", ["seine", "sein", "ihre"], "De él → *sein-*; *die Wohnung* → *-e*."),
         ch(0, "Elegí el posesivo.", "Ich suche ___ Schlüssel. (mi)", "meinen", ["meinen", "mein", "meine"], "Acusativo masculino: *meinen*."),
-        ch(0, "Elegí el posesivo.", "___ Küche ist schön. (de ustedes, amigos)", "Eure", ["Eure", "Euere", "Euer"], "*euer* + *-e* = *eure*."),
+        ch(0, "Elegí el posesivo.", "___ Küche ist schön. (de ustedes, amigos)", "Eure", ["Eure", "Euren", "Euer"], "*euer* + *-e* = *eure*."),
         ch(0, "A la señora Weber: elegí el posesivo.", "Ist das ___ Auto, Frau Weber?", "Ihr", ["Ihr", "dein", "sein"], "De usted → *Ihr*, con mayúscula."),
         cz(0, "Escribí el posesivo (nuestro).", "___ Wohnung ist klein.", "Unsere", note="*unser* + *-e* (femenino)."),
         cz(0, "Escribí el posesivo (mi).", "Das ist ___ Bett.", "mein", note="*das Bett*: neutro, sin terminación."),

@@ -153,7 +153,7 @@ WEEK = {
                 "q": [
                     q("Completá: *Ich putze ___ die Zähne.*", "mir", ["mir", "mich", "sich"]),
                     q("Completá: *Du wäschst ___.* (sin otro objeto)", "dich", ["dich", "dir", "sich"]),
-                    q("Completá: *Sie (ella) hat ___ den Fuß gebrochen.*", "sich", ["sich", "ihr", "mir"]),
+                    q("Completá: *Sie (ella) hat ___ den Fuß gebrochen.* (ella se rompió el pie)", "sich", ["sich", "ihr", "mir"]),
                 ],
             },
             {
@@ -251,7 +251,7 @@ WEEK = {
         cz(0, "Escribí el pronombre en dativo.", "___ tut der Rücken weh. (a mí)", "Mir", note="«Me duele» = *mir tut … weh*."),
         cz(0, "Escribí la forma de *wehtun*.", "Ihm ___ der Zahn weh.", "tut", note="*wehtun* se separa: *tut … weh*."),
         cz(0, "Completá la palabra.", "Ich habe ___schmerzen. (cabeza)", "Kopf", note="*die Kopfschmerzen* = dolor de cabeza."),
-        tr(0, "Me duele la cabeza.", "Mir tut der Kopf weh.", ["Mir tut der Kopf weh.", "Ich habe Kopfschmerzen.", "Der Kopf tut mir weh."], "Dativo + *tut … weh*, o *Kopfschmerzen haben*."),
+        tr(0, "Me duele la cabeza.", "Mir tut der Kopf weh.", ["Mir tut der Kopf weh.", "Ich habe Kopfschmerzen.", "Der Kopf tut mir weh.", "Mein Kopf tut weh.", "Ich habe Kopfweh."], "Dativo + *tut … weh*, o *Kopfschmerzen haben*."),
         tr(0, "Tengo fiebre.", "Ich habe Fieber.", note="*Fieber* sin artículo."),
         tr(0, "¿Te duele la espalda?", "Tut dir der Rücken weh?", ["Tut dir der Rücken weh?", "Hast du Rückenschmerzen?", "Tut der Rücken dir weh?"], "*dir* = a vos, en dativo."),
         ty(0, "Escribí en alemán, con artículo.", "«el pie»", "der Fuß", note="Plural *die Füße*. " + MAY),

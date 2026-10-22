@@ -238,7 +238,7 @@ WEEK = {
         cz(2, "Escribí la palabra que falta (disculpe).", "___, wo ist hier die Haltestelle?", "Entschuldigung", note="Para hablarle a un desconocido. " + MAY),
         cz(2, "Escribí la palabra que falta (la esquina).", "Die Bäckerei ist an der ___.", "Ecke", note="*an der Ecke* = en la esquina. " + MAY),
         tr(2, "Disculpe, ¿dónde está la estación?", "Entschuldigung, wo ist der Bahnhof?", ["Entschuldigung, wo ist der Bahnhof?", "Entschuldigung, wo ist hier der Bahnhof?"], "*Entschuldigung* + *Wo ist…?*"),
-        tr(2, "En el semáforo, doble a la izquierda. (usted)", "Gehen Sie an der Ampel links.", ["Gehen Sie an der Ampel links.", "An der Ampel gehen Sie links.", "Gehen Sie an der Ampel nach links.", "An der Ampel gehen Sie nach links."], "Imperativo con *Sie* + *an der Ampel* + *links*."),
+        tr(2, "En el semáforo, doble a la izquierda. (usted)", "Gehen Sie an der Ampel links.", ["Gehen Sie an der Ampel links.", "An der Ampel gehen Sie links.", "Gehen Sie an der Ampel nach links.", "An der Ampel gehen Sie nach links.", "Biegen Sie an der Ampel links ab.", "An der Ampel biegen Sie links ab.", "Biegen Sie an der Ampel nach links ab."], "Imperativo con *Sie* + *an der Ampel* + *links*."),
         tr(2, "Tome la primera calle a la derecha.", "Nehmen Sie die erste Straße rechts.", ["Nehmen Sie die erste Straße rechts.", "Nehmen Sie die erste Strasse rechts.", "Nehmen Sie die erste Straße nach rechts."], "Se cuentan las calles: *die erste Straße*."),
         ty(2, "Escribí en alemán, con artículo.", "«el semáforo»", "die Ampel", note="Femenino. " + MAY),
     ],

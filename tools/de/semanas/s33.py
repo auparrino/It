@@ -85,7 +85,7 @@ WEEK = {
             },
             {
                 "h": "Partizip II con objeto: pasivo y terminado",
-                "r": "El **Partizip II** de un verbo **transitivo** (con acusativo) delante del sustantivo tiene sentido **pasivo y terminado**: *das gekaufte Auto* = el auto que fue comprado. Es como nuestro «el auto comprado», pero en alemán va **antes** del sustantivo y se declina.",
+                "r": "El **Partizip II** de un verbo **transitivo** (con acusativo) delante del sustantivo tiene sentido **pasivo** y, en general, **terminado**: *das gekaufte Auto* = el auto que fue comprado. Con verbos de estado como *lieben* o *suchen* es solo pasivo: *die geliebte Mutter* = la madre que es amada. Es como nuestro «el auto comprado», pero en alemán va **antes** del sustantivo y se declina.",
                 "table": {"head": ["Infinitiv", "Partizip II", "Como adjetivo"], "rows": [
                     ["kaufen", "gekauft", "das gekaufte Auto"],
                     ["schließen", "geschlossen", "die geschlossene Tür"],
@@ -239,7 +239,7 @@ WEEK = {
         cz(0, "Completá con el Partizip I de *fahren*.", "Spring nie auf einen ___ Zug!", "fahrenden", note="Acusativo masculino con *einen*: *-en*."),
         cz(0, "Completá con el Partizip I de *folgen*.", "Lesen Sie bitte den ___ Text.", "folgenden", note="*der folgende Text* = el texto siguiente; acusativo: *den folgenden*."),
         tr(0, "el perro que duerme", "der schlafende Hund", _nc("der schlafende Hund", "der Hund, der schläft"), "Partizip I + terminación de adjetivo."),
-        tr(0, "Un chico que lloraba estaba en la puerta.", "Ein weinendes Kind stand an der Tür.", ["Ein weinendes Kind stand an der Tür.", "Ein weinendes Kind stand vor der Tür.", "Ein weinender Junge stand an der Tür.", "Ein weinender Junge stand vor der Tür.", "An der Tür stand ein weinendes Kind.", "Vor der Tür stand ein weinendes Kind."], "*das Kind* con *ein*: *ein weinendes Kind*."),
+        tr(0, "Un chico que lloraba estaba en la puerta.", "Ein weinendes Kind stand an der Tür.", ["Ein weinendes Kind stand an der Tür.", "Ein weinendes Kind stand vor der Tür.", "Ein weinender Junge stand an der Tür.", "Ein weinender Junge stand vor der Tür.", "An der Tür stand ein weinendes Kind.", "Vor der Tür stand ein weinendes Kind.", "Ein weinendes Kind stand in der Tür.", "In der Tür stand ein weinendes Kind.", "Ein weinender Junge stand in der Tür."], "*das Kind* con *ein*: *ein weinendes Kind*."),
         tr(0, "el año que viene", "das kommende Jahr", ["das kommende Jahr", "im kommenden Jahr", "nächstes Jahr", "das nächste Jahr"], "*kommend* = que viene, próximo."),
         ty(0, "Escribí el Partizip I.", "wissen →", "wissend", note="Sin excepciones: *wissen + d*. (*ein wissendes Lächeln* = una sonrisa cómplice.)"),
         # parte 1 — Partizip II

@@ -108,7 +108,7 @@ WEEK = {
                     ["Ich spreche mit *meinem neuen* Chef.", "Hablo con mi jefe nuevo."],
                     ["Wir arbeiten in *einem modernen* Büro.", "Trabajamos en una oficina moderna."],
                 ],
-                "warn": "*bei, mit, in* (dónde) piden dativo: «bei eine große Firma» está mal; es *bei **einer großen** Firma*. Y en dativo plural el sustantivo suma *-n*: *mit meinen neuen Kollege**n***.",
+                "warn": "*bei, mit, in* (dónde) piden dativo: «bei eine große Firma» está mal; es *bei **einer großen** Firma*. Y en dativo plural el sustantivo suma *-n* (si no termina ya en *-n* o *-s*): *mit meinen neuen Freunde**n***, *mit den Kinder**n***.",
                 "tip": "Regla corta: si el artículo termina en *-em, -er* (dativo) o *-en*, el adjetivo lleva *-en*.",
                 "q": [
                     q("Completá: *Ich habe einen gut___ Chef.*", "guten", ["guten", "guter", "gutes"]),
@@ -221,7 +221,7 @@ WEEK = {
         ch(1, "Elegí la terminación.", "Ich suche einen neu___ Job.", "neuen", ["neuen", "neuer", "neue"], "Acusativo masculino: *einen … -en*."),
         ch(1, "Elegí la terminación.", "Er spricht mit seiner neu___ Kollegin.", "neuen", ["neuen", "neue", "neuer"], "Dativo (*seiner*): *-en*."),
         ch(1, "Elegí la terminación.", "Meine alt___ Kollegen waren netter.", "alten", ["alten", "alte", "alter"], "Plural con *meine*: *-en*."),
-        ch(1, "¿Cuál es correcta?", "(Tengo un sueldo bueno.)", "Ich habe ein gutes Gehalt.", ["Ich habe ein gutes Gehalt.", "Ich habe ein gute Gehalt.", "Ich habe einen guten Gehalt."], "*das Gehalt*, neutro: *ein gutes*."),
+        ch(1, "¿Cuál es correcta?", "(Tengo un buen sueldo.)", "Ich habe ein gutes Gehalt.", ["Ich habe ein gutes Gehalt.", "Ich habe ein gute Gehalt.", "Ich habe einen guten Gehalt."], "*das Gehalt*, neutro: *ein gutes*."),
         ch(1, "¿Cuál es correcta?", "(Trabajo con un compañero simpático.)", "Ich arbeite mit einem netten Kollegen.", ["Ich arbeite mit einem netten Kollegen.", "Ich arbeite mit einem netter Kollege.", "Ich arbeite mit ein nettes Kollegen."], "*mit* + dativo: *einem netten Kollegen* (y *Kollege* suma *-n*)."),
         cz(1, "Escribí el adjetivo con su terminación.", "Das ist ein ___ Büro. (hell)", "helles", note="Neutro nominativo con *ein*: *-es*."),
         cz(1, "Escribí el adjetivo con su terminación.", "Er hat einen ___ Chef. (streng)", "strengen", note="Acusativo masculino: *-en*."),

@@ -189,7 +189,7 @@ WEEK = {
         ch(0, "Elegí el orden correcto.", "(…porque me levanto temprano.)", "…, weil ich früh aufstehe.", ["…, weil ich früh aufstehe.", "…, weil ich stehe früh auf.", "…, weil ich früh auf stehe."], "El separable se junta al final: *aufstehe*."),
         ch(0, "Elegí el orden correcto.", "(…porque tengo que trabajar.)", "…, weil ich arbeiten muss.", ["…, weil ich arbeiten muss.", "…, weil ich muss arbeiten.", "…, weil muss ich arbeiten."], "El modal conjugado va detrás del infinitivo."),
         ch(0, "Elegí el orden correcto.", "(…porque perdió el colectivo.)", "…, weil er den Bus verpasst hat.", ["…, weil er den Bus verpasst hat.", "…, weil er hat den Bus verpasst.", "…, weil er den Bus hat verpasst."], "Perfekt: participio y después *hat*."),
-        ch(0, "Elegí el conector.", "Ich nehme den Schirm, ___ es regnet.", "weil", ["weil", "denn", "dass"], "Verbo al final (*regnet*): *weil*."),
+        ch(0, "Elegí el conector.", "Ich nehme den Schirm, ___ es heute regnet.", "weil", ["weil", "denn", "dass"], "Verbo al final (*heute regnet*): *weil*."),
         ch(0, "Elegí el conector.", "Ich nehme den Schirm, ___ es regnet bestimmt.", "denn", ["denn", "weil", "wenn"], "Verbo segundo (*regnet* después de *es*): *denn*."),
         ch(0, "Respondé.", "Warum lernst du Deutsch?", "Weil ich in Wien arbeiten will.", ["Weil ich in Wien arbeiten will.", "Denn ich will in Wien arbeiten.", "Weil ich will in Wien arbeiten."], "A *Warum?* se contesta con *weil* y verbo al final."),
         cz(0, "Escribí el verbo al final.", "Sie bleibt zu Hause, weil sie Fieber ___. (haben)", "hat", note="*weil sie Fieber hat*."),
@@ -217,7 +217,7 @@ WEEK = {
         tr(1, "Sé que eso es cierto.", "Ich weiß, dass das stimmt.", ["Ich weiß, dass das stimmt.", "Ich weiß, dass das richtig ist.", "Ich weiß, dass das wahr ist."], "*dass* (que) + *das* (eso)."),
         ty(1, "Escribí en alemán, con artículo.", "«la opinión»", "die Meinung", note="*Meiner Meinung nach* = en mi opinión. " + MAY),
         # parte 2 — wenn
-        ch(2, "Elegí el conector.", "___ du Hunger hast, mach dir ein Brot.", "Wenn", ["Wenn", "Weil", "Denn"], "Condición («si tenés hambre»): *wenn*."),
+        ch(2, "Elegí el conector.", "___ du Hunger hast, mach dir ein Brot. (Si tenés hambre, hacete un sándwich.)", "Wenn", ["Wenn", "Weil", "Denn"], "Condición («si tenés hambre»): *wenn*."),
         ch(2, "Elegí el orden correcto.", "(Si llueve, me quedo en casa.)", "Wenn es regnet, bleibe ich zu Hause.", ["Wenn es regnet, bleibe ich zu Hause.", "Wenn es regnet, ich bleibe zu Hause.", "Wenn regnet es, bleibe ich zu Hause."], "Subordinada en posición 1 → verbo, coma, verbo."),
         ch(2, "Elegí el orden correcto.", "(Como estoy enfermo, no puedo venir.)", "Weil ich krank bin, kann ich nicht kommen.", ["Weil ich krank bin, kann ich nicht kommen.", "Weil ich krank bin, ich kann nicht kommen.", "Weil ich bin krank, kann ich nicht kommen."], "*…bin, kann ich…*: dos verbos pegados."),
         ch(2, "Elegí la forma correcta.", "Ich rufe dich an, wenn ich in Berlin ___.", "ankomme", ["ankomme", "komme an", "ankomm"], "Separable junto al final: *ankomme*."),

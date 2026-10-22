@@ -244,7 +244,7 @@ WEEK = {
         tr(1, "Y bueno, no tengo ganas.", "Ich habe halt keine Lust.",
            V(["Ich habe", "Ich hab"], " ", ["halt", "eben"], " keine Lust."),
            "Resignación: *halt* / *eben*."),
-        tr(1, "Él debe de estar enfermo. (con partícula)", "Er ist wohl krank.", ["Er ist wohl krank.", "Er ist wohl krank geworden."], "Suposición con *wohl*."),
+        tr(1, "Él debe de estar enfermo. (con partícula)", "Er ist wohl krank.", ["Er ist wohl krank.", "Er ist wohl gerade krank."], "Suposición con *wohl*."),
         ty(1, "Escribí en alemán, con *klappen*.", "«Ya va a salir bien.»", "Das wird schon klappen.", ["Das wird schon klappen.", "Es wird schon klappen.", "Das klappt schon."], "*schon* tranquiliza."),
         # parte 2 — denn, eigentlich, bloß, nur, ruhig, etwa, combinaciones
         ch(2, "Elegí la partícula (pregunta con interés).", "Was ist ___ hier los?", "denn", ["denn", "halt", "ruhig"], "En preguntas: *denn*."),

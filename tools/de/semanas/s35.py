@@ -161,7 +161,7 @@ WEEK = {
                 "warn": "Con *dass*, el verbo se va al final: *Er sagt, dass er krank sei*. Sin *dass*, queda en 2.º lugar: *Er sagt, er sei krank*. Mezclarlos («*Er sagt, dass er sei krank*») es un error muy frecuente.",
                 "q": [
                     q("Completá: *Er sagt, dass er keine Zeit ___.*", "habe", ["habe", "hat", "haben"]),
-                    q("„Ich komme morgen.“ (dicho ayer) → *Sie sagte, sie komme ___.*", "am nächsten Tag", ["am nächsten Tag", "morgen", "am Tag davor"]),
+                    q("„Ich komme morgen.“ (dicho hace un mes) → *Sie sagte, sie komme ___.*", "am nächsten Tag", ["am nächsten Tag", "morgen", "am Tag davor"]),
                 ],
             },
             {
@@ -243,7 +243,7 @@ WEEK = {
         ch(1, "Elegí la forma del discurso indirecto.", "Die Nachbarn sagen, sie ___ nichts gehört.", "hätten", ["hätten", "haben", "habe"], "*sie haben* = indicativo: va el Konjunktiv II *hätten*."),
         ch(1, "Elegí la forma del discurso indirecto.", "Die Gäste sagen, sie ___ später. (kommen)", "kämen", ["kämen", "kommen", "komme"], "*sie kommen* no se distingue: Konjunktiv II *kämen*."),
         ch(1, "Elegí el pasado indirecto.", "„Ich war in Berlin.“ → Er sagt, er ___ in Berlin gewesen.", "sei", ["sei", "habe", "war"], "*sein* hace Perfekt con *sein*: *er sei gewesen*."),
-        ch(1, "Elegí el pasado indirecto.", "„Ich habe nichts gesehen.“ → Der Zeuge sagt, er ___ nichts gesehen.", "habe", ["habe", "hätte", "sei"], "*er habe* se distingue del indicativo: no hace falta el II."),
+        ch(1, "Elegí el pasado indirecto.", "„Ich habe nichts gesehen.“ → Der Zeuge sagt, er ___ nichts gesehen.", "habe", ["habe", "ist", "sei"], "*er habe* se distingue del indicativo: no hace falta el II."),
         ch(1, "Elegí el futuro indirecto.", "„Wir werden die Steuern senken.“ → Die Regierung sagt, sie ___ die Steuern senken.", "werde", ["werde", "wird", "würde"], "*die Regierung* = *sie* singular → *werde*."),
         ch(1, "Elegí la forma correcta.", "„Warten Sie hier!“ → Er sagte, ich ___ hier warten.", "solle", ["solle", "soll", "sollen"], "Orden → *sollen* en Konjunktiv I: *ich solle*."),
         ch(1, "Elegí la forma correcta.", "Die Arbeiter erklärten, sie ___ morgen streiken.", "würden", ["würden", "werden", "wurden"], "*sie werden* no se distingue: *würden* + infinitivo."),
@@ -253,7 +253,7 @@ WEEK = {
         cz(1, "Escribí el Konjunktiv de *können*.", "Die Kollegen sagen, sie ___ nicht kommen.", "könnten", note="*sie können* = indicativo → Konjunktiv II *könnten*."),
         cz(1, "Escribí el Konjunktiv I de *werden*.", "„Ich rufe morgen an.“ → Sie sagt, sie ___ morgen anrufen.", "werde", note="Futuro indirecto: *werde* + infinitivo."),
         cz(1, "Escribí el Konjunktiv I de *sollen*.", "„Ruf mich an!“ → Sie sagte, ich ___ sie anrufen.", "solle", note="Imperativo → *sollen*."),
-        tr(1, "Dijo que no había visto nada.", "Er sagte, er habe nichts gesehen.", _nc("Er sagte, er habe nichts gesehen.", "Er sagte, dass er nichts gesehen habe.", "Sie sagte, sie habe nichts gesehen.", "Sie sagte, dass sie nichts gesehen habe.", "Er hat gesagt, er habe nichts gesehen.", "Sie hat gesagt, sie habe nichts gesehen."), "Un solo pasado: *habe* + participio."),
+        tr(1, "Dijo que no había visto nada.", "Er sagte, er habe nichts gesehen.", _nc("Er sagte, er habe nichts gesehen.", "Er sagte, dass er nichts gesehen habe.", "Sie sagte, sie habe nichts gesehen.", "Sie sagte, dass sie nichts gesehen habe.", "Er hat gesagt, er habe nichts gesehen.", "Sie hat gesagt, sie habe nichts gesehen.", "Er sagte, er hätte nichts gesehen.", "Er sagte, dass er nichts gesehen hätte.", "Sie sagte, sie hätte nichts gesehen.", "Sie sagte, dass sie nichts gesehen hätte."), "Un solo pasado: *habe* + participio. *hätte* también se usa, sobre todo hablando; en la prensa se prefiere *habe*."),
         tr(1, "Dicen que no tienen tiempo.", "Sie sagen, sie hätten keine Zeit.", _nc("Sie sagen, sie hätten keine Zeit.", "Sie sagen, dass sie keine Zeit hätten."), "*sie haben* = indicativo → *hätten*."),
         ty(1, "Pasá a discurso indirecto (empezá con *Er sagt, er*).", "„Ich bin nach Hause gegangen.“", "Er sagt, er sei nach Hause gegangen.", _nc("Er sagt, er sei nach Hause gegangen.", "Er sagt, dass er nach Hause gegangen sei."), "*gehen* → *sein*: *er sei gegangen*."),
         # parte 2 — contar lo que dijo otro
@@ -270,7 +270,7 @@ WEEK = {
         cz(2, "Escribí el verbo (confirmar, Präteritum).", "Die Polizei ___ die Meldung: Es habe keine Verletzten gegeben.", "bestätigte", note="*bestätigen* = confirmar; regular: *bestätigte*."),
         cz(2, "Escribí la expresión de tiempo.", "„Ich komme morgen.“ (dicho la semana pasada) → Sie sagte, sie komme am ___ Tag.", "nächsten", note="*morgen* → *am nächsten Tag*."),
         tr(2, "Ella preguntó si él tenía tiempo.", "Sie fragte, ob er Zeit habe.", _nc("Sie fragte, ob er Zeit habe.", "Sie fragte, ob er Zeit hätte.", "Sie hat gefragt, ob er Zeit habe.", "Sie hat gefragt, ob er Zeit hat.", "Sie fragte, ob er Zeit hat."), "*ob* + verbo al final; en la prensa, *habe*."),
-        tr(2, "El médico dijo que durmiera más.", "Der Arzt sagte, ich solle mehr schlafen.", _nc("Der Arzt sagte, ich solle mehr schlafen.", "Der Arzt sagte, dass ich mehr schlafen solle.", "Der Arzt hat gesagt, ich solle mehr schlafen.", "Der Arzt sagte, ich sollte mehr schlafen.", "Die Ärztin sagte, ich solle mehr schlafen.", "Die Ärztin hat gesagt, ich solle mehr schlafen.", "Die Ärztin sagte, ich sollte mehr schlafen."), "Pedido indirecto → *sollen*."),
+        tr(2, "El médico me dijo que durmiera más.", "Der Arzt sagte, ich solle mehr schlafen.", _nc("Der Arzt sagte, ich solle mehr schlafen.", "Der Arzt sagte, dass ich mehr schlafen solle.", "Der Arzt hat gesagt, ich solle mehr schlafen.", "Der Arzt sagte, ich sollte mehr schlafen.", "Die Ärztin sagte, ich solle mehr schlafen.", "Die Ärztin hat gesagt, ich solle mehr schlafen.", "Die Ärztin sagte, ich sollte mehr schlafen.", "Der Arzt sagte mir, ich solle mehr schlafen.", "Der Arzt sagte mir, ich sollte mehr schlafen.", "Der Arzt hat mir gesagt, ich solle mehr schlafen.", "Der Arzt sagte mir, dass ich mehr schlafen solle.", "Die Ärztin sagte mir, ich solle mehr schlafen.", "Die Ärztin sagte mir, ich sollte mehr schlafen.", "Die Ärztin hat mir gesagt, ich solle mehr schlafen.", "Die Ärztin sagte mir, dass ich mehr schlafen solle."), "Pedido indirecto → *sollen*."),
         ty(2, "Escribí en alemán, con artículo.", "«el titular (de un diario)»", "die Schlagzeile", note="*die Schlagzeile*: *die Zeile* = la línea. " + MAY),
         li(2, "Pressekonferenz", ["Pressekonferenz", "Pressefreiheit", "Pressemeldung"], "*die Pressekonferenz* = la conferencia de prensa."),
     ],

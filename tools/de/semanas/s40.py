@@ -53,7 +53,7 @@ WEEK = {
                     ["Präsens", "Das Problem lässt sich lösen."],
                     ["Präteritum", "Das Problem ließ sich lösen."],
                     ["Perfekt", "Das Problem hat sich lösen lassen."],
-                    ["con modal", "Das Problem wird sich lösen lassen."],
+                    ["Futur I", "Das Problem wird sich lösen lassen."],
                 ]},
                 "ex": [
                     ["Der Vertrag *lässt sich* jederzeit *kündigen*.", "El contrato se puede rescindir en cualquier momento."],

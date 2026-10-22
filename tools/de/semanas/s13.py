@@ -235,7 +235,7 @@ WEEK = {
         cz(1, "Escribí el pronombre en dativo.", "Das Essen schmeckt ___ nicht. (a nosotros)", "uns", note="*wir* → *uns*, igual que en acusativo."),
         tr(1, "Te ayudo.", "Ich helfe dir.", note="*helfen* + dativo: *dir*, no *dich*."),
         tr(1, "¿Te gusta la torta?", "Schmeckt dir die Torte?", ["Schmeckt dir die Torte?", "Schmeckt dir der Kuchen?"], "Para la comida, *schmecken* + dativo."),
-        tr(1, "La valija es mía.", "Der Koffer gehört mir.", ["Der Koffer gehört mir.", "Das ist mein Koffer."], "*gehören* + dativo: *mir*."),
+        tr(1, "La valija es mía.", "Der Koffer gehört mir.", ["Der Koffer gehört mir.", "Das ist mein Koffer.", "Der Koffer ist meiner."], "*gehören* + dativo: *mir*."),
         # parte 2 — dos objetos
         ch(2, "Elegí el orden correcto.", "(Le regalo flores a mi novia.)", "Ich schenke meiner Freundin Blumen.", ["Ich schenke meiner Freundin Blumen.", "Ich schenke meine Freundin Blumen.", "Ich schenke Blumen meine Freundin."], "Persona en dativo (*meiner*) antes de la cosa."),
         ch(2, "Elegí el orden correcto.", "(Se lo doy a él; lo = das Buch.)", "Ich gebe es ihm.", ["Ich gebe es ihm.", "Ich gebe ihm es.", "Ich gebe ihn es."], "Pronombre acusativo antes que el dativo: *es ihm*."),

@@ -268,7 +268,7 @@ WEEK = {
         cz(2, "Escribí el compuesto con da-.", "Träumst du von einem eigenen Haus? – Ja, ich träume ___.", "davon", note="*träumen von* + cosa → *davon*."),
         cz(2, "Escribí la preposición.", "Ich beschwere mich ___ die laute Musik.", "über", note="*sich beschweren über* + acusativo."),
         tr(2, "Me alegra que estés acá.", "Ich freue mich, dass du hier bist.", ["Ich freue mich, dass du hier bist.", "Ich freue mich, dass du da bist.", "Ich freue mich darüber, dass du hier bist.", "Ich freue mich darüber, dass du da bist.", "Ich freue mich dass du hier bist.", "Ich freue mich dass du da bist."], "Algo que ya pasa: *sich freuen (darüber), dass…*, con el verbo al final."),
-        tr(2, "Sí, me acuerdo (no me lo olvido).", "Ja, ich denke daran.", note="*Ich denke daran* = lo tengo presente, no me olvido."),
+        tr(2, "Sí, me acuerdo (no me lo olvido).", "Ja, ich denke daran.", accept=["Ja, ich denke daran.", "Ja, ich denke dran.", "Ja, ich vergesse es nicht.", "Ja, ich werde daran denken."], note="*Ich denke daran* = lo tengo presente, no me olvido."),
         tr(2, "Chateo con mi hermana.", "Ich chatte mit meiner Schwester.", note="*chatten mit* + dativo: *mit meiner Schwester*."),
         ty(2, "Escribí el compuesto con da- de *über*.", "da + über", "darüber", note="*über* empieza con vocal: se agrega *r*."),
     ],

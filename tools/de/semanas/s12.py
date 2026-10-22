@@ -75,7 +75,7 @@ WEEK = {
                 ],
                 "warn": "*schwimmen* y *wandern* van con *sein* aunque no vayas «a ningún lado»: el cuerpo se desplaza. Y *reisen* y *wandern* son regulares: *gereist, gewandert*.",
                 "more": [
-                    "*fahren* con objeto directo (manejar algo) va con *haben*: *Ich habe das Auto gefahren*. Sin objeto, *sein*: *Ich bin nach Köln gefahren*.",
+                    "*fahren* con objeto directo (llevar algo o a alguien a un lugar) va con *haben*: *Ich habe das Auto in die Garage gefahren*. Sin objeto, *sein*: *Ich bin nach Köln gefahren*.",
                     "En el sur de Alemania, en Austria y en Suiza también se dice *ich bin gestanden, ich bin gesessen*. En el norte: *ich habe gestanden*.",
                 ],
                 "q": [
@@ -241,7 +241,7 @@ WEEK = {
         ch(0, "¿haben o sein?", "Er ___ um sechs Uhr aufgestanden.", "ist", ["ist", "hat", "sind"], "Cambio de estado (de acostado a levantado): *sein*."),
         ch(0, "Elegí el participio.", "Wir sind nach Madrid ___.", "geflogen", ["geflogen", "gefliegt", "gefliegen"], "*fliegen → geflogen*, con cambio de vocal."),
         ch(0, "Elegí el participio.", "Was ist ___?", "passiert", ["passiert", "gepassiert", "passieren"], "Los verbos en *-ieren* no llevan *ge-*."),
-        ch(0, "¿haben o sein?", "Sie ___ das Auto gefahren.", "hat", ["hat", "ist", "sind"], "*fahren* con objeto directo (*das Auto*) es «manejar algo»: *haben*."),
+        ch(0, "¿haben o sein?", "Er ___ mich zum Bahnhof gefahren.", "hat", ["hat", "ist", "sind"], "*fahren* = llevar a alguien/algo → *haben*."),
         ch(0, "¿haben o sein?", "Ich ___ zu Hause geblieben.", "bin", ["bin", "habe", "war"], "*bleiben* va con *sein*."),
         cz(0, "Escribí la forma de *sein* que falta.", "Du ___ spät gekommen.", "bist", note="*du bist … gekommen*."),
         cz(0, "Escribí la forma de *sein* que falta.", "Ihr ___ nach Wien gefahren.", "seid", note="*ihr seid*, con d (*seit* con t es «desde»)."),

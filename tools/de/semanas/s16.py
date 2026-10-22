@@ -91,7 +91,7 @@ WEEK = {
             },
             {
                 "h": "El superlativo: am …-sten",
-                "r": "Para «el más …» después del verbo: **am** + adjetivo + **-sten**. Si el adjetivo termina en *-d, -t, -s, -ß, -z*, se agrega una *e*: *am ältesten, am heißesten, am kürzesten*.",
+                "r": "Para «el más …» después del verbo: **am** + adjetivo + **-sten**. Si el adjetivo termina en *-d, -t, -s, -ß, -z* (o *-sch*), casi siempre se agrega una *e*: *am ältesten, am heißesten, am kürzesten*. Ojo: *groß → am größten*, sin *e*.",
                 "ex": [
                     ["Im Juli ist es hier *am heißesten*.", "En julio es cuando más calor hace acá."],
                     ["Der Zug ist schnell, aber das Flugzeug ist *am schnellsten*.", "El tren es rápido, pero el avión es el más rápido."],
@@ -121,7 +121,7 @@ WEEK = {
                     ["Wer hat *mehr* Zeit?", "¿Quién tiene más tiempo?"],
                 ],
                 "warn": "*gern – lieber – am liebsten* es cómo decís **qué preferís**: *Ich fahre lieber mit dem Zug* (prefiero ir en tren). «gerner» no existe.",
-                "more": ["*hoch* pierde la *c* delante del sustantivo: *der hohe Berg*, pero *höher*."],
+                "more": ["*hoch* pierde la *c* delante del sustantivo y en el comparativo: *der hohe Berg, höher*; en el superlativo vuelve: *am höchsten*."],
                 "q": [
                     q("Completá: *Ich trinke ___ Wasser als Saft.* (preferencia)", "lieber", ["lieber", "gerner", "mehr gern"]),
                     q("Comparativo de *gut*:", "besser", ["besser", "guter", "mehr gut"]),

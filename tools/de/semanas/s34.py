@@ -118,7 +118,8 @@ WEEK = {
                 "table": {"head": ["Conector", "Registro", "Ejemplo"], "rows": [
                     ["also", "coloquial, neutro", "Es ist spät, also gehen wir."],
                     ["darum / deswegen", "neutro, oral", "Ich hatte Hunger, darum habe ich gekocht."],
-                    ["deshalb / daher", "neutro, escrito", "Die Mieten steigen, daher ziehen viele an den Stadtrand."],
+                    ["deshalb", "neutro (oral y escrito)", "Die Mieten steigen, deshalb ziehen viele an den Stadtrand."],
+                    ["daher", "algo más formal, escrito", "Die Mieten steigen, daher ziehen viele an den Stadtrand."],
                     ["folglich", "formal, escrito", "Die Kurse sind kostenlos; folglich nehmen viele daran teil."],
                 ]},
                 "warn": "*also* es un falso amigo del inglés: en alemán **no** significa «también» (eso es *auch*), sino «entonces, así que, o sea».",
@@ -229,7 +230,7 @@ WEEK = {
         cz(2, "Escribí un conector de consecuencia formal.", "Die Integrationskurse sind kostenlos; ___ nehmen viele Menschen daran teil.", "folglich", ["folglich", "deshalb", "deswegen", "daher", "darum", "infolgedessen"], "Adverbio + verbo detrás (*nehmen*)."),
         cz(2, "Escribí el conector de posición 0.", "Sie lernt jeden Tag Deutsch, ___ sie will in Wien studieren.", "denn", note="Orden normal (*sie will*): es *denn*, no *weil*."),
         tr(2, "Aunque vive acá hace años, no tiene la ciudadanía.", "Obwohl er seit Jahren hier lebt, hat er die Staatsangehörigkeit nicht.", _nc("Obwohl er seit Jahren hier lebt, hat er die Staatsangehörigkeit nicht.", "Obwohl sie seit Jahren hier lebt, hat sie die Staatsangehörigkeit nicht.", "Obwohl er seit Jahren hier lebt, hat er nicht die Staatsangehörigkeit.", "Obwohl sie seit Jahren hier lebt, hat sie nicht die Staatsangehörigkeit.", "Obwohl er schon seit Jahren hier lebt, hat er die Staatsangehörigkeit nicht.", "Obwohl sie schon seit Jahren hier lebt, hat sie die Staatsangehörigkeit nicht.", "Er hat die Staatsangehörigkeit nicht, obwohl er seit Jahren hier lebt.", "Sie hat die Staatsangehörigkeit nicht, obwohl sie seit Jahren hier lebt."), "*seit* + presente; *obwohl* + verbo al final."),
-        tr(2, "Muchos tienen prejuicios porque no conocen a ningún migrante.", "Viele haben Vorurteile, weil sie keine Migranten kennen.", _nc("Viele haben Vorurteile, weil sie keine Migranten kennen.", "Viele Menschen haben Vorurteile, weil sie keine Migranten kennen.", "Viele haben Vorurteile, weil sie keine Migrantinnen und Migranten kennen.", "Viele haben Vorurteile, denn sie kennen keine Migranten."), "*weil* + verbo al final; «ningún» = *keine*."),
+        tr(2, "Muchos tienen prejuicios porque no conocen a ningún migrante.", "Viele haben Vorurteile, weil sie keine Migranten kennen.", _nc("Viele haben Vorurteile, weil sie keine Migranten kennen.", "Viele Menschen haben Vorurteile, weil sie keine Migranten kennen.", "Viele haben Vorurteile, weil sie keine Migrantinnen und Migranten kennen.", "Viele haben Vorurteile, denn sie kennen keine Migranten.", "Viele haben Vorurteile, weil sie keinen Migranten kennen.", "Viele Menschen haben Vorurteile, weil sie keinen Migranten kennen.", "Viele haben Vorurteile, denn sie kennen keinen Migranten."), "*weil* + verbo al final; «ningún» = *keine*."),
         ty(2, "Escribí en alemán, con artículo.", "«el prejuicio»", "das Vorurteil", note="*vor* + *das Urteil* (el juicio). " + MAY),
         li(2, "Staatsangehörigkeit", ["Staatsangehörigkeit", "Selbstständigkeit", "Gleichberechtigung"], "*die Staatsangehörigkeit* = la nacionalidad."),
     ],

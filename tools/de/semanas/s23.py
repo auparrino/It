@@ -205,7 +205,7 @@ WEEK = {
     "items": [
         # parte 0 — werden y el futuro
         ch(0, "Elegí la forma de *werden*.", "Du ___ bestimmt eine gute Lehrerin.", "wirst", ["wirst", "wird", "werdest"], "*du wirst*: sin *e* en la raíz."),
-        ch(0, "Elegí la forma de *werden*.", "Ihr ___ das sicher schaffen.", "werdet", ["werdet", "würdet", "wirdet"], "*ihr werdet*, con *e*."),
+        ch(0, "Elegí la forma de *werden*.", "Ihr ___ das sicher schaffen.", "werdet", ["werdet", "wirst", "wirdet"], "*ihr werdet*, con *e*."),
         ch(0, "Elegí la forma de *werden*.", "Es ___ langsam dunkel.", "wird", ["wird", "werd", "wirst"], "*es wird*: una sola *d*."),
         ch(0, "Elegí el orden correcto.", "(El año que viene voy a estudiar en Viena.)", "Ich werde nächstes Jahr in Wien studieren.", ["Ich werde nächstes Jahr in Wien studieren.", "Ich werde studieren nächstes Jahr in Wien.", "Ich werde nächstes Jahr in Wien studiere."], "*werden* en la posición 2, infinitivo al final."),
         ch(0, "¿Cómo se dice?", "«Quiero aprender alemán.»", "Ich will Deutsch lernen.", ["Ich will Deutsch lernen.", "Ich werde Deutsch lernen.", "Ich werde Deutsch zu lernen."], "*wollen* = querer. *Ich werde* es «voy a»."),

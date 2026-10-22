@@ -197,7 +197,7 @@ WEEK = {
         ["die Rücksicht", "la consideración (por los demás)", "Du hättest mehr Rücksicht auf die Nachbarn nehmen sollen."],
         ["ahnen", "sospechar, intuir", "Das konnte doch niemand ahnen!"],
         ["sich einmischen", "meterse (en algo ajeno)", "Misch dich nicht in meine Angelegenheiten ein!"],
-        ["beleidigt", "ofendido", "Sie ist beleidigt, als hätte ich sie angeschrien."],
+        ["beleidigt", "ofendido", "Sie ist so beleidigt, als hätte ich sie angeschrien."],
         ["die Gewissensbisse", "el remordimiento (en plural)", "Er hatte Gewissensbisse, weil er nicht angerufen hatte."],
         ["die Einbildung", "la imaginación (lo imaginado), la ilusión", "Das ist reine Einbildung."],
     ],

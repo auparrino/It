@@ -550,7 +550,7 @@ WEEKS.append({
     "items": [
         # parte 0 — pronombres y sein
         li(0, "wohnen", ["wohnen", "wollen", "Bohnen"], "*w* = v y la *h* alarga la o: «voonen»."),
-        li(0, "heißen", ["heißen", "Hessen", "heiß"], "*ei* = ai y *ß* = s fuerte: «haisen»."),
+        li(0, "heißen", ["heißen", "Hessen", "heiß"], "*ei* = ai y *ß* = s sorda, como la nuestra: «haisen». *Hessen* tiene e, no ai."),
         li(0, "Woher", ["Woher", "Wo", "Wer"], "*Woher* (de dónde) tiene dos sílabas: vo-HER."),
         ch(0, "Elegí el pronombre.", "___ bin Ana.", "Ich", ["Ich", "Du", "Er"], "*bin* va solo con *ich*."),
         ch(0, "Elegí el pronombre.", "___ seid hier.", "Ihr", ["Ihr", "Wir", "Du"], "*seid* va con *ihr* (ustedes, con confianza)."),
@@ -1181,7 +1181,7 @@ WEEKS.append({
                     ["*eins, zwei, drei*!", "¡uno, dos, tres!"],
                 ],
                 "warn": "*zwei* se dice «tsvai» y *vier*, «fir». Como *zwei* y *drei* se confunden de oído, al teléfono muchos dicen *zwo* para el 2.",
-                "tip": "*sechs*: la *chs* suena «ks» y la s inicial es sonora: «zeks».",
+                "tip": "*sechs*: la *chs* suena «ks» y la s inicial es sonora, como un zumbido de abeja (no como nuestra s; en el sur y en Austria, sorda).",
                 "q": [
                     q("¿Qué número es *zwölf*?", "12", ["12", "11", "20"]),
                     q("¿Cómo se lee *vier*?", "«fir»", ["«fir»", "«vier»", "«bir»"]),

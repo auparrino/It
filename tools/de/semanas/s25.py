@@ -251,7 +251,7 @@ WEEK = {
         cz(2, "Escribí el modal en Konjunktiv II.", "___ ich kurz Ihr Telefon benutzen?", "Dürfte", ["Dürfte", "Könnte"], "Pedir permiso con mucha cortesía: *Dürfte ich…?*"),
         tr(2, "Deberías dormir más.", "Du solltest mehr schlafen.", note="Consejo: *du solltest* + infinitivo al final."),
         tr(2, "¿Podría repetirlo, por favor?", "Könnten Sie das bitte wiederholen?", ["Könnten Sie das bitte wiederholen?", "Könnten Sie es bitte wiederholen?", "Könnten Sie das bitte noch einmal sagen?", "Würden Sie das bitte wiederholen?"], "*Könnten Sie…?*, con el infinitivo al final."),
-        tr(2, "Yo que vos, no lo compraría.", "An deiner Stelle würde ich das nicht kaufen.", ["An deiner Stelle würde ich das nicht kaufen.", "An deiner Stelle würde ich es nicht kaufen.", "Ich an deiner Stelle würde das nicht kaufen.", "Ich würde das an deiner Stelle nicht kaufen."], "*An deiner Stelle* + verbo enseguida."),
+        tr(2, "Yo que vos, no lo compraría.", "An deiner Stelle würde ich das nicht kaufen.", ["An deiner Stelle würde ich das nicht kaufen.", "An deiner Stelle würde ich es nicht kaufen.", "Ich an deiner Stelle würde das nicht kaufen.", "Ich würde das an deiner Stelle nicht kaufen.", "Wenn ich du wäre, würde ich das nicht kaufen.", "Wenn ich du wäre, würde ich es nicht kaufen.", "Wenn ich du wäre würde ich das nicht kaufen.", "Wenn ich du wäre würde ich es nicht kaufen."], "*An deiner Stelle* + verbo enseguida."),
         li(2, "hätte", ["hätte", "hatte", "Hütte"], "*hätte* (tendría), con *ä* abierta; *hatte* (tenía), con *a*."),
     ],
 }

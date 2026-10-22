@@ -183,7 +183,7 @@ WEEK = {
                     ["Am Ende hat der Vorstand *einen Beschluss gefasst*.", "Al final, el directorio tomó una resolución."],
                     ["Die Idee hat breite *Zustimmung gefunden*.", "La idea obtuvo amplia aprobación."],
                 ],
-                "warn": "*einen Beschluss fassen*, no *machen*; *einen Einwand erheben*, no *machen*. Fijate también en el caso: *etwas **auf die** Tagesordnung setzen* (acusativo, movimiento) pero *Das steht **auf der** Tagesordnung* (dativo, lugar), como en la semana 14.",
+                "warn": "*einen Beschluss fassen*, no *machen*. *Einwand* va con *erheben* o *vorbringen* (*einen Einwand machen* existe, pero es más flojo y coloquial). Fijate también en el caso: *etwas **auf die** Tagesordnung setzen* (acusativo, movimiento) pero *Das steht **auf der** Tagesordnung* (dativo, lugar), como en la semana 14.",
                 "q": [
                     q("Completá: *Der Vorstand hat einen Beschluss ___.*", "gefasst", ["gefasst", "gemacht", "genommen"]),
                     q("Completá: *Wer führt heute das ___?*", "Protokoll", ["Protokoll", "Beschluss", "Bescheid"]),

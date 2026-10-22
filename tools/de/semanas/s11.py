@@ -230,7 +230,7 @@ WEEK = {
         cz(1, "Escribí el participio de *sprechen*.", "Habt ihr Deutsch ___?", "gesprochen", note="*e → o*: *gesprochen*."),
         cz(1, "Escribí el participio de *denken*.", "Ich habe an dich ___.", "gedacht", note="Mixto: *gedacht*."),
         tr(1, "Ya vi la película.", "Ich habe den Film schon gesehen.", ["Ich habe den Film schon gesehen.", "Den Film habe ich schon gesehen.", "Ich habe schon den Film gesehen."], "*sehen* → *gesehen*, al final."),
-        tr(1, "No lo sabía.", "Das habe ich nicht gewusst.", ["Das habe ich nicht gewusst.", "Ich habe das nicht gewusst."], "El Perfekt cubre también nuestro imperfecto."),
+        tr(1, "No lo sabía.", "Das habe ich nicht gewusst.", ["Das habe ich nicht gewusst.", "Ich habe das nicht gewusst.", "Das wusste ich nicht.", "Ich wusste das nicht."], "El Perfekt cubre también nuestro imperfecto."),
         li(1, "getrunken", ["getrunken", "getroffen", "gefunden"], "*trinken → getrunken*; *treffen → getroffen*; *finden → gefunden*."),
         # parte 2 — separables, sin ge-, contar
         ch(2, "Elegí el participio.", "Ich habe am Samstag ___. (einkaufen)", "eingekauft", ["eingekauft", "geeinkauft", "eingekaufen"], "Separable: *ge-* en el medio."),
@@ -246,7 +246,7 @@ WEEK = {
         cz(2, "Escribí la palabra que falta (ayer).", "___ habe ich lange geschlafen.", "Gestern", note="*gestern* en la posición 1 → *habe ich*."),
         tr(2, "El sábado hice las compras.", "Am Samstag habe ich eingekauft.", ["Am Samstag habe ich eingekauft.", "Ich habe am Samstag eingekauft."], "*einkaufen* → *eingekauft*."),
         tr(2, "¿Llamaste a Paul?", "Hast du Paul angerufen?", note="*anrufen* → *angerufen*."),
-        tr(2, "La pasamos muy bien.", "Wir haben viel Spaß gehabt.", ["Wir haben viel Spaß gehabt.", "Wir haben viel Spass gehabt."], "*Spaß haben* = pasarla bien → *Spaß gehabt*."),
+        tr(2, "La pasamos muy bien.", "Wir haben viel Spaß gehabt.", ["Wir haben viel Spaß gehabt.", "Wir haben viel Spass gehabt.", "Wir hatten viel Spaß.", "Wir hatten viel Spass."], "*Spaß haben* = pasarla bien → *Spaß gehabt*."),
         ty(2, "Escribí el participio.", "fotografieren →", "fotografiert", note="Los verbos en *-ieren* no llevan *ge-*."),
     ],
 }

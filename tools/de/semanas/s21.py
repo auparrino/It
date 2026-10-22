@@ -115,7 +115,7 @@ WEEK = {
                     ["Meine Oma *las* uns jeden Abend ein Märchen vor.", "Mi abuela nos leía un cuento todas las noches."],
                     ["Ich *wusste* nicht, dass du hier wohnst.", "No sabía que vivías acá."],
                 ],
-                "warn": "*es gab* es «había» (de *es gibt*), no «hubo un regalo»: *Früher gab es hier keinen Supermarkt* = antes acá no había supermercado. Y «ich ginge», «er kame» no existen: *ich ging, er kam*.",
+                "warn": "*es gab* es «había» (de *es gibt*), no «hubo un regalo»: *Früher gab es hier keinen Supermarkt* = antes acá no había supermercado. Y *gehte*, *kommte* no existen: *ich ging, er kam* (verbos irregulares).",
                 "tip": "A veces el Präteritum comparte la vocal con el participio (*bleiben – blieb – geblieben*) y a veces no (*finden – fand – gefunden*): aprendelos siempre de a tres.",
                 "q": [
                     q("Pasado de *wir gehen*:", "wir gingen", ["wir gingen", "wir gehten", "wir gangen"]),
@@ -265,7 +265,7 @@ WEEK = {
         cz(2, "Escribí *als* o *wenn*.", "___ ich Student war, hatte ich nie Geld.", "Als", note="Un período cerrado del pasado: *als*."),
         cz(2, "Escribí el verbo al final (Präteritum de *sein*).", "Als ich ein Kind ___, wohnten wir in Salta.", "war", note="*als* + verbo al final."),
         cz(2, "Escribí la palabra.", "___ gab es noch kein Internet. (en aquel entonces)", "Damals", note="*damals* = en aquel entonces."),
-        tr(2, "Cuando era chico, vivía en Mendoza.", "Als ich klein war, wohnte ich in Mendoza.", ["Als ich klein war, wohnte ich in Mendoza.", "Als ich klein war, lebte ich in Mendoza.", "Als ich klein war, habe ich in Mendoza gewohnt.", "Als ich klein war, habe ich in Mendoza gelebt.", "Als ich ein Kind war, wohnte ich in Mendoza.", "Als ich ein Kind war, lebte ich in Mendoza.", "Ich wohnte in Mendoza, als ich klein war.", "Ich lebte in Mendoza, als ich klein war.", "Als ich klein war, wohnten wir in Mendoza."], "Un período: *als*; después, verbo de la principal."),
+        tr(2, "Cuando era chico, vivía en Mendoza.", "Als ich klein war, wohnte ich in Mendoza.", ["Als ich klein war, wohnte ich in Mendoza.", "Als ich klein war, lebte ich in Mendoza.", "Als ich klein war, habe ich in Mendoza gewohnt.", "Als ich klein war, habe ich in Mendoza gelebt.", "Als ich ein Kind war, wohnte ich in Mendoza.", "Als ich ein Kind war, lebte ich in Mendoza.", "Ich wohnte in Mendoza, als ich klein war.", "Ich lebte in Mendoza, als ich klein war."], "Un período: *als*; después, verbo de la principal."),
         tr(2, "Siempre que llovía, jugábamos adentro.", "Immer wenn es regnete, spielten wir drinnen.", ["Immer wenn es regnete, spielten wir drinnen.", "Immer wenn es geregnet hat, haben wir drinnen gespielt.", "Wenn es regnete, spielten wir immer drinnen.", "Jedes Mal, wenn es regnete, spielten wir drinnen."], "Repetido: *wenn*, con *immer*."),
         tr(2, "Antes no había celulares.", "Früher gab es keine Handys.", ["Früher gab es keine Handys.", "Es gab früher keine Handys.", "Damals gab es keine Handys."], "*früher* en posición 1 → *gab es*."),
         ty(2, "Escribí en alemán, con artículo.", "«la infancia»", "die Kindheit", note="*das Kind* + *-heit*: femenino. " + MAY),
