@@ -110,7 +110,7 @@ WEEK = {
                 "warn": "En castellano decimos «en colectivo», pero en alemán no es «in dem Bus»: es *mit dem Bus*. Y con *zu Fuß* el verbo es *gehen*, no *fahren*: *Ich gehe zu Fuß*.",
                 "tip": "*Ich fahre Fahrrad* (ando en bici, la actividad) y *Ich fahre mit dem Fahrrad* (voy en bici a algún lado) son las dos correctas.",
                 "q": [
-                    q("«en tren»", "mit dem Zug", ["mit dem Zug", "mit der Zug", "im Zug"]),
+                    q("«en tren»", "mit dem Zug", ["mit dem Zug", "mit der Zug", "zu Zug"]),
                     q("«en subte»", "mit der U-Bahn", ["mit der U-Bahn", "mit dem U-Bahn", "mit die U-Bahn"]),
                     q("«a pie»", "zu Fuß", ["zu Fuß", "mit Fuß", "mit dem Fuß"]),
                 ],
@@ -150,7 +150,7 @@ WEEK = {
                 "warn": "«Wie komme ich zu der Bahnhof» está mal: es *zum Bahnhof* (masculino) y *zur Post* (femenino). Si no sabés el género, preguntá *Wo ist…?* y te salvás.",
                 "tip": "*Tut mir leid, ich bin nicht von hier* es lo que te van a decir muchas veces. Agradecé igual: *Trotzdem danke!* (¡gracias igual!).",
                 "q": [
-                    q("¿Cómo llego a la estación? (*der Bahnhof*)", "Wie komme ich zum Bahnhof?", ["Wie komme ich zum Bahnhof?", "Wie komme ich zur Bahnhof?", "Wie gehe ich der Bahnhof?"]),
+                    q("¿Cómo llego a la estación? (*der Bahnhof*)", "Wie komme ich zum Bahnhof?", ["Wie komme ich zum Bahnhof?", "Wie komme ich zur Bahnhof?", "Wie komme ich nach Bahnhof?"]),
                     q("Completá: *Wie komme ich ___ Haltestelle?*", "zur", ["zur", "zum", "zu die"]),
                 ],
             },
@@ -168,7 +168,7 @@ WEEK = {
                 "more": ["*die erste* (primera), *die zweite* (segunda), *die dritte* (tercera) Straße.", "*über die Straße gehen* = cruzar la calle."],
                 "q": [
                     q("*geradeaus* es…", "derecho, todo recto", ["derecho, todo recto", "a la derecha", "a la izquierda"]),
-                    q("«En el semáforo, a la izquierda.»", "An der Ampel links.", ["An der Ampel links.", "An der Ampel rechts.", "An der Ecke geradeaus."]),
+                    q("«En el semáforo, a la izquierda.»", "An der Ampel links.", ["An der Ampel links.", "An der Ampel rechts.", "Am Ampel links."]),
                 ],
             },
         ],
@@ -226,12 +226,12 @@ WEEK = {
         tr(1, "Vamos en subte.", "Wir fahren mit der U-Bahn.", note="*die U-Bahn* → *mit der U-Bahn*."),
         ty(1, "Escribí en alemán, con artículo.", "«la estación de tren»", "der Bahnhof", note="*die Bahn* + *der Hof*: manda *Hof*, masculino. " + MAY),
         # parte 2 — preguntar y dar indicaciones
-        ch(2, "Elegí la pregunta correcta.", "(¿Cómo llego a la estación?)", "Wie komme ich zum Bahnhof?", ["Wie komme ich zum Bahnhof?", "Wie komme ich zur Bahnhof?", "Wie komme ich der Bahnhof?"], "*der Bahnhof* → *zum*."),
+        ch(2, "Elegí la pregunta correcta.", "(¿Cómo llego a la estación?)", "Wie komme ich zum Bahnhof?", ["Wie komme ich zum Bahnhof?", "Wie komme ich zur Bahnhof?", "Wie komme ich nach Bahnhof?"], "*der Bahnhof* → *zum*."),
         ch(2, "Elegí la forma correcta.", "Wie komme ich ___ Post? (die Post)", "zur", ["zur", "zum", "zu"], "*die* → *zur*."),
-        ch(2, "¿Qué significa?", "Gehen Sie geradeaus bis zur Ampel.", "Siga derecho hasta el semáforo.", ["Siga derecho hasta el semáforo.", "Doble a la derecha en el semáforo.", "Cruce en la esquina."], "*geradeaus* = derecho; *die Ampel* = el semáforo."),
+        ch(2, "¿Qué significa?", "Gehen Sie geradeaus bis zur Ampel.", "Siga derecho hasta el semáforo.", ["Siga derecho hasta el semáforo.", "Doble a la derecha en el semáforo.", "Siga derecho después del semáforo."], "*geradeaus* = derecho; *die Ampel* = el semáforo."),
         ch(2, "¿Qué significa?", "Nehmen Sie die zweite Straße links.", "Tome la segunda calle a la izquierda.", ["Tome la segunda calle a la izquierda.", "Tome la segunda calle a la derecha.", "Camine dos cuadras derecho."], "*links* = izquierda; *rechts* = derecha."),
-        ch(2, "Alguien te pregunta el camino y no sabés. ¿Qué decís?", "Wo ist der Bahnhof?", "Tut mir leid, ich bin nicht von hier.", ["Tut mir leid, ich bin nicht von hier.", "Gehen Sie nicht!", "Ich fahre mit dem Zug."], "Fórmula amable para decir que no sabés."),
-        ch(2, "Elegí la respuesta.", "Ist das weit?", "Nein, nur fünf Minuten zu Fuß.", ["Nein, nur fünf Minuten zu Fuß.", "Ja, an der Ampel.", "Nein, links."], "*weit* = lejos."),
+        ch(2, "Alguien te pregunta el camino y no sabés. ¿Qué decís?", "Wo ist der Bahnhof?", "Tut mir leid, ich bin nicht von hier.", ["Tut mir leid, ich bin nicht von hier.", "Tut mir leid, ich bin nicht hier.", "Tut mir leid, ich kenne nicht."], "Fórmula amable para decir que no sabés."),
+        ch(2, "Elegí la respuesta.", "Ist das weit?", "Nein, nur fünf Minuten zu Fuß.", ["Nein, nur fünf Minuten zu Fuß.", "Nein, nur fünf Minuten mit Fuß.", "Nein, nur fünf Minuten mit dem Fuß."], "*weit* = lejos; a pie = *zu Fuß*."),
         cz(2, "Escribí la palabra que falta (derecho).", "Gehen Sie immer ___!", "geradeaus", note="*geradeaus* = todo recto."),
         cz(2, "Escribí la palabra que falta (a la derecha).", "An der Kreuzung gehen Sie ___.", "rechts", note="*rechts* = a la derecha."),
         cz(2, "Escribí la palabra que falta.", "Wie komme ich ___ Museum? (das Museum)", "zum", note="*das* → *zum*."),

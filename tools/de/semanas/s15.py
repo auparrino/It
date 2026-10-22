@@ -159,7 +159,7 @@ WEEK = {
                 "warn": "*zu* delante de un adjetivo es «demasiado»: *zu teuer, zu groß*. No lo confundas con *sehr* (muy): *sehr schön* es un elogio; *zu klein*, un problema.",
                 "tip": "*passen* = el talle; *stehen* = cómo te queda. Una campera puede *passen* y no *stehen*.",
                 "q": [
-                    q("«Me queda chico»:", "Das ist mir zu klein.", ["Das ist mir zu klein.", "Das ist mir sehr klein.", "Das bin ich zu klein."]),
+                    q("«Me queda chico»:", "Das ist mir zu klein.", ["Das ist mir zu klein.", "Das ist mir sehr klein.", "Das bleibt mir klein."]),
                     q("«¿Me puedo probar el vestido?»", "Kann ich das Kleid anprobieren?", ["Kann ich das Kleid anprobieren?", "Kann ich das Kleid probieren an?", "Kann ich anprobieren das Kleid?"]),
                 ],
             },
@@ -221,9 +221,9 @@ WEEK = {
         # parte 2 — en el negocio
         ch(2, "¿Cómo se dice?", "«la pollera»", "der Rock", ["der Rock", "die Rock", "das Rock"], "*der Rock*: masculino."),
         ch(2, "¿Cómo se dice?", "«la camisa»", "das Hemd", ["das Hemd", "die Hemd", "der Hemd"], "*das Hemd*: neutro."),
-        ch(2, "Elegí.", "Die Hose ist mir ___ eng. Haben Sie Größe 40?", "zu", ["zu", "sehr", "gern"], "Problema de talle: *zu* (demasiado)."),
+        ch(2, "Elegí.", "Die Hose ist mir ___ eng. Haben Sie Größe 40?", "zu", ["zu", "zu viel", "genug"], "Problema de talle: *zu* (demasiado)."),
         ch(2, "Elegí.", "Kann ich die Jacke ___?", "anprobieren", ["anprobieren", "probieren an", "anprobiere"], "Con *kann*, el infinitivo va entero al final."),
-        ch(2, "Elegí el verbo.", "Größe 38 ist zu klein. Die Hose ___ mir nicht.", "passt", ["passt", "gefällt", "schmeckt"], "Talle: *passen* + dativo."),
+        ch(2, "Elegí el verbo.", "Größe 38 ist zu klein. Die Hose ___ mir nicht.", "passt", ["passt", "gefällt", "bleibt"], "Talle: *passen* + dativo."),
         ch(2, "Elegí el pronombre.", "Kann ich ___ helfen? (a usted)", "Ihnen", ["Ihnen", "Sie", "Ihr"], "*helfen* + dativo: *Ihnen*."),
         cz(2, "Escribí la parte separable.", "Ich probiere den Rock ___.", "an", note="*anprobieren*: *an* va al final."),
         cz(2, "Escribí la palabra que falta.", "Welche ___ haben Sie? – 42.", "Größe", ["Größe", "Groesse"], "*die Größe* = el talle. " + MAY),

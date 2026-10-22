@@ -175,7 +175,7 @@ WEEK = {
                 "tip": "El *es* de *Dann wird es sortiert* no es de relleno: reemplaza a *das Glas*, es un sujeto de verdad.",
                 "q": [
                     q("Completá: *Zuerst ___ das Glas gesammelt.*", "wird", ["wird", "werden", "wirst"]),
-                    q("¿Qué orden es correcto?", "Dann wird es geschmolzen.", ["Dann wird es geschmolzen.", "Dann es wird geschmolzen.", "Dann wird geschmolzen es."]),
+                    q("¿Qué orden es correcto?", "Dann wird es geschmolzen.", ["Dann wird es geschmolzen.", "Dann es wird geschmolzen.", "Dann es geschmolzen wird."]),
                 ],
             },
         ],
@@ -202,7 +202,7 @@ WEEK = {
         ch(0, "Elegí la forma de *werden*.", "Der Müll ___ getrennt.", "wird", ["wird", "werden", "wirst"], "Sujeto *der Müll* (= er) → *wird*."),
         ch(0, "Elegí la forma de *werden*.", "Die Flaschen ___ gesammelt.", "werden", ["werden", "wird", "worden"], "Sujeto plural → *werden*."),
         ch(0, "Elegí el participio.", "Das Papier wird ___.", "recycelt", ["recycelt", "recyceln", "recycelte"], "Pasiva = *werden* + participio: *recycelt*."),
-        ch(0, "¿Qué oración es pasiva?", "(se clasifica el vidrio)", "Das Glas wird sortiert.", ["Das Glas wird sortiert.", "Das Glas wird teuer.", "Ich werde das Glas sortieren."], "*werden* + participio. Con adjetivo es «volverse»; con infinitivo, futuro."),
+        ch(0, "¿Cuál dice «se clasifica el vidrio»?", "(se clasifica el vidrio)", "Das Glas wird sortiert.", ["Das Glas wird sortiert.", "Das Glas sortiert sich.", "Das Glas ist sortiert."], "Proceso = *werden* + participio. *sortiert sich* calca el «se» castellano; *ist sortiert* es el estado (ya está clasificado)."),
         ch(0, "Pasá a pasiva.", "Man trennt den Müll.", "Der Müll wird getrennt.", ["Der Müll wird getrennt.", "Den Müll wird getrennt.", "Der Müll wird trennen."], "El acusativo *den Müll* pasa a sujeto: *der Müll*."),
         ch(0, "Elegí el final correcto.", "Ich weiß, dass hier Papier ___.", "recycelt wird", ["recycelt wird", "wird recycelt", "recycelt werden"], "En la subordinada: participio + *wird* al final."),
         cz(0, "Escribí la forma de *werden* en presente.", "Wie ___ Strom aus Wind erzeugt?", "wird", note="Sujeto *Strom* (singular) → *wird*."),

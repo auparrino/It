@@ -59,7 +59,7 @@ WEEK = {
                 "warn": "Nada de apóstrofo como en inglés: *Anna's Koffer* aparece en carteles, pero lo correcto es *Annas Koffer*.",
                 "tip": "En el habla, el genitivo se reemplaza muchas veces por *von* + dativo: *der Koffer von Anna*, *das Auto von meinem Bruder*. En lo escrito y en el examen, mejor el genitivo.",
                 "q": [
-                    q("«la valija de Peter»", "Peters Koffer", ["Peters Koffer", "Peter's Koffer", "Koffer Peter"]),
+                    q("«la valija de Peter»", "Peters Koffer", ["Peters Koffer", "Peter's Koffer", "Peter Koffer"]),
                     q("«la opinión del cliente»", "die Meinung des Kunden", ["die Meinung des Kunden", "die Meinung des Kundes", "die Meinung der Kunde"]),
                 ],
             },
@@ -113,7 +113,7 @@ WEEK = {
                 "warn": "«Durante dos horas» (cuánto duró) **no** es *während*: se dice *zwei Stunden lang* o solo *zwei Stunden*: *Wir haben zwei Stunden gewartet.* *während* va con un hecho o un período con artículo: *während der Pause*.",
                 "q": [
                     q("Completá: *___ des Films hat mein Handy geklingelt.*", "Während", ["Während", "Wegen", "Seit"]),
-                    q("«Esperamos dos horas.»", "Wir haben zwei Stunden gewartet.", ["Wir haben zwei Stunden gewartet.", "Wir haben während zwei Stunden gewartet.", "Wir haben für zwei Stunden gewartet."]),
+                    q("«Esperamos dos horas.»", "Wir haben zwei Stunden gewartet.", ["Wir haben zwei Stunden gewartet.", "Wir haben während zwei Stunden gewartet.", "Wir haben vor zwei Stunden gewartet."]),
                 ],
             },
             {
@@ -144,7 +144,7 @@ WEEK = {
                 "warn": "El «si» castellano tiene dos traducciones: *wenn* (condición: *si llueve, me quedo* = *Wenn es regnet…*) y *ob* (pregunta: *no sé si llueve* = *Ich weiß nicht, ob es regnet*). Si podés agregar «o no», es *ob*.",
                 "tip": "*ob* es la versión indirecta de una pregunta que empieza con el verbo: *Kommt er?* → *…, ob er kommt.*",
                 "q": [
-                    q("Completá: *Ich weiß nicht, ___ er heute kommt.*", "ob", ["ob", "wenn", "dass"]),
+                    q("Completá: *Ich weiß nicht, ___ er heute kommt.*", "ob", ["ob", "wenn", "als"]),
                     q("Completá: *___ es regnet, bleibe ich zu Hause.*", "Wenn", ["Wenn", "Ob", "Dass"]),
                 ],
             },
@@ -195,9 +195,9 @@ WEEK = {
         ch(0, "Elegí el artículo en genitivo.", "das Ende ___ Reise", "der", ["der", "des", "dem"], "*die Reise*, femenino: genitivo *der*."),
         ch(0, "Elegí el artículo en genitivo.", "der Name ___ Hotels", "des", ["des", "der", "dem"], "*das Hotel*, neutro: *des Hotels*."),
         ch(0, "Elegí el posesivo en genitivo.", "die Farbe ___ Mantels", "meines", ["meines", "meiner", "meinem"], "Masculino: *meines Mantels*."),
-        ch(0, "¿Cómo se dice?", "«la valija de Anna»", "Annas Koffer", ["Annas Koffer", "Anna's Koffer", "Koffer Annas"], "Nombre + *-s*, adelante y sin apóstrofo."),
+        ch(0, "¿Cómo se dice?", "«la valija de Anna»", "Annas Koffer", ["Annas Koffer", "Anna's Koffer", "Anna Koffer"], "Nombre + *-s*, adelante y sin apóstrofo."),
         ch(0, "Elegí el adjetivo.", "die Abfahrt des ___ Zuges", "letzten", ["letzten", "letzte", "letztes"], "Adjetivo en genitivo con artículo: siempre *-en*."),
-        ch(0, "Elegí la forma.", "das Zimmer des ___ (der Student)", "Studenten", ["Studenten", "Studentes", "Students"], "*der Student* lleva *-en* en todos los casos menos el nominativo."),
+        ch(0, "Elegí la forma.", "das Zimmer des ___ (der Student)", "Studenten", ["Studenten", "Studentes", "Student"], "*der Student* lleva *-en* en todos los casos menos el nominativo."),
         ch(0, "Elegí el artículo en genitivo.", "die Wünsche ___ Gäste", "der", ["der", "des", "den"], "Plural: genitivo *der*."),
         cz(0, "Escribí el artículo (die Firma).", "die Adresse ___ Firma", "der", note="Femenino: *der Firma*."),
         cz(0, "Escribí el artículo (das Kind).", "das Zimmer ___ Kindes", "des", note="Neutro: *des Kindes*."),
@@ -213,7 +213,7 @@ WEEK = {
         ch(1, "Elegí la preposición.", "___ der Fahrt habe ich geschlafen.", "Während", ["Während", "Wegen", "Seit"], "«Durante el viaje»: *während*."),
         ch(1, "Elegí la palabra.", "Der Zug hat Verspätung, ___ es einen Unfall gab.", "weil", ["weil", "wegen", "trotz"], "Sigue una oración con verbo al final: *weil*."),
         ch(1, "Elegí el artículo.", "Wegen ___ Verspätung habe ich den Anschluss verpasst.", "der", ["der", "des", "die"], "*die Verspätung* en genitivo: *der*."),
-        ch(1, "¿Cómo se dice?", "«Esperamos tres horas.»", "Wir haben drei Stunden gewartet.", ["Wir haben drei Stunden gewartet.", "Wir haben während drei Stunden gewartet.", "Wir haben wegen drei Stunden gewartet."], "Duración: sin preposición (o *drei Stunden lang*)."),
+        ch(1, "¿Cómo se dice?", "«Esperamos tres horas.»", "Wir haben drei Stunden gewartet.", ["Wir haben drei Stunden gewartet.", "Wir haben während drei Stunden gewartet.", "Wir haben vor drei Stunden gewartet."], "Duración: sin preposición (o *drei Stunden lang*)."),
         ch(1, "Elegí el artículo.", "Trotz ___ Regens sind wir an den Strand gegangen.", "des", ["des", "der", "dem"], "*der Regen*: genitivo *des Regens*."),
         cz(1, "Escribí la preposición.", "___ des Unwetters bleibt der Flughafen geschlossen.", "Wegen", note="Causa: *wegen* + genitivo."),
         cz(1, "Escribí el artículo (die Kälte).", "Trotz ___ Kälte sind wir an den See gefahren.", "der", note="*trotz* + genitivo femenino: *der*."),
@@ -225,8 +225,8 @@ WEEK = {
         tr(1, "Durante el viaje leí un libro.", "Während der Reise habe ich ein Buch gelesen.", ["Während der Reise habe ich ein Buch gelesen.", "Ich habe während der Reise ein Buch gelesen.", "Während der Fahrt habe ich ein Buch gelesen.", "Ich habe während der Fahrt ein Buch gelesen.", "Während der Reise las ich ein Buch."], "*während der Reise* (femenino)."),
         # parte 2 — preguntas indirectas y reclamos
         ch(2, "Elegí el final.", "Wissen Sie, wann ___?", "der Zug abfährt", ["der Zug abfährt", "fährt der Zug ab", "der Zug fährt ab"], "Pregunta indirecta: verbo al final, separable junto."),
-        ch(2, "Elegí la conjunción.", "Ich weiß nicht, ___ der Zug pünktlich ist.", "ob", ["ob", "wenn", "dass"], "Pregunta de sí o no: *ob*."),
-        ch(2, "Elegí la palabra.", "Können Sie mir sagen, ___ Gleis 7 ist?", "wo", ["wo", "ob", "was"], "*Wo ist Gleis 7?* → *…, wo Gleis 7 ist?*"),
+        ch(2, "Elegí la conjunción.", "Ich weiß nicht, ___ der Zug pünktlich ist.", "ob", ["ob", "wenn", "als"], "Pregunta de sí o no: *ob*."),
+        ch(2, "Elegí la palabra.", "Können Sie mir sagen, ___ Gleis 7 ist?", "wo", ["wo", "ob", "wohin"], "*Wo ist Gleis 7?* → *…, wo Gleis 7 ist?*"),
         ch(2, "Elegí la conjunción.", "Der Kellner fragt, ___ wir einen Tisch reserviert haben.", "ob", ["ob", "wenn", "dass"], "Pregunta de sí o no indirecta: *ob*."),
         ch(2, "Elegí la preposición.", "Ich möchte mich ___ den Service beschweren.", "über", ["über", "für", "an"], "*sich beschweren über* + acusativo."),
         ch(2, "¿Cuál es la más cortés?", "(en la ventanilla)", "Könnten Sie mir bitte sagen, ob der Zug Verspätung hat?", ["Könnten Sie mir bitte sagen, ob der Zug Verspätung hat?", "Hat der Zug Verspätung oder nicht?", "Sagen Sie mir, ob hat der Zug Verspätung!"], "Konjunktiv II + pregunta indirecta con *ob*."),

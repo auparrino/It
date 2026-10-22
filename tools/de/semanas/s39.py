@@ -43,7 +43,7 @@ WEEK = {
                 "warn": "No todo adjetivo acepta *un-*: el contrario de *gut* es *schlecht* («ungut» casi no se usa) y el de *alt* es *jung* o *neu*. *un-* se usa sobre todo con adjetivos derivados (*-lich, -bar, -ig*) y participios.",
                 "tip": "*unfreundlich* es más fuerte que *nicht freundlich*: el primero es «antipático»; el segundo, «no del todo amable».",
                 "q": [
-                    q("Lo contrario de *möglich*:", "unmöglich", ["unmöglich", "missmöglich", "zermöglich"]),
+                    q("Lo contrario de *möglich*:", "unmöglich", ["unmöglich", "inmöglich", "möglichlos"]),
                     q("*die Unordnung* significa…", "el desorden", ["el desorden", "la orden", "el pedido"]),
                 ],
             },
@@ -87,7 +87,7 @@ WEEK = {
                 "tip": "*sich verlaufen* (a pie) y *sich verfahren* (en auto): «perderse» depende de cómo ibas.",
                 "q": [
                     q("Completá: *Bitte ___ Sie die E-Mail bis Freitag.*", "beantworten", ["beantworten", "antworten", "verantworten"]),
-                    q("*Das Glas ist ___.* (se hizo pedazos)", "zerbrochen", ["zerbrochen", "verbrochen", "bebrochen"]),
+                    q("*Das Glas ist ___.* (se hizo pedazos)", "zerbrochen", ["zerbrochen", "verbrochen", "gezerbrochen"]),
                 ],
             },
             {
@@ -108,7 +108,7 @@ WEEK = {
                 "warn": "*die Vorlesung* no es «la lectura» sino la clase magistral del profesor. Y *die Übung* en la facultad es la clase práctica, no solo un ejercicio.",
                 "q": [
                     q("Plural de *die Prüfung*:", "die Prüfungen", ["die Prüfungen", "die Prüfunge", "die Prüfungs"]),
-                    q("El sustantivo de *sich anmelden*:", "die Anmeldung", ["die Anmeldung", "der Anmeld", "die Anmeldheit"]),
+                    q("El sustantivo de *sich anmelden*:", "die Anmeldung", ["die Anmeldung", "die Anmelde", "die Abmeldung"]),
                 ],
             },
             {
@@ -128,7 +128,7 @@ WEEK = {
                 "warn": "Aunque la base sea masculina o neutra, el resultado es femenino: *der Freund → die Freundschaft*, *das Kind → die Kindheit*.",
                 "tip": "Muchas palabras en *-dad / -tad* son *-heit / -keit*: libertad = *Freiheit*, seguridad = *Sicherheit*, posibilidad = *Möglichkeit*.",
                 "q": [
-                    q("*schwierig* →", "die Schwierigkeit", ["die Schwierigkeit", "die Schwierigheit", "die Schwierigschaft"]),
+                    q("*schwierig* →", "die Schwierigkeit", ["die Schwierigkeit", "die Schwierigheit", "die Schwere"]),
                     q("¿Qué artículo lleva *Wissenschaft*?", "die", ["die", "das", "der"]),
                 ],
             },
@@ -149,8 +149,8 @@ WEEK = {
                 "warn": "*-los* va pegado al sustantivo, a veces con una *-s-* o una *-n-* de unión: *arbeitslos, hoffnungslos, namenlos* (*Name* + *n*). No lo confundas con *los* (suelto) de *Was ist los?*",
                 "more": ["La semana que viene vas a usar *-bar* como alternativa a la pasiva: *Das Gerät ist reparierbar* = se puede reparar."],
                 "q": [
-                    q("«Se puede hacer» →", "machbar", ["machbar", "machlos", "machig"]),
-                    q("«Sin trabajo» →", "arbeitslos", ["arbeitslos", "arbeitsbar", "unarbeit"]),
+                    q("«Se puede hacer» →", "machbar", ["machbar", "mächtig", "gemacht"]),
+                    q("«Sin trabajo» →", "arbeitslos", ["arbeitslos", "arbeitsam", "arbeitsfähig"]),
                 ],
             },
             {
@@ -170,8 +170,8 @@ WEEK = {
                 "warn": "Los adjetivos se escriben con minúscula aunque vengan de un sustantivo o de un país: *argentinisch, deutsch, wissenschaftlich*.",
                 "more": ["Las piezas se combinan: *un-ver-gess-lich* (inolvidable), *Un-abhängig-keit* (independencia), *Un-vergleich-bar-keit*."],
                 "q": [
-                    q("«Se comporta de forma inmadura»: *Er ist sehr ___.*", "kindisch", ["kindisch", "kindlich", "kindbar"]),
-                    q("«Todos los días» →", "täglich", ["täglich", "tagig", "tagbar"]),
+                    q("«Se comporta de forma inmadura»: *Er ist sehr ___.*", "kindisch", ["kindisch", "kindlich", "kinderlos"]),
+                    q("«Todos los días» →", "täglich", ["täglich", "tagsüber", "tägig"]),
                 ],
             },
         ],
@@ -196,13 +196,13 @@ WEEK = {
     ],
     "items": [
         # parte 0 — prefijos
-        ch(0, "Elegí lo contrario.", "möglich ↔ ?", "unmöglich", ["unmöglich", "missmöglich", "zermöglich"], "*un-* niega adjetivos."),
-        ch(0, "Elegí la palabra.", "Ich habe dich falsch verstanden. = Ich habe dich ___.", "missverstanden", ["missverstanden", "zerverstanden", "beverstanden"], "*miss-* = mal: *missverstehen*, participio sin *ge-*."),
-        ch(0, "Elegí la palabra.", "Das Glas ist in tausend Stücke ___.", "zerbrochen", ["zerbrochen", "verbrochen", "bebrochen"], "*zer-* = en pedazos."),
+        ch(0, "Elegí lo contrario.", "möglich ↔ ?", "unmöglich", ["unmöglich", "inmöglich", "möglichlos"], "*un-* niega adjetivos."),
+        ch(0, "Elegí la palabra.", "Ich habe dich falsch verstanden. = Ich habe dich ___.", "missverstanden", ["missverstanden", "gemissverstanden", "unverstanden"], "*miss-* = mal: *missverstehen*, participio sin *ge-*."),
+        ch(0, "Elegí la palabra.", "Das Glas ist in tausend Stücke ___.", "zerbrochen", ["zerbrochen", "verbrochen", "gezerbrochen"], "*zer-* = en pedazos."),
         ch(0, "Elegí el verbo.", "Bitte ___ Sie die Fragen schriftlich.", "beantworten", ["beantworten", "antworten", "verantworten"], "*be-* + acusativo: *die Fragen beantworten*. *antworten* necesitaría *auf*."),
-        ch(0, "Elegí el verbo.", "Ich habe ___ und die Vorlesung verpasst.", "verschlafen", ["verschlafen", "beschlafen", "zerschlafen"], "*ver-* = equivocarse: *verschlafen*, quedarse dormido."),
+        ch(0, "Elegí el verbo.", "Ich habe ___ und die Vorlesung verpasst.", "verschlafen", ["verschlafen", "überschlafen", "eingeschlafen"], "*ver-* = equivocarse: *verschlafen*, quedarse dormido."),
         ch(0, "Elegí el participio.", "Wir haben das Thema im Seminar ___.", "besprochen", ["besprochen", "gebesprochen", "besprecht"], "*be-* es inseparable: sin *ge-*."),
-        ch(0, "Elegí el participio.", "Leider ist der Versuch ___.", "misslungen", ["misslungen", "gemisslungen", "verlungen"], "*misslingen* → *ist misslungen*, sin *ge-*."),
+        ch(0, "Elegí el participio.", "Leider ist der Versuch ___.", "misslungen", ["misslungen", "gemisslungen", "misslingt"], "*misslingen* → *ist misslungen*, sin *ge-*."),
         cz(0, "Escribí el prefijo (increíble).", "Das ist ___glaublich!", "un", note="*unglaublich* = increíble."),
         cz(0, "Escribí el prefijo (tramitar, procesar).", "Bitte ___arbeiten Sie den Antrag bis Freitag.", "be", note="*an etwas arbeiten → etwas bearbeiten*."),
         cz(0, "Escribí el prefijo (destruir).", "Der Sturm hat viele Häuser ___stört.", "zer", note="*zerstören* = destruir."),
@@ -213,12 +213,12 @@ WEEK = {
         tr(0, "Tenemos que mejorar el texto.", "Wir müssen den Text verbessern.", note="*besser → verbessern*: el *ver-* del cambio de estado."),
         li(0, "zerstören", ["zerstören", "verstören", "stören"], "*zerstören* = destruir; *stören* = molestar."),
         # parte 1 — sustantivos
-        ch(1, "Elegí el sustantivo.", "frei →", "die Freiheit", ["die Freiheit", "die Freikeit", "die Freischaft"], "*-heit* después de la mayoría de los adjetivos."),
-        ch(1, "Elegí el sustantivo.", "möglich →", "die Möglichkeit", ["die Möglichkeit", "die Möglichheit", "die Möglichung"], "Después de *-lich* va *-keit*."),
-        ch(1, "Elegí el sustantivo.", "der Freund →", "die Freundschaft", ["die Freundschaft", "die Freundheit", "die Freundung"], "*-schaft* forma relaciones a partir de sustantivos."),
+        ch(1, "Elegí el sustantivo.", "frei →", "die Freiheit", ["die Freiheit", "die Freikeit", "die Freizeit"], "*-heit* después de la mayoría de los adjetivos."),
+        ch(1, "Elegí el sustantivo.", "möglich →", "die Möglichkeit", ["die Möglichkeit", "die Möglichheit", "die Ermöglichung"], "Después de *-lich* va *-keit*."),
+        ch(1, "Elegí el sustantivo.", "der Freund →", "die Freundschaft", ["die Freundschaft", "die Freundheit", "die Freundlichkeit"], "*-schaft* forma relaciones a partir de sustantivos."),
         ch(1, "Elegí el artículo.", "___ Wissenschaft", "die", ["die", "das", "der"], "*-schaft* siempre es femenino."),
-        ch(1, "Elegí el sustantivo.", "schwierig →", "die Schwierigkeit", ["die Schwierigkeit", "die Schwierigheit", "die Schwierigung"], "Después de *-ig* va *-keit*."),
-        ch(1, "Elegí el sustantivo.", "sich anmelden →", "die Anmeldung", ["die Anmeldung", "die Anmeldheit", "die Anmeldschaft"], "De verbo: *-ung*."),
+        ch(1, "Elegí el sustantivo.", "schwierig →", "die Schwierigkeit", ["die Schwierigkeit", "die Schwierigheit", "die Schwere"], "Después de *-ig* va *-keit*."),
+        ch(1, "Elegí el sustantivo.", "sich anmelden →", "die Anmeldung", ["die Anmeldung", "die Anmelde", "die Abmeldung"], "De verbo: *-ung*."),
         ch(1, "Elegí el plural.", "die Vorlesung →", "die Vorlesungen", ["die Vorlesungen", "die Vorlesunge", "die Vorlesungs"], "*-ung* hace el plural en *-en*."),
         cz(1, "Escribí el final.", "Ich habe Schwierig___ mit der Hausarbeit. (plural)", "keiten", note="*die Schwierigkeit, die Schwierigkeiten*."),
         cz(1, "Escribí el sufijo.", "Die Gesund___ ist das Wichtigste.", "heit", note="*gesund → die Gesundheit*."),
@@ -230,12 +230,12 @@ WEEK = {
         ty(1, "Escribí el sustantivo de *krank*, con artículo.", "krank →", "die Krankheit", note="*-heit*, femenino. " + MAY),
         tr(1, "La amistad es importante.", "Freundschaft ist wichtig.", ["Freundschaft ist wichtig.", "Die Freundschaft ist wichtig."], "*der Freund → die Freundschaft*."),
         # parte 2 — adjetivos
-        ch(2, "Elegí el adjetivo.", "Das kann man machen. = Das ist ___.", "machbar", ["machbar", "machlos", "machig"], "*-bar* = que se puede."),
-        ch(2, "Elegí el adjetivo.", "ohne Kosten = ___", "kostenlos", ["kostenlos", "kostenbar", "kostig"], "*-los* = sin."),
-        ch(2, "Elegí el adjetivo.", "Er benimmt sich wie ein kleines Kind. (crítica) Er ist ___.", "kindisch", ["kindisch", "kindlich", "kindbar"], "*kindisch* critica; *kindlich* es neutro."),
+        ch(2, "Elegí el adjetivo.", "Das kann man machen. = Das ist ___.", "machbar", ["machbar", "mächtig", "gemacht"], "*-bar* = que se puede."),
+        ch(2, "Elegí el adjetivo.", "ohne Kosten = ___", "kostenlos", ["kostenlos", "kostbar", "kostspielig"], "*-los* = sin."),
+        ch(2, "Elegí el adjetivo.", "Er benimmt sich wie ein kleines Kind. (crítica) Er ist ___.", "kindisch", ["kindisch", "kindlich", "kinderlos"], "*kindisch* critica; *kindlich* es neutro."),
         ch(2, "Elegí el adjetivo.", "Der Kurs dauert zwei Wochen. = ein ___ Kurs", "zweiwöchiger", ["zweiwöchiger", "zweiwöchentlicher", "zweiwochiger"], "*-ig* = duración; *-lich* = frecuencia (cada dos semanas)."),
-        ch(2, "Elegí el adjetivo.", "Das Wasser kann man trinken. = Das Wasser ist ___.", "trinkbar", ["trinkbar", "trinklos", "trinkisch"], "*-bar* sobre la raíz de *trinken*."),
-        ch(2, "Elegí el adjetivo.", "jeden Tag = ___", "täglich", ["täglich", "tagig", "tagbar"], "*der Tag → täglich*, con diéresis."),
+        ch(2, "Elegí el adjetivo.", "Das Wasser kann man trinken. = Das Wasser ist ___.", "trinkbar", ["trinkbar", "getrunken", "trinkfest"], "*-bar* sobre la raíz de *trinken*."),
+        ch(2, "Elegí el adjetivo.", "jeden Tag = ___", "täglich", ["täglich", "tagsüber", "tägig"], "*der Tag → täglich*, con diéresis."),
         cz(2, "Escribí el sufijo (sin costo).", "Die Beratung ist kosten___.", "los", note="*kostenlos* = gratis."),
         cz(2, "Escribí el sufijo.", "Diese Arbeit ist sehr wissenschaft___.", "lich", note="*die Wissenschaft → wissenschaftlich*."),
         cz(2, "Escribí el sufijo (que se puede leer).", "Seine Handschrift ist kaum les___.", "bar", note="*lesbar* = legible."),

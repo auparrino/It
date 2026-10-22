@@ -46,7 +46,7 @@ WEEK = {
                 "tip": "*Was machst du?* puede ser «¿qué estás haciendo?»; para el trabajo es más claro *Was machst du beruflich?*",
                 "q": [
                     q("«Soy abogada.»", "Ich bin Anwältin.", ["Ich bin Anwältin.", "Ich bin eine Anwältin.", "Ich bin Anwaltin."]),
-                    q("El femenino de *der Koch* es…", "die Köchin", ["die Köchin", "die Kochin", "die Kochfrau"]),
+                    q("El femenino de *der Koch* es…", "die Köchin", ["die Köchin", "die Kochin", "die Köche"]),
                 ],
             },
             {

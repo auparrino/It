@@ -80,7 +80,7 @@ WEEK = {
                 "tip": "Fijate que en castellano el subjuntivo marca lo que buscás y no conocés («un departamento que **cueste** poco»); en alemán, indicativo normal: *eine Wohnung, die wenig **kostet***.",
                 "q": [
                     q("¿Qué orden es correcto?", "Das ist die Frau, die gestern angerufen hat.", ["Das ist die Frau, die gestern angerufen hat.", "Das ist die Frau, die hat gestern angerufen.", "Das ist die Frau, die gestern hat angerufen."]),
-                    q("Completá: *Ich kaufe das Handy, ___.*", "das mir gefällt", ["das mir gefällt", "das gefällt mir", "das mir gefallen"]),
+                    q("Completá: *Ich kaufe das Handy, ___.*", "das mir gefällt", ["das mir gefällt", "das gefällt mir", "der mir gefällt"]),
                 ],
             },
             {
@@ -213,7 +213,7 @@ WEEK = {
         ch(1, "Elegí el relativo.", "Das sind die Kollegen, mit ___ ich arbeite.", "denen", ["denen", "den", "die"], "*mit* + dativo plural: *denen*."),
         ch(1, "Elegí el relativo.", "Das ist der Bus, auf ___ ich warte.", "den", ["den", "dem", "der"], "*warten auf* + acusativo: *auf den*."),
         ch(1, "Elegí el relativo.", "Die Stadt, in ___ ich wohne, ist sehr grün.", "der", ["der", "die", "dem"], "*in* + dativo (dónde), femenino: *in der*."),
-        ch(1, "Elegí el relativo.", "Das Thema, über ___ wir sprechen, ist wichtig.", "das", ["das", "dem", "was"], "*sprechen über* + acusativo, neutro: *über das*."),
+        ch(1, "Elegí el relativo.", "Das Thema, über ___ wir sprechen, ist wichtig.", "das", ["das", "dem", "den"], "*sprechen über* + acusativo, neutro: *über das*."),
         ch(1, "Elegí el relativo.", "Wie heißt das Mädchen, ___ du die Blumen geschenkt hast?", "dem", ["dem", "das", "der"], "*das Mädchen* es neutro; *schenken* + dativo de persona → *dem*."),
         cz(1, "Escribí el relativo.", "Die Freunde, ___ ich vertraue, kann ich immer anrufen.", "denen", note="*vertrauen* + dativo plural: *denen*."),
         cz(1, "Escribí el relativo.", "Das ist die Kollegin, mit ___ ich oft Mittag esse.", "der", note="*mit* + dativo femenino: *der*."),

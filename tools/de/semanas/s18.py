@@ -65,8 +65,8 @@ WEEK = {
                 "warn": "«weil ich stehe früh auf» y «weil ich früh auf stehe» están mal: el separable va **junto y al final**: *weil ich früh aufstehe*.",
                 "tip": "Pensalo así: armá la oración normal y después mandá el verbo conjugado a la cola, detrás de todo.",
                 "q": [
-                    q("…, weil ich morgen früh ___.", "anfange", ["anfange", "fange an", "an fange"]),
-                    q("…, weil er keine Zeit ___.", "gehabt hat", ["gehabt hat", "hat gehabt", "hat gehabt hat"]),
+                    q("…, weil ich morgen früh ___.", "anfange", ["anfange", "fange an", "anfangen"]),
+                    q("…, weil er keine Zeit ___.", "gehabt hat", ["gehabt hat", "hat gehabt", "gehabt ist"]),
                 ],
             },
             {
@@ -84,7 +84,7 @@ WEEK = {
                 "warn": "A *Warum?* se contesta con *weil*, nunca con *denn*: «Denn ich habe Hunger» solo, como respuesta, está mal.",
                 "more": ["Las otras conjunciones que no mueven el verbo son *und, aber, oder, sondern*: con *denn* forman el grupo de las «posición cero»."],
                 "q": [
-                    q("Completá: *Ich gehe schlafen, denn ich ___ müde.*", "bin", ["bin", "müde bin", "sein"]),
+                    q("Completá: *Ich gehe schlafen, denn ich ___ müde.*", "bin", ["bin", "ist", "sein"]),
                     q("Respondé: *Warum lachst du?*", "Weil der Film lustig ist.", ["Weil der Film lustig ist.", "Denn der Film ist lustig.", "Weil der Film ist lustig."]),
                 ],
             },
@@ -122,7 +122,7 @@ WEEK = {
                 "warn": "«Tenés razón» es *du hast recht*, con *haben*: «du bist recht» no existe. Y *Meiner Meinung nach ich finde…* está mal: después de *Meiner Meinung nach* va el verbo.",
                 "more": ["*Das ist mir egal* = me da igual. *Mir ist das egal* también."],
                 "q": [
-                    q("«Tenés razón.»", "Du hast recht.", ["Du hast recht.", "Du bist recht.", "Du hast Recht haben."]),
+                    q("«Tenés razón.»", "Du hast recht.", ["Du hast recht.", "Du bist recht.", "Du hast Grund."]),
                     q("Completá: *Meiner Meinung nach ___ das Essen zu teuer.*", "ist", ["ist", "das ist", "sein"]),
                 ],
             },
@@ -138,7 +138,7 @@ WEEK = {
                 "warn": "Donde en castellano usás subjuntivo («cuando **llegue**»), en alemán va el presente común: *wenn ich ankomme*. Y para contar **una sola vez en el pasado** («cuando era chico») no va *wenn*: eso lo ves en la semana 21.",
                 "tip": "*wenn* casi nunca es «si» en una pregunta indirecta («no sé si viene»): eso es otra palabra, que vas a ver más adelante.",
                 "q": [
-                    q("«Si llueve, me quedo en casa.» ¿Qué conector?", "wenn", ["wenn", "weil", "dass"]),
+                    q("«Si llueve, me quedo en casa.» ¿Qué conector?", "wenn", ["wenn", "weil", "ob"]),
                     q("Completá: *Ich helfe dir, wenn ich Zeit ___.*", "habe", ["habe", "hat", "haben"]),
                 ],
             },
@@ -202,7 +202,7 @@ WEEK = {
         # parte 1 — dass y opinar
         ch(1, "Elegí la palabra.", "Ich glaube, ___ er recht hat.", "dass", ["dass", "das", "denn"], "Conjunción «que»: *dass*, con ss."),
         ch(1, "Elegí la palabra.", "Ich weiß, dass ___ stimmt.", "das", ["das", "dass", "weil"], "«eso»: *das*, con una s."),
-        ch(1, "Elegí el orden correcto.", "(Espero que vengas.)", "Ich hoffe, dass du kommst.", ["Ich hoffe, dass du kommst.", "Ich hoffe, dass kommst du.", "Ich hoffe, du dass kommst."], "*dass* + sujeto + verbo al final."),
+        ch(1, "Elegí la oración correcta.", "(Espero que vengas.)", "Ich hoffe, dass du kommst.", ["Ich hoffe, dass du kommst.", "Ich hoffe, dass kommst du.", "Ich hoffe, dass du kommen."], "*dass* + sujeto + verbo al final."),
         ch(1, "¿Cuál NO es correcta?", "Me parece que el libro es bueno.", "Ich finde, dass das Buch ist gut.", ["Ich finde, dass das Buch ist gut.", "Ich finde, dass das Buch gut ist.", "Ich finde, das Buch ist gut."], "Con *dass*, el verbo al final; sin *dass*, segundo."),
         ch(1, "Elegí la forma correcta.", "Meiner Meinung nach ___ zu viel.", "arbeitest du", ["arbeitest du", "du arbeitest", "du arbeiten"], "*Meiner Meinung nach* es la posición 1: verbo y después sujeto."),
         ch(1, "¿Qué significa?", "Das ist mir egal.", "Me da igual.", ["Me da igual.", "Me parece muy bien.", "Me molesta."], "*egal* = indiferente."),
@@ -220,7 +220,7 @@ WEEK = {
         ch(2, "Elegí el conector.", "___ du Hunger hast, mach dir ein Brot. (Si tenés hambre, hacete un sándwich.)", "Wenn", ["Wenn", "Weil", "Denn"], "Condición («si tenés hambre»): *wenn*."),
         ch(2, "Elegí el orden correcto.", "(Si llueve, me quedo en casa.)", "Wenn es regnet, bleibe ich zu Hause.", ["Wenn es regnet, bleibe ich zu Hause.", "Wenn es regnet, ich bleibe zu Hause.", "Wenn regnet es, bleibe ich zu Hause."], "Subordinada en posición 1 → verbo, coma, verbo."),
         ch(2, "Elegí el orden correcto.", "(Como estoy enfermo, no puedo venir.)", "Weil ich krank bin, kann ich nicht kommen.", ["Weil ich krank bin, kann ich nicht kommen.", "Weil ich krank bin, ich kann nicht kommen.", "Weil ich bin krank, kann ich nicht kommen."], "*…bin, kann ich…*: dos verbos pegados."),
-        ch(2, "Elegí la forma correcta.", "Ich rufe dich an, wenn ich in Berlin ___.", "ankomme", ["ankomme", "komme an", "ankomm"], "Separable junto al final: *ankomme*."),
+        ch(2, "Elegí la forma correcta.", "Ich rufe dich an, wenn ich in Berlin ___.", "ankomme", ["ankomme", "komme an", "ankommen"], "Separable junto al final: *ankomme*."),
         ch(2, "¿Qué significa?", "Wenn ich Zeit habe, lese ich.", "Cuando tengo tiempo, leo.", ["Cuando tengo tiempo, leo.", "Porque tengo tiempo, leo.", "Tengo tiempo, pero no leo."], "*wenn* = cuando/si, en presente."),
         ch(2, "Elegí el verbo.", "Wenn das Wetter schön ist, ___ wir an den See.", "fahren", ["fahren", "wir fahren", "fahrt"], "El verbo de la principal, justo después de la coma."),
         cz(2, "Escribí el verbo al final.", "Wenn du Hilfe ___, ruf mich an! (brauchen)", "brauchst", note="*wenn du … brauchst*."),

@@ -257,7 +257,7 @@ WEEK = {
         ch(1, "Elegí la forma.", "Wo ___ du gestern?", "warst", ["warst", "war", "wart"], "*du warst*."),
         ch(1, "Elegí la forma.", "Wir ___ kein Geld.", "hatten", ["hatten", "hattet", "hatte"], "*wir hatten*."),
         ch(1, "Elegí la forma.", "___ ihr Glück mit dem Wetter?", "Hattet", ["Hattet", "Hatten", "Hattest"], "*ihr hattet*."),
-        ch(1, "¿Qué suena más natural?", "«Estuve en Viena.»", "Ich war in Wien.", ["Ich war in Wien.", "Ich habe in Wien gewesen.", "Ich hatte in Wien."], "*war* es lo normal. (*gewesen* va con *sein*: *ich bin … gewesen*.)"),
+        ch(1, "¿Qué suena más natural?", "«Estuve en Viena.»", "Ich war in Wien.", ["Ich war in Wien.", "Ich habe in Wien gewesen.", "Ich bin in Wien."], "*war* es lo normal. (*gewesen* va con *sein*: *ich bin … gewesen*.)"),
         ch(1, "Elegí la forma.", "Das Hotel ___ sehr schön.", "war", ["war", "hatte", "waren"], "*das Hotel* = *es* → *war*."),
         li(1, "warst", ["warst", "wart", "war"], "*du warst* termina en *-st*; *ihr wart*, solo en *-t*."),
         cz(1, "Escribí el pasado de *sein*.", "Er ___ zwei Wochen in Italien.", "war", note="*er war*: igual que *ich war*."),

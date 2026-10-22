@@ -41,7 +41,7 @@ WEEK = {
                 "warn": "En castellano los dos verbos van juntos: «puedo nadar». En alemán se separan: *Ich kann gut schwimmen*, nunca «Ich kann schwimmen gut».",
                 "tip": "El infinitivo no cambia nunca: la persona la marca solo el modal.",
                 "q": [
-                    q("¿Qué oración es correcta?", "Ich kann gut kochen.", ["Ich kann gut kochen.", "Ich kann kochen gut.", "Ich gut kann kochen."]),
+                    q("¿Qué oración es correcta?", "Ich kann gut kochen.", ["Ich kann gut kochen.", "Ich kann kochen gut.", "Ich kann gut kocht."]),
                     q("¿Dónde va el infinitivo?", "al final", ["al final", "en la posición 2", "al principio"]),
                 ],
             },
@@ -104,7 +104,7 @@ WEEK = {
                 "tip": "Para contar planes y deseos con amigos, *wollen* va perfecto; para pedir algo a un desconocido, *möchten*.",
                 "q": [
                     q("Completá: *Er ___ Musik machen.* (wollen)", "will", ["will", "willt", "wollt"]),
-                    q("En el café, ¿qué es más amable?", "Ich möchte einen Tee.", ["Ich möchte einen Tee.", "Ich will einen Tee.", "Ich muss einen Tee."]),
+                    q("En el café, ¿qué es más amable?", "Ich möchte einen Tee.", ["Ich möchte einen Tee.", "Ich will einen Tee.", "Ich mag einen Tee."]),
                 ],
             },
             {
@@ -164,7 +164,7 @@ WEEK = {
                 "tip": "*gern* dice que algo te gusta; *können* dice que sabés hacerlo. *Ich singe gern, aber ich kann nicht gut singen* = me gusta cantar, pero no canto bien.",
                 "q": [
                     q("«Me gusta nadar» es…", "Ich schwimme gern.", ["Ich schwimme gern.", "Ich kann schwimmen.", "Ich will schwimmen."]),
-                    q("*Ich muss jetzt nach Hause* significa…", "Ahora me tengo que ir a casa.", ["Ahora me tengo que ir a casa.", "Ahora puedo ir a casa.", "Ahora tengo una casa."]),
+                    q("*Ich muss jetzt nach Hause* significa…", "Ahora me tengo que ir a casa.", ["Ahora me tengo que ir a casa.", "Ahora puedo ir a casa.", "Ahora tengo que quedarme en casa."]),
                 ],
             },
         ],
@@ -190,7 +190,7 @@ WEEK = {
         # parte 0 — können, müssen y el corchete
         ch(0, "Elegí la forma correcta.", "Er ___ gut schwimmen.", "kann", ["kann", "kannt", "können"], "Con *er* el modal no lleva -t: *er kann*."),
         ch(0, "Elegí la forma correcta.", "Du ___ heute arbeiten.", "musst", ["musst", "muss", "müsst"], "*du musst*: en singular, sin diéresis."),
-        ch(0, "Elegí el orden correcto.", "(Sé tocar la guitarra.)", "Ich kann Gitarre spielen.", ["Ich kann Gitarre spielen.", "Ich kann spielen Gitarre.", "Ich spielen kann Gitarre."], "Modal en el casillero 2, infinitivo al final."),
+        ch(0, "Elegí el orden correcto.", "(Sé tocar la guitarra.)", "Ich kann Gitarre spielen.", ["Ich kann Gitarre spielen.", "Ich kann spielen Gitarre.", "Ich kann Gitarre spiele."], "Modal en el casillero 2, infinitivo al final."),
         ch(0, "Elegí la forma correcta.", "Wir ___ am Montag arbeiten.", "müssen", ["müssen", "muss", "müsst"], "*wir müssen*: el plural recupera la *ü*."),
         ch(0, "Elegí la forma correcta.", "Ihr ___ gut tanzen.", "könnt", ["könnt", "kann", "können"], "*ihr könnt*."),
         ch(0, "¿Qué significa?", "Ich muss nicht arbeiten.", "No tengo que trabajar.", ["No tengo que trabajar.", "No debo trabajar (está prohibido).", "No puedo trabajar."], "*nicht müssen* = no hace falta; no prohíbe."),
@@ -207,7 +207,7 @@ WEEK = {
         # parte 1 — wollen, möchten, dürfen, sollen
         ch(1, "Elegí la forma correcta.", "Er ___ Musik machen.", "will", ["will", "willt", "wollt"], "*wollen* → *er will*, sin terminación."),
         ch(1, "¿Qué significa?", "Ich will Deutsch lernen.", "Quiero aprender alemán.", ["Quiero aprender alemán.", "Voy a aprender alemán.", "Debo aprender alemán."], "*will* es «quiero», no futuro."),
-        ch(1, "Estás en un café. ¿Qué es lo más amable?", "(Querés un café.)", "Ich möchte einen Kaffee.", ["Ich möchte einen Kaffee.", "Ich will einen Kaffee.", "Ich muss einen Kaffee."], "*möchte* es el «querría» cortés; *will* suena exigente."),
+        ch(1, "Estás en un café. ¿Qué es lo más amable?", "(Querés un café.)", "Ich möchte einen Kaffee.", ["Ich möchte einen Kaffee.", "Ich will einen Kaffee.", "Ich mag einen Kaffee."], "*möchte* es el «querría» cortés; *will* suena exigente."),
         ch(1, "Elegí el modal.", "Hier ___ man nicht rauchen. (está prohibido)", "darf", ["darf", "muss", "will"], "Prohibición: *nicht dürfen*."),
         ch(1, "Elegí el modal.", "Die Lehrerin sagt, wir ___ viel lesen.", "sollen", ["sollen", "dürfen", "wollen"], "Lo pide otra persona: *sollen*."),
         ch(1, "Querés pedir permiso. Elegí la forma correcta.", "___ ich hier parken?", "Darf", ["Darf", "Darfst", "Dürfen"], "*Darf ich…?* = ¿puedo…?, ¿me permite…?"),
@@ -224,11 +224,11 @@ WEEK = {
         ty(1, "Escribí en alemán.", "«¿Querés que vaya?» (con *sollen*, a un amigo)", "Soll ich kommen?", note="*Soll ich…?* para ofrecerte."),
         # parte 2 — preguntas, negación, hobbies
         ch(2, "Elegí el orden correcto.", "(Hoy no puedo venir.)", "Heute kann ich nicht kommen.", ["Heute kann ich nicht kommen.", "Heute ich kann nicht kommen.", "Heute kann ich kommen nicht."], "Tiempo, modal, sujeto; *nicht* antes del infinitivo."),
-        ch(2, "Elegí el orden correcto.", "(¿Qué querés comer?)", "Was willst du essen?", ["Was willst du essen?", "Was du willst essen?", "Was willst essen du?"], "W-Frage: modal segundo, infinitivo al final."),
-        ch(2, "¿Qué significa?", "Ich kann Deutsch.", "Sé alemán.", ["Sé alemán.", "Tengo que estudiar alemán.", "Quiero ir a Alemania."], "Modal sin infinitivo: se sobreentiende *sprechen*."),
+        ch(2, "Elegí el orden correcto.", "(¿Qué querés comer?)", "Was willst du essen?", ["Was willst du essen?", "Was du willst essen?", "Was willst du isst?"], "W-Frage: modal segundo, infinitivo al final."),
+        ch(2, "¿Qué significa?", "Ich kann Deutsch.", "Sé alemán.", ["Sé alemán.", "Tengo que estudiar alemán.", "Quiero aprender alemán."], "Modal sin infinitivo: se sobreentiende *sprechen*."),
         ch(2, "Elegí la forma correcta.", "Es ist spät. Ich ___ jetzt nach Hause.", "muss", ["muss", "müssen", "musst"], "Modal sin infinitivo: *gehen* se sobreentiende."),
         ch(2, "Elegí el orden correcto.", "(El domingo no tengo que trabajar.)", "Am Sonntag muss ich nicht arbeiten.", ["Am Sonntag muss ich nicht arbeiten.", "Am Sonntag muss ich arbeiten nicht.", "Am Sonntag ich muss nicht arbeiten."], "El infinitivo es lo último, detrás de *nicht*."),
-        ch(2, "¿Qué significa?", "Ich singe gern, aber ich kann nicht gut singen.", "Me gusta cantar, pero no canto bien.", ["Me gusta cantar, pero no canto bien.", "Quiero cantar, pero no tengo que cantar.", "Canto bien, pero no me gusta."], "*gern* = me gusta; *können* = saber hacer."),
+        ch(2, "¿Qué significa?", "Ich singe gern, aber ich kann nicht gut singen.", "Me gusta cantar, pero no canto bien.", ["Me gusta cantar, pero no canto bien.", "No me gusta cantar, pero canto bien.", "Canto bien, pero no me gusta."], "*gern* = me gusta; *können* = saber hacer."),
         cz(2, "Escribí la forma de *können*.", "Am Samstag ___ wir nicht kommen.", "können", note="*wir können*, con el sujeto detrás del modal."),
         cz(2, "Escribí la palabra que falta (no).", "Ich kann heute ___ kommen.", "nicht", note="*nicht* antes del infinitivo."),
         cz(2, "Escribí el infinitivo de «jugar».", "Willst du am Samstag Fußball ___?", "spielen", note="El infinitivo cierra la pregunta."),

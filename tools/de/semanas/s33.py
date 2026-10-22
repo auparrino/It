@@ -265,7 +265,7 @@ WEEK = {
         ch(2, "Elegí la forma correcta.", "Bei dem Unfall gab es zwei ___.", "Verletzte", ["Verletzte", "Verletzten", "Verletzter"], "Plural sin artículo (*es gibt* + acusativo): *-e*."),
         ch(2, "¿spannend o gespannt?", "Ich bin ___, wie der Film endet.", "gespannt", ["gespannt", "spannend", "spannende"], "La persona está expectante: *gespannt*."),
         ch(2, "¿spannend o gespannt?", "Der Krimi ist wirklich ___.", "spannend", ["spannend", "gespannt", "gespannte"], "El libro genera tensión: *spannend*. Predicativo, sin terminación."),
-        ch(2, "¿Qué significa?", "Sie kam lachend ins Zimmer.", "Entró riéndose a la habitación.", ["Entró riéndose a la habitación.", "Entró a la habitación de la risa.", "Se rió después de entrar."], "Participio sin terminación = adverbio: dice cómo."),
+        ch(2, "¿Qué significa?", "Sie kam lachend ins Zimmer.", "Entró riéndose a la habitación.", ["Entró riéndose a la habitación.", "Entró a la habitación para reírse.", "Se rió después de entrar."], "Participio sin terminación = adverbio: dice cómo."),
         ch(2, "Elegí la forma correcta.", "Im Vordergrund sieht man eine ___ Frau.", "sitzende", ["sitzende", "gesessene", "sitzender"], "Posición actual: Partizip I. «*gesessene*» no existe."),
         cz(2, "Completá con el Partizip I de *untergehen*.", "Das Bild zeigt die ___ Sonne.", "untergehende", note="*untergehen → untergehend*; acusativo femenino con *die*: *-e*."),
         cz(2, "Completá con el Partizip I de *überzeugen*.", "Sie hat sehr ___ argumentiert.", "überzeugend", note="Adverbio: sin terminación."),

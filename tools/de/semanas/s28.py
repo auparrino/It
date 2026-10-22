@@ -130,7 +130,7 @@ WEEK = {
                 ],
                 "warn": "*Während er studierte, arbeitete er…*, no *Während er studierte, er arbeitete…*: después de la coma va el verbo.",
                 "q": [
-                    q("Completá: *Während ich ___, hörte ich Musik.*", "kochte", ["kochte", "gekocht", "kochen"]),
+                    q("Completá: *Während ich ___, hörte ich Musik.*", "kochte", ["kochte", "gekocht", "koche"]),
                     q("Completá: *___ des Krieges lebte die Familie in Wien.*", "Während", ["Während", "Bevor", "Seitdem"]),
                 ],
             },

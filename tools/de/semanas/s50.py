@@ -50,7 +50,7 @@ WEEK = {
                 "tip": "*Dies* es la palabra de remisión más típica de los textos académicos; en el habla, *das*.",
                 "q": [
                     q("Completá: *Die Preise sind gestiegen. ___ zeigt, dass die Nachfrage groß ist.*", "Dies", ["Dies", "Dieser", "Welches"]),
-                    q("Completá: *___ ist klar: Wir brauchen mehr Zeit.*", "Eines", ["Eines", "Einer", "Dieses"]),
+                    q("Completá: *___ ist klar: Wir brauchen mehr Zeit.*", "Eines", ["Eines", "Einer", "Ein"]),
                 ],
             },
             {
@@ -237,7 +237,7 @@ WEEK = {
         tr(0, "Esto muestra que el método funciona.", "Dies zeigt, dass die Methode funktioniert.", V("Dies zeigt, dass die Methode funktioniert.", "Das zeigt, dass die Methode funktioniert."), "*Dies* (formal) o *das* retoman una idea entera."),
         # parte 1 — conectores textuales
         ch(1, "Elegí el conector.", "Zunächst wird das Problem beschrieben. ___ werden mögliche Lösungen diskutiert.", "Anschließend", ["Anschließend", "Einerseits", "Im Gegensatz dazu"], "*zunächst … anschließend* = primero … después."),
-        ch(1, "Elegí el orden.", "Darüber hinaus ___ eine wichtige Rolle.", "spielt die Familie", ["spielt die Familie", "die Familie spielt", "die Familie hat gespielt"], "El conector ocupa la posición 1: verbo segundo, sujeto detrás."),
+        ch(1, "Elegí el orden.", "Darüber hinaus ___ eine wichtige Rolle.", "spielt die Familie", ["spielt die Familie", "die Familie spielt", "hat die Familie gespielt"], "El conector ocupa la posición 1: verbo segundo, sujeto detrás."),
         ch(1, "Elegí la palabra.", "Er kommt heute nicht. Er ist ___ krank.", "nämlich", ["nämlich", "denn", "und zwar"], "*nämlich* va dentro de la oración: *Er ist nämlich krank.*"),
         ch(1, "Elegí la palabra.", "Ich komme morgen, ___ um acht Uhr.", "und zwar", ["und zwar", "nämlich", "demnach"], "*und zwar* agrega una precisión."),
         ch(1, "Elegí el conector.", "Die Stadt hat zwei Millionen Einwohner, ___ doppelt so viele wie vor 50 Jahren.", "das heißt", ["das heißt", "trotzdem", "stattdessen"], "*das heißt* (d. h.) = es decir."),

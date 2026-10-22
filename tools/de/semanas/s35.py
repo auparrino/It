@@ -56,7 +56,7 @@ WEEK = {
                 "warn": "Nada de cambio vocálico: *er fahre*, *er spreche*, *er nehme*, aunque en indicativo sea *er fährt, er spricht, er nimmt*. Y los modales pierden la irregularidad: *er könne, er müsse, er wolle, er dürfe*.",
                 "q": [
                     q("Konjunktiv I de *er fährt*:", "er fahre", ["er fahre", "er führe", "er fähre"]),
-                    q("Completá: *Er sagt, er ___ heute arbeiten.* (müssen)", "müsse", ["müsse", "muss", "müsste"]),
+                    q("Completá: *Er sagt, er ___ heute arbeiten.* (müssen)", "müsse", ["müsse", "muss", "musse"]),
                 ],
             },
             {
@@ -77,7 +77,7 @@ WEEK = {
                 ],
                 "warn": "*sie seien* (Konjunktiv I) nunca se confunde con *sie sind*: por eso acá no hace falta reemplazo. Y no confundas *seid* (indicativo de *ihr*: *ihr seid*) con *seit* (desde hace): suenan igual.",
                 "q": [
-                    q("Completá: *Er sagt, das Hotel ___ zu teuer.*", "sei", ["sei", "ist", "wäre"]),
+                    q("Completá: *Er sagt, das Hotel ___ zu teuer.*", "sei", ["sei", "ist", "seie"]),
                     q("Completá: *Sie sagen, sie ___ müde.*", "seien", ["seien", "sind", "seiet"]),
                 ],
             },
@@ -138,8 +138,8 @@ WEEK = {
                 ],
                 "warn": "En castellano el pedido indirecto va en subjuntivo («me dijo que esperara»). En alemán **no** se conjuga el verbo del pedido: va *sollen* en Konjunktiv + infinitivo al final: *Er sagte, ich solle warten.*",
                 "q": [
-                    q("„Warte hier!“ → *Sie sagte, ich ___ hier warten.*", "solle", ["solle", "soll", "warte"]),
-                    q("„Ich werde helfen.“ → *Er sagt, er ___ helfen.*", "werde", ["werde", "wird", "würde"]),
+                    q("„Warte hier!“ → *Sie sagte, ich ___ hier warten.*", "solle", ["solle", "soll", "wolle"]),
+                    q("„Ich werde helfen.“ → *Er sagt, er ___ helfen.*", "werde", ["werde", "wird", "wurde"]),
                 ],
             },
             {
@@ -198,7 +198,7 @@ WEEK = {
                 "tip": "En los titulares se ve a menudo la versión corta con dos puntos: *Minister: Lage sei unter Kontrolle.*",
                 "q": [
                     q("*Er dementierte den Bericht* significa…", "Desmintió el informe.", ["Desmintió el informe.", "Confirmó el informe.", "Escribió el informe."]),
-                    q("En una charla con amigos, lo más natural es…", "Er hat gesagt, dass er krank ist.", ["Er hat gesagt, dass er krank ist.", "Er sagte, er sei krank gewesen sei.", "Er hat gesagt, er seie krank."]),
+                    q("En una charla con amigos, lo más natural es…", "Er hat gesagt, dass er krank ist.", ["Er hat gesagt, dass er krank ist.", "Er hat gesagt, dass er ist krank.", "Er hat gesagt, er seie krank."]),
                 ],
             },
         ],
@@ -244,7 +244,7 @@ WEEK = {
         ch(1, "Elegí la forma del discurso indirecto.", "Die Gäste sagen, sie ___ später. (kommen)", "kämen", ["kämen", "kommen", "komme"], "*sie kommen* no se distingue: Konjunktiv II *kämen*."),
         ch(1, "Elegí el pasado indirecto.", "„Ich war in Berlin.“ → Er sagt, er ___ in Berlin gewesen.", "sei", ["sei", "habe", "war"], "*sein* hace Perfekt con *sein*: *er sei gewesen*."),
         ch(1, "Elegí el pasado indirecto.", "„Ich habe nichts gesehen.“ → Der Zeuge sagt, er ___ nichts gesehen.", "habe", ["habe", "ist", "sei"], "*er habe* se distingue del indicativo: no hace falta el II."),
-        ch(1, "Elegí el futuro indirecto.", "„Wir werden die Steuern senken.“ → Die Regierung sagt, sie ___ die Steuern senken.", "werde", ["werde", "wird", "würde"], "*die Regierung* = *sie* singular → *werde*."),
+        ch(1, "Elegí el futuro indirecto.", "„Wir werden die Steuern senken.“ → Die Regierung sagt, sie ___ die Steuern senken.", "werde", ["werde", "wird", "werden"], "*die Regierung* = *sie* singular → *werde*."),
         ch(1, "Elegí la forma correcta.", "„Warten Sie hier!“ → Er sagte, ich ___ hier warten.", "solle", ["solle", "soll", "sollen"], "Orden → *sollen* en Konjunktiv I: *ich solle*."),
         ch(1, "Elegí la forma correcta.", "Die Arbeiter erklärten, sie ___ morgen streiken.", "würden", ["würden", "werden", "wurden"], "*sie werden* no se distingue: *würden* + infinitivo."),
         cz(1, "Escribí el auxiliar (Konjunktiv).", "„Wir hatten Glück.“ → Sie sagen, sie ___ Glück gehabt.", "hätten", note="*sie haben* = indicativo → *hätten*."),

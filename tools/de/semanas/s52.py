@@ -139,7 +139,7 @@ WEEK = {
                 ],
                 "warn": "No nominalices todo: un texto solo de sustantivos se vuelve ilegible. En C1 se espera **variedad**: algunas nominalizaciones, algunos participios y subordinadas bien armadas.",
                 "q": [
-                    q("*Nachdem er angekommen war* =", "Nach seiner Ankunft", ["Nach seiner Ankunft", "Bei seinem Ankommen war", "Seit seiner Ankunft war"]),
+                    q("*Nachdem er angekommen war* =", "Nach seiner Ankunft", ["Nach seiner Ankunft", "Seit seiner Ankunft", "Bis zu seiner Ankunft"]),
                     q("*die im Text genannten Gründe* =", "los motivos mencionados en el texto", ["los motivos mencionados en el texto", "los motivos que van a mencionarse", "los motivos que mencionan el texto"]),
                 ],
             },
@@ -159,7 +159,7 @@ WEEK = {
                 "tip": "En *Schreiben*, la consigna suele traer varios puntos que tenés que tratar todos. Tachá cada punto cuando lo hayas desarrollado: un punto olvidado resta más que un error de caso.",
                 "q": [
                     q("¿Cuántos módulos tiene un examen C1 como el Goethe?", "cuatro", ["cuatro", "dos", "seis"]),
-                    q("¿Qué suele pedir *Schreiben*?", "un texto argumentativo y un texto formal", ["un texto argumentativo y un texto formal", "solo un dictado", "una traducción al castellano"]),
+                    q("¿Qué suele pedir *Schreiben*?", "un texto argumentativo y un texto formal", ["un texto argumentativo y un texto formal", "un mail informal a un amigo", "una descripción de fotos"]),
                 ],
             },
             {
@@ -180,7 +180,7 @@ WEEK = {
                 ],
                 "warn": "*Meines Erachtens* ya significa «en mi opinión»: no le sumes *nach* (*meines Erachtens nach* es un error frecuente). Lo que va con *nach* es *meiner Meinung nach*.",
                 "q": [
-                    q("Completá: *Meines ___ ist das keine gute Lösung.*", "Erachtens", ["Erachtens", "Meinung", "Ansicht nach"]),
+                    q("Completá: *Meines ___ ist das keine gute Lösung.*", "Erachtens", ["Erachtens", "Erachtens nach", "Meinung"]),
                     q("¿Cómo cerrás un mail formal?", "Mit freundlichen Grüßen", ["Mit freundlichen Grüßen", "Liebe Grüße", "Bis bald"]),
                 ],
             },
@@ -204,7 +204,7 @@ WEEK = {
                 "tip": "*Ich drücke dir die Daumen!* (semana 44): eso te decimos nosotros. *Viel Erfolg bei der Prüfung!*",
                 "q": [
                     q("¿Cómo discrepás con cortesía?", "Das sehe ich etwas anders.", ["Das sehe ich etwas anders.", "Das ist Quatsch.", "Sie haben keine Ahnung."]),
-                    q("Necesitás unos segundos para pensar:", "Lassen Sie mich kurz überlegen.", ["Lassen Sie mich kurz überlegen.", "Ich weiß nix.", "Egal, weiter."]),
+                    q("Necesitás unos segundos para pensar:", "Lassen Sie mich kurz überlegen.", ["Lassen Sie mich kurz überlegen.", "Lassen Sie mir kurz überlegen.", "Lassen Sie mich kurz zu überlegen."]),
                 ],
             },
         ],
@@ -251,8 +251,8 @@ WEEK = {
         ch(1, "Elegí la palabra.", "Je mehr man übt, ___ sicherer wird man.", "desto", ["desto", "als", "wie"], "*je … desto* (o *umso*)."),
         ch(1, "Elegí el par.", "Sie spricht ___ Englisch ___ Französisch.", "sowohl … als auch", ["sowohl … als auch", "weder … oder", "entweder … noch"], "*sowohl … als auch* = tanto … como."),
         ch(1, "Elegí el conector.", "Er hat sich beworben, ___ er kaum Chancen hatte.", "obwohl", ["obwohl", "trotzdem", "deshalb"], "Verbo al final (*hatte*): *obwohl*."),
-        ch(1, "Elegí el equivalente nominal.", "Nachdem er angekommen war, rief er seine Mutter an.", "Nach seiner Ankunft", ["Nach seiner Ankunft", "Nach seinem Ankommen war", "Bei seiner Ankunft war"], "*nachdem* + verbo → *nach* + sustantivo."),
-        ch(1, "¿Qué significa?", "das vor zwei Jahren gekaufte Auto", "el auto que se compró hace dos años", ["el auto que se compró hace dos años", "el auto que se va a comprar en dos años", "el auto que hace dos años compra cosas"], "Participio II = pasivo y anterior: *gekauft*."),
+        ch(1, "Elegí el equivalente nominal.", "Nachdem er angekommen war, rief er seine Mutter an.", "Nach seiner Ankunft", ["Nach seiner Ankunft", "Seit seiner Ankunft", "Bis zu seiner Ankunft"], "*nachdem* + verbo → *nach* + sustantivo."),
+        ch(1, "¿Qué significa?", "das vor zwei Jahren gekaufte Auto", "el auto que se compró hace dos años", ["el auto que se compró hace dos años", "el auto que se va a comprar en dos años", "el auto que compra desde hace dos años"], "Participio II = pasivo y anterior: *gekauft*."),
         ch(1, "Elegí el artículo.", "Infolge ___ Unfalls war die Autobahn gesperrt.", "eines", ["eines", "einem", "einen"], "*infolge* + genitivo."),
         cz(1, "Escribí un conector (por eso).", "Sie ist krank. ___ kann sie nicht kommen.", "Deshalb", ["Deshalb", "Deswegen", "Daher", "Darum"], "Posición 1, verbo segundo."),
         cz(1, "Escribí un conector (mientras que, contraste).", "Er arbeitet sehr viel, ___ seine Frau eher entspannt ist.", "während", ["während", "wohingegen"], "*während* (contraste) = mientras que; verbo al final."),
@@ -264,11 +264,11 @@ WEEK = {
         tr(1, "Cuanto más leo, más entiendo.", "Je mehr ich lese, desto mehr verstehe ich.", V("Je mehr ich lese, desto mehr verstehe ich.", "Je mehr ich lese, umso mehr verstehe ich."), "*je* + verbo al final, *desto / umso* + verbo segundo."),
         # parte 2 — el examen
         ch(2, "¿Cómo empezás un mail formal a una institución?", "(Estimados señores:)", "Sehr geehrte Damen und Herren,", ["Sehr geehrte Damen und Herren,", "Hallo zusammen,", "Liebe Leute,"], "Fórmula formal estándar cuando no sabés el nombre."),
-        ch(2, "¿Cómo cerrás ese mail?", "(Saludos cordiales)", "Mit freundlichen Grüßen", ["Mit freundlichen Grüßen", "Liebe Grüße", "Tschüss"], "Cierre formal estándar, sin coma después."),
-        ch(2, "Para contraargumentar en un texto de opinión:", "(A eso hay que objetar que…)", "Dem ist entgegenzuhalten, dass …", ["Dem ist entgegenzuhalten, dass …", "Das ist halt so, dass …", "Na ja, egal, dass …"], "*sein + zu* en una fórmula de registro alto."),
+        ch(2, "¿Cómo cerrás ese mail?", "(Saludos cordiales)", "Mit freundlichen Grüßen", ["Mit freundlichen Grüßen", "Liebe Grüße", "Mit freundliche Grüße"], "Cierre formal estándar, sin coma después."),
+        ch(2, "Para contraargumentar en un texto de opinión:", "(A eso hay que objetar que…)", "Dem ist entgegenzuhalten, dass …", ["Dem ist entgegenzuhalten, dass …", "Dem ist zu entgegenhalten, dass …", "Dem muss man entgegenzuhalten, dass …"], "*sein + zu* en una fórmula de registro alto."),
         ch(2, "Discrepás con cortesía en la discusión:", "(Yo lo veo algo distinto.)", "Das sehe ich etwas anders.", ["Das sehe ich etwas anders.", "Das ist Quatsch.", "Sie haben keine Ahnung."], "*etwas* suaviza el desacuerdo."),
-        ch(2, "Necesitás unos segundos para pensar:", "(Déjeme pensar un momento.)", "Lassen Sie mich kurz überlegen.", ["Lassen Sie mich kurz überlegen.", "Ich weiß nix.", "Moment, egal."], "Ganar tiempo sin quedarte callado."),
-        ch(2, "¿Qué significa?", "Ich drücke dir die Daumen!", "¡Te deseo suerte!", ["¡Te deseo suerte!", "¡Te voy a apretar!", "¡Ojo con los dedos!"], "*die Daumen drücken* = desear suerte (semana 44)."),
+        ch(2, "Necesitás unos segundos para pensar:", "(Déjeme pensar un momento.)", "Lassen Sie mich kurz überlegen.", ["Lassen Sie mich kurz überlegen.", "Lassen Sie mir kurz überlegen.", "Lassen Sie mich kurz zu überlegen."], "Ganar tiempo sin quedarte callado."),
+        ch(2, "¿Qué significa?", "Ich drücke dir die Daumen!", "¡Te deseo suerte!", ["¡Te deseo suerte!", "¡Te voy a apretar!", "¡Bien hecho!"], "*die Daumen drücken* = desear suerte (semana 44)."),
         ch(2, "Elegí la partícula.", "Komm ___ mal her!", "doch", ["doch", "denn", "wohl"], "*doch mal* suaviza el imperativo (semana 46)."),
         ch(2, "Behördendeutsch. ¿Qué significa?", "Der Antrag ist fristgerecht einzureichen.", "Hay que presentar la solicitud dentro del plazo.", ["Hay que presentar la solicitud dentro del plazo.", "La solicitud ya fue presentada a tiempo.", "Se puede presentar la solicitud después del plazo."], "*sein + zu* = deber; *fristgerecht* = dentro del plazo."),
         cz(2, "Escribí el verbo (dirigirse).", "Ich ___ mich an Sie, weil ich eine Frage zu Ihrem Angebot habe.", "wende", note="*sich wenden an* + Akk. = dirigirse a."),
@@ -278,6 +278,6 @@ WEEK = {
         ty(2, "Escribí la fórmula formal.", "«Quedo a la espera de su respuesta.»", "Ich freue mich auf Ihre Antwort.", ["Ich freue mich auf Ihre Antwort.", "Ich freue mich auf Ihre baldige Antwort.", "Ich freue mich auf Ihre Rückmeldung.", "Über eine baldige Antwort würde ich mich freuen.", "Über eine Antwort würde ich mich freuen.", "Ich würde mich über eine Antwort freuen.", "Ich würde mich über eine baldige Antwort freuen."], "*sich freuen auf* (algo futuro); *Ihre* con mayúscula: es el *Sie* formal."),
         tr(2, "En mi opinión, la propuesta tiene más ventajas que desventajas.", "Meiner Meinung nach hat der Vorschlag mehr Vorteile als Nachteile.", V("Meiner Meinung nach hat der Vorschlag mehr Vorteile als Nachteile.", "Meines Erachtens hat der Vorschlag mehr Vorteile als Nachteile.", "Meiner Ansicht nach hat der Vorschlag mehr Vorteile als Nachteile.", "Ich bin der Meinung, dass der Vorschlag mehr Vorteile als Nachteile hat.", "Ich finde, dass der Vorschlag mehr Vorteile als Nachteile hat.", "Ich finde, der Vorschlag hat mehr Vorteile als Nachteile."), "*Meiner Meinung nach* / *Meines Erachtens* ocupan la posición 1: verbo segundo."),
         tr(2, "¿Podría repetir la pregunta, por favor?", "Könnten Sie die Frage bitte wiederholen?", ["Könnten Sie die Frage bitte wiederholen?", "Könnten Sie bitte die Frage wiederholen?", "Können Sie die Frage bitte wiederholen?", "Können Sie bitte die Frage wiederholen?", "Würden Sie die Frage bitte wiederholen?", "Könnten Sie die Frage bitte noch einmal stellen?"], "Konjunktiv II de cortesía: *Könnten Sie …?*"),
-        li(2, "das Lampenfieber", ["das Lampenfieber", "die Lampe", "das Fieber"], "*das Lampenfieber* = los nervios antes de salir a escena (o de la prueba oral)."),
+        li(2, "das Lampenfieber", ["das Lampenfieber", "das Reisefieber", "das Lampenlicht"], "*das Lampenfieber* = los nervios antes de salir a escena (o de la prueba oral); *das Reisefieber* = los nervios antes de viajar."),
     ],
 }

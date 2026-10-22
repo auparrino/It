@@ -190,12 +190,12 @@ WEEK = {
     ],
     "items": [
         # parte 0 — del verbo al sustantivo
-        ch(0, "Elegí el sustantivo.", "lösen →", "die Lösung", ["die Lösung", "der Lös", "die Lösheit"], "*-ung* + femenino: *die Lösung*."),
+        ch(0, "Elegí el sustantivo.", "lösen →", "die Lösung", ["die Lösung", "die Löse", "das Lösung"], "*-ung* + femenino: *die Lösung*."),
         ch(0, "Elegí el sustantivo.", "ansteigen →", "der Anstieg", ["der Anstieg", "die Ansteigung", "das Anstieg"], "Sustantivo de raíz, masculino y con cambio vocálico: *der Anstieg*."),
         ch(0, "Elegí el artículo.", "___ Untersuchung", "die", ["die", "der", "das"], "Los sustantivos con el sufijo *-ung* (verbo + *-ung*) son femeninos (ojo: *der Sprung, der Schwung* no llevan sufijo)."),
         ch(0, "Elegí el artículo.", "___ Lesen ist anstrengend.", "das", ["das", "die", "der"], "Infinitivo sustantivado: siempre neutro."),
         ch(0, "Elegí el sustantivo.", "verbrauchen →", "der Verbrauch", ["der Verbrauch", "die Verbrauchung", "die Verbrauche"], "Sustantivo de raíz: *der Verbrauch*."),
-        ch(0, "Elegí el sustantivo.", "analysieren →", "die Analyse", ["die Analyse", "die Analysierung", "der Analys"], "*die Analyse*; «Analysierung» no se usa."),
+        ch(0, "Elegí el sustantivo.", "analysieren →", "die Analyse", ["die Analyse", "die Analysierung", "die Analysation"], "*die Analyse*; «Analysierung» no se usa."),
         ch(0, "¿Cuál está en estilo nominal?", "(Después de evaluar los datos …)", "Nach der Auswertung der Daten …", ["Nach der Auswertung der Daten …", "Nachdem wir die Daten ausgewertet hatten, …", "Wir haben die Daten ausgewertet und …"], "Preposición + sustantivo + genitivo: estilo nominal."),
         ty(0, "Escribí el sustantivo de *entwickeln* (no el infinitivo sustantivado), con artículo.", "entwickeln →", "die Entwicklung", note="*-ung*, femenino. " + MAY),
         ty(0, "Escribí el sustantivo de *entdecken* (no el infinitivo sustantivado), con artículo.", "entdecken →", "die Entdeckung", note="*-ung*, femenino. " + MAY),
@@ -209,8 +209,8 @@ WEEK = {
         # parte 1 — genitivo, durch, posesivo, adjetivo
         ch(1, "Nominalizá.", "Man löst das Problem. →", "die Lösung des Problems", ["die Lösung des Problems", "die Lösung das Problem", "die Lösung dem Problem"], "El objeto pasa a genitivo: *des Problems*."),
         ch(1, "Nominalizá.", "Die Preise steigen schnell. →", "der schnelle Anstieg der Preise", ["der schnelle Anstieg der Preise", "der schnell Anstieg der Preise", "der Anstieg schnell der Preise"], "Adverbio → adjetivo declinado delante del sustantivo."),
-        ch(1, "Nominalizá.", "Fleming entdeckte das Penicillin. →", "die Entdeckung des Penicillins durch Fleming", ["die Entdeckung des Penicillins durch Fleming", "die Entdeckung des Penicillins von Flemings", "die Entdeckung Fleming das Penicillin"], "Objeto en genitivo; el agente, con *durch*."),
-        ch(1, "Nominalizá.", "Man produziert Autos. →", "die Produktion von Autos", ["die Produktion von Autos", "die Produktion Autos", "die Produktion Autos'"], "Plural sin artículo: *von* + dativo."),
+        ch(1, "Nominalizá.", "Fleming entdeckte das Penicillin. →", "die Entdeckung des Penicillins durch Fleming", ["die Entdeckung des Penicillins durch Fleming", "die Entdeckung des Penicillins von Flemings", "die Entdeckung das Penicillin durch Fleming"], "Objeto en genitivo; el agente, con *durch*."),
+        ch(1, "Nominalizá.", "Man produziert Autos. →", "die Produktion von Autos", ["die Produktion von Autos", "die Produktion Autos", "die Produktion aus Autos"], "Plural sin artículo: *von* + dativo."),
         ch(1, "Nominalizá.", "Wir entscheiden. →", "unsere Entscheidung", ["unsere Entscheidung", "die Entscheidung uns", "die Entscheidung von wir"], "Pronombre sujeto → posesivo."),
         ch(1, "Nominalizá.", "Viele Studierende nehmen am Kurs teil. →", "die Teilnahme vieler Studierender am Kurs", ["die Teilnahme vieler Studierender am Kurs", "die Teilnahme vieler Studierender des Kurses", "die Teilnahme viele Studierende am Kurs"], "Sujeto en genitivo (*vieler Studierender*); la preposición *an* se queda."),
         cz(1, "Escribí el artículo en genitivo.", "Man untersucht die Proben. → die Untersuchung ___ Proben", "der", note="Plural con artículo: genitivo *der*."),
@@ -226,7 +226,7 @@ WEEK = {
         # parte 2 — preposiciones nominales
         ch(2, "Elegí la preposición.", "___ der Benutzung des Geräts muss man Handschuhe tragen. (= Wenn man das Gerät benutzt)", "Bei", ["Bei", "Nach", "Vor"], "*wenn* → *bei*."),
         ch(2, "Elegí la preposición.", "___ der Auswertung der Daten schrieben wir den Bericht. (= Nachdem wir die Daten ausgewertet hatten)", "Nach", ["Nach", "Vor", "Seit"], "*nachdem* → *nach*."),
-        ch(2, "Elegí la preposición.", "___ Beginn des Versuchs muss alles sauber sein. (= Bevor der Versuch beginnt)", "Vor", ["Vor", "Nach", "Bei"], "*bevor* → *vor*."),
+        ch(2, "Elegí la preposición.", "___ Beginn des Versuchs muss alles sauber sein. (= Bevor der Versuch beginnt)", "Vor", ["Vor", "Nach", "Seit"], "*bevor* → *vor*."),
         ch(2, "Elegí la preposición.", "___ der hohen Kosten wurde das Projekt gestoppt. (= Weil die Kosten hoch waren)", "Wegen", ["Wegen", "Trotz", "Während"], "*weil* → *wegen* + genitivo."),
         ch(2, "Elegí la preposición.", "___ der guten Ergebnisse ist die Chefin unzufrieden. (= Obwohl die Ergebnisse gut sind)", "Trotz", ["Trotz", "Wegen", "Bei"], "*obwohl* → *trotz* + genitivo."),
         ch(2, "Elegí la preposición.", "___ Schutz der Umwelt trennen wir den Müll. (= Um die Umwelt zu schützen)", "Zum", ["Zum", "Zur", "Beim"], "*um … zu* → *zu*; *der Schutz* es masculino: *zum*."),

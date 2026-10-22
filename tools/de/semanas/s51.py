@@ -75,7 +75,7 @@ WEEK = {
                 "more": ["En el sur casi no se usa el Präteritum al hablar: se cuenta todo en Perfekt (*Ich bin gestern ins Kino gegangen*). Solo *war* y los modales resisten."],
                 "q": [
                     q("En Viena, *Viertel acht* es…", "7:15", ["7:15", "8:15", "7:45"]),
-                    q("¿Qué forma es típica del sur y de Austria?", "Ich bin gesessen.", ["Ich bin gesessen.", "Ich habe gesitzt.", "Ich war gesitzt."]),
+                    q("¿Qué forma es típica del sur y de Austria?", "Ich bin gesessen.", ["Ich bin gesessen.", "Ich habe gesitzt.", "Ich habe gesessen."]),
                 ],
             },
             {
@@ -102,7 +102,7 @@ WEEK = {
                 "warn": "*Grüezi* es formal (equivale a *Grüß Gott* o *Guten Tag*), para gente que no conocés. A un amigo le decís *Hoi* o *Sali*.",
                 "tip": "*Spital* se usa también en Austria. Y *der Znüni* viene de «a las nueve» (*neun*): la merienda de media mañana; a la tarde está *der Zvieri* (a las cuatro).",
                 "q": [
-                    q("¿Cómo se escribe «Straße» en Suiza?", "Strasse", ["Strasse", "Strase", "Strahse"]),
+                    q("¿Cómo se escribe «Straße» en Suiza?", "Strasse", ["Strasse", "Straße", "Strase"]),
                     q("En Suiza, *das Velo* es…", "la bicicleta", ["la bicicleta", "el velo", "la vela"]),
                 ],
             },
@@ -145,7 +145,7 @@ WEEK = {
                 "tip": "En Berlín *ick* = *ich*, *wat* = *was*, *dit / det* = *das*, *keene* = *keine*. En el Ruhr: *wat* y *dat*. Al norte, el bajo alemán (*Plattdeutsch*) es casi otra lengua.",
                 "q": [
                     q("Son las 20 h en Hamburgo y te dicen *Moin!*. ¿Está bien?", "Sí, *Moin* sirve a cualquier hora.", ["Sí, *Moin* sirve a cualquier hora.", "No, *Moin* es solo a la mañana.", "No, *Moin* es una despedida."]),
-                    q("*…, gell?* significa…", "…, ¿no?", ["…, ¿no?", "…, ¡salud!", "…, ¡qué lindo!"]),
+                    q("*…, gell?* significa…", "…, ¿no?", ["…, ¿no?", "…, ¡genial!", "…, ¡claro!"]),
                 ],
             },
             {
@@ -192,7 +192,7 @@ WEEK = {
                 "warn": "*Ich habe eine interessante Notiz gelesen* no es «leí una noticia interesante» sino «leí un apunte»; la noticia es *die Nachricht* o *die Meldung*.",
                 "tip": "Un amigo verdadero que el inglés no tiene: *die Billion* = **billón** (un millón de millones), igual que en castellano. *die Milliarde* = mil millones.",
                 "q": [
-                    q("*die Firma* es…", "la empresa", ["la empresa", "la firma", "la granja"]),
+                    q("*die Firma* es…", "la empresa", ["la empresa", "la firma (en un documento)", "la marca"]),
                     q("*Ich gehe ins Gymnasium* lo dice…", "un alumno de secundaria", ["un alumno de secundaria", "alguien que va a entrenar", "un profesor de gimnasia"]),
                 ],
             },
@@ -218,13 +218,13 @@ WEEK = {
     "items": [
         # parte 0 — Austria
         ch(0, "¿Qué es?", "der Paradeiser (Wien)", "el tomate", ["el tomate", "el paraíso", "la papa"], "*Paradeiser* = *Tomate* en Austria."),
-        ch(0, "¿Qué mes es?", "der Jänner", "enero", ["enero", "junio", "julio"], "*Jänner* = *Januar* en Austria."),
+        ch(0, "¿Qué mes es?", "der Jänner", "enero", ["enero", "febrero", "junio"], "*Jänner* = *Januar* en Austria."),
         ch(0, "¿Qué significa?", "heuer", "este año", ["este año", "hoy", "ahora mismo"], "*heuer* = *dieses Jahr* (Austria y sur de Alemania)."),
-        ch(0, "En Viena te dicen *Nimm dir einen Sessel!*. ¿Qué te ofrecen?", "Nimm dir einen Sessel!", "una silla", ["una silla", "un sillón", "un vaso"], "En Austria *der Sessel* es una silla común; en Alemania, un sillón."),
+        ch(0, "En Viena te dicen *Nimm dir einen Sessel!*. ¿Qué te ofrecen?", "Nimm dir einen Sessel!", "una silla", ["una silla", "un sillón", "un banquito"], "En Austria *der Sessel* es una silla común; en Alemania, un sillón."),
         ch(0, "¿Cómo saludás formalmente en Austria o en Baviera?", "(¡Buen día!)", "Grüß Gott!", ["Grüß Gott!", "Moin!", "Grüezi!"], "*Grüß Gott* es el saludo del sur; *Moin*, del norte; *Grüezi*, de Suiza."),
         ch(0, "¿Qué hora es en Viena?", "Es ist Viertel acht.", "7:15", ["7:15", "7:45", "8:15"], "*Viertel acht*: un cuarto de camino hacia las ocho = 7:15."),
         ch(0, "¿Qué hora es en Viena?", "Es ist dreiviertel acht.", "7:45", ["7:45", "8:45", "8:15"], "*dreiviertel acht* = tres cuartos hacia las ocho = 7:45."),
-        ch(0, "¿Qué versión es típica de Austria y del sur?", "(Estuve mucho tiempo sentado.)", "Ich bin lange gesessen.", ["Ich bin lange gesessen.", "Ich habe lange gesitzt.", "Ich war lange gesitzt."], "En el sur, *sitzen, stehen, liegen* van con *sein*. (*gesitzt* no existe.)"),
+        ch(0, "¿Qué versión es típica de Austria y del sur?", "(Estuve mucho tiempo sentado.)", "Ich bin lange gesessen.", ["Ich bin lange gesessen.", "Ich habe lange gesitzt.", "Ich habe lange gesessen."], "En el sur, *sitzen, stehen, liegen* van con *sein*; *habe gesessen* es la forma del norte. (*gesitzt* no existe.)"),
         cz(0, "Escribí la palabra austríaca (bolsita).", "Brauchen Sie ein ___ für die Einkäufe?", "Sackerl", note="*das Sackerl* = *die Tüte*. Diminutivo austríaco en *-erl*. " + MAY),
         cz(0, "Escribí la palabra de Austria y Baviera (pancito).", "Zum Frühstück esse ich eine ___ mit Butter.", "Semmel", note="*die Semmel* = *das Brötchen*."),
         cz(0, "Escribí la palabra austríaca (crema batida).", "Den Apfelstrudel gibt es mit ___.", "Schlagobers", ["Schlagobers", "Obers"], "*das Schlagobers* = *die Schlagsahne*."),
@@ -235,11 +235,11 @@ WEEK = {
         # parte 1 — Suiza
         ch(1, "¿Cómo saludás formalmente en Zúrich?", "(¡Buen día!)", "Grüezi!", ["Grüezi!", "Moin!", "Servus!"], "*Grüezi* = saludo formal suizo."),
         ch(1, "¿Qué es?", "das Velo (Schweiz)", "la bicicleta", ["la bicicleta", "el velo", "la vela"], "*das Velo* (del francés *vélo*) = *das Fahrrad*."),
-        ch(1, "¿Cómo se escribe en Suiza?", "(groß)", "gross", ["gross", "gros", "grohs"], "El estándar suizo no usa *ß*: siempre *ss*."),
-        ch(1, "¿Qué es?", "das Spital (Schweiz)", "el hospital", ["el hospital", "la ciudad", "el hostal"], "*das Spital* = *das Krankenhaus* (Suiza y Austria)."),
+        ch(1, "¿Cómo se escribe en Suiza?", "(groß)", "gross", ["gross", "groß", "gros"], "El estándar suizo no usa *ß*: siempre *ss*."),
+        ch(1, "¿Qué es?", "das Spital (Schweiz)", "el hospital", ["el hospital", "la farmacia", "el hostal"], "*das Spital* = *das Krankenhaus* (Suiza y Austria)."),
         ch(1, "¿Qué significa?", "Merci vielmal!", "¡Muchas gracias!", ["¡Muchas gracias!", "¡Mucha suerte!", "¡Hasta luego!"], "*Merci vielmal* = *Danke schön* en Suiza."),
         ch(1, "En la Suiza alemana, ¿cuándo se habla dialecto?", "Schweizerdeutsch", "en casi todas las situaciones orales", ["en casi todas las situaciones orales", "solo en el campo", "solo entre gente mayor"], "Diglosia: el dialecto para hablar, el estándar para escribir."),
-        ch(1, "¿Qué significa?", "parkieren (Schweiz)", "estacionar", ["estacionar", "pasear por un parque", "pagar"], "*parkieren* = *parken*."),
+        ch(1, "¿Qué significa?", "parkieren (Schweiz)", "estacionar", ["estacionar", "pasear por un parque", "poner parquet"], "*parkieren* = *parken*."),
         cz(1, "Escribí la palabra suiza (bicicleta).", "Ich fahre jeden Tag mit dem ___ zur Arbeit.", "Velo", note="*das Velo* → *mit dem Velo*."),
         cz(1, "Escribí la palabra suiza (vereda).", "Bitte nicht auf dem ___ parkieren!", "Trottoir", note="*das Trottoir* (del francés) = *der Bürgersteig*."),
         cz(1, "Escribí la palabra suiza (colación de media mañana).", "Um zehn Uhr gibt es den ___.", "Znüni", note="*der Znüni*: «lo de las nueve»."),
@@ -247,14 +247,14 @@ WEEK = {
         ty(1, "Escribí el verbo de Alemania.", "grillieren (Schweiz) → …", "grillen", note="Suiza: *grillieren, parkieren*; Alemania: *grillen, parken*."),
         ty(1, "Escribí en estándar, con artículo.", "Chuchichäschtli → …", "das Küchenkästchen", ["das Küchenkästchen", "Küchenkästchen"], "*ch* suizo = *k* estándar; *-li* = diminutivo (*-chen*)."),
         tr(1, "Mañana estaciono acá. (en suizo)", "Morgen parkiere ich hier.", ["Morgen parkiere ich hier.", "Ich parkiere morgen hier."], "*parkieren* en Suiza."),
-        li(1, "Grüezi", ["Grüezi", "Grüß Gott", "Gesundheit"], "*Grüezi*: el saludo formal de la Suiza alemana."),
+        li(1, "Grüezi", ["Grüezi", "Grüß di", "Grüß Sie"], "*Grüezi*: el saludo formal de la Suiza alemana; *Grüß di* y *Grüß Sie* son de Baviera y Austria."),
         # parte 2 — norte, sur, coloquial y falsos amigos
         ch(2, "Son las 20 h en Hamburgo y te saludan con *Moin!*. ¿Está bien?", "Moin!", "Sí, *Moin* sirve a cualquier hora.", ["Sí, *Moin* sirve a cualquier hora.", "No, *Moin* es solo a la mañana.", "No, *Moin* es una despedida."], "*Moin* no viene de *Morgen*: es el «hola» del norte."),
-        ch(2, "¿Qué significa *gell?* (sur)?", "Das war lecker, gell?", "…, ¿no?", ["…, ¿no?", "…, ¡salud!", "…, ¡qué lindo!"], "*gell?* = *nicht wahr?* en el sur."),
+        ch(2, "¿Qué significa *gell?* (sur)?", "Das war lecker, gell?", "…, ¿no?", ["…, ¿no?", "…, ¡genial!", "…, ¡claro!"], "*gell?* = *nicht wahr?* en el sur."),
         ch(2, "Berlinés. ¿Qué es en estándar?", "Ick hab keene Zeit.", "Ich habe keine Zeit.", ["Ich habe keine Zeit.", "Ich habe kleine Zeit.", "Ich hatte keine Zeit."], "*ick* = *ich*, *keene* = *keine*."),
         ch(2, "¿Qué es en estándar?", "Haste mal 'nen Euro?", "Hast du mal einen Euro?", ["Hast du mal einen Euro?", "Hast du mal den Euro?", "Hattest du mal einen Euro?"], "*haste* = *hast du*; *'nen* = *einen*."),
-        ch(2, "Falso amigo. ¿Qué es?", "die Firma", "la empresa", ["la empresa", "la firma", "la granja"], "«La firma» = *die Unterschrift*."),
-        ch(2, "Falso amigo. ¿Qué es?", "das Gymnasium", "el secundario orientado a la universidad", ["el secundario orientado a la universidad", "el gimnasio", "el estadio"], "«El gimnasio» = *das Fitnessstudio*."),
+        ch(2, "Falso amigo. ¿Qué es?", "die Firma", "la empresa", ["la empresa", "la firma (en un documento)", "la marca"], "«La firma» = *die Unterschrift*."),
+        ch(2, "Falso amigo. ¿Qué es?", "das Gymnasium", "el secundario orientado a la universidad", ["el secundario orientado a la universidad", "el gimnasio", "la universidad"], "«El gimnasio» = *das Fitnessstudio*."),
         ch(2, "Falso amigo. ¿Qué es?", "die Rente", "la jubilación", ["la jubilación", "el alquiler", "la renta"], "«La renta» = *das Einkommen*; «el alquiler» = *die Miete*."),
         ch(2, "Falso amigo. ¿Qué significa *rar*?", "Gute Wohnungen sind in München rar.", "escaso", ["escaso", "raro, extraño", "caro"], "«Raro» = *seltsam* o *komisch*."),
         cz(2, "Escribí la palabra (firma).", "Unterschreiben Sie bitte hier. Wir brauchen Ihre ___.", "Unterschrift", note="«La firma» = *die Unterschrift*; *die Firma* es la empresa."),

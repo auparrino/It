@@ -69,7 +69,7 @@ WEEK = {
                 "tip": "*du wärst, ihr wärt* son las formas de todos los días; *du wärest, ihr wäret* son más formales.",
                 "q": [
                     q("«Si tuviera tiempo…»", "Wenn ich Zeit hätte…", ["Wenn ich Zeit hätte…", "Wenn ich Zeit hatte…", "Wenn ich Zeit würde haben…"]),
-                    q("Completá: *Das ___ wirklich schön!*", "wäre", ["wäre", "war", "würde"]),
+                    q("Completá: *Das ___ wirklich schön!*", "wäre", ["wäre", "würde", "hätte"]),
                 ],
             },
             {
@@ -141,7 +141,7 @@ WEEK = {
                 "warn": "*An deiner Stelle* ocupa el casillero 1: el verbo va enseguida. *An deiner Stelle ich würde…* está mal; va *An deiner Stelle **würde ich**…*",
                 "tip": "*Du sollst* (indicativo) transmite una orden o lo que dijo otro (semana 17); *Du solltest* es un consejo amable.",
                 "q": [
-                    q("Consejo: *Du ___ mehr schlafen.*", "solltest", ["solltest", "sollst", "sollen"]),
+                    q("Consejo: *Du ___ mehr schlafen.*", "solltest", ["solltest", "sollst", "solltet"]),
                     q("«Yo que vos, lo llamaría.»", "An deiner Stelle würde ich ihn anrufen.", ["An deiner Stelle würde ich ihn anrufen.", "An deiner Stelle ich würde ihn anrufen.", "An deiner Stelle würde ich ihn anrufe."]),
                 ],
             },
@@ -205,10 +205,10 @@ WEEK = {
     ],
     "items": [
         # parte 0 — las formas
-        ch(0, "Elegí la forma correcta.", "Ich ___ gern nach Japan reisen.", "würde", ["würde", "wurde", "werde"], "Deseo: *würde* + infinitivo. *wurde* es pasado de *werden*."),
+        ch(0, "Elegí la forma correcta.", "Ich ___ gern nach Japan reisen.", "würde", ["würde", "wurde", "wäre"], "Deseo: *würde* + infinitivo. *wurde* es pasado de *werden*."),
         ch(0, "Elegí la forma correcta.", "Ihr ___ das sicher schaffen.", "würdet", ["würdet", "würdest", "wurdet"], "*ihr würdet*."),
-        ch(0, "Elegí la forma correcta.", "Das ___ super!", "wäre", ["wäre", "würde", "war"], "«Sería»: *wäre*."),
-        ch(0, "Elegí la forma correcta.", "Wenn ich ein Auto ___, …", "hätte", ["hätte", "hatte", "würde"], "«Si tuviera»: *hätte*. *hatte* es «tenía»."),
+        ch(0, "Elegí la forma correcta.", "Das ___ super!", "wäre", ["wäre", "würde", "hätte"], "«Sería»: *wäre*."),
+        ch(0, "Elegí la forma correcta.", "Wenn ich ein Auto ___, … (si tuviera)", "hätte", ["hätte", "hatte", "würde"], "«Si tuviera»: *hätte*. *hatte* es «tenía»."),
         ch(0, "Elegí la forma correcta.", "Du ___ mir helfen. (podrías)", "könntest", ["könntest", "konntest", "kannst"], "«Podrías»: *könntest*, con diéresis."),
         ch(0, "¿Cómo se dice?", "«Querría un té, por favor.»", "Ich hätte gern einen Tee.", ["Ich hätte gern einen Tee.", "Ich hatte gern einen Tee.", "Ich würde gern einen Tee."], "*Ich hätte gern…* para pedir. A *Ich würde gern* le falta el infinitivo."),
         ch(0, "¿Cuál es la más natural?", "(Sería lindo.)", "Das wäre schön.", ["Das wäre schön.", "Das würde schön sein.", "Das war schön."], "Con *sein*, forma propia: *wäre*."),

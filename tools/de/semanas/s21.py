@@ -46,7 +46,7 @@ WEEK = {
                 "warn": "Nada de diéresis: «könnte» y «müsste» existen, pero son otra cosa (el condicional, «podría», «tendría que», semana 25). El pasado es *konnte*, *musste*.",
                 "tip": "*möchte* no tiene pasado propio: «quería» se dice con *wollen*: *Ich wollte ein Eis* (quería un helado).",
                 "q": [
-                    q("Pasado de *ich kann*:", "ich konnte", ["ich konnte", "ich könnte", "ich konntete"]),
+                    q("Pasado de *ich kann*:", "ich konnte", ["ich konnte", "ich könnte", "ich kannte"]),
                     q("Completá: *Er ___ nicht schwimmen.* (können, pasado)", "konnte", ["konnte", "konntet", "kannte"]),
                     q("Completá: *Ihr ___ früh ins Bett.* (müssen, pasado)", "musstet", ["musstet", "musste", "müsstet"]),
                 ],
@@ -64,8 +64,8 @@ WEEK = {
                 "warn": "En la subordinada el modal se va al final como siempre: *…, weil ich lernen **musste***. Y *sollte* puede ser pasado («tenía que») o consejo («debería»); el contexto lo aclara.",
                 "tip": "*mochte* casi siempre va con sustantivo, no con infinitivo: *Ich mochte die Schule* (me gustaba la escuela).",
                 "q": [
-                    q("¿Cuál es la más natural hablando?", "Ich musste gestern arbeiten.", ["Ich musste gestern arbeiten.", "Ich habe gestern arbeiten gemusst.", "Ich habe gestern gemusst arbeiten."]),
-                    q("Completá: *…, weil ich nicht schlafen ___.*", "konnte", ["konnte", "konnte schlafen", "habe gekonnt"]),
+                    q("¿Cuál es la más natural hablando?", "Ich musste gestern arbeiten.", ["Ich musste gestern arbeiten.", "Ich habe gestern arbeiten gemusst.", "Ich musste gestern gearbeitet."]),
+                    q("Completá: *…, weil ich nicht schlafen ___.*", "konnte", ["konnte", "gekonnt", "habe gekonnt"]),
                 ],
             },
             {
@@ -87,8 +87,8 @@ WEEK = {
                 ],
                 "warn": "*-te* es solo para regulares: «gehte» o «kommte» no existen. Si el participio termina en *-t* (*gespielt*), el Präteritum lleva *-te*; si termina en *-en* (*gegangen*), es irregular.",
                 "q": [
-                    q("Pasado de *er lernt*:", "er lernte", ["er lernte", "er lernt", "er gelernte"]),
-                    q("Completá: *Sie ___ in Rosario.* (arbeiten, pasado)", "arbeitete", ["arbeitete", "arbeite", "arbeitet"]),
+                    q("Pasado de *er lernt*:", "er lernte", ["er lernte", "er lernt", "er lernten"]),
+                    q("Completá: *Sie ___ in Rosario.* (arbeiten, pasado)", "arbeitete", ["arbeitete", "arbeitte", "arbeitet"]),
                 ],
             },
             {
@@ -118,9 +118,9 @@ WEEK = {
                 "warn": "*es gab* es «había» (de *es gibt*), no «hubo un regalo»: *Früher gab es hier keinen Supermarkt* = antes acá no había supermercado. Y *gehte*, *kommte* no existen: *ich ging, er kam* (verbos irregulares).",
                 "tip": "A veces el Präteritum comparte la vocal con el participio (*bleiben – blieb – geblieben*) y a veces no (*finden – fand – gefunden*): aprendelos siempre de a tres.",
                 "q": [
-                    q("Pasado de *wir gehen*:", "wir gingen", ["wir gingen", "wir gehten", "wir gangen"]),
-                    q("Completá: *Früher ___ es hier ein Kino.* (geben)", "gab", ["gab", "gibt", "gebte"]),
-                    q("Completá: *Ich ___ nicht, wo er war.* (wissen)", "wusste", ["wusste", "wisste", "weißte"]),
+                    q("Pasado de *wir gehen*:", "wir gingen", ["wir gingen", "wir ging", "wir gegangen"]),
+                    q("Completá: *Früher ___ es hier ein Kino.* (geben)", "gab", ["gab", "gibt", "gäbe"]),
+                    q("Completá: *Ich ___ nicht, wo er war.* (wissen)", "wusste", ["wusste", "wisste", "gewusst"]),
                 ],
             },
             {
@@ -139,8 +139,8 @@ WEEK = {
                 "warn": "En castellano elegís entre «jugaba» (costumbre) y «jugué» (una vez). El alemán **no** hace esa diferencia: *Wir spielten* (o *haben gespielt*) sirve para las dos. La costumbre se marca con palabras: *immer, oft, jeden Tag, früher*.",
                 "more": ["En el sur de Alemania, Austria y Suiza el Präteritum casi no se usa al hablar; en el norte se oye un poco más."],
                 "q": [
-                    q("Escribís un cuento. ¿Qué forma usás?", "Er öffnete die Tür.", ["Er öffnete die Tür.", "Er hat die Tür geöffnet.", "Er öffnet die Tür gehabt."]),
-                    q("«Jugaba todos los días» y «jugué una vez» en alemán…", "usan el mismo tiempo", ["usan el mismo tiempo", "usan tiempos distintos", "no se pueden decir"]),
+                    q("Escribís un cuento. ¿Qué forma usás?", "Er öffnete die Tür.", ["Er öffnete die Tür.", "Er hat die Tür geöffnet.", "Er öffnte die Tür."]),
+                    q("«Jugaba todos los días» y «jugué una vez» en alemán…", "usan el mismo tiempo", ["usan el mismo tiempo", "usan tiempos distintos", "«jugaba» va en Präteritum y «jugué» en Perfekt"]),
                 ],
             },
             {
@@ -193,8 +193,8 @@ WEEK = {
                 "warn": "*früher* = «antes» en general (comparado con ahora); *damals* = «en ese momento» del que estás hablando. «Antes de comer» no es *früher*: es *vor dem Essen*.",
                 "more": ["*aufwachsen* (criarse) es separable e irregular: *ich wuchs auf, ich bin aufgewachsen*."],
                 "q": [
-                    q("«Me crié en Salta.»", "Ich bin in Salta aufgewachsen.", ["Ich bin in Salta aufgewachsen.", "Ich habe in Salta aufgewachsen.", "Ich bin in Salta gewachsen auf."]),
-                    q("Completá: *Früher ___ ich viel Sport.* (machen)", "machte", ["machte", "mache", "machtete"]),
+                    q("«Me crié en Salta.»", "Ich bin in Salta aufgewachsen.", ["Ich bin in Salta aufgewachsen.", "Ich habe in Salta aufgewachsen.", "Ich bin in Salta aufgewachst."]),
+                    q("Completá: *Früher ___ ich viel Sport.* (machen)", "machte", ["machte", "mache", "gemacht"]),
                 ],
             },
         ],
@@ -221,10 +221,10 @@ WEEK = {
         # parte 0 — los modales en pasado
         ch(0, "Elegí el pasado.", "Ich ___ nicht kommen. (können)", "konnte", ["konnte", "könnte", "kann"], "Pasado sin diéresis: *konnte*."),
         ch(0, "Elegí el pasado.", "Wir ___ jeden Tag früh aufstehen. (müssen)", "mussten", ["mussten", "müssten", "musstet"], "*wir mussten*, sin diéresis."),
-        ch(0, "Elegí el pasado.", "Als Kind ___ ich keine Cola trinken. (dürfen)", "durfte", ["durfte", "dürfte", "durftete"], "*ich durfte* = me dejaban."),
+        ch(0, "Elegí el pasado.", "Als Kind ___ ich keine Cola trinken. (dürfen)", "durfte", ["durfte", "dürfte", "darf"], "*ich durfte* = me dejaban."),
         ch(0, "Elegí el pasado.", "Du ___ doch Arzt werden, oder? (wollen)", "wolltest", ["wolltest", "wollte", "willst"], "*du wolltest*."),
-        ch(0, "Elegí el pasado.", "Sie (ella) ___ ihre Lehrerin sehr. (mögen)", "mochte", ["mochte", "möchte", "magte"], "*mögen → mochte*; *möchte* es «quisiera»."),
-        ch(0, "¿Cómo se dice «quería un perro»?", "…", "Ich wollte einen Hund.", ["Ich wollte einen Hund.", "Ich möchtete einen Hund.", "Ich mochte einen Hund haben."], "*möchte* no tiene pasado: se usa *wollte*."),
+        ch(0, "Elegí el pasado.", "Sie (ella) ___ ihre Lehrerin sehr. (mögen)", "mochte", ["mochte", "möchte", "mögte"], "*mögen → mochte*; *möchte* es «quisiera»."),
+        ch(0, "¿Cómo se dice «quería un perro»?", "…", "Ich wollte einen Hund.", ["Ich wollte einen Hund.", "Ich habe einen Hund gemocht.", "Ich mochte einen Hund haben."], "«Quería» = *wollte*; *mögen* (*mochte*, *gemocht*) es «gustar»."),
         ch(0, "Elegí el orden.", "(Ayer tuve que trabajar.)", "Gestern musste ich arbeiten.", ["Gestern musste ich arbeiten.", "Gestern ich musste arbeiten.", "Gestern musste ich gearbeitet."], "Modal en posición 2, infinitivo al final."),
         cz(0, "Escribí el pasado de *können*.", "Mit fünf Jahren ___ sie schon schwimmen.", "konnte", note="*sie konnte*."),
         cz(0, "Escribí el pasado de *müssen*.", "Ihr ___ lange warten.", "musstet", note="*ihr musstet*."),
@@ -235,14 +235,14 @@ WEEK = {
         tr(0, "De chico quería ser piloto.", "Als Kind wollte ich Pilot werden.", ["Als Kind wollte ich Pilot werden.", "Ich wollte als Kind Pilot werden.", "Als Kind wollte ich Pilotin werden.", "Ich wollte als Kind Pilotin werden."], "*werden* = llegar a ser; profesión sin artículo."),
         tr(0, "Tuvimos que esperar mucho.", "Wir mussten lange warten.", ["Wir mussten lange warten.", "Wir mussten viel warten."], "*mussten*, sin diéresis."),
         # parte 1 — Präteritum frecuente
-        ch(1, "Elegí el Präteritum.", "gehen → er ___", "ging", ["ging", "gehte", "gang"], "Irregular: *gehen – ging – gegangen*."),
-        ch(1, "Elegí el Präteritum.", "kommen → wir ___", "kamen", ["kamen", "kommten", "kommen"], "*kommen – kam*: *wir kamen*."),
-        ch(1, "Elegí el Präteritum.", "spielen → ich ___", "spielte", ["spielte", "spielt", "spielete"], "Regular: *-te*."),
-        ch(1, "Elegí el Präteritum.", "Früher ___ es hier keinen Supermarkt.", "gab", ["gab", "gibt", "gebte"], "*es gibt → es gab* = había."),
-        ch(1, "Elegí el Präteritum.", "denken → ich ___", "dachte", ["dachte", "denkte", "dank"], "Mixto: cambia la vocal y lleva *-te*."),
-        ch(1, "Elegí el Präteritum.", "fahren → sie (ellos) ___", "fuhren", ["fuhren", "fahrten", "führen"], "*fahren – fuhr*: *sie fuhren*."),
+        ch(1, "Elegí el Präteritum.", "gehen → er ___", "ging", ["ging", "ginge", "gegangen"], "Irregular: *gehen – ging – gegangen*."),
+        ch(1, "Elegí el Präteritum.", "kommen → wir ___", "kamen", ["kamen", "kämen", "kommen"], "*kommen – kam*: *wir kamen*."),
+        ch(1, "Elegí el Präteritum.", "spielen → ich ___", "spielte", ["spielte", "spielt", "spielten"], "Regular: *-te*."),
+        ch(1, "Elegí el Präteritum.", "Früher ___ es hier keinen Supermarkt.", "gab", ["gab", "gibt", "gäbe"], "*es gibt → es gab* = había."),
+        ch(1, "Elegí el Präteritum.", "denken → ich ___", "dachte", ["dachte", "denkte", "dächte"], "Mixto: cambia la vocal y lleva *-te*."),
+        ch(1, "Elegí el Präteritum.", "fahren → sie (ellos) ___", "fuhren", ["fuhren", "fuhrten", "führen"], "*fahren – fuhr*: *sie fuhren*."),
         ch(1, "Estás contando un cuento por escrito.", "Der Junge ___ die Tür.", "öffnete", ["öffnete", "hat geöffnet", "öffnet"], "Relato escrito: Präteritum. (*öffnen*, regular, con *e* de apoyo.)"),
-        ch(1, "¿Qué significa?", "Wir spielten jeden Tag Fußball.", "Jugábamos al fútbol todos los días.", ["Jugábamos al fútbol todos los días.", "Jugamos al fútbol hoy.", "Vamos a jugar al fútbol todos los días."], "La costumbre la marca *jeden Tag*, no el tiempo verbal."),
+        ch(1, "¿Qué significa?", "Wir spielten jeden Tag Fußball.", "Jugábamos al fútbol todos los días.", ["Jugábamos al fútbol todos los días.", "Habíamos jugado al fútbol todos los días.", "Vamos a jugar al fútbol todos los días."], "La costumbre la marca *jeden Tag*, no el tiempo verbal."),
         cz(1, "Escribí el Präteritum de *wohnen*.", "Wir ___ damals in einem kleinen Dorf.", "wohnten", note="Regular: *wohnten*."),
         cz(1, "Escribí el Präteritum de *arbeiten*.", "Meine Mutter ___ in einem Krankenhaus.", "arbeitete", note="Raíz en *-t*: *arbeitete*."),
         cz(1, "Escribí el Präteritum de *bleiben*.", "Im Sommer ___ wir drei Wochen bei der Oma.", "blieben", note="*bleiben – blieb*: *wir blieben*."),

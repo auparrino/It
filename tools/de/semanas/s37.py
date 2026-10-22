@@ -181,7 +181,7 @@ WEEK = {
     "items": [
         # parte 0 — suponer: muss, dürfte, kann, könnte, kann nicht; pasado
         ch(0, "Elegí el modal.", "Das Licht ist aus. Sie ___ schon schlafen.", "muss", ["muss", "soll", "will"], "Sacás una conclusión de una prueba (la luz): *muss*. *soll* sería un rumor."),
-        ch(0, "Elegí el modal.", "Er ___ nicht der Täter sein, er war im Urlaub.", "kann", ["kann", "muss", "dürfte"], "Lo descartás por completo: *kann nicht*. *muss nicht* sería «no necesariamente»."),
+        ch(0, "Elegí el modal.", "Er ___ nicht der Täter sein, er war im Urlaub.", "kann", ["kann", "muss", "darf"], "Lo descartás por completo: *kann nicht*. *muss nicht* sería «no necesariamente»."),
         ch(0, "¿Qué expresa la oración?", "Der Chef dürfte noch im Büro sein.", "es probable", ["es probable", "es seguro", "es imposible"], "*dürfte* = probablemente, cerca del 75 %."),
         ch(0, "Elegí el modal.", "Sie hat ein Haus am See und drei Autos. Sie ___ viel Geld haben.", "muss", ["muss", "darf", "will"], "Las pruebas hablan: *muss*. *darf* es permiso; *will* sería lo que ella afirma."),
         ch(0, "Completá.", "Er ist nicht gekommen. Er muss den Termin ___.", "vergessen haben", ["vergessen haben", "vergessen hat", "haben vergessen"], "Modal + infinitivo perfecto: participio + *haben* al final."),
