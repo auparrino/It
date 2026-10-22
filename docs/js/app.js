@@ -828,7 +828,7 @@
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION = "c1-vN" in sw.js: test_game
      and the CI check it).  One version for the app and both languages. */
-  var APP_VERSION = "v3.15.5";
+  var APP_VERSION = "v3.15.6";
   // Settimana XVII: Roman numerals on the street signs (LANG.ui.romanWeeks).
   function romano(n) {
     var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
@@ -7133,8 +7133,11 @@
         val = String(val).trim();
         // Other corrections that are just as right (fra/tra, para/pra…).
         var goods = [it.good].concat(it.goodAlt || []).filter(Boolean);
-        var right = it.good === "" ? val === "" : window.Diagnosi &&
-          Diagnosi.diagnose(val, goods, { registro: "formal" }).verdict === Engine.VERDICT.RIGHT;
+        // a word that is left over: good is "" (or null in the German package)
+        // without a diagnosis (German), the plain grader decides
+        var right = !it.good ? val === "" : window.Diagnosi ?
+          Diagnosi.diagnose(val, goods, { registro: "formal" }).verdict === Engine.VERDICT.RIGHT :
+          Engine.grade(val, { answer: it.good, accept: goods }) === Engine.VERDICT.RIGHT;
         if (right) {
           if (tries) markFixed(it.cat);
           settle(tries ? "quasi" : "giusto", val, fixHtml(),
@@ -7148,7 +7151,7 @@
           if (d && DV) DV.tidy(d);
           var closeTo = !DV || !it.good || !val || DV.near(val, goods, d);
           $("#fb").innerHTML = '<div class="feedback prompt"><div class="verdict">' + (closeTo ? "🔎 Casi." : "🔎 Todavía no.") + "</div><p>" +
-            (it.good === "" ? "Esa palabra no hay que cambiarla por otra: sobra." :
+            (!it.good ? "Esa palabra no hay que cambiarla por otra: sobra." :
              d && d.hint && !GENERIC[d.cat] ? mk(d.hint) : "Pista: es un error de <b>" + esc(label) + "</b>.") +
             "</p></div>";
           inp.focus();
