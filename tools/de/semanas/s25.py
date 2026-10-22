@@ -21,7 +21,7 @@ WEEK = {
         "intro": "Ya usás un Konjunktiv II sin saberlo: *Ich möchte* («me gustaría») viene de *mögen*. Esta semana aprendés el resto: cómo imaginar, desear, aconsejar y pedir con la amabilidad que en castellano ponemos con el condicional y el subjuntivo.",
         "parts": [
             {"h": "Las formas: würde, hätte, wäre, könnte", "blocks": [0, 1, 2]},
-            {"h": "Si fuera…: lo irreal y los deseos", "blocks": [3, 4]},
+            {"h": "Si fuera…: lo irreal y los deseos", "blocks": [3, 4, 8]},
             {"h": "Consejos, pedidos y sueños", "blocks": [5, 6, 7]},
         ],
         "blocks": [
@@ -126,6 +126,21 @@ WEEK = {
                 "q": [
                     q("«¡Ojalá tuviera un auto!»", "Wenn ich doch ein Auto hätte!", ["Wenn ich doch ein Auto hätte!", "Wenn ich doch ein Auto habe!", "Hoffentlich hätte ich ein Auto!"]),
                     q("«Ojalá mañana haya sol.» (es posible)", "Hoffentlich scheint morgen die Sonne.", ["Hoffentlich scheint morgen die Sonne.", "Hoffentlich schiene morgen die Sonne.", "Ich wünschte, morgen scheint die Sonne."]),
+                ],
+            },
+            {
+                "h": "falls: por si, en caso de que",
+                "r": "*falls* = «por si», «en caso de que». Es una subordinada como *wenn* (verbo al final), pero solo para una condición **real y posible**, que quizás no pase; nunca significa «cuando». Va en **indicativo**, aunque el castellano ponga subjuntivo («en caso de que llueva»).",
+                "table": {"head": ["Castellano", "Alemán"], "rows": [
+                    ["Por si llueve, llevá un paraguas.", "*Falls* es regnet, nimm einen Schirm mit."],
+                    ["Llamame en caso de que no encuentres la casa.", "Ruf mich an, *falls* du das Haus nicht *findest*."],
+                    ["Si por casualidad lo ves, saludalo.", "*Falls* du ihn *siehst*, grüß ihn von mir."],
+                ]},
+                "warn": "«Cuando llegue, te aviso» no es *falls* (llegar es seguro): es *Wenn ich ankomme, …*. Y nada de Konjunktiv para el subjuntivo castellano: *falls es regnet*, no «falls es regnen würde». El «si» de las preguntas («no sé si viene») tampoco es *falls*: es *ob* (semana 26).",
+                "tip": "*wenn* casi siempre sirve en lugar de *falls*; *falls* subraya que puede que no pase. En textos formales vas a ver *sofern* (siempre que): *Sofern nichts dagegen spricht, beginnen wir um neun.*",
+                "q": [
+                    q("«Por si tenés preguntas, escribime.»", "Falls du Fragen hast, schreib mir.", ["Falls du Fragen hast, schreib mir.", "Falls du Fragen hättest, schreib mir.", "Falls hast du Fragen, schreib mir."]),
+                    q("¿Cuál NO se dice con *falls*?", "Cuando llegue a casa, te llamo.", ["Cuando llegue a casa, te llamo.", "Por si no llego, empezá sin mí.", "En caso de que llueva, nos quedamos."]),
                 ],
             },
             {
@@ -236,6 +251,14 @@ WEEK = {
         tr(1, "Si tuviera tiempo, te visitaría.", "Wenn ich Zeit hätte, würde ich dich besuchen.", ["Wenn ich Zeit hätte, würde ich dich besuchen.", "Ich würde dich besuchen, wenn ich Zeit hätte.", "Wenn ich Zeit hätte würde ich dich besuchen.", "Ich würde dich besuchen wenn ich Zeit hätte."], "*hätte* + *würde … besuchen*."),
         tr(1, "¡Ojalá no hiciera tanto frío!", "Wenn es nur nicht so kalt wäre!", ["Wenn es nur nicht so kalt wäre!", "Wenn es doch nicht so kalt wäre!", "Wenn es doch nur nicht so kalt wäre!", "Ich wünschte, es wäre nicht so kalt!", "Ich wünschte, es wäre nicht so kalt."], "Deseo irreal: *Wenn … nur / doch* + *wäre*."),
         ty(1, "Escribí el Konjunktiv II de *sein*.", "er ___", "wäre", note="*er war* → *er wäre*."),
+        # parte 1 — falls
+        ch(1, "Elegí el conector.", "Nimm eine Jacke mit, ___ es kalt wird.", "falls", ["falls", "als", "ob"], "«por si hace frío» = *falls*, con el verbo al final. *ob* es el «si» de las preguntas; *als*, «cuando» en el pasado."),
+        ch(1, "Elegí el conector.", "___ ich in Berlin ankomme, rufe ich dich an. (cuando llegue: es seguro)", "Wenn", ["Wenn", "Falls", "Als"], "Algo que va a pasar seguro («cuando llegue») → *wenn*. *falls* es solo para lo que quizás no pase."),
+        ch(1, "Elegí el orden correcto.", "(Por si llego tarde, empezá sin mí.)", "Falls ich zu spät komme, fang ohne mich an.", ["Falls ich zu spät komme, fang ohne mich an.", "Falls ich komme zu spät, fang ohne mich an.", "Falls ich zu spät käme, du fängst ohne mich an."], "*falls* + verbo al final, indicativo; después, la principal arranca con el verbo."),
+        cz(1, "Escribí el conector («por si»).", "___ du Hilfe brauchst, ruf mich an.", "Falls", ["Falls", "Wenn"], "«por si necesitás ayuda» → *Falls* (también vale *Wenn*). El verbo va al final, en indicativo."),
+        tr(1, "Llamame en caso de que no encuentres la casa.", "Ruf mich an, falls du das Haus nicht findest.", ["Ruf mich an, falls du das Haus nicht findest.", "Falls du das Haus nicht findest, ruf mich an.", "Ruf mich an, wenn du das Haus nicht findest.", "Wenn du das Haus nicht findest, ruf mich an.", "Ruf mich an, falls du das Haus nicht finden kannst.", "Falls du das Haus nicht finden kannst, ruf mich an."], "«en caso de que» + subjuntivo → *falls* + indicativo (*findest*), verbo al final."),
+        ty(1, "Uní las dos oraciones con *falls*.", "Vielleicht regnet es. Dann bleiben wir zu Hause.", "Falls es regnet, bleiben wir zu Hause.", ["Falls es regnet, bleiben wir zu Hause.", "Wir bleiben zu Hause, falls es regnet."], "*Falls es regnet* ocupa la posición 1 → *bleiben wir*."),
+        tr(1, "Por si llueve, llevá un paraguas.", "Falls es regnet, nimm einen Schirm mit.", ["Falls es regnet, nimm einen Schirm mit.", "Nimm einen Schirm mit, falls es regnet.", "Falls es regnet, nimm einen Regenschirm mit.", "Nimm einen Regenschirm mit, falls es regnet.", "Falls es regnet, nimm einen Schirm.", "Nimm einen Schirm, falls es regnet."], "«por si» = *falls*, en indicativo."),
         # parte 2 — consejos, pedidos y sueños
         ch(2, "Consejo. Elegí la forma.", "Du ___ zum Arzt gehen.", "solltest", ["solltest", "sollst", "solltet"], "Consejo amable: *du solltest*."),
         ch(2, "¿Cuál es la más cortés?", "(Le pedís que cierre la ventana.)", "Würden Sie bitte das Fenster schließen?", ["Würden Sie bitte das Fenster schließen?", "Schließen Sie das Fenster!", "Sie schließen jetzt das Fenster."], "*Würden Sie bitte…?* suaviza el pedido."),
@@ -253,5 +276,15 @@ WEEK = {
         tr(2, "¿Podría repetirlo, por favor?", "Könnten Sie das bitte wiederholen?", ["Könnten Sie das bitte wiederholen?", "Könnten Sie es bitte wiederholen?", "Könnten Sie das bitte noch einmal sagen?", "Würden Sie das bitte wiederholen?"], "*Könnten Sie…?*, con el infinitivo al final."),
         tr(2, "Yo que vos, no lo compraría.", "An deiner Stelle würde ich das nicht kaufen.", ["An deiner Stelle würde ich das nicht kaufen.", "An deiner Stelle würde ich es nicht kaufen.", "Ich an deiner Stelle würde das nicht kaufen.", "Ich würde das an deiner Stelle nicht kaufen.", "Wenn ich du wäre, würde ich das nicht kaufen.", "Wenn ich du wäre, würde ich es nicht kaufen.", "Wenn ich du wäre würde ich das nicht kaufen.", "Wenn ich du wäre würde ich es nicht kaufen."], "*An deiner Stelle* + verbo enseguida."),
         li(2, "hätte", ["hätte", "hatte", "Hütte"], "*hätte* (tendría), con *ä* abierta; *hatte* (tenía), con *a*."),
+        # parte 2 — repaso: adjetivo tras ein y dos objetos
+        cz(2, "Escribí *groß* con su terminación.", "Ich hätte gern ein ___ Auto.", "großes", ["großes", "grosses"], "Acusativo neutro con *ein*: *-es* (semana 19)."),
+        cz(2, "Escribí *klein* con su terminación.", "Wir hätten gern eine Wohnung mit einem ___ Garten.", "kleinen", note="Dativo con *einem*: *-en*. Los casilleros especiales de *ein* (*-er, -es*) son solo nominativo y acusativo."),
+        ch(2, "Elegí la terminación.", "Das wäre ein toll___ Urlaub!", "toller", ["toller", "tolle", "tollen"], "Nominativo masculino con *ein*: *-er*."),
+        ch(2, "Elegí el orden.", "Könntest du ___ erklären? (lo = das Problem)", "es mir", ["es mir", "mir es", "mich es"], "Dos pronombres: acusativo (*es*) antes que dativo (*mir*), al revés que «me lo»."),
+        tr(2, "¿Me lo podrías mandar por mail? (lo = das Dokument)", "Könntest du es mir per Mail schicken?", ["Könntest du es mir per Mail schicken?", "Könntest du es mir per E-Mail schicken?", "Könntest du es mir mailen?", "Kannst du es mir per Mail schicken?", "Könntest du mir das per Mail schicken?", "Könntest du mir das per E-Mail schicken?"], "*es mir*: el pronombre acusativo va primero. Con el demostrativo *das* se dice *mir das*."),
+        # parte 2 — repaso: schon, noch, erst (semana 21)
+        tr(2, "Ya no fumo.", "Ich rauche nicht mehr.", ["Ich rauche nicht mehr."], "«Ya no» = *nicht mehr* (lo contrario de *noch*)."),
+        ch(2, "Elegí.", "Ich bin ___ 15, ich darf noch nicht Auto fahren.", "erst", ["erst", "nur", "schon"], "Edad, «todavía soy chico» (y va a cambiar): *erst 15*. *nur* es para cantidades."),
+        tr(2, "Si tuviera plata, me compraría otro auto. Pero ya no tengo plata.", "Wenn ich Geld hätte, würde ich mir noch ein Auto kaufen. Aber ich habe kein Geld mehr.", ["Wenn ich Geld hätte, würde ich mir noch ein Auto kaufen. Aber ich habe kein Geld mehr.", "Wenn ich Geld hätte, würde ich noch ein Auto kaufen. Aber ich habe kein Geld mehr.", "Wenn ich Geld hätte, würde ich mir ein anderes Auto kaufen. Aber ich habe kein Geld mehr.", "Wenn ich Geld hätte, würde ich ein anderes Auto kaufen. Aber ich habe kein Geld mehr.", "Wenn ich Geld hätte, kaufte ich mir noch ein Auto. Aber ich habe kein Geld mehr."], "«Ya no tengo plata» = *kein Geld mehr* (no «nicht mehr Geld»). «Otro» (uno más) = *noch ein*; (uno distinto) = *ein anderes*."),
     ],
 }

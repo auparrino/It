@@ -217,6 +217,10 @@ WEEK = {
         tr(1, "La carrera no solo es interesante, sino también útil (*nützlich*).","Das Studium ist nicht nur interessant, sondern auch nützlich.", ["Das Studium ist nicht nur interessant, sondern auch nützlich.", "Der Studiengang ist nicht nur interessant, sondern auch nützlich.", "Das Studium ist nicht nur interessant, sondern auch praktisch.", "Der Studiengang ist nicht nur interessant, sondern auch praktisch."], "*nicht nur … sondern auch*; «útil» = *nützlich*."),
         ty(1, "Uní las dos oraciones con *zwar … aber*.", "Das Stipendium ist klein. Es reicht.", "Das Stipendium ist zwar klein, aber es reicht.", ["Das Stipendium ist zwar klein, aber es reicht.", "Zwar ist das Stipendium klein, aber es reicht."], "*zwar* en la primera oración, *aber* abre la segunda."),
         li(1, "Zeugnis", ["Zeugnis", "Zeichnung", "Zeugen"], "*das Zeugnis* = el boletín, el certificado."),
+        # parte 1 — repaso: aber o sondern
+        ch(1, "Encontrá el error.", "¿Qué oración tiene un error?", "Ich will nicht Medizin studieren, aber Jura.", ["Ich will nicht Medizin studieren, aber Jura.", "Ich will nicht Medizin studieren, sondern Jura.", "Ich will Medizin studieren, aber es ist sehr schwer."], "«no Medicina, sino Derecho»: corregís lo negado → *sondern*. *aber* es «pero» (agrega un contraste)."),
+        cz(1, "Escribí *aber* o *sondern*.", "Das Studium ist nicht kostenlos, ___ es ist günstig.", "aber", note="No reemplaza lo negado («no es gratis, pero es barato»): *aber*. Con «sino» sería *sondern* sin repetir el verbo: *nicht kostenlos, sondern günstig*."),
+        tr(1, "No estudio en Berlín, sino en Leipzig.", "Ich studiere nicht in Berlin, sondern in Leipzig.", note="«sino» después de *nicht* = *sondern*."),
         # parte 2 — je … desto y el sistema educativo
         ch(2, "Elegí la palabra.", "Je mehr du lernst, ___ besser wird deine Note.", "desto", ["desto", "als", "dann"], "*je … desto*."),
         ch(2, "¿Qué orden es correcto?", "(Cuanto más viejo uno es, menos duerme.)", "Je älter man wird, desto weniger schläft man.", ["Je älter man wird, desto weniger schläft man.", "Je älter man wird, desto weniger man schläft.", "Je älter wird man, desto weniger schläft man."], "*je*: verbo al final; *desto* + comparativo + verbo + sujeto."),
@@ -233,5 +237,9 @@ WEEK = {
         tr(2, "Ella no solo aprobó, sino que también sacó una buena nota.", "Sie hat nicht nur bestanden, sondern auch eine gute Note bekommen.", ["Sie hat nicht nur bestanden, sondern auch eine gute Note bekommen.", "Sie hat nicht nur bestanden, sondern sie hat auch eine gute Note bekommen.", "Sie hat nicht nur bestanden, sondern auch eine gute Note gekriegt."], "Un solo *hat* para los dos participios, o repetido después de *sondern*."),
         ty(2, "Uní con *je … desto*.", "Du schläfst mehr. Du bist fitter.", "Je mehr du schläfst, desto fitter bist du.", ["Je mehr du schläfst, desto fitter bist du.", "Je mehr du schläfst, umso fitter bist du."], "*je*: verbo al final; *desto fitter bist du*."),
         ty(2, "Escribí en alemán, con artículo.", "«la beca»", "das Stipendium", note="*das Stipendium*, plural *die Stipendien*. " + MAY),
+        # parte 0 — repaso: acusativo o dativo después de la preposición (semana 20)
+        ch(0, "Elegí preposición y caso.", "Entweder fahre ich ___ Freundin in den Urlaub, oder ich bleibe zu Hause. (con mi novia)", "mit meiner", ["mit meiner", "mit meine", "für meine"], "Compañía: *mit* + dativo femenino → *meiner*."),
+        cz(0, "Escribí el posesivo.", "Das war sowohl für ___ Eltern als auch für mich schwer. (mis)", "meine", note="*für* + acusativo plural: *meine Eltern*. Con *mit* sería *meinen Eltern*."),
+        cz(0, "Escribí el posesivo.", "Weder mit ___ Bruder noch mit meiner Schwester kann ich darüber reden. (mi)", "meinem", note="*mit* + dativo masculino: *meinem Bruder*."),
     ],
 }

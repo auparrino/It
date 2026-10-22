@@ -16,12 +16,13 @@ WEEK = {
         "*euer* pierde la *e* cuando lleva terminación: *eure Wohnung*.",
         "Después de *sein*, el adjetivo no cambia: *Die Küche ist klein. Die Zimmer sind klein.*",
         "*es gibt* + acusativo, siempre en singular: *Es gibt einen Balkon und zwei Schlafzimmer*.",
+        "*jemand/niemand, etwas/nichts*, con una sola negación; para no repetir: *Ja, ich habe einen / eine / eins / welche*.",
     ],
     "lesson": {
         "intro": "Esta semana entrás a casa: decís de quién es cada cosa, cómo es cada ambiente y qué hay. Y al final, buscás departamento en Alemania.",
         "parts": [
             {"h": "Mi, tu, su: los posesivos", "blocks": [0, 1, 2]},
-            {"h": "Cómo es y qué hay", "blocks": [3, 4]},
+            {"h": "Cómo es y qué hay", "blocks": [3, 4, 7]},
             {"h": "Buscar departamento", "blocks": [5, 6]},
         ],
         "blocks": [
@@ -169,6 +170,31 @@ WEEK = {
                     q("«¿Cuánto es el alquiler?» (lo más habitual)", "Wie hoch ist die Miete?", ["Wie hoch ist die Miete?", "Wie groß ist die Miete?", "Wie hoch kostet die Miete?"]),
                 ],
             },
+            {
+                "h": "Alguien, nada, uno: jemand, nichts, einen, welche",
+                "r": "Para personas: *jemand* (alguien) y *niemand* (nadie). Para cosas: *etwas* (algo) y *nichts* (nada). Y para no repetir el sustantivo, *ein* y *kein* se usan **solos**, con la terminación que muestra el género: *einer/keiner* (der), *eine/keine* (die), *eins/keins* (das); en acusativo masculino, *einen/keinen*. Para el plural y lo que no se cuenta (leche, pan), ***welche***.",
+                "table": {"head": ["Pregunta", "Sí", "No"], "rows": [
+                    ["Hast du einen Stuhl? (der)", "Ja, ich habe einen.", "Nein, ich habe keinen."],
+                    ["Hast du eine Lampe? (die)", "Ja, ich habe eine.", "Nein, ich habe keine."],
+                    ["Hast du ein Fahrrad? (das)", "Ja, ich habe eins.", "Nein, ich habe keins."],
+                    ["Gibt es noch Brötchen? (plural)", "Ja, es gibt noch welche.", "Nein, es gibt keine mehr."],
+                    ["Haben wir Milch? (no se cuenta)", "Ja, wir haben welche.", "Nein, wir haben keine."],
+                ]},
+                "ex": [
+                    ["Ist *jemand* da? – Nein, *niemand*.", "¿Hay alguien? – No, nadie."],
+                    ["Ich sehe *nichts*.", "No veo nada."],
+                    ["Möchtest du *etwas* trinken?", "¿Querés tomar algo?"],
+                    ["Gibt es hier einen Supermarkt? – Ja, an der Ecke ist *einer*.", "¿Hay un súper por acá? – Sí, en la esquina hay uno."],
+                ],
+                "warn": "En castellano negamos dos veces («no veo nada», «no vino nadie»); en alemán, **una sola**: *Ich sehe nichts*, *Niemand ist da*. «Ich sehe nicht nichts» está mal. Y no contestes «Ja, ich habe» a secas, como «sí, tengo»: el alemán pide el objeto: *Ja, ich habe einen / eins / welche*.",
+                "tip": "*nichts* (nada) no es *nicht* (no): *Ich habe nichts* = no tengo nada; «Ich habe nicht» a secas no se dice.",
+                "more": ["*welche* es el «unos» o «algo» que reemplaza a un plural o a algo que no se cuenta: *Brauchst du Eier? – Nein, ich habe noch welche* (todavía tengo).", "En acusativo, *jemand* y *niemand* pueden sumar *-en*: *Ich kenne hier niemanden*; en la charla también se oye *niemand*."],
+                "q": [
+                    q("*Hast du einen Kuli? – Ja, ich habe ___.*", "einen", ["einen", "ein", "eins"]),
+                    q("¿Cómo decís «No veo nada»?", "Ich sehe nichts.", ["Ich sehe nichts.", "Ich sehe nicht nichts.", "Ich sehe nicht."]),
+                    q("*Gibt es noch Brötchen? – Ja, es gibt noch ___.*", "welche", ["welche", "eins", "einen"]),
+                ],
+            },
         ],
     },
     "vocab": [
@@ -223,6 +249,19 @@ WEEK = {
         tr(1, "Las habitaciones son grandes.", "Die Zimmer sind groß.", ["Die Zimmer sind groß.", "Die Zimmer sind gross."], "Sin terminación: *groß*."),
         tr(1, "¿Hay un súper por acá?", "Gibt es hier einen Supermarkt?", note="*Gibt es…?* + acusativo."),
         ty(1, "Escribí en alemán.", "«luminoso» (un ambiente)", "hell", note="*hell* ↔ *dunkel*."),
+        # parte 1 — plural (repaso)
+        cz(1, "Escribí el plural. (das Bett, -en)", "Im Schlafzimmer gibt es zwei ___.", "Betten", note="*das Bett, -en* → *die Betten*. " + MAY),
+        cz(1, "Escribí el plural. (der Schrank, ¨-e)", "Im Flur gibt es zwei ___.", "Schränke", ["Schränke", "Schraenke"], "*der Schrank, ¨-e*: diéresis + *-e*, como *Stuhl → Stühle*. " + MAY),
+        cz(1, "Escribí el plural. (das Zimmer, –)", "Die Wohnung hat drei ___.", "Zimmer", note="*das Zimmer, –*: sin cambio, solo cambia el artículo (*die Zimmer*). " + MAY),
+        # parte 1 — jemand, nichts, einen, welche
+        cz(1, "Escribí el pronombre (uno).", "Hast du einen Kuli? – Ja, ich habe ___.", "einen", note="*der Kuli* → *einen* solo, sin sustantivo: no alcanza con «Ja, ich habe»."),
+        cz(1, "Escribí el pronombre.", "Gibt es noch Brötchen? – Ja, es gibt noch ___.", "welche", note="Para un plural (o algo que no se cuenta), *welche*: «unos», «algo»."),
+        cz(1, "Escribí el pronombre (ninguno).", "Hast du ein Fahrrad? – Nein, ich habe ___.", "keins", ["keins", "keines"], "*das Fahrrad* → *keins* (o *keines*), con la *-s* del neutro."),
+        ch(1, "Elegí la palabra.", "Ist ___ zu Hause? – Nein, niemand.", "jemand", ["jemand", "etwas", "nichts"], "Personas: *jemand* (alguien) / *niemand* (nadie). *etwas/nichts* son para cosas."),
+        ch(1, "Encontrá el error.", "¿Qué oración tiene un error?", "Ich höre nicht nichts.", ["Ich höre nicht nichts.", "Ich höre nichts.", "Niemand ist da."], "Una sola negación: *Ich höre nichts* (no oigo nada). La doble negación es del castellano."),
+        tr(1, "No hay nadie.", "Es ist niemand da.", ["Es ist niemand da.", "Niemand ist da.", "Da ist niemand.", "Es ist keiner da.", "Keiner ist da.", "Da ist keiner."], "*niemand* solo, sin otro *nicht*: una sola negación."),
+        tr(1, "¿Querés comer algo?", "Möchtest du etwas essen?", ["Möchtest du etwas essen?", "Willst du etwas essen?", "Möchtest du was essen?", "Willst du was essen?"], "«algo» = *etwas* (en la charla, *was*)."),
+        tr(1, "¿Una silla? Tengo una.", "Einen Stuhl? Ich habe einen.", ["Einen Stuhl? Ich habe einen.", "Ein Stuhl? Ich habe einen.", "Einen Stuhl? Ich habe einen!"], "«Silla» es femenino en castellano, pero *der Stuhl* es masculino: «una» = *einen* (acusativo)."),
         # parte 2 — buscar departamento
         ch(2, "Elegí el artículo.", "___ Schlafzimmer", "das", ["das", "der", "die"], "Compuesto de *das Zimmer*: neutro."),
         ch(2, "¿Qué es?", "der Kühlschrank", "la heladera", ["la heladera", "el ropero", "la cocina"], "*kühl* (fresco) + *der Schrank*."),
@@ -239,5 +278,11 @@ WEEK = {
         tr(2, "¿Cuándo puedo ver el departamento?", "Wann kann ich die Wohnung sehen?", ["Wann kann ich die Wohnung sehen?", "Wann kann ich die Wohnung besichtigen?", "Wann kann ich mir die Wohnung ansehen?"], "Modal segundo, infinitivo al final."),
         ty(2, "Escribí en alemán, con artículo.", "«el ropero»", "der Schrank", note="Masculino. " + MAY),
         li(2, "gemütlich", ["gemütlich", "gemächlich", "gemeinsam"], "*gemütlich* = acogedor; *ü* con labios redondos."),
+        # parte 2 — repaso: nicht o kein, y dónde va nicht
+        ch(2, "Elegí la negación.", "Die Wohnung hat ___ Balkon.", "keinen", ["keinen", "nicht", "kein"], "*einen Balkon* → *keinen Balkon*: *kein* niega el sustantivo y toma la *-en* del masculino objeto."),
+        ch(2, "Elegí la negación normal.", "«No me gusta el departamento.»", "Ich mag die Wohnung nicht.", ["Ich mag die Wohnung nicht.", "Ich mag keine Wohnung.", "Ich nicht mag die Wohnung."], "*die Wohnung* (con *die*) se niega con *nicht*, después del objeto. *keine Wohnung* sería «ningún departamento»."),
+        ty(2, "Negá la oración.", "Die Küche ist groß.", "Die Küche ist nicht groß.", note="Adjetivo → *nicht* justo antes: *nicht groß*."),
+        tr(2, "No necesito el ropero.", "Ich brauche den Schrank nicht.", note="Objeto con *den* → *nicht* después, al final. (*keinen Schrank* = ningún ropero)."),
+        ch(2, "Contestá que sí.", "Ist die Wohnung nicht möbliert? – ___, sie ist möbliert.", "Doch", ["Doch", "Ja", "Nein"], "Pregunta con *nicht* y respuesta que la contradice → *doch*."),
     ],
 }

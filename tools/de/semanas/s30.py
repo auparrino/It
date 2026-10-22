@@ -93,8 +93,12 @@ WEEK = {
                 ],
                 "warn": "Sin *wenn* no hay verbo al final: *Hätte ich das gewusst, …*, no *Ich das gewusst hätte, …*.",
                 "tip": "*Hätte ich das bloß gewusst!*, sin segunda parte, ya es un lamento (bloque siguiente).",
+                "more": [
+                    "Funciona igual en **presente** (semana 25): *Hätte ich Zeit, käme ich mit* = *Wenn ich Zeit hätte, würde ich mitkommen*. Y hasta con una condición **real**, en indicativo, sobre todo en el habla: *Kommt er, (dann) gehen wir* = *Wenn er kommt, gehen wir*. Lo que se lee es: verbo primero + coma + verbo → es un «si…».",
+                ],
                 "q": [
                     q("Transformá: *Wenn ich mehr gelernt hätte, …*", "Hätte ich mehr gelernt, …", ["Hätte ich mehr gelernt, …", "Ich hätte mehr gelernt, …", "Wenn hätte ich mehr gelernt, …"]),
+                    q("*Hätte ich Geld, würde ich reisen* significa…", "Si tuviera plata, viajaría.", ["Si tuviera plata, viajaría.", "¿Tenía plata? Viajaría.", "Tuve plata y viajé."]),
                 ],
             },
             {
@@ -212,6 +216,18 @@ WEEK = {
         tr(1, "¡Si hubiera estudiado más!", "Hätte ich doch mehr gelernt!", ["Hätte ich doch mehr gelernt!", "Hätte ich nur mehr gelernt!", "Hätte ich bloß mehr gelernt!", "Wenn ich doch mehr gelernt hätte!", "Wenn ich nur mehr gelernt hätte!", "Wenn ich bloß mehr gelernt hätte!", "Hätte ich doch mehr studiert!", "Wenn ich doch mehr studiert hätte!"], "Lamento: auxiliar adelante + *doch / nur / bloß*."),
         ty(1, "Escribí el lamento con *Hätte … doch*.", "Ich habe den Job nicht angenommen.", "Hätte ich den Job doch angenommen!", ["Hätte ich den Job doch angenommen!", "Hätte ich doch den Job angenommen!"], "Lo que no hiciste se lamenta en positivo: *Hätte ich … doch angenommen!*"),
         li(1, "verpasst", ["verpasst", "verfasst", "gepasst"], "*verpasst* = perdido (el tren, la oportunidad)."),
+        # parte 1 — la condición sin wenn (verbo primero)
+        ty(1, "Sacá el *wenn* y poné el verbo adelante.", "Wenn ich Zeit hätte, würde ich mitkommen.", "Hätte ich Zeit, würde ich mitkommen.", ["Hätte ich Zeit, würde ich mitkommen.", "Hätte ich Zeit, käme ich mit."], "Sin *wenn*, el verbo conjugado pasa al casillero 1 y ya no va al final: *Hätte ich Zeit, …*"),
+        ty(1, "Sacá el *wenn* y poné el auxiliar adelante.", "Wenn wir den Bus genommen hätten, wären wir pünktlich gewesen.", "Hätten wir den Bus genommen, wären wir pünktlich gewesen.", ["Hätten wir den Bus genommen, wären wir pünktlich gewesen.", "Hätten wir den Bus genommen, dann wären wir pünktlich gewesen."], "El auxiliar (*hätten*) va primero; el participio queda al final de esa parte."),
+        ch(1, "¿Qué significa?", "Wäre das Wetter besser, könnten wir grillen.", "Si el tiempo estuviera mejor, podríamos hacer un asado.", ["Si el tiempo estuviera mejor, podríamos hacer un asado.", "¿El tiempo estaba mejor? Pudimos hacer un asado.", "Como el tiempo está mejor, podemos hacer un asado."], "Verbo primero + coma + verbo = condición sin *wenn*. Konjunktiv II → irreal."),
+        ch(1, "Encontrá el error.", "¿Qué oración tiene un error?", "Hätte ich mehr Geld gehabt hätte, wäre ich geblieben.", ["Hätte ich mehr Geld gehabt hätte, wäre ich geblieben.", "Hätte ich mehr Geld gehabt, wäre ich geblieben.", "Wenn ich mehr Geld gehabt hätte, wäre ich geblieben."], "O *wenn* con el auxiliar al final, o el auxiliar adelante sin *wenn*; las dos cosas juntas, no."),
+        tr(1, "De haber tenido tiempo, te habría llamado.", "Hätte ich Zeit gehabt, hätte ich dich angerufen.", ["Hätte ich Zeit gehabt, hätte ich dich angerufen.", "Hätte ich Zeit gehabt, dann hätte ich dich angerufen.", "Wenn ich Zeit gehabt hätte, hätte ich dich angerufen.", "Ich hätte dich angerufen, wenn ich Zeit gehabt hätte."], "«De haber…» = auxiliar adelante sin *wenn*: *Hätte ich Zeit gehabt, …*"),
+        # parte 1 — repaso: als/wenn, ob/wenn, falls
+        ch(1, "Elegí el conector.", "___ ich klein war, wollte ich Pilot werden.", "Als", ["Als", "Wenn", "Wann"], "Una etapa única del pasado → *als*, aunque en castellano sea «cuando»."),
+        cz(1, "Escribí *als* o *wenn*.", "Immer ___ ich bei Oma war, hat sie Kuchen gebacken.", "wenn", note="Algo que se repetía («cada vez que») → *wenn*, también en el pasado."),
+        ch(1, "Elegí el conector.", "Ich frage mich, ___ ich das Richtige getan habe.", "ob", ["ob", "wenn", "falls"], "«me pregunto **si**…» es una pregunta → *ob*. *wenn* y *falls* son condiciones."),
+        ch(1, "Elegí el conector.", "___ ich das gewusst hätte, wäre ich gekommen.", "Wenn", ["Wenn", "Ob", "Als"], "Condición irreal → *wenn*. *ob* solo después de verbos como *wissen, fragen*."),
+        cz(1, "Escribí el conector («por si»).", "Ich nehme Geld mit, ___ das Restaurant keine Karte nimmt.", "falls", ["falls", "wenn"], "Algo que quizás pase → *falls* + indicativo, verbo al final."),
         # parte 2 — als ob
         ch(2, "Elegí la forma.", "Er tut so, als ob er alles ___.", "wüsste", ["wüsste", "gewusst", "wusste"], "*als ob* + Konjunktiv II: *wüsste* (con diéresis)."),
         ch(2, "Elegí la forma.", "Du siehst aus, als ob du müde ___.", "wärst", ["wärst", "warst", "bist gewesen"], "*als ob* + Konjunktiv II presente: *wärst*."),

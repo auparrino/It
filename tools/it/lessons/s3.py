@@ -201,14 +201,19 @@ LESSONS = {
                      ["allora", "entonces", "también muletilla oral"],
                      ["così", "así que", "Piove, così resto a casa."],
                      ["così / tanto... che", "tan... que", "Era così stanco che dormiva in piedi."],
+                     ["tanto che", "tanto es así que", "Era stanco, tanto che si è addormentato."],
                      ["altrimenti", "si no", "Corri, altrimenti perdi il treno."],
-                     ["infatti", "en efecto (confirma o explica, no contradice)", "Non è venuto: infatti era malato."]]},
+                     ["infatti", "en efecto (confirma o explica, no contradice)", "Non è venuto: infatti era malato."],
+                     ["in realtà", "en realidad, de hecho (corrige o contradice)", "Sembra facile; in realtà è difficile."]]},
   "ex": [["Resto a casa *perché* sono stanco.", "Me quedo en casa porque estoy cansado."],
          ["*Siccome* piove, restiamo a casa.", "Como llueve, nos quedamos en casa."],
          ["Non viene, *quindi* cominciamo senza di lui.", "No viene, así que empezamos sin él."],
          ["*Visto che* sei qui, aiutami.", "Ya que estás acá, ayudame."],
          ["Ero *così* stanco *che* mi sono addormentato.", "Estaba tan cansado que me dormí."]],
-  "warn": "*siccome* abre la oración por costumbre, no por ley: pospuesto existe, pero es raro. *perché* causal suele ir después de la principal."},
+  "warn": "*siccome* abre la oración por costumbre, no por ley: pospuesto existe, pero es raro. *perché* causal suele ir después de la principal.",
+  "tip": "«De hecho» tiene dos traducciones: si confirma, *infatti* (*era "
+         "stanco: infatti dormiva*); si corrige, *in realtà* (*sembra facile, "
+         "in realtà è difficilissimo*)."},
 
  {"h": "Antes, después, apenas",
   "r": "*prima di* + infinitivo; *dopo* + infinitivo **compuesto**. Y "
@@ -216,21 +221,25 @@ LESSONS = {
        "fine*.",
   "ex": [["*Prima di* uscire, chiudi la finestra.", "Antes de salir, cerrá la ventana."],
          ["*Dopo aver mangiato*, esco.", "Después de comer, salgo."],
-         ["*Appena* arrivo, ti chiamo.", "Apenas llegue, te llamo."],
+         ["*Appena* arriverò, ti chiamerò.", "Apenas llegue, te llamo (charlando, también *appena arrivo, ti chiamo*)."],
          ["Ti aspetto *finché* non arrivi.", "Te espero hasta que llegues."]],
   "warn": "*dopo* pide infinitivo compuesto: *dopo aver mangiato*, *dopo "
           "essere arrivati*. «dopo mangiare» está mal.",
   "table": {"head": ["Conector", "Significa", "Ejemplo"],
             "rows": [["prima di + infinitivo", "antes de", "Prima di uscire, chiudi."],
                      ["dopo + infinitivo compuesto", "después de", "Dopo aver mangiato, esco."],
-                     ["appena", "apenas, en cuanto", "Appena arrivo, ti chiamo."],
+                     ["appena", "apenas, en cuanto", "Appena arriverò, ti chiamerò."],
                      ["finché (non)", "hasta que", "Aspetto finché non arrivi."],
                      ["mentre", "mientras", "Mentre cucino, ascolto la radio."],
                      ["poi", "después, luego", "Prima studio, poi esco."],
                      ["alla fine", "al final", "Alla fine ha accettato."]]},
   "tip": "En *finché non arrivi* el *non* no niega nada: es como el «hasta "
          "que no llegues» que se oye en castellano. Con o sin *non*, significa "
-         "lo mismo."},
+         "lo mismo.",
+  "more": ["Ojo con el modo: donde el castellano pone subjuntivo (*apenas "
+           "llegue*, *hasta que vuelvas*, *después de que hable*), el italiano "
+           "pone indicativo: *appena arriverò*, *finché non torni*, *dopo che "
+           "ho parlato*. Solo *prima che* pide congiuntivo: *prima che piova*."]},
 
  {"h": "Ordenar un argumento",
   "r": "Para ordenar ideas: *innanzitutto*, *in primo luogo*, *poi*, "
@@ -263,16 +272,19 @@ LESSONS = {
                      ["nonostante / malgrado", "aunque; a pesar de", "Nonostante piova, esco."],
                      ["affinché / perché", "para que", "Te lo dico perché tu capisca."],
                      ["in modo che", "de modo que (para que)", "Parlo piano in modo che tu capisca."],
+                     ["in modo da + infinitivo", "de modo de (mismo sujeto)", "Parto presto in modo da arrivare in tempo."],
                      ["purché / a patto che", "con tal de que, siempre que", "Vengo, purché tu venga."],
                      ["a meno che non", "a menos que", "Vengo, a meno che non piova."],
                      ["prima che", "antes de que", "Esco prima che piova."],
                      ["anche se (+ indicativo)", "aunque", "Anche se piove, esco."]]},
-  "warn": "*anche se* (aunque) va con **indicativo**: *anche se piove, "
-          "esco*. *benché* dice lo mismo, pero pide congiuntivo: *benché "
-          "piova*.",
-  "more": ["*perché* con indicativo es causal (porque); con congiuntivo, "
-           "final (para que). En *a meno che non piova* el *non* no niega: "
-           "significa «a menos que llueva».",
+  "warn": "*perché* + indicativo = porque: *te lo ripeto perché non capisci*. "
+          "*perché* + congiuntivo = para que: *te lo ripeto perché tu "
+          "capisca*. El modo cambia el sentido.",
+  "more": ["*anche se* (aunque) va con **indicativo**: *anche se piove, "
+           "esco*; *benché* dice lo mismo, pero pide congiuntivo: *benché "
+           "piova*. En *a meno che non piova* el *non* no niega. Mismo "
+           "sujeto: *in modo da* + infinitivo (*studio in modo da passare l'esame*); "
+           "sujeto distinto: *in modo che* + congiuntivo.",
            "*nonostante* también va con un sustantivo: *nonostante la "
            "pioggia* (a pesar de la lluvia). Y con el mismo sujeto, *a "
            "condizione di* + infinitivo: *ti accompagno a condizione di "
@@ -550,6 +562,21 @@ LESSONS = {
   "more": ["En un mail: *Le scrivo per segnalare…*, *Mi aspetterei una risposta "
            "entro…*, *Resto in attesa di un Suo riscontro* (quedo a la espera de "
            "su respuesta). Lo oral y lo escrito piden la misma estructura."]},
+
+ {"h": "Escribirle a un amigo: Caro…, un abbraccio",
+  "r": "El mensaje informal abre con *Caro / Cara* + nombre y cierra con un saludo afectuoso. *Caro* concuerda con quien lo recibe.",
+  "table": {"head": ["Momento", "Informal", "Formal (semana 42)"],
+            "rows": [["abrir", "Caro Luca, / Cara Anna, / Ciao Marco!", "Gentile Signora Rossi,"],
+                     ["empezar", "Come stai? Scusa se ti rispondo solo ora.", "Le scrivo per…"],
+                     ["cerrar", "Un abbraccio / Un bacio / A presto!", "Distinti saluti"],
+                     ["firmar", "Tuo/Tua, Giulia", "Cordiali saluti, Giulia Bianchi"]]},
+  "ex": [["*Cara* Anna, come stai?", "Querida Ana, ¿cómo estás?"],
+         ["*Cari* ragazzi, grazie di tutto!", "Queridos chicos, ¡gracias por todo!"],
+         ["*Scusa se* ti rispondo solo ora.", "Perdón por contestarte recién ahora."],
+         ["*Un abbraccio* e *a presto*!", "¡Un abrazo y hasta pronto!"]],
+  "warn": "«Querido/a» se dice *caro* (*cara*, *cari*, *care*), y concuerda con quien lee. Y *Cordiali saluti* a un amigo suena frío: cerrá con *un abbraccio*.",
+  "q": [{"prompt": "Le escribís a tu amiga Giulia.", "stem": "___ Giulia, come stai?", "answer": "Cara", "options": ["Cara", "Caro", "Gentile"]},
+        {"prompt": "Cerrás un mensaje a un amigo.", "stem": "Un ___ e a presto!", "answer": "abbraccio", "options": ["abbraccio", "saluto distinto", "riscontro"]}]},
 ]},
 
 32: {
@@ -630,7 +657,11 @@ LESSONS = {
        "+ condizionale passato.",
   "ex": [["Se *ho* tempo, ti *chiamo*.", "Si tengo tiempo, te llamo."],
          ["Se *avessi* tempo, ti *chiamerei*.", "Si tuviera tiempo, te llamaría."],
-         ["Se *avessi avuto* tempo, ti *avrei chiamato*.", "Si hubiera tenido tiempo, te habría llamado."]],
+         ["Se *avessi avuto* tempo, ti *avrei chiamato*.", "Si hubiera tenido tiempo, te habría llamado."],
+         ["Se *verrai* a Roma, ti *porterò* al Colosseo.", "Si venís a Roma, te llevo al Coliseo."]],
+  "warn": "Después de «si» el castellano nunca pone futuro; el italiano sí, "
+          "si la consecuencia es futura: *se verrai, ti porterò*. El "
+          "presente (*se vieni, ti porto*) también vale.",
   "table": {"head": ["Tipo", "Con se...", "La otra parte", "Ejemplo"],
             "rows": [["I — real", "indicativo presente/futuro", "indicativo o imperativo", "Se ho tempo, ti chiamo."],
                      ["II — posible / irreal presente", "congiuntivo imperfetto", "condizionale presente", "Se avessi tempo, ti chiamerei."],
@@ -691,7 +722,7 @@ LESSONS = {
 "parts": [
  {"h": "che, cui, il cui", "blocks": [0, 1, 2],
   "match": r"^(?!.*(\bquale\b|lo que|\bchi\b|quello che|il che|refrán|familia)).*\S"},
- {"h": "il quale, chi y «lo que»", "blocks": [3, 4, 5],
+ {"h": "il quale, chi y «lo que»", "blocks": [3, 4, 5, 6, 7],
   "match": r"quale|lo que|\bchi\b"},
 ],
 "blocks": [
@@ -705,7 +736,7 @@ LESSONS = {
   "warn": "El relativo **no se omite nunca**, igual que en castellano: *il "
           "libro che ho letto*, nunca «il libro ho letto»."},
 
- {"h": "cui: con preposición",
+ {"h": "cui: con preposición (repaso de la semana 17)",
   "r": "Detrás de una preposición va **cui**, también invariable: *in cui*, "
        "*con cui*, *per cui*, *a cui*, *di cui*.",
   "ex": [["La città *in cui* vivo.", "La ciudad en la que vivo."],
@@ -743,8 +774,8 @@ LESSONS = {
          "figlio della vicina, il quale mi saluta sempre*: el hijo, sin "
          "duda.",
   "warn": "*il quale* no sirve de objeto directo: *la borsa che ho "
-          "comprato*, nunca «la borsa la quale ho comprato». Como sujeto o "
-          "con preposición, sí.",
+          "comprato*, nunca «la borsa la quale ho comprato». Con preposición, "
+          "sí; como sujeto, solo entre comas.",
   "more": ["Con preposición, el artículo se funde como siempre: *al quale*, "
            "*della quale*, *nei quali*, *sulle quali*. Y es la forma natural "
            "detrás de preposiciones largas: *senza la quale* (sin la cual), "
@@ -756,7 +787,13 @@ LESSONS = {
        "El verbo va en singular.",
   "ex": [["*Chi* cerca trova.", "El que busca encuentra."],
          ["*Chi* ha finito può uscire.", "El que terminó puede salir."],
-         ["*Chi* dorme non piglia pesci.", "Camarón que se duerme se lo lleva la corriente."]]},
+         ["*Chi* dorme non piglia pesci.", "Camarón que se duerme se lo lleva la corriente."]],
+  "warn": "Aunque pienses en varios, verbo en singular: *chi vuole venire "
+          "alzi la mano*, nunca «chi vogliono». Y *chi* sin antecedente, "
+          "nunca *che*: *chi ha finito*.",
+  "more": ["*chi* también es objeto, sin la «a» del castellano: *aiuto chi "
+           "ne ha bisogno* (ayudo a los que lo necesitan), *ringrazio chi mi "
+           "ha aiutato*."]},
 
  {"h": "«Lo que»: quello che, il che",
   "r": "«Lo que» = *quello che*, *ciò che*, *quel che*; «todo lo que» = "
@@ -775,7 +812,34 @@ LESSONS = {
                      ["il che", "lo que, lo cual (una frase entera)", "È tardi, il che mi preoccupa."]]},
   "tip": "«El que, la que» que elige entre varios es *quello / quella che*: "
          "*Quale piatto? — Quello che preferisci*. Si no hay antecedente, "
-         "*chi*: *chi arriva tardi non entra*."},
+         "*chi*: *chi arriva tardi non entra*.",
+  "more": ["*quanto* también es «todo lo que», más culto: *ti ho detto "
+           "quanto so* (te dije todo lo que sé), *tutto quanto* (todo, "
+           "absolutamente), *per quanto mi riguarda* (en lo que a mí "
+           "respecta)."]},
+
+ {"h": "Con comas o sin comas",
+  "q": [{"prompt": "«Gli studenti, che hanno studiato, hanno passato l'esame.» ¿Qué dice?", "answer": "Todos estudiaron y todos aprobaron.", "options": ["Todos estudiaron y todos aprobaron.", "Aprobaron solo los que estudiaron.", "Nadie aprobó."]},
+        {"prompt": "¿Cuál está bien?", "answer": "La ragazza che parla è mia sorella.", "options": ["La ragazza che parla è mia sorella.", "La ragazza la quale parla è mia sorella.", "La ragazza cui parla è mia sorella."]}],
+  "r": "Sin comas, la relativa **elige** (solo esos); con comas, **agrega** "
+       "un dato sobre todos. Igual que en castellano.",
+  "ex": [["Gli studenti *che hanno studiato* hanno passato l'esame.", "Los estudiantes que estudiaron aprobaron (solo esos)."],
+         ["Gli studenti*, che hanno studiato,* hanno passato l'esame.", "Los estudiantes, que estudiaron, aprobaron (todos)."],
+         ["Mia sorella*, la quale vive a Roma,* arriva domani.", "Mi hermana, que vive en Roma, llega mañana."]],
+  "warn": "*il quale* como sujeto solo va **entre comas**: *mia sorella, la "
+          "quale vive a Roma*. Sin comas, *che*: *la ragazza che parla*, "
+          "no «la ragazza la quale parla»."},
+
+ {"h": "El primero en llegar: a + infinitivo",
+  "q": [{"prompt": "Elegí la que va", "stem": "È stato il primo ___ arrivare.", "answer": "ad", "options": ["ad", "in", "di"]},
+        {"prompt": "¿Cuál está bien? «Es la única que lo sabe.»", "answer": "È l'unica a saperlo.", "options": ["È l'unica a saperlo.", "È l'unica in saperlo.", "È l'unica di saperlo."]}],
+  "r": "Tras *il primo*, *l'ultimo*, *l'unico*, la relativa se acorta: "
+       "**a + infinitivo** (*ad* ante vocal).",
+  "ex": [["È stato *il primo ad arrivare*.", "Fue el primero en llegar."],
+         ["Sono stata *l'ultima a uscire*.", "Fui la última en salir."],
+         ["È *l'unico a sapere* la verità.", "Es el único que sabe la verdad."]],
+  "warn": "El castellano dice «el primero **en** llegar»; el italiano, *a*: "
+          "*il primo ad arrivare*, nunca «il primo in arrivare»."},
 ]},
 
 35: {
@@ -789,6 +853,9 @@ LESSONS = {
   "ex": [["Il libro *è stato scritto* da Calvino.", "El libro fue escrito por Calvino."],
          ["Le lettere *sono state spedite* ieri.", "Las cartas fueron enviadas ayer."],
          ["La casa *sarà venduta*.", "La casa va a ser vendida."]],
+  "warn": "El agente va con *da*, nunca *per*: *scritto da Manzoni*. Y en "
+          "compuesto concuerdan los dos participios: *la lettera è stata "
+          "scritta*.",
   "tip": "*è letto*, *era letto*, *è stato letto*, *sarà letto*, *sarebbe "
          "stato letto*, *che sia letto*: siempre *essere* conjugado + "
          "participio.",
@@ -825,6 +892,19 @@ LESSONS = {
   "tip": "*va detto*, *va notato*, *va ricordato* son conectores de texto "
          "argumentativo de nivel C1: «hay que decir que», «cabe recordar "
          "que»."},
+
+ {"h": "andare en pasado: lo que se perdió",
+  "q": [{"prompt": "¿Qué quiere decir? «La lettera è andata persa.»", "answer": "La carta se perdió.", "options": ["La carta se perdió.", "Hay que perder la carta.", "La carta se fue."]}, {"prompt": "Elegí la que va: «Se extraviaron los documentos.»", "stem": "I documenti sono ___ smarriti.", "answer": "andati", "options": ["andati", "venuti", "andato"]}],
+  "r": "En pasado, *andare* + *perso*, *distrutto* o *smarrito* no es "
+       "obligación: dice que algo **se perdió o se destruyó**.",
+  "ex": [["La lettera *è andata persa*.", "La carta se perdió."],
+         ["Il raccolto *è andato distrutto*.", "La cosecha quedó destruida."],
+         ["I documenti *sono andati smarriti*.", "Los documentos se extraviaron."]],
+  "warn": "Solo con verbos de pérdida o destrucción, y con *essere*. *Va "
+          "fatto* (presente, otro verbo) es obligación; *è andato perso*, "
+          "pérdida.",
+  "tip": "«Se me perdió la llave»: *mi è andata persa la chiave*, o más "
+         "simple, *ho perso la chiave*."},
 
  {"h": "Cuándo conviene evitarla",
   "q": [{"prompt": "¿Cuál es lo más natural? «Dicen que va a llover.»", "answer": "Dicono che pioverà.", "options": ["Dicono che pioverà.", "È detto che pioverà.", "Viene detto che pioverà."]}],
@@ -1090,13 +1170,18 @@ LESSONS = {
        "verbos de duda, el italiano cuidado prefiere **congiuntivo**.",
   "ex": [["«Dove abiti?» → Mi chiese dove *abitassi*.", "Me preguntó dónde vivía."],
          ["«Vieni?» → Mi chiese *se venissi*.", "Me preguntó si iba."],
-         ["Non so *se sia* vero.", "No sé si es cierto."]],
+         ["Non so *se sia* vero.", "No sé si es cierto."],
+         ["*Chissà* se domani piove.", "Quién sabe si mañana llueve."]],
   "warn": "Este *se* no es el hipotético: es «si» de pregunta y admite "
           "condizionale. *Mi chiedo se sarebbe d'accordo* es perfectamente "
           "correcto.",
   "tip": "En el habla también se oye el indicativo: *mi chiese dove "
          "andavo*. Vale; el congiuntivo (*dove andassi*) es el registro "
-         "cuidado."},
+         "cuidado.",
+  "more": ["Al hablar, la pregunta indirecta más común empieza con *chissà* "
+           "(«quién sabe», «me pregunto»), sin otro verbo antes: *chissà se "
+           "domani piove*, *chissà dove l'avrà messo* (¿dónde lo habrá "
+           "puesto?), *chissà chi era*. Va con indicativo o futuro."]},
 
  {"h": "Los verbos para reportar",
   "r": "**No repitas *dire***: el C1 se nota en la variedad del verbo que "

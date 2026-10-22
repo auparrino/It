@@ -22,7 +22,7 @@ WEEK = {
         "parts": [
             {"h": "Cómo se arma el Perfekt", "blocks": [0, 1]},
             {"h": "Participios irregulares", "blocks": [2, 3]},
-            {"h": "Separables, sin ge- y el fin de semana", "blocks": [4, 5, 6]},
+            {"h": "Separables, sin ge- y el fin de semana", "blocks": [4, 5, 6, 7]},
         ],
         "blocks": [
             {
@@ -179,6 +179,26 @@ WEEK = {
                     q("«Ayer no trabajé.»", "Gestern habe ich nicht gearbeitet.", ["Gestern habe ich nicht gearbeitet.", "Gestern habe ich gearbeitet nicht.", "Gestern ich habe nicht gearbeitet."]),
                 ],
             },
+            {
+                "h": "zuerst, dann, danach: contar en orden",
+                "r": "*zuerst* (primero), *dann* (después, luego), *danach* (después de eso) y *später* (más tarde) son **adverbios**: cuando van adelante **ocupan la posición 1**, así que el verbo va enseguida y el sujeto, detrás. No son como *und* o *aber*, que no cuentan.",
+                "table": {"head": ["Pos. 1", "Pos. 2", "Resto"], "rows": [
+                    ["Zuerst", "habe", "ich gefrühstückt."],
+                    ["Dann", "habe", "ich die Wohnung aufgeräumt."],
+                    ["Danach", "sind", "wir ins Kino gegangen."],
+                    ["Später", "haben", "wir gegrillt."],
+                ]},
+                "ex": [
+                    ["Zuerst *habe* ich eingekauft, dann *habe* ich gekocht.", "Primero hice las compras, después cociné."],
+                    ["Ich habe gegessen und *dann* ferngesehen.", "Comí y después miré tele."],
+                ],
+                "warn": "En castellano decimos «después yo cociné»; en alemán «Dann ich habe gekocht» está mal. Después de *dann/danach/zuerst* va el **verbo**: *Dann habe ich gekocht*. Ojo: *und dann* también: *…, und dann habe ich gekocht* (*und* no cuenta, *dann* sí).",
+                "tip": "*dann* (después) no es *denn* (porque), que vas a ver más adelante.",
+                "q": [
+                    q("¿Cuál es correcta?", "Danach habe ich ferngesehen.", ["Danach habe ich ferngesehen.", "Danach ich habe ferngesehen.", "Danach ich ferngesehen habe."]),
+                    q("Completá: *Zuerst ___ wir gefrühstückt.*", "haben", ["haben", "wir haben", "habe"]),
+                ],
+            },
         ],
     },
     "vocab": [
@@ -248,5 +268,14 @@ WEEK = {
         tr(2, "¿Llamaste a Paul?", "Hast du Paul angerufen?", note="*anrufen* → *angerufen*."),
         tr(2, "La pasamos muy bien.", "Wir haben viel Spaß gehabt.", ["Wir haben viel Spaß gehabt.", "Wir haben viel Spass gehabt.", "Wir hatten viel Spaß.", "Wir hatten viel Spass."], "*Spaß haben* = pasarla bien → *Spaß gehabt*."),
         ty(2, "Escribí el participio.", "fotografieren →", "fotografiert", note="Los verbos en *-ieren* no llevan *ge-*."),
+        # parte 2 — zuerst, dann, danach
+        ch(2, "Elegí el orden correcto.", "(Después cociné.)", "Dann habe ich gekocht.", ["Dann habe ich gekocht.", "Dann ich habe gekocht.", "Dann ich gekocht habe."], "*dann* ocupa la posición 1: el verbo va enseguida y el sujeto detrás."),
+        ch(2, "Elegí el orden correcto.", "(Primero desayunamos.)", "Zuerst haben wir gefrühstückt.", ["Zuerst haben wir gefrühstückt.", "Zuerst wir haben gefrühstückt.", "Wir zuerst haben gefrühstückt."], "*zuerst* adelante → *haben wir*."),
+        ch(2, "Encontrá el error.", "¿Qué oración tiene un error?", "Ich habe eingekauft und dann ich habe gekocht.", ["Ich habe eingekauft und dann ich habe gekocht.", "Ich habe eingekauft und dann habe ich gekocht.", "Ich habe eingekauft und dann gekocht."], "*und* no cuenta, pero *dann* sí: *und dann habe ich gekocht*."),
+        cz(2, "Escribí el auxiliar.", "Danach ___ wir ins Kino gegangen.", "sind", note="*gehen* va con *sein*; *danach* en la posición 1 → *sind wir*."),
+        tr(2, "Primero dormí mucho, después llamé a Lisa.", "Zuerst habe ich lange geschlafen, dann habe ich Lisa angerufen.", ["Zuerst habe ich lange geschlafen, dann habe ich Lisa angerufen.", "Zuerst habe ich viel geschlafen, dann habe ich Lisa angerufen.", "Zuerst habe ich lange geschlafen, danach habe ich Lisa angerufen.", "Zuerst habe ich viel geschlafen, danach habe ich Lisa angerufen.", "Zuerst habe ich lange geschlafen und dann habe ich Lisa angerufen.", "Zuerst habe ich lange geschlafen und dann Lisa angerufen."], "*zuerst* y *dann* ocupan la posición 1: el verbo va enseguida, no «dann ich habe»."),
+        # parte 2 — repaso: plural
+        cz(2, "Escribí el plural. (der Ausflug, ¨-e)", "Im Sommer haben wir zwei ___ gemacht.", "Ausflüge", ["Ausflüge", "Ausfluege"], "*der Ausflug, ¨-e* → *die Ausflüge*, como *der Zug → die Züge*. " + MAY),
+        cz(2, "Escribí el plural. (das Konzert, -e)", "Am Wochenende hat es drei ___ gegeben.", "Konzerte", note="*das Konzert, -e* → *die Konzerte*. La *-s* («Konzerts») es del castellano. " + MAY),
     ],
 }

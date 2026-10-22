@@ -328,7 +328,10 @@ LESSONS = {
          ["Non *sono in grado di* fornire altri dettagli.", "No estoy en condiciones de dar más detalles."],
          ["*In attesa di* Suo riscontro, porgo *distinti saluti*.", "En espera de su respuesta, saludo atentamente."]],
   "table": {"head": ["Fórmula", "Función", "En castellano"],
-            "rows": [["con la presente", "abrir el motivo", "por la presente"],
+            "rows": [["Gentile Signora / Gentile Dott.ssa Rossi", "saludo de apertura (el más usado)", "Estimada señora / doctora Rossi"],
+                     ["Egregio Dottore / Egregio Avvocato", "apertura muy formal, a un hombre", "Distinguido doctor / abogado"],
+                     ["Spettabile Ditta (Spett.le)", "apertura a una empresa o una oficina", "Señores (de la empresa)"],
+                     ["con la presente", "abrir el motivo", "por la presente"],
                      ["in allegato", "señalar el adjunto", "adjunto"],
                      ["essere in grado di", "capacidad", "estar en condiciones de"],
                      ["avere la possibilità di", "posibilidad", "tener la posibilidad de"],
@@ -350,7 +353,10 @@ LESSONS = {
          ["*Sul far* del giorno.", "Al despuntar el día."],
          ["C'era *un continuo andare e venire*.", "Había un ir y venir constante."]],
   "more": ["Es más frecuente que en castellano y suena literario pero "
-           "natural."]},
+           "natural."],
+  "tip": "Lleva complementos y pronombres como un sustantivo: *il suo "
+         "continuo lamentarsi* (sus quejas constantes). En castellano "
+         "suele quedar mejor un sustantivo."},
 
  {"h": "El infinitivo compuesto",
   "r": "*avere* o *essere* + participio. **Obligatorio después de *dopo***, "
@@ -415,6 +421,9 @@ LESSONS = {
          ["Ho capito il problema *facendo* un disegno.", "Entendí el problema haciendo un dibujo."],
          ["*Pur sapendolo*, non ha detto niente.", "Aun sabiéndolo, no dijo nada."]],
   "tip": "*pur* + gerundio = «aunque»: *pur sapendolo* = aunque lo sabía.",
+  "warn": "El gerundio no cuenta algo **posterior**: «se recibió en 2010, "
+          "consiguiendo trabajo en 2012» va con *e*: *si è laureato nel "
+          "2010 e ha trovato lavoro nel 2012*.",
   "table": {"head": ["Valor", "Castellano", "Ejemplo"],
             "rows": [["modo (cómo)", "gerundio, «-ndo»", "Sbagliando s'impara."],
                      ["causa (por qué)", "como, ya que", "Essendo stanco, resto a casa."],
@@ -648,7 +657,12 @@ LESSONS = {
          ["Una fetta di focacc*ia*.", "Una porción de focaccia (un pan)."]],
   "more": ["Otros: *il burrone* (el barranco), *il montone* (el carnero), "
            "*il mattone* (el ladrillo, no un *matto* grande). Ante la duda, "
-           "buscalos en el diccionario como palabra propia."]},
+           "buscalos en el diccionario como palabra propia.",
+           "Otros nacieron alterados y se volvieron palabra propia: *il portone* "
+           "(de *porta*), *il pallone* (la pelota de fútbol, de *palla*), *il "
+           "fumetto* (la historieta, de *fumo*: el globito de humo). *-astro* "
+           "con colores y sabores es «-uzco» y poco agradable: *giallastro*, "
+           "*dolciastro*; con personas, despectivo: *poetastro*."]},
 
  {"h": "Se aplica a casi todo",
   "r": "Los sufijos van con sustantivos, con adjetivos (*carino, piccolino*) "
@@ -669,6 +683,7 @@ LESSONS = {
   "table": {"head": ["Prefijo", "Sentido", "Ejemplo"],
             "rows": [["ri-", "de nuevo", "rifare (rehacer), rivedere (volver a ver)"],
                      ["s-", "negación o contrario", "scontento (descontento), sfortuna (mala suerte)"],
+                     ["s- (con verbos)", "sacar, quitar; o reforzar", "sbucciare (pelar), scongelare (descongelar), smontare (desarmar), sbattere (golpear)"],
                      ["in- / im- / dis-", "negación", "incapace, impossibile, disonesto"],
                      ["pre-", "antes", "prevedere (prever), prenotare (reservar)"],
                      ["stra- / super- / iper-", "exceso", "strapieno (llenísimo), ipersensibile"],
@@ -873,7 +888,12 @@ LESSONS = {
   "ex": [["*Il pane lo* compro io.", "El pan lo compro yo."],
          ["*A Marco* non *gli* ho detto niente.", "A Marco no le dije nada."],
          ["*Di soldi* non *ne* ho.", "Plata no tengo."],
-         ["*Questo film l'*ho già visto.", "Esta película ya la vi."]],
+         ["*Questo film l'*ho già visto.", "Esta película ya la vi."],
+         ["*Che sia bravo*, lo sanno tutti.", "Que es bueno, lo saben todos."]],
+  "more": ["Una frase entera con *che* también puede ir adelante, como tema. "
+           "Entonces lleva **congiuntivo**, aunque cuente un hecho: *che sia "
+           "bravo, lo sanno tutti*; *che fosse stanco, si vedeva*. El "
+           "castellano ahí pone indicativo («que estaba cansado, se notaba»)."],
   "tip": "El rioplatense hace lo mismo («el pan lo compro yo»): te sale "
          "gratis. Usala, sin ella el italiano suena a libro de texto.",
   "warn": "El objeto directo va sin *a*: *Marco lo conosco bene* («a Marco "
@@ -898,7 +918,11 @@ LESSONS = {
          "(*a* + infinitivo). Evita el *che* y suena muy natural.",
   "more": ["Pariente cercano: *c'è* + persona + *che*, para contar una "
            "novedad: *c'è tuo fratello che ti cerca* (te está buscando tu "
-           "hermano), *c'è un signore che vuole parlarti*."]},
+           "hermano), *c'è un signore che vuole parlarti*.",
+           "Pseudoescindida: *quello che* (o *ciò che*) + verbo + *è*: *quello "
+           "che voglio è riposare* (lo que quiero es descansar), *ciò che mi "
+           "preoccupa è il prezzo*. Ojo con «lo que pasa es que»: *il fatto è "
+           "che*, nunca «quello che passa»."]},
 
  {"h": "Sujeto después del verbo",
   "r": "Con intransitivos y verbos de acontecimiento, el sujeto nuevo va "
@@ -918,6 +942,21 @@ LESSONS = {
          ["*Di lavorare* non ha nessuna voglia.", "Ganas de trabajar no tiene ninguna."]],
   "warn": "Son órdenes marcados: usalos para enfatizar, no por defecto. Un "
           "texto entero invertido suena artificial."},
+
+ {"h": "Congiuntivo sin verbo principal",
+  "q": [{"prompt": "¿Qué quiere decir? «Che sia già partito?»", "answer": "¿Se habrá ido ya?", "options": ["¿Se habrá ido ya?", "¡Que se vaya ya!", "Ya se fue."]}, {"prompt": "¿Qué quiere decir? «Che entri pure!»", "answer": "Que pase nomás.", "options": ["Que pase nomás.", "¿Habrá entrado?", "Entró igual."]}],
+  "r": "*che* + congiuntivo sin principal: orden a un tercero (*che "
+       "entri*), duda (*che sia partito?*) o fórmula fija (*sia chiaro*).",
+  "ex": [["*Che entri* pure!", "¡Que pase nomás!"],
+         ["*Che aspetti*: sono occupato.", "Que espere: estoy ocupado."],
+         ["*Che sia* già *partito*?", "¿Se habrá ido ya?"],
+         ["*Sia chiaro*: domani non si lavora.", "Que quede claro: mañana no se trabaja."],
+         ["*Viva* gli sposi!", "¡Vivan los novios!"]],
+  "warn": "«¿Se habrá ido?» tiene dos versiones: *sarà partito?* (futuro, "
+          "como en castellano) o *che sia partito?*, más dubitativa. El "
+          "castellano nunca usa el subjuntivo ahí.",
+  "tip": "Fórmulas fijas: *Che Dio ce la mandi buona!* (¡que Dios nos "
+         "ayude!), *Non sia mai!* (¡Dios no lo permita!), *Così sia*."},
 
  {"h": "Tu, Lei, voi: cambiar de registro en la misma charla",
   "r": "Se empieza con *Lei* y se pasa al *tu* cuando **lo propone** el mayor o "
@@ -945,6 +984,8 @@ LESSONS = {
                      ["a me mi piace", "a me piace / mi piace", "Mi piace."],
                      ["ci ho fame", "ho fame", "Ho fame."],
                      ["che polivalente: la casa che ci abito", "in cui abito", "La casa in cui abito."],
+                     ["il giorno che sei arrivato", "vale también escrito (= in cui)", "Il giorno in cui / che sei arrivato."],
+                     ["sbrigati, che è tardi (che causal)", "perché, ché", "Sbrigati, perché è tardi."],
                      ["mo', tipo / cioè (como muletilla)", "adesso, per esempio, — (sacarlo)", "Adesso."]]},
   "ex": [["A Maria *le* ho detto di venire.", "A María le dije que viniera. En la charla se oye «gli ho detto» también para ella."],
          ["*A me piace* il mare.", "A mí me gusta el mar. En la charla: «a me mi piace»."],
@@ -952,6 +993,41 @@ LESSONS = {
   "warn": "En el examen y en un mail formal estos usos restan puntos; en la charla, corregirlos suena pedante. *Cioè* = «es decir» vale siempre; lo coloquial es usarlo de muletilla.",
   "tip": "*Lui*, *lei* y *loro* como sujeto ya son estándar: *egli* y *ella* solo "
          "aparecen en textos viejos o muy formales."},
+
+ {"h": "Préstamos: il weekend, la mail, il curriculum, ad hoc",
+  "r": "Los préstamos del inglés y del latín quedan **invariables**: *i weekend*, *i computer*. El género suele copiar el de la palabra italiana.",
+  "table": {"head": ["Préstamo", "Género y plural", "Castellano"],
+            "rows": [["il weekend", "masc.; i weekend (= il fine settimana)", "el fin de semana"],
+                     ["il computer", "masc.; i computer", "la computadora"],
+                     ["la mail, l'email", "fem. (como la posta); le mail", "el mail"],
+                     ["il curriculum", "masc.; i curriculum", "el currículum"],
+                     ["ad hoc", "invariable", "a medida, para eso"],
+                     ["una tantum", "invariable", "por única vez"],
+                     ["pro capite", "invariable", "per cápita"]]},
+  "ex": [["Ho mandato *il curriculum* a tre aziende.", "Mandé el currículum a tres empresas."],
+         ["Ti mando *una mail* stasera.", "Te mando un mail esta noche."],
+         ["Ho comprato due *computer* nuovi.", "Compré dos computadoras nuevas."],
+         ["Hanno creato una commissione *ad hoc*.", "Crearon una comisión especial."],
+         ["Il reddito *pro capite* è salito.", "El ingreso per cápita subió."]],
+  "warn": "Nada de «i computers» ni «i weekends»: en italiano el préstamo no lleva *-s*. Y *la mail* es femenina aunque digas «el mail».",
+  "q": [{"prompt": "«Compré dos computadoras.»", "stem": "Ho comprato due ___.", "answer": "computer", "options": ["computer", "computers", "computeri"]},
+        {"prompt": "«Te mando un mail.»", "stem": "Ti mando ___ mail.", "answer": "una", "options": ["una", "un", "uno"]}]},
+
+ {"h": "Tiempos y registro en el relato",
+  "r": "Biografías, efemérides y crónicas cuentan el pasado en **presente**: "
+       "*Dante nasce a Firenze nel 1265*. El castellano hace lo mismo.",
+  "ex": [["Dante *nasce* a Firenze nel 1265 e *muore* a Ravenna nel 1321.", "Dante nace en Florencia en 1265 y muere en Rávena en 1321."],
+         ["Nel 1860 Garibaldi *parte* da Quarto con mille uomini.", "En 1860 Garibaldi parte de Quarto con mil hombres."],
+         ["Il giorno dopo, il ministro *si dimetteva*.", "Al día siguiente, el ministro renunció (crónica en imperfetto)."],
+         ["Ieri sono in fila alla posta e a un certo punto *arriva* un tizio che *passa* davanti a tutti.", "Ayer estoy en la fila del correo y de repente llega un tipo que se cuela adelante de todos."]],
+  "warn": "El *imperfetto* de la crónica (*si dimetteva*) cuenta un hecho "
+          "puntual, no un hábito ni un fondo. Reconocelo al leer; al escribir, "
+          "*si è dimesso* o *si dimise*.",
+  "tip": "Contando algo oral, el presente en el momento clave (*a un certo "
+         "punto arriva lui…*) da viveza. En un texto, elegí un tiempo: no "
+         "saltes de *nasce* a *morì*.",
+  "q": [{"prompt": "En una biografía: «Leopardi nasce a Recanati nel 1798.» ¿Por qué presente?", "answer": "Es el presente histórico de las biografías.", "options": ["Es el presente histórico de las biografías.", "Es un error: debería ir en passato remoto.", "Habla de algo que pasa hoy."]},
+        {"prompt": "En un diario: «Alle 7 il treno lasciava Milano; alle 7.10 deragliava.» ¿Qué cuenta el imperfetto?", "answer": "Hechos puntuales, contados como en una película.", "options": ["Hechos puntuales, contados como en una película.", "Algo que el tren hacía todos los días.", "Un pedido cortés."]}]},
 ]},
 
 49: {
@@ -971,6 +1047,7 @@ LESSONS = {
             "rows": [["añadir", "inoltre (además), per di più (encima), altresì (asimismo), nonché (así como, y además), non solo... ma anche", "Inoltre, i costi sono aumentati."],
                      ["sumar dos", "sia... sia / sia... che (tanto... como), come pure (y también), né... né (ni... ni)", "Parla sia inglese sia francese."],
                      ["oponer", "tuttavia (sin embargo), ciononostante (pese a eso), per contro / d'altro canto (en cambio, por otro lado)", "Tuttavia, il problema resta."],
+                     ["reforzar con un dato sabido", "del resto, d'altronde (después de todo, por otra parte)", "Non mi stupisce: del resto, si allenava ogni giorno."],
                      ["conceder", "certo... tuttavia (es cierto que... pero), se è vero che... è altrettanto vero che", "Certo, è caro; tuttavia conviene."],
                      ["excluir", "tranne, salvo (excepto), a parte (aparte de)", "Mangio tutto tranne il pesce."],
                      ["causa", "in quanto (ya que), poiché, dal momento che (dado que), a causa di (a causa de)", "Non è venuto in quanto era malato."],
@@ -1075,7 +1152,29 @@ LESSONS = {
                      ["a fin de que entiendas", "per che tu capisca", "affinché tu capisca"],
                      ["antes de que llegue", "prima di che arrivi", "prima che arrivi"],
                      ["gracias a que", "grazie a che", "grazie al fatto che"]]},
-  "warn": "*Benché* va con congiuntivo (o condicional: *benché preferirei restare*); *anche se*, con indicativo, salvo hipótesis: *anche se fosse vero*."},
+  "warn": "*Benché* va con congiuntivo (o condicional: *benché preferirei restare*); *anche se*, con indicativo, salvo hipótesis: *anche se fosse vero*.",
+  "more": ["*per quanto* + congiuntivo concede = «por más que»: *per quanto "
+           "ci provi, non ci riesco*; *per quanto sia bravo, sbaglia anche "
+           "lui*. No lo confundas con *per quanto ne so* (por lo que sé) ni "
+           "con *per quanto riguarda* (en cuanto a)."]},
+
+ {"h": "Locuciones del estilo nominal",
+  "q": [{"prompt": "¿Cuál está bien? «Tras el accidente, la ruta está cortada.»", "answer": "A seguito dell'incidente, la strada è chiusa.", "options": ["A seguito dell'incidente, la strada è chiusa.", "A seguito di che è successo l'incidente, la strada è chiusa.", "Al seguire l'incidente, la strada è chiusa."]},
+        {"prompt": "¿Qué quiere decir «in vista delle elezioni»?", "answer": "de cara a las elecciones", "options": ["de cara a las elecciones", "a la vista de todos los votantes", "después de las elecciones"]}],
+  "r": "Prensa y oficinas usan **preposición + sustantivo** donde el "
+       "castellano hablado pone una oración: *a seguito dell'incidente*.",
+  "ex": [["*A seguito dell'*incidente, la strada è chiusa.", "Tras el accidente, la ruta está cortada."],
+         ["*In vista delle* elezioni, il governo promette tutto.", "De cara a las elecciones, el gobierno promete todo."],
+         ["*In occasione della* festa, i musei restano aperti.", "Con motivo de la fiesta, los museos quedan abiertos."]],
+  "table": {"head": ["Locución", "Castellano", "Ejemplo"],
+            "rows": [["a seguito di / in seguito a", "tras, como consecuencia de", "a seguito dell'incidente"],
+                     ["in vista di", "de cara a, con vistas a", "in vista delle elezioni"],
+                     ["ai fini di", "a efectos de", "ai fini del calcolo"],
+                     ["in occasione di", "con motivo de", "in occasione della festa"],
+                     ["in base a", "según, sobre la base de", "in base ai dati"]]},
+  "warn": "Cambiá la oración entera por un sustantivo: «después de que pasó "
+          "el accidente» → *a seguito dell'incidente*, no «a seguito di che "
+          "è successo»."},
 ]},
 
 50: {
@@ -1332,8 +1431,8 @@ LESSONS = {
   "table": {"head": ["Tipo", "Estructura", "Ejemplo"],
             "rows": [["real", "se + indicativo, indicativo", "Se piove, resto a casa."],
                      ["posible", "se + congiuntivo imperfetto, condizionale presente", "Se avessi tempo, verrei."],
-                     ["irreal pasado", "se + trapassato, condizionale passato", "Se avessi saputo, sarei venuto."],
-                     ["mixto", "se + trapassato, condizionale presente", "Se avessi studiato, ora sarei laureato."],
+                     ["irreal pasado", "se + congiuntivo trapassato, condizionale passato", "Se avessi saputo, sarei venuto."],
+                     ["mixto", "se + congiuntivo trapassato, condizionale presente", "Se avessi studiato, ora sarei laureato."],
                      ["concesión", "sebbene, benché, nonostante + congiuntivo", "Benché sia tardi, resto."]]},
   "warn": "Después de *se* hipotético va congiuntivo, nunca condicional: «se avrei tempo» no existe."},
 ]},

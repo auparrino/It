@@ -166,6 +166,7 @@ WEEK = {
                 ],
                 "warn": "*ein Angestellter*, pero *der Angestellte*: la terminación depende del artículo, igual que en *ein guter / der gute*. Y en plural sin artículo: *zwei Verletzte*, no «Verletzten». Pero *alle* funciona como *die*: *alle Reisenden*.",
                 "tip": "*die Studierenden* (de *studieren*) se usa mucho en las universidades porque incluye a hombres y mujeres sin decir *Studentinnen und Studenten*.",
+                "more": ["Es lo mismo que *der Deutsche / ein Deutscher* y *etwas Neues* de la semana 19: también *das Gesagte* (lo dicho), *etwas Unerwartetes* (algo inesperado)."],
                 "q": [
                     q("Completá: *Er ist ein ___.* (viajero)", "Reisender", ["Reisender", "Reisende", "Reisenden"]),
                     q("Completá: *Alle ___ müssen aussteigen.*", "Reisenden", ["Reisenden", "Reisende", "Reisender"]),
@@ -276,5 +277,15 @@ WEEK = {
         tr(2, "El cuadro muestra a una mujer leyendo.", "Das Bild zeigt eine lesende Frau.", ["Das Bild zeigt eine lesende Frau.", "Das Gemälde zeigt eine lesende Frau.", "Das Bild stellt eine lesende Frau dar.", "Das Gemälde stellt eine lesende Frau dar."], "Partizip I: la mujer lee mientras la vemos."),
         ty(2, "Escribí en alemán, con artículo.", "«el cuadro (la pintura)»", "das Gemälde", note="*das Gemälde*, de *malen* (pintar). " + MAY),
         li(2, "Vordergrund", ["Vordergrund", "Hintergrund", "Vorgarten"], "*der Vordergrund* = el primer plano."),
+        # parte 2 — repaso: sustantivados y declinación del adjetivo (débil, mixta, sin artículo)
+        cz(2, "Escribí *bekannt* como sustantivo.", "Gestern habe ich einen alten ___ getroffen.", "Bekannten", note="Se declina como adjetivo: acusativo masculino tras *einen alten* → *Bekannten* (semana 19). " + MAY),
+        cz(2, "Escribí *unerwartet* como sustantivo.", "Auf der Reise ist etwas ___ passiert.", "Unerwartetes", note="*etwas* + participio con mayúscula y *-es*: *etwas Unerwartetes* (algo inesperado). " + MAY),
+        ch(2, "Elegí la terminación.", "Das Museum zeigt ein berühmt___ Gemälde aus dem 17. Jahrhundert.", "berühmtes", ["berühmtes", "berühmte", "berühmten"], "Acusativo neutro con *ein*: *-es*."),
+        ch(2, "Elegí la terminación.", "Im Vordergrund sieht man den alt___ Hafen.", "alten", ["alten", "alter", "alte"], "Acusativo masculino tras *den*: *-en*."),
+        cz(2, "Escribí *frisch* con su terminación.", "Auf dem Bild sieht man einen Tisch mit ___ Obst.", "frischem", note="Sin artículo, dativo neutro (*mit dem*): *-em*, el artículo «escondido» en el adjetivo."),
+        # parte 2 — repaso: wo o wohin (semana 14)
+        ch(2, "Elegí.", "Häng das nasse Handtuch bitte ___ Balkon!", "auf den", ["auf den", "auf dem", "am"], "*hängen* con objeto = colgar algo: destino, acusativo: *auf den Balkon*."),
+        cz(2, "Escribí el artículo.", "Das frisch gewaschene Handtuch hängt auf ___ Balkon. (der Balkon)", "dem", note="*hängen* sin objeto = estar colgado: dónde, dativo: *auf dem Balkon*."),
+        tr(2, "Las llaves están en el cajón.", "Die Schlüssel liegen in der Schublade.", ["Die Schlüssel liegen in der Schublade.", "Die Schlüssel sind in der Schublade."], "Sin movimiento: *in der Schublade* (dativo), con *liegen*."),
     ],
 }

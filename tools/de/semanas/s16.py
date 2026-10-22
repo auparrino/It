@@ -136,7 +136,14 @@ WEEK = {
                     ["Ich nehme *den billigeren* Pullover.", "Me llevo el pulóver más barato (de los dos)."],
                     ["Das ist *das beste* Restaurant hier.", "Este es el mejor restaurante de acá."],
                 ],
+                "table": {"head": ["Adjetivo", "Comparativo + terminación", "Superlativo + terminación"], "rows": [
+                    ["groß", "die größere Wohnung", "die größte Wohnung"],
+                    ["billig", "mit dem billigeren Ticket", "mit dem billigsten Ticket"],
+                    ["schön", "in der schöneren Stadt", "in der schönsten Stadt"],
+                    ["gut", "eine bessere Idee", "die beste Idee"],
+                ]},
                 "warn": "*am* va solo cuando el superlativo está **solo**, después del verbo: *Diese Stadt ist am schönsten* / *Das ist die schönste Stadt*. «die am schönsten Stadt» está mal.",
+                "more": ["El comparativo delante del sustantivo lleva **dos** colas: la del comparativo (*-er*) y la del caso (*-e / -en*): *der billig-er-e Pullover, mit dem billig-er-en Ticket*. «el más barato de los dos» también es comparativo: *der billigere*. Con *ein* se usan las terminaciones de la semana 19: *ein größeres Auto*."],
                 "q": [
                     q("Completá: *Der Juli ist der ___ Monat.* (heiß)", "heißeste", ["heißeste", "heißesten", "am heißesten"]),
                     q("Completá: *Wir nehmen das billig___ Zimmer.* (el más barato)", "-ste", ["-ste", "-sten", "-er"]),
@@ -239,6 +246,12 @@ WEEK = {
         tr(1, "Prefiero ir en tren.", "Ich fahre lieber mit dem Zug.", ["Ich fahre lieber mit dem Zug.", "Ich fahre lieber Zug."], "Preferir: verbo + *lieber*."),
         tr(1, "Esta es la mejor pizza.", "Das ist die beste Pizza.", ["Das ist die beste Pizza.", "Dies ist die beste Pizza."], "Delante del sustantivo: *die beste*."),
         ty(1, "Completá la serie de *viel*.", "viel – ___ – am meisten", "mehr", note="*viel – mehr – am meisten*."),
+        # parte 1 — comparativo y superlativo delante del sustantivo
+        cz(1, "Escribí el comparativo de *groß* con su terminación.", "Wir suchen eine ___ Wohnung.", "größere", ["größere", "groessere"], "Dos colas: comparativo *größer-* + femenino acusativo *-e*: *eine größere*. «eine mehr große» es el calco de «más grande»."),
+        cz(1, "Escribí el superlativo de *schön* con su terminación.", "Er wohnt in der ___ Stadt der Welt.", "schönsten", note="*in der* + dativo femenino → *-en*: *in der schönsten*. Sin *am* delante del sustantivo."),
+        cz(1, "Escribí el comparativo de *billig* con su terminación.", "Ich fahre mit dem ___ Ticket.", "billigeren", note="Comparativo *billiger-* + dativo *-en*: *mit dem billigeren Ticket*."),
+        ch(1, "Elegí.", "Ich habe ___ Idee!", "eine bessere", ["eine bessere", "eine mehr gute", "eine besser"], "*gut → besser*, y delante del sustantivo con terminación: *eine bessere Idee*."),
+        tr(1, "Me llevo el pulóver más barato. (de los dos)", "Ich nehme den billigeren Pullover.", ["Ich nehme den billigeren Pullover.", "Ich kaufe den billigeren Pullover.", "Ich nehme den billigeren.", "Ich kaufe den billigeren."], "Entre dos: comparativo (*billiger-*) + acusativo masculino *-en*: *den billigeren*. En castellano «el más barato» no distingue."),
         # parte 2 — el tiempo y las estaciones
         ch(2, "¿Cómo se dice?", "«Llueve.»", "Es regnet.", ["Es regnet.", "Es macht Regen.", "Es ist Regen."], "El tiempo con *es*: *Es regnet*."),
         ch(2, "¿Cómo se dice?", "«Tengo frío.»", "Mir ist kalt.", ["Mir ist kalt.", "Ich bin kalt.", "Ich habe kalt."], "Sensación con dativo: *Mir ist kalt*."),

@@ -60,7 +60,7 @@ ITEMS = [
     dict(id="mj-31-10", type="translate", topic="condizionale passato", level="B2", w=31,
          prompt=TR, stem="Tendría que haberme levantado antes.",
          answer="Avrei dovuto alzarmi prima",
-         alt=["Mi sarei dovuto alzare prima", "Sarei dovuto alzarmi prima"],
+         alt=["Mi sarei dovuto alzare prima", "Mi sarei dovuta alzare prima"],
          note="Con el pronombre pegado, avere (avrei dovuto alzarmi); con el pronombre delante del modal, essere (mi sarei dovuto alzare)."),
     dict(id="mj-31-11", type="fixerr", topic="condizionale passato", level="B2", w=31, prompt=VA,
          cat="ausiliare", stem="Ieri avrei venuto volentieri, ma lavoravo.",

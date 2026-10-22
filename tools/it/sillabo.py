@@ -51,7 +51,7 @@ FEATURE_WEEK = {
     "comparativo": 23,
     "pronomi combinati": 22,
     "ne": 21,
-    "cui": 34,
+    "cui": 17,   # che / cui con preposición en la 17; il cui, il quale y chi en la 34
     "si impersonale": 36,
     "riflessivi": 12,
     "riflessivi passato": 16,

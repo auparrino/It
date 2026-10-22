@@ -823,17 +823,22 @@ LESSONS = {
   "ex": [["*Devo* lavorare.", "Tengo que trabajar."],
          ["*Vuoi* un caffè?", "¿Querés un café?"],
          ["*Posso* entrare?", "¿Puedo pasar?"],
+         ["*So* nuotare, ma oggi non *posso*.", "Sé nadar, pero hoy no puedo."],
          ["Cosa *fai* stasera?", "¿Qué hacés esta noche?"]],
   "warn": "«Tener que» es *dovere*: *devo andare*, nunca «ho che andare». Y "
           "el infinitivo va pegado, sin *di*: *devo partire*, no «devo di "
           "partire».",
-  "tip": "El «que» que une frases es *che*: *so che hai ragione* (sé que "
-         "tenés razón), *dice che arriva domani*.",
+  "tip": "Saber hacer algo es *sapere*: *so nuotare*, *sai guidare?* Poder "
+         "(te dejan, estás en condiciones) es *potere*: *oggi non posso "
+         "nuotare, ho la febbre*.",
+  "q": [{"prompt": "«No sé cocinar.»", "stem": "Non ___ cucinare.", "answer": "so", "options": ["so", "posso", "conosco"]},
+        {"prompt": "«Hoy no puedo salir: tengo que estudiar.»", "stem": "Oggi non ___ uscire: devo studiare.", "answer": "posso", "options": ["posso", "so", "conosco"]}],
   "more": ["*fare* arma muchas frases hechas: *fare colazione* (desayunar), "
            "*fare la doccia* (ducharse), *fare la spesa* (hacer las compras), "
            "*fare una passeggiata* (dar un paseo), *fare la fila* (hacer "
            "cola), *fare il pieno* (llenar el tanque), *fare attenzione* "
-           "(prestar atención), *fa freddo / caldo* (hace frío / calor).",
+           "(prestar atención), *fa freddo / caldo* (hace frío / calor). Y el "
+           "«que» que une frases es *che*: *so che hai ragione*.",
            "Más con *fare*: *fare il bagno* (bañarse), *fare una domanda* "
            "(hacer una pregunta), *fare un giro* o *due passi* (dar una vuelta), "
            "*fare il biglietto* (sacar el boleto), *fare una foto*, *fare una "
@@ -1131,7 +1136,9 @@ LESSONS = {
   "ids": ["mj-09-%02d" % n for n in range(1, 11)]},
  {"h": "da: origen, agente, «desde hace»", "blocks": [2, 3, 7],
   "match": r"Completá con da|desde|Desde cuándo|presente \+ da|da \+|hace .* que|da quanto|\bda\b",
-  "ids": ["mj-09-%02d" % n for n in range(11, 15)]},
+  "ids": ["mj-09-%02d" % n for n in range(11, 15)], "prefix": ["gr4-9-ti-"]},
+ {"h": "Repaso: del, della, dei (partitivo)", "blocks": [8],
+  "match": r"partitiv", "prefix": ["gr2-9-pa-"]},
  {"h": "Verbos con su preposición", "blocks": [4],
   "match": r"verbo|expresión|su, in, per"},
 ],
@@ -1272,13 +1279,41 @@ LESSONS = {
   "table": {"head": ["Prep.", "Sentido", "Ejemplo"],
             "rows": [["per", "dura un tiempo", "Resto qui per tre giorni."],
                      ["da", "empezó y sigue", "Abito qui da tre anni."],
-                     ["tra / fra", "a partir de ahora", "Parto tra tre giorni."]]},
+                     ["tra / fra", "a partir de ahora", "Parto tra tre giorni."],
+                     ["fa (va detrás)", "hace, mirando al pasado", "Sono arrivato due anni fa."],
+                     ["entro", "antes de, a más tardar", "Finisco entro venerdì."]]},
+  "q": [{"prompt": "«Termino antes del viernes, a más tardar.»", "stem": "Finisco ___ venerdì.", "answer": "entro", "options": ["entro", "tra", "per"]},
+        {"prompt": "«Estudio italiano desde hace dos años (y sigo).»", "stem": "Studio italiano ___ due anni.", "answer": "da", "options": ["da", "fa", "per"]}],
   "ex": [["Resto a Roma *per* una settimana.", "Me quedo en Roma una semana."],
          ["*Da* quanto tempo studi italiano?", "¿Desde hace cuánto estudiás italiano?"],
          ["*Da* quando lavori qui?", "¿Desde cuándo trabajás acá?"],
          ["Il film comincia *tra* dieci minuti.", "La película empieza dentro de diez minutos."]],
   "warn": "*da quanto tempo* pide una duración (*da due anni*); *da quando*, un "
-          "momento (*da marzo*). «Hace dos años» en pasado es *due anni fa*."},
+          "momento (*da marzo*). «Hace dos años» en pasado es *due anni fa*.",
+  "tip": "«Hace» tiene dos traducciones: si sigue, *da* (*abito qui da due anni*); "
+         "si ya pasó, *fa*, detrás del número (*due anni fa*). *Entro* = «antes de», con fecha límite."},
+
+ {"h": "Repaso: di + artículo = el partitivo",
+  "q": [{"prompt": "Completá", "stem": "Al mercato compro ___ uova.", "answer": "delle", "options": ["delle", "dei", "degli"]},
+        {"prompt": "Completá", "stem": "In classe ci sono ___ studenti.", "answer": "degli", "options": ["degli", "dei", "delle"]}],
+  "r": "*di* + artículo también es el **partitivo** (semana 3): una cantidad "
+       "sin precisar. *del pane* = pan; *dei libri* = unos libros.",
+  "table": {"head": ["Artículo", "Partitivo", "Ejemplo"],
+            "rows": [["il", "del", "del pane"],
+                     ["lo", "dello", "dello zucchero"],
+                     ["la", "della", "della frutta"],
+                     ["l'", "dell'", "dell'acqua"],
+                     ["i", "dei", "dei biscotti"],
+                     ["gli", "degli", "degli amici, degli studenti"],
+                     ["le", "delle", "delle uova"]]},
+  "ex": [["Compro *del* pane e *delle* uova.", "Compro pan y huevos."],
+         ["Ci sono *degli* studenti in classe.", "Hay unos estudiantes en el aula."],
+         ["Vuoi *dell'*acqua?", "¿Querés agua?"]],
+  "warn": "El castellano no pone nada («compro pan») o pone «unos». El "
+          "italiano lo marca, y la forma sale del artículo: *degli amici*, "
+          "nunca «dei amici».",
+  "tip": "En negativo se cae: *non ho pane*. Y no se suma a *di*: *ho "
+         "bisogno di pane*, nunca «di del pane»."},
 ]},
 
 10: {
@@ -1421,7 +1456,13 @@ LESSONS = {
   "ex": [["*Ho cambiato* idea. / *Sono cambiato* molto.", "Cambié de idea. / Cambié mucho (yo)."],
          ["*Ho finito* il lavoro. / Il film *è finito*.", "Terminé el trabajo. / La película terminó."],
          ["*Ho passato* tre giorni lì. / *Sono passato* da casa tua.", "Pasé tres días ahí. / Pasé por tu casa."],
-         ["*Ho salito* le scale. / *Sono salito* sul treno.", "Subí las escaleras. / Me subí al tren."]]},
+         ["*Ho salito* le scale. / *Sono salito* sul treno.", "Subí las escaleras. / Me subí al tren."],
+         ["*Ho cominciato* il libro. / Il film *è cominciato* alle nove.", "Empecé el libro. / La película empezó a las nueve."]],
+  "more": ["*correre* sigue la misma idea: la actividad va con *avere* (*ho "
+           "corso* dieci chilometri, *ho corso* tutta la mattina); si corrés "
+           "hacia un lugar, *essere* (*sono corso a casa*, *sono corsa "
+           "dal medico*). *iniziare* funciona como *cominciare*: *ho iniziato "
+           "il corso / il corso è iniziato*."]},
 
  {"h": "Modales: manda el infinitivo",
   "r": "Con *potere, volere, dovere*, el auxiliar lo elige el infinitivo que "

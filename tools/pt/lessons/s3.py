@@ -345,7 +345,17 @@ LESSONS = {
          ["Eles *precisam trabalhar* amanhã.", "Tienen que trabajar mañana."]],
   "warn": "Si el sujeto es el mismo y no hay preposición, sin terminación. "
           "Con preposición y mismo sujeto, es opcional: *saímos para "
-          "almoçar / almoçarmos*."},
+          "almoçar / almoçarmos*.",
+  "table": {"head": ["Caso", "¿Se flexiona?", "Ejemplo"],
+            "rows": [["sujeto propio, dicho o sobreentendido", "sí (obligatorio)", "é bom vocês chegarem; é hora de irmos"],
+                     ["preposición + mismo sujeto", "opcional", "saímos para almoçar / almoçarmos"],
+                     ["querer, poder, dever, ir, precisar + mismo sujeto", "no (prohibido)", "podem sair; precisamos sair"],
+                     ["deixar, mandar, ver, ouvir + sujeto + infinitivo", "opcional; con pronombre átono, no", "vi eles saírem / sair; vi-os sair; deixa eu ver"]]},
+  "more": ["*É hora de irmos* (nosotros) no es *é hora de ir* (en general): "
+           "la terminación dice el sujeto aunque no lo nombres. Con *deixar, "
+           "mandar, ver, ouvir*, en el habla: *deixa eu ver*, *vi eles "
+           "saírem*; escrito: *deixe-me ver*, *vi-os sair*. Ante la duda, "
+           "flexioná si eso aclara quién hace la acción."]},
 
  {"h": "En el habla: para a gente ir",
   "q": [{"prompt": "«Para que vayamos…» (habla) → Pra a gente ___…", "answer": "ir", "options": ["ir", "irmos", "vamos"]}],
@@ -399,6 +409,10 @@ LESSONS = {
   "r": "Hipótesis en el pasado: *se* + *tivesse* + participio, y en la "
        "otra mitad *teria* + participio: *se tivesse chovido, teríamos "
        "ficado em casa*.",
+  "table": {"head": ["Tipo", "Si…", "entonces…", "Español"],
+            "rows": [["real (futuro, semana 27)", "Se eu tiver tempo,", "vou / irei.", "Si tengo tiempo, voy."],
+                     ["posible (presente, semana 28)", "Se eu tivesse tempo,", "iria (habla: ia).", "Si tuviera tiempo, iría."],
+                     ["imposible (pasado, hoy)", "Se eu tivesse tido tempo,", "teria ido (habla: tinha ido).", "Si hubiera tenido tiempo, habría ido."]]},
   "ex": [["Se eu *tivesse sabido*, *teria ido* ao show.", "Si hubiera sabido, habría ido al show."],
          ["Se vocês *tivessem chegado* cedo, *teriam visto* o Cristo sem nuvens.", "Si hubieran llegado temprano, habrían visto el Cristo sin nubes."],
          ["Se ela não *tivesse perdido* o voo, *teria vindo*.", "Si no hubiera perdido el vuelo, habría venido."]],
@@ -683,10 +697,10 @@ LESSONS = {
        "(*disse-me*). *Mesóclise*: en medio del futuro o condicional "
        "(*dir-me-á*).",
   "table": {"head": ["Nombre", "Ejemplo", "Dónde"],
-            "rows": [["próclise (antes)", "não me disse", "habla; en lo escrito, tras não, que…"],
-                     ["ênclise (después)", "disse-me", "escritura formal, por defecto"],
+            "rows": [["próclise (antes)", "não me disse", "habla; en lo escrito, tras sujeto, não, que…"],
+                     ["ênclise (después)", "disse-me", "escritura formal: al empezar, sin sujeto delante"],
                      ["mesóclise (en medio)", "dir-me-á", "solo formal, futuro y condicional"]]},
-  "ex": [["Ela *me disse* a verdade.", "Ella me dijo la verdad (habla)."],
+  "ex": [["Ela *me disse* a verdade.", "Ella me dijo la verdad (habla, y escrito con sujeto delante)."],
          ["*Disse-me* a verdade.", "Me dijo la verdad (escrito)."],
          ["*Dir-me-á* a verdade.", "Me dirá la verdad (muy formal)."]]},
 
@@ -700,7 +714,12 @@ LESSONS = {
          ["Fique quieto e *escute-me*.", "Quedate quieto y escuchame (formal: con *você*, el imperativo toma el subjuntivo)."]],
   "warn": "En el habla de Brasil, *me chama*, *me dá* abren la oración "
           "sin problema. En un texto formal, no: *Chame-me*, *Dê-me*, "
-          "*Chamo-me*."},
+          "*Chamo-me*.",
+  "more": ["Con sujeto expreso delante (*Ela me disse*, *O governo nos "
+           "informou*), la norma brasileña acepta la próclise, y es lo que "
+           "más se lee en la prensa; *Ela disse-me* también vale, pero suena "
+           "más solemne o lusitano. La ênclise es obligatoria al empezar la "
+           "oración o tras pausa: *Disse-me que…*, *Ontem, disse-me que…*"]},
 
  {"h": "Los que atraen el pronombre",
   "q": [{"prompt": "Formal: Ele ___ a verdade.", "answer": "nunca me disse", "options": ["nunca me disse", "nunca disse-me", "me nunca disse"]}],
@@ -782,7 +801,7 @@ LESSONS = {
                      ["Vou te contar.", "Vou contar-te.", "Te voy a contar."],
                      ["Nunca me disse.", "Nunca me disse.", "Nunca me dijo (nunca atrae)."]]},
   "tip": "Si dudás al escribir: pronombre detrás del verbo, salvo que haya "
-         "*não*, *que* o un adverbio delante."},
+         "*não*, *que*, un adverbio o el sujeto delante."},
 
  {"h": "Perífrasis: voltar a, chegar a, vir a, viver + gerúndio, ficar de",
   "r": "Verbo + *a* + infinitivo, como en castellano: *voltei a fumar*, "
@@ -817,7 +836,7 @@ LESSONS = {
          "no son lo que parecen.",
 "parts": [
  {"h": "Oponer: mas, porém, contudo", "blocks": [0, 1]},
- {"h": "Concluir y explicar", "blocks": [2, 3]},
+ {"h": "Concluir y explicar", "blocks": [2, 3, 7]},
  {"h": "aliás, inclusive, ou seja; concesión", "blocks": [4, 5]},
  {"h": "Argumentar: ordenar y conceder", "blocks": [6]},
 ],
@@ -924,6 +943,21 @@ LESSONS = {
   "warn": "«además» es *além disso*; *demais* es «demasiado».",
   "tip": "Esquema de un artículo: tesis, dos argumentos, una objeción respondida, conclusión. Profundización en la semana 47."},
 
+ {"h": "Consecuencia: tão… que, tanto… que, de modo que",
+  "q": [{"prompt": "«Estaba tan cansado que me dormí en el colectivo.»", "stem": "Estava ___ cansado que dormi no ônibus.", "answer": "tão", "options": ["tão", "tanto", "tan"]},
+        {"prompt": "«Llovió tanto que la calle se inundó.»", "stem": "Choveu ___ que a rua alagou.", "answer": "tanto", "options": ["tanto", "tão", "tan"]}],
+  "r": "*tão* + adjetivo o adverbio + *que*; *tanto* con verbos, y *tanto, "
+       "tanta…* con sustantivos. *de modo que* y *de forma que* + "
+       "indicativo: «así que».",
+  "ex": [["Estava *tão* cansado *que* dormi no ônibus.", "Estaba tan cansado que me dormí en el colectivo."],
+         ["Choveu *tanto que* a rua alagou.", "Llovió tanto que la calle se inundó."],
+         ["Tinha *tanta* gente *que* desistimos.", "Había tanta gente que desistimos."],
+         ["Saí cedo, *de modo que* cheguei a tempo.", "Salí temprano, así que llegué a tiempo."]],
+  "warn": "«tan» es *tão*, con til: nunca «tan» ni «tanto cansado». *tanto* "
+          "va con verbos y sustantivos: *falou tanto*, *tanto calor*.",
+  "tip": "*de modo que* + indicativo es consecuencia (*cheguei*); + "
+         "subjuntivo, finalidad: *fala alto, de modo que todos ouçam*."},
+
 ]},
 
 35: {
@@ -980,7 +1014,14 @@ LESSONS = {
          ["*Convidei* o Lucas pro churrasco.", "Invité a Lucas al asado."],
          ["*Conheci o* Rafa no bloco.", "Conocí a Rafa en el bloco."]],
   "warn": "Nada de «a» personal: «ajudei ao vizinho» es calco del español. "
-          "*ajudar* lleva objeto directo: *ajudei o vizinho*, *ajudei-o*."},
+          "*ajudar* lleva objeto directo: *ajudei o vizinho*, *ajudei-o*.",
+  "tip": "La *a* de *ajudar* va antes del **infinitivo**: *ajudei o "
+         "vizinho a carregar*. «Llamar por teléfono» es *ligar para*: "
+         "*liguei para a Bia* (habla: *liguei pra ela*).",
+  "more": ["Dos más, de registro formal: *responder a* (*respondi ao "
+           "e-mail*; al hablar, *respondi o e-mail*) y *visar* (tener por "
+           "objetivo): *o projeto visa (a) reduzir a evasão*; con objeto "
+           "directo, *visar um documento* es visarlo, sellarlo."]},
 
  {"h": "chegar, ir, morar",
   "r": "Norma: *chegar a*, *ir a / para*. Habla: *cheguei em casa*, *vou "
@@ -990,7 +1031,12 @@ LESSONS = {
          ["*Vou à* feira de São Cristóvão.", "Voy a la feria de São Cristóvão."],
          ["*Moro na* rua da praia.", "Vivo en la calle de la playa."]],
   "tip": "En un texto, *chegar a*. Hablando, *chegar em* es lo normal y "
-         "nadie lo nota."},
+         "nadie lo nota. *chegar em casa* está tan asentado que se ve "
+         "hasta escrito.",
+  "more": ["*ir a* o *ir para*: con *a*, una visita o un trámite y volvés "
+           "(*vou à farmácia e já volto*); con *para*, el destino donde te "
+           "quedás o vivís un tiempo (*vou para Salvador: arrumei emprego "
+           "lá*). Al hablar, *ir no* (o *ir pro*) suele reemplazar a *ir a*: *fui no mercado*."]},
 
  {"h": "lembrar, esquecer y compañía",
   "r": "Con *se*, preposición; sin *se*, directo: *lembrei-me do nome* = "
@@ -1269,6 +1315,7 @@ LESSONS = {
  {"h": "Reducciones y marcadores", "blocks": [0, 1, 2]},
  {"h": "cadê y ter por haver", "blocks": [3, 4]},
  {"h": "Pronombres del habla y registro", "blocks": [5, 6]},
+ {"h": "Orden y énfasis del habla", "blocks": [7, 8]},
 ],
 "blocks": [
  {"h": "tá, tô, pra, pro, cê",
@@ -1353,6 +1400,40 @@ LESSONS = {
          ["Estou a caminho.", "Estoy en camino (formal)."]],
   "tip": "El chiado carioca: la *s* final suena «sh»: *mais* ≈ «maish», "
          "*três* ≈ «treish». No se escribe; solo se oye."},
+
+ {"h": "Primero el tema, después la frase",
+  "q": [{"prompt": "«Ese libro ya lo leí.» (habla de Brasil)", "answer": "Esse livro, eu já li.", "options": ["Esse livro, eu já li.", "Esse livro, já li-o.", "Esse livro, eu já lo li."]}],
+  "r": "Al hablar, el brasileño pone el tema adelante y después lo "
+       "comenta: *esse filme, eu já vi*. Lo escrito vuelve al orden de "
+       "siempre: *já vi esse filme*.",
+  "ex": [["*Esse filme*, eu já vi duas vezes.", "Esa película ya la vi dos veces."],
+         ["*A minha irmã*, ela mora em Recife.", "Mi hermana vive en Recife."],
+         ["*Feijoada*, eu adoro.", "La feijoada me encanta."],
+         ["*A Bia*, eu falei com ela ontem.", "Con Bia hablé ayer."],
+         ["*O ônibus* chegou.", "Llegó el colectivo (en Brasil, más sujeto + verbo)."]],
+  "warn": "El castellano repite el pronombre: «ese libro **lo** leí». En "
+          "Brasil el hueco queda vacío: *esse livro, eu já li*. Nada de "
+          "«lo».",
+  "tip": "En un texto formal, orden neutro: *já li esse livro* (con "
+         "pronombre, *já o li*). Y donde el castellano dice «llegó Juan», "
+         "en Brasil es más común *o João chegou*."},
+
+ {"h": "Para destacar: foi… que, o que… é, eu é que",
+  "q": [{"prompt": "«Fueron ellos los que rompieron el vidrio.»", "answer": "Foram eles que quebraram o vidro.", "options": ["Foram eles que quebraram o vidro.", "Foi eles que quebraram o vidro.", "Foram eles los que quebraram o vidro."]},
+        {"prompt": "«Eu é que não vou!» quiere decir…", "answer": "¡Yo sí que no voy!", "options": ["¡Yo sí que no voy!", "Es que no voy.", "No soy yo el que va."]}],
+  "r": "Para resaltar: *foi* + lo resaltado + *que* (*foi a Bia que "
+       "contou*), *o que… é* (*o que quero é dormir*) o *é que* tras el "
+       "sujeto.",
+  "ex": [["*Foi* a Bia *que* me contou.", "Fue Bia la que me contó."],
+         ["*Foi* em 1988 *que* saiu a Constituição.", "Fue en 1988 cuando salió la Constitución."],
+         ["*O que* eu quero *é* dormir.", "Lo que quiero es dormir."],
+         ["Eu *é que* não vou!", "¡Yo sí que no voy!"],
+         ["Você *é que* sabe.", "Vos sabrás. / Decidí vos."]],
+  "warn": "*ser* concuerda con lo resaltado: *fui eu que fiz*, *foram eles "
+          "que…* Y sin artículo: «fue Bia **la que**» es *foi a Bia que* "
+          "(o *quem*).",
+  "tip": "*é que* tras la palabra de pregunta es relleno (*onde é que…?*, "
+         "semana 8); tras el sujeto, destaca: *ele é que sabe*."},
 ]},
 
 39: {
@@ -1360,7 +1441,7 @@ LESSONS = {
          "pessoal, condicionales, discurso indirecto, regencia, crase, "
          "conectores y pronombres. Esta es tu hoja de repaso.",
 "parts": [
- {"h": "Repaso: subjuntivos, condicionales, discurso", "blocks": [0, 1, 2]},
+ {"h": "Repaso: subjuntivos, condicionales, discurso", "blocks": [0, 1, 2, 6]},
  {"h": "Repaso: regencia, crase, conectores, trampas", "blocks": [3, 4, 5]},
 ],
 "blocks": [
@@ -1431,6 +1512,26 @@ LESSONS = {
                      ["prefiro mais X do que Y", "prefiro X a Y"],
                      ["vou à Copacabana", "vou a Copacabana"],
                      ["todavia não chegou", "ainda não chegou"]]}},
+
+ {"h": "La correlación de tiempos",
+  "r": "La principal manda. Presente o futuro → presente do subjuntivo; "
+       "pasado o condicional → imperfeito do subjuntivo. *quando / se* + "
+       "futuro: futuro do subjuntivo; contado en pasado, imperfeito.",
+  "table": {"head": ["Principal", "Subordinada", "Ejemplo"],
+            "rows": [["presente, futuro, imperativo", "presente do subj.", "quero que você venha"],
+                     ["pasado o futuro do pretérito", "imperfeito do subj.", "queria / seria bom que você viesse"],
+                     ["quando / se + futuro", "futuro do subj.", "quando ele chegar, eu ligo"],
+                     ["lo mismo, contado en pasado", "imperfeito do subj.", "disse que, quando ele chegasse, ligaria"]]},
+  "ex": [["*Espero* que *gostem*. / *Esperava* que *gostassem*.", "Espero que les guste. / Esperaba que les gustara."],
+         ["*Peço* que *assine*. / *Pedi* que *assinasse*.", "Le pido que firme. / Le pedí que firmara."],
+         ["*Se puder*, vou. / Disse que, *se pudesse*, iria.", "Si puedo, voy. / Dijo que, si podía, iría."]],
+  "warn": "En el Río de la Plata se oye «quería que vengas», «le pedí que "
+          "firme». En portugués, tras un pasado va imperfeito: *queria que "
+          "viesse*, *pedi que assinasse*.",
+  "q": [{"prompt": "«Quería que vinieras.»", "stem": "Queria que você ___.",
+         "answer": "viesse", "options": ["viesse", "venha", "vier"]},
+        {"prompt": "«Cuando llegue, llamo.» contado en pasado:", "stem": "Disse que, quando ___, ligaria.",
+         "answer": "chegasse", "options": ["chegasse", "chegar", "chegue"]}]},
 ]},
 
 }

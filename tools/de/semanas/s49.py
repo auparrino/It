@@ -261,5 +261,8 @@ WEEK = {
         tr(2, "Tenemos que tomar en cuenta todos los riesgos.", "Wir müssen alle Risiken in Betracht ziehen.", ["Wir müssen alle Risiken in Betracht ziehen.", "Wir müssen alle Risiken berücksichtigen.", "Alle Risiken müssen in Betracht gezogen werden."], "*in Betracht ziehen*: el sustantivo va sin artículo."),
         tr(2, "La propuesta está en discusión.", "Der Vorschlag steht zur Diskussion.", ["Der Vorschlag steht zur Diskussion.", "Der Vorschlag wird diskutiert."], "*zur Diskussion stehen*: el pasivo de *zur Diskussion stellen*."),
         li(2, "die Abhandlung", ["die Abhandlung", "die Behandlung", "die Verhandlung"], "*die Abhandlung* = el ensayo académico; *die Behandlung* = el tratamiento; *die Verhandlung* = la negociación."),
+        # parte 1 — más participio con zu
+        ty(1, "Reescribí con un participio con *zu*.", "die Kosten, die man erwarten muss", "die zu erwartenden Kosten", note="*die Kosten* es plural con artículo definido: *zu erwartend-en*. «Los costos que hay que esperar» = *die zu erwartenden Kosten*."),
+        ch(1, "¿Qué significa?", "der zu zahlende Betrag", "el monto a pagar", ["el monto a pagar", "el monto pagado", "el monto que paga"], "*zu* + participio I = algo que **hay que** hacer (sentido pasivo). Como nuestro «a pagar» de las facturas."),
     ],
 }

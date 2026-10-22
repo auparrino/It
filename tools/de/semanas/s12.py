@@ -22,7 +22,7 @@ WEEK = {
         "parts": [
             {"h": "El Perfekt con sein", "blocks": [0, 1, 2]},
             {"h": "war y hatte", "blocks": [3, 4]},
-            {"h": "Contar un viaje", "blocks": [5, 6, 7]},
+            {"h": "Contar un viaje", "blocks": [5, 6, 9, 7, 8]},
         ],
         "blocks": [
             {
@@ -214,6 +214,48 @@ WEEK = {
                     q("Completá: *Wie lange ___ ihr geblieben?*", "seid", ["seid", "habt", "sind"]),
                 ],
             },
+            {
+                "h": "Primero cuándo, después dónde",
+                "r": "En el medio de la oración, el alemán pone el **tiempo antes que el lugar**: *Ich fahre **morgen nach Berlin***. El castellano suele hacer al revés («voy a Berlín mañana»). El lugar adónde vas queda bien pegado al final, justo antes del participio o del infinitivo.",
+                "table": {"head": ["Castellano", "Alemán (cuándo → dónde)"], "rows": [
+                    ["Voy a Berlín mañana.", "Ich fahre *morgen* *nach Berlin*."],
+                    ["Fuimos a Perú el año pasado.", "Wir sind *letztes Jahr* *nach Peru* geflogen."],
+                    ["Estuve en Roma en agosto.", "Ich war *im August* *in Rom*."],
+                    ["Se quedó en casa el domingo.", "Er ist *am Sonntag* *zu Hause* geblieben."],
+                ]},
+                "ex": [
+                    ["Wir fahren *am Wochenende ans Meer*.", "Vamos a la playa el fin de semana."],
+                    ["Sie ist *gestern nach Hause* gegangen.", "Ayer se fue a casa."],
+                ],
+                "warn": "«Ich fahre nach Berlin morgen» se entiende, pero suena a traducción. Lo natural: *Ich fahre morgen nach Berlin*. Y si el tiempo va adelante, el lugar sigue al final: *Morgen fahre ich nach Berlin*.",
+                "tip": "Regla corta: **cuándo → dónde** (y el participio cierra). Más adelante vas a sumar el «por qué» y el «cómo».",
+                "q": [
+                    q("¿Cuál suena natural?", "Ich fliege im Juli nach Spanien.", ["Ich fliege im Juli nach Spanien.", "Ich fliege nach Spanien im Juli.", "Ich fliege nach im Juli Spanien."]),
+                    q("Completá en orden: *Wir sind ___ geflogen.*", "letztes Jahr nach Chile", ["letztes Jahr nach Chile", "nach Chile letztes Jahr", "Chile nach letztes Jahr"]),
+                ],
+            },
+            {
+                "h": "jeden Tag, montags, eines Tages",
+                "r": "*letztes Jahr* no es una fórmula suelta: es un **acusativo de tiempo**. Sin preposición, «cuándo» o «cuánto tiempo» va en acusativo, con las terminaciones de siempre: *der → den, die → die, das → das*. Así armás todo: *jeden Tag, letzten Montag, nächste Woche, dieses Jahr, den ganzen Tag*.",
+                "table": {"head": ["Género", "jed- (todos/as)", "letzt- / nächst- / dies-"], "rows": [
+                    ["der Tag, der Montag", "jeden Tag, jeden Montag", "letzten Montag, nächsten Sommer"],
+                    ["die Woche", "jede Woche", "letzte Woche, diese Woche"],
+                    ["das Jahr", "jedes Jahr", "nächstes Jahr, dieses Jahr"],
+                ]},
+                "ex": [
+                    ["*Jeden Morgen* trinke ich Mate.", "Todas las mañanas tomo mate."],
+                    ["Wir haben *den ganzen Tag* am Strand gelegen.", "Estuvimos todo el día tirados en la playa."],
+                    ["*Montags* arbeite ich nicht.", "Los lunes no trabajo."],
+                    ["*Am Montag* bin ich nach Rom geflogen.", "El lunes volé a Roma."],
+                    ["*Eines Tages* fahre ich nach Patagonien.", "Algún día voy a ir a la Patagonia."],
+                ],
+                "warn": "Sin preposición: «in letztem Jahr» o «am nächsten Woche» están mal; es *letztes Jahr, nächste Woche*. Y ojo con la diferencia: *montags, morgens, abends* (con *-s* y minúscula) = **todos** los lunes, a la mañana como costumbre; *am Montag* = **un** lunes concreto.",
+                "more": ["*eines Tages* (un día, algún día) es genitivo: queda como fórmula para contar o soñar. Igual *eines Abends* (una noche)."],
+                "q": [
+                    q("Completá: *___ Tag gehe ich joggen.* (todos los días)", "Jeden", ["Jeden", "Jede", "Jedes"]),
+                    q("«Los lunes no trabajo.»", "Montags arbeite ich nicht.", ["Montags arbeite ich nicht.", "Am Montag arbeite ich nicht.", "In Montagen arbeite ich nicht."]),
+                ],
+            },
         ],
     },
     "vocab": [
@@ -286,5 +328,25 @@ WEEK = {
         tr(2, "Ayer llegué tarde.", "Gestern bin ich spät angekommen.", ["Gestern bin ich spät angekommen.", "Ich bin gestern spät angekommen.", "Gestern bin ich spät gekommen.", "Ich bin gestern spät gekommen."], "*ankommen → ist angekommen*."),
         tr(2, "Estuvimos dos semanas en la playa.", "Wir waren zwei Wochen am Strand.", ["Wir waren zwei Wochen am Strand.", "Zwei Wochen waren wir am Strand.", "Wir waren zwei Wochen am Meer.", "Wir sind zwei Wochen am Strand gewesen.", "Wir sind zwei Wochen am Meer gewesen."], "Dónde: *am Strand* / *am Meer*."),
         ty(2, "Escribí en alemán.", "«a casa» (voy a casa)", "nach Hause", note="Con movimiento: *nach Hause*; sin movimiento: *zu Hause*."),
+        # parte 2 — cuándo antes que dónde
+        ty(2, "Ordená: cuándo antes que dónde.", "Ich fahre / nach Berlin / morgen", "Ich fahre morgen nach Berlin.", ["Ich fahre morgen nach Berlin.", "Morgen fahre ich nach Berlin."], "Tiempo antes que lugar: *morgen nach Berlin*. Al revés que en castellano («a Berlín mañana»)."),
+        ty(2, "Ordená: cuándo antes que dónde.", "Wir sind / geflogen / nach Peru / letztes Jahr", "Wir sind letztes Jahr nach Peru geflogen.", ["Wir sind letztes Jahr nach Peru geflogen.", "Letztes Jahr sind wir nach Peru geflogen."], "*letztes Jahr* antes de *nach Peru*; el participio, último."),
+        ty(2, "Ordená: cuándo antes que dónde.", "Er ist / zu Hause / am Sonntag / geblieben", "Er ist am Sonntag zu Hause geblieben.", ["Er ist am Sonntag zu Hause geblieben.", "Am Sonntag ist er zu Hause geblieben."], "*am Sonntag* (cuándo) → *zu Hause* (dónde) → participio."),
+        ch(2, "Elegí la oración más natural.", "(Fui a Viena en mayo.)", "Ich bin im Mai nach Wien gefahren.", ["Ich bin im Mai nach Wien gefahren.", "Ich bin nach Wien im Mai gefahren.", "Ich bin nach Wien gefahren im Mai."], "Tiempo antes que lugar, y el participio al final."),
+        tr(2, "Vamos a la playa el sábado.", "Wir fahren am Samstag ans Meer.", ["Wir fahren am Samstag ans Meer.", "Am Samstag fahren wir ans Meer.", "Wir fahren am Samstag an den Strand.", "Am Samstag fahren wir an den Strand.", "Wir gehen am Samstag an den Strand.", "Am Samstag gehen wir an den Strand."], "El castellano pone «el sábado» al final; en alemán el tiempo va antes del lugar: *am Samstag ans Meer*."),
+        ch(2, "Elegí el orden correcto.", "(Comimos y después fuimos a la playa.)", "Wir haben gegessen, dann sind wir an den Strand gegangen.", ["Wir haben gegessen, dann sind wir an den Strand gegangen.", "Wir haben gegessen, dann wir sind an den Strand gegangen.", "Wir haben gegessen, dann sind wir gegangen an den Strand."], "Repaso: *dann* ocupa la posición 1 → *sind wir*; el participio cierra."),
+        # parte 2 — repaso: plural, fechas y años
+        cz(2, "Escribí el plural. (die Postkarte, -n)", "Ich habe zehn ___ geschrieben.", "Postkarten", note="Femeninos en *-e* → *-n*: *die Postkarten*. " + MAY),
+        cz(2, "Escribí el plural. (der Koffer, –)", "Wir hatten drei schwere ___.", "Koffer", note="*der Koffer, –*: los masculinos en *-er* no cambian en plural. «Koffers» no existe. " + MAY),
+        cz(2, "Escribí el ordinal. (15.)", "Wir sind am ___ Juli nach Rom geflogen.", "fünfzehnten", note="Fecha con *am*: ordinal + *-ten*: *am fünfzehnten Juli* (= *am 15. Juli*)."),
+        ch(2, "Elegí la forma correcta.", "(En 2019 fuimos a España.)", "2019 sind wir nach Spanien gefahren.", ["2019 sind wir nach Spanien gefahren.", "In 2019 sind wir nach Spanien gefahren.", "Am 2019 sind wir nach Spanien gefahren."], "El año va solo (o con *im Jahr*): «in 2019» es un calco del inglés."),
+        tr(2, "Volvimos el 2 de agosto.", "Wir sind am zweiten August zurückgekommen.", ["Wir sind am zweiten August zurückgekommen.", "Wir sind am 2. August zurückgekommen.", "Am zweiten August sind wir zurückgekommen.", "Am 2. August sind wir zurückgekommen.", "Wir sind am zweiten August zurückgefahren.", "Wir sind am 2. August zurückgefahren.", "Am zweiten August sind wir zurückgefahren.", "Am 2. August sind wir zurückgefahren."], "«El 2» = *am zweiten* (ordinal + *-en*), no «am zwei». *zurückkommen* va con *sein*."),
+        # parte 2 — tiempo sin preposición: jeden Tag, montags, eines Tages
+        cz(2, "Escribí *jed-* con su terminación.", "___ Tag gehe ich joggen. (der Tag)", "Jeden", ["Jeden", "jeden"], "Tiempo sin preposición = acusativo: *der Tag → jeden Tag*."),
+        cz(2, "Escribí *nächst-* con su terminación.", "___ Woche fliege ich nach Rom. (die Woche)", "Nächste", ["Nächste", "nächste"], "Acusativo femenino = igual que el nominativo: *nächste Woche*. Sin «in» ni «am»."),
+        ch(2, "Elegí.", "Wir waren ___ am Strand. (todo el día)", "den ganzen Tag", ["den ganzen Tag", "der ganze Tag", "am ganzen Tag"], "Cuánto tiempo, sin preposición: acusativo masculino, *den ganzen Tag*."),
+        ch(2, "¿Qué significa?", "Samstags gehe ich auf den Markt.", "Los sábados voy a la feria.", ["Los sábados voy a la feria.", "Este sábado voy a la feria.", "El sábado pasado fui a la feria."], "*samstags* (con *-s*) = todos los sábados, costumbre. Un sábado concreto sería *am Samstag*."),
+        tr(2, "Los lunes no trabajo.", "Montags arbeite ich nicht.", ["Montags arbeite ich nicht.", "Ich arbeite montags nicht.", "Montags arbeite ich nie.", "Ich arbeite montags nie."], "Costumbre: *montags*. *Am Montag arbeite ich nicht* se entiende como «este lunes»."),
+        tr(2, "Algún día voy a vivir en Alemania.", "Eines Tages wohne ich in Deutschland.", ["Eines Tages wohne ich in Deutschland.", "Eines Tages lebe ich in Deutschland.", "Ich wohne eines Tages in Deutschland.", "Ich lebe eines Tages in Deutschland.", "Eines Tages werde ich in Deutschland wohnen.", "Eines Tages werde ich in Deutschland leben."], "«Algún día» = *eines Tages*, fórmula en genitivo. El presente alcanza para el futuro."),
     ],
 }

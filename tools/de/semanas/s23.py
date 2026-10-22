@@ -22,7 +22,7 @@ WEEK = {
         "parts": [
             {"h": "werden y el futuro", "blocks": [0, 1, 2]},
             {"h": "El infinitivo con zu", "blocks": [3, 4]},
-            {"h": "Para qué: um … zu y damit", "blocks": [5, 6, 7]},
+            {"h": "Para qué: um … zu y damit", "blocks": [5, 6, 7, 8]},
         ],
         "blocks": [
             {
@@ -98,11 +98,17 @@ WEEK = {
                     ["Zeit haben", "Ich habe keine Zeit, die Zeitung zu lesen."],
                     ["es ist wichtig / schwer", "Es ist wichtig, regelmäßig zu üben."],
                 ]},
-                "warn": "Con los **modales** no va *zu*: *Ich muss lernen*, nunca *Ich muss zu lernen*. Tampoco después de *werden*: *Ich werde lernen*.",
+                "warn": "Con los **modales** no va *zu*: *Ich muss lernen*, nunca *Ich muss zu lernen*. Tampoco después de *werden*, ni de *lassen*, *gehen*, *bleiben*, *sehen* y *hören*: *Ich gehe schwimmen* (voy a nadar), *Er bleibt sitzen*, *Ich höre ihn singen*, nunca «Ich gehe zu schwimmen».",
                 "tip": "Pensá en *zu* como en el «to» del inglés (*I try to read*), pero **pegado al infinitivo, al final**.",
+                "more": [
+                    "**¿zu o dass?** Lo decide el sujeto, igual que *um … zu / damit*. Si el que hace la segunda acción es el mismo, va *zu*: *Ich hoffe, dich bald **zu** sehen* (espero verte pronto). Si es **otro**, va *dass* con el verbo al final: *Ich hoffe, **dass** du bald kommst* (espero que vengas pronto). Ojo: nuestro «que vengas» va en subjuntivo; el alemán usa el indicativo normal.",
+                    "Con *bitten* (pedir), el que hace la acción es el otro, pero ya está nombrado como objeto: *Ich bitte dich, pünktlich **zu** kommen* (te pido que llegues puntual). Es muy común y más natural que *dass*.",
+                ],
                 "q": [
                     q("Completá: *Ich habe keine Lust, heute ___ kochen.*", "zu", ["zu", "um", "für"]),
                     q("¿Cuál está bien?", "Ich muss heute arbeiten.", ["Ich muss heute arbeiten.", "Ich muss heute zu arbeiten.", "Ich versuche heute arbeiten."]),
+                    q("«Espero que vengas»:", "Ich hoffe, dass du kommst.", ["Ich hoffe, dass du kommst.", "Ich hoffe, du zu kommen.", "Ich hoffe, zu kommen."]),
+                    q("«Hoy voy a nadar» (salgo a hacerlo):", "Ich gehe heute schwimmen.", ["Ich gehe heute schwimmen.", "Ich gehe heute zu schwimmen.", "Ich gehe heute um zu schwimmen."]),
                 ],
             },
             {
@@ -182,6 +188,30 @@ WEEK = {
                     q("Completá: *Ich nehme ___ vor, mehr Sport zu machen.*", "mir", ["mir", "mich", "mein"]),
                 ],
             },
+            {
+                "h": "mir o mich: más reflexivos en dativo",
+                "r": "Como *sich vornehmen*, hay verbos muy usados que llevan el reflexivo en **dativo** porque ya tienen **otro objeto** (una cosa, una idea, una oración): *sich etwas vorstellen* (imaginarse), *sich etwas merken* (acordarse, retener), *sich etwas ansehen* (mirar algo con atención), *sich etwas wünschen* (desear, pedir de regalo), *sich etwas leisten* (darse el gusto, poder pagar). Es el mismo truco de la semana 17: ¿hay otro objeto? → *mir / dir*.",
+                "table": {"head": ["Acusativo (solo yo)", "Dativo (yo + otra cosa)"], "rows": [
+                    ["Ich stelle **mich** vor. (me presento)", "Ich stelle **mir** das schwierig vor. (me lo imagino difícil)"],
+                    ["Ich freue **mich**.", "Ich wünsche **mir** ein Fahrrad."],
+                    ["Setz **dich**!", "Merk **dir** das!"],
+                    ["Er beeilt **sich**.", "Er sieht **sich** den Film an."],
+                ]},
+                "ex": [
+                    ["*Stell dir vor*, ich habe im Lotto gewonnen!", "¡Imaginate, gané la lotería!"],
+                    ["Ich kann *mir* seinen Namen nie *merken*.", "Nunca me acuerdo de su nombre."],
+                    ["Wir *sehen uns* heute die Wohnung *an*.", "Hoy vamos a ver el departamento."],
+                    ["Was *wünschst du dir* zum Geburtstag?", "¿Qué querés que te regalen para tu cumple?"],
+                    ["Das kann ich *mir* nicht *leisten*.", "No me lo puedo permitir."],
+                ],
+                "warn": "*sich vorstellen* tiene dos caras: *Ich stelle **mich** vor* = me presento (a mí mismo); *Ich stelle **mir** das vor* = me lo imagino (una idea). Y «retener, que no se te olvide» es *sich etwas merken*, sin preposición: *Ich kann mir seinen Namen nicht merken* (no «mir von»). Para recordar algo pasado sigue siendo *sich erinnern an* (semana 22).",
+                "tip": "Con *er, sie, wir, ihr* no tenés que pensar: *sich, uns, euch* son iguales en acusativo y dativo. El problema es solo *mich/mir* y *dich/dir*.",
+                "q": [
+                    q("«¡Imaginate!» (a un amigo)", "Stell dir vor!", ["Stell dir vor!", "Stell dich vor!", "Stell vor dir!"]),
+                    q("Completá: *Ich wünsche ___ ein neues Handy.*", "mir", ["mir", "mich", "ich"]),
+                    q("Completá: *Darf ich ___ vorstellen? Ich heiße Lena.*", "mich", ["mich", "mir", "sich"]),
+                ],
+            },
         ],
     },
     "vocab": [
@@ -219,6 +249,9 @@ WEEK = {
         tr(0, "Va a llover.", "Es wird regnen.", note="Predicción: *Es wird regnen*."),
         tr(0, "Me pongo nervioso.", "Ich werde nervös.", note="*werden* solo = ponerse."),
         ty(0, "Escribí la forma de *werden*.", "du ___", "wirst", note="*du wirst*."),
+        ch(0, "Le contás a un amigo tu plan. ¿Qué es lo más natural?", "(El sábado voy a lo de mis viejos.)", "Am Samstag fahre ich zu meinen Eltern.", ["Am Samstag fahre ich zu meinen Eltern.", "Am Samstag werde ich zu meinen Eltern fahren.", "Am Samstag will ich zu meinen Eltern fahren."], "Plan con fecha: alcanza el presente. *werde … fahren* no está mal, pero suena solemne; *will* es «quiero», no «voy a»."),
+        ch(0, "¿Qué es lo más natural en una charla?", "(Mañana te llamo.)", "Ich rufe dich morgen an.", ["Ich rufe dich morgen an.", "Ich werde dich morgen anrufen.", "Ich rufe dich morgen anrufen."], "Con *morgen* el presente alcanza. *Ich werde dich morgen anrufen* es correcto, pero suena a promesa formal. La tercera mezcla las dos."),
+        ch(0, "¿En cuál el Futur I es la mejor opción?", "Elegí la situación.", "Una promesa: «Te prometo que nunca más voy a llegar tarde.»", ["Una promesa: «Te prometo que nunca más voy a llegar tarde.»", "Un plan con fecha: «El lunes empiezo el curso.»", "Un horario: «El tren sale a las ocho.»"], "Para promesas, propósitos y predicciones va bien *werden*: *Ich werde nie wieder zu spät kommen*. Planes con fecha y horarios, en presente."),
         # parte 1 — infinitivo con zu
         ch(1, "Elegí la forma correcta.", "Hast du Lust, ins Kino ___?", "zu gehen", ["zu gehen", "gehen", "um gehen"], "*Lust haben* + *zu* + infinitivo."),
         ch(1, "¿Cuál está bien?", "(Mañana tengo que levantarme temprano.)", "Ich muss morgen früh aufstehen.", ["Ich muss morgen früh aufstehen.", "Ich muss morgen früh aufzustehen.", "Ich muss morgen früh zu aufstehen."], "Con modales, sin *zu*."),
@@ -252,5 +285,22 @@ WEEK = {
         tr(2, "Me propuse leer todos los días.", "Ich habe mir vorgenommen, jeden Tag zu lesen.", ["Ich habe mir vorgenommen, jeden Tag zu lesen.", "Ich habe mir vorgenommen jeden Tag zu lesen.", "Ich nehme mir vor, jeden Tag zu lesen.", "Ich nehme mir vor jeden Tag zu lesen."], "*sich vornehmen* (dativo) + *zu*."),
         ty(2, "Escribí en alemán.", "«¿Para qué?»", "Wozu?", ["Wozu?", "Wozu"], "*Wozu?* pregunta por la finalidad."),
         li(2, "damit", ["damit", "darin", "danach"], "*damit*: «para que» o «con eso»."),
+        # parte 2 — reflexivos en dativo
+        ch(2, "Elegí el pronombre.", "Ich kann ___ das gut vorstellen.", "mir", ["mir", "mich", "sich"], "*sich etwas vorstellen* = imaginarse algo: hay otro objeto (*das*), así que dativo: *mir*."),
+        ch(2, "Elegí el pronombre.", "Guten Tag, darf ich ___ vorstellen? Mein Name ist Ruiz.", "mich", ["mich", "mir", "sich"], "Presentarse: el único objeto sos vos → acusativo *mich*. Con otra cosa (*das*) sería *mir*: imaginarse."),
+        ch(2, "Elegí el pronombre.", "Hast du ___ den Film schon angesehen?", "dir", ["dir", "dich", "sich"], "*sich etwas ansehen*: el objeto es *den Film*, el reflexivo va en dativo: *dir*."),
+        cz(2, "Escribí el pronombre.", "Merk ___ das: Der Kurs beginnt um acht!", "dir", note="*sich etwas merken* = retener, acordarse. Imperativo con *du* + dativo: *Merk dir das!* (no «Merk dich»)."),
+        cz(2, "Escribí el pronombre.", "Was wünschst du ___ zum Geburtstag?", "dir", note="*sich etwas wünschen*: lo que deseás es el acusativo (*was*), vos vas en dativo: *dir*."),
+        tr(2, "No me puedo acordar de su número.", "Ich kann mir seine Nummer nicht merken.", ["Ich kann mir seine Nummer nicht merken.", "Ich kann mir ihre Nummer nicht merken.", "Seine Nummer kann ich mir nicht merken.", "Ihre Nummer kann ich mir nicht merken.", "Ich kann mich nicht an seine Nummer erinnern.", "Ich kann mich nicht an ihre Nummer erinnern."], "*sich etwas merken* (retener): *mir* + el número en acusativo, sin preposición. También vale *sich erinnern an*."),
+        tr(2, "¡Imaginate! Me voy a vivir a Berlín.", "Stell dir vor, ich ziehe nach Berlin!", ["Stell dir vor, ich ziehe nach Berlin!", "Stell dir vor, ich ziehe nach Berlin.", "Stell dir vor! Ich ziehe nach Berlin.", "Stell dir vor! Ich ziehe nach Berlin!", "Stell dir vor, ich werde nach Berlin ziehen!", "Stell dir vor, ich werde nach Berlin ziehen."], "*Stell dir vor* (dativo: la idea es el otro objeto). Para un plan alcanza el presente: *ich ziehe*."),
+        # parte 1 — ¿zu o no zu? ¿zu o dass?
+        ch(1, "Elegí la forma correcta.", "Am Samstag gehe ich ___.", "schwimmen", ["schwimmen", "zu schwimmen", "um zu schwimmen"], "Después de *gehen* el infinitivo va solo: *Ich gehe schwimmen* (voy a nadar). Igual con *lassen, bleiben, sehen, hören*."),
+        ch(1, "Elegí la forma correcta.", "(Espero que vengas a la fiesta.) Ich hoffe, ___ zur Party.", "dass du kommst", ["dass du kommst", "du zu kommen", "zu kommen"], "Otro sujeto (vos) → *dass* + verbo al final, en indicativo. *zu kommen* sería «espero venir» (yo)."),
+        ch(1, "Elegí la forma correcta.", "(Espero verte pronto.) Ich hoffe, dich bald ___.", "zu sehen", ["zu sehen", "sehen", "dass sehe"], "Mismo sujeto (yo espero, yo te veo) → *zu* + infinitivo."),
+        ch(1, "Elegí la forma correcta.", "Ich bitte dich, morgen pünktlich ___.", "zu sein", ["zu sein", "sein", "dass du bist"], "*jemanden bitten, … zu*: el otro ya está nombrado (*dich*), así que va *zu*. «Te pido que…» se arma con *zu*, no con *dass*."),
+        cz(1, "Escribí *einkaufen*, con *zu* solo si hace falta.", "Ich gehe heute Nachmittag ___.", "einkaufen", note="Después de *gehen* el infinitivo va solo: *Ich gehe einkaufen* (voy a hacer las compras). Con *Ich habe keine Lust* sí sería *einzukaufen*."),
+        cz(1, "Escribí *einkaufen*, con *zu* solo si hace falta.", "Ich habe vergessen, ___.", "einzukaufen", note="*vergessen* pide *zu*; separable: *ein-zu-kaufen*. Compará con *Ich gehe einkaufen*, sin *zu*."),
+        tr(1, "Espero que mi hermana me visite.", "Ich hoffe, dass meine Schwester mich besucht.", ["Ich hoffe, dass meine Schwester mich besucht.", "Ich hoffe, dass mich meine Schwester besucht.", "Ich hoffe, dass meine Schwester mich besuchen kommt.", "Ich hoffe, meine Schwester besucht mich."], "Otro sujeto → *dass*, con el verbo al final y en **indicativo** (*besucht*). No hay subjuntivo como nuestro «visite»."),
+        ty(1, "Uní las dos oraciones con *zu* (el sujeto es el mismo).", "Ich hoffe. Ich bestehe die Prüfung.", "Ich hoffe, die Prüfung zu bestehen.", ["Ich hoffe, die Prüfung zu bestehen.", "Ich hoffe die Prüfung zu bestehen."], "Mismo sujeto (*ich*): se borra el sujeto de la segunda y el verbo va al final con *zu*."),
     ],
 }

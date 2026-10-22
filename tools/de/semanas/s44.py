@@ -30,7 +30,7 @@ WEEK = {
         "parts": [
             {"h": "Animales, comida y cuerpo", "blocks": [0, 1, 2]},
             {"h": "Entender, meter la pata, dar en el clavo", "blocks": [3, 4, 5]},
-            {"h": "Refranes y registro", "blocks": [6, 7]},
+            {"h": "Refranes y registro", "blocks": [6, 7, 8]},
         ],
         "blocks": [
             {
@@ -211,6 +211,26 @@ WEEK = {
                     q("*Ich glaub, mein Schwein pfeift!* expresa…", "asombro", ["asombro", "suerte", "tristeza"]),
                 ],
             },
+            {
+                "h": "Wer …, (der) …: el que…",
+                "r": "Muchos refranes (y avisos) empiezan con ***wer*** = «el que», «quien» (cualquiera que). Es una relativa **sin antecedente**: *wer* + verbo al final, coma, y la principal arranca con el verbo o con un pronombre que retoma (*der, dem, den*). El caso de *wer / wem / wen* depende de su propia oración; el del pronombre que retoma, de la principal.",
+                "table": {"head": ["Parte con wer", "Principal", "Castellano"], "rows": [
+                    ["Wer zuletzt lacht,", "lacht am besten.", "El que ríe último ríe mejor."],
+                    ["Wer rastet,", "*der* rostet.", "El que se detiene se oxida."],
+                    ["Wer zu spät kommt,", "*den* bestraft das Leben.", "Al que llega tarde, la vida lo castiga."],
+                    ["*Wem* das nicht gefällt,", "*der* kann gehen.", "Al que no le guste, que se vaya."],
+                ]},
+                "ex": [
+                    ["*Wer* Fragen *hat*, kann mich jederzeit anrufen.", "El que tenga preguntas puede llamarme cuando quiera."],
+                    ["*Wer* A *sagt*, muss auch B sagen.", "Lo que se empieza, se termina."],
+                ],
+                "warn": "«El que…» al principio no es «Der, der…»: lo natural es *Wer zuletzt lacht, …*. El castellano pone subjuntivo («el que **tenga** preguntas»); el alemán, indicativo: *Wer Fragen **hat***. Y si los casos no coinciden, el pronombre que retoma es obligatorio: *Wem das nicht gefällt, **der** kann gehen* (*wem* es dativo, *der* nominativo).",
+                "tip": "Si *wer* y la principal piden el mismo caso (nominativo/nominativo), el *der* se puede omitir: *Wer zuletzt lacht, (der) lacht am besten.*",
+                "q": [
+                    q("«El que ríe último ríe mejor.»", "Wer zuletzt lacht, lacht am besten.", ["Wer zuletzt lacht, lacht am besten.", "Der zuletzt lacht, lacht am besten.", "Wer lacht zuletzt, lacht am besten."]),
+                    q("Completá: *___ das nicht passt, der kann ja gehen.*", "Wem", ["Wem", "Wer", "Wen"]),
+                ],
+            },
         ],
     },
     "vocab": [
@@ -287,6 +307,12 @@ WEEK = {
         cz(2, "Escribí la palabra que falta.", "Alles hat ein Ende, nur die ___ hat zwei.", "Wurst", note="Dicho humorístico para cerrar algo. " + MAY),
         tr(2, "La práctica hace al maestro.", "Übung macht den Meister.", note="El refrán es fijo: *Übung macht den Meister*."),
         tr(2, "Todo comienzo es difícil.", "Aller Anfang ist schwer.", note="*Aller Anfang*: forma vieja y fija del refrán."),
+        # parte 2 — wer …, (der) …
+        ch(2, "Elegí el pronombre.", "___ zuletzt lacht, lacht am besten.", "Wer", ["Wer", "Der", "Was"], "«El que» sin antecedente = *wer*, con el verbo al final de su parte."),
+        ch(2, "Elegí el pronombre.", "___ das nicht gefällt, der kann gehen.", "Wem", ["Wem", "Wer", "Wen"], "*gefallen* pide dativo: *wem*. La principal retoma en nominativo con *der*."),
+        cz(2, "Escribí el pronombre que retoma.", "Wer mir hilft, ___ helfe ich auch.", "dem", note="*wer* es nominativo en su parte, pero *helfen* pide dativo en la principal → *dem* (obligatorio, porque los casos no coinciden)."),
+        ch(2, "Encontrá el error.", "¿Qué oración tiene un error?", "Wer Fragen hat, er kann mich anrufen.", ["Wer Fragen hat, er kann mich anrufen.", "Wer Fragen hat, kann mich anrufen.", "Wer Fragen hat, der kann mich anrufen."], "Se retoma con *der* (o con nada), no con *er*; y después va el verbo."),
+        tr(2, "El que tenga preguntas puede llamarme.", "Wer Fragen hat, kann mich anrufen.", ["Wer Fragen hat, kann mich anrufen.", "Wer Fragen hat, der kann mich anrufen.", "Wer eine Frage hat, kann mich anrufen.", "Wer eine Frage hat, der kann mich anrufen.", "Wer Fragen hat, kann mich gerne anrufen.", "Wer Fragen hat, kann mich gern anrufen.", "Wer Fragen hat, darf mich anrufen.", "Wer Fragen hat kann mich anrufen."], "«El que tenga» (subjuntivo) → *Wer … hat* (indicativo); después, verbo de la principal."),
         ty(2, "Pasá a registro formal (con *gleichgültig*).", "Das ist mir Wurst.", "Das ist mir gleichgültig.", ["Das ist mir gleichgültig.", "Es ist mir gleichgültig.", "Das ist für mich gleichgültig."], "*gleichgültig* = indiferente; registro neutro o formal."),
         ty(2, "Escribí el refrán alemán.", "«De tal palo, tal astilla.»", "Der Apfel fällt nicht weit vom Stamm.", note="*Der Apfel fällt nicht weit vom Stamm*."),
     ],

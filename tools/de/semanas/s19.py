@@ -22,7 +22,7 @@ WEEK = {
         "parts": [
             {"h": "Profesiones y lugares de trabajo", "blocks": [0, 1]},
             {"h": "El adjetivo después de ein, kein, mein", "blocks": [2, 3, 4]},
-            {"h": "Sin artículo: los avisos de empleo", "blocks": [5, 6]},
+            {"h": "Sin artículo: los avisos de empleo", "blocks": [5, 6, 7]},
         ],
         "blocks": [
             {
@@ -151,6 +151,7 @@ WEEK = {
                 ],
                 "warn": "*Leute* es siempre plural: *nette Leute* (gente simpática), no «nette Leute ist». Y en plural sin artículo es *-e* (*gute Ideen*), pero con *keine/meine*, *-en* (*keine guten Ideen*).",
                 "tip": "Pensá que el artículo «se esconde» en el adjetivo: *(der) gut**er** Wein*, *(dem) mit gut**em** Wein*.",
+                "more": ["Lo mismo pasa detrás de un **número** y de *viele, einige, wenige, mehrere* (muchos, algunos, pocos, varios), que no son artículos: *zwei kleine Kinder, viele nette Leute, mit vielen netten Leuten* (los dos con *-en* en dativo).", "Y en los saludos de carta: *Lieber Peter, Liebe Anna* (masculino *-er*, femenino *-e*), *Liebe Grüße* (plural *-e*), *mit freundlichen Grüßen* (dativo plural *-en*)."],
                 "q": [
                     q("Completá: *Ich trinke gern heiß___ Tee.*", "heißen", ["heißen", "heißer", "heiße"]),
                     q("Completá: *Ich esse Brot mit frisch___ Butter.*", "frischer", ["frischer", "frische", "frischen"]),
@@ -175,6 +176,30 @@ WEEK = {
                 "q": [
                     q("Completá: *Wir bieten ein gut___ Gehalt.*", "gutes", ["gutes", "gute", "guten"]),
                     q("Completá: *Er ___ sich bei einer Bank.* (bewerben)", "bewirbt", ["bewirbt", "bewerbt", "bewerben"]),
+                ],
+            },
+            {
+                "h": "Er ist Deutscher; etwas Neues",
+                "r": "Algunos adjetivos se usan como **sustantivo**: van con **mayúscula**, pero **se declinan como adjetivo**, con las terminaciones de esta semana: *der Deutsche / ein Deutscher*. Pasa con *Deutsche*, *Bekannte* (conocido), *Verwandte* (pariente), *Erwachsene* (adulto), *Jugendliche* (adolescente). Y después de *etwas, nichts, viel, wenig*, el adjetivo va con mayúscula y ***-es***: *etwas Neues, nichts Besonderes*.",
+                "table": {"head": ["", "Masculino", "Femenino", "Plural"], "rows": [
+                    ["con der / die", "der Deutsche", "die Deutsche", "die Deutschen"],
+                    ["con ein / sin artículo", "ein Deutscher", "eine Deutsche", "Deutsche"],
+                    ["con mein", "mein Bekannter", "meine Bekannte", "meine Bekannten"],
+                ]},
+                "ex": [
+                    ["Er ist *Deutscher*, sie ist *Deutsche*.", "Él es alemán, ella es alemana."],
+                    ["Das ist *ein Bekannter* von mir.", "Es un conocido mío."],
+                    ["Am Wochenende besuchen wir *Verwandte*.", "El fin de semana visitamos parientes."],
+                    ["Gibt es *etwas Neues*? – Nein, *nichts Besonderes*.", "¿Hay algo nuevo? – No, nada especial."],
+                    ["Ich wünsche dir *alles Gute*!", "¡Te deseo lo mejor!"],
+                ],
+                "warn": "La nacionalidad va sin artículo, como en castellano, pero **con terminación**: *Er ist Deutscher* (no «Er ist Deutsch» ni «Er ist Deutsche»). Y «algo nuevo» no es «etwas neu»: es *etwas Neues*, con mayúscula y *-es*. *Deutsch* sin terminación es el idioma: *Ich lerne Deutsch*.",
+                "tip": "Pensá en un sustantivo invisible: *ein Deutscher (Mann)*, *eine Deutsche (Frau)*. Por eso se declina igual que *ein deutscher Mann*.",
+                "more": ["Con *alles* va *-e*: *alles Gute* (lo mejor), *alles Neue*.", "Casi todos los demás gentilicios son sustantivos comunes con *-er / -in*: *der Argentinier, die Argentinierin; der Spanier*. *Deutsche* es la gran excepción.", "Los participios hacen lo mismo (*der Angestellte, ein Angestellter*): lo ves en la semana 33."],
+                "q": [
+                    q("Completá: *Paul ist ___.* (alemán)", "Deutscher", ["Deutscher", "Deutsche", "Deutsch"]),
+                    q("«algo nuevo»:", "etwas Neues", ["etwas Neues", "etwas neu", "etwas Neue"]),
+                    q("Completá: *Das ist meine ___.* (parienta, una mujer)", "Verwandte", ["Verwandte", "Verwandter", "Verwandten"]),
                 ],
             },
         ],
@@ -230,6 +255,8 @@ WEEK = {
         cz(1, "Escribí el adjetivo con su terminación.", "Unsere ___ Kollegin heißt Marta. (neu)", "neue", note="Femenino nominativo: *-e*."),
         tr(1, "Busco un trabajo nuevo.", "Ich suche einen neuen Job.", ["Ich suche einen neuen Job.", "Ich suche eine neue Stelle.", "Ich suche eine neue Arbeit.", "Ich suche einen neuen Arbeitsplatz."], "Acusativo: *einen neuen* / *eine neue*."),
         tr(1, "Es una profesión interesante.", "Das ist ein interessanter Beruf.", ["Das ist ein interessanter Beruf.", "Es ist ein interessanter Beruf."], "*der Beruf* → *ein interessanter*."),
+        cz(1, "Escribí el comparativo de *gut* con su terminación.", "Sie sucht eine ___ Stelle.", "bessere", note="Comparativo *besser-* + femenino acusativo *-e*: *eine bessere Stelle* (semana 16)."),
+        cz(1, "Escribí el comparativo de *groß* con su terminación.", "Wir brauchen ein ___ Büro.", "größeres", ["größeres", "groesseres"], "Con *ein* el neutro muestra *-es*: *größer-* + *-es* = *ein größeres Büro*."),
         tr(1, "Mis compañeros nuevos son simpáticos.", "Meine neuen Kollegen sind nett.", ["Meine neuen Kollegen sind nett.", "Meine neuen Kollegen sind sympathisch.", "Meine neuen Kolleginnen sind nett.", "Meine neuen Kolleginnen sind sympathisch."], "Plural con *meine*: *-en*; el predicativo no se declina."),
         # parte 2 — sin artículo, avisos y postulación
         ch(2, "Elegí la terminación.", "Ich trinke gern schwarz___ Tee.", "schwarzen", ["schwarzen", "schwarzer", "schwarze"], "Sin artículo, acusativo masculino (*den*): *-en*."),
@@ -247,5 +274,30 @@ WEEK = {
         tr(2, "Ofrecemos un buen sueldo y horarios flexibles.", "Wir bieten ein gutes Gehalt und flexible Arbeitszeiten.", ["Wir bieten ein gutes Gehalt und flexible Arbeitszeiten.", "Wir bieten flexible Arbeitszeiten und ein gutes Gehalt."], "*ein gutes* (neutro) y *flexible* (plural sin artículo)."),
         tr(2, "Mañana tengo una entrevista de trabajo.", "Morgen habe ich ein Vorstellungsgespräch.", ["Morgen habe ich ein Vorstellungsgespräch.", "Ich habe morgen ein Vorstellungsgespräch."], "*das Vorstellungsgespräch*."),
         ty(2, "Escribí en alemán, con artículo.", "«el currículum»", "der Lebenslauf", note="*das Leben* (la vida) + *der Lauf* (el recorrido). " + MAY),
+        # parte 2 — sin artículo: números, viele y saludos
+        cz(2, "Escribí *älter* con su terminación.", "Ich habe drei ___ Brüder.", "ältere", ["ältere", "aeltere"], "Detrás de un número no hay artículo: plural sin artículo → *-e*: *drei ältere Brüder* (comparativo *älter-* + *-e*)."),
+        cz(2, "Escribí *jung* con su terminación.", "In der Firma arbeiten viele ___ Leute.", "junge", note="*viele* no es artículo: el adjetivo toma *-e* como sin artículo (*viele junge Leute*). Con *die* sería *die jungen Leute*."),
+        ch(2, "Elegí la terminación.", "Ich habe mit vielen nett___ Kunden gesprochen.", "netten", ["netten", "nette", "nettem"], "Dativo plural: *vielen* y el adjetivo, los dos con *-en*."),
+        ch(2, "Elegí el cierre de una carta formal.", "Mit ___ Grüßen", "freundlichen", ["freundlichen", "freundliche", "freundlicher"], "*mit* + dativo plural sin artículo → *-en*: *mit freundlichen Grüßen*."),
+        # parte 2 — adjetivos sustantivados
+        cz(2, "Escribí la nacionalidad.", "Er kommt aus Hamburg. Er ist ___.", "Deutscher", note="Adjetivo sustantivado, sin artículo, masculino → *-er*: *Er ist Deutscher*. Una mujer: *Sie ist Deutsche*. " + MAY),
+        cz(2, "Escribí *neu* como sustantivo.", "Gibt es etwas ___?", "Neues", note="Después de *etwas*: mayúscula y *-es*: *etwas Neues*. «etwas neu» es el calco de «algo nuevo». " + MAY),
+        cz(2, "Escribí *besonder-* como sustantivo.", "Im Urlaub haben wir nichts ___ gemacht.", "Besonderes", note="*nichts* + adjetivo con mayúscula y *-es*: *nichts Besonderes* (nada especial). " + MAY),
+        ch(2, "Elegí la forma.", "Das ist ein ___ von mir. (conocido)", "Bekannter", ["Bekannter", "Bekannte", "Bekannten"], "Se declina como adjetivo: con *ein*, masculino nominativo *-er*: *ein Bekannter*."),
+        ch(2, "Encontrá el error.", "¿Qué oración tiene un error?", "Ich habe etwas neu gekauft.", ["Ich habe etwas neu gekauft.", "Ich habe etwas Neues gekauft.", "Ich habe nichts Neues gekauft."], "«algo nuevo» = *etwas Neues*: mayúscula y *-es*."),
+        tr(2, "Ella es alemana.", "Sie ist Deutsche.", ["Sie ist Deutsche.", "Sie ist deutsch."], "Sin artículo y con *-e* (femenino): *Deutsche*. *Sie ist deutsch* (adjetivo, en minúscula) también es correcto; lo que no va es «Sie ist eine Deutsch»."),
+        tr(2, "No hay nada nuevo.", "Es gibt nichts Neues.", ["Es gibt nichts Neues.", "Nichts Neues."], "Una sola negación (*nichts*) y el adjetivo con mayúscula y *-es*."),
+        tr(2, "Querido Peter: (al empezar un mail)", "Lieber Peter,", ["Lieber Peter,", "Lieber Peter", "Lieber Peter!"], "Sin artículo, masculino → *-er*: *Lieber Peter*. A una mujer: *Liebe Anna*."),
+        # parte 2 — repaso: nicht o kein, y dónde va nicht
+        ch(2, "Elegí la negación.", "Ich habe ___ Erfahrung als Koch.", "keine", ["keine", "nicht", "keinen"], "*Erfahrung* sin artículo → *keine Erfahrung*."),
+        ch(2, "Elegí la negación normal.", "(No conozco a la jefa.)", "Ich kenne die Chefin nicht.", ["Ich kenne die Chefin nicht.", "Ich kenne keine Chefin.", "Ich nicht kenne die Chefin."], "Objeto con *die* → *nicht* al final. *keine Chefin* = «ninguna jefa»."),
+        tr(2, "Ayer no trabajé en la oficina.", "Gestern habe ich nicht im Büro gearbeitet.", ["Gestern habe ich nicht im Büro gearbeitet.", "Ich habe gestern nicht im Büro gearbeitet."], "*nicht* después del tiempo (*gestern*) y antes del lugar (*im Büro*); el participio cierra."),
+        ty(2, "Negá la oración con *nicht*.", "Ich habe den Lebenslauf geschickt.", "Ich habe den Lebenslauf nicht geschickt.", note="Después del objeto (*den Lebenslauf*) y antes del participio."),
+        # parte 2 — repaso: wo o wohin, hin/her, tiempo sin preposición (semanas 12 y 14)
+        cz(2, "Escribí el artículo.", "Ich stelle den Laptop auf ___ Schreibtisch. (der Schreibtisch)", "den", note="*stellen* = poner: destino (*Wohin?*), acusativo: *auf den Schreibtisch*."),
+        ch(2, "Elegí.", "Mein Büro ist ___ dritten Stock.", "im", ["im", "ins", "in den"], "Dónde, sin movimiento: *in* + dativo → *im dritten Stock*."),
+        tr(2, "Puse la llave en el cajón.", "Ich habe den Schlüssel in die Schublade gelegt.", ["Ich habe den Schlüssel in die Schublade gelegt.", "Ich habe den Schlüssel in die Schublade getan.", "Ich legte den Schlüssel in die Schublade."], "«Puse en» = destino: *in die Schublade* (acusativo). Después queda: *Der Schlüssel liegt in der Schublade*."),
+        ch(2, "Elegí.", "Die Chefin ist in ihrem Büro und ruft: «Kommen Sie bitte ___!»", "rein", ["rein", "raus", "drinnen"], "Ella está adentro y el otro viene hacia ella: *rein* (*herein*). *drinnen* es dónde, no adónde."),
+        tr(2, "Los viernes trabajo desde casa.", "Freitags arbeite ich von zu Hause.", ["Freitags arbeite ich von zu Hause.", "Ich arbeite freitags von zu Hause.", "Freitags arbeite ich von zu Hause aus.", "Ich arbeite freitags von zu Hause aus.", "Freitags arbeite ich im Homeoffice.", "Ich arbeite freitags im Homeoffice."], "Costumbre: *freitags* (todos los viernes), no *am Freitag* (un viernes concreto)."),
     ],
 }

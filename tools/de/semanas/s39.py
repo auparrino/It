@@ -20,8 +20,8 @@ WEEK = {
     "lesson": {
         "intro": "*Un-ver-gess-lich*: cuatro piezas, una sola palabra, y la entendés aunque no la hayas visto nunca. Esta semana desarmás el mecano del alemán, con palabras del mundo universitario: *Vorlesung, Hausarbeit, Sprechstunde*.",
         "parts": [
-            {"h": "Prefijos: un-, miss-, ver-, zer-, be-", "blocks": [0, 1, 2]},
-            {"h": "Sufijos de sustantivo: -ung, -heit, -keit, -schaft", "blocks": [3, 4]},
+            {"h": "Prefijos: un-, miss-, ver-, zer-, be-", "blocks": [0, 1, 2, 7, 8]},
+            {"h": "Sufijos de sustantivo: -ung, -heit, -keit, -schaft", "blocks": [3, 4, 9]},
             {"h": "Sufijos de adjetivo: -bar, -los, -lich, -ig, -isch", "blocks": [5, 6]},
         ],
         "blocks": [
@@ -174,6 +174,75 @@ WEEK = {
                     q("«Todos los días» →", "täglich", ["täglich", "tagsüber", "tägig"]),
                 ],
             },
+            {
+                "h": "er- y ent-",
+                "r": "**er-** marca que se **llega al resultado** (a veces, con esfuerzo): *reichen → erreichen* (alcanzar, lograr), *kämpfen → erkämpfen* (conseguir peleando). Con verbos de muerte, morir **por** eso: *frieren → erfrieren* (morir congelado), *trinken → ertrinken* (ahogarse). **ent-** se parece a nuestro **«des-»**: quitar, alejarse, salir de: *decken → entdecken* (des-cubrir), *wickeln → entwickeln* (des-arrollar), *spannen → entspannen* (dis-tender, relajar), *kommen → entkommen* (escaparse).",
+                "table": {"head": ["Base", "Con prefijo", "Castellano"], "rows": [
+                    ["reichen (alcanzar, bastar)", "erreichen", "alcanzar, llegar a, lograr"],
+                    ["frieren (tener frío)", "erfrieren", "morir congelado"],
+                    ["trinken (tomar)", "ertrinken", "ahogarse"],
+                    ["decken (cubrir)", "entdecken", "descubrir"],
+                    ["wickeln (envolver)", "entwickeln", "desarrollar"],
+                    ["spannen (tensar)", "entspannen", "relajar(se)"],
+                ]},
+                "ex": [
+                    ["Wir haben den Zug gerade noch *erreicht*.", "Alcanzamos el tren justo."],
+                    ["Kolumbus *entdeckte* 1492 Amerika.", "Colón descubrió América en 1492."],
+                    ["Die Firma *entwickelt* eine neue App.", "La empresa desarrolla una aplicación nueva."],
+                    ["Am Wochenende will ich mich nur *entspannen*.", "El fin de semana solo quiero relajarme."],
+                ],
+                "warn": "Los dos son **inseparables** y sin *ge-*: *erreicht, entdeckt, entwickelt*. Y *erreichen* lleva acusativo directo, sin preposición: «llegar **al** tren / **a** la meta» = *den Zug / das Ziel erreichen* (nada de «an den Zug»).",
+                "tip": "Si ves *ent-*, probá traducir con «des-»: *entdecken, entwickeln, enttäuschen* (des-ilusionar, decepcionar), *entladen* (descargar).",
+                "q": [
+                    q("«Descubrir» →", "entdecken", ["entdecken", "erdecken", "verdecken"]),
+                    q("Completá: *Wir haben das Ziel ___.* (logramos)", "erreicht", ["erreicht", "entreicht", "gereicht"]),
+                ],
+            },
+            {
+                "h": "Separable o no: el acento manda",
+                "r": "Algunos prefijos (*um-, über-, unter-, durch-, wieder-*) pueden ir de las dos maneras, y **cambia el significado**. Si el **acento** cae en el prefijo, es **separable** y tiene el sentido concreto (*-ge-* en el medio). Si el acento cae en el verbo, es **inseparable**, sin *ge-*, y casi siempre tiene un sentido figurado.",
+                "table": {"head": ["Separable (acento en el prefijo)", "Inseparable (acento en el verbo)"], "rows": [
+                    ["UMfahren: Er fährt den Baum um. (lo voltea con el auto) · hat umgefahren", "umFAHren: Er umfährt den Stau. (lo esquiva) · hat umfahren"],
+                    ["ÜBERsetzen: Wir setzen mit der Fähre über. (cruzamos) · hat übergesetzt", "überSETzen: Ich übersetze den Text. (traduzco) · hat übersetzt"],
+                    ["WIEDERholen: Er holt den Ball wieder. (lo va a buscar) · hat wiedergeholt", "wiederHOlen: Kannst du das wiederholen? (repetir) · hat wiederholt"],
+                    ["DURCHschauen: Ich schaue die Post durch. (la reviso por encima) · hat durchgeschaut", "durchSCHAUen: Ich durchschaue dich! (te calé) · hat durchschaut"],
+                ]},
+                "ex": [
+                    ["Der Text ist schon *übersetzt*.", "El texto ya está traducido."],
+                    ["Wir haben den Stau *umfahren*.", "Esquivamos el embotellamiento."],
+                    ["Ein Lkw hat das Schild *umgefahren*.", "Un camión volteó el cartel."],
+                ],
+                "warn": "El error típico es «Ich habe den Text übergesetzt» o «Ich setze den Text über»: «traducir» es inseparable: *Ich übersetze, ich habe übersetzt*. Lo mismo «repetir»: *Ich wiederhole, ich habe wiederholt*.",
+                "tip": "El significado más usado en el día a día suele ser el **inseparable**: *übersetzen* (traducir), *wiederholen* (repetir), *sich unterhalten* (charlar).",
+                "q": [
+                    q("Perfekt de «traducir»: *Ich habe den Brief ___.*", "übersetzt", ["übersetzt", "übergesetzt", "geübersetzt"]),
+                    q("*Wir haben den Stau umfahren* significa…", "Esquivamos el embotellamiento.", ["Esquivamos el embotellamiento.", "Chocamos el embotellamiento.", "Volvimos al embotellamiento."]),
+                ],
+            },
+            {
+                "h": "Compuestos: la -s- y la -n- del medio",
+                "r": "Para armar un compuesto, a veces hace falta una letra de **unión** entre las partes. No es plural ni genitivo: es pegamento. Va **-s-** después de *-ung, -heit, -keit, -schaft, -ion, -tät* (y en algunos masculinos y neutros); va **-n-/-en-** después de muchos femeninos en *-e*. El **género y el plural** los pone siempre la **última** parte.",
+                "table": {"head": ["Partes", "Compuesto", "Castellano"], "rows": [
+                    ["die Wohnung + die Suche", "die Wohnung**s**suche", "la búsqueda de departamento"],
+                    ["die Arbeit + der Platz", "der Arbeit**s**platz", "el puesto de trabajo"],
+                    ["die Universität + die Bibliothek", "die Universität**s**bibliothek", "la biblioteca de la universidad"],
+                    ["die Geburt + der Tag", "der Geburt**s**tag", "el cumpleaños"],
+                    ["die Straße + die Bahn", "die Straße**n**bahn", "el tranvía"],
+                    ["die Stadt + das Zentrum", "das Stadtzentrum", "el centro de la ciudad"],
+                    ["schreiben + der Tisch", "der Schreibtisch", "el escritorio"],
+                    ["groß + die Stadt", "die Großstadt", "la gran ciudad"],
+                ]},
+                "ex": [
+                    ["Die *Wohnungssuche* in München ist ein Albtraum.", "Buscar departamento en Múnich es una pesadilla."],
+                    ["Wir haben zwei neue *Arbeitsplätze*.", "Tenemos dos puestos de trabajo nuevos."],
+                ],
+                "warn": "La -s- **no** depende del género de la última parte: *der Arbeitsplatz, die Arbeitszeit, das Arbeitsamt*: la pone la **primera** (*Arbeit*). Y no hay «de» en el medio: «la búsqueda **de** departamento» es una sola palabra, leída de atrás para adelante.",
+                "tip": "Si el primer elemento es un verbo, va solo la raíz: *schreib-en → der Schreibtisch, wohn-en → das Wohnzimmer*. Si es un adjetivo, sin terminación: *die Großstadt*.",
+                "q": [
+                    q("die Wohnung + die Suche →", "die Wohnungssuche", ["die Wohnungssuche", "die Wohnungsuche", "die Wohnungensuche"]),
+                    q("¿Qué género tiene *Arbeitsplatz*?", "der", ["der", "die", "das"]),
+                ],
+            },
         ],
     },
     "vocab": [
@@ -246,5 +315,22 @@ WEEK = {
         tr(2, "La consulta es gratis.", "Die Beratung ist kostenlos.", ["Die Beratung ist kostenlos.", "Die Sprechstunde ist kostenlos.", "Die Beratung ist gratis.", "Die Sprechstunde ist gratis."], "*kostenlos* = sin costo."),
         tr(2, "Este plan no es realizable.", "Dieser Plan ist nicht machbar.", ["Dieser Plan ist nicht machbar.", "Der Plan ist nicht machbar.", "Dieser Plan ist undurchführbar.", "Der Plan ist undurchführbar."], "*machbar* = realizable."),
         li(2, "unvergesslich", ["unvergesslich", "unverständlich", "unverzichtbar"], "*un-ver-gess-lich* = inolvidable."),
+        # parte 0 — er- y ent-
+        ch(0, "Elegí el verbo.", "Kolumbus hat 1492 Amerika ___.", "entdeckt", ["entdeckt", "erdeckt", "verdeckt"], "*ent-* ≈ «des-»: *entdecken* = des-cubrir. *verdecken* es tapar."),
+        ch(0, "Elegí el verbo.", "Wir haben den letzten Zug gerade noch ___.", "erreicht", ["erreicht", "entreicht", "gereicht"], "*er-* = llegar al resultado: *erreichen* (alcanzar), con acusativo y sin *ge-*."),
+        cz(0, "Escribí el verbo con *ent-* (relajarse).", "Nach der Arbeit will ich mich nur ___.", "entspannen", note="*spannen* = tensar; *entspannen* = dis-tender, relajar(se). Reflexivo: *sich entspannen*."),
+        tr(0, "La empresa desarrolla un producto nuevo.", "Die Firma entwickelt ein neues Produkt.", ["Die Firma entwickelt ein neues Produkt.", "Das Unternehmen entwickelt ein neues Produkt."], "«des-arrollar» = *ent-wickeln* (des-envolver). Inseparable: *entwickelt*."),
+        # parte 0 — separable o no
+        tr(0, "Ya traduje el texto.", "Ich habe den Text schon übersetzt.", ["Ich habe den Text schon übersetzt.", "Ich habe den Text bereits übersetzt.", "Den Text habe ich schon übersetzt."], "«traducir» = *überSETzen*, inseparable: *übersetzt*, sin *ge-*. «übergesetzt» es «cruzado en barco»."),
+        tr(0, "¿Podés repetir eso?", "Kannst du das wiederholen?", ["Kannst du das wiederholen?", "Kannst du das bitte wiederholen?", "Könntest du das wiederholen?", "Könntest du das bitte wiederholen?", "Kannst du das noch mal wiederholen?"], "«repetir» = *wiederHOlen*, inseparable. *wiederholen* separable (*holt … wieder*) es «ir a buscar de vuelta»."),
+        ch(0, "¿Qué significa?", "Wir haben den Stau umfahren.", "Esquivamos el embotellamiento.", ["Esquivamos el embotellamiento.", "Atropellamos el embotellamiento.", "Volvimos al embotellamiento."], "Sin *-ge-* en el medio → inseparable (*umFAHren*) = rodear, esquivar. *umgefahren* = voltear con el auto."),
+        ch(0, "Encontrá el error.", "¿Qué oración tiene un error?", "Ich habe den Text ins Spanische übergesetzt.", ["Ich habe den Text ins Spanische übergesetzt.", "Ich habe den Text ins Spanische übersetzt.", "Ein Lkw hat das Schild umgefahren."], "«traducir» es inseparable: *übersetzt*. *umgefahren* sí está bien: es el separable (voltear)."),
+        # parte 1 — compuestos con -s- y -n-
+        ty(1, "Armá el compuesto, con artículo.", "die Arbeit + der Platz", "der Arbeitsplatz", note="*Arbeit* pide la -s- de unión; el género lo pone *der Platz*. " + MAY),
+        ty(1, "Armá el compuesto, con artículo.", "die Straße + die Bahn", "die Straßenbahn", ["die Straßenbahn", "die Strassenbahn"], "Femenino en *-e* → *-n-* de unión: *Straße-n-bahn*. " + MAY),
+        ty(1, "Armá el compuesto, con artículo.", "die Stadt + das Zentrum", "das Stadtzentrum", note="Sin letra de unión; el género lo pone *das Zentrum*. " + MAY),
+        ch(1, "Elegí la forma.", "die Wohnung + die Suche", "die Wohnungssuche", ["die Wohnungssuche", "die Wohnungsuche", "die Wohnungensuche"], "Después de *-ung* va siempre *-s-*: *Wohnung-s-suche* (con dos s)."),
+        ch(1, "Elegí el artículo.", "___ Universitätsbibliothek", "die", ["die", "der", "das"], "Manda la última parte: *die Bibliothek*. La *-s-* es de unión, viene de *-tät*."),
+        ty(1, "Armá el compuesto, con artículo.", "schreiben + der Tisch", "der Schreibtisch", note="Verbo como primera parte: solo la raíz (*schreib-*). " + MAY),
     ],
 }

@@ -763,9 +763,11 @@ WEEKS.append({
                 ]},
                 "warn": "La *-s* del castellano casi nunca sirve: sobre todo con palabras extranjeras o terminadas en vocal (no *-e*): *Hotels, Autos, Handys, Omas*.",
                 "tip": "Los femeninos en *-e* y *-ung* casi siempre hacen *-n/-en*: *die Wohnungen*. Y *-in* duplica la n: *die Lehrerinnen*.",
+                "more": ["En el diccionario el plural viene abreviado detrás de la palabra: *der Tisch, -e* (= *die Tische*), *das Buch, ¨-er* (= *die Bücher*: la ¨ avisa que hay diéresis), *die Lampe, -n* (= *die Lampen*), *das Zimmer, –* (= *die Zimmer*, sin cambio), *das Auto, -s*. Anotá cada sustantivo nuevo así: artículo + palabra + plural."],
                 "q": [
                     q("Plural de *das Kind*:", "die Kinder", ["die Kinder", "die Kinds", "die Kinden"]),
                     q("Plural de *das Handy*:", "die Handys", ["die Handys", "die Handies", "die Handy"]),
+                    q("En el diccionario dice *der Stuhl, ¨-e*. ¿Cuál es el plural?", "die Stühle", ["die Stühle", "die Stuhle", "die Stühlen"]),
                 ],
             },
             {
@@ -885,6 +887,7 @@ WEEKS.append({
         "Raíz en *-t/-d*: una e de apoyo: *du arbeitest, er arbeitet*.",
         "*haben*: *ich habe, du hast, er hat, wir haben, ihr habt, sie haben*.",
         "Acusativo: solo cambia el masculino: *der → den, ein → einen, kein → keinen*.",
+        "Pronombres objeto: *mich, dich, ihn, sie, es, uns, euch*; con cosas siguen el género alemán: *der Schlüssel → Ich habe ihn*.",
         "*möchte*: *ich möchte, du möchtest, er möchte* (sin -t).",
         "*kein* niega sustantivos con *ein* o sin artículo; *nicht*, todo lo demás.",
     ],
@@ -892,8 +895,8 @@ WEEKS.append({
         "intro": "Ya conjugaste *wohnen* y *kommen*: esa es la regla de casi todos los verbos. Esta semana se suma *haben* y aparece el objeto directo.",
         "parts": [
             {"h": "El presente y haben", "blocks": [0, 1, 2]},
-            {"h": "El acusativo", "blocks": [3, 4]},
-            {"h": "möchte, nicht y kein", "blocks": [5, 6]},
+            {"h": "El acusativo", "blocks": [3, 4, 7]},
+            {"h": "möchte, nicht y kein", "blocks": [5, 6, 8, 9]},
         ],
         "blocks": [
             {
@@ -1053,6 +1056,76 @@ WEEKS.append({
                     q("Completá: *Er ist ___ müde.*", "nicht", ["nicht", "kein", "keine"]),
                 ],
             },
+            {
+                "h": "mich, dich, ihn: los pronombres como objeto",
+                "r": "Los pronombres también tienen acusativo, el «me, te, lo, la» del objeto directo. Cambian *ich → mich*, *du → dich*, *er → ihn*, *wir → uns*, *ihr → euch*; *sie, es* y *Sie* quedan igual. Con **cosas** el pronombre copia el **género alemán** de la palabra: *der Schlüssel → ihn*, *die Jacke → sie*, *das Buch → es*.",
+                "table": {"head": ["Sujeto", "Objeto (acusativo)", "Castellano"], "rows": [
+                    ["ich", "mich", "me"],
+                    ["du", "dich", "te"],
+                    ["er", "ihn", "lo (a él; una cosa *der*)"],
+                    ["sie", "sie", "la (a ella; una cosa *die*)"],
+                    ["es", "es", "lo (una cosa *das*)"],
+                    ["wir", "uns", "nos"],
+                    ["ihr", "euch", "los, las (a ustedes)"],
+                    ["sie / Sie", "sie / Sie", "los, las / lo, la (a usted)"],
+                ]},
+                "ex": [
+                    ["Wo ist der Schlüssel? – Ich habe *ihn*.", "¿Dónde está la llave? – La tengo yo."],
+                    ["Die Jacke? Ich nehme *sie*.", "¿La campera? Me la llevo."],
+                    ["Das Buch ist gut. Ich kaufe *es*.", "El libro está bueno. Lo compro."],
+                    ["Ich liebe *dich*.", "Te quiero."],
+                    ["Brauchst du *mich*?", "¿Me necesitás?"],
+                ],
+                "warn": "El pronombre sigue el género **alemán**, no el castellano: «la llave» es *der Schlüssel*, así que «la tengo» es *Ich habe ihn*, no «sie». Y el pronombre va **después** del verbo, no antes como el «lo» nuestro: *Ich sehe ihn*, nunca «Ich ihn sehe».",
+                "tip": "*ihn* termina en *-n* como *den* y *einen*: otra vez, solo cambia el masculino. Ojo más adelante con *ihm* (con m), que es «le» y llega en la semana 13: *ihn* = lo, *ihm* = le.",
+                "q": [
+                    q("Completá: *Der Kaffee ist gut. Ich trinke ___ gern.*", "ihn", ["ihn", "er", "es"]),
+                    q("¿Cómo decís «Te quiero»?", "Ich liebe dich.", ["Ich liebe dich.", "Ich dich liebe.", "Ich liebe du."]),
+                    q("*Die Tasche? Ich habe ___.*", "sie", ["sie", "ihn", "es"]),
+                ],
+            },
+            {
+                "h": "¿Dónde va nicht?",
+                "r": "En castellano el «no» va siempre pegado antes del verbo. En alemán *nicht* se mueve: va **después** del objeto con *der/die/das*, de un pronombre y de palabras de tiempo como *heute*; y va **antes** de un lugar, un adjetivo o algo con preposición.",
+                "table": {"head": ["Afirmativa", "Negativa", "nicht va…"], "rows": [
+                    ["Ich kenne den Mann.", "Ich kenne den Mann *nicht*.", "después del objeto"],
+                    ["Ich kaufe es.", "Ich kaufe es *nicht*.", "después del pronombre"],
+                    ["Ich arbeite heute.", "Ich arbeite heute *nicht*.", "después del tiempo"],
+                    ["Ich wohne in Berlin.", "Ich wohne *nicht* in Berlin.", "antes del lugar"],
+                    ["Das ist teuer.", "Das ist *nicht* teuer.", "antes del adjetivo"],
+                ]},
+                "ex": [
+                    ["Ich brauche den Schlüssel *nicht*.", "No necesito la llave."],
+                    ["Er kommt heute *nicht*.", "Hoy no viene."],
+                    ["Sie wohnt *nicht* in Köln.", "Ella no vive en Colonia."],
+                ],
+                "warn": "«Ich nicht kenne den Mann» calca el castellano y está mal. *Ich kenne nicht den Mann* existe, pero solo para contrastar («no al hombre, sino a la mujer»). Lo normal: *Ich kenne den Mann **nicht***.",
+                "tip": "Truco: armá la oración afirmativa y poné *nicht* al final. Si al final hay un lugar, un adjetivo o algo con preposición, *nicht* se mete justo antes.",
+                "q": [
+                    q("«No conozco al hombre.»", "Ich kenne den Mann nicht.", ["Ich kenne den Mann nicht.", "Ich nicht kenne den Mann.", "Ich kenne nicht den Mann."]),
+                    q("Negá: *Sie wohnt in Wien.*", "Sie wohnt nicht in Wien.", ["Sie wohnt nicht in Wien.", "Sie wohnt in Wien nicht.", "Sie nicht wohnt in Wien."]),
+                ],
+            },
+            {
+                "h": "ja, nein, doch",
+                "r": "A una pregunta **negativa** («¿No venís?», «¿No tenés tiempo?») el «sí» que contradice la negación es **doch**, no *ja*. *nein* confirma lo negativo: «no, no vengo».",
+                "table": {"head": ["Pregunta", "Respuesta", "Quiere decir"], "rows": [
+                    ["Kommst du?", "Ja.", "Sí, vengo."],
+                    ["Kommst du?", "Nein.", "No, no vengo."],
+                    ["Kommst du nicht?", "*Doch!*", "Sí, sí vengo."],
+                    ["Kommst du nicht?", "Nein.", "No, no vengo."],
+                    ["Hast du keine Zeit?", "*Doch*, ich habe Zeit.", "Sí, tengo tiempo."],
+                ]},
+                "ex": [
+                    ["Bist du nicht müde? – *Doch*, sehr!", "¿No estás cansado? – Sí, ¡mucho!"],
+                    ["Das ist nicht teuer. – *Doch*, das ist teuer!", "Eso no es caro. – ¡Sí que es caro!"],
+                ],
+                "warn": "En castellano contestamos «¿No venís? – Sí». Si en alemán decís *Ja* a *Kommst du nicht?*, el otro no sabe si venís o no. Después de *nicht* o *kein*, el «sí» es **doch**.",
+                "q": [
+                    q("*Bist du nicht müde?* – «Sí, estoy muy cansado.»", "Doch, ich bin sehr müde.", ["Doch, ich bin sehr müde.", "Ja, ich bin sehr müde.", "Nein, ich bin sehr müde."]),
+                    q("*Hast du keinen Hund?* – «No, no tengo.»", "Nein.", ["Nein.", "Doch.", "Ja."]),
+                ],
+            },
         ],
     },
     "vocab": [
@@ -1117,6 +1190,16 @@ WEEKS.append({
         tr(1, "Necesito la llave.", "Ich brauche den Schlüssel.", note="*den Schlüssel*: masculino objeto."),
         tr(1, "No tengo hermanos.", "Ich habe keine Geschwister.", ["Ich habe keine Geschwister.", "Ich habe keine Brüder."], "*Geschwister* = hermanos en general; *Brüder* = solo varones."),
         ty(1, "Escribí en alemán, con artículo.", "«los padres»", "die Eltern", note="*die Eltern*, siempre plural. " + MAY),
+        # parte 1 — pronombres en acusativo
+        ch(1, "Elegí el pronombre.", "Wo ist der Schlüssel? – Ich habe ___.", "ihn", ["ihn", "sie", "er"], "En castellano «la llave» es femenino, pero *der Schlüssel* es masculino: como objeto, *ihn*. *er* es solo sujeto."),
+        ch(1, "Encontrá el error.", "¿Qué oración tiene un error?", "Ich liebe du.", ["Ich liebe du.", "Ich liebe dich.", "Liebst du mich?"], "*du* es sujeto; como objeto («te») es *dich*: *Ich liebe dich*."),
+        ch(1, "Elegí el pronombre.", "Das Auto ist neu. Ich brauche ___ heute.", "es", ["es", "ihn", "sie"], "*das Auto* → *es*: el neutro no cambia."),
+        cz(1, "Escribí el pronombre en acusativo.", "Der Pullover ist schön. Ich kaufe ___.", "ihn", note="*der Pullover* → *ihn*: masculino objeto termina en *-n*, como *den*."),
+        cz(1, "Escribí el pronombre en acusativo.", "Die Tasche? Ich habe ___.", "sie", note="*die Tasche* → *sie*: el femenino no cambia."),
+        cz(1, "Escribí el pronombre en acusativo.", "Wir sind hier! Hörst du ___? (nos)", "uns", note="*wir* → *uns* como objeto."),
+        tr(1, "Te quiero.", "Ich liebe dich.", ["Ich liebe dich.", "Ich hab dich lieb.", "Ich habe dich lieb."], "*du* como objeto → *dich*. *Ich hab dich lieb* es el «te quiero» de familia y amigos."),
+        tr(1, "¿El café? Lo tomo con leche.", "Den Kaffee? Ich trinke ihn mit Milch.", ["Den Kaffee? Ich trinke ihn mit Milch.", "Der Kaffee? Ich trinke ihn mit Milch.", "Kaffee? Ich trinke ihn mit Milch."], "*der Kaffee* → *ihn*, y va después del verbo (no «Ich ihn trinke»)."),
+        tr(1, "¿Me necesitás?", "Brauchst du mich?", note="*ich* como objeto → *mich*; pregunta de sí o no: verbo primero."),
         # parte 2 — möchte, nicht, kein
         ch(2, "Elegí la forma de *möchte*.", "Lena ___ eine Katze.", "möchte", ["möchte", "möchtet", "möchtest"], "*er/sie/es möchte*, sin -t."),
         ch(2, "Elegí la forma de *möchte*.", "___ du einen Tee?", "Möchtest", ["Möchtest", "Möchte", "Möchtet"], "*du möchtest*."),
@@ -1137,6 +1220,22 @@ WEEKS.append({
         tr(2, "Él no trabaja.", "Er arbeitet nicht.", note="*nicht* después del verbo."),
         tr(2, "¿Querés una bici?", "Möchtest du ein Fahrrad?", note="*das Fahrrad* → *ein Fahrrad*."),
         tr(2, "No vivo en Berlín.", "Ich wohne nicht in Berlin.", note="*nicht* antes del lugar."),
+        # parte 2 — dónde va nicht
+        ch(2, "Elegí la negación normal.", "«No conozco al hombre.»", "Ich kenne den Mann nicht.", ["Ich kenne den Mann nicht.", "Ich nicht kenne den Mann.", "Ich kenne nicht den Mann."], "Con objeto con *der/den*, *nicht* va después: *den Mann nicht*. *nicht den Mann* solo sirve para contrastar («no al hombre, sino…»)."),
+        ch(2, "Elegí la negación normal.", "«Hoy no trabajo.»", "Ich arbeite heute nicht.", ["Ich arbeite heute nicht.", "Ich nicht arbeite heute.", "Ich arbeite nicht heute."], "*nicht* va después de la palabra de tiempo. *nicht heute* sería «no hoy (sino otro día)»."),
+        ty(2, "Negá la oración con *nicht*.", "Ich kenne den Mann.", "Ich kenne den Mann nicht.", note="Objeto con artículo definido → *nicht* después, al final."),
+        ty(2, "Negá la oración con *nicht*.", "Ich kaufe die Jacke.", "Ich kaufe die Jacke nicht.", note="*die Jacke* es objeto con *die* → *nicht* va después."),
+        ty(2, "Negá la oración con *nicht*.", "Er kommt heute.", "Er kommt heute nicht.", note="Después de *heute*: *heute nicht*."),
+        ty(2, "Negá la oración con *nicht*.", "Das Auto ist teuer.", "Das Auto ist nicht teuer.", note="Antes del adjetivo: *nicht teuer*."),
+        tr(2, "No necesito la llave.", "Ich brauche den Schlüssel nicht.", note="En castellano «no» va antes del verbo; en alemán *nicht* va después del objeto: *den Schlüssel nicht*."),
+        tr(2, "No lo compro.", "Ich kaufe es nicht.", ["Ich kaufe es nicht.", "Ich kaufe ihn nicht.", "Ich kaufe sie nicht."], "El pronombre va antes y *nicht* al final. (*ihn* o *sie* si la cosa es masculina o femenina en alemán)."),
+        # parte 2 — ja, nein, doch
+        ch(2, "Contestá que sí.", "Hast du keine Zeit? – ___, ich habe Zeit.", "Doch", ["Doch", "Ja", "Nein"], "Pregunta negativa (*keine*) y la respuesta la contradice → *doch*. *Ja* acá confunde."),
+        ch(2, "Contestá que sí.", "Kommst du? – ___, ich komme.", "Ja", ["Ja", "Doch", "Nein"], "La pregunta no tiene *nicht* ni *kein*: el sí es *ja*. *doch* solo contradice una negación."),
+        ch(2, "Elegí la respuesta.", "Bist du nicht müde? – ___, ich bin sehr müde.", "Doch", ["Doch", "Ja", "Nein"], "«¿No estás cansado? – Sí, mucho»: el sí contra *nicht* es *doch*."),
+        ch(2, "¿Qué quiere decir?", "Wohnst du nicht hier? – Nein.", "No, no vivo acá.", ["No, no vivo acá.", "Sí, vivo acá.", "No sé."], "*nein* confirma lo negativo: no vive acá. Para decir que sí vive acá: *Doch!*"),
+        cz(2, "Escribí *ja*, *nein* o *doch*.", "Wohnst du nicht in Berlin? – ___, ich wohne in Berlin.", "Doch", note="Pregunta con *nicht* y respuesta que dice que sí → *doch*."),
+        ty(2, "Contestá que sí, con oración completa.", "Hast du keine Zeit?", "Doch, ich habe Zeit.", ["Doch, ich habe Zeit.", "Doch ich habe Zeit.", "Doch, ich habe Zeit!"], "El «sí» contra *keine* es *doch*, y después la oración afirmativa sin *keine*."),
     ],
 })
 
@@ -1161,7 +1260,7 @@ WEEKS.append({
     "lesson": {
         "intro": "Los números alemanes tienen una sola trampa grande: dicen la unidad antes que la decena. Con eso y dos fórmulas para pedir, ya podés comprar.",
         "parts": [
-            {"h": "Los números", "blocks": [0, 1, 2]},
+            {"h": "Los números", "blocks": [0, 1, 2, 7]},
             {"h": "Precios, comida y bebida", "blocks": [3, 4]},
             {"h": "Pedir y comprar", "blocks": [5, 6]},
         ],
@@ -1301,6 +1400,31 @@ WEEKS.append({
                     q("¿Qué significa *Sonst noch etwas?*", "¿Algo más?", ["¿Algo más?", "¿Si no, qué?", "¿Otra vez?"]),
                 ],
             },
+            {
+                "h": "Cientos, miles y años",
+                "r": "Más de 100 se arma **de mayor a menor**, todo en una palabra: *hundert* (100), *tausend* (1000), y lo que sigue igual que del 1 al 99, con la unidad antes de la decena. Los **años** hasta 1999 se dicen en **centenas**: 1985 = «diecinueve cientos ochenta y cinco»; desde 2000, con *tausend*.",
+                "table": {"head": ["Número", "Alemán"], "rows": [
+                    ["101", "hunderteins"],
+                    ["250", "zweihundertfünfzig"],
+                    ["365", "dreihundertfünfundsechzig"],
+                    ["1000", "tausend / eintausend"],
+                    ["2500", "zweitausendfünfhundert"],
+                    ["año 1985", "neunzehnhundertfünfundachtzig"],
+                    ["año 2010", "zweitausendzehn"],
+                    ["año 2024", "zweitausendvierundzwanzig"],
+                ]},
+                "ex": [
+                    ["Ich bin *neunzehnhundertneunzig* geboren.", "Nací en 1990."],
+                    ["Das Haus ist von *neunzehnhundertzwölf*.", "La casa es de 1912."],
+                    ["Das kostet *zweihundertvierzig* Euro.", "Sale 240 euros."],
+                ],
+                "warn": "El año no se dice «mil novecientos…»: *tausendneunhundert…* está mal; es *neunzehnhundert…* (diecinueve cientos). Y «en 1990» va **sin preposición** (*Ich bin 1990 geboren*) o con *im Jahr*: *im Jahr 1990*. Nunca «in 1990», que es un calco del inglés.",
+                "tip": "En los números grandes el punto separa los miles (*1.000*) y la coma, los decimales (*2,5*), igual que en Argentina.",
+                "q": [
+                    q("¿Cómo se dice el año 1985?", "neunzehnhundertfünfundachtzig", ["neunzehnhundertfünfundachtzig", "tausendneunhundertfünfundachtzig", "neunzehnhundertachtundfünfzig"]),
+                    q("¿Cómo decís «en 2010»?", "2010 / im Jahr 2010", ["2010 / im Jahr 2010", "in 2010", "am 2010"]),
+                ],
+            },
         ],
     },
     "vocab": [
@@ -1339,6 +1463,14 @@ WEEKS.append({
         cz(0, "Escribí el número en letras.", "20 = ___", "zwanzig", note="*zwanzig*: la base cambia (*zwei → zwan-*)."),
         cz(0, "Escribí el número en letras.", "63 = ___", "dreiundsechzig", note="*sechzig* sin s en el medio."),
         cz(0, "Escribí el número en letras.", "8 = ___", "acht", note="*acht*: la *ch* tras a suena como nuestra j."),
+        # parte 0 — cientos, miles y años
+        ch(0, "¿Cómo se dice el año?", "1998", "neunzehnhundertachtundneunzig", ["neunzehnhundertachtundneunzig", "tausendneunhundertachtundneunzig", "neunzehnhundertneunundachtzig"], "Hasta 1999, el año va en centenas: *neunzehnhundert* + *achtundneunzig*. «Mil novecientos» es el calco del castellano."),
+        ch(0, "Elegí la forma correcta.", "(Nací en 1990.)", "Ich bin 1990 geboren.", ["Ich bin 1990 geboren.", "Ich bin in 1990 geboren.", "Ich bin am 1990 geboren."], "El año va solo o con *im Jahr*: nunca «in 1990»."),
+        ch(0, "¿Qué número es?", "dreihundertzwölf", "312", ["312", "320", "3012"], "*dreihundert* (300) + *zwölf* (12)."),
+        cz(0, "Escribí el número en letras.", "250 = ___", "zweihundertfünfzig", note="Cientos + el resto, todo junto: *zweihundert* + *fünfzig*."),
+        cz(0, "Escribí el año en letras.", "2024 = ___", "zweitausendvierundzwanzig", note="Desde el 2000, con *tausend*: *zweitausend* + *vierundzwanzig* (unidad primero)."),
+        cz(0, "Escribí el año en letras.", "1985 = ___", "neunzehnhundertfünfundachtzig", note="*neunzehnhundert* (diecinueve cientos) + *fünfundachtzig*: nada de *tausend*."),
+        tr(0, "Nací en 1995.", "Ich bin 1995 geboren.", ["Ich bin 1995 geboren.", "Ich bin im Jahr 1995 geboren.", "Ich wurde 1995 geboren.", "Ich bin neunzehnhundertfünfundneunzig geboren."], "Sin preposición o con *im Jahr*; «in 1995» es un calco del inglés. *Ich bin … geboren* es una fórmula fija."),
         # parte 1 — precios, comida
         ch(1, "¿Cómo se lee?", "2,50 €", "zwei Euro fünfzig", ["zwei Euro fünfzig", "fünfzig Euro zwei", "zwei Euros fünfzig"], "Euros + centavos, y *Euro* sin plural."),
         ch(1, "Elegí la forma correcta.", "Was ___ die Äpfel?", "kosten", ["kosten", "kostet", "kostest"], "*die Äpfel* es plural → *kosten*."),
@@ -1402,13 +1534,14 @@ WEEKS.append({
         "Los días son todos *der*; «el lunes» = *am Montag*.",
         "*am Morgen, am Abend*, pero *in der Nacht*.",
         "*um acht Uhr* = a las ocho; *halb neun* = 8:30.",
+        "Fechas con ordinal: *der 3. Mai* (*der dritte*), *am 3. Mai* (*am dritten*).",
         "Si empezás con el tiempo, el verbo sigue segundo: *Am Montag arbeite ich*.",
     ],
     "lesson": {
         "intro": "Para contar tu semana te faltan pocas cosas: unos verbos muy usados que cambian la vocal, los días, la hora y una regla de orden que ya conocés.",
         "parts": [
             {"h": "Verbos que cambian la vocal", "blocks": [0, 1]},
-            {"h": "Días, momentos y horas", "blocks": [2, 3, 4, 5]},
+            {"h": "Días, momentos y horas", "blocks": [2, 3, 4, 5, 8]},
             {"h": "Contar tu rutina", "blocks": [6, 7]},
         ],
         "blocks": [
@@ -1570,6 +1703,32 @@ WEEKS.append({
                     q("¿Cómo se dice «a la una» con *Uhr*?", "um ein Uhr", ["um ein Uhr", "um eins Uhr", "um eine Uhr"]),
                 ],
             },
+            {
+                "h": "Ordinales, meses y fechas",
+                "r": "El ordinal se arma con el número + **-te** hasta el 19 (*zweite, vierte, zwölfte*) y + **-ste** desde el 20 (*zwanzigste, einunddreißigste*). Irregulares: *erste* (1.º), *dritte* (3.º), *siebte* (7.º), *achte* (8.º). La fecha se dice con el ordinal: *Heute ist der dritte Mai*. Para decir **cuándo**, *am* + ordinal en **-ten**: *am dritten Mai*. Por escrito, el número lleva un punto: *der 3. Mai, am 3. Mai*.",
+                "table": {"head": ["Número", "Fecha (der…)", "Cuándo (am…)"], "rows": [
+                    ["1.", "der erste", "am ersten"],
+                    ["2.", "der zweite", "am zweiten"],
+                    ["3.", "der dritte", "am dritten"],
+                    ["7.", "der siebte", "am siebten"],
+                    ["8.", "der achte", "am achten"],
+                    ["19.", "der neunzehnte", "am neunzehnten"],
+                    ["20.", "der zwanzigste", "am zwanzigsten"],
+                    ["31.", "der einunddreißigste", "am einunddreißigsten"],
+                ]},
+                "ex": [
+                    ["Heute ist *der 12. Mai* (der zwölfte Mai).", "Hoy es 12 de mayo."],
+                    ["Wann hast du Geburtstag? – *Am 3. März* (am dritten März).", "¿Cuándo es tu cumpleaños? – El 3 de marzo."],
+                    ["Der Kurs ist *am 1. Oktober* (am ersten Oktober).", "El curso es el 1.º de octubre."],
+                ],
+                "warn": "En castellano la fecha va con el número común («el tres de mayo»); en alemán, con el **ordinal**: *der dritte Mai*, nunca «der drei Mai». El punto de *3.* te avisa: leelo *dritte* o *dritten*. Y en la fecha corta el día va primero, como acá: *3.5.* = 3 de mayo.",
+                "more": ["Los meses son todos masculinos: *Januar, Februar, März, April, Mai, Juni, Juli, August, September, Oktober, November, Dezember*. «En mayo» = *im Mai*. En Austria, enero es *Jänner*.", "*Geburtstag haben* = cumplir años: *Ich habe am 3. Mai Geburtstag*."],
+                "q": [
+                    q("¿Cómo se lee *am 3. Mai*?", "am dritten Mai", ["am dritten Mai", "am drei Mai", "am dreiten Mai"]),
+                    q("Ordinal de 20:", "zwanzigste", ["zwanzigste", "zwanzigte", "zwanzigerste"]),
+                    q("Completá: *Heute ist der ___ Juli.* (7.)", "siebte", ["siebte", "sieben", "siebzehnte"]),
+                ],
+            },
         ],
     },
     "vocab": [
@@ -1633,6 +1792,15 @@ WEEKS.append({
         tr(1, "Hoy es viernes.", "Heute ist Freitag.", ["Heute ist Freitag.", "Es ist heute Freitag."], "*heute* = hoy."),
         ty(1, "Escribí en alemán, con artículo.", "«el fin de semana»", "das Wochenende", note="*das Ende* (el final) manda: neutro. " + MAY),
         ty(1, "Escribí en alemán.", "«miércoles»", "Mittwoch", ["Mittwoch", "der Mittwoch"], "*der Mittwoch*, «mitad de la semana»."),
+        # parte 1 — ordinales y fechas
+        ch(1, "¿Cómo se lee?", "am 1. Mai", "am ersten Mai", ["am ersten Mai", "am einsten Mai", "am eins Mai"], "1.º es irregular: *erste*; para decir cuándo, *am ersten*."),
+        ch(1, "Encontrá el error.", "¿Qué oración tiene un error?", "Heute ist der sieben Juli.", ["Heute ist der sieben Juli.", "Heute ist der siebte Juli.", "Ich habe am siebten Juli Geburtstag."], "La fecha va con ordinal, no con el número común: *der siebte Juli* (7.º es *siebte*, sin *-en-*)."),
+        li(1, "am einundzwanzigsten Juni", ["am einundzwanzigsten Juni", "am zwanzigsten Juni", "am einunddreißigsten Juni"], "21 → *einundzwanzig* + *-sten*: el 21 de junio."),
+        cz(1, "Escribí el ordinal.", "Ich habe am ___ Mai Geburtstag. (3.)", "dritten", note="3.º es irregular (*dritte*) y con *am* termina en *-ten*: *am dritten Mai*."),
+        cz(1, "Escribí el ordinal.", "Heute ist der ___ April. (2.)", "zweite", note="*der* + ordinal en *-te*: *der zweite April*. Con *am* sería *am zweiten*."),
+        cz(1, "Escribí el ordinal.", "Der Kurs ist am ___ Oktober. (20.)", "zwanzigsten", note="Desde el 20 se suma *-st-*: *zwanzigste*, y con *am*, *am zwanzigsten*."),
+        tr(1, "Mi cumpleaños es el 8 de marzo.", "Ich habe am achten März Geburtstag.", ["Ich habe am achten März Geburtstag.", "Ich habe am 8. März Geburtstag.", "Mein Geburtstag ist am achten März.", "Mein Geburtstag ist am 8. März."], "«El 8» = *am achten* (ordinal + *-en*), nunca «am acht». *achte* no duplica la t."),
+        tr(1, "Hoy es 1 de enero.", "Heute ist der erste Januar.", ["Heute ist der erste Januar.", "Heute ist der 1. Januar.", "Heute ist der erste Jänner.", "Heute ist der 1. Jänner."], "La fecha con ordinal: *der erste Januar* (no «der eins»)."),
         # parte 2 — rutina
         ch(2, "Elegí el orden correcto.", "(El lunes trabajo.)", "Am Montag arbeite ich.", ["Am Montag arbeite ich.", "Am Montag ich arbeite.", "Am Montag arbeiten ich."], "Tiempo, verbo, sujeto."),
         ch(2, "Elegí el orden correcto.", "(A las siete como.)", "Um sieben Uhr esse ich.", ["Um sieben Uhr esse ich.", "Um sieben Uhr ich esse.", "Um sieben Uhr esse."], "El verbo siempre en el casillero 2."),
@@ -1653,6 +1821,12 @@ WEEKS.append({
         tr(2, "El domingo no trabajo.", "Am Sonntag arbeite ich nicht.", ["Am Sonntag arbeite ich nicht.", "Ich arbeite am Sonntag nicht."], "*nicht* al final."),
         tr(2, "Hoy él va en bici.", "Heute fährt er Fahrrad.", ["Heute fährt er Fahrrad.", "Er fährt heute Fahrrad.", "Heute fährt er mit dem Fahrrad.", "Er fährt heute mit dem Fahrrad."], "*Fahrrad fahren* = andar en bici."),
         ty(2, "Escribí en alemán.", "«¿Cuándo?»", "Wann?", ["Wann?", "Wann"], "*Wann?*"),
+        # parte 2 — repaso: nicht, kein y doch
+        ch(2, "Elegí la negación normal.", "«Hoy no leo el diario.»", "Ich lese heute die Zeitung nicht.", ["Ich lese heute die Zeitung nicht.", "Ich nicht lese heute die Zeitung.", "Ich lese heute keine Zeitung nicht."], "*nicht* va después del tiempo y del objeto con *die*: casi al final. (*keine Zeitung* = ningún diario, sin *nicht*.)"),
+        ch(2, "Elegí la negación.", "Am Sonntag fahre ich ___ nach Wien.", "nicht", ["nicht", "kein", "keine"], "Antes de una dirección (*nach Wien*) va *nicht*."),
+        cz(2, "Escribí *nicht* o la forma de *kein*.", "Am Morgen esse ich ___ Brot.", "kein", note="*Brot* sin artículo → *kein Brot*."),
+        ty(2, "Negá la oración con *nicht*.", "Am Montag arbeite ich.", "Am Montag arbeite ich nicht.", note="*nicht* va al final, después del sujeto que quedó detrás del verbo."),
+        ch(2, "Contestá que sí.", "Schläfst du am Samstag nicht lange? – ___, bis zehn Uhr.", "Doch", ["Doch", "Ja", "Nein"], "Pregunta con *nicht*, respuesta que la contradice → *doch*."),
     ],
 })
 

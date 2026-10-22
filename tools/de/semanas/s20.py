@@ -21,8 +21,8 @@ WEEK = {
         "intro": "Las preposiciones de dos casos (semana 14) dependen de si hay movimiento. Las de esta semana son más fáciles: cada una pide **siempre** el mismo caso. Hay que aprenderlas en dos listas cortas. Las vas a usar para los trámites: el banco, el correo y la oficina pública.",
         "parts": [
             {"h": "Siempre acusativo", "blocks": [0, 1]},
-            {"h": "Siempre dativo", "blocks": [2, 3, 4]},
-            {"h": "seit y los trámites", "blocks": [5, 6]},
+            {"h": "Siempre dativo", "blocks": [2, 3, 4, 7, 9]},
+            {"h": "seit y los trámites", "blocks": [5, 8, 6]},
         ],
         "blocks": [
             {
@@ -42,10 +42,14 @@ WEEK = {
                     ["Die Post ist gleich *um die* Ecke.", "El correo está a la vuelta de la esquina."],
                 ],
                 "tip": "Memotecnia: **DOGFU** (*durch, ohne, gegen, für, um*).",
-                "warn": "*ohne* casi nunca lleva artículo con cosas generales: *ohne Zucker, ohne Geld*. Y «por» no siempre es *für*: «paso **por** el parque» es *durch den Park*.",
+                "warn": "*ohne* casi nunca lleva artículo con cosas generales: *ohne Zucker, ohne Geld*. Y «por» no siempre es *für*: «paso **por** el parque» es *durch den Park*; «diez euros **por** persona» es *zehn Euro **pro** Person*; *für* es «por» solo en el sentido de «a cambio de» o «en favor de»: *Danke für den Brief*.",
+                "more": [
+                    "*bis* (hasta) también va con acusativo, pero casi siempre **sin artículo**: *bis Freitag, bis 2030, bis Berlin, bis morgen*. Si hace falta artículo, se le suma *zu* y manda el dativo: *bis **zum** Bahnhof, bis **zur** Ampel, bis **zum** 1. Mai*.",
+                ],
                 "q": [
                     q("Completá: *Das Geschenk ist für ___ Bruder.*", "meinen", ["meinen", "meinem", "mein"]),
                     q("¿Qué caso pide *ohne*?", "acusativo", ["acusativo", "dativo", "depende del movimiento"]),
+                    q("«Hasta la estación»", "bis zum Bahnhof", ["bis zum Bahnhof", "bis den Bahnhof", "bis dem Bahnhof"]),
                 ],
             },
             {
@@ -87,7 +91,7 @@ WEEK = {
                     ["*Nach der* Arbeit gehe ich *zur* Bank.", "Después del trabajo voy al banco."],
                     ["Kann ich *mit der* Karte bezahlen?", "¿Puedo pagar con tarjeta?"],
                 ],
-                "tip": "Se canta con la melodía de «El Danubio azul»: *aus-bei-mit, nach-seit-von-zu*. Y *gegenüber* (enfrente de) también va con dativo.",
+                "tip": "Se canta con la melodía de «El Danubio azul»: *aus-bei-mit, nach-seit-von-zu*. Y *gegenüber* (enfrente de) también va con dativo: *Die Post ist gegenüber **dem** Bahnhof*. Con pronombre va **detrás**: *Sie sitzt **mir gegenüber*** (se sienta enfrente mío), nunca «gegenüber mir».",
                 "warn": "«Vivo con mis padres» (en su casa) es *bei meinen Eltern*, no «mit»: *mit* es compañía, *bei* es «en lo de».",
                 "q": [
                     q("Completá: *Ich fahre mit ___ Zug.*", "dem", ["dem", "den", "der"]),
@@ -113,7 +117,7 @@ WEEK = {
                     ["Um sechs gehe ich *nach Hause*; um sieben bin ich *zu Hause*.", "A las seis me voy a casa; a las siete estoy en casa."],
                 ],
                 "warn": "*nach Hause* (adónde: a casa) y *zu Hause* (dónde: en casa) son fijas y van sin artículo. «Ich gehe zu Hause» está mal: es *nach Hause*.",
-                "more": ["Países con artículo usan *in*: *in die Schweiz, in die USA* (semana 14)."],
+                "more": ["Países con artículo usan *in*: *in die Schweiz, in die USA* (semana 12)."],
                 "q": [
                     q("Completá: *Ich gehe ___ Post.*", "zur", ["zur", "zum", "nach"]),
                     q("Completá: *Wir fliegen ___ Madrid.*", "nach", ["nach", "zu", "zum"]),
@@ -178,6 +182,78 @@ WEEK = {
                 "q": [
                     q("«Llene el formulario, por favor.»", "Füllen Sie bitte das Formular aus.", ["Füllen Sie bitte das Formular aus.", "Ausfüllen Sie bitte das Formular.", "Füllen Sie bitte aus das Formular."]),
                     q("Para mandar una carta necesitás…", "eine Briefmarke", ["eine Briefmarke", "eine Gebühr", "einen Schalter"]),
+                ],
+            },
+            {
+                "h": "Wohin? Wo? Woher? La tabla de tres columnas",
+                "r": "Para lugares, el alemán hace **tres preguntas** y cada una tiene su preposición: **adónde** vas, **dónde** estás y **de dónde** venís. Elegís la fila según el tipo de lugar.",
+                "table": {"head": ["Tipo de lugar", "Wohin? (adónde)", "Wo? (dónde)", "Woher? (de dónde)"], "rows": [
+                    ["ciudad, país sin artículo", "nach Spanien", "in Spanien", "aus Spanien"],
+                    ["persona, médico, negocio", "zum Arzt, zu Ana", "beim Arzt, bei Ana", "vom Arzt, von Ana"],
+                    ["edificio o lugar con artículo", "ins Kino, in die Schweiz", "im Kino, in der Schweiz", "aus dem Kino, aus der Schweiz"],
+                    ["evento, espacio abierto", "auf eine Party, auf den Markt", "auf einer Party, auf dem Markt", "von einer Party, vom Markt"],
+                    ["casa", "nach Hause", "zu Hause", "von zu Hause"],
+                ]},
+                "ex": [
+                    ["Ich gehe *zum* Arzt. – Ich bin *beim* Arzt. – Ich komme *vom* Arzt.", "Voy al médico. – Estoy en el médico. – Vengo del médico."],
+                    ["Wir fliegen *nach* Chile, wohnen zwei Wochen *in* Chile und kommen dann *aus* Chile zurück.", "Volamos a Chile, vivimos dos semanas en Chile y después volvemos de Chile."],
+                    ["Meine Großeltern wohnen *auf dem* Land.", "Mis abuelos viven en el campo."],
+                    ["Am Samstag gehen wir *auf eine* Party.", "El sábado vamos a una fiesta."],
+                ],
+                "warn": "En castellano decís «voy **a** lo de Ana», «estoy **en** lo de Ana», «vengo **de** lo de Ana»: tres preposiciones. En alemán también son tres, pero no se traducen una por una: *zu Ana, bei Ana, von Ana*. «Ich bin zu Ana» o «Ich gehe bei Ana» están mal.",
+                "tip": "*auf* va con eventos y con lugares abiertos o «de superficie»: *auf eine Party, auf den Markt, auf dem Land, auf der Straße, auf die Bank* (al banco, coloquial). *aufs Amt* también es muy común.",
+                "q": [
+                    q("Completá: *Ich komme gerade ___ Arzt.* (de dónde)", "vom", ["vom", "beim", "zum"]),
+                    q("Completá: *Sie wohnt ___ der Schweiz.*", "in", ["in", "nach", "aus"]),
+                    q("«Mis abuelos viven en el campo.»", "Meine Großeltern wohnen auf dem Land.", ["Meine Großeltern wohnen auf dem Land.", "Meine Großeltern wohnen im Land.", "Meine Großeltern wohnen zum Land."]),
+                ],
+            },
+            {
+                "h": "¿Cuándo? ¿Desde cuándo? ¿Por cuánto tiempo?",
+                "r": "Las preposiciones de tiempo se reparten así. Las de esta semana (*seit, ab, vor, in*) van con **dativo**; *für* y *bis*, con acusativo.",
+                "table": {"head": ["Pregunta", "Alemán", "Ejemplo", "Castellano"], "rows": [
+                    ["¿cuándo? (día, parte del día)", "am", "am Montag, am Abend", "el lunes, a la noche"],
+                    ["¿a qué hora?", "um", "um acht Uhr", "a las ocho"],
+                    ["¿cuándo? (mes, estación)", "im", "im Mai, im Winter", "en mayo, en invierno"],
+                    ["¿cuándo? (año)", "– (o im Jahr)", "2019, im Jahr 2019", "en 2019"],
+                    ["pasado, terminado", "vor + Dat.", "vor drei Tagen", "hace tres días"],
+                    ["futuro, plazo", "in + Dat.", "in drei Tagen", "dentro de tres días"],
+                    ["desde, y sigue", "seit + Dat.", "seit drei Tagen", "hace tres días que…"],
+                    ["a partir de", "ab", "ab Montag", "a partir del lunes"],
+                    ["duración prevista", "für + Akk.", "für zwei Wochen", "por dos semanas"],
+                    ["límite", "bis", "bis Freitag, bis zum 1. Mai", "hasta el viernes, hasta el 1.º de mayo"],
+                ]},
+                "ex": [
+                    ["Ich fahre *für* zwei Wochen nach Chile.", "Me voy dos semanas a Chile."],
+                    ["Ich komme *in* drei Tagen zurück.", "Vuelvo dentro de tres días."],
+                    ["*Ab* Montag arbeite ich hier.", "A partir del lunes trabajo acá."],
+                    ["Das Büro ist *bis* Freitag geschlossen.", "La oficina está cerrada hasta el viernes."],
+                ],
+                "warn": "«Dentro de tres días» es *in drei Tagen*, no «nach drei Tagen» (eso es «a los tres días», contando algo pasado). Y para «por dos semanas» con algo **planeado** va *für*; con algo que ya duró, *zwei Wochen lang* o directamente *zwei Wochen*: *Ich war zwei Wochen in Chile*.",
+                "tip": "Pensalo como una línea: *vor* (atrás) – *seit* (de atrás hasta ahora) – *ab* (de ahora o de un punto en adelante) – *in* (adelante) – *bis* (hasta ahí).",
+                "q": [
+                    q("«Vuelvo dentro de una semana.»", "Ich komme in einer Woche zurück.", ["Ich komme in einer Woche zurück.", "Ich komme nach einer Woche zurück.", "Ich komme vor einer Woche zurück."]),
+                    q("«A partir de mañana no fumo.»", "Ab morgen rauche ich nicht.", ["Ab morgen rauche ich nicht.", "Seit morgen rauche ich nicht.", "Bis morgen rauche ich nicht."]),
+                    q("Completá: *Ich fahre ___ zwei Wochen nach Spanien.* (plan)", "für", ["für", "seit", "vor"]),
+                ],
+            },
+            {
+                "h": "¿Lista de acusativo o de dativo?",
+                "r": "Ahora mezclá las dos listas. Primero elegís la **preposición** por el significado; después, el **caso** lo decide la preposición. *für* y *mit* parecen parecidas, pero una es acusativo y la otra dativo.",
+                "table": {"head": ["Acusativo", "Dativo"], "rows": [
+                    ["für meinen Bruder (para)", "mit meinem Bruder (con)"],
+                    ["ohne meine Freundin (sin)", "mit meiner Freundin (con)"],
+                    ["für mich / für dich", "mit mir / mit dir"],
+                    ["durch den Park (por)", "aus dem Park (de adentro)"],
+                ]},
+                "ex": [
+                    ["Ich kaufe Blumen *für meine* Freundin und gehe *mit meiner* Freundin essen.", "Compro flores para mi novia y salgo a comer con mi novia."],
+                    ["Ich fahre nie *ohne meinen* Hund, immer *mit meinem* Hund.", "Nunca viajo sin mi perro, siempre con mi perro."],
+                ],
+                "warn": "«Para mí» y «conmigo» parecen de la misma familia, pero no: *für mich* (acusativo) y *mit mir* (dativo).",
+                "q": [
+                    q("Completá: *Ich gehe mit ___ Bruder ins Kino.*", "meinem", ["meinem", "meinen", "mein"]),
+                    q("Completá: *Das Geschenk ist für ___ Freundin.*", "meine", ["meine", "meiner", "meinem"]),
                 ],
             },
         ],
@@ -252,5 +328,42 @@ WEEK = {
         tr(2, "¿Desde cuándo esperás?", "Seit wann wartest du?", note="*seit* + presente."),
         ty(2, "Escribí en alemán, con artículo.", "«la firma»", "die Unterschrift", note="De *unterschreiben* (firmar). " + MAY),
         li(2, "überweisen", ["überweisen", "unterschreiben", "ausfüllen"], "*überweisen* = transferir."),
+        # parte 2 — repaso: adjetivo, masculinos con -n, dos objetos
+        cz(2, "Escribí *neu* con su terminación.", "Ich brauche das ___ Formular.", "neue", note="Acusativo neutro tras *das*: *-e* (semana 15). Tras *ein* sería *ein neues*."),
+        ch(2, "Elegí la terminación.", "Ich habe mit dem nett___ Beamten gesprochen.", "netten", ["netten", "nette", "nettem"], "Dativo tras *dem*: siempre *-en*."),
+        cz(2, "Escribí la forma de *der Kunde*.", "Die Bank schickt dem ___ eine neue Karte.", "Kunden", note="*der Kunde* es de los masculinos con *-n* (semana 13): fuera del nominativo, *Kunden*. " + MAY),
+        ch(2, "Encontrá el error.", "¿Qué oración tiene un error?", "Ich habe eine Frage an den Praktikant.", ["Ich habe eine Frage an den Praktikant.", "Ich habe eine Frage an den Praktikanten.", "Der Praktikant hat eine Frage."], "*der Praktikant* (-ant) suma *-en* fuera del nominativo: *an den Praktikanten*."),
+        tr(2, "¿Me lo podés explicar? (lo = das Formular)", "Kannst du es mir erklären?", ["Kannst du es mir erklären?", "Könntest du es mir erklären?", "Kannst du mir das erklären?", "Könntest du mir das erklären?"], "Dos pronombres: *es* (acusativo) antes de *mir* (dativo), al revés que «me lo»."),
+        # parte 0 — bis
+        cz(0, "Escribí la preposición.", "Der Kurs dauert ___ Freitag. (hasta)", "bis", note="*bis* + día, sin artículo: *bis Freitag*."),
+        cz(0, "Escribí la contracción.", "Gehen Sie geradeaus bis ___ Bahnhof. (der Bahnhof)", "zum", note="Con artículo, *bis* necesita *zu*: *bis zum Bahnhof* (y el caso lo pone *zu*: dativo)."),
+        # parte 1 — acusativo o dativo, mezclados
+        ch(1, "Elegí preposición y caso.", "Ich gehe heute ___ Bruder ins Kino. (con mi hermano)", "mit meinem", ["mit meinem", "mit meinen", "für meinen"], "Compañía: *mit*, y *mit* pide dativo: *meinem*."),
+        ch(1, "Elegí preposición y caso.", "Das Geschenk ist ___ Bruder. (para mi hermano)", "für meinen", ["für meinen", "für meinem", "mit meinem"], "Destinatario: *für*, y *für* pide acusativo: *meinen*."),
+        cz(1, "Escribí el posesivo.", "Ich fahre nie ohne ___ Freundin weg. (mi)", "meine", note="*ohne* + acusativo; en femenino el acusativo es igual al nominativo: *meine*."),
+        cz(1, "Escribí el posesivo.", "Am Wochenende fahre ich mit ___ Freundin weg. (mi)", "meiner", note="*mit* + dativo femenino: *meiner*. Con *ohne* sería *meine*."),
+        cz(1, "Escribí el pronombre.", "Kommst du mit ___ ins Kino? (yo)", "mir", note="*mit* + dativo: *mit mir*. «Conmigo» no tiene forma especial en alemán."),
+        ch(1, "Encontrá el error.", "¿Qué oración tiene un error?", "Ich mache das für dir.", ["Ich mache das für dir.", "Ich komme mit dir.", "Ich gehe ohne dich."], "*für* es acusativo: *für dich*. *mit dir* (dativo) y *ohne dich* (acusativo) están bien."),
+        tr(1, "Este regalo es de mi abuela y es para vos.", "Dieses Geschenk ist von meiner Oma und für dich.", ["Dieses Geschenk ist von meiner Oma und für dich.", "Das Geschenk ist von meiner Oma und für dich.", "Dieses Geschenk ist von meiner Großmutter und für dich.", "Das Geschenk ist von meiner Großmutter und für dich.", "Dieses Geschenk ist von meiner Oma und es ist für dich.", "Das Geschenk ist von meiner Oma und es ist für dich."], "«de» (de parte de) = *von* + dativo (*meiner*); «para vos» = *für* + acusativo (*dich*)."),
+        cz(1, "Escribí el artículo.", "Die Post ist gegenüber ___ Bahnhof. (der Bahnhof)", "dem", note="*gegenüber* + dativo: *dem Bahnhof*."),
+        tr(1, "Ella se sienta enfrente mío.", "Sie sitzt mir gegenüber.", ["Sie sitzt mir gegenüber.", "Sie sitzt gegenüber von mir."], "Con pronombre, *gegenüber* va detrás: *mir gegenüber* (dativo). En el habla también se oye *gegenüber von mir*; «gegenüber mir» suena mal."),
+        # parte 1 — Wohin? Wo? Woher?
+        cz(1, "Escribí la contracción.", "Ich kann nicht telefonieren, ich bin gerade ___ Arzt. (wo?)", "beim", note="Dónde, con persona o médico: *bei* → *beim Arzt*. Adónde sería *zum*; de dónde, *vom*."),
+        ch(1, "Elegí.", "Woher kommt Lukas? – ___ Österreich.", "Aus", ["Aus", "Von", "Nach"], "País sin artículo: *nach* (adónde), *in* (dónde), *aus* (de dónde)."),
+        ch(1, "Elegí.", "Wir sind gerade ___ Kino. Der Film ist super.", "im", ["im", "ins", "zum"], "Dónde, dentro de un lugar con artículo: *in* + dativo → *im Kino*. *ins Kino* sería adónde."),
+        ch(1, "Elegí.", "Meine Großeltern wohnen ___ Land.", "auf dem", ["auf dem", "im", "in dem"], "«En el campo» = *auf dem Land* (espacio abierto). *im Land* es «dentro del país»."),
+        ch(1, "Elegí.", "Gestern waren wir ___ einer Party.", "auf", ["auf", "in", "an"], "Eventos: *auf eine Party* (adónde), *auf einer Party* (dónde)."),
+        tr(1, "Vengo del médico y voy a lo de mi abuela.", "Ich komme vom Arzt und gehe zu meiner Oma.", ["Ich komme vom Arzt und gehe zu meiner Oma.", "Ich komme vom Arzt und gehe zu meiner Großmutter.", "Ich komme vom Arzt und fahre zu meiner Oma.", "Ich komme vom Arzt und fahre zu meiner Großmutter.", "Ich komme gerade vom Arzt und gehe zu meiner Oma.", "Ich komme gerade vom Arzt und fahre zu meiner Oma."], "De dónde (persona o médico): *von* → *vom Arzt*; adónde (persona): *zu* → *zu meiner Oma*. «a lo de» no se traduce palabra por palabra."),
+        tr(1, "Mi amiga vive en Suiza.", "Meine Freundin wohnt in der Schweiz.", ["Meine Freundin wohnt in der Schweiz.", "Meine Freundin lebt in der Schweiz."], "País con artículo: dónde = *in der Schweiz* (dativo); adónde = *in die Schweiz*; de dónde = *aus der Schweiz*."),
+        # parte 2 — ¿cuándo?, ¿desde cuándo?, ¿por cuánto tiempo?
+        tr(2, "Me voy dos semanas a Chile.", "Ich fahre für zwei Wochen nach Chile.", ["Ich fahre für zwei Wochen nach Chile.", "Ich fliege für zwei Wochen nach Chile.", "Ich reise für zwei Wochen nach Chile.", "Ich fahre zwei Wochen nach Chile.", "Ich fliege zwei Wochen nach Chile.", "Für zwei Wochen fahre ich nach Chile.", "Für zwei Wochen fliege ich nach Chile."], "Duración prevista: *für zwei Wochen* (acusativo). No es *seit* (eso es algo que ya empezó y sigue)."),
+        tr(2, "Vuelvo dentro de tres días.", "Ich komme in drei Tagen zurück.", ["Ich komme in drei Tagen zurück.", "In drei Tagen komme ich zurück.", "Ich bin in drei Tagen zurück.", "In drei Tagen bin ich zurück.", "Ich komme in drei Tagen wieder.", "In drei Tagen komme ich wieder."], "Plazo hacia el futuro: *in* + dativo (*Tagen*). «nach drei Tagen» sería «a los tres días»."),
+        tr(2, "A partir del lunes trabajo acá.", "Ab Montag arbeite ich hier.", ["Ab Montag arbeite ich hier.", "Ich arbeite ab Montag hier.", "Ab Montag arbeite ich da.", "Ich arbeite ab Montag da."], "«A partir de» = *ab*, con presente para el futuro."),
+        ch(2, "¿Cuál es correcta?", "(Vuelvo dentro de una semana.)", "Ich komme in einer Woche zurück.", ["Ich komme in einer Woche zurück.", "Ich komme vor einer Woche zurück.", "Ich komme seit einer Woche zurück."], "Futuro: *in*. *vor* es pasado (hace); *seit*, algo que sigue."),
+        ch(2, "Elegí la preposición.", "Ich lerne ___ einem Jahr Deutsch.", "seit", ["seit", "vor", "für"], "Empezó hace un año y sigue: *seit* + presente."),
+        ch(2, "Elegí la preposición.", "Das Büro ist ___ Freitag geschlossen. (hasta)", "bis", ["bis", "ab", "seit"], "Límite: *bis Freitag*. *ab Freitag* sería «a partir del viernes»."),
+        cz(2, "Escribí la preposición.", "___ Montag ist das Büro wieder offen. (a partir del lunes)", "Ab", ["Ab", "ab"], "*ab* = a partir de. Con *seit* no: *seit* mira hacia atrás."),
+        cz(2, "Escribí la preposición.", "Der Termin ist ___ halb zehn.", "um", note="Hora exacta: *um*. Día: *am*; mes o estación: *im*."),
+        cz(2, "Escribí la preposición con artículo.", "___ Juli habe ich Urlaub.", "Im", ["Im", "im"], "Meses y estaciones: *im* (*in dem*): *im Juli, im Sommer*."),
     ],
 }

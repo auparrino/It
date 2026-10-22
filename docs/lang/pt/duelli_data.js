@@ -12,10 +12,11 @@
  * «¿qué te lo dijo?».  Cada duelo se abre cuando las dos formas ya se
  * enseñaron («week», según tools/pt/curriculo.py).
  *
- * Los nueve duelos del portugués para hispanohablantes: ser/estar, por/para,
+ * Los once duelos del portugués para hispanohablantes: ser/estar, por/para,
  * perfeito/imperfeito, perfeito simples/composto, seu/dele, indicativo/
- * subjuntivo, futuro do subjuntivo/infinitivo pessoal, la crase (à/a) y
- * presente/futuro do subjuntivo (chegue/chegar).
+ * subjuntivo, futuro do subjuntivo/infinitivo pessoal, la crase (à/a),
+ * presente/futuro do subjuntivo (chegue/chegar) y la correlación de tiempos
+ * (venha/viesse y tiver/tivesse).
  */
 (function (root) {
   "use strict";
@@ -29,8 +30,8 @@
   var DUELLI = [
     // Semana 1: solo ser, estar y ter, sin contracciones ni presente regular
     // (llegan en las semanas 3 y 5).  El contraste que de verdad hace
-    // tropezar: dónde queda algo fijo va con ser (o ficar), dónde está una
-    // persona, con estar.  Los ítems nuevos van al final: el repaso guarda
+    // tropezar, con la misma regla que la lección: lugares fijos, ficar (lo
+    // más seguro; también ser o estar); eventos, ser; personas, estar.  Los ítems nuevos van al final: el repaso guarda
     // las tarjetas por índice.
     { id: "serestar", week: 1, title: "ser o estar", sub: "lo que algo es, dónde queda, o cómo y dónde está", items: [
       A("Eu ___ argentino, de Buenos Aires.", "sou", "estou", "argentino", "Nacionalidad y origen: ser."),
@@ -54,28 +55,28 @@
       B("Hoje o banco ___ fechado, e o metrô também.", "está", "é", "fechado", "Resultado, estado: estar + participio."),
       B("Hoje o céu ___ nublado em Copacabana.", "está", "é", "nublado", "El tiempo de hoy: estar."),
       A("A festa ___ em Botafogo, um bairro tranquilo.", "é", "está", "festa",
-        "Un evento se ubica con ser (o ficar): *a festa é / fica em Botafogo*."),
+        "Un evento se ubica con ser: *a festa é em Botafogo*. Ficar queda para lo fijo: *o bairro fica longe*."),
       A("O show ___ em Copacabana, com a Bia.", "é", "está", "show",
-        "Un evento se ubica con ser (o ficar): *o show é / fica em Copacabana*."),
+        "Un evento se ubica con ser: *o show é em Copacabana*. Lo que no se mueve (el estadio), mejor ficar."),
       A("Onde ___ a reunião? Em Botafogo.", "é", "está", "reunião",
-        "Un evento se ubica con ser (o ficar): *onde é a reunião?*"),
+        "Un evento se ubica con ser: *onde é a reunião?* Para un lugar fijo, ficar: *onde fica o escritório?*"),
       A("O casamento ___ perto ou longe daqui?", "é", "está", "casamento",
-        "Un evento, cerca o lejos: *é perto*, *é longe* (o *fica perto*)."),
+        "Un evento, cerca o lejos: *é perto*, *é longe*. Ficar es para lugares fijos: *o hotel fica perto*."),
       B("O Martín ___ em Copacabana agora, com a Bia.", "está", "é", "agora",
-        "Una persona se mueve: dónde está hoy va con estar. El barrio, que no se mueve, iría con ser."),
+        "Una persona se mueve: dónde está va con estar. El barrio, que no se mueve, va con ficar: *Copacabana fica no Rio*."),
       B("A Bia ___ em casa hoje, com o gato.", "está", "é", "em casa",
-        "Dónde está una persona: estar (*estou em casa*). La casa misma *é* en Botafogo.")
+        "Dónde está una persona: estar (*estou em casa*). La casa, que no se mueve, *fica* en Botafogo.")
     ] },
 
     { id: "porpara", week: 9, title: "por o para", sub: "por dónde y por qué, o hacia dónde y para qué", items: [
       A("Vamos passear ___ Santa Teresa?", "por", "para", "passear", "Recorrer un lugar: por."),
       A("Obrigado ___ tudo, de verdade!", "por", "para", "Obrigado", "Agradecer: *obrigado por*."),
-      A("Compro esse quadro ___ cem reais.", "por", "para", "cem reais", "Precio, intercambio: por."),
+      A("Obrigado ___ convite, eu vou sim!", "pelo", "para o", "Obrigado", "Agradecer: *obrigado por* + *o* = *pelo*. «Por o» no existe."),
       A("Eu passo ___ Copacabana todos os dias.", "por", "para", "passo", "Pasar por un lugar: por."),
-      A("Trabalho oito horas ___ dia.", "por", "para", "dia", "Distribución (por día, por persona): por."),
-      A("Esse ônibus passa ___ Botafogo?", "por", "para", "passa", "El recorrido: por."),
-      A("Troco o meu livro ___ um café.", "por", "para", "Troco", "Cambiar una cosa por otra: por."),
-      A("Viajamos ___ todo o Nordeste de carro.", "por", "para", "todo o Nordeste", "Recorrer una región: por."),
+      A("Falo com a minha mãe ___ telefone.", "pelo", "para o", "telefone", "El medio: *pelo telefone* (o *por telefone*), con la contracción por + o."),
+      A("A gente chega ___ volta das oito, beleza?", "por", "para", "volta das oito", "«A eso de las ocho» = *por volta das oito*: fórmula fija."),
+      A("Obrigada ___ ajuda com a mudança!", "pela", "para a", "Obrigada", "*obrigada por* + *a* = *pela*: la contracción es obligatoria."),
+      A("Custa ___ menos cem reais.", "pelo", "para o", "menos", "«Al menos, por lo menos» = *pelo menos*, sin «lo»."),
       A("Desculpa ___ não ligar ontem.", "por", "para", "Desculpa", "La causa: *desculpa por*."),
       A("Estou aqui ___ acaso, sem querer.", "por", "para", "acaso", "*Por acaso* = por casualidad."),
       B("Esse presente é ___ você, feliz aniversário!", "para", "por", "presente", "El destinatario: para."),
@@ -254,6 +255,85 @@
       B("Como você ___, a gente faz.", "quiser", "queira", "Como", "*Como* + algo por decidir (como quieras): futuro do subjuntivo (*quiser*)."),
       B("Se ___ amanhã, o jogo vai ser cancelado.", "chover", "chova", "Se", "*Se* + condición futura: *chover* (igual al infinitivo), no «se chova»."),
       B("Logo que o ônibus ___, te aviso.", "chegar", "chegue", "Logo que", "*Logo que* (apenas) + futuro: futuro do subjuntivo (*chegar*).")
+    ] },
+
+    // Semana 28: la correlación de tiempos.  La principal manda: presente →
+    // presente do subjuntivo; pasado o condicional → imperfeito do
+    // subjuntivo.  El rioplatense dice «quería que vengas», «me pidió que
+    // traiga»: el portugués no lo admite.
+    { id: "venhaviesse", week: 28, title: "venha o viesse", sub: "la principal en presente o en pasado", items: [
+      A("Quero que você ___ à festa.", "venha", "viesse", "Quero", "Principal en presente → presente do subjuntivo: *quero que venha*."),
+      A("Espero que eles ___ do presente.", "gostem", "gostassem", "Espero", "*Espero* (presente) → *gostem*."),
+      A("É importante que todos ___ a verdade.", "saibam", "soubessem", "É importante", "*É importante* (presente) → presente do subjuntivo: *saibam*."),
+      A("Peço que o senhor ___ aqui.", "assine", "assinasse", "Peço", "*Peço* (presente) → *assine*."),
+      A("Ela vai pedir que eu ___ o vinho.", "traga", "trouxesse", "vai pedir", "*Vai pedir* (futuro) → presente do subjuntivo: *traga*."),
+      B("Queria que você ___ à festa.", "viesse", "venha", "Queria", "Principal en pasado → imperfeito do subjuntivo: *queria que viesse*, no «que venha»."),
+      B("Esperava que eles ___ do presente.", "gostassem", "gostem", "Esperava", "*Esperava* (pasado) → *gostassem*."),
+      B("Seria importante que todos ___ a verdade.", "soubessem", "saibam", "Seria", "Condicional (*seria*) → imperfeito do subjuntivo: *soubessem*."),
+      B("Pedi que o senhor ___ ali.", "assinasse", "assine", "Pedi", "*Pedi* (pasado) → *assinasse*. «Le pedí que firme» no pasa al portugués."),
+      B("Ela pediu que eu ___ o vinho.", "trouxesse", "traga", "pediu", "*Pediu* (pasado) → *trouxesse* (trouxeram → trouxesse), no «que eu traga»."),
+      A("Duvido que ele ___ a tempo.", "chegue", "chegasse", "Duvido", "*Duvido* (presente) → presente do subjuntivo: *chegue*."),
+      A("Prefiro que vocês ___ de ônibus.", "venham", "viessem", "Prefiro", "*Prefiro* (presente) → *venham*."),
+      A("Ela insiste que eu ___ cedo.", "saia", "saísse", "insiste", "*Insiste* (presente) → presente do subjuntivo: *saia*."),
+      B("Duvidei que ele ___ a tempo.", "chegasse", "chegue", "Duvidei", "*Duvidei* (pasado) → imperfeito do subjuntivo: *chegasse*."),
+      B("Preferia que vocês ___ de ônibus.", "viessem", "venham", "Preferia", "*Preferia* (pasado, o el condicional del habla) → *viessem*."),
+      B("Ela insistiu que eu ___ cedo.", "saísse", "saia", "insistiu", "*Insistiu* (pasado) → *saísse*."),
+      A("Exijo que vocês ___ silêncio.", "façam", "fizessem", "Exijo", "*Exijo* (presente) → presente do subjuntivo: *façam*."),
+      A("É melhor que ele ___ o ônibus das oito.", "pegue", "pegasse", "É melhor", "*É melhor* (presente) → *pegue*."),
+      B("Exigiu que vocês ___ silêncio.", "fizessem", "façam", "Exigiu", "*Exigiu* (pasado) → *fizessem*."),
+      B("Seria melhor que ele ___ o ônibus das oito.", "pegasse", "pegue", "Seria melhor", "*Seria* (condicional) → *pegasse*.")
+    ] },
+
+    // Semana 28: la condición real (se tiver → vou) o imaginada (se tivesse
+    // → iria).  Lo que decide es la otra mitad de la frase.
+    { id: "tivertivesse", week: 28, title: "tiver o tivesse", sub: "condición real o imaginada", items: [
+      A("Se eu ___ tempo amanhã, vou à praia.", "tiver", "tivesse", "vou", "Del otro lado, *vou* (real, futuro): *se* + futuro do subjuntivo, *tiver*."),
+      A("Se você ___ dúvidas, me liga.", "tiver", "tivesse", "me liga", "Pedido real para después: *se você tiver*."),
+      A("Quando eles ___ dinheiro, vão viajar.", "tiverem", "tivessem", "vão viajar", "*Vão viajar*: algo que puede pasar → futuro do subjuntivo, *tiverem*."),
+      A("Se a gente ___ sorte, chega antes da chuva.", "tiver", "tivesse", "chega", "*Chega* (presente con valor de futuro): condición real → *tiver*."),
+      A("Se ___ vaga no hotel, eu te aviso.", "houver", "houvesse", "te aviso", "*Te aviso*: real → futuro do subjuntivo de *haver*, *houver*."),
+      B("Se eu ___ tempo, iria à praia.", "tivesse", "tiver", "iria", "Del otro lado, *iria* (condicional): hipótesis → imperfeito do subjuntivo, *tivesse*."),
+      B("Se ela ___ mais paciência, seria uma ótima professora.", "tivesse", "tiver", "seria", "*Seria*: algo imaginado → *tivesse*."),
+      B("Se nós ___ um carro, viajaríamos mais.", "tivéssemos", "tivermos", "viajaríamos", "*Viajaríamos* → *tivéssemos* (con tilde)."),
+      B("Se ___ vaga no hotel, eu te avisaria.", "houvesse", "houver", "avisaria", "*Avisaria* (condicional) → *houvesse*."),
+      B("Se eles ___ dinheiro, iam viajar.", "tivessem", "tiverem", "iam viajar", "*Iam* es el condicional del habla (*iriam*): sigue siendo hipótesis → *tivessem*."),
+      A("Se vocês ___ tempo no sábado, passem lá em casa.", "tiverem", "tivessem", "passem", "*Passem* (una invitación real) → futuro do subjuntivo: *tiverem*."),
+      A("Se o tempo ___ bom, a gente faz churrasco.", "estiver", "estivesse", "faz", "*Faz* (presente con valor de futuro): condición real → *estiver*."),
+      A("Se eu ___ o resultado amanhã, te conto.", "souber", "soubesse", "te conto", "*Te conto*: real → *souber*, futuro do subjuntivo de *saber*."),
+      B("Se vocês ___ tempo, passariam lá em casa?", "tivessem", "tiverem", "passariam", "*Passariam* (condicional) → hipótesis: *tivessem*."),
+      B("Se o tempo ___ bom, a gente faria churrasco.", "estivesse", "estiver", "faria", "*Faria*: algo imaginado → *estivesse*."),
+      B("Se eu ___ o resultado da prova, te contaria.", "soubesse", "souber", "contaria", "*Contaria* (condicional) → *soubesse*."),
+      A("Se vocês ___ ir, avisem antes.", "puderem", "pudessem", "avisem", "*Avisem* (un pedido real) → futuro do subjuntivo: *puderem*."),
+      A("Se ela ___ cedo, a gente almoça junto.", "chegar", "chegasse", "almoça", "*Almoça* (presente con valor de futuro): real → *chegar*."),
+      B("Se vocês ___ ir, avisariam antes?", "pudessem", "puderem", "avisariam", "*Avisariam* (condicional) → hipótesis: *pudessem*."),
+      B("Se ela ___ cedo, a gente almoçaria junto.", "chegasse", "chegar", "almoçaria", "*Almoçaria* (condicional) → *chegasse*.")
+    ] },
+
+    // Semana 24: el conector decide el modo.  Causa o tiempo pasado
+    // (já que, como, porque, depois que, desde que + pasado): indicativo.
+    // Concesión, condición y finalidad (embora, mesmo que, caso, desde que
+    // = «siempre que», a menos que, para que): subjuntivo.
+    { id: "conectores", week: 24, title: "indicativo o subjuntivo según el conector", sub: "já que você está o embora você esteja", items: [
+      A("Já que você ___ aqui, me ajuda com a mala.", "está", "esteja", "Já que", "*Já que* da una causa conocida: indicativo."),
+      A("Como hoje ___ feriado, o banco está fechado.", "é", "seja", "Como", "*Como* causal (al principio, «como»): indicativo."),
+      A("Vou ficar em casa porque ___ cansado.", "estou", "esteja", "porque", "*Porque* da la causa, un hecho: indicativo. «Porque esteja» es error."),
+      A("Depois que ele ___, a festa acabou.", "saiu", "saia", "Depois que", "*Depois que* con pasado: indicativo."),
+      A("Desde que eu ___ ao Rio, só chove.", "cheguei", "chegue", "só chove", "*Desde que* de tiempo («desde que llegué»), con algo que ya pasó: indicativo."),
+      A("Já que vocês ___ cedo, podem escolher a mesa.", "chegaram", "cheguem", "Já que", "*Já que* + un hecho: indicativo."),
+      B("Embora ___ caro, vale a pena.", "seja", "é", "Embora", "*Embora* pide subjuntivo aunque sea un hecho (en castellano, «aunque es caro»)."),
+      B("Mesmo que ___ amanhã, o bloco sai.", "chova", "chove", "Mesmo que", "*Mesmo que* + subjuntivo."),
+      B("Caso você ___ de ajuda, me liga.", "precise", "precisa", "Caso", "*Caso* + presente do subjuntivo."),
+      B("Pode ir à festa, desde que ___ cedo.", "volte", "volta", "Pode ir", "*Desde que* de condición («siempre que»): subjuntivo. Lo dice *pode ir*: un permiso con condición."),
+      B("Vamos à praia, a menos que ___.", "chova", "chove", "a menos que", "*A menos que* + subjuntivo."),
+      B("Vou explicar de novo para que todos ___.", "entendam", "entendem", "para que", "Finalidad con otro sujeto: *para que* + subjuntivo."),
+      A("Visto que o prazo ___ amanhã, vamos correr.", "termina", "termine", "Visto que", "*Visto que* da una causa conocida: indicativo."),
+      A("Enquanto você ___ a louça, eu arrumo a sala.", "lava", "lave", "Enquanto", "*Enquanto* para algo que pasa ahora, al mismo tiempo: indicativo."),
+      B("Ainda que ___ cansada, ela foi trabalhar.", "estivesse", "estava", "Ainda que", "*Ainda que* (aunque) pide subjuntivo aunque sea un hecho: *estivesse*."),
+      B("Contanto que você ___ o trabalho, pode sair mais cedo.", "termine", "termina", "Contanto que", "*Contanto que* (siempre que, con condición) + subjuntivo."),
+      A("Ela sempre chega atrasada porque ___ longe.", "mora", "more", "porque", "*Porque* da la causa, un hecho: indicativo."),
+      A("Ontem, assim que ele ___, começamos a reunião.", "chegou", "chegue", "Ontem", "*Ontem*: ya pasó → indicativo, *chegou*."),
+      B("Por mais que ___, não consigo dormir.", "tente", "tento", "Por mais que", "*Por mais que* (por más que) + subjuntivo."),
+      B("Antes que ___ tarde, vamos embora.", "fique", "fica", "Antes que", "*Antes que* + subjuntivo.")
     ] }
   ];
 

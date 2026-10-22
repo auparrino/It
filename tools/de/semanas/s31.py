@@ -72,7 +72,12 @@ WEEK = {
                 ],
                 "warn": "*darf nicht … werden* es **prohibición** («no se puede, está prohibido»). Para «no hace falta» va *muss nicht*: *Das muss nicht heute erledigt werden* (no hace falta hacerlo hoy).",
                 "tip": "*sollte* + pasiva suena a recomendación amable, típica de los manuales: *sollte gewechselt werden*.",
+                "more": [
+                    "Otra forma muy usada de «no hace falta»: ***brauchen nicht zu*** + infinitivo = *muss nicht*. *Du brauchst nicht zu kommen* = no hace falta que vengas; *Das braucht nicht heute erledigt zu werden* = no hace falta hacerlo hoy. Ojo: *brauchen* lleva **zu** (con separables, en el medio: *Du brauchst nicht anzurufen*), a diferencia de *müssen*.",
+                    "Con ***nur zu*** es «solo tenés que»: *Du brauchst nur anzurufen* = solo tenés que llamar. Hablando, mucha gente se come el *zu* (*Du brauchst nicht kommen*), pero por escrito va siempre.",
+                ],
                 "q": [
+                    q("«No hace falta que me esperes»:", "Du brauchst nicht auf mich zu warten.", ["Du brauchst nicht auf mich zu warten.", "Du darfst nicht auf mich warten.", "Du brauchst nicht auf mich warten zu."]),
                     q("¿Qué significa *Hier darf nicht geraucht werden*?", "Está prohibido fumar acá.", ["Está prohibido fumar acá.", "No hace falta fumar acá.", "Acá se fumó."]),
                     q("«No hace falta firmarlo hoy.»", "Das muss nicht heute unterschrieben werden.", ["Das muss nicht heute unterschrieben werden.", "Das darf nicht heute unterschrieben werden.", "Das muss nicht heute unterschrieben worden."]),
                 ],
@@ -237,5 +242,11 @@ WEEK = {
         tr(2, "La canilla pierde.", "Der Wasserhahn ist undicht.", ["Der Wasserhahn ist undicht.", "Der Wasserhahn tropft."], "*undicht* = que pierde; *tropfen* = gotear."),
         ty(2, "Describí cómo quedó, con *sein* + participio.", "Man hat die Rechnung bezahlt.", "Die Rechnung ist bezahlt.", note="Resultado: *ist bezahlt* (está pagada)."),
         ty(2, "Escribí en alemán, con artículo.", "«el repuesto»", "das Ersatzteil", note="*der Ersatz* (reemplazo) + *das Teil* (pieza): neutro. " + MAY),
+        # parte 0 — brauchen nicht / nur zu (= muss nicht), frente a darf nicht
+        ch(0, "Elegí la forma correcta.", "(No hace falta que vengas mañana: ya terminamos.) Du ___ morgen nicht zu kommen.", "brauchst", ["brauchst", "darfst", "musst"], "*brauchen nicht zu* = no hace falta (= *musst nicht*). *darfst nicht* sería prohibido, y *müssen* no lleva *zu*."),
+        ch(0, "Elegí la forma correcta.", "(Está prohibido estacionar acá.) Hier ___ man nicht parken.", "darf", ["darf", "braucht", "muss"], "Prohibición: *darf nicht*. *braucht nicht zu* y *muss nicht* son «no hace falta»."),
+        cz(0, "Escribí el infinitivo con *zu* de *anrufen*.", "Wenn du Hilfe brauchst, brauchst du nur ___.", "anzurufen", note="*brauchen nur zu* = solo tenés que. Con separable, *zu* en el medio: *anzurufen*."),
+        tr(0, "No hace falta que me esperes.", "Du brauchst nicht auf mich zu warten.", ["Du brauchst nicht auf mich zu warten.", "Du musst nicht auf mich warten.", "Ihr braucht nicht auf mich zu warten.", "Ihr müsst nicht auf mich warten.", "Sie brauchen nicht auf mich zu warten.", "Sie müssen nicht auf mich warten."], "«No hace falta que…» = *brauchst nicht zu* (o *musst nicht*). Ojo: no es *darfst nicht* (prohibido), y nuestro subjuntivo «esperes» desaparece."),
+        ty(0, "Reescribí con *brauchen*.", "Du musst nicht kommen.", "Du brauchst nicht zu kommen.", note="*muss nicht* = *braucht nicht zu*: con *brauchen* el infinitivo lleva *zu*."),
     ],
 }

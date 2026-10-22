@@ -68,7 +68,7 @@ WEEK = {
         "intro": "*Aufgrund der schwachen Nachfrage und angesichts steigender Zinsen hat die Geschäftsführung beschlossen …* Así arranca cualquier comunicado de empresa. Esta semana dominás esas preposiciones y el genitivo que las acompaña.",
         "parts": [
             {"h": "El genitivo y las preposiciones de causa", "blocks": [0, 1]},
-            {"h": "Tema, medio y alternativa", "blocks": [2, 3]},
+            {"h": "Tema, medio y alternativa", "blocks": [2, 3, 7]},
             {"h": "Tiempo, lugar, fuentes y registro", "blocks": [4, 5, 6]},
         ],
         "blocks": [
@@ -208,6 +208,28 @@ WEEK = {
                     q("*Weil die Nachfrage sinkt* → ___ der sinkenden Nachfrage", "Aufgrund", ["Aufgrund", "Anstatt", "Trotz"]),
                 ],
             },
+            {
+                "h": "Sin hacer, sin que: ohne … zu y ohne dass",
+                "r": "*ohne* no es solo preposición (*ohne Geld*). Con un verbo funciona como *um … zu* y *anstatt … zu*: si el sujeto es **el mismo**, **ohne … zu** + infinitivo al final; si es **otro**, **ohne dass** + verbo conjugado al final.",
+                "table": {"head": ["Mismo sujeto", "Otro sujeto"], "rows": [
+                    ["um … zu (para)", "damit (para que)"],
+                    ["ohne … zu (sin)", "ohne dass (sin que)"],
+                    ["(an)statt … zu (en lugar de)", "(an)statt dass (en lugar de que)"],
+                ]},
+                "ex": [
+                    ["Er ging, *ohne* etwas *zu sagen*.", "Se fue sin decir nada."],
+                    ["Er ging, *ohne dass* es jemand *merkte*.", "Se fue sin que nadie lo notara."],
+                    ["Die Firma hat die Preise erhöht, *ohne* die Kunden *zu informieren*.", "La empresa subió los precios sin informar a los clientes."],
+                    ["Die Preise wurden erhöht, *ohne dass* die Kunden informiert wurden.", "Se subieron los precios sin que se informara a los clientes."],
+                ],
+                "warn": "«Sin decir» no es «ohne sagen»: falta el *zu*, *ohne etwas zu sagen*. Y «sin que nadie lo **notara**» va en **indicativo**: *ohne dass es jemand merkte*, nada de subjuntivo. Con separables, *zu* en el medio: *ohne anzurufen*.",
+                "tip": "*ohne dass* ya es negativo: no agregues *nicht*. *ohne dass er es merkte* = sin que lo notara.",
+                "q": [
+                    q("«Se fue sin saludar»:", "Er ging, ohne zu grüßen.", ["Er ging, ohne zu grüßen.", "Er ging, ohne grüßen.", "Er ging, ohne dass grüßen."]),
+                    q("«Entró sin que lo viéramos»:", "Er kam herein, ohne dass wir ihn sahen.", ["Er kam herein, ohne dass wir ihn sahen.", "Er kam herein, ohne uns ihn zu sehen.", "Er kam herein, ohne dass wir ihn nicht sahen."]),
+                    q("«Para que» (otro sujeto) es…", "damit", ["damit", "um … zu", "ohne dass"]),
+                ],
+            },
         ],
     },
     "vocab": [
@@ -243,6 +265,12 @@ WEEK = {
         cz(0, "Escribí la terminación.", "Aufgrund des hohen Umsatz___ zahlt die Firma einen Bonus.", "es", note="Termina en *-z*: *des Umsatzes*."),
         cz(0, "Escribí la terminación.", "Aufgrund eines Fehler___ im System war der Shop offline.", "s", note="*der Fehler* → *eines Fehlers*."),
         ty(0, "Escribí el genitivo singular con artículo definido.", "der Kunde →", "des Kunden", note="Masculino débil: *-n*, sin *-s*."),
+        # parte 0 — repaso: masculinos con -n y declinación del adjetivo
+        cz(0, "Escribí la forma de *der Präsident*.", "Aufgrund der Rede des ___ stiegen die Kurse.", "Präsidenten", ["Präsidenten", "Praesidenten"], "Masculino con *-n* (semana 13): fuera del nominativo, *Präsidenten*, también en genitivo. «des Präsidents» es un error frecuente. " + MAY),
+        ch(0, "Encontrá el error.", "¿Qué oración tiene un error?", "Die Firma hat dem Kunde ein neues Angebot gemacht.", ["Die Firma hat dem Kunde ein neues Angebot gemacht.", "Die Firma hat dem Kunden ein neues Angebot gemacht.", "Der Kunde hat ein neues Angebot bekommen."], "Dativo de *der Kunde*: *dem Kunden*. Solo el sujeto queda sin *-n*."),
+        ch(0, "Elegí la terminación.", "Wegen eines unerwartet___ Rückgangs der Nachfrage …", "unerwarteten", ["unerwarteten", "unerwartetes", "unerwarteter"], "En genitivo con artículo (también *eines*), el adjetivo va siempre en *-en*."),
+        cz(0, "Escribí *stark* con su terminación.", "Trotz ___ Konkurrenz wächst das Unternehmen.", "starker", note="Sin artículo, genitivo femenino (*der Konkurrenz*): el adjetivo toma la marca del artículo, *-er*."),
+        cz(0, "Escribí *neu* con su terminación.", "Das Unternehmen hat einen ___ Standort in Polen eröffnet.", "neuen", note="Acusativo masculino tras *einen*: *-en*."),
         ty(0, "Reescribí con *aufgrund*.", "Weil die Nachfrage gesunken ist, produziert die Firma weniger.", "Aufgrund der gesunkenen Nachfrage produziert die Firma weniger.", ["Aufgrund der gesunkenen Nachfrage produziert die Firma weniger.", "Die Firma produziert aufgrund der gesunkenen Nachfrage weniger.", "Aufgrund des Rückgangs der Nachfrage produziert die Firma weniger.", "Die Firma produziert aufgrund des Rückgangs der Nachfrage weniger.", "Auf Grund der gesunkenen Nachfrage produziert die Firma weniger."], "*weil* → *aufgrund* + genitivo; el participio (*gesunken*) se vuelve adjetivo."),
         tr(0, "Debido a la crisis, la empresa despidió a 200 empleados.", _DESPIDOS[0], _DESPIDOS, "*aufgrund* + genitivo; después, verbo en posición 2."),
         li(0, "angesichts", ["angesichts", "anstatt", "abseits"], "*angesichts* = ante, en vista de."),
@@ -281,5 +309,29 @@ WEEK = {
         tr(2, "Según el informe, la facturación bajó.", _BERICHT[0], _BERICHT, "*Dem Bericht zufolge* o *laut (dem) Bericht*; después, verbo segundo."),
         tr(2, "Fuera del horario comercial no hay nadie.", "Außerhalb der Geschäftszeiten ist niemand da.", ["Außerhalb der Geschäftszeiten ist niemand da.", "Außerhalb der Öffnungszeiten ist niemand da.", "Außerhalb der Geschäftszeiten ist keiner da.", "Außerhalb der Öffnungszeiten ist keiner da.", "Außerhalb der Geschäftszeiten ist niemand erreichbar.", "Außerhalb der Öffnungszeiten ist niemand erreichbar.", "Außerhalb der Geschäftszeiten ist niemand im Büro.", "Außerhalb der Öffnungszeiten ist niemand im Büro."], "*außerhalb* + genitivo plural: *der Geschäftszeiten*."),
         li(2, "infolgedessen", ["infolgedessen", "stattdessen", "trotzdem"], "*infolgedessen* = como consecuencia de eso."),
+        # parte 1 — ohne … zu / ohne dass, mezclado con um … zu y anstatt … zu
+        ch(1, "Elegí la forma correcta.", "Er hat gekündigt, ohne mit seinem Chef ___.", "zu sprechen", ["zu sprechen", "sprechen", "dass er spricht"], "Mismo sujeto (él renuncia, él no habla) → *ohne … zu* + infinitivo. «Sin hablar» no es «ohne sprechen»: falta el *zu*."),
+        ch(1, "Elegí la forma correcta.", "Die Firma hat Stellen gestrichen, ___ die Gewerkschaft davon wusste.", "ohne dass", ["ohne dass", "ohne zu", "ohne"], "Otro sujeto (la empresa / el sindicato) → *ohne dass* + verbo al final. En indicativo: *wusste*, aunque nuestro «sin que lo supiera» vaya en subjuntivo."),
+        ch(1, "Elegí la conjunción.", "(Para renovar el departamento.) Sie hat einen Kredit aufgenommen, ___ ihre Wohnung zu renovieren.", "um", ["um", "ohne", "anstatt"], "Finalidad: *um … zu* (para renovar)."),
+        ch(1, "Elegí la conjunción.", "(Se fue sin despedirse.) Er ist nach Hause gegangen, ___ sich zu verabschieden.", "ohne", ["ohne", "um", "damit"], "«Sin despedirse»: *ohne … zu*. *um … zu* diría «para despedirse», que no tiene sentido si se fue."),
+        cz(1, "Escribí *ohne dass* u *ohne … zu* (solo la palabra o las palabras que faltan).", "Der Vertrag wurde geändert, ___ wir informiert wurden.", "ohne dass", note="Otro sujeto (*wir*) y verbo conjugado al final → *ohne dass*."),
+        cz(1, "Escribí el infinitivo con *zu* de *anrufen*.", "Sie kam einfach vorbei, ohne vorher ___.", "anzurufen", note="*ohne … zu* con separable: *zu* en el medio, *anzurufen*."),
+        tr(1, "Se fue sin decir nada.", "Er ging, ohne etwas zu sagen.", ["Er ging, ohne etwas zu sagen.", "Er ist gegangen, ohne etwas zu sagen.", "Sie ging, ohne etwas zu sagen.", "Sie ist gegangen, ohne etwas zu sagen.", "Er ging, ohne ein Wort zu sagen.", "Er ist gegangen, ohne ein Wort zu sagen.", "Er ging weg, ohne etwas zu sagen.", "Er ist weggegangen, ohne etwas zu sagen."], "«Sin + infinitivo» = *ohne … zu*, con el infinitivo al final. Nunca «ohne sagen»."),
+        tr(1, "Firmó el contrato sin que el abogado lo leyera.", "Er unterschrieb den Vertrag, ohne dass der Anwalt ihn las.", ["Er unterschrieb den Vertrag, ohne dass der Anwalt ihn las.", "Er hat den Vertrag unterschrieben, ohne dass der Anwalt ihn gelesen hat.", "Er unterschrieb den Vertrag, ohne dass der Anwalt ihn gelesen hatte.", "Sie unterschrieb den Vertrag, ohne dass der Anwalt ihn las.", "Sie hat den Vertrag unterschrieben, ohne dass der Anwalt ihn gelesen hat.", "Er hat den Vertrag unterschrieben, ohne dass ihn der Anwalt gelesen hat.", "Er unterschrieb den Vertrag, ohne dass ihn der Anwalt las."], "Otro sujeto (el abogado) → *ohne dass*, verbo al final y en **indicativo** (*las*), no un subjuntivo como «leyera»."),
+        ty(1, "Uní con *ohne … zu* u *ohne dass* (lo que corresponda).", "Er hat das Geld investiert. Er hat sich nicht informiert.", "Er hat das Geld investiert, ohne sich zu informieren.", ["Er hat das Geld investiert, ohne sich zu informieren.", "Er hat das Geld investiert, ohne sich vorher zu informieren."], "Mismo sujeto → *ohne … zu*. El *nicht* desaparece: *ohne* ya es la negación."),
+        # parte 2 — repaso de la prensa (semanas 35 y 37): soll, will y Konjunktiv I con fuentes
+        ch(2, "¿Qué significa?", "Der Minister soll Geld von der Firma angenommen haben.", "Dicen que el ministro aceptó dinero de la empresa.", ["Dicen que el ministro aceptó dinero de la empresa.", "El ministro tiene que aceptar dinero de la empresa.", "El ministro asegura haber aceptado dinero de la empresa."], "*soll* + infinitivo perfecto = rumor sobre el pasado, lo dicen otros. Como nuestro condicional de prensa: «habría aceptado»."),
+        ch(2, "Elegí el modal.", "(Él dice que no sabía nada, pero nadie le cree.) Der Chef ___ von nichts gewusst haben.", "will", ["will", "soll", "muss"], "Lo afirma el propio sujeto y el hablante duda: *will*. *soll* sería lo que dicen otros."),
+        cz(2, "Escribí la forma de *sein* en Konjunktiv I.", "Laut Polizei ___ der Täter ins Ausland geflohen.", "sei", note="Discurso indirecto de prensa: Konjunktiv I, *sei* (+ *geflohen*, que va con *sein*)."),
+        cz(2, "Escribí la forma de *haben* en Konjunktiv I.", "Dem Sprecher zufolge ___ die Firma keine Fehler gemacht.", "habe", note="*er/sie hat* → Konjunktiv I *habe*: la empresa dice eso, el diario no lo afirma."),
+        cz(2, "Escribí la forma de *haben* que corresponda (Konjunktiv I no se distingue).", "Laut Gewerkschaft ___ die Mitarbeiter keine Informationen bekommen.", "hätten", note="*sie haben* en Konjunktiv I es igual al indicativo (*haben*), así que se reemplaza por el Konjunktiv II *hätten*. No es irreal: solo marca que es una cita."),
+        cz(2, "Escribí la forma de *kommen* que corresponda (Konjunktiv I no se distingue).", "Der Zeitung zufolge ___ die Investoren aus China.", "kämen", note="*sie kommen* en Konjunktiv I sería igual al indicativo → Konjunktiv II *kämen* (de *kamen* + diéresis). También se ve *würden … kommen*, con *kommen* al final."),
+        cz(2, "Escribí el participio que falta (pasiva en pasado).", "Laut Polizei ist bei dem Unfall niemand verletzt ___.", "worden", note="Pasiva en Perfekt: *ist … verletzt worden*. Si ya hay otro participio, *worden* va sin *ge-*."),
+        ty(2, "Reescribí con *sollen*.", "Laut der Zeitung hat der Minister gelogen.", "Der Minister soll gelogen haben.", note="«Según el diario» + hecho pasado = *soll* + infinitivo perfecto (*gelogen haben*)."),
+        ty(2, "Pasá a discurso indirecto con Konjunktiv I, empezando con *Laut Zeitung*.", "Der Minister soll gelogen haben.", "Laut Zeitung habe der Minister gelogen.", ["Laut Zeitung habe der Minister gelogen.", "Laut der Zeitung habe der Minister gelogen."], "Las dos herramientas de prensa: *soll* (modal) o fuente + Konjunktiv I (*habe … gelogen*)."),
+        # parte 2 — repaso: relativas en dativo y con preposición (semana 24)
+        cz(2, "Escribí el relativo.", "Die Firma, für ___ sie seit zehn Jahren arbeitet, wurde verkauft.", "die", note="*für* + acusativo, *die Firma* femenino → *für die*. La preposición va delante, no al final como en el castellano coloquial «la empresa que trabaja para ella»."),
+        ch(2, "Elegí el relativo.", "Die Kunden, ___ wir die Ware geliefert haben, sind zufrieden.", "denen", ["denen", "den", "die"], "*liefern* + dativo (a quién) y plural → *denen*, no *den*."),
+        tr(2, "Es un tema sobre el que se discute mucho.", "Das ist ein Thema, über das viel diskutiert wird.", ["Das ist ein Thema, über das viel diskutiert wird.", "Das ist ein Thema, über das man viel diskutiert.", "Das ist ein Thema, worüber viel diskutiert wird.", "Das ist ein Thema, worüber man viel diskutiert.", "Es ist ein Thema, über das viel diskutiert wird.", "Es ist ein Thema, über das man viel diskutiert."], "*diskutieren über* + acusativo → *über das* (neutro). *worüber* también se usa."),
     ],
 }

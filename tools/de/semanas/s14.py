@@ -22,7 +22,7 @@ WEEK = {
         "parts": [
             {"h": "Wo o wohin", "blocks": [0, 1, 2]},
             {"h": "Poner y estar", "blocks": [3, 4, 5]},
-            {"h": "La mudanza", "blocks": [6, 7]},
+            {"h": "La mudanza", "blocks": [6, 8, 7]},
         ],
         "blocks": [
             {
@@ -42,9 +42,11 @@ WEEK = {
                 ],
                 "warn": "En castellano «en» sirve para las dos cosas: «pongo el libro en la mesa», «el libro está en la mesa». En alemán cambia el caso: *auf den Tisch* (adónde) / *auf dem Tisch* (dónde).",
                 "tip": "¿Hay un destino? Acusativo. ¿Está quieto, o se mueve **dentro** del mismo lugar? Dativo: *Wir laufen im Park* (corremos por el parque).",
+                "more": ["Ojo: la regla *wo/wohin* es solo para **lugares**. Cuando estas preposiciones hablan de **tiempo**, van **siempre con dativo**: *am Montag, im Mai, vor einer Woche, in einem Monat, zwischen 8 und 9 Uhr*. «In einen Monat» está mal aunque «vaya hacia el futuro»."],
                 "q": [
                     q("Completá: *Das Buch liegt auf ___ Tisch.*", "dem", ["dem", "den", "der"]),
                     q("Completá: *Ich gehe in ___ Küche.*", "die", ["die", "der", "dem"]),
+                    q("Completá: *Ich bin in ___ Monat fertig.* (tiempo)", "einem", ["einem", "einen", "ein"]),
                 ],
             },
             {
@@ -185,6 +187,32 @@ WEEK = {
                     q("Participio de *legen*:", "gelegt", ["gelegt", "gelegen", "gelogen"]),
                 ],
             },
+            {
+                "h": "hin y her: desde dónde mirás",
+                "r": "El alemán marca hacia dónde va el movimiento **mirado desde quien habla**: ***her*** = hacia acá (hacia mí); ***hin*** = hacia allá (lejos de mí). En la charla se acortan: *herein/hinein → rein*, *heraus/hinaus → raus*, *herunter/hinunter → runter*, *herauf/hinauf → rauf*.",
+                "table": {"head": ["Wo? (dónde estás)", "Wohin? (adónde vas)", "Woher? (de dónde)"], "rows": [
+                    ["hier (acá)", "hierher, her (para acá)", "von hier (de acá)"],
+                    ["dort, da (allá)", "dorthin, hin (para allá)", "von dort (de allá)"],
+                    ["drinnen (adentro)", "rein (para adentro)", "von drinnen"],
+                    ["draußen (afuera)", "raus (para afuera)", "von draußen"],
+                    ["oben (arriba)", "nach oben, rauf (para arriba)", "von oben"],
+                    ["unten (abajo)", "nach unten, runter (para abajo)", "von unten"],
+                ]},
+                "ex": [
+                    ["*Komm her!*", "¡Vení para acá!"],
+                    ["*Geh hin* und frag ihn!", "¡Andá y preguntale!"],
+                    ["*Komm rein!* (yo estoy adentro) – *Geh rein!* (yo estoy afuera)", "¡Entrá! – ¡Entrá!"],
+                    ["*Komm runter*, ich warte *unten*.", "Bajá, te espero abajo."],
+                    ["*Wo* gehst du *hin*? = *Wohin* gehst du? · *Wo* kommst du *her*? = *Woher* kommst du?", "¿Adónde vas? · ¿De dónde venís?"],
+                ],
+                "warn": "En castellano «entrá» sirve siempre; en alemán depende de dónde estás vos: si estás adentro, *Komm rein!*; si estás afuera con el otro, *Geh rein!* Y no mezcles dónde con adónde: *Ich bin draußen* (estoy afuera), pero *Ich gehe raus* (salgo); *Ich warte unten*, pero *Ich komme nach unten / runter*.",
+                "tip": "Con *kommen* casi siempre va *her-* (viene hacia vos); con *gehen*, casi siempre *hin-* (se aleja). Por eso *Komm her!* y *Geh hin!*",
+                "q": [
+                    q("Estás en el jardín y llamás a tu hijo, que está en la casa: *Komm ___!*", "raus", ["raus", "rein", "draußen"]),
+                    q("«Te espero abajo.»", "Ich warte unten.", ["Ich warte unten.", "Ich warte runter.", "Ich warte nach unten."]),
+                    q("*Wo gehst du hin?* significa…", "¿Adónde vas?", ["¿Adónde vas?", "¿Dónde estás?", "¿De dónde venís?"]),
+                ],
+            },
         ],
     },
     "vocab": [
@@ -240,6 +268,8 @@ WEEK = {
         tr(1, "Pongo la botella en la heladera.", "Ich stelle die Flasche in den Kühlschrank.", ["Ich stelle die Flasche in den Kühlschrank.", "Ich lege die Flasche in den Kühlschrank."], "Acción → acusativo: *in den Kühlschrank*."),
         tr(1, "El celular está sobre la mesa.", "Das Handy liegt auf dem Tisch.", ["Das Handy liegt auf dem Tisch.", "Das Handy ist auf dem Tisch."], "Estado, acostado: *liegt auf dem Tisch*."),
         tr(1, "Colgamos el cuadro en la pared.", "Wir hängen das Bild an die Wand.", ["Wir hängen das Bild an die Wand.", "Wir haben das Bild an die Wand gehängt."], "Acción → acusativo: *an die Wand*."),
+        tr(1, "¡Poné la botella en la heladera! (a un amigo)", "Stell die Flasche in den Kühlschrank!", ["Stell die Flasche in den Kühlschrank!", "Stell die Flasche bitte in den Kühlschrank!", "Stell bitte die Flasche in den Kühlschrank!", "Stelle die Flasche in den Kühlschrank!", "Leg die Flasche in den Kühlschrank!"], "Imperativo con *du*: *du stellst → Stell!* Es una acción (adónde): *in den Kühlschrank*, acusativo."),
+        cz(1, "Escribí el imperativo de *legen* con *ihr*.", "Kinder, ___ eure Jacken bitte auf das Bett!", "legt", note="*ihr legt → Legt!*: el imperativo con *ihr* es igual al presente, sin *ihr*. Acción → *auf das Bett* (acusativo)."),
         # parte 2 — la mudanza
         ch(2, "Elegí la pregunta.", "___ stellen wir den Schrank? – Ins Schlafzimmer.", "Wohin", ["Wohin", "Wo", "Woher"], "Hay destino: *Wohin?*"),
         ch(2, "Elegí la pregunta.", "___ ist der Spiegel? – Im Bad.", "Wo", ["Wo", "Wohin", "Wann"], "Lugar quieto: *Wo?*"),
@@ -257,5 +287,24 @@ WEEK = {
         tr(2, "¿Dónde pongo las cajas?", "Wohin stelle ich die Kartons?", ["Wohin stelle ich die Kartons?", "Wo stelle ich die Kartons hin?", "Wohin lege ich die Kartons?", "Wo lege ich die Kartons hin?"], "Hay destino: *Wohin?*"),
         tr(2, "Puse la alfombra en el living.", "Ich habe den Teppich ins Wohnzimmer gelegt.", ["Ich habe den Teppich ins Wohnzimmer gelegt.", "Ich habe den Teppich in das Wohnzimmer gelegt."], "Acción → *ins* (acusativo); *legen → gelegt*."),
         ty(2, "Escribí en alemán, con artículo.", "«la mudanza»", "der Umzug", note=MAY),
+        # parte 2 — repaso: jemand, nichts, einen, welche (semana 10)
+        cz(2, "Escribí el pronombre.", "Brauchen wir noch Kartons? – Nein, wir haben noch ___.", "welche", note="Para un plural sin artículo: *welche* («unos», «algunos»). No alcanza con «wir haben noch»."),
+        cz(2, "Escribí el pronombre (uno).", "Hast du einen Hammer? – Ja, im Keller liegt ___.", "einer", note="*der Hammer* como sujeto (nominativo) → *einer*. En acusativo sería *Ich habe einen*."),
+        tr(2, "No encuentro nada.", "Ich finde nichts.", ["Ich finde nichts.", "Ich kann nichts finden."], "Una sola negación: *nichts*, sin *nicht* («Ich finde nicht nichts» está mal)."),
+        ch(2, "Elegí la palabra.", "Kann mir ___ beim Umzug helfen? – Ja, Paul.", "jemand", ["jemand", "etwas", "niemand"], "«alguien» = *jemand*; la respuesta nombra a una persona."),
+        # parte 2 — repaso: cuándo antes que dónde, y nicht
+        ch(2, "Elegí la oración más natural.", "(Nos mudamos a Hamburgo en marzo.)", "Wir ziehen im März nach Hamburg.", ["Wir ziehen im März nach Hamburg.", "Wir ziehen nach Hamburg im März.", "Wir ziehen nach im März Hamburg."], "Cuándo antes que dónde: *im März nach Hamburg*. La dirección queda pegada al final."),
+        tr(2, "Mañana pongo la mesa en la cocina.", "Ich stelle morgen den Tisch in die Küche.", ["Ich stelle morgen den Tisch in die Küche.", "Morgen stelle ich den Tisch in die Küche.", "Ich stelle den Tisch morgen in die Küche."], "*morgen* (cuándo) antes que *in die Küche* (dónde, acusativo), que queda al final. El objeto con *den* puede ir antes o después de *morgen*."),
+        ch(2, "Elegí la negación normal.", "(No pongo el sofá en el dormitorio.)", "Ich stelle das Sofa nicht ins Schlafzimmer.", ["Ich stelle das Sofa nicht ins Schlafzimmer.", "Ich stelle das Sofa ins Schlafzimmer nicht.", "Ich nicht stelle das Sofa ins Schlafzimmer."], "*nicht* va después del objeto (*das Sofa*) pero **antes** de la dirección (*ins Schlafzimmer*)."),
+        # parte 0 — tiempo: siempre dativo
+        ch(0, "Elegí el artículo.", "Wir ziehen in ___ Woche um. (dentro de una semana)", "einer", ["einer", "eine", "einen"], "Con tiempo, *in* va siempre con dativo: *in einer Woche*. La lógica *wohin* es solo para lugares."),
+        # parte 2 — hin y her
+        ch(2, "Elegí.", "Du stehst draußen vor der Tür, ich bin in der Küche. Ich rufe: «Komm ___!»", "rein", ["rein", "raus", "drinnen"], "Yo estoy adentro y vos venís hacia mí: *Komm rein!* *drinnen* es dónde, no adónde."),
+        ch(2, "Elegí.", "Ich bin im Garten. Mein Sohn ist im Haus. Ich rufe: «Komm ___!»", "raus", ["raus", "rein", "draußen"], "Yo estoy afuera: el movimiento va de adentro hacia afuera, hacia mí: *raus*."),
+        ch(2, "Elegí.", "Ich warte ___ auf dich. (abajo)", "unten", ["unten", "runter", "nach unten"], "Esperar no es moverse: dónde = *unten*. *runter / nach unten* es adónde."),
+        cz(2, "Escribí la palabra que falta.", "Wo gehst du ___? – Zum Supermarkt.", "hin", note="*Wo … hin?* = *Wohin?* (adónde). *hin*: se aleja de quien habla."),
+        cz(2, "Escribí la palabra que falta.", "Wo kommst du ___? – Aus Argentinien.", "her", note="*Wo … her?* = *Woher?* (de dónde). *her*: hacia quien habla."),
+        tr(2, "Bajá, te estoy esperando abajo.", "Komm runter, ich warte unten.", ["Komm runter, ich warte unten.", "Komm runter, ich warte unten auf dich.", "Komm nach unten, ich warte unten.", "Komm herunter, ich warte unten.", "Komm runter, ich warte schon unten.", "Komm nach unten, ich warte unten auf dich.", "Komm runter, ich warte auf dich unten.", "Komm herunter, ich warte unten auf dich."], "Movimiento hacia mí y hacia abajo: *runter* (o *nach unten*); donde espero: *unten*."),
+        tr(2, "¡Vení para acá!", "Komm her!", ["Komm her!", "Komm hierher!", "Komm mal her!"], "Hacia quien habla: *her*. «Komm hier» está mal: *hier* es dónde, no adónde."),
     ],
 }

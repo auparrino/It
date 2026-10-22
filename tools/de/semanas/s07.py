@@ -16,13 +16,14 @@ WEEK = {
         "*nicht müssen* = no hace falta; *nicht dürfen* = está prohibido.",
         "*Ich will* es «quiero», no futuro; *ich möchte* es el «querría» amable.",
         "*sollen* = lo que otro te pide o te aconseja: *Der Lehrer sagt, ich soll mehr lesen*.",
+        "Saber un dato = *wissen* (*ich weiß*); saber hacer = *können*; conocer = *kennen*.",
     ],
     "lesson": {
         "intro": "Con seis verbos chicos podés decir muchísimo: qué sabés hacer, qué tenés que hacer, qué querés y qué está permitido. Todos funcionan igual: el modal va segundo y el otro verbo se va al final.",
         "parts": [
-            {"h": "können, müssen y el corchete", "blocks": [0, 1, 2]},
+            {"h": "können, müssen y el corchete", "blocks": [0, 1, 2, 7]},
             {"h": "Querer, poder y deber", "blocks": [3, 4]},
-            {"h": "Preguntar, negar y contar", "blocks": [5, 6]},
+            {"h": "Preguntar, negar y contar", "blocks": [5, 6, 8]},
         ],
         "blocks": [
             {
@@ -47,7 +48,7 @@ WEEK = {
             },
             {
                 "h": "können: poder y saber",
-                "r": "*können* es «poder» y también «saber hacer algo»: *Ich kann schwimmen* = sé nadar. Como todos los modales, cambia la vocal en singular y **no lleva terminación con *ich* ni con *er/sie/es***.",
+                "r": "*können* es «poder» y también «saber hacer algo»: *Ich kann schwimmen* = sé nadar. *können, müssen, dürfen* y *wollen* cambian la vocal en singular (*sollen* no: *ich soll*), y ningún modal **lleva terminación con *ich* ni con *er/sie/es***.",
                 "table": {"head": ["Persona", "können", "müssen"], "rows": [
                     ["ich", "kann", "muss"],
                     ["du", "kannst", "musst"],
@@ -86,13 +87,13 @@ WEEK = {
             {
                 "h": "wollen y möchten: querer",
                 "r": "*wollen* es «querer» con firmeza: un plan, una decisión. *möchten* (que ya conocés de *Ich möchte einen Kaffee*) es el «querría», más suave y cortés. Los dos pueden llevar un infinitivo al final.",
-                "table": {"head": ["Persona", "wollen", "möchten"], "rows": [
-                    ["ich", "will", "möchte"],
-                    ["du", "willst", "möchtest"],
-                    ["er, sie, es", "will", "möchte"],
-                    ["wir", "wollen", "möchten"],
-                    ["ihr", "wollt", "möchtet"],
-                    ["sie, Sie", "wollen", "möchten"],
+                "table": {"head": ["Persona", "wollen", "möchten", "mögen"], "rows": [
+                    ["ich", "will", "möchte", "mag"],
+                    ["du", "willst", "möchtest", "magst"],
+                    ["er, sie, es", "will", "möchte", "mag"],
+                    ["wir", "wollen", "möchten", "mögen"],
+                    ["ihr", "wollt", "möchtet", "mögt"],
+                    ["sie, Sie", "wollen", "möchten", "mögen"],
                 ]},
                 "ex": [
                     ["Ich *will* Deutsch lernen.", "Quiero aprender alemán."],
@@ -102,8 +103,13 @@ WEEK = {
                 ],
                 "warn": "*Ich will* parece el *will* inglés, pero no es futuro: es «quiero». Y en un negocio *Ich will einen Kaffee* suena exigente; pedí con *Ich möchte…*",
                 "tip": "Para contar planes y deseos con amigos, *wollen* va perfecto; para pedir algo a un desconocido, *möchten*.",
+                "more": [
+                    "*mögen* (*ich mag, du magst, er mag*) es «me gusta» **con un sustantivo**: *Ich mag Pizza*, *Magst du Hunde?* Para una **actividad** lo natural es *gern*: *Ich esse gern Pizza* (no «Ich mag essen Pizza»). Y para la impresión que te da algo, *gefallen*: *Die Stadt gefällt mir* (lo vemos en la semana 13).",
+                    "*möchte* viene de *mögen*, pero se usa como verbo aparte: *Ich mag Kaffee* = me gusta el café; *Ich möchte einen Kaffee* = quiero un café (ahora).",
+                ],
                 "q": [
                     q("Completá: *Er ___ Musik machen.* (wollen)", "will", ["will", "willt", "wollt"]),
+                    q("«Me gustan los perros» es…", "Ich mag Hunde.", ["Ich mag Hunde.", "Ich möchte Hunde.", "Ich gern Hunde."]),
                     q("En el café, ¿qué es más amable?", "Ich möchte einen Tee.", ["Ich möchte einen Tee.", "Ich will einen Tee.", "Ich mag einen Tee."]),
                 ],
             },
@@ -126,7 +132,7 @@ WEEK = {
                     ["*Soll* ich kommen?", "¿Querés que vaya?"],
                 ],
                 "warn": "En castellano «poder» sirve para todo. En alemán: si es capacidad o posibilidad, *können*; si es permiso, *dürfen*. *Darf ich…?* es la forma educada de pedir permiso.",
-                "more": ["*man* va con la forma de *er*: *man darf, man muss, man kann*.", "*Soll ich…?* sirve para ofrecerte: *Soll ich helfen?* = ¿te ayudo?"],
+                "more": ["*man* va con la forma de *er*: *man darf, man muss, man kann*. Es nuestro «se» impersonal o el «uno», y también el «vos» genérico: *Man spricht hier Deutsch* = acá se habla alemán; *Das macht man nicht* = eso no se hace. No lo confundas con *der Mann* (el hombre): *man* va con minúscula y una sola n.", "*Soll ich…?* sirve para ofrecerte: *Soll ich helfen?* = ¿te ayudo?"],
                 "q": [
                     q("Cartel de prohibido fumar: *Hier ___ man nicht rauchen.*", "darf", ["darf", "muss", "will"]),
                     q("El médico te dice que tomes agua: *Ich ___ viel Wasser trinken.*", "soll", ["soll", "darf", "will"]),
@@ -167,6 +173,54 @@ WEEK = {
                     q("*Ich muss jetzt nach Hause* significa…", "Ahora me tengo que ir a casa.", ["Ahora me tengo que ir a casa.", "Ahora puedo ir a casa.", "Ahora tengo que quedarme en casa."]),
                 ],
             },
+            {
+                "h": "Saber y conocer: wissen, können, kennen",
+                "r": "El castellano usa «saber» para dos cosas y el alemán las separa. Saber **un dato** (un número, dónde vive alguien, si viene) es *wissen*. Saber **hacer algo** es *können*. Y «conocer» (una persona, una ciudad, un libro) es *kennen*. *wissen* se conjuga como un modal: **sin -t** con *ich* y *er/sie/es*.",
+                "table": {"head": ["Persona", "wissen", "kennen"], "rows": [
+                    ["ich", "weiß", "kenne"],
+                    ["du", "weißt", "kennst"],
+                    ["er, sie, es", "weiß", "kennt"],
+                    ["wir", "wissen", "kennen"],
+                    ["ihr", "wisst", "kennt"],
+                    ["sie, Sie", "wissen", "kennen"],
+                ]},
+                "ex": [
+                    ["Ich *weiß* seine Nummer.", "Sé su número."],
+                    ["*Weißt* du, wo Anna wohnt?", "¿Sabés dónde vive Anna?"],
+                    ["Ich *kenne* Anna.", "Conozco a Anna."],
+                    ["*Kennst* du Berlin?", "¿Conocés Berlín?"],
+                    ["Ich *kann* schwimmen.", "Sé nadar."],
+                    ["Ich *weiß* es nicht.", "No sé."],
+                ],
+                "warn": "«Sé nadar» no es «Ich weiß schwimmen»: una habilidad va con *können*. Y «Conozco a Anna» no es «Ich weiß Anna»: personas y lugares van con *kennen*. Ojo también con «er weißt»: es *er weiß*, sin -t, como *er kann*.",
+                "tip": "Preguntate qué viene después: ¿un infinitivo (nadar, cocinar)? → *können*. ¿Una persona, un lugar, una cosa conocida? → *kennen*. ¿Un dato o una pregunta (*wo, wann, ob*)? → *wissen*.",
+                "q": [
+                    q("Completá: *Er ___ die Antwort.*", "weiß", ["weiß", "weißt", "kennt"]),
+                    q("«Conozco a tu hermano» es…", "Ich kenne deinen Bruder.", ["Ich kenne deinen Bruder.", "Ich weiß deinen Bruder.", "Ich kann deinen Bruder."]),
+                    q("«¿Sabés cocinar?» es…", "Kannst du kochen?", ["Kannst du kochen?", "Weißt du kochen?", "Kennst du kochen?"]),
+                ],
+            },
+            {
+                "h": "und, aber, oder: no cuentan",
+                "r": "*und* (y), *aber* (pero) y *oder* (o) unen dos oraciones **sin tocar el orden**: van en la «posición 0», fuera de la cuenta. Después viene la oración normal, con el verbo segundo. Antes de *aber* va coma; antes de *und* y *oder*, no hace falta.",
+                "table": {"head": ["Oración 1", "Conector (0)", "Pos. 1", "Pos. 2 (verbo)", "Resto"], "rows": [
+                    ["Ich komme aus Chile,", "aber", "ich", "wohne", "in Berlin."],
+                    ["Ich kann nicht kommen,", "aber", "morgen", "habe", "ich Zeit."],
+                    ["Wir gehen ins Kino", "oder", "wir", "bleiben", "zu Hause."],
+                    ["Er kocht", "und", "sie", "macht", "Musik."],
+                ]},
+                "ex": [
+                    ["Ich kann nicht gut kochen, *aber* ich will es lernen.", "No cocino bien, pero quiero aprender."],
+                    ["Heute muss ich arbeiten, *aber* morgen habe ich Zeit.", "Hoy tengo que trabajar, pero mañana tengo tiempo."],
+                    ["Trinkst du Kaffee *oder* möchtest du einen Tee?", "¿Tomás café o querés un té?"],
+                ],
+                "warn": "*aber* no es como *heute*: no ocupa la posición 1. «aber habe ich keine Zeit» está mal; va *aber ich habe keine Zeit*. En cambio, si después de *aber* ponés otra cosa adelante (*morgen*), el verbo sigue segundo: *aber morgen habe ich Zeit*.",
+                "tip": "Tapá el *und / aber / oder* con el dedo: lo que queda tiene que ser una oración normal.",
+                "q": [
+                    q("¿Cuál es correcta?", "Ich bin müde, aber ich muss arbeiten.", ["Ich bin müde, aber ich muss arbeiten.", "Ich bin müde, aber muss ich arbeiten.", "Ich bin müde, aber ich arbeiten muss."]),
+                    q("Completá: *Ich kann heute nicht, aber morgen ___ ich.*", "kann", ["kann", "ich kann", "können"]),
+                ],
+            },
         ],
     },
     "vocab": [
@@ -204,6 +258,15 @@ WEEK = {
         tr(0, "Hoy tengo que trabajar.", "Ich muss heute arbeiten.", ["Ich muss heute arbeiten.", "Heute muss ich arbeiten."], "Modal segundo, infinitivo al final."),
         tr(0, "¿Sabés bailar?", "Kannst du tanzen?", note="Pregunta de sí o no: modal primero."),
         li(0, "können", ["können", "kennen", "kommen"], "*können* (poder, con ö); *kennen* es conocer y *kommen*, venir."),
+        # parte 0 — wissen, können, kennen
+        ch(0, "Elegí el verbo.", "Ich ___ Berlin gut.", "kenne", ["kenne", "weiß", "kann"], "Un lugar que conocés: *kennen*. *wissen* es saber un dato."),
+        ch(0, "Elegí el verbo.", "___ du, wo er wohnt?", "Weißt", ["Weißt", "Kennst", "Kannst"], "Saber un dato (dónde vive): *wissen* → *du weißt*."),
+        ch(0, "Elegí el verbo.", "(Sé nadar.) Ich ___ schwimmen.", "kann", ["kann", "weiß", "kenne"], "Saber hacer algo, con infinitivo: *können*. «Ich weiß schwimmen» es el calco del castellano."),
+        cz(0, "Escribí la forma de *wissen*.", "Er ___ die Antwort nicht.", "weiß", note="*er weiß*, sin -t, igual que *er kann*. «er weißt» es un error típico."),
+        cz(0, "Escribí la forma de *wissen*.", "Ich ___ es nicht.", "weiß", note="*ich weiß*: sin -e ni -t, como los modales."),
+        cz(0, "Escribí la forma de *kennen* o *wissen*.", "___ du meine Schwester?", "Kennst", note="Una persona: *kennen* → *du kennst*."),
+        tr(0, "Conozco a Anna.", "Ich kenne Anna.", note="Conocer a una persona es *kennen*, sin «a»: el alemán no marca a la persona con preposición."),
+        tr(0, "No sé su número.", "Ich weiß seine Nummer nicht.", ["Ich weiß seine Nummer nicht.", "Ich weiß ihre Nummer nicht.", "Seine Nummer weiß ich nicht.", "Ihre Nummer weiß ich nicht."], "Un dato: *wissen*. *nicht* va al final, después del objeto."),
         # parte 1 — wollen, möchten, dürfen, sollen
         ch(1, "Elegí la forma correcta.", "Er ___ Musik machen.", "will", ["will", "willt", "wollt"], "*wollen* → *er will*, sin terminación."),
         ch(1, "¿Qué significa?", "Ich will Deutsch lernen.", "Quiero aprender alemán.", ["Quiero aprender alemán.", "Voy a aprender alemán.", "Debo aprender alemán."], "*will* es «quiero», no futuro."),
@@ -221,7 +284,16 @@ WEEK = {
         tr(1, "¿Puedo fumar acá?", "Darf ich hier rauchen?", note="Permiso: *dürfen*."),
         tr(1, "Quiero aprender alemán.", "Ich will Deutsch lernen.", ["Ich will Deutsch lernen.", "Ich möchte Deutsch lernen."], "*wollen* o, más suave, *möchten*."),
         tr(1, "Acá no se puede estacionar.", "Hier darf man nicht parken.", ["Hier darf man nicht parken.", "Man darf hier nicht parken."], "Regla general: *man* + *nicht dürfen*."),
+        tr(1, "Acá se habla alemán.", "Hier spricht man Deutsch.", ["Hier spricht man Deutsch.", "Man spricht hier Deutsch."], "El «se» impersonal es *man* + verbo en 3.ª singular: *spricht*. No se traduce con *sich*."),
+        ch(1, "Elegí la forma correcta.", "(Eso no se hace.)", "Das macht man nicht.", ["Das macht man nicht.", "Das machen man nicht.", "Das macht sich nicht."], "*man* va con la forma de *er*: *macht*. El «se» castellano acá es *man*, no *sich*."),
         ty(1, "Escribí en alemán.", "«¿Querés que vaya?» (con *sollen*, a un amigo)", "Soll ich kommen?", note="*Soll ich…?* para ofrecerte."),
+        # parte 1 — mögen y gern
+        cz(1, "Escribí la forma de *mögen*.", "___ du Hunde?", "Magst", note="*du magst*: en singular, *a* en lugar de *ö*."),
+        ch(1, "Elegí la oración correcta.", "(Me gusta leer.)", "Ich lese gern.", ["Ich lese gern.", "Ich gern lese.", "Ich möchte lesen."], "Para una actividad, *gern* después del verbo. *Ich möchte lesen* es «quiero leer». (*Ich mag lesen* se oye, pero lo normal es *gern*; *mögen* va sobre todo con sustantivos: *Ich mag Bücher*.)"),
+        ch(1, "¿Qué significa?", "Ich mag Kaffee, aber jetzt möchte ich einen Tee.", "Me gusta el café, pero ahora quiero un té.", ["Me gusta el café, pero ahora quiero un té.", "Quiero un café, pero ahora me gusta el té.", "Me gustaría un café, pero ahora me gusta el té."], "*mögen* = gusto en general; *möchte* = lo que querés ahora."),
+        tr(1, "Ella no me gusta. (una persona)", "Ich mag sie nicht.", ["Ich mag sie nicht.", "Sie gefällt mir nicht."],"Con una persona, *mögen* + acusativo; *nicht* va al final. Fijate que el sujeto es *ich*: al revés que «me gusta»."),
+        ch(1, "Elegí el pronombre.", "Der Film? Ich mag ___ nicht.", "ihn", ["ihn", "er", "es"], "*der Film* como objeto → *ihn* (lo). *er* es solo para el sujeto."),
+        tr(1, "¿La torta? No la quiero, gracias.", "Den Kuchen? Ich möchte ihn nicht, danke.", ["Den Kuchen? Ich möchte ihn nicht, danke.", "Der Kuchen? Ich möchte ihn nicht, danke.", "Den Kuchen? Ich will ihn nicht, danke.", "Den Kuchen? Nein, danke, ich möchte ihn nicht.", "Kuchen? Ich möchte ihn nicht, danke.", "Die Torte? Ich möchte sie nicht, danke.", "Die Torte? Ich will sie nicht, danke."], "«La torta» es femenino en castellano, pero *der Kuchen* es masculino: «la» = *ihn*. (Si pensás en *die Torte*, la de crema, sí es *sie*.)"),
         # parte 2 — preguntas, negación, hobbies
         ch(2, "Elegí el orden correcto.", "(Hoy no puedo venir.)", "Heute kann ich nicht kommen.", ["Heute kann ich nicht kommen.", "Heute ich kann nicht kommen.", "Heute kann ich kommen nicht."], "Tiempo, modal, sujeto; *nicht* antes del infinitivo."),
         ch(2, "Elegí el orden correcto.", "(¿Qué querés comer?)", "Was willst du essen?", ["Was willst du essen?", "Was du willst essen?", "Was willst du isst?"], "W-Frage: modal segundo, infinitivo al final."),
@@ -240,5 +312,16 @@ WEEK = {
         tr(2, "Tengo que irme a casa.", "Ich muss nach Hause.", ["Ich muss nach Hause.", "Ich muss nach Hause gehen."], "Con dirección, el modal puede ir solo."),
         ty(2, "Escribí en alemán, con artículo.", "«el tiempo libre»", "die Freizeit", note="*frei* (libre) + *die Zeit*: manda *Zeit*. " + MAY),
         ty(2, "Escribí en alemán (con *wollen*, a un amigo).", "«¿Qué querés hacer?»", "Was willst du machen?", ["Was willst du machen?", "Was willst du tun?"], "W-Frage + modal + sujeto + infinitivo."),
+        # parte 2 — und, aber, oder (posición 0)
+        ch(2, "Elegí el orden correcto.", "Ich bin müde, aber ___", "ich muss arbeiten.", ["ich muss arbeiten.", "muss ich arbeiten.", "ich arbeiten muss."], "*aber* no cuenta: después va sujeto + verbo, como una oración normal."),
+        ch(2, "Elegí el orden correcto.", "Heute kann ich nicht, aber ___", "morgen habe ich Zeit.", ["morgen habe ich Zeit.", "morgen ich habe Zeit.", "ich morgen habe Zeit."], "Después de *aber* empieza una oración normal: si *morgen* va primero, el verbo sigue segundo."),
+        ch(2, "Encontrá el error.", "¿Qué oración tiene un error?", "Er spielt Gitarre und singt er gern.", ["Er spielt Gitarre und singt er gern.", "Er spielt Gitarre und er singt gern.", "Er spielt Gitarre und singt gern."], "*und* no ocupa la posición 1: *und er singt* o, sin repetir el sujeto, *und singt gern*. «und singt er» es un error."),
+        cz(2, "Escribí *und*, *aber* u *oder*.", "Ich kann nicht gut kochen, ___ ich will es lernen.", "aber", note="Contraste (no sé, pero quiero) → *aber*, con coma, y el orden no cambia."),
+        tr(2, "Soy de Chile, pero vivo en Berlín.", "Ich komme aus Chile, aber ich wohne in Berlin.", ["Ich komme aus Chile, aber ich wohne in Berlin.", "Ich komme aus Chile, aber wohne in Berlin.", "Ich bin aus Chile, aber ich wohne in Berlin."], "*aber* no cuenta como posición: después va *ich wohne*, no «wohne ich»."),
+        tr(2, "¿Tomás café o querés un té?", "Trinkst du Kaffee oder möchtest du einen Tee?", ["Trinkst du Kaffee oder möchtest du einen Tee?", "Trinkst du Kaffee oder willst du einen Tee?", "Trinkst du Kaffee oder möchtest du Tee?", "Trinkst du Kaffee oder willst du Tee?"], "*oder* une dos preguntas; cada una conserva su orden (verbo primero)."),
+        # parte 2 — repaso: nicht y doch
+        ch(2, "Contestá que sí.", "Kannst du nicht schwimmen? – ___, ich kann gut schwimmen.", "Doch", ["Doch", "Ja", "Nein"], "Pregunta con *nicht* y la respuesta la contradice → *doch*."),
+        ty(2, "Contestá que sí, con oración completa.", "Musst du heute nicht arbeiten?", "Doch, ich muss heute arbeiten.", ["Doch, ich muss heute arbeiten.", "Doch ich muss heute arbeiten.", "Doch, heute muss ich arbeiten.", "Doch, ich muss arbeiten."], "Contradecís una pregunta negativa → *doch*; después la oración sin *nicht*."),
+        tr(2, "No conozco a tu hermano.", "Ich kenne deinen Bruder nicht.", note="Objeto con posesivo: *nicht* va después, al final. «Ich nicht kenne…» es el calco del castellano."),
     ],
 }

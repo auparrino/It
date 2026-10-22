@@ -22,7 +22,7 @@ WEEK = {
         "parts": [
             {"h": "Suponer: qué tan seguro estás", "blocks": [0, 1, 2]},
             {"h": "Lo que dicen otros: soll y will", "blocks": [3, 4]},
-            {"h": "Otras formas de suponer y el pasado objetivo", "blocks": [5, 6]},
+            {"h": "Otras formas de suponer y el pasado objetivo", "blocks": [5, 6, 7]},
         ],
         "blocks": [
             {
@@ -152,10 +152,35 @@ WEEK = {
                     ["Wir *haben* gestern länger bleiben *müssen*.", "Ayer tuvimos que quedarnos más tiempo."],
                     ["Ihr *müsst* gestern länger geblieben *sein*.", "Ayer deben de haberse quedado más tiempo."],
                 ],
-                "warn": "En el Perfekt objetivo, el modal va en **infinitivo**, no en participio: *Er hat arbeiten müssen* (nunca «gemusst» cuando hay otro verbo).",
+                "warn": "En el Perfekt objetivo, el modal va en **infinitivo**, no en participio: *Er hat arbeiten müssen* (nunca «gemusst» cuando hay otro verbo). **Sin otro verbo**, sí va el participio: *Das habe ich nicht gekonnt* (no pude), *Er hat es so gewollt* (lo quiso así).",
+                "more": [
+                    "En la subordinada, el doble infinitivo no se deja pasar: *haben* se adelanta y queda **antes** de los dos infinitivos: *…, weil er **hat** arbeiten müssen* (no «weil er arbeiten müssen hat»). Como suena pesado, hablando y escribiendo casi todos usan el Präteritum: *…, weil er arbeiten musste*.",
+                ],
                 "q": [
+                    q("Completá: *Ich bin zu spät gekommen, weil ich noch ___.*", "habe arbeiten müssen", ["habe arbeiten müssen", "arbeiten müssen habe", "arbeiten gemusst habe"]),
                     q("«No pudo venir» (no le fue posible):", "Sie konnte nicht kommen.", ["Sie konnte nicht kommen.", "Sie kann nicht gekommen sein.", "Sie hat nicht kommen gekonnt."]),
                     q("«No puede haber venido» (lo descarto):", "Sie kann nicht gekommen sein.", ["Sie kann nicht gekommen sein.", "Sie konnte nicht kommen.", "Sie hat nicht kommen können."]),
+                ],
+            },
+            {
+                "h": "Futur II: se habrá olvidado, habré terminado",
+                "r": "*werden* + **participio** + *haben/sein* (el infinitivo perfecto) es el **Futur II**. Tiene los mismos dos usos que nuestro futuro compuesto: (1) **suponer algo sobre el pasado**: *Er wird es vergessen haben* = se habrá olvidado; (2) decir que algo **va a estar terminado** antes de un momento: *Bis Freitag werde ich den Bericht geschrieben haben* = para el viernes habré escrito el informe. *haben* o *sein* se eligen como en el Perfekt.",
+                "table": {"head": ["Alemán", "Castellano", "Uso"], "rows": [
+                    ["Er *wird* es *vergessen haben*.", "Se habrá olvidado.", "suposición (pasado)"],
+                    ["Sie *wird* schon *angekommen sein*.", "Ya habrá llegado.", "suposición (pasado)"],
+                    ["Er *wird* wohl *verschlafen haben*.", "Se habrá quedado dormido.", "suposición (pasado)"],
+                    ["Bis Freitag *werde* ich den Bericht *geschrieben haben*.", "Para el viernes habré escrito el informe.", "terminado antes de"],
+                ]},
+                "ex": [
+                    ["Wo ist Tom? – Er *wird* den Bus *verpasst haben*.", "¿Dónde está Tom? – Habrá perdido el colectivo."],
+                    ["In zwei Jahren *werde* ich das Studium *abgeschlossen haben*.", "En dos años habré terminado la carrera."],
+                ],
+                "warn": "Para lo que va a estar terminado, en la charla el alemán prefiere el **Perfekt** con una palabra de tiempo: *Bis Freitag habe ich den Bericht geschrieben*. El Futur II suena escrito o formal. Para suponer, en cambio, *wird … haben* (casi siempre con *wohl* o *schon*) es muy común, igual que *muss / dürfte … haben*.",
+                "tip": "La estructura es la misma del Perfekt, pero con *werden* conjugado adelante y *haben/sein* en infinitivo al final: *er hat geschlafen* → *er wird geschlafen haben*.",
+                "q": [
+                    q("*Sie wird den Zug verpasst haben* significa…", "Habrá perdido el tren.", ["Habrá perdido el tren.", "Va a perder el tren.", "Tuvo que perder el tren."]),
+                    q("Completá: *Er wird schon nach Hause gegangen ___.*", "sein", ["sein", "haben", "werden"]),
+                    q("«Para junio habré terminado la carrera» (formal):", "Bis Juni werde ich das Studium abgeschlossen haben.", ["Bis Juni werde ich das Studium abgeschlossen haben.", "Bis Juni werde ich das Studium abschließen haben.", "Bis Juni habe ich das Studium abschließen werden."]),
                 ],
             },
         ],
@@ -232,5 +257,24 @@ WEEK = {
         tr(2, "Seguramente él ya está durmiendo.", "Er wird wohl schon schlafen.", ["Er wird wohl schon schlafen.", "Er schläft wohl schon.", "Er dürfte schon schlafen.", "Er schläft wahrscheinlich schon.", "Er schläft vermutlich schon.", "Wahrscheinlich schläft er schon.", "Vermutlich schläft er schon.", "Er schläft sicher schon.", "Er schläft bestimmt schon.", "Sicher schläft er schon.", "Er muss schon schlafen."], "Nuestro «seguramente» es probabilidad: *wird wohl*, *dürfte* o *wahrscheinlich*."),
         tr(2, "Es imposible que él haya escrito esta carta.", "Er kann diesen Brief nicht geschrieben haben.", ["Er kann diesen Brief nicht geschrieben haben.", "Er kann den Brief nicht geschrieben haben."], "*kann nicht* + infinitivo perfecto."),
         li(2, "vermutlich", ["vermutlich", "verständlich", "vergeblich"], "*vermutlich* = probablemente; viene de *vermuten*."),
+        # parte 2 — Perfekt de modales en subordinada y sin otro verbo
+        ch(2, "Elegí el orden correcto.", "Ich konnte nicht kommen, weil er ___.", "hat arbeiten müssen", ["hat arbeiten müssen", "arbeiten müssen hat", "arbeiten gemusst hat"], "Con doble infinitivo, *hat* se adelanta en la subordinada: *weil er hat arbeiten müssen*. Más común todavía: *weil er arbeiten musste*."),
+        tr(2, "No lo pude hacer.", "Ich habe es nicht machen können.", ["Ich habe es nicht machen können.", "Ich konnte es nicht machen.", "Ich habe das nicht machen können.", "Ich konnte das nicht machen.", "Ich habe es nicht tun können.", "Ich konnte es nicht tun.", "Das habe ich nicht machen können.", "Das konnte ich nicht machen."], "Perfekt con doble infinitivo (*machen können*, no «gekonnt»), o el Präteritum *konnte*, que es lo más usado."),
+        ch(2, "Elegí la forma correcta.", "(No pude con eso: la tarea era demasiado difícil.) Ich habe es nicht ___.", "gekonnt", ["gekonnt", "können", "gekönnt"], "**Sin otro verbo**, el modal va en participio: *Ich habe es nicht gekonnt*. Con otro verbo sería *nicht machen können*."),
+        # parte 2 — Futur II
+        ch(2, "¿Qué significa?", "Er wird den Bus verpasst haben.", "Habrá perdido el colectivo.", ["Habrá perdido el colectivo.", "Va a perder el colectivo.", "Tuvo que perder el colectivo."], "*werden* + infinitivo perfecto = suposición sobre el pasado, como nuestro «habrá perdido»."),
+        ch(2, "¿Qué significa?", "Bis Montag werde ich das Buch gelesen haben.", "Para el lunes habré leído el libro.", ["Para el lunes habré leído el libro.", "El lunes voy a leer el libro.", "Hasta el lunes estuve leyendo el libro."], "Futur II: algo que va a estar terminado antes de un momento del futuro."),
+        cz(2, "Escribí el auxiliar en infinitivo (*haben* o *sein*).", "Sie wird schon angekommen ___.", "sein", note="*ankommen* hace el Perfekt con *sein* (*sie ist angekommen*), así que en el Futur II: *angekommen sein*."),
+        cz(2, "Escribí el auxiliar en infinitivo (*haben* o *sein*).", "Er wird den Schlüssel im Büro vergessen ___.", "haben", note="*vergessen* hace el Perfekt con *haben*: *wird … vergessen haben* = se habrá olvidado."),
+        tr(2, "Se habrá quedado dormido.", "Er wird verschlafen haben.", ["Er wird verschlafen haben.", "Er wird wohl verschlafen haben.", "Er wird sicher verschlafen haben.", "Er hat wohl verschlafen.", "Er dürfte verschlafen haben.", "Er muss verschlafen haben."], "Suposición sobre el pasado: *wird (wohl) verschlafen haben*. *verschlafen* = quedarse dormido (no despertarse a tiempo)."),
+        tr(2, "Ya habrán terminado.", "Sie werden schon fertig sein.", ["Sie werden schon fertig sein.", "Sie werden wohl schon fertig sein.", "Sie werden schon fertig geworden sein.", "Sie werden es schon geschafft haben.", "Sie dürften schon fertig sein.", "Sie sind wohl schon fertig."], "Con *fertig* lo natural es *werden … fertig sein* (suposición sobre ahora); el Futur II *fertig geworden sein* también es correcto pero pesado."),
+        # parte 0 — muss nicht / kann nicht
+        ch(0, "¿Qué significa?", "Sie kann nicht zu Hause sein, ihr Auto ist weg.", "Es imposible que esté en casa.", ["Es imposible que esté en casa.", "No necesariamente está en casa.", "No tiene permiso para estar en casa."], "*kann nicht* descarta: imposible. «No necesariamente» sería *muss nicht*."),
+        cz(0, "Escribí el modal (no necesariamente).", "Wer viel lacht, ___ nicht glücklich sein.", "muss", note="*muss nicht* = no necesariamente. Si dijeras *kann nicht*, afirmarías que es imposible."),
+        # parte 1 — repaso de la semana 35: soll y Konjunktiv I, las dos herramientas de la prensa
+        ty(1, "Pasá a discurso indirecto, empezando con *Laut Zeitung*.", "Der Minister soll gelogen haben.", "Laut Zeitung habe der Minister gelogen.", ["Laut Zeitung habe der Minister gelogen.", "Laut der Zeitung habe der Minister gelogen."], "Lo que con *soll* es rumor, con una fuente va en Konjunktiv I: *habe … gelogen* (un solo pasado en el indirecto)."),
+        ty(1, "Reescribí con *sollen*.", "Laut Polizei sei der Täter nach Spanien geflohen.", "Der Täter soll nach Spanien geflohen sein.", ["Der Täter soll nach Spanien geflohen sein.", "Laut Polizei soll der Täter nach Spanien geflohen sein."], note="Konjunktiv I con fuente → *soll* + infinitivo perfecto. *geflohen sein*, porque *fliehen* va con *sein*."),
+        ty(1, "Reescribí con *sollen*.", "Die Zeugen sagen, der Fahrer sei zu schnell gefahren.", "Der Fahrer soll zu schnell gefahren sein.", note="«Dicen que…» + Konjunktiv I = *soll*. *gefahren sein*: *fahren* va con *sein*."),
+        ch(1, "¿Qué oración dice lo mismo?", "Er will nichts gewusst haben.", "Er behauptet, er habe nichts gewusst.", ["Er behauptet, er habe nichts gewusst.", "Man sagt, er habe nichts gewusst.", "Er wollte nichts wissen."], "*will* = lo afirma él mismo (*er behauptet*), con Konjunktiv I para la cita. *Man sagt…* sería *soll*."),
     ],
 }

@@ -147,6 +147,7 @@ LESSONS = {
  {"h": "La forma y los cuatro irregulares", "blocks": [0, 1]},
  {"h": "Imperfeito o perfeito", "blocks": [2, 3]},
  {"h": "Acción interrumpida y verbos que cambian", "blocks": [4, 5]},
+ {"h": "Ponerse, quedarse, empezar, dejar, seguir", "blocks": [6, 7]},
 ],
 "blocks": [
  {"h": "La forma regular",
@@ -253,6 +254,47 @@ LESSONS = {
           "es solo el artículo.",
   "q": [{"prompt": "«Me enteré de la noticia ayer.»", "stem": "Eu ___ da notícia ontem.",
          "answer": "soube", "options": ["soube", "sabia", "sabi"]}]},
+
+ {"h": "ficar: ponerse y quedarse",
+  "r": "Para contar cómo te sentiste: *ficar* + adjetivo = ponerse (*fiquei "
+       "nervoso*). *ficar* también es quedarse: en un lugar (*ficamos em "
+       "casa*) o haciendo algo (*fiquei esperando*).",
+  "table": {"head": ["Castellano", "Portugués"],
+            "rows": [["me puse nervioso / triste", "fiquei nervoso / triste"],
+                     ["se puso rojo", "ficou vermelho"],
+                     ["nos quedamos en casa", "ficamos em casa"],
+                     ["me quedé esperando una hora", "fiquei esperando uma hora"],
+                     ["se quedó mirando el mar", "ficou olhando o mar"]]},
+  "ex": [["Quando vi a nota, *fiquei* muito feliz.", "Cuando vi la nota, me puse muy contento."],
+         ["Ela *ficou* vermelha e não disse nada.", "Se puso colorada y no dijo nada."],
+         ["No domingo a gente *ficou* em casa.", "El domingo nos quedamos en casa."],
+         ["*Fiquei olhando* o mar a tarde toda.", "Me quedé mirando el mar toda la tarde."]],
+  "warn": "«Me pus nervoso» no existe: *pôr-se* no sirve para estados. Y "
+          "*ficar* va sin «me»: *fiquei esperando*, nunca «me fiquei».",
+  "q": [{"prompt": "«Me puse nervioso.»", "answer": "Fiquei nervoso.", "options": ["Fiquei nervoso.", "Me pus nervoso.", "Me fiquei nervoso."]},
+        {"prompt": "«Me quedé esperando.»", "answer": "Fiquei esperando.", "options": ["Fiquei esperando.", "Fiquei esperar.", "Me fiquei esperando."]}]},
+
+ {"h": "Empezar, dejar, seguir, volver",
+  "r": "Como en castellano: verbo + preposición + infinitivo (*começar a*, "
+       "*parar de*, *voltar a*). La trampa: «seguir + gerundio» se dice "
+       "*continuar* + gerúndio.",
+  "table": {"head": ["Castellano", "Portugués", "Ejemplo"],
+            "rows": [["empezar a", "começar a", "Começou a chover."],
+                     ["dejar de", "parar de / deixar de", "Parei de fumar."],
+                     ["seguir + gerundio", "continuar + gerúndio", "Continuo morando no Rio."],
+                     ["volver a", "voltar a", "Voltei a estudar."],
+                     ["soler", "costumar", "Costumo acordar cedo."]]},
+  "ex": [["De repente *começou a* chover.", "De repente empezó a llover."],
+         ["*Parei de* comer carne em 2020.", "Dejé de comer carne en 2020."],
+         ["Ela *continua trabalhando* no banco.", "Ella sigue trabajando en el banco."],
+         ["Depois da viagem, *voltei a* jogar bola.", "Después del viaje, volví a jugar a la pelota."]],
+  "warn": "«Sigo trabajando» → *continuo trabalhando* (o *ainda trabalho*). "
+          "*Seguir* + gerúndio existe, pero suena a noticiero; sin "
+          "gerúndio, *seguir* es sobre todo ir detrás: *sigo você*.",
+  "tip": "*parar de* es lo más común al hablar; *deixar de* también vale. Y "
+         "sin preposición no va: *começou a chorar*, *parou de chover*.",
+  "q": [{"prompt": "«Sigo viviendo en Río.»", "answer": "Continuo morando no Rio.", "options": ["Continuo morando no Rio.", "Continuo morar no Rio.", "Continuo de morar no Rio."]},
+        {"prompt": "«Dejé de fumar.»", "answer": "Parei de fumar.", "options": ["Parei de fumar.", "Parei a fumar.", "Deixei fumar."]}]},
 ]},
 
 16: {
@@ -293,6 +335,9 @@ LESSONS = {
          ["Vou *te* ligar amanhã.", "Te voy a llamar mañana."]],
   "warn": "«Dame» no es «dá-me» en el habla carioca: es *me dá*. Pegar el "
           "pronombre detrás suena a Portugal o a texto formal.",
+  "tip": "Con *vou* o *estou* + verbo, en Brasil el pronombre va **entre "
+         "los dos**: *vou te ligar*, *estou te esperando*. «Te vou ligar» "
+         "no se oye en Brasil.",
   "more": ["La regla escolar: con *não*, *nunca*, *que*, *quem*, *já* y "
            "similares, el pronombre va delante en toda variedad: *não me "
            "diga*, *quem te contou?* Al comienzo absoluto de frase, la "
@@ -378,7 +423,12 @@ LESSONS = {
   "r": "Para contar: *aí* encadena (= y entonces), *tipo* aproxima o ejemplifica, *sabe?* y *entendeu?* chequean que el otro te sigue.",
   "ex": [["Cheguei na festa e *aí* vi o João.", "Llegué a la fiesta y entonces lo vi a João."], ["Eram *tipo* umas dez pessoas.", "Eran como unas diez personas."], ["Ela é muito tímida, *sabe*?", "Ella es muy tímida, ¿sabés?"], ["Tem que virar à direita, *entendeu*?", "Tenés que doblar a la derecha, ¿entendiste?"]],
   "warn": "*aí* en un relato no es un lugar: es «y entonces». En un texto escrito, cambialo por *então* o *depois*.",
-  "tip": "*entendeu?* repetido suena a reto; *sabe?* es más suave."},
+  "tip": "*entendeu?* repetido suena a reto; *sabe?* es más suave.",
+  "more": ["Otra que engaña: *de repente*. En un relato es «de golpe», como "
+           "en español; pero en una charla, sobre todo para proponer o "
+           "suponer, es «capaz que, a lo mejor»: *de repente eu vou* = capaz "
+           "que voy; *de repente a gente pode ir à praia* = a lo mejor "
+           "podemos ir a la playa."]},
 
  {"h": "Elogiar e responder a um elogio",
   "q": [{"prompt": "—Que blusa linda! Elegí la respuesta más natural.", "answer": "Ah, obrigada! Comprei na feira.", "options": ["Ah, obrigada! Comprei na feira.", "Sim, eu sei.", "De nada."]}],
@@ -597,7 +647,7 @@ LESSONS = {
          "*mais*.",
 "parts": [
  {"h": "Más, menos, tan", "blocks": [0, 1, 2]},
- {"h": "El más... y -íssimo", "blocks": [3, 4, 5]},
+ {"h": "El más... y -íssimo", "blocks": [3, 4, 5, 6]},
 ],
 "blocks": [
  {"h": "mais / menos ... (do) que",
@@ -671,7 +721,15 @@ LESSONS = {
          ["Esse restaurante é *caríssimo*.", "Este restaurante es carísimo."],
          ["O show foi *superlegal*.", "El show estuvo buenísimo. (habla)"]],
   "tip": "*ótimo* y *péssimo* son los superlativos de *bom* y *ruim*: "
-         "*ótimo* = buenísimo, *péssimo* = malísimo. Se usan a cada rato."},
+         "*ótimo* = buenísimo, *péssimo* = malísimo. Se usan a cada rato.",
+  "warn": "Adverbios en *-mente*: se pegan al femenino y la base **pierde "
+          "la tilde**, al revés que en español (rápidamente): *rápida → "
+          "rapidamente*, *fácil → facilmente*, *prática → praticamente*.",
+  "more": ["En la prensa y en textos cultos aparecen superlativos en "
+           "*-érrimo*, para reconocer: *paupérrimo* (pobrísimo), "
+           "*celebérrimo* (famosísimo), *libérrimo*, *macérrimo*. En la "
+           "charla se dice *pobríssimo* o *superpobre*; y *magérrimo*, mezcla "
+           "de las dos, es muy de la calle."]},
 
  {"h": "bem = muy; mesmo = realmente, incluso",
   "r": "Delante de adjetivo, *bem* = «muy»: *bem caro*, *bem perto*. "
@@ -684,6 +742,25 @@ LESSONS = {
           "caro». Y nunca «muy»: en portugués, *muito* o *bem*.",
   "q": [{"prompt": "«¿En serio?» (sorpresa)", "stem": "É ___?",
          "answer": "mesmo", "options": ["mesmo", "bem", "muito"]}]},
+
+ {"h": "Antes o después: grande, pobre, velho, certo, simples",
+  "q": [{"prompt": "«Pelé fue un gran jugador» (no por la altura):", "answer": "Pelé foi um grande jogador.", "options": ["Pelé foi um grande jogador.", "Pelé foi um jogador grande.", "Pelé foi um gran jogador."]},
+        {"prompt": "«Las personas adecuadas»", "answer": "as pessoas certas", "options": ["as pessoas certas", "as certas pessoas", "certas pessoas"]}],
+  "r": "Unos pocos adjetivos cambian de sentido según el lugar: delante "
+       "valoran, detrás describen. Como en español, pero sin «gran»: *um "
+       "grande amigo*.",
+  "table": {"head": ["Delante", "Detrás"],
+            "rows": [["um grande escritor (importante)", "um escritor grande (alto, grandote)"],
+                     ["um pobre homem (pobre, digno de lástima)", "um homem pobre (sin plata)"],
+                     ["um velho amigo (de hace años)", "um amigo velho (de edad)"],
+                     ["certas pessoas (algunas)", "as pessoas certas (las adecuadas)"],
+                     ["um simples erro (un mero error)", "um erro simples (fácil de arreglar)"]]},
+  "ex": [["Machado de Assis foi um *grande escritor*.", "Machado de Assis fue un gran escritor."],
+         ["O Lucas é um *velho amigo* meu.", "Lucas es un viejo amigo mío."],
+         ["Você chegou na *hora certa*.", "Llegaste justo a tiempo."]],
+  "warn": "«Gran» no existe: *um grande amigo*, *uma grande ideia*. Y "
+          "*certo* delante es «cierto, alguno» (*certo dia*); detrás, "
+          "«correcto» (*a resposta certa*)."},
 ]},
 
 20: {
@@ -691,7 +768,7 @@ LESSONS = {
          "aparece dos veces en la misma frase. Esta semana, cuantificar, "
          "negar y reaccionar.",
 "parts": [
- {"h": "tudo, todo y los indefinidos", "blocks": [0, 1, 5]},
+ {"h": "tudo, todo y los indefinidos", "blocks": [0, 1, 9, 5, 10]},
  {"h": "Negar en portugués de Brasil", "blocks": [2, 3, 4]},
  {"h": "Reaccionar y no coincidir sin pelear", "blocks": [6, 7, 8]},
 ],
@@ -799,6 +876,46 @@ LESSONS = {
   "r": "El baiano abre las vocales y alarga las frases; sus marcas: *oxe* (sorpresa, fastidio), *meu rei* (trato cariñoso), *painho* y *mainha* (papá y mamá).",
   "ex": [["*Oxe*, que foi isso?", "¡Epa! ¿Qué fue eso?"], ["Calma, *meu rei*!", "¡Tranquilo, querido!"], ["*Mainha* fez acarajé.", "Mamá hizo acarajé."]],
   "tip": "*Oxe* y *oxente* se oyen en todo el Nordeste. La voz de la app es la estándar: el acento no se oye, las palabras sí."},
+
+ {"h": "qualquer, cada, outro, vários, ambos",
+  "q": [{"prompt": "«Quiero otro café.»", "answer": "Quero outro café.", "options": ["Quero outro café.", "Quero otro café.", "Quero outra café."]},
+        {"prompt": "«Cualquier día de estos.»", "answer": "Qualquer dia desses.", "options": ["Qualquer dia desses.", "Qualquier dia desses.", "Cualquer dia desses."]}],
+  "r": "*qualquer* (plural *quaisquer*) y *cada* no cambian de género; "
+       "*outro, vários, certo, ambos* concuerdan: *outra vez, várias "
+       "pessoas, ambas as mãos*.",
+  "table": {"head": ["Portugués", "Español", "Ejemplo"],
+            "rows": [["qualquer / quaisquer", "cualquier, cualquiera", "*qualquer* pessoa; *quaisquer* dúvidas (escrito)"],
+                     ["cada (invariable)", "cada", "*cada* dia, *cada* semana"],
+                     ["outro, outra", "otro, otra", "*outro* café, *outra* vez"],
+                     ["vários, várias", "varios, varias", "*várias* vezes"],
+                     ["ambos, ambas + os / as", "ambos, ambas", "*ambas as* mãos"]]},
+  "ex": [["*Qualquer* lugar serve.", "Cualquier lugar sirve."],
+         ["*Cada* um paga o seu.", "Cada uno paga lo suyo."],
+         ["Me dá *outra* cerveja?", "¿Me das otra cerveza?"],
+         ["Já fui *várias* vezes ao Nordeste.", "Ya fui varias veces al Nordeste."],
+         ["Não está *em lugar nenhum*.", "No está en ningún lado (*nenhum* detrás refuerza)."]],
+  "warn": "*qualquer* lleva *qu*: nunca «cualquer» ni «qualquier». Y el "
+          "plural es *quaisquer* (cambia en el medio), no «qualquers».",
+  "tip": "*outro* va solo, como en español: *outro dia* («um outro» existe, "
+         "pero es enfático). *Ambos* lleva artículo: *ambos os lados*."},
+
+ {"h": "meio, bastante: ¿cambian o no?",
+  "q": [{"prompt": "«Ella está medio cansada.»", "answer": "Ela está meio cansada.", "options": ["Ela está meio cansada.", "Ela está meia cansada.", "Ela está média cansada."]},
+        {"prompt": "«Esperé media hora.»", "stem": "Esperei ___ hora.", "answer": "meia", "options": ["meia", "meio", "média"]}],
+  "r": "Delante de adjetivo, *meio* (= un poco) no cambia: *ela está meio "
+       "cansada*. Delante de sustantivo, concuerda: *meia hora*.",
+  "table": {"head": ["Palabra", "+ sustantivo: concuerda", "+ adjetivo o verbo: no cambia"],
+            "rows": [["meio", "meia hora, meia garrafa", "ela está meio cansada"],
+                     ["bastante", "bastantes opções (escrito)", "elas falam bastante"],
+                     ["muito", "muitas pessoas", "elas são muito bonitas"]]},
+  "ex": [["A Bia ficou *meio* chateada.", "Bia quedó medio molesta."],
+         ["Esperei *meia* hora.", "Esperé media hora."],
+         ["É meio-dia e *meia*.", "Son las doce y media."],
+         ["Tem *bastantes* opções no cardápio.", "Hay bastantes opciones en la carta."]],
+  "warn": "«Medio cansada» es *meio cansada*, aunque sea ella: «meia "
+          "cansada» se oye, pero es error. *meia* va solo con sustantivos.",
+  "tip": "Al hablar, *bastante* casi no cambia (*bastante coisa*); al "
+         "escribir, concordalo: *bastantes coisas*."},
 
 ]},
 
@@ -1022,6 +1139,7 @@ LESSONS = {
   "table": {"head": ["Español", "Portugués", "Ejemplo"],
             "rows": [["ponerse (nervioso, rojo)", "ficar", "Ficou vermelho."],
                      ["quedarse (sin plata, ciego)", "ficar", "Ficou sem dinheiro."],
+                     ["quedarse + gerundio", "ficar + gerúndio", "Fiquei esperando."],
                      ["hacerse, volverse + sustantivo", "virar (habla) / tornar-se", "Virou médico. / Tornou-se um clássico."],
                      ["hacerse (amigos, famoso)", "ficar", "Ficamos amigos."],
                      ["empezar a (y seguir)", "passar a + infinitivo", "Passei a correr."]]},
@@ -1034,6 +1152,10 @@ LESSONS = {
           "*virar* va sin «em»: *virou médico*, nunca «virou em médico».",
   "tip": "*ficar* resuelve casi todo: *ficar bravo, ficar feliz, ficar pronto*, "
          "y *ficar sabendo* = enterarse.",
+  "more": ["*ficar com* tiene usos propios: en una tienda, *fico com esse* "
+           "(me lo llevo); con una sensación, *fiquei com vergonha / medo* "
+           "(me dio vergüenza, miedo); y entre jóvenes, *ficar com alguém* "
+           "es salir o besarse con alguien sin compromiso, no «quedarse con»."],
   "q": [{"prompt": "«Me puse muy contento.»", "stem": "___ muito contente.",
          "answer": "Fiquei", "options": ["Fiquei", "Me pus", "Virei"]}]},
 
@@ -1104,7 +1226,8 @@ LESSONS = {
   "ex": [["Espero que você *goste* do Rio.", "Espero que te guste Río."],
          ["Tomara que não *chova* no domingo.", "Ojalá no llueva el domingo."],
          ["Quero que vocês *conheçam* a Bahia.", "Quiero que conozcan Bahía."],
-         ["Ela quer que eu *faça* o jantar.", "Quiere que yo haga la cena."]],
+         ["Ela quer que eu *faça* o jantar.", "Quiere que yo haga la cena."],
+         ["*Que pena que* ela não *possa* vir.", "Qué lástima que no pueda venir (emoción)."]],
   "warn": "«Ojalá» es *tomara que* (o *oxalá*, más literario), siempre con "
           "subjuntivo. Con *espero que*, ojo a *goste*: el que gusta sigue "
           "siendo el sujeto.",
@@ -1133,7 +1256,14 @@ LESSONS = {
          ["*Duvido que* ele *saiba*.", "Dudo que sepa."],
          ["*Pode ser que* ela *esteja* no trabalho.", "Puede que esté en el trabajo."]],
   "warn": "En el español hablado «quizás viene» es común; en portugués, "
-          "*talvez* antes del verbo va con subjuntivo: *talvez venha*."},
+          "*talvez* antes del verbo va con subjuntivo: *talvez venha*.",
+  "more": ["Si *talvez* va **después** del verbo, el verbo ya salió en "
+           "indicativo: *ele vem, talvez* (viene, tal vez). Lo que manda "
+           "es la posición: *talvez ele venha* / *ele vem, talvez*."],
+  "q": [{"prompt": "«Tal vez venga mañana.»", "stem": "Talvez ele ___ amanhã.",
+         "answer": "venha", "options": ["venha", "vem", "venga"]},
+        {"prompt": "«Viene mañana, tal vez.»", "stem": "Ele ___ amanhã, talvez.",
+         "answer": "vem", "options": ["vem", "venha", "venga"]}]},
 
  {"h": "achar que: indicativo",
   "r": "Opinar afirmando va con **indicativo**: *acho que ele vem*. Negado, "
@@ -1192,8 +1322,8 @@ LESSONS = {
          ["*Mesmo que* *custe* caro, vale a pena.", "Aunque cueste caro, vale la pena."],
          ["*Apesar do* calor, foi ótimo.", "A pesar del calor, estuvo genial."]],
   "warn": "«Aunque está cansado» lleva indicativo en español; en portugués, "
-          "con *embora*, no: *embora esteja*. Si querés indicativo, usá "
-          "*apesar de que* o *mas*.",
+          "con *embora*, no: *embora esteja*. ¿Querés indicativo? *mas* "
+          "(*está cansado, mas vai*) o, en la charla, *apesar de que*.",
   "more": ["*ir embora* es otra cosa: «irse». *Vou embora* = me voy. El "
            "*embora* de concesión es formal y escrito; al hablar se dice "
            "*mesmo que* o se da vuelta la frase con *mas*: *tá chovendo, "
@@ -1275,6 +1405,7 @@ LESSONS = {
  {"h": "que, quem, onde", "blocks": [0, 1, 2]},
  {"h": "o que y la preposición delante", "blocks": [3, 4]},
  {"h": "o qual y cujo", "blocks": [5, 6]},
+ {"h": "Procuro alguém que fale", "blocks": [7]},
 ],
 "blocks": [
  {"h": "que: el comodín",
@@ -1356,8 +1487,32 @@ LESSONS = {
          ["Os alunos *cujos* pais vieram ficaram felizes.", "Los alumnos cuyos padres vinieron quedaron contentos."]],
   "warn": "Nada de «cujo o»: el artículo sobra. Y concuerda con lo poseído: "
           "*o homem cuja casa*, no «cujo casa».",
+  "tip": "En la charla casi no se usa: *o cara que o carro dele foi "
+         "roubado*. Al escribir (y en el examen), *cujo*: *o homem cujo "
+         "carro foi roubado*.",
   "q": [{"prompt": "«La chica cuyo padre es médico.»", "stem": "A menina ___ pai é médico.",
          "answer": "cujo", "options": ["cujo", "cuja", "cujo o"]}]},
+
+ {"h": "alguém que fale / alguém que fala",
+  "r": "Si no sabés si lo que nombrás existe, o lo negás, la relativa "
+       "va en **subjuntivo**: *procuro alguém que fale inglês*. "
+       "Si existe, indicativo: *conheço alguém que fala*.",
+  "ex": [["Procuro alguém que *fale* inglês.", "Busco a alguien que hable inglés (no sé quién)."],
+         ["Conheço uma moça que *fala* inglês.", "Conozco a una chica que habla inglés (existe)."],
+         ["Quero um apê que *tenha* varanda.", "Quiero un depto que tenga balcón."],
+         ["Moro num apê que *tem* varanda.", "Vivo en un depto que tiene balcón."],
+         ["Não há ninguém que *saiba* a senha.", "No hay nadie que sepa la contraseña."]],
+  "warn": "Funciona como en español, pero sin «a» personal (*procuro alguém*) "
+          "y sin indicativo por descuido: «procuro um professor que sabe "
+          "alemão» es error: *que saiba*.",
+  "more": ["Si lo buscado depende de una decisión futura, el portugués usa "
+           "el futuro do subjuntivo (semana 27): *fico com o apê que você "
+           "escolher*, *quem quiser pode vir*. Por ahora: lo que no sabés si "
+           "existe, presente do subjuntivo."],
+  "q": [{"prompt": "«Busco a alguien que hable alemán.»", "stem": "Procuro alguém que ___ alemão.",
+         "answer": "fale", "options": ["fale", "fala", "hable"]},
+        {"prompt": "«Tengo un amigo que vive en Recife.»", "stem": "Tenho um amigo que ___ em Recife.",
+         "answer": "mora", "options": ["mora", "more", "viva"]}]},
 ]},
 
 26: {
@@ -1366,7 +1521,7 @@ LESSONS = {
          "Un repaso compacto antes del combate.",
 "parts": [
  {"h": "Pasado, pronombres, futuro", "blocks": [0, 1, 2]},
- {"h": "Composto, subjuntivo y lo demás", "blocks": [3, 4, 5]},
+ {"h": "Composto, subjuntivo y lo demás", "blocks": [3, 4, 5, 6]},
 ],
 "blocks": [
  {"h": "Imperfeito o perfeito",
@@ -1429,6 +1584,26 @@ LESSONS = {
          ["Comi *tudo*.", "Me comí todo."]],
   "warn": "Los errores que más se repiten: «me gosta», «mais grande», "
           "«todo» por *tudo* y «lo que» por *o que*."},
+
+ {"h": "Formar palabras: -vel, -ista, -eiro, -mente",
+  "q": [{"prompt": "«Confiable»", "answer": "confiável", "options": ["confiável", "confiable", "confiavel"]},
+        {"prompt": "«El panadero»", "answer": "o padeiro", "options": ["o padeiro", "o panadero", "o padero"]},
+        {"prompt": "«Fácilmente»", "answer": "facilmente", "options": ["facilmente", "fácilmente", "facilemente"]}],
+  "r": "Cuatro sufijos para escribir: *-vel* (que se puede: *lavável*), "
+       "*-ista* (oficio, postura: *taxista*), *-eiro / -eira* (oficio: "
+       "*padeiro*) y *-mente* (adverbio: *facilmente*).",
+  "table": {"head": ["Español", "Portugués", "Ojo"],
+            "rows": [["-ble: posible, confiable", "-vel: possível, confiável", "tilde antes de -vel; plural -veis"],
+                     ["-ista: taxista, dentista", "-ista: taxista, dentista", "igual en femenino: a taxista"],
+                     ["-ero / -era: panadero, cocinera", "-eiro / -eira: padeiro, cozinheira", "con i: -eiro"],
+                     ["-mente: rápidamente", "-mente: rapidamente", "sin la tilde de la base"]]},
+  "ex": [["Esse tecido é *lavável*.", "Esta tela es lavable."],
+         ["O *taxista* conhecia um atalho.", "El taxista conocía un atajo."],
+         ["A *cozinheira* fez uma moqueca.", "La cocinera hizo una moqueca."],
+         ["Ele resolveu tudo *facilmente*.", "Resolvió todo fácilmente."]],
+  "warn": "«-ble» → *-vel*, nunca «-ble»: *possível*, *incrível*. Y «-ero» "
+          "→ *-eiro*: *padeiro*, *pedreiro*, *carteiro*. En *-mente* la "
+          "tilde se va: *rapidamente*."},
 ]},
 
 }

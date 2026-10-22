@@ -29,7 +29,7 @@ WEEK = {
         "intro": "Hay gente que actúa como si nada hubiera pasado, y hay cosas que tendríamos que haber hecho y no hicimos. Para las dos cosas el alemán usa el Konjunktiv II, con algunas construcciones que a nivel C1 tenés que dominar.",
         "parts": [
             {"h": "Como si: als ob, als wenn, als", "blocks": [0, 1, 2]},
-            {"h": "Lo que tendrías que haber hecho", "blocks": [3, 4, 5]},
+            {"h": "Lo que tendrías que haber hecho", "blocks": [3, 4, 5, 8, 9]},
             {"h": "Excepciones y consecuencias irreales", "blocks": [6, 7]},
         ],
         "blocks": [
@@ -182,6 +182,46 @@ WEEK = {
                     q("¿Qué significa *zu müde, als dass er arbeiten könnte*?", "demasiado cansado como para poder trabajar", ["demasiado cansado como para poder trabajar", "tan cansado que trabaja igual", "cansado porque trabajó"]),
                 ],
             },
+            {
+                "h": "¿Reproche, obligación o suposición?",
+                "r": "Con el mismo modal y los mismos verbos salen tres cosas distintas. **Reproche** (no pasó): *Er **hätte** kommen **müssen*** = tendría que haber venido. **Obligación real en el pasado** (pasó): *Er **hat** kommen **müssen*** / *Er musste kommen* = tuvo que venir. **Suposición** (semana 37): *Er **muss** gekommen **sein*** = debe de haber venido. La pista: *hätte* = irreal; *hat* + doble infinitivo = obligación real; modal en presente + participio + *haben/sein* = suposición.",
+                "table": {"head": ["Alemán", "Castellano", "Qué dice"], "rows": [
+                    ["Er hätte kommen müssen.", "Tendría que haber venido.", "no vino: reproche"],
+                    ["Er hat kommen müssen.", "Tuvo que venir.", "vino, obligado"],
+                    ["Er muss gekommen sein.", "Debe de haber venido.", "supongo que vino"],
+                    ["Er dürfte gekommen sein.", "Probablemente vino.", "supongo (probable)"],
+                    ["Er kann nicht gekommen sein.", "No puede haber venido.", "lo descarto"],
+                ]},
+                "ex": [
+                    ["Die Tür ist offen. Jemand *muss* hier *gewesen sein*.", "La puerta está abierta. Alguien debe de haber estado acá."],
+                    ["Du *hättest* abschließen *müssen*!", "¡Tendrías que haber cerrado con llave!"],
+                ],
+                "warn": "En castellano «debe (de) haber venido» es suposición y «tendría que haber venido», reproche, pero se confunden fácil. En alemán el auxiliar decide: *muss gekommen sein* (suposición) no es *hätte kommen müssen* (reproche).",
+                "q": [
+                    q("*Sie muss den Zug verpasst haben* significa…", "debe de haber perdido el tren", ["debe de haber perdido el tren", "tuvo que perder el tren", "tendría que haber perdido el tren"]),
+                    q("«Tendrías que haber llamado» (reproche):", "Du hättest anrufen müssen.", ["Du hättest anrufen müssen.", "Du musst angerufen haben.", "Du hast anrufen müssen."]),
+                ],
+            },
+            {
+                "h": "La pasiva en Konjunktiv",
+                "r": "Las piezas ya las tenés: la pasiva en pasado (*ist … worden*, semana 31) y los Konjunktiv. Juntas aparecen mucho en la prensa y en los textos formales. **Konjunktiv I** (cita): *Es **sei** niemand verletzt **worden*** = según dicen, nadie resultó herido. **Konjunktiv II pasado** (irreal): *Wenn der Fehler früher erkannt worden **wäre**, …* = si el error se hubiera detectado antes. **Con modal** (reproche): *Das **hätte** früher gemacht **werden müssen*** = habría que haberlo hecho antes.",
+                "table": {"head": ["Forma", "Ejemplo", "Castellano"], "rows": [
+                    ["K I pasado", "Es sei niemand verletzt worden.", "(Según dicen) no hubo heridos."],
+                    ["K II pasado", "Wenn das früher erkannt worden wäre, …", "Si eso se hubiera detectado antes, …"],
+                    ["K II + modal", "Das hätte verhindert werden können.", "Eso se podría haber evitado."],
+                    ["K II + modal", "Das hätte früher gemacht werden müssen.", "Habría que haberlo hecho antes."],
+                ]},
+                "ex": [
+                    ["Wenn die Brücke rechtzeitig repariert *worden wäre*, *wäre* der Unfall nicht passiert.", "Si se hubiera reparado el puente a tiempo, el accidente no habría pasado."],
+                    ["Der Schaden *hätte* leicht *vermieden werden können*.", "El daño se podría haber evitado fácilmente."],
+                ],
+                "warn": "Como en el Perfekt pasivo: si ya hay un participio, va *worden* (sin *ge-*), y el auxiliar es *sein*: *wäre … erkannt worden*, nunca «hätte erkannt worden» ni «wäre erkannt geworden». Con modal, en cambio, va *hätte* + participio + *werden* + modal en infinitivo.",
+                "tip": "Leelo de atrás para adelante: *gemacht werden müssen* = «tener que ser hecho»; *hätte* adelante = «habría».",
+                "q": [
+                    q("Completá: *Wenn das früher bemerkt ___ wäre, …*", "worden", ["worden", "geworden", "werden"]),
+                    q("«Eso se podría haber evitado»:", "Das hätte verhindert werden können.", ["Das hätte verhindert werden können.", "Das wäre verhindert worden können.", "Das hätte verhindert worden können."]),
+                ],
+            },
         ],
     },
     "vocab": [
@@ -268,5 +308,16 @@ WEEK = {
            V("Er tut", [" so,", ","], " ", ["als ob", "als wenn"], " ihm alles ", ["egal", "gleichgültig"], " wäre.")
            + V("Er tut", [" so,", ","], " als wäre ihm alles ", ["egal", "gleichgültig"], "."),
            "*ihm ist alles egal* → *als ob ihm alles egal wäre*."),
+        # parte 1 — reproche, obligación o suposición (repaso de la semana 37)
+        ch(1, "Elegí la oración.", "(Supongo que se olvidó del turno.)", "Er muss den Termin vergessen haben.", ["Er muss den Termin vergessen haben.", "Er hätte den Termin vergessen müssen.", "Er hat den Termin vergessen müssen."], "Suposición sobre el pasado: modal en presente + *vergessen haben*. *hätte … müssen* sería reproche."),
+        ch(1, "Elegí la oración.", "(No vino, y estuvo mal: tendría que haber venido.)", "Er hätte kommen müssen.", ["Er hätte kommen müssen.", "Er muss gekommen sein.", "Er hat kommen müssen."], "Reproche por algo que no pasó: *hätte* + doble infinitivo."),
+        ch(1, "Elegí la oración.", "(Vino porque lo obligaron.)", "Er hat kommen müssen.", ["Er hat kommen müssen.", "Er hätte kommen müssen.", "Er muss gekommen sein."], "Obligación real en el pasado: *hat … kommen müssen* (o *musste kommen*)."),
+        ch(1, "¿Qué significa?", "Sie dürfte die Nachricht schon gelesen haben.", "Probablemente ya leyó el mensaje.", ["Probablemente ya leyó el mensaje.", "Tendría que haber leído el mensaje.", "Tenía permiso para leer el mensaje."], "*dürfte* + infinitivo perfecto = suposición probable sobre el pasado."),
+        tr(1, "Debe de haberse quedado dormido.", "Er muss verschlafen haben.", ["Er muss verschlafen haben.", "Er muss wohl verschlafen haben.", "Er wird verschlafen haben.", "Er wird wohl verschlafen haben.", "Er dürfte verschlafen haben.", "Er hat wohl verschlafen."], "Suposición: *muss* + *verschlafen haben*. No *hätte verschlafen müssen* (reproche)."),
+        # parte 1 — la pasiva en Konjunktiv
+        ch(1, "Elegí la forma correcta.", "Wenn der Fehler früher erkannt ___, hätte man ihn beheben können.", "worden wäre", ["worden wäre", "geworden wäre", "worden hätte"], "Pasiva en Konjunktiv II pasado: participio + *worden* + *wäre*. Con otro participio, *worden* sin *ge-*, y siempre con *sein*."),
+        ch(1, "¿Qué significa?", "Das hätte früher gemacht werden müssen.", "Habría que haberlo hecho antes.", ["Habría que haberlo hecho antes.", "Eso tuvo que hacerse antes.", "Eso debe de haberse hecho antes."], "*hätte* + participio + *werden müssen* = pasiva con modal en Konjunktiv II pasado: algo que no se hizo y debía hacerse."),
+        cz(1, "Escribí *worden* o *geworden*.", "Wäre das Haus besser gebaut ___, wäre es nicht eingestürzt.", "worden", note="Con otro participio (*gebaut*) la pasiva usa *worden*. *geworden* es solo cuando *werden* es el verbo principal (*Er ist Arzt geworden*)."),
+        tr(1, "El accidente se podría haber evitado.", "Der Unfall hätte verhindert werden können.", ["Der Unfall hätte verhindert werden können.", "Der Unfall hätte vermieden werden können.", "Man hätte den Unfall verhindern können.", "Man hätte den Unfall vermeiden können.", "Den Unfall hätte man verhindern können.", "Den Unfall hätte man vermeiden können."], "Pasiva + modal en Konjunktiv II pasado: *hätte* + participio + *werden können*. También con *man*: *Man hätte … verhindern können*."),
     ],
 }

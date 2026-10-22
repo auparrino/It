@@ -7,7 +7,15 @@ Junta las propuestas de las revisiones contra manuales (`auditorias/2026-10-*-re
 - ✅ Errores de lengua confirmados: alemán (#84), italiano y portugués (#85).
 - ✅ Distractores absurdos del alemán → errores reales (#84).
 - ✅ Corrección más flexible con los errores de dedo (#85).
-- ⏳ Nada se ejercita antes de explicarse (3 idiomas, en curso).
+- ✅ Nada se ejercita antes de explicarse (3 idiomas, PR #86).
+
+## Orden después de la auditoría de gramática (`auditorias/2026-10-gramatica.md`)
+
+1. ✅ Tanda 1 — construcciones (PR #86).
+2. ⏳ **Tanda G — gramática**: lo que la auditoría marcó falta / flojo / mejorable en los 3 idiomas (de 109 puntos: 4 faltan, 13 flojos, 47 mejorables; it 112: 1, 6, 40; pt 106: 4, 7, 38). Absorbe del alemán la n-Deklination, el Futur II, los conectores y lo de *obwohl/trotzdem*.
+3. Tanda 2 — alemán: lo que queda del paquete contrastivo (duelos, Capire, fixerr, traducción con trampa, repaso intercalado, dictado de terminaciones).
+4. Tanda 3 — la app (funciones nuevas).
+5. Tanda 4 — lo que quede de las propuestas por temporada (muchas ya cubiertas por la 1 y la G).
 
 ## Tanda 1 — Construcciones que no existen en español (contenido)
 

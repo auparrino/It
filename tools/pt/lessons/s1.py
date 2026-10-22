@@ -9,7 +9,7 @@ LESSONS = {
          "los sonidos nuevos y tus tres primeros verbos.",
 "parts": [
  {"h": "Oi, tudo bem? Saludar y deletrear", "blocks": [0, 1, 2]},
- {"h": "Los sonidos que el español no tiene", "blocks": [3, 4, 5, 6]},
+ {"h": "Los sonidos que el español no tiene", "blocks": [3, 4, 5, 6, 8]},
  {"h": "Tus primeros verbos: ser, estar y ter", "blocks": [7]},
 ],
 "blocks": [
@@ -137,10 +137,11 @@ LESSONS = {
 
  {"h": "ser, estar y ter",
   "q": [{"prompt": "«Tengo hambre.»", "answer": "Estou com fome.", "options": ["Estou com fome.", "Sou fome.", "Sou com fome."]},
-        {"prompt": "«¿Vos sos de Córdoba?»", "answer": "Você é de Córdoba?", "options": ["Você é de Córdoba?", "Você és de Córdoba?", "Você está de Córdoba?"]}],
+        {"prompt": "«¿Vos sos de Córdoba?»", "answer": "Você é de Córdoba?", "options": ["Você é de Córdoba?", "Você és de Córdoba?", "Você está de Córdoba?"]},
+        {"prompt": "«¿Dónde queda el hotel?»", "answer": "Onde fica o hotel?", "options": ["Onde fica o hotel?", "Onde queda o hotel?", "Onde tem o hotel?"]}],
   "r": "*ser* y *estar* se reparten casi como en español; *ter* = tener. "
-       "Una diferencia: dónde **queda** algo fijo va con *ficar* (o *estar*): "
-       "*o apartamento fica em Botafogo*; con eventos, *ser*: *a festa é em Botafogo*.",
+       "Para ubicar: lugar fijo, *ficar* (*o hotel fica aqui*); evento, "
+       "*ser* (*a festa é aqui*); persona, *estar*.",
   "table": {"head": ["Persona", "ser", "estar", "ter"],
             "rows": [["eu (yo)", "sou", "estou", "tenho"],
                      ["tu (vos, tú)", "és", "estás", "tens"],
@@ -160,11 +161,36 @@ LESSONS = {
            "(frío), *calor*, *sono* (sueño), *pressa* (apuro), *medo* "
            "(miedo), *saudade* (nostalgia). La edad, en cambio, va con "
            "*ter*, como en español: *tenho vinte anos*.",
-           "¿Dónde queda? Para ubicar lo que no se mueve se usa mucho *ficar* "
-           "o *ser* (*onde fica o hotel?*, *a escola é em Copacabana*); "
-           "*estar* también es común (*o hotel está perto da praia*). Lo que "
-           "se mueve, con *estar*: *a Bia está em Ipanema*. "
+           "¿Dónde queda? La regla corta: lugares fijos, *ficar* (lo más "
+           "seguro: *onde fica o hotel?*); también se oye *ser* o *estar* "
+           "(*a escola é em Copacabana*, *o hotel está perto da praia*). "
+           "Eventos, *ser*: *a festa é em Botafogo*. Personas, *estar*: *a Bia "
+           "está em Ipanema*. "
            "Y la negación es *não*, antes del verbo: *não sou*, *não estou*."]},
+
+ {"h": "Mismas letras, otro acento",
+  "q": [{"prompt": "«Estoy aquí.»", "answer": "Estou aqui.", "options": ["Estou aqui.", "Estou aquí.", "Estou akí."]},
+        {"prompt": "«La policía» en portugués:", "answer": "a polícia", "options": ["a polícia", "a policía", "a polícía"]},
+        {"prompt": "¿Dónde cae el acento en «academia»?", "answer": "a-ca-de-MI-a", "options": ["a-ca-de-MI-a", "a-ca-DE-mia", "A-ca-de-mia"]}],
+  "r": "Algunas palabras se escriben casi igual que en español, pero el "
+       "acento cae en **otra sílaba**. Si las decís como en castellano, "
+       "no te entienden.",
+  "table": {"head": ["Portugués", "Suena", "Español"],
+            "rows": [["academia, alergia, anemia", "a-ca-de-MI-a, a-ler-GI-a, a-ne-MI-a", "a-ca-DE-mia, a-LER-gia, a-NE-mia"],
+                     ["polícia", "po-LÍ-cia", "po-li-CÍ-a"],
+                     ["nível", "NÍ-vel", "ni-VEL"],
+                     ["cérebro", "CÉ-re-bro", "ce-RE-bro"],
+                     ["limite", "li-MI-te", "LÍ-mi-te"],
+                     ["oxigênio", "o-xi-GÊ-nio", "o-XÍ-ge-no"]]},
+  "ex": [["Vou à *academia* (= gimnasio).", "a-ca-de-MI-a, como «María»"],
+         ["Tenho *alergia* a camarão.", "a-ler-GI-a"],
+         ["A *polícia* está aqui.", "po-LÍ-cia: la tilde marca dónde cae"],
+         ["O *nível* é alto.", "NÍ-vel, no «ni-VEL»"]],
+  "warn": "Y al revés: *aqui, ali, Peru, caju* van **sin tilde**: las "
+          "agudas en *-i* y *-u* ya cargan el acento al final. «Aquí» y "
+          "«Perú» son español.",
+  "tip": "La tilde portuguesa marca la sílaba fuerte igual que la "
+         "española: si *polícia* la lleva en la *í*, ahí va el golpe de voz."},
 ]},
 
 2: {
@@ -421,7 +447,10 @@ LESSONS = {
          ["A chave está *em cima da* mesa.", "La llave está arriba de la mesa."],
          ["A escola é *atrás do* hotel.", "La escuela queda detrás del hotel."]],
   "warn": "Para lugares fijos (edificios, barrios) se usa *ser* o *ficar*, "
-          "además de *estar*: *a padaria é ao lado*, *onde fica o metrô?*."},
+          "además de *estar*: *a padaria é ao lado*, *onde fica o metrô?*.",
+  "tip": "Grafía: *em cima* va **separado** (dos palabras) y *embaixo*, "
+         "**junto**. «Encima» es español y «em baixo» es un error muy "
+         "frecuente."},
 ]},
 
 4: {
@@ -429,9 +458,9 @@ LESSONS = {
          "Concordancia, colores, gentilicios y *muito*, la palabra que "
          "todo argentino dice mal el primer día.",
 "parts": [
- {"h": "Concordancia y plurales del adjetivo", "blocks": [0, 1]},
+ {"h": "Concordancia y plurales del adjetivo", "blocks": [0, 1, 7]},
  {"h": "Nacionalidades y colores", "blocks": [2, 3]},
- {"h": "muito y cómo describir a alguien", "blocks": [4, 5, 6]},
+ {"h": "muito, comparar y describir a alguien", "blocks": [4, 5, 8, 6]},
 ],
 "blocks": [
  {"h": "Adjetivos: cuatro formas o dos",
@@ -535,13 +564,48 @@ LESSONS = {
   "more": ["Para el pelo: *cabelo liso* (lacio), *cacheado* o *crespo* "
            "(rulos), *loiro* (rubio), *ruivo* (pelirrojo), *careca* "
            "(pelado). *pelado* en portugués significa «desnudo»: no lo "
-           "uses para un calvo."]},
+           "uses para un calvo."],
+  "tip": "*obrigado* es «agradecido»: concuerda con quien habla. Ella dice "
+         "*obrigada*; él, *obrigado*."},
 
  {"h": "Sotaque da semana: Rio de Janeiro",
   "q": [{"prompt": "En Río, «Que maneiro!» quiere decir…", "answer": "¡Qué copado!", "options": ["¡Qué copado!", "¡Qué manera!", "¡Qué maniático!"]}],
   "r": "El carioca *chia*: la *s* final suena como «sh» (*mais* ≈ «maish») y la *r* es aspirada. Tres palabras de la calle: *maneiro*, *mermão*, *partiu*.",
   "ex": [["Que *maneiro*!", "¡Qué copado!"], ["Ô, *mermão*, tudo bem?", "Eh, hermano, ¿todo bien?"], ["*Partiu* praia!", "¡A la playa!"], ["Vamos à *Lapa* mais tarde?", "¿Vamos a Lapa más tarde? (la s de «mais» suena «sh»)"]],
   "tip": "Cada cuatro semanas, un acento: Brasil tiene muchos y todos son portugués. La voz de la app es la estándar: el acento no se oye, las palabras sí."},
+
+ {"h": "ovo / ovos: la o que se abre en el plural",
+  "q": [{"prompt": "En «os olhos», la o de «olh-» suena…", "answer": "abierta, como en avó", "options": ["abierta, como en avó", "cerrada, como en avô", "como una u"]},
+        {"prompt": "¿Cuál NO abre la o en el plural?", "answer": "bolo → bolos", "options": ["bolo → bolos", "ovo → ovos", "jogo → jogos"]}],
+  "r": "Varias palabras con *o* tónica cerrada en singular la **abren** en "
+       "plural y en femenino: *ovo* [ô] → *ovos* [ó]. La escritura no lo "
+       "marca: hay que oírlo.",
+  "table": {"head": ["Singular [ô]", "Plural o femenino [ó]"],
+            "rows": [["ovo, olho", "ovos, olhos"],
+                     ["porto, corpo, jogo, povo", "portos, corpos, jogos, povos"],
+                     ["novo, grosso", "nova, novos, grossa, grossos"],
+                     ["sin cambio: bolo, gosto, almoço", "bolos, gostos, almoços [ô]"]]},
+  "ex": [["um *ovo* [ô], dois *ovos* [ó]", "un huevo, dos huevos"],
+         ["o *olho* [ô], os *olhos* [ó] verdes", "el ojo, los ojos verdes"],
+         ["um carro *novo* [ô], uma casa *nova* [ó]", "un auto nuevo, una casa nueva"],
+         ["o *bolo* [ô], os *bolos* [ô]", "la torta, las tortas: no cambia"]],
+  "warn": "En español la o no cambia nunca. Acá *ovos*, *olhos*, *novos* "
+          "suenan con ó abierta, como *avó*: si la cerrás, se nota el acento.",
+  "tip": "Pasa con una lista corta: *ovo, olho, porto, corpo, jogo, fogo, "
+         "povo, novo, grosso*. Las demás, como *bolo* o *gosto*, quedan cerradas."},
+
+ {"h": "Comparar: mais... do que, maior, melhor",
+  "q": [{"prompt": "«Río es más grande que Niterói.»", "answer": "O Rio é maior do que Niterói.", "options": ["O Rio é maior do que Niterói.", "O Rio é mais grande do que Niterói.", "O Rio é más grande que Niterói."]}],
+  "r": "*mais* + adjetivo + *do que* (o *que*): *a Bia é mais alta do que "
+       "eu*. Cuatro no llevan *mais*: *maior, menor, melhor, pior*.",
+  "ex": [["O Lucas é *mais alto do que* o Rafa.", "Lucas es más alto que Rafa."],
+         ["São Paulo é *maior que* o Rio.", "San Pablo es más grande que Río."],
+         ["O açaí daqui é *melhor*.", "El asaí de acá es mejor."],
+         ["Ela é *mais velha do que* eu.", "Ella es mayor que yo (de edad)."]],
+  "warn": "*mais* con i, nunca «más». «Más grande» es *maior*, nunca «mais "
+          "grande». Y detrás de *que*, *eu*: *do que eu*, no «do que mim».",
+  "tip": "Para la edad: *mais velho* (mayor) y *mais novo* (menor). *tão... "
+         "quanto* y *o mais...* llegan en la semana 19."},
 
 ]},
 
@@ -584,7 +648,9 @@ LESSONS = {
          ["*Você trabalha* aqui?", "¿Trabajás acá?"],
          ["*Tu falas* espanhol? (Sur)", "¿Hablás español?"]],
   "warn": "«Você falas» es el calco de «vos hablás». Con *você*, siempre "
-          "tercera: *você fala*, *você come*, *você abre*."},
+          "tercera: *você fala*, *você come*, *você abre*.",
+  "tip": "Para contestar, repetí el verbo en tu persona: *—Você mora aqui? "
+         "—Moro.* / *—Não moro.* Un *sim* solo suena cortante."},
 
  {"h": "A gente = nosotros",
   "q": [{"prompt": "«Nosotros comemos en el boteco.» (habla)", "answer": "A gente come no boteco.", "options": ["A gente come no boteco.", "A gente comemos no boteco.", "A gente comem no boteco."]}],
@@ -758,7 +824,8 @@ LESSONS = {
           "con *e*: *ela pede*, no «pide»."},
 
  {"h": "Sin diptongos: dormir, preferir, subir",
-  "q": [{"prompt": "«Ella duerme poco.»", "answer": "Ela dorme pouco.", "options": ["Ela dorme pouco.", "Ela duerme pouco.", "Ela durme pouco."]}],
+  "q": [{"prompt": "«Ella duerme poco.»", "answer": "Ela dorme pouco.", "options": ["Ela dorme pouco.", "Ela duerme pouco.", "Ela durme pouco."]},
+        {"prompt": "«Siento frío.» (sentir)", "answer": "Eu sinto frio.", "options": ["Eu sinto frio.", "Eu sento frio.", "Eu siento frio."]}],
   "r": "Donde el español diptonga (*duermo, prefiero*), el portugués no. "
        "Algunos cambian la vocal **solo en eu**: *durmo*, *prefiro*.",
   "table": {"head": ["Infinitivo", "eu", "ele", "eles"],
@@ -766,13 +833,21 @@ LESSONS = {
                      ["preferir", "prefiro", "prefere", "preferem"],
                      ["sentir", "sinto", "sente", "sentem"],
                      ["vestir", "visto", "veste", "vestem"],
+                     ["conseguir", "consigo", "consegue", "conseguem"],
+                     ["seguir", "sigo", "segue", "seguem"],
+                     ["servir", "sirvo", "serve", "servem"],
+                     ["repetir", "repito", "repete", "repetem"],
                      ["subir", "subo", "sobe", "sobem"]]},
   "ex": [["Eu *durmo* cedo, mas ele *dorme* tarde.", "Yo duermo temprano, pero él tarde."],
          ["*Prefiro* praia.", "Prefiero playa."],
-         ["Ela *prefere* o Leblon.", "Ella prefiere Leblon."],
+         ["Não *consigo* dormir. — Ela *consegue*.", "No puedo dormir. — Ella sí puede."],
+         ["Eu *sigo* a Bia; ela *segue* o Rafa.", "Yo la sigo a Bia; ella lo sigue a Rafa."],
          ["O bondinho *sobe* o morro.", "El teleférico sube el cerro."]],
   "warn": "*subir* es al revés: *subo* pero *sobe, sobem*. Lo mismo "
-          "*fugir* (*fujo, foge*)."},
+          "*fugir* (*fujo, foge*).",
+  "tip": "*Conseguir* + infinitivo es el «poder» de la capacidad: *não "
+         "consigo dormir* (no puedo dormir). Y ojo: *sento* es de *sentar*; "
+         "de *sentir* es *sinto*."},
 
  {"h": "Invitar, aceptar, decir que no",
   "r": "Para invitar: *vamos…?*, *quer…?*, *bora?* (habla). Para no poder: "
@@ -791,8 +866,8 @@ LESSONS = {
          "tienen género y los días de semana se cuentan: *segunda-feira* "
          "es lunes.",
 "parts": [
- {"h": "Los números", "blocks": [0, 1, 2]},
- {"h": "Días, meses y fechas", "blocks": [3]},
+ {"h": "Los números", "blocks": [0, 1, 2, 6]},
+ {"h": "Días, meses y fechas", "blocks": [3, 7]},
  {"h": "La hora, los precios y el teléfono", "blocks": [4, 5]},
 ],
 "blocks": [
@@ -856,8 +931,9 @@ LESSONS = {
          ["Hoje é *dia 15 de março*.", "Hoy es 15 de marzo."],
          ["*primeiro* de janeiro", "1.º de enero (el 1 es ordinal)"],
          ["O carnaval é *em fevereiro*.", "El carnaval es en febrero."]],
-  "warn": "«En el lunes» → *na segunda*; «el sábado» → *no sábado*: con "
-          "contracción, porque *segunda* es femenino y *sábado* masculino.",
+  "warn": "«El lunes», sin preposición en español, es *na segunda* (*em* + "
+          "*a*); «el sábado», *no sábado*. Sin *na / no* («segunda eu "
+          "trabalho») solo al hablar.",
   "more": ["Los meses van con minúscula: *janeiro, fevereiro, março, abril, "
            "maio, junho, julho, agosto, setembro, outubro, novembro, "
            "dezembro*. El día 1 se dice *primeiro* (*1º de maio*); los "
@@ -865,7 +941,10 @@ LESSONS = {
            "*na segunda, na terça, na sexta*.",
            "Cumplir años se dice *fazer anos*: *a Bia faz trinta anos na "
            "quarta* (Bia cumple treinta el miércoles). El cumpleaños es *o "
-           "aniversário*; para saludar, *parabéns!* o *feliz aniversário!*"]},
+           "aniversário*; para saludar, *parabéns!* o *feliz aniversário!*"],
+  "tip": "Plural de compuestos: *as segundas-feiras* (cambian las dos "
+         "partes); *os guarda-chuvas* (verbo + sustantivo: solo el "
+         "sustantivo); *os pães de queijo* (con *de*: solo la primera)."},
 
  {"h": "¿Qué hora es?",
   "q": [{"prompt": "«A las tres.»", "answer": "Às três.", "options": ["Às três.", "As três.", "A las três."]}],
@@ -895,6 +974,57 @@ LESSONS = {
           "para no confundirlo con *três*. Si oís «meia», anotá 6.",
   "tip": "El *Pix* es la transferencia instantánea que usa todo Brasil, "
          "del vendedor de mate en la playa a la farmacia."},
+
+ {"h": "Primeiro, segundo… y la metade",
+  "q": [{"prompt": "«Vivo en el tercer piso.»", "answer": "Moro no terceiro andar.", "options": ["Moro no terceiro andar.", "Moro no tercer andar.", "Moro no três andar."]},
+        {"prompt": "«La mitad de la torta»", "answer": "a metade do bolo", "options": ["a metade do bolo", "a mitade do bolo", "o meio do bolo"]}],
+  "r": "Ordinales: *primeiro, segundo, terceiro, quarto, quinto, sexto, "
+       "sétimo, oitavo, nono, décimo*; concuerdan: *a terceira vez*. "
+       "Fracciones: *a metade, um terço, um quarto*.",
+  "table": {"head": ["Número", "Ordinal", "Fracción"],
+            "rows": [["2", "segundo", "meio, a metade"],
+                     ["3", "terceiro (nunca «tercer»)", "um terço"],
+                     ["4", "quarto", "um quarto"],
+                     ["5 / 10", "quinto / décimo", "um quinto / um décimo"]]},
+  "ex": [["Moro no *terceiro* andar.", "Vivo en el tercer piso."],
+         ["É a *primeira* vez que estou no Rio.", "Es la primera vez que estoy en Río."],
+         ["*A metade* do bolo é sua.", "La mitad de la torta es tuya."],
+         ["*meio* quilo de queijo", "medio kilo de queso"],
+         ["*um milhão de* pessoas", "un millón de personas: con *de*, como en español"]],
+  "warn": "«Primer» y «tercer» no existen: *o primeiro dia*, *o terceiro "
+          "andar*. «La mitad» es *a metade* (no «mitade»); *o meio* es el "
+          "medio, el centro.",
+  "tip": "En el ascensor, *térreo* es planta baja y el 1 es *primeiro "
+         "andar*. En las fechas, ordinal solo el día 1: *primeiro de maio*, "
+         "*dois de maio*."},
+
+ {"h": "¿Cuándo? em, no, às, daqui a",
+  "q": [{"prompt": "«En marzo empiezan las clases.»", "answer": "Em março começam as aulas.", "options": ["Em março começam as aulas.", "No março começam as aulas.", "En março começam as aulas."]},
+        {"prompt": "«En verano»", "answer": "no verão", "options": ["no verão", "em verão", "en el verão"]},
+        {"prompt": "«Vuelvo dentro de dos días.»", "answer": "Volto daqui a dois dias.", "options": ["Volto daqui a dois dias.", "Volto de aqui a dois dias.", "Volto há dois dias."]}],
+  "r": "Mes y año, con *em* solo: *em março*, *em 2020*. Día, fecha y "
+       "estación, con *em* + artículo: *na segunda*, *no dia 15*, *no "
+       "verão*.",
+  "table": {"head": ["Español", "Portugués"],
+            "rows": [["el lunes, el sábado", "na segunda, no sábado"],
+                     ["los sábados (siempre)", "aos sábados / nos sábados"],
+                     ["en marzo, en 2020", "em março, em 2020"],
+                     ["el 15, el 15 de marzo", "no dia 15, em 15 de março"],
+                     ["en verano, en invierno", "no verão, no inverno"],
+                     ["a la mañana, a la tarde, a la noche", "de manhã, à tarde, à noite"],
+                     ["a las tres", "às três"],
+                     ["dentro de una hora", "daqui a uma hora"]]},
+  "ex": [["O carnaval é *em* fevereiro.", "El carnaval es en febrero (mes: em)."],
+         ["O show é *no dia* 20.", "El show es el 20 (no «o 20»)."],
+         ["*No verão* o Rio está cheio.", "En verano Río está lleno."],
+         ["*Aos domingos* tem feira.", "Los domingos hay feria (cada domingo)."],
+         ["O ônibus sai *daqui a* dez minutos.", "El colectivo sale dentro de diez minutos."]],
+  "warn": "«Dentro de una hora», contando desde ahora: *daqui a uma hora* "
+          "(*daqui* junto, de + aqui). «De aqui a» no se escribe, y *há* "
+          "mira al pasado (hace).",
+  "tip": "*em uma hora* cuenta lo que tarda algo: *faço isso em uma hora* "
+         "(lo hago en una hora). En carteles también vas a ver *volto em "
+         "dez minutos*."},
 ]},
 
 8: {
@@ -902,7 +1032,7 @@ LESSONS = {
          "lo que vas a hacer (*vou viajar*): con esto armás el plan del "
          "fin de semana.",
 "parts": [
- {"h": "Preguntas y el porquê", "blocks": [0, 1]},
+ {"h": "Preguntas y el porquê", "blocks": [0, 8, 1]},
  {"h": "ir + infinitivo: los planes", "blocks": [2, 3]},
  {"h": "estar + gerúndio", "blocks": [4, 5]},
  {"h": "Palavras que não estão no dicionário", "blocks": [6, 7]},
@@ -926,7 +1056,10 @@ LESSONS = {
          ["*Quantos* anos você tem?", "¿Cuántos años tenés?"],
          ["*De onde* você é?", "¿De dónde sos?"]],
   "warn": "*quem* no tiene plural: *quem são eles?*. Y «¿cuál es tu "
-          "nombre?» usa *qual*, no «o que»."},
+          "nombre?» usa *qual*, no «o que».",
+  "tip": "*que* + sustantivo también es «qué»: *Que horas são?* Y para "
+         "exclamar, *que* sin tilde: *Que lindo!*, *Que calor!*, *Que "
+         "saudade!* «¡Qué…!» con tilde es del español."},
 
  {"h": "por que, porque, por quê, o porquê",
   "r": "Pregunta: *por que* (separado). Respuesta: *porque* (junto). Al "
@@ -942,7 +1075,10 @@ LESSONS = {
          ["Não sei *o porquê* da demora.", "No sé el porqué de la demora."]],
   "warn": "En portugués la pregunta va **separada** (*por que*) y la "
           "respuesta **junta** (*porque*): igual que en español, sin tilde "
-          "en la pregunta."},
+          "en la pregunta.",
+  "tip": "Para unir: *e*, *ou*, *mas* («pero»: *pero* no existe), *então* y "
+         "*por isso* (por eso). *Moro no Rio, mas trabalho em Niterói. Tô "
+         "cansado, então vou dormir.*"},
 
  {"h": "ir + infinitivo: el futuro del habla",
   "q": [{"prompt": "«Voy a viajar mañana.»", "answer": "Vou viajar amanhã.", "options": ["Vou viajar amanhã.", "Vou a viajar amanhã.", "Vou viajo amanhã."]}],
@@ -1014,6 +1150,26 @@ LESSONS = {
   "ex": [["*Meu*, que trânsito!", "¡Che, qué tránsito! (meu = che, en São Paulo)"], ["Vamos tomar um *café* na padaria?", "¿Vamos a tomar un café a la panadería?"], ["*No farol*, vira à direita.", "En el semáforo, doblá a la derecha (farol = semáforo, en SP)"]],
   "tip": "En Río el semáforo es *sinal*; en São Paulo, *farol*. La voz de la app es la estándar: el acento no se oye, las palabras sí."},
 
+ {"h": "Preguntar como en Brasil",
+  "q": [{"prompt": "«¿Venís mañana?»", "answer": "Você vem amanhã?", "options": ["Você vem amanhã?", "Vem você amanhã?", "É que você vem amanhã?"]},
+        {"prompt": "Te dicen «Vou vender o carro». Sorprendido, preguntás…", "answer": "Você vai vender o quê?", "options": ["Você vai vender o quê?", "Você vai vender o que?", "Você vai vender qué?"]}],
+  "r": "La pregunta de sí o no es la frase de siempre con tono de "
+       "pregunta: *você vem amanhã?* Sin dar vuelta sujeto y verbo.",
+  "table": {"head": ["Recurso", "Ejemplo", "Para qué"],
+            "rows": [["solo el tono", "Você vem amanhã?", "sí o no"],
+                     ["palabra + é que", "O que é que você quer? Onde é que fica o metrô?", "la pregunta típica del habla"],
+                     ["palabra al final", "Você vai vender o quê? Você vai morar onde?", "sorpresa, o que te repitan"],
+                     ["…, né? / …, não é?", "Você é argentino, né?", "que te confirmen"]]},
+  "ex": [["*O que é que* você quer?", "¿Qué es lo que querés? / ¿Qué querés?"],
+         ["*Onde é que* fica o metrô?", "¿Dónde queda el subte?"],
+         ["Você vai vender *o quê*?!", "¿¡Vas a vender qué!?"],
+         ["Você é de Rosário, *né*?", "Sos de Rosario, ¿no?"]],
+  "warn": "Después de *é que*, sujeto + verbo: *onde é que você mora?*, "
+          "nunca «onde é que mora você». Al final, *quê* lleva "
+          "circunflejo: *o quê?*",
+  "tip": "*né?* = ¿no?, ¿cierto? Ojo: el «¿viste?» porteño no es *viu?*, "
+         "que en Brasil remata un aviso: *se cuida, viu?*"},
+
 ]},
 
 9: {
@@ -1023,7 +1179,7 @@ LESSONS = {
 "parts": [
  {"h": "Estar en, ir a, llegar a", "blocks": [0, 1, 2]},
  {"h": "Medios de transporte y el camino", "blocks": [3, 4]},
- {"h": "Desde, hasta y cómo llegar", "blocks": [5, 6]},
+ {"h": "Desde, hasta y cómo llegar", "blocks": [5, 6, 7]},
 ],
 "blocks": [
  {"h": "em: donde estás y donde vivís",
@@ -1090,8 +1246,9 @@ LESSONS = {
          ["O metrô passa *por* Copacabana.", "El subte pasa por Copacabana."]],
   "warn": "«Por el», «por la» → *pelo, pela*. «Por o» no existe, como "
           "tampoco «em o».",
-  "tip": "Los demás usos de *por* y *para* son los del español: *obrigado "
-         "por*, *por dia*, *para você*, *para mim* (para mí), *para sexta*."},
+  "tip": "Casi todos los usos de *por* y *para* son los del español: *por "
+         "dia*, *para você*, *para mim* (para mí), *para sexta*. Lo que "
+         "cambia está en el último bloque de la semana."},
 
  {"h": "De dónde, hasta dónde: de, até",
   "q": [{"prompt": "«Voy caminando hasta la playa.»", "answer": "Vou a pé até a praia.", "options": ["Vou a pé até a praia.", "Vou de pé até a praia.", "Vou a pé hasta a praia."]}],
@@ -1120,6 +1277,28 @@ LESSONS = {
           "(o *reto*). *à direita* es solo «a la derecha».",
   "tip": "*Com licença* sirve para pedir paso y para abordar a alguien por "
          "la calle. «Disculpe» se dice *desculpa* o *com licença*."},
+
+ {"h": "Por y para: lo que cambia",
+  "q": [{"prompt": "«¡Gracias por la invitación!»", "answer": "Obrigado pelo convite!", "options": ["Obrigado pelo convite!", "Obrigado por o convite!", "Obrigado para o convite!"]},
+        {"prompt": "«Llego a eso de las ocho.»", "answer": "Chego por volta das oito.", "options": ["Chego por volta das oito.", "Chego a isso das oito.", "Chego para as oito."]}],
+  "r": "Casi como en español, pero *por* + artículo se contrae siempre "
+       "(*obrigado pela ajuda*) y hay fórmulas fijas que no se traducen "
+       "palabra por palabra.",
+  "table": {"head": ["Español", "Portugués"],
+            "rows": [["gracias por la ayuda / por el regalo", "obrigado pela ajuda / pelo presente"],
+                     ["a eso de las ocho", "por volta das oito"],
+                     ["al menos, por lo menos", "pelo menos"],
+                     ["por teléfono", "por telefone / pelo telefone"],
+                     ["para el centro (hablado)", "pro Centro (= para o)"]]},
+  "ex": [["Obrigada *pela* ajuda!", "¡Gracias por la ayuda! (por + a = pela)"],
+         ["A festa começa *por volta das* nove.", "La fiesta empieza a eso de las nueve."],
+         ["Custa *pelo menos* cem reais.", "Sale por lo menos cien reales."],
+         ["Falo com ela *pelo telefone*.", "Hablo con ella por teléfono."]],
+  "warn": "«Obrigado por o convite» no existe: *pelo convite*. Y «por lo "
+          "menos» no lleva «lo»: *pelo menos*. «A eso de» es *por volta "
+          "de*.",
+  "tip": "*pra* y *pro* (*para a*, *para o*) son del habla y del chat: "
+         "*vou pro Centro*. En un texto, *para o Centro*."},
 ]},
 
 10: {
@@ -1398,7 +1577,7 @@ LESSONS = {
  {"h": "El imperativo: escrito y hablado", "blocks": [0, 1, 2]},
  {"h": "Reflexivos y la rutina", "blocks": [3, 4, 5]},
  {"h": "En la farmacia y en la cocina", "blocks": [6]},
- {"h": "Pedir perdón, reclamar y las respuestas cortas", "blocks": [7, 8, 9]},
+ {"h": "Pedir perdón, reclamar y las respuestas cortas", "blocks": [7, 8, 10, 9]},
 ],
 "blocks": [
  {"h": "Imperativo de você",
@@ -1441,7 +1620,13 @@ LESSONS = {
   "ex": [["*Olha* o Cristo ali!", "¡Mirá el Cristo ahí!"],
          ["*Vem* cá!", "¡Vení para acá!"],
          ["*Fala* sério!", "¡No te puedo creer! / ¡Hablá en serio!"],
-         ["*Senta* aí.", "Sentate ahí."]],
+         ["*Senta* aí.", "Sentate ahí."],
+         ["*Me passa* o sal? *Me liga* amanhã.", "¿Me pasás la sal? Llamame mañana."]],
+  "q": [{"prompt": "«Pasame la sal.» (con amigos)", "answer": "Me passa o sal.", "options": ["Me passa o sal.", "Passa-me o sal.", "Pasame o sal."]},
+        {"prompt": "«Mirá esto.» (con amigos)", "answer": "Olha isso.", "options": ["Olha isso.", "Olhas isso.", "Mira isso."]}],
+  "warn": "Con pronombre, el habla lo pone **adelante**: *me dá*, *me "
+          "passa*, *me liga* (= dame, pasame, llamame). «Dá-me» suena a "
+          "Portugal o a texto muy formal.",
   "tip": "Con amigos, *fala*; con un cliente o un desconocido mayor, "
          "*fale*. Mezclar en la misma frase es normal en Brasil."},
 
@@ -1537,13 +1722,30 @@ LESSONS = {
   "q": [{"prompt": "Llegaste tarde a encontrarte con un amigo. Elegí lo más natural.", "answer": "Foi mal, me atrasei!", "options": ["Foi mal, me atrasei!", "Com licença, me atrasei!", "De nada, me atrasei!"]}],
   "r": "Para disculparte: *desculpa* (lo común), *foi mal* (informal), *sinto muito* (algo grave). Para reclamar sin pelear: *olha, acho que teve um engano*.",
   "ex": [["*Desculpa* o atraso!", "¡Perdón por la demora!"], ["*Foi mal*, esqueci!", "¡Uh, perdón, me olvidé!"], ["*Sinto muito* pela sua avó.", "Lo siento mucho por tu abuela."], ["*Olha, acho que teve um engano*: pedi sem cebola.", "Mire, creo que hubo un error: pedí sin cebolla."], ["*Com licença*, posso passar?", "Permiso, ¿puedo pasar?"]],
-  "warn": "*Com licença* es «permiso» (para pasar o interrumpir), no «perdón por el error»: para eso, *desculpa*."},
+  "warn": "*Com licença* es «permiso» (para pasar o interrumpir), no «perdón por el error»: para eso, *desculpa*.",
+  "tip": "Al portero mayor, al señor del quiosco o a una señora en la calle: *o senhor / a senhora*, con verbo en 3.ª: *o senhor sabe onde fica o metrô?*"},
 
  {"h": "Sotaque da semana: Minas Gerais",
   "q": [{"prompt": "En Minas, «Me passa esse trem» quiere decir…", "answer": "Pasame esa cosa.", "options": ["Pasame esa cosa.", "Pasame ese tren.", "Pasame ese trago."]}],
   "r": "El mineiro «se come» sílabas (*pó pô* = *pode pôr*) y tiene su muletilla: *uai*, sorpresa o evidencia. *Trem* es «cosa», cualquier cosa.",
   "ex": [["*Uai*, cê não vem?", "¿Eh? ¿No venís? (uai: sorpresa)"], ["Me passa esse *trem* aí.", "Pasame esa cosa (trem = cosa, en Minas)"], ["Ô, *sô*, vem cá!", "¡Eh, señor, vení! (sô = senhor)"]],
   "tip": "La voz de la app es la estándar: el acento no se oye, las palabras sí."},
+
+ {"h": "cafezinho, minutinho: el diminutivo de todos los días",
+  "q": [{"prompt": "«¿Un cafecito?»", "answer": "Um cafezinho?", "options": ["Um cafezinho?", "Um cafecito?", "Um cafeinho?"]}],
+  "r": "*-inho / -inha* reemplaza la vocal final átona: *casa → casinha*. "
+       "Tras vocal tónica o nasal, *-zinho*: *café → cafezinho*, *pão → "
+       "pãozinho*.",
+  "ex": [["Vamos tomar um *cafezinho*?", "¿Vamos a tomar un cafecito?"],
+         ["Só um *minutinho*!", "¡Un minutito!"],
+         ["Volto *rapidinho*.", "Vuelvo enseguida."],
+         ["Fica *pertinho* da praia.", "Queda cerquita de la playa."],
+         ["Fala *devagarinho*, por favor.", "Hablá despacito, por favor."]],
+  "warn": "Nunca «-ito»: *cafezinho*, *minutinho*, *agorinha* (ya mismo). "
+          "Más que tamaño, el diminutivo pone cariño o suaviza un pedido: "
+          "*um favorzinho*.",
+  "tip": "Los plurales (*pãezinhos*) y los aumentativos en *-ão* llegan en "
+         "la semana 44."},
 
 ]},
 
