@@ -269,11 +269,11 @@
   // Cada set: una explicación breve (información explícita, como pide la
   // Processing Instruction) e ítems que se resuelven solo leyendo la forma.
   // Un tercer elemento en el ítem es la semana desde la que se muestra.
-  var P = ["yo", "nosotros (o a gente)", "él / ella / você", "ellos / ellas / vocês"];
+  var P = ["eu", "nós / a gente", "ele / ela / você", "eles / elas / vocês"];
   var T = ["ya pasó (una vez)", "pasaba siempre (antes)", "pasa ahora / siempre", "va a pasar"];
   var G = ["a Ana le gusta João", "a João le gusta Ana"];
   var F = ["ya pasó", "pasa siempre (hábito)", "todavía no pasó"];
-  var I = ["nosotros", "ellos / ellas / vocês", "en general (nadie en particular)"];
+  var I = ["nós", "eles / elas / vocês", "en general (nadie en particular)"];
   var CAPIRE = [
     { id: "persona", week: 5, h: "¿Quién lo hace?",
       body: "La terminación dice quién: **-o** = eu; **-a / -e** = ele, ela y también **você**; **-amos / -emos / -imos** = nós; **-am / -em** = eles, elas y **vocês**. *A gente* (= nosotros) va con el verbo en singular.",
