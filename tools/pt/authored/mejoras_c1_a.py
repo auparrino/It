@@ -315,7 +315,7 @@ fx(W, 0, "Em Botafogo, esperei o autocarro por meia hora debaixo de chuva.", "au
    "tomarlo: *pegar* en Brasil, *apanhar* en Portugal.")
 fx(W, 2, "É freqüente ouvir sotaques do Nordeste nas ruas do Rio.", "freqüente", "frequente",
    "ortografia",
-   "Desde el Acuerdo de 1990 el trema desapareció: *frequente*, *linguiça*, *tranquilo*. La *u* "
+   "Con el Acuerdo de 1990 (en Brasil, vigente desde 2009 y obligatorio desde 2016) el trema desapareció: *frequente*, *linguiça*, *tranquilo*. La *u* "
    "se sigue pronunciando.")
 fx(W, 1, "Se diz que o chiado carioca veio com a corte portuguesa em 1808.", "Se diz", "Diz-se",
    "colocacao",

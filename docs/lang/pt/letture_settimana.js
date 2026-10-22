@@ -865,22 +865,22 @@
         "já previa a mudança, mas foi JK quem a manteve contra todas as críticas.\n\n" +
         "O urbanista Lúcio Costa venceu o concurso com o Plano Piloto, em forma de cruz, ou de avião, " +
         "e Oscar Niemeyer desenhou os palácios, a catedral e o Congresso. Milhares de trabalhadores, os " +
-        "candangos, vieram de todo o país, sobretudo do Nordeste, e intervieram em cada etapa da obra.\n\n" +
+        "candangos, vieram de todo o país, sobretudo do Nordeste, e participaram de cada etapa da obra.\n\n" +
         "Brasília foi inaugurada em 21 de abril de 1960, e o Rio perdeu o título de capital. Os cariocas, " +
         "meio de brincadeira, dizem que a cidade nunca deixou de ser a capital cultural do país. Quem " +
-        "visita Brasília hoje obtém uma aula de arquitetura moderna ao ar livre: desde 1987, a cidade é " +
+        "visita Brasília hoje ganha uma aula de arquitetura moderna ao ar livre: desde 1987, a cidade é " +
         "Patrimônio Mundial da Unesco.",
       gloss: { propôs: "propuso", meta: "meta", ousada: "audaz", planalto: "meseta", previa: "preveía",
                manteve: "mantuvo", venceu: "ganó", concurso: "concurso", candangos: "obreros que construyeron Brasilia",
-               sobretudo: "sobre todo", intervieram: "intervinieron", etapa: "etapa", perdeu: "perdió",
-               brincadeira: "broma", obtém: "obtiene", livre: "libre" },
+               sobretudo: "sobre todo", participaram: "participaron", etapa: "etapa", perdeu: "perdió",
+               brincadeira: "broma", ganha: "recibe (literalmente, gana)", livre: "libre" },
       questions: [
         ["Quem propôs construir Brasília?", ["Juscelino Kubitschek", "Oscar Niemeyer", "Lúcio Costa", "Getúlio Vargas"], "Juscelino Kubitschek"],
         ["Que forma tem o Plano Piloto?", ["de cruz ou de avião", "de círculo", "de estrela de cinco pontas", "de quadrado"], "de cruz ou de avião"],
         ["O que os cariocas dizem, de brincadeira?", ["que o Rio continua sendo a capital cultural", "que Brasília é mais bonita", "que o Rio nunca foi de verdade a capital do Brasil", "que querem se mudar"], "que o Rio continua sendo a capital cultural"]
       ],
       vf: [["Brasília foi inaugurada em 1960.", "verdadeiro"], ["A ideia de mudar a capital nasceu com JK.", "falso"], ["A Sofía já visitou Brasília.", "não se diz"]],
-      hunt: { label: "Toque nos derivados de pôr, ver, ter e vir (propôs, previa…)", targets: ["propôs", "previa", "manteve", "intervieram", "obtém"] } },
+      hunt: { label: "Toque nos derivados de pôr, ver e ter (propôs, previa…)", targets: ["propôs", "previa", "manteve"] } },
 
     { id: "w-38", week: 38, n: 38, level: "B2", emoji: "🍺", title: "Papo de boteco",
       grammar: "português falado do Brasil",

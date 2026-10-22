@@ -49,9 +49,14 @@ def tr(w, part, stem, answer, alt, note):
     return _base(w, part, "translate", P_TR, stem, answer, note, alt)
 
 
-def fx(w, part, stem, bad, good, cat, note):
-    return _base(w, part, "fixerr", P_FX, stem, stem.replace(bad, good, 1), note,
-                 bad=bad, good=good, cat=cat)
+def fx(w, part, stem, bad, good, cat, note, goodAlt=None):
+    extra = dict(bad=bad, good=good, cat=cat)
+    alt = None
+    if goodAlt:
+        extra["goodAlt"] = list(goodAlt)
+        alt = [stem.replace(bad, g, 1) for g in goodAlt]
+    return _base(w, part, "fixerr", P_FX, stem, stem.replace(bad, good, 1), note, alt,
+                 **extra)
 
 
 def gd(w, part, lead, stem, answer, trap, note, alt=None, prompt=P_GD):
@@ -83,7 +88,7 @@ ITEMS += [
        "Con gostar, la persona es el sujeto: eu gosto. No hay pronombre «me» delante."),
     ch(W, 0, "Os cariocas ___ de praia no fim de semana.", ["gostam", "gosta", "gostamos"], "gostam",
        "El verbo concuerda con los que sienten el gusto (os cariocas), no con la playa."),
-    ch(W, 0, "A Sofía gosta ___ música que toca no rádio.", ["da", "de", "a"], "da",
+    ch(W, 0, "A Sofía gosta ___ música nova do Caetano.", ["da", "de", "a"], "da",
        "gostar de + a música = da música: la preposición se funde con el artículo."),
     ch(W, 0, "Você gosta ___ biscoito Globo?", ["do", "de o", "o"], "do",
        "de + o = do, siempre contraído: «de o» no se escribe. Y gostar nunca va sin de."),
@@ -258,7 +263,7 @@ ITEMS += [
         "Todas las formas de los verbos en -er e -ir (comía, abría).",
         "Ninguna: el imperfeito nunca lleva tilde."],
        "Solo la de nós: falávamos, comíamos, abríamos.",
-       "La tilde marca que nós es esdrújula: falávamos, comíamos. Las otras formas son llanas (falava, comia), salvo los verbos en -air/-uir (saía)."),
+       "La tilde marca que nós es esdrújula: falávamos, comíamos. Las otras formas son llanas y no la llevan (falava, comia); en -air/-uir aparece otra tilde, la del hiato: saía, caía."),
     ty(W, 0, "Escribí el imperfeito de «ser» para «nós».", "nós ___ (ser)", "éramos",
        "ser: era, era, éramos, eram. Esdrújula: lleva tilde."),
     ty(W, 0, "Escribí el imperfeito de «vir» para «eles».", "eles ___ (vir)", "vinham",
@@ -410,7 +415,8 @@ ITEMS += [
     fx(W, 1, "Vou comprar-lo amanhã.", "comprar-lo", "comprá-lo", "pronome",
        "Tras -r el pronombre es -lo y la r cae: comprá-lo. «comprar-lo» nunca."),
     fx(W, 1, "Eu se lo disse ontem.", "se lo disse", "disse para ele", "espanol",
-       "«se lo» es español. En portugués: disse para ele (o disse-lhe, formal)."),
+       "«se lo» es español. En portugués: disse para ele (o disse-lhe, formal).",
+       goodAlt=["lhe disse", "disse a ele", "disse pra ele", "falei para ele"]),
     gd(W, 1, [["comprar o carro", "comprá-lo"], ["ver a praia", "vê-la"], ["fazer o bolo", "fazê-lo"]],
        "abrir a janela → ___", "abri-la", "abrí-la",
        "En -ar y -er la tilde marca la vocal acentuada; en -ir no hace falta: abri-la, parti-lo."),
@@ -476,8 +482,8 @@ ITEMS += [
        "vir es regular en futuro: virei, virá, viremos, virão («vendrán»)."),
     cl(W, 0, "Eu ___ (trazer) o vinho.", "trarei",
        "trazer pierde -ze-: trarei."),
-    cl(W, 0, "A gente ___ (sair) às oito.", "sairá",
-       "sair es regular en futuro: sairá. Con a gente, tercera del singular."),
+    cl(W, 0, "O ônibus ___ (sair) às oito.", "sairá",
+       "sair es regular en futuro: sairá."),
     cl(W, 0, "Vocês ___ (poder) entrar depois das nove.", "poderão",
        "poder es regular en futuro: poderão («podrán»)."),
     cl(W, 0, "Nós ___ (pôr) as cadeiras na varanda.", "poremos",
@@ -751,7 +757,7 @@ ITEMS += [
     cl(W, 0, "Ela tem mais paciência do que ___. (yo)", "eu",
        "Tras do que va el pronombre sujeto: do que eu, nunca «do que mim»."),
     tr(W, 0, "São Paulo es más grande que Río.", "São Paulo é maior do que o Rio",
-       ["São Paulo é maior que o Rio", "São Paulo é maior do que Rio", "São Paulo é maior que Rio"],
+       ["São Paulo é maior que o Rio"],
        "«más grande» = maior. Rio suele llevar artículo: o Rio."),
     tr(W, 0, "Este bar es mejor que el otro.", "Este bar é melhor do que o outro",
        ["Esse bar é melhor do que o outro", "Este bar é melhor que o outro", "Esse bar é melhor que o outro"],
@@ -1534,7 +1540,8 @@ ITEMS += [
        "gostar de: la preposición va delante del relativo: de que.",
        prompt="Elegí la forma correcta en la lengua escrita."),
     ch(W, 1, "A casa ___ moro tem varanda.", ["em que", "que", "na que"], "em que",
-       "morar em: a casa em que moro (o onde moro)."),
+       "morar em: a casa em que moro (o onde moro).",
+       prompt="Elegí la forma correcta en la lengua escrita."),
     cl(W, 1, "___ eu mais gosto no Rio é a praia.", "O que",
        "Para destacar algo, «lo que» se dice *o que*. En el habla se oye *o que eu mais gosto*; en lo escrito, *do que eu mais gosto* (o *o que eu mais admiro*). El portugués no tiene el neutro *lo*.",
        alt=["Do que"]),

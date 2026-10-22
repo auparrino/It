@@ -186,7 +186,7 @@ WEEKS.append({
             },
             {
                 "h": "¿Cómo andás? – Wie geht's?",
-                "r": "*Wie geht's?* (de *Wie geht es?*) es «¿cómo andás?». Se contesta y se devuelve la pregunta: *Und dir?* (¿y vos?).",
+                "r": "*Wie geht's?* (de *Wie geht es?*) es «¿cómo andás?». Se contesta y se devuelve la pregunta: *Und dir?* (¿y vos?). Para preguntarle a alguien en particular: *Wie geht's **dir**?* (a vos) o *Wie geht es **Ihnen**?* (a usted). *dir* e *Ihnen* son las formas de *du* y *Sie* que pide esta frase (es el dativo, que se ve en la semana 13): por ahora, aprendé las dos preguntas enteras, como fórmulas.",
                 "ex": [
                     ["*Wie geht's?* – *Gut*, danke. Und dir?", "¿Cómo andás? – Bien, gracias. ¿Y vos?"],
                     ["*Sehr gut!*", "¡Muy bien!"],
@@ -320,11 +320,11 @@ WEEKS.append({
         ch(2, "¿Cómo se nombra la letra?", "ß", "«es-tset»", ["«es-tset»", "«beta»", "«doble ese»"], "*ß* se llama *Eszett* (o *scharfes S*)."),
         ch(2, "¿Qué preguntás?", "Alguien te dice su apellido y no sabés cómo escribirlo.", "Wie schreibt man das?", ["Wie schreibt man das?", "Wie geht's?", "Wie heißt das?"], "*Wie schreibt man das?* = ¿Cómo se escribe?"),
         ch(2, "¿Cuál es el saludo correcto?", "Saludás a la señora Weber, tu nueva jefa.", "Guten Tag, Frau Weber!", ["Guten Tag, Frau Weber!", "Guten Tag, Frau!", "Guten Tag, Weber!"], "*Frau* + apellido es «señora»; sin apellido no se usa así."),
-        ch(2, "¿Qué pregunta es formal?", "Querés saber cómo está un cliente.", "Wie geht es Ihnen?", ["Wie geht es Ihnen?", "Wie geht's dir?", "Und dir?"], "*Ihnen* va con *Sie*; *dir* va con *du*."),
-        ch(2, "Elegí la forma correcta (trato formal).", "Wie geht es ___?", "Ihnen", ["Ihnen", "dir", "dich"], "La forma de usted va siempre con mayúscula: *Ihnen*. *dir* es para *du*."),
+        ch(2, "¿Qué pregunta es formal?", "Querés saber cómo está un cliente.", "Wie geht es Ihnen?", ["Wie geht es Ihnen?", "Wie geht's dir?", "Und dir?"], "Fórmula fija: a usted, *Wie geht es Ihnen?*; a vos, *Wie geht's dir?*. *Ihnen* y *dir* son las formas de *Sie* y *du* en esta frase (el dativo, semana 13)."),
+        ch(2, "Elegí la forma correcta (trato formal).", "Wie geht es ___?", "Ihnen", ["Ihnen", "dir", "dich"], "En esta fórmula, *Sie* pasa a *Ihnen* (con mayúscula) y *du* a *dir*; *dich* es otra forma que acá no va. Por ahora aprendela entera; la regla (el dativo) llega en la semana 13."),
         ch(2, "¿Cómo la tratás?", "Una compañera de curso de 25 años te dice *Hallo!*", "con du", ["con du", "con Sie", "con ihr"], "Entre jóvenes y compañeros se usa *du*."),
         ty(2, "Escribí en alemán.", "«señor Müller»", "Herr Müller", note="*Herr* = señor. " + MAY),
-        ty(2, "Escribí en alemán.", "«¿Cómo está usted?»", "Wie geht es Ihnen?", ["Wie geht es Ihnen?", "Wie geht's Ihnen?", "Wie gehts Ihnen?"], note="Con *Sie*: *Ihnen*, con mayúscula."),
+        ty(2, "Escribí en alemán.", "«¿Cómo está usted?»", "Wie geht es Ihnen?", ["Wie geht es Ihnen?", "Wie geht's Ihnen?", "Wie gehts Ihnen?"], note="Fórmula fija con *Sie*: *Ihnen*, con mayúscula (es el dativo, que se ve en la semana 13)."),
         ty(2, "Escribí en alemán.", "«¿Cómo se escribe?»", "Wie schreibt man das?", note="Fórmula fija para pedir que te deletreen algo."),
     ],
 })

@@ -75,7 +75,6 @@ LESSONS = {
        "**cerradas** (*ê*, *ô*). A veces cambian la palabra.",
   "table": {"head": ["Abierta", "Cerrada", "Diferencia"],
             "rows": [["avó (abuela)", "avô (abuelo)", "ó / ô"],
-                     ["é (es)", "e (y)", "é / e"],
                      ["pé, café", "você, português", "é / ê"],
                      ["nó, pó", "ovo, bolo", "ó / ô"]]},
   "ex": [["a *avó* / o *avô*", "la abuela / el abuelo"],
@@ -83,7 +82,8 @@ LESSONS = {
          ["*café*, *pé*", "é abierta, como en «perro»"],
          ["*você*, *três*", "ê cerrada, casi una «e» corta"]],
   "warn": "*é* (es) lleva tilde; *e* (y) no. Y la conjunción es *e*, nunca "
-          "«y»: *Rio e São Paulo*.",
+          "«y»: *Rio e São Paulo*. *é* (es) es tónica y abierta; *e* (y) es "
+          "átona y suena casi «i»: *Ela é* [ɛ] *de Recife e* [i] *ele é de Belém*.",
   "more": ["El acento agudo (´) marca vocal abierta; el circunflejo (^), "
            "cerrada: *avó / avô*, *pé / você*. Las *e* y *o* finales sin "
            "acento se reducen en Brasil: *leite* suena casi «léiti», *carro* "
@@ -160,9 +160,10 @@ LESSONS = {
            "(frío), *calor*, *sono* (sueño), *pressa* (apuro), *medo* "
            "(miedo), *saudade* (nostalgia). La edad, en cambio, va con "
            "*ter*, como en español: *tenho vinte anos*.",
-           "¿Dónde queda? Lo que no se mueve (un edificio, un barrio) va "
-           "con *ser* o *ficar*: *a escola é em Copacabana*, *onde fica o "
-           "hotel?*. Lo que se mueve, con *estar*: *a Bia está em Ipanema*. "
+           "¿Dónde queda? Para ubicar lo que no se mueve se usa mucho *ficar* "
+           "o *ser* (*onde fica o hotel?*, *a escola é em Copacabana*); "
+           "*estar* también es común (*o hotel está perto da praia*). Lo que "
+           "se mueve, con *estar*: *a Bia está em Ipanema*. "
            "Y la negación es *não*, antes del verbo: *não sou*, *não estou*."]},
 ]},
 
@@ -434,8 +435,11 @@ LESSONS = {
 ],
 "blocks": [
  {"h": "Adjetivos: cuatro formas o dos",
-  "r": "En *-o*: cuatro formas (*alto, alta, altos, altas*). En *-e* o "
-       "consonante: dos (*forte, fortes*; *feliz, felizes*).",
+  "r": "En *-o*: cuatro formas (*alto, alta, altos, altas*). En *-e* y en la "
+       "mayoría de los terminados en consonante (*feliz, fácil, azul*): una forma por "
+       "número, dos en total (*forte, fortes*; *feliz, felizes*). Ojo: *-ês*, *-ol* y "
+       "*-or* suelen hacer femenino en *-a* (*portuguesa, espanhola, trabalhadora*), "
+       "pero *melhor, maior, menor* no cambian.",
   "table": {"head": ["", "masc. sing.", "fem. sing.", "masc. pl.", "fem. pl."],
             "rows": [["-o", "alto", "alta", "altos", "altas"],
                      ["-e", "alegre", "alegre", "alegres", "alegres"],
@@ -1007,7 +1011,7 @@ LESSONS = {
  {"h": "Sotaque da semana: São Paulo",
   "q": [{"prompt": "En São Paulo, ¿qué es o farol?", "answer": "el semáforo", "options": ["el semáforo", "el faro", "la farola"]}],
   "r": "El paulistano no chia: la *s* final es *s*, y la *e* final suena más cerrada. En el interior, la *r* «caipira» se enrosca: *porta* ≈ «porrrta».",
-  "ex": [["*Meu*, que trânsito!", "¡Che, qué tránsito! (meu = che, en São Paulo)"], ["Vamos tomar um *café* na padaria?", "¿Vamos a tomar un café a la panadería?"], ["Pega o *farol* e vira à direita.", "En el semáforo, doblá a la derecha (farol = semáforo, en SP)"]],
+  "ex": [["*Meu*, que trânsito!", "¡Che, qué tránsito! (meu = che, en São Paulo)"], ["Vamos tomar um *café* na padaria?", "¿Vamos a tomar un café a la panadería?"], ["*No farol*, vira à direita.", "En el semáforo, doblá a la derecha (farol = semáforo, en SP)"]],
   "tip": "En Río el semáforo es *sinal*; en São Paulo, *farol*. La voz de la app es la estándar: el acento no se oye, las palabras sí."},
 
 ]},
@@ -1477,9 +1481,10 @@ LESSONS = {
          ["*Esqueci* a chave.", "Me olvidé la llave."]],
   "warn": "*acordar* = despertarse; *lembrar* = acordarse. «Acordo do "
           "João» no es «me acuerdo de João»: es un disparate.",
-  "tip": "*lembrar de* y *esquecer de* llevan *de* ante objeto: *lembro "
-         "do show*, *esqueci da reunião*. También *me lembro*, más "
-         "formal."},
+  "tip": "Sin pronombre, *lembrar* y *esquecer* van con objeto directo: "
+         "*esqueci a chave*, *lembro o nome*. Con pronombre llevan *de*: "
+         "*me esqueci da chave*, *me lembro do show*. En el habla también "
+         "se oye mucho *lembro do show*, *esqueci da reunião*."},
 
  {"h": "La rutina: tomar banho, escovar os dentes",
   "r": "La rutina en Brasil: *acordar, tomar banho* (ducharse), "

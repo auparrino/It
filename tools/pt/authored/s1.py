@@ -145,7 +145,7 @@ tr(W, 0, "Me llamo Sofía. Mucho gusto.", "Eu me chamo Sofía. Muito prazer.",
    ["Me chamo Sofía. Muito prazer.", "Meu nome é Sofía. Muito prazer.", "Eu me chamo Sofía. Prazer.",
     "Me chamo Sofía. Prazer.", "Meu nome é Sofía. Prazer.", "O meu nome é Sofía. Muito prazer.",
     "Chamo-me Sofía. Muito prazer.", "Eu me chamo Sofia. Muito prazer.", "Meu nome é Sofia. Muito prazer."],
-   "Eu me chamo o meu nome é para presentarte; muito prazer, nunca «muy».")
+   "*Eu me chamo…* o *Meu nome é…* para presentarte; *muito prazer*, nunca «muy».")
 tr(W, 0, "¿Vos sos argentino?", "Você é argentino?",
    ["Tu és argentino?", "Tu é argentino?"],
    "El «vos» del Río de la Plata se dice você, con el verbo en tercera: você é.")
@@ -158,7 +158,7 @@ tr(W, 2, "Tengo hambre.", "Estou com fome.", ["Eu estou com fome.", "Tô com fom
 tr(W, 2, "Estamos en Copacabana.", "Estamos em Copacabana.",
    ["Nós estamos em Copacabana.", "A gente está em Copacabana.", "A gente tá em Copacabana."],
    "estar + em. Copacabana se usa sin artículo: em Copacabana.")
-tr(W, 2, "Ellos tienen sed.", "Eles estão com sede.", ["Elas estão com sede.", "Eles tão com sede.", "Elas têm sede.", "Eles têm sede.", "Eles tem sede."],
+tr(W, 2, "Ellos tienen sed.", "Eles estão com sede.", ["Elas estão com sede.", "Eles tão com sede.", "Elas têm sede.", "Eles têm sede."],
    "Lo más común es *estar com* + sustantivo; *ter sede* también se oye: *estar com sede* «tener sed», *estar com fome* «tener hambre». *Sede* también es «sede».")
 
 fx(W, 0, "persona", "Você és brasileiro?", "és", "é",
@@ -227,7 +227,7 @@ ch(W, 1, "___ leite está frio.", ["O", "A", "Os"], "O",
 ch(W, 1, "___ árvore é alta.", ["A", "O", "Um"], "A",
    "Árvore es femenino: a árvore (el árbol). Por eso: alta.")
 ch(W, 1, "Tenho ___ mensagem.", ["uma", "um", "una"], "uma",
-   "Todas las palabras en -agem son femeninas: uma mensagem, a viagem.")
+   "Casi todas las palabras en -agem son femeninas: uma mensagem, a viagem (ojo: o personagem).")
 ch(W, 1, "___ dor é forte.", ["A", "O", "El"], "A",
    "Dor es femenino en portugués: a dor (el dolor), uma dor forte.")
 ch(W, 2, "___ um boteco aqui?", ["Tem", "Têm", "Hay"], "Tem",
@@ -256,7 +256,7 @@ cz(W, 1, "___ sangue", "o", "Sangue es masculino: o sangue (la sangre).",
    prompt="Completá con el artículo (o / a).")
 cz(W, 1, "___ ponte", "a", "Ponte es femenino: a ponte (el puente), como a ponte Rio-Niterói.",
    prompt="Completá con el artículo (o / a).")
-cz(W, 1, "___ mensagem", "a", "-agem es siempre femenino: a mensagem (el mensaje).",
+cz(W, 1, "___ mensagem", "a", "-agem es casi siempre femenino: a mensagem (el mensaje).",
    prompt="Completá con el artículo (o / a).")
 cz(W, 1, "___ nariz", "o", "Nariz es masculino: o nariz (la nariz).",
    prompt="Completá con el artículo (o / a).")
@@ -276,7 +276,7 @@ tr(W, 0, "Los hombres están en casa.", "Os homens estão em casa.", ["Os homens
 tr(W, 1, "La leche está fría.", "O leite está frio.", ["O leite está gelado."],
    "Leite es masculino: o leite, y el adjetivo concuerda: frio.")
 tr(W, 1, "El viaje es caro.", "A viagem é cara.", [],
-   "Viagem es femenino (todo -agem): a viagem é cara.")
+   "Viagem es femenino (casi todo -agem): a viagem é cara.")
 tr(W, 1, "El puente es nuevo.", "A ponte é nova.", [],
    "Ponte es femenino: a ponte é nova.")
 tr(W, 2, "Hay una farmacia aquí.", "Tem uma farmácia aqui.",
@@ -288,7 +288,7 @@ tr(W, 2, "Hay mensajes nuevos.", "Tem mensagens novas.", ["Há mensagens novas."
 fx(W, 1, "genero", "A leite está quente.", "A leite", "O leite",
    "Leite es masculino en portugués: o leite.")
 fx(W, 1, "genero", "O viagem é cara.", "O viagem", "A viagem",
-   "Todas las palabras en -agem son femeninas: a viagem.")
+   "Casi todas las palabras en -agem son femeninas: a viagem (ojo: o personagem).")
 fx(W, 0, "plural", "Tem três limãos.", "limãos", "limões",
    "Limão → limões, como limón → limones.")
 fx(W, 2, "espanol", "Hay um boteco aqui.", "Hay", "Tem",
@@ -303,9 +303,9 @@ gd(W, 0, [["animal", "animais"], ["jornal", "jornais"], ["hospital", "hospitais"
 
 sc(W, 1, ["A viagem é cara.", "A mensagem é longa.", "A garagem é pequena.", "A paisagem é linda.", "A passagem é barata.", "A bagagem é pesada."],
    "¿Qué género tienen las palabras en -agem?",
-   ["Son todas femeninas.", "Son masculinas, como en español (-aje).", "Depende de si son cosas concretas o abstractas."],
-   "Son todas femeninas.",
-   "-agem es siempre femenino, aunque en español -aje sea masculino: a viagem, a mensagem, a garagem.")
+   ["Son femeninas (casi todas; ojo: o personagem).", "Son masculinas, como en español (-aje).", "Depende de si son cosas concretas o abstractas."],
+   "Son femeninas (casi todas; ojo: o personagem).",
+   "-agem es casi siempre femenino, aunque en español -aje sea masculino: a viagem, a mensagem, a garagem.")
 sc(W, 0, ["pão → pães (pan → panes)", "mão → mãos (mano → manos)", "limão → limões (limón → limones)",
           "alemão → alemães (alemán → alemanes)", "irmão → irmãos (hermano → hermanos)", "estação → estações (estación → estaciones)"],
    "¿Qué pista te da el español para el plural de -ão?",
@@ -540,9 +540,9 @@ sc(W, 2, ["Ela é muito bonita.", "Eles são muito altos.", "Tenho muitos amigos
 sc(W, 0, ["O Pedro é alto; a Bia é alta.", "O carro é branco; a casa é branca.", "O dia é alegre; a noite é alegre.",
           "O menino é feliz; a menina é feliz.", "O exercício é fácil; a lição é fácil.", "O bairro é tranquilo; a rua é tranquila."],
    "¿Qué adjetivos cambian del masculino al femenino?",
-   ["Los terminados en -o; los en -e o consonante tienen una sola forma.",
+   ["Los terminados en -o; los en -e y casi todos los en consonante tienen una sola forma.",
     "Todos los adjetivos cambian en el femenino: -o → -a, -e → -a, consonante + -a.", "Solo los de colores."],
-   "Los terminados en -o; los en -e o consonante tienen una sola forma.",
+   "Los terminados en -o; los en -e y casi todos los en consonante tienen una sola forma.",
    "Como en español: alto/alta, pero alegre, feliz, fácil sirven para los dos géneros.")
 
 ty(W, 2, "Escribí «muy» en portugués.", "«muy» → ___", "muito",
@@ -805,7 +805,7 @@ ch(W, 2, "___ para as oito.", ["Quinze", "Quarto", "Um quarto"], "Quinze",
 ch(W, 2, "Meu número é nove, ___, dois…", ["meia", "meio", "média"], "meia",
    "Al dictar números, 6 se dice meia (de meia dúzia).", prompt="«Mi número es 9-6-2…»")
 
-cz(W, 0, "Tenho ___ anos. (18)", "dezoito", "18 es *dezoito*: el portugués junta *dez* + *oito* sin la *y* que tenemos en «dieciocho». La edad se dice con *ter*: *tenho dezoito anos*.", prompt="Escribí el número en letras.")
+cz(W, 0, "Tenho ___ anos. (18)", "dezoito", "18 es *dezoito*: *dez* + *oito* pegados, sin la «-i-» de «dieciocho» y sin la *e* de *dezesseis*. La edad se dice con *ter*: *tenho dezoito anos*.", prompt="Escribí el número en letras.")
 cz(W, 0, "São ___ reais. (22)", "vinte e dois", "22 = vinte e dois: decena + e + unidad.",
    prompt="Escribí el número en letras.")
 cz(W, 0, "Tem ___ pessoas. (21)", "vinte e uma", "Pessoas es femenino: vinte e uma pessoas.",
@@ -1425,7 +1425,7 @@ W = 13
 ch(W, 0, "a estação → as ___", ["estações", "estaçãos", "estaciones"], "estações",
    "-ão → -ões (como -ones en español).")
 ch(W, 0, "___ viagem foi ótima.", ["A", "O", "Um"], "A",
-   "Todas las palabras en -agem son femeninas: a viagem.")
+   "Casi todas las palabras en -agem son femeninas: a viagem (ojo: o personagem).")
 ch(W, 0, "Estou ___ praia do Leblon.", ["na", "em a", "no"], "na",
    "*Em* + *a* se contrae en *na*: *estou na praia*. El artículo de *praia* es femenino, así que no puede ser *no*.")
 ch(W, 1, "A gente ___ no Rio.", ["mora", "moramos", "moram"], "mora",

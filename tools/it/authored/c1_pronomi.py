@@ -71,7 +71,7 @@ ITEMS = [
          prompt="Elegí la forma correcta.",
          stem="Sei mai stato a Roma? — Sì, ___ sono stato l'anno scorso.",
          options=["ci", "ne", "lo"], answer="ci",
-         note="*ci* retoma un lugar ya nombrado («allí»), y el italiano no lo puede omitir como el castellano: *ci sono stato*. *vi* es la variante escrita."),
+         note="*ci* retoma un lugar ya nombrado («allí»). Con *essere stato* el *ci* prácticamente no se omite: *ci sono stato*. *vi* es la variante escrita."),
     dict(id="c1-ci-03", type="choice", topic="ci",
          prompt="¿Qué significa «Ci vuole un'ora»?",
          stem="Ci vuole un'ora.",
@@ -109,9 +109,10 @@ ITEMS = [
          prompt="Completá la terminación.",
          stem="Maria si è lava___ le mani.",
          answer="ta",
-         alt=[],
-         note="Reflexivo con objeto directo propio: en uso corriente concuerda con "
-              "el sujeto (lavata). Con el objeto delante en pronombre: «se le è lavate»."),
+         alt=["te"],
+         note="Reflexivo con objeto directo propio: lo más común es que concuerde con "
+              "el sujeto (lavata); lavate, concordando con le mani, también es correcto. "
+              "Con el objeto delante en pronombre: «se le è lavate»."),
     dict(id="c1-part-05", type="choice", topic="participio",
          prompt="Elegí la forma más usual en el italiano actual.",
          stem="Quella è la lettera che ho ___ ieri.",

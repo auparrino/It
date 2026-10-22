@@ -33,7 +33,7 @@ VOCAB = {
     ["abrir mão de", "renunciar a", "Se fosse preciso, abriria mão do carro para morar perto da praia.", "Literal «abrir la mano». Pide *de*, que se contrae: *abrir mão do carro*. Se conjuga *abrir*: *abri mão*."],
     ["juntar", "ahorrar (plata)", "Se eu juntasse dinheiro, passaria um ano em Portugal.", "*Juntar dinheiro* = ahorrar. También juntar cosas o gente: *juntar a galera*."],
     ["encarar", "enfrentar", "Ela encarou a mudança com coragem.", "Enfrentar: *encarar a mudança*, *encarar o problema*. Coloquial: *encarar alguém* = mirarlo fijo, desafiante."],
-    ["a coragem", "el coraje, la valentía (femenino)", "Se eu tivesse a coragem dela, já estaria longe daqui.", "Femenino, como todas las palabras en *-agem*: *a coragem*. *Criar coragem* = animarse, juntar valor."],
+    ["a coragem", "el coraje, la valentía (femenino)", "Se eu tivesse a coragem dela, já estaria longe daqui.", "Femenino, como casi todas las palabras en *-agem* (excepción: *o/a personagem*): *a coragem*. *Criar coragem* = animarse, juntar valor."],
     ["arcar com", "hacerse cargo de (gastos, consecuencias)", "Quem arcaria com as despesas se a gente fosse?", "Siempre con *com*: *arcar com as despesas*, *arcar com as consequências*. Registro formal."],
     ["cogitar", "considerar, pensar en (una posibilidad)", "Nunca cogitei morar fora do Rio.", "Más usado que en español: *nem cogitar* = ni pensarlo. Va sin preposición: *cogitar uma mudança*."],
     ["pra valer", "en serio, de verdad (coloquial)", "Se eu decidisse pra valer, mudaria amanhã.", "Coloquial; *pra* = *para*. Va después del verbo o el sustantivo: *decidir pra valer*, *um namoro pra valer*."],
@@ -130,7 +130,7 @@ VOCAB = {
     ["o trecho", "el fragmento, el pasaje; el tramo", "Leia este trecho de «Os Lusíadas» em voz alta.", "Fragmento de un texto o tramo de un camino: *um trecho da estrada*."],
     ["a obra-prima", "la obra maestra", "«Grande Sertão: Veredas» é a obra-prima de Guimarães Rosa.", "Con guion; plural *obras-primas*. *Prima* aquí significa «primera»."],
     ["o rodapé", "el pie de página; el zócalo", "A nota de rodapé explica a palavra.", "*Roda* + *pé*: al pie. *Nota de rodapé* = nota al pie. En la pared, el zócalo."],
-    ["a tiragem", "la tirada (de ejemplares)", "O jornal tinha uma tiragem enorme nos anos 50.", "De *tirar* (imprimir, sacar copias). Femenino, como todas en *-agem*."],
+    ["a tiragem", "la tirada (de ejemplares)", "O jornal tinha uma tiragem enorme nos anos 50.", "De *tirar* (imprimir, sacar copias). Femenino, como casi todas en *-agem* (ver *o/a personagem*)."],
     ["o cordel", "la poesía popular en folletos (Nordeste)", "Na feira de São Cristóvão vendem-se cordéis.", "Folletos colgados de un *cordel* (cuerda) en las ferias: de ahí el nombre. Plural *cordéis*."],
 ],
 

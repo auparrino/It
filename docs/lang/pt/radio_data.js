@@ -550,7 +550,7 @@
     ],
     [
      "B",
-     "Venho da rodoviária. Volto de São Paulo, de ônibus: a viagem é longa, mas é barata."
+     "Venho da rodoviária: tô voltando de São Paulo, de ônibus. A viagem é longa, mas é barata."
     ],
     [
      "A",
@@ -3352,7 +3352,7 @@
     ],
     [
      "A",
-     "Tem uma trilha até um mirante lindo. Saia cedo, para que chegue lá em cima antes do pôr do sol. E leve lanterna, a não ser que você queira descer no escuro."
+     "Tem uma trilha até um mirante lindo. Saia cedo para chegar lá em cima antes do pôr do sol. E leve lanterna, a não ser que você queira descer no escuro."
     ],
     [
      "B",
@@ -3416,12 +3416,12 @@
     [
      "Por que o Caio precisa sair cedo para a trilha?",
      [
-      "Para que chegue ao mirante antes do pôr do sol",
+      "Para chegar ao mirante antes do pôr do sol",
       "Porque a trilha fecha ao meio-dia",
       "Porque faz calor à tarde",
-      "Para que pegue o ônibus de volta"
+      "Para pegar o ônibus de volta"
      ],
-     "Para que chegue ao mirante antes do pôr do sol"
+     "Para chegar ao mirante antes do pôr do sol"
     ],
     [
      "O que a Nanda diz sobre a chuva?",
@@ -3455,7 +3455,6 @@
      "antes que fique cara",
      "para que você reserve",
      "caso não tenha vaga",
-     "para que chegue",
      "a não ser que você queira",
      "embora eu não seja",
      "até que o tempo esteja seco",

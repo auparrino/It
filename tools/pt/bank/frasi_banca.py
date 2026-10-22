@@ -73,7 +73,7 @@ _ROWS = [
     # --- semana 1: saludos, ser, estar, ter
     (1, "Hola, me llamo Martín.", ["{Oi|Olá}, {eu |}me chamo Martín.", "{Oi|Olá}, meu nome é Martín.", "{Oi|Olá}, chamo-me Martín."],
      "ser_estar lexico", None,
-     "Me llamo = (eu) me chamo o meu nome é. Hola = oi (informal) u olá."),
+     "Me llamo = (eu) me chamo… o meu nome é… Hola = oi (informal) u olá."),
     (1, "Soy argentino, de Buenos Aires.", "{Eu |}sou argentino, de Buenos Aires.",
      "ser_estar", ("sou", "ser"),
      "Soy = sou. El origen va con ser de: sou de Buenos Aires."),
@@ -483,7 +483,7 @@ _ROWS += [
      "Once = onze."),
     (7, "El vuelo sale a las diez y cuarto.", "O voo sai às dez e quinze.",
      "horas", ("sai", "sair"),
-     "Voo, sin circunflejo desde 1990."),
+     "Voo, sin circunflejo desde el Acuerdo Ortográfico."),
     (7, "Mi teléfono es nueve, seis, seis, uno...", "{O |}meu telefone é nove, meia, meia, um...",
      "numeros", None,
      "Al dictar números, el seis se dice meia (de meia dúzia)."),

@@ -328,8 +328,7 @@ LESSONS = {
            "que)."]},
 
  {"h": "Presente o passato",
-  "r": "Mismo momento o después → **congiuntivo presente**. Antes → "
-       "**congiuntivo passato**. Nada más.",
+  "r": "Mismo momento o después → **congiuntivo presente**. Antes → **congiuntivo passato**. Una descripción o un hábito anterior → congiuntivo imperfetto: *credo che da giovane fosse timido*.",
   "ex": [["Credo che *venga* domani.", "Creo que viene mañana."],
          ["Credo che *sia venuto* ieri.", "Creo que vino ayer."],
          ["Spero che *stia* bene.", "Espero que esté bien."],
@@ -368,8 +367,7 @@ LESSONS = {
 ],
 "blocks": [
  {"h": "Imperfetto: la forma",
-  "r": "Raíz del infinitivo + *-assi*, *-essi*, *-issi*. El único irregular "
-       "de verdad es *essere → fossi*.",
+  "r": "Raíz del infinitivo + *-assi*, *-essi*, *-issi*. Solo *essere → fossi* cambia entero; *dare, stare* hacen *dessi, stessi*; *fare, dire, bere, tradurre* usan la raíz del imperfetto.",
   "ex": [["Volevo che tu *parlassi* con lei.", "Quería que hablaras con ella."],
          ["Pensavo che *dormisse*.", "Pensaba que dormía."],
          ["Credevo che *fosse* tardi.", "Creía que era tarde."]],

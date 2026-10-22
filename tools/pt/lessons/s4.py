@@ -553,8 +553,9 @@ LESSONS = {
 
  {"h": "Diminutivo -inho / -zinho",
   "r": "*-inho* con palabras en *-o / -a* átonas (*casa → casinha*); "
-       "*-zinho* tras vocal tónica, nasal, diptongo o consonante (*café → "
-       "cafezinho*, *pão → pãozinho*, *flor → florzinha*).",
+       "*-zinho* tras vocal tónica, nasal, diptongo o *-r / -l* (*café → "
+       "cafezinho*, *pão → pãozinho*, *flor → florzinha*, *papelzinho*); "
+       "tras *-s / -z*, *-inho* (*rapazinho*, *lapisinho*).",
   "table": {"head": ["Base", "Diminutivo", "Plural"],
             "rows": [["casa", "casinha", "casinhas"],
                      ["livro", "livrinho", "livrinhos"],
@@ -874,9 +875,9 @@ LESSONS = {
                      ["registro", "registo", "registro"],
                      ["ideia, voo", "ideia, voo", "idea, vuelo"]]},
   "ex": [["O *fato* é que ninguém sabia.", "El hecho es que nadie sabía (en PT: facto)."],
-         ["Uma *ideia* ótima.", "Una idea excelente (sin tilde desde 1990)."],
+         ["Uma *ideia* ótima.", "Una idea excelente (sin tilde desde el Acuerdo)."],
          ["Meu *voo* sai às dez.", "Mi vuelo sale a las diez (sin tilde)."]],
-  "warn": "En Portugal *fato* es «traje»; en Brasil, «hecho». Y desde 1990: "
+  "warn": "En Portugal *fato* es «traje»; en Brasil, «hecho». Y desde el Acuerdo (en Brasil, vigente desde 2009 y obligatorio desde 2016): "
           "*ideia*, *voo*, *linguiça*, sin tilde ni diéresis."},
 ]},
 
@@ -939,7 +940,8 @@ LESSONS = {
          ["*Apesar de* o projeto ser bom, falta verba.", "A pesar de que el proyecto es bueno, faltan fondos."],
          ["*Por um lado*..., *por outro*...", "Por un lado..., por el otro..."]],
   "warn": "«A pesar de que es bueno» → *apesar de ser bom* o *embora seja "
-          "bom*. «Apesar de que é bom» suena a calco."},
+          "bom*. *Apesar de que* existe, pero en el texto cuidado se "
+          "prefieren esas dos."},
 
  {"h": "Ordenar los argumentos",
   "q": [{"prompt": "Elegí el conector para sumar un argumento.", "stem": "O projeto é caro. ___, não resolve o problema.", "answer": "Além disso", "options": ["Além disso", "Demais", "Aliás de"]}],
@@ -1155,10 +1157,11 @@ LESSONS = {
   "ex": [["*Me disseram* que... → *Disseram-me* que...", "Me dijeron que..."],
          ["*Não me disseram* nada.", "No me dijeron nada (próclise, también formal)."],
          ["Vou te dizer. → *Dir-te-ei*.", "Te diré (muy formal)."],
-         ["Isso se faria. → *Far-se-ia* isso.", "Se haría eso."]],
+         ["Se faria uma festa. → *Far-se-ia* uma festa.", "Se haría una fiesta."]],
   "warn": "No empieces una oración formal con pronombre átono: «Me parece» → "
           "*Parece-me*. Y mesóclise solo si nada atrae al pronombre: *não "
-          "lhe direi*."},
+          "lhe direi*; con *isso*, *tudo* o *ninguém* delante, próclise: "
+          "*isso se faria*."},
 
  {"h": "Vocabulario: legal → interessante",
   "r": "El vocabulario coloquial tiene su par formal. En un texto "
@@ -1367,8 +1370,9 @@ LESSONS = {
 
  {"h": "Contracciones y crase",
   "q": [{"prompt": "Completá.", "stem": "Chegamos ___ Rocinha ___ duas da tarde.", "answer": "à / às", "options": ["à / às", "a / as", "à / as"]}],
-  "r": "Preposición + artículo se funden siempre: *no, na, do, pelo, num, "
-       "dele*. *a + a = à*: *vou à praia*, *às três*.",
+  "r": "Con el artículo definido se funden siempre: *no, na, do, pelo*. "
+       "Con el indefinido es optativo: *num / em um*, *duma / de uma*. "
+       "Y *de + ele = dele*. *a + a = à*: *vou à praia*, *às três*.",
   "ex": [["Moro *na* Tijuca, perto *do* Maracanã.", "Vivo en Tijuca, cerca del Maracanã."],
          ["Passei *pela* orla.", "Pasé por la costanera."],
          ["Vou *à* feira *às* oito.", "Voy a la feria a las ocho."],
@@ -1391,8 +1395,8 @@ LESSONS = {
          ["Ela *namora* o Rafa.", "Ella sale con Rafa."],
          ["*Assistimos ao* jogo no Maracanã.", "Vimos el partido en el Maracanã."],
          ["Conheci *o* João na feira.", "Conocí a João en la feria."]],
-  "warn": "Sin *a* personal: *conheci o João*. Y *namorar com* es regional; "
-          "la norma: *namorar alguém*."},
+  "warn": "Sin *a* personal: *conheci o João*. Y *namorar com* es del habla; "
+          "en la norma escrita: *namorar alguém*."},
 
  {"h": "Léxico traicionero",
   "r": "Repasá los falsos amigos y los heterogenéricos que siguen "

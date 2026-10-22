@@ -198,8 +198,10 @@ LESSONS = {
          ["Se ele *soubesse* sambar, *dançaria* no bloco.", "Si supiera sambar, bailaría en el bloco."],
          ["O que você *faria* se *ganhasse* na Mega-Sena?", "¿Qué harías si ganaras la lotería?"],
          ["Se Machado *vivesse* hoje, *escreveria* crônicas sobre as redes?", "Si Machado viviera hoy, ¿escribiría crónicas sobre las redes?"]],
-  "warn": "Nunca condicional después de *se*: «se eu poderia» es error. "
-          "El condicional va en la otra mitad, como en español."},
+  "warn": "Tras el *se* de condición («si…»), nunca condicional ni futuro del indicativo: "
+          "«se eu poderia» es error. El condicional va en la otra mitad, "
+          "como en español. (El *se* de las preguntas indirectas sí los "
+          "admite: *perguntou se eu poderia ir*.)"},
 
  {"h": "En el habla: imperfeito en la principal",
   "r": "Hablando, el imperfeito reemplaza al futuro do pretérito: *se eu "
@@ -405,7 +407,7 @@ LESSONS = {
        "pasado (*se fosse cuidadoso, não teria caído*).",
   "ex": [["Se eu *tivesse aceitado* aquele emprego, hoje *moraria* em Recife.", "Si hubiera aceptado aquel trabajo, hoy viviría en Recife."],
          ["Se ele *fosse* mais pontual, não *teria perdido* o BRT.", "Si fuera más puntual, no habría perdido el BRT."],
-         ["Se a gente *tivesse comprado* antes, *estaria* mais barato.", "Si hubiéramos comprado antes, estaría más barato."],
+         ["Se a gente *tivesse comprado* antes, *teria saído* mais barato.", "Si hubiéramos comprado antes, nos habría salido más barato."],
          ["Se a corte não *tivesse vindo* em 1808, o Rio *seria* outra cidade?", "Si la corte no hubiera venido en 1808, ¿Río sería otra ciudad?"]]},
 
  {"h": "Espero que tenham gostado",
@@ -470,7 +472,9 @@ LESSONS = {
          ["«*Vou* ao show.» → Disse que *ia* ao show.", "Dijo que iba al show."],
          ["«*Gosto* de samba.» → Contou que *gostava* de samba.", "Contó que le gustaba el samba."]],
   "tip": "Si el verbo de decir está en presente, no cambia nada: *ele diz "
-         "que vai*."},
+         "que vai*.",
+  "more": ["Si lo dicho sigue siendo verdad hoy, también vale el presente: "
+           "*disse que mora em Niterói* (todavía vive ahí)."]},
 
  {"h": "La tabla de la correlación",
   "r": "Presente → imperfeito; perfeito → *tinha* + participio; futuro → "
@@ -578,7 +582,7 @@ LESSONS = {
   "ex": [["*Aluga-se* quarto em Santa Teresa.", "Se alquila cuarto en Santa Teresa."],
          ["*Vendem-se* pranchas de surfe.", "Se venden tablas de surf."],
          ["*Consertam-se* bicicletas.", "Se arreglan bicicletas."],
-         ["Aqui *falam-se* três línguas.", "Acá se hablan tres idiomas."],
+         ["*Falam-se* três línguas nesta loja.", "En este negocio se hablan tres idiomas."],
          ["No século XVIII, *extraíram-se* toneladas de ouro de Minas.", "En el siglo XVIII se extrajeron toneladas de oro de Minas."]],
   "tip": "Es la misma lógica que «se venden casas». Lo nuevo es el orden: "
          "en el cartel, *se* va detrás y con guion."},
@@ -731,8 +735,9 @@ LESSONS = {
          ["*Fazemo-lo* todos os dias.", "Lo hacemos todos los días (-s)."],
          ["*Fi-lo* sem pensar.", "Lo hice sin pensar (-z)."],
          ["As sardinhas? Os pescadores *trazem-nas* do mar.", "¿Las sardinas? Los pescadores las traen del mar (nasal)."]],
-  "warn": "Tras *-ar* tilde aguda (*comprá-lo*); tras *-er* circunflejo "
-          "(*vendê-lo*); tras *-ir*, nada (*parti-lo*)."},
+  "warn": "Tras *-ar* tilde aguda (*comprá-lo*); tras *-er* y *-or* "
+          "circunflejo (*vendê-lo*, *pô-la*); tras *-ir*, nada (*parti-lo*), "
+          "salvo la *í* tónica en hiato: *possuí-lo, atraí-lo*."},
 
  {"h": "Mesóclise: dir-lhe-ei",
   "r": "Con futuro o condicional sin atractor, la norma culta mete el "
@@ -936,8 +941,8 @@ LESSONS = {
          ["*Sonhei com* você.", "Soñé con vos."],
          ["*Sonho em* morar em Ipanema.", "Sueño con vivir en Ipanema."],
          ["*Penso em* você.", "Pienso en vos."]],
-  "more": ["*namorar com* se oye en algunas regiones, pero la norma y el "
-           "habla del Rio dicen *namorar alguém*. *casar* también se usa "
+  "more": ["*namorar com* es muy común al hablar; en un texto formal, "
+           "*namorar alguém*. *casar* también se usa "
            "como *casar-se com*. Y *gostar de*, *precisar de*, *lembrar de* "
            "ya los viste en la semana 14."]},
 
@@ -1252,8 +1257,9 @@ LESSONS = {
                      ["você", "cê", "Cê vem?"],
                      ["espera aí", "pera aí", "Pera aí!"],
                      ["em um / em uma", "num / numa", "Tô num bar."]]},
-  "warn": "*cê* nunca va al final ni después de preposición: *é pra você*, "
-          "no «é pra cê». Y *tá?* al final es «¿sí? / ¿dale?»."},
+  "warn": "*cê* casi siempre va delante del verbo; al final o después de "
+          "preposición lo normal es *você* (*é pra você*), aunque en Minas "
+          "se oye *procê*. Y *tá?* al final es «¿sí? / ¿dale?»."},
 
  {"h": "né, então, tipo, aí",
   "r": "*né* (= ¿no?) pide acuerdo; *então* ordena; *tipo* (= como, "
@@ -1397,7 +1403,6 @@ LESSONS = {
                      ["para eles fizerem", "para eles fazerem"],
                      ["pediu que eu vá", "pediu que eu fosse"],
                      ["precisam-se de garçons", "precisa-se de garçons"],
-                     ["namoro com a Bia", "namoro a Bia"],
                      ["prefiro mais X do que Y", "prefiro X a Y"],
                      ["vou à Copacabana", "vou a Copacabana"],
                      ["todavia não chegou", "ainda não chegou"]]}},

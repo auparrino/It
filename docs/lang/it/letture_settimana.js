@@ -16,7 +16,7 @@
         "Sopra il tavolo ci sono due bicchieri, tre piatti e un vaso con i fiori.\n\n" +
         "Il frigorifero è pieno: ci sono le uova, il latte, due formaggi e tante verdure. " +
         "Anna ha anche la pasta, il riso, lo zucchero e il caffè. Il caffè è importante: " +
-        "in Italia la mattina è sacro!\n\n" +
+        "in Italia, la mattina, è sacro!\n\n" +
         "Sopra il divano ci sono le foto di famiglia: i nonni, gli zii e i cugini. " +
         "In una foto c'è anche il cane, Otto. Otto è vecchio, ma è ancora il re di casa.",
       gloss: { bicchieri: "vasos", piatti: "platos", vaso: "florero", fiori: "flores", frigorifero: "heladera",

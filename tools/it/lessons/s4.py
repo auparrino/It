@@ -447,8 +447,7 @@ LESSONS = {
        "Con *stavo* va al pasado: la acción interrumpida.",
   "ex": [["*Stavo dormendo* quando hai chiamato.", "Estaba durmiendo cuando llamaste."],
          ["*Stavamo uscendo* quando è arrivato Luca.", "Estábamos saliendo cuando llegó Luca."]],
-  "warn": "Se usa mucho menos que el «estar + -ndo» castellano. «Estoy "
-          "estudiando italiano este año» es *studio italiano quest'anno*.",
+  "warn": "Mucho menos que «estar + -ndo». No va en compuestos («estuve trabajando» → *ho lavorato*) ni con verbos de estado (*ho una macchina nuova*).",
   "qq": [{"prompt": "Completá (dormire)", "stem": "Quando mi hai chiamato, ___.", "answer": "stavo dormendo", "options": ["stavo dormendo", "sto dormendo", "stavo dormito"]}]},
 
  {"h": "El participio pasado absoluto",
@@ -593,7 +592,7 @@ LESSONS = {
 
  {"h": "stare a, finire con l', infischiarsene, prendersela comoda",
   "r": "Cuatro construcciones de conversación que no se deducen: *stare a* "
-       "+ infinitivo, *finire con l'* + infinitivo, *infischiarsene di* y "
+       "+ persona (+ infinitivo), *finire con l'* + infinitivo, *infischiarsene di* y "
        "*prendersela comoda*.",
   "ex": [["*Sta a te* decidere.", "Te toca a vos decidir."],
          ["*Non sta a me* giudicare.", "No me corresponde a mí juzgar."],
@@ -601,14 +600,12 @@ LESSONS = {
          ["*Me ne infischio* delle critiche.", "Me importan un bledo las críticas."],
          ["*Se l'è presa comoda*, come sempre.", "Se lo tomó con calma, como siempre."]],
   "table": {"head": ["Construcción", "Sentido", "Ejemplo"],
-            "rows": [["stare a + infinito", "corresponder, tocar", "Sta a te scegliere."],
+            "rows": [["stare a + persona (+ infinito)", "corresponderle, tocarle a alguien", "Sta a te scegliere."],
                      ["finire con l' + infinito", "terminar + gerundio (= finire per)", "Finirai con l'ammetterlo."],
                      ["infischiarsene di", "importarle un bledo", "Se ne infischia del regolamento."],
                      ["prendersela comoda", "tomárselo con calma", "Se la prende comoda."],
                      ["prendersela con", "agarrársela con", "Se la prende con tutti."]]},
-  "warn": "*Prendersela comoda* no es *prendersela* («ofenderse»): el "
-          "adjetivo *comoda* cambia el sentido. *Infischiarsene* es "
-          "coloquial; en registro más neutro, *non curarsi di*."},
+  "warn": "*Prendersela comoda* no es *prendersela* («ofenderse»). *Infischiarsene* es coloquial; más neutro, *non curarsi di*. *Sta a te* (te toca) no es *stare lì a* + infinitivo (quedarse haciendo algo)."},
 ]},
 
 46: {
@@ -762,7 +759,7 @@ LESSONS = {
          ["*Un quarto* d'ora.", "Un cuarto de hora."],
          ["*Due terzi* degli studenti sono d'accordo.", "Dos tercios de los estudiantes están de acuerdo."],
          ["Costa *il doppio*.", "Cuesta el doble."]],
-  "warn": "*Metà* es sustantivo; *mezzo* es adjetivo y concuerda: *mezzo litro*, *un'ora e mezza*, *due chili e mezzo*."},
+  "warn": "*Metà* es sustantivo; *mezzo* es adjetivo y delante concuerda siempre: *mezza bottiglia*. Después de *e* lo común es concordar (*un'ora e mezza*), pero *un'ora e mezzo* también vale."},
 
  {"h": "Porcentajes",
   "r": "Llevan **artículo masculino**: *il 20%*, *l'8%*. El verbo va en "
@@ -806,7 +803,7 @@ LESSONS = {
             "rows": [["1 a 10", "primo, secondo, terzo, quarto, quinto, sesto, settimo, ottavo, nono, decimo", "concuerdan: la terza volta"],
                      ["11, 12, 16", "undicesimo, dodicesimo, sedicesimo", "se cae la -i final"],
                      ["20, 30", "ventesimo, trentesimo", "se cae la vocal final"],
-                     ["21, 23", "ventunesimo, ventitreesimo", "-uno y -tre se conservan"],
+                     ["21, 23, 26", "ventunesimo, ventitreesimo, ventiseiesimo", "-uno pierde la -o; -tre y -sei conservan la vocal"],
                      ["100, 1000", "centesimo, millesimo", "se cae la vocal final"]]},
   "warn": "En las fechas solo el día uno es ordinal: *il primo maggio*, pero *il due maggio*."},
 
@@ -943,12 +940,11 @@ LESSONS = {
                      ["a me mi piace", "a me piace / mi piace", "Mi piace."],
                      ["ci ho fame", "ho fame", "Ho fame."],
                      ["che polivalente: la casa che ci abito", "in cui abito", "La casa in cui abito."],
-                     ["mo', tipo, cioè", "adesso, come, ossia", "Adesso."]]},
+                     ["mo', tipo / cioè (como muletilla)", "adesso, per esempio, — (sacarlo)", "Adesso."]]},
   "ex": [["A Maria *le* ho detto di venire.", "A María le dije que viniera. En la charla se oye «gli ho detto» también para ella."],
          ["*A me piace* il mare.", "A mí me gusta el mar. En la charla: «a me mi piace»."],
          ["Penso che *sia* vero.", "Creo que es cierto. En la charla: «penso che è vero»."]],
-  "warn": "En el examen y en un mail formal estos usos restan puntos. En la charla, "
-          "corregirlos al otro suena pedante.",
+  "warn": "En el examen y en un mail formal estos usos restan puntos; en la charla, corregirlos suena pedante. *Cioè* = «es decir» vale siempre; lo coloquial es usarlo de muletilla.",
   "tip": "*Lui*, *lei* y *loro* como sujeto ya son estándar: *egli* y *ella* solo "
          "aparecen en textos viejos o muy formales."},
 ]},

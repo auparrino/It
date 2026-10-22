@@ -1970,7 +1970,7 @@
         hint: "Revisá el género de " + it(noun) + ".",
         explain: it(noun) + " es " + gen + " en portugués: " + it(e + " " + noun) + "." +
           (HETERO_ES[noun] || HETERO_ES[noun.replace(/s$/, "")] ? " En español es " + (HETERO_ES[noun] || HETERO_ES[noun.replace(/s$/, "")]) + ": son de los que cambian de género (o leite, a árvore, a viagem, o nariz)." :
-           /agem$|agens$/.test(noun) ? " Las palabras en *-agem* son femeninas: a viagem, a mensagem, a garagem." : "") +
+           /agem$|agens$/.test(noun) ? " Las palabras en *-agem* son casi siempre femeninas: a viagem, a mensagem, a garagem." : "") +
           (info && info.note ? " " + info.note : "") };
     } else if (ag[1] !== ae[1]) {
       r = { cat: "concordancia", slip: false,

@@ -960,11 +960,11 @@
   "d18-011": {
    "consigna": "Completá con el futuro simple del verbo entre paréntesis.",
    "type": "cloze",
-   "stem": "Mi ___ (tu, fare) un favore?",
+   "stem": "Quando mi ___ (tu, fare) sapere qualcosa?",
    "answer": "farai",
    "alt": [],
    "drop": false,
-   "note": "*fare* en futuro: *farai*; el futuro sirve para pedir favores."
+   "note": "*fare* en futuro: *farai*; el futuro, para algo que va a pasar más adelante."
   },
   "d18-012": {
    "consigna": "Completá con el futuro simple del verbo entre paréntesis.",
@@ -2064,9 +2064,9 @@
    "consigna": "Completá con la forma correcta del verbo entre paréntesis: congiuntivo cuando haga falta; si no hay «che», probablemente va el infinitivo.",
    "type": "cloze",
    "stem": "Dimmi che ___ (essere) vero.",
-   "answer": "sia",
+   "answer": "è",
    "alt": [
-    "è"
+    "sia"
    ],
    "drop": false,
    "note": "Con «dimmi che» se usa sobre todo el indicativo (è); el congiuntivo (sia) expresa deseo."
@@ -2819,7 +2819,7 @@
    "answer": "avessi scritto",
    "alt": [],
    "drop": false,
-   "note": "*insisteva che* + congiuntivo trapassato: *avessi scritto*."
+   "note": "*sosteneva che* + congiuntivo trapassato: *avessi scritto* (hecho anterior a un pasado)."
   },
   "d22-021": {
    "consigna": "Completá con el congiuntivo passato o trapassato según la concordancia de tiempos (o con el infinitivo pasado si no hay «che»). El auxiliar está indicado.",

@@ -87,7 +87,7 @@
                 es: "Varias no coinciden con el español: «pensar en» es *pensar em*, «soñar con» es *sonhar com*, «casarse con» es *casar com*, y *namorar* va sin preposición.",
                 ej: "Penso em você e sonho com o Rio." },
     genero: { regla: "El género se aprende con la palabra: con su artículo (*o leite, a viagem*).",
-              es: "Muchas palabras cambian de género respecto del español: *o leite, o sangue, a árvore, a viagem, a ponte*; las terminadas en *-agem* son femeninas.",
+              es: "Muchas palabras cambian de género respecto del español: *o leite, o sangue, a árvore, a viagem, a ponte*; las terminadas en *-agem* son casi siempre femeninas.",
               ej: "a mensagem, o nariz, a dor" },
     concordancia: { regla: "Artículos, adjetivos y participios toman el género y el número del sustantivo.",
                     es: "Igual que en español; el cuidado está en los sustantivos que cambian de género (a viagem longa, o leite frio).",

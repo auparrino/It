@@ -72,8 +72,8 @@ def fx(part, stem, bad, good, answer, cat, note, goodAlt=None, alt=None):
     return d
 
 
-def gd(part, lead, stem, answer, trap, note, prompt=GP):
-    return _add(part, "garden", prompt, stem, answer, note, lead=lead, trap=trap)
+def gd(part, lead, stem, answer, trap, note, prompt=GP, alt=None):
+    return _add(part, "garden", prompt, stem, answer, note, alt=alt, lead=lead, trap=trap)
 
 
 def sc(part, data, stem, options, answer, note):
@@ -116,7 +116,7 @@ ch(1, "Assim que o síndico ___ a chave, a gente entra.", ["trouxer", "trazer", 
 ch(2, "Se Deus ___, a mudança termina sábado.", ["quiser", "queira", "quer"], "quiser",
    "Fórmula fija: se Deus quiser. querer → quiseram → quiser.")
 ch(2, "Se ___ amanhã, a gente não vai à praia.", ["chover", "chova", "choverá"], "chover",
-   "Condición futura con «se»: futuro do subjuntivo. Nunca futuro de indicativo ni subjuntivo presente tras «se».")
+   "Condición futura con «se»: futuro do subjuntivo. Nunca futuro de indicativo ni subjuntivo presente tras el «se» de condición.")
 ch(2, "Se você quiser, a gente ___ de metrô até Ipanema.", ["vai", "for", "iria"], "vai",
    "En la otra mitad va presente, «vou + infinitivo», futuro o imperativo: a gente vai. «For» sería otra condición.")
 
@@ -256,7 +256,7 @@ cb(2, "Talvez você queira. A gente vai ao Pão de Açúcar amanhã. (se)", "Se 
 wk(28, "B2", "imperfeito do subjuntivo")
 
 ch(0, "Se eu ___ carioca, iria à praia todo dia.", ["fosse", "for", "seria"], "fosse",
-   "Hipótesis del presente: se + imperfeito do subjuntivo. «For» es para condiciones futuras reales; «seria» nunca va tras «se».")
+   "Hipótesis del presente: se + imperfeito do subjuntivo. «For» es para condiciones futuras reales; tras el «se» de condición nunca va «seria».")
 ch(0, "Se nós ___ mais tempo, ficaríamos em Paraty.", ["tivéssemos", "tivemos", "tivermos"], "tivéssemos",
    "ter → tiveram → tivesse; nós: tivéssemos, con tilde. «Tivermos» es futuro do subjuntivo (condición real).")
 ch(0, "Se você ___ o que eu sei…", ["soubesse", "sabesse", "souber"], "soubesse",
@@ -1007,7 +1007,7 @@ ch(0, "Já ___ a história de Canudos?", ["lhe contei", "contei-lhe", "contei-le
    "Adverbios como já, sempre, aqui atraen el pronombre: já lhe contei. Canudos es la guerra que narró Euclides da Cunha en «Os Sertões».", prompt=_FO)
 ch(1, "Preciso ___ antes de viajar.", ["vendê-lo", "vender-lo", "vendê-o"], "vendê-lo",
    "Tras -r, el pronombre o se vuelve lo y la r cae; en -er, circunflejo: vendê-lo.")
-ch(1, "Os pescadores de Copacabana ___ do mar ainda de madrugada.", ["trazem-nos", "trazem-los", "trazem-os"], "trazem-nos",
+ch(1, "Os peixes? Os pescadores de Copacabana ___ do mar ainda de madrugada.", ["trazem-nos", "trazem-los", "trazem-os"], "trazem-nos",
    "Tras terminación nasal (-m), os se vuelve nos: trazem-nos.")
 ch(1, "___ toda a verdade amanhã.", ["Dir-lhe-ei", "Direi-lhe", "Lhe direi"], "Dir-lhe-ei",
    "Futuro sin atractor en la norma culta: mesóclise, dir-lhe-ei. «Direi-lhe» no se admite.", prompt=_FO)
@@ -1146,7 +1146,7 @@ wk(34, "B2", "conectores")
 
 _CC = "Elegí el conector correcto."
 ch(0, "O Rio é lindo, ___ a violência preocupa.", ["mas", "mais", "más"], "mas",
-   "«Pero» es *mas*, sin *i*; *mais* es «más». Y *más* no existe en portugués (*má* es «mala»).", prompt=_CC)
+   "«Pero» es *mas*, sin *i*; *mais* es «más». Y *más* es «malas» (plural de *má*): *más notícias*.", prompt=_CC)
 ch(0, "En portugués, «todavia» significa…", ["sin embargo", "todavía", "mientras tanto"], "sin embargo",
    "Falso amigo: todavia = sin embargo, como porém y contudo. «Todavía» se dice ainda.",
    prompt="Elegí el significado.")
@@ -1250,7 +1250,7 @@ gd(2, _L34, "incluso → ___", "inclusive", "incluso",
    "«incluso» en portugués es el participio de incluir (incluido). El «incluso» español es inclusive o até.", prompt=_GP34)
 gd(0, _L34, "mientras tanto → ___", "enquanto isso", "entretanto",
    "En Brasil, «entretanto» se usa como «sin embargo». «Mientras tanto» es enquanto isso o nesse meio-tempo.",
-   prompt=_GP34)
+   prompt=_GP34, alt=["nesse meio-tempo", "nesse meio tempo", "enquanto isto"])
 
 sc(0, ["Queria ir, mas choveu.", "Queria ir; choveu, porém.", "Queria ir; a chuva, contudo, não deixou.",
        "Queria ir; no entanto, choveu.", "O plano, porém, falhou.", "O prazo, contudo, é curto."],
@@ -1302,7 +1302,8 @@ ch(0, "Os motoristas devem obedecer ___ sinais de trânsito.", ["aos", "os", "no
 ch(0, "Prefiro samba ___ funk.", ["a", "do que", "que"], "a",
    "preferir X a Y: prefiro samba a funk. «Do que» es calco de «más que».")
 ch(0, "A Bia namora ___ Rafa há dois anos.", ["o", "com o", "ao"], "o",
-   "namorar alguém, sin preposición: namora o Rafa (o = artículo).")
+   "namorar alguém, sin preposición en la norma: namora o Rafa (o = artículo). Al hablar, «namorar com» es muy común.",
+   prompt="Elegí la forma de la norma culta.")
 ch(0, "Ela casou ___ um mineiro.", ["com", "a", "de"], "com",
    "casar com (o casar-se com), como en español.")
 ch(0, "Sonho ___ uma casa em Ipanema.", ["com", "em", "de"], "com",
@@ -1378,7 +1379,7 @@ trv(2, "La persona de la que te hablé es carioca.",
 
 fx(0, "A Bia namora com o Rafa desde o carnaval.", "namora com", "namora",
    "A Bia namora o Rafa desde o carnaval.", "regencia",
-   "namorar es transitivo directo: namorar alguém. «Namorar com» es regional y la norma lo rechaza.")
+   "En la norma escrita, namorar alguém (transitivo directo); al hablar, «namorar com» es muy común.")
 fx(0, "Prefiro mais praia do que montanha.", "mais praia do que", "praia a",
    "Prefiro praia a montanha.", "regencia",
    "preferir ya compara: preferir X a Y, sin «mais» ni «do que».")
@@ -1498,7 +1499,7 @@ cl(2, "Moramos ___ beira-mar.", "à",
 
 trv(0, "Voy a la feria.",
     "*Ir a* + *a feira* se contrae en *à feira*: la *crase* une preposición y artículo. En el habla, *vou pra feira*.",
-    ["Vou à feira", "Eu vou à feira"])
+    ["Vou à feira", "Eu vou à feira", "Vou para a feira", "Vou pra feira", "Eu vou para a feira", "Eu vou pra feira"])
 trv(0, "El museo abre de diez a cinco.",
     "de ... a con horas: das dez às cinco.",
     "O museu ", ["abre", "funciona", "fica aberto"], " das dez às cinco")
@@ -1750,7 +1751,7 @@ ch(1, "«Había mucha gente en el bloco.»", ["Tinha muita gente no bloco.", "Ti
 ch(1, "«Hay muchas personas acá.»", ["Tem muitas pessoas aqui.", "Têm muitas pessoas aqui.", "Estão muitas pessoas aqui."],
    "Tem muitas pessoas aqui.",
    "«tem» existencial no concuerda: tem muitas pessoas (como «hay»).", prompt=_HB)
-ch(2, "Você sabe que eu ___ amo.", ["te", "lhe", "ti"], "te",
+ch(2, "Você sabe que eu ___ amo.", ["te", "le", "ti"], "te",
    "En el habla de Brasil se mezcla você con te: eu te amo. En la norma, você → o / a.", prompt=_HB)
 ch(2, "¿Cuál va en un mail formal?", ["Estou a caminho.", "Tô chegando, pera aí.", "Tô indo, beleza?"], "Estou a caminho.",
    "Las reducciones (tô, pera aí) y los marcadores (beleza) son del habla y los chats; en un mail formal, forma plena.",
@@ -1908,7 +1909,7 @@ trv(1, "Todavía no leí Os Lusíadas.",
     ["Ainda não li", "Eu ainda não li"], " Os Lusíadas")
 fx(1, "A Bia namora com um português de Coimbra.", "namora com", "namora",
    "A Bia namora um português de Coimbra.", "regencia",
-   "namorar alguém, sin «com».")
+   "En la norma escrita, namorar alguém, sin «com» (al hablar, «namorar com» es muy común).")
 fx(1, "Vou à Ipanema depois do trabalho.", "à Ipanema", "a Ipanema",
    "Vou a Ipanema depois do trabalho.", "crase",
    "Volto de Ipanema (sin artículo) → vou a Ipanema, sin crase.")
