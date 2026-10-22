@@ -592,7 +592,7 @@
     if (weakO.length) {
       more += '<button class="card weekcard clin" data-bank="clinica">' +
         '<span class="muted">🩺 Clínica de tus errores</span>' +
-        "<b>Practicá " + weakO.map(function (w) { return esc((Diagnosi.LABEL[w.cat] || w.cat).toLowerCase()); }).join(" y ") + "</b>" +
+        "<b>Practicá " + weakO.map(function (w) { return esc(catLabel(w.cat).toLowerCase()); }).join(" y ") + "</b>" +
         '<span class="muted">12 ejercicios armados con lo que más te cuesta.</span></button>';
     }
 
@@ -670,7 +670,7 @@
       var errs = state.errs || {}, cats = Object.keys(errs).sort(function (a, b) { return errs[b].n - errs[a].n; }).slice(0, 3);
       out.push({ id: "reflect", html: '<div class="card weekcard reflect"><span class="muted">📓 Cierre de la semana pasada · tres toques</span>' +
         '<span class="muted small">¿Qué te costó más?</span><span class="chips">' +
-          cats.map(function (c) { return '<button class="tab" data-rf="hard" data-v="' + esc(c) + '">' + esc(Diagnosi.LABEL[c] || c) + "</button>"; }).join("") +
+          cats.map(function (c) { return '<button class="tab" data-rf="hard" data-v="' + esc(c) + '">' + esc(catLabel(c)) + "</button>"; }).join("") +
           '<button class="tab" data-rf="hard" data-v="nada">nada en especial</button></span>' +
         '<span class="muted small">¿Qué cambiás esta semana? Tu plan del día lo tiene en cuenta.</span><span class="chips">' +
           CHANGES.map(function (c) { return '<button class="tab" data-rf="change" data-v="' + c[0] + '">' + c[1] + "</button>"; }).join("") + "</span>" +
@@ -900,7 +900,7 @@
     if (Banca.loaded()) {
       var weak = Banca.weakest(state, 2);
       if (weak.length) wk.push('<button class="ep" data-bank="clinica"><span class="e">🩺</span><span><b>Clínica de tus errores</b>' +
-        '<span class="muted">' + weak.map(function (w) { return esc(Diagnosi.LABEL[w.cat] || w.cat); }).join(", ") + "</span></span></button>");
+        '<span class="muted">' + weak.map(function (w) { return esc(catLabel(w.cat)); }).join(", ") + "</span></span></button>");
     }
     if (window.Trabajo) wk = wk.concat(Trabajo.weekButtons(state, week));   // la escena de trabajo de la semana (trabajo.js)
     if (window.Variaciones && Variaciones.eligible(state, week).length)
@@ -955,7 +955,7 @@
         '<div class="labs">' +
           (weak2.length ? '<button class="lab clin" data-bank="clinica"><span class="e">🩺</span><b>Clínica de tus errores</b>' +
             '<span class="muted">Práctica armada con lo que más te cuesta: ' +
-            weak2.map(function (w) { return esc(Diagnosi.LABEL[w.cat] || w.cat); }).join(", ") + ".</span></button>" : "") +
+            weak2.map(function (w) { return esc(catLabel(w.cat)); }).join(", ") + ".</span></button>" : "") +
           '<button class="lab" data-bank="b-voc"><span class="e">📚</span><b>' + UI.words + "</b>" +
             '<span class="muted">Vocabulario de tu nivel: primero reconocer, después escribir con el artículo.</span></button>' +
           bankBtn("b-tr", "✍️", UI.tr, "Oraciones del español al " + UI.langEs + ", con corrección que te explica el error.", Banca.TR_WEEK) +
@@ -1967,7 +1967,7 @@
       if (w.week > Banca.FORME_WEEK) {
         var wk2 = Banca.weakest(state, 2), ip2 = ident("b-ident");
         m({ kind: "b-ident", arg: "w:" + w.week, done: ip2 >= 70, half: ip2 != null && ip2 < 70, opt: true, ico: "🎯", title: "Lo que más te cuesta",
-            sub: identSub("b-ident", (wk2.length ? "Tus puntos flojos: " + wk2.map(function (x) { return ((Diagnosi.LABEL || {})[x.cat] || x.cat).toLowerCase(); }).join(", ")
+            sub: identSub("b-ident", (wk2.length ? "Tus puntos flojos: " + wk2.map(function (x) { return catLabel(x.cat).toLowerCase(); }).join(", ")
                                                   : "Preposiciones, contracciones y artículos") + ". Preposiciones, pronombres, conectores, el verbo justo, falsos amigos y cuál está bien.") });
       }
       if (w.week >= Banca.ERR_WEEK) {
@@ -2139,7 +2139,7 @@
     var errs = [];
     var weak = Banca.loaded() ? Banca.weakest(state, 2) : [];
     if (weak.length) errs.push(btn('data-bank="clinica"', "🩺", "Clínica de tus errores",
-      "Práctica con lo que más te cuesta: " + weak.map(function (x) { return esc(((Diagnosi.LABEL || {})[x.cat] || x.cat).toLowerCase()); }).join(", ") + "."));
+      "Práctica con lo que más te cuesta: " + weak.map(function (x) { return esc(catLabel(x.cat).toLowerCase()); }).join(", ") + "."));
     if (Banca.loaded() && U >= Banca.ERR_WEEK) errs.push(btn('data-bank="b-err"', "🔍", esc(UI.err), "Encontrá y corregí el error típico de un hispanohablante."));
     if (errs.length) groups.push(["Tus errores", errs]);
     var words = [];
@@ -2714,6 +2714,9 @@
   // Category groups come from the diagnosis of the language (its ids):
   // Diagnosi.GROUPS, or the package's LANG.diagGroups.
   var GROUPS = (window.Diagnosi && Diagnosi.GROUPS) || LG.diagGroups || {};
+  // The name of an error category; German has no diagnosis (diagnosi.js),
+  // and its «encontrá el error» items bring their own category.
+  function catLabel(c) { return ((window.Diagnosi && Diagnosi.LABEL) || {})[c] || c; }
   var GENERIC = GROUPS.generic || {};
   var LEXICAL = GROUPS.lexical || {};
   var SLIPS = GROUPS.slips || {};
@@ -3048,7 +3051,7 @@
       body +
       (!brief && d.all && d.all.length > 1 ? (function () {
         var seen = {}, rest = d.all.slice(1).filter(function (c) { if (seen[c] || c === d.cat) return false; seen[c] = 1; return true; });
-        return rest.length ? '<div class="muted">También: ' + rest.map(function (c) { return esc(Diagnosi.LABEL[c] || c); }).join(", ") + "</div>" : "";
+        return rest.length ? '<div class="muted">También: ' + rest.map(function (c) { return esc(catLabel(c)); }).join(", ") + "</div>" : "";
       })() : "") +
       "</div>";
   }
@@ -4615,7 +4618,7 @@
       '<p class="muted">Se registran solos cuando te equivocás. Los que corregís vos mismo cuentan como avance.</p>' +
       '<div class="errbars">' + cats.slice(0, 8).map(function (c) {
         var e = errs[c];
-        return '<div class="eb"><span>' + esc(Diagnosi.LABEL[c] || c) + "</span>" +
+        return '<div class="eb"><span>' + esc(catLabel(c)) + "</span>" +
           '<i style="width:' + Math.round(e.n / max * 100) + '%"></i>' +
           "<b>" + e.n + (e.fixed ? ' <small>· ' + e.fixed + (e.fixed === 1 ? " corregido" : " corregidos") + "</small>" : "") + "</b></div>";
       }).join("") + "</div>" +
@@ -7094,7 +7097,7 @@
       if (ok) start = i;
     }
     var misses = 0, found = false;
-    var label = (window.Diagnosi && Diagnosi.LABEL[it.cat]) || it.cat;
+    var label = catLabel(it.cat);
     function markBad(cls) {
       for (var k = start; k < start + badT.length; k++) {
         var el = document.querySelector('[data-ft="' + k + '"]');
