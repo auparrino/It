@@ -515,7 +515,7 @@ tf(49, 8, "I lavoratori partecipano poco: è un problema. → La scarsa ___ dei 
 # 50 · lessico di registro: il verbo generico → il verbo preciso
 # --------------------------------------------------------------------------
 _P50 = "Cambiá el verbo genérico por el preciso del registro formal: escribí solo lo que falta."
-tf(50, 1, "Ho fatto un errore nel modulo. → Ho ___ un errore nel modulo.", "commesso",
+tf(50, 1, "Ho fatto un errore nel modulo. → Ho ___ un errore nel modulo. (commettere = cometer; se conjuga como mettere)", "commesso",
    "*Commettere un errore* es la colocación formal; *fare un errore* es la corriente.", prompt=_P50)
 tf(50, 2, "Ha detto la sua opinione con chiarezza. → Ha ___ la sua opinione con chiarezza.", "espresso",
    "*Esprimere un'opinione* (participio *espresso*).", alt=["manifestato"], prompt=_P50)
@@ -582,7 +582,7 @@ rs(46, 2, "Il capo si è arrabbiato di brutto. → (verbale della riunione) Il d
    alt=["malcontento", "fastidio"])
 rs(47, 1, "Hanno mandato a casa venti persone. → (comunicato) L'azienda ha ___ venti dipendenti.", "licenziato",
    "*Mandare a casa* es el eufemismo coloquial; el término preciso es *licenziare*.")
-rs(47, 2, "Ne parliamo dopo. → (verbale) La questione sarà affrontata in un secondo ___.", "momento",
+rs(47, 2, "Ne parliamo dopo. → (verbale) La questione sarà affrontata in un secondo ___ (= más adelante).", "momento",
    "Fórmula de acta: *in un secondo momento* («más adelante, en otra ocasión»).", alt=["tempo"])
 rs(48, 1, "Scusa se ti rispondo tardi. → (email formale) Mi ___ per il ritardo con cui rispondo.", "scuso",
    "Con el *Lei* no se dice «scusa»: *mi scuso per il ritardo*.")

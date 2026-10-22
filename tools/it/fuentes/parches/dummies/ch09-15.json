@@ -1118,7 +1118,7 @@
   "d11-033": {
    "consigna": "Respondé en italiano con una oración completa: reusá las palabras de la pregunta y agregá el dato que está entre paréntesis.",
    "type": "qa",
-   "stem": "Che cosa fanno gli studenti? (hacen la tarea)",
+   "stem": "Che cosa fanno gli studenti? (hacen la tarea: i compiti)",
    "answer": "Gli studenti fanno i compiti.",
    "alt": [
     "Fanno i compiti."
@@ -1490,7 +1490,7 @@
   "d12-032": {
    "consigna": "Traducí al italiano la expresión (todas llevan una preposición: su, in, per, di, con…).",
    "type": "translate",
-   "stem": "por las buenas o por las malas",
+   "stem": "por las buenas o por las malas (literal: «por amor o por fuerza»)",
    "answer": "per amore o per forza",
    "alt": [
     "con le buone o con le cattive"
@@ -1510,7 +1510,7 @@
   "d12-034": {
    "consigna": "Traducí al italiano la expresión (todas llevan una preposición: su, in, per, di, con…).",
    "type": "translate",
-   "stem": "en ciernes (ej.: un poeta en ciernes)",
+   "stem": "en ciernes (ej.: un poeta en ciernes; literal: «en hierba», erba)",
    "answer": "in erba",
    "alt": [],
    "drop": false,
@@ -1572,7 +1572,7 @@
   "d12-040": {
    "consigna": "Traducí al italiano la expresión (todas llevan una preposición: su, in, per, di, con…).",
    "type": "translate",
-   "stem": "en serio",
+   "stem": "en serio (en italiano, con «su»)",
    "answer": "sul serio",
    "alt": [],
    "drop": false,

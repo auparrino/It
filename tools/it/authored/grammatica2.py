@@ -1687,7 +1687,7 @@ ITEMS += [
          stem="Mi dai un vaso d'acqua?", bad="vaso", good="bicchiere",
          answer="Mi dai un bicchiere d'acqua?",
          note="Vaso en italiano = florero o maceta. Para beber: bicchiere."),
-    dict(id="g2-va-25", type="fixerr", topic="valico", level="A1", w=6, prompt=_VA, cat="falso_amico",
+    dict(id="g2-va-25", type="fixerr", topic="valico", level="A1", w=6, prompt=_VA + " Pista: «tocar» un instrumento es «suonare».", cat="falso_amico",
          stem="Luca tocca la chitarra molto bene.", bad="tocca", good="suona",
          answer="Luca suona la chitarra molto bene.",
          note="Los instrumentos se «suonano»: suonare la chitarra. Toccare es tocar con la mano."),

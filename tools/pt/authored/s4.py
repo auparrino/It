@@ -663,7 +663,7 @@ tr(W, 0, "Quedo a la espera de su respuesta. Atentamente,",
     "Fico aguardando sua resposta. Atenciosamente", "Fico à espera de sua resposta. Atenciosamente",
     "Aguardo a sua resposta. Atenciosamente"],
    "Dos fórmulas fijas del mail formal: fico no aguardo y Atenciosamente.")
-tr(W, 1, "Adjunto el certificado médico.", "Segue em anexo o atestado médico.",
+tr(W, 1, "Adjunto el certificado médico. (certificado médico = atestado)", "Segue em anexo o atestado médico.",
    ["Segue anexo o atestado médico", "Envio em anexo o atestado médico",
     "Segue o atestado médico em anexo", "Encaminho em anexo o atestado médico"],
    "«Adjunto» se dice con segue em anexo; el certificado médico es o atestado.")
@@ -1188,7 +1188,7 @@ tr(W, 1, "En Río decimos aipim; en Recife, macaxeira.", "No Rio a gente diz aip
     "No Rio a gente fala aipim; em Recife, macaxeira", "No Rio falamos aipim; em Recife, macaxeira",
     "No Rio a gente diz aipim e em Recife macaxeira"],
    "Rio: aipim; Nordeste: macaxeira. em + o Rio = no Rio; Recife va sin artículo.")
-tr(W, 1, "El chiado carioca se parece al de Lisboa.", "O chiado carioca se parece com o de Lisboa.",
+tr(W, 1, "El chiado carioca se parece al de Lisboa. (parecerse a = parecer-se com)", "O chiado carioca se parece com o de Lisboa.",
    ["O chiado carioca parece-se com o de Lisboa", "O chiado carioca é parecido com o de Lisboa",
     ],
    "«Parecerse a» es *parecer-se com*: la preposición es *com*, no *a*. *O chiado carioca se parece com o de Lisboa*.")
@@ -1534,7 +1534,7 @@ fx(W, 1, "Segundo dele, o prazo acabou.", "Segundo dele", "Segundo ele", "pronom
    "segundo va con pronombre sujeto: segundo ele.")
 
 gd(W, 0, [["afirmar", "a afirmação"], ["declarar", "a declaração"], ["informar", "a informação"]],
-   "defender → ___", "a defesa", "a defensão",
+   "defender → ___ (la defensa)", "a defesa", "a defensão",
    "defender no sigue el patrón -ção: a defesa (la defensa).")
 gd(W, 0, [["argumentar", "o argumento"], ["pensar", "o pensamento"], ["tratar", "o tratamento"]],
    "resumir → ___", "o resumo", "o resumimento",
@@ -1640,8 +1640,13 @@ cl(W, 1, "Tá tudo certo? → ___ tudo certo?", "Está",
    "En el habla, *está* se reduce a *tá*: *tá tudo certo?* En la escritura neutra, *está*.")
 cl(W, 1, "Me parece que... → ___-me que... (formal)", "Parece",
    "Al inicio, ênclise: parece-me.")
-cl(W, 1, "Se faria uma reunião na sexta, mas choveu. → ___ uma reunião na sexta, mas choveu.", "Far-se-ia",
-   "Verbo al inicio y en condicional: mesóclise, far-se-ia. Con isso, tudo o ninguém delante, próclise: isso se faria.")
+ch(W, 1, "«Far-se-ia uma reunião na sexta, mas choveu.»",
+   ["Ia ter uma reunião na sexta, mas choveu.", "Teve uma reunião na sexta, mas choveu.",
+    "Vai ter uma reunião na sexta, mas choveu."],
+   "Ia ter uma reunião na sexta, mas choveu.",
+   "Far-se-ia = faria + se (mesóclise, condicional): «se iba a hacer». Se reconoce en lo escrito; en la charla, "
+   "el condicional pasa a ia + infinitivo y el se impersonal a ter: ia ter uma reunião.",
+   prompt="Elegí la versión coloquial.")
 cl(W, 2, "Curti a palestra. → ___ (gostar, perfeito) da palestra.", "Gostei",
    "curtir (coloquial) = gostar de; ojo con la preposición: gostei da palestra.")
 cl(W, 2, "Não saquei nada. → Não ___ (entender, perfeito) nada.", "entendi",

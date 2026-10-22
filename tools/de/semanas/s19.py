@@ -108,7 +108,7 @@ WEEK = {
                     ["Ich spreche mit *meinem neuen* Chef.", "Hablo con mi jefe nuevo."],
                     ["Wir arbeiten in *einem modernen* Büro.", "Trabajamos en una oficina moderna."],
                 ],
-                "warn": "*bei, mit, in* (dónde) piden dativo: «bei eine große Firma» está mal; es *bei **einer großen** Firma*. Y en dativo plural el sustantivo suma *-n* (si no termina ya en *-n* o *-s*): *mit meinen neuen Freunde**n***, *mit den Kinder**n***.",
+                "warn": "*bei, mit, in* (dónde) piden dativo: «bei eine große Firma» está mal; es *bei **einer großen** Firma*. Y en dativo plural el sustantivo suma *-n* (si no termina ya en *-n* o *-s*): *mit meinen neuen Freunde**n***, *mit den Kinder**n***. Ojo: *der Kollege* suma *-n* también en singular, fuera del nominativo: *mit einem netten Kollege**n*** (la regla, en la semana 26).",
                 "tip": "Regla corta: si el artículo termina en *-em, -er* (dativo) o *-en*, el adjetivo lleva *-en*.",
                 "q": [
                     q("Completá: *Ich habe einen gut___ Chef.*", "guten", ["guten", "guter", "gutes"]),

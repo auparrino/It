@@ -159,6 +159,7 @@ WEEK = {
                     ["Ich hole dich um halb acht ab.", "Te paso a buscar a las siete y media."],
                 ],
                 "warn": "*leider* (lamentablemente) es la palabra mágica para decir que no sin sonar seco. *Nein* a secas suena muy brusco.",
+                "tip": "Aprendé *dich* y *mich* como fórmula: son «te» y «me» como objeto (*Ich hole dich ab* = te paso a buscar; *Ruf mich an* = llamame). La tabla completa llega en la semana 13.",
                 "more": ["*Ich lade dich ein* también quiere decir «yo invito» (pago yo) en un bar.", "*ins Kino* = al cine: por ahora, frase hecha."],
                 "q": [
                     q("¿Cómo rechazás con amabilidad?", "Leider kann ich nicht.", ["Leider kann ich nicht.", "Nein.", "Ich will nicht."]),
@@ -231,7 +232,7 @@ WEEK = {
         cz(2, "Escribí la forma de *anfangen* (la parte que se conjuga).", "Wann ___ der Film an?", "fängt", note="*der Film* = *er* → *fängt … an*."),
         tr(2, "¿Venís con nosotros?", "Kommst du mit?", note="*mitkommen*: *mit* al final."),
         tr(2, "Lamentablemente no puedo.", "Leider kann ich nicht.", ["Leider kann ich nicht.", "Ich kann leider nicht.", "Leider kann ich nicht kommen.", "Ich kann leider nicht kommen."], "*leider* puede ir primero (y el verbo va segundo) o después del verbo."),
-        tr(2, "Te paso a buscar a las siete y media.", "Ich hole dich um halb acht ab.", ["Ich hole dich um halb acht ab.", "Um halb acht hole ich dich ab.", "Ich hole dich um sieben Uhr dreißig ab."], "7:30 = *halb acht*; *abholen* con *ab* al final."),
+        tr(2, "Te paso a buscar a las siete y media.", "Ich hole dich um halb acht ab.", ["Ich hole dich um halb acht ab.", "Um halb acht hole ich dich ab.", "Ich hole dich um sieben Uhr dreißig ab."], "7:30 = *halb acht*; *abholen* con *ab* al final. *dich* = te (la forma de *du* como objeto; la regla, en la semana 13)."),
         tr(2, "¿Tenés tiempo el sábado?", "Hast du am Samstag Zeit?", ["Hast du am Samstag Zeit?", "Hast du Samstag Zeit?"], "*Zeit haben*, sin artículo."),
         ty(2, "Escribí en alemán, con artículo.", "«la invitación»", "die Einladung", note="Los sustantivos en *-ung* son todos femeninos. " + MAY),
     ],

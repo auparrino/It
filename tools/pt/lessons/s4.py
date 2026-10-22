@@ -41,7 +41,9 @@ LESSONS = {
                      ["perder", "a perda", "la pérdida"],
                      ["escolher", "a escolha", "la elección"],
                      ["debater", "o debate", "el debate"],
-                     ["cortar", "o corte", "el corte"]]},
+                     ["cortar", "o corte", "el corte"],
+                     ["cair", "a queda", "la caída, la baja"],
+                     ["assinar", "a assinatura", "la firma"]]},
   "ex": [["A *análise* dos dados levou um mês.", "El análisis de los datos llevó un mes."],
          ["A *pesquisa* ouviu dois mil cariocas.", "La encuesta consultó a dos mil cariocas."],
          ["A *venda* de ingressos para o Maracanã começa hoje.", "La venta de entradas para el Maracanã empieza hoy."],
@@ -101,7 +103,10 @@ LESSONS = {
          ["*Constatou-se* que a água estava poluída.", "Se comprobó que el agua estaba contaminada."],
          ["A prefeitura *forneceu* os dados, que *evidenciam* o atraso.", "La intendencia proporcionó los datos, que ponen en evidencia el atraso."]],
   "warn": "*proceder a* rige *a*: ante femenino, crase (*procedeu à "
-          "análise*); ante masculino, *ao* (*procedeu ao pagamento*)."},
+          "análise*); ante masculino, *ao* (*procedeu ao pagamento*).",
+  "tip": "Dos fórmulas del informe para aprender enteras: *levantar uma "
+         "questão* (plantear una cuestión) y *fazer jus a* (estar a la altura "
+         "de, merecer)."},
 
  {"h": "Sin repetir: sinónimos y pronombres",
   "q": [{"prompt": "Elegí cómo retomar «os dados» sin repetir.", "stem": "Recebemos os dados e ___ enviamos à diretoria.", "answer": "os", "options": ["os", "lhes", "eles"]}],
@@ -206,6 +211,9 @@ LESSONS = {
          ["A corte portuguesa *chegara* ao Rio em 1808.", "La corte portuguesa había llegado a Río en 1808."]],
   "warn": "*vira* puede ser «había visto» (de *ver*) o «da vuelta, se "
           "convierte» (de *virar*). El contexto decide.",
+  "tip": "En esas páginas también vas a leer *fazer vista grossa*: es «hacer "
+         "la vista gorda», pero en portugués la vista es *grossa*, no "
+         "«gorda».",
   "more": ["Machado de Assis (Río, 1839-1908) escribió *Memórias Póstumas de "
            "Brás Cubas* y *Dom Casmurro*; Clarice Lispector, nacida en "
            "Ucrania y criada en Recife, vivió en Río y escribió *A Hora da "
@@ -348,7 +356,10 @@ LESSONS = {
          ["*Ao completar* 18 anos, ela tirou a carteira de motorista.", "Al cumplir 18 años, sacó el registro de conducir."]],
   "tip": "La *crônica* es un género muy brasileño: texto corto sobre lo "
          "cotidiano (Rubem Braga, Fernando Sabino, Drummond). Leé una por "
-         "semana."},
+         "semana.",
+  "warn": "Dos calcos de la noticia: «hacer la denuncia» es *registrar um "
+          "boletim de ocorrência* (*o BO*), no «denunciar»; y el penal se "
+          "*bate*, no se «tira»."},
 ]},
 
 43: {
@@ -421,7 +432,9 @@ LESSONS = {
          ["*Fico no aguardo* de um retorno.", "Quedo a la espera de una respuesta."]],
   "warn": "*seguir* concuerda con lo adjuntado: *seguem anexos os "
           "documentos*, *segue anexa a lista*. Con *em anexo*, *anexo* no "
-          "cambia, pero el verbo sí: *seguem em anexo*."},
+          "cambia, pero el verbo sí: *seguem em anexo*.",
+  "tip": "Dos más del mail: *esclarecer uma dúvida* (sacarse una duda; en la "
+         "charla, *tirar uma dúvida*) y *prorrogar o prazo* (extender el plazo)."},
 
  {"h": "Pedir con cortesía",
   "q": [{"prompt": "Completá.", "stem": "Agradeceria se a senhora me ___ o boleto.", "answer": "enviasse", "options": ["enviasse", "envie", "enviar"]}],
@@ -498,7 +511,8 @@ LESSONS = {
          ["A *aprendizagem* de línguas leva tempo.", "El aprendizaje de idiomas lleva tiempo."],
          ["Tenha *paciência*: o ônibus já vem.", "Tené paciencia: el colectivo ya viene."]],
   "warn": "*-aje* → *-agem*, y pasa a **femenino**: *a aprendizagem*, *a "
-          "viagem*, *a mensagem*, *a lavagem*."},
+          "viagem*, *a mensagem*. Con verbos en *-er*, *-mento* cambia la "
+          "*e* por *i*: *sofrer → sofrimento*, *esquecer → esquecimento*."},
 
  {"h": "-eiro / -eira: oficios, árboles y recipientes",
   "r": "*-eiro* nombra oficios (*padeiro*, *pedreiro*), árboles (*coqueiro*, "
@@ -572,7 +586,9 @@ LESSONS = {
           "florezinhas*.",
   "more": ["El diminutivo en Brasil es sobre todo **afecto o cortesía**, no "
            "tamaño: *um minutinho*, *obrigadinho*, *um favorzinho*. También "
-           "va con adverbios: *cedinho*, *agorinha*, *devagarinho*."]},
+           "va con adverbios: *cedinho*, *agorinha*, *devagarinho*."],
+  "tip": "También entra en frases hechas: *dar um jeito* (arreglárselas, "
+         "buscarle la vuelta) se dice mucho *dar um jeitinho*."},
 
  {"h": "Aumentativo -ão / -ona y -aço",
   "q": [{"prompt": "Elegí el aumentativo.", "stem": "Eles compraram ___ antigo em Santa Teresa.", "answer": "um casarão", "options": ["um casarão", "uma casona", "uma casão"]}],
@@ -645,13 +661,16 @@ LESSONS = {
                      ["borracha", "goma de borrar", "bêbada (borracha)"],
                      ["apelido", "apodo", "sobrenome (apellido)"],
                      ["pelado", "desnudo", "careca (pelado)"],
-                     ["embaraçada", "avergonzada, en aprietos", "grávida (embarazada)"]]},
+                     ["embaraçada", "avergonzada, en aprietos", "grávida (embarazada)"],
+                     ["rato", "ratón, rata", "um tempinho, um momento (rato)"]]},
   "ex": [["Que comida *esquisita*!", "¡Qué comida más rara! (no rica)"],
          ["Comi *polvo* grelhado em Búzios.", "Comí pulpo a la parrilla en Búzios."],
          ["Me empresta a *borracha*?", "¿Me prestás la goma?"],
          ["Meu *apelido* é Tuca; meu *sobrenome*, Silva.", "Mi apodo es Tuca; mi apellido, Silva."]],
   "warn": "«Estaba exquisito» → *estava delicioso* o *uma delícia*. Si "
-          "decís «estava esquisito», el cocinero entiende que era raro."},
+          "decís «estava esquisito», el cocinero entiende que era raro.",
+  "tip": "Para «me dio vergüenza», lo más común no es *embaraçada*: es "
+         "*fiquei sem graça* (o *constrangida*)."},
 
  {"h": "Adjetivos que engañan",
   "r": "*largo* es ancho, *roxo* es violeta, *ruivo* es pelirrojo y "
@@ -680,7 +699,9 @@ LESSONS = {
                      ["puxar", "tirar hacia uno", "—"],
                      ["empurrar", "empujar", "—"],
                      ["tirar", "sacar, quitar", "jogar (tirar)"],
-                     ["acordar", "despertar(se)", "lembrar (acordarse)"]]},
+                     ["acordar", "despertar(se)", "lembrar (acordarse)"],
+                     ["prender", "detener, arrestar; sujetar", "acender (prender la luz)"],
+                     ["brincar", "jugar; bromear (*brincadeira*: broma)", "pular (brincar, saltar)"]]},
   "ex": [["*Reparou* no vestido dela?", "¿Te fijaste en el vestido de ella?"],
          ["O cachorro *latiu* a noite toda.", "El perro ladró toda la noche."],
          ["*Puxe* / *Empurre*", "Tire / Empuje (carteles de las puertas)"],
@@ -959,7 +980,9 @@ LESSONS = {
          ["*Em contrapartida*, a orla ficou mais segura.", "En cambio, la costanera quedó más segura."],
          ["*É o caso da* Baía de Guanabara, que ainda recebe esgoto.", "Es el caso de la Bahía de Guanabara, que todavía recibe cloacas."]],
   "warn": "«además» → *além disso* (o *ademais*, formal). *demais* es "
-          "«demasiado»: *é caro demais*."},
+          "«demasiado»: *é caro demais*.",
+  "tip": "Dos fórmulas del debate: *pôr em xeque* (poner en duda, en jaque) "
+         "y *dar ensejo a* (dar lugar a, formal)."},
 
  {"h": "Concluir",
   "r": "Para cerrar: *em suma*, *em resumo*, *diante do exposto*, *dessa "
@@ -1063,7 +1086,9 @@ LESSONS = {
          ["Segundo testemunhas, o motorista *estaria* bêbado.", "Según testigos, el conductor estaría borracho."],
          ["O prefeito *teria dito* que...", "El intendente habría dicho que..."]],
   "warn": "Como en el español periodístico: no es hipótesis, es distancia. "
-          "Si se confirma, pasá al perfeito: *o suspeito fugiu*."},
+          "Si se confirma, pasá al perfeito: *o suspeito fugiu*.",
+  "tip": "Otra fórmula de la prensa: *trazer à tona* es «sacar a la luz»: "
+         "*a reportagem trouxe à tona o caso*."},
 ]},
 
 49: {
@@ -1181,7 +1206,9 @@ LESSONS = {
          ["*Rolou* um problema. → *Ocorreu* um problema.", "Surgió un problema."],
          ["*Curti* a palestra. → *Gostei* da palestra.", "Me gustó la charla."]],
   "tip": "*maneiro*, *irado* y *sinistro* (¡que puede ser elogio!) son muy "
-         "cariocas; en São Paulo se oye más *da hora*."},
+         "cariocas; en São Paulo se oye más *da hora*.",
+  "warn": "Ojo: *quitar a dívida* es saldarla (pagarla toda), no «quitarla». "
+          "Y *dar mole* (coloquial) es descuidarse, regalarse."},
 
  {"h": "El camino de vuelta: de lo formal a la charla",
   "q": [{"prompt": "Versión coloquial carioca.", "stem": "Haverá muitas pessoas no bloco. → ___ muita gente no bloco.", "answer": "Vai ter", "options": ["Vai ter", "Vão ter", "Haverão"]}],
@@ -1285,7 +1312,9 @@ LESSONS = {
          ["Pode *tirar o cavalo da chuva*: ele não vem.", "Olvidate: él no viene."]],
   "warn": "En portugués es una **pulga**, no una mosca, y los *olhos* son "
           "dos: *os olhos da cara*. Falso amigo: *chover no molhado* es decir algo "
-          "obvio o inútil, no «llover sobre mojado»."},
+          "obvio o inútil, no «llover sobre mojado».",
+  "tip": "Dos más: *engolir sapo* es «tragarse un sapo» (*engolir* = "
+         "tragar) y *ir por água abaixo* es «irse al tacho»."},
 
  {"h": "Refranes",
   "r": "Los refranes brasileños tienen su equivalente, con otras imágenes. "
@@ -1396,7 +1425,9 @@ LESSONS = {
          ["*Assistimos ao* jogo no Maracanã.", "Vimos el partido en el Maracanã."],
          ["Conheci *o* João na feira.", "Conocí a João en la feria."]],
   "warn": "Sin *a* personal: *conheci o João*. Y *namorar com* es del habla; "
-          "en la norma escrita: *namorar alguém*."},
+          "en la norma escrita: *namorar alguém*.",
+  "tip": "Con verbo fijo: el gobierno *toma posse* (asume) y los votantes "
+         "*vão às urnas* (van a votar)."},
 
  {"h": "Léxico traicionero",
   "r": "Repasá los falsos amigos y los heterogenéricos que siguen "

@@ -151,8 +151,8 @@ tr(W, 0, "¿Vos sos argentino?", "Você é argentino?",
    "El «vos» del Río de la Plata se dice você, con el verbo en tercera: você é.")
 tr(W, 2, "Soy de Buenos Aires.", "Sou de Buenos Aires.", ["Eu sou de Buenos Aires."],
    "El origen va con ser + de. Las ciudades sin artículo llevan de a secas.")
-tr(W, 2, "Tengo treinta años.", "Tenho trinta anos.", ["Eu tenho trinta anos."],
-   "La edad va con ter. Anos: la ñ de «años» se pierde (ano).")
+tr(W, 2, "Tengo treinta años. (treinta = trinta)", "Tenho trinta anos.", ["Eu tenho trinta anos."],
+   "La edad va con ter. Anos: la ñ de «años» se pierde (ano). Los números llegan en la semana 7.")
 tr(W, 2, "Tengo hambre.", "Estou com fome.", ["Eu estou com fome.", "Tô com fome.", "Eu tô com fome.", "Tenho fome.", "Eu tenho fome."],
    "Hambre, sed, frío y sueño: lo más común es estar com. Fome = hambre.")
 tr(W, 2, "Estamos en Copacabana.", "Estamos em Copacabana.",

@@ -115,7 +115,7 @@ ITEMS = [
          stem="Questi errori non ___ (ripetere).", answer="vanno ripetuti",
          note="*andare* + participio = obligación en pasiva: *non vanno ripetuti* («no hay que repetirlos»), con participio concordado con *errori*."),
     dict(id="rf2-35-10", type="translate", topic="passivo", level="B2",
-         prompt=TR, stem="El museo es visitado por miles de turistas.",
+         prompt=TR, stem="El museo es visitado por miles de turistas. (miles de = *migliaia di*)",
          answer="Il museo è visitato da migliaia di turisti",
          alt=["Il museo viene visitato da migliaia di turisti"],
          note="La pasiva va con *essere* y el agente con *da*: *è visitato da migliaia di turisti*. «Miles de» = *migliaia di*."),

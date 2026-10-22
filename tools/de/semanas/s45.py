@@ -239,7 +239,7 @@ WEEK = {
         cz(0, "Escribí la palabra que falta (despedida formal).", "Mit freundlichen ___", "Grüßen", note="*Mit freundlichen Grüßen*, sin coma. " + MAY),
         cz(0, "Escribí la palabra («por la presente»).", "___ kündige ich meinen Vertrag zum 31. März.", "Hiermit", note="*Hiermit* = por la presente."),
         cz(0, "Escribí la preposición.", "Bezug nehmend ___ Ihr Schreiben vom 3. Mai teile ich Ihnen mit, dass …", "auf", note="*Bezug nehmend auf* + acusativo."),
-        cz(0, "Escribí el verbo formal de «preguntar» (reflexivo).", "Ich möchte mich nach dem Stand meines Antrags ___.", "erkundigen", note="*sich nach etwas erkundigen* = informarse, consultar."),
+        cz(0, "Escribí el verbo formal de «preguntar» (reflexivo): *sich erkundigen nach* = informarse sobre, consultar por.","Ich möchte mich nach dem Stand meines Antrags ___.", "erkundigen", note="*sich nach etwas erkundigen* = informarse, consultar."),
         tr(0, "Por la presente rescindo mi contrato.", "Hiermit kündige ich meinen Vertrag.", ["Hiermit kündige ich meinen Vertrag.", "Ich kündige hiermit meinen Vertrag."], "*kündigen* = rescindir (contrato, alquiler, trabajo)."),
         tr(0, "Estimada señora Weber:", "Sehr geehrte Frau Weber,", ["Sehr geehrte Frau Weber,", "Sehr geehrte Frau Weber"], "Coma, no dos puntos. *Frau* → *geehrte*."),
         ty(0, "Escribí la versión formal de *kriegen*.", "kriegen → …", "erhalten", note="*kriegen* (coloquial) → *bekommen* (estándar) → *erhalten* (formal)."),

@@ -471,7 +471,7 @@
    {
     "label": "a",
     "type": "cloze",
-    "stem": "Ci hanno appena avvisato che ___ (el avión debería salir en una hora) / che ___ (la autopista podría estar bloqueada por la nieve).",
+    "stem": "Ci hanno appena avvisato che ___ (el avión debería salir en una hora) / che ___ (la autopista podría estar bloqueada por la nieve). (autopista = *autostrada*; «por la nieve» = *dalla neve*)",
     "answer": "l'aereo dovrebbe partire fra un'ora | l'autostrada potrebbe essere bloccata dalla neve",
     "alt": [
      "l'aereo dovrebbe partire tra un'ora | l'autostrada potrebbe essere bloccata dalla neve"
@@ -481,7 +481,7 @@
    {
     "label": "b",
     "type": "cloze",
-    "stem": "Alla radio avevo sentito che ___ (el avión tendría que haber salido una hora antes) / che ___ (la autopista podría haber estado bloqueada por la nieve).",
+    "stem": "Alla radio avevo sentito che ___ (el avión tendría que haber salido una hora antes) / che ___ (la autopista podría haber estado bloqueada por la nieve). (autopista = *autostrada*; «por la nieve» = *dalla neve*)",
     "answer": "l'aereo sarebbe dovuto partire un'ora prima | l'autostrada avrebbe potuto essere bloccata dalla neve",
     "alt": [
      "l'aereo avrebbe dovuto partire un'ora prima | l'autostrada avrebbe potuto essere bloccata dalla neve",
@@ -605,7 +605,7 @@
    {
     "label": "a",
     "type": "translate",
-    "stem": "Al parecer, el ministro no estaría dispuesto a renunciar.",
+    "stem": "Al parecer, el ministro no estaría dispuesto a renunciar. (renunciar a un cargo = *dimettersi*)",
     "answer": "Il ministro non sarebbe disposto a dare le dimissioni.",
     "alt": [
      "Il ministro non sarebbe disposto a dimettersi.",
@@ -617,7 +617,7 @@
    {
     "label": "b",
     "type": "translate",
-    "stem": "Según las fuentes, el avión se habría caído diez minutos después del despegue.",
+    "stem": "Según las fuentes, el avión se habría caído diez minutos después del despegue. (despegue = *decollo*)",
     "answer": "L'aereo sarebbe caduto dieci minuti dopo il decollo.",
     "alt": [
      "Secondo le fonti, l'aereo sarebbe caduto dieci minuti dopo il decollo.",
@@ -628,7 +628,7 @@
    {
     "label": "c",
     "type": "translate",
-    "stem": "Según parece, el asaltante habría disparado dos veces.",
+    "stem": "Según parece, el asaltante habría disparado dos veces. (asaltante = *rapinatore*; disparar = *sparare*)",
     "answer": "Il rapinatore avrebbe sparato due volte.",
     "alt": [
      "A quanto pare, il rapinatore avrebbe sparato due volte.",
@@ -788,7 +788,7 @@
    {
     "label": "d",
     "type": "cloze",
-    "stem": "Pedile que venga. / Pídanle que venga. (chiedere a) → tu: ___ · voi: ___",
+    "stem": "Pedile que venga. / Pídanle que venga. (chiedere a qualcuno di + infinitivo) → tu: ___ · voi: ___",
     "answer": "chiedigli di venire | chiedetegli di venire",
     "alt": [
      "chiedile di venire | chiedetele di venire"
@@ -798,7 +798,7 @@
    {
     "label": "e",
     "type": "cloze",
-    "stem": "Ponete el abrigo. / Pónganse el abrigo. (mettersi) → tu: ___ · voi: ___",
+    "stem": "Ponete el abrigo. / Pónganse el abrigo. (mettersi; abrigo: il cappotto) → tu: ___ · voi: ___",
     "answer": "mettiti il cappotto | mettetevi il cappotto",
     "alt": [
      "mettiti il giaccone | mettetevi il giaccone"
@@ -1790,7 +1790,7 @@
    {
     "label": "f",
     "type": "cloze",
-    "stem": "attrarre → che io/tu/lui ___",
+    "stem": "attrarre (io attraggo) → che io/tu/lui ___",
     "answer": "attragga",
     "alt": [],
     "note": "Como trarre: tragga → attragga."
@@ -2320,7 +2320,7 @@
    {
     "label": "d",
     "type": "cloze",
-    "stem": "___, non avrebbe perso il posto. (Si no se hubiera peleado con el jefe…)",
+    "stem": "___, non avrebbe perso il posto. (Si no se hubiera peleado con el jefe…; pelearse = *litigare*)",
     "answer": "Se non avesse litigato con il capo",
     "alt": [
      "Se non avesse litigato col capo"
@@ -2442,7 +2442,7 @@
    {
     "label": "b",
     "type": "translate",
-    "stem": "___ non ti posso aiutare. (Lo que pasa es que…)",
+    "stem": "___ non ti posso aiutare. (Lo que pasa es que…, literalmente «el hecho es que…»)",
     "answer": "Il fatto è che",
     "alt": [],
     "note": "Il fatto è che introduce un hecho: va con indicativo."
@@ -2450,7 +2450,7 @@
    {
     "label": "c",
     "type": "translate",
-    "stem": "___, suo figlio non studia. (Por lo que sé…)",
+    "stem": "___, suo figlio non studia. (Por lo que sé…: per + «lo que» + ne so)",
     "answer": "Per quanto ne so",
     "alt": [
      "Per quel che ne so",
@@ -2576,7 +2576,7 @@
    {
     "label": "e",
     "type": "cloze",
-    "stem": "Mi rendo conto di quanto ___ dato da fare in questi giorni. (darsi, lui)",
+    "stem": "Mi rendo conto di quanto ___ dato da fare in questi giorni. (darsi, lui; *mi rendo conto* = me doy cuenta; *darsi da fare* = ponerse las pilas)",
     "answer": "si sia",
     "alt": [
      "si è"
@@ -3304,7 +3304,7 @@
    {
     "label": "c",
     "type": "translate",
-    "stem": "Según los bomberos la casa no podía ser salvada.",
+    "stem": "Según los bomberos la casa no podía ser salvada. (bomberos = *vigili del fuoco* o *pompieri*)",
     "answer": "Secondo i vigili del fuoco la casa non poteva essere salvata.",
     "alt": [
      "Secondo i pompieri la casa non poteva essere salvata.",
@@ -4890,7 +4890,7 @@
    {
     "label": "b",
     "type": "translate",
-    "stem": "Me canso estudiando de noche. (stancarsi)",
+    "stem": "Me canso estudiando de noche. (stancarsi a + infinitivo = cansarse haciendo algo)",
     "answer": "Mi stanco a studiare la sera.",
     "alt": [
      "Mi stanco a studiare di sera.",

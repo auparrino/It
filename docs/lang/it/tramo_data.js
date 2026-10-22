@@ -577,6 +577,7 @@
      "sindaci": "intendentes",
      "vendesi": "se vende",
      "bensì": "sino",
+     "piuttosto": "(si risolve, piuttosto, con…) más bien",
      "ambulatorio": "salita, consultorio",
      "cartoline": "postales",
      "costretto": "obligado",

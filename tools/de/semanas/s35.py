@@ -100,7 +100,7 @@ WEEK = {
                 "tip": "Receta: probá el Konjunktiv I; si suena igual al indicativo, pasá al II; si el II suena igual al Präteritum, *würde* + infinitivo.",
                 "q": [
                     q("Completá: *Die Nachbarn sagen, sie ___ nichts gehört.*", "hätten", ["hätten", "haben", "habe"]),
-                    q("Completá: *Die Firmen sagen, sie ___ keine Fachkräfte.* (finden)", "fänden", ["fänden", "finden", "finde"]),
+                    q("Completá: *Die Firmen sagen, sie ___ keine Fachkräfte finden.* (können)", "könnten", ["könnten", "können", "könne"]),
                 ],
             },
             {

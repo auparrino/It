@@ -33,7 +33,7 @@
    {
     "label": "c",
     "type": "translate",
-    "stem": "La librería está a 200 metros de mi casa.",
+    "stem": "La librería está a 200 metros de mi casa. (la distancia, con «a»; desde dónde, con «da»)",
     "answer": "La libreria è a 200 metri da casa mia.",
     "alt": [
      "La libreria è a duecento metri da casa mia.",
@@ -45,7 +45,7 @@
    {
     "label": "d",
     "type": "translate",
-    "stem": "Vivo en una ciudad al suroeste de Londres. (sud ovest)",
+    "stem": "Vivo en una ciudad al suroeste de Londres. (sud ovest, con «a»; Londres: Londra)",
     "answer": "Abito in una città a sud ovest di Londra.",
     "alt": [
      "Vivo in una città a sud ovest di Londra.",
@@ -85,7 +85,7 @@
    {
     "label": "g",
     "type": "translate",
-    "stem": "Nos vemos en diciembre, para Navidad.",
+    "stem": "Nos vemos en diciembre, para Navidad. (nos vemos: «ci vediamo»)",
     "answer": "Ci vediamo a dicembre, a Natale.",
     "alt": [
      "Ci vediamo a dicembre a Natale.",
@@ -269,7 +269,7 @@
    {
     "label": "c",
     "type": "cloze",
-    "stem": "L'aereo parte ___ numero 34. (El avión sale por la puerta número 34.)",
+    "stem": "L'aereo parte ___ numero 34. (El avión sale por la puerta número 34; puerta de embarque: l'uscita.)",
     "answer": "dall'uscita",
     "alt": [],
     "note": "Da indica desde dónde parte algo."
@@ -719,7 +719,7 @@
    {
     "label": "c",
     "type": "cloze",
-    "stem": "Ho bisogno di due francobolli ___ un euro.",
+    "stem": "Ho bisogno di due francobolli ___ un euro. (estampillas de un euro: el valor de un sello o un billete va con «da»)",
     "answer": "da",
     "alt": [],
     "note": "Da indica el valor de estampillas, billetes o monedas."
@@ -972,7 +972,7 @@
    {
     "label": "c",
     "type": "cloze",
-    "stem": "‘Il ponte ___’ è un film piuttosto vecchio. (El puente sobre el río Kwai)",
+    "stem": "‘Il ponte ___’ è un film piuttosto vecchio. (El puente sobre el río Kwai; río: fiume)",
     "answer": "sul fiume Kwai",
     "alt": [],
     "note": "Su indica posición encima de algo: il ponte sul fiume."
@@ -996,7 +996,7 @@
    {
     "label": "f",
     "type": "cloze",
-    "stem": "Il viaggio costa ___ due milioni. (El viaje cuesta alrededor de dos millones.)",
+    "stem": "Il viaggio costa ___ due milioni. (El viaje cuesta alrededor de dos millones; «alrededor de» + número: «su» + artículo.)",
     "answer": "sui",
     "alt": [],
     "note": "Su + artículo + número = ‘alrededor de’: sui due milioni."
@@ -1089,7 +1089,7 @@
    {
     "label": "g",
     "type": "cloze",
-    "stem": "Si vede la casa ___. (Se ve la casa entre los árboles.)",
+    "stem": "Si vede la casa ___. (Se ve la casa entre los árboles; árboles: gli alberi.)",
     "answer": "fra gli alberi",
     "alt": [
      "tra gli alberi"
@@ -1484,7 +1484,7 @@
    {
     "label": "b",
     "type": "cloze",
-    "stem": "È un piatto realizzato con polenta ___ funghi e formaggio. (rellena de)",
+    "stem": "È un piatto realizzato con polenta ___ funghi e formaggio. (rellena de; relleno = ripieno)",
     "answer": "ripiena di",
     "alt": [
      "farcita di",
@@ -1571,7 +1571,7 @@
    {
     "label": "a",
     "type": "translate",
-    "stem": "La causa del accidente no está clara.",
+    "stem": "La causa del accidente no está clara. (accidente: incidente)",
     "answer": "La causa dell'incidente non è chiara.",
     "alt": [],
     "note": "Causa di: la causa dell'incidente."
@@ -3502,7 +3502,7 @@
    {
     "label": "c",
     "type": "cloze",
-    "stem": "Per gli anziani la vita ___ più dura. ___ di più e alla fine ___ una pensione più piccola di prima. (diventare; lavorare; ottenere)",
+    "stem": "Per gli anziani la vita ___ più dura. ___ di più e alla fine ___ una pensione più piccola di prima. (diventare; lavorare; ottenere, que se conjuga como tenere)",
     "answer": "diventerà | Lavoreranno | otterranno",
     "alt": [],
     "note": "Ottenere se conjuga como tenere: otterranno."
@@ -3928,7 +3928,7 @@
    {
     "label": "a",
     "type": "translate",
-    "stem": "Vení a verme cuando termines.",
+    "stem": "Vení a verme cuando termines. («venir a ver a alguien» = venire a trovare)",
     "answer": "Vieni a trovarmi quando hai finito.",
     "alt": [
      "Vienimi a trovare quando hai finito.",
@@ -4131,7 +4131,7 @@
    {
     "label": "e",
     "type": "cloze",
-    "stem": "Mi ___ le scarpe in casa. (togliersi)",
+    "stem": "Mi ___ le scarpe in casa. (togliersi; participio: tolto)",
     "answer": "sono tolto",
     "alt": [
      "sono tolta",

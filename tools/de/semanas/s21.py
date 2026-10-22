@@ -70,7 +70,7 @@ WEEK = {
             },
             {
                 "h": "Verbos regulares: -te",
-                "r": "Los verbos regulares agregan **-te** a la raíz, igual que los modales. Si la raíz termina en *-t* o *-d*, va una **e de apoyo**: *arbeiten → arbeitete*. No cambia nada más.",
+                "r": "Los verbos regulares agregan **-te** a la raíz, igual que los modales. Si la raíz termina en *-t* o *-d* (o en *-n* tras otra consonante que no sea *l*, *r* o *h*, como *öffnen*; pero *lernen → lernte*), va una **e de apoyo**: *arbeiten → arbeitete*, *öffnen → öffnete*. No cambia nada más.",
                 "table": {"head": ["Persona", "spielen", "wohnen", "arbeiten"], "rows": [
                     ["ich", "spielte", "wohnte", "arbeitete"],
                     ["du", "spieltest", "wohntest", "arbeitetest"],
@@ -232,7 +232,7 @@ WEEK = {
         cz(0, "Escribí el pasado de *sollen*.", "Ich ___ um acht zu Hause sein.", "sollte", note="*ich sollte* = tenía que (me decían que)."),
         cz(0, "Escribí el modal al final.", "Er kam nicht, weil er arbeiten ___. (müssen, pasado)", "musste", note="En la subordinada, el modal conjugado al final."),
         tr(0, "No pude dormir.", "Ich konnte nicht schlafen.", note="*konnte* + infinitivo al final."),
-        tr(0, "De chico quería ser piloto.", "Als Kind wollte ich Pilot werden.", ["Als Kind wollte ich Pilot werden.", "Ich wollte als Kind Pilot werden.", "Als Kind wollte ich Pilotin werden.", "Ich wollte als Kind Pilotin werden."], "*werden* = llegar a ser; profesión sin artículo."),
+        tr(0, "De chico quería ser piloto. («llegar a ser» = *werden*)","Als Kind wollte ich Pilot werden.", ["Als Kind wollte ich Pilot werden.", "Ich wollte als Kind Pilot werden.", "Als Kind wollte ich Pilotin werden.", "Ich wollte als Kind Pilotin werden."], "*werden* = llegar a ser; profesión sin artículo."),
         tr(0, "Tuvimos que esperar mucho.", "Wir mussten lange warten.", ["Wir mussten lange warten.", "Wir mussten viel warten."], "*mussten*, sin diéresis."),
         # parte 1 — Präteritum frecuente
         ch(1, "Elegí el Präteritum.", "gehen → er ___", "ging", ["ging", "ginge", "gegangen"], "Irregular: *gehen – ging – gegangen*."),

@@ -783,7 +783,7 @@
   ]
  },
  "r09-03b": {
-  "consigna": "Te está mostrando la ciudad tu anfitrión. Hacele preguntas en italiano tratándolo de Lei.",
+  "consigna": "Te está mostrando la ciudad tu anfitrión. Hacele preguntas en italiano tratándolo de Lei. Fórmula: «¿acá es donde…?» = è qui che…?; «¿ahí es donde…?» = è lì che…?",
   "interactive": true,
   "items": [
    {
@@ -836,7 +836,7 @@
   ]
  },
  "r09-04b": {
-  "consigna": "Traducí al italiano usando ecco perché o ecco come cuando se pueda. Puede haber más de una posibilidad.",
+  "consigna": "Traducí al italiano usando ecco perché («por eso») o ecco come («así es como») cuando se pueda. Puede haber más de una posibilidad.",
   "interactive": true,
   "items": [
    {
@@ -893,7 +893,7 @@
   ]
  },
  "r09-05b": {
-  "consigna": "Traducí al italiano eligiendo entre ecco quello che y quello che.",
+  "consigna": "Traducí al italiano eligiendo entre ecco quello che («esto es lo que», presenta lo que sigue) y è quello che («es lo que», identifica).",
   "interactive": true,
   "items": [
    {
@@ -1053,7 +1053,7 @@
    {
     "label": "c",
     "type": "translate",
-    "stem": "Es una mujer fascinante, ¿no te parece? (tu)",
+    "stem": "Es una mujer fascinante, ¿no te parece? (tu; fascinante: affascinante)",
     "answer": "È una donna affascinante, non trovi?",
     "alt": [
      "È una donna affascinante, non ti pare?",
@@ -1116,7 +1116,7 @@
    {
     "label": "b",
     "type": "cloze",
-    "stem": "Spiegami un po' – ___? (¿dónde nos encontramos exactamente esta noche?)",
+    "stem": "Spiegami un po' – ___? (¿dónde nos encontramos exactamente esta noche? nos encontramos: «ci vediamo»)",
     "answer": "dov'è che ci vediamo stasera",
     "alt": [
      "dove è che ci vediamo stasera",
@@ -1289,7 +1289,7 @@
    {
     "label": "e",
     "type": "translate",
-    "stem": "¿Me da un vaso de agua? – ¡Pero claro! (Lei)",
+    "stem": "¿Me da un vaso de agua? – ¡Pero claro! (Lei; «¡claro que sí!» se dice «come no!»)",
     "answer": "Ma come no!",
     "alt": [
      "Come no!"
@@ -1332,7 +1332,7 @@
    {
     "label": "b",
     "type": "translate",
-    "stem": "¿A qué hora sale exactamente el avión?",
+    "stem": "¿A qué hora sale exactamente el avión? (avión: aereo)",
     "answer": "Quand'è che parte l'aereo?",
     "alt": [
      "Quando è che parte l'aereo?",
@@ -1371,7 +1371,7 @@
   ]
  },
  "r10-07": {
-  "consigna": "Reescribí las preguntas de forma más enfática y coloquial (adelantá o repetí el objeto con un pronombre).",
+  "consigna": "Reescribí las preguntas de forma más enfática y coloquial: el objeto pasa al final y delante del verbo queda su pronombre (Dove l'hai messo, il libro?).",
   "interactive": true,
   "items": [
    {
@@ -1616,7 +1616,7 @@
   ]
  },
  "r10-15": {
-  "consigna": "Reescribí las preguntas de forma más coloquial, usando un pronombre además del sustantivo.",
+  "consigna": "Reescribí las preguntas de forma más coloquial, usando un pronombre además del sustantivo: el sustantivo pasa al final y su pronombre queda delante del verbo (Dove l'hai comprato, il pane?); con cantidades, ne… di (Quanti ne vuoi, di biscotti?).",
   "interactive": true,
   "items": [
    {
@@ -1720,7 +1720,7 @@
   ]
  },
  "r10-03c": {
-  "consigna": "¿Quién te obliga? Completá la respuesta con los pronombres correctos.",
+  "consigna": "¿Quién te obliga? Completá la respuesta con los pronombres correctos. Es una fórmula fija: chi + indirecto + lo fa fare? = ¿quién te obliga (a hacerlo)?",
   "interactive": true,
   "items": [
    {
@@ -1974,7 +1974,7 @@
    {
     "label": "a",
     "type": "translate",
-    "stem": "Te quedaste afuera sin llaves: ¡Qué tonto que soy!",
+    "stem": "Te quedaste afuera sin llaves: ¡Qué tonto que soy! (tonto: stupido)",
     "answer": "Come sono stupido!",
     "alt": [
      "Quanto sono stupido!",
@@ -2876,7 +2876,7 @@
    {
     "label": "a",
     "type": "translate",
-    "stem": "Voy a aceptar tu decisión, sea cual sea.",
+    "stem": "Voy a aceptar tu decisión, sea cual sea. («sea cual sea» = qualunque + congiuntivo de essere)",
     "answer": "Accetterò la tua decisione, qualunque sia.",
     "alt": [
      "Accetterò la tua decisione, qualsiasi sia.",
@@ -3230,7 +3230,7 @@
    {
     "label": "b",
     "type": "translate",
-    "stem": "Cuando tengas ganas, vení a verme. (tu)",
+    "stem": "Cuando tengas ganas, vení a verme. (tu; «venir a ver a alguien» = venire a trovare)",
     "answer": "Quando vuoi, vieni a trovarmi.",
     "alt": [
      "Vieni a trovarmi quando vuoi.",
@@ -3243,7 +3243,7 @@
    {
     "label": "c",
     "type": "translate",
-    "stem": "Necesito estar localizable en todo momento.",
+    "stem": "Necesito estar localizable en todo momento. (localizable: reperibile)",
     "answer": "Devo essere reperibile in ogni momento.",
     "alt": [
      "Devo essere reperibile in qualsiasi momento.",

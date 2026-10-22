@@ -1089,7 +1089,9 @@ LESSONS = {
          ["Você mora *por aqui*?", "¿Vivís por acá?"],
          ["O metrô passa *por* Copacabana.", "El subte pasa por Copacabana."]],
   "warn": "«Por el», «por la» → *pelo, pela*. «Por o» no existe, como "
-          "tampoco «em o»."},
+          "tampoco «em o».",
+  "tip": "Los demás usos de *por* y *para* son los del español: *obrigado "
+         "por*, *por dia*, *para você*, *para mim* (para mí), *para sexta*."},
 
  {"h": "De dónde, hasta dónde: de, até",
   "q": [{"prompt": "«Voy caminando hasta la playa.»", "answer": "Vou a pé até a praia.", "options": ["Vou a pé até a praia.", "Vou de pé até a praia.", "Vou a pé hasta a praia."]}],
@@ -1381,7 +1383,11 @@ LESSONS = {
          ["*Aí* começou a chover.", "Ahí empezó a llover."],
          ["*No fim*, voltamos de Uber.", "Al final, volvimos en Uber."]],
   "tip": "*semana passada*, *mês passado*, *ano passado*: sin artículo y "
-         "sin «el». *anteontem* = anteayer."},
+         "sin «el». *anteontem* = anteayer.",
+  "more": ["«Hace» + tiempo se dice *há* (con h: es el verbo *haver*) o *faz*: "
+           "*cheguei há duas semanas*, *faz três dias que voltei*. También "
+           "*duas semanas atrás*. Pero nunca *faz* y *atrás* juntos: «faz dois "
+           "anos atrás» repite la idea."]},
 ]},
 
 12: {
@@ -1413,7 +1419,8 @@ LESSONS = {
          ["*Seja* paciente e *vá* devagar.", "Sea paciente y vaya despacio."]],
   "warn": "Seis irregulares que no siguen la regla: *seja* (ser), *esteja* "
           "(estar), *vá* (ir), *dê* (dar), *saiba* (saber), *queira* "
-          "(querer).",
+          "(querer). Y la grafía cambia como en *fiquei*: *fique*, "
+          "*pague*, *comece*.",
   "tip": "Esta forma es la de carteles, recetas, prospectos y trato "
          "formal: *Aperte o botão*, *Mantenha a porta fechada*.",
   "more": ["Los seis irregulares, en uso: *seja bem-vindo* (sea "

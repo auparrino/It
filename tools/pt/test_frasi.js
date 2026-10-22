@@ -269,7 +269,7 @@ ok(Drills.buildReview(course, lst, 50).length === 20, "el repaso incluye el labo
 
 /* --------------------------------------------------------------- duelos */
 
-ok(Duelli.DUELLI.length === 8, "ocho duelos");
+ok(Duelli.DUELLI.length === 9, "nueve duelos");
 ok(uniq(Duelli.DUELLI.map(function (d) { return d.id; })), "ids de duelo únicos");
 var DUEL_TENSE = { passado: ["imperfeito"], composto: ["perfeitoComposto"], subjuntivo: ["subjPresente"],
                    futinf: ["subjFuturo", "infPessoal"] };
@@ -295,7 +295,7 @@ Duelli.DUELLI.forEach(function (d) {
   var sess = Duelli.session(d.id, {});
   ok(sess.filter(function (x) { return !x.cue; }).length === 8, "sesión de duelo: 8 oraciones: " + d.id);
 });
-ok(Duelli.open(1).length === 1 && Duelli.open(52).length === 8, "duelos abiertos por semana");
+ok(Duelli.open(1).length === 1 && Duelli.open(52).length === 9, "duelos abiertos por semana");
 
 /* ------------------------------------------------------------- lecturas */
 

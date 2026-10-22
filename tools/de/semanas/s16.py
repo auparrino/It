@@ -178,7 +178,7 @@ WEEK = {
                     ["*Im Herbst* regnet es in Hamburg oft.", "En otoño llueve seguido en Hamburgo."],
                 ],
                 "warn": "Ojo con las estaciones al revés: *im Dezember* en Alemania es invierno; en el Río de la Plata, verano. Si hablás de tu ciudad, aclaralo: *Bei uns ist im Juli Winter*.",
-                "tip": "Tu estación favorita: *Der Herbst gefällt mir am besten* o *Den Herbst mag ich am liebsten*.",
+                "tip": "Tu estación favorita: *Der Herbst gefällt mir am besten* o *Den Herbst mag ich am liebsten* (*ich mag, du magst* = me gusta, te gusta: del verbo *mögen*).",
                 "q": [
                     q("Completá: *___ Winter schneit es.*", "Im", ["Im", "Am", "In"]),
                     q("¿Qué estación es *der Herbst*?", "el otoño", ["el otoño", "la primavera", "el invierno"]),
@@ -254,7 +254,7 @@ WEEK = {
         cz(2, "Escribí el participio de *regnen*.", "Gestern hat es den ganzen Tag ___.", "geregnet", note="*regnen* es regular: *hat geregnet*."),
         tr(2, "Hace frío.", "Es ist kalt.", note="«Hace» frío: *Es ist kalt*, sin *machen*."),
         tr(2, "En verano hace más calor que en primavera.", "Im Sommer ist es wärmer als im Frühling.", ["Im Sommer ist es wärmer als im Frühling.", "Es ist im Sommer wärmer als im Frühling.", "Im Sommer ist es heißer als im Frühling."], "*im Sommer*, *wärmer als*."),
-        tr(2, "¿Cuál es tu estación favorita?", "Welche Jahreszeit magst du am liebsten?", ["Welche Jahreszeit magst du am liebsten?", "Was ist deine Lieblingsjahreszeit?", "Welche Jahreszeit gefällt dir am besten?", "Welche ist deine Lieblingsjahreszeit?", "Was ist deine liebste Jahreszeit?"], "*am liebsten* o *am besten* para lo favorito."),
+        tr(2, "¿Cuál es tu estación favorita?", "Welche Jahreszeit magst du am liebsten?", ["Welche Jahreszeit magst du am liebsten?", "Was ist deine Lieblingsjahreszeit?", "Welche Jahreszeit gefällt dir am besten?", "Welche ist deine Lieblingsjahreszeit?", "Was ist deine liebste Jahreszeit?"], "*am liebsten* o *am besten* para lo favorito. *magst* = te gusta (de *mögen*); también vale *Welche Jahreszeit gefällt dir am besten?*"),
         ty(2, "Escribí en alemán, con artículo.", "«el invierno»", "der Winter", note=MAY),
     ],
 }

@@ -194,6 +194,7 @@
       chunks: ["não tinha ninguém", "nenhum turista", "comprei tudo", "algumas pessoas", "eu também não", "não sei, não"],
       keywords: ["praia", "Leblon", "vendedor", "turista", "barraca", "sanduíche", "salva-vidas", "carioca"],
       gloss: {
+        "tudo o que precisava": "todo lo que necesitaba (o que = lo que)",
         "barraca": "puesto de playa (sombrillas, sillas, bebidas)",
         "sanduíche natural": "sándwich frío de pan integral con pollo o atún y verduras",
         "salva-vidas": "guardavidas",
@@ -205,6 +206,7 @@
       chunks: ["tenho trabalhado muito", "tenho dormido pouco", "tem me pedido", "tenho ido menos", "já tinha preparado", "nunca tinha recebido"],
       keywords: ["semanas", "chefe", "relatórios", "praia", "vizinha", "bolo", "prédio", "cariocas"],
       gloss: {
+        "tem me pedido": "me viene pidiendo (el pronombre va entre tem y el participio)",
         "prédio": "edificio (de departamentos)",
         "andava cansado": "venía cansado, estaba cansado esos días" } },
 

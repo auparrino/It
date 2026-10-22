@@ -112,7 +112,7 @@ WEEK = {
                 "table": {"head": ["Sustantivo", "Preposición + caso", "Ejemplo"], "rows": [
                     ["das Interesse", "an + Dat.", "Sie hat großes Interesse an Kunst."],
                     ["die Angst / der Respekt", "vor + Dat.", "Er hat Angst vor der Prüfung."],
-                    ["die Lust / die Hoffnung", "auf + Akk.", "Ich habe Lust auf ein Eis."],
+                    ["die Lust / die Hoffnung / die Antwort", "auf + Akk.", "Ich habe Lust auf ein Eis."],
                     ["die Sehnsucht", "nach + Dat.", "Die Sehnsucht nach der Heimat bleibt."],
                     ["die Liebe / die Zuneigung / die Beziehung", "zu + Dat.", "Ihre Liebe zur Musik ist groß."],
                     ["die Kritik / der Mangel", "an + Dat.", "Es gibt Kritik an der Reform."],

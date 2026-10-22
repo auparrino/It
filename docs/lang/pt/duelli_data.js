@@ -12,9 +12,10 @@
  * «¿qué te lo dijo?».  Cada duelo se abre cuando las dos formas ya se
  * enseñaron («week», según tools/pt/curriculo.py).
  *
- * Los ocho duelos del portugués para hispanohablantes: ser/estar, por/para,
+ * Los nueve duelos del portugués para hispanohablantes: ser/estar, por/para,
  * perfeito/imperfeito, perfeito simples/composto, seu/dele, indicativo/
- * subjuntivo, futuro do subjuntivo/infinitivo pessoal y la crase (à/a).
+ * subjuntivo, futuro do subjuntivo/infinitivo pessoal, la crase (à/a) y
+ * presente/futuro do subjuntivo (chegue/chegar).
  */
 (function (root) {
   "use strict";
@@ -217,14 +218,42 @@
       A("Pedi um bife ___ milanesa com arroz.", "à", "a", "milanesa", "*À moda de*: à milanesa, à baiana."),
       B("Vou ___ Lisboa em julho.", "a", "à", "Lisboa", "*Lisboa* no lleva artículo (*venho de Lisboa*): sin crase."),
       B("De repente, começou ___ chover.", "a", "à", "chover", "Ante verbo nunca hay crase."),
-      B("Fiquei cara ___ cara com ele.", "a", "à", "cara", "Entre palabras repetidas, sin crase."),
+      B("Fui ___ esta praia uma vez.", "a", "à", "esta", "Ante *esta* / *essa*, sin crase."),
       B("Ela chegou ___ pé na praia.", "a", "à", "pé", "Ante masculino no hay crase."),
       B("Entreguei o livro ___ ela ontem.", "a", "à", "ela", "Ante pronombre personal, sin crase."),
       B("Estou disposto ___ ajudar vocês.", "a", "à", "ajudar", "Ante infinitivo, sin crase."),
       B("Vendem roupas ___ preços baixos.", "a", "à", "preços", "Ante masculino plural, sin crase."),
-      B("Daqui ___ duas semanas começa o curso.", "a", "à", "Daqui", "*Daqui a* + tiempo: sin artículo, sin crase."),
+      B("Amanhã vou ___ Copacabana.", "a", "à", "Copacabana", "*Copacabana* no lleva artículo (*volto de Copacabana*): sin crase."),
       B("Ele foi ___ uma festa ontem.", "a", "à", "uma", "Ante *uma* (artículo indefinido), sin crase."),
       B("Escrevi ___ você ontem à noite.", "a", "à", "você", "Ante *você*, sin crase.")
+    ] },
+
+    // Semana 27: el error más típico del hispanohablante (*quando eu chegue,
+    // *se você possa).  Mismo verbo de los dos lados: lo que decide es el
+    // disparador (espero que, talvez, é importante que → presente; quando,
+    // se, assim que, depois que → futuro), no el castellano, que dice
+    // presente de subjuntivo o, con «si», indicativo.
+    { id: "futpres", week: 27, title: "chegue o chegar", sub: "presente o futuro do subjuntivo", items: [
+      A("Espero que você ___ bem.", "chegue", "chegar", "Espero que", "*Esperar que* (deseo) + presente do subjuntivo: *chegue*."),
+      A("Talvez ele ___ amanhã.", "venha", "vier", "Talvez", "*Talvez* (duda) + presente do subjuntivo: *venha*."),
+      A("Quero que vocês ___ a verdade.", "saibam", "souberem", "Quero que", "*Querer que* + presente do subjuntivo: *saibam*."),
+      A("É importante que você ___ o contrato.", "leia", "ler", "É importante que", "*É importante que* + presente do subjuntivo: *leia*."),
+      A("Tomara que ___ sol no domingo.", "faça", "fizer", "Tomara que", "*Tomara que* (ojalá) + presente do subjuntivo: *faça*."),
+      A("Duvido que ela ___ dinheiro para isso.", "tenha", "tiver", "Duvido que", "*Duvidar que* (duda) + presente do subjuntivo: *tenha*."),
+      A("É melhor que a gente ___ cedo.", "saia", "sair", "É melhor que", "*É melhor que* + presente do subjuntivo: *saia* (con *a gente*, tercera)."),
+      A("Embora ele ___ cansado, vai à festa.", "esteja", "estiver", "Embora", "*Embora* (concesión) pide presente do subjuntivo, nunca futuro: *esteja*."),
+      A("Vamos embora antes que ___.", "chova", "chover", "antes que", "*Antes que* pide presente do subjuntivo: *antes que chova*, no futuro."),
+      A("A gente espera aqui até que ele ___.", "chegue", "chegar", "até que", "*Até que* pide presente do subjuntivo: *até que ele chegue* (o *até ele chegar*, infinitivo)."),
+      B("Quando você ___, me liga.", "chegar", "chegue", "Quando", "*Quando* + algo que todavía no pasó: futuro do subjuntivo, nunca «quando você chegue»."),
+      B("Se ele ___ amanhã, a gente sai.", "vier", "venha", "Se", "*Se* + condición futura: futuro do subjuntivo (*vieram → vier*)."),
+      B("Assim que vocês ___ a verdade, me contem.", "souberem", "saibam", "Assim que", "*Assim que* (en cuanto) + futuro: futuro do subjuntivo (*souberam → souberem*)."),
+      B("Depois que você ___ o contrato, assina.", "ler", "leia", "Depois que", "*Depois que* + algo por venir: futuro do subjuntivo (*ler*, igual al infinitivo)."),
+      B("Se ___ sol no domingo, a gente vai à praia.", "fizer", "faça", "Se", "*Se* + condición futura: *fizer* (*fizeram → fizer*), nunca «se faça»."),
+      B("Enquanto ela ___ dinheiro, vai continuar viajando.", "tiver", "tenha", "Enquanto", "*Enquanto* (mientras) + futuro: futuro do subjuntivo (*tiver*)."),
+      B("Quem ___ por último apaga a luz.", "sair", "saia", "Quem", "*Quem* + algo por venir (quien salga): futuro do subjuntivo, no «quem saia»."),
+      B("Como você ___, a gente faz.", "quiser", "queira", "Como", "*Como* + algo por decidir (como quieras): futuro do subjuntivo (*quiser*)."),
+      B("Se ___ amanhã, o jogo vai ser cancelado.", "chover", "chova", "Se", "*Se* + condición futura: *chover* (igual al infinitivo), no «se chova»."),
+      B("Logo que o ônibus ___, te aviso.", "chegar", "chegue", "Logo que", "*Logo que* (apenas) + futuro: futuro do subjuntivo (*chegar*).")
     ] }
   ];
 

@@ -194,7 +194,7 @@ WEEK = {
         cz(0, "Completá con el Partizip I de *steigen*.", "Die immer weiter ___ Preise machen vielen Sorgen.", "steigenden", note="Siguen subiendo: Partizip I."),
         tr(0, "el mail escrito por él", "die von ihm geschriebene Mail", ["die von ihm geschriebene Mail", "die von ihm geschriebene E-Mail", "das von ihm geschriebene Mail", "das von ihm geschriebene E-Mail"], "*von ihm* va dentro, antes del participio. (*das Mail* en Austria y Suiza.)"),
         tr(0, "los chicos que juegan en el parque", "die im Park spielenden Kinder", _nc("die im Park spielenden Kinder", "die Kinder, die im Park spielen"), "*im Park* dentro del corchete, Partizip I al final."),
-        ty(0, "Escribí el sustantivo, con artículo.", "«la encuesta»", "die Umfrage", note="*die Umfrage*: *um* + *die Frage*. " + MAY),
+        ty(0, "Escribí el sustantivo, con artículo.", "«la encuesta» (pista: *um* + *die Frage*)", "die Umfrage", note="*die Umfrage*: *um* + *die Frage*. " + MAY),
         # parte 1 — del participio a la relativa
         ch(1, "Elegí la paráfrasis.", "die im Park spielenden Kinder", "die Kinder, die im Park spielen", ["die Kinder, die im Park spielen", "die Kinder, die im Park gespielt werden", "die Kinder, die im Park gespielt haben"], "Partizip I → relativa activa en presente."),
         ch(1, "Elegí la paráfrasis.", "die von ihm geschriebene Mail", "die Mail, die von ihm geschrieben wurde", ["die Mail, die von ihm geschrieben wurde", "die Mail, die er schreibt", "die Mail, die ihn geschrieben hat"], "Partizip II con objeto → pasiva."),

@@ -94,6 +94,30 @@
       { s: "Benché ___ tardi, esco.", a: "sia", b: "è", cue: "Benché", why: "«benché» pide siempre congiuntivo." },
       { s: "Dico che ___ una buona idea.", a: "è", b: "sia", cue: "Dico che", why: "Lo que afirmás: indicativo." }
     ] },
+    { id: "dainf", week: 17, title: "da o per", sub: "+ infinitivo: para qué sirve la cosa o para qué hacés algo", items: [
+      { s: "Vuoi qualcosa ___ bere?", a: "da", b: "per", cue: "qualcosa", why: "Algo que sirve para tomar: qualcosa da + infinitivo." },
+      { s: "Oggi ho molto ___ fare.", a: "da", b: "per", cue: "molto", why: "Mucho que hacer: molto da + infinitivo." },
+      { s: "Ho una pila di libri ___ leggere.", a: "da", b: "per", cue: "libri", why: "Libros para leer: el «para» describe la cosa, da." },
+      { s: "Non c'è niente ___ mangiare in casa.", a: "da", b: "per", cue: "niente", why: "Nada que comer: niente da + infinitivo." },
+      { s: "Questa è una camicia ___ stirare.", a: "da", b: "per", cue: "camicia", why: "Una camisa para planchar (que hay que planchar): da." },
+      { s: "Sono venuto qui ___ parlarti di una cosa.", a: "per", b: "da", cue: "Sono venuto", why: "Para qué viniste: la finalidad de una acción va con per." },
+      { s: "Studio l'italiano ___ lavorare a Roma.", a: "per", b: "da", cue: "Studio", why: "Para qué estudiás: finalidad, per." },
+      { s: "Esco presto ___ prendere il treno delle otto.", a: "per", b: "da", cue: "Esco", why: "Para qué salís: finalidad, per." },
+      { s: "Risparmio ogni mese ___ comprare una macchina.", a: "per", b: "da", cue: "Risparmio", why: "Para qué ahorrás: finalidad, per." },
+      { s: "Ho chiamato Marco ___ chiedergli un favore.", a: "per", b: "da", cue: "Ho chiamato", why: "Para qué llamaste: finalidad, per." }
+    ] },
+    { id: "volerci", week: 22, title: "ci vuole o ci metto", sub: "hace falta (nadie tarda) o alguien tarda", items: [
+      { s: "Per fare il ragù ___ almeno tre ore.", a: "ci vogliono", b: "ci vuole", cue: "tre ore", why: "volerci concuerda con lo que hace falta: tre ore es plural, ci vogliono." },
+      { s: "Per questa torta ___ due uova.", a: "ci vogliono", b: "ci vuole", cue: "due uova", why: "Hacen falta dos huevos: plural, ci vogliono." },
+      { s: "Da qui a Milano ___ un'ora di treno.", a: "ci vuole", b: "ci vogliono", cue: "un'ora", why: "Una hora, singular, y nadie que tarde: ci vuole." },
+      { s: "Con i bambini piccoli ___ tanta pazienza.", a: "ci vuole", b: "ci vogliono", cue: "tanta pazienza", why: "volerci es «hace falta» cualquier cosa: pazienza, singular, ci vuole." },
+      { s: "Quanti anni ___ per diventare medico?", a: "ci vogliono", b: "ci vuole", cue: "Quanti anni", why: "Lo que hace falta es plural (anni): ci vogliono." },
+      { s: "Io ___ venti minuti in bici.", a: "ci metto", b: "ci vuole", cue: "Io", why: "Hay alguien que tarda (io): metterci, ci metto. Nunca «tardo»." },
+      { s: "Il treno ___ tre ore per arrivare a Napoli.", a: "ci mette", b: "ci vogliono", cue: "Il treno", why: "El que tarda es el tren: metterci concuerda con él, ci mette." },
+      { s: "Quanto tempo ___ tu per arrivare in ufficio?", a: "ci metti", b: "ci vuole", cue: "tu", why: "Hay una persona que tarda (tu): ci metti." },
+      { s: "Mia sorella ___ sempre un'ora a prepararsi.", a: "ci mette", b: "ci vuole", cue: "Mia sorella", why: "La que tarda es tu hermana: metterci, ci mette." },
+      { s: "Noi ___ mezz'ora a piedi fino alla stazione.", a: "ci mettiamo", b: "ci vogliono", cue: "Noi", why: "Los que tardan somos nosotros: ci mettiamo." }
+    ] },
     { id: "relativi", week: 34, title: "che o cui", sub: "con o sin preposición", items: [
       { s: "Il libro ___ leggo è bello.", a: "che", b: "cui", cue: "leggo", why: "Objeto directo, sin preposición: che." },
       { s: "Il libro di ___ ti ho parlato è bello.", a: "cui", b: "che", cue: "di", why: "Después de preposición: cui." },
@@ -121,6 +145,8 @@
       case "cine": return a === "ci" ? 0 : 1;
       case "congiuntivo": return /congiuntivo/.test(x.why) ? 0 : 1;
       case "relativi": return a === "che" ? 0 : 1;
+      case "dainf": return a === "da" ? 0 : 1;
+      case "volerci": return /^ci v/.test(a) ? 0 : 1;
     }
     return 0;
   }

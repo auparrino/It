@@ -197,7 +197,7 @@ ITEMS = [
          note="dimenticarsi DI, ricordarsi DI, accorgersi DI, pentirsi DI."),
     dict(id="c1-prep-05", type="translate", topic="preposizioni",
          prompt="Traducí al italiano.",
-         stem="No logro terminar a tiempo.",
+         stem="No logro terminar a tiempo. (a tiempo: «in tempo»)",
          answer="Non riesco a finire in tempo",
          alt=["Non riesco a terminare in tempo"],
          note="«riuscire A» + infinitivo: riesco a finire, no «riesco finire»."),

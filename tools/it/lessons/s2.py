@@ -264,7 +264,8 @@ LESSONS = {
            "un adjetivo: *quel programma*, pero *quello strano programma*; "
            "*quella gonna*, *quell'altra gonna*. Para señalar: *questo qui*, "
            "*quello lì* (este de acá, ese de allá). «Eso» abstracto: *questo* "
-           "o *ciò* (más formal); *quello che* = lo que."]},
+           "o *ciò* (más formal); *quello che* = lo que. «El de, la de» = "
+           "*quello di, quella di*: *le scarpe di Anna e quelle di Marco*."]},
 
  {"h": "Posesivos: ya los viste en la semana 3",
   "r": "Repaso de la semana 3: el posesivo lleva **artículo** y concuerda con "
@@ -324,7 +325,11 @@ LESSONS = {
   "more": ["«En algún lado» es *da qualche parte*; «en ningún lado», *da "
            "nessuna parte*: *ho lasciato l'agenda da qualche parte*, *non vado "
            "da nessuna parte*. Solos, sin sustantivo, *alcuni* y *molti* "
-           "son pronombres: *alcuni non lavorano*, *molti pensano di sì*."]},
+           "son pronombres: *alcuni non lavorano*, *molti pensano di sì*.",
+           "*qualcosa* y *niente* piden *di* ante adjetivo y *da* ante "
+           "infinitivo: *qualcosa di buono* (algo rico), *niente da fare* "
+           "(nada que hacer). Y *tutti quanti* = absolutamente todos: "
+           "*vengono tutti quanti*."]},
 
  {"h": "molto, poco, tanto, troppo: ya lo viste en la semana 4",
   "r": "Como *molto* (semana 4): con sustantivo **concuerda**; con adjetivo, "
@@ -382,7 +387,8 @@ LESSONS = {
   "more": ["Para responder corto: *niente* (nada), *mai!* (¡nunca!), *per "
            "niente!* / *nient'affatto!* (¡para nada!), *assolutamente no!* "
            "(¡de ninguna manera!). «Creo que no», «espero que no»: *credo di "
-           "no*, *spero di no*, con *di*."]},
+           "no*, *spero di no*, con *di*. «Nada de» + sustantivo es *niente* "
+           "solo, sin *di*: *oggi niente vino* (hoy nada de vino)."]},
 
  {"h": "mica, la negación coloquial",
   "r": "*mica* refuerza la negación al hablar: *Non è mica facile!* Se dice "
@@ -812,7 +818,10 @@ LESSONS = {
          ["Le chiavi? *Gliele ho date* ieri.", "¿Las llaves? Se las di ayer."],
          ["*Ce li* hanno *portati*.", "Nos los trajeron."]],
   "warn": "*lo* y *la* se apostrofan ante *ha*: *me l'ha*. Solo el "
-          "participio te dice si era «lo» o «la»: *me l'ha dato / data*."},
+          "participio te dice si era «lo» o «la»: *me l'ha dato / data*.",
+  "more": ["Con un reflexivo pasa lo mismo: si el directo va delante, el "
+           "participio concuerda con él. *Si è rotto la gamba* → *se l'è "
+           "rotta*; *si è lavata le mani* → *se le è lavate*."]},
 
  {"h": "Con infinitivo e imperativo, pegados",
   "q": [{"prompt": "¿Cuál está bien? «¡Dámelo!»", "answer": "Dammelo!", "options": ["Dammelo!", "Damelo!", "Me lo da'!"]}, {"prompt": "¿Cuál está bien? «Quiero decírtelo.»", "answer": "Voglio dirtelo.", "options": ["Voglio dirtelo.", "Voglio dirtilo.", "Voglio dirlo ti."]}, {"prompt": "¿Cuál está bien? «¡Decíselo ya!»", "answer": "Diglielo subito!", "options": ["Diglielo subito!", "Digglielo subito!", "Digli lo subito!"]}],
@@ -1146,7 +1155,7 @@ LESSONS = {
   "more": ["Tras *a meno che*, el *non* no niega: *a meno che non piova*."],
   "qq": [{"prompt": "Elegí la que va", "stem": "Ti chiamo prima che tu ___.", "answer": "parta", "options": ["parta", "parti", "partire"]},
          {"prompt": "Elegí la que va", "stem": "Anche se ___, esco.", "answer": "piove", "options": ["piove", "piova", "piovere"]},
-         {"prompt": "Elegí la que va", "stem": "Cerco qualcuno che ___ il tedesco.", "answer": "sappia", "options": ["sappia", "sa", "sapere"]}]},
+         {"prompt": "Elegí la que va", "stem": "Esco, benché ___ freddo.", "answer": "faccia", "options": ["faccia", "fa", "fare"]}]},
 
 
  {"h": "Negar un verbo declarativo",
