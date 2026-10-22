@@ -4,6 +4,8 @@
 ipotetico), 37 (passato remoto) y 38 (discorso indiretto).  Esas semanas
 eran casi todo cloze y choice: acá el alumno traduce, transforma y corrige."""
 
+import re
+
 TR = "Traducí al italiano."
 VA = "Trova l'errore: tocá la palabra que está mal y corregila."
 P28 = "Uní o reescribí la frase con el conector entre paréntesis."
@@ -14,9 +16,17 @@ P37 = "Pasá la frase al passato remoto."
 P38 = "Pasá la frase al discurso indirecto."
 
 
+def _swap(stem, bad, good):
+    """Cambia la PALABRA bad, no la primera subcadena (bad="a" se comería la «a» de otra palabra)."""
+    pat = r"(?<!\w)" + re.escape(bad) + r"(?!\w)"
+    if re.search(pat, stem):
+        return re.sub(pat, lambda m: good, stem, count=1)
+    return stem.replace(bad, good, 1)
+
+
 def _fx(id, w, topic, level, cat, stem, bad, good, note, goodAlt=None):
     d = dict(id=id, type="fixerr", topic=topic, level=level, w=w, prompt=VA, cat=cat,
-             stem=stem, bad=bad, good=good, answer=stem.replace(bad, good, 1), note=note)
+             stem=stem, bad=bad, good=good, answer=_swap(stem, bad, good), note=note)
     if goodAlt:
         d["goodAlt"] = goodAlt
     return d

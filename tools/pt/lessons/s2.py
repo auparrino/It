@@ -150,8 +150,9 @@ LESSONS = {
 ],
 "blocks": [
  {"h": "La forma regular",
-  "r": "*-ar → -ava*; *-er* e *-ir → -ia*. Solo *nós* lleva tilde: "
-       "*falávamos*, *comíamos*, *abríamos*.",
+  "r": "*-ar → -ava*; *-er* e *-ir → -ia*. Solo *nós* lleva tilde, por ser "
+       "esdrújula: *falávamos*, *comíamos*, *abríamos* (en *-air/-uir* hay "
+       "además la tilde del hiato: *saía*).",
   "table": {"head": ["", "falar", "comer", "abrir"],
             "rows": [["eu", "falava", "comia", "abria"],
                      ["tu", "falavas", "comias", "abrias"],
@@ -556,7 +557,7 @@ LESSONS = {
  {"h": "Al hablar: queria, podia",
   "r": "En la charla, el imperfeito reemplaza al condicional: *eu queria "
        "um café*, *você podia me ajudar?* Es igual de amable.",
-  "ex": [["*Eu queria* um mate e um biscoito Globo.", "Quería un mate y un bizcocho Globo."],
+  "ex": [["*Eu queria* um mate e um biscoito Globo.", "Quería un mate helado (el de la playa) y un Biscoito Globo."],
          ["*Você podia* me passar o sal?", "¿Me pasabas la sal?"],
          ["Eu *ia* adorar!", "¡Me encantaría!"],
          ["No seu lugar, eu *ficava* em casa.", "En tu lugar, me quedaba en casa. (habla)"]],
@@ -767,7 +768,7 @@ LESSONS = {
  {"h": "Cantidad: muito, pouco, bastante, demais",
   "r": "*muito / pouco* concuerdan con el sustantivo (*muitas pessoas*) y "
        "no varían como adverbio (*muito caro*). *demais* = demasiado o muchísimo.",
-  "ex": [["Tinha *muitas* pessoas no bloco.", "Había mucha gente en el bloque."],
+  "ex": [["Tinha *muitas* pessoas no bloco.", "Había mucha gente en la comparsa."],
          ["Ela é *muito* simpática.", "Es muy simpática."],
          ["Comi *demais*.", "Comí demasiado."],
          ["Esse show foi bom *demais*!", "¡Ese show estuvo buenísimo!"],
@@ -1024,8 +1025,9 @@ LESSONS = {
          "answer": "faça", "options": ["faça", "faza", "haga"]}]},
 
  {"h": "Siete que van aparte",
-  "r": "Su *eu* no termina en *-o* (*sou, estou, vou, dou, sei, quero*...), "
-       "así que se aprenden de memoria.",
+  "r": "Estos siete no siguen el truco y se aprenden de memoria: en seis, el "
+       "*eu* no termina en *-o* (*sou, estou, vou, dou, sei, hei*); *querer* "
+       "sí (*quero*), pero da *queira*, no «quera».",
   "table": {"head": ["Verbo", "eu / você", "nós", "vocês / eles"],
             "rows": [["ser", "seja", "sejamos", "sejam"],
                      ["estar", "esteja", "estejamos", "estejam"],
@@ -1038,7 +1040,7 @@ LESSONS = {
          ["Tomara que *seja* verdade.", "Ojalá sea verdad."],
          ["É bom que eles *saibam*.", "Es bueno que lo sepan."]],
   "warn": "El español dicta «sea, vaya, sepa, haya»: en portugués son "
-          "*seja, vá, saiba, haja*. Y *deem* va sin tilde desde 1990.",
+          "*seja, vá, saiba, haja*. Y *deem* va sin tilde desde el Acuerdo Ortográfico.",
   "q": [{"prompt": "«Ojalá sea un buen día.»", "stem": "Tomara que ___ um bom dia.",
          "answer": "seja", "options": ["seja", "sea", "é"]}]},
 
@@ -1081,7 +1083,7 @@ LESSONS = {
  {"h": "Duda: talvez, é possível que",
   "r": "*talvez* delante del verbo pide subjuntivo: *talvez ele venha*. "
        "También *é possível que*, *duvido que*, *pode ser que*.",
-  "ex": [["*Talvez* eu *vá* ao bloco.", "Tal vez vaya al bloque."],
+  "ex": [["*Talvez* eu *vá* ao bloco.", "Tal vez vaya a la comparsa (al bloco)."],
          ["*É possível que* chova à tarde.", "Es posible que llueva a la tarde."],
          ["*Duvido que* ele *saiba*.", "Dudo que sepa."],
          ["*Pode ser que* ela *esteja* no trabalho.", "Puede que esté en el trabajo."]],

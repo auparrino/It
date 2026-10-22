@@ -108,7 +108,7 @@ TIPS = {
     # --- semana 9 ---
     "bere": "Se conjuga desde *bev-*: *bevo, bevi, beve, beviamo, bevete, bevono*; participio *bevuto*. *Qualcosa da bere* = algo para tomar.",
     "restare": "Pasado (semana 11) con *essere*: *sono restato*. *Restare a casa*; *mi resta poco tempo* = me queda poco tiempo.",
-    "sembrare": "Funciona como «parecer»: *mi sembra giusto*. Con infinitivo, sin preposición: *non sembra disposta*; *sembra che* + congiuntivo (semana 25).",
+    "sembrare": "Funciona como «parecer»: *mi sembra giusto*. Con adjetivo, directo: *non sembra disposta*. Con infinitivo, sin preposición: *sembra dormire*; *sembra che* + congiuntivo (semana 25).",
     "imparare": "Con infinitivo pide *a*: *imparo a guidare*. Idiomas con artículo: *imparare l'italiano*.",
     "dispiacere": "Se usa como «gustar»: *mi dispiace* = lo siento. *Ti dispiace se...?* = ¿te molesta si...?",
     "riuscire": "Con infinitivo pide *a*: *non riesco a dormire*. Se conjuga como *uscire*: *riesco, riesci*. Pasado con *essere*.",

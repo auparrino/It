@@ -497,7 +497,7 @@ ES_IT.update({
     "vestirse": ("vestir-se / se vestir", ""),
     "sentarse": ("sentar-se / sentar", ""),
     "llamarse": ("chamar-se", "Llamarse = chamar-se: me chamo Ana."),
-    "me llamo": ("me chamo / chamo-me / meu nome é", "Me llamo = me chamo o meu nome é."),
+    "me llamo": ("me chamo / chamo-me / meu nome é", "Me llamo = me chamo… o meu nome é…"),
     "llamar": ("chamar / ligar", "Llamar por teléfono = ligar (para)."),
     "llamo": ("chamo / ligo", ""),
     "llegar": ("chegar", "Llegar = chegar."),

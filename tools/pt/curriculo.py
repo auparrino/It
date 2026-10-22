@@ -521,7 +521,7 @@ WEEKS = [
          v=["ser", "ter", "fazer", "ir", "poder", "vir"],
          tenses=["subjFuturo", "subjImperfeito", "infPessoal", "perfeitoComposto"]),
     dict(w=52, title="Exame final C1", level="C1", boss=True,
-         focus="Cinco pruebas como en el Celpe-Bras y los exámenes C1.",
+         focus="Cinco pruebas como en los exámenes C1, con tareas de escritura a partir de un audio o un texto, como en el Celpe-Bras.",
          keys=["Compreensão oral y escrita.",
                "Estruturas y léxico.",
                "Produção escrita: texto argumentativo y carta formal."],

@@ -55,7 +55,7 @@
       { s: "Nel 2010 ___ in Italia per un mese.", a: "sono stato", b: "stavo", cue: "per un mese", why: "Un período cerrado, con duración: passato prossimo." },
       { s: "Ogni estate ___ al mare con i nonni.", a: "andavamo", b: "siamo andati", cue: "Ogni estate", why: "Lo que se repetía: imperfetto." },
       { s: "Sabato scorso ___ al mare con Luca.", a: "siamo andati", b: "andavamo", cue: "Sabato scorso", why: "Una vez, en un momento dado: passato prossimo." },
-      { s: "Non sono uscito perché ___ la febbre.", a: "avevo", b: "ho avuto", cue: "perché", why: "La causa, el estado de fondo: imperfetto." },
+      { s: "Quando mi hai chiamato ___ la febbre e stavo a letto.", a: "avevo", b: "ho avuto", cue: "Quando mi hai chiamato", why: "El estado de fondo en el momento de la llamada: imperfetto." },
       { s: "___ il libro di Eco in due giorni.", a: "Ho letto", b: "Leggevo", cue: "in due giorni", why: "Una acción completa, con su límite: passato prossimo." }
     ] },
     { id: "futcond", week: 20, title: "futuro o condizionale", sub: "lo que va a pasar o lo que pasaría", items: [

@@ -152,7 +152,7 @@
     P("p-105", "erres", 9, "rato", "jato", "ratón", "chorro; jet", "r inicial (una j suave, sin voz) contra j (la «y» zumbada de «yo», sonora)."),
     P("p-106", "erres", 10, "carinho", "carrinho", "cariño", "carrito", RR),
     P("p-107", "erres", 12, "vara", "varra", "vara", "barra (imperativo de varrer)", RR),
-    P("p-108", "erres", 14, "ramo", "amo", "ramo", "amo (amar)", "La r inicial se oye como una j suave; la h no suena: ramo ≠ amo."),
+    P("p-108", "erres", 14, "ramo", "amo", "ramo", "amo (amar)", "La r inicial suena como una j suave; amo empieza directamente con vocal: ramo ≠ amo."),
     P("p-109", "erres", 14, "jogo", "rogo", "juego", "ruego", "j sonora (la «y» zumbada de «yo») contra r inicial aspirada."),
     P("p-110", "erres", 16, "rir", "ir", "reír", "ir", "rir empieza con una j suave («jir»); ir, con vocal."),
     P("p-111", "erres", 17, "gente", "rente", "gente", "al ras", "g sonora (la «y» zumbada de «yo») contra r aspirada, sin voz."),
@@ -196,7 +196,7 @@
     P("p-146", "lfinal", 8, "pau", "pá", "palo", "pala", "pau (con u) contra pá: la misma u que tienen mal y sol."),
     P("p-147", "lfinal", 11, "vil", "vi", "vil", "vi", LFIN),
     P("p-148", "lfinal", 12, "cal", "cá", "cal", "acá", LFIN),
-    P("p-149", "lfinal", 14, "amor", "amou", "amor", "amó", "amor termina en r (a veces casi muda en el habla); amou, en ô cerrada."),
+    P("p-149", "erres", 14, "amor", "amou", "amor", "amó", "amor termina en r (a veces casi muda en el habla); amou, en ô cerrada."),
     P("p-150", "lfinal", 18, "calda", "cada", "almíbar", "cada", LFIN),
     // ------------------------------------------------------------- tonica
     P("p-151", "tonica", 1, "está", "esta", "está", "esta", "está es aguda (es-TÁ); esta es llana (ÉS-ta), con é abierta."),

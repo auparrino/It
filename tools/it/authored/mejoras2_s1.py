@@ -68,7 +68,7 @@ ITEMS = [
 
     # ================= Settimana 12: Riflessivi e imperativo =================
     dict(id="mj-12-01", type="cloze", topic="riflessivi e corpo", level="A2", w=12,
-         prompt="Completá con el artículo.", stem="Dopo il giardino, mi lavo ___ mani.",
+         prompt="Completá con el artículo.", stem="Dopo il lavoro in giardino, mi lavo ___ mani.",
          answer="le",
          note="Con partes del cuerpo el italiano usa el artículo, no el posesivo: mi lavo le mani."),
     dict(id="mj-12-02", type="fixerr", topic="riflessivi e corpo", level="A2", w=12, prompt=FX,

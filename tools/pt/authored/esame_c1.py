@@ -460,7 +460,7 @@ ITEMS = [
     co(3, "Não se preocupe, eu ___ um jeito. (= me las arreglo)", ["dou", "faço", "tomo"], "dou",
        "*Dar um jeito* es «arreglárselas, encontrar la vuelta»: el verbo es *dar*, no *fazer*. De ahí el famoso *jeitinho brasileiro*."),
     co(4, "Ela sempre ___ tudo a sério. (= tomarse en serio)", ["leva", "toma", "faz"], "leva",
-       "«Levar a sério» = tomar(se) en serio. Calco a evitar: ✗tomar a sério."),
+       "«Tomar en serio» no se calca con *tomar*: en Brasil la colocación es *levar a sério* (llevar), con *a* y sin artículo. *Tomar a sério* existe, pero suena europeo."),
     co(5, "Amanhã eu ___ a prova de história. (= rendir el examen)", ["faço", "dou", "tomo"], "faço",
        "El alumno «faz a prova» (rinde); el profesor «aplica» o «dá» la prova. Trampa rioplatense: ✗dar a prova."),
     co(6, "Os alunos ___ atenção à explicação.", ["prestam", "fazem", "põem"], "prestam",

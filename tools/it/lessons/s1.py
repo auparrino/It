@@ -861,8 +861,7 @@ LESSONS = {
          ["*Dormo* poco.", "Duermo poco."],
          ["*Penso* di sì.", "Pienso que sí."],
          ["Quanto *costa*?", "¿Cuánto cuesta?"]],
-  "warn": "Excepciones pocas: *vieni, vuole, può*. En *gioco* la *i* es solo "
-          "gráfica. Si tu instinto quiere diptongar, frenalo."},
+  "warn": "El italiano tiene sus propios *ie/uo* tónicos: *vieni, tieni, vuoi, può, siedo, muore*. En *gioco* la *i* es solo gráfica. Ante la duda, memorizá el *io*."},
 
  {"h": "essere o stare",
   "r": "*stare* = «estar» **de salud** y «quedarse». Estados, cualidades y "
@@ -1172,8 +1171,7 @@ LESSONS = {
          ["Vado *dal* medico.", "Voy al médico."],
          ["Stasera ceno *da* Anna.", "Esta noche ceno en lo de Ana."],
          ["gli occhiali *da* sole", "los anteojos de sol"]],
-  "warn": "A lo de una persona se va con *da*, no con *a*: *vado da Marco*, "
-          "*vado dal dentista*. «Vado al medico» se entiende, pero es calco del castellano.",
+  "warn": "A lo de una persona se va con *da*, no con *a*: *vado da Marco*, *dal dentista*. Lo estándar es *dal medico*; *al medico* es coloquial.",
   "more": ["*da* + infinitivo = «para» o «que»: *qualcosa da bere* (algo para "
            "tomar), *compiti da fare* (tarea para hacer). También el paso: "
            "*non guardare dalla finestra* (por la ventana). Y ojo: *un "
@@ -1667,8 +1665,9 @@ LESSONS = {
          ["Loro scriv*ono* molto.", "Ellos escriben mucho."]]},
 
  {"h": "Irregulares: essere a fare",
-  "r": "Los que más aparecen en el examen. **Sin diptongo** y con el acento "
-       "de *loro* en la raíz.",
+  "r": "Los que más aparecen en el examen. **Sin el diptongo del castellano** "
+       "(*posso, dormo*), aunque *venire* tiene el suyo: *vieni, viene*. Y con "
+       "el acento de *loro* en la raíz.",
   "table": {"head": ["", "essere", "avere", "andare", "fare", "venire"],
             "rows": [["io", "sono", "ho", "vado", "faccio", "vengo"],
                      ["tu", "sei", "hai", "vai", "fai", "vieni"],

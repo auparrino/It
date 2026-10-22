@@ -25,7 +25,7 @@
   var TASKS = {
     1: { t: "Presentate: cómo te llamás, de dónde sos, cuántos años tenés, qué hacés y cómo estás hoy.", min: 15,
          use: [["ser", 2, "2 formas de ser (sou, é, somos…)"], ["estar", 1, "1 forma de estar (estou, está…)"], ["ter", 1, "1 forma de ter (tenho, tem…)"]],
-         model: "Oi! Eu me chamo Martín. Sou argentino, de Rosario, e sou professor de história. Tenho trinta anos. Hoje estou em Copacabana e estou feliz. E você, como está?" },
+         model: "Oi! Eu me chamo Martín. Sou argentino, de Buenos Aires, e sou professor de história. Tenho trinta anos. Hoje estou em Copacabana e estou feliz. E você, como está?" },
     2: { t: "Contá qué tenés y qué hay en tu casa: hermanos, animales, cosas. Usá sustantivos en plural.", min: 15,
          use: [["plurais", 4, "4 sustantivos en plural"], ["haTem", 2, "2 veces tem o há"]],
          model: "Tenho dois irmãos e três primos. Em casa tenho dois gatos, cinco plantas e dez livros. Há duas janelas grandes e três cadeiras. Também tem dois violões e duas mesas." },

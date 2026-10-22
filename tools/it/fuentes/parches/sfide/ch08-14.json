@@ -3108,13 +3108,15 @@
     "label": "b",
     "type": "translate",
     "stem": "Te conocí en algún lado. (conoscere)",
-    "answer": "Ti ho conosciuto da qualche parte.",
+    "answer": "Ci siamo già conosciuti da qualche parte.",
     "alt": [
-     "Ti ho conosciuta da qualche parte.",
+     "Ci siamo già conosciute da qualche parte.",
      "Ti ho già conosciuto da qualche parte.",
-     "Ti ho già conosciuta da qualche parte."
+     "Ti ho già conosciuta da qualche parte.",
+     "Ti ho già visto da qualche parte.",
+     "Ti ho già vista da qualche parte."
     ],
-    "note": "*conoscere* en passato prossimo significa «conocer a alguien por primera vez»; «en algún lado» se arma con *da qualche parte*."
+    "note": "*conoscere* en passato prossimo significa «conocer a alguien por primera vez»; para «te ubico de algún lado» hace falta *già*. «En algún lado» se arma con *da qualche parte*."
    },
    {
     "label": "c",
@@ -3917,7 +3919,7 @@
    {
     "label": "d",
     "type": "translate",
-    "stem": "De ninguna manera tenés que irte. (tu)",
+    "stem": "No te podés ir por nada del mundo. (tu)",
     "answer": "Non devi assolutamente partire.",
     "alt": [
      "Non devi partire assolutamente.",
@@ -3977,7 +3979,7 @@
   ]
  },
  "r14-03": {
-  "consigna": "Traducí al italiano usando dos palabras negativas además de non.",
+  "consigna": "Traducí al italiano usando non y otras palabras negativas o de refuerzo (mai, più, niente, proprio…).",
   "interactive": true,
   "items": [
    {
@@ -4025,16 +4027,14 @@
     "label": "e",
     "type": "translate",
     "stem": "No encontré absolutamente nada.",
-    "answer": "Non ho mica trovato niente.",
+    "answer": "Non ho trovato assolutamente niente.",
     "alt": [
-     "Non ho mica trovato nulla.",
+     "Non ho trovato assolutamente nulla.",
      "Non ho trovato proprio niente.",
      "Non ho trovato proprio nulla.",
-     "Non ho trovato niente di niente.",
-     "Non ho trovato assolutamente niente.",
-     "Non ho trovato assolutamente nulla."
+     "Non ho trovato niente di niente."
     ],
-    "note": "Mica refuerza la negación (≈ para nada): non … mica … niente. También sirven proprio niente o assolutamente niente."
+    "note": "Assolutamente o proprio refuerzan: non … assolutamente niente. Mica no sirve acá: no refuerza, sino que discute algo que el otro supone («no es que haya encontrado nada…»)."
    },
    {
     "label": "f",

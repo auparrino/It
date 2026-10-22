@@ -37,7 +37,7 @@ PAROLE_C1 = {
     ],
     28: [
         ["comunque", "de todos modos; igual", "Finora non ho trovato un posto stabile. Comunque non escludo niente.", "Cierra una discusión o marca una concesión: *comunque sia* = sea como sea. Con congiuntivo es conjunción: *comunque vada* = salga como salga."],
-        ["siccome", "como (causal), ya que", "Siccome a Padova mi offrivano solo contratti brevi, sono partito per Berlino.", "Va siempre al principio, antes de la principal, como el «como» causal del español. En el medio se usa *perché* o *dato che*."],
+        ["siccome", "como (causal), ya que", "Siccome a Padova mi offrivano solo contratti brevi, sono partito per Berlino.", "Casi siempre abre la oración, antes de la principal, como el «como» causal del español; en el medio es más natural *perché* o *dato che*."],
         ["altrimenti", "si no, de lo contrario", "Serve una politica più paziente. Altrimenti, finito il clamore, resteranno soltanto le foto.", "Presenta la consecuencia de no hacer algo. En la charla, *sennò* (o *se no*) dice lo mismo."],
         ["inoltre", "además", "Inoltre, molti edifici sono in condizioni pessime e costano moltissimo.", "Suma un argumento, registro escrito y formal. En la charla, *e poi*, *in più*. No confundir con *oltre* (más allá de, además de)."],
         ["innanzitutto", "ante todo, en primer lugar", "Innanzitutto, bisogna chiarire un equivoco: la casa a un euro non costa un euro.", "Abre una enumeración de argumentos; sigue con *poi*, *inoltre*, *infine*. Se escribe junto; también *innanzi tutto*."],
@@ -113,7 +113,7 @@ PAROLE_C1 = {
         ["risparmio", "ahorro", "Avevo finito quasi tutti i risparmi prima della fine dell'inverno.", "En plural, *i risparmi* = los ahorros (la plata guardada). En singular, el hecho de ahorrar: *risparmio energetico*."],
         ["senno", "juicio, sensatez", "Con il senno di poi, avrei fatto le cose in modo diverso.", "Casi solo en *con il senno di poi* = con el diario del lunes, a posteriori. *Uscire di senno* = perder la razón."],
         ["sinceramente", "sinceramente, la verdad", "Sinceramente, non ci speravo più: il cliente era scontento da mesi.", "Abre una opinión franca, como el «la verdad» rioplatense. Adjetivo: *sincero*; sustantivo: *la sincerità*."],
-        ["esagerare", "exagerar", "Ho pensato che Marco esagerasse, come al solito.", "Una sola *s*, doble *g*. *Non esagerare!* = ¡no te zarpes! Adjetivo: *esagerato*."],
+        ["esagerare", "exagerar", "Ho pensato che Marco esagerasse, come al solito.", "Una sola *s* y una sola *g*, como en castellano (nada de «esaggerare»). *Non esagerare!* = ¡no te zarpes! Adjetivo: *esagerato*."],
         ["bozza", "borrador", "Ti preparo io la prima bozza della relazione?", "*La prima bozza*, *in bozza* (en borrador). En imprenta, *le bozze* son las pruebas de galera."],
         ["rinnovare", "renovar", "Il cliente di Verona non ha rinnovato il contratto.", "Doble *n*. *Rinnovare un contratto, un abbonamento, un documento*. Sustantivo: *il rinnovo*."],
         ["consegna", "entrega", "Io avrei voluto rimandare la consegna, ma il direttore non voleva sentirne parlare.", "*Data di consegna* = fecha de entrega; *consegna a domicilio* = envío a domicilio. Verbo: *consegnare*."],
@@ -214,7 +214,7 @@ PAROLE_C1 = {
     36: [
         ["sindaco", "intendente", "Molti sindaci dicono che per salvare i centri storici si deve partire dai residenti.", "Masculino; para una mujer se usa *la sindaca* o *il sindaco*. Es el jefe del *Comune*. *Sindacato* = sindicato, otra cosa."],
         ["palazzo", "edificio; palacio", "Nel nostro palazzo si sentono trolley sulle scale a tutte le ore.", "Es cualquier edificio de varios pisos, no solo un palacio. *Il Palazzo* también es el poder político."],
-        ["citofono", "portero eléctrico", "Si guardano i citofoni: dove c'erano cognomi, oggi si trovano numeri.", "Acento en la *i*: *citòfono*. *Suonare il citofono*; *citofonare a qualcuno* = tocarle el portero."],
+        ["citofono", "portero eléctrico", "Si guardano i citofoni: dove c'erano cognomi, oggi si trovano numeri.", "Esdrújula, acento en la *o*: *citòfono*. *Suonare il citofono*; *citofonare a qualcuno* = tocarle el portero."],
         ["padrone", "dueño, patrón", "Il padrone di casa, se esiste, abita altrove.", "*Padrone di casa* = el dueño (el que alquila). *Essere padrone di sé* = dominarse. Femenino *padrona*."],
         ["degradato", "deteriorado, venido a menos", "Negli anni Settanta molti centri storici erano degradati e insicuri.", "Se dice de barrios y edificios: *un quartiere degradato*. Sustantivo: *il degrado* (deterioro, abandono)."],
         ["soggiornare", "alojarse, quedarse (por un tiempo)", "Si passa da un luogo in cui si vive a un luogo in cui si soggiorna.", "*Soggiornare in albergo*, *per tre notti*. *Il soggiorno* = la estadía y también el living de la casa."],

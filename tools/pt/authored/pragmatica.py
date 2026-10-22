@@ -67,7 +67,7 @@ _P = [
   "*Vou ver e te falo* muchas veces es un «no» educado."),
  (18, S, "Al recepcionista de un hotel: ___", "Eu gostaria de um quarto com vista para o mar.",
   ["Eu gostaria de um quarto com vista para o mar.", "Quero um quarto com vista para o mar.", "Me dá um quarto com vista para o mar."],
-  "Con un desconocido que te atiende, el pedido va en futuro do pretérito: *eu gostaria*, *eu queria*."),
+  "Con un desconocido que te atiende, el pedido va en futuro do pretérito (*eu gostaria*) o en imperfeito de cortesía (*eu queria*)."),
  (20, A, "— O ônibus atrasou de novo. — ___", "Pois é…", ["Pois é…", "Ué!", "Nem pensar!"],
   "*Pois é* da la razón: «y sí», «así es». *Ué* marca extrañeza."),
  (20, A, "— Me empresta o carro no sábado? — ___ (no querés prestarlo)", "Nem pensar!", ["Nem pensar!", "Pois é!", "Eita!"],

@@ -991,8 +991,8 @@ ITEMS = [
     dict(id="rf-48-19", type="cloze", topic="ordine", level="C1",
          prompt="Completá la frase escindida.",
          stem="È nel 1861 ___ nasce il Regno d'Italia.", answer="che",
-         alt=["quando"],
-         note="Frase escindida temporal: è + fecha + che (o quando)."),
+         note="Frase escindida temporal: en castellano, cuando / donde («fue en 1861 cuando»); "
+              "en italiano la escindida va con che: è nel 1861 che, è qui che."),
     dict(id="rf-48-20", type="choice", topic="ordine", level="C1",
          prompt="Respuesta a «¿Quién guió a los Mil?»: elegí la que pone en foco a Garibaldi.",
          stem="___",

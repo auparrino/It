@@ -89,7 +89,7 @@ LESSONS = {
 ]},
 
 15: {
-"intro": "LA semana difícil del B1: passato prossimo o imperfetto. No se "
+"intro": "La semana difícil del A2: passato prossimo o imperfetto. No se "
          "decide por «puntual o duradero», sino por lo que mira quien habla: "
          "los hechos o el decorado.",
 "parts": [
@@ -194,8 +194,8 @@ LESSONS = {
          ["Anna *si è vestita* in fretta.", "Ana se vistió rápido."],
          ["I ragazzi *si sono divertiti*.", "Los chicos se divirtieron."]],
   "warn": "*lavare* solo va con *avere*, y el instinto lo arrastra: «mi ho "
-          "lavato». Con pronombre, siempre *mi sono lavato*: es el error más "
-          "penalizado del B1."},
+          "lavato». Con pronombre, siempre *mi sono lavato*: es uno de los "
+          "errores que más se notan."},
 
  {"h": "El mismo verbo con y sin pronombre",
   "r": "Sin pronombre, cada verbo sigue su regla: *ho lavato la macchina*. "
@@ -371,15 +371,14 @@ LESSONS = {
                      ["non... ancora", "todavía no", "Non è ancora qui. (Todavía no está.)"],
                      ["non... né... né", "ni... ni", "Non bevo né vino né birra. (No tomo ni vino ni cerveza.)"],
                      ["non... affatto / per niente", "en absoluto / para nada", "Non è affatto facile. (No es nada fácil.)"],
-                     ["non... assolutamente", "de ninguna manera", "Non devi assolutamente partire. (De ninguna manera tenés que irte.)"],
+                     ["non... assolutamente", "de ninguna manera", "Non devi assolutamente partire. (No te podés ir por nada del mundo.)"],
                      ["non... neanche / nemmeno / neppure", "ni siquiera, tampoco", "Non ho neanche un euro. (No tengo ni un euro.)"],
                      ["non... che", "solo (¡no es negación!)", "Non ho che dieci euro. (Solo tengo diez euros.)"]]},
   "ex": [["Non c'è *niente* da fare.", "No hay nada que hacer."],
          ["Non è *ancora* arrivato.", "Todavía no llegó."],
          ["Non mi piace *neanche* un po'.", "No me gusta ni un poco."],
          ["*Non* ho *che* dieci euro.", "Solo tengo diez euros."]],
-  "warn": "*Non ho che dieci euro* = «solo tengo diez euros», no «no tengo "
-          "diez euros». Trampa clásica de comprensión lectora.",
+  "warn": "*Non ho che dieci euro* = «solo tengo diez euros», no «no tengo diez euros». Y *non devi* prohíbe; «no hace falta» es *non c'è bisogno che…*.",
   "more": ["Para responder corto: *niente* (nada), *mai!* (¡nunca!), *per "
            "niente!* / *nient'affatto!* (¡para nada!), *assolutamente no!* "
            "(¡de ninguna manera!). «Creo que no», «espero que no»: *credo di "
@@ -719,15 +718,13 @@ LESSONS = {
           "due ore* = se necesitan dos horas (impersonal). No los mezcles."},
  
  {"h": "NE: de + lugar",
-  "q": [{"prompt": "Elegí la que va", "stem": "Torni da Roma? — Sì, ___ torno domani.", "answer": "ne", "options": ["ne", "ci", "lo"]},
-        {"prompt": "¿Cuál está bien? «Salgo de ahí ahora.»", "answer": "Ne esco adesso.", "options": ["Ne esco adesso.", "Ci esco adesso.", "Lo esco adesso."]}],
-  "r": "*ne* también reemplaza **de + lugar**: «de ahí». Va con verbos de "
-       "movimiento como *uscire*, *tornare*, *venire*, *partire*.",
-  "ex": [["Quando esci dall'ufficio? — *Ne* esco alle sei.", "¿Cuándo salís de la oficina? — Salgo a las seis."],
-         ["Torni da Roma? — Sì, *ne* torno domani.", "¿Volvés de Roma? — Sí, vuelvo mañana."],
-         ["*Ne* sto uscendo proprio adesso.", "Justo estoy saliendo de ahí."]],
-  "warn": "En castellano lo dejás implícito o decís «de ahí». Con *da* + "
-          "lugar, el clítico es *ne*, no *ci*: *ne esco*, no «ci esco»."},
+  "q": [{"prompt": "Elegí la que va", "stem": "Era un brutto periodo, ma ___ sono uscito.", "answer": "ne", "options": ["ne", "ci", "lo"]},
+        {"prompt": "¿Cuál está bien? «¿Cómo saliste de eso?»", "answer": "Come ne sei uscito?", "options": ["Come ne sei uscito?", "Come ci sei uscito?", "Come lo sei uscito?"]}],
+  "r": "*ne* también puede querer decir **de ahí**. Para reconocerlo, sobre todo en *uscirne* / *venirne fuori* (salir de algo, también en sentido figurado) y *ne sono appena uscito*.",
+  "ex": [["Che casino! Come *ne* veniamo fuori?", "¡Qué lío! ¿Cómo salimos de esto?"],
+         ["Come *ne* sei uscito?", "¿Cómo saliste de eso?"],
+         ["Sei ancora in ufficio? — No, *ne* sono appena uscita.", "¿Seguís en la oficina? — No, recién salí."]],
+  "warn": "No lo pongas en cualquier respuesta: a «Quando esci dall'ufficio?» se contesta *Esco alle sei*, sin clítico. Y es *ne*, no *ci*: *ne sono uscito*."},
 
  {"h": "CI: con + algo",
   "q": [{"prompt": "Elegí la que va", "stem": "Hai un coltello? — Sì, ___ taglio il pane.", "answer": "ci", "options": ["ci", "ne", "la"]},
@@ -746,7 +743,7 @@ LESSONS = {
        "**a**, **in**, **su** o **con** llevan *ci*.",
   "table": {"head": ["Preposición", "Clítico", "Ejemplo"],
             "rows": [["di + cosa / cantidad", "ne", "ne parlo, ne ho due"],
-                     ["da + lugar", "ne", "ne esco"],
+                     ["da + lugar (más acotado)", "ne", "uscirne, andarsene"],
                      ["a / in + lugar", "ci", "ci vado, ci abito"],
                      ["a / su + cosa", "ci", "ci penso, ci conto"],
                      ["con + cosa", "ci", "ci scrivo"]]},

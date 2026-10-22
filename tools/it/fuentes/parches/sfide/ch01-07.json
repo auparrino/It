@@ -403,7 +403,7 @@
     "stem": "La capitale ___ Cuba è l'Avana.",
     "answer": "di",
     "alt": [],
-    "note": "Las islas pequeñas o medianas como Cuba van sin artículo."
+    "note": "Cuba va sin artículo, como Malta o Cipro: muchas islas-Estado no lo llevan."
    },
    {
     "label": "f",
@@ -2184,7 +2184,7 @@
     "stem": "Andate in centro? – Sì, ___ andiamo fra poco.",
     "answer": "ci",
     "alt": [],
-    "note": "*ci* reemplaza un lugar ya nombrado (*in centro*) y no se puede omitir como en castellano: *ci andiamo*."
+    "note": "Lo natural es retomar el lugar ya nombrado (*in centro*) con *ci*: *ci andiamo*. Sin *ci* también se dice (*Sì, andiamo fra poco*), pero acá se pide el pronombre."
    },
    {
     "label": "c",

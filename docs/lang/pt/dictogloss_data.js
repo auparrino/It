@@ -35,15 +35,14 @@
         "pão na chapa": "pan con manteca tostado en la plancha" } },
 
     { week: 4, level: "A1", title: "Bia e Sofía",
-      es: "Dos amigas muy distintas, una carioca y una rosarina: cómo son por fuera y por dentro.",
-      text: "Bia é carioca, de Botafogo. É alta e magra, tem o cabelo comprido e os olhos verdes. É muito simpática e um pouco tímida. Sofía é uma amiga argentina da Bia, de Rosario. É baixa e tem o cabelo curto e cacheado. É inteligente, mas um pouco preguiçosa. São duas pessoas muito diferentes, mas são boas amigas. O Rio é uma cidade bonita e muito quente.",
+      es: "Dos amigas muy distintas, una carioca y una porteña: cómo son por fuera y por dentro.",
+      text: "Bia é carioca, de Botafogo. É baixa e tem o cabelo curto e crespo. É muito simpática e alegre. Sofía é uma amiga argentina da Bia, de Buenos Aires. É alta e magra, tem o cabelo comprido e os olhos verdes. É inteligente, mas um pouco tímida. São duas pessoas muito diferentes, mas são boas amigas. O Rio é uma cidade bonita e muito quente.",
       chunks: ["alta e magra", "o cabelo comprido", "os olhos verdes", "um pouco tímida", "boas amigas", "bonita e muito quente"],
-      keywords: ["Bia", "Botafogo", "cabelo", "olhos", "tímida", "Sofía", "Rosario", "amigas"],
+      keywords: ["Bia", "Botafogo", "cabelo", "olhos", "tímida", "Sofía", "Buenos Aires", "amigas"],
       gloss: {
         "magra": "flaca",
         "cabelo comprido": "pelo largo (comprido = largo; no es «comprimido»)",
-        "cacheado": "enrulado",
-        "preguiçosa": "vaga, perezosa" } },
+        "crespo": "enrulado (rizo apretado)" } },
 
     { week: 5, level: "A1", title: "O dia do Lucas",
       es: "La rutina de Lucas de lunes a viernes: el metro, el almuerzo, la cena. Y el sábado, el calçadão.",

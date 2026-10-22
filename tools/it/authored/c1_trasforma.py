@@ -25,7 +25,9 @@ Cada ítem lleva «w», la semana de su teoría: build_course.py lo pone en esa
 semana y tools/it/sillabo.py controla que no pida nada que se enseñe después.
 """
 
-P_TR = "Reescribí la frase manteniendo el sentido: escribí solo lo que falta en el hueco."
+import re
+
+P_TR ="Reescribí la frase manteniendo el sentido: escribí solo lo que falta en el hueco."
 P_SOG = "La subordinada tiene ahora otro sujeto: pasala a la forma explícita y escribí solo lo que falta."
 P_IMP = "Mismo sujeto: pasá la subordinada a la forma implícita y escribí solo lo que falta."
 P_PASS = "Pasá de activa a pasiva (o al revés) sin cambiar el tiempo: escribí solo lo que falta."
@@ -53,9 +55,17 @@ def rs(w, n, stem, answer, note, alt=None):
     ITEMS.append(d)
 
 
+def _swap(stem, bad, good):
+    """Cambia la PALABRA bad (no la primera subcadena: con bad="a" se comía la «a» de «padre»)."""
+    pat = r"(?<!\w)" + re.escape(bad) + r"(?!\w)"
+    if re.search(pat, stem):
+        return re.sub(pat, lambda m: good, stem, count=1)
+    return stem.replace(bad, good, 1)
+
+
 def er(n, w, cat, stem, bad, good, note, goodAlt=None):
     d = dict(id="c1-er-%02d" % n, type="fixerr", topic="valico", level="C1", w=w, prompt=P_ERR, cat=cat,
-             stem=stem, bad=bad, good=good, answer=stem.replace(bad, good, 1), note=note)
+             stem=stem, bad=bad, good=good, answer=_swap(stem, bad, good), note=note)
     if goodAlt:
         d["goodAlt"] = goodAlt
     ITEMS.append(d)
@@ -406,7 +416,9 @@ tf(44, 6, "Se studi un po' ogni giorno, impari presto. → ___ un po' ogni giorn
 tf(44, 7, "Poiché aveva perso le chiavi, ha dormito da un'amica. → ___ le chiavi, ha dormito da un'amica.", "Avendo perso",
    "Anterioridad + causa: gerundio compuesto, *avendo perso*.", prompt=P_IMP)
 tf(44, 8, "Uscito dall'ufficio, ha chiamato la moglie. → Dopo che ___ dall'ufficio, ha chiamato la moglie.", "era uscito",
-   "Al revés: el participio absoluto vuelve a ser una temporal explícita en trapassato.")
+   "Al revés: el participio absoluto vuelve a ser una temporal explícita. *Dopo che* + passato prossimo "
+   "o trapassato prossimo: *è uscito* o *era uscito*; en la narración literaria, *dopo che fu uscito*.",
+   alt=["è uscito"])
 tf(44, 9, "Pur essendo ricco, vive modestamente. → Benché ___ ricco, vive modestamente.", "sia",
    "*Pur* + gerundio = *benché* + congiuntivo: *benché sia ricco*.")
 
@@ -567,7 +579,7 @@ rs(46, 1, "I prezzi sono andati alle stelle. → (articolo) I prezzi sono ___ no
    "*Andare alle stelle* es expresivo y coloquial; en un artículo: *sono aumentati notevolmente*.", alt=["cresciuti", "saliti"])
 rs(46, 2, "Il capo si è arrabbiato di brutto. → (verbale della riunione) Il direttore ha espresso un forte ___.", "disappunto",
    "*Esprimere disappunto* es la forma neutra y formal de decir que alguien se enojó.",
-   alt=["malcontento", "dissenso", "fastidio", "disagio"])
+   alt=["malcontento", "fastidio"])
 rs(47, 1, "Hanno mandato a casa venti persone. → (comunicato) L'azienda ha ___ venti dipendenti.", "licenziato",
    "*Mandare a casa* es el eufemismo coloquial; el término preciso es *licenziare*.")
 rs(47, 2, "Ne parliamo dopo. → (verbale) La questione sarà affrontata in un secondo ___.", "momento",
@@ -603,7 +615,8 @@ er(3, 40, "accordo", "In quel negozio si vende libri usati.", "vende", "vendono"
 er(4, 40, "condizionale", "Mi ha detto che verrebbe il giorno dopo.", "verrebbe", "sarebbe venuto",
    "El futuro visto desde el pasado es *condizionale passato*: *mi ha detto che sarebbe venuto*. El simple es calco del castellano «vendría».")
 er(5, 41, "periodo_ipotetico", "Se avrei più tempo, leggerei di più.", "avrei", "avessi",
-   "Después de *se* nunca va condicional: *se avessi più tempo*. Es el error más típico del hispanohablante… y de muchos italianos.")
+   "Después de *se* hipotético («si» condicional) nunca va condicional: *se avessi più tempo*. "
+   "Con *se* = «si» interrogativo sí puede ir: *non so se verrebbe*. Es el error más típico del hispanohablante… y de muchos italianos.")
 er(6, 41, "participio_accordo", "Maria? L'ho visto uscire alle otto.", "visto", "vista",
    "*L'* es *la* (Maria): con el pronombre directo delante, el participio concuerda: *l'ho vista*.")
 er(7, 41, "a_personale", "Ho sentito a Marco cantare sotto la doccia.", "a Marco", "Marco",
@@ -639,7 +652,7 @@ er(21, 49, "congiuntivo", "Ti lascio le chiavi affinché puoi entrare quando vuo
    "*Affinché* (= *perché* final) rige congiuntivo: *affinché tu possa entrare*.")
 er(22, 49, "congiuntivo", "Qualora avete bisogno di aiuto, chiamate questo numero.", "avete", "abbiate",
    "*Qualora* («en caso de que») rige congiuntivo: *qualora abbiate bisogno* (o *aveste*).", goodAlt=["aveste"])
-er(23, 50, "falso_amico", "Sono un po' imbarazzata: aspetto un bambino!", "imbarazzata", "incinta",
+er(23, 50, "falso_amico", "Sono imbarazzata: aspetto un bambino!", "imbarazzata", "incinta",
    "Falso amigo: *imbarazzata* es «avergonzada, incómoda»; «embarazada» se dice *incinta*.")
 er(24, 50, "falso_amico", "Il suo discorso è stato troppo largo e noioso.", "largo", "lungo",
    "Falso amigo: *largo* es «ancho»; el «largo» castellano se dice *lungo*.")

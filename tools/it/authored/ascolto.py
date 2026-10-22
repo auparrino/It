@@ -14,7 +14,7 @@ PAIRS = [
     ("nono", ["nonno"], "nono = noveno, n simple; nonno (abuelo) alarga la n."),
     ("palla", ["pala"], "palla = pelota: la l doble dura más. pala = pala."),
     ("sette", ["sete"], "Las dobles se pronuncian con una pequeña pausa antes: *set-te* (siete) contra *sete* (sed). Si no la marcás, decís otra palabra."),
-    ("casa", ["cassa"], "casa, con s simple (suena casi como z suave); cassa = caja."),
+    ("casa", ["cassa"], "casa, con una sola s (en el estándar suena como nuestra s; en el norte, sonora); cassa (caja) la sostiene."),
     ("penna", ["pena"], "*penna* (lapicera) sostiene la n; *pena* (pena) no. En italiano la duración de la consonante distingue palabras."),
     ("caro", ["carro"], "La r simple suena como la de «caro» y la doble *rr* vibra como la de «carro»: acá el contraste es el mismo que en castellano."),
     ("sono", ["sonno"], "*sono* (soy/son) con n simple; *sonno* (sueño) la sostiene. La doble consonante es la única diferencia entre las dos palabras."),

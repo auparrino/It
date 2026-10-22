@@ -326,7 +326,7 @@ ce(37, 9, "Nel cassetto trovammo il certificato ___ di quel giorno.", ["elettora
 # ------------------------------------------------------------------ 38
 fp(38, 1, "fare → ___ (di nuovo)", "rifare", "*ri-* = otra vez: *rifare* (rehacer, volver a hacer).")
 fp(38, 2, "partire → ___ (di nuovo)", "ripartire", "*Ripartire* = volver a salir, volver a arrancar.")
-fp(38, 3, "Dopo cinque anni il bar ha ___ tutti i giorni. (aprire)", "riaperto", "*Riaprire*, participio *riaperto*.")
+fp(38, 3, "Dopo cinque anni di chiusura il bar ha ___. (aprire)", "riaperto", "*Riaprire*, participio *riaperto*.")
 fp(38, 4, "Un paese non si ___ soltanto con gli incentivi. (popolare)", "ripopola", "*Ripopolare* = repoblar.")
 fp(38, 5, "La sindaca ha ___ la gente in montagna. (portare)", "riportato", "*Riportare* = traer de vuelta.")
 fp(38, 6, "Dopo il terremoto la scuola è stata ___ in un anno. (costruire)", "ricostruita", "*Ricostruire* = reconstruir; en pasiva concuerda con *scuola*.")
@@ -453,7 +453,7 @@ ce(44, 9, "Il Gran Sasso ospita una ricerca di ___.", ["punta", "vertice", "cima
 fp(45, 1, "amico → ___ (aggettivo)", "amichevole", "*-evole*: *amichevole* (amistoso); también *una partita amichevole*.")
 fp(45, 2, "ragione → ___ (aggettivo)", "ragionevole", "*Ragionevole* = razonable.")
 fp(45, 3, "Quando dice «non prendertela», sta per dirti qualcosa di ___. (spiacere)", "spiacevole", "*Spiacevole* = desagradable.")
-fp(45, 4, "Chi se la prende soffre con tutti tranne che con il ___. (colpa)", "colpevole", "*Colpevole* = culpable.")
+fp(45, 4, "Chi se la prende soffre a voce alta con tutti tranne che con il ___. (colpa)", "colpevole", "*Colpevole* = culpable.")
 fp(45, 5, "Una cena in famiglia può essere molto ___. (piacere)", "piacevole", "*Piacevole* = agradable.")
 fp(45, 6, "Il capo si è detto ___ alla proposta. (favore)", "favorevole", "*Essere favorevole a* = estar a favor de.")
 cv(45, 1, "Ti ho ___ una risposta seria, o quasi.", "dato", "*Dare una risposta*.")

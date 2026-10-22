@@ -140,7 +140,7 @@ ITEMS = [
        "benché (aunque) pide siempre congiuntivo."),
     ch("mj-25-04", 25, T25, "B1", "Anche se ___ stanco, continua a lavorare.",
        ["è", "sia", "siete"], "è",
-       "anche se va con indicativo. Solo benché y sebbene piden congiuntivo."),
+       "Anche se va con indicativo. Las concesivas benché, sebbene, nonostante y malgrado (+ verbo) piden congiuntivo."),
     ch("mj-25-05", 25, T25, "B1", "Te lo ripeto affinché tu lo ___.",
        ["capisca", "capisci", "capirai"], "capisca",
        "affinché (para que) pide congiuntivo."),

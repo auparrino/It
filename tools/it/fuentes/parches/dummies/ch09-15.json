@@ -1220,9 +1220,9 @@
    "type": "cloze",
    "stem": "C'è un bel film ___ televisione.",
    "answer": "alla",
-   "alt": [],
+   "alt": ["in"],
    "drop": false,
-   "note": "«En la tele» se dice *alla televisione*: el italiano usa *a* + artículo donde el castellano pone «en»."
+   "note": "*alla televisione* o *in televisione*: se usan las dos. Acá practicamos a + artículo: *alla*."
   },
   "d12-004": {
    "consigna": "Completá con a o di, solas o unidas al artículo (al, alla, alle, del, della…).",
