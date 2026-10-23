@@ -418,12 +418,16 @@ async function smokeEsame(page, code, P, snap, note, errors) {
     if (await page.$("[data-m='lez']")) {
       // a toast or the gloss box can cover the button for a moment: click it directly
       await page.$eval("[data-m='lez']", b => b.click());
+      // the first mission of the week opens «💡 Estrategia de la semana» first
+      if (await page.waitForSelector("#stratgo", { timeout: 1500 }).catch(() => null)) await page.click("#stratgo");
       await page.waitForSelector(".lescard");
       await page.click("#lesnext"); await page.waitForTimeout(300);
       await snap(page, P("leccion-claro"));
       note(code + " · lección abierta");
       await page.click("#lesquit");
     } else errors.push(code + ": la semana 1 no tiene lección");
+    // from here on the strategy sheet would cover the missions (smoke_estrategia.js covers it)
+    await page.evaluate(() => { const s = window.__test.state(); s.strat = Object.assign(s.strat || {}, { off: true }); });
     // the dictogloss of week 2
     await page.evaluate(() => { const s = window.__test.state(); s.unlocked = 2; });
     await page.click("[data-tab='percorso']"); await page.click("[data-week='2']");
