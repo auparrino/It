@@ -1453,6 +1453,14 @@ def main() -> None:
     with open(os.path.join(DATA, "glossario.json"), "w", encoding="utf-8") as fh:
         json.dump(lessico.gloss_table(texts), fh, ensure_ascii=False, separators=(",", ":"))
 
+    # «Ya puedo…»: the week's goals, each tied to one or two of its items
+    # (tools/it/can.py, tools/lib/puedo.py)
+    sys.path.insert(0, os.path.join(ROOT, "tools", "lib"))
+    import can
+    import puedo
+    for p in puedo.attach(course, can.CAN):
+        print("  -", p)
+
     out = os.path.join(DATA, "course.json")
     with open(out, "w", encoding="utf-8") as fh:
         json.dump(course, fh, ensure_ascii=False, separators=(",", ":"))

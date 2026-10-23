@@ -107,6 +107,296 @@
   // What is left after the common stem when the difference is an ending.
   var ENDING = /^(|e|en|er|es|em|n|s|st|t|et|est|te|ten)$/;
 
+  /* ------------------------------------------------------ el color del género */
+
+  /* Signalgrammatik (Schritte, Menschen): der azul, das verde, die rojo y
+     el plural amarillo, siempre el mismo color, con una forma además del
+     color (■ ▲ ● ◆) para quien no distingue los colores.  El color es el
+     del sustantivo, no el del artículo: «mit der Mutter» va en rojo (die
+     Mutter), «die Zimmer» en amarillo (el plural de das Zimmer).  Lo que
+     no se sabe no se pinta: solo los sustantivos de las palabras de la
+     semana y de las tablas de las lecciones (learn), sus plurales y sus
+     compuestos (der Handschuh, como der Schuh).  El núcleo lo usa en
+     Palabras de la semana, la lección y la devolución (app.js genderPaint),
+     y el aviso «es die Sonne» en la corrección (notice). */
+  var G_LABEL = { m: "masculino", f: "femenino", n: "neutro", pl: "plural" };
+  var G_MARK = { m: "■", n: "▲", f: "●", pl: "◆" };   // ■ ▲ ● ◆
+  // The genders an article can go with (any case).
+  var G_ART = { der: ["m", "f", "pl"], die: ["f", "pl"], das: ["n"], den: ["m", "pl"], dem: ["m", "n"], des: ["m", "n"],
+                ein: ["m", "n"], eine: ["f"], einen: ["m"], einem: ["m", "n"], einer: ["f"], eines: ["m", "n"],
+                kein: ["m", "n"], keine: ["f", "pl"], keinen: ["m", "pl"], keinem: ["m", "n"], keiner: ["f", "pl"], keines: ["m", "n"] };
+  // The gender a learner means with the article (nominative and accusative).
+  var G_MEANT = { der: ["m"], die: ["f", "pl"], das: ["n"], den: ["m", "pl"], ein: ["m", "n"], eine: ["f"], einen: ["m"],
+                  kein: ["m", "n"], keine: ["f", "pl"], keinen: ["m", "pl"] };
+  // Only plural (die Eltern) or a plural with a Spanish gloss in singular.
+  var G_PL_ONLY = { Eltern: 1, Geschwister: 1, Leute: 1, Ferien: 1, Großeltern: 1, Lebensmittel: 1, Kosten: 1 };
+  var G_LEX = {};
+  var G_NOUN = "[A-ZÄÖÜ][a-zäöüßé]*(?:-[A-ZÄÖÜ]?[a-zäöüßé]+)*";   // é: das Café
+  // article, the adjectives between (der kleine, alte Tisch), the noun
+  var G_RE = new RegExp("(^|[^A-Za-zÄÖÜäöüß])([DdEeKk][a-z]{1,5})([ \\u00a0]+)((?:[a-zäöüß]+(?:e|en|er|es|em),?[ \\u00a0]+){0,2})(" +
+                        G_NOUN + ")(?![A-Za-zÄÖÜäöüßé])", "g");
+  var G_ONE = new RegExp("^(der|die|das)\\s+(" + G_NOUN + ")$");
+
+  // capitalized but not a noun: «das Ihre», «das Sie»
+  var G_PRON = /^(Sie|Ihr|Ihre|Ihren|Ihrem|Ihrer|Ihres|Euer|Eure|Ich|Du|Er|Es|Wir)$/;
+  // a determiner among the «adjectives»: the article is that one (das keine gute Idee)
+  var G_DET = /(^|[ ,\u00a0])((k?ein|[mds]ein|ihr|unser|eur)(e|en|er|es|em)|(dies|jen|jed|manch|welch)(e|en|er|es|em))[ ,\u00a0]/i;
+
+  function gAllows(art, g) { return (G_ART[art] || []).indexOf(g) >= 0; }
+  function gFold(w) { return w.replace(/ä/g, "a").replace(/ö/g, "o").replace(/ü/g, "u").replace(/Ä/g, "A").replace(/Ö/g, "O").replace(/Ü/g, "U"); }
+  function gCap(w) { return w.charAt(0).toUpperCase() + w.slice(1); }
+
+  function gAdd(art, noun, plural) {
+    if (!noun || G_LEX[noun]) return;
+    G_LEX[noun] = plural || G_PL_ONLY[noun] ? "pl" : art === "der" ? "m" : art === "die" ? "f" : "n";
+  }
+  function gAddEntry(text, gloss) {
+    String(text || "").split(/\s+\/\s+/).forEach(function (one) {
+      var m = G_ONE.exec(one.trim());
+      if (m) gAdd(m[1], m[2], m[1] === "die" && /^(los|las)\s/.test(String(gloss || "")));
+    });
+  }
+
+  /* The nouns of the course: the words of every week and the gender
+     tables of the lessons («Tisch | der | la mesa»). */
+  function gLearn(course) {
+    ((course && course.weeks) || []).forEach(function (w) {
+      (w.vocab || []).forEach(function (v) { gAddEntry(v[0], v[1]); });
+      (((w.lesson || {}).blocks) || []).forEach(function (b) {
+        var t = b.table;
+        // only the lists of words with their article («Palabra | Artículo»)
+        if (!t || !/^(palabra|sustantivo)$/i.test(String((t.head || [])[0] || "").trim()) ||
+            !(t.head || []).some(function (h) { return /art[ií]culo|g[ée]nero/i.test(h); })) return;
+        (t.rows || []).forEach(function (r) {
+          var cells = r.map(function (c) { return String(c || "").replace(/\*/g, "").trim(); });
+          var art = cells.filter(function (c) { return /^(der|die|das)$/.test(c); })[0];
+          var noun = cells.filter(function (c) { return new RegExp("^" + G_NOUN + "$").test(c) && c.length > 1; })[0];
+          if (art && noun) gAdd(art, noun);
+        });
+      });
+    });
+    return Object.keys(G_LEX).length;
+  }
+
+  // A noun of the course: { g, form } (form: the plural or another case of it).
+  function gLookup(noun, deep) {
+    if (G_LEX[noun]) return { g: G_LEX[noun], lemma: noun, form: false };
+    var tries = [noun, gFold(noun)], ends = ["nen", "ern", "en", "n", "er", "e", "s", "es"];
+    for (var i = 0; i < tries.length; i++) {
+      for (var k = 0; k < ends.length; k++) {
+        var e = ends[k], w = tries[i];
+        if (w.length > e.length + 2 && w.slice(-e.length) === e) {
+          var base = w.slice(0, -e.length);
+          if (G_LEX[base] && G_LEX[base] !== "pl") return { g: G_LEX[base], lemma: base, form: true, end: e };
+        }
+      }
+      if (i === 1 && tries[1] !== noun && G_LEX[tries[1]] && G_LEX[tries[1]] !== "pl") return { g: G_LEX[tries[1]], lemma: tries[1], form: true, end: "" };
+    }
+    // a compound takes the gender of its last part (der Handschuh: der Schuh)
+    if (!deep) {
+      for (var j = 3; j <= noun.length - 3; j++) {
+        var tail = gCap(noun.slice(j));
+        if (/^[a-zäöüß]/.test(noun.charAt(j))) { var r = gLookup(tail, true); if (r) return r; }
+      }
+    }
+    return null;
+  }
+
+  /* The gender of «art noun», or null when it is not known or the article
+     does not fit the noun (die Tisch: no color, it is wrong). */
+  function gOf(art, noun) {
+    art = String(art || "").toLowerCase();
+    if (!G_ART[art]) return null;
+    var x = gLookup(noun);
+    // an unknown noun after «das» is neuter, but not a pronoun (Ist das Ihre Wohnung?)
+    if (!x) return art === "das" && !G_PRON.test(noun) ? "n" : null;
+    if (x.g === "pl") return gAllows(art, "pl") ? "pl" : null;
+    if (!x.form) {
+      if (gAllows(art, x.g)) return x.g;
+      // die Zimmer: the plural of das Zimmer (only the nouns whose plural has no ending)
+      return x.g !== "f" && /(er|el|en|chen|lein)$/.test(noun) && gAllows(art, "pl") ? "pl" : null;
+    }
+    // a form of the noun: den Kollegen (n-Deklination) is singular
+    var weak = x.g === "m" && /e$/.test(x.lemma) && (x.end === "n" || x.end === "en");
+    if (weak && gAllows(art, "m")) return "m";
+    if (gAllows(art, "pl")) return "pl";
+    return gAllows(art, x.g) ? x.g : null;
+  }
+
+  /* The articles of a text with the gender of their noun:
+     [{ at, len, art, g, adj, noun }]. */
+  function gMarks(text) {
+    var out = [], m;
+    G_RE.lastIndex = 0;
+    while ((m = G_RE.exec(String(text || "")))) {
+      var art = m[2], g = gOf(art, m[5]);
+      // a determiner in between: the «das» is a pronoun (dass das keine gute Idee ist)
+      if (g && G_DET.test(m[4])) g = null;
+      // «das» guessed for an unknown noun: not with words in between (das letzte Woche
+      // reparierte Auto) nor after a comma (das Auto, das Peter fährt: a relative)
+      if (g && !gLookup(m[5]) && (m[4] || /,[ \u00a0]*$/.test(String(text).slice(0, m.index + m[1].length)))) g = null;
+      if (g) out.push({ at: m.index + m[1].length, len: art.length, art: art, g: g, adj: m[4], noun: m[5] });
+      // not an article (Kaffee, Er): look again right after that word
+      G_RE.lastIndex = g ? m.index + m[0].length : m.index + m[1].length + art.length;
+    }
+    return out;
+  }
+
+  function gSpan(doc, art, g, mark) {
+    var s = doc.createElement("span");
+    s.className = "gen gen-" + g + (mark ? " mk" : "");
+    s.setAttribute("title", G_LABEL[g]);
+    s.textContent = art;
+    return s;
+  }
+  // The gender a table header or a row label names (Masculino, Femenino, Plural, der Balkon).
+  function gHead(text) {
+    var t = String(text || "").replace(/[*()]/g, "").trim();
+    // «Masculino», «Femenino», «Neutro», «Plural», «Nom. masc.», «Dativ plural»
+    // only the gender, maybe after a case: not «Neutro o formal» (the register)
+    // nor «citar (plural)» (the verb)
+    var h = /^(?:(?:un|nom|nominativ|nominativo|akk|akkusativ|acusativo|dat|dativ|dativo|gen|genitiv|genitivo)\.?\s+)?(masc|masculino|maskulin|maskulinum|fem|femenino|feminin|femininum|neutr|neutro|neutrum|plural)\.?$/i.exec(t);
+    if (h) return { mas: "m", fem: "f", neu: "n", plu: "pl" }[h[1].toLowerCase().slice(0, 3)];
+    var m = G_ONE.exec(t);
+    return m ? gOf(m[1], m[2]) : null;
+  }
+  var G_BLOCK = /^(P|LI|TD|TH|DIV|H1|H2|H3|H4|SECTION|UL|OL|TABLE|TR|DETAILS|SUMMARY|BUTTON|BR)$/;
+  var G_SKIP = /^(SCRIPT|STYLE|TEXTAREA|INPUT|SELECT|OPTION)$/;
+
+  /* Paint a piece of the page (an element already in the document): the
+     columns and rows of the tables that name a gender, then every article
+     followed by a noun of the course.  mark: the form beside the color
+     (■ ▲ ● ◆), for the word lists and the correction.  Painting twice
+     changes nothing. */
+  function gPaint(el, opts) {
+    if (!el || !el.ownerDocument) return 0;
+    opts = opts || {};
+    var doc = el.ownerDocument, n = 0;
+    // tables: a column (Masculino | Femenino…) or a row that names a gender
+    Array.prototype.forEach.call(el.querySelectorAll("table"), function (t) {
+      var heads = Array.prototype.map.call(t.querySelectorAll("thead th"), function (th) { return gHead(th.textContent); });
+      var artCol = Array.prototype.some.call(t.querySelectorAll("thead th"), function (th) { return /art[ií]culo|g[ée]nero/i.test(th.textContent); });
+      Array.prototype.forEach.call(t.querySelectorAll("tbody tr"), function (tr) {
+        var cells = tr.children, rowG = cells.length ? gHead(cells[0].textContent) : null;
+        for (var k = 0; k < cells.length; k++) {
+          // the plural row of a masculine column (die Kollegen): the row says it
+          var g = heads[k] && k > 0 && rowG === "pl" ? "pl" : heads[k] || (k > 0 ? rowG : null);
+          if (!g && artCol && /^(der|die|das)$/.test(cells[k].textContent.trim())) g = { der: "m", die: "f", das: "n" }[cells[k].textContent.trim()];
+          if (g && !/\bgen-/.test(cells[k].className)) { cells[k].className += (cells[k].className ? " " : "") + "gen-c gen-" + g; n++; }
+        }
+      });
+      Array.prototype.forEach.call(t.querySelectorAll("thead th"), function (th, k) {
+        if (heads[k] && !/\bgen-/.test(th.className)) th.className += (th.className ? " " : "") + "gen-c gen-" + heads[k];
+      });
+    });
+    // the rows of a long table shown as cards (app.js renderTableCards)
+    Array.prototype.forEach.call(el.querySelectorAll(".rowcard"), function (rc) {
+      var h = rc.querySelector(".rc-h"), rowG = h ? gHead(h.textContent) : null;
+      Array.prototype.forEach.call(rc.querySelectorAll(".rc-line"), function (ln) {
+        var k = ln.querySelector(".rc-k"), v = ln.querySelector(".rc-v");
+        var kg = k && gHead(k.textContent), g = kg && rowG === "pl" ? "pl" : kg || rowG;
+        if (g && v && !/\bgen-/.test(v.className)) { v.className += " gen-c gen-" + g; n++; }
+      });
+    });
+    // the text: the nodes in order, a line break between blocks
+    var nodes = [], text = "", lastBlock = null, lastParent = null;
+    (function walk(node) {
+      for (var c = node.firstChild; c; c = c.nextSibling) {
+        if (c.nodeType === 3) {
+          var b = c.parentNode;
+          while (b && b !== el && !G_BLOCK.test(b.nodeName)) b = b.parentNode;
+          if (b !== lastBlock) { text += "\n"; lastBlock = b; }
+          // two inline tags glued (<b>der Tisch</b><small>la mesa</small>): not one word
+          else if (/[A-Za-zÄÖÜäöüß]$/.test(text) && /^[A-Za-zÄÖÜäöüß]/.test(c.nodeValue) && c.parentNode !== lastParent) text += "\u0001";
+          lastParent = c.parentNode;
+          nodes.push({ node: c, at: text.length });
+          text += c.nodeValue;
+        } else if (c.nodeType === 1 && !G_SKIP.test(c.nodeName) && !/\bgen\b/.test(c.getAttribute("class") || "")) {
+          if (G_BLOCK.test(c.nodeName)) lastBlock = null;
+          walk(c);
+        }
+      }
+    })(el);
+    var marks = gMarks(text);
+    // from the end, so that splitting a node leaves the earlier offsets right
+    for (var i = marks.length - 1; i >= 0; i--) {
+      var mk = marks[i];
+      for (var j = nodes.length - 1; j >= 0; j--) {
+        var nd = nodes[j];
+        if (nd.at > mk.at) continue;
+        var off = mk.at - nd.at;
+        if (off + mk.len > nd.node.nodeValue.length) break;   // split by a tag: leave it
+        var mid = nd.node.splitText(off);
+        mid.splitText(mk.len);
+        mid.parentNode.replaceChild(gSpan(doc, mid.nodeValue, mk.g, opts.mark), mid);
+        n++;
+        break;
+      }
+    }
+    return n;
+  }
+
+  /* «der Sonne» where «die Sonne» was due: the warning of the correction
+     (only when the article says another gender, not another case:
+     «ein Tisch» for «einen Tisch» is the accusative, not the gender). */
+  function gNotice(given, want) {
+    var g0 = String(given || ""), out = null;
+    gMarks(want).some(function (w) {
+      var m = new RegExp("(^|[^A-Za-zÄÖÜäöüß])" + w.noun + "(?![A-Za-zÄÖÜäöüß])", "i").exec(g0);
+      if (!m) return false;
+      // the nearest article before the noun, at most two words (adjectives) away
+      var before = g0.slice(0, m.index + m[1].length).match(/[A-Za-zÄÖÜäöüß]+/g) || [], said = null;
+      for (var k = before.length - 1; k >= 0 && k >= before.length - 3; k--) {
+        if (G_ART[before[k].toLowerCase()]) { said = before[k]; break; }
+        // only adjectives in between (mit Frau after «den Mann»: not its article)
+        if (!/^[a-zäöüß]+(e|en|er|es|em)$/.test(before[k])) break;
+      }
+      if (!said) return false;
+      var low = said.toLowerCase(), due = w.art.toLowerCase();
+      if (low === due || !G_MEANT[low] || G_MEANT[low].indexOf(w.g) >= 0) return false;
+      // what was written, adjectives included: «eine kleinen Bruder»
+      out = { said: before.slice(k).join(" ") + " " + g0.substr(m.index + m[1].length, w.noun.length), art: w.art, adj: w.adj, noun: w.noun, g: w.g };
+      return true;
+    });
+    return out;
+  }
+  function gEsc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+  function gNoticeHtml(given, want) {
+    var x = gNotice(given, want);
+    if (!x) return "";
+    return '<div class="note gen-note">Ojo con el género: es <b lang="de-DE"><span class="gen gen-' + x.g + ' mk" title="' + G_LABEL[x.g] + '">' +
+      gEsc(x.art) + "</span> " + gEsc(x.adj + x.noun) + "</b> (" + G_LABEL[x.g] + '), no «<span lang="de-DE">' + gEsc(x.said) + "</span>».</div>";
+  }
+
+  /* The genders that deceive (trampas.js, «Trampas del castellano»): the
+     words of the week whose Spanish gloss has the other gender (der Mond
+     → la luna, die Hose → el pantalón).  Only der ↔ la and die ↔ el, and
+     only when every gloss agrees (die Uhr: el reloj; la hora, out); the
+     neuter has no Spanish twin, it would be every das. */
+  function gTraps(course) {
+    var out = [], seen = {};
+    ((course && course.weeks) || []).forEach(function (w) {
+      (w.vocab || []).forEach(function (v) {
+        var m = G_ONE.exec(String(v[0] || "").trim());
+        if (!m || m[1] === "das" || seen[m[2]] || G_PL_ONLY[m[2]]) return;
+        var arts = String(v[1] || "").split(/[;,]/).map(function (s) { return (/^\s*(el|la)\s/.exec(s) || [])[1]; });
+        if (!arts[0] || arts.some(function (a) { return a && a !== arts[0]; })) return;
+        if ((arts[0] === "el") === (m[1] === "der")) return;
+        seen[m[2]] = 1;
+        var gl = String(v[1]).split(/[;,]/)[0].trim();
+        out.push({ week: w.week, art: m[1], noun: m[2], g: m[1] === "der" ? "m" : "f", es: String(v[1]), ex: v[2] || "",
+                   note: "«" + gl + "» es " + (arts[0] === "el" ? "masculino" : "femenino") + " en castellano, pero *" + m[1] + " " + m[2] +
+                     "* es " + (m[1] === "der" ? "masculino" : "femenino") + "." });
+      });
+    });
+    return out;
+  }
+
+  var GENDER = { learn: gLearn, add: gAdd, of: gOf, lookup: gLookup, marks: gMarks, paint: gPaint, head: gHead,
+                 notice: gNotice, noticeHtml: gNoticeHtml, LABEL: G_LABEL, MARK: G_MARK,
+                 traps: gTraps, ARTS: ["der", "die", "das"],
+                 size: function () { return Object.keys(G_LEX).length; } };
+
   LANG.rules = {
     /* Corrección (engine.js grade).  Las diéresis cuentan (schon ≠ schön):
        la que falta es «casi»; una en otro lugar es otra palabra
@@ -130,6 +420,9 @@
         return i >= 3 && ENDING.test(a) && ENDING.test(b);
       }
     },
+
+    // The color of the gender (Signalgrammatik): app.js genderPaint.
+    gender: GENDER,
 
     // The umlaut is not a tilde (devolucion.js slipText).
     slip: { falta_tilde: "lleva diéresis", sobra_tilde: "va sin diéresis", otra_tilde: "lleva otra diéresis" },

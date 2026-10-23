@@ -373,6 +373,13 @@ def main():
     except FileNotFoundError as e:
         print("aviso: sin glosario (%s)" % e)
 
+    # «Ya puedo…»: los objetivos de cada semana, atados a sus ítems
+    # (tools/pt/can.py, tools/lib/puedo.py)
+    sys.path.insert(0, os.path.join(ROOT, "tools", "lib"))
+    import can  # noqa: E402
+    import puedo  # noqa: E402
+    problems += puedo.attach(course, can.CAN)
+
     if problems:
         print("ATENCIÓN, %d problemas:" % len(problems))
         for p in problems:

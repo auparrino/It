@@ -189,13 +189,25 @@ function modulos(c, code) {
   c.add("mapas-bloques", idx(m.blocks));
 
   c.add("porque", entries(mod("porque_data.js").PORQUE_DATA.why));
+  // la estrategia de la semana (estrategia_data.js): una unidad por estrategia, con su grupo
+  var eg = mod("estrategia_data.js").ESTRATEGIA_DATA.GROUPS;
+  Object.keys(eg).forEach(function (g) { c.add("estrategia", idx(eg[g], function (x) { return g + "." + x.id; })); });
   c.add("radio", byWeek(mod("radio_data.js").RADIO_DATA.EPISODI));
+  // la mediación (mediacion_data.js): una tarea por episodio de la radio y por lectura
+  var md = mod("mediacion_data.js").MEDIACION_DATA;
+  c.add("mediacion", entries(md.radio, function (k) { return "radio-w" + pad(+k); })
+    .concat(entries(md.letture, function (k) { return "lectura-" + k; })));
 
   var t = mod("tramo_data.js").TRAMO_DATA;
   c.add("tramo", byWeek(t.SETTIMANE));
   c.add("tramo-generos", entries(t.GENRES));
 
   c.add("scrivi", entries(mod("scrivi.js").Scrivi.TASKS, function (k) { return "w" + pad(+k); }));
+  // la grilla de Scrivi (grilla_data.js): sus filas, los textos de muestra y la adecuación por semana
+  var gr = mod("grilla_data.js").GRILLA_DATA;
+  c.add("grilla", byId(gr.rows));
+  c.add("grilla-muestras", idx(gr.samples, function (x) { return "desde-w" + pad(x.from); }));
+  c.add("grilla-contexto", entries(gr.context, function (k) { return "w" + pad(+k); }));
   c.add("variaciones", idx(mod("variaciones_data.js").VARIACIONES_DATA.frames, function (x) { return slug(x.f); }));
   c.add("voces", idx(mod("voci_cv_data.js").VociCV.ALL, function (x) { return x.f; }));
 }

@@ -448,6 +448,8 @@
         '<div class="card"><h3>Transcripción</h3>' + transcript(a) +
         (tts ? '<div class="row" style="margin-top:10px"><button class="btn" id="trplay">🔊 Escuchar de nuevo con el texto</button><button class="tab" id="trstop">⏹</button></div>' : "") +
         glossHtml(a.gloss) + "</div>" +
+        // «Tu amiga no entendió»: contarlo en castellano (mediacion.js, opcional)
+        (rad && root.Mediacion ? root.Mediacion.html(H.state(), "radio:" + cur.week) : "") +
         '<div class="row" style="margin-top:12px"><button class="btn" id="trdone">Listo</button>' +
         (rad ? '<button class="tab" id="trredo">🔁 Responder otra vez</button>' : '<button class="tab" id="trwrite">🖋️ Ir a la tarea</button>') + "</div>";
     }
@@ -861,6 +863,7 @@
       on("trdeliver", screen === "tramo-brv" ? deliverBrv : deliverAsc);
       on("trwrite", function () { open("scr", cur.week, cur.from); });
       on("trredo", function () { open(cur.kind, cur.week, cur.from); root.scrollTo(0, 0); });
+      if (root.Mediacion) root.Mediacion.wire();
       document.querySelectorAll("[data-trrate]").forEach(function (b) {
         b.onclick = function () { cur.rate = +b.dataset.trrate; stop(); H.render(); };
       });

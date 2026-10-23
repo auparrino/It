@@ -214,6 +214,21 @@ palabras en la 6 a ~300 en la 25.
   semana, en `npm run test:content`) y `tools/lib/smoke_radio.js` (el
   episodio en Chromium, desde el percorso y desde Leggi).
 
+**Mediación: «Tu amiga no entendió» (después de la Radio y de algunas
+lecturas).** Una tarea opcional: contar en castellano, en dos frases, qué
+pasó en el episodio o en la lectura (la Sprachmittlung del MCER 2020).
+- **Datos**: `lang/<código>/mediacion_data.js` (`window.MEDIACION_DATA`),
+  escrito a mano: por episodio (`radio`) y por lectura (`letture`), lo que
+  la amiga quiere saber, 3-5 claves con sus formas en castellano y una
+  versión modelo; `notEs`, las palabras que delatan la lengua meta.
+- **Código**: `js/mediacion.js` corrige sin IA (claves, mínimo de palabras,
+  que esté en castellano; si es largo, lo avisa) y con IA si hay clave. El
+  bloque plegado aparece en el resultado de la Radio (`js/tramo.js`) y en
+  el de una lectura (`renderRisultato` en `js/app.js`). Guarda en
+  `state.mediacion`; la primera vez que pasa da xp de input.
+- **Tests**: `tools/lib/test_mediacion.js` y `tools/lib/smoke_mediacion.js`
+  (Chromium, 390×844).
+
 **Fuera de la app (semanas 6-52).** Una ficha opcional por semana que manda
 a material auténtico de afuera (un video, una radio, una nota, una canción)
 y trae de vuelta los minutos como input.
@@ -241,6 +256,30 @@ y trae de vuelta los minutos como input.
   Chromium: la misión de la 6, +10 min, la pregunta, el corrector y la ficha
   de la 20 desde Leggi).
 
+**Estrategia de la semana (los tres idiomas).** Una táctica corta («leé las
+preguntas antes de escuchar», «el sustantivo con artículo y plural»), dicha
+justo antes de la misión donde sirve, con «¿Te sirve? 👍 / 👎» para el
+cierre semanal.
+- **Datos**: `lang/<código>/estrategia_data.js` (`window.ESTRATEGIA_DATA`),
+  escrito a mano: `GROUPS` {grupo: [{id, t, from?, to?}]}, un set rotativo
+  por grupo de misión (escucha, oido, lectura, escritura, palabras, frases,
+  practica, dominala, leccion, capire, parla, falsos). En el inventario de la
+  auditoría, una unidad `estrategia` por estrategia.
+- **Código**: `js/estrategia.js`: `Estrategia.GROUP` (tipo de misión →
+  grupo), `pick(semana, kind)` (de las que valen esa semana, la que hace más
+  que no sale), `shouldShow` (la primera vez de la semana y, sin voto, una
+  más con «¿Te sirvió?»; nunca con la misión hecha ni apagadas), `vote`,
+  `weekVotes` y `reflectLine` (la línea del cierre semanal en
+  `oggiHabitCards`). En `app.js`, `missionTap` la pone delante de la misión
+  tocada en el percorso y en «Seguir» de Oggi (no en `goMission`: el plan
+  del día y los tests van directo); Ajustes la prende y apaga. Guarda en
+  `state.strat` = {seen: {"semana:grupo": veces}, votes: {id: {v, w, at}},
+  off}.
+- **Tests**: `tools/lib/test_estrategia.js` (los datos, la rueda de las 52
+  semanas, una vez por semana, votos y cierre, el guardado) y
+  `tools/lib/smoke_estrategia.js` (en Chromium: la hoja, 👍, «Empezar», el
+  «¿Te sirvió?» y apagadas).
+
 **Para el trabajo (desde el A2).** Una ruta paralela al percorso con escenas
 de oficina (presentarse, la charla del café, llamadas, mails, opinar,
 presentar resultados, quejarse, negociar plazos, coordinar), cada una en la
@@ -261,6 +300,76 @@ semana cuya gramática usa.
   como `trab:<escena>:<n>` (`Drills.reviewItem`). Guarda en `state.trabajo`.
 - **Tests**: `tools/lib/test_trabajo.js`, `tools/it/check_trabajo.py` (en
   `npm run test:content`) y `tools/lib/smoke_trabajo.js` (en Chromium).
+
+**Estación (repaso cada tres semanas).** Entre el repaso diario y el jefe:
+después de la 3.ª, 6.ª, 9.ª y 12.ª semana de cada estación (3, 6, 9, 12, 16,
+19…, nunca un jefe), la semana siguiente trae la misión opcional «🧭 Estación:
+repaso de las semanas N-2-N» (en la 13, antes del jefe). No frena el avance;
+cuenta para «todas las misiones».
+- **Código**: `js/estacion.js`, sin DOM ni datos propios: `Estacion.build`
+  arma 15 ítems de esas tres semanas, una semana por vez, la producción
+  escrita primero y lo fallado antes que lo sabido, más hasta 3 oraciones de
+  los duelos que se abrieron en ellas (`startRound("estacion", "<semana final>")`);
+  `Estacion.roundDone` guarda el balance por semana y por duelo en
+  `state.estacion`, y `Estacion.balanceHtml` lo muestra en el resultado con
+  semáforo (🟢 seguí, 🟡 repasá la semana, 🔴 volvé a su lección). Hecha con
+  60 % en las primeras respuestas.
+- **Tests**: `tools/lib/test_estacion.js`.
+
+**«Ya puedo…» (objetivos de la semana, verificables).** Cada semana trae en
+`course.json` `can: [{t, items}]`: tres o cuatro objetivos escritos como
+acciones, cada uno atado a uno o dos ítems de la semana. Al abrir la semana se
+ven («🎯 Al final de la semana vas a poder»; sin `can`, la línea de `fare` de
+antes). Con las misiones hechas (las que abren la semana siguiente; en la del
+jefe, vencerlo) aparece «¿Ya podés…?» con sí / más o menos / todavía no. «Sí»
+lo prueba ahí mismo con sus ítems (`startRound("puedo", "<semana>:<k>")`) y el
+resultado dice la calibración («dijiste que sí y te salió / y fallaste»). Lo
+que quedó en «más o menos», «todavía no» o falló vuelve mañana
+(`Engine.enqueue`), y por eso entra en «Tus puntos débiles» y primero en la
+Estación, que además muestra el balance de sus tres semanas.
+- **Contenido**: `tools/<código>/can.py` (`CAN = {semana: [(texto, [ids])]}`);
+  los tres `build_course.py` lo copian con `tools/lib/puedo.py`, que descarta
+  con aviso un id que ya no esté en la semana (en la última, el examen, vale
+  uno de antes).
+- **Código**: `js/puedo.js`, sin DOM: `introHtml`, `cardHtml`, `answer`,
+  `items`, `roundDone`, `resultHtml`, `stationHtml`. Guarda en `state.puedo`
+  (`{semana: {k: {a, ok, at}}}`).
+- **Tests**: `tools/lib/test_puedo.js` y `tools/lib/smoke_puedo.js` (en Chromium).
+
+**La grilla a la vista (Scrivi, desde la semana 14).** Arriba de la consigna,
+la grilla de 4 filas en castellano (consigna/adecuación, orden y conectores,
+vocabulario, gramática), con cómo es una nota alta y una baja; en pt, además,
+enunciador, interlocutor, propósito y género de la consigna de esa semana. El
+botón «Ver un texto de nota alta y uno de nota baja» muestra un par de textos
+de muestra (uno por tramo: 14, 27, 40) con 2 o 3 anotaciones atadas a filas.
+Antes de revisar, 4 casillas de autoevaluación; al revisar, la devolución
+estima cada fila con lo que un programa ve (largo y estructuras, conectores,
+repeticiones, errores del corrector, que incluye los de la IA si hay clave) al
+lado de lo que marcó el alumno.
+- **Contenido**: `docs/lang/<código>/grilla_data.js` (`GRILLA_DATA`), escrito a
+  mano (it, pt; de cuando tenga Scrivi). Entra en el registro de revisión
+  (`grilla`, `grilla-muestras`, `grilla-contexto`).
+- **Código**: `js/grilla.js`, sin DOM: `gridHtml`, `selfHtml`, `samplesHtml`,
+  `resultHtml`, `score`. Guarda en `state.grilla` (`{semana: {s: [4 bool], at}}`).
+- **Tests**: `tools/lib/test_grilla.js` y `tools/lib/smoke_grilla.js` (en Chromium).
+
+**Trampas del castellano (Consultar).** Listas cerradas de lo que el castellano
+hace decir mal: género que engaña, acento que engaña, falsos amigos,
+preposición o régimen distinto y el castellano que se cuela. No hay contenido
+propio: salen del banco (sustantivos con «Género distinto» o «Acento
+distinto», errores por categoría), del Lab (`FALSI`, desde `FALSI_WEEK`), de
+los heterotónicos de Suoni (`ACCENTO` con `fake`), de los ejercicios del curso
+que nombran un falso amigo o el género del castellano y, en alemán, de
+`LANG.rules.gender.traps` (las palabras de la semana con der ↔ la, die ↔ el).
+Una lista vacía no se muestra; sin ninguna, la entrada no aparece.
+- **Código**: `js/trampas.js`: `Trampas.lists`, `summary` (lo ya visto por
+  semana o nivel, «N de M dominadas»: dos aciertos seguidos o en
+  mantenimiento), `round` (10, lo que no se sabe primero:
+  `startRound("trampas", "<lista>")`) y `page` (la sub-pantalla
+  `trampas` de Consultar). Reusa los ids del banco, del Lab y del curso; el
+  acento escrito y el género calculado van como `trampa:acc:…` y
+  `trampa:gen:…`, que vuelven al repaso por `Drills.reviewItem`.
+- **Tests**: `tools/lib/test_trampas.js`.
 
 **Oggi, el primer arranque y el progreso.** Durante el curso, arriba de Oggi / Hoje va la semana
 del percorso con su próxima misión (`weekTopHtml` en `app.js`, «▶︎ Seguir»): el percorso organiza
@@ -290,7 +399,7 @@ El plegado, las misiones que llevan módulos al percorso y la pantalla
 | **Input** | Leggi / Ler | lo de esta semana (la lectura y la escucha pendientes, el capítulo recomendado de la Biblioteca, los minutos de input en 7 días); después Historias (Martín, Cultura, Inundaciones, cuentos con tus palabras), La settimana / A semana, Lecturas largas, Escuchas largas y Ascolto facile, Biblioteca y la velocidad de lectura |
 | **Práctica** | Allena / Treino | lo de esta semana (escenas, el oído, el duelo que se abre, la Clínica, Variaciones); después Laboratorio, Escritura guiada, Duelos, Banco, Escenas por estación y Tres lenguas |
 | **Producción** | Scrivi / Escreva (misión) | el texto de la semana, Tres vueltas y Reformulación, la tarea del tramo, la Scrittura del examen |
-| **Referencia** | «Consultar» (pantalla `consultar`: se entra desde Allena, Leggi e Io) | el diccionario del curso, Mi gramática, Palabra por palabra, los mapas de preposiciones, las fórmulas fijas y los contrastes de Tres lenguas |
+| **Referencia** | «Consultar» (pantalla `consultar`: se entra desde Allena, Leggi e Io) | el diccionario del curso, Mi gramática, Palabra por palabra, los mapas de preposiciones, las fórmulas fijas, las Trampas del castellano y los contrastes de Tres lenguas |
 | **Evaluación** | Percorso | ubicación, jefes, examen C1 |
 
 **Al percorso.** `Capas.missions(w, state)` (una línea en `weekPlan`, como
@@ -417,5 +526,16 @@ duelo, Tres lenguas y Tres vueltas.
   caché en localStorage (`Errores.cache*`) que se exporta con «Correcciones para revisar».
 - **«🙋 Mi respuesta es válida»**, sin clave: acepta sin xp, deshace el error y lo anota en
   `state.aiNotes`.
+- **«Corregí tu propia frase»** (`Errores.mioAdd`, `mioFromText`): cada error anotado con su
+  oración (una respuesta escrita entera, Parla, la rúbrica del tramo; o la oración de un texto
+  de Scrivi, el dictogloss, el tramo o Escritura plus, con las correcciones aplicadas) deja una
+  ficha `own:mio:…` en `state.own` (`Engine.enqueue`) que vence en dos o tres días: tu oración
+  tal cual, «hay 1 error», la categoría como única pista en el segundo intento, y se corrige
+  escribiendo contra la corrección guardada. Tope de 3 por día en el repaso (`drills.js`,
+  `MIO_A_DAY`) y de 40 guardadas; la Clínica no las adelanta. La ficha fallada no crea otra;
+  tampoco una opción elegida, un hueco ni «Trova l'errore», y «Mi respuesta es válida» la borra
+  (`Errores.unrecord`). En un texto, cada corrección va donde la vio el corrector (o, sin eso,
+  donde está esa palabra si es un solo lugar); si alguna no se puede ubicar, no hay ficha.
+  Test: `tools/lib/test_mio.js`.
 - **Tests**: `tools/lib/test_errores.js`; en el navegador, `tools/lib/smoke_correccion.js`
   (con la IA simulada; lo corre `npm run smoke`).
