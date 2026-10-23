@@ -50,6 +50,7 @@ italiano.
 | Tramo C1 (semanas 27-51: lectura, escucha y tarea largas) | `tools/<código>/tramo/wNN.json` y `generi.json` | `tools/lib/test_tramo.js` |
 | Serie Radio / Rádio (semanas 6-25: un programa a dos voces por semana) | `tools/<código>/radio/wNN.json` y `serie.json` | `tools/lib/test_radio.js`, `tools/it/check_radio.py`, `tools/pt/check_radio.py` |
 | Biblioteca (libros de dominio público) | `tools/lib/biblioteca_fuentes.js` | `tools/lib/test_biblioteca.js` |
+| «¿Qué notás?» (la hipótesis antes de «La regla», por bloque de lección: semana + título exacto del bloque; o un campo `notice` en el bloque mismo) | `docs/lang/<código>/notar_data.js` | `tools/lib/test_notar.js` |
 | Tres lenguas (it ↔ pt ↔ es) | `docs/lang/tres_lenguas_data.js` | `tools/lib/test_tres_lenguas.js` |
 | Voces reales del italiano | `tools/it/VOCES.md`, `tools/it/voci_cv.py` | `test_suoni.js` |
 

@@ -804,7 +804,8 @@
   var MODULE_OBJ = ["mcGloss", "readSess", "readParts", "variants", "hintLevels", "weakDone", "suoniPct", "suoniDone", "capirePct", "identPct",
     "duelli", "ubicacion", "dictogloss", "ascolto", "parlaLog", "esame", "esameDraft", "scrittiDraft", "scritti", "biblio",
     "bossUsed", "strands", "streakBroken", "escritos", "escrituraPlus", "onboard", "hoy", "cierre", "porque", "ritmo", "tiempo",
-    "dos", "radio", "scriviExtra", "tramo", "tres", "fuera", "trabajo", "sync"];
+    "dos", "radio", "mediacion", "scriviExtra", "tramo", "tres", "fuera", "estacion", "esencial", "puedo", "strat", "grilla",
+    "trabajo", "sync"];
   var MODULE_ARR = ["aiNotes", "storie", "history"];
   function sanitizeModules(s) {
     MODULE_OBJ.forEach(function (k) { if (k in s && s[k] != null && !isObj(s[k])) delete s[k]; });

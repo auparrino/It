@@ -16,6 +16,7 @@ Junta las propuestas de las revisiones contra manuales (`auditorias/2026-10-*-re
 3. Tanda 2 — alemán: lo que queda del paquete contrastivo (duelos, Capire, fixerr, traducción con trampa, repaso intercalado, dictado de terminaciones).
 4. Tanda 3 — la app (funciones nuevas).
 5. Tanda 4 — lo que quede de las propuestas por temporada (muchas ya cubiertas por la 1 y la G).
+6. Tanda 5 — las funciones grandes de la app y lo que le falta al alemán (ver abajo).
 
 ## Tanda 1 — Construcciones que no existen en español (contenido)
 
@@ -258,3 +259,25 @@ Agregar un ítem listen de ese contraste a la lista de la semana y otro al jefe 
 - [ ] **Semana 45 a la altura de C1: heterosemánticos finos y prosodia culta** (impacto medio, esfuerzo medio). Los clásicos (esquisito, polvo, borracha, copo, oficina) ya están en el laboratorio desde la semana 14: en la 45 dejarlos como repaso espaciado (2-3 ítems) y usar el resto en lo sutil. Heterosemánticos: esperto (vivo, no experto), pretender (tener la intención), polido (educado), requintado (exquisito), desenvolto, competência (atribución), presumir, apurar, contestar, propina, em que pese. Prosodia normativa que también le cuesta al nativo: rubrica (ru-BRI-ca), ruim (ru-ÍM), recorde (re-CÓR-de), gratuito (gra-TUI-to), Nobel (no-BEL), pudico, ibero, avaro. Formato: frase contrastiva + recuperación activa (traducción dirigida) + ACCENTO con audio.
 - [ ] **Colocaciones: producir la expresión entera desde el español, repartida en S4** (impacto medio, esfuerzo chico). Además de los 2 col por semana, sumar en las semanas 40-49 2-3 translate cortos que obliguen a producir la colocación completa desde el español, con la trampa a la vista: «tomar medidas» → tomar providências; «tener en cuenta» → levar em conta; «sacar provecho» → tirar proveito; «jugar un papel» → desempenhar; «llamar la atención sobre» → chamar a atenção para; «poner en duda» → pôr em xeque; «hacer hincapié» → enfatizar. Después hacerlas volver en el repaso FSRS como bloque léxico.
 - [ ] **Insumos más brasileños y de prensa en el tramo final** (impacto bajo, esfuerzo medio). De los dictados de las semanas 47-50 y las lecturas 49-50, pasar por lo menos 4 a temas de la prensa brasileña actual (tarifa zero, enchentes no RS, cotas, ENEM, saneamento, reforma tributária), con el mismo foco gramatical. Portugal queda en la 46 y en una semana más.
+
+## Tanda 5 — Funciones grandes de la app y lo que le falta al alemán
+
+Pedida el 2026-10-23. Sin «Mi dossier» (descartado).
+
+### La app
+- [ ] **Simulacros B1 y B2** con el formato del certificado (CILS UNO-B1 / DUE-B2, Celpe-Bras Intermediário / Avançado, Goethe B1 / B2), opcionales y cronometrados, con el puntaje en la escala real.
+- [ ] **Vacío de información sin IA**: agenda partida, «Indovina chi»; preguntas de un banco con formas bien y mal hechas y respuestas fijas.
+- [ ] **Lernwortschatz**: tus palabras de la semana por campo, con artículo, plural y régimen, tapar columna y búsqueda desde el castellano.
+- [ ] **Historia atada a la regla**: el «Mirá» de la lección con citas del episodio de la semana y el cierre que lo vuelve a escuchar.
+- [ ] **Textos semiauténticos en A1-A2**: menú, cartel de horarios, aviso, posteo, con lectura selectiva.
+- [ ] **Audiotraining manos libres**: estímulo, pausa y respuesta con lo de la semana (sin grabar la voz).
+- [ ] **Consignas en la lengua meta desde B2**, con el castellano a un toque.
+
+### El alemán (lo que el README da como «todavía no tiene»)
+- [ ] **Diagnóstico de errores por categoría** (diagnosi.js), con devolución y «¿por qué?».
+- [ ] **Jefes de fin de temporada** (13, 26, 39, 52) y **examen final**.
+- [ ] **Escritura con IA (Scrivi) y role-play (Parla)**.
+- [ ] **Conjugador y gimnasio de verbos**.
+- [ ] **Banco de ejercicios**, **frases de conversación**, **lecturas** y **radio**.
+- [ ] **Laboratorio Ponte** (cognados) y **falsos amigos**.
+

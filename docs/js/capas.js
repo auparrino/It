@@ -8,7 +8,8 @@
  *   Producción  Scrivi / Escreva y lo que cuelga de ella (Tres vueltas).
  *   Referencia  «Consultar»: el diccionario propio, Mi gramática, Palabra
  *               por palabra (Desglose), los mapas de preposiciones, las
- *               fórmulas fijas y los contrastes de Tres lenguas.
+ *               fórmulas fijas, las Trampas del castellano (trampas.js) y
+ *               los contrastes de Tres lenguas.
  *
  * Este módulo tiene tres cosas:
  *
@@ -233,6 +234,7 @@
       '<button class="lab" data-csub="desglose"><span class="e">🔎</span><b>Palabra por palabra</b><span class="muted">Pegá una frase y te la desarmo: pronombres, tiempos, elisiones, locuciones.</span></button>' +
       (root.Mapas && root.Mapas.data && root.Mapas.data() ? '<button class="lab" data-csub="mapas"><span class="e">🗺️</span><b>Mapas de preposiciones</b><span class="muted">Dónde estás, adónde vas, de dónde venís: en dibujos.</span></button>' : "") +
       (root.Formule && Object.keys(root.Formule.DATA || {}).length ? '<button class="lab" data-csub="formule"><span class="e">🧱</span><b>Fórmulas fijas</b><span class="muted">Las frases que usás enteras antes de su gramática, y cuándo llega la regla.</span></button>' : "") +
+      (root.Trampas && root.Trampas.entryButton ? root.Trampas.entryButton() : "") +
       (root.TresLenguas ? '<button class="lab" data-tres="menu"><span class="e">🔀</span><b>Tres lenguas: contrastes</b><span class="muted">Dónde se cruzan las dos lenguas y el español.</span></button>' : "") +
       "</div>" +
       '<p class="muted science">🔬 Consultar una palabra en sus usos reales (concordancias) enseña cómo se combina mejor que la definición sola (Boulton y Cobb 2017); ' +
@@ -256,6 +258,8 @@
           : '<p class="lead">Los dibujos de la lección de la semana ' + ((D && D.week) || "") + ": la forma del lugar y el movimiento deciden la preposición.</p>") +
         (ids.length ? M.figure(ids) : '<p class="muted">No hay mapas en este idioma.</p>');
     }
+    // «Trampas del castellano» (trampas.js): the lists and their rounds of 10
+    if (cq.sub === "trampas" && root.Trampas) return back + root.Trampas.page();
     if (cq.sub === "formule") {
       var F = root.Formule, Fr = root.Frasi, by = {};
       Object.keys((F && F.DATA) || {}).forEach(function (id) {
@@ -343,6 +347,12 @@
     if (H) H.show("consultar");
   }
 
+  // A screen of «Consultar» (the way back from a round of Trampas).
+  function openSub(sub) {
+    cq.sub = sub || "home";
+    if (H) H.show("consultar");
+  }
+
   // The entry card (Allena, Leggi, Io).
   function entryHtml(compact) {
     if (compact) return '<button class="btn ghost cq-entry" data-consultar="">📖 Consultar: diccionario y gramática</button>';
@@ -359,7 +369,7 @@
 
   var api = { attach: attach, missions: missions, handles: handles, go: go, fold: fold, seasons: seasons, seasonOf: seasonOf,
               inputWeek: inputWeek, curveSvg: curveSvg, render: render, owns: owns, wire: wire, open: open,
-              openConsultar: function () { open(""); }, entryHtml: entryHtml, wordCard: wordCard,
+              openConsultar: function () { open(""); }, openSub: openSub, entryHtml: entryHtml, wordCard: wordCard,
               _cq: cq, _opened: opened };
   if (typeof module === "object" && module.exports) module.exports = api;
   root.Capas = api;

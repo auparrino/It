@@ -477,6 +477,8 @@
     var now = Date.now(), cards = (state && state.cards) || {}, own = (state && state.own) || {};
     return Object.keys(own).filter(function (id) {
       var c = cards[id];
+      // the learner's sentences to correct wait their two or three days (errores.js)
+      if (id.indexOf("own:mio:") === 0) return false;
       return now - (own[id].at || 0) < 7 * DAY && (!c || !c.reps);
     }).sort(function (a, b) { return own[b].at - own[a].at; }).slice(0, n || 6)
       .map(function (id) { var it = ownItem(state, id); if (it) it.clinic = "own"; return it; }).filter(Boolean);

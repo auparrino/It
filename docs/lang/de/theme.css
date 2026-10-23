@@ -619,3 +619,35 @@ ul.exs.look .it { font-size: 1.08rem; color: var(--tinta); font-weight: 600; }
   html:not([data-theme="light"]) { --bx-ok: var(--mata-claro); --bx-mid: var(--sol); --bx-hard: var(--coral-claro); --bx-sub: var(--sol); }
 }
 html[data-theme="dark"] { --bx-ok: var(--mata-claro); --bx-mid: var(--sol); --bx-hard: var(--coral-claro); --bx-sub: var(--sol); }
+
+/* Signalgrammatik: el color del género, el mismo en toda la app (rules.js
+   gender, app.js genderPaint).  der azul, das verde, die rojo, el plural
+   amarillo (en claro, un ocre oscuro para que se lea sobre blanco); todos
+   con contraste AA sobre las tarjetas y los tres fondos de la devolución.
+   Además del color, una forma (■ ▲ ● ◆) en las listas y la corrección, y
+   un subrayado distinto en el texto, para quien no distingue los colores. */
+:root { --gen-m: #1a5a9e; --gen-n: #1d6e33; --gen-f: #b3261e; --gen-pl: #7a5200; }
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) { --gen-m: #82bdf5; --gen-n: #7fd68d; --gen-f: #ff8f85; --gen-pl: #f2c54b; }
+}
+html[data-theme="dark"] { --gen-m: #82bdf5; --gen-n: #7fd68d; --gen-f: #ff8f85; --gen-pl: #f2c54b; }
+.gen { font-weight: 700; text-decoration-line: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.gen-m { color: var(--gen-m); text-decoration-style: solid; }
+.gen-n { color: var(--gen-n); text-decoration-style: dotted; }
+.gen-f { color: var(--gen-f); text-decoration-style: dashed; }
+.gen-pl { color: var(--gen-pl); text-decoration-style: double; }
+.gen-c { font-weight: 600; }
+body.ingame .feedback .gen-m, .gen-c.gen-m { color: var(--gen-m); }
+body.ingame .feedback .gen-n, .gen-c.gen-n { color: var(--gen-n); }
+body.ingame .feedback .gen-f, .gen-c.gen-f { color: var(--gen-f); }
+body.ingame .feedback .gen-pl, .gen-c.gen-pl { color: var(--gen-pl); }
+.gen.mk::before { font-size: .72em; margin-right: .22em; vertical-align: .08em; display: inline-block; text-decoration: none; }
+.gen-m.mk::before { content: "\25A0"; content: "\25A0" / ""; }
+.gen-n.mk::before { content: "\25B2"; content: "\25B2" / ""; }
+.gen-f.mk::before { content: "\25CF"; content: "\25CF" / ""; }
+.gen-pl.mk::before { content: "\25C6"; content: "\25C6" / ""; }
+th.gen-c::after { font-size: .72em; margin-left: .3em; }
+th.gen-m::after { content: "\25A0"; content: "\25A0" / ""; }
+th.gen-n::after { content: "\25B2"; content: "\25B2" / ""; }
+th.gen-f::after { content: "\25CF"; content: "\25CF" / ""; }
+th.gen-pl::after { content: "\25C6"; content: "\25C6" / ""; }

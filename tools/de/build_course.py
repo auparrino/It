@@ -16,6 +16,9 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, HERE)
 import curso  # noqa: E402
+import can  # noqa: E402
+sys.path.insert(0, os.path.join(ROOT, "tools", "lib"))
+import puedo  # noqa: E402
 
 OUT = os.path.join(ROOT, "docs", "lang", "de", "data", "course.json")
 TYPES = {"choice", "cloze", "translate", "listen", "typed", "fixerr", "dictation"}
@@ -86,6 +89,10 @@ def build():
         })
     course = {"title": "La Via — alemán", "lang": "de", "seasons": curso.SEASONS,
               "weeks": weeks, "items": items, "challenges": [], "sources": []}
+    # «Ya puedo…»: los objetivos de cada semana, atados a sus ítems
+    # (tools/de/can.py, tools/lib/puedo.py)
+    for p in puedo.attach(course, can.CAN):
+        print("aviso:", p)
     return nfc(course)
 
 

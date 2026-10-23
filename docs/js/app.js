@@ -676,6 +676,7 @@
           CHANGES.map(function (c) { return '<button class="tab" data-rf="change" data-v="' + c[0] + '">' + c[1] + "</button>"; }).join("") + "</span>" +
         '<span class="muted small">¿Cuándo estudiás?</span><span class="chips">' +
           WHENS.map(function (c) { return '<button class="tab" data-rf="when" data-v="' + c[0] + '">' + c[1] + "</button>"; }).join("") + "</span>" +
+        (window.Estrategia ? Estrategia.reflectLine(state, prevWk) : "") +   // the 👍/👎 of the strategies (estrategia.js)
         '<span class="row"><button class="btn" id="rfsave">Guardar</button><button class="tab" id="rfskip">Ahora no</button></span></div>' });
     }
     // the backup: every 14 days once there is something to lose
@@ -828,7 +829,7 @@
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION = "c1-vN" in sw.js: test_game
      and the CI check it).  One version for the app and both languages. */
-  var APP_VERSION = "v3.15.6";
+  var APP_VERSION = "v3.16.0";
   // Settimana XVII: Roman numerals on the street signs (LANG.ui.romanWeeks).
   function romano(n) {
     var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
@@ -1382,6 +1383,27 @@
 
   /* ---------------------------------------------------------------- teoria */
 
+  /* The color of the gender (Signalgrammatik), when the language has it
+     (German: LANG.rules.gender, in its rules.js): the articles of the week's
+     words, of the lesson and its tables, of the correction.  Never the
+     options of a question: only what is already read or answered. */
+  function genderRules() { return (LG.rules || {}).gender || null; }
+  function genderPaint(root, sel) {
+    var G = genderRules();
+    if (!G || !root) return;
+    try {
+      var els = sel ? root.querySelectorAll(sel) : [root];
+      Array.prototype.forEach.call(els, function (el) {
+        G.paint(el, { mark: el.classList.contains("wwords") || el.classList.contains("sol") });
+      });
+    } catch (e) { /* the color is a help: never in the way */ }
+  }
+  // «der Sonne» for «die Sonne»: the gender, said apart from the rest.
+  function genderNotice(given, want) {
+    var G = genderRules();
+    try { return G && given ? G.noticeHtml(given, want) : ""; } catch (e) { return ""; }
+  }
+
   /* *palabra* marca una forma de la lengua, **texto** una regla clave. */
   function mk(text) {
     return esc(text)
@@ -1580,25 +1602,65 @@
     });
     return (tenseForms[w.week] = Object.keys(out));
   }
-  function renderLook(b, i) {
+  // The examples of a block, their forms marked (key: the prefix of sayIndex).
+  function lookList(b, exs, key) {
     var fs = Lezione.forms(b).concat(les && les.w ? weekTenseForms(les.w) : []);
+    return '<ul class="exs look">' + exs.map(function (pair, k) {
+      // «A → B» (two forms) is read with a pause, not as «arrow»
+      sayIndex[key + "-" + k] = Lezione.strip(pair[0]).replace(/\s*\u2192\s*/g, ", ");
+      // marked by hand when the lesson says which form matters; else, guessed
+      var itHtml = /\*[^*]+\*/.test(pair[0]) ? exHtml(pair[0]) : markForms(pair[0], fs);
+      return '<li><span class="it">' + itHtml + '</span><span class="es">' + esc(pair[1] || "") + "</span>" +
+        '<button class="say" data-say="' + key + "-" + k + '" aria-label="escuchar">🔊</button></li>';
+    }).join("") + "</ul>";
+  }
+  function renderLook(b, i) {
     return '<section class="blk">' + stepBadge("👀", "Mirá") + (b.h ? "<h2>" + mk(b.h) + "</h2>" : "") +
-      '<ul class="exs look">' + b.ex.map(function (pair, k) {
-        sayIndex[i + "-" + k] = Lezione.strip(pair[0]);
-        // marked by hand when the lesson says which form matters; else, guessed
-        var itHtml = /\*[^*]+\*/.test(pair[0]) ? exHtml(pair[0]) : markForms(pair[0], fs);
-        return '<li><span class="it">' + itHtml + '</span><span class="es">' + esc(pair[1]) + "</span>" +
-          '<button class="say" data-say="' + i + "-" + k + '" aria-label="escuchar">🔊</button></li>';
-      }).join("") + "</ul>" +
+      lookList(b, b.ex, String(i)) +
       '<p class="muted small">Fijate en lo marcado. La regla, en la pantalla siguiente.</p></section>';
+  }
+  /* 🤔 «¿Qué notás?» (Lezione.notice): the examples and a question on the
+     rule, answered before the rule.  No heading: it often says the rule.
+     Not a check: it does not count in the score nor go to the review. */
+  function renderNotice(b, i, st) {
+    var n = st.n, done = st.pick != null;
+    return '<section class="blk">' + stepBadge("🤔", "¿Qué notás?") +
+      lookList(b, n.ex, "n" + i) +
+      '<div class="prompt notice-q">' + esc(n.q) + "</div>" +
+      '<div class="options">' + n.options.map(function (o, k) {
+        var cls = !done ? "" : o === n.answer ? " right" : o === st.pick ? " wrong" : "";
+        return '<button class="opt' + cls + '" data-ln="' + k + '"' + (done ? " disabled" : "") + ">" + esc(o) + "</button>";
+      }).join("") + "</div>" +
+      '<p class="muted small">' + (!done ? "Arriesgá antes de ver la regla: equivocarse acá no cuenta." :
+        st.got ? "¡Bien visto! La regla, en la pantalla siguiente." : "No era esa. En la regla, la diferencia.") + "</p></section>";
+  }
+  function noticeAnswer(btn) {
+    var st = les && les.steps[les.i];
+    if (!st || st.kind !== "notice" || st.pick != null) return;
+    st.pick = btn.textContent;
+    st.got = st.pick === st.n.answer;
+    if (st.got) fx.right();
+    savePending();
+    render();
+  }
+  // The answer to «¿Qué notás?» opens the rule: «¡Eso!» or the difference.
+  function noticeHead(i) {
+    var st = les ? les.steps.filter(function (x) { return x.kind === "notice" && x.i === i; })[0] : null;
+    if (!st || st.pick == null) return "";
+    return st.got ? '<p class="notice-res ok"><b>¡Eso!</b> ' + esc(st.n.answer) + ".</p>"
+      : '<p class="notice-res no">Elegiste «' + esc(st.pick) + "», pero es «<b>" + esc(st.n.answer) + "</b>». " + mk(st.n.no || "") + "</p>";
   }
   // 📐 The rule, alone (with its table when it is small).
   function renderRule(b, i) {
-    var html = '<section class="blk">' + stepBadge("📐", "La regla") + (b.h ? "<h2>" + mk(b.h) + "</h2>" : "") +
+    var nh = noticeHead(i);
+    var html = '<section class="blk">' + stepBadge("📐", "La regla") + nh + (b.h ? "<h2>" + mk(b.h) + "</h2>" : "") +
       (b.r ? '<p class="rule solo">' + mk(b.r) + "</p>" : "");
     (b.p || []).forEach(function (par) { html += "<p>" + mk(par) + "</p>"; });
     if (b.fig && window.Mapas) html += Mapas.figure(b.fig);
     if (b.table && Lezione.smallTable(b.table)) html += renderBlock({ table: b.table }, i, "a").replace(/^<section class="blk">|<\/section>$/g, "");
+    // «¿Qué notás?» with its own examples took the place of «Mirá»: the block's, here
+    var nst = les ? les.steps.filter(function (x) { return x.kind === "notice" && x.i === i; })[0] : null;
+    if (nst && nst.n.own && b.ex && b.ex.length) html += '<details class="more"><summary>Los ejemplos de la lección</summary>' + lookList(b, b.ex, String(i)) + "</details>";
     return html + "</section>";
   }
   // 🗂️ A big table as cards, one row each, to swipe.
@@ -1701,6 +1763,7 @@
         '<div class="scorebig"><b>' + les.right + "/" + les.asked + '</b><span>+' + les.xp + " xp</span></div>" +
         (les.extras || []).map(function (x) { return '<p class="note selfrepair">' + esc(x) + "</p>"; }).join("") +
         (window.Referencia ? Referencia.lessonNote(w.week, ssd[les.sess] ? ssd[les.sess].blocks : null) : "") +
+        (nextS == null && window.Esencial ? Esencial.offerHtml(state, w, "lesson") : "") +   // the week's summary, to complete (esencial.js)
         '<p class="muted">' + (pct === 100 ? "Perfecta: ni un error en los chequeos." :
           pct >= 70 ? "Bien. Lo que fallaste vuelve mañana en el repaso, con su regla." :
           "Lo que fallaste vuelve mañana en el repaso, con su regla. Antes de seguir, entrená esta parte: el entrenamiento pasa adelante en la semana.") + "</p>" +
@@ -1720,6 +1783,11 @@
     if (st.kind === "formule") {
       return hudH + '<div class="card lescard formule">' + formuleBridgeHtml(st.ids, w.week) +
         '<button class="btn wide" id="lesnext">Seguir →</button></div>';
+    }
+    if (st.kind === "notice") {
+      return hudH + (partLabel && les.i === 0 ? '<div class="badge-new">📘 Lección · semana ' + w.week + partLabel + "</div>" : "") +
+        '<div class="card lescard lesson step-notice">' + renderNotice(w.lesson.blocks[st.i], st.i, st) +
+        (st.pick != null ? '<button class="btn wide" id="lesnext">Ver la regla →</button>' : "") + "</div>";
     }
     if (st.kind === "look" || st.kind === "rule" || st.kind === "table" || st.kind === "trap") {
       var bk = w.lesson.blocks[st.i];
@@ -1763,6 +1831,7 @@
       '<div class="sol">' + esc(q.answer) + "</div>" +
       (ok ? "" : lesRule(q)) +
       '<div class="row" style="margin-top:10px"><button class="btn" id="lesnext2">' + UI.next + "</button></div></div>";
+    genderPaint($("#lesfb"), ".sol, .note");
     on("#lesnext2", lesNext);
   }
 
@@ -1852,6 +1921,7 @@
             sub: (sessRead(w, k) ? "Hecho · " : "Opcional · ") + "la regla en pasos cortos" +
               (x.k === x.of - 1 && p.items.length ? " y " + p.items.length + " ejercicios del tema" : "") });
       });
+      if (window.Estacion) Estacion.missions(w, state, course).forEach(m);   // la estación de las semanas 10-12, opcional (estacion.js)
       var weak = Drills.weakItems(course, w, state, itemMap).length;
       m({ kind: "debil", done: !!(state.weakDone || {})[w.week], ico: "🩹", opt: true, title: "Tus puntos débiles",
           sub: weak ? "Opcional · " + weak + " ejercicios de la estación que fallaste o casi no viste" : "Opcional · no fallaste nada todavía: repaso al azar" });
@@ -2004,6 +2074,7 @@
       m({ kind: "duello", arg: d.id, done: !!best && best.pct >= 80, ico: "⚔️", title: "Duelo: " + d.title, opt: true,
           sub: best ? "Tu mejor: " + best.pct + " %" + (best.pct >= 80 ? "" : " · Te falta: 80 %") : "Opcional · " + d.sub + ": las dos formas mezcladas y «¿qué te lo dijo?»" });
     });
+    if (window.Estacion) Estacion.missions(w, state, course).forEach(m);   // repaso de las tres semanas anteriores, opcional (estacion.js)
     if (window.Escritos) Escritos.missions(w, state).forEach(m);   // escritura guiada (escritos.js), opcionales
     if (window.Capas) Capas.missions(w, state).forEach(m);   // Biblioteca y Tres vueltas (capas.js), opcionales
     var domDone = Drills.dominated(st, w, state);
@@ -2070,6 +2141,7 @@
     else if (kind === "ep") { view.ep = arg; view.epFrom = "briefing"; view.screen = "lettura"; render(); window.scrollTo(0, 0); }
     else if (kind === "suoni") startRound("suoni", w.week);
     else if (kind === "duello") startRound("duello", arg);
+    else if (window.Estacion && Estacion.handles(kind)) startRound("estacion", arg);
     else if (kind === "dictogloss") { dg = null; view.screen = "dictogloss"; render(); window.scrollTo(0, 0); }
     else if (kind === "parla") { view.screen = "parla"; render(); window.scrollTo(0, 0); }
     else if (kind === "storia") { view.screen = "storia"; render(); window.scrollTo(0, 0); }
@@ -2078,6 +2150,15 @@
     else if (window.Capas && Capas.handles(kind)) Capas.go(kind, arg);
     else if (window.Fuera && Fuera.handles(kind)) Fuera.go(kind, arg);
     else if (window.Trabajo && Trabajo.handles(kind)) Trabajo.go(kind, arg);
+  }
+
+  /* A mission tapped by the learner: the strategy of the week first, once
+     per week and kind of mission (estrategia.js), then the mission. */
+  function missionTap(kind, arg, done, week, pre) {
+    var wk = week || view.week;
+    var start = function () { if (pre) pre(); view.week = wk; goMission(kind, arg); };
+    if (window.Estrategia) Estrategia.before(wk, kind, done, start);
+    else start();
   }
 
   function missions(w, st, nChal) {
@@ -2189,17 +2270,32 @@
     return '<button class="btn ghost" id="back">← ' + UI.pathAl + "</button>" +
       plate(UI.week + " " + weekNum(w.week) + " · " + esc(w.level), esc(w.title), true) +
       '<p class="lead">' + esc(w.focus) + '</p>' +
-      (w.fare ? '<p class="fare">🎯 Al final de la semana: <b>' + esc(w.fare) + '</b>' +
+      // «Ya puedo…»: the week's goals as actions (puedo.js); before, one line
+      (window.Puedo && Puedo.list(w).length ? Puedo.introHtml(w, state) :
+      w.fare ? '<p class="fare">🎯 Al final de la semana: <b>' + esc(w.fare) + '</b>' +
         (w.tema ? ' <span class="muted">· ' + esc(w.tema) + '</span>' : '') + '</p>' : '') +
       vocabCard(w) +
       missions(w, st, nChal) +
+      // the missions done: «¿Ya podés…?», and «sí» is tested (puedo.js)
+      (window.Puedo ? Puedo.cardHtml(w, state, !pendingToAdvance(w).length) : "") +
       weekExtrasHtml(w) +
       '<div class="card"><h2>Lo que se juega esta semana</h2>' +
         '<ul class="keys">' +
           w.keys.map(function (k) { return "<li>" + esc(k) + "</li>"; }).join("") +
         '</ul>' +
+        (window.Esencial ? Esencial.offerHtml(state, w) : "") +   // the week in ten lines (esencial.js)
         (refs.length ? '<h3>Lectura de apoyo</h3><p class="refs">' + refs.join(" · ") + "</p>" : "") +
-      '</div>';
+      '</div>' +
+      // the week of a station: the summaries of the three weeks it reviews
+      (window.Esencial && window.Estacion ? esencialStation(w) : "");
+  }
+
+  // the summaries of the weeks a station reviews (esencial.js): no empty card
+  function esencialStation(w) {
+    var fw = Estacion.forWeek(course, w.week), h = fw ? Esencial.stationHtml(state, course, fw.end) : "";
+    // and what you said you can do in those weeks (puedo.js)
+    if (fw && window.Puedo) h += Puedo.stationHtml(state, course, fw.end);
+    return h ? '<div class="card">' + h + "</div>" : "";
   }
 
   /* ------------------------------------------------------------ entrenamiento */
@@ -2324,6 +2420,10 @@
     }
     else if (kind === "micro") items = Drills.buildReview(course, state, 5, drillOpts());
     else if (kind === "duello") items = window.Duelli ? Duelli.session(arg, state.cards) : [];
+    // every three weeks: those three weeks interleaved, writing first (estacion.js)
+    else if (kind === "estacion") items = window.Estacion ? Estacion.build(course, arg, state, { map: itemMap }) : [];
+    // «¿Ya podés…?»: the items tied to the goal (puedo.js)
+    else if (kind === "puedo") items = window.Puedo ? Puedo.items(course, arg, itemMap) : [];
     else if (kind === "variaciones") items = window.Escritos ? Escritos.variaciones(state, arg, course) : [];
     // a scene of the work route: its phrases or its production items (trabajo.js)
     else if (kind === "trabajo") items = window.Trabajo ? Trabajo.session(arg, state, { silent: state.silent }) : [];
@@ -2332,6 +2432,8 @@
     else if (kind === "b-forme") items = Banca.formsSession(state, 12);
     else if (kind === "b-tr") items = Banca.translateSession(state, 8);
     else if (kind === "lista") items = (arg || []).slice();       // the items given (__test.play)
+    // «Trampas del castellano»: ten of one list (trampas.js, from Consultar)
+    else if (kind === "trampas") items = window.Trampas ? Trampas.round(arg, state, { map: itemMap, course: course }) : [];
     else if (kind === "b-gap") items = Banca.gapSession(state, 10);
     else if (kind === "b-err") items = Banca.errorSession(state, 8);
     else if (kind === "b-ident") items = Banca.weakSession(state, 12);
@@ -2498,6 +2600,7 @@
       });
     var prompt = (it.retry ? '<div class="badge-new">🔁 Segunda vez, más fácil</div>' : "") +
       (it.unamas && window.UnaMas ? UnaMas.badge(it) : "") +
+      (it.mio && !it.retry ? '<div class="badge-new">\u270d\ufe0f Tu frase, tal cual la escribiste</div>' : "") +
       '<div class="prompt">' + esc(DV ? DV.plain(it.prompt || "") : it.prompt || "") + "</div>" +
       (it.type === "guess" ? formulaHtml(it.frase) : "") +
       // a check of the lesson missed comes back with its rule in sight
@@ -2646,7 +2749,9 @@
         '<textarea id="ans" class="grow" rows="1" autocomplete="off" autocapitalize="off" ' +
         'autocorrect="off" spellcheck="false" enterkeyhint="send" placeholder="' +
           (multi ? "las " + gaps + " respuestas en orden: 1 / 2" + (gaps > 2 ? " / 3" : "")
-                 : it.type === "translate" ? UI.inLang : "tu respuesta…") + '"></textarea>' +
+                 : it.type === "translate" ? UI.inLang : "tu respuesta…") + '">' +
+          // your own sentence: rewrite it fixed, starting from what you wrote
+          (it.mio ? esc(it.stem) : "") + "</textarea>" +
         // the letters a Spanish keyboard does not have at hand (LANG.ui.keys),
         // for the phones without long press
         '<div class="accents">' +
@@ -2659,7 +2764,7 @@
         '<button class="btn" id="send">' + UI.check + "</button></div>";
     }
 
-    var sayBtn = it.src === "frasi" || it.src === "lettura" || it.src === "lab" || it.src === "ascolto" || it.type === "scopri" ? "" :
+    var sayBtn = it.src === "frasi" || it.src === "lettura" || it.src === "lab" || it.src === "ascolto" || it.type === "scopri" || it.src === "mio" ? "" :
       ' <button class="tab" id="say" title="escuchar">🔊</button>';
 
     return hud() + fatigue +
@@ -2885,10 +2990,11 @@
       // but not what a native would say.  «✓ Vale»: full xp, not a slip.
       var noteH = d.verdict === "giusto" && window.Errores && Errores.level(d) === "note" ? okNoteHtml(d) : "";
       if (round.tried) {
-        markFixed(round.firstCat);
-        settle("quasi", given, selfRepairHtml(round.firstDiag) + noteH, { label: "¡Eso es!", fixed: true });
+        markFixed(round.firstCat || (it.mio && it.cat));
+        settle("quasi", given, selfRepairHtml(round.firstDiag) + (it.mio ? mioSheet(it, given) : "") + noteH, { label: "¡Eso es!", fixed: true });
       } else {
         if (it.frase && it.type === "write") state.written = (state.written || 0) + 1;
+        if (it.mio) { markFixed(it.cat); settle("giusto", given, mioSheet(it, given) + noteH, { label: "✓ Corregida" }); return; }
         settle("giusto", given, noteH, noteH ? { label: "✓ Vale" } : undefined);
       }
       return;
@@ -2914,6 +3020,21 @@
 
     function decide() {
       if (round.answered) return;
+      // your own sentence (errores.js, mio): the first miss gives the
+      // category as the only hint; the second, the correction
+      if (it.mio && verdict === "sbagliato") {
+        if (!round.tried) {
+          round.tried = true;
+          round.lastGiven = String(given).trim();
+          round.promptAt = Date.now();
+          round.firstCat = it.cat;
+          mioPrompt(it);
+          return;
+        }
+        round.lastDiag = d.cat ? d : null;
+        settle("sbagliato", given, mioSheet(it, given));
+        return;
+      }
       if (verdict === "sbagliato" && !round.tried && round.kind !== "boss" && round.kind !== "esame" && d.hint && d.cat !== "vuoto") {
         round.tried = true;
         round.lastGiven = String(given).trim();
@@ -2924,10 +3045,31 @@
         showPrompt(d, DV ? DV.promptVerdict(given, accept, d) : null);
         return;
       }
-      if (!round.tried && d.cat) recordError(d, given, { registro: reg });
+      if (!round.tried && d.cat && !it.mio) recordError(d, given, { registro: reg });
       // right but for a slip: what differed, without the list of the other categories
       settle(verdict, given, d.cat ? diagHtml(d, true, verdict !== "sbagliato") : "");
     }
+  }
+
+  /* «Corregí tu frase» (errores.js, mio): the hint of the second attempt
+     is the category, nothing else; the sheet, your sentence and the fix. */
+  function mioPrompt(it) {
+    fx.close();
+    var lbl = it.l || (window.Diagnosi && Diagnosi.LABEL && Diagnosi.LABEL[it.cat]) || "";
+    $("#fb").innerHTML = '<div class="feedback prompt">' +
+      '<div class="verdict">\ud83d\udd0e Todav\u00eda no. ' + (it.n > 1 ? "Siguen los errores." : "Sigue el error.") + "</div>" +
+      (lbl ? '<p>Pista: <span class="tag">' + esc(lbl) + "</span></p>" : "<p>Mir\u00e1 la frase palabra por palabra.</p>") +
+      '<div class="row"><button class="tab" id="giveup">Ver la respuesta</button></div></div>';
+    on("#giveup", function () { settle("sbagliato", "", mioSheet(it, "")); });
+    var input = $("#ans");
+    if (input) input.focus();
+  }
+  function mioSheet(it, given) {
+    var lbl = it.l || (window.Diagnosi && Diagnosi.LABEL && Diagnosi.LABEL[it.cat]) || "";
+    return '<div class="diag">' + (lbl ? '<span class="tag">' + esc(lbl) + "</span>" : "") +
+      '<div class="diff"><span class="k">escribiste</span> ' + esc(it.stem) + "</div>" +
+      // the why is it.note: settle already shows it under the sheet
+      '<div class="diff"><span class="k">\u2192</span> <b class="fix">' + esc(it.answer) + "</b></div></div>";
   }
 
   /* «✓ Vale» with its note: why it is fine and, if it is, what is more
@@ -3379,8 +3521,13 @@
     if (!d || !d.cat || UNRECORDED[d.cat]) return null;
     var E = window.Errores;
     var err = d.fuente && d.mal !== undefined ? d : E ? E.fromDiag(d, given, o) : null;
-    var row = null;
-    if (E) row = E.record(state, err);
+    var row = null, cur = round && round.items ? round.items[round.i] : null;
+    // «Corregí tu frase» (errores.js, mio) only from a sentence the learner
+    // wrote whole: not an option picked, not a gap, not «Trova l'errore»,
+    // and your own sentence coming back to be corrected makes no new one
+    var noMio = !cur || !!(cur.mio || cur.nomio || cur.options || cur.type === "fixerr" ||
+      /_{3,}/.test(cur.stem || "") || /\|/.test(cur.answer || ""));
+    if (E) row = E.record(state, err, { noMio: noMio });
     else {
       if (!state.errs) state.errs = {};
       if (!state.errLog) state.errLog = [];
@@ -3553,6 +3700,7 @@
         (gained ? ' <span class="xpgain">+' + gained + " xp</span>" : "") + "</div>" +
       (it.type === "hunt" ? "" : '<div class="sol">' + (it.frase || it.src === "lettura" || it.dir === "it-es" || it.type === "scopri" ? esc(sol) : glossifyAny(sol)) + "</div>") +
       (it.frase && it.type !== "listen" ? '<div class="note">' + esc(it.frase.es) + "</div>" : "") +
+      (q < 2 ? genderNotice(claimGiven, sol) : "") +
       rp.top +
       (extra || "") +
       noteHtml +
@@ -3575,6 +3723,7 @@
       '</div><div id="aiexpout"></div><div id="claimout"></div></div>';
 
     $("#fb").innerHTML = fb;
+    genderPaint($("#fb"), ".sol, .note:not(.gen-note), .diag");
     if (window.Porque) Porque.after(it, { q: q, given: given, round: round });   // 📖 ¿Por qué? · 🧐 ¿Qué tenía de malo?
     // «¿Qué tenía de malo X?» asks about an option: its why, said here, would answer it
     var pq = $("#fb .porque-quiz .pq-h b");
@@ -3835,10 +3984,10 @@
     } catch (e) { return null; }
   }
   var KIND_NAME = { debil: "Puntos débiles", domina: "Dominala", round: "Entrenamiento", giorno: UI.daily, boss: UI.Boss, gym: "Gimnasio de verbos", pausa: UI.pausa, review: UI.review,
-                    scene: "Frases", vocab: "Palabras de la semana", lettura: "Lectura", sfida: UI.sfida, ponte: "Ponte",
+                    scene: "Frases", vocab: "Palabras de la semana", trampas: "Trampas del castellano", lettura: "Lectura", sfida: UI.sfida, ponte: "Ponte",
                     falsi: UI.falsi, capire: UI.capire, "b-voc": UI.words, "b-tr": UI.tr, "b-gap": UI.gap,
                     "b-forme": UI.forme, "b-err": UI.err, "b-ident": "Lo que más te cuesta", clinica: "Clínica", suoni: UI.suoni, "b-freq": UI.wordsFreq,
-                    ritorno: "Cinco minutos para retomar", micro: UI.micro, esame: UI.examC1, duello: "Duelo",
+                    ritorno: "Cinco minutos para retomar", micro: UI.micro, esame: UI.examC1, duello: "Duelo", estacion: "Estación", puedo: "¿Ya podés…?",
                     diag: "Mini diagnóstico" };
   function pendingTitle(p) {
     if (p.type === "lezione") return "Lección · semana " + p.week + " · " + (p.i + 1) + "/" + p.steps.length;
@@ -4000,6 +4149,10 @@
     }
 
     if (round.kind === "trabajo" && window.Trabajo) Trabajo.roundDone(state, round.arg, pct);
+    // the station: its balance by week and by duel, kept (estacion.js)
+    if (round.kind === "estacion" && window.Estacion) pct = Estacion.roundDone(state, round.arg, round.log, course).pct;
+    // «¿Ya podés…?»: whether the test came out, kept for the balance (puedo.js)
+    if (round.kind === "puedo" && window.Puedo) Puedo.roundDone(state, round.arg, round.log, course);
 
     if (round.kind === "sfida") {
       var prevS = state.challengeLog[round.arg];
@@ -4136,6 +4289,13 @@
       }).join("") + "</table>" +
       (!ab.ascolto && state.silent ? '<p class="muted small">Sin escucha: estás en modo silencioso.</p>' : "");
     }
+    if (round.kind === "estacion" && window.Estacion) html += Estacion.balanceHtml(state, round.arg, course);
+    if (round.kind === "estacion" && window.Puedo) html += Puedo.stationHtml(state, course, round.arg);
+    if (round.kind === "puedo" && window.Puedo) html += Puedo.resultHtml(state, course, round.arg);
+    // the summaries of those three weeks, to go back to (esencial.js)
+    if (round.kind === "estacion" && window.Esencial) html += Esencial.stationHtml(state, course, round.arg);
+    // «Tu amiga no entendió»: contar la lectura en castellano (mediacion.js, opcional)
+    if (round.kind === "lettura" && window.Mediacion) html += Mediacion.html(state, "lettura:" + round.arg);
     if (r.oldRules) {
       html += '<p class="note">🗓️ Reglas de hace un mes o más: ' + r.oldRules.pct + " % en " + r.oldRules.n +
         (r.oldRules.n === 1 ? " pregunta" : " preguntas") + (round.kind === "domina" ? " (aparte: no cuentan para dominar la semana)" : "") + ".</p>";
@@ -4175,6 +4335,7 @@
       (round.from === "hoy" && window.Inicio ? Inicio.resultButton() : "") +       // el plan de hoy sigue (inicio.js)
       (round.from === "briefing" ? '<button class="btn" id="backweek">← Seguir ' + UI.pathEl + "</button>" : "") +
       '<button class="btn' + (round.from === "briefing" ? " ghost" : "") + '" id="again">Otra ronda</button>' +
+      (round.kind === "trampas" ? '<button class="btn ghost" id="totrampas">← Trampas</button>' : "") +
       '<button class="btn ghost" id="toggi">Inicio</button>' +
       "</div></div>";
     return html;
@@ -4404,6 +4565,8 @@
           }).join("") + "</select></label>" : "") +
         '<label class="set"><span>Teclado sin sugerencias<small>el teclado no te propone palabras (más difícil), pero tampoco detecta el idioma solo ni deja elegirlo desde su barra</small></span>' +
           '<input type="checkbox" id="kbquiet"' + (state.kbQuiet ? " checked" : "") + "></label>" +
+        (window.Estrategia ? '<label class="set"><span>Estrategia de la semana 💡<small>una táctica corta antes de la misión donde sirve, una vez por semana, con 👍/👎 para el cierre</small></span>' +
+          '<input type="checkbox" id="stratset"' + ((state.strat || {}).off ? "" : " checked") + "></label>" : "") +
         '<label class="set"><span>Modo silencioso 🤫<small>nada suena solo y los ejercicios de escuchar se cambian por otros escritos; el 🔊 sigue andando si lo tocás</small></span>' +
           '<input type="checkbox" id="silent"' + (state.silent ? " checked" : "") + "></label>" +
         '<label class="set"><span>Agendar mi rato diario<small>' + (state.icsAt ? 'ya lo agregaste · de nuevo si cambiás la hora' : 'un evento en tu calendario, con alarma, que abre tu semana') + '</small></span>' +
@@ -4927,6 +5090,7 @@
     else if (window.Capas && Capas.owns(s)) html = Capas.render(s);   // «Consultar» (js/capas.js)
     else if (window.Fuera && Fuera.owns(s)) html = Fuera.render(s);   // fuera de la app (fuera.js)
     else if (window.Trabajo && Trabajo.owns(s)) html = Trabajo.render(s);   // para el trabajo (trabajo.js)
+    else if (window.Esencial && Esencial.owns(s)) html = Esencial.render(s);   // lo esencial de la semana (esencial.js)
 
     var gb = $("#glossbox");
     if (gb) gb.classList.remove("on");
@@ -4939,6 +5103,7 @@
     }
     app().innerHTML = html;
     langBoxes(app());   // before anything takes the focus: the keyboard reads the box's lang when it opens
+    genderPaint(app(), ".blk, .wwords");
     document.body.classList.toggle("ingame", s === "gioco" || s === "lampo" || s === "lezione");
     var pl = document.querySelector(".progressline i[data-to]");
     if (pl) requestAnimationFrame(function () { requestAnimationFrame(function () { pl.style.width = pl.dataset.to + "%"; }); });
@@ -5128,14 +5293,24 @@
     on("#lesnextpart", function () { var b = $("#lesnextpart"); startLezione(+b.dataset.part); });
     on("#play2", function () { startRound("round"); });
     document.querySelectorAll("[data-m]").forEach(function (b) {
-      b.onclick = function () { goMission(b.dataset.m, b.dataset.arg); };
+      b.onclick = function () { missionTap(b.dataset.m, b.dataset.arg, b.classList.contains("done")); };
+    });
+    // «¿Ya podés…?»: sí / más o menos / todavía no; «sí» goes to the test (puedo.js)
+    document.querySelectorAll("[data-puedo]").forEach(function (b) {
+      b.onclick = function () {
+        var p = b.dataset.puedo.split(":");
+        var r = Puedo.answer(state, course, +p[0], +p[1], p[2]);
+        persist();
+        if (r.test) startRound("puedo", p[0] + ":" + p[1]);
+        else { render(); toast(p[2] === "si" ? "Anotado." : "Anotado: vuelve mañana en el repaso.", 2500); }
+      };
     });
     on("#heronext", function () {
       var w = course.weeks[Math.min(state.unlocked, 52) - 1];
       var nm = nextMission(w);
       if (!nm) return;
-      view.week = w.week; view.tab = "percorso";
-      goMission(nm.kind, nm.arg);
+      // the tab changes only when the mission starts: closing the sheet stays in Oggi
+      missionTap(nm.kind, nm.arg, false, w.week, function () { view.tab = "percorso"; });
     });
     on("#topercorso", function () { go("percorso"); });
     on("#backweek", function () { view.tab = "percorso"; view.screen = "briefing"; render(); window.scrollTo(0, 0); });
@@ -5152,21 +5327,25 @@
     if (window.Capas) Capas.wire(view.screen);
     if (window.Fuera) Fuera.wire(view.screen);
     if (window.Trabajo) Trabajo.wire(view.screen);
+    if (window.Esencial) Esencial.wire(view.screen);
     on("#lesback", function () { view.screen = "briefing"; render(); });
     on("#lesplay", function () {
       var lw = course.weeks[view.week - 1];
       startRound(lw.boss ? "boss" : "round", !lw.boss && les && les.part != null ? "part:" + les.part : undefined);
     });
     document.querySelectorAll("[data-lq]").forEach(function (b) { b.onclick = function () { lesAnswer(b); }; });
+    document.querySelectorAll("[data-ln]").forEach(function (b) { b.onclick = function () { noticeAnswer(b); }; });
     on("#chal", function () { view.screen = "sfide"; render(); window.scrollTo(0, 0); });
     on("#back2", function () { view.screen = "briefing"; render(); });
     document.querySelectorAll("[data-sfida]").forEach(function (b) {
       b.onclick = function () { startRound("sfida", b.dataset.sfida); };
     });
     on("#again", function () { startRound(round.kind, round.arg); });
+    on("#totrampas", function () { if (window.Capas) Capas.openSub("trampas"); });
     on("#quit", function () {
       clearPending();
       if (round.kind === "trabajo" && window.Trabajo && Trabajo.reopen(round.arg)) return;   // back to the scene (trabajo.js)
+      if (round.kind === "trampas" && window.Capas) { Capas.openSub("trampas"); return; }   // back to the lists (trampas.js)
       if (round.from === "briefing") { view.tab = "percorso"; view.screen = "briefing"; render(); window.scrollTo(0, 0); }
       else if (round.from === "hoy") go("oggi");
       else if (round.kind === "lettura") go("leggi");
@@ -5213,6 +5392,7 @@
       startRound("lettura", view.ep);
     });
     noteReadingSpeed();
+    if (view.screen === "risultato" && window.Mediacion) Mediacion.wire();
     on("#playlib", function () {
       var ids = Object.keys(state.letture || {}).filter(function (id) { return Letture.byId(id); });
       if (!ids.length) return toast("Todavía no terminaste ninguna lectura.");
@@ -6516,11 +6696,15 @@
     scriviLexicon();
     var draft = ((state.scrittiDraft || {})[w.week]) || ((state.scritti || {})[w.week] || {}).t || "";
     var r = Scrivi.check(draft, w.week);
+    // from week 14, the grid in view and the self-assessment (grilla.js)
+    var grid = window.Grilla && Grilla.active(w.week, task);
     return '<button class="btn ghost" id="sback">← a la semana</button>' +
       plate(UI.scrivi + " · " + UI.week + " " + weekNum(w.week), esc(w.fare || w.title)) +
       '<div class="card"><p>' + mk(task.t) + '</p><ul class="reqs" id="sreqs">' + reqsHtml(r) + "</ul>" +
       '<p class="muted small">Escribí sin traductor: lo que te equivoques es lo que más vas a aprender. Podés dejarlo a medias y volver.</p></div>' +
+      (grid ? Grilla.gridHtml(w.week) : "") +
       '<textarea id="stext" class="grow scrivi" rows="7" spellcheck="false" autocapitalize="sentences" placeholder="' + UI.scriviIn + '">' + esc(draft) + "</textarea>" +
+      (grid ? Grilla.selfHtml(w.week, state) : "") +
       '<div class="row" style="margin-top:10px"><button class="btn" id="scheck">🔎 Revisar</button>' +
       '<button class="tab" id="smodel">👀 Ver un modelo</button></div>' +
       (window.EscrituraPlus ? '<div class="row ep-entry" style="margin-top:8px"><button class="tab" id="eptre">⏱️ Tres vueltas: 5, 4 y 3 min</button>' +
@@ -6531,7 +6715,7 @@
         ? "Corrector con IA activado (" + aiNames() + "). "
         : "Para que una IA marque todo y lo explique, cargá una clave de Anthropic. ") +
         '<a href="#" id="aigo">Claves en ' + UI.me + " →</a></p>" +
-      '<div id="sout"></div>';
+      '<div id="sout"></div><div id="sgrid"></div>';
   }
 
   /* Where the answer differs, gap by gap, for an item with several gaps
@@ -6665,9 +6849,18 @@
       }, 400);
     });
     on("#smodel", function () {
-      var out = $("#sout");
+      var out = $("#sout"), grOld = $("#sgrid");
+      if (grOld) grOld.innerHTML = "";
       if (out) out.innerHTML = '<div class="card"><h3>Un modelo</h3><p class="model it">' + esc(Scrivi.TASKS[w.week].model) +
         '</p><p class="muted small">No es la única forma: compará las estructuras, no las palabras.</p></div>';
+    });
+    // the grid (grilla.js): the two sample texts, and the four boxes saved as they are ticked
+    on("#grsamp", function () {
+      var o = $("#grsampout");
+      if (o) o.innerHTML = o.innerHTML ? "" : Grilla.samplesHtml(w.week);
+    });
+    Array.prototype.forEach.call(document.querySelectorAll("[data-grself]"), function (c) {
+      c.onchange = function () { Grilla.selfSet(state, w.week, +c.getAttribute("data-grself"), c.checked); persist(); };
     });
     var lt = $("#slt");
     if (lt) lt.onchange = function () { state.ltOff = !lt.checked; persist(); };
@@ -6844,6 +7037,9 @@
                         : '<p>Cumple la consigna.' + (hard.length ? " Corregí lo marcado si querés, o entregalo así: los errores quedan anotados para la clínica." : "") + "</p>" +
                           '<button class="btn" id="sdone">✓ Entregar el texto</button>') +
         "</div>";
+      // the grid, row by row: what the program can see next to what was ticked (grilla.js)
+      var grOut = $("#sgrid");
+      if (grOut && window.Grilla && Grilla.active(w.week, Scrivi.TASKS[w.week])) grOut.innerHTML = busy ? "" : Grilla.resultHtml(w.week, state, text, r, hard.length);
       on("#sdone", function () { deliverScrivi(w, text, r); });
       if (ltState !== "ok" && ltState !== "error") out.scrollIntoView({ behavior: "smooth", block: "start" });
   }
@@ -7244,6 +7440,8 @@
     if (kbm) kbm.onchange = function () { Teclado.setMode(kbm.value); toast(kbm.value === "app" ? "Respondés con el teclado de la app." : "Respondés con el teclado del teléfono."); };
     var kbq = $("#kbquiet");
     if (kbq) kbq.onchange = function () { state.kbQuiet = kbq.checked; persist(); langBoxes(); };
+    var sts = $("#stratset");
+    if (sts) sts.onchange = function () { Estrategia.setOff(state, !sts.checked); persist(); };
     var silent = $("#silent");
     if (silent) silent.onchange = function () {
       state.silent = silent.checked;
@@ -7446,6 +7644,9 @@
     xpFly: xpFly, weekNum: weekNum, weekLabel: function (n) { return UI.theory + weekNum(n); }
   });
 
+  // «💡 Estrategia de la semana» (estrategia.js): what it needs from here.
+  if (window.Estrategia) Estrategia.init({ state: function () { return state; }, persist: persist, toast: toast });
+
   // Test hook (only with ?test in the URL): lets the automated playthrough
   // read the current question so it can answer right or wrong on purpose.
   if (/[?&]test\b/.test(location.search)) {
@@ -7488,6 +7689,11 @@
             var ok = Array.prototype.filter.call(document.querySelectorAll("[data-lq]"), function (b) { return b.textContent === ls.q.answer; })[0];
             if (ok) { lesAnswer(ok); return "answered"; }
           }
+          // «¿Qué notás?»: answered right, then on to the rule
+          if (ls.kind === "notice" && ls.pick == null) {
+            var okn = Array.prototype.filter.call(document.querySelectorAll("[data-ln]"), function (b) { return b.textContent === ls.n.answer; })[0];
+            if (okn) { noticeAnswer(okn); return "answered"; }
+          }
           lesNext();
           return "next";
         }
@@ -7513,6 +7719,11 @@
       if (view.gramFrom === "consultar") { view.gramFrom = null; view.screen = "consultar"; render(); window.scrollTo(0, 0); }
       else go(view.tab || "io");
     }
+  });
+  // «Trampas del castellano» (trampas.js): las listas en Consultar, la ronda acá.
+  if (window.Trampas) Trampas.attach({
+    state: function () { return state; }, course: function () { return course; },
+    start: function (id) { startRound("trampas", id); }
   });
   // Las capas (capas.js): «Consultar» y las misiones de la Biblioteca y de Tres vueltas.
   if (window.Capas) Capas.attach({
@@ -7554,6 +7765,12 @@
     show: function (sc) { view.screen = sc; render(); window.scrollTo(0, 0); },
     toWeek: function () { view.tab = "percorso"; view.screen = "briefing"; render(); window.scrollTo(0, 0); },
     openReading: function (id) { view.ep = id; view.epFrom = "briefing"; view.screen = "lettura"; render(); window.scrollTo(0, 0); }
+  });
+
+  // Mediación (mediacion.js): contar en castellano lo escuchado o leído.
+  if (window.Mediacion) Mediacion.attach({
+    state: function () { return state; }, persist: persist, toast: toast, aiKey: aiKey, aiKeys: aiKeys,
+    gain: function (n, strand) { gain(n); if (strand && n) Engine.addStrand(state, strand, n); renderHeader(); }
   });
 
   // «Hoy», el primer arranque y el después del curso (inicio.js, plan.js):
@@ -7643,6 +7860,15 @@
     toWeek: function () { view.tab = "percorso"; view.screen = "briefing"; render(); window.scrollTo(0, 0); }
   });
 
+  // Lo esencial de la semana (esencial.js): el resumen tapado, después hoja de repaso.
+  if (window.Esencial) Esencial.attach({
+    state: function () { return state; }, persist: persist, render: render, mk: mk, speak: speak,
+    course: function () { return course; }, lang: function () { return LG.tts; },
+    gain: function (n) { gain(n); renderHeader(); },
+    show: showScreen,
+    back: function () { view.tab = "percorso"; view.screen = "briefing"; render(); window.scrollTo(0, 0); }
+  });
+
   // La Biblioteca (biblioteca.js): libros enteros, con el lector y el input.
   if (window.Biblioteca) Biblioteca.init({
     state: function () { return state; }, view: function () { return view; }, persist: persist, gain: gain,
@@ -7711,6 +7937,7 @@
     .then(function (data) {
       course = data;
       try {
+        if (genderRules()) genderRules().learn(course);
         if (window.Mapas) Mapas.install(course);
         itemMap = Drills.itemsById(course);
         registerStories();

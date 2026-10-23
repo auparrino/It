@@ -1,6 +1,6 @@
 /*
  * La lección jugable: la teoría de cada semana se vuelve una secuencia de
- * pantallas cortas (mirá → la regla → la tabla → la trampa), y después de
+ * pantallas cortas (mirá o ¿qué notás? → la regla → la tabla → la trampa), y después de
  * cada bloque llega un chequeo rápido armado con el material del mismo
  * bloque.  Leer y recuperar enseguida (práctica de recuperación) fija más
  * que releer.  Las trampas son los errores del hispanohablante en el idioma
@@ -451,6 +451,26 @@
 
   function qkey(q) { return q.prompt + "|" + (q.stem || "") + "|" + q.answer; }
 
+  /* «¿Qué notás?»: before the rule, a few examples with the form marked and
+     a multiple-choice question on the rule itself (Grammatik entdecken; the
+     learner builds the hypothesis, the rule confirms it).  The block's own
+     «notice», or the package's NOTAR_DATA[week][heading] (notar_data.js).
+     Valid when it has a question, an answer among two or more different
+     options and examples (its own or the block's). */
+  function notice(b, week) {
+    var D = root.NOTAR_DATA || {};
+    var n = b.notice || (D[week] && b.h ? D[week][b.h] : null);
+    if (!n || !n.q || !n.answer || !(n.options || []).length) return null;
+    var ex = (n.ex && n.ex.length ? n.ex : b.ex) || [];
+    if (!ex.length || n.options.indexOf(n.answer) < 0 || uniq(n.options.slice()).length !== n.options.length || n.options.length < 2) return null;
+    // the order of the options from the question itself: no draw from rnd,
+    // so the checks of the lesson stay the ones they were
+    var h = 7;
+    String(n.q).split("").forEach(function (c) { h = (h * 31 + c.charCodeAt(0)) % 2147483647; });
+    var seed = h || 1, rnd = function () { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
+    return { ex: ex, own: !!(n.ex && n.ex.length), q: n.q, answer: n.answer, options: shuffle(n.options, rnd), no: n.no || "" };
+  }
+
   // The playable sequence: intro, then each block followed by its check.
   function steps(lesson, rnd, week, isWord, only) {
     rnd = rnd || Math.random;
@@ -465,7 +485,10 @@
       // One idea per screen (segmenting: Mayer 2017), the examples first
       // (PACE: the form in context, then the rule), the big tables as cards,
       // the trap on its own.
-      if (b.ex && b.ex.length) out.push({ kind: "look", i: i });
+      // «¿Qué notás?» takes the place of «Mirá»: the examples and a question
+      var nt = notice(b, week);
+      if (nt) out.push({ kind: "notice", i: i, n: nt });
+      else if (b.ex && b.ex.length) out.push({ kind: "look", i: i });
       out.push({ kind: "rule", i: i });
       // A long table in screens of three or four rows, one under the other,
       // with a quick check on each group before the next one.
@@ -514,7 +537,7 @@
     return out;
   }
 
-  var api = { steps: steps, traps: traps, strip: strip, exQuestion: exQuestion, tableQuestion: tableQuestion, forms: forms, smallTable: smallTable };
+  var api = { steps: steps, notice: notice, traps: traps, strip: strip, exQuestion: exQuestion, tableQuestion: tableQuestion, forms: forms, smallTable: smallTable };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   else root.Lezione = api;
 })(this);

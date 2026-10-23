@@ -1040,6 +1040,7 @@
     if (root.Biblioteca && id.indexOf("lib:") === 0) return root.Biblioteca.reviewItem(id, opts && opts.state);   // 📌 de la Biblioteca
     if (root.TresLenguas && id.indexOf("tres:") === 0) return root.TresLenguas.reviewItem(id);   // lo fallado en Tres lenguas
     if (root.Trabajo && id.indexOf("trab:") === 0) return root.Trabajo.reviewItem(id);   // los ejercicios de las escenas de trabajo
+    if (root.Trampas && id.indexOf("trampa:") === 0) return root.Trampas.reviewItem(id);   // Trampas del castellano (acento, género)
     // a rule: a new sentence with it; an item another module left (Engine.enqueue)
     if (root.Reglas && id.indexOf("r:") === 0) return root.Reglas.reviewItem(id, opts && opts.state);
     if (root.Reglas && id.indexOf("own:") === 0) return root.Reglas.ownItem(opts && opts.state, id);
@@ -1055,6 +1056,7 @@
               (root.Biblioteca && id.indexOf("lib:") === 0) ||
               (root.TresLenguas && id.indexOf("tres:") === 0 && !!root.TresLenguas.reviewItem(id)) ||
               (root.Trabajo && id.indexOf("trab:") === 0 && !!root.Trabajo.reviewItem(id)) ||
+              (root.Trampas && id.indexOf("trampa:") === 0 && root.Trampas.known(id)) ||
               (Duelli && id.indexOf("duel:") === 0 && !!Duelli.reviewItem(id)));
   }
 
@@ -1079,15 +1081,17 @@
       due.push({ id: id, due: card.due, pri: pri, maint: isMaint });
     });
     due.sort(function (a, b) { return a.pri - b.pri || a.due - b.due; });
-    var rules = 0;
+    var rules = 0, mio = 0;
     return due.filter(function (d) {
       // the rules (a new sentence each) are a few a day too: they wait, they never pile up
       if (d.id.indexOf("r:") === 0 && d.pri > 0 && ++rules > RULES_A_DAY) return false;
+      // your own sentences to correct (errores.js, «own:mio:»): a few a day, never a debt
+      if (d.id.indexOf("own:mio:") === 0 && ++mio > MIO_A_DAY) return false;
       if (!d.maint) return true;
       return ++maint <= MAINT_A_DAY;
     });
   }
-  var RULES_A_DAY = 4;
+  var RULES_A_DAY = 4, MIO_A_DAY = 3;
 
   function buildReview(course, state, size, opts) {
     var map = (opts && opts.map) || itemsById(course);

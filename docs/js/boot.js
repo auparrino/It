@@ -39,8 +39,8 @@
                     "letture_settimana.js", "tramo_data.js", "letture_data.js", "mapas_data.js", "diagnosi.js", "scrivi.js",
                     "freq_data.js", "ascolto_data.js", "dictogloss_data.js", "esame_data.js",
                     "voci_cv_data.js", "devolucion_data.js", "porque_data.js", "escritura_plus_data.js",
-                    "variaciones_data.js", "escritos_data.js", "desglose_data.js", "biblioteca_data.js", "radio_data.js",
-                    "fuera_data.js"],
+                    "variaciones_data.js", "escritos_data.js", "desglose_data.js", "biblioteca_data.js", "radio_data.js", "mediacion_data.js",
+                    "fuera_data.js", "grilla_data.js"],
           data: ["course.json"] }
   };
 
@@ -53,7 +53,7 @@
     { lang: "formule_data.js" }, { core: "formule.js" },
     { lang: "lab_data.js" }, { core: "lab.js" },
     { lang: "letture_settimana.js" }, { lang: "tramo_data.js" }, { lang: "letture_data.js" }, { core: "letture.js" },
-    { core: "lezione.js" },
+    { lang: "notar_data.js" }, { core: "lezione.js" },
     { lang: "mapas_data.js" }, { core: "mapas.js" },
     { lang: "diagnosi.js" }, { lang: "scrivi.js" },
     { core: "banca.js" }, { lang: "freq_data.js" }, { core: "frequenza.js" },
@@ -64,6 +64,7 @@
     { lang: "devolucion_data.js" }, { core: "devolucion.js" },
     { lang: "porque_data.js" }, { core: "porque.js" },
     { lang: "escritura_plus_data.js" }, { core: "escritura_plus.js" },
+    { lang: "grilla_data.js" }, { core: "grilla.js" },
     { lang: "variaciones_data.js" },
     { lang: "escritos_data.js" },
     { core: "variaciones.js" },
@@ -73,13 +74,16 @@
     { lang: "desglose_data.js" },
     { core: "voci.js" }, { core: "drills.js" }, { core: "desglose.js" },
     { core: "referencia.js" },
-    { core: "reglas.js" }, { core: "unamas.js" },
+    { core: "reglas.js" }, { core: "unamas.js" }, { core: "estacion.js" }, { core: "esencial.js" }, { core: "puedo.js" },
     { lang: "biblioteca_data.js" }, { core: "biblioteca.js" },
     { shared: "tres_lenguas_data.js" }, { core: "tres_lenguas.js" },
-    { lang: "radio_data.js" }, { core: "radio.js" }, { core: "tramo.js" },
+    { lang: "radio_data.js" }, { core: "radio.js" },
+    { lang: "mediacion_data.js" }, { core: "mediacion.js" }, { core: "tramo.js" },
     { lang: "fuera_data.js" }, { core: "fuera.js" }, { core: "trabajo.js" },
+    { core: "trampas.js" },
     { core: "plan.js" }, { core: "progreso.js" }, { core: "inicio.js" },
     { core: "capas.js" }, { core: "nube.js" }, { core: "teclado.js" },
+    { lang: "estrategia_data.js" }, { core: "estrategia.js" },
     { core: "app.js" }
   ];
 
