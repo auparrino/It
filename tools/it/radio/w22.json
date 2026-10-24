@@ -5,6 +5,7 @@
  "genre": "chiacchierata in studio",
  "es": "Uno de los primos mellizos de Dario se recibió en Nápoles. Dario quiere mandarle un regalo desde Bologna, pero tiene más ganas que organización; Sara lo ayuda con el paquete y con otra cosa.",
  "speakers": ["Sara", "Dario"],
+ "sexes": ["f", "m"],
  "turns": [
   ["A", "Dario, che cos'è questa scatola enorme sulla tua scrivania?"],
   ["B", "È un pacco per mio cugino Gennaro, quello dei gemelli. Venerdì a Napoli ha preso la laurea in ingegneria!"],

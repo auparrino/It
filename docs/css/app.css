@@ -688,6 +688,8 @@ details.nube .set { margin-top: 6px; }
   display: flex; gap: 12px; align-items: center; justify-content: space-between; padding: 10px 14px; border-radius: 14px;
   background: var(--card, #fff); color: var(--ink, #222); box-shadow: 0 6px 24px rgba(0,0,0,.18); }
 .updbar .btn { min-height: 44px; }
+.novoice { align-items: flex-start; z-index: 62; max-height: 70vh; overflow: auto; }
+.novoice ul { margin: 6px 0 0; padding-left: 18px; }
 
 /* --- accesibilidad --- */
 /* el foco del teclado siempre a la vista */

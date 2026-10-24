@@ -57,7 +57,7 @@ pack.LANGS.filter(function (c) { return c !== "de"; }).forEach(function (code) {
   ok(!G.active(13, S.TASKS[13] || {}) && !G.active(8, S.TASKS[8]), L + "antes de la 14, no");
   var on = weeks.filter(function (n) { return n >= 14; });
   ok(on.length >= 30 && on.every(function (n) { return G.active(n, S.TASKS[n]); }), L + "desde la 14, en cada semana con Scrivi (" + on.length + ")");
-  ok(!G.active(26, S.TASKS[26]), L + "sin consigna, no");
+  ok(!G.active(39, null), L + "sin consigna, no");
 
   // the four rows
   var ids = D.rows.map(function (r) { return r.id; }), autos = D.rows.map(function (r) { return r.auto; }).sort().join();

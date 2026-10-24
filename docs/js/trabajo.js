@@ -243,11 +243,15 @@
   }
   function owns(screen) { return screen === "trabajo"; }
 
-  // One voice per speaker, in the order they first speak.
+  // One voice per speaker, in the order they first speak; with the host's
+  // cast (H.cast: Voces.cast) a voice of each one's gender (TRABAJO_DATA.sexes).
   function voiceOf(s, who) {
     var seen = [];
     (s.dialogo || []).forEach(function (d) { if (seen.indexOf(d[0]) < 0) seen.push(d[0]); });
-    return Math.max(0, seen.indexOf(who));
+    var k = Math.max(0, seen.indexOf(who)), sx = D().sexes || {};
+    if (!H.cast) return { vi: k };
+    var c = H.cast(seen.map(function (n) { return sx[n] || null; }), seen.length)[k];
+    return { vi: c.vi, pitch: c.pitch };
   }
 
   function countLine(s, text) {
@@ -336,7 +340,8 @@
     var next = function () {
       if (!cur || cur.id !== s.id || i >= s.dialogo.length) return;
       var d = s.dialogo[i++];
-      var u = H.speak(d[1], true, null, { vi: voiceOf(s, d[0]), keep: i > 1, onend: next });
+      var v = voiceOf(s, d[0]);
+      var u = H.speak(d[1], true, null, { vi: v.vi, pitch: v.pitch, keep: i > 1, onend: next });
       if (!u) i = s.dialogo.length;
     };
     if (root.speechSynthesis) root.speechSynthesis.cancel();
@@ -358,7 +363,7 @@
     on("trplay", playAll);
     on("trdlgok", function () { recOf(H.state(), s.id).d = 1; H.persist(); H.render(); });
     document.querySelectorAll("[data-trsay]").forEach(function (b) {
-      b.onclick = function () { var d = s.dialogo[+b.getAttribute("data-trsay")]; H.speak(d[1], true, null, { vi: voiceOf(s, d[0]) }); };
+      b.onclick = function () { var d = s.dialogo[+b.getAttribute("data-trsay")], v = voiceOf(s, d[0]); H.speak(d[1], true, null, { vi: v.vi, pitch: v.pitch }); };
     });
     document.querySelectorAll("[data-trph]").forEach(function (b) {
       b.onclick = function (e) { e.preventDefault(); H.speak(s.phrases[+b.getAttribute("data-trph")][0], true); };

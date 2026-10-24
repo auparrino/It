@@ -56,6 +56,7 @@
     "genre": "programa de consultas na rádio",
     "es": "En un programa de radio de consultas legales, una abogada laboralista atiende el llamado de una oyente preocupada por una nueva regla de su empresa.",
     "speakers": ["Helena, advogada e apresentadora", "Patrícia, ouvinte"],
+    "sexes": ["f", "f"],
     "turns": [
       ["A", "Boa tarde, você está ouvindo o Direito na Hora, e a gente já tem uma ouvinte na linha. Pode falar, Patrícia, tudo bem?"],
       ["B", "Tudo bem, Helena, obrigada por me atender. Olha, é uma situação meio delicada. Eu trabalho numa empresa de logística há uns quatro anos e, faz seis meses, eu namoro um colega do setor financeiro."],

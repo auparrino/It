@@ -51,6 +51,7 @@
     "genre": "conversa entre amigos",
     "es": "Dos amigos se encuentran en un café y charlan de una serie brasileña que están viendo, de los spoilers en las redes y de otras cosas.",
     "speakers": ["Bruna", "Caio"],
+    "sexes": ["f", "m"],
     "turns": [
       ["A", "E aí, Caio, tudo bom? Senta aí. Nossa, cê tá com uma cara de sono..."],
       ["B", "Tô morto, Bruna. Fiquei até as três da manhã maratonando aquela série, sabe? A da família que tem uma padaria em Niterói."],

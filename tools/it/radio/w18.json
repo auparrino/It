@@ -5,6 +5,7 @@
  "genre": "collegamento dal mercato",
  "es": "Leo, el corresponsal en bicicleta, tenía que contar el mercado de la Piazzola, pero llama a la radio desesperado: perdió algo importante.",
  "speakers": ["Sara", "Leo"],
+ "sexes": ["f", "m"],
  "turns": [
   ["A", "E adesso andiamo al mercato della Piazzola con il nostro Leo. Leo, com'è il mercato stamattina?"],
   ["B", "Sara, il mercato è bellissimo, ma io ho un problema: non trovo più il portafoglio!"],

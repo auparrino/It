@@ -5,6 +5,7 @@
  "genre": "quadro do programa",
  "es": "En la radio hay una caja de «objetos perdidos» del barrio. Hoy Dona Lúcia, la vecina de ochenta años, pasa por el estudio: busca algo suyo y Nanda le muestra lo que hay en la caja.",
  "speakers": ["Nanda", "Dona Lúcia"],
+ "sexes": ["f", "f"],
  "turns": [
   ["A", "Bom dia! Hoje tem o nosso quadro «Achados e perdidos». No estúdio está a Dona Lúcia, nossa vizinha. Dona Lúcia, o que a senhora procura?"],
   ["B", "Bom dia, minha filha. Eu procuro os meus óculos. Em casa não estão: nem no quarto, nem embaixo do travesseiro!"],

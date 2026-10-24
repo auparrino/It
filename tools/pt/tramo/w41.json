@@ -54,6 +54,7 @@
     "genre": "podcast literário",
     "es": "En un podcast de literatura, la conductora conversa con un profesor sobre un tiempo verbal típico de la narrativa y sobre los narradores de dos novelas brasileñas clásicas.",
     "speakers": ["Marina, apresentadora", "Rubens, professor de literatura"],
+    "sexes": ["f", "m"],
     "turns": [
       ["A", "Tá no ar mais um Estante Aberta. Hoje a conversa é sobre um tempo verbal que quase ninguém usa falando, mas que aparece em tudo quanto é romance: o mais-que-perfeito. E pra isso eu convidei o professor Rubens, que dá aula de literatura brasileira. Rubens, obrigada por vir."],
       ["B", "Eu é que agradeço, Marina. E olha, já começo concordando com você: na fala, ninguém diz eu fizera. A gente diz eu tinha feito. A forma simples ficou praticamente restrita à escrita, e à escrita mais cuidada."],

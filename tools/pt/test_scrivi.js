@@ -45,8 +45,23 @@ if (!bank || !items || !phrases || !readings) console.log("(datos del curso toda
 /* ------------------------------------------------ las tareas y sus modelos */
 
 var WEEKS = S.weeks();
-ok(WEEKS.length === 48, "una tarea por semana menos las de jefe: " + WEEKS.length);
-[13, 26, 39, 52].forEach(function (w) { ok(!S.TASKS[w], "la semana de jefe " + w + " no tiene tarea"); });
+ok(WEEKS.length === 49, "una tarea por semana menos las de jefe, más la integrada de la 26: " + WEEKS.length);
+[13, 39, 52].forEach(function (w) { ok(!S.TASKS[w], "la semana de jefe " + w + " no tiene tarea"); });
+// the boss of B1: an integrated task (Celpe-Bras): an audio to listen to, and the answer
+// mixes past, polite conditional and subjunctive, in 80 words or more
+(function () {
+  var t = S.TASKS[26] || {};
+  ok(t.ouvir && t.ouvir.split(/\s+/).length >= 30, "semana 26: la tarea integrada trae el audio (ouvir)");
+  ok(t.min >= 80, "semana 26: 80 palabras o más");
+  var need = (t.use || []).map(function (u) { return u[0]; }).sort().join();
+  ok(need === "condicional,perfeito,subjuntivo", "semana 26: pide pasado, condicional y subjuntivo (" + need + ")");
+  var n = S.toks(t.model || "").filter(function (x) { return /\w/.test(x.o || ""); }).length;
+  ok(n >= 80 && n <= 120, "semana 26: el modelo tiene entre 80 y 120 palabras (" + n + ")");
+})();
+// the tasks with an input (Tanda 4): they name the episode of the week they answer
+[[20, "Ninguém merece"], [22, "dictogloss"], [23, "Consultório da Nanda"], [24, "Roteiro para o feriadão"]].forEach(function (x) {
+  ok(S.TASKS[x[0]] && S.TASKS[x[0]].t.indexOf(x[1]) >= 0, "semana " + x[0] + ": la consigna parte de «" + x[1] + "»");
+});
 WEEKS.forEach(function (w) {
   var t = S.TASKS[w], r = S.check(t.model, w);
   ok(t.t && /[áéíóú]|[a-z]/.test(t.t) && t.use.length, "semana " + w + ": consigna y estructuras");

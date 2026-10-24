@@ -121,6 +121,7 @@
       "Moderatrice",
       "Relatrice"
     ],
+    "sexes": ["f", "f"],
     "turns": [
       [
         "A",

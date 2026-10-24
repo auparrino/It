@@ -52,7 +52,7 @@ course.weeks.forEach(function (w) {
    (tools/sillabo.py), and no week may ask anything later. */
 var TENSE_WEEK = { presente: 1, imperfetto: 15, futuro: 19, condizionale: 20, congiuntivo: 24,
                    congImperfetto: 30, passatoRemoto: 37, passatoProssimo: 11,
-                   trapassatoProssimo: 26, futuroAnteriore: 19, trapassatoRemoto: 37,
+                   trapassatoProssimo: 16, futuroAnteriore: 19, trapassatoRemoto: 37,
                    condizionalePassato: 31, congiuntivoPassato: 29, congiuntivoTrapassato: 30 };
 course.weeks.forEach(function (w) {
   (w.items || []).concat(w.extra || []).forEach(function (id) {
@@ -381,6 +381,101 @@ ok(Drills.dueCount(course, state) >= 30, "le schede scadute rientrano in coda");
   ok(L.ui.tabs.length === 3 && L.ui.tabs[0][2] === "Oggi" && L.ui.tabs[2][2] === "Io" && L.ui.allTabs.length === 2, "las pestañas (3.4): Oggi, Percorso, Io; Allena y Leggi desde Io");
   ok(L.spanish.sure.test("¿Qué tal?") && !L.spanish.sure.test("Che cosa fai?"), "español o italiano: la ñ, ¿, ¡ y las tildes agudas");
   ok(L.glue("l'") === "next" && L.glue("un po'") === null, "hueco elidido: l'amica se pega, un po' no");
+})();
+
+/* Tanda 4: una semana son unas pocas sesiones (build_course.py, ITEMS_CAP).
+   Pasado el tope quedan solo los ítems escritos para la semana y los de su
+   «ya puedo»; el resto va al repaso («extra»).  El jefe de la 26 va por
+   cuotas y cubre todo lo que nombran sus keys. */
+(function () {
+  course.weeks.forEach(function (w) {
+    if (w.boss || [49, 50, 51].indexOf(w.week) >= 0) return;
+    var pinned = {};
+    (w.can || []).forEach(function (c) { (c.items || []).forEach(function (id) { pinned[id] = 1; }); });
+    var own = w.items.filter(function (id) { return (ids[id].src === "autore" && ids[id].w === w.week) || pinned[id]; }).length;
+    ok(w.items.length <= Math.max(90, own), "semana " + w.week + ": " + w.items.length + " ítems, más que el tope de 90");
+  });
+  var b = course.weeks.filter(function (w) { return w.week === 26; })[0];
+  ok(b.items.length <= 180 && b.extra.length > 100, "jefe 26 por cuotas: " + b.items.length + " ítems, " + b.extra.length + " de repaso");
+  [/\b(più|meno|migliore|meglio|nessun\w*|niente|mai)\b/, /\bpiac\w*/, /\b(ne|ce|glie\w*)\b|gliel'/, /\b(sia|abbia|vada|faccia|possa)\b/,
+   /\w(rò|rà|remo|rei|rebbe|remmo)\b/, /\w(avo|evo|ivo|ava|eva|iva)\b/].forEach(function (re) {
+    ok(b.items.some(function (id) { return re.test(((ids[id].stem || "") + " " + (ids[id].answer || "")).toLowerCase()); }),
+       "jefe 26: hay ítems de " + re);
+  });
+  var w16 = course.weeks.filter(function (w) { return w.week === 16; })[0];
+  ok(w16.items.some(function (id) { return /\b(era|erano|avevo|aveva|avevano) (già )?\w+[aio]to\b/.test(ids[id].answer || ""); }),
+     "semana 16: el trapassato prossimo se practica");
+})();
+
+/* Tanda 4, temporada 3: el jefe de la 39 va por cuotas y repasa remoto,
+   discurso indirecto, si y relativos (no «más → più» ni «posso / potrei»);
+   la 31 ya no trae los modales A1; la pasiva y la concordancia no se
+   repiten entre semanas; la pragmática de la 31 y la 36 no se resuelve por
+   el largo de la opción. */
+(function () {
+  var wk = {};
+  course.weeks.forEach(function (w) { wk[w.week] = w; });
+  var b = wk[39];
+  var a1 = function (id) { return /^d15-/.test(id) || /^d21-0(1[1-9]|20)$/.test(id); };
+  ok(b.items.length <= 180, "jefe 39 por cuotas: " + b.items.length + " ítems");
+  ok(!b.items.some(a1), "jefe 39: sin d15 ni d21-011..020");
+  ok(!wk[31].items.some(a1), "semana 31: sin d21-011..020");
+  [/\w(ò|ì|ì|arono|irono|ero|ebbe|ebbero|ennero|isse|issero)\b/, /\b(disse|ha detto|ha chiesto|chiese)\b/,
+   /\b(cui|chi|il quale|la quale)\b/, /\bsi \w+/].forEach(function (re) {
+    ok(b.items.some(function (id) { return re.test(((ids[id].stem || "") + " " + (ids[id].answer || "")).toLowerCase()); }),
+       "jefe 39: hay ítems de " + re);
+  });
+  var seen = {};
+  for (var n = 27; n <= 38; n++) {
+    wk[n].items.forEach(function (id) {
+      if (/^(c1-conc|c1-pass-0[123]|rf2-35)-?/.test(id)) {
+        ok(!seen[id], id + " repetido en las semanas " + seen[id] + " y " + n);
+        seen[id] = n;
+      }
+    });
+  }
+  [31, 36].forEach(function (w) {
+    var pr = course.items.filter(function (x) { return x.topic === "pragmatica" && x.w === w && (x.options || []).length === 3; });
+    var mid = pr.filter(function (x) {
+      var l = x.options.map(function (o) { return o.length; }).sort(function (p, q) { return p - q; });
+      return x.answer.length === l[1] && l[0] < l[1] && l[1] < l[2];
+    }).length;
+    ok(mid * 2 <= pr.length, "pragmática " + w + ": la correcta es la de largo intermedio en " + mid + " de " + pr.length);
+  });
+})();
+
+/* Tanda 4, temporada 4: en las semanas 40-48 el relleno A1-B1 (lo que no
+   se escribió para la semana) no pasa del 30 % (build_course.py,
+   trim_c1_filler) y la 52 se arma por cuotas, con transformaciones y
+   correcciones (exam_by_quotas).  Cada semana 40-51 tiene escucha y dictado. */
+(function () {
+  var wk = {};
+  course.weeks.forEach(function (w) { wk[w.week] = w; });
+  for (var n = 40; n <= 48; n++) {
+    var w = wk[n], pinned = {};
+    (w.can || []).forEach(function (c) { (c.items || []).forEach(function (id) { pinned[id] = 1; }); });
+    var fill = w.items.filter(function (id) {
+      var it = ids[id];
+      if (pinned[id] || it.w === n) return false;
+      return it.src === "dummies" || ["A1", "A2", "B1"].indexOf(it.level) >= 0;
+    }).length;
+    ok(fill <= Math.ceil(0.3 * w.items.length) + 1, "semana " + n + ": relleno de nivel bajo " + fill + " de " + w.items.length);
+    ok(!w.items.some(function (id) { return !pinned[id] && /^(b2-prep-|a2-num-|rf2-47-)/.test(id); }),
+       "semana " + n + ": sin b2-prep, a2-num ni rf2-47 (salvo los del «ya puedo»)");
+  }
+  for (var m = 40; m <= 51; m++) {
+    ["listen", "dictation"].forEach(function (t) {
+      ok(wk[m].items.concat(wk[m].extra || []).some(function (id) { return ids[id].type === t && /^t4it40-/.test(id); }),
+         "semana " + m + ": hay " + t + " de la Tanda 4");
+    });
+  }
+  var e = wk[52], by = function (t) { return e.items.filter(function (id) { return ids[id].type === t; }).length; };
+  ok(e.items.length <= 160, "examen 52 por cuotas: " + e.items.length + " ítems");
+  ok(by("typed") >= 40 && by("fixerr") >= 20, "examen 52: " + by("typed") + " typed y " + by("fixerr") + " fixerr");
+  var pin52 = {};
+  (e.can || []).forEach(function (c) { (c.items || []).forEach(function (id) { pin52[id] = 1; }); });
+  ok(!e.items.some(function (id) { return !pin52[id] && /^d(0[3-9]|1\d|2[0-2])-/.test(id); }),
+     "examen 52: el Dummies d03-d22 queda como extra (salvo el «ya puedo»)");
 })();
 
 T.done();

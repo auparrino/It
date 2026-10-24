@@ -5,6 +5,7 @@
  "genre": "telefonema ao vivo",
  "es": "Hace semanas que Sofía no llama a la radio. Vuelve a aparecer y se ponen al día: qué viene haciendo últimamente, las novedades del barrio y una fiesta a la que llegó tarde.",
  "speakers": ["Nanda", "Sofía"],
+ "sexes": ["f", "f"],
  "turns": [
   ["A", "Olha quem está na linha: a Sofía! Sumiu, hein? Faz um mês que você não liga."],
   ["B", "Oi, Nanda! Pois é, desculpa. Tenho trabalhado demais: a empresa de Rosário tem me mandado um monte de projetos. E tenho estudado para a prova de português."],

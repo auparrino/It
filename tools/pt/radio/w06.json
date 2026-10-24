@@ -5,6 +5,7 @@
  "genre": "programa da manhã",
  "es": "Es viernes a la mañana en Rádio Calçadão, la radio comunitaria de Botafogo. Nanda, la conductora, le pregunta a Téo, su compañero, qué planes tiene para el fin de semana.",
  "speakers": ["Nanda", "Téo"],
+ "sexes": ["f", "m"],
  "turns": [
   ["A", "Bom dia, Botafogo! Aqui é a Rádio Calçadão, com a Nanda e o Téo. Téo, qual é o rolê do fim de semana?"],
   ["B", "Hoje de noite eu saio com uns amigos. A gente vai a um bar na Lapa: o chope lá é barato."],
@@ -24,7 +25,7 @@
  },
  "questions": [
   ["¿Adónde va Téo esta noche?", ["A un bar de la Lapa con amigos", "A un show de samba en la Lapa, con Nanda", "A la playa, a pasear", "A la casa de Nanda"], "A un bar de la Lapa con amigos"],
-  ["¿Por qué Nanda duda antes de aceptar la invitación?", ["Porque no le gusta el samba", "Porque este mes no tiene plata", "Porque el sábado a la noche trabaja en la radio", "Porque no conoce la banda"], "Porque este mes no tiene plata"],
+  ["¿Qué problema menciona Nanda después de aceptar la invitación?", ["Que no le gusta el samba", "Que este mes no tiene plata", "Que el sábado a la noche trabaja en la radio", "Que no conoce la banda"], "Que este mes no tiene plata"],
   ["¿Qué hace Téo el domingo?", ["Va a la playa temprano", "Se queda en casa y ve el partido", "Trabaja en la radio", "Sale con amigos a la Lapa"], "Se queda en casa y ve el partido"]
  ],
  "info": [

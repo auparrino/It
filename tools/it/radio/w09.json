@@ -5,6 +5,7 @@
  "genre": "collegamento dalla stazione",
  "es": "Lunes a la mañana: Dario todavía no llegó a la radio. Sara lo llama por teléfono y él cuenta, en directo, dónde está, de dónde viene y cómo va a llegar.",
  "speakers": ["Sara", "Dario"],
+ "sexes": ["f", "m"],
  "turns": [
   ["A", "Buongiorno da Radio Portici! Oggi sono sola in studio: Dario non c'è. Telefoniamo... Dario, dove sei?"],
   ["B", "Ciao, Sara! Sono alla stazione, sul binario tre. Arrivo da Napoli, in treno."],

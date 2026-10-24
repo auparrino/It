@@ -5,6 +5,7 @@
  "genre": "quadro de viagens",
  "es": "Se acerca un fin de semana largo. Caio quiere hacer un viaje de mochilero con poca plata y Nanda lo ayuda a armar el itinerario, con condiciones, finalidades y algún «aunque».",
  "speakers": ["Nanda", "Caio"],
+ "sexes": ["f", "m"],
  "turns": [
   ["A", "Bom dia! Semana que vem tem feriadão, e o Caio veio aqui para montar o roteiro dele. Caio, qual é o plano?"],
   ["B", "Quero fazer um mochilão pela Serra da Mantiqueira, mas com um orçamento pequeno. Tenho só quinhentos reais para quatro dias."],

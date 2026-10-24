@@ -5,6 +5,7 @@
  "genre": "conversa no estúdio",
  "es": "Se acerca fin de año y en la radio hacen «amigo invisible». Téo tiene que comprarle un regalo a Nanda sin que ella sepa, pero es pésimo guardando secretos.",
  "speakers": ["Nanda", "Téo"],
+ "sexes": ["f", "m"],
  "turns": [
   ["A", "Bom dia! Dezembro chegou e aqui na rádio a gente faz amigo secreto. Téo, você já comprou o seu presente?"],
   ["B", "Já comprei, mas não te conto para quem é. É segredo!"],

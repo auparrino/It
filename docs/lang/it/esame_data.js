@@ -4,6 +4,8 @@
  * è in tools/it/authored/esame_c1.py: ogni item porta «ver» ("A" | "B" | "C").
  * Tutto in italiano: domande, opzioni e consegne del testo; le consegne della
  * scrittura restano in castellano, come le altre consegne dell'app.
+ * Il formato è quello del CELI 4 (C1): due scritture lunghe, 230-280 e
+ * 160-200 parole.  Il CILS TRE-C1 ne chiede meno (160-180 + 100-120).
  *
  * FORMA DEI DATI (per la schermata dell'esame in app.js)
  *
@@ -18,7 +20,8 @@
  *     C: 29 + 16 item; oggi l'app ne estrae 20 e 12 da tutto il gruppo).
  *
  *   ascolto[]  dialoghi a due voci (turns: "A" = primo speaker, "B" = secondo;
- *              l'app li legge con due altezze TTS diverse), 8 domande a scelta
+ *              sexes: ["f"|"m", …] per speaker: l'app sceglie una voce del
+ *              telefono di quel genere, o una diversa con un'altra altezza), 8 domande a scelta
  *              multipla [domanda, [4 opzioni], risposta] e 4 frasi da
  *              completare [frase con ___, parola dell'audio].  La risposta
  *              giusta non è quasi mai l'opzione più lunga.
@@ -45,7 +48,7 @@
 (function (root) { "use strict";
   var ESAME = {
     ascolto: [
-      { id: "asc-1", title: "Intervista: il lavoro da remoto", speakers: ["Giornalista", "Esperta"],
+      { id: "asc-1", title: "Intervista: il lavoro da remoto", speakers: ["Giornalista", "Esperta"], sexes: ["m", "f"],
         turns: [
           ["A", "Buongiorno e benvenuti. Oggi parliamo di lavoro da remoto con la professoressa Livia Sartori, sociologa del lavoro. Professoressa, a distanza di qualche anno dall'emergenza sanitaria, che cosa è rimasto del cosiddetto smart working?"],
           ["B", "Meno di quanto si pensasse nei momenti di entusiasmo, ma più di quanto temessero gli scettici. La maggior parte delle aziende che lo avevano introdotto in fretta è tornata a chiedere presenza, però quasi nessuna è tornata al modello precedente: prevale la formula ibrida, due o tre giorni a casa e gli altri in ufficio."],
@@ -77,7 +80,7 @@
           ["Il diritto alla disconnessione è garantito sulla ___, ma nella pratica dipende dalla cultura di ogni ufficio.", "carta"]
         ] },
 
-      { id: "asc-2", title: "Conferenza: quando gli italiani impararono l'italiano", speakers: ["Moderatrice", "Storico"],
+      { id: "asc-2", title: "Conferenza: quando gli italiani impararono l'italiano", speakers: ["Moderatrice", "Storico"], sexes: ["f", "m"],
         turns: [
           ["A", "Buonasera a tutti. Prosegue il nostro ciclo di incontri sulla storia della lingua. Stasera abbiamo con noi il professor Andrea Colombo, storico della lingua italiana. Professore, cominciamo da una domanda provocatoria: nel 1861, quando l'Italia fu unificata, quanti italiani parlavano italiano?"],
           ["B", "Pochissimi. Le stime variano molto, e gli studiosi discutono ancora sui criteri, ma si va da poco più del due per cento a circa il dieci. In ogni caso, la stragrande maggioranza della popolazione parlava esclusivamente il dialetto della propria zona, e l'italiano era una lingua quasi soltanto scritta, patrimonio di una ristretta minoranza colta."],
@@ -111,7 +114,7 @@
       {
         id: "asc-3",
         title: "Intervista: il ritorno dei treni notturni",
-        speakers: ["Conduttrice", "Esperto di trasporti"],
+        speakers: ["Conduttrice", "Esperto di trasporti"], sexes: ["f", "m"],
         turns: [
           ["A", "Buonasera. Parliamo di un ritorno che pochi si aspettavano: quello dei treni notturni. Con noi c'è l'ingegner Paolo Ferrante, esperto di trasporti. Ingegnere, perché se ne parla tanto?"],
           ["B", "Perché, dopo vent'anni di chiusure, in tutta Europa si è tornati a investire nei treni con le cuccette. Le ragioni sono soprattutto due: l'ambiente e il tempo. Un viaggio di notte da Roma a Vienna produce una frazione delle emissioni di un volo, e si arriva in centro città, riposati, senza perdere una giornata."],

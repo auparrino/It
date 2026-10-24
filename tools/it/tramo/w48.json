@@ -129,6 +129,7 @@
       "Gennaro",
       "Paolo"
     ],
+    "sexes": ["f", "m", "m"],
     "turns": [
       ["A", "Gennaro, scusa, ma il caffè l'hai finito tu? La moka è vuota."],
       ["B", "Sì, sono stato io… perdonami, te lo rifaccio subito. Però aspetta: hai detto «la moka»."],

@@ -54,6 +54,7 @@
     "genre": "boletim de serviço na rádio",
     "es": "En un informativo matinal, la conductora y un periodista repasan los cambios de tránsito del domingo y una noticia sobre la biblioteca pública de la ciudad.",
     "speakers": ["Luciana, apresentadora", "Tiago, repórter"],
+    "sexes": ["f", "m"],
     "turns": [
       ["A", "São sete e meia, e a gente vai agora direto à rua com o Tiago, que traz as informações de serviço para o fim de semana. Bom dia, Tiago!"],
       ["B", "Bom dia, Luciana, bom dia a quem está ouvindo. Olha, o domingo vai ser movimentado. Por causa da corrida de rua, a avenida principal do centro vai ficar fechada das seis às treze horas, no trecho entre a praça da prefeitura e o parque municipal."],

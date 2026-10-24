@@ -5,6 +5,7 @@
  "genre": "boletim de notícias",
  "es": "Nanda lee las noticias del barrio con la voz pasiva de los boletines. Después Téo cuenta su semana de trámites: le robaron la billetera y tuvo que rehacer todos los documentos.",
  "speakers": ["Nanda", "Téo"],
+ "sexes": ["f", "m"],
  "turns": [
   ["A", "São oito horas. Notícias do bairro. A rua São Clemente foi fechada ontem à noite por causa de um pequeno desabamento num prédio antigo. Ninguém ficou ferido. Os moradores foram retirados pelos bombeiros e o prédio já foi interditado pela prefeitura."],
   ["B", "Que susto! E a passeata de sábado?"],

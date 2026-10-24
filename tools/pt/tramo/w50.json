@@ -76,6 +76,7 @@
       "Carol",
       "Bruno"
     ],
+    "sexes": ["f", "m"],
     "turns": [
       [
         "A",

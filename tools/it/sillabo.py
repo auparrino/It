@@ -37,7 +37,7 @@ TENSE_WEEK = {
     "futuroAnteriore": 19,
     "condizionale": 20,
     "congiuntivo": 24,
-    "trapassatoProssimo": 26,
+    "trapassatoProssimo": 16,   # bloque propio en la 16 (Tanda 4); la 26 lo repasa
     "congiuntivoPassato": 29,
     "congImperfetto": 30,
     "congiuntivoTrapassato": 30,
@@ -348,6 +348,9 @@ MIN_WEEK = {}
 MIN_WEEK.update({
     # números escritos (semana 7)
     "rf-1-22": (7, "numeri: novant'anni"),
+    # régimen B2 que la semana 9 no pide (Tanda 4): a la 42, verbi e preposizioni
+    "s:r15-01c:e": (42, "B2: portato per / negato per"),
+    "s:r15-04b:c": (42, "B2: costituito da"),
     # presente + da «desde hace» (semana 9)
     "s:r18-03c:a": (9, "presente + da"), "s:r18-03c:b": (9, "presente + da"),
     "s:r18-03c:c": (9, "presente + da"), "s:r18-03c:f": (9, "presente + da"),
@@ -386,9 +389,29 @@ MIN_WEEK.update({
     "s:r07-06c:c": (22, "pronomi combinati: se le è"), "s:r07-06c:d": (22, "pronomi combinati: se l'è"),
     # congiuntivo en la relativa (semana 25)
     "s:r12-02:b": (25, "congiuntivo: nessuno che si chiami"),
-    # trapassato prossimo en el contexto o en la consigna (semana 26)
-    "s:r20-07b:b": (26, "trapassato: non mi aveva detto"), "s:r20-07b:c": (26, "trapassato: non mi aveva avvertito"),
-    "s:r20-07b:d": (26, "trapassato: nessuno mi aveva detto"), "s:r20-01d:f": (26, "trapassato: la consigna"),
+    # «No sabía que venían»: el imperfetto como futuro en el pasado, que se
+    # enseña con el discurso indirecto (semana 31; pendiente de 2026-09-semanal)
+    "s:r20-07b:a": (31, "futuro nel passato"), "s:r20-07b:b": (31, "futuro nel passato"),
+    "s:r20-07b:c": (31, "futuro nel passato"), "s:r20-07b:d": (31, "futuro nel passato"),
+    # trapassato prossimo en la consigna (semana 16)
+    "s:r20-01d:f": (16, "trapassato: la consigna"),
+})
+# Reparto de la temporada 2 (pendientes de 2026-09-semanal, Tanda 4): lo que
+# era relleno o bloque mecánico pasa al repaso («extra») de una semana
+# posterior, donde se mezcla de a poco con las rondas.
+MIN_WEEK.update({
+    # marcadores del discurso sueltos en 14, 15, 16, 18 y 20: a la 28 (Connettivi)
+    **{"l2-d-%02d" % n: (28, "marcadores del discurso: semana 28")
+       for n in (7, 10, 11, 21, 24, 26, 29, 33, 13, 22, 32, 8, 12, 19, 25, 27, 55,
+                 14, 34, 36, 42, 56, 57, 58, 59, 23, 35, 43, 50)},
+    # diez «a nosotros + los → ___» de tabla: quedan cinco en la 22, el resto al repaso de la 23
+    **{"d08-%03d" % n: (23, "repaso: pronombres combinados") for n in range(36, 41)},
+    # diez piace / piacciono seguidos: quedan cuatro en la 14, el resto al repaso de la 15
+    **{"d10-%03d" % n: (15, "repaso: piace / piacciono") for n in range(5, 11)},
+    # los 12 «ahora producilo vos» de la 21, en bloque: cuatro se quedan (el 10
+    # es el «ya puedo» de la semana), ocho al repaso de 22 y 23
+    **{"g2-out-cor-%02d" % n: (22, "repaso mezclado") for n in (4, 5, 6, 7)},
+    **{"g2-out-cor-%02d" % n: (23, "repaso mezclado") for n in (8, 9, 11, 12)},
     # infinitivo compuesto: dopo aver finito (semana 28)
     "s:r20-03b:b": (28, "infinito passato: dopo aver finito"),
     # condizionale passato (semana 31)

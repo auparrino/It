@@ -142,7 +142,7 @@ CAN = {
     22: [
         ("Contar quién hizo algo con la pasiva: foi construída em 1920", ["s2-22-37", "s2-22-39"]),
         ("Describir cómo está algo: a porta está aberta", ["s2-22-15", "s2-22-38"]),
-        ("Usar el participio corto: foi entregue, está paga", ["s2-22-16", "s2-22-17"]),
+        ("Usar el participio corto: foi impresso, está paga", ["s2-22-12", "s2-22-17"]),
         ("Decir que te pusiste o te volviste: fiquei nervoso, virou médico", ["cx-b-22-01", "cx-b-22-02"]),
     ],
     23: [
@@ -152,7 +152,7 @@ CAN = {
         ("Opinar con acho que + indicativo", ["s2-23-42"]),
     ],
     24: [
-        ("Decir para qué: para que você entenda", ["s2-24-09", "col-24-1"]),
+        ("Decir para qué: para que você não se perca", ["s2-24-09", "col-24-1"]),
         ("Hacer una concesión: embora esteja cansada", ["s2-24-25"]),
         ("Poner una condición: a não ser que chova, desde que você cuide", ["gr1-24-01", "gr3-24-03"]),
         ("Hacer una pregunta que es una duda: será que vai chover?", ["prag-24-3"]),

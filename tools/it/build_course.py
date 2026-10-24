@@ -86,7 +86,9 @@ SAI_FARE = {
     49: ("Sostener una tesis por escrito y oralmente; redactar informe y reseña", "Debate público; registro culto y coloquial"),
     50: ("Analizar textos y usar colocaciones sin caer en falsos amigos", "Autores del Novecento"),
     51: ("Matizar concesión, hipótesis y relación", "Sintaxis compleja"),
-    52: ("Certificar tu C1", "PLIDA / CILS / CELI C1"),
+    # El examen final sigue el formato del CELI 4 (dos escritos largos:
+    # 230-280 y 160-200 palabras); el CILS TRE-C1 pide 160-180 y 100-120.
+    52: ("Certificar tu C1", "Simulacro con el formato del CELI 4 (C1)"),
 }
 
 
@@ -207,7 +209,7 @@ WEEKS = [
                "Con pronombre: dimmi, fallo, alzati; con Lei se antepone."],
          v=["alzarsi", "lavarsi", "vestirsi", "svegliarsi", "divertirsi"],
          tenses=["presente"], t=[]),
-    dict(w=13, title="BOSS — Livello A2", level="A2", d=[3, 4, 5, 6, 7], r=[1, 2, 3], boss=True,
+    dict(w=13, title="BOSS — Livello A2 (prima parte)", level="A2", d=[3, 4, 5, 6, 7], r=[1, 2, 3], boss=True,
          focus="Examen de la primera estación: todo lo anterior, mezclado y cronometrado.",
          keys=["Sustantivos, artículos y adjetivos concordando sin pensarlo.",
                "Presente completo, regular e irregular.",
@@ -240,9 +242,10 @@ WEEKS = [
          keys=["mi sono alzato/a, ci siamo divertiti/e.",
                "El participio concuerda con el sujeto.",
                "Con objeto directo propio: si è lavata le mani.",
-               "Recíprocos: si sono conosciuti a Roma."],
+               "Recíprocos: si sono conosciuti a Roma.",
+               "Trapassato prossimo para lo anterior: era già partito, si era addormentata."],
          v=["alzarsi", "divertirsi", "svegliarsi", "accorgersi", "fermarsi"],
-         tenses=["passatoProssimo"], t=["riflessivi passato"]),
+         tenses=["passatoProssimo", "trapassatoProssimo"], t=["riflessivi passato"]),
     dict(w=17, title="Dimostrativi, possessivi, indefiniti", level="A2", d=[13], r=[8, 9, 12],
          focus="Señalar, poseer y cuantificar.",
          keys=["questo/quello, con las formas de quello como bello.",
@@ -343,14 +346,16 @@ WEEKS = [
          tenses=["passatoProssimo", "imperfetto", "futuro", "condizionale"], t=[]),
 
     # ---------------- Stagione 3: La Corrente (B1 -> B2) ----------------
-    dict(w=27, title="Avverbi", level="B1", d=[15], r=[4],
-         focus="Formación en -mente y el orden de los adverbios.",
-         keys=["Adjetivo femenino + -mente: lentamente.",
-               "Adjetivos en vocal + -le/-re pierden la e: facilmente, particolarmente.",
-               "Irregulares: bene, male, meglio, peggio.",
-               "Posición: normalmente después del verbo (parla lentamente)."],
-         v=["parlare", "andare"],
-         tenses=["presente", "passatoProssimo", "imperfetto"], t=["avverbi"]),
+    # Tanda 4: los adverbios A1-A2 quedan como repaso; la semana es de
+    # modalidad (qué tan seguro estás) y adverbios de juicio.
+    dict(w=27, title="Avverbi e modalità", level="B1", d=[15], r=[4],
+         focus="Repaso de adverbios y, sobre todo, decir qué tan seguro estás: forse, può darsi che, sarà, dovrebbe.",
+         keys=["Adjetivo femenino + -mente: lentamente; facile → facilmente.",
+               "forse + indicativo (forse è); può darsi che + congiuntivo (può darsi che sia).",
+               "Suponer: sarà in riunione, avrà perso il treno, dovrebbe arrivare.",
+               "Juicio: mica, appunto, eppure, magari."],
+         v=["essere", "avere", "dovere"],
+         tenses=["presente", "futuro", "futuroAnteriore"], t=["avverbi"]),
     dict(w=28, title="Connettivi e transizioni", level="B1", d=[14], r=[16],
          focus="Hilar frases: el primer salto real de nivel.",
          keys=["e, ma, però, anzi, invece, mentre.",
@@ -384,7 +389,8 @@ WEEKS = [
                "avrei potuto / avrei dovuto / avrei voluto.",
                "Futuro en el pasado: mi ha detto che sarebbe arrivato tardi."],
          v=["dovere", "potere", "volere", "venire", "fare"],
-         tenses=["condizionalePassato"], t=["concordanza"]),
+         # c1-conc (tema concordanza) se queda en la 32: estaba repetido en 31, 32 y 38
+         tenses=["condizionalePassato"], t=[]),
     dict(w=32, title="Concordanza dei tempi", level="B2", d=[], r=[24],
          focus="Qué tiempo pide qué tiempo: la regla que ordena todo el sistema.",
          keys=["Principal en presente + simultáneo → congiuntivo presente.",
@@ -432,7 +438,8 @@ WEEKS = [
                "Con si impersonal el adjetivo va en plural: quando si è stanchi.",
                "En pasado siempre con essere: si è mangiato bene."],
          v=["mangiare", "vendere", "dire"],
-         tenses=["presente", "passatoProssimo"], t=["passivo", "si impersonale"]),
+         # la pasiva (c1-pass-01..03, rf2-35) se queda en la 35: estaba repetida en la 36
+         tenses=["presente", "passatoProssimo"], t=["si impersonale"]),
     dict(w=37, title="Passato remoto e trapassato remoto", level="B2", d=[], r=[20],
          focus="El pasado de la narrativa y del sur: hay que reconocerlo y saber usarlo.",
          keys=["Regular: parlai, vendei, dormii.",
@@ -456,7 +463,7 @@ WEEKS = [
                "Imperativo → di + infinitivo: mi disse di aspettare.",
                "Cambian también deícticos: oggi → quel giorno, qui → lì, domani → il giorno dopo."],
          v=["dire", "essere", "venire", "fare"],
-         tenses=["imperfetto", "trapassatoProssimo", "condizionalePassato"], t=["discorso indiretto", "concordanza"]),
+         tenses=["imperfetto", "trapassatoProssimo", "condizionalePassato"], t=["discorso indiretto"]),
     dict(w=39, title="BOSS — Livello B2", level="B2", d=[19, 20, 21, 22], r=[24, 26], boss=True,
          focus="Examen de la tercera estación: subjuntivo, hipotéticos, pasiva y discurso indirecto.",
          keys=["Los cuatro tiempos del congiuntivo, elegidos por concordancia.",
@@ -467,7 +474,10 @@ WEEKS = [
          tenses=["congiuntivo",
  "congImperfetto",
  "congiuntivoPassato",
- "condizionalePassato"], t=["congiuntivo", "periodo ipotetico", "passivo"]),
+ "condizionalePassato"],
+         # el jefe repasa toda la estación (BOSS_QUOTAS[39] elige por cuotas)
+         t=["congiuntivo", "concordanza", "periodo ipotetico", "passivo", "si impersonale", "relativi",
+            "passato remoto", "discorso indiretto", "connettivi"]),
 
     # ---------------- Stagione 4: La Vetta (B2 -> C1) ----------------
     dict(w=40, title="Il causativo: fare e lasciare", level="C1", d=[], r=[27],
@@ -638,13 +648,15 @@ DUMMIES_WEEKS = [
     (12, 1, 40, [9]),
     (13, 1, 50, [17]),
     (14, 1, 20, [28]), (14, 21, 30, [34]),
-    (15, 1, 20, [27]), (15, 21, 30, [23]),
+    # 15-011..020 son palabras sueltas A1 (más → più, ya → già): a la 11, no a la 27 (ni a su jefe)
+    (15, 1, 10, [27]), (15, 11, 20, [11]), (15, 21, 30, [23]),
     (16, 1, 50, [11]), (16, 51, 70, [15]),
     (17, 1, 20, [16]),
     (18, 1, 35, [19]), (18, 36, 55, [20]), (18, 56, 60, [31]),
     (19, 1, 40, [33]),
     (20, 1, 10, [24]), (20, 11, 30, [25]), (20, 31, 40, [30]),
-    (21, 1, 30, [31]),
+    # 21-011..020 (posso / potrei, devo / dovrei) son de la 20, no de la 31 ni del jefe de la 39
+    (21, 1, 10, [31]), (21, 11, 20, [20]), (21, 21, 30, [31]),
     (22, 1, 10, [29]), (22, 11, 20, [30]), (22, 21, 30, [32]),
 ]
 
@@ -654,8 +666,16 @@ DUMMIES_WEEKS = [
 # or a dict {exercise id: weeks} for the sections that mix topics.  A group
 # whose grammar comes later still waits for it (tools/sillabo.py).
 SFIDE_HOMES = {
-    1: [[2]], 2: [[3]], 4: [[27]], 5: [[23]], 6: [[46]], 8: [[17]], 9: [[17]],
-    10: [[8]], 11: [[18]], 12: [[17]], 13: [[34]], 14: [[18]], 15: [[9]],
+    1: [[2]], 2: [[3]], 4: [[27]], 5: [[23]], 6: [[46]], 8: [[17]],
+    # La 17 tenía 251 ítems.  Se queda con demostrativos, posesivos e
+    # indefinidos básicos; è qui che va a la frase scissa (48), ecco perché /
+    # ecco quello che a los conectores (28), nessuno / niente a las
+    # negaciones (18) y ognuno, chiunque, tutti e tre… al repaso de la 27.
+    9: [[17], {"r09-03": [48], "r09-04": [28], "r09-05": [28], "*": [17]}],
+    10: [[8]], 11: [[18]],
+    12: [{"r12-01": [18], "r12-03": [18], "*": [27]}, {"r12-01": [17], "r12-03": [17], "*": [27]},
+         [17], [27], [27]],
+    13: [[34]], 14: [[18]], 15: [[9]],
     16: [[28]], 19: [[19]], 22: [[12]], 28: [[42]],
     7: [[10], [12], [10], [21], [21], [10], [10], [22], [22], [11]],
     17: [{"r17-04": [47], "*": [7]}, [7], [47]],
@@ -893,7 +913,9 @@ def place_by_syllabus(weeks: list, by_id: dict, challenges: list) -> None:
 
     # What a week's own lesson teaches ahead of the general order: week 12
     # teaches the Lei imperative, which is a congiuntivo form (parli, venga).
-    local = {12: {"congiuntivo"}}
+    # Week 25 brings «credo che sia andato» as a formula to give an opinion
+    # about the past (the congiuntivo passato itself is week 29).
+    local = {12: {"congiuntivo"}, 25: {"congiuntivoPassato"}}
 
     def weeks_ok(feats, week):
         return all(v <= week or k in local.get(week, ()) for k, v in feats.items())
@@ -1027,6 +1049,193 @@ def clean_week_50(weeks: list, by_id: dict) -> None:
     w50["items"] = keep
 
 
+ITEMS_CAP = 90
+
+
+def cap_week_items(weeks: list, by_id: dict, challenges: list) -> None:
+    """A week is a few sessions, not a drawer (Tanda 4: the 17 had 251).
+
+    Above ITEMS_CAP, a normal week keeps every item written for it (authored
+    with its «w») and fills the rest with the book, then its own sfide;
+    what is left goes to the week's review («extra»), a few per round.
+    The sfide themselves stay in the week's list of sfide.
+    """
+    import can
+    play = {c["id"]: c.get("play") or [] for c in challenges}
+    for w in weeks:
+        if w["boss"] or w["week"] in (49, 50, 51) or len(w["items"]) <= ITEMS_CAP:
+            continue
+        mine = {i for g in w["challenges"] for i in play.get(g, [])}
+        # the items that test the week's «ya puedo» (can.py) stay
+        pinned = {i for _, ids in can.CAN.get(w["week"], []) for i in ids}
+
+        def rank(iid):
+            it = by_id[iid]
+            if (it.get("src") == "autore" and it.get("w") == w["week"]) or iid in pinned:
+                return 0
+            # the book before the sfide: these are already asked as sfide
+            return 1 if it.get("src") == "dummies" else 2 if iid in mine else 3
+        order = sorted(range(len(w["items"])), key=lambda k: (rank(w["items"][k]), k))
+        n0 = sum(1 for i in w["items"] if rank(i) == 0)
+        keep = {w["items"][k] for k in order[:max(ITEMS_CAP, n0)]}
+        out = [i for i in w["items"] if i not in keep]
+        w["items"] = [i for i in w["items"] if i in keep]
+        w["extra"] = w["extra"] + [i for i in out if i not in w["extra"]]
+
+
+# Tanda 4 (revisión 2026-10, temporada 4): en las semanas propias del C1
+# (40-48) entre el 40 y el 76 % de los ítems se resolvía con gramática A1-B1.
+# El relleno que la revisión nombra pasa a «extra» (repaso, unos pocos por
+# ronda), y lo que queda de nivel bajo y no escrito para la semana tiene un
+# tope: C1_FILLER_MAX de la semana.  Lo que prueba el «ya puedo» se queda.
+C1_RELLENO = ("b2-prep-", "a2-num-", "rf2-47-", "s:r25-", "s:r23-01:", "d03-056", "d03-057", "d03-058",
+              "d03-059", "d03-060", "g2-cb-39")
+C1_FILLER_MAX = 0.30
+
+
+def trim_c1_filler(weeks: list, by_id: dict) -> None:
+    import can
+    for w in weeks:
+        if w["boss"] or not 40 <= w["week"] <= 48:
+            continue
+        pinned = {i for _, ids in can.CAN.get(w["week"], []) for i in ids}
+
+        def filler(iid):
+            it = by_id[iid]
+            if iid in pinned or it.get("w") == w["week"]:
+                return False
+            return (it.get("src") == "dummies" or it.get("level") in ("A1", "A2", "B1")
+                    or (it.get("level") == "B2" and it.get("wk", 1) <= 26))
+        out = [i for i in w["items"] if i.startswith(C1_RELLENO) and i not in pinned]
+        keep = [i for i in w["items"] if i not in out]
+        fill = [i for i in keep if filler(i)]
+        # the cap is on the week as it ends up: filler / (rest + filler) ≤ MAX
+        cap = int(C1_FILLER_MAX * (len(keep) - len(fill)) / (1 - C1_FILLER_MAX))
+        if len(fill) > cap:
+            drop = set(fill[cap:])
+            out += [i for i in keep if i in drop]
+            keep = [i for i in keep if i not in drop]
+        w["items"] = keep
+        w["extra"] = w["extra"] + [i for i in out if i not in w["extra"]]
+
+
+# Tanda 4: las rondas de la semana 52 (el examen final) medían sobre todo
+# A1-B1: 870 de 1.497 ítems del Dummies, ni un fixerr ni un typed.  Ahora se
+# arman por cuotas, como la «analisi delle strutture» del CILS TRE-C1: 40 %
+# transformación y registro escritos, 20 % corrección, 20 % cloze C1 y 20 %
+# repaso B2.  Todo lo demás (el Dummies d03-d22, los manuales) queda como
+# «extra».  Los ítems del examen mismo (topic «esame») no entran.
+EXAM_QUOTAS = [
+    ("transformación y registro", 48, lambda it: it["type"] == "typed" and (it.get("w") or 0) >= 40),
+    ("corrección", 24, lambda it: it["type"] == "fixerr" and (it.get("w") or 0) >= 40),
+    ("cloze C1", 24, lambda it: it["type"] == "cloze" and (it.get("w") or 0) >= 40),
+    ("repaso B2", 24, lambda it: it["type"] in ("typed", "fixerr", "cloze") and 27 <= (it.get("w") or 0) <= 39),
+]
+
+
+def exam_by_quotas(weeks: list, by_id: dict) -> None:
+    w = next((x for x in weeks if x["week"] == 52), None)
+    if not w:
+        return
+    pool = sorted((it for it in by_id.values() if it.get("src") == "autore" and it.get("topic") != "esame"),
+                  key=lambda it: it["id"])
+    import can
+    pinned = {i for _, ids in can.CAN.get(52, []) for i in ids}
+    keep = [i for i in w["items"] if i in pinned or (by_id[i].get("src") == "autore" and by_id[i].get("w") == 52)]
+    for _name, n, test in EXAM_QUOTAS:
+        cand = [it["id"] for it in pool if it["id"] not in keep and test(it)]
+        step = max(1.0, len(cand) / n)
+        keep += [cand[int(k * step)] for k in range(min(n, len(cand)))]
+    out = [i for i in w["items"] if i not in keep]
+    w["items"] = keep
+    w["extra"] = w["extra"] + [i for i in out if i not in w["extra"]]
+
+
+# The boss of the second season, by quotas: what its keys name, in
+# proportion, instead of 340 items where comparatives and negations hardly
+# appear.  (name, how many, test on the item's features and text)
+BOSS_QUOTAS = {
+    26: [
+        ("comparativos y negaciones", 15,
+         lambda f, t: "comparativo" in f or re.search(r"\b(più|meno|migliore|peggiore|meglio|nessun\w*|niente|nulla|mai|neanche|nemmeno|neppure|mica)\b", t)),
+        ("piacere y reflexivos", 15,
+         lambda f, t: re.search(r"\b(piac\w*|mancat?\w*|serv\w*|bast\w*)\b", t)
+         or re.search(r"\b(mi|ti|si|ci|vi) (sono|sei|è|siamo|siete|ero|eri|era|eravamo|erano)\b", t)),
+        ("ne, ci y combinados", 20,
+         lambda f, t: {"ne", "ci", "pronomi combinati"} & set(f)
+         or re.search(r"\b(ne|ce|ci|glie\w*|me l\w*|te l\w*|se l\w*)\b|gliel'", t)),
+        ("congiuntivo", 20, lambda f, t: "congiuntivo" in f),
+        ("futuro y condicional", 20, lambda f, t: {"futuro", "futuroAnteriore", "condizionale"} & set(f)),
+        ("pasados", 30, lambda f, t: {"passatoProssimo", "imperfetto", "trapassatoProssimo"} & set(f)),
+    ],
+    # Tercera estación (Tanda 4): el jefe tenía 366 ítems y ninguno de remoto
+    # ni de discurso indirecto, pero sí «más → più» (d15) y «posso / potrei»
+    # (d21).  Ahora, ~120 por cuotas, de lo que menos hay a lo que más.
+    39: [
+        ("passato remoto", 15, lambda f, t: {"passatoRemoto", "trapassatoRemoto"} & set(f)),
+        ("discurso indirecto", 15,
+         lambda f, t: "discorso indiretto" in f
+         or re.search(r"\b(ha detto|disse|dissero|ha chiesto|chiese|ha risposto|rispose|ha promesso|promise)\b", t)),
+        ("relativos", 15, lambda f, t: re.search(r"\b(cui|il quale|la quale|i quali|le quali|chi|il che)\b", t)),
+        ("pasiva y si", 20,
+         lambda f, t: {"passivo", "si impersonale"} & set(f)
+         or re.search(r"\bci si\b|\bsi \w+(a|e|ono)\b|\b(viene|vengono|va|vanno|stat[oaie]) \w+[aiu]t[oaie]\b", t)),
+        ("conectores y modalidad", 10,
+         lambda f, t: re.search(r"\b(benché|sebbene|nonostante|anche se|siccome|dato che|purché|a patto che|"
+                                r"qualora|forse|può darsi)\b", t)),
+        ("hipotético", 20,
+         lambda f, t: re.search(r"\bse\b", t)
+         and {"condizionale", "condizionalePassato", "congImperfetto", "congiuntivoTrapassato"} & set(f)),
+        ("congiuntivo y concordanza", 25,
+         lambda f, t: {"congiuntivo", "congiuntivoPassato", "congImperfetto", "congiuntivoTrapassato",
+                       "condizionalePassato"} & set(f)),
+    ],
+}
+
+
+def aviso_pragmatica(items: list) -> None:
+    """Tanda 4: la pragmática no se tiene que poder resolver por el largo de
+    la opción.  Avisa (no frena) si en una serie (una semana de pr-) la
+    correcta es la de largo intermedio en más de la mitad de los ítems."""
+    series = {}
+    for it in items:
+        if it.get("topic") != "pragmatica" or it.get("type") != "choice" or len(it.get("options") or []) != 3:
+            continue
+        lens = sorted(len(o) for o in it["options"])
+        series.setdefault(it.get("w"), []).append(len(it["answer"]) == lens[1] and lens[0] < lens[1] < lens[2])
+    for w, mid in sorted(series.items(), key=lambda x: x[0] or 0):
+        if len(mid) >= 4 and sum(mid) * 2 > len(mid):
+            print("AVISO pragmática, semana %s: la correcta es la de largo intermedio en %d de %d ítems"
+                  % (w, sum(mid), len(mid)))
+
+
+def boss_by_quotas(weeks: list, by_id: dict) -> None:
+    """Each category takes its quota, spread evenly over what it has (the
+    rarest categories choose first); the rest stays as the boss's review."""
+    import sillabo
+    import can
+    for w in weeks:
+        quotas = BOSS_QUOTAS.get(w["week"])
+        if not quotas:
+            continue
+        # written for the boss (its «w») or testing its «ya puedo»: always in
+        pinned = {i for _, ids in can.CAN.get(w["week"], []) for i in ids}
+        pool = list(w["items"])
+        keep = [i for i in pool if i in pinned or (by_id[i].get("src") == "autore" and by_id[i].get("w") == w["week"])]
+        for name, n, test in quotas:
+            cand = []
+            for iid in pool:
+                it = by_id[iid]
+                text = " ".join(str(it.get(k) or "") for k in ("stem", "answer")).lower()
+                if iid not in keep and test(sillabo.min_week(it)[1], text):
+                    cand.append(iid)
+            step = max(1.0, len(cand) / n)
+            keep += [cand[int(k * step)] for k in range(min(n, len(cand)))]
+        out = [i for i in w["items"] if i not in keep]
+        w["items"] = [i for i in w["items"] if i in keep]
+        w["extra"] = w["extra"] + [i for i in out if i not in w["extra"]]
+
+
 def main() -> None:
     with open(os.path.join(FUENTES, "bank_dummies.json"), encoding="utf-8") as fh:
         dummies = json.load(fh)
@@ -1092,6 +1301,7 @@ def main() -> None:
             })
 
     authored = load_authored()
+    aviso_pragmatica(authored)
     lessons = load_lessons()
     for it in authored:
         it.setdefault("accept", [it["answer"]] + list(it.get("alt", [])))
@@ -1238,6 +1448,10 @@ def main() -> None:
 
     place_by_syllabus(weeks, {i["id"]: i for i in items + authored + sfida_items}, flat)
     clean_week_50(weeks, {i["id"]: i for i in items + authored + sfida_items})
+    cap_week_items(weeks, {i["id"]: i for i in items + authored + sfida_items}, flat)
+    boss_by_quotas(weeks, {i["id"]: i for i in items + authored + sfida_items})
+    trim_c1_filler(weeks, {i["id"]: i for i in items + authored + sfida_items})
+    exam_by_quotas(weeks, {i["id"]: i for i in items + authored + sfida_items})
 
     course = {
         "title": "La Via C1",
@@ -1460,6 +1674,12 @@ def main() -> None:
     import puedo
     for p in puedo.attach(course, can.CAN):
         print("  -", p)
+
+    # Reglas absolutas («nunca», «no se dice», «✗ forma» que otro ítem
+    # acepta): un aviso, no un error (tools/it/reglas_absolutas.py).
+    import reglas_absolutas
+    for line in reglas_absolutas.report(course):
+        print(line)
 
     out = os.path.join(DATA, "course.json")
     with open(out, "w", encoding="utf-8") as fh:

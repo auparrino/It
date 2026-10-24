@@ -220,7 +220,7 @@ ch(40, None, SP, "«Uma região paupérrima» es una región…",
    "*paupérrimo* es el superlativo culto de *pobre* (del latín *pauper*): pobrísimo. En la charla, "
    "*pobríssimo* o *muito pobre*.", prompt=SG)
 ch(40, None, SP, "Notícia de jornal: «O cantor, ___, lotou o estádio.»",
-   ["celebérrimo", "celebrísimo", "celébrimo"], "celebérrimo",
+   ["celebérrimo", "celebrissimo", "celébrimo"], "celebérrimo",
    "*célebre* → *celebérrimo* (famosísimo): superlativo en *-érrimo*, como *paupérrimo* y *libérrimo*. "
    "Es de la prensa y de los textos cultos.", prompt=EF)
 cl(51, None, SP, "O restaurante era ___ (caro, superlativo en -íssimo).", "caríssimo",

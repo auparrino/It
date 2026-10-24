@@ -106,6 +106,17 @@ versión (A, B, C; v1, v2, v3): la pantalla del examen (`esameItems` en
 la semana 52. Controles: `tools/it/test_suoni.js` y
 `tools/lib/test_fix_contenido_pt.js`.
 
+**Voces del teléfono.** `docs/js/voces.js` ordena las voces de la lengua
+(la variante preferida, después Natural, Neural, Online, Enhanced, Premium
+y Google, después las locales), reconoce el género de una voz por su nombre
+(Google, Microsoft, Apple) y reparte las voces de un diálogo: a cada
+hablante una de su género y distinta de las otras; si no hay, otra voz u
+otra altura. El género de cada hablante está en los datos: `sexes` junto a
+`speakers` en `tools/<código>/radio`, `tools/<código>/tramo` y
+`esame_data.js`, y `TRABAJO_DATA.sexes`. Si el teléfono tiene voces pero
+ninguna de la lengua, `app.js` (`noVoiceWarn`) explica cómo instalarla.
+Controles: `tools/lib/test_voces.js` y `tools/lib/smoke_voces.js`.
+
 **Tests.** `npm test` corre la batería de cada idioma (`tools/it/test_*.js`,
 `tools/pt/test_*.js`) contra el mismo núcleo, cargado con `tools/lib/pack.js`,
 los tests de lo común (`tools/lib/test_*.js`) y los chequeos de contenido

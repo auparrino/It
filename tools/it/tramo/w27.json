@@ -60,6 +60,7 @@
     "genre": "intervista radiofonica",
     "es": "Un conductor de radio entrevista a una socióloga que escribió un libro sobre el bar italiano y lo que representa en la vida social.",
     "speakers": ["Conduttore", "Marta Ferri, sociologa"],
+    "sexes": ["m", "f"],
     "turns": [
       ["A", "Buongiorno a tutti e bentornati. Oggi parliamo di un luogo che frequentiamo quasi quotidianamente, spesso senza pensarci: il bar. Con noi c'è Marta Ferri, sociologa, che ha appena pubblicato un libro proprio su questo. Buongiorno, professoressa."],
       ["B", "Buongiorno, e grazie dell'invito."],

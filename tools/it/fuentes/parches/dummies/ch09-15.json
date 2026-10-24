@@ -738,114 +738,126 @@
    "note": "«Ellos les faltan a ellos» → *gli mancano*."
   },
   "d11-001": {
-   "consigna": "Convertí la afirmación en pregunta: pasá el sujeto al final, después de una coma, y agregá el signo de pregunta.",
+   "consigna": "Convertí la afirmación en pregunta de sí o no.",
    "type": "qa",
    "stem": "Michele ha mangiato tutti i biscotti.",
-   "answer": "Ha mangiato tutti i biscotti, Michele?",
+   "answer": "Michele ha mangiato tutti i biscotti?",
    "alt": [
+    "Ha mangiato tutti i biscotti, Michele?",
     "Ha mangiato tutti i biscotti Michele?"
    ],
    "drop": false,
-   "note": "En italiano la pregunta no invierte obligatoriamente: basta la entonación. Para destacar el sujeto se lo pasa al final tras una coma: *Ha mangiato..., Michele?*"
+   "note": "Como en castellano, basta la entonación y el signo de cierre: *Michele ha mangiato tutti i biscotti?* Charlando también se oye el sujeto al final, tras una coma: *Ha mangiato tutti i biscotti, Michele?*"
   },
   "d11-002": {
-   "consigna": "Convertí la afirmación en pregunta: pasá el sujeto al final, después de una coma, y agregá el signo de pregunta.",
+   "consigna": "Convertí la afirmación en pregunta de sí o no.",
    "type": "qa",
    "stem": "I ragazzi sono a scuola.",
-   "answer": "Sono a scuola, i ragazzi?",
+   "answer": "I ragazzi sono a scuola?",
    "alt": [
+    "Sono a scuola, i ragazzi?",
     "Sono a scuola i ragazzi?"
    ],
    "drop": false,
-   "note": "Verbo y resto primero, sujeto al final tras coma: *Sono a scuola, i ragazzi?*; en la lengua escrita solo el signo de cierre marca la pregunta."
+   "note": "El orden no cambia: *I ragazzi sono a scuola?*, y por escrito solo el signo de cierre marca la pregunta. Charlando también: *Sono a scuola, i ragazzi?*"
   },
   "d11-003": {
-   "consigna": "Convertí la afirmación en pregunta: pasá el sujeto al final, después de una coma, y agregá el signo de pregunta.",
+   "consigna": "Convertí la afirmación en pregunta de sí o no.",
    "type": "qa",
    "stem": "Tua madre è impegnatissima.",
-   "answer": "È impegnatissima, tua madre?",
+   "answer": "Tua madre è impegnatissima?",
    "alt": [
+    "È impegnatissima, tua madre?",
     "È impegnatissima tua madre?"
    ],
    "drop": false,
-   "note": "Se mueve el sujeto al final con coma: *È impegnatissima, tua madre?* (*tua madre* sin artículo: familiar en singular)."
+   "note": "Basta la entonación: *Tua madre è impegnatissima?* (*tua madre* sin artículo: familiar en singular). Charlando, el sujeto puede ir al final tras una coma: *È impegnatissima, tua madre?*"
   },
   "d11-004": {
-   "consigna": "Convertí la afirmación en pregunta: pasá el sujeto al final, después de una coma, y agregá el signo de pregunta.",
+   "consigna": "Convertí la afirmación en pregunta de sí o no.",
    "type": "qa",
    "stem": "Giuseppe parla inglese.",
-   "answer": "Parla inglese, Giuseppe?",
+   "answer": "Giuseppe parla inglese?",
    "alt": [
+    "Parla inglese, Giuseppe?",
     "Parla inglese Giuseppe?"
    ],
    "drop": false,
-   "note": "Sujeto al final tras coma: *Parla inglese, Giuseppe?* El italiano no usa «¿» de apertura."
+   "note": "*Giuseppe parla inglese?*: mismo orden, entonación de pregunta y sin «¿» de apertura. También se oye *Parla inglese, Giuseppe?*"
   },
   "d11-005": {
-   "consigna": "Convertí la afirmación en pregunta: pasá el sujeto al final, después de una coma, y agregá el signo de pregunta.",
+   "consigna": "Convertí la afirmación en pregunta de sí o no.",
    "type": "qa",
    "stem": "Le nuove macchine sono molto belle.",
-   "answer": "Sono molto belle, le nuove macchine?",
+   "answer": "Le nuove macchine sono molto belle?",
    "alt": [
+    "Sono molto belle, le nuove macchine?",
     "Sono molto belle le nuove macchine?"
    ],
    "drop": false,
-   "note": "El sujeto con su adjetivo va entero al final: *..., le nuove macchine?*"
+   "note": "Mismo orden que la afirmación: *Le nuove macchine sono molto belle?* Si lo pasás al final, el sujeto va entero, con su adjetivo: *..., le nuove macchine?*"
   },
   "d11-006": {
-   "consigna": "Convertí la afirmación en pregunta: pasá el sujeto al final, después de una coma, y agregá el signo de pregunta.",
+   "consigna": "Convertí la afirmación en pregunta de sí o no.",
    "type": "qa",
    "stem": "Tu prepari da mangiare.",
-   "answer": "Prepari da mangiare, tu?",
+   "answer": "Prepari da mangiare?",
    "alt": [
+    "Tu prepari da mangiare?",
+    "Prepari da mangiare, tu?",
     "Prepari da mangiare tu?"
    ],
    "drop": false,
-   "note": "Aun con pronombre, el sujeto va al final: *Prepari da mangiare, tu?* (*da mangiare* = «de comer»)."
+   "note": "*Prepari da mangiare?* (*da mangiare* = «de comer»). El *tu* solo hace falta para contrastar, y entonces suele ir al final: *Prepari da mangiare tu?* (¿cocinás vos?)."
   },
   "d11-007": {
-   "consigna": "Convertí la afirmación en pregunta: pasá el sujeto al final, después de una coma, y agregá el signo de pregunta.",
+   "consigna": "Convertí la afirmación en pregunta de sí o no.",
    "type": "qa",
    "stem": "Marco e Lorenzo sono andati in centro.",
-   "answer": "Sono andati in centro, Marco e Lorenzo?",
+   "answer": "Marco e Lorenzo sono andati in centro?",
    "alt": [
+    "Sono andati in centro, Marco e Lorenzo?",
     "Sono andati in centro Marco e Lorenzo?"
    ],
    "drop": false,
-   "note": "Con passato prossimo, auxiliar y participio quedan juntos y el sujeto va al final: *Sono andati in centro, Marco e Lorenzo?*"
+   "note": "*Marco e Lorenzo sono andati in centro?*: auxiliar y participio quedan juntos, sin inversión. Charlando: *Sono andati in centro, Marco e Lorenzo?*"
   },
   "d11-008": {
-   "consigna": "Convertí la afirmación en pregunta: pasá el sujeto al final, después de una coma, y agregá el signo de pregunta.",
+   "consigna": "Convertí la afirmación en pregunta de sí o no.",
    "type": "qa",
    "stem": "Giulia sarà a casa.",
-   "answer": "Sarà a casa, Giulia?",
+   "answer": "Giulia sarà a casa?",
    "alt": [
+    "Sarà a casa, Giulia?",
     "Sarà a casa Giulia?"
    ],
    "drop": false,
-   "note": "Sujeto al final tras coma: *Sarà a casa, Giulia?* (futuro de suposición: «¿estará en casa?»)."
+   "note": "*Giulia sarà a casa?* (futuro de suposición: «¿estará en casa?»). También se oye *Sarà a casa, Giulia?*"
   },
   "d11-009": {
-   "consigna": "Convertí la afirmación en pregunta: pasá el sujeto al final, después de una coma, y agregá el signo de pregunta.",
+   "consigna": "Convertí la afirmación en pregunta de sí o no.",
    "type": "qa",
    "stem": "Le donne visitano i musei fiorentini.",
-   "answer": "Visitano i musei fiorentini, le donne?",
+   "answer": "Le donne visitano i musei fiorentini?",
    "alt": [
+    "Visitano i musei fiorentini, le donne?",
     "Visitano i musei fiorentini le donne?"
    ],
    "drop": false,
-   "note": "Sujeto al final: *Visitano i musei fiorentini, le donne?*"
+   "note": "Sin inversión: *Le donne visitano i musei fiorentini?* Con el sujeto al final, tras coma, suena más charlado."
   },
   "d11-010": {
-   "consigna": "Convertí la afirmación en pregunta: pasá el sujeto al final, después de una coma, y agregá el signo de pregunta.",
+   "consigna": "Convertí la afirmación en pregunta de sí o no.",
    "type": "qa",
    "stem": "Io leggo ogni giorno.",
-   "answer": "Leggo ogni giorno, io?",
+   "answer": "Leggo ogni giorno?",
    "alt": [
+    "Io leggo ogni giorno?",
+    "Leggo ogni giorno, io?",
     "Leggo ogni giorno io?"
    ],
    "drop": false,
-   "note": "Sujeto al final: *Leggo ogni giorno, io?*; en italiano solo se usa el signo de pregunta de cierre."
+   "note": "*Leggo ogni giorno?*: el *io* sobra salvo para contrastar, y en italiano solo se usa el signo de pregunta de cierre."
   },
   "d11-011": {
    "consigna": "Elegí la palabra interrogativa correcta: quanto/quanta/quanti/quante (cuánto…, concuerda con el sustantivo) o quale/quali (cuál, cuáles).",

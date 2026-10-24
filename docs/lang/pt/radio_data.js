@@ -26,6 +26,10 @@
     "Nanda",
     "Téo"
    ],
+   "sexes": [
+    "f",
+    "m"
+   ],
    "turns": [
     [
      "A",
@@ -82,14 +86,14 @@
      "A un bar de la Lapa con amigos"
     ],
     [
-     "¿Por qué Nanda duda antes de aceptar la invitación?",
+     "¿Qué problema menciona Nanda después de aceptar la invitación?",
      [
-      "Porque no le gusta el samba",
-      "Porque este mes no tiene plata",
-      "Porque el sábado a la noche trabaja en la radio",
-      "Porque no conoce la banda"
+      "Que no le gusta el samba",
+      "Que este mes no tiene plata",
+      "Que el sábado a la noche trabaja en la radio",
+      "Que no conoce la banda"
      ],
-     "Porque este mes no tiene plata"
+     "Que este mes no tiene plata"
     ],
     [
      "¿Qué hace Téo el domingo?",
@@ -183,6 +187,10 @@
     "Nanda",
     "Sofía"
    ],
+   "sexes": [
+    "f",
+    "f"
+   ],
    "turns": [
     [
      "A",
@@ -272,11 +280,11 @@
      "¿Cuándo va a ir Sofía a la boletería?",
      [
       "El sábado a la noche",
-      "Mañana, miércoles, temprano",
+      "Mañana, miércoles, a las dos",
       "El lunes a las seis de la tarde",
       "Hoy a las ocho y media"
      ],
-     "Mañana, miércoles, temprano"
+     "Mañana, miércoles, a las dos"
     ]
    ],
    "info": [
@@ -352,10 +360,14 @@
    "level": "A1",
    "title": "Sábado no Aterro",
    "genre": "entrada ao vivo",
-   "es": "Sábado a la mañana: Caio, el cronista en bicicleta de la radio, está en el Aterro do Flamengo. Nanda le pregunta qué está haciendo la gente y qué va a hacer él el resto del fin de semana.",
+   "es": "Sábado a la mañana: Caio, el reportero en bicicleta de la radio, está en el Aterro do Flamengo. Nanda le pregunta qué está haciendo la gente y qué va a hacer él el resto del fin de semana.",
    "speakers": [
     "Nanda",
     "Caio"
+   ],
+   "sexes": [
+    "f",
+    "m"
    ],
    "turns": [
     [
@@ -404,7 +416,7 @@
     ]
    ],
    "gloss": {
-    "repórter": "cronista, periodista",
+    "repórter": "reportero, periodista",
     "grama": "pasto (el césped)",
     "água de coco": "agua de coco",
     "Ninguém é de ferro": "nadie es de fierro (hay que darse un gusto)",
@@ -534,6 +546,10 @@
    "speakers": [
     "Nanda",
     "Téo"
+   ],
+   "sexes": [
+    "f",
+    "m"
    ],
    "turns": [
     [
@@ -721,6 +737,10 @@
     "Nanda",
     "Dona Lúcia"
    ],
+   "sexes": [
+    "f",
+    "f"
+   ],
    "turns": [
     [
      "A",
@@ -889,6 +909,10 @@
     "Nanda",
     "Sofía"
    ],
+   "sexes": [
+    "f",
+    "f"
+   ],
    "turns": [
     [
      "A",
@@ -920,7 +944,7 @@
     ],
     [
      "B",
-     "Andamos pelo Pelourinho, vimos uma roda de capoeira e comemos acarajé na praia. A Bia provou a pimenta e chorou de rir!"
+     "Andamos pelo Pelourinho, vimos uma roda de capoeira e comemos acarajé na praia. A Bia provou a pimenta, que é muito ardida, e chorou!"
     ],
     [
      "A",
@@ -953,7 +977,7 @@
     "roda de capoeira": "ronda de capoeira",
     "acarajé": "buñuelo bahiano de porotos, frito en aceite de palma",
     "pimenta": "ají picante",
-    "chorou de rir": "lloró de risa",
+    "ardida": "picante (que quema)",
     "na hora certa": "a tiempo, justo a la hora",
     "aventura": "aventura",
     "férias": "vacaciones",
@@ -1093,6 +1117,10 @@
     "Nanda",
     "Téo"
    ],
+   "sexes": [
+    "f",
+    "m"
+   ],
    "turns": [
     [
      "A",
@@ -1100,7 +1128,7 @@
     ],
     [
      "B",
-     "Ai, Nanda... Ontem machuquei as costas na academia. Agora dói o ombro, o pescoço... e ainda tô com tosse."
+     "Ai, Nanda... Ontem machuquei as costas na academia. Agora dói o ombro, dói o pescoço... e ainda tô com tosse."
     ],
     [
      "A",
@@ -1287,6 +1315,10 @@
    "speakers": [
     "Nanda",
     "Sofía"
+   ],
+   "sexes": [
+    "f",
+    "f"
    ],
    "turns": [
     [
@@ -1476,6 +1508,10 @@
    "speakers": [
     "Nanda",
     "Dona Lúcia"
+   ],
+   "sexes": [
+    "f",
+    "f"
    ],
    "turns": [
     [
@@ -1683,6 +1719,10 @@
     "Nanda",
     "Téo"
    ],
+   "sexes": [
+    "f",
+    "m"
+   ],
    "turns": [
     [
      "A",
@@ -1886,6 +1926,10 @@
     "Nanda",
     "Caio"
    ],
+   "sexes": [
+    "f",
+    "m"
+   ],
    "turns": [
     [
      "A",
@@ -2084,6 +2128,10 @@
    "speakers": [
     "Nanda",
     "Téo"
+   ],
+   "sexes": [
+    "f",
+    "m"
    ],
    "turns": [
     [
@@ -2296,6 +2344,10 @@
     "Nanda",
     "Téo"
    ],
+   "sexes": [
+    "f",
+    "m"
+   ],
    "turns": [
     [
      "A",
@@ -2499,6 +2551,10 @@
    "speakers": [
     "Nanda",
     "Caio"
+   ],
+   "sexes": [
+    "f",
+    "m"
    ],
    "turns": [
     [
@@ -2712,6 +2768,10 @@
     "Nanda",
     "Sofía"
    ],
+   "sexes": [
+    "f",
+    "f"
+   ],
    "turns": [
     [
      "A",
@@ -2921,6 +2981,10 @@
     "Nanda",
     "Téo"
    ],
+   "sexes": [
+    "f",
+    "m"
+   ],
    "turns": [
     [
      "A",
@@ -3129,6 +3193,10 @@
     "Nanda",
     "Téo"
    ],
+   "sexes": [
+    "f",
+    "m"
+   ],
    "turns": [
     [
      "A",
@@ -3325,6 +3393,10 @@
    "speakers": [
     "Nanda",
     "Caio"
+   ],
+   "sexes": [
+    "f",
+    "m"
    ],
    "turns": [
     [
@@ -3535,6 +3607,10 @@
    "speakers": [
     "Nanda",
     "Téo"
+   ],
+   "sexes": [
+    "f",
+    "m"
    ],
    "turns": [
     [

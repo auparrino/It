@@ -5,6 +5,7 @@
  "genre": "debate no estúdio",
  "es": "Llegó el duelo más esperado: Nanda, carioca, contra Téo, paulista. ¿Qué ciudad es mejor? Discuten de ropa, de precios, de comida y de fútbol, y los oyentes votan.",
  "speakers": ["Nanda", "Téo"],
+ "sexes": ["f", "m"],
  "turns": [
   ["A", "Bom dia! Hoje é o grande debate: Rio contra São Paulo. Eu defendo o Rio, claro, e o Téo defende São Paulo. Os ouvintes votam por mensagem. Téo, pode começar."],
   ["B", "São Paulo é maior do que o Rio, tem mais teatros, mais museus e os melhores restaurantes do Brasil."],

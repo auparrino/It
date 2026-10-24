@@ -2038,6 +2038,10 @@
      "Luciana, apresentadora",
      "Paulo, consultor"
     ],
+    "sexes": [
+     "f",
+     "m"
+    ],
     "turns": [
      [
       "A",
@@ -2441,6 +2445,10 @@
     "speakers": [
      "Tati",
      "Bruno"
+    ],
+    "sexes": [
+     "f",
+     "m"
     ],
     "turns": [
      [
@@ -2861,6 +2869,10 @@
     "speakers": [
      "Jéssica, ouvinte",
      "Sandra, advogada"
+    ],
+    "sexes": [
+     "f",
+     "f"
     ],
     "turns": [
      [
@@ -3285,6 +3297,10 @@
      "Clara, entrevistadora",
      "Seu Aurélio"
     ],
+    "sexes": [
+     "f",
+     "m"
+    ],
     "turns": [
      [
       "A",
@@ -3691,6 +3707,10 @@
      "Renata, editora",
      "Gustavo, repórter"
     ],
+    "sexes": [
+     "f",
+     "m"
+    ],
     "turns": [
      [
       "A",
@@ -3902,7 +3922,7 @@
      "Rádio Vale Notícias, boa tarde. O principal assunto de hoje em Itajubá é o fechamento da última banca de jornal do centro.",
      "A banca do seu Aristides, na praça da matriz, funcionou por 42 anos. Ontem, ele contou à nossa reportagem que vendia mais de 300 jornais por dia nos anos 90 e que hoje vende menos de 20. Disse que ia fechar no fim do mês porque o aluguel do ponto tinha subido de novo.",
      "A prefeitura informou que estudava uma forma de manter a banca aberta como ponto de troca de livros. O secretário de Cultura, Renato Brandão, afirmou que a decisão seria tomada até sexta-feira e pediu que os moradores mandassem sugestões pelo site da prefeitura.",
-     "Seu Aristides agradeceu o apoio dos clientes e disse que, se a banca virar ponto de troca, quer continuar trabalhando lá como voluntário."
+     "Seu Aristides agradeceu o apoio dos clientes e disse que, se a banca virasse ponto de troca, queria continuar trabalhando lá como voluntário."
     ],
     "tabella": [
      [
@@ -4110,6 +4130,10 @@
     "speakers": [
      "Fábio, apresentador",
      "Vera, coordenadora"
+    ],
+    "sexes": [
+     "m",
+     "f"
     ],
     "turns": [
      [
@@ -4553,6 +4577,10 @@
      "Lia, apresentadora",
      "Otávio, professor"
     ],
+    "sexes": [
+     "f",
+     "m"
+    ],
     "turns": [
      [
       "A",
@@ -4946,6 +4974,10 @@
     "speakers": [
      "Carla, bióloga",
      "Ronaldo, dono de restaurante"
+    ],
+    "sexes": [
+     "f",
+     "m"
     ],
     "turns": [
      [
@@ -5356,6 +5388,10 @@
     "speakers": [
      "Helena, advogada e apresentadora",
      "Patrícia, ouvinte"
+    ],
+    "sexes": [
+     "f",
+     "f"
     ],
     "turns": [
      [
@@ -5773,6 +5809,10 @@
     "speakers": [
      "Luciana, apresentadora",
      "Tiago, repórter"
+    ],
+    "sexes": [
+     "f",
+     "m"
     ],
     "turns": [
      [
@@ -6210,6 +6250,10 @@
     "speakers": [
      "Fernanda, apresentadora",
      "Diego, técnico de celulares"
+    ],
+    "sexes": [
+     "f",
+     "m"
     ],
     "turns": [
      [
@@ -6650,6 +6694,10 @@
     "speakers": [
      "Bruna",
      "Caio"
+    ],
+    "sexes": [
+     "f",
+     "m"
     ],
     "turns": [
      [
@@ -7108,6 +7156,10 @@
      "Profª Regina, orientadora",
      "Vítor, mestrando"
     ],
+    "sexes": [
+     "f",
+     "m"
+    ],
     "turns": [
      [
       "A",
@@ -7543,6 +7595,10 @@
      "Marina, apresentadora",
      "Rubens, professor de literatura"
     ],
+    "sexes": [
+     "f",
+     "m"
+    ],
     "turns": [
      [
       "A",
@@ -7969,6 +8025,10 @@
     "speakers": [
      "Rogério, apresentador",
      "Henrique, repórter"
+    ],
+    "sexes": [
+     "m",
+     "m"
     ],
     "turns": [
      [
@@ -8422,6 +8482,10 @@
     "speakers": [
      "Anselmo, secretário",
      "Beatriz, ex-aluna"
+    ],
+    "sexes": [
+     "m",
+     "f"
     ],
     "turns": [
      [
@@ -8880,6 +8944,10 @@
      "Marina (apresentadora)",
      "Tiago (professor)"
     ],
+    "sexes": [
+     "f",
+     "m"
+    ],
     "turns": [
      [
       "A",
@@ -9326,6 +9394,10 @@
      "Carla (apresentadora)",
      "Diego (ouvinte)"
     ],
+    "sexes": [
+     "f",
+     "m"
+    ],
     "turns": [
      [
       "A",
@@ -9765,6 +9837,10 @@
     "speakers": [
      "Rodrigo (apresentador)",
      "Nádia (estudante angolana)"
+    ],
+    "sexes": [
+     "m",
+     "f"
     ],
     "turns": [
      [
@@ -10232,6 +10308,10 @@
      "Luciana (empresária)",
      "Carlos (sindicalista)"
     ],
+    "sexes": [
+     "f",
+     "m"
+    ],
     "turns": [
      [
       "A",
@@ -10660,6 +10740,10 @@
     "speakers": [
      "Fábio (apresentador)",
      "Sônia (ouvidora de jornal)"
+    ],
+    "sexes": [
+     "m",
+     "f"
     ],
     "turns": [
      [
@@ -11109,6 +11193,10 @@
     "speakers": [
      "Renata (gerente)",
      "Lucas (estagiário)"
+    ],
+    "sexes": [
+     "f",
+     "m"
     ],
     "turns": [
      [
@@ -11564,6 +11652,10 @@
     "speakers": [
      "Carol",
      "Bruno"
+    ],
+    "sexes": [
+     "f",
+     "m"
     ],
     "turns": [
      [
@@ -12084,6 +12176,10 @@
     "speakers": [
      "Henrique Tavares (urbanista)",
      "Paula (estudante)"
+    ],
+    "sexes": [
+     "m",
+     "f"
     ],
     "turns": [
      [

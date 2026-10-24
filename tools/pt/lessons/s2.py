@@ -1092,7 +1092,9 @@ LESSONS = {
          ["A luz *estava acesa*.", "La luz estaba encendida."]],
   "more": ["En Brasil, *pago*, *ganho* y *gasto* también van con *ter*: "
            "*tinha pago*, *tenho gasto*, *tinha ganho* son lo más común y "
-           "la norma los acepta. *chegar* tiene un solo participio: "
+           "la norma los acepta. *Tinha aceito*, *tinha entregue* y *tinha "
+           "salvo* también se oyen mucho y varias gramáticas los admiten; lo "
+           "seguro con *ter* es el regular. *chegar* tiene un solo participio: "
            "*chegado*. «tinha chego» se oye mucho, pero es incorrecto."],
   "q": [{"prompt": "«El paquete fue entregado ayer.»", "stem": "A encomenda foi ___ ontem.",
          "answer": "entregue", "options": ["entregue", "entregada", "entrego"]}]},
@@ -1189,9 +1191,9 @@ LESSONS = {
          "answer": "faça", "options": ["faça", "faza", "haga"]}]},
 
  {"h": "Siete que van aparte",
-  "r": "Estos siete no siguen el truco y se aprenden de memoria: en seis, el "
-       "*eu* no termina en *-o* (*sou, estou, vou, dou, sei, hei*); *querer* "
-       "sí (*quero*), pero da *queira*, no «quera».",
+  "r": "Estos siete se aprenden de memoria: en seis, el *eu* no termina en "
+       "*-o* (*sou, estou, vou, dou, sei, hei*); *querer* sí (*quero*), pero "
+       "da *queira*.",
   "table": {"head": ["Verbo", "eu / você", "nós", "vocês / eles"],
             "rows": [["ser", "seja", "sejamos", "sejam"],
                      ["estar", "esteja", "estejamos", "estejam"],

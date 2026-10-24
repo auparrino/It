@@ -132,6 +132,7 @@
       "Renata (gerente)",
       "Lucas (estagiário)"
     ],
+    "sexes": ["f", "m"],
     "turns": [
       [
         "A",

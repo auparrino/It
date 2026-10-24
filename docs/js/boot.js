@@ -48,7 +48,7 @@
   // {shared: archivo} en docs/lang/ (datos de los dos idiomas, van con el núcleo).
   var ORDER = [
     { lang: "lang.js" }, { lang: "rules.js" }, { lang: "conjugator.js" },
-    { core: "engine.js" }, { core: "ia.js" }, { core: "errores.js" },
+    { core: "engine.js" }, { core: "voces.js" }, { core: "ia.js" }, { core: "errores.js" },
     { lang: "frasi_data.js" }, { lang: "trabajo_data.js" }, { core: "frasi.js" },
     { lang: "formule_data.js" }, { core: "formule.js" },
     { lang: "lab_data.js" }, { core: "lab.js" },

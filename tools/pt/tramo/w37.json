@@ -54,6 +54,7 @@
     "genre": "podcast de tecnologia",
     "es": "En un podcast sobre tecnología cotidiana, la conductora entrevista a un técnico que repara celulares desde hace años sobre las trabas para arreglar los aparatos.",
     "speakers": ["Fernanda, apresentadora", "Diego, técnico de celulares"],
+    "sexes": ["f", "m"],
     "turns": [
       ["A", "Olá, olá, começa agora mais um episódio do Fio Terra, o podcast que desmonta a tecnologia do dia a dia. Eu sou a Fernanda e hoje eu tô com o Diego, que tem uma assistência técnica de celulares em Campinas há mais de quinze anos. Diego, seja bem-vindo."],
       ["B", "Valeu, Fernanda, obrigado pelo convite."],

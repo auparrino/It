@@ -59,6 +59,7 @@
     "genre": "conversazione tra colleghi",
     "es": "Dos colegas de una empresa de software comentan por qué un cliente importante no renovó el contrato y cómo escribir el informe que les pide el director.",
     "speakers": ["Sonia, responsabile di progetto", "Paolo, collega"],
+    "sexes": ["f", "m"],
     "turns": [
       ["A", "Paolo, hai saputo? Il cliente di Verona non ha rinnovato il contratto."],
       ["B", "Sì, me l'ha detto Rossi stamattina. Sinceramente, non ci speravo più."],

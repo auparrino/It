@@ -410,10 +410,10 @@ fx(26, 1, T_SUF, "O panadero da esquina abre às seis.", "panadero", "padeiro", 
    "Panadero = *padeiro* (de *pão*): «-ero» → *-eiro*. Igual *carteiro*, *pedreiro*, *cozinheiro*.")
 fx(26, 1, T_SUF, "Isso não é posible agora.", "posible", "possível", "espanol",
    "«-ble» → *-vel*, con doble *s* y tilde: *possível*. Plural, *possíveis*.")
-ch(29, None, T_SUF, "Uma pessoa em quem você pode confiar é…", ["confiável", "confiable", "confiavel"],
+ch(29, None, T_SUF, "Uma pessoa em quem você pode confiar é…", ["confiável", "confiante", "confiavel"],
    "confiável",
-   "*confiar + -vel = confiável*: tilde en la *á* de *-ável*. «Confiable» es español y «confiavel» "
-   "pierde la tilde.")
+   "*confiar + -vel = confiável*: tilde en la *á* de *-ável*. *Confiante* es el que confía (seguro "
+   "de sí), no en quien se confía; «confiavel» pierde la tilde.")
 cl(30, None, T_SUF, "Ela fala ___ (perfeito → adverbio) o português.", "perfeitamente",
    "*-mente* sobre el femenino: *perfeita → perfeitamente*. Si la base tuviera tilde, se iría: "
    "*rápida → rapidamente*.")
@@ -432,7 +432,7 @@ ch(44, 1, T_GUI, "O médico receitou um ___.", ["anti-inflamatório", "antiinfla
    "anti-inflamatório",
    "*anti* + *inflamatório*: vocal igual (*i* + *i*) → guion. Con vocal distinta va junto: "
    "*antiaéreo*.", prompt=GR)
-ch(44, 1, T_GUI, "A cidade precisa investir em ___.", ["infraestrutura", "infra-estrutura", "infraestructura"],
+ch(44, 1, T_GUI, "A cidade precisa investir em ___.", ["infraestrutura", "infra-estrutura", "infra estrutura"],
    "infraestrutura",
    "Vocal distinta (*a* + *e*): junto, *infraestrutura*. El guion se usaba antes del Acuerdo de 1990; "
    "«-structura» es español.", prompt=GR)

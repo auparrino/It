@@ -55,6 +55,7 @@
     "genre": "trasmissione radiofonica di consulenza",
     "es": "En un programa de radio sobre trabajo, una orientadora laboral atiende la llamada de un oyente de Brescia que perdió el empleo y duda entre tres caminos.",
     "speakers": ["Silvia Moro, orientatrice", "Andrea, ascoltatore"],
+    "sexes": ["f", "m"],
     "turns": [
       ["A", "Buonasera, sei in onda con «Lavori in corso». Chi c'è al telefono?"],
       ["B", "Buonasera, sono Andrea, ho quarantacinque anni e chiamo da Brescia."],

@@ -5,6 +5,7 @@
  "genre": "chiacchierata in studio",
  "es": "Dario llega corriendo a la radio, con un minuto de atraso y un aspecto extraño. Sara quiere saber qué pasó desde que se despertó; después cuenta su propia mañana.",
  "speakers": ["Sara", "Dario"],
+ "sexes": ["f", "m"],
  "turns": [
   ["A", "Buongiorno da Radio Portici! Sono le sette e un minuto e Dario è appena entrato in studio... di corsa. Dario, che cosa ti è successo?"],
   ["B", "Non chiedere! Stanotte è andata via la luce e la sveglia non ha suonato. Mi sono svegliato alle sei e mezza, al buio, e mi sono alzato di corsa."],

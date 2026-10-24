@@ -33,7 +33,7 @@ VOCAB = {
     ["prateleira", "estante, repisa", "A prateleira é nova.", "Viene de *prato* (plato). Algo se pone *na prateleira* (em + a); la librería de pared es *a estante*."],
     ["copo", "vaso (para tomar); «copa» es taça", "Tem um copo de água?", "Masculino: *o copo*, el vaso para tomar; la copa de vino es *a taça*. Se pide *um copo de água*, con *de*."],
     ["xícara", "taza", "Tem uma xícara de café?", "Esdrújula con tilde: *xí-ca-ra*, con la *x* inicial como «sh». Recipiente + *de* + contenido: *uma xícara de café*."],
-    ["garrafa", "botella", "São duas garrafas de água.", "En Brasil es cualquier botella, no un bidón. *Uma garrafa de vinho*; el termo es *garrafa térmica*."],
+    ["garrafa", "botella", "São duas garrafas de água.", "Es la botella (de agua, de vino…). Ojo: la garrafa de gas argentina es *botijão*. *Uma garrafa de vinho*; el termo es *garrafa térmica*."],
     ["tomada", "enchufe", "Tem uma tomada aqui?", "Es el participio de *tomar* usado como sustantivo: el enchufe de la pared. La ficha del aparato es *o plugue*."],
 ],
 3: [
@@ -103,7 +103,7 @@ VOCAB = {
     ["meia", "media; seis (al dictar números)", "Meu telefone é nove, meia, oito, dois…", "Al dictar números, el 6 se dice *meia* (de *meia dúzia*) para no confundir *seis* con *três*. También: *meia* = media, calcetín."],
     ["troco", "vuelto", "Você tem troco para cem?", "Masculino: *o troco*. *Tem troco para cem?* = ¿tenés cambio de cien? *Pode ficar com o troco* = quedate con el vuelto."],
     ["cartão", "tarjeta", "Aceita cartão?", "Plural en *-ões*: *cartões*. Se paga *no cartão* o *com cartão*, *de crédito* o *de débito*."],
-    ["atrasado", "demorado, que llega tarde", "O ônibus está atrasado.", "Con *estar*: *estou atrasado* = llego tarde. Verbo *atrasar* (*o voo atrasou*); sustantivo *o atraso*."],
+    ["atrasado", "que llega tarde, con retraso", "O ônibus está atrasado.", "Con *estar*: *estou atrasado* = llego tarde. Verbo *atrasar* (*o voo atrasou*); sustantivo *o atraso*."],
     ["aniversário", "cumpleaños", "Meu aniversário é em julho.", "Es el cumpleaños de una persona, y también aniversario. Se saluda *Feliz aniversário!* o simplemente *Parabéns!*"],
 ],
 8: [
@@ -132,6 +132,7 @@ VOCAB = {
     ["carona", "aventón, que te lleven", "Ela dá carona para a gente.", "Con *dar* y *pegar*: *dar carona* = llevar a alguien en tu auto; *pegar carona* = ir con alguien, hacer dedo."],
     ["rodoviária", "terminal de micros", "O ônibus para São Paulo sai da rodoviária.", "Terminal de ómnibus de larga distancia; viene de *rodovia* (ruta). Con *de*: *sai da rodoviária*."],
     ["virar", "doblar; darse vuelta", "O táxi vira na rua da praia.", "Doblar: *virar à direita*. También volverse: *ele virou médico*. *Se virar* = arreglárselas."],
+    ["polícia", "la fuerza policial (acento en LÍ)","A polícia está na esquina.", "Ojo con el acento: po-LÍ-cia, no «po-li-CÍ-a» como en español. *O policial* = el policía (la persona)."],
     ["engarrafamento", "embotellamiento", "Tem engarrafamento na Avenida Brasil.", "De *garrafa*: tránsito «embotellado». En el habla: *peguei trânsito* = me agarró el tránsito."],
 ],
 10: [
@@ -174,6 +175,7 @@ VOCAB = {
     ["colher", "cuchara", "Tome uma colher de xarope.", "Sustantivo femenino con *é* abierta: *a colher*. Con *ê* cerrada es el verbo cosechar. *Uma colher de sopa*."],
     ["panela", "olla", "Coloque o feijão na panela.", "Femenino: *a panela*. *Panela de pressão* = olla a presión; *panelaço* = cacerolazo."],
     ["lembrar", "acordarse, recordar", "Você lembra do nome da farmácia?", "En el habla, *lembrar de*: *lembro do nome*. La norma pide *lembrar-se de* o *lembrar* + objeto: *lembro o nome*."],
+    ["alergia", "reacción alérgica (acento en GI)","Tenho alergia a camarão.", "Ojo con el acento: a-ler-GI-a, no «a-LER-gia». Igual *anemia* (a-ne-MI-a) y *terapia* (te-ra-PI-a). *Ter alergia a* algo."],
     ["escova de dentes", "cepillo de dientes", "Esqueci a escova de dentes!", "*Escovar os dentes* = cepillarse los dientes. *Escova* sola también es el brushing del peluquero."],
 ],
 13: [],

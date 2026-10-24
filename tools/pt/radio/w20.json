@@ -5,6 +5,7 @@
  "genre": "quadro de reclamações",
  "es": "En la sección «Ninguém merece» (Nadie se lo merece) los oyentes se quejan de lo que no anda en el barrio. Caio lee los mensajes y Nanda reacciona. Al final hay una buena noticia.",
  "speakers": ["Nanda", "Caio"],
+ "sexes": ["f", "m"],
  "turns": [
   ["A", "Bom dia! Começa agora o «Ninguém merece», o quadro das reclamações. O Caio está com um monte de mensagens. Caio, qual é a primeira?"],
   ["B", "A primeira é do seu Jorge, da rua Real Grandeza: «Na minha rua não tem nenhum banco para sentar. Os idosos não têm onde descansar e ninguém faz nada»."],

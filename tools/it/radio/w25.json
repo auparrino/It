@@ -5,6 +5,7 @@
  "genre": "rubrica di consigli",
  "es": "Último programa de la temporada: Sara y Dario abren «La posta del cuore» (el correo sentimental). Dario lee la carta de una oyente con un problema de pareja y los dos le dan consejos.",
  "speakers": ["Sara", "Dario"],
+ "sexes": ["f", "m"],
  "turns": [
   ["A", "Ed eccoci all'ultima puntata della stagione: oggi apriamo «La posta del cuore». Dario, leggi tu la lettera?"],
   ["B", "Volentieri. Scrive Chiara, ventisei anni: «Cari Sara e Dario, sto con Paolo da tre anni e siamo una bella coppia. Ma da qualche mese Paolo è geloso della mia amicizia con Luca, un collega di lavoro. Ogni volta che esco con i colleghi si lamenta e mi chiede con chi sono. Io non credo di aver fatto niente di male. Venerdì abbiamo litigato e adesso non ci parliamo. Che cosa mi consigliate?»"],

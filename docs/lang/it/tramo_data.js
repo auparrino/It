@@ -269,6 +269,10 @@
      "Conduttore",
      "Marta Ferri, sociologa"
     ],
+    "sexes": [
+     "m",
+     "f"
+    ],
     "turns": [
      [
       "A",
@@ -683,6 +687,10 @@
      "Giulia, conduttrice",
      "Davide, biologo"
     ],
+    "sexes": [
+     "f",
+     "m"
+    ],
     "turns": [
      [
       "A",
@@ -1080,6 +1088,10 @@
      "Ernesto Galli, commerciante",
      "Paola Rinaldi, urbanista"
     ],
+    "sexes": [
+     "m",
+     "f"
+    ],
     "turns": [
      [
       "A",
@@ -1472,6 +1484,10 @@
     "speakers": [
      "Marco, redattore",
      "Elena, caporedattrice"
+    ],
+    "sexes": [
+     "m",
+     "f"
     ],
     "turns": [
      [
@@ -1881,6 +1897,10 @@
     "speakers": [
      "Sonia, responsabile di progetto",
      "Paolo, collega"
+    ],
+    "sexes": [
+     "f",
+     "m"
     ],
     "turns": [
      [
@@ -2320,6 +2340,10 @@
      "Moderatrice",
      "Prof. Karim Benali, sociolinguista"
     ],
+    "sexes": [
+     "f",
+     "m"
+    ],
     "turns": [
      [
       "A",
@@ -2721,6 +2745,10 @@
     "speakers": [
      "Silvia Moro, orientatrice",
      "Andrea, ascoltatore"
+    ],
+    "sexes": [
+     "f",
+     "m"
     ],
     "turns": [
      [
@@ -3149,6 +3177,10 @@
     "speakers": [
      "Chiara",
      "Valentina"
+    ],
+    "sexes": [
+     "f",
+     "f"
     ],
     "turns": [
      [
@@ -3644,6 +3676,10 @@
      "Giulia, conduttrice",
      "Marco Ferri, assessore all'ambiente"
     ],
+    "sexes": [
+     "f",
+     "m"
+    ],
     "turns": [
      [
       "A",
@@ -4098,6 +4134,11 @@
      "Chiara",
      "Davide",
      "Pina, edicolante"
+    ],
+    "sexes": [
+     "f",
+     "m",
+     "f"
     ],
     "turns": [
      [
@@ -4618,6 +4659,10 @@
      "Sara, conduttrice",
      "Andrea Bellini, storico"
     ],
+    "sexes": [
+     "f",
+     "m"
+    ],
     "turns": [
      [
       "A",
@@ -5045,6 +5090,10 @@
     "speakers": [
      "Federica, caporedattrice",
      "Luca, cronista"
+    ],
+    "sexes": [
+     "f",
+     "m"
     ],
     "turns": [
      [
@@ -5490,6 +5539,10 @@
     "speakers": [
      "Paola Donati, avvocata e conduttrice",
      "Giorgio, ascoltatore"
+    ],
+    "sexes": [
+     "f",
+     "m"
     ],
     "turns": [
      [
@@ -5937,6 +5990,10 @@
     "speakers": [
      "Marco, conduttore",
      "Silvia, ascoltatrice"
+    ],
+    "sexes": [
+     "m",
+     "f"
     ],
     "turns": [
      [
@@ -6455,6 +6512,10 @@
      "Valeria, funzionaria",
      "Tommaso, collega"
     ],
+    "sexes": [
+     "f",
+     "m"
+    ],
     "turns": [
      [
       "A",
@@ -6892,6 +6953,10 @@
     "speakers": [
      "Irene Monti, ricercatrice",
      "Stefano, dal pubblico"
+    ],
+    "sexes": [
+     "f",
+     "m"
     ],
     "turns": [
      [
@@ -7344,6 +7409,10 @@
      "Conduttrice",
      "Biologo marino"
     ],
+    "sexes": [
+     "f",
+     "m"
+    ],
     "turns": [
      [
       "A",
@@ -7789,6 +7858,10 @@
     "speakers": [
      "Conduttore",
      "Comica"
+    ],
+    "sexes": [
+     "m",
+     "f"
     ],
     "turns": [
      [
@@ -8236,6 +8309,10 @@
     "speakers": [
      "Giulia, copywriter",
      "Andrea, responsabile marketing"
+    ],
+    "sexes": [
+     "f",
+     "m"
     ],
     "turns": [
      [
@@ -8708,6 +8785,10 @@
      "Conduttore",
      "Giornalista economica"
     ],
+    "sexes": [
+     "m",
+     "f"
+    ],
     "turns": [
      [
       "A",
@@ -9152,6 +9233,11 @@
      "Chiara",
      "Gennaro",
      "Paolo"
+    ],
+    "sexes": [
+     "f",
+     "m",
+     "m"
     ],
     "turns": [
      [
@@ -9696,6 +9782,10 @@
      "Conduttore",
      "Urbanista"
     ],
+    "sexes": [
+     "m",
+     "f"
+    ],
     "turns": [
      [
       "A",
@@ -10133,6 +10223,10 @@
     "speakers": [
      "Livia, conduttrice",
      "Tommaso, critico letterario"
+    ],
+    "sexes": [
+     "f",
+     "m"
     ],
     "turns": [
      [
@@ -10572,6 +10666,10 @@
     "speakers": [
      "Moderatrice",
      "Relatrice"
+    ],
+    "sexes": [
+     "f",
+     "f"
     ],
     "turns": [
      [

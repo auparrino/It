@@ -55,6 +55,7 @@
     "genre": "reunião de orientação acadêmica",
     "es": "Una profesora se reúne con su tesista de maestría para comentar el primer capítulo que él le mandó y cómo mejorar la escritura.",
     "speakers": ["Profª Regina, orientadora", "Vítor, mestrando"],
+    "sexes": ["f", "m"],
     "turns": [
       ["A", "Vítor, entra, senta. Eu li o capítulo que você me mandou. Tem coisa muito boa ali, mas a gente precisa conversar sobre o texto."],
       ["B", "Pode falar, professora. Eu imaginei que ia ter bastante correção."],

@@ -495,10 +495,9 @@ LESSONS = {
          ["Fico *à disposição*.", "Quedo a disposición."],
          ["*Em relação à* sua solicitação...", "En relación con su solicitud..."],
          ["Encaminho o pedido *ao* setor responsável.", "Derivo el pedido al sector responsable."]],
-  "warn": "Con crase fija: *à disposição*. En *em relação a* y *devido a* depende "
-          "de lo que sigue: *em relação à proposta*, *em relação ao prazo*, *devido a problemas*. "
-          "Sin crase ante verbo y ante masculino: *a partir de hoje*, *a pedido "
-          "do senhor*."},
+  "warn": "Fija: *à disposição*. *Em relação a* y *devido a* dependen de lo "
+          "que sigue: *à proposta*, *ao prazo*, *a problemas*. Ante verbo o "
+          "masculino, sin crase: *a partir de hoje*."},
 
  {"h": "Sin gerundismo: vou enviar",
   "r": "En mails y atención al cliente se cuela *vou estar enviando*: es el "
@@ -644,10 +643,9 @@ LESSONS = {
           "y *pos-* se pegan: *prever*, *pospor*."},
 
  {"h": "Diminutivo -inho / -zinho",
-  "r": "*-inho* con palabras en *-o / -a* átonas (*casa → casinha*); "
-       "*-zinho* tras vocal tónica, nasal, diptongo o *-r / -l* (*café → "
-       "cafezinho*, *pão → pãozinho*, *flor → florzinha*, *papelzinho*); "
-       "tras *-s / -z*, *-inho* (*rapazinho*, *lapisinho*).",
+  "r": "*-inho* tras *-o / -a* átonas (*casinha*); *-zinho* tras vocal "
+       "tónica, nasal, diptongo o *-r / -l* (*cafezinho*, *pãozinho*, "
+       "*florzinha*); tras *-s / -z*, *-inho* (*rapazinho*).",
   "table": {"head": ["Base", "Diminutivo", "Plural"],
             "rows": [["casa", "casinha", "casinhas"],
                      ["livro", "livrinho", "livrinhos"],
@@ -746,9 +744,9 @@ LESSONS = {
          "falsos amigos, sustantivos con otro género y palabras con el "
          "acento en otra sílaba.",
 "parts": [
- {"h": "Los falsos amigos más peligrosos", "blocks": [0, 1, 2]},
+ {"h": "Los falsos amigos más peligrosos", "blocks": [0, 1, 2, 7]},
  {"h": "En la mesa y en el trabajo", "blocks": [3, 4]},
- {"h": "Otro género, otro acento", "blocks": [5, 6]},
+ {"h": "Otro género, otro acento", "blocks": [5, 6, 8]},
 ],
 "blocks": [
  {"h": "Los clásicos",
@@ -882,6 +880,43 @@ LESSONS = {
          ["Qual é o seu *nível* de português?", "¿Cuál es tu nivel de portugués? (NÍ-vel)"]],
   "warn": "*academia* en Brasil es sobre todo el **gimnasio**. Y *polícia* "
           "lleva tilde en la í: po-LÍ-cia, no «po-li-CÍ-a»."},
+
+ {"h": "Falsos amigos finos: los que engañan a un C1",
+  "q": [{"prompt": "«Ele é muito esperto.»", "answer": "Es muy vivo.", "options": ["Es muy vivo.", "Es muy experto.", "Es muy despierto (no duerme)."]}],
+  "r": "Los clásicos ya los sabés. Estos se parecen más al español y por eso "
+       "pasan de largo: el sentido cambia poco, pero cambia.",
+  "table": {"head": ["Portugués", "Quiere decir", "Para el sentido español"],
+            "rows": [["esperto", "vivo, astuto", "experto → especialista, perito"],
+                     ["pretender", "tener pensado", "pretender (aspirar a) → almejar"],
+                     ["polido / requintado", "cortés (y pulido) / refinado", "exquisito (comida) → delicioso"],
+                     ["desenvolver", "desarrollar", "desenvolver → desembrulhar"],
+                     ["competência", "atribución, capacidad", "competencia (comercial) → concorrência"],
+                     ["presumir", "suponer", "presumir (alardear) → se gabar, se exibir"],
+                     ["propina", "soborno", "propina → gorjeta"],
+                     ["firma", "empresa", "firma → assinatura"],
+                     ["largar", "dejar, abandonar", "largarse (irse) → se mandar, sair"]]},
+  "ex": [["Ele é *esperto*: sempre acha uma saída.", "Es vivo: siempre encuentra una salida."],
+         ["*Pretendo* morar em Recife.", "Tengo pensado vivir en Recife."],
+         ["O fiscal recebeu *propina*.", "El inspector recibió una coima."],
+         ["Não é da minha *competência*.", "No me corresponde."],
+         ["*Largou* o emprego e foi para a praia.", "Dejó el trabajo y se fue a la playa."]],
+  "tip": "En la escritura culta: *em que pese* = a pesar de (*em que pese a crise*)."},
+
+ {"h": "Acento culto: lo que también le cuesta al nativo",
+  "r": "Algunas palabras se dicen mal hasta en Brasil. En un examen oral o "
+       "en una exposición, conviene la forma de la norma.",
+  "table": {"head": ["Palabra", "Norma", "Se oye también"],
+            "rows": [["rubrica", "ru-BRI-ca", "RÚ-bri-ca"],
+                     ["recorde", "re-CÓR-de", "RÉ-cor-de"],
+                     ["gratuito", "gra-TUI-to", "gra-tu-Í-to"],
+                     ["Nobel", "no-BÉL", "NÓ-bel"],
+                     ["ruim", "ru-ÍM", "RÚ-im"],
+                     ["pudico, ibero, avaro", "pu-DI-co, i-BE-ro, a-VA-ro", "PÚ-di-co, Í-be-ro, Á-va-ro"]]},
+  "ex": [["Falta a *rubrica* em cada página.", "Falta la media firma en cada página (ru-BRI-ca)."],
+         ["A entrada é *gratuita*.", "La entrada es gratis (gra-TUI-ta)."],
+         ["Saramago ganhou o *Nobel* em 1998.", "Saramago ganó el Nobel en 1998 (no-BÉL)."]],
+  "warn": "Sin tilde, la palabra es llana si termina en vocal (*rubrica*, "
+          "*recorde*) y aguda si termina en *-l* o *-im* (*Nobel*, *ruim*)."},
 ]},
 
 46: {
@@ -970,6 +1005,7 @@ LESSONS = {
   "r": "Es oficial en Angola, Moçambique, Cabo Verde, Guiné-Bissau, São Tomé "
        "e Príncipe y Timor-Leste. Allá la norma escrita sigue a Portugal.",
   "ex": [["Em Luanda: Gosto *bué* desta música.", "En Luanda: me gusta mucho esta música."],
+         ["Em Luanda: o *kota* veio de *candongueiro*.", "En Luanda: el señor mayor vino en combi (*kota*: persona mayor; *candongueiro*: la combi que hace de colectivo)."],
          ["Brasil: *cafuné*, *caçula*, *moleque*", "de origen bantú: caricia en el pelo, hijo menor, pibe"],
          ["Brasil: *quitanda*, *fubá*, *samba*", "también de lenguas africanas"],
          ["Mia Couto *escreve* em Maputo, em português de Moçambique.", "Mia Couto escribe en Maputo, en portugués de Mozambique."]],
@@ -994,7 +1030,7 @@ LESSONS = {
                      ["fato", "facto", "hecho"],
                      ["contato", "contacto", "contacto"],
                      ["registro", "registo", "registro"],
-                     ["ideia, voo", "ideia, voo", "idea, vuelo"]]},
+                     ["ideia, voo, leem", "ideia, voo, leem", "idea, vuelo, leen"]]},
   "ex": [["O *fato* é que ninguém sabia.", "El hecho es que nadie sabía (en PT: facto)."],
          ["Uma *ideia* ótima.", "Una idea excelente (sin tilde desde el Acuerdo)."],
          ["Meu *voo* sai às dez.", "Mi vuelo sale a las diez (sin tilde)."]],
@@ -1007,7 +1043,7 @@ LESSONS = {
          "ordenar argumentos y concluir. Es el portugués del debate y de la "
          "redação del ENEM.",
 "parts": [
- {"h": "Afirmar con matices", "blocks": [0, 1]},
+ {"h": "Afirmar con matices", "blocks": [0, 1, 6, 7]},
  {"h": "Conceder y contraargumentar", "blocks": [2, 3]},
  {"h": "Ordenar y concluir", "blocks": [4, 5]},
 ],
@@ -1099,6 +1135,44 @@ LESSONS = {
            "Senhor Prefeito,*; *Nós, moradores do bairro X, vimos a público "
            "manifestar…*; *em nome da associação…*; cierra con el pedido "
            "concreto y la firma colectiva (*Associação de Moradores de…*)."]},
+
+ {"h": "Modalizadores C1: cuánto te comprometés",
+  "q": [{"prompt": "Nota a la prensa, con la investigación abierta.", "stem": "___, a falha foi humana.", "answer": "Ao que tudo indica", "options": ["Ao que tudo indica", "Com certeza absoluta", "Na boa"]}],
+  "r": "El texto culto dosifica la certeza según el género: casi seguro, "
+       "probable, posible. Elegí la fórmula que dice justo lo que sabés.",
+  "table": {"head": ["Grado", "Fórmulas", "Dónde"],
+            "rows": [["casi seguro", "tudo leva a crer que, é inegável que", "ensayo, informe"],
+                     ["probable", "ao que tudo indica, é de supor que", "prensa, informe"],
+                     ["posible", "não se pode descartar que (+ subj.), é possível que", "nota de prensa"],
+                     ["opinión suave", "parece-nos, eu diria que, seria interessante", "ensayo, mail al jefe"],
+                     ["destacar", "cabe ressaltar que, convém lembrar que", "ensayo, informe"]]},
+  "ex": [["*Tudo leva a crer que* a medida *vai* reduzir o trânsito.", "Todo hace pensar que la medida va a reducir el tránsito."],
+         ["*Não se pode descartar que* a obra *atrase*.", "No se puede descartar que la obra se atrase."],
+         ["*Cabe ressaltar que* os dados são de 2022.", "Cabe destacar que los datos son de 2022."],
+         ["*Parece-nos* que a proposta é viável.", "Nos parece que la propuesta es viable."],
+         ["*Seria interessante* rever o cronograma.", "Sería interesante revisar el cronograma."]],
+  "warn": "*Não se pode descartar que* va con **subjuntivo**, como *é "
+          "possível que*; *tudo leva a crer que*, con indicativo.",
+  "tip": "El futuro do pretérito suaviza: *seria interessante*, *eu diria "
+         "que*, *valeria a pena*. Suena menos tajante que *é preciso*."},
+
+ {"h": "Atenuar al hablar: el «no» a la brasileña",
+  "q": [{"prompt": "Tu jefa te invita a un asado el sábado y no podés ir. ¿Qué le decís?",
+         "answer": "Poxa, que pena! Acho que não vai dar…",
+         "options": ["Poxa, que pena! Acho que não vai dar…", "Não posso, não.",
+                     "Lamento informar que não poderei comparecer."]}],
+  "r": "En Brasil un no seco suena brusco. Se lamenta (*poxa, que pena*), se "
+       "suaviza (*acho que não vai dar*), se da el motivo y se ofrece algo.",
+  "ex": [["Não posso. → *Poxa, que pena! Acho que não vai dar…*", "No puedo."],
+         ["Isso está errado. → *Será que não valeria a pena rever esse ponto?*", "Eso está mal."],
+         ["Preciso de mais prazo. → *Será que daria para estender até sexta?*", "Necesito más plazo."],
+         ["Discordo. → *Entendo seu ponto, mas eu vejo de outro jeito.*", "No estoy de acuerdo."],
+         ["Você está enganado. → *Acho que não é bem assim.*", "Estás equivocado."]],
+  "warn": "Lo directo rioplatense, traducido tal cual, suena cortante. Lo "
+          "sobreformal (*lamento informar que…*) entre colegas suena frío: "
+          "el punto justo es cordial e indirecto.",
+  "tip": "Para criticar un trabajo: primero lo bueno (*ficou bom!*), después "
+         "la sugerencia (*só acho que…*)."},
 ]},
 
 48: {
@@ -1108,7 +1182,7 @@ LESSONS = {
 "parts": [
  {"h": "Verbos para citar", "blocks": [0, 1]},
  {"h": "Atribuir y reformular", "blocks": [2, 3]},
- {"h": "El resumo y la prensa", "blocks": [4, 5]},
+ {"h": "El resumo y la prensa", "blocks": [4, 5, 6]},
 ],
 "blocks": [
  {"h": "Verbos de decir: más precisos que dizer",
@@ -1194,6 +1268,26 @@ LESSONS = {
           "Si se confirma, pasá al perfeito: *o suspeito fugiu*.",
   "tip": "Otra fórmula de la prensa: *trazer à tona* es «sacar a la luz»: "
          "*a reportagem trouxe à tona o caso*."},
+
+ {"h": "Vícios do texto formal: lo que corrige el ENEM",
+  "q": [{"prompt": "Texto formal.", "stem": "A reunião ___ decidimos o orçamento durou três horas.", "answer": "em que", "options": ["em que", "onde", "que"]}],
+  "r": "En un texto formal se notan: *onde* para todo, *a nível de*, *o "
+       "mesmo* como pronombre, *fazem* dos anos, *certeza que* y la coma "
+       "mal puesta.",
+  "table": {"head": ["Evitá", "Escribí", "Por qué"],
+            "rows": [["a reunião onde decidimos", "a reunião em que (na qual) decidimos", "onde, solo para lugares"],
+                     ["a nível de saúde", "em termos de / no âmbito da saúde", "ao nível de = a la altura de"],
+                     ["li o mesmo", "li-o / eu o li", "o mesmo no es pronombre"],
+                     ["fazem dois anos", "faz dois anos", "fazer de tiempo es impersonal"],
+                     ["penso de que / tenho certeza que", "penso que / tenho certeza de que", "cada verbo, su régimen"],
+                     ["Os alunos da escola, chegaram.", "Os alunos da escola chegaram.", "nada de coma entre sujeto y verbo"]]},
+  "ex": [["*A maioria dos alunos chegou* (o *chegaram*) cedo.", "La mayoría de los alumnos llegó temprano: las dos concordancias valen."],
+         ["*Cerca de mil pessoas compareceram.*", "Unas mil personas asistieron: el verbo va con lo contado."],
+         ["O projeto, *porém*, não avançou.", "El proyecto, sin embargo, no avanzó."]],
+  "warn": "*Porém*, *no entanto* y *contudo* en medio de la oración van "
+          "entre dos comas (*vírgulas*). Al comienzo, con una sola.",
+  "tip": "Antes de entregar, buscá cada *onde* y cada *o mesmo* de tu texto: "
+         "casi siempre sobran."},
 ]},
 
 49: {
@@ -1288,10 +1382,9 @@ LESSONS = {
          ["*Não me disseram* nada.", "No me dijeron nada (próclise, también formal)."],
          ["Vou te dizer. → *Dir-te-ei*.", "Te diré (muy formal)."],
          ["Se faria uma festa. → *Far-se-ia* uma festa.", "Se haría una fiesta."]],
-  "warn": "No empieces una oración formal con pronombre átono: «Me parece» → "
-          "*Parece-me*. Y mesóclise solo si nada atrae al pronombre: *não "
-          "lhe direi*; con *isso*, *tudo* o *ninguém* delante, próclise: "
-          "*isso se faria*."},
+  "warn": "No empieces la oración formal con pronombre átono: *Parece-me*. "
+          "Mesóclise solo si nada atrae: *não lhe direi*; con *isso*, *tudo* "
+          "o *ninguém* delante, próclise: *isso se faria*."},
 
  {"h": "Vocabulario: legal → interessante",
   "r": "El vocabulario coloquial tiene su par formal. En un texto "
@@ -1415,9 +1508,9 @@ LESSONS = {
          ["O apartamento no Leblon *custa os olhos da cara*.", "El depto en Leblon cuesta un ojo de la cara."],
          ["Fiquei *com a pulga atrás da orelha*.", "Me quedé con la mosca detrás de la oreja."],
          ["Pode *tirar o cavalo da chuva*: ele não vem.", "Olvidate: él no viene."]],
-  "warn": "En portugués es una **pulga**, no una mosca, y los *olhos* son "
-          "dos: *os olhos da cara*. Falso amigo: *chover no molhado* es decir algo "
-          "obvio o inútil, no «llover sobre mojado».",
+  "warn": "Es una **pulga**, no una mosca, y los *olhos* son dos. Falso "
+          "amigo: *chover no molhado* es decir algo obvio o inútil, no "
+          "«llover sobre mojado».",
   "tip": "Dos más: *engolir sapo* es «tragarse un sapo» (*engolir* = "
          "tragar) y *ir por água abaixo* es «irse al tacho»."},
 
@@ -1528,9 +1621,9 @@ LESSONS = {
 
  {"h": "Contracciones y crase",
   "q": [{"prompt": "Completá.", "stem": "Chegamos ___ Rocinha ___ duas da tarde.", "answer": "à / às", "options": ["à / às", "a / as", "à / as"]}],
-  "r": "Con el artículo definido se funden siempre: *no, na, do, pelo*. "
-       "Con el indefinido es optativo: *num / em um*, *duma / de uma*. "
-       "Y *de + ele = dele*. *a + a = à*: *vou à praia*, *às três*.",
+  "r": "Con el definido se funden siempre: *no, na, do, pelo*; con el "
+       "indefinido es optativo: *num / em um*. *de + ele = dele*; *a + a = "
+       "à*.",
   "ex": [["Moro *na* Tijuca, perto *do* Maracanã.", "Vivo en Tijuca, cerca del Maracanã."],
          ["Passei *pela* orla.", "Pasé por la costanera."],
          ["Vou *à* feira *às* oito.", "Voy a la feria a las ocho."],

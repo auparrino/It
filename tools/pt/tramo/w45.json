@@ -145,6 +145,7 @@
       "Carla (apresentadora)",
       "Diego (ouvinte)"
     ],
+    "sexes": ["f", "m"],
     "turns": [
       [
         "A",

@@ -26,6 +26,10 @@
     "Sara",
     "Dario"
    ],
+   "sexes": [
+    "f",
+    "m"
+   ],
    "turns": [
     [
      "A",
@@ -199,6 +203,10 @@
     "Sara",
     "Martín"
    ],
+   "sexes": [
+    "f",
+    "m"
+   ],
    "turns": [
     [
      "A",
@@ -350,6 +358,10 @@
    "speakers": [
     "Sara",
     "Leo"
+   ],
+   "sexes": [
+    "f",
+    "m"
    ],
    "turns": [
     [
@@ -524,6 +536,10 @@
     "Sara",
     "Dario"
    ],
+   "sexes": [
+    "f",
+    "m"
+   ],
    "turns": [
     [
      "A",
@@ -685,6 +701,10 @@
    "speakers": [
     "Sara",
     "Franca"
+   ],
+   "sexes": [
+    "f",
+    "f"
    ],
    "turns": [
     [
@@ -850,6 +870,10 @@
    "speakers": [
     "Sara",
     "Dario"
+   ],
+   "sexes": [
+    "f",
+    "m"
    ],
    "turns": [
     [
@@ -1038,6 +1062,10 @@
     "Sara",
     "Dario"
    ],
+   "sexes": [
+    "f",
+    "m"
+   ],
    "turns": [
     [
      "A",
@@ -1206,10 +1234,6 @@
     [
      "senti",
      "sentirsi"
-    ],
-    [
-     "domenica",
-     "domenica"
     ]
    ],
    "qlang": "es",
@@ -1226,6 +1250,10 @@
    "speakers": [
     "Sara",
     "Martín"
+   ],
+   "sexes": [
+    "f",
+    "m"
    ],
    "turns": [
     [
@@ -1424,6 +1452,10 @@
     "Sara",
     "Franca"
    ],
+   "sexes": [
+    "f",
+    "f"
+   ],
    "turns": [
     [
      "A",
@@ -1621,6 +1653,10 @@
     "Sara",
     "Dario"
    ],
+   "sexes": [
+    "f",
+    "m"
+   ],
    "turns": [
     [
      "A",
@@ -1811,6 +1847,10 @@
     "Sara",
     "Dario"
    ],
+   "sexes": [
+    "f",
+    "m"
+   ],
    "turns": [
     [
      "A",
@@ -1961,28 +2001,8 @@
      "zio"
     ],
     [
-     "sorella",
-     "sorella"
-    ],
-    [
      "nipote",
      "nipote"
-    ],
-    [
-     "figlia",
-     "figlio"
-    ],
-    [
-     "marito",
-     "marito"
-    ],
-    [
-     "nonni",
-     "nonno"
-    ],
-    [
-     "parenti",
-     "parente"
     ],
     [
      "giornata",
@@ -2011,6 +2031,10 @@
    "speakers": [
     "Sara",
     "Leo"
+   ],
+   "sexes": [
+    "f",
+    "m"
    ],
    "turns": [
     [
@@ -2219,6 +2243,10 @@
    "speakers": [
     "Sara",
     "Martín"
+   ],
+   "sexes": [
+    "f",
+    "m"
    ],
    "turns": [
     [
@@ -2434,6 +2462,10 @@
     "Sara",
     "Martín"
    ],
+   "sexes": [
+    "f",
+    "m"
+   ],
    "turns": [
     [
      "A",
@@ -2621,6 +2653,10 @@
    "speakers": [
     "Sara",
     "Franca"
+   ],
+   "sexes": [
+    "f",
+    "f"
    ],
    "turns": [
     [
@@ -2837,6 +2873,10 @@
     "Sara",
     "Dario"
    ],
+   "sexes": [
+    "f",
+    "m"
+   ],
    "turns": [
     [
      "A",
@@ -3049,6 +3089,10 @@
     "Sara",
     "Dario"
    ],
+   "sexes": [
+    "f",
+    "m"
+   ],
    "turns": [
     [
      "A",
@@ -3256,6 +3300,10 @@
     "Sara",
     "Leo"
    ],
+   "sexes": [
+    "f",
+    "m"
+   ],
    "turns": [
     [
      "A",
@@ -3450,6 +3498,10 @@
    "speakers": [
     "Sara",
     "Dario"
+   ],
+   "sexes": [
+    "f",
+    "m"
    ],
    "turns": [
     [

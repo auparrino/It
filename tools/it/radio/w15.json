@@ -5,6 +5,7 @@
  "genre": "rubrica «Una volta»",
  "es": "En la nueva sección «Una volta» (Antes), la signora Franca cuenta cómo era su calle, via del Pratello, cuando ella era chica, y un día que no se olvida.",
  "speakers": ["Sara", "Franca"],
+ "sexes": ["f", "f"],
  "turns": [
   ["A", "Buongiorno! Oggi comincia una nuova rubrica: «Una volta». E la prima ospite è un'amica della radio, la signora Franca. Signora, com'era via del Pratello quando lei era bambina?"],
   ["B", "Oh, era tutta un'altra cosa! Non c'erano i locali e i ristoranti di oggi. C'erano tante botteghe: il fornaio, il calzolaio, la latteria."],

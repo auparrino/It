@@ -16,7 +16,8 @@
  * window.LAB_DATA: RULES, FALSI, FALSI_WEEK, CAPIRE, ui).  Una regla del
  * Ponte o un set de Capire con `week` se abre en esa semana; sin `week`,
  * desde el principio.  FALSI_WEEK: la semana en que entran los falsos amigos
- * (0 o ausente: desde el principio).
+ * (0 o ausente: desde el principio); FALSI_WEEKS, {palabra: semana}, adelanta
+ * los que el curso ya enseña antes, en las palabras de su semana.
  *
  * Sin dependencias del DOM.
  */
@@ -27,6 +28,9 @@
   var RULES = DATA.RULES || [];
   var FALSI = DATA.FALSI || [];
   var FALSI_WEEK = DATA.FALSI_WEEK || 0;
+  // A false friend the course already teaches earlier (in that week's
+  // words) comes into the review from that week: {palabra: semana}.
+  var FALSI_WEEKS = DATA.FALSI_WEEKS || {};
   var CAPIRE = DATA.CAPIRE || [];
   var UI = DATA.ui || {};
 
@@ -69,6 +73,7 @@
       note: f[3],
       pool: others.map(function (g) { return g[1]; })
     };
+    if (+FALSI_WEEKS[f[0]]) it.week = +FALSI_WEEKS[f[0]];
     BY_ID[it.id] = it;
   });
 
@@ -144,6 +149,13 @@
     return out;
   }
 
+  // The week a false friend comes into the review: its own (FALSI_WEEKS)
+  // or else FALSI_WEEK (0: from the start).
+  function falsoWeek(id) {
+    var it = BY_ID[id];
+    return (it && it.week) || FALSI_WEEK || 0;
+  }
+
   function falsiSession(cards) {
     var all = ids("falso:");
     var unseen = shuffle(all.filter(function (k) { return !cards[k]; }));
@@ -181,7 +193,8 @@
   // One random item for interleaving into the coffee break.
   function randomItem(cards, week) {
     var pool = Object.keys(BY_ID).filter(function (k) {
-      if (week && FALSI_WEEK && k.indexOf("falso:") === 0) return week >= FALSI_WEEK || !!cards[k];
+      var fw = k.indexOf("falso:") === 0 ? falsoWeek(k) : 0;
+      if (week && fw) return week >= fw || !!cards[k];
       return !week || !BY_ID[k].week || BY_ID[k].week <= week;
     });
     if (!pool.length && RULES.length) pool = ids("ponte:" + RULES[0].id + ":");
@@ -203,6 +216,8 @@
     RULES: RULES,
     FALSI: FALSI,
     FALSI_WEEK: FALSI_WEEK,
+    FALSI_WEEKS: FALSI_WEEKS,
+    falsoWeek: falsoWeek,
     CAPIRE: CAPIRE,
     BY_ID: BY_ID,
     item: item,
