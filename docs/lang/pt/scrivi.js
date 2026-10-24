@@ -1,6 +1,7 @@
 /* Scrivi: la misión semanal de producción libre.
  *
- * Cada semana (menos las de jefe: 13, 26, 39 y 52) pide un texto corto con
+ * Cada semana (menos las de jefe 13, 39 y 52; la 26 trae una tarea integrada:
+ * escuchar un audio, `ouvir`, y contestar) pide un texto corto con
  * la función comunicativa de la semana (SAI_FARE de tools/curriculo.py:
  * «contá lo que hiciste», «pedí con cortesía») y con sus estructuras («al
  * menos 5 verbos en pretérito perfeito», «4 contracciones con em»).  No hay
@@ -23,27 +24,27 @@
      model: un texto que cumple todo (tools/test_scrivi.js lo verifica).
      Cada modelo usa solo la gramática vista hasta su semana. */
   var TASKS = {
-    1: { t: "Presentate: cómo te llamás, de dónde sos, cuántos años tenés, qué hacés y cómo estás hoy.", min: 15,
+    1: { t: "Presentate en el grupo de WhatsApp de tu curso de portugués: cómo te llamás, de dónde sos, cuántos años tenés, qué hacés y cómo estás hoy.", min: 15,
          use: [["ser", 2, "2 formas de ser (sou, é, somos…)"], ["estar", 1, "1 forma de estar (estou, está…)"], ["ter", 1, "1 forma de ter (tenho, tem…)"]],
-         model: "Oi! Eu me chamo Martín. Sou argentino, de Buenos Aires, e sou professor de história. Tenho trinta anos. Hoje estou em Copacabana e estou feliz. E você, como está?" },
-    2: { t: "Contá qué tenés y qué hay en tu casa: hermanos, animales, cosas. Usá sustantivos en plural.", min: 15,
+         model: "Oi, pessoal! Eu me chamo Martín. Sou argentino, de Buenos Aires, e sou professor de história. Tenho trinta anos. Hoje estou em Copacabana e estou feliz. E você, como está?" },
+    2: { t: "Una amiga se viene a vivir con vos. Mandale un mensaje: qué tenés y qué hay en tu casa (hermanos, animales, cosas). Usá sustantivos en plural.", min: 15,
          use: [["plurais", 4, "4 sustantivos en plural"], ["haTem", 2, "2 veces tem o há"]],
-         model: "Tenho dois irmãos e três primos. Em casa tenho dois gatos, cinco plantas e dez livros. Há duas janelas grandes e três cadeiras. Também tem dois violões e duas mesas." },
-    3: { t: "Describí tu barrio en Río: dónde están las cosas (la playa, el metro, la panadería) y dónde está la gente.", min: 20,
+         model: "Oi, Carla! Tenho dois irmãos e três primos. Em casa tenho dois gatos, cinco plantas e dez livros. Há duas janelas grandes e três cadeiras. Também tem dois violões e duas mesas." },
+    3: { t: "Una amiga llega a Río y se queda en tu barrio. Mandale un mensaje con dónde está cada cosa (la playa, el metro, la panadería) y dónde está la gente.", min: 20,
          use: [["contracoes", 4, "4 contracciones (no, na, do, da, ao, pelo…)"], ["estar", 2, "2 formas de estar"]],
-         model: "O meu apartamento é em Botafogo, perto da praia. A estação do metrô está no fim da rua e a padaria está na esquina. O mercado é ao lado do banco. Os meus amigos estão na Lapa hoje." },
-    4: { t: "Describí a una persona que conocés: de dónde es, cómo es por fuera y por dentro.", min: 20,
+         model: "Oi, Lu! O meu apartamento é em Botafogo, perto da praia. A estação do metrô está no fim da rua e a padaria está na esquina. O mercado é ao lado do banco. Os meus amigos estão na Lapa hoje." },
+    4: { t: "Tu amiga va a buscar al aeropuerto a tu compañera de departamento y no la conoce. Describísela para que la reconozca: de dónde es, cómo es por fuera y por dentro.", min: 20,
          use: [["adjetivos", 5, "5 adjetivos concordados"]],
-         model: "A Bia é brasileira, de Niterói. É alta, magra e muito simpática. Tem os olhos verdes e o cabelo castanho e comprido. É uma pessoa alegre, mas um pouco tímida. O irmão da Bia é engraçado." },
-    5: { t: "Contá tu rutina de un día de semana: dónde trabajás o estudiás, qué comés, qué hacés a la noche.", min: 25,
+         model: "Oi, Carla! A Bia é brasileira, carioca. É baixa, magra e muito simpática. Tem os olhos verdes e o cabelo curto e crespo. Hoje ela está com uma camiseta amarela. É uma pessoa alegre, mas um pouco tímida." },
+    5: { t: "Un compañero nuevo del curso te pregunta cómo es tu semana. Contale tu rutina de un día de semana: dónde trabajás o estudiás, qué comés, qué hacés a la noche.", min: 25,
          use: [["presente", 5, "5 verbos en presente"]],
          model: "De manhã eu trabalho num escritório no Centro. Almoço com os colegas perto da Cinelândia. Depois do trabalho, corro no calçadão de Copacabana. De noite janto em casa, estudo português e escuto bossa nova." },
-    6: { t: "Contá tus planes simples para el sábado: adónde vas, quién viene, qué querés y qué podés hacer.", min: 25,
+    6: { t: "Escribí en el grupo de WhatsApp de tus amigos tus planes para el sábado, para que se sumen: adónde vas, quién viene, qué querés y qué podés hacer.", min: 25,
          use: [["irregulares", 4, "4 verbos irregulares en presente (ir, vir, poder, querer, fazer, sair…)"]],
          model: "No sábado quero ir ao Arpoador com a Ana. Ela vem de Niterói de barca e eu saio de casa cedo. Vocês podem vir também? Depois vamos ao boteco e fazemos um churrasco no terraço." },
-    7: { t: "Escribí tu agenda de la semana: qué día, a qué hora, cuánto cuesta. Los números, con letras.", min: 25,
+    7: { t: "Mandale a Bia tu agenda de la semana para elegir un día para verse: qué día, a qué hora, cuánto cuesta. Los números, con letras.", min: 25,
          use: [["horas", 3, "3 horas (às oito, à uma, ao meio-dia…)"], ["numeros", 3, "3 números escritos con letras"]],
-         model: "Na segunda-feira, às oito, tenho aula de português. Na quarta, às seis e meia, jogo futevôlei em Ipanema. O show de samba na Lapa é na sexta, dia doze, às dez da noite. O ingresso custa quarenta reais." },
+         model: "Oi, Bia! Na segunda-feira, às oito, tenho aula de português. Na quarta, às seis e meia, jogo futevôlei em Ipanema. O show de samba na Lapa é na sexta, dia doze, às dez da noite. O ingresso custa quarenta reais. Que dia você pode?" },
     8: { t: "Le escribís un WhatsApp a Bia, tu vecina carioca, para invitarla a una roda de samba el sábado: contale qué estás haciendo ahora, qué van a hacer y hacele tres preguntas (la hora, el lugar, quién va).", min: 40,
          use: [["perguntas", 3, "3 preguntas"], ["irInf", 1, "1 ir + infinitivo (vou sair, vai chover…)"]],
          model: "Oi, Bia! Tudo bem? Estou estudando português agora, mas no sábado vou sair: tem uma roda de samba na Pedra do Sal. Você quer ir comigo? A que horas você pode sair de casa? Vou chamar o Rafa e a Ana também. Você conhece a Pedra do Sal? Depois a gente vai comer um pastel na feira. Beijos, Sofía" },
@@ -77,24 +78,32 @@
     19: { t: "Um amigo argentino não sabe se vai morar no Rio ou em São Paulo e pediu a sua opinião. Escreva uma mensagem comparando as duas cidades (preços, praias, trânsito, comida) e diga qual você escolheria.", min: 55,
           use: [["comparativos", 3, "3 comparaciones (mais… do que, tão… quanto, melhor, maior…)"]],
           model: "Oi, Nico! São Paulo é maior do que o Rio e tem mais empregos, mas o trânsito é pior. No Rio, os aluguéis são tão caros quanto em São Paulo, principalmente na Zona Sul. A comida paulistana é a melhor do Brasil, dizem, mas o Rio tem as praias mais bonitas. Eu escolheria o Rio: a qualidade de vida é melhor. Abraço!" },
-    20: { t: "O seu amigo Rafa convidou você para uma festa, mas você está cansado e não quer sair. Responda à mensagem dele recusando tudo, com educação e bom humor.", min: 50,
+    20: { t: "Ouça antes o «Ninguém merece» da Rádio Calçadão desta semana. Depois escreva para o quadro: uma reclamação sua sobre o seu bairro (ou uma resposta ao seu Jorge), com educação e bom humor.", min: 50,
           use: [["negacoes", 3, "3 negaciones (nada, ninguém, nenhum, nunca, nem…)"]],
-          model: "Oi, Rafa! Valeu pelo convite, mas hoje não vou a lugar nenhum. Não conheço ninguém nessa festa e não tenho nenhuma roupa limpa. Também não posso beber nada: amanhã trabalho cedo. E você sabe que eu nunca saio no domingo à noite, nem para ver o Flamengo. Fica para a próxima, tá? Abraço." },
+          model: "Oi, Nanda e Caio! Ouvi o «Ninguém merece» de hoje e também quero reclamar. Na minha rua, em Botafogo, não tem nenhuma lixeira. As pessoas jogam tudo no chão e ninguém limpa nada. Já escrevi para a prefeitura três vezes, mas nunca me responderam. Seu Jorge, eu entendo o senhor: na nossa rua não tem nem banco nem lixeira! Pelo menos o meu vizinho não canta pagode às seis da manhã. Um abraço, Martín" },
     21: { t: "Uma amiga que você não vê há meses mandou uma mensagem: «E aí, quais são as novidades?». Responda contando o que você tem feito ultimamente e algo que já tinha acontecido quando ela foi embora do Rio.", min: 55,
           use: [["perfeitoComposto", 2, "2 perfeitos compostos (tenho trabalhado…)"], ["maisQuePerfeitoComposto", 1, "1 mais-que-perfeito (tinha começado…)"]],
           model: "Oi, Ju! Quanto tempo! Ultimamente tenho trabalhado muito e tenho estudado português todas as noites. Também tenho corrido no Aterro nos fins de semana. Quando você foi embora do Rio, eu já tinha mudado de apartamento, lembra? Agora moro em Laranjeiras, perto do Largo do Machado. E você? O que tem feito em Salvador? Beijos!" },
-    22: { t: "Você escreve para o jornal da escola de português. Escreva uma nota curta sobre um monumento do Rio: quando foi construído, por quem e o que aconteceu com ele depois.", min: 55,
+    22: { t: "Faça antes o dictogloss desta semana, sobre o Cristo Redentor. Depois, com o mesmo modelo, escreva para o jornal da escola de português uma nota curta sobre outro monumento do Rio: quando foi construído, por quem e o que aconteceu com ele depois.", min: 55,
           use: [["passiva", 3, "3 pasivas (foi construído, é visitado…)"]],
-          model: "O Cristo Redentor foi construído entre 1922 e 1931 e foi inaugurado em outubro de 1931. O projeto foi feito pelo engenheiro Heitor da Silva Costa, e o rosto foi esculpido pelo romeno Gheorghe Leonida. Em 2007, o monumento foi escolhido como uma das sete maravilhas do mundo moderno. Hoje ele é visitado por milhões de turistas todos os anos." },
-    23: { t: "A sua amiga Bia está doente e triste porque vai perder uma viagem. Escreva uma mensagem para animá-la: diga o que você espera, o que recomenda e o que deseja.", min: 55,
+          model: "O Theatro Municipal do Rio foi construído no começo do século XX e foi aberto ao público em 1909, na Cinelândia. O projeto foi feito pelo engenheiro Francisco de Oliveira Passos, que se inspirou na Ópera de Paris. Ao longo dos anos, o prédio passou por várias reformas, e em 2010 foi aberto de novo depois de uma grande restauração. Hoje ele é visitado por turistas do mundo inteiro e recebe óperas, balés e concertos." },
+    23: { t: "Ouça antes o «Consultório da Nanda» da Rádio Calçadão desta semana. Depois escreva uma mensagem para o Rafael, o ouvinte que brigou com a namorada: diga o que você espera, o que recomenda e o que deseja.", min: 55,
           use: [["subjuntivo", 3, "3 verbos en presente do subjuntivo"]],
-          model: "Querida Bia, que pena que você não possa viajar! Espero que você esteja melhor hoje. É importante que você descanse e que beba muita água. Talvez seja uma boa ideia ficar em casa vendo séries no fim de semana. Quero que você me ligue amanhã, sem falta. Tomara que você fique boa logo e que a viagem seja só adiada! Um beijo, Sofía" },
-    24: { t: "Você está organizando uma viagem para Paraty com três amigos. Escreva uma mensagem para o grupo explicando o plano: para que, em que condições e apesar de quê.", min: 55,
+          model: "Rafael, ouvi a sua carta na rádio. Primeiro: é normal que você sinta ciúme, mas é importante que você não fique mandando mensagens o dia todo. Eu recomendo que você espere uns dias e depois convide a Júlia para um café. Talvez ela também queira conversar. Espero que vocês façam as pazes logo, e tomara que tudo dê certo! Um abraço, Sofía" },
+    24: { t: "Ouça antes o «Roteiro para o feriadão» da Rádio Calçadão desta semana. Como o Caio, você vai viajar no feriadão: está organizando uma viagem para Paraty com três amigos. Escreva uma mensagem para o grupo explicando o plano: para que, em que condições e apesar de quê.", min: 55,
           use: [["conjuncoes", 3, "3 conjunciones con subjuntivo (para que, embora, caso, antes que…)"]],
           model: "Pessoal, a ideia é sair na sexta às seis para que a gente pegue pouco trânsito. Embora a pousada seja simples, fica perto do centro histórico. Caso chova no sábado, vamos à cachoeira no domingo. Vou reservar hoje, antes que os preços subam. Cada um leva uma toalha, um chapéu e protetor solar. Quem topa? Beijos!" },
     25: { t: "Um site de intercâmbio pediu que você descreva o seu bairro para os estudantes que vão chegar. Escreva o texto: a rua onde você mora, as pessoas com quem você convive e o lugar de que mais gosta.", min: 55,
           use: [["relativos", 3, "3 relativos (que, quem, onde, cujo, o que…)"]],
           model: "Moro num bairro de que eu gosto muito: Santa Teresa. A rua onde moro tem um bonde amarelo que passa o dia inteiro. A vizinha com quem divido o apartamento é uma artista cujos quadros estão num ateliê da Lapa. O que eu mais adoro é a vista da baía. Para quem vem estudar aqui, recomendo o café da esquina." },
+    // CHEFÃO B1: la única semana de jefe con texto, una tarea integrada tipo
+    // Celpe-Bras Intermediário (Tanda 4): `ouvir` es el audio de entrada
+    // (TTS, botón 🔊 en la pantalla de Scrivi) y la respuesta mezcla pasado,
+    // condicional de cortesía y subjuntivo.
+    26: { t: "CHEFÃO, tarefa integrada. Ouça a mensagem que um ouvinte deixou na Rádio Calçadão e responda por e-mail, em nome da rádio: conte uma experiência sua no Rio (no passado), faça duas recomendações com cortesia e deseje uma boa viagem.", min: 80,
+          ouvir: "Alô, Rádio Calçadão! Aqui é o Diego, de Buenos Aires. No próximo feriadão eu vou ao Rio pela primeira vez, com a minha namorada. Vamos ficar quatro dias e não queremos gastar muito. O que vocês recomendam? Onde a gente pode comer bem e barato? E que passeio a gente não pode perder? Obrigado!",
+          use: [["perfeito", 2, "2 verbos en perfeito (lo que hiciste)"], ["condicional", 1, "1 condicional de cortesía (eu sugeriria, seria bom…)"], ["subjuntivo", 2, "2 verbos en subjuntivo (recomendo que, tomara que…)"]],
+          model: "Oi, Diego! Obrigada pela mensagem. Eu conheci o Rio há três anos e me apaixonei pela cidade. No primeiro dia, subi o Pão de Açúcar no fim da tarde e vi o pôr do sol: foi inesquecível. Para comer bem e barato, eu sugeriria um prato feito num boteco do Centro ou uma feira de rua no domingo. Recomendo que vocês peguem o bondinho de Santa Teresa e que caminhem pela Lapa à noite. Seria bom levar sempre um casaco leve, porque à noite pode ventar. Tomara que faça sol e que vocês aproveitem muito! Um abraço, Nanda, da Rádio Calçadão" },
     27: { t: "Você vai se mudar para o Rio. Escreva uma mensagem a um amigo contando o que vai fazer quando chegar, se conseguir trabalho e assim que puder. Inclua um lugar histórico da cidade.", min: 45,
           use: [["futSubj", 4, "4 verbos en futuro do subjuntivo (quando eu for, se você quiser…)"]],
           model: "Quando eu me mudar para o Rio, vou morar no Centro. Se eu conseguir o emprego, vou visitar o Paço Imperial, onde o príncipe regente dom João despachava depois que a corte portuguesa chegou, em 1808. Assim que eu puder, vou à Biblioteca Nacional. Se você quiser, vamos juntos." },

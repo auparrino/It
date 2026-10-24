@@ -468,7 +468,10 @@ LESSONS = {
   "r": "En un relato, el *perfeito* hace avanzar los hechos, el *imperfeito* pinta el fondo y *tinha* + participio cuenta lo que había pasado antes.",
   "ex": [["*Foi em* 2019, quando eu *morava* em Córdoba.", "Fue en 2019, cuando vivía en Córdoba."], ["Um dia, a vizinha me *disse* que eu *tinha esquecido* a chave.", "Un día, la vecina me dijo que me había olvidado la llave."], ["*De repente*, a luz *acabou*.", "De pronto, se cortó la luz."], ["*Foi então que* eu *entendi* tudo.", "Fue entonces cuando entendí todo."], ["*Hoje percebo que* aquele dia mudou a minha vida.", "Hoy me doy cuenta de que ese día me cambió la vida."]],
   "warn": "«He llegado ayer» no se dice en portugués: *cheguei ontem*. *Tenho chegado* es «vengo llegando».",
-  "tip": "Un buen relato cierra con una reflexión en presente: *hoje sei que…*, *essa experiência me ensinou que…*."},
+  "tip": "Un buen relato cierra con una reflexión en presente: *hoje sei que…*, *essa experiência me ensinou que…*.",
+  "more": ["Para los cambios que avanzan el relato (semana 22): *ficar* + adjetivo es «ponerse, quedarse» "
+           "(*fiquei nervoso*, sin *me*; *ficou rico*); *virar* + sustantivo en la charla y *tornar-se* "
+           "por escrito: *virou médico*, *tornou-se presidente*."]},
 
 ]},
 
@@ -904,7 +907,10 @@ LESSONS = {
   "more": ["*pois* tiene dos caras: al principio explica (*fica, pois está "
            "tarde*); entre comas, después del verbo, concluye (*está "
            "tarde; fica, pois, aqui*). Y *pois é* en el habla es «y sí, "
-           "así es»."]},
+           "así es».",
+           "Los cuatro *porquês* (semana 8): *por que* al principio de la pregunta y cuando vale «por "
+           "qué motivo» (*não sei por que saiu*); *por quê* al final; *porque* da la causa; *o porquê* es "
+           "«el motivo»."]},
 
  {"h": "aliás, inclusive, ou seja",
   "q": [{"prompt": "«Vinieron todos, incluso el administrador.» → Vieram todos, ___ o síndico.", "answer": "inclusive", "options": ["inclusive", "incluso", "aliás"]}],
@@ -1076,7 +1082,7 @@ LESSONS = {
 "parts": [
  {"h": "Qué es la crase y el truco del masculino", "blocks": [0, 1, 2]},
  {"h": "Cuándo nunca, y los lugares", "blocks": [3, 4]},
- {"h": "àquele y las locuciones", "blocks": [5, 6, 7, 8]},
+ {"h": "àquele y las locuciones", "blocks": [5, 6, 7, 9, 8]},
 ],
 "blocks": [
  {"h": "a + a = à",
@@ -1202,6 +1208,26 @@ LESSONS = {
   "r": "En Angola el portugués es lengua de todos los días, con palabras del kimbundu: *bué* (mucho), *kota* (persona mayor), *kamba* (amigo).",
   "ex": [["Gosto *bué* desta música!", "¡Me encanta esta música!"], ["O *kota* está à espera.", "El señor mayor está esperando."], ["Ele é meu *kamba*.", "Es mi amigo."]],
   "tip": "La grafía y la gramática siguen la norma europea (*estar à espera*, *desta*). La voz de la app es la estándar: el acento no se oye, las palabras sí."},
+
+ {"h": "a, há o à; devido à, graças à",
+  "q": [{"prompt": "Moro no Rio ___ dois anos.", "answer": "há", "options": ["há", "a", "à"]},
+        {"prompt": "A praia fica ___ dois quarteirões.", "answer": "a", "options": ["a", "há", "à"]}],
+  "r": "*Há* (de *haver*) mira atrás: *há dois anos* = hace dos años. *A* mira adelante o mide "
+       "distancia: *daqui a dois anos*, *a dois quarteirões*.",
+  "table": {"head": ["Forma", "Qué marca", "Ejemplo"],
+            "rows": [["há", "tiempo pasado (= hace)", "Cheguei há dois anos."],
+                     ["daqui a", "tiempo futuro (= dentro de)", "Volto daqui a uma semana."],
+                     ["a", "distancia", "O metrô fica a cem metros."],
+                     ["à, às", "a + a: hora, lugar", "O show é às duas."],
+                     ["devido à, graças à, em relação à", "locución con a + a", "Graças à chuva, ficamos em casa."]]},
+  "ex": [["Conheci a Bia *há* dois anos.", "Conocí a Bia hace dos años."],
+         ["A obra termina *daqui a* três meses.", "La obra termina dentro de tres meses."],
+         ["O voo foi cancelado *devido à* tempestade.", "El vuelo se canceló debido a la tormenta."],
+         ["*Em relação ao* aluguel, não mudou nada.", "En cuanto al alquiler, no cambió nada."]],
+  "warn": "Suenan igual: el oído no ayuda. Probá con *faz*: si entra (*faz dois anos*), es *há*. "
+          "Y *há dois anos atrás* repite la idea: alcanza con *há dois anos*.",
+  "tip": "*devido a, graças a, em relação a* piden *a*: con femenino, crase (*graças à Bia*); con "
+         "masculino, *ao* (*graças ao João*)."},
 
 ]},
 
@@ -1457,8 +1483,8 @@ LESSONS = {
 
  {"h": "Los tres condicionales",
   "r": "Real: *se* + futuro do subj. Posible: *se* + imperfeito do subj. "
-       "Imposible: *se* + *tivesse* + participio. Nunca condicional tras "
-       "*se*.",
+       "Imposible: *se* + *tivesse* + participio. Tras el *se* de "
+       "condición, nunca condicional.",
   "table": {"head": ["Tipo", "Condición", "Resultado", "Español"],
             "rows": [["real (futuro)", "Se eu tiver tempo,", "vou / irei.", "Si tengo tiempo, voy."],
                      ["posible (presente)", "Se eu tivesse tempo,", "iria (habla: ia).", "Si tuviera tiempo, iría."],

@@ -62,15 +62,15 @@
         "Há também muitos livros e muitas plantas.\n\n" +
         "A cozinha é pequena. Há pães, limões, feijão, arroz, o sal e o leite. " +
         "O leite é para o café, e o café é sagrado!\n\n" +
-        "Na janela da sala há uma árvore grande e, atrás da árvore, o Pão de Açúcar. " +
+        "Da janela da sala, a gente vê uma árvore grande e, atrás da árvore, o Pão de Açúcar. " +
         "De noite, as luzes da cidade são lindas. E os animais? Há só um: o Tom, o gato. " +
         "Ele é o rei da casa.",
       gloss: { quartos: "dormitorios", banheiro: "baño", cadeiras: "sillas", janelas: "ventanas", janela: "ventana",
                violões: "guitarras", pães: "panes", limões: "limones", feijão: "porotos", leite: "leche (en portugués es masculino)",
                árvore: "árbol (en portugués es femenino)", atrás: "detrás", luzes: "luces", rei: "rey",
-               sagrado: "sagrado", noite: "noche", só: "solo",
+               sagrado: "sagrado", noite: "noche", só: "solo", vê: "ve (a gente vê = vemos)",
                // las contracciones llegan en la semana 3: acá se glosan
-               na: "en la (em + a)", da: "de la (de + a)" },
+               da: "de la (de + a)" },
       questions: [
         ["¿Cuántos dormitorios tiene el departamento?", ["dos", "uno", "tres", "cuatro"], "dos"],
         ["¿Para qué es la leche?", ["para el café", "para el gato", "para una torta", "para Bia"], "para el café"],
@@ -204,7 +204,7 @@
         "— Porque o metrô é rápido e barato.\n" +
         "— Tá bom. Vou tomar um banho e vou comer alguma coisa. Onde é o encontro?\n" +
         "— Na saída do metrô. Estou esperando vocês lá!",
-      gloss: { ainda: "todavía", depois: "después", hoje: "hoy", saindo: "saliendo", roda: "ronda (roda de samba)", graça: "gracia (de graça = gratis)",
+      gloss: { ainda: "todavía", depois: "después", hoje: "hoy", saindo: "saliendo", roda: "rueda (roda de samba: músicos y público en círculo)", graça: "gracia (de graça = gratis)",
                pé: "pie (a pé = a pie)", tá: "está (tá bom = está bien, coloquial)", banho: "baño (tomar banho = bañarse)",
                coisa: "cosa", encontro: "encuentro", saída: "salida", esperando: "esperando", oi: "hola" },
       questions: [
@@ -226,7 +226,7 @@
         "Do museu, a vista do Rio é incrível: o Pão de Açúcar, o Cristo e a ponte Rio-Niterói. " +
         "Voltam de ônibus pela ponte, mas o trânsito é terrível. " +
         "\"Da próxima vez, a gente volta de barca\", diz a Bia.",
-      gloss: { baía: "bahía", pegam: "toman", descem: "bajan", barca: "lancha (ferry)", orla: "costanera",
+      gloss: { baía: "bahía", pegam: "toman", descem: "bajan", barca: "ferry (el barco que cruza la bahía)", orla: "costanera",
                sobem: "suben", voador: "volador (disco voador = plato volador)", cima: "cima (em cima de = arriba de)",
                ponte: "puente (en portugués es femenino)", ônibus: "colectivo", vez: "vez", outro: "otro" },
       questions: [
@@ -312,7 +312,7 @@
         "No sábado, acordou às sete e foi com a Bia ao Cordão da Bola Preta, no Centro, " +
         "um bloco de 1918. Na rua, milhares de pessoas cantaram marchinhas antigas e dançaram " +
         "sob o sol forte. A Sofía usou uma fantasia de abacaxi, e o João, uma de sereia.\n\n" +
-        "Na segunda, todos estão cansados, mas a Bia já está fazendo planos: \"Amanhã a gente vai " +
+        "Na segunda, todos acordaram cansados, mas a Bia já fez planos: \"Amanhã a gente vai " +
         "às Carmelitas, em Santa Teresa!\" E a Quarta-Feira de Cinzas? A Sofía dormiu o dia inteiro.",
       gloss: { blocos: "comparsas", milhares: "miles", marchinhas: "marchas de carnaval", sob: "bajo",
                fantasia: "disfraz", abacaxi: "ananá", sereia: "sirena", cinzas: "cenizas",
@@ -323,7 +323,7 @@
         ["¿Qué hizo el Miércoles de Ceniza?", ["durmió todo el día", "fue a otro bloco", "trabajó", "fue a la playa"], "durmió todo el día"]
       ],
       vf: [["A Sofía foi ao Sambódromo.", "falso"], ["O Cordão da Bola Preta é de 1918.", "verdadeiro"], ["O João dançou com a Bia.", "não se diz"]],
-      hunt: { label: "Tocá los verbos en pretérito perfeito", targets: ["viveu", "foi", "preferiu", "acordou", "cantaram", "dançaram", "usou", "dormiu"] } },
+      hunt: { label: "Tocá los verbos en pretérito perfeito", targets: ["viveu", "foi", "preferiu", "acordou", "cantaram", "dançaram", "usou", "acordaram", "fez", "dormiu"] } },
 
     // ------------------------------------------------ Estação 2 (A2 → B1)
     { id: "w-14", week: 14, n: 14, level: "A2", emoji: "🍲", title: "Feijoada de sábado",
@@ -1199,31 +1199,36 @@
       vf: [["O seu Manuel estava em Lisboa em 1974.", "verdadeiro"], ["Salazar ainda governava em 1974.", "falso"], ["O seu Manuel era soldado.", "não se diz"]],
       hunt: { label: "Toque nas marcas do registro coloquial no áudio do João", targets: ["cara", "cê", "mano", "tava"] } },
 
-    { id: "w-50", week: 50, n: 50, level: "C1", emoji: "🌊", title: "Lisboa, 1755",
+    // Semana 50: tema de la prensa brasileña actual (la tragedia de Lisboa
+    // ya está en la lectura cultural c-1755 de la semana 44).
+    { id: "w-50", week: 50, n: 50, level: "C1", emoji: "🌧️", title: "Depois da tempestade",
       grammar: "colocações e expressões idiomáticas",
       text:
-        "Na manhã de 1º de novembro de 1755, Dia de Todos os Santos, um terremoto seguido de um maremoto e de " +
-        "incêndios destruiu boa parte de Lisboa. Morreram dezenas de milhares de pessoas.\n\n" +
-        "O futuro Marquês de Pombal, ministro de D. José I, assumiu as rédeas da situação e tomou providências " +
-        "rápidas. Atribui-se a ele a frase \"Enterrar os mortos e cuidar dos vivos\", mas a autoria é duvidosa: " +
-        "há quem a atribua a outro nobre. Seja como for, Pombal levou a sério a reconstrução: a Baixa foi " +
-        "redesenhada com ruas retas e prédios com uma estrutura de madeira, a gaiola pombalina, pensada " +
-        "para resistir aos tremores.\n\n" +
-        "Na Europa, a tragédia deu o que falar: Voltaire escreveu um poema sobre o desastre e zombou do " +
-        "otimismo filosófico em Cândido.\n\n" +
-        "O seu Manuel resume: \"Lisboa deu a volta por cima. Como diz o ditado, depois da tempestade vem " +
-        "a bonança.\"",
-      gloss: { rédeas: "riendas", providências: "medidas", volta: "(deu a volta por cima) se recuperó, salió adelante", "atribui-se": "se atribuye", enterrar: "enterrar",
-               autoria: "autoría", duvidosa: "dudosa", nobre: "noble", sério: "serio (levar a sério = tomar en serio)",
-               retas: "rectas", madeira: "madera", gaiola: "jaula", pombalina: "de Pombal", tremores: "temblores", zombou: "se burló",
-               otimismo: "optimismo", ditado: "refrán", bonança: "calma" },
+        "Em maio de 2024, o Rio Grande do Sul viveu a maior enchente da sua história. Depois de dias de chuva " +
+        "sem trégua, o Guaíba passou dos cinco metros e superou a marca da grande cheia de 1941. Bairros " +
+        "inteiros de Porto Alegre ficaram debaixo d'água, o aeroporto fechou por meses e centenas de milhares " +
+        "de pessoas tiveram que deixar suas casas.\n\n" +
+        "A tragédia deu o que falar: especialistas lembraram que o sistema de proteção contra cheias, " +
+        "construído depois de 1941, sofria havia anos com a falta de manutenção. Para muitos, faltou levar a " +
+        "sério os alertas da ciência sobre o clima.\n\n" +
+        "Enquanto o poder público tomava providências, milhares de voluntários arregaçaram as mangas: barcos " +
+        "particulares resgataram moradores, e cozinhas solidárias serviram refeições dia e noite.\n\n" +
+        "A Sofía ouviu uma amiga gaúcha resumir: \"A gente perdeu muita coisa, mas vai dar a volta por " +
+        "cima. Depois da tempestade vem a bonança.\"",
+      gloss: { enchente: "inundación", trégua: "tregua", superou: "superó", cheia: "crecida", debaixo: "(debaixo d'água) bajo el agua",
+               falar: "(deu o que falar) dio que hablar", manutenção: "mantenimiento", sério: "serio (levar a sério = tomar en serio)",
+               alertas: "alertas, advertencias", providências: "medidas (tomar providências = tomar medidas)",
+               arregaçaram: "se arremangaron (arregaçar as mangas = poner manos a la obra)", mangas: "mangas",
+               resgataram: "rescataron", solidárias: "solidarias (cozinhas solidárias = ollas populares)",
+               refeições: "comidas", gaúcha: "de Rio Grande do Sul", volta: "(dar a volta por cima) recuperarse, salir adelante",
+               bonança: "calma, bonanza" },
       questions: [
-        ["O que destruiu Lisboa em 1755?", ["um terremoto, um maremoto e incêndios", "uma guerra", "uma cheia do Tejo e uma epidemia", "uma epidemia"], "um terremoto, um maremoto e incêndios"],
-        ["O que se sabe da frase atribuída a Pombal?", ["que a autoria é duvidosa", "que foi o rei que a disse", "que é de Voltaire", "que está na Constituição"], "que a autoria é duvidosa"],
-        ["O que era a gaiola pombalina?", ["uma estrutura de madeira contra os tremores", "uma prisão", "uma praça aberta para fugir dos tremores", "um navio"], "uma estrutura de madeira contra os tremores"]
+        ["O que aconteceu com o Guaíba em maio de 2024?", ["passou dos cinco metros e superou a cheia de 1941", "secou por causa da falta de chuva", "ficou abaixo da marca de 1941", "foi desviado para proteger o aeroporto"], "passou dos cinco metros e superou a cheia de 1941"],
+        ["Segundo os especialistas, qual era um problema do sistema de proteção contra cheias?", ["a falta de manutenção", "a falta de voluntários", "o excesso de barcos", "que tinha sido construído havia pouco tempo"], "a falta de manutenção"],
+        ["O que quer dizer \"arregaçaram as mangas\" no texto?", ["começaram a trabalhar com vontade", "foram embora da cidade", "sentiram frio", "desistiram de ajudar"], "começaram a trabalhar com vontade"]
       ],
-      vf: [["O terremoto aconteceu no Dia de Todos os Santos.", "verdadeiro"], ["Está provado que Pombal disse a frase.", "falso"], ["O seu Manuel já visitou a Baixa de Lisboa.", "não se diz"]],
-      hunt: { label: "Toque nas palavras das colocações e expressões (assumir as rédeas, tomar providências…)", targets: ["rédeas", "providências", "sério", "falar", "volta", "bonança"] } },
+      vf: [["O aeroporto de Porto Alegre ficou fechado por meses.", "verdadeiro"], ["A enchente de 2024 foi menor que a de 1941.", "falso"], ["A amiga da Sofía perdeu a casa.", "não se diz"]],
+      hunt: { label: "Toque nas palavras das colocações e expressões (dar o que falar, tomar providências…)", targets: ["falar", "sério", "providências", "mangas", "volta", "bonança"] } },
 
     { id: "w-51", week: 51, n: 51, level: "C1", emoji: "✊🏿", title: "Palmares e a Consciência Negra",
       grammar: "revisão B2-C1",
@@ -1254,18 +1259,18 @@
     { id: "w-52", week: 52, n: 52, level: "C1", emoji: "🎓", title: "O mar da nossa língua",
       grammar: "exame final: todo o ano",
       text:
-        "No dia do exame, a Sofía chegou cedo ao campus da universidade, na Ilha do Fundão, com o documento " +
-        "na mão e o coração acelerado. Na prova escrita, pediram-lhe um texto sobre o mar na cultura de " +
-        "língua portuguesa. Ela respirou fundo e escreveu:\n\n" +
-        "\"Poucas línguas devem tanto ao mar quanto a nossa. Em 1572, Camões publicou Os Lusíadas, epopeia " +
+        "No dia do exame, a Sofía chegou cedo ao campus da Ilha do Fundão. Na prova " +
+        "escrita, depois de um vídeo sobre a pesca artesanal em Arraial do Cabo, pediram-lhe uma carta do " +
+        "leitor para um jornal sobre o mar na cultura de língua portuguesa. Ela respirou fundo e escreveu:\n\n" +
+        "\"Prezado editor, poucas línguas devem tanto ao mar quanto a nossa. Em 1572, Camões publicou Os Lusíadas, epopeia " +
         "da viagem de Vasco da Gama à Índia, em que o gigante Adamastor encarna os perigos do cabo das " +
         "Tormentas. Em 1654, em São Luís do Maranhão, o Padre Antônio Vieira pregou o Sermão de Santo " +
         "Antônio aos Peixes, criticando os colonos por meio dos peixes. E Fernando Pessoa escreveu, em " +
         "Mensagem: 'Ó mar salgado, quanto do teu sal / São lágrimas de Portugal!'\"\n\n" +
         "Semanas depois, chegou o resultado do Celpe-Bras: Avançado Superior. A Sofía foi ao Arpoador e, " +
-        "quando o sol se pôs atrás do Dois Irmãos, aplaudiu mais alto do que todo mundo.",
-      gloss: { campus: "campus", ilha: "isla", mão: "mano", coração: "corazón", acelerado: "acelerado",
-               prova: "prueba", "pediram-lhe": "le pidieron", respirou: "respiró", devem: "deben",
+        "quando o sol se pôs atrás do Dois Irmãos, aplaudiu mais alto que todo mundo.",
+      gloss: { campus: "campus", ilha: "isla", pesca: "pesca", leitor: "lector (carta do leitor = carta de lectores)",
+               jornal: "diario", prova: "prueba", "pediram-lhe": "le pidieron", respirou: "respiró", devem: "deben",
                epopeia: "epopeya", encarna: "encarna", perigos: "peligros", tormentas: "tormentas",
                pregou: "predicó", sermão: "sermón", colonos: "colonos", salgado: "salado", "lágrimas": "lágrimas",
                aplaudiu: "aplaudió" },

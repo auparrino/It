@@ -26,12 +26,12 @@
   }
   var VOG = "é y ó son abiertas (boca más abierta, como en «perro», «sol» pero más); ê y ô, cerradas. El español tiene una sola e y una sola o: acá cambian la palabra.";
   var NAS = "La vocal nasal suena también por la nariz y no termina en una n ni una m que se oiga: «mão» no es «man».";
-  var LH = "lh es una sola consonante palatal, como la «ll» de «calle» pronunciada a la antigua (la lengua pegada al paladar), nunca «l» ni «li».";
+  var LH = "lh es una sola consonante palatal, con la lengua pegada al paladar, como la «lli» de «millón» dicha de un golpe. No es una l sola: filha ≠ fila (en el habla se oye a veces casi «li»).";
   var NH = "nh es la ñ: sonho = «soño».";
   var SZ = "Entre vocales, una s sola suena z (zumbido, como una abeja); ss, ç y c suenan s. El español no tiene esa z sonora.";
   var CHJ = "ch y x suenan «sh» (sin la t de la ch española); j y g ante e, i suenan como la «y» de «yo» en un rioplatense que la hace zumbar: sonora, no la «sh» sorda que muchos porteños hacen en «calle».";
   var TIDI = "En casi todo Brasil ti y di suenan «chi» y «yi» (con un toque de d); también la te y la de finales: leite = «leichi», tarde = «tárdji».";
-  var RR = "r entre vocales es un toque suave, como en español (caro); rr y r inicial suenan como una j suave, aspirada: carro = «caju», Rio = «Jío».";
+  var RR = "r entre vocales es un toque suave, como en español (caro); rr y r inicial suenan como una j castellana suave, aspirada: carro ≈ «cájo», Rio ≈ «jío».";
   var VB = "La v portuguesa es labiodental (los dientes de arriba tocan el labio de abajo) y la b, bilabial. El español las confunde; el portugués no.";
   var ATO = "Al final de la palabra, la e átona suena casi «i» y la o átona casi «u»: lo que las distingue es dónde cae el acento. come = «cómi», comi = «comí».";
   var PERF = "El presente (eu falo) carga el acento en la raíz y la -o final suena «u»; el perfeito (ele falou) lo carga al final, en una ô cerrada.";
@@ -66,7 +66,7 @@
     P("p-024", "nasais", 1, "som", "sou", "sonido", "soy", NAS),
     P("p-025", "nasais", 1, "irmã", "irmão", "hermana", "hermano", "ã sola contra ão: el diptongo nasal termina cerrándose hacia la u."),
     P("p-026", "nasais", 2, "são", "sal", "son; sano", "sal", "são es nasal; sal es oral y suena «sau»."),
-    P("p-027", "nasais", 3, "mundo", "mudo", "mundo", "mudo", NAS),
+    P("p-027", "nasais", 3, "mundo", "mudo", "mundo", "mudo", "En mundo la u es nasal: suena también por la nariz y la n no se pronuncia aparte. En mudo la u es oral."),
     P("p-028", "nasais", 4, "grão", "grau", "grano", "grado", NAS),
     P("p-029", "nasais", 4, "cão", "cal", "perro", "cal", "cão es nasal; cal suena «cau», oral."),
     P("p-030", "nasais", 4, "manto", "mato", "manto", "monte, yuyos", NAS),
@@ -104,18 +104,18 @@
     P("p-061", "palatais", 9, "malha", "mala", "malla, tejido", "valija", LH),
     P("p-062", "palatais", 10, "filho", "filo", "hijo", "filo (biología)", LH),
     P("p-063", "palatais", 10, "manha", "mana", "berrinche", "hermana (coloquial)", NH),
-    P("p-064", "palatais", 12, "olho", "óleo", "ojo", "aceite", "lh no es «li»: olho (ojo) tiene dos sílabas; óleo (aceite), tres."),
+    P("p-064", "palatais", 12, "olho", "óleo", "ojo", "aceite", "lh no es «li»: en olho la lh es un solo sonido palatal; en óleo hay una l simple seguida de vocal (ó-le-o)."),
     P("p-065", "palatais", 16, "senha", "sena", "contraseña", "sena (la Mega-Sena)", NH),
     P("p-066", "palatais", 18, "pinho", "pino", "pino (el árbol, la madera)", "perno, clavija", "Ojo: el pino es pinho, con nh; pino es un perno."),
     // --------------------------------------------------------- sibilantes
-    P("p-067", "sibilantes", 1, "casa", "caça", "casa", "caza", "casa suena «caza» (s sonora, zumbido); caça, con s sorda. Justo al revés de lo que espera el oído rioplatense."),
+    P("p-067", "sibilantes", 1, "casa", "caça", "casa", "caza", "casa se dice con s sonora, un zumbido de abeja (no como tu «caza», que es sorda); caça, con s sorda. Justo al revés de lo que espera el oído rioplatense."),
     P("p-068", "sibilantes", 4, "rosa", "roça", "rosa", "chacra, campo", SZ),
     P("p-069", "sibilantes", 5, "asa", "assa", "ala", "asa (de assar)", SZ),
     P("p-070", "sibilantes", 6, "presa", "pressa", "presa", "prisa", "presa con s sonora; pressa con ss sorda (y é abierta)."),
     P("p-071", "sibilantes", 6, "ouso", "ouço", "me atrevo", "oigo", SZ),
     P("p-072", "sibilantes", 7, "doze", "doce", "doce (12)", "dulce", "¡Al revés que en español! doze (12) con z sonora; doce (dulce) con s sorda."),
     P("p-073", "sibilantes", 7, "zinco", "cinco", "cinc", "cinco", SZ),
-    P("p-074", "sibilantes", 9, "zelo", "selo", "celo, cuidado", "sello, estampilla", SZ),
+    P("p-074", "sibilantes", 9, "zelo", "selo", "celo, cuidado", "sello, estampilla", "La z suena siempre z, sonora (un zumbido de abeja): zelo. La s inicial suena s, sorda, como en español: selo."),
     P("p-075", "sibilantes", 14, "casar", "caçar", "casarse", "cazar", SZ),
     P("p-076", "sibilantes", 18, "azar", "assar", "mala suerte", "asar", "azar (mala suerte, no «casualidad») con z sonora; assar con ss sorda."),
     P("p-077", "sibilantes", 19, "preso", "preço", "preso", "precio", SZ),
@@ -134,9 +134,9 @@
     P("p-088", "tidi", 1, "dia", "tia", "día", "tía", "dia suena «yía» (sonora); tia, «chía» (sorda)."),
     P("p-089", "tidi", 4, "tina", "China", "tina", "China", TIDI),
     P("p-090", "tidi", 6, "diz", "giz", "dice", "tiza", "diz suena «yis» con un toque de d; giz, «shis» sonora, sin d."),
-    P("p-091", "tidi", 9, "tiro", "giro", "tiro, disparo", "giro, vuelta", TIDI),
+    P("p-091", "tidi", 9, "tique", "dique", "tic (nervioso)", "dique", TIDI),
     P("p-092", "tidi", 9, "ponte", "ponche", "puente", "ponche", "ponte termina en «chi» con t; ponche, en «shi»."),
-    P("p-093", "tidi", 10, "tio", "chio", "tío", "chirrido", TIDI),
+    P("p-093", "tidi", 10, "tio", "chio", "tío", "chirrido", "tio suena «chíu», con la t pegada: como la ch española (tch). chio no tiene t: «shíu», una sh sola."),
     P("p-094", "tidi", 12, "de", "dê", "de", "dé (imperativo de dar)", "de, átona, suena «yi»; dê, tónica, con ê cerrada y d dura."),
     P("p-095", "tidi", 16, "te", "tê", "te (pronombre)", "la letra t", "te, átono, suena «chi»; tê, tónico, con t dura y ê cerrada."),
     P("p-096", "tidi", 18, "tinto", "cinto", "tinto (vino)", "cinturón", TIDI),
@@ -144,7 +144,7 @@
     // -------------------------------------------------------------- erres
     P("p-098", "erres", 1, "caro", "carro", "caro", "auto", RR),
     P("p-099", "erres", 2, "muro", "murro", "muro", "trompada", RR),
-    P("p-100", "erres", 3, "rato", "ato", "ratón", "acto", "La r inicial es una j suave: rato = «jato». Sin r, ato."),
+    P("p-100", "erres", 3, "rato", "ato", "ratón", "acto", "La r inicial suena como una j castellana suave (la de «jamón»): rato ≈ «játo» (no la j portuguesa de jato, que zumba). Sin r, ato."),
     P("p-101", "erres", 5, "coro", "corro", "coro", "corro", RR),
     P("p-102", "erres", 5, "era", "erra", "era, época", "se equivoca", RR),
     P("p-103", "erres", 5, "moro", "morro", "vivo (morar)", "morro, cerro", "El morro carioca (Morro da Urca, dos Irmãos) lleva rr aspirada: «mojo»."),
@@ -258,7 +258,7 @@
     { id: "c-018", kind: "scegli", week: 9, say: "Vou pro centro.", answer: "Vou para o centro.", options: ["Vou para o centro.", "Vou pelo centro.", "Vou por o centro."], es: "Voy al centro.", note: "pro = para + o, en el habla." },
     { id: "c-019", kind: "conta", week: 10, say: "O carro dele é novo.", answer: "5", options: ["4", "5", "6"], es: "Su auto (de él) es nuevo.", note: "dele = de + ele." },
     { id: "c-020", kind: "conta", week: 10, say: "Moro nesta rua.", answer: "3", options: ["3", "4", "5"], es: "Vivo en esta calle.", note: "nesta = em + esta." },
-    { id: "c-021", kind: "scegli", week: 10, say: "A casa dela é linda.", answer: "A casa dela é linda.", options: ["A casa dela é linda.", "A casa de ela é linda.", "A casa dele é linda."], es: "Su casa (de ella) es linda.", note: "dela (é abierta) ≠ dele (ê cerrada, e final «i»)." },
+    { id: "c-021", kind: "scegli", week: 10, say: "A casa dela é linda.", answer: "A casa dela é linda.", options: ["A casa dela é linda.", "A casa delas é linda.", "A casa dele é linda."], es: "Su casa (de ella) es linda.", note: "dela (é abierta) ≠ dele (ê cerrada, e final «i»)." },
     { id: "c-022", kind: "conta", week: 11, say: "Ontem eu fui à praia.", answer: "5", options: ["4", "5", "6"], es: "Ayer fui a la playa.", note: "à = a + a: una palabra." },
     { id: "c-023", kind: "scegli", week: 12, say: "Num sei, não.", answer: "Não sei, não.", options: ["Não sei, não.", "Um sei, não.", "No sei, não."], es: "No sé.", note: "En el habla rápida, não delante del verbo se reduce a «num». Ojo: num también es em + um." },
     { id: "c-024", kind: "scegli", week: 12, say: "Me dá um café?", answer: "Me dá um café?", options: ["Me dá um café?", "Me dá o café?", "Me dás um café?"], es: "¿Me das un café?", note: "En Brasil el pronombre va delante, aun al empezar la frase: me dá." },
@@ -300,7 +300,7 @@
     [6, "Você vem com a gente", "Venís con nosotros"], [6, "Ela sabe nadar", "Ella sabe nadar"],
     [7, "O show começa às nove", "El show empieza a las nueve"], [7, "Custa vinte reais", "Cuesta veinte reales"],
     [8, "Você vai ao Maracanã no domingo", "Vas al Maracaná el domingo"], [8, "Está chovendo em Botafogo", "Está lloviendo en Botafogo"],
-    [9, "O metrô passa em Ipanema", "El subte pasa por Ipanema"], [9, "A gente desce na próxima", "Nos bajamos en la próxima"],
+    [9, "O metrô passa por Ipanema", "El subte pasa por Ipanema"], [9, "A gente desce na próxima", "Nos bajamos en la próxima"],
     [10, "Esse chapéu é seu", "Ese sombrero es tuyo"], [11, "Você já comeu", "Ya comiste"], [11, "Eles chegaram ontem", "Llegaron ayer"],
     [12, "Você se levanta cedo", "Te levantás temprano"], [14, "Você gosta de samba", "Te gusta el samba"],
     [15, "A loja era pequena", "El negocio era chico"], [16, "Você conhece ela", "La conocés"],
@@ -360,7 +360,8 @@
     A("a-032", 34, "hemorragia", "he·mor·ra·GI·a", "he·mor·RA·gia", "hemorragia", "hemorragia: he-mor-ra-GI-a."),
     A("a-033", 35, "diplomacia", "di·plo·ma·CI·a", "di·plo·MA·cia", "diplomacia", "diplomacia: di-plo-ma-CI-a."),
     A("a-034", 36, "têxtil", "TÊX·til", "tex·TIL", "textil", "têxtil es llana: TÊX-til."),
-    A("a-035", 37, "fobia", "fo·BI·a", "FO·bia", "fobia", "fobia: fo-BI-a.")
+    A("a-035", 37, "fobia", "fo·BI·a", "FO·bia", "fobia", "fobia: fo-BI-a."),
+    A("a-036", 12, "cirurgia", "ci·rur·GI·a", "ci·RUR·gia", "cirugía", "cirurgia: ci-rur-GI-a (y con r antes de la g, no «cirugía»).")
   ];
 
   // Lo que suoni.js dice de este idioma: el nombre de cada categoría de

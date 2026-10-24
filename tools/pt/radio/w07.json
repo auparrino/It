@@ -33,7 +33,7 @@
  "questions": [
   ["¿Qué quiere regalarle Sofía a Bia?", ["Una entrada para un show de samba", "Una torta de cumpleaños", "Una tarjeta de crédito", "Un viaje a la Lapa"], "Una entrada para un show de samba"],
   ["¿Cuánto paga Sofía por la entrada de Bia?", ["Veinte reales", "Cuarenta reales", "Ochenta reales", "Ciento veinte reales"], "Cuarenta reales"],
-  ["¿Cuándo va a ir Sofía a la boletería?", ["El sábado a la noche", "Mañana, miércoles, temprano", "El lunes a las seis de la tarde", "Hoy a las ocho y media"], "Mañana, miércoles, temprano"]
+  ["¿Cuándo va a ir Sofía a la boletería?", ["El sábado a la noche", "Mañana, miércoles, a las dos", "El lunes a las seis de la tarde", "Hoy a las ocho y media"], "Mañana, miércoles, a las dos"]
  ],
  "info": [
   ["El show es el sábado a las diez de la noche.", true],

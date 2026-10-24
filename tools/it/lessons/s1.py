@@ -154,7 +154,8 @@ LESSONS = {
          "adjetivo. Esta semana: las terminaciones, los plurales con trampa "
          "y los géneros que no coinciden con el castellano.",
 "parts": [
- {"h": "Género: el esquema, las sorpresas y «hay»", "blocks": [0, 4, 5, 6],
+ {"h": "Género: el esquema, las sorpresas y «hay»", "blocks": [0, 4, 5, 6, 7],
+  "prefix": ["t4it1-2-n"],
   "match": r"masculino o femenino|género|c'è|ci sono"},
  {"h": "Plural: regulares, con h, invariables e irregulares", "blocks": [1, 2, 3],
   "match": r"plural"},
@@ -270,6 +271,25 @@ LESSONS = {
          ["*Ci sono* molte persone.", "Hay mucha gente."]],
   "warn": "No digas «ci sono molta gente»: *gente* es singular, entonces "
           "*c'è molta gente*."},
+
+ # Tanda 4: los números se usan desde la semana 1 (vent'anni, due fratelli).
+ # Acá solo se reconocen de oído; escribirlos llega en la semana 7.
+ {"h": "Adelanto: los números del 0 al 20",
+  "r": "Para contar lo que hay: del 0 al 10, forma propia; del 11 al 16 "
+       "terminan en *-dici*; del 17 al 19 empiezan con *dicia-*.",
+  "table": {"head": ["", "", "", ""],
+            "rows": [["0 zero", "1 uno", "2 due", "3 tre"],
+                     ["4 quattro", "5 cinque", "6 sei", "7 sette"],
+                     ["8 otto", "9 nove", "10 dieci", "11 undici"],
+                     ["12 dodici", "13 tredici", "14 quattordici", "15 quindici"],
+                     ["16 sedici", "17 diciassette", "18 diciotto", "19 diciannove"],
+                     ["20 venti", "", "", ""]]},
+  "ex": [["Ci sono *tre* sedie.", "Hay tres sillas."],
+         ["*sette*, *diciassette*", "siete, diecisiete: la doble t se sostiene"],
+         ["*sei*, *sedici*", "seis, dieciséis"]],
+  "tip": "Ojo con los que se parecen al oído: *sei* y *sedici*, *tre* y "
+         "*tredici*, *sette* y *diciassette*. Esta semana los escuchás; "
+         "escribirlos, en la 7."},
 ]},
 
 3: {
@@ -779,13 +799,13 @@ LESSONS = {
 
 6: {
 "intro": "Unos quince irregulares cubren media conversación. Y una "
-         "diferencia grande con el castellano: el italiano casi nunca "
-         "diptonga.",
+         "diferencia grande con el castellano: donde decimos *puedo, "
+         "duermo*, el italiano no diptonga (*posso, dormo*).",
 "parts": [
  {"h": "Los pilares, los modales y siete irregulares más", "blocks": [0, 1, 2, 6],
   "match": r"andare, d|de fare|modales|infinitivo|pregunta y la respuesta|de avere|tenere|salire",
   "ids": ["mj-06-14"]},
- {"h": "No diptonga, essere o stare, stare + gerundio", "blocks": [3, 4, 5],
+ {"h": "Los diptongos, essere o stare, stare + gerundio", "blocks": [3, 4, 5],
   "match": r"stare|gerundio|essere|diptong",
   "ids": ["mj-06-%02d" % n for n in range(1, 14)]},
 ],
@@ -870,7 +890,7 @@ LESSONS = {
            "*dare retta* (hacer caso), *dare un'occhiata* (echar un vistazo), "
            "*dare del tu / del Lei* (tutear / tratar de usted)."]},
 
- {"h": "El italiano no diptonga",
+ {"h": "Sin los diptongos del castellano",
   "r": "Donde el castellano rompe la vocal (*puedo, duermo, pienso*), el "
        "italiano **la deja entera**: *posso, dormo, penso*.",
   "ex": [["Non *posso* venire.", "No puedo venir."],
@@ -935,7 +955,8 @@ LESSONS = {
 "parts": [
  {"h": "Cardinales y ordinales", "blocks": [0, 1],
   "match": r"^(?!.*(hora|agenda|fecha|siglo)).*(número|ordinal|cifra)"},
- {"h": "Fechas y la hora", "blocks": [2, 3],
+ {"h": "Fechas, la hora, días y meses", "blocks": [2, 3, 4],
+  "prefix": ["t4it1-7-"],
   "match": r"hora|agenda|fecha|siglo"},
 ],
 "blocks": [
@@ -1016,6 +1037,21 @@ LESSONS = {
            "cines y oficinas se usa el reloj de 24 horas mucho más que en el "
            "castellano rioplatense: *alle diciotto* (a las seis de la "
            "tarde). También se dice *le sette e quarantacinque*."]},
+
+ {"h": "Días, meses y estaciones",
+  "r": "Día **sin artículo** = este (*lunedì vado*); **con artículo** = "
+       "todos (*il lunedì lavoro*). Meses y estaciones: *a / in maggio*, "
+       "*in primavera*, *d'estate*.",
+  "ex": [["*Sabato* vado al mare.", "Este sábado voy al mar."],
+         ["*Il sabato* vado al mare.", "Los sábados voy al mar."],
+         ["Il mio compleanno è *a maggio*.", "Mi cumpleaños es en mayo."],
+         ["*D'estate* fa caldo, *d'inverno* fa freddo.", "En verano hace calor, en invierno hace frío."],
+         ["Quando è il tuo compleanno? — *Il tredici aprile*.", "¿Cuándo es tu cumpleaños? — El trece de abril."]],
+  "warn": "Días y meses van en **minúscula**. Delante de vocal, *ad*: *ad "
+          "aprile, ad agosto*.",
+  "tip": "Estaciones: *la primavera, l'estate, l'autunno, l'inverno*. Con "
+         "*in* todas (*in autunno*); *d'estate* y *d'inverno* son las más "
+         "usadas. En Italia, julio es verano."},
 ]},
 
 8: {
@@ -1320,9 +1356,18 @@ LESSONS = {
 "intro": "Los pronombres son el corazón del italiano hablado. Esta semana, "
          "el mapa completo: directos, indirectos y tónicos, y dónde se "
          "ponen.",
+# Tanda 4: tres tramos de producción, como los manuales.  1) directos y sin
+# «a» personal (vedere, conoscere, aspettare, chiamare, aiutare); 2)
+# indirectos (telefonare, scrivere, dire, dare, rispondere) y, al final, el
+# contraste; 3) dónde va el pronombre y los tónicos.
 "parts": [
- {"h": "El cuadro: directo o indirecto, sin leísmo", "blocks": [0, 1, 2],
-  "match": r"^(?!.*(posición|ubicando|tónico|preposición|sé, lui, lei|Enfatizá)).*\S"},
+ {"h": "Directos: lo, la, li, le, sin leísmo ni «a» personal", "blocks": [0, 2],
+  "prefix": ["t4it1-10-d"],
+  "ids": ["g2-gd-40", "g2-ct-03"],
+  "match": r"^(?!.*(posición|ubicando|tónico|preposición|sé, lui, lei|Enfatizá|Da lo mismo|indirec|persona indicada|«vos», «usted»|formal o plural|Una mano|convencer|obligar|contestar)).*(sujeto|objeto directo|sustantivo por el pronombre|pronombre de objet|conosc|aspett|ascolt|vedo|vede)"},
+ {"h": "Indirectos: gli, le, y el contraste con los directos", "blocks": [1],
+  "prefix": ["t4it1-10-i"],
+  "match": r"^(?!.*(posición|ubicando|tónico|sé, lui, lei|Enfatizá|Da lo mismo)).*\S"},
  {"h": "Dónde va el pronombre y los tónicos", "blocks": [3],
   "match": r"posición|tónico"},
 ],
@@ -1692,13 +1737,17 @@ LESSONS = {
 
 13: {
 "intro": "Semana de jefe final: no hay teoría nueva. Es la hoja de repaso "
-         "del examen A2. Leela antes de entrar y volvé cada vez que falles.",
+         "del A1 completo y la primera parte del A2. Leela antes de entrar "
+         "y volvé cada vez que falles.",
 "parts": [
  {"h": "Repaso: artículos, presente e irregulares", "blocks": [0, 1, 2, 3],
   "match": r"^(?!.*(pronombre|passato|particip|reflexiv|imperativ|auxiliar)).*(artículo|presente|essere|avere|plural|masculino|adjetivo|número|hora|pregunt)"},
  {"h": "Repaso: pronombres, passato prossimo, reflexivos", "blocks": [4, 5, 6],
   "match": r"pronombre|passato|particip|reflexiv|imperativ|auxiliar"},
- {"h": "Repaso: las cinco trampas y todo lo demás", "blocks": [7],
+ {"h": "Las trampas: encontrá el error", "blocks": [7],
+  "prefix": ["t4it1-13-t"],
+  "match": r"^(?!)"},
+ {"h": "Repaso: preposiciones y todo lo demás", "blocks": [8],
   "match": r"\S"},
 ],
 "blocks": [
@@ -1803,11 +1852,28 @@ LESSONS = {
  {"h": "Las cinco trampas del hispanohablante",
   "q": [{"prompt": "¿Cuál está bien? «Estudio italiano desde hace dos años.»", "answer": "Studio italiano da due anni.", "options": ["Studio italiano da due anni.", "Ho studiato italiano da due anni.", "Studio italiano fa due anni."]}, {"prompt": "¿Cuál está bien? «Mi libro es nuevo.»", "answer": "Il mio libro è nuovo.", "options": ["Il mio libro è nuovo.", "Mio libro è nuovo.", "Mi libro è nuovo."]}],
   "r": "Repasalas antes del examen: son las que más puntos cuestan.",
-  "ex": [["*posso*, *dormo*, penso", "1. No diptongar."],
+  "ex": [["*posso*, *dormo*, penso", "1. Sin el diptongo del castellano."],
          ["*PAR*lano, *A*bitano", "2. loro: acento en la raíz."],
          ["*il mio* libro", "3. Artículo con el posesivo."],
          ["*Vedo Marco*.", "4. Sin «a» ante el objeto directo."],
          ["Studio *da* due anni.", "5. Presente + da para lo que sigue."]]},
+
+ {"h": "Preposiciones: a, in, da, di",
+  "r": "*a* + ciudad, *in* + país o región; *da* + persona (a lo de) y "
+       "«desde hace»; *di* + origen con *essere*.",
+  "table": {"head": ["", "Ejemplo", "Castellano"],
+            "rows": [["a + ciudad", "Vivo a Bologna.", "Vivo en Bolonia."],
+                     ["in + país", "Vado in Italia.", "Voy a Italia."],
+                     ["da + persona", "Vado da Marco.", "Voy a lo de Marco."],
+                     ["da + tiempo", "Studio qui da due anni.", "Estudio acá desde hace dos años."],
+                     ["di + ciudad", "Sono di Rosario.", "Soy de Rosario."],
+                     ["da + lugar", "Vengo da Rosario.", "Vengo de Rosario."]]},
+  "ex": [["Vivo *a* Bologna, *in* Italia.", "Vivo en Bolonia, en Italia."],
+         ["Stasera vado *dal* dentista.", "Esta noche voy al dentista."],
+         ["Sono arrivato due anni *fa*.", "Llegué hace dos años."],
+         ["Vado *in* ufficio *in* macchina.", "Voy a la oficina en auto."]],
+  "warn": "«En» no siempre es *in*: con ciudades, *a*. Y «hace dos años» "
+          "es *due anni fa* si ya pasó, pero *da due anni* si sigue."},
 ]},
 
 }

@@ -16,7 +16,12 @@
  *                 interpretarla.  Cada ítem se resuelve solo mirando la forma,
  *                 no el contexto (você + 3.ª persona, contracciones, dele/dela,
  *                 gostar de, perfeito/imperfeito, perfeito composto, achar
- *                 que + indicativo, futuro do subjuntivo, infinitivo pessoal).
+ *                 que + indicativo, futuro do subjuntivo, infinitivo pessoal;
+ *                 y, de la Tanda 4: o/a objeto, la pasiva, los relativos con
+ *                 gostar de, la hipótesis real o imaginada, el pasado que no
+ *                 pasó, el discurso indirecto vigente, el sujeto
+ *                 indeterminado, -o/-a/-lhe, assistir (a), el -ra y Brasil o
+ *                 Portugal).
  *                 Cada set trae `week` (tools/pt/curriculo.py, TENSE_WEEK).
  */
 (function (root) {
@@ -35,7 +40,7 @@
               ["atención", "atenção"], ["acción", "ação"], ["colección", "coleção"]] },
 
     { id: "dade", week: 3, h: "-dad → -dade",
-      body: "Las palabras en **-dad** terminan en **-dade** y son femeninas: *a cidade*, *a liberdade*. Ojo con dos que cambian también la vocal: *edad → idade*, *mitad → metade*.",
+      body: "Las palabras en **-dad** terminan en **-dade** y son femeninas: *a cidade*, *a liberdade*. Ojo: algunas cambian también otra letra: *edad → idade*, *mitad → metade*, *novedad → novidade*, *calidad → qualidade*, *libertad → liberdade* (t → d).",
       ex: [["ciudad", "cidade"], ["libertad", "liberdade"]],
       words: [["ciudad", "cidade"], ["universidad", "universidade"], ["libertad", "liberdade"],
               ["verdad", "verdade"], ["realidad", "realidade"], ["sociedad", "sociedade"],
@@ -75,7 +80,7 @@
               ["araña", "aranha"], ["castaño", "castanho"], ["sueño", "sonho"]] },
 
     { id: "lh", week: 8, h: "ll / j → lh",
-      body: "El sonido **lh** (parecido a la «ll» de quien la distingue de la «y») aparece donde el español tiene **ll** (*batalla → batalha*) y, muchas veces, **j**: *trabajo → trabalho*, *ojo → olho*, *mujer → mulher*.",
+      body: "El sonido **lh** (parecido a la «ll» de quien la distingue de la «y») aparece donde el español tiene **ll** en medio de palabra (*batalla → batalha*; al principio suele ser **ch**: *llave → chave*) y, muchas veces, **j**: *trabajo → trabalho*, *ojo → olho*, *mujer → mulher*.",
       ex: [["trabajo", "trabalho"], ["medalla", "medalha"]],
       words: [["batalla", "batalha"], ["medalla", "medalha"], ["maravilla", "maravilha"],
               ["orgullo", "orgulho"], ["detalle", "detalhe"], ["toalla", "toalha"],
@@ -84,14 +89,14 @@
               ["abeja", "abelha"], ["ajo", "alho"]] },
 
     { id: "efe", week: 9, h: "h- → f-",
-      body: "La **h-** inicial del español viene de una **f** latina que el portugués conservó: *hacer → fazer*, *hablar → falar*, *hijo → filho*.",
+      body: "Muchas palabras con **h-** inicial en español vienen de una **f** latina que el portugués conservó: *hacer → fazer*, *hablar → falar*, *hijo → filho*.",
       ex: [["hablar", "falar"], ["harina", "farinha"]],
       words: [["hacer", "fazer"], ["hablar", "falar"], ["harina", "farinha"], ["hierro", "ferro"],
               ["hijo", "filho"], ["hoja", "folha"], ["hambre", "fome"], ["hormiga", "formiga"],
               ["higo", "figo"], ["horno", "forno"], ["hervir", "ferver"], ["herida", "ferida"]] },
 
     { id: "ch", week: 10, h: "ll- / pl- / cl- / fl- → ch- / pr- / cr- / fr-",
-      body: "La **ll-** inicial del español suele ser **ch-**: *llamar → chamar*, *lleno → cheio*. Y la **l** después de consonante se vuelve **r**: *plaza → praça*, *blanco → branco*, *flaco → fraco*, *iglesia → igreja*.",
+      body: "La **ll-** inicial del español suele ser **ch-**: *llamar → chamar*, *lleno → cheio*. Y la **l** después de consonante muchas veces se vuelve **r**: *plaza → praça*, *blanco → branco*, *flaco → fraco*, *iglesia → igreja* (pero no siempre: *claro*, *flor*, *planta*, *blusa*).",
       ex: [["llave", "chave"], ["playa", "praia"]],
       words: [["lleno", "cheio"], ["llamar", "chamar"], ["llave", "chave"], ["llover", "chover"],
               ["llorar", "chorar"], ["llegar", "chegar"], ["plaza", "praça"], ["playa", "praia"],
@@ -99,7 +104,7 @@
               ["blanco", "branco"], ["flaco", "fraco"], ["iglesia", "igreja"], ["regla", "regra"]] },
 
     { id: "ele", week: 11, h: "La l entre vocales cae",
-      body: "En portugués la **l** latina entre vocales desapareció: *salir → sair*, *volar → voar*, *color → cor*, *dolor → dor*, *cielo → céu*. Por eso *malo* es *mau* y *solo* (solamente) es *só*. Hay excepciones cultas: *calor*, *vela*.",
+      body: "En portugués la **l** latina entre vocales desapareció: *salir → sair*, *volar → voar*, *color → cor*, *dolor → dor*, *cielo → céu*. Por eso *malo* es *mau* y *solo* (solamente) es *só*. Es una tendencia de las palabras heredadas, con muchas excepciones: *calor*, *vela*, *sala*, *mala*, *bala*.",
       ex: [["salir", "sair"], ["color", "cor"]],
       words: [["color", "cor"], ["dolor", "dor"], ["volar", "voar"], ["salir", "sair"],
               ["salud", "saúde"], ["cielo", "céu"], ["palo", "pau"], ["malo", "mau"],
@@ -149,13 +154,58 @@
       words: [["actitud", "atitude"], ["juventud", "juventude"], ["virtud", "virtude"],
               ["amplitud", "amplitude"], ["latitud", "latitude"], ["inquietud", "inquietude"],
               ["multitud", "multidão"], ["esclavitud", "escravidão"], ["gratitud", "gratidão"],
-              ["soledad", "solidão"]] }
+              ["soledad", "solidão"]] },
+
+    // Tanda 4 (PLAN-2026-10, pt 27-39): el léxico culto de prensa, trámite
+    // y derecho que llega en la temporada 3.
+    { id: "encia", week: 28, h: "-encia / -ancia → -ência / -ância",
+      body: "Las palabras en **-encia** y **-ancia** terminan en **-ência** y **-ância**, con circunflejo: *ciencia → ciência*, *distancia → distância*. El *-cuencia* pierde la *u* escrita: *frecuencia → frequência*.",
+      ex: [["experiencia", "experiência"], ["importancia", "importância"]],
+      words: [["ciencia", "ciência"], ["experiencia", "experiência"], ["violencia", "violência"],
+              ["emergencia", "emergência"], ["residencia", "residência"], ["antecedencia", "antecedência"],
+              ["frecuencia", "frequência"], ["consecuencia", "consequência"], ["importancia", "importância"],
+              ["distancia", "distância"], ["tolerancia", "tolerância"], ["infancia", "infância"],
+              ["independencia", "independência"], ["competencia", "competência"]] },
+
+    { id: "mento", week: 32, h: "-miento → -mento",
+      body: "El **-miento** del español es **-mento**, siempre masculino: *movimiento → movimento*, *pensamiento → pensamento*. Ojo con la raíz, que sigue sus propias reglas: *conocimiento → conhecimento*, *nacimiento → nascimento*.",
+      ex: [["movimiento", "movimento"], ["tratamiento", "tratamento"]],
+      words: [["movimiento", "movimento"], ["pensamiento", "pensamento"], ["sentimiento", "sentimento"],
+              ["tratamiento", "tratamento"], ["procedimiento", "procedimento"], ["asentamiento", "assentamento"],
+              ["saneamiento", "saneamento"], ["conocimiento", "conhecimento"], ["nacimiento", "nascimento"],
+              ["crecimiento", "crescimento"], ["cumplimiento", "cumprimento"], ["funcionamiento", "funcionamento"],
+              ["alojamiento", "alojamento"], ["casamiento", "casamento"]] },
+
+    { id: "ia", week: 34, h: "-ía → -ia (y la fuerza en la i)",
+      body: "La **-ía** con tilde pierde la tilde y la fuerza queda donde estaba: *biología → biologia* (bi-o-lo-GI-a). Y las palabras en **-cracia**, que se escriben igual, también la llevan en la i: *democracia* = de-mo-cra-CI-a, *burocracia*, *aristocracia*.",
+      ex: [["biología", "biologia"], ["economía", "economia"]],
+      words: [["biología", "biologia"], ["geografía", "geografia"], ["economía", "economia"],
+              ["filosofía", "filosofia"], ["sociología", "sociologia"], ["tecnología", "tecnologia"],
+              ["ideología", "ideologia"], ["fotografía", "fotografia"], ["energía", "energia"],
+              ["mayoría", "maioria"], ["categoría", "categoria"], ["autonomía", "autonomia"]] },
+
+    { id: "ais", week: 36, h: "-ales / -eles / -iles → -ais / -éis / -is",
+      body: "En el plural, la **l** de *-al, -el, -il, -ol* cae: **-ales → -ais**, **-eles → -éis**, **-oles → -óis**, **-iles → -is** (*civis*). Si esa sílaba no es la fuerte, queda **-eis**: *nível → níveis*, *fácil → fáceis*. Aparece en todo texto de prensa: *direitos fundamentais*.",
+      ex: [["nacionales", "nacionais"], ["papeles", "papéis"]],
+      words: [["nacionales", "nacionais"], ["sociales", "sociais"], ["ambientales", "ambientais"],
+              ["fiscales", "fiscais"], ["federales", "federais"], ["fundamentales", "fundamentais"],
+              ["papeles", "papéis"], ["hoteles", "hotéis"], ["niveles", "níveis"], ["españoles", "espanhóis"],
+              ["civiles", "civis"], ["fáciles", "fáceis"], ["difíciles", "difíceis"], ["útiles", "úteis"]] }
   ];
 
   /* -------------------------------------------------------- falsos amigos */
 
   // Semana en que los falsos amigos entran en el recorrido.
   var FALSI_WEEK = 14;
+
+  // Los que la estación 1 ya enseña en las palabras de su semana
+  // (tools/pt/vocab/s1.py) entran al repaso desde esa semana, no desde la 14.
+  var FALSI_WEEKS = {
+    legal: 1, apelido: 1, sobrenome: 1, cadeira: 2, borracha: 2, copo: 2, garrafa: 2,
+    "calçada": 3, "prédio": 3, esquisito: 4, chato: 4, roxo: 4, "engraçado": 4,
+    acordar: 5, "escritório": 5, oficina: 5, balada: 6, ingresso: 6, "sítio": 8,
+    pegar: 9, carteira: 10, mala: 11
+  };
 
   // [portugués, lo que significa de verdad, la trampa que parece, nota]
   var FALSI = [
@@ -261,7 +311,9 @@
     ["vitamina", "licuado (de fruta con leche)", "vitamina (nutriente)", "*Uma vitamina de banana* = un licuado de banana."],
     ["batida", "cóctel de cachaça con fruta; choque", "batido (licuado)", "El licuado = *vitamina*."],
     ["bilhete", "nota, mensaje escrito", "billete (dinero)", "El billete = *nota* o *cédula*."],
-    ["legal", "copado, buena onda", "legal (según la ley)", "*Que legal!* = ¡qué bueno! También significa «legal»."]
+    ["legal", "copado, buena onda", "legal (según la ley)", "*Que legal!* = ¡qué bueno! También significa «legal»."],
+    ["prédio", "edificio", "predio (terreno)", "El terreno = *terreno*, *lote*. *Um prédio de dez andares* = un edificio de diez pisos."],
+    ["balada", "boliche, salida nocturna", "balada (canción)", "*Ir para a balada* = salir a bailar. La canción lenta = *balada* también, pero en la noche de São Paulo es el boliche."]
   ];
 
   /* ------------------------------------------------------------- capire */
@@ -274,6 +326,10 @@
   var G = ["a Ana le gusta João", "a João le gusta Ana"];
   var F = ["ya pasó", "pasa siempre (hábito)", "todavía no pasó"];
   var I = ["nós", "eles / elas / vocês", "en general (nadie en particular)"];
+  var V = ["la Bia vio al João", "el João vio a la Bia"];
+  var R = ["a la Bia le gusta el vecino", "al vecino le gusta la Bia"];
+  var H = ["no pasó", "todavía no pasó", "no se sabe si pasó"];
+  var M = ["había pasado antes", "pasó (pretérito)", "subjuntivo (se, embora, que…)"];
   var CAPIRE = [
     { id: "persona", week: 5, h: "¿Quién lo hace?",
       body: "La terminación dice quién: **-o** = eu; **-a / -e** = ele, ela y también **você**; **-amos / -emos / -imos** = nós; **-am / -em** = eles, elas y **vocês**. *A gente* (= nosotros) va con el verbo en singular.",
@@ -312,7 +368,9 @@
               ["Os filhos dele moram em Recife.", "de él"], ["Os filhos delas moram em Recife.", "de ellas"],
               ["As amigas dela são cariocas.", "de ella"], ["As amigas deles são cariocas.", "de ellos"]] },
 
-    { id: "gostar", week: 14, h: "¿A quién le gusta quién?",
+    // Semana 6: receptivo, antes de la sistematización de la 14 (los ítems
+    // en perfeito, desde la 11).
+    { id: "gostar", week: 6, h: "¿A quién le gusta quién?",
       body: "Al revés que *gustar*: en *gostar de* el sujeto es **el que siente**, y lo que gusta va después de **de** (*do, da*). Mirá quién va con *de*: esa es la persona que gusta.",
       q: "¿Qué dice la oración?",
       opts: G,
@@ -320,7 +378,7 @@
               ["Quem gosta do João é a Ana.", G[0]], ["Quem gosta da Ana é o João.", G[1]],
               ["É do João que a Ana gosta.", G[0]], ["É da Ana que o João gosta.", G[1]],
               ["Do João, a Ana gosta muito.", G[0]], ["Da Ana, o João gosta muito.", G[1]],
-              ["A Ana sempre gostou do João.", G[0]], ["O João sempre gostou da Ana.", G[1]]] },
+              ["A Ana sempre gostou do João.", G[0], 11], ["O João sempre gostou da Ana.", G[1], 11]] },
 
     { id: "tempo", week: 15, h: "¿Cuándo pasa?",
       body: "Leé el tiempo en el verbo: *comeu* = pasó y terminó; *comia* = pasaba siempre, era así; *come* = pasa ahora o siempre; *vai comer* / *comerá* = va a pasar.",
@@ -395,13 +453,160 @@
               ["É importante chegar cedo.", I[2]],
               ["Depois de estudarmos, fomos à praia.", I[0]], ["Depois de estudarem, foram à praia.", I[1]],
               ["Sem conhecermos a cidade, nos perdemos.", I[0]], ["Sem conhecerem a cidade, se perderam.", I[1]],
-              ["Estudar línguas abre portas.", I[2]], ["Viver no Rio é caro.", I[2]]] }
+              ["Estudar línguas abre portas.", I[2]], ["Viver no Rio é caro.", I[2]]] },
+
+    // Tanda 4: un set por cada tema de la temporada donde el castellano
+    // confunde quién hace qué, cuándo o si pasó.
+    { id: "objeto", week: 16, h: "¿Quién vio a quién?",
+      body: "En este set hay dos personas: la Bia y el João. **o** = a él; **a** = a ella. Ojo: *A Bia o viu* no es «a la Bia la vio»: en portugués no hay «a» delante del objeto, así que *a Bia* (con artículo) es **el sujeto**: la Bia lo vio a él. En el habla: *a Bia viu ele*.",
+      q: "¿Quién vio a quién?",
+      opts: V,
+      items: [["A Bia o viu.", V[0]], ["O João a viu.", V[1]],
+              ["A Bia viu ele.", V[0]], ["O João viu ela.", V[1]],
+              ["Ela o viu.", V[0]], ["Ele a viu.", V[1]],
+              ["A Bia, o João viu.", V[1]], ["O João, a Bia viu.", V[0]],
+              ["Ela viu o João.", V[0]], ["Ele viu a Bia.", V[1]],
+              ["Quem viu a Bia foi o João.", V[1]], ["Quem viu o João foi a Bia.", V[0]],
+              // la pasiva: desde la semana 22
+              ["A Bia foi vista pelo João.", V[1], 22], ["O João foi visto pela Bia.", V[0], 22]] },
+
+    { id: "passiva", week: 22, h: "¿Quién terminó preso?",
+      body: "En la pasiva, el que hace la acción va con **por** (*pelo, pela*); el sujeto la **recibe**: *o ladrão foi preso pelo policial* = el policía detuvo al ladrón. No te guíes por el orden: mirá *foi* + participio y *pelo / pela*.",
+      q: "¿Quién hizo la acción?",
+      opts: ["el ladrón", "el policía"],
+      items: [["O ladrão foi preso pelo policial.", "el policía"], ["O ladrão prendeu o policial.", "el ladrón"],
+              ["O policial foi enganado pelo ladrão.", "el ladrón"], ["O policial enganou o ladrão.", "el policía"],
+              ["O ladrão foi visto pelo policial.", "el policía"], ["O policial foi ferido pelo ladrão.", "el ladrón"],
+              ["O ladrão foi perseguido pelo policial.", "el policía"], ["O policial foi salvo pelo ladrão.", "el ladrón"],
+              ["O ladrão, o policial prendeu.", "el policía"], ["O policial, o ladrão empurrou.", "el ladrón"],
+              ["Foi o ladrão que empurrou o policial.", "el ladrón"], ["Foi pelo policial que o ladrão foi preso.", "el policía"]] },
+
+    { id: "relativo", week: 25, h: "¿A quién le gusta quién?",
+      body: "*gostar de* lleva su **de** también en la relativa: *o vizinho de quem a Bia gosta* = el vecino que le gusta a la Bia (ella siente). *o vizinho que gosta da Bia* = el vecino al que le gusta la Bia (él siente). Mirá dónde está el **de**: va con lo que gusta. En el habla se oye *o vizinho que a Bia gosta*, sin **de**: quiere decir lo mismo que *de quem a Bia gosta*.",
+      q: "¿Qué dice la oración?",
+      opts: R,
+      items: [["O vizinho de quem a Bia gosta mora no quinto andar.", R[0]],
+              ["O vizinho que gosta da Bia mora no quinto andar.", R[1]],
+              ["O vizinho do qual a Bia gosta é carioca.", R[0]],
+              ["O vizinho que a Bia gosta é carioca.", R[0]],
+              ["A Bia, de quem o vizinho gosta, viajou.", R[1]],
+              ["A Bia, que gosta do vizinho, viajou.", R[0]],
+              ["É da Bia que o vizinho gosta.", R[1]],
+              ["É do vizinho que a Bia gosta.", R[0]],
+              ["O vizinho, de quem a Bia tanto gosta, se mudou.", R[0]],
+              ["O vizinho, que tanto gosta da Bia, se mudou.", R[1]],
+              ["A Bia, da qual o vizinho gosta, é professora.", R[1]],
+              ["Quem gosta da Bia é o vizinho.", R[1]]] },
+
+    { id: "hipotese", week: 28, h: "¿Puede pasar o es imaginario?",
+      body: "*se* + **futuro do subjuntivo** (*vier, tiver, chover*) = algo que **puede pasar**; del otro lado, presente, futuro o imperativo. *se* + **imperfeito do subjuntivo** (*viesse, tivesse, chovesse*) = algo **imaginado**; del otro lado, condicional (*iria, faria*).",
+      q: "¿Qué presenta la oración?",
+      opts: ["algo que puede pasar", "algo imaginado"],
+      items: [["Se ele vier, a gente sai.", "algo que puede pasar"], ["Se ele viesse, a gente sairia.", "algo imaginado"],
+              ["Se chover, fico em casa.", "algo que puede pasar"], ["Se chovesse, ficaria em casa.", "algo imaginado"],
+              ["Se eu tiver tempo, te ajudo.", "algo que puede pasar"], ["Se eu tivesse tempo, te ajudaria.", "algo imaginado"],
+              ["Se vocês puderem, venham.", "algo que puede pasar"], ["Se vocês pudessem, viriam?", "algo imaginado"],
+              ["Se for preciso, eu vou.", "algo que puede pasar"], ["Se eu fosse você, aceitaria.", "algo imaginado"],
+              ["Se ganhar na loteria, ela vai viajar.", "algo que puede pasar"], ["Se ganhasse na loteria, ela viajaria.", "algo imaginado"]] },
+
+    { id: "passou", week: 30, h: "¿Pasó o no pasó?",
+      body: "*se* + **tivesse** + participio = algo que **no pasó** (lo imaginamos al revés). *quando / assim que* + **tiver** + participio = algo que **todavía no pasó**. *talvez, espero que, é possível que* + **tenha** + participio = puede que **haya pasado**: no se sabe.",
+      q: "¿Qué dice la oración?",
+      opts: H,
+      items: [["Se tivesse chovido, a festa teria acabado.", H[0]],
+              ["Quando tiver chovido bastante, as represas vão encher.", H[1]],
+              ["Talvez tenha chovido à noite.", H[2]],
+              ["Se ele tivesse estudado, teria passado.", H[0]],
+              ["Quando ele tiver estudado tudo, vai fazer a prova.", H[1]],
+              ["Espero que ele tenha estudado.", H[2]],
+              ["Se a gente tivesse saído antes, teria chegado a tempo.", H[0]],
+              ["Assim que a gente tiver saído, você fecha a porta.", H[1]],
+              ["É possível que eles já tenham saído.", H[2]],
+              ["Se eu tivesse lido o livro, saberia o final.", H[0]],
+              ["Quando você tiver lido o livro, me empresta?", H[1]],
+              ["Talvez ela já tenha lido o livro.", H[2]]] },
+
+    { id: "vigente", week: 31, h: "¿Sigue siendo así hoy?",
+      body: "En el discurso indirecto, *disse que morava* cuenta lo que era cierto **cuando lo dijo** (hoy, no se sabe). Si lo dicho **sigue valiendo hoy**, también va el presente: *disse que mora em Niterói* = todavía vive ahí.",
+      q: "¿Qué dice el que cuenta?",
+      opts: ["sigue siendo así hoy", "era así cuando lo dijo"],
+      items: [["A Bia disse que mora em Niterói.", "sigue siendo así hoy"], ["A Bia disse que morava em Niterói.", "era así cuando lo dijo"],
+              ["O João contou que trabalha num banco.", "sigue siendo así hoy"], ["O João contou que trabalhava num banco.", "era así cuando lo dijo"],
+              ["Ela falou que está grávida.", "sigue siendo así hoy"], ["Ela falou que estava grávida.", "era así cuando lo dijo"],
+              ["Eles disseram que são vegetarianos.", "sigue siendo así hoy"], ["Eles disseram que eram vegetarianos.", "era así cuando lo dijo"],
+              ["O médico afirmou que a vacina é segura.", "sigue siendo así hoy"], ["O médico afirmou que a vacina era segura.", "era así cuando lo dijo"],
+              ["Ele me disse que gosta de jazz.", "sigue siendo así hoy"], ["Ele me disse que gostava de jazz.", "era así cuando lo dijo"]] },
+
+    { id: "agente", week: 32, h: "¿Alguien concreto o nadie en particular?",
+      body: "Con sujeto (*eles roubaram*), son **unos concretos**. Sin sujeto, en tercera del plural (*roubaram meu celular*), o con **se** (*vendem-se casas*, *precisa-se de ajuda*), **no importa quién**: es el «se» o el «me robaron» del castellano.",
+      q: "¿Quién hace la acción?",
+      opts: ["unos concretos (eles)", "nadie en particular"],
+      items: [["Eles roubaram o carro.", "unos concretos (eles)"], ["Roubaram o carro.", "nadie en particular"],
+              ["Eles ligaram para você.", "unos concretos (eles)"], ["Ligaram para você.", "nadie en particular"],
+              ["Eles vendem casas.", "unos concretos (eles)"], ["Vendem-se casas.", "nadie en particular"],
+              ["Eles disseram que vai chover.", "unos concretos (eles)"], ["Dizem que vai chover.", "nadie en particular"],
+              ["Elas precisam de ajuda.", "unos concretos (eles)"], ["Precisa-se de ajuda.", "nadie en particular"],
+              ["Eles bateram na porta.", "unos concretos (eles)"], ["Bateram na porta.", "nadie en particular"],
+              ["Aqui eles consertam bicicletas.", "unos concretos (eles)"], ["Consertam-se bicicletas.", "nadie en particular"]] },
+
+    { id: "clitico", week: 33, h: "¿La carta o el director?",
+      body: "En este set hay una carta (*a carta*, femenino) y un director (*o diretor*). **-a** = la (la carta); **-o** = lo (el director, objeto directo); **-lhe** = le (al director, el que recibe). *Entregou-a ao diretor* = la entregó; *entregou-lhe a carta* = le entregó la carta.",
+      q: "¿A qué se refiere el pronombre?",
+      opts: ["a la carta", "al director"],
+      items: [["Entregou-a ao diretor.", "a la carta"], ["Entregou-lhe a carta.", "al director"],
+              ["Leu-a duas vezes.", "a la carta"], ["Viu-o na reunião.", "al director"],
+              ["Escreveu-a ontem.", "a la carta"], ["Escreveu-lhe ontem.", "al director"],
+              ["Mostrou-a ao diretor.", "a la carta"], ["Mostrou-lhe a carta.", "al director"],
+              ["Rasgou-a depois.", "a la carta"], ["Esperou-o na porta.", "al director"],
+              ["Guardou-a na gaveta.", "a la carta"], ["Agradeceu-lhe a resposta.", "al director"],
+              ["Cumprimentou-o com um aperto de mão.", "al director"]] },
+
+    { id: "assistir", week: 35, h: "¿Vio o ayudó?",
+      body: "*assistir a* (con **a**, *ao, à*) = ver, presenciar: *assistiu ao jogo*. *assistir* sin preposición = **ayudar, atender**: *o médico assistiu o paciente*. En el habla se oye *assisti o jogo*; en la norma, la **a** cambia el sentido.",
+      q: "¿Qué hizo?",
+      opts: ["vio, presenció", "ayudó, atendió"],
+      items: [["O médico assistiu o paciente.", "ayudó, atendió"], ["O médico assistiu ao jogo.", "vio, presenció"],
+              ["Assistimos ao show do Caetano.", "vio, presenció"], ["A enfermeira assiste os idosos.", "ayudó, atendió"],
+              ["Você assistiu ao filme?", "vio, presenció"], ["O advogado assiste o réu.", "ayudó, atendió"],
+              ["Milhões assistiram à final.", "vio, presenció"], ["Uma equipe assistiu as vítimas do acidente.", "ayudó, atendió"],
+              ["Ela assistiu à palestra inteira.", "vio, presenció"], ["O governo assiste as famílias atingidas pela enchente.", "ayudó, atendió"],
+              ["Assisti ao debate pela TV.", "vio, presenció"], ["Os voluntários assistiram os moradores.", "ayudó, atendió"]] },
+
+    { id: "maisqueperfeito", week: 41, h: "¿Había pasado, pasó o es subjuntivo?",
+      body: "El **-ra** portugués (*saíra, dissera, vira*) es pluscuamperfecto: «había salido». No es el «saliera» del castellano: ese es **-sse** (*saísse*), y va con *se, embora, que*. *saiu* es el pretérito simple: «salió».",
+      q: "¿Qué dice el verbo?",
+      opts: M,
+      items: [["Quando o médico chegou, o paciente já morrera.", M[0]],
+              ["Quando o médico chegou, o paciente morreu.", M[1]],
+              ["Se o médico chegasse antes, o paciente viveria.", M[2]],
+              ["Ela já saíra quando o telefone tocou.", M[0]],
+              ["Ela saiu quando o telefone tocou.", M[1]],
+              ["Embora ela saísse cedo, chegava atrasada.", M[2]],
+              ["Ele dissera que viria.", M[0]],
+              ["Ele disse que viria.", M[1]],
+              ["Pediu que ele dissesse a verdade.", M[2]],
+              ["O autor contou o que vira na guerra.", M[0]],
+              ["O autor contou o que viu na guerra.", M[1]],
+              ["Se o autor visse a guerra, não escreveria assim.", M[2]]] },
+
+    { id: "variante", week: 46, h: "¿Brasil o Portugal?",
+      body: "Las pistas más rápidas: *estar a* + infinitivo (PT) o gerundio (BR); *tu* con verbo en *-s* (PT) o *você* (BR); y el léxico: *autocarro / ônibus*, *comboio / trem*, *telemóvel / celular*, *pequeno-almoço / café da manhã*, *apanhar / pegar*, *fixe / legal*, *facto / fato*.",
+      q: "¿De dónde es la frase?",
+      opts: ["Brasil", "Portugal"],
+      items: [["Estás a ver o jogo?", "Portugal"], ["Você está vendo o jogo?", "Brasil"],
+              ["Apanhei o autocarro no Rossio.", "Portugal"], ["Peguei o ônibus na Rodoviária.", "Brasil"],
+              ["O meu telemóvel morreu.", "Portugal"], ["Meu celular morreu.", "Brasil"],
+              ["Vou tomar o pequeno-almoço.", "Portugal"], ["Vou tomar café da manhã.", "Brasil"],
+              ["O comboio para o Porto está atrasado.", "Portugal"], ["O trem para Petrópolis está atrasado.", "Brasil"],
+              ["Que fixe, pá!", "Portugal"], ["Que legal, cara!", "Brasil"],
+              ["O facto é que ninguém sabia.", "Portugal"], ["O fato é que ninguém sabia.", "Brasil"]] }
   ];
 
   root.LAB_DATA = {
     RULES: RULES,
     FALSI: FALSI,
     FALSI_WEEK: FALSI_WEEK,
+    FALSI_WEEKS: FALSI_WEEKS,
     CAPIRE: CAPIRE,
     ui: { ponte: "Pasalo al portugués", falsi: "¿Qué significa en portugués?" }
   };

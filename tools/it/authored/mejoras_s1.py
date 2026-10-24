@@ -32,7 +32,7 @@ ITEMS = [
          note="Gerundio irregular: sale de la raíz larga bevere → bevendo."),
     dict(id="mj-06-07", type="choice", topic="no diptongación", level="A1", w=6, prompt=CE,
          stem="Stasera non ___ venire.", options=["posso", "puosso", "poso"], answer="posso",
-         note="El italiano no diptonga: posso, no «puedo». La doble s es parte de la forma."),
+         note="Acá el italiano no diptonga como el castellano: posso, no «puedo». La doble s es parte de la forma."),
     dict(id="mj-06-08", type="fixerr", topic="no diptongación", level="A1", w=6, prompt=FX, cat="dittongo",
          stem="Io duermo poco la notte.", bad="duermo", good="dormo",
          answer="Io dormo poco la notte.",

@@ -1925,6 +1925,13 @@
       var weak = Drills.weakItems(course, w, state, itemMap).length;
       m({ kind: "debil", done: !!(state.weakDone || {})[w.week], ico: "🩹", opt: true, title: "Tus puntos débiles",
           sub: weak ? "Opcional · " + weak + " ejercicios de la estación que fallaste o casi no viste" : "Opcional · no fallaste nada todavía: repaso al azar" });
+      // a boss with a text of its own (pt 26: listen and answer, Scrivi `ouvir`)
+      if (window.Scrivi && Scrivi.TASKS[w.week]) {
+        var sdB = (state.scritti || {})[w.week];
+        m({ kind: "scrivi", done: !!sdB, ico: "✍️", title: UI.scrivi + ": tarea integrada",
+            sub: sdB ? "Entregado · " + sdB.n + " palabras" : (Scrivi.TASKS[w.week].ouvir ? "Escuchá el audio y contestá · " : "") +
+              Scrivi.TASKS[w.week].min + " palabras o más" });
+      }
       if (w.week === 52 && window.EsameData) m({ kind: "play", done: st.bossPassed, ico: "🎓", title: UI.examC1,
           sub: EX.missionSub, cls: "boss" });
       else m({ kind: "play", done: st.bossPassed, ico: "⚔️", title: "Vencé al " + UI.boss,
@@ -6700,7 +6707,11 @@
     var grid = window.Grilla && Grilla.active(w.week, task);
     return '<button class="btn ghost" id="sback">← a la semana</button>' +
       plate(UI.scrivi + " · " + UI.week + " " + weekNum(w.week), esc(w.fare || w.title)) +
-      '<div class="card"><p>' + mk(task.t) + '</p><ul class="reqs" id="sreqs">' + reqsHtml(r) + "</ul>" +
+      '<div class="card"><p>' + mk(task.t) + "</p>" +
+      // the input of an integrated task (the audio the text answers)
+      (task.ouvir ? '<div class="row"><button class="tab" id="souvir">🔊 Escuchá el audio</button>' +
+        '<button class="tab" id="souvirl">🐢 más lento</button></div>' : "") +
+      '<ul class="reqs" id="sreqs">' + reqsHtml(r) + "</ul>" +
       '<p class="muted small">Escribí sin traductor: lo que te equivoques es lo que más vas a aprender. Podés dejarlo a medias y volver.</p></div>' +
       (grid ? Grilla.gridHtml(w.week) : "") +
       '<textarea id="stext" class="grow scrivi" rows="7" spellcheck="false" autocapitalize="sentences" placeholder="' + UI.scriviIn + '">' + esc(draft) + "</textarea>" +
@@ -6834,6 +6845,9 @@
     if (view.screen !== "scrivi") return;
     var w = course.weeks[view.week - 1], box = $("#stext");
     on("#sback", function () { view.screen = "briefing"; render(); window.scrollTo(0, 0); });
+    var ouvir = (Scrivi.TASKS[w.week] || {}).ouvir;
+    on("#souvir", function () { speak(ouvir, true); });
+    on("#souvirl", function () { speak(ouvir, true, 0.7); });
     ["tre", "rif"].forEach(function (m) {   // escritura_plus.js
       on("#ep" + m, function () { EscrituraPlus.start(m, w.week); view.screen = "eplus"; render(); window.scrollTo(0, 0); });
     });

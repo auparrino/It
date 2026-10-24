@@ -4,6 +4,8 @@
  * è in tools/it/authored/esame_c1.py: ogni item porta «ver» ("A" | "B" | "C").
  * Tutto in italiano: domande, opzioni e consegne del testo; le consegne della
  * scrittura restano in castellano, come le altre consegne dell'app.
+ * Il formato è quello del CELI 4 (C1): due scritture lunghe, 230-280 e
+ * 160-200 parole.  Il CILS TRE-C1 ne chiede meno (160-180 + 100-120).
  *
  * FORMA DEI DATI (per la schermata dell'esame in app.js)
  *

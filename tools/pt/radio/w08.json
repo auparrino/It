@@ -3,7 +3,7 @@
  "level": "A1",
  "title": "Sábado no Aterro",
  "genre": "entrada ao vivo",
- "es": "Sábado a la mañana: Caio, el cronista en bicicleta de la radio, está en el Aterro do Flamengo. Nanda le pregunta qué está haciendo la gente y qué va a hacer él el resto del fin de semana.",
+ "es": "Sábado a la mañana: Caio, el reportero en bicicleta de la radio, está en el Aterro do Flamengo. Nanda le pregunta qué está haciendo la gente y qué va a hacer él el resto del fin de semana.",
  "speakers": ["Nanda", "Caio"],
  "turns": [
   ["A", "Agora, o Caio, nosso repórter de bicicleta. Caio, onde você está?"],
@@ -19,7 +19,7 @@
   ["A", "Vou pensar. E vocês, ouvintes: o que estão fazendo agora? E o que vão fazer no fim de semana? Já, já tem música!"]
  ],
  "gloss": {
-  "repórter": "cronista, periodista",
+  "repórter": "reportero, periodista",
   "grama": "pasto (el césped)",
   "água de coco": "agua de coco",
   "Ninguém é de ferro": "nadie es de fierro (hay que darse un gusto)",

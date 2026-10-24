@@ -3902,7 +3902,7 @@
      "Rádio Vale Notícias, boa tarde. O principal assunto de hoje em Itajubá é o fechamento da última banca de jornal do centro.",
      "A banca do seu Aristides, na praça da matriz, funcionou por 42 anos. Ontem, ele contou à nossa reportagem que vendia mais de 300 jornais por dia nos anos 90 e que hoje vende menos de 20. Disse que ia fechar no fim do mês porque o aluguel do ponto tinha subido de novo.",
      "A prefeitura informou que estudava uma forma de manter a banca aberta como ponto de troca de livros. O secretário de Cultura, Renato Brandão, afirmou que a decisão seria tomada até sexta-feira e pediu que os moradores mandassem sugestões pelo site da prefeitura.",
-     "Seu Aristides agradeceu o apoio dos clientes e disse que, se a banca virar ponto de troca, quer continuar trabalhando lá como voluntário."
+     "Seu Aristides agradeceu o apoio dos clientes e disse que, se a banca virasse ponto de troca, queria continuar trabalhando lá como voluntário."
     ],
     "tabella": [
      [

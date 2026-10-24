@@ -77,17 +77,18 @@ def cb(w, p, stem, answer, alt, note):
 # ===========================================================================
 W = 40
 ch(W, 0, "A ___ dos dados do censo levou meses.",
-   ["análise", "analisação", "analisamento"], "análise",
-   "analisar → a análise, sin sufijo -ção ni -mento, y femenino: a análise.")
-ch(W, 0, "O ___ da passagem de ônibus provocou os protestos de 2013.",
-   ["aumento", "aumentamento", "aumentação"], "aumento",
-   "aumentar → o aumento. Las Jornadas de Junho de 2013 empezaron contra una suba del boleto.")
-ch(W, 0, "A ___ da Lei Áurea, em 13 de maio de 1888, aboliu a escravidão.",
-   ["assinatura", "assinação", "assinamento"], "assinatura",
-   "assinar → a assinatura (la firma). La Lei Áurea la firmó la princesa Isabel.")
-ch(W, 0, "A ___ da capital do Rio para Brasília aconteceu em 1960.",
-   ["transferência", "transferimento", "transferição"], "transferência",
-   "transferir → a transferência (-ência, femenino). Brasília se inauguró el 21 de abril de 1960.")
+   ["análise", "analise", "análises"], "análise",
+   "analisar → a análise, sin sufijo -ção ni -mento, femenina y con tilde (a-NÁ-li-se). *Analise*, sin "
+   "tilde, es el verbo (*que ele analise*); y con *a* y *levou*, singular.")
+cl(W, 0, "O ___ (aumentar) da passagem de ônibus provocou os protestos de 2013.", "aumento",
+   "aumentar → o aumento, sin sufijo (no «aumentação»). Las Jornadas de Junho de 2013 empezaron contra una suba del boleto.",
+   prompt="Completá con la forma correcta de la palabra entre paréntesis.")
+cl(W, 0, "A ___ (assinar) da Lei Áurea, em 13 de maio de 1888, aboliu a escravidão.", "assinatura",
+   "assinar → a assinatura (la firma), con -tura (no «assinação»). La Lei Áurea la firmó la princesa Isabel.",
+   prompt="Completá con la forma correcta de la palabra entre paréntesis.")
+cl(W, 0, "A ___ (transferir) da capital do Rio para Brasília aconteceu em 1960.", "transferência",
+   "transferir → a transferência (-ência, femenino, con circunflejo). Brasília se inauguró el 21 de abril de 1960.",
+   prompt="Completá con la forma correcta de la palabra entre paréntesis.")
 ch(W, 0, "Houve ___ nas vendas do comércio carioca em janeiro.",
    ["uma queda", "uma caída", "um caimento"], "uma queda",
    "cair → a queda. Para una baja de precios o de ventas se dice *queda*; *caída* existe, pero casi no se usa.")
@@ -247,9 +248,10 @@ W = 41
 ch(W, 0, "Quando a polícia chegou, o ladrão já ___.",
    ["fugira", "fugisse", "fugiria"], "fugira",
    "fugira = tinha fugido (había huido): mais-que-perfeito, indicativo. fugisse es subjuntivo.")
-ch(W, 0, "Nós já ___ a reserva quando o voo foi cancelado.",
-   ["fizéramos", "fizeramos", "fizéssemos"], "fizéramos",
-   "La 1.ª plural del mais-que-perfeito lleva tilde: fizéramos, fôramos, estivéramos.")
+ch(W, 0, "«Nós já fizéramos a reserva quando o voo foi cancelado.» Quando vocês fizeram a reserva?",
+   ["antes do cancelamento", "depois do cancelamento", "não fizeram a reserva"], "antes do cancelamento",
+   "*Fizéramos* = *tínhamos feito* (habíamos hecho): la reserva es anterior a la cancelación. No es "
+   "subjuntivo («hiciéramos» sería *fizéssemos*).", prompt="Leia e responda.")
 ch(W, 0, "Ela contou que o avô ___ em Trás-os-Montes.",
    ["nascera", "nascesse", "nacera"], "nascera",
    "nasceram → nascera (había nacido). Ojo con la grafía: nascer, con sc.")
@@ -372,9 +374,10 @@ fx(W, 2, "Tomara que você vem ao ensaio da Mangueira.", "vem", "venha", "subjun
 fx(W, 1, "Quando cheguei, o filme já tem começado.", "tem começado", "tinha começado", "tempo",
    "Para lo anterior a otro pasado: tinha começado. tem começado sería una acción repetida hasta hoy.")
 
-gd(W, 0, [["fizeram", "fizera"], ["disseram", "dissera"], ["tiveram", "tivera"]],
-   "estiveram → (nós) ___", "estivéramos", "estiveramos",
-   "La 1.ª plural del mais-que-perfeito es esdrújula y lleva tilde: estivéramos, fizéramos, disséramos.")
+ch(W, 0, "«Ela me contou que fora ao médico na véspera.» «Fora» vem de…",
+   ["ir: tinha ido", "ser: tinha sido", "fora: lá fora"], "ir: tinha ido",
+   "*Fora* es el mais-que-perfeito de *ir* y de *ser* (foram → fora). Con *ao médico* (un destino) es "
+   "*ir*: *tinha ido*. No es el adverbio *fora* (afuera).", prompt="Leia e responda.")
 gd(W, 0, [["falaram", "falara"], ["comeram", "comera"], ["partiram", "partira"]],
    "puseram → ___", "pusera", "pusiera",
    "La raíz sale del perfeito portugués: puseram → pusera. «Pusiera» es el subjuntivo español.")
@@ -402,8 +405,10 @@ sc(W, 2, ["Era uma noite quente.", "Joana abriu a janela.", "Ninguém dormira al
 
 ty(W, 0, "Escribí el mais-que-perfeito simples (3.ª persona singular).", "ver → ele ___", "vira",
    "viram → vira (había visto). Ojo: vira también es «da vuelta», de virar.")
-ty(W, 0, "Escribí el mais-que-perfeito simples (1.ª persona plural).", "ser → nós ___", "fôramos",
-   "foram → fôramos, con circunflejo en la 1.ª plural.")
+ch(W, 0, "«Quando a guerra acabou, nós já fôramos embora.» = Nós já ___ embora.",
+   ["tínhamos ido", "fôssemos", "iríamos"], "tínhamos ido",
+   "*Fôramos* (de *ir*) = *tínhamos ido*: nos habíamos ido antes del final de la guerra. *Fôssemos* "
+   "es subjuntivo («fuéramos») e *iríamos*, condicional.", prompt="Elegí la equivalencia.")
 
 cb(W, 1, "Pombal reconstruiu a Baixa. O terremoto de 1755 tinha destruído a Baixa. (que)",
    "Pombal reconstruiu a Baixa que o terremoto de 1755 tinha destruído.",
@@ -434,11 +439,11 @@ ch(W, 0, "___ ao Arpoador, vimos o pôr do sol.",
    ["Chegando", "Chegado", "Chegar"], "Chegando",
    "Gerundio con valor temporal: chegando = cuando llegamos.")
 ch(W, 0, "___ Os Lusíadas, a gente entende a obsessão portuguesa pelo mar.",
-   ["Lendo", "Leyendo", "Lido"], "Lendo",
-   "ler → lendo, sin la y del español. Os Lusíadas (1572), de Camões, cantan el viaje de Vasco da Gama.")
+   ["Lendo", "Ao lendo", "Lido"], "Lendo",
+   "ler → lendo, sin la y del español. *Ao* va con infinitivo (*ao ler*), nunca con gerundio. Os Lusíadas (1572), de Camões, cantan el viaje de Vasco da Gama.")
 ch(W, 0, "___ o livro na mesa, ele saiu sem dizer nada.",
-   ["Pondo", "Poniendo", "Pôndo"], "Pondo",
-   "pôr → pondo, sin tilde y sin la -ni- del español.")
+   ["Pondo", "Ponhando", "Pôndo"], "Pondo",
+   "pôr → pondo, sin tilde (la de *pôr* no pasa al gerundio) y sin la -nh- de *ponho*.")
 ch(W, 0, "Ao ___ ao Rio, em 1808, D. João criou o Jardim Botânico.",
    ["chegar", "chegando", "chegado"], "chegar",
    "ao + infinitivo = al + infinitivo. El Jardim Botânico se fundó en 1808, el año de la llegada de la corte.")
@@ -455,8 +460,9 @@ ch(W, 1, "___ as contas, vimos que a viagem era cara.",
    ["Feitas", "Feito", "Fazidas"], "Feitas",
    "fazer → feito, y concuerda con as contas: feitas.")
 ch(W, 1, "___ o boleto, a matrícula é confirmada.",
-   ["Pago", "Pagado", "Pagada"], "Pago",
-   "Con ser/estar y en la reducida se usa el participio corto: pago.")
+   ["Pago", "Pagado", "Paga"], "Pago",
+   "Con ser/estar y en la reducida se usa el participio corto, concordado con *o boleto*: pago. "
+   "*Paga* sería para un femenino (*paga a conta*).")
 ch(W, 1, "___ as inscrições, a fila chegou à esquina.",
    ["Abertas", "Aberto", "Abrindo"], "Abertas",
    "abrir → aberto, concordado con as inscrições: abertas.")
@@ -766,43 +772,46 @@ cb(W, 2, "Recebi sua solicitação. Informo que ela foi deferida. (em relação 
 # 2 diminutivos y aumentativos · 3 formá la palabra (producir)
 # ===========================================================================
 W = 44
-ch(W, 0, "A ___ do Rio impressionou Stefan Zweig, que escreveu «Brasil, país do futuro».",
-   ["beleza", "belidade", "belice"], "beleza",
-   "belo → a beleza (-eza). Zweig publicó ese libro en 1941 y vivió sus últimos meses en Petrópolis.")
-ch(W, 0, "Que ___ esse discurso de duas horas!",
-   ["chatice", "chateza", "chatidade"], "chatice",
-   "chato → a chatice: -ice es el sufijo típico para lo molesto o lo tonto (burrice, criancice).")
-ch(W, 0, "Para Sérgio Buarque, a ___ é um traço do brasileiro.",
-   ["cordialidade", "cordialeza", "cordialice"], "cordialidade",
-   "El sufijo *-dade* corresponde a nuestro «-dad»: *cordial* da *a cordialidade*. En Raízes do Brasil, «cordial» viene de *cor*, corazón.")
-ch(W, 0, "A ___ de uma língua estrangeira exige paciência.",
-   ["aprendizagem", "aprendizaje", "aprendimento"], "aprendizagem",
-   "-aje → -agem, y femenino: a aprendizagem.")
-ch(W, 0, "O ___ é a crença na volta de D. Sebastião.",
-   ["sebastianismo", "sebastianidade", "sebastianice"], "sebastianismo",
-   "-ismo forma doctrinas y movimientos: sebastianismo, modernismo, coronelismo.")
+PF = "Completá con la forma correcta de la palabra entre paréntesis."
+cl(W, 0, "A ___ (largo) da Avenida Presidente Vargas impressiona: são várias pistas de cada lado.",
+   "largura",
+   "-ura forma medidas y cualidades: largo (ancho) → a largura (el ancho), alto → a altura, gordo → a "
+   "gordura. Ojo: *largura* es el ancho, no el largo (*o comprimento*).", prompt=PF)
+cl(W, 0, "Que ___ (chato) esse discurso de duas horas!", "chatice",
+   "chato → a chatice: -ice es el sufijo típico para lo molesto o lo tonto (burrice, criancice).",
+   prompt=PF)
+cl(W, 0, "Para Sérgio Buarque, a ___ (cordial) é um traço do brasileiro.", "cordialidade",
+   "El sufijo *-dade* corresponde a nuestro «-dad»: *cordial* da *a cordialidade*. En Raízes do Brasil, «cordial» viene de *cor*, corazón.",
+   prompt=PF)
+cl(W, 0, "A ___ (independente) do Brasil foi proclamada em 1822.", "independência",
+   "Adjetivo en -ente → sustantivo en -ência: independente → a independência (con circunflejo), "
+   "paciente → a paciência. Femenino, como en español.", prompt=PF)
+cl(W, 0, "O ___ (sebastianista), a crença na volta de D. Sebastião, inspirou a Mensagem, de Pessoa.",
+   "sebastianismo",
+   "-ista nombra al seguidor; -ismo, la doctrina o el movimiento: sebastianista → o sebastianismo, "
+   "como modernista → modernismo.", prompt=PF)
 ch(W, 1, "O pneu furou; procure um ___ na estrada.",
-   ["borracheiro", "gomero", "borrachista"], "borracheiro",
-   "borracha (caucho) → borracheiro, el gomero: -eiro nombra oficios.")
+   ["borracheiro", "borracharia", "borrachudo"], "borracheiro",
+   "borracha (caucho) → o borracheiro, el gomero: -eiro nombra oficios. *A borracharia* es el taller "
+   "(femenino: no va con *um*), y *borrachudo* es un mosquito.")
 ch(W, 1, "Na esquina, o ___ vende pão quentinho às seis da manhã.",
    ["padeiro", "panadeiro", "pãozeiro"], "padeiro",
    "pão → padeiro (del latín panis → pad-).")
-ch(W, 1, "Dá uma ___ nesse poema de Drummond.",
-   ["olhada", "olhação", "olhamento"], "olhada",
-   "dar uma olhada = echar un vistazo: -ada forma gestos y golpes.")
-ch(W, 1, "Estou fazendo ___ em História na UFF.",
-   ["pós-graduação", "posgraduação", "pósgraduação"], "pós-graduação",
-   "pós- tónico va con tilde y guion: pós-graduação.")
-ch(W, 1, "O editor pediu para eu ___ o texto inteiro.",
-   ["refazer", "rehacer", "re-fazer"], "refazer",
+cl(W, 1, "Domingo tem ___ (feijão) na casa da Dona Lúcia.", "feijoada",
+   "-ada también nombra platos: feijão → a feijoada, coco → a cocada. La *ã* de *feijão* se vuelve *o*.",
+   prompt=PF)
+cl(W, 0, "A ___ (rápido) do atendimento surpreendeu os turistas.", "rapidez",
+   "-ez forma cualidades, igual que en español: rápido → a rapidez, tímido → a timidez. Femenino.",
+   prompt=PF)
+cl(W, 1, "O editor pediu para eu ___ (fazer de novo) o texto inteiro.", "refazer",
    "re- se pega sin guion: refazer, reler, reabrir.")
 ch(W, 2, "Vamos tomar um ___ na padaria?",
-   ["cafezinho", "cafeinho", "cafecito"], "cafezinho",
-   "Tras vocal tónica (café) va -zinho: cafezinho.")
-ch(W, 2, "De manhã comprei seis ___ na padaria.",
-   ["pãezinhos", "pãozinhos", "pãoezinhos"], "pãezinhos",
-   "En la norma, el plural del diminutivo pluraliza la base: pães → pãezinhos. En el habla se oye «pãozinhos».",
-   prompt="Elegí la forma de la norma culta.")
+   ["cafezinho", "cafézinho", "cafeinho"], "cafezinho",
+   "Tras vocal tónica (café) va -zinho, y la tilde se pierde: cafezinho (✗cafézinho). «Cafeinho» "
+   "aplica la regla de las palabras en vocal átona.")
+cl(W, 0, "O estilo ___ (Machado de Assis) é cheio de ironia.", "machadiano",
+   "Para autores, -iano: Machado → machadiano, Guimarães Rosa → rosiano. Va en minúscula y concuerda: "
+   "*a ironia machadiana*.", prompt=PF)
 
 cl(W, 0, "A ___ (triste) do fado é famosa no mundo todo.", "tristeza",
    "triste → a tristeza (-eza). El fado es patrimonio inmaterial de la UNESCO desde 2011.")
@@ -955,8 +964,7 @@ W = 45
 ch(W, 0, "O bacalhau estava ___! Parabéns ao cozinheiro.",
    ["delicioso", "esquisito", "exquisito"], "delicioso",
    "esquisito significa raro. «Exquisito» se dice delicioso o gostoso.")
-ch(W, 0, "No Mercado do Bolhão, no Porto, comprei ___ para o almoço.",
-   ["polvo", "pulpo", "pó"], "polvo",
+cl(W, 0, "No Mercado do Bolhão, no Porto, comprei ___ (pulpo) para o almoço.", "polvo",
    "Falso amigo: *polvo* es «pulpo». El polvo del español se dice *pó* o *poeira*.")
 ch(W, 0, "Me empresta a ___? Errei uma palavra.",
    ["borracha", "goma", "apagadora"], "borracha",
@@ -979,8 +987,7 @@ ch(W, 1, "Garçom, me traz um ___ d'água, por favor.",
 ch(W, 1, "Deixei o carro na ___ para trocar o óleo.",
    ["oficina", "escritório", "ofício"], "oficina",
    "Falso amigo: *oficina* es el «taller» mecánico. La oficina donde se trabaja es el *escritório*.")
-ch(W, 1, "Depois do jantar, pedimos ___: pudim de leite.",
-   ["sobremesa", "postre", "sobrejantar"], "sobremesa",
+cl(W, 1, "Depois do jantar, pedimos ___ (postre): pudim de leite.", "sobremesa",
    "Falso amigo: *sobremesa* es el «postre», no la charla después de comer.")
 ch(W, 2, "___ leite está ___.",
    ["O / frio", "A / fria", "O / fria"], "O / frio",
@@ -1137,25 +1144,29 @@ ch(W, 1, "Em Minas, «___» pode significar «cosa»: «que ___ é esse?».",
 ch(W, 1, "(Porto Alegre) Bah, ___ viste o jogo do Grêmio?",
    ["tu", "vós", "te"], "tu",
    "En el Sur se usa tu como pronombre de 2.ª persona.")
-ch(W, 2, "Mia Couto, autor de Terra Sonâmbula, é de ___.",
-   ["Moçambique", "Angola", "Cabo Verde"], "Moçambique",
-   "Mia Couto nació en Beira, Mozambique, en 1955; ganó el Prêmio Camões en 2013.")
+ch(W, 0, "«Estás a ver o jogo? Depois vou apanhar o autocarro.» De onde é essa fala?",
+   ["de Portugal", "do Brasil", "do Rio Grande do Sul"], "de Portugal",
+   "Tres pistas europeas: *tu* con su verbo (*estás*), *estar a* + infinitivo (*a ver*) y el léxico "
+   "(*apanhar*, *autocarro*). En el Sur de Brasil se usa *tu*, pero se dice *tá vendo o jogo?* y "
+   "*pegar o ônibus*.", prompt="Leia e responda.")
 ch(W, 2, "Tenho uma ___ ótima para o fim de semana.",
    ["ideia", "idéia", "idea"], "ideia",
-   "Desde el Acuerdo de 1990, ideia se escribe sin tilde en Brasil y en Portugal.",
+   "Desde el Acuerdo Ortográfico (en Brasil, vigente desde 2009 y obligatorio desde 2016), ideia se escribe sin tilde en Brasil y en Portugal.",
    prompt="Elegí la grafía brasileña actual.")
 ch(W, 2, "No Brasil se escreve «___» (hecho); em Portugal, «facto».",
    ["fato", "facto", "feito"], "fato",
    "fato (BR) / facto (PT). En Portugal, fato además es «traje».")
 
-cl(W, 0, "(PT) Estou ___ (ler) um livro de Eça de Queirós.", "a ler",
-   "Portugal: estar a + infinitivo. Eça escribió Os Maias (1888).")
+cl(W, 0, "(PT) «Ela está a dormir.» → (BR) «Ela está ___.»", "dormindo",
+   "Lo que en Portugal es *estar a* + infinitivo (*está a dormir*), en Brasil es *estar* + gerundio: "
+   "*está dormindo*.")
 cl(W, 0, "(BR) Estou ___ (ler) Os Maias.", "lendo",
    "Brasil: estar + gerundio.")
 cl(W, 0, "No Brasil, «suco»; em Portugal, «___».", "sumo",
    "Brasil y Portugal difieren: la bebida es *suco* en Brasil y *sumo* en Portugal. En Brasil, *sumo* es el jugo que se exprime (*o sumo do limão*) y también *eu sumo* (de *sumir*).")
-cl(W, 0, "(PT) O ___ (tren) para o Porto sai às nove.", "comboio",
-   "El tren es *trem* en Brasil y *comboio* en Portugal. En Brasil *comboio* es solo una caravana de vehículos.")
+cl(W, 0, "(PT) «Apanhei o comboio para o Porto.» → (BR) «Peguei o ___ para o Porto.»", "trem",
+   "El tren es *comboio* en Portugal y *trem* en Brasil; *apanhar* (PT) es *pegar* (BR). En Brasil "
+   "*comboio* es solo una caravana de vehículos.")
 cl(W, 1, "(Nordeste) ___, que calor!", "Oxente",
    "oxente (u oxe) es la interjección nordestina de sorpresa.", alt=["Oxe", "Ôxe"])
 cl(W, 1, "(Minas) ___, cadê o pão de queijo?", "Uai",
@@ -1166,27 +1177,29 @@ cl(W, 1, "No Rio, «mesmo» soa «meshmo»: é o ___ carioca.", "chiado",
    "El chiado: la s ante consonante o al final suena «sh», como en Lisboa.")
 cl(W, 2, "Em Angola, «___» quer dizer «muito».", "bué",
    "bué viene de Angola y hoy lo usan los jóvenes de Lisboa.")
-cl(W, 2, "Pessoa, como Bernardo Soares, escreveu: «Minha pátria é a língua ___».", "portuguesa",
-   "La frase está en el Livro do Desassossego, atribuido al semi-heterónimo Bernardo Soares.")
+cl(W, 2, "Em Angola, «apanhar o machimbombo» é, no Brasil, «pegar o ___».", "ônibus",
+   "*Machimbombo* es el colectivo en Angola y Mozambique; en Portugal, *autocarro*; en Brasil, *ônibus*.")
 cl(W, 2, "Antes do Acordo Ortográfico se escrevia «vôo»; hoje se escreve «___».", "voo",
    "El Acuerdo eliminó el circunflejo de voo, enjoo, leem, veem.")
-cl(W, 2, "Cafuné, caçula e moleque são palavras de origem ___.", "banta",
-   "Vienen de lenguas bantúes (sobre todo el quimbundo), traídas por africanos esclavizados.",
-   alt=["banto", "bantu", "africana"])
+cl(W, 2, "Em Angola, «isso é bué fixe» quer dizer, no Brasil, «isso é muito ___».", "legal",
+   "*Bué* (muy, mucho) viene de Angola; *fixe* (copado) es de Portugal. En Brasil: *muito legal*.",
+   alt=["bom", "bacana", "massa", "maneiro", "da hora"])
 
 tr(W, 0, "(Brasil) ¿Qué estás haciendo?", "O que você está fazendo?",
    ["O que você tá fazendo", "Você está fazendo o quê", "Que você está fazendo",
     "O que está fazendo", "O que é que você está fazendo", "O que cê tá fazendo"],
    "Brasil: você + estar + gerundio.")
-tr(W, 0, "(Portugal) ¿Qué estás haciendo?", "O que estás a fazer?",
-   ["Que estás a fazer", "O que é que estás a fazer", "O que tu estás a fazer",
-    "Tu estás a fazer o quê", "Estás a fazer o quê"],
-   "Portugal: tu (o sin pronombre) + estar a + infinitivo.")
-tr(W, 0, "Tomé el tren de Lisboa a Coimbra.", "Apanhei o comboio de Lisboa para Coimbra.",
-   ["Apanhei o comboio de Lisboa a Coimbra", "Eu apanhei o comboio de Lisboa para Coimbra",
-    "Apanhei o comboio de Lisboa até Coimbra"],
-   "En Portugal: apanhar (tomar) o comboio (el tren).",
-   prompt="Traducí al portugués de Portugal.")
+tr(W, 0, "(PT) O que estás a fazer?", "O que você está fazendo?",
+   ["O que você tá fazendo", "Você está fazendo o quê", "O que é que você está fazendo",
+    "O que está fazendo", "O que cê tá fazendo", "Que você está fazendo"],
+   "Para pasar de Portugal a Brasil: *tu estás* → *você está* y *a fazer* → *fazendo*.",
+   prompt="Como se diz isto no Brasil?")
+tr(W, 0, "(PT) Apanhei o comboio de Lisboa para Coimbra.", "Peguei o trem de Lisboa para Coimbra.",
+   ["Eu peguei o trem de Lisboa para Coimbra", "Peguei o trem de Lisboa até Coimbra",
+    "Peguei o trem de Lisboa pra Coimbra", "Tomei o trem de Lisboa para Coimbra",
+    "Eu peguei o trem de Lisboa até Coimbra"],
+   "*Apanhar* (PT) = *pegar* (BR), y *o comboio* = *o trem*. La frase se entiende igual: cambia el léxico.",
+   prompt="Como se diz isto no Brasil?")
 tr(W, 0, "Se me murió el celular.", "Meu celular morreu.",
    ["O meu celular morreu", "Meu celular descarregou", "O meu celular descarregou",
     "Acabou a bateria do meu celular"],
@@ -1224,12 +1237,14 @@ fx(W, 1, "Tu vai receber a resposta amanhã.", "Tu vai", "Você vai", "persona",
    goodAlt=["Tu vais"])
 ITEMS[-1].update(prompt="Texto formal. " + FX)
 
-gd(W, 0, [["me diz", "diz-me"], ["me ajuda", "ajuda-me"], ["te conto", "conto-te"]],
-   "não me diz → (PT) ___", "não me diz", "não diz-me",
-   "También en Portugal la negación atrae al pronombre: não me diz. La ênclise no es automática.")
-gd(W, 0, [["estou comendo", "estou a comer"], ["está falando", "está a falar"], ["estamos lendo", "estamos a ler"]],
-   "estão pondo → ___", "estão a pôr", "estão a pondo",
-   "Portugal cambia el gerundio por a + infinitivo: pondo → a pôr.")
+gd(W, 0, [["(PT) diz-me", "(BR) me diz"], ["(PT) ajuda-me", "(BR) me ajuda"], ["(PT) conto-te", "(BR) te conto"]],
+   "(PT) dá-me → (BR) ___", "me dá", "dá-me",
+   "En la charla de Brasil el pronombre va delante del verbo, aun al principio: *me dá*. *Dá-me* "
+   "suena a Portugal (o a texto muy formal).")
+gd(W, 0, [["(PT) estou a comer", "(BR) estou comendo"], ["(PT) está a falar", "(BR) está falando"],
+          ["(PT) estamos a ler", "(BR) estamos lendo"]],
+   "(PT) estão a pôr → (BR) ___", "estão pondo", "estão ponhando",
+   "*A* + infinitivo pasa a gerundio: *a pôr* → *pondo* (sin tilde y sin la -nh- de *ponho*).")
 gd(W, 2, [["econômico (BR)", "económico (PT)"], ["gênero (BR)", "género (PT)"], ["Antônio (BR)", "António (PT)"]],
    "ideia (BR) → ___ (PT)", "ideia", "idéia",
    "Hay tildes distintas entre variedades, pero ideia se escribe igual en las dos desde el Acuerdo Ortográfico.")
@@ -1251,8 +1266,8 @@ sc(W, 1, ["Rio: aipim", "Nordeste: macaxeira", "São Paulo: mandioca", "Sul: gur
    "El léxico varía por región dentro de Brasil.",
    "Brasil es enorme: el léxico cotidiano cambia de región a región sin que ninguna forma sea un error.")
 
-ty(W, 0, "Escribí la palabra de Portugal para «ônibus».", "___", "autocarro",
-   "El colectivo es *ônibus* en Brasil y *autocarro* en Portugal. El metro es *metrô* en Brasil y *metro* en Portugal.")
+ty(W, 0, "Qual é a palavra do Brasil para «autocarro»?", "___", "ônibus",
+   "El colectivo es *autocarro* en Portugal y *ônibus* en Brasil (con circunflejo). El metro es *metro* en Portugal y *metrô* en Brasil.")
 ty(W, 1, "Escribí la palabra carioca para «mandioca».", "___", "aipim",
    "aipim en Rio; macaxeira en el Nordeste.")
 
@@ -1457,8 +1472,9 @@ ch(W, 0, "O réu ___ inocência, mas ninguém acreditou.",
    ["alegou", "alegrou", "alojou"], "alegou",
    "*Alegar* es «alegar», a menudo con matiz de excusa: *alegou inocência*. *Alegrar* es «poner contento».")
 ch(W, 1, "___ o IBGE, a população do Rio passa de seis milhões.",
-   ["Segundo", "Según", "Seguindo"], "Segundo",
-   "«Según» se dice *segundo* (o *conforme*, *de acordo com*): *segundo o IBGE*. *Según* no existe.")
+   ["Segundo", "Seguindo", "De acordo"], "Segundo",
+   "«Según» se dice *segundo* (o *conforme*, *de acordo com*): *segundo o IBGE*. *De acordo* necesita "
+   "su *com*, y *seguindo* es el gerundio de *seguir*.")
 ch(W, 1, "Segundo ___, a obra termina em maio.",
    ["ele", "dele", "lhe"], "ele",
    "segundo + pronombre sujeto: segundo ele, segundo ela.")
@@ -1785,8 +1801,9 @@ ch(W, 1, "Fiquei com a ___ atrás da orelha.",
    ["pulga", "mosca", "barata"], "pulga",
    "En portugués es una pulga: estar com a pulga atrás da orelha.")
 ch(W, 1, "O apartamento no Leblon custa os ___ da cara.",
-   ["olhos", "ojos", "olho"], "olhos",
-   "custar os olhos da cara: los ojos, en plural.")
+   ["olhos", "olho", "rins"], "olhos",
+   "custar os olhos da cara: los ojos, en plural. También se dice *custar um rim* (un riñón), pero "
+   "no «os rins da cara».")
 ch(W, 2, "Quem não tem cão caça com ___.",
    ["gato", "cachorro", "rato"], "gato",
    "Equivale a «a falta de pan, buenas son tortas».")
@@ -1910,15 +1927,17 @@ cb(W, 2, "O governo tomou providências. Antes houve muitas reclamações. (depo
 # 1 contracciones, crase, regencia · 2 léxico y registro
 # ===========================================================================
 W = 51
-ch(W, 0, "Quando você ___ ao Rio, me liga.",
-   ["chegar", "chegue", "chega"], "chegar",
-   "quando + futuro = futuro do subjuntivo: quando você chegar. Nunca «chegue».")
+ch(W, 0, "Quando a Bia entrou na sala, a reunião já ___.",
+   ["terminara", "terminasse", "terminará"], "terminara",
+   "Lo anterior a otro pasado: *terminara* = *tinha terminado* (había terminado). *Terminasse* es "
+   "subjuntivo («terminara» castellano) y *terminará*, futuro.")
 ch(W, 0, "Se eu ___, vou a Ouro Preto no feriado.",
    ["puder", "posso", "poder"], "puder",
    "se + futuro: futuro do subjuntivo (puderam → puder).")
-ch(W, 0, "Assim que ___ o resultado, te aviso.",
-   ["souber", "saber", "saiba"], "souber",
-   "souberam → souber.")
+ch(W, 2, "Na reunião, a diretora fez questão de ___ a atenção para o prazo.",
+   ["chamar", "prestar", "dar"], "chamar",
+   "*Chamar a atenção para* = llamar la atención sobre. *Prestar atenção* es «prestar atención» (sin "
+   "artículo ni *para*), y *dar atenção* es «hacerle caso» a alguien.")
 ch(W, 0, "Trouxe o livro para vocês ___.",
    ["lerem", "ler", "leiam"], "lerem",
    "Infinitivo pessoal tras para, con sujeto propio: para vocês lerem.")
@@ -1931,9 +1950,11 @@ ch(W, 0, "Ultimamente ___ muito calor em São Paulo.",
 ch(W, 1, "Vou ___ feira ___ oito.",
    ["à / às", "a / as", "à / as"], "à / às",
    "à feira (a + a) y às oito (a + as): las horas siempre con crase.")
-ch(W, 1, "Moro ___ Tijuca.",
-   ["na", "em a", "em"], "na",
-   "*Morar em* + *a Tijuca* se contrae en *na Tijuca*; los barrios suelen llevar artículo. ✗*em a* no existe.")
+ch(W, 2, "(Ofício) ___ o resultado assim que possível.",
+   ["Informar-lhe-emos", "Lhe informaremos", "Informaremos-lhe"], "Informar-lhe-emos",
+   "Al comienzo de la oración y con futuro, la norma pide mesóclise: *informar-lhe-emos*. Nunca se "
+   "empieza con el pronombre átono, y la ênclise no va con el futuro. Más simple: *Nós lhe informaremos*.",
+   prompt="Elegí la forma de la escritura formal.")
 ch(W, 1, "Ela namora ___ Rafa há dois anos.",
    ["o", "com o", "com"], "o",
    "namorar alguém, sin preposición en la norma. Al hablar, «namorar com» es muy común.",
@@ -1953,8 +1974,9 @@ cl(W, 0, "Quando vocês ___ (ir) a Salvador, provem o acarajé.", "forem",
    "foram → forem: futuro do subjuntivo de ir.")
 cl(W, 0, "Se ___ (fazer) sol, vamos à praia.", "fizer",
    "fizeram → fizer.")
-cl(W, 0, "Enquanto ___ (haver) samba, a gente fica.", "houver",
-   "houveram → houver: enquanto + futuro.")
+cl(W, 2, "A ___ (aprovar) da Lei de Cotas, em 2012, mudou o perfil das universidades federais.", "aprovação",
+   "Nominalización: aprovar → a aprovação (-ção, femenino). La Lei de Cotas (Lei 12.711) es de agosto de 2012.",
+   prompt="Completá con la forma correcta de la palabra entre paréntesis.")
 cl(W, 0, "É importante eles ___ (saber) a verdade.", "saberem",
    "Infinitivo pessoal con sujeto propio: eles saberem.")
 cl(W, 0, "Eu ___ (estudar, perfeito composto) muito para o Celpe-Bras.", "tenho estudado",
@@ -1974,19 +1996,24 @@ cl(W, 2, "Moramos numa rua ___ (ancha).", "larga",
 cl(W, 2, "(Formal) ___ (haver, perfeito) muitos protestos em 2013.", "Houve",
    "houve, singular.")
 
-tr(W, 0, "Cuando llegues, llamame.", "Quando você chegar, me liga.",
-   ["Quando chegar, me liga", "Quando você chegar, me ligue", "Quando chegar, me ligue",
-    "Quando você chegar, liga pra mim", "Quando você chegar, liga para mim",
-    "Quando você chegar, ligue para mim", "Quando chegares, liga-me"],
-   "*Quando* con valor futuro pide futuro do subjuntivo: *quando você chegar*. En el habla, el imperativo con *você* va con pronombre delante: *me liga*.")
+tr(W, 2, "Después de las inundaciones, el gobierno tomó medidas.", "Depois das enchentes, o governo tomou providências.",
+   ["Depois das enchentes, o governo tomou medidas", "Após as enchentes, o governo tomou providências",
+    "Após as enchentes, o governo tomou medidas", "O governo tomou providências depois das enchentes",
+    "O governo tomou medidas depois das enchentes", "Depois das inundações, o governo tomou providências",
+    "Depois das inundações, o governo tomou medidas"],
+   "«Tomar medidas» es sobre todo *tomar providências* (también *tomar medidas*). Las inundaciones son "
+   "*as enchentes*.")
 tr(W, 0, "Si podés, vení al ensayo de la Mangueira.", "Se você puder, venha ao ensaio da Mangueira.",
    ["Se puder, venha ao ensaio da Mangueira", "Se você puder, vem ao ensaio da Mangueira",
     "Se puder, vem ao ensaio da Mangueira", "Se você puder, venha para o ensaio da Mangueira",
     "Se puder, venha para o ensaio da Mangueira"],
    "Un *se* con valor futuro pide futuro do subjuntivo: *se você puder* «si podés». El español usa presente de indicativo.")
-tr(W, 0, "Es bueno que salgamos temprano.", "É bom sairmos cedo.",
-   ["É bom que saiamos cedo", "É bom a gente sair cedo", "É bom nós sairmos cedo"],
-   "Infinitivo pessoal (sairmos) o que + subjuntivo (saiamos).")
+tr(W, 0, "Terminada la reunión, todos se fueron.", "Terminada a reunião, todos foram embora.",
+   ["Terminada a reunião, todo mundo foi embora", "Acabada a reunião, todos foram embora",
+    "Encerrada a reunião, todos foram embora", "Terminada a reunião, todos saíram",
+    "Acabada a reunião, todo mundo foi embora", "Encerrada a reunião, todo mundo foi embora",
+    "Terminada a reunião, todos se foram"],
+   "Reducida de participio: *terminada* concuerda con *a reunião*. «Irse» es *ir embora*.")
 tr(W, 0, "Vengo estudiando mucho.", "Tenho estudado muito.",
    ["Eu tenho estudado muito", "Ando estudando muito", "Venho estudando muito",
     "Eu ando estudando muito", "Eu venho estudando muito"],
@@ -2041,8 +2068,9 @@ sc(W, 1, ["Vou à praia.", "Vou ao mercado.", "Chego às três.", "Refiro-me àq
 
 ty(W, 0, "Escribí el futuro do subjuntivo.", "se eu (ter) → se eu ___", "tiver",
    "tiveram → tiver.")
-ty(W, 2, "Escribí cómo se dice «oficina» (lugar de trabajo) en Brasil.", "___", "escritório",
-   "La oficina es o escritório; oficina es el taller.")
+ty(W, 0, "Escribí el participio corto, concordado.", "___ (entregar) as chaves, o inquilino foi embora.", "Entregues",
+   "entregar tiene participio corto *entregue*: con *ser*, *estar* y en la reducida va ese, concordado "
+   "con *as chaves* (*entregues*). *Entregado* queda para *ter* (*tinha entregado*).")
 
 cb(W, 0, "Vocês vão chegar. Eu vou sair antes. (antes de + infinitivo pessoal)",
    "Vou sair antes de vocês chegarem.",

@@ -41,5 +41,5 @@
   ["Sara y Dario van a correr el domingo.", false]
  ],
  "grammatica": {"label": "los reflexivos en presente y el imperativo de tú", "forme": ["ti senti", "mi sveglio", "mi alzo", "mi addormento", "ascolta", "non uscire", "resta", "vai a letto", "bevi", "scendi", "chiedi", "fermati", "non ti arrabbiare", "tieni", "dormi"]},
- "parole": [["gola", "gola"], ["testa", "testa"], ["solito", "solito"], ["sveglio", "svegliarsi"], ["alzo", "alzarsi"], ["addormento", "addormentarsi"], ["scendi", "scendere"], ["fermati", "fermarsi"], ["arrabbiare", "arrabbiarsi"], ["tieni", "tenere"], ["senti", "sentirsi"], ["domenica", "domenica"]]
+ "parole": [["gola", "gola"], ["testa", "testa"], ["solito", "solito"], ["sveglio", "svegliarsi"], ["alzo", "alzarsi"], ["addormento", "addormentarsi"], ["scendi", "scendere"], ["fermati", "fermarsi"], ["arrabbiare", "arrabbiarsi"], ["tieni", "tenere"], ["senti", "sentirsi"]]
 }

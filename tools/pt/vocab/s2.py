@@ -22,7 +22,7 @@ VOCAB = {
     ["time", "equipo (de fútbol)", "Qual é o seu time do coração?", "Del inglés *team*, masculino: *o time*. *Time do coração* = el cuadro del que sos hincha. En Portugal: *equipa*."],
     ["goleiro", "arquero", "O goleiro defendeu o pênalti no último minuto.", "*Gol* + sufijo de oficio *-eiro*. Atajar se dice *defender*: *o goleiro defendeu o pênalti*."],
     ["pelada", "picado de fútbol, partido informal", "Toda quinta tem pelada na areia de Copacabana.", "Coloquial y femenino: *jogar uma pelada*. Ojo: *pelado* / *pelada* también es «desnudo»."],
-    ["academia", "gimnasio", "Vou à academia três vezes por semana.", "Falso amigo: gimnasio. *Ir à academia*; entrenar en el habla es *malhar*. La academia de estudios es *academia* solo en sentido culto (*Academia Brasileira de Letras*)."],
+    ["academia", "gimnasio", "Vou à academia três vezes por semana.", "Falso amigo: gimnasio. Ojo al acento: a-ca-de-MI-a (en español, a-ca-DE-mia). *Ir à academia*; entrenar en el habla es *malhar*. La academia de estudios es *academia* solo en sentido culto (*Academia Brasileira de Letras*)."],
 ],
 
 15: [

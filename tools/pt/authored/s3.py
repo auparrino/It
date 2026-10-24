@@ -263,10 +263,12 @@ ch(0, "Se você ___ o que eu sei…", ["soubesse", "sabesse", "souber"], "soubes
    "saber → souberam → soubesse. El tronco sale del perfeito, nunca del infinitivo: «sabesse» no existe.")
 ch(0, "Se eles ___ ao Brasil, adorariam.", ["viessem", "vissem", "venham"], "viessem",
    "vir → vieram → viessem. «Vissem» es de ver (viram → visse).")
-ch(1, "Se eu pudesse, ___ em Santa Teresa.", ["moraria", "morasse", "moraría"], "moraria",
-   "En la otra mitad va futuro do pretérito: moraria, sin tilde (el acento cae en -ri-, pero no se marca).")
+ch(1, "Se eu pudesse, ___ em Santa Teresa.", ["moraria", "morasse", "morarei"], "moraria",
+   "En la otra mitad va futuro do pretérito: moraria, sin tilde (el acento cae en -ri-, pero no se marca). "
+   "*Morasse* va en la mitad del *se*; *morarei* sería una condición real (se eu puder, morarei).")
 ch(1, "Se ela ___ mais cedo, pegaria o BRT vazio.", ["saísse", "sairia", "saia"], "saísse",
-   "sair → saíram → saísse, con tilde en la í. Nunca condicional tras «se».")
+   "sair → saíram → saísse, con tilde en la í. Tras el «se» de condición, nunca condicional "
+   "(el «se» de una pregunta indirecta sí lo admite: perguntou se sairia).")
 ch(1, "O que você faria se ___ na Mega-Sena?", ["ganhasse", "ganharia", "ganhar"], "ganhasse",
    "Pregunta hipotética: faria + se ganhasse. «Se ganhar» sería una posibilidad real y futura, con «vai fazer».")
 ch(1, "Se D. Pedro II ___ hoje, o que pensaria do Brasil?", ["vivesse", "viveria", "vivera"], "vivesse",
@@ -641,7 +643,7 @@ fx(0, "Se eu tivesse sabido, tivesse ido com vocês.", "tivesse ido", "teria ido
    goodAlt=["tinha ido"])
 fx(0, "Se eu teria sabido, não teria vindo.", "teria sabido", "tivesse sabido",
    "Se eu tivesse sabido, não teria vindo.", "subjuntivo",
-   "Tras «se», nunca condicional: se eu tivesse sabido.")
+   "Tras el «se» de condición, nunca condicional: se eu tivesse sabido.")
 fx(1, "Espero que vocês tinham gostado da feijoada.", "tinham", "tenham",
    "Espero que vocês tenham gostado da feijoada.", "subjuntivo",
    "«Espero que» pide subjuntivo: tenham gostado (subjuntivo perfeito).")
@@ -993,18 +995,22 @@ cb(1, "Roubaram meu celular. Eu estava no metrô. (quando)", "Roubaram meu celul
 wk(33, "B2", "colocação pronominal")
 
 _FO = "Elegí la forma de la escritura formal."
-ch(0, "___ a verdade.", ["Disse-me", "Me disse", "Disse-mi"], "Disse-me",
-   "En la escritura formal, la oración no empieza con pronombre átono: disse-me.", prompt=_FO)
+ch(0, "«Me dijo la verdad.» → ___ a verdade.", ["Disse-me", "Me disse", "Disse-lhe"], "Disse-me",
+   "En la escritura formal, la oración no empieza con pronombre átono: disse-me. *Disse-lhe* sería "
+   "«le dijo» (a él, a ella, a usted).", prompt=_FO)
 ch(0, "Ele ___ nada.", ["não me disse", "não disse-me", "me não disse"], "não me disse",
    "La negación atrae el pronombre: não me disse (próclise obligatoria).", prompt=_FO)
-ch(0, "O livro que ___ é de Clarice Lispector.", ["me deram", "deram-me", "deram-mi"], "me deram",
-   "El relativo «que» atrae el pronombre: que me deram.", prompt=_FO)
+ch(0, "«El libro que me regalaron es de Clarice Lispector.» → O livro que ___ é de Clarice Lispector.",
+   ["me deram", "deram-me", "lhe deram"], "me deram",
+   "El relativo «que» atrae el pronombre: que me deram. *Lhe deram* sería «le regalaron» (a otro).", prompt=_FO)
 ch(0, "Quem ___ isso?", ["te contou", "contou-te", "contou te"], "te contou",
    "Los interrogativos atraen el pronombre: quem te contou?", prompt=_FO)
-ch(0, "___ o prêmio no Theatro Municipal.", ["Entregaram-lhe", "Lhe entregaram", "Entregaram-le"], "Entregaram-lhe",
-   "Verbo al inicio y sin atractor: ênclise. «Le» es español; en portugués, lhe.", prompt=_FO)
-ch(0, "Já ___ a história de Canudos?", ["lhe contei", "contei-lhe", "contei-le"], "lhe contei",
-   "Adverbios como já, sempre, aqui atraen el pronombre: já lhe contei. Canudos es la guerra que narró Euclides da Cunha en «Os Sertões».", prompt=_FO)
+ch(0, "___ o prêmio no Theatro Municipal.", ["Entregaram-lhe", "Lhe entregaram", "Entregaram-no"], "Entregaram-lhe",
+   "Verbo al inicio y sin atractor: ênclise. El premio es el objeto directo; a quien se lo dan, el "
+   "indirecto: *lhe* (no *o*, que daría *entregaram-no*).", prompt=_FO)
+ch(0, "Já ___ a história de Canudos?", ["lhe contei", "contei-lhe", "o contei"], "lhe contei",
+   "Adverbios como já, sempre, aqui atraen el pronombre: já lhe contei. *O* no va: la historia ya es el "
+   "objeto directo, y la persona a la que se cuenta es *lhe*. Canudos es la guerra que narró Euclides da Cunha en «Os Sertões».", prompt=_FO)
 ch(1, "Preciso ___ antes de viajar.", ["vendê-lo", "vender-lo", "vendê-o"], "vendê-lo",
    "Tras -r, el pronombre o se vuelve lo y la r cae; en -er, circunflejo: vendê-lo.")
 ch(1, "Os peixes? Os pescadores de Copacabana ___ do mar ainda de madrugada.", ["trazem-nos", "trazem-los", "trazem-os"], "trazem-nos",
@@ -1021,20 +1027,20 @@ ch(2, "«Lo vi ayer en la playa.»", ["Vi ele ontem na praia.", "Vi-lo ontem na 
    prompt="Elegí cómo se dice en el habla de Brasil.")
 
 _CF = "Uní verbo y pronombre en registro formal."
-cl(0, "___ (chamo + me) Martín e sou de Rosario.", "Chamo-me",
-   "Verbo al inicio de la oración: ênclise, chamo-me.", prompt=_CF)
+# Tanda 4 (PLAN-2026-10, pt 27-39): los «Uní verbo y pronombre» mecánicos o
+# repetidos (s3-33-13, 16, 17, 19) dejan lugar a dos párrafos del habla que
+# se pasan a la norma (tools/pt/authored/t4_pt27.py).  Se saltea el número
+# para que los demás ids no cambien.
+_S["n"] += 1  # s3-33-13 retirado (chamo-me)
 cl(0, "Nunca ___ (disse + me) isso.", "me disse",
    "«Nunca» atrae el pronombre: nunca me disse.", prompt=_CF)
 cl(0, "Quando ___ (vi + o), entendi tudo.", "o vi",
    "Las conjunciones subordinantes (quando, se, embora) atraen el pronombre: quando o vi.", prompt=_CF)
-cl(0, "___ (enviaram + nos) muitas cartas.", "Enviaram-nos",
-   "Sin atractor y al inicio: ênclise.", prompt=_CF)
-cl(1, "É preciso ___ (fazer + o) hoje.", "fazê-lo",
-   "fazer + o → fazê-lo: cae la r, aparece l y el circunflejo.", prompt=_CF)
+_S["n"] += 1  # s3-33-16 retirado (enviaram-nos)
+_S["n"] += 1  # s3-33-17 retirado (fazê-lo, repetido en s3-33-42)
 cl(1, "Vou ___ (comprar + a) amanhã.", "comprá-la",
    "comprar + a → comprá-la, con tilde aguda.", prompt=_CF)
-cl(1, "___ (fiz + o) sem ajuda.", "Fi-lo",
-   "Tras -z cae la consonante: fiz + o → fi-lo.", prompt=_CF)
+_S["n"] += 1  # s3-33-19 retirado (fi-lo, repetido en 19 y 37)
 cl(1, "Os alunos ___ (fazem + a) em casa.", "fazem-na",
    "Tras nasal, a → na: fazem-na. Con sujeto delante, en Brasil se acepta también a fazem.",
    alt=["a fazem"], prompt=_CF)
@@ -1169,8 +1175,9 @@ ch(0, "«Todavía no llegó.» → ___ não chegou.", ["Ainda", "Todavia", "Entr
    "«Todavía» (aún) se dice *ainda*. *Todavia* y *entretanto* son falsos amigos: significan «sin embargo».")
 ch(1, "Choveu muito; ___, houve enchentes na Zona Norte.", ["por isso", "porque", "embora"], "por isso",
    "Consecuencia: por isso (= por eso). «Porque» daría la causa.", prompt=_CC)
-ch(1, "Penso, ___ existo.", ["logo", "luego", "depois"], "logo",
-   "*Logo* conclusivo es «luego, por lo tanto»: *penso, logo existo*. En portugués no existe *luego*.", prompt=_CC)
+ch(1, "Penso, ___ existo.", ["logo", "depois", "porém"], "logo",
+   "*Logo* conclusivo es «luego, por lo tanto»: *penso, logo existo*. *Depois* es «después» (tiempo) "
+   "y *porém*, «pero».", prompt=_CC)
 ch(1, "___ você está aqui, me ajuda com a mudança.", ["Já que", "Embora", "Portanto"], "Já que",
    "Causa conocida al inicio: já que (= ya que).", prompt=_CC)
 ch(1, "Leve guarda-chuva, ___ vai chover.", ["pois", "portanto", "contudo"], "pois",
@@ -1599,30 +1606,32 @@ cb(0, "A loja abre às nove. Fecha às seis. (e)", "A loja abre às nove e fecha
 # ============================================================================
 wk(37, "B2", "verbos irregulares")
 
-ch(0, "Eles ___ a tradição do samba de roda.", ["mantêm", "mantém", "mantienem"], "mantêm",
-   "manter se conjuga como ter: eles têm → eles mantêm (circunflejo en plural, agudo en singular).")
-ch(0, "A equipe da Fiocruz ___ ótimos resultados com a vacina.", ["obteve", "obteu", "obtiu"], "obteve",
-   "obter como ter: teve → obteve. «Obteu» regulariza el verbo.")
-ch(0, "Palmares ___ a resistência por quase um século.", ["manteve", "manteu", "mantiu"], "manteve",
+ch(0, "Eles ___ a tradição do samba de roda.", ["mantêm", "mantém", "mantêem"], "mantêm",
+   "manter se conjuga como ter: eles têm → eles mantêm (circunflejo en plural, agudo en singular). "
+   "«Mantêem» copia *leem, veem*: los derivados de *ter* no duplican la e.")
+ch(0, "A equipe da Fiocruz ___ ótimos resultados com a vacina.", ["obteve", "obteu", "obtive"], "obteve",
+   "obter como ter: teve → obteve. «Obteu» regulariza el verbo; *obtive* es eu (como *tive*).")
+ch(0, "Palmares ___ a resistência por quase um século.", ["manteve", "manteu", "mantive"], "manteve",
    "manter → manteve, como teve. El quilombo de Palmares resistió en la sierra da Barriga durante buena parte del siglo XVII.")
 ch(0, "O governo ___ no porto.", ["interveio", "interviu", "interveu"], "interveio",
    "intervir como vir: veio → interveio. «Interviu» es el error más común (lo confundís con ver).")
-ch(0, "___ chegar cedo ao cartório.", ["Convém", "Convêm", "Conviene"], "Convém",
-   "convir como vir: vem → convém (singular, con tilde aguda).")
-ch(1, "Depois do terremoto de 1755, Pombal ___ uma Lisboa nova.", ["propôs", "propuso", "propós"], "propôs",
-   "propor como pôr: pôs → propôs, con circunflejo. «Propuso» es español.")
-ch(1, "Tom Jobim ___ «Garota de Ipanema» com Vinicius de Moraes.", ["compôs", "compuso", "compós"], "compôs",
-   "compor como pôr: compôs.")
+ch(0, "___ chegar cedo ao cartório.", ["Convém", "Convêm", "Conviu"], "Convém",
+   "convir como vir: vem → convém (singular, con tilde aguda). *Convêm* es plural; «conviu» lo "
+   "confunde con *ver* (el pasado sería *conveio*, como *veio*).")
+ch(1, "Depois do terremoto de 1755, Pombal ___ uma Lisboa nova.", ["propôs", "propós", "propus"], "propôs",
+   "propor como pôr: pôs → propôs, con circunflejo. *Propus* es eu (como *pus*).")
+ch(1, "Tom Jobim ___ «Garota de Ipanema» com Vinicius de Moraes.", ["compôs", "compós", "compus"], "compôs",
+   "compor como pôr: ele pôs → ele compôs. *Compus* es eu.")
 ch(1, "Os cientistas ___ mais calor para o próximo verão.", ["preveem", "prevêem", "prevém"], "preveem",
    "prever como ver: veem → preveem, sin circunflejo desde el Acuerdo de 1990.")
-ch(1, "Ninguém ___ a tempestade.", ["previu", "preveu", "previo"], "previu",
-   "prever como ver: viu → previu.")
-ch(2, "Eu ___ no calçadão todo domingo.", ["passeio", "passeo", "paseio"], "passeio",
-   "-ear: la e se vuelve ei en las formas acentuadas en la raíz: passeio.")
-ch(2, "Eu ___ acordar cedo.", ["odeio", "odio", "odeo"], "odeio",
-   "odiar es uno de los cinco -iar que van como -ear (MARIO): odeio.")
-ch(2, "Eu não ___ nessa roupa.", ["caibo", "cabo", "quepo"], "caibo",
-   "caber: eu caibo (y que eu caiba). «Quepo» es español.")
+ch(1, "Ninguém ___ a tempestade.", ["previu", "preveu", "preveio"], "previu",
+   "prever como ver: viu → previu. «Preveio» lo confunde con *vir* (*interveio*).")
+ch(2, "Eu ___ no calçadão todo domingo.", ["passeio", "passeo", "passeia"], "passeio",
+   "-ear: la e se vuelve ei en las formas acentuadas en la raíz: passeio. *Passeia* es ele.")
+ch(2, "Eu ___ acordar cedo.", ["odeio", "odio", "odeia"], "odeio",
+   "odiar es uno de los cinco -iar que van como -ear (MARIO): odeio. *Odeia* es ele.")
+ch(2, "Eu não ___ nessa roupa.", ["caibo", "cabo", "caiba"], "caibo",
+   "caber: eu caibo (y que eu caiba, en subjuntivo). «Cabo» lo regulariza.")
 
 cl(0, "Espero que ele ___ (manter) a promessa.", "mantenha",
    "Subjuntivo presente como ter: tenha → mantenha.")
@@ -1766,22 +1775,26 @@ ch(2, "Você sabe que eu ___ amo.", ["te", "le", "ti"], "te",
 ch(2, "¿Cuál va en un mail formal?", ["Estou a caminho.", "Tô chegando, pera aí.", "Tô indo, beleza?"], "Estou a caminho.",
    "Las reducciones (tô, pera aí) y los marcadores (beleza) son del habla y los chats; en un mail formal, forma plena.",
    prompt="Elegí la opción adecuada para el registro formal.")
-ch(2, "«¡Qué show copado!» (carioca)", ["Que show maneiro!", "Que show copado!", "Que show manero!"], "Que show maneiro!",
-   "En el habla carioca, «copado» se dice *maneiro* (*que show maneiro!*). *Copado* no existe en portugués.", prompt=_HB)
+ch(2, "«¡Qué show copado!» (carioca)", ["Que show maneiro!", "Que show mané!", "Que show maneira!"], "Que show maneiro!",
+   "En el habla carioca, «copado» se dice *maneiro* (*que show maneiro!*). *Mané* es «gil, tonto» y "
+   "*maneira* es «manera».", prompt=_HB)
 
 _RD = "Escribí la forma reducida del habla."
+# Tanda 4 (PLAN-2026-10, pt 27-39): de los 12 cloze «forma reducida» (nivel
+# A1) quedan 6; los otros 6 (s3-38-14, 16, 18, 20, 22, 23) dejan lugar a
+# escucha de habla rápida y a reescrituras de registro (t4_pt27.py).  Se
+# saltea el número para que los demás ids no cambien.
 cl(0, "Eu ___ (estou) cansado.", "tô", "estou → tô.", prompt=_RD)
-cl(0, "Ela ___ (está) na praia.", "tá", "está → tá.", prompt=_RD)
+_S["n"] += 1  # s3-38-14 retirado (tá)
 cl(0, "Vou ___ (para o) Leblon.", "pro", "para o → pro.", prompt=_RD)
-cl(0, "Vamos ___ (para a) Lapa?", "pra", "para a → pra.", prompt=_RD)
+_S["n"] += 1  # s3-38-16 retirado (pra)
 cl(0, "___ (você) vem hoje?", "Cê", "você → cê, solo delante del verbo.", prompt=_RD)
-cl(0, "___ (espera aí), já volto!", "Pera aí", "espera aí → pera aí (también se escribe peraí).",
-   alt=["Peraí"], prompt=_RD)
+_S["n"] += 1  # s3-38-18 retirado (pera aí)
 cl(1, "___ (onde está) a Bia?", "Cadê", "onde está → cadê, sin verbo.", prompt=_RD)
-cl(1, "Não ___ (há) problema.", "tem", "En el habla, ter reemplaza a haver: não tem problema.", prompt=_RD)
+_S["n"] += 1  # s3-38-20 retirado (não tem problema, ya en las traducciones)
 cl(1, "Ontem ___ (havia) muita gente no Aterro.", "tinha", "havia → tinha (ter por haver).", prompt=_RD)
-cl(2, "Eu ___ (estava) no metrô quando cê ligou.", "tava", "estava → tava.", prompt=_RD)
-cl(2, "Tô ___ (em um) bar em Botafogo.", "num", "em um → num, muy frecuente también en la escritura informal.", prompt=_RD)
+_S["n"] += 1  # s3-38-22 retirado (tava)
+_S["n"] += 1  # s3-38-23 retirado (num)
 cl(2, "«Tô chegando» → ___ chegando.", "Estou",
    "En registro formal, forma plena: estou chegando (o estou a caminho).",
    prompt="Escribí la forma plena del registro formal.")
@@ -1897,7 +1910,7 @@ trv(0, "Cuando llegue a Lisboa, te llamo.",
     ["te ligo", "eu te ligo", "ligo pra você", "ligo para você", "vou te ligar"])
 fx(0, "Se eu poderia, viajaria para Angola e Moçambique.", "poderia", "pudesse",
    "Se eu pudesse, viajaria para Angola e Moçambique.", "subjuntivo",
-   "Tras «se», nunca condicional: se eu pudesse.")
+   "Tras el «se» de condición, nunca condicional: se eu pudesse.")
 ty(0, "Escribí el infinitivo pessoal (nós) de «ir».", "É hora de ___, galera!", "irmos",
    "ir → irmos.")
 

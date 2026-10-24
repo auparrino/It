@@ -143,7 +143,9 @@ fp(29, 5, "I commercianti hanno fatto una ___ davanti al Comune. (manifestare)",
 fp(29, 6, "La decisione era giusta, ma l'___ è stata frettolosa. (applicare)", "applicazione", "*Applicazione* = aplicación (de una norma, y también de un celular).")
 cv(29, 1, "Un anno fa il Comune ha ___ al traffico tutto il centro storico.", "chiuso", "*Chiudere al traffico* = cerrar al tránsito.")
 cv(29, 2, "In consiglio comunale qualcuno è arrivato a ___ le dimissioni dell'assessore.", "chiedere", "*Chiedere le dimissioni* = pedir la renuncia. *Dimissioni* va siempre en plural.")
-cv(29, 3, "Oggi vale la pena ___ un bilancio onesto.", "fare", "*Fare un bilancio* = hacer un balance.")
+ce(29, 3, "Oggi vale la pena ___ un bilancio onesto.", ["fare", "dare", "prendere"], "fare",
+   "*Fare un bilancio* (o *tracciare un bilancio*) = hacer un balance. Con *bilancio* no van *dare* ni *prendere*, "
+   "que compiten en otras colocaciones (*dare un consiglio*, *prendere una decisione*).")
 cv(29, 4, "Alcune gelaterie hanno perfino ___ personale.", "assunto", "*Assumere personale* = contratar personal (*assumere*, participio *assunto*).")
 cv(29, 5, "Il Comune non ha ___ i tempi del progetto.", "rispettato", "*Rispettare i tempi* = cumplir los plazos.")
 ce(29, 6, "Chi passeggia in via Garibaldi ___ l'impressione che la città sia cambiata.", ["ha", "fa", "prende"], "ha",
@@ -186,7 +188,9 @@ fp(31, 6, "Al mercato di Voghera Laura fa la ___: vende i suoi formaggi. (vender
 cv(31, 1, "Per dodici anni Laura ha ___ l'avvocata d'affari.", "fatto", "*Fare* + profesión con artículo = ejercer: *fare l'avvocata*, *fare il medico*.")
 cv(31, 2, "Sua madre avrebbe preferito che non ___ i ponti.", "bruciasse", "*Bruciare i ponti* = quemar las naves (cortar toda vuelta atrás).")
 cv(31, 3, "I suoi genitori avevano ___ tanti sacrifici per farla studiare.", "fatto", "*Fare sacrifici*.")
-cv(31, 4, "Nessuno racconta le notti passate a ___ i conti.", "fare", "*Fare i conti* = hacer las cuentas.")
+ce(31, 4, "Nessuno racconta le notti passate a ___ i conti.", ["fare", "rendere", "dare"], "fare",
+   "*Fare i conti* = hacer las cuentas (y, en sentido figurado, enfrentar algo: *fare i conti con la realtà*). "
+   "*Rendere conto*, sin artículo, es rendir cuentas.")
 cv(31, 5, "Avrei ___ un corso serio prima di partire.", "seguito", "*Seguire un corso* = hacer, cursar un curso.")
 ce(31, 6, "Chi sogna di ___ vita dovrebbe diffidare dei giornali.", ["cambiare", "mutare", "scambiare"], "cambiare",
    "*Cambiare vita* = cambiar de vida. *Scambiare* es intercambiar o confundir.")
@@ -465,8 +469,9 @@ ce(45, 6, "Tutti fanno ___ che le regole non ci siano.", ["finta", "finzione", "
    "*Fare finta che* + congiuntivo = hacer como si.")
 ce(45, 7, "Da noi ci si offende con ___ creatività.", ["discreta", "discorde", "distinta"], "discreta",
    "*Discreto* = bastante, considerable (*una discreta somma*); también «discreto».")
-ce(45, 8, "Questa coppia di verbi ti farà ___.", ["impazzire", "impazzare", "pazziare"], "impazzire",
-   "*Far impazzire* = volver loco. *Impazzare* es desatarse (una moda, una fiesta).")
+ce(45, 8, "Questa coppia di verbi ti farà ___.", ["impazzire", "impazzare", "tornare pazzo"], "impazzire",
+   "*Far impazzire* = volver loco. *Impazzare* es desatarse (una moda, una fiesta). «Volver loco» no se "
+   "calca con *tornare*.")
 ce(45, 9, "Se chiedi a un chirurgo di ___ come va col bisturi…", ["fama", "fame", "famoso"], "fama",
    "*Di fama* = famoso, de renombre. *Fame* es hambre.")
 
@@ -484,8 +489,8 @@ cv(46, 4, "I peggiorativi ___ disprezzo o un giudizio negativo.", "esprimono", "
 cv(46, 5, "Il consiglio che ___ ai miei studenti è di non inventare alterati.", "do", "*Dare un consiglio*.")
 ce(46, 6, "Usarli bene è un traguardo che va ben ___ la grammatica.", ["oltre", "sopra", "fuori"], "oltre",
    "*Andare oltre* = ir más allá.")
-ce(46, 7, "Il diminutivo può diventare ironico o perfino ___.", ["sprezzante", "disprezzato", "prezzante"], "sprezzante",
-   "*Sprezzante* = despectivo, desdeñoso.")
+ce(46, 7, "Il diminutivo può diventare ironico o perfino ___.", ["sprezzante", "dispettoso", "disprezzato"], "sprezzante",
+   "*Sprezzante* = despectivo, desdeñoso. *Dispettoso* es el que hace maldades o travesuras: no es «despectivo».")
 ce(46, 8, "Se un collega chiama il progetto «un lavoretto», forse lo sta ___.", ["sminuendo", "diminuendo", "rimpicciolendo"], "sminuendo",
    "*Sminuire* = restar valor, menospreciar; *diminuire* es disminuir una cantidad.")
 ce(46, 9, "«Ragazzone» ha spesso una sfumatura ___.", ["bonaria", "buona", "benigna"], "bonaria",
@@ -528,8 +533,9 @@ ce(48, 6, "Ci sono rapper che il dialetto l'hanno ___ in classifica.", ["portato
    "*Portare in classifica* = llevar a los rankings.")
 ce(48, 7, "Certe cose, in italiano, non ___.", ["rendono", "danno", "fanno"], "rendono",
    "*Rendere* = transmitir el mismo efecto (una traducción, una expresión).")
-ce(48, 8, "Il dialetto non è più la lingua della ___.", ["vergogna", "imbarazzo", "pudore"], "vergogna",
-   "*Della* pide un femenino: *la vergogna*. *Imbarazzo* y *pudore* son masculinos.")
+ce(48, 8, "Il dialetto non è più la lingua della ___.", ["vergogna", "pena", "timidezza"], "vergogna",
+   "*La lingua della vergogna*: la que daba vergüenza hablar. *Pena* es lástima o castigo, y *timidezza*, "
+   "un rasgo de carácter.")
 ce(48, 9, "Qualcuno teme che il dialetto diventi un folklore da ___.", ["cartolina", "cartella", "carta"], "cartolina",
    "*Da cartolina* = de postal: lindo pero artificial.")
 
@@ -551,8 +557,9 @@ ce(49, 7, "Il governo ha ___ una proposta di legge.", ["avanzato", "anticipato",
    "*Avanzare una proposta* = presentar, plantear una propuesta.")
 ce(49, 8, "A sedici anni si è in grado di ___ scelte consapevoli?", ["compiere", "compire", "finire"], "compiere",
    "*Compiere una scelta* (registro alto) = tomar una decisión; también *fare una scelta*.")
-ce(49, 9, "È un argomento più ___ di quanto sembri.", ["fragile", "frangibile", "fracassato"], "fragile",
-   "*Un argomento fragile* = un argumento débil.")
+ce(49, 9, "È un argomento più ___ di quanto sembri.", ["fragile", "frangibile", "rotto"], "fragile",
+   "*Un argomento fragile* = un argumento débil. *Frangibile* (que se puede romper) y *rotto* (roto) "
+   "son de objetos.")
 
 # ------------------------------------------------------------------ 50
 fp(50, 1, "scrivere → ___ (persona, femminile)", "scrittrice", "*Scrittore*, *scrittrice*.")
@@ -572,8 +579,9 @@ ce(50, 7, "Così si rischia di ___ all'autore un ottimismo che non ha.", ["attri
    "*Attribuire qualcosa a qualcuno* = atribuírselo.")
 ce(50, 8, "Ogni falso amico ___ è una piccola scoperta.", ["smascherato", "mascherato", "scoperchiato"], "smascherato",
    "*Smascherare* = desenmascarar.")
-ce(50, 9, "La confidenza è il suo pericolo ___.", ["principale", "principesco", "principiante"], "principale",
-   "*Principale* = principal.")
+ce(50, 9, "La confidenza è il suo pericolo ___.", ["principale", "primordiale", "principiante"], "principale",
+   "*Principale* = principal. *Primordiale* es «primitivo, de los orígenes», no «fundamental» como "
+   "el «primordial» castellano.")
 
 # ------------------------------------------------------------------ 51
 fp(51, 1, "flessibile → ___ (sostantivo)", "flessibilità", "*-bile* → *-bilità*.")

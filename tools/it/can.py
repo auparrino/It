@@ -172,7 +172,7 @@ CAN = {
     27: [
         ("Decir cómo hace alguien algo: perfettamente, bene, male", ["rf-16-21", "g2-ct-35"]),
         ("Poner el adverbio en su lugar: arriva sempre", ["g2-va-67", "g2-ct-36"]),
-        ("Decir que ya hiciste algo: ho già finito", ["rf-16-22"]),
+        ("Decir qué tan seguro estás: forse è, può darsi che sia, sarà", ["t4it27-27-e01", "t4it27-27-e02"]),
         ("Decir cuánto tardás o qué hace falta: ci metti, ci vuole", ["cx-c-27-04", "cx-c-27-05"]),
     ],
     28: [
@@ -196,7 +196,7 @@ CAN = {
     31: [
         ("Lamentar lo que no hiciste: avresti dovuto avvisarmi", ["cx-c-31-02", "g2-va-55"]),
         ("Decir que habrías hecho algo: sarei venuto, ma", ["g2-ct-42", "cx-c-31-03"]),
-        ("Contar lo que alguien prometió: ha detto che sarebbe arrivato", ["g2-ct-43", "c1-conc-07"]),
+        ("Contar lo que alguien prometió: ha detto che sarebbe arrivato", ["g2-ct-43", "t4it27-31-u07"]),
         ("Dar una noticia no confirmada: sarebbe arrivato ieri", ["mj-31-04"]),
     ],
     32: [

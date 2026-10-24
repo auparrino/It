@@ -24,7 +24,7 @@
  },
  "questions": [
   ["¿Adónde va Téo esta noche?", ["A un bar de la Lapa con amigos", "A un show de samba en la Lapa, con Nanda", "A la playa, a pasear", "A la casa de Nanda"], "A un bar de la Lapa con amigos"],
-  ["¿Por qué Nanda duda antes de aceptar la invitación?", ["Porque no le gusta el samba", "Porque este mes no tiene plata", "Porque el sábado a la noche trabaja en la radio", "Porque no conoce la banda"], "Porque este mes no tiene plata"],
+  ["¿Qué problema menciona Nanda después de aceptar la invitación?", ["Porque no le gusta el samba", "Porque este mes no tiene plata", "Porque el sábado a la noche trabaja en la radio", "Porque no conoce la banda"], "Porque este mes no tiene plata"],
   ["¿Qué hace Téo el domingo?", ["Va a la playa temprano", "Se queda en casa y ve el partido", "Trabaja en la radio", "Sale con amigos a la Lapa"], "Se queda en casa y ve el partido"]
  ],
  "info": [

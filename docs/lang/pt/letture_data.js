@@ -306,7 +306,7 @@
       gloss: { barca: "ferry", falta: "(falta pouco) falta poco", daqui: "(daqui a dois meses) dentro de dos meses",
                escola: "(escola de samba) agrupación que desfila en Carnaval", ensaio: "ensayo",
                quadra: "galpón de la escuela de samba", ala: "sector del desfile",
-               souber: "supiera (futuro do subjuntivo de saber)", sambar: "bailar samba", começo: "comienzo",
+               souber: "sepa (futuro do subjuntivo de saber)", sambar: "bailar samba", começo: "comienzo",
                fantasia: "disfraz", camiseta: "remera", erra: "se equivoca", passo: "paso",
                "sapucaí": "(la Sapucaí) la pasarela del Carnaval de Río", prata: "plata", chapéu: "sombrero",
                esquece: "olvida", mexo: "muevo", sorrio: "sonrío", contas: "(fazer as contas) sacar la cuenta" },
@@ -1297,7 +1297,7 @@
       gloss: { causa: "(por causa de) por, a causa de", divide: "comparte", geladeira: "heladera", banheiro: "baño", conta: "cuenta, factura",
                fatia: "porción, tajada", "lava-louças": "lavavajillas", acorda: "se despierta",
                cedo: "temprano", bonde: "tranvía", barulho: "ruido", nem: "ni", ouve: "oye",
-               odeia: "odia", faxina: "limpieza general", limpo: "limpio", procura: "busca",
+               odeia: "odia", faxina: "limpieza general", limpo: "limpio (de limpar: eu limpo = yo limpio)", procura: "busca",
                mímica: "mímica", ri: "se ríe", janta: "cena", varanda: "balcón",
                embaixo: "(lá embaixo) allá abajo", dinheiro: "plata" },
       questions: [

@@ -237,7 +237,9 @@ Object.keys(Lab.BY_ID).forEach(function (id) {
   }
 });
 var CAPIRE_TENSE = { tempo: "imperfeito", composto: "perfeitoComposto", certeza: "subjPresente",
-                     cortesia: "condicional", futsubj: "subjFuturo", infpessoal: "infPessoal" };
+                     cortesia: "condicional", futsubj: "subjFuturo", infpessoal: "infPessoal",
+                     passiva: "participio", hipotese: "subjImperfeito", passou: "subjMaisQuePerfeito",
+                     maisqueperfeito: "maisQuePerfeito" };
 Lab.CAPIRE.forEach(function (c) {
   c.items.forEach(function (x) {
     ok(c.opts.indexOf(x[1]) >= 0, "capire: respuesta fuera de las opciones: " + x[0]);
@@ -257,8 +259,33 @@ ok(Lab.falsiSession({}).length === 10, "falsos amigos: 10 preguntas");
 for (var r2 = 0; r2 < 50; r2++) ok(!!Lab.randomItem({}), "ítem al azar del laboratorio");
 for (var r3 = 0; r3 < 50; r3++) {
   var ri = Lab.randomItem({}, 3);
-  ok(ri && (!ri.week || ri.week <= 3) && ri.lab !== "falsi", "ítem al azar respeta la semana");
+  ok(ri && (!ri.week || ri.week <= 3) && (ri.lab !== "falsi" || Lab.falsoWeek(ri.id) <= 3), "ítem al azar respeta la semana");
 }
+// Falsos amigos desde su semana: los que la estación 1 enseña en sus
+// palabras entran al repaso desde esa semana; el resto, en FALSI_WEEK.
+(function () {
+  var idOf = {};
+  Lab.FALSI.forEach(function (f, i) { idOf[f[0]] = "falso:" + i; });
+  var vocWeek = {};
+  course.weeks.forEach(function (w) {
+    (w.vocab || []).forEach(function (v) { var k = String(v[0]).toLowerCase(); if (!vocWeek[k]) vocWeek[k] = w.week; });
+  });
+  Object.keys(Lab.FALSI_WEEKS).forEach(function (wd) {
+    var wk = Lab.FALSI_WEEKS[wd];
+    ok(!!idOf[wd], "falso amigo con semana propia que no está en la lista: " + wd);
+    ok(wk >= 1 && wk < Lab.FALSI_WEEK && Lab.falsoWeek(idOf[wd]) === wk, "falso amigo antes de FALSI_WEEK: " + wd);
+    ok(vocWeek[wd] === wk, "el falso amigo entra la semana de su palabra: " + wd + " (" + vocWeek[wd] + ")");
+  });
+  ok(Lab.falsoWeek(idOf.apelido) === 1 && Lab.falsoWeek(idOf.mala) === 11 && Lab.falsoWeek(idOf.pastel) === Lab.FALSI_WEEK,
+     "apelido en la 1, mala en la 11, pastel en FALSI_WEEK");
+  var early = {};
+  for (var k = 0; k < 400; k++) {
+    var r = Lab.randomItem({}, 2);
+    if (r && r.lab === "falsi") early[r.stem] = 1;
+  }
+  ok(Object.keys(early).length > 0 && Object.keys(early).every(function (s) { return Lab.FALSI_WEEKS[s] <= 2; }),
+     "la pausa de la semana 2 trae falsos amigos de las semanas 1 y 2: " + Object.keys(early).join(", "));
+})();
 
 var lst = Engine.blankSave();
 Object.keys(Lab.BY_ID).slice(0, 20).forEach(function (id) {
@@ -269,10 +296,14 @@ ok(Drills.buildReview(course, lst, 50).length === 20, "el repaso incluye el labo
 
 /* --------------------------------------------------------------- duelos */
 
-ok(Duelli.DUELLI.length === 12, "doce duelos");
+ok(Duelli.DUELLI.length === 34, "treinta y cuatro duelos");
 ok(uniq(Duelli.DUELLI.map(function (d) { return d.id; })), "ids de duelo únicos");
 var DUEL_TENSE = { passado: ["imperfeito"], composto: ["perfeitoComposto"], subjuntivo: ["subjPresente"],
-                   futinf: ["subjFuturo", "infPessoal"] };
+                   futinf: ["subjFuturo", "infPessoal"],
+                   temtem: ["presente"], fuifoi: ["perfeito"], vivim: ["perfeito"], falefala: ["imperativo"],
+                   futurovou: ["futuro"], foiesta: ["participio"], aceitado: ["participio"],
+                   tivesseteria: ["subjMaisQuePerfeito", "condicionalComposto"], iairia: ["condicional", "condicionalComposto"],
+                   sairasaisse: ["maisQuePerfeito", "subjImperfeito"], tinhatenho: ["maisQuePerfeitoComposto", "perfeitoComposto"] };
 Duelli.DUELLI.forEach(function (d) {
   ok(d.items.length >= 20, "duelo corto: " + d.id);
   (DUEL_TENSE[d.id] || []).forEach(function (t) { ok(d.week >= TW[t], "duelo " + d.id + " antes de " + t); });
@@ -295,7 +326,7 @@ Duelli.DUELLI.forEach(function (d) {
   var sess = Duelli.session(d.id, {});
   ok(sess.filter(function (x) { return !x.cue; }).length === 8, "sesión de duelo: 8 oraciones: " + d.id);
 });
-ok(Duelli.open(1).length === 1 && Duelli.open(52).length === 12, "duelos abiertos por semana");
+ok(Duelli.open(1).length === 1 && Duelli.open(52).length === 34, "duelos abiertos por semana");
 
 /* ------------------------------------------------------------- lecturas */
 

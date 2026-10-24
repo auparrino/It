@@ -194,6 +194,8 @@ def build_errors(raw):
         row = {k: e[k] for k in ("wrong", "right", "bad", "good", "cat", "why", "lvl")}
         if e.get("alt"):
             row["alt"] = [clean(a) for a in e["alt"] if clean(a)]
+        if e.get("wk"):
+            row["wk"] = e["wk"]    # semana mínima pedida (errori_banca.WEEK)
         out.append(row)
     return out
 
@@ -257,7 +259,7 @@ def main():
         ctx = sillabo.analyze(er["right"])
         ctx.update({k: v for k, v in sillabo.analyze(er["good"], answer=True).items()
                     if v > ctx.get(k, 0)})
-        er["w"] = week(ctx)
+        er["w"] = max(week(ctx), er.pop("wk", 1))
     # And what the tenses do not show: the words the learner has to write
     # (seen in the course, in the bank of the level, or transparent) and the
     # grammar that is not a tense (possessives, clitics, piacere, numbers…):

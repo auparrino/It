@@ -31,7 +31,7 @@ ITEMS = [
          note="El infinitivo ya tiene objeto (la relazione), así que quien escribe pasa a indirecto: gli + la = gliela."),
     dict(id="mj-40-03", type="choice", topic="causativo", level="C1", w=40, prompt=CE,
          stem="I miei occhiali? ___ dall'ottico.",
-         options=["Li ho fatti riparare", "Gli ho fatti riparare", "Ho fatti riparare li"],
+         options=["Li ho fatti riparare", "Gli ho fatti riparare", "Ho fatto ripararli"],
          answer="Li ho fatti riparare",
          note="El pronombre va delante de avere y el participio de fare concuerda con él: li ho fatti riparare."),
     dict(id="mj-40-04", type="fixerr", topic="causativo", level="B2", w=40, prompt=FX, cat="posizione_pronome",
