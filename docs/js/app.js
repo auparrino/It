@@ -223,11 +223,25 @@
   var voice = null, voices = [], voicesSeen = false;
   // force: the learner tapped 🔊 explicitly, so play even in office mode
   // (they may have earphones on).  opts: { pitch, vi (which voice of the language),
+  // slot (the speaker's place in a dialogue, for the recorded voices: "f1", "m2"…),
   // onboundary, onend, onstart, keep (do not cancel what is playing) }.
+  // A text with its recording (tools/audio/grabar.py) plays the file; the
+  // rest, the phone's voice.  The answer is truthy when something will sound.
   function speak(text, force, rate, opts) {
-    if (!window.speechSynthesis) return null;
     if (state.silent && !force) return null;
     opts = opts || {};
+    var file = recorded(text, opts.slot);
+    if (!file && !window.speechSynthesis) return null;
+    if (!opts.keep) { pqStop(); if (window.speechSynthesis) window.speechSynthesis.cancel(); if (realAudio) try { realAudio.pause(); } catch (e) { /* */ } }
+    // nothing recorded and nothing in the queue: the phone's voice, as always
+    if (!file && !pqOn) return ttsSpeak(text, rate, opts);
+    // a recording, or a turn after one: in order, one after the other
+    pq.push(function () { if (file) playFile(file, text, rate, opts); else ttsSpeak(text, rate, chained(opts)); });
+    if (!pqOn) pqNext();
+    return { text: text, file: file };
+  }
+  function ttsSpeak(text, rate, opts) {
+    if (!window.speechSynthesis) { if (opts.onend) opts.onend({}); return null; }
     var u = new SpeechSynthesisUtterance(String(text).replace(/_+/g, " "));
     u.lang = LG.tts;
     var v = opts.vi != null && voices.length ? voices[opts.vi % voices.length] : voice;
@@ -244,10 +258,78 @@
       if (opts.onerror) opts.onerror(e);
     };
     if (opts.onstart) u.onstart = opts.onstart;
-    if (!opts.keep) window.speechSynthesis.cancel();
     if (!voices.length && voicesSeen) noVoiceWarn();
     window.speechSynthesis.speak(u);
     return u;
+  }
+
+  /* The recorded voices (Piper, lang/<código>/audio_data.js: AUDIO_DATA.have,
+     the keys of Voces.key): the file of this text in this voice, or of the
+     text in the voice of sentences on their own, or null.  «Voz del
+     teléfono» in the profile (state.phoneVoice) turns them off. */
+  var adHave = null;
+  function recorded(text, slot) {
+    var AD = window.AUDIO_DATA;
+    if (!AD || !window.Voces || state.phoneVoice || !text) return null;
+    if (!adHave) {
+      adHave = {};
+      String(AD.have || "").split(" ").forEach(function (k) { if (k) adHave[k] = 1; });
+    }
+    var k = slot ? Voces.key(text, slot) : "";
+    if (!(k && adHave[k])) k = Voces.key(text, "");
+    return adHave[k] ? (LG.base || "") + AD.dir + k + ".mp3" : null;
+  }
+  // The queue: a recording plays, then the next turn (a recording or the
+  // phone's voice); speechSynthesis.cancel() (what every «stop» calls)
+  // empties it too.
+  var pq = [], pqOn = false, player = null;
+  function pqNext() {
+    var job = pq.shift();
+    pqOn = !!job;
+    if (job) job();
+  }
+  function pqStop() {
+    pq = [];
+    pqOn = false;
+    if (player) { player.onended = player.onerror = player.onplay = null; try { player.pause(); } catch (e) { /* */ } }
+  }
+  // a turn of the phone's voice inside the queue: when it ends, the next one
+  function chained(opts) {
+    return Object.assign({}, opts, {
+      onend: function (e) { pqNext(); if (opts.onend) opts.onend(e); },
+      onerror: function (e) { pqNext(); if (opts.onerror) opts.onerror(e); }
+    });
+  }
+  function playFile(file, text, rate, opts) {
+    if (!player) player = new Audio();
+    var a = player, settled = false;
+    a.onended = function () {
+      if (settled) return;
+      settled = true;
+      a.onended = a.onerror = a.onplay = null;
+      pqNext();
+      if (opts.onend) opts.onend({});
+    };
+    // the file does not load (offline the first time): the phone's voice
+    a.onerror = function () {
+      if (settled) return;
+      settled = true;
+      a.onended = a.onerror = a.onplay = null;
+      ttsSpeak(text, rate, chained(opts));
+    };
+    a.onplay = opts.onstart ? function () { a.onplay = null; opts.onstart({}); } : null;
+    a.src = file;
+    a.defaultPlaybackRate = a.playbackRate = Math.max(0.5, Math.min(2, (rate || 0.95) / 0.95));
+    try {
+      var p = a.play();
+      if (p && p.catch) p.catch(function () { if (a.onerror) a.onerror(); });
+    } catch (e) { if (a.onerror) a.onerror(); }
+  }
+  if (window.speechSynthesis) {
+    try {
+      var ssCancel = window.speechSynthesis.cancel.bind(window.speechSynthesis);
+      window.speechSynthesis.cancel = function () { pqStop(); return ssCancel(); };
+    } catch (e) { /* a read-only object: the recordings stop with speak() only */ }
   }
   /* «Tu teléfono no tiene voz en alemán»: once per session, with the steps
      to install it (Android, iPhone, Windows, Mac). */
@@ -863,7 +945,7 @@
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION = "c1-vN" in sw.js: test_game
      and the CI check it).  One version for the app and both languages. */
-  var APP_VERSION = "v3.17.0";
+  var APP_VERSION = "v3.18.0";
   // Settimana XVII: Roman numerals on the street signs (LANG.ui.romanWeeks).
   function romano(n) {
     var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
@@ -4608,6 +4690,8 @@
           '<input type="checkbox" id="kbquiet"' + (state.kbQuiet ? " checked" : "") + "></label>" +
         (window.Estrategia ? '<label class="set"><span>Estrategia de la semana 💡<small>una táctica corta antes de la misión donde sirve, una vez por semana, con 👍/👎 para el cierre</small></span>' +
           '<input type="checkbox" id="stratset"' + ((state.strat || {}).off ? "" : " checked") + "></label>" : "") +
+        (window.AUDIO_DATA ? '<label class="set"><span>Voz del teléfono<small>apagado: la radio, las escuchas largas, los diálogos y los dictados suenan con voces grabadas (Piper), menos robóticas; prendido: con la voz que tenga el teléfono</small></span>' +
+          '<input type="checkbox" id="phonevoice"' + (state.phoneVoice ? " checked" : "") + "></label>" : "") +
         '<label class="set"><span>Modo silencioso 🤫<small>nada suena solo y los ejercicios de escuchar se cambian por otros escritos; el 🔊 sigue andando si lo tocás</small></span>' +
           '<input type="checkbox" id="silent"' + (state.silent ? " checked" : "") + "></label>" +
         '<label class="set"><span>Agendar mi rato diario<small>' + (state.icsAt ? 'ya lo agregaste · de nuevo si cambiás la hora' : 'un evento en tu calendario, con alarma, que abre tu semana') + '</small></span>' +
@@ -4662,6 +4746,9 @@
       })() : "") +
       (window.VociCV && (VociCV.ALL || []).length ? '<h3>🗣️ Oraciones grabadas</h3><p class="muted small">El dictado de ' + UI.suoni + " y «¿Qué forma escuchaste?» usan " +
         VociCV.ALL.length + " oraciones leídas por voluntarios de Common Voice (Mozilla), de dominio público (CC0).</p>" : "") +
+      (window.AUDIO_DATA && (AUDIO_DATA.credits || []).length ? '<h3>🔊 Voces grabadas</h3><p class="muted small">La radio, las escuchas largas, los diálogos y los dictados usan ' +
+        String(AUDIO_DATA.have || "").split(" ").filter(Boolean).length + " audios generados con Piper (TTS neuronal, libre), con las voces " +
+        AUDIO_DATA.credits.map(esc).join("; ") + ".</p>" : "") +
       '<div class="row" style="margin-top:14px">' +
         '<button class="btn ghost" id="reset">Borrar mi progreso</button>' +
       "</div></details>" + versionLine();
@@ -7265,10 +7352,11 @@
         if (window.speechSynthesis) speechSynthesis.cancel();
         // a dialogue: each speaker a voice of their gender (it.sexes), or at least another pitch
         var two = it.parts.some(function (x) { return x[0] !== "A"; });
-        var cs = two ? castVoices(it.sexes, 1 + Math.max.apply(null, it.parts.map(function (x) { return x[0] === "C" ? 2 : x[0] === "B" ? 1 : 0; }))) : null;
+        var n = 1 + Math.max.apply(null, it.parts.map(function (x) { return x[0] === "C" ? 2 : x[0] === "B" ? 1 : 0; }));
+        var cs = two ? castVoices(it.sexes, n) : null, sl = two && window.Voces ? Voces.slots(it.sexes, n) : [];
         it.parts.forEach(function (p) {
-          var c = cs && cs[p[0] === "C" ? 2 : p[0] === "B" ? 1 : 0];
-          speak(p[1], force, rate || 0.95, c ? { keep: true, vi: c.vi, pitch: c.pitch } : { keep: true });
+          var k = p[0] === "C" ? 2 : p[0] === "B" ? 1 : 0, c = cs && cs[k];
+          speak(p[1], force, rate || 0.95, c ? { keep: true, vi: c.vi, pitch: c.pitch, slot: sl[k] } : { keep: true });
         });
       };
       on("#play1", function () { sayIt(true); });
@@ -7490,6 +7578,8 @@
     };
     var kbm = $("#kbmode");
     if (kbm) kbm.onchange = function () { Teclado.setMode(kbm.value); toast(kbm.value === "app" ? "Respondés con el teclado de la app." : "Respondés con el teclado del teléfono."); };
+    var pvo = $("#phonevoice");
+    if (pvo) pvo.onchange = function () { state.phoneVoice = pvo.checked; persist(); speak(UI.hi || "Ciao", true); };
     var kbq = $("#kbquiet");
     if (kbq) kbq.onchange = function () { state.kbQuiet = kbq.checked; persist(); langBoxes(); };
     var sts = $("#stratset");
@@ -7705,6 +7795,7 @@
     window.__test = {
       item: function () { return round && view.screen === "gioco" ? round.items[round.i] : null; },
       state: function () { return state; },
+      speak: speak,
       round: function () { return round; },
       // start a round of a given week (the exploration and the smoke test)
       start: function (kind, arg, week) { if (week) view.week = week; startRound(kind, arg); },

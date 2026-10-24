@@ -1,7 +1,9 @@
-/* Las voces en el navegador (docs/js/voces.js), con un speechSynthesis de
-   mentira: (1) en la radio de italiano, Sara habla con una voz de mujer y
-   Dario con una de hombre; (2) en alemán, sin ninguna voz alemana en el
-   teléfono, tocar 🔊 muestra cómo instalarla.
+/* Las voces en el navegador (docs/js/voces.js), con un speechSynthesis y un
+   Audio de mentira: (1) con la voz del teléfono, en la radio de italiano
+   Sara habla con una voz de mujer y Dario con una de hombre; (2) con las
+   voces grabadas (Piper, audio_data.js), la radio suena desde los archivos,
+   cada hablante con los suyos y en orden; (3) en alemán, sin ninguna voz
+   alemana en el teléfono, tocar 🔊 muestra cómo instalarla.
      NODE_PATH=$(npm root -g) node tools/lib/smoke_voces.js */
 "use strict";
 const { chromium } = require("playwright");
@@ -10,7 +12,14 @@ const path = require("path");
 
 function fakeVoices(list) {
   return function (list) {
-    window.__spoken = [];
+    window.__spoken = []; window.__played = [];
+    // an <audio> that «plays» at once and ends a moment later
+    window.Audio = function () {
+      const a = { src: "", playbackRate: 1, defaultPlaybackRate: 1, onended: null, onerror: null, onplay: null,
+        pause() { a.paused = true; },
+        play() { a.paused = false; window.__played.push(a.src); if (a.onplay) a.onplay(); setTimeout(() => { if (!a.paused && a.onended) a.onended(); }, 5); return Promise.resolve(); } };
+      return a;
+    };
     window.SpeechSynthesisUtterance = function (t) { this.text = t; };
     const vs = list.map(v => ({ name: v[0], lang: v[1], localService: true, default: false, voiceURI: v[0] }));
     Object.defineProperty(window, "speechSynthesis", { configurable: true, value: {
@@ -45,10 +54,11 @@ function fakeVoices(list) {
     return { ctx, page };
   }
 
-  // 1. La radio de italiano, semana 6: Sara (mujer) y Dario (hombre)
+  // 1. La radio de italiano, semana 6: Sara (mujer) y Dario (hombre), con la voz del teléfono
   {
     const { ctx, page } = await start("it", [["Microsoft Diego Online (Natural) - Italian (Italy)", "it-IT"],
       ["Microsoft Elsa - Italian (Italy)", "it-IT"], ["Microsoft Isabella Online (Natural) - Italian (Italy)", "it-IT"], ["Google US English", "en-US"]]);
+    await page.evaluate(() => { window.__test.state().phoneVoice = true; });
     const ep = await page.evaluate(() => (window.RADIO_DATA.EPISODI || []).filter(e => e.week === 6)[0]);
     if (!ep || (ep.sexes || []).join() !== "f,m") errors.push("la radio 6 no trae sexes f,m: " + JSON.stringify(ep && ep.sexes));
     await page.evaluate(() => { window.__spoken = []; Tramo.playScript(RADIO_DATA.EPISODI.filter(e => e.week === 6)[0].turns, { sexes: ["f", "m"] }); });
@@ -63,9 +73,34 @@ function fakeVoices(list) {
     await ctx.close();
   }
 
-  // 2. Alemán sin voz alemana: el aviso con las instrucciones
+  // 2. La misma radio con las voces grabadas: los archivos de Sara (f1) y de Dario (m1), en orden
+  {
+    const { ctx, page } = await start("it", [["Google italiano", "it-IT"]]);
+    const r = await page.evaluate(() => {
+      window.__played = []; window.__spoken = [];
+      const ep = RADIO_DATA.EPISODI.filter(e => e.week === 6)[0];
+      Tramo.playScript(ep.turns, { sexes: ep.sexes });
+      const want = ep.turns.map(t => "lang/it/" + AUDIO_DATA.dir + Voces.key(t[1], t[0] === "A" ? "f1" : "m1") + ".mp3");
+      const have = AUDIO_DATA.have.split(" ").length;
+      return { want, have };
+    });
+    await page.waitForTimeout(1500);
+    const played = await page.evaluate(() => window.__played), spoken = await page.evaluate(() => window.__spoken);
+    note("radio 6 grabada: " + played.length + " archivos de " + r.want.length + " turnos (" + r.have + " audios en el manifiesto), " + spoken.length + " con la voz del teléfono");
+    if (played.join() !== r.want.join()) errors.push("la radio no tocó los archivos de cada hablante en orden: " + played.slice(0, 3).join(", "));
+    if (spoken.length) errors.push("con todo grabado, igual usó la voz del teléfono: " + spoken.length);
+    // a file that does not exist: the phone's voice, and the turns go on
+    await page.evaluate(() => { window.__played = []; window.__spoken = []; window.__test.speak("Questa frase non è registrata.", true); });
+    await page.waitForTimeout(200);
+    const sp2 = await page.evaluate(() => window.__spoken);
+    if (sp2.length !== 1) errors.push("un texto sin grabación no sonó con la voz del teléfono");
+    await ctx.close();
+  }
+
+  // 3. Alemán sin voz alemana (y con la voz del teléfono): el aviso con las instrucciones
   {
     const { ctx, page } = await start("de", [["Google US English", "en-US"], ["Google español", "es-ES"]]);
+    await page.evaluate(() => { window.__test.state().phoneVoice = true; });
     await page.evaluate(() => window.__test.mission("play", null, 1)); await page.waitForTimeout(600);
     let shown = false;
     for (let i = 0; i < 12 && !shown; i++) {

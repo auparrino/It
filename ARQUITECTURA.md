@@ -117,6 +117,17 @@ otra altura. El género de cada hablante está en los datos: `sexes` junto a
 ninguna de la lengua, `app.js` (`noVoiceWarn`) explica cómo instalarla.
 Controles: `tools/lib/test_voces.js` y `tools/lib/smoke_voces.js`.
 
+**Voces grabadas (Piper).** La radio, el tramo, los diálogos del examen, las
+escenas de trabajo y los ejercicios de escuchar y de dictado del curso suenan
+desde MP3 generados con Piper (`tools/audio/grabar.py`, corre local, no en el
+build ni en el CI): un archivo por clave en `docs/lang/it/audio/piper/` (y pt, de) y el
+manifiesto `audio_data.js`. La clave sale del texto y del lugar del hablante
+(`Voces.key`, `Voces.slots`: «f1», «m2»…; la misma cuenta en Python).
+`speak()` (app.js) toca el archivo si está, en una cola que respeta el orden
+de los diálogos, y si no usa la voz del teléfono; «Voz del teléfono» en el
+perfil (`state.phoneVoice`) las apaga. El service worker guarda cada audio
+al escucharlo. Controles: `tools/lib/test_audio.js` y `tools/lib/smoke_voces.js`.
+
 **Tests.** `npm test` corre la batería de cada idioma (`tools/it/test_*.js`,
 `tools/pt/test_*.js`) contra el mismo núcleo, cargado con `tools/lib/pack.js`,
 los tests de lo común (`tools/lib/test_*.js`) y los chequeos de contenido

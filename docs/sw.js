@@ -18,7 +18,7 @@
  * las viejas de esta misma app (La Via C1: «laviac1-v…») se borran las
  * versiones; las voces ya descargadas («laviac1-voci») se siguen leyendo.
  */
-var VERSION = "c1-v3.17.0";
+var VERSION = "c1-v3.18.0";
 var PREFIX = "c1-";
 var VOCI = "c1-voci";
 var LEGACY = /^laviac1-v\d/;          // the old versions of this same app
@@ -138,12 +138,13 @@ self.addEventListener("fetch", function (e) {
     return;
   }
   if (url.origin !== location.origin) return;
-  // The sentences of Common Voice (lang/<código>/audio/cv/): cached the
+  // The sentences of Common Voice (lang/<código>/audio/cv/) and the
+  // recordings of Piper (lang/<código>/audio/piper/): cached the
   // first time they play, in the lasting cache, so a session works offline
   // afterwards without downloading 5 MB at install.  The player asks by
   // ranges (206, which cannot be cached): ask for the whole file, a few KB,
   // and answer with it.
-  if (/\/audio\/cv\//.test(url.pathname)) {
+  if (/\/audio\/(cv|piper)\//.test(url.pathname)) {
     e.respondWith(lasting(null, url.href, function (res) { return res.status === 200; }));
     return;
   }

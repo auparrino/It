@@ -746,6 +746,7 @@
       chest: null,        // día en que abriste el cofre
       best: {},           // récords: relâmpago, combo
       silent: false,      // modo silencioso: nada suena ni hay que escuchar
+      phoneVoice: false,  // true: la voz del teléfono en lugar de los audios grabados (Piper)
       kbQuiet: false,     // teclado sin sugerencias (autocomplete="off"): Gboard no detecta ni deja cambiar el idioma
       theme: "",          // "" como el teléfono, "light" u "dark"
       written: 0,         // frases escritas de memoria sin errores

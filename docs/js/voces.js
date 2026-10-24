@@ -121,7 +121,34 @@
   // The speakers of a script: "A" → 0, "B" → 1, "C" → 2.
   function who(letter) { var c = String(letter || "A").charCodeAt(0) - 65; return c >= 0 && c < 26 ? c : 0; }
 
-  var Voces = { gender: gender, score: score, sort: sort, cast: cast, who: who };
+  /* The recorded voices (tools/audio/grabar.py): each speaker of a dialogue
+     has a slot, its gender and its place among those of that gender (the
+     second woman is "f2"); a sentence outside a dialogue has none ("").
+     key(text, slot) names the file: the same text and the same slot always
+     give the same name, here and in the script. */
+  function slots(sexes, n) {
+    var seen = { f: 0, m: 0 }, out = [];
+    for (var k = 0; k < Math.max(n || 0, (sexes || []).length); k++) {
+      var s = (sexes || [])[k] === "f" || (sexes || [])[k] === "m" ? sexes[k] : (k % 2 ? "f" : "m");
+      out.push(s + (++seen[s]));
+    }
+    return out;
+  }
+  function norm(text) {
+    var s = String(text == null ? "" : text).replace(/_+/g, " ");
+    if (s.normalize) s = s.normalize("NFC");
+    return s.replace(/\s+/g, " ").trim();
+  }
+  function fnv(s, h) {
+    for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; }
+    return ("0000000" + h.toString(16)).slice(-8);
+  }
+  function key(text, slot) {
+    var s = (slot || "") + "|" + norm(text);
+    return fnv(s, 2166136261) + fnv(s, 3735928559);
+  }
+
+  var Voces = { gender: gender, score: score, sort: sort, cast: cast, who: who, slots: slots, norm: norm, key: key };
   if (typeof module !== "undefined" && module.exports) module.exports = Voces;
   root.Voces = Voces;
 })(typeof window !== "undefined" ? window : this);
