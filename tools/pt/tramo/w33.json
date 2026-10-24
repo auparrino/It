@@ -61,6 +61,7 @@
     "genre": "podcast literário",
     "es": "En un podcast sobre literatura, una conductora conversa con un profesor sobre la ubicación de los pronombres en el portugués de Brasil: lo que se dice, lo que se escribe y lo que hicieron los escritores con eso.",
     "speakers": ["Lia, apresentadora", "Otávio, professor"],
+    "sexes": ["f", "m"],
     "turns": [
       ["A", "Olá, está começando mais um Entrelinhas. Hoje eu recebo o professor Otávio Brandão para falar de um assunto que parece pequeno, mas rende muito: onde a gente coloca o pronome. Professor, por que isso dá tanta discussão no Brasil?"],
       ["B", "Porque aqui existe uma distância grande entre o que se fala e o que a gramática tradicional manda escrever. Na fala, o brasileiro diz “me dá”, “me empresta”, “te vejo amanhã”, com o pronome antes do verbo, mesmo no começo da frase. Já a norma escrita, que foi muito baseada no português de Portugal, pede “dá-me”, “empresta-me”."],

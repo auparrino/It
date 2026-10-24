@@ -226,7 +226,7 @@
        presente is there from day one; its full name («presente
        indicativo») only makes sense next to the congiuntivo. */
     weeks: { presente: 1, imperativo: 12, passatoProssimo: 11, imperfetto: 15, futuro: 19, futuroAnteriore: 19,
-      condizionale: 20, congiuntivo: 24, trapassatoProssimo: 26, congiuntivoPassato: 29, congImperfetto: 30,
+      condizionale: 20, congiuntivo: 24, trapassatoProssimo: 16, congiuntivoPassato: 29, congImperfetto: 30,
       congiuntivoTrapassato: 30, condizionalePassato: 31, passatoRemoto: 37, trapassatoRemoto: 37 },
     nameWeek: { presente: 24 },
     // What to say before the tense has a name.

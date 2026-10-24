@@ -5,6 +5,7 @@
  "genre": "gioco radiofonico",
  "es": "Todos los lunes Radio Portici juega a «¿Dónde estoy?»: Leo, el corresponsal en bicicleta, recorre la ciudad y cuenta el camino; Sara hace preguntas hasta adivinar el lugar.",
  "speakers": ["Sara", "Leo"],
+ "sexes": ["f", "m"],
  "turns": [
   ["A", "Buongiorno! È lunedì e, come ogni lunedì, c'è il gioco «Dove sono?». Leo è in bicicletta da qualche parte in città. Leo, mi senti?"],
   ["B", "Ti sento benissimo, Sara!"],

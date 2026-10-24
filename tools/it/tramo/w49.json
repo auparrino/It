@@ -126,6 +126,7 @@
       "Conduttore",
       "Urbanista"
     ],
+    "sexes": ["m", "f"],
     "turns": [
       [
         "A",

@@ -62,6 +62,7 @@
     "genre": "conversazione in redazione",
     "es": "En la redacción de un diario online, un redactor joven y su jefa discuten si publicar un video viral que circula desde la mañana.",
     "speakers": ["Marco, redattore", "Elena, caporedattrice"],
+    "sexes": ["m", "f"],
     "turns": [
       ["A", "Elena, hai un minuto? Hai visto il video che gira da stamattina, quello dell'incendio al mercato coperto?"],
       ["B", "L'ho visto, sì. Tre milioni di visualizzazioni in due ore. Perché?"],

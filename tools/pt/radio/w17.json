@@ -5,6 +5,7 @@
  "genre": "previsão do tempo e conversa",
  "es": "Se viene el carnaval. Nanda lee el pronóstico del tiempo con el futuro formal de los boletines; después Caio, el cronista estudiante, cuenta sus planes, que dependen de un examen.",
  "speakers": ["Nanda", "Caio"],
+ "sexes": ["f", "m"],
  "turns": [
   ["A", "E agora, a previsão do tempo para o fim de semana de carnaval. Na sexta-feira, o dia será quente e abafado, com máxima de trinta e oito graus. No sábado, haverá pancadas de chuva no fim da tarde, com trovões. No domingo, o céu ficará nublado e uma garoa fina cairá sobre a cidade durante a manhã."],
   ["B", "Nanda, fala a verdade: vai chover no desfile ou não vai?"],

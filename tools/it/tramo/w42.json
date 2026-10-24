@@ -129,6 +129,7 @@
       "Valeria, funzionaria",
       "Tommaso, collega"
     ],
+    "sexes": ["f", "m"],
     "turns": [
       [
         "A",

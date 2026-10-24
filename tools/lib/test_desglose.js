@@ -102,7 +102,8 @@ var CASES = {
     ["Mi sono perso.", 11, ["*sono perso*: de *perdere*", "reflexivo (*perdersi*)"], []],
     ["Il negozio è chiuso.", 12, [], ["*è chiuso*"]],
     ["L'ho già visto.", 19, ["*l'* (*l'ho*): pronombre átono «lo / la", "*ho visto*: de *vedere*, passato prossimo"], []],
-    ["Hai ragione, non ci avevo pensato.", 20, ["*avevo pensato*: de *pensare*, pasado anterior"], ["trapassato prossimo"]],
+    ["Hai ragione, non ci avevo pensato.", 14, ["*avevo pensato*: de *pensare*, pasado anterior"], ["trapassato prossimo"]],
+    ["Hai ragione, non ci avevo pensato.", 20, ["*avevo pensato*: de *pensare*, trapassato prossimo"], []],
     ["Sto imparando l'italiano.", 2, ["*sto imparando*: *stare* (presente, io) + gerundio de *imparare*"], []],
     // elisiones
     ["Un bicchiere d'acqua, per favore.", 3, ["*d'acqua*: *d'* = *di*"], []],

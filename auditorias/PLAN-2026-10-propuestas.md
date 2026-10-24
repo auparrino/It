@@ -74,6 +74,16 @@ Junta las propuestas de las revisiones contra manuales (`auditorias/2026-10-*-re
 
 ## Tanda 4 — Propuestas por temporada de italiano y portugués
 
+**Estado (2026-10-24, v3.17.0): hecha.** Los ítems están en `tools/it/authored/t4_it*.py`,
+`tools/it/lessons/t4_c1.py`, `tools/pt/authored/t4_pt*.py` y en los archivos de cada
+temporada; duelos y Capire en `docs/lang/<código>/duelli_data.js` y `lab_data.js`;
+evidencia negativa en `tools/<código>/bank/errori_banca.py`. Cada bloque (it 1-13, 14-26,
+27-39, 40-52; pt transversal, 1-13, 14-26, 27-39, 40-52) pasó por un control de profesor
+nativo. Quedan abiertos: en pt S4 el 35 % de respuestas escritas (queda en ~29 %), repartir
+el repaso de las semanas 51 y 52 entre sus partes (`_review_part` de
+`tools/pt/build_course.py`), el dictogloss y la lectura de la 49 con tema brasileño, y
+escuchar con voz real los ítems de vocal abierta/cerrada antes de confiar en el TTS.
+
 
 ### it semanas 1-13
 - [ ] **Evidencia negativa focalizada para lo que hay que desaprender (T1)** (impacto alto, esfuerzo chico). Agregar a errori_banca.py, con semana, entre 20 y 25 agramaticales de los rasgos que Della Putta muestra que no se corrigen con input. Hoy no hay ninguno de *stare* + gerundio sobreextendido ni de *andare a* como futuro.

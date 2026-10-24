@@ -5,6 +5,7 @@
  "genre": "telefonata in diretta",
  "es": "Martín llama a la radio un viernes: el lunes tiene una entrevista de trabajo en una empresa de Módena y está nervioso. Sara lo ayuda a imaginarse el día, y hay una noticia que complica el viaje.",
  "speakers": ["Sara", "Martín"],
+ "sexes": ["f", "m"],
  "turns": [
   ["A", "Buongiorno, ascoltatori! In linea abbiamo di nuovo Martín. Martín, ti sento agitato..."],
   ["B", "Ciao, Sara. Sì, un po'. Lunedì avrò un colloquio di lavoro a Modena, in un'azienda che produce motori elettrici. È il mio primo colloquio in Italia."],

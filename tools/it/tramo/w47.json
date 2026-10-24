@@ -123,6 +123,7 @@
       "Conduttore",
       "Giornalista economica"
     ],
+    "sexes": ["m", "f"],
     "turns": [
       [
         "A",

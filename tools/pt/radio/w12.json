@@ -5,9 +5,10 @@
  "genre": "quadro «Saúde no ar»",
  "es": "Téo llega a la radio caminando raro y con tos. En la sección de salud, Nanda le pregunta por su rutina y le da consejos, y hasta una receta de la abuela.",
  "speakers": ["Nanda", "Téo"],
+ "sexes": ["f", "m"],
  "turns": [
   ["A", "Bom dia! Começa agora o quadro «Saúde no ar», e hoje o paciente é o Téo. O que aconteceu, Téo?"],
-  ["B", "Ai, Nanda... Ontem machuquei as costas na academia. Agora dói o ombro, o pescoço... e ainda tô com tosse."],
+  ["B", "Ai, Nanda... Ontem machuquei as costas na academia. Agora dói o ombro, dói o pescoço... e ainda tô com tosse."],
   ["A", "Coitado! Me conta: a que horas você se levanta?"],
   ["B", "Eu me levanto às cinco, me visto rápido e vou para a academia. Depois venho para a rádio e só me deito à meia-noite."],
   ["A", "Aí está o problema! Escuta a doutora Nanda. Primeiro: hoje não vá à academia. Descanse e não carregue peso."],

@@ -231,7 +231,7 @@
       mille: ["Mille", "1000 respuestas correctas."],
       settimana: ["Sette giorni", "Racha de 7 días."],
       mese: ["Trenta giorni", "Racha de 30 días."],
-      a2: ["Livello A2", "Vencé al jefe de la semana 13."],
+      a2: ["Livello A2 · 1", "Vencé al jefe de la semana 13: el A1 completo y la primera parte del A2."],
       b1: ["Livello B1", "Vencé al jefe de la semana 26."],
       b2: ["Livello B2", "Vencé al jefe de la semana 39."],
       c1: ["Livello C1", "Superá el examen final."],

@@ -5,6 +5,7 @@
  "genre": "telefonata in diretta",
  "es": "Llama la signora Franca, una vecina del barrio que escucha la radio todas las mañanas. Su nieto cumple años y ella no sabe qué regalarle: le pide ayuda a Sara.",
  "speakers": ["Sara", "Franca"],
+ "sexes": ["f", "f"],
  "turns": [
   ["A", "Abbiamo un'altra telefonata. Pronto, chi parla?"],
   ["B", "Buongiorno, sono la signora Franca, di via del Pratello. Vi ascolto ogni mattina!"],

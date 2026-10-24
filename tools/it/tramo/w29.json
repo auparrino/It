@@ -56,6 +56,7 @@
     "genre": "dibattito radiofonico",
     "es": "En un programa de radio de Valmarina, un comerciante del centro y una urbanista discuten sobre el primer año del centro peatonal.",
     "speakers": ["Ernesto Galli, commerciante", "Paola Rinaldi, urbanista"],
+    "sexes": ["m", "f"],
     "turns": [
       ["A", "Comincio io, se la professoressa Rinaldi è d'accordo. Ho un negozio di scarpe in via Garibaldi da trent'anni. E le dico francamente: quest'anno ho perso quasi un terzo dei clienti."],
       ["B", "Mi dispiace davvero, signor Galli. Ma lei è sicuro che li abbia persi per colpa della zona pedonale? Voglio dire, anche le vendite online sono cresciute moltissimo."],

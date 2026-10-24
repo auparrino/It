@@ -5,6 +5,7 @@
  "genre": "chiacchierata in studio",
  "es": "El domingo la familia de Dario vino de Nápoles a visitarlo. Sara mira la foto de la comida en la computadora de la radio y quiere saber quién es cada uno.",
  "speakers": ["Sara", "Dario"],
+ "sexes": ["f", "m"],
  "turns": [
   ["A", "Buongiorno! Dario, sul sito della radio c'è una foto bellissima: un tavolo lunghissimo e tante persone. Chi sono?"],
   ["B", "È la mia famiglia! Domenica sono venuti tutti da Napoli per il mio compleanno. Abbiamo passato una giornata splendida."],
@@ -45,5 +46,5 @@
   ["La madre di Dario vuole trasferirsi a Bologna.", false]
  ],
  "grammatica": {"label": "demostrativos, posesivos (sin artículo con los familiares) e indefinidos", "forme": ["questa signora", "questa è mia madre", "quel signore", "mio padre", "questi due ragazzi", "i miei cugini", "la loro madre", "mia zia", "quella bambina", "mia nipote", "suo marito", "i tuoi nonni", "i miei nonni", "nessuno", "ogni viaggio", "alcuni parenti", "qualcuno", "casa tua"]},
- "parole": [["cugini", "cugino"], ["zia", "zio"], ["sorella", "sorella"], ["nipote", "nipote"], ["figlia", "figlio"], ["marito", "marito"], ["nonni", "nonno"], ["parenti", "parente"], ["giornata", "giornata"], ["lasciato", "lasciare"], ["bisogno", "bisogno"]]
+ "parole": [["cugini", "cugino"], ["zia", "zio"], ["nipote", "nipote"], ["giornata", "giornata"], ["lasciato", "lasciare"], ["bisogno", "bisogno"]]
 }

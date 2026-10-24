@@ -625,7 +625,7 @@
    "stem": "1947 → ___",
    "answer": "millenovecentoquarantasette",
    "alt": [],
-   "drop": false,
+   "drop": true,
    "note": "Los años se escriben en una sola palabra: *mille* + *novecento* + *quarantasette*, sin «y» entre decenas y unidades como en castellano."
   },
   "d04-002": {
@@ -700,7 +700,7 @@
    "stem": "6298 → ___",
    "answer": "seimiladuecentonovantotto",
    "alt": [],
-   "drop": false,
+   "drop": true,
    "note": "Miles en plural es *mila* (*seimila*, pero *mille* para uno) y todo va pegado: *seimiladuecentonovantotto*; *novanta* + *otto* pierde la a."
   },
   "d04-010": {
@@ -1808,12 +1808,10 @@
    "stem": "Leemos.",
    "answer": "Leggiamo.",
    "alt": [
-    "Noi leggiamo.",
-    "Stiamo leggendo.",
-    "Noi stiamo leggendo."
+    "Noi leggiamo."
    ],
    "drop": false,
-   "note": "*noi* termina en *-iamo*: *leggiamo* (la g suena dura en *leggo* y blanda ante e/i)."
+   "note": "*noi* termina en *-iamo*: *leggiamo* (la g suena dura en *leggo* y blanda ante e/i). «Leemos» es presente simple; *stiamo leggendo* es solo «estamos leyendo ahora»."
   },
   "d06-054": {
    "consigna": "Traducí al italiano.",
@@ -1843,12 +1841,10 @@
    "stem": "Ustedes escriben. (en confianza)",
    "answer": "Scrivete.",
    "alt": [
-    "Voi scrivete.",
-    "State scrivendo.",
-    "Voi state scrivendo."
+    "Voi scrivete."
    ],
    "drop": false,
-   "note": "El «ustedes» de confianza es voi."
+   "note": "El «ustedes» de confianza es voi: *scrivete*. «Escriben» es presente simple; *state scrivendo* es solo «están escribiendo ahora»."
   },
   "d06-057": {
    "consigna": "Traducí al italiano.",

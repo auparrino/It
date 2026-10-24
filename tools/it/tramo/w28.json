@@ -58,6 +58,7 @@
     "genre": "podcast",
     "es": "En un podcast sobre italianos que emigran, la conductora conversa con un biólogo que vive en Berlín desde hace años sobre por qué se fue y si piensa volver.",
     "speakers": ["Giulia, conduttrice", "Davide, biologo"],
+    "sexes": ["f", "m"],
     "turns": [
       ["A", "Bentornati a «Valigie», il podcast sugli italiani che partono e, qualche volta, tornano. Oggi con me c'è Davide, trentaquattro anni, biologo, che vive a Berlino da sette anni. Ciao Davide."],
       ["B", "Ciao Giulia, grazie per avermi invitato."],

@@ -126,6 +126,7 @@
      "Chiara",
      "Valentina"
    ],
+   "sexes": ["f", "f"],
    "turns": [
      ["A", "Vale! Finalmente. Ti ho scritto tre volte, eh. Ero quasi preoccupata."],
      ["B", "Lo so, lo so, scusami. Hai ragione. È stata una settimana… boh, pazzesca."],

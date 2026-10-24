@@ -220,7 +220,7 @@
 
   /* ------------------------------------------------------------- pronunciación */
 
-  var voice = null, voices = [];
+  var voice = null, voices = [], voicesSeen = false;
   // force: the learner tapped 🔊 explicitly, so play even in office mode
   // (they may have earphones on).  opts: { pitch, vi (which voice of the language),
   // onboundary, onend, onstart, keep (do not cancel what is playing) }.
@@ -235,12 +235,39 @@
     u.rate = rate || 0.95;
     if (opts.pitch) u.pitch = opts.pitch;
     if (opts.onboundary) u.onboundary = opts.onboundary;
-    if (opts.onend) u.onend = opts.onend;
-    if (opts.onerror) u.onerror = opts.onerror;
+    u.onend = function (e) { if (opts.onend) opts.onend(e); };
+    // the phone has voices, but none of the language (or the engine says it is
+    // not downloaded): say how to install it.  A browser with no voices at all
+    // (getVoices empty) says nothing: it may still be loading them.
+    u.onerror = function (e) {
+      if (e && /language-unavailable|voice-unavailable/.test(e.error || "") && !voices.length) noVoiceWarn();
+      if (opts.onerror) opts.onerror(e);
+    };
     if (opts.onstart) u.onstart = opts.onstart;
     if (!opts.keep) window.speechSynthesis.cancel();
+    if (!voices.length && voicesSeen) noVoiceWarn();
     window.speechSynthesis.speak(u);
     return u;
+  }
+  /* «Tu teléfono no tiene voz en alemán»: once per session, with the steps
+     to install it (Android, iPhone, Windows, Mac). */
+  var noVoiceShown = false;
+  function noVoiceWarn() {
+    if (noVoiceShown || document.getElementById("novoice")) return;
+    noVoiceShown = true;
+    var lang = UI.langEs || LG.name || "este idioma";
+    var b = document.createElement("div");
+    b.id = "novoice";
+    b.className = "updbar novoice";
+    b.setAttribute("role", "alert");
+    b.innerHTML = "<div><b>🔇 Tu teléfono no tiene voz en " + esc(lang) + ".</b> Por eso no suena el audio. Instalala gratis:" +
+      "<ul class=\"small\"><li><b>Android:</b> Ajustes → Sistema → Idiomas → <i>Salida de texto a voz</i> (o «Texto a voz») → " +
+      "⚙️ del motor de Google → Instalar datos de voz → " + esc(lang) + ". Después cerrá y abrí la app.</li>" +
+      "<li><b>iPhone:</b> Ajustes → Accesibilidad → Contenido leído → Voces → " + esc(lang) + ".</li>" +
+      "<li><b>Computadora:</b> en Windows, Configuración → Hora e idioma → Voz → Agregar voces; en Mac, Ajustes → Accesibilidad → Contenido leído.</li></ul></div>" +
+      '<button class="btn" id="novoiceok">Entendido</button>';
+    document.body.appendChild(b);
+    document.getElementById("novoiceok").onclick = function () { b.remove(); };
   }
   var realAudio = null;
   // An item of the listening module carries its own voice (variability).
@@ -369,12 +396,19 @@
     if (!window.speechSynthesis) return;
     var vs = window.speechSynthesis.getVoices();
     var re = LG.voiceRe || new RegExp("^" + String(LG.tts || "").slice(0, 2), "i");
-    voices = vs.filter(function (v) { return re.test(v.lang); });
-    if (LG.voicePrefer) {
-      var pref = function (v) { return LG.voicePrefer.test(v.lang) ? 0 : 1; };
-      voices.sort(function (a, b) { return pref(a) - pref(b) || (b.localService ? 1 : 0) - (a.localService ? 1 : 0); });
-    }
+    voices = vs.filter(function (v) { return re.test(String(v.lang).replace("_", "-")); });
+    // the preferred variant, then the better voices (Natural, Neural, Google…: voces.js), then the local ones
+    voices = window.Voces ? Voces.sort(voices, LG.voicePrefer) : voices;
     voice = voices[0] || null;
+    voicesSeen = voicesSeen || vs.length > 0;
+  }
+  /* The voices of a dialogue: for each speaker {vi, pitch}, a voice of their
+     gender (sexes: ["f", "m"…], from the data) and a different one for each. */
+  function castVoices(sexes, n) {
+    if (window.Voces) return Voces.cast(voices, sexes, n);
+    var out = [];
+    for (var k = 0; k < n; k++) out.push({ vi: k, pitch: [0.92, 1.1, 1.25][k % 3] });
+    return out;
   }
   if (window.speechSynthesis) {
     pickVoice();
@@ -829,7 +863,7 @@
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION = "c1-vN" in sw.js: test_game
      and the CI check it).  One version for the app and both languages. */
-  var APP_VERSION = "v3.16.0";
+  var APP_VERSION = "v3.17.0";
   // Settimana XVII: Roman numerals on the street signs (LANG.ui.romanWeeks).
   function romano(n) {
     var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
@@ -1925,6 +1959,13 @@
       var weak = Drills.weakItems(course, w, state, itemMap).length;
       m({ kind: "debil", done: !!(state.weakDone || {})[w.week], ico: "🩹", opt: true, title: "Tus puntos débiles",
           sub: weak ? "Opcional · " + weak + " ejercicios de la estación que fallaste o casi no viste" : "Opcional · no fallaste nada todavía: repaso al azar" });
+      // a boss with a text of its own (pt 26: listen and answer, Scrivi `ouvir`)
+      if (window.Scrivi && Scrivi.TASKS[w.week]) {
+        var sdB = (state.scritti || {})[w.week];
+        m({ kind: "scrivi", done: !!sdB, ico: "✍️", title: UI.scrivi + ": tarea integrada",
+            sub: sdB ? "Entregado · " + sdB.n + " palabras" : (Scrivi.TASKS[w.week].ouvir ? "Escuchá el audio y contestá · " : "") +
+              Scrivi.TASKS[w.week].min + " palabras o más" });
+      }
       if (w.week === 52 && window.EsameData) m({ kind: "play", done: st.bossPassed, ico: "🎓", title: UI.examC1,
           sub: EX.missionSub, cls: "boss" });
       else m({ kind: "play", done: st.bossPassed, ico: "⚔️", title: "Vencé al " + UI.boss,
@@ -6321,12 +6362,12 @@
      insumo of a tarefa ("t0".."t3"). */
   function esScript(key) {
     var v = esV();
-    if (key === "d") return v.ascolto ? { parts: v.ascolto.turns } : null;
+    if (key === "d") return v.ascolto ? { parts: v.ascolto.turns, sexes: v.ascolto.sexes } : null;
     if (key === "m") return v.monologo ? { parts: v.monologo.text, mono: v.monologo.voice === 1 ? 1 : 0 } : null;
     var t = v.scrittura[+key.slice(1)], ins = t && t.insumo;
     if (!ins || ins.tipo !== "audio") return null;
-    if (ins.ref) { var a = esFind((window.EsameData || {}).ascolto, ins.ref); return a ? { parts: a.turns } : null; }
-    return ins.turns ? { parts: ins.turns } : null;
+    if (ins.ref) { var a = esFind((window.EsameData || {}).ascolto, ins.ref); return a ? { parts: a.turns, sexes: a.sexes } : null; }
+    return ins.turns ? { parts: ins.turns, sexes: ins.sexes } : null;
   }
   function esPlayHtml(key, what) {
     var n = (es && es.plays[key]) || 0;
@@ -6343,7 +6384,7 @@
     document.querySelectorAll("[data-eplay]").forEach(function (x) { x.disabled = true; });
     if (lbl) lbl.textContent = esPlayState(n, true);
     var me = esPlayer = { key: key, screen: view.screen };
-    me.h = Tramo.playScript(sc.parts, { mono: sc.mono, onend: function (sec) {
+    me.h = Tramo.playScript(sc.parts, { mono: sc.mono, sexes: sc.sexes, onend: function (sec) {
       if (esPlayer !== me) return;
       esPlayer = null;
       noteListening(sec);
@@ -6700,7 +6741,11 @@
     var grid = window.Grilla && Grilla.active(w.week, task);
     return '<button class="btn ghost" id="sback">← a la semana</button>' +
       plate(UI.scrivi + " · " + UI.week + " " + weekNum(w.week), esc(w.fare || w.title)) +
-      '<div class="card"><p>' + mk(task.t) + '</p><ul class="reqs" id="sreqs">' + reqsHtml(r) + "</ul>" +
+      '<div class="card"><p>' + mk(task.t) + "</p>" +
+      // the input of an integrated task (the audio the text answers)
+      (task.ouvir ? '<div class="row"><button class="tab" id="souvir">🔊 Escuchá el audio</button>' +
+        '<button class="tab" id="souvirl">🐢 más lento</button></div>' : "") +
+      '<ul class="reqs" id="sreqs">' + reqsHtml(r) + "</ul>" +
       '<p class="muted small">Escribí sin traductor: lo que te equivoques es lo que más vas a aprender. Podés dejarlo a medias y volver.</p></div>' +
       (grid ? Grilla.gridHtml(w.week) : "") +
       '<textarea id="stext" class="grow scrivi" rows="7" spellcheck="false" autocapitalize="sentences" placeholder="' + UI.scriviIn + '">' + esc(draft) + "</textarea>" +
@@ -6834,6 +6879,9 @@
     if (view.screen !== "scrivi") return;
     var w = course.weeks[view.week - 1], box = $("#stext");
     on("#sback", function () { view.screen = "briefing"; render(); window.scrollTo(0, 0); });
+    var ouvir = (Scrivi.TASKS[w.week] || {}).ouvir;
+    on("#souvir", function () { speak(ouvir, true); });
+    on("#souvirl", function () { speak(ouvir, true, 0.7); });
     ["tre", "rif"].forEach(function (m) {   // escritura_plus.js
       on("#ep" + m, function () { EscrituraPlus.start(m, w.week); view.screen = "eplus"; render(); window.scrollTo(0, 0); });
     });
@@ -7215,8 +7263,12 @@
       var sayIt = function (force, rate) {
         if (!it.parts) return speak(it.stem, force, rate);
         if (window.speechSynthesis) speechSynthesis.cancel();
+        // a dialogue: each speaker a voice of their gender (it.sexes), or at least another pitch
+        var two = it.parts.some(function (x) { return x[0] !== "A"; });
+        var cs = two ? castVoices(it.sexes, 1 + Math.max.apply(null, it.parts.map(function (x) { return x[0] === "C" ? 2 : x[0] === "B" ? 1 : 0; }))) : null;
         it.parts.forEach(function (p) {
-          speak(p[1], force, rate || 0.95, { keep: true, vi: p[0] === "B" ? 1 : 0, pitch: p[0] === "B" ? 1.1 : p[0] === "A" && it.parts.some(function (x) { return x[0] === "B"; }) ? 0.92 : 1 });
+          var c = cs && cs[p[0] === "C" ? 2 : p[0] === "B" ? 1 : 0];
+          speak(p[1], force, rate || 0.95, c ? { keep: true, vi: c.vi, pitch: c.pitch } : { keep: true });
         });
       };
       on("#play1", function () { sayIt(true); });
@@ -7748,7 +7800,7 @@
   // Tramo C1 (tramo.js): la escucha larga y la tarea integrada de las semanas 27-51.
   if (window.Tramo) Tramo.attach({
     state: function () { return state; }, persist: persist, render: render, go: go, toast: toast,
-    esc: esc, mk: mk, plate: plate, speak: speak, listened: noteListening, shuffle: Drills.shuffle, lexicon: scriviLexicon,
+    esc: esc, mk: mk, plate: plate, speak: speak, cast: castVoices, listened: noteListening, shuffle: Drills.shuffle, lexicon: scriviLexicon,
     gain: function (n, strand) { gain(n); if (strand && n) Engine.addStrand(state, strand, n); renderHeader(); },
     aiKey: aiKey, aiKeys: aiKeys, ui: function () { return UI; }, langName: function () { return UI.langEs; },
     screen: function () { return view.screen; },
@@ -7850,7 +7902,7 @@
   // Para el trabajo (trabajo.js): las escenas de oficina, desde el A2.
   if (window.Trabajo) Trabajo.attach({
     state: function () { return state; }, persist: persist, render: render, go: go, toast: toast, mk: mk,
-    lexicon: scriviLexicon, ui: function () { return UI; }, speak: speak,
+    lexicon: scriviLexicon, ui: function () { return UI; }, speak: speak, cast: castVoices,
     gain: function (n, strand) { gain(n); if (strand && n) Engine.addStrand(state, strand, n); renderHeader(); },
     recordFindings: function (findings, text) {
       if (window.Errores && Errores.recordFindings(state, findings, text, {}).length) persist();

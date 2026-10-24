@@ -20,7 +20,12 @@ LESSONS = {
           "piace* = Marco le gusta a la gente.",
   "tip": "Son los indirectos de la semana 10: *mi, ti, gli* (a él y a "
          "ellos), *le* (a ella), *Le* (a usted), *ci, vi*. *Gli piace* = le "
-         "o les gusta."},
+         "o les gusta.",
+  "more": ["Cuando lo que gusta es **una persona**, el verbo va con esa persona, "
+           "igual que «me gustás»: *mi piaci* (me gustás), *ti piaccio?* (¿te "
+           "gusto?), *le piaci* (le gustás a ella), *ci piacete* (nos gustan "
+           "ustedes). Primero preguntate quién gusta: ese es el sujeto, y el verbo "
+           "concuerda con él. «Tu mi piace» es el error típico: *tu mi piaci*."]},
 
  {"h": "Negar y enfatizar",
   "r": "*non* va antes del pronombre: *non mi piace*. Para contrastar, "
@@ -162,7 +167,7 @@ LESSONS = {
            "*aspettava da un'ora* (hacía una hora que esperaba). Y lo "
            "anterior a otro pasado va en trapassato prossimo, imperfetto de "
            "*avere / essere* + participio: *non mi aveva detto niente* (no me "
-           "había dicho nada), *era già partito*. Lo repasás en la semana 26."]},
+           "había dicho nada), *era già partito*. Tiene bloque propio en la semana 16."]},
 
  {"h": "El mismo verbo, dos lecturas",
   "r": "Con *sapere*, *conoscere* y los modales, el imperfetto deja el "
@@ -194,8 +199,9 @@ LESSONS = {
 ]},
 
 16: {
-"intro": "Los reflexivos en pasado tienen una sola regla, absoluta, y el "
-         "castellano empuja justo al revés. Esta semana la automatizás.",
+"intro": "Los reflexivos en pasado tienen una sola regla, y el "
+         "castellano empuja justo al revés. Esta semana la automatizás, y sumás "
+         "el pasado del pasado: *era già partito*.",
 "blocks": [
  {"h": "Todos con essere. Todos.",
   "q": [{"prompt": "¿Cuál está bien? «Me lavé» (dice Anna).", "answer": "Mi sono lavata.", "options": ["Mi sono lavata.", "Mi ho lavata.", "Mi sono lavato."]}, {"prompt": "Completá: «Se divirtieron» (los chicos).", "stem": "I ragazzi si ___ divertiti.", "answer": "sono", "options": ["sono", "hanno", "è"]}],
@@ -245,6 +251,28 @@ LESSONS = {
          ["Non *ho potuto* fermar*mi*.", "No me pude detener."]],
   "warn": "Lo que no vale es mezclar: ni «mi ho dovuto alzare» ni «sono "
           "dovuto alzarmi»."},
+
+ {"h": "El trapassato prossimo: lo que ya había pasado",
+  "q": [{"prompt": "«Cuando llegué, el tren ya había salido.»", "stem": "Quando sono arrivato, il treno ___ già partito.", "answer": "era", "options": ["era", "è", "aveva"]}],
+  "r": "Imperfetto de *avere* o *essere* + participio: lo que pasó **antes** "
+       "de otro hecho pasado. El auxiliar se elige como en el passato prossimo.",
+  "table": {"head": ["", "con avere", "con essere"],
+            "rows": [["io", "avevo visto", "ero uscito / uscita"],
+                     ["tu", "avevi visto", "eri uscito / uscita"],
+                     ["lui / lei", "aveva visto", "era uscito / uscita"],
+                     ["noi", "avevamo visto", "eravamo usciti / uscite"],
+                     ["voi", "avevate visto", "eravate usciti / uscite"],
+                     ["loro", "avevano visto", "erano usciti / uscite"]]},
+  "ex": [["Quando sono arrivato, il treno *era* già *partito*.", "Cuando llegué, el tren ya había salido."],
+         ["Non sono andata al cinema: *avevo* già *visto* il film.", "No fui al cine: ya había visto la película."],
+         ["Quando l'ho chiamata, *si era* già *addormentata*.", "Cuando la llamé, ya se había dormido."],
+         ["Mi ha detto che non *era* mai *stato* a Roma.", "Me dijo que nunca había estado en Roma."]],
+  "warn": "Al hablar decimos «cuando llegué, el tren ya salió». En italiano "
+          "«il treno è già partito» ahí está mal: lo anterior va en "
+          "trapassato, *era già partito*.",
+  "tip": "Las pistas: *già*, *mai*, *prima*, y un *quando* o un *perché* con "
+         "otro pasado al lado. Con reflexivos, *essere* también acá: *mi ero "
+         "alzato*."},
 
  {"h": "Adelanto: se vende, se habla",
   "q": [{"prompt": "¿Cuál está bien? «Se venden bicicletas.»", "answer": "Si vendono biciclette.", "options": ["Si vendono biciclette.", "Si vende biciclette.", "Si vendiamo biciclette."]}, {"prompt": "Elegí la que va", "stem": "Qui si ___ italiano.", "answer": "parla", "options": ["parla", "parlano", "parliamo"]}],
@@ -1310,6 +1338,19 @@ LESSONS = {
           "escribir y en un examen, se espera el congiuntivo.",
   "tip": "*sperare* admite futuro: *spero che verrà* es correcto."},
 
+ {"h": "Adelanto: opinar sobre el pasado",
+  "q": [{"prompt": "«Creo que ya se fue.»", "stem": "Credo che ___ già partito.", "answer": "sia", "options": ["sia", "è", "abbia"]}],
+  "r": "Para opinar sobre algo que **ya pasó**: *sia* o *abbia* + participio. "
+       "Es el passato prossimo con el auxiliar en congiuntivo.",
+  "ex": [["Credo che *sia andato* a casa.", "Creo que se fue a casa."],
+         ["Penso che *abbia capito*.", "Creo que entendió."],
+         ["Spero che *siano arrivati* bene.", "Espero que hayan llegado bien."],
+         ["Mi sembra che *abbiano* già *mangiato*.", "Me parece que ya comieron."]],
+  "warn": "El auxiliar es el del passato prossimo: *è andato* → *sia andato*, "
+          "*ha capito* → *abbia capito*. Nada de «abbia andato».",
+  "tip": "Por ahora, como fórmula para opinar. El congiuntivo passato completo "
+         "llega en la semana 29."},
+
  {"h": "Cuándo NO va congiuntivo",
   "q": [{"prompt": "¿Cuál está bien? «Es verdad que tiene razón.»", "answer": "È vero che ha ragione.", "options": ["È vero che ha ragione.", "È vero che abbia ragione.", "È vero che avesse ragione."]}, {"prompt": "Elegí la que va", "stem": "So che ___ tardi.", "answer": "è", "options": ["è", "sia", "fosse"]}, {"prompt": "Elegí la que va", "stem": "Secondo me, ___ una buona idea.", "answer": "è", "options": ["è", "sia", "che sia"]}],
   "r": "Si el principal presenta **un hecho** (*so che*, *è vero che*, *vedo "
@@ -1431,7 +1472,7 @@ LESSONS = {
          ["Domani *lavorerò* da casa.", "Mañana voy a trabajar desde casa."],
          ["*Lavorerei* volentieri con te.", "Trabajaría con gusto con vos."]]},
 
- {"h": "El trapassato prossimo",
+ {"h": "El trapassato prossimo (repaso de la semana 16)",
   "r": "Imperfetto de *avere* o *essere* + participio: lo que pasó **antes** "
        "de otro hecho pasado.",
   "ex": [["*Avevo* già *mangiato*.", "Ya había comido."],

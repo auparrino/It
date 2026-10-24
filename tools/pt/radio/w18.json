@@ -5,6 +5,7 @@
  "genre": "quadro «Fala bonito»",
  "es": "En la sección «Fala bonito» (Hablá lindo), Nanda y Téo actúan situaciones de hotel y de restaurante para practicar cómo pedir las cosas con cortesía. Téo no siempre lo logra.",
  "speakers": ["Nanda", "Téo"],
+ "sexes": ["f", "m"],
  "turns": [
   ["A", "Bom dia! No quadro «Fala bonito» de hoje, a gente vai aprender a pedir com educação. Primeira situação: o Téo chega a uma pousada em Paraty, e eu sou a moça da recepção."],
   ["B", "Oi. Quero um quarto de casal. Quanto é a diária?"],

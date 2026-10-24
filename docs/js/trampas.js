@@ -180,7 +180,7 @@
     L.FALSI.forEach(function (f, i) {
       var id = "falso:" + i;
       add({ key: id, list: "falsos", ids: [id], t: f[0], es: f[1], note: (f[2] ? "Parece «" + f[2] + "». " : "") + (f[3] || ""),
-            week: wk, make: function () { return L.item ? L.item(id) : null; } });
+            week: (L.falsoWeek && L.falsoWeek(id)) || wk, make: function () { return L.item ? L.item(id) : null; } });
     });
   }
 

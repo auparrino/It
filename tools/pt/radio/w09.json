@@ -5,6 +5,7 @@
  "genre": "boletim do trânsito",
  "es": "Lunes a la mañana y Téo todavía no llegó a la radio. Nanda lo llama: está atrapado en el tránsito y le cuenta dónde está y cómo piensa llegar.",
  "speakers": ["Nanda", "Téo"],
+ "sexes": ["f", "m"],
  "turns": [
   ["A", "Bom dia! Hoje eu tô sozinha no estúdio: o Téo ainda não está aqui. Téo, cadê você?"],
   ["B", "Oi, Nanda! Tô num ônibus na praia de Botafogo, parado no sinal. É um engarrafamento enorme!"],

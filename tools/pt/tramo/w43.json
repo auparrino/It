@@ -56,6 +56,7 @@
     "genre": "telefonema a uma secretaria universitária",
     "es": "Una egresada de maestría llama a la secretaría de su posgrado porque su diploma se demora y lo necesita con urgencia.",
     "speakers": ["Anselmo, secretário", "Beatriz, ex-aluna"],
+    "sexes": ["m", "f"],
     "turns": [
       ["A", "Secretaria de Pós-Graduação em Letras, Anselmo, bom dia."],
       ["B", "Bom dia, seu Anselmo. Meu nome é Beatriz Andrade, eu defendi o mestrado em março e tô ligando por causa do meu diploma."],

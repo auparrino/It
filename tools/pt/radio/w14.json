@@ -5,6 +5,7 @@
  "genre": "enquete ao vivo",
  "es": "La radio hace una encuesta: ¿qué les gusta y qué no les gusta a los oyentes? Llama Sofía, que ya lleva unos meses en Río, y habla de comida, de música y de fútbol.",
  "speakers": ["Nanda", "Sofía"],
+ "sexes": ["f", "f"],
  "turns": [
   ["A", "Hoje a enquete da Rádio Calçadão é: do que você gosta no Rio e do que você não gosta? E temos na linha a nossa amiga argentina, a Sofía!"],
   ["B", "Oi, Nanda! Adoro essa pergunta."],

@@ -5,6 +5,7 @@
  "genre": "quadro de conselhos",
  "es": "En el «Consultório da Nanda» los oyentes piden consejos. Hoy llega la carta de un chico con un problema de celos; después, Téo pregunta por un mareo y termina con un consejo de salud.",
  "speakers": ["Nanda", "Téo"],
+ "sexes": ["f", "m"],
  "turns": [
   ["A", "Bom dia! Está aberto o «Consultório da Nanda». Téo, você lê a carta de hoje?"],
   ["B", "Leio. É do Rafael, de vinte e quatro anos: «Nanda, eu namoro a Júlia há dois anos. Ela é ótima, mas eu tenho ciúme dos amigos dela. No sábado a gente brigou feio, e agora ela não responde as minhas mensagens. Tenho medo de levar um fora. O que você me aconselha?»"],

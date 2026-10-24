@@ -92,7 +92,9 @@
 
   // The voices of a script: A and B are the phone's two voices; C, when a
   // conversation has three people, is the first voice with another pitch
-  // and a slightly faster pace (as Suoni does).
+  // and a slightly faster pace (as Suoni does).  With the host's cast
+  // (H.cast: Voces.cast), the voice and the pitch come from the gender of
+  // each speaker (the data's «sexes»); the pace stays.
   var VOICE = { A: { pitch: 0.92, vi: 0, rate: 1 }, B: { pitch: 1.1, vi: 1, rate: 1 }, C: { pitch: 1.25, vi: 0, rate: 1.08 } };
   function speakerName(a, who) { return a.speakers[who === "A" ? 0 : who === "B" ? 1 : 2] || who; }
 
@@ -492,6 +494,10 @@
     opts = opts || {};
     var h = { on: true }, i = 0, rate = opts.rate || 1, t0 = Date.now(), guard = null;
     var all = words(parts.map(function (p) { return typeof p === "string" ? p : p[1]; }).join(" "));
+    // opts.sexes: ["f", "m", …], the gender of A, B, C (the data's «sexes»)
+    var n = 0;
+    parts.forEach(function (p) { if (typeof p !== "string" && root.Voces) n = Math.max(n, root.Voces.who(p[0]) + 1); });
+    var cast = n && H.cast ? H.cast(opts.sexes, n) : null;
     h.stop = function () {
       if (!h.on) return;
       h.on = false; clearTimeout(guard);
@@ -509,6 +515,9 @@
       var step = function () { if (moved) return; moved = true; clearTimeout(guard); next(); };
       guard = setTimeout(step, (words(text) / (1.6 * rate) + 4) * 1000);
       var v = opts.mono != null ? { pitch: opts.mono ? 1.05 : 0.95, vi: opts.mono ? 1 : 0, rate: 1 } : VOICE[p[0]] || VOICE.A;
+      // with the cast of the host (app.js: Voces.cast), each speaker a voice of their gender
+      var c = opts.mono == null && cast && cast[root.Voces.who(p[0])];
+      if (c) v = { pitch: c.pitch, vi: c.vi, rate: v.rate };
       H.speak(text, true, 0.95 * rate * v.rate, { keep: true, pitch: v.pitch, vi: v.vi, onend: step, onerror: step });
     })();
     return h;
@@ -530,7 +539,7 @@
     if (playing) return;
     var token = playing = Date.now();
     if (b) b.disabled = true;
-    playScript(a.turns, { rate: cur.rate || 1, alive: function () { return playing === token; },
+    playScript(a.turns, { rate: cur.rate || 1, sexes: a.sexes, alive: function () { return playing === token; },
       onend: function (sec) { played(token, sec); } });
   }
 

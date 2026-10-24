@@ -5,6 +5,7 @@
  "genre": "telefonata in diretta",
  "es": "Temprano a la mañana llama a la radio Martín, el argentino que vive en via Zamboni. Tiene una pregunta sobre la hora: hoy es un día especial para su familia.",
  "speakers": ["Sara", "Martín"],
+ "sexes": ["f", "m"],
  "turns": [
   ["A", "Sono le sette e mezza e siete su Radio Portici. Abbiamo una telefonata. Pronto?"],
   ["B", "Pronto, Sara? Sono Martín, lo studente argentino di via Zamboni."],

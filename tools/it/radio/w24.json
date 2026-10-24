@@ -5,6 +5,7 @@
  "genre": "commento alle notizie",
  "es": "En el diario del barrio sale una noticia que enoja a los estudiantes: la ciudad quiere sacar un colectivo nocturno. Sara y Leo la comentan, cada uno con su opinión, y leen los mensajes de los oyentes.",
  "speakers": ["Sara", "Leo"],
+ "sexes": ["f", "m"],
  "turns": [
   ["A", "Buongiorno! Oggi commentiamo una notizia del giornale di quartiere: il Comune vuole cancellare l'autobus della notte, quello che parte dalla stazione a mezzanotte e mezza. In studio c'è Leo. Leo, che te ne pare?"],
   ["B", "Mi pare una sciocchezza. Penso che sia un errore grave: molti studenti tornano a casa tardi dal lavoro, e senza l'autobus devono prendere un taxi o tornare a piedi."],

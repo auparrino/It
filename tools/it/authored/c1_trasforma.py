@@ -656,8 +656,8 @@ er(23, 50, "falso_amico", "Sono imbarazzata: aspetto un bambino!", "imbarazzata"
    "Falso amigo: *imbarazzata* es «avergonzada, incómoda»; «embarazada» se dice *incinta*.")
 er(24, 50, "falso_amico", "Il suo discorso è stato troppo largo e noioso.", "largo", "lungo",
    "Falso amigo: *largo* es «ancho»; el «largo» castellano se dice *lungo*.")
-er(25, 51, "lessico", "Dai dati dell'indagine possiamo tirare alcune conclusioni.", "tirare", "trarre",
-   "La colocación es *trarre conclusioni* (sacar conclusiones). *Tirare* es tirar o estirar.")
+er(25, 51, "lessico", "Dai dati dell'indagine possiamo togliere alcune conclusioni.", "togliere", "trarre",
+   "La colocación es *trarre conclusioni* (sacar conclusiones). *Togliere* es sacar en el sentido de quitar.")
 er(26, 51, "lessico", "In questo progetto la scuola ha fatto un ruolo fondamentale.", "fatto", "svolto",
    "Colocación: *svolgere* (o *avere*) *un ruolo*, «desempeñar un papel». *Fare la parte* es solo del teatro.",
    goodAlt=["avuto", "giocato"])

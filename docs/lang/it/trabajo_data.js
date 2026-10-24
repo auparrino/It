@@ -19,6 +19,8 @@
  */
 window.TRABAJO_DATA = {
   label: "Per il lavoro",
+  // el género de cada personaje: cada uno habla con una voz del teléfono de su género (voces.js)
+  sexes: { Giulia: "f", Martín: "m", Luca: "m", Sara: "f", Bianchi: "m", Conti: "f", Centralinista: "f" },
   blurb: "Escenas de oficina en italiano, desde el A2: presentarte en una reunión, la charla del café, llamadas y videollamadas, mails formales, opinar, presentar resultados, quejarte con cortesía, negociar plazos y coordinar un equipo. Cada una con su diálogo, las frases que se usan, ejercicios para escribirlas y un mail o un mensaje de verdad.",
   SCENES: [
     { id: "t-presentarsi", week: 8, level: "A2", emoji: "🤝", name: "Presentarsi in riunione",

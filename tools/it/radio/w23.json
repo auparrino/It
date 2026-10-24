@@ -5,6 +5,7 @@
  "genre": "sfida in studio",
  "es": "Llegó el día del duelo: Sara, boloñesa, y Dario, napolitano, discuten al aire qué ciudad es mejor. Los oyentes votan por mensaje y al final se anuncia el resultado.",
  "speakers": ["Sara", "Dario"],
+ "sexes": ["f", "m"],
  "turns": [
   ["A", "Buongiorno! Oggi a Radio Portici c'è la grande sfida: Bologna contro Napoli. Io difendo Bologna, naturalmente, e Dario difende Napoli. Gli ascoltatori votano con un messaggio. Cominciamo dal cibo?"],
   ["B", "Facile! La pizza di Napoli è la migliore del mondo. E il caffè napoletano è più forte e più buono di quello di Bologna."],

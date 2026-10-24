@@ -992,7 +992,7 @@
       }).map(function (s) { return { id: "asc-" + s.week, s: s }; }));
       if (cands[0]) {
         var a = cands[0].s.ascolto;
-        asc = { id: cands[0].id, title: a.title, questions: a.questions, vf: a.vf,
+        asc = { id: cands[0].id, title: a.title, questions: a.questions, vf: a.vf, sexes: a.sexes,
                 parts: a.turns.map(function (t) { return [t[0], t[1]]; }) };
       }
     }
@@ -1011,7 +1011,7 @@
         .filter(function (x) { return x.type === "choice"; }).slice(0, 6).map(function (x, k) {
           var vf = /:vf\d+$/.test(x.id);
           return { id: "boss:" + x.id, src: "lettura", type: "listen", skill: "ascolto", nocard: true, nopeek: true,
-                   prompt: vf ? x.prompt + " «" + x.stem + "»" : x.stem, stem: text, parts: asc.parts,
+                   prompt: vf ? x.prompt + " «" + x.stem + "»" : x.stem, stem: text, parts: asc.parts, sexes: asc.sexes,
                    options: x.options, answer: x.answer, accept: x.accept, note: x.note || "",
                    noauto: k > 0, bossText: asc.title };
         });

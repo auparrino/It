@@ -13,7 +13,7 @@
  * tiene tres versiones.  Forma exacta:
  *
  * ascolto[]:  3 entrevistas a dos voces, {id: "asc-1".."asc-3", title,
- *             speakers: [A, B], turns: [["A"|"B", texto]], questions:
+ *             speakers: [A, B], sexes: ["f"|"m", …], turns: [["A"|"B", texto]], questions:
  *             [[pregunta, [4 opciones], respuesta]] × 8 (en portugués, con
  *             opciones de largo parejo: tools/lib/test_fix_contenido_pt.js),
  *             completa: [[frase con ___, palabra]] × 4}.  asc-3 tiene rasgos
@@ -52,7 +52,7 @@
 (function (root) { "use strict";
   var ESAME = {
     ascolto: [
-      { id: "asc-1", title: "Entrevista: o «homem cordial» e o jeitinho", speakers: ["Jornalista", "Historiadora"],
+      { id: "asc-1", title: "Entrevista: o «homem cordial» e o jeitinho", speakers: ["Jornalista", "Historiadora"], sexes: ["m", "f"],
         turns: [
           ["A", "Boa noite. Você está ouvindo o Conversa de Botequim, gravado hoje num bar da Lapa, aqui no Rio. Minha convidada é a historiadora Regina Aguiar, que acaba de lançar um livro sobre as chamadas interpretações do Brasil. Regina, em 1936 Sérgio Buarque de Holanda publicou Raízes do Brasil e popularizou uma expressão que todo mundo cita: o «homem cordial». O que ele queria dizer com isso?"],
           ["B", "Obrigada pelo convite. Antes de mais nada, uma correção: a expressão não foi inventada por ele. O próprio Sérgio Buarque explica que a tomou emprestada do escritor Ribeiro Couto. E quase todo mundo a entende mal. «Cordial», aqui, não quer dizer gentil nem bem-educado. A palavra vem do latim cor, cordis, que significa coração. O homem cordial é aquele que age movido pelo coração, pelas emoções, tanto na amizade quanto na inimizade."],
@@ -100,7 +100,7 @@
           ["O brasileiro trata o Estado como se fosse uma extensão da ___.", "família"]
         ] },
 
-      { id: "asc-2", title: "Conversa: 1808, a corte chega ao Rio", speakers: ["Apresentadora", "Historiador"],
+      { id: "asc-2", title: "Conversa: 1808, a corte chega ao Rio", speakers: ["Apresentadora", "Historiador"], sexes: ["f", "m"],
         turns: [
           ["A", "Estamos na Praça Quinze, no Centro do Rio, em frente ao Paço Imperial. Meu convidado é o historiador Paulo Menezes. Paulo, foi aqui que tudo começou em 1808?"],
           ["B", "Foi aqui perto, sim. Em março de 1808 desembarcou no Rio o príncipe regente Dom João, com a mãe, a rainha Dona Maria I, e boa parte da corte portuguesa. Eles tinham saído de Lisboa no fim de novembro de 1807, praticamente na véspera de as tropas de Napoleão, comandadas pelo general Junot, entrarem na cidade. Antes de chegar ao Rio, tinham passado por Salvador."],
@@ -149,7 +149,7 @@
           ["Em 1820 estourou no Porto uma revolução ___ que exigia o retorno do rei.", "liberal"]
         ] },
 
-      { id: "asc-3", title: "Rádio: viver numa fronteira que é uma rua", speakers: ["Apresentadora", "Morador"],
+      { id: "asc-3", title: "Rádio: viver numa fronteira que é uma rua", speakers: ["Apresentadora", "Morador"], sexes: ["f", "m"],
         turns: [
           ["A", "Boa tarde, você está ouvindo o Brasil de Ponta a Ponta. Hoje a gente vai até o extremo sul, a Santana do Livramento, no Rio Grande do Sul, que faz fronteira com Rivera, no Uruguai. Tá comigo o Tiago Pereira, professor de geografia e morador da cidade. Tiago, tudo bem?"],
           ["B", "Bah, tudo ótimo. Obrigado pelo convite. É… é sempre bom falar da minha cidade."],
@@ -311,7 +311,7 @@
           insumo: { tipo: "texto", ref: "let-1" },
           t: "Você trabalha numa agência de turismo cultural e leu o texto «Do cortiço à favela: o Rio que se reinventou». A agência vai oferecer um passeio a pé pela região portuária para estudantes estrangeiros. Escreva o roteiro que será publicado no site da agência, com três ou quatro paradas e, para cada uma, o que aconteceu ali segundo o texto." },
         { id: "v1-t3", kind: "reclamacao", genero: "e-mail de reclamação", words: 150,
-          insumo: { tipo: "audio", titulo: "Recado da síndica no grupo do prédio", speakers: ["Síndica", "Morador"], turns: [
+          insumo: { tipo: "audio", titulo: "Recado da síndica no grupo do prédio", speakers: ["Síndica", "Morador"], sexes: ["f", "m"], turns: [
             ["A", "Oi, pessoal, aqui é a Márcia, a síndica. Olha, é sobre a água de novo. A companhia cortou ontem às oito da manhã, sem aviso nenhum, e só voltou às onze da noite."],
             ["A", "Eu liguei três vezes pro atendimento. Na primeira me disseram que era manutenção programada. Na segunda, que era um vazamento na rua. Na terceira, ninguém atendeu."],
             ["B", "Márcia, e a conta? Porque a minha veio mais alta este mês, e eu nem tava em casa na semana passada."],
@@ -330,7 +330,7 @@
           insumo: { tipo: "texto", ref: "let-2" },
           t: "Você mantém um blog sobre viagens e história e leu o texto «Abril em Lisboa: o fim da ditadura e do império». Vai visitar Lisboa em abril. Escreva um post para os seus leitores explicando por que o 25 de Abril é tão importante para os portugueses e sugerindo lugares da cidade ligados a essa história." },
         { id: "v2-t3", kind: "email", genero: "e-mail a um amigo", words: 150,
-          insumo: { tipo: "audio", titulo: "Trecho do podcast Vida Remota", speakers: ["Apresentador", "Psicóloga"], turns: [
+          insumo: { tipo: "audio", titulo: "Trecho do podcast Vida Remota", speakers: ["Apresentador", "Psicóloga"], sexes: ["m", "f"], turns: [
             ["A", "Então, doutora, trabalhar de casa é bom ou não é?"],
             ["B", "É bom pra muita gente, mas tem um risco que pouca gente vê: o trabalho não tem mais hora pra acabar. A pessoa responde e-mail no jantar, no fim de semana, na cama…"],
             ["A", "E o que a senhora recomenda?"],
@@ -349,7 +349,7 @@
           insumo: { tipo: "texto", ref: "let-3" },
           t: "Uma revista de divulgação científica para jovens prepara um número sobre a Amazônia. Você leu o texto «O ouro branco da Amazônia». Escreva um artigo para a revista mostrando como a história da borracha ajuda a entender os debates atuais sobre a floresta e quem vive dela." },
         { id: "v3-t3", kind: "panfleto", genero: "texto de campanha", words: 140,
-          insumo: { tipo: "audio", titulo: "Recado do posto de saúde no rádio comunitário", speakers: ["Locutor", "Enfermeira"], turns: [
+          insumo: { tipo: "audio", titulo: "Recado do posto de saúde no rádio comunitário", speakers: ["Locutor", "Enfermeira"], sexes: ["m", "f"], turns: [
             ["A", "E agora um recado importante do posto de saúde da Vila Esperança. Tá aqui com a gente a enfermeira Rosângela."],
             ["B", "Boa tarde. A gente tá em plena campanha de vacinação contra a gripe, e a procura tá muito baixa. Só vinte por cento das pessoas com mais de sessenta anos vieram até agora."],
             ["A", "E por que a senhora acha que o pessoal não tá vindo?"],

@@ -57,6 +57,7 @@
     "genre": "intervista radiofonica",
     "es": "En un programa de radio sobre la lengua, un conductor entrevista a una comediante sobre la ironía italiana y cómo hacer reír a un público extranjero.",
     "speakers": ["Conduttore", "Comica"],
+    "sexes": ["m", "f"],
     "turns": [
       ["A", "Siamo di nuovo in onda con «Parole in libertà». La mia ospite di oggi fa ridere l'Italia da dieci anni, nei teatri e sui social: Serena Galli. Serena, benvenuta."],
       ["B", "Grazie, Luca. Dieci anni… detto così mi fai sentire vecchissima."],

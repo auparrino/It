@@ -66,6 +66,7 @@
     "genre": "conferenza con domande",
     "es": "Al final de una conferencia, la moderadora le hace preguntas (propias y del público) a un sociolingüista que investigó a los hijos de inmigrantes nacidos en Italia.",
     "speakers": ["Moderatrice", "Prof. Karim Benali, sociolinguista"],
+    "sexes": ["f", "m"],
     "turns": [
       ["A", "Grazie, professor Benali, per questa relazione così ricca. Abbiamo qualche minuto per le domande. Comincio io, se permette: nel suo intervento ha parlato di «italiani con il trattino». Che cosa intendeva?"],
       ["B", "Intendevo ragazzi e ragazze che si definiscono italo-marocchini, italo-cinesi, italo-peruviani. Durante la ricerca ho intervistato una studentessa di Bergamo che mi ha detto che si sentiva italiana a Casablanca e marocchina a Bergamo. Cioè, sempre un po' straniera, in tutti e due i posti."],

@@ -5,6 +5,7 @@
  "genre": "chiacchierata del lunedì",
  "es": "Lunes en Radio Portici: Sara y Dario se cuentan qué hicieron el fin de semana. Uno se fue de paseo y el otro se quedó en Bologna.",
  "speakers": ["Sara", "Dario"],
+ "sexes": ["f", "m"],
  "turns": [
   ["A", "Buon lunedì a tutti! Dario, com'è andato il fine settimana? Hai la faccia un po' stanca..."],
   ["B", "Ciao, Sara! Sabato sono andato in gita al mare con due amici. Abbiamo preso il treno delle sette e siamo arrivati a Rimini alle nove."],

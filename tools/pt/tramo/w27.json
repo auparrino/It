@@ -54,6 +54,7 @@
     "genre": "programa de rádio com consultas",
     "es": "En un programa de radio, una conductora le lee a un consultor en movilidad internacional las dudas de los oyentes que piensan irse a vivir al exterior.",
     "speakers": ["Luciana, apresentadora", "Paulo, consultor"],
+    "sexes": ["f", "m"],
     "turns": [
       ["A", "Boa tarde, você está ouvindo o Vida em Movimento. Hoje o assunto é morar fora do Brasil, e quem responde às perguntas é o Paulo Ribeiro, que trabalha há quinze anos com mudanças internacionais. Tudo bem, Paulo?"],
       ["B", "Tudo ótimo, Luciana. Obrigado pelo convite."],

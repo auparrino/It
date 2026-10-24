@@ -441,7 +441,7 @@
     "stem": "___ Sicilia non è lontana ___ Africa. (Sicilia no está lejos de África.)",
     "answer": "La | dall'",
     "alt": [],
-    "note": "Las islas grandes y los continentes llevan artículo: la Sicilia, da + l' = dall'."
+    "note": "Las islas grandes de Italia y los continentes llevan artículo: la Sicilia, da + l' = dall'. Algunas islas-Estado no lo llevan: Cuba, Cipro, Malta."
    },
    {
     "label": "d",
@@ -534,7 +534,7 @@
     "stem": "Sandra va a Cuba.",
     "answer": "Sandra va a Cuba.",
     "alt": [],
-    "note": "Cuba, como muchas islas, va sin artículo y con «a»."
+    "note": "Cuba va sin artículo y con «a», como Malta o Cipro: muchas islas-Estado se tratan como ciudades."
    }
   ]
  },

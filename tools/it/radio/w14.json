@@ -5,6 +5,7 @@
  "genre": "sondaggio in diretta",
  "es": "Radio Portici hace una encuesta: ¿qué les gusta y qué no de la ciudad? Llama otra vez Martín, que ya lleva unos meses en Bologna, y termina recibiendo una invitación.",
  "speakers": ["Sara", "Martín"],
+ "sexes": ["f", "m"],
  "turns": [
   ["A", "Oggi facciamo un sondaggio: che cosa vi piace di Bologna e che cosa no? In linea c'è un amico della radio: Martín!"],
   ["B", "Ciao, Sara! Che bello sentirti."],

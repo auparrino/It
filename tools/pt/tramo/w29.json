@@ -53,6 +53,7 @@
     "genre": "programa de rádio com consultas",
     "es": "En un programa de radio sobre derechos laborales, una oyente que trabaja y estudia de noche le cuenta su problema a una abogada.",
     "speakers": ["Jéssica, ouvinte", "Sandra, advogada"],
+    "sexes": ["f", "f"],
     "turns": [
       ["B", "Boa noite, Jéssica, você está no ar. Pode contar a sua dúvida."],
       ["A", "Boa noite, doutora. Então, eu trabalho numa loja de material de construção, de carteira assinada, e faço faculdade de enfermagem à noite. Quando eu entrei, combinei com o gerente de sair às cinco e meia, para dar tempo de chegar na aula."],

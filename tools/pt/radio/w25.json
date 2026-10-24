@@ -5,6 +5,7 @@
  "genre": "programa de fim de temporada",
  "es": "Último programa de la temporada. Para despedirse, Nanda y Téo juegan a «¿Quién es quién?»: describen a la gente del barrio sin decir el nombre y el otro tiene que adivinar.",
  "speakers": ["Nanda", "Téo"],
+ "sexes": ["f", "m"],
  "turns": [
   ["A", "Bom dia! Este é o último programa da temporada, e para fechar a gente vai jogar «Quem é quem». Eu descrevo uma pessoa do bairro e o Téo adivinha. Pronto, Téo?"],
   ["B", "Pronto! Pode começar."],

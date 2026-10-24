@@ -125,6 +125,7 @@
       "Carla, bióloga",
       "Ronaldo, dono de restaurante"
     ],
+    "sexes": ["f", "m"],
     "turns": [
       [
         "A",

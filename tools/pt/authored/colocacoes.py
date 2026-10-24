@@ -130,7 +130,7 @@ _C = [
   "Quedarse dormido → pegar no sono (o cair no sono).", "pegar no sono", "quedarse dormido", "cotidiano"),
  (40, "O estudo ___ a questão da evasão no primeiro ano.", "levanta", ["levanta", "planta", "alça"],
   "Plantear una cuestión → levantar (o colocar) uma questão.", "levantar uma questão", "plantear una cuestión", "academia"),
- (40, "O projeto faz ___ ao prêmio que recebeu.", "jus", ["jus", "honor", "mérito"],
+ (40, "O projeto faz ___ ao prêmio que recebeu.", "jus", ["jus", "direito", "mérito"],
   "Merecer, estar a la altura → fazer jus a (formal).", "fazer jus a", "estar a la altura de", "academia"),
  (41, "A viagem chegara ___ fim, e ninguém dissera nada.", "ao", ["ao", "a", "no"],
   "Llegar a su fin → chegar ao fim (a + o).", "chegar ao fim", "llegar a su fin", "literatura"),

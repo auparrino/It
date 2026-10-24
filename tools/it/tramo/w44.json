@@ -129,6 +129,7 @@
       "Conduttrice",
       "Biologo marino"
     ],
+    "sexes": ["f", "m"],
     "turns": [
       [
         "A",

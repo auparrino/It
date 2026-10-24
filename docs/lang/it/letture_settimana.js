@@ -530,7 +530,7 @@
         ["¿Qué hace Giacomo cuando la abuela lo llama?", ["se queja, pero se levanta", "sigue durmiendo", "se enoja y se va a su cuarto", "llora"], "se queja, pero se levanta"],
         ["¿Quién se duerme primero?", ["la abuela", "Giacomo", "los nietos", "nadie"], "la abuela"]
       ],
-      vf: [["La nonna vuole che i nipoti si lavino le mani.", "vero"], ["Giacomo si sveglia presto.", "falso"], ["La nonna guarda un film alla televisione.", "non si dice"]],
+      vf: [["Per la nonna, i nipoti devono lavarsi le mani prima di mangiare.", "vero"], ["Giacomo si sveglia presto.", "falso"], ["La nonna guarda un film alla televisione.", "non si dice"]],
       hunt: { label: "Tocá los imperativos (lavatevi, sedetevi, alzati…)", targets: ["lavatevi", "sedetevi", "alzatevi", "alzati", "vestiti", "fai", "addormentate"] } },
 
     { id: "w-13", week: 13, level: "A2", emoji: "🍷", title: "La nuova vicina",
@@ -992,7 +992,7 @@
         "fermate a guardare le luci della città.\n\n" +
         "\"Pensando a quegli anni, mi viene nostalgia\", ha detto l'amica. Silvia, sorridendo, le ha preso il " +
         "braccio: \"Vedendoti, mi sembra ieri.\" Prima di salutarsi davanti alla stazione, si sono promesse " +
-        "di rivedersi presto. E questa volta, conoscendole, lo faranno davvero.",
+        "di rivedersi presto. E questa volta, per come le conosco, lo faranno davvero.",
       gloss: { accorte: "dado cuenta", lungo: "a lo largo de", fiume: "río", ridendo: "riéndose", ponte: "puente",
                fermate: "detenido", nostalgia: "nostalgia", sorridendo: "sonriendo", braccio: "brazo",
                salutarsi: "despedirse", promesse: "prometido", davvero: "de verdad" },
@@ -1002,7 +1002,7 @@
         ["Che cosa vuol dire l'ultima frase del testo?", ["che il narratore ci crede davvero", "che probabilmente non si rivedranno più", "che si sono già riviste il giorno dopo", "che faranno un viaggio insieme"], "che il narratore ci crede davvero"]
       ],
       vf: [["Silvia e l'amica non si vedevano da dieci anni.", "vero"], ["Si sono salutate al ponte.", "falso"], ["L'amica abita in un'altra città.", "non si dice"]],
-      hunt: { label: "Tocá los gerundios y participios (tornando, finita…)", targets: ["tornando", "parlando", "finita", "ridendo", "arrivate", "pensando", "sorridendo", "vedendoti", "conoscendole"] } },
+      hunt: { label: "Tocá los gerundios y participios (tornando, finita…)", targets: ["tornando", "parlando", "finita", "ridendo", "arrivate", "pensando", "sorridendo", "vedendoti"] } },
 
     { id: "w-45", week: 45, level: "C1", emoji: "🏅", title: "La maratona",
       grammar: "costruzioni verbali speciali",

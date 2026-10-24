@@ -5,6 +5,7 @@
  "genre": "quadro «Era uma vez»",
  "es": "En la nueva sección «Era uma vez» (Había una vez), Dona Lúcia cuenta cómo era Botafogo cuando ella era chica: los juegos, la escuela, el tranvía y un día que no se olvida.",
  "speakers": ["Nanda", "Dona Lúcia"],
+ "sexes": ["f", "f"],
  "turns": [
   ["A", "Bom dia! Hoje começa um quadro novo: «Era uma vez». E a primeira convidada é a Dona Lúcia. Dona Lúcia, como era Botafogo na sua infância?"],
   ["B", "Ah, minha filha, era outro mundo! Não tinha tantos prédios. As casas tinham quintal, com mangueira e galinha. E na rua passava o bonde."],

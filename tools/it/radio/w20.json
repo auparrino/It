@@ -5,6 +5,7 @@
  "genre": "telefonata in diretta",
  "es": "Llegó la respuesta de la empresa de Módena. Martín vuelve a llamar a la radio, pero no para festejar: tiene que decidir algo y le pide consejo a Sara.",
  "speakers": ["Sara", "Martín"],
+ "sexes": ["f", "m"],
  "turns": [
   ["A", "Ed eccolo di nuovo in linea: Martín! Allora? Ci sono notizie da Modena?"],
   ["B", "Sì, Sara. Venerdì è arrivata la mail: l'azienda mi offre il posto."],

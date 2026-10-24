@@ -5,6 +5,7 @@
  "genre": "rubrica di cucina",
  "es": "Llueve y hace frío en Bologna. En la sección de cocina, la signora Franca dicta por teléfono su receta de sopa de invierno, con cantidades y todo, mientras Sara anota.",
  "speakers": ["Sara", "Franca"],
+ "sexes": ["f", "f"],
  "turns": [
   ["A", "Fuori piove e fa freddo: è il giorno giusto per una minestra calda. In linea c'è la nostra esperta, la signora Franca. Buongiorno, signora!"],
   ["B", "Buongiorno, Sara! Oggi vi do la ricetta della minestra di mia nonna. È facile: ci riescono tutti."],

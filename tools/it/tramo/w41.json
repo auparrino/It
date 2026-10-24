@@ -129,6 +129,7 @@
       "Marco, conduttore",
       "Silvia, ascoltatrice"
     ],
+    "sexes": ["m", "f"],
     "turns": [
       ["A", "Eccoci di nuovo a Filo diretto, la trasmissione in cui la cronaca la fate voi. Abbiamo in linea Silvia, che stamattina ha visto una scena, diciamo, insolita. Silvia, buongiorno!"],
       ["B", "Buongiorno! Sì, guardi, ancora… ancora non ci credo."],
