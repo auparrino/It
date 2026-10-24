@@ -286,6 +286,11 @@ módulo donde aparecieron.
   `docs/` corré `node tools/audit/inventario.js --sync` y commiteá
   `auditorias/registro/` (el test `tools/lib/test_registro.js` falla si no).
   Para ver el avance: `npm run cobertura`.
+- **Audios grabados:** si cambiás un texto de la radio, del tramo, de un diálogo
+  del examen o de trabajo, o un ítem de escuchar o de dictado, corré
+  `tools/audio/grabar.py` (con Piper instalado, ver su encabezado) después del
+  build: graba lo que falta y borra lo que sobra. Si no, ese texto suena con
+  la voz del teléfono y `tools/lib/test_audio.js` lo avisa.
 - **Antes de subir:** `npm test`, `npm run sim` (sin duplicados), y que cada
   ítem nuevo quede en su semana (si el sílabo lo mueve, reescribirlo con
   palabras y gramática ya vistas).

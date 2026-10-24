@@ -498,6 +498,8 @@
     var n = 0;
     parts.forEach(function (p) { if (typeof p !== "string" && root.Voces) n = Math.max(n, root.Voces.who(p[0]) + 1); });
     var cast = n && H.cast ? H.cast(opts.sexes, n) : null;
+    // the place of each speaker for the recorded voices (Voces.slots); a monologue, "f1" or "m1"
+    var slots = n && root.Voces ? root.Voces.slots(opts.sexes, n) : null;
     h.stop = function () {
       if (!h.on) return;
       h.on = false; clearTimeout(guard);
@@ -518,7 +520,8 @@
       // with the cast of the host (app.js: Voces.cast), each speaker a voice of their gender
       var c = opts.mono == null && cast && cast[root.Voces.who(p[0])];
       if (c) v = { pitch: c.pitch, vi: c.vi, rate: v.rate };
-      H.speak(text, true, 0.95 * rate * v.rate, { keep: true, pitch: v.pitch, vi: v.vi, onend: step, onerror: step });
+      var slot = opts.mono != null ? (opts.mono ? "f1" : "m1") : slots ? slots[root.Voces.who(p[0])] : "";
+      H.speak(text, true, 0.95 * rate * v.rate, { keep: true, pitch: v.pitch, vi: v.vi, slot: slot, onend: step, onerror: step });
     })();
     return h;
   }

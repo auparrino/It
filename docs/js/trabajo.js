@@ -249,9 +249,11 @@
     var seen = [];
     (s.dialogo || []).forEach(function (d) { if (seen.indexOf(d[0]) < 0) seen.push(d[0]); });
     var k = Math.max(0, seen.indexOf(who)), sx = D().sexes || {};
-    if (!H.cast) return { vi: k };
-    var c = H.cast(seen.map(function (n) { return sx[n] || null; }), seen.length)[k];
-    return { vi: c.vi, pitch: c.pitch };
+    var sexes = seen.map(function (n) { return sx[n] || null; });
+    var slot = root.Voces ? root.Voces.slots(sexes, seen.length)[k] : "";
+    if (!H.cast) return { vi: k, slot: slot };
+    var c = H.cast(sexes, seen.length)[k];
+    return { vi: c.vi, pitch: c.pitch, slot: slot };
   }
 
   function countLine(s, text) {
@@ -341,7 +343,7 @@
       if (!cur || cur.id !== s.id || i >= s.dialogo.length) return;
       var d = s.dialogo[i++];
       var v = voiceOf(s, d[0]);
-      var u = H.speak(d[1], true, null, { vi: v.vi, pitch: v.pitch, keep: i > 1, onend: next });
+      var u = H.speak(d[1], true, null, { vi: v.vi, pitch: v.pitch, slot: v.slot, keep: i > 1, onend: next });
       if (!u) i = s.dialogo.length;
     };
     if (root.speechSynthesis) root.speechSynthesis.cancel();
@@ -363,7 +365,7 @@
     on("trplay", playAll);
     on("trdlgok", function () { recOf(H.state(), s.id).d = 1; H.persist(); H.render(); });
     document.querySelectorAll("[data-trsay]").forEach(function (b) {
-      b.onclick = function () { var d = s.dialogo[+b.getAttribute("data-trsay")], v = voiceOf(s, d[0]); H.speak(d[1], true, null, { vi: v.vi, pitch: v.pitch }); };
+      b.onclick = function () { var d = s.dialogo[+b.getAttribute("data-trsay")], v = voiceOf(s, d[0]); H.speak(d[1], true, null, { vi: v.vi, pitch: v.pitch, slot: v.slot }); };
     });
     document.querySelectorAll("[data-trph]").forEach(function (b) {
       b.onclick = function (e) { e.preventDefault(); H.speak(s.phrases[+b.getAttribute("data-trph")][0], true); };

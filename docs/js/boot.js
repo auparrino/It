@@ -57,7 +57,7 @@
     { lang: "mapas_data.js" }, { core: "mapas.js" },
     { lang: "diagnosi.js" }, { lang: "scrivi.js" },
     { core: "banca.js" }, { lang: "freq_data.js" }, { core: "frequenza.js" },
-    { lang: "ascolto_data.js" }, { lang: "dictogloss_data.js" }, { lang: "esame_data.js" }, { lang: "voci_cv_data.js" },
+    { lang: "ascolto_data.js" }, { lang: "dictogloss_data.js" }, { lang: "esame_data.js" }, { lang: "voci_cv_data.js" }, { lang: "audio_data.js" },
     { core: "suoni.js" },
     { core: "ubicacion.js" },
     { lang: "duelli_data.js" }, { core: "duelli.js" },
