@@ -11,13 +11,13 @@ FX = "Trova l'errore: tocá la palabra que está mal y corregila."
 ITEMS = [
     # ================= Settimana 6: Presente irregolare =================
     dict(id="mj-06-01", type="cloze", topic="stare + gerundio", level="A1", w=6, prompt=CL,
-         stem="Adesso Marco ___ (leggere) il giornale.", answer="sta leggendo",
+         stem="Adesso Marco ___ (stare + leggere) il giornale.", answer="sta leggendo",
          note="Acción en curso: stare + gerundio. Leggere es -ere, entonces -endo: leggendo."),
     dict(id="mj-06-02", type="choice", topic="stare + gerundio", level="A1", w=6, prompt=CE,
          stem="Cosa ___ facendo, ragazzi?", options=["state", "siete", "avete"], answer="state",
          note="El auxiliar del gerundio es stare, no essere: voi state facendo."),
     dict(id="mj-06-03", type="cloze", topic="stare + gerundio", level="A1", w=6, prompt=CL,
-         stem="Noi ___ (studiare) in biblioteca.", answer="stiamo studiando",
+         stem="Noi ___ (stare + studiare) in biblioteca.", answer="stiamo studiando",
          note="stare en noi (stiamo) + gerundio en -ando: stiamo studiando."),
     dict(id="mj-06-04", type="translate", topic="stare + gerundio", level="A1", w=6, prompt=TR,
          stem="Estoy escribiendo un mensaje.", answer="Sto scrivendo un messaggio",

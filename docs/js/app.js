@@ -945,7 +945,7 @@
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION = "c1-vN" in sw.js: test_game
      and the CI check it).  One version for the app and both languages. */
-  var APP_VERSION = "v3.18.0";
+  var APP_VERSION = "v3.19.0";
   // Settimana XVII: Roman numerals on the street signs (LANG.ui.romanWeeks).
   function romano(n) {
     var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
@@ -2204,6 +2204,9 @@
     m({ kind: "play2", done: domDone, half: !domDone && !!st.domBest, ico: "🏆", title: "Dominala",
         sub: domDone ? "Dominada" + (st.domPct ? " · " + st.domPct + " %" : "")
           : w.lesson && !lessonRead(w.week) ? "Se abre cuando termines la lección: pregunta toda la semana"
+          : st.domShort > 0
+          ? "Te faltaron " + st.domShort + " para el 85 %: ahora es una ronda corta de " + Drills.dominaSize(st) +
+            " preguntas, con 85 % la ganás" + (w.week >= DOMINA_GATE ? " · abre la semana siguiente" : "")
           : "Una sola sesión de " + Drills.DOMINA_SIZE + " preguntas de toda la semana, sin vidas: con 85 % la ganás" +
             (w.week >= DOMINA_GATE ? " · abre la semana siguiente" : "") +
             (st.domBest ? " · tu mejor intento: " + st.domBest + " % · Te falta: 85 %" : "") });
@@ -2484,7 +2487,7 @@
     else if (kind === "domina") {
       // the whole week, so only once the whole lesson has been read
       if (w.lesson && !lessonRead(w.week)) { toast("«Dominala» pregunta toda la semana: se abre cuando termines la lección.", 3500); return; }
-      items = Drills.buildDomina(course, w, state, { map: itemMap, silent: state.silent });
+      items = Drills.buildDomina(course, w, state, { map: itemMap, silent: state.silent, size: Drills.dominaSize(weekStat(w.week)) });
     }
     else if (kind === "review") items = Drills.buildReview(course, state, 20, drillOpts());
     else if (kind === "scene") {
@@ -4253,10 +4256,17 @@
       var dp = firsts.length ? Math.round(okN / firsts.length * 100) : 0;
       var dws = state.weekStats[view.week] || (state.weekStats[view.week] = { attempts: 0, right: 0, bossPassed: false });
       dws.domBest = Math.max(dws.domBest || 0, dp);
-      if (dp >= 85 && firsts.length >= Math.min(20, round.items.length)) {
+      // (the short attempt has fewer than 20 questions: all of them count)
+      var domN = round.items.filter(function (x) { return !x.old; }).length;
+      if (dp >= 85 && firsts.length >= Math.min(20, domN)) {
         if (!dws.dominated) gain(60);
         dws.dominated = true; dws.domPct = Math.max(dws.domPct || 0, dp);
+        delete dws.domShort;
         domExtra = "🏆 ¡Semana dominada! " + dp + " % en " + firsts.length + " preguntas";
+      } else if (firsts.length) {
+        dws.domShort = Drills.dominaMissing(okN, firsts.length);
+        domExtra = "🏆 Dominala: " + okN + " de " + firsts.length + " (" + dp + " %). Te faltaron " + dws.domShort +
+          " para el 85 %: la próxima es una ronda corta de " + Drills.dominaSize(dws) + " preguntas.";
       } else domExtra = "🏆 Dominala: " + dp + " % (hace falta 85 %). Tu mejor intento: " + dws.domBest + " %.";
     }
 

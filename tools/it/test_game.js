@@ -269,6 +269,18 @@ ok(Drills.dueCount(course, state) >= 30, "le schede scadute rientrano in coda");
   ok(rep === 0, "Dominala: " + rep + " ejercicios repetidos en la misma sesión");
 })();
 
+// Dominala después de quedarse corto: una ronda de 3 × las que faltaron
+// (entre 10 y 30), con el mismo 85 %.
+(function () {
+  ok(Drills.dominaMissing(25, 30) === 1 && Drills.dominaMissing(26, 30) === 0, "Dominala: 25 de 30 → falta 1");
+  ok(Drills.dominaMissing(7, 10) === 2 && Drills.dominaMissing(15, 30) === 11, "Dominala: 7 de 10 → faltan 2; 15 de 30 → 11");
+  ok(Drills.dominaSize({}) === 30 && Drills.dominaSize({ domShort: 1 }) === 10 && Drills.dominaSize({ domShort: 5 }) === 15 &&
+     Drills.dominaSize({ domShort: 11 }) === 30, "Dominala: tamaño 30 / 10 / 15 / 30");
+  var w = course.weeks[9];
+  var short = Drills.buildDomina(course, w, { cards: {}, unlocked: w.week }, { size: 10 });
+  ok(short.length === 10 && short.every(function (it) { return !it.old; }), "Dominala corta: 10 preguntas, sin reglas viejas (" + short.length + ")");
+})();
+
 // Duelos: cada oración tiene sus dos formas, la pista está en la oración y
 // «¿qué te lo dijo?» se puede armar; cada sesión trae los dos lados.
 (function () {

@@ -1138,23 +1138,40 @@
      exercises first (so one pass also covers the week).  Written items stay
      written: mastering is producing, not recognising. */
   var DOMINA_SIZE = 30;
+  /* An attempt that fell short leaves ws.domShort (the right answers it
+     lacked); the next attempt is then a short one, three questions per
+     missing answer, between 10 and the full 30, with the same 85 %. */
+  var DOMINA_MIN = 10;
+  function dominaSize(ws) {
+    var s = ws && ws.domShort;
+    return s > 0 ? Math.max(DOMINA_MIN, Math.min(DOMINA_SIZE, 3 * s)) : DOMINA_SIZE;
+  }
+  // How many more right answers out of n would have reached the 85 %
+  // (rounded as the score is shown).
+  function dominaMissing(right, n) {
+    var k = 0;
+    while (right + k < n && Math.round((right + k) / n * 100) < 85) k++;
+    return k;
+  }
   function buildDomina(course, week, state, opts) {
     opts = opts || {};
+    var size = opts.size || DOMINA_SIZE;
     var map = opts.map || itemsById(course);
     var pool = (week.items || []).map(function (id) { return map[id]; })
       .filter(function (it) { return it && !(opts.silent && it.type === "listen"); });
-    var out = pickFresh(pool, DOMINA_SIZE, state);
-    if (out.length < DOMINA_SIZE) {
+    var out = pickFresh(pool, size, state);
+    if (out.length < size) {
       var have = {};
       out.forEach(function (it) { have[sameKey(it)] = 1; });
-      bankFill(state, DOMINA_SIZE - out.length).forEach(function (it) {
+      bankFill(state, size - out.length).forEach(function (it) {
         if (!have[sameKey(it)]) { have[sameKey(it)] = 1; out.push(it); }
       });
     }
     out = shuffle(out);
     // A few rules of a month ago or more, written, with new sentences
-    // (it.old: reported apart, they do not count for the 85 %).
-    if (root.Reglas && root.Reglas.oldItems && state) {
+    // (it.old: reported apart, they do not count for the 85 %).  Not in
+    // the short attempt: that one only confirms the week.
+    if (root.Reglas && root.Reglas.oldItems && state && size >= DOMINA_SIZE) {
       root.Reglas.oldItems(state, week.week, DOMINA_OLD).forEach(function (it, k) {
         out.splice(Math.floor((k + 1) * out.length / (DOMINA_OLD + 1)), 0, it);
       });
@@ -1318,6 +1335,8 @@
     buildDomina: buildDomina,
     dominated: dominated,
     DOMINA_SIZE: DOMINA_SIZE,
+    dominaSize: dominaSize,
+    dominaMissing: dominaMissing,
     weakItems: weakItems,
     buildReview: buildReview,
     buildColdest: buildColdest,
