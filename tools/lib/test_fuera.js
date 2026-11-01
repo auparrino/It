@@ -26,10 +26,11 @@ var SRC = fs.readFileSync(path.join(pack.DOCS, "js", "fuera.js"), "utf8");
 ok(!/italian|portugu|brasil|\bLa Via\b|Rumo C1/i.test(SRC.replace(/\/\*[\s\S]*?\*\//g, "").replace(/\/\/.*$/gm, "")), "fuera.js no nombra ningún idioma");
 ok(Boot.coreFiles().indexOf("js/fuera.js") >= 0, "el service worker guarda fuera.js");
 var APP = fs.readFileSync(path.join(pack.DOCS, "js", "app.js"), "utf8");
-ok(/Fuera\.missions\(w, state\)\.forEach\(m\)/.test(APP), "weekPlan llama a Fuera.missions");
+// 3.20: ya no es misión ni está en Leggi (era más trabajo que lo que daba)
+ok(!/Fuera\.missions\(/.test(APP), "weekPlan ya no trae la misión de afuera");
 ok(/Fuera\.handles\(kind\)\) Fuera\.go\(kind, arg\)/.test(APP), "goMission lleva la misión de afuera");
 ok(/Fuera\.owns\(s\)\) html = Fuera\.render\(s\)/.test(APP) && /Fuera\.wire\(view\.screen\)/.test(APP), "la pantalla «fuera» se dibuja y se cablea");
-ok(/Fuera\.leggiFold\(state, week, sNames\)/.test(APP) && /Fuera\.weekButtons\(state, week\)/.test(APP), "Leggi muestra la ficha de la semana y todas");
+ok(!/Fuera\.leggiFold\(/.test(APP) && !/Fuera\.weekButtons\(/.test(APP), "Leggi ya no muestra las fichas de afuera");
 
 var WEEKS = [];
 for (var w = 6; w <= 52; w++) WEEKS.push(w);

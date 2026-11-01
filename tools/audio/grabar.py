@@ -2,6 +2,8 @@
 """Los audios grabados con Piper (TTS neuronal, corre local): la radio, el
 tramo, los diálogos del examen, las escenas de trabajo y los ejercicios de
 escuchar y de dictado del curso, para que no dependan de la voz del teléfono.
+En alemán (TODO_EL_CURSO), además, todo lo que la app lee del curso: las
+respuestas, los ejemplos de la lección y las palabras (tools/audio/textos.js).
 
     python3 -m venv /tmp/piper && /tmp/piper/bin/pip install piper-tts
     /tmp/piper/bin/python tools/audio/grabar.py [it pt de] [--solo-listar]
@@ -53,6 +55,10 @@ VOICES = {
            "m1": ("de_DE-thorsten-medium", 1.0), "m2": ("de_DE-thorsten-medium", 0.92), "m3": ("de_DE-thorsten-medium", 1.08),
            "f1": ("de_DE-kerstin-low", 1.0), "f2": ("de_DE-kerstin-low", 1.1), "f3": ("de_DE-kerstin-low", 0.94)},
 }
+# Los idiomas en los que se graba todo lo que la app lee del curso, no solo
+# la escucha: los que el teléfono no suele tener instalados.
+TODO_EL_CURSO = ("de",)
+
 CREDITS = {
     "it_IT-paola-medium": "Paola (Piper, datos CC0)",
     "it_IT-serena-medium": "Serena (Piper, datos CC BY 4.0, committa/serena-synthetic-it)",
@@ -173,6 +179,13 @@ def collect(lang):
             jobs.append(("", it.get("stem")))
         elif it.get("type") == "dictation":
             jobs.append(("", it.get("answer")))
+    # El alemán: el teléfono casi nunca trae voz alemana, así que se graba
+    # todo lo que la app lee del curso (tools/audio/textos.js).
+    if lang in TODO_EL_CURSO:
+        out = subprocess.run(["node", os.path.join(ROOT, "tools", "audio", "textos.js"), lang],
+                             capture_output=True, text=True, check=True).stdout
+        for t in json.loads(out):
+            jobs.append(("", t))
     out, seen = [], set()
     for slot, text in jobs:
         t = norm(text)

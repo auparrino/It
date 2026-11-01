@@ -524,8 +524,7 @@ async function smokeEsame(page, code, P, snap, note, errors) {
     await require("./smoke_modulos.js")(page, { code, errors, note, snap });
     // the Radio series (weeks 6-25): the mission, the player, Leggi (tools/lib/smoke_radio.js)
     await require("./smoke_radio.js")(page, { code, errors, note, snap });
-    // out of the app (weeks 6-52): the card, the minutes, Leggi (tools/lib/smoke_fuera.js)
-    await require("./smoke_fuera.js")(page, { code, errors, note, snap });
+    // «Fuera de la app» is no longer a mission nor in Leggi (3.20): tools/lib/smoke_fuera.js retired
     // the work route (from A2): the scene, the round, the task, Allena (tools/lib/smoke_trabajo.js)
     await require("./smoke_trabajo.js")(page, { code, errors, note, snap });
     // the copy in the learner's GitHub Gist, with the API simulated (tools/lib/smoke_nube.js)

@@ -114,8 +114,9 @@
      color (■ ▲ ● ◆) para quien no distingue los colores.  El color es el
      del sustantivo, no el del artículo: «mit der Mutter» va en rojo (die
      Mutter), «die Zimmer» en amarillo (el plural de das Zimmer).  Lo que
-     no se sabe no se pinta: solo los sustantivos de las palabras de la
-     semana y de las tablas de las lecciones (learn), sus plurales y sus
+     no se sabe no se pinta: los sustantivos de las palabras de la semana,
+     de las tablas de las lecciones y los de todo el curso con su género de
+     diccionario (course.genders, tools/de/generos.py), sus plurales y sus
      compuestos (der Handschuh, como der Schuh).  El núcleo lo usa en
      Palabras de la semana, la lección y la devolución (app.js genderPaint),
      y el aviso «es die Sonne» en la corrección (notice). */
@@ -175,6 +176,10 @@
         });
       });
     });
+    // every other noun of the course, with all its forms (tools/de/generos.py:
+    // «Tische»: "pl"); what the weeks say goes first
+    var gl = (course && course.genders) || {};
+    Object.keys(gl).forEach(function (f) { if (!G_LEX[f] && /^(m|f|n|pl)$/.test(gl[f])) G_LEX[f] = gl[f]; });
     return Object.keys(G_LEX).length;
   }
 

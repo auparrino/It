@@ -7,7 +7,9 @@ forma → los tiempos que puede expresar.  Una forma ambigua (falamos es
 presente y perfeito; falar es infinitivo y futuro do subjuntivo) cuenta por
 el tiempo más temprano que puede ser, así el control nunca falla por una
 lectura rebuscada.  build_course.py lo usa para advertir, no para mover
-ejercicios: los ítems de autor ya declaran su semana («w»).
+ejercicios: los ítems de autor ya declaran su semana («w»), pero el que
+usa un tiempo que su semana todavía no enseñó pasa a la semana de esa
+teoría (build_course.py): nada se toma antes de explicarse.
 """
 import json
 import os
@@ -37,7 +39,9 @@ FIXED = {"chamo", "chama", "chamas", "gosto", "gosta", "gostaria", "obrigado", "
          # expresiones fijas y formas que casi siempre son otra cosa
          # (sustantivos, contracciones): tomara que, há, deste, o trabalho
          "tomara", "oxalá", "há", "deste", "desse", "neste", "nesse", "casa", "trabalho",
-         "passeio", "mate", "vira", "quer", "queres", "viras"}
+         "passeio", "mate", "vira", "quer", "queres", "viras",
+         # «em cima», «sobre a mesa», «o telefone», «onde fica» (explicado en la semana 1)
+         "cima", "telefone", "fica", "sobre"}
 
 
 _IMP = None

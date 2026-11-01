@@ -220,22 +220,26 @@ def main():
             problems.append("%s (semana %s): consigna sin portugués en tools/pt/consignas.py: %s" % (it["id"], it["w"], it["prompt"]))
 
     # Nada antes de su teoría: la respuesta no puede usar un tiempo que su
-    # semana todavía no enseñó.  Solo avisa: el conjugador reconoce formas,
-    # no contextos, y alguna forma ambigua puede engañarlo.
+    # semana todavía no enseñó.  Un ítem así pasa a la semana de esa teoría
+    # (a la última parte de la lección), como en el italiano: nunca se pide
+    # algo que la app no explicó.  (Antes solo avisaba, y el «se Deus
+    # quiser» de la semana 6 se tomó sin explicación.)  Las formas ambiguas
+    # que engañan al conjugador van en sillabo.FIXED.
     try:
         import sillabo
-        early = []
+        moved = []
         for it in authored:
             if it.get("type") in ("listen", "scopri") or it.get("prova"):
                 continue
             wk, feats = sillabo.min_week(it)
             if wk > int(it["w"]):
-                early.append("%s (semana %s) usa %s" % (it["id"], it["w"],
+                moved.append("%s (semana %s → %d) usa %s" % (it["id"], it["w"], wk,
                              ", ".join("%s:%d" % kv for kv in feats.items() if kv[1] > int(it["w"]))))
-        if early:
-            print("aviso: %d ítems usan un tiempo antes de su semana (primeros 25):" % len(early))
-            for e in early[:25]:
-                print("   ", e)
+                it["w"] = wk
+                it.pop("part", None)
+        print("sillabo: %d ejercicios pasan a una semana posterior, a su teoría" % len(moved))
+        for e in moved[:25]:
+            print("   ", e)
     except Exception as e:           # sin node o sin conjugador
         print("aviso: sin control de tiempos (%s)" % e)
 

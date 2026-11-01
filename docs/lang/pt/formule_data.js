@@ -23,7 +23,6 @@
     "frase:socorro:9": [[5, "pode"]],
     "frase:socorro:12": [[11, "entendi"]],
     "frase:socorro:13": [[5, "preciso"]],
-    "frase:socorro:14": [[5, "fica"]],
     "frase:socorro:16": [[5, "pode"]],
     "frase:boteco:1": [[6, "vê"]],
     "frase:boteco:7": [[6, "vamos"]],

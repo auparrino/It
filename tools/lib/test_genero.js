@@ -54,7 +54,7 @@ eq(G.notice("Die Sonne scheint", "Die Sonne scheint."), null, "de: bien escrito,
 eq(G.notice("", "Die Sonne scheint."), null, "de: sin respuesta, sin aviso");
 
 // what is not an article + noun: a pronoun, a determiner in between, a relative
-[["Ist das Ihre Wohnung?", []], ["Ich denke, dass das keine gute Idee ist.", []],
+[["Ist das Ihre Wohnung?", []], ["Ich denke, dass das keine gute Idee ist.", ["keine:f"]],   // el «das» no; «keine Idee» sí (Idee está en course.genders)
  ["das Auto, das letzte Woche repariert wurde", ["das:n"]], ["Das Auto, das Peter fährt.", ["Das:n"]],
  ["Das ist das Café, wo wir uns kennen.", ["das:n"]]]
   .forEach(function (x) { eq(G.marks(x[0]).map(function (m) { return m.art + ":" + m.g; }), x[1], "de: «" + x[0] + "»"); });
