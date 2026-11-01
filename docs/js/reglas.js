@@ -422,7 +422,10 @@
     var at = sent.toLowerCase().indexOf(String(piece).toLowerCase());
     return at < 0 ? "" : sent.slice(0, at) + "___" + sent.slice(at + piece.length);
   }
-  // The blocks of the dictogloss not recovered: each one as a gap in its sentence.
+  /* The blocks of the dictogloss not recovered: each one as a gap in its
+     sentence.  No longer called (3.20): a block of a text heard days ago
+     could only be remembered, not worked out, so it does not come back;
+     ownItem drops the ones already saved. */
   function fromDictogloss(state, t, r, week, now) {
     if (!state || !t || !r) return 0;
     var n = 0;
@@ -467,7 +470,8 @@
 
   function ownItem(state, id) {
     var o = state && state.own && state.own[id];
-    if (!o || !o.it) return null;
+    // own:dg: a block of a dictogloss asked by heart: no longer reviewed (3.20)
+    if (!o || !o.it || id.indexOf("own:dg:") === 0) return null;
     var copy = {};
     Object.keys(o.it).forEach(function (k) { copy[k] = o.it[k]; });
     return copy;

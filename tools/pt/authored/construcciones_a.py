@@ -3,10 +3,12 @@
 
 Cuatro propuestas del plan auditorias/PLAN-2026-10-propuestas.md:
 
-1. Fórmulas antes de la regla (semanas 6, 8, 12, 18, 20 y 24): *se Deus
-   quiser*, *quando você puder*, *se der*, *como você quiser*, *se
-   precisar*, *seja como for*.  Se aprenden como bloques fijos; la nota lo
-   dice («la regla llega en la 27»).
+1. (Sacada) Fórmulas antes de la regla en las semanas 6-24 (*se Deus
+   quiser*, *quando você puder*…): se tomaban como ejercicio antes de que
+   la lección explicara el tiempo, y el alumno no tenía con qué
+   resolverlas.  Ahora todo el futuro do subjuntivo empieza en la 27, con
+   su teoría; tools/pt/test_scrivi.js controla que ningún ejercicio lo use
+   antes.
 2. Relativas e indefinidos (27, 34, 43 y 50): *quem quiser*, *o que você
    achar*, *aonde você for*, *o que for necessário*, *aconteça o que
    acontecer*: el castellano usa presente de subjuntivo y empuja al calco
@@ -82,49 +84,6 @@ def fx(w, stem, bad, good, cat, note, part=None, prompt=FX):
 def di(w, text, note, alt=None, part=None):
     """Dictado (TTS pt-BR): se oye la frase y se escribe."""
     return _add(w, "dictation", DI, text, text, note, alt, part, nopeek=True)
-
-
-# ===========================================================================
-# 1. Fórmulas antes de la regla (6-24)
-# ===========================================================================
-FORM = " Es una fórmula: aprendela entera, como un bloque. La regla de este tiempo llega en la semana 27."
-
-tr(6, "¡Si Dios quiere!", ["Se Deus quiser!"],
-   "Se dice *se Deus quiser*, no «se Deus quer»: *quiser* es el futuro do subjuntivo de *querer*, "
-   "un tiempo que el castellano perdió y el portugués usa todos los días." + FORM)
-
-tr(8, "Cuando puedas, avisame.",
-   _combo(["Quando você puder, ", "Quando puder, "], ["me avisa"]) +
-   _combo(["Quando você puder, ", "Quando puder, "], ["me avise"]) +
-   _combo(["Me avisa quando ", "Me avise quando "], ["você puder", "puder"]),
-   "«Cuando puedas» se dice *quando você puder*, no «quando você possa»: para un momento futuro, "
-   "el portugués usa el futuro do subjuntivo (*puder*). *Me avisa* es como se pide en el habla." + FORM)
-
-tr(12, "Si se puede, vamos al bloco el sábado.",
-   _combo(["Se der, ", "Se for possível, "], ["a gente vai", "vamos", "nós vamos"],
-          [" ao bloco", " no bloco", " pro bloco", " para o bloco"], [" no sábado", " sábado"]),
-   "*Se der* es «si se puede, si sale»: *dar* en futuro do subjuntivo. «Se dá» sería otra cosa "
-   "(si se da ahora, siempre). *Ir no bloco* es del habla; en la norma, *ir ao bloco*." + FORM)
-
-tr(18, "Como quieras. (a un amigo que no sabe dónde comer)",
-   ["Como você quiser.", "Como quiser.", "Do jeito que você quiser.", "Do jeito que quiser.",
-    "Como você preferir.", "Como preferir."],
-   "*Como você quiser* (o *como você preferir*). Con *como*, *quem*, *onde* "
-   "y una mirada al futuro va el futuro do subjuntivo: nunca «como você queira»." + FORM)
-
-tr(20, "Si hace falta, te ayudo.",
-   _combo(["Se precisar, ", "Se você precisar, ", "Se for preciso, ", "Se for necessário, "],
-          ["eu te ajudo", "te ajudo", "eu ajudo você", "ajudo você", "eu vou te ajudar", "vou te ajudar"]),
-   "«Si hace falta» mira al futuro: *se precisar* (o *se for preciso*), con el futuro do "
-   "subjuntivo de *precisar* (igual al infinitivo) o de *ser* (*for*). No «se precisa»." + FORM)
-
-tr(24, "Sea como sea, el sábado voy a la playa.",
-   _combo(["Seja como for, "], ["no sábado eu vou", "no sábado vou", "eu vou no sábado", "vou no sábado"],
-          [" à praia", " pra praia", " para a praia"]) +
-   _combo(["Seja como for, "], ["eu vou", "vou"], [" à praia", " pra praia", " para a praia"], " no sábado") +
-   _combo(["No sábado eu vou", "No sábado vou"], [" à praia", " pra praia", " para a praia"], [", seja como for"]),
-   "*Seja como for* junta el presente de subjuntivo que ya viste (*seja*) con el futuro do "
-   "subjuntivo de *ser* (*for*). No es «seja como seja», el calco de «sea como sea»." + FORM)
 
 
 # ===========================================================================

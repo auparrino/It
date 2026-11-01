@@ -945,7 +945,7 @@
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION = "c1-vN" in sw.js: test_game
      and the CI check it).  One version for the app and both languages. */
-  var APP_VERSION = "v3.19.0";
+  var APP_VERSION = "v3.20.0";
   // Settimana XVII: Roman numerals on the street signs (LANG.ui.romanWeeks).
   function romano(n) {
     var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
@@ -1163,7 +1163,6 @@
         (ad ? '<span class="score">' + ad.pct + "%</span>" : "") + "</button>");
     }
     if (window.Radio) wk = wk.concat(Radio.weekButtons(state, week));   // el episodio de la serie Radio (radio.js)
-    if (window.Fuera) wk = wk.concat(Fuera.weekButtons(state, week));   // la ficha de afuera de la semana (fuera.js)
     var B = window.Biblioteca, rec = null;
     if (B && B.loaded && B.loaded() && B.firstOpenWeek(B.index()) <= week) {
       var lm = B.mission(B.index(), { week: week }, state);
@@ -1215,7 +1214,6 @@
       '<p class="muted">' + esc(ser.lunga.blurb) + "</p>" + bySeason("lg:lunga", lunghe));
 
     if (window.Radio) html += Radio.leggiFold(state, week, sNames);   // la serie Radio, semanas 6-25 (radio.js)
-    if (window.Fuera) html += Fuera.leggiFold(state, week, sNames);   // material de afuera, semanas 6-52 (fuera.js)
     // Escuchas: las largas del tramo y la re-escucha de lo ya leído
     var asc = "", TD = window.TRAMO_DATA;
     if (TD && (TD.SETTIMANE || []).length) {
@@ -1501,8 +1499,9 @@
 
   /* The color of the gender (Signalgrammatik), when the language has it
      (German: LANG.rules.gender, in its rules.js): the articles of the week's
-     words, of the lesson and its tables, of the correction.  Never the
-     options of a question: only what is already read or answered. */
+     words, of the lesson and its tables, of the correction, and the
+     sentence of a question once answered.  Never the options of a question
+     nor a question still open: only what is already read or answered. */
   function genderRules() { return (LG.rules || {}).gender || null; }
   function genderPaint(root, sel) {
     var G = genderRules();
@@ -1948,6 +1947,7 @@
       (ok ? "" : lesRule(q)) +
       '<div class="row" style="margin-top:10px"><button class="btn" id="lesnext2">' + UI.next + "</button></div></div>";
     genderPaint($("#lesfb"), ".sol, .note");
+    genderPaint(document, ".blk .stem");   // answered: the sentence of the check too
     on("#lesnext2", lesNext);
   }
 
@@ -2118,7 +2118,9 @@
     });
     if (window.Tramo) Tramo.missions(w, state).forEach(m);   // tramo C1 (tramo.js): escucha larga y tarea
     if (window.Radio) Radio.missions(w, state).forEach(m);   // la serie Radio de las semanas 6-25 (radio.js)
-    if (window.Fuera) Fuera.missions(w, state).forEach(m);   // fuera de la app, opcional (fuera.js)
+    // «Fuera de la app» (fuera.js: Easy Italian, Easy Brazilian Portuguese…) ya no es misión
+    // ni está en Leggi (3.20): abrir un video afuera, anotar y contarlo era más trabajo que lo
+    // que daba.  La pantalla queda solo para abrir lo que alguien ya tenía guardado.
     if (window.Trabajo) Trabajo.missions(w, state).forEach(m);   // la escena de trabajo de la semana, opcional (trabajo.js)
     if (window.Lab) {
       Lab.RULES.forEach(function (r, k) {
@@ -3850,6 +3852,7 @@
 
     $("#fb").innerHTML = fb;
     genderPaint($("#fb"), ".sol, .note:not(.gen-note), .diag");
+    genderPaint(document, ".stem");   // answered: the sentence of the question too
     if (window.Porque) Porque.after(it, { q: q, given: given, round: round });   // 📖 ¿Por qué? · 🧐 ¿Qué tenía de malo?
     // «¿Qué tenía de malo X?» asks about an option: its why, said here, would answer it
     var pq = $("#fb .porque-quiz .pq-h b");
@@ -5718,8 +5721,8 @@
       Engine.touchStreak(state);
       // what the checker saw goes to the profile: what was written, the correction and why
       if (window.Errores) Errores.recordFindings(state, dg.findings, given, {});
-      // the blocks not recovered come back tomorrow, each one as a gap (reglas.js)
-      if (window.Reglas) Reglas.fromDictogloss(state, t, r, w.week);
+      // the blocks missed no longer come back as a gap: a block of a text heard
+      // days ago cannot be guessed from its sentence, only remembered (3.20)
       dg.extras = missionCheck(w.week, before);
       Engine.checkBadges(state);
       persist();

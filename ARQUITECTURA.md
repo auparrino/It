@@ -274,9 +274,10 @@ y trae de vuelta los minutos como input.
   bloque de input. Guarda en `state.fuera` = {w: {semana: {min, taps, q, t,
   n, hard, at}}, d: {día: [min, xp]}}.
 - **Tests**: `tools/lib/test_fuera.js` (las 47 fichas, los topes, el input,
-  la misión, el «contalo», la pantalla) y `tools/lib/smoke_fuera.js` (en
-  Chromium: la misión de la 6, +10 min, la pregunta, el corrector y la ficha
-  de la 20 desde Leggi).
+  el «contalo», la pantalla).
+- **Desde 3.20 no se muestra**: `app.js` ya no llama a `Fuera.missions`,
+  `Fuera.weekButtons` ni `Fuera.leggiFold` (el alumno: «me trabaja más que lo
+  que resulta»). El módulo y los datos quedan, por si vuelve.
 
 **Estrategia de la semana (los tres idiomas).** Una táctica corta («leé las
 preguntas antes de escuchar», «el sustantivo con artículo y plural»), dicha

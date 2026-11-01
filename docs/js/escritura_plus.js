@@ -348,7 +348,8 @@
      the learner wrote in its place as the cue (no «wrong»: another way). */
   function reviewItem(id, state) {
     var c = state && state.escrituraPlus && state.escrituraPlus.cards && state.escrituraPlus.cards[id];
-    if (!c || !c.n || !c.s) return null;
+    // the chunks of the model text: by heart, no longer reviewed (3.20)
+    if (!c || !c.n || !c.s || c.src === "modelo") return null;
     var prompt = c.src === "modelo" ? "Del texto modelo: completá como lo escribió un nativo"
       : c.m ? "Vos escribiste «" + c.m + "». Un nativo lo dijo así: completá"
       : "Un nativo agregó algo que vos no pusiste: completá";
@@ -567,8 +568,8 @@
       var mu = split(taskFor(cur.week).model), mcls = {};
       Object.keys(cur.picked).forEach(function (i) { mcls[i] = "on"; });
       html += '<div class="card"><h3>Un texto modelo con la misma consigna</h3>' +
-        '<p class="muted small">Así lo escribió un nativo. Tocá las palabras que te gustaría haber usado (varias seguidas forman una expresión): también van a tu repaso.</p>' +
-        '<div class="text hunt ep-diff it" id="eprmodel">' + unitsHtml(mu, null, mcls) + "</div></div>";
+        '<p class="muted small">Así lo escribió un nativo. Leelo y fijate qué expresiones te gustaría haber usado.</p>' +
+        '<div class="text ep-diff it" id="eprmodel">' + unitsHtml(mu, null, mcls) + "</div></div>";
     }
     var sent = cur.sent;
     html += '<div class="card">' + (sent != null
@@ -622,13 +623,8 @@
   function sendRif(h) {
     var cards = [], meta = { week: cur.week, src: cur.src, at: Date.now() };
     Object.keys(cur.found).forEach(function (k) { var c = cardFor(cur.diff, +k, meta); if (c) cards.push(c); });
-    // the model: runs of consecutive picked units, one card each
-    if (cur.src !== "ia") {
-      var mu = split(taskFor(cur.week).model), idx = Object.keys(cur.picked).map(Number).sort(function (a, b) { return a - b; });
-      var runs = [];
-      idx.forEach(function (i) { var r = runs[runs.length - 1]; if (r && r[1] === i) r[1] = i + 1; else runs.push([i, i + 1]); });
-      runs.forEach(function (r) { var c = modelCard(mu, r[0], r[1], meta); if (c) cards.push(c); });
-    }
+    // the chunks picked from the model text no longer become cards (3.20): a
+    // chunk asked days later, with only its sentence, is memory, not reasoning
     var added = addCards(h.state, cards);
     var s = store(h.state), first = !s.rif[cur.week];
     s.rif[cur.week] = { at: Date.now(), n: cur.diff.chunks.length, found: Object.keys(cur.found).length, src: cur.src };
@@ -674,15 +670,7 @@
         if (cnt) cnt.textContent = countLine(Object.keys(cur.found).length, cur.misses);
       };
     });
-    var mod = $("#eprmodel");
-    if (mod) Array.prototype.forEach.call(mod.querySelectorAll("[data-u]"), function (el) {
-      el.onclick = function () {
-        if (cur.sent != null) return;
-        var i = +el.getAttribute("data-u");
-        if (cur.picked[i]) delete cur.picked[i]; else cur.picked[i] = 1;
-        el.classList.toggle("on", !!cur.picked[i]);
-      };
-    });
+    // the model is only read since 3.20: picking from it no longer makes cards
   }
 
   function on(sel, fn) { var b = $(sel); if (b) b.onclick = fn; }

@@ -276,13 +276,16 @@
     var kinds = [];
     if (root.Variaciones && root.Variaciones.eligible(state, week).length) kinds.push("var");
     var srcs = sources(state, week);
-    if (srcs.length && root.CTest) kinds.push("cloze", "ord");
+    // only «Ordená» (the clues are on the screen): the gap of a connector of
+    // a text read days ago asked for the exact word from memory, not
+    // something that can be worked out (removed in 3.20)
+    if (srcs.length && root.CTest) kinds.push("ord");
     if (!kinds.length) return null;
     var k = kinds[Math.floor(rnd() * kinds.length)];
     try {
       if (k === "var") return root.Variaciones.one(state, week);
       var src = srcs[Math.floor(rnd() * Math.min(srcs.length, 4))];
-      return k === "cloze" ? clozeItem(src) : tilesItem(src);
+      return tilesItem(src);
     } catch (e) { return null; }
   }
 

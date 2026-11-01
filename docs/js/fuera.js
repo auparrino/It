@@ -30,7 +30,9 @@
  * Datos: lang/<código>/fuera_data.js (window.FUERA_DATA: las fuentes y una
  * ficha por semana).  Guarda en state.fuera = { w: {semana: {min, taps,
  * q, t, n, hard, at}}, d: {"aaaa-m-d": [minutos, xp]} }.
- * Test: tools/lib/test_fuera.js; en el navegador, tools/lib/smoke_fuera.js.
+ * Test: tools/lib/test_fuera.js.
+ * Desde 3.20 app.js no muestra la misión ni las fichas en Leggi (era más
+ * trabajo que lo que daba); el módulo queda por si vuelve.
  */
 (function (root) {
   "use strict";

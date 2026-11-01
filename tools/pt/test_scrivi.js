@@ -89,6 +89,22 @@ WEEKS.forEach(function (w) {
   });
   void TW; void FORM;
 })();
+// Nothing tested before it is explained: no exercise of the course asks for
+// the futuro do subjuntivo before week 27, where the lesson teaches it (the
+// «se Deus quiser» of week 6 was asked without explanation; removed in 3.20).
+(function () {
+  var C = readJSON("course.json");
+  if (!C) return;
+  var wk = {};
+  C.weeks.forEach(function (w) { (w.items || []).forEach(function (id) { wk[id] = w.week; }); });
+  C.items.forEach(function (it) {
+    var w = wk[it.id] || it.w;
+    if (!w || w >= 27) return;
+    var ans = String(it.answer || "").split("|")[0], stem = String(it.stem || "").replace(/\([^)]*\)/g, " ");
+    var txt = /_{3,}/.test(stem) ? stem.replace(/_{3,}/g, ans) : ans;
+    ok(!S.features(txt).futSubj, "semana " + w + ": " + it.id + " pide el futuro do subjuntivo antes de la semana 27: «" + txt + "»");
+  });
+})();
 
 /* ------------------------------------------- errores escritos a mano */
 

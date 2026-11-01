@@ -23,7 +23,7 @@ ene y qué no
 **Tiene**: el camino (*Weg*) con lecciones en pasos cortos y sus chequeos, el
 entrenamiento y la *Dominala* de cada semana, las palabras de la semana, la
 pausa (*Kaffeepause*), el desafío del día, el repaso con FSRS y la palabra del
-día. La voz es la del teléfono en alemán (`de-DE`). Los ejercicios escritos
+día. La voz es grabada (Piper, voz *Thorsten*): todo lo que el curso lee en voz alta (las respuestas, los ejemplos de la lección, las palabras) está en `docs/lang/de/audio/piper/`, porque casi ningún teléfono trae voz alemana; lo que no está grabado usa la del teléfono (`de-DE`). Los artículos van coloreados por género con un diccionario de los sustantivos del curso (`tools/de/generos.py`). Los ejercicios escritos
 usan el teclado de la app en QWERTY, con una fila de *ä ö ü ß* arriba (o el del teléfono, con una
 fila de *ä ö ü ß*). La corrección no mira mayúsculas, y marca como *casi* lo
 que solo pierde la diéresis o escribe *ss* en vez de *ß*; pero si sin la

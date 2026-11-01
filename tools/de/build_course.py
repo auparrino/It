@@ -17,6 +17,7 @@ ROOT = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, HERE)
 import curso  # noqa: E402
 import can  # noqa: E402
+import sillabo  # noqa: E402
 sys.path.insert(0, os.path.join(ROOT, "tools", "lib"))
 import puedo  # noqa: E402
 
@@ -39,6 +40,35 @@ def season_of(n):
         if s["weeks"][0] <= n <= s["weeks"][1]:
             return s["n"]
     raise SystemExit("semana %d: fuera de las temporadas" % n)
+
+
+def early(weeks, items):
+    """Nada antes de su teoría (tools/de/sillabo.py): un ejercicio que usa algo
+    que su semana todavía no enseñó (el Perfekt con sein en la 11, la pasiva
+    en la 21) pasa a la semana que lo enseña, a la última parte de la
+    lección.  Como en el italiano y el portugués."""
+    by_week = {w["week"]: w for w in weeks}
+    moved = []
+    for it in items:
+        n = it["wk"]
+        if it["type"] == "listen":
+            continue
+        to, feats = sillabo.min_week(it, n)
+        if to <= n or to not in by_week:
+            continue
+        src, dst = by_week[n], by_week[to]
+        src["items"].remove(it["id"])
+        for p in src["parts"]:
+            if it["id"] in p["items"]:
+                p["items"].remove(it["id"])
+        dst["items"].append(it["id"])
+        dst["parts"][-1]["items"].append(it["id"])
+        it["wk"], it["level"], it["topic"] = to, dst["level"], "de%d" % to
+        moved.append("%s (semana %d → %d) usa %s" % (it["id"], n, to,
+                     ", ".join("%s:%d" % kv for kv in feats.items() if kv[1] > n)))
+    print("sillabo: %d ejercicios pasan a una semana posterior, a su teoría" % len(moved))
+    for m in moved:
+        print("   ", m)
 
 
 def build():
@@ -87,8 +117,12 @@ def build():
             "parts": parts,
             "vocab": [list(v) for v in w.get("vocab", [])],
         })
+    early(weeks, items)
     course = {"title": "La Via — alemán", "lang": "de", "seasons": curso.SEASONS,
               "weeks": weeks, "items": items, "challenges": [], "sources": []}
+    # el género de cada sustantivo del curso, para el color de los artículos
+    # (tools/de/generos.py; la app lo aprende en LANG.rules.gender.learn)
+    course["genders"] = json.load(open(os.path.join(HERE, "generos.json"), encoding="utf-8"))
     # «Ya puedo…»: los objetivos de cada semana, atados a sus ítems
     # (tools/de/can.py, tools/lib/puedo.py)
     for p in puedo.attach(course, can.CAN):

@@ -96,7 +96,9 @@ pack.LANGS.forEach(function (code) {
   var again = ctx.Engine.sanitize(JSON.parse(JSON.stringify(state)));
   ok(again.escrituraPlus && again.escrituraPlus.cards[card.id] && again.cards[card.id], code + ": las tarjetas sobreviven al guardado");
   var mu = E.split(S.TASKS[tw].model), mc = E.modelCard(mu, 2, 4, { week: tw });
-  ok(mc && mc.src === "modelo" && mc.s.indexOf("___") >= 0, code + ": una expresión del modelo también se vuelve tarjeta");
+  // 3.20: un trozo del texto modelo pedido días después es de memoria: no se repasa
+  ok(mc && E.reviewItem(mc.id, { escrituraPlus: { cards: (function () { var o = {}; o[mc.id] = mc; return o; })() } }) === null,
+     code + ": una expresión del texto modelo no vuelve al repaso");
 
   /* ---- la IA: el prompt del paquete y la respuesta por Scrivi.llm */
   var p = E.aiPrompt("Testo di prova.", { week: 11, level: "A2", task: S.TASKS[11] });
