@@ -441,15 +441,18 @@
     });
     return n;
   }
-  /* The gaps of the C-test (or of the rational cloze) missed at the first
-     try: each one in its sentence, the rest of the text whole. */
+  /* The gaps of the C-test missed at the first try: each one in its
+     sentence (the half word shown is the clue).  The whole-word gaps of
+     the rational cloze do not come back (3.21): out of their text, one
+     sentence does not tell the word («farmácia e, ___, um boteco» could be
+     depois, também, ali…), so it could only be remembered. */
   function fromCtest(state, built, first, now) {
     if (!state || !built || !first || !first.per) return 0;
     var n = 0;
     first.per.forEach(function (v, i) {
       if (v === "giusto" || n >= 5) return;
       var g = built.gaps[i];
-      if (!g) return;
+      if (!g || g.cat !== "ctest") return;
       var MARK = "\u0001", text = "";
       (built.parts || []).forEach(function (p) {
         if (p.t != null) text += p.t;
@@ -458,11 +461,11 @@
       });
       var sent = sentenceWith(text, MARK);
       if (!sent) return;
-      var ans = g.cat === "ctest" ? g.answer : g.full;
+      var ans = g.answer;
       enqueue(state, "own:ct:" + hash(sent + "|" + g.full), {
-        src: "ctest", type: "cloze", prompt: g.cat === "ctest" ? "Completá la palabra" : "Completá con la palabra que falta",
+        src: "ctest", type: "cloze", prompt: "Completá la palabra",
         stem: sent.replace(MARK, "___"), answer: ans, accept: [ans, g.full].concat(g.alt || []),
-        note: "", say: sent.replace(MARK, g.cat === "ctest" ? g.answer : g.full), from: "C-test" }, { src: "ctest", now: now });
+        note: "", say: sent.replace(MARK, g.answer), from: "C-test" }, { src: "ctest", now: now });
       n++;
     });
     return n;
@@ -470,8 +473,10 @@
 
   function ownItem(state, id) {
     var o = state && state.own && state.own[id];
-    // own:dg: a block of a dictogloss asked by heart: no longer reviewed (3.20)
+    // own:dg: a block of a dictogloss asked by heart: no longer reviewed (3.20);
+    // own:ct: a whole word of the rational cloze, out of its text: neither (3.21)
     if (!o || !o.it || id.indexOf("own:dg:") === 0) return null;
+    if (id.indexOf("own:ct:") === 0 && o.it.prompt !== "Completá la palabra") return null;
     var copy = {};
     Object.keys(o.it).forEach(function (k) { copy[k] = o.it[k]; });
     return copy;

@@ -261,7 +261,7 @@ WEEK = {
            V(["Sie hat mich begrüßt", "Sie begrüßte mich"], ", ", ["als ob", "als wenn"], " nichts ", ["passiert", "geschehen"], " wäre.")
            + V(["Sie hat mich begrüßt", "Sie begrüßte mich"], ", als wäre nichts ", ["passiert", "geschehen"], "."),
            "Anterior + verbo con *sein*: *passiert wäre*."),
-        tr(0, "Ella parece como si hubiera llorado.", "Sie sieht aus, als ob sie geweint hätte.",
+        tr(0, "Ella parece como si hubiera llorado. (llorar: weinen)", "Sie sieht aus, als ob sie geweint hätte.",
            V("Sie sieht ", ["", "so "], "aus, ", ["als ob", "als wenn"], " sie geweint hätte.")
            + V("Sie sieht ", ["", "so "], "aus, als hätte sie geweint."),
            "*aussehen, als ob* + Konjunktiv II pasado: *geweint hätte*."),

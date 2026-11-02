@@ -1438,7 +1438,7 @@ WEEKS.append({
             },
             {
                 "h": "Cientos, miles y años",
-                "r": "Más de 100 se arma **de mayor a menor**, todo en una palabra: *hundert* (100), *tausend* (1000), y lo que sigue igual que del 1 al 99, con la unidad antes de la decena. Los **años** hasta 1999 se dicen en **centenas**: 1985 = «diecinueve cientos ochenta y cinco»; desde 2000, con *tausend*.",
+                "r": "Más de 100 se arma **de mayor a menor**, todo en una palabra: *hundert* (100), *tausend* (1000), y lo que sigue igual que del 1 al 99, con la unidad antes de la decena. Los **años** hasta 1999 se dicen en **centenas**: 1985 = «diecinueve cientos ochenta y cinco»; desde 2000, con *tausend*. Para decir cuándo naciste hay una **fórmula fija**: *Ich bin* + año + *geboren* = «nací en…» (*geboren* = nacido, va al final).",
                 "table": {"head": ["Número", "Alemán"], "rows": [
                     ["101", "hunderteins"],
                     ["250", "zweihundertfünfzig"],
@@ -1479,6 +1479,7 @@ WEEKS.append({
         ["kosten", "costar", "Was kostet das?"],
         ["teuer", "caro", "Das ist teuer!"],
         ["billig", "barato", "Die Bananen sind billig."],
+        ["geboren", "nacido: *Ich bin … geboren* = nací", "Ich bin 1990 geboren."],
     ],
     "items": [
         # parte 0 — números
@@ -1506,7 +1507,7 @@ WEEKS.append({
         cz(0, "Escribí el número en letras.", "250 = ___", "zweihundertfünfzig", note="Cientos + el resto, todo junto: *zweihundert* + *fünfzig*."),
         cz(0, "Escribí el año en letras.", "2024 = ___", "zweitausendvierundzwanzig", note="Desde el 2000, con *tausend*: *zweitausend* + *vierundzwanzig* (unidad primero)."),
         cz(0, "Escribí el año en letras.", "1985 = ___", "neunzehnhundertfünfundachtzig", note="*neunzehnhundert* (diecinueve cientos) + *fünfundachtzig*: nada de *tausend*."),
-        tr(0, "Nací en 1995.", "Ich bin 1995 geboren.", ["Ich bin 1995 geboren.", "Ich bin im Jahr 1995 geboren.", "Ich wurde 1995 geboren.", "Ich bin neunzehnhundertfünfundneunzig geboren."], "Sin preposición o con *im Jahr*; «in 1995» es un calco del inglés. *Ich bin … geboren* es una fórmula fija."),
+        tr(0, "La casa es de 1985.", "Das Haus ist von 1985.", ["Das Haus ist von 1985.", "Das Haus ist aus dem Jahr 1985.", "Das Haus ist von neunzehnhundertfünfundachtzig."], "*von* + el año, sin artículo; se lee *neunzehnhundertfünfundachtzig*."),
         # parte 1 — precios, comida
         ch(1, "¿Cómo se lee?", "2,50 €", "zwei Euro fünfzig", ["zwei Euro fünfzig", "fünfzig Euro zwei", "zwei Euros fünfzig"], "Euros + centavos, y *Euro* sin plural."),
         ch(1, "Elegí la forma correcta.", "Was ___ die Äpfel?", "kosten", ["kosten", "kostet", "kostest"], "*die Äpfel* es plural → *kosten*."),

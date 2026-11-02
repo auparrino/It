@@ -68,7 +68,7 @@ if (bank) Banca.load(bank);
 var map = Drills.itemsById(course);
 var Scrivi = ctx.Scrivi;
 var glossario = optData("glossario.json") || {};
-if (Scrivi) Scrivi.learnCourse({ items: course.items, bank: Banca.bank(), phrases: Frasi.ALL, readings: Letture.EPISODI, glossario: glossario });
+if (Scrivi && Scrivi.learnCourse) Scrivi.learnCourse({ items: course.items, bank: Banca.bank(), phrases: Frasi.ALL, readings: Letture.EPISODI, glossario: glossario });
 var isTarget = function (w) { return !!glossario[String(w).toLowerCase()]; };
 
 /* ------------------------------------------------------------ el jugador */
@@ -261,7 +261,7 @@ course.weeks.forEach(function (w) {
 
   // 1b. Scrivi: el texto de la semana (la simulación entrega el modelo y
   // comprueba que cumpla la consigna; escribir, a unas 8 palabras por minuto)
-  if (Scrivi && Scrivi.TASKS[w.week]) {
+  if (Scrivi && Scrivi.check && Scrivi.TASKS[w.week]) {
     var sr = Scrivi.check(Scrivi.TASKS[w.week].model, w.week);
     if (!sr.ok || sr.hard) log.itemIssues.push({ id: "scrivi:" + w.week, wk: w.week, type: "scrivi", msg: "el modelo no cumple la consigna o tiene errores marcados" });
     totalSec += Math.round(sr.words / 8 * 60) + 120;

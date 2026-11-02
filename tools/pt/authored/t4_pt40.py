@@ -802,7 +802,7 @@ vo(W, 1, "Os poços da região secaram.", "poços",
 di(W, 2, "A prefeitura tomou providências para ampliar o saneamento básico.",
    "Colocación de la semana: *tomar providências* (tomar medidas). *Saneamento básico* (agua y "
    "cloacas) es un tema fijo de la prensa brasileña.")
-cl(W, 1, T_LE, "Enquanto o poder público tomava providências, milhares de voluntários ___ as mangas.",
+cl(W, 1, T_LE, "Enquanto o poder público tomava providências, milhares de voluntários ___ as mangas (arregaçar, pretérito).",
    "arregaçaram",
    "*Arregaçar as mangas* es arremangarse, ponerse a trabajar en serio. Es de la lectura «Depois da "
    "tempestade».", prompt=LC)

@@ -945,7 +945,7 @@
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION = "c1-vN" in sw.js: test_game
      and the CI check it).  One version for the app and both languages. */
-  var APP_VERSION = "v3.20.0";
+  var APP_VERSION = "v3.21.1";
   // Settimana XVII: Roman numerals on the street signs (LANG.ui.romanWeeks).
   function romano(n) {
     var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
@@ -4673,7 +4673,7 @@
         (nextRank ? " · próximo rango: <b>" + esc(nextRank[1]) + "</b> en el nivel " +
           nextRank[0] : "") + "</div></div>" +
       (window.Progreso ? Progreso.summaryCard() : "") +
-      allMaterialCard() +
+      allMaterialCard() + (window.Libro ? Libro.card() : "") +
       switchCard() +
 
       '<div class="card"><h2>Ajustes</h2>' +
@@ -5225,6 +5225,7 @@
     else if (s === "tres" && window.TresLenguas) html = TresLenguas.render(state);
     else if (s === "escritos" && window.Escritos) html = Escritos.render();
     else if (window.Biblioteca && Biblioteca.owns(s)) html = Biblioteca.render(s, view);
+    else if (window.Libro && Libro.owns(s)) html = Libro.render(s);          // lectura guiada (libro.js)
     else if (window.Tramo && Tramo.owns(s)) html = Tramo.render(s);
     else if (window.Inicio && Inicio.owns(s)) html = Inicio.render(s);          // el primer arranque (inicio.js)
     else if (window.Progreso && Progreso.owns(s)) html = Progreso.render(s);    // tu progreso (progreso.js)
@@ -5462,6 +5463,7 @@
     wireHabit();
     if (window.Escritos) Escritos.wire(view.screen);
     if (window.Biblioteca) Biblioteca.wire(view.screen, view);
+    if (window.Libro) Libro.wire(view.screen);
     if (window.Tramo) Tramo.wire(view.screen);
     if (window.Inicio) Inicio.wire(view.screen);
     if (window.Progreso) Progreso.wire(view.screen);
@@ -5858,7 +5860,7 @@
   // The level, tenses and vocabulary the AI must stay inside this week.
   function aiContext(w) {
     var level = w.week <= 8 ? "A1" : w.week <= 18 ? "A2" : w.week <= 30 ? "B1" : w.week <= 42 ? "B2" : "C1";
-    var tenses = (w.known || ["presente"]).map(function (t) { return Conj.TENSE_LABELS[t] || t; }).join(", ");
+    var tenses = (w.known || ["presente"]).map(function (t) { return (window.Conj && Conj.TENSE_LABELS[t]) || t; }).join(", ");
     var known = window.Freq && Freq.loaded() ? knownWords() : {};
     // the words to hand the model: the learner's most frequent known words plus the week's
     var list = Object.keys(known).filter(function (l) { return Freq.STOP.indexOf(l) < 0 && l.length > 2; });
@@ -5879,7 +5881,7 @@
   // What the local checker marks in a text the AI wrote: the AI's language
   // is checked before the learner reads it («una ragazzo», «em o Rio»).
   function langErrors(text, week) {
-    if (!window.Scrivi) return [];
+    if (!window.Scrivi || !Scrivi.check) return [];
     scriviLexicon();
     var r = Scrivi.check(String(text || ""), week || 52);
     return ((r && r.findings) || []).filter(function (f) { return !f.soft; });
@@ -6816,7 +6818,7 @@
 
   // Everything of the language the course shows, as the checker's dictionary.
   function scriviLexicon() {
-    if (!window.Scrivi) return;
+    if (!window.Scrivi || !Scrivi.learnCourse) return;
     Scrivi.learnCourse({ items: course.items, bank: Banca.loaded() ? Banca.bank() : null,
       phrases: window.Frasi ? Frasi.ALL : [], readings: window.Letture ? Letture.EPISODI : [], glossario: glossario || {},
       extra: window.Tramo ? Tramo.lexTexts() : [] });
@@ -8023,6 +8025,13 @@
     gain: function (n) { gain(n); renderHeader(); },
     show: showScreen,
     back: function () { view.tab = "percorso"; view.screen = "briefing"; render(); window.scrollTo(0, 0); }
+  });
+
+  // La lectura guiada (libro.js): una novela que el alumno carga, oración por oración.
+  if (window.Libro) Libro.init({
+    state: function () { return state; }, view: function () { return view; }, persist: persist, render: render, go: go,
+    show: showScreen, toast: toast, speak: speak, esc: esc, ui: function () { return UI; },
+    gain: function (n) { gain(n); Engine.addStrand(state, "input", n); renderHeader(); }
   });
 
   // La Biblioteca (biblioteca.js): libros enteros, con el lector y el input.
