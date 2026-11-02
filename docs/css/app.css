@@ -1051,3 +1051,7 @@ body.lb-docked #app { padding-bottom: 96px; }
 .lb-ej { margin: 6px 0; padding-left: 10px; border-left: 3px solid color-mix(in srgb, var(--mar, #1b6fb3) 45%, transparent); }
 .lb-q, .lb-sum { margin: 8px 0; }
 .lb-q summary, .lb-sum summary { cursor: pointer; font-weight: 700; }
+.lb-ia { margin-top: 8px; }
+.lb-ia textarea { width: 100%; box-sizing: border-box; margin: 4px 0 6px; font: inherit; }
+.lb-ia-a { margin: 6px 0; padding: 8px 10px; border-radius: 10px; background: color-mix(in srgb, var(--mar, #1b6fb3) 9%, transparent); }
+.lb-ia-a p { margin: 4px 0; }
