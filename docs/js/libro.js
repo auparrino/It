@@ -219,7 +219,7 @@
   }
 
   // What one sentence says: translation, standard form, word by word, words, note.
-  function explain(s) {
+  function explain(s, id) {
     if (!ui.show) return '<p class="muted small">Tratá de entenderla sola. Tocá «💬» para ver la explicación.</p>';
     return '<p class="lb-es">' + esc(s.es || "") + "</p>" +
       (s.std ? '<p class="small"><span class="muted">Estándar:</span> <span lang="' + tts() + '">' + esc(s.std) + "</span></p>" : "") +
@@ -227,7 +227,75 @@
       ((s.g || []).length ? '<ul class="lb-g">' + s.g.map(function (g) {
         return '<li><b lang="' + tts() + '">' + esc(g[0]) + "</b> — " + mk(g[1] || "") + "</li>";
       }).join("") + "</ul>" : "") +
-      (s.n ? '<p class="small lb-n">💡 ' + mk(s.n) + "</p>" : "");
+      (s.n ? '<p class="small lb-n">💡 ' + mk(s.n) + "</p>" : "") + askBox(id);
+  }
+
+  /* ------------------------------------------------------- «No entiendo»
+     The learner asks the AI (the Anthropic key of Ich / Io / Eu, the same
+     as the role-play) about the sentence: what part, optional.  The AI gets
+     the sentence, the one before and after, and what the app already
+     explained, and answers in Rioplatense Spanish.  The answers stay on
+     this phone (localStorage, c1.libro.ia.<book>), under the sentence. */
+  var IA_KEY = "c1.libro.ia.";
+  function asked(id) {
+    try { return (JSON.parse(root.localStorage.getItem(IA_KEY + ui.book) || "{}") || {})[id] || []; } catch (e) { return []; }
+  }
+  function keep(id, q, a) {
+    try {
+      var all = JSON.parse(root.localStorage.getItem(IA_KEY + ui.book) || "{}") || {};
+      (all[id] = all[id] || []).push([q, a]);
+      root.localStorage.setItem(IA_KEY + ui.book, JSON.stringify(all));
+    } catch (e) { /* sin almacenamiento: queda solo en pantalla */ }
+  }
+  function paras(text) {
+    return String(text || "").split(/\n+/).filter(function (x) { return x.trim(); }).map(function (x) { return "<p>" + mk(x) + "</p>"; }).join("");
+  }
+  function askBox(id) {
+    if (!id) return "";
+    var prev = asked(id).map(function (x) {
+      return '<div class="lb-ia-a">' + (x[0] ? '<p class="small muted">🤔 ' + esc(x[0]) + "</p>" : "") + paras(x[1]) + "</div>";
+    }).join("");
+    var body = ui.ask === id ?
+      (ui.busy ? '<p class="muted small">⏳ Pensando una explicación mejor…</p>' :
+        '<textarea id="lbiaq" class="grow" rows="2" placeholder="¿Qué parte no entendés? (opcional: una palabra, un pedazo, el orden…)"></textarea>' +
+        '<div class="row"><button class="btn" id="lbiago">Explicámelo</button><button class="tab" id="lbiano">Cancelar</button></div>' +
+        (ui.iaErr ? '<p class="small">⚠️ ' + esc(ui.iaErr) + "</p>" : "")) :
+      '<button class="tab lb-ia-btn" id="lbiabtn">🤔 No entiendo' + (prev ? " otra cosa" : "") + "</button>";
+    return '<div class="lb-ia">' + prev + body + "</div>";
+  }
+  function askPrompt(p, all, i, q) {
+    var s = p.s[all[i]] || {}, prev = p.s[all[i - 1]], next = p.s[all[i + 1]];
+    var lang = (H.ui() && H.ui().langEs) || "la lengua del libro";
+    return "Sos profesor de " + lang + " para un hispanohablante rioplatense que está leyendo «" + p.title + "» de " + (p.author || "") +
+      " en el original, oración por oración. No entiende bien una oración.\n" +
+      (prev ? "Oración anterior: " + prev.t + "\n" : "") +
+      "ORACIÓN: " + s.t + "\n" +
+      (next ? "Oración siguiente: " + next.t + "\n" : "") +
+      "Lo que la app ya le explicó — traducción: " + (s.es || "") +
+      ((s.g || []).length ? "; palabras: " + s.g.map(function (g) { return g[0] + " = " + g[1]; }).join("; ") : "") +
+      (s.n ? "; nota: " + s.n : "") + (s.std ? "; en estándar: " + s.std : "") + "\n" +
+      (q ? "Lo que el alumno pregunta: «" + q + "»\n" : "El alumno no dijo qué parte: explicá lo que más cuesta de esta oración.\n") +
+      "Explicá en castellano rioplatense, claro y sin tecnicismos de más: desarmá la oración en partes (quién hace qué, a qué se refiere cada pronombre, " +
+      "dónde está el verbo y por qué está ahí), la palabra o construcción que traba, y si hay dialecto, ironía, una cita o una alusión, decilo. " +
+      "No repitas la traducción entera si no hace falta. Formas del original entre *asteriscos*. Máximo 170 palabras, en 2 a 4 párrafos cortos.\n" +
+      "Respondé SOLO con JSON: {\"explicacion\": \"…\"}";
+  }
+  function ask(p, pr, q) {
+    var keys = H.aiKeys && H.aiKeys();
+    if (!keys || !keys.claude) { ui.iaErr = "Hace falta tu clave de Anthropic: cargala en " + H.ui().me + "."; moveTo(pr.i); return; }
+    if (!root.IA || !root.IA.llm) { ui.iaErr = "Sin cliente de IA."; moveTo(pr.i); return; }
+    var all = ids(p.tramos[pr.t]), id = all[pr.i], at = pr.i;
+    ui.busy = true; ui.iaErr = ""; ui.jump = true;
+    moveTo(pr.i);
+    root.IA.llm(askPrompt(p, all, at, q), keys, function (err, data) {
+      ui.busy = false;
+      var a = !err && data && (data.explicacion || data.explicación || data.explanation);
+      ui.jump = true;
+      if (a) { keep(id, q, String(a)); ui.ask = null; }
+      else ui.iaErr = "La IA no respondió (" + String((err && err.message) || "respuesta rara") + "). Probá de nuevo.";
+      var now = progress(H.state(), p.id);
+      if (owns(H.view().screen) && now.t === pr.t && now.i === at) moveTo(at);
+    }, { max: 900 });
   }
   function navRow(pr, all) {
     return '<div class="lb-nav">' +
@@ -242,7 +310,7 @@
     var s = p.s[all[pr.i]] || {};
     return '<div class="lb-grip" aria-hidden="true"></div>' +
       '<button class="lb-close" id="lbclose" aria-label="Cerrar">✕</button>' +
-      '<div class="lb-sheet-body"><p class="lb-cur" lang="' + tts() + '">' + esc(s.t || "") + "</p>" + explain(s) + "</div>" +
+      '<div class="lb-sheet-body"><p class="lb-cur" lang="' + tts() + '">' + esc(s.t || "") + "</p>" + explain(s, all[pr.i]) + "</div>" +
       navRow(pr, all);
   }
   function modeBar() {
@@ -267,7 +335,7 @@
         (prev ? '<p class="lb-ctx" lang="' + tts() + '">' + esc(prev.t) + "</p>" : "") +
         '<p class="lb-cur lb-big" lang="' + tts() + '">' + esc(s.t || "") + "</p>" +
         (next ? '<p class="lb-ctx" lang="' + tts() + '">' + esc(next.t) + "</p>" : "") +
-        '<div class="lb-exp">' + explain(s) + "</div></div>" +
+        '<div class="lb-exp">' + explain(s, all[pr.i]) + "</div></div>" +
         '<div class="lb-dock">' + navRow(pr, all) + "</div>";
     }
     var curId = all[pr.i];
@@ -309,7 +377,9 @@
   // Move to sentence k without drawing the screen again (the page keeps its place).
   function moveTo(k, open) {
     var p = packs[ui.book], pr = progress(H.state(), p.id), all = ids(p.tramos[pr.t]);
-    pr.i = Math.max(0, Math.min(all.length - 1, k));
+    var to = Math.max(0, Math.min(all.length - 1, k));
+    if (to !== pr.i && !ui.busy) { ui.ask = null; ui.iaErr = ""; }
+    pr.i = to;
     if (open) ui.open = true;
     H.persist();
     var sh = document.getElementById("lbsheet");
@@ -324,6 +394,17 @@
     document.body.classList.toggle("lb-sheet-open", !!ui.open);
     wireSheet(p, pr);
     keepCurrent();
+    jumpToAsk();
+  }
+  // The question box or the AI's answer in sight (the sheet scrolls, not the page).
+  function jumpToAsk() {
+    if (!ui.jump) return;
+    ui.jump = false;
+    var box = document.querySelector(".lb-ia");
+    if (!box) return;
+    var sb = document.querySelector(".lb-sheet-body");
+    if (sb && sb.contains(box)) sb.scrollTop = sb.scrollHeight;
+    else if (box.scrollIntoView) box.scrollIntoView({ block: "center" });
   }
   // The current sentence above the sheet, in the upper part of what is left.
   function keepCurrent() {
@@ -339,6 +420,9 @@
     on("#lbshow", function () { ui.show = !ui.show; moveTo(pr.i); });
     on("#lbclose", function () { ui.open = false; moveTo(pr.i); });
     on("#lbsay", function () { var s0 = p.s[ids(p.tramos[pr.t])[pr.i]]; if (s0) H.speak(s0.t, true); });
+    on("#lbiabtn", function () { ui.ask = ids(p.tramos[pr.t])[pr.i]; ui.iaErr = ""; ui.jump = true; moveTo(pr.i); var q = document.getElementById("lbiaq"); if (q) q.focus(); });
+    on("#lbiano", function () { ui.ask = null; ui.iaErr = ""; moveTo(pr.i); });
+    on("#lbiago", function () { var q = document.getElementById("lbiaq"); ask(p, pr, q ? q.value.trim() : ""); });
     document.querySelectorAll("[data-lbstep]").forEach(function (b) {
       b.onclick = function () { ui.open = false; document.body.classList.remove("lb-sheet-open", "lb-docked"); ui.step = +b.dataset.lbstep; H.render(); root.scrollTo(0, 0); };
     });
@@ -410,6 +494,7 @@
     document.body.classList.toggle("lb-docked", ui.step === 1 && ui.mode === "frase");
     if (ui.step === 1) wireSheet(p, pr);
     keepCurrent();
+    jumpToAsk();
     document.querySelectorAll("[data-lbs]").forEach(function (sp) { sp.onclick = function () { moveTo(+sp.dataset.lbs, true); }; });
     on("#lbresume", function () { moveTo(pr.i, true); });
     document.querySelectorAll("[data-lbmode]").forEach(function (b) {
