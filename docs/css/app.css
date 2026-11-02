@@ -1005,3 +1005,26 @@ label.gr-chk { display: flex; gap: 8px; align-items: flex-start; margin: 6px 2px
 ul.gr-res { list-style: none; padding: 0; margin: 8px 0; }
 ul.gr-res li { margin: 8px 0; line-height: 1.45; }
 .gr-dots { letter-spacing: 1px; }
+
+/* Lectura guiada (libro.js): la oración actual, su explicación y el texto */
+.lb-steps { margin: 6px 0 12px; }
+.lb-steps .tab.on { font-weight: 800; text-decoration: underline; text-underline-offset: 4px; }
+.lb-row { justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid color-mix(in srgb, currentColor 15%, transparent); }
+.lb-ex { position: sticky; top: 0; z-index: 2; background: var(--papel, #fff); padding-bottom: 8px; margin-bottom: 10px;
+  border-bottom: 2px solid color-mix(in srgb, var(--mar, #1b6fb3) 40%, transparent); }
+.lb-cur { font-size: 1.12rem; line-height: 1.45; margin: 0 0 6px; }
+.lb-es { font-style: italic; margin: 0 0 6px; }
+.lb-g { margin: 4px 0 6px; padding-left: 18px; }
+.lb-g li { margin: 2px 0; }
+.lb-n { margin: 4px 0; }
+.lb-nav { align-items: center; margin-top: 6px; }
+.lb-text { position: relative; max-height: 55vh; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+.lb-p { line-height: 1.6; margin: 0 0 10px; }
+.lb-s { cursor: pointer; border-radius: 4px; }
+.lb-s.read { opacity: .62; }
+.lb-s.cur { background: color-mix(in srgb, var(--sol, #f5c518) 45%, transparent); opacity: 1; }
+.lb-h { margin: 14px 0 6px; }
+.lb-gr { margin-bottom: 12px; }
+.lb-ej { margin: 6px 0; padding-left: 10px; border-left: 3px solid color-mix(in srgb, var(--mar, #1b6fb3) 45%, transparent); }
+.lb-q, .lb-sum { margin: 8px 0; }
+.lb-q summary, .lb-sum summary { cursor: pointer; font-weight: 700; }

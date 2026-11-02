@@ -59,6 +59,15 @@ repaso, las rondas, las misiones, las pantallas), va en el núcleo y lee del
 paquete lo que necesita (`LANG`, `LANG.rules`, `Conj`, `Diagnosi`, los
 `*_DATA`). El núcleo no nombra un idioma nunca.
 
+**Lectura guiada** (`docs/js/libro.js`). Una novela entera en el original,
+oración por oración (traducción, glosas, nota, estándar si es dialecto,
+palabra por palabra), en tramos de ≈1500 palabras con contexto,
+vocabulario, gramática y preguntas. El libro no está en la app ni en el
+repositorio: el alumno carga un paquete `.json` (lo arma
+`tools/lib/libro/`, ver su README) que queda en IndexedDB de su teléfono;
+cada idioma ve los paquetes de su lengua. El avance va en
+`state.libros[id]`. Test: `tools/lib/test_libro.js`.
+
 **Guardado.** Cada idioma guarda con su prefijo (`laviac1.` para italiano,
 `rumoc1.` para portugués), así el progreso de uno no toca el del otro y
 quien ya estudiaba italiano no pierde nada. El idioma elegido queda en
