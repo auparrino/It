@@ -237,6 +237,13 @@ pack.LANGS.forEach(function (code) {
     var nc = R.fromCtest(sl, built, first);
     var cts = Object.keys(sl.own).filter(function (id) { return id.indexOf("own:ct:") === 0; });
     ok(nc >= 1 && cts.every(function (id) { var x = sl.own[id].it; return /___/.test(x.stem) && x.accept.indexOf(x.answer) >= 0; }), tag + "los huecos del C-test vuelven (" + nc + ")");
+    var cloze = ctx.CTest.build(text, "cloze");
+    var before = Object.keys(sl.own).length;
+    R.fromCtest(sl, cloze, ctx.CTest.score(cloze.gaps, cloze.gaps.map(function () { return ""; })));
+    ok(Object.keys(sl.own).length === before, tag + "los huecos de palabra entera del cloze no vuelven: fuera del texto no se deducen");
+    sl.own["own:ct:viejo"] = { it: { type: "cloze", prompt: "Completá con la palabra que falta", stem: "farmácia e, ___, um boteco", answer: "depois" }, at: 1 };
+    ok(R.ownItem(sl, "own:ct:viejo") === null, tag + "y los que ya estaban guardados dejan de salir");
+    delete sl.own["own:ct:viejo"];
   }
   var rq = { id: "lettura:w-03:0", src: "lettura", ep: "w-03", type: "choice", prompt: "p", stem: "s", options: ["a", "b"], answer: "a", withText: true };
   R.afterAnswer(sl, rq, 0, { kind: "lettura" });

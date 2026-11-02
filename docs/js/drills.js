@@ -1051,7 +1051,9 @@
     return !!(map[id] || (id.indexOf("v:") === 0 && VOC && VOC[id.slice(2)]) || (Frasi && Frasi.BY_ID[id]) || (Lab && Lab.BY_ID[id]) ||
               (root.Reglas && id.indexOf("r:") === 0 && root.Reglas.known(id)) ||
               // own:dg: the blocks of a dictogloss, by heart: no longer reviewed (3.20)
-              (id.indexOf("own:") === 0 && id.indexOf("own:dg:") !== 0 && state && state.own && state.own[id]) ||
+              // own:ct: a whole word of the rational cloze, out of its text: neither (3.21)
+              (id.indexOf("own:") === 0 && id.indexOf("own:dg:") !== 0 && state && state.own && state.own[id] &&
+               !(id.indexOf("own:ct:") === 0 && (state.own[id].it || {}).prompt !== "Completá la palabra")) ||
               (Banca && Banca.loaded() && id.indexOf("b:") === 0 && Banca.item(id)) ||
               (root.EscrituraPlus && id.indexOf("ep:") === 0) ||
               (root.Biblioteca && id.indexOf("lib:") === 0) ||
