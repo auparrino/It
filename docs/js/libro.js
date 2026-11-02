@@ -36,7 +36,8 @@
   var H = null;                 // host (app.js)
   var packs = {};               // id → paquete cargado en memoria
   var list = null;              // [{id, lang, title, author, year, n}] de IndexedDB
-  var ui = { book: null, step: 0, show: true, msg: "" };
+  var ui = { book: null, step: 0, show: true, msg: "", open: false, mode: "texto" };
+  try { if (root.localStorage && root.localStorage.getItem("c1.libro.mode") === "frase") ui.mode = "frase"; } catch (e) { /* */ }
 
   /* ------------------------------------------------------------ lógica */
 
@@ -217,33 +218,70 @@
     return head + body;
   }
 
+  // What one sentence says: translation, standard form, word by word, words, note.
+  function explain(s) {
+    if (!ui.show) return '<p class="muted small">Tratá de entenderla sola. Tocá «💬» para ver la explicación.</p>';
+    return '<p class="lb-es">' + esc(s.es || "") + "</p>" +
+      (s.std ? '<p class="small"><span class="muted">Estándar:</span> <span lang="' + tts() + '">' + esc(s.std) + "</span></p>" : "") +
+      (s.lit ? '<p class="small"><span class="muted">Palabra por palabra:</span> ' + esc(s.lit) + "</p>" : "") +
+      ((s.g || []).length ? '<ul class="lb-g">' + s.g.map(function (g) {
+        return '<li><b lang="' + tts() + '">' + esc(g[0]) + "</b> — " + mk(g[1] || "") + "</li>";
+      }).join("") + "</ul>" : "") +
+      (s.n ? '<p class="small lb-n">💡 ' + mk(s.n) + "</p>" : "");
+  }
+  function navRow(pr, all) {
+    return '<div class="lb-nav">' +
+      '<button class="btn ghost" id="lbprev" aria-label="Oración anterior"' + (pr.i ? "" : " disabled") + ">←</button>" +
+      '<button class="tab" id="lbsay" aria-label="Escuchar">🔊</button>' +
+      '<button class="tab" id="lbshow" aria-pressed="' + ui.show + '" aria-label="Explicación">' + (ui.show ? "🙈" : "💬") + "</button>" +
+      '<span class="muted small lb-count">' + (pr.i + 1) + " / " + all.length + "</span>" +
+      (pr.i + 1 < all.length ? '<button class="btn" id="lbnext" aria-label="Oración siguiente">→</button>' :
+        '<button class="btn" data-lbstep="2">Gramática →</button>') + "</div>";
+  }
+  function sheet(p, pr, all) {
+    var s = p.s[all[pr.i]] || {};
+    return '<div class="lb-grip" aria-hidden="true"></div>' +
+      '<button class="lb-close" id="lbclose" aria-label="Cerrar">✕</button>' +
+      '<div class="lb-sheet-body"><p class="lb-cur" lang="' + tts() + '">' + esc(s.t || "") + "</p>" + explain(s) + "</div>" +
+      navRow(pr, all);
+  }
+  function modeBar() {
+    return '<div class="row lb-modes" role="group" aria-label="Cómo leer">' +
+      '<button class="tab' + (ui.mode === "texto" ? " on" : "") + '" data-lbmode="texto" aria-pressed="' + (ui.mode === "texto") + '">📄 Texto</button>' +
+      '<button class="tab' + (ui.mode === "frase" ? " on" : "") + '" data-lbmode="frase" aria-pressed="' + (ui.mode === "frase") + '">🔍 Frase a frase</button></div>';
+  }
+
+  /* Two ways to read.  «Texto»: the text fills the page (no box with its
+     own scroll); a tap on a sentence opens a sheet from the bottom with its
+     explanation, and the page moves so the sentence sits above the sheet.
+     «Frase a frase»: one sentence big, the one before and after in grey,
+     the explanation under it and the buttons docked at the bottom. */
   function renderReading(p, tr, all, pr) {
-    var curId = all[pr.i], s = p.s[curId] || {};
+    if (ui.mode === "frase") {
+      var s = p.s[all[pr.i]] || {}, prev = p.s[all[pr.i - 1]], next = p.s[all[pr.i + 1]], h = "";
+      // the chapter title when its first sentence is the current one
+      (tr.p || []).forEach(function (x, k) {
+        if (!Array.isArray(x) && Array.isArray(tr.p[k + 1]) && tr.p[k + 1][0] === all[pr.i]) h = '<h3 class="lb-h">' + esc(x.h) + "</h3>";
+      });
+      return modeBar() + '<div class="card lb-frase" id="lbswipe">' + h +
+        (prev ? '<p class="lb-ctx" lang="' + tts() + '">' + esc(prev.t) + "</p>" : "") +
+        '<p class="lb-cur lb-big" lang="' + tts() + '">' + esc(s.t || "") + "</p>" +
+        (next ? '<p class="lb-ctx" lang="' + tts() + '">' + esc(next.t) + "</p>" : "") +
+        '<div class="lb-exp">' + explain(s) + "</div></div>" +
+        '<div class="lb-dock">' + navRow(pr, all) + "</div>";
+    }
+    var curId = all[pr.i];
     var text = (tr.p || []).map(function (x) {
       if (!Array.isArray(x)) return '<h3 class="lb-h">' + esc(x.h) + (x.sub ? ' <small class="muted">' + esc(x.sub) + "</small>" : "") + "</h3>";
       return '<p class="lb-p" lang="' + tts() + '">' + x.map(function (id) {
         var o = p.s[id] || {}, k = all.indexOf(id);
-        return '<span class="lb-s' + (id === curId ? " cur" : k < pr.i ? " read" : "") + '" data-lbs="' + k + '">' + esc(o.t || "") + "</span>";
+        return '<span class="lb-s' + (ui.open && id === curId ? " cur" : "") + (k < pr.i ? " read" : "") + '" data-lbs="' + k + '">' + esc(o.t || "") + "</span>";
       }).join(" ") + "</p>";
     }).join("");
-    var ex = '<div class="lb-ex" aria-live="polite">' +
-      '<p class="lb-cur" lang="' + tts() + '"><b>' + esc(s.t || "") + "</b></p>" +
-      (ui.show ? (
-        '<p class="lb-es">' + esc(s.es || "") + "</p>" +
-        (s.std ? '<p class="small"><span class="muted">Estándar:</span> <span lang="' + tts() + '">' + esc(s.std) + "</span></p>" : "") +
-        (s.lit ? '<p class="small"><span class="muted">Palabra por palabra:</span> ' + esc(s.lit) + "</p>" : "") +
-        ((s.g || []).length ? '<ul class="lb-g">' + s.g.map(function (g) {
-          return '<li><b lang="' + tts() + '">' + esc(g[0]) + "</b> — " + mk(g[1] || "") + "</li>";
-        }).join("") + "</ul>" : "") +
-        (s.n ? '<p class="small lb-n">💡 ' + mk(s.n) + "</p>" : "")
-      ) : '<p class="muted small">Tratá de entenderla sola. Tocá «Explicación» para verla.</p>') +
-      '<div class="row lb-nav">' +
-      '<button class="btn ghost" id="lbprev"' + (pr.i ? "" : " disabled") + ">←</button>" +
-      '<button class="tab" id="lbsay">🔊</button>' +
-      '<button class="tab" id="lbshow" aria-pressed="' + ui.show + '">' + (ui.show ? "🙈 Ocultar" : "💬 Explicación") + "</button>" +
-      (pr.i + 1 < all.length ? '<button class="btn" id="lbnext">→</button>' : '<button class="btn" data-lbstep="2">Gramática →</button>') +
-      "</div><p class=\"muted small\">Oración " + (pr.i + 1) + " de " + all.length + "</p></div>";
-    return '<div class="card lb-read">' + ex + '<div class="lb-text">' + text + "</div></div>";
+    return modeBar() + '<p class="muted small">Tocá una oración para ver su explicación.' +
+      (pr.i ? ' <button class="tab" id="lbresume">▶ Seguir en la oración ' + (pr.i + 1) + "</button>" : "") + "</p>" +
+      '<div class="card lb-texto">' + text + "</div>" +
+      '<div class="lb-sheet" id="lbsheet" aria-live="polite"' + (ui.open ? "" : " hidden") + ">" + (ui.open ? sheet(p, pr, all) : "") + "</div>";
   }
 
   function owns(s) { return s === "guiada" || s === "guiada-shelf" || s === "guiada-tramo"; }
@@ -264,22 +302,60 @@
     var p = packs[ui.book], pr = progress(H.state(), p.id);
     if (pr.t !== i) { pr.t = i; pr.i = 0; }
     ui.step = pr.i ? 1 : 0;
+    ui.open = false;
     H.persist();
     show("guiada-tramo");
   }
-  function moveTo(k) {
+  // Move to sentence k without drawing the screen again (the page keeps its place).
+  function moveTo(k, open) {
     var p = packs[ui.book], pr = progress(H.state(), p.id), all = ids(p.tramos[pr.t]);
     pr.i = Math.max(0, Math.min(all.length - 1, k));
+    if (open) ui.open = true;
     H.persist();
-    H.render();
+    var sh = document.getElementById("lbsheet");
+    if (ui.mode === "frase" || !sh) { H.render(); return; }
+    document.querySelectorAll(".lb-s").forEach(function (el) {
+      var n = +el.getAttribute("data-lbs");
+      el.classList.toggle("cur", !!ui.open && n === pr.i);
+      el.classList.toggle("read", n < pr.i);
+    });
+    sh.hidden = !ui.open;
+    sh.innerHTML = ui.open ? sheet(p, pr, all) : "";
+    document.body.classList.toggle("lb-sheet-open", !!ui.open);
+    wireSheet(p, pr);
     keepCurrent();
   }
-  // The current sentence stays in view inside the text box (only the box scrolls, not the page).
+  // The current sentence above the sheet, in the upper part of what is left.
   function keepCurrent() {
-    var box = document.querySelector(".lb-text"), el = document.querySelector(".lb-s.cur");
-    if (!box || !el) return;
-    var top = el.offsetTop - box.offsetTop;
-    if (top < box.scrollTop || top > box.scrollTop + box.clientHeight - 40) box.scrollTop = Math.max(0, top - 40);
+    var el = document.querySelector(".lb-s.cur"), sh = document.getElementById("lbsheet");
+    if (!el || !sh || sh.hidden) return;
+    var r = el.getBoundingClientRect(), free = sh.getBoundingClientRect().top;
+    if (r.top < 70 || r.bottom > free - 12) root.scrollTo(0, root.pageYOffset + r.top - Math.max(70, (free - r.height) / 3));
+  }
+  function wireSheet(p, pr) {
+    var on = function (sel, fn) { var el = document.querySelector(sel); if (el) el.onclick = fn; };
+    on("#lbprev", function () { moveTo(pr.i - 1, true); });
+    on("#lbnext", function () { moveTo(pr.i + 1, true); });
+    on("#lbshow", function () { ui.show = !ui.show; moveTo(pr.i); });
+    on("#lbclose", function () { ui.open = false; moveTo(pr.i); });
+    on("#lbsay", function () { var s0 = p.s[ids(p.tramos[pr.t])[pr.i]]; if (s0) H.speak(s0.t, true); });
+    document.querySelectorAll("[data-lbstep]").forEach(function (b) {
+      b.onclick = function () { ui.open = false; document.body.classList.remove("lb-sheet-open", "lb-docked"); ui.step = +b.dataset.lbstep; H.render(); root.scrollTo(0, 0); };
+    });
+    swipe(document.getElementById(ui.mode === "frase" ? "lbswipe" : "lbsheet"), pr);
+  }
+  // A swipe to the left is the next sentence; to the right, the one before.
+  function swipe(el, pr) {
+    if (!el || el.dataset.sw) return;
+    el.dataset.sw = "1";
+    var x0 = null, y0 = 0;
+    el.addEventListener("touchstart", function (e) { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
+    el.addEventListener("touchend", function (e) {
+      if (x0 == null) return;
+      var dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
+      x0 = null;
+      if (Math.abs(dx) > 60 && Math.abs(dx) > 2 * Math.abs(dy)) moveTo(pr.i + (dx < 0 ? 1 : -1), true);
+    });
   }
 
   // The card's buttons (in Ich), wherever the card is drawn.
@@ -292,6 +368,7 @@
   }
   function wire(s) {
     wireCard();
+    if (typeof document !== "undefined" && document.body && (s !== "guiada-tramo" || ui.step !== 1)) document.body.classList.remove("lb-sheet-open", "lb-docked");
     if (!owns(s)) return;
     var on = function (sel, fn) { var el = document.querySelector(sel); if (el) el.onclick = fn; };
     on("#lbback", function () { H.go("io"); });
@@ -329,12 +406,19 @@
     var p = packs[ui.book];
     if (!p) return;
     var pr = progress(H.state(), p.id);
+    document.body.classList.toggle("lb-sheet-open", ui.step === 1 && ui.mode === "texto" && !!ui.open);
+    document.body.classList.toggle("lb-docked", ui.step === 1 && ui.mode === "frase");
+    if (ui.step === 1) wireSheet(p, pr);
     keepCurrent();
-    on("#lbprev", function () { moveTo(pr.i - 1); });
-    on("#lbnext", function () { moveTo(pr.i + 1); });
-    on("#lbshow", function () { ui.show = !ui.show; H.render(); });
-    on("#lbsay", function () { var s0 = p.s[ids(p.tramos[pr.t])[pr.i]]; if (s0) H.speak(s0.t, true); });
-    document.querySelectorAll("[data-lbs]").forEach(function (sp) { sp.onclick = function () { moveTo(+sp.dataset.lbs); }; });
+    document.querySelectorAll("[data-lbs]").forEach(function (sp) { sp.onclick = function () { moveTo(+sp.dataset.lbs, true); }; });
+    on("#lbresume", function () { moveTo(pr.i, true); });
+    document.querySelectorAll("[data-lbmode]").forEach(function (b) {
+      b.onclick = function () {
+        ui.mode = b.dataset.lbmode;
+        try { localStorage.setItem("c1.libro.mode", ui.mode); } catch (e) { /* sin almacenamiento */ }
+        H.render(); root.scrollTo(0, 0);
+      };
+    });
     on("#lbdone", function () {
       var tr = p.tramos[pr.t];
       if (!pr.done[tr.id]) { pr.done[tr.id] = Date.now(); H.gain(XP_TRAMO); }
