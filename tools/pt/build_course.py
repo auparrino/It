@@ -243,6 +243,29 @@ def main():
     except Exception as e:           # sin node o sin conjugador
         print("aviso: sin control de tiempos (%s)" % e)
 
+    # Y las palabras: lo que el alumno escribe tiene que estar enseñado en la
+    # lección o en las palabras de su semana o de una anterior, o en pantalla
+    # (tools/lib/vocab_norma.py).  Si no, el ítem pasa a la semana que la
+    # enseña; si ninguna la enseña, el build falla.
+    sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "lib"))
+    import vocab_norma
+    lex = vocab_norma.lexicon([{"week": w, "lesson": lessons.get(w), "vocab": vocab.get(w)} for w in range(1, 53)], "pt")
+    moved_v = []
+    for it in authored:
+        if it.get("type") in ("listen", "scopri") or it.get("prova"):
+            continue
+        vw, why = vocab_norma.need_week(it, lex)
+        if vw == 99:
+            problems.append("%s (semana %s): «%s» no se enseña en ninguna lección: glosalo en la consigna o enseñalo"
+                            % (it["id"], it["w"], ", ".join(why)))
+        elif vw > int(it["w"]):
+            moved_v.append("%s (semana %s → %d): %s" % (it["id"], it["w"], vw, ", ".join(why)))
+            it["w"] = vw
+            it.pop("part", None)
+    print("vocabulario: %d ejercicios pasan a la semana que enseña sus palabras" % len(moved_v))
+    for e in moved_v:
+        print("   ", e)
+
     by_week = {}
     for it in authored:
         it["wk"] = int(it["w"])

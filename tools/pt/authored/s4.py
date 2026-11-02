@@ -852,7 +852,7 @@ cl(W, 2, "Eles moram num ___ (casa, aumentativo) em Santa Teresa.", "casarão",
 cl(W, 2, "Houve ___ (panela, aumentativo) nas janelas de Copacabana.", "panelaço",
    "panela → o panelaço, el cacerolazo.")
 
-tr(W, 0, "La belleza de Lisboa me sorprendió.", "A beleza de Lisboa me surpreendeu.",
+tr(W, 0, "La belleza de Lisboa me sorprendió. (sorprender: surpreender)", "A beleza de Lisboa me surpreendeu.",
    ["A beleza de Lisboa surpreendeu-me"],
    "belo → beleza; «sorprender» = surpreender.")
 tr(W, 0, "El aprendizaje de un idioma lleva años.", "A aprendizagem de uma língua leva anos.",
@@ -1248,7 +1248,7 @@ tr(W, 1, "El chiado carioca se parece al de Lisboa. (parecerse a = parecer-se co
    ["O chiado carioca parece-se com o de Lisboa", "O chiado carioca é parecido com o de Lisboa",
     ],
    "«Parecerse a» es *parecer-se com*: la preposición es *com*, no *a*. *O chiado carioca se parece com o de Lisboa*.")
-tr(W, 2, "Mia Couto es mozambiqueño y escribe en portugués.", "Mia Couto é moçambicano e escreve em português.", [],
+tr(W, 2, "Mia Couto es mozambiqueño y escribe en portugués. (mozambiqueño: moçambicano)", "Mia Couto é moçambicano e escreve em português.", [],
    "moçambicano, con ç. La norma escrita de Mozambique sigue a la de Portugal.")
 tr(W, 2, "Pessoa escribió que su patria era la lengua portuguesa.",
    "Pessoa escreveu que sua pátria era a língua portuguesa.",
@@ -1572,13 +1572,13 @@ tr(W, 1, "Según el IBGE, Río tiene más de seis millones de habitantes.",
     "Segundo o IBGE, o Rio de Janeiro tem mais de seis milhões de habitantes",
     "De acordo com o IBGE, o Rio de Janeiro tem mais de seis milhões de habitantes"],
    "segundo / de acordo com / conforme. o Rio lleva artículo.")
-tr(W, 1, "O sea, nadie leyó el informe.", "Ou seja, ninguém leu o relatório.",
+tr(W, 1, "O sea, nadie leyó el informe. (leer: ler)", "Ou seja, ninguém leu o relatório.",
    ["Isto é, ninguém leu o relatório", "Quer dizer, ninguém leu o relatório"],
    "«O sea» es *ou seja*; «informe» se dice *relatório*. «Nadie» es *ninguém*, que al inicio no necesita *não*.")
 tr(W, 1, "Según ella, el libro es un clásico.", "Segundo ela, o livro é um clássico.",
    ["De acordo com ela, o livro é um clássico", "Para ela, o livro é um clássico"],
    "segundo + pronombre sujeto: segundo ela.")
-tr(W, 2, "El texto trata sobre la Revolución de los Claveles.", "O texto trata da Revolução dos Cravos.",
+tr(W, 2, "El texto trata sobre la Revolución de los Claveles. (claveles: cravos)", "O texto trata da Revolução dos Cravos.",
    ["O texto aborda a Revolução dos Cravos", "O texto fala da Revolução dos Cravos",
     "O texto fala sobre a Revolução dos Cravos", "O texto trata sobre a Revolução dos Cravos"],
    "tratar de + a = da. El 25 de abril de 1974 terminó con casi medio siglo de dictadura en Portugal.")

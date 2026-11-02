@@ -1671,7 +1671,7 @@ trv(1, "Ella propuso una solución.",
 trv(1, "Los científicos prevén lluvia.",
     "prever como ver: preveem.",
     "Os cientistas preveem ", ["chuva", "chuvas"])
-trv(2, "Paseamos por la costanera.",
+trv(2, "Paseamos por la costanera. (costanera: orla)",
     "-ear: nós passeamos (sin ei). Costanera = orla.",
     ["Passeamos", "Nós passeamos", "A gente passeou", "A gente passeia", "Passeamos"], " pela orla")
 trv(2, "Odio el tránsito.",

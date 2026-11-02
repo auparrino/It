@@ -217,7 +217,7 @@ WEEK = {
         cz(0, "Escribí el pronombre (a nosotros).", "Gestern hat ___ der Vermieter endlich geantwortet.", "uns", note="*antworten* + dativo; el pronombre va antes que el sujeto *der Vermieter*."),
         tr(0, "Te lo explico.", "Ich erkläre es dir.", ["Ich erkläre es dir.", "Ich erkläre dir das.", "Das erkläre ich dir."], "Dos pronombres: *es dir*. Con el demostrativo *das* se puede *dir das*."),
         tr(0, "Se lo di a ella. (el libro → es; Perfekt)", "Ich habe es ihr gegeben.", note="Castellano «se lo», alemán *es ihr*: el orden se invierte."),
-        tr(0, "Le mostré la foto a mi mamá. (Perfekt)", "Ich habe meiner Mutter das Foto gezeigt.", ["Ich habe meiner Mutter das Foto gezeigt.", "Ich habe meiner Mama das Foto gezeigt."], "Orden neutro: dativo – acusativo. (*das Foto meiner Mutter* se leería «la foto de mi mamá».)"),
+        tr(0, "Le mostré la foto a mi mamá. (Perfekt; mostrar: zeigen)", "Ich habe meiner Mutter das Foto gezeigt.", ["Ich habe meiner Mutter das Foto gezeigt.", "Ich habe meiner Mama das Foto gezeigt."], "Orden neutro: dativo – acusativo. (*das Foto meiner Mutter* se leería «la foto de mi mamá».)"),
         ty(0, "Reemplazá los dos objetos por pronombres.", "Ich bringe dem Gast den Kaffee.", "Ich bringe ihn ihm.", note="*den Kaffee* → *ihn*, *dem Gast* → *ihm*: acusativo antes que dativo."),
         # parte 1 — TeKaMoLo y nicht
         ch(1, "Elegí el orden neutro.", "Ich fahre ___.", "morgen mit dem Zug nach Wien", ["morgen mit dem Zug nach Wien", "nach Wien mit dem Zug morgen", "mit dem Zug nach Wien morgen"], "TeKaMoLo: tiempo – modo – lugar; la dirección, al final."),

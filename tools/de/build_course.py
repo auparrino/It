@@ -20,6 +20,7 @@ import can  # noqa: E402
 import sillabo  # noqa: E402
 sys.path.insert(0, os.path.join(ROOT, "tools", "lib"))
 import puedo  # noqa: E402
+import vocab_norma  # noqa: E402
 
 OUT = os.path.join(ROOT, "docs", "lang", "de", "data", "course.json")
 TYPES = {"choice", "cloze", "translate", "listen", "typed", "fixerr", "dictation"}
@@ -48,12 +49,19 @@ def early(weeks, items):
     en la 21) pasa a la semana que lo enseña, a la última parte de la
     lección.  Como en el italiano y el portugués."""
     by_week = {w["week"]: w for w in weeks}
-    moved = []
+    moved, never = [], []
+    # y las palabras: lo que el alumno escribe, enseñado antes (tools/lib/vocab_norma.py)
+    lex = vocab_norma.lexicon(weeks, "de")
     for it in items:
         n = it["wk"]
         if it["type"] == "listen":
             continue
         to, feats = sillabo.min_week(it, n)
+        vw, why = vocab_norma.need_week(it, lex)
+        if vw == 99:
+            never.append("%s (semana %d): «%s» no se enseña en ninguna lección" % (it["id"], n, ", ".join(why)))
+        elif vw > max(to, n):
+            to, feats = vw, dict(feats, **{"vocabulario " + "/".join(why): vw})
         if to <= n or to not in by_week:
             continue
         src, dst = by_week[n], by_week[to]
@@ -69,6 +77,9 @@ def early(weeks, items):
     print("sillabo: %d ejercicios pasan a una semana posterior, a su teoría" % len(moved))
     for m in moved:
         print("   ", m)
+    if never:
+        raise SystemExit("Palabras que el alumno tiene que escribir y ninguna lección enseña "
+                         "(glosalas en la consigna o enseñalas en la lección):\n  " + "\n  ".join(never))
 
 
 def build():
