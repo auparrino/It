@@ -637,6 +637,7 @@
      de «Seguir» se ofrece la misión que le queda mejor a este dispositivo.
      No cambia el orden del percorso: es una segunda puerta. */
   var PC_KINDS = { scrivi: 1, dictogloss: 1, parla: 1, "b-tr": 1 };
+  function aqui() { return onPc() ? "esta computadora" : "este teléfono"; }
   function onPc() { return !!(window.matchMedia && matchMedia("(min-width: 1000px) and (pointer: fine)").matches); }
   function deviceMission(plan, nm, pc) {
     if (!nm || plan.some(function (x) { return x.kind === "lez" && !x.done && !x.opt; })) return null;
@@ -812,7 +813,7 @@
           ? "Tenés " + rv.due + " atrasadas. Con dos tandas por día de estudio te ponés al día en unos " + dias2 + " días; cada ficha que recordás se aleja semanas."
           : rv.done ? "Ya hiciste " + rv.done + " hoy; con esta tanda queda al día." : "Unos " + Math.max(2, Math.round(tanda / 4)) + " minutos. Lo que repasás a tiempo no se olvida.") + "</span>" +
         '<span class="row" style="margin-top:10px"><button class="btn" id="herorev">🔁 Repasar</button>' +
-        '<button class="tab" id="heronext">Seguir con lo nuevo: ' + nm.ico + " " + esc(nm.title) + "</button></span>" +
+        '<button class="btn ghost" id="heronext">Seguir con lo nuevo: ' + nm.ico + " " + esc(nm.title) + "</button></span>" +
         '<span class="muted small">🗺️ semana ' + w.week + " · " + doneN + " / " + plan.length + ' misiones · <button class="tab" data-week="' + w.week + '">ver la semana</button></span>' +
         "</div>";
     }
@@ -1053,7 +1054,7 @@
     if (state.totals.attempts >= 150 && (sinceCopy == null || sinceCopy >= 14)) {
       out.push({ id: "copia", html: '<div class="card weekcard copia"><span class="muted">💾 Tu copia</span>' +
         "<b>" + (sinceCopy == null ? "Todavía no guardaste una copia de tu progreso." : "Hace " + sinceCopy + " días que no guardás una copia.") + "</b>" +
-        '<span class="muted">Todo vive solo en este teléfono. Un toque y la mandás a tu Drive, tu mail o un chat.</span>' +
+        '<span class="muted">Todo vive solo en ' + aqui() + '. Un toque y la mandás a tu Drive, tu mail o un chat.</span>' +
         '<span class="row" style="margin-top:10px"><button class="btn" id="hexport">💾 Guardar ahora</button></span></div>' });
     }
     if (!state.ideal && state.totals.attempts >= 10) {
@@ -1198,7 +1199,7 @@
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION = "c1-vN" in sw.js: test_game
      and the CI check it).  One version for the app and both languages. */
-  var APP_VERSION = "v3.30";
+  var APP_VERSION = "v3.31";
   // Settimana XVII: Roman numerals on the street signs (LANG.ui.romanWeeks).
   function romano(n) {
     var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
@@ -5066,8 +5067,9 @@
       planCard() +
       memoriaCard() +
       '<div class="card"><h2>Tu copia</h2>' +
-        '<p class="muted">Todo tu progreso vive <b>solo en este teléfono</b>, sin cuentas ni servidores. ' +
-        "Si borrás los datos del navegador se pierde: guardá una copia de vez en cuando." +
+        '<p class="muted">' + (window.Nube && Nube.store().token() && nubeSync().auto !== false
+          ? "Tu progreso se sincroniza con tus otros dispositivos por tu gist (abajo). Igual podés guardar una copia en un archivo. "
+          : "Todo tu progreso vive <b>solo en " + aqui() + "</b>, sin cuentas ni servidores. Si borrás los datos del navegador se pierde: guardá una copia de vez en cuando.") +
         (state.exportedAt ? " La última: " + new Date(state.exportedAt).toLocaleDateString("es-AR") + "." : "") + "</p>" +
         '<div class="row"><button class="btn" id="export">💾 Guardar copia</button>' +
         '<button class="btn ghost" id="import">📂 Restaurar copia</button>' +
@@ -5392,7 +5394,8 @@
       '<label class="set"><span>Sincronizar sola 🔄<small>al abrir trae lo que hiciste en el otro dispositivo; después de cada ronda sube lo de este</small></span>' +
         '<input type="checkbox" id="gistauto"' + (nubeOn(sy) ? " checked" : "") + "></label>" +
       (st.length ? '<p class="muted small" id="giststate">' + esc(st.join(" ")) + "</p>" : "") +
-      '<p class="muted small">El token queda solo en este teléfono, con las claves de IA (sirve para los dos idiomas), y nunca entra en la copia.</p>' +
+      '<p class="muted small">El token queda solo en ' + aqui() + ', con las claves de IA (sirve para todos los idiomas), y nunca entra en la copia.</p>' +
+      (!tok && window.QR ? '<p class="muted small">Con el token puesto, acá aparece «📱 Pasar al celular»: un código QR para no tipearlo en el otro dispositivo.</p>' : "") +
       (tok ? '<div class="row">' + (window.QR ? '<button class="tab" id="gistqr">📱 Pasar al celular</button>' : "") +
         '<button class="tab" id="gistforget">Olvidar el token</button></div><div id="gistqrbox" hidden></div>' : "") +
       "</details>";
@@ -7474,7 +7477,7 @@
       '<p class="muted small"><label for="aiws">ID del workspace</label> (solo si Anthropic lo pide: «not scoped to a workspace»). En la consola, Settings → Workspaces → el workspace → empieza con <code>wrkspc_</code>.</p>' +
       '<input id="aiws" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="wrkspc_… (opcional)" value="' + esc(k.ws) + '">' +
       '<div class="row"><button class="tab" id="aisave">Guardar</button></div>' +
-      '<p class="muted small">La clave sirve para todos los idiomas y queda solo en este teléfono; el texto se envía a Anthropic. La API se paga por uso: con Haiku, centavos por cientos de correcciones.</p>';
+      '<p class="muted small">La clave sirve para todos los idiomas y queda solo en ' + aqui() + '; el texto se envía a Anthropic. La API se paga por uso: con Haiku, centavos por cientos de correcciones.</p>';
   }
   function saveKeys() {
     var g = cleanKey(($("#aikey") || {}).value);
