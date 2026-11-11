@@ -33,6 +33,45 @@ con qué recuerdo llegan los repasos y cuántos días por semana se juega.
 Las citas son las que la sesión principal conoce bien; donde el auditor citó
 algo que no se pudo confirmar, la cita no está.
 
+## Lo que mostraron las copias reales del alumno (11 de noviembre)
+
+El alumno pasó sus tres copias (italiano, portugués, alemán). Reemplazan a la
+simulación en lo que sigue:
+
+| | Italiano | Portugués | Alemán |
+|---|---|---|---|
+| Semana abierta | 7 | 7 | 5 |
+| Días con estudio | 17 en 40 | 15 en 41 | 5 en 12 |
+| Fichas | 837 | 617 | 212 |
+| Vencidas | 733 (88 %) | 529 (86 %) | 191 (90 %) |
+| Atraso de las vencidas (mediana) | 31 días | 28 días | 13 días |
+| Repasos hechos con más de medio día de espera | 193 | 114 | 22 |
+| De esos, recordados | 88 % | 92 % | 73 % |
+
+- **A1 no es un problema de fin de año: ya pasó en la semana 7.** El repaso casi
+  no se hace. No es falta de memoria (cuando repasa, recuerda cerca del 90 %): es
+  que «Seguir» lleva siempre a lo nuevo y el repaso estaba dentro de «Más».
+- Estudia unos **3 días por semana, en sesiones largas** (mediana de 570 xp por
+  día activo en italiano), y **tres idiomas a la vez**: entre los tres hay 1.450
+  fichas vencidas.
+- Al momento de la copia llevaba **8 días sin abrir** ninguno de los tres.
+- Dijo que el cofre, la racha y lo demás del juego le son indiferentes: B1, B3,
+  B5 y B8 quedan fuera.
+
+Lo que se hizo con esto (v3.26):
+
+- **El repaso, primero**: con fichas vencidas, el botón principal de Oggi es el
+  repaso del día (una tanda de 20; dos si hay más de 60 atrasadas) y la misión
+  nueva queda al lado, nunca bloqueada. Con 684 atrasadas en italiano, a dos
+  tandas por día de estudio son unos 18 días de estudio para ponerse al día.
+- **La rapidez ya no decide cuándo vuelve una ficha** (A3).
+- **Lo que se falla escribiendo vuelve para escribir**, con la primera letra de
+  pista, 5 ítems después (A4).
+- **«🧩 Qué es cada palabra»** (D): la clase de cada palabra con los datos del
+  curso, en italiano y portugués, y la función de cada grupo con la IA, a pedido.
+- El final de ronda dice en una línea lo que falta para abrir la semana (B4, en
+  parte); «encontrá el error» se puede hacer con el teclado (C3, en parte).
+
 ## Lo que ya se hizo en esta tanda (v3.24 y v3.25)
 
 | Qué | Dónde |

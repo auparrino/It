@@ -1137,3 +1137,33 @@ body.lb-docked #app { padding-bottom: 96px; }
 .lampocard #lfb p { margin: 10px 0 0; font-size: 1.05rem; }
 .lampocard .lw-ok { color: var(--k-ok, #1c7c43); font-weight: 800; }
 .lampocard .lw-no b { font-weight: 800; }
+
+/* «🧩 Qué es cada palabra» (rol.js): la clase debajo de cada palabra, y la
+   función de cada grupo cuando se pide a la IA.  Un color por clase y por
+   función, los mismos en toda la app; el rótulo escrito, para no depender
+   del color. */
+.rol { margin: 6px 0 4px; padding: 8px 12px; border-radius: 12px; background: color-mix(in srgb, currentColor 6%, transparent); }
+.rol summary { cursor: pointer; font-weight: 700; list-style: none; }
+.rol summary::-webkit-details-marker { display: none; }
+.rol summary::after { content: " ▾"; opacity: .6; }
+.rol[open] summary { margin-bottom: 6px; }
+.rol-line { margin: 4px 0 6px; line-height: 2.5; font-size: 1.05rem; }
+.rol-w { display: inline-flex; flex-direction: column; align-items: center; vertical-align: top; line-height: 1.15; margin: 0 1px; padding: 2px 4px 3px;
+  border-bottom: 3px solid var(--rol, transparent); border-radius: 4px 4px 0 0; }
+.rol-w b { font-weight: 700; }
+.rol-w i { font-style: normal; font-size: .62rem; font-weight: 700; letter-spacing: .02em; opacity: .8; white-space: nowrap; }
+.rol-art, .rol-contr { --rol: #8a8f98; } .rol-sus { --rol: #1a6fd8; } .rol-ver { --rol: #c8401e; } .rol-adj { --rol: #1c8a4b; }
+.rol-pro { --rol: #8b3fc4; } .rol-prep { --rol: #b7791f; } .rol-adv { --rol: #0e8f8f; } .rol-conj { --rol: #6b7280; }
+.rol-num, .rol-cuant, .rol-int { --rol: #a8577e; } .rol-amb { border-bottom-style: dashed; --rol: currentColor; }
+.rol-fn { list-style: none; margin: 6px 0; padding: 0; }
+.rol-fn li { margin: 6px 0; line-height: 1.4; }
+.rol-f { display: inline-block; padding: 1px 8px; border-radius: 99px; font-size: .75rem; font-weight: 800; color: #fff; background: #6b7280; }
+.rol-f-suj { background: #1a6fd8; } .rol-f-ver { background: #c8401e; } .rol-f-od { background: #1c8a4b; } .rol-f-oi { background: #8b3fc4; }
+.rol-f-atr { background: #0e8f8f; } .rol-f-comp { background: #b7791f; }
+
+/* Con teclado: la palabra elegida entre las de «encontrá el error» se ve */
+[data-ft]:focus-visible, [data-tok]:focus-visible { outline: 3px solid var(--focus-ring, #1a5fb4); outline-offset: 2px; border-radius: 4px; }
+/* Textos largos en la computadora: el mismo ancho de lectura que las rondas */
+@media (min-width: 1000px) {
+  html body #app > .card > p, html body #app > .card > .ltext, html body #app > .card > ul, html body #app > .card > ol { max-width: 76ch; }
+}

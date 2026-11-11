@@ -443,6 +443,61 @@
         return "<li>" + mk(l) + (w ? " " + Referencia.button(w[1]) : "") + "</li>";
       }).join("") + "</ul></details>";
   }
+  /* «🧩 Qué es cada palabra» (rol.js): la oración con la clase de cada
+     palabra debajo (del banco del curso, sin internet) y, a pedido y con la
+     clave de IA, la función de cada grupo (sujeto, objeto directo…),
+     rotulada como generada.  Lo ya pedido queda guardado en el dispositivo. */
+  function rolCache() { try { return JSON.parse(localStorage.getItem(LG.storage + ".rol") || "{}") || {}; } catch (e) { return {}; } }
+  function rolKeep(text, val) {
+    var c = rolCache(), ks = Object.keys(c);
+    if (ks.length > 150) ks.slice(0, 50).forEach(function (k) { delete c[k]; });
+    c[text] = val;
+    try { localStorage.setItem(LG.storage + ".rol", JSON.stringify(c)); } catch (e) { /* lleno */ }
+  }
+  function rolFnHtml(r) {
+    return '<ul class="rol-fn">' + r.grupos.map(function (g) {
+      return '<li><span class="rol-f rol-f-' + Rol.familia(g.funcion) + '">' + esc(g.funcion) + "</span> <b>" + esc(g.texto) + "</b>" +
+        (g.porque ? ' <span class="muted small">' + esc(g.porque) + "</span>" : "") + "</li>";
+    }).join("") + "</ul>" +
+      (r.tacito ? '<p class="muted small">Sujeto que no se escribe: <b>' + esc(r.tacito) + "</b>.</p>" : "") +
+      '<p class="muted small">Análisis generado por la IA: puede equivocarse.</p>';
+  }
+  function rolHtml(text) {
+    if (!window.Rol || !Rol.loaded() || !text || spanishText(text)) return "";
+    var parts;
+    try { parts = Rol.clases(text); } catch (e) { return ""; }
+    var useful = Rol.useful(parts), words = parts.filter(function (p) { return !p.sep; }).length;
+    if (!useful && !(aiKey() && words >= 3)) return "";
+    var line = !useful ? "" : '<p class="rol-line">' + parts.map(function (p) {
+      if (p.sep) return esc(p.t);
+      var lab = p.cls ? Rol.corto(p.cls) : p.amb ? Rol.corto(p.amb[0]) + " o " + Rol.corto(p.amb[1]) : "";
+      var title = p.cls ? Rol.nombre(p.cls) : p.amb ? Rol.nombre(p.amb[0]) + " o " + Rol.nombre(p.amb[1]) + " (acá no se puede saber sin el sentido)" : "";
+      return '<span class="rol-w' + (p.cls ? " rol-" + p.cls : p.amb ? " rol-amb" : "") + '"' + (title ? ' title="' + esc(title) + '"' : "") + "><b>" + esc(p.t) + "</b><i>" + esc(lab || "·") + "</i></span>";
+    }).join("") + "</p>" +
+      '<p class="muted small">La clase de cada palabra, según el banco del curso. Sin rótulo: no está en el banco o puede ser varias cosas.</p>';
+    var kept = rolCache()[text];
+    var fn = kept ? rolFnHtml(kept)
+      : aiKey() ? '<button class="tab" data-rolfn="' + esc(text) + '">🧠 ¿Qué función cumple cada parte? (sujeto, objeto…)</button>'
+      : '<p class="muted small">La función de cada parte (sujeto, objeto directo…) se analiza con la IA: poné tu clave en ' + esc(UI.me) + ".</p>";
+    return '<details class="rol"><summary>🧩 Qué es cada palabra</summary>' + line + '<div class="rol-out">' + fn + "</div></details>";
+  }
+  document.addEventListener("click", function (e) {
+    var b = e.target && e.target.closest ? e.target.closest("[data-rolfn]") : null;
+    if (!b || !window.Rol || !window.IA) return;
+    var text = b.dataset.rolfn, box = b.parentNode;
+    b.disabled = true;
+    b.textContent = "Analizando…";
+    IA.llm(Rol.prompt(text, UI.langEs || LG.name), aiKeys(), function (err, data) {
+      var r = !err && data ? Rol.parse(data, text) : null;
+      if (!r) {
+        box.innerHTML = '<p class="muted small">No pude analizarla con la IA' + (err ? " (" + esc(String(err.message || err)) + ")" : ": la respuesta no coincidía con la oración") + ". Probá de nuevo más tarde.</p>";
+        return;
+      }
+      rolKeep(text, r);
+      box.innerHTML = rolFnHtml(r);
+    });
+  });
+
   /* The target-language text of an item: the phrase, the sentence with its
      gaps filled, the word asked about, or the answer. */
   function targetText(it) {
@@ -589,8 +644,36 @@
     if (pc) return PC_KINDS[nm.kind] ? null : open.filter(function (x) { return PC_KINDS[x.kind]; })[0] || null;
     return PC_KINDS[nm.kind] ? open.filter(function (x) { return !PC_KINDS[x.kind] && !x.opt; })[0] || null : null;
   }
+  /* El repaso, primero.  Las copias reales del alumno (noviembre 2026)
+     mostraron que casi no se hacía: 88 % de las fichas vencidas, un mes de
+     atraso de mediana, porque «Seguir» lleva siempre a lo nuevo y el repaso
+     quedaba dentro de «Más».  El espaciado rinde si el repaso llega cerca de
+     su fecha (Cepeda et al. 2006).  Ahora, con fichas vencidas, el botón
+     principal de Oggi es el repaso del día (una tanda de 20; dos si hay más
+     de 60 atrasadas) y la misión nueva queda al lado: nunca bloqueada, pero
+     segunda.  Hecho el repaso de hoy, «Seguir» vuelve a ser lo principal. */
+  var REV_BACKLOG = 60;
+  function reviewFirst() {
+    var due = Drills.dueCount(course, state, itemMap);
+    var done = state.revDay && state.revDay.d === Engine.dayKey() ? state.revDay.n : 0;
+    var want = Math.min(due + done, due > REV_BACKLOG ? 40 : 20);
+    return { due: due, done: done, first: due > 0 && done < want, left: Math.max(0, Math.min(due, want - done)), backlog: due > REV_BACKLOG };
+  }
   function weekTopHtml(w, plan, doneN, nm) {
-    var pc = onPc(), alt = deviceMission(plan, nm, pc);
+    var pc = onPc(), alt = deviceMission(plan, nm, pc), rv = reviewFirst();
+    if (rv.first && nm) {
+      var tanda = Math.min(20, rv.left), dias2 = Math.ceil(rv.due / 40);
+      return '<div class="card weekcard hero" id="weektop">' +
+        '<span class="muted">🔁 Primero, el repaso de hoy · después, lo nuevo</span>' +
+        "<b>" + tanda + (tanda === 1 ? " ficha" : " fichas") + " para repasar</b>" +
+        '<span class="muted">' + (rv.backlog
+          ? "Tenés " + rv.due + " atrasadas. Con dos tandas por día de estudio te ponés al día en unos " + dias2 + " días; cada ficha que recordás se aleja semanas."
+          : rv.done ? "Ya hiciste " + rv.done + " hoy; con esta tanda queda al día." : "Unos " + Math.max(2, Math.round(tanda / 4)) + " minutos. Lo que repasás a tiempo no se olvida.") + "</span>" +
+        '<span class="row" style="margin-top:10px"><button class="btn" id="herorev">🔁 Repasar</button>' +
+        '<button class="tab" id="heronext">Seguir con lo nuevo: ' + nm.ico + " " + esc(nm.title) + "</button></span>" +
+        '<span class="muted small">🗺️ semana ' + w.week + " · " + doneN + " / " + plan.length + ' misiones · <button class="tab" data-week="' + w.week + '">ver la semana</button></span>' +
+        "</div>";
+    }
     return '<div class="card weekcard hero" id="weektop">' +
       '<span class="muted">🗺️ ' + UI.path + " · semana " + w.week + " · " + esc(w.level) + " · " + doneN + " / " + plan.length + " misiones</span>" +
       "<b>" + esc(w.title) + "</b>" +
@@ -970,7 +1053,7 @@
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION = "c1-vN" in sw.js: test_game
      and the CI check it).  One version for the app and both languages. */
-  var APP_VERSION = "v3.25";
+  var APP_VERSION = "v3.26";
   // Settimana XVII: Roman numerals on the street signs (LANG.ui.romanWeeks).
   function romano(n) {
     var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
@@ -3759,11 +3842,10 @@
                      rule: it.rule || "",
                      es: it.frase ? it.frase.es : "", stem: it.stem || "", prompt: it.prompt || "" });
 
-    // How long it took: right and quick (under half of what counts as slow
-    // for this kind of item) is Easy; right and slow is Hard.
-    var slowT = window.Devolucion && Devolucion.slowAfter ? Devolucion.slowAfter(it) : null;
-    var fast = q === 2 && produced && !round.tried && took != null && slowT && took < slowT / 2;
-    var slow = q === 2 && took != null && slowT && took > slowT * 1.5;
+    // The clock does not decide when a card comes back (the learner asked:
+    // «no estoy apurado»): right is right, quick or slow.  The time is still
+    // noted in the log (ms), for nothing but the record.
+    var fast = false, slow = false;
     // The diagnosis says what kind of mistake it was (a slip, a word, a rule).
     var dg = round.lastDiag; round.lastDiag = null;
     var ekind = q === 1 && (!dg || dg.slip) ? "slip"
@@ -3784,7 +3866,7 @@
     }
     // The ladder inside the round: recognised right and quick → the next of
     // the same rule written; written and missed → the next with options.
-    var recogFast = q === 2 && it.recog && took != null && slowT && took < slowT / 2;
+    var recogFast = q === 2 && !!it.recog;   // recognised right (no clock): the next one, written
     if (window.Reglas && round.kind !== "boss" && round.kind !== "domina" && round.kind !== "esame") Reglas.adaptNext(round, it, q, recogFast);
     // Productive practice of the week's own rule, day by day (a rule is a
     // card of its own: three days of writing it right consolidate it).
@@ -3798,9 +3880,10 @@
     var relearn = "";
     if (q < 2 && round.kind !== "boss" && round.kind !== "esame" && it.src !== "lettura" && !it.retry && !it.unamas && !(round.again[it.id])) {
       round.again[it.id] = 1;
-      var at = Math.min(round.items.length, round.i + 3);
-      round.items.splice(at, 0, retryVersion(it));
-      relearn = '<div class="note">🔁 Te la vuelvo a preguntar en un rato, más fácil.</div>';
+      // five or six items later: far enough to have to recall it, not to copy it
+      var back = retryVersion(it), at = Math.min(round.items.length, round.i + (back.written ? 5 : 3));
+      round.items.splice(at, 0, back);
+      relearn = '<div class="note">🔁 Te la vuelvo a preguntar en un rato' + (back.written ? ", otra vez para escribir, con una pista." : ", más fácil.") + "</div>";
     }
     // «Ahora vos: una más» (unamas.js): after a mistake of a rule, one new
     // item of the same rule with other words, optional, as the next question.
@@ -3865,6 +3948,7 @@
       (it.hint && it.src === "dummies"
         ? '<div class="note">Consigna original: ' + esc(it.hint) + "</div>" : "") +
       (withDesglose ? desgloseHtml(tt, (verdict !== "giusto" && !explained) || it.type === "guess") : "") +
+      (tt ? rolHtml(tt) : "") +
       (function () {
         var vw = vocabWordOf(it), kw = vw && (state.keywords || {})[vw];
         return kw ? '<div class="note">🧷 Tu imagen: ' + esc(kw) + "</div>" : q < 2 && vw ? keywordBox(vw, true) : "";
@@ -3999,7 +4083,15 @@
       }));
       copy = Object.assign({}, it, { options: Drills.shuffle([it.answer, wrong[0]]) });
     } else if (!it.options) {
-      copy = Drills.recognitionOf(it, round.items, view.week) || Object.assign({}, it);
+      /* What was to be written comes back to be written (recalling teaches
+         more than recognising: Kang, McDermott & Roediger 2007; relearning
+         until a right recall: Rawson & Dunlosky 2011), with its first letter
+         as a hint.  A very short answer, or one of tiles, with options as before. */
+      var ansR = String(it.answer == null ? "" : it.answer).trim();
+      var special = { listen: 1, garden: 1, dictation: 1, coppia: 1, scopri: 1, hunt: 1, guess: 1, intro: 1, fixerr: 1, word: 1, tiles: 1, flash: 1, card: 1, write: 1 };
+      if (ansR.length > 3 && typeof it.answer === "string" && !it.tiles && !special[it.type]) {
+        copy = Object.assign({}, it, { written: true, prompt: (it.prompt || "") + " (pista: empieza con «" + ansR.charAt(0) + "»)" });
+      } else copy = Drills.recognitionOf(it, round.items, view.week) || Object.assign({}, it);
     } else copy = Object.assign({}, it, { options: Drills.shuffle(it.options) });
     copy.retry = true;
     return copy;
@@ -4196,6 +4288,12 @@
     Engine.touchStreak(state);
     Engine.noteSession(state);
     if (round.kind === "dos" && total >= 1) { if (!state.dos) state.dos = {}; state.dos[Engine.dayKey()] = true; }
+    // the review done today (the hero of Oggi: review first, then what is new)
+    if ((round.kind === "review" || round.kind === "dos" || round.kind === "micro" || round.kind === "ritorno") && total >= 1) {
+      var rd = state.revDay && state.revDay.d === Engine.dayKey() ? state.revDay : { d: Engine.dayKey(), n: 0 };
+      rd.n += total;
+      state.revDay = rd;
+    }
     if (!state.best) state.best = {};
     state.best.combo = Math.max(state.best.combo || 0, round.bestCombo);
     var records = [];
@@ -4384,7 +4482,8 @@
       out.push("🔓 ¡Semana " + state.unlocked + " abierta!");
     } else if (w.week === state.unlocked && !w.boss) {
       var left = pendingToAdvance(w);
-      if (left.length && now > (before || 0)) out.push("Para abrir la semana " + (w.week + 1) + ": " + left.join(", ") + ".");
+      // one line, not the whole list: the end of a round is for what was done
+      if (left.length && now > (before || 0)) out.push("Para abrir la semana " + (w.week + 1) + (left.length === 1 ? " te falta una misión: " + left[0] + "." : " te faltan " + left.length + " misiones. Sigue: " + left[0] + "."));
     }
     if (now === plan.length && plan.length && !(state.perfectWeeks || {})[w.week]) {
       state.perfectWeeks = state.perfectWeeks || {};
@@ -5653,6 +5752,7 @@
       // the tab changes only when the mission starts: closing the sheet stays in Oggi
       missionTap(nm.kind, nm.arg, false, w.week, function () { view.tab = "percorso"; });
     });
+    on("#herorev", function () { startRound("review"); });
     on("#heroalt", function () {
       var w = course.weeks[Math.min(state.unlocked, 52) - 1];
       var alt = deviceMission(weekPlan(w), nextMission(w), onPc());
@@ -7518,6 +7618,7 @@
     if (it.type === "hunt") {
       var sel = [];
       document.querySelectorAll("[data-tok]").forEach(function (w) {
+        w.tabIndex = 0; w.setAttribute("role", "button");
         w.onclick = function () {
           if (round.answered) return;
           var k = +w.dataset.tok, at = sel.indexOf(k);
@@ -7655,6 +7756,8 @@
 
   /* Trova l'errore / Ache o erro: primero encontrar (notar), después corregir (producir). */
   function wireFixerr(it) {
+    // with a keyboard: Tab or the arrows move from word to word, Enter picks
+    document.querySelectorAll("[data-ft]").forEach(function (el) { el.tabIndex = 0; el.setAttribute("role", "button"); });
     var toks = it.stem.split(/\s+/);
     var core = function (t) { return t.toLowerCase().replace(new RegExp("^[^" + WCH + "]+|[^" + WCH + "]+$", "g"), ""); };
     var badT = it.bad.split(/\s+/).map(core), start = -1;
@@ -7947,6 +8050,14 @@
       var nx = kbFirst(view.screen === "risultato" || view.screen === "lampofine" ? KB_END : KB_NEXT) ||
         kbFirst([".lesdone .row .btn:not(.ghost)"]);   // the end of a lesson
       if (nx) { e.preventDefault(); kbPress(nx); }
+      return;
+    }
+    // the words to pick (find the error, mark the forms): the arrows walk them
+    if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+      var ws = Array.prototype.filter.call(app().querySelectorAll("[data-ft], [data-tok]"), kbSeen);
+      if (!ws.length) return;
+      var cur = ws.indexOf(document.activeElement), to = cur < 0 ? 0 : cur + (e.key === "ArrowRight" ? 1 : -1);
+      if (ws[to]) { e.preventDefault(); ws[to].tabIndex = 0; ws[to].focus(); }
       return;
     }
     if (e.key === "Backspace") {
@@ -8370,7 +8481,7 @@
   // The bank is optional: without it the app still works, just smaller.
   var bankP = !hasData("bank.json") ? Promise.resolve() : fetch(DATA("bank.json"))
     .then(function (r) { return r.ok ? r.json() : null; })
-    .then(function (b) { if (b) Banca.load(b); })
+    .then(function (b) { if (b) { Banca.load(b); if (window.Rol) Rol.load(b); } })
     .catch(function () { /* sin banco */ });
 
   fetch(DATA("course.json"))

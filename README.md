@@ -48,6 +48,26 @@ from a branch*, carpeta `/docs`), abrí la URL una vez con internet y agregala
 a la pantalla de inicio. `?lang=it`, `?lang=pt` o `?lang=de` en la URL abre
 directo un idioma.
 
+## Qué es cada palabra
+
+En la corrección de cada ejercicio, «🧩 Qué es cada palabra» muestra la oración
+con la **clase** de cada palabra debajo (artículo, sustantivo, verbo,
+preposición…). Sale de los datos del curso, sin internet, en italiano y
+portugués (`docs/js/rol.js`): lo que puede ser dos cosas se dice («verbo o
+sustantivo») y lo que no está en el banco queda sin rótulo, nunca se adivina.
+La **función** de cada parte (sujeto, objeto directo, objeto indirecto,
+complemento…) se pide a la IA con tu clave y va rotulada como generada: con
+reglas simples falla donde más importa (en *Mi piace il caffè* el sujeto es *il
+caffè*).
+
+## El repaso, primero
+
+Si hay fichas vencidas, el botón principal de la pantalla de hoy es el repaso
+del día (una tanda de 20; dos si hay más de 60 atrasadas) y la misión nueva
+queda al lado. Lo que se falla escribiendo vuelve en la misma ronda para
+escribir, con una pista. El tiempo que tardás en contestar no cambia cuándo
+vuelve una ficha.
+
 ## En la computadora
 
 La misma app se instala en Windows como aplicación de escritorio (ventana
