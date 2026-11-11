@@ -945,7 +945,7 @@
   /* The version, so a glance says whether the phone already loaded the
      latest one (it must match VERSION = "c1-vN" in sw.js: test_game
      and the CI check it).  One version for the app and both languages. */
-  var APP_VERSION = "v3.23";
+  var APP_VERSION = "v3.24";
   // Settimana XVII: Roman numerals on the street signs (LANG.ui.romanWeeks).
   function romano(n) {
     var out = "", v = [[50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
@@ -5014,7 +5014,7 @@
      a secret gist of the learner's, with their own token.  The token and
      what this phone knows of the gist live in its storage, never in the
      copy. */
-  var nubeBusy = false;
+  var nubeBusy = false, nubeRun = null;   // nubeRun: the automatic sync in flight (nubeTick)
   function nubeWhen(t) {
     var d = new Date(t);
     return isNaN(d) ? "" : d.toLocaleDateString("es-AR") + " " + d.toLocaleTimeString("es-AR", { hour: "2-digit", minute: "2-digit", hour12: false });
@@ -5032,14 +5032,14 @@
     var sy = nubeSync(), tok = Nube.store().token(), st = [];
     if (sy.up) st.push("Última subida: " + nubeWhen(sy.up) + ".");
     if (sy.down) st.push("La trajiste por última vez: " + nubeWhen(sy.down) + ".");
-    if (sy.conflict) st.push("⚠️ En la nube hay una copia subida desde otro teléfono el " + nubeWhen(sy.conflict) + ": traela, o subí la de este teléfono si es la buena.");
+    if (sy.conflict) st.push("⚠️ En la nube hay una copia subida desde otro dispositivo el " + nubeWhen(sy.conflict) + ", y acá también avanzaste: traela, o subí la de este dispositivo si es la buena.");
     return '<details class="nube"' + (tok ? " open" : "") + "><summary>☁️ Sincronizar con tu GitHub Gist</summary>" +
-      '<p class="muted small">Para seguir en otro teléfono sin servidor de la app: tu copia va a un gist secreto de tu cuenta de GitHub. ' +
+      '<p class="muted small">Para seguir en la computadora o en otro teléfono sin servidor de la app: tu copia va a un gist secreto de tu cuenta de GitHub. En cada dispositivo se pega el mismo token. ' +
         'Creá el token en <a href="' + Nube.TOKEN_URL + '" target="_blank" rel="noopener">github.com/settings/tokens</a> (viene marcado solo «gist»: elegí el vencimiento y tocá «Generate token») y pegalo acá.</p>' +
       '<input id="gisttoken" type="password" autocomplete="off" aria-label="Token de GitHub" placeholder="Token de GitHub (ghp_…)" value="' + esc(tok) + '">' +
       '<div class="row"><button class="btn" id="gistup">☁️ Subir ahora</button><button class="btn ghost" id="gistdown">⬇️ Traer de la nube</button></div>' +
-      '<label class="set"><span>Subir sola al cerrar la app<small>una vez por día como mucho, si cambió algo</small></span>' +
-        '<input type="checkbox" id="gistauto"' + (sy.auto ? " checked" : "") + "></label>" +
+      '<label class="set"><span>Sincronizar sola 🔄<small>al abrir trae lo que hiciste en el otro dispositivo; después de cada ronda sube lo de este</small></span>' +
+        '<input type="checkbox" id="gistauto"' + (nubeOn(sy) ? " checked" : "") + "></label>" +
       (st.length ? '<p class="muted small" id="giststate">' + esc(st.join(" ")) + "</p>" : "") +
       '<p class="muted small">El token queda solo en este teléfono, con las claves de IA (sirve para los dos idiomas), y nunca entra en la copia.</p>' +
       (tok ? '<div class="row"><button class="tab" id="gistforget">Olvidar el token</button></div>' : "") +
@@ -5053,11 +5053,11 @@
     if (!window.Nube) return Promise.resolve(false);
     var sy = nubeSync(), o = nubeOpts();
     if (!o.token) { if (!auto) toast(Nube.message({ code: "notoken" })); return Promise.resolve(false); }
-    if (nubeBusy) return Promise.resolve(false);
+    if (nubeBusy) return !auto && nubeRun ? nubeRun.then(function () { return nubeUp(false); }) : Promise.resolve(false);
     nubeBusy = true;
     if (!auto) toast("☁️ Subiendo…", 1500);
     flushPersist();
-    var mark = state.savedAt || Date.now();
+    var mark = state.savedAt || Date.now(), fp = Nube.huella(state);
     return Nube.remote(o).then(function (r) {
       if (r && Nube.conflict(r, sy)) {
         if (auto) { nubeSync(function (x) { x.conflict = r.updated; }); return false; }
@@ -5068,7 +5068,7 @@
       }
       return Nube.push(o, saveEnvelope(), r).then(function (g) {
         nubeSync(function (x) {
-          x.id = g.id; x.gistAt = g.updated; x.up = Date.now(); x.mark = mark; x.conflict = null;
+          x.id = g.id; x.gistAt = g.updated; x.up = Date.now(); x.mark = mark; x.conflict = null; x.fp = fp;
           if (auto) x.day = Nube.dayKey();
         });
         if (!auto) toast(g.created ? "☁️ Listo: creé tu gist secreto y subí la copia." : "☁️ Copia subida.", 2500);
@@ -5089,7 +5089,7 @@
     if (!window.Nube) return Promise.resolve(false);
     var o = nubeOpts();
     if (!o.token) { toast(Nube.message({ code: "notoken" })); return Promise.resolve(false); }
-    if (nubeBusy) return Promise.resolve(false);
+    if (nubeBusy) return nubeRun ? nubeRun.then(nubeDown) : Promise.resolve(false);
     nubeBusy = true;
     toast("☁️ Buscando tu copia…", 1500);
     flushPersist();
@@ -5102,7 +5102,7 @@
           " la de este teléfono (" + here + "). ¿Reemplazar igual?";
       nubeSync(function (x) { x.id = r.id; });
       if (!restoreEnvelope(env, ask)) return false;
-      nubeSync(function (x) { x.gistAt = r.updated; x.down = Date.now(); x.mark = state.savedAt; x.conflict = null; });
+      nubeSync(function (x) { x.gistAt = r.updated; x.down = Date.now(); x.mark = state.savedAt; x.conflict = null; x.fp = Nube.huella(state); });
       return true;
     }).catch(function (e) {
       toast(e && e.code === "idioma" && e.env ? otherLangCopy(e.env) : e && e.code ? Nube.message(e) : "Lo que hay en la nube no es una copia válida.", 4500);
@@ -5113,23 +5113,96 @@
       return done;
     });
   }
-  // When the app is hidden or closed: the automatic upload, once a day.
-  function nubeAuto() {
-    if (!window.Nube || nubeBusy) return;
-    if (Nube.autoDue(nubeSync(), Nube.store().token(), state.savedAt)) nubeUp(true);
+  /* La sincronización sola (celular ↔ computadora).  Con un token, y si
+     no se apagó: al abrir la app, al volver a ella, al terminar una ronda
+     y al cerrarla mira la fecha del gist (una llamada liviana) y hace lo
+     que dice Nube.plan: subir lo de acá, traer lo del otro dispositivo
+     (sin preguntar: acá no cambió nada) o, si se avanzó en los dos lados
+     sin conexión, no pisar nada y avisar (se elige en Io).  Traer
+     reemplaza el guardado: solo en una pantalla tranquila, nunca en medio
+     de una ronda o de un texto a medio escribir. */
+  function nubeOn(sy) { return !!Nube.store().token() && (sy || nubeSync()).auto !== false; }
+  var nubeLast = 0, nubeWarned = null, nubeLater = null;
+  function nubeCloud(env, r) {
+    state = Engine.fromRaw(env.save);
+    clearPending();
+    if (persistTimer) { clearTimeout(persistTimer); persistTimer = null; }
+    Engine.save(state);   // as it came: its savedAt stays the cloud's
+    nubeSync(function (x) { x.id = r.id; x.gistAt = r.updated; x.down = Date.now(); x.mark = state.savedAt; x.conflict = null; x.fp = Nube.huella(state); });
+    applyTheme();
+    renderHeader();
+    render();
+    toast("🔄 Traje lo que hiciste en tu otro dispositivo.", 3000);
   }
+  function nubeTick(force) {
+    if (!window.Nube || nubeBusy || !course) return Promise.resolve(false);
+    var sy = nubeSync(), o = nubeOpts();
+    if (!nubeOn(sy) || navigator.onLine === false) return Promise.resolve(false);
+    // nothing new here: a look at the cloud every half minute at most; with
+    // progress to upload (a round just ended), right away
+    var due = !sy.conflict && (sy.fp ? Nube.huella(state) !== sy.fp : state.xp > 0);
+    var wait = (due ? 5000 : 30000) - (Date.now() - nubeLast);
+    if (!force && wait > 0) {
+      // two rounds in a row: the second one goes up when the pause is over
+      if (due && !nubeLater) nubeLater = setTimeout(function () { nubeLater = null; nubeTick(); }, wait + 50);
+      return Promise.resolve(false);
+    }
+    nubeLast = Date.now();
+    nubeBusy = true;
+    flushPersist();
+    var mark = state.savedAt || Date.now(), fp = Nube.huella(state), changed = false;
+    nubeRun = Nube.remote(o).then(function (r) {
+      var what = Nube.plan(r, sy, state);
+      if (what === "subir") {
+        return Nube.push(o, saveEnvelope(), r).then(function (g) {
+          nubeSync(function (x) { x.id = g.id; x.gistAt = g.updated; x.up = Date.now(); x.mark = mark; x.conflict = null; x.fp = fp; });
+          changed = true;
+        });
+      }
+      if (what === "bajar") {
+        if (!safeToReload()) { nubeLast = 0; return null; }   // after the round
+        return Nube.pull(Object.assign({}, o, { id: r.id })).then(function (got) {
+          // the learner may have started something while it downloaded
+          if (!safeToReload() || Nube.huella(state) !== fp) { nubeLast = 0; return; }
+          nubeCloud(got.env, got);
+          changed = true;
+        });
+      }
+      if (what === "conflicto" && sy.conflict !== r.updated) {
+        nubeSync(function (x) { x.conflict = r.updated; });
+        changed = true;
+      }
+      if (what === "conflicto" && nubeWarned !== r.updated && !document.hidden) {
+        nubeWarned = r.updated;
+        toast("⚠️ Avanzaste en dos dispositivos sin sincronizar: elegí cuál copia queda en " + UI.me + " → Tu copia.", 6000);
+      }
+      return null;
+    }).catch(function () { /* sin red o GitHub caído: la próxima */ }).then(function () {
+      nubeBusy = false;
+      nubeRun = null;
+      // Io says when it last synced (not while the token is being typed)
+      var el = document.activeElement, typing = el && (el.tagName === "TEXTAREA" || (el.tagName === "INPUT" && !/^(checkbox|radio)$/.test(el.type)));
+      if (changed && view.screen === "io" && !typing) render();
+      return changed;
+    });
+    return nubeRun;
+  }
+  // When the app is hidden or closed: upload what changed.
+  function nubeAuto() { nubeTick(true); }
   function wireNube() {
     var box = $("#gisttoken");
     if (!window.Nube || !box) return;
     var S = Nube.store();
     function take() { var t = (box.value || "").trim(); if (t !== S.token()) S.setToken(t); return t; }
-    box.onchange = take;
+    box.onchange = function () { if (take()) nubeTick(true); };
     on("#gistup", function () { take(); nubeUp(false); });
     on("#gistdown", function () { take(); nubeDown(); });
     var auto = $("#gistauto");
     if (auto) auto.onchange = function () {
+      take();
       nubeSync(function (x) { x.auto = auto.checked; });
-      toast(auto.checked ? "☁️ Al cerrar la app se sube sola, una vez por día." : "Subida automática apagada.", 2500);
+      toast(auto.checked ? "🔄 Se sincroniza sola: al abrir la app y después de cada ronda." : "Sincronización automática apagada.", 2500);
+      if (auto.checked) nubeTick(true);
     };
     on("#gistforget", function () { S.setToken(""); toast("Token borrado de este teléfono."); render(); });
   }
@@ -5253,6 +5326,8 @@
     wire();
     if (s === "ubicacion" && window.Ubicacion) Ubicacion.wire(app());
     growBoxes();
+    // a round just ended, or a calm screen: the moment to sync (nubeTick)
+    if (SAFE_SCREENS[s] || s === "risultato" || s === "lampofine") setTimeout(nubeTick, 0);
   }
 
   /* El test de ubicación (ubicacion.js): al empezar un idioma y desde Io / Eu. */
@@ -5339,7 +5414,7 @@
   document.addEventListener("click", function (e) {
     var near = !guardAt || e.clientX == null ||
       (Math.abs(e.clientX - guardAt.x) < 48 && Math.abs(e.clientY - guardAt.y) < 48);
-    if (Date.now() < guardUntil && near && !(window.__test && window.__test.fast) && app().contains(e.target)) {
+    if (Date.now() < guardUntil && near && !viaKey && !(window.__test && window.__test.fast) && app().contains(e.target)) {
       e.stopPropagation();
       e.preventDefault();
     }
@@ -7687,6 +7762,56 @@
     }).observe(document.body, { childList: true, subtree: true });
   }
 
+  /* En la computadora, con el teclado: 1-9 eligen la opción (o la ficha, o
+     la nota de la tarjeta), Enter o Espacio siguen, Backspace saca la
+     última ficha, Esc cierra la hoja abierta.  En una caja de texto no se
+     toca nada (Enter ya envía ahí); con la respuesta ya corregida, Enter
+     sigue. */
+  function kbSeen(el) { return !!el && !el.disabled && el.getClientRects().length > 0; }
+  function kbFirst(sels) {
+    for (var i = 0; i < sels.length; i++) {
+      var el = app().querySelector(sels[i]);
+      if (kbSeen(el)) return el;
+    }
+    return null;
+  }
+  var viaKey = false;   // a key press is never a double tap (the guard below)
+  function kbPress(el) { viaKey = true; try { el.click(); } finally { viaKey = false; } }
+  var KB_NEXT = ["#next", "#lesnext2", "#lesnext", "#reveal", "#tcheck"];
+  var KB_END = [".row .btn:not(.ghost)", "#toggi"];   // the end of a round: what the screen proposes
+  var KB_PICK = [".opt", "[data-fq]", "#tbank [data-tile]:not(.used)"];
+  document.addEventListener("keydown", function (e) {
+    if (e.ctrlKey || e.metaKey || e.altKey || e.repeat || e.defaultPrevented || !course) return;
+    // a sheet over the screen (¿Por qué?, the glossary) takes the keys
+    var sheet = document.querySelector(".porque-back, .strat-sheet, .mcbox");
+    if (sheet && kbSeen(sheet)) return;
+    var t = e.target, tag = t && t.tagName;
+    var typing = tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || (t && t.isContentEditable);
+    if (typing) {
+      var nxt = e.key === "Enter" && !e.shiftKey && tag !== "SELECT" && document.body.classList.contains("ingame") && kbFirst(["#next", "#lesnext2"]);
+      if (nxt) { e.preventDefault(); e.stopPropagation(); kbPress(nxt); }
+      return;
+    }
+    if (e.key === "Enter" || e.key === " ") {
+      // the browser already presses the focused button
+      if (tag === "BUTTON" || tag === "A" || tag === "SUMMARY" || (t && t.getAttribute && t.getAttribute("role") === "button")) return;
+      var nx = kbFirst(view.screen === "risultato" || view.screen === "lampofine" ? KB_END : KB_NEXT);
+      if (nx) { e.preventDefault(); kbPress(nx); }
+      return;
+    }
+    if (e.key === "Backspace") {
+      var placed = app().querySelectorAll("[data-pos]");
+      if (placed.length && kbSeen(placed[placed.length - 1])) { e.preventDefault(); kbPress(placed[placed.length - 1]); }
+      return;
+    }
+    if (/^[1-9]$/.test(e.key)) {
+      for (var i = 0; i < KB_PICK.length; i++) {
+        var list = Array.prototype.filter.call(app().querySelectorAll(KB_PICK[i]), kbSeen);
+        if (list.length) { if (list[+e.key - 1]) { e.preventDefault(); kbPress(list[+e.key - 1]); } return; }
+      }
+    }
+  }, true);
+
   // Words and chips that act like buttons (span role="button"): Enter and
   // the space bar work on them as on a button.
   document.addEventListener("keydown", function (e) {
@@ -7779,9 +7904,13 @@
       renderHeader();
       if (view.screen === "oggi") render();
       if (updateReady && safeToReload()) reloadHere();
+      nubeTick();
     }
     if (document.hidden && course) { flushPersist(); updateBadge(); nubeAuto(); }
   });
+  // On a computer the window can come back to the front without having been hidden.
+  window.addEventListener("focus", function () { nubeTick(); });
+  window.addEventListener("online", function () { nubeTick(true); });
   window.addEventListener("pagehide", function () { flushPersist(); });
   // The app icon shows how many cards are due (Badging API; a passive
   // reminder that needs no server and no permission on Android).

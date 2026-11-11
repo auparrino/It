@@ -277,6 +277,29 @@ step("subida automática", function () {
 });
 
 /* ------------------------------------------ 6. lo guardado en el teléfono */
+step("sincronización sola: qué hacer sin preguntar", function () {
+  var save = { xp: 120, totals: { attempts: 30 }, cards: { a: {}, b: {} }, log: [[1], [2]], read: { 1: 5 }, unlocked: 2, savedAt: 1000 };
+  var fp = Nube.huella(save), r = { id: "g1", updated: "2026-09-28T10:00:00Z" };
+  var enPaso = { gistAt: r.updated, mark: 1000, fp: fp };
+  eq(Nube.plan(r, enPaso, save), "nada", "nadie cambió: nada");
+  // abrir la app un día nuevo guarda (la racha) sin que haya progreso
+  eq(Nube.plan(r, enPaso, Object.assign({}, save, { savedAt: 9999, streak: 0, theme: "dark" })), "nada", "un guardado sin progreso no es un cambio");
+  var jugo = Object.assign({}, save, { xp: 150, totals: { attempts: 36 }, savedAt: 2000 });
+  eq(Nube.plan(r, enPaso, jugo), "subir", "se jugó acá: subir");
+  var otro = { id: "g1", updated: "2026-09-28T12:00:00Z" };
+  eq(Nube.plan(otro, enPaso, save), "bajar", "subió el otro dispositivo y acá no cambió nada: bajar sin preguntar");
+  eq(Nube.plan(otro, enPaso, jugo), "conflicto", "se jugó en los dos lados: no se pisa nada");
+  ok(Nube.huella(Object.assign({}, save, { cards: { a: {}, b: {}, c: {} } })) !== fp, "una ficha nueva cambia la huella");
+  ok(Nube.huella(Object.assign({}, save, { read: { 1: 5, 2: 6 } })) !== fp, "una lección leída cambia la huella");
+  // un dispositivo que nunca sincronizó
+  var vacio = { xp: 0, cards: {}, totals: { attempts: 0 } };
+  eq(Nube.plan(r, {}, vacio), "bajar", "recién instalada y hay copia arriba: bajar");
+  eq(Nube.plan(null, {}, vacio), "nada", "recién instalada y sin copia: nada");
+  eq(Nube.plan(null, {}, save), "subir", "con progreso y sin copia arriba: subir (crea el gist)");
+  eq(Nube.plan(r, {}, save), "conflicto", "con progreso y una copia que nunca trajo: elige el alumno");
+  return Promise.resolve();
+});
+
 step("lo guardado en el teléfono", function () {
   var ls = memStorage(), S = Nube.store(ls);
   S.setToken("  " + TOKEN + "  ");
@@ -310,6 +333,8 @@ step("en el orden de carga y en la app", function () {
   ok(/function restoreEnvelope[\s\S]{0,700}Engine\.fromRaw\(s\)/.test(app), "restoreEnvelope pasa por Engine.fromRaw");
   ok(/function restoreEnvelope[\s\S]{0,500}j\.lang !== LG\.code/.test(app), "y controla el idioma");
   ok(/document\.hidden && course\)[^\n]*nubeAuto\(\)/.test(app), "la subida automática corre al ocultar la app");
+  ok(/function nubeTick[\s\S]{0,1400}Nube\.plan\(r, sy, state\)/.test(app), "la sincronización sola decide con Nube.plan");
+  ok(/what === "bajar"[\s\S]{0,120}safeToReload\(\)/.test(app), "y solo trae la copia en una pantalla tranquila");
   return Promise.resolve();
 });
 

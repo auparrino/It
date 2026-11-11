@@ -48,6 +48,27 @@ from a branch*, carpeta `/docs`), abrí la URL una vez con internet y agregala
 a la pantalla de inicio. `?lang=it`, `?lang=pt` o `?lang=de` en la URL abre
 directo un idioma.
 
+## En la computadora
+
+La misma app se instala en Windows como aplicación de escritorio (ventana
+propia, ícono en Inicio y en la barra de tareas, sin internet): abrí la URL en
+**Edge** (*⋯ → Aplicaciones → Instalar este sitio como una aplicación*) o en
+**Chrome** (el ícono de instalar de la barra de direcciones).
+
+- **Pantalla ancha:** las pestañas van arriba, en la cabecera, y la corrección
+  sale al costado de la pregunta en vez de taparla.
+- **Teclado:** `1`-`9` eligen la opción, la ficha o la nota de la tarjeta;
+  `Enter` o `Espacio` siguen; `Backspace` saca la última ficha. En una caja de
+  texto `Enter` manda la respuesta y, ya corregida, sigue.
+- **Sincronizada con el celular:** en *Io → Tu copia → Sincronizar con tu
+  GitHub Gist* se pega el mismo token en los dos. Con «Sincronizar sola», la
+  app trae lo del otro dispositivo al abrirla y sube lo de este al terminar
+  cada ronda. Si avanzaste en los dos sin conexión no pisa nada: avisa y elegís
+  cuál copia queda (`docs/js/nube.js`: `plan`).
+
+`npm run smoke:pc` lo prueba en el navegador (teclado, pantalla ancha y la
+sincronización entre dos dispositivos con un GitHub simulado).
+
 ## Cómo está hecha
 
 Un **núcleo** común (`docs/js/`) y un **paquete** por idioma

@@ -243,6 +243,32 @@
     return !sync.mark || (+savedAt || 0) > sync.mark;
   }
 
+  /* La sincronización sola (celular ↔ computadora): qué hacer con la copia
+     de la nube sin preguntar.  huella() resume el progreso (no los
+     ajustes ni la fecha del guardado: abrir la app un día nuevo toca la
+     racha y guarda, y eso no es «jugar»); sync.fp es la huella de cuando
+     este dispositivo quedó igual que la nube.
+       "nada"       nadie cambió
+       "subir"      solo cambió este dispositivo (o no hay copia arriba)
+       "bajar"      solo cambió la nube: se trae sin preguntar
+       "conflicto"  cambiaron los dos (se jugó sin conexión en los dos
+                    lados): no se pisa nada, elige el alumno en Io
+     r: lo que devuelve remote(); sync: lo guardado en este dispositivo. */
+  function count(o) { return o && typeof o === "object" ? Object.keys(o).length : 0; }
+  function huella(save) {
+    var s = save || {}, t = s.totals || {};
+    return [+s.xp || 0, +t.attempts || 0, count(s.cards), Array.isArray(s.log) ? s.log.length : 0,
+            +s.written || 0, +s.spoken || 0, count(s.read), count(s.lessonScore), count(s.letture), +s.unlocked || 0].join(".");
+  }
+  function vacio(save) { return !save || (!(+save.xp > 0) && !count(save.cards)); }
+  function plan(r, sync, save) {
+    sync = sync || {};
+    var changed = sync.fp ? huella(save) !== sync.fp : !vacio(save);
+    if (!r) return changed ? "subir" : "nada";
+    if (!conflict(r, sync)) return changed ? "subir" : "nada";
+    return changed ? "conflicto" : "bajar";
+  }
+
   /* This phone's storage (localStorage, or another with getItem/setItem
      in the tests).  Nothing of this goes into the save. */
   function store(ls) {
@@ -263,6 +289,7 @@
     API: API, DESC: DESC, TOKEN_KEY: TOKEN_KEY, TOKEN_URL: TOKEN_URL, fileName: fileName,
     call: call, remote: remote, pull: pull, push: push, envelope: envelope, saveOf: saveOf,
     stamp: stamp, compare: compare, conflict: conflict, autoDue: autoDue, dayKey: dayKey,
+    huella: huella, plan: plan,
     store: store, message: message
   };
   if (typeof module === "object" && module.exports) module.exports = api;

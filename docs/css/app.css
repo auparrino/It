@@ -1055,3 +1055,56 @@ body.lb-docked #app { padding-bottom: 96px; }
 .lb-ia textarea { width: 100%; box-sizing: border-box; margin: 4px 0 6px; font: inherit; }
 .lb-ia-a { margin: 6px 0; padding: 8px 10px; border-radius: 10px; background: color-mix(in srgb, var(--mar, #1b6fb3) 9%, transparent); }
 .lb-ia-a p { margin: 4px 0; }
+
+/* ---------------------------------------------------------- en la computadora */
+/* Con pantalla ancha la app deja de ser un teléfono estirado: las pestañas
+   suben a la cabecera, la corrección sale al costado de la pregunta (no
+   encima) y los avisos bajan al borde.  Los selectores llevan «html body»
+   porque el tema de cada idioma (lang/<código>/theme.css) se carga después
+   de este archivo. */
+@media (min-width: 1000px) {
+  html body .wrap { max-width: 1040px; padding-bottom: 56px; }
+  html body header.top .bar { max-width: 1040px; }
+
+  /* las pestañas: arriba, al centro de la cabecera */
+  html body .nav { top: 4px; bottom: auto; left: 50%; right: auto; transform: translateX(-50%); width: auto; height: 78px;
+    align-items: center; gap: 6px; padding: 0; background: none; border: 0; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  html body .nav button { flex: 0 0 auto; flex-direction: row; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px;
+    font-size: .95rem; letter-spacing: 0; transition: background .15s; }
+  html body .nav button span { font-size: 1.2rem; }
+  html body .nav button:hover { background: color-mix(in srgb, currentColor 9%, transparent); }
+  html body .nav button.on { background: color-mix(in srgb, currentColor 11%, transparent); }
+  html body .nav button.on::after { display: none; }
+
+  /* lo que flotaba encima de la barra de abajo */
+  html body .toast, html body .mcbox { bottom: 28px; }
+  html body .updbar { left: auto; right: 24px; bottom: 24px; max-width: 420px; }
+
+  /* el puntero: se nota dónde se puede hacer clic */
+  html body .card.onb-opt:hover, html body .mission:hover, html body .pick-lang:hover { transform: translateY(-1px); }
+  html body .opt:hover:not(:disabled) { transform: translateX(2px); }
+
+  /* textos largos: un renglón que se lee de corrido */
+  html body.ingame .wrap { max-width: 780px; }
+}
+
+/* La corrección al costado: la tarjeta de la pregunta se corre a la
+   izquierda (no cambia de ancho: nada se reacomoda) y la corrección entra
+   por la derecha, las dos a la vista. */
+@media (min-width: 1200px) {
+  html body.ingame .wrap { position: relative; left: 0; transition: left .28s cubic-bezier(.2, .8, .2, 1); }
+  html body.ingame:has(.feedback:not(.prompt)) .wrap { left: -222px; padding-bottom: 56px; }
+  html body.ingame .feedback:not(.prompt) { left: calc(50% + 176px); right: auto; top: 148px; bottom: auto; width: 420px; margin: 0;
+    max-height: calc(100vh - 172px); border-radius: 18px; border-top-width: 4px; padding: 20px;
+    box-shadow: 0 10px 34px rgba(30, 20, 10, .16); animation: pc-side .28s cubic-bezier(.2, .8, .2, 1); }
+  /* la tecla de cada cosa, donde se usa */
+  html body.ingame .feedback #next::after, html body.ingame .feedback #lesnext2::after,
+  html body.ingame #lesnext::after, html body.ingame .card > .row > #next::after, html body.ingame #tcheck::after, html body.ingame #reveal::after {
+    content: "Enter ↵"; margin-left: 12px; padding: 2px 8px; border-radius: 6px; font-size: .72rem; font-weight: 700; letter-spacing: .02em;
+    border: 1px solid currentColor; opacity: .6; vertical-align: 2px; }
+}
+@keyframes pc-side { from { opacity: 0; transform: translateX(28px); } }
+@media (prefers-reduced-motion: reduce) {
+  html body.ingame .wrap { transition: none; }
+  html body.ingame .feedback:not(.prompt) { animation: none; }
+}

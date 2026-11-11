@@ -4,9 +4,10 @@
    llega a GitHub): se pega un token, «Subir ahora» crea el gist secreto
    con el sobre del idioma y sin el token; otro teléfono sube una copia más
    nueva y «Traer de la nube» pregunta diciendo que es más nueva y la
-   restaura; la subida automática al ocultar la app sube una vez y la
-   segunda vez, el mismo día, no.  Al final deja el teléfono como estaba
-   (sin token ni gist).
+   restaura; la sincronización sola (encendida con el token, se puede
+   apagar) sube al ocultar la app si hubo progreso, y si no lo hubo, no.
+   Los dos dispositivos, ida y vuelta: tools/lib/smoke_pc.js.  Al final
+   deja el teléfono como estaba (sin token ni gist).
 
    module.exports = async (page, { code, errors, note, snap }) */
 "use strict";
@@ -73,6 +74,9 @@ module.exports = async function nube(page, ctx) {
   await snap(page, code + "-nube");
 
   // another phone uploads a newer copy: «Traer de la nube» asks and restores it
+  // (by hand: the sync alone is on with the token, and it is turned off here)
+  if (!(await page.isChecked("#gistauto"))) fail("con el token puesto, «Sincronizar sola» no viene encendida");
+  await page.uncheck("#gistauto");
   const id = Object.keys(gists)[0];
   const xp0 = await page.evaluate(() => window.__test.state().xp);
   const newer = JSON.parse(gists[id].files[file]);
@@ -86,25 +90,29 @@ module.exports = async function nube(page, ctx) {
   await page.waitForFunction((x) => window.__test.state().xp === x, xp0 + 777, { timeout: 8000 }).catch(() => fail("«Traer de la nube» no restauró la copia"));
   if (!/más nueva/.test(asked)) fail("al traer no preguntó diciendo que la de la nube es más nueva: " + asked);
 
-  // the automatic upload when the app is hidden: once a day
+  // the sync alone, when the app is hidden: it uploads the progress made
+  // here, and nothing when there was none
   await page.waitForSelector("#gistauto");
   await page.check("#gistauto");
+  await page.waitForTimeout(800);
   const patches = () => calls.filter((c) => c.method === "PATCH").length;
-  const hide = () => page.evaluate(() => {
-    const s = window.__test.state(); s.savedAt = Date.now() + 1000;   // something changed
+  const hide = (played) => page.evaluate((p) => {
+    const s = window.__test.state();
+    if (p) { s.xp += 5; s.totals.attempts += 1; }   // a round was played
+    s.savedAt = Date.now() + 1000;
     Object.defineProperty(document, "hidden", { value: true, configurable: true });
     document.dispatchEvent(new Event("visibilitychange"));
     delete document.hidden;
-  });
+  }, played);
   const p0 = patches();
-  await hide();
-  await page.waitForFunction((k) => { try { return !!JSON.parse(localStorage.getItem(k) || "{}").day; } catch (e) { return false; } }, storage + ".gist", { timeout: 8000 })
-    .catch(() => fail("la subida automática no subió al ocultar la app"));
-  if (patches() !== p0 + 1) fail("la subida automática hizo " + (patches() - p0) + " subidas");
-  await hide();
+  await hide(true);
+  for (let i = 0; i < 40 && patches() === p0; i++) await page.waitForTimeout(200);
   await page.waitForTimeout(600);
-  if (patches() !== p0 + 1) fail("la subida automática subió dos veces el mismo día");
-  note(code + " · nube: traída y subida automática una vez por día");
+  if (patches() !== p0 + 1) fail("la sincronización sola hizo " + (patches() - p0) + " subidas al ocultar la app (esperaba 1)");
+  await hide(false);
+  await page.waitForTimeout(900);
+  if (patches() !== p0 + 1) fail("la sincronización sola subió sin que hubiera progreso nuevo");
+  note(code + " · nube: traída a mano y subida sola al ocultar la app");
   if (process.env.SHOTS) {
     await page.click("[data-tab='io']");
     await page.waitForSelector("details.nube");
